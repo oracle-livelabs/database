@@ -1,0 +1,1 @@
+A diagram showing the advantaged of a multitenant architecture. 

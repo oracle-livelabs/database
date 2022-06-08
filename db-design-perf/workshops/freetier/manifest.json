@@ -1,0 +1,46 @@
+{
+    "workshoptitle": "Improving Performance through Database Design",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Introduction",
+            "filename": "./../../introduction/introduction.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "Get a Free Trial",
+            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/cloud-login/pre-register-free-tier-account.md"
+        },
+        {
+            "title": "Lab 1: Provision an Autonomous Database",
+            "description": "Provision Autonomous Database",
+            "filename": "./../../db-design-perf-provision/db-design-perf-provision.md"
+        },
+        {
+            "title": "Lab 2: Establish the initial Database Schema",
+            "description": "Establish the initial Database Schema",
+            "filename": "./../../db-design-perf-build/db-design-perf-build.md"
+        },
+       {
+            "title": "Lab 3: Run the base Performance Benchmark",
+            "description": "Run the base Performance Benchmark",
+            "filename": "./../../db-design-perf-bench1/db-design-perf-bench1.md"
+        },
+        {
+            "title": "Lab 4: Optimize the Design for Throughput",
+            "description": "Optimize the Design for Throughput",
+            "filename": "./../../db-design-perf-bench2/db-design-perf-bench2.md"
+        },
+        {
+            "title": "Lab 5: Optimize the Design for Concurrency",
+            "description": "Optimize the Design for Concurrency",
+            "filename": "./../../db-design-perf-bench3/db-design-perf-bench3.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

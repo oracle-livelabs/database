@@ -1,0 +1,33 @@
+{
+  "workshoptitle": "Develop and Deploy Java, Spring Boot on Kubernetes with MySQL",
+  "help": "livelabs-help-**enterarea**_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction to the lab.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Lab 1: Setup Kubernetes",
+      "description": "Labs that follow the introduction are numbered, starting with Lab 1",
+      "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/solutions-library/weblogic-kubernetes/setup-oke-ocishell/setup-oke-ocishell.md"
+    },
+    {
+      "title": "Lab 2: Setup MySQL",
+      "filename": "../../mysql/mysql.md"
+    },
+    {
+      "title": "Lab 3: Create a simple Java program and run it in Docker",
+      "filename": "../../java/java.md"
+    },
+    {
+      "title": "Lab 4: Run Spring Boot in Kubernetes",
+      "filename": "../../springboot/springboot.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}

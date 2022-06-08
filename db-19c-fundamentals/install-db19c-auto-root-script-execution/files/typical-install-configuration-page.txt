@@ -1,0 +1,1 @@
+Screenshot of the Typical Installation page in the Oracle Database 19c Installer.

@@ -1,0 +1,1 @@
+Screenshot of the compartment option when creating a stack for the workshop-staged compute instance.

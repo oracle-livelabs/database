@@ -1,0 +1,59 @@
+{
+    "workshoptitle": "Discover new performance features in Oracle Database 19c",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Introduction to Oracle Database 19c and the Oracle Database 19c New Features Workshop.",
+            "filename": "../../intro/intro-performance.md"
+        },
+        {
+            "title": "Get started",
+            "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/cloud-login/pre-register-free-tier-account.md",
+            "type": "freetier"
+        },
+        {
+            "title": "Prepare your environment",
+            "description": "Steps to create the workshop-staged and workshop-installed compute instances.",
+            "filename": "./../../prepare-environment/prepare-environment-performance.md",
+            "type": "freetier"
+        },
+        {
+            "title": "Initialize your environment",
+            "description": "Steps to verify the workshop-installed compute instance and download the lab files.",
+            "filename": "./../../initialize-environment/initialize-environment-performance.md",
+            "type": "freetier"
+        },
+        {
+            "title": "Lab 1: Use Memoptimized Rowstore - Fast Ingest",
+            "description": "Observe the behavior of Memoptimze Rowstore and observe how inserts are optimized.",
+            "filename": "./../../use-memoptimized-rowstore-fast-ingest/use-memoptimized-rowstore-fast-ingest.md"
+        },
+        {
+            "title": "Lab 2: Complete an ADDM analysis inside a PDB",
+            "description": "Complete an ADDM analysis inside of a PDB, also perform an analysis of a CDB.",
+            "filename": "./../../complete-an-addm-analysis-inside-a-pdb/complete-an-addm-analysis-inside-a-pdb.md"
+        },
+        {
+            "title": "Lab 3: Use Real-Time SQL Monitoring as a SQL Developer",
+            "description": "Use Real-Time SQL Monitoring as a SQL Developer.",
+            "filename": "./../../use-real-time-sql-monitoring-as-a-sql-developer/use-real-time-sql-monitoring-as-a-sql-developer.md"
+        },
+        {
+            "title": "Lab 4: Wait for in-memory objects to be populated",
+            "description": "Wait for in-memory objects to be populated.",
+            "filename": "./../../wait-for-in-memory-objects-to-be-populated/wait-for-in-memory-objects-to-be-populated.md"
+        },
+        {
+            "title": "Lab 5: Configure and use Database Replay at the PDB level",
+            "description": "Observe how Database Replay works at the PDB level.",
+            "filename": "./../../configure-and-use-database-replay-at-the-pdb-level/configure-and-use-database-replay-at-the-pdb-level.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+Screenshot of the stack log showing the url to the workshop-staged compute instance.

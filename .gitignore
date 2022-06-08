@@ -1,0 +1,7 @@
+.DS_Store
+**/*.rpm
+**/*.jar
+**/*.bin
+*.patch
+env.sh
+.vscode

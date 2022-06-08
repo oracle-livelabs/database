@@ -1,0 +1,1 @@
+Screenshot of the option to run configuration scripts as a privileged user in the Oracle Database 19c Installer.

@@ -1,0 +1,15 @@
+# ~grid/fppc.rsp
+oracle.install.responseFileVersion=/oracle/install/rspfmt_crsinstall_response_schema_v19.0.0
+INVENTORY_LOCATION=/u01/app/oraInventory
+oracle.install.option=HA_CONFIG
+ORACLE_BASE=/u01/app/grid
+oracle.install.asm.OSDBA=dba
+oracle.install.asm.OSOPER=oper
+oracle.install.asm.OSASM=asmadmin
+oracle.install.asm.SYSASMPassword=WelcomeWelcome##123
+oracle.install.asm.diskGroup.name=DATA
+oracle.install.asm.diskGroup.redundancy=EXTERNAL
+oracle.install.asm.diskGroup.AUSize=4
+oracle.install.asm.diskGroup.disks=/dev/oracleasm/asm-disk1
+oracle.install.asm.diskGroup.diskDiscoveryString=/dev/oracleasm/*
+oracle.install.asm.monitorPassword=WelcomeWelcome##123

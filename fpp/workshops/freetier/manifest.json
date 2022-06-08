@@ -1,0 +1,61 @@
+{
+    "workshoptitle": "Fleet Patching and Provisioning",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "This lab gives you a basic overview of Fleet Patching and Provisioning",
+            "filename": "../../intro/intro.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "Login to Oracle Cloud",
+            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/cloud-login/cloud-login-livelabs2.md"
+        },
+        {
+            "title": "Lab 1: Generate SSH Keys",
+            "description": "Generate SSH Key",
+            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key/generate-ssh-keys.md"
+        },
+         {
+            "title": "Lab 2: Create the Environment with Resource Manager",
+            "description": "If you are not running the LiveLab Green Button, you will need to provision the environment yourself",
+            "filename": "../../apply-terraform-stack/apply-terraform-stack.md"
+        },
+        {
+            "title": "Lab 3: Get Acquainted with the Environment and the rhpctl Command line tool",
+            "description": "This lab walks you through the steps to start using Oracle Fleet Patching and Provisioning",
+            "filename": "../../environment/environment.md"
+        },
+        {
+            "title": "Lab 4: Import Gold Images",
+            "description": "This lab shows how to import and query gold images into the FPP Server",
+            "filename": "../../gold-images/gold-images.md"
+        },
+        {
+            "title": "Lab 5: Provision an Oracle Restart environment",
+            "description": "This lab shows how FPP can provision Grid Infrastructure and Oracle Restart environments",
+            "filename": "../../gi-home/gi-home.md"
+        },
+        {
+            "title": "Lab 6: Install the Oracle Database homes (working copies)",
+            "description": "This lab shows how to provision working copies to remote targets",
+            "filename": "../../db-home/db-home.md"
+        },
+        {
+            "title": "Lab 7: Provision a new database",
+            "description": "This lab ",
+            "filename": "../../create-db/create-db.md"
+        },
+        {
+            "title": "Lab 8: Patch the database",
+            "description": "This lab shows how FPP can patch databases",
+            "filename": "../../patch-db/patch-db.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

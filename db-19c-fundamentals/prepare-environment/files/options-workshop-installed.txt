@@ -1,0 +1,1 @@
+Screenshot of the Options section when creating a stack for the workshop-installed compute instance.

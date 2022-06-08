@@ -1,0 +1,40 @@
+{
+    "workshoptitle": "Develop and Deploy a Modern Application in Node.js on MySQL Database Service",
+    "help": "livelabs-help-db_us@oracle.com",
+	"tutorials": [
+        {
+            "title": "Get Started",
+            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/cloud-login/cloud-login-livelabs2.md"
+        },
+        {
+            "title": "Introduction",
+            "filename": "../../intro/intro.md"
+        },
+        {
+            "title": "Lab 1: Setup",
+            "filename": "../../setup/setup.md"
+        },
+        {
+            "title": "Lab 2: Exploring and completing the Setup of the Cloud Environment",
+            "filename": "../../environment/environment.md"
+        },
+        {
+            "title": "Lab 3: Importing Data using FaaS and Events",
+            "filename": "../../import/import.md"
+        },
+        {
+            "title": "Lab 4: Build a Microservice and a Web frontend",
+            "filename": "../../frontend/frontend.md"
+        },
+        {
+            "title": "Lab 5: Next steps",
+            "filename": "../../next-steps/next-steps.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-livelabs.md"
+        }
+
+    ]
+}

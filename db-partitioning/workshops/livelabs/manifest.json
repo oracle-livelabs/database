@@ -1,0 +1,59 @@
+{
+    "workshoptitle": "8 Partitioning Techniques in Oracle Database",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "The Introduction is always first. The title and contents menu title match for the Introduction.",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+          "title": "Get Started",
+          "description": "Login to Oracle Cloud",
+          "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/cloud-login/cloud-login-livelabs2.md"
+        },
+        {
+          "title": "Lab 1: Connect to you Autonomous Database",
+          "description": "Connect to you Autonomous Database",
+          "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/sqldevweb-login/sqldevweb-login.md",
+          "type" : "livelabs"
+        },
+        {
+            "title": "Lab 2: Range Partitioning",
+            "filename": "../../range-partitioning/range.md"
+        },
+        {
+            "title": "Lab 3: Interval Partitioning",
+            "filename": "../../interval-partitioning/interval.md"
+        },
+        {
+            "title": "Lab 4: List Partitioning",
+            "filename": "../../list-partitioning/list.md"
+        },
+        {
+            "title": "Lab 5: Hash Partitioning",
+            "filename": "../../hash-partitioning/hash.md"
+        },
+        {
+            "title": "Lab 6: Auto List Partitioning",
+            "filename": "../../auto-list-partitioning/autolist.md"
+        },
+        {
+            "title": "Lab 7: Read Only Partitions",
+            "filename": "../../readonly-partitioning/readonly.md"
+        },
+        {
+            "title": "Lab 8: Multi Column List Partitioning",
+            "filename": "../../multi-list-partitioning/multilist.md"
+        },
+        {
+            "title": "Lab 9: Convert Non Partitioned Table into Partitioned Table",
+            "filename": "../../convert-table-partitioning/convert.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

@@ -1,0 +1,91 @@
+{
+    "workshoptitle": "Oracle Database 19c New Features",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+            {
+                "title": "Introduction",
+                "description": "Introduction to Oracle Database 19c and the Oracle Database 19c New Features workshop.",
+                "filename": "./../../intro/intro.md"
+            },
+            {
+                "title": "Get Started with noVNC Remote Desktop",
+                "description": "Using noVNC Remote Desktop",
+                "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/remote-desktop/using-novnc-remote-desktop.md"
+            },
+            {
+                "title": "Initialize Your Environment",
+                "description": "Steps to verify the workshop-installed compute instance and download the lab files.",
+                "filename": "./../../initialize-environment/initialize-environment.md"
+            },
+            {
+                "title": "Lab 1: Install Oracle Database 19c with Automatic Root Script Execution",
+                "description": "Install Oracle Database 19c with automatic configuration script execution.",
+                "filename": "./../../install-db19c-auto-root-script-execution/install-db19c-auto-root-script-execution.md"
+            },
+            {
+                "title": "Lab 2: Clone a PDB from a Remote CDB by Using DBCA in Silent Mode",
+                "description": "Clone a PDB from a remote CDB by using DBCA in silent mode.",
+                "filename": "./../../clone-pdb-using-dbca-silent-mode/clone-pdb-using-dbca-silent-mode.md"
+            },
+            {
+                "title": "Lab 3: Relocate a PDB to a Remote CDB by Using DBCA in Silent Mode",
+                "description": "Relocate a PDB to a remote CDB by using DBCA in silent mode.",
+                "filename": "./../../relocate-pdb-using-dbca-silent-mode/relocate-pdb-using-dbca-silent-mode.md"
+            },
+            {
+                "title": "Lab 4: Duplicate a CDB by Using DBCA in Silent Mode",
+                "description": "Duplicate a CDB by using DBCA in silent mode.",
+                "filename": "./../../duplicate-cdb-using-dbca-silent-mode/duplicate-cdb-using-dbca-silent-mode.md"
+            },
+            {
+                "title": "Lab 5: Decrease the Transportable Tablespace (TTS) Import and Export Time",
+                "description": "Decrease the transportable tablespace (TTS) import and export time.",
+                "filename": "./../../decrease-transportable-tablespace-import-export-time/decrease-transportable-tablespace-import-export-time.md"
+            },
+            {
+                "title": "Lab 6: Omit the Column Encryption Attribute During Import",
+                "description": "Omit the column encryption attribute during import.",
+                "filename": "./../../omit-column-encryption-attribute-during-import/omit-column-encryption-attribute-during-import.md"
+            },
+            {
+                "title": "Lab 7: Use RMAN to Connect to a PDB to Use the Recovery Catalog",
+                "description": "Use Resource Manager (RMAN) to connect to a pluggable database (PDB) to use the recovery catalog.",
+                "filename": "./../../use-rman-connect-to-pdb-to-use-recovery-catalog/use-rman-connect-to-pdb-to-use-recovery-catalog.md"
+            },
+            {
+                "title": "Lab 8: Explore Automatic Deletion of Flashback Logs",
+                "description": "Explore Automatic Deletion of Flashback Logs.",
+                "filename": "./../../explore-automatic-deletion-flashback-logs/explore-automatic-deletion-flashback-logs.md"
+            },
+            {
+                "title": "Lab 9: Explore Oracle-Supplied Schema-Only Accounts",
+                "description": "Explore Oracle-Supplied Schema-Only Accounts.",
+                "filename": "./../../explore-oracle-supplied-schema-only-accounts/explore-oracle-supplied-schema-only-accounts.md"
+            },
+            {
+                "title": "Lab 10: Protect Application Data by Using Database Vault Operations Control",
+                "description": "Protect Application Data by Using Database Vault Operations Control.",
+                "filename": "./../../protect-application-database-vault-operations-control/protect-application-database-vault-operations-control.md"
+            },
+            {
+                "title": "Lab 11: Restrict Users from Executing the AUDIT POLICY and NOAUDIT POLICY SQL Commands by Using Oracle Database Vault Command Rules",
+                "description": "Restrict Users from Executing the AUDIT POLICY and NOAUDIT POLICY SQL Commands by Using Oracle Database Vault Command Rules.",
+                "filename": "./../../restrict-audit-policy-sql-commands-with-oracle-database-vault/restrict-audit-policy-sql-commands-with-oracle-database-vault.md"
+            },
+            {
+                "title": "Lab 12: Audit Direct User Activities",
+                "description": "Audit Direct User Activities.",
+                "filename": "./../../audit-direct-user-activities/audit-direct-user-activities.md"
+            },
+            {
+                "title": "Lab 13: Handle Operations on Oracle-Managed and User-Managed Tablespaces Encrypted in TDE",
+                "description": "Handle Operations on Oracle-Managed and User-Managed Tablespaces Encrypted in TDE",
+                "filename": "./../../operations-on-managed-tablespaces-encrypted-in-tde/operations-on-managed-tablespaces-encrypted-in-tde.md"
+            },
+            {
+                "title": "Need Help?",
+                "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+                "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-livelabs.md"
+            }
+    ]
+}
