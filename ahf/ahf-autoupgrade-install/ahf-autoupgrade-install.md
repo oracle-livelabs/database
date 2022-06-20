@@ -21,7 +21,7 @@ This lab assumes you have:
 
 ## Task 1: Install AHF on Linux or UNIX as root User in Daemon Mode
 
-To obtain the fullest capabilities of Oracle Autonomous Health Framework, install it as **root**.
+To obtain the fullest capabilities of Oracle Autonomous Health Framework (AHF), install it as **root**.
 
 Oracle Autonomous Health Framework maintains Access Control Lists (ACLs) to determine which users are allowed access. By default, the **Grid home** owner and **Oracle home** owners have access to their respective diagnostics. No other users can perform diagnostic collections.
 
