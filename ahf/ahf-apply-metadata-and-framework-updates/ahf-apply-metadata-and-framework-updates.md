@@ -50,7 +50,7 @@ You must apply metadata and framework updates to all cluster nodes.
 
 ## Task 2: Query AHF Framework and Metadata Updates
 
-Query the metadata updates using the **-all** option and the framework updates using **-updateid**.
+You can query metadata updates using the **-all** option and the framework updates using **-updateid**.
 
 To verify if the metadata and framework updates were applied to all nodes in a cluster, run the **ahfctl queryupdate** command as the AHF install user on each cluster node.
 
