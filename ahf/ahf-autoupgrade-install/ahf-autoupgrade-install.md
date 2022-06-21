@@ -146,7 +146,7 @@ If Oracle Autonomous Health Framework is already installed, then reinstalling pe
 
 	 **Cluster-wide Installation:**
 
-	 **Note:** In this workshop, you can only install AHF on a local node.
+	 >**Note:** In this workshop, you can only install AHF on a local node.
 
 ## Task 2: Enable or Disable Oracle ORAchk or Oracle EXAchk Daemon to Start Automatically
 
@@ -184,7 +184,7 @@ The daemon restarts at 1 am every day to discover environment changes. The daemo
 
 If you are unable to install as **root**, then install Oracle Autonomous Health Framework as a non-root user, for example, **opc**.
 
-**Note:**
+>**Note:**
 - Perl version 5.10 or later is required to install Oracle Autonomous Health Framework.
 - You cannot perform the cluster-wide installation as a non-root user.
 
