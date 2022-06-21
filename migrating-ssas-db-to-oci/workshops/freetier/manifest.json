@@ -1,0 +1,37 @@
+{
+  "workshoptitle": "Migrate Microsoft SQL Server Analysis Service (SSAS) Databases to OCI",
+  "help": "livelabs-help-oci_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction about the Workshop and Labs",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Details about How to Register for Free Tier Account on OCI",
+      "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/cloud-login/pre-register-free-tier-account.md"
+    },
+
+    {
+      "title": "Lab 1: Provision the Compute Instance from Market Place Image for SQL Server 2019",
+      "description": "Step by step instruction on creating Microsoft Active Directory Domain Controller",
+      "filename": "../../create-compute-instances/installation-of-microsoft-sql-server-2019.md"
+    },
+    {
+      "title": "Lab 2: Configure the SQL Server Analysis Services",
+      "description": "Step by step instruction on creating a 2 node windows Server Failver Cluster",
+      "filename": "../../configure-ssas/configure-ssas.md"
+    },
+    {
+      "title": "Lab 3: Restore the analysis Databases from backups (Cubes, Dimensions, etc.)",
+      "description": "Step by step instruction on how to install SQL Server from OCI MarketPlace image",
+      "filename": "../../restore-ssas-db/restore-ssas-db.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "../../need-help/need-help.md"
+  }
+  ]
+}
