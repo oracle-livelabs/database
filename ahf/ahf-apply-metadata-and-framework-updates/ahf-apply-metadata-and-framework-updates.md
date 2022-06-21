@@ -34,7 +34,7 @@ This lab assumes you have:
 
 You must apply metadata and framework updates to all cluster nodes.
 
-To update metadata and framework files on the local node from the zip file provided:
+Use the **ahfctl applyupdate** command to update metadata and framework files on the local node from the zip file provided.
 
 ```
 <copy>
