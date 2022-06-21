@@ -30,12 +30,19 @@ If Oracle Autonomous Health Framework is already installed, then reinstalling pe
 1. Download and copy the **AHF-LINUX_<*version*>.zip** file to the **/tmp/ahf22.1.0** folder on the required machine, and then unzip it.
 
     ```
+    <copy>
     unzip /home/opc/Downloads/AHF-LINUX_v22.1.0.zip -d /tmp/ahf22.1.0
+    </copy>
+    ```
+    Command output:
+
+    ```
+    <copy>
     Archive:  /home/opc/Downloads/AHF-LINUX_v22.1.0.zip
-      inflating: /tmp/ahf22.1.0/ahf_setup
-      extracting: /tmp/ahf22.1.0/ahf_setup.dat
-      inflating: /tmp/ahf22.1.0/README.txt
-      inflating: /tmp/ahf22.1.0/oracle-tfa.pub
+    inflating: /tmp/ahf22.1.0/ahf_setup
+    extracting: /tmp/ahf22.1.0/ahf_setup.dat
+    inflating: /tmp/ahf22.1.0/README.txt
+    inflating: /tmp/ahf22.1.0/oracle-tfa.pub
     </copy>
     ```
 
@@ -65,6 +72,12 @@ If Oracle Autonomous Health Framework is already installed, then reinstalling pe
     ```
     <copy>
     ahf_setup
+    </copy>
+    ```
+    Command output:
+
+    ```
+    <copy>
     AHF Installer for Platform Linux Architecture x86_64
     AHF Installation Log : /tmp/ahf_install_221000_103911_2022_02_02-13_38_15.log
     Starting Autonomous Health Framework (AHF) Installation
@@ -115,12 +128,18 @@ If Oracle Autonomous Health Framework is already installed, then reinstalling pe
     Moving /tmp/ahf_install_221000_103911_2022_02_02-13_38_15.log to /opt/oracle.ahf/data/den02mwa/diag/ahf/
     </copy>
     ```
+
     If you plan to run only Oracle ORAchk or Oracle EXAchk and do not want to run any Oracle Trace File Analyzer processes, then use the install options **-extract -notfasetup**.
 
     ```
     <copy>
     ahf_setup -extract -notfasetup
+    </copy>
+    ```
+    Command output:
 
+    ```
+    <copy>
     AHF Installer for Platform Linux Architecture x86_64
     AHF Installation Log : /tmp/ahf_install_221000_98374_2022_02_02-13_33_27.log
     Starting Autonomous Health Framework (AHF) Installation
@@ -158,7 +177,21 @@ The daemon restarts at 1 am every day to discover environment changes. The daemo
 
     ```
     <copy>
-    orachk -autostop (or) ahfctl compliance -autostop
+    orachk -autostop
+    </copy>
+    ```
+    (or)
+
+    ```
+    <copy>
+    ahfctl compliance -autostop
+    </copy>
+    ```
+
+    Command output:
+
+    ```
+    <copy>
     Removing orachk cache discovery....
     Successfully completed orachk cache discovery removal.
     Successfully copied Daemon Store to Remote Nodes
@@ -170,7 +203,21 @@ The daemon restarts at 1 am every day to discover environment changes. The daemo
 
     ```
     <copy>
-    orachk -autostart (or) ahfctl compliance –autostart
+    orachk -autostart
+    </copy>
+    ```
+    (or)
+
+    ```
+    <copy>
+    ahfctl compliance –autostart
+    </copy>
+    ```
+
+    Command output:
+
+    ```
+    <copy>
     .
     .
     Successfully copied Daemon Store to Remote Nodes
@@ -198,7 +245,12 @@ Oracle Autonomous Health Framework has reduced capabilities when you install it 
     ```
     <copy>
     /tmp/ahf22.1.0/ahf_setup -ahf_loc /ahf -notfasetup
+    </copy>
+    ```
+    Command output:
 
+    ```
+    <copy>
     AHF Installer for Platform Linux Architecture x86_64
     AHF Installation Log : /tmp/ahf_install_221000_540223_2022_06_06-20_36_32.log
     Starting Autonomous Health Framework (AHF) Installation
@@ -219,6 +271,12 @@ Oracle Autonomous Health Framework has reduced capabilities when you install it 
     ```
     <copy>
     /tmp/ahf22.1.0/ahf_setup -ahf_loc /ahf -notfasetup -extract
+    </copy>
+    ```
+    Command output:
+
+    ```
+    <copy>
     AHF Installer for Platform Linux Architecture x86_64
     AHF Installation Log : /tmp/ahf_install_221000_539881_2022_06_06-20_36_05.log
     Starting Autonomous Health Framework (AHF) Installation
@@ -227,7 +285,6 @@ Oracle Autonomous Health Framework has reduced capabilities when you install it 
     [ERROR] : AHF-00014: AHF Location /ahf/oracle.ahf is not owned by root in directory hierarchy
     </copy>
     ```
-
 
 	For more information, run **ahf_setup -h**.
 
@@ -264,16 +321,30 @@ Setting the value of the SELINUX directive in the configuration file persists ac
     ```
     <copy>
     /usr/sbin/getenforce
+    </copy>
+    ```
+    Command output:
+
+    ```
+    <copy>
     Permissive
     </copy>
     ```
-The **getenforce** command returns **Enforcing**, **Permissive**, or **Disabled**.
+
+    The **getenforce** command returns **Enforcing**, **Permissive**, or **Disabled**.
 
 3. To check the status of SELinux and the policy being used:
 
     ```
     <copy>
     /usr/sbin/sestatus
+    </copy>
+    ```
+
+    Command output:
+
+    ```
+    <copy>
     SELinux status: enabled
     SELinuxfs mount: /sys/fs/selinux
     SELinux root directory: /etc/selinux
@@ -292,6 +363,13 @@ The **getenforce** command returns **Enforcing**, **Permissive**, or **Disabled*
     ```
     <copy>
     ahfctl unloadpolicy
+    </copy>
+    ```
+
+    Command output:
+
+    ```
+    <copy>
     Please wait while the policy is being removed, it might take couple of minutes.
     Successfully removed Contexts and Policy
     </copy>
@@ -322,6 +400,13 @@ AHF installer loads the policy and sets relevant contexts.
     ```
     <copy>
     ahf_setup
+    </copy>
+    ```
+
+    Command output:
+
+    ```
+    <copy>
     AHF Installer for Platform Linux Architecture x86_64
     AHF Installation Log : /tmp/ahf_install_221000_2193173_2022_02_23-22_35_59.log
     Starting Autonomous Health Framework (AHF) Installation
@@ -369,6 +454,7 @@ AHF installer loads the policy and sets relevant contexts.
     Moving /tmp/ahf_install_221000_2193173_2022_02_23-22_35_59.log to /opt/oracle.ahf/data/phoenix78312/diag/ahf/
     </copy>
     ```
+
 2. To check if the policy is loaded successfully:
 
     ```
@@ -388,14 +474,29 @@ In Disabled mode, AHF does not load the SELinux policy.
     ```
     <copy>
     /usr/sbin/sestatus
+    </copy>
+    ```
+
+    Command output:
+
+    ```
+    <copy>
     SELinux status: disabled
     </copy>
     ```
+
 2. To check if the policy is loaded:
 
     ```
     <copy>
     ahfctl loadpolicy
+    </copy>
+    ```
+
+    Command output:
+
+    ```
+    <copy>
     Checking if policy exists
     SELinux is not enabled on this system
     </copy>
@@ -406,6 +507,13 @@ In Disabled mode, AHF does not load the SELinux policy.
     ```
     <copy>
     ahf_setup
+    </copy>
+    ```
+
+    Command output:
+
+    ```
+    <copy>
     AHF Installer for Platform Linux Architecture x86_64
     AHF Installation Log : /tmp/ahf_install_221000_16953_2022_02_23-14_43_58.log
     Starting Autonomous Health Framework (AHF) Installation
@@ -459,6 +567,13 @@ After installing AHF if you switch the mode to Permissive or Enforcing, then SEL
     ```
     <copy>
     ahfctl loadpolicy
+    </copy>
+    ```
+
+    Command output:
+
+    ```
+    <copy>
     Checking if policy exists
     Please wait while the policy is being loaded, it might take couple of minutes.
     Successfully loaded SELinux policy
