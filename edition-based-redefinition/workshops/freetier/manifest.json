@@ -1,0 +1,36 @@
+{
+    "workshoptitle": "Evolve your database applications online with Edition-Based Redefinition"
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Learn how to use Edition-Based Redefinition (EBR) and Online Table Reorganization (DBMS_REDEFINITION) along with SQLcl and its Liquibase integration. These unique Oracle technologies will let you evolve your database schemas online, without any interruption, using a rolling, blue-green deployment style.",
+            "filename": "../../intro/intro.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "Login to Oracle Cloud",
+            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/cloud-login/cloud-login-livelabs2.md"
+        },
+        {
+            "title": "Lab 1: Create an ATP Autonomous Database",
+            "description": "Create an ATP Autonomous Database",
+            "filename": "create_adb_here.md"
+        },
+        {
+            "title": "Lab n: Connect to the ATP Autonomous Database",
+            "description": "Get the wallet and connect to the newly created Autonomous Database",
+            "filename": "connect_to_adb_here.md"
+        },
+         {
+            "title": "Lab n: Prepare the HR schema",
+            "description": "This workshop uses a modified version of the well-known HR schema. Please set it up using this lab.",
+            "filename": "../../setup-hr-schema/setup-hr-schema.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}
