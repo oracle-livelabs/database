@@ -20,17 +20,27 @@ This lab assumes you have:
 * AHF install user privileges to run the **applyupdate**, **queryupdate**, **rollbackupdate**, and **deleteupdatebackup** commands.
 
 >**Note:** You must have installed 22.1.1 to apply the AHF framework and metadata updates.
-  ```
-  <copy>
-  .-------------------------------------------------------------------------------.
-  | Host     | Status of TFA | PID    | Port  | Version    | Build ID             |
-  +----------+---------------+--------+-------+------------+----------------------+
-  | den02mwa | RUNNING       | 105916 | 59452 | 22.1.1.0.0 | 22100020220130232427 |
-  '----------+---------------+--------+-------+------------+----------------------'
-  </copy>
-  ```
 
-## Task 1: Apply AHF Framework and Metadata Updates
+## Task 1: Check if the installed version is 22.1.1
+
+```
+<copy>
+tfactl print status
+</copy>
+```
+Command output:
+
+```
+<copy>
+.-------------------------------------------------------------------------------.
+| Host     | Status of TFA | PID    | Port  | Version    | Build ID             |
++----------+---------------+--------+-------+------------+----------------------+
+| den02mwa | RUNNING       | 105916 | 59452 | 22.1.1.0.0 | 22100020220130232427 |
+'----------+---------------+--------+-------+------------+----------------------'
+</copy>
+```
+
+## Task 2: Apply AHF Framework and Metadata Updates
 
 You must apply metadata and framework updates to all cluster nodes.
 
@@ -53,7 +63,7 @@ Data files updated to 20220602 from 20220516
 </copy>
 ```
 
-## Task 2: Query AHF Framework and Metadata Updates
+## Task 3: Query AHF Framework and Metadata Updates
 
 You can query metadata updates using the **-all** option and the framework updates using **-updateid**.
 
@@ -75,7 +85,7 @@ Applied on: Mon Jun  6 00:23:14 2022
 </copy>
 ```
 
-## Task 3: Rollback AHF Framework and Metadata Updates
+## Task 4: Rollback AHF Framework and Metadata Updates
 
 Use the **ahfctl rollbackupdate** command to rollback the updates with a specific update ID applied to the local node. If you do not specify the update ID, then AHF rolls back to the previous state by default.
 
@@ -96,7 +106,7 @@ Rolled back the data files 20220602 to Production version 20220516
 </copy>
 ```
 
-## Task 4: Cleanup AHF Metadata Backup Directories
+## Task 5: Cleanup AHF Metadata Backup Directories
 
 To delete the backup directories on all nodes in a cluster, you must run the **ahfctl deletebackup** command as the AHF install user on each cluster node.
 

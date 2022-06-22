@@ -43,336 +43,9 @@ Autoupgrade of AHF by non-root users is supported only if the existing installat
 You can upgrade AHF on the local file system, Oracle Advanced Cluster File System (Oracle ACFS), and Network File System (NFS).
 
 >**Note**
-* The scope of this workshop is limited to upgrading AHF on the local file system.
+* The scope of this workshop is limited to upgrading AHF on the local file system because enabling ACFS and configuring the NFS path location is not possible in this environment.
 * If the upgrade output is not displayed, wait for 3-5 minutes and then check the **/opt/oracle.ahf/data/*hostname*/diag/ahf/ahf\_install\_*date*>.log** file.
 
-**Local File System**
-
-If the stage location is a local file system and if the AHF installer zip file exists in the stage location, then after upgrading, the installer removes the AHF installer zip file and all the extracted items from the stage location.
-
-1. Configure the auto upgrade parameters.
-
-	```
-	<copy>
-	ahfctl setupgrade -all
-	</copy>
-	```
-
-	Command output:
-
-	```
-	<copy>
-	Enter autoupgrade flag <on/off> : on
-	Enter software stage location : /opt/local
-	Enter auto upgrade frequency : 30
-	AHF autoupgrade parameters successfully updated
-	Successfully synced AHF configuration
-	refreshConfig() completed successfully.
-	</copy>
-	```
-
-2. Check if the AHF installer zip file exists in the stage location.
-
-	```
-	<copy>
-	ls /opt/local
-	</copy>
-	```
-
-	Command output:
-
-	```
-	<copy>
-	AHF-LINUX_v22.1.1.zip
-	</copy>
-	```
-
-	>**Note:** Oracle Trace File Analyzer scheduler calls **ahfctl upgrade -nomos** at a given frequency, in this example, auto-upgrade will happen every 30 days at 3 AM. You can also initiate automatic upgrade from the command-line using the **ahfctl upgrade** command.
-
-3. Run the upgrade command.
-
-	```
-	<copy>
-	ahfctl upgrade
-	</copy>
-	```
-
-	Command output:
-
-	```
-	<copy>
-	AHF Installer for Platform Linux Architecture x86_64
-	AHF Installation Log : /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log
-	Starting Autonomous Health Framework (AHF) Installation
-	AHF Version: 22.1.0 Build Date: 202203081742
-	AHF is already installed at /opt/oracle.ahf
-	Installed AHF Version: 22.1.0 Build Date: 202203081714
-	Upgrading /opt/oracle.ahf
-	Shutting down AHF Services
-	Nothing to do !
-	Shutting down TFA
-	Removed symlink /etc/systemd/system/multi-user.target.wants/oracle-tfa.service.
-	Removed symlink /etc/systemd/system/graphical.target.wants/oracle-tfa.service.
-	Successfully shutdown TFA..
-	Starting AHF Services
-	Starting TFA..
-	Waiting up to 100 seconds for TFA to be started..
-	. . . . .
-	Successfully started TFA Process..
-	. . . . .
-	TFA Started and listening for commands
-	No new directories were added to TFA
-	Directory /u01/app/grid/crsdata/scao05adm07/trace/chad was already added to TFA Directories.
-	INFO: Starting exachk scheduler in background. Details for the process can be found at /u01/app/grid/oracle.ahf/data/scao05adm07/diag/exachk/compliance_start_090322_021151.log
-	AHF is successfully upgraded to latest version
-	.-------------------------------------------------------------------.
-	| Host        | TFA Version | TFA Build ID         | Upgrade Status |
-	+-------------+-------------+----------------------+----------------+
-	| scao05adm07 |  22.1.0.0.0 | 22100020220308174218 | UPGRADED       |
-	| scao05adm08 |  22.1.0.0.0 | 22100020220308171448 | UPGRADED       |
-	'-------------+-------------+----------------------+----------------'
-	Moving /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log to /u01/app/grid/oracle.ahf/data/scao05adm07/diag/ahf/
-	Please upgrade AHF on the below mentioned nodes as well using ahfctl upgrade
-	scao05adm08
-	</copy>
-	```
-
-4. Validate if AHF installer zip and the extracted files are removed from the stage location.
-
-	```
-	<copy>
-	ls -lart /opt/local
-	</copy>
-	```
-	Command output:
-
-	```
-	<copy>
-	drwxr-xr-x   2 root     root           2 Mar  9 02:32 .
-	drwxr-xr-x  25 root     sys           28 Mar  9 02:32 ..
-	</copy>
-	```
-
-**Oracle Advanced Cluster File System (Oracle ACFS)**
-
-If the stage location is ACFS and if the AHF installer zip file exists in the stage location, then after upgrading, the installer removes the AHF installer zip file and retains all the extracted binaries in the stage location so that the other nodes can consume them.
-
-1. Configure the auto upgrade parameters.
-
-	```
-	<copy>
-	ahfctl setupgrade -all
-	</copy>
-	```
-	Command output:
-
-	```
-	<copy>
-	Enter autoupgrade flag <on/off> : on
-	Enter software stage location : /acfs01
-	Enter auto upgrade frequency : 30
-	AHF autoupgrade parameters successfully updated
-	Successfully synced AHF configuration
-	refreshConfig() completed successfully.
-	</copy>
-	```
-
-2. Check if the AHF installer zip file exists in the stage location.
-
-	```
-	<copy>
-	ls -lart /acfs01
-	</copy>
-	```
-
-	Command output:
-
-	```
-	<copy>
-	total 387862
-	-rw-r--r--+  1 root root       1520 Apr 30  2020 README.txt
-	-rw-r--r--+  1 root root        625 Nov  1 15:15 oracle-tfa.pub
-	-rw-r--r--+  1 root root        384 Jan  4 22:45 ahf_setup.dat
-	-rwxr-xr-x+  1 root root  392587026 Mar  9 01:55 ahf_setup
-	</copy>
-	```
-
-3. Run the upgrade command.
-
-	```
-	<copy>
-	ahfctl upgrade
-	</copy>
-	```
-
-	Command output:
-
-	```
-	<copy>
-	AHF Installer for Platform Linux Architecture x86_64
-	AHF Installation Log : /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log
-	Starting Autonomous Health Framework (AHF) Installation
-	AHF Version: 22.1.0 Build Date: 202203081742
-	AHF is already installed at /opt/oracle.ahf
-	Installed AHF Version: 22.1.0 Build Date: 202203081714
-	Upgrading /opt/oracle.ahf
-	Shutting down AHF Services
-	Nothing to do !
-	Shutting down TFA
-	Removed symlink /etc/systemd/system/multi-user.target.wants/oracle-tfa.service.
-	Removed symlink /etc/systemd/system/graphical.target.wants/oracle-tfa.service.
-	Successfully shutdown TFA..
-	Starting AHF Services
-	Starting TFA..
-	Waiting up to 100 seconds for TFA to be started..
-	. . . . .
-	Successfully started TFA Process..
-	. . . . .
-	TFA Started and listening for commands
-	No new directories were added to TFA
-	Directory /u01/app/grid/crsdata/scao05adm07/trace/chad was already added to TFA Directories.
-	INFO: Starting exachk scheduler in background. Details for the process can be found at /u01/app/grid/oracle.ahf/data/scao05adm07/diag/exachk/compliance_start_090322_021151.log
-	AHF is successfully upgraded to latest version
-	.-------------------------------------------------------------------.
-	| Host        | TFA Version | TFA Build ID         | Upgrade Status |
-	+-------------+-------------+----------------------+----------------+
-	| scao05adm07 |  22.1.0.0.0 | 22100020220308174218 | UPGRADED       |
-	| scao05adm08 |  22.1.0.0.0 | 22100020220308171448 | UPGRADED       |
-	'-------------+-------------+----------------------+----------------'
-	Moving /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log to /u01/app/grid/oracle.ahf/data/scao05adm07/diag/ahf/
-	Please upgrade AHF on the below mentioned nodes as well using ahfctl upgrade
-	scao05adm08
-	</copy>
-	```
-
-4. Validate the AHF installer zip is removed and the extracted binaries are retained.
-
-	```
-	<copy>
-	ls -lart /acfs01
-	</copy>
-	```
-	Command output:
-
-	```
-	<copy>
-	-rw-r--r--+  1 root root       1520 Apr 30  2020 README.txt
-	-rw-r--r--+  1 root root        625 Nov  1 15:15 oracle-tfa.pub
-	-rw-r--r--+  1 root root        384 Jan  4 22:45 ahf_setup.dat
-	-rwxr-xr-x+  1 root root  392587026 Mar  9 01:55 ahf_setup
-	</copy>
-	```
-
-**Network File System (NFS)**
-
-- If the stage location is NFS and if the AHF installer zip file exists in the stage location, then the installer asks the user to extract it.
-- If the stage location has AHF binaries in the extracted form, then after upgrading, the installer retains the extracted AHF binaries as is.
-- If the stage location has AHF installer zip file, then after upgrading, the installer removes the AHF installer zip file.
-
-1. Configure the auto upgrade parameters.
-
-	```
-	<copy>
-	ahfctl setupgrade -all
-	</copy>
-	```
-	Command output:
-
-	```
-	<copy>
-	Enter autoupgrade flag <on/off> : on
-	Enter software stage location : /export/sheisey_R/ahf_stage
-	Stage location /export/sheisey_R/ahf_stage file system type is NFS. User needs to unzip AHF zip placed at NFS file system.
-	Enter auto upgrade frequency : 30
-	AHF autoupgrade parameters successfully updated
-	Successfully synced AHF configuration
-	refreshConfig() completed successfully.
-	</copy>
-	```
-
-2. Check if the AHF installer zip file or AHF binaries in the extracted form exists in the stage location.
-
-	```
-	<copy>
-	ls -lart /export/sheisey_R/ahf_stage
-	</copy>
-	```
-	Command output:
-
-	```
-	<copy>
-	-rw-r--r--    1 root root  389105013 Feb  3 06:08 AHF-LINUX_v22.1.0.zip
-	-rw-r--r--+  1 root root       1520 Apr 30  2020 README.txt
-	-rw-r--r--+  1 root root        625 Nov  1 15:15 oracle-tfa.pub
-	-rw-r--r--+  1 root root        384 Jan  4 22:45 ahf_setup.dat
-	-rwxr-xr-x+  1 root root  392587026 Mar  9 01:55 ahf_setup
-	</copy>
-	```
-
-3. Run the upgrade command.
-
-	```
-	<copy>
-	ahfctl upgrade
-	</copy>
-	```
-	Command output:
-
-	```
-	<copy>
-	AHF Installer for Platform Linux Architecture x86_64
-	AHF Installation Log : /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log
-	Starting Autonomous Health Framework (AHF) Installation
-	AHF Version: 22.1.0 Build Date: 202203081742
-	AHF is already installed at /opt/oracle.ahf
-	Installed AHF Version: 22.1.0 Build Date: 202203081714
-	Upgrading /opt/oracle.ahf
-	Shutting down AHF Services
-	Nothing to do !
-	Shutting down TFA
-	Removed symlink /etc/systemd/system/multi-user.target.wants/oracle-tfa.service.
-	Removed symlink /etc/systemd/system/graphical.target.wants/oracle-tfa.service.
-	Successfully shutdown TFA..
-	Starting AHF Services
-	Starting TFA..
-	Waiting up to 100 seconds for TFA to be started..
-	. . . . .
-	Successfully started TFA Process..
-	. . . . .
-	TFA Started and listening for commands
-	No new directories were added to TFA
-	Directory /u01/app/grid/crsdata/scao05adm07/trace/chad was already added to TFA Directories.
-	INFO: Starting exachk scheduler in background. Details for the process can be found at /u01/app/grid/oracle.ahf/data/scao05adm07/diag/exachk/compliance_start_090322_021151.log
-	AHF is successfully upgraded to latest version
-	.-------------------------------------------------------------------.
-	| Host        | TFA Version | TFA Build ID         | Upgrade Status |
-	+-------------+-------------+----------------------+----------------+
-	| scao05adm07 |  22.1.0.0.0 | 22100020220308174218 | UPGRADED       |
-	| scao05adm08 |  22.1.0.0.0 | 22100020220308171448 | UPGRADED       |
-	'-------------+-------------+----------------------+----------------'
-	Moving /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log to /u01/app/grid/oracle.ahf/data/scao05adm07/diag/ahf/
-	Please upgrade AHF on the below mentioned nodes as well using ahfctl upgrade
-	scao05adm08
-	</copy>
-	```
-
-4. Validate if the AHF installer zip is removed and the extracted binaries are retained.
-
-	```
-	<copy>
-	ls -lart /export/sheisey_R/ahf_stage
-	</copy>
-	```
-	Command output:
-
-	```
-	<copy>
-	-rw-r--r--+  1 root root       1520 Apr 30  2020 README.txt
-	-rw-r--r--+  1 root root        625 Nov  1 15:15 oracle-tfa.pub
-	-rw-r--r--+  1 root root        384 Jan  4 22:45 ahf_setup.dat
-	-rwxr-xr-x+  1 root root  392587026 Mar  9 01:55 ahf_setup
-	</copy>
-	```
 ## Task 1: Uninstall an Older Version of AHF and Install AHF 21.4.3
 
 1. To check if AHF is already installed:
@@ -823,6 +496,335 @@ You can disable **autoupgrade** if you want to upgrade AHF manually.
 	or
 	```
 	<copy>ahfctl unsetupgrade -autoupgrade</copy>
+	```
+## Task 8: Upgrade AHF on Local File System
+
+If the stage location is a local file system and if the AHF installer zip file exists in the stage location, then after upgrading, the installer removes the AHF installer zip file and all the extracted items from the stage location.
+
+1. Configure the auto upgrade parameters.
+
+	```
+	<copy>
+	ahfctl setupgrade -all
+	</copy>
+	```
+
+	Command output:
+
+	```
+	<copy>
+	Enter autoupgrade flag <on/off> : on
+	Enter software stage location : /opt/local
+	Enter auto upgrade frequency : 30
+	AHF autoupgrade parameters successfully updated
+	Successfully synced AHF configuration
+	refreshConfig() completed successfully.
+	</copy>
+	```
+
+2. Check if the AHF installer zip file exists in the stage location.
+
+	```
+	<copy>
+	ls /opt/local
+	</copy>
+	```
+
+	Command output:
+
+	```
+	<copy>
+	AHF-LINUX_v22.1.1.zip
+	</copy>
+	```
+
+	>**Note:** Oracle Trace File Analyzer scheduler calls **ahfctl upgrade -nomos** at a given frequency, in this example, auto-upgrade will happen every 30 days at 3 AM. You can also initiate automatic upgrade from the command-line using the **ahfctl upgrade** command.
+
+3. Run the upgrade command.
+
+	```
+	<copy>
+	ahfctl upgrade
+	</copy>
+	```
+
+	Command output:
+
+	```
+	<copy>
+	AHF Installer for Platform Linux Architecture x86_64
+	AHF Installation Log : /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log
+	Starting Autonomous Health Framework (AHF) Installation
+	AHF Version: 22.1.0 Build Date: 202203081742
+	AHF is already installed at /opt/oracle.ahf
+	Installed AHF Version: 22.1.0 Build Date: 202203081714
+	Upgrading /opt/oracle.ahf
+	Shutting down AHF Services
+	Nothing to do !
+	Shutting down TFA
+	Removed symlink /etc/systemd/system/multi-user.target.wants/oracle-tfa.service.
+	Removed symlink /etc/systemd/system/graphical.target.wants/oracle-tfa.service.
+	Successfully shutdown TFA..
+	Starting AHF Services
+	Starting TFA..
+	Waiting up to 100 seconds for TFA to be started..
+	. . . . .
+	Successfully started TFA Process..
+	. . . . .
+	TFA Started and listening for commands
+	No new directories were added to TFA
+	Directory /u01/app/grid/crsdata/scao05adm07/trace/chad was already added to TFA Directories.
+	INFO: Starting exachk scheduler in background. Details for the process can be found at /u01/app/grid/oracle.ahf/data/scao05adm07/diag/exachk/compliance_start_090322_021151.log
+	AHF is successfully upgraded to latest version
+	.-------------------------------------------------------------------.
+	| Host        | TFA Version | TFA Build ID         | Upgrade Status |
+	+-------------+-------------+----------------------+----------------+
+	| scao05adm07 |  22.1.0.0.0 | 22100020220308174218 | UPGRADED       |
+	| scao05adm08 |  22.1.0.0.0 | 22100020220308171448 | UPGRADED       |
+	'-------------+-------------+----------------------+----------------'
+	Moving /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log to /u01/app/grid/oracle.ahf/data/scao05adm07/diag/ahf/
+	Please upgrade AHF on the below mentioned nodes as well using ahfctl upgrade
+	scao05adm08
+	</copy>
+	```
+
+4. Validate if AHF installer zip and the extracted files are removed from the stage location.
+
+	```
+	<copy>
+	ls -lart /opt/local
+	</copy>
+	```
+	Command output:
+
+	```
+	<copy>
+	drwxr-xr-x   2 root     root           2 Mar  9 02:32 .
+	drwxr-xr-x  25 root     sys           28 Mar  9 02:32 ..
+	</copy>
+	```
+## Task 9: Upgrade AHF on Oracle Advanced Cluster File System (Oracle ACFS)
+
+>**Note** The scope of this workshop is limited to upgrading AHF on the local file system because enabling ACFS and configuring the NFS path location is not possible in this environment.
+
+If the stage location is ACFS and if the AHF installer zip file exists in the stage location, then after upgrading, the installer removes the AHF installer zip file and retains all the extracted binaries in the stage location so that the other nodes can consume them.
+
+1. Configure the auto upgrade parameters.
+
+	```
+	<copy>
+	ahfctl setupgrade -all
+	</copy>
+	```
+	Command output:
+
+	```
+	<copy>
+	Enter autoupgrade flag <on/off> : on
+	Enter software stage location : /acfs01
+	Enter auto upgrade frequency : 30
+	AHF autoupgrade parameters successfully updated
+	Successfully synced AHF configuration
+	refreshConfig() completed successfully.
+	</copy>
+	```
+
+2. Check if the AHF installer zip file exists in the stage location.
+
+	```
+	<copy>
+	ls -lart /acfs01
+	</copy>
+	```
+
+	Command output:
+
+	```
+	<copy>
+	total 387862
+	-rw-r--r--+  1 root root       1520 Apr 30  2020 README.txt
+	-rw-r--r--+  1 root root        625 Nov  1 15:15 oracle-tfa.pub
+	-rw-r--r--+  1 root root        384 Jan  4 22:45 ahf_setup.dat
+	-rwxr-xr-x+  1 root root  392587026 Mar  9 01:55 ahf_setup
+	</copy>
+	```
+
+3. Run the upgrade command.
+
+	```
+	<copy>
+	ahfctl upgrade
+	</copy>
+	```
+
+	Command output:
+
+	```
+	<copy>
+	AHF Installer for Platform Linux Architecture x86_64
+	AHF Installation Log : /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log
+	Starting Autonomous Health Framework (AHF) Installation
+	AHF Version: 22.1.0 Build Date: 202203081742
+	AHF is already installed at /opt/oracle.ahf
+	Installed AHF Version: 22.1.0 Build Date: 202203081714
+	Upgrading /opt/oracle.ahf
+	Shutting down AHF Services
+	Nothing to do !
+	Shutting down TFA
+	Removed symlink /etc/systemd/system/multi-user.target.wants/oracle-tfa.service.
+	Removed symlink /etc/systemd/system/graphical.target.wants/oracle-tfa.service.
+	Successfully shutdown TFA..
+	Starting AHF Services
+	Starting TFA..
+	Waiting up to 100 seconds for TFA to be started..
+	. . . . .
+	Successfully started TFA Process..
+	. . . . .
+	TFA Started and listening for commands
+	No new directories were added to TFA
+	Directory /u01/app/grid/crsdata/scao05adm07/trace/chad was already added to TFA Directories.
+	INFO: Starting exachk scheduler in background. Details for the process can be found at /u01/app/grid/oracle.ahf/data/scao05adm07/diag/exachk/compliance_start_090322_021151.log
+	AHF is successfully upgraded to latest version
+	.-------------------------------------------------------------------.
+	| Host        | TFA Version | TFA Build ID         | Upgrade Status |
+	+-------------+-------------+----------------------+----------------+
+	| scao05adm07 |  22.1.0.0.0 | 22100020220308174218 | UPGRADED       |
+	| scao05adm08 |  22.1.0.0.0 | 22100020220308171448 | UPGRADED       |
+	'-------------+-------------+----------------------+----------------'
+	Moving /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log to /u01/app/grid/oracle.ahf/data/scao05adm07/diag/ahf/
+	Please upgrade AHF on the below mentioned nodes as well using ahfctl upgrade
+	scao05adm08
+	</copy>
+	```
+
+4. Validate the AHF installer zip is removed and the extracted binaries are retained.
+
+	```
+	<copy>
+	ls -lart /acfs01
+	</copy>
+	```
+	Command output:
+
+	```
+	<copy>
+	-rw-r--r--+  1 root root       1520 Apr 30  2020 README.txt
+	-rw-r--r--+  1 root root        625 Nov  1 15:15 oracle-tfa.pub
+	-rw-r--r--+  1 root root        384 Jan  4 22:45 ahf_setup.dat
+	-rwxr-xr-x+  1 root root  392587026 Mar  9 01:55 ahf_setup
+	</copy>
+	```
+## Task 10: Upgrade AHF on Network File System (NFS)
+
+>**Note** The scope of this workshop is limited to upgrading AHF on the local file system because enabling ACFS and configuring the NFS path location is not possible in this environment.
+
+- If the stage location is NFS and if the AHF installer zip file exists in the stage location, then the installer asks the user to extract it.
+- If the stage location has AHF binaries in the extracted form, then after upgrading, the installer retains the extracted AHF binaries as is.
+- If the stage location has AHF installer zip file, then after upgrading, the installer removes the AHF installer zip file.
+
+1. Configure the auto upgrade parameters.
+
+	```
+	<copy>
+	ahfctl setupgrade -all
+	</copy>
+	```
+	Command output:
+
+	```
+	<copy>
+	Enter autoupgrade flag <on/off> : on
+	Enter software stage location : /export/sheisey_R/ahf_stage
+	Stage location /export/sheisey_R/ahf_stage file system type is NFS. User needs to unzip AHF zip placed at NFS file system.
+	Enter auto upgrade frequency : 30
+	AHF autoupgrade parameters successfully updated
+	Successfully synced AHF configuration
+	refreshConfig() completed successfully.
+	</copy>
+	```
+
+2. Check if the AHF installer zip file or AHF binaries in the extracted form exists in the stage location.
+
+	```
+	<copy>
+	ls -lart /export/sheisey_R/ahf_stage
+	</copy>
+	```
+	Command output:
+
+	```
+	<copy>
+	-rw-r--r--    1 root root  389105013 Feb  3 06:08 AHF-LINUX_v22.1.0.zip
+	-rw-r--r--+  1 root root       1520 Apr 30  2020 README.txt
+	-rw-r--r--+  1 root root        625 Nov  1 15:15 oracle-tfa.pub
+	-rw-r--r--+  1 root root        384 Jan  4 22:45 ahf_setup.dat
+	-rwxr-xr-x+  1 root root  392587026 Mar  9 01:55 ahf_setup
+	</copy>
+	```
+
+3. Run the upgrade command.
+
+	```
+	<copy>
+	ahfctl upgrade
+	</copy>
+	```
+	Command output:
+
+	```
+	<copy>
+	AHF Installer for Platform Linux Architecture x86_64
+	AHF Installation Log : /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log
+	Starting Autonomous Health Framework (AHF) Installation
+	AHF Version: 22.1.0 Build Date: 202203081742
+	AHF is already installed at /opt/oracle.ahf
+	Installed AHF Version: 22.1.0 Build Date: 202203081714
+	Upgrading /opt/oracle.ahf
+	Shutting down AHF Services
+	Nothing to do !
+	Shutting down TFA
+	Removed symlink /etc/systemd/system/multi-user.target.wants/oracle-tfa.service.
+	Removed symlink /etc/systemd/system/graphical.target.wants/oracle-tfa.service.
+	Successfully shutdown TFA..
+	Starting AHF Services
+	Starting TFA..
+	Waiting up to 100 seconds for TFA to be started..
+	. . . . .
+	Successfully started TFA Process..
+	. . . . .
+	TFA Started and listening for commands
+	No new directories were added to TFA
+	Directory /u01/app/grid/crsdata/scao05adm07/trace/chad was already added to TFA Directories.
+	INFO: Starting exachk scheduler in background. Details for the process can be found at /u01/app/grid/oracle.ahf/data/scao05adm07/diag/exachk/compliance_start_090322_021151.log
+	AHF is successfully upgraded to latest version
+	.-------------------------------------------------------------------.
+	| Host        | TFA Version | TFA Build ID         | Upgrade Status |
+	+-------------+-------------+----------------------+----------------+
+	| scao05adm07 |  22.1.0.0.0 | 22100020220308174218 | UPGRADED       |
+	| scao05adm08 |  22.1.0.0.0 | 22100020220308171448 | UPGRADED       |
+	'-------------+-------------+----------------------+----------------'
+	Moving /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log to /u01/app/grid/oracle.ahf/data/scao05adm07/diag/ahf/
+	Please upgrade AHF on the below mentioned nodes as well using ahfctl upgrade
+	scao05adm08
+	</copy>
+	```
+
+4. Validate if the AHF installer zip is removed and the extracted binaries are retained.
+
+	```
+	<copy>
+	ls -lart /export/sheisey_R/ahf_stage
+	</copy>
+	```
+	Command output:
+
+	```
+	<copy>
+	-rw-r--r--+  1 root root       1520 Apr 30  2020 README.txt
+	-rw-r--r--+  1 root root        625 Nov  1 15:15 oracle-tfa.pub
+	-rw-r--r--+  1 root root        384 Jan  4 22:45 ahf_setup.dat
+	-rwxr-xr-x+  1 root root  392587026 Mar  9 01:55 ahf_setup
+	</copy>
 	```
 
 ## Learn More
