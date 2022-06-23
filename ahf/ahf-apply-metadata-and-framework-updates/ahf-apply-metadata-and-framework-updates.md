@@ -31,13 +31,11 @@ tfactl print status
 Command output:
 
 ```
-<copy>
 .-------------------------------------------------------------------------------.
 | Host     | Status of TFA | PID    | Port  | Version    | Build ID             |
 +----------+---------------+--------+-------+------------+----------------------+
 | den02mwa | RUNNING       | 105916 | 59452 | 22.1.1.0.0 | 22100020220130232427 |
 '----------+---------------+--------+-------+------------+----------------------'
-</copy>
 ```
 
 ## Task 2: Apply AHF Framework and Metadata Updates
@@ -54,13 +52,11 @@ ahfctl applyupdate -updatefile /home/opc/Downloads/ahf_data_20220602.zip
 Command output:
 
 ```
-<copy>
 Updated file /opt/oracle.ahf/orachk/.cgrep/collections.dat
 Updated file /opt/oracle.ahf/orachk/rules.dat
 Updated file /opt/oracle.ahf/orachk/.cgrep/versions.dat
 Updated file /opt/oracle.ahf/orachk/messages/check_messages.json
 Data files updated to 20220602 from 20220516
-</copy>
 ```
 
 ## Task 3: Query AHF Framework and Metadata Updates
@@ -78,11 +74,9 @@ ahfctl queryupdate -all
 ```
 Command output:
 ```
-<copy>
 AHF Metadata Update: 20220602
 Status: Applied
 Applied on: Mon Jun  6 00:23:14 2022
-</copy>
 ```
 
 ## Task 4: Rollback AHF Framework and Metadata Updates
@@ -100,10 +94,8 @@ ahfctl rollbackupdate -updateid 20220602
 ```
 Command output:
 ```
-<copy>
 Data files with timestamp 20220602 identified. Rolling back the files to Production version 20220516
 Rolled back the data files 20220602 to Production version 20220516
-</copy>
 ```
 
 ## Task 5: Cleanup AHF Metadata Backup Directories
@@ -123,9 +115,7 @@ ahfctl deleteupdatebackup -updateid 20220602
 ```
 Command output:
 ```
-<copy>
 No metadata update applied.
-</copy>
 ```
 
 ## Learn More

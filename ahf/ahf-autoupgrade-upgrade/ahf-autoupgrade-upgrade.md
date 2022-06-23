@@ -58,13 +58,11 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	Command output:
 
 	```
-	<copy>
 	.----------------------------------------------------------------------------------.
 	| Host       | Status of TFA | PID     | Port  | Version    | Build ID             |
 	+------------+---------------+---------+-------+------------+----------------------+
 	| iaddbfan38 | RUNNING       | 1039258 | 39435 | 21.3.6.0.0 | 21360020220202214733 |
 	'------------+---------------+---------+-------+------------+----------------------'
-	</copy>
 	```
 
 2. To uninstall AHF:
@@ -77,7 +75,6 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	Command output:
 
 	```
-	<copy>
 	Starting AHF Uninstall
 	AHF will be uninstalled on: ahf2
 
@@ -101,7 +98,6 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	Removing /ahf/oracle.ahf/install.properties
 	Removing /ahf/oracle.ahf/data/repository
 	Removing /ahf/oracle.ahf/data
-	</copy>
 	```
 
 3. To unzip the **ahf\_setup** installer script, **/home/opc/Downloads/AHF-LINUX\_v21.4.3.zip** in the **/tmp** directory:
@@ -114,9 +110,7 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	Command output:
 
 	```
-	<copy>
 	-rw-r--r--. 1 root root 373987699 May 31 02:03 /home/opc/Downloads/AHF-LINUX_v21.4.3.zip
-	</copy>
 	```
 
 	```
@@ -127,13 +121,11 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	Command output:
 
 	```
-	<copy>
 	Archive:  /home/opc/Downloads/AHF-LINUX_v21.4.3.zip
 	inflating: /tmp/ahf21.4.3/ahf_setup
 	extracting: /tmp/ahf21.4.3/ahf_setup.dat
 	inflating: /tmp/ahf21.4.3/README.txt
 	inflating: /tmp/ahf21.4.3/oracle-tfa.pub
-	</copy>
 	```
 4. To install AHF 21.4.3:
 
@@ -156,10 +148,8 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	```
 	Command output:
 	```
-	<copy>
 	AHF autoupgrade parameters successfully updated
 	Successfully synced AHF configuration
-	</copy>
 	```
 
 3. Verify the configuration.
@@ -172,12 +162,10 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	Command output:
 
 	```
-	<copy>
 	autoupgrade : on
 	autoupgrade.swstage : /opt/oracle.ahf
 	autoupgrade.frequency : [not set]
 	autoupgrade.servicename : [not set]
-	</copy>
 	```
 
 4. Validate if a newer AHF zip file is located in the software stage location.
@@ -190,7 +178,6 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	 Command output:
 
 	 ```
-	 <copy>
 	 total 410272
 	 drwxr-xr-x 6 root root      4096 Jan 24 21:46 ahf
 	 -rwxrwxrwx 1 root root 420064080 Jan 29 14:15 AHF-LINUX_v22.1.1.zip
@@ -205,7 +192,6 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	 drwxr-xr-x 6 root root      4096 Jan 10 20:28 python
 	 drwx------ 2 root root      4096 Jan 24 21:46 rpms
 	 drwxr-x--x 9 root root      4096 Jan 29 11:23 tfa
-	 </copy>
 	 ```
 
 	 ```
@@ -216,9 +202,7 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	 Command output:
 
 	 ```
-	 <copy>
 	 /opt/oracle.ahf
-	 </copy>
 	 ```
 
 5. Run the upgrade command and specify the **-nomos** command option to upgrade without MOS configuration.
@@ -231,17 +215,14 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	Command output:
 
 	```
-	<copy>
 	/opt/oracle.ahf/AHF-LINUX_v22.2.0.zip successfully extracted at /opt/oracle.ahf
 	AHF software signature has been validated successfully
 	echo $?
-	</copy>
 	```
 
 6. Validate if the upgrade is done correctly and check the upgrade logs after 4 minutes.
 
 	```
-	<copy>
 	Sat Jan 29 22:51:47 UTC 2022
 	AHF Installer for Platform Linux Architecture x86_64
 	AHF Installation Log : /tmp/ahf_install_221000_23212_2022_01_29-22_51_47.log
@@ -288,7 +269,6 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	'----------+-------------+----------------------+----------------'
 
 	Moving /tmp/ahf_install_221000_23212_2022_01_29-22_51_47.log to /opt/oracle.ahf/data/den02kad/diag/ahf/
-	</copy>
 	```
 
 7. Run the **tfactl status** command to check the run status of Oracle Trace File Analyzer.
@@ -301,13 +281,11 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	Command output:
 
 	```
-	<copy>
 	.------------------------------------------------------------------------------------------------.
 	| Host     | Status of TFA | PID   | Port | Version    | Build ID             | Inventory Status |
 	+----------+---------------+-------+------+------------+----------------------+------------------+
 	| den02kad | RUNNING       | 28379 | 5000 | 22.1.0.0.0 | 22100020220127214932 | COMPLETE         |
 	'----------+---------------+-------+------+------------+----------------------+------------------'
-	</copy>
 	```
 
 ## Task 3: Upgrade AHF from REST Endpoints (Object Store)
@@ -324,7 +302,6 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	Command output:
 
 	```
-	<copy>
 	Enter test_ep.https.user :  testuser@oracle.com
 	Enter test_ep.https.password :
 	Enter test_ep.https.url : https://swiftobjectstorage.r1.oracleiaas.com/v1/dbaasimage/CDCJH
@@ -335,7 +312,6 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	test_ep.https.password: ******
 
 	test_ep.https.url: https://swiftobjectstorage.r1.oracleiaas.com/v1/dbaasimage/CDCJH
-	</copy>
 	```
 
 2. Validate the configured upload parameters.
@@ -348,10 +324,8 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	Command output:
 
 	```
-	<copy>
 	Upload configuration check for: test_ep.
 	Parameters are configured correctly to upload.
-	</copy>
 	```
 
 3. Configure the name of the REST download service.
@@ -364,10 +338,8 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	Command output:
 
 	```
-	<copy>
 	AHF autoupgrade parameters successfully updated
 	Successfully synced AHF configuration
-	</copy>
 	```
 
 4. Run the upgrade command and specify the **-nomos** command option to upgrade without MOS configuration.
@@ -380,7 +352,6 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	Command output:
 
 	```
-	<copy>
 	Upload configuration check for: test_ep.
 
 	Parameters are configured correctly to upload.
@@ -388,7 +359,6 @@ You can upgrade AHF on the local file system, Oracle Advanced Cluster File Syste
 	/opt/oracle.ahf/AHF-LINUX_v22.2.0.zip successfully extracted at /opt/oracle.ahf
 	AHF software signature has been validated successfully
 	AHF is already running latest version. No need to upgrade.
-	</copy>
 	```
 
 >**Note:** To run the upgrade, **test\_ep** upload configuration must contain the **AHF-LINUX\_v22.2.0.zip** file. To check if this file exists in the object storage, run the **curl get** command.
@@ -407,13 +377,11 @@ If a new version of AHF is not found either at the software stage location or at
 	Command output:
 
 	```
-	<copy>
 	Enter autoupgrade flag <on/off> : on
 	Enter software stage location : /opt/oracle.ahf
 	Enter auto upgrade frequency : 5
 	AHF autoupgrade parameters successfully updated
 	Successfully synced AHF configuration
-	</copy>
 	```
 2. Run the **ahfctl upgrade** command:
 
@@ -425,29 +393,26 @@ If a new version of AHF is not found either at the software stage location or at
 	Command output:
 
 	```
-	<copy>
 	AHF-LINUX_v21.1.0.zip successfully downloaded at /opt/oracle.ahf /opt/oracle.ahf/AHF-LINUX_v21.1.0.zip successfully extracted at /opt/oracle.ahf AHF software signature has been validated successfully
-	</copy>
 	```
 ## Task 5: Troubleshoot AHF Download from MOS
 
 **Description:** AHF download from MOS fails with the following error:
 
 ```
-<copy>
 ahfctl upgrade
 An error has occurred while downloading AHF from MOS. Please try again!
-</copy>
 ```
 **Action:** Check the **<Diag_Directory>/tfa/tfa_main.trc** file for more information and troubleshooting tips.
 
-1. To enable debug:
+To enable debug:
 
-	```
-	<copy>
-	tfactl set tracelevel=MAIN:DEBUG
-	</copy>
-	```
+```
+<copy>
+tfactl set tracelevel=MAIN:DEBUG
+</copy>
+```
+
 ## Task 6: Unset Upgrade Configuration
 
 Run the **ahfctl unsetupgrade** command to unset a specific upgrade parameter or all of the upgrade parameters.
@@ -461,10 +426,8 @@ Run the **ahfctl unsetupgrade** command to unset a specific upgrade parameter or
 	```
 	Command output:
 	```
-	<copy>
 	AHF upgrade parameters successfully removed
 	Successfully synced AHF configuration
-	</copy>
 	```
 
 2. To verify if all the parameters are unset:
@@ -476,27 +439,27 @@ Run the **ahfctl unsetupgrade** command to unset a specific upgrade parameter or
 	```
 	Command output:
 	```
-	<copy>
 	autoupgrade : [not set]
 	autoupgrade.swstage : [not set]
 	autoupgrade.frequency : [not set]
 	autoupgrade.servicename : [not set]
-	</copy>
 	```
 
 ## Task 7: Disable Automatic upgrade
 
 You can disable **autoupgrade** if you want to upgrade AHF manually.
 
-1. To disable autoupgrade, run:
+To disable autoupgrade:
 
-	```
-	<copy>ahfctl setupgrade -autoupgrade off</copy>
-	```
-	or
-	```
-	<copy>ahfctl unsetupgrade -autoupgrade</copy>
-	```
+```
+<copy>ahfctl setupgrade -autoupgrade off</copy>
+```
+(or)
+
+```
+<copy>ahfctl unsetupgrade -autoupgrade</copy>
+```
+
 ## Task 8: Upgrade AHF on Local File System
 
 If the stage location is a local file system and if the AHF installer zip file exists in the stage location, then after upgrading, the installer removes the AHF installer zip file and all the extracted items from the stage location.
@@ -512,14 +475,12 @@ If the stage location is a local file system and if the AHF installer zip file e
 	Command output:
 
 	```
-	<copy>
 	Enter autoupgrade flag <on/off> : on
 	Enter software stage location : /opt/local
 	Enter auto upgrade frequency : 30
 	AHF autoupgrade parameters successfully updated
 	Successfully synced AHF configuration
 	refreshConfig() completed successfully.
-	</copy>
 	```
 
 2. Check if the AHF installer zip file exists in the stage location.
@@ -533,9 +494,7 @@ If the stage location is a local file system and if the AHF installer zip file e
 	Command output:
 
 	```
-	<copy>
 	AHF-LINUX_v22.1.1.zip
-	</copy>
 	```
 
 	>**Note:** Oracle Trace File Analyzer scheduler calls **ahfctl upgrade -nomos** at a given frequency, in this example, auto-upgrade will happen every 30 days at 3 AM. You can also initiate automatic upgrade from the command-line using the **ahfctl upgrade** command.
@@ -549,9 +508,7 @@ If the stage location is a local file system and if the AHF installer zip file e
 	```
 
 	Command output:
-
 	```
-	<copy>
 	AHF Installer for Platform Linux Architecture x86_64
 	AHF Installation Log : /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log
 	Starting Autonomous Health Framework (AHF) Installation
@@ -585,7 +542,6 @@ If the stage location is a local file system and if the AHF installer zip file e
 	Moving /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log to /u01/app/grid/oracle.ahf/data/scao05adm07/diag/ahf/
 	Please upgrade AHF on the below mentioned nodes as well using ahfctl upgrade
 	scao05adm08
-	</copy>
 	```
 
 4. Validate if AHF installer zip and the extracted files are removed from the stage location.
@@ -598,10 +554,8 @@ If the stage location is a local file system and if the AHF installer zip file e
 	Command output:
 
 	```
-	<copy>
 	drwxr-xr-x   2 root     root           2 Mar  9 02:32 .
 	drwxr-xr-x  25 root     sys           28 Mar  9 02:32 ..
-	</copy>
 	```
 ## Task 9: Upgrade AHF on Oracle Advanced Cluster File System (Oracle ACFS)
 
@@ -619,14 +573,12 @@ If the stage location is ACFS and if the AHF installer zip file exists in the st
 	Command output:
 
 	```
-	<copy>
 	Enter autoupgrade flag <on/off> : on
 	Enter software stage location : /acfs01
 	Enter auto upgrade frequency : 30
 	AHF autoupgrade parameters successfully updated
 	Successfully synced AHF configuration
 	refreshConfig() completed successfully.
-	</copy>
 	```
 
 2. Check if the AHF installer zip file exists in the stage location.
@@ -640,13 +592,11 @@ If the stage location is ACFS and if the AHF installer zip file exists in the st
 	Command output:
 
 	```
-	<copy>
 	total 387862
 	-rw-r--r--+  1 root root       1520 Apr 30  2020 README.txt
 	-rw-r--r--+  1 root root        625 Nov  1 15:15 oracle-tfa.pub
 	-rw-r--r--+  1 root root        384 Jan  4 22:45 ahf_setup.dat
 	-rwxr-xr-x+  1 root root  392587026 Mar  9 01:55 ahf_setup
-	</copy>
 	```
 
 3. Run the upgrade command.
@@ -660,7 +610,6 @@ If the stage location is ACFS and if the AHF installer zip file exists in the st
 	Command output:
 
 	```
-	<copy>
 	AHF Installer for Platform Linux Architecture x86_64
 	AHF Installation Log : /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log
 	Starting Autonomous Health Framework (AHF) Installation
@@ -694,7 +643,6 @@ If the stage location is ACFS and if the AHF installer zip file exists in the st
 	Moving /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log to /u01/app/grid/oracle.ahf/data/scao05adm07/diag/ahf/
 	Please upgrade AHF on the below mentioned nodes as well using ahfctl upgrade
 	scao05adm08
-	</copy>
 	```
 
 4. Validate the AHF installer zip is removed and the extracted binaries are retained.
@@ -707,12 +655,10 @@ If the stage location is ACFS and if the AHF installer zip file exists in the st
 	Command output:
 
 	```
-	<copy>
 	-rw-r--r--+  1 root root       1520 Apr 30  2020 README.txt
 	-rw-r--r--+  1 root root        625 Nov  1 15:15 oracle-tfa.pub
 	-rw-r--r--+  1 root root        384 Jan  4 22:45 ahf_setup.dat
 	-rwxr-xr-x+  1 root root  392587026 Mar  9 01:55 ahf_setup
-	</copy>
 	```
 ## Task 10: Upgrade AHF on Network File System (NFS)
 
@@ -732,7 +678,6 @@ If the stage location is ACFS and if the AHF installer zip file exists in the st
 	Command output:
 
 	```
-	<copy>
 	Enter autoupgrade flag <on/off> : on
 	Enter software stage location : /export/sheisey_R/ahf_stage
 	Stage location /export/sheisey_R/ahf_stage file system type is NFS. User needs to unzip AHF zip placed at NFS file system.
@@ -740,7 +685,6 @@ If the stage location is ACFS and if the AHF installer zip file exists in the st
 	AHF autoupgrade parameters successfully updated
 	Successfully synced AHF configuration
 	refreshConfig() completed successfully.
-	</copy>
 	```
 
 2. Check if the AHF installer zip file or AHF binaries in the extracted form exists in the stage location.
@@ -753,13 +697,11 @@ If the stage location is ACFS and if the AHF installer zip file exists in the st
 	Command output:
 
 	```
-	<copy>
 	-rw-r--r--    1 root root  389105013 Feb  3 06:08 AHF-LINUX_v22.1.0.zip
 	-rw-r--r--+  1 root root       1520 Apr 30  2020 README.txt
 	-rw-r--r--+  1 root root        625 Nov  1 15:15 oracle-tfa.pub
 	-rw-r--r--+  1 root root        384 Jan  4 22:45 ahf_setup.dat
 	-rwxr-xr-x+  1 root root  392587026 Mar  9 01:55 ahf_setup
-	</copy>
 	```
 
 3. Run the upgrade command.
@@ -772,7 +714,6 @@ If the stage location is ACFS and if the AHF installer zip file exists in the st
 	Command output:
 
 	```
-	<copy>
 	AHF Installer for Platform Linux Architecture x86_64
 	AHF Installation Log : /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log
 	Starting Autonomous Health Framework (AHF) Installation
@@ -806,7 +747,6 @@ If the stage location is ACFS and if the AHF installer zip file exists in the st
 	Moving /tmp/ahf_install_221000_139332_2022_03_09-02_09_42.log to /u01/app/grid/oracle.ahf/data/scao05adm07/diag/ahf/
 	Please upgrade AHF on the below mentioned nodes as well using ahfctl upgrade
 	scao05adm08
-	</copy>
 	```
 
 4. Validate if the AHF installer zip is removed and the extracted binaries are retained.
@@ -819,12 +759,10 @@ If the stage location is ACFS and if the AHF installer zip file exists in the st
 	Command output:
 
 	```
-	<copy>
 	-rw-r--r--+  1 root root       1520 Apr 30  2020 README.txt
 	-rw-r--r--+  1 root root        625 Nov  1 15:15 oracle-tfa.pub
 	-rw-r--r--+  1 root root        384 Jan  4 22:45 ahf_setup.dat
 	-rwxr-xr-x+  1 root root  392587026 Mar  9 01:55 ahf_setup
-	</copy>
 	```
 
 ## Learn More
