@@ -6,7 +6,7 @@ In this workshop you will discover how deploying Oracle TimesTen In-Memory Datab
 
 Setting up a TimesTen cache is quick and easy. This workshop leads you through the process step by step and uses a simple OLTP application and some example queries to demonstrate the incredibly low query latencies provided by TimesTen.
 
-Estimated workshop time: **60 minutes**
+Estimated Workshop Time: **60 minutes**
 
 ### About Oracle TimesTen In-Memory Database
 
@@ -16,7 +16,7 @@ TimesTen is a relational database, with SQL as its access language and PL/SQL as
 
 TimesTen can be deployed both as a database of record or as a high performance relational cache in front of an Oracle database to acceleratae Oracle database applications. This lab focuses on the cache deployment mode.
 
-![](./images/tt-cache-architecture.png " ")
+![TimesTen Cache Architecture Diagram](./images/tt-cache-architecture.png " ")
 
 ### Objectives
 

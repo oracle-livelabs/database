@@ -97,11 +97,11 @@ Here are the entity relationship diagrams.
 
 _APPUSER schema_
 
-![](./images/appuser-schema-er.png " ")
+![APPUSER tables ER Diagram](./images/appuser-schema-er.png " ")
 
 _OE schema_
 
-![](./images/oe-schema-er.png " ")
+![OE tables ER Diagram](./images/oe-schema-er.png " ")
 
 After the tables were created and populated with suitable example data, optimizer statistics were gathered using **dbms\_stats.gather\_schema\_stats**.
 

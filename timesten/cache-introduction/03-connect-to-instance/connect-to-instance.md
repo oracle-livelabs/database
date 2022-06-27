@@ -35,7 +35,7 @@ At the end of the ORM stack apply job execution report you will see the noVNC co
 
 Copy / paste the URL into your browser and you should then see the workshop desktop.
 
-![](./images/novnc-desktop.png " ")
+![Workshp noVNC Desktop](./images/novnc-desktop.png " ")
 
 You can use the *Activities* menu, or double click the *Terminal* icon on the desktop to open a terminal session.
 
