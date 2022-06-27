@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "TimesTen Cache Introduction",
+  "workshoptitle": "Accelerate your Applications: Achieve Blazing Fast SQL With an Oracle TimesTen Cache",
   "support": "https://community.oracle.com/tech/developers/categories/database-19c",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
@@ -14,7 +14,7 @@
       "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/verify-compute/verify-compute-novnc.md"
     },
     {
-      "title": "Lab 2: Connect to the Instance",
+      "title": "Lab 2: Connect to the workshop compute instance",
       "description": "How to connect to the Cloud Instance",
       "filename": "../../03-connect-to-instance/connect-to-instance.md"
     },
@@ -59,7 +59,7 @@
       "filename": "../../11-query-performance/query-performance.md"
     },
     {
-      "title": "Lab 11: Dynamic Cache Groups",
+      "title": "Lab 11: Dynamic caching",
       "filename": "../../12-dynamic-caching/dynamic-caching.md"
     },
     {

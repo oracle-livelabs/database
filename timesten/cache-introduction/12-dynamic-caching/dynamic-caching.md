@@ -1,63 +1,229 @@
-# Initialize Environment
+# Dynamic caching
 
 ## Introduction
 
-In this lab we will review and startup all components required to successfully run this workshop.
+In this lab you will learn the difference between static and dynamic cache groups.
 
-Estimated Time: 10 Minutes.
+Estimated Time: **5 minutes**
+
+So far, the cache groups that you have been working with are what are known as static cache groups. With static cache groups you pre-load the cache group with the data that you wish to cache and then the TimesTen autorefresh mechanism ensures that any inserts, updates or deletes that occur on Oracle are captured and propagated to the cache to refresh the cached tables.
+
+Static cache groups are optimal when the data set that needs to be cached is well defined and will fit into the memory allocated to the TimesTen cache. Sometimes, however, the data set may be so large that you cannot afford to allocate enough memory to cache it all and it may not be possible to predict in advance which rows the application will access in any given time period. In such cases using a dynamic cache group may be a better option.
+
+With a dynamic cache group, data is automatically faulted into the cache on a ‘cache miss’. Once in the cache the data remains there and is able to satisfy future read requests. The data in the cache is maintained in sync with Oracle using the TimesTen autorefresh mechanism. To avoid the cache memory completely filling up over time as new data is faulted in, TimesTen provides a choice of two aging mechanisms (LRU and lifetime) which can be used to automatically discard ‘old’ data from the cache.
+
+Only certain kinds of query qualify for dynamic load; typically the query must include a full key equality condition on either a primary or foreign key on one of the cache group tables. If the result of executing the query in TimesTen is ‘no rows found’ then instead of returning this answer to the application TimesTen first tries to execute the same query in Oracle. If that query returns something in Oracle, then the rows making up the cache instance (the parent row and all related child rows down through the hierarchy) are retrieved and inserted into the cache tables in TimesTen. Then the query is executed against the cache and the answer returned to the application.
+
+As a result, a cache miss is significantly more expensive than a cache hit since the rows have to be fetched from Oracle and inserted into TimesTen. Therefore dynamic caching only brings performance benefits if there is considerable reuse of rows once they have been faulted into the cache.
 
 ### Objectives
 
-- Initialize the workshop environment.
+- Create a dynamic readonly cache group.
+- Run some queries that trihgger cache misses and cache hits.
+- Observe the behaviour and how it differs from a static cache group.
 
 ### Prerequisites
 
-This lab assumes you have:
+This lab assumes that you have:
 
-- Completed all the previous labs in this workshop.
+- Completed all the previous labs in this workshop, in sequence.
 
 ## Task 1: Connect to the environment
 
-*Note:* All screenshots for SSH terminal type tasks featured throughout this workshop were captured using the *MobaXterm* SSH Client as described in this step. As a result when executing such tasks from within the graphical remote desktop session you can skip steps requiring you to login as user *oracle* using *sudo su - oracle*, the reason being that the remote desktop session is under user *oracle*.
+If you do not already have an active terminal session, connect to the OCI compute instance and open a terminal session, as the user **oracle**. In that terminal session, connect to the TimesTen host (tthost1) using ssh.
 
-1. Now with access to your remote desktop session, proceed as indicated below to validate your environment before you start executing the subsequent labs. The following Processes should be up and running:
+## Task 2: Create a DYNAMIC READONLY cache group
 
-    - Database Listener
-        - LISTENER
-    - Database Server Instances
-        - FTEX
-        - DB12
-        - CDB2
+Use ttIsql to connect to the cache as the APPUSER user:
 
-    You may test database connectivity clicking on the *+* sign next to each of the 3 Databases as shown below in the *SQL Developer Oracle Connections* panel.
+**ttIsql "DSN=sampledb;UID=appuser;PWD=appuser;OraclePWD=appuser"**
 
-    ![validate your environment](./images/19c_upgrade_landing.png " ")
+```
+[oracle@tthost1 livelab]$ ttIsql "DSN=sampledb;UID=appuser;PWD=appuser;OraclePWD=appuser"
 
-2. Validate that expected processes are up. Please note that it may take up to 5 minutes after instance provisioning for all processes to fully start.
+Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
+Type ? or "help" for help, type "exit" to quit ttIsql.
 
-    ```
-    <copy>
-    ps -ef|grep LISTENER|grep -v grep
-    ps -ef|grep ora_|grep pmon|grep -v grep
-    systemctl status oracle-database
-    </copy>
-    ```
+connect "DSN=sampledb;UID=appuser;PWD=********;OraclePWD=********";
+Connection successful: DSN=sampledb;UID=appuser;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
+(Default setting AutoCommit=1)
+Command> 
+```
+Create a dynamic readonly cache group encompassing the **PARENT** and **CHILD** tables, which are related through a foreign key:
 
-    ![Validate that expected processes are up](./images/check-tns-up.png " ")
-    ![Validate that expected processes are up](./images/check-pmon-up.png " ")
-    ![Validate that expected processes are up](./images/check-db-service-up.png " ")
+**CREATE DYNAMIC READONLY CACHE GROUP appuser.cg\_parent\_child 
+AUTOREFRESH MODE INCREMENTAL INTERVAL 2 SECONDS 
+STATE ON 
+FROM 
+parent 
+( parent\_id          NUMBER(8) NOT NULL
+, parent\_c1          VARCHAR2(20 BYTE)
+, PRIMARY KEY (parent\_id)
+),
+child 
+( child\_id           NUMBER(8) NOT NULL
+, parent\_id          NUMBER(8) NOT NULL
+, child\_c1           VARCHAR2(20 BYTE)
+, PRIMARY KEY (child\_id)
+, FOREIGN KEY (parent\_id)
+  REFERENCES appuser.parent (parent\_id)
+) 
+AGING LRU ON;**
 
-    If all expected processes are shown in your output as seen above, then your environment is ready.
+```
+Command> CREATE DYNAMIC READONLY CACHE GROUP appuser.cg_parent_child 
+       > AUTOREFRESH MODE INCREMENTAL INTERVAL 2 SECONDS 
+       > FROM 
+       > parent 
+       > ( parent_id          NUMBER(8) NOT NULL
+       > , parent_c1          VARCHAR2(20 BYTE)
+       > , PRIMARY KEY (parent_id)
+       > ),
+       > child 
+       > ( child_id           NUMBER(8) NOT NULL
+       > , parent_id          NUMBER(8) NOT NULL
+       > , child_c1           VARCHAR2(20 BYTE)
+       > , PRIMARY KEY (child_id)
+       > , FOREIGN KEY (parent_id)
+       >   REFERENCES appuser.parent (parent_id)
+       > ) 
+       > AGING LRU ON;
+```
 
-3. If you see questionable output(s), failure or down component(s), restart the service accordingly
+Display information about the cache group:
 
-    ```
-    <copy>
-    sudo systemctl restart oracle-database
-    </copy>
-    ```
+**cachegroups cg\_parent\_child;**
 
-You may now *proceed to the next lab*.
+```
+Command> cachegroups cg_parent_child;
+
+Cache Group APPUSER.CG_PARENT_CHILD:
+
+  Cache Group Type: Read Only (Dynamic)
+  Autorefresh: Yes
+  Autorefresh Mode: Incremental
+  Autorefresh State: On
+  Autorefresh Interval: 2 Seconds
+  Autorefresh Status: ok
+  Aging: LRU on
+
+  Root Table: APPUSER.PARENT
+  Table Type: Read Only
+
+
+  Child Table: APPUSER.CHILD
+  Table Type: Read Only
+```
+Note that in this case the Autorefresh state is immediately set to on.
+
+```
+Autorefresh State: On
+```
+
+This is because you do not need to perform any initial load for a dynamic cache group (though it is pssible to do so).
+
+Check the state of the tables:
+
+**select count(\*) from appuser.parent;**
+
+```
+Command> select count(*) from appuser.parent;
+< 0 >
+1 row found.
+```
+**select count(\*) from appuser.child;**
+
+```
+Command> select count(*) from appuser.child;
+< 0 >
+1 row found.
+```
+
+There is no data in the cached tables.
+
+## Task 3: Run some queries and observe the behaviour
+
+First run a query that referenbces the root table's (PARENT table) primary key:
+
+**select \* from parent where parent\_id = 4;**
+
+```
+Command> select * from parent where parent_id = 4;
+< 4, Parent row 4 >
+1 row found.
+```
+
+Even though the table was empty, the query returns a result. Now examine the contents of both tables again:
+
+**select \* from parent;**
+
+```
+Command> select * from parent;
+< 4, Parent row 4 >
+1 row found.
+```
+
+**select \* from child;**
+
+```
+Command> select * from child;
+< 4, 4, P4,C4 >
+< 5, 4, P4,C5 >
+< 6, 4, P4,C6 >
+3 rows found.
+```
+
+Observe that the row that was queried now exists in the PARENT table and the three related rows also exist in the CHILD table. TimesTen performed a dynamic load operation for the cache instance. 
+
+Now that these rows now exist in the cache they will satisfy future read requests. If any of these rows are modified in Oracle, the Timesten autorefresh mechanism will capture the changes and propagate them to the cache.
+
+Let’s try something a little more sophisticated. Query a row in the CHILD table with a join back to the PARENT table:
+
+**select p.parent\_id, p.parent\_c1, c.child\_c1 from parent p, child c where c.child\_id = 2 and p.parent\_id = c.parent\_id;**
+
+```
+Command> select p.parent_id, p.parent_c1, c.child_c1 from parent p,
+       > child c where c.child_id = 2 and p.parent_id = c.parent_id;
+< 1, Parent row 1, P1,C2 >
+1 row found.
+```
+
+Now check again to see the contents of both tables.
+
+**select \* from parent;**
+
+```
+Command> select * from parent;
+< 1, Parent row 1 >
+< 4, Parent row 4 >
+2 rows found.
+```
+**select \* from child;**
+
+```
+Command> select * from child;
+< 1, 1, P1,C1 >
+< 2, 1, P1,C2 >
+< 4, 4, P4,C4 >
+< 5, 4, P4,C5 >
+< 6, 4, P4,C6 >
+5 rows found.
+```
+
+Here you queried against a specific child_id value and joined back to the parent table. TimesTen figured things out and dynamically loaded all the expected cache instances. Dynamic caching can be very useful for appropriate use cases.
+
+Disconnect from the cache.
+
+**quit**
+
+```
+Command> quit;
+Rolling back active transaction...
+Disconnecting...
+Done.
+```
+
+You can now *proceed to the next lab*. Keep your primary terminal session open for use in the next lab.
 
 ## Acknowledgements
 

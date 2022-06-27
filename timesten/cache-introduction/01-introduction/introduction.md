@@ -2,17 +2,25 @@
 
 ## About this Workshop
 
-In this workshop you will discover how deploying Oracle TimesIen In-Memory Database as an in-memory relational cache for Oracle Database can dramatically improve the resposne times for SQL queries, typically by an order of magnitude.
+In this workshop you will discover how deploying Oracle TimesTen In-Memory Database as an in-memory relational cache for Oracle Database can dramatically improve the response times for SQL queries, typically by an order of magnitude.
 
-Setting up a TimesTen cache is quick and easy. This workshop leads you through the process step by step and uses both a simple OLTP application and sample queries to demonstrate the incredibly low query latencies provided by TimesTen.
+Setting up a TimesTen cache is quick and easy. This workshop leads you through the process step by step and uses a simple OLTP application and some example queries to demonstrate the incredibly low query latencies provided by TimesTen.
 
-Estimated Workshop Time: 60 minutes.
+Estimated workshop time: **60 minutes**
+
+### About Oracle TimesTen In-Memory Database
+
+Oracle TimesTen In-Memory Database (TimesTen) delivers real time application performance (low response time and high throughput) by changing the assumptions around where data resides at runtime. By managing data in memory, and optimizing data structures and access algorithms accordingly, database operations execute with maximum efficiency achieving dramatic gains in responsiveness and throughput.
+
+TimesTen is a relational database, with SQL as its access language and PL/SQL as its procedural language, so you can leverage your existing Oracle Database skills. It supports a wide range of database APIs such as JDBC, ODBC, ODP.NET and Oracle Call Interface (OCI) and several Open Source languages, such as Python and Node.js, are supported via Open Source APIs. TimesTen provides full persistence and has built in high-availability.
+
+TimesTen can be deployed both as a database of record or as a high performance relational cache in front of an Oracle database to acceleratae Oracle database applications. This lab focuses on the cache deployment mode.
 
 ![](./images/tt-cache-architecture.png " ")
 
 ### Objectives
 
-In this workshop, you will learn how to:
+In this workshop you will:
 
 * Start up the components required for the labs
 * Create a TimesTen instance
@@ -33,10 +41,19 @@ This workshop assumes that you have:
 * Some familiarity with Oracle Database
 * A basic understanding of SQL
 
-In order to run this workshop you need either:
+In order to run this workshop you need:
 
-* An Oracle Cloud account with sufficient available resources in your tenancy, if you wish to run the workshop in your own tenancy. This workshop does _not_ support the Oracle Cloud 'Always Free' tier due to that tier's resource restrictions.
-* An Oracle Account, if you want to ruin the workshop in the LiveLabs sandbox.
+* An active Oracle Cloud account
+
+You can run this workshop:
+
+* In the LiveLabs sandbox
+* In your own tenancy using a paid Oracle Cloud account
+* Using a free-trial Oracle Cloud account
+
+This workshop does _not_ support the Oracle Cloud 'Always Free' tier due to that tier's resource restrictions.
+
+**IMPORTANT:** If you choose to run this workshop in your own tenancy, or using a free-trial Cloud account, please be sure to provision at least **4 CPUs** and **32 GB RAM** for the cloud instance used for the workshop.
 
 You may now ***proceed to the next lab***.
 

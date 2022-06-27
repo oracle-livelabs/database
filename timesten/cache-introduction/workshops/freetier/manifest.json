@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "TimesTen Cache Introduction",
+  "workshoptitle": "Accelerate your Applications: Achieve Blazing Fast SQL With an Oracle TimesTen Cache",
   "support": "https://community.oracle.com/tech/developers/categories/database-19c",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
@@ -9,22 +9,22 @@
       "filename": "../../01-introduction/introduction.md"
     },
     {
-      "title": "Get Started",
+      "title": "Get started",
       "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
       "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/cloud-login/cloud-login-livelabs2.md"
     },
     {
-      "title": "Lab 1: Prepare Setup",
+      "title": "Lab 1: Prepare setup",
       "description": "How to download the ORM stack and, optionally, update security rules for an existing VCN",
-      "filename": "../../02-prepare-setup/setup.md"
+      "filename": "../../02-prepare-setup/prepare-setup.md"
     },
     {
-      "title": "Lab 2: Environment Setup",
+      "title": "Lab 2: Environment setup",
       "description": "How to provision the workshop environment and connect to it",
       "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/setup-compute-generic/setup-compute-novnc.md"
     },
     {
-      "title": "Lab 3: Connect to the Instance",
+      "title": "Lab 3: Connect to the workshop compute instance",
       "description": "How to connect to the Cloud Instance",
       "filename": "../../03-connect-to-instance/connect-to-instance.md"
     },
@@ -69,7 +69,7 @@
       "filename": "../../11-query-performance/query-performance.md"
     },
     {
-      "title": "Lab 12: Dynamic Cache Groups",
+      "title": "Lab 12: Dynamic caching",
       "filename": "../../12-dynamic-caching/dynamic-caching.md"
     },
     {

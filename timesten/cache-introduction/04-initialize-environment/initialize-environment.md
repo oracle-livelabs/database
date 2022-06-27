@@ -1,10 +1,10 @@
-# Initialize the Workshop Environment
+# Initialize the workshop environment
 
 ## Introduction
 
-In this lab we will startup all the components required to successfully run the rest of the labs making up this workshop.
+In this lab you will start up all the components required to run the labs making up this workshop.
 
-The workshop uses an Oracle database which runs in its own container (dbhost). A second container (tthost1) provides the TimesTen environment. These containers, and the host system (ttlivelabvm), are all connected using a custom Docker network. This setup provides a realistic multi-host environment with the cionvenience of just a single compute instance.
+The workshop uses an Oracle database which runs in its own container (**dbhost**). A second container (**tthost1**) provides the TimesTen environment. These containers, and the host system (**ttlivelabvm**), are all connected using a custom Docker network. This setup provides a realistic multi-host environment with the convenience of just a single compute instance.
 
 Estimated Time: 10 minutes.
 
@@ -18,17 +18,25 @@ This lab assumes that you have:
 
 - Completed all the previous labs in this workshop, in sequence.
 
+### Starting over from the beginning
+
+Once you have successfully completed this lab, if at any point you want to start the whole workshop again from the beginning, just go the the **~/lab** directory and run the script **labReset.sh**. That script will take 5-8 minutes to run and it will reset everything back to the way it was after this lab completed.
+
 ## Task 1: Connect to the environment
 
 Connect to the OCI compute instance and open a terminal session, as the user **oracle**,  using an appropriate method as discussed in the previous lab.
 
 ## Task 2: Initialize and startup the lab components
 
-Change to the 'lab' directory:
+Change to the **lab** directory:
+
+**cd ~/lab**
 
 `[oracle@ttlivelabvm ~] cd ~/lab`
 
-Execute the labSetup.sh script as shown below:
+Initialize the workshop:
+
+**labSetup.sh cache-intro**
 
 ```
 [oracle@ttlivelabvm ~] labSetup.sh cache-intro
@@ -41,11 +49,6 @@ info: starting Oracle Database: OK
 ```
 
 This command will take between 5 and 8 minutes to complete. Once the setup has completed successfully, *proceed to the next lab*. You can keep your terminal session open ready for the next lab.
-
-### Starting over from the beginning
-
-If at any point you want to start the whole workshop again from the beginning, just go the the **lab** directiry and run the script **labReset.sh**. The script will take 5-8 minutes to run and it will reset everything back to the way it was after this lab completed.
-
 
 ## Acknowledgements
 

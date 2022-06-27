@@ -1,12 +1,12 @@
-# Verify cache refresh
+# Verify automatic cache refresh
 
 ## Introduction
 
 With READONLY cache groups, the Oracle database is the master of the data. The data cached in TimesTen is a read-only copy. Any changes (insert/update/delete) made to the data in Oracle are automatically captured and refreshed to the cached tables in TimesTen based on the defined refresh interval (2 seconds in these examples).
 
-In this lab we will execute some DML statements on the tables in Oracle and observe those changes being automatically propagated to the cache tables in TimesTen.
+In this lab you will execute some DML statements on the tables in Oracle and observe those changes being automatically propagated to the cache tables in TimesTen.
 
-Estimated Time: 5 minutes.
+Estimated Time: **5 minutes**
 
 ### Objectives
 
@@ -25,11 +25,13 @@ This lab assumes that you have:
 
 If you do not already have an active terminal session, connect to the OCI compute instance and open a terminal session, as the user **oracle**. In that terminal session, connect to the TimesTen host (tthost1) using ssh. This session, or your existing session if there was one, will be refereed to as the **primary** session.
 
-Connect to the OCI compute instance again (if required) and open a terminal session. In this second session, connect to the TimesTen host (tthost1) using ssh. This session will be refereed to as the **secondary** session.
+Connect to the OCI compute instance again (if required) and open a second terminal session. In this second session, connect to the TimesTen host (tthost1) using ssh. This session will be refereed to as the **secondary** session.
 
 ## Task 2: Verify the refresh of INSERT operations
 
-In your _primary_ SSH session, which is currently logged into the TimesTen host, connect to the TimesTen cache as the OE schema user.
+In your _primary_ SSH session, which is currently logged into the TimesTen host, connect to the TimesTen cache as the OE schema user"
+
+**ttIsql "DSN=sampledb;uid=oe;pwd=oe;OraclePWD=oe"**
 
 ```
 [oracle@tthost1 livelab]$ ttIsql "DSN=sampledb;uid=oe;pwd=oe;OraclePWD=oe"
@@ -43,7 +45,9 @@ Connection successful: DSN=sampledb;UID=oe;DataStore=/tt/db/sampledb;DatabaseCha
 Command>
 ```
 
-In your secondary SSH session, which is already logged into the TimesTen host (tthost1), connect to the Oracle database as the OE schema user:
+In your _secondary_ SSH session, which is already logged into the TimesTen host (tthost1), connect to the Oracle database as the OE schema user:
+
+**sqlplus oe/oe@orclpdb1**
 
 ```
 [oracle@tthost1 livelab]$ sqlplus oe/oe@orclpdb1
@@ -62,7 +66,9 @@ Version 19.3.0.0.0
 SQL>
 ```
 
-In your _primary_ SSH session (ttIsql), check the rows in the OE.PROMOTIONS table in TimesTen:
+In your _primary_ SSH session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
+
+**SELECT * FROM promotions ORDER BY promo\_id;**
 
 ```
 Command> SELECT * FROM promotions ORDER BY promo_id;
@@ -71,7 +77,9 @@ Command> SELECT * FROM promotions ORDER BY promo_id;
 2 rows found.
 ```
 
-In your _secondary_ SSH session (sqlplus), check the rows in the OE.PROMOTIONS table in Oracle, then insert a new row and commit:
+In your _secondary_ SSH session (**sqlplus**), check the rows in the OE.PROMOTIONS table in Oracle, then insert a new row and commit:
+
+**SELECT * FROM promotions ORDER BY promo\_id;**
 
 ```
 SQL> SELECT * FROM promotions ORDER BY promo_id;
@@ -84,11 +92,17 @@ SQL> SELECT * FROM promotions ORDER BY promo_id;
 SQL> INSERT INTO promotions VALUES ( 3, 'christmas sale' );
 
 1 row created.
+```
+**commit;**
 
+```
 SQL> commit;
 
 Commit complete.
+```
+**SELECT * FROM promotions ORDER BY promo\_id;**
 
+```
 SQL> SELECT * FROM promotions ORDER BY promo_id;
 
   PROMO_ID PROMO_NAME
@@ -98,7 +112,9 @@ SQL> SELECT * FROM promotions ORDER BY promo_id;
 	 3 christmas sale
 ```
 
-Wait for 2 seconds (the cache refresh interval) and then in your _primary_ SSH session (ttIsql), check the rows in the OE.PROMOTIONS table in TimesTen:
+Wait for 2 seconds (the cache refresh interval) and then in your _primary_ SSH session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
+
+**SELECT * FROM promotions ORDER BY promo\_id;**
 
 ```
 Command> SELECT * FROM promotions ORDER BY promo_id;
@@ -112,17 +128,25 @@ The inserted row has been captured and propagated to the cached table in TimesTe
 
 ## Task 3: Verify the refresh of UPDATE operations
 
-In your _secondary_ SSH session (sqlplus), update a row in the OE.PROMOTIONS table in Oracle and commit:
+In your _secondary_ SSH session (**sqlplus**), update a row in the OE.PROMOTIONS table in Oracle and commit:
+
+**UPDATE promotions SET promo\_name = 'easter sale' WHERE promo\_id = 3;**
 
 ```
 SQL> UPDATE promotions SET promo_name = 'easter sale' WHERE promo_id = 3;
 
 1 row updated.
+```
+**commit;**
 
+```
 SQL> commit;
 
 Commit complete.
+```
+**SELECT * FROM promotions ORDER BY promo\_id;**
 
+```
 SQL> SELECT * FROM promotions ORDER BY promo_id;
 
   PROMO_ID PROMO_NAME
@@ -132,7 +156,9 @@ SQL> SELECT * FROM promotions ORDER BY promo_id;
 	 3 easter sale
 ```
 
-Wait for 2 seconds (the cache refresh interval) and then in your _primary_ SSH session (ttIsql), check the rows in the OE.PROMOTIONS table in TimesTen:
+Wait for 2 seconds (the cache refresh interval) and then in your _primary_ SSH session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
+
+**SELECT * FROM promotions ORDER BY promo\_id;**
 
 ```
 Command> SELECT * FROM promotions ORDER BY promo_id;
@@ -146,17 +172,25 @@ The update to the row has been captured and propagated to the cached table in Ti
 
 ## Task 4: Verify the refresh of DELETE operations
 
-In your _secondary_ SSH session (sqlplus), delete a row in the OE.PROMOTIONS table in Oracle and commit:
+In your _secondary_ SSH session (**sqlplus**), delete a row in the OE.PROMOTIONS table in Oracle and commit:
+
+**DELETE FROM promotions WHERE promo\_id =  3;**
 
 ```
 SQL> DELETE FROM promotions WHERE promo_id =  3;
 
 1 row deleted.
+```
+**commit;**
 
+```
 SQL> commit;
 
 Commit complete.
+```
+**SELECT * FROM promotions ORDER BY promo\_id;**
 
+```
 SQL> SELECT * FROM promotions ORDER BY promo_id;
 
   PROMO_ID PROMO_NAME
@@ -165,7 +199,9 @@ SQL> SELECT * FROM promotions ORDER BY promo_id;
 	 2 blowout sale
 ```
 
-Wait for 2 seconds (the cache refresh interval) and then in your _primary_ SSH session (ttIsql), check the rows in the OE.PROMOTIONS table in TimesTen:
+Wait for 2 seconds (the cache refresh interval) and then in your _primary_ SSH session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
+
+**SELECT * FROM promotions ORDER BY promo\_id;**
 
 ```
 Command> SELECT * FROM promotions ORDER BY promo_id;
@@ -176,17 +212,29 @@ Command> SELECT * FROM promotions ORDER BY promo_id;
 
 The row deletion has been captured and propagated to the cached table in TimesTen.
 
-In your _secondary_ SSH session, quit out of SQL*Plus, disconnect from the TimesTen host and close the terminal session:
+In your _secondary_ SSH session (**sqlplus**), exit from SQL*Plus, disconnect from the TimesTen host and close the terminal session:
+
+**quit;**
 
 ```
 SQL> quit;
 Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
 Version 19.3.0.0.0
+```
+**exit**
+
+```
 [oracle@tthost1 livelab]$ exit
+```
+**exit**
+
+```
 [oracle@ttlivelabvm lab]$ exit
 ```
 
-In your _primary_ SSH session, quit out of ttIsql for now:
+In your _primary_ SSH session (**ttIsql**), exit from ttIsql:
+
+**quit**
 
 ```
 Command> quit;

@@ -1,92 +1,82 @@
-# Title of the Lab
+# Connect to the workshop compute instance
 
 ## Introduction
 
-*Describe the lab in one or two sentences, for example:* This lab walks you through the steps to ...
+In this lab you will learn the different ways to connect to the OCI compute instance that hosts the workshop.
 
-Estimated Lab Time: -- minutes
+The workshop requires you to use a terminal session to run various commands and observe their output. Often you may need to copy and paste commands or text from the workshop instructions into the terminal session.
 
-### About <Product/Technology> (Optional)
-Enter background information here about the technology/feature or product used in this lab - no need to repeat what you covered in the introduction. Keep this section fairly concise. If you find yourself needing more than to sections/paragraphs, please utilize the "Learn More" section.
+If you chose to run the workshop in the LiveLabs sandbox then the only connection method available to you by default is a GUI session using the browser based VNC mechanism. It is possible to setup SSH connectivity by adding your own SSH key into the instance (follow the instructions provided in the noVNC lab).
+
+If you chose to run the workshop in your own tenancy, or in a free-trial Cloud account, then you can use the same browser based GUI connection method. Also, if you selected the option during deploymemnt via the ORM stack, you also have the option to use SSH connectivity (**strongly recommended)**. 
+
+Estimated Time: **5 minutes**
 
 ### Objectives
 
-*List objectives for this lab using the format below*
+- Connect to the compute instance using noVNC
+- Connect to the compute instance using SSH (optional)
 
-In this lab, you will:
-* Objective 1
-* Objective 2
-* Objective 3
+### Prerequisites
 
-### Prerequisites (Optional)
+This lab assumes that you have:
 
-*List the prerequisites for this lab using the format below. Fill in whatever knowledge, accounts, etc. is necessary to complete the lab. Do NOT list each previous lab as a prerequisite.*
+- Completed all the previous labs in this workshop, in sequence.
 
-This lab assumes you have:
-* An Oracle account
-* All previous labs successfully completed
+## Task 1: Connect using noVNC
 
+_LiveLabs sandbox_
 
-*This is the "fold" - below items are collapsed by default*
+In the LiveLabs reservation page for your active reservation you will see the URL to use for a noVNC connection to the workshop instance.
 
-## Task 1: Concise Step Description
+_Own tenancy or free-trial Cloud account_
 
-(optional) Step 1 opening paragraph.
+At the end of the ORM stack apply job execution report you will see the noVNC connection URL.
 
-1. Sub step 1
+Copy / paste the URL into your browser and you should then see the workshop desktop.
 
-	![Image alt text](images/sample1.png)
+![](./images/novnc-desktop.png " ")
 
-2. Sub step 2
+You can use the *Activities* menu, or double click the *Terminal* icon on the desktop to open a terminal session.
 
-  ![Image alt text](images/sample1.png)
+## Task 2: Connect using SSH (optional but recommended)
 
-4. Example with inline navigation icon ![Image alt text](images/sample2.png) click **Navigation**.
+You can connect to the instance as the oracle user using an SSH private key.
 
-5. Example with bold **text**.
+_LiveLabs sandbox_
 
-   If you add another paragraph, add 3 spaces before the line.
+You can follow the instructions in the noVNC lab to add an SSH poublic key to the oracle user's SSH **authorized_keys** file. You then connect using the corresponding SSH private key.
 
-## Task 2: Concise Step Description
+_Own tenancy or free-trial Cloud account - user provided public key_
 
-1. Sub step 1 - tables sample
+If you provided your own SSH public key as part of the ORM stack deployment process then you can connect using the corresponding SSH private key.
 
-  Use tables sparingly:
+_Own tenancy or free-trial Cloud account - system generated key pair_
 
-  | Column 1 | Column 2 | Column 3 |
-  | --- | --- | --- |
-  | 1 | Some text or a link | More text  |
-  | 2 |Some text or a link | More text |
-  | 3 | Some text or a link | More text |
+The SSH private key needed to connect is displayed at the end of the ORM stack apply job log. Copy/paste the key into a file on your client computer, or import into into your SSH client, and use that file to connect.
 
-2. You can also include bulleted lists - make sure to indent 4 spaces:
+**NOTE:** On Linux and macOS systems, SSH private keys should be stored in your user's .ssh directory (**~/.ssh**) and must have permissions of **600 (rw-------)**.
 
-    - List item 1
-    - List item 2
+Assuming that the SSH private key is **~/.ssh/id_livelabs** and the oublic IP address of the workshop compiute instance is **123.123.123.123** then you can connect using:
 
-3. Code examples
+**ssh -i ~/.ssh/id_livelabs oracle@123.123.123.123**
 
-    ```
-    Adding code examples
-  	Indentation is important for the code example to appear inside the step
-    Multiple lines of code
-  	<copy>Enclose the text you want to copy in <copy></copy>.</copy>
-    ```
+```
+$ ssh -i ~/.ssh/id_livelabs oracle@123.123.123.123                                                      11:55:17
+The authenticity of host '123.123.123.123 (123.123.123.123)' can't be established.
+ED25519 key fingerprint is SHA256:bm2wv3HgyBIhIRov6+EtId10rQHyq1LXpXglQMpqhqA.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '140.238.69.118' (ED25519) to the list of known hosts.
+Last login: Mon Jun 27 09:12:52 2022 from aa.bb.cc.dd
+[oracle@ttlivelabvm ~]$
+```
 
-4. Code examples that include variables
-
-	```
-  <copy>ssh -i <ssh-key-file></copy>
-  ```
-
-## Learn More
-
-*(optional - include links to docs, white papers, blogs, etc)*
-
-* [URL text 1](http://docs.oracle.com)
-* [URL text 2](http://docs.oracle.com)
+You can now *proceed to the next lab*. You can keep your terminal session open for use in the next lab.
 
 ## Acknowledgements
-* **Author** - <Name, Title, Group>
-* **Contributors** -  <Name, Group> -- optional
-* **Last Updated By/Date** - <Name, Month Year>
+
+* **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
+* **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
+* **Last Updated By/Date** - Chris Jenkins, July 2022
+

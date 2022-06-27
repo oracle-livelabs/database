@@ -1,12 +1,14 @@
-# Measure OLTP performance
+# Measure OLTP performance improvement
 
 ## Introduction
 
-In this lab we will use a simple benchmark program to run a (readonly) OLTP workload against the TimesTen cache and against the Oracle database to illustrate the performance benefit of TimesTen.
+In this lab you will use a simple benchmark program to run a (readonly) OLTP workload against the TimesTen cache and against the Oracle database to illustrate the performance benefit of TimesTen.
 
-For this lab we will use a standard TimesTen benchmark program, TptBm. We will use a version of this program that connects to the target database using the Oracle Call Interface (OCI) API. The program can run against either TimesTen or Oracle and performs the same operations in both cases. The source code for the tptbmOCI program is available in the host VM in the directory ~/lab/src.
+You will use a standard TimesTen benchmark program, TptBm, in this case a version that connects to the target database using the Oracle Call Interface (OCI) API. The program can run against either TimesTen or Oracle and performs the same operations in both cases. The source code for the tptbmOCI program is available in the _host VM _in the directory **~/lab/src**.
 
-There is a single table used for this benchmark:
+Estimated Time: **5 minutes**
+
+There is a single table used for this benchmark, APPUSER.VPN_USERS:
 
 ```
 CREATE TABLE vpn_users
@@ -22,9 +24,7 @@ CREATE TABLE vpn_users
 This table has been populated with 1,000,000 rows of data:
 
 ```
-[oracle@tthost1 livelab]$ ttIsql \
-     "DSN=sampledb;uid=appuser;pwd=appuser;oraclepwd=appuser"
-…
+
 Command> select count(*) from vpn_users;
 < 1000000 >
 1 row found.
@@ -40,24 +40,19 @@ Command> select first 10 * from vpn_users;
 < 0, 8, 5508      , 000000000 , <placeholderfordescriptionofVPN0extension8>                            >
 < 0, 9, 5509      , 000000000 , <placeholderfordescriptionofVPN0extension9>                            >
 10 rows found.
-Command> quit;
-Disconnecting...
-Done.
 ```
 
 The benchmark workload (in this case) is 100% read and consists of repeated executions of this SELECT statement:
 
 ```
-select directory_nb, last_calling_party, descr from vpn_users \
-where vpn_id = :id and vpn_nb= :nb
+select directory_nb, last_calling_party, descr from vpn_users where vpn_id = :id and vpn_nb= :nb
 ```
 
 The input values, *id* and *nb*, are randomly generated for each execution such that they fall within the range of the values in the table, so each execution of the statement retrieves a randomly chosen row.
 
-We will run the benchmark using the script **~/bin/runBenchmark**:
+Run the benchmark using the script **~/bin/runBenchmark**:
 
 ```
-[oracle@tthost1 livelab]$ cat ~/bin/runBenchmark
 #!/bin/bash
 
 declare -r tptbm=/tt/livelab/bin/tptbmOCI
@@ -103,10 +98,9 @@ esac
 exit ${ret}
 ```
 
-When run using this script, the tptbmOCI program will execute 1,000,000 SELECTs against random rows. The only difference between the runs is the database service name to connect to, which is defined in the tnsnames.ora file:
+When run using this script, the tptbmOCI program will execute 1,000,000 SELECTs against random rows. The only difference between the runs is the database service name to connect to, which is defined in the \**$TNS_ADMIN/tnsnames.ora** file:
 
 ```
-[oracle@tthost1 livelab]$ cat $TNS_ADMIN/tnsnames.ora
 ORCLPDB1 =
   (DESCRIPTION =
     (ADDRESS = (PROTOCOL = TCP)(HOST = dbhost)(PORT = 1521))
@@ -133,13 +127,11 @@ SAMPLEDBCS =
   )
 ```
 
-Estimated Time: 5 minutes.
-
 ### Objectives
 
 - Run OLTP workload against Oracle database and measure the throughput.
 - Run the same workload against TimesTen and measure the throughput.
-- Compare the throughout and latency measurements.
+- Compare the throughput and latency measurements.
 
 ### Prerequisites
 
@@ -155,8 +147,10 @@ If you do not already have an active terminal session, connect to the OCI comput
 
 Run the program against the Oracle database and note the results:
 
+**~/bin/runBenchmark -oracle**
+
 ```
-[oracle@tthost1 livelab]$ bin/runBenchmark -oracle
+[oracle@tthost1 livelab]$ ~/bin/runBenchmark -oracle
 /tt/livelab/bin/tptbmOCI -nobuild -read 100 -key 1000 -proc 1 -user appuser -xact 1000000 -service orclpdb1
 
 Run 1000000 txns with 1 process: 100% read, 0% update, 0% insert, 0% delete
@@ -171,8 +165,10 @@ Transaction rate:    1171417.4 transactions/minute
 
 Run the program against the TimesTen cache and note the results:
 
+**~/bin/runBenchmark -timesten**
+
 ```
-[oracle@tthost1 livelab]$ bin/runBenchmark -timesten
+[oracle@tthost1 livelab]$ ~/bin/runBenchmark -timesten
 /tt/livelab/bin/tptbmOCI -nobuild -read 100 -key 1000 -proc 1 -user appuser -xact 1000000 -service sampledb
 
 Run 1000000 txns with 1 process: 100% read, 0% update, 0% insert, 0% delete
@@ -187,7 +183,7 @@ Transaction rate:   12404382.9 transactions/minute
 
 In this run, TimesTen achieved a throughput that was **~10.6x greater** than Oracle database (your results _will_ vary).
 
-As this was a single connection/thread we can easily translate the throughput results to average latency values. In this case the average latency for Oracle database was **~51 microseconds** and for TimesTen it was **~4.8 microseconds**.
+As this was a single connection/thread it is easy to translate the throughput results to average latency values. In this case the average latency for Oracle database was **~51 microseconds** and for TimesTen it was **~4.8 microseconds**.
 
 You can now *proceed to the next lab*. Keep your primary terminal session open for use in the next lab.
 

@@ -1,8 +1,10 @@
-# Measure query performance
+# Measure query performance improvement
 
 ## Introduction
 
-In this lab we will run some typical queries against the TimesTen cache and against the Oracle database to illustrate the performance benefit of TimesTen.
+In this lab you will run some typical queries against the TimesTen cache and against the Oracle database to illustrate the performance benefit of TimesTen.
+
+Estimated Time: **5 minutes**
 
 **IMPORTANT:** As noted in the previous lab there are many factors that can affect performance. As a result, the performance numbers shown in this lab are indicative only. The numbers that _you_ measure will differ and may be slightly better or slightly worse.
 
@@ -86,8 +88,6 @@ exit ${ret}
 
 We will use this script to investigate the performance of three different queries running against both the Oracle database and the TimesTen cache.
 
-Estimated Time: 5 minutes.
-
 ### Objectives
 
 - Run queries against Oracle database and measure the elapsed times.
@@ -108,8 +108,10 @@ If you do not already have an active terminal session, connect to the OCI comput
 
 Examine the three queries that we will use for this exercise:
 
+**cat ~/queries/query_1.sql**
+
 ```
-[oracle@tthost1 livelab]$ cat queries/query_1.sql
+[oracle@tthost1 livelab]$ cat ~/queries/query_1.sql
 SELECT
     c.customer_id,
     c.cust_first_name,
@@ -124,8 +126,11 @@ SELECT
 WHERE
     c.customer_id IN (104, 108, 144)
 ORDER BY 6;
+```
+**cat ~queries/query_2.sql**
 
-[oracle@tthost1 livelab]$ cat queries/query_2.sql
+```
+[oracle@tthost1 livelab]$ cat ~queries/query_2.sql
 SELECT
     o.order_id,
     oi.line_item_id,
@@ -144,8 +149,11 @@ SELECT
     (o.order_id = oi.order_id) and
     (oi.product_id = pi.product_id)
  ORDER BY 1, 2;
- 
-[oracle@tthost1 livelab]$ cat queries/query_3.sql
+```
+**cat ~queries/query_3.sql**
+
+``` 
+[oracle@tthost1 livelab]$ cat ~queries/query_3.sql
 SELECT
     i.product_id,
     i.warehouse_id,
@@ -167,8 +175,10 @@ There is also a file, **queries/query_all.sql**, that contains all three queries
 
 First run the queries against the Oracle database:
 
+**~/bin/timeQueries -oracle queries/query_all.sql**
+
 ```
-[oracle@tthost1 livelab]$ bin/timeQueries -oracle queries/query_all.sql
+[oracle@tthost1 livelab]$ ~/bin/timeQueries -oracle queries/query_all.sql
 info: connected to 'orclpdb1' (Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production)
 info: running queries from file 'queries/query_all.sql'
 info: ========================================
@@ -239,8 +249,10 @@ info: disconnected from 'orclpdb1'
 
 Now run the queries against the TimesTen cache:
 
+**~/bin/timeQueries -timesten queries/query_all.sql**
+
 ```
-[oracle@tthost1 livelab]$ bin/timeQueries -timesten queries/query_all.sql
+[oracle@tthost1 livelab]$ ~/bin/timeQueries -timesten queries/query_all.sql
 info: connected to 'sampledb' (Oracle TimesTen IMDB version 22.1.1.3.0)
 info: running queries from file 'queries/query_all.sql'
 info: ========================================

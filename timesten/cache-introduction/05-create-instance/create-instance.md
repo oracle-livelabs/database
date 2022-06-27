@@ -1,8 +1,8 @@
-# Create a TimesTen Instance
+# Create a TimesTen instance
 
 ## Introduction
 
-In this lab we will create a TimesTen instance to host our TimesTen cache database, start the instance and execute a few simple TimesTen commands.
+In this lab you will create a TimesTen instance to host our TimesTen cache database, start the instance and execute a few simple TimesTen commands.
 
 Estimated Time: 5 minutes.
 
@@ -26,12 +26,16 @@ If you do not already have an active terminal session, connect to the OCI comput
 
 Connect to the TimesTen host (tthost1) using ssh:
 
+**ssh tthost1**
+
 ```
 [oracle@ttlivelabvm ~] ssh tthost1
 Your current directory is:  /tt/livelab
 [oracle@tthost1 livelab]$
 ```
-Take a brief look around:
+Take a look at the directory contents:
+
+**ls -l**
 
 ```
 [oracle@tthost1 livelab]$ ls -l
@@ -47,10 +51,17 @@ drwxr-xr-x. 2 oracle oinstall 4096 May 26 13:10 scripts
 
 A TimesTen _installation_ is comprised of the TimesTen software components. An installation is created by unzipping the TimesTen software distribution media into a suitable location. For this workshop, the TimesTen software distribution media has already been unzipped into the directory **/shared/sw** to create a TimesTen installation named **tt22.1.1.3.0**. Take a look at that:
 
+**ls -l /shared/sw**
+
 ```
 [oracle@tthost1 livelab]$ ls -l /shared/sw
 total 0
 dr-xr-x---. 17 oracle oinstall 277 May  5 22:20 tt22.1.1.3.0
+```
+
+**ls -l /shared/sw/tt22.1.1.3.0**
+
+```
 [oracle@tthost1 livelab]$ ls -l /shared/sw/tt22.1.1.3.0
 total 108
 dr-xr-x---. 3 oracle oinstall    89 May  5 22:20 3rdparty
@@ -74,13 +85,14 @@ dr-xr-x---. 3 oracle oinstall    54 May  5 22:20 ttoracle_home
 
 You can create one or more TimesTen _instances_ from an installation. A TimesTen instance consists of various configuration files, log files and other things that together allow you to create and manage TimesTen databases. An instance is linked to the installation used to create it, so the installation must not be removed, renamed or modified in any way otherwise the operation of all linked instances will be affected.
 
-When it is operational, a TimesTen instance also includes a set of associated processes which co-operate to manage the TimesTen databases that are owned by the instance.
+When it is operational, a TimesTen instance also includes a set of associated processes which cooperate to manage the TimesTen databases that are owned by the instance.
 
-Create a TimesTen instance called **ttinst** by using the **ttInstanceCreate** command located in the installation’s **bin** directory.
+Create a TimesTen instance called **ttinst** by using the **ttInstanceCreate** command located in the installation’s **bin** directory:
+
+**/shared/sw/tt22.1.1.3.0/bin/ttInstanceCreate -location /tt/inst -name ttinst -tnsadmin /shared/tnsadmin**
 
 ```
-[oracle@tthost1 livelab]$ /shared/sw/tt22.1.1.3.0/bin/ttInstanceCreate \
-    -location /tt/inst -name ttinst -tnsadmin /shared/tnsadmin
+[oracle@tthost1 livelab]$ /shared/sw/tt22.1.1.3.0/bin/ttInstanceCreate -location /tt/inst -name ttinst -tnsadmin /shared/tnsadmin
 
 Creating instance in /tt/inst/ttinst ...
 
@@ -100,7 +112,9 @@ Instance created successfully.
 
 ```
 
-Copy the predefined **sys.odbc.ini** configuration file (more on that later) to the instance.
+Copy the predefined **sys.odbc.ini** configuration file (more on that later) to the instance:
+
+**cp scripts/sys.odbc.ini /tt/inst/ttinst/conf/sys.odbc.ini**
 
 ```
 [oracle@tthost1 livelab]$ cp scripts/sys.odbc.ini /tt/inst/ttinst/conf/sys.odbc.ini
@@ -109,6 +123,8 @@ Copy the predefined **sys.odbc.ini** configuration file (more on that later) to 
 ## Task 4: Start the instance
 
 Whenever you work with TimesTen, it is _essential_ that you have the correct environment settings for the instance that you are working with. The easiest and safest way to do this is to source the environment file provided within the instance:
+
+**source /tt/inst/ttinst/bin/ttenv.sh**
 
 ```
 [oracle@tthost1 livelab]$ source /tt/inst/ttinst/bin/ttenv.sh
@@ -127,6 +143,8 @@ TIMESTEN_HOME set to /tt/inst/ttinst
 
 Start the instance (i.e. start the main daemon) so that the instance is usable:
 
+**ttDaemonAdmin -start**
+
 ```
 [oracle@tthost1 livelab]$ ttDaemonAdmin -start
 TimesTen Daemon (PID: 706, port: 6624) startup OK.
@@ -137,6 +155,8 @@ You now have an operational TimesTen instance that can host TimesTen databases.
 ## Task 5: View the database configuration file (sys.odbc.ini)
 
 Examine the database configuration file sys.odbc.ini. This file is the main configuration file for the instance and defines all the databases that will be managed by the instance along with parameters used for connecting to them:
+
+**cat $TIMESTEN_HOME/conf/sys.odbc.ini**
 
 ```
 [oracle@tthost1 livelab]$ cat $TIMESTEN_HOME/conf/sys.odbc.ini
@@ -162,7 +182,7 @@ ConnectionCharacterSet=AL32UTF8
 
 The file defines two ODBC Data Source Names (DSNs), **sampledb** and **sampledbcs**. ODBC is TimesTen’s native API, though TimesTen also provides, or supports, many other commonly used database APIs such as JDBC, Oracle Call Interface, ODP.NET, cx_Oracle (for Python) and node-oracledb (for Node.js).
 
-The **sampledb** DSN is a _direct mode, or server, DSN_. It defines the parameters and connectivity for a database hosted by this TimesTen instance. Tools, utilities, and applications running on this host (tthost1) can connect via this DSN using TimesTen’s low latency ‘direct mode’ connectivity mechanism. This database is also accessible remotely using TimesTen’s client-server connectivity.
+The **sampledb** DSN is a _direct mode_, or _server_, _DSN_. It defines the parameters and connectivity for a database hosted by this TimesTen instance. Tools, utilities, and applications running on this host (tthost1) can connect via this DSN using TimesTen’s low latency ‘direct mode’ connectivity mechanism. This database is also accessible remotely using TimesTen’s client-server connectivity.
 
 The **sampledbcs** DSN is a _client DSN_. It defines connectivity parameters for a server DSN which tools, utilities and applications can connect to using TimesTen’s client-server connectivity mechanism. In this example the DSN defines client-server access for the local sampledb server DSN.
 
@@ -171,6 +191,8 @@ All TimesTen APIs support both direct mode and client-server and, with some mino
 ## Task 6: Run some simple TimesTen commands
 
 One of the simplest TimesTen utilities is **ttVersion**. This provides basic information about the TimesTen instance:
+
+**ttVersion**
 
 ```
 [oracle@tthost1 livelab]$ ttVersion
@@ -183,6 +205,8 @@ TimesTen Release 22.1.1.3.0 (64 bit Linux/x86_64) (ttinst:6624) 2022-05-05T19:45
 ```
   
 Another TimesTen utility is **ttStatus**, which displays information about the instance’s processes and any databases that it hosts:
+
+**ttStatus**
 
 ```
 [oracle@tthost1 livelab]$ ttStatus
