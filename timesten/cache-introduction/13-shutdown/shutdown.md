@@ -126,7 +126,7 @@ TimesTen Daemon (PID: 190, port: 6624) stopped.
 ```
 ## Task 4: Finally
 
-Log our of the TimesTen host:
+Log out of the TimesTen host:
 
 **exit**
 
@@ -137,7 +137,7 @@ Connection to tthost1 closed.
 [oracle@ttlivelabvm:~]$
 ```
 
-Congratulations, you have completed the workshop.
+Congratulations, *you have completed the workshop*.
 
 ## Acknowledgements
 
