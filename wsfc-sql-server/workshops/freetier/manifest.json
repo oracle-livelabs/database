@@ -1,0 +1,47 @@
+{
+  "workshoptitle": "Deploy Windows Server Failover Cluster and Setup the MS SQL Server AOAG in Compute Instance",
+  "help": "livelabs-help-oci_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction about the Workshop and Labs",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Details about How to Register for Free Tier Account on OCI",
+      "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/cloud-login/pre-register-free-tier-account.md"
+    },
+
+    {
+      "title": "Lab 1: Setup the Windows Active Directory in Compute Instance",
+      "description": "Step by step instruction on creating Microsoft Active Directory Domain controller",
+      "filename": "../../setup-the-windows-active-directory-in-compute-instance/setup-the-windows-active-directory-in-compute-instance.md"
+    },
+    {
+      "title": "Lab 2: Provision of the Compute Instance from Market Place Image for SQL Server 2019",
+      "description": "Step by step instruction on how to install SQL Server from OCI MarketPlace image",
+      "filename": "../../installation-of-microsoft-sql-server-2019/installation-of-microsoft-sql-server-2019.md"
+    },
+    {
+      "title": "Lab 3: In Compute Instance, create a two-node Windows Server Failover Cluster",
+      "description": "Step by step instructions on creating a 2-node Windows Server Failover Cluster",
+      "filename": "../../setup-the-2node-wsfc/setup-the-2node-wsfc.md"
+    },
+    {
+      "title": "Lab 4: Setup and Configure the Microsoft SQL Server Always On Availability Group setup",
+      "description": "Step by step instruction on setup and configure the Microsoft Always on Availability Group",
+      "filename": "../../setup-and-configure-aoag/setup-and-configure-aoag.md"
+    },
+    {
+      "title": "Lab 5: Setup and Configure the Witness Server for Windows Failover Cluster",
+      "description": "Setup and Configure the Witness Server for Windows Failover Cluster",
+      "filename": "../../setup-witness-wsfc/setup-witness-wsfc.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-freetier.md"
+  }
+  ]
+}
