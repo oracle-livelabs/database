@@ -15,15 +15,18 @@
         {
             "title": "Lab 1: Provision an Autonomous Database",
             "description": "Labs that follow the introduction are numbered, starting with Lab 1",
-            "filename": "../../provision/provision.md"
+            "filename": "../../provision/provision.md",
+            "type": "freetier"
         },
         {
             "title": "Lab 2: Creating Indexes",
-            "filename": "../../create-indexes/create-indexes.md"
+            "filename": "../../create-indexes/create-indexes.md",
+            "type": "freetier"
         },
         {
             "title": "Lab 3: Queries",
-            "filename": "../../queries/queries.md"
+            "filename": "../../queries/queries.md",
+            "type": "freetier"
         },
         {
             "title": "Lab 4: Index Maintenance",

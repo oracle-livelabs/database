@@ -79,7 +79,7 @@ Otherwise, login to the Oracle Cloud.
 
 ## Task 2: Run Text Queries
 
-1.  First familiarize yourself with the text contained in USER_DATA. Copy the following and press the "Run C
+1.  First familiarize yourself with the text contained in USER_DATA. Copy the following and press the "Run Command" button.
 
     ```
     <copy>
@@ -99,7 +99,7 @@ Otherwise, login to the Oracle Cloud.
 
     CONTAINS is a function returning a number. It is almost allways used in the form __WHERE CONTAINS(...) > 0__. If the return value is greater than zero, there's a match for the row, if it's zero there isn't.
 
-    CONTAINS takes two or three arguments. The third is optional and we'll leave it for later. The arguments are:
+    CONTAINS takes two or three arguments. The third is optional and we'll leave it for later. The two required arguments are:
 
     1.  The name of the column to be searched
     2.  A string value to search for. The string can be a literal string, or anything that evaluates to a string (VARCHAR2 or CLOB).
