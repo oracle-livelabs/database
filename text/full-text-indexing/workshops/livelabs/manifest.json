@@ -19,17 +19,17 @@
             "type": "livelabs"
         },
         {
-            "title": "Lab 2: Creating Indexes",
+            "title": "Lab 2: Create Indexes",
             "filename": "../../create-indexes/create-indexes.md",
             "type": "livelabs"
         },
         {
-            "title": "Lab 3: Queries",
+            "title": "Lab 3: Run Queries",
             "filename": "../../queries/queries.md",
             "type": "livelabs"
         },
         {
-            "title": "Lab 4: Index Maintenance",
+            "title": "Lab 4: Maintain Indexes",
             "filename": "../../maintenance/maintenance.md"
         },
         {

@@ -1,4 +1,4 @@
-# Index Maintenance
+# Maintain Indexes
 
 ## Introduction
 
@@ -50,7 +50,7 @@ We'll assume you're already in Database Actions having just completed the previo
 
     When you run that you will get no results. Remember CONTAINS *only* works with a CONTEXT index. And if that index isn't up-to-date, neither will the results be. To get the right results, we must __SYNC__hronize the index. The basic way to do this is to call a PL/SQL procedure __CTX\_DDL.SYNC\_INDEX__ (your user will need to have CTXAPP role to access that, or have been explicitly granted __EXECUTE ON CTXSYS.CTX\_DDL__). The index name is passed in as a parameter to the procedure.
 
- 2. Sychronize the index. Run this:
+ 2. Synchronize the index. Run this:
 
     ```
     <copy>

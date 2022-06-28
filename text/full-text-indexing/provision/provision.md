@@ -45,19 +45,19 @@ In this lab, you will:
 
 5. Use the __List Scope__ drop-down menu on the left to select a compartment. Make sure your workload type is __Transaction Processing__. <if type="livelabs">Enter the first part of your user name, for example `LL185` in the Search Compartments field to quickly locate your compartment.
 
-    ![Check the workload type on the left.](images/livelabs-compartment.png " ")
+    ![Check the workload type on the left](images/livelabs-compartment.png " ")
 
 </if>
 <if type="freetier">
-    ![Check the workload type on the left.](./images/compartments.png " ")
+    ![Check the workload type on the left](./images/compartments.png " ")
 </if>
-    ![Check the workload type om the left](./images/workload-type.png " ")
+    ![Check the workload type on the left](./images/workload-type.png " ")
 
 <if type="freetier">
    > **Note:** Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
 </if>
 
-## Task 2: Create the ATP Instance
+## Task 2: Create the Autonomous Transaction Processing Instance
 
 1. Click **Create Autonomous Database** to start the instance creation process.
 

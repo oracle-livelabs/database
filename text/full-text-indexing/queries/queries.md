@@ -1,4 +1,4 @@
-# Oracle Text Queries
+# Run Queries
 
 ## Introduction
 
@@ -45,7 +45,7 @@ Otherwise, login to the Oracle Cloud.
 
     ![Click Autonomous Transaction Processing](./images/adb-atp.png " ")
 
-6. Use the __List Scope__ drop-down menu on the left to select the same compartment where you created your Autonomous Databae in Lab 2. Make sure your workload type is __Transaction Processing__. <if type="livelabs">Enter the first part of your user name, for example `LL185` in the Search Compartments field to quickly locate your compartment.
+6. Use the __List Scope__ drop-down menu on the left to select the same compartment where you created your Autonomous Database in Lab 2. Make sure your workload type is __Transaction Processing__. <if type="livelabs">Enter the first part of your user name, for example `LL185` in the Search Compartments field to quickly locate your compartment.
 <if type="livelabs">
 
     ![Check the workload type on the left.](images/livelabs-compartment.png " ")
@@ -97,7 +97,7 @@ Otherwise, login to the Oracle Cloud.
     To search an Oracle Text CONTEXT index you must use the CONTAINS operator. CONTAINS is specific to that type of index.
     Unlike 'ordinary' indexes, you can't get the same results with or without an index. CONTAINS simply won't work if there is no CONTEXT index present.
 
-    CONTAINS is a function returning a number. It is almost allways used in the form __WHERE CONTAINS(...) > 0__. If the return value is greater than zero, there's a match for the row, if it's zero there isn't.
+    CONTAINS is a function returning a number. It is almost always used in the form __WHERE CONTAINS(...) > 0__. If the return value is greater than zero, there's a match for the row, if it's zero there isn't.
 
     CONTAINS takes two or three arguments. The third is optional and we'll leave it for later. The two required arguments are:
 
@@ -225,7 +225,7 @@ Otherwise, login to the Oracle Cloud.
     Please note that by default the order of the words within a near operator doesn't matter, unless the ORDER parameter is explicitly set to TRUE. But in a phrase search, the order of the words does matter.
 
 
-This is as far as well go in exploring queries in this lab, but feel free to experiment futher.
+This is as far as well go in exploring queries in this lab, but feel free to experiment further.
 
 You can find a list of query operators here: [Contains Query Operators](https://docs.oracle.com/en/database/oracle/oracle-database/19/ccref/oracle-text-CONTAINS-query-operators.html).
 
