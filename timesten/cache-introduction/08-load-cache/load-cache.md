@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab you will load data from the Oracle tabls into the TimesTen cache tables. This action will also activate the AUTOREFRESH mechanism which will periodically refresh the cache with any changes that have occurred in the Oracle database.
+In this lab, you will load data from the Oracle tables into the TimesTen cache tables. This action will also activate the AUTOREFRESH mechanism which will periodically refresh the cache with any changes that have occurred in the Oracle database.
 
 Estimated Time: **5 minutes**
 
@@ -28,7 +28,7 @@ In that terminal session, connect to the TimesTen host (tthost1) using ssh.
 
 As you saw in the previous lab, when a READONLY cache group is first created its tables are empty and the autorefresh mechanism is in a paused state.
 
-Loading the cache group populates the cache tables with the data from the Oracle database and also activates the autorefresh mechanism. The load occurs in such a manner that if any changes occur oin Oracle while the load is in progress those changes will be captured and then autorefreshed to TimesTen ince the load is completed.
+Loading the cache group populates the cache tables with the data from the Oracle database and also activates the autorefresh mechanism. The load occurs in such a manner that if any changes occur in Oracle while the load is in progress, those changes will be captured and then autorefreshed to TimesTen once the load is completed.
 
 Load the APPUSER.CG\_VPN\_USERS cache group (1 million rows) and then examine the cach group and table:
 

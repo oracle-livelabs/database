@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab you will create a TimesTen instance to host our TimesTen cache database, start the instance and execute a few simple TimesTen commands.
+In this lab, you will create a TimesTen instance to host our TimesTen cache database, start the instance and execute a few simple TimesTen commands.
 
 Estimated Time: 5 minutes.
 
@@ -184,7 +184,7 @@ The file defines two ODBC Data Source Names (DSNs), **sampledb** and **sampledbc
 
 The **sampledb** DSN is a _direct mode_, or _server_, _DSN_. It defines the parameters and connectivity for a database hosted by this TimesTen instance. Tools, utilities, and applications running on this host (tthost1) can connect via this DSN using TimesTen’s low latency ‘direct mode’ connectivity mechanism. This database is also accessible remotely using TimesTen’s client-server connectivity.
 
-The **sampledbcs** DSN is a _client DSN_. It defines connectivity parameters for a server DSN which tools, utilities and applications can connect to using TimesTen’s client-server connectivity mechanism. In this example the DSN defines client-server access for the local sampledb server DSN.
+The **sampledbcs** DSN is a _client DSN_. It defines connectivity parameters for a server DSN that tools, utilities and applications can connect to using TimesTen’s client-server connectivity mechanism. In this example, the DSN defines client-server access for the local **sampledb** server DSN.
 
 All TimesTen APIs support both direct mode and client-server and, with some minor exceptions, the functionality is identical regardless of the type of connectivity that you are using.
 
@@ -220,7 +220,7 @@ Accessible by group oinstall
 End of report
 ```
 
-Currently there is not much to observe other than the process ids and port numbers used by the instance Daemon and Server processes.
+Currently, there is not much to observe other than the process ids and port numbers used by the instance Daemon and Server processes.
 
 You can now *proceed to the next lab*. Keep your terminal session open for use in the next lab.
 

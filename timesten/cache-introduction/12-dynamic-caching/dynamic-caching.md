@@ -2,24 +2,24 @@
 
 ## Introduction
 
-In this lab you will learn the difference between static and dynamic cache groups.
+In this lab, you will learn the difference between static and dynamic cache groups.
 
 Estimated Time: **5 minutes**
 
-So far, the cache groups that you have been working with are what are known as static cache groups. With static cache groups you pre-load the cache group with the data that you wish to cache and then the TimesTen autorefresh mechanism ensures that any inserts, updates or deletes that occur on Oracle are captured and propagated to the cache to refresh the cached tables.
+So far, the cache groups that you have been working with are what are known as static cache groups. With static cache groups, you pre-load the cache group with the data that you wish to cache and then the TimesTen autorefresh mechanism ensures that any inserts, updates or deletes that occur on Oracle are captured and propagated to the cache to refresh the cached tables.
 
 Static cache groups are optimal when the data set that needs to be cached is well defined and will fit into the memory allocated to the TimesTen cache. Sometimes, however, the data set may be so large that you cannot afford to allocate enough memory to cache it all and it may not be possible to predict in advance which rows the application will access in any given time period. In such cases using a dynamic cache group may be a better option.
 
-With a dynamic cache group, data is automatically faulted into the cache on a ‘cache miss’. Once in the cache the data remains there and is able to satisfy future read requests. The data in the cache is maintained in sync with Oracle using the TimesTen autorefresh mechanism. To avoid the cache memory completely filling up over time as new data is faulted in, TimesTen provides a choice of two aging mechanisms (LRU and lifetime) which can be used to automatically discard ‘old’ data from the cache.
+With a dynamic cache group, data is automatically faulted into the cache on a ‘cache miss’. Once in the cache the data remains there and is able to satisfy future read requests. The data in the cache is maintained in sync with Oracle using the TimesTen autorefresh mechanism. To avoid the cache memory completely filling up over time as new data is faulted in, TimesTen provides a choice of two ageing mechanisms (LRU and lifetime) which can be used to automatically discard ‘old’ data from the cache.
 
-Only certain kinds of query qualify for dynamic load; typically the query must include a full key equality condition on either a primary or foreign key on one of the cache group tables. If the result of executing the query in TimesTen is ‘no rows found’ then instead of returning this answer to the application TimesTen first tries to execute the same query in Oracle. If that query returns something in Oracle, then the rows making up the cache instance (the parent row and all related child rows down through the hierarchy) are retrieved and inserted into the cache tables in TimesTen. Then the query is executed against the cache and the answer returned to the application.
+Only certain kinds of queries qualify for dynamic load; typically the query must include a full key equality condition on either a primary or foreign key on one of the cache group tables. If the result of executing the query in TimesTen is ‘no rows found’ then instead of returning this answer to the application TimesTen first tries to execute the same query in Oracle. If that query returns something in Oracle, then the rows making up the cache instance (the parent row and all related child rows down through the hierarchy) are retrieved and inserted into the cache tables in TimesTen. Then the query is executed against the cache and the answer is returned to the application.
 
 As a result, a cache miss is significantly more expensive than a cache hit since the rows have to be fetched from Oracle and inserted into TimesTen. Therefore dynamic caching only brings performance benefits if there is considerable reuse of rows once they have been faulted into the cache.
 
 ### Objectives
 
 - Create a dynamic readonly cache group.
-- Run some queries that trihgger cache misses and cache hits.
+- Run some queries that trigger cache misses and cache hits.
 - Observe the behaviour and how it differs from a static cache group.
 
 ### Prerequisites
@@ -120,7 +120,7 @@ Note that in this case the Autorefresh state is immediately set to on.
 Autorefresh State: On
 ```
 
-This is because you do not need to perform any initial load for a dynamic cache group (though it is pssible to do so).
+This is because you do not need to perform an initial load for a dynamic cache group (though it is possible to do so).
 
 Check the state of the tables:
 
@@ -143,7 +143,7 @@ There is no data in the cached tables.
 
 ## Task 3: Run some queries and observe the behaviour
 
-First run a query that referenbces the root table's (PARENT table) primary key:
+First, run a query that references the root table's (PARENT table) primary key:
 
 **select \* from parent where parent\_id = 4;**
 
@@ -175,7 +175,7 @@ Command> select * from child;
 
 Observe that the row that was queried now exists in the PARENT table and the three related rows also exist in the CHILD table. TimesTen performed a dynamic load operation for the cache instance. 
 
-Now that these rows now exist in the cache they will satisfy future read requests. If any of these rows are modified in Oracle, the Timesten autorefresh mechanism will capture the changes and propagate them to the cache.
+Now that these rows now exist in the cache they will satisfy future read requests. If any of these rows are modified in Oracle, the TimesTen autorefresh mechanism will capture the changes and propagate them to the cache.
 
 Let’s try something a little more sophisticated. Query a row in the CHILD table with a join back to the PARENT table:
 

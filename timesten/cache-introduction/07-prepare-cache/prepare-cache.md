@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab you will create a TimesTen database and set it up to cache the required tables from the Oracle database.
+In this lab, you will create a TimesTen database and set it up to cache the required tables from the Oracle database.
 
 Estimated Time: **10 minutes**
 
@@ -28,9 +28,9 @@ In that terminal session, connect to the TimesTen host (tthost1) using ssh.
 
 ## Task 2: Create the TimesTen database and prepare it for caching
 
-A TimesTen database is implicitly created the first time the instance administrator user connects to it via its server DSN. In order to use the database as a cache you must set the Oracle cache admin username and password and also start the TimesTen Cache Agent.
+A TimesTen database is implicitly created the first time the instance administrator user connects to it via its server DSN. In order to use the database as a cache, you must set the Oracle cache admin username and password and also start the TimesTen Cache Agent.
 
-The Cache Agent is a TimesTen daemon process that manages many of the cache related functions for a TimesTen database.
+The Cache Agent is a TimesTen daemon process that manages many of the cache-related functions for a TimesTen database.
 
 One of the most frequently used TimesTen utilities is the **ttIsql** utility. This is an interactive SQL utility that serves the same purpose for TimesTen as SQL*Plus does for Oracle Database.
 
@@ -55,7 +55,7 @@ Set the Oracle cache administrator username and password (these are stored, encr
 ```
 Command> call ttCacheUidPwdSet('ttcacheadm','ttcacheadm');
 ```
-Start the Timesten Cache Agent for the cache database:
+Start the TimesTen Cache Agent for the cache database:
 
 **call ttCacheStart;**
 
@@ -101,13 +101,13 @@ Done.
 
 ## Task 3: Create the cache groups
 
-A **cache group** is a SQL object that encapsulates a set of one or more tables that are related through primary key -> foreign key relationships. The (single) top level table is called the root table and the other tables sit below it in a hierarchical parent/child arrangement.
+A **cache group** is a SQL object that encapsulates a set of one or more tables that are related through primary key -> foreign key relationships. The (single) top-level table is called the root table and the other tables sit below it in a hierarchical parent/child arrangement.
 
 A cache instance consists of a single row from the root table and all the related rows from the subordinate tables down through the hierarchy within the cache group.
 
 Cache operations act on cache groups not on individual tables, or on cache instances as opposed to individual rows.
 
-Normal SQL operations, such as SELECT, INSERT, UPDATE and DELETE, operate directly on the cache tabls and the rows therein. 
+Normal SQL operations, such as SELECT, INSERT, UPDATE and DELETE, operate directly on the cache tables and the rows therein. 
 
 Create the (multiple) cache groups for the **OE** schema tables. You will use a pre-prepared script to reduce the amount of typing or copying & pasting.
 
@@ -270,7 +270,7 @@ Disconnecting...
 Done.
 ```
 
-The user OE has 3 cache groups, some containing single tables and others containing multiple tables. Currently all the tables are empty.
+The user OE has 3 cache groups, some containing single tables and others containing multiple tables. Currently, all the tables are empty.
 
 Create the cache group for the **APPUSER.VPN\_USERS** table. This time you will type, or copy/paste, the individual commands:
 
@@ -379,7 +379,7 @@ The TimesTen mechanism that captures data changes that occur in the Oracle datab
 ```
 Autorefresh State: Paused
 ```
-In order to pre-populate the cache tables and activate the AUTOREFRESH mechanism you must now load the cache groups, which you will do in the next lab.
+In order to pre-populate the cache tables and activate the AUTOREFRESH mechanism, you must now load the cache groups, which you will do in the next lab.
 
 You can now *proceed to the next lab*. Keep your terminal session open for use in the next lab.
 

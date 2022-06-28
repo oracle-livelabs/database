@@ -10,7 +10,7 @@ Estimated Time: **5 minutes**
 
 ### Objectives
 
-- Modify data in Oracle database
+- Modify data in the Oracle database
 - Verify that the changes are refreshed to the cache
 
 ### Prerequisites
@@ -23,9 +23,9 @@ This lab assumes that you have:
 
 **IMPORTANT:** This lab requires _two_ terminal sessions to the TimesTen host (tthost1).
 
-If you do not already have an active terminal session, connect to the OCI compute instance and open a terminal session, as the user **oracle**. In that terminal session, connect to the TimesTen host (tthost1) using ssh. This session, or your existing session if there was one, will be refereed to as the **primary** session.
+If you do not already have an active terminal session, connect to the OCI compute instance and open a terminal session, as the user **oracle**. In that terminal session, connect to the TimesTen host (tthost1) using ssh. This session, or your existing session if there was one, will be referred to as the **primary** session.
 
-Connect to the OCI compute instance again (if required) and open a second terminal session. In this second session, connect to the TimesTen host (tthost1) using ssh. This session will be refereed to as the **secondary** session.
+Connect to the OCI compute instance again (if required) and open a second terminal session. In this second session, connect to the TimesTen host (tthost1) using ssh. This session will be referred to as the **secondary** session.
 
 ## Task 2: Verify the refresh of INSERT operations
 

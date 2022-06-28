@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this final lab you will cleanly shutdown the Timesten cache and the TimesTen instance that manages it.
+In this final lab, you will cleanly shut down the TimesTen cache and the TimesTen instance that manages it.
 
 Estimated Time: **2 minutes**
 
@@ -72,7 +72,7 @@ Accessible by group oinstall
 End of report 
 ```
 
-The database is active and is loaded in memory, because the cache agent is connected to it.
+The database is active and is loaded in memory because the cache agent is connected to it.
 
 Stop the cache agent:
 

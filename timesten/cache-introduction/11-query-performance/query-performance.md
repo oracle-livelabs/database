@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab you will run some typical queries against the TimesTen cache and against the Oracle database to illustrate the performance benefit of TimesTen.
+In this lab, you will run some typical queries against the TimesTen cache and against the Oracle database to illustrate the performance benefit of TimesTen.
 
 Estimated Time: **5 minutes**
 
@@ -31,7 +31,7 @@ Both SQL*Plus and ttIsql offer various features to allow you to time queries:
 **SQL\*Plus**
 
 -	The SET TIMING ON command will provide query timings with an accuracy of around 0.01 seconds.
--	Proper use of the autotrace functionality (set autotrace traceonly statistics) will suppress the formatting and display of the returned results.
+-	Proper use of the autotrace functionality (**set autotrace traceonly statistics**) will suppress the formatting and display of the returned results.
 -	There is no mechanism to separate out the prepare step from the query execution/fetch step.
 
 **ttIsql**
@@ -321,7 +321,7 @@ info: disconnected from 'sampledb'
 
 ## Task 4: Compare the results
 
-Here is a comparion of the results that I obtained when I ran these queries (your results _will_ differ):
+Here is a comparison of the results that I obtained when I ran these queries (your results _will_ differ):
 
 
 | Query |	Average Oracle Query Time (us) | Average TimesTen Query Time (us) | TimesTen Speedup |

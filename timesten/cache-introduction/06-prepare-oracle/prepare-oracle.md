@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab we will prepare the Oracle database to support TimesTen caching.
+In this lab, we will prepare the Oracle database to support TimesTen caching.
 
 Estimated Time: 5 minutes.
 
@@ -93,7 +93,7 @@ CREATE UNIQUE INDEX order_items_uk
  ON order_items (order_id, product_id) ;
 ```
 
-Here are the entity relationship diagrams.
+Here are the entity-relationship diagrams.
 
 _APPUSER schema_
 
@@ -213,7 +213,7 @@ PUBLIC
 
 ## Task 5: Grant table specific privileges to cache admin user
 
-The cache admin user lso needs specific privileges on each user table that will be cached in TimesTen. The exact privileges depend on the type of caching that will be used. In this workshop we are using READONLY caching, so the cache admin user needs SELECT privilege on all the user tables that will be cached,
+The cache admin user also needs specific privileges on each user table that will be cached in TimesTen. The exact privileges depend on the type of caching that will be used. In this workshop we are using READONLY caching, so the cache admin user needs SELECT privilege on all the user tables that will be cached,
 
 Grant those privileges:
 
@@ -299,7 +299,7 @@ Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Pr
 Version 19.3.0.0.0
 ```
 
-The Oracle database is now setup to support a TimesTen cache for the specified tables.
+The Oracle database is now set up to support a TimesTen cache for the specified tables.
 
 You can now *proceed to the next lab*. Keep your terminal session open for use in the next lab.
 
