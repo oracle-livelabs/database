@@ -60,7 +60,13 @@ Using the details from the two steps above, proceed to the lab *Environment Setu
   -  Create Stack:  *Compute + Networking*
   -  Create Stack:  *Compute only* using an existing VCN where security lists have been updated as per *Task 2* above
 
-**IMPORTANT:** When deploying the workshop compute instance via the ORM stack, it is strongly recommended that you enable the optional SSH access using either your own SSH public key or a generated SSH key pair. SSH connectivity offers a better user experience, especially for copy/paste, than noVNC connectivity.
+**IMPORTANT**
+
+When deploying the workshop compute instance via the ORM stack, as described in the next lab:
+
+1. It is strongly recommended that you enable the optional SSH access using either your own SSH public key or a generated SSH key pair. For this workshop, SSH connectivity offers a better user experience, especially for copy/paste, than noVNC connectivity.
+
+2. Other than configuring SSH connectivity, you can accept all the defaults provided by the ORM stack.
 
 You may now *proceed to the next lab (Environment setup)*.
 
