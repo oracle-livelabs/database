@@ -25,7 +25,7 @@ In this lab, you will:
 ### Prerequisites
 
 This lab assumes you have:
-* A Free Tier, Paid or LiveLabs Oracle Cloud account
+* A Free Tier, Paid or Active LiveLabs reservation for this workshop
 * Prior knowledge of using Linux command-line options and Oracle Autonomous Health Framework
 * Prior knowledge of Oracle Database basic concepts
 
