@@ -48,19 +48,26 @@ In this lab, you will:
 
 5. Use the __List Scope__ drop-down menu on the left to select the same compartment where you created your Autonomous Databae in Lab 1. Make sure your workload type is __Transaction Processing__. <if type="livelabs">Enter the first part of your user name, for example `LL185` in the Search Compartments field to quickly locate your compartment.
 
-    ![Check the workload type on the left.](./images/livelabs-compartment.png " ")
+    ![select your compartment.](./images/livelabs-compartment.png " ")
 
 </if>
 <if type="freetier">
-    ![Check the workload type on the left.](./images/compartments.png " ")
+5. If using FreeTier, your compartment should be the root compartment for your tenancy.
+
+    ![Check the compartment](./images/compartments.png " ")
 </if>
-    ![check workload type](./images/workload-type.png " ")
 
 <if type="freetier">
    **Note:** Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
 </if>
 
+<if type="freetier">
 6. You should see your database **TEXTDB** listed in the center. Click on the database name "TEXTDB".
+</if>
+
+<if type="livelabs">
+6. You should see your database **TEXTDBnnnnn** (where nnnn represents your LiveLabs user id) listed in the center. Click on the database name "TEXTDBnnnn".
+</if>
 
     ![database name](./images/database-name.png " ")
 

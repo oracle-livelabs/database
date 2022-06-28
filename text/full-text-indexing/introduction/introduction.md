@@ -2,7 +2,7 @@
 
 ## About this Workshop
 
-Oracle Text allows you to do fast, full-text searching in Oracle Database.
+Oracle Text is a standard component of the database allows you to do fast, full-text searching in textual data in Oracle Database. It would, for example, allow you to find mis-spelled words in an address field or get a list of Microsoft Word documents containing a particular phrase.
 
 While superficially it is similar to an indexed version of the LIKE operator, there are many differences.
 
