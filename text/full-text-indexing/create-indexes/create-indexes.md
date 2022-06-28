@@ -1,4 +1,4 @@
-# Creating an Oracle Text index
+# Create an Oracle Text index
 
 ## Introduction
 
@@ -46,7 +46,7 @@ In this lab, you will:
 
     ![Click Autonomous Transaction Processing](./images/adb-atp.png " ")
 
-5. Use the __List Scope__ drop-down menu on the left to select the same compartment where you created your Autonomous Databae in Lab 1. Make sure your workload type is __Transaction Processing__. <if type="livelabs">Enter the first part of your user name, for example `LL185` in the Search Compartments field to quickly locate your compartment.
+5. Use the __List Scope__ drop-down menu on the left to select the same compartment where you created your Autonomous Database in Lab 1. Make sure your workload type is __Transaction Processing__. <if type="livelabs">Enter the first part of your user name, for example `LL185` in the Search Compartments field to quickly locate your compartment.
 
     ![select your compartment.](./images/livelabs-compartment.png " ")
 
@@ -216,7 +216,7 @@ Text indexes are an example of a **domain index**. Domain indexes are specialize
     You can customize your stop word list following the examples here: [Create Stop List](https://docs.oracle.com/en/database/oracle/oracle-database/19/ccref/CTX_DDL-package.html#GUID-3336B8E9-13FB-4997-A9AD-8D9A207B10C4) and [Add Stop Word] (https://docs.oracle.com/en/database/oracle/oracle-database/19/ccref/CTX_DDL-package.html#GUID-5D27665E-8ECC-4703-94CC-83387BB7ABCD).
     
     We don't need to know anything about the underlying index tables at the moment. But it's useful to see the words that are indexed,
-    and it can sometimes be worth refering to this list when trying to figure out why a particular query acts as it does (queries
+    and it can sometimes be worth referring to this list when trying to figure out why a particular query acts as it does (queries
     are covered in the next lab).
 
 You may now continue to the next lab.
