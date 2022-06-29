@@ -2,7 +2,7 @@
 
 ## About this Workshop
 
-This hands-on workshop provides users step-by-step instructions on migrating Microsoft SSRS Services from On-Premise to OCI (Compute Instance) and configuring the Microsoft SSRS Reporting services.
+This hands-on workshop provides users with step-by-step instructions on migrating Microsoft SSRS Services from On-Premise to OCI (Compute Instance) and configuring the Microsoft SSRS Reporting services.
 
 **Architecture:**
 This reference architecture includes a compute instance and Object Storage on Oracle Cloud Infrastructure.

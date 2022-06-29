@@ -25,7 +25,7 @@ This lab assumes you have:
 
   ![SSRS Backup file zip](./images/ssrsbackupzipfile.png "SSRS Backup file zip")
 
-3. Once the **ssrsbackupfiles.zip** is downloaded successfully, unzip the files to the configured SQL Server backup folder to avoid permission issues.  Right-click on Database engine properties to get the default backup locations.
+3. Once the **ssrsbackupfiles.zip** is downloaded successfully, unzip the files to the configured SQL Server backup folder to avoid permission issues. Right-click on Database engine properties to get the default backup locations.
 
   ![SSRS Backup file unzip to SQL Backup location](./images/ssrsbackupzipsqlbackuplocation.png "SSRS Backup file unzip to SQL Backup location")
 
@@ -89,7 +89,7 @@ This lab assumes you have:
 
   ![Report Server web service URL success](./images/ssrsconfigwebserverurlsuccess.png "Report Server web service URL success")
 
-5. Click on **Database** on left pane, and then click on **Change Database**.
+5. Click on **Database** on the left pane, then click on **Change Database**.
 
   ![Report Server configuration manager database config](./images/ssrsselectdatabase.png "Report Server configuration manager database config")
 
@@ -113,7 +113,7 @@ This lab assumes you have:
 
   ![Report Server database configuration manger summary](./images/ssrschanedbsummary.png "Report Server database configuration manger summary")
 
-11. The progress will show as successful as shown in the following image. 
+11. The progress will show as successful, as shown in the following image. 
 
   ![Report Server database configuration manger result](./images/ssrsdbfinish.png "Report Server database configuration manger result")
 
