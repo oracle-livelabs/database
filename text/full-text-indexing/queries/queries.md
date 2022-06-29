@@ -22,18 +22,18 @@ In this lab, you will:
 ## Task 1: Open Database Actions
 
 1. If you have just completed the previous lab, you can skip this task as you will already be in Database Actions.
-Otherwise, login to the Oracle Cloud.
+Otherwise, log in to the Oracle Cloud.
 
 <if type="freetier">
 
-2. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources, you need to be in a region where Always Free Resources are available. You can see your current default **Region** in the top, right hand corner of the page.
+2. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources, you need to be in a region where Always Free Resources are available. You can see your current default **Region** in the top, right-hand corner of the page.
 
     ![Select region on the far upper-right corner of the page.](./images/region.png " ")
 
 </if>
 <if type="livelabs">
 
-3. If you are using a LiveLabs account, you need to be in the region your account was provisioned in. You can see your current default **Region** in the top, right hand corner of the page. Make sure that it matches the region on the LiveLabs Launch page.
+3. If you are using a LiveLabs account, you need to be in the region your account was provisioned in. You can see your current default **Region** in the top, right-hand corner of the page. Make sure that it matches the region on the LiveLabs Launch page.
 
     ![Select region on the far upper-right corner of the page.](./images/region.png " ")
 
@@ -200,7 +200,7 @@ Otherwise, login to the Oracle Cloud.
 
 8.  Near searches
 
-    You can find words close to each other using __NEAR__ operator. It will find words within specified distance of each other. For example, the following query doesn't find any result. Because there are two words between "order" and "smith".
+    You can find words close to each other using the __NEAR__ operator. It will find words within specified distance of each other. For example, the following query doesn't find any result. Because there are two words between "order" and "smith".
 
     ```
     <copy>
