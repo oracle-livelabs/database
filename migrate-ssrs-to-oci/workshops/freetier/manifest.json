@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Migrate Microsoft SSRS to OCI in Compute Instance",
+  "workshoptitle": "Migrate Microsoft SQL Server Reporting Services to OCI in Compute Instance",
   "help": "livelabs-help-oci_us@oracle.com",
   "tutorials": [
     {
