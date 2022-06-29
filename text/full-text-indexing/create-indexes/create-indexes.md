@@ -22,24 +22,24 @@ In this lab, you will:
 
 ## Task 1: Open Database Actions
 
-1. Login to the Oracle Cloud.
+1. Log in to the Oracle Cloud.
 
 <if type="freetier">
 
-2. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources, you need to be in a region where Always Free Resources are available. You can see your current default **Region** in the top, right hand corner of the page.
+2. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources, you need to be in a region where Always Free Resources are available. You can see your current default **Region** in the top, right-hand corner of the page.
 
     ![Select region on the far upper-right corner of the page.](./images/region.png " ")
 
 </if>
 <if type="livelabs">
 
-2. If you are using a LiveLabs account, you need to be in the region your account was provisioned in. You can see your current default **Region** in the top, right hand corner of the page. Make sure that it matches the region on the LiveLabs Launch page.
+2. If you are using a LiveLabs account, you need to be in the region your account was provisioned in. You can see your current default **Region** in the top, right-hand corner of the page. Make sure that it matches the region on the LiveLabs Launch page.
 
     ![Select region on the far upper-right corner of the page.](./images/region.png " ")
 
 </if>
 
-3. Click the navigation menu in the upper left to show top level navigation choices.
+3. Click the navigation menu in the upper left to show top-level navigation choices.
 
 4. Click on **Oracle Database** and choose **Autonomous Transaction Processing**.
 <if type="livelabs">
@@ -126,7 +126,7 @@ In this lab, you will:
 
     ![inserts](./images/inserts.png " ")
 
-    **Note:** You should see "3 rows inserted" at the bottom. If you just see the values listed, you didn't highlight the statement, and SQL workshop only run the SELECTs rather than the INSERT. You can try again.
+    **Note:** You should see "3 rows inserted" at the bottom. If you just see the values listed, you didn't highlight the statement, and SQL Workshop only run the SELECT rather than the INSERTs. You can try again.
 
 4.  Check that we have rows in the table
 
@@ -197,7 +197,7 @@ Text indexes are an example of a **domain index**. Domain indexes are specialize
 
     We see a list of columns. The main one we're interested in is TOKEN_TEXT.
 
-    We discussed earlier how Oracle Text uses "word based" indexes. To be more accurate, it uses "token-based" indexes, because a token is not necessarily a word (though it usually is).  The "$I" table contains a list of all the indexed tokens, and we can view them with the following query:
+    We discussed earlier how Oracle Text uses "word-based" indexes. To be more accurate, it uses "token-based" indexes, because a token is not necessarily a word (though it usually is).  The "$I" table contains a list of all the indexed tokens, and we can view them with the following query:
 
     ```
     <copy>
@@ -209,9 +209,9 @@ Text indexes are an example of a **domain index**. Domain indexes are specialize
 
     You may want to expand the output window upwards so you can see the full list of indexed words.
 
-    Notice anything about the list? Not all the words in the text appear - "from" is missing. That's because it is designated "stop word" - common words that are not very useful in searches, but are likely to take a lot of space
+    Notice anything about the list? Not all the words in the text appear - "from" is missing. That's because it is designated "stop word" - common words that are not very useful in searches, but are likely to take up a lot of space
     in the index. By default, we don't index them - though using advanced options we can tell the system to index all words,
-    or provide a "custom stoplist" of words we don't want indexed. The default list of stopwords will vary with language and
+    or provide a "custom stoplist" of words we don't want to be indexed. The default list of stopwords will vary with language and
     will depend on the default language setting for the database (always English for Autonomous Database).
     You can customize your stop word list following the examples here: [Create Stop List](https://docs.oracle.com/en/database/oracle/oracle-database/19/ccref/CTX_DDL-package.html#GUID-3336B8E9-13FB-4997-A9AD-8D9A207B10C4) and [Add Stop Word] (https://docs.oracle.com/en/database/oracle/oracle-database/19/ccref/CTX_DDL-package.html#GUID-5D27665E-8ECC-4703-94CC-83387BB7ABCD).
     
