@@ -9,7 +9,7 @@ Estimated Time:  1 hour
 ### Objectives
 In this lab, you will learn to :
 * Restore the SQL Server Databases
-* Configure the Microsoft SQL Server Reporting (SSRS) services with existing ReportServer and ReportServerTempdb databases. 
+* Configure the Microsoft SQL Server Reporting (SSRS) services with existing ReportServer and ReportServerTempdb Databases
 
 ### Prerequisites  
 
@@ -17,7 +17,7 @@ This lab assumes you have:
 - A Free or LiveLabs Oracle Cloud account
 - IAM policies to create resources in the compartment
 
-##  Task 1: Download the sample database backups for Microsoft SQL Server Report Server services 
+##  Task 1: Download the sample Database backups for Microsoft SQL Server Report Server services 
 
 1. RDP to the Bastion host server using the username .\opc and password. From the Bastion host, opens the Remote Desktop and connect to the Microsoft SSRS server using the private IP Address.
 
@@ -29,7 +29,7 @@ This lab assumes you have:
 
   ![SSRS Backup file unzip to SQL Backup location](./images/ssrsbackupzipsqlbackuplocation.png "SSRS Backup file unzip to SQL Backup location")
 
-4. The unzipped folder contains ReportServer database backup files, an encryption key, and one text file, as shown in the image below.
+4. The unzipped folder contains ReportServer Database backup files, an encryption key, and one text file, as shown in the image below.
 
   ![SSRS backup files and the encryption key](./images/ssrsbackupscontent.png "SSRS backup files and the encryption key")
 
@@ -37,7 +37,7 @@ This lab assumes you have:
 
 1. Open SSMS from Windows Start Menu. Once opened, choose the Server type Database Engine, provide the SSRS server name, Choose the Authentication type Windows Authentication, and then click on Connect.
 
-2. Once successfully connected to the database engine, right-click on **Databases**, and then click on **Restore Database**.
+2. Once successfully connected to the Database engine, right-click on **Databases**, and then click on **Restore Database**.
 
   ![Restore Database Wizard](./images/restoredatabase.png "Restore Database Wizard")
 
@@ -55,7 +55,7 @@ This lab assumes you have:
 
   ![Report Server database backup file](./images/reportserverbackupfileresult.png "Report Server database backup file")
   
-6. The ReportServer database is ready to restore as shown below, and then click on **OK** to restore the Database.
+6. The ReportServer Database is ready to restore as shown below, and then click on **OK** to restore the Database.
 
   ![Report Server database restore](./images/ssrs-reportserverdbrestore.png "Report Server database restore")
 
@@ -67,11 +67,11 @@ This lab assumes you have:
 
 1. Repeat all the steps from **Task3** to restore the **ReportServerTempdb** database.
 
-##  Task 4: Restore the **testdb** database.
+##  Task 4: Restore the **testdb** Database.
 
 1. Repeat all the steps from **Task3** to restore the **testdb** Database. 
 
-##  Task 5: Configure the Microsoft SQL Server Reporting (SSRS) services with existing SSRS databases
+##  Task 5: Configure the Microsoft SQL Server Reporting (SSRS) services with existing SSRS Databases
 
 1. Click on the Windows start menu, navigate to Microsoft SQL Server Reporting Services, and click on **Report server Configuration Manager** to open the configuration manager. 
 
@@ -93,7 +93,7 @@ This lab assumes you have:
 
   ![Report Server configuration manager database config](./images/ssrsselectdatabase.png "Report Server configuration manager database config")
 
-6. Choose the database server name and click on **Test Connection**
+6. Choose the Database server name and click on **Test Connection**
 
   ![Report Server configuration manager change database](./images/ssrstestdbconnection.png "Report Server configuration manager change database")
 

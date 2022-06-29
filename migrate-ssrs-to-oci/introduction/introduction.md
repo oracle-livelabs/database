@@ -5,7 +5,7 @@
 This hands-on workshop provides users with step-by-step instructions on migrating Microsoft SSRS Services from On-Premise to OCI (Compute Instance) and configuring the Microsoft SSRS Reporting services.
 
 **Architecture:**
-This reference architecture includes a compute instance and Object Storage on Oracle Cloud Infrastructure.
+This reference architecture includes a Compute Instance and Object Storage on Oracle Cloud Infrastructure.
 
 The Oracle Cloud Infrastructure region provides object storage (for backup) that includes a single availability domain with one fault domain. It also consists of a virtual cloud network (VCN) with one regional subnet and a service gateway. The VCN provides routing tables for the subnet, and the subnet provides its security list access. The compute instance has SQL Server Reporting Services in the fault domain.
 
@@ -21,9 +21,9 @@ In this workshop, you will learn how to:
 
 **Prerequisites**
 * An Oracle Free Tier, Always Free, Paid, or LiveLabs Cloud Account
-* Some understanding of cloud and security terms is helpful.
-* Familiarity with Oracle Cloud Infrastructure (OCI) is helpful.
-* Required Subnets: One Public subnet to host the Bastion host and One Private subnet for hosting compute instance.
+* Some understanding of cloud and security terms is helpful
+* Familiarity with Oracle Cloud Infrastructure (OCI) is helpful
+* Required Subnets: One Public subnet to host the Bastion host and One Private subnet for hosting Compute Instance
 
 ## Acknowledgements
 * **Author** - Ramesh Babu Donti, Principal Cloud Architect, NA Cloud Engineering

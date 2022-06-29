@@ -8,7 +8,7 @@ Estimated Time: 30 min
 
 ### Objectives
 In this lab, you will learn to :
-* Setup the Windows bastion host
+* Setup the Windows Bastion Host
 
 ### Prerequisites  
 
@@ -17,7 +17,7 @@ This lab assumes you have:
 - IAM policies to create resources in the compartment
 - Required Subnets are available in VCN
 
-##  Task 1: Create the Bastion host in Public Subnet
+##  Task 1: Create the Bastion Host in Public Subnet
 
 1. Open the navigation menu, click **Compute**, and then click **Instances**.
 
