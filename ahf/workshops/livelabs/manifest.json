@@ -17,7 +17,7 @@
             "filename": "./../../ahf-autoupgrade-upgrade/ahf-autoupgrade-upgrade.md"
         },
         {
-            "title": "Lab 3: Apply AHF Metadata and Framework Updates",
+            "title": "Lab 3: Apply and rollback AHF updates",
             "filename": "./../../ahf-apply-metadata-and-framework-updates/ahf-apply-metadata-and-framework-updates.md"
         },
         {

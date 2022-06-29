@@ -1,4 +1,4 @@
-# Apply AHF Metadata and Framework Updates
+# Apply and rollback AHF updates
 
 ## Introduction
 
@@ -21,102 +21,101 @@ This lab assumes you have:
 
 >**Note:** You must have installed 22.1.1 to apply the AHF framework and metadata updates.
 
-## Task 1: Check if the installed version is 22.1.1
+## Task 1: Apply AHF metadata and framework updates
 
-```
-<copy>
-tfactl print status
-</copy>
-```
-Command output:
+Use the **ahfctl applyupdate** command to update metadata and framework files from the zip file provided.
 
-```
-.-------------------------------------------------------------------------------.
-| Host     | Status of TFA | PID    | Port  | Version    | Build ID             |
-+----------+---------------+--------+-------+------------+----------------------+
-| den02mwa | RUNNING       | 105916 | 59452 | 22.1.1.0.0 | 22100020220130232427 |
-'----------+---------------+--------+-------+------------+----------------------'
-```
+1. To check if the installed version is 22.1.1:
 
-## Task 2: Apply AHF Framework and Metadata Updates
+    ```
+    <copy>
+    tfactl print status
+    </copy>
+    ```
+    Command output:
 
-You must apply metadata and framework updates to all cluster nodes.
+    ```
+    .-------------------------------------------------------------------------------.
+    | Host     | Status of TFA | PID    | Port  | Version    | Build ID             |
+    +----------+---------------+--------+-------+------------+----------------------+
+    | den02mwa | RUNNING       | 105916 | 59452 | 22.1.1.0.0 | 22100020220130232427 |
+    '----------+---------------+--------+-------+------------+----------------------'
+    ```
+2. To apply metadata and framework updates:
 
-Use the **ahfctl applyupdate** command to update metadata and framework files on the local node from the zip file provided.
+    ```
+    <copy>
+    ahfctl applyupdate -updatefile /home/opc/Downloads/ahf_data_20220602.zip
+    </copy>
+    ```
+    Command output:
 
-```
-<copy>
-ahfctl applyupdate -updatefile /home/opc/Downloads/ahf_data_20220602.zip
-</copy>
-```
-Command output:
+    ```
+    Updated file /opt/oracle.ahf/orachk/.cgrep/collections.dat
+    Updated file /opt/oracle.ahf/orachk/rules.dat
+    Updated file /opt/oracle.ahf/orachk/.cgrep/versions.dat
+    Updated file /opt/oracle.ahf/orachk/messages/check_messages.json
+    Data files updated to 20220602 from 20220516
+    ```
 
-```
-Updated file /opt/oracle.ahf/orachk/.cgrep/collections.dat
-Updated file /opt/oracle.ahf/orachk/rules.dat
-Updated file /opt/oracle.ahf/orachk/.cgrep/versions.dat
-Updated file /opt/oracle.ahf/orachk/messages/check_messages.json
-Data files updated to 20220602 from 20220516
-```
+3. To query the metadata updates applied:
 
-## Task 3: Query AHF Framework and Metadata Updates
+    >**Note** You can query metadata updates using the **-all** option and the framework updates using **-updateid**.
 
-You can query metadata updates using the **-all** option and the framework updates using **-updateid**.
+    ```
+    <copy>
+    ahfctl queryupdate -all
+    </copy>
+    ```
+    Command output:
+    ```
+    AHF Metadata Update: 20220602
+    Status: Applied
+    Applied on: Mon Jun  6 00:23:14 2022
+    ```
 
-To verify if the metadata and framework updates were applied to all nodes in a cluster, run the **ahfctl queryupdate** command as the AHF install user on each cluster node.
+## Task 2: Rollback AHF metadata and framework and updates
 
-To check if an update was applied on the local node:
+Use the **ahfctl rollbackupdate** command with the **-updateid** option to rollback the updates with a specific update ID. If you do not specify the update ID, then AHF rolls back to the previous state by default.
 
-```
-<copy>
-ahfctl queryupdate -all
-</copy>
-```
-Command output:
-```
-AHF Metadata Update: 20220602
-Status: Applied
-Applied on: Mon Jun  6 00:23:14 2022
-```
+1. To rollback the metadata and framework updates:
 
-## Task 4: Rollback AHF Framework and Metadata Updates
+    ```
+    <copy>
+    ahfctl rollbackupdate -updateid 20220602
+    </copy>
+    ```
+    Command output:
+    ```
+    Data files with timestamp 20220602 identified. Rolling back the files to Production version 20220516
+    Rolled back the data files 20220602 to Production version 20220516
+    ```
 
-Use the **ahfctl rollbackupdate** command to rollback the updates with a specific update ID applied to the local node. If you do not specify the update ID, then AHF rolls back to the previous state by default.
-
-To rollback the metadata and framework updates applied to all nodes in a cluster, you must run the **ahfctl rollbackupdate** command as the AHF install user on each cluster node.
-
-To rollback the metadata and framework updates:
-
-```
-<copy>
-ahfctl rollbackupdate -updateid 20220602
-</copy>
-```
-Command output:
-```
-Data files with timestamp 20220602 identified. Rolling back the files to Production version 20220516
-Rolled back the data files 20220602 to Production version 20220516
-```
-
-## Task 5: Cleanup AHF Metadata Backup Directories
-
-To delete the backup directories on all nodes in a cluster, you must run the **ahfctl deletebackup** command as the AHF install user on each cluster node.
+## Task 3: Cleanup AHF metadata backup directories
 
 You must not delete the backup directories randomly. Oracle recommends deleting the backup directories in the same order the updates were applied. If you delete the backup directories associated with a specific timestamp, then you will not be able to roll back to the state before the updates with that specific timestamp were applied.
 
 Upgrading AHF using the **ahf_setup** script automatically deletes the backup directories of the previous AHF versions.
 
-To delete the backup directories:
+1. To view the list of backup directories in the patch/update directory:
 
-```
-<copy>
-ahfctl deleteupdatebackup -updateid 20220602
-</copy>
-```
-Command output:
-```
-No metadata update applied.
-```
+    ```
+    <copy>
+    ls  /opt/oracle.ahf/data/work/.exachk_patch_directory
+    </copy>
+    ```
+2. To delete a backup directory with a specific timestamp:
+
+    ```
+    <copy>
+    ahfctl deleteupdatebackup -updateid 20220602
+    </copy>
+    ```
+    Command output:
+    ```
+    Deleting backup directories will not allow you to rollback metadata to 20211228 in the future. Do you want to continue? [y/n][y]: Y
+    Deleted metadata backup directory for: /opt/oracle.ahf/data/work/.exachk_patch_directory/.20211228_metadata_bkp
+    ```
 
 ## Learn More
 
