@@ -25,7 +25,7 @@ This lab assumes you have:
 
   ![SSRS Backup file zip](./images/ssrsbackupzipfile.png "SSRS Backup file zip")
 
-3. Once the **ssrsbackupfiles.zip** is downloaded successfully, unzip the files to the configured SQL Server backup folder to avoid permission issues. To get the SQL Server Backup configured details check the Database engine properties and extract backup files to a configured location. 
+3. Once the **ssrsbackupfiles.zip** is downloaded successfully, unzip the files to the configured SQL Server backup folder to avoid permission issues.  Right-click on Database engine properties to get the default backup locations.
 
   ![SSRS Backup file unzip to SQL Backup location](./images/ssrsbackupzipsqlbackuplocation.png "SSRS Backup file unzip to SQL Backup location")
 
@@ -77,95 +77,91 @@ This lab assumes you have:
 
   ![Report Server configuration manager](./images/ssrsconfigurationmanager.png "Report Server configuration manager")
 
-2. Click on **Yes** to open the configuration manager.
-
-  ![Browse Report Server configuration manager](./images/ssrsconfigurationmanageropen.png "Browse Report Server configuration manager")
-
-3. Click on **Connect** to connect to ReportServer. 
+2. Click on **Connect** to connect to ReportServer. 
 
   ![Connect to Report Server configuration manager](./images/ssrsconfigurationmanageropen.png "Connect to Browse Report Server configuration manager")
 
-4. Click on **Web Service URL**, and then click on **Apply**.
+3. Click on **Web Service URL**, and then click on **Apply**.
 
   ![Report Server configuration manager web service url](./images/ssrsconfigwebserverurl.png "Report Server configuration manager web service URL")
 
-5. The **Web Service URL** will be enabled, as shown in the following image. 
+4. The **Web Service URL** will be enabled, as shown in the following image. 
 
   ![Report Server web service URL success](./images/ssrsconfigwebserverurlsuccess.png "Report Server web service URL success")
 
-6. Click on **Database**, and then on **Change Database**.
+5. Click on **Database** on left pane, and then click on **Change Database**.
 
   ![Report Server configuration manager database config](./images/ssrsselectdatabase.png "Report Server configuration manager database config")
 
-7. Choose the database server name and click on **Test Connection**
+6. Choose the database server name and click on **Test Connection**
 
   ![Report Server configuration manager change database](./images/ssrstestdbconnection.png "Report Server configuration manager change database")
 
-8. You can see the successful test connection, as shown in the following image. 
+7. You can see the successful test connection, as shown in the following image. 
 
   ![Report Server configuration manager database connection test](./images/ssrstestdbconnectionsuccess.png "Report Server configuration manager database connection test")
 
-9. Choose the Database **ReportServer**, and then click on **Next**.
+8. Choose the Database **ReportServer**, and then click on **Next**.
 
   ![Report Server configuration ReportServer DB](./images/ssrsdatbaseselect.png "Report Server configuration ReportServer DB")
 
-10. Choose the Authentication Type, **Service Credentials** and then click on **Next**.
+9. Choose the Authentication Type, **Service Credentials** and then click on **Next**.
 
   ![Report Server service credentials](./images/ssrsservicecredentials.png "Report Server service credentials")
 
-11. Change the Database summary as shown in the following image. 
+10. Change the Database summary as shown in the following image. 
 
   ![Report Server database configuration manger summary](./images/ssrschanedbsummary.png "Report Server database configuration manger summary")
 
-12. The progress will show as successful as shown in the following image. 
+11. The progress will show as successful as shown in the following image. 
 
   ![Report Server database configuration manger result](./images/ssrsdbfinish.png "Report Server database configuration manger result")
 
-13. The successful configuration of the Database is shown in the following image. 
+12. The successful configuration of the Database is shown in the following image. 
 
   ![Report Server database configuration database configuration](./images/ssrsdbconfigsuccess.png "Report Server database configuration database configuration")
 
-14. Click on the **Web Portal URL**, and then click on **Apply**. 
+13. Click on the **Web Portal URL**, and then click on **Apply**. 
 
   ![Report Server database configuration web portal url](./images/ssrswebportalurl.png "Report Server database configuration web portal url")
 
-15. The successfully configured web portal URL is shown in the following image. 
+14. The successfully configured web portal URL is shown in the following image. 
 
   ![Report Server configuration web portal URL success](./images/ssrswebportalurlsuccess.png "Report Server  configuration web portal URL success")
 
-16. Click on **Encryption Keys**, and then click on **Restore**.
+15. Click on **Encryption Keys**, and then click on **Restore**.
 
   ![Report Server database configuration encryption keys](./images/ssrsencryptionkey.png "Report Server database configuration encryption keys")
 
-17. Click on the three-dot button to select the encryption key. 
+16. Click on the three-dot button to select the encryption key. 
 
   ![Report Server database configuration encryption key location](./images/ssrsencryptionkeylocatin.png "Report Server database configuration encryption key location")
 
-18. Choose the key **mykey.snk** created in Task1. 
+17. Choose the key **mykey.snk** created in **Task1**. 
 
   ![Report Server database configuration encryption key file select](./images/ssrsencryptionkeyfileopen.png "Report Server database configuration encryption key file select")
 
-19. Type the password, the password for the **mykey.snk** is stored in the text file **Encryptionkey** text file, extracted in the Task1 from the zip folder.   
+18. Type the password of the **mykey.snk** file stored in **Encryptionkey** text file, extracted in the **Task1**.
 
   ![Restore Encryption key](./images/ssrsencryptionkeypassword.png "Restore Encryption key")
 
-20. The successful restore encryption key is shown in the following image. 
+19. The successful restore encryption key is shown in the following image. 
 
   ![Restore Encryption key success](./images/ssrsencryptionkeyrestoresuccessmsg.png "Restore Encryption key success")
 
-21. Navigate to **Web Service URL** and then click on **Report Server Web Service URLs** 
+20. Navigate to **Web Service URL** and then click on **Report Server Web Service URLs** 
 
   ![Report Server Web Service URLs](./images/openwebserverurl.png "Report Server Web Service URLs")
 
-22. The URL will open in the web browser, provide the windows credentials, and click on **Sign in**. 
+21. The URL will open in the web browser, provide the windows credentials, and click on **Sign in**. 
 
   ![Report Server Web Service URLs](./images/ssrsbrowserurlsignin.png "Report Server Web Service URLs")
 
-23. The successful report execution is shown in the following image, and click on **test** report to view the report data.
+22. The successful report execution is shown in the following image, and click on **test** report to view the report data.
 
   ![Report Server reports](./images/ssrsrdlfile.png "Report Server reports")
 
-24. The test report will show the timestamp in the following image. 
+23. The test report will show the timestamp in the following image. 
 
   ![Report Server  report](./images/ssrsreportresults.png "Report Server report")
 

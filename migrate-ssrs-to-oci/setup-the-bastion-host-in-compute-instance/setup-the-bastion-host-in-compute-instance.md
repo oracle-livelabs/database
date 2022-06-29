@@ -1,10 +1,10 @@
-# Setup Windows bastion host in Public Subnet
+# Setup Windows Bastion Host in Public Subnet
 
 ## Introduction
 
-This lab walks you through creating a Windows bastion host in a Compute Instance in public subnet. Bastion Host will be used to connect the Remote Desktop sessions to private subnet servers. 
+This lab walks you through creating a Windows bastion host in a Compute Instance public subnet. You will use the Bastion Host to connect the Remote Desktop sessions to private subnet servers. 
 
-Estimated Time:  1 Hour 30 min
+Estimated Time: 30 min
 
 ### Objectives
 In this lab, you will learn to :

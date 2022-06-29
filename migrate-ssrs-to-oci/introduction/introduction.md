@@ -11,13 +11,13 @@ The Oracle Cloud Infrastructure region provides object storage (for backup) that
 
   ![Microsoft SQL Server Reporting Services - OCI](./images/ssrsarch.png "Microsoft SQL Server Reporting Services - OCI")
 
-Estimated Time: 2 Hour
+Estimated Time: 3 Hours
 
 **Workshop Objectives**
 In this workshop, you will learn how to:
-* Provisioning the Compute Instance from Market Place Image for SQL Server 2019
-* Configure the SQL Server Reporting Services
-* Restore the Reporting Databases from backups and configure the SQL Server Reporting Services to use the newly restored the databases 
+* Provision of the Compute Instance from Market Place Image for SQL Server 2019
+* Install the SQL Server Reporting Services
+* Restore the Reporting Databases from backups and configure the SQL Server Reporting Services to use the existing databases
 
 **Prerequisites**
 * An Oracle Free Tier, Always Free, Paid, or LiveLabs Cloud Account

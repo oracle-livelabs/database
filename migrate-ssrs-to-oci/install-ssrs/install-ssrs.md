@@ -8,7 +8,7 @@ Estimated Time:  30 min
 
 ### Objectives
 In this lab, you will learn to :
-* Install the Microsoft SQL Server Reporting Services (SSRS)
+* Download and Install the Microsoft SQL Server Reporting Services (SSRS)
 
 ### Prerequisites  
 

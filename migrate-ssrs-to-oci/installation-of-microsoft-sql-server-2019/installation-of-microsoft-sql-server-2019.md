@@ -9,7 +9,7 @@ Estimated Time:  1 hour
 ### Objectives
 In this lab, you will learn to:
 * Deploy Microsoft SQL Server 2019 from the marketplace image
-* Register the Computer Instances to Active Directory Domain Controller
+* Install Microsoft SQL Server Management Studio
 
 ### Prerequisites
 
@@ -68,6 +68,7 @@ This lab assumes you have:
 
   ![SQL Server Management Studio installation status](./images/sqlservermanagementstudiostatus.png "SQL Server Management Studio installation status")
 
+  You may now **proceed to the next lab**.
 ## Learn More
 - You can find more information about Launching a Windows Instance [here](https://docs.oracle.com/en-us/iaas/Content/GSG/Tasks/launchinginstanceWindows.htm)
 
