@@ -121,7 +121,7 @@ Autoupgrade of AHF by non-root users is supported only if the existing installat
 	</copy>
 	```
 
-## Task 2: Upgrade AHF from Software Stage Location
+## Task 2: Upgrade AHF from the software stage location
 
 1. Ensure that you have an older version of AHF (preferably 21.4.3) installed.
 
@@ -274,132 +274,7 @@ Autoupgrade of AHF by non-root users is supported only if the existing installat
 	'----------+---------------+-------+------+------------+----------------------+------------------'
 	```
 
-## Task 3: Upgrade AHF from REST Endpoints (Object Store)
-
->**Note** You can skip the following steps if you have already configured the REST Endpoint (Object Store) or if you do not have a REST Endpoint.
-
-1. Configure REST endpoints (Object Store).
-
-	```
-	<copy>
-	ahfctl setupload -name test_ep -type https
-	</copy>
-	```
-	Command output:
-
-	```
-	Enter test_ep.https.user :  testuser@oracle.com
-	Enter test_ep.https.password :
-	Enter test_ep.https.url : https://swiftobjectstorage.r1.oracleiaas.com/v1/dbaasimage/CDCJH
-	Successfully synced AHF configuration
-	Upload configuration set for: test_ep
-	type: https
-
-	test_ep.https.password: ******
-
-	test_ep.https.url: https://swiftobjectstorage.r1.oracleiaas.com/v1/dbaasimage/CDCJH
-	```
-
-2. Validate the configured upload parameters.
-
-	```
-	<copy>
-	ahfctl checkupload -name test_ep
-	</copy>
-	```
-	Command output:
-
-	```
-	Upload configuration check for: test_ep.
-	Parameters are configured correctly to upload.
-	```
-
-3. Configure the name of the REST download service.
-
-	```
-	<copy>
-	ahfctl setupgrade -servicename test_ep
-	</copy>
-	```
-	Command output:
-
-	```
-	AHF autoupgrade parameters successfully updated
-	Successfully synced AHF configuration
-	```
-
-4. Run the upgrade command and specify the **-nomos** command option to upgrade without MOS configuration.
-
-	```
-	<copy>
-	ahfctl upgrade -nomos
-	</copy>
-	```
-	Command output:
-
-	```
-	Upload configuration check for: test_ep.
-
-	Parameters are configured correctly to upload.
-	AHF-LINUX_v22.2.0.zip successfully downloaded at /opt/oracle.ahf
-	/opt/oracle.ahf/AHF-LINUX_v22.2.0.zip successfully extracted at /opt/oracle.ahf
-	AHF software signature has been validated successfully
-	AHF is already running latest version. No need to upgrade.
-	```
-
->**Note:** To run the upgrade, **test\_ep** upload configuration must contain the **AHF-LINUX\_v22.2.0.zip** file. To check if this file exists in the object storage, run the **curl get** command.
-
-## Task 4: Download AHF Installer Zip File from MOS
-
-If a new version of AHF is not found either at the software stage location or at Rest Endpoints (Object Store), then download AHF from MOS to software stage, and then upgrade.
-
-1. Set all autoupgrade parameters with valid inputs:
-
-	```
-	<copy>
-	ahfctl setupgrade -all
-	</copy>
-	```
-	Command output:
-
-	```
-	Enter autoupgrade flag <on/off> : on
-	Enter software stage location : /opt/oracle.ahf
-	Enter auto upgrade frequency : 5
-	AHF autoupgrade parameters successfully updated
-	Successfully synced AHF configuration
-	```
-2. Run the **ahfctl upgrade** command:
-
-	```
-	<copy>
-	ahfctl upgrade
-	</copy>
-	```
-	Command output:
-
-	```
-	AHF-LINUX_v21.1.0.zip successfully downloaded at /opt/oracle.ahf /opt/oracle.ahf/AHF-LINUX_v21.1.0.zip successfully extracted at /opt/oracle.ahf AHF software signature has been validated successfully
-	```
-## Task 5: Troubleshoot AHF Download from MOS
-
-**Description:** AHF download from MOS fails with the following error:
-
-```
-ahfctl upgrade
-An error has occurred while downloading AHF from MOS. Please try again!
-```
-**Action:** Check the **<Diag_Directory>/tfa/tfa_main.trc** file for more information and troubleshooting tips.
-
-To enable debug:
-
-```
-<copy>
-tfactl set tracelevel=MAIN:DEBUG
-</copy>
-```
-
-## Task 6: Unset Upgrade Configuration
+## Task 3: Unset upgrade configuration
 
 Run the **ahfctl unsetupgrade** command to unset a specific upgrade parameter or all of the upgrade parameters.
 
@@ -431,7 +306,7 @@ Run the **ahfctl unsetupgrade** command to unset a specific upgrade parameter or
 	autoupgrade.servicename : [not set]
 	```
 
-## Task 7: Disable Automatic upgrade
+## Task 4: Disable automatic upgrade
 
 You can disable **autoupgrade** if you want to upgrade AHF manually.
 
@@ -446,7 +321,7 @@ To disable autoupgrade:
 <copy>ahfctl unsetupgrade -autoupgrade</copy>
 ```
 
-## Task 8: Upgrade AHF on Local File System
+## Task 5: Upgrade AHF on the local file system
 
 If the stage location is a local file system and if the AHF installer zip file exists in the stage location, then after upgrading, the installer removes the AHF installer zip file and all the extracted items from the stage location.
 
