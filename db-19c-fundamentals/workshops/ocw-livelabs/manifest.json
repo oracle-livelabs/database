@@ -1,0 +1,41 @@
+{
+    "workshoptitle": "Oracle Database 19c New Features",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Introduction to Oracle Database 19c and the Oracle Database 19c New Features workshop.",
+            "filename": "./../../intro/intro.md"
+        },
+        {
+            "title": "Get Started with noVNC Remote Desktop",
+            "description": "Using noVNC Remote Desktop",
+            "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+          },
+        {
+            "title": "Initialize Your Environment",
+            "description": "Steps to initialize the workshop-installed compute instance and download the lab files.",
+            "filename": "./../../initialize-environment/initialize-environment.md"
+        },
+            {
+                "title": "Lab 1: Duplicate a CDB by Using DBCA in Silent Mode",
+                "description": "Duplicate a CDB by using DBCA in silent mode.",
+                "filename": "./../../duplicate-cdb-using-dbca-silent-mode/duplicate-cdb-using-dbca-silent-mode.md"
+            },
+            {
+                "title": "Lab 2: Decrease the Transportable Tablespace (TTS) Import and Export Time",
+                "description": "Decrease the transportable tablespace (TTS) import and export time.",
+                "filename": "./../../decrease-transportable-tablespace-import-export-time/decrease-transportable-tablespace-import-export-time.md"
+            },
+            {
+                "title": "Lab 3: Omit the Column Encryption Attribute During Import",
+                "description": "Omit the column encryption attribute during import.",
+                "filename": "./../../omit-column-encryption-attribute-during-import/omit-column-encryption-attribute-during-import.md"
+            },
+           {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename":"https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/need-help/need-help-livelabs.md"
+           }
+    ]
+}
