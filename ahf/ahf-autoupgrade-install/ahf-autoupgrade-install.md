@@ -22,7 +22,7 @@ This lab assumes you have:
 ## Task 1: Open a terminal window
 
 1. Click the LiveLabs URL.
-2.  Click **Start**.
+2. Click **Start**.
 3. Click **Run on LiveLabs**.
 4. Choose a date and time to run the workshop or you choose to start the workshop now.
 5. Select the **I consent to receive emails from LiveLabs for my reservation** checkbox.
