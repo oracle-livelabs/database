@@ -25,19 +25,21 @@ This lab assumes that you have:
 
 ## Task 1: Connect using noVNC
 
+All environments support browser based noVNC connections.
+
 _LiveLabs sandbox_
 
 In the LiveLabs reservation page for your active reservation, you will see the URL to use for a noVNC connection to the workshop instance.
 
 _Own tenancy or free-trial Cloud account_
 
-At the end of the ORM stack apply job execution report you will see the noVNC connection URL.
+At the end of the ORM stack 'apply' job execution log you will see the noVNC connection URL.
 
 Copy/paste the URL into your browser and you should then see the workshop desktop.
 
 ![Workshp noVNC Desktop](./images/novnc-desktop.png " ")
 
-You can use the *Activities* menu, or double-click the *Terminal* icon on the desktop to open a terminal session.
+You can use the **Terminal** option under the *Activities* menu, or double-click the *Terminal* icon on the desktop, to open a terminal session.
 
 ## Task 2: Connect using SSH (optional but recommended)
 
@@ -49,15 +51,15 @@ You can follow the instructions in the noVNC lab to add an SSH public key to the
 
 _Own tenancy or free-trial Cloud account - user-provided public key_
 
-If you provided your own SSH public key as part of the ORM stack deployment process then you can connect using the corresponding SSH private key.
+If you enabled SSH connectivity by providing your own SSH public key as part of the ORM stack deployment process then you can connect using the corresponding SSH private key.
 
 _Own tenancy or free-trial Cloud account - system-generated key pair_
 
-The SSH private key needed to connect is displayed at the end of the ORM stack apply job log. Copy/paste the key into a file on your client computer, or import into your SSH client, and use that file to connect.
+If you enabled SSH connectivity and asked for a system generated key as part of the ORM stack deployment process, the SSH private key needed to connect is displayed at the end of the ORM stack 'apply' job execution log. Copy/paste the key into a file on your client computer, or import into your SSH client, and use that file to connect.
 
 **NOTE:** On Linux and macOS systems, SSH private keys should be stored in your user's .ssh directory (**~/.ssh**) and must have permissions of **600 (rw-------)**.
 
-Assuming that the SSH private key is **~/.ssh/id_livelabs** and the oublic IP address of the workshop compiute instance is **123.123.123.123** then you can connect using:
+Assuming that the SSH private key is **~/.ssh/id_livelabs** and the public IP address of the workshop compute instance is **123.123.123.123** then you can connect using:
 
 **ssh -i ~/.ssh/id_livelabs oracle@123.123.123.123**
 
