@@ -23,7 +23,7 @@ This lab assumes you have:
 
 ## Task 1: Apply AHF metadata and framework updates
 
-Use the **ahfctl applyupdate** command to update metadata and framework files from the zip file provided.
+Run the **ahfctl applyupdate** command to update metadata and framework files from the zip file provided. Run the **ahfctl queryupdate** command to check if an update was applied on the local node. Query the metadata updates using the **-all** option and the framework updates using **-updateid**.
 
 1. To check if the installed version is 22.1.1:
 
@@ -60,8 +60,6 @@ Use the **ahfctl applyupdate** command to update metadata and framework files fr
 
 3. To query the metadata updates applied:
 
-    >**Note** You can query metadata updates using the **-all** option and the framework updates using **-updateid**.
-
     ```
     <copy>
     ahfctl queryupdate -all
@@ -76,7 +74,7 @@ Use the **ahfctl applyupdate** command to update metadata and framework files fr
 
 ## Task 2: Rollback AHF metadata and framework and updates
 
-Use the **ahfctl rollbackupdate** command with the **-updateid** option to rollback the updates with a specific update ID. If you do not specify the update ID, then AHF rolls back to the previous state by default.
+Run the **ahfctl rollbackupdate** command with the **-updateid** option to rollback the updates with a specific update ID. If you do not specify the update ID, then AHF rolls back to the previous state by default.
 
 1. To rollback the metadata and framework updates:
 
@@ -93,9 +91,7 @@ Use the **ahfctl rollbackupdate** command with the **-updateid** option to rollb
 
 ## Task 3: Cleanup AHF metadata backup directories
 
-You must not delete the backup directories randomly. Oracle recommends deleting the backup directories in the same order the updates were applied. If you delete the backup directories associated with a specific timestamp, then you will not be able to roll back to the state before the updates with that specific timestamp were applied.
-
-Upgrading AHF using the **ahf_setup** script automatically deletes the backup directories of the previous AHF versions.
+Run the **ahfctl deleteupdatebackup** command to delete the backup directories used for AHF update.
 
 1. To view the list of backup directories in the patch/update directory:
 
@@ -104,6 +100,13 @@ Upgrading AHF using the **ahf_setup** script automatically deletes the backup di
     ls  /opt/oracle.ahf/data/work/.exachk_patch_directory
     </copy>
     ```
+    Command output:
+
+    ```
+    .  ..  20220602_metadata_bkp
+
+    ```
+
 2. To delete a backup directory with a specific timestamp:
 
     ```
@@ -113,8 +116,8 @@ Upgrading AHF using the **ahf_setup** script automatically deletes the backup di
     ```
     Command output:
     ```
-    Deleting backup directories will not allow you to rollback metadata to 20211228 in the future. Do you want to continue? [y/n][y]: Y
-    Deleted metadata backup directory for: /opt/oracle.ahf/data/work/.exachk_patch_directory/.20211228_metadata_bkp
+    Deleting backup directories will not allow you to rollback metadata to 20220602 in the future. Do you want to continue? [y/n][y]: Y
+    Deleted metadata backup directory for: /opt/oracle.ahf/data/work/.exachk_patch_directory/.20220602_metadata_bkp
     ```
 
 ## Learn More
