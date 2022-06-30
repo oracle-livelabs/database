@@ -1,0 +1,42 @@
+{
+    "workshoptitle": "Full-Text Indexing in Oracle Database",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "The Introduction is always first. The title and contents menu title match for the Introduction.",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/cloud-login/pre-register-free-tier-account.md"
+        },
+        {
+            "title": "Lab 1: Provision an Autonomous Database",
+            "description": "Labs that follow the introduction are numbered, starting with Lab 1",
+            "filename": "../../provision/provision.md",
+            "type": "livelabs"
+        },
+        {
+            "title": "Lab 2: Create Indexes",
+            "filename": "../../create-indexes/create-indexes.md",
+            "type": "livelabs"
+        },
+        {
+            "title": "Lab 3: Run Queries",
+            "filename": "../../queries/queries.md",
+            "type": "livelabs"
+        },
+        {
+            "title": "Lab 4: Maintain Indexes",
+            "filename": "../../maintenance/maintenance.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename":"https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}
+
