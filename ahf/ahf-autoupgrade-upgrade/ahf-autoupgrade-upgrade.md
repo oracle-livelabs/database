@@ -12,34 +12,18 @@ Oracle Trace File Analyzer scheduler is scheduled to run on a weekly time interv
 
 If a new version of AHF is not found either at the software stage location or at Rest Endpoints (Object Store), then download AHF from MOS to software stage, and then upgrade.
 
+>**Note:** The scope of this workshop is limited to upgrading AHF from the software stage location.
+
 ### Objectives
 
 In this lab, you will:
 * Upgrade AHF from Software Stage location
-
->**Note:** The scope of this workshop is limited to upgrading AHF from the software stage locatoin and on the local file system.
 
 ### Prerequisites
 
 * You need AHF installed user privileges or **root** access to run **getupgrade**, **setupgrade**, **unsetupgrade**, and **upgrade** commands.
 * **openssl** is needed for all platforms to support **autoupgrade**. If **openssl** is not present, then **autoupgrade** exits gracefully.
 * AHF version 21.4.3. You can only upgrade AHF from 21.4.3 to 22.1.1 so uninstall if you have any older versions of AHF.
-
-### Operating Systems Supported to Upgrade AHF Automatically
-
-Automatic upgrade is supported on:
-- Linux
-- Solaris
-- AIX
-
-Autoupgrade is NOT supported on:
-- HP-UX
-- Microsoft Windows
-- Standalone installations (except Exadata dom0)
-
-Autoupgrade of AHF by non-root users is supported only if the existing installation was done by the same user and the installation type is typical (full). For example, if user "X" has installed AHF, then autoupgrade cannot be performed by user "Y".
-
->**Note:** If the upgrade output is not displayed, wait for 3-5 minutes and then check the **/opt/oracle.ahf/data/*hostname*/diag/ahf/ahf\_install\_*date*>.log** file.
 
 ## Task 1: Uninstall the current AHF installation and install AHF 21.4.3
 
