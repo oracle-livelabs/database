@@ -25,7 +25,9 @@ This lab assumes you have:
 
 Run the **ahfctl applyupdate** command to update metadata and framework files from the zip file provided.
 
-Run the **ahfctl queryupdate** command to check if an update was applied. Query all of the metadata and framework updates applied using the **-all** option and the **-updateid** option to query the updates with a specific update ID.
+Run the **ahfctl queryupdate** command to check if an update was applied. To get a list of all the metadata and framework updates applied, use the **-all** option. To query a metadata or framework update with a specific update ID, use the **-updateid** option.
+
+>**Note:** **ahf\_data\_update ID/timestamp.zip** identifies a metadata update file and **ahf_update ID/timestamp.zip** identifies a framework update file.
 
 1. To check if the installed version is 22.1.1:
 
