@@ -1,0 +1,61 @@
+{
+	"workshoptitle": "DBA Essentials - Backup and recovery operations for Oracle Database 21c",
+	"help": "suresh.r.rajan@oracle.com",
+	"tutorials": [
+		{
+			"title": "Introduction",
+			"description": "Introduction to performing backup and recovery operations in Oracle Database 21c.",
+			"filename": "../../intro-backup-recovery/intro-backup-recovery.md"
+		},
+		{
+			"title": "Using noVNC Remote Desktop",
+			"description": "Using noVNC Remote Desktop",
+			"filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+		},
+		{
+			"title": "Lab 1: Initialize environment",
+			"description": "How to initialize and setup the workshop components.",
+			"filename": "./../../initialize-environment/initialize-environment.md"
+		},
+		{
+			"title": "Lab 2: Configure recovery settings",
+			"description": "How to configure the Oracle Database for several recovery settings.",
+			"filename": "../../configure-recovery-settings/configure-recovery-settings.md"
+		},
+		{
+			"title": "Lab 3: Configure backup settings",
+			"description": "How to configure the database for several backup-related settings and policies.",
+			"filename": "../../configure-backup-settings/configure-backup-settings.md"
+		},
+		{
+			"title": "Lab 4: Perform and schedule backups",
+			"description": "How to use RMAN to perfrom and schedule backups.",
+			"filename": "../../perform-and-schedule-backups/perform-and-schedule-backups.md"
+		},
+		{
+			"title": "Lab 5: Manage backups",
+			"description": "How to manage backups after you create them.",
+			"filename": "../../manage-backups/manage-backups.md"
+		},
+		{
+			"title": "Lab 6: Use Data Recovery Advisor to repair failures",
+			"description": "How to use RMAN commands to repair failures in Oracle database.",
+			"filename": "../../use-data-recovery-advisor-to-repair-failures/use-data-recovery-advisor-to-repair-failures.md"
+		},
+		{
+			"title": "Lab 7: Rewind a table using Oracle Flashback Table",
+			"description": "How to rewind one or more tables to their contents at a previous time without affecting other database objects.",
+			"filename": "../../rewind-table-using-flashback-table/rewind-table-using-flashback-table.md"
+		},
+		{
+			"title": "Lab 8: Recover a dropped table using Oracle Flashback Drop",
+			"description": "How to reverse the effects of dropping (deleting) a table, returning the dropped table to the database along with dependent objects such as indexes and triggers.",
+			"filename": "../../recover-dropped-table-using-flashback-drop/recover-dropped-table-using-flashback-drop.md"
+		},
+		{
+			"title": "Need help?",
+			"description": "Solutions to Common Problems and Directions for Receiving Live Help",
+			"filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/need-help/need-help-livelabs.md"
+		}
+	]
+}

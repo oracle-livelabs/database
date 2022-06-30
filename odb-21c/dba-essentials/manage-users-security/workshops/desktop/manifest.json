@@ -1,0 +1,37 @@
+{
+  "workshoptitle": "DBA Essentials - Manage user accounts and security for Oracle Database 21c",
+  "help": "livelabs-help-em_us_grp@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The workshop on user accounts and security privileges for Oracle Database 21c.",
+      "filename": "../../intro-user-admin-sec-priv/intro-user-admin-sec-priv.md"
+    },
+    {
+      "title": "Use noVNC remote desktop",
+      "description": "Use noVNC Remote Desktop",
+      "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+    },
+    {
+      "title": "Lab 1: Initialize environment",
+      "description": "How to initialize and start all the workshop components.",
+      "publisheddate": "04/29/2022",
+      "filename": "./../../initialize-environment/initialize-environment.md"
+    },
+    {
+      "title": "Lab 2: Manage roles",
+      "description": "How to manage roles and system privileges in a PDB.",
+      "filename": "../../manage-roles/manage-roles.md"
+    },
+    {
+      "title": "Lab 3: Manage database user accounts",
+      "description": "How to manage user accounts in a PDB.",
+      "filename": "../../manage-users-accounts/manage-users-accounts.md"
+    },
+    {
+      "title": "Need help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}
