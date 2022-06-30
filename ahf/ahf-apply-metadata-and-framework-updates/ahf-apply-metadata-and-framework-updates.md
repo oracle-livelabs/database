@@ -61,8 +61,39 @@ Run the **ahfctl queryupdate** command to check if an update was applied. To get
     Updated file /opt/oracle.ahf/orachk/messages/check_messages.json
     Data files updated to 20220602 from 20220516
     ```
+3.  To apply framework update:
 
-3. To query all the metadata and framework updates applied:
+    >**Note:** You cannot perform this step because **ahf\_33687033.zip** is not included in this workshop. This example is provided solely for informational purposes.
+
+    ```
+    <copy>
+    ahfctl applyupdate -updatefile ahf_33687033.zip
+    </copy>
+    ```
+    Command output:
+    ```
+    Updated file /opt/oracle.ahf/ahf/lib/ahfcomponents.pyc
+    Updated file /opt/oracle.ahf/ahf/lib/ahfparser.pyc
+    Updated file /opt/oracle.ahf/ahf/lib/ahfpatch.pyc
+    Updated file /opt/oracle.ahf/ahf/lib/ahfctl.pyc
+    Updated file /opt/oracle.ahf/exachk/messages/framework_messages.json
+    Updated file /opt/oracle.ahf/exachk/lib/utils.pyc
+    Updated file /opt/oracle.ahf/exachk/lib/constant.pyc
+    Updated file /opt/oracle.ahf/exachk/messages/ahfmessages.json
+    Updated file /opt/oracle.ahf/exachk/lib/gen_apply_patch.pyc
+    Updated file /opt/oracle.ahf/ahf/bin/uninstallahf.sh
+    Updated file /opt/oracle.ahf/exachk/exachk.pyc
+    Updated file /opt/oracle.ahf/ahf/scripts/ahf_upgrade.pyc
+    Updated file /opt/oracle.ahf/exachk/lib/ahf_metadata.pyc
+
+    AHF metadata updating of file ahf_33687033.zip completed
+
+    Updated to 22.1.0.1 from 22.1.0
+
+    AHF framework update fixes 33687033, 33161400, 33687046, 33687061, 33687041
+    ```
+
+4. To query all the metadata and framework updates applied:
 
     ```
     <copy>
