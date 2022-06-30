@@ -34,8 +34,8 @@ This workshop requires a certain number of ports to be available, a requirement 
 | Port           |Description                            |
 | :------------- | :------------------------------------ |
 | 22             | SSH                                   |
-| 80             | Remote Desktop using noVNC           |
-| 6080           | Remote Desktop using noVNC            |
+| 80             | Remote Desktop using noVNC            |
+
 
 1.  Go to *Networking >> Virtual Cloud Networks*
 
@@ -64,9 +64,11 @@ Using the details from the two steps above, proceed to the lab *Environment Setu
 
 When deploying the workshop compute instance via the ORM stack, as described in the next lab:
 
-1. It is strongly recommended that you enable the optional SSH access using either your own SSH public key or a generated SSH key pair. For this workshop, SSH connectivity offers a better user experience, especially for copy/paste, than noVNC connectivity.
+1. By default SSH access using a system generated SSH private key is enabled. SSH access is recommended for this workshop as it offers a better user experience, especially for copy/paste, than noVNC connectivity.
 
-2. Other than configuring SSH connectivity, you can accept all the defaults provided by the ORM stack.
+2. If you wish to provide your own SSH public key, uncheck the option *Auto Generate SSH Key Pair* and follow the on-screen instructions to either upload or copy/paste your SSH public key.  
+
+3. Unless you wish to customize SSH connectivity as desccribed in (2), you can accept all the defaults provided by the ORM stack.
 
 You may now *proceed to the next lab (Environment setup)*.
 

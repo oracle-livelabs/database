@@ -23,9 +23,9 @@ This lab assumes that you have:
 
 - Completed all the previous labs in this workshop, in sequence.
 
-## Task 1: Connect using noVNC
+## Task 1: Connect using noVNC remote desktop
 
-All environments support browser based noVNC connections.
+All environments support browser based noVNC connections. The lab *Using noVNC Remote Desktop* provides information on using the noVNC remote desktop.
 
 _LiveLabs sandbox_
 
@@ -35,7 +35,16 @@ _Own tenancy or free-trial Cloud account_
 
 At the end of the ORM stack 'apply' job execution log you will see the noVNC connection URL.
 
-Copy/paste the URL into your browser and you should then see the workshop desktop.
+```
+remote_desktop = [
+  "http://140.238.65.52/livelabs/vnc.html?password=yO56MG6tnJ&resize=scale&quality=9&autoconnect=true&reconnect=true",
+]
+```
+The noVNC connection URL can also be viewed and copied on the Stack's Application Information tab:
+
+![Workshp noVNC connection URL](./images/orm-novnc-url.png " ")
+
+Copy/paste the URL from the log into your browser and you should then see the workshop desktop.
 
 ![Workshp noVNC Desktop](./images/novnc-desktop.png " ")
 
@@ -47,7 +56,7 @@ You can connect to the instance as the oracle user using an SSH private key.
 
 _LiveLabs sandbox_
 
-You can follow the instructions in the noVNC lab to add an SSH public key to the oracle user's SSH **authorized_keys** file. You then connect using the corresponding SSH private key.
+Follow the instructions in the lab *Using noVNC Remote Desktop* to add your SSH public key to the **oracle** user's SSH **authorized_keys** file. You can then connect to the workshop compute instance using the corresponding SSH private key.
 
 _Own tenancy or free-trial Cloud account - user-provided public key_
 
@@ -55,7 +64,21 @@ If you enabled SSH connectivity by providing your own SSH public key as part of 
 
 _Own tenancy or free-trial Cloud account - system-generated key pair_
 
-If you enabled SSH connectivity and asked for a system generated key as part of the ORM stack deployment process, the SSH private key needed to connect is displayed at the end of the ORM stack 'apply' job execution log. Copy/paste the key into a file on your client computer, or import into your SSH client, and use that file to connect.
+If you enabled SSH connectivity using a system generated key as part of the ORM stack deployment process, the SSH private key needed to connect is displayed at the end of the ORM stack 'apply' job execution log. 
+
+```
+generated_instance_ssh_private_key = -----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAu8ta42Xs+O/JvkDfpjWo4c2uqb9xkR2IncidGFE1FO4GlMm6
+...
+2o0ssyrFUAo93fbkfdNfqojnnVJaMjGrpwaTS80Y7tbIrreex2R+9g==
+-----END RSA PRIVATE KEY-----
+```
+
+The generated SSH private key can also be viewed and copied on the Stack's Application Information tab:
+
+![Workshp SSH private key](./images/orm-ssh-key.png " ")
+
+Copy/paste the key into a file on your client computer, or import into your SSH client, and use it to connect via SSH.
 
 **NOTE:** On Linux and macOS systems, SSH private keys should be stored in your user's .ssh directory (**~/.ssh**) and must have permissions of **600 (rw-------)**.
 
