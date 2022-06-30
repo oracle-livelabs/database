@@ -10,12 +10,12 @@
 		{
 			"title": "Get started",
 			"description": "Get started",
-			"filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/cloud-login/cloud-login-livelabs2.md"
+			"filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
 		},
 		{
 			"title": "Lab 1: Verify compute instance setup",
 			"description": "Verify compute instance setup",
-			"filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/verify-compute/verify-compute-novnc.md"
+			"filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-novnc.md"
 		},
 		{
 			"title": "Lab 2: Initialize environment",
@@ -60,7 +60,7 @@
 		{
 			"title": "Need help?",
 			"description": "Solutions to Common Problems and Directions for Receiving Live Help",
-			"filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/need-help/need-help-livelabs.md"
+			"filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
 		}
 	]
 }
