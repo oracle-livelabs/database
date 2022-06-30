@@ -16,8 +16,8 @@ If a new version of AHF is not found either at the software stage location or at
 
 In this lab, you will:
 * Upgrade AHF from Software Stage location
-* Upgrade AHF from REST endpoints (Object Store)
-* Upgrade AHF from MOS
+
+>**Note:** The scope of this workshop is limited to upgrading AHF from the software stage locatoin and on the local file system.
 
 ### Prerequisites
 
@@ -39,9 +39,7 @@ Autoupgrade is NOT supported on:
 
 Autoupgrade of AHF by non-root users is supported only if the existing installation was done by the same user and the installation type is typical (full). For example, if user "X" has installed AHF, then autoupgrade cannot be performed by user "Y".
 
->**Note**
-* The scope of this workshop is limited to upgrading AHF on the local file system.
-* If the upgrade output is not displayed, wait for 3-5 minutes and then check the **/opt/oracle.ahf/data/*hostname*/diag/ahf/ahf\_install\_*date*>.log** file.
+>**Note:** If the upgrade output is not displayed, wait for 3-5 minutes and then check the **/opt/oracle.ahf/data/*hostname*/diag/ahf/ahf\_install\_*date*>.log** file.
 
 ## Task 1: Uninstall the current AHF installation and install AHF 21.4.3
 
