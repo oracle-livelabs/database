@@ -80,7 +80,7 @@ Run the **ahfctl rollbackupdate** command with the **-updateid** option to rollb
 
 >**Note:** All the backup directories used for applying updates will also be deleted as part of rollback.
 
-1. To rollback the metadata and framework updates:
+1. To rollback metadata and framework updates:
 
     ```
     <copy>
