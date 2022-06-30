@@ -23,7 +23,9 @@ This lab assumes you have:
 
 ## Task 1: Apply AHF metadata and framework updates
 
-Run the **ahfctl applyupdate** command to update metadata and framework files from the zip file provided. Run the **ahfctl queryupdate** command to check if an update was applied on the local node. Query the metadata updates using the **-all** option and the framework updates using **-updateid**.
+Run the **ahfctl applyupdate** command to update metadata and framework files from the zip file provided.
+
+Run the **ahfctl queryupdate** command to check if an update was applied. Query all of the metadata and framework updates applied using the **-all** option and the **-updateid** option to query the updates with a specific update ID.
 
 1. To check if the installed version is 22.1.1:
 
@@ -41,7 +43,7 @@ Run the **ahfctl applyupdate** command to update metadata and framework files fr
     | den02mwa | RUNNING       | 105916 | 59452 | 22.1.1.0.0 | 22100020220130232427 |
     '----------+---------------+--------+-------+------------+----------------------'
     ```
-2. To apply metadata and framework updates:
+2. To apply metadata updates:
 
     ```
     <copy>
@@ -58,7 +60,7 @@ Run the **ahfctl applyupdate** command to update metadata and framework files fr
     Data files updated to 20220602 from 20220516
     ```
 
-3. To query the metadata updates applied:
+3. To query all the metadata and framework updates applied:
 
     ```
     <copy>
@@ -76,6 +78,8 @@ Run the **ahfctl applyupdate** command to update metadata and framework files fr
 
 Run the **ahfctl rollbackupdate** command with the **-updateid** option to rollback the updates with a specific update ID. If you do not specify the update ID, then AHF rolls back to the previous state by default.
 
+>**Note:** All the backup directories used for applying updates will also be deleted as part of rollback.
+
 1. To rollback the metadata and framework updates:
 
     ```
@@ -92,6 +96,8 @@ Run the **ahfctl rollbackupdate** command with the **-updateid** option to rollb
 ## Task 3: Cleanup AHF metadata backup directories
 
 Run the **ahfctl deleteupdatebackup** command to delete the backup directories used for AHF update.
+
+>**Note:** If you delete backup directories for a specific update ID, then you cannot rollback to that specific update ID.
 
 1. To view the list of backup directories in the patch/update directory:
 
