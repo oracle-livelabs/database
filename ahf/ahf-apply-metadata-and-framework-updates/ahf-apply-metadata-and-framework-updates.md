@@ -16,10 +16,8 @@ In this lab, you will:
 
 ### Prerequisites
 
-This lab assumes you have:
+* You must have installed AHF version 22.1.1 to apply AHF framework and metadata updates.
 * AHF install user privileges to run the **applyupdate**, **queryupdate**, **rollbackupdate**, and **deleteupdatebackup** commands.
-
->**Note:** You must have installed 22.1.1 to apply the AHF framework and metadata updates.
 
 ## Task 1: Apply AHF metadata and framework updates
 

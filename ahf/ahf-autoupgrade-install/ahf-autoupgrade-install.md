@@ -15,7 +15,6 @@ In this lab, you will:
 
 ### Prerequisites
 
-This lab assumes you have:
 * Oracle recommends installing AHF as the **root** user. For this workshop, run the **sudo su** command to gain **root** access.
 * Perl version 5.10 or later installed.
 
