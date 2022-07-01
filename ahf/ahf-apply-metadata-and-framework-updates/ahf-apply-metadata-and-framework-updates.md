@@ -59,7 +59,7 @@ Run the **ahfctl queryupdate** command to check if an update was applied. To get
     Updated file /opt/oracle.ahf/orachk/messages/check_messages.json
     Data files updated to 20220602 from 20220516
     ```
-    >**Note:** You cannot apply framework updates because **ahf\_33687033.zip** is not included in this workshop. The following example is provided solely for informational purposes.
+    >**Note:** You cannot apply framework updates because framework update zip files are not included in this workshop. The following example is provided solely for informational purposes.
 
     To apply framework update:
 
@@ -130,7 +130,7 @@ Run the **ahfctl deleteupdatebackup** command to delete the backup directories u
 
 >**Note:**
 - If you delete backup directories for a specific update ID, then you cannot rollback to that specific update ID.
-- Repeat [Task 1: Apply AHF metadata and framework updates](#Task1:ApplyAHFmetadataandframeworkupdates) if you have performed [Task 2: Rollback AHF metadata and framework and updates](#Task2:RollbackAHFmetadataandframeworkandupdates).
+- Repeat [Task 1: Apply AHF metadata and framework updates](#Task1:ApplyAHFmetadataandframeworkupdates) if you have performed [Task 2: Rollback AHF metadata and framework and updates](#Task2:RollbackAHFmetadataandframeworkandupdates), and then proceed with the following steps.
 
 1. To view the list of backup directories in the patch/update directory:
 

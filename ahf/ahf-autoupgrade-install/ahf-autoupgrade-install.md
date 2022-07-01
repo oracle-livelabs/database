@@ -77,15 +77,7 @@ If Oracle Autonomous Health Framework is already installed, then reinstalling pe
     inflating: /tmp/ahf22.1.0/oracle-tfa.pub
     ```
 
-3. Verify that the **umask** command displays a value of **22**, **022**, or **0022**.
-
-    ```
-    <copy>umask
-    0022
-    </copy>
-    ```
-
-4. Run the **ahf_setup** script.
+3. Run the **ahf_setup** script.
 
     ```
     <copy>/tmp/ahf22.1.0/ahf_setup</copy>
@@ -259,6 +251,7 @@ Setting the value of the SELINUX directive in the configuration file persists ac
 
 >**Note:**
 * SELinux is already setup in **Enforcing** mode. DO NOT change the mode and just proceed further with installing AHF.
+* If you have performed [Task 4: Install AHF on Linux or UNIX as non-root user in non-daemon mode](#Task4:InstallAHFonLinuxorUNIXasnonrootuserinnondaemonmode), first uninstall AHF, and then proceed with the following steps.
 * Install AHF as the **root** user.
 
 1. To switch to **root** user:
