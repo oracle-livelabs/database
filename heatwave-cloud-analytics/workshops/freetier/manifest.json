@@ -1,0 +1,70 @@
+{
+    "workshoptitle": "Cloud-native analytics using Open-source tools with MySQL HeatWave",
+    "help": "livelabs-help-**enterarea**_us@oracle.com",
+    "tutorials": [{
+            "title": "Introduction",
+            "description": "Building cloud native solution using popular open-source data engineering tools such as Superset, Grafana and Zeppelin with MySQL HeatWave",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+            "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/cloud-login/cloud-login.md"
+        },
+        {
+            "title": "Lab 1: Create Oracle Kubernetes Engine and MySQL HeatWave",
+            "description": "Create Oracle Kubernetes Engine and MySQL HeatWave using OCI Resource Manager",
+            "filename": "../../oke/oke.md"
+        },
+        {
+            "title": "Lab 2: Load data into MySQL HeatWave",
+            "description": "Use mysql shell to load airportdb data set to MySQL HeatWave cluster",
+            "filename": "../../data-load/data-load.md"
+        },
+        {
+            "title": "Lab 3: Enable MySQL HeatWave cluster",
+            "description": "Enable MySQL HeatWave cluster",
+            "filename": "../../enable-heatwave-cluster/enable-heatwave-cluster.md"
+        },
+        {
+            "title": "Lab 4: Deploy ingress-controller",
+            "description": "Deploy ingress controller to OCI Kubernetes",
+            "filename": "../../ingress-controller/ingress-controller.md"
+        },
+        {
+            "title": "Lab 5: Deploy Grafana dashboard",
+            "description": "Deploy Grafana Dashboard for MySQL to OCI Kubernetes",
+            "filename": "../../grafana/grafana.md"
+        },
+        {
+            "title": "Lab 6: Deploy Superset dashboard",
+            "description": "Build analytics dashboard with Superset on MySQL HeatWave",
+            "filename": "../../superset/superset.md"
+        },
+        {
+            "title": "Lab 7: Deploy Redash dashboard",
+            "description": "Create dashborad with Redash on MySQL HeatWave",
+            "filename": "../../redash/redash.md"
+        },
+        {
+            "title": "Lab 8: Deploy Jupyter notebook",
+            "description": "Analyze data with Jupyter on MySQL HeatWave",
+            "filename": "../../jupyter/jupyter.md"
+        },
+        {
+            "title": "Lab 9: Deploy Zeppelin notebook",
+            "description": "Build interactive analytics notebook with Zeppelin on MySQL HeatWave",
+            "filename": "../../zeppelin/zeppelin.md"
+        },
+        {
+            "title": "[OPTIONAL] Lab 10: Deploy phpMyAdmin",
+            "description": "Manage MySQL with phpMyAdmin",
+            "filename": "../../phpmyadmin/phpmyadmin.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}
