@@ -49,8 +49,6 @@ In this lab, you will:
 
 To obtain the fullest capabilities of Oracle Autonomous Health Framework (AHF), install it as **root**.
 
-Oracle Autonomous Health Framework maintains Access Control Lists (ACLs) to determine which users are allowed access. By default, the **Grid home** owner and **Oracle home** owners have access to their respective diagnostics. No other users can perform diagnostic collections.
-
 If Oracle Autonomous Health Framework is already installed, then reinstalling performs an upgrade to the existing location.
 
 1. Switch to **root** user.
