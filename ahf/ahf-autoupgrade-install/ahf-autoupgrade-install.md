@@ -182,7 +182,7 @@ Install Oracle Autonomous Health Framework as a non-root user, for example, **op
 
 >**Note:**
 - Perl version 5.10 or later is required to install Oracle Autonomous Health Framework.
-- You cannot perform the cluster-wide installation as a non-root user.
+- You cannot perform cluster-wide installation as a non-root user.
 
 Oracle Autonomous Health Framework has reduced capabilities when you install it as a non-root user in non-daemon mode. Therefore, you cannot complete the following tasks:
 - Automate diagnostic collections
@@ -190,7 +190,7 @@ Oracle Autonomous Health Framework has reduced capabilities when you install it 
 - Collect files that are not readable by the Oracle Home owner, for example, **/var/log/messages**, or certain Oracle Grid Infrastructure logs
 
 1. If you are logged in as **root**, then log out by running the **exit** command at the command prompt.
-2. To install as the **Oracle home** owner (**opc** user), use the **–ahf_loc** option, and optionally specify the **-notfasetup** option to prevent running any of the Oracle Trace File Analyzer processes.
+2. To install as **Oracle home** owner (**opc** user), use the **–ahf_loc** option, and optionally specify the **-notfasetup** option to prevent running any of the Oracle Trace File Analyzer processes.
 
     ```
     <copy>
@@ -214,7 +214,7 @@ Oracle Autonomous Health Framework has reduced capabilities when you install it 
     Moving /tmp/ahf_install_221000_540223_2022_06_06-20_36_32.log to /ahf/oracle.ahf/data/ahf2/diag/ahf/
     ```
 
-    The installer script will throw an error if you install AHF as the **root** user.
+    The installer script will throw an error as follows if you install AHF as the **root** user.
 
     ```
     [ERROR] : AHF-00014: AHF Location /ahf/oracle.ahf is not owned by root in directory hierarchy
