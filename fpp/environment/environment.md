@@ -44,24 +44,24 @@ To create your LiveLabs reservation, you used a ssh key that you created on your
 2.  Under **List Scope**, verify that you select the **same compartment** that you received in the reservation confirmation. 
 3.  To start the Oracle Cloud Shell, click the Cloud Shell icon at the top right of the page. *Note: Ensure before you click the console you have selected your assigned compartment or you will get an error.*
 
-      ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/cloudshellopen.png " ")
+      ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/cloudshellopen.png " ")
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/cloudshellsetup.png " ")
+    ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/cloudshellsetup.png " ")
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/cloudshell.png " ")
+    ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/cloudshell.png " ")
 
 2.  Click on the Cloud Shell hamburger icon and select **Upload** to upload your private key
    
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/upload-key.png " ")
+    ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key.png " ")
 
 3.  To connect to the compute instance that was created for you, you will need to load your private key.  This is the key that does *not* have a .pub file at the end.  Locate that file on your machine and click **Upload** to process it.
    
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/upload-key-select.png " ")
+    ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key-select.png " ")
 
 4. Be patient while the key file uploads to your Cloud Shell directory
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/upload-key-select-2.png " ")
+    ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key-select-2.png " ")
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/upload-key-select-3.png " ")
+    ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key-select-3.png " ")
 
 5. Once finished run the command below to check to see if your ssh key was uploaded.  Move it into your .ssh directory
 
@@ -77,7 +77,7 @@ To create your LiveLabs reservation, you used a ssh key that you created on your
     cd ~
     ````
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/upload-key-finished.png " ")
+    ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key-finished.png " ")
 </if>
 ## Task 1: Connect to the FPP Server via SSH
 1. Connect to the FPP Server via SSH using the user `opc` and the private key that you have created during the LiveLab setup.

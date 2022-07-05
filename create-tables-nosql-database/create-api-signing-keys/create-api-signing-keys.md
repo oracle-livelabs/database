@@ -31,7 +31,7 @@ Any software client you use to connect to Oracle Cloud Infrastructure must be co
 
 2. Click the **Navigation Menu** in the upper left, navigate to **Governance & Administration**, and select **Tenancy Details**.
 
-	![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/admin-details.png " ")
+	![](https://oracle-livelabs.github.io/common/images/console/admin-details.png " ")
 
 3. The Tenancy Details page shows information about your cloud account. Copy the Tenancy OCID by clicking on the **Copy** link next to it. Save the value in your note file.
 
