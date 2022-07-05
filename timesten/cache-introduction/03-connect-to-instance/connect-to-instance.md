@@ -84,10 +84,13 @@ Copy/paste the key into a file on your client computer, or import into your SSH 
 
 Assuming that the SSH private key is **~/.ssh/id_livelabs** and the public IP address of the workshop compute instance is **123.123.123.123** then you can connect using:
 
-**ssh -i ~/.ssh/id_livelabs oracle@123.123.123.123**
+```
+<copy>
+ssh -i ~/.ssh/id_livelabs oracle@123.123.123.123
+</copy>
+```
 
 ```
-$ ssh -i ~/.ssh/id_livelabs oracle@123.123.123.123                                                      11:55:17
 The authenticity of host '123.123.123.123 (123.123.123.123)' can't be established.
 ED25519 key fingerprint is SHA256:bm2wv3HgyBIhIRov6+EtId10rQHyq1LXpXglQMpqhqA.
 This key is not known by any other names

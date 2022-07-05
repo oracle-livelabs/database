@@ -36,11 +36,13 @@ If you do not already have an active terminal session, connect to the OCI comput
 
 Use ttIsql to connect to the cache as the APPUSER user:
 
-**ttIsql "DSN=sampledb;UID=appuser;PWD=appuser;OraclePWD=appuser"**
+```
+<copy>
+ttIsql "DSN=sampledb;UID=appuser;PWD=appuser;OraclePWD=appuser"
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ttIsql "DSN=sampledb;UID=appuser;PWD=appuser;OraclePWD=appuser"
-
 Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
 Type ? or "help" for help, type "exit" to quit ttIsql.
 
@@ -51,52 +53,38 @@ Command>
 ```
 Create a dynamic readonly cache group encompassing the **PARENT** and **CHILD** tables, which are related through a foreign key:
 
-**CREATE DYNAMIC READONLY CACHE GROUP appuser.cg\_parent\_child 
+```
+<copy>
+CREATE DYNAMIC READONLY CACHE GROUP appuser.cg_parent_child 
 AUTOREFRESH MODE INCREMENTAL INTERVAL 2 SECONDS 
 STATE ON 
 FROM 
 parent 
-( parent\_id          NUMBER(8) NOT NULL
-, parent\_c1          VARCHAR2(20 BYTE)
-, PRIMARY KEY (parent\_id)
+( parent_id          NUMBER(8) NOT NULL
+, parent_c1          VARCHAR2(20 BYTE)
+, PRIMARY KEY (parent_id)
 ),
 child 
-( child\_id           NUMBER(8) NOT NULL
-, parent\_id          NUMBER(8) NOT NULL
-, child\_c1           VARCHAR2(20 BYTE)
-, PRIMARY KEY (child\_id)
-, FOREIGN KEY (parent\_id)
-  REFERENCES appuser.parent (parent\_id)
+( child_id           NUMBER(8) NOT NULL
+, parent_id          NUMBER(8) NOT NULL
+, child_c1           VARCHAR2(20 BYTE)
+, PRIMARY KEY (child_id)
+, FOREIGN KEY (parent_id)
+  REFERENCES appuser.parent (parent_id)
 ) 
-AGING LRU ON;**
-
-```
-Command> CREATE DYNAMIC READONLY CACHE GROUP appuser.cg_parent_child 
-       > AUTOREFRESH MODE INCREMENTAL INTERVAL 2 SECONDS 
-       > FROM 
-       > parent 
-       > ( parent_id          NUMBER(8) NOT NULL
-       > , parent_c1          VARCHAR2(20 BYTE)
-       > , PRIMARY KEY (parent_id)
-       > ),
-       > child 
-       > ( child_id           NUMBER(8) NOT NULL
-       > , parent_id          NUMBER(8) NOT NULL
-       > , child_c1           VARCHAR2(20 BYTE)
-       > , PRIMARY KEY (child_id)
-       > , FOREIGN KEY (parent_id)
-       >   REFERENCES appuser.parent (parent_id)
-       > ) 
-       > AGING LRU ON;
+AGING LRU ON;
+</copy>
 ```
 
 Display information about the cache group:
 
-**cachegroups cg\_parent\_child;**
+```
+<copy>
+cachegroups cg_parent_child;
+</copy>
+```
 
 ```
-Command> cachegroups cg_parent_child;
-
 Cache Group APPUSER.CG_PARENT_CHILD:
 
   Cache Group Type: Read Only (Dynamic)
@@ -114,7 +102,8 @@ Cache Group APPUSER.CG_PARENT_CHILD:
   Child Table: APPUSER.CHILD
   Table Type: Read Only
 ```
-Note that in this case the Autorefresh state is immediately set to on.
+
+Note that in this case the Autorefresh state is immediately set to _on_.
 
 ```
 Autorefresh State: On
@@ -124,17 +113,24 @@ This is because you do not need to perform an initial load for a dynamic cache g
 
 Check the state of the tables:
 
-**select count(\*) from appuser.parent;**
+```
+<count>
+select count(*) from appuser.parent;
+</copy>
+```
 
 ```
-Command> select count(*) from appuser.parent;
 < 0 >
 1 row found.
 ```
-**select count(\*) from appuser.child;**
 
 ```
-Command> select count(*) from appuser.child;
+<copy>
+select count(*) from appuser.child;
+</copy>
+```
+
+```
 < 0 >
 1 row found.
 ```
@@ -145,28 +141,37 @@ There is no data in the cached tables.
 
 First, run a query that references the root table's (PARENT table) primary key:
 
-**select \* from parent where parent\_id = 4;**
+```
+<copy>
+select * from parent where parent_id = 4;
+</copy>
+```
 
 ```
-Command> select * from parent where parent_id = 4;
 < 4, Parent row 4 >
 1 row found.
 ```
 
-Even though the table was empty, the query returns a result. Now examine the contents of both tables again:
-
-**select \* from parent;**
+Even though the table was empty, the query returns a result! Now examine the contents of both tables again:
 
 ```
-Command> select * from parent;
+<copy>
+select * from parent;
+</copy>
+```
+
+```
 < 4, Parent row 4 >
 1 row found.
 ```
 
-**select \* from child;**
+```
+<copy>
+select * from child;
+</copy>
+```
 
 ```
-Command> select * from child;
 < 4, 4, P4,C4 >
 < 5, 4, P4,C5 >
 < 6, 4, P4,C6 >
@@ -179,29 +184,38 @@ Now that these rows now exist in the cache they will satisfy future read request
 
 Let’s try something a little more sophisticated. Query a row in the CHILD table with a join back to the PARENT table:
 
-**select p.parent\_id, p.parent\_c1, c.child\_c1 from parent p, child c where c.child\_id = 2 and p.parent\_id = c.parent\_id;**
+```
+<copy>
+select p.parent_id, p.parent_c1, c.child_c1 from parent p, child c where c.child_id = 2 and p.parent_id = c.parent_id;
+</copy>
+```
 
 ```
-Command> select p.parent_id, p.parent_c1, c.child_c1 from parent p,
-       > child c where c.child_id = 2 and p.parent_id = c.parent_id;
 < 1, Parent row 1, P1,C2 >
 1 row found.
 ```
 
 Now check again to see the contents of both tables.
 
-**select \* from parent;**
+```
+<copy>
+select * from parent;
+</copy>
+```
 
 ```
-Command> select * from parent;
 < 1, Parent row 1 >
 < 4, Parent row 4 >
 2 rows found.
 ```
-**select \* from child;**
 
 ```
-Command> select * from child;
+<copy>
+select * from child;
+</copy>
+```
+
+```
 < 1, 1, P1,C1 >
 < 2, 1, P1,C2 >
 < 4, 4, P4,C4 >
@@ -214,10 +228,13 @@ Here you queried against a specific child_id value and joined back to the parent
 
 Disconnect from the cache.
 
-**quit**
+```
+<copy>
+quit
+</copy>
+```
 
 ```
-Command> quit;
 Rolling back active transaction...
 Disconnecting...
 Done.

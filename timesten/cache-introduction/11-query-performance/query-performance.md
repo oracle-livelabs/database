@@ -108,10 +108,13 @@ If you do not already have an active terminal session, connect to the OCI comput
 
 Examine the three queries that we will use for this exercise:
 
-**cat ~/queries/query_1.sql**
+```
+<copy>
+cat ~/queries/query_1.sql
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ cat ~/queries/query_1.sql
 SELECT
     c.customer_id,
     c.cust_first_name,
@@ -127,10 +130,14 @@ WHERE
     c.customer_id IN (104, 108, 144)
 ORDER BY 6;
 ```
-**cat ~queries/query_2.sql**
 
 ```
-[oracle@tthost1 livelab]$ cat ~queries/query_2.sql
+<copy>
+cat ~queries/query_2.sql
+</copy>
+```
+
+```
 SELECT
     o.order_id,
     oi.line_item_id,
@@ -150,10 +157,14 @@ SELECT
     (oi.product_id = pi.product_id)
  ORDER BY 1, 2;
 ```
-**cat ~queries/query_3.sql**
+
+```
+<copy>
+cat ~queries/query_3.sql
+</copy>
+```
 
 ``` 
-[oracle@tthost1 livelab]$ cat ~queries/query_3.sql
 SELECT
     i.product_id,
     i.warehouse_id,
@@ -175,10 +186,13 @@ There is also a file, **queries/query_all.sql**, that contains all three queries
 
 First run the queries against the Oracle database:
 
-**~/bin/timeQueries -oracle queries/query_all.sql**
+```
+<copy>
+~/bin/timeQueries -oracle queries/query_all.sql
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ~/bin/timeQueries -oracle queries/query_all.sql
 info: connected to 'orclpdb1' (Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production)
 info: running queries from file 'queries/query_all.sql'
 info: ========================================
@@ -249,10 +263,13 @@ info: disconnected from 'orclpdb1'
 
 Now run the queries against the TimesTen cache:
 
-**~/bin/timeQueries -timesten queries/query_all.sql**
+```
+<copy>
+~/bin/timeQueries -timesten queries/query_all.sql
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ~/bin/timeQueries -timesten queries/query_all.sql
 info: connected to 'sampledb' (Oracle TimesTen IMDB version 22.1.1.3.0)
 info: running queries from file 'queries/query_all.sql'
 info: ========================================

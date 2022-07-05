@@ -147,10 +147,13 @@ If you do not already have an active terminal session, connect to the OCI comput
 
 Run the program against the Oracle database and note the results:
 
-**~/bin/runBenchmark -oracle**
+```
+<copy>
+~/bin/runBenchmark -oracle
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ~/bin/runBenchmark -oracle
 /tt/livelab/bin/tptbmOCI -nobuild -read 100 -key 1000 -proc 1 -user appuser -xact 1000000 -service orclpdb1
 
 Run 1000000 txns with 1 process: 100% read, 0% update, 0% insert, 0% delete
@@ -165,10 +168,13 @@ Transaction rate:    1171417.4 transactions/minute
 
 Run the program against the TimesTen cache and note the results:
 
-**~/bin/runBenchmark -timesten**
+```
+<copy>
+~/bin/runBenchmark -timesten
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ~/bin/runBenchmark -timesten
 /tt/livelab/bin/tptbmOCI -nobuild -read 100 -key 1000 -proc 1 -user appuser -xact 1000000 -service sampledb
 
 Run 1000000 txns with 1 process: 100% read, 0% update, 0% insert, 0% delete

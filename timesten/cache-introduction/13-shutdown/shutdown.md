@@ -25,10 +25,13 @@ If you do not already have an active terminal session, connect to the OCI comput
 
 Check the current status of the TimesTen database:
 
-**ttStatus**
+```
+<copy>
+ttStatus
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ttStatus
 TimesTen status report as of Mon Jun 13 13:33:24 2022
 
 Daemon pid 256 port 6624 instance ttinst
@@ -76,10 +79,13 @@ The database is active and is loaded in memory because the cache agent is connec
 
 Stop the cache agent:
 
-**ttAdmin -cacheStop sampledb**
+```
+<copy>
+ttAdmin -cacheStop sampledb
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ttAdmin -cacheStop sampledb
 RAM Residence Policy            : inUse
 Replication Agent Policy        : manual
 Replication Manually Started    : False
@@ -90,7 +96,11 @@ Database State                  : Open
 
 Check the status again:
 
-**ttStatus**
+```
+<copy>
+ttStatus
+</copy>
+```
 
 ```
 TimesTen status report as of Mon Jun 13 13:35:38 2022
@@ -118,23 +128,29 @@ The database has been unloaded from memory and is now shut down.
 
 Stop the TimesTen instance (i.e. stop the main daemon):
 
-**ttDaemonAdmin -stop**
+```
+<copy>
+ttDaemonAdmin -stop
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ttDaemonAdmin -stop
 TimesTen Daemon (PID: 190, port: 6624) stopped.
 ```
+
 ## Task 4: Finally
 
 Log out of the TimesTen host:
 
-**exit**
+```
+<copy>
+exit
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ exit
 logout
 Connection to tthost1 closed.
-[oracle@ttlivelabvm:~]$
 ```
 
 Congratulations, *you have completed the workshop*.

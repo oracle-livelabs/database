@@ -30,16 +30,21 @@ Connect to the OCI compute instance and open a terminal session, as the user **o
 
 Change to the **lab** directory:
 
-**cd ~/lab**
-
-`[oracle@ttlivelabvm ~] cd ~/lab`
+```
+<copy>
+cd ~/lab
+</copy>
+```
 
 Initialize the workshop:
 
-**labSetup.sh cache-intro**
+```
+<copy>
+labSetup.sh cache-intro
+</copy>
+```
 
 ```
-[oracle@ttlivelabvm ~] labSetup.sh cache-intro
 info: setting up workshop 'cache-intro', this will take several minutes...
 info: starting hosts: OK
 info: host initialization: OK

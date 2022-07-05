@@ -31,11 +31,13 @@ Connect to the OCI compute instance again (if required) and open a second termin
 
 In your _primary_ SSH session, which is currently logged into the TimesTen host, connect to the TimesTen cache as the OE schema user"
 
-**ttIsql "DSN=sampledb;uid=oe;pwd=oe;OraclePWD=oe"**
+```
+<copy>
+ttIsql "DSN=sampledb;uid=oe;pwd=oe;OraclePWD=oe"
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ttIsql "DSN=sampledb;uid=oe;pwd=oe;OraclePWD=oe"
-
 Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
 Type ? or "help" for help, type "exit" to quit ttIsql.
 
@@ -47,11 +49,13 @@ Command>
 
 In your _secondary_ SSH session, which is already logged into the TimesTen host (tthost1), connect to the Oracle database as the OE schema user:
 
-**sqlplus oe/oe@orclpdb1**
+```
+<copy>
+sqlplus oe/oe@orclpdb1
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ sqlplus oe/oe@orclpdb1
-
 SQL*Plus: Release 19.0.0.0.0 - Production on Wed Jun 15 14:39:50 2022
 Version 19.14.0.0.0
 
@@ -68,10 +72,13 @@ SQL>
 
 In your _primary_ SSH session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
 
-**SELECT * FROM promotions ORDER BY promo\_id;**
+```
+<copy>
+SELECT * FROM promotions ORDER BY promo_id;
+</copy>
+```
 
 ```
-Command> SELECT * FROM promotions ORDER BY promo_id;
 < 1, everyday low price >
 < 2, blowout sale >
 2 rows found.
@@ -79,32 +86,46 @@ Command> SELECT * FROM promotions ORDER BY promo_id;
 
 In your _secondary_ SSH session (**sqlplus**), check the rows in the OE.PROMOTIONS table in Oracle, then insert a new row and commit:
 
-**SELECT * FROM promotions ORDER BY promo\_id;**
+```
+<copy>
+SELECT * FROM promotions ORDER BY promo_id;
+</copy>
+```
 
 ```
-SQL> SELECT * FROM promotions ORDER BY promo_id;
-
   PROMO_ID PROMO_NAME
 ---------- --------------------
 	 1 everyday low price
 	 2 blowout sale
+```
 
-SQL> INSERT INTO promotions VALUES ( 3, 'christmas sale' );
+```
+<copy>
+INSERT INTO promotions VALUES ( 3, 'christmas sale' );
+</copy>
+```
 
+```
 1 row created.
 ```
-**commit;**
 
 ```
-SQL> commit;
+<copy>
+commit;
+</copy>
+```
 
+```
 Commit complete.
 ```
-**SELECT * FROM promotions ORDER BY promo\_id;**
 
 ```
-SQL> SELECT * FROM promotions ORDER BY promo_id;
+<copy>
+SELECT * FROM promotions ORDER BY promo_id;
+</copy>
+```
 
+```
   PROMO_ID PROMO_NAME
 ---------- --------------------
 	 1 everyday low price
@@ -114,10 +135,13 @@ SQL> SELECT * FROM promotions ORDER BY promo_id;
 
 Wait for 2 seconds (the cache refresh interval) and then in your _primary_ SSH session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
 
-**SELECT * FROM promotions ORDER BY promo\_id;**
+```
+<copy>
+SELECT * FROM promotions ORDER BY promo_id;
+</copy>
+```
 
 ```
-Command> SELECT * FROM promotions ORDER BY promo_id;
 < 1, everyday low price >
 < 2, blowout sale >
 < 3, christmas sale >
@@ -130,25 +154,33 @@ The inserted row has been captured and propagated to the cached table in TimesTe
 
 In your _secondary_ SSH session (**sqlplus**), update a row in the OE.PROMOTIONS table in Oracle and commit:
 
-**UPDATE promotions SET promo\_name = 'easter sale' WHERE promo\_id = 3;**
+```
+<copy>
+UPDATE promotions SET promo_name = 'easter sale' WHERE promo_id = 3;
+</copy>
+```
 
 ```
-SQL> UPDATE promotions SET promo_name = 'easter sale' WHERE promo_id = 3;
-
 1 row updated.
 ```
-**commit;**
 
 ```
-SQL> commit;
+<copy>
+commit;
+</copy>
+```
 
+```
 Commit complete.
 ```
-**SELECT * FROM promotions ORDER BY promo\_id;**
 
 ```
-SQL> SELECT * FROM promotions ORDER BY promo_id;
+<copy>
+SELECT * FROM promotions ORDER BY promo_id;
+</copy>
+```
 
+```
   PROMO_ID PROMO_NAME
 ---------- --------------------
 	 1 everyday low price
@@ -158,10 +190,13 @@ SQL> SELECT * FROM promotions ORDER BY promo_id;
 
 Wait for 2 seconds (the cache refresh interval) and then in your _primary_ SSH session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
 
-**SELECT * FROM promotions ORDER BY promo\_id;**
+```
+<copy>
+SELECT * FROM promotions ORDER BY promo_id;
+</copy>
+```
 
 ```
-Command> SELECT * FROM promotions ORDER BY promo_id;
 < 1, everyday low price >
 < 2, blowout sale >
 < 3, easter sale >
@@ -174,25 +209,33 @@ The update to the row has been captured and propagated to the cached table in Ti
 
 In your _secondary_ SSH session (**sqlplus**), delete a row in the OE.PROMOTIONS table in Oracle and commit:
 
-**DELETE FROM promotions WHERE promo\_id =  3;**
+```
+<copy>
+DELETE FROM promotions WHERE promo_id =  3;
+</copy>
+```
 
 ```
-SQL> DELETE FROM promotions WHERE promo_id =  3;
-
 1 row deleted.
 ```
-**commit;**
 
 ```
-SQL> commit;
+<copy>
+commit;
+</copy>
+```
 
+```
 Commit complete.
 ```
-**SELECT * FROM promotions ORDER BY promo\_id;**
 
 ```
-SQL> SELECT * FROM promotions ORDER BY promo_id;
+<copy>
+SELECT * FROM promotions ORDER BY promo_id;
+</copy>
+```
 
+```
   PROMO_ID PROMO_NAME
 ---------- --------------------
 	 1 everyday low price
@@ -201,10 +244,13 @@ SQL> SELECT * FROM promotions ORDER BY promo_id;
 
 Wait for 2 seconds (the cache refresh interval) and then in your _primary_ SSH session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
 
-**SELECT * FROM promotions ORDER BY promo\_id;**
+```
+<copy>
+SELECT * FROM promotions ORDER BY promo_id;
+</copy>
+```
 
 ```
-Command> SELECT * FROM promotions ORDER BY promo_id;
 < 1, everyday low price >
 < 2, blowout sale >
 2 rows found.
@@ -214,30 +260,38 @@ The row deletion has been captured and propagated to the cached table in TimesTe
 
 In your _secondary_ SSH session (**sqlplus**), exit from SQL*Plus, disconnect from the TimesTen host and close the terminal session:
 
-**quit;**
+```
+<copy>
+quit;
+</copy>
+```
 
 ```
-SQL> quit;
 Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
 Version 19.3.0.0.0
 ```
-**exit**
 
 ```
-[oracle@tthost1 livelab]$ exit
+<copy>
+exit
+</copy>
 ```
-**exit**
 
 ```
-[oracle@ttlivelabvm lab]$ exit
+<copy>
+exit
+</copy>
 ```
 
 In your _primary_ SSH session (**ttIsql**), exit from ttIsql:
 
-**quit**
+```
+<copy>
+quit
+</copy>
+```
 
 ```
-Command> quit;
 Disconnecting...
 Done.
 ```

@@ -36,10 +36,13 @@ One of the most frequently used TimesTen utilities is the **ttIsql** utility. Th
 
 Connect to the **sampledb** DSN using **ttIsql**:
 
-**ttIsql sampledb**
+```
+<copy>
+ttIsql sampledb
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ttIsql sampledb
 
 Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
 Type ? or "help" for help, type "exit" to quit ttIsql.
@@ -50,51 +53,63 @@ Connection successful: DSN=sampledb;UID=oracle;DataStore=/tt/db/sampledb;Databas
 ```
 Set the Oracle cache administrator username and password (these are stored, encrypted, in the TimesTen database):
 
-**call ttCacheUidPwdSet('ttcacheadm','ttcacheadm');**
+```
+<copy>
+call ttCacheUidPwdSet('ttcacheadm','ttcacheadm');
+</copy>
+```
 
-```
-Command> call ttCacheUidPwdSet('ttcacheadm','ttcacheadm');
-```
 Start the TimesTen Cache Agent for the cache database:
 
-**call ttCacheStart;**
-
 ```
-Command> call ttCacheStart;
+<copy>
+call ttCacheStart;
+</copy>
 ```
 
 Create application users for the **OE** and **APPUSER** schemas and grant them some necessary privileges:
 
-**CREATE USER oe IDENTIFIED BY "oe";**
+```
+<copy>
+CREATE USER oe IDENTIFIED BY "oe";
+</copy>
+```
 
 ```
-Command> CREATE USER oe IDENTIFIED BY "oe";
-
 User created.
 ```
-**GRANT CREATE SESSION, CREATE CACHE GROUP, CREATE TABLE TO oe;**
 
 ```
-Command> GRANT CREATE SESSION, CREATE CACHE GROUP, CREATE TABLE TO oe;
+<copy>
+GRANT CREATE SESSION, CREATE CACHE GROUP, CREATE TABLE TO oe;
+</copy>
 ```
-**CREATE USER appuser IDENTIFIED BY "appuser";**
 
 ```
-Command> CREATE USER appuser IDENTIFIED BY "appuser";
+<copy>
+CREATE USER appuser IDENTIFIED BY "appuser";
+</copy>
+```
 
+```
 User created.
 ```
-**GRANT CREATE SESSION, CREATE CACHE GROUP, CREATE TABLE TO appuser;**
 
 ```
-Command> GRANT CREATE SESSION, CREATE CACHE GROUP, CREATE TABLE TO appuser;
+<copy>
+GRANT CREATE SESSION, CREATE CACHE GROUP, CREATE TABLE TO appuser;
+</copy>
 ```
+
 Exit from ttIsql:
 
-**quit**
+```
+<copy>
+quit
+</copy>
+```
 
 ```
-Command> quit;
 Disconnecting...
 Done.
 ```
@@ -113,11 +128,13 @@ Create the (multiple) cache groups for the **OE** schema tables. You will use a 
 
 Use **ttIsql** to connect to the TimesTen cache as the **OE** user:
 
-**ttIsql "DSN=sampledb;UID=oe;PWD=oe;OraclePWD=oe"**
+```
+<copy>
+ttIsql "DSN=sampledb;UID=oe;PWD=oe;OraclePWD=oe"
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ttIsql "DSN=sampledb;UID=oe;PWD=oe;OraclePWD=oe"
-
 Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
 Type ? or "help" for help, type "exit" to quit ttIsql.
 
@@ -128,10 +145,13 @@ Command>
 ```
 Run the script to create the OE cache groups:
 
-**@scripts/createCacheGroupsOE;**
+```
+<copy>
+@scripts/createCacheGroupsOE;
+</copy>
+```
 
 ```
-Command> @scripts/createCacheGroupsOE;
 --
 -- Put 'promotions' in its own cache group as it has
 -- no child tables.
@@ -160,11 +180,13 @@ CREATE INDEX oe.order_items_fk
 ```
 Display the cachegroups owned by the OE user:
 
-**cachegroups oe.%;**
+```
+<copy>
+cachegroups oe.%;
+</copy>
+```
 
 ```
-Command> cachegroups oe.%;
-
 Cache Group OE.CG_CUST_ORDERS:
 
   Cache Group Type: Read Only
@@ -225,10 +247,13 @@ Cache Group OE.CG_PROMOTIONS:
 
 Display the tables owned by the OE user. These are the tables that make up the cache groups:
 
-**tables;**
+```
+<copy>
+tables;
+</copy>
+```
 
 ```
-Command> tables;
   OE.CUSTOMERS
   OE.INVENTORIES
   OE.ORDERS
@@ -238,34 +263,49 @@ Command> tables;
   OE.PROMOTIONS
 7 tables found.
 ```
-**select count(\*) from customers;**
 
 ```
-Command> select count(*) from customers;
+<copy>
+select count(*) from customers;
+</copy>
+```
+
+```
 < 0 >
 1 row found.
 ```
-**select count(\*) from product\_information;**
 
 ```
-Command> select count(*) from product_information;
+<copy>
+select count(*) from product_information;
+</copy>
+```
+
+```
 < 0 >
 1 row found.
 ```
-**select count(\*) from promotions;**
 
 ```
-Command> select count(*) from promotions;
+<copy>
+select count(*) from promotions;
+</copy>
+```
+
+```
 < 0 >
 1 row found.
 ```
 
 Exit from ttIsql:
 
-**quit**
+```
+<copy>
+quit
+</copy>
+```
 
 ```
-Command> quit
 Disconnecting...
 Done.
 ```
@@ -274,11 +314,13 @@ The user OE has 3 cache groups, some containing single tables and others contain
 
 Create the cache group for the **APPUSER.VPN\_USERS** table. This time you will type, or copy/paste, the individual commands:
 
-**ttIsql "DSN=sampledb;UID=appuser;PWD=appuser;OraclePWD=appuser"**
+```
+<copy>
+ttIsql "DSN=sampledb;UID=appuser;PWD=appuser;OraclePWD=appuser"
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ttIsql "DSN=sampledb;UID=appuser;PWD=appuser;OraclePWD=appuser"
-
 Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
 Type ? or "help" for help, type "exit" to quit ttIsql.
 
@@ -287,54 +329,53 @@ Connection successful: DSN=sampledb;UID=appuser;DataStore=/tt/db/sampledb;Databa
 (Default setting AutoCommit=1)
 Command>
 ```
-**cachegroups appuser.%;**
 
 ```
-Command> cachegroups appuser.%;
+<copy>
+cachegroups appuser.%;
+</copy>
+```
 
+```
 0 cache groups found.
 ```
-**tables;**
 
 ```
-Command> tables;
+<copy>
+tables;
+</copy>
+```
+
+```
 0 tables found.
 ```
-**CREATE READONLY CACHE GROUP appuser.cg\_vpn\_users 
+
+```
+<copy>
+CREATE READONLY CACHE GROUP appuser.cg_vpn_users 
 AUTOREFRESH MODE INCREMENTAL INTERVAL 2 SECONDS 
 STATE PAUSED 
 FROM 
 vpn_users 
-( vpn\_id             NUMBER(5) NOT NULL
-, vpn\_nb             NUMBER(5) NOT NULL
-, directory\_nb       CHAR(10 BYTE) NOT NULL
-, last\_calling\_party CHAR(10 BYTE) NOT NULL
+( vpn_id             NUMBER(5) NOT NULL
+, vpn_nb             NUMBER(5) NOT NULL
+, directory_nb       CHAR(10 BYTE) NOT NULL
+, last_calling_party CHAR(10 BYTE) NOT NULL
 , descr              CHAR(100 BYTE) NOT NULL
-, PRIMARY KEY (vpn\_id, vpn\_nb)
-);**
-
-```
-Command> CREATE READONLY CACHE GROUP appuser.cg_vpn_users 
-       > AUTOREFRESH MODE INCREMENTAL INTERVAL 2 SECONDS 
-       > STATE PAUSED 
-       > FROM 
-       > vpn_users 
-       > ( vpn_id             NUMBER(5) NOT NULL
-       > , vpn_nb             NUMBER(5) NOT NULL
-       > , directory_nb       CHAR(10 BYTE) NOT NULL
-       > , last_calling_party CHAR(10 BYTE) NOT NULL
-       > , descr              CHAR(100 BYTE) NOT NULL
-       > , PRIMARY KEY (vpn_id, vpn_nb)
-       > );
+, PRIMARY KEY (vpn_id, vpn_nb)
+);
+</copy>
 ```
 
 Display the cachegroup and table:
 
-**cachegroups appuser.%;**
+```
+<copy>
+cachegroups appuser.%;
+</copy>
+```
 
 ```
-Command> cachegroups appuser.%;
-
 Cache Group APPUSER.CG_VPN_USERS:
 
   Cache Group Type: Read Only
@@ -350,26 +391,38 @@ Cache Group APPUSER.CG_VPN_USERS:
 
 1 cache group found.
 ```
-**tables;**
 
 ```
-Command> tables;
+<copy>
+tables;
+</copy>
+```
+
+```
   APPUSER.VPN_USERS
 1 table found.
 ```
-**select count(\*) from vpn\_users;**
 
 ```
-Command> select count(*) from vpn_users;
+<copy>
+select count(*) from vpn_users;
+</copy>
+```
+
+```
 < 0 >
 1 row found.
 ```
+
 Exit from ttIsql:
 
-**quit**
+```
+<copy>
+quit
+</copy>
+```
 
 ```
-Command> quit
 Disconnecting...
 Done.
 ```
