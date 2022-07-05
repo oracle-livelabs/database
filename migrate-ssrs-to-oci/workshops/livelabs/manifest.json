@@ -1,0 +1,41 @@
+{
+  "workshoptitle": "Migrate Microsoft SQL Server Reporting Services to OCI in Compute Instance",
+  "help": "livelabs-help-oci_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction about the Workshop and Labs",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Details about How to Register for Free Tier Account on OCI",
+      "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/cloud-login/cloud-login.md"
+    },
+    {
+      "title": "Lab 1: Create the Windows Bastion host in Public Subnet",
+      "description": "Step by step instruction on how deploy the Windows Bastion host in Public Subnet",
+      "filename": "../../setup-the-bastion-host-in-compute-instance/setup-the-bastion-host-in-compute-instance.md"
+    },
+    {
+      "title": "Lab 2: Provision of the Compute Instance from Market Place Image for SQL Server 2019",
+      "description": "Step by step instruction on how to install SQL Server from OCI MarketPlace image",
+      "filename": "../../installation-of-microsoft-sql-server-2019/installation-of-microsoft-sql-server-2019.md"
+    },
+    {
+      "title": "Lab 3: Install Microsoft SQL Server Reporting Services (SSRS)",
+      "description": "Step by step instruction on how to install Microsoft SQL Server Reporting Services (SSRS) Databases in Compute Instance",
+      "filename": "../../install-ssrs/install-ssrs.md"
+    },
+    {
+      "title": "Lab 4: Migrate Microsoft SQL Server Reporting Services (SSRS) Databases in Compute Instance",
+      "description": "Step by step instruction on how Migrate Microsoft SQL Server Reporting Services (SSRS) Databases in Compute Instance",
+      "filename": "../../migrate-ssrs-databases/migrate-ssrs-databases.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-livelabs.md"
+  }
+  ]
+}
