@@ -1,5 +1,5 @@
 # TimesTen LiveLabs on GitHub - Welcome!
-[![](../../common/images/livelabs-banner-formarketplace.png)](https://bit.ly/golivelabs)
+[![](../../common/images/livelabs-banner-formarketplace.png)](https://developer.oracle.com/livelabs)
 
 Oracle TimesTen In-Memory Database (TimesTen) delivers real time application performance (low response time and high throughput) by changing the assumptions around where data resides at runtime. By managing data in memory, and optimizing data structures and access algorithms accordingly, database operations execute with maximum efficiency achieving dramatic gains in responsiveness and throughput.
 

@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: phpmyadmin
+  labels:
+    app: phpmyadmin
+spec:
+  containers:
+    - name: phpmyadmin
+      image: phpmyadmin/phpmyadmin
+      env:
+        - name: PMA_HOST
+          value: "MYSQL_HOST"
+        - name: PMA_PORT
+          value: "3306"
+      ports:
+        - containerPort: 80
+          name: phpmyadmin
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: phpmyadmin-svc
+  name: phpmyadmin-svc
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: phpmyadmin
