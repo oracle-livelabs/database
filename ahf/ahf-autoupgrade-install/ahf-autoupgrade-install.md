@@ -23,27 +23,30 @@ In this lab, you will:
 1. Click the LiveLabs URL.
 2. Click **Start**.
 3. Click **Run on LiveLabs**.
-4. Choose a date and time to run the workshop or you choose to start the workshop now.
-5. Select the **I consent to receive emails from LiveLabs for my reservation** checkbox.
-6. Click **Submit Reservation**.
+4. If prompted, then enter login credentials.
+5. Click **Start**.
+6. Click **Run on LiveLabs**.
+7. Choose a date and time to run the workshop or you choose to start the workshop now.
+8. Select the **I consent to receive emails from LiveLabs for my reservation** checkbox.
+9. Click **Submit Reservation**.
 
     **My Reservations** page is displayed with the status of your reservation. You will also receive an email detailing the status of your reservation. Once the setup is done, My Reservations page is displayed with the **Status**, and the links to **Launch Workshop**, view **Details**, and **Remove** the workshop. You will also receive an email announcing that your workshop is ready.
-7. Click **Launch Workshop**.
+10. Click **Launch Workshop**.
 
     You will be redirected to your workshop.
-8. Click **View Login info**.
+11. Click **View Login info**.
 
     **Reservation Information** dialog is displayed.
-9. Copy the Remote Desktop URL, open a browser, and paste the link in the address bar.
+12. Copy the **Remote Desktop URL**, open a browser, and paste the link in the address bar.
 
     (or)
 
     Click **Lauch Remote Desktop**.
-10. Click **Activities** at the upper-left corner, and then click the **Terminal** icon.
+13. Click **Activities** at the upper-left corner, and then click the **Terminal** icon.
 
     >**Note:** When you log in to the terminal, you will be logging in as the **opc** user.
 
-11. Click **Activities**, and then click the **LiveLabs** icon to view the technical content.
+14. Click **Activities**, and then click the **LiveLabs** icon to view the technical content.
 
 ## Task 2: Install AHF on Linux or UNIX as root user in daemon mode
 
@@ -85,9 +88,9 @@ If Oracle Autonomous Health Framework is already installed, then reinstalling pe
 
     ```
     AHF Installer for Platform Linux Architecture x86_64
-    AHF Installation Log : /tmp/ahf_install_221000_103911_2022_02_02-13_38_15.log
+    AHF Installation Log : /tmp/ahf_install_221000_12928_2022_07_06-13_24_29.log
     Starting Autonomous Health Framework (AHF) Installation
-    AHF Version: 22.1.0 Build Date: 202201302324
+    AHF Version: 22.1.0 Build Date: 202205292144
     Default AHF Location : /opt/oracle.ahf
     Do you want to install AHF at [/opt/oracle.ahf] ? [Y]|N : Y
     AHF Location : /opt/oracle.ahf
@@ -101,37 +104,37 @@ If Oracle Autonomous Health Framework is already installed, then reinstalling pe
     Discovering Nodes and Oracle Resources
     Successfully generated certificates.
     Starting TFA Services
-    Created symlink from /etc/systemd/system/multi-user.target.wants/oracle-tfa.service to /etc/systemd/system/oracle-tfa.service.
-    Created symlink from /etc/systemd/system/graphical.target.wants/oracle-tfa.service to /etc/systemd/system/oracle-tfa.service.
+    Created symlink /etc/systemd/system/multi-user.target.wants/oracle-tfa.service → /etc/systemd/system/oracle-tfa.service.
+    Created symlink /etc/systemd/system/graphical.target.wants/oracle-tfa.service → /etc/systemd/system/oracle-tfa.service.
 
-    .-------------------------------------------------------------------------------.
-    | Host     | Status of TFA | PID    | Port  | Version    | Build ID             |
-    +----------+---------------+--------+-------+------------+----------------------+
-    | den02mwa | RUNNING       | 105916 | 59452 | 22.1.0.0.0 | 22100020220130232427 |
-    '----------+---------------+--------+-------+------------+----------------------'
+    .------------------------------------------------------------------------------------------.
+    | Host                 | Status of TFA | PID   | Port  | Version    | Build ID             |
+    +----------------------+---------------+-------+-------+------------+----------------------+
+    | ll46863-instance-ahf | RUNNING       | 14895 | 22303 | 22.1.0.0.0 | 22100020220529214423 |
+    '----------------------+---------------+-------+-------+------------+----------------------'
 
     Running TFA Inventory...
+
     Adding default users to TFA Access list...
 
-    .------------------------------------------------------.
-    |             Summary of AHF Configuration             |
-    +-----------------+------------------------------------+
-    | Parameter       | Value                              |
-    +-----------------+------------------------------------+
-    | AHF Location    | /opt/oracle.ahf                    |
-    | TFA Location    | /opt/oracle.ahf/tfa                |
-    | Orachk Location | /opt/oracle.ahf/orachk             |
-    | Data Directory  | /opt/oracle.ahf/data               |
-    | Repository      | /opt/oracle.ahf/data/repository    |
-    | Diag Directory  | /opt/oracle.ahf/data/den02mwa/diag |
-    '-----------------+------------------------------------'
+    .------------------------------------------------------------------.
+    |                   Summary of AHF Configuration                   |
+    +-----------------+------------------------------------------------+
+    | Parameter       | Value                                          |
+    +-----------------+------------------------------------------------+
+    | AHF Location    | /opt/oracle.ahf                                |
+    | TFA Location    | /opt/oracle.ahf/tfa                            |
+    | Orachk Location | /opt/oracle.ahf/orachk                         |
+    | Data Directory  | /opt/oracle.ahf/data                           |
+    | Repository      | /opt/oracle.ahf/data/repository                |
+    | Diag Directory  | /opt/oracle.ahf/data/ll46863-instance-ahf/diag |
+    '-----------------+------------------------------------------------'
 
     Starting orachk scheduler from AHF ...
     AHF binaries are available in /opt/oracle.ahf/bin
     AHF is successfully installed
-
     Do you want AHF to store your My Oracle Support Credentials for Automatic Upload ? Y|[N] : N
-    Moving /tmp/ahf_install_221000_103911_2022_02_02-13_38_15.log to /opt/oracle.ahf/data/den02mwa/diag/ahf/
+    Moving /tmp/ahf_install_221000_12928_2022_07_06-13_24_29.log to /opt/oracle.ahf/data/ll46863-instance-ahf/diag/ahf/
     ```
 
 ## Task 3: Enable or disable Oracle ORAchk or Oracle EXAchk daemon to start automatically
@@ -152,7 +155,7 @@ The daemon restarts at 1 am every day to discover environment changes. The daemo
 
     ```
     Removing orachk cache discovery....
-    Successfully completed orachk cache discovery removal.
+    No orachk cache discovery found.
     Successfully copied Daemon Store to Remote Nodes
     Removed orachk from inittab
     ```
@@ -168,12 +171,14 @@ The daemon restarts at 1 am every day to discover environment changes. The daemo
     Command output:
 
     ```
-    .
-    .
+    .  
+    .  
     Successfully copied Daemon Store to Remote Nodes
-    .  .  .
-    orachk is using TFA Scheduler. TFA PID: 11552
-    Daemon log file location is : /opt/oracle.ahf/data/den00pkf/orachk/user_root/output/orachk_daemon.log
+
+    .  .  .  
+
+    orachk is using TFA Scheduler. TFA PID: 14895
+    Daemon log file location is : /opt/oracle.ahf/data/ll46863-instance-ahf/orachk/user_root/output/orachk_daemon.log
     ```
 
 ## Task 4: Install AHF on Linux or UNIX as non-root user in non-daemon mode
@@ -201,7 +206,7 @@ Oracle Autonomous Health Framework has reduced capabilities when you install it 
 
     ```
     AHF Installer for Platform Linux Architecture x86_64
-    AHF Installation Log : /tmp/ahf_install_221000_540223_2022_06_06-20_36_32.log
+    AHF Installation Log : /tmp/ahf_install_221000_30040_2022_07_06-13_51_45.log
     Starting Autonomous Health Framework (AHF) Installation
     AHF Version: 22.1.0 Build Date: 202205292144
     AHF Location : /ahf/oracle.ahf
@@ -211,7 +216,7 @@ Oracle Autonomous Health Framework has reduced capabilities when you install it 
     ORAchk is available at /ahf/oracle.ahf/bin/orachk
     AHF binaries are available in /ahf/oracle.ahf/bin
     AHF is successfully installed
-    Moving /tmp/ahf_install_221000_540223_2022_06_06-20_36_32.log to /ahf/oracle.ahf/data/ahf2/diag/ahf/
+    Moving /tmp/ahf_install_221000_30040_2022_07_06-13_51_45.log to /ahf/oracle.ahf/data/ll46863-instance-ahf/diag/ahf/
     ```
 
     The installer script will throw an error as follows if you install AHF as the **root** user.
