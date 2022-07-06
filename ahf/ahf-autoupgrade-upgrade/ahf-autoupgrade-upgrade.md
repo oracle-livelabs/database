@@ -55,28 +55,47 @@ In this lab, you will:
 
 	```
 	Starting AHF Uninstall
-	AHF will be uninstalled on: ahf2
+	AHF will be uninstalled on:
+	ll46863-instance-ahf
 
-	Stopping AHF service on local node ahf2...
-	Sleeping for 10 seconds...
-
+	Stopping AHF service on local node ll46863-instance-ahf...
 	Stopping TFA Support Tools...
 
-	Removing AHF setup on ahf2:
-	Removing /ahf/oracle.ahf/rpms
-	Removing /ahf/oracle.ahf/jre
-	Removing /ahf/oracle.ahf/common
-	Removing /ahf/oracle.ahf/bin
-	Removing /ahf/oracle.ahf/python
-	Removing /ahf/oracle.ahf/analyzer
-	Removing /ahf/oracle.ahf/tfa
-	Removing /ahf/oracle.ahf/chm
-	Removing /ahf/oracle.ahf/orachk
-	Removing /ahf/oracle.ahf/ahf
-	Removing /ahf/oracle.ahf/data/ahf2
-	Removing /ahf/oracle.ahf/install.properties
-	Removing /ahf/oracle.ahf/data/repository
-	Removing /ahf/oracle.ahf/data
+	Removed /etc/systemd/system/multi-user.target.wants/oracle-tfa.service.
+	Removed /etc/systemd/system/graphical.target.wants/oracle-tfa.service.
+
+	Stopping orachk scheduler ...
+	Removing orachk cache discovery....
+	No orachk cache discovery found.
+
+	Unable to send message to TFA
+
+	Removed orachk from inittab
+
+	Deleting selinux context entries
+	Removing AHF setup on ll46863-instance-ahf:
+	Removing /etc/rc.d/rc0.d/K17init.tfa
+	Removing /etc/rc.d/rc1.d/K17init.tfa
+	Removing /etc/rc.d/rc2.d/K17init.tfa
+	Removing /etc/rc.d/rc4.d/K17init.tfa
+	Removing /etc/rc.d/rc6.d/K17init.tfa
+	Removing /etc/init.d/init.tfa...
+	Removing /etc/systemd/system/oracle-tfa.service...
+	Removing /opt/oracle.ahf/rpms
+	Removing /opt/oracle.ahf/jre
+	Removing /opt/oracle.ahf/common
+	Removing /opt/oracle.ahf/bin
+	Removing /opt/oracle.ahf/python
+	Removing /opt/oracle.ahf/analyzer
+	Removing /opt/oracle.ahf/tfa
+	Removing /opt/oracle.ahf/chm
+	Removing /opt/oracle.ahf/orachk
+	Removing /opt/oracle.ahf/ahf
+	Removing /opt/oracle.ahf/data/ll46863-instance-ahf
+	Removing /opt/oracle.ahf/install.properties
+	Removing /opt/oracle.ahf/data/repository
+	Removing /opt/oracle.ahf/data
+	Removing /sys/fs/cgroup/cpu/oratfagroup/
 	```
 
 3. Unzip the **ahf\_setup** installer script, **/home/opc/Downloads/AHF-LINUX\_v21.4.3.zip** in the **/tmp** directory:
@@ -90,9 +109,9 @@ In this lab, you will:
 
 	```
 	Archive:  /home/opc/Downloads/AHF-LINUX_v21.4.3.zip
-	inflating: /tmp/ahf21.4.3/ahf_setup
-	extracting: /tmp/ahf21.4.3/ahf_setup.dat
-	inflating: /tmp/ahf21.4.3/README.txt
+	inflating: /tmp/ahf21.4.3/ahf_setup  
+	extracting: /tmp/ahf21.4.3/ahf_setup.dat  
+	inflating: /tmp/ahf21.4.3/README.txt  
 	inflating: /tmp/ahf21.4.3/oracle-tfa.pub
 	```
 4. Install AHF 21.4.3:
@@ -107,9 +126,9 @@ In this lab, you will:
 
 	```
 	AHF Installer for Platform Linux Architecture x86_64
-	AHF Installation Log : /tmp/ahf_install_221000_103911_2022_02_02-13_38_15.log
+	AHF Installation Log : /tmp/ahf_install_214300_61521_2022_07_06-14_51_09.log
 	Starting Autonomous Health Framework (AHF) Installation
-	AHF Version: 21.4.3 Build Date: 202201302324
+	AHF Version: 21.4.3 Build Date: 202204300235
 	Default AHF Location : /opt/oracle.ahf
 	Do you want to install AHF at [/opt/oracle.ahf] ? [Y]|N : Y
 	AHF Location : /opt/oracle.ahf
@@ -123,37 +142,37 @@ In this lab, you will:
 	Discovering Nodes and Oracle Resources
 	Successfully generated certificates.
 	Starting TFA Services
-	Created symlink from /etc/systemd/system/multi-user.target.wants/oracle-tfa.service to /etc/systemd/system/oracle-tfa.service.
-	Created symlink from /etc/systemd/system/graphical.target.wants/oracle-tfa.service to /etc/systemd/system/oracle-tfa.service.
+	Created symlink /etc/systemd/system/multi-user.target.wants/oracle-tfa.service → /etc/systemd/system/oracle-tfa.service.
+	Created symlink /etc/systemd/system/graphical.target.wants/oracle-tfa.service → /etc/systemd/system/oracle-tfa.service.
 
-	.-------------------------------------------------------------------------------.
-	| Host     | Status of TFA | PID    | Port  | Version    | Build ID             |
-	+----------+---------------+--------+-------+------------+----------------------+
-	| den02mwa | RUNNING       | 105916 | 59452 | 21.4.3.0.0 | 22100020220130232427 |
-	'----------+---------------+--------+-------+------------+----------------------'
+	.------------------------------------------------------------------------------------------.
+	| Host                 | Status of TFA | PID   | Port  | Version    | Build ID             |
+	+----------------------+---------------+-------+-------+------------+----------------------+
+	| ll46863-instance-ahf | RUNNING       | 63300 | 32273 | 21.4.3.0.0 | 21430020220430023517 |
+	'----------------------+---------------+-------+-------+------------+----------------------'
 
 	Running TFA Inventory...
+
 	Adding default users to TFA Access list...
 
-	.------------------------------------------------------.
-	|             Summary of AHF Configuration             |
-	+-----------------+------------------------------------+
-	| Parameter       | Value                              |
-	+-----------------+------------------------------------+
-	| AHF Location    | /opt/oracle.ahf                    |
-	| TFA Location    | /opt/oracle.ahf/tfa                |
-	| Orachk Location | /opt/oracle.ahf/orachk             |
-	| Data Directory  | /opt/oracle.ahf/data               |
-	| Repository      | /opt/oracle.ahf/data/repository    |
-	| Diag Directory  | /opt/oracle.ahf/data/den02mwa/diag |
-	'-----------------+------------------------------------'
+	.------------------------------------------------------------------.
+	|                   Summary of AHF Configuration                   |
+	+-----------------+------------------------------------------------+
+	| Parameter       | Value                                          |
+	+-----------------+------------------------------------------------+
+	| AHF Location    | /opt/oracle.ahf                                |
+	| TFA Location    | /opt/oracle.ahf/tfa                            |
+	| Orachk Location | /opt/oracle.ahf/orachk                         |
+	| Data Directory  | /opt/oracle.ahf/data                           |
+	| Repository      | /opt/oracle.ahf/data/repository                |
+	| Diag Directory  | /opt/oracle.ahf/data/ll46863-instance-ahf/diag |
+	'-----------------+------------------------------------------------'
 
 	Starting orachk scheduler from AHF ...
 	AHF binaries are available in /opt/oracle.ahf/bin
 	AHF is successfully installed
-
 	Do you want AHF to store your My Oracle Support Credentials for Automatic Upload ? Y|[N] : N
-	Moving /tmp/ahf_install_221000_103911_2022_02_02-13_38_15.log to /opt/oracle.ahf/data/den02mwa/diag/ahf/
+	Moving /tmp/ahf_install_214300_61521_2022_07_06-14_51_09.log to /opt/oracle.ahf/data/ll46863-instance-ahf/diag/ahf/
 	```
 
 ## Task 2: Upgrade AHF from the software stage location
