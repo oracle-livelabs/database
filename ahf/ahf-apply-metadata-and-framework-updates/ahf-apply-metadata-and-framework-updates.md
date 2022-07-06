@@ -37,11 +37,11 @@ Run the **ahfctl queryupdate** command to check if an update was applied. To get
     Command output:
 
     ```
-    .-------------------------------------------------------------------------------.
-    | Host     | Status of TFA | PID    | Port  | Version    | Build ID             |
-    +----------+---------------+--------+-------+------------+----------------------+
-    | den02mwa | RUNNING       | 105916 | 59452 | 22.1.1.0.0 | 22100020220130232427 |
-    '----------+---------------+--------+-------+------------+----------------------'
+    .-------------------------------------------------------------------------------------------------------------.
+    | Host                 | Status of TFA | PID   | Port  | Version    | Build ID             | Inventory Status |
+    +----------------------+---------------+-------+-------+------------+----------------------+------------------+
+    | ll46863-instance-ahf | RUNNING       | 83199 | 20707 | 22.1.1.0.0 | 22110020220516195917 | COMPLETE         |
+    '----------------------+---------------+-------+-------+------------+----------------------+------------------'
     ```
 2. To apply metadata updates:
 
@@ -102,7 +102,7 @@ Run the **ahfctl queryupdate** command to check if an update was applied. To get
     ```
     AHF Metadata Update: 20220602
     Status: Applied
-    Applied on: Mon Jun  6 00:23:14 2022
+    Applied on: Wed Jul  6 15:45:02 2022
     ```
 
 ## Task 2: Rollback AHF metadata and framework and updates
@@ -144,7 +144,14 @@ Patch/update directory Exadata systems: **/opt/oracle.ahf/data/work/.exachk\_pat
     Command output:
 
     ```
-    .  ..  20220602_metadata_bkp
+    drwxr-xr-x. 4 root root      196 Jul  6 15:51 .
+    drwxr-x--x. 3 root root       37 Jul  6 15:43 ..
+    drwxr-xr-x. 2 root root      141 Jul  6 15:51 .20220602_metadata_bkp
+    drwxr-xr-x. 2 root root      141 Jul  6 15:45 .base_dat_20220602
+    -r--r--r--. 1 root root   877505 Jul  6 15:51 .check_messages.dat.production
+    -r--r--r--. 1 root root 75877931 Jul  6 15:50 .collections.dat.production
+    -r--r--r--. 1 root root 10660569 Jul  6 15:51 .rules.dat.production
+    -r--r--r--. 1 root root     8311 Jul  6 15:51 .versions.dat.production
 
     ```
 
@@ -158,7 +165,7 @@ Patch/update directory Exadata systems: **/opt/oracle.ahf/data/work/.exachk\_pat
     Command output:
 
     ```
-    Removing current timestamp: 20220602 backup directory not allowed. Please use ahfctl rollback update -h.
+    Removing current timestamp: 20220602 backup directory not allowed, Please use ahfctl rollback update -h.
     ```
 
     If the timestamp is not current, then the expected output would be similar to the following:
