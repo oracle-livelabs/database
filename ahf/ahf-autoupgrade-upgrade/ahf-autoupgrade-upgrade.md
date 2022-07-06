@@ -225,20 +225,20 @@ In this lab, you will:
 	 Command output:
 
 	 ```
-	 total 410272
-	 drwxr-xr-x 6 root root      4096 Jan 24 21:46 ahf
-	 -rwxrwxrwx 1 root root 420064080 Jan 29 14:15 AHF-LINUX_v22.1.1.zip
-	 drwxr-x--x 2 root root      4096 Jan 26 11:10 analyzer
-	 drwxr-xr-x 2 root root      4096 Jan 26 11:11 bin
-	 drwxr-x--x 3 root root      4096 Jan 26 11:10 chm
-	 drwxr-xr-x 7 root root      4096 Jan 24 21:46 common
-	 drwxr-xr-x 5 root root      4096 Jan 26 11:10 data
-	 -rw-r--r-- 1 root root       941 Jan 26 11:10 install.properties
-	 drwxr-x--x 6 root root      4096 Jan 24 21:46 jre
-	 drwxr-xr-x 7 root root      4096 Jan 26 11:10 orachk
-	 drwxr-xr-x 6 root root      4096 Jan 10 20:28 python
-	 drwx------ 2 root root      4096 Jan 24 21:46 rpms
-	 drwxr-x--x 9 root root      4096 Jan 29 11:23 tfa
+	 total 277720
+	 drwxr-xr-x. 5 root root        43 Apr 30 09:35 ahf
+	 -rw-r--r--. 1 root root 284378255 Jul  6 15:20 AHF-LINUX_v22.1.1.zip
+	 drwxr-x--x. 2 root root         6 Jul  6 14:51 analyzer
+	 drwxr-xr-x. 2 root root        60 Jul  6 14:53 bin
+	 drwxr-x--x. 3 root root        17 Jul  6 14:51 chm
+	 drwxr-xr-x. 7 root root        64 Apr 30 09:35 common
+	 drwxr-xr-x. 5 root root        64 Jul  6 14:51 data
+	 -rw-r--r--. 1 root root       984 Jul  6 14:51 install.properties
+	 drwxr-x--x. 6 root root       198 Apr 30 09:35 jre
+	 drwxr-xr-x. 7 root root       251 Jul  6 14:51 orachk
+	 drwxr-xr-x. 6 root root       226 Mar 15 12:00 python
+	 drwx------. 2 root root        57 Apr 30 09:35 rpms
+	 drwxr-x--x. 9 root root       209 Jul  6 14:51 tfa
 	 ```
 
 5. Run the upgrade command and specify the **-nomos** command option to upgrade without MOS configuration.
@@ -251,7 +251,7 @@ In this lab, you will:
 	Command output:
 
 	```
-	/opt/oracle.ahf/AHF-LINUX_v22.2.0.zip successfully extracted at /opt/oracle.ahf
+	/opt/oracle.ahf/AHF-LINUX_v22.1.1.zip successfully extracted at /opt/oracle.ahf
 	AHF software signature has been validated successfully
 	```
 
@@ -265,11 +265,10 @@ In this lab, you will:
 	Command output:
 
 	```
-	total 80
-	-rw-r--r-- 1 root root  1988 Jun 29 20:52 ahf_auto_upgrade_console_24810.log
-	-rw-r--r-- 1 root root  12884 Jun 29 20:52 ahfctl.log
-	-rw------- 1 root root  26303 Jun 27 09:05 ahf_install_222000_29562_2022_06_27-09_03_56.log
-	-rw-r--r-- 1 root root 125123 Jun 29 22:09 tfactl.log
+	total 44
+	-rw-r--r--. 1 root root   801 Jul  6 15:25 ahf_auto_upgrade_console_78122.log
+	-rw-r--r--. 1 root root  9219 Jul  6 15:25 ahfctl.log
+	-rw-------. 1 root root 26693 Jul  6 14:54 ahf_install_214300_61521_2022_07_06-14_51_09.log
 	```
 
 	```
@@ -280,16 +279,32 @@ In this lab, you will:
 	Command output:
 
 	```
-	Sat Jan 29 22:51:47 UTC 2022
+	Wed Jul  6 15:25:00 GMT 2022
+
 	AHF Installer for Platform Linux Architecture x86_64
-	AHF Installation Log : /tmp/ahf_install_221000_23212_2022_01_29-22_51_47.log
+
+	AHF Installation Log : /tmp/ahf_install_221100_78142_2022_07_06-15_25_00.log
+
 	Starting Autonomous Health Framework (AHF) Installation
-	AHF Version: 22.1.1 Build Date: 202201272149
+
+	AHF Version: 22.1.1 Build Date: 202205161959
+
 	AHF is already installed at /opt/oracle.ahf
-	Installed AHF Version: 21.4.3 Build Date: 202201152118
+
+	Installed AHF Version: 21.4.3 Build Date: 202204300235
+
 	Upgrading /opt/oracle.ahf
+
 	Shutting down AHF Services
-	Stopped OSWatcher
+	Removing orachk cache discovery....
+	No orachk cache discovery found.
+
+	Successfully copied Daemon Store to Remote Nodes
+
+	Removed orachk from inittab
+
+	Stopping orachk scheduler ...
+	Stopped orachk
 	Nothing to do !
 	Stopping TFA from the Command Line
 	Nothing to do !
@@ -298,34 +313,32 @@ In this lab, you will:
 	TFA-00002 Oracle Trace File Analyzer (TFA) is not running
 	TFA Stopped Successfully
 	Successfully stopped TFA..
+	Telemetry adapter is not running
 
 	Starting AHF Services
 	Starting TFA..
 	Waiting up to 100 seconds for TFA to be started..
 	. . . . .
 	. . . . .
-	. . . . .
-	. . . . .
-	. . . . .
-	. . . . .
-	. . . . .
 	Successfully started TFA Process..
 	. . . . .
 	TFA Started and listening for commands
-	No new directories were added to TFA
-	Directory /scratch/u01/app/grid_base/crsdata/den02kad/trace/chad was already added to TFA Directories.
 
-	INFO: Starting orachk scheduler in background. Details for the process can be found at /opt/oracle.ahf/data/den02kad/diag/orachk/compliance_start_290122_225349.log
+	Adding default users to TFA Access list...
+
+	Oracle Trace File Analyzer (TFA) is already running
+
+	INFO: Starting orachk scheduler in background. Details for the process can be found at /opt/oracle.ahf/data/ll46863-instance-ahf/diag/orachk/compliance_start_060722_152803.log
 
 	AHF is successfully upgraded to latest version
 
-	.----------------------------------------------------------------.
-	| Host     | TFA Version | TFA Build ID         | Upgrade Status |
-	+----------+-------------+----------------------+----------------+
-	| den02kad |  22.1.1.0.0 | 22100020220127214932 | UPGRADED       |
-	'----------+-------------+----------------------+----------------'
+	.----------------------------------------------------------------------------.
+	| Host                 | TFA Version | TFA Build ID         | Upgrade Status |
+	+----------------------+-------------+----------------------+----------------+
+	| ll46863-instance-ahf |  22.1.1.0.0 | 22110020220516195917 | UPGRADED       |
+	'----------------------+-------------+----------------------+----------------'
 
-	Moving /tmp/ahf_install_221000_23212_2022_01_29-22_51_47.log to /opt/oracle.ahf/data/den02kad/diag/ahf/
+	Moving /tmp/ahf_install_221100_78142_2022_07_06-15_25_00.log to /opt/oracle.ahf/data/ll46863-instance-ahf/diag/ahf/
 	```
 
 7. Run the **tfactl status** command to check the run status of Oracle Trace File Analyzer.
@@ -338,11 +351,11 @@ In this lab, you will:
 	Command output:
 
 	```
-	.------------------------------------------------------------------------------------------------.
-	| Host     | Status of TFA | PID   | Port | Version    | Build ID             | Inventory Status |
-	+----------+---------------+-------+------+------------+----------------------+------------------+
-	| den02kad | RUNNING       | 28379 | 5000 | 22.1.1.0.0 | 22100020220127214932 | COMPLETE         |
-	'----------+---------------+-------+------+------------+----------------------+------------------'
+	.-------------------------------------------------------------------------------------------------------------.
+	| Host                 | Status of TFA | PID   | Port  | Version    | Build ID             | Inventory Status |
+	+----------------------+---------------+-------+-------+------------+----------------------+------------------+
+	| ll46863-instance-ahf | RUNNING       | 83199 | 20707 | 22.1.1.0.0 | 22110020220516195917 | COMPLETE         |
+	'----------------------+---------------+-------+-------+------------+----------------------+------------------'
 	```
 
 ## Task 3: Unset upgrade configuration
