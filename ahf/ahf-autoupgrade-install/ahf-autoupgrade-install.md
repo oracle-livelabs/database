@@ -305,7 +305,7 @@ Setting the value of the SELINUX directive in the configuration file persists ac
 
     ```
     <copy>
-    ahf_setup
+    /tmp/ahf22.1.0/ahf_setup
     </copy>
     ```
 
@@ -313,53 +313,21 @@ Setting the value of the SELINUX directive in the configuration file persists ac
 
     Command output:
 
+    Since you have already installed AHF, the installer script exits gracefully with a message, **AHF is already installed at /opt/oracle.ahf** as shown below.
+
     ```
     AHF Installer for Platform Linux Architecture x86_64
-    AHF Installation Log : /tmp/ahf_install_221000_2193173_2022_02_23-22_35_59.log
+    AHF Installation Log : /tmp/ahf_install_221000_33802_2022_07_06-14_00_20.log
     Starting Autonomous Health Framework (AHF) Installation
-    AHF Version: 22.1.0 Build Date: 202202230349
-    Default AHF Location : /opt/oracle.ahf
-    Do you want to install AHF at [/opt/oracle.ahf] ? [Y]|N
-    AHF Location : /opt/oracle.ahf
-    AHF Data Directory stores diagnostic collections and metadata.
-    AHF Data Directory requires at least 5GB (Recommended 10GB) of free space.
-    Please Enter AHF Data Directory : /opt/oracle.ahf
-    AHF Data Directory : /opt/oracle.ahf/data
-
-    Do you want to add AHF Notification Email IDs ? [Y]|N : N
-    Extracting AHF to /opt/oracle.ahf
-    Configuring TFA Services
-    Discovering Nodes and Oracle Resources
-    Successfully generated certificates.
-    Starting TFA Services
-    Created symlink /etc/systemd/system/multi-user.target.wants/oracle-tfa.service → /etc/systemd/system/oracle-tfa.service.
-    Created symlink /etc/systemd/system/graphical.target.wants/oracle-tfa.service → /etc/systemd/system/oracle-tfa.service.
-    .------------------------------------------------------------------------------------.
-    | Host         | Status of TFA | PID     | Port  | Version    | Build ID             |
-    +--------------+---------------+---------+-------+------------+----------------------+
-    | phoenix78312 | RUNNING       | 2194746 | 36707 | 22.1.0.0.0 | 22100020220223034920 |
-    '--------------+---------------+---------+-------+------------+----------------------'
-    Running TFA Inventory...
-    Adding default users to TFA Access list...
-    .----------------------------------------------------------.
-    |               Summary of AHF Configuration               |
-    +-----------------+----------------------------------------+
-    | Parameter       | Value                                  |
-    +-----------------+----------------------------------------+
-    | AHF Location    | /opt/oracle.ahf                        |
-    | TFA Location    | /opt/oracle.ahf/tfa                    |
-    | Orachk Location | /opt/oracle.ahf/orachk                 |
-    | Data Directory  | /opt/oracle.ahf/data                   |
-    | Repository      | /opt/oracle.ahf/data/repository        |
-    | Diag Directory  | /opt/oracle.ahf/data/phoenix78312/diag |
-    '-----------------+----------------------------------------'
-
-    Starting orachk scheduler from AHF ...
-    AHF binaries are available in /opt/oracle.ahf/bin
-    AHF is successfully installed
-    Do you want AHF to store your My Oracle Support Credentials for Automatic Upload ? Y|[N] :
-    Moving /tmp/ahf_install_221000_2193173_2022_02_23-22_35_59.log to /opt/oracle.ahf/data/phoenix78312/diag/ahf/
+    AHF Version: 22.1.0 Build Date: 202205292144
+    AHF is already installed at /opt/oracle.ahf
+    Installed AHF Version: 22.1.0 Build Date: 202205292144
+    AHF is already running latest version. No need to upgrade.
     ```
+
+    To install AHF, first uninstall, and then install it afresh.
+
+    To uninstall, run **ahfctl uninstall -deleterepo -silent**
 
 5. To check if the policy is loaded successfully:
 
@@ -367,6 +335,10 @@ Setting the value of the SELINUX directive in the configuration file persists ac
     <copy>
     /usr/sbin/semodule -l | grep inittfa-policy
     </copy>
+    ```
+    Command output:
+    ```
+    inittfa-policy
     ```
 ## Learn More
 
