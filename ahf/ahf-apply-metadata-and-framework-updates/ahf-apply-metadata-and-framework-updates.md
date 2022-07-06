@@ -172,7 +172,7 @@ Patch/update directory Exadata systems: **/opt/oracle.ahf/data/work/.exachk\_pat
 
     ```
     Deleting backup directories will not allow you to rollback metadata to 20220602 in the future. Do you want to continue? [y/n][y]: Y
-    Deleted metadata backup directory for: /opt/oracle.ahf/data/work/.exachk_patch_directory/.20220602_metadata_bkp
+    Deleted metadata backup directory for: /opt/oracle.ahf/data/work/.orachk_patch_directory/.20220602_metadata_bkp
     ```
 
 ## Learn More
