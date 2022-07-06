@@ -1,24 +1,27 @@
 ## Switch to the new edition,Decommission the old edition and redefine the table
 
-
 Now selected application containers can connect to the new edition using either a dedicated service or by issuing an `alter session` (either explicit or in the connection string).
 Once the application is validated, all the new sessions can switch to the new edition by changing the database default:
+
 ```
 ALTER DATABASE DEFAULT EDITION=V2;
 ```
+
 As `HR` user, we achieve that using the helper procedure previously created:
+
 ```
 begin
   admin.default_edition('V2');
 end;
 /
 ```
+
 However, all the applications that are sensible to the change should explicitly set the edition so that reconnections will not cause any harm.
 
 For this demo, we will integrate this step in a changelog that decommission the old edition.
 
-
 The last changelog contains the SQL files that cleanup everything, drop the old edition and redefine the table without the `phone_number` column.
+
 ```
 hr.000001.alter_session.sql
 hr.000002.change_default_edition.sql
@@ -32,7 +35,9 @@ hr.000013.drop_interim_table.sql
 ```
 
 ### 1. Alter the session to use the new edition
+
 For a new connection, the edition is still the default. Use the new one!
+
 ```
 ALTER SESSION SET EDITION=V2;
 ```
@@ -40,6 +45,7 @@ ALTER SESSION SET EDITION=V2;
 ### 2. Change the default edition
 
 For this step, we use again a helper procedure that we have defined previously, and that runs with DBA privileges.
+
 ```
 begin
   admin.default_edition('V2');
@@ -49,9 +55,10 @@ end;
 
 Internally, the procedure just runs `execute immediate 'alter database default edition ='||edition_name;`
 
-
 ### 3. Drop the old edition
+
 Here we use a helper procedure again:
+
 ```
 declare
   l_parent_edition dba_editions.edition_name%type;
@@ -62,9 +69,11 @@ begin
 end;
 /
 ```
+
 The user has a `grant select on dba_editions`. The `drop_edition` procedure will execute internally a `execute immediate 'DROP EDITION '||edition_name||' CASCADE`, then a `dbms_editions_utilities.clean_unusable_editions`.
 
 ### 4. Drop the cross-edition triggers
+
 Keeping the cross-edition triggers when the previous edition is no longer in use will just add overhead to the table DMLs.
 
 ```
@@ -77,8 +86,8 @@ alter trigger EMPLOYEES_FWDXEDITION_TRG disable;
 drop trigger EMPLOYEES_FWDXEDITION_TRG;
 ```
 
-
 ### 5. Redefine the Table: Create the interim table
+
 ```
 create table employees$interim
     ( employee_id    NUMBER(6)
@@ -96,7 +105,9 @@ create table employees$interim
     ) ;
 
 ```
+
 ### 6. Redefine the Table: Start the redefinition
+
 ```
 declare
   l_colmap varchar(512);
@@ -124,7 +135,9 @@ begin
 end;
 /
 ```
+
 ### 7. Redefine the Table: Copy the table dependents
+
 ```
 declare
   nerrors number;
@@ -141,6 +154,7 @@ end;
 ```
 
 ### 8. Redefine the Table: Finish the redefinition
+
 ```
 begin
   dbms_redefinition.finish_redef_table ( user, 'EMPLOYEES$0', 'EMPLOYEES$INTERIM');
@@ -150,14 +164,17 @@ end;
 ```
 
 ### 9. Redefine the table: Drop the interim table
+
 ```
 drop table employees$interim cascade constraints;
 ```
+
 The cascade constraints is necessary for the self-referencing foreign key (employee->manager).
 
-
 ### Run the changelog with liquibase
+
 The changelog file will look similar to this:
+
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
@@ -214,8 +231,9 @@ The changelog file will look similar to this:
 ```
 
 Let's run it:
+
 ```
-$ rlwrap sql /nolog
+$ sql /nolog
 
 SQLcl: Release 21.4 Production on Mon Mar 14 15:18:04 2022
 
@@ -272,7 +290,6 @@ Errors encountered:0
 ######## END ERROR SUMMARY ##################
 SQL>
 ```
-
 
 You have successfully executed the verified the editions in  the HR schema [proceed to the next lab](#next)
 

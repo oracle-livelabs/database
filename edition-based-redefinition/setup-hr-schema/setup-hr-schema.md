@@ -51,6 +51,8 @@ The HR schema is a modified version of the well-known HR schema to support editi
 
     ```
       SQL> set cloudconfig ../../Wallet_DB20220620133943.zip
+
+** This Wallet name will be different for your ADB and  use the correct *.zip file **
     ```
 
 3. Connect using the `admin` user (or another user with DBA privileges). For that, use the TNS name noted down previously, along with the password used during the creation of the Autonomous Database:
