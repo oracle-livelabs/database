@@ -131,6 +131,8 @@ Run the **ahfctl deleteupdatebackup** command to delete the backup directories u
 >**Note:**
 - If you delete backup directories for a specific update ID, then you cannot rollback to that specific update ID.
 - Repeat [Task 1: Apply AHF metadata and framework updates](#Task1:ApplyAHFmetadataandframeworkupdates) if you have performed [Task 2: Rollback AHF metadata and framework and updates](#Task2:RollbackAHFmetadataandframeworkandupdates), and then proceed with the following steps.
+- Patch/update directory in non-Exadata systems: **/opt/oracle.ahf/data/work/.orachk\_patch\_directory**
+Patch/update directory Exadata systems: **/opt/oracle.ahf/data/work/.exachk\_patch\_directory**
 
 1. To view the list of backup directories in the patch/update directory:
 
