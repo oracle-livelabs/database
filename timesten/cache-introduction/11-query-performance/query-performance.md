@@ -46,7 +46,9 @@ A much better way to time queries, with any database, is to use a program writte
 
 `usage: timeQueries { -oracle | -timesten } <filename>`
 
-where ‘filename’ is the name of a file containing the query text. The source code for the queryTimer utility is available in the main VM in the directory **~/lab/src**. Here is the timeQueries script:
+where ‘filename’ is the name of a file containing the query text. The source code for the queryTimer utility is available in the main VM in the directory **~/lab/src**. 
+
+Here is the **/tt/livelab/bin/timeQueries** script:
 
 ```
 #!/bin/bash
@@ -110,7 +112,7 @@ Examine the three queries that we will use for this exercise:
 
 ```
 <copy>
-cat ~/queries/query_1.sql
+cat /tt/livelab/queries/query_1.sql
 </copy>
 ```
 
@@ -133,7 +135,7 @@ ORDER BY 6;
 
 ```
 <copy>
-cat ~queries/query_2.sql
+cat /tt/livelab/queries/query_2.sql
 </copy>
 ```
 
@@ -160,7 +162,7 @@ SELECT
 
 ```
 <copy>
-cat ~queries/query_3.sql
+cat /tt/livelab/queries/query_3.sql
 </copy>
 ```
 
@@ -180,7 +182,7 @@ SELECT
  ORDER BY 1, 3 DESC;
 ```
  
-There is also a file, **queries/query_all.sql**, that contains all three queries.
+There is also a file, **/tt/livelab/queries/query_all.sql**, that contains all three queries.
 
 ## Task 3: Run the queries against the Oracle database
 
@@ -188,7 +190,7 @@ First run the queries against the Oracle database:
 
 ```
 <copy>
-~/bin/timeQueries -oracle queries/query_all.sql
+/tt/livelab/bin/timeQueries -oracle queries/query_all.sql
 </copy>
 ```
 
@@ -265,7 +267,7 @@ Now run the queries against the TimesTen cache:
 
 ```
 <copy>
-~/bin/timeQueries -timesten queries/query_all.sql
+/tt/livelab/bin/timeQueries -timesten queries/query_all.sql
 </copy>
 ```
 
