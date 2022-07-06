@@ -373,6 +373,7 @@ Run the **ahfctl unsetupgrade** command to unset a specific upgrade parameter or
 	```
 	AHF upgrade parameters successfully removed
 	Successfully synced AHF configuration
+	refreshConfig() completed successfully.
 	```
 
 2. To verify if all the parameters are unset:
@@ -388,6 +389,9 @@ Run the **ahfctl unsetupgrade** command to unset a specific upgrade parameter or
 	autoupgrade.swstage : [not set]
 	autoupgrade.frequency : [not set]
 	autoupgrade.servicename : [not set]
+	autoupgrade.fstype : [not set]
+	autoupgrade.tmp_loc : [not set]
+	autoupgrade.remove_installer : [not set]
 	```
 
 ## Task 4: Disable automatic upgrade
@@ -406,7 +410,8 @@ You can disable **autoupgrade** if you want to upgrade AHF manually.
 
 	```
 	Autoupgrade flag successfully removed
-
+	Successfully synced AHF configuration
+	refreshConfig() completed successfully.
 	```
 
 ## Learn More
