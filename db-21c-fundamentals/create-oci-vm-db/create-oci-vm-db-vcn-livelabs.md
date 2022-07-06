@@ -21,7 +21,7 @@ Estimated Lab Time: 10 minutes
 
 1. Click the **Navigation Menu** in the upper left, navigate to **Oracle Database**, and select **Bare Metal, VM, and Exadata**.
 
-	![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/database-dbcs.png " ")
+	![](https://oracle-livelabs.github.io/common/images/console/database-dbcs.png " ")
 
 2. Select the compartment you were assigned. Note that you have a fully provisioned Database. Select it. 
   ![](images/select-db.png " ")
@@ -36,7 +36,7 @@ Estimated Lab Time: 10 minutes
 
 5. In Cloud Shell or your terminal window, navigate to the folder where you created the SSH keys and enter this command, using your IP address:
 
-   ![Open Cloud Shell](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/cloud-shell.png " ")
+   ![Open Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png " ")
 
     ```
     $ <copy>ssh -i <<sshkeyname>> opc@</copy>123.123.123.123

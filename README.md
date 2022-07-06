@@ -1,13 +1,13 @@
 # Welcome
 
-[![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/livelabs-banner-formarketplace.png)](https://developer.oracle.com/livelabs)
+[![](https://oracle-livelabs.github.io/common/images/livelabs-banner-formarketplace.png)](https://developer.oracle.com/livelabs)
 ---
 LiveLabs is the place to explore Oracle's products and services using workshops designed to enhance your experience building and deploying applications on the Cloud and On-Premises.   Our library of workshops cover everything from how to provision the world's first autonomous database to setting up a webserver on our world class OCI Generation 2 infrastructure, machine learning and much more.  Use your existing Oracle Cloud account, a Free Tier account or a LiveLabs Cloud Account to build, test, and deploy applications on Oracle's Cloud.
 
 ### How do I get started?
 Visit [LiveLabs](https://developer.oracle.com/livelabs) now to get started.  Workshops are added weekly, please visit frequently for new content.
 
-[![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/livelabs-homepage-march.png)](https://developer.oracle.com/livelabs)
+[![](https://oracle-livelabs.github.io/common/images/livelabs-homepage-march.png)](https://developer.oracle.com/livelabs)
 
 ## **Developer** Featured Workshops
 - [Oracle's Converged Database - Autonomous Edition](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=776)

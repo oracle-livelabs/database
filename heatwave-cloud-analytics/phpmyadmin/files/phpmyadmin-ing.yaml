@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: phpmyadmin-ing
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/app-root: /phpmyadmin/
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      rewrite ^/themes/(.*)$ /phpmyadmin/themes/$1 redirect;
+      rewrite ^/index.php(.*)$ /phpmyadmin/index.php$1 redirect;
+      rewrite ^/config/(.*)$ /phpmyadmin/config/$1 redirect;
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+        - path: /phpmyadmin(/|$)(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: phpmyadmin-svc
+              port:
+                number: 80
+        - path: /index.php(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: phpmyadmin-svc
+              port:
+                number: 80
