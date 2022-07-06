@@ -68,7 +68,7 @@ When deploying the workshop compute instance via the ORM stack, as described in 
 
 2. If you wish to provide your own SSH public key, uncheck the option *Auto Generate SSH Key Pair* and follow the on-screen instructions to either upload or copy/paste your SSH public key.  
 
-3. Unless you wish to customize SSH connectivity as desccribed in (2), you can accept all the defaults provided by the ORM stack.
+3. Unless you wish to customize SSH connectivity as described in (2), you can accept all the defaults provided by the ORM stack.
 
 You may now *proceed to the next lab (Environment setup)*.
 
