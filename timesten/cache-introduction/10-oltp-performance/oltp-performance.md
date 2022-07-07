@@ -50,7 +50,7 @@ select directory_nb, last_calling_party, descr from vpn_users where vpn_id = :id
 
 The input values, *id* and *nb*, are randomly generated for each execution such that they fall within the range of the values in the table, so each execution of the statement retrieves a randomly chosen row.
 
-You will run the benchmark using the script **~/bin/runBenchmark**:
+You will run the benchmark using the script **/tt/livelab/bin/runBenchmark**:
 
 ```
 #!/bin/bash
@@ -149,7 +149,7 @@ Run the program against the Oracle database and note the results:
 
 ```
 <copy>
-~/bin/runBenchmark -oracle
+/tt/livelab/bin/runBenchmark -oracle
 </copy>
 ```
 
@@ -170,7 +170,7 @@ Run the program against the TimesTen cache and note the results:
 
 ```
 <copy>
-~/bin/runBenchmark -timesten
+/tt/livelab/bin/runBenchmark -timesten
 </copy>
 ```
 
