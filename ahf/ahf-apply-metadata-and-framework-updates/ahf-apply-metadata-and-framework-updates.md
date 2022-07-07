@@ -9,10 +9,10 @@ Estimated Time: 30 minutes
 ### Objectives
 
 In this lab, you will:
-* Apply AHF framework and metadata updates
-* Query AHF framework and metadata updates
-* Rollback AHF framework and metadata updates
-* Cleanup AHF metadata backup directories
+* Apply AHF metadata and framework updates
+* Query AHF metadata and framework updates
+* Rollback AHF metadata and framework updates
+* Cleanup backup directories used for AHF metadata and framework updates
 
 ### Prerequisites
 
@@ -105,7 +105,7 @@ Run the **ahfctl queryupdate** command to check if an update was applied. To get
     Applied on: Wed Jul  6 15:45:02 2022
     ```
 
-## Task 2: Rollback AHF metadata and framework and updates
+## Task 2: Rollback AHF metadata and framework updates
 
 Run the **ahfctl rollbackupdate** command with the **-updateid** option to rollback the updates with a specific update ID. If you do not specify the update ID, then AHF rolls back to the previous state by default.
 
@@ -124,9 +124,9 @@ Run the **ahfctl rollbackupdate** command with the **-updateid** option to rollb
     Rolled back the data files 20220602 to Production version 20220516
     ```
 
-## Task 3: Cleanup AHF metadata backup directories
+## Task 3: Cleanup backup directories used for AHF metadata and framework updates
 
-Run the **ahfctl deleteupdatebackup** command to delete the backup directories used for AHF update.
+Run the **ahfctl deleteupdatebackup** command to delete the backup directories used for AHF metadata and framework updates.
 
 >**Note:**
 - If you delete backup directories for a specific update ID, then you cannot rollback to that specific update ID.
