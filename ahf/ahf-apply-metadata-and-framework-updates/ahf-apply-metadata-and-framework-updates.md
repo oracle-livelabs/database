@@ -170,10 +170,10 @@ Run the **ahfctl deleteupdatebackup** command to delete the backup directories u
 
     If the timestamp is not current, then the expected output would be similar to the following:
 
-    ```
-    Deleting backup directories will not allow you to rollback metadata to 20220602 in the future. Do you want to continue? [y/n][y]: Y
+    <pre>
+    Deleting backup directories will not allow you to rollback metadata to 20220602 in the future. Do you want to continue? [y/n][y]: <font color=#f80000><i><b>Y</i></b></font>
     Deleted metadata backup directory for: /opt/oracle.ahf/data/work/.orachk_patch_directory/.20220602_metadata_bkp
-    ```
+    </pre>
 
 ## Learn More
 
