@@ -124,19 +124,19 @@ In this lab, you will:
 
 	Command output:
 
-	```
+	<pre>
 	AHF Installer for Platform Linux Architecture x86_64
 	AHF Installation Log : /tmp/ahf_install_214300_61521_2022_07_06-14_51_09.log
 	Starting Autonomous Health Framework (AHF) Installation
 	AHF Version: 21.4.3 Build Date: 202204300235
 	Default AHF Location : /opt/oracle.ahf
-	Do you want to install AHF at [/opt/oracle.ahf] ? [Y]|N : Y
+	Do you want to install AHF at [/opt/oracle.ahf] ? [Y]|N : <font color=#f80000><i><b>Y</i></b></font>
 	AHF Location : /opt/oracle.ahf
 	AHF Data Directory stores diagnostic collections and metadata.
 	AHF Data Directory requires at least 5GB (Recommended 10GB) of free space.
-	Please Enter AHF Data Directory : /opt/oracle.ahf
+	Please Enter AHF Data Directory : <font color=#f80000><i><b>/opt/oracle.ahf</i></b></font>
 	AHF Data Directory : /opt/oracle.ahf/data
-	Do you want to add AHF Notification Email IDs ? [Y]|N : N
+	Do you want to add AHF Notification Email IDs ? [Y]|N : <font color=#f80000><i><b>N</i></b></font>
 	Extracting AHF to /opt/oracle.ahf
 	Configuring TFA Services
 	Discovering Nodes and Oracle Resources
@@ -171,9 +171,9 @@ In this lab, you will:
 	Starting orachk scheduler from AHF ...
 	AHF binaries are available in /opt/oracle.ahf/bin
 	AHF is successfully installed
-	Do you want AHF to store your My Oracle Support Credentials for Automatic Upload ? Y|[N] : N
+	Do you want AHF to store your My Oracle Support Credentials for Automatic Upload ? Y|[N] : <font color=#f80000><i><b>N</i></b></font>
 	Moving /tmp/ahf_install_214300_61521_2022_07_06-14_51_09.log to /opt/oracle.ahf/data/ll46863-instance-ahf/diag/ahf/
-	```
+	</pre>
 
 ## Task 2: Upgrade AHF from the software stage location
 
