@@ -86,19 +86,19 @@ If Oracle Autonomous Health Framework is already installed, then reinstalling pe
 
     Command output:
 
-    ```
+    <pre>
     AHF Installer for Platform Linux Architecture x86_64
     AHF Installation Log : /tmp/ahf_install_221000_12928_2022_07_06-13_24_29.log
     Starting Autonomous Health Framework (AHF) Installation
     AHF Version: 22.1.0 Build Date: 202205292144
     Default AHF Location : /opt/oracle.ahf
-    Do you want to install AHF at [/opt/oracle.ahf] ? [Y]|N : Y
+    Do you want to install AHF at [/opt/oracle.ahf] ? [Y]|N : <font color=#f80000><i><b>Y</i></b></font>
     AHF Location : /opt/oracle.ahf
     AHF Data Directory stores diagnostic collections and metadata.
     AHF Data Directory requires at least 5GB (Recommended 10GB) of free space.
-    Please Enter AHF Data Directory : /opt/oracle.ahf
+    Please Enter AHF Data Directory : <font color=#f80000><i><b>/opt/oracle.ahf</i></b></font>
     AHF Data Directory : /opt/oracle.ahf/data
-    Do you want to add AHF Notification Email IDs ? [Y]|N : N
+    Do you want to add AHF Notification Email IDs ? [Y]|N : <font color=#f80000><i><b>N</i></b></font>
     Extracting AHF to /opt/oracle.ahf
     Configuring TFA Services
     Discovering Nodes and Oracle Resources
@@ -133,9 +133,9 @@ If Oracle Autonomous Health Framework is already installed, then reinstalling pe
     Starting orachk scheduler from AHF ...
     AHF binaries are available in /opt/oracle.ahf/bin
     AHF is successfully installed
-    Do you want AHF to store your My Oracle Support Credentials for Automatic Upload ? Y|[N] : N
+    Do you want AHF to store your My Oracle Support Credentials for Automatic Upload ? Y|[N] : <font color=#f80000><i><b>N</i></b></font>
     Moving /tmp/ahf_install_221000_12928_2022_07_06-13_24_29.log to /opt/oracle.ahf/data/ll46863-instance-ahf/diag/ahf/
-    ```
+    </pre>
 
 ## Task 3: Enable or disable Oracle ORAchk or Oracle EXAchk daemon to start automatically
 
