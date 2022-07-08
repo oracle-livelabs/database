@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The labs in this workshop take you through the steps to install Oracle Autonomous Health Framework (AHF) and upgrade it on the fly without manually downloading **ahf_setup**.
+In this workshop, you will learn how to install and upgrade Oracle Autonomous Health Framework (AHF) on the fly without manually downloading the setup file, **ahf_setup**.
 
 Estimated Time: 120 minutes
 
@@ -11,7 +11,7 @@ Oracle Autonomous Health Framework (AHF) includes the functionality from Oracle 
 
 **Oracle ORAchk / Oracle EXAchk:** Provides a lightweight and non-intrusive compliance check framework for the Oracle stack of software and hardware components.
 
-**Oracle Trace File Analyzer (TFA):** Monitors your logs for significant problems, automatically trims logs and collects relevant diagnostics across cluster nodes and consolidates everything in one place. Collections are analyzed for know problems. Various DBA tools are included for triaging problems.
+**Oracle Trace File Analyzer (TFA):** Monitors logs for significant problems, automatically trims logs and collects relevant diagnostics across cluster nodes, and consolidates everything in one place.
 
 ### Objectives
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will learn how to apply AHF metadata and framework updates, and rollback to the previous timestamp when needed.
+In this lab, you will learn how to apply metadata and framework updates to AHF, roll back to the previous timestamp, and clean up backup files.
 
 Estimated Time: 30 minutes
 
