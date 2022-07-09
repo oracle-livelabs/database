@@ -17,8 +17,8 @@ Oracle Autonomous Health Framework (AHF) includes the functionality from Oracle 
 
 In this lab, you will:
 * Install AHF
-* Upgrade AHF from Software Stage Location
-* Apply AHF Framework and Metadata Updates
+* Upgrade AHF from Software Stage location
+* Apply AHF metadata and framework updates
 
 ### Prerequisites
 
