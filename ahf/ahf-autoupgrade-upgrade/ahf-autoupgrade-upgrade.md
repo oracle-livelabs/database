@@ -21,13 +21,13 @@ In this lab, you will:
 
 ### Prerequisites
 
-* You need AHF installed user privileges or **root** access to run **getupgrade**, **setupgrade**, **unsetupgrade**, and **upgrade** commands.
+* You need AHF installed user privileges or **root** access to run the **getupgrade**, **setupgrade**, **unsetupgrade**, and **upgrade** commands.
 * **openssl** is needed for all platforms to support **autoupgrade**. If **openssl** is not present, then **autoupgrade** exits gracefully.
 * AHF version 21.4.3. You can only upgrade AHF from 21.4.3 to 22.1.1 so uninstall if you have any older versions of AHF.
 
 ## Task 1: Uninstall the current AHF installation and install AHF 21.4.3
 
-1. Check if AHF is already installed:
+1. Check if AHF is already installed.
 
 	```
 	<copy>
@@ -44,7 +44,7 @@ In this lab, you will:
 	'----------------------+---------------+-------+-------+------------+----------------------+------------------'
 	```
 
-2. Uninstall the current AHF installation:
+2. Uninstall the current AHF installation.
 
 	```
 	<copy>
@@ -98,7 +98,7 @@ In this lab, you will:
 	Removing /sys/fs/cgroup/cpu/oratfagroup/
 	```
 
-3. Unzip the **ahf\_setup** installer script, **/home/opc/Downloads/AHF-LINUX\_v21.4.3.zip** in the **/tmp** directory:
+3. Unzip the **ahf\_setup** installer script, **/home/opc/Downloads/AHF-LINUX\_v21.4.3.zip** in the **/tmp** directory.
 
 	```
 	<copy>
@@ -114,7 +114,7 @@ In this lab, you will:
 	inflating: /tmp/ahf21.4.3/README.txt  
 	inflating: /tmp/ahf21.4.3/oracle-tfa.pub
 	```
-4. Install AHF 21.4.3:
+4. Install AHF 21.4.3.
 
 	```
 	<copy>
@@ -207,7 +207,7 @@ In this lab, you will:
 	autoupgrade.servicename : [not set]
 	```
 
-3. Copy the **AHF-LINUX_22.1.1.zip** file from **/home/opc/Downloads** and paste in to the **/opt/oracle.ahf** directory.
+3. Copy the **AHF-LINUX_22.1.1.zip** file from **/home/opc/Downloads** and paste it into the **/opt/oracle.ahf** directory.
 
 	```
 	<copy>
