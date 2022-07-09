@@ -255,7 +255,7 @@ Setting the value of the SELINUX directive in the configuration file persists ac
 * If you have performed [Task 4: Install AHF on Linux or UNIX as non-root user in non-daemon mode](#Task4:InstallAHFonLinuxorUNIXasnonrootuserinnondaemonmode), first uninstall AHF, and then proceed with the following steps.
 * Install AHF as the **root** user.
 
-1. To switch to **root** user:
+1. Switch to **root** user.
 
     ```
     <copy>
@@ -263,7 +263,7 @@ Setting the value of the SELINUX directive in the configuration file persists ac
     </copy>
     ```
 
-2. To check the status of SELinux:    
+2. Check the status of SELinux.    
 
     ```
     <copy>
@@ -278,7 +278,7 @@ Setting the value of the SELINUX directive in the configuration file persists ac
 
     The **getenforce** command returns **Enforcing**, **Permissive**, or **Disabled**.
 
-3. To check the status of SELinux and the policy being used:
+3. Check the status of SELinux and the policy being used.
 
     ```
     <copy>
@@ -300,7 +300,7 @@ Setting the value of the SELINUX directive in the configuration file persists ac
     Max kernel policy version: 31
     ```
 
-4. To install AHF:
+4. Install AHF.
 
     ```
     <copy>
@@ -328,7 +328,7 @@ Setting the value of the SELINUX directive in the configuration file persists ac
 
     To uninstall, run **ahfctl uninstall -deleterepo -silent**
 
-5. To check if the policy is loaded successfully:
+5. Check if the policy is loaded successfully.
 
     ```
     <copy>
