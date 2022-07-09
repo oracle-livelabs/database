@@ -21,32 +21,30 @@ In this lab, you will:
 ## Task 1: Open a terminal window
 
 1. Click the LiveLabs URL.
-2. Click **Start**.
-3. Click **Run on LiveLabs**.
-4. If prompted, then enter login credentials.
-5. Click **Start**.
-6. Click **Run on LiveLabs**.
-7. Choose a date and time to run the workshop or you choose to start the workshop now.
-8. Select the **I consent to receive emails from LiveLabs for my reservation** checkbox.
-9. Click **Submit Reservation**.
+2. Click **Sign In**, and then enter login credentials.
+3. Click **Start**.
+4. Click **Run on LiveLabs**.
+5. Choose a date and time to run the workshop or you choose to start the workshop now.
+6. Select the **I consent to receive emails from LiveLabs for my reservation** checkbox.
+7. Click **Submit Reservation**.
 
     **My Reservations** page is displayed with the status of your reservation. You will also receive an email detailing the status of your reservation. Once the setup is done, My Reservations page is displayed with the **Status**, and the links to **Launch Workshop**, view **Details**, and **Remove** the workshop. You will also receive an email announcing that your workshop is ready.
-10. Click **Launch Workshop**.
+8. Click **Launch Workshop**.
 
     You will be redirected to your workshop.
-11. Click **View Login info**.
+9. Click **View Login info**.
 
     **Reservation Information** dialog is displayed.
-12. Copy the **Remote Desktop URL**, open a browser, and paste the link in the address bar.
+10. Copy the **Remote Desktop URL**, open a browser, and paste the link in the address bar.
 
     (or)
 
     Click **Lauch Remote Desktop**.
-13. Click **Activities** at the upper-left corner, and then click the **Terminal** icon.
+11. Click **Activities** at the upper-left corner, and then click the **Terminal** icon.
 
     >**Note:** When you log in to the terminal, you will be logging in as the **opc** user.
 
-14. Click **Activities**, and then click the **LiveLabs** icon to view the technical content.
+12. Click **Activities**, and then click the **LiveLabs** icon to view the technical content.
 
 ## Task 2: Install AHF on Linux or UNIX as root user in daemon mode
 
