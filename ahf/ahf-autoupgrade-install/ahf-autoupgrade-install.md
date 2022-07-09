@@ -179,7 +179,7 @@ The daemon restarts at 1 am every day to discover environment changes. The daemo
     Daemon log file location is : /opt/oracle.ahf/data/ll46863-instance-ahf/orachk/user_root/output/orachk_daemon.log
     ```
 
-## Task 4: Install AHF on Linux or UNIX as non-root user in non-daemon mode
+## Task 4: Install AHF on Linux or UNIX as a non-root user in non-daemon mode
 
 Install Oracle Autonomous Health Framework as a non-root user, for example, **opc**.
 
