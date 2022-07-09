@@ -237,19 +237,19 @@ You can enable or disable SELinux. When enabled, SELinux can run either in **enf
 
 To configure default SELinux mode, edit the configuration file for SELinux, **sudo vi /etc/selinux/config**, and set the value of the **SELINUX** directive to **disabled**, **enforcing**, or **permissive**.
 
-    ```
-    # This file controls the state of SELinux on the system.
-    # SELINUX= can take one of these three values:
-    #     enforcing - SELinux security policy is enforced.
-    #     permissive - SELinux prints warnings instead of enforcing.
-    #     disabled - No SELinux policy is loaded.
-    SELINUX=enforcing
-    # SELINUXTYPE= can take one of three two values:
-    #     targeted - Targeted processes are protected,
-    #     minimum - Modification of targeted policy. Only selected processes are protected.
-    #     mls - Multi Level Security protection.
-    SELINUXTYPE=targeted
-    ```
+```
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+SELINUX=enforcing
+# SELINUXTYPE= can take one of these three values:
+#     targeted - Targeted processes are protected,
+#     minimum - Modification of targeted policy. Only selected processes are protected.
+#     mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+```
 Setting the value of the SELINUX directive in the configuration file persists across reboots.
 
 >**Note:**
@@ -263,7 +263,7 @@ Setting the value of the SELINUX directive in the configuration file persists ac
     <copy>
     sudo su
     </copy>
-```
+    ```
 
 2. To check the status of SELinux:    
 
@@ -288,6 +288,7 @@ Setting the value of the SELINUX directive in the configuration file persists ac
     </copy>
     ```
     Command output:
+
     ```
     SELinux status: enabled
     SELinuxfs mount: /sys/fs/selinux
