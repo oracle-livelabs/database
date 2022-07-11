@@ -109,7 +109,7 @@ Run the **ahfctl rollbackupdate** command with the **-updateid** option to rollb
 
 >**Note:** All the backup directories used for applying updates will also be deleted as part of rollback.
 
-1. To rollback metadata and framework updates:
+1. To rollback metadata updates:
 
     ```
     <copy>
@@ -157,7 +157,7 @@ Run the **ahfctl deleteupdatebackup** command to delete the backup directories u
 
     ```
     ahfctl deleteupdatebackup -updateid 20220602
-    
+
     ```
     Command output:
 
