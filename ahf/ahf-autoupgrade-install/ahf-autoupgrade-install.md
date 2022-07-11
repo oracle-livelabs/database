@@ -169,14 +169,34 @@ Install Oracle Autonomous Health Framework as a non-root user, for example, **op
 >**Note:**
 - Perl version 5.10 or later is required to install Oracle Autonomous Health Framework.
 - You cannot perform cluster-wide installation as a non-root user.
+- Upgrading AHF is not supported if it is installed in non-daemon mode.
 
 Oracle Autonomous Health Framework has reduced capabilities when you install it as a non-root user in non-daemon mode. Therefore, you cannot complete the following tasks:
 - Automate diagnostic collections
 - Collect diagnostics from remote hosts
 - Collect files that are not readable by the Oracle Home owner, for example, **/var/log/messages**, or certain Oracle Grid Infrastructure logs
 
-1. If you are logged in as **root**, then log out by running the **exit** command at the command prompt.
-2. To install as **Oracle home** owner (**opc** user), use the **–ahf_loc** option, and optionally specify the **-notfasetup** option to prevent running any of the Oracle Trace File Analyzer processes.
+1. To check if Perl version 5.10 or later is installed:
+
+    ```
+    <copy>
+    perl -v
+    </copy>
+    ```
+    Command output:
+
+    ```
+    This is perl 5, version 26, subversion 3 (v5.26.3) built for x86_64-linux-thread-multi (with 57 registered patches, see perl -V for more detail)
+
+    Copyright 1987-2018, Larry Wall
+
+    Perl may be copied only under the terms of either the Artistic License or the GNU General Public License, which may be found in the Perl 5 source kit.
+
+    Complete documentation for Perl, including FAQ lists, should be found on this system using "man perl" or "perldoc perl". If you have access to the Internet, point your browser at http://www.perl.org/, the Perl Home Page.
+
+    ```
+2. If you are logged in as **root**, then log out by running the **exit** command at the command prompt.
+3. To install as **Oracle home** owner (**opc** user), use the **–ahf_loc** option, and optionally specify the **-notfasetup** option to prevent running any of the Oracle Trace File Analyzer processes:
 
     ```
     <copy>
