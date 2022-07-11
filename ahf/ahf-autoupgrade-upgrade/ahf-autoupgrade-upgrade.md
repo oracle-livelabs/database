@@ -25,80 +25,9 @@ In this lab, you will:
 * **openssl** is needed for all platforms to support **autoupgrade**. If **openssl** is not present, then **autoupgrade** exits gracefully.
 * AHF version 21.4.3. You can only upgrade AHF from 21.4.3 to 22.1.1 so uninstall if you have any older versions of AHF.
 
-## Task 1: Uninstall the current AHF installation and install AHF 21.4.3
+## Task 1: Install AHF 21.4.3
 
-1. Check if AHF is already installed.
-
-	```
-	<copy>
-	tfactl status
-	</copy>
-	```
-	Command output:
-
-	```
-	.-------------------------------------------------------------------------------------------------------------.
-	| Host                 | Status of TFA | PID   | Port  | Version    | Build ID             | Inventory Status |
-	+----------------------+---------------+-------+-------+------------+----------------------+------------------+
-	| ll46863-instance-ahf | RUNNING       | 14895 | 22303 | 22.1.0.0.0 | 22100020220529214423 | COMPLETE         |
-	'----------------------+---------------+-------+-------+------------+----------------------+------------------'
-	```
-
-2. Uninstall the current AHF installation.
-
-	```
-	<copy>
-	ahfctl uninstall -deleterepo -silent
-	</copy>
-	```
-	Command output:
-
-	```
-	Starting AHF Uninstall
-	AHF will be uninstalled on:
-	ll46863-instance-ahf
-
-	Stopping AHF service on local node ll46863-instance-ahf...
-	Stopping TFA Support Tools...
-
-	Removed /etc/systemd/system/multi-user.target.wants/oracle-tfa.service.
-	Removed /etc/systemd/system/graphical.target.wants/oracle-tfa.service.
-
-	Stopping orachk scheduler ...
-	Removing orachk cache discovery....
-	No orachk cache discovery found.
-
-	Unable to send message to TFA
-
-	Removed orachk from inittab
-
-	Deleting selinux context entries
-	Removing AHF setup on ll46863-instance-ahf:
-	Removing /etc/rc.d/rc0.d/K17init.tfa
-	Removing /etc/rc.d/rc1.d/K17init.tfa
-	Removing /etc/rc.d/rc2.d/K17init.tfa
-	Removing /etc/rc.d/rc4.d/K17init.tfa
-	Removing /etc/rc.d/rc6.d/K17init.tfa
-	Removing /etc/init.d/init.tfa...
-	Removing /etc/systemd/system/oracle-tfa.service...
-	Removing /opt/oracle.ahf/rpms
-	Removing /opt/oracle.ahf/jre
-	Removing /opt/oracle.ahf/common
-	Removing /opt/oracle.ahf/bin
-	Removing /opt/oracle.ahf/python
-	Removing /opt/oracle.ahf/analyzer
-	Removing /opt/oracle.ahf/tfa
-	Removing /opt/oracle.ahf/chm
-	Removing /opt/oracle.ahf/orachk
-	Removing /opt/oracle.ahf/ahf
-	Removing /opt/oracle.ahf/data/ll46863-instance-ahf
-	Removing /opt/oracle.ahf/install.properties
-	Removing /opt/oracle.ahf/data/repository
-	Removing /opt/oracle.ahf/data
-	Removing /sys/fs/cgroup/cpu/oratfagroup/
-	```
-
-3. Unzip the **ahf\_setup** installer script, **/home/opc/Downloads/AHF-LINUX\_v21.4.3.zip** in the **/tmp** directory.
+1. Unzip the **ahf\_setup** installer script, **/home/opc/Downloads/AHF-LINUX\_v21.4.3.zip** in the **/tmp** directory.
 
 	```
 	<copy>
@@ -114,7 +43,7 @@ In this lab, you will:
 	inflating: /tmp/ahf21.4.3/README.txt  
 	inflating: /tmp/ahf21.4.3/oracle-tfa.pub
 	```
-4. Install AHF 21.4.3.
+2. Install AHF 21.4.3.
 
 	```
 	<copy>

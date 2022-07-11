@@ -25,13 +25,15 @@ In this lab, you will:
 
     >**Note:** When you log in to the terminal, you will be logging in as the **opc** user.
 
-12. Click **Activities**, and then click the **LiveLabs** icon to view the technical content.
-
 ## Task 2: Install AHF on Linux or UNIX as root user in daemon mode
 
 To obtain the fullest capabilities of Oracle Autonomous Health Framework (AHF), install it as **root**.
 
 If Oracle Autonomous Health Framework is already installed, then reinstalling performs an upgrade to the existing location.
+
+SELinux is a set of kernel mods and user-space tools that provide another layer of system security, precise access control, system-wide admin-defined policies, and improved mitigation for privilege escalation attacks. For more information, see [Use SELinux on Oracle Linux](https://docs.oracle.com/en/learn/ol-selinux/index.html#introduction).
+
+SELinux is already setup in **Enforcing** mode on this Linux box. Refer to [Task 5](#Task5:RunAHFonSELinux-enabledsystems) to install AHF on SELinux-enabled systems.
 
 1. Switch to **root** user.
 
@@ -293,7 +295,7 @@ Setting the value of the SELINUX directive in the configuration file persists ac
 
     Command output:
 
-    Since you have already installed AHF, the installer script exits gracefully with a message, **AHF is already installed at /opt/oracle.ahf** as shown below.
+    Since you have already installed AHF in [Task 2](Task2:InstallAHFonLinuxorUNIXasrootuserindaemonmode), the installer script exits gracefully with a message, **AHF is already installed at /opt/oracle.ahf** as shown below.
 
     ```
     AHF Installer for Platform Linux Architecture x86_64
@@ -320,6 +322,83 @@ Setting the value of the SELINUX directive in the configuration file persists ac
     ```
     inittfa-policy
     ```
+## Task 6: Uninstall the current AHF (version 22.1.0.0.0) installation
+
+You can only upgrade AHF from 21.4.3 to 22.1.1 so uninstall the current AHF (version 22.1.0.0.0) installation.
+
+1. Check the version of AHF installed.
+
+    ```
+    <copy>
+    tfactl status
+    </copy>
+    ```
+
+  	Command output:
+
+    ```
+    .-------------------------------------------------------------------------------------------------------------.
+    | Host                 | Status of TFA | PID   | Port  | Version    | Build ID             | Inventory Status |
+    +----------------------+---------------+-------+-------+------------+----------------------+------------------+
+    | ll46863-instance-ahf | RUNNING       | 14895 | 22303 | 22.1.0.0.0 | 22100020220529214423 | COMPLETE         |
+    '----------------------+---------------+-------+-------+------------+----------------------+------------------'
+    ```
+
+2. Uninstall AHF.
+
+    ```
+    <copy>
+    ahfctl uninstall -deleterepo -silent
+    </copy>
+    ```
+
+  	Command output:
+
+    ```
+    Starting AHF Uninstall
+    AHF will be uninstalled on:
+    ll46863-instance-ahf
+
+    Stopping AHF service on local node ll46863-instance-ahf...
+    Stopping TFA Support Tools...
+
+    Removed /etc/systemd/system/multi-user.target.wants/oracle-tfa.service.
+    Removed /etc/systemd/system/graphical.target.wants/oracle-tfa.service.
+
+    Stopping orachk scheduler ...
+    Removing orachk cache discovery....
+    No orachk cache discovery found.
+
+    Unable to send message to TFA
+
+    Removed orachk from inittab
+
+    Deleting selinux context entries
+    Removing AHF setup on ll46863-instance-ahf:
+    Removing /etc/rc.d/rc0.d/K17init.tfa
+    Removing /etc/rc.d/rc1.d/K17init.tfa
+    Removing /etc/rc.d/rc2.d/K17init.tfa
+    Removing /etc/rc.d/rc4.d/K17init.tfa
+    Removing /etc/rc.d/rc6.d/K17init.tfa
+    Removing /etc/init.d/init.tfa...
+    Removing /etc/systemd/system/oracle-tfa.service...
+    Removing /opt/oracle.ahf/rpms
+    Removing /opt/oracle.ahf/jre
+    Removing /opt/oracle.ahf/common
+    Removing /opt/oracle.ahf/bin
+    Removing /opt/oracle.ahf/python
+    Removing /opt/oracle.ahf/analyzer
+    Removing /opt/oracle.ahf/tfa
+    Removing /opt/oracle.ahf/chm
+    Removing /opt/oracle.ahf/orachk
+    Removing /opt/oracle.ahf/ahf
+    Removing /opt/oracle.ahf/data/ll46863-instance-ahf
+    Removing /opt/oracle.ahf/install.properties
+    Removing /opt/oracle.ahf/data/repository
+    Removing /opt/oracle.ahf/data
+    Removing /sys/fs/cgroup/cpu/oratfagroup/
+    ```
+
 ## Learn More
 
 * [Installing and Upgrading Oracle Autonomous Health Framework](https://docs.oracle.com/en/engineered-systems/health-diagnostics/autonomous-health-framework/ahfug/install-upgrade-ahf.html#GUID-663F0836-A2A2-4EFB-B19E-EABF303739A9)
