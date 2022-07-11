@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab walks you through the steps to provision at Autonomous Database on Oracle Cloud. In this lab, you will provision a new Autonomous Transaction processing instance.
+This lab walks you through the steps to provision an Autonomous Database on Oracle Cloud. In this lab, you will provision a new Autonomous Transaction processing instance.
 
 Estimated Time: 10 minutes
 
@@ -14,28 +14,28 @@ In this lab, you will:
 
 ### Prerequisites
 
-* Logged into your Oracle Cloud Account
+* Be logged in to your Oracle Cloud Account
 
 ## Task 1: Choose Autonomous Transaction Processing from the Services Menu
 
-1. Login to the Oracle Cloud.
+1. Log in to the Oracle Cloud.
 
 <if type="freetier">
 
-2. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources, you need to be in a region where Always Free Resources are available. You can see your current default **Region** in the top, right hand corner of the page.
+2. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources, you need to be in a region where Always Free Resources are available. You can see your current default **Region** in the top, right-hand corner of the page.
 
     ![Select region on the far upper-right corner of the page.](./images/region.png " ")
 
 </if>
 <if type="livelabs">
 
-2. If you are using a LiveLabs account, you need to be in the region your account was provisioned in. You can see your current default **Region** in the top, right hand corner of the page. Make sure that it matches the region on the LiveLabs Launch page.
+2. If you are using a LiveLabs account, you need to be in the region your account was provisioned in. You can see your current default **Region** in the top, right-hand corner of the page. Make sure that it matches the region on the LiveLabs Launch page.
 
     ![Select region on the far upper-right corner of the page.](./images/region.png " ")
 
 </if>
 
-3. Click the navigation menu in the upper left to show top level navigation choices.
+3. Click the navigation menu in the upper left to show top-level navigation choices.
 
     ![Oracle home page.](./images/navigation.png " ")
 
@@ -106,7 +106,7 @@ In this lab, you will:
     <if type="livelabs">
     - __Always Free__ - For this lab, we recommend you leave Always Free unchecked.
     </if>
-    - __Choose database version__ - Select 19c from the database version. Note: This lab should work on 21c AJD database as well.
+    - __Choose database version__ - Select 19c from the database version. Note: This lab should work on a 21c AJD database as well.
     - __OCPU count__ - Number of OCPUs for your service. For this lab, leave the default __1 OCPU__. If you choose an Always Free database, it comes with 1 OCPU.
     - __Storage (TB)__ - Select your storage capacity in terabytes. For this lab, leave the default __1 TB__ of storage. If you choose an Always Free database, it comes with 20 GB of storage.
     - __Auto Scaling__ - For this lab, keep auto scaling enabled, to allow the system to automatically use up to three times more CPU and IO resources to meet workload demand.

@@ -6,7 +6,7 @@ So far we've seen how to create and query an Oracle Text index. That's the basic
 
 Oracle Text indexes are not, by default transactional. After changes to the indexed table, the index must be **synchronized** before the new data can be found by a search.
 
-After many changes to an Oracle Text index, it will perform less than ideally, because of fragmentation of the index and garbage (deleted) data accumulating in the index. To get the index to it's best state, we must **optimize** it.
+After many changes to an Oracle Text index, it will perform less than ideally, because of fragmentation of the index and garbage (deleted) data accumulating in the index. To get the index to its best state, we must **optimize** it.
 
 Estimated Time: 20 minutes
 
@@ -108,7 +108,7 @@ SYNC(ON COMMIT) is convenient, but not ideal in high transaction-rate situations
 
 The longer that time period is (five minutes is often chosen) the less your index will need to be optimized. However, if you need near-real-time syncs, you can choose a period as low as one second.
 
-Time interval SYNCs use database scheduler, so in 19c and before you must have __CREATE JOB__ privilege to use it.
+Time interval SYNCs use the database scheduler, so in 19c and before you must have __CREATE JOB__ privilege to use it.
 
 1.  Drop the existing index:
 
@@ -135,7 +135,7 @@ Time interval SYNCs use database scheduler, so in 19c and before you must have _
     </copy>
     ```
 
-4.  Search for the new row. Initially you'll probably find that it doesn't find the new row, but keep repeating the query and it will work 
+4.  Search for the new row. Initially, you'll probably find that it doesn't find the new row, but keep repeating the query and it will work 
     within one minute.
 
     ```
