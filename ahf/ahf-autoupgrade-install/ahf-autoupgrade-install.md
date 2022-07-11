@@ -12,6 +12,7 @@ In this lab, you will:
 * (Recommended) Install AHF on Linux or UNIX as **root** user in daemon mode
 * Install AHF on Linux or UNIX as a non-root user in non-daemon mode
 * Run AHF on SELinux-enabled systems
+* Uninstall AHF
 
 ### Prerequisites
 
@@ -344,7 +345,7 @@ Setting the value of the SELINUX directive in the configuration file persists ac
     ```
 ## Task 6: Uninstall the current AHF (version 22.1.0.0.0) installation
 
-You can only upgrade AHF from 21.4.3 to 22.1.1 so uninstall the current AHF (version 22.1.0.0.0) installation.
+Lab 2 requires that you uninstall AHF (version 22.1.0.0.0) before proceeding because this workshop only upgrades AHF from 21.4.3 to 22.1.1.
 
 1. Check the version of AHF installed.
 
