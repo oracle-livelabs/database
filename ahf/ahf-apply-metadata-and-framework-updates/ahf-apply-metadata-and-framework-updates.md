@@ -64,9 +64,7 @@ Run the **ahfctl queryupdate** command to check if an update was applied. To get
     To apply framework update:
 
     ```
-    <copy>
     ahfctl applyupdate -updatefile ahf_33687033.zip
-    </copy>
     ```
     Command output:
     ```
@@ -158,9 +156,8 @@ Run the **ahfctl deleteupdatebackup** command to delete the backup directories u
 2. To delete a backup directory with a specific timestamp:
 
     ```
-    <copy>
     ahfctl deleteupdatebackup -updateid 20220602
-    </copy>
+    
     ```
     Command output:
 
