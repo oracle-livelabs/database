@@ -256,7 +256,7 @@ Setting the value of the SELINUX directive in the configuration file persists ac
 
 >**Note:**
 * SELinux is already setup in **Enforcing** mode. DO NOT change the mode and just proceed further with installing AHF.
-* If you have performed [Task 4: Install AHF on Linux or UNIX as non-root user in non-daemon mode](#Task4:InstallAHFonLinuxorUNIXasnonrootuserinnondaemonmode), first uninstall AHF, and then proceed with the following steps.
+* If you have performed Task 4: Install AHF on Linux or UNIX as non-root user in non-daemon mode, first uninstall AHF, and then proceed with the following steps.
 * Install AHF as the **root** user.
 
 1. Switch to **root** user.
