@@ -345,7 +345,7 @@ Setting the value of the SELINUX directive in the configuration file persists ac
     ```
 ## Task 6: Uninstall the current AHF (version 22.1.0.0.0) installation
 
-Performing Task 2 in Lab2 requires that you uninstall AHF (version 22.1.0.0.0) before proceeding because in this workshop you can only upgrade AHF from 21.4.3 to 22.1.1.
+Performing Task 2 in Lab 2 requires that you uninstall AHF (version 22.1.0.0.0) before proceeding because in this workshop you can only upgrade AHF from 21.4.3 to 22.1.1.
 
 1. Check the version of AHF installed.
 
