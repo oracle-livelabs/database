@@ -34,7 +34,7 @@ If Oracle Autonomous Health Framework is already installed, then reinstalling pe
 
 SELinux is a set of kernel mods and user-space tools that provide another layer of system security, precise access control, system-wide admin-defined policies, and improved mitigation for privilege escalation attacks. For more information, see [Use SELinux on Oracle Linux](https://docs.oracle.com/en/learn/ol-selinux/index.html#introduction).
 
-SELinux is already setup in **Enforcing** mode on this Linux box. Refer to [Task 5](#Task5:RunAHFonSELinux-enabledsystems) to install AHF on SELinux-enabled systems.
+SELinux is already setup in **Enforcing** mode on this Linux box. Refer to Task 5 to install AHF on SELinux-enabled systems.
 
 1. Switch to **root** user.
 
