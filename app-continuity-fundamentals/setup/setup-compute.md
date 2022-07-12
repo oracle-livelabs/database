@@ -29,7 +29,7 @@ If you already have a VCN setup, proceed to *Step 1B*.
 
   ![](./images/em-oci-landing.png " ")
 
-  ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/developer-resmgr-stacks.png " ")
+  ![](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
 
   ![](./images/em-create-stack.png " ")
 
@@ -96,7 +96,7 @@ If you do not know how to add egress rules, skip to the Appendix to add rules to
 
   ![](./images/em-oci-landing.png " ")
 
-  ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/developer-resmgr-stacks.png " ")
+  ![](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
 
   ![](./images/em-create-stack.png " ")
 
@@ -203,7 +203,7 @@ Before logging in, first note down your IP addresses.
 
 1.  From the hamburger menu, select Bare Metal, VM, Exadata in the Oracle Database category. 
 
-  ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/database-dbcs.png " ")
+  ![](https://oracle-livelabs.github.io/common/images/console/database-dbcs.png " ")
 
 2.  Identify your database system and click it.  (Note:  Remember to choose the compartment that you were assigned if running on LiveLabs)
 

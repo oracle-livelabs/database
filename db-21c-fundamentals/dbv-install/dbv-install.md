@@ -20,7 +20,7 @@ In this lab, you will:
 
 ## Task 1: Ensure Database Vault is not installed
 
-Before starting the reinstallation of Database Vault, use the [Practice: Deinstalling Oracle Database Vault](https://oracle.github.io/learning-library/data-management-library/database/21c/fundamentals/workshops/freetier/index.html?lab=lab-uninstall-db-vault) in case Database Vault is already installed.
+Before starting the reinstallation of Database Vault, use the [Practice: Deinstalling Oracle Database Vault](https://oracle-livelabs.github.io/database/db-21c-fundamentals/workshops/freetier/index.html?lab=lab-uninstall-db-vault) in case Database Vault is already installed.
 
 ## Task 2: Use DBCA to reinstall or install Database Vault in the CDB
 

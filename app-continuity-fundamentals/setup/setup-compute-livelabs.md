@@ -25,7 +25,7 @@ Watch the video below for an overview of the Build a DB System lab
 
 3.  From the hamburger menu, select **Bare Metal, VM, and Exadata** in the Oracle Database category.
 
-  ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/database-dbcs.png " ")
+  ![](https://oracle-livelabs.github.io/common/images/console/database-dbcs.png " ")
 
 2.  Identify your database system from your My Reservations page in LiveLabs and click it.  (Note:  Remember to choose the compartment and region that you were assigned if running on LiveLabs)
 
@@ -53,25 +53,25 @@ Watch the video below for an overview of the Build a DB System lab
 
 1.  To start the Oracle Cloud Shell, go to your Cloud console and click the Cloud Shell icon at the top right of the page.
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/cloudshellopen.png " ")
+    ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/cloudshellopen.png " ")
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/cloudshellsetup.png " ")
+    ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/cloudshellsetup.png " ")
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/cloudshell.png " ")
+    ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/cloudshell.png " ")
 
 2.  Click on the Cloud Shell hamburger icon and select **Upload** to upload your private key
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/upload-key.png " ")
+    ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key.png " ")
 
 3.  To connect to the compute instance that was created for you, you will need to load your private key.  This is the key that does *not* have a .pub file at the end.  Locate that file on your machine and click **Upload** to process it.
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/upload-key-select.png " ")
+    ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key-select.png " ")
 
 4. Be patient while the key file uploads to your Cloud Shell directory
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/upload-key-select-2.png " ")
+    ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key-select-2.png " ")
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/upload-key-select-3.png " ")
+    ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key-select-3.png " ")
 
 5. Once finished run the command below to check to see if your ssh key was uploaded.  Move it into your .ssh directory and change the permissions on the file.
 
@@ -87,7 +87,7 @@ Watch the video below for an overview of the Build a DB System lab
     cd ~
     ````
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/upload-key-finished.png " ")
+    ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key-finished.png " ")
 
 
 6.  Using one of the Public IP addresses, enter the command below to login as the *opc* user and verify connection to your nodes.    
