@@ -27,20 +27,20 @@ Estimated Time: 15 minutes
 
 1. Select database actions and login using admin.
    
-   ![log in screen](./images/log_in_admin.png " ")
+   ![log in screen](./images/log-in-admin.png " ")
 
 2. Select Database Users.
 
-    ![database actions home screen](./images/select_database_users.png " ")
+    ![database actions home screen](./images/select-database-users.png " ")
    
 3. Create User and input HR for username, create a password, select web access, and click create user at the bottom.
 
-    ![database users home page](./images/create_hr_schema.png " ")
-    ![credentials for hr](./images/hr_schema_credentials.png " ")
+    ![database users home page](./images/create-hr-schema.png " ")
+    ![credentials for hr](./images/hr-schema-credentials.png " ")
    
 4. Select the hamburger menu on the top left and click SQL under development.
 
-    ![hamburger menu options](./images/hamburger_menu.png " ")
+    ![hamburger menu options](./images/hamburger-menu.png " ")
    
 5. Copy and paste the following code in the worksheet and click run script to create the HR tables.
    ```
@@ -2957,7 +2957,7 @@ Estimated Time: 15 minutes
     SQL> <copy>SELECT employee_id, salary FROM hr.employees; </copy>
 
     ```
-    ![table generated from scripts](./images/query_result_for_hr.png " ")
+    ![table generated from scripts](./images/query-result-for-hr.png " ")
 
 3. Create a procedure that allows the HR user to raise the employees’ salaries.
 
@@ -3052,7 +3052,7 @@ Estimated Time: 15 minutes
 
 4. Find the auditor_admin user, click the ellipses next to the name, and enable Rest User.
 
-   ![Enable Rest for auditor_admin](./images/audit_admin_rest.png " ")
+   ![Enable Rest for auditor_admin](./images/audit-admin-rest.png " ")
 
 5. Sign out of sql developer and sign in as auditor_admin using the password you inserted in step 2.
 
