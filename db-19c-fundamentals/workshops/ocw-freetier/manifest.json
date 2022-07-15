@@ -44,6 +44,11 @@
               "filename": "./../../omit-column-encryption-attribute-during-import/omit-column-encryption-attribute-during-import.md",
               "type": "freetier"
           },
+          {
+            "title": "Clean your environment",
+            "description": "Clean up OCI resources",
+            "filename": "./../../clean-environment/clean-environment.md"
+        },
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",

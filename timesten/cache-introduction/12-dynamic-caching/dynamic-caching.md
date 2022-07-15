@@ -114,7 +114,7 @@ This is because you do not need to perform an initial load for a dynamic cache g
 Check the state of the tables:
 
 ```
-<count>
+<copy>
 select count(*) from appuser.parent;
 </copy>
 ```
