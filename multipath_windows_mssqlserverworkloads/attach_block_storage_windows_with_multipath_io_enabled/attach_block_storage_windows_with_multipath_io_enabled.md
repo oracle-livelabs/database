@@ -70,7 +70,7 @@ This lab assumes you have:
 
   ![Disk Management disk online](./images/diskcreatewelcome.png "Disk Management disk online")
 
-8. Leave the values empty and click on **Next**.
+8. Leave the default values and click on **Next**.
 
   ![Disk Management disk size](./images/disksize.png "Disk Management disk size")
 
@@ -81,7 +81,7 @@ This lab assumes you have:
 10. In the **Format Partition** section
     * **Choose File System**: NTFS
     * **Allocation unit Size**: 64K
-      > Note: SQL Server uses extents to store data. Therefore, on a SQL Server machine, the NTFS allocation unit size for hosting SQL database files (including the tempdb) should be 64 KB.
+      > Note: **Microsoft SQL Server** uses extents to store data. Therefore, on a SQL Server machine, the NTFS allocation unit size for hosting SQL database files (including the tempdb) should be 64 KB.
 
     * Select the **Perform a quick format**
 
@@ -95,14 +95,16 @@ This lab assumes you have:
 
   ![Disk Management disk Properties](./images/diskproperties.png "Disk Management disk Properties")
 
-13. Right-click on newly created disk and click on **Properties**
+13. Click on **Hardware** tab and select the LUN1 and click on **Properties**. 
 
   ![Disk Management disk mpio properties](./images/diskmpioproperties.png "Disk Management disk mpio properties")
 
-14. Click on MPIO and change the policy to **Round Robin** and click on **ok**.
+14. Click on **MPIO** and select the policy to **Round Robin** and click on **ok**.
 
   ![Disk Management disk mpio policy](./images/mpiopolicy.png "Disk Management disk mpio policy")
 
+  You may now **proceed to the next Task**.
+  
 ##  Task 3: Test the Disk Throughput from diskspd
 
 1. Download the diskspd from the [link](https://github.com/microsoft/diskspd/releases/download/v2.1/DiskSpd.ZIP) from the browser.

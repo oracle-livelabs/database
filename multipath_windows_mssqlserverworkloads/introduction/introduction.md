@@ -21,7 +21,6 @@ In this workshop, you will learn how to:
 * An Oracle Free Tier, Always Free, Paid, or LiveLabs Cloud Account
 * Some understanding of cloud and security terms is helpful
 * Familiarity with Oracle Cloud Infrastructure (OCI) is helpful
-* Required Subnets: One public subnet for the Bastion host and three private subnets to host the Domain Controller, Microsoft SQL Server Nodes, and Quorum Server
 
 ## Acknowledgements
 * **Author** - Ramesh Babu Donti, Principal Cloud Architect, NA Cloud Engineering

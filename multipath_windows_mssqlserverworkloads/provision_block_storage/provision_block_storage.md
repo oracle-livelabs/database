@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab walks you through how to provision the Block storage.
+This lab walks you through how to provision the Block Storage.
 
 Estimated Time:  15 min
 
@@ -21,7 +21,7 @@ This lab assumes you have:
 1. From the OCI services menu, Click **Block Volumes** under **Block Storage**, then Click **Create Block Volume**.
 
 2. Fill out the dialog box:
-    * **Name:** Enter a name for the block volume. (e.g. "sql_data)
+    * **Name:** Enter a name for the block volume. (e.g. sql_data)
     * **Create in Compartment:** Select the same compartment as your VCN and Instance.
     * **Availability Domain:** Select the first available domain (must be the same as Compute).
     * **Volume and Size Performance:** click on custom and choose 1024 GB size, and **Target Volume Performance** is **30 VPU**
