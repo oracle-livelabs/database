@@ -117,6 +117,8 @@ This lab assumes you have:
 
         <copy>diskspd -d60 -t4 -o64 -b8k -r -Sh D: > c:\TestRandomReads.txt
 
+  > Note: The parameter -b8K - SQL Server stores data in the pages, and these pages' size is 8KB; therefore, we will set the block size parameter as 8KB. Hence we have chosen the -b8K size.
+
    Open the **CMD** as administration and browse to the path where **diskspd.exe** file is available and run the diskspd command. The example is shown below. 
 
   ![diskspd extract](./images/diskspdresults.png "diskspd extract")
@@ -126,12 +128,6 @@ This lab assumes you have:
   ![diskspd extract read results](./images/results.png "diskspd extract read results")
 
   > Note:  For the throughput and IOPS performance numbers details for various volume sizes, see the [link] (https://docs.oracle.com/en-us/iaas/Content/Block/Concepts/blockvolumeultrahighperformance.htm#Higher_Performance). 
-
-4. Repeat the steps from **Step3** to test **random reads for Throughput**: 
-
-        <copy>diskspd -d60 -t4 -o64 -b8k -r -Sh D: > c:\TestRandomReadsThroughput.txt
-  
-  > Note: The parameter -b8K - SQL Server stores data in the pages, and these pages' size is 8KB; therefore, we will set the block size parameter as 8KB. Hence we have chosen the -b8K size. 
 
   Congratulations !!! You Have Completed Successfully The Workshop. 
 
