@@ -201,7 +201,7 @@ Estimated Time: 5 minutes
 
     computeIP//iris/iris_web.php
 
-    ![MDS](./images/iris_web_php.png "iris_web_php ")
+    ![MDS](./images/iris-web-php.png "iris-web-php")
 
 ## Acknowledgements
 

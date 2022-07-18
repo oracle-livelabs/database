@@ -119,7 +119,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     'Assign a public IP address' should be set to Yes
 
-    ![CONNECT](./images/05compute-IP.png "compute-IP ")
+    ![CONNECT](./images/05compute-ip.png "compute-ip ")
 
 12. On Add SSH keys, paste the public key from the notepad.
 
