@@ -12,12 +12,12 @@
         {
             "title": "Get Started",
             "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
-            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/cloud-login/pre-register-free-tier-account.md"
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
         },
         {
             "title": "Prereq 1 - Create Autonomous Database (ADB) as Target (Optional)",
             "description": "This lab will help you create Oracle ADB (ADW/ATP) instance for target purpose, if you don't already have that",
-            "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/data-management-library/autonomous-database/shared/adb-provision/adb-provision-conditional.md"
+            "filename": "https://oracle-livelabs.github.io/adb/shared/adb-provision/adb-provision-conditional.md"
         },
         {
             "title": "Prereq 2 - Create Windows VM to run Oracle SQL Developer (Optional)",
@@ -32,12 +32,12 @@
         {
             "title": "Appendix: How to Connect to Autonomous Database from SQL Developer",
             "description": "How to Make Connection to Autonomous Database from SQL Developer with Wallet",
-            "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/data-management-library/autonomous-database/shared/adw-connection-wallet/adw-connection-wallet.md"
+            "filename": "https://oracle-livelabs.github.io/adb/shared/adw-connection-wallet/adw-connection-wallet.md"
         },
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-freetier.md"
+            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
         }
     ]
 }
