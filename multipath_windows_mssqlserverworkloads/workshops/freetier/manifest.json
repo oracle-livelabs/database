@@ -15,22 +15,22 @@
     {
       "title": "Lab 1: Provision the Windows Compute Instance",
       "description": "Step by step instruction on how to Provision the Windows Compute Instance",
-      "filename": "../../provision_windows_computeInstance/provision_windows_computeInstance.md"
+      "filename": "../../provision-windows-computeInstance/provision-windows-computeInstance.md"
     },
     {
       "title": "Lab 2: Configure Multipath-IO (MPIO) on Windows Server 2019",
       "description": "Step by step instructions on how to Configure Multipath-IO (MPIO) on Windows Server 2019",
-      "filename": "../../configure_multipath_io_windows2019/configure_multipath_io_windows2019.md"
+      "filename": "../../configure-multipath-io-windows2019/configure-multipath-io-windows2019.md"
     },
     {
       "title": "Lab 3: Provision the Block storage",
       "description": "Step by step instruction how to Provision the Block storage",
-      "filename": "../../provision_block_storage/provision_block_storage.md"
+      "filename": "../../provision-block-storage/provision-block-storage.md"
     },
     {
       "title": "Lab 4: Attach Block storage on Windows with Multipath_IO (MPIO) enabled",
       "description": "Step by step instruction how to Attach Block storage on Windows with Multipath_IO (MPIO) enabled",
-      "filename": "../../attach_block_storage_windows_with_multipath_io_enabled/attach_block_storage_windows_with_multipath_io_enabled.md"
+      "filename": "../../attach-block-storage-windows-with-multipath-io-enabled/attach-block-storage-windows-with-multipath-io-enabled.md"
     },
     {
       "title": "Need Help?",

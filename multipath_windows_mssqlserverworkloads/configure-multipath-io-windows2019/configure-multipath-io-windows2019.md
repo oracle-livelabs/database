@@ -55,15 +55,15 @@ This lab assumes you have:
 
 10. The results will show as shown in the following image, and the installation required a restart to finish the installation. Click on **close**. 
 
-  ![Windows Server Manager MPIO installation](./images/windows-servermanger_mpio_installation.png "Windows Server Manager MPIO installation")
+  ![Windows Server Manager MPIO installation](./images/windows-servermanger-mpio-installation.png "Windows Server Manager MPIO installation")
 
 11. Restart the Windows server from start menu. 
 
-  ![Windows Server restart](./images/server_restart.png "Windows Server restart")
+  ![Windows Server restart](./images/server-restart.png "Windows Server restart")
 
 12. After successful restart, login to the server, and you can see **Multipath I/O** installed successfully.
 
-  ![Multipath I/O Success](./images/windows-servermanger_mpio_verify.png "Multipath I/O Success")
+  ![Multipath I/O Success](./images/windows-servermanger-mpio-verify.png "Multipath I/O Success")
 
   You may now **Proceed to the next lab.**
 

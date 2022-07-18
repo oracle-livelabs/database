@@ -31,7 +31,7 @@ This lab assumes you have:
     * **Backup Policy:** Leave empty.
     * **Encryption:** Select "Encrypt Using Oracle-Managed Keys"
 
-  ![Block Storage Create](./images/blockstorage_create.png "Block Storage Create")
+  ![Block Storage Create](./images/blockstorage-create.png "Block Storage Create")
 
 3. Wait for the Block Volume state to change from 'Provisioning' to 'Available'.
 
@@ -42,7 +42,7 @@ This lab assumes you have:
 
     Click on **Attach**
   
-    ![Block Storage attach Instance](./images/block_stroage_attachinstance.png "Block Storage attach Instance")
+    ![Block Storage attach Instance](./images/block-stroage-attachinstance.png "Block Storage attach Instance")
 
   You may now **Proceed to the next lab.**
 

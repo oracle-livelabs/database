@@ -48,7 +48,7 @@ This lab assumes you have:
 
 2. Right-click on the Start button from **Task Bar** from Windows and click on **Run** button. Once the **Run** command opens, type **diskmgmt.msc** to open the disk management service. 
 
-  ![Windows Run Command](./images/windows_run.png "Windows Run Command")
+  ![Windows Run Command](./images/windows-run.png "Windows Run Command")
 
 3. From the **Disk Management** opens, you can see the unknown disk **Offline**, right-click on the disk and then click on **Online** to bring the disk online. 
 
