@@ -25,8 +25,13 @@
           },
              
           {
-              "title": "Lab 3: Buildd HeatWave ML",
+              "title": "Lab 3: Build HeatWave ML with SQL",
               "filename": "../../do-heatwave-ml/do-heatwave-ml.md"
+          },
+
+          {
+            "title": "Lab 4: Build HeatWave ML Web App with PHP",
+            "filename": "../../develop/develop.md"
           },
 
           {
