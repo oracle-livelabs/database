@@ -58,6 +58,7 @@ In this lab, you will be guided through the following steps:
 - An Oracle Free Tier, Paid or LiveLabs Cloud Account
 - Some Experience with MySQL Shell - [MySQL shell] (https://dev.MySQL.com/doc/MySQL-shell/8.0/en/)
 
+
 ## Acknowledgements
 
 - **Author** - Perside Foster, MySQL Solution Engineering

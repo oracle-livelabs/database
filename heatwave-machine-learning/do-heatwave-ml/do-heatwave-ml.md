@@ -16,7 +16,6 @@ After this step the data is stored in the MySQL HeatWave database in the followi
 
 _Estimated Time:_ 10 minutes
 
-
 ### Objectives
 
 In this lab, you will be guided through the following task:
@@ -28,7 +27,6 @@ In this lab, you will be guided through the following task:
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with MySQL Shell
 - Completed Lab 2
-
 
 ## Task 1: Prepare HeatWave ML environment
 
@@ -57,7 +55,6 @@ In this lab, you will be guided through the following task:
     ```bash
     <copy>GRANT SELECT, EXECUTE ON sys.* TO 'user_name'@'%';</copy>
     ```
-
 
 ## Task 2: load training and test data
 
@@ -144,13 +141,13 @@ In this example, data is assigned to a @row\_input session variable, and the var
 
 1. Make predictions for a table of data using the ML\_PREDICT\_TABLE routine. The routine takes data from the iris\_test table as input and writes the predictions to an iris_predictions output table.
 
-    ```
+    ```bash
     <copy>CALL sys.ML_PREDICT_TABLE('ml_data.iris_test', @iris_model,'ml_data.iris_predictions');</copy>
     ```
 
 2. Query the table ML\_PREDICT\_TABLE to view the results  
 
-    ```
+    ```bash
     <copy>SELECT * FROM ml_data.iris_predictions LIMIT 3;</copy>
     ```
 
@@ -158,13 +155,13 @@ In this example, data is assigned to a @row\_input session variable, and the var
 
 3. Generate explanations for the same table of data using the ML\_EXPLAIN\_TABLE routine.
 
-    ```
+    ```bash
     <copy>CALL sys.ML_EXPLAIN_TABLE('ml_data.iris_test', @iris_model, 'ml_data.iris_explanations');</copy>
     ```
 
 4. Query the table ML\_EXPLAIN\_TABLE  to view the results
 
-    ```
+    ```bash
     <copy> SELECT * FROM iris_explanations LIMIT 3\G;</copy>
     ```
 
@@ -175,18 +172,19 @@ In this example, data is assigned to a @row\_input session variable, and the var
 
 1. Score the model using ML\_SCORE to assess the model's reliability. This example uses the balanced_accuracy metric, which is one of the many scoring metrics supported by HeatWave ML.
 
-    ```
+    ```bash
     <copy>CALL sys.ML_SCORE('ml_data.iris_validate', 'class', @iris_model, 'balanced_accuracy', @score);</copy>
     ```
 
 2. To retrieve the computed score, query the @score session variable
 
-    ```
+    ```bash
     <copy>SELECT @score;</copy>
     ```
+
 3. Unload the model using ML\_MODEL\_UNLOAD:
 
-    ```
+    ```bash
     <copy>CALL sys.ML_MODEL_UNLOAD(@iris_model);</copy>
     ```
 

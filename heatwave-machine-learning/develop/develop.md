@@ -20,7 +20,6 @@ In this lab, you will be guided through the following tasks:
 
 ## Task 1: Connect to HeatWave using Workbench
 
-
 Estimated Time: 5 minutes
 
 1. At this point, you can also use MySQL Workbench from your local machine to connect to the MySQL endpoint using your new Compute instance as a jump box.
@@ -35,7 +34,7 @@ Estimated Time: 5 minutes
 
 ## TASK 2: Install App Server (APACHE)
 
-1. If not already connected with SSH, on Command Line, connect to the Compute instance using SSH ... be sure replace the  "private key file"  and the "new compute instance ip".
+1. If not already connected with SSH, on Command Line, connect to the Compute instance using SSH ... be sure to replace the  "private key file"  and the "new compute instance IP".
 
     ```bash
         <copy>ssh -i private_key_file opc@new_compute_instance_ip</copy>
@@ -73,13 +72,13 @@ Estimated Time: 5 minutes
     <copy>sudo firewall-cmd --reload</copy>
     ```
 
-3. From a browser test apache from your loacal machine using the Public IP Address of your Compute Instance
+3. From a browser test apache from your local machine using the Public IP Address of your Compute Instance
 
     **Example: http://129.213....**
 
-## TASK 3: Install PHP  
+## TASK 3: Install PHP
 
-1. Install php:
+1. Install PHP:
 
     a. Install php:7.4
 
@@ -87,19 +86,19 @@ Estimated Time: 5 minutes
     <copy> sudo dnf module install php:7.4 -y</copy>
     ```
 
-    b. Install associated php libraries
+    b. Install associated PHP libraries
 
     ```bash
     <copy>sudo yum install php-cli php-mysqlnd php-zip php-gd php-mbstring php-xml php-json -y</copy>
     ```
 
-    c. View  php / mysql libraries
+    c. View PHP / MySQL libraries
 
     ```bash
     <copy>php -m |grep mysql</copy>
     ```
 
-    d. View php version
+    d. View PHP version
 
     ```bash
     <copy>php -v</copy>
@@ -111,13 +110,13 @@ Estimated Time: 5 minutes
     <copy>sudo systemctl restart httpd</copy>
     ```
 
-2. Create test php file (info.php)
+2. Create test PHP file (info.php)
 
     ```bash
-    <copy>sudo nano /var/www/html/info.php</copy> 
+    <copy>sudo nano /var/www/html/info.php</copy>
     ```
 
-3. Add the following code to the editor and save the file (ctr + o) (ctl + x)
+3. Add the following code to the editor and save the file (ctr + o) (ctrl + x)
 
     ```bash
         <copy><?php
@@ -171,7 +170,7 @@ Estimated Time: 5 minutes
 
 4. From your local machine, browse the page info.php
 
-    **Test Config.php on Web sever http://150.230..../config.php**
+    **Test Config.php on Web Sever http://150.230..../config.php**
 
 ## TASK 5: Create HeatWave ML Web App
 
@@ -195,7 +194,7 @@ Estimated Time: 5 minutes
     <copy>cd /var/www/html/iris</copy>
     ```
 
-    replace the database ip in config.php file with your heatwave data base IP and save the file .
+    Replace the database IP in config.php file with your heatwave database IP and save the file.
 
     run the application as follows:
 
@@ -205,7 +204,7 @@ Estimated Time: 5 minutes
 
 ## Acknowledgements
 
-- **Author** - Perside Foster, MySQL Solution Engineering, Harsh Nayak , MySQL Solution Engineering
+- **Author** - Perside Foster, MySQL Solution Engineering, Harsh Nayak, MySQL Solution Engineering
 
 - **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Priscila Galvao, MySQL Solution Engineering, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, May 2022
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, July 2022
