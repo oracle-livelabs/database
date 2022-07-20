@@ -37,7 +37,7 @@ In this lab, you will be guided through the following tasks:
 
     VCN Name:
 
-    ```
+    ```bash
     <copy>MDS-VCN</copy>
     ```
 
@@ -73,19 +73,22 @@ In this lab, you will be guided through the following tasks:
 
     Add an Ingress Rule with Source CIDR
 
-        ```
-        <copy>0.0.0.0/0</copy>
-        ```
+    ```bash
+    <copy>0.0.0.0/0</copy>
+    ```
+
     Destination Port Range
 
-        ```
-        <copy>3306,33060</copy>
-        ```
+    ```bash
+    <copy>3306,33060</copy>
+    ```
+
     Description
 
-        ```
-        <copy>MySQL Port Access</copy>
-        ```
+    ```bash
+    <copy>MySQL Port Access</copy>
+    ```
+
     Click 'Add Ingress Rule'
         ![VCN](./images/03vcn-ingress-rule.png "vcn-ingress-rule")
 
@@ -121,14 +124,15 @@ In this lab, you will be guided through the following tasks:
 
     Enter Name
 
-        ```
-        <copy>MDS-HW</copy>
-        ```
+    ```bash
+    <copy>MDS-HW</copy>
+    ```
+
     Enter Description
 
-        ```
-        <copy>MySQL Database Service HeatWave instance</copy>
-        ```
+    ```bash
+    <copy>MySQL Database Service HeatWave instance</copy>
+    ```
 
     Select **HeatWave** to specify a HeatWave DB System
 
@@ -164,9 +168,9 @@ In this lab, you will be guided through the following tasks:
 
     Data Storage Size (GB) Set value to:  **1024**
 
-        ```
-        <copy>1024</copy>
-        ```
+    ```bash
+    <copy>1024</copy>
+    ```
 
     ![MDS](./images/04mysql-data-storage.png "mysqldata-storage")
 
@@ -176,9 +180,9 @@ In this lab, you will be guided through the following tasks:
 
 10. Go to the Networking tab, in the Hostname field enter (same as DB System Name):
 
-        ```
-        <copy>MDS-HW</copy>
-        ```
+    ```bash
+    <copy>MDS-HW</copy>
+    ```
 
 11. Review **Create MySQL DB System**  Screen
 

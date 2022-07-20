@@ -4,7 +4,7 @@
 
 MySQL HeatWave Machine Learning can easily be used for development tasks with existing Oracle services. New applications can also be created with the LAMP or other software stacks.
 
-_Estimated Lab Time:_ 30 minutes
+_Estimated Time:_ 30 minutes
 
 ### Objectives
 

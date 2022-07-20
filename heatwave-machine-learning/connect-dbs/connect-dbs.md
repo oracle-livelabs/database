@@ -117,7 +117,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 11. On Networking, make sure '**MDS-VCN**' is selected
 
-    'Assign a public IP address' should be set to Yes
+    'Assign a public IP address should be set to Yes
 
     ![CONNECT](./images/05compute-ip.png "compute-ip ")
 
