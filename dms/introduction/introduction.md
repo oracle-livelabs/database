@@ -1,6 +1,6 @@
 # Introduction
 
-The labs in this workshop will walk you through all the steps to get started using Oracle Cloud Infrastructure (OCI) Database Migration (DMS). You will provision a Virtual Cloud Network (VCN), an Oracle Database 19c instance, and an Oracle Autonomous Database (ADB) instance in order to perform a database migration using DMS.
+The labs in this workshop will walk you through all the steps to get started using Oracle Cloud Infrastructure (OCI) Database Migration (DMS). You will provision a Virtual Cloud Network (VCN), an Oracle Database 19c instance, and an Oracle Autonomous Database (ADB) instance and deploy a GoldenGate instance from marketplace in order to perform a database migration using DMS.
 
 With DMS we make it quick and easy for you to migrate databases from on-premises, Oracle or third-party cloud into Oracle databases on OCI.
 
@@ -20,7 +20,8 @@ In the current release of DMS we support Oracle databases located on-premises, i
 |                  |  |     
 |--------------------------|-------------------------|
 | Source Databases | Oracle DB 11g, 12c, 18c, 19c: <br>on-premises, third-party cloud, OCI  |   
-| Target Databases | ADB shared and dedicated |    
+| Target Databases | ADB shared and dedicated |  
+| Supported Source Environments| Oracle Cloud Infrastructure co-managed databases or on-premises environments<br>Amazon Web Services RDS Oracle Database (both offline and online migrations)<br>Linux-x86-64, IBM AIX (both offline and online modes)<br>Oracle Solaris (offline mode only)|
 | Migration Modes  | Direct Access to Source <br>(VPN or Fast Connect) Indirect Access to Source <br>(Agent on Source Env) |                        |  
 | Initial Load <br> (Offline Migration) | Logical Migration using <br>Data Pump to Object Store <br>Data Pump using SQLnet |  |
 | Replication <br> (Online Migration) | GoldenGate Marketplace |
@@ -46,6 +47,7 @@ In this lab, you will:
 * Create a Vault
 * Create Databases
 * Create an Object Storage Bucket
+* Deploy GoldenGate marketplace instance
 * Create Registered Databases
 * Create, Validate, and Run a Migration
 
@@ -65,4 +67,4 @@ You may now [proceed to the next lab](#next).
 ## Acknowledgements
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian Lynch, Solution Engineers, Austin Specialist Hub
-* **Last Updated By/Date** - Killian Lynch, Solution Engineers, July 2021
+* **Last Updated By/Date** - Jorge Martinez, Product Manager, July 2022
