@@ -2,22 +2,19 @@
 
 ## Introduction
 
-#### Logical Online Migration with Backup Location
-ZDM's Logical Online Migration requires a GoldenGate Hub with two GoldenGate Microservices, one Extract and one Replicat. These two microservices' task is to keep both source and target in sync during the migration and during the graceful switchover. The overall logical workflow architecture, as discussed in this workshop's introduction, is as follows:
-
-![Oracle Zero Downtime Migration Logical Online Workflow Step-by-Step visualization](./images/logical-online-backup-workflow.png " ")
-
+#### Logical Online Migration
+Online migration makes a point-in-time copy and replicates all subsequent changes from the source to the target database. This allows applications to stay online during the migration and then be switched over from source to target database. DMS online migration requires GoldenGate Hub, the current version 21 comes with two GoldenGate microservices, one extract and one replicat. These two microservice tasks are to keep both source and target in sync during the migration and during the graceful switchover. 
 
 Estimated Time: 30 minutes
 
 ### Workshop Objectives
 
 In this lab, you will:
-* Learn how to configure the required GoldenGate Hub for ZDM's Logical Online Migration
+* Learn how to configure the required GoldenGate Hub for DMS's Logical Online Migration
 
 ## Task 1: Verify VCN Correct Configuration
 
-This workshop section requires having access to an Oracle Cloud account, having created SSH Keys and verify the Virtual Cloud Network Configuration. This last step will be described below.
+This workshop section requires having access to an Oracle cloud account, having created SSH Keys and verify the Virtual Cloud Network Configuration. This last step will be described below.
 
 1. Login to the Oracle Cloud.
 
@@ -94,9 +91,9 @@ This workshop section requires having access to an Oracle Cloud account, having 
 5. Configure the following variables for section __Name for New Resources__:
 
     - Display Name (As is)
-    - Host DNS Name, enter oggzdm
+    - Host DNS Name, enter oggdms
 
-    ![Screenshot of Oracle GoldenGate Image Create Stack Menu, Resource Name Section](./images/ogg-name-for-new-resources.png " ") 
+    ![Screenshot of Oracle GoldenGate Image Create Stack Menu, Resource Name Section](./images/ogg-host-name.png " ") 
 
 6. Configure the following variables for section __Network Settings__, bear in mind that all variables must be from the compartment where all your resources are deployed:
 
@@ -138,7 +135,7 @@ This workshop section requires having access to an Oracle Cloud account, having 
 
     ![Screenshot of Oracle GoldenGate Image Create Stack Menu, Final Section](./images/ogg-hub-create.png " ")
 
-12. Upon creation, scroll down to the bottom of the logs and copy the __ogg\_image\_id__ __ogg\_instance_\_id__ and the __ogg\_public\_ip__. Save them for later use, you will require it during the migration
+12. Upon creation, scroll down to the bottom of the logs and copy the __ogg\_image\_id__ , __ogg\_instance_\_id__ and the __ogg\_public\_ip__. Save them for later use, you will require it during the migration
 
     ![Screenshot of Oracle GoldenGate Image Creation Logs](./images/ogg-copy-ocid.png " ")
 
@@ -228,10 +225,10 @@ This workshop section requires having access to an Oracle Cloud account, having 
 You may now close any Oracle GoldenGate Service Manager leftover tab.
 Please *proceed to the next lab*.
 
-## Learn More About ZDM's Oracle GoldenGate Hub
+## Learn More
 
-* [Oracle Zero Downtime Migration - Product Page](http://www.oracle.com/goto/zdm)
-* [Oracle GoldenGate MicroService Documentation](https://docs.oracle.com/en/middleware/goldengate/core/19.1/oggmp/oracle-goldengate-microservices-oracle-cloud-marketplace.html)
+* [Blog - Elevate your database into the cloud using Oracle Cloud Infrastructure Database Migration](https://blogs.oracle.com/dataintegration/elevate-your-database-into-the-cloud-using-oracle-cloud-infrastructure-database-migration)
+* [Overview of Oracle Cloud Infrastructure Database Migration](https://docs.oracle.com/en-us/iaas/database-migration/doc/overview-oracle-cloud-infrastructure-database-migration.html)
 
 
 
@@ -239,4 +236,4 @@ Please *proceed to the next lab*.
 * **Authors** - Ricardo Gonzalez, Senior Principal Product Manager, Oracle Cloud Database Migration
 * **Authors** - Ameet Kumar Nihalani, Senior Principal Support Engineer, Oracle Cloud Database Migration
 * **Contributors** - LiveLabs Team, ZDM Development Team
-* **Last Updated By/Date** - Ricardo Gonzalez, January 2022
+* **Last Updated By/Date** - Jorge Martinez, Product Manager, January 2022
