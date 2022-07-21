@@ -196,6 +196,10 @@ Estimated Time: 5 minutes
 
     Replace the database IP in config.php file with your heatwave database IP and save the file.
 
+    ```bash
+    <copy>sudo nano config.php</copy>
+    ```
+
     run the application as follows:
 
     computeIP//iris/iris_web.php
