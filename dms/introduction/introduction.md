@@ -47,7 +47,7 @@ In this lab, you will:
 * Create a Vault
 * Create Databases
 * Create an Object Storage Bucket
-* Deploy GoldenGate marketplace instance
+* Deploy a GoldenGate marketplace instance
 * Create Registered Databases
 * Create, Validate, and Run a Migration
 

@@ -28,9 +28,9 @@ The following task is *optional* if a source database is already present.
 1. You will need an SSH key pair for logging into your database and environments. If you don’t already have one, please create one.
 *Important*: The key needs to be in RSA format, other formats like OpenSSL are currently not supported. You can use a command like: `ssh-keygen -t rsa -N "" -b 2048 -C "<key_name>" -f <path/root_name>`
 
-2. In the OCI Console Menu, go to **Oracle Database > Bare Metal, VM, and Exadata**.
+2. In the OCI Console Menu, go to **Oracle Database > Oracle Base Database (VM, BM)**.
 
-  ![](images/bare-metal-vm-exadata.png)
+  ![](images/oracle-base-database.png)
 
 3. Press **Create DB System**.
 
@@ -166,4 +166,4 @@ You may now [proceed to the next lab](#next).
 ## Acknowledgements
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Killian Lynch, Hanna Rakhsha, Kiana McDaniel, Solution Engineers, Austin Specialist Hub
-* **Last Updated By/Date** - Killian Lynch, Hanna Rakhsha, Kiana McDaniel, Solution Engineers, July 2021
+* **Last Updated By/Date** - Jorge Martinez, Product Manager, July 2022

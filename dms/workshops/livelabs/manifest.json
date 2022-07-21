@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "Oracle Cloud Infrastructure Database Migration",
+    "workshoptitle": "OCI DMS - Online migration",
     "include": {"starter-file.sql":"../../files/starter-file.sql",
                 "sample.json":"../../files/sample.json",
                 "injected-step.md":"../../files/injected-step.md"},
