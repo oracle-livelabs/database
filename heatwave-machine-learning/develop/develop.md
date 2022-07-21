@@ -166,7 +166,7 @@ Estimated Time: 5 minutes
     echo 'Host info: ' . mysqli_get_host_info($link);
     ?>
     </copy>
-        ```
+    ```
 
 4. From your local machine, browse the page info.php
 
