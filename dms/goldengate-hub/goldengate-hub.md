@@ -2,7 +2,6 @@
 
 ## Introduction
 
-#### Logical Online Migration
 Online migration makes a point-in-time copy and replicates all subsequent changes from the source to the target database. This allows applications to stay online during the migration and then be switched over from source to target database. DMS online migration requires GoldenGate Hub, the current version 21 comes with two GoldenGate microservices, one extract and one replicat. These two microservice tasks are to keep both source and target in sync during the migration and during the graceful switchover. 
 
 Estimated Time: 30 minutes
