@@ -95,7 +95,7 @@ In this lab, you will be guided through the following tasks:
 13. On Security List for Private Subnet-MDS-VCN page, the new Ingress Rules will be shown under the Ingress Rules List
     ![VCN](./images/03vcn-ingress-rule-list.png "vcn-ingress-rule-list")
 
-## Task 2: Create a MySQL Database for HeatWave (DB System) instance with sample data (airportdb)
+## Task 2: Create a MySQL Database for HeatWave (DB System) 
 
 1. Go to Navigation Menu
          Databases
@@ -116,7 +116,7 @@ In this lab, you will be guided through the following tasks:
     - Configure placement
     - Configure hardware
     - Exclude Backups
-    - Advanced Options - Data Import
+    - Advanced Options - Set  Host Name
 
 4. Provide basic information for the DB System:
 
@@ -220,26 +220,11 @@ click **More Action ->  Add HeatWave Cluster**.
 
 4. On the “Add HeatWave Cluster” dialog, select “MySQL.HeatWave.VM.Standard.E3” shape
 
-5. Click the  “Estimate Node Count” button
-
-    ![Connect](./images/10addheat-estimate.png "estimate ")
-
-6. On the “Estimate Node Count” page, click “Generate Estimate”.
-This will trigger the auto-provisioning advisor to sample the data that is stored in InnoDB and based on the machine learning algorithm, it will predict the number of nodes needed.
-
-    ![Connect](./images/10addheat-node-count.png "node-count ")
-
-7. Once the estimations are calculated, it shows a list of database schemas in the MySQL node. If you expand the schema and select different tables, you will see the estimated memory required in the Summary box, There is a Load Command (heatwave_load) generated in the text box window, which will change based on the selection of databases/tables
-
-8. Select the airportdb schema and click “Apply Node Count Estimate” to apply the node count
-
-    ![Connect](./images/10addheat-select-airportdb.png "addheat-select-airportdb ")
-
-9. Click “Add HeatWave Cluster” to create the HeatWave cluster
+5. Click “Add HeatWave Cluster” to create the HeatWave cluster
 
     ![Connect](./images/10addheat-create-cluster.png "create-cluster ")
 
-10. HeatWave creation will take about 10 minutes. From the DB display page scroll down to the Resources section. Click the **HeatWave** link. Your completed HeatWave Cluster Information section will look like this:
+6. HeatWave Clusters creation will take about 10 minutes. From the DB display page scroll down to the Resources section. Click the **HeatWave** link. Your completed HeatWave Cluster Information section will look like this:
 
     ![Connect](./images/10addheatcluster-create-complete.png " addheatcluster-create-complete")
 

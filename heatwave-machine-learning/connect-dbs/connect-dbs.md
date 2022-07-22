@@ -64,6 +64,7 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
     There are two files in the output, a *private key:* `id_rsa` and a *public key:* `id_rsa.pub`. Keep the private key safe and don't share its content with anyone. The public key will be needed for various activities and can be uploaded to certain systems as well as copied and pasted to facilitate secure communications in the cloud.
 
 ## Task 2: Create Compute instance
+
 You will need a compute Instance to connect to your brand new MySQL database.
 
 1. Before creating the Compute instance open a notepad
@@ -117,21 +118,21 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 11. On Networking, make sure '**MDS-VCN**' is selected
 
-    'Assign a public IP address should be set to Yes
+12. 'Assign a public IP' address should be set to Yes
 
     ![CONNECT](./images/05compute-ip.png "compute-ip ")
 
-12. On Add SSH keys, paste the public key from the notepad.
+13. On Add SSH keys, paste the public key from the notepad.
 
     ![CONNECT](./images/05compute-id-rsa-paste.png "compute-id-rsa-past ")
 
-13. Click '**Create**' to finish creating your Compute Instance.
+14. Click '**Create**' to finish creating your Compute Instance.
 
-14. The New Virtual Machine will be ready to use after a few minutes. The state will be shown as 'Provisioning' during the creation
+15. The New Virtual Machine will be ready to use after a few minutes. The state will be shown as 'Provisioning' during the creation
 
     ![CONNECT](./images/05compute-privision.png "compute-provision ")
 
-15. The state 'Running' indicates that the Virtual Machine is ready to use.
+16. The state 'Running' indicates that the Virtual Machine is ready to use.
 
     ![CONNECT](./images/05compute-running.png "compute-running ")
 
