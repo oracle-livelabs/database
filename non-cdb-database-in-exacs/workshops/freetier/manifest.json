@@ -1,0 +1,36 @@
+{
+  "workshoptitle": "Create a Non-CDB database in ExaCS",
+  "help": "livelabs-help-oci_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction about the Workshop and Labs",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Details about How to Register for Free Tier Account on OCI",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+    },
+    {
+      "title": "Lab 1: Create a custom DB software image using OCI console",
+      "description": "Details about how to create a custom Database software Image using OCI console",
+      "filename": "../../create-db-image-using-oci-console/create-db-image-using-oci-console.md"
+    },
+    {
+      "title": "Lab 2: Create DB home using OCI console",
+      "description": "Details about how to create a Database home using custom Database software image",
+      "filename": "../../create-db-home-using-oci-console/create-db-home-using-oci-console.md"
+    },
+    {
+      "title": "Lab 3: Create a non-CDB database in ExaCS using dbaascli utility",
+      "description": "Details about how to create a Non-CDB database in ExaCS using dbaascli utility",
+      "filename": "../../create-a-non-cdb-db-in-exacs-using-dbaascli-utility/create-a-non-cdb-db-in-exacs-using-dbaascli-utility.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+  }
+  ]
+}
