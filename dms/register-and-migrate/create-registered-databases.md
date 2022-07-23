@@ -175,12 +175,14 @@ For this task you need the following info from previous steps:
       - Export Directory Object:
           - Name: **dumpdir**
           - Path: **/u01/app/oracle/dumpdir**
-      - *DO NOT Check* Use Online Replication
-
+     
           ![](images/Test-migration.png =40%x*)
 
 
-  7. Press **Create**
+  7. Check **Use Online Replication**
+     - GoldenGate Hub URL: **https://(goldengate public IP)**
+
+     - GoldenGate Administrator Username: **oggadmin**
 
 
 You may now [proceed to the next lab](#next).
