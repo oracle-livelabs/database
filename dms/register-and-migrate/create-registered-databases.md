@@ -181,8 +181,23 @@ For this task you need the following info from previous steps:
 
   7. Check **Use Online Replication**
      - GoldenGate Hub URL: **https://(goldengate public IP)**
-
      - GoldenGate Administrator Username: **oggadmin**
+     - GoldenGate Administrator Password: **(As previously selected)**
+
+     - Source database:
+          - GoldenGate deployment name: **Source**
+          - Database Username: **ggadmin**
+          - Database Password: **(As previously selected)**
+          - Container Database Username: **c##ggadmin**
+          - Container Database Password: **(As previously selected)**
+     
+     - Target database:
+          - GoldenGate Deployment Name: **Target**
+          - Database Username: **ggadmin**
+          - Database Password: **(As previously selected)**
+          - Press Show Advanced Options
+          - Press Replication tab
+          -Golden Gate Instance OCID: **(OCID as copied from GoldenGate compute instance)** (This field is optional; if OCID is given, validation will check for GoldenGate space requirements)     
 
 
 You may now [proceed to the next lab](#next).
@@ -196,4 +211,4 @@ You may now [proceed to the next lab](#next).
 ## Acknowledgements
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian Lynch, Solution Engineers, Austin Specialist Hub
-* **Last Updated By/Date** - Kiana McDaniel, Hanna Rakhsha, Killian Lynch Solution Engineers, July 2021
+* **Last Updated By/Date** - Jorge Martinez, Product Manager, July 2022
