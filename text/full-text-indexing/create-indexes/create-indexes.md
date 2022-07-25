@@ -85,7 +85,7 @@ In this lab, you will:
 
     ![dbactions menu sql](./images/dbactions-menu-sql.png " ")
 
-    When you first enter SQL, you will get a tour of the features. We recommend you step through it, but you can skip the tour by clicking on the "X". The tour is available at any time by clicking the tour button.
+    When you first enter SQL, you will get a tour of the features. We recommend you step through it, but you can skip the tour by clicking on the "X". The tour is available at any time by clicking the tour button. You can dismiss the warning that you are logged in as the ADMIN user.
 
     ![sql tour](./images/sql-tour.png " ")
 
@@ -111,6 +111,8 @@ In this lab, you will:
 
 3. Populate the table with a few rows.
 
+    Use the 'trashcan' icon to delete the previous statement from the Worksheet area.
+    
     Copy the following SQL into the worksheet area. Make sure you *highlight the whole statement* with your mouse, and press the "Run Statement" button:
 
     ```
@@ -127,6 +129,14 @@ In this lab, you will:
     ![inserts](./images/inserts.png " ")
 
     **Note:** You should see "3 rows inserted" at the bottom. If you just see the values listed, you didn't highlight the statement, and SQL Workshop only run the SELECT rather than the INSERTs. You can try again.
+
+    You should see this:
+
+    ![three rows inserted - correct output](./images/three-rows-inserted.png " ")
+
+    If you didn't highlight the whole statement it will only have run the *select* and you'll see this:
+
+    ![wrong output - no rows inserted](./images/wrong-output.png " ")
 
 4.  Check that we have rows in the table
 
@@ -193,6 +203,8 @@ Text indexes are an example of a **domain index**. Domain indexes are specialize
 
     ![table list](./images/table-list.png " ")
 
+    Note: the list of sub-tables will vary with database version and indexing options chosen. You may see a different list from what is shown here.
+
     You should see several tables listed. Open the table definition for DR$MYINDEX$I by clicking on the triangle next to it.
 
     We see a list of columns. The main one we're interested in is TOKEN_TEXT.
@@ -209,9 +221,7 @@ Text indexes are an example of a **domain index**. Domain indexes are specialize
 
     You may want to expand the output window upwards so you can see the full list of indexed words.
 
-    Notice anything about the list? Not all the words in the text appear - "from" is missing. That's because it is designated "stop word" - common words that are not very useful in searches, but are likely to take up a lot of space
-    in the index. By default, we don't index them - though using advanced options we can tell the system to index all words,
-    or provide a "custom stoplist" of words we don't want to be indexed. The default list of stopwords will vary with language and
+    Notice anything about the list? Not all the words in the text appear - "from" is missing. That's because it is designated "*stop word*" - common words that are not very useful in searches, but are likely to take up a lot of space in the index. By default, we don't index them - though using advanced options we can tell the system to index all words, or provide a "custom stoplist" of words we don't want to be indexed. The default list of stopwords will vary with language and
     will depend on the default language setting for the database (always English for Autonomous Database).
     You can customize your stop word list following the examples here: [Create Stop List](https://docs.oracle.com/en/database/oracle/oracle-database/19/ccref/CTX_DDL-package.html#GUID-3336B8E9-13FB-4997-A9AD-8D9A207B10C4) and [Add Stop Word] (https://docs.oracle.com/en/database/oracle/oracle-database/19/ccref/CTX_DDL-package.html#GUID-5D27665E-8ECC-4703-94CC-83387BB7ABCD).
     

@@ -158,7 +158,7 @@ Time interval SYNCs use the database scheduler, so in 19c and before you must ha
     </copy>
     ```
 
-    You should see that there are now two entries for the word 'smith'. We won't worry about exactly why, but let's just say it's an example of index fragmentation. 
+    You should see that there are now two entries for the wors 'order' and 'williams. We won't worry about exactly why (though note they were used in the last update), but let's just say it's an example of index fragmentation. 
     
     
 2.  Optimize the index
@@ -173,7 +173,7 @@ Time interval SYNCs use the database scheduler, so in 19c and before you must ha
     </copy>
     ```
 
-    Now try the previous select from the $I table again. There is now only one entry for 'smith' - the index information for that word has been condensed into a single row.
+    Now try the previous select from the $I table again. There is now only one entry for 'order' and one entry for 'williams' - the index information for those words have been condensed into a single row for each word.
 
     ![table after optimization](./images/after-optimize.png " ")
 
