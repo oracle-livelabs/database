@@ -40,9 +40,13 @@
               "filename": "../../run-autopilot/run-autopilot.md"
           },
           
-             
           {
-            "title": "Lab 6: Use MySQL HeatWave For Development",
+            "title": "Lab 6: Build HeatWave ML with SQL",
+            "filename": "../../do-heatwave-ml/do-heatwave-ml.md"
+          },
+
+          {
+            "title": "Lab 7: Use MySQL HeatWave For Development",
             "filename": "../../develop/develop.md"
           }, 
   
