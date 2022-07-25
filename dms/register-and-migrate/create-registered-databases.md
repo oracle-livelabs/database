@@ -184,12 +184,16 @@ For this task you need the following info from previous steps:
      - GoldenGate Administrator Username: **oggadmin**
      - GoldenGate Administrator Password: **(As previously selected)**
 
+     ![](images/online-goldengate.png =50%x*)
+
      - Source database:
           - GoldenGate deployment name: **Source**
           - Database Username: **ggadmin**
           - Database Password: **(As previously selected)**
           - Container Database Username: **c##ggadmin**
           - Container Database Password: **(As previously selected)**
+
+      ![](images/online-source-database.png =50%x*)    
      
      - Target database:
           - GoldenGate Deployment Name: **Target**
@@ -197,8 +201,12 @@ For this task you need the following info from previous steps:
           - Database Password: **(As previously selected)**
           - Press Show Advanced Options
           - Press Replication tab
-          -Golden Gate Instance OCID: **(OCID as copied from GoldenGate compute instance)** (This field is optional; if OCID is given, validation will check for GoldenGate space requirements)     
+          - GoldenGate Instance OCID: **(OCID as copied from GoldenGate compute instance)** (This field is optional; if OCID is given, validation will check for GoldenGate space requirements) 
+          
 
+    ![](images/online-target-database-ggocid.png =50%x*) 
+
+      - Press Create to initiate the Migration creation
 
 You may now [proceed to the next lab](#next).
 
