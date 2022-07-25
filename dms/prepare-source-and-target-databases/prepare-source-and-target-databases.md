@@ -323,17 +323,22 @@ The next steps will connect to the target ADB instance and enable the standard g
 
 1. Enter the following commands:
 
- ```
+    ```
     <copy>
     export TNS_ADMIN=/u02/deployments/Target/etc 
+
+
     </copy>
+
     ```
 
     ```
     <copy>
-    $ORACLE_HOME/bin/sqlplus admin/<ATP password>@targetatp_high
+    $ORACLE_HOME/bin/sqlplus admin/ATP password@targetatp_high
+
     </copy>
     ```
+
 2. In SQL Plus enter the following commands:
 
     ```
@@ -349,7 +354,8 @@ The next steps will connect to the target ADB instance and enable the standard g
     </copy>
     ```
 
-Please *proceed to the next lab*.
+
+You may now [proceed to the next lab](#next).
 
 
 ## Acknowledgements
