@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "Full-Text Indexing in Oracle Database",
+    "workshoptitle": "Use Full-Text Indexing in Oracle Database",
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
         {
@@ -10,7 +10,7 @@
         {
             "title": "Get Started",
             "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
-            "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/cloud-login/pre-register-free-tier-account.md"
+            "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/cloud-login/pre-register-free-tier-account.md"
         },
         {
             "title": "Lab 1: Provision an Autonomous Database",
@@ -33,9 +33,13 @@
             "filename": "../../maintenance/maintenance.md"
         },
         {
+            "title": "Lab 5: Terminate Oracle Autonomous Database",
+            "filename":"https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/terminate-adb/terminate-adb.md"
+        },
+        {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-            "filename":"https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-freetier.md"
+            "filename":"https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/need-help/need-help-freetier.md"
         }
     ]
 }
