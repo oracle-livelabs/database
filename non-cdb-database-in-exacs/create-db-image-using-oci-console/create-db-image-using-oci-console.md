@@ -20,12 +20,12 @@ This lab assumes you have:
 
 1. Open the navigation menu in the OCI Console. Click **Oracle Database**, then click **Exadata on Oracle Public Cloud**.
 
-  ![Navigate to Exadata on Oracle Public Cloud](./images/navigate_to_exacs_public_cloud.png "Navigate to Exadata on Oracle Public Cloud")
+  ![Navigate to Exadata on Oracle Public Cloud](./images/navigate-to-exacs-public-cloud.png "Navigate to Exadata on Oracle Public Cloud")
 
 
 2. Choose your **compartment**.
 
-  ![Compartment for DB Software image](./images/choose_compartment.png "Compartment for DB Software image")
+  ![Compartment for DB Software image](./images/choose-compartment.png "Compartment for DB Software image")
 
 
 3. Under **Resources**,
@@ -34,7 +34,7 @@ This lab assumes you have:
 
     * Click on **Create Database Software Image**.
 
-  ![DB Software image creation](./images/navigate_create_db_image.png "DB Software image creation")
+  ![DB Software image creation](./images/navigate-create-db-image.png "DB Software image creation")
 
 
 4. Provide the below information for the database software image.
@@ -53,7 +53,7 @@ This lab assumes you have:
 
     * Click **Create Database Software Image**.
 
-  ![DB Software image for ExaCS](./images/create_custom_db_image.png "DB Software image for ExaCS")
+  ![DB Software image for ExaCS](./images/create-custom-db-image.png "DB Software image for ExaCS")
 
 
 You may now **proceed to the next lab**.

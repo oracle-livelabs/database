@@ -43,7 +43,7 @@ This lab assumes you have:
 
         <copy>dbaascli dbhome info
 
-  ![ExaCS DB Home informantion](./images/db_home_info.png "ExaCS DB Home informantion")
+  ![ExaCS DB Home informantion](./images/db-home-info.png "ExaCS DB Home informantion")
 
 4. Use the below command to run the prerequisites checks for database creation. Use the **--executePrereqs** command option. This option will perform only the prerequisite checks without the actual Oracle Database creation. 
 
@@ -53,9 +53,9 @@ This lab assumes you have:
 
         <copy>dbaascli database create --dbName testld --oracleHomeName OraHome6 --executePrereqs yes
 
-  ![Pre-requisite check ExaCS DB creation](./images/create_db_pre-req1.png "Pre-requisite check ExaCS DB creation")
+  ![Pre-requisite check ExaCS DB creation](./images/create-db-pre-req1.png "Pre-requisite check ExaCS DB creation")
 
-  ![Pre-requisite check ExaCS DB creation](./images/create_db_prereq2.png "Pre-requisite check ExaCS DB creation")
+  ![Pre-requisite check ExaCS DB creation](./images/create-db-prereq2.png "Pre-requisite check ExaCS DB creation")
 
 
 5. To create a non-CDB, run the following command.
@@ -66,9 +66,9 @@ This lab assumes you have:
     
         <copy>dbaascli database create --dbName ldtestdb --oracleHomeName OraHome5 --dbNCharset AL16UTF16 --executePrereqs NO --dbUniqueName ldtest_phx --dbCharset AL32UTF8 --pgaSizeInMB 1024 --createAsCDB False
 
-  ![Create non-CDB in ExaCS](./images/create_db_dbaascli1.png "Create non-CDB in ExaCS")
+  ![Create non-CDB in ExaCS](./images/create-db-dbaascli1.png "Create non-CDB in ExaCS")
 
-  ![Create non-CDB in ExaCS](./images/create_db_dbaascli2.png "Create non-CDB in ExaCS")
+  ![Create non-CDB in ExaCS](./images/create-db-dbaascli2.png "Create non-CDB in ExaCS")
 
 6. You can check the database status using the below command.
 
@@ -78,7 +78,7 @@ This lab assumes you have:
 
         <copy>dbaascli database status --dbname ldtestdb
 
-  ![Check DB status in ExaCS](./images/database_status.png "Check DB status in ExaCS")
+  ![Check DB status in ExaCS](./images/database-status.png "Check DB status in ExaCS")
 
 
 ## Learn More

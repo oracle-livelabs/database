@@ -22,12 +22,12 @@ This lab assumes you have:
 
 1. Open the navigation menu in the OCI Console. Click **Oracle Database**, then click **Exadata on Oracle Public Cloud**.
 
-  ![Navigate to ExaCS on OCI](./images/navigate_to_exacs_public_cloud.png "Navigate to ExaCS on OCI")
+  ![Navigate to ExaCS on OCI](./images/navigate-to-exacs-public-cloud.png "Navigate to ExaCS on OCI")
 
 
 2. Choose your **Compartment**.
 
-  ![Compartment for DB home creation](./images/choose_compartment.png "Compartment for DB home creation")
+  ![Compartment for DB home creation](./images/choose-compartment.png "Compartment for DB home creation")
 
 
 3. Navigate to the cloud VM cluster or DB system you want to create the new Database Home on:
@@ -36,7 +36,7 @@ This lab assumes you have:
 
     * In the list of VM clusters, find the VM cluster you want to access and click its **Display Name** to view the details page for the cluster.
 
-   ![VM Clusters in ExaCS](./images/navigate_exacs_vm_cluster.png "VM Clusters in ExaCS")
+   ![VM Clusters in ExaCS](./images/navigate-exacs-vm-cluster.png "VM Clusters in ExaCS")
 
 4. Under Resources, 
 
@@ -45,7 +45,7 @@ This lab assumes you have:
     
     * Click on **Create Database Home**.
 
-    ![Create DB home in ExaCS](./images/create_db_home1.png "Create DB home in ExaCS")
+    ![Create DB home in ExaCS](./images/create-db-home1.png "Create DB home in ExaCS")
 
 5. In the Create Database Home dialog, enter the following:
 
@@ -55,7 +55,7 @@ This lab assumes you have:
     
     * Click **Change Database Image** to use an older Oracle-published image or a custom database software image that you have created in advance.
 
-   ![Display name for DB home in ExaCS](./images/create_db_home2.png "Display name for DB home in ExaCS")
+   ![Display name for DB home in ExaCS](./images/create-db-home2.png "Display name for DB home in ExaCS")
   
 6. For Image Type, select **Custom Database Software Images**.
     
@@ -64,22 +64,22 @@ This lab assumes you have:
 
     * After **choosing** the software image, click **Select** to return to the Create Database dialog.
 
-   ![Custom image for DB home creation](./images/create_db_home3.png "Custom image for DB home creation")
+   ![Custom image for DB home creation](./images/create-db-home3.png "Custom image for DB home creation")
 
 
    > Note: The Custom Database Software Image must be based on the Oracle Database Release Version that is currently supported by Oracle Cloud Infrastructure and also supported by the hardware model on which you are creating the Database Home.
 
 7. Click **Create**.
 
-   ![DB home creation for ExaCS](./images/create_db_home4.png "DB home creation for ExaCS")
+   ![DB home creation for ExaCS](./images/create-db-home4.png "DB home creation for ExaCS")
 
 8. The status of the Database Home creation shows as **Provisioning**. 
 
-   ![Status of DB home creation for ExaCS](./images/create_db_home_state1.png "Status of DB home creation for ExaCS")
+   ![Status of DB home creation for ExaCS](./images/create-db-home-state1.png "Status of DB home creation for ExaCS")
 
 9. When the Database Home creation is complete, the status changes from    **Provisioning** to **Available**.
 
-   ![Completion of DB home creation for ExaCS](./images/create_db_home_state2.png "Completion of DB home creation for ExaCS")
+   ![Completion of DB home creation for ExaCS](./images/create-db-home-state2.png "Completion of DB home creation for ExaCS")
 
 
 You may now **proceed to the next lab**.
