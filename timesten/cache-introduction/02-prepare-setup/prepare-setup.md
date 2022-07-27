@@ -21,7 +21,7 @@ This lab assumes you have:
 
 1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
 
- [ll-timesten-cache-intro.zip](https://objectstorage.uk-london-1.oraclecloud.com/p/puzLjtCV8NbFGkuRWo1lVsdeFqS5E91KZ1Rfa7fkidhPEGVxuFTbtT32zkXOXtl0/n/intdouglashood/b/stacks/o/ll-timesten-cache-intro.zip)
+ [timesten-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/47ShQ4Xe1mUQOSeXXJGUL1zM1jYfYXR1YNJTIH0jTDHRYzsZjR5UQx37cCSXsxdt/n/natdsecurity/b/stack/o/timesten-mkplc-freetier.zip)
 
 2.  Save in your downloads folder.
 
