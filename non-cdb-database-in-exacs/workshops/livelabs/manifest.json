@@ -13,18 +13,18 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
     },
     {
-      "title": "Lab 1: Create DB image using OCI console",
-      "description": "??",
+      "title": "Lab 1: Create a Custom Database Software Image using OCI console",
+      "description": "Details about how to create a custom Database software Image using OCI Console",
       "filename": "../../create-db-image-using-oci-console/create-db-image-using-oci-console.md"
     },
     {
-      "title": "Lab 2: Create DB home using OCI console",
-      "description": "??",
+      "title": "Lab 2: Create a Database Home using custom Database Software Image using OCI Console",
+      "description": "Details about how to create a Database home using custom Database software image",
       "filename": "../../create-db-home-using-oci-console/create-db-home-using-oci-console.md"
     },
     {
-      "title": "Lab 3: Create a non-CDB database in ExaCS using dbaascli utility",
-      "description": "??",
+      "title": "Lab 3: Create a non-container database in ExaCS using dbaascli utility",
+      "description": "Details about how to create a Non-CDB database in ExaCS using dbaascli utility",
       "filename": "../../create-a-non-cdb-db-in-exacs-using-dbaascli-utility/create-a-non-cdb-db-in-exacs-using-dbaascli-utility.md"
     },
     {

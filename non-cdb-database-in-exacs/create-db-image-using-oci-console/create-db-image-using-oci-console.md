@@ -1,33 +1,31 @@
-# ???
+# Creating a Custom Database Software Image using OCI Console.
 
 ## Introduction
-This lab walks you through creating a custom database software image using OCI console.
+This lab walks you through creating a custom Database Software Image using the OCI Console.
 
 Estimated Time: 30 min
 
 ### Objectives
 In this lab, you will learn to :
-* Create a custom DB software image using OCI console.
+* Create a custom Database Software Image using the OCI Console.
 
 ### Prerequisites  
 
 This lab assumes you have:
 - A Free or LiveLabs Oracle Cloud account.
 - IAM policies to create resources in the compartment.
-- Network setup for Exadata Cloud Infrastructure.
-- Exadata Cloud Infrastructure Deployment.
 
 
-## Task 1: Create custom DB software image using OCI console.
+## Task 1: Create a Custom Database Software Image using OCI Console.
 
-1. Open the navigation menu in OCI console. Click **Oracle Database**, then click **Exadata on Oracle Public Cloud**.
+1. Open the navigation menu in the OCI Console. Click **Oracle Database**, then click **Exadata on Oracle Public Cloud**.
 
-  ![DB Software image for ExaCS](./images/navigate_to_exacs_public_cloud.png "DB Software image for ExaCS")
+  ![Navigate to Exadata on Oracle Public Cloud](./images/navigate_to_exacs_public_cloud.png "Navigate to Exadata on Oracle Public Cloud")
 
 
-2. Choose your **Compartment**.
+2. Choose your **compartment**.
 
-  ![DB Software image for ExaCS](./images/choose_compartment.png "DB Software image for ExaCS")
+  ![Compartment for DB Software image](./images/choose_compartment.png "Compartment for DB Software image")
 
 
 3. Under **Resources**,
@@ -36,16 +34,16 @@ This lab assumes you have:
 
     * Click on **Create Database Software Image**.
 
-  ![DB Software image for ExaCS](./images/navigate_create_db_image.png "DB Software image for ExaCS")
+  ![DB Software image creation](./images/navigate_create_db_image.png "DB Software image creation")
 
 
 4. Provide the below information for the database software image.
 
-    * In the Display name field, provide a **display name** for your image. Avoid entering confidential information.
+    * In the Display name field, provide your image a **Display name**. Avoid entering confidential information.
 
-    * Choose your **Compartment**.
+    * Choose your **compartment**.
 
-    * Choose a **Shape family**. A custom database software image is compatible with only one shape family. Available shape families for Exadata Cloud Services is **Exadata Shapes**.
+    * Choose a **Shape Family**. A custom database software image is compatible with only one shape family. Available shape families for Exadata Cloud Services is **Exadata Shapes**.
 
     * Choose the **Database version** for your image. You can create a database software image using any supported Oracle Database release update (RU).
 
@@ -61,7 +59,7 @@ This lab assumes you have:
 You may now **proceed to the next lab**.
 
 ## Learn More
-- You can find more information about Launching a Windows Instance [here](https://docs.oracle.com/en-us/iaas/Content/GSG/Tasks/launchinginstanceWindows.htm)
+- You can find more information about Managing Oracle Database Software Images [here](https://docs.oracle.com/en-us/iaas/exadatacloud/exacs/ecc-manage-images.html)
 
 
 ## Acknowledgements
