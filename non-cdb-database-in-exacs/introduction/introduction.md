@@ -11,8 +11,8 @@ Estimated Time: 1 Hour 30 min
 **Workshop Objectives**
 
 In this workshop, you will learn how to:
-* How to create a custom Database software Image using OCI Console.
-* How to create a Database home using custom Database Software Image using OCI Console.
+* How to create a custom Database Software Image using OCI Console.
+* How to create a DB Home using custom Database Software Image using OCI Console.
 * How to create a non-container database in ExaCS using the dbaascli utility.
 
 
