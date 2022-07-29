@@ -6,7 +6,7 @@ This hands-on workshop provides step-by-step instructions on creating a non-cont
 
 By default, the database system you create using the OCI console in Exadata Cloud Service creates an Oracle Database 12.1, 12.2, 18c, or 19c using the multitenant architecture with a container database (CDB) with one pluggable database (PDB). If you want to create a non-container database in Exadata Cloud Service in OCI, this can be done using the dbaascli utility.
 
-Estimated Time: 1 Hour 30 min
+Estimated Workshop Time: 1 Hour 30 min
 
 **Workshop Objectives**
 
