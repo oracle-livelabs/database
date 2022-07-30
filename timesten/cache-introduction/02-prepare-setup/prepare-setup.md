@@ -75,5 +75,5 @@ You may now *proceed to the next lab (Environment setup)*.
 ## Acknowledgements
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
-* **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Contributors** -  Doug Hood, Jenny Bloom, Rene Fontcha
+* **Last Updated By/Date** - Rene Fontcha, July 2022
