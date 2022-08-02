@@ -420,18 +420,18 @@ LIMIT 10;</copy>
     <copy>cd /var/www/html</copy>
     ```
 
-2. Download the iris application zip file
+2. Download the airport application zip file
 
     ```bash
-    <copy> sudo wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/kXwlzPHPazXmLdWkWVkcDEPF1PIDV6sZHlpzx89NBaAx_STlf-3i0DQ3ViIACayS/n/idazzjlcjqzj/b/heatwaveml-iris/o/iris.zip</copy>
+    <copy> sudo wget https://objectstorage.us-phoenix-1.oraclecloud.com/p/fsulOSjXwCWISwMMXL6Hkv46FfgXvDyMs74tb0jFKIZH3UGAKft7hfAGoQUOSpCy/n/idazzjlcjqzj/b/bucket_apps/o/airport_web_01_eureka_ml_web_prod_version.zip</copy>
     ```
 
     ```bash
-    <copy>sudo unzip iris.zip</copy>
+    <copy>sudo unzip airport_web_01_eureka_ml_web_prod_version.zip</copy>
     ```
 
     ```bash
-    <copy>cd /var/www/html/iris</copy>
+    <copy>cd /var/www/html/airport</copy>
     ```
 
     Replace the database IP in config.php file with your heatwave database IP and save the file.
@@ -442,9 +442,9 @@ LIMIT 10;</copy>
 
     run the application as follows:
 
-    computeIP//iris/iris_web.php
+    computeIP//web/airport_web.php
 
-    ![MDS](./images/iris-web-php.png "iris-web-php")
+    ![MDS](./images/airport_web.png "airport-web-php")
 
 ## Acknowledgements
 * **Author** - Perside Foster, MySQL Solution Engineering, Harsh Nayak , MySQL Solution Engineering 

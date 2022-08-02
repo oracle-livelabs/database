@@ -2,17 +2,17 @@
 
 ## Introduction
 
-To load the Iris data components, perform the following steps to create and load the required schema and tables. The requirements for Python 3 are already loaded in the compute instance and you have already installed MySQL Shell in the previous Lab.
+To load the Aiport Delay data components, perform the following steps to create and load the required schema and tables. The requirements for Python 3 are already loaded in the compute instance and you have already installed MySQL Shell in the previous Lab.
 
 After this step the data is stored in the MySQL HeatWave database in the following schema and tables:
 
 **ml_data schema:** The schema containing training and test dataset tables.
 
-**iris_train table:** The training dataset (labeled). Includes feature columns (sepal length, sepal width, petal length, petal width) and a populated class target column with ground truth values.
+**airport_train table:** The training dataset (labeled). Includes feature columns (MONTH, ORIGIN_AIRPORT, DEST_AIRPORT, SCHEDULED_DEPT_TIME, AVG_MINUTES_LATE) and a populated class target column with ground truth values.
 
-**iris_test table:** The test dataset (unlabeled). Includes feature columns (sepal length, sepal width, petal length, petal width) but no target column.
+**airport_test table:** The test dataset (unlabeled). Includes feature columns (sMONTH, ORIGIN_AIRPORT, DEST_AIRPORT, SCHEDULED_DEPT_TIME, AVG_MINUTES_LATE) but no target column.
 
-**iris_validate table:** The validation dataset (labeled). Includes feature columns (sepal length, sepal width, petal length, petal width) and a populated class target column with ground truth values.
+**airport_validate table:** The validation dataset (labeled). Includes feature columns (MONTH, ORIGIN_AIRPORT, DEST_AIRPORT, SCHEDULED_DEPT_TIME, AVG_MINUTES_LATE) and a populated class target column with ground truth values.
 
 _Estimated Time:_ 10 minutes
 
@@ -20,7 +20,7 @@ _Estimated Time:_ 10 minutes
 
 In this lab, you will be guided through the following task:
 
-- Load Iris Data into HeatWave
+- Load airport Data into HeatWave
 
 ### Prerequisites
 
@@ -60,15 +60,15 @@ In this lab, you will be guided through the following task:
 
 1. To Create the Machine Learning schem and tables on the MySQL HeatWave DB System perform  the following steps:
 
-    a. Click on this link to **Download file [iris-ml-data.txt](files/iris-ml-data.txt)**  to your local machine
-    b. Open iris-ml-data.txt from your local machine with notepad
+    a. Click on this link to **Download file [airport-ml-data.txt](files/airport-ml-data.txt)**  to your local machine
+    b. Open airport-ml-data.txt from your local machine with notepad
 
-    ![MDS](./images/iris-ml-data.png "iris-ml-data ")
+    ![MDS](./images/airport-ml-data.png "airport-ml-data ")
 
-    c. Copy all of the content of the iris-ml-data.txt file from your local machine
+    c. Copy all of the content of the airport-ml-data.txt file from your local machine
         - Paste the content next to the MySQL Shell command and hit enter at the very end.
 
-    ![MDS](./images/iris-ml-data-execute.png "iris-ml-data-execute ")
+    ![MDS](./images/airport-ml-data-execute.png "airport-ml-data-execute ")
 
 2. View the content of  your machine Learning schema (ml_data)
 
@@ -91,10 +91,10 @@ In this lab, you will be guided through the following task:
 1. Train the model using ML_TRAIN. Since this is a classification dataset, the classification task is specified to create a classification model:
 
     ```bash
-    <copy>CALL sys.ML_TRAIN('ml_data.iris_train', 'class',JSON_OBJECT('task', 'classification'), @iris_model);</copy>
+    <copy>CALL sys.ML_TRAIN('ml_data.airport_train', 'class',JSON_OBJECT('task', 'classification'), @airport_model);</copy>
     ```
 
-2. When the training operation finishes, the model handle is assigned to the @iris_model session variable, and the model is stored in your model catalog. You can view the entry in your model catalog using the following query, where user1 is your MySQL account name:
+2. When the training operation finishes, the model handle is assigned to the @airport_model session variable, and the model is stored in your model catalog. You can view the entry in your model catalog using the following query, where user1 is your MySQL account name:
 
     ```bash
     <copy>SELECT model_id, model_handle, train_table_name FROM ML_SCHEMA_admin.MODEL_CATALOG;</copy>
@@ -103,52 +103,52 @@ In this lab, you will be guided through the following task:
 3. Load the model into HeatWave ML using ML\_MODEL\_LOAD routine:
 
     ```bash
-    <copy>CALL sys.ML_MODEL_LOAD(@iris_model, NULL);</copy>
+    <copy>CALL sys.ML_MODEL_LOAD(@model, NULL);</copy>
     ```
 
     A model must be loaded before you can use it. The model remains loaded until you unload it or the HeatWave Cluster is restarted.
 
     **Note**  Your output should look like this:
-    ![MDS](./images/iris-ml-build-out.png "iris-ml-build-out ")
+    ![MDS](./images/airport-ml-build-out.png "airport-ml-build-out ")
 
 ## Task 4: Predict and Explain for Single Row
 
 1. Make a prediction for a single row of data using the ML\_PREDICT\_ROW routine.
-In this example, data is assigned to a @row\_input session variable, and the variable is called by the routine. The model handle is called using the @iris\_model session variable:
+In this example, data is assigned to a @row\_input session variable, and the variable is called by the routine. The model handle is called using the @airport\_model session variable:
 
     ```bash
-    <copy>SET @row_input = JSON_OBJECT( "sepal_length", 7.3, "sepal_width", 2.9, "petal_length", 6.3, "petal_width", 1.8); </copy>
+    <copy>@airline_input = JSON_OBJECT('MONTH', 'Oct', 'ORIGIN_AIRPORT', 'JFK', 'DEST_AIRPORT', 'MIA', 'SCHEDULED_DEPT_TIME', 1800, 'AVG_MINUTES_LATE', 0); </copy>
     ```
 
     ```bash
-    <copy>SELECT sys.ML_PREDICT_ROW(@row_input, @iris_model);</copy>
+    <copy>SELECT sys.ML_PREDICT_ROW(@airline_input, @airline_model);</copy>
     ```
 
-    Based on the feature inputs that were provided, the model predicts that the Iris plant is of the **class Iris-virginica**. The feature values used to make the prediction are also shown.
+    Based on the feature inputs that were provided, the model predicts that the airport plant is of the **class airport-virginica**. The feature values used to make the prediction are also shown.
 
 2. Generate an explanation for the same row of data using the ML\_EXPLAIN\_ROW routine to understand how the prediction was made:
 
     ```bash
-    <copy>SELECT sys.ML_EXPLAIN_ROW(@row_input, @iris_model);</copy>
+    <copy>SELECT sys.ML_EXPLAIN_ROW(@row_input, @airport_model);</copy>
     ```
 
     The attribution values show which features contributed most to the prediction, with petal length and pedal width being the most important features. The other features have a 0 value indicating that they did not contribute to the prediction.
 
     **Note**  Your output should look like this:
-    ![MDS](./images/iris-ml-predict-out.png "iris-ml-predict-out ")
+    ![MDS](./images/iris-ml-predict-out.png "airport-ml-predict-out ")
 
 ## Task 5: Make predictions and run explanations for a table of data  using a trained model
 
-1. Make predictions for a table of data using the ML\_PREDICT\_TABLE routine. The routine takes data from the iris\_test table as input and writes the predictions to an iris_predictions output table.
+1. Make predictions for a table of data using the ML\_PREDICT\_TABLE routine. The routine takes data from the airport\_test table as input and writes the predictions to an airport_predictions output table.
 
     ```bash
-    <copy>CALL sys.ML_PREDICT_TABLE('ml_data.iris_test', @iris_model,'ml_data.iris_predictions');</copy>
+    <copy>CALL sys.ML_PREDICT_TABLE('ml_data.airport_test', @airport_model,'ml_data.airport_predictions');</copy>
     ```
 
 2. Query the table ML\_PREDICT\_TABLE to view the results  
 
     ```bash
-    <copy>SELECT * FROM ml_data.iris_predictions LIMIT 3;</copy>
+    <copy>SELECT * FROM ml_data.airport_predictions LIMIT 3;</copy>
     ```
 
     The table shows the predictions and the feature column values used to make each prediction.
@@ -156,24 +156,24 @@ In this example, data is assigned to a @row\_input session variable, and the var
 3. Generate explanations for the same table of data using the ML\_EXPLAIN\_TABLE routine.
 
     ```bash
-    <copy>CALL sys.ML_EXPLAIN_TABLE('ml_data.iris_test', @iris_model, 'ml_data.iris_explanations');</copy>
+    <copy>CALL sys.ML_EXPLAIN_TABLE('ml_data.airport_test', @airport_model, 'ml_data.airport_explanations');</copy>
     ```
 
 4. Query the table ML\_EXPLAIN\_TABLE  to view the results
 
     ```bash
-    <copy> SELECT * FROM iris_explanations LIMIT 3\G;</copy>
+    <copy> SELECT * FROM airport_explanations LIMIT 3\G;</copy>
     ```
 
      **Note**  Your output should look like this:
-    ![MDS](./images/iris-ml-predict-table-out.png "iris-ml-predict=table-out ")
+    ![MDS](./images/airport-ml-predict-table-out.png "airport-ml-predict=table-out ")
 
 ## Task 6: Score your machine learning model to assess its reliability and unload the model
 
 1. Score the model using ML\_SCORE to assess the model's reliability. This example uses the balanced_accuracy metric, which is one of the many scoring metrics supported by HeatWave ML.
 
     ```bash
-    <copy>CALL sys.ML_SCORE('ml_data.iris_validate', 'class', @iris_model, 'balanced_accuracy', @score);</copy>
+    <copy>CALL sys.ML_SCORE('ml_data.airport_validate', 'class', @airport_model, 'balanced_accuracy', @score);</copy>
     ```
 
 2. To retrieve the computed score, query the @score session variable
@@ -185,13 +185,13 @@ In this example, data is assigned to a @row\_input session variable, and the var
 3. Unload the model using ML\_MODEL\_UNLOAD:
 
     ```bash
-    <copy>CALL sys.ML_MODEL_UNLOAD(@iris_model);</copy>
+    <copy>CALL sys.ML_MODEL_UNLOAD(@airport_model);</copy>
     ```
 
     To avoid consuming too much space, it is good practice to unload a model when you are finished using it.
 
     **Note**  Your output should look like this:
-    ![MDS](./images/iris-ml-score-model-out.png "iris-ml-score-model-out ")
+    ![MDS](./images/airport-ml-score-model-out.png "airport-ml-score-model-out ")
 
 ## Learn More
 
