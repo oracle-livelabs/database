@@ -11,6 +11,7 @@ Current VM shapes configured for 16 cores or more support multipath-enabled atta
 Estimated Time: 1 Hour 30 min
 
 **Workshop Objectives**
+
 In this workshop, you will learn how to:
 * Provision of the Windows Compute Instance
 * Configure Multipath_IO (MPIO) on Windows Server 2019
