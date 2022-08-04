@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab you will run some typical queries against the TimesTen cache and against the Oracle database to illustrate the performance benefit of TimesTen.
+In this lab, you will run some typical queries against the TimesTen cache and against the Oracle database to illustrate the performance benefit of TimesTen.
 
 Estimated Time: **5 minutes**
 
@@ -31,7 +31,7 @@ Both SQL*Plus and ttIsql offer various features to allow you to time queries:
 **SQL\*Plus**
 
 -	The SET TIMING ON command will provide query timings with an accuracy of around 0.01 seconds.
--	Proper use of the autotrace functionality (set autotrace traceonly statistics) will suppress the formatting and display of the returned results.
+-	Proper use of the autotrace functionality (**set autotrace traceonly statistics**) will suppress the formatting and display of the returned results.
 -	There is no mechanism to separate out the prepare step from the query execution/fetch step.
 
 **ttIsql**
@@ -46,7 +46,9 @@ A much better way to time queries, with any database, is to use a program writte
 
 `usage: timeQueries { -oracle | -timesten } <filename>`
 
-where ‘filename’ is the name of a file containing the query text. The source code for the queryTimer utility is available in the main VM in the directory **~/lab/src**. Here is the timeQueries script:
+where ‘filename’ is the name of a file containing the query text. The source code for the queryTimer utility is available in the main VM in the directory **~/lab/src**. 
+
+Here is the **/tt/livelab/bin/timeQueries** script:
 
 ```
 #!/bin/bash
@@ -108,10 +110,13 @@ If you do not already have an active terminal session, connect to the OCI comput
 
 Examine the three queries that we will use for this exercise:
 
-**cat ~/queries/query_1.sql**
+```
+<copy>
+cat /tt/livelab/queries/query_1.sql
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ cat ~/queries/query_1.sql
 SELECT
     c.customer_id,
     c.cust_first_name,
@@ -127,10 +132,14 @@ WHERE
     c.customer_id IN (104, 108, 144)
 ORDER BY 6;
 ```
-**cat ~queries/query_2.sql**
 
 ```
-[oracle@tthost1 livelab]$ cat ~queries/query_2.sql
+<copy>
+cat /tt/livelab/queries/query_2.sql
+</copy>
+```
+
+```
 SELECT
     o.order_id,
     oi.line_item_id,
@@ -150,10 +159,14 @@ SELECT
     (oi.product_id = pi.product_id)
  ORDER BY 1, 2;
 ```
-**cat ~queries/query_3.sql**
+
+```
+<copy>
+cat /tt/livelab/queries/query_3.sql
+</copy>
+```
 
 ``` 
-[oracle@tthost1 livelab]$ cat ~queries/query_3.sql
 SELECT
     i.product_id,
     i.warehouse_id,
@@ -169,16 +182,19 @@ SELECT
  ORDER BY 1, 3 DESC;
 ```
  
-There is also a file, **queries/query_all.sql**, that contains all three queries.
+There is also a file, **/tt/livelab/queries/query_all.sql**, that contains all three queries.
 
 ## Task 3: Run the queries against the Oracle database
 
 First run the queries against the Oracle database:
 
-**~/bin/timeQueries -oracle queries/query_all.sql**
+```
+<copy>
+/tt/livelab/bin/timeQueries -oracle queries/query_all.sql
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ~/bin/timeQueries -oracle queries/query_all.sql
 info: connected to 'orclpdb1' (Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production)
 info: running queries from file 'queries/query_all.sql'
 info: ========================================
@@ -249,10 +265,13 @@ info: disconnected from 'orclpdb1'
 
 Now run the queries against the TimesTen cache:
 
-**~/bin/timeQueries -timesten queries/query_all.sql**
+```
+<copy>
+/tt/livelab/bin/timeQueries -timesten queries/query_all.sql
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ~/bin/timeQueries -timesten queries/query_all.sql
 info: connected to 'sampledb' (Oracle TimesTen IMDB version 22.1.1.3.0)
 info: running queries from file 'queries/query_all.sql'
 info: ========================================
@@ -321,7 +340,7 @@ info: disconnected from 'sampledb'
 
 ## Task 4: Compare the results
 
-Here is a comparion of the results that I obtained when I ran these queries (your results _will_ differ):
+Here is a comparison of the results that I obtained when I ran these queries (your results _will_ differ):
 
 
 | Query |	Average Oracle Query Time (us) | Average TimesTen Query Time (us) | TimesTen Speedup |

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab you will create a TimesTen database and set it up to cache the required tables from the Oracle database.
+In this lab, you will create a TimesTen database and set it up to cache the required tables from the Oracle database.
 
 Estimated Time: **10 minutes**
 
@@ -28,18 +28,21 @@ In that terminal session, connect to the TimesTen host (tthost1) using ssh.
 
 ## Task 2: Create the TimesTen database and prepare it for caching
 
-A TimesTen database is implicitly created the first time the instance administrator user connects to it via its server DSN. In order to use the database as a cache you must set the Oracle cache admin username and password and also start the TimesTen Cache Agent.
+A TimesTen database is implicitly created the first time the instance administrator user connects to it via its server DSN. In order to use the database as a cache, you must set the Oracle cache admin username and password and also start the TimesTen Cache Agent.
 
-The Cache Agent is a TimesTen daemon process that manages many of the cache related functions for a TimesTen database.
+The Cache Agent is a TimesTen daemon process that manages many of the cache-related functions for a TimesTen database.
 
 One of the most frequently used TimesTen utilities is the **ttIsql** utility. This is an interactive SQL utility that serves the same purpose for TimesTen as SQL*Plus does for Oracle Database.
 
 Connect to the **sampledb** DSN using **ttIsql**:
 
-**ttIsql sampledb**
+```
+<copy>
+ttIsql sampledb
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ttIsql sampledb
 
 Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
 Type ? or "help" for help, type "exit" to quit ttIsql.
@@ -50,74 +53,88 @@ Connection successful: DSN=sampledb;UID=oracle;DataStore=/tt/db/sampledb;Databas
 ```
 Set the Oracle cache administrator username and password (these are stored, encrypted, in the TimesTen database):
 
-**call ttCacheUidPwdSet('ttcacheadm','ttcacheadm');**
+```
+<copy>
+call ttCacheUidPwdSet('ttcacheadm','ttcacheadm');
+</copy>
+```
+
+Start the TimesTen Cache Agent for the cache database:
 
 ```
-Command> call ttCacheUidPwdSet('ttcacheadm','ttcacheadm');
-```
-Start the Timesten Cache Agent for the cache database:
-
-**call ttCacheStart;**
-
-```
-Command> call ttCacheStart;
+<copy>
+call ttCacheStart;
+</copy>
 ```
 
 Create application users for the **OE** and **APPUSER** schemas and grant them some necessary privileges:
 
-**CREATE USER oe IDENTIFIED BY "oe";**
+```
+<copy>
+CREATE USER oe IDENTIFIED BY "oe";
+</copy>
+```
 
 ```
-Command> CREATE USER oe IDENTIFIED BY "oe";
-
 User created.
 ```
-**GRANT CREATE SESSION, CREATE CACHE GROUP, CREATE TABLE TO oe;**
 
 ```
-Command> GRANT CREATE SESSION, CREATE CACHE GROUP, CREATE TABLE TO oe;
+<copy>
+GRANT CREATE SESSION, CREATE CACHE GROUP, CREATE TABLE TO oe;
+</copy>
 ```
-**CREATE USER appuser IDENTIFIED BY "appuser";**
 
 ```
-Command> CREATE USER appuser IDENTIFIED BY "appuser";
+<copy>
+CREATE USER appuser IDENTIFIED BY "appuser";
+</copy>
+```
 
+```
 User created.
 ```
-**GRANT CREATE SESSION, CREATE CACHE GROUP, CREATE TABLE TO appuser;**
 
 ```
-Command> GRANT CREATE SESSION, CREATE CACHE GROUP, CREATE TABLE TO appuser;
+<copy>
+GRANT CREATE SESSION, CREATE CACHE GROUP, CREATE TABLE TO appuser;
+</copy>
 ```
+
 Exit from ttIsql:
 
-**quit**
+```
+<copy>
+quit
+</copy>
+```
 
 ```
-Command> quit;
 Disconnecting...
 Done.
 ```
 
 ## Task 3: Create the cache groups
 
-A **cache group** is a SQL object that encapsulates a set of one or more tables that are related through primary key -> foreign key relationships. The (single) top level table is called the root table and the other tables sit below it in a hierarchical parent/child arrangement.
+A **cache group** is a SQL object that encapsulates a set of one or more tables that are related through primary key -> foreign key relationships. The (single) top-level table is called the root table and the other tables sit below it in a hierarchical parent/child arrangement.
 
 A cache instance consists of a single row from the root table and all the related rows from the subordinate tables down through the hierarchy within the cache group.
 
 Cache operations act on cache groups not on individual tables, or on cache instances as opposed to individual rows.
 
-Normal SQL operations, such as SELECT, INSERT, UPDATE and DELETE, operate directly on the cache tabls and the rows therein. 
+Normal SQL operations, such as SELECT, INSERT, UPDATE and DELETE, operate directly on the cache tables and the rows therein. 
 
 Create the (multiple) cache groups for the **OE** schema tables. You will use a pre-prepared script to reduce the amount of typing or copying & pasting.
 
 Use **ttIsql** to connect to the TimesTen cache as the **OE** user:
 
-**ttIsql "DSN=sampledb;UID=oe;PWD=oe;OraclePWD=oe"**
+```
+<copy>
+ttIsql "DSN=sampledb;UID=oe;PWD=oe;OraclePWD=oe"
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ttIsql "DSN=sampledb;UID=oe;PWD=oe;OraclePWD=oe"
-
 Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
 Type ? or "help" for help, type "exit" to quit ttIsql.
 
@@ -128,10 +145,13 @@ Command>
 ```
 Run the script to create the OE cache groups:
 
-**@scripts/createCacheGroupsOE;**
+```
+<copy>
+@scripts/createCacheGroupsOE;
+</copy>
+```
 
 ```
-Command> @scripts/createCacheGroupsOE;
 --
 -- Put 'promotions' in its own cache group as it has
 -- no child tables.
@@ -160,11 +180,13 @@ CREATE INDEX oe.order_items_fk
 ```
 Display the cachegroups owned by the OE user:
 
-**cachegroups oe.%;**
+```
+<copy>
+cachegroups oe.%;
+</copy>
+```
 
 ```
-Command> cachegroups oe.%;
-
 Cache Group OE.CG_CUST_ORDERS:
 
   Cache Group Type: Read Only
@@ -225,10 +247,13 @@ Cache Group OE.CG_PROMOTIONS:
 
 Display the tables owned by the OE user. These are the tables that make up the cache groups:
 
-**tables;**
+```
+<copy>
+tables;
+</copy>
+```
 
 ```
-Command> tables;
   OE.CUSTOMERS
   OE.INVENTORIES
   OE.ORDERS
@@ -238,47 +263,64 @@ Command> tables;
   OE.PROMOTIONS
 7 tables found.
 ```
-**select count(\*) from customers;**
 
 ```
-Command> select count(*) from customers;
+<copy>
+select count(*) from customers;
+</copy>
+```
+
+```
 < 0 >
 1 row found.
 ```
-**select count(\*) from product\_information;**
 
 ```
-Command> select count(*) from product_information;
+<copy>
+select count(*) from product_information;
+</copy>
+```
+
+```
 < 0 >
 1 row found.
 ```
-**select count(\*) from promotions;**
 
 ```
-Command> select count(*) from promotions;
+<copy>
+select count(*) from promotions;
+</copy>
+```
+
+```
 < 0 >
 1 row found.
 ```
 
 Exit from ttIsql:
 
-**quit**
+```
+<copy>
+quit
+</copy>
+```
 
 ```
-Command> quit
 Disconnecting...
 Done.
 ```
 
-The user OE has 3 cache groups, some containing single tables and others containing multiple tables. Currently all the tables are empty.
+The user OE has 3 cache groups, some containing single tables and others containing multiple tables. Currently, all the tables are empty.
 
 Create the cache group for the **APPUSER.VPN\_USERS** table. This time you will type, or copy/paste, the individual commands:
 
-**ttIsql "DSN=sampledb;UID=appuser;PWD=appuser;OraclePWD=appuser"**
+```
+<copy>
+ttIsql "DSN=sampledb;UID=appuser;PWD=appuser;OraclePWD=appuser"
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ ttIsql "DSN=sampledb;UID=appuser;PWD=appuser;OraclePWD=appuser"
-
 Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
 Type ? or "help" for help, type "exit" to quit ttIsql.
 
@@ -287,54 +329,53 @@ Connection successful: DSN=sampledb;UID=appuser;DataStore=/tt/db/sampledb;Databa
 (Default setting AutoCommit=1)
 Command>
 ```
-**cachegroups appuser.%;**
 
 ```
-Command> cachegroups appuser.%;
+<copy>
+cachegroups appuser.%;
+</copy>
+```
 
+```
 0 cache groups found.
 ```
-**tables;**
 
 ```
-Command> tables;
+<copy>
+tables;
+</copy>
+```
+
+```
 0 tables found.
 ```
-**CREATE READONLY CACHE GROUP appuser.cg\_vpn\_users 
+
+```
+<copy>
+CREATE READONLY CACHE GROUP appuser.cg_vpn_users 
 AUTOREFRESH MODE INCREMENTAL INTERVAL 2 SECONDS 
 STATE PAUSED 
 FROM 
 vpn_users 
-( vpn\_id             NUMBER(5) NOT NULL
-, vpn\_nb             NUMBER(5) NOT NULL
-, directory\_nb       CHAR(10 BYTE) NOT NULL
-, last\_calling\_party CHAR(10 BYTE) NOT NULL
+( vpn_id             NUMBER(5) NOT NULL
+, vpn_nb             NUMBER(5) NOT NULL
+, directory_nb       CHAR(10 BYTE) NOT NULL
+, last_calling_party CHAR(10 BYTE) NOT NULL
 , descr              CHAR(100 BYTE) NOT NULL
-, PRIMARY KEY (vpn\_id, vpn\_nb)
-);**
-
-```
-Command> CREATE READONLY CACHE GROUP appuser.cg_vpn_users 
-       > AUTOREFRESH MODE INCREMENTAL INTERVAL 2 SECONDS 
-       > STATE PAUSED 
-       > FROM 
-       > vpn_users 
-       > ( vpn_id             NUMBER(5) NOT NULL
-       > , vpn_nb             NUMBER(5) NOT NULL
-       > , directory_nb       CHAR(10 BYTE) NOT NULL
-       > , last_calling_party CHAR(10 BYTE) NOT NULL
-       > , descr              CHAR(100 BYTE) NOT NULL
-       > , PRIMARY KEY (vpn_id, vpn_nb)
-       > );
+, PRIMARY KEY (vpn_id, vpn_nb)
+);
+</copy>
 ```
 
 Display the cachegroup and table:
 
-**cachegroups appuser.%;**
+```
+<copy>
+cachegroups appuser.%;
+</copy>
+```
 
 ```
-Command> cachegroups appuser.%;
-
 Cache Group APPUSER.CG_VPN_USERS:
 
   Cache Group Type: Read Only
@@ -350,26 +391,38 @@ Cache Group APPUSER.CG_VPN_USERS:
 
 1 cache group found.
 ```
-**tables;**
 
 ```
-Command> tables;
+<copy>
+tables;
+</copy>
+```
+
+```
   APPUSER.VPN_USERS
 1 table found.
 ```
-**select count(\*) from vpn\_users;**
 
 ```
-Command> select count(*) from vpn_users;
+<copy>
+select count(*) from vpn_users;
+</copy>
+```
+
+```
 < 0 >
 1 row found.
 ```
+
 Exit from ttIsql:
 
-**quit**
+```
+<copy>
+quit
+</copy>
+```
 
 ```
-Command> quit
 Disconnecting...
 Done.
 ```
@@ -379,7 +432,7 @@ The TimesTen mechanism that captures data changes that occur in the Oracle datab
 ```
 Autorefresh State: Paused
 ```
-In order to pre-populate the cache tables and activate the AUTOREFRESH mechanism you must now load the cache groups, which you will do in the next lab.
+In order to pre-populate the cache tables and activate the AUTOREFRESH mechanism, you must now load the cache groups, which you will do in the next lab.
 
 You can now *proceed to the next lab*. Keep your terminal session open for use in the next lab.
 

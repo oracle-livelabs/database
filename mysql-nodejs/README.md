@@ -10,4 +10,4 @@ Welcome to the Develop and Deploy a Modern Application in Node.js on MySQL Datab
 
 **Click the image to use our easy to navigate HTML format:**
 
-[![Develop and Deploy a Modern Application in Node.js on MySQL Database Service](images/adboml.png " ")](https://oracle.github.io/learning-library/developer-library/mysql-nodejs)
+[![Develop and Deploy a Modern Application in Node.js on MySQL Database Service](images/adboml.png " ")](https://oracle-livelabs.github.io/database/mysql-nodejs)
