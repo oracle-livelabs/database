@@ -3,10 +3,10 @@ CREATE SCHEMA ml_data;
 USE ml_data;
 
 CREATE TABLE `iris_train` (
-  `sepal_length` float DEFAULT NULL,
-  `sepal_width` float DEFAULT NULL,
-  `petal_length` float DEFAULT NULL,
-  `petal_width` float DEFAULT NULL,
+  `sepal length` float DEFAULT NULL,
+  `sepal width` float DEFAULT NULL,
+  `petal length` float DEFAULT NULL,
+  `petal width` float DEFAULT NULL,
   `class` varchar(16) DEFAULT NULL
 );
 
