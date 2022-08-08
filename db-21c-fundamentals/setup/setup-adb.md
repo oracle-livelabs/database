@@ -43,7 +43,7 @@ There are multiple ways to create an Oracle Wallet for ADB.  We will be using Or
 2.  Click the Cloud Shell icon to start up Cloud Shell
       ![](./images/cloud-shell.png " ")
 3.  While your Cloud Shell is starting up, click on the Hamburger Menu -> **Autonomous Transaction Processing** 
-      ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/database-atp.png " ")
+      ![](https://oracle-livelabs.github.io/common/images/console/database-atp.png " ")
 
 4.  Click on the **Display Name** to go to your ADB main page.
 

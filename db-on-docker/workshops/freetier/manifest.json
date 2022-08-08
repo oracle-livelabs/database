@@ -8,15 +8,15 @@
       },
       {
         "title": "Get Started",
-        "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/cloud-login/pre-register-free-tier-account.md"
+        "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
       },
       {
         "title": "Lab 1: Create SSH Keys",
-        "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key/generate-ssh-keys.md"
+        "filename": "https://oracle-livelabs.github.io/common/labs/generate-ssh-key/generate-ssh-keys.md"
       },
       {
         "title": "Lab 2: Setup Compute Instance",
-        "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/setup-compute/setup-linux-freetier.md"
+        "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute/setup-linux-freetier.md"
       },
       {
         "title": "Lab 3: Docker Setup & Basic Concepts",
@@ -33,7 +33,7 @@
       {
         "title": "Need Help?",
         "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-        "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-freetier.md"
+        "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
       }
   ]
 }
