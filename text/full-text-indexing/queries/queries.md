@@ -200,7 +200,7 @@ Otherwise, log in to the Oracle Cloud.
 
 8.  Near searches
 
-    You can find words close to each other using the __NEAR__ operator. It will find words within specified distance of each other. For example, the following query doesn't find any result. Because there are two words between "order" and "smith".
+    You can find words close to each other using the __NEAR__ operator. It will find words within specified distance of each other. For example, the following query doesn't find any result. Because there are two words between "order" and "smith", but we specified that we wanted a maximum of 1 word between them.
 
     ```
     <copy>
