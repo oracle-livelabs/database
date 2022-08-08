@@ -21,37 +21,37 @@ This lab assumes you have:
 
 1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
 
- [timesten-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/47ShQ4Xe1mUQOSeXXJGUL1zM1jYfYXR1YNJTIH0jTDHRYzsZjR5UQx37cCSXsxdt/n/natdsecurity/b/stack/o/timesten-mkplc-freetier.zip)
+ [ll-timesten-cache-intro.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/zXF3WR--V6CG3ZmB1vgQcEcYYidDhuejeplM9oBUwiYGs-7BnN4YI2_TLVY82_-b/n/natdsecurity/b/stack/o/ll-timesten-cache-intro.zip)
 
 2.  Save in your downloads folder.
 
-We strongly recommend using this stack to create a self-contained/dedicated VCN with your instance(s). Skip to *Task 3* to follow our recommendations. If you would rather use an exiting VCN then proceed to the next task to update your existing VCN with the required Egress rules.
+We strongly recommend using this stack to create a self-contained/dedicated VCN with your instance(s). Skip to *Task 3* to follow our recommendations. If you would rather use an exiting VCN then proceed to the next task to update your existing VCN with the required Ingress rules.
 
 ## Task 2: Adding security rules to an existing VCN
 
 This workshop requires a certain number of ports to be available, a requirement that can be met by using the default ORM stack execution that creates a dedicated VCN. In order to use an existing VCN/subnet, the following ports should be added to the Ingress rules.
 
-| Port           |Description                            |
-| :------------- | :------------------------------------ |
-| 22             | SSH                                   |
-| 80             | Remote Desktop using noVNC            |
+| Source Port    | Source CIDR | Destination Port | Protocol | Description                           |
+|   :--------:   |  :--------: |    :----------:  | :----:   | :------------------------------------ |
+| All            | 0.0.0.0/0   | 22               | TCP      | SSH                                   |
+| All            | 0.0.0.0/0   | 80               | TCP      | Remote Desktop using noVNC            |
+{: title="List of Ports Required Opened (Ingress Rules)"}
 
 
 1.  Go to *Networking >> Virtual Cloud Networks*
-
 2.  Choose your network
-
-3.  Under Resources, select *Security Lists*
-
-4.  Click on *Default Security Lists* under the Create Security List button
-
-5.  Click the *Add Ingress Rule* button
-
-6.  Enter the following:
+3.  Under Resources, select Security Lists
+4.  Click on Default Security Lists under the Create Security List button
+5.  Click Add Ingress Rule button
+6.  Enter the following:  
+    - Source Type: CIDR
     - Source CIDR: 0.0.0.0/0
-    - Destination Port Range: *Refer to the above table*
-
+    - IP Protocol: TCP
+    - Source Port Range: All (Keep Default)
+    - Destination Port Range: *Select from above table*
+    - Description: *Select corresponding description from above table*
 7.  Click the Add Ingress Rules button
+8. Repeat steps [5-7] until a rule is created for each port listed in the table
 
 ## Task 3: Setup your OCI compute instance
 
@@ -75,5 +75,5 @@ You may now *proceed to the next lab (Environment setup)*.
 ## Acknowledgements
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
-* **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Contributors** -  Doug Hood, Jenny Bloom, Rene Fontcha
+* **Last Updated By/Date** - Rene Fontcha, July 2022

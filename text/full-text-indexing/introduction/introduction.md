@@ -14,7 +14,7 @@ This workshop is an introduction to Oracle Text indexes, and is designed to walk
 
 Later workshops will explore the more advanced capabilities of the Oracle Text.
 
-## Workshop Scenario
+### Workshop Scenario
 
 We're going to create a simple table called "user_data" with customer information. That includes a number column for record ID, a VARCHAR2 column for the customer name, a number column for order amount and a VARCHAR2 column for any notes that the sales rep took.
 
@@ -24,7 +24,7 @@ We'll then work through various types of queries using the Oracle Text CONTAINS 
 
 Finally, we'll look at how to SYNC and OPTIMIZE Oracle Text indexes.
 
-## Prerequisites
+### Prerequisites
 
 Oracle Text is a SQL-level toolkit. This workshop assumes you have:
 
