@@ -6,7 +6,7 @@ With DMS we make it quick and easy for you to migrate databases from on-premises
 
 Watch the video below for an overview of Oracle Database Migration.
 
-[](youtube:GHIIFdmqAmA)
+[](youtube:1_bqqfgaof)
 
 ## About OCI Database Migration
 
