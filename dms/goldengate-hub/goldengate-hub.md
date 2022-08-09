@@ -183,8 +183,8 @@ This workshop section requires having access to an Oracle cloud account, having 
 
     - Type: Basic
     - Info: admin
-    - Password: __WELcome##1234__
-    - Verify Password: __WELcome##1234__
+    - Password: *password of your choice*
+    - Verify Password: *password of your choice*
 
     Upon review, click __Submit__
 
@@ -212,8 +212,8 @@ This workshop section requires having access to an Oracle cloud account, having 
 
     - Type: Basic
     - Info: admin
-    - Password: __WELcome##1234__
-    - Verify Password: __WELcome##1234__
+    - Password: *password of your choice*
+    - Verify Password: *password of your choice*
 
     Upon review, click __Submit__
 

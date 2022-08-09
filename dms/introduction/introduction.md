@@ -8,6 +8,8 @@ Watch the video below for an overview of Oracle Database Migration.
 
 [](youtube:1qHjaRFlPUo)
 
+Estimated workshop time: 180 minutes
+
 ## About OCI Database Migration
 
 DMS provides high performance, fully managed approach to migrating databases from on-premises, Oracle or third-party cloud into OCI-hosted databases. Migrations can be in either one of the following modes:

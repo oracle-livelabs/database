@@ -82,7 +82,7 @@ In this lab, you will:
 
   9. The migration runs the final cleanup phases and shows as **Succeeded** when finished
 
-You may now [proceed to the next lab](#next).
+
 
 ## Learn More
 
