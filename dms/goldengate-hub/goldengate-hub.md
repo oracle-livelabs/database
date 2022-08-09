@@ -71,7 +71,7 @@ This workshop section requires having access to an Oracle cloud account, having 
 
 ## Task 2: Setting up the GoldenGate Image from the Oracle Cloud Infrastructure Market Place
 
-1. Click the navigation menu in the upper left to show top level navigation choices. On the Search bar, type "Marketplace" and click on the __All Applications__ result on the right hand side.
+1. Click the navigation menu in the upper left to show top level navigation choices. On the Search bar, type "Marketplace" and click on the __All Applications__ result on the right-hand side.
 
     ![Screenshot of marketplace results for the search function in Oracle Cloud Infrastructure](./images/marketplace-search.png " ")
 
@@ -116,7 +116,7 @@ This workshop section requires having access to an Oracle cloud account, having 
 8. Configure the following variables for section __Create OGG Deployment__:
 
     - Deployment  Name, enter __Marketplace__
-    - Deployment 2 - Automomous Database (__Check__)
+    - Deployment 2 - Autonomous Database (__Check__)
     - Deployment 2 - Autonomous Database Compartment, select appropriate compartment as the rest of your deployment
     - Deployment 2 - Autonomous Database Instance, select the target database created earlier 
 
@@ -142,7 +142,7 @@ This workshop section requires having access to an Oracle cloud account, having 
 
 1. Open CloudShell
 
-2. Connect to the GoldenGate Hub, replace __ogg\_public\_ip__ with the GoldenGate Hub public ip copied above and replace __sshkeyname__ with the SSH Key name used previously. Enter yes at the prompt. Please bear in mind that the instance creationg might still be wrapping up and hence the connection might be refused. If this is the case, please wait for a couple of minutes and try again
+2. Connect to the GoldenGate Hub, replace __ogg\_public\_ip__ with the GoldenGate Hub public ip copied above, and replace __sshkeyname__ with the SSH Key name used previously. Enter yes at the prompt. Please bear in mind that the instance creation might still be wrapping up and hence the connection might be refused. If this is the case, please wait for a couple of minutes and try again
 
     ```
     <copy>
@@ -231,7 +231,7 @@ Please *proceed to the next lab*.
 
 
 
-## Acknowledgements
+## Acknowledgments
 * **Authors** - Ricardo Gonzalez, Senior Principal Product Manager, Oracle Cloud Database Migration
 * **Authors** - Ameet Kumar Nihalani, Senior Principal Support Engineer, Oracle Cloud Database Migration
 * **Contributors** - LiveLabs Team, ZDM Development Team

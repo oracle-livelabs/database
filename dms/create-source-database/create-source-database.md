@@ -19,7 +19,7 @@ In this lab, you will:
 * SSH Public Key in RSA format
 * This lab requires completion of the preceding labs in the Contents menu on the left.
 
-*Note: If you have a **Free Trial** account, when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)***
+*Note: If you have a **Free Trial** account when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)***
 
 ## Task 1: Setup the Source Database
 
@@ -92,7 +92,7 @@ The following task is *optional* if a source database is already present.
 
   ![](images/easy-connect-string.png)
 
-5. Also note the service name of the PDB into a notepad, you need to replace the first section of the CDB service name with the PDB name(if you named it something else, use that), in this case **pdb.sub12062328210.vcndmsla.oraclevcn.com**
+5. Also note the service name of the PDB into a notepad, you need to replace the first section of the CDB service name with the PDB name (if you named it something else, use that), in this case **pdb.sub12062328210.vcndmsla.oraclevcn.com**
 
 6. Go back to the **DB Systems Details** page of your database and select **Nodes** on the left-hand side **Resources** list.
 
@@ -163,7 +163,7 @@ You may now [proceed to the next lab](#next).
 * [Bare Metal and Virtual Machine DB Systems](https://docs.oracle.com/en-us/iaas/Content/Database/Concepts/overview.htm)
 * [Administering Oracle Database Classic Cloud Service](https://docs.oracle.com/en/cloud/paas/database-dbaas-cloud/csdbi/this-service.html)
 
-## Acknowledgements
+## Acknowledgments
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Killian Lynch, Hanna Rakhsha, Kiana McDaniel, Solution Engineers, Austin Specialist Hub
 * **Last Updated By/Date** - Jorge Martinez, Product Manager, July 2022

@@ -14,7 +14,7 @@ In this lab, you will:
 * Learn how to Connect to the target ADB instance and enable the standard ggadmin user.
 
 ### Prerequisites
-* This workshop section requires having setup a compute instance ,source database and target ABD instance.
+* This workshop section requires having set up a compute instance ,source database and target ABD instance.
 
 
 ## Task 1: Connect to Your Database and Configure required parameters
@@ -126,7 +126,7 @@ In this lab, you will:
 
     ```
     <copy>    
-    CREATE USER C##GGADMIN IDENTIFIED BY WELCOME##1234 DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP;
+    CREATE USER C##GGADMIN IDENTIFIED BY <password> DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP;
     GRANT CONNECT, RESOURCE TO C##GGADMIN CONTAINER=ALL; 
     GRANT SELECT ON SYS.CCOL$ TO C##GGADMIN CONTAINER=ALL; 
     GRANT SELECT ON SYS.CDEF$ TO C##GGADMIN CONTAINER=ALL; 
@@ -169,7 +169,7 @@ In this lab, you will:
 
     ```
     <copy>    
-    CREATE USER GGADMIN IDENTIFIED BY WELCOME##1234 DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP;
+    CREATE USER GGADMIN IDENTIFIED BY <password> DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP;
     GRANT CONNECT, RESOURCE TO GGADMIN; 
     GRANT SELECT ON SYS.CCOL$ TO GGADMIN; 
     GRANT SELECT ON SYS.CDEF$ TO GGADMIN; 
@@ -196,10 +196,10 @@ In this lab, you will:
     ```
 
 
-4. After connecting to your container database create the user 'HR01'. If you would like you can replace `WELcome123ZZ` with a password of your choice. Write down or save the password as you will need it later.
+4. After connecting to your container database create the user 'HR01'. Write down or save the password as you will need it later.
     ```
     <copy>
-    CREATE USER HR01 IDENTIFIED BY WELCOME##1234;
+    CREATE USER HR01 IDENTIFIED BY <password>;
     </copy>
     ```
 
@@ -216,7 +216,7 @@ In this lab, you will:
     ```
 
 ## Task 3: Load Sample Table
-1. Connect to your database user. Enter password `WELcome##1234` at the prompt that you set for your user.
+1. Connect to your database user. Enter <password> at the prompt that you set for your user.
     ```
     <copy>
     connect HR01@PDB;
@@ -226,7 +226,7 @@ In this lab, you will:
     Password:
     ```
     <copy>
-    WELcome##1234
+    <password>
     </copy>
     ```
 
@@ -301,11 +301,11 @@ To perform the migration, DMS will require several passwords, for simplicity, le
     </copy>
     ```
 
-2. Change your password to __WELcome##1234__ by copying and executing the following in SQLPLUS
+2. Change your password by copying and executing the following in SQLPLUS
    
     ```
     <copy>
-    ALTER USER system IDENTIFIED BY WELcome##1234;
+    ALTER USER system IDENTIFIED BY <New password>;
     </copy>
     ```
 
@@ -346,7 +346,7 @@ The next steps will connect to the target ADB instance and enable the standard g
     alter user ggadmin identified by <new password> account unlock;
     </copy>
     ```
-3. Exit SQL.
+3. Exit SQL. 
 
     ```
     <copy>
@@ -358,7 +358,7 @@ The next steps will connect to the target ADB instance and enable the standard g
 You may now [proceed to the next lab](#next).
 
 
-## Acknowledgements
+## Acknowledgments
 * **Author** - Zachary Talke, Solutions Engineer, NA Tech Solution Engineering
 * **Author** - Ameet Kumar Nihalani, Senior Principal Support Engineer, Oracle Cloud Database Migration
 * **Author** - Ricardo Gonzalez, Senior Principal Product Manager, Oracle Cloud Database Migration

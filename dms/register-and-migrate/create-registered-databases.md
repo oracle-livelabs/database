@@ -23,7 +23,7 @@ In this lab, you will:
 * Source DB PDB Service Name
 * Database Administrator Password
 
-*Note: If you have a **Free Trial** account, when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)***
+*Note: If you have a **Free Trial** account when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)***
 
 ## Task 1: Create Registered Database for Source CDB
 
@@ -49,7 +49,7 @@ For this task you need the following info from previous steps:
     - Database: **sourcedb**
     - Connect String: Change existing string by replacing the qualified hostname with the **private IP** of the database node, for example:
         - **10.0.0.3**:1521/sourcedb_iad158.sub12062328210.vcndmsla.oraclevcn.com
-    - Subnet: Pick the Subnet that the DB is located in
+    - Subnet: Pick the Subnet that the DB is in
 
 4. Press **Next**
 
@@ -216,7 +216,7 @@ You may now [proceed to the next lab](#next).
 * [Managing Migrations](https://docs.oracle.com/en-us/iaas/database-migration/doc/managing-migrations.html)
 
 
-## Acknowledgements
+## Acknowledgments
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian Lynch, Solution Engineers, Austin Specialist Hub
 * **Last Updated By/Date** - Jorge Martinez, Product Manager, July 2022

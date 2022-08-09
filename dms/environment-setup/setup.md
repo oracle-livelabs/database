@@ -4,7 +4,7 @@
 
 This lab walks you through the steps of creating your own virtual cloud network and updating the security list, allowing for future Database access. You will also walk through the steps of creating a vault, an encrypted key, and the steps to create an empty Object Storage Bucket for use in the migration. The OCI Object Storage service is an internet-scale, high-performance storage platform that offers reliable and cost-efficient data durability. In this lab, Object Storage is used as temporary storage between the source and target databases with Data Pump. For more information visit the *Learn More* tab at the bottom of the page.
 
-For a full understanding of the network components and their relationships view the linked video, or visit the *Learn More* tab below.
+For a full understanding of the network components and their relationships view the linked video or visit the *Learn More* tab below.
 
   [](youtube:mIYSgeX5FkM)
 
@@ -21,10 +21,10 @@ In this lab, you will:
 
 ### Prerequisites
 
-* An Oracle Cloud Account - Please view this workshop's LiveLabs landing page to see which environments are supported
+* An Oracle Cloud Account - Please view this workshop's LiveLabs landing page to see which environments are supported.
 * This lab requires completion of the preceding labs in the Contents menu on the left.
 
-*Note: If you have a **Free Trial** account, when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)***
+*Note: If you have a **Free Trial** account when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)***
 
 ## Task 1: Create Virtual Cloud Network
 
@@ -95,7 +95,7 @@ You may now [proceed to the next lab](#next).
 
 ## Task 3: Create Vault
 
-These steps walks you through the steps of creating a vault and encrypted key. For more information visit the *Learn More* tab at the bottom of the page.
+These steps walk you through the steps of creating a vault and encrypted key. For more information visit the *Learn More* tab at the bottom of the page.
 
 The following task is *optional* if a Vault is already present.
 
