@@ -226,7 +226,6 @@ Text indexes are an example of a **domain index**. Domain indexes are specialize
     or provide a "custom stoplist" of words we don't want to be indexed. The default list of stopwords will vary with language and
     will depend on the default language setting for the database (always English for Autonomous Database).
     You can customize your stop word list following the examples here: [Create Stop List](https://docs.oracle.com/en/database/oracle/oracle-database/19/ccref/CTX_DDL-package.html#GUID-3336B8E9-13FB-4997-A9AD-8D9A207B10C4) and [Add Stop Word] (https://docs.oracle.com/en/database/oracle/oracle-database/19/ccref/CTX_DDL-package.html#GUID-5D27665E-8ECC-4703-94CC-83387BB7ABCD).
-    
     We don't need to know anything about the underlying index tables at the moment. But it's useful to see the words that are indexed,
     and it can sometimes be worth referring to this list when trying to figure out why a particular query acts as it does (queries
     are covered in the next lab).
@@ -236,5 +235,5 @@ You may now continue to the next lab.
 ## Acknowledgements
 
 - **Author** - Roger Ford, Principal Product Manager
-- **Contributors** - Alexandra Czarlinska, James Zheng
-- **Last Updated By/Date** - Roger Ford, March 2022
+- **Contributors** - Alexandra Czarlinska, James Zheng, Arabella Yao
+- **Last Updated By/Date** - Arabella Yao, Database Product Manager, July 2022
