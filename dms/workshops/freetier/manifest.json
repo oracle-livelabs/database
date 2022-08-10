@@ -14,7 +14,7 @@
         {
             "title": "Get Started",
             "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
-            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
         },
         {
             "title": "Lab 1: Create SSH Keys",
@@ -33,12 +33,21 @@
             "title": "Lab 4: Create Target Database",
             "filename": "../../create-target-database/create-target-database.md"
         },
+        
         {
-            "title": "Lab 5: Register and Setup Migration",
+            "title": "Lab 5: Configure GoldenGate hub ",
+            "filename": "../../goldengate-hub/goldengate-hub.md"
+        },
+        {
+            "title": "Lab 6: Prepare source and target databases ",
+            "filename": "../../prepare-source-and-target-databases/prepare-source-and-target-databases.md"
+        },
+        {
+            "title": "Lab 7: Register and Setup Migration",
             "filename": "../../register-and-migrate/create-registered-databases.md"
         },
         {
-            "title": "Lab 6: Validate and Run Migration",
+            "title": "Lab 8: Validate and Run Migration",
             "filename": "../../validate-and-run/validate-migration.md"
         },
         {
