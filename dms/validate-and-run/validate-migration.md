@@ -17,7 +17,7 @@ In this lab, you will:
 * An Oracle Cloud Account - Please view this workshop's LiveLabs landing page to see which environments are supported
 * This lab requires completion of the preceding labs in the Contents menu on the left.
 
-*Note: If you have a **Free Trial** account when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)***
+*Note: If you have a **Free Trial** account, when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)***
 
 ## Task 1: Validate Migration
 
@@ -41,14 +41,14 @@ In this lab, you will:
 
 6. Click on most recent Evaluation Job
 
-7. Click on **Phases** in the left-hand **Resources** list
+7. Click on **Phases** in left-hand **Resources** list
 
   ![](images/5.png =20%x*)
 
-8. Phases will be shown, and status will be updated as phases are completed. It can take 2 minutes before the first phase is shown.
+8. Phases will be shown and status will be updated as phases are completed. It can take 2 minutes before the first phase is shown.
     ![](images/Pump.png =90%x*)
 
-9. If a phase has failed, it will show with the status **Failed**. In this case, press **Download Log** to learn more about the reason for failure. Press **Abort** on a failed job to allow further jobs or deleting of the migration.
+9. If a phase has failed, it will show with status **Failed**. In this case press **Download Log** to learn more about the reason of failure. Press **Abort** on a failed job to allow further jobs or deleting of the migration.
 
   ![](images/9.png =90%x*)
 
@@ -68,27 +68,27 @@ In this lab, you will:
 
     ![](images/pic.png =90%x*)
 
-  4. Click on **Jobs** in the left-hand **Resources** list
+  4. Click on **Jobs** in left-hand **Resources** list
 
-  5. Click on the most recent Evaluation Job
+  5. Click on most recent Evaluation Job
 
-  6. Click on **Phases** in the left-hand **Resources** list
+  6. Click on **Phases** in left-hand **Resources** list
 
   7. Job phases are updated as the migration progresses
 
-  8. Wait till all the phases have been completed and your screen should look like the picture below.
+  8. Wait till all the phases have completed and your screen should look the like picture below.
 
   ![](images/FD.png =90%x*)
 
   9. The migration runs the final cleanup phases and shows as **Succeeded** when finished
 
-
+You may now [proceed to the next lab](#next).
 
 ## Learn More
 
 * [Managing Migration Jobs](https://docs.oracle.com/en-us/iaas/database-migration/doc/managing-migration-jobs.html)
 
-## Acknowledgments
+## Acknowledgements
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian, Lynch, Solution Engineers, Austin Specialist Hub
 * **Last Updated By/Date** - Killian Lynch, Kiana McDaniel, Hanna Rakhsha, Solution Engineers, July 2021
