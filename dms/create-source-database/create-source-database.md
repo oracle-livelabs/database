@@ -19,7 +19,7 @@ In this lab, you will:
 * SSH Public Key in RSA format
 * This lab requires completion of the preceding labs in the Contents menu on the left.
 
-*Note: If you have a **Free Trial** account when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)***
+*Note: If you have a **Free Trial** account, when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)***
 
 ## Task 1: Setup the Source Database
 
@@ -28,9 +28,9 @@ The following task is *optional* if a source database is already present.
 1. You will need an SSH key pair for logging into your database and environments. If you don’t already have one, please create one.
 *Important*: The key needs to be in RSA format, other formats like OpenSSL are currently not supported. You can use a command like: `ssh-keygen -t rsa -N "" -b 2048 -C "<key_name>" -f <path/root_name>`
 
-2. In the OCI Console Menu, go to **Oracle Database > Oracle Base Database (VM, BM)**.
+2. In the OCI Console Menu, go to **Oracle Database > Bare Metal, VM, and Exadata**.
 
-  ![](images/oracle-base-database.png)
+  ![](images/bare-metal-vm-exadata.png)
 
 3. Press **Create DB System**.
 
@@ -92,7 +92,7 @@ The following task is *optional* if a source database is already present.
 
   ![](images/easy-connect-string.png)
 
-5. Also note the service name of the PDB into a notepad, you need to replace the first section of the CDB service name with the PDB name (if you named it something else, use that), in this case **pdb.sub12062328210.vcndmsla.oraclevcn.com**
+5. Also note the service name of the PDB into a notepad, you need to replace the first section of the CDB service name with the PDB name(if you named it something else, use that), in this case **pdb.sub12062328210.vcndmsla.oraclevcn.com**
 
 6. Go back to the **DB Systems Details** page of your database and select **Nodes** on the left-hand side **Resources** list.
 
@@ -163,7 +163,7 @@ You may now [proceed to the next lab](#next).
 * [Bare Metal and Virtual Machine DB Systems](https://docs.oracle.com/en-us/iaas/Content/Database/Concepts/overview.htm)
 * [Administering Oracle Database Classic Cloud Service](https://docs.oracle.com/en/cloud/paas/database-dbaas-cloud/csdbi/this-service.html)
 
-## Acknowledgments
+## Acknowledgements
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Killian Lynch, Hanna Rakhsha, Kiana McDaniel, Solution Engineers, Austin Specialist Hub
-* **Last Updated By/Date** - Jorge Martinez, Product Manager, July 2022
+* **Last Updated By/Date** - Killian Lynch, Hanna Rakhsha, Kiana McDaniel, Solution Engineers, July 2021
