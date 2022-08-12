@@ -41,7 +41,7 @@ The TimesTen workshops have the following pre-requisites:
 - A basic familiarity with relational databases and SQL
 
 ## Available TimesTen Workshops
-- [Accelerate your Applications: Achieve Blazing Fast SQL With an Oracle TimesTen Cache](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?p180_id=613)
+- [Accelerate your Applications: Achieve Blazing Fast SQL With an Oracle TimesTen Cache](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3282)
 
 ## TimesTen Related Pages
 - [TimesTen Product Home](https://www.oracle.com/au/application-development/)

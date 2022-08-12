@@ -138,7 +138,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
    ```
 
    <if type="atp">
-    ![](./images/step2-2.png " ")
+   ![](./images/step2-2.png " ")
    </if>
 
   <if type="dbcs">
