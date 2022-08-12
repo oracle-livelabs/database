@@ -222,7 +222,7 @@ This workshop section requires having access to an Oracle cloud account, having 
 
 
 You may now close any Oracle GoldenGate Service Manager leftover tab.
-Please *proceed to the next lab*.
+You may now [proceed to the next lab](#next).
 
 ## Learn More
 
