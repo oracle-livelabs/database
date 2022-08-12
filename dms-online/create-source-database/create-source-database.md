@@ -30,11 +30,11 @@ The following task is *optional* if a source database is already present.
 
 2. In the OCI Console Menu, go to **Oracle Database > Oracle Base Database (VM, BM)**.
 
-  ![](images/oracle-base-database.png)
+  ![Screenshot of Oracle Base Database (VM, BM) navigation](images/oracle-base-database.png)
 
 3. Press **Create DB System**.
 
-  ![](images/create-db-system.png)
+  ![Screenshot of create db system](images/create-db-system.png)
 
 4. Enter the following values, otherwise leave defaults. You can adjust shapes and storage to your use case requirements and available quota.
     - Name: **SourceDB**
@@ -44,11 +44,11 @@ The following task is *optional* if a source database is already present.
     - Client subnet: **Public Subnet-VCN\_DMS\_LA** (Or your subnet name)
     - Hostname prefix: **sourcedb**
 
-  ![](images/name-your-source.png)
+  ![Screenshot of enter db name details](images/name-your-source.png)
 
-  ![](images/dbLT.png)
+  ![Screenshot of entering ssh key information](images/add-ssh-key.png)
 
-  ![](images/specify-network-info.png)
+  ![Screenshot of network information](images/specify-network-info.png)
 
 5. Press **Next**.
 
@@ -56,18 +56,18 @@ The following task is *optional* if a source database is already present.
     - Database name: **sourcedb**
     - Press **Change Database Image**
 
-    ![](images/change-db.png)
+    ![Screenshot of source database information](images/change-db.png)
 
     - Select **Display all available versions**
     - Check the box for version number **19.10.0.0**
     - Press **Select**
 
-    ![](images/1910db.png)
+    ![Screenshot of PDB details](images/select-db-details.png)
 
     - PDB name: **pdb**
     - Create administrator credentials – Password: *password of your choice*
 
-  ![](images/pdb-name-and-sys-password.png)
+  ![Screenshot of PDB name and sys password](images/pdb-name-and-sys-password.png)
 
 7. Press **Create DB System**.
 
@@ -78,19 +78,19 @@ The following task is *optional* if a source database is already present.
 
 1. Open the database system **SourceDB** in the **DB Systems** table.
 
-  ![](images/open-sourcedb.png)
+  ![Screenshot of open source db](images/open-sourcedb.png)
 
 2. Open the database **sourcedb** in the **Databases** table.
 
-  ![](images/databases-sourcedb.png)
+  ![Screenshot click on sourcedb](images/databases-sourcedb.png)
 
 3. Press **DB Connection**.
 
-  ![](images/db-connect.png)
+  ![Screenshot of press DB connection](images/db-connect.png)
 
 4. Press **Show** next to the **Easy Connect** Connection String. A string similar to **sourcedb.sub12062328210.vcndmsla.oraclevcn.com:1521/sourcedb\_iad158.sub12062328210.vcndmsla.oraclevcn.com** should be shown. Copy the string after the */* into a notepad, in this case **sourcedb\_iad158.sub12062328210.vcndmsla.oraclevcn.com**. This is the service name of your CDB, you will need this string later for accessing your database and creating migrations. Close the dialog.
 
-  ![](images/easy-connect-string.png)
+  ![Screenshot of easy connect string](images/easy-connect-string.png)
 
 5. Also note the service name of the PDB into a notepad, you need to replace the first section of the CDB service name with the PDB name (if you named it something else, use that), in this case **pdb.sub12062328210.vcndmsla.oraclevcn.com**
 
@@ -98,7 +98,7 @@ The following task is *optional* if a source database is already present.
 
 7. The Nodes list shows the **sourcedb** node. Note the **Public IP Address** and **Private IP Address** of the node into a notepad, in this case **129.146.173.28** and **10.0.0.55**.
 
-  ![](images/source-db-ip-addresses.png)
+  ![Screenshot of source db ip address](images/source-db-ip-addresses.png)
 
 ## Task 3: Adding Data to the Database
 

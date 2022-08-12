@@ -34,11 +34,11 @@ For this task you need the following info from previous steps:
 
 1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Registered Databases**
 
-  ![](images/1-1.png =90%x*)
+  ![Screenshot of Registered Databases navigation](images/registered-db.png =90%x*)
 
 2. Press **Register Database**
 
-  ![](images/1-2.png =90%x*)
+  ![Screenshot of click register db](images/click-register-db.png =90%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **SourceCDB**
@@ -53,7 +53,7 @@ For this task you need the following info from previous steps:
 
 4. Press **Next**
 
-  ![](images/1-4.png =50%x*)
+  ![Screenshot of register DB details and click next](images/register-db-next.png =50%x*)
 
 5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
     - Database Administrator Username: **system**
@@ -65,7 +65,7 @@ For this task you need the following info from previous steps:
 
 6. Press **Register**
 
-  ![](images/1-6.png =50%x*)
+  ![Screenshot of  confirm register DB](images/register-db-confirm.png =50%x*)
 
 ## Task 2: Create Registered Database for Source PDB
 
@@ -76,11 +76,11 @@ For this task you need the following info from previous steps:
 
 1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Registered Databases**
 
-  ![](images/1-1.png =90%x*)
+  ![Screenshot of Registered Databases](images/registered-db.png =90%x*)
 
 2. Press **Register Database**
 
-  ![](images/1-2.png =90%x*)
+  ![Screenshot of click register db](images/click-register-db.png =90%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **SourcePDB**
@@ -95,7 +95,7 @@ For this task you need the following info from previous steps:
 
 4. Press **Next**
 
-  ![](images/2-4.png =50%x*)
+  ![Screenshot of register db](images/Register-db-next-second.png =50%x*)
 
 5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
     - Database Administrator Username: **system**
@@ -107,7 +107,7 @@ For this task you need the following info from previous steps:
 
 6. Press **Register**
 
-  ![](images/1-6.png =50%x*)
+   ![Screenshot of  confirm register DB](images/register-db-confirm.png =50%x*)
 
 ## Task 3: Create Registered Database for Target ADB
 
@@ -116,11 +116,11 @@ For this task you need the following info from previous steps:
 
 1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Registered Databases**
 
-  ![](images/1-1.png =90%x*)
+  ![Screenshot of Registered Databases](images/registered-db.png =90%x*)
 
 2. Press **Register Database**
 
-  ![](images/1-2.png =90%x*)
+   ![Screenshot of click register db](images/click-register-db.png =90%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **TargetATP**
@@ -131,7 +131,7 @@ For this task you need the following info from previous steps:
 
 4. Press **Next**
 
-  ![](images/3-4.png =50%x*)
+  ![Screenshot of press next after entering details](images/press-next.png =50%x*)
 
 5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
     - Database Administrator Username: **admin**
@@ -139,25 +139,25 @@ For this task you need the following info from previous steps:
 
 6. Press **Register**
 
-  ![](images/3-6.png =50%x*)
+  ![Screenshot of confirm db registration](images/confirm-db-registration.png =50%x*)
 
 
 ## Task 4: Create Migration
 
   1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Migrations**
 
-    ![](images/1.png =90%x*)
+    ![Screenshot of migration navigation](images/migrations-navigation.png =90%x*)
 
   2. Press **Create Migration**
 
-    ![](images/2.png =90%x*)
+    ![Screenshot of press create migration](images/press-create-migration.png =90%x*)
 
   3. On the page **Add Details**, fill in the following entries, otherwise leave defaults:
       - Name: **TestMigration**
       - Vault: **DMS_Vault**
       - Encryption Key: **DMS_Key**
 
-      ![](images/add-details.png =40%x*)
+      ![Screenshot to add vault details](images/add-details.png =40%x*)
 
   4. Press **Next**
 
@@ -167,7 +167,7 @@ For this task you need the following info from previous steps:
       - Registered Container Database: **SourceCDB**
       - Target Database: **TargetATP**
 
-      ![](images/select-databases.png =40%x*)
+      ![Screenshot of source db selection](images/select-databases.png =40%x*)
 
   6. On the page **Migration Options**, fill in the following entries, otherwise leave defaults:
       - In **Initial Load**, select **Datapump via Object Storage**
@@ -176,7 +176,7 @@ For this task you need the following info from previous steps:
           - Name: **dumpdir**
           - Path: **/u01/app/oracle/dumpdir**
      
-          ![](images/Test-migration.png =40%x*)
+          ![Screenshot for migration options](images/Test-migration.png =40%x*)
 
 
   7. Check **Use Online Replication**
