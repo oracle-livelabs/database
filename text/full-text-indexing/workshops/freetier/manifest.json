@@ -33,6 +33,10 @@
             "filename": "../../maintenance/maintenance.md"
         },
         {
+            "title": "Lab 5: Terminate Oracle Autonomous Database",
+            "filename":"https://oracle-livelabs.github.io/common/labs/terminate-adb/terminate-adb.md"
+        },
+        {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
             "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
