@@ -1,0 +1,71 @@
+{
+    "workshoptitle": "Evolve your database applications online with Edition-Based Redefinition",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Learn how to use Edition-Based Redefinition (EBR) and Online Table Reorganization (DBMS_REDEFINITION) along with SQLcl and its Liquibase integration. These unique Oracle technologies will let you evolve your database schemas online, without any interruption, using a rolling, blue-green deployment style.",
+            "filename": "../../introduction/intro.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "Login to Oracle Cloud",
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
+        },
+        {
+            "title": "Lab 1: Create an ATP Autonomous Database",
+            "description": "Create an ATP Autonomous Database",
+            "filename": "../../create-adb/create-adb.md"
+        },
+        {
+            "title": "Lab 2: Connect to the ATP Autonomous Database",
+            "description": "Get the wallet and connect to the newly created Autonomous Database",
+            "filename": "../../connect-adb/connect-adb.md"
+        },
+        {
+            "title": "Lab 3: Prepare the HR schema",
+            "description": "This workshop uses a modified version of the well-known HR schema. Please set it up using this lab.",
+            "filename": "../../setup-hr-schema/setup-hr-schema.md"
+        },
+        {
+            "title": "Lab 4: Review the HR schema",
+            "description": "Review the HR Schema",
+            "filename": "../../review-hr-schema/review-hr-schema.md"
+        },
+        {
+            "title": "Lab 5: Using Liquibase run the generate schema",
+            "description": "Using Liquibase run the generate schema",
+            "filename": "../../lb-genschema/lb-genschema.md"
+        },
+        {
+            "title": "Lab 6: Create Directory structure and sync the metadata",
+            "description": "Create Directory structure and sync the metadata",
+            "filename": "../../directory-syncmetadata/directory-syncmetadata.md"
+        },
+        {
+            "title": "Lab 7: Prepare and review new edition scripts",
+            "description": "Prepare and review new edition scripts",
+            "filename": "../../prepare-newedition/prepare-newedition.md"
+        },
+        {
+            "title": "Lab 8: Update new edition",
+            "description": "Update new edition",
+            "filename": "../../update-newedition/update-newedition.md"
+        },
+        {
+            "title": "Lab 9: Verify new edition",
+            "description": "Verify new edition",
+            "filename": "../../verify-newedition/verify-newedition.md"
+        },
+        {
+            "title": "Lab 10: Switch to new edition and decommision the old edition",
+            "description": "Switch to new edition and decommision the old edition",
+            "filename": "../../switch-decomm-editions/switch-decomm-editions.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+        }
+    ]
+  }
