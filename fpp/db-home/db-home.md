@@ -58,9 +58,9 @@ In this lab, you will:
 2. Then, provision the first DB image to the target. The opc password is always `FPPll##123` unless you have changed it (Est. 8-9 minutes):
 
       ```
-      $ rhpctl add workingcopy -image db_19_9_0  -workingcopy WC_db_19_9_0_FPPC \
+      $ rhpctl add workingcopy -image db_previous  -workingcopy WC_db_previous_FPPC \
          -storagetype LOCAL -user oracle -oraclebase /u01/app/oracle \
-         -targetnode fppc -path /u01/app/oracle/product/19.0.0.0/WC_db_19_9_0_FPPC \
+         -targetnode fppc -path /u01/app/oracle/product/19.0.0.0/WC_db_previous_FPPC \
          -sudouser opc -sudopath /bin/sudo
       ```
       ![](./images/first-db.png)
@@ -70,9 +70,9 @@ In this lab, you will:
 1. Provision the second DB image to the target (Est. 8-9 minutes), **please note the additional -groups** parameter passed here:
 
       ```
-      $ rhpctl add workingcopy -image db_19_10_0_oci -workingcopy WC_db_19_10_0_FPPC \
+      $ rhpctl add workingcopy -image db_current_oci -workingcopy WC_db_current_FPPC \
       -storagetype LOCAL -user oracle -oraclebase /u01/app/oracle   -targetnode fppc \
-      -path /u01/app/oracle/product/19.0.0.0/WC_db_19_10_0_FPPC  \
+      -path /u01/app/oracle/product/19.0.0.0/WC_db_current_FPPC  \
       -groups  OSDBA=dba,OSOPER=oper,OSBACKUP=backupdba,OSDG=dgdba,OSKM=kmdba,OSRAC=racdba \
       -sudouser opc -sudopath /bin/sudo
       ```
