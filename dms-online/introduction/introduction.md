@@ -57,7 +57,6 @@ In this lab, you will:
 
 * An Oracle Cloud Account - Please view this workshop's LiveLabs landing page to see which environments are supported
 
-
 You may now [proceed to the next lab](#next).
 
 ## Learn More
