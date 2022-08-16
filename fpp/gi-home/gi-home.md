@@ -60,7 +60,7 @@ In this lab, you will:
 2. Alternatively, you can download it directly on the host:
 
       ```
-      wget  https://github.com/lcaldara-oracle/learning-library/raw/master/data-management-library/database/fpp/03-gi-home/files/fppc.rsp
+      wget  https://github.com/oracle-livelabs/database/raw/main/fpp/gi-home/files/fppc.rsp
       ```
       ![](./images/download.png)
 
@@ -68,9 +68,9 @@ In this lab, you will:
 1. On the FPP Server, run the following command to provision and configure the GI home on the target. The password is `FPPll##123`. (Est. 8 minutes)
 
       ```
-      rhpctl add workingcopy -workingcopy WC_gi_19_10_0_FPPC \
-      -image gi_19_10_0_oci -responsefile ~/fppc.rsp \
-      -path /u01/app/grid/WC_gi_19_10_0_FPPC -user oracle -oraclebase /u01/app/oracle \
+      rhpctl add workingcopy -workingcopy WC_gi_current_FPPC \
+      -image gi_current_oci -responsefile ~/fppc.rsp \
+      -path /u01/app/grid/WC_gi_current_FPPC -user oracle -oraclebase /u01/app/oracle \
       -targetnode fppc -sudouser opc -sudopath /bin/sudo -ignoreprereq
       ```
       ![](./images/provision.png)
@@ -94,7 +94,7 @@ In this lab, you will:
       ```
       $ . oraenv
       ORACLE_SID = [oracle] ?
-      ORACLE_HOME = [/home/oracle] ? /u01/app/grid/WC_gi_19_10_0_FPPC
+      ORACLE_HOME = [/home/oracle] ? /u01/app/grid/WC_gi_current_FPPC
       The Oracle base has been set to /u01/app/oracle
       ```
       ![](./images/oraenv.png)
