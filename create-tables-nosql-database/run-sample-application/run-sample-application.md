@@ -63,6 +63,7 @@ This workshop contains different language implementation in the form of differen
 </project>
 </copy>
 ```
+**Note:** The latest SDK can be found here [Oracle NoSQL Database SDK For Java](https://mvnrepository.com/artifact/com.oracle.nosql.sdk/nosqldriver). You can update the `pom.xml` file with this latest SDK version number.
 </if>
 
 <if type="Python">
