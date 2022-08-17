@@ -174,7 +174,7 @@ When `SignatureProvider` is constructed without any parameters, the default [Con
 
 ```
 <copy>
-$ mvn exec:java -Dexec.mainClass=HelloWorld -Dexec.args="-service cloud -endpoint <your region endpoint>"
+$ mvn exec:java -Dexec.mainClass=HelloWorld
 </copy>
 ```
 
