@@ -20,9 +20,9 @@ This workshop contains different language implementation in the form of differen
 ## **Step 1:** Download the appropriate Oracle NoSQL SDK
 <if type="Java">
 
-1.  Make sure that a recent version of the java jdk is installed locally on your computer.
-
-2. Use the pre-supplied maven project [pom.xml](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/pom.xml) to configure Oracle NoSQL SDK. This grabs the SDK runtime from Maven Central.
+1. Make sure that a recent version of the java jdk is installed locally on your computer.
+2. Make sure you have `maven` installed. See [Installing Maven](https://maven.apache.org/install.html) for details.
+3. Create a `test` directory. Download [pom.xml](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/pom.xml) to configure Oracle NoSQL SDK. This grabs the SDK runtime from Maven Central.
 
 ```
 <copy>
@@ -63,6 +63,7 @@ This workshop contains different language implementation in the form of differen
 </project>
 </copy>
 ```
+**Note:** The latest SDK can be found here [Oracle NoSQL Database SDK For Java](https://mvnrepository.com/artifact/com.oracle.nosql.sdk/nosqldriver). You can update the `pom.xml` file with this latest SDK version number.
 </if>
 
 <if type="Python">
@@ -140,11 +141,11 @@ cd <your-project-directory>
 ## **Step 2:** Download, build and run the sample application
 
 <if type="Java">
-1. Download the provided [HelloWorld.java](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.java) file and move it to your home directory.
+1. Download the provided [HelloWorld.java](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.java) file and move it to the `test/src/main/java` directory.
 
 2. Review the sample application. You can access the [JavaAPI Reference Guide](https://docs.oracle.com/en/cloud/paas/nosql-cloud/csnjv/index.html) to reference Java classes, methods, and interfaces included in this sample application.
 
-  Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.java](https://objectstorage.us-ashburn-1.oraclecloud.com/p/qCpBRv5juyWwIF4dv9h98YWCDD50574Y6OwsIHhEMgI/n/c4u03/b/data-management-library-files/o/HelloWorld.java), replace the placeholder of the compartment  in the fucntion ```setDefaultCompartment``` with the OCID of your compartment. Save the file and close it.
+  Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.java](https://objectstorage.us-ashburn-1.oraclecloud.com/p/qCpBRv5juyWwIF4dv9h98YWCDD50574Y6OwsIHhEMgI/n/c4u03/b/data-management-library-files/o/HelloWorld.java), replace the placeholder of the compartment  in the function ```setDefaultCompartment``` with the OCID of your compartment. Save the file and close it.
 
 3. From your home directory, navigate to ".oci" directory.
 
@@ -169,11 +170,12 @@ Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/api
 ![](images/config-file.png)
 When `SignatureProvider` is constructed without any parameters, the default [Configuration File](https://docs.cloud.oracle.com/iaas/Content/API/Concepts/sdkconfig.htm) is located in the `~/.oci/config` directory.
 
-4. Build your maven project using the following command.
+4. Compile your java code using the command `mvn compile`.
+5. Build your maven project using the following command.
 
 ```
 <copy>
-$ mvn exec:java -Dexec.mainClass=HelloWorld -Dexec.args="-service cloud -endpoint <your region endpoint>"
+$ mvn exec:java -Dexec.mainClass=HelloWorld
 </copy>
 ```
 
