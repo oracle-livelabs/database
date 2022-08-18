@@ -69,7 +69,6 @@ This workshop contains different language implementation in the form of differen
 <if type="Python">
 
 1. Make sure that python is installed in your system.
-
 2. You can install the Python SDK through the Python Package Index with the command given below.
 ```
  <copy> pip3 install borneo </copy>
