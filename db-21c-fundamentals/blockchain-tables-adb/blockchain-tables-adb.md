@@ -36,7 +36,7 @@ Please proceed to next step if you are already connected to Autonomous Database 
 
 2. To navigate to your Autonomous Database, click on the hamburger menu on the top left corner of the Oracle Cloud console and select the Autonomous Database flavor (ATP, ADW or AJD) you provisioned.
 
-	![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/database-atp.png " ")
+	![](https://oracle-livelabs.github.io/common/images/console/database-atp.png " ")
 
 3. If you can't find your ADB instance, ensure you are in the correct region, compartment and have chosen the right flavor of your ADB instance.
 

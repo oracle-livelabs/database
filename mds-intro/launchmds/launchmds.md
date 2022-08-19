@@ -33,7 +33,7 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
 
 1. Click the **Navigation Menu** in the upper left, navigate to **Identity & Security** and select **Compartments**.
 
-    ![Oracle Cloud Console](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/id-compartment.png " ")
+    ![Oracle Cloud Console](https://oracle-livelabs.github.io/common/images/console/id-compartment.png " ")
 
 2. On the Compartments page, click **Create Compartment**.
 
@@ -53,7 +53,7 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
 
 1.	Click the **Navigation Menu** in the upper-left corner, navigate to **Identity & Security** and select **Policies**.
 
-     ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/id-policies.png " ")
+     ![](https://oracle-livelabs.github.io/common/images/console/id-policies.png " ")
 
 2.	On the Policies page, in the **List Scope** section, select the Compartment (root) and click **Create Policy**.
 
@@ -97,7 +97,7 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
 
 1. Click the **Navigation Menu** in the upper-left corner, navigate to **Networking**, and select **Virtual Cloud Networks**.
 
-   ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/networking-vcn.png " ")
+   ![](https://oracle-livelabs.github.io/common/images/console/networking-vcn.png " ")
 
 2. Click **Start VCN Wizard**.
 
@@ -152,7 +152,7 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
 
 1. Click the **Navigation Menu** in the upper-left corner, navigate to **Databases**, and select **Database Systems**.
 
-   ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/database-dbsys.png " ")
+   ![](https://oracle-livelabs.github.io/common/images/console/database-dbsys.png " ")
 
 2. Click **Create MySQL Database System**.
 
@@ -219,7 +219,7 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
 
 1. You need a client machine to connect to your brand new MySQL database. Click the **Navigation Menu** in the upper-left corner, navigate to **Compute**, and select **Instances**.
 
-   ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/compute-instances.png " ")
+   ![](https://oracle-livelabs.github.io/common/images/console/compute-instances.png " ")
 
 2. In the **Instances in MDS_Sandbox Compartment** section, click **Create Instance**.
 
@@ -352,7 +352,7 @@ If you are a Linux, Mac, or  Windows 10 Powershell user, skip the first step.
 
 1. Click the **Navigation Menu** in the upper-left corner, navigate to **Databases**, and select **DB Systems**.
 
-   ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/database-dbsys.png " ")
+   ![](https://oracle-livelabs.github.io/common/images/console/database-dbsys.png " ")
 
 2. List Database Systems.
 
@@ -387,7 +387,7 @@ Deleting a database system is permanent. Any manual backups associated with the 
 
 1. Click the **Navigation Menu** in the upper-left corner, navigate to **Databases**, and select **DB Systems**.
 
-   ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/database-dbsys.png " ")
+   ![](https://oracle-livelabs.github.io/common/images/console/database-dbsys.png " ")
 
 2. List Database Systems.
 

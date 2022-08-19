@@ -221,7 +221,9 @@ Text indexes are an example of a **domain index**. Domain indexes are specialize
 
     You may want to expand the output window upwards so you can see the full list of indexed words.
 
-    Notice anything about the list? Not all the words in the text appear - "from" is missing. That's because it is designated "*stop word*" - common words that are not very useful in searches, but are likely to take up a lot of space in the index. By default, we don't index them - though using advanced options we can tell the system to index all words, or provide a "custom stoplist" of words we don't want to be indexed. The default list of stopwords will vary with language and
+    Notice anything about the list? Not all the words in the text appear - "from" is missing. That's because it is designated "stop word" - common words that are not very useful in searches, but are likely to take up a lot of space
+    in the index. By default, we don't index them - though using advanced options we can tell the system to index all words,
+    or provide a "custom stoplist" of words we don't want to be indexed. The default list of stopwords will vary with language and
     will depend on the default language setting for the database (always English for Autonomous Database).
     You can customize your stop word list following the examples here: [Create Stop List](https://docs.oracle.com/en/database/oracle/oracle-database/19/ccref/CTX_DDL-package.html#GUID-3336B8E9-13FB-4997-A9AD-8D9A207B10C4) and [Add Stop Word] (https://docs.oracle.com/en/database/oracle/oracle-database/19/ccref/CTX_DDL-package.html#GUID-5D27665E-8ECC-4703-94CC-83387BB7ABCD).
     
