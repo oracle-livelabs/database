@@ -9,6 +9,8 @@ During this Lab, the focus will be on one of them - the Activity Tracking servic
 
 ![](images/component-arch.png)
 
+### Activity Tracking service
+
 Consider a Video on Demand streaming application. It streams various shows that
 are watched by customers across the globe. Every show has number of seasons and
 every season has multiple episodes. You need a modern persistent meta-data store
@@ -27,7 +29,8 @@ _Estimated Lab Time:_ 7 minutes
 
 ### Serverless Logic Tier
 
-We selected this demo because it solves real world business problems. Many of those are listed on the slide.
+We selected this demo because it solves real world business problems. Many of
+those are listed on the slide.
 
   ![](images/business-problem.jpg)
 
@@ -40,6 +43,29 @@ brains of the application. The features of these services enable you to build a
 serverless production application that is highly available, scalable, and secure.
 Your application can use thousands of servers, however, by leveraging this pattern
 you do not have to manage a single one.
+
+During years, REST has become the standard for designing web APIs.
+It offers stateless servers and structured access to resources.
+However, REST APIs have shown to be inflexible to keep up
+with the rapidly changing requirements of the clients that access them.
+
+Increased mobile usage, low-powered devices and sloppy networks. For those applications,
+we looked for a solution that minimizes the amount of data that needs to be
+transferred over the network and allowing our users to query data easily using
+directly the API. A query language for our API.
+
+GraphQL is a query language for APIs and a runtime for fulfilling those queries
+with your data. GraphQL provides a complete and understandable description
+of the data in your API, gives clients the power to ask for exactly what they
+need and nothing more, makes it easier to evolve APIs over time, and enables
+powerful developer tools.
+
+GraphQL is often confused with being a database technology. GraphQL isn't tied
+to any specific database or storage engine and is instead backed by your existing
+data. You can code with GraphQL engines available in many languages.
+
+In this demo, we will learn how easy is develop the Activity Tracking service
+using Node.Js, ApolloServer and Oracle NoSQL Database.
 
 In addition, by using these managed services together you gain the following benefits:
 *	No operating systems to choose, secure, patch, or manage.
@@ -88,31 +114,24 @@ What are a few goals of this application:
   - Scalable to your user base
   - Highly available
   - Auto expiry of the data
-  - Offload consumer queries from operation data store
 
 
 ## Task 2: Explore data using GraphQL queries
 
-A query language for your API
+Let us explore our API and showing some advantage of using GraphQL.
 
-GraphQL is a query language for APIs and a runtime for fulfilling those queries
-with your data. GraphQL provides a complete and understandable description
-of the data in your API, gives clients the power to ask for exactly what they
-need and nothing more, makes it easier to evolve APIs over time, and enables
-powerful developer tools.
-
-Move faster with powerful developer tools
+**Move faster with powerful developer tools**
 
 Know exactly what data you can request from your API without leaving your editor,
 highlight potential issues before sending a query, and take advantage of
 improved code intelligence.
-GraphQL makes it easy to build powerful tools like GraphiQL or apollographql studio.
+GraphQL makes it easy to build powerful tools like GraphiQL or Apollo GraphQL Studio.
 
 1. In a browser window, enter https://studio.apollographql.com/sandbox.
 2. In the sandbox, enter https://lc22qxcred2zq4ciqms2tzzxv4.apigateway.us-ashburn-1.oci.customer-oci.com/
 3. And now, you are ready to use our API
 
-![](images/CaptureConnectionSettings.png)
+![](images/capture-connection-settings.png)
 
 
 ## Task 3: Ask for what you need, get exactly that
@@ -122,9 +141,8 @@ and nothing less. GraphQL queries always return predictable results.
 Apps using GraphQL are fast and stable because they control the data they get,
 not the server.
 
-![](images/CaptureGraphQLQuery.png)
+![Simple query](images/capture-graphql-simple-query.gif)
 
-Gif animated with query
 
 ## Task 4: Describe what’s possible with a type system
 
@@ -133,9 +151,7 @@ Access the full capabilities of your data from a single endpoint.
 GraphQL uses types to ensure Apps only ask for what’s possible and provide
 clear and helpful errors.
 
-![](images/CaptureGraphQLSchema.png)
-
-Gif animated with schema
+![](images/capture-graphql-schema.png)
 
 
 ## Task 5: Get many resources in a single request
@@ -144,24 +160,42 @@ GraphQL queries access not just the properties of one resource but also smoothly
 follow references between them. While typical REST APIs require loading from
 multiple URLs, GraphQL APIs get all the data your app needs in a single request.
 
-![](images/CaptureGraphQLUrl.png)
+![Multiple queries in one](images/capture-graphql-multi-query.gif)
 
-Gif animated with curl test
+## Task 6: Test using an unique URL
+
+In the previous tasks, we looked at the flexibility and the power of GraphQL to
+explore the data exposed by the Activity Tracking service of our Video on Demand
+streaming application.
+
+Now, explore the queries that we will use in the next Lab to query and to load data.
+
+Open the [demo-streaming.json](files/demo-streaming.json) file in another tab on
+your browser
+
+![](images/capture-demo-streaming-json.png)
+
+If you prefer, you can use an API tool like Postman
+
+![](images/capture-graphql-url.png)
 
 
 
-## Task 6: Key takeaways
+## Task 7: Key takeaways
 
 1. While this was a simple demo, it used many components that are available in Oracle Cloud Infrastructure today.
 
   * Application is running live in all Oracle Cloud Infrastructure Regions
-  * Application uses Oracle Cloud Infrastructure traffic Management for Geo-Steering to steer network requests to closest Oracle Cloud Infrastructure region
+  * Application uses Oracle Cloud Infrastructure traffic Management for
+  Geo-Steering to steer network requests to closest Oracle Cloud Infrastructure region
   * Uses Oracle Cloud Infrastructure API gateway
   * Data stored in Oracle NoSQL Cloud Service as JSON documents
+  * GraphQL is a query language for your API, and a server-side runtime for
+executing queries using a type system (schema) you define for your data
 
   The benefits to customers are shown in this slide.
 
-      ![](images/benefits.png)
+      ![TODO](images/benefits.png)
 
 You may now **proceed to the next lab.**
 
