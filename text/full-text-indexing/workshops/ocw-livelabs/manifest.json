@@ -33,7 +33,11 @@
             "filename": "../../maintenance/maintenance.md"
         },
         {
-            "title": "Lab 5: Terminate Oracle Autonomous Database",
+            "title": "Lab 5: Index Files on Object Store",
+            "filename": "../../index-files/index-files.md"
+        },
+        {
+            "title": "Lab 6: Cleanup Oracle Autonomous Database",
             "filename":"https://oracle-livelabs.github.io/common/labs/terminate-adb/terminate-adb.md"
         },
         {
