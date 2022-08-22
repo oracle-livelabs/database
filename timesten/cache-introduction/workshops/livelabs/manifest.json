@@ -9,11 +9,6 @@
       "filename": "../../01-introduction/introduction.md"
     },
     {
-      "title": "Get Started",
-      "description": "Get started with LiveLabs",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
-    },
-    {
       "title": "Lab 1: Environment Setup",
       "description": "Verify Setup of compute instance",
       "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-novnc.md"

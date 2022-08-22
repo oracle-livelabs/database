@@ -4,7 +4,7 @@
 
 In this lab, you will load data from the Oracle tables into the TimesTen cache tables. This action will also activate the AUTOREFRESH mechanism which will periodically refresh the cache with any changes that have occurred in the Oracle database.
 
-Estimated Time: **5 minutes**
+**Estimated Lab Time:** 5 minutes
 
 ### Objectives
 
