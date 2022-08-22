@@ -50,6 +50,7 @@ The goal of this task is to understand the difference between the 2 data models 
     <copy>
     cd ~/serverless-with-nosql-database/express-nosql
     npm install
+    npm install oracle-nosqldb --save
     node express-oracle-nosql.js &
     </copy>
     ```
@@ -133,6 +134,7 @@ The goal of this task is to understand the difference between the 2 data models 
     <copy>
     cd ~/serverless-with-nosql-database/express-nosql
     npm install
+    npm install oracle-nosqldb --save
     node express-baggage-demo-nosql.js &
     </copy>
     ````

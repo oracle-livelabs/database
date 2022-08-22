@@ -183,7 +183,7 @@ Estimated Time: 5 minutes
 2. Download the iris application zip file
 
     ```bash
-    <copy> sudo wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/kXwlzPHPazXmLdWkWVkcDEPF1PIDV6sZHlpzx89NBaAx_STlf-3i0DQ3ViIACayS/n/idazzjlcjqzj/b/heatwaveml-iris/o/iris.zip</copy>
+    <copy> sudo wget https://objectstorage.us-phoenix-1.oraclecloud.com/p/2DOHO3J49Z66FDdv-C4tkEOjm5_XL6UWAECDaVoWGDVgCnSI1PajwAZpj2oFRp_A/n/idazzjlcjqzj/b/iris_app/o/iris.zip </copy>
     ```
 
     ```bash

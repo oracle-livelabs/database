@@ -40,8 +40,8 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
 1. Run the following command: password is always FPPll##123 unless you have changed it
 
     ```
-    rhpctl move database -sourcewc  WC_db_19_9_0_FPPC \
-    -patchedwc WC_db_19_10_0_FPPC -dbname fpplive1_site1 \
+    rhpctl move database -sourcewc  WC_db_previous_FPPC \
+    -patchedwc WC_db_current_FPPC -dbname fpplive1_site1 \
     -sudouser opc -sudopath /bin/sudo -eval
     ```
     ![](./images/move.png)
@@ -52,15 +52,16 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
     ```
     fpps01.pub.fpplivelab.oraclevcn.com: verifying groups of Oracle homes ...
     fpps01.pub.fpplivelab.oraclevcn.com: PRGO-1774 : The evaluation revealed potential failure for command "move database".
-    PRGO-1619 : The groups "OSOPER=oper" of the source home are not configured in the patched working copy.\nPRGO-1618 : The groups "OSBACKUP=backupdba,OSDG=dgdba,OSKM=kmdba,OSRAC=racdba" of the source home do not match the groups "OSBACKUP=dba,OSDG=dba,OSKM=dba,OSRAC=dba" of the patched working copy.
+    PRGO-1619 : The groups "OSOPER=oper" of the source home are not configured in the patched working copy.
+    PRGO-1618 : The groups "OSBACKUP=backupdba,OSDG=dgdba,OSKM=kmdba,OSRAC=racdba" of the source home do not match the groups "OSBACKUP=dba,OSDG=dba,OSKM=dba,OSRAC=dba" of the patched working copy.
     ```
 
 ## Task 2: Patch the database
 1. The command is the same as before, but without the `-eval` switch:
 
     ```
-    rhpctl move database -sourcewc  WC_db_19_9_0_FPPC \
-    -patchedwc WC_db_19_10_0_FPPC -dbname fpplive1_site1 \
+    rhpctl move database -sourcewc  WC_db_previous_FPPC \
+    -patchedwc WC_db_current_FPPC -dbname fpplive1_site1 \
     -sudouser opc -sudopath /bin/sudo
     ```
   ![](./images/move2.png)
@@ -107,12 +108,10 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
     ```
     set lines 220
     ```
-
     ```
     select PATCH_ID, PATCH_UID, STATUS, DESCRIPTION from DBA_REGISTRY_SQLPATCH;
     ```
-
-   ```
+    ```
     exit
     ```
     ![](./images/exit.png)
