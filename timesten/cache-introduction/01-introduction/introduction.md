@@ -6,7 +6,7 @@ In this workshop you will discover how deploying Oracle TimesTen In-Memory Datab
 
 Setting up a TimesTen cache is quick and easy. This workshop leads you through the process step by step and uses a simple OLTP application and some example queries to demonstrate the incredibly low query latencies provided by TimesTen.
 
-**Estimated Workshop Time:** 90 minutes
+**Estimated Workshop Time:** 120 minutes
 
 ### About Oracle TimesTen In-Memory Database
 
@@ -43,16 +43,16 @@ This workshop assumes that you have:
 
 In order to run this workshop you need:
 
-* An active Oracle Cloud account
+* An active Oracle account or Oracle Cloud account
 
 You can run this workshop:
 
-* In the LiveLabs sandbox
+* In the LiveLabs sandbox using a regular Oracle Account
 * In your own tenancy using a paid Oracle Cloud account or a free-trial Oracle Cloud account
 
 This workshop does _not_ support the Oracle Cloud 'Always Free' tier due to that tier's resource restrictions.
 
-**IMPORTANT:** This workshop requires an OCI comoute instance with at least **4 CPUs** and **32 GB RAM.** If you choose to run this workshop in your own tenancy, please ensure that you have sufficient resources available.
+**IMPORTANT:** This workshop requires an OCI compute instance with at least **4 CPUs** and **32 GB RAM.** If you choose to run this workshop in your own tenancy, please ensure that you have sufficient resources available.
 
 You may now ***proceed to the next lab***.
 
@@ -66,4 +66,4 @@ You may now ***proceed to the next lab***.
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Last Updated By/Date** - Chris Jenkins, August 2022

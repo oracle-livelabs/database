@@ -21,17 +21,22 @@
     {
       "title": "Lab 2: Environment setup",
       "description": "How to provision the workshop environment and connect to it",
-      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc.md"
+      "filename": "../../00-setup-compute/setup-compute.md"
     },
     {
       "title": "Lab 3: Using noVNC Remote Desktop",
       "description": "Using noVNC Remote Desktop",
-      "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+      "filename": "../../00-novnc/novnc-owntenancy.md"
+    },
+    {
+      "title": "Lab 1: Environment Setup",
+      "description": "Verify Setup of compute instance",
+      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-novnc.md"
     },
     {
       "title": "Lab 4: Connect to the workshop compute instance",
       "description": "How to connect to the Cloud Instance",
-      "filename": "../../03-connect-to-instance/connect-to-instance.md"
+      "filename": "../../03-connect-to-instance/connect-to-instance-freetier.md"
     },
     {
       "title": "Lab 5: Initialize the workshop environment",

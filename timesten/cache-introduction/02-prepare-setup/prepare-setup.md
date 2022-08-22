@@ -4,7 +4,7 @@
 
 In this lab, you will download the Oracle Resource Manager (ORM) stack zip file needed to set up the resources needed to run this workshop. This workshop requires a compute instance and a Virtual Cloud Network (VCN) and subnet.
 
-**Estimated Lab Time:** 15 minutes
+**Estimated Lab Time:** 10 minutes
 
 ### Objectives
 
@@ -27,18 +27,21 @@ This lab assumes you have:
 
 We strongly recommend using this stack to create a self-contained/dedicated VCN for your instance. If you would rather use an existing VCN, consult the appendix below to learn how to update an existing VCN with the required Ingress rules.
 
-## Task 2: Setup your OCI compute instance
+## Task 2: Prepare to setup your OCI compute instance
 
-Using the details from the two steps above, proceed to the lab *Environment Setup* to set up your workshop environment using Oracle Resource Manager (ORM) using one of the following options:
+Using the ORM zip file from the previous step, you can setup your workshop environment in one of two ways:
 
-  -  Create Stack:  *Compute + Networking*
-  -  Create Stack:  *Compute only* using an existing VCN where security lists have been updated as per *Task 2* above
+- Let the stack create both the compute and network resources (recommended)
+
+- Let the stack create the compute resources and connect them to an existing VNC. If you wish to use this option, please consult the appendix belwo to ensure that your existing VCN has the necessary ingress and egress rules defined, oitherwise the workshop will not function as expected.
+
+Both options are covered in the next lab.
 
 **IMPORTANT**
 
 When deploying the workshop compute instance via the ORM stack, as described in the next lab:
 
-1. By default SSH access using a system generated SSH private key is enabled. SSH access is recommended for this workshop as it offers a better user experience, especially for copy/paste, than Remote Desktop access.
+1. By default SSH access using a system generated SSH private key is enabled.
 
 2. If you wish to provide your own SSH public key, uncheck the option *Auto Generate SSH Key Pair* and follow the on-screen instructions to either upload or copy/paste your SSH public key.  
 
@@ -48,14 +51,15 @@ You may now *proceed to the next lab*.
 
 ## Appendix: Adding security rules to an existing VCN
 
-This workshop requires a certain number of ports to be available, a requirement that can be met by using the default ORM stack execution that creates a dedicated VCN. In order to use an existing VCN/subnet, the following ports should be added to the Ingress rules.
+This workshop requires a certain number of ports to be available, a requirement that can be met by using the default ORM stack execution that creates a dedicated VCN. In order to use an existing VCN/subnet, the following ports should be added to the **Ingress** rules.
 
 | Port           |Description                            |
 | :------------- | :------------------------------------ |
 | 22             | SSH                                   |
 | 80             | Remote Desktop using noVNC            |
+| 6080           | Remote Desktop using noVNC            |
 
-**Note:** If you plan to only use SSH connectivity, or only Remote Desktop connectivity, then you only need to open the appropriate port.
+**Note:** If you plan to only use SSH connectivity, or only Remote Desktop connectivity, then you only need to open the appropriate port(s).
 
 
 1.  Go to *Networking >> Virtual Cloud Networks*
@@ -74,9 +78,8 @@ This workshop requires a certain number of ports to be available, a requirement 
 
 7.  Click the **Add Ingress Rules** button
 
-
 ## Acknowledgements
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Last Updated By/Date** - Chris Jenkins, August 2022
