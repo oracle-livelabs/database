@@ -1,4 +1,4 @@
-# Introduction  CHANGE FROM MIKE
+# Introduction
 
 ## About this Workshop
 
