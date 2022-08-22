@@ -4,7 +4,7 @@
 
 In this lab, we will prepare the Oracle database to support TimesTen caching.
 
-Estimated Time: 5 minutes.
+**Estimated Lab Time:** 10 minutes.
 
 ### Objectives
 
@@ -241,17 +241,9 @@ GRANT SELECT ON oe.promotions TO ttcacheadm;
 ```
 
 ```
-Grant succeeded.
-```
-
-```
 <copy>
 GRANT SELECT ON oe.product_information TO ttcacheadm;
 </copy>
-```
-
-```
-Grant succeeded.
 ```
 
 ```
@@ -261,17 +253,9 @@ GRANT SELECT ON oe.customers TO ttcacheadm;
 ```
 
 ```
-Grant succeeded.
-```
-
-```
 <copy>
 GRANT SELECT ON oe.orders TO ttcacheadm;
 </copy>
-```
-
-```
-Grant succeeded.
 ```
 
 ```
@@ -281,17 +265,9 @@ GRANT SELECT ON oe.order_items TO ttcacheadm;
 ```
 
 ```
-Grant succeeded.
-```
-
-```
 <copy>
 GRANT SELECT ON oe.inventories TO ttcacheadm;
 </copy>
-```
-
-```
-Grant succeeded.
 ```
 
 ```
@@ -301,17 +277,9 @@ GRANT SELECT ON oe.product_descriptions TO ttcacheadm;
 ```
 
 ```
-Grant succeeded.
-```
-
-```
 <copy>
 GRANT SELECT ON appuser.vpn_users TO ttcacheadm;
 </copy>
-```
-
-```
-Grant succeeded.
 ```
 
 ```
@@ -321,18 +289,9 @@ GRANT SELECT ON appuser.parent TO ttcacheadm;
 ```
 
 ```
-Grant succeeded.
-
-```
-
-```
 <copy>
 GRANT SELECT ON appuser.child TO ttcacheadm;
 </copy>
-```
-
-```
-Grant succeeded.
 ```
 
 Exit from SQL\*Plus:

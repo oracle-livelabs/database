@@ -4,9 +4,9 @@
 
 In this lab, you will use a simple benchmark program to run a (read-only) OLTP workload against the TimesTen cache and against the Oracle database to illustrate the performance benefit of TimesTen.
 
-You will use a standard TimesTen benchmark program, TptBm, in this case a version that connects to the target database using the Oracle Call Interface (OCI) API. The program can run against either TimesTen or Oracle and performs the same operations in both cases. The source code for the tptbmOCI program is available in the _host VM _in the directory **~/lab/src**.
+You will use a standard TimesTen benchmark program, TptBm, in this case a version that connects to the target database using the Oracle Call Interface (OCI) API. The program can run against either TimesTen or Oracle and performs the same operations in both cases. The source code for the tptbmOCI program is available in the _host VM_ in the directory **~/lab/src**.
 
-Estimated Time: **5 minutes**
+**Estimated Lab Time:** 5 minutes
 
 There is a single table used for this benchmark, APPUSER.VPN_USERS:
 
