@@ -33,7 +33,19 @@ _Estimated Lab Time:_ 25 minutes
     </copy>
     ```
 
-## Task 2: Load Data and Examine It
+## Task 2: Review the code using OCI Code Editor
+
+![](./images/appl-code.png)
+
+1. createNoSQLClient
+explain that this code can also executed using OKE and on premise
+- useInstancePrincipal
+- on-premise non-secure configuration
+2. createTable
+
+
+
+## Task 3: Load Data and Examine It
 
 The goal of this task is to understand the difference between the 2 data models used. The demoKeyVal table is a schema-less table, sometimes referred to as a JSON document, that contains a primary key and a JSON column.
 
@@ -130,6 +142,26 @@ The goal of this task is to understand the difference between the 2 data models 
     ````
   In this case, the data is formatted as a nice JSON document.
 
+7. Load information for 91 users. For the shows, we will insert 5 randoms shows
+using a set of 46 shows
+
+````
+<copy>
+cd ~/demo-tv-streaming-app/exemple-graphql-query/
+sh load.sh
+</copy>
+````
+If you have an error saying,
+````
+ls: cannot access ../data/User: No such file or directory
+````
+it means that you forgot to load the data
+````
+<copy>
+cd ~/demo-tv-streaming-app/data/
+sh unzip.sh
+</copy>
+````
 
 
 ## Learn More

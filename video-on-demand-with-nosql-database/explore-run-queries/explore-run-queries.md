@@ -27,7 +27,7 @@ section
 ````
 <copy>
 select count(*) as cnt
-from users u
+from stream_acct u
 where u.info.country = "USA" and
 u.info.shows.showId =any 16;
 </copy>
@@ -44,7 +44,7 @@ The query could also have been written equivalently like this:
 ````
 <copy>
 select count(*) as cnt
-from users u
+from stream_acct u
 where u.info.country = "USA" and
 exists u.info.shows[$element.showId = 16];
 </copy>
@@ -79,7 +79,7 @@ the query features (e.g., the “any” comparison operators, the exists operato
 ````
 <copy>
 select count(*) as cnt
-from users u
+from stream_acct u
 where u.info.country = "USA" and
       exists u.info.shows[$element.showId = 16].seriesInfo.episodes[$element.date > "2021-04-01"];
 </copy>
@@ -103,7 +103,7 @@ pushed to the index and the index is covering the query.
 ````
 <copy>
 select count(*) as cnt
-from users u
+from stream_acct u
 where u.info.country = "USA" and
       u.info.shows.showId =any 16 and
       u.info.shows.seriesInfo.episodes.date >any "2021-04-01";
@@ -127,7 +127,7 @@ Therefore, the index is not covering this query.
 ````
 <copy>
 select count(*) as cnt
-from users u
+from stream_acct u
 where exists u.info.shows[$element.showId = 15].seriesInfo.episodes[$element.date > "2021-04-01"];
 </copy>
 ````
@@ -154,7 +154,7 @@ Whether `idx_showId` or `idx_country_showid_date` is better depends on how selec
 <copy>
 select /*+ FORCE_INDEX(users idx_country_showid_date) */
 count(*) as cnt
-from users u
+from stream_acct u
 where exists u.info.shows[$element.showId = 15].seriesInfo.episodes[$element.date > "2021-04-01"];
 </copy>
 ````
@@ -167,7 +167,7 @@ Same as previous query, but forcing the use of index `idx_country_showid_date`.
 ````
 <copy>
 select count(*) as cnt
-from users u
+from stream_acct u
 where u.info.country = "USA" and
       exists u.info.shows[
         exists $element.genres[$element in ("french", "danish")] and
@@ -229,7 +229,7 @@ select u.acct_id, u.user_id,
                              "episodeId" : $sq3.episodeID,
                              "dateWatched" : $sq3.date}
         ))) ] as episodes
-from users u
+from stream_acct u
 where u.info.country = "USA" and
       exists u.info.shows[$element.showId = 16].seriesInfo.episodes[$element.date > "2021-04-01"];
 </copy>
@@ -289,7 +289,7 @@ for details on sequence aggregation functions.
 ````
 <copy>
 select count(*) as cnt
-from users u
+from stream_acct u
 where u.info.shows.showId =any 15 and
       size(u.info.shows[$element.showId = 15].seriesInfo) =
       u.info.shows[$element.showId = 15].numSeasons and
@@ -338,7 +338,7 @@ unnesting queries.
 select u.acct_id, u.user_id,
        $show.showName, $season.seasonNum,
        $episode.episodeID, $episode.date
-from users u, u.info.shows[] as $show,
+from stream_acct u, u.info.shows[] as $show,
               $show.seriesInfo[] as $season,
               $season.episodes[] as $episode
 where u.info.country = "USA" and
@@ -371,7 +371,7 @@ Query 2.1 flattens this array to produce 4 separate results.
 ````
 <copy>
 select $show.showId, count(*) as cnt
-from users u, unnest(u.info.shows[] as $show)
+from stream_acct u, unnest(u.info.shows[] as $show)
 group by $show.showId
 order by count(*) desc;
 </copy>
@@ -407,7 +407,7 @@ optimizer to “match” the index and the query.
 ````
 <copy>
 select $show.showId, sum($show.seriesInfo.episodes.minWatched) as totalTime
-from users u, unnest(u.info.shows[] as $show)
+from stream_acct u, unnest(u.info.shows[] as $show)
 group by $show.showId
 order by sum($show.seriesInfo.episodes.minWatched) desc;
 </copy>
@@ -443,7 +443,7 @@ This analysis leads to the following equivalent query, which does use the
 select $show.showId,
 sum(u.info.shows[$element.showId = $show.showId].
 seriesInfo.episodes.minWatched) as totalTime
-from users u, unnest(u.info.shows[] as $show)
+from stream_acct u, unnest(u.info.shows[] as $show)
 group by $show.showId
 order by sum(u.info.shows[$element.showId = $show.showId].
 seriesInfo.episodes.minWatched) desc;
@@ -455,7 +455,7 @@ seriesInfo.episodes.minWatched) desc;
 select $show.showId,
        $seriesInfo.seasonNum,
        sum($seriesInfo.episodes.minWatched) as totalTime
-from users u, unnest(u.info.shows[] as $show,
+from stream_acct u, unnest(u.info.shows[] as $show,
                      $show.seriesInfo[] as $seriesInfo)
 group by $show.showId, $seriesInfo.seasonNum
 order by sum($seriesInfo.episodes.minWatched) desc;
