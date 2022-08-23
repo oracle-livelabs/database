@@ -37,7 +37,7 @@
             "filename": "../../index-files/index-files.md"
         },
         {
-            "title": "Lab 6: Cleanup Oracle Autonomous Database",
+            "title": "Lab 6: Clean up Oracle Autonomous Database",
             "filename":"https://oracle-livelabs.github.io/common/labs/terminate-adb/terminate-adb.md"
         },
         {
