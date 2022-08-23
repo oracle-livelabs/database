@@ -4,9 +4,9 @@
 
 With READONLY cache groups, the Oracle database is the master of the data. The data cached in TimesTen is a read-only copy. Any changes (insert/update/delete) made to the data in Oracle are automatically captured and refreshed to the cached tables in TimesTen based on the defined refresh interval (2 seconds in these examples).
 
-In this lab you will execute some DML statements on the tables in Oracle and observe those changes being automatically propagated to the cache tables in TimesTen.
+In this lab you will execute some DML statements on the tables in Oracle and observe those changes being automatically propagated to the corresponding tables cached in TimesTen.
 
-Estimated Time: **5 minutes**
+**Estimated Lab Time:** 5 minutes
 
 ### Objectives
 
@@ -29,7 +29,7 @@ Connect to the OCI compute instance again (if required) and open a second termin
 
 ## Task 2: Verify the refresh of INSERT operations
 
-In your _primary_ SSH session, which is currently logged into the TimesTen host, connect to the TimesTen cache as the OE schema user"
+In your _primary_ SSH session, which is currently logged into the TimesTen host, connect to the TimesTen cache as the OE schema user:
 
 ```
 <copy>

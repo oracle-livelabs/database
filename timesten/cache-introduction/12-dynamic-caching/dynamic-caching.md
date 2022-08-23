@@ -4,7 +4,7 @@
 
 In this lab, you will learn the difference between static and dynamic cache groups.
 
-Estimated Time: **5 minutes**
+**Estimated Lab Time:** 5 minutes
 
 So far, the cache groups that you have been working with are what are known as static cache groups. With static cache groups, you pre-load the cache group with the data that you wish to cache and then the TimesTen autorefresh mechanism ensures that any inserts, updates or deletes that occur on Oracle are captured and propagated to the cache to refresh the cached tables.
 

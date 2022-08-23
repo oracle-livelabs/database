@@ -4,7 +4,7 @@
 
 In this lab, you will create a TimesTen database and set it up to cache the required tables from the Oracle database.
 
-Estimated Time: **10 minutes**
+**Estimated Lab Time:** 10 minutes
 
 ### Objectives
 
@@ -116,13 +116,15 @@ Done.
 
 ## Task 3: Create the cache groups
 
-A **cache group** is a SQL object that encapsulates a set of one or more tables that are related through primary key -> foreign key relationships. The (single) top-level table is called the root table and the other tables sit below it in a hierarchical parent/child arrangement.
+Some useful definitions and concepts:
 
-A cache instance consists of a single row from the root table and all the related rows from the subordinate tables down through the hierarchy within the cache group.
+- A **cache group** is a SQL object that encapsulates a set of one or more tables that are related through primary key -> foreign key relationships. The (single) top-level table is called the root table and the other tables sit below it in a hierarchical parent/child arrangement.
 
-Cache operations act on cache groups not on individual tables, or on cache instances as opposed to individual rows.
+- A **cache instance** consists of a single row from the root table and all the related rows from the subordinate tables down through the hierarchy within the cache group.
 
-Normal SQL operations, such as SELECT, INSERT, UPDATE and DELETE, operate directly on the cache tables and the rows therein. 
+- Cache operations act on cache groups not on individual tables, or on cache instances as opposed to individual rows.
+
+- Normal SQL operations, such as SELECT, INSERT, UPDATE and DELETE, operate directly on the cache tables and the rows therein. 
 
 Create the (multiple) cache groups for the **OE** schema tables. You will use a pre-prepared script to reduce the amount of typing or copying & pasting.
 
@@ -328,26 +330,6 @@ connect "DSN=sampledb;UID=appuser;PWD=********;OraclePWD=********";
 Connection successful: DSN=sampledb;UID=appuser;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
 (Default setting AutoCommit=1)
 Command>
-```
-
-```
-<copy>
-cachegroups appuser.%;
-</copy>
-```
-
-```
-0 cache groups found.
-```
-
-```
-<copy>
-tables;
-</copy>
-```
-
-```
-0 tables found.
 ```
 
 ```
