@@ -6,7 +6,7 @@ In this lab, you will start up all the components required to run the labs makin
 
 The workshop uses an Oracle database which runs in its own container (**dbhost**). A second container (**tthost1**) provides the TimesTen environment. These containers, and the host system (**ttlivelabvm**), are all connected using a custom Docker network. This setup provides a realistic multi-host environment with the convenience of just a single compute instance.
 
-Estimated Time: 10 minutes.
+**Estimated Lab Time:** 10 minutes.
 
 ### Objectives
 
