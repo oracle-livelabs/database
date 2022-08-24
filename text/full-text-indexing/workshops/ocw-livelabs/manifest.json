@@ -37,7 +37,11 @@
             "filename": "../../index-files/index-files.md"
         },
         {
-            "title": "Lab 6: Clean up Oracle Autonomous Database",
+            "title": "Lab 6: Optional Lab - Sentiment Analysis",
+            "filename": "../../sentiment-analysis/sentiment-analysis.md"
+        },
+        {
+            "title": "Lab 7: Clean up Oracle Autonomous Database",
             "filename":"https://oracle-livelabs.github.io/common/labs/terminate-adb/terminate-adb.md"
         },
         {
