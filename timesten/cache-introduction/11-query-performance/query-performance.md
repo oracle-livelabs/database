@@ -98,15 +98,12 @@ We will use this script to investigate the performance of three different querie
 
 ### Prerequisites
 
-This lab assumes that you have:
+This lab assumes that you:
 
-- Completed all the previous labs in this workshop, in sequence.
+- Have completed all the previous labs in this workshop, in sequence.
+- Have an open terminal session in the workshop compute instance, either via NoVNC or SSH, and that session is logged into the TimesTen host (tthost1).
 
-## Task 1: Connect to the environment
-
-If you do not already have an active terminal session, connect to the OCI compute instance and open a terminal session, as the user **oracle**. In that terminal session, connect to the TimesTen host (tthost1) using ssh.
-
-## Task 2: Examine the test queries
+## Task 1: Examine the test queries
 
 Examine the three queries that we will use for this exercise:
 
@@ -184,7 +181,7 @@ SELECT
  
 There is also a file, **/tt/livelab/queries/query_all.sql**, that contains all three queries.
 
-## Task 3: Run the queries against the Oracle database
+## Task 2: Run the queries against the Oracle database
 
 First run the queries against the Oracle database:
 
@@ -261,7 +258,7 @@ info: ========================================
 info: disconnected from 'orclpdb1'
 ```
 
-## Task 4: Run the queries against the TimesTen cache
+## Task 3: Run the queries against the TimesTen cache
 
 Now run the queries against the TimesTen cache:
 
@@ -338,9 +335,9 @@ info: ========================================
 info: disconnected from 'sampledb'
 ```
 
-## Task 4: Compare the results
+## Task 3: Compare the results
 
-Here is a comparison of the results that were obtained from a previous run (your results _will_ differ):
+Here is a comparison of the results that were obtained from the example run above (your results _will_ differ):
 
 
 | Query |	Average Oracle Query Time (us) | Average TimesTen Query Time (us) | TimesTen Speedup |
@@ -350,7 +347,9 @@ Here is a comparison of the results that were obtained from a previous run (your
 | 3 | 25688.2 | 1819.8 | 14.1x|
 
 
-You can now *proceed to the next lab*. Keep your primary terminal session open for use in the next lab.
+You can now *proceed to the next lab*. 
+
+Keep your primary session open for use in the next lab.
 
 ## Acknowledgements
 
