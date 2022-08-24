@@ -23,7 +23,7 @@
 			"title": "Lab 2: Prepare Your Environment",
 			"description": "Perform the inital setup operations",
 			"type": "livelabs",
-			"filename": "../../setup-environment/setup-environment.md"
+			"filename": "../../setup-environment/setup-environment-green.md"
 		},
 		{
 			"title": "Lab 3: Create Tables, Load Tables",
