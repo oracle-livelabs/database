@@ -12,9 +12,9 @@ Setting up a TimesTen cache is quick and easy. This workshop leads you through t
 
 Oracle TimesTen In-Memory Database (TimesTen) delivers real-time application performance (low response time and high throughput) by changing the assumptions around where data resides at runtime. By managing data in memory, and optimizing data structures and access algorithms accordingly, database operations execute with maximum efficiency achieving dramatic gains in responsiveness and throughput.
 
-TimesTen is a relational database, with SQL as its access language and PL/SQL as its procedural language so that you can leverage your existing Oracle Database skills. It supports many database APIs such as JDBC, ODBC, ODP.NET and Oracle Call Interface (OCI) and several Open Source languages, such as Python and Node.js, are supported via Open Source APIs. TimesTen provides full persistence and has built-in high availability.
+TimesTen is a relational database, with SQL as its access language and PL/SQL as its procedural language, so you can leverage your existing Oracle Database skills. It supports many database APIs, such as JDBC, ODBC, ODP.NET and Oracle Call Interface (OCI), and several Open Source languages, such as Python and Node.js, are supported via Open Source APIs. TimesTen provides full persistence and has built-in high availability.
 
-TimesTen can be deployed both as a database of record or as a high-performance relational cache in front of an Oracle database to accelerate Oracle database applications. This lab focuses on the cache deployment mode.
+TimesTen can be deployed both as a database of record or as a high-performance relational cache in front of an Oracle database to accelerate Oracle database applications. This lab focuses on the cache deployment mode of TimesTen Classic.
 
 ![TimesTen Cache Architecture Diagram](./images/tt-cache-architecture.png " ")
 
@@ -54,7 +54,7 @@ This workshop does _not_ support the Oracle Cloud 'Always Free' tier due to that
 
 **IMPORTANT:** This workshop requires an OCI compute instance with at least **4 CPUs** and **32 GB RAM.** If you choose to run this workshop in your own tenancy, please ensure that you have sufficient resources available.
 
-You may now ***proceed to the next lab***.
+You can now *proceed to the next lab*.
 
 ## Learn More
 

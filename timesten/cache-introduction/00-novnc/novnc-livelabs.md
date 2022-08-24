@@ -61,7 +61,6 @@ During the execution of your labs you may need to copy text from your local PC/M
 
     ![](./images/novnc-launch-get-started-2.png " ")
 
-You may now proceed to the next lab.
 
 ## Task 4: Configure SSH access (optional).
 
@@ -117,6 +116,8 @@ This assumes that you already have an RSA type SSH key-pair available on the loc
     ```
 
     For Putty, please refer to the guide [Generate SSH Keys](https://oracle-livelabs.github.io/common/labs/generate-ssh-key) on how to establish the connection using the *.ppk* private key.
+    
+You can now *proceed to the next lab*.
 
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology

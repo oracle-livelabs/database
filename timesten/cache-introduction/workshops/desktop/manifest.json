@@ -68,6 +68,11 @@
       "filename": "../../13-shutdown/shutdown.md"
     },
     {
+      "title": "Wrap-up",
+      "description": "Summary and resource cleanup",
+      "filename": "../../14-wrapup/wrapup.md"
+    },
+    {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"

@@ -29,7 +29,7 @@ This lab assumes that you have:
 
 When you launch the workshop by clicking the *Launch Workshop* link in the LiveLabs reservation page entry, these instructions open in your browser. Click on ***View Login Info*** at the tope left of the browser window and then click the Launch Remote Desktop button. You should then see the workshop desktop.
 
-![Workshp noVNC Desktop](./images/novnc-desktop.png " ")
+![Workshp noVNC Desktop](./images/workshop-homescreen.png " ")
 
 You can use the **Terminal** option under the *Activities* menu, or double-click the *Terminal* icon on the desktop, to open a terminal session.
 
@@ -59,7 +59,7 @@ Last login: Mon Jun 27 09:12:52 2022 from aa.bb.cc.dd
 
 You can now *proceed to the next lab*.
 
-If you plan to use SSH then you can keep your terminal session open for use in the next lab.
+If you plan to use SSH then keep your terminal session open for use in the next lab.
 
 ## Acknowledgements
 

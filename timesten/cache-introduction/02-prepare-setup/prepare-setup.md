@@ -47,7 +47,7 @@ When deploying the workshop compute instance via the ORM stack, as described in 
 
 3. Unless you wish to customize SSH connectivity as described in (2), you can accept all the defaults provided by the ORM stack.
 
-You may now *proceed to the next lab*.
+You can now *proceed to the next lab*.
 
 ## Appendix: Adding security rules to an existing VCN
 

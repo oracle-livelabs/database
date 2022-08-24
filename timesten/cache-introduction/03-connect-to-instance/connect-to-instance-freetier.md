@@ -31,7 +31,7 @@ The noVNC connection URL can be viewed and copied on the Stack's Application Inf
 
 Copy/paste the URL from the log into your browser and you should then see the workshop desktop.
 
-![Workshp noVNC Desktop](./images/novnc-desktop.png " ")
+![Workshp noVNC Desktop](./images/workshop-homescreen.png " ")
 
 You can use the **Terminal** option under the *Activities* menu, or double-click the *Terminal* icon on the desktop, to open a terminal session.
 
@@ -39,7 +39,7 @@ You can use the **Terminal** option under the *Activities* menu, or double-click
 
 If you configured SSH access as part setting up the ORM stack then you can connect to the instance, as the oracle user, using an SSH private key.
 
-If you selected an automayically generated SSH private key, the key can be viewed and copied on the Stack's Application Information tab:
+If you selected an automatically generated SSH private key, the key can be viewed and copied on the Stack's Application Information tab:
 
 ![Workshp SSH private key](./images/orm-ssh-key.png " ")
 
@@ -65,7 +65,9 @@ Last login: Mon Jun 27 09:12:52 2022 from aa.bb.cc.dd
 [oracle@ttlivelabvm ~]$
 ```
 
-You can now *proceed to the next lab*. You can keep your terminal session open for use in the next lab.
+You can now *proceed to the next lab*. 
+
+If you plan to use SSH then keep your terminal session open for use in the next lab.
 
 ## Acknowledgements
 

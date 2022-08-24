@@ -14,17 +14,14 @@ In this lab, you will create a TimesTen instance to host our TimesTen cache data
 
 ### Prerequisites
 
-This lab assumes that you have:
+This lab assumes that you:
 
-- Completed all the previous labs in this workshop, in sequence.
+- Have completed all the previous labs in this workshop, in sequence.
+- Have an open terminal session in the workshop compute instance, either via NoVNC or SSH.
 
-## Task 1: Connect to the environment
+## Task 1: Connect to the TimesTen host
 
-If you do not already have an active terminal session, connect to the OCI compute instance and open a terminal session, as the user **oracle**.
-
-## Task 2: Connect to the TimesTen host
-
-Connect to the TimesTen host (tthost1) using ssh:
+1. In the terminal session, connect to the TimesTen host (tthost1) using ssh:
 
 ```
 <copy>
@@ -36,7 +33,7 @@ ssh tthost1
 Your current directory is:  /tt/livelab
 [oracle@tthost1 livelab]$
 ```
-Take a look at the directory contents:
+2. Take a look at the directory contents:
 
 ```
 <copy>
@@ -53,7 +50,7 @@ drwxr-xr-x. 2 oracle oinstall 4096 May 26 13:10 scripts
 -rw-r--r--. 1 oracle oinstall 3879 May 10 14:31 tables_oe.sql
 ```
 
-## Task 3: Create a TimesTen instance
+## Task 2: Create a TimesTen instance
 
 A TimesTen _installation_ is comprised of the TimesTen software components. An installation is created by unzipping the TimesTen software distribution media into a suitable location. For this workshop, the TimesTen software distribution media has already been unzipped into the directory **/shared/sw** to create a TimesTen installation named **tt22.1.1.3.0**. Take a look at that:
 
@@ -134,7 +131,7 @@ cp scripts/sys.odbc.ini /tt/inst/ttinst/conf/sys.odbc.ini
 </copy>
 ```
 
-## Task 4: Start the instance
+## Task 3: Start the instance
 
 Whenever you work with TimesTen, it is _essential_ that you have the correct environment settings for the instance that you are working with. The easiest and safest way to do this is to source the environment file provided within the instance:
 
@@ -172,7 +169,7 @@ TimesTen Daemon (PID: 706, port: 6624) startup OK.
 
 You now have an operational TimesTen instance that can host TimesTen databases.
 
-## Task 5: View the database configuration file (sys.odbc.ini)
+## Task 4: View the database configuration file (sys.odbc.ini)
 
 Examine the database configuration file sys.odbc.ini. This file is the main configuration file for the instance and defines all the databases that will be managed by the instance along with parameters used for connecting to them:
 
@@ -211,7 +208,7 @@ ConnectionCharacterSet=AL32UTF8
 
 - All TimesTen APIs support both direct mode and client-server and, with some minor exceptions, the functionality is identical regardless of the type of connectivity that you are using.
 
-## Task 6: Run some simple TimesTen commands
+## Task 5: Run some simple TimesTen commands
 
 One of the simplest TimesTen utilities is **ttVersion**. This provides basic information about the TimesTen instance:
 
@@ -251,7 +248,9 @@ End of report
 
 Currently, there is not much to observe other than the process ids and port numbers used by the instance Daemon and Server processes.
 
-You can now *proceed to the next lab*. Keep your terminal session open for use in the next lab.
+You can now *proceed to the next lab*. 
+
+Keep your terminal session to tthost1 open ready for the next lab.
 
 ## Acknowledgements
 
