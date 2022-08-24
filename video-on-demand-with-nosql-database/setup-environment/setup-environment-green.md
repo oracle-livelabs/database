@@ -67,7 +67,7 @@ to get the Cloud Shell started.
     </copy>
     ````
 
-5. Edit the file env.sh and provide the **Compartment OCID** copied in the Tas1
+5. Edit the file env.sh and provide the **Compartment OCID** copied in the Task 1
 
     ````
     <copy>
