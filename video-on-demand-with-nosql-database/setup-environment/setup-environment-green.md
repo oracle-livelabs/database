@@ -64,13 +64,23 @@ to get the Cloud Shell started.
       cd $HOME
       rm -rf demo-tv-streaming-app
       git clone https://github.com/dario-vega/demo-tv-streaming-app.git
-      cp ~/demo-tv-streaming-app/env-freetier.sh ~/demo-tv-streaming-app/env.sh
     </copy>
     ````
 
-5. Exit from Cloud Shell
+5. Edit the file env.sh and provide the **Compartment OCID** copied in the Tas1
 
-6. Open the **OCI Code Editor** in the top right menu. It can take about 2 minutes
+    ````
+    <copy>
+      vi ~/demo-tv-streaming-app/env.sh
+    </copy>
+    ````
+
+    ![modify-env-sh](images/modify-env-sh.png)
+
+
+6. Exit from Cloud Shell
+
+7. Open the **OCI Code Editor** in the top right menu. It can take about 2 minutes
 to get the Code Editor started. You can continue the next Task. Cloud Editor
 will be used only in the Lab4
 
