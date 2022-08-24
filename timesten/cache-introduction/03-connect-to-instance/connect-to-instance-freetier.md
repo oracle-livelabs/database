@@ -1,18 +1,15 @@
-# Connect to the workshop compute instance
+# Connect to the workshop compute instance using SSH (optional)
 
 ## Introduction
 
-In this lab, you will learn the different ways to connect to the OCI compute instance that hosts the workshop.
+You always have the option to access the workshop host using the browser based NoVNC graphical desktop (covered in a previous lab). In addition, if you enabled the option when deploying the workshop, you also have direct SSH access to the workshop host.
 
-The workshop requires you to use a terminal session to run various commands and observe their output. Often you may need to copy and paste commands or text from the workshop instructions into the terminal session.
-
-If you chose to run the workshop in your own tenancy, or in a free-trial Cloud account, then you have a choice of using a browser-based GUI connection method or, if you selected the option during deployment via the ORM stack, the option to use SSH connectivity. 
-
+In this optional lab, you will learn how to connect to the workshop host using SSH. If you prefer to use the NoVNC remote Desktop rather than SSH then you can simply *proceed to the next lab*.
+ 
 **Estimated Lab Time:** 5 minutes
 
 ### Objectives
 
-- Connect to the compute instance using noVNC
 - Connect to the compute instance using SSH (optional)
 
 ### Prerequisites
@@ -21,21 +18,7 @@ This lab assumes that you have:
 
 - Completed all the previous labs in this workshop, in sequence.
 
-## Task 1: Connect using noVNC remote desktop
-
-The lab *Using noVNC Remote Desktop* provides information on using the noVNC remote desktop.
-
-The noVNC connection URL can be viewed and copied on the Stack's Application Information tab:
-
-![Workshp noVNC connection URL](./images/orm-novnc-url.png " ")
-
-Copy/paste the URL from the log into your browser and you should then see the workshop desktop.
-
-![Workshp noVNC Desktop](./images/workshop-homescreen.png " ")
-
-You can use the **Terminal** option under the *Activities* menu, or double-click the *Terminal* icon on the desktop, to open a terminal session.
-
-## Task 2: Connect using SSH (optional)
+## Task 1: Connect using SSH (optional)
 
 If you configured SSH access as part setting up the ORM stack then you can connect to the instance, as the oracle user, using an SSH private key.
 
@@ -67,7 +50,7 @@ Last login: Mon Jun 27 09:12:52 2022 from aa.bb.cc.dd
 
 You can now *proceed to the next lab*. 
 
-If you plan to use SSH then keep your terminal session open for use in the next lab.
+If you plan to use SSH for the rest of the workshop, keep your terminal session open for use in the next lab.
 
 ## Acknowledgements
 

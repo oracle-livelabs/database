@@ -25,7 +25,7 @@ This lab assumes you have:
 
 2.  Save in your downloads folder.
 
-We strongly recommend using this stack to create a self-contained/dedicated VCN for your instance. If you would rather use an existing VCN, consult the appendix below to learn how to update an existing VCN with the required Ingress rules.
+
 
 ## Task 2: Prepare to setup your OCI compute instance
 
@@ -33,9 +33,11 @@ Using the ORM zip file from the previous step, you can setup your workshop envir
 
 - Let the stack create both the compute and network resources (recommended)
 
-- Let the stack create the compute resources and connect them to an existing VNC. If you wish to use this option, please consult the appendix belwo to ensure that your existing VCN has the necessary ingress and egress rules defined, oitherwise the workshop will not function as expected.
+- Let the stack create the compute resources and connect them to an existing VNC.
 
-Both options are covered in the next lab.
+For simplicity, we recommend allowing the stack to create a self-contained, dedicated VCN for this workshop. If you would rather use an existing VCN, consult the appendix below to learn how to update an existing VCN with the required Ingress rules.
+
+The detailed steps for both options are covered in the next lab.
 
 **IMPORTANT**
 
@@ -45,7 +47,7 @@ When deploying the workshop compute instance via the ORM stack, as described in 
 
 2. If you wish to provide your own SSH public key, uncheck the option *Auto Generate SSH Key Pair* and follow the on-screen instructions to either upload or copy/paste your SSH public key.  
 
-3. Unless you wish to customize SSH connectivity as described in (2), you can accept all the defaults provided by the ORM stack.
+3. Unless you wish to customize SSH connectivity as described in (2), you can accept all the other defaults provided by the ORM stack.
 
 You can now *proceed to the next lab*.
 

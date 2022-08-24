@@ -27,7 +27,7 @@ This lab assumes you have:
 
 When using the downloaded ORM stack file to deploy the required OCI resources you have two options:
 
-- Allow the stack to create and configure a private, dedicated network (VNC and subnet) for you
+- Allow the stack to create and configure a private, dedicated network (VNC and subnet) for you (recommended)
 
 - Specify an existing, suitably configured, network (VCN and subnet) to be used
 

@@ -223,68 +223,23 @@ PUBLIC
 ********* Initialization for cache admin user done successfully *********
 ```
 
-## Task 4: Grant table specific privileges to cache admin user
+## Task 4: Grant table specific privileges to the cache admin user
 
 The cache admin user also needs specific privileges on each user table that will be cached in TimesTen. The exact privileges depend on the type of caching that will be used. In this workshop we are using READONLY caching, so the cache admin user needs SELECT privilege on all the user tables that will be cached,
 
-1. Grant those privileges:
+1. Grant those privileges (be sure to press 'Enter' after pasting this into SQL\*Plus):
 
 ```
 <copy>
 GRANT SELECT ON oe.promotions TO ttcacheadm;
-</copy>
-```
-
-```
-<copy>
 GRANT SELECT ON oe.product_information TO ttcacheadm;
-</copy>
-```
-
-```
-<copy>
 GRANT SELECT ON oe.customers TO ttcacheadm;
-</copy>
-```
-
-```
-<copy>
 GRANT SELECT ON oe.orders TO ttcacheadm;
-</copy>
-```
-
-```
-<copy>
 GRANT SELECT ON oe.order_items TO ttcacheadm;
-</copy>
-```
-
-```
-<copy>
 GRANT SELECT ON oe.inventories TO ttcacheadm;
-</copy>
-```
-
-```
-<copy>
 GRANT SELECT ON oe.product_descriptions TO ttcacheadm;
-</copy>
-```
-
-```
-<copy>
 GRANT SELECT ON appuser.vpn_users TO ttcacheadm;
-</copy>
-```
-
-```
-<copy>
 GRANT SELECT ON appuser.parent TO ttcacheadm;
-</copy>
-```
-
-```
-<copy>
 GRANT SELECT ON appuser.child TO ttcacheadm;
 </copy>
 ```

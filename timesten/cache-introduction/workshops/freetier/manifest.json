@@ -29,12 +29,7 @@
       "filename": "../../00-novnc/novnc-owntenancy.md"
     },
     {
-      "title": "Lab 1: Environment Setup",
-      "description": "Verify Setup of compute instance",
-      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-novnc.md"
-    },
-    {
-      "title": "Lab 4: Connect to the workshop compute instance",
+      "title": "Lab 4: Connect to the workshop compute instance using SSH (optional)",
       "description": "How to connect to the Cloud Instance",
       "filename": "../../03-connect-to-instance/connect-to-instance-freetier.md"
     },
