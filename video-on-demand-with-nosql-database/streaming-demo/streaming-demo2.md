@@ -86,12 +86,8 @@ Let us explore our API and showing some advantage of using GraphQL.
 
 With developer tools, you can know exactly what data you can request from your API without leaving your editor, you can highlight potential issues before sending a query, and you can take advantage of improved code intelligence. GraphQL makes it easy to build powerful tools like GraphiQL or Apollo GraphQL Studio.
 
-1. In a browser window, enter [https://studio.apollographql.com/sandbox/explorer](https://studio.apollographql.com/sandbox/explorer)
-2. In the sandbox, copy/paste the following url:
-````
-<copy>https://lc22qxcred2zq4ciqms2tzzxv4.apigateway.us-ashburn-1.oci.customer-oci.com/
-</copy>
-````
+1. In a browser window, enter https://studio.apollographql.com/sandbox.
+2. In the sandbox, enter https://lc22qxcred2zq4ciqms2tzzxv4.apigateway.us-ashburn-1.oci.customer-oci.com/
 3. And now, you are ready to use our API
 
 ![](images/capture-connection-settings.png)
