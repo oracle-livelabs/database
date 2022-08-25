@@ -14,23 +14,20 @@ This task is accomplished using SQL statements, so can be easily performed from 
 
 ### Prerequisites
 
-This lab assumes that you have:
+This lab assumes that you:
 
-- Completed all the previous labs in this workshop, in sequence.
+- Have completed all the previous labs in this workshop, in sequence.
+- Have an open terminal session in the workshop compute instance, either via NoVNC or SSH, and that session is logged into the TimesTen host (tthost1).
 
-## Task 1: Connect to the environment
-
-If you do not already have an active terminal session, connect to the OCI compute instance and open a terminal session, as the user **oracle**.
-
-In that terminal session, connect to the TimesTen host (tthost1) using ssh.
-
-## Task 2: Load the APPUSER cache group
+## Task 1: Load the APPUSER cache group
 
 As you saw in the previous lab, when a READONLY cache group is first created its tables are empty and the autorefresh mechanism is in a paused state.
 
 Loading the cache group populates the cache tables with the data from the Oracle database and also activates the autorefresh mechanism. The load occurs in such a manner that if any changes occur in Oracle while the load is in progress, those changes will be captured and then autorefreshed to TimesTen once the load is completed.
 
-Load the APPUSER.CG\_VPN\_USERS cache group (1 million rows) and then examine the cach group and table:
+Load the APPUSER.CG\_VPN\_USERS cache group (1 million rows) and then examine the cach group and table.
+
+1. Connect to the cache as the user **appuser**:
 
 ```
 <copy>
@@ -48,6 +45,8 @@ Connection successful: DSN=sampledb;UID=appuser;DataStore=/tt/db/sampledb;Databa
 Command>
 ```
 
+2. Load the cache group:
+
 ```
 <copy>
 LOAD CACHE GROUP appuser.cg_vpn_users COMMIT EVERY 1024 ROWS;
@@ -57,6 +56,8 @@ LOAD CACHE GROUP appuser.cg_vpn_users COMMIT EVERY 1024 ROWS;
 ```
 1000000 cache instances affected.
 ```
+
+3. Display the cache group details:
 
 ```
 <copy>
@@ -81,6 +82,8 @@ Cache Group APPUSER.CG_VPN_USERS:
 1 cache group found.
 ```
 
+4. Display the cache group tables:
+
 ```
 <copy>
 tables;
@@ -92,6 +95,8 @@ tables;
 1 table found. 
 ```
 
+5. Check the row count:
+
 ```
 <copy>
 select count(*) from vpn_users;
@@ -102,7 +107,8 @@ select count(*) from vpn_users;
 < 1000000 >
 1 row found.
 ```
-Update optimizer statistics for all the tables in the APPUSER schema:
+
+6. Update optimizer statistics for all the tables in the APPUSER schema:
 
 ```
 <copy>
@@ -110,7 +116,7 @@ statsupdate;
 </copy>
 ```
 
-Exit from ttIsql:
+7. Exit from ttIsql:
 
 ```
 <copy>
@@ -129,7 +135,7 @@ Note that the status of autorefresh has now changed to  **On**.
 Autorefresh State: On
 ```
 
-## Task 3: Load the OE cache groups
+## Task 2: Load the OE cache groups
 
 Now do the same for the OE schema cache groups:
 
@@ -290,7 +296,9 @@ Disconnecting...
 Done.
 ```
 
-You can now *proceed to the next lab*. Keep your terminal session open for use in the next lab.
+You can now *proceed to the next lab*. 
+
+Keep your terminal session to tthost1 open for use in the next lab.
 
 ## Acknowledgements
 

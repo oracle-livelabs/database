@@ -14,14 +14,14 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-novnc.md"
     },
     {
-      "title": "Lab 2: Using noVNC Remote Desktop",
-      "description": "Using noVNC Remote Desktop",
-      "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+      "title": "Lab 2: Connect to the workshop compute instance",
+      "description": "How to connect to the Cloud Instance",
+      "filename": "../../03-connect-to-instance/connect-to-instance-livelabs.md"
     },
     {
-      "title": "Lab 3: Connect to the workshop compute instance",
-      "description": "How to connect to the Cloud Instance",
-      "filename": "../../03-connect-to-instance/connect-to-instance.md"
+      "title": "Lab 3: Using noVNC Remote Desktop",
+      "description": "Using noVNC Remote Desktop",
+      "filename": "../../00-novnc/novnc-livelabs.md"
     },
     {
       "title": "Lab 4: Initialize the workshop environment",
@@ -71,6 +71,11 @@
       "title": "Lab 13: Shutdown the TimesTen cache and instance",
       "description": "Perform an orderly shutdown of TimesTen",
       "filename": "../../13-shutdown/shutdown.md"
+    },
+    {
+      "title": "Wrap-up",
+      "description": "Summary and resource cleanup",
+      "filename": "../../14-wrapup/wrapup.md"
     },
     {
       "title": "Need Help?",
