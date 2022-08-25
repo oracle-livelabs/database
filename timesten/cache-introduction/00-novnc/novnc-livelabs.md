@@ -2,9 +2,7 @@
 
 ## Introduction
 
-This workshop can be accessed using a browser based graphical remote desktop (noVNC). It can also be accessed using SSH. You are free to use either method but we recommend SSH as for this workshop it provides a superior experience.
-
-This lab will show you how to get started with your workshop with a remote desktop session and how to enable SSH access. 
+This workshop can be accessed using a browser based graphical remote desktop (noVNC). It can also be accessed using SSH. This lab will show you how to get started with your workshop with a remote desktop session, and how to enable SSH access. 
 
 **Estimated Lab Time**: 10 minutes
 
@@ -15,14 +13,14 @@ In this lab, you will:
 - Enable fullscreen display of remote desktop session
 - Enable remote clipboard integration
 - Open the workshop guide from the remote desktop
-- Enable SSH access (optional but recommended)
+- Enable SSH access (optional)
 
 ### Prerequisites
 
 This lab assumes you have:
 
 - Launched the workshop in the LiveLabs environment
-- An RSA format SSH private/public key pair to use to access the OCI instance (optional)
+- An RSA format SSH private/public key pair to use to access the OCI instance using SSH (optional)
 
 If you need help in generating a suitable SSH key pair, please consult [this tutorial](https://docs.oracle.com/en/learn/generate_ssh_keys/index.html).
 
@@ -50,19 +48,19 @@ During the execution of your labs you may need to copy text from your local PC/M
     ![](./images/novnc-clipboard-2.png " ")
 
     *Note:* Please make sure you initialize your clipboard with step [1] shown in the screenshot above before opening the target application in which you intend to paste the text. Otherwise will find the *paste* function in the context menu grayed out when attempting to paste for the first time.
+    
+    **IMPORTANT:** Due to the slightly cumbesome nature of copying between your host system and the NoVNC session, we recommend that you perform all of the copy/paste actiosn within the NoVNC session. Alternatively, access the workshop's OCI instance via SSH and copy/paste between your host and your SSH session.
 
 ## Task 3: Open Your Workshop Guide
 
-1. If the *Web* browser window(s) is(are) not already open side-by-side, double-click on the *Get Started with your Workshop* icon from the remote desktop. This will launch one or two windows depending on the workshop.
+1. If the *Web* browser window is not already open, double-click on the *Get Started with your Workshop* icon from the remote desktop. This will open the workshop instructions within the NoVNC session (ideal for copy/paste).
 
     ![](./images/novnc-launch-get-started-1.png " ")
 
-2. On the left windows is your workshop guide and depending on your workshop, you may also one or two browser tabs loaded with webapps. e.g. Weblogic console, Enterprise Manager Cloud Console, or a relevant application to your workshop such as SQL Developer, JDeveloper, etc.
+2. On the left is the browser window with your workshop guide
 
     ![](./images/novnc-launch-get-started-2.png " ")
-    ![](./images/novnc-launch-get-started-3.png " ")
 
-You may now proceed to the next lab.
 
 ## Task 4: Configure SSH access (optional).
 
@@ -118,6 +116,8 @@ This assumes that you already have an RSA type SSH key-pair available on the loc
     ```
 
     For Putty, please refer to the guide [Generate SSH Keys](https://oracle-livelabs.github.io/common/labs/generate-ssh-key) on how to establish the connection using the *.ppk* private key.
+    
+You can now *proceed to the next lab*.
 
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
