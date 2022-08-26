@@ -32,7 +32,7 @@ The operator uses webhooks for validating user input before persisting it in Etc
     ```bash
     <copy>kubectl apply -f https://raw.githubusercontent.com/oracle/oracle-database-operator/main/oracle-database-operator.yaml</copy>
     ```
-
+    This will produce the following output.
     ```bash
     labuserexa@cloudshell:cbworkshop (us-phoenix-1)$ kubectl apply -f https://raw.githubusercontent.com/oracle/oracle-database-operator/main/oracle-database-operator.yaml
     namespace/oracle-database-operator-system created
@@ -67,6 +67,10 @@ The operator uses webhooks for validating user input before persisting it in Etc
 
     ```bash
     <copy>kubectl get pods -n oracle-database-operator-system</copy>
+    ```
+    <strong style="color: #C74634">Note</strong>: If you encounter the following error, wait a few seconds (not more than a minute) and try running the command again.
+    ```bash
+    Error from server (InternalError): error when creating "https://raw.githubusercontent.com/oracle/oracle-database-operator/main/oracle-database-operator.yaml": Internal error occurred: failed calling webhook "webhook.cert-manager.io": failed to call webhook: Post "https://cert-manager-webhook.cert-manager.svc:443/mutate?timeout=10s": EOF
     ```
 
 ## Task 2: Setup Secrets and Provision an ADB
@@ -166,7 +170,7 @@ To get started with creating an Oracle Autonomous Database, you will need to cre
     You can also run the following:
     ```bash
     <copy>
-    (cd $CB_STATE_DIR ; ./generated/adb-create.yaml)
+    (cd $CB_STATE_DIR ; kubectl apply -f ./generated/adb-create.yaml)
     </copy>
     ```
 
