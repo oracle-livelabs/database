@@ -4,9 +4,9 @@
 
 In this lab, you will use a simple benchmark program to run a (read-only) OLTP workload against the TimesTen cache and against the Oracle database to illustrate the performance benefit of TimesTen.
 
-You will use a standard TimesTen benchmark program, TptBm, in this case a version that connects to the target database using the Oracle Call Interface (OCI) API. The program can run against either TimesTen or Oracle and performs the same operations in both cases. The source code for the tptbmOCI program is available in the _host VM _in the directory **~/lab/src**.
+You will use a standard TimesTen benchmark program, TptBm, in this case a version that connects to the target database using the Oracle Call Interface (OCI) API. The program can run against either TimesTen or Oracle and performs the same operations in both cases. The source code for the tptbmOCI program is available in the _host VM_ in the directory **~/lab/src**.
 
-Estimated Time: **5 minutes**
+**Estimated Lab Time:** 5 minutes
 
 There is a single table used for this benchmark, APPUSER.VPN_USERS:
 
@@ -135,15 +135,13 @@ SAMPLEDBCS =
 
 ### Prerequisites
 
-This lab assumes that you have:
+This lab assumes that you:
 
-- Completed all the previous labs in this workshop, in sequence.
+- Have completed all the previous labs in this workshop, in sequence.
+- Have an open terminal session in the workshop compute instance, either via NoVNC or SSH, and that session is logged into the TimesTen host (tthost1).
 
-## Task 1: Connect to the environment
 
-If you do not already have an active terminal session, connect to the OCI compute instance and open a terminal session, as the user **oracle**. In that terminal session, connect to the TimesTen host (tthost1) using ssh.
-
-## Task 2: Run the benchmark against the Oracle database
+## Task 1: Run the benchmark against the Oracle database
 
 Run the program against the Oracle database and note the results:
 
@@ -164,7 +162,7 @@ Transaction rate:      19523.6 transactions/second
 Transaction rate:    1171417.4 transactions/minute
 ```
 
-## Task 3: Run the benchmark against the TimesTen cache
+## Task 2: Run the benchmark against the TimesTen cache
 
 Run the program against the TimesTen cache and note the results:
 
@@ -185,13 +183,15 @@ Transaction rate:     206739.7 transactions/second
 Transaction rate:   12404382.9 transactions/minute
 ```
 
-## Task 4: Compare the results
+## Task 3: Compare the results
 
-In this run, TimesTen achieved a throughput that was **~10.6x greater** than Oracle database (your results _will_ vary).
+In the example run above, TimesTen achieved a throughput that was **~10.6x greater** than Oracle database (your results _will_ vary).
 
-As this was a single connection/thread it is easy to translate the throughput results to average latency values. In this case, the average latency for Oracle database was **~51 microseconds** and for TimesTen it was **~4.8 microseconds**.
+As this was a single thread with a single connection it is easy to translate the throughput results to average latency values. In this case, the average latency for Oracle database was **~51 microseconds** and for TimesTen it was **~4.8 microseconds**.
 
-You can now *proceed to the next lab*. Keep your primary terminal session open for use in the next lab.
+You can now *proceed to the next lab*. 
+
+Keep your primary session open for use in the next lab.
 
 ## Acknowledgements
 
