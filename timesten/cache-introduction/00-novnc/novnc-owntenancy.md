@@ -1,12 +1,10 @@
-# Using noVNC Remote Desktop
+# Using noVNC Remote Desktop and enabling SSH access
 
 ## Introduction
 
-This workshop can be accessed using a browser based graphical remote desktop (noVNC) or via SSH. You are free to use either method, but we recommend SSH as for this workshop it provides a superior experience.
+This workshop can be accessed using a browser based graphical remote desktop (noVNC). It can also be accessed using SSH. This lab will show you how to get started with your workshop with a remote desktop session. 
 
-This lab will show you how to get started with your workshop with a remote desktop session. SSH access was (optionally) provisioned when you created the OCI instance using the provided ORM stack file.
-
-If you prefer to use SSH access (recommended), and do not plan to use the graphical desktop, then you can skip the rest of this lab and *proceed to the next lab.*
+If you plan to only use SSH access then you can *proceed to the next lab*.
 
 **Estimated Lab Time**: 5 minutes
 
@@ -22,7 +20,7 @@ In this lab, you will:
 
 This lab assumes you have:
 
-- Launched the workshop in your own tenancy (paid or free trial)
+- Launched the workshop in your own tenancy using via the provided ORM stack
 
 ## Task 1: Enable Full-screen Display
 For seamless desktop integration and to make the best use of your display, perform the following tasks to render your remote desktop session in fullscreen mode.
@@ -48,21 +46,22 @@ During the execution of your labs you may need to copy text from your local PC/M
     ![](./images/novnc-clipboard-2.png " ")
 
     *Note:* Please make sure you initialize your clipboard with step [1] shown in the screenshot above before opening the target application in which you intend to paste the text. Otherwise will find the *paste* function in the context menu grayed out when attempting to paste for the first time.
+    
+    **IMPORTANT:** Due to the slightly cumbesome nature of copying between your host system and the NoVNC session, we recommend that you perform all of the copy/paste actions within the NoVNC session rather than between your host and the NoVNC session.
 
 ## Task 3: Open Your Workshop Guide
 
-1. If the *Web* browser window(s) is(are) not already open side-by-side, double-click on the *Get Started with your Workshop* icon from the remote desktop. This will launch one or two windows depending on the workshop.
+1. If the *Web* browser window is not already open, double-click on the *Get Started with your Workshop* icon from the remote desktop. This will open the workshop instructions within the NoVNC session (ideal for copy/paste).
 
     ![](./images/novnc-launch-get-started-1.png " ")
 
-2. On the left windows is your workshop guide and depending on your workshop, you may also one or two browser tabs loaded with webapps. e.g. Weblogic console, Enterprise Manager Cloud Console, or a relevant application to your workshop such as SQL Developer, JDeveloper, etc.
+2. On the left is the browser window with your workshop guide
 
     ![](./images/novnc-launch-get-started-2.png " ")
-    ![](./images/novnc-launch-get-started-3.png " ")
 
-You may now *proceed to the next lab*.
+*You may now proceed to the next lab.*
 
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
 * **Contributors** - Arabella Yao, Database Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Last Updated By/Date** - Chris Jenkins, August 2022

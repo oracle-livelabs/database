@@ -75,7 +75,11 @@ We'll assume you're already in Database Actions having just completed the previo
 
     On the panel that pops up, leave "Object" selected and click the **Create Pre-Authenticated Request** button
 
+    ![create PAC step 1](./images/create-pac-1.png " ")
+
     You will see a panel "Pre-Authenticated Request Details" Click on the Copy button to copy the URL, and then save it to a text file for later use. Repeat for each file you want to index.
+
+    ![create PAC step 1](./images/create-pac-2.png " ")
 
     Note: Don't worry about the scary "It will not be shown again". You can create another PAR whenever you like.
 

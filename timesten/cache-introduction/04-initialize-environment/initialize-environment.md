@@ -14,21 +14,18 @@ The workshop uses an Oracle database which runs in its own container (**dbhost**
 
 ### Prerequisites
 
-This lab assumes that you have:
+This lab assumes that you:
 
-- Completed all the previous labs in this workshop, in sequence.
+- Have completed all the previous labs in this workshop, in sequence.
+- Have an open terminal session in the workshop compute instance, either via NoVNC or SSH.
 
 ### Starting over from the beginning
 
 Once you have successfully completed this lab, if at any point you want to start the whole workshop again from the beginning, just go to the **~/lab** directory and run the script **labReset.sh**. That script will take 5-8 minutes to run and it will reset everything back to the way it will be after this lab is completed.
 
-## Task 1: Connect to the environment
+## Task 1: Initialize and startup the lab components
 
-Connect to the OCI compute instance and open a terminal session, as the user **oracle**,  using an appropriate method as discussed in the previous lab.
-
-## Task 2: Initialize and startup the lab components
-
-Change to the **lab** directory:
+1. In the terminal session, change to the **lab** directory:
 
 ```
 <copy>
@@ -36,7 +33,7 @@ cd ~/lab
 </copy>
 ```
 
-Initialize the workshop:
+2. Initialize the workshop:
 
 ```
 <copy>
@@ -53,7 +50,9 @@ info: Oracle Database state successfully reset
 info: starting Oracle Database: OK
 ```
 
-This command will take between 5 and 8 minutes to complete. Once the setup script has completed successfully, *proceed to the next lab*. You can keep your terminal session open ready for the next lab.
+This command will take between 5 and 8 minutes to complete. Once the setup script has completed successfully, *proceed to the next lab*. 
+
+Keep your terminal session open ready for the next lab.
 
 ## Acknowledgements
 

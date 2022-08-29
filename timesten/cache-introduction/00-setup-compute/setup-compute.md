@@ -4,7 +4,7 @@
 
 This lab will show you how to setup a Resource Manager stack that will generate the Oracle Cloud objects needed to run your workshop.
 
-*Estimated Lab Time:* 15 minutes
+**Estimated Lab Time:** 15 minutes
 
 ### About Terraform and Oracle Cloud Resource Manager
 
@@ -27,10 +27,13 @@ This lab assumes you have:
 
 When using the downloaded ORM stack file to deploy the required OCI resources you have two options:
 
-- Allow the stack to create and configure a private, dedicated network (VNC and subnet) for you
+- Allow the stack to create and configure a private, dedicated network (VNC and subnet) for you (recommended)
+
 - Specify an existing, suitably configured, network (VCN and subnet) to be used
 
-The rest of thi lab assumes that you will allow the stack to create the network for you. If you wish to use an existing network (see *Lab: Prepare Setup *for details of required Ingress rules) then consult the Appendix below for instructions.
+The rest of this lab assumes that you will allow the stack to create the network for you.
+
+If you wish to use an existing network (see *Lab: Prepare Setup* for details of required **Ingress** rules) then consult **Appendix 3** below for instructions.
 
 ## Task 2: Create Stack:  Compute + Networking
 
@@ -58,81 +61,27 @@ The rest of thi lab assumes that you will allow the stack to create the network 
 7. Depending on the quota you have in your tenancy you can choose from standard Compute shapes or Flex shapes. Please visit the Appendix: Troubleshooting Tips for instructions on checking your quota
     - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Keep the default as checked (unless you plan on using a fixed shape)
     - **Instance Shape:** Keep the default or select from the list of Flex shapes in the dropdown menu (e.g *VM.Standard.E4.Flex*).
-    - **Instance OCPUS:** Accept the default shown. e.g. (**4**) will provision 4 OCPUs and 64GB of memory. You may also elect to reduce or increase the count by selecting from the dropdown. e.g. `[2-24]`. Please ensure you have the capacity available before increasing.
+    - **Instance OCPUS:** Accept the default shown. e.g. **4** will provision 4 OCPUs and 64GB of memory, which is the minimum for this workshop. Please ensure you have the capacity available before increasing the resources.
 8.  If don't have quota for Flex Shapes or you prefer to use fixed shapes, follow the instructions below.  Otherwise skip to the next step.
     - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Unchecked
-    - **Instance Shape:** Accept the default shown or select from the dropdown. e.g. VM.Standard2.2
+    - **Instance Shape:** Accept the default shown or select from the dropdown. e.g. VM.Standard2.4
 
   ![](./images/create-stack-novnc-3.png " ")
 
-10. For this section we will provision a new VCN with all the appropriate ingress and egress rules needed to run this workshop.  If you already have a VCN, make sure it has all of the correct ingress and egress rules and skip to the next section.
+10. In this section we are provisioning a new VCN with all the appropriate ingress and egress rules needed to run this workshop (recommended).
     - **Use Existing VCN?:** Accept the default by leaving this unchecked. This will create a **new VCN**.
 
 11. Click **Next**.
+
 12. Select **Run Apply** and click **Create**.
 
   ![](./images/create-stack-novnc-4.png " ")
 
-13. Your stack has is now created and the *Apply* action triggered is running to deploy your environment!  
+13. Your stack has is now created and the *Apply* action is running to deploy your environment!  
 
   ![](./images/create-stack-novnc-5.png " ")
 
-You may now proceed to Task 2 (skip Task 1B).
-
-## Task 1B: Create Stack:  Compute only
-If you just completed Task 1A, please proceed to Task 2.  If you have an existing VCN and are comfortable updating VCN configurations, please ensure your VCN meets the minimum requirements. Refer to *Lab: Prepare Setup*       
-
-  *Note:* We recommend letting our stack create the VCN to reduce the potential for error.
-
-1.  Identify the ORM stack zip file downloaded in *Lab: Prepare Setup*
-2.  Login to Oracle Cloud
-3.  Open up the hamburger menu in the left hand corner.  Choose the compartment in which you would like to install.  Choose **Resource Manager > Stacks**.  
-
-  ![](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
-
-  ![](./images/create-stack.png " ")
-
-4. Select **My Configuration**, click the **Browse** link and select the zip file (dbsec-lab-mkplc-freetier.zip) that you downloaded. Click **Select**.
-
-  ![](./images/create-stack-novnc-1.png " ")
-
-  Enter the following information:
-    - **Name**:  Enter a name  or keep the prefilled default (*DO NOT ENTER ANY SPECIAL CHARACTERS HERE*, including periods, underscores, exclamation etc, it will mess up the configuration and you will get an error during the apply process)
-    - **Description**:  Same as above
-    - **Create in compartment**:  Select the correct compartment if not already selected
-
-  *Note:* If this is a newly provisioned tenant such as freetier with no user created compartment, stop here and first create it before proceeding.
-
-5. Click **Next**.
-
-  ![](./images/create-stack-novnc-6.png " ")
-
-  Enter or select the following:
-    - **Instance Count:** Keep the default to **1** to create only one instance. You may also choose to a higher number if you need more than one instance created.
-    - **Select Availability Domain:** Select an availability domain from the dropdown list.
-    - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Keep the default as checked (unless you plan on using a fixed shape)
-    - **Instance Shape:** Keep the default or select from the list of Flex shapes in the dropdown menu (e.g *VM.Standard.E4.Flex*).
-    - **Instance OCPUS:** Accept the default shown. e.g. (**4**) will provision 4 OCPUs and 64GB of memory. You may also elect to reduce or increase the count by selecting from the dropdown. e.g. `[2-24]`. Please ensure you have the capacity available before increasing.
-    - **Use Existing VCN?:** Check to select.
-    - **Select Existing VCN?:** Select existing VCN with regional public subnet and required security list.
-
-  *Note:* For an existing VCN Option to be used successful, review the details at the bottom of this section
-
-6. If you prefer to use fixed shapes, follow the instructions below.  Otherwise skip to the next step.
-    - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Unchecked
-    - **Instance Shape:** Accept the default shown or select from the dropdown. e.g. VM.Standard.E2.2
-
-  ![](./images/create-stack-novnc-7.png " ")
-
-7. Review and click **Create**.
-
-  ![](./images/create-stack-novnc-8.png " ")
-
-8. Your stack has is now created and the *Apply* action triggered is running to deploy your environment!
-
-  ![](./images/create-stack-novnc-5.png " ")
-
-## Task 2: Terraform Apply
+## Task 3: Terraform Apply
 In the prior steps we elected to trigger the *terraform apply action* on stack creation.
 
 1.  Review the job output.
@@ -143,7 +92,7 @@ In the prior steps we elected to trigger the *terraform apply action* on stack c
 3.  Your public IP address(es), instance name(s), and remote desktop URL are displayed.
 
 
-## Task 3: Access the Graphical Remote Desktop
+## Task 4: Access the Graphical Remote Desktop
 For ease of execution of this workshop, your VM instance has been pre-configured with a remote graphical desktop accessible using any modern browser on your laptop or workstation. Proceed as detailed below to login.
 
 1. Navigate to **Stack Details**, **Application Information** tab, and click on the remote desktop URL
@@ -161,6 +110,8 @@ For ease of execution of this workshop, your VM instance has been pre-configured
     Public IP addresses used for LiveLabs provisioning comes from a pool of reusable addresses and this error is due to the fact that the address was previously used by a compute instance long terminated, but that wasn't properly secured, got bridged and was flagged. You can safely ignore and proceed by clicking on *Details*, and finally on *Visit this unsafe site*.
 
   ![](images/novnc-deceptive-site-error.png " ")
+  
+You can now *proceed to the next lab*.
 
 ## Appendix 1:  Terraform and Resource Manager
 Terraform is a tool for building, changing, and versioning infrastructure safely and efficiently.  Configuration files describe to Terraform the components needed to run a single application or your entire datacenter.  In this lab a configuration file has been created for you to build network and compute components.  The compute component you will build creates an image out of Oracle's Cloud Marketplace.  This image is running Oracle Linux 7.
@@ -251,7 +202,62 @@ Modify your stack to use fixed shapes instead.
 1. Uncheck the option *"Use Flexible Instance Shape with Adjustable OCPU Count"* to use fixed shape instead
 ![](./images/standardshape.png " ")
 
+## Appendix 3: Create Stack using an existing VCN
+
+If you have an existing VCN which you wish to use, and are comfortable updating VCN configurations, please ensure your VCN meets the minimum requirements. Refer to *Lab: Prepare Setup*
+
+*Note:* We recommend letting our stack create the VCN to reduce the potential for error.
+
+1.  Identify the ORM stack zip file downloaded in *Lab: Prepare Setup*
+2.  Login to Oracle Cloud
+3.  Open up the hamburger menu in the left hand corner.  Choose the compartment in which you would like to install.  Choose **Resource Manager > Stacks**.  
+
+  ![](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
+
+  ![](./images/create-stack.png " ")
+
+4. Select **My Configuration**, click the **Browse** link and select the zip file (dbsec-lab-mkplc-freetier.zip) that you downloaded. Click **Select**.
+
+  ![](./images/create-stack-novnc-1.png " ")
+
+  Enter the following information:
+    - **Name**:  Enter a name  or keep the prefilled default (*DO NOT ENTER ANY SPECIAL CHARACTERS HERE*, including periods, underscores, exclamation etc, it will mess up the configuration and you will get an error during the apply process)
+    - **Description**:  Same as above
+    - **Create in compartment**:  Select the correct compartment if not already selected
+
+  *Note:* If this is a newly provisioned tenant such as freetier with no user created compartment, stop here and first create it before proceeding.
+
+5. Click **Next**.
+
+  ![](./images/create-stack-novnc-6.png " ")
+
+  Enter or select the following:
+    - **Instance Count:** Keep the default to **1** to create only one instance. You may also choose to a higher number if you need more than one instance created.
+    - **Select Availability Domain:** Select an availability domain from the dropdown list.
+    - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Keep the default as checked (unless you plan on using a fixed shape)
+    - **Instance Shape:** Keep the default or select from the list of Flex shapes in the dropdown menu (e.g *VM.Standard.E4.Flex*).
+    - **Instance OCPUS:** Accept the default shown. e.g. **4** will provision 4 OCPUs and 64GB of memory, which is the minimum for this workshop. Please ensure you have the capacity available before increasing the resources.
+    - **Use Existing VCN?:** Check to select.
+    - **Select Existing VCN?:** Select existing VCN with regional public subnet and required security list.
+
+  *Note:* For an existing VCN Option to be used successful, review the details at the bottom of this section
+
+6. If you prefer to use fixed shapes, follow the instructions below.  Otherwise skip to the next step.
+    - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Unchecked
+    - **Instance Shape:** Accept the default shown or select from the dropdown. e.g. VM.Standard.E2.4
+
+  ![](./images/create-stack-novnc-7.png " ")
+
+7. Review and click **Create**.
+
+  ![](./images/create-stack-novnc-8.png " ")
+
+8. Your stack has is now created and the *Apply* action is running to deploy your environment!
+
+  ![](./images/create-stack-novnc-5.png " ")
+
+You may now return to **Task 3: Terraform Apply** above.
 
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
-* **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, August 2021
+* **Last Updated By/Date** - Chris Jenkins, August 2022
