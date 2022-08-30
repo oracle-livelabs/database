@@ -4,7 +4,7 @@
 
 In this lab, we will tear down the resources created in your tenancy and the directory in the Oracle cloud shell.
 
-Estimates Time: 10 minutes
+Estimated Time: 10 minutes
 
 Quick walk through to tear down the resources created in your tenancy and the directory in cloud shell.
 
@@ -24,11 +24,24 @@ To begin teardown, run the following command below. The teardown script will del
     (cd $CB_STATE_DIR ; ./teardown.sh)
     </copy>
     ```
+
+The teardown script will run terraform destroy in the background. While this is running in the background, you can check the status of whether the teardown process has completed by checking the state. 
+
+You can directly watch the terraform output as it completes by running:
+```bash
+<copy>
+tail -f $CB_STATE_DIR/logs/*-terraform-destroy.log
+</copy>
+```
+
+
 ## Task 2: Delete the workshop directory
-When done with the lab, you can delete the workshop directory and the application repository on __Cloud Shell__
+When done with the lab, you can delete the workshop directory and the application repository on __Cloud Shell__. Make sure you are on the directory where you cloned the repository.
 
 ```bash
-    rm -r cbworkshop && rm -r oracle.cloud.native.devops-oraoperator
+<copy>
+    rm -rf cbworkshop && rm -rf oci-react-samples
+</copy>
 ```
 
 ## Acknowledgements

@@ -20,7 +20,7 @@ Estimated Time: XX minutes
 
 ## Task 1: Prepare for Application Deployment
 
-1. Login to your tenancy's OCI Registry (OCIR) to authorize the pushing of application images to OCIR. For help on how to retrieve the information below on the console, click on the dropdown below. When prompted, provide the Auth token you copied earlier as the password.
+1. Login to your tenancy's OCI Registry (OCIR) to authorize the pushing of application images to OCIR. For help on how to retrieve the information below on the console, click on the dropdown below. When prompted for the password, retrieve and provide from your notes the Auth token you copied earlier as the password.
 
 
      ```bash
@@ -30,17 +30,57 @@ Estimated Time: XX minutes
      ```
 
      ```bash
-     # Example
+     # Example Output
      docker login phx.ocir.io
-     Username: tenancyObjectStorageNamespace/username
+     Username: your_tenancy_namespace/labuserexample
      Password: <auth-token>
+     ...
 
      Login Succeeded
      ```
 
- ## How to Login to OCIR from the Docker CLI
+  ## How to get the region key
+     
+     The region key is a shortened form of your region. For example, the region us-phoenix-1 will have a region key of PHX; the region us-ashburn-1 will have a region key of IAD. You can view the list of regions and their keys [here](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm#About:~:text=and%20Availability%20Domains-,About%20Regions%20and%20Availability%20Domains,-Fault%20Domains). 
 
+     Alternatively, you can also run the following command which leverages the OCI CLI on Cloud Shell:
 
+     ```bash
+     <copy>
+     oci iam region list | jq -r --arg REGION $(state_get .lab.region.identifier) '.data[] | select (.name == $REGION) | .key '
+     </copy>
+     ```
+     <strong style="color: #C74634">Note</strong>: Region Keys should be lowercase when running `docker login.`
+
+  ## How to get the tenancy namespace
+
+     The tenancy namespace is not always the same as the tenance name. To retrieve it, on the OCI Console, you can click on your Profile (top-right user icon) and navigate to `Tenancy: <your_tenancy>`. This will open the Tenancy page on the console, from which you can copy the Object Storage namespace.
+
+     ![Get Tenancy Namespace](./images/get-tenancy-namespace.png)
+
+     Alternatively, you can also run the following command which leverages the OCI CLI on Cloud Shell:
+
+     ```bash
+     <copy>
+     oci os ns get | jq -r .data
+     </copy>
+     ```
+
+  ## How to get your username
+     
+     To retrieve your username, on the OCI Console, click on your your Profile (top-right user icon) and click on your username. Your username should then be displayed at the top.
+
+     ![Get Username](./images/get-username.png)
+
+     <strong style="color: #C74634">Note</strong>: Your username will include oracleidentitycloudservice if you are logged in as a federated user. Include this part as your username along with the forward slash.
+
+     Alternatively, you can also run the following command which leverages the OCI CLI on Cloud Shell:
+
+     ```bash
+     <copy>
+     oci iam user get --user-id $(state_get .lab.ocid.user) | jq -r .data.name
+     </copy>
+     ```
 
 ## Task 2: Build and Deploy the applications
 
@@ -66,11 +106,14 @@ To view the application deployments, you can run:
 
 ```bash
 <copy>
-kubectl get all
+kubectl get deploy
 </copy>
 ```
+The above command will give an output similar to what is shown in the below image:
 
-1. Retrieve the `EXTERNAL IP` by running the below command. Navigate to the address
+![Kubectl Get Deploy](./images/kubectl-get-deploy.png)
+
+1. Retrieve the `EXTERNAL IP` by running the below command. This will show a table of values for the frontend-service of type LoadBalancer. Copy the value under `EXTERNAL-IP`.
 
      ```bash
      <copy>
@@ -78,14 +121,14 @@ kubectl get all
      </copy>
      ```
 
-2. View the microservices website by navigating to
+2. View the microservices app by navigating to the website with the IP address
      ```bash
      <copy>
      https://<ip-address>
      </copy>
      ```
 
-3. You will be prompted by a login modal. Use `cloudbank` as the username and the password you provided earlier on. 
+3. You will be prompted by the application to login. Use `cloudbank` as the username and the password you provided earlier on during setup. 
 
      Username: `cloudbank`
 
@@ -103,5 +146,5 @@ You may now **proceed to the next lab.**.
 
 ## Acknowledgements
 
-* **Authors** - Irina Granat, Consulting Member of Technical Staff, Oracle MAA and Exadata; Norman Aberin, Member of Technical Staff
-* **Last Updated By/Date** - Irina Granat, June 2022
+* **Authors** - Norman Aberin, Developer Advocate
+* **Last Updated By/Date** - Developer Advocate, August 2022

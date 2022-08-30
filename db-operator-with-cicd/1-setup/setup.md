@@ -6,7 +6,7 @@ In this lab, we will provision and setup the reference architecture.
 
 In this reference architecture, Jenkins is hosted on Oracle Cloud Infrastructure to centralize build automation and scale the deployment by using Oracle Cloud Infrastructure Registry, Oracle Kubernetes and Oracle Converged Database. GitHub is used to manage source code. 
 
-Estimated Time: XX minutes
+Estimated Time: 25 minutes
 
 ### Objectives
 
@@ -39,14 +39,14 @@ https://github.com/oracle/oci-react-samples.git
 </copy>
 ```
 Since the lab will require you to make changes to the code, you will need to have a fork of the lab. To fork, 
-1. click on the Fork button at the top right. 
-2. Select yourself as the owner and keep the repository name the same.
-3. Deselect Copy the `main` branch only (as you also want to copy the other branches)
+1. Click on the Fork button at the top right. 
+2. Select your account as the owner and keep the repository name the same.
+3. Deselect `Copy the main branch only` (as the lab-related files exist only in another branch)
 4. Finally, click on `Create fork`
 
     ![Fork Repository](./images/fork-repository.png)
 
-With a working fork of the lab repository under your own account, clone the forked repository by running the below command:
+With a working fork of the lab repository under your own account, clone the forked repository by running the below command. Remember to specify `--single-branch --branch cloudbank` as shown below, as this will only pull the files related to the lab:
 ```bash
 <copy>
  git clone --single-branch --branch cloudbank https://github.com/<username>/oci-react-samples
@@ -57,8 +57,9 @@ With a working fork of the lab repository under your own account, clone the fork
   ![Locate GitHub Username](./images/github-un-where.png)
 
 ## Task 3: Prepare for Terraform Provisioning
-The first part of the setup process will require the following information below to provision resources. Retrieve these information and keep these in your notes (with _exception_ to the Jenkins Password  which does not have to retrieved). Click on the drop downs below for more information on how to retrieve these from the OCI Console:
+The first part of the setup process will require the following information below to provision resources. Retrieve these information and keep these in your notes (with _exception_ to the Jenkins Password  which does not have to retrieved) for Task 4, which will prompt you for these values. Click on the drop downs below for more information on how to retrieve these from the OCI Console:
 
+<strong style="color: #C74634">Note</strong>: Keep the following information and credentials in your notes.
 
 1. __API Key__ - API Signing Key to authenticate provisioning Database resources with
 
@@ -91,7 +92,7 @@ The first part of the setup process will require the following information below
 
  ## How to Retrieve an API Key's Configuration
     
-    <strong style="color: #C74634">Note</strong>: Each user can have a maximum of three API signing keys.
+    <strong style="color: #C74634">Note</strong>: Each user can have a maximum of three API signing keys. If you are planning to reuse a previous API Key, please make sure you have the corresponding keys used in generating the API Key.
 
     If you already have three or opt to reuse your API Keys. Open the options menu on the right side (3 dots) for a specific API Key and select `View Configuration file`. This option will show the same output as above listing your `User OCID, Tenancy OCID, Region Identifier` and `Fingerprint`
 
@@ -99,15 +100,15 @@ The first part of the setup process will require the following information below
 
 
 
-1. __Region Identifier__ - a fixed identifier for the region to provision lab-related resources in (e.g. `us-phoenix-1`, `us-ashburn-1`, etc.). A full list can be found here: [https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)
+2. __Region Identifier__ - a fixed identifier for the region to provision lab-related resources in (e.g. `us-phoenix-1`, `us-ashburn-1`, etc.). A full list can be found here: [https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)
 
     Use the region value from the API Key Configuration file.
 
-2. __Tenancy OCID__ - Oracle Cloud ID for the tenancy to provision lab-related resources in
+3. __Tenancy OCID__ - Oracle Cloud ID for the tenancy to provision lab-related resources in
 
     Use the tenancy value from the API Key Configuration file
 
-3. __Compartment OCID__ - Oracle Cloud ID for the compartment to provision lab-related resources in
+4. __Compartment OCID__ - Oracle Cloud ID for the compartment to provision lab-related resources in
 
  ## How to Retrieve the Compartment OCID
  You may choose to use an existing compartment or create a new one.
@@ -126,21 +127,48 @@ The first part of the setup process will require the following information below
 
     ![Obtain Oracle Cloud Infrastructure Compartment OCID](images/compartment-ocid.png " ")
 
-4. __Jenkins Password__ - Enter a password
+5. __Jenkins Password__ - Enter a password
 
-    <strong style="color: #C74634">Note</strong>: Keep your Jenkins Password credentials in your notes.
+6. __Database Password__ - Enter a password (see below requirements)
+
+    <strong style="color: #C74634">Note</strong>: The Autonomous Database sets minimum standards for passwords, and the default profile sets parameters to limit the number of failed login attempts. 
+
+     * The password must be between 12 and 30 characters long and must include at least one uppercase letter, one lowercase letter, and one numeric character.
+     * The password cannot contain the username.
+     * The password cannot be one of the last four passwords used for the same username.
+     * The password cannot contain the double quote (") character.
+     * The password must not be the same password that is set less than 24 hours ago.
+
+7. __Frontend Login Password__ - Enter a password 
+
+8. __User OCID__ - Oracle Cloud ID for the user to provision lab-related resources with
+
+    Use the tenancy value from the API Key Configuration file
+
+ ## How to Retrieve the User OCID
+    Another method of retrieving the user OCID is to simply go to User Settings. Locate your menu bar in the Cloud Console and click the person icon at the far upper right. From the drop-down menu, select your user's name. Note, sometimes the name link is missing in which case select the **User Settings** link. Do not select the **Tenancy** link.
+
+    ![Obtain Oracle Cloud Infrastructure User OCID](images/get-user-ocid.png " ")
+
+    The user OCID will look something like: `ocid1.user.oc1....<unique_ID>`. Click Show to see the details and then click Copy to copy the user OCID to the clipboard, paste in the copied data in console.
+
+    ![Oracle Cloud Infrastructure User OCID Example](images/example-user-ocid.png " ")
+
+8. __Fingerprint__ - The resulting fingerprint after generating an API Key
+
+    Use the fingerprint value from the API Key Configuration file
 
 ## Task 4: Run Setup for Terraform Provisioning
-1. Execute the following sequence of commands to start the setup.  
+Execute the following sequence of commands to start the setup.  
 
-    First, source the `source.env` file to register common lab-related environment variables;
+1. First, source the `source.env` file to register common lab-related environment variables;
     ```bash
     <copy>
     source ./oci-react-samples/cloudbank/source.env
     </copy>
     ```
 
-    Then run the setup script to initiate the setup process.
+2. Run the setup script to initiate the setup process.
     ```bash
     <copy>
     ./oci-react-samples/cloudbank/scripts/setup.sh
@@ -154,41 +182,15 @@ The first part of the setup process will require the following information below
     
     Terraform will then run in the background and produce the following output on Cloud Shell:
     ```bash
-    Terraforming Resources on OCI...
+    Terraforming Resources on OCI...STARTED
     Preparing terraform...DONE
     Running terraform provisioning in the background...DONE
     ```
 
 ## Task 5: Prepare other required information
-The second part of the setup process will require the following information below for later purposes. Retrieve these information and keep these in your notes (with _exception_ to passwords which do not have to retrieved). Click on the drop downs below for more information on how to retrieve these from the OCI Console.
+Once setup completes, you will need to run and setup the following manually for the labs.
 
-<strong style="color: #C74634">Note</strong>: The Autonomous Database sets minimum standards for passwords, and the default profile sets parameters to limit the number of failed login attempts. 
-
-* The password must be between 12 and 30 characters long and must include at least one uppercase letter, one lowercase letter, and one numeric character.
-* The password cannot contain the username.
-* The password cannot be one of the last four passwords used for the same username.
-* The password cannot contain the double quote (") character.
-* The password must not be the same password that is set less than 24 hours ago.
-
-1. __Database Password__ - Enter a password (see above requirements)
-
-2. __Frontend Login Password__ - Enter a password 
-
-3. __User OCID__ - Oracle Cloud ID for the user to provision lab-related resources with
-
- ## How to Retrieve the User OCID
- The user OCID will look something like: `ocid1.user.oc1....<unique_ID>`
-
-    Locate your menu bar in the Cloud Console and click the person icon at the far upper right. From the drop-down menu, select your user's name. Note, sometimes the name link is missing in which case select the **User Settings** link. Do not select the **Tenancy** link.
-
-    ![Obtain Oracle Cloud Infrastructure User OCID](images/get-user-ocid.png " ")
-
-    Click Show to see the details and then click Copy to copy the user OCID to the clipboard, paste in the copied data in console.
-
-    ![Oracle Cloud Infrastructure User OCID Example](images/example-user-ocid.png " ")
-
-Once setup completes and you have provided the above information, there are a few more information and files to set that can only be done manually:
-1. Create an __Oracle Account__
+<!-- 1. Create an __Oracle Account__
     
     <strong style="color: #C74634">Note</strong>: Keep your Oracle Account credentials in your notes. These will be referenced as `oracle-sso-email-address` and `oracle-sso-password` in __Lab 2__
 
@@ -199,51 +201,62 @@ Once setup completes and you have provided the above information, there are a fe
 
     An Oracle Account provides access to pull pre-built Database docker images from the official Oracle Container Registry.
 
-    To create an account, navigate to the following link: [Create Oracle Account](https://profile.oracle.com/myprofile/account/create-account.jspx). Since you will be using the Oracle Database Express Edition, there are no further actions to take. Once you have completed creating an account, you can return to the next step below.
+    To create an account, navigate to the following link: [Create Oracle Account](https://profile.oracle.com/myprofile/account/create-account.jspx). Since you will be using the Oracle Database Express Edition, there are no further actions to take. Once you have completed creating an account, you can return to the next step below. -->
 
-2. Upload the API Signing Key's __Private Key__
+1. Upload the API Signing Key's __Private Key__
+
+    This private key will be used to create a secret to authorize the DB operator for Kubernetes to do DB operations on your own OCI Tenancy.
 
  ## How to upload the Private Key
-
-    The private key is used to authorize Database provisioning with the Oracle DB Operator with API Key Authentication.
-
-    To upload the Privey Key file, click on the Gear icon on the right. 
+    To upload the Privey Key file, click on the Gear icon on the right of the screen when Cloud Shell is opened. 
     
     ![Upload File to Bash](./images/upload-key.png)
 
-    This will be open the form for uploading. Select your private key file and upload it.
+    This will be open the form for uploading. Select your private key file and upload it. 
+
+    <strong style="color: #C74634">Note</strong>: We recommend renaming the private key file to `private.pem` before uploading.
+
     ![Upload File to Bash](./images/select-and-upload.png)
     
-
-
     The Cloud Shell upload functionality will place the private key inside the root directory. You can then run the following:
     ```bash
     <copy>
-    mv <private_key_filename> $CB_STATE_DIR/private.pem && chmod 400 $CB_STATE_DIR/private.pem
+    (cd ~ ; mv <private_key_filename> $CB_STATE_DIR/private.pem && chmod 400 $CB_STATE_DIR/private.pem)
     </copy>
     ```
-
-    <strong style="color: #C74634">Note</strong>: Replace `<private_key_filename>` above with the name of the private key file.
-
-3. Set the __Java Version to 11__
-
- ## How to set the Java Version on Cloud Shell
- 
-    Cloud Shell offers a command to switch java versions. To do this, run the following command below. If `openjdk-11.0.16` is not a recognized version, you can run `csruntimectl java list` instead to view the available versions to set versions to, with which you can run `csruntimectl java set` with.
-
-    ```bash
+    or, if you renamed the private key file to `private.pem`, you can run the below command instead.
+    ```
     <copy>
-    csruntimectl java set openjdk-11.0.16
+    (cd ~ ; mv private.pem $CB_STATE_DIR/private.pem && chmod 400 $CB_STATE_DIR/private.pem)
     </copy>
     ```
 
-4. Create an __Auth Token__
+    <strong style="color: #C746-34">Note</strong>: Replace `<private_key_filename>` above with the name of the private key file.
+
+2. Create or Provide a previous __Auth Token__
+
+
+    Auth tokens are used to authenticate with when logging on your tenancy's container registry. This is required for pushing the lab's Cloudbank container images. If you are opting to reuse an auth token, do note that this information is only available upon creation.
  
   <strong style="color: #C74634">Note</strong>: Keep the Auth Token in your notes.
 
  ## How to create an Auth Token
 
-    Auth tokens are used to authenticate with when logging on your tenancy's container registry to push the Lab's application container images.
+    To create an Auth Token, navigate again to __User Settings__ on the top right of the OCI Console. From the user details page, under Auth Tokens, generate a new token.
+
+    You can add any value for the description to help you identify and remember the use for this auth-token. You can for example set:
+
+    ```
+    <copy>
+    cloudbank-livelab auth-token-for-docker-login
+    </copy>
+    ```
+
+    ![Auth Token](./images/auth-token.png)
+
+    After clicking `Generate Token`, make sure to copy the token before closing and add it to your notes.
+
+    ![Copy Generated Token](./images/copy-generated-token.png)
 
 
 
@@ -261,13 +274,17 @@ To setup your kubeconfig:
     ![Navigate to OKE](./images/navigate-to-cloudbank.png)
 
 2. Click on [Access Cluster]
-3. Copy the `oci ce cluster create-kubeconfig` command, paste and run it on Cloud Shell.
+3. Copy the `oci ce cluster create-kubeconfig` command
 
     ![Navigate to OKE](./images/access-cluster.png)
+
+4. Paste the command on cloud shell and run it
 
     This will produce an output similar to:
 
     ```bash
+    labuser@cloudshell:~ (us-phoenix-1)$ oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.phx...<hidden> --file $HOME/.kube/config --region us-phoenix-1 --token-version 2.0.0  --kube-endpoint PUBLIC_ENDPOINT
+
     New config written to the Kubeconfig file /home/labuser/.kube/config
     ```
 
@@ -278,7 +295,7 @@ Once the KubeConfig has been created, navigate to the lab directory `cbworkshop`
 cd $CB_STATE_DIR
 </copy>
 ```
-From this directory, you can run the init script to initialize the cluster:
+From this directory, you can run the init script to initialize the cluster and create a namespace, and secrets not related to the operator, but to the cloudbank application:
 ```bash
 <copy>
 ./init-cluster.sh
