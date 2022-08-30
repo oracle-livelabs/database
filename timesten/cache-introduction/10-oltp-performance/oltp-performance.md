@@ -6,7 +6,7 @@ In this lab, you will use a simple benchmark program to run a (read-only) OLTP w
 
 You will use a standard TimesTen benchmark program, TptBm, in this case a version that connects to the target database using the Oracle Call Interface (OCI) API. The program can run against either TimesTen or Oracle and performs the same operations in both cases. The source code for the tptbmOCI program is available in the _host VM_ in the directory **~/lab/src**.
 
-**Estimated Lab Time:** 5 minutes
+**Estimated Lab Time:** 6 minutes
 
 There is a single table used for this benchmark, APPUSER.VPN_USERS:
 

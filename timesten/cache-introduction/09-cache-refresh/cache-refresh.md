@@ -6,7 +6,7 @@ With READONLY cache groups, the Oracle database is the master of the data. The d
 
 In this lab you will execute some DML statements on the tables in Oracle and observe those changes being automatically propagated to the corresponding tables cached in TimesTen.
 
-**Estimated Lab Time:** 5 minutes
+**Estimated Lab Time:** 10 minutes
 
 ### Objectives
 
@@ -27,6 +27,18 @@ This lab assumes that you:
 Your existing terminal session to tthost1 will be referred to as the **primary** session.
 
 1. Open a _second_ terminal session, as the user **oracle**, in the workshop compute instance, either via NoVNC or SSH. In that terminal session, connect to the TimesTen host (tthost1) using ssh. This session will be referred to as the **secondary** session.
+
+ If you are using SSH, then you can just create a second SSH session, as the **oracle** user, to the workshop compute instance and then in that session **ssh** into **tthost1**.
+
+ If you are using the NoVNC desktop then there are several ways to open an additional terminal window:
+ 
+ - Click on **Activities** in the linux Menu bar, _right_ click on the **Terminal** icon in the list that appears and choose **New Window**
+ 
+ - If you already have at least one terminal window open, click on the **Terminal** item in the Linux menu bar and choose **New window **
+
+ - _Double_ click the **Terminal** icon on the linux desktop.  
+
+ Once you have a new window, **ssh** into **tthost1**.
 
 ## Task 2: Verify the refresh of INSERT operations
 
