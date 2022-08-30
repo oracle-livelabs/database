@@ -185,7 +185,7 @@ Otherwise, log in to the Oracle Cloud.
 
 7.  Fuzzy searches
 
-    If you make a mistake or simply don't remember the exact spelling, you can do an __FUZZY__ search. It will find not only the original search word, but also all those similar to it.
+    If you make a mistake or simply don't remember the exact spelling, you can do a __FUZZY__ search. It will find not only the original search word, but also all those similar to it.
 
     ```
     <copy>
