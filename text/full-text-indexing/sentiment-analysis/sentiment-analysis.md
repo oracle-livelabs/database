@@ -216,9 +216,9 @@ The more training documents you can provide, the better the classifier will be. 
     ![insert category data](./images/cat-data.png " ")	
 	
 
-3.  Create an SVM sentiment classifier called "classifier_camera".
+3.  Create an SVM sentiment classifier.
 
-    The first step is to create a SENTIMENT\_CLASSIFIER preference
+    The first step is to create a SENTIMENT\_CLASSIFIER preference called "classifier\_camera".
 
     ```
     <copy>
