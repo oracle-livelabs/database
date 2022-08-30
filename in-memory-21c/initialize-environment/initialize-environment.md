@@ -59,15 +59,9 @@ This lab assumes you have:
 
     If all expected processes are shown in your output as seen above, then your environment is ready for the next task.  
 
-3. If you see questionable output(s), failure or down component(s), restart the service accordingly
+3. If you see questionable output(s) or failure or down component(s) check the Managing Startup Services section in Appendix 1.
 
-    ```
-    <copy>
-    sudo systemctl restart oracle-database
-    sudo systemctl restart oracle-db-listener
-    </copy>
-    ```
-
+  
 ## Task 2: Initialize Database for In-Memory Use Cases
 
 1. From your remote desktop session as user *oracle*, run the block below
@@ -90,6 +84,17 @@ This lab assumes you have:
 You may now [proceed to the next lab](#next).
 
 ## Appendix 1: Managing Startup Services
+
+If you find that the listener or database services have not started then you can issue the following commands to restart one or both of the services:
+
+  ```
+    <copy>
+    sudo systemctl restart oracle-database
+    sudo systemctl restart oracle-db-listener
+    </copy>
+    ```
+
+The following is a list of the commands to start, stop and determine the status of each of the Lab database services.
 
 1. Database service (All databases and Standard Listener).
 
