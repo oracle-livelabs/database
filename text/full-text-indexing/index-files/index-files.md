@@ -98,7 +98,7 @@ Open the Database Actions tab in your browser (or reopen it using earlier instru
 
 2.   Load the files from Object Store into your table. 
 
-    Run this once for each file you've stored, substituting in the PAR URL (that you saved in the previous step) and a short name or description.
+    Run this once for **each file** you've stored, substituting in the PAR URL (that you saved in the previous step) and a short name or description. Don't forget to give each file a different name/description.
 
     ```
     <copy>
