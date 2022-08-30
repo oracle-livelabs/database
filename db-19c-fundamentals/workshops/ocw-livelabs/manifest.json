@@ -27,11 +27,15 @@
     {
         "title": "Lab: SQL Updates",
         "filename": "../../sql-macros/sql-macros.md"
-},
-{
-    "title": "Lab: Terminate ADB & Bucket",
-    "filename": "../../cleanup/terminate-adb-bucket.md"
-},
+    },
+    {
+        "title": "Lab: Terminate ADB & Bucket",
+        "filename": "../../cleanup/terminate-adb-bucket.md"
+    },
+    {
+        "title": "Lab: CloudWorld Support Lab",
+        "filename": "https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
+    },
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",

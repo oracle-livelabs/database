@@ -8,6 +8,10 @@ In order to create a collection all you have to specify is the collection's name
 
 Estimated Time: 15 minutes
 
+Watch the video below for a quick walk through of the lab.
+
+[Work with JSON in the database](https://youtu.be/I1g3PhWXrxQ)
+
 ### Objectives
 
 In this lab, you will:
