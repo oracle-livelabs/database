@@ -3,10 +3,10 @@
 ## Introduction
 Watch the video below to get an overview of joins using Database In-Memory.
 
-[](youtube:y3tQeVGuo6g)
+[Youtube video](youtube:y3tQeVGuo6g)
 
 Watch the video below for a walk through of the In-memory Joins and Aggregations lab.
-[](youtube:PC1kWntRrqg)
+[Youtube video](youtube:PC1kWntRrqg)
 
 ### Objectives
 
@@ -46,7 +46,7 @@ Up until now we have been focused on queries that scan only one table, the LINEO
     </copy>
     ````
 
-    ![](images/num1.png " ")
+    ![query image](images/num1.png " ")
 
 2.  Join the LINEORDER and DATE\_DIM tables in a "What If" style query that calculates the amount of revenue increase that would have resulted from eliminating certain company-wide discounts in a given percentage range for products shipped on a given day (Christmas eve 1996).  
 
@@ -80,7 +80,7 @@ Up until now we have been focused on queries that scan only one table, the LINEO
     </copy>
     ```
 
-    ![](images/num2.png)
+    ![query image](images/num2.png)
 
     The IM column store has no problem executing a query with a join because it is able to take advantage of Bloom filters.  It’s easy to identify Bloom filters in the execution plan. They will appear in two places, at creation time and again when it is applied. Look at the highlighted areas in the plan above. You can also see what join condition was used to build the Bloom filter by looking at the predicate information under the plan.
 
@@ -118,7 +118,7 @@ Up until now we have been focused on queries that scan only one table, the LINEO
     @../imstats.sql
     </copy>
     ```
-    ![](images/num3.png)
+    ![query image](images/num3.png)
 
 4. Let’s try a more complex query that encompasses three joins and an aggregation to our query. This time our query will compare the revenue for different product classes, from suppliers in a certain region for the year 1997. This query returns more data than the others we have looked at so far so we will use parallel execution to speed up the elapsed times so we don’t need to wait too long for the results.
 
@@ -158,9 +158,9 @@ Up until now we have been focused on queries that scan only one table, the LINEO
     </copy>
     ```
 
-    ![](images/num4a.png)
+    ![query image](images/num4a.png)
 
-    ![](images/num4b.png)
+    ![query image](images/num4b.png)
 
 
     In this query, three Bloom filters have been created and applied to the scan of the LINEORDER table, one for the join to DATE\_DIM table, one for the join to the PART table, and one for the join to the SUPPLIER table. How is Oracle able to apply three Bloom filters when the join order would imply that the LINEORDER is accessed before the SUPPLER table?
@@ -206,9 +206,9 @@ Up until now we have been focused on queries that scan only one table, the LINEO
     </copy>
     ```
 
-    ![](images/3join_buffer_p1.png)
+    ![query image](images/3join_buffer_p1.png)
 
-    ![](images/3join_buffer_p2.png)
+    ![query image](images/3join_buffer_p2.png)
 
 
     As you can see, the IM column store continues to out-perform the buffer cache query.
@@ -254,9 +254,9 @@ Oracle has introduced a new Optimizer transformation, called Vector Group By. Th
     </copy>
     ```
 
-    ![](images/vgb-im-p1.png)
+    ![query image](images/vgb-im-p1.png)
 
-    ![](images/vgb-im-p2.png)
+    ![query image](images/vgb-im-p2.png)
 
 
   Our query is more complex now and if you look closely at the execution plan you will see the creation and use of :KV000n structures which are the Key Vectors along with the Vector Group By operation.
@@ -301,9 +301,9 @@ Oracle has introduced a new Optimizer transformation, called Vector Group By. Th
     </copy>
     ```
 
-    ![](images/11-novgb-im-p1.png)
+    ![query image](images/11-novgb-im-p1.png)
 
-    ![](images/11-novgb-im-p2.png)
+    ![query image](images/11-novgb-im-p2.png)
 
     We went from 0.99 seconds to 2.15 seconds. Note that the second query still ran in-memory and even took advantage of Bloom filters, but it ran twice as slow as the vector group by plan.
 
@@ -348,9 +348,9 @@ Oracle has introduced a new Optimizer transformation, called Vector Group By. Th
     </copy>
     ```
 
-   ![](images/12-vgb-buffer-p1.png)
+   ![query image](images/12-vgb-buffer-p1.png)
 
-   ![](images/12-vgb-buffer-p2.png)
+   ![query image](images/12-vgb-buffer-p2.png)
 
 
     Note that like hash joins with Bloom filters, vector group by with key vectors can be performed on row-store objects. This only requires that Database In-Memory be enabled and shows just how flexible Database In-Memory is. You don't have to have all objects populated in the IM column store. Of course, the row store objects cannot be accessed as fast as column-store objects and cannot take advantage of all of the performance features available to IM column store scans.
@@ -396,9 +396,9 @@ Oracle has introduced a new Optimizer transformation, called Vector Group By. Th
     </copy>
     ```
 
-   ![](images/13-novgb-buffer-p1.png)
+   ![query image](images/13-novgb-buffer-p1.png)
 
-   ![](images/13-novgb-buffer-p2.png)
+   ![query image](images/13-novgb-buffer-p2.png)
 
 
    Compare the time from Step 6 at 0.99 seconds to the time running the query in the row-store of 7.17 seconds. Quite a dramatic difference. This is why we say that you can expect a 3-8x performance improvement with In-Memory Aggregation.
