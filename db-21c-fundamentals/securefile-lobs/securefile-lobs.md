@@ -129,7 +129,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 ## Task 2: Shrink the SecureFile LOB after rows inserted and updated
 
 <if type="atp">
-1.  Create a Large Object table
+1.  You can create a Large Object table as below. In our example, the table is already created.
     ```
     SQL> <copy>
     CREATE TABLE hr.t1 ( a CLOB) LOB(a) STORE AS SECUREFILE TABLESPACE data;

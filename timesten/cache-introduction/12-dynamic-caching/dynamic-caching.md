@@ -4,7 +4,7 @@
 
 In this lab, you will learn the difference between static and dynamic cache groups.
 
-Estimated Time: **5 minutes**
+**Estimated Lab Time:** 5 minutes
 
 So far, the cache groups that you have been working with are what are known as static cache groups. With static cache groups, you pre-load the cache group with the data that you wish to cache and then the TimesTen autorefresh mechanism ensures that any inserts, updates or deletes that occur on Oracle are captured and propagated to the cache to refresh the cached tables.
 
@@ -24,17 +24,14 @@ As a result, a cache miss is significantly more expensive than a cache hit since
 
 ### Prerequisites
 
-This lab assumes that you have:
+This lab assumes that you:
 
-- Completed all the previous labs in this workshop, in sequence.
+- Have completed all the previous labs in this workshop, in sequence.
+- Have an open terminal session in the workshop compute instance, either via NoVNC or SSH, and that session is logged into the TimesTen host (tthost1).
 
-## Task 1: Connect to the environment
+## Task 1: Create a DYNAMIC READONLY cache group
 
-If you do not already have an active terminal session, connect to the OCI compute instance and open a terminal session, as the user **oracle**. In that terminal session, connect to the TimesTen host (tthost1) using ssh.
-
-## Task 2: Create a DYNAMIC READONLY cache group
-
-Use ttIsql to connect to the cache as the APPUSER user:
+1. Use ttIsql to connect to the cache as the APPUSER user:
 
 ```
 <copy>
@@ -51,7 +48,7 @@ Connection successful: DSN=sampledb;UID=appuser;DataStore=/tt/db/sampledb;Databa
 (Default setting AutoCommit=1)
 Command> 
 ```
-Create a dynamic readonly cache group encompassing the **PARENT** and **CHILD** tables, which are related through a foreign key:
+2. Create a _dynamic_ readonly cache group encompassing the **PARENT** and **CHILD** tables, which are related through a foreign key:
 
 ```
 <copy>
@@ -76,7 +73,7 @@ AGING LRU ON;
 </copy>
 ```
 
-Display information about the cache group:
+3. Display information about the cache group:
 
 ```
 <copy>
@@ -111,7 +108,7 @@ Autorefresh State: On
 
 This is because you do not need to perform an initial load for a dynamic cache group (though it is possible to do so).
 
-Check the state of the tables:
+4. Check the state of the tables:
 
 ```
 <copy>
@@ -137,9 +134,9 @@ select count(*) from appuser.child;
 
 There is no data in the cached tables.
 
-## Task 3: Run some queries and observe the behaviour
+## Task 2: Run some queries and observe the behaviour
 
-First, run a query that references the root table's (PARENT table) primary key:
+1. First, run a query that references the root table's (PARENT table) primary key:
 
 ```
 <copy>
@@ -152,7 +149,9 @@ select * from parent where parent_id = 4;
 1 row found.
 ```
 
-Even though the table was empty, the query returns a result! Now examine the contents of both tables again:
+Even though the table was empty, the query returns a result!
+
+2. Now examine the contents of both tables again:
 
 ```
 <copy>
@@ -182,7 +181,9 @@ Observe that the row that was queried now exists in the PARENT table and the thr
 
 Now that these rows now exist in the cache they will satisfy future read requests. If any of these rows are modified in Oracle, the TimesTen autorefresh mechanism will capture the changes and propagate them to the cache.
 
-Let’s try something a little more sophisticated. Query a row in the CHILD table with a join back to the PARENT table:
+Let’s try something a little more sophisticated. 
+
+3. Query a row in the CHILD table with a join back to the PARENT table:
 
 ```
 <copy>
@@ -195,7 +196,7 @@ select p.parent_id, p.parent_c1, c.child_c1 from parent p, child c where c.child
 1 row found.
 ```
 
-Now check again to see the contents of both tables.
+4. Now check again to see the contents of both tables.
 
 ```
 <copy>
@@ -224,9 +225,9 @@ select * from child;
 5 rows found.
 ```
 
-Here you queried against a specific child_id value and joined back to the parent table. TimesTen figured things out and dynamically loaded all the expected cache instances. Dynamic caching can be very useful for appropriate use cases.
+Here you queried against a specific *child_id* value and joined back to the parent table. TimesTen figured things out and dynamically loaded all the expected cache instances. Dynamic caching can be very useful for specific use cases.
 
-Disconnect from the cache.
+5. Disconnect from the cache.
 
 ```
 <copy>
@@ -240,7 +241,9 @@ Disconnecting...
 Done.
 ```
 
-You can now *proceed to the next lab*. Keep your primary terminal session open for use in the next lab.
+You can now *proceed to the next lab*. 
+
+Keep your primary session open for use in the next lab.
 
 ## Acknowledgements
 

@@ -31,13 +31,14 @@ In this lab, you will:
 1. Run the following command on the FPP Server (Est. 14-15 minutes): password is always FPPll##123 unless you have changed it
 
     ```
-    rhpctl add database -workingcopy  WC_db_19_9_0_FPPC  \
+    rhpctl add database -workingcopy  WC_db_previous_FPPC  \
       -dbname fpplive1_site1 -datafileDestination DATA -dbtype SINGLE \
       -sudouser opc -sudopath /bin/sudo
     ```
   ![](./images/fpp.png)
+  ![](./images/fpp2.png)
 
-  Notice that you have not specified the target name: the FPP server knows what is the target node (or cluster) because the working copy named `WC_db_19_9_0_FPPC` has been provisioned there. This information is stored in the FPP metadata schema.
+  Notice that you have not specified the target name: the FPP server knows what is the target node (or cluster) because the working copy named `WC_db_previous_FPPC` has been provisioned there. This information is stored in the FPP metadata schema.
 
 ## Task 2: Verify the new database
 

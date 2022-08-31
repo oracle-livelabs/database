@@ -157,7 +157,7 @@ pip3 install pymysql
 	
 	```sql
 <copy>
-%sql mysql+pysql://admin:<password>@<mysql_private_ip>/airportdb
+%sql mysql+pymysql://admin:<password>@<mysql_private_ip>/airportdb
 </copy>
 ```
 

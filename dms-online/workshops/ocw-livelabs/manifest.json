@@ -1,0 +1,43 @@
+{
+    "workshoptitle": "Oracle CloudWorld 2022 - HOL4096",
+    "include": {"starter-file.sql":"../../files/starter-file.sql",
+                "sample.json":"../../files/sample.json",
+                "injected-step.md":"../../files/injected-step.md"},
+      "help": "livelabs-help-db_us@oracle.com",
+      "tutorials": [
+        
+        {
+            "title": "Lab 3: Create Source Database",
+            "filename": "../../create-source-database/create-source-database.md"
+        },
+        {
+            "title": "Lab 4: Create Target Database",
+            "filename": "../../create-target-database/create-target-database.md"
+        },
+        {
+            "title": "Lab 5: Configure GoldenGate hub ",
+            "filename": "../../goldengate-hub/goldengate-hub.md"
+        },
+        {
+            "title": "Lab 6: Prepare source and target databases ",
+            "filename": "../../prepare-source-and-target-databases/prepare-source-and-target-databases.md"
+        },
+        {
+            "title": "Lab 7: Register and Setup Migration",
+            "filename": "../../register-and-migrate/create-registered-databases.md"
+        },
+        {
+            "title": "Lab 8: Validate and Run Migration",
+            "filename": "../../validate-and-run/validate-migration.md"
+        },
+        {
+            "title": "CloudWorld Support Lab",
+            "filename": "https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
+        },
+        {
+          "title": "Need Help?",
+          "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
+          "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+        }
+    ]
+}

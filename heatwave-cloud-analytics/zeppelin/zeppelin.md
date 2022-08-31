@@ -85,7 +85,7 @@ In this lab, you will:
     ```
 	![Ingress IP](images/ingress.png)
 
-6. Access the deployed Zeppelin application. Point your browser to **http://&lt;INGRESS&#95;PUBLIC&#95;IP&#95;ADDRESS&gt;/zeppelin/**
+6. Access the deployed Zeppelin application. Point your browser to **https://&lt;INGRESS&#95;PUBLIC&#95;IP&#95;ADDRESS&gt;/zeppelin/**
 
     >Note: Please ensure you have the closing **/** in the url, that is, **zeppelin/**
 
