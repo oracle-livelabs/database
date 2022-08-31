@@ -19,7 +19,7 @@ Estimated Lab Time: 25 minutes
 
 Terraform provides a reusable process for creating infrastructure. In some cases, like this one, you don't have to know anything about how the process works. You can deploy different pre-designed infrastructure designs for many different purposes, which frees up users to focus on their projects. This will create your cloud resources (VCN, Compute Image, Autonomous Transaction Processing Instance, among other things).
 
-1.  We provide an archive containing the Terraform configuration and sample code. You can download it from [here: node-mysql-hol-tf.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/jyHA4nclWcTaekNIdpKPq3u2gsLb00v_1mmRKDIuOEsp--D6GJWS_tMrqGmb85R2/n/c4u04/b/livelabsfiles/o/labfiles/node-mysql-hol-tf.zip)
+1.  We provide an archive containing the Terraform configuration and sample code. You can download it from [here: node-mysql-hol-tf.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/LNAcA6wNFvhkvHGPcWIbKlyGkicSOVCIgWLIu6t7W2BQfwq2NSLCsXpTL9wVzjuP/n/c4u04/b/livelabsfiles/o/developer-library/node-mysql-hol-tf.zip )
 
  *Note: Keep the file around! We will refer to it later!*
 
