@@ -1065,6 +1065,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
 
 This lab demonstrated how Database In-Memory can optimize the access of JSON data, making it feasible to perform analytic queries on JSON data.
 
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
