@@ -5,6 +5,10 @@ In this lab, you will explore Hybrid Partitioning, a new feature introduced in O
 
 Estimated Lab Time:  15 minutes
 
+Watch the video below for a quick walk through of the lab.
+
+[Work with Partitioning in the database](https://youtu.be/jxA80ppiDXw)
+
 ### About Partitioning
 
 Partitioning can provide tremendous benefit to a wide variety of applications by improving performance, manageability, and availability. It is not unusual for partitioning to greatly improve the performance of certain queries or maintenance operations. Moreover, partitioning can greatly simplify common administration tasks.
@@ -64,7 +68,7 @@ First we will create an empty Object Storage bucket as our external partition.
 
 7. Lets name our token HPL (short for Hybrid Partitioning Lab) under the Description and press **Generate Token**. 
 
-8. Here you need to copy this token ad it will not be shown again. You can press Show or Copy and save this somewhere you will have access to it later (a .txt file on the your desktop will work fine).
+8. Here you need to copy this token as it will not be shown again. You can press Show or Copy and save this somewhere you will have access to it later (a .txt file on the your desktop will work fine).
 
   ![Copy the token](./images/copy-token.png) 
 
@@ -290,7 +294,7 @@ Hybrid Partitioned Tables support many partition level operations, including:
     However lets first try and add data to our Sales_old partition located on Object Storage. 
      ```
     <copy>
-       INSERT INTO SALES_OLD VALUES (1009, 999, '26-JUL-2009', 9, 09, 10, 70);
+       INSERT INTO SALES_BY_YEAR PARTITION(SALES_OLD) VALUES (1009, 999, '26-JUL-2009', 9, 09, 10, 70);
     </copy>
     ```
 
