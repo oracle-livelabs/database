@@ -51,6 +51,7 @@ In this lab, you will:
 <if type="freetier">
     ![Check the workload type on the left](./images/compartments.png " ")
 </if>
+    ![Check the workload type on the left](./images/workload-type.png " ")
 
 <if type="freetier">
    > **Note:** Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
@@ -160,5 +161,5 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 
 - **Author** - Roger Ford, Principal Product Manager, Oracle Database
-- **Contributors** - Kamryn Vinson, Andres Quintana, James Zheng, Arabella Yao
-- **Last Updated By/Date** - Arabella Yao, Database Product Manager, July 2022
+- **Contributors** - Kamryn Vinson, Andres Quintana, James Zheng
+- **Last Updated By/Date** - Roger Ford, March 2022
