@@ -612,7 +612,7 @@ SQL>
 
 In this lab you saw that the IM column store is configured by setting the initialization parameter INMEMORY_SIZE. The IM column store is a new static pool in the SGA, and once allocated it can be resized dynamically, but it is not managed by either of the automatic SGA memory features.
 
-You also had an opportunity to populate and view objects in the IM column store and to see how much memory they use. In this lab we populated five tables into the IM column store, and the LINEORDER table is the largest of the tables populated with over 23 million rows. You may have noticed that it is also a partitioned table. We will be using that attribute in later labs.
+You also had an opportunity to populate and view objects in the IM column store and to see how much memory they use. In this lab we populated five tables into the IM column store, and the LINEORDER table is the largest of the tables populated with over 41 million rows. You may have noticed that it is also a partitioned table. We will be using that attribute in later labs.
 
 Remember that the population speed depends on the CPU capacity of the system as the in-memory data compression is a CPU intensive operation. The more CPU and processes you allocate the faster the populations will occur.
 

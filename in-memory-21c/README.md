@@ -1,7 +1,9 @@
-# Oracle Database In-Memory Github
+# Oracle Database In-Memory 21c Github
 
 
-Oracle Database In-Memory (Database In-Memory) is a suite of features, first introduced in Oracle Database 12c, that greatly improves performance for real-time analytics and mixed workloads. The In-Memory Column Store (IM column store) is a key feature of Database In-Memory. The In-Memory Column Store (IM column store) stores tables and partitions in memory using a columnar format optimized for rapid scans. Oracle Database uses a sophisticated architecture to manage data in columnar and row formats simultaneously. 
+Oracle Database In-Memory (Database In-Memory) is a product, first introduced in Oracle Database 12c, that improves the performance of analytic queries by orders of magnitude. It makes it possible to enable real-time analytics in mixed workload environments. Since it is fully integrated into Oracle Database and requires no application changes to use, it can be used in any Oracle Database environment where existing reporting or analytic workloads exist to provide orders of magnitude performance improvements.
+
+The In-Memory Column Store (IM column store) is a key feature of Database In-Memory. The In-Memory Column Store (IM column store) stores tables and partitions in memory using a columnar format optimized for rapid scans. Oracle Database uses a sophisticated architecture to manage data in columnar and row formats simultaneously. This lab will explore how Database In-Memory works and the newer features that have been added in Oracle Database 19c and 21c.
 
 [Run a workshop now!](http://developer.oracle.com/livelabs)
 

@@ -18,14 +18,29 @@
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 3: Querying the In-Memory Column Store",
+      "title": "Lab 3: Setting up the In-Memory Column Store",
+      "description": "Populating and administering the In-Memory column store",
+      "filename": "../../setup/setup.md"
+    },
+    {
+      "title": "Lab 4: Querying the In-Memory Column Store",
       "description": "Queries on In-Memory Column Store",
       "filename": "../../queries/queries.md"
     },
     {
-      "title": "Lab 4: Joins and Aggregation",
+      "title": "Lab 5: Joins and Aggregation",
       "description": "In-Memory Joins and Aggregation",
       "filename": "../../joins-aggregations/joins-aggregations.md"
+    },
+    {
+      "title": "Lab 6: JSON and the In-Memory column store",
+      "description": "Using JSON with the In-Memory column store",
+      "filename": "../../json/json.md"
+    },
+    {
+      "title": "Lab 7: Automatic In-Memory Level High",
+      "description": "Using Automatic In-Memory with level high",
+      "filename": "../../aim-high/aim-high.md"
     },
     {
       "title": "Need Help?",

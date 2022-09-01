@@ -42,7 +42,7 @@ Database In-Memory Channel
 Oracle Database Product Management Videos on In-Memory
 <a href="https://www.youtube.com/channel/UCr6mzwq_gcdsefQWBI72wIQ/search?query=in-memory">![query image](./images/youtube.png " ") </a>
 
-Please proceed to the next lab.
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
