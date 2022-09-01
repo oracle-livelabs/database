@@ -1453,6 +1453,7 @@ You also got to see just how sophisticated the Oracle Optimizer has become over 
 
 Oracle Database adds In-Memory database functionality to existing databases, and transparently accelerates analytics by orders of magnitude while simultaneously speeding up mixed-workload OLTP. With Oracle Database In-Memory, users get immediate answers to business questions that previously took hours.
 
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
