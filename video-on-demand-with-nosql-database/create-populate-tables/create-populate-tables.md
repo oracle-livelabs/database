@@ -58,7 +58,7 @@ Enter in 10,10, and 5 respectively.
    ![create-reserve](./images/create-reserve.png)
 
    Next enter a **name** for your table, a **primary key** and a **column**
-   and click **Set as a shard key.** For this example, we used freeTest as the
+   and click **Set as a shard key.** For this example, we used test as the
    name, pkey with a type of integer as the primary key, and name with a type
    of string as an additional column.
 
@@ -70,7 +70,7 @@ Enter in 10,10, and 5 respectively.
   primary key, as well as adding many additional columns. You can create simple
   or more complex tables with this interface.
 
-7. After clicking **Create table** you will be brought to the 'Tables' screen. This screen shows you a list of tables you have created, as well as basic information about the table. One important thing to notice is that our table has a status of 'Active' which means we are ready to load data into our table. If you created an 'Always Free' table, then a tag that is attached to that table. This lets you know it is an always free table. Without the tag, then it is a paid table.
+7. After clicking **Create table** you will be brought to the 'Tables' screen. This screen shows you a list of tables you have created, as well as basic information about the table. One important thing to notice is that our table has a status of 'Active' which means we are ready to load data into our table.
 
     ![my-table](./images/my-table.png)
 
@@ -92,7 +92,7 @@ we have created some shell scripts and files that will assist you in this Task. 
 
     ```
     <copy>
-    source ~/demo-tv-streaming-app/env.sh
+    source ~/video-on-demand-with-nosql-database/env.sh
     </copy>
     ```
 3. Let's create NoSQL table using the Oracle Cloud Infrastructure Command Line Interface (CLI).
@@ -102,8 +102,8 @@ and  echo the DDL statement so you can see what is being created.
 
     ```
     <copy>
-    cd ~/demo-tv-streaming-app
-    DDL_TABLE=$(cat demo-tv/demo-stream-acct.ddl)
+    cd ~/video-on-demand-with-nosql-database
+    DDL_TABLE=$(cat demo-vod/demo-stream-acct.ddl)
     echo $DDL_TABLE
     </copy>
     ```
@@ -128,11 +128,11 @@ and  echo the DDL statement so you can see what is being created.
 
 ## Task 3:  Adding Data From the Oracle Cloud Console
 
-1. Make sure you see the 'Tables' screen. You should see 2 tables listed. You may or may not see the 'Always Free' tag, this displays depending on how you created the tables.  You may see different values for read units, write units and storage.
+1. Make sure you see the 'Tables' screen. You should see 2 tables listed. You may see different values for read units, write units and storage.
 
     ![table-screen](./images/table-screen.png)
 
-2. Let's start with the simple table we created in Task 1. Click **freeTest** table. The details screen that shows up, displays all the key information about the table. Explore that screen.
+2. Let's start with the simple table we created in Task 1. Click **test** table. The details screen that shows up, displays all the key information about the table. Explore that screen.
 
     ![my-test](./images/my-test.png)
 
@@ -140,7 +140,7 @@ and  echo the DDL statement so you can see what is being created.
 
     ![insert-row](./images/insert-row.png)
 
-4. On the 'Insert row' screen, you will see two ways to input data - a simple and advanced. For our freeTest table we will use the simple method. Enter a value for the **Pkey** column and the **Name** column. When done, press **Insert row.**
+4. On the 'Insert row' screen, you will see two ways to input data - a simple and advanced. For our test table we will use the simple method. Enter a value for the **Pkey** column and the **Name** column. When done, press **Insert row.**
 
     ![row-inserted](./images/row-inserted.png)
 
@@ -165,7 +165,7 @@ Command 1
   ````
   <copy>
   INSERT INTO stream_acct VALUES(
-  DEFAULT,
+  1,
   {
      "firstName" : "John",
      "lastName" : "Sanders",
@@ -214,6 +214,7 @@ Command 1
       ]
     }
   )
+  RETURNING *  
   </copy>
   ````
 
@@ -222,7 +223,7 @@ Command 1
   ````
   <copy>
   INSERT INTO stream_acct VALUES(
-  DEFAULT,
+  2,
   {
      "firstName" : "Tim",
      "lastName" : "Greenberg",
@@ -271,13 +272,14 @@ Command 1
       ]
     }
   )
+  RETURNING *
   </copy>
   ````
   Command 3
   ````
   <copy>
   INSERT INTO stream_acct VALUES(
-  DEFAULT,
+  3,
   {
      "firstName" : "Aniketh",
      "lastName" : "Shubham",
@@ -326,6 +328,7 @@ Command 1
       ]
     }
   )
+  RETURNING *  
   </copy>
   ````
 
@@ -339,7 +342,7 @@ Starting with the `stream_acct` demo table, we can go and look at the data we in
 
     ![table-row-select](./images/table-row-select.png)
 
-2. In the textbox **Query**, keep the text 'SELECT * FROM stream_acct' This will select all the rows from our table. Click **Run query**
+2. In the textbox **Query**, keep the text `SELECT * FROM stream_acct` This will select all the rows from our table. Click **Run query**
 
     ![run-query](./images/run-query.png)
 
@@ -348,7 +351,7 @@ Starting with the `stream_acct` demo table, we can go and look at the data we in
   ![explore-row-select](./images/explore-row-select.png)
 
 
-3. Go to the top left, press **Tables**, select the **freeTest** table, and look at the row inserted into that table.
+3. Go to the top left, press **Tables**, select the **test** table, and look at the row inserted into that table.
 
 You may now **proceed to the next lab.**
 

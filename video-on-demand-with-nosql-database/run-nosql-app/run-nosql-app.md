@@ -29,7 +29,7 @@ _Estimated Lab Time:_ 25 minutes
 
     ```
     <copy>
-    source ~/demo-tv-streaming-app/env.sh
+    source ~/video-on-demand-with-nosql-database/env.sh
     </copy>
     ```
 
@@ -53,13 +53,13 @@ The goal of this task is to understand the difference between the 2 data models 
 
     ```
     <copy>
-    cd ~/demo-tv-streaming-app/demo-tv
+    cd ~/video-on-demand-with-nosql-database/demo-vod
     npm install
     npm install oracle-nosqldb --save
     node index.js &
     </copy>
     ```
-    **Note:** This will start the "demo-tv" application in the background.
+    **Note:** This will start the "demo-vod" application in the background.
 
 2. After you complete step 1, you will see a message in the shell saying 'application running'
 
@@ -103,25 +103,25 @@ The goal of this task is to understand the difference between the 2 data models 
 
 6. Insert data into the stream_acct table.
 
-    This will be done using a curl command to transfer data over the network to the NoSQL store using the "demo-tvl" application. Execute in Cloud Shell.
+    This will be done using a curl command to transfer data over the network to the NoSQL store using the "demo-vod" application. Execute in Cloud Shell.
 
     ````
     <copy>
-    cd ~/demo-tv-streaming-app/exemple-graphql-query/
+    cd ~/video-on-demand-with-nosql-database/example-graphql-query/
     </copy>
     ````
 
     ````
     <copy>
-    sh createStream.sh
-    sh queryStreamById.sh
+    sh create-stream.sh
+    sh query-stream-by-id.sh
     </copy>
     ````
 
     ````
     <copy>
-    sh updateStream.sh
-    sh queryStreamById.sh
+    sh update-stream.sh
+    sh query-stream-by-id.sh
     </copy>
     ````
 
@@ -147,7 +147,7 @@ using a set of 46 shows
 
 ````
 <copy>
-cd ~/demo-tv-streaming-app/exemple-graphql-query/
+cd ~/video-on-demand-with-nosql-database/example-graphql-query/
 sh load.sh
 </copy>
 ````
@@ -158,7 +158,7 @@ ls: cannot access ../data/User: No such file or directory
 it means that you forgot to load the data
 ````
 <copy>
-cd ~/demo-tv-streaming-app/data/
+cd ~/video-on-demand-with-nosql-database/data/
 sh unzip.sh
 </copy>
 ````

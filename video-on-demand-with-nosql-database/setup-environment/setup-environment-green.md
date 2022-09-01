@@ -61,9 +61,13 @@ to get the Cloud Shell started.
 
     ````
     <copy>
-      cd $HOME
-      rm -rf demo-tv-streaming-app
-      git clone https://github.com/dario-vega/demo-tv-streaming-app.git
+    cd $HOME
+    rm -rf video-on-demand-with-nosql-database
+    git clone https://github.com/dario-vega/demo-tv-streaming-app.git
+    mv demo-tv-streaming-app video-on-demand-with-nosql-database
+    cd ~/video-on-demand-with-nosql-database/data/
+    sh unzip.sh
+    cd $HOME
     </copy>
     ````
 
@@ -71,7 +75,7 @@ to get the Cloud Shell started.
 
     ````
     <copy>
-      vi ~/demo-tv-streaming-app/env.sh
+      vi ~/video-on-demand-with-nosql-database/env.sh
     </copy>
     ````
 

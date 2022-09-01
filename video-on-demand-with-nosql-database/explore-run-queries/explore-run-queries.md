@@ -508,7 +508,7 @@ Select your compartment. Click the **freeTest** table, which will bring up the t
     ````
     <copy>
     cd ~
-    rm -rf *
+    rm -rf video-on-demand-with-nosql-database
     </copy>
     ````
 
@@ -531,7 +531,7 @@ Select your compartment. Click the **freeTest** table, which will bring up the t
     ````
     <copy>
     cd ~
-    rm -rf *
+    rm -rf video-on-demand-with-nosql-database
     </copy>
     ````
 
