@@ -33,6 +33,17 @@ The operator uses webhooks for validating user input before persisting it in Etc
 
     ![CertManager install output](./images/install-certificate-manage-output.png)
 
+    After installing the certificate manager, check that the status of the cert-manager deployments are `Running` before moving on to Step 2:
+
+    ```bash
+    <copy>
+    kubectl get deploy --namespace cert-manager
+    </copy>
+    ```
+
+
+    ![View Cert Manager Deployments](./images/kubectl-get-cert-manager.png)
+
 2. To install the operator in the cluster quickly, run the following command:
 
     ```bash
@@ -47,12 +58,19 @@ The operator uses webhooks for validating user input before persisting it in Etc
     ```bash
     <copy>kubectl get pods -n oracle-database-operator-system</copy>
     ```
-    ![Kubectl get pods](./images/kubectl-get-pods.png)
+    ![Kubectl get pods](./images/kubectl-get-operator-pods.png)
 
+  ## Troubleshooting
 
-    <strong style="color: #C74634">Note</strong>: If you encounter the following error, wait a few seconds (not more than a minute) and try running the command again.
+    If you encounter the following error, wait a few seconds (not more than a minute) and try running the command again.
     ```bash
     Error from server (InternalError): error when creating "https://raw.githubusercontent.com/oracle/oracle-database-operator/main/oracle-database-operator.yaml": Internal error occurred: failed calling webhook "webhook.cert-manager.io": failed to call webhook: Post "https://cert-manager-webhook.cert-manager.svc:443/mutate?timeout=10s": EOF
+    ```
+
+    If you encounter the following error, check whether the cert-manager deployments are running.
+
+    ```bash
+    Error from server (InternalError): error when creating "https://raw.githubusercontent.com/oracle/oracle-database-operator/main/oracle-database-operator.yaml": Internal error occurred: failed calling webhook "webhook.cert-manager.io": failed to call webhook: Post "https://cert-manager-webhook.cert-manager.svc:443/mutate?timeout=10s": context deadline exceeded
     ```
 
 ## Task 2: Setup Secrets

@@ -30,7 +30,7 @@ Cloud Shell is a small virtual machine running a "bash" shell which you access t
 
   > **Note:** Cloud Shell uses websockets to communicate between your browser and the service. If your browser has websockets disabled or uses a corporate proxy that has websockets disabled you will see an error message ("An unexpected error occurred") when attempting to start Cloud Shell from the console. You also can change the browser cookies settings for a specific site to allow the traffic from *.oracle.com
 
-## Task 2: Fork and clone the Lab Repository
+## Task 2: Fork and clone the Lab Repository 
 
 Open a browser and navigate to the Lab Repository Available <u><strong>[here](https://github.com/oracle/oci-react-samples.git)</strong></u>. You can also find the link below if you would like to copy-paste the link instead on your browser.
 ``` bash
@@ -38,6 +38,9 @@ Open a browser and navigate to the Lab Repository Available <u><strong>[here](ht
 https://github.com/oracle/oci-react-samples.git
 </copy>
 ```
+
+![Navigate to Lab](./images/navigate-to-lab-repository.png)
+
 Since the lab will require you to make changes to the code, you will need to have a fork of the lab. To fork, 
 1. Click on the Fork button at the top right. 
 2. Select your account as the owner and keep the repository name the same.
@@ -278,7 +281,7 @@ To setup your kubeconfig:
 
     ![Navigate to OKE](./images/access-cluster.png)
 
-4. Paste the command on cloud shell and run it
+4. Paste the provided oci-cli command on cloud shell and run it.
 
     This will produce an output similar to:
 

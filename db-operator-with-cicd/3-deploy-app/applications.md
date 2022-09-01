@@ -84,7 +84,7 @@ Estimated Time: XX minutes
 
 ## Task 2: Build and Deploy the applications
 
-1. To build the front-end and back-end applications, you can simply run the following:
+1. Build the front-end and back-end application by running the following command:
 
      ```bash
      <copy>
@@ -92,13 +92,19 @@ Estimated Time: XX minutes
      </copy>
      ```
 
-2. Once the applicatoin successfully builds, deploy the application by running
+     This command will install the dependencies, build the application and push to your OCI Registry.
+
+2. Once the applicatoin successfully builds, deploy the application by running the following command:
 
      ```bash
      <copy>
      (cd $CB_STATE_DIR ; ./cloudbank-deploy.sh)
      </copy>
      ```
+
+     This command will apply the deployment and service YAML files to run the application containers on your cluster. The following output is expected to appear:
+
+     ![View Deploy Output](./images/view-cloudbank-deploy-output.png)
 
 ## Task 3: Navigate through the CloudBank Application
 
@@ -127,6 +133,9 @@ The above command will give an output similar to what is shown in the below imag
      https://<ip-address>
      </copy>
      ```
+
+     <strong style="color: #C74634">Note</strong>: If you are using Chrome, you may encounter a warning that the connection is not private and no visible way to advance. This is because the certificate provided is self-signed and not a paid official certificate. As a workaround, type `thisisunsafe`.
+
 
 3. You will be prompted by the application to login. Use `cloudbank` as the username and the password you provided earlier on during setup. 
 

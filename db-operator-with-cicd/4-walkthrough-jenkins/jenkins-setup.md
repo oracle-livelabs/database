@@ -4,7 +4,6 @@
 
 For this lab, you will create multiple pipelines in Jenkins that will run jobs for different scenarios. Currently, you have a working environment from Lab 3, the previous lab. You can call this environment your TEST environment, where your QA team can test all features, bugs and updates developed and fixed after a sprint and for review before merging to master and tagging. You will also have a DEV branch that should contain all completed features and fixes that the team worked on. For those features and fixes, you will be creating and committing those changes into feature branches - which will create and provide an isolated, shared and easily-replaceable environment (currently only a database to demonstrate usage of the Oracle Database operator for Kubernetes). Once DEV is ready, you will create a `release-1.0` branch, which will update the TEST environment.
 
-< will add Jenkins flow below >
 
 <!-- This lab will walk you through CI/CD workflow using the pipeline built in the previous lab.
 
@@ -28,16 +27,34 @@ Estimated Time: XX minutes
 
 To allow Jenkins to access your repository, a Jenkins credentials must be made with your GitHub credentials. It is highly recommended to generate a restrictive Personal Access Token, with which we can control how much access and for how long we want to provide.
 
-1. On your GitHub account, click on your profile at the top right.
-2. Navigate to `Settings` → `Developer Settings` → `Personal access tokens` -> `Generate new token`
-3. Creating a new personal access token, you can add a Note to help you remember what the token is for, you can set `oracle-database-cbworkshop`
-4. Under `Select scopes`, Click on 
-   ```
-   repo - Full control of private repositories
-   ```
-5. At the bottom, click `Generate token` to complete the step
+1. On your GitHub account, click on your profile at the top right and select `Settings`.
 
-<strong style="color: #C74634">Note</strong>: Keep your Github Access Token in your notes.
+   ![Find Github Settings](./images/find-github-settings.png)
+
+2. From here, scroll down and go to `Developer Settings` on the left
+
+   ![Find Github Dev Settings](./images/find-github-dev-settings.png)
+
+3. Under Developer Settings, navigate to `Personal access tokens`, and click on `Generate new token`
+
+   ![Generate Access Token](./images/generate-new-token.png)
+
+4. Creating a new personal access token, you can add a Note to help you remember what the token is for. For example, you can set:
+    ```
+    <copy>
+    repo-access-only
+    </copy>
+    ```
+5. Under `Select scopes`, Select `repo`
+      ```
+      repo - Full control of private repositories
+      ```
+
+   ![Create Access Token](./images/creating-access-token.png)
+
+6. At the bottom of the page, click `Generate token` to complete the step and generate the token
+
+<strong style="color: #C74634">Note</strong>: Copy and keep your Github Access Token in your notes.
 
 ## Task 2: Configure Jenkins Credentials
 You will need to create some credentials in Jenkins to authorize access to both our Kubernetes cluster and GitHub, as well as webhook tokens.
@@ -51,24 +68,22 @@ To access the Jenkins Console, you will need to retrieve the IP address to visit
       terraform -chdir="$CB_STATE_DIR/terraform" output -json | jq -r .jenkins_public_ip.value
       </copy>
       ```
-2. Login as `admin` with the `Jenkins password` you supplied earlier. 
+2. Login as `admin` with the `Jenkins password` you supplied earlier.
+   
+   Retrieve the password from your notes, which you provided during setup.
 
-   You can also retrieve the Jenkins password you set earlier by
-   running the below command:
-
-      ```bash
-         <copy>
-         state_get .lab.pwd.jenkins
-         </copy>
-      ```
+   ![Login on Jenkins](./images/login-on-jenkins.png)
 
 3. Navigate to the Jenkins credentials store to create credentials
 
-      1. Manage Jenkins
-      2. Under Security (2nd Group from the Top), Manage Credentials
-      3. Click on Jenkins
-      4. Click on Global credentials
-      5. Add Credentials
+      1. From the home page, click on Manage Jenkins
+      2. From the Manage Jenkins page, Under Security, go to Manage Credentials
+      3. Hover over (global), the domain for the Jenkins Store (under Stores scoped to Jenkins)
+      4. Click on the dropdown
+      5. Click on Add credentials
+
+      ![Navigate to Credentials](./images/navigate-to-jenkins-credentials.png)
+      ![Login on Jenkins](./images/add-credentials.png)
 
 4. On __Cloud Shell__, run the following command to get a list of the credentials that need to be created. 
 
