@@ -81,7 +81,7 @@ This lab assumes you have:
 
     ![query image](./images/init-inmemory.png " ")
 
-You may now [proceed to the next lab](#next).
+You may now **proceed to the next lab**.
 
 ## Appendix 1: Managing Startup Services
 

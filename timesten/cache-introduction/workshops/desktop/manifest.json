@@ -9,62 +9,57 @@
       "filename": "../../01-introduction/introduction.md"
     },
     {
-      "title": "Lab 1: Using noVNC Remote Desktop",
-      "description": "Using noVNC Remote Desktop",
-      "filename": "../../00-novnc/novnc-livelabs.md"
+      "title": "Lab 1: Connect to the workshop compute instance",
+      "description": "Connect to the workshop compute instance",
+      "filename": "../../00-verify-compute/verify-compute-desktop.md"
     },
     {
-      "title": "Lab 2: Connect to the workshop compute instance using SSH",
-      "description": "How to connect to the Cloud Instance using SSH",
-      "filename": "../../03-connect-to-instance/connect-to-instance-desktop.md"
-    },
-    {
-      "title": "Lab 3: Initialize the workshop environment",
+      "title": "Lab 2: Initialize the workshop environment",
       "description": "Initialize the workshop environmentEnvironment",
       "filename": "../../04-initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 4: Create a TimesTen instance",
+      "title": "Lab 3: Create a TimesTen instance",
       "description": "Create and start a TimesTen instance and execute some basic commands",
       "filename": "../../05-create-instance/create-instance.md"
     },
     {
-      "title": "Lab 5: Prepare the Oracle database for caching",
+      "title": "Lab 4: Prepare the Oracle database for caching",
       "description": "Prepare the Oracle database to support TimesTen caching",
       "filename": "../../06-prepare-oracle/prepare-oracle.md"
     },
     {
-      "title": "Lab 6: Prepare the TimesTen cache",
+      "title": "Lab 5: Prepare the TimesTen cache",
       "description": "Create a TimesTen database and set it up as a cache",
       "filename": "../../07-prepare-cache/prepare-cache.md"
     },
     {
-      "title": "Lab 7: Load Oracle data into the cache",
+      "title": "Lab 6: Load Oracle data into the cache",
       "description": "Perform the initial data load from Oracle to establish the cache",
       "filename": "../../08-load-cache/load-cache.md"
     },
     {
-      "title": "Lab 8: Verify automatic cache refresh",
+      "title": "Lab 7: Verify automatic cache refresh",
       "description": "Demonstrate the cache refresh mechanism",
       "filename": "../../09-cache-refresh/cache-refresh.md"
     },
     {
-      "title": "Lab 9: Measure OLTP performance improvement",
+      "title": "Lab 8: Measure OLTP performance improvement",
       "description": "Run a simple OLTP benchmark to compare the performance with and without the cache",
       "filename": "../../10-oltp-performance/oltp-performance.md"
     },
     {
-      "title": "Lab 10: Measure query performance improvement",
+      "title": "Lab 9: Measure query performance improvement",
       "description": "Use a query timing program to compare query performance with and without the cache",
       "filename": "../../11-query-performance/query-performance.md"
     },
     {
-      "title": "Lab 11: Dynamic caching",
+      "title": "Lab 10: Dynamic caching",
       "filename": "../../12-dynamic-caching/dynamic-caching.md"
     },
     {
-      "title": "Lab 12: Shutdown the TimesTen cache and instance",
-      "description": "Perform an orderly shutdown of TimesTen",
+      "title": "Lab 11: Shut down the TimesTen cache and instance",
+      "description": "Perform an orderly shut down of TimesTen",
       "filename": "../../13-shutdown/shutdown.md"
     },
     {

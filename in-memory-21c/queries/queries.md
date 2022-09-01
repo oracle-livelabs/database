@@ -893,6 +893,8 @@ In this lab you had an opportunity to try out Oracle’s In-Memory performance c
 
 These significant performance improvements are possible because of Oracle’s unique in-memory columnar format that allows us to only scan the columns we need and to take full advantage of SIMD vector processing. We also got a little help from our new in-memory storage indexes, which allow us to prune out unnecessary data. Remember that with the IM column store, every column has a storage index that is automatically maintained for you.
 
+You may now **proceed to the next lab**.
+
 ## Acknowledgements
 
 - **Author** - Andy Rivenes, Product Manager, Database In-Memory
