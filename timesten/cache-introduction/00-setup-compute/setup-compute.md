@@ -21,7 +21,7 @@ For more information about Terraform and Resource Manager, please see the append
 This lab assumes you have:
 
 - An Oracle Cloud account (paid or free trial)
-- You have completed *Lab: Prepare Setup* 
+- Completed *Lab: Prepare Setup* 
 
 ## Task 1: Create Stack: Choose a Path
 
@@ -91,26 +91,6 @@ In the prior steps we elected to trigger the *terraform apply action* on stack c
 2.  Congratulations, your environment has been created!  Click on the *Application Information* tab to get additional information about what you have just done.
 3.  Your public IP address(es), instance name(s), and remote desktop URL are displayed.
 
-
-## Task 4: Access the Graphical Remote Desktop
-For ease of execution of this workshop, your VM instance has been pre-configured with a remote graphical desktop accessible using any modern browser on your laptop or workstation. Proceed as detailed below to login.
-
-1. Navigate to **Stack Details**, **Application Information** tab, and click on the remote desktop URL
-
-  ![](./images/create-stack-novnc-10.png " ")
-
-  ![](./images/novnc-login-1.png " ")
-
-  This should take you directly to your remote desktop in a single click.
-
-  ![](images/novnc-launch-get-started-2.png " ")
-
-    *Note:* While rare, you may see an error on the browser - â€œ*Deceptive Site Ahead*â€ or similar depending on your browser type as shown below.
-
-    Public IP addresses used for LiveLabs provisioning comes from a pool of reusable addresses and this error is due to the fact that the address was previously used by a compute instance long terminated, but that wasn't properly secured, got bridged and was flagged. You can safely ignore and proceed by clicking on *Details*, and finally on *Visit this unsafe site*.
-
-  ![](images/novnc-deceptive-site-error.png " ")
-  
 You can now *proceed to the next lab*.
 
 ## Appendix 1:  Terraform and Resource Manager

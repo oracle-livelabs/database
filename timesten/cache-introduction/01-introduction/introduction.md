@@ -32,7 +32,7 @@ In this workshop you will:
 * Run a simple OLTP benchmark to see the performance benefit of TimesTen
 * Run some queries to see the speedup provided by TimesTen
 * Use dynamic cache groups
-* Shutdown the TimesTen cache and instance
+* Shut down the TimesTen cache and instance
 
 ### Prerequisites
 
@@ -52,7 +52,10 @@ You can run this workshop:
 
 This workshop does _not_ support the Oracle Cloud 'Always Free' tier due to that tier's resource restrictions.
 
-**IMPORTANT:** This workshop requires an OCI compute instance with at least **4 CPUs** and **32 GB RAM.** If you choose to run this workshop in your own tenancy, please ensure that you have sufficient resources available.
+**IMPORTANT:** 
+
+1. This workshop requires an OCI compute instance with at least **4 CPUs** and **32 GB RAM.** If you choose to run this workshop in your own tenancy, please ensure that you have sufficient resources available.
+2. Depending on how you run the workshop (LiveLabs sandbox or your own tenancy), and whether you look at the workshop guide that loads in your own local browser or the one within the workshop compute instance, you may notice minor differences. This is because each guide is customized based on the context where it is being used. For the best experience, consistently follow either the guide within the workshop instance or the one in your local browser.
 
 You can now *proceed to the next lab*.
 

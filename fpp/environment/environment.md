@@ -63,7 +63,7 @@ To create your LiveLabs reservation, you used a ssh key that you created on your
 
     ![](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key-select-3.png " ")
 
-5. Once finished run the command below to check to see if your ssh key was uploaded.  Move it into your .ssh directory
+5. Once finished run the command below to check to see if your ssh key was uploaded.  Create a .ssh directory, and move the ssh key into your .ssh directory
 
     ````
     <copy>
@@ -72,6 +72,7 @@ To create your LiveLabs reservation, you used a ssh key that you created on your
     ````
     ````
     chmod 600 <<keyname>>
+    mkdir .ssh
     mv <<keyname>> .ssh
     ls .ssh
     cd ~

@@ -1,10 +1,10 @@
-# Shutdown the TimesTen cache and instance
+# Shut down the TimesTen cache and instance
 
 ## Introduction
 
 In this final lab, you will cleanly shut down the TimesTen cache and the TimesTen instance that manages it.
 
-**Estimated Lab Time:** 2 minutes
+**Estimated Lab Time:** 3 minutes
 
 ### Objectives
 
