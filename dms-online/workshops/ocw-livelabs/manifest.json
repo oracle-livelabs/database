@@ -6,18 +6,7 @@
       "help": "livelabs-help-db_us@oracle.com",
       "tutorials": [
         
-        {
-            "title": "Lab 3: Create Source Database",
-            "filename": "../../create-source-database/create-source-database.md"
-        },
-        {
-            "title": "Lab 4: Create Target Database",
-            "filename": "../../create-target-database/create-target-database.md"
-        },
-        {
-            "title": "Lab 5: Configure GoldenGate hub ",
-            "filename": "../../goldengate-hub/goldengate-hub.md"
-        },
+        
         {
             "title": "Lab 6: Prepare source and target databases ",
             "filename": "../../prepare-source-and-target-databases/prepare-source-and-target-databases.md"
