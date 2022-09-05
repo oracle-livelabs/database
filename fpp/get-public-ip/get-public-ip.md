@@ -15,9 +15,7 @@ In this lab, you will:
 - An assigned compartment
 
 ## Task 1: Access the OCI Console
-1. Access the OCI Console using the **User Name**, **Initial Password** and **Login URL** that you received with your Livelabs Reservation confirmation.
-
-    ![](./images/00-reservation.png)
+1. Log in to the OCI console using login information provided. Check the "Get Started" lab on the left menu on how to log in to the OCI console.
 
 2. Change the password as required.
 
@@ -45,5 +43,5 @@ You may now [proceed to the next lab](#next) and connect to the server.
 ## Acknowledgements
 
 - **Author** - Ludovico Caldara
-- **Contributors** - Kamryn Vinson
-- **Last Updated By/Date** -  Kamryn Vinson, May 2021
+- **Contributors** - Kamryn Vinson, Arabella Yao, Database Product Manager
+- **Last Updated By/Date** -  Arabella Yao, September 2022
