@@ -147,7 +147,7 @@ If you prefer, you can use an API tool like Postman
 
   The benefits to customers are shown in this slide.
 
-      ![TODO](images/benefits.png)
+      ![benefits](images/benefits.png)
 
 You may now **proceed to the next lab.**
 
@@ -164,7 +164,7 @@ You may now **proceed to the next lab.**
 
 * [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
 * [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/pls/topic/lookup?ctx=cloud&id=CSNSD-GUID-88373C12-018E-4628-B241-2DFCB7B16DE8)
-* [About API Gateway](https://docs.oracle.com/en-us/iaas/Content/APIGateway/Concepts/apigatewayoverview.htm)
+* [About API Gateway](https://www.oracle.com/cloud/cloud-native/api-management/)
 * [AI Services](https://www.oracle.com/artificial-intelligence/ai-services/)
 * [Media Streams](https://www.oracle.com/cloud/media-streams/)
 
