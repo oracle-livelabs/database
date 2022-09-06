@@ -12,7 +12,7 @@ Consider a Video on Demand streaming application. It streams various shows that 
 
 In general, customers are interested in tracking things like: the episodes they watch, the watch time per episode, the total number of seasons watched etc. Customers also want the streaming application to start streaming from where they left off watching - after all who wants to start at the beginning again.
 
-The streaming application backend collects data so reports such as, which show is the most popular and what is the average watch time of a show, can be generated.
+The streaming application backend collects data so reports such as, which is the most popular show and what is the average watch time of a show, can be generated.
 
 _Estimated Lab Time:_ 7 minutes
 
@@ -41,7 +41,7 @@ with existing data. GraphQL provides a complete and understandable description o
 
 GraphQL is often confused with being a database technology. GraphQL isn't tied to any specific database or storage engine and is instead backed by your existing data. You can code with GraphQL engines available in many languages.
 
-In this demo, we will learn how easy is develop the Activity Tracking service using Node.Js, ApolloServer and Oracle NoSQL Database.
+In this demo, we will learn how easy it is develop the Activity Tracking service using Node.Js, ApolloServer and Oracle NoSQL Database.
 
 In addition, by using managed services you gain the following benefits:
 *	No operating systems to choose, secure, patch, or manage.
@@ -65,10 +65,9 @@ Here is a diagram of architecture behind the demo.
 
 ## Task 1: The "Streaming" challenge
 
-This particular application came to the NoSQL team from a different Oracle team working with us to deliver a service with a very high value add. (AI Service, Media Streams)
+This particular application came to the NoSQL team from an internal Oracle team working with us to deliver a service with a very high value-add. (AI Service, Media Streams)
 
-When we thought about this for a little bit, we realized that this was a perfect use case for NoSQL. Many Video on Demand services are now offering real time activity tracking. When you use their application, you get close to a real time
-feed of your viewing behaviors.
+When we thought about this for a little bit, we realized that this was a perfect use case for NoSQL. Many Video on Demand services are now offering real time activity tracking. When you use their application, you get close to a real time feed of your viewing behaviors.
 
 What are a few goals of this application:
 
@@ -80,11 +79,11 @@ What are a few goals of this application:
 
 ## Task 2: Explore data using GraphQL queries
 
-Let us explore our API and showing some advantage of using GraphQL.
+Let us explore our API and showing some advantages of using GraphQL.
 
 **Move faster with powerful developer tools**
 
-With developer tools, you can know exactly what data you can request from your API without leaving your editor, you can highlight potential issues before sending a query, and you can take advantage of improved code intelligence. GraphQL makes it easy to build powerful tools like GraphiQL or Apollo GraphQL Studio.
+With developer tools, you can know exactly what data you can request from your API without leaving your editor, you can highlight potential issues before sending a query, and you can take advantage of improved code intelligence. GraphQL applications are easily built with powerful tools like GraphiQL or Apollo GraphQL Studio.
 
 1. In a browser window, enter [https://studio.apollographql.com/sandbox/explorer](https://studio.apollographql.com/sandbox/explorer)
 2. In the sandbox, copy/paste the following url:
@@ -119,9 +118,9 @@ GraphQL queries access not just the properties of one resource but also smoothly
 
 ## Task 6: Test using an unique URL
 
-In the previous tasks, we looked at the flexibility and the power of GraphQL to explore the data exposed by the Activity Tracking service of our Video on Demand streaming application.
+In the previous tasks, we looked at the flexibility and the power of GraphQL to explore the data exposed by the Activity Tracking microservice of our Video on Demand streaming application.
 
-Now, explore the queries that we will use in the next Lab to query and to load data.
+Now, explore the queries that we will use in the next Lab.
 
 Open the [demo-streaming.json](files/demo-streaming.json) file in another tab on
 your browser
@@ -167,6 +166,9 @@ You may now **proceed to the next lab.**
 * [About API Gateway](https://www.oracle.com/cloud/cloud-native/api-management/)
 * [AI Services](https://www.oracle.com/artificial-intelligence/ai-services/)
 * [Media Streams](https://www.oracle.com/cloud/media-streams/)
+
+### References
+
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management
