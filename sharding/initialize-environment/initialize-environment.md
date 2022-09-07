@@ -30,7 +30,7 @@ This lab assumes you have:
 
 2. On the *Web Browser* window on the right preloaded with *eShop Application*, click on the *Login* button to login the Application and select the saved credentials to login. These credentials have been saved within *Web Browser* and are provided below for reference
 
-    ![](images/oracle-shading-noVnc.png " ")
+    ![oracle sharding noVNC](images/oracle-shading-noVnc.png " ")
     ```
     Username: <copy>demo@eshop.com</copy>
     ```
@@ -39,11 +39,11 @@ This lab assumes you have:
     Password: <copy>demo</copy>
     ```
 
-    ![](images/application-login.png " ")
+    ![application login](images/application-login.png " ")
 
 3. Confirm successful login. Please note that it takes about 2 minutes after instance provisioning for all processes to fully start.
 
-    ![](images/application-demo.png " ")
+    ![application demo](images/application-demo.png " ")
 
     If successful, the page above is displayed and as a result your environment is now ready.  
 
@@ -58,7 +58,7 @@ This lab assumes you have:
         sudo docker ps -a
         </copy>
         ```
-        ![](images/sharding-docker.png " ")
+        ![sharding docker](images/sharding-docker.png " ")
 
     - If a container is stopped and not in running state then try to restart it by using below docker command.
 
@@ -86,4 +86,4 @@ You may now proceed to the next lab.
 ## Acknowledgements
 * **Authors** - Shailesh Dwivedi, Database Sharding PM , Vice President
 * **Contributors** - Alex Kovuru, Nishant Kaushik, Ashish Kumar, Priya Dhuriya, Richard Delval, Param Saini,Jyoti Verma, Virginia Beecher, Rodrigo Fuentes
-* **Last Updated By/Date** - Ashish Kumar, Solution Engineer - July 2021
+* **Last Updated By/Date** - Shefali Bhargava - September 2022
