@@ -120,7 +120,9 @@ Estimated Lab Time: 10 minutes
 
     *Tip: If you choose to use a default password __Ora$Dev$Live2021__ then you will not have to make changes to scripts later in this lab.* 
 
-    ```<copy>Ora$Dev$Live2021</copy>```
+    ```
+    <copy>Ora$Dev$Live2021</copy>
+    ```
 
     - __Password and Confirm Password__ - Specify the password for ADMIN user of the service instance. The password must meet the following requirements:
     - The password must be between 12 and 30 characters long and must include at least one uppercase letter, one lowercase letter, and one numeric character.
