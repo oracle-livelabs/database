@@ -46,14 +46,20 @@ Estimated Lab Time: 10 minutes
 <if type="freetier">
 	Select your __root compartment__, or __another compartment of your choice__ where you will create your new ATP instance. If you want to create a new compartment, click <a href="https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#three" target="\_blank">here</a>. To learn more about compartments, click <a href="https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/settinguptenancy.htm#Setting_Up_Your_Tenancy" target="\_blank">here</a>.
 
-__Note__ - Avoid the use of the `ManagedCompartmentforPaaS` compartment as this is an Oracle default used for Oracle Platform Services.
+    __Note__ - Avoid the use of the `ManagedCompartmentforPaaS` compartment as this is an Oracle default used for Oracle Platform Services.
 </if>
 <if type="livelabs">
-	A compartment has been assigned to you during the setup of your Livelabs Sandbox. You only have permission to create objects in this assigned compartment. Check your Login Info, make a note of the compartment that has been assigned, and use the drop down list under __Compartment__ to select the compartment. If you see the below picture with the "Forbidden" sign, you do not have access to the resources required:
+	A compartment has been assigned to you during the setup of your Livelabs Sandbox. 
+
+    - You only have permission to create objects in this assigned compartment. 
+    - Check your Login Info, make a note of the compartment that has been assigned
+    - Use the drop down list under __Compartment__ to select the compartment. 
+
+    If you see the below picture with the "Forbidden" sign, you __do not have access__ to the resources required and need to check the allocated compartment:
 
 	![](./images/prov2a.png " ")
 </if>
-5. Make sure your __Workload type__ filter set to __Transaction Processing__ or __All__ to see your Autonomous Transaction Processing instances. 
+5. Make sure your __Workload type__ filter is set to __Transaction Processing__ or __All__ to see your Autonomous Transaction Processing instances. 
 
 	![](./images/prov2.png " ")
 
@@ -90,17 +96,17 @@ __Note__ - Avoid the use of the `ManagedCompartmentforPaaS` compartment as this 
 
 6. Configure the database:
 
-<if type="freetier")
+<if type="freetier">
     - __Always Free__ - For this lab, you can select this option to create an always free autonomous database, or not select this option and create a database using your paid subscription. An always free database comes with 1 CPU and 20 GB of storage.
 </if>
-<if type="livelabs")
+<if type="livelabs">
     - __Always Free__ - If visible, do not select this option.
 </if>
     - __Choose database version__ - Select a database version 19c from the available versions.
-<if type="freetier")
+<if type="freetier">
     - __OCPU count__ - Number of CPUs for your service. For this lab, specify __2 CPUs__. Or, if you choose an always free database, it comes with 1 CPU.
 </if>
-<if type="livelabs")
+<if type="livelabs">
     - __OCPU count__ - Number of CPUs for your service. For this lab, specify __2 CPUs__.
 </if>
     - __Storage (TB)__ - Select your storage capacity in terabytes. If you can select a storage size, choose specify __1 TB__ of storage.
