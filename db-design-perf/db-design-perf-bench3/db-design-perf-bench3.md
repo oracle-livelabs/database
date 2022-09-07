@@ -108,7 +108,7 @@ Estimated lab time: 15 minutes
 
     If you not have done so already, press Enter to exit the benchmark.
 
-# Summary #
+## Summary ##
 
 Take a minute to review the gains made by simply optimizing the database design to suit the required workload. Remember that in this lab, _no changes_ were made to the server configuration, _no changes_ were made to the application code that ran the benchmark. Yet even with no changes, consider the performance benefits obtained from the initial base line benchmark to the final design:
 
