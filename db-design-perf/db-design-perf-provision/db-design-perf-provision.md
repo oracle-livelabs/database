@@ -42,6 +42,7 @@ Estimated Lab Time: 10 minutes
 	![](https://oracle-livelabs.github.io/common/images/console/database-atp.png " ")
 
 4. Use the __List scope__ drop-down menu to select a compartment. 
+
 <if type="freetier">
     Select your __root compartment__, or __another compartment of your choice__ where you will create your new ATP instance. If you want to create a new compartment, click <a href="https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#three" target="\_blank">here</a>. To learn more about compartments, click <a href="https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/settinguptenancy.htm#Setting_Up_Your_Tenancy" target="\_blank">here</a>.
 
