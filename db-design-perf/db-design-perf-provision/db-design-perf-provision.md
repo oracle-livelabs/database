@@ -1,4 +1,4 @@
-# Provision an Autonomous Database
+# Provision an Autonomous Database 17:27
 
 
 ## Introduction
@@ -32,7 +32,7 @@ Estimated Lab Time: 10 minutes
 1. Login to the Oracle Cloud, as shown in the previous lab.
 2. Once you are logged in, you are taken to the cloud services dashboard where you can see all the services available to you. Click the navigation menu in the upper left to show top level navigation choices.
 <if type="freetier">
-    __Note:__ You can also directly access your Autonomous Transaction Processing service in the __Quick Actions__ section of the dashboard.
+	__Note:__ You can also directly access your Autonomous Transaction Processing service in the __Quick Actions__ section of the dashboard.
 
 	![](./images/prov1.png " ")
 </if>
@@ -44,19 +44,18 @@ Estimated Lab Time: 10 minutes
 4. Use the __List scope__ drop-down menu to select a compartment. 
 
 <if type="freetier">
-    Select your __root compartment__, or __another compartment of your choice__ where you will create your new ATP instance. If you want to create a new compartment, click <a href="https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#three" target="\_blank">here</a>. To learn more about compartments, click <a href="https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/settinguptenancy.htm#Setting_Up_Your_Tenancy" target="\_blank">here</a>.
+	Select your __root compartment__, or __another compartment of your choice__ where you will create your new ATP instance. If you want to create a new compartment, click <a href="https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#three" target="\_blank">here</a>. To learn more about compartments, click <a href="https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/settinguptenancy.htm#Setting_Up_Your_Tenancy" target="\_blank">here</a>.
 
 __Note__ - Avoid the use of the `ManagedCompartmentforPaaS` compartment as this is an Oracle default used for Oracle Platform Services.
 </if>
 <if type="livelabs">
-    A compartment has been assigned to you during the setup of your Livelabs Sandbox. You only have permission to create objects in this assigned compartment. Check your Login Info, make a note of the compartment that has been assigned, and use the drop down list under __Compartment__ to select the compartment. If you see the below picture with the "Forbidden" sign, you do not have access to the resources required:
+	A compartment has been assigned to you during the setup of your Livelabs Sandbox. You only have permission to create objects in this assigned compartment. Check your Login Info, make a note of the compartment that has been assigned, and use the drop down list under __Compartment__ to select the compartment. If you see the below picture with the "Forbidden" sign, you do not have access to the resources required:
 
-    ![](./images/prov2a.png " ")
-/if>
+	![](./images/prov2a.png " ")
+</if>
 5. Make sure your __Workload type__ filter set to __Transaction Processing__ or __All__ to see your Autonomous Transaction Processing instances. 
 
-    ![](./images/prov2.png " ")
-
+	![](./images/prov2.png " ")
 
 6. This console shows that no databases yet exist. If there were a long list of databases, you could filter the list by the state of the databases (available, stopped, terminated, and so on). You can also sort by __Workload Type__. 
 
@@ -77,7 +76,7 @@ __Note__ - Avoid the use of the `ManagedCompartmentforPaaS` compartment as this 
 
     ![](./images/prov4.png " ")
 
-4. Choose a workload type. Select the workload type for your database from the choices:
+4. Choose a workload type. Make sure the Select the workload type for your database from the choices:
 
     - __Transaction Processing__ - For this lab, make sure __Transaction Processing__ has been selected.
 
@@ -115,9 +114,7 @@ __Note__ - Avoid the use of the `ManagedCompartmentforPaaS` compartment as this 
 
     *Tip: If you choose to use a default password __Ora$Dev$Live2021__ then you will not have to make changes to scripts later in this lab.* 
 
-    ````
-    <copy>Ora$Dev$Live2021</copy>
-    ````
+    ```<copy>Ora$Dev$Live2021</copy>```
 
     - __Password and Confirm Password__ - Specify the password for ADMIN user of the service instance. The password must meet the following requirements:
     - The password must be between 12 and 30 characters long and must include at least one uppercase letter, one lowercase letter, and one numeric character.
