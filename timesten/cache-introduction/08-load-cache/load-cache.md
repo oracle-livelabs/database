@@ -4,7 +4,7 @@
 
 In this lab, you will load data from the Oracle tables into the TimesTen cache tables. This action will also activate the AUTOREFRESH mechanism which will periodically refresh the cache with any changes that have occurred in the Oracle database.
 
-**Estimated Lab Time:** 5 minutes
+**Estimated Lab Time:** 6 minutes
 
 ### Objectives
 
@@ -82,6 +82,9 @@ Cache Group APPUSER.CG_VPN_USERS:
 1 cache group found.
 ```
 
+Note that the status of autorefresh has now changed to  **On**.
+
+
 4. Display the cache group tables:
 
 ```
@@ -129,15 +132,12 @@ Disconnecting...
 Done.
 ```
 
-Note that the status of autorefresh has now changed to  **On**.
-
-```
-Autorefresh State: On
-```
 
 ## Task 2: Load the OE cache groups
 
-Now do the same for the OE schema cache groups:
+Now do the same for the OE schema cache groups.
+
+1. Connect to the cache as the OE user:
 
 ```
 <copy>
@@ -155,6 +155,8 @@ Connection successful: DSN=sampledb;UID=oe;DataStore=/tt/db/sampledb;DatabaseCha
 Command> 
 ```
 
+2. Load the CG_PROMOTIONS cache group:
+
 ```
 <copy>
 LOAD CACHE GROUP oe.cg_promotions COMMIT EVERY 1024 ROWS;
@@ -164,6 +166,8 @@ LOAD CACHE GROUP oe.cg_promotions COMMIT EVERY 1024 ROWS;
 ```
 2 cache instances affected.
 ```
+
+3. Load the CG_PROD_INVENTORY cache group:
 
 ```
 <copy>
@@ -175,6 +179,8 @@ LOAD CACHE GROUP oe.cg_prod_inventory COMMIT EVERY 1024 ROWS;
 288 cache instances affected.
 ```
 
+4. Load the CG_CUST_ORDERS cache group:
+
 ```
 <copy>
 LOAD CACHE GROUP oe.cg_cust_orders COMMIT EVERY 1024 ROWS;
@@ -185,11 +191,15 @@ LOAD CACHE GROUP oe.cg_cust_orders COMMIT EVERY 1024 ROWS;
 319 cache instances affected.
 ```
 
+5. Update optimizer statistics for all the tables in the OE schema:
+
 ```
 <copy>
 statsupdate;
 </copy>
 ```
+
+6. Display the cache group tables:
 
 ```
 <copy>
@@ -208,6 +218,8 @@ tables;
 7 tables found.
 ```
 
+7. Check the row count for CUSTOMERS:
+
 ```
 <copy>
 select count(*) from customers;
@@ -218,6 +230,8 @@ select count(*) from customers;
 < 319 >
 1 row found.
 ```
+
+8. Check the row count for INVENTORIES:
 
 ```
 <copy>
@@ -230,6 +244,8 @@ select count(*) from inventories;
 1 row found.
 ```
 
+9. Check the row count for ORDERS:
+
 ```
 <copy>
 select count(*) from orders;
@@ -240,6 +256,8 @@ select count(*) from orders;
 < 105 >
 1 row found.
 ```
+
+10. Check the row count for ORDER_ITEMS:
 
 ```
 <copy>
@@ -252,6 +270,8 @@ select count(*) from order_items;
 1 row found.
 ```
 
+11. Check the row count for PRODUCT_DESCRIPTIONS:
+
 ```
 <copy>
 select count(*) from product_descriptions;
@@ -262,6 +282,8 @@ select count(*) from product_descriptions;
 < 8639 >
 1 row found.
 ```
+
+12. Check the row count for PRODUCT_INFORMATION:
 
 ```
 <copy>
@@ -274,6 +296,8 @@ select count(*) from product_information;
 1 row found.
 ```
 
+13. Check the row count for PROMOTIONS:
+
 ```
 <copy>
 select count(*) from promotions;
@@ -284,6 +308,8 @@ select count(*) from promotions;
 < 2 >
 1 row found.
 ```
+
+14. Quit out of ttIsql:
 
 ```
 <copy>

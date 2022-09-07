@@ -9,7 +9,7 @@
       "filename": "../../01-introduction/introduction.md"
     },
     {
-      "title": "Get started",
+      "title": "Get started - Cloud Login",
       "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
       "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
     },
@@ -24,13 +24,13 @@
       "filename": "../../00-setup-compute/setup-compute.md"
     },
     {
-      "title": "Lab 3: Using noVNC Remote Desktop",
-      "description": "Using noVNC Remote Desktop",
-      "filename": "../../00-novnc/novnc-owntenancy.md"
+      "title": "Lab 3: Connect to the workshop compute instance using NoVNC Remote Desktop",
+      "description": "Connect using noVNC Remote Desktop",
+      "filename": "../../00-verify-compute/verify-compute-freetier.md"
     },
     {
       "title": "Lab 4: Connect to the workshop compute instance using SSH (optional)",
-      "description": "How to connect to the Cloud Instance",
+      "description": "Connect using SSH",
       "filename": "../../03-connect-to-instance/connect-to-instance-freetier.md"
     },
     {
@@ -78,8 +78,8 @@
       "filename": "../../12-dynamic-caching/dynamic-caching.md"
     },
     {
-      "title": "Lab 14: Shutdown the TimesTen cache and instance",
-      "description": "Perform an orderly shutdown of TimesTen",
+      "title": "Lab 14: Shut down the TimesTen cache and instance",
+      "description": "Perform an orderly shut down of TimesTen",
       "filename": "../../13-shutdown/shutdown.md"
     },
     {
