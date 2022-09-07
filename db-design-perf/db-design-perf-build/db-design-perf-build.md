@@ -1,5 +1,3 @@
-<!-- Updated March 24, 2020 -->
-
 
 # Establish the initial schema
 
@@ -45,7 +43,7 @@ Oracle Cloud Infrastructure Cloud (OCI) Shell is a web browser-based terminal ac
     ![](./images/connect6.png " ")
 
 
-2. You will be using SQL tools from the cloud shell to create and run your performance benchmark, so you will need the database credentials you downloaded in the previous step. Click on the three line icon at the top left of the cloud shell to reveal the **File Transfer** option, and choose **Upload**.
+2. You will be using SQL tools from the cloud shell to create and run your performance benchmark, so you will need the database credentials you downloaded in the previous step. Click on the gear-icon at the top right side of the cloud shell to reveal the **File Transfer** option, and choose **Upload**.
 
     ![](./images/connect7.png " ")
 
@@ -55,33 +53,43 @@ Oracle Cloud Infrastructure Cloud (OCI) Shell is a web browser-based terminal ac
 
 4. Verify the wallet has been successfully uploaded, by listing the current directory in your cloud shell. The wallet file should be present in the home directory.
 
-    ```
-    <copy>
-    ls -l
-    </copy>
+    ```nohighlight
+    $ <copy>ls -l</copy>
     ```
 
-    ![](./images/connect9.png " ")
-
+    ```nohighlight
+    mcdonald_c@cloudshell:~ (ap-sydney-1)$ ls -l 
+    total 28
+    -rw-r--r--. 1 mcdonald_c oci 26422 Sep  7 16:08 Wallet_ATPDBDESIGN.zip
+    ````
+ 
 5. Verify connectivity to your autonomous database. You will use the SQLcl command line interface to set your wallet credentials and connect to the database as the ADMIN user. Press enter at the last command and at the prompt, enter your ADMIN password.
 
-    ```
-    <copy>
-    sql /nolog
-    set cloudconfig Wallet_ATPDBDESIGN.zip
+    ```nohighlight
+    <copy>sql /nolog</copy>
+    ````
+
+    Once logged in, set the configuration to use your uploaded wallet and connect to the database:
+
+    ```nohighlight
+    <copy>set cloudconfig Wallet_ATPDBDESIGN.zip
     show tns
     connect admin@atpdbdesign_tp
     </copy>
     ```
 
+    Use the password you choose while creating the database. If you have used the default password, you can copy it here:
+
+    ```nohighlight
+    <copy>Ora$Dev$Live2021</copy>
+    ```
+
     ![](./images/connect10.png " ")
 
-6. Type `exit` to bring you out of SQL and back to the shell.
+6. If you have successfully logged into the database, type `exit` to leave SQLcl and return to the shell.
 
-    ```
-    <copy>
-    exit
-    </copy>
+    ```nohighlight
+    <copy>exit</copy>
     ```
 
 ## Task 3: Create the initial schema
