@@ -4,28 +4,23 @@
 
 For this lab, you will create multiple pipelines in Jenkins that will run jobs for different scenarios. Currently, you have a working environment from Lab 3, the previous lab. You can call this environment your TEST environment, where your QA team can test all features, bugs and updates developed and fixed after a sprint and for review before merging to master and tagging. You will also have a DEV branch that should contain all completed features and fixes that the team worked on. For those features and fixes, you will be creating and committing those changes into feature branches - which will create and provide an isolated, shared and easily-replaceable environment (currently only a database to demonstrate usage of the Oracle Database operator for Kubernetes). Once DEV is ready, you will create a `release-1.0` branch, which will update the TEST environment.
 
+Do note that this setup of Jenkins is NOT built for production purposes and is setup minimally.
 
-<!-- This lab will walk you through CI/CD workflow using the pipeline built in the previous lab.
-
-![CI/CD Flow](images/cicd-jenkins-flow.png " ") -->
-
-Estimated Time: XX minutes
+Estimated Time: 15 minutes
 
 ### Objectives
 
-* CI/CD Workflow Walkthrough
+* Configure Jenkins Pipelines
+* Configure GitHub webhooks
   
 ### Prerequisites
 
-<!-- * Oracle Cloud Infrastructure Services, like OKE cluster, OCIR and the Autonomous Transaction Processing databases, GitHub, and Jenkins that you created and configured in earlier labs
-* The latest version of Git, [GitHub Desktop] (https://desktop.github.com/) and your preferred editor, such as Visual Studio Code, or IntelliJ Idea installed locally on your computer.
-* This lab presumes you will set up a workshop repository in your own GitHub account. -->
-
-<!-- > **Note:** As this is a demonstration of Jenkins/GitHub integration for CI/CD, **you must use your own GitHub account to run it. Please fork or copy [Oracle Microservices GitHub repository](https://github.com/oracle/microservices-datadriven) into your own GitHub account**. -->
+* Lab-Related resources provisioned
+* Working OKE cluster
 
 ## Task 1: Generate a Github Access Token
 
-To allow Jenkins to access your repository, a Jenkins credentials must be made with your GitHub credentials. It is highly recommended to generate a restrictive Personal Access Token, with which we can control how much access and for how long we want to provide.
+To allow Jenkins to access your repository, a Jenkins credentials must be made with your GitHub credentials. It is highly recommended to generate a restrictive Personal Access Token, with which you can control how much access and for how long you want to provide access.
 
 1. On your GitHub account, click on your profile at the top right and select `Settings`.
 
@@ -89,125 +84,162 @@ To access the Jenkins Console, you will need to retrieve the IP address to visit
 
       ```bash
       <copy>
-      ( cd $CB_STATE_DIR/tasks ; ./generate-credentials-help.sh )
+      ( cd $CB_STATE_DIR/tasks ; ./generate-configuration-help.sh )
       </copy>
       ```
-      The below command should output the id, kind and the secret of credentials to be created. Copy the information as you create the credentials on Jenkins.
+      This script will collect information together for you when creating credentials on Jenkins. Run the following command to retrieve this information:
 
+      ```bash
+      <copy>
+      state_get .lab.credentials
+      </copy>
+      ``` 
+      This command will produce an output similar to the following snippet below. 
       ```json
       {
-      "create_branch_webhook": {
-         "id": "cbworkshop-create-branch-token",
-         "kind": "secret_text",
-         "secret": "<someToken>"
-      },
-      "delete_branch_webhook": {
-         "id": "cbworkshop-delete-branch-token",
-         "kind": "secret_text",
-         "secret": "someToken"
-      },
-      "push_branch_webhook": {
-         "id": "cbworkshop-push-token",
-         "kind": "secret_text",
-         "secret": "someToken"
-      },
+      ...
       "tenancy_namespace": {
-         "id": "cbworkshop-tenancy-namespace",
          "kind": "secret_text",
-         "secret": "tenancyNamespace"
+         "secret": "<tenancy-namespace>",
+         "id": "cbworkshop-tenancy-namespace"
+      }
       ...
       ```
-
-      For example, below, on the right side of the screen is the output from the command and Jenkins credentials store on the left. Notice how each property value maps to the inputs for Jenkins credentials.
+      In the snippet, you will see 3-4 keys and their values which maps to what you should enter on Jenkins. For example, when creating the credentials for `create_branch_webhook` above:
+      1. Set Kind to `Secret Text`
+      2. Copy and Paste the Secret inside Secret
+      3. Copy and Paste the id inside ID.
+      4. (Optional) Set the parent key of the object as the description
       
-      ![Jenkins Credentials 1](images/jenkins-credentials-example1.png " ")
+      On Jenkins, this would look like the following image below.
 
-      ![Jenkins Credentials 2](images/jenkins-credentials-example2.png " ")
+      ![Create Example Credential](./images/create-credential-example.png)
+
+5. Create the following credentials:
+   
+      1. create\_branch\_webhook
+      2. delete\_branch\_webhook
+      3. push\_branch\_webhook
+      4. tenancy\_namespace
+      5. region\_key
+      6. cluster\_name
+      7. cluster\_server\_url
+      8. cluster\_token
+      9. db\_password
+      10. lab\_unique\_id
+      11. github\_credentials
+      12. ocir\_credentials
 
 ## Task 3: Configure the Create-Branch Pipeline
-Once you have created the credentials, we can now move on to create the Jenkins pipelines that we will use and trigger on different parts of our DevOps workflow.
+Once you have created the credentials, you can move on to create the Jenkins pipelines that will be triggered on different parts of the DevOps workflow.
 
-
-This first pipeline will be responsible for creating isolated environments when we have features to work on. In this first iteration, we will only provision and setup a Single Instace Database with scripts to initialize schemas and queues through the Kubernetes operator.
+This first pipeline will be responsible for creating isolated environments for feature development. In this part of the lab, you will provision and setup a Single Instace Database with scripts to initialize schemas and queues through the Kubernetes operator.
 
 Create a new Pipeline by clicking on `+ New Item`
+
+![Create New Item](./images/create-jenkins-item.png)
 
 1. Enter an item name: `Create-Branch-Pipeline`
 2. Select `Pipeline`
 3. Click `OK`
-4. Under Build Triggers, select `GitHub hook trigger for GITScm polling`
-5. Under Pipeline, select `Pipeline script from SCM`
-6. Under Pipeline > SCM, set `Git`
-7. Set Repository HTTPS URL
-8. Set the Credentials to your GitHub credentials created earlier, which should appear as `<github-username>/******`
-9. Under Branch Specifier, change `*/master`  to 
+
+  ![Create Branch Pipeline](images/create-branch-pipeline.png)
+
+1. Under Build Triggers, select `GitHub hook trigger for GITScm polling`
+2. Under Pipeline, select `Pipeline script from SCM`
+3. Under Pipeline > SCM, set `Git`
+4. Set the Repository HTTPS URL to your Fork's HTTPS URL
+5. Set the Credentials to your GitHub credentials created earlier, which should appear as `<github-username>/******`
+6. Under Branch Specifier, change `*/master`  to 
       ```bash
       <copy>
       :^(origin/feature/|origin/release/|origin/dev$).*
       </copy>
       ```
-10. Build Configuration, Script Path:
+      This will limit the pipeline to build only the branches specified above.
+
+      ![Create Branch Pipeline Details](./images/configure-create-branch-pipeline.png)
+
+7.  For Build Configuration, set the Script Path to the location of the Jenkinsfile in the lab repository:
       ```bash
       <copy>
-      examples/cloudbank/jenkins/create-dev-env/Jenkinsfile
+      cloudbank/jenkins/create-dev-env/Jenkinsfile
       </copy>
       ```
-11. Click `Save`
+8.  Click `Save`
 
-With our pipeline configured, we will need to build our pipeline initially to enable Jenkins to register our Pipeline parameters and settings
+  With the pipeline configured, you will need to build the pipeline initially to enable Jenkins to register all pipeline parameters and settings. Once you press Save, Jenkins will navigate automatically to that specific pipeline.
 
-1. Click on `Build Now`
+9. Click on `Build Now`
 
-The Pipeline should **succeed**.
+      The Pipeline should **succeed** with a checkmark.
+
+      ![Build Create Branch Pipeline](./images/build-create-branch-pipeline.png)
 
 ## Task 4: Configure the Delete-Branch Pipeline
 
-This second pipeline will be responsible for tearing down our isolated environments when we no longer have a need for them after merging our work back to our main branch (test). In this first iteration, we will only destroy and clean up our database through the Kubernetes operator.
+This second pipeline will be responsible for tearing down your isolated environments when you no longer have a need for them after merging your feature back to the cloudbank branch (test).
 
 Create a new Pipeline by clicking on `+ New Item`
 
 1. Enter an item name: `Cleanup-Branch-Pipeline`
 2. Select `Pipeline`
 3. Click `OK`
+
+      ![Create Cleanup Pipeline](./images/create-cleanup-pipeline.png)
+
 4. Under Build Triggers, select `GitHub hook trigger for GITScm polling`
 5. Under Pipeline, select `Pipeline script from SCM`
 6. Under Pipeline > SCM, set `Git`
-7. Set Repository HTTPS URL
+7. Set the Repository HTTPS URL to your Fork's HTTPS URL
 8. Set the Credentials to your GitHub credentials created earlier, which should appear as `<github-username>/******`
-9. Under Branch Specifier, change `*/master` to
+9.  Under Branch Specifier, change `*/master` to
+    
       ```bash
       <copy>
       :^(origin/feature/|origin/dev$).*
       </copy>
       ```
-10. Build Configuration, Script Path:
+
+      ![Create Cleanup Pipeline Details](./images/configure-cleanup-pipeline.png)
+
+10. For Build Configuration, set the Script Path to the location of the Jenkinsfile in the lab repository:
       ```bash
       <copy>
-      examples/cloudbank/jenkins/destroy-dev-env/Jenkinsfile
+      cloudbank/jenkins/destroy-dev-env/Jenkinsfile
       </copy>
       ```
 11. Click `Save`
+12. Click on `Build Now`
 
+      The Pipeline should **succeed** with a checkmark.
 
 ## Task 5: Configure the Push-Branch Pipeline
-This third pipeline will build and test the applications on push to dev and feature-branches.
+This third pipeline will build the applications on push to dev and feature-branches.
 
 Create a new Pipeline by clicking on `+ New Item`
 
 1. Enter an item name: `Push-Pipeline`
 2. Select `Multibranch Pipeline`
-3. Under Branch Source, `Add source` , select `GitHub`
-4. Set Credentials to your GitHub credentials
-5. Set Repository HTTPS URL
-6. Validate by clicking on `Validate` below the Repository HTTPs URL
-7. Build Configuration, Script Path:
+3. Click `OK`
+
+      ![Create Push Pipeline](./images/create-push-pipeline.png)
+
+4. Under Branch Source, `Add source` , select `GitHub`
+5. Set Credentials to your GitHub credentials
+6. Set Repository HTTPS URL
+7. Validate by clicking on `Validate` below the Repository HTTPs URL
+
+      ![Configure Push Pipeline](./images/configure-push-pipeline.png)
+
+8. For Build Configuration, set the Script Path to the location of the Jenkinsfile in the lab repository:
       ```bash
       <copy>
-      examples/cloudbank/jenkins/push/Jenkinsfile
+      cloudbank/jenkins/push/Jenkinsfile
       </copy>
       ```
-8. Under Scan Multribranch Pipeline Triggers, select `Scan by webhook`
-9. Under Trigger token, set it to the secret you enterred earlier for `cbworkshop-push-token`.
+9.  Under Scan Multribranch Pipeline Triggers, select `Scan by webhook`
+10. Under Trigger token, set it to the secret you entered earlier for `cbworkshop-push-token`.
 
    You can retrieve this quickly by running the following command and using the property value for `secret`:
       ```bash
@@ -215,8 +247,9 @@ Create a new Pipeline by clicking on `+ New Item`
       state_get .lab.tokens.push_branch_webhook
       </copy>
       ```
-
-You should see Finished: Success under Scan Repository Log
+11. Click `Save`.
+    
+You should see Finished: Success under __Scan Repository Log__
 
 
 ## Task 6: Configuring GitHub Webhooks
@@ -261,13 +294,18 @@ The above command should provide a list with the Jenkins IP address and tokens p
 
       ![Webhooks Add](images/map-webhooks.png " ")
 
-    <strong style="color: #C74634">Note</strong>: For webhooks `create_branch_webhook` and `delete_branch_webhook, make sure to deselect the Push event (as they are selected by default).
+    <strong style="color: #C74634">Note</strong>: For webhooks `create_branch_webhook` and `delete_branch_webhook`, make sure to deselect the Push event (as they are selected by default).
 
     After all three webhooks have been created, your repository's webhooks listing should appear similar to the ones in the image below.
    
    ![Webhooks Final Outcome](images/final-webhooks.png " ")
 
+4. Create the following Webhooks:
+      1. create branch webhook
+      2. delete branch webhook
+      3. push branch webhook
+
 ## Acknowledgements
 
 * **Authors** - Norman Aberin, Developer Advocate
-* **Last Updated By/Date** - Norman Aberin, August 2022
+* **Last Updated By/Date** - Norman Aberin, September 2022

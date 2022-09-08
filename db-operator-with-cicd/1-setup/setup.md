@@ -2,18 +2,17 @@
 
 ## Introduction
 
-In this lab, we will provision and setup the reference architecture.
-
-In this reference architecture, Jenkins is hosted on Oracle Cloud Infrastructure to centralize build automation and scale the deployment by using Oracle Cloud Infrastructure Registry, Oracle Kubernetes and Oracle Converged Database. GitHub is used to manage source code. 
+In this lab, you will provision all lab-related resources (with exception to OKE-provisioned resources such as LoadBalancers and Databases) by running a set of scripts. The setup script will create resources in your tenancy using Terraform. It will provision an OKE cluster and a Virtual Machine with Jenkins running. Do note however that this setup of Jenkins is not meant for production purposes. 
 
 Estimated Time: 25 minutes
 
 ### Objectives
 
-* Clone the setup and microservices code
-* Execute setup
+* Fork and clone the lab repository
+* Setup and provision lab resources
+* Setup Kube Config
 
-<em><strong style="color: #C74634">We recommend that you create a notes page to write down all of the credentials you will need.</strong></em>
+<em><strong style="color: #C74634">It is recommended that you keep all credentials and important information in your notes.</strong></em>
 
 
 ### Prerequisites
@@ -32,7 +31,7 @@ Cloud Shell is a small virtual machine running a "bash" shell which you access t
 
 ## Task 2: Fork and clone the Lab Repository 
 
-Open a browser and navigate to the Lab Repository Available <u><strong>[here](https://github.com/oracle/oci-react-samples.git)</strong></u>. You can also find the link below if you would like to copy-paste the link instead on your browser.
+Open a browser and navigate to the Lab Repository Available <u><strong>[here](https://github.com/oracle/oci-react-samples.git)</strong></u>. You can also find the link below if you would like to copy-paste the link instead on your browser:
 ``` bash
 <copy>
 https://github.com/oracle/oci-react-samples.git
@@ -41,7 +40,7 @@ https://github.com/oracle/oci-react-samples.git
 
 ![Navigate to Lab](./images/navigate-to-lab-repository.png)
 
-Since the lab will require you to make changes to the code, you will need to have a fork of the lab. To fork, 
+Since the lab will require you to make changes to the code, you will need to have a fork of the lab. To fork the lab repository: 
 1. Click on the Fork button at the top right. 
 2. Select your account as the owner and keep the repository name the same.
 3. Deselect `Copy the main branch only` (as the lab-related files exist only in another branch)
@@ -49,7 +48,7 @@ Since the lab will require you to make changes to the code, you will need to hav
 
     ![Fork Repository](./images/fork-repository.png)
 
-With a working fork of the lab repository under your own account, clone the forked repository by running the below command. Remember to specify `--single-branch --branch cloudbank` as shown below, as this will only pull the files related to the lab:
+With a working fork of the lab repository under your own account, clone the forked repository by running the below command. Remember to specify the flags `--single-branch --branch cloudbank` as shown below. With the flags, the command will only pull the files related to the lab:
 ```bash
 <copy>
  git clone --single-branch --branch cloudbank https://github.com/<username>/oci-react-samples
@@ -60,15 +59,15 @@ With a working fork of the lab repository under your own account, clone the fork
   ![Locate GitHub Username](./images/github-un-where.png)
 
 ## Task 3: Prepare for Terraform Provisioning
-The first part of the setup process will require the following information below to provision resources. Retrieve these information and keep these in your notes (with _exception_ to the Jenkins Password  which does not have to retrieved) for Task 4, which will prompt you for these values. Click on the drop downs below for more information on how to retrieve these from the OCI Console:
+This part of the setup process will require the following information below to provision resources. Retrieve these information and keep these in your notes (with _exception_ to the Jenkins Password  which does not have to retrieved) for Task 4, which will prompt you for these values. Click on the drop downs below for more information on how to retrieve these from the OCI Console:
 
 <strong style="color: #C74634">Note</strong>: Keep the following information and credentials in your notes.
 
-1. __API Key__ - API Signing Key to authenticate provisioning Database resources with
+1. __API Key__ - used to authorize provisioning Database resources with
 
  ## How to Create an API Key
  
- Creating an API Signing Key Fingerprint will list some of the required values you will need to provide in the following prompts. To start, navigate to your OCI Console.
+ By creating an API Signing Key, OCI will provide you a configuration file that contains some of the required information you will need to provide in the following prompts. To start, navigate to your OCI Console.
 
     On the top right, go to `User Settings` and create an API Key Resource.
 
@@ -116,19 +115,19 @@ The first part of the setup process will require the following information below
  ## How to Retrieve the Compartment OCID
  You may choose to use an existing compartment or create a new one.
 
-    To use an existing compartment, enter the OCID of the compartment.
+    Navigate to Compartments on your OCI Console.
 
-    To create a new compartment, enter the name you would like to use.
+    ![Navigate to Compartments](./images/navigate-to-compartments.png)
+    
+    To use an existing compartment, click on the OCID of the compartment you want to use and click copy.
 
-    If you chose to create a new compartment, you will also be asked to enter the OCID of the parent compartment in which the new compartment is to be created.  Enter the parent compartment OCID or hit enter to use the root compartment of your tenancy.
+    ![Copy Compartments OCID](./images/copy-compartment-ocid.png)
 
-    To get the OCID of an existing compartment, click on the Navigation Menu in the upper left of Cloud Console, navigate to **Identity & Security** and click on **Compartments**:
+    To create a new compartment instead, click on the Create Compartment button (emphasized above with dashes) and add the name and description. You will also have to place the compartment either under another compartment of your choice or the Parent Compartment. Click on Create Compartment to finalize the creation of the compartment.
 
-    ![Navigate to Oracle Cloud Infrastructure Compartments Screen](images/compartments.png " ")
+    ![Create Compartment](./images/create-compartment.png)
 
-    Click on the link in the **OCID column** of the compartment, and click **Copy**:
-
-    ![Obtain Oracle Cloud Infrastructure Compartment OCID](images/compartment-ocid.png " ")
+    Once created, simply find the name of your lab from the list and copy the OCID shown in the 2nd image above.
 
 5. __Jenkins Password__ - Enter a password
 
@@ -148,16 +147,7 @@ The first part of the setup process will require the following information below
 
     Use the tenancy value from the API Key Configuration file
 
- ## How to Retrieve the User OCID
-    Another method of retrieving the user OCID is to simply go to User Settings. Locate your menu bar in the Cloud Console and click the person icon at the far upper right. From the drop-down menu, select your user's name. Note, sometimes the name link is missing in which case select the **User Settings** link. Do not select the **Tenancy** link.
-
-    ![Obtain Oracle Cloud Infrastructure User OCID](images/get-user-ocid.png " ")
-
-    The user OCID will look something like: `ocid1.user.oc1....<unique_ID>`. Click Show to see the details and then click Copy to copy the user OCID to the clipboard, paste in the copied data in console.
-
-    ![Oracle Cloud Infrastructure User OCID Example](images/example-user-ocid.png " ")
-
-8. __Fingerprint__ - The resulting fingerprint after generating an API Key
+9. __Fingerprint__ - The resulting fingerprint after generating an API Key
 
     Use the fingerprint value from the API Key Configuration file
 
@@ -217,7 +207,7 @@ Once setup completes, you will need to run and setup the following manually for 
 
     This will be open the form for uploading. Select your private key file and upload it. 
 
-    <strong style="color: #C74634">Note</strong>: We recommend renaming the private key file to `private.pem` before uploading.
+    <strong style="color: #C74634">Note</strong>: We recommend renaming the private key file to `private.pem` before uploading to OCI Cloud Shell.
 
     ![Upload File to Bash](./images/select-and-upload.png)
     
@@ -264,7 +254,7 @@ Once setup completes, you will need to run and setup the following manually for 
 
 
 ## Task 6: Set up KubeConfig
-This step requires the Kubernetes cluster (OKE cluster) to exist. You will have to wait for the Kubernetes cluster to complete this step if Terraform has not yet completely setup Terraform when you get to this step.
+This task requires the Kubernetes cluster (OKE cluster) to exist. You will have to wait for the Kubernetes cluster to complete provisioning before this task, if Terraform has not yet completely setup your cluster when you get to this step.
 
 To setup your kubeconfig:
 
@@ -276,12 +266,12 @@ To setup your kubeconfig:
 
     ![Navigate to OKE](./images/navigate-to-cloudbank.png)
 
-2. Click on [Access Cluster]
-3. Copy the `oci ce cluster create-kubeconfig` command
+3. Click on [Access Cluster]
+4. Copy the `oci ce cluster create-kubeconfig` command
 
     ![Navigate to OKE](./images/access-cluster.png)
 
-4. Paste the provided oci-cli command on cloud shell and run it.
+5. Paste the provided oci-cli command on cloud shell and run it.
 
     This will produce an output similar to:
 
@@ -308,4 +298,4 @@ From this directory, you can run the init script to initialize the cluster and c
 ## Acknowledgements
 
 * **Authors** - Norman Aberin, Developer Advocate; Irina Granat, Consulting Member of Technical Staff, Oracle MAA and Exadata; Paul Parkinson, Developer Evangelist; Richard Exley, Consulting Member of Technical Staff, Oracle MAA and Exadata
-* **Last Updated By/Date** - Norman Aberin, August 2022;
+* **Last Updated By/Date** - Norman Aberin, September 2022

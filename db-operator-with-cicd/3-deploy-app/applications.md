@@ -1,27 +1,24 @@
 # Deploy the Microservices App
 
 ## Introduction
+This lab will show you how to build and deploy the application used by the lab to your Oracle Kubernetes Engine (OKE) cluster. The application uses maven for build automation, react for frontend and spring-boot to connect to the database and serve requests and serve the frontend. More notably, the Spring Boot application leverages the Advanced Queueing capabilities of the database.
 
-<!-- This lab will demonstrate how to integrate Jenkins with GitHub and Oracle Cloud Infrastructure Services and build a pipeline.
-
-GitHub provides webhook integration, so Jenkins starts running automated builds and tests after each code check-in. A sample web application Grabdish is modified and re-deployed as part of the CI/CD pipeline, which end users can access from the Container Engine for the Kubernetes cluster. -->
-
-Estimated Time: XX minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 
-<!-- * Execute GitHub Configuration
-* Execute Jenkins Configuration
-* Configure a Pipeline -->
+* Build and Push the application to OCI Container Registry
+* Deploy the application to OKE
+* Test the application
 
 ### Prerequisites
 
 * This lab presumes you have already completed the earlier labs.
+* Working Kubernetes cluster
 
 ## Task 1: Prepare for Application Deployment
 
 1. Login to your tenancy's OCI Registry (OCIR) to authorize the pushing of application images to OCIR. For help on how to retrieve the information below on the console, click on the dropdown below. When prompted for the password, retrieve and provide from your notes the Auth token you copied earlier as the password.
-
 
      ```bash
      <copy>
@@ -139,7 +136,7 @@ The above command will give an output similar to what is shown in the below imag
 
 3. You will be prompted by the application to login. Use `cloudbank` as the username and the password you provided earlier on during setup. 
 
-     Username: `cloudbank`
+     Username: __`cloudbank`__
 
      Password: `<your-frontend-login-password>`
 

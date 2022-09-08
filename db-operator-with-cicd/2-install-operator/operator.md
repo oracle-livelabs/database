@@ -1,11 +1,9 @@
 # Install the Database Operator
 
 ## Introduction
-This lab will show you how to install the DB Operator Kubernetes, or OraOperator, create an Autonomous Database on your Kubernetes cluster, walk through its many functionalities and explain how it works.
+This lab will show you how to install the DB Operator Kubernetes (OraOperator), create an Autonomous Database (ADB) in your Kubernetes cluster, walk through its many functionalities and explain how it works.
 
 Estimated Time:  10 minutes
-
-<!-- Quick walk through on how to deploy the microservices on your Kubernetes cluster. -->
 
 ### Objectives
 
@@ -77,7 +75,7 @@ The operator uses webhooks for validating user input before persisting it in Etc
 
 With a working DB operator installed in your Kubernetes cluster, you can now provision Autonomous Databases (ADB), Single-Instance Databases (SIDB), Oracle On-Premises Databases, etc.
 
-For this lab, we will use an Autonomous Database. To provision an Oracle Autonomous Database through the DB Operator for Kubernetes, you can use the below sample YAML file and configure it to your specific uses. More properties can be set and are shown in the official sample YAML file for ADB and can be found [<strong>here</strong>](https://github.com/oracle/oracle-database-operator/blob/main/config/samples/adb/autonomousdatabase_create.yaml).
+For this lab, you will use an Autonomous Database. To provision an Oracle Autonomous Database through the DB Operator for Kubernetes, you can use the below sample YAML file and configure it to your specific uses. More properties can be set and are shown in the official sample YAML file for ADB and can be found [<strong>here</strong>](https://github.com/oracle/oracle-database-operator/blob/main/config/samples/adb/autonomousdatabase_create.yaml).
 
 <strong style="color: #C74634">Note</strong>: As you go through creating the secrets and other kubernetes resources, notice how the names of these resources correspond to the values in the below example YAML.
 
@@ -217,7 +215,7 @@ To provision an Autonomous Database (ADB), follow the steps below:
     ![Find ADB](./images/find-adb.png)
 
  ## Troubleshooting
-    If any problems occur with the provisioning, you can check the logs of the deployment by running the following command:
+    If any problems occur with the provisioning, such as when the STATE is blank when you run `kubectl get adb`, you can check the logs of the deployment by running the following command:
 
     ```bash
       <copy>
@@ -294,7 +292,14 @@ spec:
     secretName: oci-privatekey
 ```
 
-1. Before creating the `instance-wallet`, we will need a secret with the instance wallet password. Above, this is referenced as `instance-wallet-password`. Run the following command to create a secret for the wallet's password.
+Before creating the `instance-wallet`, make sure the autonomous database already exist before creating a secret for the wallet. Copy the below command and make sure the output is `AVAILABLE`.
+```bash
+<copy>
+kubectl get adb cloudbankdb -o 'jsonpath={.status.lifecycleState}{"\n"}'
+</copy>
+```
+
+1. To create the instance-wallet secret, you need a secret with the instance wallet password. Above, this is referenced as `instance-wallet-password`. Run the following command to create a secret for the wallet's password.
 
     ```bash
     <copy>
