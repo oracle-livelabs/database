@@ -49,7 +49,7 @@ To allow Jenkins to access your repository, a Jenkins credentials must be made w
 
 6. At the bottom of the page, click `Generate token` to complete the step and generate the token
 
-<strong style="color: #C74634">Note</strong>: Copy and keep your Github Access Token in your notes.
+> **Note:** Copy and keep your Github Access Token in your notes.
 
 ## Task 2: Configure Jenkins Credentials
 You will need to create some credentials in Jenkins to authorize access to both our Kubernetes cluster and GitHub, as well as webhook tokens.
@@ -249,10 +249,10 @@ Create a new Pipeline by clicking on `+ New Item`
       ```
 11. Click `Save`.
     
-You should see Finished: Success under __Scan Repository Log__
+  You should see Finished: Success under __Scan Repository Log__
 
 
-## Task 6: Configuring GitHub Webhooks
+## Task 6: Configure GitHub Webhooks
 Back on Github, you will need to create multiple webhooks which will send specific payloads and trigger the different pipelines you created from Task 3-5.
 
 Run the following command to get a list of the webhooks that need to be created on your own fork of the lab repository.
@@ -294,7 +294,7 @@ The above command should provide a list with the Jenkins IP address and tokens p
 
       ![Webhooks Add](images/map-webhooks.png " ")
 
-    <strong style="color: #C74634">Note</strong>: For webhooks `create_branch_webhook` and `delete_branch_webhook`, make sure to deselect the Push event (as they are selected by default).
+    > **Note:** For webhooks `create_branch_webhook` and `delete_branch_webhook`, make sure to deselect the Push event (as they are selected by default).
 
     After all three webhooks have been created, your repository's webhooks listing should appear similar to the ones in the image below.
    
@@ -304,6 +304,8 @@ The above command should provide a list with the Jenkins IP address and tokens p
       1. create branch webhook
       2. delete branch webhook
       3. push branch webhook
+
+You may now **proceed to the next lab.**
 
 ## Acknowledgements
 

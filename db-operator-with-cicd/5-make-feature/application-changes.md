@@ -17,7 +17,7 @@ Estimated Time:  20 minutes
 * This lab presumes you have already completed the earlier labs.
 * As this is a demonstration of Jenkins/GitHub integration for CI/CD, **you must have your own GitHub fork of the lab repository.** It is assumed you completed this step in Setup lab.
 
-## Task 1: Creating a feature branch
+## Task 1: Create a feature branch
 
 You have a new request to display the transaction date besides the outcome of the transfer. To implement this, you will be creating a new branch to start developing in. The changes have already been implemented in the database but have not yet been reflected in the backend application. Follow the instructions below to get started and create a new branch.
 
@@ -42,7 +42,7 @@ You have a new request to display the transaction date besides the outcome of th
      </copy>
      ```
 
-     <strong style="color: #C74634">Note</strong>: Notice that the branch name follows the following pattern:
+     > **Note:** Notice that the branch name follows the following pattern:
      ```
      <branch_group>/<uniqueId>/<short_description>
      ``` where the uniqueId is used as the identifier for any environments.
@@ -66,7 +66,7 @@ You have a new request to display the transaction date besides the outcome of th
 
   With the creation of a feature branch, your create-branch pipeline on Jenkins will be triggered and create an isolated environment, which currently only consists of a single-instance database.
 
-## Task 2: Viewing the created isolated environment (Optional)
+## Task 2: View the created isolated environment (Optional)
 
 1. After the branch is created, you can navigate back to your fork's Webhooks page on GitHub to view the payload/event sent to Jenkins. On your list of payloads, select the one with the `create` event and is most recent. You should see something similar to the image below, with the response body indicating that a job was triggered. 
 
@@ -80,7 +80,7 @@ You have a new request to display the transaction date besides the outcome of th
      </copy>
      ```
 
-     <strong style="color: #C74634">Note</strong>: Notice that the name of this new resource matches a part of the name of the branch you created earlier. This is because Jenkins is setup to use that to identify the environment.
+     > **Note:** Notice that the name of this new resource matches a part of the name of the branch you created earlier. This is because Jenkins is setup to use that to identify the environment.
 
 3. Once the isolated database environment is fully provisioned, you can retrieve the details to connect to that specific environment's database:
 
@@ -88,7 +88,7 @@ You have a new request to display the transaction date besides the outcome of th
      kubectl get singleinstancedatabase cbtransfer01 -o jsonpath='{.status.pdbConnectString}{"\n"}'
      ```
 
-## Task 3: Updating the Spring Boot application
+## Task 3: Update the Spring Boot application
 
 With a feature branch, you can start developing the feature you are working on and connect it to the database for testing your back-end features extensively.
 
@@ -138,7 +138,7 @@ For this task, you can make use of the new Code Editor available on Cloud Shell.
 
      ![New Code Snippet](./images/new-line-60-code.png)
 
-## Task 4: Testing the changes locally
+## Task 4: Test the changes locally
 Now that the tiny feature has been added, you can test our changes by running the application.
 
 1. Navigate to the `backend-springboot` directory.
@@ -153,7 +153,7 @@ Now that the tiny feature has been added, you can test our changes by running th
      cd cloudbank/backend-springboot
      </copy>
      ```
-     <strong style="color: #C74634">Note</strong>: The relative path above will work if you opened the repository directory as a __workspace__. 
+     > **Note:** The relative path above will work if you opened the repository directory as a __workspace__. 
 
 
 2. Build the application by running
@@ -162,7 +162,7 @@ Now that the tiny feature has been added, you can test our changes by running th
                mvn clean package
           </copy>
           ```
-     <strong style="color: #C74634">Note</strong>: Above we are using the maven CLI to run project lifecycles. OCI Code Editor comes with tools pre-installed, which includes `mvn` amongst many others. If you are testing locally, make sure you have maven installed.
+     > **Note:** Above we are using the maven CLI to run project lifecycles. OCI Code Editor comes with tools pre-installed, which includes `mvn` amongst many others. If you are testing locally, make sure you have maven installed.
 
      The command above should produce something similar to the following at the bottom of the output:
      ```
@@ -219,7 +219,7 @@ Now that the tiny feature has been added, you can test our changes by running th
      You can now proceed to pushing these changes.
 
 
-## Task 5: Pushing the changes
+## Task 5: Push the changes
 Once you are satisfied with your changes and manual testing, you can start checking your changes into GitHub. Since you are working from the CloudShell and will be pushing changes to your remote, you will need to login when you make a commit.
 
 1. Run the following and replace the example email and the username with your GitHub email and GitHub username. This will set your identity for when you make commits and pushes.
@@ -273,7 +273,7 @@ After finishing the feature, you can merge these changes back into `dev`. Naviga
    
 2. Open a Pull Request from `feature/cbtransfer01/transaction_date` to `dev`.
 
-     <strong style="color: #C74634">Note</strong>: When opening a pull request, you will be prompted to select which repositories branches and branches to use. For both the base repository and head repository, select your own forked repository (which contain your username). This will simplify the form to a Pull Request merging changes from your feature branch to `dev` as shown below.
+     > **Note:** When opening a pull request, you will be prompted to select which repositories branches and branches to use. For both the base repository and head repository, select your own forked repository (which contain your username). This will simplify the form to a Pull Request merging changes from your feature branch to `dev` as shown below.
 
      ![Pull Request Open](./images/open-pr.png)
 
@@ -331,7 +331,7 @@ No resources found in cloudbank namespace.
      
 
 
-## Task 8: Creating a Release Preview
+## Task 8: Create a Release Preview
 
 Once you are done with the sprint, and you have the necessary features, fixes and changes all merged into `dev`, you can now create a release-branch from `dev` with which you can preview the updates with.
 
@@ -370,7 +370,7 @@ This will update the environment you have built from Lab 1-3.
      ![Create Pipeline Triggered](./images/create-pipeline-triggered.png)
 
           
-     <strong style="color: #C74634">Note</strong>: To get to the Console Output, hover over #3 under Last Success in the image above and click on Console Output from the dropdown. (Check Task 7 for an example)
+     > **Note:** To get to the Console Output, hover over #3 under Last Success in the image above and click on Console Output from the dropdown. (Check Task 7 for an example)
 
      In the Console Output, you will see that the release branch updates the Test environment and the deployments. You will also notice that the images took the release version __1.0__ as a tag.
 
@@ -382,7 +382,7 @@ This will update the environment you have built from Lab 1-3.
 
      You can also navigate back to the web application and make another transfer request. The response output should reflect your chnages and include the transaction date.
 
-This completes the LiveLab. You may now **proceed to Teardown.**
+This completes the LiveLab. You may now **proceed to the next lab.**
 
 ## Acknowledgements
 

@@ -54,14 +54,14 @@ With a working fork of the lab repository under your own account, clone the fork
  git clone --single-branch --branch cloudbank https://github.com/<username>/oci-react-samples
 </copy>
 ```
-<strong style="color: #C74634">Note</strong>: Replace `<username>` above with your GitHub username. Your GitHub username will be located at the top right after clicking on your user icon.
+> **Note:** Replace `<username>` above with your GitHub username. Your GitHub username will be located at the top right after clicking on your user icon.
 
   ![Locate GitHub Username](./images/github-un-where.png)
 
 ## Task 3: Prepare for Terraform Provisioning
 This part of the setup process will require the following information below to provision resources. Retrieve these information and keep these in your notes (with _exception_ to the Jenkins Password  which does not have to retrieved) for Task 4, which will prompt you for these values. Click on the drop downs below for more information on how to retrieve these from the OCI Console:
 
-<strong style="color: #C74634">Note</strong>: Keep the following information and credentials in your notes.
+> **Note:** Keep the following information and credentials in your notes.
 
 1. __API Key__ - used to authorize provisioning Database resources with
 
@@ -94,7 +94,7 @@ This part of the setup process will require the following information below to p
 
  ## How to Retrieve an API Key's Configuration
     
-    <strong style="color: #C74634">Note</strong>: Each user can have a maximum of three API signing keys. If you are planning to reuse a previous API Key, please make sure you have the corresponding keys used in generating the API Key.
+    > **Note:** Each user can have a maximum of three API signing keys. If you are planning to reuse a previous API Key, please make sure you have the corresponding keys used in generating the API Key.
 
     If you already have three or opt to reuse your API Keys. Open the options menu on the right side (3 dots) for a specific API Key and select `View Configuration file`. This option will show the same output as above listing your `User OCID, Tenancy OCID, Region Identifier` and `Fingerprint`
 
@@ -133,7 +133,7 @@ This part of the setup process will require the following information below to p
 
 6. __Database Password__ - Enter a password (see below requirements)
 
-    <strong style="color: #C74634">Note</strong>: The Autonomous Database sets minimum standards for passwords, and the default profile sets parameters to limit the number of failed login attempts. 
+    > **Note:** The Autonomous Database sets minimum standards for passwords, and the default profile sets parameters to limit the number of failed login attempts. 
 
      * The password must be between 12 and 30 characters long and must include at least one uppercase letter, one lowercase letter, and one numeric character.
      * The password cannot contain the username.
@@ -183,19 +183,6 @@ Execute the following sequence of commands to start the setup.
 ## Task 5: Prepare other required information
 Once setup completes, you will need to run and setup the following manually for the labs.
 
-<!-- 1. Create an __Oracle Account__
-    
-    <strong style="color: #C74634">Note</strong>: Keep your Oracle Account credentials in your notes. These will be referenced as `oracle-sso-email-address` and `oracle-sso-password` in __Lab 2__
-
-
- ## How to create an Oracle Account
- 
-    > Note: This step is required to authenticate later on through Docker and authorize pulling the Oracle Database Express Edition image from the official Oracle Container Registry. <strong>For other editions, like the Enterprise and Standard editions</strong>, please navigate to the specific edition and _accept the license agreement_. You can check out the Oracle Database images available [<strong>here</strong>](https://container-registry.oracle.com/ords/f?p=113:10:110127779464535:::::)
-
-    An Oracle Account provides access to pull pre-built Database docker images from the official Oracle Container Registry.
-
-    To create an account, navigate to the following link: [Create Oracle Account](https://profile.oracle.com/myprofile/account/create-account.jspx). Since you will be using the Oracle Database Express Edition, there are no further actions to take. Once you have completed creating an account, you can return to the next step below. -->
-
 1. Upload the API Signing Key's __Private Key__
 
     This private key will be used to create a secret to authorize the DB operator for Kubernetes to do DB operations on your own OCI Tenancy.
@@ -207,7 +194,7 @@ Once setup completes, you will need to run and setup the following manually for 
 
     This will be open the form for uploading. Select your private key file and upload it. 
 
-    <strong style="color: #C74634">Note</strong>: We recommend renaming the private key file to `private.pem` before uploading to OCI Cloud Shell.
+    > **Note:** We recommend renaming the private key file to `private.pem` before uploading to OCI Cloud Shell.
 
     ![Upload File to Bash](./images/select-and-upload.png)
     
@@ -230,8 +217,6 @@ Once setup completes, you will need to run and setup the following manually for 
 
 
     Auth tokens are used to authenticate with when logging on your tenancy's container registry. This is required for pushing the lab's Cloudbank container images. If you are opting to reuse an auth token, do note that this information is only available upon creation.
- 
-  <strong style="color: #C74634">Note</strong>: Keep the Auth Token in your notes.
 
  ## How to create an Auth Token
 
@@ -250,6 +235,8 @@ Once setup completes, you will need to run and setup the following manually for 
     After clicking `Generate Token`, make sure to copy the token before closing and add it to your notes.
 
     ![Copy Generated Token](./images/copy-generated-token.png)
+
+    > **Note:** Keep the Auth Token in your notes.
 
 
 
@@ -282,18 +269,20 @@ To setup your kubeconfig:
     ```
 
 
-Once the KubeConfig has been created, navigate to the lab directory `cbworkshop`.
-```bash
-<copy>
-cd $CB_STATE_DIR
-</copy>
-```
-From this directory, you can run the init script to initialize the cluster and create a namespace, and secrets not related to the operator, but to the cloudbank application:
-```bash
-<copy>
-./init-cluster.sh
-</copy>
-```
+6. Once the KubeConfig has been created, navigate to the lab directory `cbworkshop`.
+    ```bash
+    <copy>
+    cd $CB_STATE_DIR
+    </copy>
+    ```
+    From this directory, you can run the init script to initialize the cluster and create a namespace, and secrets not related to the operator, but to the cloudbank application:
+    ```bash
+    <copy>
+    ./init-cluster.sh
+    </copy>
+    ```
+
+You may now **proceed to the next lab.**
 
 ## Acknowledgements
 

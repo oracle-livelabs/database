@@ -47,7 +47,7 @@ Estimated Time: 10 minutes
      oci iam region list | jq -r --arg REGION $(state_get .lab.region.identifier) '.data[] | select (.name == $REGION) | .key '
      </copy>
      ```
-     <strong style="color: #C74634">Note</strong>: Region Keys should be lowercase when running `docker login.`
+     > **Note:** Region Keys should be lowercase when running `docker login.`
 
   ## How to get the tenancy namespace
 
@@ -69,7 +69,7 @@ Estimated Time: 10 minutes
 
      ![Get Username](./images/get-username.png)
 
-     <strong style="color: #C74634">Note</strong>: Your username will include oracleidentitycloudservice if you are logged in as a federated user. Include this part as your username along with the forward slash.
+     > **Note:** Your username will include oracleidentitycloudservice if you are logged in as a federated user. Include this part as your username along with the forward slash.
 
      Alternatively, you can also run the following command which leverages the OCI CLI on Cloud Shell:
 
@@ -131,7 +131,7 @@ The above command will give an output similar to what is shown in the below imag
      </copy>
      ```
 
-     <strong style="color: #C74634">Note</strong>: If you are using Chrome, you may encounter a warning that the connection is not private and no visible way to advance. This is because the certificate provided is self-signed and not a paid official certificate. As a workaround, type `thisisunsafe`.
+     > **Note:** If you are using Chrome, you may encounter a warning that the connection is not private and no visible way to advance. This is because the certificate provided is self-signed and not a paid official certificate. As a workaround, type `thisisunsafe`.
 
 
 3. You will be prompted by the application to login. Use `cloudbank` as the username and the password you provided earlier on during setup. 
@@ -148,7 +148,7 @@ The above command will give an output similar to what is shown in the below imag
     
     ![Cloudbank Application Make Transfer Response](images/transfer-request-response.png " ")
 
-You may now **proceed to the next lab.**.
+You may now **proceed to the next lab.**
 
 ## Acknowledgements
 

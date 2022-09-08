@@ -77,7 +77,7 @@ With a working DB operator installed in your Kubernetes cluster, you can now pro
 
 For this lab, you will use an Autonomous Database. To provision an Oracle Autonomous Database through the DB Operator for Kubernetes, you can use the below sample YAML file and configure it to your specific uses. More properties can be set and are shown in the official sample YAML file for ADB and can be found [<strong>here</strong>](https://github.com/oracle/oracle-database-operator/blob/main/config/samples/adb/autonomousdatabase_create.yaml).
 
-<strong style="color: #C74634">Note</strong>: As you go through creating the secrets and other kubernetes resources, notice how the names of these resources correspond to the values in the below example YAML.
+> **Note:** As you go through creating the secrets and other kubernetes resources, notice how the names of these resources correspond to the values in the below example YAML.
 
 
 ```yaml
@@ -135,7 +135,7 @@ To get started with creating an Oracle Autonomous Database, you will need to cre
         </copy>
     ```
 
-    <strong style="color: #C74634">Note</strong>: This requires the private.pem file from Lab 1 Task 5.
+    > **Note:** This requires the private.pem file from Lab 1 Task 5.
 
 3. Create the __secret admin-password__
 
@@ -229,7 +229,7 @@ To provision an Autonomous Database (ADB), follow the steps below:
 
 For Labs 4-6, you will be making use of Single-Instance Databases (SIDB). To provision SIDBs through the DB Operator for Kubernetes, you can use the below sample YAML file and configure it to your specific uses. More types can be found and properties can be set are available in the official sample YAML files for SIDB and can be found [<strong>here</strong>](https://github.com/oracle/oracle-database-operator/tree/main/config/samples/sidb).
 
-<strong style="color: #C74634">Note</strong>: As you go through creating the secrets and other kubernetes resources, notice how the names of these resources correspond to the values in the below example YAML.
+> **Note:** As you go through creating the secrets and other kubernetes resources, notice how the names of these resources correspond to the values in the below example YAML.
 
 ```yaml
 # Copyright (c) 2022, Oracle and/or its affiliates.
@@ -265,11 +265,11 @@ spec:
     ```
 
 
-## Task 5: Creating a secret with the Autonomous Database Wallet
+## Task 5: Create a secret with the Autonomous Database Wallet
 
 In the microservices application related to the lab, we have configured the back-end to connect to the database with a database wallet. The Oracle Database operator for Kubernetes provides means to generate a wallet and create a secret to enable you to inject it into deployments that need it. Below, the secret will be named `instance-wallet`.
 
-<strong style="color: #C74634">Note</strong>: As you go through creating the secrets and other kubernetes resources, notice how the names of these resources correspond to the values in the below example YAML.
+> **Note:** As you go through creating the secrets and other kubernetes resources, notice how the names of these resources correspond to the values in the below example YAML.
 
 ```yaml
 # Copyright (c) 2022, Oracle and/or its affiliates.
@@ -350,7 +350,7 @@ kubectl get adb cloudbankdb -o 'jsonpath={.status.lifecycleState}{"\n"}'
 
     ![View Secrets for ADB Wallet](./images/view-adb-wallet-secrets.png)
 
-## Task 6: Initializing the Autonomous Database
+## Task 6: Initialize the Autonomous Database
 
 To begin initializing the database, simply run the following command below. This script will connect to the database to execute SQL scripts and initialize the Autonomous Database with lab-related database tables and create users.
 
@@ -360,7 +360,9 @@ To begin initializing the database, simply run the following command below. This
 </copy>
 ```
 
+You may now **proceed to the next lab.**
+
 ## Acknowledgements
 
 * **Authors** - Norman Aberin, Developer Advocate
-* **Last Updated By/Date** - Norman Aberin, August 2022
+* **Last Updated By/Date** - Norman Aberin, September 2022
