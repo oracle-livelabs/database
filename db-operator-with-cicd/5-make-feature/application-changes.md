@@ -309,12 +309,12 @@ Once the feature branch has been removed. You can navigate back to Jenkins and s
 You will see that the Last Build(#2), ran a few minutes ago from when you deleted the feature branch. __Hover__ over the #2 link, click on the dropdown icon and finaly go to Console Output.
 
 
-![Cleanup Console Output Location](./images/cleanup_open_console_output.png)
+![Cleanup Console Output Location](./images/cleanup-open-console-output.png)
      
 
 In the output, you will notice that the environment is cleaned when this pipeline runs, or when feature branches are deleted.
 
-![Cleanup Console Output](./images/cleanup_environment_deleted.png)
+![Cleanup Console Output](./images/cleanup-environment-deleted.png)
      
 On your OCI Cloud Shell, running the same command earlier for listing all singleinstancedatabases will now return an empty list
 
