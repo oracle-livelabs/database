@@ -17,7 +17,7 @@
         },
         {
             "title": "Lab 2: Validate and Run Migration",
-            "filename": "../../validate-and-run/validate-migration.md"
+            "filename": "../../validate-and-run-terraform/validate-and-run-terraform.md"
         },
         {
             "title": "CloudWorld Support Lab",
@@ -27,10 +27,7 @@
             "title": "Need Help?",
             "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
             "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
-        },
-        {
-            "title": "Terraform Output",
-            "filename": "../../terraform/terraform.md"
         }
+        
     ]
 }
