@@ -8,7 +8,6 @@ We developed this application to demonstrate Oracle Sharding (a hyperscale globa
 - The application can support billions of users and products.
 
 -  We used Oracle Database Sharding (with 3 shards) with different types of data stored in a single database platform, which includes structured and unstructured data, relational, JSON and text.
-  
 -  Multiple capabilities, like the Simple Oracle Document Access (SODA) API + Text Search for JSON, joins, transactions, and ACID properties for relational queries, fuzzy match, type ahead, free-form text search, and sentiment analysis for text.
 
 
@@ -43,7 +42,6 @@ This lab assumes you have:
 
 ## Task 1: Eshop Demonstration
 
-1. **eShop URL Access:** When you access the application using the URL  (**`http://localhost:3000/`**), the application's home page opens. 
 
   ![<application front page>](./images/app-front.jpg " ")
 
@@ -55,7 +53,6 @@ This lab assumes you have:
 2. **Log In and Sign Up:** The application has **login** and new user **signup** features, but it allows access to a non-logged in application user to some extent. It allows you to search for a product in the catalog and make a purchase based on the product's reviews, sentiment score, and rating.
 
   To log in, go to the top right of the navigation bar, click the user profile icon, and select Log In. On the login page, you can log in to an existing account or sign up for a new account.
-   
   You can use the default login email and password for this LiveLab.
 
 
@@ -69,8 +66,6 @@ This lab assumes you have:
 
   ![<catalog page>](./images/catalog.jpg " ")
 
-  Any of the product tiles on this page can be clicked to take you to the product information tab. 
-  Use the Filter options by selecting from the Price and/or Brand filters to get a list of specific products. 
 
    Alternatively, you can perform a text search. Access the search bar by clicking the Search icon, then directly type the product information in the search bar. Here, Oracle fuzzy matching is the method used, and it provides an improved ability to process word-based matching queries to find matching phrases or sentences from a database.
 
@@ -100,7 +95,6 @@ This lab assumes you have:
 
   ![<proceed to checkout>](./images/checkout.png " ")
 
-6. **Place Your Order:** In the Review Order page, look over the order and click **Place your order**. 
 You can change the address shown in Saved Address if you want to ship products to a location different from your default address.
 
   ![place your order](./images/bill.png " ")
@@ -126,7 +120,6 @@ The application can create reports by emulating two large data sets from relatio
   ![<sentiment report>](./images/sentiment.png " ")
 
 3.	Best Selling Product In last two months: A single query from multiple tables, both relational and non-relational, accessing multiple shard databases.
-   
   ![<best selling product report>](./images/product.png " ")
 
 4. The Analytics report is made with a Java table with multiple SQL queries (These queries are on multiple tables both relational and non-relational across all of the shard databases).

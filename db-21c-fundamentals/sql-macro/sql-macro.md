@@ -182,9 +182,6 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
     ```
     SQL> <copy>COL CONCAT_SELF(LAST_NAME,2) FORMAT A40</copy>
-    ```
-
-    ```
     SQL> <copy>SELECT last_name, concat_self(last_name,2) FROM hr.employees;</copy>
     ```
 

@@ -29,9 +29,25 @@
       "filename": "../../topology/topology.md"
     },
     {
+<<<<<<< HEAD
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
+=======
+      "title": "Lab 5: Eshop Application Schema & Code Snippet (read-only)",
+      "description": "Eshop App schema & Code Snippet",
+      "filename": "../../appschema/appschema.md"
+    },
+    {
+      "title": "Lab 6: Application Queries on Sharded Database",
+      "description": "Application Queries on sharding Database",
+      "filename": "../../appqueries/appqueries.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+>>>>>>> upstream/main
     }
   ]
 }

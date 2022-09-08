@@ -15,7 +15,7 @@ It is built on shared-nothing architecture, in which data is horizontally partit
 ![Sharding Architecture](images/sharding_arch.jpg " ")
 
 ### Objectives
-In this workshop, you will gain first-hand experience of how Oracle Database can store structured and unstructured data in same database with ten’s of petabytes of data.
+In this workshop, you will gain first-hand experience of how Oracle Database can store structured and unstructured data in the same database with ten’s of petabytes of data.
 
 Once you complete your setup, the next lab will cover:
 
