@@ -6,15 +6,15 @@ In this workshop you will discover how deploying Oracle TimesTen In-Memory Datab
 
 Setting up a TimesTen cache is quick and easy. This workshop leads you through the process step by step and uses a simple OLTP application and some example queries to demonstrate the incredibly low query latencies provided by TimesTen.
 
-Estimated Workshop Time: **60 minutes**
+**Estimated Workshop Time:** 120 minutes
 
 ### About Oracle TimesTen In-Memory Database
 
 Oracle TimesTen In-Memory Database (TimesTen) delivers real-time application performance (low response time and high throughput) by changing the assumptions around where data resides at runtime. By managing data in memory, and optimizing data structures and access algorithms accordingly, database operations execute with maximum efficiency achieving dramatic gains in responsiveness and throughput.
 
-TimesTen is a relational database, with SQL as its access language and PL/SQL as its procedural language so that you can leverage your existing Oracle Database skills. It supports many database APIs such as JDBC, ODBC, ODP.NET and Oracle Call Interface (OCI) and several Open Source languages, such as Python and Node.js, are supported via Open Source APIs. TimesTen provides full persistence and has built-in high availability.
+TimesTen is a relational database, with SQL as its access language and PL/SQL as its procedural language, so you can leverage your existing Oracle Database skills. It supports many database APIs, such as JDBC, ODBC, ODP.NET and Oracle Call Interface (OCI), and several Open Source languages, such as Python and Node.js, are supported via Open Source APIs. TimesTen provides full persistence and has built-in high availability.
 
-TimesTen can be deployed both as a database of record or as a high-performance relational cache in front of an Oracle database to accelerate Oracle database applications. This lab focuses on the cache deployment mode.
+TimesTen can be deployed both as a database of record or as a high-performance relational cache in front of an Oracle database to accelerate Oracle database applications. This lab focuses on the cache deployment mode of TimesTen Classic.
 
 ![TimesTen Cache Architecture Diagram](./images/tt-cache-architecture.png " ")
 
@@ -32,7 +32,7 @@ In this workshop you will:
 * Run a simple OLTP benchmark to see the performance benefit of TimesTen
 * Run some queries to see the speedup provided by TimesTen
 * Use dynamic cache groups
-* Shutdown the TimesTen cache and instance
+* Shut down the TimesTen cache and instance
 
 ### Prerequisites
 
@@ -43,19 +43,21 @@ This workshop assumes that you have:
 
 In order to run this workshop you need:
 
-* An active Oracle Cloud account
+* An active Oracle account or Oracle Cloud account
 
 You can run this workshop:
 
-* In the LiveLabs sandbox
-* In your own tenancy using a paid Oracle Cloud account
-* Using a free-trial Oracle Cloud account
+* In the LiveLabs sandbox using a regular Oracle Account
+* In your own tenancy using a paid Oracle Cloud account or a free-trial Oracle Cloud account
 
 This workshop does _not_ support the Oracle Cloud 'Always Free' tier due to that tier's resource restrictions.
 
-**IMPORTANT:** If you choose to run this workshop in your own tenancy, or using a free-trial Cloud account, please be sure to provision at least **4 CPUs** and **32 GB RAM** for the cloud instance used for the workshop.
+**IMPORTANT:** 
 
-You may now ***proceed to the next lab***.
+1. This workshop requires an OCI compute instance with at least **4 CPUs** and **32 GB RAM.** If you choose to run this workshop in your own tenancy, please ensure that you have sufficient resources available.
+2. Depending on how you run the workshop (LiveLabs sandbox or your own tenancy), and whether you look at the workshop guide that loads in your own local browser or the one within the workshop compute instance, you may notice minor differences. This is because each guide is customized based on the context where it is being used. For the best experience, consistently follow either the guide within the workshop instance or the one in your local browser.
+
+You can now *proceed to the next lab*.
 
 ## Learn More
 
@@ -67,4 +69,4 @@ You may now ***proceed to the next lab***.
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Last Updated By/Date** - Chris Jenkins, August 2022

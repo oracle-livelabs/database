@@ -19,7 +19,7 @@ For more information about Terraform and Resource Manager, please see the append
 
 1. Click on the link below to download the Resource Manager zip file you need to build your environment.
 
-    [tf-fpp-1.0.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/tf-fpp-1.0.zip)
+    [tf-fpp-1.2.1.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/fpp/tf-fpp-1.2.1.zip )
 
 2. Login to Oracle Cloud
 3. Select the correct region
@@ -31,9 +31,9 @@ For more information about Terraform and Resource Manager, please see the append
 
 6. Click on Create Stack
     ![](./images/01-resmgr-compartment.png)
-7. Select **My Configuration**, choose the **.ZIP FILE** button, click the **Browse** link and select the zip file (tf-fpp-1.0.zip) that you downloaded. Click **Select**.
+7. Select **My Configuration**, choose the **.ZIP FILE** button, click the **Browse** link and select the zip file (tf-fpp-1.2.1.zip) that you downloaded. Click **Select**.
     ![](./images/02-resmgr-zip.png)
-8. Make sure that the base information is populated properly
+8. Review the information. You can leave the default values.
     ![](./images/03-resmgr-stack-info.png)
 9. Click **Next**
 10. In the **Configure Variables** step, select the appropriate Availability Domain (depending on your region you may need to specify it or not)
@@ -65,7 +65,7 @@ When using Resource Manager to deploy an environment, execute a **Terraform Appl
 
     ![](./images/apply-job.png)
 
-2. Select the **Apply** button in the bottom right of the screen. This will create your cloud network, the db system and the compute instance.
+2. Select the **Apply** button in the bottom right of the screen. This will create your cloud network, the db system and the compute instance. The job will take some time (90-120 minutes).
     ![](./images/apply-job2.png)
 
 3. Once this job succeeds, you will get an apply complete notification from Terraform. Examine it closely.
