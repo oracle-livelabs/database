@@ -120,7 +120,7 @@ Estimated Lab Time: 10 minutes
 
     *Tip: If you choose to use a default password __Ora$Dev$Live2021__ then you will not have to make changes to scripts later in this lab.* 
 
-    ```
+    ```nohighlight
     <copy>Ora$Dev$Live2021</copy>
     ```
 
