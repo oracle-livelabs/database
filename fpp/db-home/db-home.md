@@ -18,14 +18,14 @@ When it comes to patching the binaries, a common approach is **in-place patching
 
 The downtime window must be large enough to accommodate the patching operation and its rollback in case of any problems.
 
-**Our-of-place patching** is generally a better approach, that consists in the following steps:
+**Out-of-place patching** is generally a better approach, that consists in the following steps:
 - Prepare a new Oracle Home which contains the required patches
 - Stop the databases (all, or one at the time)
 - Restart the databases in the new Oracle Home
 - Run `datapatch`
 
 The downtime window can be scheduled separately for each database, because at any time, both Oracle Homes will be available. This gives more flexibility and allows an easier rollback (the previous Oracle Home is still there).
-Customers do not always implement our-of-place patching because the new binaries preparation and installation require some additional steps before the patching campaign.
+Customers do not always implement out-of-place patching because the new binaries preparation and installation require some additional steps before the patching campaign.
 
 Fleet Patching and Provisioning takes this burden off by automating the Oracle Home provisioning for you, that's it, FPP use out-of-place patching, and helps you keeping your Oracle Homes under control, in a central and standardized way.
 
