@@ -3,42 +3,50 @@
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
         {
-            "title": "Get Started",
-            "description": "Login to Oracle Cloud",
-            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
-        },
-        {
             "title": "Introduction",
+            "type": "livelabs",
             "description": "Introduction",
             "filename": "../../introduction/introduction.md"
         },
         {
+            "title": "Getting Started",
+            "type": "livelabs",
+            "description": "Login to Oracle Cloud",
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
+        },
+        {
             "title": "Lab 1: Provision an Autonomous Database",
+            "type": "livelabs",
             "description": "Provision Autonomous Database",
             "filename": "./../../db-design-perf-provision/db-design-perf-provision.md"
         },
         {
             "title": "Lab 2: Establish the initial Database Schema",
+            "type": "livelabs",
             "description": "Establish the initial Database Schema",
             "filename": "./../../db-design-perf-build/db-design-perf-build.md"
         },
        {
             "title": "Lab 3: Run the base Performance Benchmark",
+            "type": "livelabs",
             "description": "Run the base Performance Benchmark",
             "filename": "./../../db-design-perf-bench1/db-design-perf-bench1.md"
         },
         {
             "title": "Lab 4: Optimize the Design for Throughput",
+            "type": "livelabs",
             "description": "Optimize the Design for Throughput",
             "filename": "./../../db-design-perf-bench2/db-design-perf-bench2.md"
         },
         {
             "title": "Lab 5: Optimize the Design for Concurrency",
+            "type": "livelabs",
             "description": "Optimize the Design for Concurrency",
             "filename": "./../../db-design-perf-bench3/db-design-perf-bench3.md"
         },
         {
             "title": "Need Help?",
+            "type": "livelabs",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
             "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
         }
