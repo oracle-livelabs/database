@@ -8,7 +8,7 @@ Estimated Time:  10 minutes
 ### Objectives
 
 * Install the DB Operator for Kubernetes
-* Learn how they work
+* Learn how the OraOperator works
 * Provision an Autonomous Database
 * Setup the Autonomous Database
 
@@ -31,7 +31,7 @@ The operator uses webhooks for validating user input before persisting it in Etc
 
     ![CertManager install output](./images/install-certificate-manage-output.png)
 
-    After installing the certificate manager, check that the status of the cert-manager deployments are `Running` before moving on to Step 2:
+    After installing the certificate manager, check that the status of the cert-manager deployments is `Running` before moving on to Step 2:
 
     ```bash
     <copy>
@@ -75,9 +75,9 @@ The operator uses webhooks for validating user input before persisting it in Etc
 
 With a working DB operator installed in your Kubernetes cluster, you can now provision Autonomous Databases (ADB), Single-Instance Databases (SIDB), Oracle On-Premises Databases, etc.
 
-For this lab, you will use an Autonomous Database. To provision an Oracle Autonomous Database through the DB Operator for Kubernetes, you can use the below sample YAML file and configure it to your specific uses. More properties can be set and are shown in the official sample YAML file for ADB and can be found [<strong>here</strong>](https://github.com/oracle/oracle-database-operator/blob/main/config/samples/adb/autonomousdatabase_create.yaml).
+For this lab, you will use an Autonomous Database. To provision an Oracle Autonomous Database through the DB Operator for Kubernetes, you can use the below sample YAML file and configure it to your specific uses. More properties can be set and are shown in the official sample YAML file for ADB [<strong>here</strong>](https://github.com/oracle/oracle-database-operator/blob/main/config/samples/adb/autonomousdatabase_create.yaml).
 
-> **Note:** As you go through creating the secrets and other kubernetes resources, notice how the names of these resources correspond to the values in the below example YAML.
+> **Note:** As you go through creating the secrets and other Kubernetes resources, notice how the names of these resources correspond to the values in the below example YAML.
 
 
 ```yaml
@@ -103,7 +103,7 @@ spec:
     secretName: oci-privatekey
 ```
 
-With the Kubernetes Operator, you only need to configure a YAML file like the above and apply it to create databases, similar to the below command.
+With the Kubernetes Operator, you only need to configure a YAML file like the above and apply it to create databases, similar to the command below.
 
 ```bash
 kubectl apply -f your-adb-configuration.yaml
@@ -127,7 +127,7 @@ To get started with creating an Oracle Autonomous Database, you will need to cre
 
 2. Create the __secret oci-privatekey__
 
-    This secret is used to authorize the operator with API signing key pair. To create this secret, run the following, which will use the private key file you uploaded earlier in __Lab 1__ and moved inside the `cbworkshop` directory. This secret is referenced in the above example YAML file under `spec.ociConfig.secretName`.
+    This secret is used to authorize the operator with API signing key pair. To create this secret, run the following, which will use the private key file you uploaded and moved inside the cbworkshop directory earlier in  __Lab 1__. This secret is referenced in the above example YAML file under `spec.ociConfig.secretName`.
 
     ```bash
         <copy>
@@ -162,10 +162,10 @@ To provision an Autonomous Database (ADB), follow the steps below:
 
 2. Apply the YAML file
 
-  The `gen-adb-create.sh` script will produce an output similar to the below on your terminal with an instruction for applying the generated YAML file. Copy the the last command: `kubectl apply ...` and run it.
+  The `gen-adb-create.sh` script will produce an output similar to the one below on your terminal for applying the generated YAML file. Copy the last command: `kubectl apply ...` and run it.
 
     ```bash
-    Retreiving Compartment OCID...DONE
+    Retrieving Compartment OCID...DONE
 
     Generating YAML file...DONE
     Updating generated YAML file...DONE
@@ -184,13 +184,13 @@ To provision an Autonomous Database (ADB), follow the steps below:
 
   Applying the yaml file, you should get the following output
 
-    ```
+    ```bash
     autonomousdatabase.database.oracle.com/cloudbankdb created
     ```
 
 3. View the ADB Resource
 
-  With the OraOperator, you can now interact with your database through kubernetes and the kubectl command. To get a list of AutonomousDatabases, you can run the following:
+  With the OraOperator, you can now interact with your database through Kubernetes and the kubectl command. To get a list of AutonomousDatabases, you can run the following:
 
     ```bash
       <copy>
@@ -227,9 +227,9 @@ To provision an Autonomous Database (ADB), follow the steps below:
 
 ## Task 4: Setup Secrets for SIDB (Used in Lab 4-6)
 
-For Labs 4-6, you will be making use of Single-Instance Databases (SIDB). To provision SIDBs through the DB Operator for Kubernetes, you can use the below sample YAML file and configure it to your specific uses. More types can be found and properties can be set are available in the official sample YAML files for SIDB and can be found [<strong>here</strong>](https://github.com/oracle/oracle-database-operator/tree/main/config/samples/sidb).
+For Labs 4-6, you will be using Single-Instance Databases (SIDB). To provision SIDBs through the DB Operator for Kubernetes, you can use the below sample YAML file and configure it for your specific uses. More types and properties can be found in the official sample YAML files for SIDB [<strong>here</strong>](https://github.com/oracle/oracle-database-operator/tree/main/config/samples/sidb).
 
-> **Note:** As you go through creating the secrets and other kubernetes resources, notice how the names of these resources correspond to the values in the below example YAML.
+> **Note:** As you go through creating the secrets and other Kubernetes resources, notice how the names of these resources correspond to the values in the below example YAML.
 
 ```yaml
 # Copyright (c) 2022, Oracle and/or its affiliates.
@@ -269,7 +269,7 @@ spec:
 
 In the microservices application related to the lab, we have configured the back-end to connect to the database with a database wallet. The Oracle Database operator for Kubernetes provides means to generate a wallet and create a secret to enable you to inject it into deployments that need it. Below, the secret will be named `instance-wallet`.
 
-> **Note:** As you go through creating the secrets and other kubernetes resources, notice how the names of these resources correspond to the values in the below example YAML.
+> **Note:** As you go through creating the secrets and other Kubernetes resources, notice how the names of these resources correspond to the values in the below example YAML.
 
 ```yaml
 # Copyright (c) 2022, Oracle and/or its affiliates.
@@ -314,9 +314,9 @@ kubectl get adb cloudbankdb -o 'jsonpath={.status.lifecycleState}{"\n"}'
     </copy>
     ```
 
-    The `gen-adb-create.sh` script will produce an output similar to the below with an instruction for applying the generated YAML file.
+    The `gen-adb-create.sh` script will produce an output similar to the one below for applying the generated YAML file.
     ```
-    Retreiving Autonomous Database OCID...DONE
+    Retrieving Autonomous Database OCID...DONE
 
     Generating YAML file...DONE
     Updating generated YAML file...DONE

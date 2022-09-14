@@ -2,7 +2,7 @@
 
 ## Introduction
 
-For this lab, you will create multiple pipelines in Jenkins that will run jobs for different scenarios. Currently, you have a working environment from Lab 3, the previous lab. You can call this environment your TEST environment, where your QA team can test all features, bugs and updates developed and fixed after a sprint and for review before merging to master and tagging. You will also have a DEV branch that should contain all completed features and fixes that the team worked on. For those features and fixes, you will be creating and committing those changes into feature branches - which will create and provide an isolated, shared and easily-replaceable environment (currently only a database to demonstrate usage of the Oracle Database operator for Kubernetes). Once DEV is ready, you will create a `release-1.0` branch, which will update the TEST environment.
+For this lab, you will create multiple pipelines in Jenkins that will run jobs for different scenarios. Currently, you have a working environment from Lab 3, the previous lab. You can call this environment your TEST environment, where your QA team can test all features, bugs and updates developed and fixed after a sprint and for review before merging to master and tagging. You will also have a DEV branch containing all completed features and fixes that the team worked on. For those features and fixes, you will be creating and committing those changes into feature branches - which will create and provide an isolated, shared and easily-replaceable environment (currently only a database to demonstrate usage of the Oracle Database operator for Kubernetes). Once DEV is ready, you will create a `release-1.0` branch that will trigger an update to the TEST environment.
 
 Do note that this setup of Jenkins is NOT built for production purposes and is setup minimally.
 
@@ -18,23 +18,23 @@ Estimated Time: 15 minutes
 * Lab-Related resources provisioned
 * Working OKE cluster
 
-## Task 1: Generate a Github Access Token
+## Task 1: Generate a GitHub Access Token
 
-To allow Jenkins to access your repository, a Jenkins credentials must be made with your GitHub credentials. It is highly recommended to generate a restrictive Personal Access Token, with which you can control how much access and for how long you want to provide access.
+To authorize access to your repository, Jenkins credentials must be made with your GitHub credentials. It is highly recommended to generate a restrictive Personal Access Token, with which you can control how much access and for how long you want to provide access.
 
 1. On your GitHub account, click on your profile at the top right and select `Settings`.
 
-   ![Find Github Settings](./images/find-github-settings.png)
+   ![Find GitHub Settings](./images/find-github-settings.png)
 
 2. From here, scroll down and go to `Developer Settings` on the left
 
-   ![Find Github Dev Settings](./images/find-github-dev-settings.png)
+   ![Find GitHub Dev Settings](./images/find-github-dev-settings.png)
 
 3. Under Developer Settings, navigate to `Personal access tokens`, and click on `Generate new token`
 
    ![Generate Access Token](./images/generate-new-token.png)
 
-4. Creating a new personal access token, you can add a Note to help you remember what the token is for. For example, you can set:
+4. In creating a new personal access token, you can add a Note to help you remember what the token is for. For example, you can set:
     ```
     <copy>
     repo-access-only
@@ -49,7 +49,7 @@ To allow Jenkins to access your repository, a Jenkins credentials must be made w
 
 6. At the bottom of the page, click `Generate token` to complete the step and generate the token
 
-> **Note:** Copy and keep your Github Access Token in your notes.
+> **Note:** Copy and keep your GitHub Access Token in your notes.
 
 ## Task 2: Configure Jenkins Credentials
 You will need to create some credentials in Jenkins to authorize access to both our Kubernetes cluster and GitHub, as well as webhook tokens.
@@ -105,10 +105,10 @@ To access the Jenkins Console, you will need to retrieve the IP address to visit
       }
       ...
       ```
-      In the snippet, you will see 3-4 keys and their values which maps to what you should enter on Jenkins. For example, when creating the credentials for `create_branch_webhook` above:
+      In the snippet, you will see 3-4 keys and their values which map to what you should enter on Jenkins. For example, when creating the credentials for `create_branch_webhook` above:
       1. Set Kind to `Secret Text`
-      2. Copy and Paste the Secret inside Secret
-      3. Copy and Paste the id inside ID.
+      2. Copy and Paste the secret inside the field, Secret
+      3. Copy and Paste the id inside the field, ID.
       4. (Optional) Set the parent key of the object as the description
       
       On Jenkins, this would look like the following image below.
@@ -133,7 +133,7 @@ To access the Jenkins Console, you will need to retrieve the IP address to visit
 ## Task 3: Configure the Create-Branch Pipeline
 Once you have created the credentials, you can move on to create the Jenkins pipelines that will be triggered on different parts of the DevOps workflow.
 
-This first pipeline will be responsible for creating isolated environments for feature development. In this part of the lab, you will provision and setup a Single Instace Database with scripts to initialize schemas and queues through the Kubernetes operator.
+This first pipeline will be responsible for creating isolated environments for feature development. In this part of the lab, you will provision and setup a Single Instance Database with scripts to initialize schemas and queues through the Kubernetes operator.
 
 Create a new Pipeline by clicking on `+ New Item`
 
@@ -156,7 +156,7 @@ Create a new Pipeline by clicking on `+ New Item`
       :^(origin/feature/|origin/release/|origin/dev$).*
       </copy>
       ```
-      This will limit the pipeline to build only the branches specified above.
+      This will limit the pipeline to building only the branches specified above.
 
       ![Create Branch Pipeline Details](./images/configure-create-branch-pipeline.png)
 
@@ -168,7 +168,7 @@ Create a new Pipeline by clicking on `+ New Item`
       ```
 8.  Click `Save`
 
-  With the pipeline configured, you will need to build the pipeline initially to enable Jenkins to register all pipeline parameters and settings. Once you press Save, Jenkins will navigate automatically to that specific pipeline.
+  With the pipeline configured, build the pipeline initially to enable Jenkins to register all pipeline parameters and settings. Once you press Save, Jenkins will navigate automatically to that specific pipeline.
 
 9. Click on `Build Now`
 
@@ -178,7 +178,7 @@ Create a new Pipeline by clicking on `+ New Item`
 
 ## Task 4: Configure the Delete-Branch Pipeline
 
-This second pipeline will be responsible for tearing down your isolated environments when you no longer have a need for them after merging your feature back to the cloudbank branch (test).
+This second pipeline will be responsible for tearing down your isolated environments when you no longer need them after merging your feature back to the cloudbank branch (test).
 
 Create a new Pipeline by clicking on `+ New Item`
 
@@ -225,7 +225,7 @@ Create a new Pipeline by clicking on `+ New Item`
 
       ![Create Push Pipeline](./images/create-push-pipeline.png)
 
-4. Under Branch Source, `Add source` , select `GitHub`
+4. Under Branch Source, `Add source`, select `GitHub`
 5. Set Credentials to your GitHub credentials
 6. Set Repository HTTPS URL
 7. Validate by clicking on `Validate` below the Repository HTTPs URL
@@ -253,16 +253,16 @@ Create a new Pipeline by clicking on `+ New Item`
 
 
 ## Task 6: Configure GitHub Webhooks
-Back on Github, you will need to create multiple webhooks which will send specific payloads and trigger the different pipelines you created from Task 3-5.
+Back on GitHub, you will need to create multiple webhooks which will send specific payloads and trigger the different pipelines you created from Task 3-5.
 
-Run the following command to get a list of the webhooks that need to be created on your own fork of the lab repository.
+Run the following command. This command will display the list of the webhooks you need to create on your fork of the lab repository.
 
 ```bash
    <copy>
    ( cd $CB_STATE_DIR/tasks ; ./generate-webhooks-help.sh )
    </copy>
 ```
-The above command should provide a list with the Jenkins IP address and tokens pre-filled similar to this output below. Use this as a guide when creating GitHub Webhooks.
+The above command should provide a list with the Jenkins IP address and tokens pre-filled, similar to this output below. Use this as a guide when creating GitHub Webhooks.
 ```json
 {
   "create_branch_webhook": {
@@ -283,7 +283,7 @@ The above command should provide a list with the Jenkins IP address and tokens p
 }
 ```
 
-1. On GitHub, navigate to your own fork of the repository.
+1. On GitHub, navigate to your fork of the repository.
 2. To create webhooks, navigate to Settings -> Webhooks then click on `Add webhook`
 
       ![Webhooks Location](images/where-webhooks.png " ")
