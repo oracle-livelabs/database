@@ -23,7 +23,7 @@ To begin teardown, run the following command below. The teardown script will del
     </copy>
     ```
 
-The teardown script will run terraform destroy in the background. While this is running in the background, you can check the status of whether the teardown process has completed by checking the state. 
+The teardown script will run terraform destroy in the background. While this is running in the background, you can check the status of whether the teardown process has been completed by checking the state. 
 
 You can directly watch the terraform output as it completes by running:
 ```bash

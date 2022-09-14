@@ -1,7 +1,7 @@
 # Deploy the Microservices App
 
 ## Introduction
-This lab will show you how to build and deploy the application used by the lab to your Oracle Kubernetes Engine (OKE) cluster. The application uses maven for build automation, react for frontend and spring-boot to connect to the database and serve requests and serve the frontend. More notably, the Spring Boot application leverages the Advanced Queueing capabilities of the database.
+This lab will show you how to build and deploy the application used by the lab to your Oracle Kubernetes Engine (OKE) cluster. The application uses maven for build automation, react for front-end and spring-boot to connect to the database and serve requests and serve the frontend. More notably, the Spring Boot application leverages the Advanced Queueing capabilities of the database.
 
 Estimated Time: 10 minutes
 
@@ -51,7 +51,7 @@ Estimated Time: 10 minutes
 
   ## How to get the tenancy namespace
 
-     The tenancy namespace is not always the same as the tenance name. To retrieve it, on the OCI Console, you can click on your Profile (top-right user icon) and navigate to `Tenancy: <your_tenancy>`. This will open the Tenancy page on the console, from which you can copy the Object Storage namespace.
+     The tenancy namespace is not always the same as the tenancy name. To retrieve it, on the OCI Console, you can click on your Profile (top-right user icon) and navigate to `Tenancy: <your_tenancy>`. This will open the Tenancy page on the console, from which you can copy the Object Storage namespace.
 
      ![Get Tenancy Namespace](./images/get-tenancy-namespace.png)
 
@@ -65,7 +65,7 @@ Estimated Time: 10 minutes
 
   ## How to get your username
      
-     To retrieve your username, on the OCI Console, click on your your Profile (top-right user icon) and click on your username. Your username should then be displayed at the top.
+     To retrieve your username, on the OCI Console, click on your Profile (top-right user icon) and click on your username. Your username should then be displayed at the top.
 
      ![Get Username](./images/get-username.png)
 
@@ -91,7 +91,7 @@ Estimated Time: 10 minutes
 
      This command will install the dependencies, build the application and push to your OCI Registry.
 
-2. Once the applicatoin successfully builds, deploy the application by running the following command:
+2. Once the application successfully builds, deploy the application by running the following command:
 
      ```bash
      <copy>
@@ -134,7 +134,7 @@ The above command will give an output similar to what is shown in the below imag
      > **Note:** If you are using Chrome, you may encounter a warning that the connection is not private and no visible way to advance. This is because the certificate provided is self-signed and not a paid official certificate. As a workaround, type `thisisunsafe`.
 
 
-3. You will be prompted by the application to login. Use `cloudbank` as the username and the password you provided earlier on during setup. 
+3. You will be prompted by the application to log in. Use `cloudbank` as the username and the password you provided earlier on during setup. 
 
      Username: __`cloudbank`__
 
