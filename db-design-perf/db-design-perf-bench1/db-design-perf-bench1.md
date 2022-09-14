@@ -22,15 +22,15 @@ Estimated lab time: 15 minutes
     </copy>
     ```
 
-    ![](./images/b1-cloudshell-with-benchmark1-command.png "Cloudshell with benchmark1.sh command")
+    ![Cloudshell with benchmark1.sh command](./images/b1-cloudshell-with-benchmark1-command.png " ")
 
     The script will connect to your autonomous database and rebuild the schema from scratch, just in case you inadvertently modified it or the data whilst exploring it with Database Actions. You will see this rebuild-from-scratch in the subsequent benchmarks to ensure a consistent base for measuring the benchmark results.
 
-    ![](./images/b2-cloudshell-rebuilding-schema.png "Cloudshell rebuilding schema")
+    ![Cloudshell rebuilding schema](./images/b2-cloudshell-rebuilding-schema.png " ")
 
     The script will pause when it has rebuilt the schema back to the state of when you explored it via Data Modeler.
 
-    ![](./images/b3-cloudshell-schema-complete.png "Cloudshell schema building complete")
+    ![Cloudshell schema building complete](./images/b3-cloudshell-schema-complete.png " ")
 
     Do not exit the script; press Enter to move on to item 2 below.
 
@@ -42,7 +42,7 @@ Estimated lab time: 15 minutes
       - Creating a new customer (into the CUSTOMERS table)
       - Creating new items for an order (into the ORDER_ITEMS table)
 
-    ![](./images/b4-cloudshell-building-application-plsql.png "Building the application logic")
+    ![Building the application logic](./images/b4-cloudshell-building-application-plsql.png " ")
 
     Do not exit the script; press Enter to move on to item 3 below.
 
@@ -54,7 +54,7 @@ Estimated lab time: 15 minutes
 
     - RUN - this is the proper benchmark routine.  It will use 'n' iterations of randomised customer and order creation using the created APIs. Two key variables in the source code, 'iter' and 'new_cust', determine the volume of orders created and how often a new customer is created (e.g. every 200 orders). These can be edited depending on how large an autonomous database instance you have made. The defaults are chosen for the smallest always-free database so as not to create massive execution times for the benchmark.  Typically execution will be less than 2 minutes.
 
-    ![](./images/b5-building-benchmark-packages.png "Building benchmark packages")
+    ![Building benchmark packages](./images/b5-building-benchmark-packages.png " ")
 
     Do not exit the script; press Enter to move on to item 4 below.
 
@@ -62,7 +62,7 @@ Estimated lab time: 15 minutes
 
     The benchmark launches eight concurrent SQL*Plus sessions in the background, each of which will run an instance of the BENCHMARK PL/SQL package, each of which will go through 'iter' (see above) iterations of creating orders and customers. However, to ensure all eight sessions commence simultaneously, they each try to obtain a lock on a row in the RESULTS table, which is pre-seeded before the benchmark starts.  The calling session (the script you are currently in) locks the entire RESULTS table before launching the eight sessions, thus halting them from commencing.  
 
-     ![](./images/b6-waiting-for-enter-to-start-benchmark.png "Waiting for Enter to start the benchmark")
+     ![Waiting for Enter to start the benchmark](./images/b6-waiting-for-enter-to-start-benchmark.png " ")
 
     At this point, you can press Enter, which will commit this parent session, thus releasing the lock on the RESULTS table, and all eight sessions will commence their benchmark. The calling script will then wait for all eight sessions to complete before producing a summary. This may take several minutes.
 
@@ -74,7 +74,7 @@ Estimated lab time: 15 minutes
       - The average elapsed time in seconds across the eight benchmark sessions (ELA)
       - A cumulative breakdown of where the eight sessions utilised the elapsed time
 
-    ![](./images/b7-benchmark1-results.png "Benchmark 1 results")
+    ![Benchmark 1 results](./images/b7-benchmark1-results.png " ")
 
     An exhaustive explanation of each of the elements in the session breakdown is beyond the scope of this lab, but the general guiding principle for obtaining the best performance is:
 

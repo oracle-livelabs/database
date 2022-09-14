@@ -25,7 +25,7 @@ Estimated lab time: 10 minutes
 
     The script will connect to your autonomous database and rebuilds the schema from scratch.  The only elements presented verbosely on screen are those changed from the initial baseline.
 
-    ![](./images/t1-show-difference-in-table-compared-to-benchmark1.png "Show the difference in table setup comparted to Benchmark1")
+    ![Show the difference in table setup comparted to Benchmark 1](./images/t1-show-difference-in-table-compared-to-benchmark1.png " ")
 
     The first change here focuses on reducing the number of database **triggers** down to a minimum. There is a performance cost to firing a trigger during a DML operation. Sometimes the complexity of business requirements makes a trigger mandatory, but often, triggers are used to populate potentially missing column values. A column has *always* had the ability to be given a default value, but triggers were used to ensure that a NULL could never be forcibly inserted into such columns.
 
@@ -33,11 +33,11 @@ Estimated lab time: 10 minutes
 
     As the schema generation continues, you will see that all of the trigger creation code is no longer required, as has been commented out.
 
-    ![](./images/t2-no-more-triggers-created-in-schema.png "No more triggers available in the benchmark schema")
+    ![No more triggers available in the benchmark schema](./images/t2-no-more-triggers-created-in-schema.png " ")
 
     The script will pause when it has rebuilt the schema back to the state and is ready to launch the benchmark.
 
-    ![](./images/t3-benchmark-will-start-in-5-seconds.png "The benchmark will start in 5 seconds")
+    ![The benchmark will start in 5 seconds](./images/t3-benchmark-will-start-in-5-seconds.png " ")
 
     Because you are familiar with the benchmark process, the eight sessions will be launched, and the initiating commit will occur automatically. Thus you need to wait for the benchmark to complete.
 
@@ -45,7 +45,7 @@ Estimated lab time: 10 minutes
 
 1. The benchmark will produce a similar performance summary to the first execution.
 
-    ![](./images/t4-results-of-benchmark-2.png "Results of benchmark 2")
+    ![Results of benchmark 2](./images/t4-results-of-benchmark-2.png " ")
 
     As mentioned earlier, your results will be different, but using the results in the image above, you can observe that with the revised design, which has eliminated triggers:
 

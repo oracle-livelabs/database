@@ -33,12 +33,12 @@ Estimated Lab Time: 10 minutes
 <if type="freetier">
 	__Note:__ You can also directly access your Autonomous Transaction Processing service in the __Quick Actions__ section of the dashboard.
 
-	![](./images/p01-quick-actions-menu-in-the-oci-console.png "Quick actions menu in the OCI console")
+	![Quick actions menu in the OCI console](./images/p01-quick-actions-menu-in-the-oci-console.png " ")
 </if>
 
 3. The following steps apply similarly to either Autonomous Transaction Processing or Autonomous Data Warehouse. This lab shows the provisioning of an Autonomous Transaction Processing database, so click the **Navigation Menu** in the upper left, navigate to **Oracle Database**, and select **Autonomous Transaction Processing**.
 
-	![](https://oracle-livelabs.github.io/common/images/console/database-atp.png " ")
+	![OCI Database submenu](https://oracle-livelabs.github.io/common/images/console/database-atp.png " ")
 
 4. Use the __List scope__ drop-down menu to select a compartment. 
 
@@ -56,21 +56,21 @@ Estimated Lab Time: 10 minutes
 
     If you see the below picture with the "Forbidden" sign, you __do not have access__ to the resources required and need to check the allocated compartment:
 
-	![](./images/p02-autonomous-database-console-with-permissions-error.png "Autonomous Database console with permissions error")
+	![Autonomous Database console with permissions error](./images/p02-autonomous-database-console-with-permissions-error.png " ")
 </if>
 5. Make sure your __Workload type__ filter is set to __Transaction Processing__ or __All__ to see your Autonomous Transaction Processing instances. 
 
-	![](./images/p03-autonomous-database-console-filters-section.png "Autonomous Database Filters secion")
+	![Autonomous Database Filters secion](./images/p03-autonomous-database-console-filters-section.png " ")
 
 6. This console shows that no databases yet exist. If there were a long list of databases, you could filter the list by the state of the databases (available, stopped, terminated, and so on). You can also sort by __Workload Type__. 
 
-    ![](./images/p04-autonomous-database-console-without-databases-running.png "Autonomous Database console without databases running")
+    ![Autonomous Database console without databases running](./images/p04-autonomous-database-console-without-databases-running.png " ")
 
 ## Task 2: Creating the Autonomous Database Instance
 
 1. Click **Create Autonomous Database** to start the instance creation process.
 
-    ![](./images/p05-autonomous-database-console-with-create-database-button-highlighted.png "Autonomous Database console with Create Autonomous Database highlighted")
+    ![Autonomous Database console with Create Autonomous Database highlighted](./images/p05-autonomous-database-console-with-create-database-button-highlighted.png " ")
 
 2.  This brings up the __Create Autonomous Database__ screen, where you will specify the instance's configuration.
 3. Provide basic information for the autonomous database:
@@ -79,19 +79,19 @@ Estimated Lab Time: 10 minutes
     - __Display Name__ - Enter a memorable name for the database for display purposes. For this lab, use __ATP-DB-DESIGN__.
     - __Database Name__ - Use letters and numbers only, starting with a letter. The maximum length is 14 characters. (Underscores not initially supported.) For this lab, use __ATPDBDESIGN__.
 
-    ![](./images/p06-basic-information-section-adb-create-wizard.png "Basic information section of the ADB Create wizard")
+    ![Basic information section of the ADB Create wizard](./images/p06-basic-information-section-adb-create-wizard.png " ")
 
 4. Choose a workload type. Make sure the Select the workload type for your database from the choices:
 
     - __Transaction Processing__ - For this lab, make sure __Transaction Processing__ has been selected.
 
-    ![](./images/p07-workload-type-section.png "Workload type section ")
+    ![Workload type section](./images/p07-workload-type-section.png " ")
 
 5. Choose a deployment type. Select the deployment type for your database from the choices:
 
     - __Shared Infrastructure__ - For this lab, choose __Shared Infrastructure__ as the deployment type.
 
-    ![](./images/p08-deployment-type-section.png "Deployment type section ")
+    ![Deployment type section](./images/p08-deployment-type-section.png " ")
 
 6. Configure the database:
 
@@ -113,7 +113,7 @@ Estimated Lab Time: 10 minutes
     - __Storage auto Scaling__ - For this lab, ensure auto-scaling of storage is disabled.
     - __New Database Preview__ - If a checkbox is available to preview a new database version, do __not__ select it.
 
-    ![](./images/p09-database-configuration-screen.png "Database configuration screen")
+    ![Database configuration screen](./images/p09-database-configuration-screen.png " ")
 
 7. Create administrator credentials:
 
@@ -131,7 +131,7 @@ Estimated Lab Time: 10 minutes
     - The password must not be the same one set less than 24 hours ago.
     - Re-enter the password to confirm it. Make a note of this password.
 
-    ![](./images/p10-create-database-administrator-details.png "Create administrator details")
+    ![Create administrator details](./images/p10-create-database-administrator-details.png " ")
 
 
 8. Choose network access:
@@ -140,7 +140,7 @@ Estimated Lab Time: 10 minutes
     - If you want a private endpoint to allow traffic only from the VCN you specify - where access to the database from all public IPs or VCNs is blocked, select "Virtual cloud network" in the Choose network access area.
 
 
-    ![](./images/p11-choose-network-access-screen.png "Choose network access screen")
+    ![Choose network access screen](./images/p11-choose-network-access-screen.png " ")
 
 9. Choose a license type. 
 
@@ -152,19 +152,19 @@ Estimated Lab Time: 10 minutes
 <if type="freetier">
     For this lab, choose __License Included__. 
 
-    ![](./images/p12-license-type-section-license-included.png "License type section with License Included selected")
+    ![License type section with License Included selected](./images/p12-license-type-section-license-included.png " ")
 </if>
 <if type="livelabs">
     For this lab, choose __Bring Your Own License__ and __Oracle Database Enterprise Edition__ as this is an Oracle-supplied environment. 
 
-    ![](./images/p13-license-type-section-byol.png "License type section with BYOL selected")
+    ![License type section with BYOL selected](./images/p13-license-type-section-byol.png " ")
 </if>
 
 10. Click __Create Autonomous Database__.
 
 11.  Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous Data Warehouse database is ready to use! Please look at your instance's details, including its name, database version, CPU count and storage size.
 
-    ![](./images/p14-license-type-section-with-ee-edition-selected.png "License type section with Oracle Database Enterprise Edition option selected")
+    ![License type section with Oracle Database Enterprise Edition option selected](./images/p14-license-type-section-with-ee-edition-selected.png " ")
 
 You may now **proceed to the next lab.**
 

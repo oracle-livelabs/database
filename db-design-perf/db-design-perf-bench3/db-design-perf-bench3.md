@@ -27,7 +27,7 @@ Estimated lab time: 15 minutes
 
     You may have noticed the element _enq: SQ contention_ from the previous benchmark. This performance inhibitor occurs when multiple sessions attempt to manage the dictionary objects for sequences. They are all competing for exclusive access to an internal table which contains the current sequence number. The number of times a session must access this internal object be reduced by increasing the cache size. Consider raising the cache size above the default for any high-activity sequence.
 
-    ![](./images/c1-sequence-cache-changes.png "Show the changes in Sequence caching in benchmark 3")
+    ![how the changes in Sequence caching in benchmark 3](./images/c1-sequence-cache-changes.png " ")
 
     Every index you create in a database schema adds to the overhead of creating rows. Of course, this is not to say that all indexes can be dropped because they are vital for query performance and declarative data integrity, such as primary keys and unique constraints. Similarly, foreign key indexes are essential, but it is easy to go "overboard" and adopt an index on _every_ column involved in a foreign key relation back to the parent table. In early versions of the Oracle Database, this was best practice because there were locking implications associated with any DML (insert, update, delete) on columns that were also foreign keys.
 
@@ -37,13 +37,13 @@ Estimated lab time: 15 minutes
 
     Thus the index linking ORDER\_ITEMS to PRODUCT will _not_ be retained because it is just an inhibitor of performance without any justifiable benefit.
 
-    ![](./images/c2-indexes-which-are-created.png "Indexes which are created for foreign keys")
+    ![Indexes which are created for foreign keys](./images/c2-indexes-which-are-created.png " ")
 
     Remember your goal should always be to have *just enough indexes*
 
     The script will load the rest of the schema and launch the benchmark without further input required.
 
-    ![](./images/c3-sessions-ready-for-benchmark-start.png " ")
+    ![Sessions are ready for benchmark start](./images/c3-sessions-ready-for-benchmark-start.png " ")
 
     The eight sessions will be launched, and the initiating commit will occur automatically. Thus you need to wait for the benchmark to complete.
 
@@ -51,7 +51,7 @@ Estimated lab time: 15 minutes
 
 1. The benchmark will produce a similar performance summary to the previous executions.
 
-    ![](./images/c4-benchmark3-results.png "The results for Benchmark 3")
+    ![The results for Benchmark 3](./images/c4-benchmark3-results.png " ")
 
     As mentioned earlier, your results will be different, but using the results in the image above, you can observe that the revised design has lifted the caching sizes for the critical sequences and eliminated unnecessary indexes:
 
@@ -83,7 +83,7 @@ Estimated lab time: 15 minutes
 
     By utilising the _Partitioning_ facilities available in the Oracle Database, a single database object (such as a table or index) can be split into multiple physical objects in the database. This distributes competition for the blocks across multiple physical objects, thus reducing contention and allowing for more excellent performance.
 
-    ![](./images/c5-creation-of-partitioned-tables.png "Tables with partitioning are created")
+    ![Tables with partitioning are created](./images/c5-creation-of-partitioned-tables.png " ")
 
     In this example, hash partitioning is used to split tables into equal-sized segments to distribute contention for blocks. Indexes can be split like-wise, and often, indexes are the best candidates for partitioning to ease contention, even if the underlying table is not partitioned. Index entries must be stored in key order, so for index keys that are always ascending (e.g. sequence values or timestamps), there is a greater risk of contention for the leading index blocks. Hash partitioning a primary or unique key index can often be the ideal solution.
 
@@ -93,7 +93,7 @@ Estimated lab time: 15 minutes
 
 1. The benchmark will produce a similar performance summary to the previous executions.
 
-    ![](./images/c6-benchmark3-results-with-partitioned-tables.png "Benchmark results after partitioning the tables")
+    ![Benchmark results after partitioning the tables](./images/c6-benchmark3-results-with-partitioned-tables.png " ")
 
     As mentioned earlier, your results will be different, but using the results in the image above, you can observe that the revised design has lifted the caching sizes for the critical sequences and eliminated unnecessary indexes:
 

@@ -20,15 +20,15 @@ Estimated lab time: 15 minutes
 To perform a secure connection to your autonomous database, you need a database wallet which securely holds those credentials. These can be downloaded from the console of your autonomous database.
 1. Click the **DB Connection** button on your database's details page.
 
-    ![](./images/c1-atp-console-with-db-connection-highlighted.png "ATP console with DB Connection highlighted")
+    ![ATP console with DB Connection highlighted](./images/c1-atp-console-with-db-connection-highlighted.png " ")
 
 2. Ensure the wallet type is Instance Wallet and click **Download Wallet**
 
-    ![](./images/c2-db-connection-screen-with-download-wallet-button-highlighted.png "DB Connection screen with Download Wallet button highlighted")
+    ![DB Connection screen with Download Wallet button highlighted](./images/c2-db-connection-screen-with-download-wallet-button-highlighted.png " ")
 
 3. You will be prompted for a wallet password. Note that this is **not** related to the database password and is only required for particular types of client connections. You will not use this password in this lab, but you should still store it in a secure place if you need it later. Click **Download** to store the wallet on your local machine, ensuring that you take note of its name and location. (You will need this file again shortly)
 
-    ![](./images/c3-download-wallet-screen-with-password-field-highlighted.png "Download wallet screen with password field highlighted")
+    ![Download wallet screen with password field highlighted](./images/c3-download-wallet-screen-with-password-field-highlighted.png " ")
 
 ## Task 2: Launch Cloud Shell
 
@@ -36,26 +36,26 @@ Oracle Cloud Infrastructure Cloud (OCI) Shell is a web browser-based terminal ac
 
 1. In your database's details page, click the **Cloud Shell** button at the top right. The bottom portion of the browser page should initiate a cloud shell session.
 
-    ![](./images/c4-cloud-shell-starting.png "Cloud Shell starting ")
+    ![Cloud Shell starting](./images/c4-cloud-shell-starting.png " ")
 
      After a few seconds, a Linux shell interface should be available. Most standard shell commands are available to you from Cloud Shell.
 
-    ![](./images/c5-cloud-shell-has-started.png "Cloud shell has started")
+    ![Cloud shell has started](./images/c5-cloud-shell-has-started.png " ")
 
     You can maximise and normalise the Linux shell interface by clicking on the Arrow icons on the right side of the screen (in the green header). When maximised, the screen output will be easier to see and follow. 
 
-    ![](./images/c6-icon-to-increase-size-of-cloud-shell-terminal.png "Icon for increasing size of Cloud Shell terminal ")
+    ![Icon for increasing size of Cloud Shell terminal](./images/c6-icon-to-increase-size-of-cloud-shell-terminal.png " ")
 
 Using the settings option, you can also change the font size and other attributes.
 
 
 2. You will be using SQL tools from the cloud shell to create and run your performance benchmark, so you will need the database credentials you downloaded in the previous step. Click on the gear icon at the top right side of the cloud shell to reveal the **File Transfer** option, and choose **Upload**.
 
-    ![](./images/c7-submenu-after-clicking-gear-icon-in-cloudshell.png "Submenu after clicking gear icon in Cloudshell")
+    ![Submenu after clicking gear icon in Cloudshell](./images/c7-submenu-after-clicking-gear-icon-in-cloudshell.png " ")
 
 3. Drag (or click "select from your computer") the wallet file you downloaded in the previous step of this lab. Then click **Upload** to transfer the wallet file to your home directory under the cloud shell.
 
-    ![](./images/c8-upload-window-with-upload-button-highlighted.png "Upload window with upload button highlighted")
+    ![Upload window with upload button highlighted](./images/c8-upload-window-with-upload-button-highlighted.png " ")
 
 4. Verify the wallet has been successfully uploaded by listing the current directory in your cloud shell. The wallet file should be present in the home directory.
 
@@ -90,7 +90,7 @@ Using the settings option, you can also change the font size and other attribute
     <copy>Ora$Dev$Live2021</copy>
     ```
 
-    ![](./images/c9-sql-connection-to-autonomous-was-succesful.png "SQL connection to Autonomous database was succesfull ")
+    ![SQL connection to Autonomous database was succesfull](./images/c9-sql-connection-to-autonomous-was-succesful.png " ")
 
 6. If you have successfully logged into the database, type `exit` to leave SQLcl and return to the shell.
 
@@ -220,39 +220,39 @@ Although you can connect to your autonomous database from local PC desktop tools
 
 1. In your database's details page, click the **Database Actions** button, and then in the Database Actions box, click **Open Database Actions**.
 
-    ![](./images/m1-atp-console-with-database-actions-highlighted.png "ATP console with database actions highlighted")
+    ![ATP console with database actions highlighted](./images/m1-atp-console-with-database-actions-highlighted.png " ")
 
 2. After the Database Actions have been initialised and the various actions are displayed on your screen, choose **Data Modeller** to launch the web-based data modelling tool.
 
-    ![](./images/m2-database-actions-menu-with-data-modeler-option-highlighted.png "Database actions menu with Data Modeler option highlighted")
+    ![Database actions menu with Data Modeler option highlighted](./images/m2-database-actions-menu-with-data-modeler-option-highlighted.png " ")
 
     The data modeller tool with open with a blank canvas for building your database schema design.
 
-    ![](./images/m3-data-modeler-web-worksheet.png "Data Modeler work sheet")
+    ![Data Modeler work sheet](./images/m3-data-modeler-web-worksheet.png " ")
 
 3. Your database schema has already been built via the setup.sh, command you ran earlier, so you will bring that schema into the modeller to see the relationships between the tables.  From the schema drop-down at the left, choose the **DEVLIVE** schema.
 
-    ![](./images/m4-data-modeler-navigator-with-product-categories-highlighted.png "Data Modeler worksheet with PRODUCT_CATEGORIES table highlighted")
+    ![Data Modeler worksheet with PRODUCT_CATEGORIES table highlighted](./images/m4-data-modeler-navigator-with-product-categories-highlighted.png " ")
 
 4. Right-click on the CUSTOMERS table and choose **Add object to diagram**.
 
-    ![](./images/m5-right-click-menu-after-table-selection.png "Right click menu after selecting a table")
+    ![Right click menu after selecting a table](./images/m5-right-click-menu-after-table-selection.png "")
 
 5. The CUSTOMERS table will appear on the diagram with its columns and other metadata revealed.
 
-    ![](./images/m6-data-modeler-worksheet-after-adding-customers-table.png "Data Modeler worksheet after adding customers table")
+    ![Data Modeler worksheet after adding customers table](./images/m6-data-modeler-worksheet-after-adding-customers-table.png " ")
 
 6. Perform the same step for each remaining table in the listing at the left. You cannot select all tables and do the action for all tables simultaneously; it needs to be done one table at a time. Don't worry about the display, as many tables will overlap.
 
-    ![](./images/m7-data-modeler-model-mess-after-adding-all-tables.png "Data Modeler Diagram mess after adding all objects")
+    ![Data Modeler Diagram mess after adding all objects](./images/m7-data-modeler-model-mess-after-adding-all-tables.png " ")
 
    Once all tables have been imported, click the **Auto-Layout** button. The tables will be re-arranged on the diagram to form a neat relationship model. You can also drag and resize tables on the diagram to suit your preferences.
 
-    ![](./images/m8-data-modeler-diagram-layout-wizard-selected.png "Data Modeler diagram layout with Layout Wizard selected")
+    ![Data Modeler diagram layout with Layout Wizard selected](./images/m8-data-modeler-diagram-layout-wizard-selected.png " ")
 
     The result will look similar to this:
 
-    ![](./images/m9-data-modeler-diagram-after-auto-layout-wizard-applied.png "Data Modeler Diagram after Auto Layout wizard applied")
+    ![Data Modeler Diagram after Auto Layout wizard applied](./images/m9-data-modeler-diagram-after-auto-layout-wizard-applied.png " ")
 
     Close the Data Modeler window, and please **proceed to the next lab.**
 
