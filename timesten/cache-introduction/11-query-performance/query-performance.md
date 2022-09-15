@@ -4,7 +4,7 @@
 
 In this lab, you will run some typical queries against the TimesTen cache and against the Oracle database to illustrate the performance benefit of TimesTen.
 
-**Estimated Lab Time:** 5 minutes
+**Estimated Lab Time:** 8 minutes
 
 **IMPORTANT:** As noted in the previous lab there are many factors that can affect performance. As a result, the performance numbers shown in this lab are indicative only. The numbers that _you_ measure will differ and may be slightly better or slightly worse.
 

@@ -11,7 +11,7 @@
     {
       "title": "Get Started",
       "description": "Login to Oracle Cloud",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
     },
     {
       "title": "Lab 1: Prepare Setup",
@@ -41,19 +41,14 @@
       "filename": "../../topology/topology.md"
     },
     {
-      "title": "Lab 6: Eshop Application Schema & Code Snippet (read-only)",
-      "description": "Eshop App schema & Code Snippet",
-      "filename": "../../appschema/appschema.md"
-    },
-    {
-      "title": "Lab 7: Application Queries on Sharded Database",
-      "description": "Application Queries on sharding Database",
-      "filename": "../../appqueries/appqueries.md"
-    },
+       "title": "Lab 6: Clean up Stack and Instances",
+       "description": "Clean up ORM Stack and instances",
+       "filename": "../../cleanup/cleanup.md"
+     },
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+      "filename": "https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
     }
   ]
 }

@@ -4,7 +4,7 @@
 
 In this lab, you will create a TimesTen instance to host our TimesTen cache database, start the instance and execute a few simple TimesTen commands.
 
-**Estimated Lab Time:** 5 minutes.
+**Estimated Lab Time:** 6 minutes.
 
 ### Objectives
 
@@ -52,7 +52,9 @@ drwxr-xr-x. 2 oracle oinstall 4096 May 26 13:10 scripts
 
 ## Task 2: Create a TimesTen instance
 
-A TimesTen _installation_ is comprised of the TimesTen software components. An installation is created by unzipping the TimesTen software distribution media into a suitable location. For this workshop, the TimesTen software distribution media has already been unzipped into the directory **/shared/sw** to create a TimesTen installation named **tt22.1.1.3.0**. Take a look at that:
+A TimesTen _installation_ is comprised of the TimesTen software components. An installation is created by unzipping the TimesTen software distribution media into a suitable location. For this workshop, the TimesTen software distribution media has already been unzipped into the directory **/shared/sw** to create a TimesTen installation named **tt22.1.1.3.0**. Take a look at that.
+
+1. List the top level software directory.
 
 ```
 <copy>
@@ -64,6 +66,8 @@ ls -l /shared/sw
 total 0
 dr-xr-x---. 17 oracle oinstall 277 May  5 22:20 tt22.1.1.3.0
 ```
+
+2. List the contents of the TimesTen installation top level directory.
 
 ```
 <copy>
@@ -96,7 +100,7 @@ You can create one or more TimesTen _instances_ from an installation. A TimesTen
 
 When it is operational, a TimesTen instance also includes a set of associated processes which cooperate to manage the TimesTen databases that are owned by the instance.
 
-Create a TimesTen instance called **ttinst** by using the **ttInstanceCreate** command located in the installation’s **bin** directory:
+3. Create a TimesTen instance called **ttinst** by using the **ttInstanceCreate** command located in the installation’s **bin** directory:
 
 ```
 <copy>
@@ -123,7 +127,7 @@ Instance created successfully.
 
 ```
 
-Copy the predefined **sys.odbc.ini** configuration file (more on that later) to the instance:
+4. Copy the predefined **sys.odbc.ini** configuration file (more on that later) to the instance:
 
 ```
 <copy>
