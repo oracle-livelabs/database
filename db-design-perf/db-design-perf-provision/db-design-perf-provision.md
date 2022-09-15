@@ -77,7 +77,12 @@ Estimated Lab Time: 10 minutes
 
     - __Compartment__ - Make sure your compartment is displayed; if not, select it from the drop-down box.
     - __Display Name__ - Enter a memorable name for the database for display purposes. For this lab, use __ATP-DB-DESIGN__.
+<if type="freetier">
     - __Database Name__ - Use letters and numbers only, starting with a letter. The maximum length is 14 characters. (Underscores not initially supported.) For this lab, use __ATPDBDESIGN__.
+</if>
+<if type="livelabs">
+    - __Database Name__ - Enter a memorable name for the database. Use letters and numbers only, starting with a letter. The maximum length is 14 characters. (Underscores not initially supported.). In our examples, we use ATPDBDESIGN. __Do not use this name__ as it will already exist in the Livelabs tenancies (and needs to be unique for your tenancy).
+</if>
 
     ![Basic information section of the ADB Create wizard](./images/p06-basic-information-section-adb-create-wizard.png " ")
 

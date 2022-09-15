@@ -26,9 +26,17 @@ To perform a secure connection to your autonomous database, you need a database 
 
     ![DB Connection screen with Download Wallet button highlighted](./images/c2-db-connection-screen-with-download-wallet-button-highlighted.png " ")
 
-3. You will be prompted for a wallet password. Note that this is **not** related to the database password and is only required for particular types of client connections. You will not use this password in this lab, but you should still store it in a secure place if you need it later. Click **Download** to store the wallet on your local machine, ensuring that you take note of its name and location. (You will need this file again shortly)
+3. You will be prompted for a wallet password. Note that this is **not** related to the database password and is only required for particular types of client connections. You will not use this password in this lab. For this example, use the following password:
+
+    ````
+    <copy>01-NotNeededForNow</copy>
+    ````
 
     ![Download wallet screen with password field highlighted](./images/c3-download-wallet-screen-with-password-field-highlighted.png " ")
+
+    After entering the password and clicking the Download button, the Wallet zipfile will be downloaded to your local system. The name starts with __Wallet__ and contains the name of your database. 
+
+    You may now close the Database Connection screen by clicking the __Close__ button.
 
 ## Task 2: Launch Cloud Shell
 
@@ -45,9 +53,6 @@ Oracle Cloud Infrastructure Cloud (OCI) Shell is a web browser-based terminal ac
     You can maximise and normalise the Linux shell interface by clicking on the Arrow icons on the right side of the screen (in the green header). When maximised, the screen output will be easier to see and follow. 
 
     ![Icon for increasing size of Cloud Shell terminal](./images/c6-icon-to-increase-size-of-cloud-shell-terminal.png " ")
-
-Using the settings option, you can also change the font size and other attributes.
-
 
 2. You will be using SQL tools from the cloud shell to create and run your performance benchmark, so you will need the database credentials you downloaded in the previous step. Click on the gear icon at the top right side of the cloud shell to reveal the **File Transfer** option, and choose **Upload**.
 
@@ -66,8 +71,10 @@ Using the settings option, you can also change the font size and other attribute
     ```nohighlight
     mcdonald_c@cloudshell:~ (ap-sydney-1)$ ls -l 
     total 28
-    -rw-r--r--. 1 mcdonald_c oci 26422 Sep  7 16:08 Wallet_ATPDBDESIGN.zip
+    -rw-r--r--. 1 mcdonald_c oci 26422 Sep  7 16:08 Wallet_<your database name>.zip
     ````
+    Using the settings option, also available after clicking the Gear icon on the right side of the screen, you can change the font size and other attributes if needed.
+
  
 5. Verify connectivity to your autonomous database. You will use the SQLcl command line interface to set your wallet credentials and connect to the database as the ADMIN user. Press ENTER at the last command, and enter your ADMIN password at the prompt.
 
@@ -75,13 +82,22 @@ Using the settings option, you can also change the font size and other attribute
     <copy>sql /nolog</copy>
     ````
 
-    Once logged in, set the configuration to use your uploaded wallet and connect to the database:
+    Once logged in, set the configuration to use your uploaded wallet and connect to the database. Make sure you replace the ATPDBDESIGN name with your chosen database name:
 
     ```nohighlight
-    <copy>set cloudconfig Wallet_ATPDBDESIGN.zip
-    show tns
-    connect admin@atpdbdesign_tp
-    </copy>
+    <copy>set cloudconfig Wallet_ATPDBDESIGN.zip</copy>
+    ````
+
+    You can now display the TNS entries available for connection in the selected wallet file:
+
+    ````nohighlights
+    <copy>show tns</copy>
+    ````
+
+    Copy the __\_tp__ entry from the list and use it to connect to your database:
+
+    ````
+    <copy>connect admin@</copy>atpdbdesign_tp
     ```
 
     Use the password you choose while creating the database. If you have used the default password, you can copy it here:
@@ -90,7 +106,42 @@ Using the settings option, you can also change the font size and other attribute
     <copy>Ora$Dev$Live2021</copy>
     ```
 
-    ![SQL connection to Autonomous database was succesfull](./images/c9-sql-connection-to-autonomous-was-succesful.png " ")
+    After entering the password, the connection to the database should be established. The output on the screen will look like this:
+
+    ````nohighlight
+    mcdonald_c@cloudshell:~ (ap-sydney-1)$ sql /nolog
+
+    SQLcl: Release 21.4 Production on Thu Sep 15 10:12:11 2022
+
+    Copyright (c) 1982, 2022, Oracle.  All rights reserved.
+
+    SQL> set cloudconfig Wallet_your-DB-name.zip
+    SQL> show tns
+    CLOUD CONFIG set to: Wallet_your-DB-name.zip
+
+    TNS Lookup Locations
+    --------------------
+
+    TNS Locations Used
+    ------------------
+    1.  Wallet_your-DB-name.zip
+    2.  /home/mcdonald_c
+
+    Available TNS Entries
+    ---------------------
+    your-DB-name_HIGH
+    your-DB-name_LOW
+    your-DB-name_MEDIUM
+    your-DB-name_TP
+    your-DB-name_TPURGENT
+
+    SQL> connect admin@your-DB-name_TP
+    Password? (**********?) ****************
+    Connected.
+
+    SQL> exit
+    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production Version 19.16.0.1.0
+    ````
 
 6. If you have successfully logged into the database, type `exit` to leave SQLcl and return to the shell.
 
@@ -133,10 +184,14 @@ Using the settings option, you can also change the font size and other attribute
     setup.sql
     sqlp
     sql_plus
-    Wallet_ATPDBDESIGN.zip
+    Wallet_your-DB-name.zip
     ```
 
-2. The file *credential.sql* is a central place where your database credentials will be stored to avoid the need to re-enter them during the benchmark continuously. Using VI, edit the file to reflect your autonomous database's password and service names. *If you are following this lab "to the letter, " you will likely not need to make any changes at all.*
+2. The file *credential.sql* is a central place where your database credentials will be stored to avoid the need to re-enter them during the benchmark continuously. Using VI, edit the file to reflect your autonomous database's password and __service names__. 
+
+<if type="freetier">
+    *If you are following this lab "to the letter, " you will likely not need to make any changes at all.*
+</if>
 
     ```nohighlight
     <copy>vi credential.sql</copy>
@@ -148,8 +203,8 @@ Using the settings option, you can also change the font size and other attribute
     --
     define ADMIN_USER=ADMIN
     define ADMIN_PASSWORD=Ora$Dev$Live2021
-    define DB_SERVICE=atpdbdesign_tp
-    set cloudconfig Wallet_ATPDBDESIGN.zip
+    define DB_SERVICE=your-DB-name_tp
+    set cloudconfig Wallet_your-DB-name.zip
     --
     -- ====================================================
     ~                                                                                                                                                                                                                                                                                                                                                                                                                                   
@@ -218,11 +273,11 @@ Note: This step is not mandatory for your performance benchmark investigation bu
 
 Although you can connect to your autonomous database from local PC desktop tools like Oracle SQL Developer, you can conveniently access the browser-based Database Actions directly from your Autonomous Data Warehouse or Autonomous Transaction Processing console.
 
-1. In your database's details page, click the **Database Actions** button, and then in the Database Actions box, click **Open Database Actions**.
+1. If you have maximized the CloudShell terminal, first collapse it to display the Autonomous Database details. In your database's details page, click the **Database Actions** button, and then in the Database Actions box, click **Open Database Actions**.
 
     ![ATP console with database actions highlighted](./images/m1-atp-console-with-database-actions-highlighted.png " ")
 
-2. After the Database Actions have been initialised and the various actions are displayed on your screen, choose **Data Modeller** to launch the web-based data modelling tool.
+2. After the Database Actions have been initialised and the various actions are displayed on your screen, choose **Data Modeler** to launch the web-based data modelling tool.
 
     ![Database actions menu with Data Modeler option highlighted](./images/m2-database-actions-menu-with-data-modeler-option-highlighted.png " ")
 
