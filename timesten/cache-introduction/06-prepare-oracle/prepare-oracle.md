@@ -143,6 +143,8 @@ CREATE TABLESPACE cachetblsp DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/ttca
 Tablespace created.
 ```
 
+**NOTE:** This operation takes a few minutes. 
+
 3. Create the TimesTen cache admin user (in this workshop we will name the user **ttcacheadm** with password **ttcacheadm**):
 
 ```
