@@ -67,7 +67,7 @@ In this lab, you will:
 
   4. Click on **View Details** in the information box above the validate button. You can also navigate to the Jobs resources of this migration.
 
-  ![Screenshot of click jobs](images/migration-view-details.png)
+  ![Screenshot of click jobs](images/runmigration-view-details.png)
 
   5. Job phases are updated as the migration progresses
 
