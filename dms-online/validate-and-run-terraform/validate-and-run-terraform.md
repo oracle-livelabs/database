@@ -36,7 +36,7 @@ In this lab, you will:
 
 5. Press **Validate** button to confirm   
 
-![Screenshot of confirm validate](images/press-validate-again.png =90%x*)
+![Screenshot of confirm validate](images/press-validate-again.png =40%x*)
 
 6. Click on **View Details** in the information box above the validate button. You can also navigate to the Jobs resources of this migration.
 
@@ -63,7 +63,7 @@ In this lab, you will:
 
   3. Press **Start** to begin the Migration. The Start Migration dialog is shown. Select the default phase: **Monitor replication lag**.This will cause the replication to run continuously until the Migration is resumed. 
 
-    ![Screenshot of start migration](images/monitor-replication-lag.png =90%x*)
+    ![Screenshot of start migration](images/monitor-replication-lag.png =50%x*)
 
   4. Click on **View Details** in the information box above the validate button. You can also navigate to the Jobs resources of this migration.
 
@@ -78,7 +78,7 @@ In this lab, you will:
  Data replication is in progress and is capturing all transactions since start of the migration. 
   
   7. Open the Cloud Shell by pressing the icon ![](images/cloudshell.png =22x22) and enter the following command to run SQL*Plus:
- ```
+    ```
     <copy>
     sqlplus system/<admin_password>@<dbcs_public_ip>:1521/<dbcs_pdb_service>
     </copy>
