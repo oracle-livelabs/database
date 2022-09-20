@@ -10,7 +10,7 @@ Watch the video below to get an explanation of enabling the In-Memory column sto
 
 Quick walk through on how to enable In-Memory.
 
-[Oracle VideoHub video](https://videohub.oracle.com/media/LLv2-setup/1_2u1gssb9)
+[Setting up the In-Memory column store](videohub:1_dg318frc)
 
 Estimated Time: 30 minutes
 

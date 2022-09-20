@@ -5,8 +5,9 @@ Watch a preview video of querying the In-Memory Column Store
 
 [YouTube video](youtube:U9BmS53KuGs)
 
-Watch the video below for a walk through of the In-memory Queries lab.
-[Oracle VideoHub video](https://videohub.oracle.com/media/LLv2-queries/1_3h96zruy)
+Watch the video below for a walk through of the In-Memory Queries lab:
+
+[In-Memory Queries](videohub:1_ohs9hpw0)
 
 ### Objectives
 

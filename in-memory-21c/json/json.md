@@ -7,7 +7,7 @@ Watch the video below to get an overview of joins using Database In-Memory.
 
 Watch the video below for a walk through of the In-Memory JSON Lab:
 
-[Oracle VideoHub video](https://videohub.oracle.com/media/LLv2-json/1_pvfvyl6k)
+[JSON](videohub:1_5rf7ugsx)
 
 ### Objectives
 

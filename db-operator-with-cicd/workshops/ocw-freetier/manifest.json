@@ -1,0 +1,43 @@
+{
+  "workshoptitle": "Oracle Database Operator for Kubernetes + DevOps",
+  "help": "livelabs-help-db_us@oracle.com",
+	"tutorials": [
+      {
+        "title": "Introduction",
+        "filename": "../../0-intro/intro.md"
+      },
+      {
+        "title": "Get Started",
+        "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+      },
+      {
+        "title": "Lab 1: Setup",
+        "filename": "../../1-setup/setup.md"
+      },
+      {
+        "title": "Lab 2: Install the Database Operator",
+        "filename": "../../2-install-operator/operator.md"
+      },
+      {
+        "title": "Lab 3: Deploy the Microservices App",
+        "filename": "../../3-deploy-app/applications.md"
+      },
+      {
+        "title": "Lab 4: Prepare Jenkins and Configure Webhooks",
+        "filename": "../../4-walkthrough-jenkins/jenkins-setup.md"
+      },
+      {
+        "title": "Lab 5: Make and Monitor Application Changes",
+        "filename": "../../5-make-feature/application-changes.md"
+      },
+      {
+        "title": "Lab 6: Teardown",
+        "filename": "../../6-teardown/teardown.md"
+      },
+      {
+        "title": "Oracle CloudWorld 2022 - Get Help",
+        "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+        "filename":"https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
+      }
+    ]
+}

@@ -5,9 +5,8 @@
 
 [//]: # ( [YouTube video](youtube:y3tQeVGuo6g) )
 
-Watch the video below for a walk through of the In-memory Joins and Aggregations lab:
-
-[Oracle VideoHub video](https://videohub.oracle.com/media/LLv2-joinsaggr/1_8gndlc7i)
+Watch the video below for a quick walk-through of this lab.
+[In-Memory Joins and Aggregations](videohub:1_gx8ajh93)
 
 ### Objectives
 

@@ -20,7 +20,7 @@ This lab assumes that you have:
 
 ## Task 1: Connect using SSH (optional)
 
-If you configured SSH access as part setting up the ORM stack then you can connect to the instance, as the oracle user, using an SSH private key.
+If you configured SSH access as part setting up the ORM stack then you can connect to the instance, as the **oracle** user, using an SSH private key.
 
 If you selected an automatically generated SSH private key, the key can be viewed and copied on the Stack's Application Information tab:
 
@@ -28,9 +28,9 @@ If you selected an automatically generated SSH private key, the key can be viewe
 
 Copy/paste the key into a file on your client computer, or import into your SSH client, and use it to connect via SSH.
 
-**NOTE:** On Linux and macOS systems, SSH private keys should be stored in your user's .ssh directory (**~/.ssh**) and must have permissions of **600 (rw-------)**.
+**NOTE:** On Linux and macOS systems, SSH private keys should be stored in your user's .ssh directory (**~/.ssh**) and must have permissions of **600 (-rw-------)**.
 
-Assuming that the SSH private key is **~/.ssh/id_livelabs** and the public IP address of the workshop compute instance is **123.123.123.123** then you can connect using:
+Assuming that the SSH private key is **~/.ssh/id_livelabs** and the public IP address of the workshop compute instance is **123.123.123.123** then you can connect, as the **oracle** user, using:
 
 ```
 <copy>
