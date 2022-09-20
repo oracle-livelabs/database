@@ -10,7 +10,7 @@ Watch the video below to get an explanation of enabling the In-Memory column sto
 
 Quick walk through on how to enable In-Memory.
 
-[Youtube video](youtube:oCES149OPeE)
+[Setting up the In-Memory column store](videohub:1_dg318frc)
 
 Estimated Time: 30 minutes
 

@@ -6,7 +6,7 @@ Watch the video below to get an overview of joins using Database In-Memory.
 [](youtube:y3tQeVGuo6g)
 
 Watch the video below for a walk through of the In-Memory and JSON.
-[](youtube:CHPQ6hAymvM)
+[JSON](videohub:1_5rf7ugsx)
 
 ### Objectives
 
