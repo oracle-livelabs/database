@@ -1,26 +1,26 @@
 # Automatic In-Memory High
 
 ## Introduction
-Watch the video below to get an overview of using Database In-Memory.
+Watch the video below to get an overview of Automatic In-Memory:
 
-[](youtube:y3tQeVGuo6g)
+[YouTube video](youtube:pFWjl1G7uDI)
 
-Watch the video below to learn about Automatic In-Memory High.
-[](youtube:pFWjl1G7uDI)
+Watch the video below for a walk through of the Automatic In-Memory High lab:
+
+[Oracle VideoHub video](https://videohub.oracle.com/media/LLv2-aim-high/1_kvpqe5sa)
 
 ### Objectives
 
--   Learn how to Automatic In-Memory (AIM) level HIGH works
+-   Learn how Automatic In-Memory (AIM) level HIGH works
 -   Perform various queries invoking AIM with INMEMORY_AUTOMATIC_LEVEL set to HIGH
 
 ### Prerequisites
 This lab assumes you have:
 - A Free Tier, Paid or LiveLabs Oracle Cloud account
 - You have completed:
-    - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
-    - Lab: Environment Setup
+    - Lab: Get Started with noVNC Remote Desktop (*Free-tier* and *Paid Tenants* only)
     - Lab: Initialize Environment
-    - Lab: Querying the In-Memory Column Store
+    - Lab: Setting up the In-Memory Column Store
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 

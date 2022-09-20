@@ -1,12 +1,13 @@
 # In-Memory Joins and Aggregations
 
 ## Introduction
-Watch the video below to get an overview of joins using Database In-Memory.
+[//]: # ( Watch the video below to get an overview of joins using Database In-Memory. )
 
-[](youtube:y3tQeVGuo6g)
+[//]: # ( [YouTube video](youtube:y3tQeVGuo6g) )
 
-Watch the video below for a walk through of the In-memory Joins and Aggregations lab.
-[](youtube:PC1kWntRrqg)
+Watch the video below for a walk through of the In-memory Joins and Aggregations lab:
+
+[Oracle VideoHub video](https://videohub.oracle.com/media/LLv2-joinsaggr/1_8gndlc7i)
 
 ### Objectives
 
@@ -17,10 +18,9 @@ Watch the video below for a walk through of the In-memory Joins and Aggregations
 This lab assumes you have:
 - A Free Tier, Paid or LiveLabs Oracle Cloud account
 - You have completed:
-    - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
-    - Lab: Environment Setup
+    - Lab: Get Started with noVNC Remote Desktop (*Free-tier* and *Paid Tenants* only)
     - Lab: Initialize Environment
-    - Lab: Querying the In-Memory Column Store
+    - Lab: Setting up the In-Memory Column Store
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
