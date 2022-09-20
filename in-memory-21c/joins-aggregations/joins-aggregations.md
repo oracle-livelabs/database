@@ -5,8 +5,8 @@ Watch the video below to get an overview of joins using Database In-Memory.
 
 [](youtube:y3tQeVGuo6g)
 
-Watch the video below for a walk through of the In-memory Joins and Aggregations lab.
-[](youtube:PC1kWntRrqg)
+Watch the video below for a quick walk-through of this lab.
+[In-Memory Joins and Aggregations](videohub:1_gx8ajh93)
 
 ### Objectives
 

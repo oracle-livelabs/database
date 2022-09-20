@@ -8,6 +8,9 @@ Watch the video below to get an overview of using Database In-Memory.
 Watch the video below to learn about Automatic In-Memory High.
 [](youtube:pFWjl1G7uDI)
 
+Watch the video below for a quick walk-through of this lab.
+[Automatic In-Memory High](videohub:1_0rzwly4i)
+
 ### Objectives
 
 -   Learn how to Automatic In-Memory (AIM) level HIGH works

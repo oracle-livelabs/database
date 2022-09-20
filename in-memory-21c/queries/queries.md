@@ -6,7 +6,7 @@ Watch a preview video of querying the In-Memory Column Store
 [](youtube:U9BmS53KuGs)
 
 Watch the video below for a walk through of the In-memory Queries lab.
-[](youtube:KpqccIF8Hj8)
+[In-Memory Queries](videohub:1_ohs9hpw0)
 
 ### Objectives
 
