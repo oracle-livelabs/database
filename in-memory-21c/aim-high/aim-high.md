@@ -7,9 +7,6 @@ Watch the video below to get an overview of Automatic In-Memory:
 
 Watch the video below for a walk through of the Automatic In-Memory High lab:
 
-[Oracle VideoHub video](https://videohub.oracle.com/media/LLv2-aim-high/1_kvpqe5sa)
-
-Watch the video below for a quick walk-through of this lab.
 [Automatic In-Memory High](videohub:1_0rzwly4i)
 
 ### Objectives

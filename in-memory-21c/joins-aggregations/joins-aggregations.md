@@ -5,7 +5,8 @@
 
 [//]: # ( [YouTube video](youtube:y3tQeVGuo6g) )
 
-Watch the video below for a quick walk-through of this lab.
+Watch the video below for a quick walk-through of the In-memory Joins and Aggregations lab:
+
 [In-Memory Joins and Aggregations](videohub:1_gx8ajh93)
 
 ### Objectives
