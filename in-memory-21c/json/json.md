@@ -3,24 +3,25 @@
 ## Introduction
 Watch the video below to get an overview of joins using Database In-Memory.
 
-[](youtube:y3tQeVGuo6g)
+[YouTube video](youtube:CHPQ6hAymvM)
 
-Watch the video below for a walk through of the In-Memory and JSON.
+Watch the video below for a walk through of the In-Memory JSON Lab:
+
 [JSON](videohub:1_5rf7ugsx)
 
 ### Objectives
 
--   Learn how to enable In-Memory on the Oracle Database
--   Perform various queries on the In-Memory Column Store
+-   Learn how to JSON can be used with Database In-Memory on Oracle Database
+-   Perform various tasks to see how to use JSON with Database In-Memory
 
 ### Prerequisites
 This lab assumes you have:
 - A Free Tier, Paid or LiveLabs Oracle Cloud account
 - You have completed:
-    - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
-    - Lab: Environment Setup
+    - Lab: Get Started with noVNC Remote Desktop (*Free-tier* and *Paid Tenants* only)
     - Lab: Initialize Environment
-    - Lab: Querying the In-Memory Column Store
+    - Lab: Setting up the In-Memory Column Store
+
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
@@ -81,13 +82,83 @@ SQL> set lines 150
 SQL>
 ```
 
-1. First let's verify that the database has been setup with the required prerequisites.
+1. First we will disable all of the tables that are enabled for INMEMORY so that we can ensure that we will have enough room in the IM column store for this lab.
 
-    Run the script *01\_json\_prereq.sql*
+    Run the script *01\_disable\_tables.sql*
 
     ```
     <copy>
-    @01_json_prereq.sql
+    @01_disable_tables.sql
+    </copy>    
+    ```
+
+    or run the query below:  
+
+    ```
+    <copy>
+    declare
+      v_ddl varchar2(1000);
+    begin
+      for tab_cursor in (
+        select owner, table_name
+        from   dba_tables
+        where  owner not in ('AUDSYS','SYS')
+        and    inmemory = 'ENABLED'
+      )
+      loop
+        v_ddl := 'alter table '||tab_cursor.owner||'.'||tab_cursor.table_name||' no inmemory';
+        dbms_output.put_line(v_ddl);
+        execute immediate v_ddl;
+      end loop;
+      --
+      for part_cursor in (
+        select table_owner, table_name, partition_name
+        from   dba_tab_partitions
+        where  table_owner not in ('AUDSYS','SYS')
+        and    inmemory = 'ENABLED'
+      )
+      loop
+        v_ddl := 'alter table '||part_cursor.table_owner||'.'||part_cursor.table_name||
+          ' modify partition '||part_cursor.partition_name||' no inmemory';
+        dbms_output.put_line(v_ddl);
+        execute immediate v_ddl;
+      end loop;
+    end;
+    /
+    </copy>
+    ```
+
+    Query result:
+
+    ```
+    SQL> @01_disable_tables.sql
+    Connected.
+    alter table SSB.SUPPLIER no inmemory
+    alter table SSB.DATE_DIM no inmemory
+    alter table SSB.PART no inmemory
+    alter table SSB.CUSTOMER no inmemory
+    alter table SSB.J_PURCHASEORDER no inmemory
+    alter table SSB.LINEORDER modify partition PART_1994 no inmemory
+    alter table SSB.LINEORDER modify partition PART_1995 no inmemory
+    alter table SSB.LINEORDER modify partition PART_1996 no inmemory
+    alter table SSB.LINEORDER modify partition PART_1997 no inmemory
+    alter table SSB.LINEORDER modify partition PART_1998 no inmemory
+
+    PL/SQL procedure successfully completed.
+
+
+    PL/SQL procedure successfully completed.
+
+    SQL>
+    ```
+
+2. Next let's verify that the database has been setup with the required prerequisites.
+
+    Run the script *02\_json\_prereq.sql*
+
+    ```
+    <copy>
+    @02_json_prereq.sql
     </copy>    
     ```
 
@@ -105,7 +176,7 @@ SQL>
     Query result:
 
     ```
-    SQL> @01_json_prereq.sql
+    SQL> @02_json_prereq.sql
     Connected.
 
     NAME                                 TYPE        VALUE
@@ -133,11 +204,11 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
 
 1. First we will display the J\_PURCHASEORDER table. This is the table we will be using for our examples and is the same table that is created and used in the 19c JSON Developer's Guide.
 
-    Run the script *02\_j\_purchaseorder.sql*
+    Run the script *03\_j\_purchaseorder.sql*
 
     ```
     <copy>
-    @02_j_purchaseorder.sql
+    @03_j_purchaseorder.sql
     </copy>    
     ```
 
@@ -165,7 +236,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     Query result:
 
     ```
-    SQL> @02_j_purchaseorder.sql
+    SQL> @03_j_purchaseorder.sql
     Connected.
      Name                                      Null?    Type
      ----------------------------------------- -------- ----------------------------
@@ -191,11 +262,11 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
 
 2. The next step will define a check constraint on the PO\_DOCUMENT column to ensure well formed JSON and enable In-Memory optimizations on the JSON data.
 
-    Run the script *03\_enable\_json.sql*
+    Run the script *04\_enable\_json.sql*
 
     ```
     <copy>
-    @03_enable_json.sql
+    @04_enable_json.sql
     </copy>    
     ```
 
@@ -223,7 +294,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     Query result:
 
     ```
-    SQL> @03_enable_json.sql
+    SQL> @04_enable_json.sql
     Connected.
     SQL>
     SQL> alter table j_purchaseorder add constraint ensure_json check (po_document is json);
@@ -255,13 +326,13 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
 
     Note that not only have we created a check constraint on the PO\_DOCUMENT column, but that has also resulted in the creation of a new virtual column that starts with the name SYS\_IME\_OSON. Oracle Database has created a special binary version of the PO\_DOCUMENT column.
 
-4. Next we will run a query on the JSON data to show the functionality and peformance. Remember that we have not yet enabled in-memory processing for the JSON data.
+3. Next we will run a query on the JSON data to show the functionality and peformance. Remember that we have not yet enabled in-memory processing for the JSON data.
 
-    Run the script *04\_json\_query.sql*
+    Run the script *05\_json\_query.sql*
 
     ```
     <copy>
-    @04_json_query.sql
+    @05_json_query.sql
     </copy>    
     ```
 
@@ -293,7 +364,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     Query result:
 
     ```
-    SQL> @04_json_query.sql
+    SQL> @05_json_query.sql
     Connected.
     SQL>
     SQL> -- JSON query
@@ -384,13 +455,13 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     SQL>
     ```
 
-5. Now we will enable the J\_PURCHASEORDER table for inmemory and populate it.
+4. Now we will enable the J\_PURCHASEORDER table for inmemory and populate it.
 
-    Run the script *05\_json\_pop.sql*
+    Run the script *06\_json\_pop.sql*
 
     ```
     <copy>
-    @05_json_pop.sql
+    @06_json_pop.sql
     </copy>
     ```
 
@@ -406,7 +477,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     Query result:
 
     ```
-    SQL> @05_json_pop.sql
+    SQL> @06_json_pop.sql
     Connected.
     SQL>
     SQL> alter table j_purchaseorder inmemory;
@@ -421,13 +492,13 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     SQL>
     ```
 
-6. Verify that the J\_PURCHASEORDER table has been populated in the IM column store.
+5. Verify that the J\_PURCHASEORDER table has been populated in the IM column store.
 
-    Run the script *06\_im\_populated.sql*
+    Run the script *07\_im\_populated.sql*
 
     ```
     <copy>
-    @06_im_populated.sql
+    @07_im_populated.sql
     </copy>    
     ```
 
@@ -452,7 +523,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     Query result:
 
     ```
-    SQL> @06_im_populated.sql
+    SQL> @07_im_populated.sql
     Connected.
     SQL>
     SQL> -- Query the view v$IM_SEGMENTS to shows what objects are in the column store
@@ -483,13 +554,13 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     SQL>
     ```
 
-7. Since a virtual column was created it will be stored in the IM column store as an In-Memory Expression (IME). Let's check how much additional space the binary JSON data requires.
+6. Since a virtual column was created it will be stored in the IM column store as an In-Memory Expression (IME). Let's check how much additional space the binary JSON data requires.
 
-    Run the script *07\_ime\_usage.sql*
+    Run the script *08\_ime\_usage.sql*
 
     ```
     <copy>
-    @07_ime_usage.sql
+    @08_ime_usage.sql
     </copy>    
     ```
 
@@ -526,7 +597,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     Query result:
 
     ```
-    SQL> @07_ime_usage.sql
+    SQL> @08_ime_usage.sql
     Connected.
     SQL>
     SQL> -- This query displays what objects are in the In-Memory Column Store
@@ -562,13 +633,13 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
 
     Not very much space, but like some of the other features that we've seen in this Lab it does require some additional space in the IM column store in-memory optimized JSON data.
 
-8. Now let's run the JSON query again. This is the same query from step 3.
+7. Now let's run the JSON query again. This is the same query from step 3.
 
-    Run the script *08\_json\_query.sql*
+    Run the script *09\_json\_query.sql*
 
     ```
     <copy>
-    @08_json_query.sql
+    @09_json_query.sql
     </copy>    
     ```
 
@@ -600,7 +671,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     Query result:
 
     ```
-    SQL> @08_json_query.sql
+    SQL> @09_json_query.sql
     Connected.
     SQL>
     SQL> -- JSON query
@@ -708,11 +779,11 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
 
 1. Now let's switch to a new table with the PO\_DOCUMENT column defined as a JSON data type. Recall that this is new in Oracle Database 21c.
 
-    Run the script *09\_json\_purchaseorder.sql*
+    Run the script *10\_json\_purchaseorder.sql*
 
     ```
     <copy>
-    @09_json_purchaseorder.sql
+    @10_json_purchaseorder.sql
     </copy>    
     ```
 
@@ -740,7 +811,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     Query result:
 
     ```
-    SQL> @09_json_purchaseorder.sql
+    SQL> @10_json_purchaseorder.sql
     Connected.
 
                          Column
@@ -767,11 +838,11 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
 
 2. Next we will populate the JSON\_PURCHASEORDER table with the JSON data type and we will remove the previous J\_PURCHASEORDER table since we won't need it any longer.
 
-    Run the script *10\_json\_pop.sql*
+    Run the script *11\_json\_pop.sql*
 
     ```
     <copy>
-    @10_json_pop.sql
+    @11_json_pop.sql
     </copy>    
     ```
 
@@ -788,7 +859,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     Query result:
 
     ```
-    SQL> @10_json_pop.sql
+    SQL> @11_json_pop.sql
     Connected.
     SQL>
     SQL> alter table j_purchaseorder no inmemory;
@@ -810,11 +881,11 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
 
 3. Make sure that the JSON\_PURCHASEORDER table has been fully populated.
 
-    Run the script *11\_im\_populated.sql*
+    Run the script *12\_im\_populated.sql*
 
     ```
     <copy>
-    @11_im_populated.sql
+    @12_im_populated.sql
     </copy>    
     ```
 
@@ -839,7 +910,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     Query result:
 
     ```
-    SQL> @11_im_populated.sql
+    SQL> @12_im_populated.sql
     Connected.
     SQL>
     SQL> -- Query the view v$IM_SEGMENTS to shows what objects are in the column store
@@ -872,11 +943,11 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
 
 4. Now we will query the JSON\_PURCHASEORDER table with the same basic query that we used in Step 7.
 
-    Run the script *12\_json\_query.sql*
+    Run the script *13\_json\_query.sql*
 
     ```
     <copy>
-    @12_json_query.sql
+    @13_json_query.sql
     </copy>    
     ```
 
@@ -908,7 +979,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     Query result:
 
     ```
-    SQL> @12_json_query.sql
+    SQL> @13_json_query.sql
     Connected.
     SQL>
     SQL> -- JSON query
@@ -1003,13 +1074,13 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     SQL>
     ```
 
-5. (Optional) - You can optionally remove the JSON table(s) from the IM column store to save space and re-run this lab if you wish.
+5. Run the cleanup script to remove the JSON table(s) from the IM column store to save space and re-run this lab if you wish.
 
-    Run the script *13\_json\_cleanup.sql*
+    Run the script *14\_json\_cleanup.sql*
 
     ```
     <copy>
-    @13_json_cleanup.sql
+    @14_json_cleanup.sql
     </copy>    
     ```
 
@@ -1025,7 +1096,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     Query result:
 
     ```
-    SQL> @13_json_cleanup.sql
+    SQL> @14_json_cleanup.sql
     Connected.
     SQL>
     SQL> alter table json_purchaseorder no inmemory;
