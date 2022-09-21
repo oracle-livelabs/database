@@ -1,9 +1,6 @@
 # In-Memory Joins and Aggregations
 
 ## Introduction
-[//]: # ( Watch the video below to get an overview of joins using Database In-Memory. )
-
-[//]: # ( [YouTube video](youtube:y3tQeVGuo6g) )
 
 Watch the video below for a quick walk-through of the In-memory Joins and Aggregations lab:
 
