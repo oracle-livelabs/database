@@ -326,7 +326,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
 
     Note that not only have we created a check constraint on the PO\_DOCUMENT column, but that has also resulted in the creation of a new virtual column that starts with the name SYS\_IME\_OSON. Oracle Database has created a special binary version of the PO\_DOCUMENT column.
 
-3. Next we will run a query on the JSON data to show the functionality and peformance. Remember that we have not yet enabled in-memory processing for the JSON data.
+3. Next we will run a query on the JSON data to show the functionality and performance. Remember that we have not yet enabled in-memory processing for the JSON data.
 
     Run the script *05\_json\_query.sql*
 
@@ -538,19 +538,9 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
                                                                                             In-Memory            Bytes
     OWNER      SEGMENT_NAME         PARTITION_NAME  POPULATE_STATUS        Disk Size             Size    Not Populated
     ---------- -------------------- --------------- --------------- ---------------- ---------------- ----------------
-    SSB        CUSTOMER                             COMPLETED             24,928,256       23,199,744                0
-    SSB        DATE_DIM                             COMPLETED                122,880        1,179,648                0
     SSB        J_PURCHASEORDER                      COMPLETED            793,198,592    1,069,285,376                0
-    SSB        LINEORDER            PART_1994       COMPLETED            563,601,408      585,236,480                0
-    SSB        LINEORDER            PART_1995       COMPLETED            563,470,336      585,236,480                0
-    SSB        LINEORDER            PART_1996       COMPLETED            565,010,432      587,333,632                0
-    SSB        LINEORDER            PART_1997       COMPLETED            563,314,688      585,236,480                0
-    SSB        LINEORDER            PART_1998       COMPLETED            329,015,296      342,556,672                0
-    SSB        PART                                 COMPLETED             56,893,440       21,168,128                0
-    SSB        SUPPLIER                             COMPLETED              1,769,472        2,228,224                0
-
-    10 rows selected.
-
+    
+    
     SQL>
     ```
 
@@ -631,7 +621,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     SQL>
     ```
 
-    Not very much space, but like some of the other features that we've seen in this Lab it does require some additional space in the IM column store in-memory optimized JSON data.
+    Not very much space, but it does require some additional space in the IM column store in order to store in-memory optimized JSON data.
 
 7. Now let's run the JSON query again. This is the same query from step 3.
 
@@ -774,6 +764,8 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
 
     SQL>
     ```
+
+    A couple of things to note here. The first is that the query ran in about half the time. That is a pretty good speed up. The second is take a look at the statistics. Notice that there are now "IM scan EU" statistics. That's because binary JSON data leverages another Database In-Memory feature called In-Memory Expressions.
 
 ## Task 3: Populating JSON data in the IM column using the JSON data type in 21c
 
@@ -925,19 +917,9 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
                                     Partition                                               In-Memory            Bytes
     Owner      SEGMENT_NAME         Name            POPULATE_STATUS        Disk Size             Size    Not Populated
     ---------- -------------------- --------------- --------------- ---------------- ---------------- ----------------
-    SSB        DATE_DIM                             COMPLETED                122,880        1,179,648                0
-    SSB        SUPPLIER                             COMPLETED              1,769,472        2,228,224                0
-    SSB        PART                                 COMPLETED             56,893,440       21,168,128                0
-    SSB        CUSTOMER                             COMPLETED             24,928,256       23,199,744                0
-    SSB        LINEORDER            PART_1998       COMPLETED            329,015,296      342,556,672                0
-    SSB        LINEORDER            PART_1995       COMPLETED            563,470,336      585,236,480                0
-    SSB        LINEORDER            PART_1994       COMPLETED            563,601,408      585,236,480                0
-    SSB        LINEORDER            PART_1997       COMPLETED            563,314,688      585,236,480                0
-    SSB        LINEORDER            PART_1996       COMPLETED            565,010,432      587,333,632                0
     SSB        JSON_PURCHASEORDER                   COMPLETED            691,912,704      816,513,024                0
 
-    10 rows selected.
-
+    
     SQL>
     ```
 
