@@ -1,17 +1,16 @@
 # Connect to the workshop compute instance using NoVNC Remote Desktop
 
 ## Introduction
-This lab will show you how to login to your compute instance running on Oracle Cloud using the browser based NoVMC remote graphical desktop
+This lab shows you how to login to your compute instance running on Oracle Cloud using the browser based NoVNC remote graphical desktop.
 
-If you configured the workshop compute instance for SSH access when you deployed it, and you prefer to use SSH instead of the graphical remote desktop, then skip this lab and *proceed to the next lab*.
+If you configured the workshop compute instance for SSH access when you deployed it, and you prefer to use SSH instead of the graphical remote desktop, then skip this lab and **proceed to the next lab**.
 
 **Estimated Lab Time:** 10 minutes
 
 ### Objectives
-In this lab, you will:
 
-- Learn how to connect to your compute instance using the NoVNC Remote Desktop
-- Learn the basics of using the NoVNC Desktop, including copy and paste
+- Learn how to connect to your compute instance using the NoVNC Remote Desktop.
+- Learn the basics of using the NoVNC Desktop, including copy and paste.
 
 ### Prerequisites
 
@@ -22,15 +21,15 @@ This lab assumes:
 ## Task 1: Access the Graphical Remote Desktop
 For ease of execution of this workshop, your VM instance has been pre-configured with a remote graphical desktop accessible using any modern browser on your laptop or workstation. Proceed as detailed below to login.
 
-If you prefer to connect to the compute instance using SSH to execute the workshop steps and commands, please skip the rest of this lab and  *proceed to the next lab*.
+If you prefer to connect to the compute instance using SSH to execute the workshop steps and commands, please skip the rest of this lab and  **proceed to the next lab**.
 
-1. Navigate to **Stack Details**, **Application Information** tab, and click on the remote desktop URL
+1. Navigate to **Stack Details**, **Application Information** tab, and **Copy** the remote desktop URL.
 
   ![](./images/create-stack-novnc-10.png " ")
 
   ![](./images/novnc-login-1.png " ")
 
-  This should take you directly to your remote desktop in a single click.
+  Paste this URL into another browser window and it will take you to the remote desktop.
 
   ![](images/novnc-launch-get-started-2.png " ")
 
@@ -44,7 +43,7 @@ You can safely ignore this error. Proceed by clicking on **Details**, and finall
 
 ## Task 2: Enable NoVNC Full-screen Display
 
-Too make the best use of your display, perform the following tasks to render your remote desktop session in fullscreen mode.
+To make the best use of your display, perform the following tasks to render your remote desktop session in fullscreen mode.
 
 1. Click on the small gray tab on the middle-left side of your screen to open the control bar.
 
@@ -57,7 +56,7 @@ Too make the best use of your display, perform the following tasks to render you
     
 ## Task 3: Enable Copy/Paste from Local to Remote Desktop
 
-During the execution of this workshop you may will to copy text from your local PC/Mac to the remote desktop, such as commands from the lab guide. While such direct copy/paste isn't supported, you may proceed as indicated below to enable an alternative local-to-remote clipboard via the NoVNC Clipboard.
+During the execution of this workshop you will need to copy text from the workshop instructions (use the copy button provided) to a terminal session (remote desktop or SSH). As direct copy/paste between your local browser and the NoVNC desktop isn't supported, you may proceed as indicated below to enable an alternative local-to-remote clipboard using the NoVNC Clipboard.
 
 1. Continuing from the last task above, Select the *clipboard* icon
 
@@ -69,11 +68,11 @@ During the execution of this workshop you may will to copy text from your local 
 
 *Note:* Please make sure you initialize your clipboard with step [1] shown in the screenshot above before opening the target application in which you intend to paste the text. Otherwise will find the *paste* function in the context menu grayed out when attempting to paste for the first time.
     
-**IMPORTANT:** Due to the slightly cumbersome nature of copying between your host system and the NoVNC session, we recommend that you perform all of the copy/paste actions within the NoVNC session itself, as this avoids the use of the NoVNC clipboard. Alternatively, access the workshop's compute instance via SSH and copy/paste between the lab instructions displayed in your local browser and your SSH session.
+**IMPORTANT:** Due to the slightly cumbersome nature of copying between your host system and the NoVNC session, we recommend that you perform all of the copy/paste actions within the NoVNC session itself, as this avoids the use of the NoVNC clipboard. Alternatively, access the workshop's compute instance using SSH and copy/paste between the lab instructions displayed in your local browser and your SSH session.
 
 If you will be using the NoVNC desktop for the workshop, make sure that you have an open terminal session. If you have closed the terminal session that was open when you first logged in, open a new one now using **Activities > Terminal** from the Linux desktop menu bar. 
 
-You may now *proceed to the next lab*.
+You can now **proceed to the next lab**.
 
 
 ## Acknowledgements

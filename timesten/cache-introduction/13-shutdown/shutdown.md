@@ -2,14 +2,14 @@
 
 ## Introduction
 
-In this final lab, you will cleanly shut down the TimesTen cache and the TimesTen instance that manages it.
+In this final lab, you cleanly shut down the TimesTen cache and the TimesTen instance that manages it.
 
 **Estimated Lab Time:** 3 minutes
 
 ### Objectives
 
-- Stop the Cache Agent
-- Stop the TimesTen instance
+- Stop the cache agent.
+- Stop the TimesTen instance.
 
 ### Prerequisites
 
@@ -123,7 +123,7 @@ The database has been unloaded from memory and is now shut down.
 
 ## Task 2: Stop the TimesTen instance
 
-Stop the TimesTen instance (i.e. stop the main daemon):
+Stop the TimesTen instance (the main daemon):
 
 ```
 <copy>
@@ -150,7 +150,7 @@ logout
 Connection to tthost1 closed.
 ```
 
-You can now *proceed to the next lab*.
+You can now **proceed to the Wrap Up**.
 
 ## Acknowledgements
 
