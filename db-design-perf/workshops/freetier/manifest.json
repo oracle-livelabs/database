@@ -4,41 +4,49 @@
     "tutorials": [
         {
             "title": "Introduction",
+            "type": "freetier",
             "description": "Introduction",
             "filename": "./../../introduction/introduction.md"
         },
         {
             "title": "Get Started",
+            "type": "freetier",
             "description": "Get a Free Trial",
             "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
         },
         {
             "title": "Lab 1: Provision an Autonomous Database",
+            "type": "freetier",
             "description": "Provision Autonomous Database",
             "filename": "./../../db-design-perf-provision/db-design-perf-provision.md"
         },
         {
             "title": "Lab 2: Establish the initial Database Schema",
+            "type": "freetier",
             "description": "Establish the initial Database Schema",
             "filename": "./../../db-design-perf-build/db-design-perf-build.md"
         },
        {
             "title": "Lab 3: Run the base Performance Benchmark",
+            "type": "freetier",
             "description": "Run the base Performance Benchmark",
             "filename": "./../../db-design-perf-bench1/db-design-perf-bench1.md"
         },
         {
             "title": "Lab 4: Optimize the Design for Throughput",
+            "type": "freetier",
             "description": "Optimize the Design for Throughput",
             "filename": "./../../db-design-perf-bench2/db-design-perf-bench2.md"
         },
         {
             "title": "Lab 5: Optimize the Design for Concurrency",
+            "type": "freetier",
             "description": "Optimize the Design for Concurrency",
             "filename": "./../../db-design-perf-bench3/db-design-perf-bench3.md"
         },
         {
             "title": "Need Help?",
+            "type": "freetier",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
             "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
         }

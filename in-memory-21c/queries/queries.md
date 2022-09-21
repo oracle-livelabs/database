@@ -3,10 +3,11 @@
 ## Introduction
 Watch a preview video of querying the In-Memory Column Store
 
-[](youtube:U9BmS53KuGs)
+[YouTube video](youtube:U9BmS53KuGs)
 
-Watch the video below for a walk through of the In-memory Queries lab.
-[](youtube:KpqccIF8Hj8)
+Watch the video below for a walk through of the In-Memory Queries lab:
+
+[In-Memory Queries](videohub:1_ohs9hpw0)
 
 ### Objectives
 
@@ -422,7 +423,7 @@ SQL>
 
 5. Think indexing lo\_orderkey would provide the same performance as the IM column store? There is an invisible index already created on the lo\_orderkey column of the LINEORDER table. By using the parameter OPTIMIZER\_USE\_INVISIBLE\_INDEXES we can compare the performance of the IM column store to using an index. Let's see how well the index performs.
 
-    Run the script *05\_\index\_comparison.sql*
+    Run the script *05\_index\_comparison.sql*
 
     ```
     <copy>
