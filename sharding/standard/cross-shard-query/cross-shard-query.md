@@ -8,7 +8,7 @@ If the sharding key cannot be provided as part of database connection string, th
 
 At a high level the coordinator rewrites each incoming query, Q, into a distributive form composed of two queries, CQ and SQ, where SQ (Shard Query) is the portion of Q that executes on each participating shard and CQ (Coordinator Query) is the portion that executes on the coordinator shard.
 
-Estimated Lab Time: 20 minutes.
+*Estimated Lab Time:* 20 minutes.
 
 ### Objectives
 

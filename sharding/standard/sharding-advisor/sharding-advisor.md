@@ -6,7 +6,7 @@ Sharding Advisor simplifies the migration of your existing, non-sharded Oracle d
 
 The Sharding Advisor utility, `GWSADV`, is installed with Oracle Database 21c as a standalone tool, and connects to your database using authenticated OCI connections.
 
-Estimated Lab Time: 30 minutes.
+*Estimated Lab Time:* 30 minutes.
 
 ### Objectives
 

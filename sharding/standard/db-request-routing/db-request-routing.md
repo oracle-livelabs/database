@@ -7,7 +7,7 @@ You can connect directly to the shards to execute queries and DML by providing a
 
 Queries that need data from multiple shards, and queries that do not specify a sharding key, cannot be routed directly by the application. Those queries require a proxy to route requests between the application and the shards. Proxy routing is handled by the shard catalog query coordinator.
 
-Estimated Lab Time: 20 minutes.
+*Estimated Lab Time:* 20 minutes.
 
 Watch the video below for a quick walk through of the lab.
 [](youtube:cihT3Ana55A)

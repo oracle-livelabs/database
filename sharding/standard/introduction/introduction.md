@@ -5,7 +5,7 @@
 
 In this workshop you will learn how to deploy Oracle Sharding, work with the sharded database and scale the sharded database. You will also learn how to migrate an application from a non-shard database to a sharded database.
 
-Estimated Lab Time: 4 hours.
+*Estimated Lab Time:* 4 hours.
 
 ### About Oracle Sharding
 

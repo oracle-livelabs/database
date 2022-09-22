@@ -20,7 +20,7 @@ This lab assumes you have:
 
 ## Task 1: Validate That Required Processes are Up and Running.
 
-**NOTE:** NoVNC remote desktop is active on all 4 hosts that are part of your environment. While you are provided with a single remote desktop URL for *cata*, you can access other hosts with the same URL after replacing the IP address in the URL with the respective Public IP of the target host.   
+**NOTE:** NoVNC remote desktop is active on all 4 hosts that are part of your environment. While you are provided with a single remote desktop URL for *cata*, you can access other hosts with the same URL after replacing the IP address in the URL with the respective Public IP of the target host.
 
 1. Now with access to your remote desktop session(s), proceed as indicated below to validate your environment before you start executing the subsequent labs. The following Processes should be up and running:
 

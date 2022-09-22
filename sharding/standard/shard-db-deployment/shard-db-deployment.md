@@ -18,7 +18,7 @@ Following is the topology used for System Managed Sharding we will create in thi
 
 ![System topology diagram.](images/systemtopology.png)
 
-Estimated Lab Time: 60 minutes.
+*Estimated Lab Time:* 60 minutes.
 
 Watch the video below for a quick walk through of the lab.
 [](youtube:8r3cvL5s7nk)

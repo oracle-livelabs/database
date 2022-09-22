@@ -4,7 +4,7 @@
 
 In this lab, you will setup a non-sharded database application. You will migrate the schema and data to the sharded database in the next lab. The demo java application is designed for sharded database, but also can work with the non-sharded database with a little modified. In order to save the resource, we will use a PDB in the shard3 host to simulate a non-sharded instance.
 
-Estimated Lab Time: 30 minutes.
+*Estimated Lab Time:* 30 minutes.
 
 Watch the video below for a quick walk through of the lab.
 [](youtube:bUC2KXUW21E)

@@ -4,7 +4,7 @@
 
 Now, we will add the shard (on shd3) to the Shard Database and thus elastically scale the SDB. Make sure you have done all steps in the shard3 host according to the lab 2 "Shard Database Deployment" to configure the shard host, setup shard database and validate without any error.
 
-Estimated Lab Time: 30 minutes.
+*Estimated Lab Time:* 30 minutes.
 
 Watch the video below for a quick walk through of the lab.
 [](youtube:oojbS9Wp1RQ)
