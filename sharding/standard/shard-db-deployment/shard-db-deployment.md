@@ -33,6 +33,7 @@ This lab assumes you have:
 - You have completed:
     - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
     - Lab: Environment Setup
+    - Lab: Initialize Environment
 
 ## Task 1: Install Shard Director Software
 

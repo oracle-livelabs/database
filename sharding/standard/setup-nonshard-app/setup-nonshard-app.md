@@ -19,13 +19,14 @@ In this lab, you will perform the following steps:
 - Export the demo data.
 
 
-
 ### Prerequisites
-
-This lab assumes you have already completed the following:
-
-- Access the Workshop Environment
-
+This lab assumes you have:
+- An Oracle Cloud account
+- You have completed:
+    - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
+    - Lab: Environment Setup
+    - Lab: Initialize Environment
+    - Lab: Oracle Shard Database Deployment
 
 
 ## Task 1: Create a Non-Shard Service
@@ -68,7 +69,7 @@ This lab assumes you have already completed the following:
 
     ```
     SQL> <copy>CREATE PLUGGABLE DATABASE nspdb ADMIN USER admin IDENTIFIED BY Ora_DB4U
-      DEFAULT TABLESPACE users DATAFILE '/opt/oracle/oradata/SHD3/nspdb/users01.dbf' 
+      DEFAULT TABLESPACE users DATAFILE '/opt/oracle/oradata/SHD3/nspdb/users01.dbf'
       SIZE 10G AUTOEXTEND ON
       FILE_NAME_CONVERT = ('/pdbseed/', '/nspdb/');</copy>  2    3    4  
 

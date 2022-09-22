@@ -20,10 +20,15 @@ In this lab, you will perform the following steps:
 - Multi-Shard Queries.
 
 ### Prerequisites
-
-This lab assumes you have already completed the following:
-- Sharded Database Deployment
-- Migrate application to sharded database
+This lab assumes you have:
+- An Oracle Cloud account
+- You have completed:
+    - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
+    - Lab: Environment Setup
+    - Lab: Initialize Environment
+    - Lab: Oracle Shard Database Deployment
+    - Lab: Setup a Non-Sharded Application.
+    - Lab: Migrate Application to Sharded Database
 
 ## Task 1: Routing Queries and DMLs Directly to Shards
 
@@ -237,7 +242,6 @@ This lab assumes you have already completed the following:
     Version 19.14.0.0.0
     [oracle@cata ~]$
     ```
-
 
 
 ## Task 2: Routing Queries and DMLs by Proxy

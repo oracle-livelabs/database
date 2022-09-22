@@ -17,10 +17,15 @@ In this lab, you will perform the following steps:
 - Run the demo application again with 3 shards.
 
 ### Prerequisites
-
-This lab assumes you have already completed the following:
-- Sharded database deployment
-- Migrate application to sharded database
+This lab assumes you have:
+- An Oracle Cloud account
+- You have completed:
+    - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
+    - Lab: Environment Setup
+    - Lab: Initialize Environment
+    - Lab: Oracle Shard Database Deployment
+    - Lab: Setup a Non-Sharded Application.
+    - Lab: Migrate Application to Sharded Database
 
 ## Task 1: Add the New Shard
 
