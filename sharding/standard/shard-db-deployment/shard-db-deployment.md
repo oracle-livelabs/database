@@ -39,24 +39,32 @@ This lab assumes you have:
 
 In this workshop we choose to co-locate the shard director software on the same host as the shard catalog database, it must be installed in a separate Oracle Home.
 
-1. From your remote desktop session connected to host *cata* as user **oracle**, open a Terminal session and edit two config files to switch environment between catalog and GSM.
+1. From your remote desktop session connected to host *cata* as user **oracle**, open a Terminal session and the blocks below to create two config files needed to switch environment between catalog and GSM.
 
     - create a file named gsm.sh.
 
        ```
-       <copy>export ORACLE_BASE=/opt/oracle
+       <copy>
+       cat >gsm.sh <<EOF
+       export ORACLE_BASE=/opt/oracle
        export ORACLE_HOME=/opt/oracle/product/19c/gsmhome_1
-       export LD_LIBRARY_PATH=$ORACLE_HOME/lib
-       export PATH=$ORACLE_HOME/bin:$PATH</copy>
+       export LD_LIBRARY_PATH=\$ORACLE_HOME/lib
+       export PATH=\$ORACLE_HOME/bin:\$PATH
+       EOF
+       </copy>
        ```
 
     - create a file named cata.sh.
 
        ```
-       <copy>export ORACLE_BASE=/opt/oracle
+       <copy>
+       cat >cata.sh <<EOF
+       export ORACLE_BASE=/opt/oracle
        export ORACLE_HOME=/opt/oracle/product/19c/dbhome_1
-       export LD_LIBRARY_PATH=$ORACLE_HOME/lib
-       export PATH=$ORACLE_HOME/bin:$PATH</copy>
+       export LD_LIBRARY_PATH=\$ORACLE_HOME/lib
+       export PATH=\$ORACLE_HOME/bin:\$PATH
+       EOF
+       </copy>
        ```
 
 3. Switch to the GSM environment.
