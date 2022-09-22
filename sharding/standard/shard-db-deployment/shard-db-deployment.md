@@ -43,29 +43,29 @@ In this workshop we choose to co-locate the shard director software on the same 
 
     - create a file named gsm.sh.
 
-       ```
-       <copy>
-       cat >gsm.sh <<EOF
-       export ORACLE_BASE=/opt/oracle
-       export ORACLE_HOME=/opt/oracle/product/19c/gsmhome_1
-       export LD_LIBRARY_PATH=\$ORACLE_HOME/lib
-       export PATH=\$ORACLE_HOME/bin:\$PATH
-       EOF
-       </copy>
-       ```
+    ```
+    <copy>
+    cat >gsm.sh <<EOF
+    export ORACLE_BASE=/opt/oracle
+    export ORACLE_HOME=/opt/oracle/product/19c/gsmhome_1
+    export LD_LIBRARY_PATH=\$ORACLE_HOME/lib
+    export PATH=\$ORACLE_HOME/bin:\$PATH
+    EOF
+    </copy>
+    ```
 
     - create a file named cata.sh.
 
-       ```
-       <copy>
-       cat >cata.sh <<EOF
-       export ORACLE_BASE=/opt/oracle
-       export ORACLE_HOME=/opt/oracle/product/19c/dbhome_1
-       export LD_LIBRARY_PATH=\$ORACLE_HOME/lib
-       export PATH=\$ORACLE_HOME/bin:\$PATH
-       EOF
-       </copy>
-       ```
+    ```
+    <copy>
+    cat >cata.sh <<EOF
+    export ORACLE_BASE=/opt/oracle
+    export ORACLE_HOME=/opt/oracle/product/19c/dbhome_1
+    export LD_LIBRARY_PATH=\$ORACLE_HOME/lib
+    export PATH=\$ORACLE_HOME/bin:\$PATH
+    EOF
+    </copy>
+    ```
 
 3. Switch to the GSM environment.
 
