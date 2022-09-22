@@ -1,0 +1,38 @@
+{
+  "workshoptitle": "Maintain Transaction Consistency with Oracle Transaction Manager for Microservices",
+  "help": "livelabs-help-**enterarea**_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The Introduction is always second for LiveLabs. The title and contents menu title match for the Introduction.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Lab 1: Environment Setup",
+      "description": "Verify Setup of compute instance",
+      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+    },
+    {
+      "title": "Lab 3: Run an LRA Sample Application",
+      "filename": "../../run-lra-app/run-lra-app.md"
+    },
+    {
+      "title": "Lab 4: Provision Autonomous Databases for Use as Resource Manager",
+      "filename": "../../adb-provision/adb-provision.md"
+    },
+    {
+      "title": "Lab 5: Run an XA Sample Application",
+      "filename": "../../run-xa-app/run-xa-app.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    },
+    {
+      "title": "Other LiveLabs you might like",
+      "description": "Other LiveLabs you might like",
+      "filename": "../../other-livelabs/other-livelabs.md"
+    }
+  ]
+}
