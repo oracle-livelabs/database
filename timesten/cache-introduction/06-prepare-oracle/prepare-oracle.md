@@ -8,9 +8,9 @@ In this lab, we will prepare the Oracle database to support TimesTen caching.
 
 ### Objectives
 
-- Create a tablespace for TimesTen metadata
-- Create the TimesTen cache admin user
-- Grant all necessary privileges to the cache admin user
+- Create a tablespace for TimesTen metadata.
+- Create the TimesTen cache admin user.
+- Grant all necessary privileges to the cache admin user.
 
 ### Prerequisites
 
@@ -21,9 +21,9 @@ This lab assumes that you:
 
 ## Task 1: Examine Oracle database schemas and tables
 
-There are two separate schema users, **appuser** and **oe**, already defined in the Oracle Database. Each user has some tables, which have already been created, and example data has been pre-loaded into those tables.
+For this workshop, two separate schema users, **appuser** and **oe**, have been defined in the Oracle Database. Each user has several tables, which have already been created, and some example data has been pre-loaded into those tables.
 
-Examine the table definitions, and their row counts, by looking at the files **tables\_appuser.sql** and **tables\_oe.sql**:
+Examine the table definitions, and their row counts, by reviewing the **tables\_appuser.sql** and **tables\_oe.sql** files:
 
 ```
 <copy>
@@ -94,7 +94,7 @@ CREATE UNIQUE INDEX order_items_uk
  ON order_items (order_id, product_id) ;
 ```
 
-Here are the entity-relationship diagrams.
+Just for information, here are the entity-relationship diagrams showing the relationships between the tables.
 
 _APPUSER schema_
 
@@ -104,11 +104,11 @@ _OE schema_
 
 ![OE tables ER Diagram](./images/oe-schema-er.png " ")
 
-After the tables were created and populated with suitable example data, optimizer statistics were gathered using **dbms\_stats.gather\_schema\_stats**.
+After the tables were created and populated with suitable example data, optimizer statistics were gathered using **dbms\_stats.gather\_schema\_stats** to ensure that the Oracle database will be able to generate optimal query plans.
 
 ## Task 2: Create tablespace and cache admin user
 
-1. In your session on tthost1, connect to the Oracle database (running on dbhost) using the **sqlplus** utility:
+1. In your tthost1 session, connect to the Oracle database (running on dbhost) using the **SQL\*Plus** utility:
 
 ```
 <copy>
@@ -145,7 +145,7 @@ Tablespace created.
 
 **NOTE:** This operation takes a few minutes. 
 
-3. Create the TimesTen cache admin user (in this workshop we will name the user **ttcacheadm** with password **ttcacheadm**):
+3. Create the TimesTen cache admin user in the Oracle database (in this workshop we name the user **ttcacheadm** with password **ttcacheadm**):
 
 ```
 <copy>
@@ -171,9 +171,9 @@ Grant succeeded.
 
 ## Task 3: Grant required roles and privileges to the cache admin user
 
-The cache admin user needs various privileges. In order to simplify granting these, TimesTen includes a SQL script (**\$TIMESTEN_HOME/install/oraclescripts/grantCacheAdminPrivileges.sql**) that can be run to grant them.
+The cache admin user needs various privileges in the Oracle database. In order to simplify granting these, TimesTen includes a SQL script (**\$TIMESTEN_HOME/install/oraclescripts/grantCacheAdminPrivileges.sql**) that can be run to grant them.
 
-Run that script in SQL\*Plus, passing it the cache admin username (ttcacheadm):
+Run that script in your SQL\*Plus session, passing it the cache admin username (ttcacheadm):
 
 ```
 <copy>
@@ -227,7 +227,7 @@ PUBLIC
 
 ## Task 4: Grant table specific privileges to the cache admin user
 
-The cache admin user also needs specific privileges on each user table that will be cached in TimesTen. The exact privileges depend on the type of caching that will be used. In this workshop we are using READONLY caching, so the cache admin user needs SELECT privilege on all the user tables that will be cached,
+The cache admin user also needs specific privileges on each user table that is cached in TimesTen. The exact privileges depend on the type of caching being used. In this workshop we are using READONLY caching, so the cache admin user needs SELECT privilege on all the user tables that will be cached,
 
 1. Grant those privileges (be sure to press 'Enter' after pasting this into SQL\*Plus):
 
@@ -261,7 +261,7 @@ Version 19.3.0.0.0
 
 The Oracle database is now set up to support a TimesTen cache for the specified tables.
 
-You can now *proceed to the next lab*. 
+You can now **proceed to the next lab**. 
 
 Keep your terminal session to tthost1 open for use in the next lab.
 

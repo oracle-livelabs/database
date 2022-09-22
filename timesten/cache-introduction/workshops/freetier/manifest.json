@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Accelerate your Applications: Achieve Blazing Fast SQL With an Oracle TimesTen Cache",
+  "workshoptitle": "Accelerate your Applications - Achieve Blazing Fast SQL With an Oracle TimesTen Cache",
   "support": "https://community.oracle.com/tech/developers/categories/database-19c",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
@@ -74,7 +74,7 @@
       "filename": "../../11-query-performance/query-performance.md"
     },
     {
-      "title": "Lab 13: Dynamic caching",
+      "title": "Lab 13: Learn about dynamic caching",
       "filename": "../../12-dynamic-caching/dynamic-caching.md"
     },
     {
