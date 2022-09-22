@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Now, we have 4 database instances. We will use cata as the catalog database, shd1 and shd2 use as the shard database. The shd3 use as the third shard which will be add to the shard database in the last lab.
+Now, we have 4 database instances. We will use cata as the catalog database, shd1 and shd2 use as the shard database. The shd3 use as the third shard will be added to the shard database in the last lab.
 
 The 4 database instances sample information like this:
 
