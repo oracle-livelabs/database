@@ -12,7 +12,7 @@ Estimated Time: 10 minutes
 The sample application demonstrates how you can develop microservices that participate in LRA transactions while using Transaction Manager for Microservices to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and flight ticket. Only when you provide approval to confirm the booking, the booking of the hotel room and flight ticket is confirmed. If you cancel the provisional booking, the hotel room and flight ticket that was blocked is released and the booking is canceled.
 
 The following figure shows a sample LRA application, which contains several microservices, to demonstrate how you can develop microservices that participate in LRA transactions.
-![Image alt text](images/lra-sample-app.png)
+![Microservices in sample LRA application](./images/lra-sample-app.png)
 
 For more details, see [About the Sample LRA Application](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/set-sample-applications.html#GUID-C5332159-BD13-4210-A02E-475107919FD9) in *Transaction Manager for Microservices Developer Guide*.
 
@@ -35,9 +35,7 @@ This lab assumes you have:
 
 Follow the instructions in this section to configure Minikube, and then run a sample application.
 
-1. SSH to the instance that you have created?
-
-2. Open a new terminal and run the following command to start Minikube.
+1. Open a new terminal and run the following command to start Minikube.
 
     ```text
     <copy>
@@ -45,7 +43,7 @@ Follow the instructions in this section to configure Minikube, and then run a sa
     </copy>
     ```
 
-3. Verify that all resources, such as pods and services, are ready. Use the following command to retrieve the list of resources in the namespace `otmm` and their status.
+2. Verify that all resources, such as pods and services, are ready. Use the following command to retrieve the list of resources in the namespace `otmm` and their status.
 
     ```text
     <copy>
@@ -95,7 +93,7 @@ Before you start a transaction, you must start a tunnel between Minikube and Tra
 
     **Example output**
 
-    ![Public IP address of ingress gateway](images/ingress-gateway-ip-address.png)
+    ![Public IP address of ingress gateway](./images/ingress-gateway-ip-address.png)
 
     Let's consider that the external IP in the above example is 192.0.2.117.
 
@@ -137,7 +135,9 @@ The sample application provisionally books a hotel room and a flight ticket and 
 
 Your booking is confirmed and information about your confirmed booking is displayed.
 
-![Details of the confirmed booking](images/lra-confirmation.png)
+![Details of the confirmed booking](./images/lra-confirmation.png)
+
+You may now **proceed to the next lab**.
 
 ## Learn More
 

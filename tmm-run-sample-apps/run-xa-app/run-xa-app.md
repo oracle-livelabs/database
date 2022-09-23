@@ -1,4 +1,4 @@
-# Run an XA Sample Application
+# Run an XA sample application
 
 ## Introduction
 
@@ -11,7 +11,7 @@ Estimated Lab Time: 20 minutes
 ### About XA Sample Application
 
 The following figure shows a sample XA application, which contains several microservices.
-![Image alt text](images/xa-sample-app-simple.png)
+![Microservices in the XA sample applications](./images/xa-sample-app-simple.png)
 
 The sample application demonstrates how you can develop microservices that participate in XA transactions while using Transaction Manager for Microservices to coordinate the transactions. When you run the Teller application, it withdraws money from one department and deposits it to another department by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
@@ -35,52 +35,68 @@ This lab assumes you have:
 
 ## Task 1: Build Container Images for Sample XA Applications
 
-The code for the XA sample applications are available in the installation bundle in the `/home/oracle/OTMM/otmm-22.3/samples/xa/java` folder. Build container images for each microservice in the XA sample application.
+The code for the XA sample application is available in the installation bundle in the `/home/oracle/OTMM/otmm-22.3/samples/xa/java` folder. Build container images for each microservice in the XA sample application.
 
 To build container images for each microservice in the sample:
 
 1. Run the following commands to build the container image for the Teller application.
 
-   ```text
-   <copy>cd /home/oracle/OTMM/otmm-22.3/samples/xa/java/teller
-   minikube image build -t xa-java-teller:1.0 .</copy>
-   ```
+    ```text
+    <copy>
+    cd /home/oracle/OTMM/otmm-22.3/samples/xa/java/teller
+    </copy>
+    ```
+
+    ```text
+    <copy>
+    minikube image build -t xa-java-teller:1.0 .</copy>
+    ```
 
    When the image is successfully built, the following message is displayed.
 
-   ```text
-   Successfully tagged xa-java-teller:1.0
-   ```
+    ```text
+    Successfully tagged xa-java-teller:1.0
+    ```
 
 2. Run the following commands to build the Docker image for the Department 1 application.
 
-   ```text
-   <copy>
-   cd /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-helidon
-   minikube image build -t department-helidon:1.0 .
-   </copy>
-   ```
+    ```text
+    <copy>
+    cd /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-helidon
+    </copy>
+    ```
+
+    ```text
+    <copy>
+    minikube image build -t department-helidon:1.0 .
+    </copy>
+    ```
 
    When the image is successfully built, the following message is displayed.
 
-   ```text
-   Successfully tagged department-helidon:1.0
-   ```
+    ```text
+    Successfully tagged department-helidon:1.0
+    ```
 
 3. Run the following commands to build the Docker image for the Department 2 application.
 
-   ```text
-   <copy>
-   cd /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-spring
-   minikube image build -t department-spring:1.0 .
-   </copy>
-   ```
+    ```text
+    <copy>
+    cd /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-spring
+    </copy>
+    ```
+
+    ```text
+    <copy>
+    minikube image build -t department-spring:1.0 .
+    </copy>
+    ```
 
    When the image is successfully built, the following message is displayed.
 
-   ```text
-   Successfully tagged department-spring:1.0
-   ```
+    ```text
+    Successfully tagged department-spring:1.0
+    ```
 
 The container images that you have created are available in your Minikube container registry.
 
@@ -92,7 +108,7 @@ In the `values.yaml` file, specify the image to pull, the credentials to use whe
 
 To provide the configuration and environment details in the `values.yaml` file:
 
-1. Open the values.yaml file, which is located in the `/home/oracle/OTMM/otmm-22.3/samples/xa/java/helmcharts/transfer` folder, in any code editor. This file contains sample values. Replace these sample values with values that are specific to your environment.
+1. Open the values.yaml file, which is in the `/home/oracle/OTMM/otmm-22.3/samples/xa/java/helmcharts/transfer` folder, in any code editor. This file contains sample values. Replace these sample values with values that are specific to your environment.
 
 2. Provide the details of the ATP database instances, that you have created, in the `values.yaml` file, so that the Department A and Department B sample microservices can access the resource manager.
 
@@ -180,7 +196,7 @@ Before you start a transaction, you must start a tunnel between Minikube and Tra
 
     **Example output**
 
-    ![Public IP address of ingress gateway](images/ingress-gateway-ip-address.png)
+    ![Public IP address of ingress gateway](./images/ingress-gateway-ip-address.png)
 
     Let's consider that the external IP in the above example is 192.0.2.117.
 
@@ -262,7 +278,7 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
 
     Where, `192.0.2.117` is the external IP address of the Istio ingress gateway. Replace this with a value specific to your environment.
 
-5. Check the balance in Department 1, account 1 to verify that the account balance is correct and no amount was withdrawn.
+5. Check the balance in Department 1, account 1 to verify that the account balance is correct, and no amount was withdrawn.
 
    **Example command**
 

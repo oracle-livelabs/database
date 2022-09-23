@@ -24,7 +24,7 @@ We strongly recommend using this stack to create a self-contained/dedicated VCN 
 
 ## Task 2: Adding security rules to an existing VCN
 
-This workshop requires a certain number of ports to be available, a requirement that can be met by using the default ORM stack execution that creates a dedicated VCN. In order to use an existing VCN/subnet, the following rules should be added to the security list.
+This workshop requires a certain number of ports to be available, a requirement that can be met by using the default ORM stack execution that creates a dedicated VCN. To use an existing VCN/subnet, the following rules should be added to the security list.
 
 | Type           | Source Port    | Source CIDR | Destination Port | Protocol | Description                           |
 | :-----------   |   :--------:   |  :--------: |    :----------:  | :----:   | :------------------------------------ |
@@ -63,9 +63,9 @@ Using the details from the two Tasks above, proceed to the lab *Environment Setu
 -  Create Stack:  *Compute + Networking*
 -  Create Stack:  *Compute only* with an existing VCN where security lists have been updated as per *Task 2* above
 
-You may now proceed to the next lab.
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
 * **Contributors** - Meghana Banka
-* **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, August 2022
+* **Last Updated By/Date** - Sylaja Kannan, October 2022

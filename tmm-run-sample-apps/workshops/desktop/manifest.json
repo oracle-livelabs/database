@@ -1,6 +1,6 @@
 {
-  "workshoptitle": "Maintain Transaction Consistency with Oracle Transaction Manager for Microservices",
-  "help": "livelabs-help-**enterarea**_us@oracle.com",
+  "workshoptitle": "Maintain transaction consistency with Oracle Transaction Manager for Microservices",
+  "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
@@ -8,31 +8,26 @@
       "filename": "../../introduction/introduction.md"
     },
     {
-      "title": "Get Started with noVNC Remote Desktop",
+      "title": "Get started with noVNC remote desktop",
       "description": "Using noVNC Remote Desktop",
       "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
     },
     {
-      "title": "Lab 2: Run an LRA Sample Application",
+      "title": "Lab 1: Run an LRA sample application",
       "filename": "../../run-lra-app/run-lra-app.md"
     },
     {
-      "title": "Lab 3: Provision Autonomous Databases for Use as Resource Manager",
+      "title": "Lab 2: Provision Autonomous Databases for use as resource manager",
       "filename": "../../adb-provision/adb-provision.md"
     },
     {
-      "title": "Lab 4: Run an XA Sample Application",
+      "title": "Lab 3: Run an XA sample application",
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {
-      "title": "Need Help?",
+      "title": "Need help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
-    },
-    {
-      "title": "Other LiveLabs you might like",
-      "description": "Other LiveLabs you might like",
-      "filename": "../../other-livelabs/other-livelabs.md"
     }
   ]
 }

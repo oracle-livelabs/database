@@ -1,6 +1,6 @@
 {
-  "workshoptitle": "Maintain Transaction Consistency with Oracle Transaction Manager for Microservices",
-  "help": "livelabs-help-**enterarea**_us@oracle.com",
+  "workshoptitle": "Maintain transaction consistency with Oracle Transaction Manager for Microservices",
+  "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
@@ -8,31 +8,31 @@
       "filename": "../../introduction/introduction.md"
     },
     {
-      "title": "Lab 1: Environment Setup",
+      "title": "Get started",
+      "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
+    },
+    {
+      "title": "Lab 1: Environment setup",
       "description": "Verify Setup of compute instance",
       "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
     },
     {
-      "title": "Lab 3: Run an LRA Sample Application",
+      "title": "Lab 3: Run an LRA sample application",
       "filename": "../../run-lra-app/run-lra-app.md"
     },
     {
-      "title": "Lab 4: Provision Autonomous Databases for Use as Resource Manager",
+      "title": "Lab 4: Provision Autonomous Databases for Use as resource manager",
       "filename": "../../adb-provision/adb-provision.md"
     },
     {
-      "title": "Lab 5: Run an XA Sample Application",
+      "title": "Lab 5: Run an XA sample application",
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {
-      "title": "Need Help?",
+      "title": "Need help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
-    },
-    {
-      "title": "Other LiveLabs you might like",
-      "description": "Other LiveLabs you might like",
-      "filename": "../../other-livelabs/other-livelabs.md"
     }
   ]
 }
