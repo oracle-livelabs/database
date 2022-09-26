@@ -19,7 +19,7 @@ This lab assumes that you:
 - Have completed all the previous labs in this workshop, in sequence.
 - Have an open terminal session in the workshop compute instance, either via NoVNC or SSH.
 
-### Starting over from the beginning
+### Start over from the beginning
 
 Once you have successfully completed this lab, if at any point you want to start the whole workshop again from the beginning, just go to the **~/lab** directory and run the script **labReset.sh**. That script will take 5-8 minutes to run and it will reset everything back to the way it will be after this lab is completed.
 
@@ -50,7 +50,7 @@ info: Oracle Database state successfully reset
 info: starting Oracle Database: OK
 ```
 
-This command will take between 5 and 8 minutes to complete. Once the setup script has completed successfully, *proceed to the next lab*. 
+This command will take between 5 and 8 minutes to complete. Once the setup script has completed successfully, **proceed to the next lab**. 
 
 Keep your terminal session open ready for the next lab.
 

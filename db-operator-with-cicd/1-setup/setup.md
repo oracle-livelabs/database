@@ -60,7 +60,7 @@ If your group already has the permissions listed in part 6 of this task you may 
     Allow group <group_name> to manage all-resources in tenancy
     </copy>
     ```
-    If you named your groupName labgroup similar to the image above, you can use the following policies instead.
+    If you named your group `labgroup` similar to the image above, you can use the following policies instead.
 
     ```
     <copy>
@@ -78,39 +78,48 @@ Cloud Shell is a small virtual machine running a "bash" shell that you access th
 
 1. Click the Cloud Shell icon in the top-right corner of the Console.
 
-  ![Oracle Cloud Infrastructure Cloud Shell Opening](images/where-cloud-shell.png " ")
+    ![Oracle Cloud Infrastructure Cloud Shell Opening](images/where-cloud-shell.png " ")
 
-  > **Note:** Cloud Shell uses WebSockets to communicate between your browser and the service. If your browser has WebSockets disabled or uses a corporate proxy that has WebSockets disabled you will see an error message ("An unexpected error occurred") when attempting to start Cloud Shell from the console. You also can change the browser cookies settings for a specific site to allow the traffic from *.oracle.com
+    > **Note:** Cloud Shell uses WebSockets to communicate between your browser and the service. If your browser has WebSockets disabled or uses a corporate proxy that has WebSockets disabled you will see an error message ("An unexpected error occurred") when attempting to start Cloud Shell from the console. You also can change the browser cookies settings for a specific site to allow the traffic from *.oracle.com
 
 
 ## Task 3: Fork and clone the Lab Repository 
 
-Open a browser and navigate to the Lab Repository Available **[here](https://github.com/oracle/oci-react-samples.git)**. You can also find the link below if you would like to copy-paste the link instead on your browser:
-```bash
-<copy>
-https://github.com/oracle/oci-react-samples.git
-</copy>
-```
+1. Fork the Lab Repository
 
-![Navigate to Lab](./images/navigate-to-lab-repository.png)
+    Open a browser and navigate to the Lab Repository Available **[here](https://github.com/oracle/oci-react-samples.git)**. You can also find the link below if you would like to copy-paste the link instead on your browser:
 
-Since the lab will require you to make changes to the code, you will need to have a fork of the lab. To fork the lab repository: 
-1. Click on the Fork button at the top right. 
-2. Select your account as the owner and keep the repository name the same.
-3. Deselect `Copy the main branch only` (as the lab-related files exist only in another branch)
-4. Finally, click on `Create fork`
+    ```bash
+    <copy>
+    https://github.com/oracle/oci-react-samples.git
+    </copy>
+    ```
+
+    ![Navigate to Lab](./images/navigate-to-lab-repository.png)
+
+    Since the lab will require you to make changes to the code, you will need to have a fork of the lab. To fork the lab repository: 
+
+    1. Click on the Fork button at the top right. 
+    2. Select your account as the owner and keep the repository name the same.
+    3. Deselect `Copy the main branch only` (as the lab-related files exist only in another branch)
+    4. Finally, click on `Create fork`
 
     ![Fork Repository](./images/fork-repository.png)
 
-With a working fork of the lab repository under your account, clone the forked repository by running the below command. Remember to specify the flags `--single-branch --branch cloudbank` as shown below. With the flags, the command will only pull the files related to the lab:
-```bash
-<copy>
- git clone --single-branch --branch cloudbank https://github.com/<username>/oci-react-samples
-</copy>
-```
-> **Note:** Replace `<username>` above with your GitHub username. Your GitHub username will be located at the top right after clicking on your user icon.
 
-  ![Locate GitHub Username](./images/github-un-where.png)
+2. Clone the fork
+   
+    With a working fork of the lab repository under your account, clone the forked repository by running the below command. It is important to specify the flags `--single-branch --branch cloudbank` as shown below. With the flags, the command will only pull the files related to the lab:
+
+    ```bash
+    <copy>
+    git clone --single-branch --branch cloudbank <repository-web-url>
+    </copy>
+    ```
+    > **Note:** Replace `<repository-web-url>` above with your fork's web URL. The image below shows where to copy the web URL from. Keep this URL in your notes.
+
+    ![Retrieve GitHub Web URL](./images/retrieve-github-web-url.png)
+
 
 ## Task 4: Prepare for Terraform Provisioning
 This part of the setup process will require the following information to provision resources. Retrieve the information and keep these in your notes (with exception of the Jenkins Password) for Task 4, which will prompt you for these values. Click on the drop downs below for more information on how to retrieve these from the OCI Console:
@@ -119,9 +128,9 @@ This part of the setup process will require the following information to provisi
 
 1. __API Key__ - used to authorize provisioning of Database resources with
 
- ## How to Create an API Key
- 
-  By creating an API Signing Key, OCI will provide you with a configuration file that contains some of the required information you will need to provide in the following prompts. To start, navigate to your OCI Console.
+    ## How to create an API key
+
+    By creating an API Signing Key, OCI will provide you with a configuration file that contains some of the required information you will need to provide in the following prompts. To start, navigate to your OCI Console.
 
     On the top-right, go to `User Settings` and create an API Key Resource.
 
@@ -142,7 +151,7 @@ This part of the setup process will require the following information to provisi
         key_file=<path to your private keyfile> # TODO
     ```
 
- ## How to Retrieve an API Key's Configuration
+    ## How to retrieve an API Key's configuration
     
     > **Note:** Each user can have a maximum of three API signing keys. If you are planning to reuse a previous API Key, please make sure you have the corresponding keys used in generating the API Key.
 
@@ -150,30 +159,31 @@ This part of the setup process will require the following information to provisi
 
     ![View API Key Configuration](./images/api-key-view-config.png)
 
-1. __Compartment OCID__ - Oracle Cloud ID for the compartment to provision lab-related resources in
+2. __Compartment OCID__ - Oracle Cloud ID for the compartment to provision lab-related resources in
 
- ## How to Retrieve the Compartment OCID
- You may choose to use an existing compartment or create a new one.
-
-    Navigate to Compartments on your OCI Console.
+    ## How to retrieve a pre-existing compartment's OCID
+    
+    You may choose to use an existing compartment or create a new one. Navigate to Compartments on your OCI Console.
 
     ![Navigate to Compartments](./images/navigate-to-compartments.png)
     
-    To use an existing compartment, click on the OCID of the compartment you want to use and click copy.
+    Click on the OCID of the compartment you want to use and click copy.
 
     ![Copy Compartments OCID](./images/copy-compartment-ocid.png)
 
-    To create a new compartment instead, click on the Create Compartment button (emphasized above with dashes) and add the name and description. You will also have to place the compartment either under another compartment of your choice or the Parent Compartment. Click on Create Compartment to finalize the creation of the compartment.
+    ## How to create a new compartment
+
+    To create a new compartment instead, click on the `Create Compartment` button (emphasized above with dashes) and add the name and description. You will also have to place the compartment either under another compartment of your choice or the Parent Compartment. Click on Create Compartment to finalize the creation of the compartment.
 
     ![Create Compartment](./images/create-compartment.png)
 
-    Once created, simply find the name of your lab from the list and copy the OCID shown in the 2nd image above.
+    Once created, find the name of your lab from the list and copy the OCID. You can find the instructions in the previous dropdown.
 
 5. __Jenkins Password__ - Enter a password
 
 6. __Database Password__ - Enter a password (see below requirements)
 
-    > **Note:** The Autonomous Database sets minimum standards for passwords, and the default profile sets parameters to limit the number of failed login attempts. 
+    The Autonomous Database sets minimum standards for passwords, and the default profile sets parameters to limit the number of failed login attempts. 
 
      * The password must be between 12 and 30 characters long and must include at least one uppercase letter, one lowercase letter, and one numeric character.
      * The password cannot contain the username.
@@ -190,7 +200,8 @@ This part of the setup process will require the following information to provisi
 ## Task 5: Run Setup for Terraform Provisioning
 Execute the following sequence of commands to start the setup.  
 
-1. First, source the `source.env` file to register common lab-related environment variables;
+1. First, source the `source.env` file to register common lab-related environment variables:
+
     ```bash
     <copy>
     source ./oci-react-samples/cloudbank/source.env
@@ -198,6 +209,7 @@ Execute the following sequence of commands to start the setup.
     ```
 
 2. Run the setup script to initiate the setup process.
+
     ```bash
     <copy>
     ./oci-react-samples/cloudbank/scripts/setup.sh
@@ -210,6 +222,7 @@ Execute the following sequence of commands to start the setup.
     ```
     
     Terraform will then run in the background and produce the following output on Cloud Shell:
+
     ```bash
     Terraforming Resources on OCI...STARTED
     Preparing terraform...DONE
@@ -223,7 +236,8 @@ Once setup completes, you will need to run and setup the following manually for 
 
     This private key will be used to create a secret to authorize the DB operator for Kubernetes to do DB operations on your own OCI Tenancy.
 
- ## How to upload the Private Key
+    ## How to upload the Private Key
+
     To upload the Privey Key file, click on the Gear icon on the right of the screen when Cloud Shell is opened. 
     
     ![Upload File to Bash](./images/upload-key.png)
@@ -234,13 +248,18 @@ Once setup completes, you will need to run and setup the following manually for 
 
     ![Upload File to Bash](./images/select-and-upload.png)
     
-    The Cloud Shell upload functionality will place the private key inside the root directory. You can then run the following:
+    The Cloud Shell upload functionality will place the private key inside the root directory. 
+
+2. Move the private key to the workshop directory by running the following:
+
     ```bash
     <copy>
     (cd ~ ; mv <private_key_filename> $CB_STATE_DIR/private.pem && chmod 400 $CB_STATE_DIR/private.pem)
     </copy>
-    ```bash
+    ```
+
     or, if you renamed the private key file to `private.pem`, you can run the below command instead.
+
     ```bash
     <copy>
     (cd ~ ; mv private.pem $CB_STATE_DIR/private.pem && chmod 400 $CB_STATE_DIR/private.pem)
@@ -249,12 +268,12 @@ Once setup completes, you will need to run and setup the following manually for 
 
     Replace `<private_key_filename>` above with the name of the private key file.
 
-2. Create or Provide a previous __Auth Token__
+3. Create or Provide a previous __Auth Token__
 
 
     Auth tokens are used to authenticate when logging on to your tenancy's container registry. This is required for pushing the lab's Cloudbank container images. If you are opting to reuse an auth token, do note that this information is only available upon creation.
 
- ## How to create an Auth Token
+    ## How to create an Auth Token
 
     To create an Auth Token, navigate again to __User Settings__ on the top right of the OCI Console. From the user details page, under Auth Tokens, generate a new token.
 
@@ -290,6 +309,7 @@ To setup your kubeconfig:
     ![Navigate to OKE](./images/navigate-to-cloudbank.png)
 
 3. Click on [Access Cluster]
+   
 4. Copy the `oci ce cluster create-kubeconfig` command
 
     ![Navigate to OKE](./images/access-cluster.png)

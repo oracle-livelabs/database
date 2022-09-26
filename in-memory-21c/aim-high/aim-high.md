@@ -1,26 +1,26 @@
-# Automatic In-Memory High
+# Automatic In-Memory Level High
 
 ## Introduction
-Watch the video below to get an overview of using Database In-Memory.
+Watch the video below to get an overview of Automatic In-Memory:
 
-[](youtube:y3tQeVGuo6g)
+[YouTube video](youtube:pFWjl1G7uDI)
 
-Watch the video below to learn about Automatic In-Memory High.
-[](youtube:pFWjl1G7uDI)
+Watch the video below for a walk through of the Automatic In-Memory High lab:
+
+[Automatic In-Memory High](videohub:1_0rzwly4i)
 
 ### Objectives
 
--   Learn how to Automatic In-Memory (AIM) level HIGH works
+-   Learn how Automatic In-Memory (AIM) level HIGH works
 -   Perform various queries invoking AIM with INMEMORY_AUTOMATIC_LEVEL set to HIGH
 
 ### Prerequisites
 This lab assumes you have:
 - A Free Tier, Paid or LiveLabs Oracle Cloud account
 - You have completed:
-    - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
-    - Lab: Environment Setup
+    - Lab: Get Started with noVNC Remote Desktop (*Free-tier* and *Paid Tenants* only)
     - Lab: Initialize Environment
-    - Lab: Querying the In-Memory Column Store
+    - Lab: Setting up the In-Memory Column Store
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
@@ -31,9 +31,7 @@ In Oracle Database 18c a feature called Automatic In-Memory (AIM) was added. The
 This Lab will explore the new AIM level HIGH and how it works. A new schema will be used, the AIM schema with small, medium and large tables. This will make it easier to show how AIM works as the column store experiences "memory pressure" (i.e. gets full). The LINEORDER table in the SSB schema will be used to help "fill up" the IM column store and then the AIM tables will be used to show how AIM can manage the total number of objects for maximum benefit.
 
 
-## Task 1: Verify Directory Definitions
-
-In this Lab we will be populating external data from a local directory and we will need to define a database directory to use in our external table definitions to point the database to our external data.
+## Task 1: AIM Level High
 
 Let's switch to the aim-high folder and log back in to the PDB:
 
@@ -320,7 +318,7 @@ SQL>
     SQL>
     ```
 
-    Verify that all of the LINEORDER partitions are populated before continuing on with the lab.
+    Verify that all of the LINEORDER partitions are populated before continuing on with the lab. You may have to re-run this script to verify that the partitions are populated since it does take a little bit of time to fully populate the partitions.
 
 5. Let's re-check the inmemory status of the objects in the SSB and AIM schemas:
 
@@ -807,7 +805,7 @@ SQL>
     SQL>
     ```
 
-11. Let's take a look at the Heat Map statistics for the segments.    
+11. Let's take a look at the Heat Map statistics for the segments. Although Heat Map is not used directly by AIM, and does not have to be enabled for AIM to work, it does give us an easy way to look at the usage statistics that AIM does base its decisions on. 
 
     Run the script *11\_hm\_stats.sql*
 
@@ -889,6 +887,8 @@ SQL>
     SQL>
     ```
 
+    Note that your values may be different than what is shown above. The values shown will be based on the usage that has occurred in your database.
+
 12. Now let's see if we can figure out what has happened with the AIM processing. First we will look at the tasks that are running as part of AIM.
 
     Run the script *12\_aim\_tasks.sql*
@@ -932,7 +932,7 @@ SQL>
     SQL>
     ```
 
-    Make note of the last task_id. We will use this as input in the next step. Also note that the tasks are being run approximately every 2 minutes. As was described in Lab13 on AIM level LOW and MEDIUM, AIM tasks will continue to be scheduled during each IMCO cycle when under memory pressure. Again, this means that it may take a couple of cycles before an object is populated by AIM in the IM column store.
+    Make note of the last task_id. We will use this as input in the next step. Also note that the tasks are being run approximately every 2 minutes. AIM tasks will be scheduled during each IMCO cycle, which is approximately every 2 minutes, when the IM column store is under memory pressure. This means that it may take a couple of cycles before an object is populated by AIM in the IM column store.
 
 13. Now let's look at the AIM task details, or what actually happened.    
 
@@ -998,7 +998,7 @@ SQL>
     SQL>
     ```
 
-    As a reminder, take a look at the OBJECT_NAME and the ACTION. Now that the IM column store is under memory pressure AIM has taken over control of population and there is a lot going on. Based on usage statistics AIM will populate the objects that will result in the most benefit to queries being run. You may want to take a look at some of the other task details to get a better picture of what has happened. Also note that now that AIM is controlling population the PRIORITY level will be ignored and AIM will decide which objects to populate and which to evict.
+    Take a look at the OBJECT_NAME and the ACTION. Now that the IM column store is under memory pressure AIM has taken over control of population and there is a lot going on. Based on usage statistics AIM will populate the objects that will result in the most benefit to queries being run. You may want to take a look at some of the other task details to get a better picture of what has happened. Also note that now that AIM is controlling population the PRIORITY level will be ignored and AIM will decide which objects to populate and which to evict.
 
 14. Now let's turn AIM off and see what happens.  
 
@@ -1141,7 +1141,7 @@ SQL>
     SQL>
     ```
 
-    Notice that all of the objects that were enabled for inmemory when the AIM level was set to high have now been disabled. However, the LINEORDER partitions that we manually enabled are still enabled.
+    Notice that all of the objects that were enabled for inmemory when the AIM level was set to HIGH have now been disabled. However, the LINEORDER partitions that we manually enabled are still enabled.
 
 16. What has happened to the populated segments in the IM column store?    
 
@@ -1284,7 +1284,7 @@ SQL>
 
 ## Conclusion
 
-This lab demonstrated how then new INMEMORY\_AUTOMATIC\_LEVEL = HIGH feature works and how AIM level high can enable the automatic management of the contents of IM column store. This means no more having to try and figure out which objects would get the most benefit from being populated. Now the database will do it for you.
+This lab demonstrated how the new INMEMORY\_AUTOMATIC\_LEVEL = HIGH feature works and how AIM level high can enable the automatic management of the contents of IM column store. This means no more having to try and figure out which objects would get the most benefit from being populated. Now the database will do it for you.
 
 You may now **proceed to the next lab**.
 

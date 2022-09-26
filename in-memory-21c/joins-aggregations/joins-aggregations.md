@@ -1,12 +1,10 @@
 # In-Memory Joins and Aggregations
 
 ## Introduction
-Watch the video below to get an overview of joins using Database In-Memory.
 
-[](youtube:y3tQeVGuo6g)
+Watch the video below for a quick walk-through of the In-memory Joins and Aggregations lab:
 
-Watch the video below for a walk through of the In-memory Joins and Aggregations lab.
-[](youtube:PC1kWntRrqg)
+[In-Memory Joins and Aggregations](videohub:1_gx8ajh93)
 
 ### Objectives
 
@@ -17,10 +15,9 @@ Watch the video below for a walk through of the In-memory Joins and Aggregations
 This lab assumes you have:
 - A Free Tier, Paid or LiveLabs Oracle Cloud account
 - You have completed:
-    - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
-    - Lab: Environment Setup
+    - Lab: Get Started with noVNC Remote Desktop (*Free-tier* and *Paid Tenants* only)
     - Lab: Initialize Environment
-    - Lab: Querying the In-Memory Column Store
+    - Lab: Setting up the In-Memory Column Store
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
@@ -185,6 +182,8 @@ SQL>
     ```
 
     Database In-Memory has no problem executing a query with a join, and in fact can optimize hash joins by being able to take advantage of Bloom filters. It’s easy to identify Bloom filters in the execution plan. They will appear in two places, at creation time (i.e. JOIN FILTER CREATE) and again when they are applied (i.e. JOIN FILTER USE). Look at Id 3 and Id 6 in the plan above. You can also see what join condition was used to build the Bloom filter by looking at the predicate information under the plan.
+
+    You may also note that there is another use of a Bloom filter at line Id 4. This is not a Database In-Memory feature but simply Oracle Database optimizing access to the partitions that make up the LINEORDER table. A takeaway here is that the use of Database In-Memory does not prevent the use of the other Oracle Database features.
 
 2. Let's run the query using the buffer cache.
 
@@ -762,7 +761,7 @@ SQL>
     SQL>
     ```
 
-    Notice that we have told the optimizer that it can use invisible indexes and we just happen to have an index that can be used on the LINEORDER table. This results in the optimizer choosing to perform a nested loops join by first accessing the DATE\_DIM table in-memory and then accessing the LINEORDER table through an index. The optimizer chooses this join, rather than a hash join, based on cost. This is another big advantage with Database In-Memory, the ability of the optimizer to choose the lowest cost methods to run queries with or without accessing object in-memory.
+    Notice that we have told the optimizer that it can use invisible indexes and we have added an index hint that can be used on the LINEORDER table. This results in the optimizer choosing to perform a nested loops join by first accessing the DATE\_DIM table in-memory and then accessing the LINEORDER table through an index. In this example, the cost is lower to access the LINEORDER table in the IM column store, but we wanted to show you that it is possible for the optimizer to choose different join types when using in-memory. If you're adventerous you can edit the script and remove the index hint. Don't worry, this is your own environment so it won't affect anyone else. If you then run the query again you can compare the cost to accessing the data through the index with a nested loops join. The thing to remember is the ability of the optimizer to choose the lowest cost methods to run queries with or without accessing object(s) in-memory.
 
 
 6. Up until this point we have been focused on joins and how the IM column store can execute them incredibly efficiently. Let’s now turn our attention to more OLAP style “What If” queries.  In this case our query examines the yearly profits from a specific region and manufacturer over our complete data set.
@@ -1093,9 +1092,9 @@ SQL>
     SQL>
     ```
 
-    Notice how much slower this second query ran even though it still ran in-memory, and even took advantage of Bloom filters. This is why we say that you can expect at least a 3-8x performance improvement with In-Memory Aggregation.
+    Notice how much slower this second query ran even though it still ran in-memory, and even took advantage of Bloom filters. In this Lab our tables are pretty small, but as the tables grow in size the performance difference is typically much greater. This is why we say that you can normally expect at least a 3-8x performance improvement with In-Memory Aggregation.
 
-8. As we mentioned earlier, with Database In-Memory enabled the optimizer can even take advantage of vector transformation when the tables are not in-memory. To see this in action execute the same query against the buffer cache.
+8. With Database In-Memory enabled the optimizer can even take advantage of vector transformation when the tables are not in-memory. To see this in action execute the same query against the buffer cache.
 
     Run the script *08\_vgb\_buffer.sql*
 
@@ -1447,11 +1446,11 @@ SQL>
 
 ## Conclusion
 
-This lab saw our performance comparison expanded to queries with both joins and aggregations. You had an opportunity to see just how efficiently a hash join, that is automatically converted to a Bloom filter, can be executed in the IM column store.
+This lab saw our performance comparison expanded to queries with both joins and aggregations. You had an opportunity to see just how efficiently an in-memory hash join with Bloom filters can be executed in the IM column store.
 
 You also got to see just how sophisticated the Oracle Optimizer has become over the last 30 plus years, when it used a combination of complex query transformations to find the optimal execution plan for a star query.
 
-Oracle Database adds In-Memory database functionality to existing databases, and transparently accelerates analytics by orders of magnitude while simultaneously speeding up mixed-workload OLTP. With Oracle Database In-Memory, users get immediate answers to business questions that previously took hours.
+Oracle Database adds in-memory database functionality to existing databases, and transparently accelerates analytics by orders of magnitude while simultaneously speeding up mixed-workload OLTP. With Oracle Database In-Memory, users get immediate answers to business questions that previously took hours or days to run.
 
 You may now **proceed to the next lab**.
 

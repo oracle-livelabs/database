@@ -7,6 +7,7 @@ With the growing Kubernetes adoption, customers, engineers, and DevOps teams hav
 The Oracle DB operator for Kubernetes allows users (DBAs, Developers, DevOps, GitOps teams, etc.) **to manage database lifecycles and dynamically do database operations such as provision, clone, and more directly through Kubernetes**. The Oracle DB operator for Kubernetes makes the Oracle Database more accessible through Kubernetes allowing users to focus more on their applications and less on the infrastructure. It also eliminates the dependency on a human operator or administrator for such operations. This lab showcases one example of what you can do with the Oracle DB Operator for Kubernetes (OraOperator) with DevOps.
 
 This workshop will provide the users the knowledge in installing, using, and deploying an Autonomous Database (ADB) with the OraOperator. In the following labs, the users will integrate with Jenkins and provision environments which will consist of an OraOperator-provisioned Single-Instance database (SIDB) whenever they create a branch.
+
 Estimated Workshop Time: 90 minutes
 
 ### About Product/Technology
