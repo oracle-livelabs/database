@@ -9,7 +9,7 @@ Estimated Time: 10 minutes
 
 ### About LRA Sample Application
 
-The sample application demonstrates how you can develop microservices that participate in LRA transactions while using Transaction Manager for Microservices to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and flight ticket. Only when you provide approval to confirm the booking, the booking of the hotel room and flight ticket is confirmed. If you cancel the provisional booking, the hotel room and flight ticket that was blocked is released and the booking is canceled.
+The sample application demonstrates how you can develop microservices that participate in LRA transactions while using Transaction Manager for Microservices to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and flight ticket. Only when you provide approval to confirm the booking, the booking of the hotel room and flight ticket is confirmed. If you cancel the provisional booking, the hotel room and flight ticket that was blocked is released and the booking is canceled. The flight service in this example allows only two confirmed bookings by default. After two confirmed bookings, the flight service rejects any additional booking requests and that would lead to the trip booking failure and cancellation (compensation) of a provisionally booked hotel booking within the trip. 
 
 The following figure shows a sample LRA application, which contains several microservices, to demonstrate how you can develop microservices that participate in LRA transactions.
 ![Microservices in sample LRA application](./images/lra-sample-app.png)
@@ -150,6 +150,29 @@ Your booking is confirmed and information about your confirmed booking is displa
 
 ![Details of the confirmed booking](./images/lra-confirmation.png)
 
+4. Call the Trip-Service, Hotel Service and Flight Service REST APIs to view the list of the trip bookings, hotel bookings and flight bookings.
+
+   **Example command for Trip-Service**
+
+    ```text
+    <copy>
+    curl --location --request GET http://192.0.2.117/trip-service/api/trip | jq
+    </copy>
+    ```
+   **Example command for Hotel Service**
+
+    ```text
+    <copy>
+    curl --location --request GET http://192.0.2.117/hotelService/api/hotel | jq
+    </copy>
+    ```
+   **Example command for Flight Service**
+
+    ```text
+    <copy>
+    curl --location --request GET http://192.0.2.117/flightService/api/flight | jq
+    </copy>
+    ```
 You may now **proceed to the next lab**.
 
 ## Learn More
