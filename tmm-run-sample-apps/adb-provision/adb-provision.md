@@ -172,32 +172,33 @@ To create a table with sample values for the Department 1 application, execute t
 
 1. Ensure that you are connected to SQL Worksheet as administrator.
 
-2. Copy and paste the following code snippet to your SQL Worksheet to create the Accounts table with `account_id` as the primary key.
+2. Copy and paste the following code snippet to your SQL Worksheet to create the Accounts table with `account_id` as the primary key. Replace *&lt;password&gt;* by choosing a password for user department_helidon.
 
-      **Syntax**
+   **Syntax**
 
-      ```text
-      <copy>
-      create database department_helidon;
-      use department_helidon;
-      create table accounts
-      (
-        account_id VARCHAR(10) not null,
-        name VARCHAR(60) not null,
-        amount decimal(10,2) not null,
-        PRIMARY KEY (account_id)
-      );
-      insert into accounts values('account1', 'account1', 1000.00);
-      insert into accounts values('account2', 'account2', 2000.00);
-      insert into accounts values('account3', 'account3', 3000.00);
-      insert into accounts values('account4', 'account4', 4000.00);
-      insert into accounts values('account5', 'account5', 5000.00);
-      </copy>
-      ```
-
+   ```text
+   <copy>
+   CREATE USER department_helidon IDENTIFIED BY <password> QUOTA UNLIMITED ON DATA;
+   GRANT CREATE SESSION TO department_helidon;
+   ALTER SESSION SET CURRENT_SCHEMA=department_helidon;
+   create table accounts
+   (
+   account_id VARCHAR(10) not null,
+   name VARCHAR(60) not null,
+   amount decimal(10,2) not null,
+   PRIMARY KEY (account_id)
+   );
+   insert into accounts values('account1', 'account1', 1000.00);
+   insert into accounts values('account2', 'account2', 2000.00);
+   insert into accounts values('account3', 'account3', 3000.00);
+   insert into accounts values('account4', 'account4', 4000.00);
+   insert into accounts values('account5', 'account5', 5000.00);
+   </copy>
+   ```
+   
    ![Create table](./images/sql-dept1.png)
 
-   This creates a database with the name `department_helidon` and a table with the name `accounts`. It also populates the accounts table with sample values.
+   This creates a table with the name `accounts`. It also populates the accounts table with sample values.
 
 ## Task 6: Create an Autonomous Database Instance for Department 2
 
@@ -219,20 +220,21 @@ To create a table with sample values for the Department 2 application, execute t
 
 1. Ensure that you are connected to SQL Worksheet as administrator.
 
-2. Copy and paste the following code snippet to your SQL Worksheet to create the Accounts table with `account_id` as the primary key.
+2. Copy and paste the following code snippet to your SQL Worksheet to create the Accounts table with `account_id` as the primary key. Replace *&lt;password&gt;* by choosing a password for user department_spring.
 
       **Syntax**
 
       ```text
       <copy>
-      create database department_spring;
-      use department_spring;
+      CREATE USER department_spring IDENTIFIED BY <password> QUOTA UNLIMITED ON DATA;
+      GRANT CREATE SESSION TO department_spring;
+      ALTER SESSION SET CURRENT_SCHEMA=department_spring;
       create table accounts
       (
-        account_id VARCHAR(10) not null,
-        name VARCHAR(60) not null,
-        amount decimal(10,2) not null,
-        PRIMARY KEY (account_id)
+      account_id VARCHAR(10) not null,
+      name VARCHAR(60) not null,
+      amount decimal(10,2) not null,
+      PRIMARY KEY (account_id)
       );
       insert into accounts values('account1', 'account1', 1000.00);
       insert into accounts values('account2', 'account2', 2000.00);
@@ -244,7 +246,7 @@ To create a table with sample values for the Department 2 application, execute t
 
    ![Create table](./images/sql-dept2.png)
 
-   This creates a database with the name `department_spring` and a table with the name `accounts`. It also populates the accounts table with sample values.
+   This creates a table with the name `accounts`. It also populates the accounts table with sample values.
 
 You may now **proceed to the next lab.**
 
