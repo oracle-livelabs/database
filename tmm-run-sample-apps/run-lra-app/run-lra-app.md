@@ -35,7 +35,7 @@ This lab assumes you have:
 
 Follow the instructions in this section to configure Minikube, and then run a sample application.
 
-1. Open a new terminal and run the following command to start Minikube.
+1. Open a new terminal by clicking on Activities on the top left in the remote desktop window and run the following command to start Minikube.
 
     ```text
     <copy>
