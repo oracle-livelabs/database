@@ -4,13 +4,13 @@
 
 You always have the option to access the workshop host using the browser based NoVNC graphical desktop (covered in a previous lab). In addition, if you enabled the option when deploying the workshop, you also have direct SSH access to the workshop host.
 
-In this optional lab, you will learn how to connect to the workshop host using SSH. If you prefer to use the NoVNC remote Desktop rather than SSH then you can simply *proceed to the next lab*.
+In this optional lab, you will learn how to connect to the workshop host using SSH. If you prefer to use the NoVNC remote Desktop rather than SSH then you can simply **proceed to the next lab**.
  
 **Estimated Lab Time:** 5 minutes
 
 ### Objectives
 
-- Connect to the compute instance using SSH (optional)
+- Connect to the compute instance using SSH (optional).
 
 ### Prerequisites
 
@@ -48,7 +48,7 @@ Last login: Mon Jun 27 09:12:52 2022 from aa.bb.cc.dd
 [oracle@ttlivelabvm ~]$
 ```
 
-You can now *proceed to the next lab*. 
+You can now **proceed to the next lab**. 
 
 If you plan to use SSH for the rest of the workshop, keep your terminal session open for use in the next lab.
 

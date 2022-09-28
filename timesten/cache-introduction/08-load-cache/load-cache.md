@@ -8,7 +8,7 @@ In this lab, you will load data from the Oracle tables into the TimesTen cache t
 
 ### Objectives
 
-- Load the APPUSER and OE cache groups
+- Load the APPUSER and OE cache groups.
 
 This task is accomplished using SQL statements, so can be easily performed from application code if required.
 
@@ -21,11 +21,11 @@ This lab assumes that you:
 
 ## Task 1: Load the APPUSER cache group
 
-As you saw in the previous lab, when a READONLY cache group is first created its tables are empty and the autorefresh mechanism is in a paused state.
+As you saw in the previous lab, when a READONLY cache group is first created its tables are empty and the AUTOREFRESH mechanism is in a paused state.
 
-Loading the cache group populates the cache tables with the data from the Oracle database and also activates the autorefresh mechanism. The load occurs in such a manner that if any changes occur in Oracle while the load is in progress, those changes will be captured and then autorefreshed to TimesTen once the load is completed.
+Loading the cache group populates the cache tables with the data from the Oracle database and also activates the AUTOREFRESH mechanism. The load occurs in such a manner that if any changes occur to the data in the Oracle database while the load is in progress, those changes will be captured. The captured changes are then autorefreshed to TimesTen once the load is completed.
 
-Load the APPUSER.CG\_VPN\_USERS cache group (1 million rows) and then examine the cach group and table.
+Load the APPUSER.CG\_VPN\_USERS cache group (1 million rows) and then examine the cache group and table.
 
 1. Connect to the cache as the user **appuser**:
 
@@ -82,7 +82,7 @@ Cache Group APPUSER.CG_VPN_USERS:
 1 cache group found.
 ```
 
-Note that the status of autorefresh has now changed to  **On**.
+Note that the state of autorefresh has now changed to  **On**.
 
 
 4. Display the cache group tables:
@@ -155,7 +155,7 @@ Connection successful: DSN=sampledb;UID=oe;DataStore=/tt/db/sampledb;DatabaseCha
 Command> 
 ```
 
-2. Load the CG_PROMOTIONS cache group:
+2. Load the CG\_PROMOTIONS cache group:
 
 ```
 <copy>
@@ -167,7 +167,7 @@ LOAD CACHE GROUP oe.cg_promotions COMMIT EVERY 1024 ROWS;
 2 cache instances affected.
 ```
 
-3. Load the CG_PROD_INVENTORY cache group:
+3. Load the CG\_PROD\_INVENTORY cache group:
 
 ```
 <copy>
@@ -179,7 +179,7 @@ LOAD CACHE GROUP oe.cg_prod_inventory COMMIT EVERY 1024 ROWS;
 288 cache instances affected.
 ```
 
-4. Load the CG_CUST_ORDERS cache group:
+4. Load the CG\_CUST\_ORDERS cache group:
 
 ```
 <copy>
@@ -257,7 +257,7 @@ select count(*) from orders;
 1 row found.
 ```
 
-10. Check the row count for ORDER_ITEMS:
+10. Check the row count for ORDER\_ITEMS:
 
 ```
 <copy>
@@ -270,7 +270,7 @@ select count(*) from order_items;
 1 row found.
 ```
 
-11. Check the row count for PRODUCT_DESCRIPTIONS:
+11. Check the row count for PRODUCT\_DESCRIPTIONS:
 
 ```
 <copy>
@@ -283,7 +283,7 @@ select count(*) from product_descriptions;
 1 row found.
 ```
 
-12. Check the row count for PRODUCT_INFORMATION:
+12. Check the row count for PRODUCT\_INFORMATION:
 
 ```
 <copy>
@@ -309,7 +309,7 @@ select count(*) from promotions;
 1 row found.
 ```
 
-14. Quit out of ttIsql:
+14. Exit from ttIsql:
 
 ```
 <copy>
@@ -322,7 +322,7 @@ Disconnecting...
 Done.
 ```
 
-You can now *proceed to the next lab*. 
+You can now **proceed to the next lab**. 
 
 Keep your terminal session to tthost1 open for use in the next lab.
 
