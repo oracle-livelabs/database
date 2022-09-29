@@ -804,7 +804,7 @@ SQL>
     SQL>
     ```
 
-11. Let's take a look at the Heat Map statistics for the segments. Although Heat Map is not used directly by AIM, and does not have to be enabled for AIM to work, it does give us an easy way to look at the usage statistics that AIM does base its decisions on. 
+11. Let's take a look at the Heat Map statistics for the segments. Although Heat Map is not used directly by AIM, and does not have to be enabled for AIM to work, it does give us an easy way to look at the usage statistics that AIM does base its decisions on.
 
     Run the script *11\_hm\_stats.sql*
 
@@ -890,11 +890,11 @@ SQL>
 
 12. Now let's see if we can figure out what has happened with the AIM processing. First we will look at the tasks that are running as part of AIM.
 
-    Run the script *12\_aim\_tasks.sql*
+    Run the script *12\_aimtasks.sql*
 
     ```
     <copy>
-    @12_aim_tasks.sql
+    @12_aimtasks.sql
     </copy>    
     ```
 
