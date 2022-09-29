@@ -10,7 +10,7 @@ Estimated Time: 15 minutes
 
 Watch the video below for a quick walk through of the lab.
 
-[Work with JSON in the database](https://youtu.be/I1g3PhWXrxQ)
+[Working with JSON in the Oracle Database](videohub:1_qxy2y77h)
 
 ### Objectives
 
