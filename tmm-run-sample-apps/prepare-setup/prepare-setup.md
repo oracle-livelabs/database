@@ -60,7 +60,7 @@ This workshop requires a certain number of ports to be available, a requirement 
 
 ## Task 3: Setup Compute   
 Using the details from the two Tasks above, proceed to the lab *Environment Setup* to set up your workshop environment using Oracle Resource Manager (ORM) and one of the following options:
--  Create Stack:  *Compute + Networking*
+-  Create Stack:  *Compute + Networking* (We strongly recommend this option)
 -  Create Stack:  *Compute only* with an existing VCN where security lists have been updated as per *Task 2* above
 
 You may now **proceed to the next lab**.

@@ -32,6 +32,13 @@ This lab assumes you have:
 
 * An Oracle Cloud account
 * Successfully completed all previous labs
+* Logged in using remote desktop URL as oracle user. If you have connected to your instance via an SSH terminal using auto-generated SSH Keys as opc user, then change user to oracle before proceeding with the next step.
+
+ ```text
+  <copy>
+  sudo su - oracle
+  </copy>
+  ```
 
 ## Task 1: Build Container Images for Sample XA Applications
 
@@ -290,6 +297,23 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     ```
 
     Where, `192.0.2.117` is the external IP address of the Istio ingress gateway. Replace this with a value specific to your environment.
+
+## Task 6: Clean up the livelabs stack
+
+Perform this task only if you want to clean up the livelabs stack provisioned using Resource Manager. Performing this task will delete all the stack resources including the remote desktop VM.
+
+
+1. Open the navigation menu and click Developer Services. Under Resource Manager, click Stacks.
+2. Choose a compartment that you have permission to work in (on the left side of the page).
+3. Click the name of the stack that you want.
+4. The Stack details page opens.
+5. Click on Destroy to delete the stack resources.
+6. Confirm the operation when prompted.
+7. After the Destroy job is completed, go to More actions on the Stack details page and then select Delete stack.
+8. Confirm the operation when prompted.
+
+![Destroy the stack resources](./images/destroy-stack.png)
+![Delete the stack](./images/delete-stack.png)
 
 ## Learn More
 

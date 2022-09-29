@@ -30,6 +30,13 @@ This lab assumes you have:
 
 * An Oracle Cloud account
 * Successfully completed all previous labs
+* Logged in using remote desktop URL as oracle user. If you have connected to your instance via an SSH terminal using auto-generated SSH Keys as opc user, then change user to oracle before proceeding with the next step.
+ 
+   ```text
+    <copy>
+    sudo su - oracle
+    </copy>
+    ```
 
 ## Task 1: Configure Minikube
 
@@ -42,8 +49,11 @@ Follow the instructions in this section to configure Minikube, and then run a sa
     minikube start
     </copy>
     ```
+   
+In rare situations, if you see an error as shown below then it would indicate a failure in provisioning. In such cases, destroy the stack resources and delete the stack by performing Task 4 below. Then recreate the stack by performing the steps in Lab 2.
+![minikube start error](./images/minikube-start-error.png)
 
-2. Verify that all resources, such as pods and services, are ready. Use the following command to retrieve the list of resources in the namespace `otmm` and their status.
+2. Verify that all resources, such as pods and services, are ready before proceeding to the next task. Use the following command to retrieve the list of resources in the namespace `otmm` and their status.
 
     ```text
     <copy>
@@ -173,7 +183,24 @@ Your booking is confirmed and information about your confirmed booking is displa
     curl --location --request GET http://192.0.2.117/flightService/api/flight | jq
     </copy>
     ```
-You may now **proceed to the next lab**.
+You may now **proceed to the next lab**. If you do not want to proceed further and would like to finish the livelab and clean up the resources, then perform task 4 below.
+
+## Task 4: Clean up the livelabs stack
+
+Perform this task only if you want to clean up the livelabs stack provisioned using Resource Manager. Performing this task will delete all the stack resources including the remote desktop VM.
+
+
+1. Open the navigation menu and click Developer Services. Under Resource Manager, click Stacks.
+2. Choose a compartment that you have permission to work in (on the left side of the page).
+3. Click the name of the stack that you want.
+4. The Stack details page opens.
+5. Click on Destroy to delete the stack resources.
+6. Confirm the operation when prompted.
+7. After the Destroy job is completed, go to More actions on the Stack details page and then select Delete stack.
+8. Confirm the operation when prompted.
+
+![Destroy the stack resources](./images/destroy-stack.png)
+![Delete the stack](./images/delete-stack.png)
 
 ## Learn More
 
