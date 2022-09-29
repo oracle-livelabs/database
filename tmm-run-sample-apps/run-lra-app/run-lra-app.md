@@ -183,7 +183,7 @@ Your booking is confirmed and information about your confirmed booking is displa
     curl --location --request GET http://192.0.2.117/flightService/api/flight | jq
     </copy>
     ```
-You may now **proceed to the next lab**. If you do not want to proceed further and would like to finish the livelab and clean up the resources, then perform task 4 below.
+You may now **proceed to the next lab**. If you do not want to proceed further and would like to finish the livelabs and clean up the resources, then perform task 4 below.
 
 ## Task 4: Clean up the livelabs stack
 
