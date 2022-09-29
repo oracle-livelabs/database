@@ -187,7 +187,7 @@ You may now **proceed to the next lab**. If you do not want to proceed further a
 
 ## Task 4: Clean up the livelabs stack
 
-Perform this task only if you want to clean up the livelabs stack provisioned using Resource Manager. Performing this task will delete all the stack resources including the remote desktop VM.
+Perform this task only if you want to clean up the livelabs stack provisioned using Resource Manager. Performing this task will delete all the stack resources including the remote desktop instance.
 
 
 1. Open the navigation menu and click Developer Services. Under Resource Manager, click Stacks.
