@@ -7,7 +7,7 @@ Estimated Lab Time:  15 minutes
 
 Watch the video below for a quick walk through of the lab.
 
-[Work with Partitioning in the database](https://youtu.be/jxA80ppiDXw)
+[Hybrid Partitioning](videohub:1_26o376wu)
 
 ### About Partitioning
 
