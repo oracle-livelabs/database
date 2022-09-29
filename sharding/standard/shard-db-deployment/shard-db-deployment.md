@@ -226,10 +226,10 @@ In this workshop we choose to co-locate the shard director software on the same 
 
 ## Task 3: Setup Catalog Database
 
-1. Make sure you are in the catalog database environment by running *`. ./set-env-db.sh`* and selecting *cata* from the list.
+1. Make sure you are in the catalog database environment by running *`.set-env-db.sh`* and selecting *cata* from the list.
 
     ```
-    [oracle@cata ~]$ <copy>. ./set-env-db.sh</copy>
+    [oracle@cata ~]$ <copy>.set-env-db.sh</copy>
     [oracle@cata ~]$
     ```
 
