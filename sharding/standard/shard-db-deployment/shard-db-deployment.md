@@ -133,14 +133,14 @@ In this workshop we choose to co-locate the shard director software on the same 
 7. Create the gsm home directory.
 
     ```
-    [oracle@cata ~]$ <copy>mkdir -p /opt/oracle/product/19c/gsmhome_1</copy>
-    [oracle@cata ~]$
+    [oracle@cata /opt/oracle/stage/gsm]$ <copy>mkdir -p /opt/oracle/product/19c/gsmhome_1</copy>
+    [oracle@cata /opt/oracle/stage/gsm]$
     ```
 
 8. Install the gsm
 
     ```
-    [oracle@cata ~]$ <copy>./runInstaller -silent -responseFile /opt/oracle/stage/gsm/response/gsm_install_livelabs.rsp -showProgress -ignorePrereq</copy>
+    [oracle@cata /opt/oracle/stage/gsm]$ <copy>./runInstaller -silent -responseFile /opt/oracle/stage/gsm/response/gsm_install_livelabs.rsp -showProgress -ignorePrereq</copy>
     ```
 
 9. The progress screen like this. Ignore the warning.
@@ -219,17 +219,51 @@ In this workshop we choose to co-locate the shard director software on the same 
 11. Run the root.sh as **oracle** user using **SUDO**.
 
     ```
-    [opc@cata ~]$ <copy>sudo /opt/oracle/product/19c/gsmhome_1/root.sh</copy>
+    [oracle@cata /opt/oracle/stage/gsm]$ <copy>sudo /opt/oracle/product/19c/gsmhome_1/root.sh</copy>
     Check /opt/oracle/product/19c/gsmhome_1/install/root_cata_2020-11-28_01-45-39-535370417.log for the output of root script
-    [opc@cata ~]$
+    [oracle@cata /opt/oracle/stage/gsm]$<copy>cd ~</copy>
+    [oracle@cata ~]$
     ```
 
-## Task 3: Setup Catalog Database
+## Task 2: Setup Catalog Database
 
-1. Make sure you are in the catalog database environment by running *`. ./set-env-db.sh`* and selecting *cata* from the list.
+1. Make sure you are in the catalog database environment by running *`. .set-env-db.sh`* and selecting *cata* from the list.
 
     ```
-    [oracle@cata ~]$ <copy>. ./set-env-db.sh</copy>
+    [oracle@cata ~]$ <copy>. .set-env-db.sh</copy>
+    ```
+    ```
+    List of Database Instances
+
+    #  ORACLE_SID
+    -- ----------
+    1) cata
+
+    Select a number from the list (1-n): 1
+    ================================================================================
+        ___                 _        _     _           _          _
+        / _ \ _ __ __ _  ___| | ___  | |   (_)_   _____| |    __ _| |__  ___
+        | | | | '__/ _` |/ __| |/ _ \ | |   | \ \ / / _ \ |   / _` | '_ \/ __|
+        | |_| | | | (_| | (__| |  __/ | |___| |\ V /  __/ |__| (_| | |_) \__ \
+        \___/|_|  \__,_|\___|_|\___| |_____|_| \_/ \___|_____\__,_|_.__/|___/
+
+    ================================================================================
+                        ENV VARIABLES
+    --------------------------------------------------------------------------------
+    . ORACLE_BASE         = /opt/oracle
+    . ORACLE_BASE_HOME    = /opt/oracle/product/19c/dbhome_1
+    . ORACLE_HOME         = /opt/oracle/product/19c/dbhome_1
+    . ORACLE_SID          = cata
+    . PRIVATE_IP          = 10.0.0.151
+    . PUBLIC_IP           = xxx.xxx.xxx.xxx
+    . HOSTNAME            = cata.livelabs.oraclevcn.com
+    --------------------------------------------------------------------------------
+                        Database ENV set for cata
+
+    Run this to reload/setup the Database ENV: source /usr/local/bin/.set-env-db.sh
+    --------------------------------------------------------------------------------
+    ================================================================================
+
     [oracle@cata ~]$
     ```
 
@@ -413,7 +447,7 @@ In this workshop we choose to co-locate the shard director software on the same 
     [oracle@cata ~]$
     ```
 
-## Task 4: Setup Shard Databases
+## Task 3: Setup Shard Databases
 
 The following steps need to do in all the shard database side. We only provide steps for shard1.
 
@@ -699,7 +733,7 @@ The following steps need to do in all the shard database side. We only provide s
 18. Repeat previous steps to set up all shard databases. You can only setup shard1 and shard2 if you don't want add the third shard in the workshop.
 
 
-## Task 5: Configure the Shard Database Topology
+## Task 4: Configure the Shard Database Topology
 
 1. Switch back to the browser tab connecting to the remote desktop session for catalog database host (*cata*)
 
@@ -938,7 +972,7 @@ The following steps need to do in all the shard database side. We only provide s
     GDSCTL>
     ```
 
-## Task 6: Deploy the Sharding Configuration
+## Task 5: Deploy the Sharding Configuration
 
 1. When the sharded database topology has been fully configured, run the `GDSCTL DEPLOY` command to deploy the sharded database configuration.
 

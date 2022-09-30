@@ -5,8 +5,7 @@ Watch the video below to get an overview of Automatic In-Memory:
 
 [YouTube video](youtube:pFWjl1G7uDI)
 
-Watch the video below for a walk through of the Automatic In-Memory High lab:
-
+Watch the video below for a quick walk-through of this lab.
 [Automatic In-Memory High](videohub:1_0rzwly4i)
 
 ### Objectives
