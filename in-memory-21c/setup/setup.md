@@ -22,15 +22,16 @@ Estimated Time: 30 minutes
 ### Prerequisites
 
 This lab assumes you have:
-* Lab: Prepare Setup (Free-tier and Paid Tenants only)
-* Lab: Environment Setup
-* Lab: Initialize Environment
+- A Free Tier, Paid or LiveLabs Oracle Cloud account
+- You have completed:
+    - Get Started with noVNC Remote Desktop
+    - Lab: Initialize Environment
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
 ## Task 1: Logging In and Enabling In-Memory
 
-In this Lab we will be populating external data from a local directory and we will need to define a database directory to use in our external table definitions to point the database to our external data.
+In this Lab we will explore how the In-Memory column store is enabled in Oracle Database, and then how to enable and populate objects and verify the population of those objects in the In-Memory column store.
 
 Let's switch to the setup folder and log back in to the PDB:
 

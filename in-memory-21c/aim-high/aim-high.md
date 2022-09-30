@@ -14,10 +14,11 @@ Watch the video below for a quick walk-through of this lab.
 -   Perform various queries invoking AIM with INMEMORY_AUTOMATIC_LEVEL set to HIGH
 
 ### Prerequisites
+
 This lab assumes you have:
 - A Free Tier, Paid or LiveLabs Oracle Cloud account
 - You have completed:
-    - Lab: Get Started with noVNC Remote Desktop (*Free-tier* and *Paid Tenants* only)
+    - Get Started with noVNC Remote Desktop
     - Lab: Initialize Environment
     - Lab: Setting up the In-Memory Column Store
 
