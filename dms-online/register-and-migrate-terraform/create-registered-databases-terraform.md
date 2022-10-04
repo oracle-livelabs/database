@@ -165,7 +165,7 @@ For this task you need the following info from previous steps:
 
 ## Task 5: Create Migration
 
-  1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Migrations**
+  1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Database Migration > Migrations**
 
     ![Screenshot of migration navigation](images/migrations-navigation.png =90%x*)
 
@@ -222,8 +222,7 @@ For this task you need the following info from previous steps:
           - Database Password: **admin\_password** value from Terraform output
           - Press Show Advanced Options
           - Press Replication tab
-          - GoldenGate Instance OCID: **(OCID as copied from GoldenGate compute instance)** (This field is optional; if OCID is given, validation will check for GoldenGate space requirements) 
-          
+                    
 
     ![Target database details](images/online-target-database-ggocid.png =50%x*) 
 

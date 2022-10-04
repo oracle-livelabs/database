@@ -1,35 +1,34 @@
 # Connect to the workshop compute instance
 
 ## Introduction
-This lab will show you how to login to your pre-created compute instance running on Oracle Cloud.
+This lab shows you how to login to your pre-created compute instance running on Oracle Cloud.
 
 **Estimated Lab Time:** 10 minutes
 
 ### Objectives
-In this lab, you will:
 
-- Learn how to connect to your compute instance using the NoVNC Remote Desktop
-- Learn the basics of using the NoVNC Desktop, including copy and paste
-- Configure and use SSH access to the compute instance (optional)
+- Learn how to connect to your compute instance using the NoVNC Remote Desktop.
+- Learn the basics of using the NoVNC Desktop, including copy and paste.
+- Configure and use SSH access to the compute instance (optional).
 
 ### Prerequisites
 
 This lab assumes:
 
-- You have successfully provisioned a workshop compute instance either in the LiveLabs sandbix or in your own tenancy
-- If you using the LiveLabs sandbox, and you wish to use SSH to access the compute instance, that you have an RSA format SSH private/public key pair to use to access the compute instance (optional)
+- You have successfully provisioned a workshop compute instance either in the LiveLabs sandbix or in your own tenancy.
+- If you using the LiveLabs sandbox, and you wish to use SSH to access the compute instance, that you have an RSA format SSH private/public key pair to use to access the compute instance (optional).
 
 If you wish to use the NoVNC graphical desktop to access the workshop compute instance, please complete **tasks 1 and 2** below.
 
-If you prefer to use SSH to access the compute instance, please complete **task 3** below.
+If you prefer to use SSH to access the compute instance, please complete **tasks 2 and 3** below.
 
 If you wish to be able to use both connection methods, please complete all the tasks in this lab.
 
-**IMPORTANT:** Due to the slightly cumbersome nature of copying between your host system and the NoVNC session, we recommend that you perform all of the copy/paste actions within the NoVNC session itself, as this avoids the use of the NoVNC clipboard. Alternatively, access the workshop's compute instance via SSH and copy/paste between the lab instructions displayed in your local browser and your SSH session.
+**IMPORTANT:** Due to the slightly cumbersome nature of copying between your host system and the NoVNC session, we recommend that you perform all of the copy/paste actions within the NoVNC session itself, as this avoids the use of the NoVNC clipboard. Alternatively, access the workshop's compute instance using SSH and copy/paste between the lab instructions displayed in your local browser and your SSH session.
 
 ## Task 1: Enable NoVNC Full-screen Display
 
-Too make the best use of your display, perform the following tasks to render your remote desktop session in fullscreen mode.
+To make the best use of your display, perform the following tasks to render your remote desktop session in fullscreen mode.
 
 1. Click on the small gray tab on the middle-left side of your screen to open the control bar.
 
@@ -42,7 +41,7 @@ Too make the best use of your display, perform the following tasks to render you
     
 ## Task 2: Enable Copy/Paste from Local to Remote Desktop
 
-During the execution of this workshop you may will to copy text from your local PC/Mac to the remote desktop, such as commands from the lab guide. While such direct copy/paste isn't supported, you may proceed as indicated below to enable an alternative local-to-remote clipboard via the NoVNC Clipboard.
+During the execution of this workshop you will need to copy text from the workshop instructions (use the copy button provided) to a terminal session (remote desktop or SSH). As direct copy/paste between your local browser and the NoVNC desktop isn't supported, you may proceed as indicated below to enable an alternative local-to-remote clipboard using the NoVNC Clipboard.
 
 1. Continuing from the last task above, Select the *clipboard* icon
 
@@ -60,15 +59,15 @@ If you will be using the NoVNC desktop for the workshop, make sure that you have
 
 While your workshop can be executed end-to-end from the remote desktop, follow the steps provided below if you prefer to access the instance remotely using an SSH client such as Putty, Unix/Linux/MacOS Terminal, OCI cloudshell, and other terminal emulators available on Windows.
 
-**IMPORTANT:** If you are running the workshop instance in your own tenancy and you configured SSH access as part of deploying the instance via the ORM stack, skip straight to step **7** below.
+**IMPORTANT:** If you are running the workshop instance in your own tenancy and you configured SSH access as part of deploying the instance using the ORM stack, skip straight to step **7** below.
 
 *Note:* In this section you are enabling SSH access to the OS user running the remote desktop, which for this workshop is the **oracle** user.
 
 This assumes that you already have an RSA type SSH key-pair available on the local system where you will be connecting from. If you don't, then for more info on creating and using SSH keys for your specific platform and client, please refer to the guide [Generate SSH Keys](https://docs.oracle.com/en/learn/generate_ssh_keys/index.html)
 
-1. Open the remote clipboard on the remote desktop as shown in *Task 3* and launch a terminal session
+1. Open the remote clipboard on the remote desktop as shown in *Task 3* and launch a terminal session.
 
-2. Paste the block below onto the remote clipboard first, then onto the terminal to create or update the file *$HOME/.ssh/authorized_keys* using the *vi* editor
+2. Paste the block below onto the remote clipboard first, then onto the terminal to create or update the file *\$HOME/.ssh/authorized_keys* using the *vi* editor.
 
     ```
     <copy>
@@ -93,9 +92,9 @@ This assumes that you already have an RSA type SSH key-pair available on the loc
 
     ![](./images/novnc-copy-pub-key-3.png " ")
 
-5. Save and exit the *vi* editor (press the **Escape** key then type **ZZ**)
+5. Save and exit the *vi* editor (press the **Escape** key then type **ZZ**).
 
-6. Set the required permissions on *authorized_keys*
+6. Set the required permissions on *authorized_keys*.
 
     ```
     <copy>
@@ -113,11 +112,13 @@ This assumes that you already have an RSA type SSH key-pair available on the loc
     </copy>
     ```
 
+    If copy/pasting the above _example_, substitue the appropriate values for the SSH key private key file and the compute instance IP address.
+    
     For Putty, please refer to the guide [Generate SSH Keys](https://oracle-livelabs.github.io/common/labs/generate-ssh-key) on how to establish the connection using the *.ppk* private key.
 
-You should now have an open terminal session in the compute instance, either via the NoVNC desktop or via SSH. Keep this session open for the next lab.
+You should now have an open terminal session in the compute instance, either through the NoVNC desktop or through SSH. Keep this session open for the next lab.
 
-You may now *proceed to the next lab*.
+You can now **proceed to the next lab**.
 
 
 ## Acknowledgements

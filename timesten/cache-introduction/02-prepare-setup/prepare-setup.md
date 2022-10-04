@@ -8,8 +8,8 @@ In this lab, you will download the Oracle Resource Manager (ORM) stack zip file 
 
 ### Objectives
 
--   Download the workshop's ORM stack
--   Configure an existing Virtual Cloud Network (VCN) - optional
+-   Download the workshop's ORM stack.
+-   Configure an existing Virtual Cloud Network (VCN) - optional.
 
 ### Prerequisites
 
@@ -31,7 +31,7 @@ This lab assumes you have:
 
 Using the ORM zip file from the previous step, you can setup your workshop environment in one of two ways:
 
-- Let the stack create both the compute and network resources (recommended)
+- Let the stack create both the compute and network resources (recommended).
 
 - Let the stack create the compute resources and connect them to an existing VNC.
 
@@ -41,15 +41,15 @@ The detailed steps for both options are covered in the next lab.
 
 **IMPORTANT**
 
-When deploying the workshop compute instance via the ORM stack, as described in the next lab:
+When deploying the workshop compute instance using the ORM stack, as described in the next lab:
 
-1. By default SSH access using a system generated SSH private key is enabled.
+1. By default, SSH access using a system generated SSH private key is enabled.
 
 2. If you wish to provide your own SSH public key, uncheck the option *Auto Generate SSH Key Pair* and follow the on-screen instructions to either upload or copy/paste your SSH public key.  
 
 3. Unless you wish to customize SSH connectivity as described in (2), you can accept all the other defaults provided by the ORM stack.
 
-You can now *proceed to the next lab*.
+You can now **proceed to the next lab**.
 
 ## Appendix: Adding security rules to an existing VCN
 
@@ -64,21 +64,21 @@ This workshop requires a certain number of ports to be available, a requirement 
 **Note:** If you plan to only use SSH connectivity, or only Remote Desktop connectivity, then you only need to open the appropriate port(s).
 
 
-1.  Go to *Networking >> Virtual Cloud Networks*
+1.  Go to *Networking >> Virtual Cloud Networks*.
 
-2.  Choose your network
+2.  Choose your network.
 
-3.  Under Resources, select *Security Lists*
+3.  Under Resources, select *Security Lists*.
 
-4.  Click on *Default Security Lists* under the Create Security List button
+4.  Click on *Default Security Lists* under the Create Security List button.
 
-5.  Click the *Add Ingress Rule* button
+5.  Click the *Add Ingress Rule* button.
 
 6.  Enter the following:
     - Source CIDR: 0.0.0.0/0
     - Destination Port Range: *Refer to the above table*
 
-7.  Click the **Add Ingress Rules** button
+7.  Click the **Add Ingress Rules** button.
 
 ## Acknowledgements
 

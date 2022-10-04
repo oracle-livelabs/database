@@ -10,7 +10,7 @@ Watch the video below to get an explanation of enabling the In-Memory column sto
 
 Quick walk through on how to enable In-Memory.
 
-[Youtube video](youtube:oCES149OPeE)
+[Setting up the In-Memory column store](videohub:1_dg318frc)
 
 Estimated Time: 30 minutes
 
@@ -22,15 +22,16 @@ Estimated Time: 30 minutes
 ### Prerequisites
 
 This lab assumes you have:
-* Lab: Prepare Setup (Free-tier and Paid Tenants only)
-* Lab: Environment Setup
-* Lab: Initialize Environment
+- A Free Tier, Paid or LiveLabs Oracle Cloud account
+- You have completed:
+    - Get Started with noVNC Remote Desktop
+    - Lab: Initialize Environment
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
 ## Task 1: Logging In and Enabling In-Memory
 
-In this Lab we will be populating external data from a local directory and we will need to define a database directory to use in our external table definitions to point the database to our external data.
+In this Lab we will explore how the In-Memory column store is enabled in Oracle Database, and then how to enable and populate objects and verify the population of those objects in the In-Memory column store.
 
 Let's switch to the setup folder and log back in to the PDB:
 
@@ -72,7 +73,7 @@ SQL> set lines 150
 SQL>
 ```
 
-1. Database In-Memory is integrated into Oracle Database 12c (12.1.0.2) and higher.  The IM column store is not enabled by default, but can be easily enabled via a few steps.  Before you enable it, let's take a look at the default configuration. Set your oracle environment
+1. Database In-Memory is integrated into Oracle Database 12c (12.1.0.2) and higher.  The IM column store is not enabled by default, but can be easily enabled via a few steps.  Before you enable it, let's take a look at the default configuration.
 
     Run the script *01\_show\_parms.sql*
 
@@ -134,7 +135,7 @@ SQL>
 
     These parameters have already been set for this Lab. The IM column store is not enabled by default (i.e. INMEMORY\_SIZE=0), but we have set it to a size that will work for this Lab.  HEAT\_MAP defaults to OFF, but it has been enabled for one of the later labs. The KEEP pool (i.e. DB\_KEEP\_CACHE\_SIZE) is set to 0 by default. We have defined it for this Lab so that you can compare the performance of objects populated in the IM column store with the same objects fully cached in the buffer cache and compare the difference in performance for yourself.
 
-2. Database In-Memory is integrated into Oracle Database 12c (12.1.0.2) and higher.  The IM column store is allocated within the System Global Area (SGA) and can be easily displayed using normal database commands.
+2. Database In-Memory is fully integrated into Oracle Database.  The IM column store is allocated within the System Global Area (SGA) and can be easily displayed using normal database commands.
 
     Run the script *02\_show\_sga.sql*
 
@@ -406,6 +407,8 @@ SQL>
     SQL>
     ```
 
+  Note the FULL and NOPARALLEL hints. These have been added to ensure that the table data is also read into the KEEP pool that was defined. This is only done for this Lab so that we can show you a true memory based comparison of the performance of the Database In-Memory columnar format versus the traditional row format. This is not required to initiate Database In-Memory population.
+
 7. There is a function available that enables the ability to programatically check if the IM column store has been populated. The function, dbms\_inmemory\_admin.populate_wait returns a code based on populate priority and percentage of population:
 
     ```
@@ -610,7 +613,7 @@ SQL>
 
 ## Conclusion
 
-In this lab you saw that the IM column store is configured by setting the initialization parameter INMEMORY_SIZE. The IM column store is a new static pool in the SGA, and once allocated it can be resized dynamically, but it is not managed by either of the automatic SGA memory features.
+In this lab you saw that the IM column store is configured by setting the initialization parameter INMEMORY_SIZE. The IM column store is a new static pool in the SGA, and once allocated it can be increased in size dynamically, but it is not managed by either of the automatic SGA memory features.
 
 You also had an opportunity to populate and view objects in the IM column store and to see how much memory they use. In this lab we populated five tables into the IM column store, and the LINEORDER table is the largest of the tables populated with over 41 million rows. You may have noticed that it is also a partitioned table. We will be using that attribute in later labs.
 

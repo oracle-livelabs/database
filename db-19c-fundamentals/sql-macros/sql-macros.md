@@ -10,8 +10,7 @@ This lab shows how to use SQL Macro as scalar and table expressions.
 Estimated Lab Time: 15 minutes
 
 Watch the video below for a quick walk through of the lab.
-
-[Work with Partitioning in the database](https://youtu.be/BqWeEYUGLbM)
+[Using SQM Scalar and Table Expressions](videohub:1_mdq4mino)
 
 ### Objectives
 
