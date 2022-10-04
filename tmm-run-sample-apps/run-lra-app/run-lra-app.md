@@ -63,32 +63,7 @@ In rare situations, if you see an error as shown below then it would indicate a 
 
     An output as shown in the example below is displayed.
 
-    ```
-    NAME                               READY   STATUS    RESTARTS        AGE
-   pod/flight-58f8584c6d-md58w        2/2     Running   4 (5d18h ago)   10d
-   pod/hotel-64cfb55df8-dgv8k         2/2     Running   4 (5d18h ago)   10d
-   pod/otmm-tcs-0                     2/2     Running   4 (5d18h ago)   10d
-   pod/trip-manager-8df796b7d-f8dgk   2/2     Running   4 (5d18h ago)   10d
-
-   NAME                   TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
-   service/flight         ClusterIP   10.106........   <none>        8080/TCP   10d
-   service/hotel          ClusterIP   10.99........    <none>        8080/TCP   10d
-   service/otmm-tcs       ClusterIP   10.99.......     <none>        9000/TCP   10d
-   service/trip-manager   ClusterIP   10.111.......    <none>        8080/TCP   10d
-
-   NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
-   deployment.apps/flight         1/1     1            1           10d
-   deployment.apps/hotel          1/1     1            1           10d
-   deployment.apps/trip-manager   1/1     1            1           10d
-
-   NAME                                     DESIRED   CURRENT   READY   AGE
-   replicaset.apps/flight-58f8584c6d        1         1         1       10d
-   replicaset.apps/hotel-64cfb55df8         1         1         1       10d
-   replicaset.apps/trip-manager-8df796b7d   1         1         1       10d
-
-   NAME                        READY   AGE
-   statefulset.apps/otmm-tcs   1/1     10d
-    ```
+   ![Public IP address of ingress gateway](./images/get-all-resources-ready.png)
 
 ## Task 2: Start a tunnel
 
