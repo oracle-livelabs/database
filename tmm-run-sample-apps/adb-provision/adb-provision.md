@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab walks you through the steps to quickly provision an Oracle Autonomous Database (Autonomous Transaction Processing [ATP]) on Oracle Cloud. You will use this database in the subsequent labs of this workshop. For this lab, you must create two ATP instances. One ATP instance acts as a resource manager for Department 1 and the other ATP instance acts as resource manager for Department 2.
+This lab walks you through the steps to quickly provision an Oracle Autonomous Database (Autonomous Transaction Processing [ATP]) on Oracle Cloud. You will use this database in the subsequent labs of this workshop. For this lab, you must create two ATP instances. One ATP instance acts as a resource manager for Department 1 and the other ATP instance acts as resource manager for Department 2. You can perform this lab from within the remote desktop so that the DB wallets can be downloaded directly on the remote desktop without the need to copy the wallet files from outside.
 
 Estimated lab time: 20 minutes
 
@@ -137,7 +137,7 @@ To download client credentials from the Oracle Cloud Infrastructure Console:
     ```text
     <copy>
     unzip Wallet_Department1DB.zip -d <path to Database_Wallet folder>
-    <copy>
+    </copy>
     ```
 
 
