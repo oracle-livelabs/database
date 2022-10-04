@@ -14,12 +14,13 @@ Watch the video below for a walk through of the In-Memory Queries lab:
 -   Perform various queries on the In-Memory Column Store
 
 ### Prerequisites
+
 This lab assumes you have:
 - A Free Tier, Paid or LiveLabs Oracle Cloud account
 - You have completed:
-    - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
-    - Lab: Environment Setup
+    - Get Started with noVNC Remote Desktop
     - Lab: Initialize Environment
+    - Lab: Setting up the In-Memory Column Store
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
