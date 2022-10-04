@@ -3,7 +3,7 @@
 ## Introduction
 
 Run a sample application that uses the Long Running Action (LRA) transaction protocol to book a trip and understand how you can use Transaction Manager for Microservices to coordinate the transactions. Using samples is the fastest way for you to get familiar with Transaction Manager for Microservices.
-The sample application code is available in the Transaction Manager for Microservices image. The Transaction Manager for Microservices library files are already integrated with the sample application code.
+The sample application code is available in the Transaction Manager for Microservices distribution. The Transaction Manager for Microservices library files are already integrated with the sample application code.
 
 Estimated Time: 10 minutes
 
@@ -61,7 +61,7 @@ In rare situations, if you see an error as shown below then it would indicate a 
     </copy>
     ```
 
-    The following information is displayed.
+    An output as shown in the example below is displayed.
 
     ```text
     NAME                               READY   STATUS    RESTARTS        AGE
@@ -102,9 +102,7 @@ Before you start a transaction, you must start a tunnel between Minikube and Tra
     </copy>
     ```
 
-2. Enter the password to access your local machine if you are asked to enter your password at the command prompt.
-
-3. In a new terminal, run the following command to note down the external IP address of the Istio ingress gateway.
+2. In a new terminal, run the following command to note down the external IP address of the Istio ingress gateway.
 
     ```text
     <copy>
@@ -120,7 +118,7 @@ Before you start a transaction, you must start a tunnel between Minikube and Tra
 
     Let's consider that the external IP in the above example is 192.0.2.117.
 
-4. Set the URL for the Trip Manager service, which is the transaction initiator service.
+3. Set the URL for the Trip Manager service, which is the transaction initiator service.
 
     **Command syntax**
 
@@ -169,6 +167,9 @@ Your booking is confirmed and information about your confirmed booking is displa
     curl --location --request GET http://192.0.2.117/trip-service/api/trip | jq
     </copy>
     ```
+   An example output for Trip-Service is shown below. The type is Trip and the status is CONFIRMED.
+![Details of the confirmed booking](./images/trip-confirmation-json.png)
+
    **Example command for Hotel Service**
 
     ```text

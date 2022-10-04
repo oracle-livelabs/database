@@ -4,7 +4,7 @@
 
 Run the XA sample application to transfer an amount from one department to another and to understand how you can use Transaction Manager for Microservices to coordinate XA transactions.
 
-The sample application code is available in the Transaction Manager for Microservices image. The Transaction Manager for Microservices library files are already integrated with the sample application code.
+The sample application code is available in the Transaction Manager for Microservices distribution. The Transaction Manager for Microservices library files are already integrated with the sample application code.
 
 Estimated Lab Time: 20 minutes
 
@@ -119,33 +119,39 @@ To provide the configuration and environment details in the `values.yaml` file:
 
 2. Provide the details of the ATP database instances, that you have created, in the `values.yaml` file, so that the Department A and Department B sample microservices can access the resource manager.
 
-    * `connectString`: Enter the connect string to access the database in the following format.
+    * `connectString`: Enter the connect string to access the database in the following format. The host, port and service_name for the connection string can be found on the DB Connection Tab under Connection Strings as shown in screenshot below.
 
       **Syntax**
 
         ```text
         <copy>
-        jdbc:oracle:thin:@tcps://<host>:<port>/<service_name>?wallet_location=<wallet_dir>
+        jdbc:oracle:thin:@tcps://<host>:<port>/<service_name>?retry_count=20&retry_delay=3&wallet_location=Database_Wallet
         </copy>
         ```
 
     * `databaseUser`: Enter the user name to access the database, such as SYS.
     * `databasePassword`: Enter the password to access the database for the specific user.
+    * `resourceManagerId`: A unique identifier (uuid) to identify a resource manager. Enter a random value for this lab as shown below.
+   
 
     The `values.yaml` file contains many properties. For readability, only the resource manager properties for which you must provide values are listed in the following sample code snippet.
 
     ```text
     dept1:
       ...
-      connectString: jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bfeldfxbtjvtddi_tmmwsdb3_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet
-      databaseUser: atpc_user
-      databasePassword: your_password
+      connectString: jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bbcldfxbtjvtddi_tmmwsdb3_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet
+      databaseUser: db_user
+      databasePassword: db_user_password
+      resourceManagerId: 77e75891-27f4-49cf-a488-7e6fece865b7
     dept2:
       ...
-      connectString: jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bfeldfxbtjvtddi_tmmwsdb4_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet
-      databaseUser: atpc_user
-      databasePassword: your_password
+      connectString: jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bdcldfxbtjvtddi_tmmwsdb4_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet
+      databaseUser: db_user
+      databasePassword: db_user_password
+      resourceManagerId: 17ff43bb-6a4d-4833-a189-56ef023158d3
     ```
+
+![DB connection string](./images/db-connection-string.png)
 
 3. Save your changes.
 
@@ -157,7 +163,7 @@ Install the XA sample application in the `otmm` namespace, where Transaction Man
 
     ```text
     <copy>
-    cd /home/oracle/OTMM/otmm-22.3/otmm/samples/xa/java/helmcharts
+    cd /home/oracle/OTMM/otmm-22.3/samples/xa/java/helmcharts
     </copy>
     ```
 
@@ -167,9 +173,23 @@ Install the XA sample application in the `otmm` namespace, where Transaction Man
     </copy>
     ```
 
-   Where, `sample-xa-app` is the name of the application that you want to install. You can provide another name to the installed application.
+   Where, `sample-xa-app` is the name of the application that you want to install. You can provide another name to the installed application. 
+2. Verify that the application has been deployed successfully.
+   ```text
+    <copy>
+    helm list -n otmm
+    </copy>
+    ```
+   An output showing the application status as deployed confirms successful deployment.
 
-2. Verify that all resources, such as pods and services, are ready. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
+   ![Helm install success](./images/helm-install-deployed.png)
+3. If you need to make any changes in the values.yaml file and reinstall the `sample-xa-app`, then you can uninstall the `sample-xa-app` and install it again by performing step 1 above. Otherwise, skip this step and go to the next step.
+   ```text
+    <copy>
+    helm uninstall sample-xa-app --namespace otmm
+    </copy>
+    ```
+4. Verify that all resources, such as pods and services, are ready. Proceed to the next step only when all resources are ready. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
 
     ```text
     <copy>
@@ -179,7 +199,7 @@ Install the XA sample application in the `otmm` namespace, where Transaction Man
 
 ## Task 4: Start a Tunnel
 
-Before you start a transaction, you must start a tunnel between Minikube and Transaction Manager for Microservices.
+Before you start a transaction, you must start Minikube tunnel.
 
 1. Run the following command in a new terminal to start a tunnel. Keep this terminal window open.
 
@@ -246,7 +266,7 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
      </copy>
     ```
 
-    Where, `192.0.2.117` is the external IP address of the Istio ingress gateway. Replace this with a value specific to your environment.
+    Where, `192.0.2.117` is the external IP address of the Istio ingress gateway. Replace this with a value specific to your environment. An http response status 200 indicates a successful transfer.
 
 3. Check balances in Department 1, account1 and Department 2, account2 to verify that the amounts reflect correctly after the transaction. Run the following commands to confirm the transaction.
 
