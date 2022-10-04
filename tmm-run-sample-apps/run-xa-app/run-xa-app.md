@@ -61,9 +61,7 @@ To build container images for each microservice in the sample:
 
    When the image is successfully built, the following message is displayed.
 
-    ```text
-    Successfully tagged xa-java-teller:1.0
-    ```
+   **Successfully tagged xa-java-teller:1.0**
 
 2. Run the following commands to build the Docker image for the Department 1 application.
 
@@ -81,9 +79,7 @@ To build container images for each microservice in the sample:
 
    When the image is successfully built, the following message is displayed.
 
-    ```text
-    Successfully tagged department-helidon:1.0
-    ```
+   **Successfully tagged department-helidon:1.0**
 
 3. Run the following commands to build the Docker image for the Department 2 application.
 
@@ -101,9 +97,8 @@ To build container images for each microservice in the sample:
 
    When the image is successfully built, the following message is displayed.
 
-    ```text
-    Successfully tagged department-spring:1.0
-    ```
+   **Successfully tagged department-spring:1.0**
+
 
 The container images that you have created are available in your Minikube container registry.
 
@@ -133,10 +128,10 @@ To provide the configuration and environment details in the `values.yaml` file:
     * `databasePassword`: Enter the password to access the database for the specific user.
     * `resourceManagerId`: A unique identifier (uuid) to identify a resource manager. Enter a random value for this lab as shown below.
    
-
-    The `values.yaml` file contains many properties. For readability, only the resource manager properties for which you must provide values are listed in the following sample code snippet.
+   The `values.yaml` file contains many properties. For readability, only the resource manager properties for which you must provide values are listed in the following sample code snippet.
 
     ```text
+   <copy>
     dept1:
       ...
       connectString: jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bbcldfxbtjvtddi_tmmwsdb3_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet
@@ -149,6 +144,7 @@ To provide the configuration and environment details in the `values.yaml` file:
       databaseUser: db_user
       databasePassword: db_user_password
       resourceManagerId: 17ff43bb-6a4d-4833-a189-56ef023158d3
+   </copy>
     ```
 
 ![DB connection string](./images/db-connection-string.png)
