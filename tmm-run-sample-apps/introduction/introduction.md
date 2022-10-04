@@ -19,7 +19,7 @@ This workshop requires an Oracle Cloud account.
 
 Let's begin! If you need to create an Oracle Cloud account, click **Get Started** in the **Contents** menu on the left. Otherwise, if you have an existing account, click **Lab 1**.
 
-## Learn More
+## Task: Learn More
 
 * [Oracle® Transaction Manager for Microservices Developer Guide](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/index.html)
 * [Oracle® Transaction Manager for Microservices Quick Start Guide](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmqs/index.html)

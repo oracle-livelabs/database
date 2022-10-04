@@ -63,7 +63,7 @@ In rare situations, if you see an error as shown below then it would indicate a 
 
     An output as shown in the example below is displayed.
 
-    ```text
+    ```
     NAME                               READY   STATUS    RESTARTS        AGE
    pod/flight-58f8584c6d-md58w        2/2     Running   4 (5d18h ago)   10d
    pod/hotel-64cfb55df8-dgv8k         2/2     Running   4 (5d18h ago)   10d
@@ -123,7 +123,9 @@ Before you start a transaction, you must start a tunnel between Minikube and Tra
     **Command syntax**
 
     ```text
+   <copy>
     export TRIP_SERVICE_URL=http://copied-external-IP-adress/trip-service/api/trip
+   </copy>
     ```
 
     **Example command**
