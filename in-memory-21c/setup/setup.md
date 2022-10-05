@@ -355,7 +355,7 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     9 rows selected.
 
     SQL>
-    ``` 
+    ```
 
     Note that tables enabled for inmemory will have the inmemory attribute of ENABLED. The default priority level is NONE which means that the object is not populated until it is first accessed.
 
