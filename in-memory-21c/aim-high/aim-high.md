@@ -5,8 +5,7 @@ Watch the video below to get an overview of Automatic In-Memory:
 
 [YouTube video](youtube:pFWjl1G7uDI)
 
-Watch the video below for a walk through of the Automatic In-Memory High lab:
-
+Watch the video below for a quick walk-through of this lab.
 [Automatic In-Memory High](videohub:1_0rzwly4i)
 
 ### Objectives
@@ -15,10 +14,11 @@ Watch the video below for a walk through of the Automatic In-Memory High lab:
 -   Perform various queries invoking AIM with INMEMORY_AUTOMATIC_LEVEL set to HIGH
 
 ### Prerequisites
+
 This lab assumes you have:
 - A Free Tier, Paid or LiveLabs Oracle Cloud account
 - You have completed:
-    - Lab: Get Started with noVNC Remote Desktop (*Free-tier* and *Paid Tenants* only)
+    - Get Started with noVNC Remote Desktop
     - Lab: Initialize Environment
     - Lab: Setting up the In-Memory Column Store
 
@@ -805,7 +805,7 @@ SQL>
     SQL>
     ```
 
-11. Let's take a look at the Heat Map statistics for the segments. Although Heat Map is not used directly by AIM, and does not have to be enabled for AIM to work, it does give us an easy way to look at the usage statistics that AIM does base its decisions on. 
+11. Let's take a look at the Heat Map statistics for the segments. Although Heat Map is not used directly by AIM, and does not have to be enabled for AIM to work, it does give us an easy way to look at the usage statistics that AIM does base its decisions on.
 
     Run the script *11\_hm\_stats.sql*
 
@@ -891,11 +891,11 @@ SQL>
 
 12. Now let's see if we can figure out what has happened with the AIM processing. First we will look at the tasks that are running as part of AIM.
 
-    Run the script *12\_aim\_tasks.sql*
+    Run the script *12\_aimtasks.sql*
 
     ```
     <copy>
-    @12_aim_tasks.sql
+    @12_aimtasks.sql
     </copy>    
     ```
 
