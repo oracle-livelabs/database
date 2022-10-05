@@ -51,7 +51,7 @@ Query result:
 [CDB1:oracle@dbhol:~/labs/inmemory/joins-aggr]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
 
 SQL*Plus: Release 21.0.0.0.0 - Production on Fri Aug 19 18:33:55 2022
-Version 21.4.0.0.0
+Version 21.7.0.0.0
 
 Copyright (c) 1982, 2021, Oracle.  All rights reserved.
 
@@ -59,7 +59,7 @@ Last Successful login time: Thu Aug 18 2022 21:37:24 +00:00
 
 Connected to:
 Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
-Version 21.4.0.0.0
+Version 21.7.0.0.0
 
 SQL> set pages 9999
 SQL> set lines 150
@@ -1439,7 +1439,7 @@ SQL>
     ```
     SQL> exit
     Disconnected from Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
-    Version 21.4.0.0.0
+    Version 21.7.0.0.0
     [CDB1:oracle@dbhol:~/labs/inmemory/joins-aggr]$ cd ..
     [CDB1:oracle@dbhol:~/labs/inmemory]$
     ```

@@ -58,7 +58,7 @@ Query result:
 [CDB1:oracle@dbhol:~/labs/inmemory/setup]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
 
 SQL*Plus: Release 21.0.0.0.0 - Production on Fri Aug 19 18:33:55 2022
-Version 21.4.0.0.0
+Version 21.7.0.0.0
 
 Copyright (c) 1982, 2021, Oracle.  All rights reserved.
 
@@ -66,7 +66,7 @@ Last Successful login time: Thu Aug 18 2022 21:37:24 +00:00
 
 Connected to:
 Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
-Version 21.4.0.0.0
+Version 21.7.0.0.0
 
 SQL> set pages 9999
 SQL> set lines 150
@@ -164,10 +164,10 @@ SQL>
     SQL>
     SQL> show sga
 
-    Total System Global Area           8589933520 bytes
-    Fixed Size                            9706448 bytes
-    Variable Size                       754974720 bytes
-    Database Buffers                   3623878656 bytes
+    Total System Global Area           8589933480 bytes
+    Fixed Size                            9706408 bytes
+    Variable Size                       452984832 bytes
+    Database Buffers                   3925868544 bytes
     Redo Buffers                          7069696 bytes
     In-Memory Area                     4194304000 bytes
     SQL>
@@ -606,7 +606,7 @@ SQL>
     ```
     SQL> exit
     Disconnected from Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
-    Version 21.4.0.0.0
+    Version 21.7.0.0.0
     [CDB1:oracle@dbhol:~/labs/inmemory/setup]$ cd ..
     [CDB1:oracle@dbhol:~/labs/inmemory]$
     ```
