@@ -168,9 +168,9 @@ This lab assumes you have:
     alter system set heat_map=ON scope=spfile;
     alter system set sga_max_size=8G scope=spfile;
     alter system set sga_target=8G scope=spfile;
-    alter system set db_keep_cache_size=3000M scope=spfile;
+    alter system set db_keep_cache_size=3008M scope=spfile;
     alter system set pga_aggregate_target=2500M scope=spfile;
-    alter system set inmemory_size=3300M scope=spfile;
+    alter system set inmemory_size=4000M scope=spfile;
     alter system set inmemory_max_populate_servers=4 scope=spfile;
     alter system set inmemory_virtual_columns=enable scope=spfile;
     alter system set "_inmemory_64k_percent"=5 scope=spfile;
@@ -186,9 +186,9 @@ This lab assumes you have:
     SQL> alter system set heat_map=ON scope=spfile;
     2  alter system set sga_max_size=8G scope=spfile;
     3  alter system set sga_target=8G scope=spfile;
-    4  alter system set db_keep_cache_size=3000M scope=spfile;
+    4  alter system set db_keep_cache_size=3008M scope=spfile;
     5  alter system set pga_aggregate_target=2500M scope=spfile;
-    6  alter system set inmemory_size=3300M scope=spfile;
+    6  alter system set inmemory_size=4000M scope=spfile;
     7  alter system set inmemory_max_populate_servers=4 scope=spfile;
     8  alter system set inmemory_virtual_columns=enable scope=spfile;
     9  alter system set "_inmemory_64k_percent"=5 scope=spfile;
@@ -214,32 +214,32 @@ This lab assumes you have:
     ```
     <copy>
     shutdown immediate
-    </copy>
-    ```
-    ```
-    <copy>
     startup
+    exit
     </copy>
     ```
 
     Output:
+    
     ```
     SQL> shutdown immediate
+    2  startup
+    3* exit
     Database closed.
     Database dismounted.
     ORACLE instance shut down.
-    SQL> startup
     ORACLE instance started.
 
     Total System Global Area   8589933480 bytes
     Fixed Size                    9706408 bytes
-    Variable Size               452984832 bytes
-    Database Buffers           4647288832 bytes
+    Variable Size               436207616 bytes
+    Database Buffers           3942645760 bytes
     Redo Buffers                  7069696 bytes
-    In-Memory Area             3472883712 bytes
+    In-Memory Area             4194304000 bytes
     Database mounted.
     Database opened.
-    SQL>
+    Disconnected from Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
+    Version 21.7.0.0.0
     ```
 
 You may now **proceed to the next lab**.
