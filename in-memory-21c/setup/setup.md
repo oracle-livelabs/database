@@ -33,47 +33,62 @@ This lab assumes you have:
 
 In this Lab we will explore how the In-Memory column store is enabled in Oracle Database, and then how to enable and populate objects and verify the population of those objects in the In-Memory column store.
 
-Let's switch to the setup folder and log back in to the PDB:
+1. Let's switch to the setup folder and log back in to the PDB:
 
- ```
- <copy>
- cd /home/oracle/labs/inmemory/setup
- sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
- </copy>
- ```
+    ```
+    <copy>
+    cd /home/oracle/labs/inmemory/setup
+    sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
+    </copy>
+    ```
 
-And adjust the sqlplus display:
+    And adjust the sqlplus display:
 
- ```
- <copy>
- set pages 9999
- set lines 150
- </copy>
- ```
+    ```
+    <copy>
+    set pages 9999
+    set lines 150
+    </copy>
+    ```
 
-Query result:
+    Query result:
 
-```
-[CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/setup
-[CDB1:oracle@dbhol:~/labs/inmemory/setup]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
+    ```
+    [CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/setup
+    [CDB1:oracle@dbhol:~/labs/inmemory/setup]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
 
-SQL*Plus: Release 21.0.0.0.0 - Production on Fri Aug 19 18:33:55 2022
-Version 21.7.0.0.0
+    SQL*Plus: Release 21.0.0.0.0 - Production on Fri Aug 19 18:33:55 2022
+    Version 21.7.0.0.0
 
-Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+    Copyright (c) 1982, 2021, Oracle.  All rights reserved.
 
-Last Successful login time: Thu Aug 18 2022 21:37:24 +00:00
+    Last Successful login time: Thu Aug 18 2022 21:37:24 +00:00
 
-Connected to:
-Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
-Version 21.7.0.0.0
+    Connected to:
+    Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
+    Version 21.7.0.0.0
 
-SQL> set pages 9999
-SQL> set lines 150
-SQL>
-```
+    SQL> set pages 9999
+    SQL> set lines 150
+    SQL>
+    ```
 
-1. Database In-Memory is integrated into Oracle Database 12c (12.1.0.2) and higher.  The IM column store is not enabled by default, but can be easily enabled via a few steps.  Before you enable it, let's take a look at the default configuration.
+2. Initialize objects to be used for In-memory
+
+    ```
+    <copy>
+    alter table SSB.DATE_DIM no inmemory;
+    alter table SSB.PART no inmemory;
+    alter table SSB.CUSTOMER no inmemory;
+    alter table SSB.LINEORDER modify partition PART_1996 no inmemory;
+    alter table SSB.LINEORDER modify partition PART_1998 no inmemory;
+    alter table SSB.LINEORDER modify partition PART_1995 no inmemory;
+    alter table SSB.LINEORDER modify partition PART_1997 no inmemory;
+    alter table SSB.LINEORDER modify partition PART_1994 no inmemory;
+    </copy>    
+    ```
+
+3. Database In-Memory is integrated into Oracle Database 12c (12.1.0.2) and higher.  The IM column store is not enabled by default, but can be easily enabled via a few steps.  Before you enable it, let's take a look at the default configuration.
 
     Run the script *01\_show\_parms.sql*
 
@@ -135,7 +150,7 @@ SQL>
 
     These parameters have already been set for this Lab. The IM column store is not enabled by default (i.e. INMEMORY\_SIZE=0), but we have set it to a size that will work for this Lab.  HEAT\_MAP defaults to OFF, but it has been enabled for one of the later labs. The KEEP pool (i.e. DB\_KEEP\_CACHE\_SIZE) is set to 0 by default. We have defined it for this Lab so that you can compare the performance of objects populated in the IM column store with the same objects fully cached in the buffer cache and compare the difference in performance for yourself.
 
-2. Database In-Memory is fully integrated into Oracle Database.  The IM column store is allocated within the System Global Area (SGA) and can be easily displayed using normal database commands.
+4. Database In-Memory is fully integrated into Oracle Database.  The IM column store is allocated within the System Global Area (SGA) and can be easily displayed using normal database commands.
 
     Run the script *02\_show\_sga.sql*
 
@@ -176,7 +191,7 @@ SQL>
     Notice that the SGA is made up of Fixed Size, Variable Size, Database Buffers and Redo Buffers. And since we have set the INEMMORY\_SIZE parameter we also see the In-Memory Area allocated within the SGA.
 
 
-3. The In-Memory area is sub-divided into two pools:  a 1MB pool used to store actual columnar formatted data populated in the IM column store and a 64KB pool to store metadata about the objects populated in the IM column store.  The view V$INMEMORY\_AREA shows the total memory allocated and used in the IM column store.
+5. The In-Memory area is sub-divided into two pools:  a 1MB pool used to store actual columnar formatted data populated in the IM column store and a 64KB pool to store metadata about the objects populated in the IM column store.  The view V$INMEMORY\_AREA shows the total memory allocated and used in the IM column store.
 
     Run the script *03\_im\_usage.sql*
 
@@ -220,7 +235,7 @@ SQL>
     SQL>
     ```
 
-4. To add objects to the IM column store the inmemory attribute needs to be set for each object. This tells Oracle Database that these tables should be populated into the IM column store.
+6. To add objects to the IM column store the inmemory attribute needs to be set for each object. This tells Oracle Database that these tables should be populated into the IM column store.
 
     Run the script *04\_im\_alter\_table.sql*
 
@@ -273,7 +288,7 @@ SQL>
     SQL>
     ```
 
-5. The following query accesses the USER_TABLES view and displays attributes of the tables in the SSB schema.  
+7. The following query accesses the USER_TABLES view and displays attributes of the tables in the SSB schema.  
 
     Run the script *05\_im\_attributes.sql*
 
@@ -344,7 +359,7 @@ SQL>
 
     Note that tables enabled for inmemory will have the inmemory attribute of ENABLED. The default priority level is NONE which means that the object is not populated until it is first accessed.
 
-6. Let's populate the IM column store by accessing the tables that are enabled for inmemory with the following queries.
+8. Let's populate the IM column store by accessing the tables that are enabled for inmemory with the following queries.
 
     Run the script *06\_im\_start_pop.sql*
 
@@ -409,7 +424,7 @@ SQL>
 
   Note the FULL and NOPARALLEL hints. These have been added to ensure that the table data is also read into the KEEP pool that was defined. This is only done for this Lab so that we can show you a true memory based comparison of the performance of the Database In-Memory columnar format versus the traditional row format. This is not required to initiate Database In-Memory population.
 
-7. There is a function available that enables the ability to programatically check if the IM column store has been populated. The function, dbms\_inmemory\_admin.populate_wait returns a code based on populate priority and percentage of population:
+9. There is a function available that enables the ability to programatically check if the IM column store has been populated. The function, dbms\_inmemory\_admin.populate_wait returns a code based on populate priority and percentage of population:
 
     ```
     -- Return code:
@@ -484,7 +499,7 @@ SQL>
     SQL>
     ```
 
-8. To identify which segments have been populated into the IM column store you can query the view V$IM\_SEGMENTS.  Once the data population is complete, the BYTES\_NOT\_POPULATED attribute should be 0 for each segment.  
+10. To identify which segments have been populated into the IM column store you can query the view V$IM\_SEGMENTS.  Once the data population is complete, the BYTES\_NOT\_POPULATED attribute should be 0 for each segment.  
 
     Run the script *08\_im\_populated.sql*
 
@@ -545,7 +560,7 @@ SQL>
     SQL>
     ```
 
-9. Now let's check the total space usage used in the IM column store.
+11. Now let's check the total space usage used in the IM column store.
 
     Run the script *09\_im\_usage.sql*
 
@@ -590,7 +605,7 @@ SQL>
     SQL>
     ```
 
-10. Exit lab
+12. Exit lab
 
     Type commands below:  
 
