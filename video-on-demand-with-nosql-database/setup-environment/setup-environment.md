@@ -58,8 +58,8 @@ to get the Cloud Shell started.
     <copy>
     cd $HOME
     rm -rf video-on-demand-with-nosql-database
-    git clone https://github.com/dario-vega/demo-tv-streaming-app.git
-    mv demo-tv-streaming-app video-on-demand-with-nosql-database
+    curl -L https://github.com/oracle/nosql-examples/raw/master/zips/video-on-demand-with-nosql-database.zip -o video-on-demand-with-nosql-database.zip
+    unzip video-on-demand-with-nosql-database.zip
     cd ~/video-on-demand-with-nosql-database/data/
     sh unzip.sh
     cd $HOME
