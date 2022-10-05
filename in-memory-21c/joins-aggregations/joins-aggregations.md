@@ -12,10 +12,11 @@ Watch the video below for a quick walk-through of the In-memory Joins and Aggreg
 -   Perform various queries on the In-Memory Column Store
 
 ### Prerequisites
+
 This lab assumes you have:
 - A Free Tier, Paid or LiveLabs Oracle Cloud account
 - You have completed:
-    - Lab: Get Started with noVNC Remote Desktop (*Free-tier* and *Paid Tenants* only)
+    - Get Started with noVNC Remote Desktop
     - Lab: Initialize Environment
     - Lab: Setting up the In-Memory Column Store
 
