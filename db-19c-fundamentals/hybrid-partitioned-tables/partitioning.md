@@ -125,6 +125,10 @@ END;
 
     ![Create the credentials](images/create-credentials.png)
 
+    > **Note**: If you are having an issue creating the credentials, you can use the command BEGIN
+   DBMS\_CLOUD.DROP\_CREDENTIAL('OBJECT\_STORE\_CRED');
+END; to drop the credentials and start the process again.
+
 
 
 ## Task 3: Build the External Table
