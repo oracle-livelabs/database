@@ -42,6 +42,12 @@ To populate JSON data in the IM column store several database prerequisites must
 
 JSON data columns must have 'IS JSON' check constraints prior to 21c. In 21c a check constraint is not required for columns with JSON data type, but the compatible parameter must be set to at least 20.
 
+Reload the environment variables for **CDB1** if you exited the terminal after the previous lab
+
+```
+<copy>. ~/.set-env-db.sh CDB1</copy>
+```
+    
 Let's switch to the json folder and log back in to the PDB:
 
 ```

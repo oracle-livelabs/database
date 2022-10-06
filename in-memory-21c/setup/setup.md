@@ -35,6 +35,14 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
 
 1. Let's switch to the setup folder and log back in to the PDB:
 
+    Reload the environment variables for **CDB1** if you exited the terminal after the previous lab
+    
+    ```
+    <copy>. ~/.set-env-db.sh CDB1</copy>
+    ```
+
+    Connect to **PDB1**
+    
     ```
     <copy>
     cd /home/oracle/labs/inmemory/setup
@@ -144,7 +152,7 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
 
     NAME                                 TYPE        VALUE
     ------------------------------------ ----------- ------------------------------
-    inmemory_size                        big integer 4000M
+    inmemory_size                        big integer 3312M
     SQL>
     ```
 
@@ -181,10 +189,10 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
 
     Total System Global Area           8589933480 bytes
     Fixed Size                            9706408 bytes
-    Variable Size                       452984832 bytes
-    Database Buffers                   3925868544 bytes
+    Variable Size                       553648128 bytes
+    Database Buffers                   4546625536 bytes
     Redo Buffers                          7069696 bytes
-    In-Memory Area                     4194304000 bytes
+    In-Memory Area                     3472883712 bytes
     SQL>
     ```
 
@@ -229,8 +237,8 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
 
     POOL                ALLOC_BYTES           USED_BYTES POPULATE_STATUS                          CON_ID
     ---------- -------------------- -------------------- -------------------------- --------------------
-    1MB POOL          3,940,548,608                    0 DONE                                          3
-    64KB POOL           234,881,024                    0 DONE                                          3
+    1MB POOL          3,252,682,752                    0 DONE                                          3
+    64KB POOL           201,326,592                    0 DONE                                          3
 
     SQL>
     ```
@@ -547,12 +555,12 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     ---------- -------------------- --------------- --------------- ---------------- ---------------- ----------------
     SSB        CUSTOMER                             COMPLETED             24,928,256       23,199,744                0
     SSB        DATE_DIM                             COMPLETED                122,880        1,179,648                0
-    SSB        LINEORDER            PART_1994       COMPLETED            563,601,408      479,330,304                0
-    SSB        LINEORDER            PART_1995       COMPLETED            563,470,336      479,330,304                0
-    SSB        LINEORDER            PART_1996       COMPLETED            565,010,432      480,378,880                0
-    SSB        LINEORDER            PART_1997       COMPLETED            563,314,688      479,330,304                0
-    SSB        LINEORDER            PART_1998       COMPLETED            329,015,296      279,642,112                0
-    SSB        PART                                 COMPLETED             56,893,440       18,022,400                0
+    SSB        LINEORDER            PART_1994       COMPLETED            563,609,600      478,281,728                0
+    SSB        LINEORDER            PART_1995       COMPLETED            563,470,336      478,281,728                0
+    SSB        LINEORDER            PART_1996       COMPLETED            565,018,624      480,378,880                0
+    SSB        LINEORDER            PART_1997       COMPLETED            563,322,880      479,330,304                0
+    SSB        LINEORDER            PART_1998       COMPLETED            329,015,296      280,690,688                0
+    SSB        PART                                 COMPLETED             56,893,440       16,973,824                0
     SSB        SUPPLIER                             COMPLETED              1,769,472        2,228,224                0
 
     9 rows selected.
@@ -599,8 +607,8 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
 
     POOL                ALLOC_BYTES           USED_BYTES POPULATE_STATUS               CON_ID
     ---------- -------------------- -------------------- --------------- --------------------
-    1MB POOL          3,940,548,608        2,236,612,608 DONE                               3
-    64KB POOL           234,881,024            6,029,312 DONE                               3
+    1MB POOL          3,252,682,752        2,234,515,456 DONE                               3
+    64KB POOL           201,326,592            6,029,312 DONE                               3
 
     SQL>
     ```
@@ -641,5 +649,5 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 
 - **Author** - Andy Rivenes, Product Manager, Database In-Memory
-- **Contributors** - Maria Colgan, Distinguished Product Manager
-- **Last Updated By/Date** - Andy Rivenes, August 2022
+- **Contributors** - Maria Colgan, Rene Fontcha
+- **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, October 2022

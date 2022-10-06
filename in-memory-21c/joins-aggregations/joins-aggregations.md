@@ -26,6 +26,12 @@ This lab assumes you have:
 
 Up until now we have been focused on queries that scan only one table, the LINEORDER table. Let’s broaden the scope of our investigation to include joins and parallel execution. This section executes a series of queries that begin with a single join between the fact table, LINEORDER, and one or more dimension tables and works up to a 5 table join. The queries will be executed in both the buffer cache and the column store, to demonstrate the different ways the column store can improve query performance above and beyond just the basic performance benefits of scanning data in a columnar format.
 
+Reload the environment variables for **CDB1** if you exited the terminal after the previous lab
+
+```
+<copy>. ~/.set-env-db.sh CDB1</copy>
+```
+
 Let's switch to the joins-aggr folder and log back in to the PDB:
 
 ```
