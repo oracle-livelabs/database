@@ -33,6 +33,12 @@ This Lab will explore the new AIM level HIGH and how it works. A new schema will
 
 ## Task 1: AIM Level High
 
+Reload the environment variables for **CDB1** if you exited the terminal after the previous lab
+
+```
+<copy>. ~/.set-env-db.sh CDB1</copy>
+```
+
 Let's switch to the aim-high folder and log back in to the PDB:
 
 ```

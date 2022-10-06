@@ -28,6 +28,12 @@ This lab assumes you have:
 
 Now that you’ve gotten familiar with the IM column store let’s look at the benefits of using it. You will execute a series of queries against the large fact table LINEORDER, in both the buffer cache and the IM column store, to demonstrate the different ways the IM column store can improve query performance above and beyond the basic performance benefits of accessing data in memory only.
 
+Reload the environment variables for **CDB1** if you exited the terminal after the previous lab
+
+```
+<copy>. ~/.set-env-db.sh CDB1</copy>
+```
+
 Let's switch to the queries folder and log back in to the PDB.
 
 ```
@@ -45,6 +51,8 @@ set pages 9999
 set lines 150
 </copy>
 ```
+
+Query result:
 
 ```
 [CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/queries
