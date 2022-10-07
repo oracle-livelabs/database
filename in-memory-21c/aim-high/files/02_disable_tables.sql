@@ -10,8 +10,7 @@ begin
   for tab_cursor in (
     select owner, table_name
     from   dba_tables
-    where  owner not in ('AUDSYS','SYS')
-    and    inmemory = 'ENABLED'
+    where  owner in ('SSB','AIM')
   )
   loop
     v_ddl := 'alter table '||tab_cursor.owner||'.'||tab_cursor.table_name||' no inmemory';
@@ -22,8 +21,7 @@ begin
   for part_cursor in (
     select table_owner, table_name, partition_name
     from   dba_tab_partitions
-    where  table_owner not in ('AUDSYS','SYS')
-    and    inmemory = 'ENABLED'
+    where  table_owner in ('SSB','AIM')
   )
   loop
     v_ddl := 'alter table '||part_cursor.table_owner||'.'||part_cursor.table_name||

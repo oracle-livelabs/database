@@ -39,8 +39,7 @@ This lab assumes you have:
     <copy>
     ps -ef|grep LIST|grep -v grep
     ps -ef|grep ora_|grep pmon|grep -v grep
-    systemctl status oracle-database
-    systemctl status oracle-db-listener
+    systemctl status oracle-database oracle-db-listener
     </copy>
     ```
 
@@ -50,14 +49,7 @@ This lab assumes you have:
 
     If all expected processes are shown in your output as seen above, then your environment is ready for the next task.  
 
-3. If you see questionable output(s), failure or down component(s), restart the service accordingly
-
-    ```
-    <copy>
-    sudo systemctl restart oracle-database
-    sudo systemctl restart oracle-db-listener
-    </copy>
-    ```
+3. If you see questionable output(s), failure or down component(s), refer to the appendix section to restart the service accordingly
 
 ## Task 2: Initialize Database for Multitenant Use Cases
 
@@ -79,7 +71,18 @@ This lab assumes you have:
 
     ![](./images/init-multitenant.png " ")
 
-You may now [proceed to the next lab](#next).
+<!-- for 21c image only.
+2. Create Database Links. During this workshop you will use database links *cdb1_dblink* and *cdb2_dblink* to perform tasks across between the two CDBs
+
+    ```
+    <copy>
+    cat initCDBs.sh
+    . ./initCDBs.sh
+    </copy>
+    ``` 
+    -->
+
+You may now proceed to the next lab.
 
 ## Appendix 1: Managing Startup Services
 
@@ -150,6 +153,6 @@ You may now [proceed to the next lab](#next).
     ```
 
 ## Acknowledgements
-* **Author** - Andy Rivenes, Sr. Principal Product Manager, Oracle Database In-Memory
+* **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
 * **Contributors** - Kay Malcolm, Didi Han, Rene Fontcha
-* **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, March 2022
+* **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, October 2022
