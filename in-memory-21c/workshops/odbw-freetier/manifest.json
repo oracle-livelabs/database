@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Boost Analytics Performance with Oracle Database In-Memory",
+  "workshoptitle": "Learn How Database In-Memory Enables Real-Time Analytics",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -23,7 +23,7 @@
       "title": "Lab 2: Environment Setup",
       "description": "How to provision the workshop environment and connect to it",
       "publisheddate": "06/30/2020",
-      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc.md"
+      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc-ssh.md"
     },
     {
       "title": "Lab 3: Initialize Environment",

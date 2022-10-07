@@ -10,7 +10,7 @@ Watch the video below to get an explanation of enabling the In-Memory column sto
 
 Quick walk through on how to enable In-Memory.
 
-[Youtube video](youtube:oCES149OPeE)
+[Setting up the In-Memory column store](videohub:1_dg318frc)
 
 Estimated Time: 30 minutes
 
@@ -22,57 +22,81 @@ Estimated Time: 30 minutes
 ### Prerequisites
 
 This lab assumes you have:
-* Lab: Prepare Setup (Free-tier and Paid Tenants only)
-* Lab: Environment Setup
-* Lab: Initialize Environment
+- A Free Tier, Paid or LiveLabs Oracle Cloud account
+- You have completed:
+    - Get Started with noVNC Remote Desktop
+    - Lab: Initialize Environment
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
 ## Task 1: Logging In and Enabling In-Memory
 
-In this Lab we will be populating external data from a local directory and we will need to define a database directory to use in our external table definitions to point the database to our external data.
+In this Lab we will explore how the In-Memory column store is enabled in Oracle Database, and then how to enable and populate objects and verify the population of those objects in the In-Memory column store.
 
-Let's switch to the setup folder and log back in to the PDB:
+1. Let's switch to the setup folder and log back in to the PDB:
 
- ```
- <copy>
- cd /home/oracle/labs/inmemory/setup
- sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
- </copy>
- ```
+    Reload the environment variables for **CDB1** if you exited the terminal after the previous lab
+    
+    ```
+    <copy>. ~/.set-env-db.sh CDB1</copy>
+    ```
 
-And adjust the sqlplus display:
+    Connect to **PDB1**
+    
+    ```
+    <copy>
+    cd /home/oracle/labs/inmemory/setup
+    sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
+    </copy>
+    ```
 
- ```
- <copy>
- set pages 9999
- set lines 150
- </copy>
- ```
+    And adjust the sqlplus display:
 
-Query result:
+    ```
+    <copy>
+    set pages 9999
+    set lines 150
+    </copy>
+    ```
 
-```
-[CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/setup
-[CDB1:oracle@dbhol:~/labs/inmemory/setup]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
+    Query result:
 
-SQL*Plus: Release 21.0.0.0.0 - Production on Fri Aug 19 18:33:55 2022
-Version 21.4.0.0.0
+    ```
+    [CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/setup
+    [CDB1:oracle@dbhol:~/labs/inmemory/setup]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
 
-Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+    SQL*Plus: Release 21.0.0.0.0 - Production on Fri Aug 19 18:33:55 2022
+    Version 21.7.0.0.0
 
-Last Successful login time: Thu Aug 18 2022 21:37:24 +00:00
+    Copyright (c) 1982, 2021, Oracle.  All rights reserved.
 
-Connected to:
-Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
-Version 21.4.0.0.0
+    Last Successful login time: Thu Aug 18 2022 21:37:24 +00:00
 
-SQL> set pages 9999
-SQL> set lines 150
-SQL>
-```
+    Connected to:
+    Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
+    Version 21.7.0.0.0
 
-1. Database In-Memory is integrated into Oracle Database 12c (12.1.0.2) and higher.  The IM column store is not enabled by default, but can be easily enabled via a few steps.  Before you enable it, let's take a look at the default configuration. Set your oracle environment
+    SQL> set pages 9999
+    SQL> set lines 150
+    SQL>
+    ```
+
+2. Initialize objects to be used for In-memory
+
+    ```
+    <copy>
+    alter table SSB.DATE_DIM no inmemory;
+    alter table SSB.PART no inmemory;
+    alter table SSB.CUSTOMER no inmemory;
+    alter table SSB.LINEORDER modify partition PART_1996 no inmemory;
+    alter table SSB.LINEORDER modify partition PART_1998 no inmemory;
+    alter table SSB.LINEORDER modify partition PART_1995 no inmemory;
+    alter table SSB.LINEORDER modify partition PART_1997 no inmemory;
+    alter table SSB.LINEORDER modify partition PART_1994 no inmemory;
+    </copy>    
+    ```
+
+3. Database In-Memory is integrated into Oracle Database 12c (12.1.0.2) and higher.  The IM column store is not enabled by default, but can be easily enabled via a few steps.  Before you enable it, let's take a look at the default configuration.
 
     Run the script *01\_show\_parms.sql*
 
@@ -128,13 +152,13 @@ SQL>
 
     NAME                                 TYPE        VALUE
     ------------------------------------ ----------- ------------------------------
-    inmemory_size                        big integer 4000M
+    inmemory_size                        big integer 3312M
     SQL>
     ```
 
     These parameters have already been set for this Lab. The IM column store is not enabled by default (i.e. INMEMORY\_SIZE=0), but we have set it to a size that will work for this Lab.  HEAT\_MAP defaults to OFF, but it has been enabled for one of the later labs. The KEEP pool (i.e. DB\_KEEP\_CACHE\_SIZE) is set to 0 by default. We have defined it for this Lab so that you can compare the performance of objects populated in the IM column store with the same objects fully cached in the buffer cache and compare the difference in performance for yourself.
 
-2. Database In-Memory is integrated into Oracle Database 12c (12.1.0.2) and higher.  The IM column store is allocated within the System Global Area (SGA) and can be easily displayed using normal database commands.
+4. Database In-Memory is fully integrated into Oracle Database.  The IM column store is allocated within the System Global Area (SGA) and can be easily displayed using normal database commands.
 
     Run the script *02\_show\_sga.sql*
 
@@ -163,19 +187,19 @@ SQL>
     SQL>
     SQL> show sga
 
-    Total System Global Area           8589933520 bytes
-    Fixed Size                            9706448 bytes
-    Variable Size                       754974720 bytes
-    Database Buffers                   3623878656 bytes
+    Total System Global Area           8589933480 bytes
+    Fixed Size                            9706408 bytes
+    Variable Size                       553648128 bytes
+    Database Buffers                   4546625536 bytes
     Redo Buffers                          7069696 bytes
-    In-Memory Area                     4194304000 bytes
+    In-Memory Area                     3472883712 bytes
     SQL>
     ```
 
     Notice that the SGA is made up of Fixed Size, Variable Size, Database Buffers and Redo Buffers. And since we have set the INEMMORY\_SIZE parameter we also see the In-Memory Area allocated within the SGA.
 
 
-3. The In-Memory area is sub-divided into two pools:  a 1MB pool used to store actual columnar formatted data populated in the IM column store and a 64KB pool to store metadata about the objects populated in the IM column store.  The view V$INMEMORY\_AREA shows the total memory allocated and used in the IM column store.
+5. The In-Memory area is sub-divided into two pools:  a 1MB pool used to store actual columnar formatted data populated in the IM column store and a 64KB pool to store metadata about the objects populated in the IM column store.  The view V$INMEMORY\_AREA shows the total memory allocated and used in the IM column store.
 
     Run the script *03\_im\_usage.sql*
 
@@ -213,13 +237,13 @@ SQL>
 
     POOL                ALLOC_BYTES           USED_BYTES POPULATE_STATUS                          CON_ID
     ---------- -------------------- -------------------- -------------------------- --------------------
-    1MB POOL          3,940,548,608                    0 DONE                                          3
-    64KB POOL           234,881,024                    0 DONE                                          3
+    1MB POOL          3,252,682,752                    0 DONE                                          3
+    64KB POOL           201,326,592                    0 DONE                                          3
 
     SQL>
     ```
 
-4. To add objects to the IM column store the inmemory attribute needs to be set for each object. This tells Oracle Database that these tables should be populated into the IM column store.
+6. To add objects to the IM column store the inmemory attribute needs to be set for each object. This tells Oracle Database that these tables should be populated into the IM column store.
 
     Run the script *04\_im\_alter\_table.sql*
 
@@ -272,7 +296,7 @@ SQL>
     SQL>
     ```
 
-5. The following query accesses the USER_TABLES view and displays attributes of the tables in the SSB schema.  
+7. The following query accesses the USER_TABLES view and displays attributes of the tables in the SSB schema.  
 
     Run the script *05\_im\_attributes.sql*
 
@@ -339,11 +363,11 @@ SQL>
     9 rows selected.
 
     SQL>
-    ``` 
+    ```
 
     Note that tables enabled for inmemory will have the inmemory attribute of ENABLED. The default priority level is NONE which means that the object is not populated until it is first accessed.
 
-6. Let's populate the IM column store by accessing the tables that are enabled for inmemory with the following queries.
+8. Let's populate the IM column store by accessing the tables that are enabled for inmemory with the following queries.
 
     Run the script *06\_im\_start_pop.sql*
 
@@ -406,7 +430,9 @@ SQL>
     SQL>
     ```
 
-7. There is a function available that enables the ability to programatically check if the IM column store has been populated. The function, dbms\_inmemory\_admin.populate_wait returns a code based on populate priority and percentage of population:
+  Note the FULL and NOPARALLEL hints. These have been added to ensure that the table data is also read into the KEEP pool that was defined. This is only done for this Lab so that we can show you a true memory based comparison of the performance of the Database In-Memory columnar format versus the traditional row format. This is not required to initiate Database In-Memory population.
+
+9. There is a function available that enables the ability to programatically check if the IM column store has been populated. The function, dbms\_inmemory\_admin.populate_wait returns a code based on populate priority and percentage of population:
 
     ```
     -- Return code:
@@ -481,7 +507,7 @@ SQL>
     SQL>
     ```
 
-8. To identify which segments have been populated into the IM column store you can query the view V$IM\_SEGMENTS.  Once the data population is complete, the BYTES\_NOT\_POPULATED attribute should be 0 for each segment.  
+10. To identify which segments have been populated into the IM column store you can query the view V$IM\_SEGMENTS.  Once the data population is complete, the BYTES\_NOT\_POPULATED attribute should be 0 for each segment.  
 
     Run the script *08\_im\_populated.sql*
 
@@ -529,12 +555,12 @@ SQL>
     ---------- -------------------- --------------- --------------- ---------------- ---------------- ----------------
     SSB        CUSTOMER                             COMPLETED             24,928,256       23,199,744                0
     SSB        DATE_DIM                             COMPLETED                122,880        1,179,648                0
-    SSB        LINEORDER            PART_1994       COMPLETED            563,601,408      479,330,304                0
-    SSB        LINEORDER            PART_1995       COMPLETED            563,470,336      479,330,304                0
-    SSB        LINEORDER            PART_1996       COMPLETED            565,010,432      480,378,880                0
-    SSB        LINEORDER            PART_1997       COMPLETED            563,314,688      479,330,304                0
-    SSB        LINEORDER            PART_1998       COMPLETED            329,015,296      279,642,112                0
-    SSB        PART                                 COMPLETED             56,893,440       18,022,400                0
+    SSB        LINEORDER            PART_1994       COMPLETED            563,609,600      478,281,728                0
+    SSB        LINEORDER            PART_1995       COMPLETED            563,470,336      478,281,728                0
+    SSB        LINEORDER            PART_1996       COMPLETED            565,018,624      480,378,880                0
+    SSB        LINEORDER            PART_1997       COMPLETED            563,322,880      479,330,304                0
+    SSB        LINEORDER            PART_1998       COMPLETED            329,015,296      280,690,688                0
+    SSB        PART                                 COMPLETED             56,893,440       16,973,824                0
     SSB        SUPPLIER                             COMPLETED              1,769,472        2,228,224                0
 
     9 rows selected.
@@ -542,7 +568,7 @@ SQL>
     SQL>
     ```
 
-9. Now let's check the total space usage used in the IM column store.
+11. Now let's check the total space usage used in the IM column store.
 
     Run the script *09\_im\_usage.sql*
 
@@ -581,13 +607,13 @@ SQL>
 
     POOL                ALLOC_BYTES           USED_BYTES POPULATE_STATUS               CON_ID
     ---------- -------------------- -------------------- --------------- --------------------
-    1MB POOL          3,940,548,608        2,236,612,608 DONE                               3
-    64KB POOL           234,881,024            6,029,312 DONE                               3
+    1MB POOL          3,252,682,752        2,234,515,456 DONE                               3
+    64KB POOL           201,326,592            6,029,312 DONE                               3
 
     SQL>
     ```
 
-10. Exit lab
+12. Exit lab
 
     Type commands below:  
 
@@ -603,14 +629,14 @@ SQL>
     ```
     SQL> exit
     Disconnected from Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
-    Version 21.4.0.0.0
+    Version 21.7.0.0.0
     [CDB1:oracle@dbhol:~/labs/inmemory/setup]$ cd ..
     [CDB1:oracle@dbhol:~/labs/inmemory]$
     ```
 
 ## Conclusion
 
-In this lab you saw that the IM column store is configured by setting the initialization parameter INMEMORY_SIZE. The IM column store is a new static pool in the SGA, and once allocated it can be resized dynamically, but it is not managed by either of the automatic SGA memory features.
+In this lab you saw that the IM column store is configured by setting the initialization parameter INMEMORY_SIZE. The IM column store is a new static pool in the SGA, and once allocated it can be increased in size dynamically, but it is not managed by either of the automatic SGA memory features.
 
 You also had an opportunity to populate and view objects in the IM column store and to see how much memory they use. In this lab we populated five tables into the IM column store, and the LINEORDER table is the largest of the tables populated with over 41 million rows. You may have noticed that it is also a partitioned table. We will be using that attribute in later labs.
 
@@ -623,5 +649,5 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 
 - **Author** - Andy Rivenes, Product Manager, Database In-Memory
-- **Contributors** - Maria Colgan, Distinguished Product Manager
-- **Last Updated By/Date** - Andy Rivenes, August 2022
+- **Contributors** - Maria Colgan, Rene Fontcha
+- **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, October 2022

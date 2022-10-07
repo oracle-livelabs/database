@@ -7,7 +7,7 @@ Estimated Lab Time:  15 minutes
 
 Watch the video below for a quick walk through of the lab.
 
-[Work with Partitioning in the database](https://youtu.be/jxA80ppiDXw)
+[Hybrid Partitioning](videohub:1_26o376wu)
 
 ### About Partitioning
 
@@ -124,6 +124,10 @@ END;
     The alter statement may show an unexpected symbol icon as shown in the image. This is okay as we are altering the database property to the new credentials we just created. Run each statement individually.
 
     ![Create the credentials](images/create-credentials.png)
+
+    > **Note**: If you are having an issue creating the credentials, you can use the command BEGIN
+   DBMS\_CLOUD.DROP\_CREDENTIAL('OBJECT\_STORE\_CRED');
+END; to drop the credentials and start the process again.
 
 
 

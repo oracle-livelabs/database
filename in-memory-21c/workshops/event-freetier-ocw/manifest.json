@@ -1,0 +1,62 @@
+{
+  "workshoptitle": "Learn How Database In-Memory Enables Real-Time Analytics",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "About the In-Memory Workshop",
+      "filename": "../../intro/intro.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Login to Oracle Cloud",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+    },
+    {
+      "title": "Lab 1: Prepare Setup",
+      "description": "How to download your ORM stack and update security rules for an existing VCN",
+      "publisheddate": "09/28/2020",
+      "filename": "../../prepare-setup/prepare-setup.md"
+    },
+    {
+      "title": "Lab 2: Environment Setup",
+      "description": "How to provision the workshop environment and connect to it",
+      "publisheddate": "06/30/2020",
+      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc-ssh.md"
+    },
+    {
+      "title": "Lab 3: Initialize Environment",
+      "description": "Initialize Environment",
+      "filename": "../../initialize-environment/initialize-environment.md"
+    },
+    {
+      "title": "Lab 4: Setting up the In-Memory Column Store",
+      "description": "Populating and administering the In-Memory column store",
+      "filename": "../../setup/setup.md"
+    },
+    {
+      "title": "Lab 5: Querying the In-Memory Column Store",
+      "description": "Queries on In-Memory Column Store",
+      "filename": "../../queries/queries.md"
+    },
+    {
+      "title": "Lab 6: Joins and Aggregation",
+      "description": "In-Memory Joins and Aggregation",
+      "filename": "../../joins-aggregations/joins-aggregations.md"
+    },
+    {
+      "title": "Lab 7: JSON and the In-Memory column store",
+      "description": "Using JSON with the In-Memory column store",
+      "filename": "../../json/json.md"
+    },
+    {
+      "title": "Lab 8: Automatic In-Memory Level High",
+      "description": "Using Automatic In-Memory with level high",
+      "filename": "../../aim-high/aim-high.md"
+    },
+    {
+      "title": "Oracle CloudWorld 2022 - Get Help",
+      "filename": "https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
+    }
+  ]
+}
