@@ -39,7 +39,7 @@ This lab assumes you have:
     {: title="Summary of Databases and Listeners by Host"}
 
 
-2. Click the *SQL Developer* icon on the desktop to Launch the application, then Click on the *+* sign next to database connection listed test connecting
+2. Click the *SQL Developer* icon on the desktop to Launch the application, then Click on the *+* sign next to database connection listed under Oracle Connections
 
     ![Launch SQL Developer #1](./images/launch_sql_developer1.png "Launch SQL Developer #1")
 
@@ -95,5 +95,5 @@ You may now proceed to the next lab
 
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
-* **Contributors** -
-* **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, September 2022
+* **Contributors** - Rene Fontcha, Shefali Bhargava, DB Sharding Product Management
+* **Last Updated By/Date** - Shefali Bhargava, DB Sharding Product Management, October 2022
