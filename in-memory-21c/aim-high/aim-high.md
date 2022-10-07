@@ -33,6 +33,12 @@ This Lab will explore the new AIM level HIGH and how it works. A new schema will
 
 ## Task 1: AIM Level High
 
+Reload the environment variables for **CDB1** if you exited the terminal after the previous lab
+
+```
+<copy>. ~/.set-env-db.sh CDB1</copy>
+```
+
 Let's switch to the aim-high folder and log back in to the PDB:
 
 ```
@@ -58,7 +64,7 @@ Query result:
 [CDB1:oracle@dbhol:~/labs/inmemory/aim-high]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
 
 SQL*Plus: Release 21.0.0.0.0 - Production on Fri Aug 19 18:33:55 2022
-Version 21.4.0.0.0
+Version 21.7.0.0.0
 
 Copyright (c) 1982, 2021, Oracle.  All rights reserved.
 
@@ -66,7 +72,7 @@ Last Successful login time: Thu Aug 18 2022 21:37:24 +00:00
 
 Connected to:
 Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
-Version 21.4.0.0.0
+Version 21.7.0.0.0
 
 SQL> set pages 9999
 SQL> set lines 150
