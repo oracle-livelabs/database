@@ -73,7 +73,7 @@ For this task you need the following info from previous steps:
 
 5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
     - Database Administrator Username: **system**
-    - Database Administrator Password: Select **admin_password** value from Terraform output
+    - Database Administrator Password: Select **Admin Password** value from Terraform output
     - SSH Database Server Hostname: Select **DBCS Public IP** value from Terraform output
     - SSH Private Key: Select private key file saved earlier
     - SSH Username: **opc**
