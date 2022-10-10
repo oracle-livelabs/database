@@ -31,47 +31,37 @@ This lab assumes you have:
 
 ## Task 1: Create a Non-Shard Service
 
-1. Connect to the shard3 host, switch to the oracle user.
+
+1. Duplicate the remote desktop browser tab connecting to host *cata* and replace the IP address in the address bar with the Public IP address of host *shd3*. Open a terminal session
+
+2. Make sure you are in the shd3 database environment by running *`. .set-env-db.sh`* and selecting the appropriate shard from the list.
 
     ```
-    $ <copy>ssh -i labkey opc@xxx.xxx.xxx</copy>
-    Last login: Mon Nov 30 11:24:36 2020 from 59.66.120.23
-    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
-
-    [opc@shd3 ~]$ <copy>sudo su - oracle</copy>
-    Last login: Mon Nov 30 11:27:34 GMT 2020 on pts/0
-    [oracle@shd3 ~]$
+    [oracle@cata ~]$ <copy>. .set-env-db.sh</copy>
     ```
 
-
-
-2. Connect to the database as sysdba.
+3. Connect to the database as sysdba.
 
     ```
     [oracle@shd3 ~]$ <copy>sqlplus / as sysdba</copy>
 
     SQL*Plus: Release 19.0.0.0.0 - Production on Fri Dec 4 11:32:41 2020
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
 
     Copyright (c) 1982, 2020, Oracle.  All rights reserved.
 
 
     Connected to:
     Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
 
     SQL>
     ```
 
-
-
-3. Create a new pdb name nspdb.
+4. Create a new pdb name nspdb.
 
     ```
-    SQL> <copy>CREATE PLUGGABLE DATABASE nspdb ADMIN USER admin IDENTIFIED BY Ora_DB4U
-      DEFAULT TABLESPACE users DATAFILE '/opt/oracle/oradata/SHD3/nspdb/users01.dbf'
-      SIZE 10G AUTOEXTEND ON
-      FILE_NAME_CONVERT = ('/pdbseed/', '/nspdb/');</copy>  2    3    4  
+    SQL> <copy>CREATE PLUGGABLE DATABASE nspdb ADMIN USER admin IDENTIFIED BY Ora_DB4U DEFAULT TABLESPACE users;</copy>
 
     Pluggable database created.
 
@@ -80,7 +70,7 @@ This lab assumes you have:
 
 
 
-4. Open the PDB.
+5. Open the PDB.
 
     ```
     SQL> <copy>alter pluggable database nspdb open;</copy>
@@ -92,7 +82,7 @@ This lab assumes you have:
 
 
 
-5. Connect to the PDB as sysdba.
+6. Connect to the PDB as sysdba.
 
     ```
     SQL> <copy>alter session set container = nspdb;</copy>
@@ -104,7 +94,7 @@ This lab assumes you have:
 
 
 
-6. Create a service named `GDS$CATALOG.ORADBCLOUD` and start it in order to run the demo application correctly.  (The demo application is designed for sharded database, it's need connect to the shard catalog. The service name is hard code in the demo application).
+7. Create a service named `GDS$CATALOG.ORADBCLOUD` and start it in order to run the demo application correctly.  (The demo application is designed for sharded database, it's need connect to the shard catalog. The service name is hard code in the demo application).
 
     ```
     SQL> <copy>BEGIN
@@ -131,12 +121,12 @@ This lab assumes you have:
 
 
 
-7. Exit from the sqlplus.
+8. Exit from the sqlplus.
 
     ```
     SQL> <copy>exit</copy>
     Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
     [oracle@shd3 ~]$
     ```
 
@@ -145,25 +135,20 @@ This lab assumes you have:
 
 ## Task 2: Create the Demo Schema
 
-1. Still in the shard3 host with oracle user. Download the SQL script `nonshard-app-schema.sql`.
+1. Still in the shard3 host as oracle user. Download the SQL script `nonshard-app-schema.sql`.
 
     ```
     [oracle@shd3 ~]$ <copy>wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/Oracle%20Sharding/nonshard-app-schema.sql</copy>
-    --2020-12-06 10:45:06--  https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/Oracle%20Sharding/nonshard-app-schema.sql
-    Resolving github.com (github.com)... 140.82.112.3
-    Connecting to github.com (github.com)|140.82.112.3|:443... connected.
-    HTTP request sent, awaiting response... 302 Found
-    Location: https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/Oracle%20Sharding/nonshard-app-schema.sql [following]
-    --2020-12-06 10:45:08--  https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/Oracle%20Sharding/nonshard-app-schema.sql
-    Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 151.101.76.133
-    Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|151.101.76.133|:443... connected.
+    --2022-10-06 18:45:53--  https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/Oracle%20Sharding/nonshard-app-schema.sql
+    Resolving objectstorage.us-ashburn-1.oraclecloud.com (objectstorage.us-ashburn-1.oraclecloud.com)... 134.70.32.1, 134.70.28.1, 134.70.24.1
+    Connecting to objectstorage.us-ashburn-1.oraclecloud.com (objectstorage.us-ashburn-1.oraclecloud.com)|134.70.32.1|:443... connected.
     HTTP request sent, awaiting response... 200 OK
-    Length: 2938 (2.9K) [text/plain]
-    Saving to: ‘nonshard-app-schema.sql’
+    Length: 2938 (2.9K) [application/octet-stream]
+    Saving to: \u2018nonshard-app-schema.sql\u2019
 
-    100%[======================================>] 2,938       --.-K/s   in 0s      
+    100%[=====================================================>] 2,938       --.-K/s   in 0s      
 
-    2020-12-06 10:45:08 (15.2 MB/s) - ‘nonshard-app-schema.sql’ saved [2938/2938]
+    2022-10-06 18:45:53 (52.7 MB/s) - \u2018nonshard-app-schema.sql\u2019 saved [2938/2938]
 
     [oracle@shd3 ~]$
     ```
@@ -294,8 +279,6 @@ This lab assumes you have:
 
     [oracle@shd3 ~]$
    ```
-
-
 
 3. Use SQLPLUS to run this sql scripts.
 
@@ -464,38 +447,28 @@ This lab assumes you have:
 
 ## Task 3: Setup and Run the Demo Application
 
-1. Connect to the catalog host, switch to the oracle user.
+1. Switch to your browser's remote desktop session connected to host cata as user oracle, open a Terminal session
+
+2. Make sure you are in the appropriate database environment by running *`. .set-env-db.sh`* and selecting the appropriate database from the list.
 
     ```
-    $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxx</copy>
-    Last login: Fri Dec  4 06:48:49 2020 from 202.45.129.206
-    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
-    [opc@cata ~]$ <copy>sudo su - oracle</copy>
-    Last login: Fri Dec  4 06:48:55 GMT 2020 on pts/0
-    [oracle@cata ~]$
+    [oracle@cata ~]$ <copy>. .set-env-db.sh</copy>
     ```
-
-
 
 2. Download the `sdb_demo_app.zip`  file.
 
     ```
     [oracle@cata ~]$ <copy>wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/Oracle%20Sharding/sdb_demo_app.zip</copy>
-    --2020-12-06 10:50:35--  https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/Oracle%20Sharding/sdb_demo_app.zip
-    Resolving github.com (github.com)... 140.82.113.3
-    Connecting to github.com (github.com)|140.82.113.3|:443... connected.
-    HTTP request sent, awaiting response... 302 Found
-    Location: https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/Oracle%20Sharding/sdb_demo_app.zip [following]
-    --2020-12-06 10:50:37--  https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/Oracle%20Sharding/sdb_demo_app.zip
-    Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 151.101.88.133
-    Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|151.101.88.133|:443... connected.
+    --2022-10-06 19:25:44--  https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/Oracle%20Sharding/sdb_demo_app.zip
+    Resolving objectstorage.us-ashburn-1.oraclecloud.com (objectstorage.us-ashburn-1.oraclecloud.com)... 134.70.28.1, 134.70.32.1, 134.70.24.1
+    Connecting to objectstorage.us-ashburn-1.oraclecloud.com (objectstorage.us-ashburn-1.oraclecloud.com)|134.70.28.1|:443... connected.
     HTTP request sent, awaiting response... 200 OK
-    Length: 5897406 (5.6M) [application/zip]
-    Saving to: ‘sdb_demo_app.zip’
+    Length: 5897389 (5.6M) [application/octet-stream]
+    Saving to: \u2018sdb_demo_app.zip\u2019
 
-    100%[===============================================================>] 5,897,406   6.92MB/s   in 0.8s   
+    100%[=====================================================>] 5,897,389   --.-K/s   in 0.06s   
 
-    2020-12-06 10:50:38 (6.92 MB/s) - ‘sdb_demo_app.zip’ saved [5897406/5897406]
+    2022-10-06 19:25:44 (86.7 MB/s) - \u2018sdb_demo_app.zip\u2019 saved [5897389/5897389]
 
     [oracle@cata ~]$
     ```
@@ -717,15 +690,13 @@ This lab assumes you have:
     [oracle@cata sql]$
     ```
 
-
-
 6. Using SQLPLUS to run the script.
 
     ```
     [oracle@cata sql]$ <copy>sqlplus /nolog</copy>
 
     SQL*Plus: Release 19.0.0.0.0 - Production on Fri Dec 4 12:23:11 2020
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
 
     Copyright (c) 1982, 2020, Oracle.  All rights reserved.
 
@@ -854,8 +825,17 @@ This lab assumes you have:
     ```
 
 
+8. Exit SQL
 
-8. Exit the sqlplus. Then change directory to the `sdb_demo_app`.
+    ```
+    SQL><copy>exit</copy>
+    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+    Version 19.11.0.0.0
+    [oracle@shd3 ~]$
+
+    ```
+
+8. Change directory to the `sdb_demo_app`.
 
     ```
     [oracle@cata sql]$ <copy>cd ~/sdb_demo_app</copy>
@@ -1098,21 +1078,10 @@ In this step, you will export the demo application data and copy the dmp file to
 
 
 
-8. Open another terminal to connect to the cata host. Switch to oracle user.
-
-    ```
-    $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxx</copy>
-    Last login: Mon Nov 30 11:22:42 2020 from 59.66.120.23
-    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
-
-    [opc@shd1 ~]$ <copy>sudo su - oracle</copy>
-    Last login: Sun Nov 29 03:15:53 GMT 2020 on pts/0
-    [oracle@cata ~]$
-    ```
+8.  Switch to your browser's remote desktop session connected to host cata as user oracle, open a Terminal session
 
 
-
-9. Make a `.ssh` directory and edit the authorized_keys file.
+9. In the home directory, make a `.ssh` directory and edit the authorized_keys file.
 
     ```
     [oracle@cata ~]$ <copy>mkdir .ssh</copy>
@@ -1124,13 +1093,13 @@ In this step, you will export the demo application data and copy the dmp file to
 10. Copy all the content of the SSH public key from Shard3 host. Save the file and chmod the file.
 
     ```
-    [oracle@shd1 ~]$ <copy>chmod 600 .ssh/authorized_keys</copy>
-    [oracle@shd1 ~]$
+    [oracle@cata ~]$ <copy>chmod 600 .ssh/authorized_keys</copy>
+    [oracle@cata ~]$
     ```
 
 
 
-11. **Repeat do the same steps**  from previous steps 8 - 10. This time connect to the shard1 and shard2 host. Create `authorized_keys` in each of the shard hosts.
+11. **Repeat the steps**  from steps 8 - 10. This time connect to the shard1 and shard2 host. Create and copy the contents of .ssh/id_rsa.pub from shard3  into `authorized_keys` file of each of the shard hosts.
 
 12. From shard3 host side. Copy the dmp file to the catalog, shard1 and shard2 host. Press yes when prompt ask if you want to  continue.
 
@@ -1169,4 +1138,5 @@ You may now proceed to the next lab..
 
 ## Acknowledgements
 * **Author** - Minqiao Wang, DB Product Management, Dec 2020
-* **Last Updated By/Date** - Minqiao Wang, Aug 2022
+* **Contributors** - Shefali Bhargava, DB Sharding Product Management
+* **Last Updated By/Date** - Shefali Bhargava, DB Sharding Product Management, October 2022
