@@ -5,6 +5,9 @@ This lab will show you how to build and deploy the application used by the lab t
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Deploy the Microservices App](videohub:1_4o38boii)
+
 ### Objectives
 
 * Build and Push the application to OCI Container Registry
