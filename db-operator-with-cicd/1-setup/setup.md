@@ -6,6 +6,9 @@ In this lab, you will provision all lab-related resources (except for OKE-provis
 
 Estimated Time: 25 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Setup](videohub:1_a9byzg3m)
+
 ### Objectives
 
 * Create OCI group with the appropriate permissions to run the setup
