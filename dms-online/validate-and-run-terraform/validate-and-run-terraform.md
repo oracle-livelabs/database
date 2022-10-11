@@ -6,6 +6,9 @@ This lab walks you through the steps to validate a migration prior to running it
 
 Estimated Lab Time: 20 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Validate Migration](videohub:1_pl8uedpr)
+
 ### Objectives
 
 In this lab, you will:

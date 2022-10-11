@@ -6,6 +6,9 @@ This lab will walk you through making changes in the code and propagating this c
 
 Estimated Time: 20 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Making and Monitoring Application Changes](videohub:1_jiw2c0va)
+
 ### Objectives
 
 * Make Application Changes
