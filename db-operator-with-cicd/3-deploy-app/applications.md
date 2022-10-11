@@ -88,9 +88,41 @@ Watch the video below for a quick walk-through of the lab.
 
     ```bash
     <copy>
-    csruntimectl java set openjdk-11.0.16
+    csruntimectl java set openjdk-11.0.16.1
     </copy>
     ```
+
+    > **Note:** The JDK version that is supported by Cloud Shell is subject to change. If you encounter an error, follow the troubleshooting guide below.
+
+    ## Troubleshooting
+
+    ```bash
+    Invalid java version alias: openjdk-11.0.16.1. Run 'csruntimectl java list' for the available version aliases.
+    ```
+    If you encounter the following error above when setting the runtime version of Java using `csruntimectl`, run the following command below as advised by the error to view the available versions supported.
+    
+    ```bash
+    <copy>
+    csruntimectl java list
+    </copy>
+    ```
+
+    ```bash
+    labuserexa@cloudshell:~ (us-phoenix-1)$ csruntimectl java list
+    graalvmeejdk-17.0.4.1                                         /usr/lib64/graalvm/graalvm22-ee-java17
+    openjdk-11.0.16.1                        /usr/lib/jvm/java-11-openjdk-11.0.16.1.1-1.0.1.el7_9.x86_64
+    * openjdk-1.8.0.345                       /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.345.b01-1.el7_9.x86_64
+    ```
+
+    Finally, copy the proper version for `JDK 11` and run the command again with the proper version.
+    
+    ```bash
+    <copy>
+    csruntimectl java set openjdk-11.<version>
+    </copy>
+    ```
+
+
 
 ## Task 2: Build and Deploy the applications
 
