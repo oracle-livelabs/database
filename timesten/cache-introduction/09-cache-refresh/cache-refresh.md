@@ -2,34 +2,54 @@
 
 ## Introduction
 
-With READONLY cache groups, the Oracle database is the master of the data. The data cached in TimesTen is a read-only copy. Any changes (insert/update/delete) made to the data in Oracle are automatically captured and refreshed to the cached tables in TimesTen based on the defined refresh interval (2 seconds in these examples).
+With READONLY cache groups, the Oracle database is authoritative for the cached data. The corresponding data in TimesTen is a read-only copy. TimesTen automatically captures any changes (insert/update/delete) made to the data in Oracle. TimesTen refreshes these changes to the cached tables based on the defined refresh interval (2 seconds in these examples).
 
-In this lab you will execute some DML statements on the tables in Oracle and observe those changes being automatically propagated to the cache tables in TimesTen.
+In this lab you execute DML statements on the tables in Oracle and observe those changes being automatically propagated to the corresponding tables cached in TimesTen.
 
-Estimated Time: **5 minutes**
+**Estimated Lab Time:** 10 minutes
 
 ### Objectives
 
-- Modify data in the Oracle database
-- Verify that the changes are refreshed to the cache
+- Modify data in the Oracle database.
+- Verify that the changes are refreshed to the cache.
 
 ### Prerequisites
 
-This lab assumes that you have:
+This lab assumes that you:
 
-- Completed all the previous labs in this workshop, in sequence.
+- Have completed all the previous labs in this workshop, in sequence.
+- Have an open terminal session in the workshop compute instance, either via NoVNC or SSH, and that session is logged into the TimesTen host (tthost1).
 
-## Task 1: Connect to the environment
+## Task 1: Open a second terminal session
 
 **IMPORTANT:** This lab requires _two_ terminal sessions to the TimesTen host (tthost1).
 
-If you do not already have an active terminal session, connect to the OCI compute instance and open a terminal session, as the user **oracle**. In that terminal session, connect to the TimesTen host (tthost1) using ssh. This session, or your existing session if there was one, will be referred to as the **primary** session.
+Your existing terminal session to tthost1 will be referred to as the **primary** session.
 
-Connect to the OCI compute instance again (if required) and open a second terminal session. In this second session, connect to the TimesTen host (tthost1) using ssh. This session will be referred to as the **secondary** session.
+Open a _second_ terminal session, as the user **oracle**, in the workshop compute instance, either via NoVNC or SSH. In that terminal session, connect to the TimesTen host (tthost1) using ssh. This session will be referred to as the **secondary** session.
+
+### Opening a new terminal session using SSH
+
+ If you are using **SSH**, then you can just create a second SSH session, as the **oracle** user, to the workshop compute instance and then in that session **ssh** into **tthost1**.
+ 
+### Opening a new terminal session using the NoVNC desktop
+
+ If you are using the **NoVNC desktop**, then there are several ways to open an additional terminal window:
+ 
+ - Click on **Activities** in the linux Menu bar, _right_ click on the **Terminal** icon in the list that appears and choose **New Window**.
+ 
+ - If you already have at least one terminal window open, click on the **Terminal** item in the Linux menu bar and choose **New window**.
+
+ - _Double_ click the **Terminal** icon on the linux desktop.  
+
+ - Once you have a new window, in that window **ssh** into **tthost1**.
+
+**IMPORTANT:** When you open a new terminal window it often exactly overlays the exitsing terminal window, and it may appear that a new window has not been opened. If you move the visible terminal window you will find that a new window has indeed been created and that you now have two terminal windows.
+ 
 
 ## Task 2: Verify the refresh of INSERT operations
 
-In your _primary_ SSH session, which is currently logged into the TimesTen host, connect to the TimesTen cache as the OE schema user"
+1. In your _primary_ session connect to the TimesTen cache as the OE schema user:
 
 ```
 <copy>
@@ -47,7 +67,7 @@ Connection successful: DSN=sampledb;UID=oe;DataStore=/tt/db/sampledb;DatabaseCha
 Command>
 ```
 
-In your _secondary_ SSH session, which is already logged into the TimesTen host (tthost1), connect to the Oracle database as the OE schema user:
+2. In your _secondary_ session, connect to the Oracle database as the OE schema user:
 
 ```
 <copy>
@@ -70,7 +90,7 @@ Version 19.3.0.0.0
 SQL>
 ```
 
-In your _primary_ SSH session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
+3. In your _primary_ session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
 
 ```
 <copy>
@@ -84,7 +104,7 @@ SELECT * FROM promotions ORDER BY promo_id;
 2 rows found.
 ```
 
-In your _secondary_ SSH session (**sqlplus**), check the rows in the OE.PROMOTIONS table in Oracle, then insert a new row and commit:
+4. In your _secondary_ session (**sqlplus**), check the rows in the OE.PROMOTIONS table in Oracle, then insert a new row and commit:
 
 ```
 <copy>
@@ -133,7 +153,7 @@ SELECT * FROM promotions ORDER BY promo_id;
 	 3 christmas sale
 ```
 
-Wait for 2 seconds (the cache refresh interval) and then in your _primary_ SSH session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
+5. Wait for 2 seconds (the cache refresh interval) and then in your _primary_ session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
 
 ```
 <copy>
@@ -152,7 +172,7 @@ The inserted row has been captured and propagated to the cached table in TimesTe
 
 ## Task 3: Verify the refresh of UPDATE operations
 
-In your _secondary_ SSH session (**sqlplus**), update a row in the OE.PROMOTIONS table in Oracle and commit:
+1. In your _secondary_ session (**sqlplus**), update a row in the OE.PROMOTIONS table in Oracle and commit:
 
 ```
 <copy>
@@ -174,21 +194,7 @@ commit;
 Commit complete.
 ```
 
-```
-<copy>
-SELECT * FROM promotions ORDER BY promo_id;
-</copy>
-```
-
-```
-  PROMO_ID PROMO_NAME
----------- --------------------
-	 1 everyday low price
-	 2 blowout sale
-	 3 easter sale
-```
-
-Wait for 2 seconds (the cache refresh interval) and then in your _primary_ SSH session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
+2. Wait for 2 seconds (the cache refresh interval) and then in your _primary_ session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
 
 ```
 <copy>
@@ -207,7 +213,7 @@ The update to the row has been captured and propagated to the cached table in Ti
 
 ## Task 4: Verify the refresh of DELETE operations
 
-In your _secondary_ SSH session (**sqlplus**), delete a row in the OE.PROMOTIONS table in Oracle and commit:
+1. In your _secondary_ session (**sqlplus**), delete a row in the OE.PROMOTIONS table in Oracle and commit:
 
 ```
 <copy>
@@ -242,7 +248,7 @@ SELECT * FROM promotions ORDER BY promo_id;
 	 2 blowout sale
 ```
 
-Wait for 2 seconds (the cache refresh interval) and then in your _primary_ SSH session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
+2. Wait for 2 seconds (the cache refresh interval) and then in your _primary_ session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
 
 ```
 <copy>
@@ -258,7 +264,7 @@ SELECT * FROM promotions ORDER BY promo_id;
 
 The row deletion has been captured and propagated to the cached table in TimesTen.
 
-In your _secondary_ SSH session (**sqlplus**), exit from SQL*Plus, disconnect from the TimesTen host and close the terminal session:
+3. In your _secondary_ session (**sqlplus**), exit from SQL*Plus, disconnect from the TimesTen host and close the terminal session:
 
 ```
 <copy>
@@ -283,7 +289,7 @@ exit
 </copy>
 ```
 
-In your _primary_ SSH session (**ttIsql**), exit from ttIsql:
+4. In your _primary_ session (**ttIsql**), exit from ttIsql:
 
 ```
 <copy>
@@ -296,7 +302,9 @@ Disconnecting...
 Done.
 ```
 
-You can now *proceed to the next lab*. Keep your primary terminal session open for use in the next lab.
+You can now **proceed to the next lab**. 
+
+Keep your primary session open for use in the next lab.
 
 ## Acknowledgements
 
