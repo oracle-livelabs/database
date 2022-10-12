@@ -6,6 +6,9 @@ This lab walks you through the steps to register a database for use with DMS. Re
 
 Estimated Lab Time: 20 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Create Registered Databases](videohub:1_51ktrlb6)
+
 ### Objectives
 
 In this lab, you will:
@@ -73,7 +76,7 @@ For this task you need the following info from previous steps:
 
 5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
     - Database Administrator Username: **system**
-    - Database Administrator Password: Select **admin_password** value from Terraform output
+    - Database Administrator Password: Select **Admin Password** value from Terraform output
     - SSH Database Server Hostname: Select **DBCS Public IP** value from Terraform output
     - SSH Private Key: Select private key file saved earlier
     - SSH Username: **opc**
