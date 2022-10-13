@@ -7,7 +7,7 @@ Estimated Lab Time:  15 minutes
 
 Watch the video below for a quick walk through of the lab.
 
-[Hybrid Partitioning](videohub:1_26o376wu)
+[Hybrid Partitioning](videohub:1_2pkskut1)
 
 ### About Partitioning
 
