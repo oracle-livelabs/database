@@ -14,6 +14,9 @@ The lab is optional if you have completed all the other labs.
 
 Estimated Time: 20 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Sentiment Analysis](videohub:1_s4lnxfw5)
+
 ### Objectives
 
 In this lab, you will:
