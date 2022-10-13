@@ -6,6 +6,9 @@ This lab walks you through the steps to provision an Autonomous Database on Orac
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Provision an Autonomous Database](videohub:1_6vuxgeyf)
+
 ### Objectives
 
 In this lab, you will:

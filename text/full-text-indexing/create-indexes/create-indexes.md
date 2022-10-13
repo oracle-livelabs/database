@@ -8,6 +8,9 @@ We will then briefly explore information about the index before moving on to que
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Create an Oracle Text index](videohub:1_cimsoxwz)
+
 ### Objectives
 
 In this lab, you will:
