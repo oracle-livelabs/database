@@ -30,11 +30,11 @@
             "filename": "../../sql-macros/sql-macros.md"
         },
         {
-            "title": "Lab: Terminate ADB & Bucket",
+            "title": "Clean Up",
             "filename": "../../cleanup/terminate-adb-bucket.md"
         },
         {
-            "title": "Lab: CloudWorld Support Lab",
+            "title": "Oracle CloudWorld 2022 - Get Help",
             "filename": "https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
         }
     ]
