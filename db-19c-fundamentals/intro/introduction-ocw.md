@@ -2,7 +2,7 @@
 
 This workshop contains several hands-on labs that showcase some of the latest enhancements in the long term Oracle Database support release, 19c. This is not a complete list of new features. Our mission is not just to manage your data but help you get value out of your data. For the world’s most demanding enterprise applications and workloads, Oracle Database 19c is a converged database that delivers a high performance, highly available, secure and scalable data management platform for cloud as well as on-premises environments.
 
-    ![Welcome to this lab](https://www.youtube.com/watch?v=aF89i0m6zFU)
+[](youtube:aF89i0m6zFU)
 
 ## About Oracle Database 19c
 

@@ -39,24 +39,24 @@ In this lab, you will:
 
 	![Reset DB Password](./images/db-password-reset.png)
 
-3. Next, select the JSON tile on the left hand side of the screen.
+4. Next, select the JSON tile on the left hand side of the screen.
 
 	![JSON Database Actions](./images/db-actions-json.png)
 
 
-4. To create a collection, click **Create Collection**.
+5. To create a collection, click **Create Collection**.
 
 	![Create Collection](./images/create-collection.png)
 
-5. Provide a name for the collection in the field, we'll call it  **products** and click **Create**. MAKE SURE you check the **MongoDB Compatible** box. Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use PRODUCTS or Products.
+6. Provide a name for the collection in the field, we'll call it  **products** and click **Create**. MAKE SURE you check the **MongoDB Compatible** box. Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use PRODUCTS or Products.
 
 	![New collection: products](./images/new-products.png)
 
-6. A notification pops up informing you the `products` collections is created.
+7. A notification pops up informing you the `products` collections is created.
 
 	![New collection notification](./images/popup.png)
 
-6. Click the refresh button to verify the `products` collection is created.
+8. Click the refresh button to verify the `products` collection is created.
 
 	![Refresh button](./images/refreshed.png)
 
