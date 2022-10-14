@@ -239,7 +239,7 @@ CREATE TABLE RockBuster_locations (
 );
     </copy>
     ```
-2. Lets add some data to our table.
+2. Lets add some data to our table. We will use the **Run Script button** for the remainder of this lab. Its located in the Database Actions console as shown in the gif below. (F5) works as well
 
     ```
     <copy>
@@ -249,36 +249,37 @@ INSERT INTO ROCKBUSTER_LOCATIONS VALUES ( 3, 2025550139, 'New York', 10003);
 INSERT INTO ROCKBUSTER_LOCATIONS VALUES ( 4, 2025550152, 'New York', 10004);
     </copy>
     ```
+    ![run with the script button](./images/run-script.gif)
 
-3. Here we will go ahead and add a constrain and create an index on the locations by state. 
+3. Here we will go ahead and add a constraint and create an index on the locations by state. Lets use the **Run script button** as shown above. (F5) works as well.
 
     ```
     <copy>
-    ALTER TABLE ROCKBUSTER_LOCATIONS add constraint location_pk PRIMARY KEY (store_id);
-create index location_index on RockBuster_locations(state);
+    ALTER TABLE ROCKBUSTER_LOCATIONS ADD CONSTRAINT location_pk PRIMARY KEY (store_id);
+CREATE index location_index ON RockBuster_locations(state);
     </copy>
     ```
 
-4. Now that we have some test data lets move our table. Run the select statement after the alter table move. Notice how our Indexes are now Unstable. This is because the index is now referencing the wrong location.
+4. Now that we have some test data lets move our table. Run the select statement after the alter table move. Notice how our Indexes are now Unstable. This is because the index is now referencing the wrong location. Lets use the **Run Script button** again 
 
     ```
     <copy>
     ALTER TABLE RockBuster_locations MOVE;
-SELECT index_name, status FROM user_indexes where index_name = 'LOCATION_INDEX' OR index_name = 'LOCATION_PK';
+SELECT index_name, status FROM user_indexes WHERE index_name = 'LOCATION_INDEX' OR index_name = 'LOCATION_PK';
     </copy>
     ```
 
-5. We will go ahead now and rebuild our indexes. run the command below to rebuild both.
+5. We will go ahead now and rebuild our indexes. Use the Run Script button and run the commands below to rebuild both.
 
     ```
     <copy>
-    alter index location_index REBUILD ONLINE;
-alter index location_pk REBUILD ONLINE;
-SELECT index_name, status FROM user_indexes where index_name = 'LOCATION_INDEX' OR index_name = 'LOCATION_PK';
+    ALTER index location_index REBUILD ONLINE;
+ALTER index location_pk REBUILD ONLINE;
+SELECT index_name, status FROM user_indexes WHERE index_name = 'LOCATION_INDEX' OR index_name = 'LOCATION_PK';
     </copy>
     ```
 
-6. Now we will move our table using the ONLINE keyword. Not only does this move the table but this automatically maintains the indexes.
+6. Now we will move our table using the ONLINE keyword. Not only does this move the table but this automatically maintains the indexes. Use the Run Script button or press (F5)
 
     ```
    <copy>
@@ -288,24 +289,20 @@ SELECT index_name, status FROM user_indexes where index_name = 'LOCATION_INDEX' 
     ```
 
 
-7. We also have the ability to change table compression and other storage parameters ann online operation. We can first see that our Rockbuster table is uncompressed. 
+7. We also have the ability to change table compression and other storage parameters as an online operation. We can first see that our Rockbuster table is uncompressed. 
 
     ```
     <copy>
-    SELECT compression
-    FROM   user_tables
-    WHERE  table_name = 'ROCKBUSTER_LOCATIONS';
+    SELECT compression FROM user_tables WHERE table_name = 'ROCKBUSTER_LOCATIONS';
     </copy>
     ```
 
- Now we can move our table with compression.
+ Now we can move our table with compression. Use the Run Script button or press (F5) to execute the commands.
 
    ```
    <copy>
     ALTER TABLE RockBuster_locations MOVE ONLINE COMPRESS;
-    SELECT compression
-    FROM   user_tables
-    WHERE  table_name = 'ROCKBUSTER_LOCATIONS';
+    SELECT compression FROM user_tables WHERE table_name = 'ROCKBUSTER_LOCATIONS';
     </copy>
     ```
  To recap, you now have the ability to perform a table move online, as well as individual partitions and sub-partitions without the need for an outage to support the reorganization of tables. This means the table indexes will be maintained for you as well. Online table move also has the ability to filter and compress data as part of a move. For more on this see the Learn More section

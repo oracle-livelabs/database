@@ -31,24 +31,32 @@ In this lab, you will:
 
 	![Database Action](./images/database-actions.png)
 
-2. Next, select the JSON tile on the left hand side of the screen.
+2. If you're not automatically logged in, sign in as ADMIN. Your password will be the password you specified when you created the database.
+
+	![Database Actions Login](./images/db-actions-login.png)
+
+3. (Optional database password reset) If you need to reset your database password its very simple to do so. Click on **More actions** from the OCI console screen and select **Administrator Password**. Fill in your new password and select **Change**. After you select **Change**, follow from step 1 above.
+
+	![Reset DB Password](./images/db-password-reset.png)
+
+4. Next, select the JSON tile on the left hand side of the screen.
 
 	![JSON Database Actions](./images/db-actions-json.png)
 
 
-3. To create a collection, click **Create Collection**.
+5. To create a collection, click **Create Collection**.
 
 	![Create Collection](./images/create-collection.png)
 
-4. Provide a name for the collection in the field, we'll call it  **products** and click **Create**. MAKE SURE you check the **MongoDB Compatible** box. Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use PRODUCTS or Products.
+6. Provide a name for the collection in the field, we'll call it  **products** and click **Create**. MAKE SURE you check the **MongoDB Compatible** box. Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use PRODUCTS or Products.
 
 	![New collection: products](./images/new-products.png)
 
-5. A notification pops up informing you the `products` collections is created.
+7. A notification pops up informing you the `products` collections is created.
 
 	![New collection notification](./images/popup.png)
 
-6. Click the refresh button to verify the `products` collection is created.
+8. Click the refresh button to verify the `products` collection is created.
 
 	![Refresh button](./images/refreshed.png)
 
@@ -235,6 +243,8 @@ More generally, constraints can be used to check the data being entered for vari
 1.  Let's add a check - or 'constraint' to check our data entry. We will do this using SQL Developer Web. Click the navigation menu on the top left and select **SQL** under Development.
 
 	![SQL navigation](./images/nav.png)
+
+> **Note**: Ignore the warning message about being logged in as ADMIN. This is a demo, not a best practice.
 
 2. Check constraint to make sure every product has a title of string data type and price >=0. 
 

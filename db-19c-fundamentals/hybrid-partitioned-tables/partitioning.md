@@ -193,12 +193,20 @@ END;
     ```
    ![Export Data](./images/export-data.png " ")
 
-4.  We can check our object storage bucket with the following. We will need our file\_uri\_list we used above **without** the file name. Something like the following 
+4.  We can check our object storage bucket with the following. We will need our file\_uri\_list we used above **without** the file name. We can copy the uri from above and **take off the sales_old.dmp**.
 
- 
-    >SELECT object\_name FROM DBMS\_CLOUD.LIST\_OBJECTS('OBJECT\_STORE\_CRED','https:/objectstorage.**us-phoenix-1**.oraclecloud.com/n/**mynamespace**/b/**ExternalPartition**/o/');
+    ```
+    <copy>
+SELECT object_name FROM DBMS_CLOUD.LIST_OBJECTS('OBJECT_STORE_CRED','LINK FROM ABOVE WITHOUT SALES_OLD.DMP');
+
+    </copy>
+    ```
+
+    > **Note**: If you get an error here double and triple check the region, namespace, and bucket name. You can take the https:// **link from the step above** (Step 3) and **remove** the sales_old.dmp. We want the link to end with the .../o/' See picture below for an example
 
     ![Display objects in storage](./images/objects.png " ")
+
+  
 5. Last, lets drop the internal Sales\_old table we created above so it only exists as a external file in Object Storage.
 
     ```
@@ -225,7 +233,9 @@ Hybrid Partitioned Tables support many partition level operations, including:
 -	Full partition wise refreshing on external partitions
 -   DML trigger operations on a hybrid partitioned table on internal partitions
 
-1. First we will create our Hybrid Partitioned table. **Make sure you update the external location to YOUR bucket**. Your ''URI'' will go the middle of the 2 sets of single quotes. See the picture below the code box if needed. You will use the location of our Sales_old.dmp file that you made note of earlier as the external location. 
+1. First we will create our Hybrid Partitioned table. **Make sure you update the external location to YOUR bucket**. Your ''URI'' will go the middle of the 2 sets of single quotes. See the picture below the code box if needed. **You will use the location of our Sales_old.dmp** file that you made note of earlier as the external location. 
+
+  ![Create Hybrid Table](./images/updatinguri.gif " ")
 
 
     ```
@@ -256,7 +266,7 @@ Hybrid Partitioned Tables support many partition level operations, including:
     </copy>
     ```
 
-     ![Create Hybrid Table](./images/make-hybrid-table.png " ")
+     
 
 2. Now we're going to add data into our partitions 2019, 2020 and 2021.
 
@@ -307,7 +317,10 @@ Hybrid Partitioned Tables support many partition level operations, including:
       ![Read Only](./images/read-only.png " ")
 
 
-4. Now we will export our sales_2019 partition data to object storage using DBMS\_CLOUD.EXPORT\_DATA functionality like we did at the beginning of this lab. **Make sure to update the URI with your link**. Leave your URI in single quotes. Like this 'yourURI'. **Lets call this file sales2019.dmp**
+4. Now we will export our sales_2019 partition data to object storage using DBMS\_CLOUD.EXPORT\_DATA functionality like we did at the beginning of this lab. **Make sure to update the URI with your link**. Leave your URI in single quotes. Like this 'yourURI'. **Lets call this file sales2019.dmp**. See photo below for an example 
+
+    > **Note**: Troubleshooting tip - If you're having a problem with the URI, this is the same URI we have been using in the previous steps, **double check** the file name is now sales2019.dmp, you can locate the file name at the end of the URI
+
 
     ```
     <copy>
@@ -321,6 +334,8 @@ Hybrid Partitioned Tables support many partition level operations, including:
 END;
     </copy>
     ```
+
+  ![Update the URI by the file_uri_list](./images/sales2019.png " ")
 
 5. In order to use the EXCHANGE statement, we will need to build an external table to do the exchange with. That statement looks like the following below. **Make sure to update the URI with your link**. Leave your URI in single quotes. Like this 'yourURI'. See picture below the code box if needed. We will use the file sales2019.dmp we created above.
 
