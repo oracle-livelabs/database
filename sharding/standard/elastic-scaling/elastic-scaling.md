@@ -29,19 +29,7 @@ This lab assumes you have:
 
 ## Task 1: Add the New Shard
 
-1. Connect to the catalog database host. Switch to oracle user.
-
-    ```
-    $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxx</copy>
-    Last login: Tue Dec  1 01:01:30 2020 from 202.45.129.206
-    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
-
-    [opc@cata ~]$ <copy>sudo su - oracle</copy>
-    Last login: Tue Dec  1 01:01:32 GMT 2020 on pts/0
-    [oracle@cata ~]$
-    ```
-
-
+1. Switch to your browser's remote desktop session connected to host cata as user oracle, open a Terminal session
 
 2. Switch to the GSM environment.
 
@@ -358,14 +346,14 @@ This lab assumes you have:
     [oracle@cata ~]$ <copy>sqlplus / as sysdba</copy>
 
     SQL*Plus: Release 19.0.0.0.0 - Production on Tue Dec 1 03:27:17 2020
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
 
     Copyright (c) 1982, 2020, Oracle.  All rights reserved.
 
 
     Connected to:
     Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
 
     SQL> <copy>alter session set container=catapdb;</copy>
 
@@ -393,7 +381,7 @@ This lab assumes you have:
     ```
     SQL> <copy>exit</copy>
     Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
     [oracle@cata ~]$
     ```
 
@@ -439,21 +427,12 @@ This lab assumes you have:
 
 
 
-8. Open another terminal, connect to the catalog host, switch to oracle user. Change the directory to `sdb_demo_app`.
+8. Open another Terminal session on host cata. Change the directory to `sdb_demo_app`.
 
     ```
-    $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxx</copy>
-    Last login: Mon Nov 30 06:07:40 2020 from 202.45.129.206
-    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
-
-    [opc@cata ~]$ <copy>sudo su - oracle</copy>
-    Last login: Mon Nov 30 06:08:03 GMT 2020 on pts/0
-
     [oracle@cata ~]$ <copy>cd ~/sdb_demo_app</copy>
     [oracle@cata sdb_demo_app]$
     ```
-
-
 
 9. Start the monitoring tool via the following command using the sdbdemo.properties parameter file. (Note: due to the resource limit, start monitor may impact the application performance).
 
@@ -483,4 +462,5 @@ This lab assumes you have:
 
 ## Acknowledgements
 * **Author** - Minqiao Wang, DB Product Management, Dec 2020
-* **Last Updated By/Date** - Minqiao Wang, Aug 2021
+* **Contributors** - Shefali Bhargava, DB Sharding Product Management
+* **Last Updated By/Date** - Shefali Bhargava, DB Sharding Product Management, October 2022
