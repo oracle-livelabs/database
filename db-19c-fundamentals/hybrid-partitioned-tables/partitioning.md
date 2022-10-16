@@ -58,7 +58,7 @@ First we will create an empty Object Storage bucket as our external partition.
 
     In order to use the Bucket we just created, we need to create the proper credentials.
     
-5.  Click the user profile icon in the top right of the screen.
+5.  Click the user profile icon in the top right of the screen and select your full username (the first option under the profile drop down).
 
   ![Locate account](./images/locate-account.png) 
 
@@ -166,7 +166,7 @@ First let's create some external files.  The external partitions will be stored 
     INSERT INTO SALES_OLD VALUES (1001, 111, '26-JUL-2010', 1, 01, 50, 50);
     </copy>
     ```
-3. Now we will export our data to object storage. In order to do this we need to **locate some information**. Our URI variable will be our link to object storage and will look something like this https://objectstorage.**region**.oraclecloud.com/n/**namespace-string**/b/**bucket**/o/yourFileName.dmp. What we need to locate is the bold above. The region, our namespace, and our bucket name. Once we locate this information, lets save our https link on a text file or somewhere it can be easily accessed for the upcoming steps.
+3. Now we will export our data to object storage. In order to do this we need to **locate some information**. Our URI variable will be our link to object storage and will look something like this https://objectstorage.**region**.oraclecloud.com/n/**namespace-string**/b/**bucket**/o/yourFileName.dmp. What we need to locate is the bold above. The region, our namespace, and our bucket name. Once we locate this information, **lets save our https link on a text file or somewhere it can be easily accessed for the upcoming steps.**
 
     You can find your region and bucket name by using the Oracle Cloud Console and locating your bucket. If you need a re-fresher on how to find object storage, use the task 1 above or from the OCI console got to -> Hamburger menu -> Storage -> Object Storage & Archive Storage.
     ![locating the region](./images/region.png " ")
@@ -174,7 +174,7 @@ First let's create some external files.  The external partitions will be stored 
     To find our namespace string **click the user profile icon in the top right hand corner** of the screen and select the tenancy name. The Object storage namespace will be displayed. See picture below for reference.
    ![locating the namepsace](./images/namespace.png " ")
 
-    Now **you need to update your file uri list** to look something like the code snippet below. Notice we will call our external dump file 'sales_old.dmp'
+    Now **you need to update your file uri list** to look something like the code snippet below. Notice we will call our external dump file 'sales_old.dmp'. 
   
 
 
@@ -202,7 +202,7 @@ SELECT object_name FROM DBMS_CLOUD.LIST_OBJECTS('OBJECT_STORE_CRED','LINK FROM A
     </copy>
     ```
 
-    > **Note**: If you get an error here double and triple check the region, namespace, and bucket name. You can take the https:// **link from the step above** (Step 3) and **remove** the sales_old.dmp. We want the link to end with the .../o/' See picture below for an example
+    > **Note**: If you get an error here, double and triple check the region, namespace, and bucket name. You want to use the URI that you saved earlier (step 3 above) and **remove** the sales_old.dmp. We want the link to end with the .../o/' See picture below for an example
 
     ![Display objects in storage](./images/objects.png " ")
 

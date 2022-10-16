@@ -90,7 +90,7 @@ In this lab, you will:
     - **Choose database version** - Select database version 19c from the available versions.
     - **OCPU count** - Number of CPUs for your service. For this lab, specify **1 CPU**. If you choose an Always Free database, it comes with 1 CPU.
     - **Storage (TB)** - Select your storage capacity in terabytes. For this lab, specify **1 TB** of storage. Or, if you choose an Always Free database, it comes with 20 GB of storage.
-    - **Auto Scaling** - For this lab, keep auto scaling enabled, to enable the system to automatically use up to three times more CPU and IO resources to meet workload demand.
+    - **Auto Scaling** - For always free accounts (this lab), auto scaling will be disabled.
     - **New Database Preview** - If a checkbox is available to preview a new database version, do NOT select it.
 
     > **Note:** You cannot scale up/down an Always Free autonomous database.

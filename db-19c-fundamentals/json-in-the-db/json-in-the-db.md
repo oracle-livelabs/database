@@ -97,7 +97,7 @@ In this lab, you will:
 
 5. Let's repeat this with the following documents:
 
-	Click New JSON Document button, copy and run the following JSON objects one by one, paste it in the worksheet and click **Create**.
+	Click New JSON Document button, copy the following JSON objects one by one, paste it in the worksheet and click **Create**.
 
     ```
 	<copy>
@@ -282,7 +282,7 @@ More generally, constraints can be used to check the data being entered for vari
 	![create a not-allowed item](./images/tester.png)
 	![constraint error message](./images/error2.png)
 
-5. The following document now satisfies all the constraints: the "id" is a unique number, the title is a string, and the price is a positive number.
+5. The following document now satisfies all the constraints: the "id" is a unique number, the title is a string, and the price is a positive number. Lets add the document.
 
 	```
 	<copy>
@@ -303,7 +303,7 @@ More generally, constraints can be used to check the data being entered for vari
 	}
 	</copy>
 	```
-
+	![Add the top gun data](./images/add-top-gun.png)
 ## Task 5: Using SQL on JSON 
 
 So far, we've focused mostly on the document store API where we dealt with JSON data as a collection of documents. But there is another way to interact with your JSON data: SQL. SQL is a very mature query language. Oracle added new operators to work with JSON data (we created an open standard called SQL/JSON which was adopted by the ISO SQL standard). A key characteristic of a JSON collection (like 'products') is that it is backed by a table - a table then gets auto-created when you create a collection so that you do not have to specify columns and data types. In the following we show you how you can use SQL to work with the JSON data in a collection.
