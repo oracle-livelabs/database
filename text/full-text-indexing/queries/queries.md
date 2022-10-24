@@ -6,6 +6,9 @@ This lab will use the SQL Workshop in Database Actions from the Autonomous Trans
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Run Queries](videohub:1_j5xwhbsf)
+
 ### Objectives
 
 In this lab, you will:
