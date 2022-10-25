@@ -9,6 +9,8 @@ Watch the video below for a walk through of the In-Memory Queries lab:
 
 [In-Memory Queries](videohub:1_ohs9hpw0)
 
+*Estimated Lab Time:* 15 Minutes.
+
 ### Objectives
 
 -   Perform various queries on the In-Memory Column Store
