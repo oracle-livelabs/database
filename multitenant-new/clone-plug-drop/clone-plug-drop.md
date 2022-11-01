@@ -7,6 +7,9 @@ Estimated Time: 1 hour
 
 [](youtube:kzTQGs75IjA)
 
+Watch the video below for a quick walk-through of the lab.
+[Clone, plug and drop](videohub:1_19adr34a)
+
 ### Prerequisites
 
 This lab assumes you have:

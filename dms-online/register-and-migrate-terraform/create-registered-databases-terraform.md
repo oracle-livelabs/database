@@ -6,6 +6,9 @@ This lab walks you through the steps to register a database for use with DMS. Re
 
 Estimated Lab Time: 20 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Create Registered Databases](videohub:1_51ktrlb6)
+
 ### Objectives
 
 In this lab, you will:

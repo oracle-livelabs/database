@@ -368,7 +368,7 @@ In this workshop we choose to co-locate the shard director software on the same 
     SQL> <copy>connect / as sysdba</copy>
     Connected.
 
-    SQL> archive log list
+    SQL> <copy>archive log list</copy>
     Database log mode	       No Archive Mode
     Automatic archival	       Disabled
     Archive destination	       USE_DB_RECOVERY_FILE_DEST
@@ -898,7 +898,7 @@ The following steps need to be done in all the shard databases. We only provide 
     DB Unique Name: shd1_shdpdb1
     The operation completed successfully
 
-    GDSCTL> <copy>add shard -connect shd2:1521/shdpdb2.livelabs.oraclevcn.com -pwd Ora_DB4U -shardgroup shardgroup_primary -cdb shd2</copy>
+    GDSCTL> <copy>add shard -connect shd2:1521/shdpdb2 -pwd Ora_DB4U -shardgroup shardgroup_primary -cdb shd2</copy>
     INFO: Data Guard shard validation requested.
     INFO: Database role is PRIMARY.
     INFO: Database name is SHD2.

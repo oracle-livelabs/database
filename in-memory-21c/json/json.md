@@ -9,6 +9,8 @@ Watch the video below for a walk through of the In-Memory JSON Lab:
 
 [JSON](videohub:1_5rf7ugsx)
 
+*Estimated Lab Time:* 15 Minutes.
+
 ### Objectives
 
 -   Learn how to JSON can be used with Database In-Memory on Oracle Database
