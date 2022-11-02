@@ -9,6 +9,8 @@ Watch the video below for a walk through of the In-Memory Queries lab:
 
 [In-Memory Queries](videohub:1_ohs9hpw0)
 
+*Estimated Lab Time:* 15 Minutes.
+
 ### Objectives
 
 -   Perform various queries on the In-Memory Column Store
@@ -623,7 +625,7 @@ SQL>
 
     Note that we are now back to an inmemory query. This time we included the session statistics for the query. Take note of two key statistics. The first is "IM scan CUs memcompress for query low". This tells us how many IMCUs the data is populated into. The second important statistic is "IM scan CUs pruned". Notice that this number is almost as large as the total number of IMCUs. This means that Database In-Memory was able to avoid scanning almost all of the data. This is because at population time In-Memory storage indexes are created for each set of column values in each IMCU with the MIN and MAX values. During the scan these MIN and MAX values can be compared with filter predicates and can possibly result in not having to scan the actual columnar data thereby improving performance. After all, the fastest way to do something is to not do it at all.  
 
-7. Analytical queries typically have more than one WHERE clause predicate. What happens when there are multiple single column predicates on a table? Traditionally you would create a multi-column index. Can th IM column store compete with that?  
+7. Analytical queries typically have more than one WHERE clause predicate. What happens when there are multiple single column predicates on a table? Traditionally you would create a multi-column index. Can the IM column store compete with that?  
 
     Let’s change our query to look for a specific line item in an order and monitor the session statistics:
 
@@ -874,7 +876,7 @@ SQL>
     SQL>
     ```  
 
-    Even with the all of these complex predicates the optimizer chose an in-memory query, showing that for large scan operations it is the most efficient approach.
+    Even with all of these complex predicates the optimizer chose an in-memory query, showing that for large scan operations it is the most efficient approach.
 
 9. Exit lab
 

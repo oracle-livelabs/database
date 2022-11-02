@@ -36,9 +36,9 @@ This lab assumes you have:
 
 2. Make sure you are in the shd3 database environment by running *`. .set-env-db.sh`* and selecting the appropriate shard from the list.
 
-    ```
-    [oracle@cata ~]$ <copy>. .set-env-db.sh</copy>
-    ```
+        ```
+        [oracle@cata ~]$ <copy>. .set-env-db.sh</copy>
+        ```
 
 3. Connect to the database as sysdba.
 

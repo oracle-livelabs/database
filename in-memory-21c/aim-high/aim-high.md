@@ -8,6 +8,8 @@ Watch the video below to get an overview of Automatic In-Memory:
 Watch the video below for a quick walk-through of this lab.
 [Automatic In-Memory High](videohub:1_0rzwly4i)
 
+*Estimated Lab Time:* 15 Minutes.
+
 ### Objectives
 
 -   Learn how Automatic In-Memory (AIM) level HIGH works
