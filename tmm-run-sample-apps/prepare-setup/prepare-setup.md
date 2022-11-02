@@ -16,7 +16,7 @@ This lab assumes you have:
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
 1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
 
-    - [sample-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/clKCvIhItftqqFoXdipFq5oukh0jVuwcKEMHVdqOPXN7oUqaoGwPZsimi5pgpfpR/n/natdsecurity/b/stack/o/sample-mkplc-freetier.zip)
+    - [tmm-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/PszwMj5X-ILvE5_5yNipJvl2qTiqDxcFEjC219McuqtGmycd2vAQhlfaXTX7gfuY/n/natdsecurity/b/stack/o/tmm-mkplc-freetier.zip)
 
 2.  Save in your downloads folder.
 
@@ -31,7 +31,7 @@ This workshop requires a certain number of ports to be available, a requirement 
 | Ingress        | All            | 0.0.0.0/0   | 22               | TCP      | SSH                                   |
 | Ingress        | All            | 0.0.0.0/0   | 80               | TCP      | Remote Desktop using noVNC            |
 | Egress         | All            | N/A         | 80               | TCP      | Outbound HTTP access                  |
-| Egress         | All            | N/A         | 6080              | TCP      | noVNC Remote Desktop                |
+| Egress         | All            | N/A         | 443              | TCP      | Outbound HTTPS access                 |
 {: title="List of Required Network Security Rules"}
 
 <!-- **Notes**: This next table is for reference and should be adapted for the workshop. If optional rules are needed as shown in the example below, then uncomment it and add those optional rules. The first entry is just for illustration and may not fit your workshop -->
@@ -68,4 +68,4 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
 * **Contributors** - Meghana Banka
-* **Last Updated By/Date** - Sylaja Kannan, October 2022
+* **Last Updated By/Date** - Rene Fontcha, November 2022
