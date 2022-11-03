@@ -9,7 +9,7 @@
         },  
         {
             "title": "Get started",
-            "filename": "../../access-compute/access-compute.md"
+            "filename": "https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/access-compute/access-compute.md"
         },
         {
             "title": "Lab 1: Sample Schema Setup",
@@ -18,19 +18,19 @@
             "filename": "https://oracle-livelabs.github.io/developer/oracle-db-features-for-developers/setup/setup.md"
         },
         {
-            "title": "Lab 3: Enable OLTP table compression",
+            "title": "Lab 2: Enable OLTP table compression",
             "filename": "../../oltp-compression/oltp.md"
         },
         {
-            "title": "Lab 4: Enable advanced row compression",
+            "title": "Lab 3: Enable advanced row compression",
             "filename": "../../row-compression/rowc.md"
         },
         {
-            "title": "Lab 5: Enable advanced index compression",
+            "title": "Lab 4: Enable advanced index compression",
             "filename": "../../index-compression/index.md"
         },
         {
-            "title": "Lab 6: Enable automatic data optimization",
+            "title": "Lab 5: Enable automatic data optimization",
             "filename": "../../auto-optimization/auto.md"
         },  
         {
