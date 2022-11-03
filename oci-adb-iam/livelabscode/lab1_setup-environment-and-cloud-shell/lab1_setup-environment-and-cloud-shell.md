@@ -112,4 +112,3 @@ This lab assumes you have:
     ```
 
 ## Task 3: Connect to the Autonomous Database
-
