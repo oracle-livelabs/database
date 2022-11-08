@@ -9,7 +9,7 @@ Estimated Time: 10 minutes
 
 ### About LRA Sample Application
 
-The sample application demonstrates how you can develop microservices that participate in LRA transactions while using Transaction Manager for Microservices to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and flight ticket. Only when you provide approval to confirm the booking, the booking of the hotel room and flight ticket is confirmed. If you cancel the provisional booking, the hotel room and flight ticket that was blocked is released and the booking is canceled. The flight service in this example allows only two confirmed bookings by default. After two confirmed bookings, the flight service rejects any additional booking requests and that would lead to the trip booking failure and cancellation (compensation) of a provisionally booked hotel booking within the trip. 
+The sample application demonstrates how you can develop microservices that participate in LRA transactions while using Transaction Manager for Microservices to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and flight ticket. Only when you provide approval to confirm the booking, the booking of the hotel room and flight ticket is confirmed. If you cancel the provisional booking, the hotel room and flight ticket that was blocked is released and the booking is canceled. The flight service in this example allows only two confirmed bookings by default. After two confirmed bookings, the flight service rejects any additional booking requests and that would lead to the trip booking failure and cancellation (compensation) of a provisionally booked hotel booking within the trip.
 
 The following figure shows a sample LRA application, which contains several microservices, to demonstrate how you can develop microservices that participate in LRA transactions.
 ![Microservices in sample LRA application](./images/lra-sample-app.png)
@@ -31,7 +31,7 @@ This lab assumes you have:
 * An Oracle Cloud account
 * Successfully completed all previous labs
 * Logged in using remote desktop URL as oracle user. If you have connected to your instance via an SSH terminal using auto-generated SSH Keys as opc user, then change user to oracle before proceeding with the next step.
- 
+
    ```text
     <copy>
     sudo su - oracle
@@ -49,7 +49,7 @@ Follow the instructions in this section to configure Minikube, and then run a sa
     minikube start
     </copy>
     ```
-   
+
 In rare situations, if you see an error as shown below then it would indicate a failure in provisioning. In such cases, destroy the stack resources and delete the stack by performing Task 4 below. Then recreate the stack by performing the steps in Lab 2.
 ![minikube start error](./images/minikube-start-error.png)
 
@@ -163,7 +163,7 @@ Your booking is confirmed and information about your confirmed booking is displa
     ```
 You may now **proceed to the next lab**. If you do not want to proceed further and would like to finish the livelabs and clean up the resources, then perform task 4 below.
 
-## Task 4: Clean up the livelabs stack
+<!-- ## Task 4: Clean up the livelabs stack
 
 Perform this task only if you want to clean up the livelabs stack provisioned using Resource Manager. Performing this task will delete all the stack resources including the remote desktop instance.
 
@@ -178,7 +178,7 @@ Perform this task only if you want to clean up the livelabs stack provisioned us
 8. Confirm the operation when prompted.
 
 ![Destroy the stack resources](./images/destroy-stack.png)
-![Delete the stack](./images/delete-stack.png)
+![Delete the stack](./images/delete-stack.png) -->
 
 ## Learn More
 
