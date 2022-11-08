@@ -7,7 +7,7 @@ Now, we will add the shard (on shd3) to the Shard Database and thus elastically 
 *Estimated Lab Time:* 30 minutes.
 
 Watch the video below for a quick walk through of the lab.
-[](youtube:oojbS9Wp1RQ)
+[Elastic Scaling](videohub:1_gz6r23yf)
 
 ### Objectives
 
