@@ -62,10 +62,10 @@ This lab assumes you have:
 
 ## Task 2: Create and assign test user and groups
 
-1. Create a test user Debra in IAM (COMMENT: May need to alter to also be assigned an email to work)
+1. Create a test user Debra.
 
     ```
-    oci iam user create --name DBA_DEBRA --description "User Account for DEBRA the DBA"
+    oci iam user create --name DBA_DEBRA --email admin@oracle.com --description "User Account for DEBRA the DBA"
     ```
 
 2. Create two groups in IAM, one for all database users and one for database admins.
@@ -110,5 +110,3 @@ This lab assumes you have:
     ```
     oci iam group add-user --user-id $OCI_CS_USER_OCID --group-id $ALL_DB_USERS_OCID
     ```
-
-## Task 3: Connect to the Autonomous Database

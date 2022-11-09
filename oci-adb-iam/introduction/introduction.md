@@ -6,7 +6,7 @@ Autonomous Databases (ADB) can end up with a lot of users. There are some that h
 
 ### About this Workshop
 
-In this workshop, you will: 
+In this workshop, you will:
 * Enable and use OCI IAM as the identity provider for Autonomous Database.
 
 Estimated Workshop Time: -- hours -- minutes (This estimate is for the entire workshop - it is the sum of the estimates provided for each of the labs included in the workshop.)
