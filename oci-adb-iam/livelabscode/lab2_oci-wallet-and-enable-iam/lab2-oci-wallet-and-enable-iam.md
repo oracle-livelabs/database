@@ -1,4 +1,4 @@
-# ADB Wallet and Enable IAM
+# Generate ADB Wallet and Set IAM as Identity Provider
 
 ## Introduction
 
@@ -9,6 +9,9 @@
 - Configure your ADB to use IAM as its identity provider with the help of the wallet file
 -
 
+### Prerequisites
+This lab assumes you have:
+- Completed Lab 1: Create ADB and set up Environment
 
 ## Task 1: Generate Wallet in adb_wallet folder
 
@@ -36,7 +39,7 @@
 
 ## Task 2: Enable OCI IAM as the identity provider
 
-1. Configure the ADB to use OCI IAM authentication - where the wallet connects
+1. Connect to the database using the wallet file.
 
     ```
     sql /nolog <<EOF
@@ -44,13 +47,23 @@
     conn admin/Oracle123+Oracle123+@lltest_high
     ```
 
-2. Set the IAM provider to OCI IAM (error on end select statement from v$parameter line was fixed by changing to "v\$parameter")
+2. Query to select the identity provider, and see that it is NONE by default.
 
     ```
     select name, value from v\$parameter where name ='identity_provider_type';
+    ```
+
+3. Now enable IAM as the identity provider. Query the idenity provider again to see it updated.
+
+    ```
     exec dbms_cloud_admin.enable_external_authentication('OCI_IAM');
 
     select name, value from v\$parameter where name ='identity_provider_type';
+    ```
+
+4. Create the **user_shared** user and grant it permissions to create sessions. Create the **sr_dba_role** role and grant it permissions.
+
+    ```
     create user user_shared identified globally as 'IAM_GROUP_NAME=All_DB_Users';
     grant create session to user_shared;
     create role sr_dba_role identified globally as 'IAM_GROUP_NAME=DB_Admin';
@@ -58,11 +71,15 @@
     EOF
     ```
 
-3. Move wallet? Not sure exactly what is done in these steps
+5. unzip your ADB wallet file.
 
     ```
     unzip -d . lltest_wallet.zip
+    ```
 
+6. Modify wallet files (need to ask Rich exactly what happens here)
+
+    ```
     export TNS_ADMIN=$HOME/adb_wallet
 
     mv tnsnames.ora tnsnames.ora.orig
