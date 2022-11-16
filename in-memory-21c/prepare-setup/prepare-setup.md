@@ -16,7 +16,7 @@ This lab assumes you have:
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
 1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
 
-    - [db21im-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/r1YE5rmLn0w8obiSwaUgUz3uwZ7zo6OhrA7rG2EQ56-4xAai3ji2igc6GcQaj7bK/n/natdsecurity/b/stack/o/db21im-mkplc-freetier.zip)
+    - [db-inmemory-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/rqWEYKMxHiewzXChyF-aEOPZR_KMP-XKwzIJPgakxXfRpNn3DLXKArp_07ujM0O2/n/natdsecurity/b/stack/o/db-inmemory-mkplc-freetier.zip)
 
  
 2.  Save in your downloads folder.
