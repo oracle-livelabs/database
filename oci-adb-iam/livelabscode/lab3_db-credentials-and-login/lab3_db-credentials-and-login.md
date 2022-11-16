@@ -23,6 +23,7 @@ This lab assumes you have:
     ```
     oci iam user create-db-credential --user-id $DBA_DEBRA_OCID --password Oracle123+Oracle123+ --description "DB password for Debra"
     ```
+    ![Identity Debra](images/lab3-task1-step1.png)
 
 2. Connect to database with IAM credentials as Debra. (Note: origionally was "sqlplus /nolog <<EOF", but that was not working for some reason)
 
