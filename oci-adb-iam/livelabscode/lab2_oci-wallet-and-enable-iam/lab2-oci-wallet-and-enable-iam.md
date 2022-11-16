@@ -24,18 +24,21 @@ This lab assumes you have:
     ```
     ls -al $HOME/adb_wallet
     ```
+    ![Create Wallet](images/lab2-task1-step1.png)
 
 2. Generate the wallet file in the adb_wallet directory.
 
     ```
     oci db autonomous-database generate-wallet --autonomous-database-id $ADB_OCID --password Oracle123+ --file $HOME/adb_wallet/lltest_wallet.zip
     ```
+    ![Generate Wallet](images/lab2-task1-step2.png)
 
 3. Navigate to the adb_wallet directory.
 
     ```
     cd $HOME/adb_wallet
     ```
+    ![Wallet Directory](images/lab2-task1-step3.png)
 
 ## Task 2: Enable OCI IAM as the identity provider
 
@@ -76,6 +79,7 @@ This lab assumes you have:
     ```
     unzip -d . lltest_wallet.zip
     ```
+    ![Unzip Wallet](images/lab2-task2-step5.png)
 
 6. Modify wallet files (need to ask Rich exactly what happens here)
 
