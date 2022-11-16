@@ -2,14 +2,16 @@
 
 ### Why use Identity and Access Management with Autonomous Database
 
-Autonomous Databases (ADB) can end up with a lot of users. There are some that have 200 users interacting with the database. That is a lot to try to maintain. With OCI Identity and Access Management (IAM), you can use the power of Groups and Users withing IAM connected to the power of Schemas and Roles within ADB. The Roles and Schemas will grant privileges within ADB. If you then map Groups to these roles and schemas, you can now add Users to those groups within IAM and grant them the privileges they need to do their work. It will make both assignment and sign on for users who are already logged into the cloud much easier. It also helps improve security as you can simply remove a user from the cloud, removing them from the database as well.
+Managing users on a database-by-database basis is cumbersome, especially when working with a large number of databases. It can lead to mistakes where database user accounts exist long after the user has left the organization. Integrating database users with Oracle Identity and Access Management (IAM) is a quick and easy way to simplify user management across multiple ADBs and improve security.
 
 ### About this Workshop
 
 In this workshop, you will:
+* Provision an Autonomus Database
 * Enable and use OCI IAM as the identity provider for Autonomous Database.
+* Use IAM credentials to access and interact with the database as different users
 
-Estimated Workshop Time: -- hours -- minutes (This estimate is for the entire workshop - it is the sum of the estimates provided for each of the labs included in the workshop.)
+Estimated Workshop Time: -- 1 hour -- 0 min
 
 *You may add an option video, using this format: [](youtube:YouTube video id)*
 
@@ -20,10 +22,10 @@ Estimated Workshop Time: -- hours -- minutes (This estimate is for the entire wo
 *List objectives for the workshop*
 
 In this workshop, you will learn how to:
-* Provision
-* Setup
-* Load
-* Query
+* Provision an Autonomous Database
+* Set IAM as the identity provider of your ADB
+* Grant IAM users access to your ADB
+* Access and interact with your ADB using IAM credentials
 
 ### Prerequisites (Optional)
 
