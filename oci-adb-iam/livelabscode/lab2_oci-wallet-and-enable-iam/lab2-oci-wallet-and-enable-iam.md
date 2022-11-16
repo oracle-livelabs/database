@@ -2,12 +2,15 @@
 
 ## Introduction
 
-*Estimated Lab Time*: 30 minutes (TEMP)
+In this lab you will generate a wallet file for your ADB. This wallet file can be used to connect to the database. Using it you will then connect to the database and enable IAM as its identity provider. You will also create database users and grant them permissions.
+
+*Estimated Lab Time*: 20 minutes
 
 ### Objectives
 - Generate a wallet file for your ADB
 - Configure your ADB to use IAM as its identity provider with the help of the wallet file
--
+- Create database users and grant them permissions
+- unzip wallet (more detial here)
 
 ### Prerequisites
 This lab assumes you have:

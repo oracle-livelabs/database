@@ -1,8 +1,11 @@
-# Creat3 IAM Credentials and Log into the Database
+# Create IAM Credentials and Log into the Database
 
 ## Introduction
 
-*Estimated Lab Time*: 30 minutes (TEMP)
+Now that you have enabled IAM as the identity provider of your ADB, in this lab you will
+create IAM credentails for users and use those connections to connect to the database and interact with it.
+
+*Estimated Lab Time*: 15 minutes
 
 ### Objectives
 - Create IAM credentials for users of your ADB
@@ -12,6 +15,8 @@
 ### Prerequisites
 This lab assumes you have:
 - Completed Lab 1 & Lab 2
+
+## Task 1: Connect to the database as Debra.
 
 1. Create IAM credentials for user Debra.
 
@@ -37,6 +42,8 @@ This lab assumes you have:
     EOF
     ```
 
+## Task 2: Connect to the database as your OCI user & with a token.
+
 3. Create IAM credentials for your OCI user
 
     ```
@@ -47,7 +54,7 @@ This lab assumes you have:
 
     ```
     sql /nolog <<EOF
-    connect ocid1.user.oc1..aaaaaaaaplljk7dt2it6l5jzojrlyufz7elkvajksann4bm2tgu6xkgfho7a/Oracle123+Oracle123+@lltest_high
+    connect "${OCI_USER_NAME}"/Oracle123+Oracle123+@lltest_high
     select * from session_roles order by 1;
     select sys_context('USERENV','CURRENT_USER') from dual;
     select sys_context('USERENV','AUTHENTICATED_IDENTITY') from dual;
@@ -58,7 +65,7 @@ This lab assumes you have:
     EOF
     ```
 
-5. Finally, try connecting to the database with a token.  (need better explanation here)
+5. Finally, try connecting to the database with a token. (need better explanation here)
 
     ```
     oci iam db-token get

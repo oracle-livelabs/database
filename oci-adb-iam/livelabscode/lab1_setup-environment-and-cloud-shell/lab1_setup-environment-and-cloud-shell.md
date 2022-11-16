@@ -2,7 +2,10 @@
 
 ## Introduction
 
-*Estimated Lab Time*: 30 minutes (TEMP)
+The Oracle Cloud Infrastructure (OCI) Cloud Shell is a browser-based terminal accessible
+from the Oracle Cloud Console. It is a Linux shell pre-configured with the OCI CLI, and is available to all OCI users. We wil use the cloud shell throughout this workshop, and in this lab will use it to provision necessary items such as an Autonomus Database, users, groups, and policies.
+
+*Estimated Lab Time*: 15 minutes
 
 ### About Product/Technology
 
