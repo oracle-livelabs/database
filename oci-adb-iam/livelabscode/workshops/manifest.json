@@ -1,13 +1,11 @@
 {
   "workshoptitle": "The Title of the Workshop is defined in the manifest",
   "help": "livelabs-help-**enterarea**_us@oracle.com",
-  "variables": ["../../variables/variables.json",
-    "../../variables/variables-in-another-file.json"],
   "tutorials": [
     {
-         “title”: “Getting Started”,
-         “description”: “This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.“,
-         “filename”: “https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md”
+      “title”: “Getting Started”,
+      “description”: “This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.“,
+      “filename”: “https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md”
     },
     {
       "title": "Introduction",

@@ -1,4 +1,4 @@
-# Setting up the Environment
+# Create ADB and set up Environment
 
 ## Introduction
 
@@ -23,7 +23,15 @@ This lab assumes you have:
 
 ## Task 1: Provision the Autonomous Database
 
-1. Identify the root compartment to create the ADB and IAM policy in.
+1. Beginning at your Oracle Cloud Infrastructure home page, access the Cloud Shell
+by clicking on the **Cloud Shell** icon in the top right corner. You will use the Cloud Shell
+throughout this workshop.
+
+    ![OCI Homepage](images/oci-homepage.png)
+
+1. Using the Cloud Shell, identify the root compartment to create the ADB and IAM policy in.
+>**Note:** If at any point in this workshop you exit out of the Cloud Shell, you may need to redo
+this step and any others that use the "export" command. The variables created with "export" that are used in future steps are deleted when the Cloud Shell session ends.  
 
     ```
     export ROOT_COMP_ID=`oci iam compartment list --include-root --raw-output --query "data[?contains(\"id\",'tenancy')].id | [0]"`
@@ -48,13 +56,13 @@ This lab assumes you have:
     echo $OCI_USER_NAME
     ```
 
-5. Create the ADB with the name and password we decided on earlier.
+5. Create the ADB with the name and password defined in previous steps.
 
     ```
     oci db autonomous-database create --compartment-id $ROOT_COMP_ID --db-name ${DB_NAME} --display-name ${DB_NAME} --is-free-tier true  --admin-password $ADMIN_PWD --cpu-core-count 1 --data-storage-size-in-tbs 1
     ```
 
-6. Allow any user in the tenancy to access the ADB.
+6. Create a policy to allow any user in the tenancy to access the ADB.
 
     ```
     oci iam policy create  --name grant-adb-access --compartment-id $ROOT_COMP_ID  --statements '[ "allow any-user to use autonomous-database-family in tenancy"]' --description 'policy for granting any user to access autonomous databases'
