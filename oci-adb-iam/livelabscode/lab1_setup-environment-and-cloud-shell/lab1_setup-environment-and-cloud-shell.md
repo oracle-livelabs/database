@@ -30,8 +30,8 @@ throughout this workshop.
     ![OCI Homepage](images/oci-homepage.png)
 
 1. Using the Cloud Shell, identify the root compartment to create the ADB and IAM policy in.
->**Note:** If at any point in this workshop you exit out of the Cloud Shell, you may need to redo
-this step and any others that use the "export" command. The variables created with "export" that are used in future steps are deleted when the Cloud Shell session ends.  
+    >**Note:** If at any point in this workshop you exit out of the Cloud Shell, you may need to redo
+this step and any others that use the "export" command. The variables created with "export" that are used in future steps are deleted when the Cloud Shell session ends.
 
     ```
     export ROOT_COMP_ID=`oci iam compartment list --include-root --raw-output --query "data[?contains(\"id\",'tenancy')].id | [0]"`
