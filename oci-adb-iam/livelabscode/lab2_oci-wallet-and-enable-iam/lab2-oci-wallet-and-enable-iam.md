@@ -27,16 +27,14 @@ This lab assumes you have:
     ```
     ls -al $HOME/adb_wallet
     ```
-    ![Create Wallet](images/lab2-task1-step1.png)
 
-2. Generate the wallet file in the adb_wallet directory.
+2. Generate the wallet file in the adb_wallet directory. You should see a message that says a file was donwloaded to 100%.
 
     ```
     oci db autonomous-database generate-wallet --autonomous-database-id $ADB_OCID --password Oracle123+ --file $HOME/adb_wallet/lltest_wallet.zip
     ```
-    ![Generate Wallet](images/lab2-task1-step2.png)
 
-3. Navigate to the adb_wallet directory.
+3. Navigate to the adb_wallet directory. If you use the command "ls" you should see a zip file.
 
     ```
     cd $HOME/adb_wallet
@@ -84,7 +82,7 @@ This lab assumes you have:
     ```
     ![Unzip Wallet](images/lab2-task2-step5.png)
 
-6. Modify wallet files (need to ask Rich exactly what happens here)
+6. Modify wallet files (need to ask Alan exactly what happens here)
 
     ```
     export TNS_ADMIN=$HOME/adb_wallet

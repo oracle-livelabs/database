@@ -18,12 +18,11 @@ This lab assumes you have:
 
 ## Task 1: Connect to the database as Debra.
 
-1. Create IAM credentials for user Debra.
+1. Create IAM credentials for user Debra. You should see something that looks like a JSON file that has no errors in it.
 
     ```
     oci iam user create-db-credential --user-id $DBA_DEBRA_OCID --password Oracle123+Oracle123+ --description "DB password for Debra"
     ```
-    ![Identity Debra](images/lab3-task1-step1.png)
 
 2. Connect to database with IAM credentials as Debra. (Note: origionally was "sqlplus /nolog <<EOF", but that was not working for some reason)
 
