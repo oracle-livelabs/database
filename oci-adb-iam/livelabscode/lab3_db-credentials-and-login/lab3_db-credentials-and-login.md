@@ -63,6 +63,7 @@ This lab assumes you have:
     select sys_context('USERENV','network_protocol') from dual;
     EOF
     ```
+    ![OCI User Connect](images/lab3-task2-step4.png)
 
 5. Finally, try connecting to the database with a token. (need better explanation here)
 
@@ -79,3 +80,4 @@ This lab assumes you have:
     select sys_context('USERENV','network_protocol') from dual;
     EOF
     ```
+    ![Auth Token](images/lab3-task2-step5.png)
