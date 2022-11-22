@@ -21,6 +21,8 @@ In this lab, you will be guided through the following task:
 
 ## Task 1: Create and configure VCN in OCI
 
+**Note:** please skip Task 1 if you have already configured a VCN in Lab 1
+
 1. While in Oracle Cloud, go to the Navigation or Hamburger menu again. Navigate to “Networking” and “Virtual Cloud Networks”
 
     ![](./images/nav-vcn.png "navigate-to-vcn")

@@ -24,6 +24,8 @@ In this lab, you will be guided through the following tasks:
 
 ## Task 1: Create an SSH key, install a Compute and install MySQL Shell in order to access the newly created "HeatWave" system
 
+**Note:** you can use the same Compute Instance if you created one in Lab 1 and skip to Task 3
+
 1. Navigate to ‘Cloud Shell’ next to your Home Region (looks like a terminal prompt)
 
     ![](./images/cld-shell.png "oci-cloud-shell")

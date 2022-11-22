@@ -10,6 +10,7 @@ _Estimated Time:_ ? minutes
 
 In this lab, you will be guided through the following tasks:
 
+- How to set up an on-prem environment
 - Install MySQL Community Edition
 - Install MySQL Shell
 - Load a sample database
@@ -22,10 +23,123 @@ In this lab, you will be guided through the following tasks:
 
 ## Task 1: Install MySQL Community Edition in your on-prem environment
 
-1. Identify the **Operating System** where you want to install MySQL. For this example, I have chosen an Oracle Linux OS which is based on the RHEL
+Identify the **Operating System** where you want to install MySQL. For this example, I have chosen an Oracle Linux OS which is based on the RHEL
     ![os-version](./images2/image.png "os-version")
 
-2. Download **MySQL Community Edition**
+**Note: if you don't have an on-prem environment ready, follow the below steps to provision one, just like the one I am using in the above image:**
+
+1. Login to Oracle Cloud (OCI), go to the Navigation or Hamburger menu again. Navigate to “Networking” and “Virtual Cloud Networks”
+
+    ![](./images/images/nav-vcn.png "navigate-to-vcn")
+
+2. Once on the Virtual Cloud Networks page, click “Start VCN Wizard” and select “Create VCN with Internet Connectivity”
+
+    ![](./images/images/create-vcn.png "create-vcn")
+
+    ![](./images/images/vcn-wizard.png "vcn-wizard")
+
+3. Name your VCN “MySQL-VCN” while making sure you are in the correct Compartment. Leave everything as it is, and click “Next”
+    ```bash
+    <copy>MySQL-VCN</copy>
+    ```
+
+    ![](./images/images/name-vcn.png "name-vcn-wizard")
+
+4. Review all the information and click “Create”
+
+    ![](./images/images/review-vcn.png "review-vcn-wizard")
+
+5. Once the VCN is created, click “View Virtual Cloud Network”
+
+    ![](./images/images/view-vcn.png "view-vcn-wizard")
+
+6. Once on the MDS-VCN page, under “Resources” click “Subnets” and go to the “Private-Subnet-MDS-VCN”
+
+    ![](./images/images/resources-vcn.png "resources-vcn")
+
+7. On the Private Subnet page, under “Security Lists”, click on “Security List for Private Subnet -MDS-VCN” and select “Add Ingress Rules”
+
+    ![](./images/images/sc-vcn.png "seclist-vcn")
+
+    ![](./images/images/add-ingr.png "add-ingress")
+
+8. For the ‘Source CIDR’ enter “0.0.0.0/0” and for the Destination Port Range, enter “3306,33060”. In the ‘Description’ section, write “MySQL Port Access”
+    ```bash
+    <copy>0.0.0.0/0</copy>
+    ```
+    ```bash
+    <copy>3306,33060</copy>
+    ```
+
+    ![](./images/images/add-rule.png "add-ingress-rule")
+
+9. Inside Oracle Cloud, navigate to ‘Cloud Shell’ next to your Home Region (looks like a terminal prompt)
+
+    ![](./images/cld-shell.png "oci-cloud-shell")
+
+10. Once the Cloud Shell loads, it should look similar to this:
+
+    ![](./images/cld-shell-prmpt.png "cloud-shell-prompt")
+
+11. Execute the command to create an SSH key-pair
+
+    ```bash
+    <copy>ssh-keygen -t rsa</copy>
+    ```
+
+    ![](./images/key-gen.png "key-gen")
+
+    **Note:** keep pressing enter for each question. Here is what it should look like, your public and private SSH keys will be stored in a directory .ssh
+
+    ![](./images/ssh-keypair.png "ssh-key-pair")
+
+12. Go to the .ssh directory and copy the contents of the id_rsa.pub file
+
+    ```bash
+    <copy>cd .ssh</copy>
+    ```
+    ```bash
+    <copy>ls</copy>
+    ```
+    ```bash
+    <copy>cat id_rsa.pub</copy>
+    ```
+
+    ![](./images/ssh-pub-key.png "ssh-pub-key")
+
+13. Within Oracle Cloud, go to the Navigation or Hamburger menu and under Compute, select “Instances”
+
+    ![](./images/compute.png "nav-compute")
+
+14. Make sure you are in the right compartment, and click “Create instance”
+
+    ![](./images/create-compute.png "create-compute")
+
+15. Name your compute instance “MDS-Compute”, leave everything default, and make sure the Public Subnet of your MDS-VCN is selected under the Networking section
+
+    ![](./images/create-compute2.png "create-compute2")
+
+    ![](./images/pub-sub.png "public-subnet")
+
+16. For the “Add SSH keys”, select “Paste public keys” and paste the contents of the id_rsa.pub file here
+
+    ![](./images/ssh-compute.png "pubkey-compute")
+
+17. Click “Create” and your Virtual Machine will be ready in a few minutes
+
+    ![](./images/crt-compute.png "final-compute")
+
+    ![](./images/ready-compute.png "ready-compute")
+
+18. Once your VM or Compute Instance is ready, copy the Public IP address and open Cloud Shell. Perform the ssh command to login to your instance
+
+    ```bash
+    <copy>ssh -i ~/.ssh/id_rsa opc@<your_compute_instance_ip></copy>
+    ```
+
+    ![](./images/ssh-compute2.png "ssh-into-compute")
+
+19. Once you have your system/environment ready, download **MySQL Community Edition** on it
     ```bash
     <copy>sudo yum install mysql-server -y</copy>
     ```
@@ -36,7 +150,7 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images2/install-mysql2.png "install-mysql-ce2")
 
-3. Start the MySQL server, find your mysqld.log file, grab the temporary password, and login to your MySQL environment
+20. Start the MySQL server, find your mysqld.log file, grab the temporary password, and login to your MySQL environment
 
     ```bash
     <copy>sudo systemctl start mysqld</copy>
@@ -61,7 +175,7 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images2/start-mysql.png "start-mysql")
 
-4. Change the root password
+21. Change the root password
 
     ```bash
     <copy>ALTER USER ‘root’@’localhost’ IDENTIFIED BY ‘pASsWordGoesHere’;</copy>
@@ -69,7 +183,7 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images2/change-pass.png "change-root-pass")
 
-5. Exit MySQL and download MySQL Shell onto your on-prem environment
+22. Exit MySQL and download MySQL Shell onto your on-prem environment
 
     ```bash
     <copy>exit</copy>
