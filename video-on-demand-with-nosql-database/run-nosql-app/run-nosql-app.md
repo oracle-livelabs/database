@@ -86,7 +86,7 @@ The goal of this task is to understand the difference between the 2 data models 
     --header 'content-type: application/json' \
     --url 'localhost:3000' \
     --data '{
-  "query": "query Stream($streamId: Int) { user1:stream(id: $streamId) {id   info{ country shows {showName}} } }", "variables": "{ \"streamId\": 1}"}'|jq
+  "query": "query Stream($streamId: Int) { user1:stream(id: $streamId) {id   info{ country shows {showName}} } }", "variables": { "streamId": 1} }'|jq
     </copy>
     ````
 
