@@ -39,7 +39,7 @@ Otherwise, log in to the Oracle Cloud.
 
 </if>
 
-4. Click the navigation menu in the upper left to show top level navigation choices.
+4. Click the navigation menu in the upper left to show top-level navigation choices.
 
 5. Click on **Oracle Database** and choose **Autonomous Transaction Processing**.
 
@@ -118,7 +118,7 @@ Otherwise, log in to the Oracle Cloud.
 
     We can see that returned three of our four files - the files containing pangram text which includes the word 'jump'.
 
-    So is this just like the SQL **LIKE** operator, but working on the contents of files? It has some similarities, but the basic answer is "No, not really". For a start, change the query above to 'JUMP' in upper-case. Still works, right? Yes, becaue Oracle Text indexes are case-insensitive (by default). Now try 'jum'. No match, because it's a word-based index and that doesn't match a complete word.
+    So is this just like the SQL **LIKE** operator, but working on the contents of files? It has some similarities, but the basic answer is "No, not really". For a start, change the query above to 'JUMP' in upper-case. Still works, right? Yes, because Oracle Text indexes are case-insensitive (by default). Now try 'jum'. No match, because it's a word-based index and that doesn't match a complete word.
 
     Let's try another search:
 
@@ -131,7 +131,7 @@ Otherwise, log in to the Oracle Cloud.
 
     That finds all four documents. Three of them contain the words 'boxing' and 'fox' somewhere in the document. The other contains the word 'pangram'.
 
-    Finally we'll try an inexact query. The files contain the word 'zephyrs', but it's an easy word to mis-spell. Try this:
+    Finally, we'll try an inexact query. The files contain the word 'zephyrs', but it's an easy word to mis-spell. Try this:
 
     ```
     <copy>
@@ -148,8 +148,9 @@ This is as far as well go in exploring queries in this lab, but feel free to exp
 
 You can find a list of query operators here: [Contains Query Operators](https://docs.oracle.com/en/database/oracle/oracle-database/19/ccref/oracle-text-CONTAINS-query-operators.html).
 
+You also might be interested in our other Oracle Text Livelab, [Full Text Indexing in Oracle Database](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3286) which has ßmore detail about searching using the CONTAINS operator.
+
 ## Acknowledgements
 
 - **Author** - Roger Ford, Principal Product Manager
-- **Contributors** - Kamryn Vinson, Andres Quintana, James Zheng
-- **Last Updated By/Date** - Roger Ford, March 2022
+- **Last Updated By/Date** - Roger Ford, November 2022

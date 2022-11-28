@@ -143,5 +143,4 @@ That's it, you've now created a credential called "mycredential". In the next la
 ## Acknowledgements
 
 - **Author** - Roger Ford, Principal Product Manager
-- **Contributors** - Kamryn Vinson, Andres Quintana, James Zheng
-- **Last Updated By/Date** - Roger Ford, March 2022
+- **Last Updated By/Date** - Roger Ford, November 2022
