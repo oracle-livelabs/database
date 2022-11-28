@@ -7,6 +7,9 @@ Estimated Time: 1 hour
 
 [](youtube:ZPOjjF3kCvo)
 
+Watch the video below for a quick walk-through of the lab.
+[Application containers](videohub:1_h092h1u8)
+
 ### Prerequisites
 This lab assumes you have:
 - A Free Tier, Paid or LiveLabs Oracle Cloud account

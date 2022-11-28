@@ -2,13 +2,16 @@
 
 ## Introduction
 
-In the previous labs, we've shown you how to index simple VARCHAR2 text. But Oracle Text is capable of far more than that. For example, it can automatically recognise and handle around 150 different binary file formats. Got a PDF document? No problem. Want to index all the text out of your Powerpoint presentations? Sure, why not?
+In the previous labs, we've shown you how to index simple VARCHAR2 text. But Oracle Text is capable of far more than that. For example, it can automatically recognize and handle around 150 different binary file formats. Got a PDF document? No problem. Want to index all the text out of your Powerpoint presentations? Sure, why not?
 
 Oracle Text can handle files which are held on the file system or at URLs, but for this example, we're going to load the file(s) directly into the database, in a BLOB (Binary Long OBject) column.
 
 This lab is optional once you've completed all the previous labs. You can index your own files, or use a simple Microsoft Word file provided by us.
 
 Estimated Time: 15 minutes
+
+Watch the video below for a quick walk-through of the lab.
+[Index Files](videohub:1_lrbydlln)
 
 ### Objectives
 

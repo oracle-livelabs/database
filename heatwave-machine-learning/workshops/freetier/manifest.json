@@ -10,8 +10,8 @@
 
         {
           "title": "Get Started",
-          "description": "This is the prerequisites for customers using Free Trial and Paid tenancies. The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
-          "filename": "../../register-account/register-account.md"
+          "description": "Prerequisites for LiveLabs (Oracle-owned tenancies). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
         },
 
         {

@@ -10,6 +10,9 @@ After many changes to an Oracle Text index, it will perform less than ideally, b
 
 Estimated Time: 20 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Maintain Indexes](videohub:1_phmd6gbw)
+
 ### Objectives
 
 In this lab, you will:

@@ -187,7 +187,7 @@ For this task you need the following info from previous steps:
      ![Online replication check](images/online-goldengate.png =50%x*)
 
      - Source database:
-          - GoldenGate deployment name: **Source**
+          - GoldenGate deployment name: **Marketplace**
           - Database Username: **ggadmin**
           - Database Password: **(As previously selected)**
           - Container Database Username: **c##ggadmin**
@@ -196,7 +196,7 @@ For this task you need the following info from previous steps:
       ![Source database details](images/online-source-database.png =50%x*)    
      
      - Target database:
-          - GoldenGate Deployment Name: **Target**
+          - GoldenGate Deployment Name: **Marketplace**
           - Database Username: **ggadmin**
           - Database Password: **(As previously selected)**
           - Press Show Advanced Options

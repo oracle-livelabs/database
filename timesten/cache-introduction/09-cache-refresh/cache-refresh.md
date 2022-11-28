@@ -2,16 +2,16 @@
 
 ## Introduction
 
-With READONLY cache groups, the Oracle database is the master of the data. The data cached in TimesTen is a read-only copy. Any changes (insert/update/delete) made to the data in Oracle are automatically captured and refreshed to the cached tables in TimesTen based on the defined refresh interval (2 seconds in these examples).
+With READONLY cache groups, the Oracle database is authoritative for the cached data. The corresponding data in TimesTen is a read-only copy. TimesTen automatically captures any changes (insert/update/delete) made to the data in Oracle. TimesTen refreshes these changes to the cached tables based on the defined refresh interval (2 seconds in these examples).
 
-In this lab you will execute some DML statements on the tables in Oracle and observe those changes being automatically propagated to the corresponding tables cached in TimesTen.
+In this lab you execute DML statements on the tables in Oracle and observe those changes being automatically propagated to the corresponding tables cached in TimesTen.
 
-**Estimated Lab Time:** 5 minutes
+**Estimated Lab Time:** 10 minutes
 
 ### Objectives
 
-- Modify data in the Oracle database
-- Verify that the changes are refreshed to the cache
+- Modify data in the Oracle database.
+- Verify that the changes are refreshed to the cache.
 
 ### Prerequisites
 
@@ -26,7 +26,26 @@ This lab assumes that you:
 
 Your existing terminal session to tthost1 will be referred to as the **primary** session.
 
-1. Open a _second_ terminal session, as the user **oracle**, in the workshop compute instance, either via NoVNC or SSH. In that terminal session, connect to the TimesTen host (tthost1) using ssh. This session will be referred to as the **secondary** session.
+Open a _second_ terminal session, as the user **oracle**, in the workshop compute instance, either via NoVNC or SSH. In that terminal session, connect to the TimesTen host (tthost1) using ssh. This session will be referred to as the **secondary** session.
+
+### Opening a new terminal session using SSH
+
+ If you are using **SSH**, then you can just create a second SSH session, as the **oracle** user, to the workshop compute instance and then in that session **ssh** into **tthost1**.
+ 
+### Opening a new terminal session using the NoVNC desktop
+
+ If you are using the **NoVNC desktop**, then there are several ways to open an additional terminal window:
+ 
+ - Click on **Activities** in the linux Menu bar, _right_ click on the **Terminal** icon in the list that appears and choose **New Window**.
+ 
+ - If you already have at least one terminal window open, click on the **Terminal** item in the Linux menu bar and choose **New window**.
+
+ - _Double_ click the **Terminal** icon on the linux desktop.  
+
+ - Once you have a new window, in that window **ssh** into **tthost1**.
+
+**IMPORTANT:** When you open a new terminal window it often exactly overlays the exitsing terminal window, and it may appear that a new window has not been opened. If you move the visible terminal window you will find that a new window has indeed been created and that you now have two terminal windows.
+ 
 
 ## Task 2: Verify the refresh of INSERT operations
 
@@ -175,20 +194,6 @@ commit;
 Commit complete.
 ```
 
-```
-<copy>
-SELECT * FROM promotions ORDER BY promo_id;
-</copy>
-```
-
-```
-  PROMO_ID PROMO_NAME
----------- --------------------
-	 1 everyday low price
-	 2 blowout sale
-	 3 easter sale
-```
-
 2. Wait for 2 seconds (the cache refresh interval) and then in your _primary_ session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
 
 ```
@@ -297,7 +302,7 @@ Disconnecting...
 Done.
 ```
 
-You can now *proceed to the next lab*. 
+You can now **proceed to the next lab**. 
 
 Keep your primary session open for use in the next lab.
 
