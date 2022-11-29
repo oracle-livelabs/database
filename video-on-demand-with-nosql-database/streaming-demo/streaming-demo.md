@@ -88,7 +88,7 @@ With developer tools, you can know exactly what data you can request from your A
 1. In a browser window, enter [https://studio.apollographql.com/sandbox/explorer](https://studio.apollographql.com/sandbox/explorer)
 2. In the sandbox, copy/paste the following url:
 ````
-<copy>https://lc22qxcred2zq4ciqms2tzzxv4.apigateway.us-ashburn-1.oci.customer-oci.com/
+<copy>https://bmbbblriml5b2c36fifpqz5ieq.apigateway.eu-paris-1.oci.customer-oci.com/
 </copy>
 ````
 3. And now, you are ready to use our API
