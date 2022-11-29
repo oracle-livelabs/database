@@ -35,15 +35,55 @@ _Estimated Lab Time:_ 25 minutes
 
 ## Task 2: Review the code using OCI Code Editor
 
+Go to the Code Editor, and open the file `index.js` in the following directory
+`video-on-demand-with-nosql-database/demo-vod` as shown in the screen-shot:
+
 ![](./images/appl-code.png)
 
-1. createNoSQLClient
-explain that this code can also executed using OKE and on premise
-- useInstancePrincipal
-- on-premise non-secure configuration
-2. createTable
+Oracle NoSQL Database offers **flexible deployment** options to suit the needs of
+its customers. Whether deploying on an "On-Premises" cluster or utilizing the
+Oracle NoSQL Database Cloud Service, developers and end-users get the latest in
+NoSQL technology. Oracle offers a complete range of deployment options to
+support your NoSQL database, from on-premises to private cloud to public cloud.
 
+The function `createNoSQLClient` allows to illustrate this:
+- You can use **Instance Principals** to do the connection to NoSQL Cloud Service as
+shown in this code instead of specifying the credentials. Once they are set up,
+you can configure your OKE cluster to isolate workloads across node pools,
+create a dynamic group, write your policies. Your application connects to Oracle
+NoSQL Database Cloud Service by using Instance Principals. You can Deploy your
+application using the Kubernetes command line tool kubectl from the
+instructions in a manifest file.
+e.g. We deploy our image [using GitHub Actions](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-vod.yml)
 
+- In this lab, we are going to be running application code and we need an instance
+to run that from. We will run this application using Cloud Shell using another way
+called **delegation token**
+
+- Finally, the default configuration in this code, allows you to do the Connection
+to on-premise non-secure configuration. It is not the topic of this Lab but if you
+want to learn more [click here](https://github.com/oracle/nosql-examples/blob/master/demo-livelab/video-on-demand-with-nosql-database/README.md)
+
+- Otherwise, the rest of the code is exactly the same.
+
+When you create a table, you can choose between **Provisioned Capacity** and
+**On-Demand Capacity**. With the availability of both models, businesses have total flexibility when
+choosing the most cost-effective deployment to meet their business and application
+workload requirements. Such flexibility empowers businesses to solely focus on application
+innovations to delight their customers, making operational costs "worry-free" in their decision-making process.
+
+You can also modify the **Capacity mode** from Provisioned Capacity to On Demand Capacity and vice-versa.
+
+- The function `createTable` allows to illustrate this
+
+As a developer, you can access your data via an API or SQL. Review the rest of the code,
+we are using both APIs to develop our application
+- Get, put, scan APIs for raw key/value pairs and tables – CRUD API
+- SQL for rich access to JSON, more complex filtering expressions
+- Support for conjunctions and disjunctions in filter expressions
+
+In the next Lab **Explore Data and Run Queries**, we will explore more on detail
+ **SQL for rich access to JSON**. But let us continue with this Lab.
 
 ## Task 3: Load Data and Examine It
 
