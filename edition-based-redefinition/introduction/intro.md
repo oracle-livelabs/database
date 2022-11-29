@@ -1,17 +1,22 @@
-#Introduction to Edition Based Redefinition
+# Introduction to Edition Based Redefinition
 
-Oracle Database provides incredible features, performance, security and availability. But when your database fleet starts growing from a few units to a few hundreds, keeping it up to date with the latest patches and release versions can be time-consuming, and sometimes error-prone.
+Edition-based redefinition (EBR) enables online application upgrade with uninterrupted availability of the application. When the installation of an upgrade is complete, the pre-upgrade application and the post-upgrade application can be used at the same time. Therefore, an existing session can continue to use the pre-upgrade application until its user decides to end it; and all new sessions can use the post-upgrade application. When there are no longer any sessions using the pre-upgrade application, it can be retired. In this way, EBR allows hot rollover from from the pre-upgrade version to the post-upgrade version, with zero downtime.
 
-Oracle Fleet Patching and Provisioning, or FPP, is the product that Oracle has developed to help you maintaining your database fleet life cycle under control. Routine operations like provisioning new clusters and databases, installing patched Oracle binaries, patching clusters and databases or upgrading them, are completely automated by Fleet Patching and Provisioning.
+EBR enables online application upgrades in the following manner:
 
-Patched versions of Oracle Binaries, or Gold Images, can be imported and stored on the FPP Server. From there, FPP can copy and install them as new Oracle Homes on the target hosts. They become working copies ready to run databases. The new working copies are always provisioned as new Oracle Homes. Once you are ready to patch, with a single-command you can instruct FPP to patch one, a few, or all the databases in an Oracle Home from their current version to the new one. FPP takes care of everything. If the database is in a Real Application Clusters configuration, the services are relocated gracefully, honoring their drain timeouts, and the database is restarted one node at the time, so that your database is always available. If you use session draining and application continuity, the whole patching process is completely transparent to your applications. At the end of the patching process FPP runs datapatch to update your database catalog.
+    Code changes are installed in the privacy of a new edition.
+    Data changes are made safely by writing only to new columns or new tables not seen by the old edition. An editioning view exposes a different projection of a table into each edition to allow each to see just its own columns.
+    Crossedition triggers propagate data changes made by the old edition into the new edition’s columns, or (in hot-rollover) vice-versa.
 
-FPP commands can be ran simultaneously on hundreds of targets, making possible to patch your whole database fleet every quarter. A single command line, or a single RESTful API call, replaces dozens or hundreds of manual tasks. Forget about boring and time-consuming patching campaigns: Fleet Patching and Provisioning gives you the automation, standardization and protection level that your auditors are looking for.
+EBR is available for use in all editions of Oracle Database without the need to license it.
 
-Estimated Workshop Time: 4 hours
+Estimated Workshop Time: 2 hours
 
-Watch the video below for an overview on Oracle Fleet Patching and Provisioning.
-About this Workshop
+Watch the video below for an overview on Oracle Edition Based Redefinition.
+
+[EBR Introduction] (https://videohub.oracle.com/media/Oracle+DatabaseA+Edition-Based+Redefinition+%28EBR%29/1_p6bapnjx) 
+
+### About this Workshop
 
 Fleet Patching and Provisioning 19c is meant to be used by customers to patch their database fleet on-premises. It is generally not recommended to use it for patching Oracle Cloud database services, because the current version does not integrate with the OCI automation tooling (please note that is not completely true: Oracle does use FPP internally to patch some OCI services, but this is not visible to our customers). However, in this workshop we will use OCI services to setup and test FPP.
 
@@ -42,5 +47,5 @@ More Information on Oracle Fleet Patching & Provisioning
 Acknowledgements
 
     Author - Ludovico Caldara
-    Contributors - Kamryn Vinson
-    Last Updated By/Date - Ludovico Caldara, April 2021
+    Contributors - Suraj Ramesh
+    Last Updated By/Date -Suraj Ramesh, July 2022
