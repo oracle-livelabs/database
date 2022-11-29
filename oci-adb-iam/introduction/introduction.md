@@ -7,7 +7,10 @@ Managing users on a database-by-database basis is cumbersome, especially when wo
 ### About this Workshop
 
 In this workshop, you will:
+<<<<<<< Updated upstream
 * Provision an Autonomus Database
+=======
+>>>>>>> Stashed changes
 * Enable and use OCI IAM as the identity provider for Autonomous Database.
 * Use IAM credentials to access and interact with the database as different users
 
