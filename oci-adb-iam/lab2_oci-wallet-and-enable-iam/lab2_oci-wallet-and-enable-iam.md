@@ -8,9 +8,9 @@ In this lab you will generate a wallet file for your ADB. This wallet file can b
 
 ### Objectives
 - Generate a wallet file for your ADB
-- Configure your ADB to use IAM as its identity provider with the help of the wallet file
+- Access your ADB with the wallet file and configure IAM as the identity provider
 - Create database users and grant them permissions
-- unzip wallet (more detial here)
+- unzip wallet and update files so that the ADB can be accessed using a token
 
 ### Prerequisites
 This lab assumes you have:
@@ -27,21 +27,18 @@ This lab assumes you have:
     ```
     ls -al $HOME/adb_wallet
     ```
-    ![Create Wallet](images/lab2-task1-step1.png)
 
 2. Generate the wallet file in the adb_wallet directory.
 
     ```
     oci db autonomous-database generate-wallet --autonomous-database-id $ADB_OCID --password Oracle123+ --file $HOME/adb_wallet/lltest_wallet.zip
     ```
-    ![Generate Wallet](images/lab2-task1-step2.png)
 
 3. Navigate to the adb_wallet directory.
 
     ```
     cd $HOME/adb_wallet
     ```
-    ![Wallet Directory](images/lab2-task1-step3.png)
 
 ## Task 2: Enable OCI IAM as the identity provider
 
@@ -53,18 +50,31 @@ This lab assumes you have:
     conn admin/Oracle123+Oracle123+@lltest_high
     ```
 
-2. Query to select the identity provider, and see that it is NONE by default.
+2. Query to select the identity provider, and see that it is **NONE** by default.
 
     ```
     select name, value from v\$parameter where name ='identity_provider_type';
     ```
 
-3. Now enable IAM as the identity provider. Query the idenity provider again to see it updated.
+
+    ```
+    NAME                      VALUE    
+    _________________________ ________
+    identity_provider_type    NONE   
+    ```
+
+3. Now enable IAM as the identity provider. Query the idenity provider again to see it updated to **OCI_IAM**.
 
     ```
     exec dbms_cloud_admin.enable_external_authentication('OCI_IAM');
 
     select name, value from v\$parameter where name ='identity_provider_type';
+    ```
+
+    ```
+    NAME                      VALUE      
+    _________________________ __________
+    identity_provider_type    OCI_IAM    
     ```
 
 4. Create the **user\_shared** user and grant it permissions to create sessions. Create the **sr\_dba\_role** role and grant it permissions. This command and all previous ones will run when this is entered into the Cloud Shell.
@@ -84,16 +94,15 @@ This lab assumes you have:
     ```
     unzip -d . lltest_wallet.zip
     ```
-    ![Unzip Wallet](images/lab2-task2-step5.png)
 
 2. Create variable for location of wallet file.
-    >**Note:** If at any point you exit out of the cloud shell, these following commands may need to be ran again.
+    >**Note:** If at any point you exit out of the cloud shell, the following commands may need to be ran again.
 
     ```
     export TNS_ADMIN=$HOME/adb_wallet
     ```
 
-3. update tnsname.ora and sqlnet.ora files.
+3. update tnsname.ora and sqlnet.ora files. Append sqlnet.ora with the wallet location.
 
     ```
     mv tnsnames.ora tnsnames.ora.orig
@@ -105,10 +114,12 @@ This lab assumes you have:
     cat sqlnet.ora
     ```
 
-4. Append TOKEN_AUTH.
+4. Append tnsname.ora so than an authorization token can be used to access the datbase.
 
     ```
     head -1 tnsnames.ora.orig | sed -e 's/)))/)(TOKEN_AUTH=OCI_TOKEN)))/' > tnsnames.ora
 
     cat tnsnames.ora
     ```
+
+You may now proceed to the next lab!

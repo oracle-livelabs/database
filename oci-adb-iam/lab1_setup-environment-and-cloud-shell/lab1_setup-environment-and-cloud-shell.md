@@ -11,8 +11,8 @@ from the Oracle Cloud Console. It is a Linux shell pre-configured with the OCI C
 
 ### Objectives
 - Provision an Autonomous Database (ADB)
-- Create and associate Users and Groups within Identity and Access Management (IAM)
-- Connect to the provisioned ADB
+- Create Groups and Policies to be used later
+- Add your OCI user to greated groups
 
 ### Prerequisites
 This lab assumes you have:
@@ -33,7 +33,7 @@ throughout this workshop.
 
     ![OCI Homepage](images/oci-homepage.png)
 
-1. Using the Cloud Shell, identify the root compartment to create the ADB and IAM policy in.
+1. Using the Cloud Shell, identify the root compartment id.
     >**Note:** If at any point in this workshop you exit out of the Cloud Shell, you may need to redo
     this step and any others that use the "export" command. The variables created with "export" that are used in future steps are deleted when the Cloud Shell session ends.  
 
@@ -47,7 +47,7 @@ throughout this workshop.
     export DB_NAME=lltest
     ```
 
-3. Create your password for the database
+3. Create the password for your ADB
 
     ```
     export ADMIN_PWD=Oracle123+Oracle123+
@@ -59,34 +59,22 @@ throughout this workshop.
     export OCI_USER_NAME=`oci iam user list --raw-output --query "data[?contains(\"id\",'"${OCI_CS_USER_OCID}"')].name| [0]"`
     echo $OCI_USER_NAME
     ```
-    ![Verify Username](images/lab1-task1-step4.png)
 
 5. Create the ADB with the name and password defined in previous steps.
 
     ```
     oci db autonomous-database create --compartment-id $ROOT_COMP_ID --db-name ${DB_NAME} --display-name ${DB_NAME} --is-free-tier true  --admin-password $ADMIN_PWD --cpu-core-count 1 --data-storage-size-in-tbs 1
     ```
-    ![Create ADB](images/lab1-task1-step5-pt1.png)
-
-    ![Create ADB2](images/lab1-task1-step5-pt2.png)
 
 6. Create a policy to allow any user in the tenancy to access the ADB.
 
     ```
     oci iam policy create  --name grant-adb-access --compartment-id $ROOT_COMP_ID  --statements '[ "allow any-user to use autonomous-database-family in tenancy"]' --description 'policy for granting any user to access autonomous databases'
     ```
-    ![Create Policy](images/lab1-task1-step6.png)
 
-## Task 2: Create and assign test user and groups
+## Task 2: Create and assign group
 
-1. Create a test user Debra.
-
-    ```
-    oci iam user create --name DBA_DEBRA --email admin@oracle.com --description "User Account for DEBRA the DBA"
-    ```
-    ![Create Debra](images/lab1-task2-step1.png)
-
-2. Create two groups in IAM, one for all database users and one for database admins.
+1. Create two groups in IAM, one for all database users and one for database admins.
 
     ```
     oci iam group create --name ALL_DB_USERS --description "Group for all of the DB Users"
@@ -94,15 +82,13 @@ throughout this workshop.
     ```
     oci iam group create --name DB_ADMIN --description "Group for DB Admins"
     ```
-    ![Create Groups](images/lab1-task2-step2.png)
 
-3. Setup and verify environment variables for ease of use in commands later.
+2. Setup and verify environment variables for ease of use in commands later.
     >**Note:** If at any point after this step you exit out of the cloud shell, these commands may need to be ran again.
 
     ```
     export ADB_OCID=`oci db autonomous-database list --compartment-id $ROOT_COMP_ID --raw-output --query "data[?contains(\"db-name\",'lltest')].id | [0]"`
     echo $ADB_OCID
-<<<<<<< HEAD:oci-adb-iam/lab1_setup-environment-and-cloud-shell/lab1_setup-environment-and-cloud-shell.md
 
     export DB_ADMIN_OCID=`oci iam group list --raw-output --query "data[?contains(\"name\",'DB_ADMIN')].id | [0]"`
     echo $DB_ADMIN_OCID
@@ -110,40 +96,17 @@ throughout this workshop.
     export ALL_DB_USERS_OCID=`oci iam group list --raw-output --query "data[?contains(\"name\",'ALL_DB_USERS')].id | [0]"`
     echo $ALL_DB_USERS_OCID
 
-=======
-    ```
-    ![Env Var1](images/lab1-task2-step3-pt1.png)
-    ```
     export DB_ADMIN_OCID=`oci iam group list --raw-output --query "data[?contains(\"name\",'DB_ADMIN')].id | [0]"`
     echo $DB_ADMIN_OCID
-    ```
-    ![Env Var2](images/lab1-task2-step3-pt2.png)
-    ```
+
     export ALL_DB_USERS_OCID=`oci iam group list --raw-output --query "data[?contains(\"name\",'ALL_DB_USERS')].id | [0]"`
     echo $ALL_DB_USERS_OCID
     ```
-    ![Env Var3](images/lab1-task2-step3-pt3.png)
-    ```
->>>>>>> 1630f970d56517b9d7ad252b1ae8ef89d1eb0a64:oci-adb-iam/livelabscode/lab1_setup-environment-and-cloud-shell/lab1_setup-environment-and-cloud-shell.md
-    export DBA_DEBRA_OCID=`oci iam user list --raw-output --query "data[?contains(\"name\",'DBA_DEBRA')].id | [0]"`
-    echo $DBA_DEBRA_OCID
-    ```
-    ![Env Var4](images/lab1-task2-step3-pt4.png)
 
-4. Add your test user Debra to both groups that were created earlier.
-
-    ```
-    oci iam group add-user --user-id $DBA_DEBRA_OCID --group-id $ALL_DB_USERS_OCID
-    ```
-    ![Add Debra1](images/lab1-task2-step4-pt1.png)
-    ```
-    oci iam group add-user --user-id $DBA_DEBRA_OCID --group-id $DB_ADMIN_OCID
-    ```
-    ![Add Debra2](images/lab1-task2-step4-pt2.png)
-
-5. Add your cloud shell user to the ALL\_DB\_USERS group
+3. Add your OCI user to the ALL\_DB\_USERS group
 
     ```
     oci iam group add-user --user-id $OCI_CS_USER_OCID --group-id $ALL_DB_USERS_OCID
     ```
-    ![Add Shell User](images/lab1-task2-step5.png)
+
+You may now proceed to the next lab!

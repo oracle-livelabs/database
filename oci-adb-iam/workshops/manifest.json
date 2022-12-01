@@ -28,6 +28,11 @@
       "filename": "../../lab3_db-credentials-and-login/lab3_db-credentials-and-login.md"
     },
     {
+      "title": "Lab 4: Cleanup Lab Environment (Optional)",
+      "description": "Clean up resources created during lab",
+      "filename": "../../lab4_cleanup/lab4_cleanup.md"
+    },
+    {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"

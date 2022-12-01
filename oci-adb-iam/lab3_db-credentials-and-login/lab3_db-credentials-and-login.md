@@ -16,41 +16,15 @@ create IAM credentails for users and use those connections to connect to the dat
 This lab assumes you have:
 - Completed Lab 1 & Lab 2
 
-## Task 1: Connect to the database as Debra.
+## Task 1: Connect to the database as your OCI user.
 
-1. Create IAM credentials for user Debra.
-
-    ```
-    oci iam user create-db-credential --user-id $DBA_DEBRA_OCID --password Oracle123+Oracle123+ --description "DB password for Debra"
-    ```
-    ![Identity Debra](images/lab3-task1-step1.png)
-
-2. Connect to database with IAM credentials as Debra. (Note: origionally was "sqlplus /nolog <<EOF", but that was not working for some reason)
-
-    ```
-    sql /nolog <<EOF
-
-    connect dba_debra/Oracle123+Oracle123+@lltest_high
-
-    select * from session_roles order by 1;
-    select sys_context('USERENV','CURRENT_USER') from dual;
-    select sys_context('USERENV','AUTHENTICATED_IDENTITY') from dual;
-    select sys_context('USERENV','ENTERPRISE_IDENTITY') from dual;
-    select sys_context('USERENV','AUTHENTICATION_METHOD') from dual;
-    select sys_context('USERENV','IDENTIFICATION_TYPE') from dual;
-    select sys_context('USERENV','network_protocol') from dual;
-    EOF
-    ```
-
-## Task 2: Connect to the database as your OCI user & with a token.
-
-3. Create IAM credentials for your OCI user
+1. Create IAM credentials for your OCI user
 
     ```
     oci iam user create-db-credential --user-id $OCI_CS_USER_OCID --password Oracle123+Oracle123+ --description "DB password for your OCI account"
     ```
 
-4. Connect to database with IAM credentials as your OCI user.
+2. Connect to database with IAM credentials as your OCI user.
 
     ```
     sql /nolog <<EOF
@@ -65,11 +39,17 @@ This lab assumes you have:
     EOF
     ```
 
-5. Finally, try connecting to the database with a token. (need better explanation here)
+## Task 2: Connect to the database with a token.
+
+1. Get generate a token used for database access.
 
     ```
     oci iam db-token get
+    ```
 
+2. Connect to the database using your token. (need better explanation here)
+
+    ```
     sql /@lltest_high <<EOF
     select * from session_roles order by 1;
     select sys_context('USERENV','CURRENT_USER') from dual;
@@ -80,3 +60,5 @@ This lab assumes you have:
     select sys_context('USERENV','network_protocol') from dual;
     EOF
     ```
+
+You may now proceed to the next lab!
