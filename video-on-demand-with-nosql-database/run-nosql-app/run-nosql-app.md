@@ -2,7 +2,8 @@
 
 ## Introduction
 
-This lab picks up where lab 4 left off. We are going to explore in more detail the tables we created, load data, and execute queries using a Python application.
+This lab picks up where lab 4 left off. We are going to explore in more detail
+the tables we created, load data, and execute queries using a Python application.
 
 _Estimated Lab Time:_ 25 minutes
 
@@ -19,35 +20,28 @@ _Estimated Lab Time:_ 25 minutes
 * Working knowledge of SQL language
 
 
-## Task 1: Restart the Cloud Shell
+## Task 1: Review the code using OCI Code Editor
 
-1. Let's get back into the Cloud Shell. From the earlier lab, you may have minimized it in which case you need to enlarge it. It is possible it may have become disconnected and/or timed out. In that case, restart it.
+In this task we will review the code using OCI Code Editor.
 
-    ![](./images/cloud-shell-phoenix.png)
+1. Open the OCI Code Editor in the top right menu.
 
-2. Execute the following environment setup shell script in the Cloud Shell to set up your environment. If you close/open the Cloud Shell Console, please re-execute it.
+    ![Cloud Editor](./images/cloud-code-editor.png)
 
-    ```
-    <copy>
-    source ~/video-on-demand-with-nosql-database/env.sh
-    </copy>
-    ```
 
-## Task 2: Review the code using OCI Code Editor
-
-Go to the Code Editor, and open the file `index.js` in the following directory
+2. Go to the Code Editor, and open the file `index.js` in the following directory
 `video-on-demand-with-nosql-database/demo-vod` as shown in the screen-shot:
 
-![](./images/appl-code.png)
+    ![Code](./images/appl-code.png)
 
-Oracle NoSQL Database offers **flexible deployment** options to suit the needs of
+    Oracle NoSQL Database offers **flexible deployment** options to suit the needs of
 its customers. Whether deploying on an "On-Premises" cluster or utilizing the
 Oracle NoSQL Database Cloud Service, developers and end-users get the latest in
 NoSQL technology. Oracle offers a complete range of deployment options to
 support your NoSQL database, from on-premises to private cloud to public cloud.
 
-The function `createNoSQLClient` allows to illustrate this:
-- You can use **Instance Principals** to do the connection to NoSQL Cloud Service as
+    The function `createNoSQLClient` allows to illustrate this:
+    - You can use **Instance Principals** to do the connection to NoSQL Cloud Service as
 shown in this code instead of specifying the credentials. Once they are set up,
 you can configure your OKE cluster to isolate workloads across node pools,
 create a dynamic group, write your policies. Your application connects to Oracle
@@ -56,38 +50,53 @@ application using the Kubernetes command line tool kubectl from the
 instructions in a manifest file.
 e.g. We deploy our image [using GitHub Actions](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-vod.yml)
 
-- In this lab, we are going to be running application code and we need an instance
+    - In this lab, we are going to be running application code and we need an instance
 to run that from. We will run this application using Cloud Shell using another way
 called **delegation token**
 
-- Finally, the default configuration in this code, allows you to do the Connection
+    - Finally, the default configuration in this code, allows you to do the Connection
 to on-premise non-secure configuration. It is not the topic of this Lab but if you
 want to learn more [click here](https://github.com/oracle/nosql-examples/blob/master/demo-livelab/video-on-demand-with-nosql-database/README.md)
 
-- Otherwise, the rest of the code is exactly the same.
+    - Otherwise, the rest of the code is exactly the same.
 
-When you create a table, you can choose between **Provisioned Capacity** and
+    When you create a table, you can choose between **Provisioned Capacity** and
 **On-Demand Capacity**. With the availability of both models, businesses have total flexibility when
 choosing the most cost-effective deployment to meet their business and application
 workload requirements. Such flexibility empowers businesses to solely focus on application
 innovations to delight their customers, making operational costs "worry-free" in their decision-making process.
 
-You can also modify the **Capacity mode** from Provisioned Capacity to On Demand Capacity and vice-versa.
+    You can also modify the **Capacity mode** from Provisioned Capacity to On Demand Capacity and vice-versa.
 
-- The function `createTable` allows to illustrate this
+    - The function `createTable` allows to illustrate this
 
-As a developer, you can access your data via an API or SQL. Review the rest of the code,
+    As a developer, you can access your data via an API or SQL. Review the rest of the code,
 we are using both APIs to develop our application
-- Get, put, scan APIs for raw key/value pairs and tables – CRUD API
-- SQL for rich access to JSON, more complex filtering expressions
-- Support for conjunctions and disjunctions in filter expressions
+    - Get, put, scan APIs for raw key/value pairs and tables – CRUD API
+    - SQL for rich access to JSON, more complex filtering expressions
+    - Support for conjunctions and disjunctions in filter expressions
 
-In the next Lab **Explore Data and Run Queries**, we will explore more on detail
+    In the next Lab **Explore Data and Run Queries**, we will explore more on detail
  **SQL for rich access to JSON**. But let us continue with this Lab.
 
-## Task 3: Load Data and Examine It
+## Task 2: Restart the Cloud Shell
 
-The goal of this task is to understand the difference between the 2 data models used. The demoKeyVal table is a schema-less table, sometimes referred to as a JSON document, that contains a primary key and a JSON column.
+ 1. Let's get back into the Cloud Shell. From the earlier lab, you may have
+ minimized it in which case you need to enlarge it. It is possible it may have
+ become disconnected and/or timed out. In that case, restart it.
+
+     ![Cloud Shell](./images/cloud-shell.png)
+
+ 2. Execute the following environment setup shell script in the Cloud Shell to
+ set up your environment. If you close/open the Cloud Shell Console, please re-execute it.
+
+     ```
+     <copy>
+     source ~/video-on-demand-with-nosql-database/env.sh
+     </copy>
+     ```
+
+## Task 3: Load Data and Examine It
 
 1. Install the Node.js application. Execute in the Cloud Shell.
 
@@ -107,7 +116,8 @@ The goal of this task is to understand the difference between the 2 data models 
 
     Press the **Enter** key on your keypad to get the command line prompt back.
 
-3. Read back the data that we entered in the Lab 3. Execute in the Cloud Shell.
+3. Read back the data that we entered in the Lab 3 using the GraphQL query `Streams`.
+Execute in the Cloud Shell.
 
     ````
     <copy>
@@ -118,7 +128,7 @@ The goal of this task is to understand the difference between the 2 data models 
 
     This will display all the rows in the table currently without details about shows.
 
-4. Read data for a specific user using GET command
+4. Read data for a specific user using the GraphQL query `Stream($streamId: Int)`
 
     ````
     <copy>
@@ -130,7 +140,8 @@ The goal of this task is to understand the difference between the 2 data models 
     </copy>
     ````
 
-5. Execute one of the reports - For every show aired by the application, fetch the total watch time by all users
+5. Execute one of the reports using the GraphQL queries - For every show aired
+by the application, fetch the total watch time by all users
 
     ````
     <copy>
@@ -141,9 +152,11 @@ The goal of this task is to understand the difference between the 2 data models 
     </copy>
     ````
 
-6. Insert data into the stream_acct table.
+6. Insert data into the stream_acct table using the GraphQL mutations.
 
-    This will be done using a curl command to transfer data over the network to the NoSQL store using the "demo-vod" application. Execute in Cloud Shell.
+    This will be done using a curl command to transfer data over the network to the
+    NoSQL store using the "demo-vod" application. The shell script will prompt the
+    GraphQL and will execute it. Execute in Cloud Shell.
 
     ````
     <copy>
@@ -166,7 +179,8 @@ The goal of this task is to understand the difference between the 2 data models 
     ````
 
 
-7. You can also execute sql statements using Oracle Cloud Infrastructure CLI commands. Going this route, you will be querying the data over REST. Execute in Cloud Shell.
+7. You can also execute sql statements using Oracle Cloud Infrastructure CLI commands.
+Going this route, you will be querying the data over REST. Execute in Cloud Shell.
 
     ````
     <copy>
@@ -183,26 +197,54 @@ The goal of this task is to understand the difference between the 2 data models 
   In this case, the data is formatted as a nice JSON document.
 
 7. Load information for 91 users. For the shows, we will insert 5 randoms shows
-using a set of 46 shows
+using a set of 46 shows.
 
-````
-<copy>
-cd ~/video-on-demand-with-nosql-database/example-graphql-query/
-sh load.sh
-</copy>
-````
-If you have an error saying,
-````
-ls: cannot access ../data/User: No such file or directory
-````
-it means that you forgot to load the data
-````
-<copy>
-cd ~/video-on-demand-with-nosql-database/data/
-sh unzip.sh
-</copy>
-````
+  **Note**: During this load, You can minimize the Cloud Shell and explore the data
+  in detail using the NoSQL Console as shown in Lab 3 - Task 4
 
+    ````
+    <copy>
+    cd ~/video-on-demand-with-nosql-database/example-graphql-query/
+    sh load.sh
+    </copy>
+    ````
+    If you have an error saying,
+    ````
+    ls: cannot access ../data/User: No such file or directory
+    ````
+    it means that you forgot to load the data
+    ````
+    <copy>
+    cd ~/video-on-demand-with-nosql-database/data/
+    sh unzip.sh
+    </copy>
+    ````
+## Task 4: Create Indexes
+
+In the next Lab **Explore Data and Run Queries**, we will see the power of
+**SQL for rich access to JSON**. Before doing it, we will create the indexes on
+stream_acct table that will be handy while writing the queries.
+
+You can create these indexes from the OCI console, OCI cli commands, Terraform or directly from your program.
+
+In this task, we will create 3 of 5 indexes using a Node.js program.
+
+1. Review the DDL commands
+    ```
+    <copy>
+    cd ~/video-on-demand-with-nosql-database/demo-vod
+    more demo-stream-acct-idx*.ddl | cat
+    </copy>
+    ```
+
+2. Execute the create-table.js application. Execute in the Cloud Shell.
+```
+
+    <copy>
+    cd ~/video-on-demand-with-nosql-database/demo-vod
+    node create-table.js
+    </copy>
+    ```
 
 ## Learn More
 

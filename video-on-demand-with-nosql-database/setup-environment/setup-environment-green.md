@@ -88,7 +88,7 @@ to get the Cloud Shell started.
 to get the Code Editor started. You can continue the next Task. Cloud Editor
 will be used only in the Lab4
 
-    ![cloud-oci-editor](images/cloud-oci-editor.png)
+    ![cloud-code-editor](images/cloud-code-editor.png)
 
 
 ## Task 3: Understand Credentials, and Policies

@@ -2,7 +2,12 @@
 
 ## Introduction
 
-This lab walks you through creating and loading NoSQL tables. This can be done a variety of different ways including using the Oracle Cloud Console, writing an application program, or triggering actions through a function. This lab will walk you through a couple of different approaches. Oracle NoSQL Database Cloud Service supports both schema-based and schema-less (JSON) modeling so we will create examples of both tables.
+This lab walks you through creating and loading NoSQL tables. This can be done a
+variety of different ways including using the Oracle Cloud Console, writing an
+application program, or triggering actions through a function. This lab will
+walk you through a couple of different approaches. Oracle NoSQL Database Cloud
+Service supports both schema-based and schema-less (JSON) modeling so we will
+create examples of both tables.
 
 _Estimated Lab Time:_ 25 minutes
 
@@ -82,7 +87,8 @@ Infrastructure Command Line Interface (CLI). The CLI commands issued from the Cl
 Shell make REST calls to the Oracle NoSQL Database Cloud Service (NDCS).
 Oracle Cloud Infrastructure offers several SDKs in different languages that
 you can use to make REST calls to NDCS. To make things a little simpler,
-we have created some shell scripts and files that will assist you in this Task. We need to download those to the Cloud Shell first.
+we have created some shell scripts and files that will assist you in this Task.
+We need to download those to the Cloud Shell first.
 
 1. Open the **Cloud Shell** from the top right menu.
 
@@ -128,11 +134,14 @@ and  echo the DDL statement so you can see what is being created.
 
 ## Task 3:  Adding Data From the Oracle Cloud Console
 
-1. Make sure you see the 'Tables' screen. You should see 2 tables listed. You may see different values for read units, write units and storage.
+1. Make sure you see the 'Tables' screen. You should see 2 tables listed. You
+may see different values for read units, write units and storage.
 
     ![table-screen](./images/table-screen.png)
 
-2. Let's start with the simple table we created in Task 1. Click **test** table. The details screen that shows up, displays all the key information about the table. Explore that screen.
+2. Let's start with the simple table we created in Task 1. Click **test** table.
+The details screen that shows up, displays all the key information about the table.
+Explore that screen.
 
     ![my-test](./images/my-test.png)
 
@@ -140,11 +149,14 @@ and  echo the DDL statement so you can see what is being created.
 
     ![insert-row](./images/insert-row.png)
 
-4. On the 'Insert row' screen, you will see two ways to input data - a simple and advanced. For our test table we will use the simple method. Enter a value for the **Pkey** column and the **Name** column. When done, press **Insert row.**
+4. On the 'Insert row' screen, you will see two ways to input data - a simple and advanced.
+For our test table we will use the simple method. Enter a value for the **Pkey** column
+and the **Name** column. When done, press **Insert row.**
 
     ![row-inserted](./images/row-inserted.png)
 
-5. Let's insert rows into another table. First we need to get back to the 'Tables' screen. Click **Tables** on top right.
+5. Let's insert rows into another table. First we need to get back to the 'Tables'
+screen. Click **Tables** on top right.
 
     ![click-tables](./images/click-tables.png)
 
@@ -152,15 +164,16 @@ and  echo the DDL statement so you can see what is being created.
 
     ![capturenosql](./images/capturenosql.png)
 
-7. Click **Table rows**
+7. Click **Explore data**
 
-  Copy/Paste the following 3 commands below in the **Query** text box. Because this JSON document is complex, it is easiest to copy/paste into the field. However, you could have typed it all in. Then
-  click on **Run Query**
+  Copy/Paste the following 3 commands below in the **SQL statement** text box. Because
+  this JSON document is complex, it is easiest to copy/paste into the field.
+  However, you could have typed it all in. Then click on **Execute**
 
   ![table-row-insert](./images/table-row-insert.png)
 
 
-Command 1
+  SQL statement 1
 
   ````
   <copy>
@@ -220,7 +233,7 @@ Command 1
   </copy>
   ````
 
-  Command 2
+  SQL statement 2
 
   ````
   <copy>
@@ -279,7 +292,7 @@ Command 1
   RETURNING *
   </copy>
   ````
-  Command 3
+  SQL statement 3
   ````
   <copy>
   INSERT INTO stream_acct VALUES(
@@ -340,13 +353,15 @@ Command 1
 
 ## Task 4:  Show Data From the Console
 
-Starting with the `stream_acct` demo table, we can go and look at the data we inserted for each of the tables.
+Starting with the `stream_acct` demo table, we can go and look at the data we
+inserted for each of the tables.
 
-1. On the left click **Table rows**
+1. On the left click **Explore data**
 
     ![table-row-select](./images/table-row-select.png)
 
-2. In the textbox **Query**, keep the text `SELECT * FROM stream_acct` This will select all the rows from our table. Click **Run query**
+2. In the textbox **SQL statement**, keep the text `SELECT * FROM stream_acct` This will
+select all the rows from our table. Click **Execute**
 
     ![run-query](./images/run-query.png)
 
@@ -355,7 +370,8 @@ Starting with the `stream_acct` demo table, we can go and look at the data we in
   ![explore-row-select](./images/explore-row-select.png)
 
 
-3. Go to the top left, press **Tables**, select the **test** table, and look at the row inserted into that table.
+3. Go to the top left, press **Tables**, select the **test** table, and look at
+the row inserted into that table.
 
 You may now **proceed to the next lab.**
 

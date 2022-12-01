@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "898768c5-e4ea-4a05-b9d3-084e1c6171b1",
+		"_postman_id": "7f5e87fa-e7b5-4165-8bdd-4e14d065bbb0",
 		"name": "Demo Streaming",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -393,7 +393,7 @@
 	"variable": [
 		{
 			"key": "api-url",
-			"value": "ivjinqwcyivgswtepdhy3mio5a.apigateway.us-ashburn-1.oci.customer-oci.com/graphql/",
+			"value": "bmbbblriml5b2c36fifpqz5ieq.apigateway.eu-paris-1.oci.customer-oci.com/",
 			"type": "default"
 		}
 	]
