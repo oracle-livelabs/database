@@ -34,8 +34,8 @@ throughout this workshop.
     ![OCI Homepage](images/oci-homepage.png)
 
 1. Using the Cloud Shell, identify the root compartment id.
-    >**Note:** If at any point in this workshop you exit out of the Cloud Shell, you may need to redo
-    this step and any others that use the "export" command. The variables created with "export" that are used in future steps are deleted when the Cloud Shell session ends.  
+    >**Note:** If at any point in this workshop you exit out of the Cloud Shell, you may need to reexecute
+    this step and any others that use the "export" command. The environemnt variables created with "export" that are used in future steps are deleted when the Cloud Shell session ends.  
 
     ```
     export ROOT_COMP_ID=`oci iam compartment list --include-root --raw-output --query "data[?contains(\"id\",'tenancy')].id | [0]"`
@@ -72,7 +72,7 @@ throughout this workshop.
     oci iam policy create  --name grant-adb-access --compartment-id $ROOT_COMP_ID  --statements '[ "allow any-user to use autonomous-database-family in tenancy"]' --description 'policy for granting any user to access autonomous databases'
     ```
 
-## Task 2: Create and assign group
+## Task 2: Create and assign groups
 
 1. Create two groups in IAM, one for all database users and one for database admins.
 
@@ -84,17 +84,11 @@ throughout this workshop.
     ```
 
 2. Setup and verify environment variables for ease of use in commands later.
-    >**Note:** If at any point after this step you exit out of the cloud shell, these commands may need to be ran again.
+    >**Note:** If at any point after this step you exit out of the cloud shell, these commands may need to be executed again to reset the environment variables.
 
     ```
     export ADB_OCID=`oci db autonomous-database list --compartment-id $ROOT_COMP_ID --raw-output --query "data[?contains(\"db-name\",'lltest')].id | [0]"`
     echo $ADB_OCID
-
-    export DB_ADMIN_OCID=`oci iam group list --raw-output --query "data[?contains(\"name\",'DB_ADMIN')].id | [0]"`
-    echo $DB_ADMIN_OCID
-
-    export ALL_DB_USERS_OCID=`oci iam group list --raw-output --query "data[?contains(\"name\",'ALL_DB_USERS')].id | [0]"`
-    echo $ALL_DB_USERS_OCID
 
     export DB_ADMIN_OCID=`oci iam group list --raw-output --query "data[?contains(\"name\",'DB_ADMIN')].id | [0]"`
     echo $DB_ADMIN_OCID
@@ -110,3 +104,14 @@ throughout this workshop.
     ```
 
 You may now proceed to the next lab!
+
+## Learn More
+
+* []()
+
+## Acknowledgements
+* **Author**
+	* Miles Novotny, Solution Engineer, NASH
+	* Noah Galloso, Solution Engineer, NASH
+* **Contributors** - Richard Events, Database Security Product Management
+* **Last Updated By/Date** - Miles Novotny, December 2022

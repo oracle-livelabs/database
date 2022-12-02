@@ -37,10 +37,14 @@ This lab assumes you have:
     oci db autonomous-database delete --autonomous-database-id $ADB_OCID
     ```
 
-4. Delete the **ALL_DB_USERS** group
+4. Delete the **ALL\_DB\_USERS** and **DB_ADMIN** groups.
 
     ```
     oci iam group delete --group-id $ALL_DB_USERS_OCID
+    ```
+
+    ```
+    oci iam group delete --group-id $DB_ADMIN_OCID
     ```
 
 5. You may now close your cloud shell session, as you will use the OCI Console to delete the final resource. Click on the hamburger icon in the top left corner. Choose **Identity and Security** then **Policies**.
@@ -52,3 +56,10 @@ This lab assumes you have:
 6. Ensure that you are in your root compartment, and you should see the policiy called **grant-adb-access**. Click the box next to its name then click delete.
 
     ![Policy Page - Delete](images/delete-policy.png)
+
+## Acknowledgements
+* **Author**
+  * Miles Novotny, Solution Engineer, NASH
+  * Noah Galloso, Solution Engineer, NASH
+* **Contributors** - Richard Events, Database Security Product Management
+* **Last Updated By/Date** - Miles Novotny, December 2022

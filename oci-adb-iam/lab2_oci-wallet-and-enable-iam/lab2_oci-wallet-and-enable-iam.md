@@ -42,18 +42,21 @@ This lab assumes you have:
 
 ## Task 2: Enable OCI IAM as the identity provider
 
-1. Connect to the database using the wallet file. This step and the following steps will not run until the **EOF** statement at the end of step 4.
+1. Open the SQL command line, then connect to the database using the wallet file.
+    >**Note:** This command only works from inside the adb_wallet folder. Insure that you have navigated to it as shown in the previous steps.
 
     ```
-    sql /nolog <<EOF
-    set cloudconfig $HOME/adb_wallet/lltest_wallet.zip
+    sql /nolog
+    ```
+    ```
+    set cloudconfig lltest_wallet.zip
     conn admin/Oracle123+Oracle123+@lltest_high
     ```
 
 2. Query to select the identity provider, and see that it is **NONE** by default.
 
     ```
-    select name, value from v\$parameter where name ='identity_provider_type';
+    select name, value from v$parameter where name ='identity_provider_type';
     ```
 
 
@@ -68,7 +71,7 @@ This lab assumes you have:
     ```
     exec dbms_cloud_admin.enable_external_authentication('OCI_IAM');
 
-    select name, value from v\$parameter where name ='identity_provider_type';
+    select name, value from v$parameter where name ='identity_provider_type';
     ```
 
     ```
@@ -77,32 +80,32 @@ This lab assumes you have:
     identity_provider_type    OCI_IAM    
     ```
 
-4. Create the **user\_shared** user and grant it permissions to create sessions. Create the **sr\_dba\_role** role and grant it permissions. This command and all previous ones will run when this is entered into the Cloud Shell.
+4. Create the **user\_shared** user and grant it permissions to create sessions. Create the **sr\_dba\_role** role and grant it permissions. Quit the SQL session.
 
     ```
     create user user_shared identified globally as 'IAM_GROUP_NAME=All_DB_Users';
     grant create session to user_shared;
     create role sr_dba_role identified globally as 'IAM_GROUP_NAME=DB_Admin';
     grant pdb_dba to sr_dba_role;
-    EOF
+    quit
     ```
 
 ## Task 3: Unzip wallet file and edit contents
 
-1. unzip your ADB wallet file.
+1. Unzip your ADB wallet file.
 
     ```
     unzip -d . lltest_wallet.zip
     ```
 
-2. Create variable for location of wallet file.
-    >**Note:** If at any point you exit out of the cloud shell, the following commands may need to be ran again.
+2. Create session variable for location of wallet file.
+    >**Note:** If at any point you exit out of the cloud shell, the following commands may need to be executed again to reset the environment variables.
 
     ```
     export TNS_ADMIN=$HOME/adb_wallet
     ```
 
-3. update tnsname.ora and sqlnet.ora files. Append sqlnet.ora with the wallet location.
+3. Append the ADB's sqlnet.ora entry with the environment variable for the wallet location.
 
     ```
     mv tnsnames.ora tnsnames.ora.orig
@@ -114,7 +117,7 @@ This lab assumes you have:
     cat sqlnet.ora
     ```
 
-4. Append tnsname.ora so than an authorization token can be used to access the datbase.
+4. Append the TOKEN_AUTH parameter to the ADB instance's tnsname.ora entry so that an authorization token can be used instead of a password.
 
     ```
     head -1 tnsnames.ora.orig | sed -e 's/)))/)(TOKEN_AUTH=OCI_TOKEN)))/' > tnsnames.ora
@@ -123,3 +126,14 @@ This lab assumes you have:
     ```
 
 You may now proceed to the next lab!
+
+## Learn More
+
+* [Parameters for the sqlnet.ora File](https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/parameters-for-the-sqlnet.ora.html#GUID-2041545B-58D4-48DC-986F-DCC9D0DEC642)
+
+## Acknowledgements
+* **Author**
+	* Miles Novotny, Solution Engineer, NASH
+	* Noah Galloso, Solution Engineer, NASH
+* **Contributors** - Richard Events, Database Security Product Management
+* **Last Updated By/Date** - Miles Novotny, December 2022
