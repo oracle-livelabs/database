@@ -39,13 +39,14 @@ This lab assumes you have:
     EOF
     ```
 
-3. Add your OCI user to the ___ group.
+3. Add your OCI user to the **DB_ADMIN** group.
 
     ```
     oci iam group add-user --user-id $OCI_CS_USER_OCID --group-id $DB_ADMIN_OCID
     ```
 
-4. Connect to the database with IAM credentials again and see the ____ updated for your OCI user.
+4. Connect to the database with IAM credentials again. As a member of the **DB_ADMIN** group your user now sees all possible session roles returned in the query, rather than the zero rows that were returned previously. 
+
 
     ```
     sql /nolog <<EOF
@@ -68,7 +69,7 @@ This lab assumes you have:
     oci iam db-token get
     ```
 
-2. Connect to the database using your token. This lets you connect to the database without a password. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming. For more information on parameters in the sqlnet.ora or tnsnames.ora files, please see the Oracle Database 19c Net Services Reference book. 
+2. Connect to the database using your token. This lets you connect to the database without a password. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming. For more information on parameters in the sqlnet.ora or tnsnames.ora files, please see the Oracle Database 19c Net Services Reference book.
 
     ```
     sql /@lltest_high <<EOF

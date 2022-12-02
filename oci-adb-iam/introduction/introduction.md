@@ -48,6 +48,8 @@ In general, the Introduction does not have Steps.
 * [URL text 2](http://docs.oracle.com)
 
 ## Acknowledgements
-* **Author** - <Name, Title, Group>
-* **Contributors** -  <Name, Group> -- optional
-* **Last Updated By/Date** - <Name, Month Year>
+* **Author**
+	* Miles Novotny, Solution Engineer, NASH
+	* Noah Galloso, Solution Engineer, NASH
+* **Contributors** - Richard Events, Database Security Product Management
+* **Last Updated By/Date** - Miles Novotny, December 2022
