@@ -78,7 +78,7 @@ create IAM credentails for users and use those connections to connect to the dat
     oci iam group add-user --user-id $OCI_CS_USER_OCID --group-id $DB_ADMIN_OCID
     ```
 
-4. Connect to the database with IAM credentials again. Because the **DB_ADMIN** IAM group is mapped to the **SR_DBA_ROLE** ADB group you will see the first query of this script now return TRUE.
+4. Connect to the database with IAM credentials again. Because the **DB_ADMIN** IAM group is mapped to the **SR\_DBA\_ROLE** ADB group you will see the first query of this script now return TRUE.
     >**Note:** The output for AUTHENTICATED IDENTITY and ENTERPRISE IDENTITY is obscurified in the example output to protect user information, but will appear unobscured for you.
 
     ```
