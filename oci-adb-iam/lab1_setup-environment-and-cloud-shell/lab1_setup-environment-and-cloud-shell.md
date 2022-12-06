@@ -14,16 +14,6 @@ from the Oracle Cloud Console. It is a Linux shell pre-configured with the OCI C
 - Create Groups and Policies to be used later
 - Add your OCI user to greated groups
 
-### Prerequisites
-This lab assumes you have:
-- A Free Tier, Paid or LiveLabs Oracle Cloud account
-- You have completed:
-    - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
-    - Lab: Environment Setup
-    - Lab: Initialize Environment
-
-
-
 ## Task 1: Provision the Autonomous Database
 >**Note:** It is advised that you do not perform this lab in a production tenancy due to policies created in this lab that give all users access to all ADBs in the tenancy.
 
@@ -111,7 +101,7 @@ You may now proceed to the next lab!
 
 ## Acknowledgements
 * **Author**
-	* Miles Novotny, Solution Engineer, NASH
-	* Noah Galloso, Solution Engineer, NASH
+	* Miles Novotny, Solution Engineer, North America Specalist Hub
+	* Noah Galloso, Solution Engineer, North America Specalist Hub
 * **Contributors** - Richard Events, Database Security Product Management
 * **Last Updated By/Date** - Miles Novotny, December 2022

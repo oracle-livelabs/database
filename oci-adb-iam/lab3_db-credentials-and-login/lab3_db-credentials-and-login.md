@@ -12,10 +12,6 @@ create IAM credentails for users and use those connections to connect to the dat
 - Use IAM credentials to log into and query the database
 - Use a IAM Token to connect to and query the database
 
-### Prerequisites
-This lab assumes you have:
-- Completed Lab 1 & Lab 2
-
 ## Task 1: Connect to the database as your OCI user.
 
 1. Create IAM credentials for your OCI user
@@ -29,7 +25,7 @@ This lab assumes you have:
     ```
     sql /nolog <<EOF
     connect "${OCI_USER_NAME}"/Oracle123+Oracle123+@lltest_high
-    select * from session_roles order by 1;
+    select sys_context('SYS_SESSION_ROLES', 'SR_DBA_ROLE') from dual;
     select sys_context('USERENV','CURRENT_USER') from dual;
     select sys_context('USERENV','AUTHENTICATED_IDENTITY') from dual;
     select sys_context('USERENV','ENTERPRISE_IDENTITY') from dual;
@@ -37,6 +33,42 @@ This lab assumes you have:
     select sys_context('USERENV','IDENTIFICATION_TYPE') from dual;
     select sys_context('USERENV','network_protocol') from dual;
     EOF
+    ```
+
+    ```
+    SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
+    _________________________________________________
+    FALSE                                             
+
+
+    SYS_CONTEXT('USERENV','CURRENT_USER')    
+    ________________________________________
+    USER_SHARED                              
+
+
+    SYS_CONTEXT('USERENV','AUTHENTICATED_IDENTITY')    
+    __________________________________________________
+    milesnov@umich.edu                                 
+
+
+    SYS_CONTEXT('USERENV','ENTERPRISE_IDENTITY')                                    
+    _______________________________________________________________________________
+    ocid1.user.oc1..aaaaaaaafo2hqdolb5e4dvjjm3c2stdxwqseojy3hyhnp7guvqzpdy54di4q    
+
+
+    SYS_CONTEXT('USERENV','AUTHENTICATION_METHOD')    
+    _________________________________________________
+    PASSWORD_GLOBAL                                   
+
+
+    SYS_CONTEXT('USERENV','IDENTIFICATION_TYPE')    
+    _______________________________________________
+    GLOBAL SHARED                                   
+
+
+    SYS_CONTEXT('USERENV','NETWORK_PROTOCOL')    
+    ____________________________________________
+    tcps
     ```
 
 3. Add your OCI user to the **DB_ADMIN** group.
@@ -45,13 +77,12 @@ This lab assumes you have:
     oci iam group add-user --user-id $OCI_CS_USER_OCID --group-id $DB_ADMIN_OCID
     ```
 
-4. Connect to the database with IAM credentials again. As a member of the **DB_ADMIN** group your user now sees all possible session roles returned in the query, rather than the zero rows that were returned previously. 
-
+4. Connect to the database with IAM credentials again. Because the **DB_ADMIN** IAM group is mapped to the **SR_DBA_ROLE** ADB group you will see the first query of this script now return TRUE.
 
     ```
     sql /nolog <<EOF
     connect "${OCI_USER_NAME}"/Oracle123+Oracle123+@lltest_high
-    select * from session_roles order by 1;
+    select sys_context('SYS_SESSION_ROLES', 'SR_DBA_ROLE') from dual;
     select sys_context('USERENV','CURRENT_USER') from dual;
     select sys_context('USERENV','AUTHENTICATED_IDENTITY') from dual;
     select sys_context('USERENV','ENTERPRISE_IDENTITY') from dual;
@@ -59,6 +90,42 @@ This lab assumes you have:
     select sys_context('USERENV','IDENTIFICATION_TYPE') from dual;
     select sys_context('USERENV','network_protocol') from dual;
     EOF
+    ```
+
+    ```
+    SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
+    _________________________________________________
+    TRUE                                              
+
+
+    SYS_CONTEXT('USERENV','CURRENT_USER')    
+    ________________________________________
+    USER_SHARED                              
+
+
+    SYS_CONTEXT('USERENV','AUTHENTICATED_IDENTITY')    
+    __________________________________________________
+    milesnov@umich.edu                                 
+
+
+    SYS_CONTEXT('USERENV','ENTERPRISE_IDENTITY')                                    
+    _______________________________________________________________________________
+    ocid1.user.oc1..aaaaaaaafo2hqdolb5e4dvjjm3c2stdxwqseojy3hyhnp7guvqzpdy54di4q    
+
+
+    SYS_CONTEXT('USERENV','AUTHENTICATION_METHOD')    
+    _________________________________________________
+    PASSWORD_GLOBAL                                   
+
+
+    SYS_CONTEXT('USERENV','IDENTIFICATION_TYPE')    
+    _______________________________________________
+    GLOBAL SHARED                                   
+
+
+    SYS_CONTEXT('USERENV','NETWORK_PROTOCOL')    
+    ____________________________________________
+    tcps   
     ```
 
 ## Task 2: Connect to the database with a token.
@@ -69,11 +136,11 @@ This lab assumes you have:
     oci iam db-token get
     ```
 
-2. Connect to the database using your token. This lets you connect to the database without a password. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming. For more information on parameters in the sqlnet.ora or tnsnames.ora files, please see the Oracle Database 19c Net Services Reference book.
+2. Connect to the database using your token. This lets you connect to the database without a password. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming. For more information on parameters in the sqlnet.ora or tnsnames.ora files, please see the Oracle Database 19c Net Services Reference book. You should see the same output from this query as in the previous steps. 
 
     ```
     sql /@lltest_high <<EOF
-    select * from session_roles order by 1;
+    select sys_context('SYS_SESSION_ROLES', 'SR_DBA_ROLE') from dual;
     select sys_context('USERENV','CURRENT_USER') from dual;
     select sys_context('USERENV','AUTHENTICATED_IDENTITY') from dual;
     select sys_context('USERENV','ENTERPRISE_IDENTITY') from dual;
@@ -88,10 +155,11 @@ You may now proceed to the next lab!
 ## Learn More
 
 * [Connecting to Autonomous Database with Identity and Access Management (IAM) Authentication](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/iam-access-database.html#GUID-CFC74EAF-E887-4B1F-9E9A-C956BCA0BEA9)
+* [Connecting to Autonomous Database using a token] (https://blogs.oracle.com/cloudsecurity/post/password-free-authentication-to-autonomous-database-using-sqlcl-with-cloud-shell)
 
 ## Acknowledgements
 * **Author**
-	* Miles Novotny, Solution Engineer, NASH
-	* Noah Galloso, Solution Engineer, NASH
+	* Miles Novotny, Solution Engineer, North America Specalist Hub
+	* Noah Galloso, Solution Engineer, North America Specalist Hub
 * **Contributors** - Richard Events, Database Security Product Management
 * **Last Updated By/Date** - Miles Novotny, December 2022

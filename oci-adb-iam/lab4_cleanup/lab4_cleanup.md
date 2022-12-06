@@ -59,7 +59,7 @@ This lab assumes you have:
 
 ## Acknowledgements
 * **Author**
-  * Miles Novotny, Solution Engineer, NASH
-  * Noah Galloso, Solution Engineer, NASH
+  * Miles Novotny, Solution Engineer, North America Specalist Hub
+  * Noah Galloso, Solution Engineer, North America Specalist Hub
 * **Contributors** - Richard Events, Database Security Product Management
 * **Last Updated By/Date** - Miles Novotny, December 2022

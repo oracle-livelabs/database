@@ -12,10 +12,6 @@ In this lab you will generate a wallet file for your ADB. This wallet file can b
 - Create database users and grant them permissions
 - unzip wallet and update files so that the ADB can be accessed using a token
 
-### Prerequisites
-This lab assumes you have:
-- Completed Lab 1: Create ADB and set up Environment
-
 ## Task 1: Generate Wallet in adb_wallet folder
 
 1. Create adb_wallet directory.
@@ -130,10 +126,11 @@ You may now proceed to the next lab!
 ## Learn More
 
 * [Parameters for the sqlnet.ora File](https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/parameters-for-the-sqlnet.ora.html#GUID-2041545B-58D4-48DC-986F-DCC9D0DEC642)
+* [Local Naming Parameters in the tnsname.ora File] (https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/local-naming-parameters-in-tns-ora-file.html#GUID-7F967CE5-5498-427C-9390-4A5C6767ADAA)
 
 ## Acknowledgements
 * **Author**
-	* Miles Novotny, Solution Engineer, NASH
-	* Noah Galloso, Solution Engineer, NASH
+	* Miles Novotny, Solution Engineer, North America Specalist Hub
+	* Noah Galloso, Solution Engineer, North America Specalist Hub
 * **Contributors** - Richard Events, Database Security Product Management
 * **Last Updated By/Date** - Miles Novotny, December 2022
