@@ -136,7 +136,7 @@ create IAM credentails for users and use those connections to connect to the dat
     oci iam db-token get
     ```
 
-2. Connect to the database using your token. This lets you connect to the database without a password. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming. For more information on parameters in the sqlnet.ora or tnsnames.ora files, please see the Oracle Database 19c Net Services Reference book. You should see the same output from this query as in the previous steps. 
+2. Connect to the database using your token. This lets you connect to the database without a password. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming. For more information on parameters in the sqlnet.ora or tnsnames.ora files, please see the Oracle Database 19c Net Services Reference book. You should see the same output from this query as in the previous step. 
 
     ```
     sql /@lltest_high <<EOF
