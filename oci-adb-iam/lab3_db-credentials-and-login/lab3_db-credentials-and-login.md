@@ -21,6 +21,7 @@ create IAM credentails for users and use those connections to connect to the dat
     ```
 
 2. Connect to database with IAM credentials as your OCI user.
+    >**Note:** The output for AUTHENTICATED IDENTITY and ENTERPRISE IDENTITY is obscurified in the example output to protect user information, but will appear unobscured for you.
 
     ```
     sql /nolog <<EOF
@@ -48,12 +49,12 @@ create IAM credentails for users and use those connections to connect to the dat
 
     SYS_CONTEXT('USERENV','AUTHENTICATED_IDENTITY')    
     __________________________________________________
-    milesnov@umich.edu                                 
+    xxxxxxxxxxxxxxxxxxxxxxx                          
 
 
     SYS_CONTEXT('USERENV','ENTERPRISE_IDENTITY')                                    
     _______________________________________________________________________________
-    ocid1.user.oc1..aaaaaaaafo2hqdolb5e4dvjjm3c2stdxwqseojy3hyhnp7guvqzpdy54di4q    
+    xxxxxxxxxxxxxxxxxxxxxxx    
 
 
     SYS_CONTEXT('USERENV','AUTHENTICATION_METHOD')    
@@ -78,6 +79,7 @@ create IAM credentails for users and use those connections to connect to the dat
     ```
 
 4. Connect to the database with IAM credentials again. Because the **DB_ADMIN** IAM group is mapped to the **SR_DBA_ROLE** ADB group you will see the first query of this script now return TRUE.
+    >**Note:** The output for AUTHENTICATED IDENTITY and ENTERPRISE IDENTITY is obscurified in the example output to protect user information, but will appear unobscured for you.
 
     ```
     sql /nolog <<EOF
@@ -105,12 +107,12 @@ create IAM credentails for users and use those connections to connect to the dat
 
     SYS_CONTEXT('USERENV','AUTHENTICATED_IDENTITY')    
     __________________________________________________
-    milesnov@umich.edu                                 
+    xxxxxxxxxxxxxxxxxxxxxxx                                 
 
 
     SYS_CONTEXT('USERENV','ENTERPRISE_IDENTITY')                                    
     _______________________________________________________________________________
-    ocid1.user.oc1..aaaaaaaafo2hqdolb5e4dvjjm3c2stdxwqseojy3hyhnp7guvqzpdy54di4q    
+    xxxxxxxxxxxxxxxxxxxxxxx    
 
 
     SYS_CONTEXT('USERENV','AUTHENTICATION_METHOD')    
@@ -136,7 +138,7 @@ create IAM credentails for users and use those connections to connect to the dat
     oci iam db-token get
     ```
 
-2. Connect to the database using your token. This lets you connect to the database without a password. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming. For more information on parameters in the sqlnet.ora or tnsnames.ora files, please see the Oracle Database 19c Net Services Reference book. You should see the same output from this query as in the previous step. 
+2. Connect to the database using your token. This lets you connect to the database without a password. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming. For more information on parameters in the sqlnet.ora or tnsnames.ora files, please see the Oracle Database 19c Net Services Reference book. You should see the same output from this query as in the previous step.
 
     ```
     sql /@lltest_high <<EOF
