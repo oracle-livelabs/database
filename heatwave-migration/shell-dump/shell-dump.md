@@ -47,14 +47,14 @@ In this lab, you will be guided through the following tasks:
 
     ```bash
     <copy>cd</copy>
-    ````
-    ````bash
+    ```
+    ```bash
     <copy>mkdir .oci</copy>
-    ````
-    ````bash
+    ```
+    ```bash
     <copy>cd .oci</copy>
-    ````
-    ````bash
+    ```
+    ```bash
     <copy>nano config</copy>
     ```
 
@@ -62,12 +62,12 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images/paste-config.png "paste-config")
 
-    **Note:** you will need to add your ‘Private API Key’ path where it says “key _ file”. This is how I did it; navigate back to your home directory and create a file called “privapikey.pem” and paste the contents of the Private API Key into the “privapikey.pem” file. Retieve the path of the .pem key and update the .oci/config file “key _ file”
+    **Note:** you will need to add your ‘Private API Key’ path where it says "key _ file". This is how I did it; navigate back to your home directory and create a file called “privapikey.pem” and paste the contents of the Private API Key into the “privapikey.pem” file. Retieve the path of the .pem key and update the .oci/config file "key _ file"
 
     ```bash
     <copy>cd</copy>
-    ````
-    ````bash
+    ```
+    ```bash
     <copy>nano privapikey.pem</copy>
     ```
 
@@ -107,8 +107,8 @@ In this lab, you will be guided through the following tasks:
 
     ```bash
     <copy>\js</copy>
-    ````
-    ````bash
+    ```
+    ```bash
     <copy>util.dumpInstance("sampledump", {"osBucketName": "MDS-Bucket", "osNamespace": "idzfu48uajtm", "ocimds": "true", "compatibility": ["strip_restricted_grants", "force_innodb", "strip_definers", "ignore_missing_pks"], dryRun:"true"})</copy>
     ```
 

@@ -21,12 +21,12 @@ In this lab, you will be guided through the following tasks:
 - An environment where you can install/run a MySQL Server
 - Some Experience with MySQL Shell
 
-## Task 1: Install MySQL Community Edition in your on-prem environment
+## Task 1: Set up an on-prem environment
 
-Identify the **Operating System** where you want to install MySQL. For this example, I have chosen an Oracle Linux OS which is based on the RHEL
-    ![os-version](./images2/image.png "os-version")
+**Note: if you already have an on-prem environment with MySQL installed and have data loaded, skip to Lab 2 Task 1.**
 
-**Note: if you don't have an on-prem environment ready, follow the below steps to provision one, just like the one I am using in the above image:**
+**But assuming you don't have an on-prem environment, start by following the below steps in order to set one up that looks like the image below which uses Oracle Linux 8 as it's OS. Oracle Linux is based on the RHEL.**
+![os-version](./images2/image.png "os-version")
 
 1. Login to Oracle Cloud (OCI), go to the Navigation or Hamburger menu again. Navigate to “Networking” and “Virtual Cloud Networks”
 
@@ -38,9 +38,9 @@ Identify the **Operating System** where you want to install MySQL. For this exam
 
     ![](./images/images/vcn-wizard.png "vcn-wizard")
 
-3. Name your VCN “MySQL-VCN” while making sure you are in the correct Compartment. Leave everything as it is, and click “Next”
+3. Name your VCN “MDS-VCN” while making sure you are in the correct Compartment. Leave everything as it is, and click “Next”
     ```bash
-    <copy>MySQL-VCN</copy>
+    <copy>MDS-VCN</copy>
     ```
 
     ![](./images/images/name-vcn.png "name-vcn-wizard")
@@ -57,13 +57,13 @@ Identify the **Operating System** where you want to install MySQL. For this exam
 
     ![](./images/images/resources-vcn.png "resources-vcn")
 
-7. On the Private Subnet page, under “Security Lists”, click on “Security List for Private Subnet -MDS-VCN” and select “Add Ingress Rules”
+7. On the Private Subnet page, under “Security Lists”, click on “Security List for Private Subnet-MDS-VCN” and select “Add Ingress Rules”
 
     ![](./images/images/sc-vcn.png "seclist-vcn")
 
     ![](./images/images/add-ingr.png "add-ingress")
 
-8. For the ‘Source CIDR’ enter “0.0.0.0/0” and for the Destination Port Range, enter “3306,33060”. In the ‘Description’ section, write “MySQL Port Access”
+8. For the ‘Source CIDR’ enter “0.0.0.0/0”, select "TCP" for the 'IP Protocol' and for the Destination Port Range, enter “3306,33060”. In the ‘Description’ section, write “MySQL Port Access”
     ```bash
     <copy>0.0.0.0/0</copy>
     ```
@@ -73,15 +73,17 @@ Identify the **Operating System** where you want to install MySQL. For this exam
 
     ![](./images/images/add-rule.png "add-ingress-rule")
 
-9. Inside Oracle Cloud, navigate to ‘Cloud Shell’ next to your Home Region (looks like a terminal prompt)
+9. Inside Oracle Cloud, navigate to "Cloud Shell" under 'Developer tools' next to your Home Region
 
-    ![](./images/cld-shell.png "oci-cloud-shell")
+    ![](./images/devtools.png "developer-tools")
+
+    ![](./images/devtools-cldshell.png "cloud-shell")
 
 10. Once the Cloud Shell loads, it should look similar to this:
 
     ![](./images/cld-shell-prmpt.png "cloud-shell-prompt")
 
-11. Execute the command to create an SSH key-pair
+11. Inside your Cloud Shell, execute the command to create an SSH key-pair
 
     ```bash
     <copy>ssh-keygen -t rsa</copy>
@@ -139,7 +141,9 @@ Identify the **Operating System** where you want to install MySQL. For this exam
 
     ![](./images/ssh-compute2.png "ssh-into-compute")
 
-19. Once you have your system/environment ready, download **MySQL Community Edition** on it
+## Task 2: Install MySQL Community Edition in your on-prem environment
+
+1. Once you have your system/environment ready and are logged in using SSH, download **MySQL Community Edition** on it
     ```bash
     <copy>sudo yum install mysql-server -y</copy>
     ```
@@ -150,7 +154,7 @@ Identify the **Operating System** where you want to install MySQL. For this exam
 
     ![](./images2/install-mysql2.png "install-mysql-ce2")
 
-20. Start the MySQL server, find your mysqld.log file, grab the temporary password, and login to your MySQL environment
+2. Start the MySQL server, find your mysqld.log file, grab the temporary password, and login to your MySQL environment
 
     ```bash
     <copy>sudo systemctl start mysqld</copy>
@@ -175,15 +179,15 @@ Identify the **Operating System** where you want to install MySQL. For this exam
 
     ![](./images2/start-mysql.png "start-mysql")
 
-21. Change the root password
+3. Change the root password
 
     ```bash
-    <copy>ALTER USER ‘root’@’localhost’ IDENTIFIED BY ‘pASsWordGoesHere’;</copy>
+    <copy>ALTER USER 'root'@'localhost' IDENTIFIED BY 'pASsWordGoesHere';</copy>
     ```
 
     ![](./images2/change-pass.png "change-root-pass")
 
-22. Exit MySQL and download MySQL Shell onto your on-prem environment
+4. Exit MySQL and download MySQL Shell onto your on-prem environment
 
     ```bash
     <copy>exit</copy>
@@ -213,7 +217,7 @@ Identify the **Operating System** where you want to install MySQL. For this exam
 
     ![](./images2/connect-shell2.png "connect-shell2")
 
-## Task 2: Load the sample database into the MySQL on-prem
+## Task 3: Load the sample database into the MySQL on-prem
 
 1. Download the sample 'world' database, unzip the file, and load it into MySQL on-prem
 
