@@ -68,6 +68,6 @@ Your OCI tenancy should now be cleared of all lab resources!
 ## Acknowledgements
 * **Author**
   * Richard Events, Database Security Product Management
-	* Miles Novotny, Solution Engineer, North America Specalist Hub
-	* Noah Galloso, Solution Engineer, North America Specalist Hub
+  * Miles Novotny, Solution Engineer, North America Specalist Hub
+  * Noah Galloso, Solution Engineer, North America Specalist Hub
 * **Last Updated By/Date** - Miles Novotny, December 2022

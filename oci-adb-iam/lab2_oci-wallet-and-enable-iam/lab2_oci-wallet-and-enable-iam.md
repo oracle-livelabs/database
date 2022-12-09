@@ -10,7 +10,7 @@ In this lab you will generate a wallet file for your ADB. This wallet file can b
 - Generate a wallet file for your ADB
 - Access your ADB with the wallet file and configure IAM as the identity provider
 - Create database users and grant them permissions
-- unzip wallet and update files so that the ADB can be accessed using a token
+- Unzip wallet and update files so that the ADB can be accessed using a token
 
 ## Task 1: Generate Wallet in adb_wallet folder
 
@@ -127,6 +127,6 @@ You may now proceed to the next lab!
 ## Acknowledgements
 * **Author**
   * Richard Events, Database Security Product Management
-	* Miles Novotny, Solution Engineer, North America Specalist Hub
-	* Noah Galloso, Solution Engineer, North America Specalist Hub
+  * Miles Novotny, Solution Engineer, North America Specalist Hub
+  * Noah Galloso, Solution Engineer, North America Specalist Hub
 * **Last Updated By/Date** - Miles Novotny, December 2022

@@ -25,7 +25,7 @@ throughout this workshop.
 
 2. Using the Cloud Shell, identify the root compartment ID and save it as a Bash variable named ROOT\_COMP\_ID.
     >**Note:** If at any point in this workshop you exit out of the Cloud Shell, you may need to reexecute
-    this step and any others that use the "export" command. The environemnt variables created with "export" that are used in future steps are deleted when the Cloud Shell session ends.  
+    this step and any others that use the "export" command. The environment variables created with "export" that are used in future steps are deleted when the Cloud Shell session ends.  
 
     ```
     <copy>export ROOT_COMP_ID=`oci iam compartment list --include-root --raw-output --query "data[?contains(\"id\",'tenancy')].id | [0]"`</copy>
@@ -102,6 +102,6 @@ You may now proceed to the next lab!
 ## Acknowledgements
 * **Author**
   * Richard Events, Database Security Product Management
-	* Miles Novotny, Solution Engineer, North America Specalist Hub
-	* Noah Galloso, Solution Engineer, North America Specalist Hub
+  * Miles Novotny, Solution Engineer, North America Specalist Hub
+  * Noah Galloso, Solution Engineer, North America Specalist Hub
 * **Last Updated By/Date** - Miles Novotny, December 2022

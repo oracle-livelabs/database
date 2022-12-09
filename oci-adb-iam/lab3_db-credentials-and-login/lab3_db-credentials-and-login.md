@@ -20,7 +20,7 @@ create IAM credentails for your user and use them to connect to the database. Fi
     <copy>oci iam user create-db-credential --user-id $OCI_CS_USER_OCID --password Oracle123+Oracle123+ --description "DB password for your OCI account"</copy>
     ```
 
-2. Connect to database with IAM credentials as your OCI user. All values you see should match the output below except for AUTHENTICATED_IDENTITY and ENTERPIRSE_IDENTITY. These are unique to your user.
+2. Connect to database with IAM credentials as your OCI user. All values you see should match the output below except for **AUTHENTICATED_IDENTITY** and **ENTERPIRSE_IDENTITY**. These are unique to your user.
 
     ```
     <copy>sql /nolog <<EOF
@@ -77,7 +77,7 @@ create IAM credentails for your user and use them to connect to the database. Fi
     <copy>oci iam group add-user --user-id $OCI_CS_USER_OCID --group-id $DB_ADMIN_OCID</copy>
     ```
 
-4. Connect to the database with IAM credentials again. Because the **DB\_ADMIN** IAM group is mapped to the **SR\_DBA\_ROLE** ADB group you will see the first query of this script now return TRUE. Again, all all values you see should match the output below except for AUTHENTICATED_IDENTITY and ENTERPIRSE_IDENTITY. These are unique to your user.
+4. Connect to the database with IAM credentials again. Because the **DB\_ADMIN** IAM group is mapped to the **SR\_DBA\_ROLE** ADB group you will see the first query of this script now return TRUE. Again, all all values you see should match the output below except for **AUTHENTICATED_IDENTITY** and **ENTERPIRSE_IDENTITY**. These are unique to your user.
 
     ```
     <copy>sql /nolog <<EOF
@@ -130,13 +130,13 @@ create IAM credentails for your user and use them to connect to the database. Fi
 
 ## Task 2: Connect to the database with a token.
 
-1. Get generate a token used for database access. It is possible to generate this token because of the OCI_TOKEN parameter we added to the tnsnames.ora file in the previous lab. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming.
+1. Generate a token used for database access. It is possible to generate this token because of the OCI_TOKEN parameter we added to the tnsnames.ora file in the previous lab. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming.
 
     ```
     <copy>oci iam db-token get</copy>
     ```
 
-2. Connect to the database using your token. Notice that the AUTHENTICATION_METHOD is now listed as TOKEN_GLOBAL, rather than PASSWORD_GLOBAL, which it is when you access the database with an IAM username and password.
+2. Connect to the database using your token. Notice that the **AUTHENTICATION_METHOD** is now listed as **TOKEN_GLOBAL**, rather than **PASSWORD_GLOBAL**, which it is when you access the database with an IAM username and password.
 
     ```
     <copy>sql /@lltest_high <<EOF
@@ -196,6 +196,6 @@ You may now proceed to the next lab!
 ## Acknowledgements
 * **Author**
   * Richard Events, Database Security Product Management
-	* Miles Novotny, Solution Engineer, North America Specalist Hub
-	* Noah Galloso, Solution Engineer, North America Specalist Hub
+  * Miles Novotny, Solution Engineer, North America Specalist Hub
+  * Noah Galloso, Solution Engineer, North America Specalist Hub
 * **Last Updated By/Date** - Miles Novotny, December 2022
