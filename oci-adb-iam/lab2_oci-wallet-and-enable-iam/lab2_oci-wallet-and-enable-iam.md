@@ -126,7 +126,7 @@ You may now proceed to the next lab!
 
 ## Acknowledgements
 * **Author**
-  * Richard Events, Database Security Product Management
+  * Richard Evans, Database Security Product Management
   * Miles Novotny, Solution Engineer, North America Specalist Hub
   * Noah Galloso, Solution Engineer, North America Specalist Hub
 * **Last Updated By/Date** - Miles Novotny, December 2022
