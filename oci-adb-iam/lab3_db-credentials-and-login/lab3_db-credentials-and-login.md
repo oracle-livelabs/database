@@ -3,7 +3,7 @@
 ## Introduction
 
 Now that you have enabled IAM as the identity provider of your ADB, in this lab you will
-create IAM credentails for users and use those connections to connect to the database and interact with it.
+create IAM credentails for your user and use them to connect to the database. First we connect with our IAM username and password, then with a token. Using a token lets you connect to the database without a password, and is possible for us because of the OCI_TOKEN parameter we added to the tnsnames.ora file in the previous lab. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming.
 
 *Estimated Lab Time*: 15 minutes
 
@@ -17,14 +17,13 @@ create IAM credentails for users and use those connections to connect to the dat
 1. Create IAM credentials for your OCI user
 
     ```
-    oci iam user create-db-credential --user-id $OCI_CS_USER_OCID --password Oracle123+Oracle123+ --description "DB password for your OCI account"
+    <copy>oci iam user create-db-credential --user-id $OCI_CS_USER_OCID --password Oracle123+Oracle123+ --description "DB password for your OCI account"</copy>
     ```
 
-2. Connect to database with IAM credentials as your OCI user.
-    >**Note:** The output for AUTHENTICATED IDENTITY and ENTERPRISE IDENTITY is obscurified in the example output to protect user information, but will appear unobscured for you.
+2. Connect to database with IAM credentials as your OCI user. All values you see should match the output below except for AUTHENTICATED_IDENTITY and ENTERPIRSE_IDENTITY. These are unique to your user.
 
     ```
-    sql /nolog <<EOF
+    <copy>sql /nolog <<EOF
     connect "${OCI_USER_NAME}"/Oracle123+Oracle123+@lltest_high
     select sys_context('SYS_SESSION_ROLES', 'SR_DBA_ROLE') from dual;
     select sys_context('USERENV','CURRENT_USER') from dual;
@@ -33,7 +32,7 @@ create IAM credentails for users and use those connections to connect to the dat
     select sys_context('USERENV','AUTHENTICATION_METHOD') from dual;
     select sys_context('USERENV','IDENTIFICATION_TYPE') from dual;
     select sys_context('USERENV','network_protocol') from dual;
-    EOF
+    EOF</copy>
     ```
 
     ```
@@ -49,12 +48,12 @@ create IAM credentails for users and use those connections to connect to the dat
 
     SYS_CONTEXT('USERENV','AUTHENTICATED_IDENTITY')    
     __________________________________________________
-    xxxxxxxxxxxxxxxxxxxxxxx                          
+    oci-demo-user@oracle.com   
 
 
     SYS_CONTEXT('USERENV','ENTERPRISE_IDENTITY')                                    
     _______________________________________________________________________________
-    xxxxxxxxxxxxxxxxxxxxxxx    
+    ocid1.user.oc1.aaaaaaaaghe4e5nskdl6ls1pdkd9q
 
 
     SYS_CONTEXT('USERENV','AUTHENTICATION_METHOD')    
@@ -75,14 +74,13 @@ create IAM credentails for users and use those connections to connect to the dat
 3. Add your OCI user to the **DB_ADMIN** group.
 
     ```
-    oci iam group add-user --user-id $OCI_CS_USER_OCID --group-id $DB_ADMIN_OCID
+    <copy>oci iam group add-user --user-id $OCI_CS_USER_OCID --group-id $DB_ADMIN_OCID</copy>
     ```
 
-4. Connect to the database with IAM credentials again. Because the **DB\_ADMIN** IAM group is mapped to the **SR\_DBA\_ROLE** ADB group you will see the first query of this script now return TRUE.
-    >**Note:** The output for AUTHENTICATED IDENTITY and ENTERPRISE IDENTITY is obscurified in the example output to protect user information, but will appear unobscured for you.
+4. Connect to the database with IAM credentials again. Because the **DB\_ADMIN** IAM group is mapped to the **SR\_DBA\_ROLE** ADB group you will see the first query of this script now return TRUE. Again, all all values you see should match the output below except for AUTHENTICATED_IDENTITY and ENTERPIRSE_IDENTITY. These are unique to your user.
 
     ```
-    sql /nolog <<EOF
+    <copy>sql /nolog <<EOF
     connect "${OCI_USER_NAME}"/Oracle123+Oracle123+@lltest_high
     select sys_context('SYS_SESSION_ROLES', 'SR_DBA_ROLE') from dual;
     select sys_context('USERENV','CURRENT_USER') from dual;
@@ -91,7 +89,7 @@ create IAM credentails for users and use those connections to connect to the dat
     select sys_context('USERENV','AUTHENTICATION_METHOD') from dual;
     select sys_context('USERENV','IDENTIFICATION_TYPE') from dual;
     select sys_context('USERENV','network_protocol') from dual;
-    EOF
+    EOF</copy>
     ```
 
     ```
@@ -107,12 +105,12 @@ create IAM credentails for users and use those connections to connect to the dat
 
     SYS_CONTEXT('USERENV','AUTHENTICATED_IDENTITY')    
     __________________________________________________
-    xxxxxxxxxxxxxxxxxxxxxxx                                 
+    oci-demo-user@oracle.com                                  
 
 
     SYS_CONTEXT('USERENV','ENTERPRISE_IDENTITY')                                    
     _______________________________________________________________________________
-    xxxxxxxxxxxxxxxxxxxxxxx    
+    ocid1.user.oc1.aaaaaaaaghe4e5nskdl6ls1pdkd9q    
 
 
     SYS_CONTEXT('USERENV','AUTHENTICATION_METHOD')    
@@ -132,16 +130,16 @@ create IAM credentails for users and use those connections to connect to the dat
 
 ## Task 2: Connect to the database with a token.
 
-1. Get generate a token used for database access.
+1. Get generate a token used for database access. It is possible to generate this token because of the OCI_TOKEN parameter we added to the tnsnames.ora file in the previous lab. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming.
 
     ```
-    oci iam db-token get
+    <copy>oci iam db-token get</copy>
     ```
 
-2. Connect to the database using your token. This lets you connect to the database without a password. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming. For more information on parameters in the sqlnet.ora or tnsnames.ora files, please see the Oracle Database 19c Net Services Reference book. You should see the same output from this query as in the previous step.
+2. Connect to the database using your token. Notice that the AUTHENTICATION_METHOD is now listed as TOKEN_GLOBAL, rather than PASSWORD_GLOBAL which it was when you previously accessed the database with your IAM username and password.
 
     ```
-    sql /@lltest_high <<EOF
+    <copy>sql /@lltest_high <<EOF
     select sys_context('SYS_SESSION_ROLES', 'SR_DBA_ROLE') from dual;
     select sys_context('USERENV','CURRENT_USER') from dual;
     select sys_context('USERENV','AUTHENTICATED_IDENTITY') from dual;
@@ -149,7 +147,43 @@ create IAM credentails for users and use those connections to connect to the dat
     select sys_context('USERENV','AUTHENTICATION_METHOD') from dual;
     select sys_context('USERENV','IDENTIFICATION_TYPE') from dual;
     select sys_context('USERENV','network_protocol') from dual;
-    EOF
+    EOF</copy>
+    ```
+
+    ```
+    SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
+    _________________________________________________
+    TRUE                                              
+
+
+    SYS_CONTEXT('USERENV','CURRENT_USER')    
+    ________________________________________
+    USER_SHARED                              
+
+
+    SYS_CONTEXT('USERENV','AUTHENTICATED_IDENTITY')    
+    __________________________________________________
+    oci-demo-user@oracle.com                                
+
+
+    SYS_CONTEXT('USERENV','ENTERPRISE_IDENTITY')                                    
+    _______________________________________________________________________________
+    ocid1.user.oc1.aaaaaaaaghe4e5nskdl6ls1pdkd9q    
+
+
+    SYS_CONTEXT('USERENV','AUTHENTICATION_METHOD')    
+    _________________________________________________
+    TOKEN_GLOBAL                                  
+
+
+    SYS_CONTEXT('USERENV','IDENTIFICATION_TYPE')    
+    _______________________________________________
+    GLOBAL SHARED                                   
+
+
+    SYS_CONTEXT('USERENV','NETWORK_PROTOCOL')    
+    ____________________________________________
+    tcps   
     ```
 
 You may now proceed to the next lab!
@@ -161,7 +195,7 @@ You may now proceed to the next lab!
 
 ## Acknowledgements
 * **Author**
+  * Richard Events, Database Security Product Management
 	* Miles Novotny, Solution Engineer, North America Specalist Hub
 	* Noah Galloso, Solution Engineer, North America Specalist Hub
-* **Contributors** - Richard Events, Database Security Product Management
 * **Last Updated By/Date** - Miles Novotny, December 2022

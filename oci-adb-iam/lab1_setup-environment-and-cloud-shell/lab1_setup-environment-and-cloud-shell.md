@@ -23,43 +23,43 @@ throughout this workshop.
 
     ![OCI Homepage](images/oci-homepage.png)
 
-1. Using the Cloud Shell, identify the root compartment id.
+2. Using the Cloud Shell, identify the root compartment ID and save it as a Bash variable named ROOT\_COMP\_ID.
     >**Note:** If at any point in this workshop you exit out of the Cloud Shell, you may need to reexecute
     this step and any others that use the "export" command. The environemnt variables created with "export" that are used in future steps are deleted when the Cloud Shell session ends.  
 
     ```
-    export ROOT_COMP_ID=`oci iam compartment list --include-root --raw-output --query "data[?contains(\"id\",'tenancy')].id | [0]"`
+    <copy>export ROOT_COMP_ID=`oci iam compartment list --include-root --raw-output --query "data[?contains(\"id\",'tenancy')].id | [0]"`</copy>
     ```
 
-2. Create the name for your ADB
+3. Create the name for your ADB
 
     ```
-    export DB_NAME=lltest
+    <copy>export DB_NAME=lltest</copy>
     ```
 
-3. Create the password for your ADB
+4. Create the password for your ADB
 
     ```
-    export ADMIN_PWD=Oracle123+Oracle123+
+    <copy>export ADMIN_PWD=Oracle123+Oracle123+</copy>
     ```
 
-4. Record your OCI user name to be used in future commands.
+5. Identify and save your OCI user name as a Bash variable to be used in future commands.
 
     ```
-    export OCI_USER_NAME=`oci iam user list --raw-output --query "data[?contains(\"id\",'"${OCI_CS_USER_OCID}"')].name| [0]"`
-    echo $OCI_USER_NAME
+    <copy>export OCI_USER_NAME=`oci iam user list --raw-output --query "data[?contains(\"id\",'"${OCI_CS_USER_OCID}"')].name| [0]"`
+    echo $OCI_USER_NAME</copy>
     ```
 
-5. Create the ADB with the name and password defined in previous steps.
+6. Create the ADB with the name and password defined in previous steps.
 
     ```
-    oci db autonomous-database create --compartment-id $ROOT_COMP_ID --db-name ${DB_NAME} --display-name ${DB_NAME} --is-free-tier true  --admin-password $ADMIN_PWD --cpu-core-count 1 --data-storage-size-in-tbs 1
+    <copy>oci db autonomous-database create --compartment-id $ROOT_COMP_ID --db-name ${DB_NAME} --display-name ${DB_NAME} --is-free-tier true  --admin-password $ADMIN_PWD --cpu-core-count 1 --data-storage-size-in-tbs 1</copy>
     ```
 
-6. Create a policy to allow any user in the tenancy to access the ADB.
+7. Create a policy to allow any user in the tenancy to access the ADB.
 
     ```
-    oci iam policy create  --name grant-adb-access --compartment-id $ROOT_COMP_ID  --statements '[ "allow any-user to use autonomous-database-family in tenancy"]' --description 'policy for granting any user to access autonomous databases'
+    <copy>oci iam policy create  --name grant-adb-access --compartment-id $ROOT_COMP_ID  --statements '[ "allow any-user to use autonomous-database-family in tenancy"]' --description 'policy for granting any user to access autonomous databases'</copy>
     ```
 
 ## Task 2: Create and assign groups
@@ -67,41 +67,41 @@ throughout this workshop.
 1. Create two groups in IAM, one for all database users and one for database admins.
 
     ```
-    oci iam group create --name ALL_DB_USERS --description "Group for all of the DB Users"
+    <copy>oci iam group create --name ALL_DB_USERS --description "Group for all of the DB Users"</copy>
     ```
     ```
-    oci iam group create --name DB_ADMIN --description "Group for DB Admins"
+    <copy>oci iam group create --name DB_ADMIN --description "Group for DB Admins"</copy>
     ```
 
 2. Setup and verify environment variables for ease of use in commands later.
     >**Note:** If at any point after this step you exit out of the cloud shell, these commands may need to be executed again to reset the environment variables.
 
     ```
-    export ADB_OCID=`oci db autonomous-database list --compartment-id $ROOT_COMP_ID --raw-output --query "data[?contains(\"db-name\",'lltest')].id | [0]"`
-    echo $ADB_OCID
+    <copy>export ADB_OCID=`oci db autonomous-database list --compartment-id $ROOT_COMP_ID --raw-output --query "data[?contains(\"db-name\",'lltest')].id | [0]"`
+    echo $ADB_OCID</copy>
 
-    export DB_ADMIN_OCID=`oci iam group list --raw-output --query "data[?contains(\"name\",'DB_ADMIN')].id | [0]"`
-    echo $DB_ADMIN_OCID
+    <copy>export DB_ADMIN_OCID=`oci iam group list --raw-output --query "data[?contains(\"name\",'DB_ADMIN')].id | [0]"`
+    echo $DB_ADMIN_OCID</copy>
 
-    export ALL_DB_USERS_OCID=`oci iam group list --raw-output --query "data[?contains(\"name\",'ALL_DB_USERS')].id | [0]"`
-    echo $ALL_DB_USERS_OCID
+    <copy>export ALL_DB_USERS_OCID=`oci iam group list --raw-output --query "data[?contains(\"name\",'ALL_DB_USERS')].id | [0]"`
+    echo $ALL_DB_USERS_OCID</copy>
     ```
 
 3. Add your OCI user to the ALL\_DB\_USERS group
 
     ```
-    oci iam group add-user --user-id $OCI_CS_USER_OCID --group-id $ALL_DB_USERS_OCID
+    <copy>oci iam group add-user --user-id $OCI_CS_USER_OCID --group-id $ALL_DB_USERS_OCID</copy>
     ```
 
 You may now proceed to the next lab!
 
 ## Learn More
 
-* []()
+* [Identity and Access Management (IAM) Overview](https://docs.oracle.com/en-us/iaas/Content/Identity/Concepts/overview.htm)
 
 ## Acknowledgements
 * **Author**
+  * Richard Events, Database Security Product Management
 	* Miles Novotny, Solution Engineer, North America Specalist Hub
 	* Noah Galloso, Solution Engineer, North America Specalist Hub
-* **Contributors** - Richard Events, Database Security Product Management
 * **Last Updated By/Date** - Miles Novotny, December 2022

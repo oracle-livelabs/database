@@ -22,29 +22,40 @@ This lab assumes you have:
 1. With the cloud shell still open, navigate to the home directory if you are still in the **adb_wallet** directory.
 
     ```
-    cd ..
+    <copy>cd ..</copy>
     ```
 
 2. Delete the **adb_wallet** directory and its contents with the following command.
 
     ```
-    rm -r adb_wallet/
+    <copy>rm -r adb_wallet/</copy>
     ```
 
 3. Next, delete the ADB **lltest**.
 
     ```
-    oci db autonomous-database delete --autonomous-database-id $ADB_OCID
+    <copy>oci db autonomous-database delete --autonomous-database-id $ADB_OCID</copy>
     ```
 
-4. Delete the **ALL\_DB\_USERS** and **DB_ADMIN** groups.
+4. Remove your user from the **ALL\_DB\_USERS** and **DB_ADMIN** groups so that they can be deleted.
 
     ```
-    oci iam group delete --group-id $ALL_DB_USERS_OCID
+    <copy>oci iam group remove-user --user-id $OCI_CS_USER_OCID --group-id $ALL_DB_USERS_OCID</copy>
     ```
 
     ```
-    oci iam group delete --group-id $DB_ADMIN_OCID
+    <copy>oci iam group remove-user --user-id $OCI_CS_USER_OCID --group-id $DB_ADMIN_OCID</copy>
+    ```
+
+
+5. Delete the **ALL\_DB\_USERS** and **DB_ADMIN** groups.
+
+    ```
+    <copy>oci iam group delete --group-id $ALL_DB_USERS_OCID</copy>
+    ```
+
+    ```
+    <copy>oci iam group delete --group-id $DB_ADMIN_OCID</copy>
     ```
 
 5. You may now close your cloud shell session, as you will use the OCI Console to delete the final resource. Click on the hamburger icon in the top left corner. Choose **Identity and Security** then **Policies**.
@@ -57,9 +68,11 @@ This lab assumes you have:
 
     ![Policy Page - Delete](images/delete-policy.png)
 
+Your OCI tenancy should now be cleared of all lab resources!
+
 ## Acknowledgements
 * **Author**
-  * Miles Novotny, Solution Engineer, North America Specalist Hub
-  * Noah Galloso, Solution Engineer, North America Specalist Hub
-* **Contributors** - Richard Events, Database Security Product Management
+  * Richard Events, Database Security Product Management
+	* Miles Novotny, Solution Engineer, North America Specalist Hub
+	* Noah Galloso, Solution Engineer, North America Specalist Hub
 * **Last Updated By/Date** - Miles Novotny, December 2022

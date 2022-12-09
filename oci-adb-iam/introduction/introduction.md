@@ -2,7 +2,7 @@
 
 ### Why use Identity and Access Management with Autonomous Database
 
-Managing users on a database-by-database basis is cumbersome, especially when working with a large number of databases. It can lead to mistakes where database user accounts exist long after the user has left the organization. Integrating database users with Oracle Identity and Access Management (IAM) is a quick and easy way to simplify user management across multiple ADBs and improve security.
+Managing users on a database-by-database basis is cumbersome, especially when working with a large number of databases. It can lead to mistakes where database user accounts exist long after the user has left the organization. Additionally, users within organizations change teams or are promoted but often never have their privileges from their previous role revoked. This causes them to end up overprivileged for their current responsibilities. Integrating database users with Oracle Identity and Access Management (IAM) is a quick and easy way to simplify user management across multiple ADBs and improve security.
 
 Estimated Workshop Time: -- 1 hour -- 0 min
 
@@ -24,7 +24,7 @@ In this workshop, you will learn how to:
 
 ## Acknowledgements
 * **Author**
+  * Richard Events, Database Security Product Management
 	* Miles Novotny, Solution Engineer, North America Specalist Hub
 	* Noah Galloso, Solution Engineer, North America Specalist Hub
-* **Contributors** - Richard Events, Database Security Product Management
 * **Last Updated By/Date** - Miles Novotny, December 2022

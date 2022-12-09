@@ -17,23 +17,19 @@ In this lab you will generate a wallet file for your ADB. This wallet file can b
 1. Create adb_wallet directory.
 
     ```
-    mkdir $HOME/adb_wallet
-    ```
-
-    ```
-    ls -al $HOME/adb_wallet
+    <copy>mkdir -v $HOME/adb_wallet</copy>
     ```
 
 2. Generate the wallet file in the adb_wallet directory.
 
     ```
-    oci db autonomous-database generate-wallet --autonomous-database-id $ADB_OCID --password Oracle123+ --file $HOME/adb_wallet/lltest_wallet.zip
+    <copy>oci db autonomous-database generate-wallet --autonomous-database-id $ADB_OCID --password Oracle123+ --file $HOME/adb_wallet/lltest_wallet.zip</copy>
     ```
 
 3. Navigate to the adb_wallet directory.
 
     ```
-    cd $HOME/adb_wallet
+    <copy>cd $HOME/adb_wallet</copy>
     ```
 
 ## Task 2: Enable OCI IAM as the identity provider
@@ -42,17 +38,18 @@ In this lab you will generate a wallet file for your ADB. This wallet file can b
     >**Note:** This command only works from inside the adb_wallet folder. Insure that you have navigated to it as shown in the previous steps.
 
     ```
-    sql /nolog
+    <copy>sql /nolog</copy>
     ```
     ```
-    set cloudconfig lltest_wallet.zip
-    conn admin/Oracle123+Oracle123+@lltest_high
+    <copy>set cloudconfig lltest_wallet.zip
+
+    conn admin/Oracle123+Oracle123+@lltest_high</copy>
     ```
 
 2. Query to select the identity provider, and see that it is **NONE** by default.
 
     ```
-    select name, value from v$parameter where name ='identity_provider_type';
+    <copy>select name, value from v$parameter where name ='identity_provider_type';</copy>
     ```
 
 
@@ -65,9 +62,8 @@ In this lab you will generate a wallet file for your ADB. This wallet file can b
 3. Now enable IAM as the identity provider. Query the idenity provider again to see it updated to **OCI_IAM**.
 
     ```
-    exec dbms_cloud_admin.enable_external_authentication('OCI_IAM');
-
-    select name, value from v$parameter where name ='identity_provider_type';
+    <copy>exec dbms_cloud_admin.enable_external_authentication('OCI_IAM');
+    select name, value from v$parameter where name ='identity_provider_type';</copy>
     ```
 
     ```
@@ -79,11 +75,11 @@ In this lab you will generate a wallet file for your ADB. This wallet file can b
 4. Create the **user\_shared** user and grant it permissions to create sessions. Create the **sr\_dba\_role** role and grant it permissions. Quit the SQL session.
 
     ```
-    create user user_shared identified globally as 'IAM_GROUP_NAME=All_DB_Users';
+    <copy>create user user_shared identified globally as 'IAM_GROUP_NAME=All_DB_Users';
     grant create session to user_shared;
     create role sr_dba_role identified globally as 'IAM_GROUP_NAME=DB_Admin';
     grant pdb_dba to sr_dba_role;
-    quit
+    quit</copy>
     ```
 
 ## Task 3: Unzip wallet file and edit contents
@@ -91,34 +87,34 @@ In this lab you will generate a wallet file for your ADB. This wallet file can b
 1. Unzip your ADB wallet file.
 
     ```
-    unzip -d . lltest_wallet.zip
+    <copy>unzip -d . lltest_wallet.zip</copy>
     ```
 
 2. Create session variable for location of wallet file.
     >**Note:** If at any point you exit out of the cloud shell, the following commands may need to be executed again to reset the environment variables.
 
     ```
-    export TNS_ADMIN=$HOME/adb_wallet
+    <copy>export TNS_ADMIN=$HOME/adb_wallet</copy>
     ```
 
 3. Append the ADB's sqlnet.ora entry with the environment variable for the wallet location.
 
     ```
-    mv tnsnames.ora tnsnames.ora.orig
+    <copy>mv tnsnames.ora tnsnames.ora.orig
     mv sqlnet.ora sqlnet.ora.orig
 
     echo "WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="/home/`whoami`/adb_wallet")))
     SSL_SERVER_DN_MATCH=yes" >> sqlnet.ora
 
-    cat sqlnet.ora
+    cat sqlnet.ora</copy>
     ```
 
 4. Append the TOKEN_AUTH parameter to the ADB instance's tnsname.ora entry so that an authorization token can be used instead of a password.
 
     ```
-    head -1 tnsnames.ora.orig | sed -e 's/)))/)(TOKEN_AUTH=OCI_TOKEN)))/' > tnsnames.ora
+    <copy>head -1 tnsnames.ora.orig | sed -e 's/)))/)(TOKEN_AUTH=OCI_TOKEN)))/' > tnsnames.ora
 
-    cat tnsnames.ora
+    cat tnsnames.ora</copy>
     ```
 
 You may now proceed to the next lab!
@@ -130,7 +126,7 @@ You may now proceed to the next lab!
 
 ## Acknowledgements
 * **Author**
+  * Richard Events, Database Security Product Management
 	* Miles Novotny, Solution Engineer, North America Specalist Hub
 	* Noah Galloso, Solution Engineer, North America Specalist Hub
-* **Contributors** - Richard Events, Database Security Product Management
 * **Last Updated By/Date** - Miles Novotny, December 2022
