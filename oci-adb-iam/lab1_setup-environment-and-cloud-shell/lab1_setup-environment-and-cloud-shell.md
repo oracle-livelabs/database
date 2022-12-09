@@ -18,7 +18,7 @@ from the Oracle Cloud Console. It is a Linux shell pre-configured with the OCI C
 >**Note:** It is advised that you do not perform this lab in a production tenancy due to policies created in this lab that give all users access to all ADBs in the tenancy.
 
 1. Beginning at your Oracle Cloud Infrastructure home page, access the Cloud Shell
-by clicking on the **Cloud Shell** icon in the top right corner. You will use the Cloud Shell
+by clicking on the **Developer tools** icon in the top right corner and choose **Cloud Shell**. You will use the Cloud Shell
 throughout this workshop.
 
     ![OCI Homepage](images/oci-homepage.png)

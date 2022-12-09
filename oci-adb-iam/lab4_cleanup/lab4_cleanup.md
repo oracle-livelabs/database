@@ -12,11 +12,6 @@ previous 3 labs
 - Delete the lltest ADB
 - Delete all policies and Groups
 
-### Prerequisites
-This lab assumes you have:
-- Completed the previous 3 labs
-
-
 ## Task 1: Delete all resources
 
 1. With the cloud shell still open, navigate to the home directory if you are still in the **adb_wallet** directory.

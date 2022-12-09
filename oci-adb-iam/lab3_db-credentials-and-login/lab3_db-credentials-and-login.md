@@ -3,7 +3,7 @@
 ## Introduction
 
 Now that you have enabled IAM as the identity provider of your ADB, in this lab you will
-create IAM credentails for your user and use them to connect to the database. First we connect with our IAM username and password, then with a token. Using a token lets you connect to the database without a password, and is possible for us because of the OCI_TOKEN parameter we added to the tnsnames.ora file in the previous lab. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming.
+create IAM credentails for your user and use them to connect to the database. First we connect with our IAM username and password, then with a token. Using a token lets you connect to the database without a password, and is possible for you because of the OCI_TOKEN parameter you added to the tnsnames.ora file in the previous lab. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming.
 
 *Estimated Lab Time*: 15 minutes
 
@@ -136,7 +136,7 @@ create IAM credentails for your user and use them to connect to the database. Fi
     <copy>oci iam db-token get</copy>
     ```
 
-2. Connect to the database using your token. Notice that the AUTHENTICATION_METHOD is now listed as TOKEN_GLOBAL, rather than PASSWORD_GLOBAL which it was when you previously accessed the database with your IAM username and password.
+2. Connect to the database using your token. Notice that the AUTHENTICATION_METHOD is now listed as TOKEN_GLOBAL, rather than PASSWORD_GLOBAL, which it is when you access the database with an IAM username and password.
 
     ```
     <copy>sql /@lltest_high <<EOF
