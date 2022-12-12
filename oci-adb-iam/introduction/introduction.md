@@ -17,8 +17,6 @@ In this workshop, you will learn how to:
 
 ## Learn More
 
-*(optional - include links to docs, white papers, blogs, etc)*
-
 * [Oracle Identity and Access Management](https://www.oracle.com/security/identity-management/)
 * [Oracle Help Center](http://docs.oracle.com)
 
