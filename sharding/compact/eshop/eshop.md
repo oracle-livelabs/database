@@ -11,7 +11,6 @@ We developed this application to demonstrate Oracle Sharding (a hyperscale globa
 
 -  Multiple capabilities, like the Simple Oracle Document Access (SODA) API + Text Search for JSON, joins, transactions, and ACID properties for relational queries, fuzzy match, type ahead, free-form text search, and sentiment analysis for text.
 
-
 *Estimated Time*: 10 Minutes
 
 ![<application front page>](./images/app-front.jpg " ")
@@ -20,8 +19,10 @@ Typically, multiple technologies and products are required to develop such an ap
 
 The entire eShop application, including database configuration, front-end UI, and application logic, was developed within a two-week time frame.
 
-
 [](youtube:CAXepxXPC7Q)
+
+Watch the video below for a quick walk-through of the lab.
+[Build Applications with Oracle Sharding](videohub:1_5e2gjpn4)
 
 ### Objectives
 In this lab, you will:

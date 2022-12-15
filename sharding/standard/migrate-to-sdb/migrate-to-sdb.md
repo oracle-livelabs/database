@@ -7,7 +7,7 @@ When you want to migrate the application from the non-shard database to the shar
 *Estimated Lab Time:* 30 minutes.
 
 Watch the video below for a quick walk through of the lab.
-[](youtube:KgOFEm7x414)
+[Migrate to Sharded Database](videohub:1_3n6przb1)
 
 ### Objectives
 
@@ -37,20 +37,13 @@ This lab assumes you have:
 
 Before the existing database can be migrated to the sharded database, you must decide how to organize the sharded database. You must decide which tables in the application are sharded and which tables are duplicated tables. In this lab, we have already created a scripts for the sharded demo schema. It creates a sharded table family: `Customers-->Orders-->LineItems` using the sharding key `CustId`, and the `Products` is the duplicated table.
 
-1. Login to the catalog database host, switch to oracle user.
+1. Switch to your browser's remote desktop session connected to host cata as user oracle, open a Terminal session
+
+2. Make sure you are in the appropriate database environment by running *`. .set-env-db.sh`* and selecting the appropriate database from the list.
 
     ```
-    $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxxx</copy>
-    Last login: Sun Nov 29 01:26:28 2020 from 59.66.120.23
-    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
-
-    [opc@cata ~]$ <copy>sudo su - oracle</copy>
-    Last login: Sun Nov 29 02:49:51 GMT 2020 on pts/0
-
-    [oracle@cata ~]$
+    [oracle@cata ~]$ <copy>. .set-env-db.sh</copy>
     ```
-
-
 
 2. Download the sharded demo schema SQL scripts `sdb-app-schema.sql`.
 
@@ -203,7 +196,7 @@ Before the existing database can be migrated to the sharded database, you must d
     [oracle@cata ~]$ <copy>sqlplus /nolog</copy>
 
     SQL*Plus: Release 19.0.0.0.0 - Production on Mon Nov 30 01:26:03 2020
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
 
     Copyright (c) 1982, 2020, Oracle.  All rights reserved.
 
@@ -430,7 +423,7 @@ Before the existing database can be migrated to the sharded database, you must d
     ```
     01:26:41 SQL> <copy>exit</copy>
     Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
     [oracle@cata ~]$
     ```
 
@@ -584,7 +577,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
     Connected to:
     Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
 
     SQL>
     ```
@@ -819,7 +812,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
     ```
     SQL> <copy>exit</copy>
     Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
     [oracle@cata ~]$
     ```
 
@@ -842,14 +835,14 @@ Loading the data directly into the database shards is much faster, because each 
     [oracle@cata ~]$ <copy>sqlplus app_schema/app_schema@cata:1521/catapdb</copy>
 
     SQL*Plus: Release 19.0.0.0.0 - Production on Sat Dec 5 03:21:31 2020
-    Version 19.14.0.0.0
+    Version 19.13.0.0.0
 
     Copyright (c) 1982, 2020, Oracle.  All rights reserved.
 
 
     Connected to:
     Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.14.0.0.0
+    Version 19.13.0.0.0
 
     SQL>
     ```
@@ -868,7 +861,7 @@ Loading the data directly into the database shards is much faster, because each 
 
     SQL> <copy>exit</copy>
     Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.14.0.0.0
+    Version 19.13.0.0.0
     [oracle@cata ~]$
     ```
 
@@ -889,7 +882,7 @@ Loading the data directly into the database shards is much faster, because each 
 
     ```
     Import: Release 19.0.0.0.0 - Production on Mon Dec 7 02:14:07 2020
-    Version 19.14.0.0.0
+    Version 19.13.0.0.0
 
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
 
@@ -920,7 +913,7 @@ Loading the data directly into the database shards is much faster, because each 
 
     ```
     Import: Release 19.0.0.0.0 - Production on Mon Dec 7 02:15:32 2020
-    Version 19.14.0.0.0
+    Version 19.13.0.0.0
 
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
 
@@ -953,7 +946,7 @@ Loading the data directly into the database shards is much faster, because each 
 
     ```
     Import: Release 19.0.0.0.0 - Production on Mon Dec 7 02:18:56 2020
-    Version 19.14.0.0.0
+    Version 19.13.0.0.0
 
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
 
@@ -981,8 +974,6 @@ Migrate application to the sharded database a slight change to the application c
     [oracle@cata ~]$ <copy>. ./cata.sh</copy>
     [oracle@cata ~]$
     ```
-
-
 
 2. Change to the `sdb_demo_app/sql` directory.
 
@@ -1043,14 +1034,14 @@ Migrate application to the sharded database a slight change to the application c
     [oracle@cata sql]$ <copy>sqlplus /nolog</copy>
 
     SQL*Plus: Release 19.0.0.0.0 - Production on Mon Nov 30 05:54:14 2020
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
 
     Copyright (c) 1982, 2020, Oracle.  All rights reserved.
 
 
     Connected to:
     Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
 
     SQL> <copy>@sdb_demo_app_ext.sql</copy>
     ```
@@ -1241,16 +1232,9 @@ Migrate application to the sharded database a slight change to the application c
 
 
 
-10. Open another terminal, connect to the catalog host, switch to oracle user. Change the directory to `sdb_demo_app`.
+10. Open a Terminal session o host cata. Change the directory to `sdb_demo_app`.
 
     ```
-    $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxx</copy>
-    Last login: Mon Nov 30 06:07:40 2020 from 202.45.129.206
-    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
-
-    [opc@cata ~]$ <copy>sudo su - oracle</copy>
-    Last login: Mon Nov 30 06:08:03 GMT 2020 on pts/0
-
     [oracle@cata ~]$ <copy>cd ~/sdb_demo_app</copy>
     [oracle@cata sdb_demo_app]$
     ```
@@ -1300,4 +1284,5 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Minqiao Wang, DB Product Management, Dec 2020  
-* **Last Updated By/Date** - Minqiao Wang, Aug 2022
+* **Contributors** - Shefali Bhargava, DB Sharding Product Management
+* **Last Updated By/Date** - Shefali Bhargava, DB Sharding Product Management, October 2022

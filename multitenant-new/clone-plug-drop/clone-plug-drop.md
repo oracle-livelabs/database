@@ -7,6 +7,9 @@ Estimated Time: 1 hour
 
 [](youtube:kzTQGs75IjA)
 
+Watch the video below for a quick walk-through of the lab.
+[Clone, plug and drop](videohub:1_19adr34a)
+
 ### Prerequisites
 
 This lab assumes you have:
@@ -70,6 +73,7 @@ In this first task, you will create and explore a new pluggable database **PDB2*
       .
 
       save whoami.sql
+      /
 
     </copy>
     ```
@@ -905,7 +909,12 @@ The two main requirements for snapshot copy to work on our Linux filesystem are:
 1. If you're already running SQLcl, then **exit** from SQLcl and set the environment to CDB2.
 
     ```
-    <copy>exit
+    <copy>
+    exit
+    </copy>
+    ```
+    ```
+    <copy>
     . ~/.set-env-db.sh CDB2
     </copy>
     ```
@@ -1087,6 +1096,10 @@ The tasks you will do in this step are:
     ```
     <copy>
     exit
+    </copy>
+    ```
+    ```
+    <copy>
     ./resetCDB.sh
     </copy>
     ```

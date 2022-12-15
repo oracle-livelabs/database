@@ -6,6 +6,9 @@ This lab walks you through the steps to register a database for use with DMS. Re
 
 Estimated Lab Time: 20 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Create Registered Databases](videohub:1_51ktrlb6)
+
 ### Objectives
 
 In this lab, you will:
@@ -61,9 +64,9 @@ For this task you need the following info from previous steps:
     - Encryption Key: **DMSKey**
     - Choose **Manually configure database**
     - Database Type: **Oracle**
-    - Host: Select **dbcs\_public\_ip** value from Terraform output
+    - Host: Select **DBCS Public IP** value from Terraform output
     - Port: **1521**
-    - Connect String: Select **dbcs\_cdb\_service** value from Terraform output
+    - Connect String: Select **DBCS CDB Service** value from Terraform output
 
     The checkbox **Create private endpoint to access this database** needs to stay unchecked.
 
@@ -73,8 +76,8 @@ For this task you need the following info from previous steps:
 
 5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
     - Database Administrator Username: **system**
-    - Database Administrator Password: Select **admin_password** value from Terraform output
-    - SSH Database Server Hostname: Select **dbcs\_public\_ip** value from Terraform output
+    - Database Administrator Password: Select **Admin Password** value from Terraform output
+    - SSH Database Server Hostname: Select **DBCS Public IP** value from Terraform output
     - SSH Private Key: Select private key file saved earlier
     - SSH Username: **opc**
     - SSH Sudo Location: **/usr/bin/sudo**
@@ -105,9 +108,9 @@ For this task you need the following info from previous steps:
     - Encryption Key: **DMSKey**
     - Choose **Manually configure database**
     - Database Type: **Oracle**
-    - Host: Select **dbcs\_public\_ip** value from Terraform output
+    - Host: Select **DBCS Public IP** value from Terraform output
     - Port: **1521**
-    - Connect String: Select **dbcs\_pdb\_service** value from Terraform output
+    - Connect String: Select **DBCS PDB Service** value from Terraform output
 
     The checkbox **Create private endpoint to access this database** needs to stay unchecked.
 
@@ -118,8 +121,8 @@ For this task you need the following info from previous steps:
 
 5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
     - Database Administrator Username: **system**
-    - Database Administrator Password: Select **admin\_password** value from Terraform output
-    - SSH Database Server Hostname: Select **dbcs\_public\_ip** value from Terraform output
+    - Database Administrator Password: Select **Admin Password** value from Terraform output
+    - SSH Database Server Hostname: Select **DBCS Public IP** value from Terraform output
     - SSH Private Key: Select private key file saved earlier
     - SSH Username: **opc**
     - SSH Sudo Location: **/usr/bin/sudo**
@@ -154,7 +157,7 @@ For this task you need the following info from previous steps:
 
 5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
     - Database Administrator Username: **admin**
-    - Database Administrator Password: Select **admin_password** value from Terraform output
+    - Database Administrator Password: Select **Admin Password** value from Terraform output
 
 6. Press **Register**
 
@@ -201,27 +204,26 @@ For this task you need the following info from previous steps:
 
 
   7. Check **Use Online Replication**
-     - GoldenGate Hub URL: **ogg\_hub\_url** value from Terraform output
+     - GoldenGate Hub URL: **OGG Hub URL IP** value from Terraform output
      - GoldenGate Administrator Username: **oggadmin**
-     - GoldenGate Administrator Password: **admin\_password** value from Terraform output
+     - GoldenGate Administrator Password: **Admin Password** value from Terraform output
 
      ![Online replication check](images/online-goldengate.png =50%x*)
 
      - Source database:
           - GoldenGate deployment name: **Marketplace**
           - Database Username: **ggadmin**
-          - Database Password: **admin\_password** value from Terraform output
+          - Database Password: **Admin Password** value from Terraform output
           - Container Database Username: **c##ggadmin**
-          - Container Database Password: **admin\_password** value from Terraform output
+          - Container Database Password: **Admin Password** value from Terraform output
 
       ![Source database details](images/online-source-database.png =50%x*)    
      
      - Target database:
           - GoldenGate Deployment Name: **Marketplace**
           - Database Username: **ggadmin**
-          - Database Password: **admin\_password** value from Terraform output
-          - Press Show Advanced Options
-          - Press Replication tab
+          - Database Password: **Admin Password** value from Terraform output
+
                     
 
     ![Target database details](images/online-target-database-ggocid.png =50%x*) 

@@ -9,6 +9,8 @@ Watch the video below for a walk through of the In-Memory JSON Lab:
 
 [JSON](videohub:1_5rf7ugsx)
 
+*Estimated Lab Time:* 15 Minutes.
+
 ### Objectives
 
 -   Learn how to JSON can be used with Database In-Memory on Oracle Database
@@ -42,6 +44,12 @@ To populate JSON data in the IM column store several database prerequisites must
 
 JSON data columns must have 'IS JSON' check constraints prior to 21c. In 21c a check constraint is not required for columns with JSON data type, but the compatible parameter must be set to at least 20.
 
+Reload the environment variables for **CDB1** if you exited the terminal after the previous lab
+
+```
+<copy>. ~/.set-env-db.sh CDB1</copy>
+```
+    
 Let's switch to the json folder and log back in to the PDB:
 
 ```
@@ -67,7 +75,7 @@ Query result:
 [CDB1:oracle@dbhol:~/labs/inmemory/json]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
 
 SQL*Plus: Release 21.0.0.0.0 - Production on Fri Aug 19 18:33:55 2022
-Version 21.4.0.0.0
+Version 21.7.0.0.0
 
 Copyright (c) 1982, 2021, Oracle.  All rights reserved.
 
@@ -75,7 +83,7 @@ Last Successful login time: Thu Aug 18 2022 21:37:24 +00:00
 
 Connected to:
 Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
-Version 21.4.0.0.0
+Version 21.7.0.0.0
 
 SQL> set pages 9999
 SQL> set lines 150
@@ -1109,7 +1117,7 @@ This task will focusing on using JSON data in the IM column store prior to 21c.
     ```
     SQL> exit
     Disconnected from Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
-    Version 21.4.0.0.0
+    Version 21.7.0.0.0
     [CDB1:oracle@dbhol:~/labs/inmemory/json]$ cd ..
     [CDB1:oracle@dbhol:~/labs/inmemory]$
     ```
