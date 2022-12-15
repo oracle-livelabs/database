@@ -28,10 +28,10 @@ In this lab, you will:
 
 This lab assumes you have:
 
-* An Oracle Cloud account
-* Successfully completed all previous labs
-* Logged in using remote desktop URL as oracle user. If you have connected to your instance via an SSH terminal using auto-generated SSH Keys as opc user, then change user to oracle before proceeding with the next step.
- 
+* An Oracle Cloud account.
+* Successfully completed all previous labs.
+* Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance via an SSH terminal using auto-generated SSH Keys as `opc` user, then change user to `oracle` before proceeding with the next step.
+
    ```text
     <copy>
     sudo su - oracle
@@ -49,9 +49,10 @@ Follow the instructions in this section to configure Minikube, and then run a sa
     minikube start
     </copy>
     ```
-   
-In rare situations, if you see an error as shown below then it would indicate a failure in provisioning. In such cases, destroy the stack resources and delete the stack by performing Task 4 below. Then recreate the stack by performing the steps in Lab 2.
-![minikube start error](./images/minikube-start-error.png)
+
+   In rare situations, if you see an error as shown below then it would indicate a failure in provisioning. In such cases, destroy the stack resources and delete the stack by performing Task 4 below. Then recreate the stack by performing the steps in Lab 2.
+
+   ![minikube start error](./images/minikube-start-error.png)
 
 2. Verify that all resources, such as pods and services, are ready before proceeding to the next task. Use the following command to retrieve the list of resources in the namespace `otmm` and their status.
 
@@ -91,15 +92,25 @@ Before you start a transaction, you must start a tunnel between Minikube and Tra
 
     ![Public IP address of ingress gateway](./images/ingress-gateway-ip-address.png)
 
-    Let's consider that the external IP in the above example is 192.0.2.117.
+    Let's consider that the value of the external IP in the above example is 192.0.2.117.
 
-3. Set the URL for the Trip Manager service, which is the transaction initiator service.
+3. Store the external IP address of the Istio ingress gateway in an environment variable named `CLUSTER_IPADDR` as shown in the following command.
+
+    ```text
+    <copy>
+    export CLUSTER_IPADDR=192.0.2.117
+    </copy>
+    ```
+
+    Note that, if you don't do this, then you must explicitly specify the IP address when required in the commands.
+
+4. Store the URL for the Trip Manager service, which is the transaction initiator service, in an environment variable as shown in the following command.
 
     **Command syntax**
 
     ```text
    <copy>
-    export TRIP_SERVICE_URL=http://copied-external-IP-adress/trip-service/api/trip
+    export TRIP_SERVICE_URL=http://<copied-external-IP-address>/trip-service/api/trip
    </copy>
     ```
 
@@ -131,9 +142,9 @@ The sample application provisionally books a hotel room and a flight ticket and 
 
 3. Type **y** to confirm the provisional booking, and then press Enter.
 
-Your booking is confirmed and information about your confirmed booking is displayed.
+    Your booking is confirmed and information about your confirmed booking is displayed.
 
-![Details of the confirmed booking](./images/lra-confirmation.png)
+   ![Details of the confirmed booking](./images/lra-confirmation.png)
 
 4. Call the Trip-Service, Hotel Service and Flight Service REST APIs to view the list of the trip bookings, hotel bookings and flight bookings.
 
@@ -141,9 +152,10 @@ Your booking is confirmed and information about your confirmed booking is displa
 
     ```text
     <copy>
-    curl --location --request GET http://192.0.2.117/trip-service/api/trip | jq
+    curl --location --request GET http://$CLUSTER_IPADDR/trip-service/api/trip | jq
     </copy>
     ```
+
    An example output for Trip-Service is shown below. The type is Trip and the status is CONFIRMED.
 ![Details of the confirmed booking](./images/trip-confirmation-json.png)
 
@@ -151,22 +163,23 @@ Your booking is confirmed and information about your confirmed booking is displa
 
     ```text
     <copy>
-    curl --location --request GET http://192.0.2.117/hotelService/api/hotel | jq
+    curl --location --request GET http://$CLUSTER_IPADDR/hotelService/api/hotel | jq
     </copy>
     ```
+
    **Example command for Flight Service**
 
     ```text
     <copy>
-    curl --location --request GET http://192.0.2.117/flightService/api/flight | jq
+    curl --location --request GET http://$CLUSTER_IPADDR/flightService/api/flight | jq
     </copy>
     ```
+
 You may now **proceed to the next lab**. If you do not want to proceed further and would like to finish the livelabs and clean up the resources, then perform task 4 below.
 
-## Task 4: Clean up the livelabs stack
+## Task 4: Clean up the LiveLabs stack
 
-Perform this task only if you want to clean up the livelabs stack provisioned using Resource Manager. Performing this task will delete all the stack resources including the remote desktop instance.
-
+Perform this task only if you want to clean up the LiveLabs stack provisioned using the Resource Manager. When you perform this task, it deletes all the stack resources including the remote desktop instance.
 
 1. Open the navigation menu and click Developer Services. Under Resource Manager, click Stacks.
 2. Choose a compartment that you have permission to work in (on the left side of the page).
@@ -188,4 +201,4 @@ Perform this task only if you want to clean up the livelabs stack provisioned us
 
 * **Author** - Sylaja Kannan, Principal User Assistance Developer
 * **Contributors** - Brijesh Kumar Deo
-* **Last Updated By/Date** - Sylaja, October 2022
+* **Last Updated By/Date** - Sylaja, December 2022

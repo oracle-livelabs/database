@@ -32,7 +32,7 @@ This lab assumes you have:
 
 * An Oracle Cloud account
 * Successfully completed all previous labs
-* Logged in using remote desktop URL as oracle user. If you have connected to your instance via an SSH terminal using auto-generated SSH Keys as opc user, then change user to oracle before proceeding with the next step.
+* Logged in using remote desktop URL as an oracle user. If you have connected to your instance via an SSH terminal using auto-generated SSH Keys as opc user, then change user to oracle before proceeding with the next step.
 
  ```text
   <copy>
@@ -169,22 +169,28 @@ Install the XA sample application in the `otmm` namespace, where Transaction Man
     </copy>
     ```
 
-   Where, `sample-xa-app` is the name of the application that you want to install. You can provide another name to the installed application. 
+   Where, `sample-xa-app` is the name of the application that you want to install. You can provide another name to the installed application.
+
 2. Verify that the application has been deployed successfully.
+
    ```text
     <copy>
     helm list -n otmm
     </copy>
     ```
+
    An output showing the application status as deployed confirms successful deployment.
 
    ![Helm install success](./images/helm-install-deployed.png)
+
 3. If you need to make any changes in the values.yaml file and reinstall the `sample-xa-app`, then you can uninstall the `sample-xa-app` and install it again by performing step 1 above. Otherwise, skip this step and go to the next step.
+
    ```text
     <copy>
     helm uninstall sample-xa-app --namespace otmm
     </copy>
     ```
+
 4. Verify that all resources, such as pods and services, are ready. Proceed to the next step only when all resources are ready. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
 
     ```text
@@ -223,6 +229,16 @@ Before you start a transaction, you must start Minikube tunnel.
 
     Let's consider that the external IP in the above example is 192.0.2.117.
 
+4. Store the external IP address of the Istio ingress gateway in an environment variable named `CLUSTER_IPADDR` as shown in the following command.
+
+    ```text
+    <copy>
+    export CLUSTER_IPADDR=192.0.2.117
+    </copy>
+    ```
+
+    Note that, if you don't do this, then you must explicitly specify the IP address in the commands when required.
+
 ## Task 5: Run an XA Transaction
 
 Run an XA transaction When you run the Teller application, it withdraws money from one department and deposits it to another department by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
@@ -234,7 +250,7 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     ```text
     <copy>
     curl --location \
-    --request GET 'http://192.0.2.117/dept1/account1' | jq
+    --request GET 'http://$CLUSTER_IPADDR/dept1/account1' | jq
     </copy>
     ```
 
@@ -243,11 +259,9 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     ```text
     <copy>
     curl --location \
-    --request GET 'http://192.0.2.117/dept2/account2' | jq
+    --request GET 'http://$CLUSTER_IPADDR/dept2/account2' | jq
     </copy>
     ```
-
-    Where, `192.0.2.117` is the external IP address of the Istio ingress gateway. Replace this with a value specific to your environment.
 
 2. Transfer an amount of 50 from Department 1, account1 to Department 2, account2.
 
@@ -256,13 +270,13 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     ```text
     <copy>
     curl --location \
-    --request POST 'http://192.0.2.117/transfers' \
+    --request POST 'http://$CLUSTER_IPADDR/transfers' \
     --header 'Content-Type: application/json' \
     --data-raw '{"from" : "account1", "to" : "account2", "amount" : 50}'
      </copy>
     ```
 
-    Where, `192.0.2.117` is the external IP address of the Istio ingress gateway. Replace this with a value specific to your environment. An http response status 200 indicates a successful transfer.
+    HTTP status 200 in the response indicates that the transfer was successfully completed.
 
 3. Check balances in Department 1, account1 and Department 2, account2 to verify that the amounts reflect correctly after the transaction. Run the following commands to confirm the transaction.
 
@@ -271,7 +285,7 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     ```text
     <copy>
     curl --location \
-    --request GET 'http://192.0.2.117/dept1/account1' | jq
+    --request GET 'http://$CLUSTER_IPADDR/dept1/account1' | jq
     </copy>
     ```
 
@@ -280,11 +294,9 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     ```text
     <copy>
     curl --location \
-    --request GET 'http://192.0.2.117/dept2/account2' | jq
+    --request GET 'http://$CLUSTER_IPADDR/dept2/account2' | jq
     </copy>
     ```
-
-    Where, `192.0.2.117` is the external IP address of the Istio ingress gateway. Replace this with a value specific to your environment.
 
 4. Transfer an amount of 50 from Department 1, account1 to an account that does not exist in Department 2, such as account7. Since account7 does not exist, the deposit fails and Transaction Manager for Microservices rolls back the withdraw action.
 
@@ -293,13 +305,11 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     ```text
     <copy>
     curl --location \
-    --request POST 'http://192.0.2.117/transfers' \
+    --request POST 'http://$CLUSTER_IPADDR/transfers' \
     --header 'Content-Type: application/json' \
     --data-raw '{"from" : "account1", "to" : "account7", "amount" : 50}'
     </copy>
     ```
-
-    Where, `192.0.2.117` is the external IP address of the Istio ingress gateway. Replace this with a value specific to your environment.
 
 5. Check the balance in Department 1, account 1 to verify that the account balance is correct, and no amount was withdrawn.
 
@@ -308,11 +318,9 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     ```text
     <copy>
     curl --location \
-    --request GET 'http://192.0.2.117/dept1/account1' | jq
+    --request GET 'http://$CLUSTER_IPADDR/dept1/account1' | jq
     </copy>
     ```
-
-    Where, `192.0.2.117` is the external IP address of the Istio ingress gateway. Replace this with a value specific to your environment.
 
 ## Task 6: Clean up the livelabs stack
 
@@ -339,4 +347,4 @@ Perform this task only if you want to clean up the livelabs stack provisioned us
 
 * **Author** - Sylaja Kannan, Principal User Assistance Developer
 * **Contributors** - Brijesh Kumar Deo
-* **Last Updated By/Date** - Sylaja, October 2022
+* **Last Updated By/Date** - Sylaja, December 2022
