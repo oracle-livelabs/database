@@ -30,9 +30,9 @@ In this lab, you will:
 
 This lab assumes you have:
 
-* An Oracle Cloud account
-* Successfully completed all previous labs
-* Logged in using remote desktop URL as an oracle user. If you have connected to your instance via an SSH terminal using auto-generated SSH Keys as opc user, then change user to oracle before proceeding with the next step.
+* An Oracle Cloud account.
+* Successfully completed all previous labs.
+* Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
  ```text
   <copy>
@@ -127,7 +127,7 @@ To provide the configuration and environment details in the `values.yaml` file:
     * `databaseUser`: Enter the user name to access the database, such as SYS.
     * `databasePassword`: Enter the password to access the database for the specific user.
     * `resourceManagerId`: A unique identifier (uuid) to identify a resource manager. Enter a random value for this lab as shown below.
-   
+
    The `values.yaml` file contains many properties. For readability, only the resource manager properties for which you must provide values are listed in the following sample code snippet.
 
     ```text
@@ -147,7 +147,7 @@ To provide the configuration and environment details in the `values.yaml` file:
    </copy>
     ```
 
-![DB connection string](./images/db-connection-string.png)
+   ![DB connection string](./images/db-connection-string.png)
 
 3. Save your changes.
 
@@ -179,11 +179,13 @@ Install the XA sample application in the `otmm` namespace, where Transaction Man
     </copy>
     ```
 
-   An output showing the application status as deployed confirms successful deployment.
+   In the output, verify that the `STATUS` of the `sample-xa-app` is `deployed.
+
+   **Example output**
 
    ![Helm install success](./images/helm-install-deployed.png)
 
-3. If you need to make any changes in the values.yaml file and reinstall the `sample-xa-app`, then you can uninstall the `sample-xa-app` and install it again by performing step 1 above. Otherwise, skip this step and go to the next step.
+3. If you need to make any changes in the `values.yaml` file, then uninstall `sample-xa-app`. Update the `values.yaml` file, and then reinstall the `sample-xa-app`. Perform step 1 as described in this task again to reinstall `sample-xa-app`.  and install it again by perform step 1. Otherwise, skip this step and go to the next step.
 
    ```text
     <copy>
@@ -201,7 +203,7 @@ Install the XA sample application in the `otmm` namespace, where Transaction Man
 
 ## Task 4: Start a Tunnel
 
-Before you start a transaction, you must start Minikube tunnel.
+Before you start a transaction, you must start a Minikube tunnel.
 
 1. Run the following command in a new terminal to start a tunnel. Keep this terminal window open.
 
@@ -321,23 +323,6 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     --request GET 'http://$CLUSTER_IPADDR/dept1/account1' | jq
     </copy>
     ```
-
-## Task 6: Clean up the livelabs stack
-
-Perform this task only if you want to clean up the livelabs stack provisioned using Resource Manager. Performing this task will delete all the stack resources including the remote desktop instance.
-
-
-1. Open the navigation menu and click Developer Services. Under Resource Manager, click Stacks.
-2. Choose a compartment that you have permission to work in (on the left side of the page).
-3. Click the name of the stack that you want.
-4. The Stack details page opens.
-5. Click on Destroy to delete the stack resources.
-6. Confirm the operation when prompted.
-7. After the Destroy job is completed, go to More actions on the Stack details page and then select Delete stack.
-8. Confirm the operation when prompted.
-
-![Destroy the stack resources](./images/destroy-stack.png)
-![Delete the stack](./images/delete-stack.png)
 
 ## Learn More
 
