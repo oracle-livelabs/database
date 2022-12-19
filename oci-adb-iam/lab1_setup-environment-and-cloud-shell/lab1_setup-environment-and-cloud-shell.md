@@ -17,6 +17,8 @@ from the Oracle Cloud Console. It is a Linux shell pre-configured with the OCI C
 ## Task 1: Provision the Autonomous Database
 >**Note:** It is advised that you do not perform this lab in a production tenancy due to policies created in this lab that give all users access to all ADBs in the tenancy.
 
+>**Note:** If you have a slightly older tenancy with the option to sign in with Single Sign-On or Direct Sign-In, sign in with Direct Sign-In as you will not have the needed permissions with Single Sign-On. You can see which way your signed in by looking at the account that is signed into the tenancy. If it starts with "oracleidentitycloudservice" than you are using Single Sign-On and need to switch over. If you are not able to sign in using Direct Sign-In, you must create a non-federated user in IAM to use for this lab. You can look to the Appendix of this lab to see how to do so.
+
 1. Beginning at your Oracle Cloud Infrastructure home page, access the Cloud Shell
 by clicking on the **Developer tools** icon in the top right corner and choose **Cloud Shell**. You will use the Cloud Shell
 throughout this workshop.
@@ -88,12 +90,75 @@ throughout this workshop.
     ```
 
 3. Add your OCI user to the ALL\_DB\_USERS group
+    >**Note:** If you run into an error here with permission, look to the note at the beginning of the lab to sign in properly with permissions. 
 
     ```
     <copy>oci iam group add-user --user-id $OCI_CS_USER_OCID --group-id $ALL_DB_USERS_OCID</copy>
     ```
 
 You may now proceed to the next lab!
+
+## **Appendix**: Creating an account to use Direct Sign-On with
+
+1. Create a New User
+
+   a) Click the **Navigation Menu** in the upper left, navigate to **Identity & Security** and select **Users**.
+
+	![](https://oracle-livelabs.github.io/common/images/console/id-users.png " ")
+
+   b) Click **Create User**.
+
+   In the **Create User** dialog box, enter the following:
+
+      - **Name:** Enter a unique First and Last name for the new user (for example, **User01**).
+      - **Email:**  Preferably use a personal email address to which you have access (GMail, Yahoo, etc).
+      - Check the box of "Use the email address as the username".
+      - Check the box of "Assign cloud account administrator role".
+
+    Click **Create**.
+
+      ![New user form](images/user-form.png)
+
+2. Set a Temporary Password for the newly created User.
+
+   a) From the list of users, click on the **user that you created** to display its details.
+
+   b) Click **Create/Reset Password**.  
+
+      ![Reset password](images/image009.png)
+
+   c) In the dialog, click **Create/Reset Password**.
+
+      ![Reset password](images/create-password.png)
+
+   d) The new one-time password is displayed.
+      Click the **Copy** link and then click **Close**. Make sure to copy this password to your notepad.
+
+      ![](images/copy-password.png)
+
+3. Sign in as the new user using a different web browser or an incognito window.
+
+   a) Click **Sign Out** from the user menu and log out of the admin user account completely.
+
+      ![Sign out](images/sign-out.png)
+   
+   b) Open a supported browser and go to the Console URL:  [https://cloud.oracle.com](https://cloud.oracle.com).
+
+   c) Click on the portrait icon in the top-right section of the browser window, then click **Sign in to Oracle Cloud**.
+
+   d) Enter the name of your cloud account (aka your tenancy name, not your user name), then click the **Next** button.
+
+   ![Enter tenancy name](images/cloud-account-name.png)
+
+   e) This time, you will sign in using **Oracle Cloud Infrastructure Direct Sign-In** box with the user you created. Note that the user you created is not part of the Identity Cloud Services.
+
+   f) Enter the password that you copied. Click **Sign In**.
+
+      ![Enter your password](images/sign-in.png)
+
+      >**Note:** Since this is the first-time sign-in, the user will be prompted to change the temporary password, as shown in the screenshot below.
+   g) Set the new password. Click **Save New Password**.
+      ![Set the new password](images/image015.png)
 
 ## Learn More
 
