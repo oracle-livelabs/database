@@ -268,19 +268,15 @@ The query returns the number of users who have fully watched show 15 (all season
 
 ````
 <copy>
-select u.id,
-seq_sum(u.info.shows[$element.showId = 16].seriesInfo.episodes.minWatched) as time,
-[ seq_transform(u.info.shows[$element.showId = 16],
-     seq_transform($sq1.seriesInfo[],
-        seq_transform($sq2.episodes[],
-        { "showName" : $sq1.showName,
-          "seasonNum" : $sq2.seasonNum,
-          "episodeId" : $sq3.episodeID,
-          "dateWatched" : $sq3.date}
-))) ] as episodes
-from stream_acct u
-where u.info.country = "USA" and
-exists u.info.shows[$element.showId = 16].seriesInfo.episodes[$element.date > "2022-04-01"]
+select count(*) as cnt
+from users u
+where u.info.shows.showId =any 15 and
+      size(u.info.shows[$element.showId = 15].seriesInfo) =
+      u.info.shows[$element.showId = 15].numSeasons and
+      not seq_transform(u.info.shows[$element.showId = 15].seriesInfo[],
+                        $sq1.numEpisodes = size($sq1.episodes)) =any false and
+      not seq_transform(u.info.shows[$element.showId=15].seriesInfo.episodes[],
+                        $sq1.lengthMin = $sq1.minWatched) =any false
 </copy>
 ````
 
