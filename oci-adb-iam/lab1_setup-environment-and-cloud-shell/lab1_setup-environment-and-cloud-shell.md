@@ -15,6 +15,8 @@ from the Oracle Cloud Console. It is a Linux shell pre-configured with the OCI C
 - Add your OCI user to greated groups
 
 >**Note:** If you have a slightly older tenancy with the option to sign in with Single Sign-On or Direct Sign-In, sign in with Direct Sign-In as you will not have the needed permissions with Single Sign-On. You can see which way your signed in by looking at the account that is signed into the tenancy. If it starts with "oracleidentitycloudservice" than you are using Single Sign-On and need to switch over. If you are not able to sign in using Direct Sign-In, you must create a non-federated user in IAM to use for this lab. You can look to the Appendix of this lab to see how to do so.
+
+
 ## Task 1: Provision the Autonomous Database
 >**Note:** It is advised that you do not perform this lab in a production tenancy due to policies created in this lab that give all users access to all ADBs in the tenancy.
 
@@ -156,6 +158,7 @@ You may now proceed to the next lab!
       ![Enter your password](images/sign-in.png)
 
       >**Note:** Since this is the first-time sign-in, the user will be prompted to change the temporary password, as shown in the screenshot below.
+      
    g) Set the new password. Click **Save New Password**.
       ![Set the new password](images/image015.png)
 
