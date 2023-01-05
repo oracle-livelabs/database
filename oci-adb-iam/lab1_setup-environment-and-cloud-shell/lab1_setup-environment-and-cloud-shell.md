@@ -14,10 +14,9 @@ from the Oracle Cloud Console. It is a Linux shell pre-configured with the OCI C
 - Create Groups and Policies to be used later
 - Add your OCI user to greated groups
 
+>**Note:** If you have a slightly older tenancy with the option to sign in with Single Sign-On or Direct Sign-In, sign in with Direct Sign-In as you will not have the needed permissions with Single Sign-On. You can see which way your signed in by looking at the account that is signed into the tenancy. If it starts with "oracleidentitycloudservice" than you are using Single Sign-On and need to switch over. If you are not able to sign in using Direct Sign-In, you must create a non-federated user in IAM to use for this lab. You can look to the Appendix of this lab to see how to do so.
 ## Task 1: Provision the Autonomous Database
 >**Note:** It is advised that you do not perform this lab in a production tenancy due to policies created in this lab that give all users access to all ADBs in the tenancy.
-
->**Note:** If you have a slightly older tenancy with the option to sign in with Single Sign-On or Direct Sign-In, sign in with Direct Sign-In as you will not have the needed permissions with Single Sign-On. You can see which way your signed in by looking at the account that is signed into the tenancy. If it starts with "oracleidentitycloudservice" than you are using Single Sign-On and need to switch over. If you are not able to sign in using Direct Sign-In, you must create a non-federated user in IAM to use for this lab. You can look to the Appendix of this lab to see how to do so.
 
 1. Beginning at your Oracle Cloud Infrastructure home page, access the Cloud Shell
 by clicking on the **Developer tools** icon in the top right corner and choose **Cloud Shell**. You will use the Cloud Shell
