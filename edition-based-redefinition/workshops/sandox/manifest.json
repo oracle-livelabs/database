@@ -13,17 +13,12 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
         },
         {
-            "title": "Lab 1: Create an ATP Autonomous Database",
-            "description": "Create an ATP Autonomous Database",
-            "filename": "../../create-adb/create-adb.md"
-        },
-        {
-            "title": "Lab 2: Connect to the ATP Autonomous Database",
+            "title": "Lab 1: Download Lab Files and Connect to the ATP Autonomous Database",
             "description": "Get the wallet and connect to the newly created Autonomous Database",
             "filename": "../../connect-adb/connect-adb.md"
         },
         {
-            "title": "Lab 3: Prepare the HR schema",
+            "title": "Lab 2: Prepare the HR schema",
             "description": "This workshop uses a modified version of the well-known HR schema. Please set it up using this lab.",
             "filename": "../../setup-hr-schema/setup-hr-schema.md"
         },
