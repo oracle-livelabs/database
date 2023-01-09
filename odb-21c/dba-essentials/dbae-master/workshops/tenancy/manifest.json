@@ -1,0 +1,24 @@
+{
+  "workshoptitle": "DBA Essentials workshops series for Oracle Database 21c",
+  "help": "livelabs-help-db_us@oracle.com",  
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The master workshop on DBA Essentials workshops series for Oracle Database 21c.",
+      "publisheddate": "01/06/2023",
+      "filename": "./../../intro-dbae/intro-dbae.md"
+    },
+    {
+      "title": "Lab 1: Access the series of DBA Essentials workshops",
+      "description": "The sequence of workshops from the DBA Essentials series for Oracle Database 21c including links to access on Livelabs.",
+      "publisheddate": "01/06/2023",
+      "filename": "./../../access-series-dbae/access-series-dbae.md"
+    },
+    {
+      "title": "Need help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "publisheddate": "08/20/2022",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+    }
+  ], "task_type": "Workshops"
+}
