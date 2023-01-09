@@ -2,8 +2,7 @@
 
 ## Introduction
 
-The Oracle Cloud Infrastructure (OCI) Cloud Shell is a browser-based terminal accessible
-from the Oracle Cloud Console. It is a Linux shell pre-configured with the OCI CLI available to all user, and is available to all OCI users. It offers an interface to quickly and easily perform operations such as provisioning resources and connecting to database services. We will use the cloud shell throughout this workshop, and in this lab will use it to provision items such as an Autonomus Database, users, groups, and policies.
+Most tasks will be completed using Oracle Cloud Infrastructure (OCI) Cloud Shell. OCI Cloud Shell is a browser-based terminal accessible from the Oracle Cloud Console. As a Linux shell, pre-configured with the OCI CLI, Cloud shell allows you to quickly and easily perform operations such as provisioning resources and connecting to database services. We will use the cloud shell throughout this workshop, and in this lab will use it to provision items such as an Autonomus Database, users, groups, and policies.
 
 *Estimated Lab Time*: 15 minutes
 
