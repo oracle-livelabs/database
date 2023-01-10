@@ -2,13 +2,13 @@
 
 ## About this workshop
 
-This workshop introduces all workshops from the *DBA Essentials series*. It not only provides a list of these workshops but also suggests the sequence to run them. 
+This workshop introduces all workshops from the *DBA Essentials series*. It not only provides quick access to these workshops but also suggests the sequence to run them. 
 
 > **Note:** You can also use the filer **DBA Essentials** on Livelabs and find the workshops that belong to this series.
 
 ### **What is the purpose and scope?**
 
-The primary goal of this workshop is to help you get started with the DBA Essentials workshops. It provides a single page to access these workshops in a specific order. 
+The primary goal of this workshop is to help you get started with the DBA Essentials workshops. It brings these workshops together on a single page and lists them in a specific order. 
 
 Each of these individual workshops focus on specific areas of *Oracle Database 21c* and illustrate some basic activities in database administration. Some workshop uses *Oracle Enterprise Manager (Oracle EM)* as an interface for procedures and tasks. Using these workshops, you can learn how to manage your database with simple steps.
 
@@ -16,7 +16,9 @@ Estimated workshop time: 30 minutes
 
 ### Objectives
 
-In this workshop, you will find a list of workshops from the DBA Essentials series. Run the DBA Essentials workshops in the sequence specified in this workshop.
+In this workshop, you will: 
+ - View all workshops from the DBA Essentials series
+ - Run the DBA Essentials workshops in the specified sequence
 
 ### Prerequisites
 
@@ -106,7 +108,7 @@ Click on the next lab to get started.
 
  - [Oracle Database Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/index.html)
 
- - [Oracle Enterprise Manager Cloud Control (Oracle EMCC)](https://docs.oracle.com/en/enterprise-manager/index.html)
+ - [Oracle Enterprise Manager (Oracle EM)](https://docs.oracle.com/en/enterprise-manager/index.html)
 
 ## Acknowledgements
 

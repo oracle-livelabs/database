@@ -2,13 +2,13 @@
 
 ## Introduction
 
-This lab consolidates all workshops from the *DBA Essentials series* for Oracle Database 21c. It helps you access the workshops on Livelabs and also suggests the sequence to run them. 
+This lab consolidates all workshops from the *DBA Essentials series* for Oracle Database 21c. It helps you access these workshops on Livelabs and also suggests the sequence to run them. 
 
 Estimated time: Check specific time under each workshop
 
 ### Objectives
 
- - Explore these workshops in the given sequence.
+ - Explore the DBA Essentials workshops in the given sequence.
  - Click the link below each workshop to open the workshop page and try it out.
 
 > **Note:** The link to workshop opens the landing page for that workshop on the Livelabs website, where you can run the workshop. 
@@ -17,7 +17,7 @@ Estimated time: Check specific time under each workshop
 ### Prerequisites
 
 This lab assumes you have -
- -   An Oracle Cloud accountx
+ -   An Oracle Cloud account
 -->
 
 ## <if type="hidden">DBA Essentials - </if>Workshop 1: Install Oracle Database 21c on OCI Compute
