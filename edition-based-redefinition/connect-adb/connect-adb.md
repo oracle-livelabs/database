@@ -1,4 +1,4 @@
-# Download lab files and Connect to ADB 
+# Download ADB Wallet and lab files
 
 ### Objectives
 
@@ -88,44 +88,11 @@ This lab assumes you have:
 
    ![Ebrlabs folders](images/ebrlabs-folders.png " ")
 
-## Task 3: Connect to ATP Database using SQLCl
 
-   SQLcl(SQL Developer command line) is installed in Cloud Shell by default
-
-1. Connect to admin user to ATP database 
-
-2. We already downloaded the wallet in the Cloud shell home folder.
-
-3. From the Cloud shell, connect to SQLcl 
-
-   ```text
-   <copy>sql /nolog </copy>
-   ```
-
-4. After getting the SQL prompt, set the cloudconfig details with the wallet file
-
-   ```text
-   <copy>set cloudconfig ebronline.zip</copy>
-   ```
-
-5. Connect as admin user and enter admin password when prompted. This is the ADMIN password while creating the ATP database. If you are using livelabs tenancy, you should refer your login page for getting those credentials. 
-
-   ```text
-   <copy>connect admin@ebronline_medium</copy>
-   ```
-
-   ![ATP Connect](images/atp-connect.png " ")
-
-6. Verify the user is connected as admin
-
-   ```text
-   <copy>show user</copy>
-   ```
-
- 
+You have successfully downloaded the ADB wallet and lab files,[proceed to the next lab](#next) to setup the HR schema.
 
 ## **Acknowledgements**
 
-- Author - Suraj Ramesh and Ludovico Caldara
+- Author - Ludovico Caldara and Suraj Ramesh 
 - Last Updated By/Date -Suraj Ramesh, Jan 2023
 

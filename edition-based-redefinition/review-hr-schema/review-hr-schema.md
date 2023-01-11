@@ -21,7 +21,8 @@ For CI/CD testing, and therefore for production environments that rolled out wit
 Keep in mind, editions are shared among all schemas in the database, therefore all the schemas must belong to the same application and follow the same edition scheme. Different applications should be separated in different databases (or PDBs).
 
 The file `hr_main.sql` that we used to create the HR schema in the previous lab, creates the following procedures to let users manage and use editions themselves:
-```
+
+```text
 REM ======================================================
 REM procedure to create an edition as DBA (with AUTHID definer) and grant its usage to the invoker
 REM ======================================================
@@ -91,10 +92,12 @@ begin
 end;
 /
 ```
+
 In a normal situation, either a DBA or a single administrative user would take care of the editions, but in a development database, developers may want to maintain the editions themselves. The `CREATE ANY EDITION` privilege is also handy, but not effective when the users that create them are recreated as part of integration tests: an edition is an object at database (PDB) level, but the grants work like for normal objects (grants are lost if the grantor is deleted).
 
 The file `hr_main.sql` gives the extra grants to the `HR` user:
-```
+
+```text
 grant execute on create_edition to hr;
 grant execute on drop_edition to hr;
 grant execute on default_edition to hr;
@@ -105,9 +108,10 @@ ALTER USER hr ENABLE EDITIONS;
 ## Task 2: Review Base Tables and Editioning Views
 
 The set of scripts that install the `HR` schema is different from the default one.
-Also give a look at the file `hr_cre.sql`. Each table has a different name compared to the original `HR` schema (a suffix `$0` in this example):
 
-```
+Also give a look at the file `hr_cre.sql`.This script is available in initial_setup folder.Each table has a different name compared to the original `HR` schema (a suffix `$0` in this example):
+
+```text
 CREATE TABLE regions$0
     ( region_id      NUMBER
        CONSTRAINT  region_id_nn NOT NULL
@@ -115,35 +119,36 @@ CREATE TABLE regions$0
     );
 ```
 
-Each table has a corresponding *editioning view* that covers the table 1 to 1:
+Each table has a corresponding *editioning view* that covers the table one to one:
 
-```
+```text
 CREATE EDITIONING VIEW regions as
     SELECT region_id, region_name FROM regions$0;
 ```
 
-To verify this, connect with the `HR` user:
+To verify this, connect with the `HR` user in SQLcl ( If you got disconnected from sqlcl, refer Lab2,Task 1 for setting up the DB wallet)
 
-```
-connect hr/Welcome#Welcome#123@db20220620133943_tp
+```text
+ <copy>connect hr/Welcome#Welcome#123@ebronline_medium</copy>
 ```
 
-Then use the SQLcl command `ddl` on `regions`:
+Then use the SQLcl command `ddl` on `regions` and you should able to see DDL of the regions view as below
 
-```
+```text
 SQL> ddl regions
 
   CREATE OR REPLACE FORCE EDITIONABLE EDITIONING VIEW "HR"."REGIONS" ("REGION_ID", "REGION_NAME") DEFAULT COLLATION "USING_NLS_COMP"  AS 
   SELECT region_id, region_name FROM regions$0;
 ```
 
+The views, and all the depending objects, are editioned and belong to the `ORA$BASE` edition. This is the default edition when a database is created. Let us verify using the below SQL in the HR schema.
 
-The views, and all the depending objects, are editioned and belong to the `ORA$BASE` edition. This is the default edition when a database is created.
+```text
+ <copy>select OBJECT_NAME, OBJECT_TYPE, EDITION_NAME from user_objects_ae WHERE edition_name is not null  order by 2,3;</copy>
+ ```
 
-```
-SQL> select OBJECT_NAME, OBJECT_TYPE, EDITION_NAME from user_objects_ae WHERE edition_name is not null  order by 2,3;
-
-          OBJECT_NAME    OBJECT_TYPE    EDITION_NAME
+```text
+ OBJECT_NAME    OBJECT_TYPE    EDITION_NAME
 _____________________ ______________ _______________
 ADD_JOB_HISTORY       PROCEDURE      ORA$BASE
 SECURE_DML            PROCEDURE      ORA$BASE
@@ -158,13 +163,13 @@ COUNTRIES             VIEW           ORA$BASE
 REGIONS               VIEW           ORA$BASE
 EMPLOYEES             VIEW           ORA$BASE
 
-12 rows selected.
+12 rows selected. 
+
 ```
 
 You have successfully reviewed the HR schema [proceed to the next lab](#next) to start working with Liquibase and SQLcl.
 
 ## Acknowledgements
 
-- **Author** - Ludovico Caldara
-- **Contributors** -
-- **Last Updated By/Date** -  
+- Author - Ludovico Caldara and Suraj Ramesh 
+- Last Updated By/Date -Suraj Ramesh, Jan 2023

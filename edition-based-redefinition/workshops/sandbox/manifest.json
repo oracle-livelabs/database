@@ -13,47 +13,47 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
         },
         {
-            "title": "Lab 1: Download Lab Files and Connect to the ATP Autonomous Database",
+            "title": "Lab 1: Download ADB Wallet and Lab Files",
             "description": "Get the wallet and connect to the newly created Autonomous Database",
             "filename": "../../connect-adb/connect-adb.md"
         },
         {
-            "title": "Lab 2: Prepare the HR schema",
+            "title": "Lab 2: Connect to ADB database and prepare the HR schema",
             "description": "This workshop uses a modified version of the well-known HR schema. Please set it up using this lab.",
             "filename": "../../setup-hr-schema/setup-hr-schema.md"
         },
         {
-            "title": "Lab 4: Review the HR schema",
+            "title": "Lab 3: Review the HR schema",
             "description": "Review the HR Schema",
             "filename": "../../review-hr-schema/review-hr-schema.md"
         },
         {
-            "title": "Lab 5: Using Liquibase run the generate schema",
+            "title": "Lab 4: Using Liquibase run the generate schema",
             "description": "Using Liquibase run the generate schema",
             "filename": "../../lb-genschema/lb-genschema.md"
         },
         {
-            "title": "Lab 6: Create Directory structure and sync the metadata",
+            "title": "Lab 5: Create Directory structure and sync the metadata",
             "description": "Create Directory structure and sync the metadata",
             "filename": "../../directory-syncmetadata/directory-syncmetadata.md"
         },
         {
-            "title": "Lab 7: Prepare and review new edition scripts",
+            "title": "Lab 6: Prepare and review new edition scripts",
             "description": "Prepare and review new edition scripts",
             "filename": "../../prepare-newedition/prepare-newedition.md"
         },
         {
-            "title": "Lab 8: Update new edition",
+            "title": "Lab 7: Update new edition",
             "description": "Update new edition",
             "filename": "../../update-newedition/update-newedition.md"
         },
         {
-            "title": "Lab 9: Verify new edition",
+            "title": "Lab 8: Verify new edition",
             "description": "Verify new edition",
             "filename": "../../verify-newedition/verify-newedition.md"
         },
         {
-            "title": "Lab 10: Switch to new edition and decommision the old edition",
+            "title": "Lab 9: Switch to new edition and decommision the old edition",
             "description": "Switch to new edition and decommision the old edition",
             "filename": "../../switch-decomm-editions/switch-decomm-editions.md"
         },

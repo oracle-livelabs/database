@@ -1,13 +1,20 @@
 # Generate the base changelog for liquibase
 
-## Task1: run lb genschema to generate the base changelog
+Estimated lab time: 10 minutes
 
-The command `lb genschema` creates the base Liquibase changelog. Run it from `../changes/hr.00000.base` directory:
-```
+### Objectives
+
+In this lab, you will learn how to use Liquibase  to generate the base changelog of HR Schema.
+
+## Task1: Run lb generate-schema to generate the base changelog
+
+The command `lb generate-schema` creates the base Liquibase changelog. Make to sure to run it from ***changes/hr.00000.base*** directory:
+
+```text
 SQL> show user
 USER is "HR"
 SQL> cd ../changes/hr.00000.base
-SQL> lb genschema
+SQL> lb generate-schema
 
 
 Export Flags Used:

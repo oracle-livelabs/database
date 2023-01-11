@@ -9,72 +9,88 @@ In this lab, you will connect as DBA to the autonomous database and create the H
 The HR schema is a modified version of the well-known HR schema to support editions directly after its creation.
 
 ### Prerequisites
-- You have completed:
-   - Lab: Create the Autonomous Database
-   - Lab: Connect to the Autonomous Database
-- Alternatively:
-  - You have DBA access to any Oracle Database release 11gR2 or higher.
-  - You have the last version of SQLcl.
-  - You know how to map any step provided in this lab to another database.
+
+   - Created or have access the Autonomous Database
+   - Downloaded Lab Files and test the connectivity of the Autonomous Database
+
+## Task 1: Connect to ATP Database using SQLCl
+
+   SQLcl(SQL Developer command line) is installed in Cloud Shell by default
+
+1. Connect to admin user to ATP database 
+
+2. We already downloaded the wallet in the Cloud shell home folder in Lab 1.
+
+3. Reopen the Cloud Shell if it is disconnected. From the Cloud shell  home folder, connect to SQLcl 
+
+   ```text
+   <copy>sql /nolog </copy>
+   ```
+
+4. After getting the SQL prompt, set the cloudconfig details with the wallet file
+
+   ```text
+   <copy>set cloudconfig ebronline.zip</copy>
+   ```
+
+5. Connect as admin user and enter admin password when prompted. **This is the ADMIN password for the database and it is provided will creating the ATP database**.
+
+   If you are using livelabs tenancy, you should refer your login page for getting those credentials. 
+
+   ```text
+   <copy>connect admin@ebronline_medium</copy>
+   ```
+
+   ![ATP Connect](images/atp-connect.png " ")
+
+6. Verify the user is connected as admin
+
+   ```text
+   <copy>show user</copy>
+   ```
 
 
-## Task 1: Download and extract the zip bundle containing the SQL files for the lab.
+## Task 2: Setup the HR schema
 
-1. Download the bundle with `wget`:
+1. In SQLCl change the directory to initial_setup and verify the sql files
+
+   ```text
+   <copy>cd initial_setup</copy>
+   <copy>pwd</copy>
+   <copy>!ls -ltr</copy>
+   ```
+
+  **Verify you are in the initial_setup directory and able to see the *.sql files**
+
+   ```text
+   SQL> cd initial_setup
+   SQL> pwd
+   /home/suraj_rame/initial_setup
+   SQL> !ls -ltr
+   total 104
+   -rw-rw-r--. 1 suraj_rame oci 45392 Oct 14 16:57 hr_popul.sql
+   -rw-rw-r--. 1 suraj_rame oci  6670 Oct 14 16:57 hr_main.sql
+   -rw-rw-r--. 1 suraj_rame oci  2528 Oct 14 16:57 hr_idx.sql
+   -rw-rw-r--. 1 suraj_rame oci  2630 Oct 14 16:57 hr_drop.sql
+   -rw-rw-r--. 1 suraj_rame oci 11475 Oct 14 16:57 hr_cre.sql
+   -rw-rw-r--. 1 suraj_rame oci  8440 Oct 14 16:57 hr_comnt.sql
+   -rw-rw-r--. 1 suraj_rame oci  3833 Oct 14 16:57 hr_code.sql
+   -rw-rw-r--. 1 suraj_rame oci  2232 Oct 14 16:57 hr_analz.sql
+   -rw-r--r--. 1 suraj_rame oci  7364 Jan  6 16:12 hr_main.log
+   ```
+
+2. Execute the SQL file hr_main.sql 
+
+   The scripts prompts for few parameters and make sure you provide the correct details if not the script will error
+
+    - The password for the `HR` user - Input as  **Welcome#Welcome#123**
+    - The default tablespace for the `HR` user - Input as **SAMPLESCHEMAS**
+    - The temporary tablespace for the `HR` user- Input as **TEMP**
+    - The path used to store the logs- Input as **./** 
+    - The name of the TNS name to connect to the Autonomous Database- Input as **ebronline_medium**
 
     ```
-      wget {{address_to}}/ebr-human-resources.zip
-    ```
-
-2. Unzip the archive:
-
-    ```
-      unzip ebr-human-resources.zip
-    ```
-  ![](./images/01-unzip-bundle-png)
-
-## Task 2: Connect as DBA to the Autonomous Database
-
-1. Execute SQLcl with the `sql` command:
-
-    ```
-      $ cd ebr-human-resources/initial_setup
-      $ sql /nolog
-
-      SQLcl: Release 21.4 Production on Mon Mar 14 15:18:04 2022
-
-      Copyright (c) 1982, 2022, Oracle.  All rights reserved.
-      SQL>
-    ```
-
-2. Instruct SQLcl to use the wallet you have uploaded in the previous lab:
-
-    ```
-      SQL> set cloudconfig ../../Wallet_DB20220620133943.zip
-
-** This Wallet name will be different for your ADB and  use the correct *.zip file **
-    ```
-
-3. Connect using the `admin` user (or another user with DBA privileges). For that, use the TNS name noted down previously, along with the password used during the creation of the Autonomous Database:
-
-    ```
-      SQL> connect admin/*****@demoadb_tp
-      Connected.
-    ```
-
-## Task 3: Setup the HR schema
-
-1. Execute the SQL file hr_main.sql (make sure you are in the directory `ebr-human-resources/initial_setup`).
-
-   The scripts prompts for a few parameters:
-     1. The password for the `HR` user (use your preferred one).
-     2. The default tablespace for the `HR` user (ADB comes with `SAMPLESCHEMAS` by default, but any existing user tablespace in your environment will work, for example `USERS`).
-     3. The temporary tablespace for the `HR` user. ADB comes with `TEMP` by default.
-     5. The path used to store the logs. You can use `./` for that.
-     6. The name of the TNS name to connect to the Autonomous Database.
-
-    ```
-      SQL> @hr_main
+      SQL> @hr_main.sql
 
       specify password for HR as parameter 1:
       Enter value for 1: Welcome#Welcome#123
@@ -89,9 +105,20 @@ The HR schema is a modified version of the well-known HR schema to support editi
       Enter value for 5: ./
 
       specify connect string as parameter 6:
-      Enter value for 6: demoadb_medium
+      Enter value for 6: ebronline_medium
 
-      User HR dropped.
+
+      PL/SQL procedure successfully completed.
+
+
+      Procedure CREATE_EDITION compiled
+
+
+      Procedure DROP_EDITION compiled
+
+
+      procedure DEFAULT_EDITION compiled
+
 
       User HR created.
 
@@ -279,10 +306,11 @@ The HR schema is a modified version of the well-known HR schema to support editi
       SQL>
     ```
 
-    You have successfully created the HR schema [proceed to the next lab](#next) to have an overview of the Editions and the helper procedure that we have created in this lab.
+    You have successfully created the HR schema [proceed to the next lab](#next) to have an overview of the Editions and the helper procedure that we have created in this lab. 
+  
+  **Verify hr_main.log in the current folders for any log. If you see any errors in the script execution, verify the parameters input an execute again**
 
 ## Acknowledgements
 
-- **Author** - Ludovico Caldara
-- **Contributors** -
-- **Last Updated By/Date** -  
+- Author - Suraj Ramesh and Ludovico Caldara
+- Last Updated By/Date -Suraj Ramesh, Jan 2023
