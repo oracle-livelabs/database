@@ -68,16 +68,16 @@ This lab assumes you have:
 1. Using the same cloud shell console, download the Lab required files
 
    ```text
-   <copy>wget bit.ly</copy>
+   <copy>wget http://bit.ly/ebrlabs</copy>
    ```
    Copy the command and execute in Cloud Shell prompt.You should be able to see the ebrlabs.zip got downloaded. Verify that using the list command ls -ltr as provided in the screenshot.
 
    ![Download ebrlabs](images/download-ebrlabs.png " ")
 
-2. Unzip the ebrlab.zip file 
+2. Unzip the ebrlabs.zip file 
 
    ```text
-   <copy>unzip ebrlab.zip</copy>
+   <copy>unzip ebrlabs</copy>
    ```
    
    Copy the command and execute in Cloud Shell prompt.You should be able to see the ebrlabs.zip has been unzipped.

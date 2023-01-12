@@ -16,6 +16,15 @@ You can watch the video below for an overview on Oracle Edition Based Redefiniti
 
 [EBR Introduction] (videohub:1_p6bapnjx)
 
+# Introduction to Oracle Online Redefinition 
+
+The Online Redefinition feature in Oracle Database offers administrators unprecedented flexibility to modify table physical attributes and transform both data and table structure while allowing users full access to the database. Below are some of the benefits.
+
+- Modify table physical attributes and transform both data and table structure while allowing users full access to the database.
+- Improve data availability, query performance, response time and disk space utilization, all of which are important in a mission-critical environment
+- Make the application upgrade process easier, safer and faster.
+- Execute using Enterprise Manager or SQL*Plus command line interface.
+
 
 ## About this Workshop
 
@@ -33,18 +42,18 @@ You can watch the video below for an overview on how to evolve Oracle DB Applica
 ## Workshop Objectives
 
 - Create and connect to Autonomous Database
+- Download ADB wallet and lab files
 - Prepare and review HR schema
 - Use Liquibase to generate schema
 - Create Directory structure and sync the metadata
-- Prepare and review new edition scripts
-- Update new edition
+- Review and update new edition scripts
 - Verify new edition
 - Switch to new edition and decommision the old edition
 
 ## Workshop Prerequisites
 
 - Autonomous (ATP or ADW) DB
-- Access to OCI Cloudshell
+- Access to OCI Cloud shell
 
 
 ## Additional information
