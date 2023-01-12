@@ -38,22 +38,17 @@
             "filename": "../../directory-syncmetadata/directory-syncmetadata.md"
         },
         {
-            "title": "Lab 6: Prepare and review new edition scripts",
-            "description": "Prepare and review new edition scripts",
-            "filename": "../../prepare-newedition/prepare-newedition.md"
+            "title": "Lab 6: Review and update new edition scripts",
+            "description": "Review and update new edition scripts",
+            "filename": "../../review-update-newedition/review-update-newedition.md"
         },
         {
-            "title": "Lab 7: Update new edition",
-            "description": "Update new edition",
-            "filename": "../../update-newedition/update-newedition.md"
-        },
-        {
-            "title": "Lab 8: Verify new edition",
+            "title": "Lab 7: Verify new edition",
             "description": "Verify new edition",
             "filename": "../../verify-newedition/verify-newedition.md"
         },
         {
-            "title": "Lab 9: Switch to new edition and decommision the old edition",
+            "title": "Lab 8: Switch to new edition and decommision the old edition",
             "description": "Switch to new edition and decommision the old edition",
             "filename": "../../switch-decomm-editions/switch-decomm-editions.md"
         },
@@ -63,4 +58,4 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
         }
     ]
-  }
+}

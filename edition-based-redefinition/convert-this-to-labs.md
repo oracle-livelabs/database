@@ -1211,3 +1211,18 @@ Errors encountered:0
 ######## END ERROR SUMMARY ##################
 SQL>
 ```
+
+
+SQL> cd changes
+SQL> lb update -changelog-file hr.00003.edition_v2_post_rollout.xml
+--Starting Liquibase at 12:39:21 (version 4.17.0 #0 built at 2022-11-02 21:48+0000)
+
+-- Loaded 9 change(s)
+Running Changeset: hr.00003.edition_v2_post_rollout.xml::hr.000001.alter_session::lcaldara
+Running Changeset: hr.00003.edition_v2_post_rollout.xml::hr.000002.change_default_edition::lcaldara
+Running Changeset: hr.00003.edition_v2_post_rollout.xml::hr.000003.drop_old_edition::lcaldara
+ORA-38805: edition is in use
+ORA-06512: at "ADMIN.DROP_EDITION", line 19
+ORA-06512: at line 7
+
+
