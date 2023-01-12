@@ -12,7 +12,8 @@
       "title": "Access the series of DBA Essentials workshops",
       "description": "The sequence of workshops from the DBA Essentials series for Oracle Database 21c including links to access on Livelabs.",
       "publisheddate": "01/10/2023",
-      "filename": "./../../access-series-dbae/access-series-dbae.md"
+      "filename": "./../../access-series-dbae/access-series-dbae.md",
+	  "task_type": "Workshops"
     },
     {
       "title": "Need help?",
@@ -20,5 +21,5 @@
       "publisheddate": "08/20/2022",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
     }
-  ], "task_type": "Workshops"
+  ]
 }
