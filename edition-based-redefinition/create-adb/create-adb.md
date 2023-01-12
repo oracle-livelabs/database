@@ -1,15 +1,17 @@
-# Provision an Oracle Autonomous Database (ADW and ATP)
+# Provision an Oracle Autonomous Database- Autonomous Transaction processing 
 
 ## Introduction
 
-This lab walks you through the steps to get started using the Oracle Autonomous Database (Autonomous Data Warehouse [ADW] and Autonomous Transaction Processing [ATP]) on Oracle Cloud. In this lab, you will provision a new ADW instance.
+This lab walks you through the steps to get started using the Oracle Autonomous Database Autonomous Transaction Processing [ATP] on Oracle Cloud. In this lab, you will provision a new ATP instance.
 
->**Note:** While this lab uses ADW, the steps are the same for creating an ATP database.
+>**Note:** It is assumed your OCI account have right IAM policies to provision ATP database and have access to Cloud Shell. If not, please setup the right policies before proceeding further
 
 Estimated Time: 5 minutes
 
 Watch the video below for a quick walk-through of the lab.
 [Provision an ADB Instance](videohub:1_22f82n6x)
+
+>**Note:** Video has the steps for ADW, the steps are the same for creating an ATP database.
 
 ### Objectives
 
@@ -21,41 +23,15 @@ In this lab, you will:
 
 - This lab requires completion of the Get Started section in the Contents menu on the left.
 
-## Task 1: Choose ADW or ATP from the services menu
+## Task 1: Choose ATP from the services menu
 
 1. Log in to the Oracle Cloud.
-2. Once you log in, the cloud services dashboard shows all the services available to you. Click the navigation menu in the upper left to show top level navigation choices.
 
-    > **Note:** You can also directly access your Autonomous Data Warehouse or Autonomous Transaction Processing service in the **Launch Resources** section of the dashboard.
+2. Click the navigation menu in the upper left to show top level navigation choices- Oracle Database- Autonomous Transaction Processing 
 
-    ![Oracle home page.](./images/navigation.png " ")
-    ![Launch Resources](./images/launch-resources.png " ")
+    ![Oracle home page.](./images/navigation-atp.png " ")
 
-3. The following steps apply similarly to either Autonomous Data Warehouse or Autonomous Transaction Processing. This lab shows provisioning of an Autonomous Data Warehouse database, so click **Oracle Database**, then **Autonomous Data Warehouse**.
-
-    ![Click Autonomous Data Warehouse.](https://oracle-livelabs.github.io/common/images/console/database-adw.png " ")
-
-4. Make sure your Workload Type is __Data Warehouse__ or __All__ to see your Autonomous Data Warehouse instances. Use the __List Scope__ drop-down menu to select a compartment. If you are running the workshop using the Green Button (on a sandbox environment), find the compartment assigned to you shown on your *Reservation Information* page and go to that compartment. Enter the first part of your user name, for example `LL185` in the Search Compartments field to quickly locate your compartment.
-
-    ![Check the workload type on the left.](images/task1-4.png " ")
-
-    <if type="freetier">
-    ![Check the workload type on the left.](images/task1-4.png " ")
-
-   > **Note:** Avoid the use of the `ManagedCompartmentforPaaS` compartment, as this is an Oracle default used for Oracle Platform Services.
-   </if>
-
-5. This console shows that no databases yet exist. If there were a long list of databases, you could filter the list by the **State** of the databases (Available, Stopped, Terminated). You can also sort by __Workload Type__. In this example, __Data Warehouse__ is the workload type.
-
-    ![Autonomous Databases console.](./images/task1-5.png " ")
-
-<if type="freetier">
-6. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources, you need to be in a region where Always Free Resources are available. You can see your current default **region** in the top, right hand corner of the page.
-
-    ![Select region on the far upper-right corner of the page.](./images/task1-6.png " ")
-</if>
-
-## Task 2: Create the Oracle Autonomous Database instance
+## Task 2: Create the ATP instance
 
 1. Click **Create Autonomous Database** to start the instance creation process.
 
@@ -63,42 +39,24 @@ In this lab, you will:
 
 2.  This brings up the __Create Autonomous Database__ screen where you will specify the configuration of the instance.
 
-    <if type="livelabs">
-    ![](./images/task2-2.png " ")
-    </if>
-    <if type="freetier">
-    ![](./images/task2-2.png " ")
-    </if>
-
 3. Specify basic information for the autonomous database:
 
     - __Compartment__ - Choose the compartment assigned to you.
-    - __Display Name__ - Enter a memorable name for the database for display purposes. For example, use __ADW\_Finance\_Mart__.
-    - __Database Name__ - Use letters and numbers only, starting with a letter. Maximum length is 14 characters. (Underscores not initially supported.)
-    <if type="livelabs">For example, use __ADWFINANCE__ and **append your user id**. For example, if your user id is **LL-185**, then enter __ADWFINANCE185__
-    </if><if type="freetier">For example, use __ADWFINANCE__.</if>
-
-    <if type="livelabs">
-    ![Enter the required details.](./images/task2-3.png " ")
-    </if>
-    <if type="freetier">
-    ![Enter the required details.](./images/task2-3.png " ")
-    </if>
+    - __Display Name__ - EBRAPP
+    - __Database Name__ - EBRONLINE
 
 
-4. Choose a workload type. Select the workload type for your database from the choices:
+4. Choose a workload type. Select the workload type as
 
-    - __Data Warehouse__ - For this lab, choose __Data Warehouse__ as the workload type.
-    - __Transaction Processing__ - Or, you could have chosen Transaction Processing as the workload type.
+    - __Transaction Processing__
 
-    ![Choose a workload type.](./images/task2-4.png " ")
+    ![Choose a workload type](./images/atp-workload.png " ")
 
 5. Choose a deployment type. Select the deployment type for your database from the choices:
 
     - __Shared Infrastructure__ - For this lab, choose __Shared Infrastructure__ as the deployment type.
-    - __Dedicated Infrastructure__ - Or, you could have chosen Dedicated Infrastructure as the deployment type.
 
-    ![Choose a deployment type.](./images/task2-5.png " ")
+    ![Choose a deployment type.](./images/atp-deployment.png " ")
 
 6. Configure the database:
 
@@ -155,15 +113,13 @@ In this lab, you will:
     ![Do not provide a contact email address.](images/contact-email-field.png)
 
 
-11. Click __Create Autonomous Database__. If you see an error *Authorization failed or requested resource not found*, it means you are not in the compartment assigned to you. To solve this error, refer to Task 1 -> Step 4 to choose the correct compartment assigned to you, as shown on your *Reservation Information* page.
+11. Click __Create Autonomous Database__.
 
-    ![](./images/task2-10.png " ")
+12.  Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your ATP database is ready to use! Have a look at your instance's details here including its name, database version, OCPU count, and storage size.
 
-12.  Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous Data Warehouse database is ready to use! Have a look at your instance's details here including its name, database version, OCPU count, and storage size.
+    ![Database instance homepage.](./images/ebrdb-atp.png " ")
 
-    ![Database instance homepage.](./images/task2-11.png " ")
-
-You may now **proceed to the next lab**.
+You have successfully created ATP database [proceed to the next lab](#next)
 
 ## Learn more
 
@@ -172,6 +128,9 @@ Go to [the documentation](https://docs.oracle.com/en/cloud/paas/autonomous-data-
 ## Acknowledgements
 
 - **Author** - Nilay Panchal, Oracle Autonomous Database Product Management
-- **Adapted for Cloud by** - Richard Green, Principal Developer, Database User Assistance
+- **Adapted for Cloud by** - Suraj Ramesh,Principal Product Manager, Oracle MAA PM Team
 - **Contributors** - Oracle LiveLabs QA Team (Jeffrey Malcolm Jr, Intern | Arabella Yao, Product Manager)
-- **Last Updated By/Date** - Richard Green, December 2022
+- **Last Updated By/Date** - Suraj Ramesh, December 2022
+
+
+[def]: ./images/atp-wokload.png " "

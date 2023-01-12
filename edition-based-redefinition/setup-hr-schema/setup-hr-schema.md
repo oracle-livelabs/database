@@ -5,7 +5,7 @@
 Estimated lab time: 10 minutes
 
 ### Objectives
-In this lab, you will connect as DBA to the autonomous database and create the HR schema, along with a few helper procedures.
+In this lab, you will connect as ADMIN to the autonomous database and create the HR schema, along with a few helper procedures.
 The HR schema is a modified version of the well-known HR schema to support editions directly after its creation.
 
 ### Prerequisites
@@ -35,7 +35,7 @@ The HR schema is a modified version of the well-known HR schema to support editi
 
 5. Connect as admin user and enter admin password when prompted. **This is the ADMIN password for the database and it is provided will creating the ATP database**.
 
-   If you are using livelabs tenancy, you should refer your login page for getting those credentials. 
+   **If you are using livelabs tenancy, you should refer your login page for getting those credentials**
 
    ```text
    <copy>connect admin@ebronline_medium</copy>

@@ -34,7 +34,7 @@ The base table itself contains all of them, but should not be used directly.
 <copy>select * from employees where rownum<5;</copy>
 
 ```
-![Employees-table](images/employees-table-png " ")
+![Employees-table](images/employees-table.png " ")
 
 We can check the objects for all the editions. We see a copy for each one because we forced their actualization. Without that step, in V2 we would see only the objects that have been changed, and the others would have been inherited from ORA$BASE.
 

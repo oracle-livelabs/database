@@ -224,7 +224,9 @@ Run the changelog
 ```
 ![execute-changelog](images/execute-changelog.png " ")
 
-Verify for successful execution.
+Verify for successful execution. In case if you are getting error like the below one, restart the ATP database from OCI console and retry again.
+
+![execute-error](images/execute-error.png " ")
 
 You have successfully switched to the new edition, decommissioned the old edition and redefined the table online
 
