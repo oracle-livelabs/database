@@ -1,11 +1,12 @@
-# Download ADB Wallet and lab files
+# Download ATP DB Wallet and lab files
+
+Estimated Time: 10 minutes
 
 ### Objectives
 
 - Download ATP Wallet
 - Download Lab files 
 - Test the connection 
-
 
 ### Prerequisites
 
@@ -22,6 +23,7 @@ This lab assumes you have:
    ![Compute Instances](https://oracle-livelabs.github.io/common/images/console/compute-instances.png " ")
 
 3. Select the compartment you were assigned. Expand the **root** compartment and then the **Livelabs** compartment. Select the compartment assigned to you.
+
    ![Select Compartment](images/select-compartment.png " ")
 
 4. Launch cloud shell. You should be able to open your cloud shell

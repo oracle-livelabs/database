@@ -1,16 +1,10 @@
 # Review the HR schema
 
-## Introduction
-
 Estimated lab time: 10 minutes
 
 ### Objectives
+
 In this lab, you will learn how to recognize the edition of an object and review the helper procedures that we have created in the previous lab.
-
-### Prerequisites
-- You have completed the previous lab:
-   - Lab: Setup the HR schema
-
 
 ## Task 1: Review the helper procedures created to deal with the editions
 

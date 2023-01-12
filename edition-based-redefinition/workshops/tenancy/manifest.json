@@ -1,9 +1,9 @@
 {
-    "workshoptitle": "Evolve your database applications online with Edition-Based Redefinition",
+    "workshoptitle": "Evolve Oracle database applications online with Edition Based Redefinition,Online Redefinition",
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
         {
-            "title": "Introduction",
+            "title": "Introduction to workshop ",
             "description": "Learn how to use Edition-Based Redefinition (EBR) and Online Table Reorganization (DBMS_REDEFINITION) along with SQLcl and its Liquibase integration. These unique Oracle technologies will let you evolve your database schemas online, without any interruption, using a rolling, blue-green deployment style.",
             "filename": "../../introduction/intro.md"
         },
@@ -13,17 +13,17 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
         },
         {
-            "title": "Lab 1: Provision an Oracle Autonomous Database",
-            "description": "Provision an Oracle Autonomous Database (ADW)",
-            "filename": "../../create-adb/create-adb.md"
+            "title": "Lab 1: Provision ATP Database",
+            "description": "Provision Oracle Autonomous Database (ATP)",
+            "filename": "../../create-atp/create-atp.md"
         },
         {
-            "title": "Lab 2: Download ADB Wallet and Lab Files",
+            "title": "Lab 2: Download ATP DB Wallet and Lab Files",
             "description": "Get the wallet and connect to the newly created Autonomous Database",
             "filename": "../../connect-adb/connect-adb.md"
         },
         {
-            "title": "Lab 3: Connect to ADB database and prepare the HR schema",
+            "title": "Lab 3: Connect to ATP database and prepare the HR schema",
             "description": "This workshop uses a modified version of the well-known HR schema. Please set it up using this lab.",
             "filename": "../../setup-hr-schema/setup-hr-schema.md"
         },

@@ -45,7 +45,7 @@ We can check the objects for all the editions. We see a copy for each one becaus
 
 You have successfully executed the verified the editions in  the HR schema [proceed to the next lab](#next)
 
-## Acknowledgements
+##Acknowledgements
 
 - Author - Ludovico Caldara and Suraj Ramesh 
 - Last Updated By/Date -Suraj Ramesh, Jan 2023

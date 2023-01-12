@@ -1,4 +1,4 @@
-## Switch to the new edition, decommission the old edition and redefine the table online
+# Switch to the new edition,decommission the old edition
 
 Estimated lab time: 15 minutes
 

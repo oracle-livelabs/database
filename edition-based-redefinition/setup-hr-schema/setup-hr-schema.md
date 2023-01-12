@@ -1,6 +1,4 @@
-# Setup the HR schema
-
-## Introduction
+# Connect to ATP database and prepare the HR schema
 
 Estimated lab time: 10 minutes
 
@@ -62,22 +60,7 @@ The HR schema is a modified version of the well-known HR schema to support editi
 
   **Verify you are in the initial_setup directory and able to see the *.sql files**
 
-   ```text
-   SQL> cd initial_setup
-   SQL> pwd
-   /home/suraj_rame/initial_setup
-   SQL> !ls -ltr
-   total 104
-   -rw-rw-r--. 1 suraj_rame oci 45392 Oct 14 16:57 hr_popul.sql
-   -rw-rw-r--. 1 suraj_rame oci  6670 Oct 14 16:57 hr_main.sql
-   -rw-rw-r--. 1 suraj_rame oci  2528 Oct 14 16:57 hr_idx.sql
-   -rw-rw-r--. 1 suraj_rame oci  2630 Oct 14 16:57 hr_drop.sql
-   -rw-rw-r--. 1 suraj_rame oci 11475 Oct 14 16:57 hr_cre.sql
-   -rw-rw-r--. 1 suraj_rame oci  8440 Oct 14 16:57 hr_comnt.sql
-   -rw-rw-r--. 1 suraj_rame oci  3833 Oct 14 16:57 hr_code.sql
-   -rw-rw-r--. 1 suraj_rame oci  2232 Oct 14 16:57 hr_analz.sql
-   -rw-r--r--. 1 suraj_rame oci  7364 Jan  6 16:12 hr_main.log
-   ```
+   ![List initial setup files](images/list-initial-setup.png " ")
 
 2. Execute the SQL file hr_main.sql 
 

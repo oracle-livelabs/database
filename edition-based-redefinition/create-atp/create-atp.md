@@ -1,12 +1,10 @@
-# Provision an Oracle Autonomous Database- Autonomous Transaction processing 
-
-## Introduction
+# Provision ATP Database  
 
 This lab walks you through the steps to get started using the Oracle Autonomous Database Autonomous Transaction Processing [ATP] on Oracle Cloud. In this lab, you will provision a new ATP instance.
 
 >**Note:** It is assumed your OCI account have right IAM policies to provision ATP database and have access to Cloud Shell. If not, please setup the right policies before proceeding further
 
-Estimated Time: 5 minutes
+Estimated lab time: 10 minutes
 
 Watch the video below for a quick walk-through of the lab.
 [Provision an ADB Instance](videohub:1_22f82n6x)
@@ -109,9 +107,6 @@ In this lab, you will:
 </if>
 
 10. For this lab, do not provide a contact email address. The **Contact Email** field allows you to list contacts to receive operational notices and announcements as well as unplanned maintenance notifications.
-
-    ![Do not provide a contact email address.](images/contact-email-field.png)
-
 
 11. Click __Create Autonomous Database__.
 

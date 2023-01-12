@@ -69,10 +69,9 @@ The `controller.xml` is the changelog file that contains the changesets. Open th
 
 ![controller Path](images/controller-path.png " ")
 
-
 You have successfully genereated the schema log using Liquibase for the HR schema [proceed to the next lab](#next)
 
-## Acknowledgements
+## Acknowledgements ##
 
 - Author - Ludovico Caldara and Suraj Ramesh 
 - Last Updated By/Date -Suraj Ramesh, Jan 2023
