@@ -92,7 +92,6 @@ This lab assumes you have:
 
 You have successfully downloaded the ADB wallet and lab files,[proceed to the next lab](#next) to setup the HR schema.
 
-## Acknowledgements
   You should be able to see an ATP database, similar to below. Make sure to change to the compartment which was assigned to you.
 
   ![ATP Database](images/atp-database.png " ")
