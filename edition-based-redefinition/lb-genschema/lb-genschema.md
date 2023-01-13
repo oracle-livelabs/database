@@ -22,6 +22,7 @@ With the Liquibase feature in SQLcl, you can:
 
 The command `lb generate-schema` creates the base Liquibase changelog. Login to HR schema and verify the current working directory is home path of Cloud Shell. You have to make sure to run the lb generate-schema command from ***changes/hr.00000.base*** directory:
 
+In this lab, you will learn how to use Liquibase  to generate the base changelog of HR Schema.
 
 ![Cloud Shell home](images/cloudshell-home.png " ")
 
@@ -74,3 +75,13 @@ You have successfully generated the schema log using Liquibase for the HR schema
 - Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
 - Last Updated By/Date - Suraj Ramesh, Jan 2023
 
+The `controller.xml` is the changelog file that contains the changesets. Open the file and you can see that the changesets are called from the current path 
+
+![controller Path](images/controller-path.png " ")
+
+You have successfully genereated the schema log using Liquibase for the HR schema [proceed to the next lab](#next)
+
+## Acknowledgements ##
+
+- Author - Ludovico Caldara and Suraj Ramesh 
+- Last Updated By/Date -Suraj Ramesh, Jan 2023

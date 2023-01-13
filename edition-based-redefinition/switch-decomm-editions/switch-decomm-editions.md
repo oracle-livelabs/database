@@ -38,7 +38,13 @@ As `HR` user, we achieve that using the helper procedure previously created.Inte
 
 ![Change edition](images/change-edition.png " ")
 
-### 3. Drop the old edition
+    --hr.000002.change_default_edition.sql
+    begin
+    admin.default_edition('V2');
+    end;
+    /
+
+###3. Drop the old edition
 
 Here we use a helper procedure again:
 

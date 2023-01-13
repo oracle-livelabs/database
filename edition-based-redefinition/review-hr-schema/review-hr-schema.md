@@ -31,7 +31,6 @@ The file `hr_main.sql` gives the extra grants to the `HR` user:
 ![HR grants](images/hr-grants.png " ")
 
 
-
 ## Task 2: Review Base Tables and Editioning Views
 
 The set of scripts that install the `HR` schema is different from the default one.

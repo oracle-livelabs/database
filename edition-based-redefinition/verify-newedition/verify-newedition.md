@@ -45,7 +45,7 @@ We can check the objects for all the editions. We see a copy for each one becaus
 
 You have successfully executed the verified the editions in  the HR schema [proceed to the next lab](#next) to switch edition and decommission the old edition.
 
-## Acknowledgements
+##Acknowledgements
 
 - Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
 - Last Updated By/Date - Suraj Ramesh, Jan 2023
