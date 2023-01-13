@@ -1,4 +1,4 @@
-# Create IAM Credentials and Log into the Database
+# Create IAM Credentials and log into the database
 
 ## Introduction
 
@@ -11,6 +11,12 @@ create IAM credentails for your user and use them to connect to the database. Fi
 - Create IAM credentials for users of your ADB
 - Use IAM credentials to log into and query the database
 - Use a IAM Token to connect to and query the database
+
+### Prerequisites
+This lab assumes that you have completed the introduction lab.
+
+### Prerequisites
+This lab assumes that you have completed the previous labs and successfully enabled IAM as your database identity provider.
 
 ## Task 1: Connect to the database as your OCI user.
 
@@ -186,7 +192,7 @@ create IAM credentails for your user and use them to connect to the database. Fi
     tcps   
     ```
 
-You may now proceed to the next lab!
+You may now **proceed to the next lab.**
 
 ## Learn More
 

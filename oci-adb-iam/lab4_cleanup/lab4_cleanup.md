@@ -1,4 +1,4 @@
-# Cleanup Lab Environment (Optional)
+# Cleanup lab environment (optional)
 
 ## Introduction
 
@@ -11,6 +11,9 @@ previous 3 labs
 - Delete the adb_wallet directory
 - Delete the lltest ADB
 - Delete all policies and Groups
+
+### Prerequisites
+This lab assumes that you have completed the previous labs and created all resources associated with them.
 
 ## Task 1: Delete all resources
 
@@ -55,15 +58,13 @@ previous 3 labs
 
 5. You may now close your cloud shell session, as you will use the OCI Console to delete the final resource. Click on the hamburger icon in the top left corner. Choose **Identity and Security** then **Policies**.
 
-    ![OCI Homepage](images/oci-homepage.png)
-
-    ![Identity and Security](images/identity-security.png)
+    ![Identity and Security](https://oracle-livelabs.github.io/common/images/console/id-policies.png " ")
 
 6. Ensure that you are in your root compartment, and you should see the policiy called **grant-adb-access**. Click the box next to its name then click delete.
 
     ![Policy Page - Delete](images/delete-policy.png)
 
-Your OCI tenancy should now be cleared of all lab resources!
+Your OCI tenancy should now be cleared of all lab resources.
 
 ## Acknowledgements
 * **Author**

@@ -1,10 +1,10 @@
-# Create ADB and set up Environment
+# Create Autonomous Database and set up environment
 
 ## Introduction
 
 Most tasks will be completed using Oracle Cloud Infrastructure (OCI) Cloud Shell. OCI Cloud Shell is a browser-based terminal accessible from the Oracle Cloud Console. As a Linux shell, pre-configured with the OCI CLI, Cloud shell allows you to quickly and easily perform operations such as provisioning resources and connecting to database services. We will use the cloud shell throughout this workshop, and in this lab will use it to provision items such as an Autonomus Database, users, groups, and policies.
 
-*Estimated Lab Time*: 15 minutes
+*Estimated Time*: 15 minutes
 
 ### About Product/Technology
 
@@ -12,6 +12,9 @@ Most tasks will be completed using Oracle Cloud Infrastructure (OCI) Cloud Shell
 - Provision an Autonomous Database (ADB)
 - Create Groups and Policies to be used later
 - Add your OCI user to greated groups
+
+### Prerequisites
+This lab assumes that you have completed the introduction lab.
 
 >**Note:** If you have a slightly older tenancy with the option to sign in with Single Sign-On or Direct Sign-In, sign in with Direct Sign-In as you will not have the needed permissions with Single Sign-On. You can see which way your signed in by looking at the account that is signed into the tenancy. If it starts with "oracleidentitycloudservice" than you are using Single Sign-On and need to switch over. If you are not able to sign in using Direct Sign-In, you must create a non-federated user in IAM to use for this lab. You can look to the Appendix of this lab to see how to do so.
 
@@ -23,7 +26,7 @@ Most tasks will be completed using Oracle Cloud Infrastructure (OCI) Cloud Shell
 by clicking on the **Developer tools** icon in the top right corner and choose **Cloud Shell**. You will use the Cloud Shell
 throughout this workshop.
 
-    ![OCI Homepage](images/oci-homepage.png)
+    ![OCI Homepage](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png " ")
 
 2. Using the Cloud Shell, identify the root compartment ID and save it as a Bash variable named ROOT\_COMP\_ID.
     >**Note:** If at any point in this workshop you exit out of the Cloud Shell, you may need to reexecute
@@ -90,13 +93,13 @@ throughout this workshop.
     ```
 
 3. Add your OCI user to the ALL\_DB\_USERS group
-    >**Note:** If you run into an error here with permission, look to the note at the beginning of the lab to sign in properly with permissions. 
+    >**Note:** If you run into an error here with permission, look to the note at the beginning of the lab to sign in properly with permissions.
 
     ```
     <copy>oci iam group add-user --user-id $OCI_CS_USER_OCID --group-id $ALL_DB_USERS_OCID</copy>
     ```
 
-You may now proceed to the next lab!
+You may now **proceed to the next lab.**
 
 ## **Appendix**: Creating an account to use Direct Sign-On with
 
@@ -104,7 +107,7 @@ You may now proceed to the next lab!
 
    a) Click the **Navigation Menu** in the upper left, navigate to **Identity & Security** and select **Users**.
 
-	![](https://oracle-livelabs.github.io/common/images/console/id-users.png " ")
+	![id-users](https://oracle-livelabs.github.io/common/images/console/id-users.png " ")
 
    b) Click **Create User**.
 
@@ -141,7 +144,7 @@ You may now proceed to the next lab!
    a) Click **Sign Out** from the user menu and log out of the admin user account completely.
 
       ![Sign out](images/sign-out.png)
-   
+
    b) Open a supported browser and go to the Console URL:  [https://cloud.oracle.com](https://cloud.oracle.com).
 
    c) Click on the portrait icon in the top-right section of the browser window, then click **Sign in to Oracle Cloud**.
@@ -157,7 +160,7 @@ You may now proceed to the next lab!
       ![Enter your password](images/sign-in.png)
 
       >**Note:** Since this is the first-time sign-in, the user will be prompted to change the temporary password, as shown in the screenshot below.
-      
+
    g) Set the new password. Click **Save New Password**.
       ![Set the new password](images/image015.png)
 

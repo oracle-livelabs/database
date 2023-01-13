@@ -12,6 +12,9 @@ In this lab you will generate a wallet file for your ADB. This wallet file can b
 - Create database users and grant them permissions
 - Unzip wallet and update files so that the ADB can be accessed using a token
 
+### Prerequisites
+This lab assumes that you have completed the previous labs and have created all resources outlined in them.
+
 ## Task 1: Generate Wallet in adb_wallet folder
 
 1. Create adb_wallet directory.
@@ -117,7 +120,7 @@ In this lab you will generate a wallet file for your ADB. This wallet file can b
     cat tnsnames.ora</copy>
     ```
 
-You may now proceed to the next lab!
+You may now **proceed to the next lab.**
 
 ## Learn More
 
