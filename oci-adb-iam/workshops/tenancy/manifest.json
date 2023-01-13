@@ -5,7 +5,7 @@
     {
       "title": "Introduction",
       "description": "The Introduction is always second for LiveLabs. The title and contents menu title match for the Introduction.",
-      "filename": "../introduction/introduction.md"
+      "filename": "../../introduction/introduction.md"
     },
     {
       "title": "Getting Started",
@@ -15,22 +15,22 @@
     {
       "title": "Lab 1: Create Autonomous Database and set up environment",
       "description": "Create Autonomus Database and other required resources",
-      "filename": "../lab1_setup-environment-and-cloud-shell/lab1_setup-environment-and-cloud-shell.md"
+      "filename": "../../lab1_setup-environment-and-cloud-shell/lab1_setup-environment-and-cloud-shell.md"
     },
     {
       "title": "Lab 2: Generate ADB Wallet and Set IAM as Identity Provider",
       "description": "Generate your wallet file & use it to connect and enable IAM",
-      "filename": "../lab2_oci-wallet-and-enable-iam/lab2_oci-wallet-and-enable-iam.md"
+      "filename": "../../lab2_oci-wallet-and-enable-iam/lab2_oci-wallet-and-enable-iam.md"
     },
     {
       "title": "Lab 3: Create IAM Credentials and log into the database",
       "description": "Create IAM credentials for users and access ADB with those credentials",
-      "filename": "../lab3_db-credentials-and-login/lab3_db-credentials-and-login.md"
+      "filename": "../../lab3_db-credentials-and-login/lab3_db-credentials-and-login.md"
     },
     {
       "title": "Lab 4: Cleanup lab environment (optional)",
       "description": "Clean up resources created during lab",
-      "filename": "../lab4_cleanup/lab4_cleanup.md"
+      "filename": "../../lab4_cleanup/lab4_cleanup.md"
     },
     {
       "title": "Need Help?",
