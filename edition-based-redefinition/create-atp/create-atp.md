@@ -1,8 +1,6 @@
 # Provision ATP Database  
 
-This lab walks you through the steps to get started using the Oracle Autonomous Database Autonomous Transaction Processing [ATP] on Oracle Cloud. In this lab, you will provision a new ATP instance.
-
->**Note:** It is assumed your OCI account have right IAM policies to provision ATP database and have access to Cloud Shell. If not, please setup the right policies before proceeding further
+This lab walks you through the steps to get started using the Oracle Autonomous Database Autonomous Transaction Processing [ATP] on Oracle Cloud. In this lab, you will provision a new ATP database.
 
 Estimated lab time: 10 minutes
 
@@ -11,15 +9,15 @@ Watch the video below for a quick walk-through of the lab.
 
 >**Note:** Video has the steps for ADW, the steps are the same for creating an ATP database.
 
-### Objectives
+## Objectives
 
 In this lab, you will:
 
--   Learn how to provision a new Autonomous Database
+- Learn how to provision a new Autonomous Database
 
-### Prerequisites
+## Prerequisites
 
-- This lab requires completion of the Get Started section in the Contents menu on the left.
+- OCI account with IAM policies to provision ATP database and have access to Cloud Shell. If not, please setup the right policies before proceeding further
 
 ## Task 1: Choose ATP from the services menu
 
@@ -29,20 +27,19 @@ In this lab, you will:
 
     ![Oracle home page.](./images/navigation-atp.png " ")
 
-## Task 2: Create the ATP instance
+## Task 2: Create the ATP database
 
 1. Click **Create Autonomous Database** to start the instance creation process.
 
     ![Click Create Autonomous Database.](./images/task2-1.png " ")
 
-2.  This brings up the __Create Autonomous Database__ screen where you will specify the configuration of the instance.
+2. This brings up the __Create Autonomous Database__ screen where you will specify the configuration of the instance.
 
 3. Specify basic information for the autonomous database:
 
     - __Compartment__ - Choose the compartment assigned to you.
     - __Display Name__ - EBRAPP
     - __Database Name__ - EBRONLINE
-
 
 4. Choose a workload type. Select the workload type as
 
@@ -81,6 +78,8 @@ In this lab, you will:
 
     ![Enter password and confirm password.](./images/task2-7.png " ")
 
+*** Store your ADMIN password safely and it will be required in the upcoming labs *** 
+
 8. Choose network access:
     - For this lab, accept the default, **Secure access from everywhere**.
     - If you want to allow traffic only from the IP addresses and VCNs you specify - where access to the database from all public IPs or VCNs is blocked, select **Secure access from allowed IPs and VCNs only** in the Choose network access area.
@@ -114,7 +113,7 @@ In this lab, you will:
 
     ![Database instance homepage.](./images/ebrdb-atp.png " ")
 
-You have successfully created ATP database [proceed to the next lab](#next)
+You have successfully created ATP database [proceed to the next lab](#next) for downloading ATP wallet and lab files.
 
 ## Learn more
 
@@ -122,10 +121,5 @@ Go to [the documentation](https://docs.oracle.com/en/cloud/paas/autonomous-data-
 
 ## Acknowledgements
 
-- **Author** - Nilay Panchal, Oracle Autonomous Database Product Management
-- **Adapted for Cloud by** - Suraj Ramesh,Principal Product Manager, Oracle MAA PM Team
-- **Contributors** - Oracle LiveLabs QA Team (Jeffrey Malcolm Jr, Intern | Arabella Yao, Product Manager)
-- **Last Updated By/Date** - Suraj Ramesh, December 2022
-
-
-[def]: ./images/atp-wokload.png " "
+- Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
+- Last Updated By/Date - Suraj Ramesh, Jan 2023

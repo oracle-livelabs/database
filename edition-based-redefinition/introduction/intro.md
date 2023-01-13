@@ -10,11 +10,9 @@ EBR enables online application upgrades in the following manner:
 
 - Data changes are made safely by writing only to new columns or new tables not seen by the old edition. An editioning view exposes a different projection of a table into each edition to allow each to see just its own columns.
 
-- Crossedition triggers propagate data changes made by the old edition into the new edition’s columns, or (in hot-rollover) vice-versa.
+- Cross edition triggers propagate data changes made by the old edition into the new edition’s columns, or (in hot-rollover) vice-versa.
 
-**EBR is available for use in all editions of Oracle Database without the need to license it**
-
-You can watch the video below for an overview on Oracle Edition Based Redefinition.
+You can watch the video for an overview on Oracle EBR.
 
 [EBR Introduction] (videohub:1_p6bapnjx)
 
@@ -31,15 +29,11 @@ Below are some of the benefits.
 
 ## About this Workshop
 
-This workshop will cover how to evolve your oracle database applications entirely online.
+This workshop will cover how to evolve your oracle database applications entirely online.While building automated development pipelines is highly regarded by development teams, making changes to database schemas and stored procedures without interrupting application traffic is tricky. What if the database changes were both safe and online? We will use Oracle Database features that allow for online data movement, schema redefinitions, table reorganizations, and, thanks to the integration with DevOps tools, controlling code versioning (Liquibase).
 
-While building automated development pipelines is highly regarded by development teams, making changes to database schemas and stored procedures without interrupting application traffic is tricky. What if the database changes were both safe and online? We will use Oracle Database features that allow for online data movement, schema redefinitions, table reorganizations, and, thanks to the integration with DevOps tools, controlling code versioning (Liquibase)
-
-You can watch the video below for an overview on how to evolve Oracle DB Applications online
+You can watch the video for an overview on how to evolve Oracle DB Applications online
 
 [](youtube:wwqDn63q3cw)
-
-*Estimated Workshop Time : 2 hours*
 
 ## Workshop Objectives
 
@@ -50,20 +44,22 @@ You can watch the video below for an overview on how to evolve Oracle DB Applica
 - Create Directory structure and sync the metadata
 - Review and update new edition scripts
 - Verify new edition
-- Switch to new edition and decommision the old edition
+- Switch to new edition and decommission the old edition
 
-## Workshop Prerequisites
+Estimated Workshop Time : 2 hours
 
-- Autonomous (ATP) DB
+## Workshop Pre-requisites
+
+- Oracle Autonomous (ATP) DB
 - Access to OCI Cloud shell
 
 ## Additional information
 
 - [Oracle EBR] (https://www.oracle.com/database/technologies/high-availability/ebr.html)
-- [Oracle Online Redefenition] (https://www.oracle.com/database/technologies/high-availability/online-ops.html)
+- [Oracle Online Redefinition] (https://www.oracle.com/database/technologies/high-availability/online-ops.html)
 - [Using Liquibase with SQLcl] (https://docs.oracle.com/en/database/oracle/sql-developer-command-line/22.4/sqcug/using-liquibase.html#GUID-4CA25386-E442-4D9D-B119-C1ACE6B79539)
 
 ## **Acknowledgements**
 
-- Author - Suraj Ramesh and Ludovico Caldara
-- Last Updated By/Date -Suraj Ramesh, Jan 2023
+- Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
+- Last Updated By/Date - Suraj Ramesh, Jan 2023
