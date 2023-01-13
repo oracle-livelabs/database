@@ -28,8 +28,8 @@
             "filename": "../../review-hr-schema/review-hr-schema.md"
         },
         {
-            "title": "Lab 4: Using Liquibase run the generate schema",
-            "description": "Using Liquibase run the generate schema",
+            "title": "Lab 4: Use Liquibase to run the generate schema",
+            "description": "Use Liquibase to run the generate schema",
             "filename": "../../lb-genschema/lb-genschema.md"
         },
         {
@@ -48,8 +48,8 @@
             "filename": "../../verify-newedition/verify-newedition.md"
         },
         {
-            "title": "Lab 8: Switch to new edition and decommision the old edition",
-            "description": "Switch to new edition and decommision the old edition",
+            "title": "Lab 8: Switch to new edition and decommission the old edition",
+            "description": "Switch to new edition and decommission the old edition",
             "filename": "../../switch-decomm-editions/switch-decomm-editions.md"
         },
         {
