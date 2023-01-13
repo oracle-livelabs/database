@@ -128,7 +128,7 @@ You may now **proceed to the next lab.**
 
    b) Click **Create/Reset Password**.  
 
-      ![Reset password](images/image009.png)
+      ![Reset password](images/reset-password.png)
 
    c) In the dialog, click **Create/Reset Password**.
 
@@ -137,7 +137,7 @@ You may now **proceed to the next lab.**
    d) The new one-time password is displayed.
       Click the **Copy** link and then click **Close**. Make sure to copy this password to your notepad.
 
-      ![](images/copy-password.png)
+      ![Copy password](images/copy-password.png)
 
 3. Sign in as the new user using a different web browser or an incognito window.
 
@@ -162,7 +162,7 @@ You may now **proceed to the next lab.**
       >**Note:** Since this is the first-time sign-in, the user will be prompted to change the temporary password, as shown in the screenshot below.
 
    g) Set the new password. Click **Save New Password**.
-      ![Set the new password](images/image015.png)
+      ![Set the new password](images/set-password.png)
 
 ## Learn More
 
