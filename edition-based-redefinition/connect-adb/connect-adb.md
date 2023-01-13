@@ -2,17 +2,16 @@
 
 Estimated Time: 10 minutes
 
-### Objectives
+##  Objectives
 
 - Download ATP Wallet
 - Download Lab files 
-- Test the connection 
 
-### Prerequisites
+##  Prerequisites
 
 This lab assumes you have:
 
-- Performed the previous lab on provisioning an Oracle Autonomous Database or you already have an existing Autonomous Database
+- Performed the previous lab on provisioning an Oracle Autonomous Database (ATP) or you already have an existing Autonomous Database (ATP)
 
 ## Task 1: Download ATP Wallet 
 
@@ -54,7 +53,7 @@ This lab assumes you have:
 
   ![Maximize Cloud shell](images/maximize-cloudshell.png " ")
 
-8. Make sure to modify the ATP database OCID for your database in the below command.You should replace the OCID after --autonomous-database-id with your values which was captured in Step 6
+8. Make sure to modify the ATP database OCID for your database in the below command.You should ***replace the OCID after --autonomous-database-id*** with your values which was captured in Step 6
 
    ````text
    <copy>oci db autonomous-database generate-wallet --generate-type ALL --file ebronline.zip --password Ebronline@123 --autonomous-database-id ocid1.autonomousdatabase.oc1.iad.xxxxxxxxxxxxxxxxxxxxxx</copy>
@@ -93,8 +92,8 @@ This lab assumes you have:
 
 You have successfully downloaded the ADB wallet and lab files,[proceed to the next lab](#next) to setup the HR schema.
 
-## **Acknowledgements**
+## Acknowledgements
 
-- Author - Ludovico Caldara and Suraj Ramesh 
-- Last Updated By/Date -Suraj Ramesh, Jan 2023
+- Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
+- Last Updated By/Date - Suraj Ramesh, Jan 2023
 

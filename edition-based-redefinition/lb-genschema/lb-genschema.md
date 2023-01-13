@@ -2,7 +2,7 @@
 
 Estimated lab time: 10 minutes
 
-### Objectives
+## Objectives
 
 In this lab, you will learn how to use Liquibase  to generate the base changelog of HR Schema.
 
@@ -12,25 +12,23 @@ In SQLcl, you can now execute commands to generate a changelog for a single obje
 
 With the Liquibase feature in SQLcl, you can:
 
-    Generate and execute single object changelogs
-    Generate and execute schema changesets with object dependencies
-    Automatically sort a changeset during creation based on object dependencies
-    Record all SQL statements for changeset or changelog execution, as it is generated
-    Provide full rollback support for changesets and changelogs automatically
+- Generate and execute single object changelogs
+- Generate and execute schema changesets with object dependencies
+- Automatically sort a changeset during creation based on object dependencies
+- Record all SQL statements for changeset or changelog execution, as it is generated
+- Provide full rollback support for changesets and changelogs automatically
 
 ## Task 1: Run lb generate-schema to generate the base changelog
 
 The command `lb generate-schema` creates the base Liquibase changelog. Login to HR schema and verify the current working directory is home path of Cloud Shell. You have to make sure to run the lb generate-schema command from ***changes/hr.00000.base*** directory:
 
-```text
-suraj_rame@cloudshell:~ (us-ashburn-1)$ pwd
-/home/suraj_rame
-suraj_rame@cloudshell:~ (us-ashburn-1)$ 
-```
+
+![Cloud Shell home](images/cloudshell-home.png " ")
 
 ***Home folder will be different for you***
 
 ```text
+<copy>cd ~</copy>
 <copy>sql /nolog</copy>
 ```
 
@@ -56,7 +54,7 @@ Change directory, remove existing files and run lb generate-schema
 This initial changelog is useful if you plan to recreate the schema from scratch by using `Liquibase` instead of the base scripts.
 Notice that the `HR` schema creation is not included in the changelog.
 
-The Liquibase changelog is created as a set of xml files:
+The Liquibase changelog is created as a set of xml files. Exit from sql prompt and verify the generated xml files(current time stamp)
 
 ```text
 <copy>cd changes/hr.00000.base</copy>
@@ -69,9 +67,10 @@ The `controller.xml` is the changelog file that contains the changesets. Open th
 
 ![controller Path](images/controller-path.png " ")
 
-You have successfully genereated the schema log using Liquibase for the HR schema [proceed to the next lab](#next)
+You have successfully generated the schema log using Liquibase for the HR schema [proceed to the next lab](#next) to modify directory and sync metadata.
 
-## Acknowledgements ##
+## Acknowledgements
 
-- Author - Ludovico Caldara and Suraj Ramesh 
-- Last Updated By/Date -Suraj Ramesh, Jan 2023
+- Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
+- Last Updated By/Date - Suraj Ramesh, Jan 2023
+

@@ -2,20 +2,16 @@
 
 Estimated lab time: 10 minutes
 
-### Objectives
+## Objectives
 
 In this lab, you will learn how to modify the directory structure for the change logs which we generated in previous lab and sync metadata
 
 
 ## Task 1: Modify the directory structure 
 
-For the base and subsequent changelogs, you might want to use a neater directory organization, for example:
+For the base and subsequent changelogs, you might want to use a neater directory organization. Navigate to changes directory and see the directory structure. 
 
-    main.xml 
-    sub_changelog_1.xml
-    ->sub_changelog_1/changesets*
-    ->sub_changelog_2.xml
-    ->sub_changelog_2/changesets*
+![Changes directory](images/changes-directory.png " ")
 
 Having each changelog contained in a separate directory facilitates the development when schemas start getting bigger and the number of changesets important.
 
@@ -37,17 +33,10 @@ This command will create new xml file *hr.00000.base.xml* with the hr.00000.base
 
 ![Base xml folder](images/basexml-folder.png " ")
 
-The file main.xml (**changes** directory) includes all the changelogs, so in a single update, ALL the modifications from the initial version to the last changelog will be checked and eventually applied.This can be verified using opening the file *cat.xml* and it will contents as below.
+The file main.xml (**changes** directory) includes all the changelogs, so in a single update, ALL the modifications from the initial version to the last changelog will be checked and eventually applied.This can be verified using opening the file *mainmain.xml* and it will contents as below.
 
-    <?xml version="1.0" encoding="UTF-8"?> 
-    <databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <include file="./hr.00000.base.xml" relativeToChangelogFile="true"/> 
-    <!-- <include file="./hr.00002.edition_v2.xml" relativeToChangelogFile="true"/> -->
-    <!-- <include file="./hr.00003.edition_v2_post_rollout.xml" relativeToChangelogFile="true"/> -->
+![Main xml](images/main-xml.png " ")
+
 
 
 ## Task 2 : Synchronize the metadata 
@@ -58,15 +47,12 @@ At this point we can run lb update to synchronize the definition with the Liquib
 
 Login to HR schema and verify the current working directory is home path of Cloud Shell. 
 
-```text
-suraj_rame@cloudshell:~ (us-ashburn-1)$ pwd
-/home/suraj_rame
-suraj_rame@cloudshell:~ (us-ashburn-1)$ 
-```
+![Cloud Shell home](images/cloudshell-home.png " ")
 
 ***Home folder will be different for you***
 
 ```text
+<copy>cd ~</copy>
 <copy>sql /nolog</copy>
 ```
 
@@ -110,10 +96,11 @@ The next lb status shows everything up to date. A subsequent lb update will not 
 ![lb-chagelog-last](images/lb-changelog-last.png " ")
 
 
-You have successfully organized the directory structure and synchronized the metadata [proceed to the next lab](#next)
+You have successfully organized the directory structure and synchronized the metadata [proceed to the next lab](#next) to review and update the edition scripts.
 
 ## Acknowledgements
 
-- Author - Ludovico Caldara and Suraj Ramesh 
-- Last Updated By/Date -Suraj Ramesh, Jan 2023
+- Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
+- Last Updated By/Date - Suraj Ramesh, Jan 2023
+
 
