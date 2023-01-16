@@ -1,4 +1,4 @@
-# Create your own directory structure for liquibase and sync metadata
+# Create the directory structure for Liquibase and sync the metadata
 
 Estimated lab time: 10 minutes
 
@@ -9,17 +9,17 @@ In this lab, you will learn how to modify the directory structure for the change
 
 ## Task 1: Modify the directory structure 
 
-For the base and subsequent changelogs, you might want to use a neater directory organization. Navigate to changes directory and see the directory structure. 
+For the base and subsequent changelogs, you might want to use a neater directory organization. Navigate to the `changes` directory and see the directory structure. 
 
 ![Changes directory](images/changes-directory.png " ")
 
-Having each changelog contained in a separate directory facilitates the development when schemas start getting bigger and the number of changesets important.
+Having each changelog contained in a separate directory facilitates the development when schemas start getting bigger and the number of changesets is important.
 
 For this reason, we want to convert the file hr.00000.base/controller.xml to hr.00000.base.xml
 
 The conversion can be achieved with the below steps:
 
-In Cloud Shell prompt,navigate to changes directory
+In the Cloud Shell prompt, navigate to the `changes` directory, then execute the following `sed`:
 
 ```text
 <copy>cd ~/changes</copy>
@@ -29,27 +29,25 @@ In Cloud Shell prompt,navigate to changes directory
 ![SED Command](images/sed-command.png " ")
 
 
-This command will create new xml file *hr.00000.base.xml* with the hr.00000.base folder structure. Verify the file with the folder structure details by opening the file hr.00000.base.xml
+This command will create a new XML file *hr.00000.base.xml* with the hr.00000.base folder structure. Verify the folder structure details by opening the file `hr.00000.base.xml`
 
-![Base xml folder](images/basexml-folder.png " ")
+![Base XML folder](images/basexml-folder.png " ")
 
-The file main.xml (**changes** directory) includes all the changelogs, so in a single update, ALL the modifications from the initial version to the last changelog will be checked and eventually applied.This can be verified using opening the file *mainmain.xml* and it will contents as below.
+The file `main.xml` (in the **changes** directory) includes all the changelogs, so in a single update, all the modifications from the initial version to the last changelog will be checked and eventually applied.
 
 ![Main xml](images/main-xml.png " ")
 
-
-
-## Task 2 : Synchronize the metadata 
-
 In the example, there are already two placeholders for the next schema/code releases.
 
-At this point we can run lb update to synchronize the definition with the Liquibase metadata
+## Task 2: (Optional) Apply the initial changelog 
 
-Login to HR schema and verify the current working directory is home path of Cloud Shell. 
+Run `lb update` to apply the changelog on the existing schema. This is not necessary because the HR schema is already there, but we'll do it anyway to synchronize the definition with the Liquibase metadata.
+
+Login to the HR schema and verify that the current working directory is your home directory.
 
 ![Cloud Shell home](images/cloudshell-home.png " ")
 
-***Home folder will be different for you***
+The folder will be different in your environment.
 
 ```text
 <copy>cd ~</copy>
@@ -72,7 +70,7 @@ pwd
 
 ![lb-chagelog-status](images/lb-changelog-status.png " ")
 
-Now let us run update command
+Now run the `lb update` command:
 
 ```text
 <copy>lb update -changelog-file main.xml</copy>
@@ -83,7 +81,7 @@ Now let us run update command
 ![lb-chagelog-update2](images/lb-changelog-update2.png " ")
 
 
-The next lb status shows everything up to date. A subsequent lb update will not change anything.
+`lb status` now shows everything up to date. A subsequent `lb update` will not change anything.
 
 ```text
 <copy>lb status -changelog-file main.xml</copy>
@@ -96,11 +94,9 @@ The next lb status shows everything up to date. A subsequent lb update will not 
 ![lb-chagelog-last](images/lb-changelog-last.png " ")
 
 
-You have successfully organized the directory structure and synchronized the metadata [proceed to the next lab](#next) to review and update the edition scripts.
+You have successfully reorganized the changelog directory structure and synchronized the Liquibase metadata. [Proceed to the next lab](#next) to review and deploy the scripts for the new edition.
 
 ## Acknowledgements
 
-- Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
+- Authors - Ludovico Caldara and Suraj Ramesh
 - Last Updated By/Date - Suraj Ramesh, Jan 2023
-
-

@@ -4,7 +4,7 @@ Estimated lab time: 10 minutes
 
 ## Objectives
 
-In this lab, you will learn how to use Liquibase  to generate the base changelog of HR Schema.
+In this lab, you will learn how to use Liquibase to generate the base changelog of the HR Schema.
 
 Liquibase is an open-source database-independent library for tracking, managing and applying database schema changes.
 
@@ -20,18 +20,20 @@ With the Liquibase feature in SQLcl, you can:
 
 ## Task 1: Run lb generate-schema to generate the base changelog
 
-The command `lb generate-schema` creates the base Liquibase changelog. Login to HR schema and verify the current working directory is home path of Cloud Shell. You have to make sure to run the lb generate-schema command from ***changes/hr.00000.base*** directory:
-
-In this lab, you will learn how to use Liquibase  to generate the base changelog of HR Schema.
+The command `lb generate-schema` creates the base Liquibase changelog. 
 
 ![Cloud Shell home](images/cloudshell-home.png " ")
 
-***Home folder will be different for you***
+The folder will be different in your environment.
+
+Verify that the current working directory is your home directory.
 
 ```text
 <copy>cd ~</copy>
 <copy>sql /nolog</copy>
 ```
+
+Connect to the HR schema (using the correct connection string):
 
 ```text
 <copy>set cloudconfig ebronline.zip</copy>
@@ -42,7 +44,9 @@ In this lab, you will learn how to use Liquibase  to generate the base changelog
 
 ![sqlcl-hr](images/sqlcl-hr.png " ")
 
-Change directory, remove existing files and run lb generate-schema
+Make sure to run the lb generate-schema command from the directory ***changes/hr.00000.base***.
+
+Change the working directory to ***changes/hr.00000.base***, remove any existing files and run lb generate-schema
 
 ```text
 <copy>cd changes/hr.00000.base</copy>
@@ -52,10 +56,10 @@ Change directory, remove existing files and run lb generate-schema
 
 ![lb-genschema](images/lb-genschema.png " ")
 
-This initial changelog is useful if you plan to recreate the schema from scratch by using `Liquibase` instead of the base scripts.
+This initial changelog is useful if you plan to recreate the schema from scratch on a new environment by using `Liquibase`  instead of the `hr_main.sql` scripts.
 Notice that the `HR` schema creation is not included in the changelog.
 
-The Liquibase changelog is created as a set of xml files. Exit from sql prompt and verify the generated xml files(current time stamp)
+The Liquibase changelog is created as a set of XML files. Exit from the SQLcl prompt and verify the generated XML files (check the file timestamp)
 
 ```text
 <copy>cd changes/hr.00000.base</copy>
@@ -64,24 +68,13 @@ The Liquibase changelog is created as a set of xml files. Exit from sql prompt a
 
 ![list schemaxml](images/list-schemaxml.png " ")
 
-The `controller.xml` is the changelog file that contains the changesets. Open the file and you can see that the changesets are called from the current path 
+The `controller.xml` is the changelog file that contains the changesets. Open it and note that changesets are called from the current path 
 
 ![controller Path](images/controller-path.png " ")
 
-You have successfully generated the schema log using Liquibase for the HR schema [proceed to the next lab](#next) to modify directory and sync metadata.
+You have successfully generated the changelog for the HR schema using Liquibase. [Proceed to the next lab](#next) to modify the directory structure and sync the metadata.
 
 ## Acknowledgements
 
-- Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
+- Authors - Ludovico Caldara and Suraj Ramesh
 - Last Updated By/Date - Suraj Ramesh, Jan 2023
-
-The `controller.xml` is the changelog file that contains the changesets. Open the file and you can see that the changesets are called from the current path 
-
-![controller Path](images/controller-path.png " ")
-
-You have successfully genereated the schema log using Liquibase for the HR schema [proceed to the next lab](#next)
-
-## Acknowledgements ##
-
-- Author - Ludovico Caldara and Suraj Ramesh 
-- Last Updated By/Date -Suraj Ramesh, Jan 2023
