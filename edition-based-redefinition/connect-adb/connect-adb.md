@@ -74,15 +74,15 @@ The LiveLabs Sandbox environment comes with a pre-created Autonomous Database (A
    ```text
    <copy>unzip ebrlabs</copy>
    ```
-   
-      ![Unzip ebrlabs](images/unzip-ebrlabs.png " ")
+
+   ![Unzip ebrlabs](images/unzip-ebrlabs.png " ")
 
    It should have two folders **initial_setup** and **changes**, with a bunch of SQL and XML files. Verify using the list command ls -ltr as provided in the screenshot.
 
    ![Ebrlabs folders](images/ebrlabs-folders.png " ")
 
 
-You have successfully downloaded the ADB wallet and lab files,[proceed to the next lab](#next) to setup the HR schema.
+You have successfully downloaded the ADB wallet and lab files. [Proceed to the next lab](#next) to setup the HR schema.
 
 ## Acknowledgements
 

@@ -20,7 +20,7 @@ The HR schema is a modified version of the well-known HR schema to support editi
 
 2. We already downloaded the wallet in the Cloud shell home folder in the previous lab.
 
-3. Reopen the Cloud Shell if it is disconnected. From the Cloud shell  home folder, connect to SQLcl 
+3. Reopen the Cloud Shell if it is disconnected. From the Cloud shell  home folder, connect to SQLcl
 
    ```text
    <copy>cd ~</copy>
@@ -40,14 +40,14 @@ The HR schema is a modified version of the well-known HR schema to support editi
    ```
 
    **If you are using the LiveLabs sandbox, you should refer to the page "View Login Info" for getting the ADMIN credentials. The connection string will also be unique to your environment.**
-   
+
    If you are using the LiveLabs sandbox, replace "ebronline" in the connection string with the full Database Name found on the Login Info page. E.g. for EBRONLINE41137 you must provide:
 
    ```text
    <copy>connect admin@ebronline41137_medium</copy>
    ```
 
-   Save the connect command line for later use. From now on, we'll always show `connect admin@ebronline_medium` regardless of your actual connection string.
+   Save the connect command line for later use. From now on, we'll always show `connect admin@ebronline_medium` or `connect hr@ebronline_medium` regardless of your actual connection string.
 
    ![ATP Connect](images/atp-connect.png " ")
 
@@ -72,7 +72,7 @@ The HR schema is a modified version of the well-known HR schema to support editi
 
    ![List initial setup files](images/list-initial-setup.png " ")
 
-2. Execute the SQL file hr_main.sql 
+2. Execute the SQL file hr_main.sql
 
    ````text
    <copy>@hr_main.sql</copy>
@@ -83,8 +83,10 @@ The HR schema is a modified version of the well-known HR schema to support editi
 - The password for the `HR` user - Input as  **Welcome#Welcome#123**
 - The default tablespace for the `HR` user - Input as **SAMPLESCHEMAS**
 - The temporary tablespace for the `HR` user- Input as **TEMP**
-- The path used to store the logs- Input as **./** 
-- The name of the TNS name to connect to the Autonomous Database- Input as **ebronline_medium**  (change it to the actual connection string, e.g. ebronline41137_medium)
+- The path used to store the logs- Input as **./**
+- The name of the TNS name to connect to the Autonomous Database- Input as **ebronline_medium**
+
+  (change it to the actual connection string, e.g. ebronline41137_medium)
 
    ![HR main script](images/hr-main-script.png " ")
 
