@@ -57,9 +57,9 @@ This lab assumes that you have completed the previous labs and have created all 
 
 
     ```
-    NAME                      VALUE    
+    <copy>NAME                      VALUE    
     _________________________ ________
-    identity_provider_type    NONE   
+    identity_provider_type    NONE</copy>
     ```
 
 3. Now enable IAM as the identity provider. Query the idenity provider again to see it updated to **OCI_IAM**.
@@ -70,9 +70,9 @@ This lab assumes that you have completed the previous labs and have created all 
     ```
 
     ```
-    NAME                      VALUE      
+    <copy>NAME                      VALUE      
     _________________________ __________
-    identity_provider_type    OCI_IAM    
+    identity_provider_type    OCI_IAM</copy> 
     ```
 
 4. Create the **user\_shared** user and grant it permissions to create sessions. Create the **sr\_dba\_role** role and grant it permissions. Quit the SQL session.

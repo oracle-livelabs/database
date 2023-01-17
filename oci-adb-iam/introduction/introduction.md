@@ -1,4 +1,4 @@
-## Introduction
+# Introduction
 
 ### Why use Identity and Access Management with Autonomous Database
 

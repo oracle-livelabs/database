@@ -42,7 +42,7 @@ This lab assumes that you have completed the previous labs and successfully enab
     ```
 
     ```
-    SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
+    <copy>SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
     _________________________________________________
     FALSE                                             
 
@@ -74,7 +74,7 @@ This lab assumes that you have completed the previous labs and successfully enab
 
     SYS_CONTEXT('USERENV','NETWORK_PROTOCOL')    
     ____________________________________________
-    tcps
+    tcps</copy>
     ```
 
 3. Add your OCI user to the **DB_ADMIN** group.
@@ -99,7 +99,7 @@ This lab assumes that you have completed the previous labs and successfully enab
     ```
 
     ```
-    SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
+    <copy>SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
     _________________________________________________
     TRUE                                              
 
@@ -131,7 +131,7 @@ This lab assumes that you have completed the previous labs and successfully enab
 
     SYS_CONTEXT('USERENV','NETWORK_PROTOCOL')    
     ____________________________________________
-    tcps   
+    tcps</copy>
     ```
 
 ## Task 2: Connect to the database with a token.
@@ -157,7 +157,7 @@ This lab assumes that you have completed the previous labs and successfully enab
     ```
 
     ```
-    SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
+    <copy>SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
     _________________________________________________
     TRUE                                              
 
@@ -189,7 +189,7 @@ This lab assumes that you have completed the previous labs and successfully enab
 
     SYS_CONTEXT('USERENV','NETWORK_PROTOCOL')    
     ____________________________________________
-    tcps   
+    tcps</copy>
     ```
 
 You may now **proceed to the next lab.**
