@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab picks up where Lab 4 left off. You are going to explore in more detail
+This lab picks up where Lab 5 left off. You are going to explore in more detail
 the tables you created, and execute queries using OCI Console.  
 
 **And now, for the fun part, let’s look at some queries over the streaming data.**

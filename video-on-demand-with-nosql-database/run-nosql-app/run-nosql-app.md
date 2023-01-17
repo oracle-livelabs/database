@@ -2,8 +2,8 @@
 
 ## Introduction
 
-This lab picks up where lab 4 left off. We are going to explore in more detail
-the tables we created, load data, and execute queries using a Python application.
+This lab picks up where lab 3 left off. We are going to explore in more detail
+the tables we created, load data, and execute queries using a GraphQL application.
 
 _Estimated Lab Time:_ 25 minutes
 
@@ -260,4 +260,4 @@ In this task, we will create 3 of 5 indexes using a Node.js program.
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, August 202Z
+* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, August 2022

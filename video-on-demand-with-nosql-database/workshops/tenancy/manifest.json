@@ -38,7 +38,13 @@
 			"filename": "../../run-nosql-app/run-nosql-app.md"
 		},
 		{
-			"title": "Lab 5: Explore Data, Run Queries",
+			"title": "Lab 5: Deploy the Activity Tracking application using Container Instances",
+			"description": "This is the content developers",
+			"type": "freetier",
+			"filename": "../../run-nosql-app-container/run-nosql-app-container.md"
+		},
+		{
+			"title": "Lab 6: Explore Data, Run Queries",
 			"description": "This is advanced SQL content developers",
 			"type": "freetier",
 			"filename": "../../explore-run-queries/explore-run-queries.md"
