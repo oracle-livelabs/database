@@ -12,7 +12,7 @@ In a production environment, the management of editions is usually a DBA task.
 
 Some operations like `CREATE EDITION`, `DROP EDITION`, `ALTER DATABASE DEFAULT EDITION`, etc., require elevated privileges that should not be granted to normal users.
 For CI/CD testing, and therefore for production environments that rolled out with CI/CD pipelines, these procedures using `AUTHID DEFINER` will facilitate the integration without executing anything as DBA.
-Keep in mind, editions are shared among all schemas in the database, therefore all the schemas must belong to the same application and follow the same edition scheme. Different applications should be separated in different databases (or PDBs).
+Keep in mind, editions are shared among all schemas in the database, therefore all the schemas must belong to the same application and follow the same edition scheme. Different applications should be separated into different databases (or PDBs).
 
 The file `hr_main.sql` that we used to create the HR schema in the previous lab, creates the following procedures to let users manage and use editions themselves. Open the script *hr_main.sql* to review the contents.
 
@@ -24,18 +24,18 @@ The file `hr_main.sql` that we used to create the HR schema in the previous lab,
 ![Default edition](images/default-edition.png " ")
 
 
-In a normal situation, either a DBA or a single administrative user would take care of the editions, but in a development database, developers may want to maintain the editions themselves. The `CREATE ANY EDITION` privilege is also handy, but not effective when the users that create them are recreated as part of integration tests: an edition is an object at database (PDB) level, but the grants work like for normal objects (grants are lost if the grantor is deleted).
+In a normal situation, either a DBA or a single administrative user would take care of the editions, but in a development database or fully CI/CD automated environment, developers may want to maintain the editions themselves. The `CREATE ANY EDITION` privilege is also handy, but not effective when the users that create them are recreated as part of integration tests: an edition is an object at the database (PDB) level, but the grants work like for normal objects (grants are lost if the grantor is deleted).
 
 The file `hr_main.sql` gives the extra grants to the `HR` user:
 
 ![HR grants](images/hr-grants.png " ")
 
 
-## Task 2: Review Base Tables and Editioning Views
+## Task 2: Review the Base Tables and Editioning Views
 
-The set of scripts that install the `HR` schema is different from the default one.
+The set of scripts that install the `HR` schema is different from the one that is usually shipped with the Oracle Database examples.
 
-Also give a look at the file `hr_cre.sql`.This script is available in initial_setup folder.Each table has a different name compared to the original `HR` schema (a suffix `$0` in this example):
+Look at the file `hr_cre.sql`. This script is available in the initial_setup folder. Each table has a different name compared to the original `HR` schema (a suffix `$0` in this example):
 
 ![Create table region ](images/create-table-region.png " ")
 
@@ -43,17 +43,19 @@ Each table has a corresponding *editioning view* that covers the table one to on
 
 ![Edition view region](images/edition-view-region.png " ")
 
-To verify this, connect with the `HR` user in SQLcl ( If you got disconnected from sqlcl, refer Lab 3,Task 1 for setting up the DB wallet)
+To verify this, connect with the `HR` user in SQLcl (if you got disconnected from sqlcl, refer to the Lab *Connect to ATP database and prepare the HR schema*, Task 1, for setting up the DB wallet)
 
 ```text
  <copy>connect hr/Welcome#Welcome#123@ebronline_medium</copy>
 ```
 
-Then use the SQLcl command `ddl` on `regions` and you should able to see DDL of the regions view as below
+(replace `ebronline_medium` with the actual connection string).
+
+Then use the SQLcl command `ddl regions` and you should able to see DDL of the regions view as below:
 
 ![DDL edition region](images/ddl-edition-region.png " ")
 
-The views, and all the depending objects, are editioned and belong to the `ORA$BASE` edition. This is the default edition when a database is created. Let us verify using the below SQL in the HR schema.
+The views, and all the depending objects, are editioned and belong to the `ORA$BASE` edition. This is the default edition when a database is created. Verify with the following SQL in the HR schema.
 
 ```text
  <copy>select OBJECT_NAME, OBJECT_TYPE, EDITION_NAME from user_objects_ae WHERE edition_name is not null  order by 2,3;</copy>
@@ -61,10 +63,10 @@ The views, and all the depending objects, are editioned and belong to the `ORA$B
 
 ![Select base objects](images/select-base-objects.png " ")
 
-You have successfully reviewed the HR schema [proceed to the next lab](#next) to start working with Liquibase and SQLcl.
+You have successfully reviewed the HR schema. [Proceed to the next lab](#next) to start working with Liquibase and SQLcl.
 
 ## Acknowledgements
 
-- Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
+- Authors - Ludovico Caldara and Suraj Ramesh
 - Last Updated By/Date - Suraj Ramesh, Jan 2023
 
