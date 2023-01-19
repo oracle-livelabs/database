@@ -126,22 +126,22 @@ You may now **proceed to the next lab.**
 
    b) Click **Create/Reset Password**.  
 
-      ![Reset password](images/reset-password.png)
+      ![Reset password](https://oracle-livelabs.github.io/security/identity-access-management/iam/images/image009.png)
 
    c) In the dialog, click **Create/Reset Password**.
 
-      ![Reset password](images/create-password.png)
+      ![Reset password](https://oracle-livelabs.github.io/security/identity-access-management/iam/images/create-password.png)
 
    d) The new one-time password is displayed.
       Click the **Copy** link and then click **Close**. Make sure to copy this password to your notepad.
 
-      ![Copy password](images/copy-password.png)
+      ![Copy password](https://oracle-livelabs.github.io/security/identity-access-management/iam/images/copy-password.png)
 
 3. Sign in as the new user using a different web browser or an incognito window.
 
    a) Click **Sign Out** from the user menu and log out of the admin user account completely.
 
-      ![Sign out](images/sign-out.png)
+      ![Sign out](https://oracle-livelabs.github.io/security/identity-access-management/iam/images/sign-out.png)
 
    b) Open a supported browser and go to the Console URL:  [https://cloud.oracle.com](https://cloud.oracle.com).
 
@@ -149,18 +149,18 @@ You may now **proceed to the next lab.**
 
    d) Enter the name of your cloud account (aka your tenancy name, not your user name), then click the **Next** button.
 
-   ![Enter tenancy name](images/cloud-account-name.png)
+   ![Enter tenancy name](https://oracle-livelabs.github.io/security/identity-access-management/iam/images/cloud-account-name.png)
 
    e) This time, you will sign in using **Oracle Cloud Infrastructure Direct Sign-In** box with the user you created. Note that the user you created is not part of the Identity Cloud Services.
 
    f) Enter the password that you copied. Click **Sign In**.
 
-      ![Enter your password](images/sign-in.png)
+      ![Enter your password](https://oracle-livelabs.github.io/security/identity-access-management/iam/images/sign-in.png)
 
       >**Note:** Since this is the first-time sign-in, the user will be prompted to change the temporary password, as shown in the screenshot below.
 
    g) Set the new password. Click **Save New Password**.
-      ![Set the new password](images/set-password.png)
+      ![Set the new password](https://oracle-livelabs.github.io/security/identity-access-management/iam/images/image015.png)
 
 ## Learn More
 
