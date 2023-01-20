@@ -2,20 +2,20 @@
 
 ## Introduction
 
-Run the XA sample application to transfer an amount from one department to another and to understand how you can use Transaction Manager for Microservices to coordinate XA transactions.
+Run the XA sample application to transfer an amount from one department to another and to understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate XA transactions.
 
-The sample application code is available in the Transaction Manager for Microservices distribution. The Transaction Manager for Microservices library files are already integrated with the sample application code.
+The sample application code is available in the MicroTx distribution. The MicroTx library files are already integrated with the sample application code.
 
-Estimated Lab Time: 20 minutes
+Estimated Lab Time: *20 minutes*
 
 ### About XA Sample Application
 
 The following figure shows a sample XA application, which contains several microservices.
 ![Microservices in the XA sample applications](./images/xa-sample-app-simple.png)
 
-The sample application demonstrates how you can develop microservices that participate in XA transactions while using Transaction Manager for Microservices to coordinate the transactions. When you run the Teller application, it withdraws money from one department and deposits it to another department by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
+The sample application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions. When you run the Teller application, it withdraws money from one department and deposits it to another department by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
-For more details, see [About the Sample XA Application](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/set-sample-applications.html#GUID-A181E2F7-00B4-421F-9EF9-DB8BF76DD53F) in *Transaction Manager for Microservices Developer Guide*.
+For more details, see [About the Sample XA Application](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/set-sample-applications.html#GUID-A181E2F7-00B4-421F-9EF9-DB8BF76DD53F) in the *Transaction Manager for Microservices Developer Guide*.
 
 ### Objectives
 
@@ -31,7 +31,11 @@ In this lab, you will:
 This lab assumes you have:
 
 * An Oracle Cloud account.
-* Successfully completed all previous labs.
+* Successfully completed the previous labs:
+  * Get Started
+  * Lab 1: Prepare setup
+  * Lab 2: Environment setup
+  * Lab 4: Provision an Oracle Autonomous Database for use as resource manager
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
  ```text
@@ -99,7 +103,6 @@ To build container images for each microservice in the sample:
 
    **Successfully tagged department-spring:1.0**
 
-
 The container images that you have created are available in your Minikube container registry.
 
 ## Task 2: Update the values.yaml File
@@ -153,7 +156,7 @@ To provide the configuration and environment details in the `values.yaml` file:
 
 ## Task 3: Install the Sample XA Application
 
-Install the XA sample application in the `otmm` namespace, where Transaction Manager for Microservices is installed. While installing the sample application, Helm uses the configuration details you provide in the values.yaml file.
+Install the XA sample application in the `otmm` namespace, where you have installed MicroTx. While installing the sample application, Helm uses the configuration details you provide in the values.yaml file.
 
 1. Run the following commands to install the XA sample application.
 
@@ -173,7 +176,7 @@ Install the XA sample application in the `otmm` namespace, where Transaction Man
 
 2. Verify that the application has been deployed successfully.
 
-   ```text
+    ```text
     <copy>
     helm list -n otmm
     </copy>
@@ -187,7 +190,7 @@ Install the XA sample application in the `otmm` namespace, where Transaction Man
 
 3. If you need to make any changes in the `values.yaml` file, then uninstall `sample-xa-app`. Update the `values.yaml` file, and then reinstall the `sample-xa-app`. Perform step 1 as described in this task again to reinstall `sample-xa-app`.  and install it again by perform step 1. Otherwise, skip this step and go to the next step.
 
-   ```text
+    ```text
     <copy>
     helm uninstall sample-xa-app --namespace otmm
     </copy>
@@ -300,7 +303,7 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     </copy>
     ```
 
-4. Transfer an amount of 50 from Department 1, account1 to an account that does not exist in Department 2, such as account7. Since account7 does not exist, the deposit fails and Transaction Manager for Microservices rolls back the withdraw action.
+4. Transfer an amount of 50 from Department 1, account1 to an account that does not exist in Department 2, such as account7. Since account7 does not exist, the deposit fails and MicroTx rolls back the withdraw action.
 
     **Example command**
 
@@ -332,4 +335,4 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
 
 * **Author** - Sylaja Kannan, Principal User Assistance Developer
 * **Contributors** - Brijesh Kumar Deo
-* **Last Updated By/Date** - Sylaja, December 2022
+* **Last Updated By/Date** - Sylaja, January 2023

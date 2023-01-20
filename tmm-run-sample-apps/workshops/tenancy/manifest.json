@@ -35,6 +35,11 @@
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {
+      "description": "Cleanly dispose of all OCI resources created by ORM for the workshop, and delete the stack",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md",
+      "title": "Lab 6: Environment Cleanup"
+    },
+    {
       "title": "Need help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"

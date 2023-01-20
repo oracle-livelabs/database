@@ -2,26 +2,26 @@
 
 ## Introduction
 
-Run a sample application that uses the Long Running Action (LRA) transaction protocol to book a trip and understand how you can use Transaction Manager for Microservices to coordinate the transactions. Using samples is the fastest way for you to get familiar with Transaction Manager for Microservices.
-The sample application code is available in the Transaction Manager for Microservices distribution. The Transaction Manager for Microservices library files are already integrated with the sample application code.
+Run a sample application that uses the Long Running Action (LRA) transaction protocol to book a trip and understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate the transactions. Using samples is the fastest way for you to get familiar with MicroTx.
+The sample application code is available in the MicroTx distribution. The MicroTx library files are already integrated with the sample application code.
 
-Estimated Time: 10 minutes
+Estimated Time: *10 minutes*
 
 ### About LRA Sample Application
 
-The sample application demonstrates how you can develop microservices that participate in LRA transactions while using Transaction Manager for Microservices to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and a flight ticket. Only when you provide approval to confirm the provisional booking, the booking of the hotel room and flight ticket is confirmed. If you cancel the provisional booking, the hotel room and flight ticket that was blocked is released and the booking is canceled. The flight service in this example allows only two confirmed bookings by default. After two confirmed bookings, the flight service rejects any additional booking requests and that would lead to the trip booking failure and cancellation (compensation) of a provisionally booked hotel booking within the trip.
+The sample application demonstrates how you can develop microservices that participate in LRA transactions while using MicroTx to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and a flight ticket. Only when you provide approval to confirm the provisional booking, the booking of the hotel room and flight ticket is confirmed. If you cancel the provisional booking, the hotel room and flight ticket that was blocked is released and the booking is canceled. The flight service in this example allows only two confirmed bookings by default. To test the failure scenario, the flight service sample app rejects any additional booking requests after two confirmed bookings. This leads to the cancellation (compensation) of a provisionally booked hotel within the trip and the trip is not booked.
 
 The following figure shows a sample LRA application, which contains several microservices, to demonstrate how you can develop microservices that participate in LRA transactions.
 ![Microservices in sample LRA application](./images/lra-sample-app.png)
 
-For more details, see [About the Sample LRA Application](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/set-sample-applications.html#GUID-C5332159-BD13-4210-A02E-475107919FD9) in *Transaction Manager for Microservices Developer Guide*.
+For more details, see [About the Sample LRA Application](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/set-sample-applications.html#GUID-C5332159-BD13-4210-A02E-475107919FD9) in the *Transaction Manager for Microservices Developer Guide*.
 
 ### Objectives
 
 In this lab, you will:
 
 * Configure Minikube
-* Start a tunnel between Minikube and Transaction Manager for Microservices
+* Start a tunnel between Minikube and MicroTx
 * Run the LRA sample application
 
 ### Prerequisites
@@ -29,14 +29,17 @@ In this lab, you will:
 This lab assumes you have:
 
 * An Oracle Cloud account.
-* Successfully completed all previous labs.
+* Successfully completed all previous labs:
+  * Get Started
+  * Lab 1: Prepare setup
+  * Lab 2: Environment setup
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
-   ```text
-    <copy>
-    sudo su - oracle
-    </copy>
-    ```
+      ```text
+      <copy>
+      sudo su - oracle
+      </copy>
+      ```
 
 ## Task 1: Configure Minikube
 
@@ -52,7 +55,7 @@ Follow the instructions in this section to configure Minikube, and then run a sa
     </copy>
     ```
 
-   In rare situations, you may the error message shown below. This message indicates that the stack resources have not been successfully provisioned. In such cases, destroy the stack resources and delete the stack by performing Task 4 below. Then recreate the stack by performing the steps in Lab 2.
+   In rare situations, you may the error message shown below. This message indicates that the stack resources have not been successfully provisioned. In such cases, complete **Lab 6: Environment Clean Up** to delete the stack and clean up the resources. Then perform the steps in Lab 2 to recreate the stack.
 
    ![minikube start error](./images/minikube-start-error.png)
 
@@ -70,7 +73,7 @@ Follow the instructions in this section to configure Minikube, and then run a sa
 
 ## Task 2: Start a tunnel
 
-Before you start a transaction, you must start a tunnel between Minikube and Transaction Manager for Microservices.
+Before you start a transaction, you must start a tunnel between Minikube and MicroTx.
 
 1. Run the following command in a new terminal to start a tunnel. Keep this terminal window open.
 
@@ -177,7 +180,7 @@ The sample application provisionally books a hotel room and a flight ticket and 
     </copy>
     ```
 
-You may now **proceed to the next lab**. If you do not want to proceed further and would like to finish the LiveLabs and clean up the resources, then perform task 4 below.
+You may now **proceed to the next lab** to run a sample XA application. If you do not want to proceed further and would like to finish the LiveLabs and clean up the resources, then complete **Lab 6: Environment Clean Up**.
 
 ## Learn More
 
@@ -187,4 +190,4 @@ You may now **proceed to the next lab**. If you do not want to proceed further a
 
 * **Author** - Sylaja Kannan, Principal User Assistance Developer
 * **Contributors** - Brijesh Kumar Deo
-* **Last Updated By/Date** - Sylaja, December 2022
+* **Last Updated By/Date** - Sylaja, January 2023

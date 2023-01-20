@@ -10,7 +10,9 @@ This lab will show you how to download the Oracle Resource Manager (ORM) stack z
 -   Configure an existing Virtual Cloud Network (VCN)
 
 ### Prerequisites
+
 This lab assumes you have:
+
 - An Oracle Cloud account
 
 ## Task 1: Download Oracle Resource Manager (ORM) stack ZIP file
