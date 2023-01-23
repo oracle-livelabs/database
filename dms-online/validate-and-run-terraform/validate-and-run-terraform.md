@@ -6,6 +6,9 @@ This lab walks you through the steps to validate a migration prior to running it
 
 Estimated Lab Time: 20 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Validate Migration](videohub:1_pl8uedpr)
+
 ### Objectives
 
 In this lab, you will:
@@ -116,7 +119,7 @@ In this lab, you will:
 
     ![Screenshot of ADB list](images/adb-list.png =90%x*) 
 
- 10. Click on the **Database Actions** button. If you browser blocks the popup, change it to allow popups from Oracle cloud. 
+ 10. Click on the **Database Actions** button. If your browser blocks the popup, change it to allow popups from Oracle cloud. 
 
     ![Screenshot of ADB list](images/db-actions.png =90%x*) 
 

@@ -5,9 +5,10 @@ Watch the video below to get an overview of Automatic In-Memory:
 
 [YouTube video](youtube:pFWjl1G7uDI)
 
-Watch the video below for a walk through of the Automatic In-Memory High lab:
-
+Watch the video below for a quick walk-through of this lab.
 [Automatic In-Memory High](videohub:1_0rzwly4i)
+
+*Estimated Lab Time:* 15 Minutes.
 
 ### Objectives
 
@@ -15,10 +16,11 @@ Watch the video below for a walk through of the Automatic In-Memory High lab:
 -   Perform various queries invoking AIM with INMEMORY_AUTOMATIC_LEVEL set to HIGH
 
 ### Prerequisites
+
 This lab assumes you have:
 - A Free Tier, Paid or LiveLabs Oracle Cloud account
 - You have completed:
-    - Lab: Get Started with noVNC Remote Desktop (*Free-tier* and *Paid Tenants* only)
+    - Get Started with noVNC Remote Desktop
     - Lab: Initialize Environment
     - Lab: Setting up the In-Memory Column Store
 
@@ -32,6 +34,12 @@ This Lab will explore the new AIM level HIGH and how it works. A new schema will
 
 
 ## Task 1: AIM Level High
+
+Reload the environment variables for **CDB1** if you exited the terminal after the previous lab
+
+```
+<copy>. ~/.set-env-db.sh CDB1</copy>
+```
 
 Let's switch to the aim-high folder and log back in to the PDB:
 
@@ -58,7 +66,7 @@ Query result:
 [CDB1:oracle@dbhol:~/labs/inmemory/aim-high]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
 
 SQL*Plus: Release 21.0.0.0.0 - Production on Fri Aug 19 18:33:55 2022
-Version 21.4.0.0.0
+Version 21.7.0.0.0
 
 Copyright (c) 1982, 2021, Oracle.  All rights reserved.
 
@@ -66,7 +74,7 @@ Last Successful login time: Thu Aug 18 2022 21:37:24 +00:00
 
 Connected to:
 Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
-Version 21.4.0.0.0
+Version 21.7.0.0.0
 
 SQL> set pages 9999
 SQL> set lines 150
@@ -805,7 +813,7 @@ SQL>
     SQL>
     ```
 
-11. Let's take a look at the Heat Map statistics for the segments. Although Heat Map is not used directly by AIM, and does not have to be enabled for AIM to work, it does give us an easy way to look at the usage statistics that AIM does base its decisions on. 
+11. Let's take a look at the Heat Map statistics for the segments. Although Heat Map is not used directly by AIM, and does not have to be enabled for AIM to work, it does give us an easy way to look at the usage statistics that AIM does base its decisions on.
 
     Run the script *11\_hm\_stats.sql*
 
@@ -891,11 +899,11 @@ SQL>
 
 12. Now let's see if we can figure out what has happened with the AIM processing. First we will look at the tasks that are running as part of AIM.
 
-    Run the script *12\_aim\_tasks.sql*
+    Run the script *12\_aimtasks.sql*
 
     ```
     <copy>
-    @12_aim_tasks.sql
+    @12_aimtasks.sql
     </copy>    
     ```
 

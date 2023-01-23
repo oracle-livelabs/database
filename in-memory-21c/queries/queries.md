@@ -9,23 +9,32 @@ Watch the video below for a walk through of the In-Memory Queries lab:
 
 [In-Memory Queries](videohub:1_ohs9hpw0)
 
+*Estimated Lab Time:* 15 Minutes.
+
 ### Objectives
 
 -   Perform various queries on the In-Memory Column Store
 
 ### Prerequisites
+
 This lab assumes you have:
 - A Free Tier, Paid or LiveLabs Oracle Cloud account
 - You have completed:
-    - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
-    - Lab: Environment Setup
+    - Get Started with noVNC Remote Desktop
     - Lab: Initialize Environment
+    - Lab: Setting up the In-Memory Column Store
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
 ## Task 1: Querying the In-Memory Column Store
 
 Now that you’ve gotten familiar with the IM column store let’s look at the benefits of using it. You will execute a series of queries against the large fact table LINEORDER, in both the buffer cache and the IM column store, to demonstrate the different ways the IM column store can improve query performance above and beyond the basic performance benefits of accessing data in memory only.
+
+Reload the environment variables for **CDB1** if you exited the terminal after the previous lab
+
+```
+<copy>. ~/.set-env-db.sh CDB1</copy>
+```
 
 Let's switch to the queries folder and log back in to the PDB.
 
@@ -45,12 +54,14 @@ set lines 150
 </copy>
 ```
 
+Query result:
+
 ```
 [CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/queries
 [CDB1:oracle@dbhol:~/labs/inmemory/queries]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
 
 SQL*Plus: Release 21.0.0.0.0 - Production on Fri Aug 19 18:33:55 2022
-Version 21.4.0.0.0
+Version 21.7.0.0.0
 
 Copyright (c) 1982, 2021, Oracle.  All rights reserved.
 
@@ -58,7 +69,7 @@ Last Successful login time: Thu Aug 18 2022 21:37:24 +00:00
 
 Connected to:
 Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
-Version 21.4.0.0.0
+Version 21.7.0.0.0
 
 SQL> set pages 9999
 SQL> set lines 150
@@ -614,7 +625,7 @@ SQL>
 
     Note that we are now back to an inmemory query. This time we included the session statistics for the query. Take note of two key statistics. The first is "IM scan CUs memcompress for query low". This tells us how many IMCUs the data is populated into. The second important statistic is "IM scan CUs pruned". Notice that this number is almost as large as the total number of IMCUs. This means that Database In-Memory was able to avoid scanning almost all of the data. This is because at population time In-Memory storage indexes are created for each set of column values in each IMCU with the MIN and MAX values. During the scan these MIN and MAX values can be compared with filter predicates and can possibly result in not having to scan the actual columnar data thereby improving performance. After all, the fastest way to do something is to not do it at all.  
 
-7. Analytical queries typically have more than one WHERE clause predicate. What happens when there are multiple single column predicates on a table? Traditionally you would create a multi-column index. Can th IM column store compete with that?  
+7. Analytical queries typically have more than one WHERE clause predicate. What happens when there are multiple single column predicates on a table? Traditionally you would create a multi-column index. Can the IM column store compete with that?  
 
     Let’s change our query to look for a specific line item in an order and monitor the session statistics:
 
@@ -865,7 +876,7 @@ SQL>
     SQL>
     ```  
 
-    Even with the all of these complex predicates the optimizer chose an in-memory query, showing that for large scan operations it is the most efficient approach.
+    Even with all of these complex predicates the optimizer chose an in-memory query, showing that for large scan operations it is the most efficient approach.
 
 9. Exit lab
 
@@ -883,7 +894,7 @@ SQL>
     ```
     SQL> exit
     Disconnected from Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
-    Version 21.4.0.0.0
+    Version 21.7.0.0.0
     [CDB1:oracle@dbhol:~/labs/inmemory/queries]$ cd ..
     [CDB1:oracle@dbhol:~/labs/inmemory]$
     ```

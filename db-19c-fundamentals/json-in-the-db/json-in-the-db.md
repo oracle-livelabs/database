@@ -10,7 +10,7 @@ Estimated Time: 15 minutes
 
 Watch the video below for a quick walk through of the lab.
 
-[Work with JSON in the database](https://youtu.be/I1g3PhWXrxQ)
+[Working with JSON in the Oracle Database](videohub:1_qxy2y77h)
 
 ### Objectives
 
@@ -31,24 +31,32 @@ In this lab, you will:
 
 	![Database Action](./images/database-actions.png)
 
-2. Next, select the JSON tile on the left hand side of the screen.
+2. If you're not automatically logged in, sign in as ADMIN. Your password will be the password you specified when you created the database.
+
+	![Database Actions Login](./images/db-actions-login.png)
+
+3. (Optional database password reset) If you need to reset your database password its very simple to do so. Click on **More actions** from the OCI console screen and select **Administrator Password**. Fill in your new password and select **Change**. After you select **Change**, follow from step 1 above.
+
+	![Reset DB Password](./images/db-password-reset.png)
+
+4. Next, select the JSON tile on the left hand side of the screen.
 
 	![JSON Database Actions](./images/db-actions-json.png)
 
 
-3. To create a collection, click **Create Collection**.
+5. To create a collection, click **Create Collection**.
 
 	![Create Collection](./images/create-collection.png)
 
-4. Provide a name for the collection in the field, we'll call it  **products** and click **Create**. MAKE SURE you check the **MongoDB Compatible** box. Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use PRODUCTS or Products.
+6. Provide a name for the collection in the field, we'll call it  **products** and click **Create**. MAKE SURE you check the **MongoDB Compatible** box. Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use PRODUCTS or Products.
 
 	![New collection: products](./images/new-products.png)
 
-5. A notification pops up informing you the `products` collections is created.
+7. A notification pops up informing you the `products` collections is created.
 
 	![New collection notification](./images/popup.png)
 
-6. Click the refresh button to verify the `products` collection is created.
+8. Click the refresh button to verify the `products` collection is created.
 
 	![Refresh button](./images/refreshed.png)
 
@@ -89,7 +97,7 @@ In this lab, you will:
 
 5. Let's repeat this with the following documents:
 
-	Click New JSON Document button, copy and run the following JSON objects one by one, paste it in the worksheet and click **Create**.
+	Click New JSON Document button, copy the following JSON objects one by one, paste it in the worksheet and click **Create**.
 
     ```
 	<copy>
@@ -236,6 +244,8 @@ More generally, constraints can be used to check the data being entered for vari
 
 	![SQL navigation](./images/nav.png)
 
+> **Note**: Ignore the warning message about being logged in as ADMIN. This is a demo, not a best practice.
+
 2. Check constraint to make sure every product has a title of string data type and price >=0. 
 
 	Add a constraint to make sure that every item has at least a title and the price. We want the price to be a non-negative number and title to be a string.
@@ -272,7 +282,7 @@ More generally, constraints can be used to check the data being entered for vari
 	![create a not-allowed item](./images/tester.png)
 	![constraint error message](./images/error2.png)
 
-5. The following document now satisfies all the constraints: the "id" is a unique number, the title is a string, and the price is a positive number.
+5. The following document now satisfies all the constraints: the "id" is a unique number, the title is a string, and the price is a positive number. Lets add the document.
 
 	```
 	<copy>
@@ -293,7 +303,7 @@ More generally, constraints can be used to check the data being entered for vari
 	}
 	</copy>
 	```
-
+	![Add the top gun data](./images/add-top-gun.png)
 ## Task 5: Using SQL on JSON 
 
 So far, we've focused mostly on the document store API where we dealt with JSON data as a collection of documents. But there is another way to interact with your JSON data: SQL. SQL is a very mature query language. Oracle added new operators to work with JSON data (we created an open standard called SQL/JSON which was adopted by the ISO SQL standard). A key characteristic of a JSON collection (like 'products') is that it is backed by a table - a table then gets auto-created when you create a collection so that you do not have to specify columns and data types. In the following we show you how you can use SQL to work with the JSON data in a collection.

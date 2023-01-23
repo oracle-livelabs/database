@@ -6,11 +6,16 @@
             "title": "Introduction",
             "description": "The Introduction is always first. The title and contents menu title match for the Introduction.",
             "filename": "../../introduction/introduction.md"
+        },  
+        {
+            "title": "Get started",
+            "filename": "https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/access-compute/access-compute.md"
         },
         {
-          "title": "Get Started",
-          "description": "Login to Oracle Cloud",
-          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
+            "title": "Lab 1: Sample Schema Setup",
+            "description": "Setup Schema",
+            "publisheddate": "3/24/2020", 
+            "filename": "https://oracle-livelabs.github.io/developer/oracle-db-features-for-developers/setup/setup.md"
         },
         {
             "title": "Lab 2: Enable OLTP table compression",
@@ -27,7 +32,7 @@
         {
             "title": "Lab 5: Enable automatic data optimization",
             "filename": "../../auto-optimization/auto.md"
-        },
+        },  
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",

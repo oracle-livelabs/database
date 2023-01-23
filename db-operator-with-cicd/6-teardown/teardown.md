@@ -6,6 +6,9 @@ In this lab, you will tear down the resources created in your tenancy and the di
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Teardown](videohub:1_evsglgau)
+
 ### Objectives
 
 * Teardown the resources
