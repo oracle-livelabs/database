@@ -15,6 +15,12 @@ In this workshop, you will learn how to:
 * Access and interact with your ADB using IAM credentials
 * Access and interact with your ADB using a token
 
+### Prerequisites
+
+In order to do this workshop, you need
+
+* An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
+
 ## Learn More
 
 * [Oracle Identity and Access Management](https://www.oracle.com/security/identity-management/)

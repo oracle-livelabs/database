@@ -99,7 +99,7 @@ throughout this workshop.
 
 You may now **proceed to the next lab.**
 
-## **Appendix**: Creating an account to use Direct Sign-On with
+## Appendix: Creating an account to use Direct Sign-On with
 
 1. Create a New User
 
