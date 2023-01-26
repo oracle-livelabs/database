@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, we will go to Oracle Cloud where we will create an API Key. Once we have our API Key, we then need to create a 'config' file so that MySQL Shell can access our Oracle Cloud Account to dump the data. But before dumping the data, there is one more thing we need to take care of which is to create an Object Storage Bucket to hold all of our files that will be generated during the dump command
+In this lab, we will go to OCI where we will create an API Key. Once we have our API Key, we then need to create a 'config' file so that MySQL Shell can access our Oracle Cloud Account to dump the data into Object Storage bucket. After the adding your API Key and creating a bucket on OCI, we then connect to the MySQL on-premise instance via MySQL Shell and perform the util.dumpInstance() utility. The util.dumpInstance() utility will take a dump of all the databases except “mysql, sys, performance schema, and information schema”. The dump comprises of DDL files for the schema structure and tab-separated .tsv files containing the actual data.
 
 _Estimated Lab Time:_ ? minutes
 
@@ -10,10 +10,9 @@ _Estimated Lab Time:_ ? minutes
 
 In this lab, you will be guided through the following tasks:
 
-- Add API Key in OCI
-- Create a config file
-- Setup Object Storage Bucket in OCI
-- Perform the MySQL Shell Dump
+- Add an API Key in Oracle Cloud Infrastructure (OCI) and setup the 'config' file
+- Create Object Storage Bucket in OCI
+- Perform MySQL Shell dump
 
 ### Prerequisites
 
@@ -23,33 +22,35 @@ In this lab, you will be guided through the following tasks:
 
 ## Task 1: On OCI "Add API Key" and setup the ".oci/config" file in the Compute/on-prem
 
-1. Sign in to your Oracle Cloud account (if you haven’t, try it for free: https://www.oracle.com/cloud/free/) and set up the API Key along with the config file. Navigate to the ‘Profile’ icon, once on the homepage of Oracle Cloud and click on the User
+1. Sign in to your Oracle Cloud account to set up the API Key along with the config file. Navigate to the 'Profile' icon on the top-right once on the homepage of Oracle Cloud. From there, click either on the "first link" or click on "User settings"
 
-    ![](./images/nav-config.png "nav-config")
+    ![](./images/nav-config0.png "nav-config")
 
-    **Note:** you should be on this page, once finished with the previous step
+    ![](./images/nav-config1.png "nav-config2")
 
-    ![](./images/nav-page.png "config-page")
+    **Note:** you should be on the below "User Details" page, once finished with the previous step
+
+    ![](./images/config-page1.png "config-page")
 
 2. Scroll down on that same page until you see the ‘Resources’ section on the left. Click “API Keys” and “Add API Key”
 
-    ![](./images/nav-page2.png "config-page2")
+    ![](./images/nav-page-1.png "config-page2")
 
-    ![](./images/add-api.png "config-page3")
+    ![](./images/add-api1.png "config-page3")
 
-3. Select ‘Generate API Key Pair’ and download both the “Private Key” and “Public Key”. Afterwards, click “Add”
+3. When you click on 'Add API Key' a popup will appear saying "Add API Key". On that popup, select ‘Generate API Key Pair’ and download both the “Private Key” and “Public Key”. Afterwards, click “Add”
 
-    ![](./images/add-api2.png "add-apikey")
+    ![](./images/add-api02.png "add-apikey")
 
-4. Once you ‘Add’ the API Key, a pop will appear saying “Configuration File Preview”. Copy the contents of the file and paste the file into your on-prem environment (For e.g. I will be using my Oracle Linux 8 environment from the previous steps)
+4. Once you ‘Add’ the API Key, a new popup will appear saying “Configuration File Preview”. Copy the contents of the file and paste the file into your on-prem environment/Compute instance
 
-    ![](./images/add-config.png "copy-config")
+    ![](./images/add-config1.png "copy-config")
 
     ```bash
     <copy>cd</copy>
     ```
     ```bash
-    <copy>mkdir .oci</copy>
+    <copy>mkdir ~/.oci</copy>
     ```
     ```bash
     <copy>cd .oci</copy>
@@ -58,11 +59,25 @@ In this lab, you will be guided through the following tasks:
     <copy>nano config</copy>
     ```
 
-    ![](./images/create-config.png "create-config")
+    ![](./images/create-config01.png "create-config")
 
-    ![](./images/paste-config.png "paste-config")
+    ![](./images/paste-config1.png "paste-config")
 
-    **Note:** you will need to add your ‘Private API Key’ path where it says "key _ file". This is how I did it; navigate back to your home directory and create a file called “privapikey.pem” and paste the contents of the Private API Key into the “privapikey.pem” file. Retieve the path of the .pem key and update the .oci/config file "key _ file"
+5. Once you have pasted the “Configuration File Preview” snippet into the “config” file, you will need to adjust the parameter where it says “key_file” with the file path to your own OCI Private API Key. Look at an example below:
+
+    ![](./images/paste-config2.png "paste-config")
+
+    **Note:** If you need help uploading your Private API Key onto your on-premise environment/Compute instance, continue following the guide. (If you have already uploaded your API Key and have updated the “key_file” parameter for your “config” file, skip to the next Task)
+
+6. After your new API Keys have successfully been added on OCI and you have created the “config” file on your on-premise environment/Compute instance, open your Private API Key in a text editor of your choice. The Private API Key will be the file without the word “public” in the file name. (You should have downloaded both the Private and Public API Keys in Lab 2 Task 1.3)
+
+    ![](./images/open-pem2.png "open-private-api")
+
+7. Once you have opened your Private API Key in a text editor, copy the contents of the entire file like shown below:
+
+    ![](./images/copy-pem.png "copy-private-api")
+
+8. After copying the contents, go back to your on-premise environment/Compute instance where you have created the “config” file and have MySQL Shell installed (in our case, the Oracle Linux server). Create a new file there called "privapikey.pem", for example. This guide used the “nano” text editor to create the "privapikey.pem" file on the on-premise environment. Choose a text editor of your own choice.
 
     ```bash
     <copy>cd</copy>
@@ -71,64 +86,98 @@ In this lab, you will be guided through the following tasks:
     <copy>nano privapikey.pem</copy>
     ```
 
-    ![](./images/config-privkey.png "paste-config-priv")
+    ![](./images/nano-priv.png "nano-private-api")
+
+9. Once the privapikey.pem file opens up, paste the contents of the OCI Private API Key that we copied in Lab 2 Task 1.7, into this newly created privapikey.pem file. Save and close the file afterwards.
+
+    ![](./images/paste-priv.png "paste-private-api")
+
+10. After you have saved the Private API Key on your on-premise environment, grab the file path of the privapikey.pem and adjust the “key_file” parameter in the '.oci/config' file. To get the file path of your current working directory where you have the privapikey.pem, execute:
+
+    ```bash
+    <copy>ls</copy>
+    ```
+    ```bash
+    <copy>pwd</copy>
+    ```
+
+    ![](./images/priv-path.png "private-api-path")
+
+    **Note:** by looking at the above image, the 'privapikey.pem' location for this guide will hence be "/home/opc/privapikey.pem". Go back to your '.oci' directory and adjust your 'config' file accordingly
+
+    ![](./images/paste-config2.png "paste-config")
+
+11. Save and close the 'config' file after you have adjusted its “key_file” parameter.
 
 ## Task 2: Set up Object Storage in OCI and note down "Bucket Name" and "Namespace"
 
-1. Once you are all done with setting up the .oci/config file, navigate back to Oracle Cloud and create an Object Storage Bucket. On the homepage of Oracle Cloud, go to the ‘hamburger’ menu or the ‘navigation’ menu on top left
+1. Once you are all done with setting up the '.oci/config' file, navigate back to Oracle Cloud and create an Object Storage Bucket. On the homepage of Oracle Cloud, go to the ‘hamburger’ menu or the ‘navigation’ menu on top left. Navigate to ‘Storage’ and select "Buckets" under 'Object Storage & Archive Storage'
 
-2. Go to ‘Storage’ and select ‘Buckets’ under Object Storage & Archive Storage
+    ![](./images/oci-nav.png "oci-navigation-menu")
 
-    ![](./images/obj-stor-nav.png "bucket-navigation")
+    ![](./images/buck-nav.png "bucket-navigation")
 
 3. Once on the Buckets page, make sure you have the right Compartment selected. Afterwards, click “Create Bucket”
 
-    ![](./images/create-buck.png "create-bucket")
+    ![](./images/create-buck1.png "create-bucket")
 
-4. Name the bucket “MDS-Bucket”, keep the ‘Default Storage Tier’ to “Standard” and click Create
+4. Name the bucket “MySQL-Bucket”, keep the ‘Default Storage Tier’ to “Standard” and click Create
 
-    ![](./images/name-buck.png "name-bucket")
+    ```bash
+    <copy>MySQL-Bucket</copy>
+    ```
+
+    ![](./images/name-buck1.png "name-bucket")
 
 5. Click on the Bucket Name and note down the “Bucket Name” as well as “Namespace” which can be found under ‘Bucket Information’
 
-    ![](./images/buck-ns.png "name-ns-bucket")
+    ![](./images/buck-ns1.png "name-ns-bucket")
 
 ## Task 3: Perform the MySQL Shell Dump
 
-1. Once the Bucket is created, we are ready to move our data from on-prem to Oracle Cloud Object Storage. Navigate back to your MySQL on-prem environment, but make sure to login using the MySQL Shell
+1. Once the bucket is created in OCI, we are ready to move our data from on-premise environment/Compute instance to Oracle Cloud Object Storage bucket. Navigate back to your on-premise environment, and login to your MySQL server using MySQL Shell
 
     ```bash
     <copy>mysqlsh root@localhost</copy>
     ```
 
-    ![](./images/connect-onprem.png "connect-onprem-mysql")
+    ![](./images/connect-shell1.png "connect-shell")
 
-2. Make sure you are in ‘JavaScript’ mode by executing “\js” and perform the command “util.dumpInstance()”. This will take a dump of all the databases except “mysql, sys, performance schema, and information schema”. The dump comprises of DDL files for the schema structure and tab-seperated .tsv files containing the actual data. Additionally, you can also use “util.dumpSchemas()” or “util.dumpTables()” if you only want to dump specific schemas or tables
+    -OR-
+
+    ```bash
+    <copy>mysqlsh -uroot -p</copy>
+    ```
+
+    ![](./images/connect-shell2.png "connect-shell2")
+
+2. Make sure you are in ‘JavaScript’ mode of MySQL Shell by executing “\js” and perform the command “util.dumpInstance()” to export the dump data into Oracle Cloud Object Storage bucket. The util.dumpInstance() command will take a dump of all the databases except “mysql, sys, performance schema, and information schema”. The dump comprises of DDL files for the schema structure and tab-seperated .tsv files containing the actual data. Additionally, you can also use “util.dumpSchemas()” or “util.dumpTables()” if you only want to dump specific schemas or tables
 
     ```bash
     <copy>\js</copy>
     ```
     ```bash
-    <copy>util.dumpInstance("sampledump", {"osBucketName": "MDS-Bucket", "osNamespace": "idzfu48uajtm", "ocimds": "true", "compatibility": ["strip_restricted_grants", "force_innodb", "strip_definers", "ignore_missing_pks"], dryRun:"true"})</copy>
+    <copy>util.dumpInstance("sampledump", {"osBucketName": "MySQL-Bucket", "osNamespace": "idazzjlcjqzj", "ocimds": "true", "compatibility": ["strip_restricted_grants", "strip_definers"], users: "true", dryRun:"true"})</copy>
     ```
 
-    ![](./images/dry-shell-dump.png "dryrun-shell-dump")
+    ![](./images/dry-shell-dump1.png "dryrun-shell-dump")
 
-    **Note:** “sampledump” is the prefix under which all our dump files will be stored in Object Storage. Change the ‘osBucketName’ and ‘osNamespace’ to match with what you have. “ocimds”: “true” option ensures compatibility of the dump with MySQL Database Service/HeatWave. For the “compatibility” options and what they do, please refer to this website:
+    **Note:** “sampledump” is the prefix under which all our dump files will be stored in Object Storage. Change the ‘osBucketName’ and ‘osNamespace’ to match with what you have. “ocimds”: “true” option ensures compatibility of the dump with MySQL Database Service/HeatWave. To understand the dumpInstance(), dumpSchemas(), or dumpTables() utility in more detail, refer to the below website:
 
     [https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-utilities-dump-instance-schema.html] (https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-utilities-dump-instance-schema.html)
 
 3. Once you have executed the commands in 6.2, execute the same “util.dumpInstance()” command again but this time, change the “dryRun” option to “false”. (When dryRun is set to true, it will not perform the actual dump but instead, displays information on what would be dumped and performs compatibility checks)
 
     ```bash
-    <copy>util.dumpInstance("sampledump", {"osBucketName": "MDS-Bucket", "osNamespace": "idzfu48uajtm", "ocimds": "true", "compatibility": ["strip_restricted_grants", "force_innodb", "strip_definers", "ignore_missing_pks"], dryRun:"false"})</copy>
+    <copy>util.dumpInstance("sampledump", {"osBucketName": "MySQL-Bucket", "osNamespace": "idazzjlcjqzj", "ocimds": "true", "compatibility": ["strip_restricted_grants", "strip_definers"], users: "true", dryRun:"false"})</copy>
     ```
 
-    ![](./images/shell-dump.png "shell-dump")
+    ![](./images/shell-dump1.png "shell-dump")
+    ![](./images/shell-dump2.png "shell-dump2")
 
-4. Once the dump is complete, navigate back to Oracle Cloud and to the Object Storage Bucket we created earlier. Check to see if you see your files under “sampledump” from the util.dumpInstance()
+4. Once the dump is complete, navigate back to Oracle Cloud and to the Object Storage bucket we created earlier (MySQL-Bucket). Check to see if you see your files under “sampledump” from the util.dumpInstance()
 
-    ![](./images/confirm-dump.png "confirm-dump")
+    ![](./images/confirm-dump1.png "confirm-dump")
 
 This concludes this lab. You may now **proceed to the next lab.**
 

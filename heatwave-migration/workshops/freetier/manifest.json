@@ -15,7 +15,7 @@
         },
 
         {
-            "title": "Lab 1: Create On-Prem MySQL System",
+            "title": "Lab 1: # Create an on-premise environment",
             "filename": "../../create-dbs/create-dbs.md"
         },
 
@@ -30,8 +30,8 @@
         },
 
         {
-          "title": "Lab 4: Create a Compute Instance and perform the MySQL Shell Load",
-          "filename": "../../shell-load/shell-load.md"
+          "title": "Lab 4: Loading Data into HeatWave",
+          "filename": "../../shell-load/heatwave-load.md"
         },
 
         {
