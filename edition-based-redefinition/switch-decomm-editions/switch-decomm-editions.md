@@ -1,60 +1,56 @@
-# Switch to the new edition,decommission the old edition
+# Switch to the new edition and decommission the old edition
 
 Estimated lab time: 15 minutes
 
 ### Objectives
 
-In this lab,we will switch to the new edition (v2) and decomission the old edition. We will be also using DBMS_REDEF procedure to redefine the tables online.
+In this lab, we will switch to the new edition `V2` and decommission the old edition `ORA$BASE`. We will also use **Oracle Online Redefinition** (PL/SQL package `DBMS_REDEF`) to redefine the `employee` table online.
 
 ## Task 1: Verify all the scripts 
 
-All these scripts are reviewed for understanding. If you want to directly execute the script, skip **Task 1** and proceed to **Task 2** 
+We will review all the scripts of the second Liquibase changelog for better understanding. If you want to directly execute the changelog, skip **Task 1** and proceed to **Task 2** 
 
-Now selected application containers can connect to the new edition using either a dedicated service or by issuing an `alter session` (either explicit or in the connection string).
+Now that the new edition is ready, instances of the new application version can use the new edition, using either a dedicated service or by issuing an `alter session`.
 
-Once the application is validated, all the new sessions can switch to the new edition by changing the database default:
+Once the application is validated, you can gradually roll over all the application servers, performing a truly rolling application upgrade.
+You can also change the database default edition so that all new sessions will see the new one.
 
-However, all the applications that are sensible to the change should explicitly set the edition so that reconnections will not cause any harm.
+However, all the applications that are sensitive to the change should explicitly set the edition, so that reconnections will not cause any harm.
 
-For this demo, we will integrate this step in a changelog that decommission the old edition.
+For this demo, we will integrate this step in a changelog that decommissions the old edition.
 
-The last changelog contains the SQL files that cleanup everything, drop the old edition and redefine the table without the `phone_number` column.
+The last changelog contains the SQL files that clean up everything, drop the old edition and redefine the table `employees`without the `phone_number` column.
 
 All the scripts are available in **hr.00003.edition\_v2\_post_rollout** directory.
 
 ```text
-<copy>cd changes/hr.00003.edition_v2_post_rollout</copy>
+<copy>cd ~/changes/hr.00003.edition_v2_post_rollout</copy>
 ```
 
-### 1. Alter session for v2 
-
-Script is setting edition as v2
+### 1. Alter session to use edition V2
 
 ![Alter session](images/alter-session.png " ")
 
-### 2. Change default edition as v2
+### 2. Change the default edition to V2
 
-As `HR` user, we achieve that using the helper procedure previously created.Internally, the procedure just runs `execute immediate 'alter database default edition ='||edition_name;`
+As the `HR` user, we can use the helper procedure previously created. Internally, the procedure runs `execute immediate 'alter database default edition ='||edition_name;`
 
 ![Change edition](images/change-edition.png " ")
 
-    --hr.000002.change_default_edition.sql
-    begin
-    admin.default_edition('V2');
-    end;
-    /
-
 ###3. Drop the old edition
+
+**This step will fail if any session is still connected to the old edition.**
 
 Here we use a helper procedure again:
 
 ![Drop old edition](images/drop-old-edition.png " ")
 
-The user has a `grant select on dba_editions`. The `drop_edition` procedure will execute internally a `execute immediate 'DROP EDITION '||edition_name||' CASCADE`, then a `dbms_editions_utilities.clean_unusable_editions`.
+The user has `grant select on dba_editions`. The `drop_edition` procedure will execute internally `execute immediate 'DROP EDITION '||edition_name||' CASCADE`, then `dbms_editions_utilities.clean_unusable_editions`.
+
 
 ### 4. Drop the cross-edition triggers
 
-Keeping the cross-edition triggers when the previous edition is no longer in use will just add overhead to the table DMLs.
+Now that nobody uses the old columns, it is safe to drop the cross-edition triggers.
 
 ![Drop triggers](images/drop-triggers.png " ")
 
@@ -78,11 +74,11 @@ Keeping the cross-edition triggers when the previous edition is no longer in use
 
 ![Drop interim table](images/drop-interim.png " ")
 
-The cascade constraints is necessary for the self-referencing foreign key (employee->manager).
+The clause "cascade constraints" is necessary for the self-referencing foreign key (employee->manager).
 
 ### 10. Run the changelog with Liquibase
 
-The changelog file will look similar to this. The script used is `hr.00003.edition_v2_post_rollout.xml` and this file is available in **changes** folder.
+The changelog file is `hr.00003.edition_v2_post_rollout.xml`, available in the **changes** directory.
 
 ![v2-post-rollout](images/v2-post-rollout.png " ")
 
@@ -90,7 +86,7 @@ The changelog file will look similar to this. The script used is `hr.00003.editi
 
 ![Cloud Shell home](images/cloudshell-home.png " ")
 
-***Home folder will be different for you***
+**The home directory will be different in your environment.**
 
 ```text
 <copy>cd ~</copy>
@@ -107,21 +103,24 @@ The changelog file will look similar to this. The script used is `hr.00003.editi
 
 ![sqlcl-hr](images/sqlcl-hr.png " ")
 
-Run the changelog 
+Run the changelog. **Remember, in this lab, we are the only user, so we can set the edition to V2 and immediately drop the old one. In real-world environments, you will need to change the default edition first, and ensure that no old sessions use the old edition, or you will not be able to drop it!**
 
 ```text
 <copy>cd changes</copy>
+<copy>alter session set edition=V2;</copy>
 <copy>lb update -changelog-file hr.00003.edition_v2_post_rollout.xml</copy>
 ```
 ![execute-changelog](images/execute-changelog.png " ")
 
-Verify for successful execution. In case if you are getting error like the below one, restart the ATP database from OCI console and retry again.
+Verify the outcome of the deployment. If you see the following error, it means you have old sessions connected to the old edition:
 
 ![execute-error](images/execute-error.png " ")
 
-You have successfully switched to the new edition, decommissioned the old edition and redefined the table online.
+You have successfully switched to the new edition, decommissioned the old edition and redefined the `employees` table online.
+
+This is the end of the **Edition-Based Redefinition** LiveLabs. We hope you enjoyed it!
 
 ## Acknowledgements
 
-- Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
+- Authors - Ludovico Caldara and Suraj Ramesh
 - Last Updated By/Date - Suraj Ramesh, Jan 2023

@@ -1,9 +1,9 @@
 {
-    "workshoptitle": "Evolve Oracle database applications online with Edition Based Redefinition,Online Redefinition",
+    "workshoptitle": "Evolve Oracle database applications online with Edition-Based Redefinition and Online Redefinition",
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
         {
-            "title": "Introduction to workshop",
+            "title": "Introduction to the workshop",
             "description": "Learn how to use Edition-Based Redefinition (EBR) and Online Table Reorganization (DBMS_REDEFINITION) along with SQLcl and its Liquibase integration. These unique Oracle technologies will let you evolve your database schemas online, without any interruption, using a rolling, blue-green deployment style.",
             "filename": "../../introduction/intro.md"
         },
@@ -13,12 +13,12 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
         },
         {
-            "title": "Lab 1: Download ATP Wallet and Lab Files",
+            "title": "Lab 1: Download the Autonomous Database Wallet and Lab Files",
             "description": "Get the wallet and connect to the newly created Autonomous Database",
             "filename": "../../connect-adb/connect-adb.md"
         },
         {
-            "title": "Lab 2: Connect to ATP database and prepare the HR schema",
+            "title": "Lab 2: Connect to the Autonomous Database and prepare the HR schema",
             "description": "This workshop uses a modified version of the well-known HR schema. Please set it up using this lab.",
             "filename": "../../setup-hr-schema/setup-hr-schema.md"
         },
@@ -28,28 +28,28 @@
             "filename": "../../review-hr-schema/review-hr-schema.md"
         },
         {
-            "title": "Lab 4: Use Liquibase to run the generate schema",
-            "description": "Use Liquibase to run the generate schema",
+            "title": "Lab 4: Use Liquibase to generate the base schema",
+            "description": "Use Liquibase to generate the base schema",
             "filename": "../../lb-genschema/lb-genschema.md"
         },
         {
-            "title": "Lab 5: Create Directory structure and sync the metadata",
-            "description": "Create Directory structure and sync the metadata",
+            "title": "Lab 5: Create the directory structure for Liquibase and sync the metadata",
+            "description": "Create the directory structure for Liquibase and sync the metadata",
             "filename": "../../directory-syncmetadata/directory-syncmetadata.md"
         },
         {
-            "title": "Lab 6: Review and update new edition scripts",
-            "description": "Review and update new edition scripts",
+            "title": "Lab 6: Review and deploy the changelog for the new edition",
+            "description": "Review and deploy the changelog for the new edition",
             "filename": "../../review-update-newedition/review-update-newedition.md"
         },
         {
-            "title": "Lab 7: Verify new edition",
-            "description": "Verify new edition",
+            "title": "Lab 7: Verify the new edition",
+            "description": "Verify the new edition",
             "filename": "../../verify-newedition/verify-newedition.md"
         },
         {
-            "title": "Lab 8: Switch to new edition and decommission the old edition",
-            "description": "Switch to new edition and decommission the old edition",
+            "title": "Lab 8: Switch to the new edition and decommission the old edition",
+            "description": "Switch to the new edition and decommission the old edition",
             "filename": "../../switch-decomm-editions/switch-decomm-editions.md"
         },
         {
