@@ -74,7 +74,42 @@ will be used only in the Lab4
 
     ![cloud-code-editor](images/cloud-code-editor.png)
 
-## Task 3: Understand Credentials, and Policies
+## Task 3: Deploy Infrastructure using Terraform
+
+1. To deploy the application, we will use a terraform scripts provided for this Lab. Click on the 'Deploy to Oracle Cloud ' button.  This will create a new window in your browser.
+
+  [![Deploy to Oracle Cloud - home](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle/nosql-examples/raw/master/zips/video-on-demand-with-nosql-database.zip)
+
+2. After successfully hitting the 'Deploy to Oracle Cloud' button, you will be brought to a new screen.
+
+  ![](images/cloud-account-name.png)
+
+
+3. Provide your **Cloud Account Name** (tenancy name, not your username or email) and click on Next.
+
+  Log into your account using your credentials (system may have remembered this from a prior log in).  You will see the Create Stack screen below:
+
+  ![](images/create-stack.png)
+
+  Click on the box "I have reviewed and accept the Oracle Terms of Use."  After clicking this box, it will populate the stack information, the name and the description.  Check the 'Create in compartment' box and make sure it shows demonosql.   If it does not, change it to demonosql.  
+
+4. Click on Next on bottom left of screen.  This will move you to the 'Configure Variables' screen. Configure the variables for the infrastructure resources that this stack needs prior to running the apply job.
+
+  Choose demonosql as _Compartment_  from the drop down list.
+
+  ![](images/configure-var.png)
+
+5. Click on Next, which brings you to the 'Review' screen.  Click on Create.
+
+  ![](images/review-screen.png)
+
+  A job will run automatically. It takes approx 1 minute. Wait still "State" field becomes **Succeeded.**  While it is running you will see a new screen that has the status displayed.   
+
+  ![](images/stack-progress.png)
+
+  Once it has succeeded you can delete that window from your browser.
+
+## Task 4: Understand Credentials, and Policies
 
 **Oracle NoSQL Database Cloud Service uses Oracle Cloud Infrastructure Identity
 and Access Management to provide secure access to Oracle Cloud.** Oracle Cloud

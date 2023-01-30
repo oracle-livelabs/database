@@ -90,7 +90,6 @@ will be used only in the Lab4
 
     ![cloud-code-editor](images/cloud-code-editor.png)
 
-
 ## Task 3: Understand Credentials, and Policies
 
 **Oracle NoSQL Database Cloud Service uses Oracle Cloud Infrastructure Identity
