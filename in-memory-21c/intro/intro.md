@@ -6,7 +6,7 @@
 
 It is similar in spirit to having a conventional index (for analytics) on every column in a table. However, it is much more lightweight than a conventional index, requiring no logging, or any writes to the database. Just as the performance benefit to an application from conventional indexes depends on the amount of time the application spends accessing data in the tables that are indexed, the benefit from the IM column store also depends on the amount of time the application spends on data access for analytic operations.
 
-*Estimated Workshop Time*: 2 hours
+*Estimated Workshop Time*: 90 minutes
 
 Watch the video below for an overview of Oracle In-Memory.
 
