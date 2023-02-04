@@ -168,34 +168,19 @@ In this lab, you will be guided through the following tasks:
 
     **Note:** MySQL Community Server can also be downloaded by visiting this website: <https://dev.mysql.com/downloads/mysql/>
 
-2. Start the MySQL server after it has been successfully installed onto your Compute instance. Find your mysqld.log file, grab the temporary password, and login to your MySQL environment
+2. Start the MySQL server after it has been successfully installed onto your Compute instance. Once the server starts, login to MySQL:
 
     ```bash
     <copy>sudo systemctl start mysqld</copy>
-    ````
-
-    ````bash
-    <copy>sudo find / -iname mysqld.log</copy>
-    ````
-
-    ````bash
-    <copy>grep 'temporary password' <paste-the-path-obtained-here-from-the-above-command></copy>
-    ````
-
-    ````bash
-    <copy>mysql -u root -p<temporary-password></copy>
     ```
 
-    **Note:** during our installation of the MySQL server, it created a root account without a password. Hence, we can just skip some the above steps and can login like so:
     ```bash
-    <copy>sudo systemctl start mysqld</copy>
-    ````
-
-    ````bash
     <copy>mysql -uroot --skip-password</copy>
     ```
 
     ![](./images2/start-mysql1.png "start-mysql")
+
+    **Note:** during the installation of the MySQL server, it created a root account without a password. Therefore we have explicitly specified that there is no password and that the client program should not prompt for one, by providing the --skip-password option.
 
 3. Change the root password
 
