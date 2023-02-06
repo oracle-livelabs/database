@@ -1,4 +1,4 @@
-# Update XML Content
+# Update XML content
 
 ## Introduction
 This lab will use the SQL Workshop in Database Actions from the Autonomous Transaction Processing page. In this lab, we will explore XQuery to update XML content in Oracle XML DB. XQuery is one of the main ways that you interact with XML data in Oracle XML DB. It is the W3C language designed for querying and updating XML data. 
@@ -89,7 +89,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-1.png)
+![Image alt text](images/img-1.png)
 
  
 
@@ -107,7 +107,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-2.png)
+![Image alt text](images/img-2.png)
 
  
 
@@ -126,7 +126,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-3.png)
+![Image alt text](images/img-3.png)
 
 You should see the updated XML doc for id 1.
 
@@ -134,7 +134,7 @@ You should see the updated XML doc for id 1.
 
 Now roll back to the previous content.
 
-![Image alt text](imgs/img-4.png)
+![Image alt text](images/img-4.png)
 
  
 
@@ -162,7 +162,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-5.png)
+![Image alt text](images/img-5.png)
 
  
 
@@ -188,7 +188,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-6.png)
+![Image alt text](images/img-6.png)
 
  
 
@@ -213,7 +213,7 @@ ROLLBACK;
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-7.png)
+![Image alt text](images/img-7.png)
 
  
 
@@ -239,7 +239,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-8.png)
+![Image alt text](images/img-8.png)
 
  
 
@@ -269,7 +269,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-9.png)
+![Image alt text](images/img-9.png)
 
  
 
@@ -292,7 +292,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-10.png)
+![Image alt text](images/img-10.png)
 
  
 
@@ -318,7 +318,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-11.png)
+![Image alt text](images/img-11.png)
 
  
 
@@ -342,7 +342,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-12.png)
+![Image alt text](images/img-12.png)
 
  
 
@@ -365,7 +365,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-13.png)
+![Image alt text](images/img-13.png)
 
  
 
@@ -394,7 +394,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-14.png)
+![Image alt text](images/img-14.png)
 
  
 
@@ -429,7 +429,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-15.png)
+![Image alt text](images/img-15.png)
 
  
 
@@ -444,9 +444,10 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-16.png)
+![Image alt text](images/img-16.png)
 
- 
+You may now **proceed to the next lab**.
+
 ## Learn More
 - [Database 19c - JSON] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=638)
 - [Developing with JSON and SODA in Oracle Database] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=831)

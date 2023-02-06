@@ -1,4 +1,4 @@
-# Generating Relational Data from XML Data
+# Generate relational data from XML data
 
 ## Introduction
 
@@ -62,7 +62,7 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-1.png)
+![Image alt text](images/img-1.png)
 
 ### QRX2. Creating Relational Views
 
@@ -98,7 +98,7 @@ CREATE OR REPLACE VIEW V_PURCHASEORDER AS
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-2.png)
+![Image alt text](images/img-2.png)
 
 
 ### RV2. Create a LineItem relational view
@@ -132,7 +132,7 @@ CREATE OR REPLACE VIEW V_LINEITEM AS
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-3.png)
+![Image alt text](images/img-3.png)
 
  
 
@@ -166,7 +166,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-4.png)
+![Image alt text](images/img-4.png)
 
  
 
@@ -196,7 +196,7 @@ ORDER BY
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-5.png)
+![Image alt text](images/img-5.png)
 
  
     
@@ -223,7 +223,7 @@ GROUP BY
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-6.png)
+![Image alt text](images/img-6.png)
 
  
 
@@ -256,9 +256,10 @@ ORDER BY
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-7.png)
+![Image alt text](images/img-7.png)
 
- 
+You may now **proceed to the next lab**.
+
 ## Learn More
 - [Database 19c - JSON] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=638)
 - [Developing with JSON and SODA in Oracle Database] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=831)

@@ -1,4 +1,4 @@
-# Create Tables and Populate Data
+# Create tables and populate data
 
 ## Introduction
 This lab will use the SQL Workshop in Database Actions from the Autonomous Transaction Processing page. We will create a simple table with an XMLType column in it and populate the table with some XML documents.
@@ -56,18 +56,18 @@ CREATE TABLE PURCHASEORDER (
 ```
 You should see the message "Table PURCHASEORDER created". 
 
-![Image alt text](imgs/img-1.png)
+![Image alt text](images/img-1.png)
 
 On the left side, click the "Refresh" button to see your new table in the tables list.
 
-![Image alt text](imgs/img-2.png)
+![Image alt text](images/img-2.png)
 
 3.	Populate the table with a few rows. 
 Use the 'trashcan' icon to delete the previous statement from the Worksheet area. Copy the following SQL into the worksheet area. Make sure you highlight the whole statement with your mouse and press the "Run Statement" button:
 
 Here we are assuming that the XML files are stored in the Object store. So, we will now load the XML data to our table from the Object store.
 
-Note: The value of OBJECT_URI has been modified here. ```url/livelab-xmldoc-1.xml``` is not the actual value.
+**Note:** The value of OBJECT_URI has been modified here. ```url/livelab-xmldoc-1.xml``` is not the actual value.
 The actual link is the authenticated link retrieved from the object store. Please refer to object store how to get it.
 If you find it difficult to load the data into the tables, please use other approaches you find appropriate. The most easy to follow approach is ```insert into [TABLE] (...)```. 
 
@@ -105,7 +105,7 @@ END;
 </copy>
 ```
 
-![Image alt text](imgs/img-3.png)
+![Image alt text](images/img-3.png)
 
 Similarly, we can insert other sample documents.
 
@@ -230,7 +230,7 @@ FROM
 
 Now the table PURCHASEORDER table should have 5 rows.
 
-![Image alt text](imgs/img-4.png)
+![Image alt text](images/img-4.png)
 
 4.	Check that we have rows in the table. 
 
@@ -249,9 +249,11 @@ FROM
 You should see the rows you inserted. You can expand the view to see the whole text 
 column by adjusting the column header. 
 
-![Image alt text](imgs/img-5.png)
+![Image alt text](images/img-5.png)
 
 If there are no rows shown, return to Step 3.
+
+You may now **proceed to the next lab**.
 
 ## Learn More
 - [Database 19c - JSON] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=638)

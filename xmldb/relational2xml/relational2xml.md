@@ -1,4 +1,4 @@
-# Converting Relational Data to XML Data
+# Convert relational data to XML data
 
 ## Introduction
 Some applications expect XML data or in some contexts, we might need data in XML format. Let's assume that we have all the data that we need to feed to applications in relational tables. Oracle XML DB will help you generate XML data from relational tables.
@@ -51,7 +51,7 @@ CREATE TABLE DEPARTMENTS (
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-1.png)
+![Image alt text](images/img-1.png)
  
 
 Table locations:
@@ -70,7 +70,7 @@ CREATE TABLE LOCATIONS (
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-2.png)
+![Image alt text](images/img-2.png)
 
 
 ```
@@ -93,7 +93,7 @@ commit;
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-3.png)
+![Image alt text](images/img-3.png)
 
  
 
@@ -131,7 +131,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-4.png)
+![Image alt text](images/img-4.png)
 
  
 
@@ -175,7 +175,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-5.png)
+![Image alt text](images/img-5.png)
 
  
 
@@ -191,7 +191,7 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-6.png)
+![Image alt text](images/img-6.png)
  
 
 ### QXR3. Querying Over XMLType Views
@@ -213,7 +213,7 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-7.png)
+![Image alt text](images/img-7.png)
 
  
 
@@ -234,9 +234,10 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-8.png)
+![Image alt text](images/img-8.png)
 
- 
+You may now **proceed to the next lab**.
+
 ## Learn More
 - [Database 19c - JSON] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=638)
 - [Developing with JSON and SODA in Oracle Database] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=831)

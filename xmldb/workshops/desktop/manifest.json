@@ -8,7 +8,7 @@
       "filename": "../../introduction/introduction.md"
     },
     {
-      "title": "Get Started",
+      "title": "Get started",
       "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
       "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
     },
@@ -18,19 +18,19 @@
       "filename": "../../provision/provision.md"
     },
     {
-      "title": "Lab 2: Create Tables and Populate Data",
+      "title": "Lab 2: Create tables and populate data",
       "filename": "../../populate/populate.md"
     },
     {
-      "title": "Lab 3: Run Queries",
+      "title": "Lab 3: Run queries",
       "filename": "../../queries/queries.md"
     },
     {
-      "title": "Lab 4: Generate Relational Data from XML Data",
+      "title": "Lab 4: Generate relational data from XML data",
       "filename": "../../xml2relational/xml2relational.md"
     },
     {
-      "title": "Lab 5: Convert Relational Data to XML Data",
+      "title": "Lab 5: Convert relational data to XML data",
       "filename": "../../relational2xml/relational2xml.md"
     },
     {
@@ -38,7 +38,7 @@
       "filename": "../../index/index.md"
     },
     {
-      "title": "Lab 7: Update XML Content",
+      "title": "Lab 7: Update XML content",
       "filename": "../../update/update.md"
     },
     {

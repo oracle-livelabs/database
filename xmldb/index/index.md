@@ -80,7 +80,7 @@ END;
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-1.png)
+![Image alt text](images/img-1.png)
 
  
 
@@ -106,7 +106,7 @@ END;
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-2.png)
+![Image alt text](images/img-2.png)
 
  
 
@@ -124,7 +124,7 @@ INDEXTYPE IS XDB.XMLINDEX PARAMETERS ( 'PARAM PO_SXI_PARAMETERS' );
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-3.png)
+![Image alt text](images/img-3.png)
 
  
 
@@ -147,7 +147,7 @@ CREATE INDEX UPC_IDX ON
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-4.png)
+![Image alt text](images/img-4.png)
 
  
 
@@ -169,7 +169,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](imgs/img-5.png)
+![Image alt text](images/img-5.png)
 
  
 
@@ -191,7 +191,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](imgs/img-6.png)
+![Image alt text](images/img-6.png)
 
  
 
@@ -221,7 +221,7 @@ END;
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-7.png)
+![Image alt text](images/img-7.png)
 
  
 
@@ -238,7 +238,7 @@ INDEXTYPE IS CTXSYS.CONTEXT PARAMETERS ( 'storage STORAGE_PREFS
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-8.png)
+![Image alt text](images/img-8.png)
 
  
 
@@ -262,7 +262,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](imgs/img-9.png)
+![Image alt text](images/img-9.png)
  
 
 
@@ -286,7 +286,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](imgs/img-10.png)
+![Image alt text](images/img-10.png)
 
  
 
@@ -309,7 +309,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](imgs/img-11.png)
+![Image alt text](images/img-11.png)
  
 
 ### SIQ4. 
@@ -331,7 +331,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](imgs/img-12.png)
+![Image alt text](images/img-12.png)
  
 
 ### SIQ5. 
@@ -354,7 +354,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](imgs/img-13.png)
+![Image alt text](images/img-13.png)
  
 
 ```
@@ -374,7 +374,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](imgs/img-14.png)
+![Image alt text](images/img-14.png)
  
 
 ```
@@ -394,8 +394,9 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](imgs/img-15.png)
+![Image alt text](images/img-15.png)
  
+You may now **proceed to the next lab**.
 
 ## Learn More
 - [Database 19c - JSON] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=638)

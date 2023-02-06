@@ -58,7 +58,7 @@ XML is one of the popular ways to persist and exchange business-critical informa
 To meet this need, Oracle developed Oracle XML DB. Oracle XML DB is a high-performance, native XML storage, and retrieval technology that is delivered as a part of Oracle Database. Oracle XML DB allows an organization to manage XML content in the same way that it manages traditional relational data. This allows organizations to save costs and improve return on investment by using a single platform to manage and secure all their mission-critical data. Oracle XML DB was first released with Oracle 9iR2, and it has been enhanced in each subsequent major release of the database.
 
 
-# Objectives
+## Objectives
 
 In this workshop, we intend to cover the following topics:
 -	How to provision an Oracle Autonomous Database
@@ -71,6 +71,8 @@ In this workshop, we intend to cover the following topics:
 ### Prerequisites
 
 -	An Oracle Cloud Account
+
+You may now **proceed to the next lab**.
 
 ## Learn More
 - [Database 19c - JSON] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=638)

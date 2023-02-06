@@ -1,4 +1,4 @@
-# Run Queries
+# Run queries
 
 ## Introduction
 
@@ -91,7 +91,7 @@ WHERE
 </copy>
 ``` 
 
-![Image alt text](imgs/img-1.png)
+![Image alt text](images/img-1.png)
 
 ### Q2. Searching for the specific XML documents
 If we want to search for specific XML documents, we can use XMLExists SQL/XML function in the where clause. Based on the XQuery expression provided in the XMLExists function, it will filter out the XML documents we are looking for.
@@ -113,7 +113,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-2.png)
+![Image alt text](images/img-2.png)
  
 
 The next query is even more specific, and it will return the XML documents where XPath /PurchaseOrder/Reference has 'ROY-1PDT' as the value.
@@ -133,7 +133,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-3.png)
+![Image alt text](images/img-3.png)
 
 
 ```
@@ -153,7 +153,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](imgs/img-4.png)
+![Image alt text](images/img-4.png)
 
 
 ### Q3. Accessing fragments or nodes of the XML documents
@@ -178,7 +178,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](imgs/img-5.png)
+![Image alt text](images/img-5.png)
 
 
 ### Q4. Extracting the scalar value from XML fragments or nodes
@@ -203,7 +203,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](imgs/img-6.png)
+![Image alt text](images/img-6.png)
 
 
 You can also use the text() function for the same.
@@ -225,7 +225,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-7.png)
+![Image alt text](images/img-7.png)
 
 
 ### Q5. Generating relation data from XML data
@@ -259,7 +259,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](imgs/img-8.png)
+![Image alt text](images/img-8.png)
 
 
 Furthermore, we can chain the XMLTable calls when we want to see data contained in multiple levels. For example, in the following example, the element PurchaseOrder is first decomposed to a relational view of two columns, reference as varchar2 and lineitem as XMLType. The lineitem column is then passed to a second XMLTable call to be broken into its various parts as multiple columns of relational values.
@@ -295,7 +295,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](imgs/img-9.png)
+![Image alt text](images/img-9.png)
 
 
 In the above examples, we have used very simple XQuery expression, and XPath expression, and passed them to the XMLTable function. However, users can pass any XQuery expression they want. In the following queries, we will use a little bit of complex XQuery just for demonstration purposes.
@@ -315,7 +315,7 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](imgs/img-10.png)
+![Image alt text](images/img-10.png)
 
 
 Similarly, we can have multiple predicates as follows:
@@ -337,7 +337,7 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](imgs/img-11.png)
+![Image alt text](images/img-11.png)
 
 
 ### Q6. Joining relational tables with XML tables/columns
@@ -362,7 +362,7 @@ COMMIT;
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-12.png)
+![Image alt text](images/img-12.png)
  
 
 ```
@@ -376,7 +376,7 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](imgs/img-13.png)
+![Image alt text](images/img-13.png)
 
 
 ```
@@ -402,7 +402,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](imgs/img-14.png)
+![Image alt text](images/img-14.png)
 
 
 In the above query, we have used the similar XMLTABLE query described in Q5 to keep it simple. Feel free to use other XMLTABLE queries and try different things.
@@ -430,7 +430,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](imgs/img-15.png)
+![Image alt text](images/img-15.png)
 
 
 The following query will do just the same.
@@ -459,7 +459,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](imgs/img-16.png)
+![Image alt text](images/img-16.png)
 
 
 ### Q8. Serialize XML data 
@@ -487,7 +487,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](imgs/img-17.png)
+![Image alt text](images/img-17.png)
 
 
 ```
@@ -514,8 +514,9 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](imgs/img-18.png)
+![Image alt text](images/img-18.png)
 
+You may now **proceed to the next lab**.
 
 ## Learn More
 - [Database 19c - JSON] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=638)
