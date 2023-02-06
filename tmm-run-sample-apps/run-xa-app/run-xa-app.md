@@ -127,7 +127,7 @@ To provide the configuration and environment details in the `values.yaml` file:
     * `databaseUser`: Enter the user name to access the database, such as SYS.
     * `databasePassword`: Enter the password to access the database for the specific user.
     * `resourceManagerId`: A unique identifier (uuid) to identify a resource manager. Enter a random value for this lab as shown below.
-   
+
    The `values.yaml` file contains many properties. For readability, only the resource manager properties for which you must provide values are listed in the following sample code snippet.
 
     ```text
@@ -169,7 +169,7 @@ Install the XA sample application in the `otmm` namespace, where Transaction Man
     </copy>
     ```
 
-   Where, `sample-xa-app` is the name of the application that you want to install. You can provide another name to the installed application. 
+   Where, `sample-xa-app` is the name of the application that you want to install. You can provide another name to the installed application.
 2. Verify that the application has been deployed successfully.
    ```text
     <copy>
@@ -314,7 +314,7 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
 
     Where, `192.0.2.117` is the external IP address of the Istio ingress gateway. Replace this with a value specific to your environment.
 
-## Task 6: Clean up the livelabs stack
+<!-- ## Task 6: Clean up the livelabs stack
 
 Perform this task only if you want to clean up the livelabs stack provisioned using Resource Manager. Performing this task will delete all the stack resources including the remote desktop instance.
 
@@ -329,7 +329,7 @@ Perform this task only if you want to clean up the livelabs stack provisioned us
 8. Confirm the operation when prompted.
 
 ![Destroy the stack resources](./images/destroy-stack.png)
-![Delete the stack](./images/delete-stack.png)
+![Delete the stack](./images/delete-stack.png) -->
 
 ## Learn More
 

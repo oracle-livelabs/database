@@ -21,7 +21,7 @@ Following is the topology used for System Managed Sharding we will create in thi
 *Estimated Lab Time:* 60 minutes.
 
 Watch the video below for a quick walk through of the lab.
-[](youtube:8r3cvL5s7nk)
+[Deployment the Sharded Database](videohub:1_m1amf8pg)
 
 ### Objectives
 
@@ -67,14 +67,14 @@ In this workshop we choose to co-locate the shard director software on the same 
     </copy>
     ```
 
-3. Switch to the GSM environment.
+2. Switch to the GSM environment.
 
     ```
     [oracle@cata ~]$ <copy>. ./gsm.sh</copy>
     [oracle@cata ~]$
     ```
 
-4. Unzip the Installation package. For your convenience and in the interest of time, the *Oracle Database 19c Global Service Manager (GSM)* software package has been downloaded from Oracle E-Delivery platform and staged under */opt/oracle/stage*. It's also available from OTN like DB and other Oracle software.
+3. Unzip the Installation package. For your convenience and in the interest of time, the *Oracle Database 19c Global Service Manager (GSM)* software package has been downloaded from Oracle E-Delivery platform and staged under */opt/oracle/stage*. It's also available from OTN like DB and other Oracle software.
 
 
     ```
@@ -86,7 +86,7 @@ In this workshop we choose to co-locate the shard director software on the same 
     </copy>
     ```
 
-6. Run the following block to create the response file needed for a silent install.
+4. Run the following block to create the response file needed for a silent install.
 
     ```
     <copy>
@@ -130,20 +130,20 @@ In this workshop we choose to co-locate the shard director software on the same 
     ls -ltrh response/gsm_install_livelabs.rsp
     </copy>
     ```
-7. Create the gsm home directory.
+5. Create the gsm home directory.
 
     ```
     [oracle@cata /opt/oracle/stage/gsm]$ <copy>mkdir -p /opt/oracle/product/19c/gsmhome_1</copy>
     [oracle@cata /opt/oracle/stage/gsm]$
     ```
 
-8. Install the gsm
+6. Install the gsm
 
     ```
     [oracle@cata /opt/oracle/stage/gsm]$ <copy>./runInstaller -silent -responseFile /opt/oracle/stage/gsm/response/gsm_install_livelabs.rsp -showProgress -ignorePrereq</copy>
     ```
 
-9. The progress screen like this. Ignore the warning.
+7. The progress screen will look like this. Ignore the warning.
 
     ```
     Starting Oracle Universal Installer...
@@ -216,7 +216,7 @@ In this workshop we choose to co-locate the shard director software on the same 
     **Notes:** Ignore the warning in the *Prerequisites* part at the beginning of the output above. It's due to the swap size being lower than the recommended value based on available memory
 
 
-11. Run the root.sh as **oracle** user using **SUDO**.
+8. Run the root.sh as **oracle** user using **SUDO**.
 
     ```
     [oracle@cata /opt/oracle/stage/gsm]$ <copy>sudo /opt/oracle/product/19c/gsmhome_1/root.sh</copy>
@@ -273,14 +273,14 @@ In this workshop we choose to co-locate the shard director software on the same 
     [oracle@cata ~]$ <copy>sqlplus / as sysdba</copy>
 
     SQL*Plus: Release 19.0.0.0.0 - Production on Sun Nov 29 02:50:15 2020
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
 
     Copyright (c) 1982, 2020, Oracle.  All rights reserved.
 
 
     Connected to:
     Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
 
     SQL>
     ```
@@ -368,16 +368,16 @@ In this workshop we choose to co-locate the shard director software on the same 
     SQL> <copy>connect / as sysdba</copy>
     Connected.
 
-    SQL> archive log list
+    SQL> <copy>archive log list</copy>
     Database log mode	       No Archive Mode
     Automatic archival	       Disabled
-    Archive destination	       /opt/oracle/product/19c/dbhome_1/dbs/arch
+    Archive destination	       USE_DB_RECOVERY_FILE_DEST
     Oldest online log sequence     10
     Current log sequence	       12
     SQL>
     ```
 
-9. Check the flashback status.
+9. Check the flashback status. Output will be similar to the one shown below depending on your environment.
 
     ```
     SQL> <copy>select flashback_on from v$database;</copy>
@@ -387,11 +387,11 @@ In this workshop we choose to co-locate the shard director software on the same 
     NO
 
     SQL> <copy>show parameter db_recovery_file</copy>
-
     NAME				     TYPE	 VALUE
     ------------------------------------ ----------- ------------------------------
-    db_recovery_file_dest		     string
-    db_recovery_file_dest_size	     big integer 0
+    db_recovery_file_dest		     string	     /opt/oracle/fast_recovery_area
+    db_recovery_file_dest_size	     big integer 12732M
+
     SQL>
     ```
 
@@ -449,29 +449,36 @@ In this workshop we choose to co-locate the shard director software on the same 
 
 ## Task 3: Setup Shard Databases
 
-The following steps need to do in all the shard database side. We only provide steps for shard1.
+The following steps need to be done in all the shard databases. We only provide steps for shard1.
 
 1. Duplicate the remote desktop browser tab connecting to host *cata* and replace the IP address in the address bar with the Public IP address of host *shd1*.
 
-2. Connect to the shard database as sysdba.
+2. Make sure you are in the shd1 (or shd2/shd3) database environment by running *`. .set-env-db.sh`* and selecting the appropriate shard from the list.
+
+    ```
+    [oracle@cata ~]$ <copy>. .set-env-db.sh</copy>
+    ```
+
+
+3. Connect to the shard database as sysdba.
 
     ```
     [oracle@shd1 ~]$ <copy>sqlplus / as sysdba</copy>
 
     SQL*Plus: Release 19.0.0.0.0 - Production on Sun Nov 29 03:16:25 2020
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
 
     Copyright (c) 1982, 2020, Oracle.  All rights reserved.
 
 
     Connected to:
     Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.14.0.0.0
+    Version 19.11.0.0.0
 
     SQL>
     ```
 
-3. Unlock the gsmrootuser user.
+4. Unlock the gsmrootuser user.
 
     ```
     SQL> <copy>alter user gsmrootuser account unlock;</copy>
@@ -490,7 +497,7 @@ The following steps need to do in all the shard database side. We only provide s
     ```
 
 
-4. A directory object named `DATA_PUMP_DIR` must be created and accessible in the shard database from the `GSMADMIN_INTERNAL` account.
+5. A directory object named `DATA_PUMP_DIR` must be created and accessible in the shard database from the `GSMADMIN_INTERNAL` account.
 
     ```
     SQL> <copy>select directory_path from dba_directories where directory_name='DATA_PUMP_DIR';</copy>
@@ -508,7 +515,7 @@ The following steps need to do in all the shard database side. We only provide s
 
 
 
-5. Unlock the gsmuser.
+6. Unlock the gsmuser.
 
     ```
     SQL> <copy>alter user gsmuser account unlock;</copy>
@@ -528,7 +535,7 @@ The following steps need to do in all the shard database side. We only provide s
 
 
 
-6. Set the `DB_FILES` database initialization parameter greater than or equal to the total number of chunks and/or tablespaces in the system.
+7. Set the `DB_FILES` database initialization parameter greater than or equal to the total number of chunks and/or tablespaces in the system.
 
     ```
     SQL> <copy>alter system set db_files=1024 scope=spfile;</copy>
@@ -540,7 +547,7 @@ The following steps need to do in all the shard database side. We only provide s
 
 
 
-7. Set the `dg_broker_start` to true for data guard replication. We will not use the data guard standby in this workshop.
+8. Set the `dg_broker_start` to true for data guard replication. We will not use the data guard standby in this workshop.
 
     ```
     SQL> <copy>alter system set dg_broker_start=true scope=both;</copy>
@@ -552,7 +559,7 @@ The following steps need to do in all the shard database side. We only provide s
 
 
 
-8. (Optional) To support file movement from shard to shard, the `DB_FILE_NAME_CONVERT` database parameter must be set to a valid value. This location is used when standby databases are in use, as is typical with non-sharded databases, and the location can also be used during chunk movement operations. (**Note**: If you current host is shd2 or shd3, you should modify the command from SHDSTB1, SHD1 to SHDSTB2, SHD2 or SHDSTB3, SHD3)
+9. (Optional) To support file movement from shard to shard, the `DB_FILE_NAME_CONVERT` database parameter must be set to a valid value. This location is used when standby databases are in use, as is typical with non-sharded databases, and the location can also be used during chunk movement operations. (**Note**: If you current host is shd2 or shd3, you should modify the command from SHDSTB1, SHD1 to SHDSTB2, SHD2 or SHDSTB3, SHD3)
 
     ```
     SQL> <copy>alter system set db_file_name_convert='/SHDSTB1/','/SHD1/' scope=spfile;</copy>
@@ -564,7 +571,7 @@ The following steps need to do in all the shard database side. We only provide s
 
 
 
-9. Connect to the shard pdb. (**Note**: If you current host is shd2 or shd3, you should change the pub name from shdpdb1 to shdpdb2 or shdpdb3)
+10. Connect to the shard pdb. (**Note**: If you current host is shd2 or shd3, you should change the pdb name from shdpdb1 to shdpdb2 or shdpdb3)
 
     ```
     SQL> <copy>show pdbs</copy>
@@ -583,7 +590,7 @@ The following steps need to do in all the shard database side. We only provide s
 
 
 
-10. Unlock the gsmuser in pdb.
+11. Unlock the gsmuser in pdb.
 
     ```
     SQL> <copy>alter user gsmuser account unlock;</copy>
@@ -599,7 +606,7 @@ The following steps need to do in all the shard database side. We only provide s
 
 
 
-11. To support Oracle Managed Files, used by the sharding chunk management infrastructure, the `DB_CREATE_FILE_DEST` database parameter must be set to a valid value.
+12. To support Oracle Managed Files, used by the sharding chunk management infrastructure, the `DB_CREATE_FILE_DEST` database parameter must be set to a valid value.
 
     ```
     SQL> <copy>show parameter db_create_file_dest</copy>
@@ -616,7 +623,7 @@ The following steps need to do in all the shard database side. We only provide s
     ```
 
 
-12. A directory object named `DATA_PUMP_DIR` must be created and accessible in the shard database from the `GSMADMIN_INTERNAL` account.
+13. A directory object named `DATA_PUMP_DIR` must be created and accessible in the shard database from the `GSMADMIN_INTERNAL` account.
 
     ```
     SQL> <copy>grant read, write on directory DATA_PUMP_DIR to gsmadmin_internal;</copy>
@@ -626,7 +633,7 @@ The following steps need to do in all the shard database side. We only provide s
     ```
 
 
-13. Connect to the CDB. Enable achivelog and flashback on.
+14. Connect to the CDB. Enable achivelog and flashback on.
 
     ```
     SQL> <copy>connect / as sysdba</copy>
@@ -672,7 +679,7 @@ The following steps need to do in all the shard database side. We only provide s
     SQL>
     ```
 
-14. (Optional)  If your shard database will use standby shard databases, you must enable the `FORCE LOGGING` mode.
+15. (Optional)  If your shard database will use standby shard databases, you must enable the `FORCE LOGGING` mode.
 
     ```
     SQL> <copy>alter database force logging;</copy>
@@ -682,7 +689,7 @@ The following steps need to do in all the shard database side. We only provide s
     SQL>
     ```
 
-15. Connect to the shard pdb and validate the shard. The `validateShard` procedure can and should be run against primary, mounted (unopened) standby, and Active Data Guard standby databases that are part of the sharded database configuration. (**Note**: If you current host is shd2 or shd3, you should change the container name from shdpdb1 to shdpdb2 or shdpdb3).
+16. Connect to the shard pdb and validate the shard. The `validateShard` procedure can and should be run against primary, mounted (unopened) standby, and Active Data Guard standby databases that are part of the sharded database configuration. (**Note**: If you current host is shd2 or shd3, you should change the container name from shdpdb1 to shdpdb2 or shdpdb3).
 
     ```
     SQL> <copy>alter session set container=shdpdb1;</copy>
@@ -693,7 +700,7 @@ The following steps need to do in all the shard database side. We only provide s
     SQL> <copy>execute dbms_gsm_fix.validateShard</copy>
     ```
 
-16. The result likes this. All output lines marked `ERROR` must be fixed before moving on to the next deployment steps.
+17. The result looks likes this. All output lines marked `ERROR` must be fixed before moving on to the next deployment steps.
 
     ```
     INFO: Data Guard shard validation requested.
@@ -728,14 +735,14 @@ The following steps need to do in all the shard database side. We only provide s
     SQL>
     ```
 
-17. If you use data guard, you need modify the parameters in the standby database and validate the shard configurations.
+18. If you use data guard, you need modify the parameters in the standby database and validate the shard configurations.
 
-18. Repeat previous steps to set up all shard databases. You can only setup shard1 and shard2 if you don't want add the third shard in the workshop.
+19. Repeat all previous steps of this task to set up all the remaining shard databases. Note you may need to modify the shard name in some copy statements
 
 
 ## Task 4: Configure the Shard Database Topology
 
-1. Switch back to the browser tab connecting to the remote desktop session for catalog database host (*cata*)
+1. Switch to the browser tab connecting to the remote desktop session for catalog database host (*cata*)
 
 
 2. Switch to the GSM environment.
@@ -938,9 +945,9 @@ The following steps need to do in all the shard database side. We only provide s
     GDSCTL> <copy>config vncr</copy>
     Name                          Group ID                      
     ----                          --------                      
-    10.0.1.5                                                    
-    shd1                                                        
-    shd2                                                        
+    10.0.0.151                                                    
+    shd1.livelabs.oraclevcn.com                                             
+    shd2.livelabs.oraclevcn.com                                             
 
     GDSCTL>
     ```
@@ -950,8 +957,8 @@ The following steps need to do in all the shard database side. We only provide s
     ```
     GDSCTL> <copy>add invitednode 127.0.0.1</copy>
     GDSCTL> <copy>add invitednode cata</copy>
-    GDSCTL> <copy>add invitednode 10.0.1.2</copy>
-    GDSCTL> <copy>add invitednode 10.0.1.4</copy>
+    GDSCTL> <copy>add invitednode 10.0.0.152</copy>
+    GDSCTL> <copy>add invitednode 10.0.0.153</copy>
     GDSCTL>
     ```
 
@@ -961,13 +968,13 @@ The following steps need to do in all the shard database side. We only provide s
     GDSCTL> <copy>config vncr</copy>
     Name                          Group ID                      
     ----                          --------                      
-    10.0.1.2                                                    
-    10.0.1.4                                                    
-    10.0.1.5                                                    
+    10.0.0.151                                                    
+    10.0.0.152                                                    
+    10.0.0.153                                                    
     127.0.0.1                                                   
     cata                                                        
-    shd1                                                        
-    shd2                                                        
+    shd1.livelabs.oraclevcn.com                                            
+    shd2.livelabs.oraclevcn.com                                             
 
     GDSCTL>
     ```
@@ -1034,7 +1041,7 @@ The following steps need to do in all the shard database side. We only provide s
     ----           ------------                  ----           ------- -------------
     oltp_rw_srvc   oltp_rw_srvc.orasdb.oradbcloud orasdb         Yes     Yes                                                                             
 
-    GDSCTL> status service
+    GDSCTL> <copy>status service</copy>
     Service "oltp_rw_srvc.orasdb.oradbcloud" has 2 instance(s). Affinity: ANYWHERE
        Instance "orasdb%1", name: "shd1", db: "shd1_shdpdb1", region: "region1", status: ready.
        Instance "orasdb%11", name: "shd2", db: "shd2_shdpdb2", region: "region1", status: ready.
@@ -1094,5 +1101,5 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Minqiao Wang, DB Product Management, Dec 2020
-* **Contributors** - Rene Fontcha
-* **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, September 2022
+* **Contributors** - Rene Fontcha, Shefali Bhargava
+* **Last Updated By/Date** - Shefali Bhargava, DB Sharding Product Management, October 2022
