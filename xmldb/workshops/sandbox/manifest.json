@@ -1,0 +1,54 @@
+{
+  "workshoptitle": "Oracle XML DB: Storing and Processing XML Documents",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The introduction of Oracle XML DB basic capabilities.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+    },
+    {
+      "title": "Lab 1: Provision an Autonomous Database",
+      "description": "Labs that follow the introduction are numbered, starting with Lab 1",
+      "filename": "../../provision/provision.md"
+    },
+    {
+      "title": "Lab 2: Create Tables and Populate Data",
+      "filename": "../../populate/populate.md"
+    },
+    {
+      "title": "Lab 3: Run Queries",
+      "filename": "../../queries/queries.md"
+    },
+    {
+      "title": "Lab 4: Generate Relational Data from XML Data",
+      "filename": "../../xml2relational/xml2relational.md"
+    },
+    {
+      "title": "Lab 5: Convert Relational Data to XML Data",
+      "filename": "../../relational2xml/relational2xml.md"
+    },
+    {
+      "title": "Lab 6: Index XML data",
+      "filename": "../../index/index.md"
+    },
+    {
+      "title": "Lab 7: Update XML Content",
+      "filename": "../../update/update.md"
+    },
+    {
+      "title": "Lab 8: Clean up Oracle Autonomous Database",
+      "filename": "https://oracle-livelabs.github.io/common/labs/terminate-adb/terminate-adb.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}
