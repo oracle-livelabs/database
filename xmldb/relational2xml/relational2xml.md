@@ -3,7 +3,7 @@
 ## Introduction
 Some applications expect XML data or in some contexts, we might need data in XML format. Let's assume that we have all the data that we need to feed to applications in relational tables. Oracle XML DB will help you generate XML data from relational tables.
 
-Estimated Time: XYZ minutes
+Estimated Time: 20 minutes
 
 ### Objectives
 In this lab, you will learn:
@@ -51,7 +51,7 @@ CREATE TABLE DEPARTMENTS (
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-1.png)
+![DEPARTMENTS table](images/img-1.png)
  
 
 Table locations:
@@ -70,7 +70,7 @@ CREATE TABLE LOCATIONS (
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-2.png)
+![LOCATIONS table](images/img-2.png)
 
 
 ```
@@ -93,7 +93,7 @@ commit;
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-3.png)
+![Populate and DEPARTMENTS LOCATIONS](images/img-3.png)
 
  
 
@@ -131,7 +131,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-4.png)
+![XML data from relational data](images/img-4.png)
 
  
 
@@ -175,7 +175,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-5.png)
+![XMLType view](images/img-5.png)
 
  
 
@@ -191,7 +191,7 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-6.png)
+![XMLType view content](images/img-6.png)
  
 
 ### QXR3. Querying Over XMLType Views
@@ -213,7 +213,7 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-7.png)
+![Administration department](images/img-7.png)
 
  
 
@@ -234,7 +234,7 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-8.png)
+![Department location](images/img-8.png)
 
 You may now **proceed to the next lab**.
 

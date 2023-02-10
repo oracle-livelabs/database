@@ -5,7 +5,7 @@ This lab will use the SQL Workshop in Database Actions from the Autonomous Trans
 
 The support for the XQuery Language is provided through a native implementation of SQL/XML functions: XMLQuery, XMLTable, XMLExists, and XMLCast. These SQL/XML functions are defined by the SQL/XML standard as a general interface between the SQL and XQuery languages.
 
-Estimated Time: XYZ minutes
+Estimated Time: 30 minutes
 
 ### Objectives
 In this lab, you will learn:
@@ -89,7 +89,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-1.png)
+![Pre-update](images/img-1.png)
 
  
 
@@ -107,7 +107,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-2.png)
+![Update](images/img-2.png)
 
  
 
@@ -126,7 +126,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-3.png)
+![Post-update](images/img-3.png)
 
 You should see the updated XML doc for id 1.
 
@@ -134,7 +134,7 @@ You should see the updated XML doc for id 1.
 
 Now roll back to the previous content.
 
-![Image alt text](images/img-4.png)
+![Rollback](images/img-4.png)
 
  
 
@@ -162,7 +162,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-5.png)
+![Pre-update](images/img-5.png)
 
  
 
@@ -188,7 +188,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-6.png)
+![Update](images/img-6.png)
 
  
 
@@ -213,7 +213,7 @@ ROLLBACK;
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-7.png)
+![Post-update](images/img-7.png)
 
  
 
@@ -239,7 +239,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-8.png)
+![Pre-update](images/img-8.png)
 
  
 
@@ -269,7 +269,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-9.png)
+![Update](images/img-9.png)
 
  
 
@@ -292,7 +292,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-10.png)
+![Post-update](images/img-10.png)
 
  
 
@@ -318,7 +318,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-11.png)
+![Pre-update](images/img-11.png)
 
  
 
@@ -342,7 +342,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-12.png)
+![Update](images/img-12.png)
 
  
 
@@ -365,7 +365,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-13.png)
+![Post-update](images/img-13.png)
 
  
 
@@ -394,7 +394,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-14.png)
+![Pre-update](images/img-14.png)
 
  
 
@@ -429,7 +429,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-15.png)
+![Update](images/img-15.png)
 
  
 
@@ -444,7 +444,7 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-16.png)
+![Post-update](images/img-16.png)
 
 You may now **proceed to the next lab**.
 

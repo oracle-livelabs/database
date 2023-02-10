@@ -3,7 +3,7 @@
 ## Introduction
 This lab will use the SQL Workshop in Database Actions from the Autonomous Transaction Processing page. We will create a simple table with an XMLType column in it and populate the table with some XML documents.
 
-Estimated Time: XYZ minutes
+Estimated Time: 15 minutes
 
 ### Objectives
 In this lab, you will learn:
@@ -56,11 +56,11 @@ CREATE TABLE PURCHASEORDER (
 ```
 You should see the message "Table PURCHASEORDER created". 
 
-![Image alt text](images/img-1.png)
+![Create table](images/img-1.png)
 
 On the left side, click the "Refresh" button to see your new table in the tables list.
 
-![Image alt text](images/img-2.png)
+![Table list](images/img-2.png)
 
 3.	Populate the table with a few rows. 
 Use the 'trashcan' icon to delete the previous statement from the Worksheet area. Copy the following SQL into the worksheet area. Make sure you highlight the whole statement with your mouse and press the "Run Statement" button:
@@ -105,7 +105,7 @@ END;
 </copy>
 ```
 
-![Image alt text](images/img-3.png)
+![Insert from the object store](images/img-3.png)
 
 Similarly, we can insert other sample documents.
 
@@ -230,7 +230,7 @@ FROM
 
 Now the table PURCHASEORDER table should have 5 rows.
 
-![Image alt text](images/img-4.png)
+![Number of rows](images/img-4.png)
 
 4.	Check that we have rows in the table. 
 
@@ -249,7 +249,7 @@ FROM
 You should see the rows you inserted. You can expand the view to see the whole text 
 column by adjusting the column header. 
 
-![Image alt text](images/img-5.png)
+![Inserted documents](images/img-5.png)
 
 If there are no rows shown, return to Step 3.
 

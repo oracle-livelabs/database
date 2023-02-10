@@ -4,6 +4,8 @@
 
 In this workshop, we will discuss some of the basic capabilities of Oracle XML DB. After the workshop, the users will be able to understand how to store XML data in Oracle DB and how to access and manipulate them. 
 
+Estimated Time: 10 minutes
+
 ## What is XML?
 
 XML is a human-readable, machine-readable, and self-describing format to represent data in a hierarchical format. Here is an example of an XML document containing information on a purchase order. 

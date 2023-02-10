@@ -4,7 +4,8 @@
 Indexing XML data will give you quick access to the data and significantly improve the query performance. The use of indexes is particularly recommended for online transaction processing (OLTP) environments involving few updates.
 
 Generally, when your XML data contains an island of structured, predictable data and your queries are known, we recommend using XMLIndex with a structured component. When you need to support ad-hoc XML queries, range, or text search queries, we recommend using the XML Search index. In this lab, we will explore both XMLIndex and XML Search Index.
-Estimated Time: XYZ minutes
+
+Estimated Time: 45 minutes
 
 ### Objectives
 In this lab, you will learn:
@@ -80,7 +81,7 @@ END;
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-1.png)
+![Drop index and parameters](images/img-1.png)
 
  
 
@@ -106,7 +107,7 @@ END;
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-2.png)
+![Register parameters](images/img-2.png)
 
  
 
@@ -124,7 +125,7 @@ INDEXTYPE IS XDB.XMLINDEX PARAMETERS ( 'PARAM PO_SXI_PARAMETERS' );
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-3.png)
+![Create index](images/img-3.png)
 
  
 
@@ -147,7 +148,7 @@ CREATE INDEX UPC_IDX ON
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-4.png)
+![Secondary indexes](images/img-4.png)
 
  
 
@@ -169,7 +170,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](images/img-5.png)
+![Explain plan 1](images/img-5.png)
 
  
 
@@ -191,7 +192,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](images/img-6.png)
+![Explain plan 2](images/img-6.png)
 
  
 
@@ -221,7 +222,7 @@ END;
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-7.png)
+![Set preferences](images/img-7.png)
 
  
 
@@ -238,7 +239,7 @@ INDEXTYPE IS CTXSYS.CONTEXT PARAMETERS ( 'storage STORAGE_PREFS
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-8.png)
+![Create XML search index](images/img-8.png)
 
  
 
@@ -262,7 +263,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](images/img-9.png)
+![Explain plan SIQ1](images/img-9.png)
  
 
 
@@ -286,7 +287,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](images/img-10.png)
+![Explain plan SIQ2](images/img-10.png)
 
  
 
@@ -309,7 +310,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](images/img-11.png)
+![Explain plan SIQ3](images/img-11.png)
  
 
 ### SIQ4. 
@@ -331,7 +332,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](images/img-12.png)
+![Explain plan SIQ4](images/img-12.png)
  
 
 ### SIQ5. 
@@ -354,7 +355,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](images/img-13.png)
+![Explain plan SIQ5 with stemming](images/img-13.png)
  
 
 ```
@@ -374,7 +375,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](images/img-14.png)
+![Explain plan SIQ5 with stemming window 2](images/img-14.png)
  
 
 ```
@@ -394,7 +395,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Explain Plan".
 
-![Image alt text](images/img-15.png)
+![Explain plan SIQ5 stemming window 5](images/img-15.png)
  
 You may now **proceed to the next lab**.
 

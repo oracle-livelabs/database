@@ -6,7 +6,7 @@ This lab will use the SQL Workshop in Database Actions from the Autonomous Trans
 
 The support for the XQuery Language is provided through a native implementation of SQL/XML functions: XMLQuery, XMLTable, XMLExists, and XMLCast. These SQL/XML functions are defined by the SQL/XML standard as a general interface between the SQL and XQuery languages.
 
-Estimated Time: XYZ minutes
+Estimated Time: 60 minutes
 
 ### Objectives
 
@@ -91,7 +91,7 @@ WHERE
 </copy>
 ``` 
 
-![Image alt text](images/img-1.png)
+![Number of not-null documents](images/img-1.png)
 
 ### Q2. Searching for the specific XML documents
 If we want to search for specific XML documents, we can use XMLExists SQL/XML function in the where clause. Based on the XQuery expression provided in the XMLExists function, it will filter out the XML documents we are looking for.
@@ -113,7 +113,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-2.png)
+![Documents satisfying the XPath](images/img-2.png)
  
 
 The next query is even more specific, and it will return the XML documents where XPath /PurchaseOrder/Reference has 'ROY-1PDT' as the value.
@@ -133,7 +133,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-3.png)
+![Documents satisfying the XPath and predicate](images/img-3.png)
 
 
 ```
@@ -153,7 +153,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](images/img-4.png)
+![Documents satisfying the XPath and a bind predicate](images/img-4.png)
 
 
 ### Q3. Accessing fragments or nodes of the XML documents
@@ -178,7 +178,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](images/img-5.png)
+![Fragments satisfying the XPath and predicate](images/img-5.png)
 
 
 ### Q4. Extracting the scalar value from XML fragments or nodes
@@ -203,7 +203,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](images/img-6.png)
+![Value of the fragments satisfying the XPath and predicate](images/img-6.png)
 
 
 You can also use the text() function for the same.
@@ -225,7 +225,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-7.png)
+![XMLCAST alternative](images/img-7.png)
 
 
 ### Q5. Generating relation data from XML data
@@ -259,7 +259,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](images/img-8.png)
+![XML data to relational data](images/img-8.png)
 
 
 Furthermore, we can chain the XMLTable calls when we want to see data contained in multiple levels. For example, in the following example, the element PurchaseOrder is first decomposed to a relational view of two columns, reference as varchar2 and lineitem as XMLType. The lineitem column is then passed to a second XMLTable call to be broken into its various parts as multiple columns of relational values.
@@ -295,7 +295,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](images/img-9.png)
+![XMLTABLE chain](images/img-9.png)
 
 
 In the above examples, we have used very simple XQuery expression, and XPath expression, and passed them to the XMLTable function. However, users can pass any XQuery expression they want. In the following queries, we will use a little bit of complex XQuery just for demonstration purposes.
@@ -315,7 +315,7 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](images/img-10.png)
+![Complex xquery inside XMLTABLE](images/img-10.png)
 
 
 Similarly, we can have multiple predicates as follows:
@@ -337,7 +337,7 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](images/img-11.png)
+![XQuery with multiple bind variables](images/img-11.png)
 
 
 ### Q6. Joining relational tables with XML tables/columns
@@ -362,7 +362,7 @@ COMMIT;
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-12.png)
+![EMP relational table](images/img-12.png)
  
 
 ```
@@ -376,7 +376,7 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-13.png)
+![EMP table entries](images/img-13.png)
 
 
 ```
@@ -402,7 +402,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](images/img-14.png)
+![Joining XMLTABLE and EMP, a relational table](images/img-14.png)
 
 
 In the above query, we have used the similar XMLTABLE query described in Q5 to keep it simple. Feel free to use other XMLTABLE queries and try different things.
@@ -430,7 +430,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](images/img-15.png)
+![Customized XML fragment](images/img-15.png)
 
 
 The following query will do just the same.
@@ -459,7 +459,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](images/img-16.png)
+![Customized XML fragment](images/img-16.png)
 
 
 ### Q8. Serialize XML data 
@@ -487,7 +487,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](images/img-17.png)
+![Serialize XML data](images/img-17.png)
 
 
 ```
@@ -514,7 +514,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
  
-![Image alt text](images/img-18.png)
+![Serialize XML data](images/img-18.png)
 
 You may now **proceed to the next lab**.
 

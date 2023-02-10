@@ -4,7 +4,7 @@
 
 Relational database views over XML data provide conventional, relational access to XML content. We will use XML-specific functions and methods provided by Oracle XML DB to create conventional database views. We will then use the views to work with XML content but in relational ways.
 
-Estimated Time: XYZ minutes
+Estimated Time: 30 minutes
 
 ### Objectives
 In this lab, you will learn:
@@ -62,7 +62,7 @@ FROM
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-1.png)
+![Relational data from XML content](images/img-1.png)
 
 ### QRX2. Creating Relational Views
 
@@ -98,7 +98,7 @@ CREATE OR REPLACE VIEW V_PURCHASEORDER AS
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-2.png)
+![Purchaseorder relational view](images/img-2.png)
 
 
 ### RV2. Create a LineItem relational view
@@ -132,7 +132,7 @@ CREATE OR REPLACE VIEW V_LINEITEM AS
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-3.png)
+![LineItem relational view](images/img-3.png)
 
  
 
@@ -166,7 +166,7 @@ WHERE
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-4.png)
+![Joing the views](images/img-4.png)
 
  
 
@@ -196,7 +196,7 @@ ORDER BY
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-5.png)
+![Group by query](images/img-5.png)
 
  
     
@@ -223,7 +223,7 @@ GROUP BY
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-6.png)
+![Group by rollup query](images/img-6.png)
 
  
 
@@ -256,7 +256,7 @@ ORDER BY
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Image alt text](images/img-7.png)
+![SQL analytics query](images/img-7.png)
 
 You may now **proceed to the next lab**.
 
