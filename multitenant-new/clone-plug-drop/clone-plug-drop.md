@@ -73,7 +73,7 @@ In this first task, you will create and explore a new pluggable database **PDB2*
       .
 
       save whoami.sql
-      /
+      
 
     </copy>
     ```
@@ -1119,4 +1119,4 @@ Please *proceed to the next lab*.
 
 - **Author** - Patrick Wheeler, VP, Multitenant Product Management
 - **Contributors** -  Joseph Bernens, David Start, Anoosha Pilli, Brian McGraw, Quintin Hill, Rene Fontcha
-- **Last Updated By/Date** - Joseph Bernens, Principal Solution Engineer, NACT Solution Engineering, February 2023
+- **Last Updated By/Date** - Joseph Bernens, Principal Solution Engineer, NACT Solution Engineering / February 2023

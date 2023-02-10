@@ -1992,4 +1992,4 @@ The tasks you will do in this step are:
 - **Author** - Patrick Wheeler, VP, Multitenant Product Management
 - **Adapted to Cloud by** -  David Start, OSPA
 - **Contributors** -  David Start, Anoosha Pilli, Rene Fontcha, Joseph Bernens
-- **Last Updated By/Date** - Joseph Bernens, Principal Solution Engineer, NACT Solution Engineering, February 2023
+- **Last Updated By/Date** - Joseph Bernens, Principal Solution Engineer, NACT Solution Engineering / February 2023
