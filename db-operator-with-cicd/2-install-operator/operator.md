@@ -5,6 +5,9 @@ This lab will show you how to install the DB Operator Kubernetes (OraOperator), 
 
 Estimated Time:  10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Install the Database Operator](videohub:1_s61gligk)
+
 ### Objectives
 
 * Install the DB Operator for Kubernetes
