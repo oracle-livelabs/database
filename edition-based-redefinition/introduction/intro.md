@@ -1,20 +1,20 @@
-# Introduction to Oracle Edition Based Redefinition and Oracle Online Redefinition 
+# Introduction to Oracle Edition-Based Redefinition and Oracle Online Redefinition 
 
 ## Oracle Edition Based Redefinition
 
-Oracle Edition-based redefinition (EBR) enables online application upgrade with uninterrupted availability of the application. When the installation of an upgrade is complete, the pre-upgrade application and the post-upgrade application can be used at the same time. Therefore, an existing session can continue to use the pre-upgrade application until its user decides to end it; and all new sessions can use the post-upgrade application. When there are no longer any sessions using the pre-upgrade application, it can be retired. In this way, EBR allows hot rollover from from the pre-upgrade version to the post-upgrade version, with zero downtime.
+Oracle Edition-Based Redefinition (EBR) enables online application upgrades with uninterrupted availability. When the installation of an upgrade is complete, the pre-upgrade application and the post-upgrade application can run at the same time. Therefore, existing sessions can keep working with the pre-upgrade application until the rolling upgrade is over, and new sessions can start working on the post-upgrade application. The pre-upgrade application can be retired when no more sessions use it. Edition-Based Redefinition allows hot-rolling application upgrades without downtime, enabling gradual application rollover used in modern CI/CD pipelines.
 
-EBR enables online application upgrades in the following manner:
+Edition-Based Redefinition enables online application upgrades in the following manner:
 
-- Code changes are installed in the privacy of a new edition.
+- Code changes are deployed in the privacy of a new edition. The existing views, packages, and triggers stay valid and unchanged for the sessions using the previous edition.
 
-- Data changes are made safely by writing only to new columns or new tables not seen by the old edition. An editioning view exposes a different projection of a table into each edition to allow each to see just its own columns.
+- A special type of views called editioning views abstracts the access to the base tables so that different application versions can see and use their own projection of the table.
 
-- Cross edition triggers propagate data changes made by the old edition into the new edition’s columns, or (in hot-rollover) vice-versa.
+- Cross-edition triggers propagate data changes made by the old edition into the new edition’s columns and vice-versa, making the upgrade tolerant of layout changes.
 
-You can watch the video for an overview on Oracle EBR.
+You can watch the video for an overview of Oracle Edition-Based Redefinition.
 
-[EBR Introduction] (videohub:1_p6bapnjx)
+[Edition-Based Redefinition Introduction](videohub:1_p6bapnjx)
 
 ## Oracle Online Redefinition
 
@@ -25,41 +25,41 @@ Below are some of the benefits.
 - Modify table physical attributes and transform both data and table structure while allowing users full access to the database.
 - Improve data availability, query performance, response time and disk space utilization, all of which are important in a mission-critical environment
 - Make the application upgrade process easier, safer and faster.
-- Execute using Enterprise Manager or SQL*Plus command line interface.
 
 ## About this Workshop
 
-This workshop will cover how to evolve your oracle database applications entirely online.While building automated development pipelines is highly regarded by development teams, making changes to database schemas and stored procedures without interrupting application traffic is tricky. What if the database changes were both safe and online? We will use Oracle Database features that allow for online data movement, schema redefinitions, table reorganizations, and, thanks to the integration with DevOps tools, controlling code versioning (Liquibase).
+This workshop will cover how to evolve your oracle database applications entirely online. While building automated development pipelines is highly regarded by development teams, making changes to database schemas and stored procedures without interrupting application traffic is tricky. What if the database changes were both safe and online? We will use Oracle Database features that allow for online data movement, schema redefinitions, table reorganizations, and, thanks to the integration with DevOps tools, controlling code versioning (Liquibase).
 
-You can watch the video for an overview on how to evolve Oracle DB Applications online
+You can watch the video for an overview of evolving Oracle Database Applications online:
 
 [](youtube:wwqDn63q3cw)
 
 ## Workshop Objectives
 
 - Create and connect to Autonomous Database
-- Download ADB wallet and lab files
-- Prepare and review HR schema
-- Use Liquibase to generate schema
-- Create Directory structure and sync the metadata
-- Review and update new edition scripts
-- Verify new edition
-- Switch to new edition and decommission the old edition
+- Download Autonomous Database wallet and lab files
+- Prepare and review the HR schema
+- Use Liquibase to generate the schema
+- Create the directory structure for the changelogs and sync the metadata
+- Review and update the new edition scripts
+- Verify the new edition
+- Switch to the new edition and decommission the old edition
 
 Estimated Workshop Time : 2 hours
 
-## Workshop Pre-requisites
+## Workshop prerequisites
 
-- Oracle Autonomous (ATP) DB
-- Access to OCI Cloud shell
+There are no prerequisites if you run this lab in a LiveLabs sandbox.
+
+You can run this workshop also with the Always Free offering in your tenancy! You will need an OCI Free Tier subscription with an Autonomous Database available.
 
 ## Additional information
 
-- [Oracle EBR] (https://www.oracle.com/database/technologies/high-availability/ebr.html)
+- [Oracle Edition-Based Redefinition] (https://www.oracle.com/database/technologies/high-availability/ebr.html)
 - [Oracle Online Redefinition] (https://www.oracle.com/database/technologies/high-availability/online-ops.html)
 - [Using Liquibase with SQLcl] (https://docs.oracle.com/en/database/oracle/sql-developer-command-line/22.4/sqcug/using-liquibase.html#GUID-4CA25386-E442-4D9D-B119-C1ACE6B79539)
 
-## **Acknowledgements**
+## Acknowledgements
 
 - Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
 - Last Updated By/Date - Suraj Ramesh, Jan 2023
