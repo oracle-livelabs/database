@@ -1,4 +1,4 @@
-# Review and deploy the scripts for the new edition
+# Review and deploy the changelog for the new edition
 
 Estimated lab time: 10 minutes
 

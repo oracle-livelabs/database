@@ -1,4 +1,4 @@
-# Generate the base changelog for liquibase
+# Use Liquibase to generate the base schema
 
 Estimated lab time: 10 minutes
 
