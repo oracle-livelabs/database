@@ -52,7 +52,7 @@ drwxr-xr-x. 2 oracle oinstall 4096 May 26 13:10 scripts
 
 ## Task 2: Create a TimesTen instance
 
-A TimesTen _installation_ is comprised of the TimesTen software components. An installation is created by unzipping the TimesTen software distribution media into a suitable location. For this workshop, the TimesTen software distribution media has already been unzipped into the directory **/shared/sw** to create a TimesTen installation named **tt22.1.1.3.0**.
+A TimesTen _installation_ is comprised of the TimesTen software components. An installation is created by unzipping the TimesTen software distribution media into a suitable location. For this workshop, the TimesTen software distribution media has already been unzipped into the directory **/shared/sw** to create a TimesTen installation named **tt22.1.1.7.0**.
 
 1. List the top level software directory.
 
@@ -64,14 +64,14 @@ ls -l /shared/sw
 
 ```
 total 0
-dr-xr-x---. 17 oracle oinstall 277 May  5 22:20 tt22.1.1.3.0
+dr-xr-x---. 17 oracle oinstall 277 May  5 22:20 tt22.1.1.7.0
 ```
 
 2. List the contents of the TimesTen installation top level directory.
 
 ```
 <copy>
-ls -l /shared/sw/tt22.1.1.3.0
+ls -l /shared/sw/tt22.1.1.7.0
 </copy>
 ```
 
@@ -104,7 +104,7 @@ When it is operational, a TimesTen instance also includes a set of associated pr
 
 ```
 <copy>
-/shared/sw/tt22.1.1.3.0/bin/ttInstanceCreate -location /tt/inst -name ttinst -tnsadmin /shared/tnsadmin
+/shared/sw/tt22.1.1.7.0/bin/ttInstanceCreate -location /tt/inst -name ttinst -tnsadmin /shared/tnsadmin
 </copy>
 ```
 
@@ -121,7 +121,7 @@ Run the 'setuproot' script :
 This will move the TimesTen startup script into its appropriate location.
 
 The 22.1 Release Notes are located here :
-  '/shared/sw/tt22.1.1.3.0/README.html'
+  '/shared/sw/tt22.1.1.7.0/README.html'
 
 Instance created successfully.
 
@@ -223,7 +223,7 @@ ttVersion
 ```
 
 ```
-TimesTen Release 22.1.1.3.0 (64 bit Linux/x86_64) (ttinst:6624) 2022-05-05T19:45:28Z
+TimesTen Release 22.1.1.7.0 (64 bit Linux/x86_64) (ttinst:6624) 2022-05-05T19:45:28Z
   Instance admin: oracle
   Instance home directory: /tt/inst/ttinst
   Group owner: oinstall
