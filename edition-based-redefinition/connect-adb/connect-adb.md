@@ -1,4 +1,4 @@
-# Download ATP DB Wallet and lab files
+# Download the Autonomous Database Wallet and Lab Files
 
 Estimated Time: 10 minutes
 
@@ -36,7 +36,7 @@ The LiveLabs Sandbox environment comes with a pre-created Autonomous Database (A
 
 6. Launch Cloud Shell
 
-   ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png " ")
+   ![Cloud Shell](images/cloud-shell.png " ")
 
    Within a few seconds, you will have a cloud shell prompt.
 

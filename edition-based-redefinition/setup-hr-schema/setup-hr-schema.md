@@ -78,6 +78,10 @@ The HR schema is a modified version of the well-known HR schema to support editi
    <copy>@hr_main.sql</copy>
    ```
 
+   ````text
+   <copy>@hr_main.sql</copy>
+   ```
+
    The scripts prompts for few parameters and make sure you provide the correct details if not the script will error
 
 - The password for the `HR` user - Input as  **Welcome#Welcome#123**
