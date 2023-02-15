@@ -25,9 +25,6 @@ In this lab, you will be guided through the following tasks:
 
 ## Task 1: Set up an on-prem environment
 
-**Let's assume you don't have an on-prem environment. Start by following Lab 1 Task 1 in order to set one up. The on-prem environment that we will setup in this Lab will use Oracle Linux 8 as the Operating System. You can view more details regarding the Operating System's version, in the image below:**
-![os-version](./images2/image0.png "os-version")
-
 1. Login to Oracle Cloud (OCI), click on the “Hamburger” menu on the top left. Navigate to “Networking” and “Virtual Cloud Networks”
 
     ![](./images2/ham-menu.png "oci-hamburger-menu")
