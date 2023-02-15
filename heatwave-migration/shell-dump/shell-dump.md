@@ -65,7 +65,7 @@ In this lab, you will be guided through the following tasks:
 
 5. Once you have pasted the “Configuration File Preview” snippet into the “config” file, you will need to adjust the parameter where it says “key_file” with the file path to your own OCI Private API Key. Look at an example below:
 
-    ![](./images/paste-config2.png "paste-config")
+    ![](./images/paste-config3.png "paste-config")
 
     **Note:** If you need help uploading your Private API Key onto your on-premise environment/Compute instance, continue following the guide. (If you have already uploaded your API Key and have updated the “key_file” parameter for your “config” file, skip to the next Task)
 
@@ -77,16 +77,16 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images/copy-pem.png "copy-private-api")
 
-8. After copying the contents, go back to your on-premise environment/Compute instance where you have created the “config” file and have MySQL Shell installed (in our case, the Oracle Linux server). Create a new file there called "privapikey.pem", for example. This guide used the “nano” text editor to create the "privapikey.pem" file on the on-premise environment. Choose a text editor of your own choice.
+8. After copying the contents, go back to your on-premise environment/Compute instance where you have created the “config” file and have MySQL Shell installed (in our case, the Oracle Linux server). Make sure you are in your .oci directory and create a new file there called "privapikey.pem", for example. This guide used the “nano” text editor to create the "privapikey.pem" file on the on-premise environment. Choose a text editor of your own choice.
 
     ```bash
-    <copy>cd</copy>
+    <copy>pwd</copy>
     ```
     ```bash
     <copy>nano privapikey.pem</copy>
     ```
 
-    ![](./images/nano-priv.png "nano-private-api")
+    ![](./images/nano-priv1.png "nano-private-api")
 
 9. Once the privapikey.pem file opens up, paste the contents of the OCI Private API Key that we copied in Lab 2 Task 1.7, into this newly created privapikey.pem file. Save and close the file afterwards.
 
@@ -101,11 +101,11 @@ In this lab, you will be guided through the following tasks:
     <copy>pwd</copy>
     ```
 
-    ![](./images/priv-path.png "private-api-path")
+    ![](./images/priv-path1.png "private-api-path")
 
-    **Note:** by looking at the above image, the 'privapikey.pem' location for this guide will hence be "/home/opc/privapikey.pem". Go back to your '.oci' directory and adjust your 'config' file accordingly
+    **Note:** by looking at the above image, the 'privapikey.pem' location for this guide will hence be "/home/opc/.oci/privapikey.pem". Go to your '.oci' directory and adjust your 'config' file accordingly
 
-    ![](./images/paste-config2.png "paste-config")
+    ![](./images/paste-config3.png "paste-config")
 
 11. Save and close the 'config' file after you have adjusted its “key_file” parameter.
 
@@ -162,7 +162,7 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images/dry-shell-dump1.png "dryrun-shell-dump")
 
-    **Note:** “sampledump” is the prefix under which all our dump files will be stored in Object Storage. Change the ‘osBucketName’ and ‘osNamespace’ to match with what you have. “ocimds”: “true” option ensures compatibility of the dump with MySQL Database Service/HeatWave. To understand the dumpInstance(), dumpSchemas(), or dumpTables() utility in more detail, refer to the below website:
+    **Note:** “sampledump” is the prefix under which all our dump files will be stored in Object Storage. **Change the ‘osBucketName’ and ‘osNamespace’ to match with what you have.** “ocimds”: “true” option ensures compatibility of the dump with MySQL Database Service/HeatWave. To understand the dumpInstance(), dumpSchemas(), or dumpTables() utility in more detail, refer to the below website:
 
     [https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-utilities-dump-instance-schema.html] (https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-utilities-dump-instance-schema.html)
 

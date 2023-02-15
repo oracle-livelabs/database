@@ -40,23 +40,27 @@ In this lab, you will be guided through the following task:
 
     ![](./images/hw-priv1.png "mysql-nav4")
 
-5. Leave the rest as it is and lastly click on "Show advanced options" under the “Configure Backup Plan” section. After click "Show advanced options", click on the "Data Import" tab
+5. Leave the rest as it is and lastly click on "Show advanced options" under the “Configure Backup Plan” section. After clicking "Show advanced options", click on the "Networking" tab. Under "Hostname", enter the name of your MySQL Database System.
 
     ![](./images/show-adv.png "show-advanced-options")
 
+    ![](./images/hostname1.png "enter-hostname")
+
+6. Afterwards, click on the "Data Import" tab
+
     ![](./images/show-adv2.png "data-import")
 
-6. Once you are on the 'Data Import' tab, click on the "Click here to create a PAR URL" link.
+7. Once you are on the 'Data Import' tab, click on the "Click here to create a PAR URL" link.
 
     ![](./images/create-par1.png "data-imp-options-hw2")
 
-7. After clicking the above link, another screen will appear where you will select the "MySQL-Bucket" bucket from the drop down list, that we created in Lab 2.
+8. After clicking the above link, another screen will appear where you will select the "MySQL-Bucket" bucket from the drop down list, that we created in Lab 2.
 
     ![](./images/select-buck01.png "select-bucket")
 
     ![](./images/select-buck02.png "select-bucket2")
 
-8. Once you have selected the appropriate bucket where the data was dumped, adjust the PAR expiration according to your needs. Then, simply click "Create and set PAR URL". Afterwards, your screen should look something similar to below:
+9. Once you have selected the appropriate bucket where the data was dumped, adjust the PAR expiration according to your needs. Then, simply click "Create and set PAR URL". Afterwards, your screen should look something similar to below:
 
     ![](./images/set-par.png "create-hw-using-par")
 
@@ -64,19 +68,19 @@ In this lab, you will be guided through the following task:
 
      **Note:** click "Create" as shown in the above image, once your 'PAR Source URL' has been populated.
 
-9. After clicking "Create" in the previous Step, your MySQL HeatWave System will start provisioning and will have the data pre-loaded that we dumped from our on-premise environment into Object Storage bucket, once the HeatWave System is in an "ACTIVE" status.
+10. After clicking "Create" in the previous Step, your MySQL HeatWave System will start provisioning and will have the data pre-loaded that we dumped from our on-premise environment into Object Storage bucket, once the HeatWave System is in an "ACTIVE" status.
 
     ![](./images/db-ready.png "MySQL-Active")
 
     **Note:** it may take MySQL HeatWave a few minutes to be in an "ACTIVE" state
 
-10. Once your MySQL DB System is 'ACTIVE', a “Private IP Address” will be allocated to it, find and copy it. You can find this Private IP under “DB System Information” > “Endpoint” section on the “DB System Details” page
+11. Once your MySQL DB System is 'ACTIVE', a “Private IP Address” will be allocated to it, find and copy it. You can find this Private IP under “DB System Information” > “Endpoint” section on the “DB System Details” page
 
     ![](./images/hw-ip1.png "MySQL-IP")
 
     **Note:** you can navigate to the “DB System Details” page by going to the “Hamburger” menu in OCI. “Databases” > “MySQL” > “DB Systems”. Click on the name of your MySQL DB System to open the “DB System Details” page.
 
-11. Copy the Private IP Address in the previous Step. You can now login to your MySQL DB System using MySQL Shell from your Compute. Execute
+12. Copy the Private IP Address in the previous Step. You can now login to your MySQL DB System using MySQL Shell from your Compute. Execute
 
     ```bash
     <copy>mysqlsh <username>@<private-mysql-ip></copy>

@@ -148,7 +148,7 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images2/ready-compute.png "ready-compute")
 
-18. After copying the Public IP of your Compute, open Cloud Shell. Once Cloud Shell loads, perform the ssh command to connect to your Compute instance
+18. After copying the Public IP of your Compute, open/restore Cloud Shell. Once Cloud Shell loads, perform the ssh command to connect to your Compute instance
 
     ```bash
     <copy>ssh -i ~/.ssh/id_rsa opc@<your_compute_instance_ip></copy>
@@ -189,6 +189,8 @@ In this lab, you will be guided through the following tasks:
     ```
 
     ![](./images2/change-pass2.png "change-root-pass")
+
+    **Note:** after changing your root password, make a note of it or save it. This will be used later.
 
 4. Exit MySQL and download MySQL Shell onto your on-prem environment
 
@@ -271,6 +273,8 @@ In this lab, you will be guided through the following tasks:
     ![](./images2/connect-shell1.png "connect-shell")
 
     ![](./images2/confirm-load1.png "confirm-load-db")
+
+    **Note:** exit MySQL Shell and minimize Cloud Shell afterwards.
 
     This concludes this lab. You may now **proceed to the next lab.**
 
