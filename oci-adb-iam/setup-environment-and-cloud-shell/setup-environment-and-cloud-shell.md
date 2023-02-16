@@ -126,11 +126,11 @@ You may now **proceed to the next lab.**
 
    b) Click **Create/Reset Password**.  
 
-      ![Reset password](https://oracle-livelabs.github.io/security/identity-access-management/iam/images/image009.png)
+      ![New User](images/new-user.png)
 
    c) In the dialog, click **Create/Reset Password**.
 
-      ![Reset password](https://oracle-livelabs.github.io/security/identity-access-management/iam/images/create-password.png)
+      ![Reset password](images/reset-password.png)
 
    d) The new one-time password is displayed.
       Click the **Copy** link and then click **Close**. Make sure to copy this password to your notepad.
@@ -141,7 +141,7 @@ You may now **proceed to the next lab.**
 
    a) Click **Sign Out** from the user menu and log out of the admin user account completely.
 
-      ![Sign out](https://oracle-livelabs.github.io/security/identity-access-management/iam/images/sign-out.png)
+      ![Sign out](images/sign-out.png)
 
    b) Open a supported browser and go to the Console URL:  [https://cloud.oracle.com](https://cloud.oracle.com).
 
