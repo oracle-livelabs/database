@@ -135,7 +135,7 @@ You may now **proceed to the next lab.**
    d) The new one-time password is displayed.
       Click the **Copy** link and then click **Close**. Make sure to copy this password to your notepad.
 
-      ![Copy password](https://oracle-livelabs.github.io/security/identity-access-management/iam/images/copy-password.png)
+      ![Copy password](images/copy-password.png)
 
 3. Sign in as the new user using a different web browser or an incognito window.
 
