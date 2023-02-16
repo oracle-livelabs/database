@@ -49,7 +49,7 @@ In this first task, you will create and explore a new pluggable database **PDB2*
 
     ```
     <copy>
-    set sqlformat ANSICONSOLE
+    set sqlformat ANSICONSOLE   
     </copy>
     ```
 
@@ -73,7 +73,7 @@ In this first task, you will create and explore a new pluggable database **PDB2*
       .
 
       save whoami.sql
-      /
+      
 
     </copy>
     ```
@@ -433,7 +433,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-    ![](./images/task4.3-cdb2datafiles.png " ")
+    ![](./images/task4.4-cdb2datafiles.png " ")
 
 5. Connect as **PDB\_ADMIN** to **PDB3** and look at **MY\_TAB**.
 
@@ -445,7 +445,7 @@ The task you will do in this step is:
     <copy>select * from my_tab;</copy>
     ```
 
-    ![](./images/task4.4-querymytab.png " ")
+    ![](./images/task4.5-querymytab.png " ")
 
 ## Task 5: Drop a PDB
 This section looks at how to drop a pluggable database.
@@ -925,6 +925,11 @@ The two main requirements for snapshot copy to work on our Linux filesystem are:
     ```
     <copy>
     sql / as sysdba
+    </copy>
+    ```
+
+    ```
+    <copy>
     set sqlformat ANSICONSOLE
     @whoami
     </copy>
@@ -1045,9 +1050,9 @@ The tasks you will do in this step are:
     <copy>alter system set local_listener='LISTENER_CDB1' scope=both;</copy>
     ```
 
-    ![](./images/task10.1-changelistener.png " ")
+    ![](./images/task10.2-changelistener.png " ")
 
-2. Connect to **CDB2** using the shared listener and relocate **OE** using the database link **oe@cdb1_link**.  
+3. Connect to **CDB2** using the shared listener and relocate **OE** using the database link **oe@cdb1_link**.  
 
     ```
     <copy>conn sys/Ora_DB4U@localhost:1521/cdb2 as sysdba;</copy>
@@ -1059,7 +1064,7 @@ The tasks you will do in this step are:
     show pdbs</copy>
     ```
 
-    ![](./images/task10.2-relocateoe.png " ")
+    ![](./images/task10.3-relocateoe.png " ")
 
 3. Connect to **CDB1** and see what pluggable databases exist there.
 
@@ -1071,7 +1076,7 @@ The tasks you will do in this step are:
     <copy>show pdbs</copy>
     ```
 
-    ![](./images/task10.3-checkcdb1.png " ")
+    ![](./images/task10.4-checkcdb1.png " ")
 
 4.  Check the other terminal window where the load program is running. After a timeout, the load program will resume on its own. If you don't want to wait, enter CTRL-C to break out of the connection timeout and the load program should continue. Note that the output now shows it is connected to the database in container **CDB2**. In real-world scenarios, Oracle customers may be able to leverage **Application Continuity**. Oracle **Application Continuity** masks outages from end users and applications by recovering the in-flight work for impacted database sessions following outages. You can learn more about **Application Continuity** [at the Oracle Application Continuity web page](https://www.oracle.com/database/technologies/high-availability/app-continuity.html).  
 
@@ -1087,7 +1092,7 @@ The tasks you will do in this step are:
     <copy>alter system set local_listener='LISTENER_CDB2' scope=both;</copy>
     ```
 
-    ![](./images/task10.5-resetlistener.png " ")
+    ![](./images/task10.6-resetlistener.png " ")
 
 ## Task 11: Lab cleanup
 
@@ -1114,4 +1119,4 @@ Please *proceed to the next lab*.
 
 - **Author** - Patrick Wheeler, VP, Multitenant Product Management
 - **Contributors** -  Joseph Bernens, David Start, Anoosha Pilli, Brian McGraw, Quintin Hill, Rene Fontcha
-- **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, October 2021
+- **Last Updated By/Date** - Joseph Bernens, Principal Solution Engineer, NACT Solution Engineering / February 2023
