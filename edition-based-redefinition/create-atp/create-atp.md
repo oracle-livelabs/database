@@ -1,4 +1,4 @@
-# Provision ATP Database  
+# Provision an Oracle Autonomous Database
 
 This lab walks you through the steps to get started using the Oracle Autonomous Database Autonomous Transaction Processing [ATP] on Oracle Cloud. In this lab, you will provision a new ATP database.
 
@@ -29,7 +29,7 @@ In this lab, you will:
 
 ## Task 2: Create the ATP database
 
-1. Click **Create Autonomous Database** to start the instance creation process.
+1. Click **Create Autonomous Database** to start the instance creation process and make sure to select the right compartment.
 
     ![Click Create Autonomous Database.](./images/task2-1.png " ")
 
