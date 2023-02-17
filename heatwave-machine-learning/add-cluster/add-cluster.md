@@ -23,118 +23,32 @@ In this lab, you will be guided through the following tasks:
 - Some Experience with MySQL Shell
 - Must Complete Lab 1
 
-## Task 1: Create SSH Key on OCI Cloud Shell
+## Task 3: Add a HeatWave Cluster to MDS-HW MySQL Database System
 
-The Cloud Shell machine is a small virtual machine running a Bash shell which you access through the Oracle Cloud Console (Homepage). You will start the Cloud Shell and generate an SSH Key to use  for the Bastion Session.
+1. Open the navigation menu
+    Databases
+    MySQL
+    DB Systems
 
-1. To start the Oracle Cloud shell, go to your Cloud console and click the cloud shell icon at the top right of the page. This will open the Cloud Shell in the browser, the first time it takes some time to generate it.
+2. Choose the root Compartment. A list of DB Systems is displayed.
 
-    ![CONNECT](./images/cloudshellopen.png "cloudshellopen ")
+    ![Connect](./images/10addheat-list.png "list ")
 
-    ![CONNECT](./images/cloudshell-open-display.png "cloudshell-open-display ")
+3. In the list of DB Systems, click the **MDS-HW** system.
+click **More Action ->  Add HeatWave Cluster**.
 
-    **Note:** You can use the icons in the upper right corner of the Cloud Shell window to minimize, maximize, restart, and close your Cloud Shell session.*
+    ![Connect](./images/10addheat-cluster.png "addheat-cluster ")
 
-2. Once the cloud shell has started, create the SSH Key using the following command:
+4. On the “Add HeatWave Cluster” dialog, select “MySQL.HeatWave.VM.Standard.E3” shape
 
-    ```bash
-    <copy>ssh-keygen -t rsa</copy>
-    ```
+5. Click “Add HeatWave Cluster” to create the HeatWave cluster
 
-    Press enter for each question.
+    ![Connect](./images/10addheat-create-cluster.png "create-cluster ")
 
-    Here is what it should look like.
+6. HeatWave Clusters creation will take about 10 minutes. From the DB display page scroll down to the Resources section. Click the **HeatWave** link. Your completed HeatWave Cluster Information section will look like this:
 
-    ![CONNECT](./images/ssh-key.png "ssh-key")
+    ![Connect](./images/10addheatcluster-create-complete.png " addheatcluster-create-complete")
 
-3. The public and private SSH keys are stored in ~/.ssh/id_rsa.pub.
-
-4. Examine the two files that you just created.
-
-    ```bash
-    <copy>cd .ssh</copy>
-    ```
-
-    ```bash
-    <copy>ls</copy>
-    ```
-
-    ![CONNECT](./images/ssh-ls.png "ssh-ls ")
-
-    There are two files in the output, a *private key:* `id_rsa` and a *public key:* `id_rsa.pub`. Keep the private key safe and don't share its content with anyone. The public key will be needed for various activities and can be uploaded to certain systems as well as copied and pasted to facilitate secure communications in the cloud.
-
-## Task 2: Create Compute instance
-
-You will need a compute Instance to connect to your brand new MySQL database.
-
-1. Before creating the Compute instance open a notepad
-
-2. Do the followings steps to copy the public SSH key to the  notepad
-
-    Open the Cloud shell
-    ![CONNECT](./images/cloudshell-key-copy.png "cloudshell-key-copy ")
-
-    Enter the following command
-
-    ```bash
-    <copy>cat ~/.ssh/id-rsa.pub</copy>
-    ```
-
-    ![CONNECT](./images/cloudshell-key-display.png "cloudshell-key-display ")
-
-3. Copy the id_rsa.pub content to the notepad
-
-    Your notepad should look like this
-    ![CONNECT](./images/notepad-rsa-key.png "notepad-rsa-key ")
-
-4. To launch a Linux Compute instance, go to
-    Navigation Menu
-    Compute
-    Instances
-    ![CONNECT](./images/05compute-instance-menu.png "compute-instance-menu ")
-
-5. On Instances in **(root)** Compartment, click  **Create Instance**
-    ![CONNECT](./images/05compute-create-menu.png "compute-create-menu ")
-
-6. On Create Compute Instance
-
-    Enter Name
-
-    ```bash
-    <copy>MDS-Client</copy>
-    ```
-
-7. Make sure **(root)** compartment is selected
-
-8. On Placement, keep the selected Availability Domain
-
-9. On Image and Shape, keep the selected Image, Oracle Linux 8
-
-      ![CONNECT](./images/05compute-image.png "compute-image ")
-
-10. Select Instance Shape: VM.Standard.E2.2
-
-      ![CONNECT](./images/05compute-shape.png "compute-shape ")
-
-11. On Networking, make sure '**MDS-VCN**' is selected
-
-12. 'Assign a public IP' address should be set to Yes
-
-    ![CONNECT](./images/05compute-ip.png "compute-ip ")
-
-13. On Add SSH keys, paste the public key from the notepad.
-
-    ![CONNECT](./images/05compute-id-rsa-paste.png "compute-id-rsa-past ")
-
-14. Click '**Create**' to finish creating your Compute Instance.
-
-15. The New Virtual Machine will be ready to use after a few minutes. The state will be shown as 'Provisioning' during the creation
-
-    ![CONNECT](./images/05compute-privision.png "compute-provision ")
-
-16. The state 'Running' indicates that the Virtual Machine is ready to use.
-
-    ![CONNECT](./images/05compute-running.png "compute-running ")
 
 ## Task 3: Connect to MySQL Database System
 

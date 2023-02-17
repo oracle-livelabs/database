@@ -239,32 +239,6 @@ Click **Navigation Menu**, **Networking**, then **Virtual Cloud Networks**
 
     ![MDS](./images/04mysql-create-active.png"mysql-create-ative ")
 
-## Task 3: Add a HeatWave Cluster to MDS-HW MySQL Database System
-
-1. Open the navigation menu
-    Databases
-    MySQL
-    DB Systems
-
-2. Choose the root Compartment. A list of DB Systems is displayed.
-
-    ![Connect](./images/10addheat-list.png "list ")
-
-3. In the list of DB Systems, click the **MDS-HW** system.
-click **More Action ->  Add HeatWave Cluster**.
-
-    ![Connect](./images/10addheat-cluster.png "addheat-cluster ")
-
-4. On the “Add HeatWave Cluster” dialog, select “MySQL.HeatWave.VM.Standard.E3” shape
-
-5. Click “Add HeatWave Cluster” to create the HeatWave cluster
-
-    ![Connect](./images/10addheat-create-cluster.png "create-cluster ")
-
-6. HeatWave Clusters creation will take about 10 minutes. From the DB display page scroll down to the Resources section. Click the **HeatWave** link. Your completed HeatWave Cluster Information section will look like this:
-
-    ![Connect](./images/10addheatcluster-create-complete.png " addheatcluster-create-complete")
-
 ## Acknowledgements
 
 - **Author** - Perside Foster, MySQL Solution Engineering

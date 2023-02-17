@@ -15,12 +15,12 @@
         },
 
         {
-            "title": "Lab 1: Create MySQL HeatWave and Cluster",
+            "title": "Lab 1: Create MySQL HeatWave",
             "filename": "../../create-dbs/create-dbs.md"
         },
 
         {
-          "title": "Lab 2: Connect to MySQL HeatWave",
+          "title": "Lab 2: Add HeatWave Cluster to MySQL Database Service",
           "filename": "../../connect-dbs/connect-dbs.md"
         },
 
