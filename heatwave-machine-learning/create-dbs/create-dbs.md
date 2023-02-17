@@ -95,6 +95,51 @@ In this lab, you will be guided through the following tasks:
 13. On Security List for Private Subnet-MDS-VCN page, the new Ingress Rules will be shown under the Ingress Rules List
     ![VCN](./images/03vcn-ingress-rule-list.png "vcn-ingress-rule-list")
 
+14. Because last lab requires web access, we open now the port 80/HTTP.
+Click **Navigation Menu**, **Networking**, then **Virtual Cloud Networks**
+    ![VCN](./images/03vcn-nav-menu.png"vcn-nav-menu")
+
+15. Click the VCN name '**MDS-VCN**' to show the subnets
+    ![VCN](./images/03vcn-list.png"vcn-wizard")
+
+16. Click the subnet '**Public Subnet-MDS-VCN**' to show the associated security lists
+    ![VCN](./images/03vcn-create-display.png"vcn-wizard")
+
+17. On Public Subnet-MDS-VCN page under 'Security Lists', click '**Default Security List for MDS-VCN**'
+    ![VCN](./images/03vcn-public-security-lists.png"vcn-wizard")
+
+17. On Public Subnet-MDS-VCN page under 'Security Lists', click '**Default Security List for MDS-VCN**'
+    ![VCN](./images/03vcn-public-security-lists.png"vcn-wizard")
+
+18. On Security List for Public Subnet-MDS-VCN page under 'Ingress Rules', click '**Add Ingress Rules**'
+    ![VCN](./images/03vcn-ingress.png "vcn-ingress ")
+
+19. On Add Ingress Rules page under Ingress Rule 1
+
+    Add an Ingress Rule with Source CIDR
+
+    ```bash
+    <copy>0.0.0.0/0</copy>
+    ```
+
+    Destination Port Range
+
+    ```bash
+    <copy>80</copy>
+    ```
+
+    Description
+
+    ```bash
+    <copy>HTTP Access</copy>
+    ```
+
+    Click 'Add Ingress Rule'
+        ![VCN](./images/03vcn-ingress-rule-80.png "vcn-ingress-rule")
+
+20. On Security List for Public Subnet-MDS-VCN page, the new Ingress Rules will be shown under the Ingress Rules List
+    ![VCN](./images/03vcn-public-ingress-rule-list.png "vcn-ingress-rule-list")
+
 ## Task 2: Create a MySQL Database for HeatWave (DB System) 
 
 1. Go to Navigation Menu
@@ -156,51 +201,43 @@ In this lab, you will be guided through the following tasks:
 
     ![MDS](./images/04mysql-vcn.png "mysql-vcn")
 
-7. On Configure placement under 'Availability Domain'
+7. On Configure hardware, keep default shape as **MySQL.HeatWave.VM.Standard.E3**
 
-    Select AD-3
-
-    Do not check 'Choose a Fault Domain' for this DB System.
-
-    ![MDS](./images/04mysql-availability-domain.png "mysql-availability-domain")
-
-8. On Configure hardware, keep default shape as **MySQL.HeatWave.VM.Standard.E3**
-
-    Data Storage Size (GB) Set value to:  **1024**
+    Data Storage Size (GB) Set value to:  **512**
 
     ```bash
-    <copy>1024</copy>
+    <copy>512</copy>
     ```
 
     ![MDS](./images/04mysql-data-storage.png "mysqldata-storage")
 
-9. On Configure Backups, disable 'Enable Automatic Backup'
+8. On Configure Backups, disable 'Enable Automatic Backup'
 
     ![MDS](./images/04mysqlset-backup.png "mysqlset-backup")
 
-10. Go to the Networking tab, in the Hostname field enter (same as DB System Name):
+9. Go to the Networking tab, in the Hostname field enter (same as DB System Name):
 
     ```bash
     <copy>MDS-HW</copy>
     ```
 
-11. Review **Create MySQL DB System**  Screen
+10. Click the '**Create**' button
 
     ![MDS](./images/04mysql-create-button.png " mysql_create-button")
 
-    Click the '**Create**' button
+    
 
-12. The New MySQL DB System will be ready to use after a few minutes
+11. The New MySQL DB System will be ready to use after a few minutes
 
     The state will be shown as 'Creating' during the creation
 
     ![MDS](./images/04mysql-create-display.png"mysql-create-display ")
 
-13. The state 'Active' indicates that the DB System is ready for use
+12. The state 'Active' indicates that the DB System is ready for use
 
     On MDS-HW Page, check the MySQL Endpoint (Private IP Address)
 
-    ![MDS](./images/04mysql-create-ative.png"mysql-create-ative ")
+    ![MDS](./images/04mysql-create-active.png"mysql-create-ative ")
 
 ## Task 3: Add a HeatWave Cluster to MDS-HW MySQL Database System
 
