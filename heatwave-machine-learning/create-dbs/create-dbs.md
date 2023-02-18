@@ -183,11 +183,11 @@ Click **Navigation Menu**, **Networking**, then **Virtual Cloud Networks**
 
     ![MDS](./images/04mysql-select-heatwave.png "mysql-select-heatwave")
 
-5. Create Administrator Credentials
+5. Create Administrator Credentials (write username and password to notepad for later use)
 
-    **Enter Username** (write username to notepad for later use)
+    **Enter Username** : admin 
 
-    **Enter Password** (write the password to notepad for later use)
+    **Enter Password** : 
 
     **Confirm Password** (value should match the password for later use)
 

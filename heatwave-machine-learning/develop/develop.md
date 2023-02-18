@@ -18,119 +18,8 @@ In this lab, you will be guided through the following tasks:
 - Some Experience with PHP
 - Completed Lab 3
 
-## Task 1: Create Compute instance
 
-The Cloud Shell machine is a small virtual machine running a Bash shell which you access through the Oracle Cloud Console (Homepage). You will start the Cloud Shell and generate an SSH Key to use  for the Bastion Session.
-
-1. To start the Oracle Cloud shell, go to your Cloud console and click the cloud shell icon at the top right of the page. This will open the Cloud Shell in the browser, the first time it takes some time to generate it.
-
-    ![CONNECT](./images/cloudshellopen.png "cloudshellopen ")
-
-    ![CONNECT](./images/cloudshell-open-display.png "cloudshell-open-display ")
-
-    **Note:** You can use the icons in the upper right corner of the Cloud Shell window to minimize, maximize, restart, and close your Cloud Shell session.*
-
-2. Once the cloud shell has started, create the SSH Key using the following command:
-
-    ```bash
-    <copy>ssh-keygen -t rsa</copy>
-    ```
-
-    Press enter for each question.
-
-    Here is what it should look like.
-
-    ![CONNECT](./images/ssh-key.png "ssh-key")
-
-3. The public and private SSH keys are stored in ~/.ssh/id_rsa.pub.
-
-4. Examine the two files that you just created.
-
-    ```bash
-    <copy>cd .ssh</copy>
-    ```
-
-    ```bash
-    <copy>ls</copy>
-    ```
-
-    ![CONNECT](./images/ssh-ls.png "ssh-ls ")
-
-    There are two files in the output, a *private key:* `id_rsa` and a *public key:* `id_rsa.pub`. Keep the private key safe and don't share its content with anyone. The public key will be needed for various activities and can be uploaded to certain systems as well as copied and pasted to facilitate secure communications in the cloud.
-
-
-You will need a compute Instance to connect to your brand new MySQL database.
-
-1. Before creating the Compute instance open a notepad
-
-2. Do the followings steps to copy the public SSH key to the  notepad
-
-    Open the Cloud shell
-    ![CONNECT](./images/cloudshell-key-copy.png "cloudshell-key-copy ")
-
-    Enter the following command
-
-    ```bash
-    <copy>cat ~/.ssh/id-rsa.pub</copy>
-    ```
-
-    ![CONNECT](./images/cloudshell-key-display.png "cloudshell-key-display ")
-
-3. Copy the id_rsa.pub content to the notepad
-
-    Your notepad should look like this
-    ![CONNECT](./images/notepad-rsa-key.png "notepad-rsa-key ")
-
-4. To launch a Linux Compute instance, go to
-    Navigation Menu
-    Compute
-    Instances
-    ![CONNECT](./images/05compute-instance-menu.png "compute-instance-menu ")
-
-5. On Instances in **(root)** Compartment, click  **Create Instance**
-    ![CONNECT](./images/05compute-create-menu.png "compute-create-menu ")
-
-6. On Create Compute Instance
-
-    Enter Name
-
-    ```bash
-    <copy>MDS-Client</copy>
-    ```
-
-7. Make sure **(root)** compartment is selected
-
-8. On Placement, keep the selected Availability Domain
-
-9. On Image and Shape, keep the selected Image, Oracle Linux 8
-
-      ![CONNECT](./images/05compute-image.png "compute-image ")
-
-10. Select Instance Shape: VM.Standard.E2.2
-
-      ![CONNECT](./images/05compute-shape.png "compute-shape ")
-
-11. On Networking, make sure '**MDS-VCN**' is selected
-
-12. 'Assign a public IP' address should be set to Yes
-
-    ![CONNECT](./images/05compute-ip.png "compute-ip ")
-
-13. On Add SSH keys, paste the public key from the notepad.
-
-    ![CONNECT](./images/05compute-id-rsa-paste.png "compute-id-rsa-past ")
-
-14. Click '**Create**' to finish creating your Compute Instance.
-
-15. The New Virtual Machine will be ready to use after a few minutes. The state will be shown as 'Provisioning' during the creation
-
-    ![CONNECT](./images/05compute-privision.png "compute-provision ")
-
-16. The state 'Running' indicates that the Virtual Machine is ready to use.
-
-    ![CONNECT](./images/05compute-running.png "compute-running ")
-
-## TASK 2: Install App Server (APACHE)
+## TASK 1: Install Web Server (APACHE)
 
 1. If not already connected with SSH, on Command Line, connect to the Compute instance using SSH ... be sure to replace the  "private key file"  and the "new compute instance IP".
 
@@ -174,7 +63,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     **Example: http://129.213....**
 
-## TASK 3: Install PHP
+## TASK 2: Install PHP
 
 1. Install PHP:
 
@@ -218,15 +107,15 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ```bash
         <copy><?php
-    phpinfo();
-    ?></copy>
-        ```
+        phpinfo();
+        ?></copy>
+    ```
 
 4. From your local machine, browse the page info.php
 
     **Example: http://129.213.167.../info.php**
 
-## TASK 4: Create Connection Test Code
+## TASK 3: Test Connection to MySQL Database Instance
 
 1. Security update"   set SELinux to allow Apache to connect to MySQL
 
@@ -270,7 +159,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     **Test Config.php on Web Sever http://150.230..../config.php**
 
-## TASK 5: Create HeatWave ML Web App
+## TASK 4: Create HeatWave ML Web App
 
 1. Go to the development folder
 

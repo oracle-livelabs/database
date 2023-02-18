@@ -20,8 +20,8 @@
         },
 
         {
-          "title": "Lab 2: Add HeatWave Cluster to MySQL Database Service",
-          "filename": "../../connect-dbs/connect-dbs.md"
+          "title": "Lab 2: Add HeatWave Cluster to MySQL Database Service and connect",
+          "filename": "../../add-cluster/add-cluster.md"
         },
 
         {
