@@ -392,10 +392,9 @@ The source code of the sample application is present in folder: /home/oracle/OTM
 - Department 1 Service Source code: /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-helidon
 - Department 2 Service Source code: /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-spring
 
-
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
 To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
----
+
 
 ## Learn More
 
