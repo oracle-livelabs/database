@@ -1,10 +1,10 @@
-# Create MySQL Database HeatWave  and Cluster
+# Create MySQL Database HeatWave
 
 ## Introduction
 
-In this lab, you will create and configure a Virtual Cloud Network and a MySQL HeatWave Database System. Once the HeatWave Database is fully created,  you will add a HeatWave Cluster comprise of two or more HeatWave nodes to the system.
+In this lab, you will create and configure a Virtual Cloud Network and a MySQL HeatWave Database System. 
 
-_Estimated Time:_ 20 minutes
+_Estimated Time:_ 15 minutes
 
 ### Objectives
 
@@ -12,7 +12,6 @@ In this lab, you will be guided through the following tasks:
 
 - Create a Virtual Cloud Network
 - Create MySQL HeatWave Database
-- Add a HeatWave Cluster to MySQL Database System
 
 ### Prerequisites
 
@@ -21,17 +20,24 @@ In this lab, you will be guided through the following tasks:
 
 ## Task 1: Create a Virtual Cloud Network
 
-1. Click **Navigation Menu**, **Networking**, then **Virtual Cloud Networks**
+1. Click **Navigation Menu** in the up-left corner of the page
+
+    ![VCN](./images/01dashboard.png"dashboard")
+
+2. Click **Virtual Cloud Networks**
+
     ![VCN](./images/03vcn-nav-menu.png"vcn-nav-menu")
-2. Click **Start VCN Wizard**
+
+3. Click **Start VCN Wizard**
+
     ![VCN](./images/03vcn-wizard.png"vcn-wizard")
 
-3. Select 'Create VCN with Internet Connectivity'
+4. Select 'Create VCN with Internet Connectivity'
 
     Click 'Start VCN Wizard'
     ![VCN](./images/03vcn-create.png "vcn-create ")
 
-4. Create a VCN with Internet Connectivity
+5. Create a VCN with Internet Connectivity
 
     On Basic Information, complete the following fields:
 
@@ -47,26 +53,32 @@ In this lab, you will be guided through the following tasks:
 
     ![VCN](./images/03vcn-create-screen.png "vcn-create-screen")
 
-5. Click 'Next' at the bottom of the screen
+6. Click 'Next' at the bottom of the screen
 
-6. Review Oracle Virtual Cloud Network (VCN), Subnets, and Gateways
+7. Review Oracle Virtual Cloud Network (VCN), Subnets, and Gateways
 
-    Click 'Create' to create the VCN
+    Click '**Create**' to create the VCN
+
     ![VCN](./images/03vcn-create-button.png "vcn-create-button")
 
-7. The Virtual Cloud Network creation is completing
+8. The Virtual Cloud Network creation is completing.
+   Then click '**View VCN**' to display the created VCN
+
     ![VCN](./images/03vcn-create-complete.png "vcn-create-complete ")
 
-8. Click 'View Virtual Cloud Network' to display the created VCN
+9. On MDS-VCN page under 'Subnets in (root) Compartment', click  '**Private Subnet-MDS-VCN**'
+
     ![VCN](./images/03vcn-create-display.png "vcn-create-display ")
 
-9. On MDS-VCN page under 'Subnets in (root) Compartment', click  '**Private Subnet-MDS-VCN**'
-     ![VCN](./images/03vcn-subnets.png "vcn-subnets")
 
 10. On Private Subnet-MDS-VCN page under 'Security Lists',  click  '**Security List for Private Subnet-MDS-VCN**'
+
+     ![VCN](./images/03vcn-subnets.png "vcn-subnets")
+    
+11. On Security List for Private Subnet-MDS-VCN page under 'Ingress Rules', click '**Add Ingress Rules**'
+
     ![VCN](./images/03vcn-seclist.png " vcn-seclist")
 
-11. On Security List for Private Subnet-MDS-VCN page under 'Ingress Rules', click '**Add Ingress Rules**'
     ![VCN](./images/03vcn-ingress.png "vcn-ingress ")
 
 12. On Add Ingress Rules page under Ingress Rule 1
@@ -90,26 +102,29 @@ In this lab, you will be guided through the following tasks:
     ```
 
     Click 'Add Ingress Rule'
+
         ![VCN](./images/03vcn-ingress-rule.png "vcn-ingress-rule")
 
 13. On Security List for Private Subnet-MDS-VCN page, the new Ingress Rules will be shown under the Ingress Rules List
+
     ![VCN](./images/03vcn-ingress-rule-list.png "vcn-ingress-rule-list")
 
-14. Because last lab requires web access, we open now the port 80/HTTP.
-Click **Navigation Menu**, **Networking**, then **Virtual Cloud Networks**
+14. Because we want also create a web application in last lab, we open now the port 80/HTTP. <br>
+    Click **Navigation Menu**, **Networking**, then **Virtual Cloud Networks**
+
     ![VCN](./images/03vcn-nav-menu.png"vcn-nav-menu")
 
 15. Click the VCN name '**MDS-VCN**' to show the subnets
-    ![VCN](./images/03vcn-list.png"vcn-wizard")
+
+    ![VCN](./images/03vcn-list.png"vcn-list")
 
 16. Click the subnet '**Public Subnet-MDS-VCN**' to show the associated security lists
-    ![VCN](./images/03vcn-create-display.png"vcn-wizard")
+
+    ![VCN](./images/03vcn-create-display.png"vcn-create-display")
 
 17. On Public Subnet-MDS-VCN page under 'Security Lists', click '**Default Security List for MDS-VCN**'
-    ![VCN](./images/03vcn-public-security-lists.png"vcn-wizard")
 
-17. On Public Subnet-MDS-VCN page under 'Security Lists', click '**Default Security List for MDS-VCN**'
-    ![VCN](./images/03vcn-public-security-lists.png"vcn-wizard")
+    ![VCN](./images/03vcn-public-security-lists.png"vcn-public-security-lists")
 
 18. On Security List for Public Subnet-MDS-VCN page under 'Ingress Rules', click '**Add Ingress Rules**'
     ![VCN](./images/03vcn-ingress.png "vcn-ingress ")
@@ -135,10 +150,10 @@ Click **Navigation Menu**, **Networking**, then **Virtual Cloud Networks**
     ```
 
     Click 'Add Ingress Rule'
-        ![VCN](./images/03vcn-ingress-rule-80.png "vcn-ingress-rule")
+        ![VCN](./images/03vcn-ingress-rule-80.png "vcn-ingress-rule-80")
 
 20. On Security List for Public Subnet-MDS-VCN page, the new Ingress Rules will be shown under the Ingress Rules List
-    ![VCN](./images/03vcn-public-ingress-rule-list.png "vcn-ingress-rule-list")
+    ![VCN](./images/03vcn-public-ingress-rule-list.png "vcn-public-ingress-rule-list")
 
 ## Task 2: Create a MySQL Database for HeatWave (DB System) 
 
@@ -237,10 +252,10 @@ Click **Navigation Menu**, **Networking**, then **Virtual Cloud Networks**
 
     On MDS-HW Page, check the MySQL Endpoint (Private IP Address)
 
-    ![MDS](./images/04mysql-create-active.png"mysql-create-ative ")
+    ![MDS](./images/04mysql-create-active.png"mysql-create-active ")
 
 ## Acknowledgements
 
 - **Author** - Perside Foster, MySQL Solution Engineering
-- **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Priscila Galvao, MySQL Solution Engineering, Nick Mader, MySQL Global Channel Enablement & Strategy Manager, Frédéric Descamps, MySQL Community Manager
+- **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Priscila Galvao, MySQL Solution Engineering, Nick Mader, MySQL Global Channel Enablement & Strategy Manager, Frédéric Descamps, MySQL Community Manager, Marco Carlessi, MySQL Solution Engineering
 - **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, July 2022

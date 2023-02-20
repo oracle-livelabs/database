@@ -1,17 +1,21 @@
-# CONNECT TO MYSQL HeatWave
+# Add HeatWave Cluster to MySQL Database Service and Connect
 
 ## Introduction
 
-When working in the cloud, there are often times when your servers and services are not exposed to the public internet. The Oracle Cloud Infrastructure (OCI) MySQL cloud service is an example of a service that is only accessible through private networks. Since the service is fully managed, we keep it siloed away from the internet to help protect your data from potential attacks and vulnerabilities. It’s a good practice to limit resource exposure as much as possible, but at some point, you’ll likely want to connect to those resources. That’s where Compute Instance, also known as a Bastion host, enters the picture. This Compute Instance Bastion Host is a resource that sits between the private resource and the endpoint which requires access to the private network and can act as a “jump box” to allow you to log in to the private resource through protocols like SSH.  This bastion host requires a Virtual Cloud Network and Compute Instance to connect with the MySQL DB Systems.
+We have now a MySQL Database up and running. It's time now to add a HeatWave Cluster comprise of one or more HeatWave nodes to the system.
+
+When working in the cloud, there are often times when your servers and services are not exposed to the public internet. The Oracle Cloud Infrastructure (OCI) MySQL cloud service is an example of a service that is only accessible through private networks. Since the service is fully managed, we keep it siloed away from the internet to help protect your data from potential attacks and vulnerabilities. It’s a good practice to limit resource exposure as much as possible, but at some point, you’ll likely want to connect to those resources. That’s where Compute Instance enters the picture. This Compute Instance can be used as application server or Bastion Host. A Bastion host is a resource that sits between the private resource and the endpoint which requires access to the private network and can act as a “jump box” to allow you to log in to the private resource through protocols like SSH.
+
 
 Today, you will use the Compute Instance to connect from the browser to a MDS DB System
 
-_Estimated Lab Time:_ 20 minutes
+_Estimated Lab Time:_ 25 minutes
 
 ### Objectives
 
 In this lab, you will be guided through the following tasks:
 
+- Add a HeatWave Cluster to MySQL Database System
 - Create SSH Key on OCI Cloud
 - Create Compute Instance
 - Setup Compute Instance with MySQL Shell
@@ -21,7 +25,7 @@ In this lab, you will be guided through the following tasks:
 
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with MySQL Shell
-- Must Complete Lab 1
+- Completed Lab 1
 
 ## Task 1: Add a HeatWave Cluster to MDS-HW MySQL Database System
 
@@ -45,7 +49,8 @@ click **More Action ->  Add HeatWave Cluster**.
 
     ![Connect](./images/10addheat-create-cluster.png "create-cluster ")
 
-6. HeatWave Clusters creation will take about 10 minutes. From the DB display page scroll down to the Resources section. Click the **HeatWave** link. Your completed HeatWave Cluster Information section will look like this:
+6. HeatWave Clusters creation will take about 10 minutes. From the DB display page scroll down to the Resources section. Click the **HeatWave** link.<br>
+   Your completed HeatWave Cluster Information section will look like this:
 
     ![Connect](./images/10addheatcluster-create-complete.png " addheatcluster-create-complete")
 
@@ -178,6 +183,7 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
     - Copy `MDS-HW` plus the `Private IP Address` to the notepad
 
 3. Your notepad should look like the following:
+
      ![CONNECT](./images/notepad-rsa-key-compute-mds.png "notepad-rsa-key-compute-mds ")
 
 4. Return to your Cloud Shell to connect to your instance, using the private key that you created earlier with **MDS-Client**.
@@ -239,5 +245,5 @@ You may now proceed to the next lab.
 ## Acknowledgements
 
 - **Author** - Perside Foster, MySQL Solution Engineering
-- **Contributor** - Frédéric Descamps, MySQL Community Manager
+- **Contributor** - Frédéric Descamps, MySQL Community Manager, Marco Carlessi, MySQL Solution Engineering
 - **Last Updated By/Date** - Perside Foster, July  2022
