@@ -24,7 +24,10 @@ In this lab, you will:
 * Build container images for each microservice from the XA sample application code. After building the container images, the images are available in your Minikube container registry.
 * Update the `values.yaml` file, which contains the deployment configuration details for the XA sample application.
 * Install the Sample XA Application. While installing the sample application, Helm uses the configuration details you provide in the `values.yaml` file.
+* Deploy Kiali and Jaeger in your minikube cluster (Optional and if not already deployed)
 * Run an XA transaction to withdraw an amount from Department A and deposit it in Department B.
+* View service graph of the mesh and distributed traces to track requests (Optional)
+* View source code of the sample application (Optional)
 
 ### Prerequisites
 
@@ -244,7 +247,55 @@ Before you start a transaction, you must start a Minikube tunnel.
 
     Note that, if you don't do this, then you must explicitly specify the IP address in the commands when required.
 
-## Task 5: Run an XA Transaction
+## Task 5: Deploy Kiali and Jaeger in the cluster (Optional)
+**You can skip this task if you have already deployed Kiali and Jaeger in your cluster while performing Lab 3. However, ensure you have started Kiali and Jaeger dashboards as shown in steps 4 and 5.** 
+This optional task lets you deploy Kiali and Jaeger in the minikube cluster to view the service mesh graph and enable distributed tracing.
+Distributed tracing enables tracking a request through service mesh that is distributed across multiple services. This allows a deeper understanding about request latency, serialization and parallelism via visualization.
+You will be able to visualize the service mesh and the distributed traces after you have run the sample application in the following task.
+The following commands can be executed to deploy Kiali and Jaeger. Kiali requires prometheus which should also be deployed in the cluster.
+
+1. Deploy Kiali.
+
+    ```text
+    <copy>
+    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/kiali.yaml
+    </copy>
+    ```
+2. Deploy Prometheus.
+
+    ```text
+    <copy>
+    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/prometheus.yaml
+    </copy>
+    ```
+3. Deploy Jaeger.
+
+    ```text
+    <copy>
+    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/jaeger.yaml
+    </copy>
+    ```
+4. Start Kiali Dashboard. Open a new tab in the terminal window and execute the following command. Leave the terminal running. A browser window may pop up as well. Close the browser window.
+
+    ```text
+    <copy>
+    istioctl dashboard kiali
+    </copy>
+    ```
+   An output will show a URL on which you can access the kiali dashboard in a browser tab:
+   http://localhost:20001/kiali
+
+5. Start Jaeger Dashboard. Open a new tab in the terminal window and execute the following command. Leave the terminal running. A browser window may pop up as well. Close the browser window.
+
+    ```text
+    <copy>
+    istioctl dashboard jaeger
+    </copy>
+    ```
+   An output will show a URL on which you can access the jaeger dashboard in a browser tab:
+   http://localhost:16686
+
+## Task 6: Run an XA Transaction
 
 Run an XA transaction When you run the Teller application, it withdraws money from one department and deposits it to another department by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
@@ -326,6 +377,24 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     --request GET 'http://$CLUSTER_IPADDR/dept1/account1' | jq
     </copy>
     ```
+## Task 7: View Service Mesh graph and Distributed Traces (Optional)
+You can perform this task only if you have performed Task 5 or have Kiali and Jaeger deployed in your cluster.
+To visualize what happens behind the scenes and how a trip booking request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you started in Task 3.
+1. Open a new browser tab and navigate to the Kiali dashboard URL - http://localhost:20001/kiali
+2. Select Graph for the otmm namespace.
+3. Open a new browser tab and navigate to the Jaeger dashboard URL - http://localhost:16686
+4. Select istio-ingressgateway.istio-system from the Service list. You can see the list of traces with each trace representing a request.
+5. Select one of the traces to view.
+
+## Task 8: View source code of the sample application (Optional)
+The source code of the sample application is present in folder: /home/oracle/OTMM/otmm-22.3/samples/xa/java
+- Teller Service Source code: /home/oracle/OTMM/otmm-22.3/samples/xa/java/teller
+- Department 1 Service Source code: /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-helidon
+- Department 2 Service Source code: /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-spring
+
+You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
+To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
+
 
 ## Learn More
 
