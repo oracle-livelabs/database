@@ -78,10 +78,6 @@ The HR schema is a modified version of the well-known HR schema to support editi
    <copy>@hr_main.sql</copy>
    ```
 
-   ````text
-   <copy>@hr_main.sql</copy>
-   ```
-
    The scripts prompts for few parameters and make sure you provide the correct details if not the script will error
 
 - The password for the `HR` user - Input as  **Welcome#Welcome#123**
@@ -90,7 +86,7 @@ The HR schema is a modified version of the well-known HR schema to support editi
 - The path used to store the logs- Input as **./**
 - The name of the TNS name to connect to the Autonomous Database- Input as **ebronline_medium**
 
-  (change it to the actual connection string, e.g. ebronline41137_medium)
+  **(change it to the actual connection string, e.g. ebronline41137_medium)**
 
    ![HR main script](images/hr-main-script.png " ")
 

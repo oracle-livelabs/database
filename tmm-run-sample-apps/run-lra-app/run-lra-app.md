@@ -22,7 +22,10 @@ In this lab, you will:
 
 * Configure Minikube
 * Start a tunnel between Minikube and MicroTx
+* Deploy Kiali and Jaeger in your minikube cluster (Optional)
 * Run the LRA sample application
+* View service graph of the mesh and distributed traces to track requests (Optional)
+* View source code of the sample application (Optional)
 
 ### Prerequisites
 
@@ -83,7 +86,7 @@ Before you start a transaction, you must start a tunnel between Minikube and Mic
     </copy>
     ```
 
-2. In a new terminal, run the following command to get the external IP address of the Istio ingress gateway.
+2. In another new terminal, run the following command to get the external IP address of the Istio ingress gateway.
 
     ```text
     <copy>
@@ -127,7 +130,54 @@ Before you start a transaction, you must start a tunnel between Minikube and Mic
     </copy>
     ```
 
-## Task 3: Run the LRA sample application
+## Task 3: Deploy Kiali and Jaeger in the cluster (Optional)
+This optional task lets you deploy Kiali and Jaeger in the minikube cluster to view the service mesh graph and enable distributed tracing.
+Distributed tracing enables tracking a request through service mesh that is distributed across multiple services. This allows a deeper understanding about request latency, serialization and parallelism via visualization.
+You will be able to visualize the service mesh and the distributed traces after you have run the sample application in the following task.
+The following commands can be executed to deploy Kiali and Jaeger. Kiali requires prometheus which should also be deployed in the cluster.
+
+1. Deploy Kiali.
+
+    ```text
+    <copy>
+    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/kiali.yaml
+    </copy>
+    ```
+2. Deploy Prometheus.
+
+    ```text
+    <copy>
+    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/prometheus.yaml
+    </copy>
+    ```
+3. Deploy Jaeger.
+
+    ```text
+    <copy>
+    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/jaeger.yaml
+    </copy>
+    ```
+4. Start Kiali Dashboard. Open a new tab in the terminal window and execute the following command. Leave the terminal running. A browser window may pop up as well. Close the browser window.
+
+    ```text
+    <copy>
+    istioctl dashboard kiali
+    </copy>
+    ```
+   An output will show a URL on which you can access the kiali dashboard in a browser tab:
+    http://localhost:20001/kiali
+
+5. Start Jaeger Dashboard. Open a new tab in the terminal window and execute the following command. Leave the terminal running. A browser window may pop up as well. Close the browser window.
+
+    ```text
+    <copy>
+    istioctl dashboard jaeger
+    </copy>
+    ```
+   An output will show a URL on which you can access the jaeger dashboard in a browser tab:
+   http://localhost:16686
+
+## Task 4: Run the LRA sample application
 
 Run the sample LRA application to book a hotel room and flight ticket.
 
@@ -179,6 +229,30 @@ The sample application provisionally books a hotel room and a flight ticket and 
     curl --location --request GET http://$CLUSTER_IPADDR/flightService/api/flight | jq
     </copy>
     ```
+
+## Task 5: View Service Mesh graph and Distributed Traces (Optional)
+You can perform this task only if you have performed Task 3. 
+To visualize what happens behind the scenes and how a trip booking request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you started in Task 3.
+1. Open a new browser tab and navigate to the Kiali dashboard URL - http://localhost:20001/kiali
+
+2. Select Graph for the otmm namespace.
+![Kiali Dashboard](images/kiali-dashboard-lra.png)
+
+3. Open a new browser tab and navigate to the Jaeger dashboard URL - http://localhost:16686
+4. Select istio-ingressgateway.istio-system from the Service list. You can see the list of traces with each trace representing a request. 
+![Jaeger Traces List](images/jaeger-traces-list.png)
+5. Select one of the traces to view.
+![Jaeger Trace for Confirmation Step](images/jaeger-trace-confirm-cancel.png)
+
+## Task 6: View source code of the sample application (Optional)
+The source code of the sample application is present in folder: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo
+- Trip Service Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/trip-manager
+- Hotel Service Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/hotel
+- Flight Service Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/flight
+- Trip Client Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/trip-client 
+
+You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files. To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
+
 
 You may now **proceed to the next lab** to run a sample XA application. If you do not want to proceed further and would like to finish the LiveLabs and clean up the resources, then complete **Lab 6: Environment Clean Up**.
 
