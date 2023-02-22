@@ -136,7 +136,25 @@ You may now **proceed to the next lab.**
 
       ![Copy password](images/copy-password.png)
 
-3. Sign in as the new user using a different web browser or an incognito window.
+3. Make the user an administrator.
+    
+    a) Click the **Navigation Menu** in the upper left, navigate to **Identity & Security** and select **Users**.
+
+	![id-users](https://oracle-livelabs.github.io/common/images/console/id-users.png " ")
+
+    b) Click the user you have made.
+
+    ![Users](images/list-of-users.png)
+
+    c) Scroll to the bottom of the page, click **Groups**, and then click **Add User to Group**.
+
+    ![User Groups](images/user-groups.png)
+
+    d) Select the administrator group and click **Add**.
+
+    ![Assigning Admin](images/assign-admin.png)
+
+4. Sign in as the new user using a different web browser or an incognito window.
 
    a) Click **Sign Out** from the user menu and log out of the admin user account completely.
 
