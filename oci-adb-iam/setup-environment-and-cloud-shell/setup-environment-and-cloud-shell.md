@@ -111,10 +111,9 @@ You may now **proceed to the next lab.**
 
    In the **Create User** dialog box, enter the following:
 
-      - **Name:** Enter a unique First and Last name for the new user (for example, **User01**).
+      - **Name:** Enter a unique First and Last name for the new user (for example, **testuser**).
+      - **Description:** Enter a short description (for example **"This is a test user"**)
       - **Email:**  Preferably use a personal email address to which you have access (GMail, Yahoo, etc).
-      - Check the box of "Use the email address as the username".
-      - Check the box of "Assign cloud account administrator role".
 
     Click **Create**.
 
