@@ -69,7 +69,6 @@ This workshop contains different language implementation in the form of differen
 <if type="Python">
 
 1. Make sure that python is installed in your system.
-
 2. You can install the Python SDK through the Python Package Index with the command given below.
 ```
  <copy> pip3 install borneo </copy>
@@ -362,7 +361,7 @@ This application accesses Oracle NoSQL Database Cloud Service, but most likely y
 
 ## Learn More
 
-* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/pls/topic/lookup?ctx=cloud&id=CSNSD-GUID-88373C12-018E-4628-B241-2DFCB7B16DE8)
+* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/dtddt/index.html)
 * [Oracle NoSQL Database Cloud Service page](https://cloud.oracle.com/en_US/nosql)
 <if type="Java">
 * [Java API Reference Guide](https://docs.oracle.com/en/cloud/paas/nosql-cloud/csnjv/index.html)
@@ -380,4 +379,4 @@ This application accesses Oracle NoSQL Database Cloud Service, but most likely y
 ## Acknowledgements
 * **Author** - Dave Rubin, Senior Director, NoSQL and Embedded Database Development and Michael Brey, Director, NoSQL Product Development
 * **Contributors** - Jaden McElvey, Technical Lead - Oracle LiveLabs Intern
-* **Last Updated By/Date** -Vandana Rajamani, Database User Assistance, December 2021
+* **Last Updated By/Date** -Vandana Rajamani, Database User Assistance, February 2023
