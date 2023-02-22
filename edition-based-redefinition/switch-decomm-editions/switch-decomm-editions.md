@@ -1,5 +1,9 @@
 # Switch to the new edition and decommission the old edition
 
+## Introduction
+
+In this lab, we will switch to the new edition `V2` and decommission the old edition `ORA$BASE`
+
 Estimated lab time: 15 minutes
 
 ### Objectives
@@ -8,119 +12,119 @@ In this lab, we will switch to the new edition `V2` and decommission the old edi
 
 ## Task 1: Verify all the scripts 
 
-We will review all the scripts of the second Liquibase changelog for better understanding. If you want to directly execute the changelog, skip **Task 1** and proceed to **Task 2** 
+1. We will review all the scripts of the second Liquibase changelog for better understanding. If you want to directly execute the changelog, skip **Task 1** and proceed to **Task 2** 
 
-Now that the new edition is ready, instances of the new application version can use the new edition, using either a dedicated service or by issuing an `alter session`.
+    Now that the new edition is ready, instances of the new application version can use the new edition, using either a dedicated service or by issuing an `alter session`.
 
-Once the application is validated, you can gradually roll over all the application servers, performing a truly rolling application upgrade.
-You can also change the database default edition so that all new sessions will see the new one.
+    Once the application is validated, you can gradually roll over all the application servers, performing a truly rolling application upgrade.
+    You can also change the database default edition so that all new sessions will see the new one.
 
-However, all the applications that are sensitive to the change should explicitly set the edition, so that reconnections will not cause any harm.
+    However, all the applications that are sensitive to the change should explicitly set the edition, so that reconnections will not cause any harm.
 
-For this demo, we will integrate this step in a changelog that decommissions the old edition.
+    For this demo, we will integrate this step in a changelog that decommissions the old edition.
 
-The last changelog contains the SQL files that clean up everything, drop the old edition and redefine the table `employees`without the `phone_number` column.
+    The last changelog contains the SQL files that clean up everything, drop the old edition and redefine the table `employees`without the `phone_number` column.
 
-All the scripts are available in **hr.00003.edition\_v2\_post_rollout** directory.
+    All the scripts are available in **hr.00003.edition\_v2\_post_rollout** directory.
 
-```text
-<copy>cd ~/changes/hr.00003.edition_v2_post_rollout</copy>
-```
+    ```text
+    <copy>cd ~/changes/hr.00003.edition_v2_post_rollout</copy>
+    ```
 
-### 1. Alter session to use edition V2
+2. Alter session to use edition V2
 
-![Alter session](images/alter-session.png " ")
+    ![Alter session](images/alter-session.png " ")
 
-### 2. Change the default edition to V2
+3. Change the default edition to V2
 
-As the `HR` user, we can use the helper procedure previously created. Internally, the procedure runs `execute immediate 'alter database default edition ='||edition_name;`
+    As the `HR` user, we can use the helper procedure previously created. Internally, the procedure runs `execute immediate 'alter database default edition ='||edition_name;`
 
-![Change edition](images/change-edition.png " ")
+    ![Change edition](images/change-edition.png " ")
 
-###3. Drop the old edition
+4. Drop the old edition
 
-**This step will fail if any session is still connected to the old edition.**
+    **This step will fail if any session is still connected to the old edition.**
 
-Here we use a helper procedure again:
+    Here we use a helper procedure again:
 
-![Drop old edition](images/drop-old-edition.png " ")
+    ![Drop old edition](images/drop-old-edition.png " ")
 
-The user has `grant select on dba_editions`. The `drop_edition` procedure will execute internally `execute immediate 'DROP EDITION '||edition_name||' CASCADE`, then `dbms_editions_utilities.clean_unusable_editions`.
+    The user has `grant select on dba_editions`. The `drop_edition` procedure will execute internally `execute immediate 'DROP EDITION '||edition_name||' CASCADE`, then `dbms_editions_utilities.clean_unusable_editions`.
 
 
-### 4. Drop the cross-edition triggers
+5. Drop the cross-edition triggers
 
-Now that nobody uses the old columns, it is safe to drop the cross-edition triggers.
+    Now that nobody uses the old columns, it is safe to drop the cross-edition triggers.
 
-![Drop triggers](images/drop-triggers.png " ")
+    ![Drop triggers](images/drop-triggers.png " ")
 
-### 5. Redefine the Table: Create the interim table
+6. Redefine the Table: Create the interim table
 
-![Create interim table](images/create-interim-table.png " ")
+    ![Create interim table](images/create-interim-table.png " ")
 
-### 6. Redefine the Table: Start the redefinition
+7. Redefine the Table: Start the redefinition
 
-![Start redefinition](images/start-redef.png " ")
+    ![Start redefinition](images/start-redef.png " ")
 
-### 7. Redefine the Table: Copy the table dependents
+8. Redefine the Table: Copy the table dependents
 
-![Copy table dependents](images/copy-table-dependents.png " ")
+    ![Copy table dependents](images/copy-table-dependents.png " ")
 
-### 8. Redefine the Table: Finish the redefinition
+9. Redefine the Table: Finish the redefinition
 
-![Finish redefinition](images/finish-redef.png " ")
+    ![Finish redefinition](images/finish-redef.png " ")
 
-### 9. Redefine the table: Drop the interim table
+10. Redefine the table: Drop the interim table
 
-![Drop interim table](images/drop-interim.png " ")
+    ![Drop interim table](images/drop-interim.png " ")
 
-The clause "cascade constraints" is necessary for the self-referencing foreign key (employee->manager).
+    The clause "cascade constraints" is necessary for the self-referencing foreign key (employee->manager).
 
-### 10. Run the changelog with Liquibase
+11. Run the changelog with Liquibase
 
-The changelog file is `hr.00003.edition_v2_post_rollout.xml`, available in the **changes** directory.
+    The changelog file is `hr.00003.edition_v2_post_rollout.xml`, available in the **changes** directory.
 
-![v2-post-rollout](images/v2-post-rollout.png " ")
+    ![v2-post-rollout](images/v2-post-rollout.png " ")
 
 ## Task 2: Run the change log 
 
-![Cloud Shell home](images/cloudshell-home.png " ")
+1. The home directory will be different in your environment
 
-**The home directory will be different in your environment.**
+    ![Cloud Shell home](images/cloudshell-home.png " ")
 
-```text
-<copy>cd ~</copy>
-<copy>sql /nolog</copy>
-```
+    ```text
+    <copy>cd ~</copy>
+    <copy>sql /nolog</copy>
+    ```
 
 
-```text
-<copy>set cloudconfig ebronline.zip</copy>
-<copy>connect hr/Welcome#Welcome#123@ebronline_medium</copy>
-<copy>show user</copy>
-<copy>pwd</copy>
-```
+    ```text
+    <copy>set cloudconfig ebronline.zip</copy>
+    <copy>connect hr/Welcome#Welcome#123@ebronline_medium</copy>
+    <copy>show user</copy>
+    <copy>pwd</copy>
+    ```
 
-![sqlcl-hr](images/sqlcl-hr.png " ")
+    ![sqlcl-hr](images/sqlcl-hr.png " ")
 
-Run the changelog. **Remember, in this lab, we are the only user, so we can set the edition to V2 and immediately drop the old one. In real-world environments, you will need to change the default edition first, and ensure that no old sessions use the old edition, or you will not be able to drop it!**
+2. Run the changelog. **Remember, in this lab, we are the only user, so we can set the edition to V2 and immediately drop the old one. In real-world environments, you will need to change the default edition first, and ensure that no old sessions use the old edition, or you will not be able to drop it!**
 
-```text
-<copy>cd changes</copy>
-<copy>alter session set edition=V2;</copy>
-<copy>lb update -changelog-file hr.00003.edition_v2_post_rollout.xml</copy>
-```
-![execute-changelog](images/execute-changelog.png " ")
+    ```text
+    <copy>cd changes</copy>
+    <copy>alter session set edition=V2;</copy>
+    <copy>lb update -changelog-file hr.00003.edition_v2_post_rollout.xml</copy>
+    ```
+    ![execute-changelog](images/execute-changelog.png " ")
 
-Verify the outcome of the deployment. If you see the following error, it means you have old sessions connected to the old edition:
+    Verify the outcome of the deployment. If you see the following error, it means you have old sessions connected to the old edition. Disconnect the sessions and retry.
 
-![execute-error](images/execute-error.png " ")
+    ![execute-error](images/execute-error.png " ")
 
 You have successfully switched to the new edition, decommissioned the old edition and redefined the `employees` table online.
 
-This is the end of the **Edition-Based Redefinition** LiveLabs. We hope you enjoyed it!
+This is the end of this LiveLabs. We hope you enjoyed it!
 
 ## Acknowledgements
 
 - Authors - Ludovico Caldara and Suraj Ramesh
-- Last Updated By/Date - Suraj Ramesh, Jan 2023
+- Last Updated By/Date - Suraj Ramesh, Feb 2023
