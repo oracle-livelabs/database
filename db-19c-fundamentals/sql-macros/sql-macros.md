@@ -9,6 +9,9 @@ This lab shows how to use SQL Macro as scalar and table expressions.
 
 Estimated Lab Time: 15 minutes
 
+Watch the video below for a quick walk through of the lab.
+[Using SQM Scalar and Table Expressions](videohub:1_mdq4mino)
+
 ### Objectives
 
 In this lab, you will:
@@ -222,7 +225,87 @@ insert into Rockbuster_employees values (934,'Sarah','Secretary',782,to_date('5-
 
 ## Task 3: [Bonus] Alter table move online 
 
-Work in progress
+Alter table move online is an Oracle 12.2 release that goes widely unused. You can now perform an online move of a table, as well as individual partitions and sub-partitions. This means that there is no longer a need for an outage to support the reorganization of tables. This inturn allows for a table move while transactions are running against it. Online table move also has the ability to filter and compress data as part of a move. For example if I were to have a table containing hundreds of thousands of order entry rows and I wanted to go through and clean out some of those, I would need to run a big DDL delete statement against that dataset. With ALTER TABLE MOVE ONLINE I can use a filter which effectively prunes out all of the old orders from the table and gives the ability to apply compression to the new dataset as well. Here we will stick with our fictitious company RockBuster and move their store locations table online while also enabling table compression.
+
+1. Lets start by creating a table and moving it offline to get a feel for how a table move works.
+
+    ```
+    <copy>
+CREATE TABLE RockBuster_locations (
+	store_id NUMBER,
+	phone VARCHAR (25),
+	state VARCHAR (10),
+	zip_code VARCHAR (5)
+);
+    </copy>
+    ```
+2. Lets add some data to our table. We will use the **Run Script button** for the remainder of this lab. Its located in the Database Actions console as shown in the gif below. (F5) works as well
+
+    ```
+    <copy>
+INSERT INTO ROCKBUSTER_LOCATIONS VALUES ( 1, 2025550179, 'New York', 10001);
+INSERT INTO ROCKBUSTER_LOCATIONS VALUES ( 2, 2025550183, 'New York', 10002);
+INSERT INTO ROCKBUSTER_LOCATIONS VALUES ( 3, 2025550139, 'New York', 10003);
+INSERT INTO ROCKBUSTER_LOCATIONS VALUES ( 4, 2025550152, 'New York', 10004);
+    </copy>
+    ```
+    ![run with the script button](./images/run-script.gif)
+
+3. Here we will go ahead and add a constraint and create an index on the locations by state. Lets use the **Run script button** as shown above. (F5) works as well.
+
+    ```
+    <copy>
+    ALTER TABLE ROCKBUSTER_LOCATIONS ADD CONSTRAINT location_pk PRIMARY KEY (store_id);
+CREATE index location_index ON RockBuster_locations(state);
+    </copy>
+    ```
+
+4. Now that we have some test data lets move our table. Run the select statement after the alter table move. Notice how our Indexes are now Unstable. This is because the index is now referencing the wrong location. Lets use the **Run Script button** again 
+
+    ```
+    <copy>
+    ALTER TABLE RockBuster_locations MOVE;
+SELECT index_name, status FROM user_indexes WHERE index_name = 'LOCATION_INDEX' OR index_name = 'LOCATION_PK';
+    </copy>
+    ```
+
+5. We will go ahead now and rebuild our indexes. Use the Run Script button and run the commands below to rebuild both.
+
+    ```
+    <copy>
+    ALTER index location_index REBUILD ONLINE;
+ALTER index location_pk REBUILD ONLINE;
+SELECT index_name, status FROM user_indexes WHERE index_name = 'LOCATION_INDEX' OR index_name = 'LOCATION_PK';
+    </copy>
+    ```
+
+6. Now we will move our table using the ONLINE keyword. Not only does this move the table but this automatically maintains the indexes. Use the Run Script button or press (F5)
+
+    ```
+   <copy>
+    ALTER TABLE RockBuster_locations MOVE ONLINE;
+    SELECT index_name, status FROM user_indexes where index_name = 'LOCATION_INDEX' OR index_name = 'LOCATION_PK';
+    </copy>
+    ```
+
+
+7. We also have the ability to change table compression and other storage parameters as an online operation. We can first see that our Rockbuster table is uncompressed. 
+
+    ```
+    <copy>
+    SELECT compression FROM user_tables WHERE table_name = 'ROCKBUSTER_LOCATIONS';
+    </copy>
+    ```
+
+ Now we can move our table with compression. Use the Run Script button or press (F5) to execute the commands.
+
+   ```
+   <copy>
+    ALTER TABLE RockBuster_locations MOVE ONLINE COMPRESS;
+    SELECT compression FROM user_tables WHERE table_name = 'ROCKBUSTER_LOCATIONS';
+    </copy>
+    ```
+ To recap, you now have the ability to perform a table move online, as well as individual partitions and sub-partitions without the need for an outage to support the reorganization of tables. This means the table indexes will be maintained for you as well. Online table move also has the ability to filter and compress data as part of a move. For more on this see the Learn More section
 
 You may now proceed to the next lab.
 
@@ -231,6 +314,7 @@ You may now proceed to the next lab.
 - [SQL Macros - LiveSQL](https://livesql.oracle.com/apex/livesql/file/tutorial_KQNYERE8ZF07EZMRR6KJ0RNIR.html)
 - [SQL Macros on ADB](https://blogs.oracle.com/datawarehousing/sql-macros-have-arrived-in-autonomous-database)
 - [Configure SQL Tracing](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/application-tracing-configure.html#GUID-542ED992-FF58-498A-9C24-0F531AC981BE)
+- [Move Table Online](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/sqlrf/ALTER-TABLE.html#GUID-552E7373-BF93-477D-9DA3-B2C9386F2877)
 
 ## Acknowledgements
 

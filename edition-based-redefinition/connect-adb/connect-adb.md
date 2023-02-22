@@ -1,87 +1,90 @@
-# Verify Editions
+# Download the Autonomous Database Wallet and Lab Files
 
-At this point we have one edition using the old column (PHONE_NUMBER))
+Estimated Time: 10 minutes
 
-SQL> alter session set edition=ORA$BASE;
+##  Objectives
 
-Session altered.
+- Download the Autonomous Database wallet
+- Download the lab files 
 
-SQL> select * from employees where rownum<5;
+##  Prerequisites
 
-   EMPLOYEE_ID    FIRST_NAME    LAST_NAME       EMAIL          PHONE_NUMBER    HIRE_DATE    JOB_ID    SALARY    COMMISSION_PCT    MANAGER_ID    DEPARTMENT_ID
-______________ _____________ ____________ ___________ _____________________ ____________ _________ _________ _________________ _____________ ________________
-           151 David         Bernstein    DBERNSTE    011.44.1344.345268    24-MAR-05    SA_REP         9500              0.25           145               80
-           156 Janette       King         JKING       011.44.1345.429268    30-JAN-04    SA_REP        10000              0.35           146               80
-           161 Sarath        Sewall       SSEWALL     011.44.1345.529268    03-NOV-06    SA_REP         7000              0.25           146               80
-           166 Sundar        Ande         SANDE       011.44.1346.629268    24-MAR-08    SA_REP         6400               0.1           147               80
+This lab assumes you have performed the previous lab on provisioning an Oracle Autonomous Database or you already have an existing Autonomous Database.
+The LiveLabs Sandbox environment comes with a pre-created Autonomous Database (ATP).
 
-and the new one with the other two columns (COUNTRY_CODE and PHONE#)
+## Task 1: Download the Autonomous Database wallet
 
-SQL> alter session set edition=v2;
+1. Login into OCI Console with your provided Credentials. 
 
-Session altered.
+2. Click the **Navigation Menu** in the upper left, navigate to **Oracle Database**, and select **Autonomous Transaction Processing**.
 
-SQL> select * from employees where rownum<5;
+  ![Navigate to Autonomous Transaction Processing](images/navigate-atp.png " ")
 
-   EMPLOYEE_ID    FIRST_NAME    LAST_NAME       EMAIL    COUNTRY_CODE         PHONE#    HIRE_DATE    JOB_ID    SALARY    COMMISSION_PCT    MANAGER_ID    DEPARTMENT_ID
-______________ _____________ ____________ ___________ _______________ ______________ ____________ _________ _________ _________________ _____________ ________________
-           151 David         Bernstein    DBERNSTE    +44             1344.345268    24-MAR-05    SA_REP         9500              0.25           145               80
-           156 Janette       King         JKING       +44             1345.429268    30-JAN-04    SA_REP        10000              0.35           146               80
-           161 Sarath        Sewall       SSEWALL     +44             1345.529268    03-NOV-06    SA_REP         7000              0.25           146               80
-           166 Sundar        Ande         SANDE       +44             1346.629268    24-MAR-08    SA_REP         6400               0.1           147               80
+3. Select the compartment you were assigned. Expand the **root** compartment and then the **Livelabs** compartment. Select the compartment assigned to you.
 
-The base table itself contains all of them, but should not be used directly.
+   ![Select Compartment](images/select-compartment.png " ")
 
-SQL> select * from employees$0 where rownum<5;
+4. Now gather the OCID (Oracle Cloud Identifier) of the Autonomous Database.
 
-   EMPLOYEE_ID    FIRST_NAME    LAST_NAME       EMAIL          PHONE_NUMBER    HIRE_DATE    JOB_ID    SALARY    COMMISSION_PCT    MANAGER_ID    DEPARTMENT_ID    COUNTRY_CODE         PHONE#
-______________ _____________ ____________ ___________ _____________________ ____________ _________ _________ _________________ _____________ ________________ _______________ ______________
-           151 David         Bernstein    DBERNSTE    011.44.1344.345268    24-MAR-05    SA_REP         9500              0.25           145               80 +44             1344.345268
-           156 Janette       King         JKING       011.44.1345.429268    30-JAN-04    SA_REP        10000              0.35           146               80 +44             1345.429268
-           161 Sarath        Sewall       SSEWALL     011.44.1345.529268    03-NOV-06    SA_REP         7000              0.25           146               80 +44             1345.529268
-           166 Sundar        Ande         SANDE       011.44.1346.629268    24-MAR-08    SA_REP         6400               0.1           147               80 +44             1346.629268
+  You should be able to see an Autonomous Database, similar to the one below. Make sure to change to the compartment which was assigned to you.
 
-We can check the objects for all the editions. We see a copy for each one because we forced their actualization. Without that step, in V2 we would see only the objects that have been changed, and the others would have been inherited from ORA$BASE.
+  ![ATP Database](images/atp-database.png " ")
 
-SQL> select OBJECT_NAME, OBJECT_TYPE, STATUS, EDITION_NAME from user_objects_ae WHERE edition_name is not null  order by 2,1,4;
+5. Click on the database, which should display a name like "EBRAPP". In the Autonomous Database Information tab, copy the OCID of the ATP database and keep it safe. That is required for downloading the wallet in the next step.
 
-                     OBJECT_NAME    OBJECT_TYPE    STATUS    EDITION_NAME 
-________________________________ ______________ _________ _______________
-ADD_JOB_HISTORY                  PROCEDURE      VALID     ORA$BASE
-ADD_JOB_HISTORY                  PROCEDURE      VALID     V2
-SECURE_DML                       PROCEDURE      VALID     ORA$BASE
-SECURE_DML                       PROCEDURE      VALID     V2
-DATABASECHANGELOG_ACTIONS_TRG    TRIGGER        VALID     ORA$BASE
-DATABASECHANGELOG_ACTIONS_TRG    TRIGGER        VALID     V2
-EMPLOYEES_FWDXEDITION_TRG        TRIGGER        VALID     V2
-EMPLOYEES_REVXEDITION_TRG        TRIGGER        VALID     V2
-SECURE_EMPLOYEES                 TRIGGER        VALID     ORA$BASE
-SECURE_EMPLOYEES                 TRIGGER        VALID     V2
-UPDATE_JOB_HISTORY               TRIGGER        VALID     ORA$BASE
-UPDATE_JOB_HISTORY               TRIGGER        VALID     V2
-COUNTRIES                        VIEW           VALID     ORA$BASE
-COUNTRIES                        VIEW           VALID     V2
-DEPARTMENTS                      VIEW           VALID     ORA$BASE
-DEPARTMENTS                      VIEW           VALID     V2
-EMPLOYEES                        VIEW           VALID     ORA$BASE
-EMPLOYEES                        VIEW           VALID     V2
-EMP_DETAILS_VIEW                 VIEW           VALID     ORA$BASE
-EMP_DETAILS_VIEW                 VIEW           VALID     V2
-JOBS                             VIEW           VALID     ORA$BASE
-JOBS                             VIEW           VALID     V2
-JOB_HISTORY                      VIEW           VALID     ORA$BASE
-JOB_HISTORY                      VIEW           VALID     V2
-LOCATIONS                        VIEW           VALID     ORA$BASE
-LOCATIONS                        VIEW           VALID     V2
-REGIONS                          VIEW           VALID     ORA$BASE
-REGIONS                          VIEW           VALID     V2
+  ![OCID ATP](images/ocid-atp.png " ")
 
-28 rows selected.
+6. Launch Cloud Shell
 
-You have successfully executed the verified the editions in  the HR schema [proceed to the next lab](#next)
+   ![Cloud Shell](images/cloud-shell.png " ")
+
+   Within a few seconds, you will have a cloud shell prompt.
+
+   ![Cloud Shell prompt](images/cloudshell-prompt.png " ")
+
+  For better viewing, you can maximize the Cloud Shell.
+
+  ![Maximize Cloud shell](images/maximize-cloudshell.png " ")
+
+7. Download the Autonomous Database wallet
+
+  Make sure to modify the database OCID in the below command. You should replace the OCID after --autonomous-database-id with the value you captured earlier.
+
+   ````text
+   <copy>oci db autonomous-database generate-wallet --generate-type ALL --file ebronline.zip --password Ebronline@123 --autonomous-database-id ocid1.autonomousdatabase.oc1.iad.xxxxxxxxxxxxxxxxxxxxxx</copy>
+   ```
+
+  You should be able to see the wallet file which was downloaded with the name `ebronline.zip`. Verify using the list command `ls -ltr` as provided in the screenshot.
+
+   ![Download wallet](images/download-wallet.png " ")
+
+## Task 2: Download Lab files
+
+1. Using the same cloud shell console, download the required lab files
+
+   ```text
+   <copy>wget http://bit.ly/ebrlabs</copy>
+   ```
+   Verify the download of the file `ebrlabs` using the list command ls -ltr as provided in the screenshot.
+
+   ![Download ebrlabs](images/download-ebrlabs.png " ")
+
+2. Unzip the ebrlabs file 
+
+   ```text
+   <copy>unzip ebrlabs</copy>
+   ```
+
+   ![Unzip ebrlabs](images/unzip-ebrlabs.png " ")
+
+   It should have two folders **initial_setup** and **changes**, with a bunch of SQL and XML files. Verify using the list command ls -ltr as provided in the screenshot.
+
+   ![Ebrlabs folders](images/ebrlabs-folders.png " ")
+
+
+You have successfully downloaded the ADB wallet and lab files. [Proceed to the next lab](#next) to setup the HR schema.
 
 ## Acknowledgements
 
-- **Author** - Suraj Ramesh
-- **Contributors** -
-- **Last Updated By/Date** -01-Jul-2022
+- Author - Ludovico Caldara and Suraj Ramesh 
+- Last Updated By/Date -Suraj Ramesh, Jan 2023
