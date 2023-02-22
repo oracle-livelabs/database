@@ -119,9 +119,9 @@ You may proceed to the next lab.
 
 ## Learn More
 
-* [Acquiring Credentials](https://docs.oracle.com/en/cloud/paas/nosql-cloud/csnsd/acquiring-credentials.html)
+* [Authentication to connect to Oracle NoSQL Database](https://docs.oracle.com/en/cloud/paas/nosql-cloud/dtddt/index.html#DTDDT-GUID-B09F1A47-98E4-4F02-AB23-5D4284F481F4)
 
 ## Acknowledgements
 * **Author** - Dave Rubin, Senior Director, NoSQL and Embedded Database Development and Michael Brey, Director, NoSQL Product Development
 * **Contributors** - Jaden McElvey, Technical Lead - Oracle LiveLabs Intern
-* **Last Updated By/Date** - Anoosha Pilli, Database Product Management, September 2020
+* **Last Updated By/Date** - Vandana Rajamani, Database User Assistance, February 2023
