@@ -4,7 +4,7 @@
 
 In this lab, we will be creating our first MySQL HeatWave System inside Oracle Cloud. While creating the MySQL HeatWave system, we need to create a PAR URL. The PAR URL will allow us to load the Object Storage bucket data into MySQL HeatWave, while the system is creating.
 
-_Estimated Time:_ ? minutes
+_Estimated Time:_ 25 minutes
 
 ### Objectives
 

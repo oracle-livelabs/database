@@ -4,7 +4,7 @@
 
 In this lab, we will make verify if our data was successfully imported into MySQL HeatWave using the PAR URL. If all your data is present, we will then go ahead and attach a HeatWave cluster to the MySQL database we created in the last Lab. Once the HeatWave cluster has been created and attached, the last step is to load the data from MySQL InnoDB storage engine into the HeatWave cluster for query acceleration.
 
-_Estimated Time:_ ? minutes
+_Estimated Time:_ 20 minutes
 
 ### Objectives
 
@@ -144,7 +144,7 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images/login-heatwave02.png "login-to-heatwave")
 
-13. Once logged in, change the MySQL Shell mode to \sql and execute the command we copied in Step 63 to load the data in-memory
+13. Once logged in, change the MySQL Shell mode to \sql and execute the command we copied in Lab 4 Task 2.9 to load the data in-memory
 
     ```bash
     <copy>\sql</copy>

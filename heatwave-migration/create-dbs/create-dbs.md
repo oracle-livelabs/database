@@ -4,7 +4,7 @@
 
 In this lab, we will setup an on-prem environment in which we install a MySQL Server, MySQL Shell, and then lastly load a sample database into the on-prem MySQL Server.
 
-_Estimated Time:_ ? minutes
+_Estimated Time:_ 15 minutes
 
 ### Objectives
 
@@ -23,7 +23,7 @@ In this lab, you will be guided through the following tasks:
 - An environment where you can install/run a MySQL Server
 - Some Experience with MySQL Shell
 
-## Task 1: Set up an on-prem environment
+## Task 1: Create and configure Virtual Cloud Network (VCN) in OCI
 
 1. Login to Oracle Cloud (OCI), click on the “Hamburger” menu on the top left. Navigate to “Networking” and “Virtual Cloud Networks”
 
@@ -79,17 +79,19 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images2/add-rule.png "add-ingress-rule")
 
-9. Inside Oracle Cloud, navigate to "Cloud Shell" under 'Developer tools' next to your Home Region
+## Task 2: Create SSH Key in OCI using Cloud Shell
+
+1. Inside Oracle Cloud, navigate to "Cloud Shell" under 'Developer tools' next to your Home Region
 
     ![](./images2/devtools.png "developer-tools")
 
     ![](./images2/devtools-cldshell.png "cloud-shell")
 
-10. Once the Cloud Shell loads, it should look similar to this:
+2. Once the Cloud Shell loads, it should look similar to this:
 
     ![](./images2/cld-shell-prmpt.png "cloud-shell-prompt")
 
-11. Inside your Cloud Shell, execute the command to create an SSH key-pair
+3. Inside your Cloud Shell, execute the command to create an SSH key-pair
 
     ```bash
     <copy>ssh-keygen -t rsa</copy>
@@ -101,7 +103,7 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images/ssh-keypair.png "ssh-key-pair")
 
-12. After your public/private rsa key pair has been created, go to the '.ssh' directory and copy the contents of the "id_rsa.pub" file
+4. After your public/private rsa key pair has been created, go to the '.ssh' directory and copy the contents of the "id_rsa.pub" file
 
     ```bash
     <copy>cd .ssh</copy>
@@ -117,15 +119,17 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images2/ssh-pub-key.png "ssh-pub-key")
 
-13. Within Oracle Cloud, go to the Navigation or Hamburger menu and under Compute, select “Instances”
+## Task 3: Setup a Compute Instance
+
+1. Within Oracle Cloud, go to the Navigation or Hamburger menu and under Compute, select “Instances”
 
     ![](./images2/compute.png "nav-compute")
 
-14. Make sure you are in the right compartment, and click “Create instance”
+2. Make sure you are in the right compartment, and click “Create instance”
 
     ![](./images2/create-compute.png "create-compute")
 
-15. Name your compute instance "MySQL-Compute". For Placement, leave it at default. For Image and Shape, make sure "Oracle Linux 8" is selected and choose an appropriate Shape that fits your needs. Under Networking, make sure the Public Subnet of your MySQL-VCN is selected
+3. Name your compute instance "MySQL-Compute". For Placement, leave it at default. For Image and Shape, make sure "Oracle Linux 8" is selected and choose an appropriate Shape that fits your needs. Under Networking, make sure the Public Subnet of your MySQL-VCN is selected
 
     ```bash
     <copy>MySQL-Compute</copy>
@@ -137,15 +141,15 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images2/pub-sub.png "public-subnet")
 
-16. Lastly for the 'Add SSH keys', select "Paste public keys" and paste the contents of the id_rsa.pub file here that we copied in Step 12 of Lab 1 Task 1. After pasting your public key, leave everything default and click "Create"
+4. Lastly for the 'Add SSH keys', select "Paste public keys" and paste the contents of the id_rsa.pub file here that we copied in Step 4 of Lab 1 Task 2. After pasting your public key, leave everything default and click "Create"
 
     ![](./images2/add-ssh.png "pubkey-compute")
 
-17. Your Compute instance will be ready in a few minutes. Copy the Public IP address of your Compute instance afterwards.
+5. Your Compute instance will be ready in a few minutes. Copy the Public IP address of your Compute instance afterwards.
 
     ![](./images2/ready-compute.png "ready-compute")
 
-18. After copying the Public IP of your Compute, open/restore Cloud Shell. Once Cloud Shell loads, perform the ssh command to connect to your Compute instance
+6. After copying the Public IP of your Compute, open/restore Cloud Shell. Once Cloud Shell loads, perform the ssh command to connect to your Compute instance
 
     ```bash
     <copy>ssh -i ~/.ssh/id_rsa opc@<your_compute_instance_ip></copy>
@@ -153,7 +157,7 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images2/ssh-compute.png "ssh-into-compute")
 
-## Task 2: Install MySQL Community Edition in your on-prem environment
+## Task 4: Install MySQL Community Edition in your on-prem environment
 
 1. Once you have your on-premise environment/Compute instance ready and are connected to it, download **MySQL Community Edition** on the Compute instance by executing
 
@@ -219,7 +223,7 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images2/connect-shell2.png "connect-shell2")
 
-## Task 3: Load the sample database into the MySQL on-prem
+## Task 5: Load the sample database into the MySQL on-prem
 
 1. Exit out of your MySQL Server. Download the sample 'world' database onto your Compute instance, unzip the file, and load it onto your on-prem MySQL Server
 

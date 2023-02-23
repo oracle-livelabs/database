@@ -4,7 +4,7 @@
 
 In this lab, we will go to OCI where we will create an API Key. Once we have our API Key, we then need to create a 'config' file so that MySQL Shell can access our Oracle Cloud Account to dump the data into Object Storage bucket. After the adding your API Key and creating a bucket on OCI, we then connect to the MySQL on-premise instance via MySQL Shell and perform the util.dumpInstance() utility. The util.dumpInstance() utility will take a dump of all the databases except “mysql, sys, performance schema, and information schema”. The dump comprises of DDL files for the schema structure and tab-separated .tsv files containing the actual data.
 
-_Estimated Lab Time:_ ? minutes
+_Estimated Lab Time:_ 10 minutes
 
 ### Objectives
 
@@ -20,7 +20,7 @@ In this lab, you will be guided through the following tasks:
 - Some Experience with MySQL Shell
 - Must Complete Lab 1
 
-## Task 1: On OCI "Add API Key" and setup the ".oci/config" file in the Compute/on-prem
+## Task 1: On OCI "Add API Key"
 
 1. Sign in to your Oracle Cloud account to set up the API Key along with the config file. Navigate to the 'Profile' icon on the top-right once on the homepage of Oracle Cloud. From there, click either on the "first link" or click on "User settings"
 
@@ -42,9 +42,13 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images/add-api02.png "add-apikey")
 
-4. Once you ‘Add’ the API Key, a new popup will appear saying “Configuration File Preview”. Copy the contents of the file and paste the file into your on-prem environment/Compute instance
+4. Once you ‘Add’ the API Key, a new popup will appear saying “Configuration File Preview”. Copy the contents of the file, save it in a notepad, and click 'Close' afterwards to exit out of the Configuration File Preview
 
     ![](./images/add-config1.png "copy-config")
+
+## Task 2: Setup the "config" file in the Compute/on-prem
+
+1. Login to your Compute/on-prem instance and paste the 'Configuration File Preview' contents in a ".oci" directory, into your on-prem environment/Compute instance
 
     ```bash
     <copy>cd</copy>
@@ -63,21 +67,21 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images/paste-config1.png "paste-config")
 
-5. Once you have pasted the “Configuration File Preview” snippet into the “config” file, you will need to adjust the parameter where it says “key_file” with the file path to your own OCI Private API Key. Look at an example below:
+2. Once you have pasted the “Configuration File Preview” snippet into the “config” file, you will need to adjust the parameter where it says “key_file” with the file path to your own OCI Private API Key. Look at an example below:
 
     ![](./images/paste-config3.png "paste-config")
 
     **Note:** If you need help uploading your Private API Key onto your on-premise environment/Compute instance, continue following the guide. (If you have already uploaded your API Key and have updated the “key_file” parameter for your “config” file, skip to the next Task)
 
-6. After your new API Keys have successfully been added on OCI and you have created the “config” file on your on-premise environment/Compute instance, open your Private API Key in a text editor of your choice. The Private API Key will be the file without the word “public” in the file name. (You should have downloaded both the Private and Public API Keys in Lab 2 Task 1.3)
+3. After your new API Keys have successfully been added on OCI and you have created the “config” file on your on-premise environment/Compute instance, open your Private API Key in a text editor of your choice. The Private API Key will be the file without the word “public” in the file name. (You should have downloaded both the Private and Public API Keys in Lab 2 Task 1.3)
 
     ![](./images/open-pem2.png "open-private-api")
 
-7. Once you have opened your Private API Key in a text editor, copy the contents of the entire file like shown below:
+4. Once you have opened your Private API Key in a text editor, copy the contents of the entire file like shown below:
 
     ![](./images/copy-pem.png "copy-private-api")
 
-8. After copying the contents, go back to your on-premise environment/Compute instance where you have created the “config” file and have MySQL Shell installed (in our case, the Oracle Linux server). Make sure you are in your .oci directory and create a new file there called "privapikey.pem", for example. This guide used the “nano” text editor to create the "privapikey.pem" file on the on-premise environment. Choose a text editor of your own choice.
+5. After copying the contents, go back to your on-premise environment/Compute instance where you have created the “config” file and have MySQL Shell installed (in our case, the Oracle Linux server). Make sure you are in your .oci directory and create a new file there called "privapikey.pem", for example. This guide used the “nano” text editor to create the "privapikey.pem" file on the on-premise environment. Choose a text editor of your own choice.
 
     ```bash
     <copy>pwd</copy>
@@ -88,11 +92,11 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images/nano-priv1.png "nano-private-api")
 
-9. Once the privapikey.pem file opens up, paste the contents of the OCI Private API Key that we copied in Lab 2 Task 1.7, into this newly created privapikey.pem file. Save and close the file afterwards.
+6. Once the privapikey.pem file opens up, paste the contents of the OCI Private API Key that we copied in Lab 2 Task 2.4, into this newly created privapikey.pem file. Save and close the file afterwards.
 
     ![](./images/paste-priv.png "paste-private-api")
 
-10. After you have saved the Private API Key on your on-premise environment, grab the file path of the privapikey.pem and adjust the “key_file” parameter in the '.oci/config' file. To get the file path of your current working directory where you have the privapikey.pem, execute:
+7. After you have saved the Private API Key on your on-premise environment, grab the file path of the privapikey.pem and adjust the “key_file” parameter in the '.oci/config' file. To get the file path of your current working directory where you have the privapikey.pem, execute:
 
     ```bash
     <copy>ls</copy>
@@ -107,9 +111,9 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images/paste-config3.png "paste-config")
 
-11. Save and close the 'config' file after you have adjusted its “key_file” parameter.
+8. Save and close the 'config' file after you have adjusted its “key_file” parameter.
 
-## Task 2: Set up Object Storage in OCI and note down "Bucket Name" and "Namespace"
+## Task 3: Set up Object Storage in OCI and note down "Bucket Name" and "Namespace"
 
 1. Once you are all done with setting up the '.oci/config' file, navigate back to Oracle Cloud and create an Object Storage Bucket. On the homepage of Oracle Cloud, go to the ‘hamburger’ menu or the ‘navigation’ menu on top left. Navigate to ‘Storage’ and select "Buckets" under 'Object Storage & Archive Storage'
 
@@ -133,7 +137,7 @@ In this lab, you will be guided through the following tasks:
 
     ![](./images/buck-ns1.png "name-ns-bucket")
 
-## Task 3: Perform the MySQL Shell Dump
+## Task 4: Perform the MySQL Shell Dump
 
 1. Once the bucket is created in OCI, we are ready to move our data from on-premise environment/Compute instance to Oracle Cloud Object Storage bucket. Navigate back to your on-premise environment, and login to your MySQL server using MySQL Shell
 
@@ -166,7 +170,7 @@ In this lab, you will be guided through the following tasks:
 
     [https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-utilities-dump-instance-schema.html] (https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-utilities-dump-instance-schema.html)
 
-3. Once you have executed the commands in 6.2, execute the same “util.dumpInstance()” command again but this time, change the “dryRun” option to “false”. (When dryRun is set to true, it will not perform the actual dump but instead, displays information on what would be dumped and performs compatibility checks)
+3. Once you are done with the previous step, execute the same “util.dumpInstance()” command again but this time, change the “dryRun” option to “false”. (When dryRun is set to true, it will not perform the actual dump but instead, displays information on what would be dumped and performs compatibility checks)
 
     ```bash
     <copy>util.dumpInstance("sampledump", {"osBucketName": "MySQL-Bucket", "osNamespace": "idazzjlcjqzj", "ocimds": "true", "compatibility": ["strip_restricted_grants", "strip_definers"], users: "true", dryRun:"false"})</copy>

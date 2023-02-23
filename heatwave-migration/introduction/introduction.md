@@ -27,7 +27,7 @@ If you follow each Lab associated with this workshop thoroughly, all of the abov
 - [What is a Configuration File?] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm)
 - [How to get the MySQL sample database?] (https://dev.mysql.com/doc/index-other.html)
 
-_Estimated Time:_ ? hours
+_Estimated Time:_ 1.15 hours
 
 ### Objectives
 
