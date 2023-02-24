@@ -27,15 +27,15 @@ In this lab, you will be guided through the following tasks:
 
 1. Login to Oracle Cloud (OCI), click on the “Hamburger” menu on the top left. Navigate to “Networking” and “Virtual Cloud Networks”
 
-    ![](./images2/ham-menu.png "oci-hamburger-menu")
+    ![OCI Navigation Menu](./images/ham-menu.png "oci-hamburger-menu")
 
-    ![](./images2/vcn-menu.png "navigate-to-vcn")
+    ![OCI Navigation VCN Menu](./images/vcn-menu.png "navigate-to-vcn")
 
 2. Once on the Virtual Cloud Networks page, click “Start VCN Wizard” and select “Create VCN with Internet Connectivity”
 
-    ![](./images2/vcn-wiz-2.png "create-vcn")
+    ![OCI VCN Page](./images/vcn-wiz-2.png "create-vcn")
 
-    ![](./images2/vcn-wiz1.png "vcn-wizard")
+    ![VCN Wizard](./images/vcn-wiz1.png "vcn-wizard")
 
 3. Name your VCN “MySQL-VCN” while making sure you are in the correct Compartment. Leave everything as it is, and click “Next”
 
@@ -43,25 +43,25 @@ In this lab, you will be guided through the following tasks:
     <copy>MySQL-VCN</copy>
     ```
 
-    ![](./images2/name-vcn.png "name-vcn-wizard")
+    ![Enter VCN Name](./images/name-vcn.png "name-vcn-wizard")
 
 4. Review all the information and click “Create”
 
-    ![](./images2/review-vcn.png "review-vcn-wizard")
+    ![Create VCN](./images/review-vcn.png "review-vcn-wizard")
 
 5. Once the VCN is created, click “View Virtual Cloud Network”
 
-    ![](./images2/view-vcn.png "view-vcn-wizard")
+    ![View VCN](./images/view-vcn.png "view-vcn-wizard")
 
 6. Once on the MySQL-VCN page, under “Resources” click “Subnets” and go to the “Private-Subnet-MySQL-VCN”
 
-    ![](./images2/resources-vcn.png "resources-vcn")
+    ![VCN Private Subnet](./images/resources-vcn.png "resources-vcn")
 
 7. On the Private Subnet page, under “Security Lists”, click on “Security List for Private Subnet-MySQL-VCN” and select “Add Ingress Rules”
 
-    ![](./images2/sc-vcn.png "seclist-vcn")
+    ![Security List Private Subnet](./images/sc-vcn.png "seclist-vcn")
 
-    ![](./images2/add-ingr.png "add-ingress")
+    ![Add Ingress Rules Button](./images/add-ingr.png "add-ingress")
 
 8. For the ‘Source CIDR’ enter “0.0.0.0/0”, select "TCP" for the 'IP Protocol' and for the Destination Port Range, enter “3306,33060”. In the ‘Description’ section, write “MySQL Port Access”
 
@@ -77,19 +77,19 @@ In this lab, you will be guided through the following tasks:
     <copy>MySQL Port Access</copy>
     ```
 
-    ![](./images2/add-rule.png "add-ingress-rule")
+    ![Add Ingress Rule](./images/add-rule.png "add-ingress-rule")
 
 ## Task 2: Create SSH Key in OCI using Cloud Shell
 
 1. Inside Oracle Cloud, navigate to "Cloud Shell" under 'Developer tools' next to your Home Region
 
-    ![](./images2/devtools.png "developer-tools")
+    ![](./images/devtools.png "developer-tools")
 
-    ![](./images2/devtools-cldshell.png "cloud-shell")
+    ![](./images/devtools-cldshell.png "cloud-shell")
 
 2. Once the Cloud Shell loads, it should look similar to this:
 
-    ![](./images2/cld-shell-prmpt.png "cloud-shell-prompt")
+    ![](./images/cld-shell-prmpt.png "cloud-shell-prompt")
 
 3. Inside your Cloud Shell, execute the command to create an SSH key-pair
 
@@ -97,7 +97,7 @@ In this lab, you will be guided through the following tasks:
     <copy>ssh-keygen -t rsa</copy>
     ```
 
-    ![](./images2/key-gen.png "key-gen")
+    ![](./images/key-gen.png "key-gen")
 
     **Note:** keep pressing the enter/return key for each question. Here is what it should look like, your public and private SSH keys will be stored in a directory called .ssh
 
@@ -117,17 +117,17 @@ In this lab, you will be guided through the following tasks:
     <copy>cat id_rsa.pub</copy>
     ```
 
-    ![](./images2/ssh-pub-key.png "ssh-pub-key")
+    ![](./images/ssh-pub-key.png "ssh-pub-key")
 
 ## Task 3: Setup a Compute Instance
 
 1. Within Oracle Cloud, go to the Navigation or Hamburger menu and under Compute, select “Instances”
 
-    ![](./images2/compute.png "nav-compute")
+    ![](./images/compute.png "nav-compute")
 
 2. Make sure you are in the right compartment, and click “Create instance”
 
-    ![](./images2/create-compute.png "create-compute")
+    ![](./images/create-compute.png "create-compute")
 
 3. Name your compute instance "MySQL-Compute". For Placement, leave it at default. For Image and Shape, make sure "Oracle Linux 8" is selected and choose an appropriate Shape that fits your needs. Under Networking, make sure the Public Subnet of your MySQL-VCN is selected
 
@@ -135,19 +135,19 @@ In this lab, you will be guided through the following tasks:
     <copy>MySQL-Compute</copy>
     ```
 
-    ![](./images2/create-compute2.png "create-compute2")
+    ![](./images/create-compute2.png "create-compute2")
 
-    ![](./images2/compute-image.png "create-compute3")
+    ![](./images/compute-image.png "create-compute3")
 
-    ![](./images2/pub-sub.png "public-subnet")
+    ![](./images/pub-sub.png "public-subnet")
 
 4. Lastly for the 'Add SSH keys', select "Paste public keys" and paste the contents of the id_rsa.pub file here that we copied in Step 4 of Lab 1 Task 2. After pasting your public key, leave everything default and click "Create"
 
-    ![](./images2/add-ssh.png "pubkey-compute")
+    ![](./images/add-ssh.png "pubkey-compute")
 
 5. Your Compute instance will be ready in a few minutes. Copy the Public IP address of your Compute instance afterwards.
 
-    ![](./images2/ready-compute.png "ready-compute")
+    ![](./images/ready-compute.png "ready-compute")
 
 6. After copying the Public IP of your Compute, open/restore Cloud Shell. Once Cloud Shell loads, perform the ssh command to connect to your Compute instance
 
@@ -155,7 +155,7 @@ In this lab, you will be guided through the following tasks:
     <copy>ssh -i ~/.ssh/id_rsa opc@<your_compute_instance_ip></copy>
     ```
 
-    ![](./images2/ssh-compute.png "ssh-into-compute")
+    ![](./images/ssh-compute.png "ssh-into-compute")
 
 ## Task 4: Install MySQL Community Edition in your on-prem environment
 
@@ -165,7 +165,7 @@ In this lab, you will be guided through the following tasks:
     <copy>sudo yum install mysql-server -y</copy>
     ```
 
-    ![mysql-ce](./images2/install-mysql1.png "install-mysql-ce")
+    ![mysql-ce](./images/install-mysql1.png "install-mysql-ce")
 
     **Note:** MySQL Community Server can also be downloaded by visiting this website: <https://dev.mysql.com/downloads/mysql/>
 
@@ -179,7 +179,7 @@ In this lab, you will be guided through the following tasks:
     <copy>mysql -uroot --skip-password</copy>
     ```
 
-    ![](./images2/start-mysql1.png "start-mysql")
+    ![](./images/start-mysql1.png "start-mysql")
 
     **Note:** during the installation of the MySQL server, it created a root account without a password. Therefore we have explicitly specified that there is no password and that the client program should not prompt for one, by providing the --skip-password option.
 
@@ -189,7 +189,7 @@ In this lab, you will be guided through the following tasks:
     <copy>ALTER USER 'root'@'localhost' IDENTIFIED BY 'pASsWordGoesHere';</copy>
     ```
 
-    ![](./images2/change-pass2.png "change-root-pass")
+    ![](./images/change-pass2.png "change-root-pass")
 
     **Note:** after changing your root password, make a note of it or save it. This will be used later.
 
@@ -203,7 +203,7 @@ In this lab, you will be guided through the following tasks:
     <copy>sudo yum install mysql-shell -y</copy>
     ```
 
-    ![](./images2/install-shell1.png "install-shell")
+    ![](./images/install-shell1.png "install-shell")
 
     **Note:** MySQL Shell can also be downloaded by visiting this website: https://dev.mysql.com/downloads/shell/
 
@@ -213,7 +213,7 @@ In this lab, you will be guided through the following tasks:
     <copy>mysqlsh root@localhost</copy>
     ```
 
-    ![](./images2/connect-shell1.png "connect-shell")
+    ![](./images/connect-shell1.png "connect-shell")
 
     -OR-
 
@@ -221,7 +221,7 @@ In this lab, you will be guided through the following tasks:
     <copy>mysqlsh -uroot -p</copy>
     ```
 
-    ![](./images2/connect-shell2.png "connect-shell2")
+    ![](./images/connect-shell2.png "connect-shell2")
 
 ## Task 5: Load the sample database into the MySQL on-prem
 
@@ -247,9 +247,9 @@ In this lab, you will be guided through the following tasks:
     <copy>mysql -u root -p < world.sql </copy>
     ```
 
-    ![](./images2/download-sample1.png "download-sample-db")
+    ![](./images/download-sample1.png "download-sample-db")
 
-    ![](./images2/load-sample1.png "load-sample-db")
+    ![](./images/load-sample1.png "load-sample-db")
 
     **Note:** additional sample MySQL databases can be found here: https://dev.mysql.com/doc/index-other.html
 
@@ -271,9 +271,9 @@ In this lab, you will be guided through the following tasks:
     <copy>SHOW TABLES IN world;</copy>
     ```
 
-    ![](./images2/connect-shell1.png "connect-shell")
+    ![](./images/connect-shell1.png "connect-shell")
 
-    ![](./images2/confirm-load1.png "confirm-load-db")
+    ![](./images/confirm-load1.png "confirm-load-db")
 
     **Note:** exit MySQL Shell and minimize Cloud Shell afterwards.
 

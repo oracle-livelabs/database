@@ -15,7 +15,7 @@ Whether you are running a MySQL Community/Standard/Enterprise Edition, MariaDB, 
 If you follow each Lab associated with this workshop thoroughly, all of the above steps that are mentioned will be covered in more detail.
 
 ***Here is what the visual representation of the whole migration process looks like:***
-![](./images/migrationoverview.png "migration-overview")
+![MySQL Migration Process Overview](./images/migrationoverview.png "migration-overview")
 
 **To learn more about the following topics, click on them:**
 - [What is MySQL?] (https://dev.mysql.com/doc/refman/8.0/en/what-is-mysql.html)

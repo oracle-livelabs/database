@@ -1,4 +1,4 @@
-# Loading Data into HeatWave
+# Load Data into HeatWave
 
 ## Introduction
 

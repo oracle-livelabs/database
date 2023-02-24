@@ -1,4 +1,4 @@
-# Perform the MySQL Shell Dump from On-Prem
+# Perform the MySQL Shell dump from on-premise MySQL
 
 ## Introduction
 
