@@ -24,27 +24,27 @@ In this lab, you will be guided through the following tasks:
 
 1. Sign in to your Oracle Cloud account to set up the API Key along with the config file. Navigate to the 'Profile' icon on the top-right once on the homepage of Oracle Cloud. From there, click either on the "first link" or click on "User settings"
 
-    ![](./images/nav-config0.png "nav-config")
+    ![OCI Homepage Profile Icon](./images/nav-config0.png "nav-config")
 
-    ![](./images/nav-config1.png "nav-config2")
+    ![OCI Profile Icon Expanded - User Settings](./images/nav-config1.png "nav-config2")
 
     **Note:** you should be on the below "User Details" page, once finished with the previous step
 
-    ![](./images/config-page1.png "config-page")
+    ![OCI User Details Page](./images/config-page1.png "config-page")
 
 2. Scroll down on that same page until you see the ‘Resources’ section on the left. Click “API Keys” and “Add API Key”
 
-    ![](./images/nav-page-1.png "config-page2")
+    ![OCI User Details Page - Resources Section](./images/nav-page-1.png "config-page2")
 
-    ![](./images/add-api1.png "config-page3")
+    ![User Details Page - API Key Section](./images/add-api1.png "config-page3")
 
 3. When you click on 'Add API Key' a popup will appear saying "Add API Key". On that popup, select ‘Generate API Key Pair’ and download both the “Private Key” and “Public Key”. Afterwards, click “Add”
 
-    ![](./images/add-api02.png "add-apikey")
+    ![Add API Key Popup](./images/add-api02.png "add-apikey")
 
 4. Once you ‘Add’ the API Key, a new popup will appear saying “Configuration File Preview”. Copy the contents of the file, save it in a notepad, and click 'Close' afterwards to exit out of the Configuration File Preview
 
-    ![](./images/add-config1.png "copy-config")
+    ![Configuration File Preview Popup](./images/add-config1.png "copy-config")
 
 ## Task 2: Setup the "config" file in the Compute/on-prem
 
@@ -63,23 +63,23 @@ In this lab, you will be guided through the following tasks:
     <copy>nano config</copy>
     ```
 
-    ![](./images/create-config01.png "create-config")
+    ![Terminal Creating Config File](./images/create-config01.png "create-config")
 
-    ![](./images/paste-config1.png "paste-config")
+    ![Paste Config File Contents](./images/paste-config1.png "paste-config")
 
 2. Once you have pasted the “Configuration File Preview” snippet into the “config” file, you will need to adjust the parameter where it says “key_file” with the file path to your own OCI Private API Key. Look at an example below:
 
-    ![](./images/paste-config3.png "paste-config")
+    ![Config File Contents Altered](./images/paste-config3.png "paste-config")
 
     **Note:** If you need help uploading your Private API Key onto your on-premise environment/Compute instance, continue following the guide. (If you have already uploaded your API Key and have updated the “key_file” parameter for your “config” file, skip to the next Task)
 
 3. After your new API Keys have successfully been added on OCI and you have created the “config” file on your on-premise environment/Compute instance, open your Private API Key in a text editor of your choice. The Private API Key will be the file without the word “public” in the file name. (You should have downloaded both the Private and Public API Keys in Lab 2 Task 1.3)
 
-    ![](./images/open-pem2.png "open-private-api")
+    ![API Keys Downlaoded](./images/open-pem2.png "open-private-api")
 
 4. Once you have opened your Private API Key in a text editor, copy the contents of the entire file like shown below:
 
-    ![](./images/copy-pem.png "copy-private-api")
+    ![Private API Key Contents](./images/copy-pem.png "copy-private-api")
 
 5. After copying the contents, go back to your on-premise environment/Compute instance where you have created the “config” file and have MySQL Shell installed (in our case, the Oracle Linux server). Make sure you are in your .oci directory and create a new file there called "privapikey.pem", for example. This guide used the “nano” text editor to create the "privapikey.pem" file on the on-premise environment. Choose a text editor of your own choice.
 
@@ -90,11 +90,11 @@ In this lab, you will be guided through the following tasks:
     <copy>nano privapikey.pem</copy>
     ```
 
-    ![](./images/nano-priv1.png "nano-private-api")
+    ![Create Blank API Key File on OCI](./images/nano-priv1.png "nano-private-api")
 
 6. Once the privapikey.pem file opens up, paste the contents of the OCI Private API Key that we copied in Lab 2 Task 2.4, into this newly created privapikey.pem file. Save and close the file afterwards.
 
-    ![](./images/paste-priv.png "paste-private-api")
+    ![Paste Private API Key Contents](./images/paste-priv.png "paste-private-api")
 
 7. After you have saved the Private API Key on your on-premise environment, grab the file path of the privapikey.pem and adjust the “key_file” parameter in the '.oci/config' file. To get the file path of your current working directory where you have the privapikey.pem, execute:
 
@@ -105,11 +105,11 @@ In this lab, you will be guided through the following tasks:
     <copy>pwd</copy>
     ```
 
-    ![](./images/priv-path1.png "private-api-path")
+    ![Private API Key Path](./images/priv-path1.png "private-api-path")
 
     **Note:** by looking at the above image, the 'privapikey.pem' location for this guide will hence be "/home/opc/.oci/privapikey.pem". Go to your '.oci' directory and adjust your 'config' file accordingly
 
-    ![](./images/paste-config3.png "paste-config")
+    ![Config File Contents Altered](./images/paste-config3.png "paste-config")
 
 8. Save and close the 'config' file after you have adjusted its “key_file” parameter.
 
@@ -117,13 +117,13 @@ In this lab, you will be guided through the following tasks:
 
 1. Once you are all done with setting up the '.oci/config' file, navigate back to Oracle Cloud and create an Object Storage Bucket. On the homepage of Oracle Cloud, go to the ‘hamburger’ menu or the ‘navigation’ menu on top left. Navigate to ‘Storage’ and select "Buckets" under 'Object Storage & Archive Storage'
 
-    ![](./images/oci-nav.png "oci-navigation-menu")
+    ![OCI Navigation Menu](./images/oci-nav.png "oci-navigation-menu")
 
-    ![](./images/buck-nav.png "bucket-navigation")
+    ![OCI Object Storage Menu](./images/buck-nav.png "bucket-navigation")
 
 3. Once on the Buckets page, make sure you have the right Compartment selected. Afterwards, click “Create Bucket”
 
-    ![](./images/create-buck1.png "create-bucket")
+    ![Object Storage Landing Page](./images/create-buck1.png "create-bucket")
 
 4. Name the bucket “MySQL-Bucket”, keep the ‘Default Storage Tier’ to “Standard” and click Create
 
