@@ -23,60 +23,60 @@ In this lab, you will be guided through the following task:
 
 1. Once the all the dump files have successfully been exported to Object Storage Bucket, in OCI click on the “Hamburger” menu and go to “Databases” > “MySQL”
 
-    ![](./images/mysql-nav1.png "mysql-nav")
+    ![OCI Databases Menu](./images/mysql-nav1.png "mysql-nav")
 
 2. After you have landed on the ‘DB Systems’ page, ensure you have the correct Compartment selected and click “Create DB System”
 
-    ![](./images/create-hw1.png "mysql-nav2")
+    ![Database Landing Page](./images/create-hw1.png "mysql-nav2")
 
 3. Name your MySQL Database System “MySQL-HW” and select the “HeatWave” offering
     ```bash
     <copy>MySQL-HW</copy>
     ```
 
-    ![](./images/create-hw02.png "mysql-nav3")
+    ![Database Creation Page](./images/create-hw02.png "mysql-nav3")
 
 4. Next, create your admin credentials for the MySQL HeatWave system that is being created. Afterwards under “Configure networking”, make sure the “MySQL-VCN” is selected and the Subnet is “Private Subnet”
 
-    ![](./images/hw-priv1.png "mysql-nav4")
+    ![Database Creation Page - Admin/Networking Section](./images/hw-priv1.png "mysql-nav4")
 
 5. Leave the rest as it is and lastly click on "Show advanced options" under the “Configure Backup Plan” section. After clicking "Show advanced options", click on the "Networking" tab. Under "Hostname", enter the name of your MySQL Database System.
 
-    ![](./images/show-adv.png "show-advanced-options")
+    ![Database Creation Page - Advanced Options](./images/show-adv.png "show-advanced-options")
 
-    ![](./images/hostname1.png "enter-hostname")
+    ![Database Creation Page - Hostname](./images/hostname1.png "enter-hostname")
 
 6. Afterwards, click on the "Data Import" tab
 
-    ![](./images/show-adv2.png "data-import")
+    ![Database Creation Page - Data Import Tab](./images/show-adv2.png "data-import")
 
 7. Once you are on the 'Data Import' tab, click on the "Click here to create a PAR URL" link.
 
-    ![](./images/create-par1.png "data-imp-options-hw2")
+    ![Database Creation Page - Data Import Link](./images/create-par1.png "data-imp-options-hw2")
 
 8. After clicking the above link, another screen will appear where you will select the "MySQL-Bucket" bucket from the drop down list, that we created in Lab 2.
 
-    ![](./images/select-buck01.png "select-bucket")
+    ![PAR URL Creation Page](./images/select-buck01.png "select-bucket")
 
-    ![](./images/select-buck02.png "select-bucket2")
+    ![PAR URL Creation Page - Bucket Selection](./images/select-buck02.png "select-bucket2")
 
 9. Once you have selected the appropriate bucket where the data was dumped, adjust the PAR expiration according to your needs. Then, simply click "Create and set PAR URL". Afterwards, your screen should look something similar to below:
 
-    ![](./images/set-par.png "create-hw-using-par")
+    ![PAR URL Creation Page](./images/set-par.png "create-hw-using-par")
 
-    ![](./images/create-hw01.png "create-hw")
+    ![Database Creation Page - Populated PAR URL](./images/create-hw01.png "create-hw")
 
      **Note:** click "Create" as shown in the above image, once your 'PAR Source URL' has been populated.
 
 10. After clicking "Create" in the previous Step, your MySQL HeatWave System will start provisioning and will have the data pre-loaded that we dumped from our on-premise environment into Object Storage bucket, once the HeatWave System is in an "ACTIVE" status.
 
-    ![](./images/db-ready.png "MySQL-Active")
+    ![MySQL Database Active Status](./images/db-ready.png "MySQL-Active")
 
     **Note:** it may take MySQL HeatWave a few minutes to be in an "ACTIVE" state
 
 11. Once your MySQL DB System is 'ACTIVE', a “Private IP Address” will be allocated to it, find and copy it. You can find this Private IP under “DB System Information” > “Endpoint” section on the “DB System Details” page
 
-    ![](./images/hw-ip1.png "MySQL-IP")
+    ![MySQL DB System Information Section](./images/hw-ip1.png "MySQL-IP")
 
     **Note:** you can navigate to the “DB System Details” page by going to the “Hamburger” menu in OCI. “Databases” > “MySQL” > “DB Systems”. Click on the name of your MySQL DB System to open the “DB System Details” page.
 

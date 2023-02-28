@@ -131,11 +131,11 @@ In this lab, you will be guided through the following tasks:
     <copy>MySQL-Bucket</copy>
     ```
 
-    ![](./images/name-buck1.png "name-bucket")
+    ![Bucket Creation Page](./images/name-buck1.png "name-bucket")
 
 5. Click on the Bucket Name and note down the “Bucket Name” as well as “Namespace” which can be found under ‘Bucket Information’
 
-    ![](./images/buck-ns1.png "name-ns-bucket")
+    ![Bucket Details Page](./images/buck-ns1.png "name-ns-bucket")
 
 ## Task 4: Perform the MySQL Shell Dump
 
@@ -145,7 +145,7 @@ In this lab, you will be guided through the following tasks:
     <copy>mysqlsh root@localhost</copy>
     ```
 
-    ![](./images/connect-shell1.png "connect-shell")
+    ![MySQL Shell Connecting to MySQL](./images/connect-shell1.png "connect-shell")
 
     -OR-
 
@@ -153,7 +153,7 @@ In this lab, you will be guided through the following tasks:
     <copy>mysqlsh -uroot -p</copy>
     ```
 
-    ![](./images/connect-shell2.png "connect-shell2")
+    ![MySQL Shell Connecting to MySQL](./images/connect-shell2.png "connect-shell2")
 
 2. Make sure you are in ‘JavaScript’ mode of MySQL Shell by executing “\js” and perform the command “util.dumpInstance()” to export the dump data into Oracle Cloud Object Storage bucket. The util.dumpInstance() command will take a dump of all the databases except “mysql, sys, performance schema, and information schema”. The dump comprises of DDL files for the schema structure and tab-seperated .tsv files containing the actual data. Additionally, you can also use “util.dumpSchemas()” or “util.dumpTables()” if you only want to dump specific schemas or tables
 
@@ -164,7 +164,7 @@ In this lab, you will be guided through the following tasks:
     <copy>util.dumpInstance("sampledump", {"osBucketName": "MySQL-Bucket", "osNamespace": "idazzjlcjqzj", "ocimds": "true", "compatibility": ["strip_restricted_grants", "strip_definers"], users: "true", dryRun:"true"})</copy>
     ```
 
-    ![](./images/dry-shell-dump1.png "dryrun-shell-dump")
+    ![MySQL Shell Dump Utility - Output](./images/dry-shell-dump1.png "dryrun-shell-dump")
 
     **Note:** “sampledump” is the prefix under which all our dump files will be stored in Object Storage. **Change the ‘osBucketName’ and ‘osNamespace’ to match with what you have.** “ocimds”: “true” option ensures compatibility of the dump with MySQL Database Service/HeatWave. To understand the dumpInstance(), dumpSchemas(), or dumpTables() utility in more detail, refer to the below website:
 
@@ -176,12 +176,12 @@ In this lab, you will be guided through the following tasks:
     <copy>util.dumpInstance("sampledump", {"osBucketName": "MySQL-Bucket", "osNamespace": "idazzjlcjqzj", "ocimds": "true", "compatibility": ["strip_restricted_grants", "strip_definers"], users: "true", dryRun:"false"})</copy>
     ```
 
-    ![](./images/shell-dump1.png "shell-dump")
-    ![](./images/shell-dump2.png "shell-dump2")
+    ![MySQL Shell Dump Utility - Output](./images/shell-dump1.png "shell-dump")
+    ![MySQL Shell Dump Utility - Summary](./images/shell-dump2.png "shell-dump2")
 
 4. Once the dump is complete, navigate back to Oracle Cloud and to the Object Storage bucket we created earlier (MySQL-Bucket). Check to see if you see your files under “sampledump” from the util.dumpInstance()
 
-    ![](./images/confirm-dump1.png "confirm-dump")
+    ![Bucket Dump Files](./images/confirm-dump1.png "confirm-dump")
 
 This concludes this lab. You may now **proceed to the next lab.**
 
