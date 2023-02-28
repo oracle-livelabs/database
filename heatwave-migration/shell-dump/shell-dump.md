@@ -44,7 +44,7 @@ In this lab, you will be guided through the following tasks:
 
 4. Once you ‘Add’ the API Key, a new popup will appear saying “Configuration File Preview”. Copy the contents of the file, save it in a notepad, and click 'Close' afterwards to exit out of the Configuration File Preview
 
-    ![Configuration File Preview Popup](./images/add-config1.png "copy-config")
+    ![Configuration File Preview Popup](./images/add-config2.png "copy-config")
 
 ## Task 2: Setup the "config" file in the Compute/on-prem
 
