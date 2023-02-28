@@ -173,4 +173,4 @@ In this lab, you will be guided through the following tasks:
 
 - **Contributors** - Perside Foster, MySQL Solution Engineering
 
-- **Last Updated By/Date** - Ravish Patel, MySQL Solution Engineering, November 2022
+- **Last Updated By/Date** - Ravish Patel, MySQL Solution Engineering, March 2023

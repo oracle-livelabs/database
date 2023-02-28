@@ -100,4 +100,4 @@ This concludes this lab. You may now **proceed to the next lab.**
 
 - **Contributors** - Perside Foster, MySQL Solution Engineering
 
-- **Last Updated By/Date** - Ravish Patel, MySQL Solution Engineering, November 2022
+- **Last Updated By/Date** - Ravish Patel, MySQL Solution Engineering, March 2023
