@@ -53,6 +53,8 @@ To make the best use of your display, perform the following tasks to render your
 
     ![Select Full Screen icon](./images/novnc-fullscreen-2.png " ")
     ![Full Screen](./images/novnc-fullscreen-3.png " ")
+
+    *Note:* The Full-screen option is available if the browser supports it. Switch to another browser if you don't see the full-screen option in the control bar.
     
 ## Task 3: Enable Copy/Paste from Local to Remote Desktop
 

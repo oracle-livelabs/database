@@ -38,7 +38,9 @@ To make the best use of your display, perform the following tasks to render your
 
     ![Select Full Screen icon](./images/novnc-fullscreen-2.png " ")
     ![Full Screen](./images/novnc-fullscreen-3.png " ")
-    
+
+ *Note:* The Full-screen option is available if the browser supports it. Switch to another browser if you don't see the full-screen option in the control bar.
+ 
 ## Task 2: Enable Copy/Paste from Local to Remote Desktop
 
 During the execution of this workshop you will need to copy text from the workshop instructions (use the copy button provided) to a terminal session (remote desktop or SSH). As direct copy/paste between your local browser and the NoVNC desktop isn't supported, you may proceed as indicated below to enable an alternative local-to-remote clipboard using the NoVNC Clipboard.
