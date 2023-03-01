@@ -13,9 +13,9 @@ Watch the video below for a quick walk-through of the lab.
 
 ### Objectives
 
-In this lab, you will:
+In this lab, you will
 
-- Learn how to provision a new Autonomous Database
+- Provision a new Autonomous Database
 
 ### Prerequisites
 

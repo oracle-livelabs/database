@@ -8,8 +8,10 @@ Estimated lab time: 10 minutes
 
 ### Objectives
 
-In this lab, you will connect as the ADMIN user to the autonomous database and create the HR schema, along with a few helper procedures.
-The HR schema is a modified version of the well-known HR schema to support editions directly after its creation.
+In this lab, you will 
+
+- Connect as the ADMIN user to the autonomous database and create the HR schema, along with a few helper procedures
+- Verify the HR schema creation logs
 
 ### Prerequisites
 
@@ -81,19 +83,19 @@ The HR schema is a modified version of the well-known HR schema to support editi
 
     The scripts prompts for few parameters and make sure you provide the correct details if not the script will error
 
-- The password for the `HR` user - Input as  **Welcome#Welcome#123**
-- The default tablespace for the `HR` user - Input as **SAMPLESCHEMAS**
-- The temporary tablespace for the `HR` user- Input as **TEMP**
-- The path used to store the logs- Input as **./**
-- The name of the TNS name to connect to the Autonomous Database- Input as **ebronline_medium**
+    - The password for the `HR` user - Input as  **Welcome#Welcome#123**
+    - The default tablespace for the `HR` user - Input as **SAMPLESCHEMAS**
+    - The temporary tablespace for the `HR` user- Input as **TEMP**
+    - The path used to store the logs- Input as **./**
+    - The name of the TNS name to connect to the Autonomous Database- Input as **ebronline_medium**
 
-  **(change it to the actual connection string, e.g. ebronline41137_medium)**
+    **(change it to the actual connection string, e.g. ebronline41137_medium)**
 
-   ![HR main script](images/hr-main-script.png " ")
+    ![HR main script](images/hr-main-script.png " ")
 
-   ![HR script execution ](images/hr-script-execution.png " ")
+    ![HR script execution ](images/hr-script-execution.png " ")
 
-   **Verify hr_main.log in the current folder. If you see any errors in the script execution, verify the parameters input and execute again**
+    **Verify hr_main.log in the current folder. If you see any errors in the script execution, verify the parameters input and execute again**
 
 You have successfully created the HR schema. [Proceed to the next lab](#next) to have an overview of the Editions and the helper procedure that we have created in this lab.
 
