@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Accelerate your Applications: Achieve Blazing Fast SQL With an Oracle TimesTen Cache",
+  "workshoptitle": "Accelerate your Applications - Achieve Blazing Fast SQL With an Oracle TimesTen Cache",
   "support": "https://community.oracle.com/tech/developers/categories/database-19c",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
@@ -9,7 +9,7 @@
       "filename": "../../01-introduction/introduction.md"
     },
     {
-      "title": "Get started",
+      "title": "Get started - Cloud Login",
       "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
       "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
     },
@@ -21,17 +21,17 @@
     {
       "title": "Lab 2: Environment setup",
       "description": "How to provision the workshop environment and connect to it",
-      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc.md"
+      "filename": "../../00-setup-compute/setup-compute.md"
     },
     {
-      "title": "Lab 3: Using noVNC Remote Desktop",
-      "description": "Using noVNC Remote Desktop",
-      "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+      "title": "Lab 3: Connect to the workshop compute instance using NoVNC Remote Desktop",
+      "description": "Connect using noVNC Remote Desktop",
+      "filename": "../../00-verify-compute/verify-compute-freetier.md"
     },
     {
-      "title": "Lab 4: Connect to the workshop compute instance",
-      "description": "How to connect to the Cloud Instance",
-      "filename": "../../03-connect-to-instance/connect-to-instance.md"
+      "title": "Lab 4: Connect to the workshop compute instance using SSH (optional)",
+      "description": "Connect using SSH",
+      "filename": "../../03-connect-to-instance/connect-to-instance-freetier.md"
     },
     {
       "title": "Lab 5: Initialize the workshop environment",
@@ -74,13 +74,18 @@
       "filename": "../../11-query-performance/query-performance.md"
     },
     {
-      "title": "Lab 13: Dynamic caching",
+      "title": "Lab 13: Learn about dynamic caching",
       "filename": "../../12-dynamic-caching/dynamic-caching.md"
     },
     {
-      "title": "Lab 14: Shutdown the TimesTen cache and instance",
-      "description": "Perform an orderly shutdown of TimesTen",
+      "title": "Lab 14: Shut down the TimesTen cache and instance",
+      "description": "Perform an orderly shut down of TimesTen",
       "filename": "../../13-shutdown/shutdown.md"
+    },
+    {
+      "title": "Wrap-up",
+      "description": "Summary and resource cleanup",
+      "filename": "../../14-wrapup/wrapup.md"
     },
     {
       "title": "Need Help?",

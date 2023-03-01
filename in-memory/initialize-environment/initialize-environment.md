@@ -9,10 +9,10 @@ In this lab we will review and startup all components required to successfully r
 ### Video Preview
 Watch the video below to get an explanation of enabling the In-Memory column store.
 
-[](youtube:dZ9cnIL6KKw)
+[Enabling IM video](youtube:dZ9cnIL6KKw)
 
 Watch the video below for a walk through of the lab.
-[](youtube:7rbgF8Z6hc4)
+[Lab walkthrough video](youtube:7rbgF8Z6hc4)
 
 
 ### Objectives
@@ -40,7 +40,7 @@ This lab assumes you have:
 
     You may test database connectivity clicking on the *+* sign next to the Database(s) as shown below in the *SQL Developer Oracle Connections* panel.
 
-    ![](./images/19c_hol_landing.png " ")
+    ![landing page](./images/19c_hol_landing.png " ")
 
 2. Click the *Terminal* icon on the desktop to launch a session, then run the following to validate that expected processes are up.
 
@@ -53,9 +53,9 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![](./images/check-pmon-up.png " ")
-    ![](./images/check-db-service-up.png " ")
-    ![](./images/check-dblistner-service-up.png " ")
+    ![query image](./images/check-pmon-up.png " ")
+    ![query image](./images/check-db-service-up.png " ")
+    ![query image](./images/check-dblistner-service-up.png " ")
 
     If all expected processes are shown in your output as seen above, then your environment is ready for the next task.  
 
@@ -85,7 +85,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![](./images/init-inmemory.png " ")
+    ![query image](./images/init-inmemory.png " ")
 
 ## Task 2: Enable In-Memory
 
@@ -106,7 +106,7 @@ This lab assumes you have:
     CDB1
     </copy>
     ```
-    ![](images/step1num1.png)
+    ![query image](images/step1num1.png)
 
     ```
     <copy>
@@ -122,7 +122,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![](images/step1num2.png)
+    ![query image](images/step1num2.png)
 
     Notice that the SGA is made up of Fixed Size, Variable Size, Database Buffers and Redo.  There is no In-Memory in the SGA.  Let's enable it.
 
@@ -139,7 +139,7 @@ This lab assumes you have:
     startup;
     </copy>
     ```
-    ![](images/step1num3.png)
+    ![query image](images/step1num3.png)
 
 
 4.  Now let's take a look at the parameters.
@@ -153,7 +153,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![](images/step1num4.png)
+    ![query image](images/step1num4.png)
 
 ## Task 3: Enable In-Memory for Objects
 
@@ -174,7 +174,7 @@ The Oracle environment is already set up so sqlplus can be invoked directly from
     </copy>
     ```
 
-    ![](images/num1.png)
+    ![query image](images/num1.png)
 
 2.  The In-Memory area is sub-divided into two pools:  a 1MB pool used to store actual column formatted data populated into memory and a 64K pool to store metadata about the objects populated into the IM columns store.  `V$INMEMORY_AREA` shows the total IM column store.  The COLUMN command in these scripts identifies the column you want to format and the model you want to use. Run the query `03_im_usage.sql` or the query below.
 
@@ -188,7 +188,7 @@ The Oracle environment is already set up so sqlplus can be invoked directly from
     select * from v$inmemory_area;
     </copy>
     ```
-    ![](images/num2.png)
+    ![query image](images/num2.png)
 
 3.  To check if any objects are populated in the IM column store query the `V$IM_SEGMENTS` view by running the script `05_im_segments.sql` or the query below.
 
@@ -201,7 +201,7 @@ The Oracle environment is already set up so sqlplus can be invoked directly from
     select v.owner, v.segment_name name, v.populate_status status from v$im_segments v;
     </copy>
     ```
-    ![](images/num3.png)   
+    ![query image](images/num3.png)   
 
 4.  To add objects to the IM column store the inmemory attribute needs to be set.  This tells Oracle Database these tables should be populated into the IM column store. Run the script `06_im_alter_table.sql` or run the commands below.   
 
@@ -214,7 +214,7 @@ The Oracle environment is already set up so sqlplus can be invoked directly from
     ALTER TABLE date_dim INMEMORY;
     </copy>
     ```
-    ![](images/num4.png)   
+    ![query image](images/num4.png)   
 
 5.  This looks at the `USER_TABLES` view and queries attributes of tables in the SSB schema. Run the script `07_im_attributes.sql` or the query below.  
 
@@ -236,7 +236,7 @@ The Oracle environment is already set up so sqlplus can be invoked directly from
     FROM   user_tables;
     </copy>
     ```
-    ![](images/step2num5.png)   
+    ![query image](images/step2num5.png)   
 
     By default the IM column store is only populated when the object is accessed.
 
@@ -251,7 +251,7 @@ The Oracle environment is already set up so sqlplus can be invoked directly from
     SELECT /*+ full(lo)  noparallel (lo )*/ Count(*) FROM   lineorder lo;
     </copy>
     ```
-    ![](images/step2num6.png)
+    ![query image](images/step2num6.png)
 
 7. Background processes are populating these segments into the IM column store.  To monitor this, you could query the `V$IM_SEGMENTS`.  Once the data population is complete, the `BYTES_NOT_POPULATED` should be 0 for each segment. Run the script `09_im_populated.sql` or run the query below.
 
@@ -270,7 +270,7 @@ The Oracle environment is already set up so sqlplus can be invoked directly from
     </copy>
     ```
 
-    ![](images/lab4step7.png)
+    ![query image](images/lab4step7.png)
 
 8.  Now let's check the total space usage. Run the script `10_im_usage.sql` or run the query below.
 
@@ -284,9 +284,9 @@ The Oracle environment is already set up so sqlplus can be invoked directly from
     </copy>
     ```
 
-    ![](images/part1step8a.png)
+    ![query image](images/part1step8a.png)
 
-    ![](images/part1step8b.png)
+    ![query image](images/part1step8b.png)
 
     In this Lab you saw that the IM column store is configured by setting the initialization parameter `INMEMORY_SIZE`. The IM column store is a static pool in the SGA, and once allocated it can be increased in size dynamically, but it is not managed by either of the automatic SGA memory features.
 
@@ -365,6 +365,6 @@ The Oracle environment is already set up so sqlplus can be invoked directly from
     ```
 
 ## Acknowledgements
-* **Author** - Andy Rivenes, Sr. Principal Product Manager, Oracle Database In-Memory
+* **Author** - Andy Rivenes, Product Manager, Oracle Database In-Memory
 * **Contributors** - Kay Malcolm, Didi Han, Rene Fontcha
-* **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, October 2021
+* **Last Updated By/Date** - Andy Rivenes, August 2022

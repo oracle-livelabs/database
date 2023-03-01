@@ -1,29 +1,26 @@
-# Shutdown the TimesTen cache and instance
+# Shut down the TimesTen cache and instance
 
 ## Introduction
 
-In this final lab, you will cleanly shut down the TimesTen cache and the TimesTen instance that manages it.
+In this final lab, you cleanly shut down the TimesTen cache and the TimesTen instance that manages it.
 
-Estimated Time: **2 minutes**
+**Estimated Lab Time:** 3 minutes
 
 ### Objectives
 
-- Stop the Cache Agent
-- Stop the TimesTen instance
+- Stop the cache agent.
+- Stop the TimesTen instance.
 
 ### Prerequisites
 
-This lab assumes that you have:
+This lab assumes that you:
 
-- Completed all the previous labs in this workshop, in sequence.
+- Have completed all the previous labs in this workshop, in sequence.
+- Have an open terminal session in the workshop compute instance, either via NoVNC or SSH, and that session is logged into the TimesTen host (tthost1).
 
-## Task 1: Connect to the environment
+## Task 1: Stop the cache agent
 
-If you do not already have an active terminal session, connect to the OCI compute instance and open a terminal session, as the user **oracle**. In that terminal session, connect to the TimesTen host (tthost1) using ssh.
-
-## Task 2: Stop the cache agent
-
-Check the current status of the TimesTen database:
+1. Check the current status of the TimesTen database:
 
 ```
 <copy>
@@ -77,7 +74,7 @@ End of report
 
 The database is active and is loaded in memory because the cache agent is connected to it.
 
-Stop the cache agent:
+2. Stop the cache agent:
 
 ```
 <copy>
@@ -94,7 +91,7 @@ Cache Agent Manually Started    : False
 Database State                  : Open
 ```
 
-Check the status again:
+3. Check the status again:
 
 ```
 <copy>
@@ -124,9 +121,9 @@ End of report
 
 The database has been unloaded from memory and is now shut down.
 
-## Task 3: Stop the TimesTen instance
+## Task 2: Stop the TimesTen instance
 
-Stop the TimesTen instance (i.e. stop the main daemon):
+Stop the TimesTen instance (the main daemon):
 
 ```
 <copy>
@@ -138,7 +135,7 @@ ttDaemonAdmin -stop
 TimesTen Daemon (PID: 190, port: 6624) stopped.
 ```
 
-## Task 4: Finally
+## Task 3: Finally
 
 Log out of the TimesTen host:
 
@@ -153,7 +150,7 @@ logout
 Connection to tthost1 closed.
 ```
 
-Congratulations, *you have completed the workshop*.
+You can now **proceed to the Wrap Up**.
 
 ## Acknowledgements
 

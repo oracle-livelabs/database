@@ -1,0 +1,11 @@
+{ "pangrams" : [
+    "text": "Waltz, bad nymph, for quick jigs vex",        "letter_count": 28 },
+    "text": "Quick zephyrs blow, vexing daft Jim",         "letter_count": 29 },
+    "text": "Sphinx of black quartz, judge my vow",        "letter_count": 29 },
+    "text": "Two driven jocks help fax my big quiz",       "letter_count": 30 },
+    "text": "Five quacking zephyrs jolt my wax bed",       "letter_count": 31 },
+    "text": "The five boxing wizards jump quickly",        "letter_count": 31 },
+    "text": "Pack my box with five dozen liquor jugs",     "letter_count": 32 },
+    "text": "The quick brown fox jumps over the lazy dog", "letter_count": 35 },
+    "text": "Jinxed wizards pluck ivy from the big quilt", "letter_count": 36 }
+] }

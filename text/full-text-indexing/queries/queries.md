@@ -6,6 +6,9 @@ This lab will use the SQL Workshop in Database Actions from the Autonomous Trans
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Run Queries](videohub:1_j5xwhbsf)
+
 ### Objectives
 
 In this lab, you will:
@@ -185,7 +188,7 @@ Otherwise, log in to the Oracle Cloud.
 
 7.  Fuzzy searches
 
-    If you make a mistake or simply don't remember the exact spelling, you can do an __FUZZY__ search. It will find not only the original search word, but also all those similar to it.
+    If you make a mistake or simply don't remember the exact spelling, you can do a __FUZZY__ search. It will find not only the original search word, but also all those similar to it.
 
     ```
     <copy>
