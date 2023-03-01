@@ -8,7 +8,9 @@ Estimated lab time: 5 minutes
 
 ### Objectives
 
-In this lab, we will verify the new edition, and see how both editions work together.
+In this lab, you will
+
+- Verify the new edition, and see how both editions work together.
 
 ## Task 1: Verify both editions
 
