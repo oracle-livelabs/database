@@ -6,9 +6,11 @@ In this lab,you will review the new edition scripts to create a new edition and 
 
 Estimated lab time: 10 minutes
 
-## Objectives
+### Objectives
 
-In this lab,you will review the new edition scripts to create a new edition and split the column `employees.phone_number` to `country_code` and `phone#`.
+In this lab,you will
+
+- Review the new edition scripts to create a new edition and split the column `employees.phone_number` to `country_code` and `phone#`
 
 ## Task 1: Review the scripts for the new edition
 

@@ -20,7 +20,9 @@ Estimated lab time: 10 minutes
 
 ### Objectives
 
-In this lab, you will learn how to use Liquibase to generate the base changelog of the HR Schema.
+In this lab, you will
+
+- Learn how to use Liquibase to generate the base changelog of the HR Schema.
 
 ## Task 1: Run lb generate-schema to generate the base changelog
 
