@@ -37,6 +37,11 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     ```
     <copy>
     sql /nolog
+    </copy>
+    ```
+
+    ```
+    <copy>
     set sqlformat ANSICONSOLE
     </copy>
     ```
@@ -91,7 +96,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     ![](./images/task1.3.1-createwmstoreadmin.png " ")
 
     ```
-    <copy>connect wmStore_Admin/Ora_DB4U@localhost:1521/wmStore_Master;</copy>
+    <copy>connect wmStore_Admin/Ora_DB4U@localhost:1521/wmStore_Master</copy>
     ```
 
     ```
@@ -101,7 +106,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     (Row_GUID         raw(16)           default Sys_GUID()                      primary key
     ,Name             varchar2(30)                                    not null  unique
     )
-    ;
+    /
     </copy>
     ```
 
@@ -112,7 +117,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     (Row_GUID         raw(16)           default Sys_GUID()                      primary key
     ,Name             varchar2(30)                                    not null  unique
     )
-    ;
+    /
     </copy>
     ```
 
@@ -125,7 +130,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     ,Order_Date       date              default   current_date        not null
     ,Campaign_ID      raw(16)           
     )
-    ;
+    /
     </copy>
     ```
 
@@ -135,7 +140,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     foreign key (Campaign_ID)
     references wm_Campaigns(Row_GUID)
     disable
-    ;
+    /
     </copy>
     ```
 
@@ -151,7 +156,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     ,Product_ID       raw(16)           not null
     ,Order_Qty        number(16,0)      not null
     )
-    ;
+    /
     </copy>
     ```
 
@@ -161,7 +166,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     foreign key (Order_ID)
     references wm_Orders(Row_GUID)
     disable
-    ;
+    /
     </copy>
     ```
 
@@ -171,7 +176,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     foreign key (Product_ID)
     references wm_Products(Row_GUID)
     disable
-    ;
+    /
     </copy>
     ```
 
@@ -197,7 +202,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     on   i.Product_ID = p.Row_GUID
     left outer join wm_Campaigns c
     on  o.Campaign_ID = c.Row_GUID
-    ;
+    /
     </copy>
     ```
 
@@ -234,7 +239,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
 4. Create the application seed PDB, which will be used to create additional application PDBs. Open the application seed PDB after it is created.
 
     ```
-    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master;</copy>
+    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master</copy>
     ```
 
     ```
@@ -262,7 +267,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
 6.  Provision separate application databases for each of the 4 stores.
 
     ```
-    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master;</copy>
+    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master</copy>
     ```
 
     ```
@@ -294,7 +299,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
 7. Create franchise-specific data by running the supplied script. In SQLcl we'll use the "cd" command to execute scripts from the correct directory.
 
     ```
-    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master;</copy>
+    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master</copy>
     ```
 
     ```
@@ -353,7 +358,7 @@ The tasks you will do in this step are:
 3. You should be able to set your container to Tulsa because `wmStore_Admin` is an Application Common user but it should fail if you try to set it to CDB$Root since that container is outside of the application container.
 
     ```
-    <copy>connect wmStore_Admin/Ora_DB4U@localhost:1521/wmStore_Master;</copy>
+    <copy>connect wmStore_Admin/Ora_DB4U@localhost:1521/wmStore_Master</copy>
     ```
 
     ```
@@ -369,7 +374,7 @@ The tasks you will do in this step are:
 4. You can connect directly to application PDBs as the various local users. Keep in mind these are local users, it just happens to be that they have the same password. Notice that the local user for California cannot use the Tulsa container because it is local to the California container.
 
     ```
-    <copy>connect wm_admin/Ora_DB4U@localhost:1521/Tulsa;</copy>
+    <copy>connect wm_admin/Ora_DB4U@localhost:1521/Tulsa</copy>
     ```
 
     ```
@@ -386,7 +391,7 @@ The tasks you will do in this step are:
 
     ![](./images/task2.4-cannotusetulsa.png " ")
 
-5. Now you'll explore the data inside the application PDBs using some sample queries. Note that each store has its own products, sales campaigns, and order quantities. First you'll create a script to query each franchise's sales by product by campaign
+5. Now you'll explore the data inside the application PDBs using some sample queries. Note that each store has its own products, sales campaigns, and order quantities. You'll create and save a script to make it easy query each franchise's sales by product by campaign
 
     ```
     <copy>
@@ -409,11 +414,7 @@ The tasks you will do in this step are:
 
     ![](./images/task2.5-savescript.png " ")
 
-    ```
-    <copy>connect wmStore_Admin/Ora_DB4U@localhost:1521/NYC
-    @orders_by_product.sql
-    </copy>
-    ```
+    
 
     ```
     <copy>connect wmStore_Admin/Ora_DB4U@localhost:1521/Tulsa
@@ -447,7 +448,7 @@ The tasks you will do in this step are:
 1. Create the upgrade of the pluggable databases.
 
     ```
-    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master;</copy>
+    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master</copy>
     ```
 
     ```
@@ -499,7 +500,7 @@ The tasks you will do in this step are:
     on   i.Product_ID = p.Row_GUID
     left outer join wm_Campaigns c
     on  o.Campaign_ID = c.Row_GUID
-    ;
+    /
     </copy>
     ```
 
@@ -1169,7 +1170,7 @@ The tasks you will do in this step are:
     ,Type_Code   varchar2(30)   not null
     ,Value_Code  varchar2(30)   not null
     )
-    ;
+    /
     </copy>
     ```
 
@@ -1177,7 +1178,7 @@ The tasks you will do in this step are:
     <copy>
     alter table wm_List_Of_Values  add constraint wm_List_Of_Values_U1
     unique (Type_Code, Value_Code)
-    ;
+    /
     </copy>
     ```
 
@@ -1534,6 +1535,8 @@ The task you will do in this step is:
     </copy>
     ```
 
+   ![](./images/task10.1-dba_pdbs.png " ")
+
     ```
     <copy>
     select P.Con_ID             "Con ID"
@@ -1560,7 +1563,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-    ![](./images/task10.1-dba_pdbs.png " ")
+ 
 
     ![](./images/task10.1-dba_pdbs_query.png " ")
 
@@ -1989,4 +1992,4 @@ The tasks you will do in this step are:
 - **Author** - Patrick Wheeler, VP, Multitenant Product Management
 - **Adapted to Cloud by** -  David Start, OSPA
 - **Contributors** -  David Start, Anoosha Pilli, Rene Fontcha, Joseph Bernens
-- **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, October 2021
+- **Last Updated By/Date** - Joseph Bernens, Principal Solution Engineer, NACT Solution Engineering / February 2023

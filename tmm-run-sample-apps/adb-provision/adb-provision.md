@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab walks you through the steps to quickly provision an Oracle Autonomous Database (Autonomous Transaction Processing [ATP]) on Oracle Cloud. You will use this database in the subsequent labs of this workshop. For this lab, you must create two ATP instances. One ATP instance acts as a resource manager for Department 1 and the other ATP instance acts as resource manager for Department 2. You can perform this lab from within the remote desktop so that the DB wallets can be downloaded directly on the remote desktop without the need to copy the wallet files from outside.
+This lab walks you through the steps to quickly provision an Oracle Autonomous Database (Autonomous Transaction Processing [ATP]) on Oracle Cloud. You will use this database in the subsequent labs of this workshop. For this lab, you must create two ATP instances. One ATP instance acts as a resource manager for Department 1 and the other ATP instance acts as resource manager for Department 2. Run the tasks in this lab in the remote desktop to create the database instances and download the database wallets within the remote desktop. When you directly download the wallet files in the remote desktop environment, you do not need to copy the wallet files from outside the environment.
 
 Estimated lab time: 20 minutes
 
@@ -83,7 +83,11 @@ Estimated lab time: 20 minutes
     * Re-enter the password to confirm it. Make a note of this password.
 
     ![Set administrator credentials](./images/create-admin.png " ")
-8. Choose network access. For this lab, accept the default, **Secure access from everywhere**, and then select the **Require mutual TLS (mTLS) authentication** option. Skip and go to the next step if the **Require mutual TLS (mTLS) authentication** option is unavailable or disabled. mTLS will be required to authenticate connections to your Autonomous Database. TLS connections allows Oracle Data Provider for .NET to connect to your Autonomous Database without a wallet. See the [documentation for network options](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/support-tls-mtls-authentication.html#GUID-3F3F1FA4-DD7D-4211-A1D3-A74ED35C0AF5) for options to allow TLS, or to require only mutual TLS (mTLS) authentication.
+8. Choose network access. For this lab, accept the default, **Secure access from everywhere**, and then select the **Require mutual TLS (mTLS) authentication** option.
+
+   Skip and go to the next step if the **Require mutual TLS (mTLS) authentication** option is unavailable or disabled. mTLS will be required to authenticate connections to your Autonomous Database.
+
+   TLS connections allow Oracle Data Provider for .NET to connect to your Autonomous Database without a wallet. See the [documentation for network options](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/support-tls-mtls-authentication.html#GUID-3F3F1FA4-DD7D-4211-A1D3-A74ED35C0AF5) for options to allow TLS, or to require only mutual TLS (mTLS) authentication.
 
     ![Choose the network access type](./images/network-access.png " ")
 
@@ -117,7 +121,7 @@ To download client credentials from the Oracle Cloud Infrastructure Console:
 
    ![Download client credentials](./images/select-db-cnxn.png)
 
-3. On the Database Connection page select Wallet type as **Instance Wallet**.
+3. On the Database Connection page, under **Wallet type**, select **Instance Wallet**.
 
 4. Click **Download Wallet**.
    ![Create wallet](./images/wallet-type.png)
@@ -132,14 +136,13 @@ To download client credentials from the Oracle Cloud Infrastructure Console:
 
    You must protect this file to prevent unauthorized database access.
 
-7. Unzip the wallet file into the Database_Wallet folder. Replace the file name in following example code based on your environment.
+7. Unzip the wallet file into the `Database_Wallet` folder. Replace the ZIP file name in following example code based on your environment.
 
     ```text
     <copy>
-    unzip Wallet_Department1DB.zip -d <path to Database_Wallet folder>
+    unzip Wallet_Department1DB.zip -d <path to the Database_Wallet folder>
     </copy>
     ```
-
 
 8. Extract the wallet files to the `/home/oracle/OTMM/otmm-22.3/samples/xa/java/department-helidon/Database_Wallet/` folder. This folder contains the source code for the Department 1 participant application.
 
@@ -147,15 +150,19 @@ To download client credentials from the Oracle Cloud Infrastructure Console:
 
 Although you can connect to your autonomous database from local desktop tools, such as Oracle SQL Developer, you can conveniently access the browser-based SQL Worksheet directly from your Autonomous Database console.
 
-1. In your database's details page, click the **Database Actions** button.
+1. In your database's details page, click **Database Actions**.
 
     ![Click the Database Actions button](images/atp-dept1-db-action.png " ")
 
-2. A sign-in page opens for Database Actions. For this lab, simply use your database instance's default administrator account, **Username - ADMIN**, and **Password** you specified when creating the database. Click **Sign in**.
+    A sign-in page for Database Actions is displayed.
+
+2. Enter your database instance's default administrator account and password. For this lab, enter **ADMIN** as the username and the password you had specified when creating the database. Click **Sign in**.
 
     ![Enter the user ID and password](./images/db-actions-sign-in-complete.png " ")
 
-3. The Database Actions page opens. In the **Development** box, click **SQL**.
+    The Database Actions page is displayed.
+
+3. In the **Development** box, click **SQL**.
 
     ![Click on SQL](./images/click-sql.png)
 
@@ -171,36 +178,41 @@ To create a table with sample values for the Department 1 application, execute t
 
 1. Ensure that you are connected to SQL Worksheet as administrator.
 
-2. Copy and paste the following code snippet to your SQL Worksheet to create the Accounts table with `account_id` as the primary key. Replace *&lt;password&gt;* by choosing a password for user department_helidon. Execute the queries one by one. At the end, execute the select query on accounts table to ensure the records have been inserted into the table.
+2. Copy and paste the following code snippet to your SQL Worksheet to create an `accounts` table with `account_id` as the primary key. Replace `<password>` with a password that you want to specify for the `department_helidon` user. Remember the password that you specify.
 
    **Syntax**
 
    ```text
    <copy>
-   CREATE USER department_helidon IDENTIFIED BY &lt;password&gt; QUOTA UNLIMITED ON DATA;
+   CREATE USER department_helidon IDENTIFIED BY <password> QUOTA UNLIMITED ON DATA;
    GRANT CREATE SESSION TO department_helidon;
    ALTER SESSION SET CURRENT_SCHEMA=department_helidon;
-   create table accounts
+   CREATE TABLE accounts
    (
    account_id VARCHAR(10) not null,
    name VARCHAR(60) not null,
    amount decimal(10,2) not null,
    PRIMARY KEY (account_id)
    );
-   insert into accounts values('account1', 'account1', 1000.00);
-   insert into accounts values('account2', 'account2', 2000.00);
-   insert into accounts values('account3', 'account3', 3000.00);
-   insert into accounts values('account4', 'account4', 4000.00);
-   insert into accounts values('account5', 'account5', 5000.00);
+   INSERT INTO accounts VALUES ('account1', 'account1', 1000.00);
+   INSERT INTO accounts VALUES ('account2', 'account2', 2000.00);
+   INSERT INTO accounts VALUES ('account3', 'account3', 3000.00);
+   INSERT INTO accounts VALUES ('account4', 'account4', 4000.00);
+   INSERT INTO accounts VALUES ('account5', 'account5', 5000.00);
    </copy>
    ```
-   
+
+3. Run the queries one at a time.
+
    ![Create table](./images/sql-dept1.png)
 
-   This creates a table with the name `accounts`. It also populates the accounts table with sample values. Verify the data in the table.
+   A table with the name `accounts` is created and populated with sample values.
+
+4. Run the following `SELECT` query on the `accounts` table to verify that the correct is available data in the table.
+
    ```text
    <copy>
-   select * from accounts;
+   SELECT * from accounts;
    </copy>
    ```
 
@@ -224,7 +236,7 @@ To create a table with sample values for the Department 2 application, execute t
 
 1. Ensure that you are connected to SQL Worksheet as administrator.
 
-2. Copy and paste the following code snippet to your SQL Worksheet to create the Accounts table with `account_id` as the primary key. Replace *&lt;password&gt;* by choosing a password for user department_spring. Execute the queries one by one. At the end, execute the select query on accounts table to ensure the records have been inserted into the table.
+2. Copy and paste the following code snippet to your SQL Worksheet to create an `accounts` table with `account_id` as the primary key. Replace `<password>` with a password that you want to specify for the `department_spring` user. Remember the password that you specify.
 
       **Syntax**
 
@@ -233,30 +245,35 @@ To create a table with sample values for the Department 2 application, execute t
       CREATE USER department_spring IDENTIFIED BY <password> QUOTA UNLIMITED ON DATA;
       GRANT CREATE SESSION TO department_spring;
       ALTER SESSION SET CURRENT_SCHEMA=department_spring;
-      create table accounts
+      CREATE TABLE accounts
       (
       account_id VARCHAR(10) not null,
       name VARCHAR(60) not null,
       amount decimal(10,2) not null,
       PRIMARY KEY (account_id)
       );
-      insert into accounts values('account1', 'account1', 1000.00);
-      insert into accounts values('account2', 'account2', 2000.00);
-      insert into accounts values('account3', 'account3', 3000.00);
-      insert into accounts values('account4', 'account4', 4000.00);
-      insert into accounts values('account5', 'account5', 5000.00);
+      INSERT INTO accounts VALUES ('account1', 'account1', 1000.00);
+      INSERT INTO accounts VALUES ('account2', 'account2', 2000.00);
+      INSERT INTO accounts VALUES ('account3', 'account3', 3000.00);
+      INSERT INTO accounts VALUES ('account4', 'account4', 4000.00);
+      INSERT INTO accounts VALUES ('account5', 'account5', 5000.00);
       </copy>
       ```
 
+3. Run the queries one at a time.
+
    ![Create table](./images/sql-dept2.png)
 
-   This creates a table with the name `accounts`. It also populates the accounts table with sample values. Verify the data in the table.
+   A table with the name `accounts` is created and populated with sample values.
+
+4. Run the following `SELECT` query on the `accounts` table to verify that the correct is available data in the table.
+
    ```text
    <copy>
-   select * from accounts;
+   SELECT * from accounts;
    </copy>
    ```
-   
+
 You may now **proceed to the next lab.**
 
 ## Learn More
@@ -267,4 +284,4 @@ You may now **proceed to the next lab.**
 ## Acknowledgements
 
 * **Author** - Richard Green, Alex Keh, Sylaja Kannan
-* **Last Updated By/Date** - Sylaja Kannan, September 2022
+* **Last Updated By/Date** - Sylaja Kannan, December 2022

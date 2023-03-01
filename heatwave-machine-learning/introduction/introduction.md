@@ -8,7 +8,7 @@ HeatWave is a massively parallel, high-performance, in-memory query accelerator 
 
 In this workshop, you will use the capabilities of HeatWave Machine Learning (ML) to implement a project which classifies species of Iris flowers. This project is also known as the Hello World version of Machine Learning. You will create and use a predictive machine learning model to step through preparing data, using the ML\_TRAIN routine to train a model, and using ML\_PREDICT\_ and ML\_EXPLAIN\_ routines to generate predictions and explanations. Finally, you will assess the quality of a model using the ML_SCORE routine and how to view a model explanation to understand how your model works.
 
-The workshop uses the publicly available [Iris Data Set] (https://archive.ics.uci.edu/ml/datasets/Iris)  from the UCI Machine Learning Repository.
+The workshop uses the publicly available [Iris Data Set] (https://archive.ics.uci.edu/ml/datasets/Iris)  from the UCI Machine Learning Repository and MySQL HeatWave version 8.0.32.
 
 The Iris Data Set has the following data, where the sepal and petal features are used to predict the class label, which is
 
@@ -65,4 +65,5 @@ In this lab, you will be guided through the following steps:
 
 - **Contributors** - Salil Pradhan, Principal Product Manager,
 Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, May 2022
+Marco Carlessi, MySQL Solution Engineering
+- **Last Updated By/Date** - Marco Carlessi, MySQL Solution Engineering, Feb 2023
