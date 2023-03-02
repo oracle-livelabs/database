@@ -7,7 +7,7 @@ In this lab, you will setup a non-sharded database application. You will migrate
 *Estimated Lab Time:* 30 minutes.
 
 Watch the video below for a quick walk through of the lab.
-[](youtube:bUC2KXUW21E)
+[Setup a Non-Sharded Application](videohub:1_z2psr30b)
 
 ### Objectives
 
@@ -36,9 +36,9 @@ This lab assumes you have:
 
 2. Make sure you are in the shd3 database environment by running *`. .set-env-db.sh`* and selecting the appropriate shard from the list.
 
-    ```
-    [oracle@cata ~]$ <copy>. .set-env-db.sh</copy>
-    ```
+        ```
+        [oracle@cata ~]$ <copy>. .set-env-db.sh</copy>
+        ```
 
 3. Connect to the database as sysdba.
 

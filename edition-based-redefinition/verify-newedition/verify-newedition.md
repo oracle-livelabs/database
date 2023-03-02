@@ -1,87 +1,61 @@
-# Verify Editions
+# Verify the new edition
 
-At this point we have one edition using the old column (PHONE_NUMBER))
+## Introduction
 
-SQL> alter session set edition=ORA$BASE;
+In this lab, we will verify the new edition, and see how both editions work together.
 
-Session altered.
+Estimated lab time: 5 minutes
 
-SQL> select * from employees where rownum<5;
+### Objectives
 
-   EMPLOYEE_ID    FIRST_NAME    LAST_NAME       EMAIL          PHONE_NUMBER    HIRE_DATE    JOB_ID    SALARY    COMMISSION_PCT    MANAGER_ID    DEPARTMENT_ID
-______________ _____________ ____________ ___________ _____________________ ____________ _________ _________ _________________ _____________ ________________
-           151 David         Bernstein    DBERNSTE    011.44.1344.345268    24-MAR-05    SA_REP         9500              0.25           145               80
-           156 Janette       King         JKING       011.44.1345.429268    30-JAN-04    SA_REP        10000              0.35           146               80
-           161 Sarath        Sewall       SSEWALL     011.44.1345.529268    03-NOV-06    SA_REP         7000              0.25           146               80
-           166 Sundar        Ande         SANDE       011.44.1346.629268    24-MAR-08    SA_REP         6400               0.1           147               80
+In this lab, you will
 
-and the new one with the other two columns (COUNTRY_CODE and PHONE#)
+- Verify the new edition, and see how both editions work together.
 
-SQL> alter session set edition=v2;
+## Task 1: Verify both editions
 
-Session altered.
+1. It is assumed you are connected to the `HR` schema.
 
-SQL> select * from employees where rownum<5;
+    After the deployment of the new edition, we still have the old one using the `PHONE_NUMBER` column. 
 
-   EMPLOYEE_ID    FIRST_NAME    LAST_NAME       EMAIL    COUNTRY_CODE         PHONE#    HIRE_DATE    JOB_ID    SALARY    COMMISSION_PCT    MANAGER_ID    DEPARTMENT_ID
-______________ _____________ ____________ ___________ _______________ ______________ ____________ _________ _________ _________________ _____________ ________________
-           151 David         Bernstein    DBERNSTE    +44             1344.345268    24-MAR-05    SA_REP         9500              0.25           145               80
-           156 Janette       King         JKING       +44             1345.429268    30-JAN-04    SA_REP        10000              0.35           146               80
-           161 Sarath        Sewall       SSEWALL     +44             1345.529268    03-NOV-06    SA_REP         7000              0.25           146               80
-           166 Sundar        Ande         SANDE       +44             1346.629268    24-MAR-08    SA_REP         6400               0.1           147               80
+    - Base edition
 
-The base table itself contains all of them, but should not be used directly.
+    ```text
+    <copy>alter session set edition=ORA$BASE;</copy>
+    <copy>select * from employees where rownum < 5;</copy>
+    ```
 
-SQL> select * from employees$0 where rownum<5;
+    ![Employees Base edition](images/employees-base-edition.png " ")
 
-   EMPLOYEE_ID    FIRST_NAME    LAST_NAME       EMAIL          PHONE_NUMBER    HIRE_DATE    JOB_ID    SALARY    COMMISSION_PCT    MANAGER_ID    DEPARTMENT_ID    COUNTRY_CODE         PHONE#
-______________ _____________ ____________ ___________ _____________________ ____________ _________ _________ _________________ _____________ ________________ _______________ ______________
-           151 David         Bernstein    DBERNSTE    011.44.1344.345268    24-MAR-05    SA_REP         9500              0.25           145               80 +44             1344.345268
-           156 Janette       King         JKING       011.44.1345.429268    30-JAN-04    SA_REP        10000              0.35           146               80 +44             1345.429268
-           161 Sarath        Sewall       SSEWALL     011.44.1345.529268    03-NOV-06    SA_REP         7000              0.25           146               80 +44             1345.529268
-           166 Sundar        Ande         SANDE       011.44.1346.629268    24-MAR-08    SA_REP         6400               0.1           147               80 +44             1346.629268
+    - Edition `V2` with the columns `COUNTRY_CODE` and `PHONE#`
 
-We can check the objects for all the editions. We see a copy for each one because we forced their actualization. Without that step, in V2 we would see only the objects that have been changed, and the others would have been inherited from ORA$BASE.
+    ```text
+    <copy>alter session set edition=v2;</copy>
+    <copy>select * from employees where rownum < 5;</copy>
+    ```
 
-SQL> select OBJECT_NAME, OBJECT_TYPE, STATUS, EDITION_NAME from user_objects_ae WHERE edition_name is not null  order by 2,1,4;
+    ![Employees v2 edition](images/employees-v2-edition.png " ")
 
-                     OBJECT_NAME    OBJECT_TYPE    STATUS    EDITION_NAME 
-________________________________ ______________ _________ _______________
-ADD_JOB_HISTORY                  PROCEDURE      VALID     ORA$BASE
-ADD_JOB_HISTORY                  PROCEDURE      VALID     V2
-SECURE_DML                       PROCEDURE      VALID     ORA$BASE
-SECURE_DML                       PROCEDURE      VALID     V2
-DATABASECHANGELOG_ACTIONS_TRG    TRIGGER        VALID     ORA$BASE
-DATABASECHANGELOG_ACTIONS_TRG    TRIGGER        VALID     V2
-EMPLOYEES_FWDXEDITION_TRG        TRIGGER        VALID     V2
-EMPLOYEES_REVXEDITION_TRG        TRIGGER        VALID     V2
-SECURE_EMPLOYEES                 TRIGGER        VALID     ORA$BASE
-SECURE_EMPLOYEES                 TRIGGER        VALID     V2
-UPDATE_JOB_HISTORY               TRIGGER        VALID     ORA$BASE
-UPDATE_JOB_HISTORY               TRIGGER        VALID     V2
-COUNTRIES                        VIEW           VALID     ORA$BASE
-COUNTRIES                        VIEW           VALID     V2
-DEPARTMENTS                      VIEW           VALID     ORA$BASE
-DEPARTMENTS                      VIEW           VALID     V2
-EMPLOYEES                        VIEW           VALID     ORA$BASE
-EMPLOYEES                        VIEW           VALID     V2
-EMP_DETAILS_VIEW                 VIEW           VALID     ORA$BASE
-EMP_DETAILS_VIEW                 VIEW           VALID     V2
-JOBS                             VIEW           VALID     ORA$BASE
-JOBS                             VIEW           VALID     V2
-JOB_HISTORY                      VIEW           VALID     ORA$BASE
-JOB_HISTORY                      VIEW           VALID     V2
-LOCATIONS                        VIEW           VALID     ORA$BASE
-LOCATIONS                        VIEW           VALID     V2
-REGIONS                          VIEW           VALID     ORA$BASE
-REGIONS                          VIEW           VALID     V2
+2. The base table itself contains all of them, but should not be used directly. It is visible in both editions.
 
-28 rows selected.
+    ```text
+    <copy>select * from employees$0 where rownum < 5;</copy>
 
-You have successfully executed the verified the editions in  the HR schema [proceed to the next lab](#next)
+    ```
+    ![Employees-table](images/employees-basetable.png " ")
 
-## Acknowledgements
+    Notice how the new columns `COUNTRY_CODE` and `PHONE#` are at the end of the base table column layout.
 
-- **Author** - Suraj Ramesh
-- **Contributors** -
-- **Last Updated By/Date** -01-Jul-2022
+    We can check the objects for all the editions. We see a copy for each one because we forced their actualization. Without that step, in `V2` we would see only the objects that have been changed, and the others would have been inherited from `ORA$BASE`.
+
+    ```text
+    <copy>select OBJECT_NAME, OBJECT_TYPE, STATUS, EDITION_NAME from user_objects_ae WHERE edition_name is not null  order by 2,1,4;</copy>
+    ```
+    ![Employees all edition](images/employees-all-edition.png " ")
+
+You have successfully verified both editions of the HR schema. [Proceed to the next lab](#next) to switch to the new edition and decommission the old one.
+
+##Acknowledgements
+
+- Authors - Ludovico Caldara and Suraj Ramesh
+- Last Updated By/Date - Suraj Ramesh, Feb 2023
