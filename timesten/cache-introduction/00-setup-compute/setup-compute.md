@@ -83,7 +83,7 @@ If you wish to use an existing network (see *Lab: Prepare Setup* for details of 
 
   ![Deploy stack environment](./images/create-stack-novnc-5.png " ")
 
-## Task 3: Terraform Apply
+## Task 3: Apply Terraform
 In the prior steps we elected to trigger the *terraform apply action* on stack creation.
 
 1.  Review the job output.
@@ -236,7 +236,7 @@ If you have an existing VCN which you wish to use, and are comfortable updating 
     - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Unchecked
     - **Instance Shape:** Accept the default shown or select from the dropdown. e.g. VM.Standard.E2.4
 
-  ![](./images/create-stack-novnc-7.png " ")
+  ![Uncheck flex shape button](./images/create-stack-novnc-3.png " ")
 
 7. Review and click **Create**.
 
@@ -250,4 +250,4 @@ You may now return to **Task 3: Terraform Apply** above.
 
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
-* **Last Updated By/Date** - Jenny Bloom, February 2023
+* **Last Updated By/Date** - Jenny Bloom, March 2023
