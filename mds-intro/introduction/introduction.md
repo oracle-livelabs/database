@@ -39,7 +39,7 @@ In this lab, you will be guided through the following steps:
 * Connect to and use MySQL.
 * Clean up used resources.
 
-### Prerequisites
+## Prerequisites
 
 * An Oracle Free Tier, Paid, or LiveLabs Cloud Account
 * Some Experience with MySQL Shell. See the [MySQL Shell page](https://dev.mysql.com/doc/mysql-shell/8.0/en/).
@@ -48,6 +48,7 @@ In this lab, you will be guided through the following steps:
 > **Note:** If you have a **Free Trial** account, when your Free Trial expires, your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. See the [Free Tier FAQ page](https://www.oracle.com/cloud/free/faq.html).
 
 ## Acknowledgements
+
 * **Author** - Perside Foster, MySQL Solution Engineering
 * **Contributors** - Airton Lastori, Principal Product Manager, Priscila Galvao, MySQL Solution Engineering,
 Nick Mader, MySQL Global Channel Enablement & Strategy Manager
