@@ -1,4 +1,4 @@
-# Setup Compute Instance
+# Setup compute instance
 
 ## Introduction
 
