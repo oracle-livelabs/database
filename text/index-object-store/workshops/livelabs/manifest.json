@@ -37,7 +37,11 @@
             "filename": "../../queries/queries.md"
         },
         {
-            "title": "Lab 6: Clean up Oracle Autonomous Database",
+            "title": "Lab 6: Index binary files",
+            "filename": "../../binaries/binaries.md"
+        },
+        {
+            "title": "Lab 7: Clean up Oracle Autonomous Database",
             "filename":"https://oracle-livelabs.github.io/common/labs/terminate-adb/terminate-adb.md"
         },
         {

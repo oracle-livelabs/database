@@ -269,7 +269,7 @@ Now run the queries against the TimesTen cache:
 ```
 
 ```
-info: connected to 'sampledb' (Oracle TimesTen IMDB version 22.1.1.3.0)
+info: connected to 'sampledb' (Oracle TimesTen IMDB version 22.1.1.7.0)
 info: running queries from file 'queries/query_all.sql'
 info: ========================================
 info: executing query #1
