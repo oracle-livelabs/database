@@ -3,7 +3,7 @@
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
         {
-            "title": "Introduction to workshop ",
+            "title": "Introduction",
             "description": "Learn how to use Edition-Based Redefinition (EBR) and Online Table Reorganization (DBMS_REDEFINITION) along with SQLcl and its Liquibase integration. These unique Oracle technologies will let you evolve your database schemas online, without any interruption, using a rolling, blue-green deployment style.",
             "filename": "../../introduction/intro.md"
         },
@@ -57,6 +57,11 @@
             "title": "Lab 9: Switch to the new edition and decommission the old edition",
             "description": "Switch to the new edition and decommission the old edition",
             "filename": "../../switch-decomm-editions/switch-decomm-editions.md"
+        },
+        {
+            "title": "Lab 10:Terminate Oracle Autonomous Database",
+            "description": "Terminate Oracle Autonomous Database",
+            "filename": "https://oracle-livelabs.github.io/common/labs/terminate-adb/terminate-adb.md"
         },
         {
             "title": "Need Help?",
