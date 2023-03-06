@@ -261,11 +261,11 @@ if ($stmt = $link->prepare($query)) {
 
 4. From the Items purchased Page click the "Loyalty Reward Promotion" button
 
-    ![MDS](./images/promotion-activity.png "promotion-activity ")
+    ![MDS](./images/promotion-activity.png "promotion activity ")
 
 5. From the Eureka Promotions Page click the "Accept" button
 
-    ![MDS](./images/eureka-promotion.png "eureka-promotion")
+    ![MDS](./images/eureka-promotion.png "eureka promotion")
 
 6. From the Eureka Promotion Coupons  Page click the "Shop" button
 
@@ -273,15 +273,15 @@ if ($stmt = $link->prepare($query)) {
 
 7. From the Promotion Shop  Page select Items to purchase and click the "Submitt" button
 
-    ![MDS](./images/promotion-shop.png "promotion-shop")
+    ![MDS](./images/promotion-shop.png "promotion shop")
 
 8. From the Items Purchase Page   click the "Continue" button
 
-    ![MDS](./images/items-purchased.png "items-purchased")
+    ![MDS](./images/items-purchased.png "items purchased")
 
 9. From the Thank You  Page   click the "Signout" button
 
-    ![MDS](./images/thankyou.png "thankyou")
+    ![MDS](./images/thankyou.png "thank you")
 
 ## Acknowledgements
 
