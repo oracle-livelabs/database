@@ -130,8 +130,8 @@ To provide the configuration and environment details in the `values.yaml` file:
         </copy>
         ```
 
-    * `databaseUser`: Enter the user name to access the database, such as SYS.
-    * `databasePassword`: Enter the password to access the database for the specific user.
+    * `databaseUser`: Enter the user name to access the database, such as ADMIN. Use ADMIN if you created the tables and inserted sample data in the previous Lab.
+    * `databasePassword`: Enter the password to access the database for the specific user. Use ADMIN user password if you created the tables and inserted sample data in the previous Lab.
     * `resourceManagerId`: A unique identifier (uuid) to identify a resource manager. Enter a random value for this lab as shown below.
 
    The `values.yaml` file contains many properties. For readability, only the resource manager properties for which you must provide values are listed in the following sample code snippet.
@@ -306,7 +306,7 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     ```text
     <copy>
     curl --location \
-    --request GET 'http://$CLUSTER_IPADDR/dept1/account1' | jq
+    --request GET http://$CLUSTER_IPADDR/dept1/account1 | jq
     </copy>
     ```
 
@@ -315,7 +315,7 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     ```text
     <copy>
     curl --location \
-    --request GET 'http://$CLUSTER_IPADDR/dept2/account2' | jq
+    --request GET http://$CLUSTER_IPADDR/dept2/account2 | jq
     </copy>
     ```
 
@@ -326,7 +326,7 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     ```text
     <copy>
     curl --location \
-    --request POST 'http://$CLUSTER_IPADDR/transfers' \
+    --request POST http://$CLUSTER_IPADDR/transfers \
     --header 'Content-Type: application/json' \
     --data-raw '{"from" : "account1", "to" : "account2", "amount" : 50}'
      </copy>
@@ -341,7 +341,7 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     ```text
     <copy>
     curl --location \
-    --request GET 'http://$CLUSTER_IPADDR/dept1/account1' | jq
+    --request GET http://$CLUSTER_IPADDR/dept1/account1 | jq
     </copy>
     ```
 
@@ -350,7 +350,7 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     ```text
     <copy>
     curl --location \
-    --request GET 'http://$CLUSTER_IPADDR/dept2/account2' | jq
+    --request GET http://$CLUSTER_IPADDR/dept2/account2 | jq
     </copy>
     ```
 
@@ -361,7 +361,7 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     ```text
     <copy>
     curl --location \
-    --request POST 'http://$CLUSTER_IPADDR/transfers' \
+    --request POST http://$CLUSTER_IPADDR/transfers \
     --header 'Content-Type: application/json' \
     --data-raw '{"from" : "account1", "to" : "account7", "amount" : 50}'
     </copy>
@@ -374,7 +374,7 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
     ```text
     <copy>
     curl --location \
-    --request GET 'http://$CLUSTER_IPADDR/dept1/account1' | jq
+    --request GET http://$CLUSTER_IPADDR/dept1/account1 | jq
     </copy>
     ```
 ## Task 7: View Service Mesh graph and Distributed Traces (Optional)
