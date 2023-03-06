@@ -22,7 +22,11 @@ We'll populate that table, and then create a Text index on the note column.
 
 We'll then work through various types of queries using the Oracle Text CONTAINS operator. We'll also show some mixed queries with full-text search on the note column with an additional filter on other relational columns.
 
-Finally, we'll look at how to SYNC and OPTIMIZE Oracle Text indexes.
+Next, we'll look at how to SYNC and OPTIMIZE Oracle Text indexes.
+
+Finally we'll look at how to index binary files such as Microsoft Word or PDF files on the Object Store.
+
+Estimated Lab Time: 60-75 minutes
 
 ### Prerequisites
 

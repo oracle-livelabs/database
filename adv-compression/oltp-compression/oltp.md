@@ -31,8 +31,7 @@ This lab assumes you have:
 
 * A LiveLabs Cloud account and assigned compartment
 * The IP address and instance name for your DB19c Compute instance
-* Successfully logged into your LiveLabs account
-* A Valid SSH Key Pair
+* Successfully logged into your LiveLabs account 
   
 ## Task 1: Enable OLTP table compression 
 

@@ -32,7 +32,7 @@ In this lab, you will be guided through the following task:
 
 1. If not already connected with SSH, connect to Compute instance using Cloud Shell
 
-    (Example: **ssh -i ~/.ssh/id_rsa opc@132.145.17....**)
+    (Example: **ssh -i MDS-Client opc@132.145.17....**)
 
 2. On the command line, connect to MySQL using the MySQL Shell client tool with the following command:
 
@@ -42,7 +42,7 @@ In this lab, you will be guided through the following task:
 
     ![Connect](./images/heatwave-load-shell.png "heatwave-load-shell ")
 
-3. Grant the following privileges the MySQL account (admin ??) that will use HeatWave ML has been
+3. In this lab we use the administrative account previously created, but if you want to use a dedicated MySQL user, please remember to grant the following privileges to use HeatWave ML
 
     a. SELECT and ALTER privileges on the schema that contains the machine learning datasets
 
@@ -58,7 +58,7 @@ In this lab, you will be guided through the following task:
 
 ## Task 2: load training and test data
 
-1. To Create the Machine Learning schem and tables on the MySQL HeatWave DB System perform  the following steps:
+1. To Create the Machine Learning schema and tables on the MySQL HeatWave DB System perform download the sample database with this command:
 
     a. Click on this link to **Download file [iris-ml-data.txt](files/iris-ml-data.txt)**  to your local machine
     b. Open iris-ml-data.txt from your local machine with notepad
@@ -66,19 +66,19 @@ In this lab, you will be guided through the following task:
     ![MDS](./images/iris-ml-data.png "iris-ml-data ")
 
     c. Copy all of the content of the iris-ml-data.txt file from your local machine
-        - Paste the content next to the MySQL Shell command and hit enter at the very end.
+        - Paste the content next to the MySQL Shell command and hit enter at the very end (please don't forget to confirm last statement).
 
     ![MDS](./images/iris-ml-data-execute.png "iris-ml-data-execute ")
 
 2. View the content of  your machine Learning schema (ml_data)
 
-    a.
+    a. Connected to the new database ml_data 
 
     ```bash
     <copy>use ml_data; </copy>
     ```
 
-    b.
+    b. Show the created tables
 
     ```bash
     <copy>show tables; </copy>
@@ -114,35 +114,48 @@ In this lab, you will be guided through the following task:
 ## Task 4: Predict and Explain for Single Row
 
 1. Make a prediction for a single row of data using the ML\_PREDICT\_ROW routine.
-In this example, data is assigned to a @row\_input session variable, and the variable is called by the routine. The model handle is called using the @iris\_model session variable:
+   In this example, data is assigned to a @row\_input session variable, and the variable is called by the routine. The model handle is called using the @iris\_model session variable:
 
     ```bash
-    <copy>SET @row_input = JSON_OBJECT( "sepal_length", 7.3, "sepal_width", 2.9, "petal_length", 6.3, "petal_width", 1.8); </copy>
+    <copy>SET @row_input = JSON_OBJECT( "sepal length", 7.3, "sepal width", 2.9, "petal length", 6.3, "petal width", 1.8); </copy>
     ```
 
     ```bash
-    <copy>SELECT sys.ML_PREDICT_ROW(@row_input, @iris_model);</copy>
+    <copy>SELECT sys.ML_PREDICT_ROW(@row_input, @iris_model, NULL);</copy>
     ```
 
     Based on the feature inputs that were provided, the model predicts that the Iris plant is of the **class Iris-virginica**. The feature values used to make the prediction are also shown.
 
-2. Generate an explanation for the same row of data using the ML\_EXPLAIN\_ROW routine to understand how the prediction was made:
+    **Note**  Your output should look like this:
+    ![MDS](./images/iris-ml-predict-out.png "iris-ml-predict-out ")
+
+2. To have a more human readable output, you can use the built-in function JSON\_PRETTY. Repeat row prediction with a better formatting output:
 
     ```bash
-    <copy>SELECT sys.ML_EXPLAIN_ROW(@row_input, @iris_model);</copy>
+    <copy>SELECT JSON_PRETTY(sys.ML_PREDICT_ROW(@row_input, @iris_model, NULL));</copy>
+    ```
+
+    **Note**  Your output should look like this:
+    ![MDS](./images/iris-ml-predict-out-pretty.png "iris-ml-predict-out ")
+
+3. Generate an explanation for the same row of data using the ML\_EXPLAIN\_ROW routine to understand how the prediction was made:
+
+    ```bash
+    <copy>SELECT JSON_PRETTY(sys.ML_EXPLAIN_ROW(@row_input, @iris_model, JSON_OBJECT('prediction_explainer', 'permutation_importance')));;</copy>
     ```
 
     The attribution values show which features contributed most to the prediction, with petal length and pedal width being the most important features. The other features have a 0 value indicating that they did not contribute to the prediction.
 
     **Note**  Your output should look like this:
-    ![MDS](./images/iris-ml-predict-out.png "iris-ml-predict-out ")
+    ![MDS](./images/iris-ml-explain-out.png "iris-ml-predict-out ")
+
 
 ## Task 5: Make predictions and run explanations for a table of data  using a trained model
 
 1. Make predictions for a table of data using the ML\_PREDICT\_TABLE routine. The routine takes data from the iris\_test table as input and writes the predictions to an iris_predictions output table.
 
     ```bash
-    <copy>CALL sys.ML_PREDICT_TABLE('ml_data.iris_test', @iris_model,'ml_data.iris_predictions');</copy>
+    <copy>CALL sys.ML_PREDICT_TABLE('ml_data.iris_test', @iris_model,'ml_data.iris_predictions',NULL);</copy>
     ```
 
 2. Query the table ML\_PREDICT\_TABLE to view the results  
@@ -153,10 +166,14 @@ In this example, data is assigned to a @row\_input session variable, and the var
 
     The table shows the predictions and the feature column values used to make each prediction.
 
+     **Note**  Your output should look like this:
+    ![MDS](./images/iris-ml-predict-table.png "iris-ml-predict=table-out ")
+
+
 3. Generate explanations for the same table of data using the ML\_EXPLAIN\_TABLE routine.
 
     ```bash
-    <copy>CALL sys.ML_EXPLAIN_TABLE('ml_data.iris_test', @iris_model, 'ml_data.iris_explanations');</copy>
+    <copy>CALL sys.ML_EXPLAIN_TABLE('ml_data.iris_test', @iris_model, 'ml_data.iris_explanations', JSON_OBJECT('prediction_explainer', 'permutation_importance'));</copy>
     ```
 
 4. Query the table ML\_EXPLAIN\_TABLE  to view the results
@@ -166,7 +183,7 @@ In this example, data is assigned to a @row\_input session variable, and the var
     ```
 
      **Note**  Your output should look like this:
-    ![MDS](./images/iris-ml-predict-table-out.png "iris-ml-predict=table-out ")
+    ![MDS](./images/iris-ml-explain-table.png "iris-ml-predict=table-out ")
 
 ## Task 6: Score your machine learning model to assess its reliability and unload the model
 
@@ -182,6 +199,9 @@ In this example, data is assigned to a @row\_input session variable, and the var
     <copy>SELECT @score;</copy>
     ```
 
+    **Note**  Your output should look like this:
+    ![MDS](./images/iris-ml-score-model-out.png "iris-ml-score-model-out ")
+
 3. Unload the model using ML\_MODEL\_UNLOAD:
 
     ```bash
@@ -189,10 +209,6 @@ In this example, data is assigned to a @row\_input session variable, and the var
     ```
 
     To avoid consuming too much space, it is good practice to unload a model when you are finished using it.
-
-    **Note**  Your output should look like this:
-    ![MDS](./images/iris-ml-score-model-out.png "iris-ml-score-model-out ")
-
 ## Learn More
 
 * [Oracle Cloud Infrastructure MySQL Database Service Documentation ](https://docs.cloud.oracle.com/en-us/iaas/MySQL-database)
@@ -204,4 +220,5 @@ In this example, data is assigned to a @row\_input session variable, and the var
 
 - **Contributors** - Salil Pradhan, Principal Product Manager,
 Nick Mader, MySQL Global Channel Enablement & Strategy Manager
+Marco Carlessi, MySQL Solution Engineering
 - **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, May 2022

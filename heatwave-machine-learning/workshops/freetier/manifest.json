@@ -10,18 +10,18 @@
 
         {
           "title": "Get Started",
-          "description": "This is the prerequisites for customers using Free Trial and Paid tenancies. The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
-          "filename": "../../register-account/register-account.md"
+          "description": "Prerequisites for LiveLabs (Oracle-owned tenancies). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
         },
 
         {
-            "title": "Lab 1: Create MySQL HeatWave and Cluster",
+            "title": "Lab 1: Create MySQL HeatWave",
             "filename": "../../create-dbs/create-dbs.md"
         },
 
         {
-          "title": "Lab 2: Connect to MySQL HeatWave",
-          "filename": "../../connect-dbs/connect-dbs.md"
+          "title": "Lab 2: Add HeatWave Cluster to MySQL Database Service and connect",
+          "filename": "../../add-cluster/add-cluster.md"
         },
 
         {
