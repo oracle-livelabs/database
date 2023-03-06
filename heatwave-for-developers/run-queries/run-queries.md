@@ -43,16 +43,16 @@ In this lab, you will be guided through the following tasks:
 5. Before running a query, use EXPLAIN to verify that the query can be offloaded to the HeatWave cluster. You should see "Use secondary engine RAPID" in the explain plan. For example:
 
     ```bash
-        <copy>EXPLAIN SELECT
-        select customer_id,order_datetime purchase_date
-            ,unit_price,discount,quantity,order_amount_total,order_discount_total
-            ,ROUND((order_amount_total - order_discount_total),1) purchase_total
-            ,start_date,end_date,coupon_redemption_status,product_name product_title
-            FROM customer_order_product_coupon_view 
-            where customer_id=1 and promotion_id =99
-            order by order_datetime; 
-        </copy>
-        ```
+    <copy>EXPLAIN SELECT
+    customer_id,order_datetime purchase_date
+        ,unit_price,discount,quantity,order_amount_total,order_discount_total
+        ,ROUND((order_amount_total - order_discount_total),1) purchase_total
+        ,start_date,end_date,coupon_redemption_status,product_name product_title
+        FROM customer_order_product_coupon_view 
+        where customer_id=1 and promotion_id =99
+        order by order_datetime; 
+    </copy>
+    ```
 
     ![RUN](./images/heatwave-query-company-explain.png "heatwave query company explain")
 
