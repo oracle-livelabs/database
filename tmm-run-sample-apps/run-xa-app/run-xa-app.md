@@ -140,13 +140,13 @@ To provide the configuration and environment details in the `values.yaml` file:
    <copy>
     dept1:
       ...
-      connectString: jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bbcldfxbtjvtddi_tmmwsdb3_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet
+      connectString: "jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bbcldfxbtjvtddi_tmmwsdb3_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet"
       databaseUser: db_user
       databasePassword: db_user_password
       resourceManagerId: 77e75891-27f4-49cf-a488-7e6fece865b7
     dept2:
       ...
-      connectString: jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bdcldfxbtjvtddi_tmmwsdb4_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet
+      connectString: "jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bdcldfxbtjvtddi_tmmwsdb4_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet"
       databaseUser: db_user
       databasePassword: db_user_password
       resourceManagerId: 17ff43bb-6a4d-4833-a189-56ef023158d3
