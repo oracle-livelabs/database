@@ -108,7 +108,7 @@ This lab assumes you have:
     kubectl port-forward service/superset --address 0.0.0.0 8088:8088 -n superset &
     </copy>
     ```
-    > **Note** This is an alternative way to access OKE services via kubernetes port-forwarding function that is different from using ingress-controller
+    > **Note** This is an alternative way to access OKE services via kubernetes port-forwarding function that is different from using ingress-controller. Port-forwarding is only used for development and testing purposes only
 
 ## Task 3: Edit VCN Security List
 

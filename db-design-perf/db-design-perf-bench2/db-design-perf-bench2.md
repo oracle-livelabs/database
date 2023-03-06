@@ -1,6 +1,3 @@
-<!-- Updated March 24, 2020 -->
-
-
 # Optimize the design for throughput
 
 ## Introduction
@@ -11,7 +8,7 @@ Estimated lab time: 10 minutes
 
 ### Prerequisites
 
--   This lab requires completion of the preceding labs in the Contents menu on the left.
+-   This lab requires completing the preceding labs in the Contents menu on the left.
 
 ## Task 1: Run the New Benchmark via Cloud Shell
 
@@ -26,39 +23,39 @@ Estimated lab time: 10 minutes
     </copy>
     ```
 
-    The script will connect to your autonomous database, and rebuilds the schema from scratch.  The only elements that will be presented verbosely on screen are those that have been changed from the initial baseline.
+    The script will connect to your autonomous database and rebuilds the schema from scratch.  The only elements presented verbosely on screen are those changed from the initial baseline.
 
-    ![](./images/through1.png " ")
+    ![Show the difference in table setup comparted to Benchmark 1](./images/t1-show-difference-in-table-compared-to-benchmark1.png " ")
 
-    The first change here is focused around reducing the number of database **triggers** down to a minimum. There is a performance cost to firing trigger during a DML operation. Sometimes the complexity of business requirements makes a trigger mandatory, but often, triggers are used just to populate potentially missing column values. A column has *always* had the ability to be given a default value, but triggers were used to ensure that a NULL could never be forcibly inserted into such columns.
+    The first change here focuses on reducing the number of database **triggers** down to a minimum. There is a performance cost to firing a trigger during a DML operation. Sometimes the complexity of business requirements makes a trigger mandatory, but often, triggers are used to populate potentially missing column values. A column has *always* had the ability to be given a default value, but triggers were used to ensure that a NULL could never be forcibly inserted into such columns.
 
-    However, from Oracle Database 12c onwards, the DEFAULT ON NULL clause means that the need for triggers to capture default values is often no longer the case.  Defaults of sequence values, user logon, context values can all be done natively in the table definition.
+    However, from Oracle Database 12c onwards, the DEFAULT ON NULL clause means that the need for triggers to capture default values is often no longer the case.  Default values (fixed or based on, for example, sequences), user login, and context values can be applied natively in the table definition.
 
-    As the schema generation continues, you will see that all of the trigger creation code is no longer required as has been commented out.
+    As the schema generation continues, you will see that all of the trigger creation code is no longer required, as has been commented out.
 
-    ![](./images/through3.png " ")
+    ![No more triggers available in the benchmark schema](./images/t2-no-more-triggers-created-in-schema.png " ")
 
     The script will pause when it has rebuilt the schema back to the state and is ready to launch the benchmark.
 
-    ![](./images/through2.png " ")
+    ![The benchmark will start in 5 seconds](./images/t3-benchmark-will-start-in-5-seconds.png " ")
 
-    This time, because you are now familiar with the benchmark process, the 8 sessions will be launched and the initiating commit will occur automatically, thus you simply need to wait for the benchmark to complete.
+    Because you are familiar with the benchmark process, the eight sessions will be launched, and the initiating commit will occur automatically. Thus you need to wait for the benchmark to complete.
 
 ## Task 2: Review results
 
 1. The benchmark will produce a similar performance summary to the first execution.
 
-    ![](./images/through4.png " ")
+    ![Results of benchmark 2](./images/t4-results-of-benchmark-2.png " ")
 
-    As mentioned earlier, your results will be different, but using the results in the image above, you can observe that with the revised design which has eliminated triggers:
+    As mentioned earlier, your results will be different, but using the results in the image above, you can observe that with the revised design, which has eliminated triggers:
 
     - Throughput has improved **2609** transactions per second (up from 1524)
     - Elapsed time per session has improved to **31** seconds (down from 52)
-    - CPU time is still at only **51** percent of the total benchmark time
+    - CPU time is still at only **51** per cent of the total benchmark time
 
-    The results here should not be understated. Often when tuning applications, a few percentage points is seen as a "win" but in this instance, simply utilizing the DEFAULT ON NULL database feature, the performance has almost doubled. However, CPU is still not the major contributor of total elapsed time, so this suggests there are potentially more benefits to be found.
+    The results here should not be understated. Often when tuning applications, a few percentage points is seen as a "win", but in this instance, the performance has almost doubled by simply utilising the DEFAULT ON NULL database feature. However, CPU is still not the major contributor to total elapsed time, which suggests potentially more benefits.
 
-If you not have done so already, press Enter to exit the benchmark and please **proceed to the next lab.**
+If you have not done so already, press Enter to exit the benchmark and please **proceed to the next lab.**
 
 ## Want to Learn More?
 
@@ -67,4 +64,4 @@ For more information on the [DEFAULT ON NULL](https://blogs.oracle.com/oraclemag
 ## Acknowledgements
 
 - **Author** - Connor McDonald, Database Advocate
-- **Last Updated By/Date** - Connor McDonald, April 2021
+- **Last Updated By/Date** - Robert Pastijn, September 2022

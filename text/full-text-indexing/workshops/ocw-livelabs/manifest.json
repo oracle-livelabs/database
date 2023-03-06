@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "Full-Text Indexing in Oracle Database",
+    "workshoptitle": "Full-Text Search in the Oracle Database",
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
         {
@@ -31,6 +31,22 @@
         {
             "title": "Lab 4: Maintain Indexes",
             "filename": "../../maintenance/maintenance.md"
+        },
+        {
+            "title": "Lab 5: Index Files on Object Store",
+            "filename": "../../index-files/index-files.md"
+        },
+        {
+            "title": "Lab 6: Optional Lab - Sentiment Analysis",
+            "filename": "../../sentiment-analysis/sentiment-analysis.md"
+        },
+        {
+            "title": "Lab 7: Clean up Oracle Autonomous Database",
+            "filename":"https://oracle-livelabs.github.io/common/labs/terminate-adb/terminate-adb.md"
+        },
+        {
+            "title": "Oracle CloudWorld 2022 - Get Help",
+            "filename": "https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
         },
         {
             "title": "Need Help?",

@@ -8,6 +8,9 @@ We will then briefly explore information about the index before moving on to que
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Create an Oracle Text index](videohub:1_cimsoxwz)
+
 ### Objectives
 
 In this lab, you will:
@@ -85,7 +88,7 @@ In this lab, you will:
 
     ![dbactions menu sql](./images/dbactions-menu-sql.png " ")
 
-    When you first enter SQL, you will get a tour of the features. We recommend you step through it, but you can skip the tour by clicking on the "X". The tour is available at any time by clicking the tour button.
+    When you first enter SQL, you will get a tour of the features. We recommend you step through it, but you can skip the tour by clicking on the "X". The tour is available at any time by clicking the tour button. You can dismiss the warning that you are logged in as the ADMIN user.
 
     ![sql tour](./images/sql-tour.png " ")
 
@@ -111,6 +114,8 @@ In this lab, you will:
 
 3. Populate the table with a few rows.
 
+    Use the 'trashcan' icon to delete the previous statement from the Worksheet area.
+    
     Copy the following SQL into the worksheet area. Make sure you *highlight the whole statement* with your mouse, and press the "Run Statement" button:
 
     ```
@@ -127,6 +132,14 @@ In this lab, you will:
     ![inserts](./images/inserts.png " ")
 
     **Note:** You should see "3 rows inserted" at the bottom. If you just see the values listed, you didn't highlight the statement, and SQL Workshop only run the SELECT rather than the INSERTs. You can try again.
+
+    You should see this:
+
+    ![three rows inserted - correct output](./images/three-rows-inserted.png " ")
+
+    If you didn't highlight the whole statement it will only have run the *select* and you'll see this:
+
+    ![wrong output - no rows inserted](./images/wrong-output.png " ")
 
 4.  Check that we have rows in the table
 
@@ -192,6 +205,8 @@ Text indexes are an example of a **domain index**. Domain indexes are specialize
     Refresh the list of tables on the left side of the screen.
 
     ![table list](./images/table-list.png " ")
+
+    Note: the list of sub-tables will vary with database version and indexing options chosen. You may see a different list from what is shown here.
 
     You should see several tables listed. Open the table definition for DR$MYINDEX$I by clicking on the triangle next to it.
 
