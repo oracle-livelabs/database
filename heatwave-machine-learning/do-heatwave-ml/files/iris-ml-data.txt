@@ -167,5 +167,3 @@ INSERT INTO iris_test VALUES(6.4,2.9,4.3,1.3,'Iris-setosa');
 CREATE TABLE `iris_validate` LIKE `iris_test`;
 
 INSERT INTO `iris_validate` SELECT * FROM `iris_test`;
-
-ALTER TABLE `iris_test` DROP COLUMN `class`;
