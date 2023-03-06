@@ -137,7 +137,7 @@ In this lab, you will be guided through the following tasks:
 3. Add the following code to the editor and save the file (ctr + o) (ctl + x)
 
      ```bash
-        <copy>?php
+        <copy><?php
     // Database credentials
     define('DB_SERVER', '10.0.1...');// MDS server IP address
     define('DB_USERNAME', 'admin');
@@ -232,11 +232,56 @@ if ($stmt = $link->prepare($query)) {
     - Save the eurekaweb/config.php
     ![MDS](./images/eurekaweb-config.png " ")
 
-5. From your local machine connect to heatwave-client IP Address/eurekaweb/login.php 
+## Task 5: Run the Marketing Analytic Application 
+
+1. From your local machine connect to heatwave-client IP Address/eurekaweb/login.php 
 
     Example: http://999.999.999/eurekaweb/login.php
 
-    ![MDS](./images/login_page.png " ")
+2. Login with the following information
+
+    a. username: 
+
+    ```bash
+    <copy>plf </copy>
+    ```
+
+    b. password:
+
+    ```bash
+    <copy>hello123</copy>
+
+    ```
+
+    ![MDS](./images/login-page.png "login-page ")
+
+3. From the Welcome Page click the "View Account Activity" button
+
+    ![MDS](./images/welcome.png "welcome ")
+
+4. From the Items purchased Page click the "Loyalty Reward Promotion" button
+
+    ![MDS](./images/promotion-activity.png "promotion activity ")
+
+5. From the Eureka Promotions Page click the "Accept" button
+
+    ![MDS](./images/eureka-promotion.png "eureka promotion")
+
+6. From the Eureka Promotion Coupons  Page click the "Shop" button
+
+    ![MDS](./images/shop.png "shop")
+
+7. From the Promotion Shop  Page select Items to purchase and click the "Submitt" button
+
+    ![MDS](./images/promotion-shop.png "promotion shop")
+
+8. From the Items Purchase Page   click the "Continue" button
+
+    ![MDS](./images/items-purchased.png "items purchased")
+
+9. From the Thank You  Page   click the "Signout" button
+
+    ![MDS](./images/thankyou.png "thank you")
 
 ## Acknowledgements
 
