@@ -8,6 +8,9 @@ In this lab, you will learn
 
 Estimated lab time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Create the directory structure for Liquibase and sync the metadata](videohub:1_tral6svn)
+
 ### Objectives
 
 In this lab, you will learn 
