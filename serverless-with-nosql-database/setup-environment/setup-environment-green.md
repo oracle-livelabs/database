@@ -25,7 +25,7 @@ This lab assumes you have:
 
 Once you LiveLabs test environment was set up, you should have clicked on a button saying to 'Attend the Workshop.'This will take you to a screen that looks similar to this.
 
-  ![](images/green-button.png)
+  ![Attend the Workshop](images/green-button.png)
 
 This environment does not allow you to create any compartments. Please take note of the compartment assigned. Under the **Compartment** is the **Compartment OCID.** Copy your **Compartment OCID** with the copy button and save for step 10 in Task 2. Paste it into notepad or some text file for use.
 
@@ -35,73 +35,73 @@ Please make note of the **Region** you are assigned. If you are assigned Phoenix
 
 1. Top right, click your **Profile**, then **User Settings.**
 
-  ![](images/user-profile.png)
+  ![User Settings](https://oracle-livelabs.github.io/common/images/console/user-settings.png)
 
 2. Copy your OCID. Make sure to **save your OCID** for future steps. Paste it into notepad or some text file for use in step 10.
 
-    ![](images/user-ocid.png)
+    ![Copy your OCID](images/user-ocid.png)
 
 3. In this step we need to execute a few commands in the Cloud Shell. To start the Cloud Shell, we have to select our compartment first. Click on the 'hamburger' menu on the top left. Click on **Databases** and then click on **Tables**.
 
-    ![](images/compartment-livelab.png)
+    ![Choose Compartment](images/nosql-tables.png)
 
 4. In the **Compartment** drop down on the left, pick you compartment. In Task 1, you should have taken note of your compartment. To find it, expand the root node (**c4u04**), then expand the **Livelabs** node. Your compartment should be listed under there. In this example we are using **LL11090-COMPARTMENT**.
 
-    ![](images/pick-compartment.png)
+    ![Choose Compartment](images/pick-compartment.png)
 
 5. Open the **Cloud Shell** in the top right menu. It can take about 2 minutes to get the Cloud Shell started.
 
-    ![](images/cloud-shell.png)
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
   **Note:** Your **Home Region** may be different than the region you are currently connected to. In the example screen below, you are connected to Phoenix but the **Home Region** is Ashburn. You can create Always Free NoSQL tables when connected to Phoenix.
 
-    ![](images/capturecloudshellhomeregion.png)
+    ![Home Region](https://oracle-livelabs.github.io/common/images/console/region.png)
 
 6. Execute these commands in your Cloud Shell to create a private and a public key.
 
-    ````
+    ```
     <copy>
     openssl genrsa -out NoSQLLabPrivateKey.pem  4096        
     openssl rsa -pubout -in NoSQLLabPrivateKey.pem -out NoSQLLabPublicKey.pem
     </copy>
-    ````
+    ```
 
 7. Grab you a copy of your public key. Execute in Cloud Shell.
 
-        ````
-        <copy>
-        cat NoSQLLabPublicKey.pem
-        </copy>
-        ````
+    ```
+    <copy>
+    cat NoSQLLabPublicKey.pem
+    </copy>
+    ```
       This will print out your public key to the screen. Grab a copy of the entire key, including the "BEGIN/END PUBLIC KEY" lines. Paste it into notepad or some text file for use in step 10.
 
       Minimize the Cloud shell.
 
 8. Top right, click your **Profile**, then **User Settings.**
 
-    ![](images/user-profile.png)
+  ![User Settings](https://oracle-livelabs.github.io/common/images/console/user-settings.png)
 
 
 
 9. On the left, click **API Keys**, then click **Add API Key.**
 
-    ![](images/api-keys.png)
+    ![Add API Key](images/api-keys.png)
 
 10. Click on **Paste Public Key**
 
-    ![](images/paste-key.png)
+    ![Paste Public Key](images/paste-key.png)
 
    Paste your public key into the **Public Key** text box. Click **Add** at the bottom.
 
-   ![](images/hit-add.png)
+   ![Add](images/hit-add.png)
 
 11. Copy your fingerprint and paste it into notepad or some text file for use in step 12. Click **Close** when done.
 
-  ![](images/copy-finger.png)
+  ![Copy fingerprint](images/copy-finger.png)
 
 12. You should have saved 3 pieces of information, the compartment OCID, your user OCID and your fingerprint. This step requires you to edit a shell script and insert that information into the script. We will use vi for this but if you are comfortable with vim or emacs then use either. Expand your Cloud Shell and execute.
 
-    ````
+    ```
     <copy>
       cd $HOME
       rm -rf serverless-with-nosql-database BaggageData serverless-with-nosql-database.zip demo-lab-nosql-main
@@ -112,23 +112,23 @@ Please make note of the **Region** you are assigned. If you are assigned Phoenix
       cp ~/serverless-with-nosql-database/env-livelab.sh ~/serverless-with-nosql-database/env.sh
       cd serverless-with-nosql-database
     </copy>
-    ````
+    ```
 
   Let's use vi to edit env.sh. Once you go into vi, you will hit 'i' to go into insert mode. You will see 3 variables that need to be set correctly based on real data. Replace **your\_compartment\_ocid**, **your\_user\_ocid**, and **your\_fingerprint** with the actual values that you save from previous steps.
 
-      ````
+      ```
       <copy>
         vi env.sh
       </copy>
-      ````
+      ```
 
-      ![](images/variable-replace.png)
+      ![variable-replace](images/variable-replace.png)
 
   Copy and paste one at a time. We recommend using Right Click and selecting 'Paste' from the menu. Using Ctrl-V can drop characters.
 
   When completed it should look something like this.
 
-  ![](images/done-replace.png)
+  ![done-replace](images/done-replace.png)
 
   To exit out of vi, click esc, then type in ":wq" and your changes will be saved.
 
@@ -142,7 +142,8 @@ The Oracle NoSQL Database SDKs allow you to provide the credentials to an applic
 
 In this node.js snippet, we used similiar credential information created in Task 2 of this Lab and specified the credentials directly as part of auth.iam property in the initial configuration. The tenancy ID, the user ID, an API signing key, a fingerprint are all supplied. The tenancy iD and the user ID are referred to as OCIDs.
 
-````
+```
+<copy>
        return new NoSQLClient({
             region: Region.EU_FRANKFURT_1,
 			compartment:'demonosql',
@@ -155,7 +156,8 @@ In this node.js snippet, we used similiar credential information created in Task
                 }
             }
         });
-````
+</copy>
+```
 
   Another way to handle authentication is with Instance and Resource Principals. The Oracle NoSQL SDKs support both of them. Resource principals are primarily used when authenticating from functions. We will show you an example of using Resource Principals.
 
@@ -169,6 +171,7 @@ In this snippet, there are hard-coded references (for example, REGION).
 
 **NoSQL Database Node.js SDK**
 ```
+<copy>
 function createClientResource() {
   return  new NoSQLClient({
     region: Region.EU_FRANKFURT_1,
@@ -180,15 +183,18 @@ function createClientResource() {
     }
   });
 }
+</copy>
 ```
 If you wanted to use **Instance Principals** instead of Resource Principals, then replace "useResourcePrincipal: true"  with "useInstancePrincipal: true" to switch.
 
 **NoSQL Database Python SDK**
 ```
+<copy>
 def get_handle():
      provider = borneo.iam.SignatureProvider.create_with_resource_principal()
      config = borneo.NoSQLHandleConfig('eu-frankfurt-1', provider).set_logger(None)
      return borneo.NoSQLHandle(config)
+</copy>
 ```
 
 A similar switch can be made here to use **Instance Principals**, replace "create\_with\_resource\_principal()" with "create\_with\_instance\_principal()" and you are all set.
