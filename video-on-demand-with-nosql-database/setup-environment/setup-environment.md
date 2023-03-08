@@ -89,7 +89,7 @@ will be used only in the Lab4
 
   Log into your account using your credentials (system may have remembered this from a prior log in).  You will see the Create Stack screen below:
 
-  ![](images/create-stack.png)
+  ![create-stack](images/create-stack.png)
 
   Click on the box "I have reviewed and accept the Oracle Terms of Use."  After clicking this box, it will populate the stack information, the name and the description.  Check the 'Create in compartment' box and make sure it shows demonosql.   If it does not, change it to demonosql.  
 
@@ -97,15 +97,15 @@ will be used only in the Lab4
 
   Choose demonosql as _Compartment_  from the drop down list.
 
-  ![](images/configure-var.png)
+  ![configure-var](images/configure-var.png)
 
 5. Click on Next, which brings you to the 'Review' screen.  Click on Create.
 
-  ![](images/review-screen.png)
+  ![review-screen](images/review-screen.png)
 
   A job will run automatically. It takes approx 1 minute. Wait still "State" field becomes **Succeeded.**  While it is running you will see a new screen that has the status displayed.   
 
-  ![](images/stack-progress.png)
+  ![stack-progress](images/stack-progress.png)
 
   Once it has succeeded you can delete that window from your browser.
 
@@ -150,6 +150,7 @@ the appropriate authorization constructor.
 
 **NoSQL Database Node.js SDK**
 ```
+<copy>
 function createClientResource() {
   return new NoSQLClient({
       region: process.env.NOSQL_REGION ,
@@ -161,12 +162,14 @@ function createClientResource() {
       }
   });
 }
+</copy>
 ```
 In the next labs we are going to be running application code and we need an
 instance to run that from. We will run this application using Cloud Shell
 using another way called delegation token
 
 ```
+<copy>
 function createClientResource() {
   return new NoSQLClient({
     region: process.env.NOSQL_REGION ,
@@ -179,6 +182,7 @@ function createClientResource() {
     }
   });
 }
+</copy>
 ```
 
 You may now **proceed to the next lab.**
@@ -192,4 +196,4 @@ You may now **proceed to the next lab.**
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, August 2022
+* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, March 2023

@@ -112,7 +112,7 @@ we are using both APIs to develop our application
 
 2. After you complete step 1, you will see a message in the shell saying 'application running'
 
-    ![](./images/appl-running.png)
+    ![appl-running](./images/appl-running.png)
 
     Press the **Enter** key on your keypad to get the command line prompt back.
 

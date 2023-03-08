@@ -13,14 +13,14 @@ Estimated Time: 15 minutes
 
 * Writing and optimizing queries over nested array
 
-## Create the required indexes
+## Task 1: Create the required indexes
 
 Before exploring nested arrays, create the indexes on `stream_acct` table that will be handy while writing the queries. You already created three indexes as part of the previous lab after creating **stream_acct** table.
 Given below are the DDL statements for creating the two new indexes. You will create these indexes from the OCI console as shown below. You can have the DDL statement as reference when you create the index in the OCI console.
 
 Log in to the OCI console. From the hamburger menu, click **Databases**. Under Oracle NoSQL Databases, click **Tables**.
 Click the **stream_acct** table. Under **Resources**, click **Indexes**. The list of indexes already created in the table is listed.
-![](./images/list_indexes.png)
+![list-indexes](./images/list-indexes.png)
 
 Create an index `idx_country_showid_date` as shown below.
 ````
@@ -39,10 +39,10 @@ create index idx_country_genre on stream_acct(
     info.shows[].genres[] as string)
 </copy>    
 ````
-![](./images/crtind_country_genre.png)
+![crtind-country-genre](./images/crtind-country-genre.png)
 
 
-## Task 1: Don’t unnest that array!
+## Task 2: Don’t unnest that array!
 
 People familiar with more traditional SQL on flat data may think that in order to do interesting things with arrays, the arrays have to be unnested and/or subqueries have to be employed (and in fact some commercial NoSQL systems require unnesting and subqueries to work with arrays).
 
@@ -92,9 +92,9 @@ how indexes are used by queries.
 
 To confirm the use of the index and to see what conditions are pushed to it, you can display the query execution plan from the OCI console as shown below. Once you provide your query under Explore Data, click **Show query execution plan** to view the execution plan for the query.
 
-![](./images/query1a_plan.png)
+![query1a-plan](./images/query1a-plan.png)
 
-![](./images/query1b_plan.png)
+![query1b-plan](./images/query1b-plan.png)
 
 **Note**: This query does not access any data in arrays nested under the shows array. This example is an introduction to some of the query features (e.g., the “any” comparison operators, the exists operator, and the filtering conditions inside path expression) that you will use in the more complex queries that follow.
 
@@ -118,7 +118,7 @@ In this example, the path expression after the `exists` operator drills down to 
 
 The query uses the `idx_country_showid_date` index. The index is not covering as you are fetching all the data from the table. You can view this index being used from the query plan as shown below.
 
-![](./images/query2a_plan.png)
+![query2a-plan](./images/query2a-plan.png)
 
 
 **Incorrect way of writing the above query:**
@@ -140,7 +140,7 @@ The queries 2a and 2b are not equivalent! Query 2b returns the number of users i
 
 Query 2b uses the `idx_country_showid_date` index. However, only one of the two `any` conditions can be pushed to the index. In this case, the `showId` condition is pushed because it’s an equality condition whereas the date condition is a range one. The date condition must be applied on the table rows, which must be retrieved. Therefore, the index is not covering this query as shown below.
 
-![](./images/query2b_plan.png)
+![query2b-plan](./images/query2b-plan.png)
 3. **Which index to choose?**
 
 The query processor can identify which of the available indexes are beneficial for a query and rewrite the query to make use of such an index. What happens when there is more than one index available for the query? Can you force using a particular index?. Some examples to understand the usage of indexes in queries.
@@ -162,7 +162,7 @@ where exists u.info.shows[$element.showId = 15].seriesInfo.episodes[$element.dat
  In this case, the query can use either `idx_country_showid_date` or `idx_showId`, and it’s not clear which index is the better choice. If it chooses `idx_country_showid_date`, it will do a full scan of the whole index applying the two
 conditions on each index key. As a result, it will access and filter-out many non-qualifying index keys. If it chooses `idx_showId`, it will scan only the index keys with `showId = 15`, but it will then have to retrieve the associated table rows in order to apply the date conditions on them. So,`idx_showid` scans far fewer index keys than `idx_country_showid_date`, but `idx_showId` is not covering whereas `idx_country_showid_date` is.
 
-![](./images/query3a_plan.png)
+![query3a-plan](./images/query3a-plan.png)
 
 Whether `idx_showId` or `idx_country_showid_date` is better depends on how selective the show id condition is. Oracle NoSQL does not currently collect statistics on index keys distribution, so it relies on a simple heuristic to choose among multiple applicable indexes. In this case, the heuristic chooses `idx_showId` on the assumption that the `showId = 15` predicate must be a highly selective one because `showId` is the complete key of an index. If this turns out to be the wrong choice, you can force the use of `idx_country_showid_date` by using an index hint, as shown in the next example.
 
@@ -178,7 +178,7 @@ where exists u.info.shows[$element.showId = 15].seriesInfo.episodes[$element.dat
 ````
 In this example, you are forcing the use of index `idx_country_showid_date`. You can verify this from the query plan shown below.
 
-![](./images/query3b_plan.png)
+![query3b-plan](./images/query3b-plan.png)
 
 4. **Placing conditions on the elements of sibling arrays**
 
@@ -205,7 +205,7 @@ Here, the genres and episodes arrays are not nested into each other, but both ar
 **Indexes used:**
 
 The query uses the `idx_country_genre `index. The country and genres conditions are pushed to the index. Two index scans will be performed: one scanning the keys with value (`USA`, `french`) and another scanning the keys with value (`USA`,`danish`). The date conditions will be applied on the table rows associated with the qualifying index keys. This can be viewed in the query plan as shown below.
-![](./images/query4a_plan.png)
+![query4a-plan](./images/query4a-plan.png)
 
 Two more things are worth mentioning here.
 
@@ -245,7 +245,7 @@ Each element of the array in the above query is a JSON document containing the s
 
 When you execute the query for a sample data, the query returns a sample result that looks like this:
 
-![](./images/query5a_result.png)
+![query5a-result](./images/query5a-result.png)
 The query illustrates how the `seq_transform` expression can be used, together with JSON object and array constructors, to transform the shape of the stored data. In this case, information from arrays in 3 different levels is combined into a new single flat array.
 
 In general, the `seq_transform` expression takes two other expressions as input. It evaluates the first (`source`) expression, and for each value in the resulting sequence, it evaluates the second (`mapper`) expression. The result of the `seq_transform` expression itself is the concatenation of the values produced by the evaluations of the mapper expression. During these evaluations, a variable is available to reference the current value of the source expression. The name of the variable is `$sk n`, where n is the level of nesting of the `seq_transform` expression within other seq_transform expressions.
@@ -255,7 +255,7 @@ In this example, the source expression of the first (outer-most) `seq_transform`
 The query also illustrates the use of a sequence aggregation function (`seq_sum`) to sum up the time spent by a user watching episodes that satisfy a condition (the episodes of show 16).
 Click [Sequence Aggregate functions](https://docs.oracle.com/en/database/other-databases/nosql-database/22.2/sqlreferencefornosql/sequence-aggregate-functions.html) for details on sequence aggregation functions.
 The corresponding query plan showing the use of index is shown below.
-![](./images/query5a_plan.png)
+![query5a-plan](./images/query5a-plan.png)
 
 
 6. **Complex conditions on nested arrays**
@@ -286,9 +286,9 @@ Let’s look closer at the WHERE clause of this query. The first condition selec
 The `seq_transform` returns the result of these checks, i.e., a sequence of true/false values. The rest of the condition checks that the sequence contains only true values. The fourth condition requires that the user has fully watched each episode of show 15. It does so in the same way as the third condition.
 
 The query uses the index `idx_showId`, pushing the `showId` condition to it. The other conditions cannot be pushed to any index. The query plan showed below shows the usage of this index.
-![](./images/query6a_plan.png)
+![query6a-plan](./images/query6a-plan.png)
 
-## Task 2: Unnest if you really have to!
+## Task 3: Unnest if you really have to!
 
 In the previous section you used path expressions with filtering conditions on array elements, the `seq_transform` expression, and the sequence aggregation functions to avoid the need for unnesting and subqueries. In fact, probably the only case where unnesting is really needed is when you want to group by fields that are contained in arrays. You will not use grouping in the first example below. It is just to illustrate the concept of unnesting. However you will use grouping in the rest of the queries in this section. See [Unnest Arrays and Maps](https://docs.oracle.com/en/database/other-databases/nosql-database/22.2/sqlreferencefornosql/unnest-arrays-maps.html) for more details on unnesting queries.
 
@@ -310,7 +310,7 @@ where u.info.country = "USA" and
 </copy>
 ````
 Although a single table row satisfies the WHERE clause of this query, the result set of the query consists of 4 rows. The reason is that the query flattens the result array with four elements to produce 4 separate results as shown below.
-![](./images/query7a_result.png)
+![query7a-result](./images/query7a-result.png)
 
 **Grouping by a field in a top-level array**
 
@@ -327,12 +327,12 @@ order by count(*) desc
 </copy>
 ````
 Here the query orders the shows according to a measure of their popularity as shown below.
-![](./images/query8a_result.png)
+![query8a-result](./images/query8a-result.png)
 
 **Indexes used:**
 
 The query uses the `idx_showid` index and the index is a covering one for this query. To make the use of this index possible, two Oracle NoSQL features have been used.
-![](./images/query8a_plan.png)
+![query8a-plan](./images/query8a-plan.png)
 * The index was created with the `with unique keys per row` property. This informs the query processor that for any streaming user, the shows array cannot contain two or more shows with the same show id. The restriction is necessary because if duplicate show ids existed, they wouldn’t be included in the index, and as a result, the index would contain fewer entries than the number of elements in the shows arrays. So, use of such an index by the query would yield fewer results from the FROM clause than if the index was not used.
 * The `UNNEST` clause was used in the query to wrap the unnesting expression. Semantically, the `UNNEST` clause is a noop (no operator). However, if an index exists on the array(s) that are being unnested by a query, use of `UNNEST` is necessary for the index to be considered by the query. The `UNNEST` clause places some restrictions on what kind of expressions can appear in it (see [Limitation for expression usage in the UNNEST clause](https://docs.oracle.com/en/database/other-databases/nosql-database/22.2/sqlreferencefornosql/unnest-arrays-maps.html)]), and these restrictions make it easier for the query optimizer to “match” the index and the query.
 
@@ -352,12 +352,12 @@ order by sum($show.seriesInfo.episodes.minWatched) desc
 ````
 The above query is similar to the previous one. It just sorts the shows according to a different measure
 of popularity as shown below.
-![](./images/query9a_result.png)
+![query9a-result](./images/query9a-result.png)
 
 **Indexes used**
 
 The query uses the `idx_showid_minWatched` index, and the index is a covering one for this query. Notice that `idx_showid_minWatched` index indexes the `episodeID` field as well. It may appear that this is not necessary, but the field is actually needed so that the index satisfies the `with unique keys per row` property.
-![](./images/query9a_plan.png)
+![query9a-plan](./images/query9a-plan.png)
 
 What if you didn’t have `idx_showid_minWatched`? Could this query have used `idx_showid`? The answer is no. This is because of the argument to the `sum()`function: The `idx_showid` index contains just the `showid` (and the primary key). So, if the query was evaluated by scanning that index, you wouldn’t be able to evaluate the `$show.seriesInfo.episodes.minWatched` expression, because there wouldn’t be any `$show` variable anymore (there would exist only an internal `$showid` variable that ranges over the index entries). Therefore, in order to compute
  the argument of `sum()`, you need to retrieve the full row. But what is the exact expression that should be computed as the argument of `sum()`? One might say that the expression is `info.shows.seriesInfo.episodes.minWatched`.
@@ -374,7 +374,7 @@ order by sum(u.info.shows[$element.showId = $show.showId].
 seriesInfo.episodes.minWatched) desc
 </copy>
 ````
-![](./images/query9b_plan.png)
+![query9b-plan](./images/query9b-plan.png)
 **Grouping by fields in a nested array**
 
 **Example:**
@@ -393,7 +393,7 @@ order by sum($seriesInfo.episodes.minWatched) desc
 </copy>
 ````
 The query uses `idx_showid_seasonNum_minWatched` as a covering index as shown below.
-![](./images/query10a_plan.png)
+![query10a-plan](./images/query10a-plan.png)
 
 ## Task 3: Clean Up
 
@@ -403,7 +403,7 @@ This task deletes the tables and other OCI components that got created.
 1. On the top left, go to menu, then **Databases**, then under Oracle NoSQL Database, press **Tables**
 Set your compartment to `demonosql`. Click the **freeTest** table, which will bring up the table details screen. Press **More Actions** and then **Delete** under that. This will bring up a new screen and press **Delete** again.
 
-  ![](./images/delete-freetable.png)
+  ![delete-freetable](./images/delete-freetable.png)
 
   Deleting tables is an async operation, so you will not immediately see the results on the Oracle Cloud Console. Eventually the status of the tables will get changed to deleted.
 </if>
@@ -412,7 +412,7 @@ Set your compartment to `demonosql`. Click the **freeTest** table, which will br
 1. On the top left, go to menu, then **Databases**, then under Oracle NoSQL Database, press **Tables**
 Set your compartment to 'demonosql'. Click the **freeTest** table, which will bring up the table details screen. Press **More Actions** and then **Delete** under that. This will bring up a new screen and press **Delete** again.
 
-  ![](./images/delete-freetable.png)
+  ![delete-freetable](./images/delete-freetable.png)
 
   Deleting tables is an async operation, so you will not immediately see the results on the Oracle Cloud Console. Eventually the status of the tables will get changed to deleted.
 </if>
@@ -421,7 +421,7 @@ Set your compartment to 'demonosql'. Click the **freeTest** table, which will br
 1. On the top left, go to menu, then **Databases**, then under Oracle NoSQL Database, press **Tables**
 Select your compartment. Click the **freeTest** table, which will bring up the table details screen. Press **More Actions** and then **Delete** under that. This will bring up a new screen and you press **Delete** again.
 
-  ![](./images/delete-freetable.png)
+  ![delete-freetable](./images/delete-freetable.png)
 
   Deleting tables is an async operation, so you will not immediately see the results on the Oracle Cloud Console. Eventually the status of the tables will get changed to deleted.
 </if>
@@ -441,15 +441,15 @@ Select your compartment. Click the **freeTest** table, which will bring up the t
 
 4. Remove the 'demonosql' compartment. From upper left hand menu, go to **Identity and Security** then **Compartments** under 'Identity.'
 
-    ![](./images/remove-compartment.png)
+    ![remove-compartment](./images/remove-compartment.png)
 
 5. The 'Compartments' screen appears and click **demonosql**
 
-    ![](./images/select-demonosql.png)
+    ![select-demonosql](./images/select-demonosql.png)
 
 6. Press the **Delete** button. This will fire off a job that runs asynchronously.
 
-    ![](./images/delete-demonosql.png)
+    ![delete-demonosql](./images/delete-demonosql.png)
 </if>
 
 <if type="freetier">
@@ -464,15 +464,15 @@ Select your compartment. Click the **freeTest** table, which will bring up the t
 
 4. Remove the 'demonosql' compartment. From upper left hand menu, go to **Identity and Security** then **Compartments** under 'Identity.'
 
-    ![](./images/remove-compartment.png)
+    ![remove-compartment](./images/remove-compartment.png)
 
 5. The 'Compartments' screen appears and click **demonosql**
 
-    ![](./images/select-demonosql.png)
+    ![select-demonosql](./images/select-demonosql.png)
 
 6. Press the **Delete** button. This will fire off a job that runs asynchronously.
 
-    ![](./images/delete-demonosql.png)
+    ![delete-demonosql](./images/delete-demonosql.png)
 </if>
 
 ## Learn More

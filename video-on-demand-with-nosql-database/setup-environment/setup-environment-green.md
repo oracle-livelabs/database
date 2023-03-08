@@ -131,6 +131,7 @@ the appropriate authorization constructor.
 
 **NoSQL Database Node.js SDK**
 ```
+<copy>
 function createClientResource() {
   return new NoSQLClient({
       region: process.env.NOSQL_REGION ,
@@ -142,12 +143,14 @@ function createClientResource() {
       }
   });
 }
+</copy>
 ```
 In the next labs we are going to be running application code and we need an
 instance to run that from. We will run this application using Cloud Shell
 using another way called delegation token
 
 ```
+<copy>
 function createClientResource() {
   return new NoSQLClient({
     region: process.env.NOSQL_REGION ,
@@ -160,6 +163,7 @@ function createClientResource() {
     }
   });
 }
+</copy>
 ```
 
 You may now **proceed to the next lab.**

@@ -4,7 +4,7 @@
 
 This lab walks you through a Video on Demand streaming application demo created by the Oracle NoSQL development team. This application is composed of several micro-services using different Oracle Cloud Infrastructure services. During this demo, the focus will be on the Activity Tracking micro-service.
 
-![](images/component-arch.png)
+![component-arch](images/component-arch.png)
 
 ### Activity Tracking service
 
@@ -20,11 +20,11 @@ _Estimated Lab Time:_ 7 minutes
 
 We selected this demo because it solves real world business problems. Many of those are listed on the slide.
 
-  ![](images/business-problem.jpg)
+  ![business-problem](images/business-problem.jpg)
 
 This application is running in all the Oracle Cloud Infrastructure regions.
 
-  ![](images/demo-region.jpg)
+  ![demo-region](images/demo-region.jpg)
 
 The application behind the demo uses a three-tier architecture, representing the brains of the application. The features of these services enable you to build a serverless production application that is highly available, scalable, and secure.
 Your application can use thousands of servers, however, by leveraging the serverless paradigm you do not have to manage a single one.
@@ -51,7 +51,7 @@ In addition, by using managed services you gain the following benefits:
 
 Here is a diagram of architecture behind the demo.
 
-  ![](images/arch-diagram.jpg)
+  ![arch-diagram](images/arch-diagram.jpg)
 
 
 ### Objectives
@@ -93,7 +93,7 @@ With developer tools, you can know exactly what data you can request from your A
 ````
 3. And now, you are ready to use our API
 
-![](images/capture-connection-settings.png)
+![connection-settings](images/capture-connection-settings.png)
 
 
 ## Task 3: Ask for what you need, get exactly that
@@ -107,7 +107,7 @@ Send a GraphQL query to your API and get exactly what you need, nothing more and
 
 GraphQL APIs are organized in terms of types and fields, not endpoints. Access the full capabilities of your data from a single endpoint. GraphQL uses types to ensure Apps only ask for what’s possible and provide clear and helpful errors.
 
-![](images/capture-graphql-schema.png)
+![graphql-schema](images/capture-graphql-schema.png)
 
 
 ## Task 5: Get many resources in a single request
