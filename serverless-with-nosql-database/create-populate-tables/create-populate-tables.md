@@ -27,55 +27,55 @@ Watch the video below for a quick walk through of the lab.
 <if type="paid">
 1. Please verify you are in the Phoenix region.
 
-  ![](./images/phoenix-location.png)
+  ![Phoenix region](./images/phoenix-location.png)
 
 </if>
 
 <if type="freetier">
 1. If you are in the Phoenix region, you will be able to create always Free tables. If you are in any other region, then you will create paid tables, however, they will be paid for with credits.
 
-  ![](./images/phoenix-location.png)
+  ![Phoenix Location](./images/phoenix-location.png)
 </if>
 
 <if type="livelabs">
 1. Please verify you are in the Phoenix region.
 
-  ![](./images/phoenix-location.png)
+  ![Phoenix Location](./images/phoenix-location.png)
 
 </if>
 
 2. On the Oracle Cloud Infrastructure menu drop down on the left, go to **Databases** and then press **Tables** under Oracle NoSQL Database. This brings you to the 'Tables' screen where you can create a table from the console.
 
-    ![](./images/nosql-tables.png)
+    ![NoSQL Tables](./images/nosql-tables.png)
 
 <if type="paid">
 3. On the 'Tables' screen there is a **Compartment** field on the left. Please make sure **demonosql** compartment is selected.
 
-  ![](./images/set-compartment.png)
+  ![Choose Compartment](./images/set-compartment.png)
 </if>
 
 <if type="freetier">
 3. On the 'Tables' screen there is a **Compartment** field on the left. Please make sure **demonosql** compartment is selected.
 
-  ![](./images/set-compartment.png)
+  ![Choose Compartment](./images/set-compartment.png)
 </if>
 
 <if type="livelabs">
 3. On the 'Tables' screen there is a **Compartment** field on the left. Please make sure the compartment you were assigned is selected. In Lab 2, task 1 you identified your compartment. You will need to expand the root compartment, and then expand the **LiveLabs** compartment to find it. In this example, we are using **LL46279-COMPARTMENT**. Yours will be different. You will not be able to create tables in any other compartment.
 
-  ![](./images/livelab-compartment.png)
+  ![LiveLab Compartment](./images/livelab-compartment.png)
 </if>
 
 4. Click **Create table** and the 'Create table' screen appears.
 
-    ![](./images/create-tables.png)
+    ![Create Table](./images/create-tables.png)
 
   This screen allows you to create tables in one of two different ways, either using simple input or using DDL input. For this Lab we are going to use the simple input method.
 
 <if type="paid">
 5. The first thing you want to do is click the **Always Free Configuration** toggle button. This will create an always free table. Each tenancy is allowed 3 always free tables. Always free tables have fixed provisioning at 50 read units, 50 write units and 25 GB of storage. NoSQL always free tables are available in the Phoenix region only and you need to be in the correct region to use them. The toggle button only shows up in the Phoenix region.
 
-    ![](./images/always-free.png)
+    ![Always Free Table](./images/always-free.png)
 
   Clicking the **Always Free Configuration** button grays out the boxes to input provisioning. Next enter a **name** for your table, a **primary key** and a **column** and click **Set as a shard key.** For this example, we used freeTest as the name, pkey with a type of integer as the primary key, and name with a type of string as an additional column.
 </if>
@@ -83,13 +83,13 @@ Watch the video below for a quick walk through of the lab.
 <if type="freetier">
 5. If you are in the Phoenix region, then the first thing you want to do is click the **Always Free Configuration** toggle button. If not, go to step 6. This will create an always free table. Each tenancy is allowed 3 always free tables. Always free tables have fixed provisioning at 50 read units, 50 write units and 25 GB of storage. NoSQL always free tables are available in the Phoenix region and the toggle button only shows up there.
 
-    ![](./images/always-free.png)
+    ![Always Free Table](./images/always-free.png)
 
   Clicking the **Always Free Configuration** button grays out the boxes to input provisioning. Next enter a **name** for your table, a **primary key** and a **column** and click **Set as a shard key.**  For this example, we used freeTest as the name, pkey with a type of integer as the primary key, and name with a type of string as an additional column. Proceed to step 7.
 
 6. If not in Phoenix, then enter in values for **Read capacity**, **Write capacity**, and **Disk storage**. Enter in 10,10, and 5 respectively. The **Always Free Configuration** button is grayed out and cannot be used.
 
-   ![](./images/create-reserve.png)
+   ![Capacity Parameters](./images/create-reserve.png)
 
    Next enter a **name** for your table, a **primary key** and a **column** and click **Set as a shard key.** For this example, we used freeTest as the name, pkey with a type of integer as the primary key, and name with a type of string as an additional column.
 </if>
@@ -97,7 +97,7 @@ Watch the video below for a quick walk through of the lab.
 <if type="livelabs">
 5. The first thing you want to do is click the **Always Free Configuration** toggle button. This will create an always free table. Each tenancy is allowed 3 always free tables. Always free tables have fixed provisioning at 50 read units, 50 write units and 25 GB of storage. NoSQL always free tables are available in the Phoenix region only and you need to be in the correct region to use them. The toggle button only shows up in the Phoenix region.
 
-    ![](./images/always-free.png)
+    ![Always Free Table](./images/always-free.png)
 
   Clicking the **Always Free Configuration** button grays out the boxes to input provisioning. Next enter a **name** for your table, a **primary key** and a **column** and click **Set as a shard key.** For this example, we used freeTest as the name, pkey with a type of integer as the primary key, and name with a type of string as an additional column.
 </if>
@@ -105,13 +105,13 @@ Watch the video below for a quick walk through of the lab.
 
 6. When done with inputs click **Create table** at the bottom.
 
-   ![](./images/create-myfree-table.png)
+   ![Create Table](./images/create-myfree-table.png)
 
   In summary, this screen allows to create a table with multiple columns for the primary key, as well as adding many additional columns. You can create simple or more complex tables with this interface.
 
 7. After clicking **Create table** you will be brought to the 'Tables' screen. This screen shows you a list of tables you have created, as well as basic information about the table. One important thing to notice is that our table has a status of 'Active' which means we are ready to load data into our table. If you created an 'Always Free' table, then a tag that is attached to that table. This lets you know it is an always free table. Without the tag, then it is a paid table.
 
-    ![](./images/freetest-table.png)
+    ![List Table](./images/freetest-table.png)
 
 
 ## Task 2: NoSQL Tables Deployment
@@ -120,15 +120,15 @@ In this task we are going to create tables using the Cloud Shell, and Oracle Clo
 
 1. Open the **Cloud Shell** from the top right menu.
 
-    ![](./images/cloud-shell-phoenix.png)
+    ![Cloud Shell](./images/cloud-shell-phoenix.png)
 
   Execute the following in your Cloud Shell. This creates several JSON documents that will be used in future steps.
 
-    ````
+    ```
     <copy>
       sh ~/serverless-with-nosql-database/data.sh
     </copy>
-    ````
+    ```
 
 2. Execute the following environment setup shell script in the Cloud Shell. If you close/open the Cloud Shell, please re-execute it.
 
@@ -265,40 +265,40 @@ In this task we are going to create tables using the Cloud Shell, and Oracle Clo
 
 4. Minimize the Cloud Shell by clicking the **minimization button.**
 
-    ![](./images/cloud-shell-small.png)
+    ![Cloud Shell](./images/cloud-shell-small.png)
 
 
 ## Task 3:  Adding Data From the Oracle Cloud Console
 
 1. Make sure you see the 'Tables' screen. You should see 3 tables listed. You may or may not see the 'Always Free' tag, this displays depending on how you created the tables.  You may see different values for read units, write units and storage.
 
-    ![](./images/table-screen.png)
+    ![NoSQL Table](./images/table-screen.png)
 
 2. Let's start with the simple table we created in Task 1. Click **freeTest** table. The details screen that shows up, displays all the key information about the table. Explore that screen.
 
-    ![](./images/free-test.png)
+    ![NoSQL Table](./images/free-test.png)
 
 3. Click **Insert row**, and the 'Insert row' screen appears.
 
-    ![](./images/insert-row.png)
+    ![Insert Row](./images/insert-row.png)
 
 4. On the 'Insert row' screen, you will see two ways to input data - a simple and advanced. For our freeTest table we will use the simple method. Enter a value for the **Pkey** column and the **Name** column. When done, press **Insert row.**
 
-    ![](./images/row-inserted.png)
+    ![Row Inserted](./images/row-inserted.png)
 
 5. Let's insert rows into another table. First we need to get back to the 'Tables' screen. Click **Tables** on top right.
 
-    ![](./images/click-tables.png)
+    ![NoSQL table](./images/click-tables.png)
 
 6. Click **demo** table
 
-    ![](./images/capturenosql.png)
+    ![Demo NoSQL Table](./images/capturenosql.png)
 
 7. Click **Insert row.** This opens up a new window. This time, choose **Advanced JSON Input.**
 
   Copy/Paste the JSON Baggage document below in the **JSON input** text box. Because this JSON document is complex, it is easiest to copy/paste into the field. However, you could have typed it all in.
 
-    ````
+    ```
     <copy>
     {
       "fullName" : "Abram Falls",
@@ -357,7 +357,7 @@ In this task we are going to create tables using the Cloud Shell, and Oracle Clo
       } ]
     }
     </copy>
-    ````
+    ```
 
 
 8. Click **Insert row** at bottom left of screen.
@@ -370,11 +370,11 @@ Starting with the demo table, we can go and look at the data we inserted for eac
 
 1. On the left click **Table rows**
 
-    ![](./images/table-row-select.png)
+    ![Table Rows](./images/table-row-select.png)
 
 2. In the textbox **Query**, keep the text 'SELECT * FROM demo.'' This will select all the rows from our table. Click **Run query**
 
-    ![](./images/run-query.png)
+    ![Run Query](./images/run-query.png)
 
   You will see in the bottom of the screen the row that we inserted.
 
@@ -385,7 +385,7 @@ You may now **proceed to the next lab.**
 ## Learn More
 
 * [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
-* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/pls/topic/lookup?ctx=cloud&id=CSNSD-GUID-88373C12-018E-4628-B241-2DFCB7B16DE8)
+* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/dtddt/index.html)
 * [About Cloud Shell](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm)
 
 
