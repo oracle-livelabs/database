@@ -82,7 +82,7 @@ will be used only in the Lab4
 
 2. After successfully hitting the 'Deploy to Oracle Cloud' button, you will be brought to a new screen.
 
-  ![](images/cloud-account-name.png)
+  ![cloud-account-name](images/cloud-account-name.png)
 
 
 3. Provide your **Cloud Account Name** (tenancy name, not your username or email) and click on Next.

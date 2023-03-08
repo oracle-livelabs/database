@@ -125,11 +125,11 @@ Now, explore the queries that we will use in the next Lab.
 Open the [demo-streaming.json](files/demo-streaming.json) file in another tab on
 your browser
 
-![](images/capture-demo-streaming-json.png)
+![demo-streaming-json](images/capture-demo-streaming-json.png)
 
 If you prefer, you can use an API tool like Postman
 
-![](images/capture-graphql-url.png)
+![graphql-url](images/capture-graphql-url.png)
 
 
 

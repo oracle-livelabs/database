@@ -31,7 +31,7 @@ create index idx_country_showid_date on stream_acct(
     info.shows[].seriesInfo[].episodes[].date as string)
 </copy>    
 ````
-![](./images/crtind_country_showid_date.png)
+![crtind-country-showid-date](./images/crtind-country-showid-date.png)
 ````
 <copy>
 create index idx_country_genre on stream_acct(
