@@ -46,8 +46,9 @@ In this lab, you will be guided through the following tasks:
 
     On Basic Information, complete the following fields:
 
- VCN Name: 
-     ```
+ VCN Name:
+
+    ```bash
     <copy>MDS-VCN</copy>
     ```
  Compartment: Select  **(root)**
@@ -81,18 +82,21 @@ In this lab, you will be guided through the following tasks:
 
 4.	On Add Ingress Rules page under Ingress Rule 1
  
- Add an Ingress Rule with Source CIDR 
-    ```
+ Add an Ingress Rule with Source CIDR
+
+    ```bash
     <copy>0.0.0.0/0</copy>
     ```
- Destination Port Range 
-     ```
+ Destination Port Range
+
+    ```bash
     <copy>3306,33060</copy>
-     ```
-Description 
-     ```
+    ```
+Description
+
+    ```bash
     <copy>MySQL Port Access</copy>
-     ```
+    ```
  Click 'Add Ingress Rule'
     ![VCN](./images/private-subnet-ingress-add-vcn.png "private subnet ingress add vcn")
 
@@ -111,18 +115,21 @@ Description
 
 5.	Click Add Ingress Rules page under Ingress Rule 1
 
- Add an Ingress Rule with Source CIDR 
-    ```
+ Add an Ingress Rule with Source CIDR
+
+    ```bash
     <copy>0.0.0.0/0</copy>
     ```
  Destination Port Range
-     ````
+
+    ```bash
     <copy>80,443</copy>
-     ````
+    ```
     Description
-     ````
+
+    ```bash
     <copy>Allow HTTP connections</copy>
-     ````
+    ```
 
     ![VCN](./images/ingress-internet-vcn.png "ingress internet vcn")
 

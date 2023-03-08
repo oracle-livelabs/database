@@ -19,7 +19,7 @@ In this lab, you will be guided through the following tasks:
 - Some Experience with MySQL Shell
 - Completed Lab 5
 
-## **TASK 1:**  Create an Oracle Analytic Cloud Service
+## Task 1:  Create an Oracle Analytic Cloud Service
 
 1. From the OCI console, navigate to Analytics & AI-> Analytics Clouds
  ![MDS](./images/15oac01.png " ")
@@ -31,15 +31,15 @@ In this lab, you will be guided through the following tasks:
 
     Name:
 
-    ````
+    ```bash
     <copy>mdsoac</copy> 
-    ````
+    ```
 
     Description:
 
-    ````
+    ```bash
         <copy>Oracle Analytics Cloud HeatWave Test</copy>
-    ````
+    ```
 
     Capacity: select **OCPU** and select **1**
 
@@ -53,7 +53,7 @@ In this lab, you will be guided through the following tasks:
 
     ![MDS](./images/15oac04.png " ")
 
-## **TASK 2:**  Configure Private Access Channel
+## Task 2: Configure Private Access Channel
 
 1. Go down to the resources page and click on the **Configure Private Access Channel**  button
 
@@ -63,18 +63,18 @@ In this lab, you will be guided through the following tasks:
 
     Name:
 
-    ````
+    ```bash
          <copy>mdsoacpac</copy>
-    ````
+    ```
 
     DNS Zones:
     **Check Virtual Cloud Network's domain name as DNS zone (mdsvcn.oraclevcn.com)**
 
     Description:
 
-    ````
+    ```bash
         <copy>Testing</copy>
-    ````
+    ```
 
     **Remove second  DNS Zone entry**
 
@@ -85,7 +85,7 @@ In this lab, you will be guided through the following tasks:
 5. Wait 30 minutes for the process to finish, then continue to Subtask 3
 ![MDS](./images/15oac06.png " ")
 
-## **TASK 3:** Get HeatWave DB Hostname **
+## Task 3: Get HeatWave DB Hostname **
 
 1. Before starting go to Menu Databases > DB Systems
 
@@ -99,7 +99,7 @@ In this lab, you will be guided through the following tasks:
 
     Example : **mdshw.sub09012.....mdsvcn.oraclevcn.com**
 
-## **TASK 4:** - Build OAC Dashboard**
+## Task 4: - Build OAC Dashboard**
 
 1. Navigate to hamburger->Analytics->Analytics Clouds
 
@@ -129,7 +129,7 @@ In this lab, you will be guided through the following tasks:
 
 8. Double click "Manual Query" and add the following SQL query to find per-company average age of passengers from Switzerland, Italy and France. Click on the “Enter SQL and type in the following sql statement:
 
-    ````  
+    ```bash  
     <copy> SELECT
         airline.airlinename,
         AVG(datediff(departure,birthdate)/365.25) as avg_age,
@@ -146,7 +146,7 @@ In this lab, you will be guided through the following tasks:
     ORDER BY
         airline.airlinename, avg_age
     LIMIT 10;</copy>
-    ````
+    ```
 
 9. Dataset screen
     ![MDS](./images/mysql_new_dataset_sql.png "add sql to dataset ")
@@ -165,11 +165,7 @@ In this lab, you will be guided through the following tasks:
 15. Save Workbook as "passenger Workbook" and close OAC application
 
 
-## Learn More
-
-- If you want to discover more on how to use Oracle Analytics Cloud check our **[Tutorials](https://docs.oracle.com/en/cloud/paas/analytics-cloud/tutorials.html)** and **[Live Labs!](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/livelabs-workshop-cards?p100_focus_area=28&me=117&clear=100&session=107258786260970)**
-
 ## Acknowledgements
 * **Author** - Perside Foster, MySQL Solution Engineering, Harsh Nayak , MySQL Solution Engineering 
 * **Contributors** - Salil Pradhan, MySQL Principal Product Manager,  Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-* **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, Sept 2022
+* **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, March 2023

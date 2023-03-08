@@ -13,60 +13,75 @@
           "description": "This is the prerequisites for customers using Free Trial and Paid tenancies. The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
           "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/cloud-login/event-register-free-tier-account.md"
         },
- 
+
         {
-          "title": "Lab 1: Create Virtual Cloud Network",
-          "filename": "../../create-vcn/create-vcn.md"
+          "title": "Lab 1: Create Compartment and Virtual Cloud Network",
+          "filename": "../../create-compartment-vcn/create-compartment-vcn.md"
         },
 
         {
-          "title": "Lab 2: Create HeatWave DB and Cluster",
+          "title": "Lab 2: Create HeatWave Standalone DB system",
           "filename": "../../create-hw-cluster-only-dbs/create-hw-cluster-only-dbs.md"
         },
 
         {
-          "title": "Lab 3: Connect to MySQL HeatWave with Compute and Create and Load airportdb Schema",
+          "title": "Lab 3: Manage HeatWave Standalone and High Availability Systems",
+          "filename": "../../access-mds-sa-ha/access-mds-sa-ha.md"
+        },
+
+        {
+          "title": "Lab 4: . Create Object Storage bucket and upload airportdb data",
+          "filename": "../../store-data/store-data.md"
+        },
+
+        {
+          "title": "Lab 5: Created HeatWave DB and Cluster",
+          "filename": "../../create-HW-cluster-only-dbs/create-HW-cluster-only-dbs.md"
+        },
+
+        {
+          "title": "Lab 6: Connect to MySQL HeatWave with Compute and Create and Load airportdb Schema",
           "filename": "../../connect-dbs-compute/connect-dbs-compute.md"
         },
            
         {
-            "title": "Lab 4: Load MySQL HeatWave Cluster",
+            "title": "Lab 7: Load MySQL HeatWave Cluster",
             "filename": "../../load-heatwave/load-heatwave.md"
         },
         
         {
-            "title": "Lab 5: Run Queries with MySQL Shell  ",
+            "title": "Lab 8: Run Queries with MySQL Shell  ",
             "filename": "../../run-queries/run-queries.md"
         },
         
         {
-            "title": "Lab 6: Run MySQL HeatWave Autopilot",
+            "title": "Lab 9: Run MySQL HeatWave Autopilot",
             "filename": "../../run-autopilot/run-autopilot.md"
         },
 
         {
-          "title": "Lab 7: Use Oracle Analytics Cloud with Heatwave",
+          "title": "Lab 10: Use Oracle Analytics Cloud with Heatwave",
           "filename": "../../do-oac/do-oac.md"
         }, 
 
         {
-          "title": "Lab 8: Connect to MySQL HeatWave Using Bastion",
+          "title": "Lab 11: Connect to MySQL HeatWave Using Bastion",
           "filename": "../../connect-dbs-bastion/connect-dbs-bastion.md"
         },
 
         {
-          "title": "Lab 9: Build HeatWave ML with SQL",
+          "title": "Lab 12: (Under Construction) Build HeatWave ML with SQL",
           "filename": "../../do-heatwave-ml/do-heatwave-ml.md"
         },
 
 
        {
-          "title": "Lab 10: Develop MySQL HeatWave PHP Apps",
+          "title": "Lab 13: Develop MySQL HeatWave PHP Apps",
           "filename": "../../develop/develop.md"
         }, 
 
         {
-          "title": "Lab 11: Develop MySQL HeatWave Apps with Oracle APEX",
+          "title": "Lab 14: Develop MySQL HeatWave Apps with Oracle APEX",
           "filename": "../../apex-heatwave/apex-heatwave.md"
         }, 
         

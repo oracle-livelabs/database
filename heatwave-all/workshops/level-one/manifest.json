@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Developing with MySQL HeatWave",
+  "workshoptitle": "Build OLTP OLAP Systems With MySQL HeatWave",
     "help": "livelabs-help-oci_us@oracle.com",
     "tutorials": [
         {
@@ -22,7 +22,7 @@
         {
           "title": "Lab 2: Created HeatWave DB and Cluster",
           "filename": "../../create-hw-cluster-only-dbs/create-hw-cluster-only-dbs.md"
-        },
+        },    
 
         {
           "title": "Lab 3: Connect to MySQL HeatWave with Compute and Create and Load airportdb Schema",
@@ -44,18 +44,14 @@
           "filename": "../../do-oac/do-oac.md"
         }, 
 
-        {
-          "title": "Lab 7: Connect to MySQL HeatWave Using Bastion",
-          "filename": "../../connect-dbs-bastion/connect-dbs-bastion.md"
-        },
 
         {
-          "title": "Lab 8: Develop MySQL HeatWave PHP Apps",
+          "title": "Lab 7: Develop MySQL HeatWave PHP Apps",
           "filename": "../../develop/develop.md"
         }, 
 
         {
-          "title": "Lab 9: Develop MySQL HeatWave Apps with Oracle APEX",
+          "title": "Lab 8: Develop MySQL HeatWave Apps with Oracle APEX",
           "filename": "../../apex-heatwave/apex-heatwave.md"
         }, 
         
