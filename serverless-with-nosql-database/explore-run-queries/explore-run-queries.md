@@ -28,7 +28,7 @@ Watch the video below for a quick walk through of the lab.
 
 1. Let's get back into the Cloud Shell. From the earlier lab, you may have minimized it in which case you need to enlarge it. It is possible it may have become disconnected and/or timed out. In that case, restart it.
 
-    ![Cloud Shell](./images/cloud-shell-phoenix.png)
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
 2. Execute the following environment setup shell script in the Cloud Shell to set up your environment. If you close/open the Cloud Shell Console, please re-execute it.
 
@@ -334,7 +334,7 @@ Select your compartment. Click the **freeTest** table, which will bring up the t
 
 5. Remove the 'demonosql' compartment. From upper left hand menu, go to **Identity and Security** then **Compartments** under 'Identity.'
 
-    ![Delete Compartment](./images/remove-compartment.png)
+    ![Delete Compartment](https://oracle-livelabs.github.io/common/images/console/id-compartment.png)
 
 6. The 'Compartments' screen appears and click **demonosql**
 
@@ -361,7 +361,7 @@ Select your compartment. Click the **freeTest** table, which will bring up the t
 
 5. Remove the 'demonosql' compartment. From upper left hand menu, go to **Identity and Security** then **Compartments** under 'Identity.'
 
-    ![Delete Compartment](./images/remove-compartment.png)
+    ![Delete Compartment](https://oracle-livelabs.github.io/common/images/console/id-compartment.png)
 
 6. The 'Compartments' screen appears and click **demonosql**
 

@@ -34,13 +34,13 @@ Watch the video below for a quick walk through of the lab.
 <if type="freetier">
 1. If you are in the Phoenix region, you will be able to create always Free tables. If you are in any other region, then you will create paid tables, however, they will be paid for with credits.
 
-  ![Phoenix Location](./images/phoenix-location.png)
+  ![Phoenix region](./images/phoenix-location.png)
 </if>
 
 <if type="livelabs">
 1. Please verify you are in the Phoenix region.
 
-  ![Phoenix Location](./images/phoenix-location.png)
+  ![Phoenix region](./images/phoenix-location.png)
 
 </if>
 
@@ -120,7 +120,7 @@ In this task we are going to create tables using the Cloud Shell, and Oracle Clo
 
 1. Open the **Cloud Shell** from the top right menu.
 
-    ![Cloud Shell](./images/cloud-shell-phoenix.png)
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
   Execute the following in your Cloud Shell. This creates several JSON documents that will be used in future steps.
 
@@ -368,9 +368,9 @@ In this task we are going to create tables using the Cloud Shell, and Oracle Clo
 
 Starting with the demo table, we can go and look at the data we inserted for each of the tables.
 
-1. On the left click **Table rows**
+1. On the left click **Explore data**
 
-    ![Table Rows](./images/table-row-select.png)
+    ![Explore data](./images/table-row-select.png)
 
 2. In the textbox **Query**, keep the text 'SELECT * FROM demo.'' This will select all the rows from our table. Click **Run query**
 

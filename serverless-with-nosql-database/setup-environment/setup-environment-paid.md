@@ -26,11 +26,11 @@ This lab assumes you have:
 
 1. Log into the Oracle Cloud Console using your tenancy. Please make note of what region you are at.
 
-    ![Oracle Cloud Console](https://github.com/oracle-livelabs/common/blob/main/images/console/home-page.png)
-
+    ![Oracle Cloud Console](https://oracle-livelabs.github.io/common/images/console/home-page.png)
+	
 2. On left side drop down (left of Oracle Cloud banner), go to **Identity & Security** and then **Compartments.**
 
-    ![Identity & Security](images/identity-security-compartment.png)
+    ![Identity & Security](https://oracle-livelabs.github.io/common/images/console/id-compartment.png)
 
 3. Click **Create Compartment.** This opens up a new window.
 
@@ -43,7 +43,7 @@ This lab assumes you have:
 
 1. Top right, click your **Profile**, then **User Settings.**
 
-  ![User Settings](images/user-profile.png)
+  ![User Settings](https://oracle-livelabs.github.io/common/images/console/user-settings.png)
 
 2. Copy your OCID. Make sure to **save your OCID** for future steps. Paste it into notepad or some text file for use in Step 4.
 
@@ -51,11 +51,11 @@ This lab assumes you have:
 
 3. Open the **Cloud Shell** in the top right menu. It can take about 2 minutes to get the Cloud Shell started.
 
-    ![Cloud Shell](images/cloud-shell.png)
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
   **Note:** This must be executed in the **Home region**. Please ensure you are in your home region. The Cloud Shell prompt shows you what region the shell is running out of.  In the example below, there is a mismatch between the two which is incorrect.  It is executing out of Phoenix and the **Home region** is Ashurn.   
 
-    ![Home Region](images/capturecloudshellhomeregion.png)
+    ![Home Region](https://oracle-livelabs.github.io/common/images/console/region.png)
 
 4. Execute these commands in your Cloud Shell. **Replace** "YOURUSEROCID" with your OCID you copied above **before** executing.
 

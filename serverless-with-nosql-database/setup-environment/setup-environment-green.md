@@ -35,7 +35,7 @@ Please make note of the **Region** you are assigned. If you are assigned Phoenix
 
 1. Top right, click your **Profile**, then **User Settings.**
 
-  ![User Settings](images/user-profile.png)
+  ![User Settings](https://oracle-livelabs.github.io/common/images/console/user-settings.png)
 
 2. Copy your OCID. Make sure to **save your OCID** for future steps. Paste it into notepad or some text file for use in step 10.
 
@@ -43,7 +43,7 @@ Please make note of the **Region** you are assigned. If you are assigned Phoenix
 
 3. In this step we need to execute a few commands in the Cloud Shell. To start the Cloud Shell, we have to select our compartment first. Click on the 'hamburger' menu on the top left. Click on **Databases** and then click on **Tables**.
 
-    ![Choose Compartment](images/compartment-livelab.png)
+    ![Choose Compartment](images/nosql-tables.png)
 
 4. In the **Compartment** drop down on the left, pick you compartment. In Task 1, you should have taken note of your compartment. To find it, expand the root node (**c4u04**), then expand the **Livelabs** node. Your compartment should be listed under there. In this example we are using **LL11090-COMPARTMENT**.
 
@@ -51,11 +51,11 @@ Please make note of the **Region** you are assigned. If you are assigned Phoenix
 
 5. Open the **Cloud Shell** in the top right menu. It can take about 2 minutes to get the Cloud Shell started.
 
-    ![Cloud Shell](images/cloud-shell.png)
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
   **Note:** Your **Home Region** may be different than the region you are currently connected to. In the example screen below, you are connected to Phoenix but the **Home Region** is Ashburn. You can create Always Free NoSQL tables when connected to Phoenix.
 
-    ![Home Region](images/capturecloudshellhomeregion.png)
+    ![Home Region](https://oracle-livelabs.github.io/common/images/console/region.png)
 
 6. Execute these commands in your Cloud Shell to create a private and a public key.
 
@@ -68,18 +68,18 @@ Please make note of the **Region** you are assigned. If you are assigned Phoenix
 
 7. Grab you a copy of your public key. Execute in Cloud Shell.
 
-        ```
-        <copy>
-        cat NoSQLLabPublicKey.pem
-        </copy>
-        ```
+    ```
+    <copy>
+    cat NoSQLLabPublicKey.pem
+    </copy>
+    ```
       This will print out your public key to the screen. Grab a copy of the entire key, including the "BEGIN/END PUBLIC KEY" lines. Paste it into notepad or some text file for use in step 10.
 
       Minimize the Cloud shell.
 
 8. Top right, click your **Profile**, then **User Settings.**
 
-    ![User Settings](images/user-profile.png)
+  ![User Settings](https://oracle-livelabs.github.io/common/images/console/user-settings.png)
 
 
 
