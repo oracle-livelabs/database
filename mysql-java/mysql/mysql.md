@@ -145,11 +145,11 @@ to run the following MySQL commands:
 
 ```
 <copy>kubectl exec -it deployment/mysql -- bash
-mysql -uroot -pWelcome1!
-CREATE USER 'root'@'%' IDENTIFIED BY 'Welcome1!';
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
-exit
-exit
+bash# mysql -uroot -pWelcome1!
+mysql> CREATE USER 'root'@'%' IDENTIFIED BY 'Welcome1!';
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+mysql> exit
+bash# exit
 </copy>
 ```
 This will connect to MySQL in the container. And create a user that may log in from the shell.
