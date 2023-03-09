@@ -41,7 +41,7 @@ In this lab, you will be guided through the following tasks:
     - Configure placement
     - Configure hardware
     - Exclude Backups
-    - Advanced Options - Data Import
+    - Advanced Options - Networking tab
 
 5. Provide basic information for the DB System:
 

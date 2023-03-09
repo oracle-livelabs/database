@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Turbocharge Business Insights with MySQL HeatWave",
+  "workshoptitle": "Build OLTP OLAP Systems With MySQL HeatWave",
     "help": "livelabs-help-oci_us@oracle.com",
     "tutorials": [
         {
@@ -22,7 +22,7 @@
         {
           "title": "Lab 2: Created HeatWave DB and Cluster",
           "filename": "../../create-hw-cluster-only-dbs/create-hw-cluster-only-dbs.md"
-        },
+        },    
 
         {
           "title": "Lab 3: Connect to MySQL HeatWave with Compute and Create and Load airportdb Schema",
@@ -38,35 +38,20 @@
             "title": "Lab 5: Run Queries with MySQL Shell  ",
             "filename": "../../run-queries/run-queries.md"
         },
-        
-        {
-            "title": "Lab 6: Run MySQL HeatWave Autopilot",
-            "filename": "../../run-autopilot/run-autopilot.md"
-        },
 
         {
-          "title": "Lab 7: Use Oracle Analytics Cloud with Heatwave",
+          "title": "Lab 6: Use Oracle Analytics Cloud with Heatwave",
           "filename": "../../do-oac/do-oac.md"
         }, 
 
-        {
-          "title": "Lab 8: Connect to MySQL HeatWave Using Bastion",
-          "filename": "../../connect-dbs-bastion/connect-dbs-bastion.md"
-        },
 
         {
-          "title": "Lab 9: Build HeatWave ML with SQL",
-          "filename": "../../do-heatwave-ml/do-heatwave-ml.md"
-        },
-
-
-       {
-          "title": "Lab 10: Develop MySQL HeatWave PHP Apps",
+          "title": "Lab 7: Develop MySQL HeatWave PHP Apps",
           "filename": "../../develop/develop.md"
         }, 
 
         {
-          "title": "Lab 11: Develop MySQL HeatWave Apps with Oracle APEX",
+          "title": "Lab 8: Develop MySQL HeatWave Apps with Oracle APEX",
           "filename": "../../apex-heatwave/apex-heatwave.md"
         }, 
         

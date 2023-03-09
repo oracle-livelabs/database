@@ -193,18 +193,9 @@ You will need a compute Instance to connect to your brand new MySQL database.
      ```bash
     <copy>sudo yum install mysql-shell -y</copy>
     ```
-
-    ![CONNECT](./images/install-mysql-shell.png "install mysql shell")
-
-   **Connect to MySQL Database Service**
-
-6. From your Compute instance, connect to MDS-HW MySQL using the MySQL Shell client tool. 
-
-   The endpoint (IP Address) can be found in your notepad or  the MDS-HW MySQL DB System Details page, under the "Endpoint" "Private IP Address". 
-
     ![CONNECT](./images/connect-shell.png "connect shell")
 
-7. Use the following command to connect to MySQL using the MySQL Shell client tool. Be sure to add the MDS-HW private IP address at the end of the command. Also enter the admin user and the db password created on Lab 1
+6. Use the following command to connect to MySQL using the MySQL Shell client tool. Be sure to add the MDS-HW private IP address at the end of the command. Also enter the admin user and the db password created on Lab 1
 
     (Example  **mysqlsh -uadmin -p -h10.0.1..   --sql**)
 
@@ -216,7 +207,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![CONNECT](./images/connect-myslqsh.png "connect myslqsh")
 
-8. Create  and load sample database (airpordb) from object storage
+7. Create  and load sample database (airpordb) from object storage
  
     a. 
 
@@ -232,7 +223,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     **Note** it takse about 12 minutes to create and load the airportbb schema
 
-9. View  the airportdb total records per table in
+8. View  the airportdb total records per table in
 
     a. 
 

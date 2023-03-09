@@ -25,15 +25,7 @@ Using APEX, developers can quickly develop and deploy compelling apps that solve
 4. Run SQL Worksheet
 
 
-## Task 2 Set REST Enabled SQL Service URL
-1. [https://peterobrien.blog/2022/06/15/how-to-use-the-oracle-database-tools-service-to-provide-data-to-apex/](https://peterobrien.blog/2022/06/15/how-to-use-the-oracle-database-tools-service-to-provide-data-to-apex/)
-
-    **Note** The pattern is https://sql.dbtools.< region >.oci.oraclecloud.com/20201005/ords/< connection ocid >/_/sql
-    **Example** https://sql.dbtools.us-ashburn-1.oci.oraclecloud.com/20201005/ords/ocid1.databasetoolsconnection.oc1.iad.amaaaaaao27h4wiamnbgbmuznwvg4nenu4j7nzbecnvpmzgs2fkgiugwueyq/_/sql
-2. Set APEX Worspace Web Credentials
-3. APEX REST Enabled SQL Reference 
-
-## Task 3 Create and Configure APEX
+## Task 2 Create and Configure APEX
 
 1. Create and Launch APEX
 ![MDS](./images/start_apex_deploy.png "start apex deploy")
@@ -49,6 +41,10 @@ Using APEX, developers can quickly develop and deploy compelling apps that solve
 ![MDS](./images/apex_web_credentials.png "apex web credentials")
 ![MDS](./images/apex_rest.png "apex rest")
 
+4. [https://peterobrien.blog/2022/06/15/how-to-use-the-oracle-database-tools-service-to-provide-data-to-apex/](https://peterobrien.blog/2022/06/15/how-to-use-the-oracle-database-tools-service-to-provide-data-to-apex/)
+
+    **Note** The pattern is https://sql.dbtools.< region >.oci.oraclecloud.com/20201005/ords/< connection ocid >/_/sql
+    **Example** https://sql.dbtools.us-ashburn-1.oci.oraclecloud.com/20201005/ords/ocid1.databasetoolsconnection.oc1.iad.amaaaaaao27h4wiamnbgbmuznwvg4nenu4j7nzbecnvpmzgs2fkgiugwueyq/_/sql
 ## Learn More
 
 How to use the Oracle Database Tools Service to provide MySQL data to APEX - [APEX and the MySQL Database Service](https://asktom.oracle.com/pls/apex/asktom.search?oh=18245).
