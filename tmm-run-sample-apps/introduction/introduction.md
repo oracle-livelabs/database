@@ -2,7 +2,7 @@
 
 ## About this Workshop
 
-The labs in this workshop walk you through all the steps run sample applications using Oracle® Transaction Manager for Microservices. Using samples is the fastest way for you to get familiar with MicroTx. Each sample application contains multiple microservices to demonstrate how MicroTx manages transactions that span several microservices.
+The labs in this workshop walk you through all the steps to run sample applications using Oracle® Transaction Manager for Microservices. Using samples is the fastest way for you to get familiar with MicroTx. Each sample application contains multiple microservices to demonstrate how MicroTx manages transactions that span several microservices.
 
 Estimated Workshop Time: *1 hours 20 minutes*
 
