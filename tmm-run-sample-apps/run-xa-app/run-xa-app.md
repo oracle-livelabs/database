@@ -8,6 +8,9 @@ The sample application code is available in the MicroTx distribution. The MicroT
 
 Estimated Lab Time: *20 minutes*
 
+Watch the video below for a quick walk-through of the lab.
+[Run an LRA Sample Application](videohub:1_ta8uv36s)
+
 ### About XA Sample Application
 
 The following figure shows a sample XA application, which contains several microservices.
