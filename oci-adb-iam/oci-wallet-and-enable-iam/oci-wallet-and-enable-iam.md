@@ -40,6 +40,8 @@ This lab assumes that you have completed the previous labs and have created all 
 1. Open the SQL command line, then connect to the database using the wallet file.
     >**Note:** This command only works from inside the adb_wallet folder. Insure that you have navigated to it as shown in the previous steps.
 
+    >**Note:** When using SQL, do not paste commands using Crtl-V as hidden characters will also be inserted resulting in an error of unknown command. You can use Crtl-Shift-V as a substitute if using a keyboard to insert copied code.
+
     ```
     <copy>sql /nolog</copy>
     ```
