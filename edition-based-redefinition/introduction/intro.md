@@ -1,5 +1,13 @@
 # Introduction
 
+## About this Workshop
+
+This workshop will cover how to evolve your oracle database applications entirely online. While building automated development pipelines is highly regarded by development teams, making changes to database schemas and stored procedures without interrupting application traffic is tricky. What if the database changes were both safe and online? We will use Oracle Database features that allow for online data movement, schema redefinitions, table reorganizations, and, thanks to the integration with DevOps tools, controlling code versioning (Liquibase).
+
+You can watch the video for an overview of evolving Oracle Database Applications online:
+
+[](youtube:wwqDn63q3cw)
+
 ### Oracle Edition Based Redefinition
 
 Oracle Edition-Based Redefinition (EBR) enables online application upgrades with uninterrupted availability. When the installation of an upgrade is complete, the pre-upgrade application and the post-upgrade application can run at the same time. Therefore, existing sessions can keep working with the pre-upgrade application until the rolling upgrade is over, and new sessions can start working on the post-upgrade application. The pre-upgrade application can be retired when no more sessions use it. Edition-Based Redefinition allows hot-rolling application upgrades without downtime, enabling gradual application rollover used in modern CI/CD pipelines.
@@ -26,13 +34,6 @@ Below are some of the benefits.
 - Improve data availability, query performance, response time and disk space utilization, all of which are important in a mission-critical environment
 - Make the application upgrade process easier, safer and faster.
 
-## About this Workshop
-
-This workshop will cover how to evolve your oracle database applications entirely online. While building automated development pipelines is highly regarded by development teams, making changes to database schemas and stored procedures without interrupting application traffic is tricky. What if the database changes were both safe and online? We will use Oracle Database features that allow for online data movement, schema redefinitions, table reorganizations, and, thanks to the integration with DevOps tools, controlling code versioning (Liquibase).
-
-You can watch the video for an overview of evolving Oracle Database Applications online:
-
-[](youtube:wwqDn63q3cw)
 
 ### Workshop Objectives
 

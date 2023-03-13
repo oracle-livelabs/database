@@ -6,9 +6,16 @@ In this lab, we will switch to the new edition `V2` and decommission the old edi
 
 Estimated lab time: 15 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Switch to the new edition and decommission the old edition](videohub:1_w16td8d1)
+
 ### Objectives
 
-In this lab, we will switch to the new edition `V2` and decommission the old edition `ORA$BASE`. We will also use **Oracle Online Redefinition** (PL/SQL package `DBMS_REDEF`) to redefine the `employee` table online.
+In this lab, we will learn
+
+- How to switch to the new edition `V2` and decommission the old edition `ORA$BASE`. 
+
+- Use **Oracle Online Redefinition** (PL/SQL package `DBMS_REDEF`) to redefine the `employee` table online.
 
 ## Task 1: Verify all the scripts 
 

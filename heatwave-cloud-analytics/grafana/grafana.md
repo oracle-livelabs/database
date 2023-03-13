@@ -87,7 +87,7 @@ spec:
           - 0
       containers:
         - name: grafana
-          image: grafana/grafana:7.5.2
+          image: grafana/grafana
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000

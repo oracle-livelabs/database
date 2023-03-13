@@ -19,7 +19,7 @@
       "filename": "../../02-prepare-setup/prepare-setup.md"
     },
     {
-      "title": "Lab 2: Environment setup",
+      "title": "Lab 2: Setup environment",
       "description": "How to provision the workshop environment and connect to it",
       "filename": "../../00-setup-compute/setup-compute.md"
     },

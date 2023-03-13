@@ -6,9 +6,14 @@ In this lab, you will learn how to recognize the edition of an object and review
 
 Estimated lab time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Review the HR schema](videohub:1_4tddmgpo)
+
 ### Objectives
 
-In this lab, you will learn how to recognize the edition of an object and review the helper procedures that we have created in the previous lab.
+In this lab, you will
+
+- Learn how to recognize the edition of an object and review the helper procedures that we have created in the previous lab.
 
 ## Task 1: Review the helper procedures created to deal with the editions
 

@@ -2,14 +2,20 @@
 
 ## Introduction
 
-In this lab, you will learn how to modify the directory structure for the change logs
+In this lab, you will learn 
+
+- How to modify the directory structure for the change logs
 
 Estimated lab time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Create the directory structure for Liquibase and sync the metadata](videohub:1_tral6svn)
+
 ### Objectives
 
-In this lab, you will learn how to modify the directory structure for the change logs which we generated in previous lab and sync metadata
+In this lab, you will learn 
 
+- How to modify the directory structure for the change logs which we generated in previous lab and sync metadata
 
 ## Task 1: Modify the directory structure 
 

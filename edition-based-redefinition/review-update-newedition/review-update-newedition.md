@@ -2,13 +2,18 @@
 
 ## Introduction
 
-In this lab,you will review the new edition scripts to create a new edition and split the column
+In this lab, you will review the new edition scripts to create a new edition and split the column
 
 Estimated lab time: 10 minutes
 
-## Objectives
+Watch the video below for a quick walk-through of the lab.
+[Review and deploy the changelog for the new edition](videohub:1_6gwysmq9)
 
-In this lab,you will review the new edition scripts to create a new edition and split the column `employees.phone_number` to `country_code` and `phone#`.
+### Objectives
+
+In this lab, you will
+
+- Review the new edition scripts to create a new edition and split the column `employees.phone_number` to `country_code` and `phone#`
 
 ## Task 1: Review the scripts for the new edition
 

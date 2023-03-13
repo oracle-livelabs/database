@@ -6,6 +6,9 @@ In this lab you will generate a wallet file for your ADB. This wallet file can b
 
 *Estimated Lab Time*: 20 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Generate ADB Wallet and Set IAM as Identity Provider](videohub:1_dq2gunqo)
+
 ### Objectives
 - Generate a wallet file for your ADB
 - Access your ADB with the wallet file and configure IAM as the identity provider

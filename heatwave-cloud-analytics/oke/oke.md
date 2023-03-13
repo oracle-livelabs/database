@@ -33,9 +33,10 @@ In this lab, you will provision the following OCI resources using Resource Manag
 
 	![Stack Information](images/resource-manager-stack-info.png)
 
-3. Review the values pre-populated for your OCI Resources, update the password for "MDS Admin User's Password" (default password: Oracle#123), and click **Next**.
+3. Review the values pre-populated for your OCI Resources, update the password for "MDS Admin User's Password" (default password: Oracle#123). Specify the <a href="https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengaboutk8sversions.htm" target="\_blank">**supported Kubernetes version**</a>, for example, 1.25.4 and click **Next**.
 
-	![Stack Variables](images/resource-manager-stack-variables.png)
+	![Stack Variables](images/resource-manager-stack-variables.jpg)
+	> **Note**: Oracle recommends that you use the most recent Kubernetes version that Container Engine for Kubernetes supports
 
 4. Check **Run Apply** and click **Create** to create the stack and apply the Terraform scripts.
 
@@ -68,4 +69,4 @@ In this lab, you will provision the following OCI resources using Resource Manag
 	* Perside Foster, MySQL Solution Engineering North America
 	* Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
 
-* **Last Updated By/Date** - Ryan Kuan, May 2022
+* **Last Updated By/Date** - Ryan Kuan, March 2023

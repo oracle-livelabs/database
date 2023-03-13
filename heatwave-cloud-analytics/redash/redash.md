@@ -100,6 +100,7 @@ kubectl get pods --namespace redash -l "app.kubernetes.io/name=redash,app.kubern
 kubectl --namespace redash port-forward <POD_NAME> 8082:5000 --address 0.0.0.0 &
 </copy>
 ```
+    > **Note**: Port-forwarding is used for development and testing purposes only
 
 8. Navigate to **Virtual Cloud Network**, select **oke-vcn**, select **Security List** on the left panel, and select **operator-seclist**
 

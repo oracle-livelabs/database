@@ -26,46 +26,46 @@ This lab assumes you have:
 
 1. Log into the Oracle Cloud Console using your tenancy. Please make note of what region you are at.
 
-    ![](images/console-image.png)
-
+    ![Oracle Cloud Console](https://oracle-livelabs.github.io/common/images/console/home-page.png)
+	
 2. On left side drop down (left of Oracle Cloud banner), go to **Identity & Security** and then **Compartments.**
 
-    ![](images/identity-security-compartment.png)
+    ![Identity & Security](https://oracle-livelabs.github.io/common/images/console/id-compartment.png)
 
 3. Click **Create Compartment.** This opens up a new window.
 
   Enter **demonosql** as compartment **Name** field, enter some text into **Description** field and press **Create Compartment** button at bottom of window. The **Parent Compartment** field will display your current parent compartment -- make sure this is your **root** compartment, whatever that is for your case. This HOL assumes the 'demonosql' compartment is a child of the root compartment.
 
-    ![](images/create-compartment.png)
+    ![Create Compartment](images/create-compartment.png)
 
 
 ## Task 2: Create an API Key For Your User
 
 1. Top right, click your **Profile**, then **User Settings.**
 
-  ![](images/user-profile.png)
+  ![User Settings](https://oracle-livelabs.github.io/common/images/console/user-settings.png)
 
 2. Copy your OCID. Make sure to **save your OCID** for future steps. Paste it into notepad or some text file for use in Step 4.
 
-    ![](images/user-ocid.png)
+    ![Copy your OCID](images/user-ocid.png)
 
 3. Open the **Cloud Shell** in the top right menu. It can take about 2 minutes to get the Cloud Shell started.
 
-    ![](images/cloud-shell.png)
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
   **Note:** This must be executed in the **Home region**. Please ensure you are in your home region. The Cloud Shell prompt shows you what region the shell is running out of.  In the example below, there is a mismatch between the two which is incorrect.  It is executing out of Phoenix and the **Home region** is Ashurn.   
 
-    ![](images/capturecloudshellhomeregion.png)
+    ![Home Region](https://oracle-livelabs.github.io/common/images/console/region.png)
 
 4. Execute these commands in your Cloud Shell. **Replace** "YOURUSEROCID" with your OCID you copied above **before** executing.
 
-    ````
+    ```
     <copy>
     openssl genrsa -out NoSQLLabPrivateKey.pem  4096        
     openssl rsa -pubout -in NoSQLLabPrivateKey.pem -out NoSQLLabPublicKey.pem
     oci iam user api-key upload --user-id YOURUSEROCID --key-file NoSQLLabPublicKey.pem > info.json
     </copy>
-    ````
+    ```
     If you execute the 'oci iam' command before replacing "YOURUSEROCID" then you will get the following error:
     **"Authorization failed or requested resource not found."**   Replace "YOURUSEROCID" and try the last command again.
 
@@ -77,7 +77,7 @@ In this task we will copy over a data bundle stored on object storage and place 
 
 1. Execute the following in your Cloud Shell.
 
-    ````
+    ```
     <copy>
       cd $HOME
       rm -rf serverless-with-nosql-database BaggageData serverless-with-nosql-database.zip demo-lab-nosql-main
@@ -88,7 +88,7 @@ In this task we will copy over a data bundle stored on object storage and place 
       cp ~/info.json ~/serverless-with-nosql-database/express-nosql
       cp ~/serverless-with-nosql-database/env-freetier.sh ~/serverless-with-nosql-database/env.sh
     </copy>
-    ````
+    ```
 
 2. Exit from Cloud Shell
 
@@ -100,7 +100,8 @@ The Oracle NoSQL Database SDKs allow you to provide the credentials to an applic
 
 In this node.js snippet, we used the credential information created in Task 2 and specified the credentials directly as part of auth.iam property in the initial configuration. The tenancy ID, the user ID, an API signing key, a fingerprint are all supplied. The tenancy iD and the user ID are referred to as OCIDs.
 
-````
+```
+<copy>
        return new NoSQLClient({
             region: Region.EU_FRANKFURT_1,
 			compartment:'demonosql',
@@ -113,7 +114,8 @@ In this node.js snippet, we used the credential information created in Task 2 an
                 }
             }
         });
-````
+</copy>
+```
 
   Another way to handle authentication is with Instance and Resource Principals. The Oracle NoSQL SDKs support both of them. Resource principals are primarily used when authenticating from functions. We will show you an example of using Resource Principals.
 
@@ -127,6 +129,7 @@ In this snippet, there are hard-coded references (for example, REGION).
 
 **NoSQL Database Node.js SDK**
 ```
+<copy>
 function createClientResource() {
   return  new NoSQLClient({
     region: Region.EU_FRANKFURT_1,
@@ -138,15 +141,18 @@ function createClientResource() {
     }
   });
 }
+</copy>
 ```
 If you wanted to use **Instance Principals** instead of Resource Principals, then replace "useResourcePrincipal: true"  with "useInstancePrincipal: true" to switch.
 
 **NoSQL Database Python SDK**
 ```
+<copy>
 def get_handle():
      provider = borneo.iam.SignatureProvider.create_with_resource_principal()
      config = borneo.NoSQLHandleConfig('eu-frankfurt-1', provider).set_logger(None)
      return borneo.NoSQLHandle(config)
+</copy>
 ```
 
 A similar switch can be made here to use **Instance Principals**, replace "create\_with\_resource\_principal()" with "create\_with\_instance\_principal()" and you are all set.
@@ -159,23 +165,23 @@ Oracle NoSQL Always Free tables are available only in the Phoenix region. If Pho
 
 1. Check to see if Phoenix shows up in your region drop down list. Click the down **arrow** by the region.
 
-    ![](images/no-phoenix.png)
+    ![Not in Phoenix](images/no-phoenix.png)
 
 2. If it is there, **click it** and move your tenancy to Phoenix and **proceed to the next lab.**
 
-    ![](images/phoenix.png)
+    ![Choose Phoenix](images/phoenix.png)
 
 3. Since it is not there, please subscribe to Phoenix Region. Click the drop down by your region and click **Manage Regions.**
 
-    ![](images/manage-regions.png)
+    ![Manage Regions](images/manage-regions.png)
 
 4. This will bring up a list of regions. Look for Phoenix and press **Subscribe**.
 
-    ![](images/capturesuscribe.png)
+    ![Subscribe](images/capturesuscribe.png)
 
 5. If you haven't been moved to Phoenix, then click **Phoenix** to move your tenancy.
 
-    ![](images/phoenix.png)
+    ![Choose Phoenix](images/phoenix.png)
 
 
 You may now **proceed to the next lab.**
