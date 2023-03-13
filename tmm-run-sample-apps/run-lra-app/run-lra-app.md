@@ -7,6 +7,9 @@ The sample application code is available in the MicroTx distribution. The MicroT
 
 Estimated Time: *10 minutes*
 
+Watch the video below for a quick walk-through of the lab.
+[Run an LRA Sample Application](videohub:1_0g2khxyc)
+
 ### About LRA Sample Application
 
 The sample application demonstrates how you can develop microservices that participate in LRA transactions while using MicroTx to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and a flight ticket. Only when you provide approval to confirm the provisional booking, the booking of the hotel room and flight ticket is confirmed. If you cancel the provisional booking, the hotel room and flight ticket that was blocked is released and the booking is canceled. The flight service in this example allows only two confirmed bookings by default. To test the failure scenario, the flight service sample app rejects any additional booking requests after two confirmed bookings. This leads to the cancellation (compensation) of a provisionally booked hotel within the trip and the trip is not booked.
