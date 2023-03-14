@@ -46,11 +46,13 @@ FPP is part of the Oracle Grid Infrastructure stack: the FPP Server requires the
 
 * [FPP documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/fppad/fleet-patching-provisioning.html)
 * [FPP website](https://www.oracle.com/database/technologies/rac/fpp.html)
+* [FPP by example blog series](https://blogs.oracle.com/maa/post/fleet-patching-provisioning-by-example-intro)
 
 ## Acknowledgements
 
 - **Author** - Ludovico Caldara
-- **Contributors** - Kamryn Vinson
-- **Last Updated By/Date** -  Ludovico Caldara, April 2021
+- **Contributors** - Kamryn Vinson - Philippe Fierens
+- **Last Updated By/Date** -  Philippe Fierens, March 2023
+
 
 
