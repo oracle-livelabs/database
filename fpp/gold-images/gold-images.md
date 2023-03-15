@@ -71,13 +71,13 @@ This is an extra step to make sure that the image is usable and can be provision
         ```
         rhpctl query image -image db_previous
         ```
-![](./images/query_previous.png)
+![](./images/query-previous.png)
 
 3. Get the detail of the other one:
         ```
         rhpctl query image -image db_current_oci
         ```
-![](./images/query_oci_current.png)      
+![](./images/query-oci-current.png)      
 
 4. Now, take a closer look at the groups:
         ```
