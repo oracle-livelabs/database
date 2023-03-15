@@ -44,7 +44,7 @@ The image type `ORACLEDBSOFTWARE` is the default, so you do not need to specify 
 1. First, download the zip file from this location into a filesystem with enough space (e.g. /u01) (Est.: 3 minutes):
         ```
         cd /u01/app/grid/
-        wget --no-proxy https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/fpp/db1913000.zip
+        wget --no-proxy https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/fpp/db1917000.zip
         ```
 ![](./images/wget.png)
 
@@ -77,7 +77,7 @@ This is an extra step to make sure that the image is usable and can be provision
         ```
         rhpctl query image -image db_current_oci
         ```
-![](./images/query_current.png)      
+![](./images/query_oci_current.png)      
 
 4. Now, take a closer look at the groups:
         ```
