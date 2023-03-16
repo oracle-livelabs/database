@@ -127,6 +127,12 @@ In this lab, we will learn
 
     ![execute-error](images/execute-error.png " ")
 
+    You can use the below command to identify the old sessions which are connected to HR schema using the below query and disconnect from those sessions.In case if you don't have access to v$session view, please check with your DBA to take necessary actions.
+
+    ```text
+    <copy>select sid,serial#,osuser,machine from v$session;</copy>
+    ```
+    
 You have successfully switched to the new edition, decommissioned the old edition and redefined the `employees` table online.
 
 This is the end of this LiveLabs. We hope you enjoyed it!
