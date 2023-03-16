@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab,you will review the new edition scripts to create a new edition and split the column
+In this lab, you will review the new edition scripts to create a new edition and split the column
 
 Estimated lab time: 10 minutes
 

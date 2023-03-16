@@ -6,6 +6,9 @@ Most tasks will be completed using Oracle Cloud Infrastructure (OCI) Cloud Shell
 
 *Estimated Time*: 15 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Create Autonomous Database and set up environment](videohub:1_z2illnuw)
+
 ### Objectives
 - Provision an Autonomous Database (ADB)
 - Create Groups and Policies to be used later
