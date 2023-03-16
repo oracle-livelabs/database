@@ -53,7 +53,7 @@ In this lab, you will:
       ```
       rhpctl query image
       ```
-      ![](./images/verify.png)
+      ![Check images in FPP repository](./images/verify.png)
 
 2. Then, provision the first DB image to the target. The opc password is always `FPPll##123` unless you have changed it (Est. 8-9 minutes):
 
@@ -63,8 +63,8 @@ In this lab, you will:
          -targetnode fppc -path /u01/app/oracle/product/19.0.0.0/WC_db_previous_FPPC \
          -sudouser opc -sudopath /bin/sudo
       ```
-      ![](./images/first-db.png)
-      ![](./images/first-db2.png)
+      ![Add working copy based on image db_previous output 1](./images/first-db.png)
+      ![Add working copy based on image db_previous noutput 2](./images/first-db2.png)
 
 ## Task 2: Provision the second workingcopy
 1. Provision the second DB image to the target (Est. 8-9 minutes), **please note the additional -groups** parameter passed here:
@@ -76,8 +76,8 @@ In this lab, you will:
       -groups  OSDBA=dba,OSOPER=oper,OSBACKUP=backupdba,OSDG=dgdba,OSKM=kmdba,OSRAC=racdba \
       -sudouser opc -sudopath /bin/sudo
       ```
-      ![](./images/second-db.png)
-      ![](./images/second-db2.png)
+      ![Add working copy based on image db_current_oci output 1](./images/second-db.png)
+      ![Add working copy based on image db_current_oci output 2](./images/second-db2.png)
 
 ## Task 3: Verify the working copies
 1. On the server:
@@ -85,7 +85,7 @@ In this lab, you will:
       ```
       rhpctl query workingcopy
       ```
-      ![](./images/verify-wc.png)
+      ![Query working copies](./images/verify-wc.png)
 
 2. On the client: password is always FPPll##123 unless you have changed it
 
@@ -96,17 +96,17 @@ In this lab, you will:
       ```
       sudo su - oracle
       ```
-      ![](./images/opc.png)
+      ![Login with opc user](./images/opc.png)
 
       ```
       cat /u01/app/oraInventory/ContentsXML/inventory.xml
       ```
-      ![](./images/inventory.png)
+      ![Check the contents of inventory.xml](./images/inventory.png)
 
 All the database homes are there! Now they are ready to run databases. You may now [proceed to the next lab](#next) and provision a database.
 
 ## Acknowledgements
 
 - **Author** - Ludovico Caldara
-- **Contributors** - Kamryn Vinson
-- **Last Updated By/Date** -  Kamryn Vinson, May 2021
+- **Contributors** - Kamryn Vinson - Philippe Fierens
+- **Last Updated By/Date** -  Philippe Fierens, March 2023
