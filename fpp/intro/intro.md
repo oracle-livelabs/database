@@ -14,10 +14,10 @@ FPP commands can be ran simultaneously on hundreds of targets, making possible t
 A single command line, or a single RESTful API call, replaces dozens or hundreds of manual tasks.
 Forget about boring and time-consuming patching campaigns: Fleet Patching and Provisioning gives you the automation, standardization and protection level that your auditors are looking for.
 
-Estimated Workshop Time:  4 hours
+Estimated Workshop Time:  2-3 hours
 
 Watch the video below for an overview on Oracle Fleet Patching and Provisioning.
-[](youtube:jFAOPGNpcoY)
+[Shows video giving an overview of FPP](youtube:jFAOPGNpcoY)
 
 ### About this Workshop
 

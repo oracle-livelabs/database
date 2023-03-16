@@ -44,7 +44,7 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
     -patchedwc WC_db_current_FPPC -dbname fpplive1_site1 \
     -sudouser opc -sudopath /bin/sudo -eval
     ```
-    ![](./images/move.png)
+    ![Shows the output of the rhpctl move -eval command above](./images/move.png)
 
   Because you have specified the correct groups when adding the working copy, this command succeeds.
   Otherwise, you might have seen an error similar to this:
@@ -64,7 +64,7 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
     -patchedwc WC_db_current_FPPC -dbname fpplive1_site1 \
     -sudouser opc -sudopath /bin/sudo
     ```
-  ![](./images/move2.png)
+  ![Shows the output of the rhpctl move command above](./images/move2.png)
 
 
 ## Task 3: Verify that the DB is patched and running in the new Oracle Home
@@ -77,7 +77,7 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
     ```
     sudo su - oracle
     ```
-  ![](./images/opc.png)
+  ![Login with opc user](./images/opc.png)
 
 
 2. Set the environment:
@@ -87,14 +87,14 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
     ORACLE_SID = [oracle] ? fpplive1site
     The Oracle base has been set to /u01/app/oracle
     ```
-  ![](./images/oraenv.png)
+  ![Set environment variables with oraenv](./images/oraenv.png)
 
 3. Verify the Oracle Restart configuration for the database:
 
     ```
     srvctl config database -db fpplive1_site1
     ```
-  ![](./images/srvctl.png)
+  ![Shows the output of the srvctl config command above](./images/srvctl.png)
 
   It is running in the new Oracle Home, the `srvctl` configuration has been adapted as well!
 
@@ -103,7 +103,7 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
     ```
     sqlplus / as sysdba
     ```
-    ![](./images/sql.png)
+    ![Logon with sqlplus](./images/sql.png)
 
     ```
     set lines 220
@@ -114,7 +114,7 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
     ```
     exit
     ```
-    ![](./images/exit.png)
+    ![Shows the patch level of the database](./images/exit.png)
 
 From the output you can see that the Database has been patched correctly.
 

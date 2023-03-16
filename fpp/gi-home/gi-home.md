@@ -8,8 +8,8 @@ Estimated lab time: 15 minutes
 ```
 rhpctl add workingcopy -help GRIDHOMEPROV
 ```
-![](./images/workingcopy.png)
-![](./images/workingcopy2.png)
+![Working copy command options](./images/workingcopy.png)
+![Working copy command options continued](./images/workingcopy2.png)
 
 ### Software Only provisioning
 If the target server already has a GI stack (either Oracle Restart or a full GI stack), then the new working copy is provisioned as Software Only: the existing stack is untouched.
@@ -62,7 +62,7 @@ In this lab, you will:
       ```
       wget  https://github.com/oracle-livelabs/database/raw/main/fpp/gi-home/files/fppc.rsp
       ```
-      ![](./images/download.png)
+      ![Output of download of fppc.rsp file](./images/download.png)
 
 ## Task 2: Provision the Restart environment on a new target using the response file
 1. On the FPP Server, run the following command to provision and configure the GI home on the target. The password is `FPPll##123`. (Est. 8 minutes)
@@ -73,9 +73,9 @@ In this lab, you will:
       -path /u01/app/grid/WC_gi_current_FPPC -user oracle -oraclebase /u01/app/oracle \
       -targetnode fppc -sudouser opc -sudopath /bin/sudo -ignoreprereq
       ```
-      ![](./images/provision.png)
-      ![](./images/provision2.png)
-      ![](./images/provision3.png)
+      ![Output of add workingcopy command part 1](./images/provision.png)
+      ![Output of add workingcopy command part 2](./images/provision2.png)
+      ![Output of add workingcopy command part 3](./images/provision3.png)
 
 ## Task 3: Connect to the target and verify the Restart Environment
 1. From either the FPP Server or your SSH client, connect as `opc` to the FPP target public IP address and become `oracle`. The password is FPPll##123
@@ -87,7 +87,7 @@ In this lab, you will:
       ```
       sudo su - oracle
       ```
-      ![](./images/opc.png)
+      ![Login with opc user](./images/opc.png)
 
 2. Set the environment.
 
@@ -97,14 +97,14 @@ In this lab, you will:
       ORACLE_HOME = [/home/oracle] ? /u01/app/grid/WC_gi_current_FPPC
       The Oracle base has been set to /u01/app/oracle
       ```
-      ![](./images/oraenv.png)
+      ![Set environment variables with oraenv](./images/oraenv.png)
 
 3. Verify that Restart is up and running:
 
       ```
       crsctl stat res -t
       ```
-      ![](./images/crsctl.png)
+      ![Show the output of crsctl stat res -t](./images/crsctl.png)
 
 Congratulations! You have successfully configured an Oracle Restart environment with a single command. Easy, huh? You may now [proceed to the next lab](#next).
 
