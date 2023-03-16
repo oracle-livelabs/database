@@ -8,6 +8,9 @@ Do note that this setup of Jenkins is NOT built for production purposes and is s
 
 Estimated Time: 15 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Preparing Jenkins and Configuring Webhooks](videohub:1_so2dr8hj)
+
 ### Objectives
 
 * Configure Jenkins Pipelines

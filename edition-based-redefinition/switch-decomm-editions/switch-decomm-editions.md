@@ -1,300 +1,137 @@
-## Switch to the new edition,Decommission the old edition and redefine the table
+# Switch to the new edition and decommission the old edition
 
-Now selected application containers can connect to the new edition using either a dedicated service or by issuing an `alter session` (either explicit or in the connection string).
-Once the application is validated, all the new sessions can switch to the new edition by changing the database default:
+## Introduction
 
-```
-ALTER DATABASE DEFAULT EDITION=V2;
-```
+In this lab, we will switch to the new edition `V2` and decommission the old edition `ORA$BASE`
 
-As `HR` user, we achieve that using the helper procedure previously created:
+Estimated lab time: 15 minutes
 
-```
-begin
-  admin.default_edition('V2');
-end;
-/
-```
+Watch the video below for a quick walk-through of the lab.
+[Switch to the new edition and decommission the old edition](videohub:1_w16td8d1)
 
-However, all the applications that are sensible to the change should explicitly set the edition so that reconnections will not cause any harm.
+### Objectives
 
-For this demo, we will integrate this step in a changelog that decommission the old edition.
+In this lab, we will learn
 
-The last changelog contains the SQL files that cleanup everything, drop the old edition and redefine the table without the `phone_number` column.
+- How to switch to the new edition `V2` and decommission the old edition `ORA$BASE`. 
 
-```
-hr.000001.alter_session.sql
-hr.000002.change_default_edition.sql
-hr.000003.drop_old_edition.sql
-hr.000004.drop_x_triggers.sql
-hr.000009.employees_create_interim.sql
-hr.000010.start_redef.sql
-hr.000011.copy_dependents.sql
-hr.000012.finish_redef_table.sql
-hr.000013.drop_interim_table.sql
-```
+- Use **Oracle Online Redefinition** (PL/SQL package `DBMS_REDEF`) to redefine the `employee` table online.
 
-### 1. Alter the session to use the new edition
+## Task 1: Verify all the scripts 
 
-For a new connection, the edition is still the default. Use the new one!
+1. We will review all the scripts of the second Liquibase changelog for better understanding. If you want to directly execute the changelog, skip **Task 1** and proceed to **Task 2** 
 
-```
-ALTER SESSION SET EDITION=V2;
-```
+    Now that the new edition is ready, instances of the new application version can use the new edition, using either a dedicated service or by issuing an `alter session`.
 
-### 2. Change the default edition
+    Once the application is validated, you can gradually roll over all the application servers, performing a truly rolling application upgrade.
+    You can also change the database default edition so that all new sessions will see the new one.
 
-For this step, we use again a helper procedure that we have defined previously, and that runs with DBA privileges.
+    However, all the applications that are sensitive to the change should explicitly set the edition, so that reconnections will not cause any harm.
 
-```
-begin
-  admin.default_edition('V2');
-end;
-/
-```
+    For this demo, we will integrate this step in a changelog that decommissions the old edition.
 
-Internally, the procedure just runs `execute immediate 'alter database default edition ='||edition_name;`
+    The last changelog contains the SQL files that clean up everything, drop the old edition and redefine the table `employees`without the `phone_number` column.
 
-### 3. Drop the old edition
+    All the scripts are available in **hr.00003.edition\_v2\_post_rollout** directory.
 
-Here we use a helper procedure again:
+    ```text
+    <copy>cd ~/changes/hr.00003.edition_v2_post_rollout</copy>
+    ```
 
-```
-declare
-  l_parent_edition dba_editions.edition_name%type;
-begin
-  select  PARENT_EDITION_NAME into l_parent_edition
-    from dba_editions where edition_name='V2';
-  admin.drop_edition(l_parent_edition);
-end;
-/
-```
+2. Alter session to use edition V2
 
-The user has a `grant select on dba_editions`. The `drop_edition` procedure will execute internally a `execute immediate 'DROP EDITION '||edition_name||' CASCADE`, then a `dbms_editions_utilities.clean_unusable_editions`.
+    ![Alter session](images/alter-session.png " ")
 
-### 4. Drop the cross-edition triggers
+3. Change the default edition to V2
 
-Keeping the cross-edition triggers when the previous edition is no longer in use will just add overhead to the table DMLs.
+    As the `HR` user, we can use the helper procedure previously created. Internally, the procedure runs `execute immediate 'alter database default edition ='||edition_name;`
 
-```
-alter trigger EMPLOYEES_REVXEDITION_TRG disable;
+    ![Change edition](images/change-edition.png " ")
 
-drop trigger EMPLOYEES_REVXEDITION_TRG;
+4. Drop the old edition
 
-alter trigger EMPLOYEES_FWDXEDITION_TRG disable;
+    **This step will fail if any session is still connected to the old edition.**
 
-drop trigger EMPLOYEES_FWDXEDITION_TRG;
-```
+    Here we use a helper procedure again:
 
-### 5. Redefine the Table: Create the interim table
+    ![Drop old edition](images/drop-old-edition.png " ")
 
-```
-create table employees$interim
-    ( employee_id    NUMBER(6)
-    , first_name     VARCHAR2(20)
-    , last_name      VARCHAR2(25)
-    , email          VARCHAR2(25)
-        , country_code          VARCHAR2(3)
-    , phone#   VARCHAR2(20)
-    , hire_date      DATE
-    , job_id         VARCHAR2(10)
-    , salary         NUMBER(8,2)
-    , commission_pct NUMBER(2,2)
-    , manager_id     NUMBER(6)
-    , department_id  NUMBER(4)
-    ) ;
+    The user has `grant select on dba_editions`. The `drop_edition` procedure will execute internally `execute immediate 'DROP EDITION '||edition_name||' CASCADE`, then `dbms_editions_utilities.clean_unusable_editions`.
 
-```
 
-### 6. Redefine the Table: Start the redefinition
+5. Drop the cross-edition triggers
 
-```
-declare
-  l_colmap varchar(512);
-begin
-  l_colmap :=
-    'employee_id
-    , first_name
-    , last_name
-    , email
-    , country_code
-    , phone#
-    , hire_date
-    , job_id
-    , salary
-    , commission_pct
-    , manager_id
-    , department_id';
+    Now that nobody uses the old columns, it is safe to drop the cross-edition triggers.
 
-  dbms_redefinition.start_redef_table (
-    uname        => user,
-    orig_table   => 'EMPLOYEES$0',
-    int_table    => 'EMPLOYEES$INTERIM',
-    col_mapping  => l_colmap
-  );
-end;
-/
-```
+    ![Drop triggers](images/drop-triggers.png " ")
 
-### 7. Redefine the Table: Copy the table dependents
+6. Redefine the Table: Create the interim table
 
-```
-declare
-  nerrors number;
-begin
-  dbms_redefinition.copy_table_dependents
-    ( user, 'EMPLOYEES$0', 'EMPLOYEES$INTERIM',
-      copy_indexes => dbms_redefinition.cons_orig_params,
-      num_errors => nerrors );
-  if nerrors > 0  then
-    raise_application_error(-20000,'Errors in copying the dependents');
-  end if;
-end;
-/
-```
+    ![Create interim table](images/create-interim-table.png " ")
 
-### 8. Redefine the Table: Finish the redefinition
+7. Redefine the Table: Start the redefinition
 
-```
-begin
-  dbms_redefinition.finish_redef_table ( user, 'EMPLOYEES$0', 'EMPLOYEES$INTERIM');
-  dbms_utility.compile_schema(schema => user, compile_all => FALSE);
-end;
-/
-```
+    ![Start redefinition](images/start-redef.png " ")
 
-### 9. Redefine the table: Drop the interim table
+8. Redefine the Table: Copy the table dependents
 
-```
-drop table employees$interim cascade constraints;
-```
+    ![Copy table dependents](images/copy-table-dependents.png " ")
 
-The cascade constraints is necessary for the self-referencing foreign key (employee->manager).
+9. Redefine the Table: Finish the redefinition
 
-### Run the changelog with liquibase
+    ![Finish redefinition](images/finish-redef.png " ")
 
-The changelog file will look similar to this:
+10. Redefine the table: Drop the interim table
 
-```
-<?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog
-  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <changeSet author="lcaldara" id="hr.000001.alter_session" runAlways="true">
-      <sqlFile dbms="oracle" endDelimiter=";"
-               path="hr.00003.edition_v2_post_rollout/hr.000001.alter_session.sql"
-               relativeToChangelogFile="true" splitStatements="false" stripComments="false"/>
-    </changeSet>
-    <changeSet author="lcaldara" id="hr.000002.change_default_edition">
-      <sqlFile dbms="oracle" endDelimiter=";"
-               path="hr.00003.edition_v2_post_rollout/hr.000002.change_default_edition.sql"
-               relativeToChangelogFile="true" splitStatements="false" stripComments="false"/>
-    </changeSet>
-    <changeSet author="lcaldara" id="hr.000003.drop_old_edition">
-      <sqlFile dbms="oracle" endDelimiter=";"
-               path="hr.00003.edition_v2_post_rollout/hr.000003.drop_old_edition.sql"
-               relativeToChangelogFile="true" splitStatements="false" stripComments="false"/>
-    </changeSet>
-    <changeSet author="lcaldara" id="hr.000004.drop_x_triggers">
-      <sqlFile dbms="oracle" endDelimiter=";"
-               path="hr.00003.edition_v2_post_rollout/hr.000004.drop_x_triggers.sql"
-               relativeToChangelogFile="true" splitStatements="true" stripComments="false"/>
-    </changeSet>
-    <changeSet author="lcaldara" id="hr.000009.employees_create_interim">
-      <sqlFile dbms="oracle" endDelimiter=";"
-               path="hr.00003.edition_v2_post_rollout/hr.000009.employees_create_interim.sql"
-               relativeToChangelogFile="true" splitStatements="false" stripComments="false"/>
-    </changeSet>
-    <changeSet author="lcaldara" id="hr.000010.start_redef">
-      <sqlFile dbms="oracle" endDelimiter=";"
-               path="hr.00003.edition_v2_post_rollout/hr.000010.start_redef.sql"
-               relativeToChangelogFile="true" splitStatements="false" stripComments="false"/>
-    </changeSet>
-    <changeSet author="lcaldara" id="hr.000011.copy_dependents">
-      <sqlFile dbms="oracle" endDelimiter=";"
-               path="hr.00003.edition_v2_post_rollout/hr.000011.copy_dependents.sql"
-               relativeToChangelogFile="true" splitStatements="false" stripComments="false"/>
-    </changeSet>
-    <changeSet author="lcaldara" id="hr.000012.finish_redef_table">
-      <sqlFile dbms="oracle" endDelimiter=";"
-               path="hr.00003.edition_v2_post_rollout/hr.000012.finish_redef_table.sql"
-               relativeToChangelogFile="true" splitStatements="false" stripComments="false"/>
-    </changeSet>
-    <changeSet author="lcaldara" id="hr.000013.drop_interim_table">
-      <sqlFile dbms="oracle" endDelimiter=";"
-               path="hr.00003.edition_v2_post_rollout/hr.000013.drop_interim_table.sql"
-               relativeToChangelogFile="true" splitStatements="false" stripComments="false"/>
-    </changeSet>
-</databaseChangeLog>
-```
+    ![Drop interim table](images/drop-interim.png " ")
 
-Let's run it:
+    The clause "cascade constraints" is necessary for the self-referencing foreign key (employee->manager).
 
-```
-$ sql /nolog
+11. Run the changelog with Liquibase
 
-SQLcl: Release 21.4 Production on Mon Mar 14 15:18:04 2022
+    The changelog file is `hr.00003.edition_v2_post_rollout.xml`, available in the **changes** directory.
 
-Copyright (c) 1982, 2022, Oracle.  All rights reserved.
+    ![v2-post-rollout](images/v2-post-rollout.png " ")
 
-SQL> set cloudconfig ../../adb_wallet.zip
-SQL> connect hr/*****@demoadb_medium
-Connected.
-SQL> lb update -changelog hr.00003.edition_v2_post_rollout.xml
+## Task 2: Run the change log 
 
-ScriptRunner Executing: ALTER SESSION SET EDITION=V2
-Liquibase Executed:ALTER SESSION SET EDITION=V2
-ScriptRunner Executing: begin
-  admin.default_edition('V2');
-end;
-/
-Liquibase Executed:begin
-  admin.default_edition('V2');
-end;
-/
-ScriptRunner Executing: declare
-  l_parent_edition dba_editions.edition_name%type;
-begin
-  select  PARENT_EDITION_NAME into l_parent_edition
-    from dba_editions where edition_name='V2';
-  admin.drop_edition(l_parent_edition);
-end;
-/
-Liquibase Executed:declare
-  l_parent_edition dba_editions.edition_name%type;
-begin
-  select  PARENT_EDITION_NAME into l_parent_edition
-    from dba_editions where edition_name='V2';
-  admin.drop_edition(l_parent_edition);
-end;
-/
-ScriptRunner Executing: alter trigger EMPLOYEES_REVXEDITION_TRG disable
-Liquibase Executed:alter trigger EMPLOYEES_REVXEDITION_TRG disable
-ScriptRunner Executing: drop trigger EMPLOYEES_REVXEDITION_TRG
-Liquibase Executed:drop trigger EMPLOYEES_REVXEDITION_TRG
-ScriptRunner Executing: alter trigger EMPLOYEES_FWDXEDITION_TRG disable
-Liquibase Executed:alter trigger EMPLOYEES_FWDXEDITION_TRG disable
-ScriptRunner Executing: drop trigger EMPLOYEES_FWDXEDITION_TRG
-Liquibase Executed:drop trigger EMPLOYEES_FWDXEDITION_TRG
-ScriptRunner Executing: create table employees$interim
+1. The home directory will be different in your environment
 
-[...]
+    ![Cloud Shell home](images/cloudshell-home.png " ")
 
-ScriptRunner Executing: drop table employees$interim cascade constraints
-Liquibase Executed:drop table employees$interim cascade constraints
-######## ERROR SUMMARY ##################
-Errors encountered:0
+    ```text
+    <copy>cd ~</copy>
+    <copy>sql /nolog</copy>
+    ```
 
-######## END ERROR SUMMARY ##################
-SQL>
-```
 
-You have successfully executed the verified the editions in  the HR schema [proceed to the next lab](#next)
+    ```text
+    <copy>set cloudconfig ebronline.zip</copy>
+    <copy>connect hr/Welcome#Welcome#123@ebronline_medium</copy>
+    <copy>show user</copy>
+    <copy>pwd</copy>
+    ```
+
+    ![sqlcl-hr](images/sqlcl-hr.png " ")
+
+2. Run the changelog. **Remember, in this lab, we are the only user, so we can set the edition to V2 and immediately drop the old one. In real-world environments, you will need to change the default edition first, and ensure that no old sessions use the old edition, or you will not be able to drop it!**
+
+    ```text
+    <copy>cd changes</copy>
+    <copy>alter session set edition=V2;</copy>
+    <copy>lb update -changelog-file hr.00003.edition_v2_post_rollout.xml</copy>
+    ```
+    ![execute-changelog](images/execute-changelog.png " ")
+
+    Verify the outcome of the deployment. If you see the following error, it means you have old sessions connected to the old edition. Disconnect the sessions and retry.
+
+    ![execute-error](images/execute-error.png " ")
+
+You have successfully switched to the new edition, decommissioned the old edition and redefined the `employees` table online.
+
+This is the end of this LiveLabs. We hope you enjoyed it!
 
 ## Acknowledgements
 
-- **Author** - Suraj Ramesh
-- **Contributors** -
-- **Last Updated By/Date** -01-Jul-2022
+- Authors - Ludovico Caldara and Suraj Ramesh
+- Last Updated By/Date - Suraj Ramesh, Feb 2023

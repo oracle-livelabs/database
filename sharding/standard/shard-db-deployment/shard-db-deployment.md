@@ -21,7 +21,7 @@ Following is the topology used for System Managed Sharding we will create in thi
 *Estimated Lab Time:* 60 minutes.
 
 Watch the video below for a quick walk through of the lab.
-[](youtube:8r3cvL5s7nk)
+[Deployment the Sharded Database](videohub:1_m1amf8pg)
 
 ### Objectives
 
@@ -368,7 +368,7 @@ In this workshop we choose to co-locate the shard director software on the same 
     SQL> <copy>connect / as sysdba</copy>
     Connected.
 
-    SQL> archive log list
+    SQL> <copy>archive log list</copy>
     Database log mode	       No Archive Mode
     Automatic archival	       Disabled
     Archive destination	       USE_DB_RECOVERY_FILE_DEST
@@ -449,7 +449,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 
 ## Task 3: Setup Shard Databases
 
-The following steps need to do in all the shard database side. We only provide steps for shard1.
+The following steps need to be done in all the shard databases. We only provide steps for shard1.
 
 1. Duplicate the remote desktop browser tab connecting to host *cata* and replace the IP address in the address bar with the Public IP address of host *shd1*.
 
@@ -898,7 +898,7 @@ The following steps need to do in all the shard database side. We only provide s
     DB Unique Name: shd1_shdpdb1
     The operation completed successfully
 
-    GDSCTL> <copy>add shard -connect shd2:1521/shdpdb2.livelabs.oraclevcn.com -pwd Ora_DB4U -shardgroup shardgroup_primary -cdb shd2</copy>
+    GDSCTL> <copy>add shard -connect shd2:1521/shdpdb2 -pwd Ora_DB4U -shardgroup shardgroup_primary -cdb shd2</copy>
     INFO: Data Guard shard validation requested.
     INFO: Database role is PRIMARY.
     INFO: Database name is SHD2.
