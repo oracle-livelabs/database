@@ -7,15 +7,14 @@ This lab walks you through the steps to get started using the Oracle Autonomous 
 Estimated lab time: 10 minutes
 
 Watch the video below for a quick walk-through of the lab.
-[Provision an ADB Instance](videohub:1_22f82n6x)
-
+[Provision an Oracle Autonomous Database](videohub:1_94b12e31)
 >**Note:** Video has the steps for ADW, the steps are the same for creating an ATP database.
 
 ### Objectives
 
-In this lab, you will:
+In this lab, you will
 
-- Learn how to provision a new Autonomous Database
+- Provision a new Autonomous Database
 
 ### Prerequisites
 

@@ -6,9 +6,16 @@ In this lab, we will switch to the new edition `V2` and decommission the old edi
 
 Estimated lab time: 15 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Switch to the new edition and decommission the old edition](videohub:1_w16td8d1)
+
 ### Objectives
 
-In this lab, we will switch to the new edition `V2` and decommission the old edition `ORA$BASE`. We will also use **Oracle Online Redefinition** (PL/SQL package `DBMS_REDEF`) to redefine the `employee` table online.
+In this lab, we will learn
+
+- How to switch to the new edition `V2` and decommission the old edition `ORA$BASE`. 
+
+- Use **Oracle Online Redefinition** (PL/SQL package `DBMS_REDEF`) to redefine the `employee` table online.
 
 ## Task 1: Verify all the scripts 
 
@@ -120,6 +127,12 @@ In this lab, we will switch to the new edition `V2` and decommission the old edi
 
     ![execute-error](images/execute-error.png " ")
 
+    You can use the below command to identify the old sessions which are connected to HR schema using the below query and disconnect from those sessions.In case if you don't have access to v$session view, please check with your DBA to take necessary actions.
+
+    ```text
+    <copy>select sid,serial#,osuser,machine from v$session;</copy>
+    ```
+    
 You have successfully switched to the new edition, decommissioned the old edition and redefined the `employees` table online.
 
 This is the end of this LiveLabs. We hope you enjoyed it!

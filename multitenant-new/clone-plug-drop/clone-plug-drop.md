@@ -53,7 +53,7 @@ In this first task, you will create and explore a new pluggable database **PDB2*
     </copy>
     ```
 
-    ![](./images/task1.2-connectcdb1.png " ")
+    ![Screenshot of terminal output](./images/task1.2-connectcdb1.png " ")
 
 3. Create a script to check to see who you are connected as. At any point in the lab you can run this script to see who or where you are connected. We'll save this script for future use and call it "whoami.sql".
 
@@ -86,7 +86,7 @@ In this first task, you will create and explore a new pluggable database **PDB2*
     </copy>
     ```
 
-   ![](./images/task1.3-whoisconnected.png " ")
+   ![Screenshot of terminal output](./images/task1.3-whoisconnected.png " ")
 
 
 4. Create a pluggable database **PDB2**.
@@ -106,7 +106,7 @@ In this first task, you will create and explore a new pluggable database **PDB2*
     </copy>
     ```
 
-    ![](./images/task1.4-createpdb2.png " ")
+    ![Screenshot of terminal output](./images/task1.4-createpdb2.png " ")
 
 
 5. Change the session to point to **PDB2**.
@@ -115,7 +115,7 @@ In this first task, you will create and explore a new pluggable database **PDB2*
     <copy>alter session set container = PDB2;</copy>
     ```
 
-    ![](./images/task1.5-altertopdb2.png " ")
+    ![Screenshot of terminal output](./images/task1.5-altertopdb2.png " ")
 
 6. Grant **PDB_ADMIN** the necessary privileges and create the **USERS** tablespace for **PDB2**.
 
@@ -129,7 +129,7 @@ In this first task, you will create and explore a new pluggable database **PDB2*
     </copy>
     ````
 
-   ![](./images/task1.6-grantpdbadminprivs.png " ")
+   ![Screenshot of terminal output](./images/task1.6-grantpdbadminprivs.png " ")
 
 7. Connect as **PDB_ADMIN** to **PDB2**.
 
@@ -147,7 +147,7 @@ In this first task, you will create and explore a new pluggable database **PDB2*
     </copy>
     ```
 
-   ![](./images/task1.8-createtable_pdbadmin.png " ")
+   ![Screenshot of terminal output](./images/task1.8-createtable_pdbadmin.png " ")
 
 9. Change back to **SYS** in the container database **CDB1** and show the tablespaces and datafiles created.
 
@@ -177,7 +177,7 @@ In this first task, you will create and explore a new pluggable database **PDB2*
     </copy>
     ```
 
-    ![](./images/task1.9-viewdbfiles.png " ")
+    ![Screenshot of terminal output](./images/task1.9-viewdbfiles.png " ")
 
 ## Task 2: Clone a PDB
 This lab covers the basics of how to clone a Pluggable Database (PDB).
@@ -206,7 +206,7 @@ The task you will do in this step is:
     show pdbs</copy>
     ```
 
-   ![](./images/task2.2-alterpdbreadonly.png " ")
+   ![Screenshot of terminal output](./images/task2.2-alterpdbreadonly.png " ")
 
 
 3. Create a pluggable database **PDB3** from the read only database **PDB2**.
@@ -219,7 +219,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-   ![](./images/task2.3-clonepdb2topdb3.png " ")
+   ![Screenshot of terminal output](./images/task2.3-clonepdb2topdb3.png " ")
 
 4. Change **PDB2** back to read write.
 
@@ -229,7 +229,7 @@ The task you will do in this step is:
     ```
 
 
-   ![](./images/task2.4-pdb2readwrite.png " ")
+   ![Screenshot of terminal output](./images/task2.4-pdb2readwrite.png " ")
 
 5. Connect to **PDB2** and show the table **MY_TAB**, then run the same SQL against **PDB3** to demonstrate that this is an exact copy of the source PDB.
 
@@ -249,7 +249,7 @@ The task you will do in this step is:
     <copy>select * from my_tab;</copy>
     ```
 
-   ![](./images/task2.5-comparepdb2pdb3.png " ")
+   ![Screenshot of terminal output](./images/task2.5-comparepdb2pdb3.png " ")
 
 ## Task 3: Unplug a PDB
 This section reviews how to unplug a PDB from its container database (CDB) and save the PDB metadata into an XML manifest file.
@@ -291,7 +291,7 @@ The task you will do in this step is:
     ```
 
 
-   ![](./images/task3.2-unplugpdb3.png " ")
+   ![Screenshot of terminal output](./images/task3.2-unplugpdb3.png " ")
 
 3. Remove **PDB3** from **CDB1** but keep the PDB datafiles for future use.
 
@@ -301,7 +301,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-   ![](./images/task3.3-droppdb3.png " ")
+   ![Screenshot of terminal output](./images/task3.3-droppdb3.png " ")
 
 4. Show the datafiles in **CDB1** and note that files for PDB3 are no longer part of the container.
     ```
@@ -328,7 +328,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-    ![](./images/task3.4-cdb1dbfiles.png " ")
+    ![Screenshot of terminal output](./images/task3.4-cdb1dbfiles.png " ")
 
 5. Look at the XML file for the pluggable database **PDB3**.  Take some time to review the information that is contained in a PDB manifest.
 
@@ -336,7 +336,7 @@ The task you will do in this step is:
     <copy>host cat /opt/oracle/oradata/CDB1/pdb3.xml</copy>
     ```
 
-    ![](./images/task3.5-catxmlfile.png " ")
+    ![Screenshot of terminal output](./images/task3.5-catxmlfile.png " ")
 
 ## Task 4: Plug in a PDB
 This section looks at how to plug in a PDB.
@@ -365,7 +365,7 @@ The task you will do in this step is:
     <copy>show pdbs</copy>
     ```
 
-    ![](./images/task4.1-connectcdb2.png " ")
+    ![Screenshot of terminal output](./images/task4.1-connectcdb2.png " ")
 
 2. Check the compatibility of **PDB3** with **CDB2**.  If there are no errors then the PDB is compatible with the CDB.
 
@@ -383,7 +383,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-    ![](./images/task4.2-pdbcompatible.png " ")
+    ![Screenshot of terminal output](./images/task4.2-pdbcompatible.png " ")
 
 3. Plug **PDB3** into **CDB2**, moving the PDB's datafiles under the CDB2 storage location.
 
@@ -403,7 +403,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-    ![](./images/task4.3-pluginpdb3.png " ")
+    ![Screenshot of terminal output](./images/task4.3-pluginpdb3.png " ")
 
 4. Review the datafiles in **CDB2**.
 
@@ -433,7 +433,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-    ![](./images/task4.4-cdb2datafiles.png " ")
+    ![Screenshot of terminal output](./images/task4.4-cdb2datafiles.png " ")
 
 5. Connect as **PDB\_ADMIN** to **PDB3** and look at **MY\_TAB**.
 
@@ -445,7 +445,7 @@ The task you will do in this step is:
     <copy>select * from my_tab;</copy>
     ```
 
-    ![](./images/task4.5-querymytab.png " ")
+    ![Screenshot of terminal output](./images/task4.5-querymytab.png " ")
 
 ## Task 5: Drop a PDB
 This section looks at how to drop a pluggable database.
@@ -485,7 +485,7 @@ The task you will do in this step is:
     <copy>show pdbs</copy>
     ```
 
-    ![](./images/task5.2-droppdb3.png " ")
+    ![Screenshot of terminal output](./images/task5.2-droppdb3.png " ")
 
 
 ## Task 6: Clone an unplugged PDB
@@ -518,7 +518,7 @@ The tasks you will do in this step are:
     <copy>show pdbs</copy>
     ```
 
-    ![](./images/task6.2-pdb2readonly.png " ")
+    ![Screenshot of terminal output](./images/task6.2-pdb2readonly.png " ")
 
 3. Create a pluggable database **GOLDPDB** from the read only database **PDB2** and then open it.
 
@@ -534,7 +534,7 @@ The tasks you will do in this step are:
     <copy>show pdbs</copy>
     ```
 
-    ![](./images/task6.3-creategoldpdb.png " ")
+    ![Screenshot of terminal output](./images/task6.3-creategoldpdb.png " ")
 
 4. Change **PDB2** back to read write.
 
@@ -546,7 +546,7 @@ The tasks you will do in this step are:
     <copy>show pdbs</copy>
     ```
 
-    ![](./images/task6.4-pdb2readwrite.png " ")
+    ![Screenshot of terminal output](./images/task6.4-pdb2readwrite.png " ")
 
 5. Unplug your gold copy PDB **GOLDPDB** from **CDB1**.
 
@@ -564,7 +564,7 @@ The tasks you will do in this step are:
     <copy>show pdbs</copy>
     ```
 
-    ![](./images/task6.5-unpluggoldpdb.png " ")
+    ![Screenshot of terminal output](./images/task6.5-unpluggoldpdb.png " ")
 
 6. Remove **GOLDPDB** from **CDB1** and keep the datafiles for future use.
 
@@ -576,7 +576,7 @@ The tasks you will do in this step are:
     <copy>show pdbs</copy>
     ```
 
-    ![](./images/task6.6-dropgoldpdb.png " ")
+    ![Screenshot of terminal output](./images/task6.6-dropgoldpdb.png " ")
 
 7. We want to clone our gold image PDB into another container database. Connect to **CDB2** and validate **GOLDPDB** is compatible with **CDB2**.
 
@@ -598,7 +598,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task6.7-checkcompat.png " ")
+    ![Screenshot of terminal output](./images/task6.7-checkcompat.png " ")
 
 8. Create a clone of our unplugged **GOLDPDB** as **COPYPDB1**.
 
@@ -615,7 +615,7 @@ The tasks you will do in this step are:
     <copy>show pdbs</copy>
     ```
 
-    ![](./images/task6.8-createcopypdb1.png " ")
+    ![Screenshot of terminal output](./images/task6.8-createcopypdb1.png " ")
 
 9. Create another clone of **GOLDPDB** as **COPYPDB2**.
 
@@ -632,7 +632,7 @@ The tasks you will do in this step are:
     <copy>show pdbs</copy>
     ```
 
-    ![](./images/task6.9-createcopypdb2.png " ")
+    ![Screenshot of terminal output](./images/task6.9-createcopypdb2.png " ")
 
 10. Open all pluggable databases in the container database **CDB2**.
 
@@ -644,7 +644,7 @@ The tasks you will do in this step are:
     <copy>show pdbs</copy>
     ```
 
-    ![](./images/task6.10-openallpdbs.png " ")
+    ![Screenshot of terminal output](./images/task6.10-openallpdbs.png " ")
 
 11. Look carefully at the GUID for the two cloned databases. Since they are cloned from the same unplugged PDB, they are very similar.
 
@@ -657,7 +657,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task6.11-showguids.png " ")
+    ![Screenshot of terminal output](./images/task6.11-showguids.png " ")
 
 ## Task 7: PDB hot clones
 This section looks at how to "hot clone" a pluggable database. Since Database 12.2, the capability exists to clone a PDB while it is open read write.
@@ -712,7 +712,7 @@ What you will do in this task:
     </copy>
     ```
 
-    ![](./images/task7.2-createoe.png " ")
+    ![Screenshot of terminal output](./images/task7.2-createoe.png " ")
 
 3. Connect as **SOE** and create the **sale_orders** table.
 
@@ -729,7 +729,7 @@ What you will do in this task:
     </copy>
     ```
 
-    ![](./images/task7.3-soetable.png " ")
+    ![Screenshot of terminal output](./images/task7.3-soetable.png " ")
 
  4. Open a new terminal window or tab within your remote desktop session, then navigate to */home/oracle/labs/multitenant* and execute *write-load.sh*. Keep this window open and running throughout for the rest of this lab.
 
@@ -741,7 +741,7 @@ What you will do in this task:
     <copy>./write-load.sh</copy>
     ```
 
-    ![](./images/task7.4-writeload.png " ")
+    ![Screenshot of terminal output](./images/task7.4-writeload.png " ")
 
     Leave this window open and running for the next few steps in this lab.
 
@@ -759,7 +759,7 @@ What you will do in this task:
     <copy>alter pluggable database oe_dev open;</copy>
     ```
 
-    ![](./images/task7.5-createoe_dev.png " ")
+    ![Screenshot of terminal output](./images/task7.5-createoe_dev.png " ")
 
 6. Connect as **SOE** to **OE\_DEV** and check the number of records in the **sale\_orders** table.
 
@@ -771,7 +771,7 @@ What you will do in this task:
     <copy>select count(*) from sale_orders;</copy>
     ```
 
-    ![](./images/task7.6-rowcountoedev.png " ")
+    ![Screenshot of terminal output](./images/task7.6-rowcountoedev.png " ")
 
 7. Connect as **SOE** to **OE** and check the number of records in the **sale_orders** table. Since the load script is running against this database, there should be more rows in the table than in the PDB you created as a hot clone of **OE**.
 
@@ -783,7 +783,7 @@ What you will do in this task:
     <copy>select count(*) from sale_orders;</copy>
     ```
 
-    ![](./images/task7.7-rowcountoe.png " ")
+    ![Screenshot of terminal output](./images/task7.7-rowcountoe.png " ")
 
 8. Close and remove the **OE_DEV** pluggable database.
 
@@ -799,7 +799,7 @@ What you will do in this task:
     <copy>drop pluggable database oe_dev including datafiles;</copy>
     ```
 
-    ![](./images/task7.8-dropoedev.png " ")
+    ![Screenshot of terminal output](./images/task7.8-dropoedev.png " ")
 
 9. Leave the **OE** pluggable database open with the load running against it for the rest of the steps in this lab.
 
@@ -841,7 +841,7 @@ The tasks you will do in this step are:
     ```
     <copy>show pdbs</copy>
     ```
-    ![](./images/task8.2-createoerefresh.png " ")
+    ![Screenshot of terminal output](./images/task8.2-createoerefresh.png " ")
 
 3. Connect as **SOE** to the pluggable database **OE\_REFRESH** and count the number of records in the **sale\_orders** table.
 
@@ -853,7 +853,7 @@ The tasks you will do in this step are:
     <copy>select count(*) from sale_orders;</copy>
     ```
 
-    ![](./images/task8.3-rowcountoerefresh.png " ")
+    ![Screenshot of terminal output](./images/task8.3-rowcountoerefresh.png " ")
 
 4. Close the pluggable database **OE_REFRESH** and refresh it from the **OE** pluggable database.
 
@@ -877,7 +877,7 @@ The tasks you will do in this step are:
     <copy>alter pluggable database oe_refresh open read only;</copy>
     ```
 
-    ![](./images/task8.4-refreshoerefresh.png " ")
+    ![Screenshot of terminal output](./images/task8.4-refreshoerefresh.png " ")
 
 5. Connect as **SOE** to the pluggable database **OE\_REFRESH** and count the number of records in the **sale\_orders** table. You should see the number of records has changed following the refresh from the source PDB.
 
@@ -889,7 +889,7 @@ The tasks you will do in this step are:
     <copy>select count(*) from sale_orders;</copy>
     ```
 
-    ![](./images/task8.5-rowcountoerefresh.png " ")
+    ![Screenshot of terminal output](./images/task8.5-rowcountoerefresh.png " ")
 
 7. Leave the **OE** pluggable database open with the load running against it for the rest of this lab.
 
@@ -919,7 +919,7 @@ The two main requirements for snapshot copy to work on our Linux filesystem are:
     </copy>
     ```
 
-    ![](./images/task9.1-setenvcdb2.png " ")
+    ![Screenshot of terminal output](./images/task9.1-setenvcdb2.png " ")
 
 2. Launch SQLcl, connect to CDB2 as SYSDBA. Set the SQLcl formatting to make the on-screen output easier to read. Run the "whoami" script to verify the CDB connection.
     ```
@@ -935,7 +935,7 @@ The two main requirements for snapshot copy to work on our Linux filesystem are:
     </copy>
     ```
 
-    ![](./images/task9.2-connectcdb2.png " ")
+    ![Screenshot of terminal output](./images/task9.2-connectcdb2.png " ")
 
 3. Show the status of the PDBs and also verify the setting of the CLONEDB initialization parameter.
 
@@ -946,7 +946,7 @@ The two main requirements for snapshot copy to work on our Linux filesystem are:
     </copy>
     ```
 
-    ![](./images/task9.3-showparamclonedb.png " ")
+    ![Screenshot of terminal output](./images/task9.3-showparamclonedb.png " ")
 
 
 4. Set the static initialization parameter CLONEDB = TRUE and restart CDB2.
@@ -960,9 +960,9 @@ The two main requirements for snapshot copy to work on our Linux filesystem are:
     </copy>
     ```
 
-    ![](./images/task9.4-restartcdb2.png " ")
+    ![Screenshot of terminal output](./images/task9.4-restartcdb2.png " ")
 
-5. Snapshot Copy PDBs must be created from a read-only source, so open PDB **OE\_REFRESH** read only and create a Snapshot Copy PDB named **OE_SNAP**.  
+5. On our standard Linux filesystem, a Snapshot Copy PDB must be created from a read-only source, so open PDB **OE\_REFRESH** read only and create a Snapshot Copy PDB named **OE_SNAP**.  
 
     ```
     <copy>
@@ -974,7 +974,7 @@ The two main requirements for snapshot copy to work on our Linux filesystem are:
     </copy>
     ```
 
-    ![](./images/task9.5-createpdbsnap.png " ")
+    ![Screenshot of terminal output](./images/task9.5-createpdbsnap.png " ")
 
 6. A PDB Snapshot Copy is a "thin" clone that reads from the source PDB but any DML changes will be persisted in the snapshot copy PDB. Insert a row into the **OE_SNAP** database.
 
@@ -988,7 +988,7 @@ The two main requirements for snapshot copy to work on our Linux filesystem are:
     </copy>
     ```
 
-    ![](./images/task9.6-dmlpdbsnap.png " ")
+    ![Screenshot of terminal output](./images/task9.6-dmlpdbsnap.png " ")
 
 7. Now generate a couple of OS commands to show that the **OE\_SNAP** PDB uses a fraction of the space compared to the source **OE_REFRESH** database.
 
@@ -1003,11 +1003,11 @@ The two main requirements for snapshot copy to work on our Linux filesystem are:
     </copy>
     ```
 
-    ![](./images/task9.7-genhostdu.png " ")
+    ![Screenshot of terminal output](./images/task9.7-genhostdu.png " ")
 
 8. Copy and paste each of the query output lines separately, to see the difference in disk space consumed between the "thin" PDB Snapshot Copy and the source PDB.
 
-    ![](./images/task9.8-duoutput.png " ")
+    ![Screenshot of terminal output](./images/task9.8-duoutput.png " ")
 
 9. Close and remove the **OE\_REFRESH** and **OE_SNAP** pluggable databases.
 
@@ -1022,7 +1022,7 @@ The two main requirements for snapshot copy to work on our Linux filesystem are:
     </copy>
     ```
 
-    ![](./images/task9.9-pdbcleanup.png " ")
+    ![Screenshot of terminal output](./images/task9.9-pdbcleanup.png " ")
 
 
 
@@ -1050,7 +1050,7 @@ The tasks you will do in this step are:
     <copy>alter system set local_listener='LISTENER_CDB1' scope=both;</copy>
     ```
 
-    ![](./images/task10.2-changelistener.png " ")
+    ![Screenshot of terminal output](./images/task10.2-changelistener.png " ")
 
 3. Connect to **CDB2** using the shared listener and relocate **OE** using the database link **oe@cdb1_link**.  
 
@@ -1064,7 +1064,7 @@ The tasks you will do in this step are:
     show pdbs</copy>
     ```
 
-    ![](./images/task10.3-relocateoe.png " ")
+    ![Screenshot of terminal output](./images/task10.3-relocateoe.png " ")
 
 3. Connect to **CDB1** and see what pluggable databases exist there.
 
@@ -1076,7 +1076,7 @@ The tasks you will do in this step are:
     <copy>show pdbs</copy>
     ```
 
-    ![](./images/task10.4-checkcdb1.png " ")
+    ![Screenshot of terminal output](./images/task10.4-checkcdb1.png " ")
 
 4.  Check the other terminal window where the load program is running. After a timeout, the load program will resume on its own. If you don't want to wait, enter CTRL-C to break out of the connection timeout and the load program should continue. Note that the output now shows it is connected to the database in container **CDB2**. In real-world scenarios, Oracle customers may be able to leverage **Application Continuity**. Oracle **Application Continuity** masks outages from end users and applications by recovering the in-flight work for impacted database sessions following outages. You can learn more about **Application Continuity** [at the Oracle Application Continuity web page](https://www.oracle.com/database/technologies/high-availability/app-continuity.html).  
 
@@ -1092,7 +1092,7 @@ The tasks you will do in this step are:
     <copy>alter system set local_listener='LISTENER_CDB2' scope=both;</copy>
     ```
 
-    ![](./images/task10.6-resetlistener.png " ")
+    ![Screenshot of terminal output](./images/task10.6-resetlistener.png " ")
 
 ## Task 11: Lab cleanup
 
@@ -1109,7 +1109,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task11.1-labcleanup.png " ")
+    ![Screenshot of terminal output](./images/task11.1-labcleanup.png " ")
 
 Now you've had a chance to try out the Multitenant option. You were able to create, clone, plug and unplug a pluggable database. You were then able to accomplish some advanced tasks, such as hot cloning and PDB relocation, that you could leverage to more easily maintain a large multitenant environment.
 
@@ -1119,4 +1119,4 @@ Please *proceed to the next lab*.
 
 - **Author** - Patrick Wheeler, VP, Multitenant Product Management
 - **Contributors** -  Joseph Bernens, David Start, Anoosha Pilli, Brian McGraw, Quintin Hill, Rene Fontcha
-- **Last Updated By/Date** - Joseph Bernens, Principal Solution Engineer, NACT Solution Engineering / February 2023
+- **Last Updated By/Date** - Joseph Bernens, Principal Solution Engineer, NACT Solution Engineering / March 2023
