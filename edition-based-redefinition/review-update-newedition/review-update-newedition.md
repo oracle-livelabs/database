@@ -2,15 +2,19 @@
 
 ## Introduction
 
-In this lab,you will review the new edition scripts to create a new edition and split the column
+In this lab, you will review the new edition scripts to create a new edition and split the column
 
 Estimated lab time: 10 minutes
 
-## Objectives
+### Objectives
 
-In this lab,you will review the new edition scripts to create a new edition and split the column `employees.phone_number` to `country_code` and `phone#`.
+In this lab,you will
+
+- Review the new edition scripts to create a new edition and split the column `employees.phone_number` to `country_code` and `phone#`. 
 
 ## Task 1: Review the scripts for the new edition
+
+We have pre-created these scripts and the scope of the lab is not to explain the logic of the scripts.
 
 1. From the Cloud Shell home directory, navigate to *changes/hr.00002.edition_v2* folder
 

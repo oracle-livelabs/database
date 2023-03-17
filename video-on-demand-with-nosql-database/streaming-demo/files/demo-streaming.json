@@ -1,0 +1,400 @@
+{
+	"info": {
+		"_postman_id": "7f5e87fa-e7b5-4165-8bdd-4e14d065bbb0",
+		"name": "Demo Streaming",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Query Streams",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ExampleQuery {\r\n  streams {\r\n    id\r\n    info {\r\n      firstName\r\n      lastName\r\n      country\r\n      shows {\r\n        showName\r\n        showId\r\n        type\r\n        numSeasons\r\n        seriesInfo {\r\n          seasonNum\r\n          numEpisodes\r\n          episodes {\r\n            episodeID\r\n            lengthMin\r\n            minWatched\r\n            date\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://{{api-url}}",
+					"protocol": "https",
+					"host": [
+						"{{api-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Streams Some Fields",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Streams {\r\n  streams {\r\n    id\r\n    info {\r\n      firstName\r\n      lastName\r\n      country\r\n    }\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://{{api-url}}",
+					"protocol": "https",
+					"host": [
+						"{{api-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Streams Error",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Streams {\r\n  streams {\r\n    error {\r\n      firstName\r\n      lastName\r\n      country\r\n    }\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://{{api-url}}",
+					"protocol": "https",
+					"host": [
+						"{{api-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Streams by Id",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Stream($streamId: Int) {\r\n  user1:stream(id: $streamId) {\r\n    id\r\n    info {\r\n      firstName\r\n      lastName\r\n      country\r\n      shows {\r\n        showName\r\n        showId\r\n        type\r\n        numSeasons\r\n        seriesInfo {\r\n          seasonNum\r\n          numEpisodes\r\n          episodes {\r\n            episodeID\r\n            lengthMin\r\n            minWatched\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n  \"streamId\": 1\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://{{api-url}}",
+					"protocol": "https",
+					"host": [
+						"{{api-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Streams by Id V2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Stream($streamId: Int) {\r\n  user1:stream(id: $streamId) {\r\n    id\r\n    info {\r\n      firstName\r\n      lastName\r\n      country\r\n      shows {\r\n        showName\r\n        showId\r\n        type\r\n        numSeasons\r\n        seriesInfo {\r\n          seasonNum\r\n          numEpisodes\r\n          episodes {\r\n            episodeID\r\n            lengthMin\r\n            minWatched\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n  user2: stream(id: 2) {\r\n    id \r\n    }\r\n}",
+						"variables": "{\r\n  \"streamId\": 1\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://{{api-url}}",
+					"protocol": "https",
+					"host": [
+						"{{api-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Streams With Condition",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Stream ($contentDirective: Boolean!){\r\n    user1: stream (id: 1) {\r\n        id\r\n        ...contentStreamed @include(if: $contentDirective)\r\n    }\r\n    user2: stream(id: 2) {\r\n        id\r\n        ...contentStreamed @include(if: $contentDirective)\r\n    }\r\n}\r\n\r\nfragment contentStreamed on Stream {\r\n    info\r\n    {\r\n      shows {  \r\n        showName\r\n        showId\r\n        type\r\n        numSeasons    \r\n      }\r\n    }\r\n}",
+						"variables": "{\r\n  \"contentDirective\": true  \r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://{{api-url}}",
+					"protocol": "https",
+					"host": [
+						"{{api-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Streams With Condition False",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Stream ($contentDirective: Boolean!){\r\n    user1: stream (id: 1) {\r\n        id\r\n        ...contentStreamed @include(if: $contentDirective)\r\n    }\r\n    user2: stream(id: 2) {\r\n        id\r\n        ...contentStreamed @include(if: $contentDirective)\r\n    }\r\n}\r\n\r\nfragment contentStreamed on Stream {\r\n    info\r\n    {\r\n      shows {  \r\n        showName\r\n        showId\r\n        type\r\n        numSeasons    \r\n      }\r\n    }\r\n}",
+						"variables": "{\r\n  \"contentDirective\": false  \r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://{{api-url}}",
+					"protocol": "https",
+					"host": [
+						"{{api-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Report peopleWatching",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query PeopleWatching($country: String!) {\r\n  peopleWatching(country: $country) {\r\n    showId\r\n    cnt\r\n  }\r\n}",
+						"variables": "{\r\n  \"country\":\"USA\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://{{api-url}}",
+					"protocol": "https",
+					"host": [
+						"{{api-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Report WatchTime",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query WatchTime {\r\n  watchTime {\r\n    showName\r\n    seasonNum\r\n    length\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://{{api-url}}",
+					"protocol": "https",
+					"host": [
+						"{{api-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateStream",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation CreateStream($input: StreamEntry) {\r\n  createStream(input: $input) {\r\n    id\r\n    info {\r\n      firstName\r\n      lastName\r\n      country\r\n      shows {\r\n           showName\r\n      }\r\n\t}\r\n  }\r\n}",
+						"variables": "{\r\n  \"input\": {\r\n    \"firstName\": \"dario\",\r\n    \"lastName\": \"vega\",\r\n    \"country\": \"France\"\r\n  }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://{{api-url}}",
+					"protocol": "https",
+					"host": [
+						"{{api-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateStream",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation Mutation($updateStreamId: Int, $input: showsEntry) {\r\n  updateStream(id: $updateStreamId, input: $input) {\r\n    id\r\n    info {\r\n      firstName\r\n      lastName\r\n      country\r\n      shows {\r\n        showName\r\n      }\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n  \"updateStreamId\":5,\r\n  \"input\": {\r\n         \"showName\": \"Call My Agent\",\r\n         \"showId\": 12,\r\n         \"type\": \"tvseries\",\r\n         \"numSeasons\" : 2,\r\n         \"seriesInfo\": [\r\n            {\r\n               \"seasonNum\" : 1,\r\n               \"numEpisodes\" : 2,\r\n               \"episodes\": [\r\n                  { \"episodeID\" : 20, \"lengthMin\" : 40, \"minWatched\" : 40 },\r\n                  { \"episodeID\" : 30, \"lengthMin\" : 42, \"minWatched\" : 42 }\r\n               ]\r\n            },\r\n            {\r\n               \"seasonNum\": 2,\r\n               \"numEpisodes\" : 2,\r\n               \"episodes\": [\r\n                  { \"episodeID\" : 20, \"lengthMin\" : 50, \"minWatched\" : 50 },\r\n                  { \"episodeID\" : 30, \"lengthMin\" : 46, \"minWatched\" : 46 }\r\n               ]\r\n            }\r\n        ]\r\n     }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://{{api-url}}",
+					"protocol": "https",
+					"host": [
+						"{{api-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Streams Name",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query streamByLastName($lastName: String) {  \r\n    user1:streamByLastName(lastName:$lastName) \r\n    {    id    \r\n         info {      \r\n           firstName\r\n           lastName\r\n           country\r\n           shows {\r\n             showName\r\n           }\r\n         }\r\n    }\r\n}",
+						"variables": "{\r\n  \"lastName\":\"vega\"  \r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://{{api-url}}",
+					"protocol": "https",
+					"host": [
+						"{{api-url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteStream",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DeleteStream($deleteStreamId: Int) {\r\n  deleteStream(id: $deleteStreamId) {\r\n    id\r\n  }\r\n}",
+						"variables": "{\r\n   \"deleteStreamId\":1004\r\n}\r\n"
+					}
+				},
+				"url": {
+					"raw": "https://{{api-url}}",
+					"protocol": "https",
+					"host": [
+						"{{api-url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api-url",
+			"value": "bmbbblriml5b2c36fifpqz5ieq.apigateway.eu-paris-1.oci.customer-oci.com/",
+			"type": "default"
+		}
+	]
+}
