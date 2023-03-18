@@ -37,7 +37,7 @@ This workshop section requires having access to an Oracle cloud account, having 
 
     ![Screenshot of Oracle Ingress rules](./images/ogg-no-rules.png " ")
 
-7.  If there are no rules present, click on the __Add Ingress Rules__ button. Otherwise, you may proceed to __Task 1__.
+7.  If there are no rules present, click on the __Add Ingress Rules__ button. Otherwise if you have the required rules available , you may proceed to __Task 2__.
 
 8. An __Add Ingress Rules__ pane will pop up. Enter the following parameters. 
 
