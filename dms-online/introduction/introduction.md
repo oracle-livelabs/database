@@ -21,8 +21,8 @@ In the current release of DMS we support Oracle databases located on-premises, i
 
 |                  |  |     
 |--------------------------|-------------------------|
-| Source Databases | Oracle DB 11g, 12c, 18c, 19c: <br>on-premises, third-party cloud, OCI  |   
-| Target Databases | ADB shared and dedicated |  
+| Source Databases | Oracle DB 11g, 12c, 18c, 19c ,21c: <br>on-premises, third-party cloud, OCI  |   
+| Target Databases | ADB shared and dedicated <br> Co-managed Oracle Base Database (VM, BM)<br> Exadata on Oracle Public Cloud. |  
 | Supported Source Environments| Oracle Cloud Infrastructure co-managed databases or on-premises environments<br>Amazon Web Services RDS Oracle Database (both offline and online migrations)<br>Linux-x86-64, IBM AIX (both offline and online modes)<br>Oracle Solaris (offline mode only)|
 | Migration Modes  | Direct Access to Source <br>(VPN or Fast Connect) Indirect Access to Source <br>(Agent on Source Env) |                        |  
 | Initial Load <br> (Offline Migration) | Logical Migration using <br>Data Pump to Object Store <br>Data Pump using SQLnet |  |
@@ -30,7 +30,7 @@ In the current release of DMS we support Oracle databases located on-premises, i
 
 The DMS service runs as a managed cloud service separate from the user's tenancy and resources. The service operates as a multitenant service in a DMS Service Tenancy and communicates with the user's resources using Private Endpoints (PEs). PEs are managed by DMS and are transparent to the user.
 
-![](images/dms-simplified-topology-2.png =80%x*)
+![dms topology](images/dms-simplified-topology-2.png =80%x*)
 
 * **DMS Control Plane**: Used by DMS end user to manage Migration and Registered Database objects. The control plane is exposed through the DMS Console UI as well as the REST API.
 * **DMS Data Plane**: Managed by DMS Control Plane and transparent to the user. The GGS Data Plane manages ongoing migration jobs and communicates with the user's databases and GoldenGate instance using PEs. The DMS data plane does not store any customer data, as data flows through GoldenGate and Data Pump directly within the user's tenancy.
