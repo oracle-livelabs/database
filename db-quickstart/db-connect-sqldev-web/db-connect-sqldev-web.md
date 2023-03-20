@@ -24,21 +24,25 @@ Although you can connect to your autonomous database from local PC desktop tools
 
 2. A sign-in page opens for Database Actions. For this lab, simply use your database instance's default administrator account, **Username - admin**, and click **Next**.
 
-    ![Enter the admin username.](./images/Picture100-16.png " ")
+    **Note:** The first time you open Database Actions, you will be prompted for username and password. Subsequently, when you open Database Actions you may not be prompted for username and password.
+
+    ![Enter the admin username.](./images/enter-admin-username.png " ")
 
 3. Enter the Administrator **Password** you specified when creating the database. Click **Sign in**.
 
-    ![Enter the admin password.](./images/Picture100-16-password.png " ")
+     ![Enter the admin password.](./images/enter-admin-password.png " ")
 
-4. The Database Actions page opens. In the **Development** box, click **SQL**.
+4. The Database Actions page opens. In the **Development** box, click **SQL** to open a SQL Worksheet.
 
     ![Click on SQL.](./images/click-sql.png " ")
 
 5. The first time you open SQL Worksheet, a series of pop-up informational boxes introduce you to the main features. Click **Next** to take a tour through the informational boxes.
 
-    ![Click Next to take tour.](./images/Picture100-sql-worksheet.png " ")
+    ![Click Next to take tour.](./images/click-next-to-take-tour.png " ")
 
-    After touring through the informational boxes, keep this SQL Worksheet open and please **proceed to the next lab.**
+    After touring through the informational boxes, keep this SQL Worksheet open.
+
+    Please **proceed to the next lab.**
 
 ## Want to Learn More?
 
@@ -47,4 +51,4 @@ Click [here](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-clo
 ## Acknowledgements
 
 - **Author** - Richard Green, Principal Developer, Database User Assistance
-- **Last Updated By/Date** - Kamryn Vinson, April 2022
+- **Last Updated By/Date** - Shilpa Sharma, March 2023
