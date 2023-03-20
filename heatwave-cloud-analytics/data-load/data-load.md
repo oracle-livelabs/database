@@ -22,21 +22,21 @@ This lab assumes you have:
 
 ## Task 1: Connect to oke-operator compute instance
 
-1. Log in to **OCI** and click on the **Hamburger Menu** ![](images/hamburger.png) at the top left corner of the OCI console, select **Compute**, and click on **Instances**
+1. Log in to **OCI** and click on the **Hamburger Menu** ![OCI Menu](images/hamburger.png) at the top left corner of the OCI console, select **Compute**, and click on **Instances**
 
-	![Compute Menu](images/compute-menu.png)
+    ![Compute Menu](images/compute-menu.png)
 
 2. In the Compute>Instance page, select the right compartment under “Compartment” > “HOL-compartment” on the right side. The list of instances will be shown. Then, find out the **Public IP** of the compute instance **oke-operator**, we will need this to connect to the compute instance to load the data into **MySQL Database Service**
 
-	![Compute ip](images/compute-ip.png)
+    ![Compute ip](images/compute-ip.png)
 
 3. Launch OCI Cloud Shell to connect to the **oke-operator** compute instance
   Click on the icon on the top right corner of OCI Console to launch the Cloud Shell.
-	![Cloud Shell](images/cloud-shell.png)
+    ![Cloud Shell](images/cloud-shell.png)
 
   OCI Cloud Shell is a web browser-based terminal accessible from the Oracle Cloud Console to access various OCI services including OCI Compute instances.
 
-	![Launch Cloud Shell](images/cloud-shell-launch.png)
+    ![Launch Cloud Shell](images/cloud-shell-launch.png)
 
 4. Follow the steps below to download the private key for connecting to oke-operator compute instance. Please use the public IP address of the oke-operator in Step 2
 

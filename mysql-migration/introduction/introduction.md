@@ -40,7 +40,7 @@ The following OCI architecture diagram depicts all the resources to be created a
 * Oracle Container Engine for Kubernetes
 * MySQL HeatWave
 
-	![OCI Architecture](images/oci-architecture.png)
+ ![OCI Architecture](images/oci-architecture.png)
 
 ### Prerequisites (Optional)
 

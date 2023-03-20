@@ -41,11 +41,14 @@ The following diagram illustrates all the components deployed on OCI when you co
 
 ## Acknowledgements
 
-* **Author**
-	* Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
-	* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
-* **Contributors**
-	* Perside Foster, MySQL Solution Engineering North America
-	* Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
+Author
 
-* **Last Updated By/Date** - Ryan Kuan, May 2022
+* Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
+* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
+
+Contributors
+
+* Perside Foster, MySQL Solution Engineering North America
+* Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
+
+**Last Updated By/Date** - Ryan Kuan, May 2022
