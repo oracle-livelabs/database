@@ -20,13 +20,15 @@ Estimated Time: 2 minutes
 You may now **proceed to the next lab.**
 
 ## Acknowledgements
-* **Author**
-	* Rayes Huang, Cloud Solution Architect, OCI APAC
-	* Ryan Kuan, MySQL Cloud Engineer, MySQL APAC
 
-* **Contributors**
+Author
 
-	* Perside Foster, MySQL Solution Engineering
-	* Howie Owi, OCI Solution Specialist, OCI APAC
+* Rayes Huang, Cloud Solution Architect, OCI APAC
+* Ryan Kuan, MySQL Cloud Engineer, MySQL APAC
 
-* **Last Updated By/Date** - Ryan Kuan, March 2022
+Contributors
+
+* Perside Foster, MySQL Solution Engineering
+* Howie Owi, OCI Solution Specialist, OCI APAC
+
+Last Updated By/Date - Ryan Kuan, March 2023

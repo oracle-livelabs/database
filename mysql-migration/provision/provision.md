@@ -19,7 +19,7 @@ In this lab, you will provision the following OCI resources using Resource Manag
 
 * You have an Oracle account
 * You have enough privileges to use OCI
-* You have one Compute instance having <a href="https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html" target="\_blank">**MySQL Shell**</a> installed on it
+* You have one Compute instance having [MySQL Shell](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html) installed on it
 
 ## Task 1: Create stack in Resource Manager
 
@@ -31,7 +31,7 @@ In this lab, you will provision the following OCI resources using Resource Manag
 
     ![Stack Information](images/resource-manager-stack-info.png)
 
-3. Review the values pre-populated for your OCI Resources, update the password for "MDS Admin User's Password" (default password: Oracle#123). Specify the <a href="https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengaboutk8sversions.htm" target="\_blank">**supported Kubernetes version**</a>, for example, 1.25.4 and click **Next**.
+3. Review the values pre-populated for your OCI Resources, update the password for "MDS Admin User's Password" (default password: Oracle#123). Specify the **[supported Kubernetes versions](https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengaboutk8sversions.htm)**, for example, 1.25.4 and click **Next**.
 
     ![Stack Variables](images/resource-manager-stack-variables.png)
     > **Note**: Oracle recommends that you use the most recent Kubernetes version that Container Engine for Kubernetes supports
@@ -63,9 +63,9 @@ Author
 * Rayes Huang, Cloud Solution Architect, OCI APAC
 * Ryan Kuan, MySQL Cloud Engineer, MySQL APAC
 
-* **Contributors**
+Contributors
 
 * Perside Foster, MySQL Solution Engineering
 * Howie Owi, OCI Solution Specialist, OCI APAC
 
-* **Last Updated By/Date** - Ryan Kuan, March 2023
+Last Updated By/Date - Ryan Kuan, March 2023
