@@ -18,14 +18,14 @@ When it comes to patching the binaries, a common approach is **in-place patching
 
 The downtime window must be large enough to accommodate the patching operation and its rollback in case of any problems.
 
-**Our-of-place patching** is generally a better approach, that consists in the following steps:
+**Out-of-place patching** is generally a better approach, that consists in the following steps:
 - Prepare a new Oracle Home which contains the required patches
 - Stop the databases (all, or one at the time)
 - Restart the databases in the new Oracle Home
 - Run `datapatch`
 
 The downtime window can be scheduled separately for each database, because at any time, both Oracle Homes will be available. This gives more flexibility and allows an easier rollback (the previous Oracle Home is still there).
-Customers do not always implement our-of-place patching because the new binaries preparation and installation require some additional steps before the patching campaign.
+Customers do not always implement out-of-place patching because the new binaries preparation and installation require some additional steps before the patching campaign.
 
 Fleet Patching and Provisioning takes this burden off by automating the Oracle Home provisioning for you, that's it, FPP use out-of-place patching, and helps you keeping your Oracle Homes under control, in a central and standardized way.
 
@@ -53,31 +53,31 @@ In this lab, you will:
       ```
       rhpctl query image
       ```
-      ![](./images/verify.png)
+      ![Check images in FPP repository](./images/verify.png)
 
 2. Then, provision the first DB image to the target. The opc password is always `FPPll##123` unless you have changed it (Est. 8-9 minutes):
 
       ```
-      $ rhpctl add workingcopy -image db_19_9_0  -workingcopy WC_db_19_9_0_FPPC \
+      $ rhpctl add workingcopy -image db_previous  -workingcopy WC_db_previous_FPPC \
          -storagetype LOCAL -user oracle -oraclebase /u01/app/oracle \
-         -targetnode fppc -path /u01/app/oracle/product/19.0.0.0/WC_db_19_9_0_FPPC \
+         -targetnode fppc -path /u01/app/oracle/product/19.0.0.0/WC_db_previous_FPPC \
          -sudouser opc -sudopath /bin/sudo
       ```
-      ![](./images/first-db.png)
-      ![](./images/first-db2.png)
+      ![Add working copy based on image db_previous output 1](./images/first-db.png)
+      ![Add working copy based on image db_previous noutput 2](./images/first-db2.png)
 
 ## Task 2: Provision the second workingcopy
 1. Provision the second DB image to the target (Est. 8-9 minutes), **please note the additional -groups** parameter passed here:
 
       ```
-      $ rhpctl add workingcopy -image db_19_10_0_oci -workingcopy WC_db_19_10_0_FPPC \
+      $ rhpctl add workingcopy -image db_current_oci -workingcopy WC_db_current_FPPC \
       -storagetype LOCAL -user oracle -oraclebase /u01/app/oracle   -targetnode fppc \
-      -path /u01/app/oracle/product/19.0.0.0/WC_db_19_10_0_FPPC  \
+      -path /u01/app/oracle/product/19.0.0.0/WC_db_current_FPPC  \
       -groups  OSDBA=dba,OSOPER=oper,OSBACKUP=backupdba,OSDG=dgdba,OSKM=kmdba,OSRAC=racdba \
       -sudouser opc -sudopath /bin/sudo
       ```
-      ![](./images/second-db.png)
-      ![](./images/second-db2.png)
+      ![Add working copy based on image db_current_oci output 1](./images/second-db.png)
+      ![Add working copy based on image db_current_oci output 2](./images/second-db2.png)
 
 ## Task 3: Verify the working copies
 1. On the server:
@@ -85,7 +85,7 @@ In this lab, you will:
       ```
       rhpctl query workingcopy
       ```
-      ![](./images/verify-wc.png)
+      ![Query working copies](./images/verify-wc.png)
 
 2. On the client: password is always FPPll##123 unless you have changed it
 
@@ -96,17 +96,17 @@ In this lab, you will:
       ```
       sudo su - oracle
       ```
-      ![](./images/opc.png)
+      ![Login with opc user](./images/opc.png)
 
       ```
       cat /u01/app/oraInventory/ContentsXML/inventory.xml
       ```
-      ![](./images/inventory.png)
+      ![Check the contents of inventory.xml](./images/inventory.png)
 
 All the database homes are there! Now they are ready to run databases. You may now [proceed to the next lab](#next) and provision a database.
 
 ## Acknowledgements
 
 - **Author** - Ludovico Caldara
-- **Contributors** - Kamryn Vinson
-- **Last Updated By/Date** -  Kamryn Vinson, May 2021
+- **Contributors** - Kamryn Vinson - Philippe Fierens
+- **Last Updated By/Date** -  Philippe Fierens, March 2023

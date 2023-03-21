@@ -2,38 +2,36 @@
 
 ## Introduction
 
-In this lab we will prepare the Oracle database to support TimesTen caching.
+In this lab, we will prepare the Oracle database to support TimesTen caching.
 
-Estimated Time: 5 minutes.
+**Estimated Lab Time:** 10 minutes.
 
 ### Objectives
 
-- Create a tablespace for TimesTen metadata
-- Create the TimesTen cache admin user
-- Grant all necessary privileges to the cache admin user
+- Create a tablespace for TimesTen metadata.
+- Create the TimesTen cache admin user.
+- Grant all necessary privileges to the cache admin user.
 
 ### Prerequisites
 
-This lab assumes that you have:
+This lab assumes that you:
 
-- Completed all the previous labs in this workshop, in sequence.
+- Have completed all the previous labs in this workshop, in sequence.
+- Have an open terminal session in the workshop compute instance, either via NoVNC or SSH, and that session is logged into the TimesTen host (tthost1).
 
-## Task 1: Connect to the environment
+## Task 1: Examine Oracle database schemas and tables
 
-If you do not already have an active terminal session, connect to the OCI compute instance and open a terminal session, as the user **oracle**.
+For this workshop, two separate schema users, **appuser** and **oe**, have been defined in the Oracle Database. Each user has several tables, which have already been created, and some example data has been pre-loaded into those tables.
 
-In that terminal session, connect to the TimesTen host (tthost1) using ssh.
-
-## Task 2: Examine Oracle database schemas and tables
-
-There are two separate schema users, **appuser** and **oe**, already defined in the Oracle Database. Each user has some tables, which have already been created, and example data has been pre-loaded into those tables.
-
-Examine the table definitions, and their row counts, by looking at the files **tables\_appuser.sql** and **tables\_oe.sql**:
-
-**more tables\_appuser.sql**
+Examine the table definitions, and their row counts, by reviewing the **tables\_appuser.sql** and **tables\_oe.sql** files:
 
 ```
-[oracle@tthost1 livelab]$ more tables_appuser.sql
+<copy>
+more tables_appuser.sql
+</copy>
+```
+
+```
 -- Rows: 1000000
 CREATE TABLE vpn_users
     ( vpn_id             NUMBER(5) NOT NULL
@@ -62,10 +60,13 @@ CREATE TABLE child
     );
 ```
 
-**more tables\_oe.sql**
+```
+<copy>
+more tables_oe.sql
+</copy>
+```
 
 ```    
-[oracle@tthost1 livelab]$ more tables_oe.sql
 -- Rows: 2
 CREATE TABLE promotions
     ( promo_id   NUMBER(6)
@@ -93,7 +94,7 @@ CREATE UNIQUE INDEX order_items_uk
  ON order_items (order_id, product_id) ;
 ```
 
-Here are the entity relationship diagrams.
+Just for information, here are the entity-relationship diagrams showing the relationships between the tables.
 
 _APPUSER schema_
 
@@ -103,16 +104,19 @@ _OE schema_
 
 ![OE tables ER Diagram](./images/oe-schema-er.png " ")
 
-After the tables were created and populated with suitable example data, optimizer statistics were gathered using **dbms\_stats.gather\_schema\_stats**.
+After the tables were created and populated with suitable example data, optimizer statistics were gathered using **dbms\_stats.gather\_schema\_stats** to ensure that the Oracle database will be able to generate optimal query plans.
 
-## Task 3: Create tablespace and cache admin user
+## Task 2: Create tablespace and cache admin user
 
-Connect to the Oracle database (running on dbhost) using the **sqlplus** utility:
-
-**sqlplus sys/RedMan99@orclpdb1 as sysdba**
+1. In your tthost1 session, connect to the Oracle database (running on dbhost) using the **SQL\*Plus** utility:
 
 ```
-[oracle@tthost1 livelab]$ sqlplus sys/RedMan99@orclpdb1 as sysdba
+<copy>
+sqlplus sys/RedMan99@orclpdb1 as sysdba
+</copy>
+```
+
+```
 
 SQL*Plus: Release 19.0.0.0.0 - Production on Tue Jun 21 10:04:41 2022
 Version 19.14.0.0.0
@@ -127,47 +131,57 @@ Version 19.3.0.0.0
 SQL>
 ```
 
-Create a tablespace to hold the TimesTen Cache metadata:
-
-**CREATE TABLESPACE cachetblsp DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/ttcache.dbf' SIZE 2G SEGMENT SPACE MANAGEMENT AUTO;**
+2. Create a tablespace to hold the TimesTen Cache metadata:
 
 ```
-SQL> CREATE TABLESPACE cachetblsp DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/ttcache.dbf' SIZE 2G SEGMENT SPACE MANAGEMENT AUTO;
+<copy>
+CREATE TABLESPACE cachetblsp DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/ttcache.dbf' SIZE 2G SEGMENT SPACE MANAGEMENT AUTO;
+</copy>
+```
 
+```
 Tablespace created.
 ```
 
-Create the TimesTen cache admin user (in this workshop we will name the user **ttcacheadm** with password **ttcacheadm**):
+**NOTE:** This operation takes a few minutes. 
 
-**CREATE USER ttcacheadm IDENTIFIED BY ttcacheadm DEFAULT TABLESPACE cachetblsp QUOTA UNLIMITED ON cachetblsp;**
+3. Create the TimesTen cache admin user in the Oracle database (in this workshop we name the user **ttcacheadm** with password **ttcacheadm**):
 
 ```
-SQL> CREATE USER ttcacheadm IDENTIFIED BY ttcacheadm DEFAULT TABLESPACE cachetblsp QUOTA UNLIMITED ON cachetblsp;
+<copy>
+CREATE USER ttcacheadm IDENTIFIED BY ttcacheadm DEFAULT TABLESPACE cachetblsp QUOTA UNLIMITED ON cachetblsp;
+</copy>
+```
 
+```
 User created.
 ```
 
-Grant CREATE SESSION privilege to the user:
-
-**GRANT CREATE SESSION TO ttcacheadm;**
+4. Grant CREATE SESSION privilege to the user:
 
 ```
-SQL> GRANT CREATE SESSION TO ttcacheadm;
+<copy>
+GRANT CREATE SESSION TO ttcacheadm;
+</copy>
+```
 
+```
 Grant succeeded.
 ```
 
-## Task 4: Grant required roles and privileges to the cache admin user
+## Task 3: Grant required roles and privileges to the cache admin user
 
-The cache admin user needs various privileges. In order to simplify granting these, TimesTen includes a SQL script (**\$TIMESTEN_HOME/install/oraclescripts/grantCacheAdminPrivileges.sql**) that can be run to grant them.
+The cache admin user needs various privileges in the Oracle database. In order to simplify granting these, TimesTen includes a SQL script (**\$TIMESTEN_HOME/install/oraclescripts/grantCacheAdminPrivileges.sql**) that can be run to grant them.
 
-Run that script passing it the cache admin username (ttcacheadm):
-
-**@/tt/inst/ttinst/install/oraclescripts/grantCacheAdminPrivileges.sql ttcacheadm**
+Run that script in your SQL\*Plus session, passing it the cache admin username (ttcacheadm):
 
 ```
-SQL> @/tt/inst/ttinst/install/oraclescripts/grantCacheAdminPrivileges.sql ttcacheadm
+<copy>
+@/tt/inst/ttinst/install/oraclescripts/grantCacheAdminPrivileges.sql ttcacheadm
+</copy>
+```
 
+```
 Please enter the administrator user id
 The value chosen for administrator user id is ttcacheadm
 
@@ -211,97 +225,45 @@ PUBLIC
 ********* Initialization for cache admin user done successfully *********
 ```
 
-## Task 5: Grant table specific privileges to cache admin user
+## Task 4: Grant table specific privileges to the cache admin user
 
-The cache admin user lso needs specific privileges on each user table that will be cached in TimesTen. The exact privileges depend on the type of caching that will be used. In this workshop we are using READONLY caching, so the cache admin user needs SELECT privilege on all the user tables that will be cached,
+The cache admin user also needs specific privileges on each user table that is cached in TimesTen. The exact privileges depend on the type of caching being used. In this workshop we are using READONLY caching, so the cache admin user needs SELECT privilege on all the user tables that will be cached,
 
-Grant those privileges:
-
-**GRANT SELECT ON oe.promotions TO ttcacheadm;**
+1. Grant those privileges (be sure to press 'Enter' after pasting this into SQL\*Plus):
 
 ```
-SQL> GRANT SELECT ON oe.promotions TO ttcacheadm;
-
-Grant succeeded.
-```
-**GRANT SELECT ON oe.product\_information TO ttcacheadm;**
-
-```
-SQL> GRANT SELECT ON oe.product_information TO ttcacheadm;
-
-Grant succeeded.
-```
-**GRANT SELECT ON oe.customers TO ttcacheadm;**
-
-```
-SQL> GRANT SELECT ON oe.customers TO ttcacheadm;
-
-Grant succeeded.
-```
-**GRANT SELECT ON oe.orders TO ttcacheadm;**
-
-```
-SQL> GRANT SELECT ON oe.orders TO ttcacheadm;
-
-Grant succeeded.
-```
-**GRANT SELECT ON oe.order\_items TO ttcacheadm;**
-
-```
-SQL> GRANT SELECT ON oe.order_items TO ttcacheadm;
-
-Grant succeeded.
-```
-**GRANT SELECT ON oe.inventories TO ttcacheadm;**
-
-```
-SQL> GRANT SELECT ON oe.inventories TO ttcacheadm;
-
-Grant succeeded.
-```
-**GRANT SELECT ON oe.product\_descriptions TO ttcacheadm;**
-
-```
-SQL> GRANT SELECT ON oe.product_descriptions TO ttcacheadm;
-
-Grant succeeded.
-```
-**GRANT SELECT ON appuser.vpn\_users TO ttcacheadm;**
-
-```
-SQL> GRANT SELECT ON appuser.vpn_users TO ttcacheadm;
-
-Grant succeeded.
-```
-**GRANT SELECT ON appuser.parent TO ttcacheadm;**
-
-```
-SQL> GRANT SELECT ON appuser.parent TO ttcacheadm;
-
-Grant succeeded.
-
-```
-**GRANT SELECT ON appuser.child TO ttcacheadm;**
-
-```
-SQL> GRANT SELECT ON appuser.child TO ttcacheadm;
-
-Grant succeeded.
+<copy>
+GRANT SELECT ON oe.promotions TO ttcacheadm;
+GRANT SELECT ON oe.product_information TO ttcacheadm;
+GRANT SELECT ON oe.customers TO ttcacheadm;
+GRANT SELECT ON oe.orders TO ttcacheadm;
+GRANT SELECT ON oe.order_items TO ttcacheadm;
+GRANT SELECT ON oe.inventories TO ttcacheadm;
+GRANT SELECT ON oe.product_descriptions TO ttcacheadm;
+GRANT SELECT ON appuser.vpn_users TO ttcacheadm;
+GRANT SELECT ON appuser.parent TO ttcacheadm;
+GRANT SELECT ON appuser.child TO ttcacheadm;
+</copy>
 ```
 
-Exit from SQL\*Plus:
-
-**quit**
+2. Exit from SQL\*Plus:
 
 ```
-SQL> quit
+<copy>
+quit
+</copy>
+```
+
+```
 Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
 Version 19.3.0.0.0
 ```
 
-The Oracle database is now setup to support a TimesTen cache for the specified tables.
+The Oracle database is now set up to support a TimesTen cache for the specified tables.
 
-You can now *proceed to the next lab*. Keep your terminal session open for use in the next lab.
+You can now **proceed to the next lab**. 
+
+Keep your terminal session to tthost1 open for use in the next lab.
 
 ## Acknowledgements
 

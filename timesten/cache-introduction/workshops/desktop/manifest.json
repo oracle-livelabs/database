@@ -1,7 +1,7 @@
 {
-  "workshoptitle": "Accelerate your Applications: Achieve Blazing Fast SQL With an Oracle TimesTen Cache",
+  "workshoptitle": "Accelerate your Applications - Achieve Blazing Fast SQL With an Oracle TimesTen Cache",
   "support": "https://community.oracle.com/tech/developers/categories/database-19c",
-  "help": "livelabs-help_us@oracle.com",
+  "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
@@ -9,14 +9,9 @@
       "filename": "../../01-introduction/introduction.md"
     },
     {
-      "title": "Get Started with noVNC remote desktop",
-      "description": "Using noVNC Remote Desktop",
-      "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/remote-desktop/using-novnc-remote-desktop.md"
-    },
-    {
       "title": "Lab 1: Connect to the workshop compute instance",
-      "description": "How to connect to the Cloud Instance",
-      "filename": "../../03-connect-to-instance/connect-to-instance.md"
+      "description": "Connect to the workshop compute instance",
+      "filename": "../../00-verify-compute/verify-compute-desktop.md"
     },
     {
       "title": "Lab 2: Initialize the workshop environment",
@@ -59,18 +54,23 @@
       "filename": "../../11-query-performance/query-performance.md"
     },
     {
-      "title": "Lab 10: Dynamic caching",
+      "title": "Lab 10: Learn about dynamic caching",
       "filename": "../../12-dynamic-caching/dynamic-caching.md"
     },
     {
-      "title": "Lab 11: Shutdown the TimesTen cache and instance",
-      "description": "Perform an orderly shutdown of TimesTen",
+      "title": "Lab 11: Shut down the TimesTen cache and instance",
+      "description": "Perform an orderly shut down of TimesTen",
       "filename": "../../13-shutdown/shutdown.md"
+    },
+    {
+      "title": "Wrap-up",
+      "description": "Summary and resource cleanup",
+      "filename": "../../14-wrapup/wrapup.md"
     },
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-      "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-livelabs.md"
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
     }
   ]
 }

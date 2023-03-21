@@ -2,40 +2,40 @@
 
 ## Introduction
 
-In this lab you will load data from the Oracle tabls into the TimesTen cache tables. This action will also activate the AUTOREFRESH mechanism which will periodically refresh the cache with any changes that have occurred in the Oracle database.
+In this lab, you will load data from the Oracle tables into the TimesTen cache tables. This action will also activate the AUTOREFRESH mechanism which will periodically refresh the cache with any changes that have occurred in the Oracle database.
 
-Estimated Time: **5 minutes**
+**Estimated Lab Time:** 6 minutes
 
 ### Objectives
 
-- Load the APPUSER and OE cache groups
+- Load the APPUSER and OE cache groups.
 
 This task is accomplished using SQL statements, so can be easily performed from application code if required.
 
 ### Prerequisites
 
-This lab assumes that you have:
+This lab assumes that you:
 
-- Completed all the previous labs in this workshop, in sequence.
+- Have completed all the previous labs in this workshop, in sequence.
+- Have an open terminal session in the workshop compute instance, either via NoVNC or SSH, and that session is logged into the TimesTen host (tthost1).
 
-## Task 1: Connect to the environment
+## Task 1: Load the APPUSER cache group
 
-If you do not already have an active terminal session, connect to the OCI compute instance and open a terminal session, as the user **oracle**.
+As you saw in the previous lab, when a READONLY cache group is first created its tables are empty and the AUTOREFRESH mechanism is in a paused state.
 
-In that terminal session, connect to the TimesTen host (tthost1) using ssh.
+Loading the cache group populates the cache tables with the data from the Oracle database and also activates the AUTOREFRESH mechanism. The load occurs in such a manner that if any changes occur to the data in the Oracle database while the load is in progress, those changes will be captured. The captured changes are then autorefreshed to TimesTen once the load is completed.
 
-## Task 2: Load the APPUSER cache group
+Load the APPUSER.CG\_VPN\_USERS cache group (1 million rows) and then examine the cache group and table.
 
-As you saw in the previous lab, when a READONLY cache group is first created its tables are empty and the autorefresh mechanism is in a paused state.
-
-Loading the cache group populates the cache tables with the data from the Oracle database and also activates the autorefresh mechanism. The load occurs in such a manner that if any changes occur oin Oracle while the load is in progress those changes will be captured and then autorefreshed to TimesTen ince the load is completed.
-
-Load the APPUSER.CG\_VPN\_USERS cache group (1 million rows) and then examine the cach group and table:
-
-**ttIsql "DSN=sampledb;UID=appuser;PWD=appuser;OraclePWD=appuser"**
+1. Connect to the cache as the user **appuser**:
 
 ```
-oracle@tthost1 livelab]$ ttIsql "DSN=sampledb;UID=appuser;PWD=appuser;OraclePWD=appuser"
+<copy>
+ttIsql "DSN=sampledb;UID=appuser;PWD=appuser;OraclePWD=appuser"
+</copy>
+```
+
+```
 Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
 Type ? or "help" for help, type "exit" to quit ttIsql.
 
@@ -44,17 +44,28 @@ Connection successful: DSN=sampledb;UID=appuser;DataStore=/tt/db/sampledb;Databa
 (Default setting AutoCommit=1)
 Command>
 ```
-**LOAD CACHE GROUP appuser.cg\_vpn\_users COMMIT EVERY 1024 ROWS;**
+
+2. Load the cache group:
 
 ```
-Command> LOAD CACHE GROUP appuser.cg_vpn_users COMMIT EVERY 1024 ROWS;
+<copy>
+LOAD CACHE GROUP appuser.cg_vpn_users COMMIT EVERY 1024 ROWS;
+</copy>
+```
+
+```
 1000000 cache instances affected.
 ```
-**cachegroups cg\_vpn\_users;**
+
+3. Display the cache group details:
 
 ```
-Command> cachegroups cg_vpn_users;
+<copy>
+cachegroups cg_vpn_users;
+</copy>
+```
 
+```
 Cache Group APPUSER.CG_VPN_USERS:
 
   Cache Group Type: Read Only
@@ -70,52 +81,71 @@ Cache Group APPUSER.CG_VPN_USERS:
 
 1 cache group found.
 ```
-**tables;**
+
+Note that the state of autorefresh has now changed to  **On**.
+
+
+4. Display the cache group tables:
 
 ```
-Command> tables;
+<copy>
+tables;
+</copy>
+```
+
+```
   APPUSER.VPN_USERS
 1 table found. 
 ```
-**select count(\*) from vpn\_users;**
+
+5. Check the row count:
 
 ```
-Command> select count(*) from vpn_users;
+<copy>
+select count(*) from vpn_users;
+</copy>
+```
+
+```
 < 1000000 >
 1 row found.
 ```
-Update optimizer statistics for all the tables in the APPUSER schema:
 
-**statsupdate;**
-
-```
-Command> statsupdate;
-```
-Exit from ttIsql:
-
-**quit**
+6. Update optimizer statistics for all the tables in the APPUSER schema:
 
 ```
-Command> quit
+<copy>
+statsupdate;
+</copy>
+```
+
+7. Exit from ttIsql:
+
+```
+<copy>
+quit
+</copy>
+```
+
+```
 Disconnecting...
 Done.
 ```
 
-Note that the status of autorefresh has now changed to  **On**.
+
+## Task 2: Load the OE cache groups
+
+Now do the same for the OE schema cache groups.
+
+1. Connect to the cache as the OE user:
 
 ```
-Autorefresh State: On
+<copy>
+ttIsql "DSN=sampledb;UID=oe;PWD=oe;OraclePWD=oe"
+</copy>
 ```
 
-## Task 3: Load the OE cache groups
-
-Now do the same for the OE schema cache groups:
-
-**ttIsql "DSN=sampledb;UID=oe;PWD=oe;OraclePWD=oe"**
-
 ```
-[oracle@tthost1 livelab]$ ttIsql \
-    "DSN=sampledb;UID=oe;PWD=oe;OraclePWD=oe"
 Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
 Type ? or "help" for help, type "exit" to quit ttIsql.
 
@@ -124,33 +154,60 @@ Connection successful: DSN=sampledb;UID=oe;DataStore=/tt/db/sampledb;DatabaseCha
 (Default setting AutoCommit=1)
 Command> 
 ```
-**LOAD CACHE GROUP oe.cg\_promotions COMMIT EVERY 1024 ROWS;**
+
+2. Load the CG\_PROMOTIONS cache group:
 
 ```
-Command> LOAD CACHE GROUP oe.cg_promotions COMMIT EVERY 1024 ROWS;
+<copy>
+LOAD CACHE GROUP oe.cg_promotions COMMIT EVERY 1024 ROWS;
+</copy>
+```
+
+```
 2 cache instances affected.
 ```
-**LOAD CACHE GROUP oe.cg\_prod\_inventory COMMIT EVERY 1024 ROWS;**
+
+3. Load the CG\_PROD\_INVENTORY cache group:
 
 ```
-Command> LOAD CACHE GROUP oe.cg_prod_inventory COMMIT EVERY 1024 ROWS;
+<copy>
+LOAD CACHE GROUP oe.cg_prod_inventory COMMIT EVERY 1024 ROWS;
+</copy>
+```
+
+```
 288 cache instances affected.
 ```
-**LOAD CACHE GROUP oe.cg\_cust\_orders COMMIT EVERY 1024 ROWS;**
+
+4. Load the CG\_CUST\_ORDERS cache group:
 
 ```
-Command> LOAD CACHE GROUP oe.cg_cust_orders COMMIT EVERY 1024 ROWS;
+<copy>
+LOAD CACHE GROUP oe.cg_cust_orders COMMIT EVERY 1024 ROWS;
+</copy>
+```
+
+```
 319 cache instances affected.
 ```
-**statsupdate;**
+
+5. Update optimizer statistics for all the tables in the OE schema:
 
 ```
-Command> statsupdate;
+<copy>
+statsupdate;
+</copy>
 ```
-**tables;**
+
+6. Display the cache group tables:
 
 ```
-Command> tables;
+<copy>
+tables;
+</copy>
+```
+
+```
   OE.CUSTOMERS
   OE.INVENTORIES
   OE.ORDERS
@@ -160,64 +217,114 @@ Command> tables;
   OE.PROMOTIONS
 7 tables found.
 ```
-**select count(\*) from customers;**
+
+7. Check the row count for CUSTOMERS:
 
 ```
-Command> select count(*) from customers;
+<copy>
+select count(*) from customers;
+</copy>
+```
+
+```
 < 319 >
 1 row found.
 ```
-**select count(\*) from inventories;**
+
+8. Check the row count for INVENTORIES:
 
 ```
-Command> select count(*) from inventories;
+<copy>
+select count(*) from inventories;
+</copy>
+```
+
+```
 < 1112 >
 1 row found.
 ```
-**select count(\*) from orders;**
+
+9. Check the row count for ORDERS:
 
 ```
-Command> select count(*) from orders;
+<copy>
+select count(*) from orders;
+</copy>
+```
+
+```
 < 105 >
 1 row found.
 ```
-**select count(\*) from order\_items;**
+
+10. Check the row count for ORDER\_ITEMS:
 
 ```
-Command> select count(*) from order_items;
+<copy>
+select count(*) from order_items;
+</copy>
+```
+
+```
 < 665 >
 1 row found.
 ```
-**select count(\*) from product\_descriptions;**
+
+11. Check the row count for PRODUCT\_DESCRIPTIONS:
 
 ```
-Command> select count(*) from product_descriptions;
+<copy>
+select count(*) from product_descriptions;
+</copy>
+```
+
+```
 < 8639 >
 1 row found.
 ```
-**select count(\*) from product\_information;**
+
+12. Check the row count for PRODUCT\_INFORMATION:
 
 ```
-Command> select count(*) from product_information;
+<copy>
+select count(*) from product_information;
+</copy>
+```
+
+```
 < 288 >
 1 row found.
 ```
-**select count(\*) from promotions;**
+
+13. Check the row count for PROMOTIONS:
 
 ```
-Command> select count(*) from promotions;
+<copy>
+select count(*) from promotions;
+</copy>
+```
+
+```
 < 2 >
 1 row found.
 ```
-**quit**
+
+14. Exit from ttIsql:
 
 ```
-Command> quit
+<copy>
+quit
+</copy>
+```
+
+```
 Disconnecting...
 Done.
 ```
 
-You can now *proceed to the next lab*. Keep your terminal session open for use in the next lab.
+You can now **proceed to the next lab**. 
+
+Keep your terminal session to tthost1 open for use in the next lab.
 
 ## Acknowledgements
 

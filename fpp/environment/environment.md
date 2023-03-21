@@ -44,26 +44,26 @@ To create your LiveLabs reservation, you used a ssh key that you created on your
 2.  Under **List Scope**, verify that you select the **same compartment** that you received in the reservation confirmation. 
 3.  To start the Oracle Cloud Shell, click the Cloud Shell icon at the top right of the page. *Note: Ensure before you click the console you have selected your assigned compartment or you will get an error.*
 
-      ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/cloudshellopen.png " ")
+    ![Open Cloud Shell](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/cloudshellopen.png " ")
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/cloudshellsetup.png " ")
+    ![Setup Cloud Shell](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/cloudshellsetup.png " ")
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/cloudshell.png " ")
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/cloudshell.png " ")
 
 2.  Click on the Cloud Shell hamburger icon and select **Upload** to upload your private key
    
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/upload-key.png " ")
+    ![Click on upload in cloud shell to upload private key](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key.png " ")
 
 3.  To connect to the compute instance that was created for you, you will need to load your private key.  This is the key that does *not* have a .pub file at the end.  Locate that file on your machine and click **Upload** to process it.
    
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/upload-key-select.png " ")
+    ![Select the key](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key-select.png " ")
 
 4. Be patient while the key file uploads to your Cloud Shell directory
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/upload-key-select-2.png " ")
+    ![Wait until key is uploaded](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key-select-2.png " ")
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/upload-key-select-3.png " ")
+    ![Key is uploaded](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key-select-3.png " ")
 
-5. Once finished run the command below to check to see if your ssh key was uploaded.  Move it into your .ssh directory
+5. Once finished run the command below to check to see if your ssh key was uploaded.  Create a .ssh directory, and move the ssh key into your .ssh directory
 
     ````
     <copy>
@@ -72,12 +72,13 @@ To create your LiveLabs reservation, you used a ssh key that you created on your
     ````
     ````
     chmod 600 <<keyname>>
+    mkdir .ssh
     mv <<keyname>> .ssh
     ls .ssh
     cd ~
     ````
 
-    ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/generate-ssh-key-cloud-shell/images/upload-key-finished.png " ")
+    ![Key is in the cloud shell](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key-finished.png " ")
 </if>
 ## Task 1: Connect to the FPP Server via SSH
 1. Connect to the FPP Server via SSH using the user `opc` and the private key that you have created during the LiveLab setup.
@@ -87,7 +88,7 @@ E.g. if you have a terminal with ssh available:
       ````
       ssh -i ~/.ssh/<sshkeyname> opc@<Your Compute Instance Public IP Address>
       ````
-      ![](./images/opc.png)
+      ![Logon with opc](./images/opc.png)
 
       If you are using other clients (Putty, MobaXTerm) and you are unsure about how to use private keys, please refer to their respective documentation.
 
@@ -96,7 +97,7 @@ E.g. if you have a terminal with ssh available:
       ```
       sudo su - grid
       ```
-      ![](./images/grid.png)
+      ![sudo to grid](./images/grid.png)
 
 
 ## Task 2: Verify the Clusterware status and rhpserver status
@@ -105,22 +106,22 @@ E.g. if you have a terminal with ssh available:
       ```
       crsctl stat res -t
       ```
-      ![](./images/crsctl.png)
-      ![](./images/crsctl2.png)
+      ![crsctl stat res -t output](./images/crsctl.png)
+      ![crsctl stat res -t output continued](./images/crsctl2.png)
 
 2. In the above output, you can already see that the FPP Server (rhpserver) is running, but you can double-check:
 
       ```
       srvctl status rhpserver
       ```
-      ![](./images/check-status.png)
+      ![srvctl status rhpserer output](./images/check-status.png)
 
 3. You can see how the FPP Server has been configured:
 
       ```
       srvctl config rhpserver
       ```
-      ![](./images/server-configured.png)
+      ![srvctl config rhpserver output](./images/server-configured.png)
 
       In particular, the *Transfer port range* has been customized from the default so that is uses a fixed port range (by default it is dynamic and would require permissive firewall rules).
 
@@ -130,20 +131,20 @@ E.g. if you have a terminal with ssh available:
       ```
       rhpctl -help
       ```
-      ![](./images/help.png)
+      ![rhpctl -help output](./images/help.png)
 
 
       ```
       rhpctl import -help
       ```
-      ![](./images/import-help.png)
+      ![rhpctl import -help output](./images/import-help.png)
 
 
       ```
       rhpctl import image -help
       ```
-      ![](./images/import-image-help.png)
-      ![](./images/import-image-help2.png)
+      ![rhpctl import image -help output](./images/import-image-help.png)
+      ![rhpctl import image -help output continued](./images/import-image-help2.png)
 
 
 ## Task 4: Find the rhpserver.log
@@ -152,7 +153,7 @@ E.g. if you have a terminal with ssh available:
       ```
       ls -l /u01/app/grid/crsdata/fpps01/rhp/
       ```
-      ![](./images/fpp-logfiles.png)
+      ![File location of logfile](./images/fpp-logfiles.png)
 
 2. The main log file is `rhpserver.log.0`, you can use it during the workshop to verify what happens. It is verbose, but useful whenever you encounter any problems.
 
@@ -168,5 +169,5 @@ You have now successfully connected and verified the environment. You may now [p
 ## Acknowledgements
 
 - **Author** - Ludovico Caldara
-- **Contributors** - Kamryn Vinson
-- **Last Updated By/Date** -  Kamryn Vinson, May 2021
+- **Contributors** - Kamryn Vinson - Philippe Fierens
+- **Last Updated By/Date** -  Philippe Fierens, March 2023

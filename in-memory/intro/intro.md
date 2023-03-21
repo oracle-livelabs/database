@@ -10,7 +10,7 @@ It is similar in spirit to having a conventional index (for analytics) on every 
 
 Watch the video below for an overview of Oracle In-Memory.
 
-[](youtube:JGM1taVRZHs)
+[Overview video](youtube:JGM1taVRZHs)
 
 <if type="odbw">If you would like to watch us do the workshop, click [here](https://youtu.be/QzCnO_Me97g).</if>
 
@@ -20,7 +20,7 @@ Watch the video below for an overview of Oracle In-Memory.
 There are four basic architectural elements of the column store that enable orders of magnitude faster analytic query processing:  
 
 1. *Compressed columnar storage*: Storing data contiguously in compressed column units allows an analytic query to scan only data within the required columns, instead of having to skip past unneeded data in other columns as would be needed for a row major format. Columnar storage therefore allows a query to perform highly efficient sequential memory references while compression allows the query to optimize its use of the available system (processor to memory) bandwidth.
-   ![](./images/DBIM.png " ")
+   ![dual format image](./images/DBIM.png " ")
 
 2. *Vector Processing*: In addition to being able to process data sequentially, column organized storage also enables the use of vector processing. Modern CPUs feature highly parallel instructions known as SIMD or vector instructions, for example Intel AVX. These instructions can process multiple values in one instruction –for instance, they allow multiple values to be compared with a given value, for example find sales with State = “California”, in one instruction. Vector processing of compressed columnar data further multiplies the scan speed obtained with columnar storage, resulting in scan speeds exceeding tens of billions of rows per second, per CPU core.
 
@@ -32,15 +32,15 @@ There are four basic architectural elements of the column store that enable orde
 
 The following figure shows a sample IM column store. The database stores the sh.sales table on disk in traditional row format. The SGA stores the data in columnar format in the IM column store, and in row format in the database buffer cache.
 
-![](./images/arch.png " ")
+![In-Memory architecture image](./images/arch.png " ")
 
 ## Learn More
 
 Database In-Memory Channel
-<a href="https://www.youtube.com/channel/UCSYHgTG68nrHa5aTGfFH4pA">![](./images/inmem.png " ") </a>
+<a href="https://www.youtube.com/channel/UCSYHgTG68nrHa5aTGfFH4pA">![In-Memory Youtube channel link](./images/inmem.png " ") </a>
 
 Oracle Database Product Management Videos on In-Memory
-<a href="https://www.youtube.com/channel/UCr6mzwq_gcdsefQWBI72wIQ/search?query=in-memory">![](./images/youtube.png " ") </a>
+<a href="https://www.youtube.com/channel/UCr6mzwq_gcdsefQWBI72wIQ/search?query=in-memory">![In-Memory Product Management videos](./images/youtube.png " ") </a>
 
 Please proceed to the next lab.
 

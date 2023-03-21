@@ -31,13 +31,14 @@ In this lab, you will:
 1. Run the following command on the FPP Server (Est. 14-15 minutes): password is always FPPll##123 unless you have changed it
 
     ```
-    rhpctl add database -workingcopy  WC_db_19_9_0_FPPC  \
+    rhpctl add database -workingcopy  WC_db_previous_FPPC  \
       -dbname fpplive1_site1 -datafileDestination DATA -dbtype SINGLE \
       -sudouser opc -sudopath /bin/sudo
     ```
-  ![](./images/fpp.png)
+  ![Output of database creationg part 1](./images/fpp.png)
+  ![Output of database creationg part 2](./images/fpp2.png)
 
-  Notice that you have not specified the target name: the FPP server knows what is the target node (or cluster) because the working copy named `WC_db_19_9_0_FPPC` has been provisioned there. This information is stored in the FPP metadata schema.
+  Notice that you have not specified the target name: the FPP server knows what is the target node (or cluster) because the working copy named `WC_db_previous_FPPC` has been provisioned there. This information is stored in the FPP metadata schema.
 
 ## Task 2: Verify the new database
 
@@ -51,7 +52,7 @@ In this lab, you will:
     sudo su - oracle
     ```
 
-  ![](./images/opc.png)
+  ![Log in as opc](./images/opc.png)
 
 2. As user `oracle`, set the environment for the new database:
 
@@ -61,19 +62,19 @@ In this lab, you will:
     The Oracle base has been set to /u01/app/oracle
     [oracle@fppc ~]$
     ```
-    ![](./images/oraenv.png)
+    ![Set environment variables with oraenv](./images/oraenv.png)
 
 3. Check the status of the database with `srvctl` and `sqlplus`:
 
     ```
     srvctl status database -db fpplive1_site1 -verbose
     ```
-  ![](./images/check-status.png)
+  ![Check status of the database](./images/check-status.png)
 
     ```
     sqlplus / as sysdba
     ```
-  ![](./images/sql.png)
+  ![Log in with sqlplus](./images/sql.png)
 
     ```
     set lines 220
@@ -86,12 +87,12 @@ In this lab, you will:
     ```
     exit
     ```
-    ![](./images/exit.png)
+    ![Check the patches installed](./images/exit.png)
 
 The database is there, wasn't that easy? You may now [proceed to the next lab](#next) and try to patch it.
 
 ## Acknowledgements
 
 - **Author** - Ludovico Caldara
-- **Contributors** - Kamryn Vinson
-- **Last Updated By/Date** -  Kamryn Vinson, May 2021
+- **Contributors** - Kamryn Vinson - Philippe Fierens
+- **Last Updated By/Date** -  Philippe Fierens, March 2023

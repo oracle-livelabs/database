@@ -6,6 +6,9 @@ This lab walks you through the steps to provision an Autonomous Database on Orac
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Provision an Autonomous Database](videohub:1_6vuxgeyf)
+
 ### Objectives
 
 In this lab, you will:
@@ -101,10 +104,10 @@ In this lab, you will:
 6. Configure the database:
 
     <if type="freetier">
-    - __Always Free__ - If your Cloud Account is an Always Free account, you can select this option to create an always free autonomous database. An always free database comes with 1 CPU and 20 GB of storage. For this lab, we recommend you leave Always Free unchecked.
+    - __Always Free__ - If your Cloud Account is an Always Free account, you can select this option to create an always free autonomous database. An always free database comes with 1 CPU and 20 GB of storage. For this lab, we recommend you leave Always Free checked if you have that as an option.
     </if>
     <if type="livelabs">
-    - __Always Free__ - For this lab, we recommend you leave Always Free unchecked.
+    - __Always Free__ - For this lab, we recommend you leave Always Free checked if it is available to you.
     </if>
     - __Choose database version__ - Select 19c from the database version. Note: This lab should work on a 21c AJD database as well.
     - __OCPU count__ - Number of OCPUs for your service. For this lab, leave the default __1 OCPU__. If you choose an Always Free database, it comes with 1 OCPU.
@@ -147,7 +150,7 @@ In this lab, you will:
 
     ![Click Create Autonomous Database.](./images/create-adb-final.png " ")
 
-11.  Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous JSON database is ready to use! Have a look at your instance's details here including the Database Name, Database Version, OCPU Count, and Storage.
+11.  Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous database is ready to use! Have a look at your instance's details here including the Database Name, Database Version, OCPU Count, and Storage.
 
     ![Database instance homepage.](./images/provisioning.png " ")
 

@@ -43,7 +43,7 @@ There are multiple ways to create an Oracle Wallet for ADB.  We will be using Or
 2.  Click the Cloud Shell icon to start up Cloud Shell
       ![](./images/cloud-shell.png " ")
 3.  While your Cloud Shell is starting up, click on the Hamburger Menu -> **Autonomous Transaction Processing** 
-      ![](https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/images/console/database-atp.png " ")
+      ![](https://oracle-livelabs.github.io/common/images/console/database-atp.png " ")
 
 4.  Click on the **Display Name** to go to your ADB main page.
 
@@ -104,14 +104,14 @@ There are multiple ways to create an Oracle Wallet for ADB.  We will be using Or
 ## Task 4:  Load ADB Instance with Application Schemas
 
 1. Go back to your cloud shell and start the cloud shell if it isn't already running
-   
+
 2. Run the wget command to download the load_21c.sh script from object storage.
 
       ````
       <copy>
       cd $HOME
       pwd
-      wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/load-21c.sh
+      wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/hgswLr4MreGPgEBDD2RTM_UggibYBlHM4UMiWQiKnigo52mxHqWWmJQx3RbRYy8D/n/id05dmgeno0f/b/adb21c/o/load-21c.sh
       chmod +x load-21c.sh
       export PATH=$PATH:/usr/lib/oracle/19.10/client64/bin
       </copy>

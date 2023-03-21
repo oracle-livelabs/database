@@ -1,7 +1,7 @@
 {
-  "workshoptitle": "Accelerate your Applications: Achieve Blazing Fast SQL With an Oracle TimesTen Cache",
+  "workshoptitle": "Accelerate your Applications - Achieve Blazing Fast SQL With an Oracle TimesTen Cache",
   "support": "https://community.oracle.com/tech/developers/categories/database-19c",
-  "help": "livelabs-help_us@oracle.com",
+  "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
@@ -9,73 +9,68 @@
       "filename": "../../01-introduction/introduction.md"
     },
     {
-      "title": "Get Started",
-      "description": "Get started with LiveLabs",
-      "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/cloud-login/cloud-login-livelabs2.md"
+      "title": "Lab 1: Connect to the workshop compute instance",
+      "description": "Connect to the workshop compute instance",
+      "filename": "../../00-verify-compute/verify-compute-livelabs.md"
     },
     {
-      "title": "Lab 1: Environment Setup",
-      "description": "Verify Setup of compute instance",
-      "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/verify-compute/verify-compute-novnc.md"
-    },
-    {
-      "title": "Lab 2: Connect to the workshop compute instance",
-      "description": "How to connect to the Cloud Instance",
-      "filename": "../../03-connect-to-instance/connect-to-instance.md"
-    },
-    {
-      "title": "Lab 3: Initialize the workshop environment",
+      "title": "Lab 2: Initialize the workshop environment",
       "description": "Initialize the workshop environmentEnvironment",
       "filename": "../../04-initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 4: Create a TimesTen instance",
+      "title": "Lab 3: Create a TimesTen instance",
       "description": "Create and start a TimesTen instance and execute some basic commands",
       "filename": "../../05-create-instance/create-instance.md"
     },
     {
-      "title": "Lab 5: Prepare the Oracle database for caching",
+      "title": "Lab 4: Prepare the Oracle database for caching",
       "description": "Prepare the Oracle database to support TimesTen caching",
       "filename": "../../06-prepare-oracle/prepare-oracle.md"
     },
     {
-      "title": "Lab 6: Prepare the TimesTen cache",
+      "title": "Lab 5: Prepare the TimesTen cache",
       "description": "Create a TimesTen database and set it up as a cache",
       "filename": "../../07-prepare-cache/prepare-cache.md"
     },
     {
-      "title": "Lab 7: Load Oracle data into the cache",
+      "title": "Lab 6: Load Oracle data into the cache",
       "description": "Perform the initial data load from Oracle to establish the cache",
       "filename": "../../08-load-cache/load-cache.md"
     },
     {
-      "title": "Lab 8: Verify automatic cache refresh",
+      "title": "Lab 7: Verify automatic cache refresh",
       "description": "Demonstrate the cache refresh mechanism",
       "filename": "../../09-cache-refresh/cache-refresh.md"
     },
     {
-      "title": "Lab 9: Measure OLTP performance improvement",
+      "title": "Lab 8: Measure OLTP performance improvement",
       "description": "Run a simple OLTP benchmark to compare the performance with and without the cache",
       "filename": "../../10-oltp-performance/oltp-performance.md"
     },
     {
-      "title": "Lab 10: Measure query performance improvement",
+      "title": "Lab 9: Measure query performance improvement",
       "description": "Use a query timing program to compare query performance with and without the cache",
       "filename": "../../11-query-performance/query-performance.md"
     },
     {
-      "title": "Lab 11: Dynamic caching",
+      "title": "Lab 10: Learn about dynamic caching",
       "filename": "../../12-dynamic-caching/dynamic-caching.md"
     },
     {
-      "title": "Lab 12: Shutdown the TimesTen cache and instance",
-      "description": "Perform an orderly shutdown of TimesTen",
+      "title": "Lab 11: Shut down the TimesTen cache and instance",
+      "description": "Perform an orderly shut down of TimesTen",
       "filename": "../../13-shutdown/shutdown.md"
+    },
+    {
+      "title": "Wrap-up",
+      "description": "Summary and resource cleanup",
+      "filename": "../../14-wrapup/wrapup.md"
     },
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-      "filename": "https://objectstorage.us-phoenix-1.oraclecloud.com/p/SJgQwcGUvQ4LqtQ9xGsxRcgoSN19Wip9vSdk-D_lBzi7bhDP6eG1zMBl0I21Qvaz/n/c4u02/b/common/o/labs/need-help/need-help-livelabs.md"
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
     }
   ]
 }

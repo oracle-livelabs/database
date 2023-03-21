@@ -1,34 +1,34 @@
-# Shutdown the TimesTen cache and instance
+# Shut down the TimesTen cache and instance
 
 ## Introduction
 
-In this final lab you will cleanly shutdown the Timesten cache and the TimesTen instance that manages it.
+In this final lab, you cleanly shut down the TimesTen cache and the TimesTen instance that manages it.
 
-Estimated Time: **2 minutes**
+**Estimated Lab Time:** 3 minutes
 
 ### Objectives
 
-- Stop the Cache Agent
-- Stop the TimesTen instance
+- Stop the cache agent.
+- Stop the TimesTen instance.
 
 ### Prerequisites
 
-This lab assumes that you have:
+This lab assumes that you:
 
-- Completed all the previous labs in this workshop, in sequence.
+- Have completed all the previous labs in this workshop, in sequence.
+- Have an open terminal session in the workshop compute instance, either via NoVNC or SSH, and that session is logged into the TimesTen host (tthost1).
 
-## Task 1: Connect to the environment
+## Task 1: Stop the cache agent
 
-If you do not already have an active terminal session, connect to the OCI compute instance and open a terminal session, as the user **oracle**. In that terminal session, connect to the TimesTen host (tthost1) using ssh.
-
-## Task 2: Stop the cache agent
-
-Check the current status of the TimesTen database:
-
-**ttStatus**
+1. Check the current status of the TimesTen database:
 
 ```
-[oracle@tthost1 livelab]$ ttStatus
+<copy>
+ttStatus
+</copy>
+```
+
+```
 TimesTen status report as of Mon Jun 13 13:33:24 2022
 
 Daemon pid 256 port 6624 instance ttinst
@@ -72,14 +72,17 @@ Accessible by group oinstall
 End of report 
 ```
 
-The database is active and is loaded in memory, because the cache agent is connected to it.
+The database is active and is loaded in memory because the cache agent is connected to it.
 
-Stop the cache agent:
-
-**ttAdmin -cacheStop sampledb**
+2. Stop the cache agent:
 
 ```
-[oracle@tthost1 livelab]$ ttAdmin -cacheStop sampledb
+<copy>
+ttAdmin -cacheStop sampledb
+</copy>
+```
+
+```
 RAM Residence Policy            : inUse
 Replication Agent Policy        : manual
 Replication Manually Started    : False
@@ -88,9 +91,13 @@ Cache Agent Manually Started    : False
 Database State                  : Open
 ```
 
-Check the status again:
+3. Check the status again:
 
-**ttStatus**
+```
+<copy>
+ttStatus
+</copy>
+```
 
 ```
 TimesTen status report as of Mon Jun 13 13:35:38 2022
@@ -114,34 +121,40 @@ End of report
 
 The database has been unloaded from memory and is now shut down.
 
-## Task 3: Stop the TimesTen instance
+## Task 2: Stop the TimesTen instance
 
-Stop the TimesTen instance (i.e. stop the main daemon):
-
-**ttDaemonAdmin -stop**
+Stop the TimesTen instance (the main daemon):
 
 ```
-[oracle@tthost1 livelab]$ ttDaemonAdmin -stop
+<copy>
+ttDaemonAdmin -stop
+</copy>
+```
+
+```
 TimesTen Daemon (PID: 190, port: 6624) stopped.
 ```
-## Task 4: Finally
+
+## Task 3: Log out of the TimesTen host
 
 Log out of the TimesTen host:
 
-**exit**
+```
+<copy>
+exit
+</copy>
+```
 
 ```
-[oracle@tthost1 livelab]$ exit
 logout
 Connection to tthost1 closed.
-[oracle@ttlivelabvm:~]$
 ```
 
-Congratulations, *you have completed the workshop*.
+You can now **proceed to the Wrap Up**.
 
 ## Acknowledgements
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Last Updated By/Date** - Jenny Bloom, March 2023
 
