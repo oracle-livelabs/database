@@ -20,9 +20,9 @@ In this lab, you will:
 
 ## Task 1: Validate Migration
 
-1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Migrations**
+1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
-  ![Screenshot of migration navigation](images/migration-navigation.png =90%x*)
+    ![create migration navigation](images/migration-create.png =90%x*)
 
 2. Select **TestMigration**
 
@@ -55,9 +55,9 @@ In this lab, you will:
 
 ## Task 2: Run Migration
 
-  1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Migrations**
+ 1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
-    ![Screenshot of migration navigation](images/migration-navigation.png =90%x*)
+    ![create migration navigation](images/migration-create.png =90%x*)
 
   2. Select **TestMigration**
 

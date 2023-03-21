@@ -18,9 +18,14 @@ With the Liquibase feature in SQLcl, you can:
 
 Estimated lab time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Use Liquibase to generate the base schema](videohub:1_lbqhg2em)
+
 ### Objectives
 
-In this lab, you will learn how to use Liquibase to generate the base changelog of the HR Schema.
+In this lab, you will
+
+- Learn how to use Liquibase to generate the base changelog of the HR Schema.
 
 ## Task 1: Run lb generate-schema to generate the base changelog
 

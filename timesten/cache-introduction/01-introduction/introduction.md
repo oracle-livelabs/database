@@ -2,7 +2,7 @@
 
 ## About this Workshop
 
-In this workshop, you will discover how, by deploying Oracle TimesTen In-Memory Database as an in-memory relational cache for an Oracle Database, you can dramatically improve the response times for SQL queries (typically by an order of magnitude ior more).
+In this workshop, you will discover how, by deploying Oracle TimesTen In-Memory Database as an in-memory relational cache for an Oracle Database, you can dramatically improve the response times for SQL queries (typically by an order of magnitude or more).
 
 Setting up a TimesTen cache is quick and easy. This workshop leads you through the process step by step. To demonstrate the incredibly low query latencies provided by TimesTen, the workshop uses a simple Online Transaction Processing (OLTP) application and sample queries.
 
