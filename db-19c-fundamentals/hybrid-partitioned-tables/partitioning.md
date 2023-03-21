@@ -1,6 +1,7 @@
 # Hybrid Partitioning
 
 ## Introduction
+
 In this lab, you will explore Hybrid Partitioning, a new feature introduced in Oracle Database 19c.
 
 Estimated Lab Time:  15 minutes
@@ -32,22 +33,22 @@ This lab is a high level overview of Hybrid partitioning. For an in depth Hybrid
 ### Prerequisites
 
 This lab assumes you have completed the following labs:
-* Lab: 19C Setup
+
+* Have an Autonomous Database provisioned.
+* Have completed the 19C Setup Lab
 
 ## Task 1: Set up the environment
 
-To set the stage, our fictitious company RockBuster only needs to keep the last 2 years worth of sales data internally. Today is the day they go through and exchange the 3 year old data to an external source. We will be exchanging our 2019 internal partition to an external table located in in Oracle's Object Storage.
+To set the stage, our fictitious company Oracle MovieStreams only needs to keep the last 2 years worth of merchandise sales data internally. Today is the day they go through and exchange the 3 year old data to an external source. We will be exchanging our 2019 internal partition to an external table located in in Oracle's Object Storage.
 
 First we will create an empty Object Storage bucket as our external partition.
 
 1. Using the OCI Console Menu, go to **Storage > Object Storage & Archive Storage**.
 
   ![Create the Bucket](./images/locate-bucket.png)
-
 2. Press **Create Bucket**.
 
   ![Locating the Bucket](./images/create-bucket.png)
-
 3. On the page Create Bucket, fill in the following entries, otherwise leave defaults:
 
     - Bucket Name: **ExternalPartition**
@@ -58,7 +59,7 @@ First we will create an empty Object Storage bucket as our external partition.
 
     In order to use the Bucket we just created, we need to create the proper credentials.
     
-5.  Click the user profile icon in the top right of the screen and select your full username (the first option under the profile drop down).
+5. Click the user profile icon in the top right of the screen and select your full username (the first option under the profile drop down).
 
   ![Locate account](./images/locate-account.png) 
 
@@ -66,9 +67,9 @@ First we will create an empty Object Storage bucket as our external partition.
 
   ![Generate the token](./images/generate-token.png) 
 
-7. Lets name our token HPL (short for Hybrid Partitioning Lab) under the Description and press **Generate Token**. 
+7. Lets name our token **HPL** (short for Hybrid Partitioning Lab) under the Description and press **Generate Token**. 
 
-8. Here you need to copy this token as it will not be shown again. You can press Show or Copy and save this somewhere you will have access to it later (a .txt file on the your desktop will work fine).
+8. Here you need to **copy** this token as it will not be shown again. You can press Show or Copy and save this somewhere you will have access to it later (a .txt file on the your desktop will work fine).
 
   ![Copy the token](./images/copy-token.png) 
 
@@ -77,7 +78,7 @@ First we will create an empty Object Storage bucket as our external partition.
 
 ## Task 2: Create the Credentials
 
-First, were going to navigate back to the Autonomous Database and open SQL Developer Web.
+First, were going to navigate back to the Autonomous Database and open SQL Developer Web. We need to make sure we are signed in as the NF19C user. Either switch to the Database Actions browser tab or follow the instructions below to sign in.
 
 1. Click the hamburger menu in the top left and select **Oracle Database** and **Autonomous Database**.
 
@@ -86,6 +87,10 @@ First, were going to navigate back to the Autonomous Database and open SQL Devel
 2. Select the Database you created in the earlier labs and select **Database Actions**.
   
   ![Open SQL Developer Web](./images/db-actions.png) 
+
+3. Log into Database Actions as the NF19C user.
+	![JSON Database Actions](./images/db-actions-logout.png)
+	![JSON Database Actions](./images/db-actions-login-lab.png)
   
 3. Wait for the new tab to open and select the SQL card under the Development section to open the SQL worksheet editor.
 
@@ -112,7 +117,7 @@ END;
     ```
     ```
     <copy>
-    alter database property set default_credential = 'ADMIN.OBJECT_STORE_CRED';
+    alter database property set default_credential = 'NF19C.OBJECT_STORE_CRED';
     </copy>
     ```
      ```
@@ -137,9 +142,7 @@ You can convert a table with only internal partitions to a hybrid partitioned ta
 
 First let's create some external files.  The external partitions will be stored in object storage as a dump file using EXPORT_DATA
 
-
-
-1.  Create a table to export. We will first drop the table SALES\_OLD incase there is already a table with this name. We can skip this if you don't have a Sales_old table 
+1.  **Double check you are signed in as the NF19C user**. Create a table to export. We will first drop the table SALES\_OLD incase there is already a table with this name. We can skip this if you don't have a Sales_old table 
 
     ```
     <copy>
@@ -297,8 +300,8 @@ Hybrid Partitioned Tables support many partition level operations, including:
      ```
     <copy>
         SELECT PARTITION_NAME, TABLESPACE_NAME, CASE READ_ONLY WHEN 'YES' THEN 'EXTERNAL' ELSE 'INTERNAL' END AS PARTITION_TYPE
-        FROM DBA_TAB_PARTITIONS
-        WHERE TABLE_OWNER = 'ADMIN' AND TABLE_NAME = 'SALES_BY_YEAR'
+        FROM ALL_TAB_PARTITIONS
+        WHERE TABLE_NAME = 'SALES_BY_YEAR'
         ORDER BY PARTITION_NAME;
     </copy>
     ```
@@ -375,8 +378,8 @@ END;
      ```
     <copy>
         SELECT PARTITION_NAME, TABLESPACE_NAME, CASE READ_ONLY WHEN 'YES' THEN 'EXTERNAL' ELSE 'INTERNAL' END AS PARTITION_TYPE
-        FROM DBA_TAB_PARTITIONS
-        WHERE TABLE_OWNER = 'ADMIN' AND TABLE_NAME = 'SALES_BY_YEAR'
+        FROM ALL_TAB_PARTITIONS
+        WHERE TABLE_NAME = 'SALES_BY_YEAR'
         ORDER BY PARTITION_NAME;
     </copy>
     ```
@@ -397,5 +400,5 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Killian Lynch, Database Product Management
-* **Contributors** - Thanks to the following for helping guide my ideas: Dominic Giles, Jenny Tsai-Smith, Kay Malcolm, Troy Anthony, Anoosha Pilli,  Dylan McLeod, Valentin Tabacaru
-* **Last Updated By/Date** - Killian Lynch July 2022
+* **Contributors** - Thanks to the following for helping: Dominic Giles, Jenny Tsai-Smith, Kay Malcolm, Troy Anthony, Anoosha Pilli,  Dylan McLeod, Valentin Tabacaru
+* **Last Updated By/Date** - Killian Lynch Feb 2023
