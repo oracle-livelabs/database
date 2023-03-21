@@ -19,7 +19,7 @@ Estimated Time: 135 minutes
 
 ### About HeatWave
 
-HeatWave is a distributed, scalable, shared-nothing, in-memory, hybrid columnar, query processing engine designed for extreme performance. It is enabled when you add a HeatWave cluster to a MySQL DB System. To know more about HeatWave Cluster <a href="https://dev.mysql.com/doc/heatwave/en/heatwave-introduction.html" target="\_blank">**Click Here**</a>
+HeatWave is a distributed, scalable, shared-nothing, in-memory, hybrid columnar, query processing engine designed for extreme performance. It is enabled when you add a [MySQL HeatWave](https://dev.mysql.com/doc/heatwave/en/heatwave-introduction.html) cluster to a MySQL DB System.
 
 ### Objectives
 
@@ -51,4 +51,4 @@ Contributors
 * Perside Foster, MySQL Solution Engineering North America
 * Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
 
-**Last Updated By/Date** - Ryan Kuan, May 2022
+Last Updated By/Date - Ryan Kuan, March 2023

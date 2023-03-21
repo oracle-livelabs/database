@@ -151,7 +151,6 @@ This lab assumes you have:
 2. Submit a SQL statement to verify that PHP application connects well with MySQL.
 
     ```text
-
     <copy>
     SELECT
     airline.airlinename,
