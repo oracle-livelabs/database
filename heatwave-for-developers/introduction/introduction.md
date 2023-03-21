@@ -6,7 +6,11 @@ MySQL HeatWave is a fully managed database service that lets developers quickly 
 
 In this workshop, you will first learn to deploy and configure MySQL HeatWave, including its built-in in-memory query accelerator. You will then develop an analytics application allowing retail customers to obtain, visualize, and redeem discount coupons based on their previous purchases. You will build this application using the LAMP (Linux, Apache, MySQL, PHP) stack with step-by-step instructions and sample code, and experience the high performance of MySQL HeatWave to run complex analytics queries.
 
+**Note:** This application code is intended for educational purposes only. It is designed to help developers learn and practice application development skills with MySQL HeatWave on OCI. The code is not designed to be used in a production environment
+
 This workshop will show you how easy it is to create and manage MySQL HeatWave and how MySQL HeatWave enables you to make informed business-critical decisions with real-time insights.
+
+
 
 _Estimated Lab Time:_ 3 hours +
 
