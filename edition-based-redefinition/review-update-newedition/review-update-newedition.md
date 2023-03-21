@@ -6,16 +6,15 @@ In this lab, you will review the new edition scripts to create a new edition and
 
 Estimated lab time: 10 minutes
 
-Watch the video below for a quick walk-through of the lab.
-[Review and deploy the changelog for the new edition](videohub:1_6gwysmq9)
-
 ### Objectives
 
-In this lab, you will
+In this lab,you will
 
-- Review the new edition scripts to create a new edition and split the column `employees.phone_number` to `country_code` and `phone#`
+- Review the new edition scripts to create a new edition and split the column `employees.phone_number` to `country_code` and `phone#`. 
 
 ## Task 1: Review the scripts for the new edition
+
+We have pre-created these scripts and the scope of the lab is not to explain the logic of the scripts.
 
 1. From the Cloud Shell home directory, navigate to *changes/hr.00002.edition_v2* folder
 

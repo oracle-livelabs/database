@@ -6,6 +6,9 @@ This lab walks you through the steps to quickly provision an Oracle Autonomous D
 
 Estimated lab time: 20 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Provision an Oracle Autonomous Database for use as resource manager](videohub:1_9p3qtn2f)
+
 ### Objectives
 
 * Provision two new Autonomous Transaction Processing instances.
