@@ -151,7 +151,7 @@ You may  *proceed to the next lab*.
 
 	![Database Actions Login](./images/db-actions-login.png)
 
-3. (Optional database password reset) If you need to reset your database password its very simple to do so. Click on **More actions** from the OCI console screen and select **Administrator Password**. Fill in your new password and select **Change**. After you select **Change**, follow from step 1 above.
+3. (Optional database password reset) If you need to reset your database password, it's very simple to do so. Click on **More actions** from the OCI console screen and select **Administrator Password**. Fill in your new password and select **Change**. After you select **Change**, follow from step 1 above.
 
 	![Reset DB Password](./images/db-password-reset.png)
 
@@ -187,7 +187,7 @@ You may  *proceed to the next lab*.
     - Toggle the **Graph** button to **On**.
     - Toggle the **Web Access** button to **On**.
     - Toggle the **OML** button to **On**.
-    - In the upper-right section of the Create User dialog, select **UNLIMITED** from the drop down menu for Quota on tablespace DATA.
+    - In the upper-right section of the Create User dialog, select **UNLIMITED** from the drop-down menu for Quota on tablespace DATA.
 
     - Leave the **Password Expired** toggle button as off (Note: this controls whether the user is prompted to change their password when they next log in).
     - Leave the **Account is Locked** toggle button as off. 
@@ -213,13 +213,13 @@ To make this workshop as realistic as possible, let us introduce the business sc
 
 ![Logo graphic of Oracle MovieStream](images/moviestream-logo.jpeg)
 
-Oracle MovieStream is a fictitious online movie streaming company. Customers log into Oracle MovieStream using their computers, tablets and phones where they are presented with a targeted list of movies based on their past viewing habits. The company is now looking for better, smarter ways to track performance, identifying customers to target with campaigns that promote new services, new movies and new viewing platforms. Many of the scenarios in this workshop will based on challenges companies are seeing in their own businesses and we hope the following labs and accompanying workshops will give you some insight into how Oracle can help you solve these common everyday business and technical challenges.
+Oracle MovieStream is a fictitious online movie streaming company. Customers log into Oracle MovieStream using their computers, tablets and phones where they are presented with a targeted list of movies based on their past viewing habits. The company is now looking for better, smarter ways to track performance, identifying customers to target with campaigns that promote new services, new movies and new viewing platforms. Many of the scenarios in this workshop will be based on challenges companies are seeing in their own businesses, and we hope the following labs and accompanying workshops will give you some insight into how Oracle can help you solve these common everyday business and technical challenges.
 
-1. Now that were signed in as user **NF19C** we can load our data. Select the Data Load card.
+1. Now that we're signed in as user **NF19C** we can load our data. Select the Data Load card.
 
 	![Selecting the Data Load Card on the right side of the screen ](./images/load-data.png)
 
-2. To make things easier, the data needed for todays lab is stored in Oracle's Object Storage. Scroll down and select **Cloud Locations**.
+2. To make things easier, the data needed for today's lab is stored in Oracle's Object Storage. Scroll down and select **Cloud Locations**.
 
 	![select cloud storage ](./images/cloud-locations.gif)
 
@@ -236,11 +236,11 @@ Oracle MovieStream is a fictitious online movie streaming company. Customers log
 
     ![Adding the cloud Bucket URI ](./images/cloud-bucket.png)
 
-4. Using the navigation bar on the left select **Data Load** and **Load Cloud Store**
+4. Using the navigation bar on the left, select **Data Load** and **Load Cloud Store**
 
 	![load cloud data ](./images/load-cloud-data.png)
 
-5. Drag and drop the **customer_contact, custsales, genre,** and **movie** folders into the data loading area. **Select yes** when prompted if you would like to load object in the folder to the table or SODA Collection. Once all the folders have been moved to the loading area and **press start and run** .
+5. Drag and drop the **customer_contact, custsales, genre,** and **movie** folders into the data loading area. **Select yes** when prompted if you would like to load an object in the folder to the table or SODA Collection. Once all the folders have been moved to the loading area and **press start and run**.
 
 
 	![Drag and drop the folders into the data loading tool ](./images/drag-and-drop-data.gif)
