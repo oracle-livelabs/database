@@ -50,8 +50,8 @@ This lab assumes you have:
 
 3. Deploy Grafana application with Load Balancer service
 
-  ```bash
-  <copy>
+    ```bash
+<copy>
 
 cat << EOF | kubectl apply -n grafana -f -
 ---
@@ -138,7 +138,7 @@ spec:
   type: LoadBalancer
 EOF
 </copy>
-```
+    ```
 
 4. Check the status of pods and wait until all the pods are up and running
 
