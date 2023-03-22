@@ -214,6 +214,12 @@ Database users, who are not service administrators, do not have access to the Au
 ## Task 5: Insert, Modify, and Delete Records
 In this section, you manipulate the records in the tables that you created.
 
+> **Note:** In Database Actions, a connection to the database is stateless.
+- In a stateless environment, each HTTPS request from a client such as SQL Worksheet maps to a new database session. Therefore, a session begins and ends with every SQL statement or script execution.
+- As the session state is not maintained, session attributes do not persist and commands such as ROLLBACK and COMMIT do not apply. If a SQL statement or script executes successfully, an implicit commit is performed. If it executes with an error, an implicit rollback is performed.
+- Therefore, when needed, include the ROLLBACK and COMMIT commands or session attributes in the PL/SQL code block that is sent to the database for a session.
+- SQL Worksheet is a handy tool to perform simple tasks, as in this lab. For the bulk of your database work, you will commonly use tools such as SQL Developer, SQLcl, and SQL*Plus augmented by Database Actions.
+
 1. **Inserting data**: You execute the `INSERT` statement to add rows of data to a database table.
 
     **Syntax**: ```INSERT INTO table [(column [, column...])]
@@ -251,8 +257,6 @@ In this section, you manipulate the records in the tables that you created.
     ```
 
     ![Delete an order from a table](./images/delete-data.png " ")
-
-> **Note**: Since SQL Worksheet is an HTTPS web interface, it is in a stateless environment. The statements that you issue are **automatically committed**. Every request is a complete session. Therefore, statements like ROLLBACK do not apply in SQL Worksheet. SQL Worksheet is a handy tool to perform simple tasks, as in this lab. For the bulk of your database work, you will use desktop tools such as Oracle SQL Developer.
 
 ## Task 6: Remove Tables
 In this section, you execute the `DROP TABLE` statement to remove a table and its data from the database.
