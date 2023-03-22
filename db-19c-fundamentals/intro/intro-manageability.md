@@ -1,24 +1,23 @@
 # Introduction
 
-This section of the workshop highlights Online table move. Online Table Move is an Oracle 12.2 release that goes widely unused. 
+Welcome to the Manageability section of the workshop, where we will explore Online Table Move. As a database administrator, you understand the importance of maintaining your database to ensure optimal performance and efficiency. However, traditional methods of moving tables can be time-consuming and often require significant downtime, causing disruptions to user access. That's where Online Table Move comes in. In this section, we will discuss the numerous benefits of Online Table Move, including minimal downtime, improved performance, simplified storage management, efficient space management, and reduced storage costs. 
 
-The benefits of using Oracle online table move include:
 
-Minimal downtime: With Oracle online table move, you can continue to access the table while the move operation is underway. This can minimize the downtime required for maintenance tasks.
+## About the Manageability New Features section
 
-Improved performance: Moving a table to a new tablespace can improve performance by allowing the DBA to store the table in a location that is optimized for the specific workload of the table.
+In this section of the workshop, we will focus on Online Table Move, a powerful yet often overlooked feature of Oracle 12.2. Online Table Move provides numerous benefits for Oracle database administrators, including:
 
-Simplified storage management: Oracle online table move allows the DBA to move tables between tablespaces without having to export and import the data, which simplifies storage management.
+* Minimal Downtime: By using Online Table Move, you can continue to access a table while it is being moved, minimizing downtime required for maintenance tasks.
 
-Space management: Moving tables between tablespaces enables you to balance the space in your database.
+* Improved Performance: Moving a table to a new tablespace can improve performance by optimizing the location of the table to the specific workload it supports.
 
-Reduced storage costs: By moving a table to a compressed tablespace, storage costs can be reduced as the table uses less disk space.
+* Simplified Storage Management: Online Table Move allows you to move tables between tablespaces without exporting and importing data, streamlining storage management.
 
-Overall, Oracle online table move is a useful feature for Oracle DBAs who need to perform table maintenance tasks without disrupting user access or incurring lengthy downtime.
+* Efficient Space Management: By moving tables between tablespaces, you can balance space in your database, ensuring optimal performance and storage capacity.
 
-## About the Oracle Database 19c New Features Workshop
+* Reduced Storage Costs: Moving a table to a compressed tablespace can decrease storage costs by using less disk space.
 
-This workshop lets you try out new features in Oracle Database 19c.  If needed, a lab starts with instructions on how to prepare your environment, and ends with instructions on how to restore your environment back to its original state.
+Overall, Oracle Online Table Move is a valuable tool for Oracle DBAs seeking to conduct table maintenance tasks without disrupting user access or incurring significant downtime.
 
 
 

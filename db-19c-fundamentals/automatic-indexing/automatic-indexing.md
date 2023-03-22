@@ -16,7 +16,7 @@ Workload information is collected in an Autonomous Database for analysis. Indexe
 
 
 
-Estimated Time: 1 hour
+Estimated Time: 45 minutes
 
 ### Objectives
 
@@ -43,7 +43,7 @@ This lab assumes you have:
 	![JSON Database Actions](./images/db-actions-logout.png)
 	![JSON Database Actions](./images/db-actions-login-lab.png)
 
-4. The DBMS\_AUTO\_INDEX package is used to manage the automatic indexing feature. The CDB\_AUTO\_INDEX\_CONFIG view shows the current automatic indexing configuration. Lets check our current index mode.
+4. The DBMS\_AUTO\_INDEX package is used to manage the automatic indexing feature. The CDB\_AUTO\_INDEX\_CONFIG view shows the current automatic indexing configuration. Let's check our current index mode.
 
       ```
       <copy>
@@ -131,7 +131,7 @@ This lab assumes you have:
 
 ## Task 3: Execute an Application Workload   
 
-1. Execute a workload on the application table, AUTO\_INDEX\_TEST\_TABLE. The statements use a variety of different predicates, some of which will benefit from index access. Auto indexing tests _new_ appliation workload SQL statements as soon as possible and will not test them again for at least 30 days. To ensure that our SQL statements are tested as soon as possible (even if you have run this lab before), the PL/SQL block below generates unique SQL statements each time it is executed. It does this using a table alias name incorporating a time-stamp. Note that workload SQL statements need to be executed more than once to be considered by auto indexing.
+1. Execute a workload on the application table, AUTO\_INDEX\_TEST\_TABLE. The statements use a variety of different predicates, some of which will benefit from index access. Auto indexing tests _new_ application workload SQL statements as soon as possible and will not test them again for at least 30 days. To ensure that our SQL statements are tested as soon as possible (even if you have run this lab before), the PL/SQL block below generates unique SQL statements each time it is executed. It does this using a table alias name incorporating a time-stamp. Note that workload SQL statements need to be executed more than once to be considered by auto indexing.
 
     ````
     <copy>
@@ -208,7 +208,7 @@ The Oracle Autonomous Database collects workload SQL periodically (every 15 minu
 
 ## Task 5: Generate the Automatic Indexing Report   
 
-1. If the auto indexing task has _just_ completed dealing with your workload, you can view the most recent report. To generate the report run the following.
+1. If the auto indexing task has _just_ completed dealing with your workload, you can view the most recent report. To generate the report, run the following.
 
     ````
     <copy>
@@ -256,7 +256,7 @@ In the report above, we can see:
 
     ![Plan differences](./images/plan-baseline.png)
 
-Automatic indexing enables Autonomous Database users to benefit from indexing without the risks inherent in making changes without analyzing the effect changes will make to the application workload. This Lab is intended to show a small sample of what the Automatic Indexing capabilities can do. For a complete in depth look at automotic indexing try the lab below.
+Automatic indexing enables Autonomous Database users to benefit from indexing without the risks inherent in making changes without analyzing the effect changes will make to the application workload. This Lab is intended to show a small sample of what the Automatic Indexing capabilities can do. For a complete in depth look at automatic indexing try the lab below.
 
 - [Automatic Indexing for Oracle Autonomous Database](https://apexapps.oracle.com/pls/apex/f?p=133:180:11731666531056::::wid:3328)
 

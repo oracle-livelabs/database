@@ -1,14 +1,14 @@
 # Online Table Move
 
 ## Introduction
-An Online Table Move is an Oracle 12.2 release that goes widely unused. You can now perform an online move of a table, as well as individual partitions and sub-partitions. 
+In this Lab, we will focus on Online Table Move, a powerful yet often overlooked feature of Oracle 12.2.
 
-This means that there is no longer a need for an outage to support the reorganization of tables. This inturn allows for a table move while transactions are running against it. Online table move also has the ability to filter and compress data as part of a move. For example if I were to have a table containing hundreds of thousands of order entry rows and I wanted to go through and clean out some of those, I would need to run a big DDL delete statement against that dataset. With ALTER TABLE MOVE ONLINE I can use a filter which effectively prunes out all of the old orders from the table and gives the ability to apply compression to the new dataset as well. 
+Online Table Move enables you to move a table, its partitions, and sub-partitions without downtime. This means that there is no longer a need for an outage to support the reorganization of tables. This inturn allows for a table move while transactions are running against it. Online table move also has the ability to filter and compress data as part of a move. For example if I were to have a table containing hundreds of thousands of order entry rows and I wanted to go through and clean out some of those, I would need to run a big DDL delete statement against that dataset. With ALTER TABLE MOVE ONLINE, I can use a filter which effectively prunes out all the old orders from the table and gives the ability to apply compression to the new dataset as well. 
 
-Here we will stick with our fictitious company Oracle MovieStreams and move their merchandise store locations table online while also enabling table compression.
+To demonstrate the power of this feature, let's use our fictitious company, Oracle MovieStreams, as an example. We will move their merchandise store locations table online while enabling table compression to reduce storage costs.
 
 
-Estimated Lab Time: 10 minutes
+Estimated Lab Time: 15 minutes
 
 ### Objectives
 
@@ -20,7 +20,7 @@ In this lab, you will:
 * Have completed the 19C Setup Lab
 
 
-## Task 1: Online Table Move
+## Task 1: Alter Table Move
 1. If you're not already looking at the SQL Developer Web interface, locate your Autonomous Database by clicking the hamburger menu in the top left of the screen, selecting Oracle Databases and choose Autonomous Database. **If you already have SQL Developer Web up, skip to step 3.**
  
   ![locate adb](./images/locate-adb.png " ")
@@ -29,7 +29,7 @@ In this lab, you will:
 
    ![db actions](./images/database-actions.png " ")
 
-3. Lets start by creating a table and moving it offline to get a feel for how a table move works.
+3. Let's start by creating a table and moving it offline to get a feel for how a table move works.
 
     ```
     <copy>
@@ -42,7 +42,7 @@ In this lab, you will:
     </copy>
     ```
 
-4. Lets add some data to our table. We will use the **Run Script button** for the remainder of this lab. Its located in the Database Actions console as shown in the gif below. (F5) works as well
+4. Let's add some data to our table. We will use the **Run Script button** for the remainder of this lab. It's located in the Database Actions console as shown in the GIF below. (F5) works as well
 
     ```
     <copy>
@@ -54,7 +54,7 @@ In this lab, you will:
     ```
     ![run with the script button](./images/run-script.png)
 
-5. Here we will go ahead and add a constraint and create an index on the locations by state. Lets use the **Run script button** as shown above. (F5) works as well.
+5. Here we will go ahead and add a constraint and create an index on the locations by state. Let's use the **Run script button** as shown above. (F5) works as well.
 
     ```
     <copy>
@@ -62,8 +62,10 @@ In this lab, you will:
     CREATE index location_index ON STORE_LOCATIONS(state);
     </copy>
     ```
+    ![run with the script button](./images/state-index.png)
 
-6. Now that we have some test data lets move our table. Run the select statement after the alter table move. Notice how our Indexes are now Unstable. This is because the index is now referencing the wrong location. Lets use the **Run Script button** again 
+
+6. Now that we have some test data, we'll move our table. Run the select statement after the alter table move. Notice how our Indexes are now Unstable. This is because the index is now referencing the wrong location. Let's use the **Run Script button** again 
 
     ```
     <copy>
@@ -72,17 +74,30 @@ In this lab, you will:
     </copy>
     ```
 
+    ![run with the script button](./images/unstable-index.png)
+
 7. We will go ahead now and rebuild our indexes. Use the Run Script button and run the commands below to rebuild both.
 
     ```
     <copy>
     ALTER index location_index REBUILD ONLINE;
     ALTER index location_pk REBUILD ONLINE;
-    SELECT index_name, status FROM user_indexes WHERE index_name = 'LOCATION_INDEX' OR index_name = 'LOCATION_PK';
     </copy>
     ```
 
-8. Now we will move our table using the ONLINE keyword. Not only does this move the table but this automatically maintains the indexes. Use the Run Script button or press (F5)
+    ![run with the script button](./images/rebuild.png)
+
+8. Next, we can run the same query as we did earlier to check the status of our indexes. Notice they are both valid. 
+    ```
+    <copy>
+    SELECT index_name, status FROM user_indexes WHERE index_name = 'LOCATION_INDEX' OR index_name = 'LOCATION_PK';
+    </copy>
+    ```
+    ![run with the script button](./images/valid.png)
+
+## Task 2: Online Table Move
+
+1. To move our table and automatically maintain its indexes, we'll use the ONLINE keyword. This avoids the need to rebuild the indexes manually. To execute this command, you can click the Run Script button or press (F5). Once the operation is complete, you'll notice that the indexes are still intact. 
 
     ```
    <copy>
@@ -90,17 +105,19 @@ In this lab, you will:
     SELECT index_name, status FROM user_indexes where index_name = 'LOCATION_INDEX' OR index_name = 'LOCATION_PK';
     </copy>
     ```
+    ![run with the script button](./images/online.png)
 
 
-9. We also have the ability to change table compression and other storage parameters as an online operation. We can first see that our Store location table is uncompressed. 
+2. We also have the ability to change table compression and other storage parameters as an online operation. Lets go ahead and do this. We can first see that our Store location table is uncompressed. 
 
     ```
     <copy>
     SELECT compression FROM user_tables WHERE table_name = 'STORE_LOCATIONS';
     </copy>
     ```
+    ![run with the script button](./images/no-compression.png)
 
- Now we can move our table with compression. Use the Run Script button or press (F5) to execute the commands.
+3. Now we can move our table with compression. Use the Run Script button or press (F5) to execute the commands.
 
    ```
    <copy>
@@ -109,13 +126,13 @@ In this lab, you will:
     </copy>
     ```
 
-    ```
-    <copy>
-    SELECT compression FROM user_tables WHERE table_name = 'STORE_LOCATIONS';
-    </copy>
-    ```
+ To recap, we learned about the "ALTER TABLE MOVE ONLINE" feature in Oracle, which allows us to move a table to a different tablespace or compress it without causing any downtime to the application that uses the table.
 
- To recap, you now have the ability to perform a table move online, as well as individual partitions and sub-partitions without the need for an outage to support the reorganization of tables. This means the table indexes will be maintained for you as well. Online table move also has the ability to filter and compress data as part of a move. For more on this see the Learn More section
+ We started by discussing the benefits of using this feature, which include better resource management, minimized downtime, and enhanced database performance. We then went on to walk through the steps of using the "ALTER TABLE MOVE ONLINE" command, which involves specifying the name of the table and the new tablespace or compression type.
+
+ We saw how the table remained available during the move, which allows  for the continuation of querying and updating of a table without any disruption to the application's availability. We also saw how we can compressing a table during the online move which can significantly reduce the amount of storage required and improve query response times.
+
+Overall, the "ALTER TABLE MOVE ONLINE" feature is a valuable tool for database administrators who need to manage resources, optimize database performance, and minimize downtime. By understanding how to use this feature effectively, we can better manage our Oracle databases and improve the overall efficiency of our systems.
 
  You may now proceed to the next lab.
 
@@ -127,4 +144,4 @@ In this lab, you will:
 
 * **Author** - Killian Lynch, Database Product Management
 * **Contributors** - Dominic Giles 
-* **Last Updated By/Date** - Killian Lynch March 202e
+* **Last Updated By/Date** - Killian Lynch March 2023

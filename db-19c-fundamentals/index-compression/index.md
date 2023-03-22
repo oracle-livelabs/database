@@ -2,26 +2,22 @@
 
 ## Introduction
 
-Advanced Index Compression is an Oracle 12.1 release that goes widely unused yet has significant benefits. Indexes are used extensively inside OLTP databases since they can efficiently support a wide variety of access paths to the data stored in relational tables. It is prevalent to find many indexes created on a single table to support many access paths for OLTP applications. This can cause indexes to contribute a more significant share to the overall storage of a database when compared to the size of the base tables alone. Advanced Index Compression is a form of index block compression. Creating an index using Advanced Index Compression reduces the size of all supported unique and non-unique indexes while still providing efficient access to the indexes. 
+Advanced Index Compression is a powerful feature in Oracle 12.1 that provides significant benefits, yet it is often overlooked. In OLTP databases, indexes are crucial for efficiently supporting various access paths to relational table data. It is not uncommon to have multiple indexes created on a single table to support many access paths for OLTP applications. However, this can result in indexes taking up a larger share of the overall database storage than the base tables themselves.
 
-Estimated Time: 20 minutes
+Advanced Index Compression offers a solution to this issue. It is a form of index block compression that reduces the size of all supported unique and non-unique indexes while still providing efficient access to the data. By using this feature, organizations can reduce the storage requirements for their indexes and free up valuable space in their database.
 
-### About Advanced index compression
+Estimated Time: 15 minutes
 
-Advanced index compression LOW works well on all supported indexes, including those indexes that are not good candidates (indexes with no duplicate values or few duplicate values for a given number of leading columns of the index) with the existing Prefix Compression feature. Advanced Index Compression HIGH works at the block level to provide the best compression for each block. This means that you do not need knowledge of data characteristics – Advanced Index Compression HIGH automatically chooses the right compression per block.The HIGH level of Advanced Index Compression provides significant space savings while also improving performance for queries that are executed using indexes. Advanced Index Compression LOW and HIGH both provide significant space savings while also improving performance for queries that are executed using indexes.
+### About Advanced Index Compression
 
-### Key Features
+Oracle's Advanced Index Compression offers two levels of compression: LOW and HIGH. The LOW level is effective for all supported indexes, even those that are not suitable for the existing Prefix Compression feature, which is designed for indexes with many duplicate values. The LOW level reduces the size of indexes that have few or no duplicate values for a given number of leading columns of the index.
 
-* Gives higher compression ratios.
-* Employs more complex compression algorithms than advanced index compression LOW.
-* Stores data in a compression unit, which is a special on-disk format.
+The HIGH level of Advanced Index Compression is block-level compression that provides the best possible compression for each block without requiring any knowledge of data characteristics. The compression is automatically selected per block, resulting in significant space savings and improved query performance.
 
-### Expectations from adapting a compression technique 
+Both levels of Advanced Index Compression offer significant space savings and improved performance for queries that use indexes. The HIGH level is especially useful for very large indexes or those with little duplication, where significant storage savings can be achieved.
 
-*	Storage costs to drop as the result of any compression deployments, and 
-*	No query performance degradation and only minimal Data Manipulation Language (DML) performance impact from compression.
  
-This Lab will teach you how to enable advanced index compression. 
+This Lab will teach you how to enable Advanced Index Compression. 
 
 ### Objectives
  
@@ -36,7 +32,7 @@ This lab assumes you have:
 * An Autonomous Database 
 * Completion of the Lab: 19C Setup
   
-## Task 1: Enable advanced index compression
+## Task 1: Enable Advanced Index Compression
 
 1. If you're not already looking at the SQL Developer Web interface, locate your Autonomous Database by clicking the hamburger menu in the top left of the screen, selecting Oracle Databases and choose Autonomous Database. **If you already have SQL Developer Web up and are logged in as the NF19C user, skip to step 4.**
  
@@ -117,20 +113,22 @@ This lab assumes you have:
       ```
       ![User Index](images/user-index.png "User Index")
 
-**To summarize**, this lab aimed to demonstrate the benefits of Advanced Index Compression. Advanced Index offers several powerful features, including the ability to perform online moves of tables, partitions, and subpartitions to a compressed format. This enables seamless movement of data without blocking concurrent DML operations. Additionally, the partition/subpartition move operation supports automatic index maintenance, eliminating the need for index rebuilding. Overall, the "online" feature of this MOVE operation is a significant advantage of Advanced Compression.
+In conclusion, this lab has explored some of the benefits and capabilities of Oracle's Advanced Index Compression technology. Through the use of high levels of Advanced Index Compression, we were able to significantly reduce the storage footprint of our indexes without compromising query performance. This can result in substantial savings in storage costs and improved overall system performance.
 
-If your interested in learning more about advanced compression check out the full advanced compression LiveLab below.
+The Advanced Index Compression feature is a powerful tool for optimizing database performance in high-data-volume environments. By reducing the size of indexes, it allows for faster querying and less storage space, which ultimately leads to better overall system performance. 
 
-* [Oracle advanced index compression LiveLab](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=1017&clear=RR,180&session=115125103779999) 
+If your interested in learning more about Advanced Compression, check out the full Advanced Compression LiveLab below.
+
+* [Oracle Advanced Index Compression LiveLab](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=1017&clear=RR,180&session=115125103779999) 
 
 You successfully made it to the end this lab. You may now **proceed to the next lab**.    
 
 ## Learn More
 
-* [Oracle advanced compression](https://www.oracle.com/technetwork/database/options/compression/advanced-compression-wp-12c-1896128.pdf) 
+* [Oracle Advanced Compression](https://www.oracle.com/technetwork/database/options/compression/advanced-compression-wp-12c-1896128.pdf) 
  
 ## Acknowledgements
 
-- **Author** - Madhusudhan Rao, Principal Product Manager, Database
-* **Contributors** - Kevin Lazarz, Senior Principal Product Manager, Database and Gregg Christman, Senior Product Manager
-* **Last Updated By/Date** -  Madhusudhan Rao, Feb 2022 
+- **Author** - Killian Lynch, Database Product Manager
+* **Contributors** - Dom Giles, Database Product Manager
+* **Last Updated By/Date** -  Killian Lynch, Feb 2023 
