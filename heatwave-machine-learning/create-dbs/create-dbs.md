@@ -103,7 +103,7 @@ In this lab, you will be guided through the following tasks:
 
     Click 'Add Ingress Rule'
 
-        ![VCN](./images/03vcn-ingress-rule.png "vcn-ingress-rule")
+    ![VCN](./images/03vcn-ingress-rule.png "vcn-ingress-rule")
 
 13. On Security List for Private Subnet-MDS-VCN page, the new Ingress Rules will be shown under the Ingress Rules List
 
