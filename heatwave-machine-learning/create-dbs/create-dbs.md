@@ -10,6 +10,8 @@ _Estimated Time:_ 15 minutes
 
 In this lab, you will be guided through the following tasks:
 
+- Create a Compartment
+- Create a policy
 - Create a Virtual Cloud Network
 - Create MySQL HeatWave Database
 
@@ -18,7 +20,73 @@ In this lab, you will be guided through the following tasks:
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with MySQL Shell
 
-## Task 1: Create a Virtual Cloud Network
+## Task 1: Create a Compartment
+
+You must have an OCI tenancy subscribed to your home region and enough limits configured for your tenancy to create a MySQL Database System. Make sure to log in to the Oracle Cloud Console as an Administrator.
+
+1. Click the **Navigation Menu** in the upper left, navigate to **Identity & Security** and select **Compartments**.
+
+    ![Oracle Cloud Console](https://oracle-livelabs.github.io/common/images/console/id-compartment.png " ")
+
+2. On the Compartments page, click **Create Compartment**.
+
+    ![Compartment2](./images/01compartment02.png " ")
+
+   > **Note:** Two Compartments, _Oracle Account Name_ (MDS_Sandbox) and a compartment for PaaS, were automatically created by the Oracle Cloud.
+
+3. In the Create Compartment dialog box, in the **NAME** field, enter **MDS_Sandbox**, and then enter a Description, select the **Parent Compartment**, and click **Create Compartment**.
+
+    ![Create a Compartment](./images/01compartment03.png " ")
+
+    The following screen shot shows a completed compartment:
+
+    ![Completed Compartment](./images/01compartment04.png " ")
+
+## Task 2: Create a Policy
+
+1. Click the **Navigation Menu** in the upper-left corner, navigate to **Identity & Security** and select **Policies**.
+
+    ![Plicies](https://oracle-livelabs.github.io/common/images/console/id-policies.png " ")
+
+2. On the Policies page, in the **List Scope** section, select the Compartment (MDS_Sandbox) and click **Create Policy**.
+
+    ![Policies page](./images/02policy02.png " ")
+
+3. On the Create Policy page, in the **Description** field, enter **MDS_Policy** and select the MDS_Sandbox compartment.
+
+4. In the **Policy Builder** section, turn on the **Show manual editor** toggle switch.
+
+    ![Create Policy page](./images/02policy03.png " ")
+
+5. Enter the following required MySQL Database Service policies:
+
+    - Policy statement 1:
+
+    ```bash
+    <copy>Allow group Administrators to {COMPARTMENT_INSPECT} in tenancy</copy>
+    ```
+
+    - Policy statement 2:
+
+    ```bash
+    <copy>Allow group Administrators to {VCN_READ, SUBNET_READ, SUBNET_ATTACH, SUBNET_DETACH} in tenancy</copy>
+    ```
+
+    - Policy statement 3:
+
+    ```bash
+    <copy>Allow group Administrators to manage mysql-family in tenancy</copy>
+    ```
+
+6. Click **Create**.
+
+    ![Create Policy page](./images/02policy04.png " ")
+
+    > **Note:** The following screen shot shows the completed policy creation:
+
+    ![Completed policy creation page](./images/02policy05.png " ")
+
+## Task2: Create a Virtual Cloud Network
 
 1. Click **Navigation Menu** in the up-left corner of the page
 
@@ -47,7 +115,7 @@ In this lab, you will be guided through the following tasks:
     <copy>MDS-VCN</copy>
     ```
 
-    Compartment: Select  **(root)**
+    Compartment: Select  **(MDS_Sandbox)**
 
     Your screen should look similar to the following
 
@@ -66,15 +134,14 @@ In this lab, you will be guided through the following tasks:
 
     ![VCN](./images/03vcn-create-complete.png "vcn-create-complete ")
 
-9. On MDS-VCN page under 'Subnets in (root) Compartment', click  '**Private Subnet-MDS-VCN**'
+9. On MDS-VCN page under 'Subnets in (MDS_Sandbox) Compartment', click  '**Private Subnet-MDS-VCN**'
 
     ![VCN](./images/03vcn-create-display.png "vcn-create-display ")
 
-
 10. On Private Subnet-MDS-VCN page under 'Security Lists',  click  '**Security List for Private Subnet-MDS-VCN**'
 
-     ![VCN](./images/03vcn-subnets.png "vcn-subnets")
-    
+    ![VCN](./images/03vcn-subnets.png "vcn-subnets")
+
 11. On Security List for Private Subnet-MDS-VCN page under 'Ingress Rules', click '**Add Ingress Rules**'
 
     ![VCN](./images/03vcn-seclist.png " vcn-seclist")
@@ -103,7 +170,7 @@ In this lab, you will be guided through the following tasks:
 
     Click 'Add Ingress Rule'
 
-        ![VCN](./images/03vcn-ingress-rule.png "vcn-ingress-rule")
+    ![VCN](./images/03vcn-ingress-rule.png "vcn-ingress-rule")
 
 13. On Security List for Private Subnet-MDS-VCN page, the new Ingress Rules will be shown under the Ingress Rules List
 
@@ -180,7 +247,7 @@ In this lab, you will be guided through the following tasks:
 
 4. Provide basic information for the DB System:
 
-    Select Compartment **(root)**
+    Select Compartment **(MDS_Sandbox)**
 
     Enter Name
 
