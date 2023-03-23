@@ -1,9 +1,10 @@
 # Hybrid Partitioning
 
 ## Introduction
+
 In this lab, you will explore Hybrid Partitioning, a new feature introduced in Oracle Database 19c.
 
-Estimated Lab Time:  15 minutes
+Estimated Lab Time:  30 minutes
 
 Watch the video below for a quick walk through of the lab.
 
@@ -32,22 +33,22 @@ This lab is a high level overview of Hybrid partitioning. For an in depth Hybrid
 ### Prerequisites
 
 This lab assumes you have completed the following labs:
-* Lab: 19C Setup
+
+* Have an Autonomous Database provisioned.
+* Have completed the 19C Setup Lab
 
 ## Task 1: Set up the environment
 
-To set the stage, our fictitious company RockBuster only needs to keep the last 2 years worth of sales data internally. Today is the day they go through and exchange the 3 year old data to an external source. We will be exchanging our 2019 internal partition to an external table located in in Oracle's Object Storage.
+To set the stage, our fictitious company Oracle MovieStreams only needs to keep the last 2 years worth of merchandise sales data internally. Today is the day they go through and exchange the 3-year-old data to an external source. We will be exchanging our 2019 internal partition to an external table located in Oracle's Object Storage.
 
-First we will create an empty Object Storage bucket as our external partition.
+First, we will create an empty Object Storage bucket as our external partition.
 
 1. Using the OCI Console Menu, go to **Storage > Object Storage & Archive Storage**.
 
   ![Create the Bucket](./images/locate-bucket.png)
-
 2. Press **Create Bucket**.
 
   ![Locating the Bucket](./images/create-bucket.png)
-
 3. On the page Create Bucket, fill in the following entries, otherwise leave defaults:
 
     - Bucket Name: **ExternalPartition**
@@ -58,7 +59,7 @@ First we will create an empty Object Storage bucket as our external partition.
 
     In order to use the Bucket we just created, we need to create the proper credentials.
     
-5.  Click the user profile icon in the top right of the screen and select your full username (the first option under the profile drop down).
+5. Click the user profile icon in the top right of the screen and select your full username (the first option under the profile drop down).
 
   ![Locate account](./images/locate-account.png) 
 
@@ -66,9 +67,9 @@ First we will create an empty Object Storage bucket as our external partition.
 
   ![Generate the token](./images/generate-token.png) 
 
-7. Lets name our token HPL (short for Hybrid Partitioning Lab) under the Description and press **Generate Token**. 
+7. Let's name our token **HPL** (short for Hybrid Partitioning Lab) under the Description and press **Generate Token**. 
 
-8. Here you need to copy this token as it will not be shown again. You can press Show or Copy and save this somewhere you will have access to it later (a .txt file on the your desktop will work fine).
+8. Here you need to **copy** this token as it will not be shown again. You can press Show or Copy and save this somewhere you will have access to it later (a .txt file on  your desktop will work fine).
 
   ![Copy the token](./images/copy-token.png) 
 
@@ -77,7 +78,7 @@ First we will create an empty Object Storage bucket as our external partition.
 
 ## Task 2: Create the Credentials
 
-First, were going to navigate back to the Autonomous Database and open SQL Developer Web.
+First, we're going to navigate back to the Autonomous Database and open SQL Developer Web. We need to make sure we are signed in as the NF19C user. Either switch to the Database Actions browser tab or follow the instructions below to sign in.
 
 1. Click the hamburger menu in the top left and select **Oracle Database** and **Autonomous Database**.
 
@@ -86,13 +87,17 @@ First, were going to navigate back to the Autonomous Database and open SQL Devel
 2. Select the Database you created in the earlier labs and select **Database Actions**.
   
   ![Open SQL Developer Web](./images/db-actions.png) 
+
+3. Log into Database Actions as the NF19C user.
+	![JSON Database Actions](./images/db-actions-logout.png)
+	![JSON Database Actions](./images/db-actions-login-lab.png)
   
 3. Wait for the new tab to open and select the SQL card under the Development section to open the SQL worksheet editor.
 
   ![Open SQL editor](./images/sql.png)
 
 
-4. The first thing we will need to do is create our credentials in order to access our Object Storage bucket from our Autonomous Database. Using the SQL Developer Web copy and run the following statements. Note, the the DBMS_CLOUD command, you will need the username and token that we copied in the lab above. The credential and token **need to be in single quotes** ''.
+4. The first thing we will need to do is create our credentials in order to access our Object Storage bucket from our Autonomous Database. Using the SQL Developer Web, copy and run the following statements. Note, te the DBMS_CLOUD command, you will need the username and token that we copied in the lab above. The credential and token **need to be in single quotes** ''.
 
     ```
     <copy>
@@ -112,7 +117,7 @@ END;
     ```
     ```
     <copy>
-    alter database property set default_credential = 'ADMIN.OBJECT_STORE_CRED';
+    alter database property set default_credential = 'NF19C.OBJECT_STORE_CRED';
     </copy>
     ```
      ```
@@ -121,7 +126,7 @@ END;
     </copy>
     ```
 
-    The alter statement may show an unexpected symbol icon as shown in the image. This is okay as we are altering the database property to the new credentials we just created. Run each statement individually.
+    The alter statement may show an unexpected symbol icon, as shown in the image. This is okay as we are altering the database property to the new credentials we just created. Run each statement individually.
 
     ![Create the credentials](images/create-credentials.png)
 
@@ -133,13 +138,11 @@ END; to drop the credentials and start the process again.
 
 ## Task 3: Build the External Table
 
-You can convert a table with only internal partitions to a hybrid partitioned table. For example, you can convert any table to a hybrid partitioned table by adding external partition attributes using an ALTER TABLE command, then add external partitions. Note that at least one partition must be an internal partition. However, in this lab we will focus on how easy it is to utilize the EXCHANGE functionality which allows users move data between internal and external partitions for cost effective purposes.
+You can convert a table with only internal partitions to a hybrid partitioned table. For example, you can convert any table to a hybrid partitioned table by adding external partition attributes using an ALTER TABLE command, then add external partitions. Note that at least one partition must be an internal partition. However, in this lab we will focus on how easy it is to utilize the EXCHANGE functionality which allows users to move data between internal and external partitions for cost-effective purposes.
 
-First let's create some external files.  The external partitions will be stored in object storage as a dump file using EXPORT_DATA
+First, let's create some external files.  The external partitions will be stored in object storage as a dump file using EXPORT_DATA
 
-
-
-1.  Create a table to export. We will first drop the table SALES\_OLD incase there is already a table with this name. We can skip this if you don't have a Sales_old table 
+1.  **Double check you are signed in as the NF19C user**. Create a table to export. We will first drop the table SALES\_OLD in case there is already a table with this name. We can skip this if you don't have a Sales_old table 
 
     ```
     <copy>
@@ -166,15 +169,15 @@ First let's create some external files.  The external partitions will be stored 
     INSERT INTO SALES_OLD VALUES (1001, 111, '26-JUL-2010', 1, 01, 50, 50);
     </copy>
     ```
-3. Now we will export our data to object storage. In order to do this we need to **locate some information**. Our URI variable will be our link to object storage and will look something like this https://objectstorage.**region**.oraclecloud.com/n/**namespace-string**/b/**bucket**/o/yourFileName.dmp. What we need to locate is the bold above. The region, our namespace, and our bucket name. Once we locate this information, **lets save our https link on a text file or somewhere it can be easily accessed for the upcoming steps.**
+3. Now we will export our data to object storage. In order to do this we need to **locate some information**. Our URI variable will be our link to object storage and will look something like this https://objectstorage.**region**.oraclecloud.com/n/**namespace-string**/b/**bucket**/o/yourFileName.dmp. What we need to locate is the bold above. The region, our namespace, and our bucket name. Once we locate this information, **let's save our https link on a text file, or somewhere it can be easily accessed for the upcoming steps.**
 
     You can find your region and bucket name by using the Oracle Cloud Console and locating your bucket. If you need a re-fresher on how to find object storage, use the task 1 above or from the OCI console got to -> Hamburger menu -> Storage -> Object Storage & Archive Storage.
     ![locating the region](./images/region.png " ")
 
-    To find our namespace string **click the user profile icon in the top right hand corner** of the screen and select the tenancy name. The Object storage namespace will be displayed. See picture below for reference.
+    To find our namespace string, **click the user profile icon in the top right-hand corner** of the screen and select the tenancy name. The Object storage namespace will be displayed. See picture below for reference.
    ![locating the namepsace](./images/namespace.png " ")
 
-    Now **you need to update your file uri list** to look something like the code snippet below. Notice we will call our external dump file 'sales_old.dmp'. 
+    Now **you need to update your file uri list** to look something like the code snippet below. Notice, we will call our external dump file 'sales_old.dmp'. 
   
 
 
@@ -193,7 +196,7 @@ END;
     ```
    ![Export Data](./images/export-data.png " ")
 
-4.  We can check our object storage bucket with the following. We will need our file\_uri\_list we used above **without** the file name. We can copy the uri from above and **take off the sales_old.dmp**.
+4.  To check our object storage bucket, we can follow these steps. First, we'll need the file\_uri\_list we used earlier, but **without** the file name. We can simply copy the URI we used before and remove the "sales\_old.dmp" part. This will give us the base path for our bucket, which we can use to navigate to other files within the same directory.
 
     ```
     <copy>
@@ -207,7 +210,7 @@ SELECT object_name FROM DBMS_CLOUD.LIST_OBJECTS('OBJECT_STORE_CRED','LINK FROM A
     ![Display objects in storage](./images/objects.png " ")
 
   
-5. Last, lets drop the internal Sales\_old table we created above so it only exists as a external file in Object Storage.
+5. Finally, we'll drop the internal Sales\_old table that we created earlier so that it only exists as an external file in Object Storage. This will ensure that we don't have any redundant data in our database and will allow us to seamlessly query the data from its new external location.
 
     ```
     <copy>
@@ -233,7 +236,7 @@ Hybrid Partitioned Tables support many partition level operations, including:
 -	Full partition wise refreshing on external partitions
 -   DML trigger operations on a hybrid partitioned table on internal partitions
 
-1. First we will create our Hybrid Partitioned table. **Make sure you update the external location to YOUR bucket**. Your ''URI'' will go the middle of the 2 sets of single quotes. See the picture below the code box if needed. **You will use the location of our Sales_old.dmp** file that you made note of earlier as the external location. 
+1. First, we will create our Hybrid Partitioned table. **Make sure you update the external location to YOUR bucket**. Your ''URI'' will go in the middle of the 2 sets of single quotes. See the picture below the code box if needed. **You will use the location of our Sales_old.dmp** file that you made note of earlier as the external location. 
 
   ![Create Hybrid Table](./images/updatinguri.gif " ")
 
@@ -279,7 +282,7 @@ Hybrid Partitioned Tables support many partition level operations, including:
 
     </copy>
     ```
-3. Lets check to make sure the data was inserted correctly
+3. Let's check to make sure the data was inserted correctly
 
     ```
     <copy>
@@ -297,15 +300,15 @@ Hybrid Partitioned Tables support many partition level operations, including:
      ```
     <copy>
         SELECT PARTITION_NAME, TABLESPACE_NAME, CASE READ_ONLY WHEN 'YES' THEN 'EXTERNAL' ELSE 'INTERNAL' END AS PARTITION_TYPE
-        FROM DBA_TAB_PARTITIONS
-        WHERE TABLE_OWNER = 'ADMIN' AND TABLE_NAME = 'SALES_BY_YEAR'
+        FROM ALL_TAB_PARTITIONS
+        WHERE TABLE_NAME = 'SALES_BY_YEAR'
         ORDER BY PARTITION_NAME;
     </copy>
     ```
 
     Notice that our sales partition SALES_2019 is an internal partition. Because our company only keeps the last 2 years worth of data stored internally, we will be exchanging this partition with one in Object Storage.
 
-    However lets first try and add data to our Sales_old partition located on Object Storage. 
+    However, let's first try and add data to our Sales_old partition located on Object Storage. 
      ```
     <copy>
        INSERT INTO SALES_BY_YEAR PARTITION(SALES_OLD) VALUES (1009, 999, '26-JUL-2009', 9, 09, 10, 70);
@@ -317,9 +320,9 @@ Hybrid Partitioned Tables support many partition level operations, including:
       ![Read Only](./images/read-only.png " ")
 
 
-4. Now we will export our sales_2019 partition data to object storage using DBMS\_CLOUD.EXPORT\_DATA functionality like we did at the beginning of this lab. **Make sure to update the URI with your link**. Leave your URI in single quotes. Like this 'yourURI'. **Lets call this file sales2019.dmp**. See photo below for an example 
+4. Now we will export our sales_2019 partition data to object storage using DBMS\_CLOUD.EXPORT\_DATA functionality like we did at the beginning of this lab. **Make sure to update the URI with your link**. Leave your URI in single quotes. Like this 'yourURI'. **Let's call this file sales2019.dmp**. See photo below for an example 
 
-    > **Note**: Troubleshooting tip - If you're having a problem with the URI, this is the same URI we have been using in the previous steps, **double check** the file name is now sales2019.dmp, you can locate the file name at the end of the URI
+    > **Note**: Troubleshooting tip - If you're having a problem with the URI, this is the same URI we have been using in the previous steps, **double-check** the file name is now sales2019.dmp, you can locate the file name at the end of the URI
 
 
     ```
@@ -375,8 +378,8 @@ END;
      ```
     <copy>
         SELECT PARTITION_NAME, TABLESPACE_NAME, CASE READ_ONLY WHEN 'YES' THEN 'EXTERNAL' ELSE 'INTERNAL' END AS PARTITION_TYPE
-        FROM DBA_TAB_PARTITIONS
-        WHERE TABLE_OWNER = 'ADMIN' AND TABLE_NAME = 'SALES_BY_YEAR'
+        FROM ALL_TAB_PARTITIONS
+        WHERE TABLE_NAME = 'SALES_BY_YEAR'
         ORDER BY PARTITION_NAME;
     </copy>
     ```
@@ -397,5 +400,5 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Killian Lynch, Database Product Management
-* **Contributors** - Thanks to the following for helping guide my ideas: Dominic Giles, Jenny Tsai-Smith, Kay Malcolm, Troy Anthony, Anoosha Pilli,  Dylan McLeod, Valentin Tabacaru
-* **Last Updated By/Date** - Killian Lynch July 2022
+* **Contributors** - Dominic Giles, Database Product Management
+* **Last Updated By/Date** - Killian Lynch Feb 2023
