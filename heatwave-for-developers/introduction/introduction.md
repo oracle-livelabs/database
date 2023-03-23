@@ -10,7 +10,9 @@ In this workshop, you will first learn to deploy and configure MySQL HeatWave, i
 
 This workshop will show you how easy it is to create and manage MySQL HeatWave and how MySQL HeatWave enables you to make informed business-critical decisions with real-time insights.
 
+**Watch a demo of the application you will build:**
 
+[](youtube:/IGPaJiCK_fI)
 
 _Estimated Lab Time:_ 3 hours +
 
