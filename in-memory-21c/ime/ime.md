@@ -1,6 +1,7 @@
 # In-Memory Expressions
 
 ## Introduction
+
 Watch a preview video of creating In-Memory Column Store
 
 [YouTube video](youtube:U9BmS53KuGs)
