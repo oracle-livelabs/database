@@ -7,9 +7,9 @@ Watch a preview video of creating In-Memory Column Store
 
 Watch the video below for a walk through of the In-Memory Expressions lab:
 
-[In-Memory Queries](videohub:1_ohs9hpw0)
+[In-Memory Expressions](videohub:1_ohs9hpw0)
 
-*Estimated Lab Time:* 15 Minutes.
+*Estimated Lab Time:* 10 Minutes.
 
 ### Objectives
 
