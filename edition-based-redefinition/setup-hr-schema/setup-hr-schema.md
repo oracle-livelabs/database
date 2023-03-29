@@ -6,6 +6,9 @@ This lab will go through the steps of connecting to Autonomous database and crea
 
 Estimated lab time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Connect to the Autonomous Database and prepare the HR schema](videohub:1_sz0987ab)
+
 ### Objectives
 
 In this lab, you will 

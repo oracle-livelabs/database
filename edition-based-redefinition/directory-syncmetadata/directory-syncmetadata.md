@@ -8,6 +8,9 @@ In this lab, you will learn
 
 Estimated lab time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Create the directory structure for Liquibase and sync the metadata](videohub:1_tral6svn)
+
 ### Objectives
 
 In this lab, you will learn 
@@ -15,6 +18,8 @@ In this lab, you will learn
 - How to modify the directory structure for the change logs which we generated in previous lab and sync metadata
 
 ## Task 1: Modify the directory structure 
+
+As part of release management best practices,we recommend to maintain separate directories for reach releases and have clean directory structure.
 
 1. For the base and subsequent changelogs, you might want to use a neater directory organization. Navigate to the `changes` directory and see the directory structure. 
 

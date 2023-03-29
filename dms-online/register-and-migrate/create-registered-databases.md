@@ -32,9 +32,9 @@ For this task you need the following info from previous steps:
 * Source DB CDB Service Name
 * Database Administrator Password
 
-1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Registered Databases**
+1. In the OCI Console Menu ![menu hamburger](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Registered Databases**
 
-  ![Screenshot of Registered Databases navigation](images/registered-db.png =90%x*)
+  ![registered database navigation](images/registered-db.png =90%x*)
 
 2. Press **Register Database**
 
@@ -74,9 +74,9 @@ For this task you need the following info from previous steps:
 * Source DB PDB Service Name
 * Database Administrator Password
 
-1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Registered Databases**
+1. In the OCI Console Menu ![menu hamburger](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Registered Databases**
 
-  ![Screenshot of Registered Databases](images/registered-db.png =90%x*)
+  ![registered database navigation](images/registered-db.png =90%x*)
 
 2. Press **Register Database**
 
@@ -114,9 +114,9 @@ For this task you need the following info from previous steps:
 For this task you need the following info from previous steps:
 * Database Administrator Password
 
-1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Registered Databases**
+1. In the OCI Console Menu ![menu hamburger](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Registered Databases**
 
-  ![Screenshot of Registered Databases](images/registered-db.png =90%x*)
+  ![registered database navigation](images/registered-db.png =90%x*)
 
 2. Press **Register Database**
 
@@ -144,9 +144,9 @@ For this task you need the following info from previous steps:
 
 ## Task 4: Create Migration
 
-  1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Migrations**
+  1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
-    ![Screenshot of migration navigation](images/migrations-navigation.png =90%x*)
+    ![create migration navigation](images/migration-create.png =90%x*)
 
   2. Press **Create Migration**
 

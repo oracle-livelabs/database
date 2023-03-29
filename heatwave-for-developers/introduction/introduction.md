@@ -2,39 +2,27 @@
 
 ## Introduction
 
-HeatWave is a fully managed database service that lets developers quickly
-develop and deploy secure cloud-native applications using the world’s most
-popular open source database. MySQL HeatWave is the only MySQL service
-with a massively-scalable, integrated, real-time query accelerator, and a fully
-automated in-database machine learning engine. This service overcomes the
-limitations of traditional data warehouse, analytics and machine learning
-environments that use periodic long-running ETL batch jobs to refresh the
-data. MySQL HeatWave provides a unified MySQL database platform for
-OLTP, OLAP and machine learning.
+MySQL HeatWave is a fully managed database service that lets developers quickly develop and deploy secure cloud-native applications using the world’s most popular open-source database. MySQL HeatWave is the only MySQL service with a massively-scalable, integrated, real-time query accelerator, and a fully automated in-database machine learning engine. This service overcomes the limitations of traditional data warehouse, analytics, and machine learning environments that use periodic long-running ETL batch jobs to refresh the data. MySQL HeatWave provides a unified MySQL database platform for OLTP, OLAP and machine learning.
 
+In this workshop, you will first learn to deploy and configure MySQL HeatWave, including its built-in in-memory query accelerator. You will then develop an analytics application allowing retail customers to obtain, visualize, and redeem discount coupons based on their previous purchases. You will build this application using the LAMP (Linux, Apache, MySQL, PHP) stack with step-by-step instructions and sample code, and experience the high performance of MySQL HeatWave to run complex analytics queries.
 
-In this workshop, you will first learn to deploy and configure MySQL HeatWave, including its built-in in memory query accelerator. You will then develop an analytics application allowing retail customers to obtain, visualize, and redeem discount coupons based on their previous purchases. You will build this application using the LAMP (Linux, Apache, MySQL, PHP) stack with step-by-step instructions and sample code, and experience the high performance of MySQL HeatWave to run complex analytics queries.
+**Note:** This application code is intended for educational purposes only. It is designed to help developers learn and practice application development skills with MySQL HeatWave on OCI. The code is not designed to be used in a production environment
 
-Overall this workshop will show you how easy it is to create and manage MySQL HeatWave and how MySQL HeatWave enables you to make informed business-critical decisions with real-time insights.
+This workshop will show you how easy it is to create and manage MySQL HeatWave and how MySQL HeatWave enables you to make informed business-critical decisions with real-time insights.
+
+**Watch a demo of the application you will build:**
+
+[](youtube:/IGPaJiCK_fI)
 
 _Estimated Lab Time:_ 3 hours +
 
 ### About Product/Technology
 
-**SINGLE MySQL DATABASE FOR OLTP AND OLAP**
+**SINGLE MySQL DATABASE FOR OLTP, OLAP, and ML**
 
-MySQL HeatWave is the only MySQL service that provides a single solution for running OLTP and OLAP workloads. It
-enables customers to run both OLTP and OLAP workloads in MySQL, within a single database platform, without the need to
-ETL data to a separate database for analytic processing. No changes to existing applications are necessary. *
-MySQL Database Service with HeatWave is a fully managed service, optimized for Oracle Cloud Infrastructure. It enables you to:
+MySQL HeatWave is a fully managed database service, powered by the integrated HeatWave in-memory query accelerator. It’s the only cloud database service that combines transactions, analytics, and machine learning services into one MySQL Database, delivering real-time, secure analytics without the complexity, latency, and cost of ETL duplication. It’s available on OCI, AWS, Azure, and in your data center with Oracle Dedicated Region Cloud@Customer.
 
-
-- Instantly provision MySQL instances and connect to a production-ready, pre-configured MySQL database.
-- Run OLTP, OLAP workloads directly on a single MySQL platform without the need of ETL, and no change in your applications.
-- Efficiently run mixed and analytics workloads with the best price performance. HeatWave is 6.5X faster than Amazon Redshift at half the cost, 7X faster than Snowflake at one-fifth the cost, and 1400X faster than Amazon Aurora at half the cost.
-- Make more informed business decisions by getting real-time insights from your operational data.
-- Free up time of developers, DBAs, and DevOps to focus on value-added tasks that are core to your business.
-- Access to dozens of additional Oracle Cloud Services enabling organizations to embrace the shift to the cloud.
+MySQL HeatWave is 6.5X faster than Amazon Redshift at half the cost, 7X faster than Snowflake at one-fifth the cost, and 1,400X faster than Amazon Aurora at half the cost.
 
 **Lab Setup**
   ![INTRO](./images/marketing-system-architecture.png "heatwave architecture ")
@@ -55,7 +43,7 @@ In this lab, you will be guided through the following steps:
 - Perform development tasks
   - Build LAMP System
   - Load Application from Object Storage
-  - Ub=nzip application configure and test
+  - Ubnzip application configure and test
 
 ### Prerequisites
 

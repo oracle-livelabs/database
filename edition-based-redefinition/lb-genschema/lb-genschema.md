@@ -18,6 +18,9 @@ With the Liquibase feature in SQLcl, you can:
 
 Estimated lab time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Use Liquibase to generate the base schema](videohub:1_lbqhg2em)
+
 ### Objectives
 
 In this lab, you will
