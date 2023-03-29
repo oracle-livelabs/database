@@ -40,11 +40,11 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
 1. Run the following command: password is always FPPll##123 unless you have changed it
 
     ```
-    rhpctl move database -sourcewc  WC_db_19_9_0_FPPC \
-    -patchedwc WC_db_19_10_0_FPPC -dbname fpplive1_site1 \
+    rhpctl move database -sourcewc  WC_db_previous_FPPC \
+    -patchedwc WC_db_current_FPPC -dbname fpplive1_site1 \
     -sudouser opc -sudopath /bin/sudo -eval
     ```
-    ![](./images/move.png)
+    ![Shows the output of the rhpctl move -eval command above](./images/move.png)
 
   Because you have specified the correct groups when adding the working copy, this command succeeds.
   Otherwise, you might have seen an error similar to this:
@@ -52,18 +52,19 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
     ```
     fpps01.pub.fpplivelab.oraclevcn.com: verifying groups of Oracle homes ...
     fpps01.pub.fpplivelab.oraclevcn.com: PRGO-1774 : The evaluation revealed potential failure for command "move database".
-    PRGO-1619 : The groups "OSOPER=oper" of the source home are not configured in the patched working copy.\nPRGO-1618 : The groups "OSBACKUP=backupdba,OSDG=dgdba,OSKM=kmdba,OSRAC=racdba" of the source home do not match the groups "OSBACKUP=dba,OSDG=dba,OSKM=dba,OSRAC=dba" of the patched working copy.
+    PRGO-1619 : The groups "OSOPER=oper" of the source home are not configured in the patched working copy.
+    PRGO-1618 : The groups "OSBACKUP=backupdba,OSDG=dgdba,OSKM=kmdba,OSRAC=racdba" of the source home do not match the groups "OSBACKUP=dba,OSDG=dba,OSKM=dba,OSRAC=dba" of the patched working copy.
     ```
 
 ## Task 2: Patch the database
 1. The command is the same as before, but without the `-eval` switch:
 
     ```
-    rhpctl move database -sourcewc  WC_db_19_9_0_FPPC \
-    -patchedwc WC_db_19_10_0_FPPC -dbname fpplive1_site1 \
+    rhpctl move database -sourcewc  WC_db_previous_FPPC \
+    -patchedwc WC_db_current_FPPC -dbname fpplive1_site1 \
     -sudouser opc -sudopath /bin/sudo
     ```
-  ![](./images/move2.png)
+  ![Shows the output of the rhpctl move command above](./images/move2.png)
 
 
 ## Task 3: Verify that the DB is patched and running in the new Oracle Home
@@ -76,7 +77,7 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
     ```
     sudo su - oracle
     ```
-  ![](./images/opc.png)
+  ![Login with opc user](./images/opc.png)
 
 
 2. Set the environment:
@@ -86,14 +87,14 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
     ORACLE_SID = [oracle] ? fpplive1site
     The Oracle base has been set to /u01/app/oracle
     ```
-  ![](./images/oraenv.png)
+  ![Set environment variables with oraenv](./images/oraenv.png)
 
 3. Verify the Oracle Restart configuration for the database:
 
     ```
     srvctl config database -db fpplive1_site1
     ```
-  ![](./images/srvctl.png)
+  ![Shows the output of the srvctl config command above](./images/srvctl.png)
 
   It is running in the new Oracle Home, the `srvctl` configuration has been adapted as well!
 
@@ -102,20 +103,18 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
     ```
     sqlplus / as sysdba
     ```
-    ![](./images/sql.png)
+    ![Logon with sqlplus](./images/sql.png)
 
     ```
     set lines 220
     ```
-
     ```
     select PATCH_ID, PATCH_UID, STATUS, DESCRIPTION from DBA_REGISTRY_SQLPATCH;
     ```
-
-   ```
+    ```
     exit
     ```
-    ![](./images/exit.png)
+    ![Shows the patch level of the database](./images/exit.png)
 
 From the output you can see that the Database has been patched correctly.
 
@@ -124,5 +123,5 @@ Congratulations! You have completed all the labs in this workshop. We hope you h
 ## Acknowledgements
 
 - **Author** - Ludovico Caldara
-- **Contributors** - Kamryn Vinson
-- **Last Updated By/Date** -  Kamryn Vinson, May 2021
+- **Contributors** - Kamryn Vinson - Philippe Fierens
+- **Last Updated By/Date** -  Philippe Fierens, March 2023

@@ -21,52 +21,52 @@ In this lab, you will:
 
 ## Task 1: Validate Migration
 
-1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Migrations**
+1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
-  ![](images/1.png =90%x*)
+  ![migrations navigation](images/migration-create.png =90%x*)
 
 2. Select **TestMigration**
 
-  ![](images/2.png =90%x*)
+  ![click on testMigration](images/2.png =90%x*)
 
 3. If Migration is still being created, wait until Lifecycle State is Active
 
 4. Press **Validate** button
 
-  ![](images/3.png =90%x*)
+  ![press validate](images/3.png =90%x*)
 
 5. Click on **Jobs** in left-hand **Resources** list
 
-  ![](images/4.png)
+  ![click on jobs menu](images/4.png)
 
 6. Click on most recent Evaluation Job
 
 7. Click on **Phases** in left-hand **Resources** list
 
-  ![](images/5.png =20%x*)
+  ![click phases menu](images/5.png =20%x*)
 
 8. Phases will be shown and status will be updated as phases are completed. It can take 2 minutes before the first phase is shown.
-    ![](images/Pump.png =90%x*)
+    ![phases are displayed](images/Pump.png =90%x*)
 
 9. If a phase has failed, it will show with status **Failed**. In this case press **Download Log** to learn more about the reason of failure. Press **Abort** on a failed job to allow further jobs or deleting of the migration.
 
-  ![](images/9.png =90%x*)
+  ![press download logs](images/9.png =90%x*)
 
 10. Once all phases show complete, move to the next step.
 
 ## Task 2: Run Migration
 
-  1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Migrations**
+  1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
-    ![](images/1.png =90%x*)
+  ![migrations navigation](images/migration-create.png =90%x*)
 
   2. Select **TestMigration**
 
-    ![](images/2.png =90%x*)
+    ![click on testmigration](images/2.png =90%x*)
 
   3. Press **Start** to begin the Migration. Please note, if a dialog box appears, press **Start** in the dialog box  to begin the migration.
 
-    ![](images/pic.png =90%x*)
+    ![press start](images/pic.png =90%x*)
 
   4. Click on **Jobs** in left-hand **Resources** list
 
@@ -78,7 +78,7 @@ In this lab, you will:
 
   8. Wait till all the phases have completed and your screen should look the like picture below.
 
-  ![](images/FD.png =90%x*)
+  ![phases completed](images/FD.png =90%x*)
 
   9. The migration runs the final cleanup phases and shows as **Succeeded** when finished
 

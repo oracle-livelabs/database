@@ -2,39 +2,45 @@
 
 ## Introduction
 
-In this lab, you will create a TimesTen database and set it up to cache the required tables from the Oracle database.
+In this lab, you create a TimesTen database and set it up to cache the required tables from the Oracle database.
 
-Estimated Time: **10 minutes**
+**Estimated Lab Time:** 10 minutes
 
 ### Objectives
 
-- Create a TimesTen database and prepare it to act as a cache
-- Create the application schema users (APPUSER and OE)
-- Create READONLY cache groups for the tables that you want to cache
+- Create a TimesTen database and prepare it to act as a cache.
+- Create the APPUSER and OE application schema users.
+- Create READONLY cache groups for the tables that you want to cache.
 
 These tasks are all accomplished using SQL statements, so they can be easily performed from application code if required.
 
 ### Prerequisites
 
-This lab assumes that you have:
+This lab assumes that you:
 
-- Completed all the previous labs in this workshop, in sequence.
+- Have completed all the previous labs in this workshop, in sequence.
+- Have an open terminal session in the workshop compute instance, either via NoVNC or SSH, and that session is logged into the TimesTen host (tthost1).
 
-## Task 1: Connect to the environment
+### Useful definitions and concepts for TimesTen Cache
 
-If you do not already have an active terminal session, connect to the OCI compute instance and open a terminal session, as the user **oracle**.
+- A **cache group** is a SQL object that encapsulates a set of one or more tables that are related through primary key -> foreign key relationships. The (single) top-level table is called the root table and the other tables sit below it in a hierarchical parent/child arrangement.
 
-In that terminal session, connect to the TimesTen host (tthost1) using ssh.
+- A **cache instance** consists of a single row from the root table and all the related rows from the subordinate tables down through the table hierarchy within the cache group.
 
-## Task 2: Create the TimesTen database and prepare it for caching
+- Cache operations act on cache groups not on individual tables, or on cache instances as opposed to individual rows.
 
-A TimesTen database is implicitly created the first time the instance administrator user connects to it via its server DSN. In order to use the database as a cache, you must set the Oracle cache admin username and password and also start the TimesTen Cache Agent.
+- Normal SQL operations, such as SELECT, INSERT, UPDATE and DELETE, operate directly on the cache tables and the rows therein. 
 
-The Cache Agent is a TimesTen daemon process that manages many of the cache-related functions for a TimesTen database.
+
+## Task 1: Create the TimesTen database and prepare it for caching
+
+A TimesTen database is implicitly created the first time the instance administrator user connects to it via its server DSN. In order to use the database as a cache, you must set the Oracle cache admin username and password and start the TimesTen cache agent.
+
+The cache agent is a TimesTen daemon process that manages many of the cache-related functions for a TimesTen database.
 
 One of the most frequently used TimesTen utilities is the **ttIsql** utility. This is an interactive SQL utility that serves the same purpose for TimesTen as SQL*Plus does for Oracle Database.
 
-Connect to the **sampledb** DSN using **ttIsql**:
+1. Connect to the **sampledb** DSN using **ttIsql**:
 
 ```
 <copy>
@@ -51,15 +57,16 @@ connect "DSN=sampledb";
 Connection successful: DSN=sampledb;UID=oracle;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
 (Default setting AutoCommit=1)
 ```
-Set the Oracle cache administrator username and password (these are stored, encrypted, in the TimesTen database):
+2. Set the Oracle cache administrator username and password:
 
 ```
 <copy>
 call ttCacheUidPwdSet('ttcacheadm','ttcacheadm');
 </copy>
 ```
+The credentials are stored, encrypted, in the TimesTen database.
 
-Start the TimesTen Cache Agent for the cache database:
+3. Start the TimesTen cache agent for the cache database:
 
 ```
 <copy>
@@ -67,7 +74,7 @@ call ttCacheStart;
 </copy>
 ```
 
-Create application users for the **OE** and **APPUSER** schemas and grant them some necessary privileges:
+4. Create the application users for the **OE** and **APPUSER** schemas and grant them some necessary privileges:
 
 ```
 <copy>
@@ -101,7 +108,7 @@ GRANT CREATE SESSION, CREATE CACHE GROUP, CREATE TABLE TO appuser;
 </copy>
 ```
 
-Exit from ttIsql:
+5. Exit from ttIsql:
 
 ```
 <copy>
@@ -114,19 +121,11 @@ Disconnecting...
 Done.
 ```
 
-## Task 3: Create the cache groups
+## Task 2: Create the cache groups
 
-A **cache group** is a SQL object that encapsulates a set of one or more tables that are related through primary key -> foreign key relationships. The (single) top-level table is called the root table and the other tables sit below it in a hierarchical parent/child arrangement.
+Create the (multiple) cache groups for the **OE** schema tables. To reduce typing and copy/pasting, this lab uses a pre-prepared script to create the cache groups.
 
-A cache instance consists of a single row from the root table and all the related rows from the subordinate tables down through the hierarchy within the cache group.
-
-Cache operations act on cache groups not on individual tables, or on cache instances as opposed to individual rows.
-
-Normal SQL operations, such as SELECT, INSERT, UPDATE and DELETE, operate directly on the cache tables and the rows therein. 
-
-Create the (multiple) cache groups for the **OE** schema tables. You will use a pre-prepared script to reduce the amount of typing or copying & pasting.
-
-Use **ttIsql** to connect to the TimesTen cache as the **OE** user:
+1. Use **ttIsql** to connect to the TimesTen cache as the **OE** user:
 
 ```
 <copy>
@@ -143,7 +142,8 @@ Connection successful: DSN=sampledb;UID=oe;DataStore=/tt/db/sampledb;DatabaseCha
 (Default setting AutoCommit=1)
 Command>
 ```
-Run the script to create the OE cache groups:
+
+2. Run the script to create the OE cache groups:
 
 ```
 <copy>
@@ -178,7 +178,8 @@ CREATE INDEX oe.order_items_fk
   ON oe.order_items (product_id);
 
 ```
-Display the cachegroups owned by the OE user:
+
+3. Display the cachegroups owned by the OE user:
 
 ```
 <copy>
@@ -245,7 +246,7 @@ Cache Group OE.CG_PROMOTIONS:
 3 cache groups found.
 ```
 
-Display the tables owned by the OE user. These are the tables that make up the cache groups:
+4. Display the tables owned by the OE user. These are the tables that make up the cache groups:
 
 ```
 <copy>
@@ -297,7 +298,7 @@ select count(*) from promotions;
 1 row found.
 ```
 
-Exit from ttIsql:
+5. Exit from ttIsql:
 
 ```
 <copy>
@@ -312,7 +313,9 @@ Done.
 
 The user OE has 3 cache groups, some containing single tables and others containing multiple tables. Currently, all the tables are empty.
 
-Create the cache group for the **APPUSER.VPN\_USERS** table. This time you will type, or copy/paste, the individual commands:
+Create the cache group for the **APPUSER.VPN\_USERS** table. This time you will type, or copy/paste, the individual commands.
+
+6. Connect to the cache as the user **appuser**:
 
 ```
 <copy>
@@ -330,25 +333,7 @@ Connection successful: DSN=sampledb;UID=appuser;DataStore=/tt/db/sampledb;Databa
 Command>
 ```
 
-```
-<copy>
-cachegroups appuser.%;
-</copy>
-```
-
-```
-0 cache groups found.
-```
-
-```
-<copy>
-tables;
-</copy>
-```
-
-```
-0 tables found.
-```
+7. Create the cache group.
 
 ```
 <copy>
@@ -367,7 +352,7 @@ vpn_users
 </copy>
 ```
 
-Display the cachegroup and table:
+8. Display the cachegroup and table:
 
 ```
 <copy>
@@ -414,7 +399,7 @@ select count(*) from vpn_users;
 1 row found.
 ```
 
-Exit from ttIsql:
+9. Exit from ttIsql:
 
 ```
 <copy>
@@ -427,14 +412,16 @@ Disconnecting...
 Done.
 ```
 
-The TimesTen mechanism that captures data changes that occur in the Oracle database and uses those changes to refresh the cached data is called **AUTOREFRESH**. Note that for all of the cache groups that you just created, the status of this mechanism is currently **Paused**.
+The TimesTen mechanism that captures data changes that occur in the Oracle database and uses those changes to refresh the cached data is called **AUTOREFRESH**. Note that, in the output above, the state of this mechanism is currently **Paused** for all of the cache groups that you just created.
 
 ```
 Autorefresh State: Paused
 ```
-In order to pre-populate the cache tables and activate the AUTOREFRESH mechanism, you must now load the cache groups, which you will do in the next lab.
+In order to pre-populate the cache tables and activate the AUTOREFRESH mechanism  you must load the cache groups.
 
-You can now *proceed to the next lab*. Keep your terminal session open for use in the next lab.
+You can now **proceed to the next lab**. 
+
+Keep your terminal session to tthost1 open for use in the next lab.
 
 ## Acknowledgements
 

@@ -24,75 +24,66 @@ In this lab, you will:
 
 ## Task 1: Import the local FPP Homes as Gold Images
 1. Import the Oracle Homes that are already installed and configured on the FPP Server as new gold images. First, the Grid Infrastructure image: (Est.: 5 minutes)
-
-        ````
-        rhpctl import image -image gi_19_10_0_oci -path /u01/app/19.0.0.0/grid -imagetype ORACLEGISOFTWARE
-        ````
-![](./images/oraclegisoftware.png)
+        ```
+        rhpctl import image -image gi_current_oci -path /u01/app/19.0.0.0/grid -imagetype ORACLEGISOFTWARE
+        ```
+![Output of rhpctl import command above](./images/oraclegisoftware.png)
         
 
 Notice the `-imagetype ORACLEGISOFTWARE` that tells FPP which image it is about to import
 
 2. Then, the Oracle Database image: (Est.: 4-5 minutes)
-
         ```
-        rhpctl import image -image db_19_10_0_oci -path /u01/app/oracle/product/19.0.0.0/dbhome_1
+        rhpctl import image -image db_current_oci -path /u01/app/oracle/product/19.0.0.0/dbhome_1
         ```
-![](./images/dbhome-1.png)
+![Output of rhpctl import command above](./images/dbhome-1.png)
 
 The image type `ORACLEDBSOFTWARE` is the default, so you do not need to specify it.
 
 ## Task 2: Import an additional DB Home from a zip file
-1. First, download the zip file from this location (Est.: 3 minutes):
-
+1. First, download the zip file from this location into a filesystem with enough space (e.g. /u01) (Est.: 3 minutes):
         ```
-        wget --no-proxy https://objectstorage.us-phoenix-1.oraclecloud.com/p/0m155SXnm5so7gqYVlJPiJqsJrWQyivsRqsJSIw-5vjrnD2MwQNRGPewmRKhYaYt/n/oracassandra/b/ludovico.caldara/o/13727/db19300.zip
+        cd /u01/app/grid/
+        wget --no-proxy https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/fpp/db1917000.zip
         ```
-![](./images/wget.png)
+![Output of wget command above](./images/wget.png)
 
 2. Then, import it: (Est.: 7-8 minutes)
-
         ```
-        rhpctl import image -image db_19_9_0 -zip $PWD/db19300.zip
+        rhpctl import image -image db_previous -zip $PWD/db1917000.zip
         ```
-![](./images/import-wget.png)
-![](./images/import-wget2.png)
-![](./images/import-wget3.png)
+![Output of rhpctl import command above](./images/import-wget.png)
+![Output of rhpctl import command above continued](./images/import-wget2.png)
 
-We have already patched it for you with the DB 19.9.0 Release Update, so you do not have to do it yourself. However, in real life this is a task that you would have to do.
+We have already patched it for you with the DB 19.17.0 Release Update, so you do not have to do it yourself. However, in real life this is a task that you would have to do.
 
 Because it comes from a non-verified source, FPP will uncompress the image and verify it by configuring it and relinking it.
 This is an extra step to make sure that the image is usable and can be provisioned as working copy on the remote targets without problem. This, however, requires 2-3 additional minutes.
 
 ## Task 3: Query the Gold Images
 1. Once the images have been imported into the FPP Server, you can query them:
-
         ```
         rhpctl query image
         ```
-![](./images/query-image.png)
+![Output of rhpctl command above](./images/query-image.png)
 
 2. Get the detail of a specific image:
-
         ```
-        rhpctl query image -image db_19_9_0
+        rhpctl query image -image db_previous
         ```
-![](./images/detail.png)
+![Output of rhpctl query image command above](./images/query-previous.png)
 
 3. Get the detail of the other one:
-
         ```
-        rhpctl query image -image db_19_10_0_oci
+        rhpctl query image -image db_current_oci
         ```
-![](./images/detail2.png)      
+![Output of rhpctl query image command above](./images/query-oci-current.png)      
 
 4. Now, take a closer look at the groups:
-
         ```
         # first
         Groups configured in the image: OSDBA=dba,OSOPER=oper,OSBACKUP=backupdba,OSDG=dgdba,OSKM=kmdba,OSRAC=racdba
         ```
-
         ```
         # second
         Groups configured in the image: OSDBA=dba,OSOPER=dbaoper,OSBACKUP=dba,OSDG=dba,OSKM=dba,OSRAC=dba
@@ -105,5 +96,5 @@ You have successfully imported the gold images int the FPP Server. You may now [
 ## Acknowledgements
 
 - **Author** - Ludovico Caldara
-- **Contributors** - Kamryn Vinson
-- **Last Updated By/Date** -  Kamryn Vinson, May 2021
+- **Contributors** - Kamryn Vinson - Philippe Fierens
+- **Last Updated By/Date** -  Philippe Fierens, March 2023

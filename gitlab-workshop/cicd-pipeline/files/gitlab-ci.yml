@@ -1,0 +1,81 @@
+stages:
+  - validate
+  - build
+  - test
+  - deploy
+
+# Login to OCIR
+variables:
+  KUBE_CONTEXT: "$OKE_AGENT"
+
+validate-job:
+  stage: validate
+  script:
+    - docker info
+    - docker login -u "$OCIR_USER" -p "$OCIR_PASSWORD" "$OCIR_REGISTRY"
+  allow_failure: false
+
+# Build Image and Push to OCIR
+code-build-job:
+  stage: build
+  script:
+    - docker build -t "$IMAGE_NAME":"$IMAGE_VERSION" .
+  dependencies:
+    - validate-job
+
+code-push-job:
+  stage: build
+  script:
+    - docker tag  "$IMAGE_NAME":"$IMAGE_VERSION" "$OCIR_REPOSITORY":"$IMAGE_VERSION"
+    - docker push "$OCIR_REPOSITORY":"$IMAGE_VERSION"
+  dependencies:
+    - code-build-job
+  allow_failure: false
+
+test-build:
+  stage: test
+  script:
+    - docker inspect "$OCIR_REPOSITORY":"$IMAGE_VERSION"
+  dependencies:
+    - code-push-job
+
+
+.kube-context:
+  before_script:
+    - if [ -n "$KUBE_CONTEXT" ]; then kubectl config use-context "$KUBE_CONTEXT"; fi
+
+deploy-create-credential:
+  stage: deploy
+  allow_failure: true
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: ['']
+  extends: [.kube-context]
+  script:
+    - kubectl config get-contexts
+    - kubectl config use-context "$OKE_AGENT"
+    - kubectl get secret ocir-cred || exit_code=$?
+    - echo $exit_code
+    - >
+        if [ "$exit_code" == 1 ]; then
+            kubectl create secret docker-registry ocir-cred --docker-username="$OCIR_USER" --docker-password="$OCIR_PASSWORD" --docker-server="$OCIR_REGISTRY"
+        else
+            echo "Skipping secret Creation"
+        fi
+  dependencies:
+    - test-build
+
+
+deploy-create-deployment:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: ['']
+  extends: [.kube-context]
+  script:
+    - kubectl config get-contexts
+    - kubectl config use-context "$OKE_AGENT"
+    - envsubst < deployment.tmpl > deployment.yaml
+    - kubectl apply -f deployment.yaml
+  dependencies:
+    - deploy-create-credential
