@@ -31,11 +31,11 @@ The following tasks are *optional* if a target autonomous database is already pr
 
 3. Press **Create Network Security Group**.
 
-  ![](images/create-network-security-group.png)
+  ![Create Network Security Group](images/create-network-security-group.png)
 
 4. Enter Name such as **DMS\_NSG** and press **Next**.
 
-  ![](images/naming-nsg.png)
+  ![Enter Name](images/naming-nsg.png)
 
 5. In the **Rule** box please enter the following entries, otherwise leave defaults:
     - Source Type: **CIDR**
@@ -43,13 +43,13 @@ The following tasks are *optional* if a target autonomous database is already pr
 
 6. Press **Create**.
 
-  ![](images/add-security-rules-nsg.png)
+  ![add security rules and create](images/add-security-rules-nsg.png)
 
 ## Task 2: Create Target Autonomous Database
 
 1. Now you can create the ADB instance. In the OCI Console Menu, go to **Oracle Database > Autonomous Transaction Processing**.
 
-  ![](images/odb-to-atp.png)
+  ![Autonomous Transaction Processing navigation menu](images/odb-to-atp.png)
 
 2. Pick a compartment on the left-hand side **Compartment** list.
 
@@ -62,11 +62,11 @@ The following tasks are *optional* if a target autonomous database is already pr
     - Access Type: **Secure Access from Everywhere**
     - Choose a license type: **License Included**
 
-  ![](images/atp-name.png)
+  ![ATP name](images/atp-name.png)
 
-  ![](images/atp-password.png)
+  ![enter password](images/atp-password.png)
 
-  ![](images/adb-lt.png)
+  ![select license](images/adb-lt.png)
 
 5. Close the dialog by pressing **Create Autonomous Database**.
 

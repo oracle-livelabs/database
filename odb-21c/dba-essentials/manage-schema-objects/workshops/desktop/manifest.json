@@ -1,0 +1,42 @@
+{
+  "workshoptitle": "DBA Essentials - Manage Schema Objects in Oracle Database 21c",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction.",
+      "filename": "./../../intro-schema-objects/intro-schema-objects.md"
+    },
+    {
+      "title": "Using noVNC Remote Desktop",
+      "description": "Using noVNC Remote Desktop",
+      "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+    },
+    {
+      "title": "Lab 1: Initialize Environment",
+      "description": "How to initialize and start all the workshop components.",
+      "publisheddate": "12/21/2021",
+      "filename": "./../../initialize-environment/initialize-environment.md"
+    },
+    {
+      "title": "Lab 2: Manage Table using Database Actions",
+      "description": "How to manage tables using Database Actions.",
+      "filename": "./../../manage-table/manage-table.md"
+    },
+    {
+      "title": "Lab 3: Manage indexes and views using Database Actions",
+      "description": "How to view and create indexes and views in Database Actions.",
+      "filename": "./../../manage-indexes-views/manage-indexes-views.md"
+    },
+    {
+      "title": "Lab 4: Manage Program code stored in the database using Database Actions",
+      "description": "How to manage Program code in Oracle Database from Database Actions.",
+      "filename": "./../../manage-program-code/manage-program-code.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}
