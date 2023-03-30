@@ -8,7 +8,7 @@ Watch a preview video of creating In-Memory Column Store
 
 Watch the video below for a walk through of the In-Memory External Tables lab:
 
-[In-Memory Expressions](videohub:1_ohs9hpw0)
+[In-Memory External Tables](videohub:1_ohs9hpw0)
 
 *Estimated Lab Time:* 10 Minutes.
 
@@ -58,7 +58,7 @@ set lines 150
 Query result:
 
 ```
-[CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/ime
+[CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/ext-tab
 [CDB1:oracle@dbhol:~/labs/inmemory/queries]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
 
 SQL*Plus: Release 21.0.0.0.0 - Production on Fri Aug 19 18:33:55 2022
@@ -1447,6 +1447,7 @@ SQL>
 
 This lab demonstrated how Database In-Memory can optimize the access of external data, and support both external and hybrid partitioned tables.
 
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

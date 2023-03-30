@@ -1,6 +1,7 @@
 # In-Memory Join Groups
 
 ## Introduction
+
 Watch a preview video of creating In-Memory Column Store
 
 [YouTube video](youtube:U9BmS53KuGs)
@@ -16,6 +17,7 @@ Watch the video below for a walk through of the In-memory Join Groups lab.
 -   Learn how to enable In-Memory Join Groups
 
 ### Prerequisites
+
 This lab assumes you have:
 - A Free Tier, Paid or LiveLabs Oracle Cloud account
 - You have completed:
@@ -51,7 +53,7 @@ set lines 100
 ```
 
 ```
-[CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/ime
+[CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/join-groups
 [CDB1:oracle@dbhol:~/labs/inmemory/queries]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
 
 SQL*Plus: Release 21.0.0.0.0 - Production on Fri Aug 19 18:33:55 2022
@@ -857,6 +859,7 @@ SQL>
 
 This lab demonstrated how Join Groups work. It showed you how to create them and how to determine if they were used.
 
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

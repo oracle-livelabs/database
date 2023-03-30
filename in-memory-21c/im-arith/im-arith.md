@@ -55,7 +55,7 @@ set lines 150
 Query result:
 
 ```
-[CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/ime
+[CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/im-arith
 [CDB1:oracle@dbhol:~/labs/inmemory/queries]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
 
 SQL*Plus: Release 21.0.0.0.0 - Production on Fri Aug 19 18:33:55 2022
@@ -532,6 +532,7 @@ Not as dramatic as an In-Memory Expression but still a substantial improvement i
 
 This lab demonstrated how In-Memory Optimized Arithmetic works. It showed you how to create them and how to determine their benefit.
 
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

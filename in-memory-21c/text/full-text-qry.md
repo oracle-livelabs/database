@@ -45,11 +45,11 @@ In this lab you will see how In-Memory Full Text Columns are setup and how to ma
 
 In this Lab we will be populating external data from a local directory and we will need to define a database directory to use in our external table definitions to point the database to our external data.
 
-Let's switch to the Lab09-Text folder and log back in to the PDB:
+Let's switch to the text folder and log back in to the PDB:
 
 ```
 <copy>
-cd /home/oracle/labs/inmemory/Lab09-Text
+cd /home/oracle/labs/inmemory/text
 sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
 </copy>
 ```
@@ -790,6 +790,8 @@ SQL>
 ## Conclusion
 
 This lab demonstrated how Database In-Memory can optimize the access of external data, and support both external and hybrid partitioned tables.
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

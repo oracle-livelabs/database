@@ -742,6 +742,8 @@ SQL>
 
 This lab described how In-Memory Expressions work, how to create them and see how much space they consume in the IM column store. The lab then showed the performance difference IMEs can provide. Remember that with objects populated in the IM column store only CPU and memory are used and significant performance gains can be made by saving CPU cycles not calculating the same expressions over and over again.
 
+You may now **proceed to the next lab**.
+
 ## Acknowledgements
 
 - **Author** - Andy Rivenes, Product Manager,  Database In-Memory
