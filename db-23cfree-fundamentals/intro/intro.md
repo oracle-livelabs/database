@@ -2,21 +2,7 @@
 
 ## About Oracle Database 23c Free
 
-Oracle Database 23c Free is the next step in the future of database. It provides users with state-of-the-art functionality to increase productivity at every level of use. Its marquee features include JSON Relational Duality, SQL Domains, Sagas for Microservices, JavaScript Stored Procedures, OKafka, and In-Database Property Graphs. It grants developers an easy and free opportunity to test the latest features of Oracle's most advanced database. Oracle Database 23c Free is limited to ____. 
-
-[](youtube:LcsPSJrZDrI)
-
-JSON Relational Duality
-
-SQL Domains
-
-Sagas
-
-JS
-
-OKafka
-
-Property Graphs
+TO BE UPDATED BY RANJAN
 
 
 ### **About the Oracle Database 19c New Features Workshop**

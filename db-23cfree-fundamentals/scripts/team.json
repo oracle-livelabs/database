@@ -1,0 +1,36 @@
+[
+    {
+      "teamId": 301,
+      "name": "Red Bull",
+      "points": 0,
+      "driver": [
+        {
+          "driverId": 101,
+          "name": "Max Verstappen",
+          "points": 0
+        },
+        {
+          "driverId": 102,
+          "name": "Sergio Perez",
+          "points": 0
+        }
+      ]
+    },
+    {
+      "teamId": 302,
+      "name": "Ferrari",
+      "points": 0,
+      "driver": [
+        {
+          "driverId": 103,
+          "name": "Charles Leclerc",
+          "points": 0
+        },
+        {
+          "driverId": 104,
+          "name": "Carlos Sainz Jr",
+          "points": 0
+        }
+      ]
+    }
+  ]
