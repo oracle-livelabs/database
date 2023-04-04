@@ -7,6 +7,7 @@ set tab off
 set echo on
 
 -- IMDS requires at least CPU_COUNT>=24 and a RESOURCE_MANAGER_PLAN
+-- The following forces IMDS to be used for this example
 --
 alter session set "_inmemory_dynamic_scans"=force;
 --

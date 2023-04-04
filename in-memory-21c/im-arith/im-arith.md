@@ -76,457 +76,457 @@ SQL>
 
 1. First we will run a query without In-Memory Optimized Arithmetic enabled as a baseline.
 
-		Run the script *01\_pre\_arith.sql*
+    Run the script *01\_pre\_arith.sql*
 
-		```
-		<copy>
-		@01_pre_arith.sql
-		</copy>    
-		```
+    ```
+    <copy>
+    @01_pre_arith.sql
+    </copy>    
+    ```
 
-		or run the query below:  
+    or run the query below:  
 
-		```
-		<copy>
-		set timing on
-		column revenue_total format 999,999,999,999,999;
-		column discount_total format 999,999,999,999,999;
-		select sum(lo_revenue) revenue_total,
-					 sum(lo_ordtotalprice - (lo_ordtotalprice*(lo_discount/100))) discount_total
-		from   LINEORDER;
-		set timing off
-		select * from table(dbms_xplan.display_cursor());
-		@../imstats.sql
-		</copy>
-		```
+    ```
+    <copy>
+    set timing on
+    column revenue_total format 999,999,999,999,999;
+    column discount_total format 999,999,999,999,999;
+    select sum(lo_revenue) revenue_total,
+           sum(lo_ordtotalprice - (lo_ordtotalprice*(lo_discount/100))) discount_total
+    from   LINEORDER;
+    set timing off
+    select * from table(dbms_xplan.display_cursor());
+    @../imstats.sql
+    </copy>
+    ```
 
-		Query result:
+    Query result:
 
-		```
-		SQL> @01_pre_arith.sql
-		Connected.
-		SQL>
-		SQL> -- In-Memory query
-		SQL>
-		SQL> column revenue_total format 999,999,999,999,999;
-		SQL> column discount_total format 999,999,999,999,999;
-		SQL> select sum(lo_revenue) revenue_total,
-			2         sum(lo_ordtotalprice - (lo_ordtotalprice*(lo_discount/100))) discount_total
-			3  from   LINEORDER;
+    ```
+    SQL> @01_pre_arith.sql
+    Connected.
+    SQL>
+    SQL> -- In-Memory query
+    SQL>
+    SQL> column revenue_total format 999,999,999,999,999;
+    SQL> column discount_total format 999,999,999,999,999;
+    SQL> select sum(lo_revenue) revenue_total,
+      2         sum(lo_ordtotalprice - (lo_ordtotalprice*(lo_discount/100))) discount_total
+      3  from   LINEORDER;
 
-					 REVENUE_TOTAL       DISCOUNT_TOTAL
-		-------------------- --------------------
-		 151,711,550,697,626  749,508,796,078,510
+           REVENUE_TOTAL       DISCOUNT_TOTAL
+    -------------------- --------------------
+     151,711,550,697,626  749,508,796,078,510
 
-		Elapsed: 00:00:08.03
-		SQL>
-		SQL> set echo off
-		Hit enter ...
-
-
-		PLAN_TABLE_OUTPUT
-		------------------------------------------------------------------------------------------------------------------------------------------------------
-		SQL_ID  7hfhswcqwt5dz, child number 0
-		-------------------------------------
-		select sum(lo_revenue) revenue_total,        sum(lo_ordtotalprice -
-		(lo_ordtotalprice*(lo_discount/100))) discount_total from   LINEORDER
-
-		Plan hash value: 4085810105
-
-		----------------------------------------------------------------------------------------------------------
-		| Id  | Operation                    | Name      | Rows  | Bytes | Cost (%CPU)| Time     | Pstart| Pstop |
-		----------------------------------------------------------------------------------------------------------
-		|   0 | SELECT STATEMENT             |           |       |       |  3754 (100)|          |       |       |
-		|   1 |  SORT AGGREGATE              |           |     1 |    15 |            |          |       |       |
-		|   2 |   PARTITION RANGE ALL        |           |    41M|   597M|  3754  (15)| 00:00:01 |     1 |     5 |
-		|   3 |    TABLE ACCESS INMEMORY FULL| LINEORDER |    41M|   597M|  3754  (15)| 00:00:01 |     1 |     5 |
-		----------------------------------------------------------------------------------------------------------
+    Elapsed: 00:00:08.03
+    SQL>
+    SQL> set echo off
+    Hit enter ...
 
 
-		16 rows selected.
+    PLAN_TABLE_OUTPUT
+    ------------------------------------------------------------------------------------------------------------------------------------------------------
+    SQL_ID  7hfhswcqwt5dz, child number 0
+    -------------------------------------
+    select sum(lo_revenue) revenue_total,        sum(lo_ordtotalprice -
+    (lo_ordtotalprice*(lo_discount/100))) discount_total from   LINEORDER
 
-		Hit enter ...
+    Plan hash value: 4085810105
+
+    ----------------------------------------------------------------------------------------------------------
+    | Id  | Operation                    | Name      | Rows  | Bytes | Cost (%CPU)| Time     | Pstart| Pstop |
+    ----------------------------------------------------------------------------------------------------------
+    |   0 | SELECT STATEMENT             |           |       |       |  3754 (100)|          |       |       |
+    |   1 |  SORT AGGREGATE              |           |     1 |    15 |            |          |       |       |
+    |   2 |   PARTITION RANGE ALL        |           |    41M|   597M|  3754  (15)| 00:00:01 |     1 |     5 |
+    |   3 |    TABLE ACCESS INMEMORY FULL| LINEORDER |    41M|   597M|  3754  (15)| 00:00:01 |     1 |     5 |
+    ----------------------------------------------------------------------------------------------------------
 
 
-		NAME                                                              VALUE
-		-------------------------------------------------- --------------------
-		CPU used by this session                                            798
-		IM scan CUs columns accessed                                        234
-		IM scan CUs memcompress for query low                                78
-		IM scan CUs pcode aggregation pushdown                              156
-		IM scan rows                                                   41760941
-		IM scan rows pcode aggregated                                  41760941
-		IM scan rows projected                                               78
-		IM scan rows valid                                             41760941
-		session logical reads                                            315586
-		session logical reads - IM                                       315480
-		session pga memory                                             18024696
-		table scans (IM)                                                      5
+    16 rows selected.
 
-		12 rows selected.
+    Hit enter ...
 
-		SQL>
-		```
+
+    NAME                                                              VALUE
+    -------------------------------------------------- --------------------
+    CPU used by this session                                            798
+    IM scan CUs columns accessed                                        234
+    IM scan CUs memcompress for query low                                78
+    IM scan CUs pcode aggregation pushdown                              156
+    IM scan rows                                                   41760941
+    IM scan rows pcode aggregated                                  41760941
+    IM scan rows projected                                               78
+    IM scan rows valid                                             41760941
+    session logical reads                                            315586
+    session logical reads - IM                                       315480
+    session pga memory                                             18024696
+    table scans (IM)                                                      5
+
+    12 rows selected.
+
+    SQL>
+    ```
 
 2.  The following will show the current total space used in the IM column store. In-Memory Optimized Arithmetic does use some additional space in the IM column store for the optimized number format.
 
-		Run the script *02\_im\_usage.sql*
+    Run the script *02\_im\_usage.sql*
 
-		```
-		<copy>
-		@02_im_usage.sql
-		</copy>    
-		```
+    ```
+    <copy>
+    @02_im_usage.sql
+    </copy>    
+    ```
 
-		or run the statements below:
+    or run the statements below:
 
-		```
-		<copy>
-		column pool format a10;
-		column alloc_bytes format 999,999,999,999,999
-		column used_bytes format 999,999,999,999,999
-		SELECT pool, alloc_bytes, used_bytes, populate_status, con_id
-		FROM   v$inmemory_area;
-		</copy>
-		```
+    ```
+    <copy>
+    column pool format a10;
+    column alloc_bytes format 999,999,999,999,999
+    column used_bytes format 999,999,999,999,999
+    SELECT pool, alloc_bytes, used_bytes, populate_status, con_id
+    FROM   v$inmemory_area;
+    </copy>
+    ```
 
-		Query result:
+    Query result:
 
-		```
-		SQL> @02_im_usage.sql
-		Connected.
-		SQL> column pool format a10;
-		SQL> column alloc_bytes format 999,999,999,999,999
-		SQL> column used_bytes format 999,999,999,999,999
-		SQL>
-		SQL> -- Show total column store usage
-		SQL>
-		SQL> SELECT pool, alloc_bytes, used_bytes, populate_status, con_id
-			2  FROM   v$inmemory_area;
+    ```
+    SQL> @02_im_usage.sql
+    Connected.
+    SQL> column pool format a10;
+    SQL> column alloc_bytes format 999,999,999,999,999
+    SQL> column used_bytes format 999,999,999,999,999
+    SQL>
+    SQL> -- Show total column store usage
+    SQL>
+    SQL> SELECT pool, alloc_bytes, used_bytes, populate_status, con_id
+      2  FROM   v$inmemory_area;
 
-		POOL                ALLOC_BYTES           USED_BYTES POPULATE_STATUS                          CON_ID
-		---------- -------------------- -------------------- -------------------------- --------------------
-		1MB POOL          3,940,548,608        2,215,641,088 DONE                                          3
-		64KB POOL           234,881,024            5,570,560 DONE                                          3
+    POOL                ALLOC_BYTES           USED_BYTES POPULATE_STATUS                          CON_ID
+    ---------- -------------------- -------------------- -------------------------- --------------------
+    1MB POOL          3,940,548,608        2,215,641,088 DONE                                          3
+    64KB POOL           234,881,024            5,570,560 DONE                                          3
 
-		SQL>
-		```
+    SQL>
+    ```
 
 3. Next we will enable In-Memory Optimized Arithmetic and re-populate the tables to create the opimized number format.
 
-		Run the script *03\_enable\_arith.sql*
+    Run the script *03\_enable\_arith.sql*
 
-		```
-		<copy>
-		@03_enable_arith.sql
-		</copy>    
-		```
+    ```
+    <copy>
+    @03_enable_arith.sql
+    </copy>    
+    ```
 
-		or run the query below:
+    or run the query below:
 
-		```
-		<copy>
-		alter table lineorder no inmemory;
-		alter table part      no inmemory;
-		alter table supplier  no inmemory;
-		alter table date_dim  no inmemory;
-		alter system set inmemory_optimized_arithmetic = 'ENABLE' scope=both;
-		alter table LINEORDER inmemory memcompress for query low;
-		alter table PART      inmemory memcompress for query low;
-		alter table SUPPLIER  inmemory memcompress for query low;
-		alter table DATE_DIM  inmemory memcompress for query low;
-		select /*+ full(LINEORDER) noparallel(LINEORDER) */ count(*) from LINEORDER;
-		select /*+ full(PART) noparallel(PART) */ count(*) from PART;
-		select /*+ full(CUSTOMER) noparallel(CUSTOMER) */ count(*) from CUSTOMER;
-		select /*+ full(SUPPLIER) noparallel(SUPPLIER) */ count(*) from SUPPLIER;
-		select /*+ full(DATE_DIM) noparallel(DATE_DIM) */ count(*) from DATE_DIM;
-		</copy>
-		```
+    ```
+    <copy>
+    alter table lineorder no inmemory;
+    alter table part      no inmemory;
+    alter table supplier  no inmemory;
+    alter table date_dim  no inmemory;
+    alter system set inmemory_optimized_arithmetic = 'ENABLE' scope=both;
+    alter table LINEORDER inmemory memcompress for query low;
+    alter table PART      inmemory memcompress for query low;
+    alter table SUPPLIER  inmemory memcompress for query low;
+    alter table DATE_DIM  inmemory memcompress for query low;
+    select /*+ full(LINEORDER) noparallel(LINEORDER) */ count(*) from LINEORDER;
+    select /*+ full(PART) noparallel(PART) */ count(*) from PART;
+    select /*+ full(CUSTOMER) noparallel(CUSTOMER) */ count(*) from CUSTOMER;
+    select /*+ full(SUPPLIER) noparallel(SUPPLIER) */ count(*) from SUPPLIER;
+    select /*+ full(DATE_DIM) noparallel(DATE_DIM) */ count(*) from DATE_DIM;
+    </copy>
+    ```
 
-		Query result:
+    Query result:
 
-		```
-		SQL> @03_enable_arith.sql
-		Connected.
-		SQL>
-		SQL> -- This script will enable In-Memory optimized arithmetic
-		SQL>
-		SQL> alter table lineorder no inmemory;
+    ```
+    SQL> @03_enable_arith.sql
+    Connected.
+    SQL>
+    SQL> -- This script will enable In-Memory optimized arithmetic
+    SQL>
+    SQL> alter table lineorder no inmemory;
 
-		Table altered.
+    Table altered.
 
-		SQL> alter table part      no inmemory;
+    SQL> alter table part      no inmemory;
 
-		Table altered.
+    Table altered.
 
-		SQL> alter table supplier  no inmemory;
+    SQL> alter table supplier  no inmemory;
 
-		Table altered.
+    Table altered.
 
-		SQL> alter table date_dim  no inmemory;
+    SQL> alter table date_dim  no inmemory;
 
-		Table altered.
+    Table altered.
 
-		SQL>
-		SQL> alter system set inmemory_optimized_arithmetic = 'ENABLE' scope=both;
+    SQL>
+    SQL> alter system set inmemory_optimized_arithmetic = 'ENABLE' scope=both;
 
-		System altered.
+    System altered.
 
-		SQL>
-		SQL> alter table LINEORDER inmemory memcompress for query low;
+    SQL>
+    SQL> alter table LINEORDER inmemory memcompress for query low;
 
-		Table altered.
+    Table altered.
 
-		SQL> alter table PART      inmemory memcompress for query low;
+    SQL> alter table PART      inmemory memcompress for query low;
 
-		Table altered.
+    Table altered.
 
-		SQL> alter table SUPPLIER  inmemory memcompress for query low;
+    SQL> alter table SUPPLIER  inmemory memcompress for query low;
 
-		Table altered.
+    Table altered.
 
-		SQL> alter table DATE_DIM  inmemory memcompress for query low;
+    SQL> alter table DATE_DIM  inmemory memcompress for query low;
 
-		Table altered.
+    Table altered.
 
-		SQL>
-		SQL> select /*+ full(LINEORDER) noparallel(LINEORDER) */ count(*) from LINEORDER;
+    SQL>
+    SQL> select /*+ full(LINEORDER) noparallel(LINEORDER) */ count(*) from LINEORDER;
 
-								COUNT(*)
-		--------------------
-								41760941
+                COUNT(*)
+    --------------------
+                41760941
 
-		SQL> select /*+ full(PART) noparallel(PART) */ count(*) from PART;
+    SQL> select /*+ full(PART) noparallel(PART) */ count(*) from PART;
 
-								COUNT(*)
-		--------------------
-									800000
+                COUNT(*)
+    --------------------
+                  800000
 
-		SQL> select /*+ full(CUSTOMER) noparallel(CUSTOMER) */ count(*) from CUSTOMER;
+    SQL> select /*+ full(CUSTOMER) noparallel(CUSTOMER) */ count(*) from CUSTOMER;
 
-								COUNT(*)
-		--------------------
-									300000
+                COUNT(*)
+    --------------------
+                  300000
 
-		SQL> select /*+ full(SUPPLIER) noparallel(SUPPLIER) */ count(*) from SUPPLIER;
+    SQL> select /*+ full(SUPPLIER) noparallel(SUPPLIER) */ count(*) from SUPPLIER;
 
-								COUNT(*)
-		--------------------
-									 20000
+                COUNT(*)
+    --------------------
+                   20000
 
-		SQL> select /*+ full(DATE_DIM) noparallel(DATE_DIM) */ count(*) from DATE_DIM;
+    SQL> select /*+ full(DATE_DIM) noparallel(DATE_DIM) */ count(*) from DATE_DIM;
 
-								COUNT(*)
-		--------------------
-										2556
+                COUNT(*)
+    --------------------
+                    2556
 
-		SQL>
-		```
+    SQL>
+    ```
 
-		Notice that the alter table inmemory statements explicitly set the MEMCOMPRESS level to QUERY LOW. This is done to ensure that the In-Memory Optimized Arithmetic number formats will be created since they are only supported for MEMCOMPRESS FOR QUERY LOW.
+    Notice that the alter table inmemory statements explicitly set the MEMCOMPRESS level to QUERY LOW. This is done to ensure that the In-Memory Optimized Arithmetic number formats will be created since they are only supported for MEMCOMPRESS FOR QUERY LOW.
 
 4. Now let's make sure that all of the segments are populated:
 
-		Run the script *04\_im\_populated.sql*
+    Run the script *04\_im\_populated.sql*
 
-		```
-		<copy>
-		@04_im_populated.sql
-		</copy>
-		```
+    ```
+    <copy>
+    @04_im_populated.sql
+    </copy>
+    ```
 
-		or run the query below:
+    or run the query below:
 
-		```
-		<copy>
-		column owner format a10;
-		column segment_name format a20;
-		column partition_name format a15;
-		column populate_status format a15;
-		column bytes heading 'Disk Size' format 999,999,999,999
-		column inmemory_size heading 'In-Memory|Size' format 999,999,999,999
-		column bytes_not_populated heading 'Bytes|Not Populated' format 999,999,999,999
-		select owner, segment_name, partition_name, populate_status, bytes,
-					 inmemory_size, bytes_not_populated
-		from   v$im_segments
-		order by owner, segment_name, partition_name;
-		</copy>
-		```
+    ```
+    <copy>
+    column owner format a10;
+    column segment_name format a20;
+    column partition_name format a15;
+    column populate_status format a15;
+    column bytes heading 'Disk Size' format 999,999,999,999
+    column inmemory_size heading 'In-Memory|Size' format 999,999,999,999
+    column bytes_not_populated heading 'Bytes|Not Populated' format 999,999,999,999
+    select owner, segment_name, partition_name, populate_status, bytes,
+           inmemory_size, bytes_not_populated
+    from   v$im_segments
+    order by owner, segment_name, partition_name;
+    </copy>
+    ```
 
-		Query result:
+    Query result:
 
-		```
-		SQL> @04_im_populated.sql
-		Connected.
-		SQL>
-		SQL> -- Query the view v$IM_SEGMENTS to shows what objects are in the column store
-		SQL> -- and how much of the objects were populated. When the BYTES_NOT_POPULATED is 0
-		SQL> -- it indicates the entire table was populated.
-		SQL>
-		SQL> select owner, segment_name, partition_name, populate_status, bytes,
-			2         inmemory_size, bytes_not_populated
-			3  from   v$im_segments
-			4  order by owner, segment_name, partition_name;
+    ```
+    SQL> @04_im_populated.sql
+    Connected.
+    SQL>
+    SQL> -- Query the view v$IM_SEGMENTS to shows what objects are in the column store
+    SQL> -- and how much of the objects were populated. When the BYTES_NOT_POPULATED is 0
+    SQL> -- it indicates the entire table was populated.
+    SQL>
+    SQL> select owner, segment_name, partition_name, populate_status, bytes,
+      2         inmemory_size, bytes_not_populated
+      3  from   v$im_segments
+      4  order by owner, segment_name, partition_name;
 
-																																														In-Memory            Bytes
-		OWNER      SEGMENT_NAME         PARTITION_NAME  POPULATE_STATUS        Disk Size             Size    Not Populated
-		---------- -------------------- --------------- --------------- ---------------- ---------------- ----------------
-		SSB        CUSTOMER                             COMPLETED             24,928,256       23,199,744                0
-		SSB        DATE_DIM                             COMPLETED                122,880        1,179,648                0
-		SSB        LINEORDER            PART_1994       COMPLETED            563,601,408      585,236,480                0
-		SSB        LINEORDER            PART_1995       COMPLETED            563,470,336      585,236,480                0
-		SSB        LINEORDER            PART_1996       COMPLETED            565,010,432      587,333,632                0
-		SSB        LINEORDER            PART_1997       COMPLETED            563,314,688      585,236,480                0
-		SSB        LINEORDER            PART_1998       COMPLETED            329,015,296      342,556,672                0
-		SSB        PART                                 COMPLETED             56,893,440       21,168,128                0
-		SSB        SUPPLIER                             COMPLETED              1,769,472        2,228,224                0
+                                                                                            In-Memory            Bytes
+    OWNER      SEGMENT_NAME         PARTITION_NAME  POPULATE_STATUS        Disk Size             Size    Not Populated
+    ---------- -------------------- --------------- --------------- ---------------- ---------------- ----------------
+    SSB        CUSTOMER                             COMPLETED             24,928,256       23,199,744                0
+    SSB        DATE_DIM                             COMPLETED                122,880        1,179,648                0
+    SSB        LINEORDER            PART_1994       COMPLETED            563,601,408      585,236,480                0
+    SSB        LINEORDER            PART_1995       COMPLETED            563,470,336      585,236,480                0
+    SSB        LINEORDER            PART_1996       COMPLETED            565,010,432      587,333,632                0
+    SSB        LINEORDER            PART_1997       COMPLETED            563,314,688      585,236,480                0
+    SSB        LINEORDER            PART_1998       COMPLETED            329,015,296      342,556,672                0
+    SSB        PART                                 COMPLETED             56,893,440       21,168,128                0
+    SSB        SUPPLIER                             COMPLETED              1,769,472        2,228,224                0
 
-		9 rows selected.
+    9 rows selected.
 
-		SQL>
-		```
+    SQL>
+    ```
 
 5. Once the objects are populated let's see how much total space was consumed.
 
-		Run the script *05\_im\_usage.sql*
+    Run the script *05\_im\_usage.sql*
 
-		```
-		<copy>
-		@05_im_usage.sql
-		</copy>    
-		```
+    ```
+    <copy>
+    @05_im_usage.sql
+    </copy>    
+    ```
 
-		or run the queries below:
+    or run the queries below:
 
-		```
-		<copy>
-		column pool format a10;
-		column alloc_bytes format 999,999,999,999,999
-		column used_bytes format 999,999,999,999,999
-		SELECT pool, alloc_bytes, used_bytes, populate_status, con_id
-		FROM   v$inmemory_area;
-		</copy>
-		```
+    ```
+    <copy>
+    column pool format a10;
+    column alloc_bytes format 999,999,999,999,999
+    column used_bytes format 999,999,999,999,999
+    SELECT pool, alloc_bytes, used_bytes, populate_status, con_id
+    FROM   v$inmemory_area;
+    </copy>
+    ```
 
-		Query result:
+    Query result:
 
-		```
-		SQL> @05_im_usage.sql
-		Connected.
-		SQL> column pool format a10;
-		SQL> column alloc_bytes format 999,999,999,999,999
-		SQL> column used_bytes format 999,999,999,999,999
-		SQL>
-		SQL> -- Show total column store usage
-		SQL>
-		SQL> SELECT pool, alloc_bytes, used_bytes, populate_status, con_id
-			2  FROM   v$inmemory_area;
+    ```
+    SQL> @05_im_usage.sql
+    Connected.
+    SQL> column pool format a10;
+    SQL> column alloc_bytes format 999,999,999,999,999
+    SQL> column used_bytes format 999,999,999,999,999
+    SQL>
+    SQL> -- Show total column store usage
+    SQL>
+    SQL> SELECT pool, alloc_bytes, used_bytes, populate_status, con_id
+      2  FROM   v$inmemory_area;
 
-		POOL                ALLOC_BYTES           USED_BYTES POPULATE_STATUS               CON_ID
-		---------- -------------------- -------------------- --------------- --------------------
-		1MB POOL          3,940,548,608        2,727,346,176 DONE                               3
-		64KB POOL           234,881,024            6,029,312 DONE                               3
+    POOL                ALLOC_BYTES           USED_BYTES POPULATE_STATUS               CON_ID
+    ---------- -------------------- -------------------- --------------- --------------------
+    1MB POOL          3,940,548,608        2,727,346,176 DONE                               3
+    64KB POOL           234,881,024            6,029,312 DONE                               3
 
-		SQL>
-		```
+    SQL>
+    ```
 
-		You can see that some additional space is used by In-Memory Optimized Arithmetic.
+    You can see that some additional space is used by In-Memory Optimized Arithmetic.
 
 6. Now let's see the results.
 
-Run the script *06\_im\_arith.sql*
+    Run the script *06\_im\_arith.sql*
 
-```
-<copy>
-@06_im_arith.sql
-</copy>    
-```
+    ```
+    <copy>
+    @06_im_arith.sql
+    </copy>    
+    ```
 
-or run the queries below:
+    or run the queries below:
 
-```
-<copy>
-set timing on
-column revenue_total format 999,999,999,999,999;
-column discount_total format 999,999,999,999,999;
-select sum(lo_revenue) revenue_total,
-       sum(lo_ordtotalprice - (lo_ordtotalprice*(lo_discount/100))) discount_total
-from   LINEORDER;
-set timing off
-select * from table(dbms_xplan.display_cursor());
-@../imstats.sql
-</copy>
-```
+    ```
+    <copy>
+    set timing on
+    column revenue_total format 999,999,999,999,999;
+    column discount_total format 999,999,999,999,999;
+    select sum(lo_revenue) revenue_total,
+           sum(lo_ordtotalprice - (lo_ordtotalprice*(lo_discount/100))) discount_total
+    from   LINEORDER;
+    set timing off
+    select * from table(dbms_xplan.display_cursor());
+    @../imstats.sql
+    </copy>
+    ```
 
-Query result:
+    Query result:
 
-```
-SQL> @06_im_arith.sql
-Connected.
-SQL>
-SQL> -- In-Memory query
-SQL>
-SQL> column revenue_total format 999,999,999,999,999;
-SQL> column discount_total format 999,999,999,999,999;
-SQL> select sum(lo_revenue) revenue_total,
-  2         sum(lo_ordtotalprice - (lo_ordtotalprice*(lo_discount/100))) discount_total
-  3  from   LINEORDER;
+    ```
+    SQL> @06_im_arith.sql
+    Connected.
+    SQL>
+    SQL> -- In-Memory query
+    SQL>
+    SQL> column revenue_total format 999,999,999,999,999;
+    SQL> column discount_total format 999,999,999,999,999;
+    SQL> select sum(lo_revenue) revenue_total,
+      2         sum(lo_ordtotalprice - (lo_ordtotalprice*(lo_discount/100))) discount_total
+      3  from   LINEORDER;
 
-       REVENUE_TOTAL       DISCOUNT_TOTAL
--------------------- --------------------
- 151,711,550,697,626  749,508,796,078,510
+           REVENUE_TOTAL       DISCOUNT_TOTAL
+    -------------------- --------------------
+     151,711,550,697,626  749,508,796,078,510
 
-Elapsed: 00:00:04.64
-SQL>
-SQL> set echo off
-Hit enter ...
-
-
-PLAN_TABLE_OUTPUT
-------------------------------------------------------------------------------------------------------------------------------------------------------
-SQL_ID  7hfhswcqwt5dz, child number 0
--------------------------------------
-select sum(lo_revenue) revenue_total,        sum(lo_ordtotalprice -
-(lo_ordtotalprice*(lo_discount/100))) discount_total from   LINEORDER
-
-Plan hash value: 4085810105
-
-----------------------------------------------------------------------------------------------------------
-| Id  | Operation                    | Name      | Rows  | Bytes | Cost (%CPU)| Time     | Pstart| Pstop |
-----------------------------------------------------------------------------------------------------------
-|   0 | SELECT STATEMENT             |           |       |       |  3754 (100)|          |       |       |
-|   1 |  SORT AGGREGATE              |           |     1 |    15 |            |          |       |       |
-|   2 |   PARTITION RANGE ALL        |           |    41M|   597M|  3754  (15)| 00:00:01 |     1 |     5 |
-|   3 |    TABLE ACCESS INMEMORY FULL| LINEORDER |    41M|   597M|  3754  (15)| 00:00:01 |     1 |     5 |
-----------------------------------------------------------------------------------------------------------
+    Elapsed: 00:00:04.64
+    SQL>
+    SQL> set echo off
+    Hit enter ...
 
 
-16 rows selected.
+    PLAN_TABLE_OUTPUT
+    ------------------------------------------------------------------------------------------------------------------------------------------------------
+    SQL_ID  7hfhswcqwt5dz, child number 0
+    -------------------------------------
+    select sum(lo_revenue) revenue_total,        sum(lo_ordtotalprice -
+    (lo_ordtotalprice*(lo_discount/100))) discount_total from   LINEORDER
 
-Hit enter ...
+    Plan hash value: 4085810105
+
+    ----------------------------------------------------------------------------------------------------------
+    | Id  | Operation                    | Name      | Rows  | Bytes | Cost (%CPU)| Time     | Pstart| Pstop |
+    ----------------------------------------------------------------------------------------------------------
+    |   0 | SELECT STATEMENT             |           |       |       |  3754 (100)|          |       |       |
+    |   1 |  SORT AGGREGATE              |           |     1 |    15 |            |          |       |       |
+    |   2 |   PARTITION RANGE ALL        |           |    41M|   597M|  3754  (15)| 00:00:01 |     1 |     5 |
+    |   3 |    TABLE ACCESS INMEMORY FULL| LINEORDER |    41M|   597M|  3754  (15)| 00:00:01 |     1 |     5 |
+    ----------------------------------------------------------------------------------------------------------
 
 
-NAME                                                              VALUE
--------------------------------------------------- --------------------
-CPU used by this session                                            466
-IM scan CUs columns accessed                                        234
-IM scan CUs memcompress for query low                                78
-IM scan CUs pcode aggregation pushdown                              156
-IM scan rows                                                   41760941
-IM scan rows pcode aggregated                                  41760941
-IM scan rows projected                                               78
-IM scan rows valid                                             41760941
-session logical reads                                            315586
-session logical reads - IM                                       315480
-session pga memory                                             18024696
-table scans (IM)                                                      5
+    16 rows selected.
 
-12 rows selected.
+    Hit enter ...
 
-SQL>
-```
 
-Not as dramatic as an In-Memory Expression but still a substantial improvement in arithmetic computations for a very modest amount of space and it will be used automatically now that it is enabled.
+    NAME                                                              VALUE
+    -------------------------------------------------- --------------------
+    CPU used by this session                                            466
+    IM scan CUs columns accessed                                        234
+    IM scan CUs memcompress for query low                                78
+    IM scan CUs pcode aggregation pushdown                              156
+    IM scan rows                                                   41760941
+    IM scan rows pcode aggregated                                  41760941
+    IM scan rows projected                                               78
+    IM scan rows valid                                             41760941
+    session logical reads                                            315586
+    session logical reads - IM                                       315480
+    session pga memory                                             18024696
+    table scans (IM)                                                      5
+
+    12 rows selected.
+
+    SQL>
+    ```
+
+    Not as dramatic as an In-Memory Expression but still a substantial improvement in arithmetic computations for a very modest amount of space and it will be used automatically now that it is enabled.
 
 ## Conclusion
 

@@ -82,515 +82,515 @@ SQL>
 
 1. This lab will use just a single partition from the LINEORDER table. Since we will be re-populating the LINEORDER table a couple of times using just one partition will make the Lab go faster. There are no restrictions requiring this, this has been done just so that you don't have to wait for the full LINEORDER table to be populated.
 
-		Run the script *01\_pop\_lineorder.sql*
+    Run the script *01\_pop\_lineorder.sql*
 
-		```
-		<copy>
-		@01_pop_lineorder.sql
-		</copy>    
-		```
+    ```
+    <copy>
+    @01_pop_lineorder.sql
+    </copy>    
+    ```
 
-		or run the query below:  
+    or run the query below:  
 
-		```
-		<copy>
-		alter table lineorder no inmemory;
-		alter table lineorder modify partition part_1996 inmemory;
-		exec dbms_inmemory.populate(USER, 'LINEORDER', 'PART_1996');
-		</copy>
-		```
+    ```
+    <copy>
+    alter table lineorder no inmemory;
+    alter table lineorder modify partition part_1996 inmemory;
+    exec dbms_inmemory.populate(USER, 'LINEORDER', 'PART_1996');
+    </copy>
+    ```
 
-		Query result:
+    Query result:
 
-		```
-		SQL> @01_pop_lineorder.sql
-		Connected.
-		SQL>
-		SQL> alter table lineorder no inmemory;
+    ```
+    SQL> @01_pop_lineorder.sql
+    Connected.
+    SQL>
+    SQL> alter table lineorder no inmemory;
 
-		Table altered.
+    Table altered.
 
-		SQL>
-		SQL> alter table lineorder modify partition part_1996 inmemory;
+    SQL>
+    SQL> alter table lineorder modify partition part_1996 inmemory;
 
-		Table altered.
+    Table altered.
 
-		SQL>
-		SQL> exec dbms_inmemory.populate(USER, 'LINEORDER', 'PART_1996');
+    SQL>
+    SQL> exec dbms_inmemory.populate(USER, 'LINEORDER', 'PART_1996');
 
-		PL/SQL procedure successfully completed.
+    PL/SQL procedure successfully completed.
 
-		SQL>
-		```
+    SQL>
+    ```
 
 2. Verify that the LINEORDER partition PART_1996 has been populated.
 
-		Run the script *02\_im\_populated.sql*
+    Run the script *02\_im\_populated.sql*
 
-		```
-		<copy>
-		@02_im_populated.sql
-		</copy>    
-		```
+    ```
+    <copy>
+    @02_im_populated.sql
+    </copy>    
+    ```
 
-		or run the query below:
+    or run the query below:
 
-		```
-		<copy>
-		column owner format a10;
-		column segment_name format a20;
-		column partition_name format a15;
-		column populate_status format a15;
-		column bytes heading 'Disk Size' format 999,999,999,999
-		column inmemory_size heading 'In-Memory|Size' format 999,999,999,999
-		column bytes_not_populated heading 'Bytes|Not Populated' format 999,999,999,999
-		select owner, segment_name, partition_name, populate_status, bytes,
-			 inmemory_size, bytes_not_populated
-		from v$im_segments
-		order by owner, segment_name, partition_name;
-		</copy>
-		```
+    ```
+    <copy>
+    column owner format a10;
+    column segment_name format a20;
+    column partition_name format a15;
+    column populate_status format a15;
+    column bytes heading 'Disk Size' format 999,999,999,999
+    column inmemory_size heading 'In-Memory|Size' format 999,999,999,999
+    column bytes_not_populated heading 'Bytes|Not Populated' format 999,999,999,999
+    select owner, segment_name, partition_name, populate_status, bytes,
+       inmemory_size, bytes_not_populated
+    from v$im_segments
+    order by owner, segment_name, partition_name;
+    </copy>
+    ```
 
-		Query result:
+    Query result:
 
-		```
-		SQL> @02_im_populated.sql
-		Connected.
-		SQL>
-		SQL> -- Query the view v$IM_SEGMENTS to shows what objects are in the column store
-		SQL> -- and how much of the objects were populated. When the BYTES_NOT_POPULATED is 0
-		SQL> -- it indicates the entire table was populated.
-		SQL>
-		SQL> select owner, segment_name, partition_name, populate_status, bytes,
-			2         inmemory_size, bytes_not_populated
-			3  from   v$im_segments
-			4  order by owner, segment_name, partition_name;
+    ```
+    SQL> @02_im_populated.sql
+    Connected.
+    SQL>
+    SQL> -- Query the view v$IM_SEGMENTS to shows what objects are in the column store
+    SQL> -- and how much of the objects were populated. When the BYTES_NOT_POPULATED is 0
+    SQL> -- it indicates the entire table was populated.
+    SQL>
+    SQL> select owner, segment_name, partition_name, populate_status, bytes,
+      2         inmemory_size, bytes_not_populated
+      3  from   v$im_segments
+      4  order by owner, segment_name, partition_name;
 
-																																														In-Memory            Bytes
-		OWNER      SEGMENT_NAME         PARTITION_NAME  POPULATE_STATUS        Disk Size             Size    Not Populated
-		---------- -------------------- --------------- --------------- ---------------- ---------------- ----------------
-		SSB        LINEORDER            PART_1996       COMPLETED            565,010,432      480,378,880                0
+                                                                                            In-Memory            Bytes
+    OWNER      SEGMENT_NAME         PARTITION_NAME  POPULATE_STATUS        Disk Size             Size    Not Populated
+    ---------- -------------------- --------------- --------------- ---------------- ---------------- ----------------
+    SSB        LINEORDER            PART_1996       COMPLETED            565,010,432      480,378,880                0
 
-		SQL>
-		```
+    SQL>
+    ```
 
-		Make note of the final "In-Memory Size" of the PART_1996 partition when population is complete.
+    Make note of the final "In-Memory Size" of the PART_1996 partition when population is complete.
 
 3. Now we will run a query that will only access the PART_1996 partition in the IM column store.
 
-		Run the script *03\_im\_query.sql*
+    Run the script *03\_im\_query.sql*
 
-		```
-		<copy>
-		@03_im_query.sql
-		</copy>    
-		```
+    ```
+    <copy>
+    @03_im_query.sql
+    </copy>    
+    ```
 
-		or run the statements below:
+    or run the statements below:
 
-		```
-		<copy>
-		set timing on
-		select sum(lo_revenue) from lineorder
-		where LO_ORDERDATE = to_date('19960102','YYYYMMDD')
-		and lo_quantity > 40 and lo_shipmode = 'AIR';
-		set timing off
-		select * from table(dbms_xplan.display_cursor());
-		@../imstats.sql
-		</copy>
-		```
+    ```
+    <copy>
+    set timing on
+    select sum(lo_revenue) from lineorder
+    where LO_ORDERDATE = to_date('19960102','YYYYMMDD')
+    and lo_quantity > 40 and lo_shipmode = 'AIR';
+    set timing off
+    select * from table(dbms_xplan.display_cursor());
+    @../imstats.sql
+    </copy>
+    ```
 
-		Query result:
+    Query result:
 
-		```
-		SQL> @03_im_query.sql
-		Connected.
-		SQL>
-		SQL> -- In-Memory query
-		SQL>
-		SQL> select sum(lo_revenue) from lineorder where LO_ORDERDATE = to_date('19960102','YYYYMMDD')
-			2  and lo_quantity > 40 and lo_shipmode = 'AIR';
+    ```
+    SQL> @03_im_query.sql
+    Connected.
+    SQL>
+    SQL> -- In-Memory query
+    SQL>
+    SQL> select sum(lo_revenue) from lineorder where LO_ORDERDATE = to_date('19960102','YYYYMMDD')
+      2  and lo_quantity > 40 and lo_shipmode = 'AIR';
 
-		SUM(LO_REVENUE)
-		---------------
-				 4916833732
+    SUM(LO_REVENUE)
+    ---------------
+         4916833732
 
-		Elapsed: 00:00:00.04
-		SQL>
-		SQL> set echo off
-		Hit enter ...
-
-
-		PLAN_TABLE_OUTPUT
-		------------------------------------------------------------------------------------------------------------------------------------------------------
-		SQL_ID  fggskyjgy55w8, child number 0
-		-------------------------------------
-		select sum(lo_revenue) from lineorder where LO_ORDERDATE =
-		to_date('19960102','YYYYMMDD') and lo_quantity > 40 and lo_shipmode =
-		'AIR'
-
-		Plan hash value: 944545749
-
-		----------------------------------------------------------------------------------------------------------
-		| Id  | Operation                    | Name      | Rows  | Bytes | Cost (%CPU)| Time     | Pstart| Pstop |
-		----------------------------------------------------------------------------------------------------------
-		|   0 | SELECT STATEMENT             |           |       |       |   717 (100)|          |       |       |
-		|   1 |  SORT AGGREGATE              |           |     1 |    28 |            |          |       |       |
-		|   2 |   PARTITION RANGE SINGLE     |           |   999 | 27972 |   717   (3)| 00:00:01 |     3 |     3 |
-		|*  3 |    TABLE ACCESS INMEMORY FULL| LINEORDER |   999 | 27972 |   717   (3)| 00:00:01 |     3 |     3 |
-		----------------------------------------------------------------------------------------------------------
-
-		Predicate Information (identified by operation id):
-		---------------------------------------------------
-
-			 3 - inmemory(("LO_ORDERDATE"=TO_DATE(' 1996-01-02 00:00:00', 'syyyy-mm-dd hh24:mi:ss') AND
-									"LO_QUANTITY">40 AND "LO_SHIPMODE"='AIR'))
-					 filter(("LO_ORDERDATE"=TO_DATE(' 1996-01-02 00:00:00', 'syyyy-mm-dd hh24:mi:ss') AND
-									"LO_QUANTITY">40 AND "LO_SHIPMODE"='AIR'))
+    Elapsed: 00:00:00.04
+    SQL>
+    SQL> set echo off
+    Hit enter ...
 
 
-		25 rows selected.
+    PLAN_TABLE_OUTPUT
+    ------------------------------------------------------------------------------------------------------------------------------------------------------
+    SQL_ID  fggskyjgy55w8, child number 0
+    -------------------------------------
+    select sum(lo_revenue) from lineorder where LO_ORDERDATE =
+    to_date('19960102','YYYYMMDD') and lo_quantity > 40 and lo_shipmode =
+    'AIR'
 
-		Hit enter ...
+    Plan hash value: 944545749
+
+    ----------------------------------------------------------------------------------------------------------
+    | Id  | Operation                    | Name      | Rows  | Bytes | Cost (%CPU)| Time     | Pstart| Pstop |
+    ----------------------------------------------------------------------------------------------------------
+    |   0 | SELECT STATEMENT             |           |       |       |   717 (100)|          |       |       |
+    |   1 |  SORT AGGREGATE              |           |     1 |    28 |            |          |       |       |
+    |   2 |   PARTITION RANGE SINGLE     |           |   999 | 27972 |   717   (3)| 00:00:01 |     3 |     3 |
+    |*  3 |    TABLE ACCESS INMEMORY FULL| LINEORDER |   999 | 27972 |   717   (3)| 00:00:01 |     3 |     3 |
+    ----------------------------------------------------------------------------------------------------------
+
+    Predicate Information (identified by operation id):
+    ---------------------------------------------------
+
+       3 - inmemory(("LO_ORDERDATE"=TO_DATE(' 1996-01-02 00:00:00', 'syyyy-mm-dd hh24:mi:ss') AND
+                  "LO_QUANTITY">40 AND "LO_SHIPMODE"='AIR'))
+           filter(("LO_ORDERDATE"=TO_DATE(' 1996-01-02 00:00:00', 'syyyy-mm-dd hh24:mi:ss') AND
+                  "LO_QUANTITY">40 AND "LO_SHIPMODE"='AIR'))
 
 
-		NAME                                                              VALUE
-		-------------------------------------------------- --------------------
-		CPU used by this session                                             24
-		IM scan CUs columns accessed                                         68
-		IM scan CUs memcompress for query low                                17
-		IM scan CUs pcode aggregation pushdown                               17
-		IM scan rows                                                    9126362
-		IM scan rows pcode aggregated                                       749
-		IM scan rows projected                                               17
-		IM scan rows valid                                              9126362
-		IM scan segments minmax eligible                                     17
-		physical reads                                                      335
-		session logical reads                                             76235
-		session logical reads - IM                                        68971
-		session pga memory                                             19532024
-		table scans (IM)                                                      1
+    25 rows selected.
 
-		14 rows selected.
+    Hit enter ...
 
-		SQL>
-		```
 
-		Note that the execution plan shows a PARTITION RANGE SINGLE and a TABLE ACCESS INMEMORY FULL and the Pstart and Pstop columns show partition 3 was accessed.
+    NAME                                                              VALUE
+    -------------------------------------------------- --------------------
+    CPU used by this session                                             24
+    IM scan CUs columns accessed                                         68
+    IM scan CUs memcompress for query low                                17
+    IM scan CUs pcode aggregation pushdown                               17
+    IM scan rows                                                    9126362
+    IM scan rows pcode aggregated                                       749
+    IM scan rows projected                                               17
+    IM scan rows valid                                              9126362
+    IM scan segments minmax eligible                                     17
+    physical reads                                                      335
+    session logical reads                                             76235
+    session logical reads - IM                                        68971
+    session pga memory                                             19532024
+    table scans (IM)                                                      1
+
+    14 rows selected.
+
+    SQL>
+    ```
+
+    Note that the execution plan shows a PARTITION RANGE SINGLE and a TABLE ACCESS INMEMORY FULL and the Pstart and Pstop columns show partition 3 was accessed.
 
 4. Now we will re-populate the same partition but with several columns excluded (i.e. no inmemory(<column list>)).
 
-		Run the script *04\_pop\_excluded.sql*
+    Run the script *04\_pop\_excluded.sql*
 
-		```
-		<copy>
-		@04_pop_excluded.sql
-		</copy>
-		```
+    ```
+    <copy>
+    @04_pop_excluded.sql
+    </copy>
+    ```
 
-		or run the query below:
+    or run the query below:
 
-		```
-		<copy>
-		alter table lineorder no inmemory;
-		alter table lineorder
-			no inmemory (LO_ORDERPRIORITY,LO_SHIPPRIORITY,LO_EXTENDEDPRICE,LO_ORDTOTALPRICE,
-			LO_DISCOUNT,LO_REVENUE,LO_SUPPLYCOST,LO_TAX,LO_COMMITDATE);
-		alter table lineorder modify partition part_1996 inmemory;
-		exec dbms_inmemory.populate(USER, 'LINEORDER', 'PART_1996');
-		</copy>
-		```
+    ```
+    <copy>
+    alter table lineorder no inmemory;
+    alter table lineorder
+      no inmemory (LO_ORDERPRIORITY,LO_SHIPPRIORITY,LO_EXTENDEDPRICE,LO_ORDTOTALPRICE,
+      LO_DISCOUNT,LO_REVENUE,LO_SUPPLYCOST,LO_TAX,LO_COMMITDATE);
+    alter table lineorder modify partition part_1996 inmemory;
+    exec dbms_inmemory.populate(USER, 'LINEORDER', 'PART_1996');
+    </copy>
+    ```
 
-		Query result:
+    Query result:
 
-		```
-		SQL> @04_pop_excluded.sql
-		Connected.
-		SQL>
-		SQL> alter table lineorder no inmemory;
+    ```
+    SQL> @04_pop_excluded.sql
+    Connected.
+    SQL>
+    SQL> alter table lineorder no inmemory;
 
-		Table altered.
+    Table altered.
 
-		SQL>
-		SQL> alter table lineorder
-			2    no inmemory (LO_ORDERPRIORITY,LO_SHIPPRIORITY,LO_EXTENDEDPRICE,LO_ORDTOTALPRICE,
-			3    LO_DISCOUNT,LO_REVENUE,LO_SUPPLYCOST,LO_TAX,LO_COMMITDATE);
+    SQL>
+    SQL> alter table lineorder
+      2    no inmemory (LO_ORDERPRIORITY,LO_SHIPPRIORITY,LO_EXTENDEDPRICE,LO_ORDTOTALPRICE,
+      3    LO_DISCOUNT,LO_REVENUE,LO_SUPPLYCOST,LO_TAX,LO_COMMITDATE);
 
-		Table altered.
+    Table altered.
 
-		SQL>
-		SQL> alter table lineorder modify partition part_1996 inmemory;
+    SQL>
+    SQL> alter table lineorder modify partition part_1996 inmemory;
 
-		Table altered.
+    Table altered.
 
-		SQL>
-		SQL> exec dbms_inmemory.populate(USER, 'LINEORDER', 'PART_1996');
+    SQL>
+    SQL> exec dbms_inmemory.populate(USER, 'LINEORDER', 'PART_1996');
 
-		PL/SQL procedure successfully completed.
+    PL/SQL procedure successfully completed.
 
-		SQL>
-		```
+    SQL>
+    ```
 
 5. Verify that the LINEORDER partition PART_1996 has been populated.
 
-		Run the script *05\_im\_populated.sql*
+    Run the script *05\_im\_populated.sql*
 
-		```
-		<copy>
-		@05_im_populated.sql
-		</copy>    
-		```
+    ```
+    <copy>
+    @05_im_populated.sql
+    </copy>    
+    ```
 
-		or run the query below:
+    or run the query below:
 
-		```
-		<copy>
-		column owner format a10;
-		column segment_name format a20;
-		column partition_name format a15;
-		column populate_status format a15;
-		column bytes heading 'Disk Size' format 999,999,999,999
-		column inmemory_size heading 'In-Memory|Size' format 999,999,999,999
-		column bytes_not_populated heading 'Bytes|Not Populated' format 999,999,999,999
-		select owner, segment_name, partition_name, populate_status, bytes,
-			 inmemory_size, bytes_not_populated
-		from v$im_segments
-		order by owner, segment_name, partition_name;
-		</copy>
-		```
+    ```
+    <copy>
+    column owner format a10;
+    column segment_name format a20;
+    column partition_name format a15;
+    column populate_status format a15;
+    column bytes heading 'Disk Size' format 999,999,999,999
+    column inmemory_size heading 'In-Memory|Size' format 999,999,999,999
+    column bytes_not_populated heading 'Bytes|Not Populated' format 999,999,999,999
+    select owner, segment_name, partition_name, populate_status, bytes,
+       inmemory_size, bytes_not_populated
+    from v$im_segments
+    order by owner, segment_name, partition_name;
+    </copy>
+    ```
 
-		Query result:
+    Query result:
 
-		```
-		SQL> @05_im_populated.sql
-		Connected.
-		SQL>
-		SQL> set pages 9999
-		SQL> set lines 150
-		SQL> column owner format a10;
-		SQL> column segment_name format a20;
-		SQL> column partition_name format a15;
-		SQL> column populate_status format a15;
-		SQL> column bytes heading 'Disk Size' format 999,999,999,999
-		SQL> column inmemory_size heading 'In-Memory|Size' format 999,999,999,999
-		SQL> column bytes_not_populated heading 'Bytes|Not Populated' format 999,999,999,999
-		SQL> set echo on
-		SQL>
-		SQL> -- Query the view v$IM_SEGMENTS to shows what objects are in the column store
-		SQL> -- and how much of the objects were populated. When the BYTES_NOT_POPULATED is 0
-		SQL> -- it indicates the entire table was populated.
-		SQL>
-		SQL> select owner, segment_name, partition_name, populate_status, bytes,
-			2         inmemory_size, bytes_not_populated
-			3  from   v$im_segments
-			4  order by owner, segment_name, partition_name;
+    ```
+    SQL> @05_im_populated.sql
+    Connected.
+    SQL>
+    SQL> set pages 9999
+    SQL> set lines 150
+    SQL> column owner format a10;
+    SQL> column segment_name format a20;
+    SQL> column partition_name format a15;
+    SQL> column populate_status format a15;
+    SQL> column bytes heading 'Disk Size' format 999,999,999,999
+    SQL> column inmemory_size heading 'In-Memory|Size' format 999,999,999,999
+    SQL> column bytes_not_populated heading 'Bytes|Not Populated' format 999,999,999,999
+    SQL> set echo on
+    SQL>
+    SQL> -- Query the view v$IM_SEGMENTS to shows what objects are in the column store
+    SQL> -- and how much of the objects were populated. When the BYTES_NOT_POPULATED is 0
+    SQL> -- it indicates the entire table was populated.
+    SQL>
+    SQL> select owner, segment_name, partition_name, populate_status, bytes,
+      2         inmemory_size, bytes_not_populated
+      3  from   v$im_segments
+      4  order by owner, segment_name, partition_name;
 
-																																														In-Memory            Bytes
-		OWNER      SEGMENT_NAME         PARTITION_NAME  POPULATE_STATUS        Disk Size             Size    Not Populated
-		---------- -------------------- --------------- --------------- ---------------- ---------------- ----------------
-		SSB        LINEORDER            PART_1996       COMPLETED            565,010,432      214,040,576                0
+                                                                                            In-Memory            Bytes
+    OWNER      SEGMENT_NAME         PARTITION_NAME  POPULATE_STATUS        Disk Size             Size    Not Populated
+    ---------- -------------------- --------------- --------------- ---------------- ---------------- ----------------
+    SSB        LINEORDER            PART_1996       COMPLETED            565,010,432      214,040,576                0
 
-		SQL>
-		```
+    SQL>
+    ```
 
-		Compare the size of the "In-Memory Size" for the PART_1996 partition with the size from Step 2. You should see that the size is considerably less. This is due to excluding columns and therefore not populating them in the IM column store.
+    Compare the size of the "In-Memory Size" for the PART_1996 partition with the size from Step 2. You should see that the size is considerably less. This is due to excluding columns and therefore not populating them in the IM column store.
 
 6. We can display the status of the columns with the following query.
 
-		Run the script *06\_im\_columns.sql*
+    Run the script *06\_im\_columns.sql*
 
-		```
-		<copy>
-		@06_im_columns.sql
-		</copy>    
-		```
+    ```
+    <copy>
+    @06_im_columns.sql
+    </copy>    
+    ```
 
-		or run the query below:
+    or run the query below:
 
-		```
-		<copy>
-		column owner format a10;
-		column table_name format a20;
-		column column_name format a20;
-		select owner, table_name, COLUMN_NAME, INMEMORY_COMPRESSION
-		from v$im_column_level
-		where table_name = 'LINEORDER'
-		order by table_name, segment_column_id;
-		</copy>
-		```
+    ```
+    <copy>
+    column owner format a10;
+    column table_name format a20;
+    column column_name format a20;
+    select owner, table_name, COLUMN_NAME, INMEMORY_COMPRESSION
+    from v$im_column_level
+    where table_name = 'LINEORDER'
+    order by table_name, segment_column_id;
+    </copy>
+    ```
 
-		Query result:
+    Query result:
 
-		```
-		SQL> @06_im_columns.sql
-		Connected.
-		SQL>
-		SQL> select owner, table_name, COLUMN_NAME, INMEMORY_COMPRESSION
-			2  from v$im_column_level
-			3  where table_name = 'LINEORDER'
-			4  order by table_name, segment_column_id;
+    ```
+    SQL> @06_im_columns.sql
+    Connected.
+    SQL>
+    SQL> select owner, table_name, COLUMN_NAME, INMEMORY_COMPRESSION
+      2  from v$im_column_level
+      3  where table_name = 'LINEORDER'
+      4  order by table_name, segment_column_id;
 
-		OWNER      TABLE_NAME           COLUMN_NAME          INMEMORY_COMPRESSION
-		---------- -------------------- -------------------- --------------------------
-		SSB        LINEORDER            LO_ORDERKEY          DEFAULT
-		SSB        LINEORDER            LO_LINENUMBER        DEFAULT
-		SSB        LINEORDER            LO_CUSTKEY           DEFAULT
-		SSB        LINEORDER            LO_PARTKEY           DEFAULT
-		SSB        LINEORDER            LO_SUPPKEY           DEFAULT
-		SSB        LINEORDER            LO_ORDERDATE         DEFAULT
-		SSB        LINEORDER            LO_ORDERPRIORITY     NO INMEMORY
-		SSB        LINEORDER            LO_SHIPPRIORITY      NO INMEMORY
-		SSB        LINEORDER            LO_QUANTITY          DEFAULT
-		SSB        LINEORDER            LO_EXTENDEDPRICE     NO INMEMORY
-		SSB        LINEORDER            LO_ORDTOTALPRICE     NO INMEMORY
-		SSB        LINEORDER            LO_DISCOUNT          NO INMEMORY
-		SSB        LINEORDER            LO_REVENUE           NO INMEMORY
-		SSB        LINEORDER            LO_SUPPLYCOST        NO INMEMORY
-		SSB        LINEORDER            LO_TAX               NO INMEMORY
-		SSB        LINEORDER            LO_COMMITDATE        NO INMEMORY
-		SSB        LINEORDER            LO_SHIPMODE          DEFAULT
+    OWNER      TABLE_NAME           COLUMN_NAME          INMEMORY_COMPRESSION
+    ---------- -------------------- -------------------- --------------------------
+    SSB        LINEORDER            LO_ORDERKEY          DEFAULT
+    SSB        LINEORDER            LO_LINENUMBER        DEFAULT
+    SSB        LINEORDER            LO_CUSTKEY           DEFAULT
+    SSB        LINEORDER            LO_PARTKEY           DEFAULT
+    SSB        LINEORDER            LO_SUPPKEY           DEFAULT
+    SSB        LINEORDER            LO_ORDERDATE         DEFAULT
+    SSB        LINEORDER            LO_ORDERPRIORITY     NO INMEMORY
+    SSB        LINEORDER            LO_SHIPPRIORITY      NO INMEMORY
+    SSB        LINEORDER            LO_QUANTITY          DEFAULT
+    SSB        LINEORDER            LO_EXTENDEDPRICE     NO INMEMORY
+    SSB        LINEORDER            LO_ORDTOTALPRICE     NO INMEMORY
+    SSB        LINEORDER            LO_DISCOUNT          NO INMEMORY
+    SSB        LINEORDER            LO_REVENUE           NO INMEMORY
+    SSB        LINEORDER            LO_SUPPLYCOST        NO INMEMORY
+    SSB        LINEORDER            LO_TAX               NO INMEMORY
+    SSB        LINEORDER            LO_COMMITDATE        NO INMEMORY
+    SSB        LINEORDER            LO_SHIPMODE          DEFAULT
 
-		17 rows selected.
+    17 rows selected.
 
-		SQL>
-		```
+    SQL>
+    ```
 
-		Notice that the column INMEMORY_COMPRESSION will specify NO INMEMORY for those columns that have been excluded.
+    Notice that the column INMEMORY_COMPRESSION will specify NO INMEMORY for those columns that have been excluded.
 
 7. Now we will re-run the same query we ran in Step 3.
 
-		Run the script *07\_hybrid\_query.sql*
+    Run the script *07\_hybrid\_query.sql*
 
-		```
-		<copy>
-		@07_hybrid_query.sql
-		</copy>    
-		```
+    ```
+    <copy>
+    @07_hybrid_query.sql
+    </copy>    
+    ```
 
-		or run the query below:
+    or run the query below:
 
-		```
-		<copy>
-		set timing on
-		select sum(lo_revenue) from lineorder
-		where LO_ORDERDATE = to_date('19960102','YYYYMMDD')
-		and lo_quantity > 40 and lo_shipmode = 'AIR';
-		set timing off
-		pause Hit enter ...
-		select * from table(dbms_xplan.display_cursor());
-		pause Hit enter ...
-		@../imstats.sql
-		</copy>
-		```
+    ```
+    <copy>
+    set timing on
+    select sum(lo_revenue) from lineorder
+    where LO_ORDERDATE = to_date('19960102','YYYYMMDD')
+    and lo_quantity > 40 and lo_shipmode = 'AIR';
+    set timing off
+    pause Hit enter ...
+    select * from table(dbms_xplan.display_cursor());
+    pause Hit enter ...
+    @../imstats.sql
+    </copy>
+    ```
 
-		Query result:
+    Query result:
 
-		```
-		SQL> @07_hybrid_query.sql
-		Connected.
-		SQL>
-		SQL> -- In-Memory query
-		SQL>
-		SQL> select sum(lo_revenue) from lineorder where LO_ORDERDATE = to_date('19960102','YYYYMMDD')
-			2  and lo_quantity > 40 and lo_shipmode = 'AIR';
+    ```
+    SQL> @07_hybrid_query.sql
+    Connected.
+    SQL>
+    SQL> -- In-Memory query
+    SQL>
+    SQL> select sum(lo_revenue) from lineorder where LO_ORDERDATE = to_date('19960102','YYYYMMDD')
+      2  and lo_quantity > 40 and lo_shipmode = 'AIR';
 
-				 SUM(LO_REVENUE)
-		--------------------
-							4916833732
+         SUM(LO_REVENUE)
+    --------------------
+              4916833732
 
-		Elapsed: 00:00:00.05
-		SQL>
-		SQL> set echo off
-		Hit enter ...
-
-
-		PLAN_TABLE_OUTPUT
-		------------------------------------------------------------------------------------------------------------------------------------------------------
-		SQL_ID  fggskyjgy55w8, child number 0
-		-------------------------------------
-		select sum(lo_revenue) from lineorder where LO_ORDERDATE =
-		to_date('19960102','YYYYMMDD') and lo_quantity > 40 and lo_shipmode =
-		'AIR'
-
-		Plan hash value: 944545749
-
-		-------------------------------------------------------------------------------------------------------------------
-		| Id  | Operation                             | Name      | Rows  | Bytes | Cost (%CPU)| Time     | Pstart| Pstop |
-		-------------------------------------------------------------------------------------------------------------------
-		|   0 | SELECT STATEMENT                      |           |       |       | 18955 (100)|          |       |       |
-		|   1 |  SORT AGGREGATE                       |           |     1 |    28 |            |          |       |       |
-		|   2 |   PARTITION RANGE SINGLE              |           |   999 | 27972 | 18955   (1)| 00:00:01 |     3 |     3 |
-		|*  3 |    TABLE ACCESS INMEMORY FULL (HYBRID)| LINEORDER |   999 | 27972 | 18955   (1)| 00:00:01 |     3 |     3 |
-		-------------------------------------------------------------------------------------------------------------------
-
-		Predicate Information (identified by operation id):
-		---------------------------------------------------
-
-			 3 - filter(("LO_ORDERDATE"=TO_DATE(' 1996-01-02 00:00:00', 'syyyy-mm-dd hh24:mi:ss') AND
-									"LO_QUANTITY">40 AND "LO_SHIPMODE"='AIR'))
+    Elapsed: 00:00:00.05
+    SQL>
+    SQL> set echo off
+    Hit enter ...
 
 
-		23 rows selected.
+    PLAN_TABLE_OUTPUT
+    ------------------------------------------------------------------------------------------------------------------------------------------------------
+    SQL_ID  fggskyjgy55w8, child number 0
+    -------------------------------------
+    select sum(lo_revenue) from lineorder where LO_ORDERDATE =
+    to_date('19960102','YYYYMMDD') and lo_quantity > 40 and lo_shipmode =
+    'AIR'
 
-		Hit enter ...
+    Plan hash value: 944545749
+
+    -------------------------------------------------------------------------------------------------------------------
+    | Id  | Operation                             | Name      | Rows  | Bytes | Cost (%CPU)| Time     | Pstart| Pstop |
+    -------------------------------------------------------------------------------------------------------------------
+    |   0 | SELECT STATEMENT                      |           |       |       | 18955 (100)|          |       |       |
+    |   1 |  SORT AGGREGATE                       |           |     1 |    28 |            |          |       |       |
+    |   2 |   PARTITION RANGE SINGLE              |           |   999 | 27972 | 18955   (1)| 00:00:01 |     3 |     3 |
+    |*  3 |    TABLE ACCESS INMEMORY FULL (HYBRID)| LINEORDER |   999 | 27972 | 18955   (1)| 00:00:01 |     3 |     3 |
+    -------------------------------------------------------------------------------------------------------------------
+
+    Predicate Information (identified by operation id):
+    ---------------------------------------------------
+
+       3 - filter(("LO_ORDERDATE"=TO_DATE(' 1996-01-02 00:00:00', 'syyyy-mm-dd hh24:mi:ss') AND
+                  "LO_QUANTITY">40 AND "LO_SHIPMODE"='AIR'))
 
 
-		NAME                                                              VALUE
-		-------------------------------------------------- --------------------
-		CPU used by this session                                              9
-		IM scan CUs columns accessed                                         51
-		IM scan CUs memcompress for query low                                17
-		IM scan rows                                                    9126362
-		IM scan rows valid                                              9126362
-		physical reads                                                     5465
-		session logical reads                                             69773
-		session logical reads - IM                                        68971
-		session pga memory                                             17893624
-		table scans (IM)                                                      1
+    23 rows selected.
 
-		10 rows selected.
+    Hit enter ...
 
-		SQL>
-		```
 
-		Notice that the execution plan shows a new access path: TABLE ACCESS INMEMORY FULL (HYBRID). This is how you can tell whether the query was an In-Memory Hybrid Scan.
+    NAME                                                              VALUE
+    -------------------------------------------------- --------------------
+    CPU used by this session                                              9
+    IM scan CUs columns accessed                                         51
+    IM scan CUs memcompress for query low                                17
+    IM scan rows                                                    9126362
+    IM scan rows valid                                              9126362
+    physical reads                                                     5465
+    session logical reads                                             69773
+    session logical reads - IM                                        68971
+    session pga memory                                             17893624
+    table scans (IM)                                                      1
+
+    10 rows selected.
+
+    SQL>
+    ```
+
+    Notice that the execution plan shows a new access path: TABLE ACCESS INMEMORY FULL (HYBRID). This is how you can tell whether the query was an In-Memory Hybrid Scan.
 
 8. Reset the LINEORDER table back to full column population and begin re-population by running the following script.
 
-		Run the script *08\_hybrid\_cleanup.sql*
+    Run the script *08\_hybrid\_cleanup.sql*
 
-		```
-		<copy>
-		@08_hybrid_cleanup.sql
-		</copy>
-		```
+    ```
+    <copy>
+    @08_hybrid_cleanup.sql
+    </copy>
+    ```
 
-		or run the statements below:
+    or run the statements below:
 
-		```
-		<copy>
-		alter table lineorder no inmemory;
-		alter table lineorder inmemory;
-		exec dbms_inmemory.populate(USER, 'LINEORDER');
-		</copy>
-		```
+    ```
+    <copy>
+    alter table lineorder no inmemory;
+    alter table lineorder inmemory;
+    exec dbms_inmemory.populate(USER, 'LINEORDER');
+    </copy>
+    ```
 
-		Query result:
+    Query result:
 
-		```
-		SQL> @08_hybrid_cleanup.sql
-		Connected.
+    ```
+    SQL> @08_hybrid_cleanup.sql
+    Connected.
 
-		Table altered.
-
-
-		Table altered.
+    Table altered.
 
 
-		PL/SQL procedure successfully completed.
+    Table altered.
 
-		SQL> 
-		```
+
+    PL/SQL procedure successfully completed.
+
+    SQL> 
+    ```
 
 ## Conclusion
 
