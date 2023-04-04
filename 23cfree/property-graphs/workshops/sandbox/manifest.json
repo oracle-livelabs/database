@@ -1,0 +1,34 @@
+{
+  "workshoptitle": "Work with JSON Relational Duality Views using SQL",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+      {
+          "title": "Introduction",
+          "description": "This is an introduction to Oracle Database 23c.",
+          "type": "livelabs",
+          "filename": "../../introduction/introduction.md"
+      },
+      {
+          "title": "Get Started with NoVNC",
+          "description": "Verify Setup of compute instance",
+          "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+      },
+      {
+          "title": "Lab 1: Setup",
+          "description": "Creating the schema including JSON Duality Views",
+          "type": "livelabs",
+          "filename": "../../labs/configure-ords.md"
+      },
+      {
+          "title": "Lab 2: Graph",
+          "description": "Using Property Graphs in 23c",
+          "type": "livelabs",
+          "filename": "../../labs/graph.md"
+      },
+      {
+        "title": "Need Help?",
+        "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
+        "filename":"https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
+      }
+  ]
+}
