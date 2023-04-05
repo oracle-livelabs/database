@@ -66,7 +66,7 @@ public class SwapTeams {
             rs = selectDriver.executeQuery();
             rs.next();
             driver = rs.getObject(1, OracleJsonObject.class);
-            System.out.println("Driver name: " + driver.getString("name") + " " + driver.getInt("teamId"));
+            System.out.println("Driver name: " + driver.getString("name") + ", ID: " + driver.getInt("teamId"));
             rs.close();
             
             PreparedStatement updateTeam = con.prepareStatement("UPDATE team_dv t SET data = ? WHERE t.data.name LIKE ?");
