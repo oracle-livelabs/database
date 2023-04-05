@@ -20,8 +20,8 @@ CREATE TABLE BANK_TRANSFERS (
     AMOUNT          NUMBER
 );
 
-load bank_transfers /home/oracle/examples/graph/23c-demo/23c-demo/BankGraphDataset/BANK_TRANSFERS.csv;
-load bank_accounts /home/oracle/examples/graph/23c-demo/23c-demo/BankGraphDataset/BANK_ACCOUNTS.csv;
+load bank_transfers /home/oracle/examples/graph/BANK_TRANSFERS.csv;
+load bank_accounts /home/oracle/examples/graph/BANK_ACCOUNTS.csv;
 
 -- Add constraints
 ALTER TABLE BANK_ACCOUNTS ADD PRIMARY KEY (ID);

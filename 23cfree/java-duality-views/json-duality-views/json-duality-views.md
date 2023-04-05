@@ -27,7 +27,7 @@ This lab assumes you have:
 
     Run the code and you can see the execution of this statement. It pulls back the expected document for the Bahrain Grand Prix. Note that the document is empty for results and podium, so the race results are not yet recorded.
 
-    ![Image alt text](images/find-race-by-id.png)
+    ![Find race by ID query](images/find-race-by-id.png)
 
     There are multiple ways to find race info by raceId. You could also use JSON functions, such as json\_value and json\_exists in predicates when querying duality views. 
     
@@ -42,16 +42,16 @@ This lab assumes you have:
 
     The update statement uses the virtual column OBJECT\_RESID to identify where to make the change. After executing the update, we access the resulting JSON object to print out the winner. Note that this name/value pair is nested a couple layers deep within the JSON file, so to access it we have to go race -> podium -> winner.
 
-    ![Image alt text](images/nested-winner.png)
+    ![race podium winner](images/nested-winner.png)
 
     Press the green play button to execute the file and find out who won the race. 
 
-    ![Image alt text](images/replace-race.png)
+    ![winner of the race](images/replace-race.png)
 
 
 2. Now to see the entirety of the updated results for the Bahrain Grand Prix. You can use the OBJECT\_RESID virtual column to to query a document by ID. Open the FindRaceByObjId.java and execute that to see the outcome.
 
-    ![Image alt text](images/find-by-obj-id.png)
+    ![updated race results](images/find-by-obj-id.png)
 
 
 ## Task 3: Update specific fields in the document identified by a predicate
@@ -64,7 +64,7 @@ This lab assumes you have:
     
     Note that the "where" clause can have any valid SQL expression, e.g. equality on OBJECT\_RESID, some condition using simplified syntax, or JSON function, such as json\_value or json\_exists.
 
-    ![Image alt text](images/update-field.png)
+    ![changed race name](images/update-field.png)
 
 
 ## Task 4: Re-parenting of sub-objects between two documents
@@ -73,19 +73,19 @@ Switch Charles Leclerc's and George Russell's teams. This can be done by updatin
 
     Execute the file with the green play button.
 
-    ![Image alt text](images/swap-docs.png)
+    ![driver ID swap](images/swap-docs.png)
 
 
 
 ## Task 5: Update a non-updateable field
 
-1. Open the NonupdateableError.java file. Remember when we created the JSON relational duality views that some would specify UPDATE or NODELETE or etc. on an underlying base table. This is where that functionality comes into play. 
+1. Open the NonupdateableError.java file. Remember, when we created the JSON relational duality views that some would specify UPDATE or NODELETE or etc. on an underlying base table. This is where that functionality comes into play. 
     
-    This program will attempt to update team for a driver through driver\_dv. However, NOUPDATE was specified through this duality view, so this will throw an error, as we do not allow this field to be updateable through driver_dv.
+    This program will attempt to update the team for a driver through driver\_dv. However, NOUPDATE was specified through this duality view, so this will throw an error, as we do not allow this field to be updateable through driver_dv.
 
     As you execute, you will see the error message pop up. Scroll right if necessary to see the entirety of the message.
 
-    ![Image alt text](images/nonupdateable.png)
+    ![Error for updating field](images/nonupdateable.png)
 
 
 
@@ -95,7 +95,7 @@ Switch Charles Leclerc's and George Russell's teams. This can be done by updatin
 
     Click the green play button to execute DeleteById.java.
 
-    ![Image alt text](images/delete.png)
+    ![delete race document](images/delete.png)
 
     In the underlying base tables, rows are deleted from the race and driver\_race\_map tables, but not from the driver table because it is marked read-only in the view definition. 
 

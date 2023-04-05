@@ -17,13 +17,19 @@
           "title": "Lab 1: Setup",
           "description": "Creating the schema including JSON Duality Views",
           "type": "livelabs",
-          "filename": "../../labs/configure-ords.md"
+          "filename": "../../setup/setup.md"
       },
       {
           "title": "Lab 2: Graph",
           "description": "Using Property Graphs in 23c",
           "type": "livelabs",
-          "filename": "../../labs/graph.md"
+          "filename": "../../graph/graph.md"
+      },
+      {
+          "title": "Lab 3: APEX",
+          "description": "Using Property Graphs in 23c",
+          "type": "livelabs",
+          "filename": "../../apex/apex.md"
       },
       {
         "title": "Need Help?",

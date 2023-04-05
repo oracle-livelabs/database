@@ -17,13 +17,13 @@
           "title": "Lab 1: Create the schema",
           "description": "Creating the schema including JSON Duality Views",
           "type": "livelabs",
-          "filename": "../../labs/schema.md"
+          "filename": "../../create-schema/create-schema.md"
       },
       {
           "title": "Lab 2: Java and the JSON Duality Views",
           "description": "Working with Java + JSON Duality Views",
           "type": "livelabs",
-          "filename": "../../labs/json.md"
+          "filename": "../../json-duality-views/json-duality-views.md"
       },
       {
         "title": "Need Help?",
