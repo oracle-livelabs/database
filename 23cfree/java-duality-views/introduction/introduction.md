@@ -10,11 +10,17 @@ This workshop focuses on working with JSON Duality Views in Oracle Database 23c.
 
 (Filler from Ranjan's blog, this is for him to write)
 
-JSON Relational Duality is a landmark capability in Oracle Database 23c that provides game-changing flexibility and simplicity for Oracle Database developers. This breakthrough innovation overcomes the historical challenges that developers have faced when building applications, either when using the relational model or when using the document model.  
+JSON Relational Duality converges the benefits of the Relational and Document worlds within a single database. Apps can access the same data as a set of JSON documents or as relational tables and columns without data duplication. Whether you are a Relational/SQL developer, Document database developer, Java or Python App developer, gain first-hand experience building apps using Duality Views.
 
-JSON Relational Duality delivers a solution that provides the benefits of both relational tables and JSON documents, without the tradeoffs of either model.
+Use your favorite tool, SQL, REST, or Mongo API, to access and update the same data. Build Java and Python apps that use Duality views.
 
-Estimated Time: n minutes
+Experience flexibility: Build document-centric apps on relational data or create SQL apps on documents
+
+Experience simplicity: Retrieve and store all the data needed for an app in a single database operation
+
+Define different Duality Views to support multiple use cases
+
+Estimated Time: 30 minutes
 
 ### About Product/Technology (Optional)
 Enter background information here about the technology/feature or product used in this lab - no need to repeat what you covered in the introduction.
