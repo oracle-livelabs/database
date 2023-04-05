@@ -6,6 +6,9 @@ Download the Autonomous database wallet and the lab files required for this lab.
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Download the Autonomous Database Wallet and Lab Files](videohub:1_mfql3sf3)
+
 ### Objectives
 
 In this lab, you will
