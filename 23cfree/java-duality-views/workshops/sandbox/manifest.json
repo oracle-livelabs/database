@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Work with JSON Relational Duality Views using SQL",
+  "workshoptitle": "Work with JSON Relational Duality Views using Java",
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
       {
@@ -20,16 +20,10 @@
           "filename": "../../labs/schema.md"
       },
       {
-          "title": "Lab 2: JSON and the Duality Views",
-          "description": "Working with JSON and the Duality Views",
+          "title": "Lab 2: Java and the JSON Duality Views",
+          "description": "Working with Java + JSON Duality Views",
           "type": "livelabs",
           "filename": "../../labs/json.md"
-      },
-      {
-          "title": "Lab 3: The Extreme Flexibility of JSON Duality Views",
-          "description": "Working with SQL and the Duality Views",
-          "type": "livelabs",
-          "filename": "../../labs/sql.md"
       },
       {
         "title": "Need Help?",
