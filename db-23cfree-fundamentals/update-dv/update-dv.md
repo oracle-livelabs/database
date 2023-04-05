@@ -19,17 +19,21 @@ In this lab, you will:
 ### Prerequisites
 
 This lab assumes you have:
-- Populated the data from the previous lab
+- Oracle Database 23c Free Developer Release
+- All previous labs successfully completed
+- Oracle REST Data Service (ORDS) 23.1
 
 
-## Task 1: Replace a document identified by document key
+## Task 1: Replace a document identified by ID
 
 
-1. First you must determine the document key, aka ID, and eTag of the document to replace. If you did not write these down in the previous lab, run this command to get them again. 
+1. First you must determine the ID and eTag of the document to replace. Run this command to query on the Bahrain Grand Prix as we did in the last lab.  
 
     ```
-    $ <copy>curl -X POST --data-binary @QBE1.json -H "Content-Type: application/json" http://localhost:8080/ords/janus/soda/latest/custom-actions/query/race_dv | json_pp</copy>
+    $ <copy>curl -v --location -g "http://hol23cfdr:8080/ords/hol23c/race_dv/?q=%7B%22name%22%3A%7B%22%24eq%22%3A%22Bahrain%20Grand%20Prix%22%7D%7D" | json_pp</copy>
     ```
+
+    Take note of the ID (which is 201) and the eTag (which will be different for everyone). 
 
 2. You need to modify the `updateRace.json` file to include the right eTag. Open the file and insert the current eTag value. Make sure to save before closing. 
 
@@ -40,139 +44,157 @@ This lab assumes you have:
 4. Now that the eTag is accurate, replace the target document with the contents in the file `updateRace.json`. 
 
     ```
-    $ <copy>curl -i -X PUT --data-binary @updateRace.json -H "Content-Type: application/json" http://localhost:8080/ords/janus/soda/latest/race_dv/<INSERT ID HERE></copy>
+    $ <copy>curl -i -X PUT --data-binary @updateRace.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/race_dv/201</copy>
     ```
 
 5. The command returns HTTP error code 200, indicating a successful replace. 
 
-    The update eTag appears in the response header as well. Note that the “_etag” value supplied in the content is used for “out of the box” optimistic locking, to prevent the well-known “lost update” problem that can occur with concurrent operations. During the replace by ID operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target duality view document. If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. In case of such an error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value.
+    The update eTag appears in the response header as well. Note that the “etag” value supplied in the content is used for “out of the box” optimistic locking, to prevent the well-known “lost update” problem that can occur with concurrent operations. During the replace by ID operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target duality view document. If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. In case of such an error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value.
 
 6. To verify that a replace using an eTag that is not the most recent fails, run the same command again. 
 
     ```
-    $ <copy>curl -i -X POST --data-binary @updateRace.json -H "Content-Type: application/json" http://localhost:8080/ords/janus/soda/latest/race_dv/<INSERT ID HERE></copy>
+    $ <copy>curl -i -X PUT --data-binary @updateRace.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/race_dv/201</copy>
     ```
 
-    Because updateRace.json content has an "_etag" field value that has been obsoleted by the preceding successful replace, the command now outputs 400 (bad request). 
+    Because updateRace.json content has an "etag" field value that has been obsoleted by the preceding successful replace, the command now outputs 400 (bad request). 
 
 
-## Task 2: Update specific fields using merge patch
+## Task 2: Re-parent sub-objects between two documents
 
-1. This operation uses `patch.json` with the following content: 
+In this task, you will switch Charles Leclerc's and George Russell's teams by updating the driver arrays in the Mercedes and Ferrari documents of the `team_dv` duality view. 
 
-    ```
-    {"name":"Blue Air Bahrain"}
-    ```
-
-    This patch document specifies that the “name” field should be set the “Blue Air Bahrain Grand Prix” in the target document. Although this patch document only specifies a single field value to change, in general the patch document can set, reset, or delete any number of fields in the target document.
-
-2. Use the PATCH verb with "application/merge-patch+json" as the content type and the ID of the target document to update the entry. You should use the same ID from the last task.
+1. First you must find the IDs of each document. We will use this query parameter with the following content: 
 
     ```
-    $ <copy>curl -i -X PATCH --data-binary @patch.json -H "Content-Type: application/merge-patch+json" http://localhost:8080/ords/janus/soda/latest/race_dv/<INSERT ID HERE></copy>
-    ```
-
-3. You can confirm the update with a fetch.
-
-    ```
-    $ <copy>curl -X GET -H "Content-Type: application/json" http://localhost:8080/ords/janus/soda/latest/race_dv/<INSERT ID HERE> | json_pp</copy>
-    ```
-
-## Task 3: Update specific fields using QBE
-
-JSON merge patch can also be applied to one or more documents identified by a QBE.
-
-1. This operation uses `patchWithQBE.json` with the following content: 
-
-    ```
-    {"$query" : {"raceId" : 201},
-     "$merge" : {"name" : "Blue Air Bahrain Grand Prix"}}
-    ```
-
-    The QBE that identifies the set of target documents is under the “$query” field. The JSON merge patch document is under “$merge” field. In this example, the QBE only matches a single target document with “raceId” equal to 201. But in general, the QBE can match any number of documents. And, once again, the JSON merge patch document can set, reset, or delete any number of fields in the target documents.
-
-2. Run this command to preform the patch:
-
-    ```
-    $ <copy>curl -i -X POST --data-binary @patchWithQBE.json -H "Content-Type: application/json" http://localhost:8080/ords/janus/soda/latest/custom-actions/update/race_dv</copy>
-    ```
-
-3. The command returns an HTML 200 indicating success and the return fields specifies 1 item has been updated. 
-
-
-## Task 4: Re-parent sub-objects between two documents
-
-In this task, you will switch Charles Leclerc's and George Russell's teams by updating the driver arrays in the Mercedes and Ferrari documents of the team_dv duality view. 
-
-1. First you must find the IDs of each document. We will use QBE2.json with the following content: 
-
-    ```
-    {"name" : {"$in" : ["Mercedes", "Ferrari"]}}
+    {"name":{"$in":["Mercedes","Ferrari"]}}
     ```
 
 2. Query the team_dv to find the documents' IDs. Then copy them down for each document.
 
     ```
-    $ <copy>curl -X POST --data-binary @QBE2.json -H "Content-Type: application/json" http://localhost:8080/ords/janus/soda/latest/custom-actions/query/team_dv | json_pp</copy>
+    $ <copy>curl -v --location -g "http://hol23cfdr:8080/ords/hol23c/team_dv/?q=%7B%22name%22%3A%7B%22%24in%22%3A%5B%22Mercedes%22%2C%22Ferrari%22%5D%7D%7D" | json_pp
+    </copy>
     ```
 
-3. Now you must update the ID for the Mercedes team in the file `updateMercedes.json`. 
+    The ID for Mercedes is 2 and the ID for the Ferrari team is 302. 
+
+3. `updateMercedes.json` contains the replacement document for the Mercedes team.
 
     ```
-    $ <copy>gedit updateMercedes.json</copy>
+    {
+        "teamId": 2,
+        "name": "Mercedes",
+        "points": 0,
+        "driver": [
+        {
+            "driverId": 105,
+            "name": "George Russell",
+            "points": 0
+        },
+        {
+            "driverId": 106,
+            "name": "Lewis Hamilton",
+            "points": 0
+        }
+        ]
+    }
     ```
 
-5. Using the same step above, you must update the ID for the Ferrari team in the file `updateFerrari.json`. 
+4. `updateFerrari.json` contains the replacement document for the Ferrari team.
 
     ```
-    $ <copy>gedit updateFerrari.json</copy>
+    {
+    "teamId": 302,
+    "name": "Ferrari",
+    "points": 30,
+    "driver": [
+        {
+        "driverId": 105,
+        "name": "George Russell",
+        "points": 12
+        },
+        {
+        "driverId": 104,
+        "name": "Carlos Sainz Jr",
+        "points": 18
+        }
+    ]
+    }
     ```
 
     **NOTE:** You are not using eTags during this update. You could use eTags; however, after the first update call to change the Mercedes team, you would need to query again and get the eTag in order to update the Ferrari team, as its eTag has changed (one of its drivers has been removed). 
 
-6. Run this command to update the Mercedes team, using the corresponding document ID: 
+6. Run this command to update the Mercedes team, using the corresponding ID: 
 
     ```
-    $ <copy>curl -i -X PUT --data-binary @updateMercedes.json -H "Content-Type: application/json" http://localhost:8080/ords/janus/soda/latest/team_dv/<INSERT MERCEDES ID></copy>
+    $ <copy>curl -i -X PUT --data-binary @updateMercedes.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/team_dv/2</copy>
     ```
 
 7. Now do the same for the Ferrari team: 
 
     ```
-    $ <copy>curl -i -X PUT --data-binary @updateFerrari.json -H "Content-Type: application/json" http://localhost:8080/ords/janus/soda/latest/team_dv/<INSERT FERRARI ID></copy>
+    $ <copy>curl -i -X PUT --data-binary @updateFerrari.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/team_dv/302</copy>
     ```
 
 8. To show the changes to Ferrari and Mercedes teams, query the team_dv duality view. 
 
     ```
-    $ <copy>curl -X POST --data-binary @QBE2.json -H "Content-Type: application/json" http://localhost:8080/ords/janus/soda/latest/custom-actions/query/team_dv | json_pp</copy>
+    $ <copy>curl -v --location -g "http://hol23cfdr:8080/ords/hol23c/team_dv/?q=%7B%22name%22%3A%7B%22%24in%22%3A%5B%22Mercedes%22%2C%22Ferrari%22%5D%7D%7D" | json_pp
+    </copy>
     ```
 
-9. To see the changes in the drivers duality view as well, you can use file `QBE3.sql` which contains the following: 
+9. To see the changes in the drivers duality view as well, you can use a new query which contains the following: 
 
     ```
-    {"$or" : [{"name" : {"$like" : "George%"}}, {"name" : {"$like" : "Charles%"}}]}
+    {"$or":[{"name":{"$like":"George%"}},{"name":{"$like":"Charles%"}}]}
     ```
 
     To see the changes, run: 
 
     ```
-    $ <copy>curl -X POST --data-binary @QBE3.json -H "Content-Type: application/json" http://localhost:8080/ords/janus/soda/latest/custom-actions/query/driver_dv | json_pp</copy>
+    $ <copy>curl -v --location -g  "http://hol23cfdr:8080/ords/hol23c/driver_dv/?q=%7B%22%24or%22:%5B%7B%22name%22:%7B%22%24like%22:%22George%25%22%7D%7D%2C%7B%22name%22:%7B%22%24like%22:%22Charles%25%22%7D%7D%5D%7D" | json_pp</copy>
     ```
 
-## Task 5: Update a non-updatable field
 
-From the previous command, ID of the Charles Leclerc document in the driver duality view is FB03C2020400. The "team" field is non-updatable because the team table is marked with NOUPDATE annotation in the team_dv duality view definition.
+## Task 3: Update a non-updatable field
+
+From the previous command, ID of the Charles Leclerc document in the driver duality view is 103. The "team" field is non-updatable because the team table is marked with NOUPDATE annotation in the team_dv duality view definition.
 
 1. Using `updateLeclerc.json`, you will attempt to set the team of Leclerc back to Ferrari. 
 
     ```
-    $ <copy>curl -i -X PUT --data-binary @updateLeclerc.json -H "Content-Type: application/json" http://localhost:8080/ords/janus/soda/latest/driver_dv/<INSERT LECLERC ID></copy>
+    $ <copy>curl -i -X PUT --data-binary @updateLeclerc.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/driver_dv/103</copy>
     ```
 
-2. Because the team is not updatable through the driver_dv view, the command outputs a failure with HTTP 400. 
+    Because the team is not updatable through the driver_dv view, the command outputs a failure with HTTP 400. 
+
+    This shows that while the team of the driver can be updated using the TEAM_DV duality view, as described in the preceding step, it cannot be updated through the DRIVER_DV duality view. This illustrates how the same underlying relational data can be made updateable or non-updateable, as needed for the different use-cases, by creating different duality views.
 
 
+## Task 4: Delete Documents
+
+You can delete a document with a given ID. Earlier, you replace "Bahrain Grand Prix" with its primary key value 201. 
+
+1. Now use the ID to delete the document. 
+
+    ```
+    $ <copy>curl --request DELETE --url http://hol23cfdr:8080/ords/hol23c/race_dv/201</copy>
+    ```
+
+2. You can also delete records matching a query parameter. Let's us this query:
+
+    ```
+    {"raceId":{"$eq":202}}
+    ```
+
+3. To delete the document(s) matching this query, run this command. 
+
+    ```
+    $ <copy>curl -v --location -g -X DELETE "http://hol23cfdr:8080/ords/hol23c/race_dv/?q=%7B%22raceId%22%3A%7B%22%24eq%22%3A202%7D%7D" </copy>
+    ```
+
+Congratulations! You have finished this workshop. 
 
 ## Learn More
 

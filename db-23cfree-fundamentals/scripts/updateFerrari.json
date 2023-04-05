@@ -1,18 +1,17 @@
 {
-    "_id": "INSERT ID HERE",
-    "teamId": 302,
-    "name": "Ferrari",
-    "points": 30,
-    "driver": [
-      {
-        "driverId": 105,
-        "name": "George Russell",
-        "points": 12
-      },
-      {
-        "driverId": 104,
-        "name": "Carlos Sainz Jr",
-        "points": 18
-      }
-    ]
-  }
+  "teamId": 302,
+  "name": "Ferrari",
+  "points": 30,
+  "driver": [
+    {
+      "driverId": 105,
+      "name": "George Russell",
+      "points": 12
+    },
+    {
+      "driverId": 104,
+      "name": "Carlos Sainz Jr",
+      "points": 18
+    }
+  ]
+}

@@ -1,18 +1,17 @@
 {
-    "_id": "INSERT ID HERE",
-    "teamId": 2,
-    "name": "Mercedes",
-    "points": 40,
-    "driver": [
-      {
-        "driverId": 106,
-        "name": "Lewis Hamilton",
-        "points": 15
-      },
-      {
-        "driverId": 103,
-        "name": "Charles Leclerc",
-        "points": 25
-      }
-    ]
-  }
+  "teamId": 2,
+  "name": "Mercedes",
+  "points": 40,
+  "driver": [
+    {
+      "driverId": 106,
+      "name": "Lewis Hamilton",
+      "points": 15
+    },
+    {
+      "driverId": 103,
+      "name": "Charles Leclerc",
+      "points": 25
+    }
+  ]
+}

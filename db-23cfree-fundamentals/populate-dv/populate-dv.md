@@ -13,24 +13,54 @@ Estimated Time: 5 minutes
 
 In this lab, you will:
 
+- Download the files used in this workshop. 
 - Insert a single document to team\_dv
 - Bulk insert documents on team\_dv and race\_dv
 
 ### Prerequisites
 
 This lab assumes you have:
-- Downloaded the files from the previous lab
-- Created the tables and duality views from the previous lab
+- Oracle Database 23c Free Developer Release
+- All previous labs successfully completed
+- Oracle REST Data Service (ORDS) 23.1
 
 
-## Task 1: Insert a single document
+
+## Task 1: Download files for this workshop
+
+
+1. You need to download the json payload files we will later use to insert and update the duality views. Make a directory and download files to be used in this workshop.
+
+    ```
+    $ <copy>mkdir -p /home/oracle/examples/rest/json-autorest</copy>
+    $ <copy>cd /home/oracle/examples/rest/json-autorest</copy>
+    $ <copy>wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/json-ords.zip</copy>
+    $ <copy>unzip json-ords.zip</copy>
+    ```
+
+## Task 2: Insert a single document
 
 
 1. View the `teamMercedes.json` file to see the document we will be inserting. 
 
     ```
-    $ <copy>cd /home/oracle/json-ords</copy>
-    $ <copy>cat teamMercedes.json</copy>
+    {
+        "teamId": 2,
+        "name": "Mercedes",
+        "points": 0,
+        "driver": [
+        {
+            "driverId": 105,
+            "name": "George Russell",
+            "points": 0
+        },
+        {
+            "driverId": 106,
+            "name": "Lewis Hamilton",
+            "points": 0
+        }
+        ]
+    }
     ```
 
     Notice that this document contains one JSON object, referring to team Mercedes. However, it also contains two entries for driver, George and Lewis. When you POST this document to the database, you will be inserting one entry into the duality view `team_dv` but it will translate the three entries on the underlying tables: 1 entry into the team table and 2 entries into the driver table. 
@@ -38,35 +68,72 @@ This lab assumes you have:
 2. Using the `teamMercedes.json` file, we will insert a document into the duality view `team_dv`. 
 
     ```
-    $ <copy>curl -i -X POST --data-binary @teamMercedes.json -H "Content-Type: application/json" http://localhost:8080/ords/janus/soda/latest/team_dv</copy>
+    $ <copy>curl -i -X POST --data-binary @teamMercedes.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/team_dv/</copy>
     ```
 
-2. Examine the response you received from the database. You will see the Oracle Database generated two fields: a document-key (aka ID) and an eTag. 
+2. Examine the response you received from the database. You will see the Oracle Database generated two fields under a "_metadata" tag: "etag" and "asof".
 
-    The ID is a unique reference to that document in the duality view - computed automatically by the database as a hex representation of the underlying table's primary key. The eTag is a unqiue idenitifer for that version of the document used for optimistic locking. If you were to change the data in that document, the eTag would change to signify a newer version of the document. 
+    The eTag is a unqiue idenitifer for that version of the document used for optimistic locking. If you were to change the data in that document, the eTag would automatically change to signify a newer version of the document. The asof is a Table System Change Number (SCN) and can be used for Flashback queries. 
 
 ## Task 2: Bulk insert
 
 1. You can also insert multiple documents into a duality view with one call. View the `team.json` file to see what we will insert. The file contains an array of 2 JSON objects, each one representing a different team document. 
 
     ```
-    $ <copy>cat team.json</copy>
+    [
+        {
+        "teamId": 301,
+        "name": "Red Bull",
+        "points": 0,
+        "driver": [
+            {
+            "driverId": 101,
+            "name": "Max Verstappen",
+            "points": 0
+            },
+            {
+            "driverId": 102,
+            "name": "Sergio Perez",
+            "points": 0
+            }
+        ]
+        },
+        {
+        "teamId": 302,
+        "name": "Ferrari",
+        "points": 0,
+        "driver": [
+            {
+            "driverId": 103,
+            "name": "Charles Leclerc",
+            "points": 0
+            },
+            {
+            "driverId": 104,
+            "name": "Carlos Sainz Jr",
+            "points": 0
+            }
+        ]
+        }
+    ]
     ```
 
 2. Using the `team.json` file, we will bulk insert into the duality view `team_dv`. 
 
-    **Note:** The URL is different for this call. Instead of pathing to `team_dv`, you refer to the `custom-actions/insert/team_dv` path. Custom action insert on a POST request causes the array to be inserted as a set of documents, rather than as a single document. You can alternatively use the equivalent url http://localhost:8080/ords/janus/soda/latest/team_dv?action=insert
+    **Note:** The URL is different for this call. Instead of pathing just to `team_dv`, you refer to the `/batchload` endpoint. This will allow the payload to contain multiple documents to insert. 
 
     ```
-    $ <copy>curl -i -X POST --data-binary @team.json -H "Content-Type: application/json" http://localhost:8080/ords/janus/soda/latest/custom-actions/insert/team_dv</copy>
+    $ <copy>curl -i -X POST --data-binary @team.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/team_dv/batchload</copy>
     ```
+
+    The AutoREST Duality View API includes a POST /batchload endpoint for ‘batch loading’ multiple JSON documents as rows in the view. 
 
     A successful POST bulk insert operation returns a response code 200. The response body is a JSON document containing an ID and eTag for each inserted document. 
 
 3. Bulk load data into `race_dv` using the `race.json` file. 
 
     ```
-    $ <copy>curl -i -X POST --data-binary @race.json -H "Content-Type: application/json" http://localhost:8080/ords/janus/soda/latest/custom-actions/insert/race_dv</copy>
+    $ <copy>curl -i -X POST --data-binary @race.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/race_dv/batchload</copy>
     ```
 
 You may **proceed to the next lab.**
