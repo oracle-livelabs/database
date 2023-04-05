@@ -31,7 +31,7 @@ This fictitious company does a high volume of business, so it runs business stat
 
 Here is the entity-relationship diagram of the SH schema:
 
-![](./images/sales_history_sh_schema_er_diagram.png " ")
+![Entity-relationship diagram of SH schema](./images/sales-history-sh-schema-er-diagram.png " ")
 
 ## Task 2: Use the DESCRIBE Command to Examine the Details of an SH Table
 
@@ -45,13 +45,13 @@ Syntax: DESC[RIBE] schema\_name.table\_name
 
 1. Using the SQL Worksheet that you opened in the previous lab, copy the following command to view the description of the COUNTRIES table:
 
-    ````
+    ```
     <copy>DESCRIBE SH.COUNTRIES;</copy>
-    ````
+    ```
 
     Click the **Run Script** button to run it.
 
-    ![](images/describe_countries.png " ")
+    ![Click the Run Script button](images/describe-countries.png " ")
 
 2. If you wish, use the `DESCRIBE` command to view descriptions of other tables in the SH schema, such as CHANNELS, CUSTOMERS and SALES.
 
@@ -64,4 +64,4 @@ For more information on the SH schema, see the documentation on [Sample Schemas]
 ## Acknowledgements
 
 - **Author** - Richard Green, Principal Developer, Database User Assistance
-- **Last Updated By/Date** - Kamryn Vinson, April 2022
+- **Last Updated By/Date** - Shilpa Sharma, March 2023

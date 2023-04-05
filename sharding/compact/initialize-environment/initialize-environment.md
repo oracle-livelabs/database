@@ -8,7 +8,7 @@ In this lab we will review and startup all components required to successfully r
 
 Watch the video for a quick walk through of the Initialize Environment lab.
 
-[](youtube:e3EXx3BMhec)
+[Initialize Environment lab](youtube:e3EXx3BMhec)
 
 ### Objectives
 - Initialize the workshop environment.

@@ -7,6 +7,9 @@ create IAM credentails for your user and use them to connect to the database. Fi
 
 *Estimated Lab Time*: 15 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Create IAM Credentials and log into the database](videohub:1_tth3qivl)
+
 ### Objectives
 - Create IAM credentials for users of your ADB
 - Use IAM credentials to log into and query the database

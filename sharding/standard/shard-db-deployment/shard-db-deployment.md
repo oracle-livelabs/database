@@ -21,7 +21,7 @@ Following is the topology used for System Managed Sharding we will create in thi
 *Estimated Lab Time:* 60 minutes.
 
 Watch the video below for a quick walk through of the lab.
-[Deployment the Sharded Database](videohub:1_m1amf8pg)
+[Deploy the Sharded Database](videohub:1_m1amf8pg)
 
 ### Objectives
 

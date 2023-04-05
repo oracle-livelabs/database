@@ -6,15 +6,22 @@ In this lab, you will learn how to recognize the edition of an object and review
 
 Estimated lab time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Review the HR schema](videohub:1_4tddmgpo)
+
 ### Objectives
 
-In this lab, you will learn how to recognize the edition of an object and review the helper procedures that we have created in the previous lab.
+In this lab, you will
+
+- Learn how to recognize the edition of an object and review the helper procedures that we have created in the previous lab.
 
 ## Task 1: Review the helper procedures created to deal with the editions
 
 1. In a production environment, the management of editions is usually a DBA task.
 
     Some operations like `CREATE EDITION`, `DROP EDITION`, `ALTER DATABASE DEFAULT EDITION`, etc., require elevated privileges that should not be granted to normal users.
+
+    By default, all procedures are considered definer's rights. You can designate a procedure to be an invoker's rights procedure by using the AUTHID CURRENT_USER clause when you create or modify it, or you can use the AUTHID DEFINER clause to make it a definer's rights procedure.
 
     For CI/CD testing, and therefore for production environments that rolled out with CI/CD pipelines, these procedures using `AUTHID DEFINER` will facilitate the integration without executing anything as DBA.
 

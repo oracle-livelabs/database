@@ -190,7 +190,7 @@ In this lab, you will be guided through the following task:
 1. Score the model using ML\_SCORE to assess the model's reliability. This example uses the balanced_accuracy metric, which is one of the many scoring metrics supported by HeatWave ML.
 
     ```bash
-    <copy>CALL sys.ML_SCORE('ml_data.iris_validate', 'class', @iris_model, 'balanced_accuracy', @score);</copy>
+    <copy>CALL sys.ML_SCORE('ml_data.iris_validate', 'class', @iris_model, 'balanced_accuracy', @score,null);</copy>
     ```
 
 2. To retrieve the computed score, query the @score session variable
