@@ -14,17 +14,22 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
         },
         {
-            "title": "Lab 1: Work with JSON Collections",
+            "title": "Lab 1: Setup User",
+            "description": "Setup User",
+            "filename": "./../../change-pw/change-pw.md"
+        },
+        {
+            "title": "Lab 2: Work with JSON Collections",
             "description": "Work with JSON Collections",
             "filename": "./../../json-collections/json-collections.md"
         },
        {
-            "title": "Lab 2: Use Mongo API to interact with Oracle Database",
+            "title": "Lab 3: Use Mongo API to interact with Oracle Database",
             "description": "Use Mongo API to interact with Oracle Database",
             "filename": "./../../json-mongo/json-mongo.md"
         },
         {
-            "title": "Lab 3: Use SQL to work with JSON",
+            "title": "Lab 4: Use SQL to work with JSON",
             "description": "Use SQL to work with JSON",
             "filename": "./../../json-sql/json-sql.md"
         },
