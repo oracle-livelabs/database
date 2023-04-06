@@ -256,6 +256,7 @@ Switch Charles Leclerc's and George Russell's teams. This can be done by updatin
 
 * [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
 * [JSON Duality View documentation](http://docs.oracle.com)
+* [Blog: Key benefits of JSON Relational Duality] (https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
 
 ## Acknowledgements
 * **Author** - Kaylien Phan, Product Manager, Database Product Management
