@@ -4,8 +4,6 @@
 
 This workshop focuses on working with JSON Duality Views in Oracle Database 23c.
 
-> **Note**: Currently, this workshop is not supported in an Always Free environment. If you are using the LiveLabs environment (green button), please note that the install files for Oracle Database 23c Free have already been downloaded to the virtual machine.
-
 ### **About Oracle Database 23c Free and JSON Duality**
 
 (Filler from Ranjan's blog, this is for him to write)

@@ -86,6 +86,8 @@ This lab assumes:
     SELECT dbms_metadata.get_ddl('PROPERTY_GRAPH', 'BANK_GRAPH') from dual;
     </copy>
     ```
+    ![Insert alt text](images/example.png)
+
 
 4. Here you can look at the elements of the BANK_TRANSFERS graph (i.e. its vertices and edges).
     ```
