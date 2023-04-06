@@ -39,15 +39,19 @@ This lab assumes you have:
     $ <copy>ords serve > /dev/null 2>&1 &</copy>
     ```
 
+    ![Startup ORDS](./images/ords_serve.png)
+
 2. After allowing a few moments for the server to startup, then use this URL to ensure ORDS is running. 
 
-    If you are running this workshop in your own machine (i.e. not with the _Run on LiveLabs_ option), make sure to replace `hol23cfdr` with the your machine's hostname, or localhost. 
+    If you are running this workshop in your own machine (i.e. not with the _Run on LiveLabs_ option), you can replace `localhost` with the your machine's hostname, if desired.  
 
     ```
     <copy>
-    http://hol23cfdr:8080/ords/hol23c/_sdw
+    http://localhost:8080/ords/hol23c/_sdw
     </copy>
     ```
+
+    ![Open SQL Developer Web](./images/check_SDW.png)
 
     No need to login right now. We are going to change the user's password in the next step. 
 
@@ -80,6 +84,8 @@ This lab assumes you have:
     SQL> <copy>connect hol23c/<new_password_here>@freepdb1;</copy>
     ```
 
+    ![Change User Password and connect as user](./images/sql_updates.png)
+
 2. Now that you have logged into the database, we can create the tables that will be the underlying data structures for our JSON Duality Vies. Before doing this, drop the views tables in case they already exist, so you can start from scratch.
 
     **NOTE:** Make sure to press 'enter' after copy and pasting these commands so that the last command executes. 
@@ -93,6 +99,8 @@ This lab assumes you have:
     SQL> <copy>drop table if exists driver;</copy>
     SQL> <copy>drop table if exists team;</copy>
     ```
+
+    ![Drop tables](./images/drop_tables.png)
 
 5. Now create the tables. 
 
@@ -133,6 +141,8 @@ This lab assumes you have:
         CONSTRAINT     driver_race_map_fk1 FOREIGN KEY(race_id)   REFERENCES race(race_id),
         CONSTRAINT     driver_race_map_fk2 FOREIGN KEY(driver_id) REFERENCES driver(driver_id));</copy>
     ```
+
+    ![Create Tables](./images/create_tables.png)
 
 6. Create a trigger to update the points for the teams and drivers. 
 
@@ -180,6 +190,8 @@ This lab assumes you have:
     /</copy>
     ```
 
+    ![Create trigger](./images/create_trigger.png)
+
 
 ## Task 3: Create JSON Duality Views
 
@@ -213,6 +225,8 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
     FROM race r WITH INSERT UPDATE DELETE;</copy>
     ```
 
+    ![Create Race Duality View](./images/create_raceDV.png)
+
 2. Create a duality view for the driver table. Notice in this duality view, we are specifying that no data alterations are allowed on the team information. That means when preforming PUT, POST, or DELETE actions on this view, we will not be able to alter the `teamId` or `team` fields. 
 
     **NOTE:** Make sure to press 'enter' after copy and pasting the code block so that view is created.
@@ -240,6 +254,8 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
     FROM driver d WITH INSERT UPDATE DELETE;</copy>
     ```
 
+    ![Create Driver Duality View](./images/create_driverDV.png)
+
 3. Create a duality view for the team table. 
 
     **NOTE:** Make sure to press 'enter' after copy and pasting the code block so that view is created.
@@ -257,6 +273,8 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
                      WHERE d.team_id = t.team_id ]}
     FROM team t WITH INSERT UPDATE DELETE;</copy>
     ```
+
+    ![Create Team Duality View](./images/create_teamDV.png)
 
 
 ## Task 4: Enable the Duality Views for REST APIs
@@ -300,14 +318,18 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
     /</copy>
     ```
 
+    ![Enable AutoREST on the Duality Views](./images/enable_autorest.png)
+
 2. With everything setup in the database, we can query ORDS to see the data in our tables. Exit SQLPlus and then use cURL to query the driver table. 
 
     ```
     SQL> <copy>exit;</copy>
     ```
     ```
-    $ <copy>curl -X GET http://hol23cfdr:8080/ords/hol23c/driver_dv/</copy>
+    $ <copy>curl -X GET http://localhost:8080/ords/hol23c/driver_dv/</copy>
     ```
+
+    ![Query for data](./images/test_ords.png)
 
     There is no data in the underlying tables, which is why the "items" array is empty. SODA paginates the results by default, so "offset" and "limit" fields refer to the offset of the results and the maximum number of resutls returned at a time. Also included in the reponse are links to common read and write operations that can be preformed on the duality view collection. The contents of "links" is not show above for brevity. 
 
@@ -320,5 +342,5 @@ You may **proceed to the next lab.**
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database 
+- **Author**- William Masdon, Product Manager, Database; Jeff Smith, Product Manager, Database 
 - **Last Updated By/Date** - William Masdon, Product Manager, Database, March 2023

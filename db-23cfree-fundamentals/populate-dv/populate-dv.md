@@ -34,9 +34,11 @@ This lab assumes you have:
     ```
     $ <copy>mkdir -p /home/oracle/examples/rest/json-autorest</copy>
     $ <copy>cd /home/oracle/examples/rest/json-autorest</copy>
-    $ <copy>wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/json-ords.zip</copy>
-    $ <copy>unzip json-ords.zip</copy>
+    $ <copy>wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/json_autorest.zip</copy>
+    $ <copy>unzip json_autorest.zip</copy>
     ```
+
+    ![Downlad the workshop files](./images/download_files.png)
 
 ## Task 2: Insert a single document
 
@@ -70,6 +72,8 @@ This lab assumes you have:
     ```
     $ <copy>curl -i -X POST --data-binary @teamMercedes.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/team_dv/</copy>
     ```
+
+    ![POST data for the Mercedes team](./images/insert_Mercedes.png)
 
 2. Examine the response you received from the database. You will see the Oracle Database generated two fields under a "_metadata" tag: "etag" and "asof".
 
@@ -130,11 +134,15 @@ This lab assumes you have:
 
     A successful POST bulk insert operation returns a response code 200. The response body is a JSON document containing an ID and eTag for each inserted document. 
 
+    ![Bulk insert teams](./images/insert_team.png)
+
 3. Bulk load data into `race_dv` using the `race.json` file. 
 
     ```
     $ <copy>curl -i -X POST --data-binary @race.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/race_dv/batchload</copy>
     ```
+
+    ![Bulk insert races](./images/insert_race.png)
 
 You may **proceed to the next lab.**
 
