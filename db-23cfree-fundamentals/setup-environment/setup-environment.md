@@ -58,19 +58,21 @@ This lab assumes you have:
 ## Task 2: Create database tables
 
 
-1. You will now create tables in the ORDS-enabled schema. First, you must login to the database and update your workshop user's password.
+1. You will now create tables in the ORDS-enabled schema. First, you must login to the database and update your workshop user's password. To do this, we will install SQLcl, a command line tool used to interact with your database. 
 
     ```
-    $ <copy>sqlplus / as sysdba</copy>
+    $ <copy>sudo yum install -y sqlcl</copy>
+    $ <copy>export JAVA_HOME=/usr/java/jdk-11.0.10</copy>
+    $ <copy>sql / as sysdba</copy>
     ```
 
-    Change the container name appropriately to match the pluggable database name where you have ORDS installed.
+2. Change the container name appropriately to match the pluggable database name where you have ORDS installed.
 
     ```
     SQL> <copy>alter session set container = freepdb1;</copy>
     ```
 
-    Update the workshop user's password. Make sure to replace `<new_password_here>` with your chosen password. 
+3. Update the workshop user's password. Make sure to replace `<new_password_here>` with your chosen password. 
 
     **NOTE:** This user was already created and granted permissions in the _Run on LiveLabs_ version of this workshop. 
 
@@ -78,7 +80,7 @@ This lab assumes you have:
     SQL> <copy>alter user hol23c identified by <new_password_here>;</copy>
     ```
 
-    Connect to the pluggable database with ORDS as the user, replacing `<new_password_here>` with your password. 
+4. Connect to the pluggable database with ORDS as the user, replacing `<new_password_here>` with your password. 
 
     ```
     SQL> <copy>connect hol23c/<new_password_here>@freepdb1;</copy>
@@ -86,7 +88,7 @@ This lab assumes you have:
 
     ![Change User Password and connect as user](./images/sql_updates.png)
 
-2. Now that you have logged into the database, we can create the tables that will be the underlying data structures for our JSON Duality Vies. Before doing this, drop the views tables in case they already exist, so you can start from scratch.
+5. Now that you have logged into the database, we can create the tables that will be the underlying data structures for our JSON Duality Vies. Before doing this, drop the views tables in case they already exist, so you can start from scratch.
 
     **NOTE:** Make sure to press 'enter' after copy and pasting these commands so that the last command executes. 
 
@@ -102,7 +104,7 @@ This lab assumes you have:
 
     ![Drop tables](./images/drop_tables.png)
 
-5. Now create the tables. 
+6. Now create the tables. 
 
     **NOTE:** Make sure to press 'enter' after each copy and paste so that each table is created individually. 
 
@@ -144,7 +146,7 @@ This lab assumes you have:
 
     ![Create Tables](./images/create_tables.png)
 
-6. Create a trigger to update the points for the teams and drivers. 
+7. Create a trigger to update the points for the teams and drivers. 
 
     **NOTE:** Make sure to press 'enter' after copy and pasting the code block so that trigger is created.
 
