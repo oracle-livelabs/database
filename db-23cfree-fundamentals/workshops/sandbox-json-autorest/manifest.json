@@ -1,12 +1,12 @@
 {
-    "workshoptitle": "Oracle Database 23c Free - Developer Release: REST-enabled JSON Duality Views",
+    "workshoptitle": "Enable AutoREST on JSON Duality Views using ORDS",
     "help": "livelabs-help-db_us@oracle.com",
 
     "tutorials": [
         {
             "title": "Introduction",
             "description": "Introduction",
-            "filename": "../../intro/intro.md"
+            "filename": "../../intro-json-autorest/intro-json-autorest.md"
         },
         {
             "title": "Get Started with NoVNC",
