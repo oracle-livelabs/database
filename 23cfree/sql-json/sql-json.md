@@ -107,7 +107,7 @@ This lab assumes you have:
 
     An alternative approach is to use json_mergepatch, which is standardized, but is limited to simple object field updates and cannot be used for updating specific array elements. The json\_transform function, however, can be used to update specific array elements.
 
-    Note that the "where" clause can have any valid SQL expression, e.g. equality on some condition using simplified syntax or JSON function, such as json\_value or json\_exists. Copy the SQL below and click **Run Script**.
+    **Note:** We are using the dv.data.name in this example. This is just another way to access values. Copy the SQL below and click **Run Script**.
 
     ```
     <copy>
@@ -120,7 +120,8 @@ This lab assumes you have:
     ```
     ![Image alt text](images/task_3_1.png " ")
 
-2. Select from the view to ensure the change is in. Copy the SQL below and click **Run Script**.
+2. Select from the view to ensure the change is in. In this example we are also showing that you can use json_value in there where clause. Copy the SQL below and click **Run Script**.
+
     ```
     <copy>
     SELECT json_serialize(data PRETTY)

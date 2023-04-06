@@ -72,15 +72,9 @@ This lab assumes you have:
     WHERE race_id = 204;
 
     INSERT INTO driver_race_map
-    VALUES(3, 204, 103, 1);
-
-    INSERT INTO driver_race_map
-    VALUES(4, 204, 104, 2);
-
-    INSERT INTO driver_race_map
-    VALUES(9, 204, 106, 3);
-
-    INSERT INTO driver_race_map
+    VALUES(3, 204, 103, 1),
+    VALUES(4, 204, 104, 2),
+    VALUES(9, 204, 106, 3),
     VALUES(10, 204, 105, 4);
 
     COMMIT;

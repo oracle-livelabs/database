@@ -57,7 +57,7 @@ This lab assumes you have:
     SQL>
 		```
 
-5. To change the password for the user hol23c use the syntax below changing the new\_password\_here to your new password. Throughout this workshop we will use Welcome123#
+5. To change the password for the user hol23c use the "alter user <username> identified by <new password" command. The syntax below for the hol23c user, make sure to replace new\_password\_here to your new password. Throughout this workshop we will use the Welcome123# password.
     ```
 		<copy>alter user hol23c identified by </copy>new_password_here;
 		```
