@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Now that your database has been configured with ORDS, you will need to setup the tables and views off of which we can use ORDS. 
+Before we can begin creating tables and JSON Duality Views, we must first start our ORDS server and update our user's password. The first 2 tasks of this lab walk you through the necessary steps to accomplish those steps. This lab assumes that you have already installed the Oracle Database 23c Free Developer Release and configured and installed ORDS on a pluggable database. 
+
+After your database has been configured with ORDS, you will need to setup the tables and views off of which we can use ORDS and the duality views. 
 
 In this workshop, we will be using a set of tables used to store data on F1 racing teams, drivers, and race results. We will then create JSON Duality Views on top of these tables to reference them as JSON documents. Then we will use AutoREST to enable our duality views to be used with REST calls. 
-
-
 
 Estimated Time: 5 minutes
 
@@ -15,7 +15,7 @@ Estimated Time: 5 minutes
 
 In this lab, you will:
 
-- Startup ORDS
+- Startup ORDS and reset the ORDS user's password
 - Create relational tables
 - Create JSON Duality Views on top of relational tables
 - Enable REST on the JSON Duality Views
@@ -43,7 +43,7 @@ This lab assumes you have:
 
 2. After allowing a few moments for the server to startup, then use this URL to ensure ORDS is running. 
 
-    If you are running this workshop in your own machine (i.e. not with the _Run on LiveLabs_ option), you can replace `localhost` with the your machine's hostname, if desired.  
+    If you are running this workshop in your own machine (i.e. not with the _Run on LiveLabs_ option), you can replace `localhost` with the your machine's hostname, if desired. You may notice in some of the screenshots that `hol23cfdr` is used instead of localhost. Please be aware that `localhost` and `hol23cfdr` refer to the same machine in the screenshots. Please continue using `localhost` unless your machine does not support it. 
 
     ```
     <copy>
@@ -342,5 +342,5 @@ You may **proceed to the next lab.**
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database; Jeff Smith, Product Manager, Database 
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, March 2023
+- **Author**- William Masdon, Product Manager, Database; Jeff Smith, Distinguished Product Manager, Database 
+- **Last Updated By/Date** - William Masdon, Product Manager, Database, April 2023

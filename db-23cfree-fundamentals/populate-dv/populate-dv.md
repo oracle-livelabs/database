@@ -70,7 +70,7 @@ This lab assumes you have:
 2. Using the `teamMercedes.json` file, we will insert a document into the duality view `team_dv`. 
 
     ```
-    $ <copy>curl -i -X POST --data-binary @teamMercedes.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/team_dv/</copy>
+    $ <copy>curl -i -X POST --data-binary @teamMercedes.json -H "Content-Type: application/json" http://localhost:8080/ords/hol23c/team_dv/</copy>
     ```
 
     ![POST data for the Mercedes team](./images/insert_Mercedes.png)
@@ -127,7 +127,7 @@ This lab assumes you have:
     **Note:** The URL is different for this call. Instead of pathing just to `team_dv`, you refer to the `/batchload` endpoint. This will allow the payload to contain multiple documents to insert. 
 
     ```
-    $ <copy>curl -i -X POST --data-binary @team.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/team_dv/batchload</copy>
+    $ <copy>curl -i -X POST --data-binary @team.json -H "Content-Type: application/json" http://localhost:8080/ords/hol23c/team_dv/batchload</copy>
     ```
 
     The AutoREST Duality View API includes a POST /batchload endpoint for ‘batch loading’ multiple JSON documents as rows in the view. 
@@ -139,7 +139,7 @@ This lab assumes you have:
 3. Bulk load data into `race_dv` using the `race.json` file. 
 
     ```
-    $ <copy>curl -i -X POST --data-binary @race.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/race_dv/batchload</copy>
+    $ <copy>curl -i -X POST --data-binary @race.json -H "Content-Type: application/json" http://localhost:8080/ords/hol23c/race_dv/batchload</copy>
     ```
 
     ![Bulk insert races](./images/insert_race.png)
@@ -153,5 +153,5 @@ You may **proceed to the next lab.**
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database 
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, March 2023
+- **Author**- William Masdon, Product Manager, Database; Jeff Smith, Distinguished Product Manager, Database 
+- **Last Updated By/Date** - William Masdon, Product Manager, Database, April 2023

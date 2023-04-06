@@ -4,6 +4,8 @@
 
 Now that our tables been populated, we will view the data as JSON documents with GET calls and query-by-example (QBE) calls. The duality view `team_dv` joins the team table with the driver table, so the insert from the previous lab ensured data was populated on both tables. Now you can query the `driver_dv` duality view to see the data in its documents.
 
+You will also learn how to use the OpenAPI View to create REST calls on your views. This provides a clean GUI interface with which you can not only create the REST calls, but run them to test return results. 
+
 Estimated Time: 5 minutes
 
 
@@ -13,7 +15,8 @@ In this lab, you will:
 
 - Use a GET call to view the driver_dv duality view
 - Use a GET call to query a specific document
-- Use QBE to view a single document from the race_dv duality view
+- Use query parameter to view a single document from the race_dv duality view
+- Familiarize yourself with the OpenAPI View included in SQL Developer Web
 
 ### Prerequisites
 
@@ -33,7 +36,7 @@ This tool is installed by default when using the _Run on LiveLabs_ option. It is
 1. View the contents of the `driver_dv` duality view. Because we are not specifying an ID, this query will return the entire view. 
 
     ```
-    $ <copy>curl -X GET http://hol23cfdr:8080/ords/hol23c/driver_dv/ | json_pp</copy>
+    $ <copy>curl -X GET http://localhost:8080/ords/hol23c/driver_dv/ | json_pp</copy>
     ```
 
     Documents corresponding to six drivers now appear in the driver_dv duality view. For each document, the following fields are automatically computed and included in the result: 
@@ -50,7 +53,7 @@ This tool is installed by default when using the _Run on LiveLabs_ option. It is
 1. To view only one document from a duality view, simply append the document's ID to the end of your GET call URL. 
 
     ```
-    $ <copy>curl -X GET http://hol23cfdr:8080/ords/hol23c/driver_dv/105 | json_pp</copy>
+    $ <copy>curl -X GET http://localhost:8080/ords/hol23c/driver_dv/105 | json_pp</copy>
     ```
 
     This call has hardcoded the document ID for George Russell, but you can exchange the ID with another driver to GET their information. 
@@ -72,7 +75,7 @@ Documents can be fetched by supplying a query parameter. Only documents matching
     **NOTE:** We have encoded the brackets, quotes, colons, and spaces in the query to make this a valid URL. This is required for cURL. 
 
     ```
-    $ <copy>curl -v --location -g "http://hol23cfdr:8080/ords/hol23c/race_dv/?q=%7B%22name%22%3A%7B%22%24eq%22%3A%22Bahrain%20Grand%20Prix%22%7D%7D" | json_pp</copy>
+    $ <copy>curl -v --location -g "http://localhost:8080/ords/hol23c/race_dv/?q=%7B%22name%22%3A%7B%22%24eq%22%3A%22Bahrain%20Grand%20Prix%22%7D%7D" | json_pp</copy>
     ```
 
     Notice that the podium and result fields are empty. This is again because the information for "Bahrain Grand Prix" has not been entered. In the next lab, this information will be added. 
@@ -89,7 +92,7 @@ You can continue to use this tool for the rest of the workshop, but the instruct
 1. Open a browser and navigate to this URL:  
 
     ```
-    <copy>http://hol23cfdr:8080/ords/hol23c/_sdw</copy>
+    <copy>http://localhost:8080/ords/hol23c/_sdw</copy>
     ```
 
     Use the username and password you have setup for this workshop. In our case, our user is `hol23c`. 
@@ -146,5 +149,5 @@ You may **proceed to the next lab.**
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database 
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, March 2023
+- **Author**- William Masdon, Product Manager, Database; Jeff Smith, Distinguished Product Manager, Database 
+- **Last Updated By/Date** - William Masdon, Product Manager, Database, April 2023
