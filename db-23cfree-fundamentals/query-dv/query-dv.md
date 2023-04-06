@@ -149,5 +149,5 @@ You may **proceed to the next lab.**
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database; Jeff Smith, Distinguished Product Manager, Database 
+- **Authors**- William Masdon, Product Manager, Database; Jeff Smith, Distinguished Product Manager, Database 
 - **Last Updated By/Date** - William Masdon, Product Manager, Database, April 2023

@@ -1,9 +1,10 @@
 # Introduction
 
-## About Oracle Database 23c Free
+## About JSON Relational Duality Views
 
 TO BE UPDATED BY RANJAN
 
+### **About Oracle REST Database Service (ORDS) and AutoREST**
 
 Interacting with your Oracle Database with HTTPS and REST APIs can be as simple as picking the objects in your database you want to start working with.
 
@@ -18,26 +19,10 @@ These tutorials include the SQL, PL/SQL, and cURL commands to work with the exam
 For the sake of simplicity, these REST APIs are unprotected. Oracle Database REST APIs offer performance AND secure access for application developers, and it is recommended you protect your endpoints with the proper web privileges and roles.
 
 
-### **About the Oracle Database 19c New Features Workshop**
-
-This workshop focuses on installing the Oracle Database 23c Free. Starting with preparing your environment, you will download the database install files, then configure your database for immediate use. Oracle Database 23c Free is limited to _____. 
-
-> **Note**: Currently, this workshop is not supported in an Always Free environment. If you are using the LiveLabs environment (green button), please note that the install files for Oracle Database 23c Free have already been downloaded to the virtual machine.
-
-
-### **New Features in Oracle Database 23c Free**
-
-The following are the marquee features of the Oracle Database 23c Free: 
-
-- JSON Relationship Duality
-- SQL Domains
-- Sagas for Microservices
-- JavaScript Stored Procedures
-- OKafka
-- In-Database Property Graphs
+> **Note**: Currently, this workshop is not supported in an Always Free environment. If you are using the _Run on LiveLabs_ option, please note that Oracle Database 23c Free Developer Release has already been installed on the virtual machine.
 
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database 
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, March 2023
+- **Authors**- William Masdon, Product Manager, Database; Jeff Smith, Distinguished Product Manager, Database; Ranjan Priyadarshi, Senior Director, Database Product Management
+- **Last Updated By/Date** - William Masdon, Product Manager, Database, April 2023
