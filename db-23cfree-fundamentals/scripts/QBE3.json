@@ -1,1 +1,0 @@
-{"$or" : [{"name" : {"$like" : "George%"}}, {"name" : {"$like" : "Charles%"}}]}

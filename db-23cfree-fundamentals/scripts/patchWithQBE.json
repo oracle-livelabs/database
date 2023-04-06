@@ -1,2 +1,0 @@
-{"$query" : {"raceId" : 201},
-"$merge" : {"name" : "Blue Air Bahrain Grand Prix"}}

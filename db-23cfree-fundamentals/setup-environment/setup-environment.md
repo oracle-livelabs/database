@@ -4,7 +4,9 @@
 
 Now that your database has been configured with ORDS, you will need to setup the tables and views off of which we can use ORDS. 
 
-In this workshop, we will be using a set of tables used to store data on F1 racing teams, drivers, and race results. We will then create JSON Duality Views on top of these tables to reference them as JSON documents. 
+In this workshop, we will be using a set of tables used to store data on F1 racing teams, drivers, and race results. We will then create JSON Duality Views on top of these tables to reference them as JSON documents. Then we will use AutoREST to enable our duality views to be used with REST calls. 
+
+
 
 Estimated Time: 5 minutes
 
@@ -13,22 +15,69 @@ Estimated Time: 5 minutes
 
 In this lab, you will:
 
-- Download configuration files
-- Create tables and views to query later with ORDS
+- Startup ORDS
+- Create relational tables
+- Create JSON Duality Views on top of relational tables
+- Enable REST on the JSON Duality Views
 
 ### Prerequisites
 
 This lab assumes you have:
-- Installed ORDS on a 23c Free Database Instance
+- Oracle Database 23c Free Developer Release
+- All previous labs successfully completed
+- Oracle REST Data Service (ORDS) 23.1
 
 
-## Task 1: Create database tables
+## Task 1: Start the ORDS Server
 
 
-1. You will now create tables in the newly-created, ORDS-enabled schema. Login to the database as the user you created in the previous lab. 
+1. If you have not started your ORDS server yet, do so now. Note that if you are using the _Run on LiveLabs_ option, ORDS has already been installed on your database and now must be started. 
+
+    The following command will run ORDS in the background of your terminal. Do not close the terminal window or the ORDS server will stop. 
 
     ```
-    $ <copy>sqlplus janus/janus@pdb23c</copy>
+    $ <copy>ords serve > /dev/null 2>&1 &</copy>
+    ```
+
+2. After allowing a few moments for the server to startup, then use this URL to ensure ORDS is running. 
+
+    If you are running this workshop in your own machine (i.e. not with the _Run on LiveLabs_ option), make sure to replace `hol23cfdr` with the your machine's hostname, or localhost. 
+
+    ```
+    <copy>
+    http://hol23cfdr:8080/ords/hol23c/_sdw
+    </copy>
+    ```
+
+    No need to login right now. We are going to change the user's password in the next step. 
+
+## Task 2: Create database tables
+
+
+1. You will now create tables in the ORDS-enabled schema. First, you must login to the database and update your workshop user's password.
+
+    ```
+    $ <copy>sqlplus / as sysdba</copy>
+    ```
+
+    Change the container name appropriately to match the pluggable database name where you have ORDS installed.
+
+    ```
+    SQL> <copy>alter session set container = freepdb1;</copy>
+    ```
+
+    Update the workshop user's password. Make sure to replace `<new_password_here>` with your chosen password. 
+
+    **NOTE:** This user was already created and granted permissions in the _Run on LiveLabs_ version of this workshop. 
+
+    ```
+    SQL> <copy>alter user hol23c identified by <new_password_here>;</copy>
+    ```
+
+    Connect to the pluggable database with ORDS as the user, replacing `<new_password_here>` with your password. 
+
+    ```
+    SQL> <copy>connect hol23c/<new_password_here>@freepdb1;</copy>
     ```
 
 2. Now that you have logged into the database, we can create the tables that will be the underlying data structures for our JSON Duality Vies. Before doing this, drop the views tables in case they already exist, so you can start from scratch.
@@ -132,7 +181,7 @@ This lab assumes you have:
     ```
 
 
-## Task 2: Create JSON Duality Views
+## Task 3: Create JSON Duality Views
 
 
 Oracle Database 23c JSON Relational Duality converges the benefits of the Relational and Document worlds within a single database. Data is stored in relational tables and can be accessed as such for reporting or legacy applications. The JSON Duality Views provide an additional form of access - JSON Documents - for new applications or REST calls.  Developers can thus think in terms of JSON documents for data access while using the highly efficient relational model for data storage, without having to compromise simplicity or efficiency. In addition to this, Duality Views hide all the complexities of database level concurrency control from the user, providing document level serializability.
@@ -210,33 +259,54 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
     ```
 
 
-## Task 3: Create Collections
+## Task 4: Enable the Duality Views for REST APIs
 
 
-1. Lastly, we will create a SODA collection on top of each of our duality views. A collection is an abstraction, typically found in NoSQL document databases - it hold JSON documents, and supports CRUD operations without requiring the developer to write SQL. 
+1. Enable each of the duality views for REST APIs. 
 
-    In this case, the data accessed, inserted, or altered with our CRUD operations on the duality views will be translated to the underlying tables. 
-
-    **NOTE:** Make sure to press 'enter' after copy and pasting the code block so that collections are created.
+    **NOTE:** Make sure to press 'enter' after copy and pasting the code block so that the code runs. 
 
     ```
-    SQL> <copy>declare
-    col soda_collection_t;
+    SQL> <copy>
     begin
-    col := dbms_soda.create_dv_collection('team_dv', 'TEAM_DV'); 
-    col := dbms_soda.create_dv_collection('driver_dv', 'DRIVER_DV'); 
-    col := dbms_soda.create_dv_collection('race_dv', 'RACE_DV');
+    ORDS.ENABLE_OBJECT(
+        P_ENABLED        => TRUE,
+        P_SCHEMA         => 'HOL23C',
+        P_OBJECT         =>  'DRIVER_DV',
+        P_OBJECT_TYPE    => 'VIEW',
+        P_OBJECT_ALIAS   => 'driver_dv',
+        P_AUTO_REST_AUTH => FALSE
+    );
+    COMMIT;
+    ORDS.ENABLE_OBJECT(
+        P_ENABLED        => TRUE,
+        P_SCHEMA         => 'HOL23C',
+        P_OBJECT         =>  'RACE_DV',
+        P_OBJECT_TYPE    => 'VIEW',
+        P_OBJECT_ALIAS   => 'race_dv',
+        P_AUTO_REST_AUTH => FALSE
+    );
+    COMMIT;
+    ORDS.ENABLE_OBJECT(
+        P_ENABLED        => TRUE,
+        P_SCHEMA         => 'HOL23C',
+        P_OBJECT         =>  'TEAM_DV',
+        P_OBJECT_TYPE    => 'VIEW',
+        P_OBJECT_ALIAS   => 'team_dv',
+        P_AUTO_REST_AUTH => FALSE
+    );
+    COMMIT;
     end;
     /</copy>
     ```
 
-7. With everything setup in the database, we can query ORDS to see the data in our tables. Exit SQLPlus and then use cURL to query the driver table. 
+2. With everything setup in the database, we can query ORDS to see the data in our tables. Exit SQLPlus and then use cURL to query the driver table. 
 
     ```
     SQL> <copy>exit;</copy>
     ```
     ```
-    $ <copy>curl -X GET -H "Content-Type: application/json" http://localhost:8080/ords/janus/soda/latest/driver_dv</copy>
+    $ <copy>curl -X GET http://hol23cfdr:8080/ords/hol23c/driver_dv/</copy>
     ```
 
     There is no data in the underlying tables, which is why the "items" array is empty. SODA paginates the results by default, so "offset" and "limit" fields refer to the offset of the results and the maximum number of resutls returned at a time. Also included in the reponse are links to common read and write operations that can be preformed on the duality view collection. The contents of "links" is not show above for brevity. 
