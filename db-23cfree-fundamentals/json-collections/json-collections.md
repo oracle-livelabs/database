@@ -26,34 +26,41 @@ In this lab, you will:
 
 ## Task 1: Create Collection
 
-1. First, open a broswer window to SQL Developer Web. 
+1. First, run the following command in terminal.
 
+	```
+	<copy>
+	ords serve > /dev/null 2>&1 &
+	</copy>
+	```
+2. Open a broswer window to SQL Developer Web.
+	![Create Collection](./images/openBrowser.png)
     ```
     <copy>http://localhost:8080/ords/jason/_sdw</copy>
     ```
 
-2. Sign in with the username and password of the schema with ORDS enabled. If you are using the green button, this user has already been created for you. 
+3. Sign in with the username and password of the schema with ORDS enabled. If you are using the green button, this user has already been created for you.
 
     ```
     username: jason
     password: welcome123
     ```
 
-3. On the homepage, click the JSON tile under Development. 
+4. On the homepage, click the JSON tile under Development.
 
-4. To create a collection, click **Create Collection**.
+5. To create a collection, click **Create Collection**.
 
 	![Create Collection](./images/create-collection.png)
 
-5. Provide a name for your collection in the field **Collection Name - movies** and click **Create**. MAKE SURE you check the **MongoDB Compatible** box. Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use MOVIES or Movies.
+6. Provide a name for your collection in the field **Collection Name - movies** and click **Create**. MAKE SURE you check the **MongoDB Compatible** box. Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use MOVIES or Movies.
 
 	![New collection: products](./images/new-products.png)
 
-6. A notification pops up that displays **movies** collections has been created.
+7. A notification pops up that displays **movies** collections has been created.
 
 	![New collection notification](./images/popup.png)
 
-7. Click the refresh button to verify the **movies** collection has been created.
+8. Click the refresh button to verify the **movies** collection has been created.
 
 	![Refresh button](./images/refreshed.png)
 
@@ -227,7 +234,7 @@ More generally, constraints can be used to check the data being entered for vari
 
 	![SQL navigation](./images/nav.png)
 
-2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types. 
+2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types.
 
     Copy and paste the query below in the worksheet and click the *Run query* button to run the SQL query to alter the **movie** table and add constraints.
 
@@ -256,7 +263,7 @@ More generally, constraints can be used to check the data being entered for vari
 
 	```
 	<copy>
-	alter table movies add constraint no_negative_price 
+	alter table movies add constraint no_negative_price
     check (
             JSON_EXISTS(data, '$?(@.price.number() >= 0)')
           );
@@ -274,7 +281,7 @@ More generally, constraints can be used to check the data being entered for vari
 
 	Click the *New JSON Document* icon, copy and paste the following query in the worksheet and click *Create*.
 
-	This throws the error "Unable to add new JSON document" since the following document has missing fields and incorrect data types. 
+	This throws the error "Unable to add new JSON document" since the following document has missing fields and incorrect data types.
 
 	```
 	<copy>
@@ -286,7 +293,7 @@ More generally, constraints can be used to check the data being entered for vari
     "genre": "Romance",
     "starring": "tbd"
     }
-	</copy> 
+	</copy>
 	```
 	![create a not-allowed item](./images/tester.png)
 	![constraint error message](./images/error2.png)
@@ -308,7 +315,7 @@ More generally, constraints can be used to check the data being entered for vari
 	</copy>
 	```
 
-12. Optionally, you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload. 
+12. Optionally, you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload.
 
     ```
     <copy>
@@ -328,7 +335,7 @@ More generally, constraints can be used to check the data being entered for vari
     </copy>
     ```
 
-13. You may also check the JSON Schema definition in your data dictionary. In the SQL tool, run: 
+13. You may also check the JSON Schema definition in your data dictionary. In the SQL tool, run:
 
     ```
     <copy>
@@ -345,5 +352,5 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database 
+- **Author**- William Masdon, Product Manager, Database
 - **Last Updated By/Date** - William Masdon, Product Manager, Database, March 2023
