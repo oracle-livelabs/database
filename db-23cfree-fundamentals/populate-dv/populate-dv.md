@@ -34,9 +34,11 @@ This lab assumes you have:
     ```
     $ <copy>mkdir -p /home/oracle/examples/rest/json-autorest</copy>
     $ <copy>cd /home/oracle/examples/rest/json-autorest</copy>
-    $ <copy>wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/json-ords.zip</copy>
-    $ <copy>unzip json-ords.zip</copy>
+    $ <copy>wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/json_autorest.zip</copy>
+    $ <copy>unzip json_autorest.zip</copy>
     ```
+
+    ![Downlad the workshop files](./images/download_files.png)
 
 ## Task 2: Insert a single document
 
@@ -68,8 +70,10 @@ This lab assumes you have:
 2. Using the `teamMercedes.json` file, we will insert a document into the duality view `team_dv`. 
 
     ```
-    $ <copy>curl -i -X POST --data-binary @teamMercedes.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/team_dv/</copy>
+    $ <copy>curl -i -X POST --data-binary @teamMercedes.json -H "Content-Type: application/json" http://localhost:8080/ords/hol23c/team_dv/</copy>
     ```
+
+    ![POST data for the Mercedes team](./images/insert_Mercedes.png)
 
 2. Examine the response you received from the database. You will see the Oracle Database generated two fields under a "_metadata" tag: "etag" and "asof".
 
@@ -123,27 +127,33 @@ This lab assumes you have:
     **Note:** The URL is different for this call. Instead of pathing just to `team_dv`, you refer to the `/batchload` endpoint. This will allow the payload to contain multiple documents to insert. 
 
     ```
-    $ <copy>curl -i -X POST --data-binary @team.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/team_dv/batchload</copy>
+    $ <copy>curl -i -X POST --data-binary @team.json -H "Content-Type: application/json" http://localhost:8080/ords/hol23c/team_dv/batchload</copy>
     ```
 
     The AutoREST Duality View API includes a POST /batchload endpoint for ‘batch loading’ multiple JSON documents as rows in the view. 
 
     A successful POST bulk insert operation returns a response code 200. The response body is a JSON document containing an ID and eTag for each inserted document. 
 
+    ![Bulk insert teams](./images/insert_team.png)
+
 3. Bulk load data into `race_dv` using the `race.json` file. 
 
     ```
-    $ <copy>curl -i -X POST --data-binary @race.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/race_dv/batchload</copy>
+    $ <copy>curl -i -X POST --data-binary @race.json -H "Content-Type: application/json" http://localhost:8080/ords/hol23c/race_dv/batchload</copy>
     ```
+
+    ![Bulk insert races](./images/insert_race.png)
 
 You may **proceed to the next lab.**
 
 ## Learn More
 
-- [JSON Relational Duality Blog](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
-- [23c Beta Docs - TO BE CHANGED](https://docs-stage.oracle.com/en/database/oracle/oracle-database/23/index.html)
+- [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
+- [JSON Duality View documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/index.html)
+- [Blog: Key benefits of JSON Relational Duality](https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
+- [ORDS Documentation](https://docs.oracle.com/en/database/oracle/oracle-rest-data-services/23.1/)
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database 
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, March 2023
+- **Authors**- William Masdon, Product Manager, Database; Jeff Smith, Distinguished Product Manager, Database 
+- **Last Updated By/Date** - William Masdon, Product Manager, Database, April 2023

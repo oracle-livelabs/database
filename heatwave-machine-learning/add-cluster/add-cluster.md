@@ -34,7 +34,7 @@ In this lab, you will be guided through the following tasks:
     MySQL
     DB Systems
 
-2. Choose the root Compartment. A list of DB Systems is displayed.
+2. Choose the MDS_Sandbox Compartment. A list of DB Systems is displayed.
 
     ![Connect](./images/10addheat-list.png "list ")
 
@@ -111,7 +111,7 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
     Instances
     ![CONNECT](./images/05compute-instance-menu.png "compute-instance-menu ")
 
-7. On Instances in **(root)** Compartment, click  **Create Instance**
+7. On Instances in **(MDS_Sandbox)** Compartment, click  **Create Instance**
     ![CONNECT](./images/05compute-create-menu.png "compute-create-menu ")
 
 8. On Create Compute Instance
@@ -122,7 +122,7 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
     <copy>MDS-Client</copy>
     ```
 
-9. Make sure **(root)** compartment is selected
+9. Make sure **(MDS_Sandbox)** compartment is selected
 
 10. On Placement, keep the selected Availability Domain
 

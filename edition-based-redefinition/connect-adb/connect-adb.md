@@ -6,7 +6,12 @@ Download the Autonomous database wallet and the lab files required for this lab.
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Download the Autonomous Database Wallet and Lab Files](videohub:1_mfql3sf3)
+
 ### Objectives
+
+In this lab, you will
 
 - Download the Autonomous Database wallet
 - Download the lab files
@@ -14,8 +19,6 @@ Estimated Time: 10 minutes
 ### Prerequisites
 
 This lab assumes you have performed the previous lab on provisioning an Oracle Autonomous Database or you already have an existing Autonomous Database.The LiveLabs Sandbox environment comes with a pre-created Autonomous Database (ATP).
-
-
 
 ## Task 1: Download the Autonomous Database wallet
 

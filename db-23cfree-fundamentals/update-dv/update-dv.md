@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab you will update the data you have already inserted via duality views. You will update with a document key, merge patch, and QBE. You will also remap 2 drivers to different teams and attempt to update a non-updatable field
+In this lab you will update the data you have already inserted via duality views. You will update with a document ID, remap 2 drivers to different teams, attempt to update a non-updatable field, and delete a couple documents. 
 
 Estimated Time: 10 minutes
 
@@ -11,10 +11,10 @@ Estimated Time: 10 minutes
 
 In this lab, you will:
 
-- Replace a document identified by document key
-- Update specific fields in a document using merge patch and QBE
+- Replace a document identified by ID
 - Re-parent sub-objects between documents
 - Attempt to update a non-updatable field
+- Delete documents with an ID and with a query
 
 ### Prerequisites
 
@@ -24,14 +24,16 @@ This lab assumes you have:
 - Oracle REST Data Service (ORDS) 23.1
 
 
-## Task 1: Replace a document identified by ID
+## Task 1: Replace a document identified by ID with an eTag
 
 
 1. First you must determine the ID and eTag of the document to replace. Run this command to query on the Bahrain Grand Prix as we did in the last lab.  
 
     ```
-    $ <copy>curl -v --location -g "http://hol23cfdr:8080/ords/hol23c/race_dv/?q=%7B%22name%22%3A%7B%22%24eq%22%3A%22Bahrain%20Grand%20Prix%22%7D%7D" | json_pp</copy>
+    $ <copy>curl -v --location -g "http://localhost:8080/ords/hol23c/race_dv/?q=%7B%22name%22%3A%7B%22%24eq%22%3A%22Bahrain%20Grand%20Prix%22%7D%7D" | json_pp</copy>
     ```
+
+    ![Find the ID and eTag of the Bahrain race](./images/get_race201.png)
 
     Take note of the ID (which is 201) and the eTag (which will be different for everyone). 
 
@@ -41,11 +43,15 @@ This lab assumes you have:
     $ <copy>gedit updateRace.json</copy>
     ```
 
+    ![Update the json payload with the eTag](./images/update_racejson.png)
+
 4. Now that the eTag is accurate, replace the target document with the contents in the file `updateRace.json`. 
 
     ```
-    $ <copy>curl -i -X PUT --data-binary @updateRace.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/race_dv/201</copy>
+    $ <copy>curl -i -X PUT --data-binary @updateRace.json -H "Content-Type: application/json" http://localhost:8080/ords/hol23c/race_dv/201</copy>
     ```
+
+    ![Update the race view with the eTag](./images/update_race.png)
 
 5. The command returns HTTP error code 200, indicating a successful replace. 
 
@@ -54,10 +60,12 @@ This lab assumes you have:
 6. To verify that a replace using an eTag that is not the most recent fails, run the same command again. 
 
     ```
-    $ <copy>curl -i -X PUT --data-binary @updateRace.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/race_dv/201</copy>
+    $ <copy>curl -i -X PUT --data-binary @updateRace.json -H "Content-Type: application/json" http://localhost:8080/ords/hol23c/race_dv/201</copy>
     ```
 
     Because updateRace.json content has an "etag" field value that has been obsoleted by the preceding successful replace, the command now outputs 400 (bad request). 
+
+    ![Failed update with expired eTag](./images/update_race2.png)
 
 
 ## Task 2: Re-parent sub-objects between two documents
@@ -73,9 +81,11 @@ In this task, you will switch Charles Leclerc's and George Russell's teams by up
 2. Query the team_dv to find the documents' IDs. Then copy them down for each document.
 
     ```
-    $ <copy>curl -v --location -g "http://hol23cfdr:8080/ords/hol23c/team_dv/?q=%7B%22name%22%3A%7B%22%24in%22%3A%5B%22Mercedes%22%2C%22Ferrari%22%5D%7D%7D" | json_pp
+    $ <copy>curl -v --location -g "http://localhost:8080/ords/hol23c/team_dv/?q=%7B%22name%22%3A%7B%22%24in%22%3A%5B%22Mercedes%22%2C%22Ferrari%22%5D%7D%7D" | json_pp
     </copy>
     ```
+
+    ![Find IDs of each team](./images/team_beforeswap.png)
 
     The ID for Mercedes is 2 and the ID for the Ferrari team is 302. 
 
@@ -128,21 +138,27 @@ In this task, you will switch Charles Leclerc's and George Russell's teams by up
 6. Run this command to update the Mercedes team, using the corresponding ID: 
 
     ```
-    $ <copy>curl -i -X PUT --data-binary @updateMercedes.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/team_dv/2</copy>
+    $ <copy>curl -i -X PUT --data-binary @updateMercedes.json -H "Content-Type: application/json" http://localhost:8080/ords/hol23c/team_dv/2</copy>
     ```
+
+    ![Update Mercedes team](./images/update_mercedes.png)
 
 7. Now do the same for the Ferrari team: 
 
     ```
-    $ <copy>curl -i -X PUT --data-binary @updateFerrari.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/team_dv/302</copy>
+    $ <copy>curl -i -X PUT --data-binary @updateFerrari.json -H "Content-Type: application/json" http://hol2localhost3cfdr:8080/ords/hol23c/team_dv/302</copy>
     ```
+
+    ![Update Ferrari team](./images/update_ferrari.png)
 
 8. To show the changes to Ferrari and Mercedes teams, query the team_dv duality view. 
 
     ```
-    $ <copy>curl -v --location -g "http://hol23cfdr:8080/ords/hol23c/team_dv/?q=%7B%22name%22%3A%7B%22%24in%22%3A%5B%22Mercedes%22%2C%22Ferrari%22%5D%7D%7D" | json_pp
+    $ <copy>curl -v --location -g "http://localhost:8080/ords/hol23c/team_dv/?q=%7B%22name%22%3A%7B%22%24in%22%3A%5B%22Mercedes%22%2C%22Ferrari%22%5D%7D%7D" | json_pp
     </copy>
     ```
+
+    ![View changes to team view](./images/team_afterswap.png)
 
 9. To see the changes in the drivers duality view as well, you can use a new query which contains the following: 
 
@@ -153,8 +169,10 @@ In this task, you will switch Charles Leclerc's and George Russell's teams by up
     To see the changes, run: 
 
     ```
-    $ <copy>curl -v --location -g  "http://hol23cfdr:8080/ords/hol23c/driver_dv/?q=%7B%22%24or%22:%5B%7B%22name%22:%7B%22%24like%22:%22George%25%22%7D%7D%2C%7B%22name%22:%7B%22%24like%22:%22Charles%25%22%7D%7D%5D%7D" | json_pp</copy>
+    $ <copy>curl -v --location -g  "http://localhost:8080/ords/hol23c/driver_dv/?q=%7B%22%24or%22:%5B%7B%22name%22:%7B%22%24like%22:%22George%25%22%7D%7D%2C%7B%22name%22:%7B%22%24like%22:%22Charles%25%22%7D%7D%5D%7D" | json_pp</copy>
     ```
+
+    ![View changes to driver view](./images/driver_afterswap.png)
 
 
 ## Task 3: Update a non-updatable field
@@ -164,12 +182,14 @@ From the previous command, ID of the Charles Leclerc document in the driver dual
 1. Using `updateLeclerc.json`, you will attempt to set the team of Leclerc back to Ferrari. 
 
     ```
-    $ <copy>curl -i -X PUT --data-binary @updateLeclerc.json -H "Content-Type: application/json" http://hol23cfdr:8080/ords/hol23c/driver_dv/103</copy>
+    $ <copy>curl -i -X PUT --data-binary @updateLeclerc.json -H "Content-Type: application/json" http://localhost:8080/ords/hol23c/driver_dv/103</copy>
     ```
 
     Because the team is not updatable through the driver_dv view, the command outputs a failure with HTTP 400. 
 
-    This shows that while the team of the driver can be updated using the TEAM_DV duality view, as described in the preceding step, it cannot be updated through the DRIVER_DV duality view. This illustrates how the same underlying relational data can be made updateable or non-updateable, as needed for the different use-cases, by creating different duality views.
+    This shows that while the team of the driver can be updated using the TEAM\_DV duality view, as described in the preceding step, it cannot be updated through the DRIVER\_DV duality view. This illustrates how the same underlying relational data can be made updateable or non-updateable, as needed for the different use-cases, by creating different duality views.
+
+    ![Failed update to view](./images/update_leclerc.png)
 
 
 ## Task 4: Delete Documents
@@ -179,8 +199,10 @@ You can delete a document with a given ID. Earlier, you replace "Bahrain Grand P
 1. Now use the ID to delete the document. 
 
     ```
-    $ <copy>curl --request DELETE --url http://hol23cfdr:8080/ords/hol23c/race_dv/201</copy>
+    $ <copy>curl --request DELETE --url http://localhost:8080/ords/hol23c/race_dv/201</copy>
     ```
+
+    ![Delete one document](./images/delete_201.png)
 
 2. You can also delete records matching a query parameter. Let's us this query:
 
@@ -191,18 +213,21 @@ You can delete a document with a given ID. Earlier, you replace "Bahrain Grand P
 3. To delete the document(s) matching this query, run this command. 
 
     ```
-    $ <copy>curl -v --location -g -X DELETE "http://hol23cfdr:8080/ords/hol23c/race_dv/?q=%7B%22raceId%22%3A%7B%22%24eq%22%3A202%7D%7D" </copy>
+    $ <copy>curl -v --location -g -X DELETE "http://localhost:8080/ords/hol23c/race_dv/?q=%7B%22raceId%22%3A%7B%22%24eq%22%3A202%7D%7D" </copy>
     ```
+
+    ![Delete with a query filter](./images/delete_query.png)
 
 Congratulations! You have finished this workshop. 
 
 ## Learn More
 
-- [JSON Relational Duality Blog](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
-- [23c Beta Docs - TO BE CHANGED](https://docs-stage.oracle.com/en/database/oracle/oracle-database/23/index.html)
-- [Overview of SODA Filter Specifications](https://docs.oracle.com/en/database/oracle/simple-oracle-document-access/adsdi/overview-soda-filter-specifications-qbes.html)
+- [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
+- [JSON Duality View documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/index.html)
+- [Blog: Key benefits of JSON Relational Duality](https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
+- [ORDS Documentation](https://docs.oracle.com/en/database/oracle/oracle-rest-data-services/23.1/)
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database 
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, March 2023
+- **Authors**- William Masdon, Product Manager, Database; Jeff Smith, Distinguished Product Manager, Database 
+- **Last Updated By/Date** - William Masdon, Product Manager, Database, April 2023

@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Now that your database has been configured with ORDS, you will need to setup the tables and views off of which we can use ORDS. 
+Before we can begin creating tables and JSON Duality Views, we must first start our ORDS server and update our user's password. The first 2 tasks of this lab walk you through the necessary steps to accomplish those steps. This lab assumes that you have already installed the Oracle Database 23c Free Developer Release and configured and installed ORDS on a pluggable database. 
+
+After your database has been configured with ORDS, you will need to setup the tables and views off of which we can use ORDS and the duality views. 
 
 In this workshop, we will be using a set of tables used to store data on F1 racing teams, drivers, and race results. We will then create JSON Duality Views on top of these tables to reference them as JSON documents. Then we will use AutoREST to enable our duality views to be used with REST calls. 
-
-
 
 Estimated Time: 5 minutes
 
@@ -15,7 +15,7 @@ Estimated Time: 5 minutes
 
 In this lab, you will:
 
-- Startup ORDS
+- Startup ORDS and reset the ORDS user's password
 - Create relational tables
 - Create JSON Duality Views on top of relational tables
 - Enable REST on the JSON Duality Views
@@ -39,34 +39,40 @@ This lab assumes you have:
     $ <copy>ords serve > /dev/null 2>&1 &</copy>
     ```
 
+    ![Startup ORDS](./images/ords_serve.png)
+
 2. After allowing a few moments for the server to startup, then use this URL to ensure ORDS is running. 
 
-    If you are running this workshop in your own machine (i.e. not with the _Run on LiveLabs_ option), make sure to replace `hol23cfdr` with the your machine's hostname, or localhost. 
+    If you are running this workshop in your own machine (i.e. not with the _Run on LiveLabs_ option), you can replace `localhost` with the your machine's hostname, if desired. You may notice in some of the screenshots that `hol23cfdr` is used instead of localhost. Please be aware that `localhost` and `hol23cfdr` refer to the same machine in the screenshots. Please continue using `localhost` unless your machine does not support it. 
 
     ```
     <copy>
-    http://hol23cfdr:8080/ords/hol23c/_sdw
+    http://localhost:8080/ords/hol23c/_sdw
     </copy>
     ```
+
+    ![Open SQL Developer Web](./images/check_SDW.png)
 
     No need to login right now. We are going to change the user's password in the next step. 
 
 ## Task 2: Create database tables
 
 
-1. You will now create tables in the ORDS-enabled schema. First, you must login to the database and update your workshop user's password.
+1. You will now create tables in the ORDS-enabled schema. First, you must login to the database and update your workshop user's password. To do this, we will install SQLcl, a command line tool used to interact with your database. 
 
     ```
-    $ <copy>sqlplus / as sysdba</copy>
+    $ <copy>sudo yum install -y sqlcl</copy>
+    $ <copy>export JAVA_HOME=/usr/java/jdk-11.0.10</copy>
+    $ <copy>sql / as sysdba</copy>
     ```
 
-    Change the container name appropriately to match the pluggable database name where you have ORDS installed.
+2. Change the container name appropriately to match the pluggable database name where you have ORDS installed.
 
     ```
     SQL> <copy>alter session set container = freepdb1;</copy>
     ```
 
-    Update the workshop user's password. Make sure to replace `<new_password_here>` with your chosen password. 
+3. Update the workshop user's password. Make sure to replace `<new_password_here>` with your chosen password. 
 
     **NOTE:** This user was already created and granted permissions in the _Run on LiveLabs_ version of this workshop. 
 
@@ -74,13 +80,15 @@ This lab assumes you have:
     SQL> <copy>alter user hol23c identified by <new_password_here>;</copy>
     ```
 
-    Connect to the pluggable database with ORDS as the user, replacing `<new_password_here>` with your password. 
+4. Connect to the pluggable database with ORDS as the user, replacing `<new_password_here>` with your password. 
 
     ```
     SQL> <copy>connect hol23c/<new_password_here>@freepdb1;</copy>
     ```
 
-2. Now that you have logged into the database, we can create the tables that will be the underlying data structures for our JSON Duality Vies. Before doing this, drop the views tables in case they already exist, so you can start from scratch.
+    ![Change User Password and connect as user](./images/sql_updates.png)
+
+5. Now that you have logged into the database, we can create the tables that will be the underlying data structures for our JSON Duality Vies. Before doing this, drop the views tables in case they already exist, so you can start from scratch.
 
     **NOTE:** Make sure to press 'enter' after copy and pasting these commands so that the last command executes. 
 
@@ -94,7 +102,9 @@ This lab assumes you have:
     SQL> <copy>drop table if exists team;</copy>
     ```
 
-5. Now create the tables. 
+    ![Drop tables](./images/drop_tables.png)
+
+6. Now create the tables. 
 
     **NOTE:** Make sure to press 'enter' after each copy and paste so that each table is created individually. 
 
@@ -134,7 +144,9 @@ This lab assumes you have:
         CONSTRAINT     driver_race_map_fk2 FOREIGN KEY(driver_id) REFERENCES driver(driver_id));</copy>
     ```
 
-6. Create a trigger to update the points for the teams and drivers. 
+    ![Create Tables](./images/create_tables.png)
+
+7. Create a trigger to update the points for the teams and drivers. 
 
     **NOTE:** Make sure to press 'enter' after copy and pasting the code block so that trigger is created.
 
@@ -180,6 +192,8 @@ This lab assumes you have:
     /</copy>
     ```
 
+    ![Create trigger](./images/create_trigger.png)
+
 
 ## Task 3: Create JSON Duality Views
 
@@ -213,6 +227,8 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
     FROM race r WITH INSERT UPDATE DELETE;</copy>
     ```
 
+    ![Create Race Duality View](./images/create_raceDV.png)
+
 2. Create a duality view for the driver table. Notice in this duality view, we are specifying that no data alterations are allowed on the team information. That means when preforming PUT, POST, or DELETE actions on this view, we will not be able to alter the `teamId` or `team` fields. 
 
     **NOTE:** Make sure to press 'enter' after copy and pasting the code block so that view is created.
@@ -240,6 +256,8 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
     FROM driver d WITH INSERT UPDATE DELETE;</copy>
     ```
 
+    ![Create Driver Duality View](./images/create_driverDV.png)
+
 3. Create a duality view for the team table. 
 
     **NOTE:** Make sure to press 'enter' after copy and pasting the code block so that view is created.
@@ -257,6 +275,8 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
                      WHERE d.team_id = t.team_id ]}
     FROM team t WITH INSERT UPDATE DELETE;</copy>
     ```
+
+    ![Create Team Duality View](./images/create_teamDV.png)
 
 
 ## Task 4: Enable the Duality Views for REST APIs
@@ -300,14 +320,18 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
     /</copy>
     ```
 
+    ![Enable AutoREST on the Duality Views](./images/enable_autorest.png)
+
 2. With everything setup in the database, we can query ORDS to see the data in our tables. Exit SQLPlus and then use cURL to query the driver table. 
 
     ```
     SQL> <copy>exit;</copy>
     ```
     ```
-    $ <copy>curl -X GET http://hol23cfdr:8080/ords/hol23c/driver_dv/</copy>
+    $ <copy>curl -X GET http://localhost:8080/ords/hol23c/driver_dv/</copy>
     ```
+
+    ![Query for data](./images/test_ords.png)
 
     There is no data in the underlying tables, which is why the "items" array is empty. SODA paginates the results by default, so "offset" and "limit" fields refer to the offset of the results and the maximum number of resutls returned at a time. Also included in the reponse are links to common read and write operations that can be preformed on the duality view collection. The contents of "links" is not show above for brevity. 
 
@@ -315,10 +339,12 @@ You may **proceed to the next lab.**
 
 ## Learn More
 
-- [JSON Relational Duality Blog](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
-- [23c Beta Docs - TO BE CHANGED](https://docs-stage.oracle.com/en/database/oracle/oracle-database/23/index.html)
+- [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
+- [JSON Duality View documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/index.html)
+- [Blog: Key benefits of JSON Relational Duality](https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
+- [ORDS Documentation](https://docs.oracle.com/en/database/oracle/oracle-rest-data-services/23.1/)
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database 
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, March 2023
+- **Authors**- William Masdon, Product Manager, Database; Jeff Smith, Distinguished Product Manager, Database 
+- **Last Updated By/Date** - William Masdon, Product Manager, Database, April 2023
