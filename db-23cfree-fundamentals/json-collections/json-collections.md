@@ -21,18 +21,18 @@ In this lab, you will:
 
 ### Prerequisites
 
-* Completed Lab 1: Setup User
+* Have completed Lab 1: Setup User
 * Have provisioned an Autonomous JSON Database instance and logged into the JSON
 * Be working with a Mac OS/X (Intel Silicon) machine, a Linux x86 machine or a Windows PC
 
 ## Task 1: Create Collection
 
-1. Open a broswer window to SQL Developer Web.
+1. Open a browser window to SQL Developer Web.
 
 	```
-    <copy>http://localhost:8080/ords/jason/_sdw</copy>
+    <copy>http://localhost:8080/ords/hol23c/_sdw</copy>
     ```
-	![Create Collection](./images/openBrowser.png)
+	![Open Browser](./images/openBrowser.png)
 
 2. Sign in with the username and password of the schema with ORDS enabled. If you are using the green button, this user has already been created for you. Replace the `<new_password>` with the one you entered in Lab 1: Setup User.
 
@@ -40,16 +40,20 @@ In this lab, you will:
     username: hol23c
     password: <new_password>
     ```
+	![User Sign In](./images/ORDS-sign-in.png)
 
 4. On the homepage, click the JSON tile under Development.
+	![Homepage Development JSON](./images/homepage-JSON.png)
 
 5. To create a collection, click **Create Collection**.
+	A tour of this section may automatically begin when the page loads. You can click `next` to continue through the tour and return to this page.
 
-	![Create Collection](./images/create-collection.png)
+	![JSON Create Collection](./images/JSON-create-collection.png)
 
-6. Provide a name for your collection in the field **Collection Name - movies** and click **Create**. MAKE SURE you check the **MongoDB Compatible** box. Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use MOVIES or Movies.
+6. In the field **Collection Name**, provide the name **movies**. MAKE SURE you check the **MongoDB Compatible** box then click **Create**.
+	Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use MOVIES or Movies.
 
-	![New collection: products](./images/new-products.png)
+	![New Collection: movies](./images/collection-name.png)
 
 7. A notification pops up that displays **movies** collections has been created.
 
@@ -57,7 +61,7 @@ In this lab, you will:
 
 8. Click the refresh button to verify the **movies** collection has been created.
 
-	![Refresh button](./images/refreshed.png)
+	![Refresh button](./images/refresh-collection.png)
 
 ## Task 2: Insert Documents
 
