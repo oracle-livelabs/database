@@ -30,17 +30,24 @@ In this lab, you will:
 
 1. Open Database Actions (if you don't already have it open). Either choose **SQL** under Development from the launchpad, or click on the navigation menu on the top left and select **SQL** under Development.
 
-    ![SQL navigation](./images/nav-sql.png)
+    ```
+    <copy>
+    http://localhost:8080/ords/hol23c/_sdw
+    </copy>
+    ```
+    ![SQL navigation](./images/nav_SQL.png)
+    ![SQL navigation](./images/Development_SQL.png)
 
 2. On the left side, click on MOVIES - this is the table for the 'movies' collection. To get the view displayed, you need to right-click on **MOVIES** and choose **Open**.
 
-    ![View products table](./images/products-table.png)
+    ![Open table](./images/open-movies.png)
+    ![View table](./images/table-view.png)
 
     You see that the table 'MOVIES' has 5 columns: an 'ID' which is a unique identifier for the document (and in the case of MongoDB-compatible collections, is taken from the "_id" field in the JSON), a column 'DATA' which holds the JSON document, 2 metadata columns to keep track of creation and update timestamps and 'VERSION' which is typically a hash value for the document and allows us to keep caches in sync (similar to an eTag). None of this is really important at this point as we will only use the DATA column in the following examples.
 
     *Learn more -* [Use Oracle Database Actions with JSON Collections](https://docs.oracle.com/en/cloud/paas/autonomous-json-database/ajdug/use-oracle-database-actions-json-collections1.html) and [Use SQL With JSON Data](https://docs.oracle.com/en/database/oracle/oracle-database/21/adjsn/json-in-oracle-database.html#GUID-04377B36-654B-47C4-A480-535E00E46D1F)
 
-## Task 2: JSON Fundamentals 
+## Task 2: JSON Fundamentals
 
 1. Because the JSON data is stored in a binary representation (for query and update efficiency) we need to convert it to a human-readable string using JSON_Serialize.
 
@@ -52,7 +59,7 @@ In this lab, you will:
     </copy>
     ```
 
-    ![JSON serialize function](./images/sql2-1.png " ")
+    ![JSON serialize function](./images/JSON-serialize.png " ")
 
 2. Simple dot notation - We can extract values from the JSON data using a simple notation (similar to JavaScript) directly from SQL.
 
@@ -95,9 +102,9 @@ In this lab, you will:
     ```
     ![nested data with drill into JSON array](./images/sql3-2.png " ")
 
-    The second 'nested' acts over the JSON array called 'cast'. The '[*]' means that we want to select every item of the array; [0] would only select the first one, for example. Then the second *columns* clause defines which value we want to extract from inside the array. The 'cast' array consists only of string values; we therefore need to select the entire value. This is done with the path expression '$'. We give selected values the column name 'actor'. 
+    The second 'nested' acts over the JSON array called 'cast'. The '[*]' means that we want to select every item of the array; [0] would only select the first one, for example. Then the second *columns* clause defines which value we want to extract from inside the array. The 'cast' array consists only of string values; we therefore need to select the entire value. This is done with the path expression '$'. We give selected values the column name 'actor'.
 
-3.  Now let's try a simple aggregation of actors using the unnesting method above. 
+3.  Now let's try a simple aggregation of actors using the unnesting method above.
 
     ```
     <copy>
@@ -136,7 +143,7 @@ Now let's look at the different SQL/JSON operators step by step:
 
 JSON_VALUE takes one scalar value from the JSON data and returns it as a SQL scalar value.
 
-1.  The first argument is the input, the column 'data' from the products collection/table. This is followed by a path expression, in this case, we select the value for field 'format'. The optional 'returning' clause allows us to specify the return type, in this case, a varchar2 value of length 10. Because not every product has a 'format' value (only the movies do) there are cases where no value can be selected. By default NULL is returned in this case. The optional ON EMPTY clause allows us to specify a default value (like 'none') or to raise an error - with ERROR ON EMPTY. 
+1.  The first argument is the input, the column 'data' from the products collection/table. This is followed by a path expression, in this case, we select the value for field 'format'. The optional 'returning' clause allows us to specify the return type, in this case, a varchar2 value of length 10. Because not every product has a 'format' value (only the movies do) there are cases where no value can be selected. By default NULL is returned in this case. The optional ON EMPTY clause allows us to specify a default value (like 'none') or to raise an error - with ERROR ON EMPTY.
 
     NOTE: there's a bug in SQL Developer Web which means it does not parse this query correctly, if you see the error: "ORA-00923: FROM keyword not found where expected" then just make sure the whole query is selected before you attempt to run it.
 
@@ -177,7 +184,7 @@ Unlike JSON\_Value (which returns one SQL scalar value) the function JSON\_Query
 
 JSON_Exists is used to filter rows, therefore you find it in the WHERE clause. Instead of using a path expression to select and return a value, this operator just tests if such value exits.
 
-1.  For example, return the year and title of all movies where Jim Carrey was in the cast. 
+1.  For example, return the year and title of all movies where Jim Carrey was in the cast.
 
     ```
     <copy>
@@ -315,14 +322,14 @@ JSON_Mergepatch follows RFC 7386 [https://datatracker.ietf.org/doc/html/rfc7386]
 
     ```
     <copy>
-    select m.data.movie_id, m.data.title, m.data.duration, m.data.gross.number(), json_query (data, '$.cast'), m.data.notes 
-    from movies m 
+    select m.data.movie_id, m.data.title, m.data.duration, m.data.gross.number(), json_query (data, '$.cast'), m.data.notes
+    from movies m
     where m.data.movie_id=3705;
     </copy>
     ```
     ![JSON merge patch - initial query](./images/sql7-1.png " ")
 
-2.  There are some actors missing, let's use mergepatch to update the cast array. 
+2.  There are some actors missing, let's use mergepatch to update the cast array.
 
     ```
     <copy>
@@ -338,10 +345,10 @@ JSON_Mergepatch follows RFC 7386 [https://datatracker.ietf.org/doc/html/rfc7386]
 
     ```
     <copy>
-    select m.data.movie_id, m.data.title, m.data.duration, m.data.gross.number(), json_query (data, '$.cast'), m.data.notes 
-    from movies m 
+    select m.data.movie_id, m.data.title, m.data.duration, m.data.gross.number(), json_query (data, '$.cast'), m.data.notes
+    from movies m
     where m.data.movie_id=3705;
- 
+
     </copy>
     ```
     ![JSON merge patch confirmation](./images/sql7-3.png " ")
@@ -366,12 +373,12 @@ JSON\_Transform, like the other SQL/JSON operators, relies on path expressions t
     ```
     ![JSON transform - update](./images/sql7-5.png " ")
 
-2. Run the query to see our changes: 
+2. Run the query to see our changes:
 
     ```
     <copy>
-    select m.data.movie_id, m.data.title, m.data.duration, m.data.gross.number(), json_query (data, '$.cast'), m.data.notes 
-    from movies m 
+    select m.data.movie_id, m.data.title, m.data.duration, m.data.gross.number(), json_query (data, '$.cast'), m.data.notes
+    from movies m
     where m.data.movie_id=3705;
     </copy>
     ```
@@ -382,7 +389,7 @@ JSON\_Transform, like the other SQL/JSON operators, relies on path expressions t
 
 Irrespective of whether data is stored relationally or as JSON document, you can switch between relational and JSON format at runtime. Here are some examples:
 
-1.  Let's use the movie_view we created earlier. We can use `json_object` to form our table as a JSON object. 
+1.  Let's use the movie_view we created earlier. We can use `json_object` to form our table as a JSON object.
 
     ```
     <copy>
@@ -401,7 +408,7 @@ Irrespective of whether data is stored relationally or as JSON document, you can
     ```
     ![JSON object - convert each row to JSON](./images/sql8-2.png " ")
 
-3.  We can also use `json_array` to extract multiple columns as array per record. 
+3.  We can also use `json_array` to extract multiple columns as array per record.
 
     ```
     <copy>
@@ -478,7 +485,7 @@ Often, you do not know all the fields that occur in a collection of JSON data, e
      ```
     ![describe new view](./images/sql9-62.png " ")
 
-3. Now let's check if everything worked as intended. Use this query to compare attributes of the generated view as compared to the one we created. 
+3. Now let's check if everything worked as intended. Use this query to compare attributes of the generated view as compared to the one we created.
 
     ```
     <copy>
@@ -489,5 +496,5 @@ Often, you do not know all the fields that occur in a collection of JSON data, e
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database 
+- **Author**- William Masdon, Product Manager, Database
 - **Last Updated By/Date** - William Masdon, Product Manager, Database, March 2023
