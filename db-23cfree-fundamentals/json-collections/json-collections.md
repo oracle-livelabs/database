@@ -67,11 +67,11 @@ In this lab, you will:
 
 1. Double click **movies** collection to show the **JSON-movies** worksheet.
 
-	![products worksheet](./images/double-clicked.png)
+	![products worksheet](./images/click-movies.png)
 
 2. Click the *New JSON Document* button.
 
-	![new document button](./images/new-document.png)
+	![new document button](./images/new-JSON-doc.png)
 
 3. A **New JSON Document** panel displays. Copy the following JSON object, paste it in the worksheet and click **Create**.
 
@@ -92,11 +92,11 @@ In this lab, you will:
 	</copy>
 	```
 
-	![add new document](./images/paste1.png)
+	![add new document](./images/JSON-object.png)
 
 4. A notification pops up that says A New Document is created and the new document is shown in the bottom section of the JSON workshop.
 
-	![new document confirmation popup](./images/popup2.png)
+	![new document confirmation popup](./images/popup-JSON-doc.png)
 
 5. Let's repeat this with the following documents:
 
