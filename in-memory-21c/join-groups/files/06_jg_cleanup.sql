@@ -7,5 +7,5 @@ alter table lineorder no inmemory;
 DROP INMEMORY JOIN GROUP lineorder_jg1;
 DROP INMEMORY JOIN GROUP lineorder_jg2;
 DROP INMEMORY JOIN GROUP lineorder_jg3;
+alter table lineorder inmemory;
 exec dbms_inmemory.populate(USER,'LINEORDER');
-
