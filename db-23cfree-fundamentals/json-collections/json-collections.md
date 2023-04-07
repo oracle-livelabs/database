@@ -21,29 +21,24 @@ In this lab, you will:
 
 ### Prerequisites
 
+* Completed Lab 1: Setup User
 * Have provisioned an Autonomous JSON Database instance and logged into the JSON
 * Be working with a Mac OS/X (Intel Silicon) machine, a Linux x86 machine or a Windows PC
 
 ## Task 1: Create Collection
 
-1. First, run the following command in terminal.
+1. Open a broswer window to SQL Developer Web.
 
 	```
-	<copy>
-	ords serve > /dev/null 2>&1 &
-	</copy>
-	```
-2. Open a broswer window to SQL Developer Web.
-	![Create Collection](./images/openBrowser.png)
-    ```
     <copy>http://localhost:8080/ords/jason/_sdw</copy>
     ```
+	![Create Collection](./images/openBrowser.png)
 
-3. Sign in with the username and password of the schema with ORDS enabled. If you are using the green button, this user has already been created for you.
+2. Sign in with the username and password of the schema with ORDS enabled. If you are using the green button, this user has already been created for you. Replace the `<new_password>` with the one you entered in Lab 1: Setup User.
 
     ```
-    username: jason
-    password: welcome123
+    username: hol23c
+    password: <new_password>
     ```
 
 4. On the homepage, click the JSON tile under Development.
