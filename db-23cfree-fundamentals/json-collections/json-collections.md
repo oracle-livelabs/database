@@ -150,7 +150,7 @@ Documents can be selected based on filter conditions - we call them 'Queries By 
 
 The simplest form of a QBE just contains a key-value pair. Any selected document in the collection must have the same key with the same value. More complex QBEs can contain multiple filter conditions or operators like 'negation' or 'and', etc.
 
-The following are examples of QBEs. You can copy them into the corresponding window (see screenshot) and execute them. Obviously, in a real application, those QBE-expressions would be issued directly from the programming language - the SODA drivers have APIs for common application programming languages: Python, etc.
+The following are examples of QBEs. You can copy them into the corresponding window (see screenshot) and execute them. In a real application, those QBE-expressions would be issued directly from the programming language - the SODA drivers have APIs for common application programming languages: Python, etc.
 
 Now let's issue some simple queries on the **movies** collection we just created.
 
@@ -165,8 +165,8 @@ Now let's issue some simple queries on the **movies** collection we just created
 	{"_id":101}
 	</copy>
 	```
-	![doc with id 101](./images/id101.png)
-	![id 101 results](./images/id101-results.png)
+	![QBE doc with id 101](./images/QBE-1.png)
+	![QBE id 101 results](./images/QBE-1-result.png)
 
 3.	Find all DVDs:
 
@@ -177,7 +177,7 @@ Now let's issue some simple queries on the **movies** collection we just created
 	{"format":"DVD"}
 	</copy>
 	```
-	![DVD search results](./images/dvd-results.png)
+	![QBE DVD results](./images/QBE-2-result.png)
 
 4.	Find all non-movies:
 
@@ -188,7 +188,7 @@ Now let's issue some simple queries on the **movies** collection we just created
 	{"type":{"$ne":"movie"}}
 	</copy>
 	```
-	![results for "not movies" search](./images/not-movies.png)
+	![QBE for "not movies" result](./images/QBE-3-result.png)
 
 5.	Find documents whose condition value contains "new", which means just document (with id) 101.
 
@@ -197,29 +197,29 @@ Now let's issue some simple queries on the **movies** collection we just created
 	{"condition":{"$like":"%new%"}}
 	</copy>
 	```
-	![condition is new results](./images/new.png)
+	![QBE condition is new result](./images/QBE-4-result.png)
 
 6. Find bargains of all products costing 5 or less:
 
-	This query displays the documents with ids 100, 102 and 103 as those documents have price less than 5.
+	This query displays the documents with ids 100 and 102 as those documents have price less than 5.
 
 	```
 	<copy>
 	{"price":{"$lte":5}}
 	</copy>
 	```
-	![results for price less than 5](./images/less5.png)
+	![QBE results for price less than 5](./images/QBE-5-result.png)
 
 7. Tighten the previous query to choose only movie documents:
 
-	This query displays the documents whose ids are 100, 102 as those documents have price less than 5 and not the type - book.
+	This query displays the documents whose ids are 100 and 102, as those documents have price less than 5 and not the type - book.
 
 	```
 	<copy>
 	{"$and":[{"price":{"$lte":5}}, {"type":"movie"}]}
 	</copy>
 	```
-	![price less than 5 and not type = book ](./images/less5-movie.png)
+	![QBE price less than 5 and not type = book ](./images/QBE-6-result.png)
 
 ## Task 4: JSON and Constraints
 
