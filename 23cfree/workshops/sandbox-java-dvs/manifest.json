@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Work with JSON Relational Duality Views using SQL",
+  "workshoptitle": "Work with JSON Relational Duality Views using Java",
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
       {
@@ -14,22 +14,16 @@
           "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
       },
       {
-          "title": "Lab 1: Setup",
+          "title": "Lab 1: Create the schema",
           "description": "Creating the schema including JSON Duality Views",
           "type": "livelabs",
-          "filename": "../../setup/setup.md"
+          "filename": "../../../create-java-schema/create-java-schema.md"
       },
       {
-          "title": "Lab 2: Graph",
-          "description": "Using Property Graphs in 23c",
+          "title": "Lab 2: Java and the JSON Duality Views",
+          "description": "Working with Java + JSON Duality Views",
           "type": "livelabs",
-          "filename": "../../graph/graph.md"
-      },
-      {
-          "title": "Lab 3: APEX",
-          "description": "Using Property Graphs in 23c",
-          "type": "livelabs",
-          "filename": "../../apex/apex.md"
+          "filename": "../../java-duality-views/java-duality-views.md"
       },
       {
         "title": "Need Help?",
