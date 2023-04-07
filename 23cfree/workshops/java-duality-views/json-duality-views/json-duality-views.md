@@ -16,9 +16,10 @@ In this lab, you will:
 ### Prerequisites (Optional)
 
 This lab assumes you have:
-* An Oracle account
-* A noVNC instance with 23c and SQL Developer installed
+* Oracle Database 23c Free Developer Release
 * All previous labs successfully completed
+* Eclipse or a compatible IDE for executing Java code
+
 
 
 ## Task 1: Find documents matching a filter (aka predicate)

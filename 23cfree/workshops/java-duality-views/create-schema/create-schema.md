@@ -24,7 +24,7 @@ This lab assumes you have:
 
 1. Click Activities -> Show Applications. Open Eclipse.
 
-   Once Eclipse is launched, the workspace will open
+   Once Eclipse is launched, the workspace will open.
 
     ![Eclipse workspace](images/eclipse-empty.png)
 
@@ -37,7 +37,9 @@ This lab assumes you have:
 
     ![create tables and views file](images/create-tables-and-views.png)
 
-2. In the code, you can see the main class of the program is setting formula1.sql as the file to read queries in from. This file contains the SQL commands that will create the necessary tables/views for this lab. The program reads in this file as input and breaks up the commands into individual queries. It will then execute each query within a try/catch block, so that errors will be printed in the console if they occur.
+2. In the code, you can see the main class of the program is setting formula1.sql as the file to read queries in from. This file contains the SQL commands that will create the necessary tables/views for this lab. 
+
+    The program reads in this file as input and breaks up the commands into individual queries. It will then execute each query within a try/catch block, so that errors will be printed in the console if they occur.
 
     ![file input stream is formula1.sql](images/formula1-code.png)
 

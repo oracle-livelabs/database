@@ -33,6 +33,8 @@ In this lab, you will:
 
 In order to do this workshop you need
 * An Oracle 23c Free Developer Release Database or one running in a LiveLabs environment
+* Eclipse or a compatible IDE for executing Java code
+
 
 ## Learn More
 
