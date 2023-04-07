@@ -16,8 +16,8 @@ In this lab, you will:
 ### Prerequisites (Optional)
 
 This lab assumes you have:
-* An Oracle account
-* A noVNC instance with 23c and Eclipse installed
+* Oracle Database 23c Free Developer Release
+* Eclipse or a compatible IDE for executing Java code
 * All previous labs successfully completed
 
 ## Task 1: Opening your project in Eclipse
