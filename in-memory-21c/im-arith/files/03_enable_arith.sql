@@ -11,7 +11,7 @@ alter table part      no inmemory;
 alter table supplier  no inmemory;
 alter table date_dim  no inmemory;
 
-alter system set inmemory_optimized_arithmetic = 'ENABLE' scope=both;
+alter system set inmemory_optimized_arithmetic = 'ENABLE';
 
 alter table LINEORDER inmemory memcompress for query low;
 alter table PART      inmemory memcompress for query low;
