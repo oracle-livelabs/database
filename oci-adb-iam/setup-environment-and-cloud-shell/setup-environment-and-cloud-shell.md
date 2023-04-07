@@ -17,7 +17,7 @@ Watch the video below for a quick walk-through of the lab.
 ### Prerequisites
 This lab assumes that you have completed the introduction lab.
 
->**Note:** If you have a slightly older tenancy with the option to sign in with Single Sign-On or Direct Sign-In, sign in with Direct Sign-In as you will not have the needed permissions with Single Sign-On. You can see which way your signed in by looking at the account that is signed into the tenancy. If it starts with "oracleidentitycloudservice" than you are using Single Sign-On and need to switch over. If you are not able to sign in using Direct Sign-In, you must create a non-federated user in IAM to use for this lab. You can look to the Appendix of this lab to see how to do so.
+>**Note:** If you have a slightly older tenancy with the option to sign in with Single Sign-On or Direct Sign-In, sign in with Direct Sign-In as you will not have the needed permissions with Single Sign-On. You can see which way your signed in by looking at the account that is signed into the tenancy. If it starts with "oracleidentitycloudservice" than you are using Single Sign-On and need to switch over. If you are not able to sign in using Direct Sign-In, you must create a non-federated user in IAM to use for this lab. You can look to the Appendix of this lab to see how to do so. When using a newer tenancy that utilizes IAM with Identity Domains, login using your IAM username in your default domain.
 
 
 ## Task 1: Provision the Autonomous Database
@@ -63,6 +63,7 @@ throughout this workshop.
     ```
 
 7. Create a policy to allow any user in the tenancy to access the ADB.
+    >**Note:** We are using any-user in this lab instead of the preferred method of adding users to a group and then allowing the group to access the databases.
 
     ```
     <copy>oci iam policy create  --name grant-adb-access --compartment-id $ROOT_COMP_ID  --statements '[ "allow any-user to use autonomous-database-family in tenancy"]' --description 'policy for granting any user to access autonomous databases'</copy>
