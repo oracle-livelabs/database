@@ -212,7 +212,7 @@ Now let's issue some simple queries on the **movies** collection we just created
 
 7. Tighten the previous query to choose only movie documents:
 
-	This query displays the documents whose ids are 100 and 102, as those documents have price less than 5 and not the type - book.
+	This query displays the documents whose ids are 100 and 102, as those documents have price less than 5 and are the type - movie.
 
 	```
 	<copy>
@@ -231,7 +231,7 @@ More generally, constraints can be used to check the data being entered for vari
 
 1.  Let's add a check - or 'constraint' to check our data entry. We will do this using SQL Developer Web. Click the navigation menu on the top left and select **SQL** under Development.
 
-	![SQL navigation](./images/nav.png)
+	![SQL navigation](./images/Development_SQL.png)
 
 2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types.
 
@@ -257,8 +257,9 @@ More generally, constraints can be used to check the data being entered for vari
     }'
     );</copy>
     ```
+	![SQL navigation](./images/SQL-constraint-1.png)
 
-8. Add another constraint so that the price cannot be a negative number.
+3. Add another constraint so that the price cannot be a negative number.
 
 	```
 	<copy>
@@ -268,15 +269,15 @@ More generally, constraints can be used to check the data being entered for vari
           );
 	</copy>
 	```
-	![add constraint](./images/sql-query.png)
+	![add constraint](./images/SQL-constraint-2.png)
 
 	JSON_Exists is a SQL/JSON function that checks that a SQL/JSON path expression selects at least one value in the JSON data. The selected value(s) are not extracted – only their existence is checked. Here, *$?(@.price.number() >= 0)* is a standard, SQL/JSON path expressions. You'll learn more about SQJ/JSON functions later in this lab.
 
-9. Once the **movie** table is altered, navigate back to JSON workshop. Click the navigation menu on the top left and select **JSON** under Development.
+4. Once the **movie** table is altered, navigate back to JSON workshop. Click the navigation menu on the top left and select **JSON** under Development.
 
-	![JSON navigation](./images/nav2-json.png)
+	![JSON navigation](./images/Development_JSON.png)
 
-10. Validate that the following documents cannot get inserted, since fields are missing or are of wrong type.
+5. Validate that the following documents cannot get inserted, since fields are missing or are of wrong type.
 
 	Click the *New JSON Document* icon, copy and paste the following query in the worksheet and click *Create*.
 
@@ -294,10 +295,10 @@ More generally, constraints can be used to check the data being entered for vari
     }
 	</copy>
 	```
-	![create a not-allowed item](./images/tester.png)
-	![constraint error message](./images/error2.png)
+	![create a not-allowed item](./images/create-wrong-type.png)
+	![constraint error message](./images/wrong-type.png)
 
-11. The following document now satisfies all the constraints: the "id" is a unique number, "starring" is an array, it has all required fields, and the price is a positive number.
+6. The following document now satisfies all the constraints: the "id" is a unique number, "starring" is an array, it has all required fields, and the price is a positive number.
 
 	```
 	<copy>
@@ -313,8 +314,9 @@ More generally, constraints can be used to check the data being entered for vari
     }
 	</copy>
 	```
+	![create allowed item](./images/create-right-type.png)
 
-12. Optionally, you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload.
+7. Optionally, you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload.
 
     ```
     <copy>
@@ -333,15 +335,19 @@ More generally, constraints can be used to check the data being entered for vari
     /
     </copy>
     ```
+	![SQL to find JSON doc problem](./images/SQL-problem.png)
 
-13. You may also check the JSON Schema definition in your data dictionary. In the SQL tool, run:
+8. You may also check the JSON Schema definition in your data dictionary. In the SQL tool, run:
 
     ```
     <copy>
     select constraint_name, json_serialize(json_schema) from user_JSON_SCHEMA_COLUMNS where table_name = 'MOVIES';
     </copy>
     ```
+	![SQL for data dictionary](./images/SQL-data-dict.png)
 
+
+	_Click the eye icon near any table value to view the full value._
 
 You may now proceed to the next lab.
 
