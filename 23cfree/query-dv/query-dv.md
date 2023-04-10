@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Now that our tables been populated, we will view the data as JSON documents with GET calls and query-by-example (QBE) calls. The duality view `team_dv` joins the team table with the driver table, so the insert from the previous lab ensured data was populated on both tables. Now you can query the `driver_dv` duality view to see the data in its documents.
+Now that our tables have been populated, we will view the data as JSON documents with GET calls. The duality view `team_dv` joins the team table with the driver table, so the insert from the previous lab ensured data was populated on both tables. Now you can query the `driver_dv` duality view to see the data in its documents.
 
 You will also learn how to use the OpenAPI View to create REST calls on your views. This provides a clean GUI interface with which you can not only create the REST calls, but run them to test return results. 
 
-Estimated Time: 5 minutes
+Estimated Time: 10 minutes
 
 
 ### Objectives
