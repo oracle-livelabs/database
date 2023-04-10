@@ -17,7 +17,7 @@
           "title": "Lab 1: Create the schema",
           "description": "Creating the schema including JSON Duality Views",
           "type": "livelabs",
-          "filename": "../../../create-java-schema/create-java-schema.md"
+          "filename": "../../create-java-schema/create-java-schema.md"
       },
       {
           "title": "Lab 2: Java and the JSON Duality Views",
