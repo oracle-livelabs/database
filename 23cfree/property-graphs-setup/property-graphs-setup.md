@@ -48,7 +48,7 @@ This lab assumes you have:
 4. Unzip the file.
 
     ```
-    $ <copy>unzip 23cfree-property-graph.zip</copy>
+    $ <copy>unzip -o 23cfree-property-graph.zip</copy>
     ```
 
     ![Insert alt text](images/example.png)
