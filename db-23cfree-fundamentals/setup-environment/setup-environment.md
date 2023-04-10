@@ -55,6 +55,8 @@ This lab assumes you have:
 
     No need to login right now. We are going to change the user's password in the next step. 
 
+    In the lab "Query Duality Views with REST," we will return to this link later and use SQL Developer Web to run some REST calls with OpenAPI. 
+
 ## Task 2: Create database tables
 
 

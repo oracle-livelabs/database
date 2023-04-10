@@ -15,7 +15,7 @@ JSON Relational Duality helps to converge benefits of both document and relation
 Key benefits of JSON Relational Duality:
 
 - Experience extreme flexibility in building apps using Duality view. Developers can access the same data relationally or as hierarchical documents based on their use case and are not forced into making compromises because of the limitations of the underlying database. Build document-centric apps on relational data or create SQL apps on documents.
-- Duality views provides fully updateable JSON views over data. Apps can simply read a document, make necessary changes, and write the document back without worrying about underlying data structure, mapping, consistency, or performance tuning. Experience simplicity by retrieving and storing all the data needed for an app in a single database operation.
+- Duality views provides fully updatable JSON views over data. Apps can simply read a document, make necessary changes, and write the document back without worrying about underlying data structure, mapping, consistency, or performance tuning. Experience simplicity by retrieving and storing all the data needed for an app in a single database operation.
 - Developers can use the power of Duality view in defining multiple JSON Views across overlapping groups of tables. This flexible data modeling makes building multiple apps against the same data easy and efficient.
 - Duality Views are fully ACID (atomicity, consistency, isolation, durability) transactions across multiple documents and tables. It eliminates data duplication across documents data, whereas consistency is maintained automatically. They eliminate the inherent problem of data duplication in document databases.
 - Build apps that support high concurrency access and updates: Traditional locks don’t work well for modern apps. A new lock-free concurrency control provided with Duality View helps support high concurrency updates, which also works efficiently for interactive applications since the data is not locked during human thinking time.
@@ -48,7 +48,7 @@ In this lab, you will:
 ### Prerequisites
 In order to do this workshop you need
 
-- An Oracle 23c Free Developer Release Database or one running in a LiveLabs environment
+- An Oracle Database 23c Free Developer Release or one running in a LiveLabs environment
 
 ## Learn More
 
