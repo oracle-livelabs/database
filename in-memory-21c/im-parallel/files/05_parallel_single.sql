@@ -7,6 +7,7 @@ set tab off
 set echo on
 
 alter session set parallel_degree_policy=auto;
+alter session set parallel_min_degree=4;
 
 set timing on
 select 

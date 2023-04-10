@@ -2,7 +2,6 @@
 
 set pages 9999
 set lines 150
-set timing off
 
 col table_name format a15;
 col column_name format a35;
