@@ -6,7 +6,7 @@ Oracle is a relational database, meaning it typically stores data in rows and co
 
 To create a collection all you have to specify is the collection's name. Unlike a relational table, you do not have to provide any schema information. So, let's create a collection for the products we want to sell in the store.
 
-Estimated Time: 15 minutes
+Estimated Time: 5 minutes
 
 
 ### Objectives
@@ -17,13 +17,11 @@ In this lab, you will:
 * Insert First Document
 * Find JSON documents in a collection
 * Learn about JSON and Constraints
-* Load more data through the Database API for MongoDB
 
 ### Prerequisites
 
-* Have completed Lab 1: Setup User
-* Have provisioned an Autonomous JSON Database instance and logged into the JSON
-* Be working with a Mac OS/X (Intel Silicon) machine, a Linux x86 machine or a Windows PC
+- Oracle Database 23c Free Developer Release
+- All previous labs successfully completed
 
 ## Task 1: Create Collection
 
@@ -357,5 +355,6 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, March 2023
+* **Author** - William Masdon, Kaylien Phan, Hermann Baer
+* **Contributors** -  David Start, Ranjan Priyadarshi
+* **Last Updated By/Date** - William Masdon, Database Product Manager, April 2023

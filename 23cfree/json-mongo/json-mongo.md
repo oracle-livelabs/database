@@ -2,28 +2,23 @@
 
 ## Introduction
 
-Oracle is a relational database, meaning it typically stores data in rows and columns of tables and JSON can be stored as a column value. For this lab though, we first focus on the Document Store API SODA (Simple Oracle Document Access) which allows us to store JSON data in a so-called collection. A JSON collection stores JSON documents alongside some metadata like the time of creation or update. Collections offer operations like inserts, deletes, index creation or queries.
+With our JSON Collection created in the Oracle Database, we can use Mongo APIs to interact with the collection as if we were interacting with a Mongo Database. In this lab, we will download Mongo tools and then use a Mongo connection string -- which was configured as a part of the Oracle REST Data Service (ORDS) configuation -- to connect to the Oracle Database using Mongo Shell. From there, we can interact with Mongo tools or SQL Developer Web interchangeably to access our data. 
 
-To create a collection all you have to specify is the collection's name. Unlike a relational table, you do not have to provide any schema information. So, let's create a collection for the products we want to sell in the store.
-
-Estimated Time: 15 minutes
+Estimated Time: 10 minutes
 
 
 ### Objectives
 
 In this lab, you will:
 
-* Create Collection
-* Insert First Document
-* Find JSON documents in a collection
-* Learn about JSON and Constraints
-* Load more data through the Database API for MongoDB
+- Install Mongo Shell and Mongo Database Tools
+- Load more data through the Database API for MongoDB
+- Use Mongo Shell to interact with Oracle Database
 
 ### Prerequisites
 
-* Have completed Lab 2: Work with JSON Collections
-* Have provisioned an Autonomous JSON Database instance and logged into the JSON
-* Be working with a Mac OS/X (Intel Silicon) machine, a Linux x86 machine or a Windows PC
+- Oracle Database 23c Free Developer Release
+- All previous labs successfully completed
 
 
 ## Task 1: Download Mongo Shell and Mongo Database Tools
@@ -36,15 +31,9 @@ PUT IN DISCLAIMER ABOUT DOWNLOADED MONGO TOOLS
     Run the following commands to download and install Mongo Shell and Mongo Database Tools.
 
     ```
-    $ <copy>sudo yum install https://repo.mongodb.org/yum/redhat/9/mongodb-org/6.0/x86_64/RPMS/mongodb-mongosh-1.8.0.x86_64.rpm</copy>
-    ```
-    Enter `y` to confirm install size if asked.
-
-    ```
-    $ <copy>mkdir -p /home/oracle/json-mongo</copy>
-    $ <copy>cd /home/oracle/json-mongo</copy>
-    $ <copy>wget https://fastdl.mongodb.org/tools/db/mongodb-database-tools-rhel80-x86_64-100.7.0.rpm</copy>
-    $ <copy>sudo yum install -y mongodb-database-tools-rhel80-x86_64-100.7.0.rpm</copy>
+    $ <copy>echo "18.67.17.0 repo.mongodb.org" | sudo tee -a /etc/hosts</copy>
+    $ <copy>sudo yum install -y https://repo.mongodb.org/yum/redhat/8/mongodb-org/6.0/x86_64/RPMS/mongodb-mongosh-1.8.0.x86_64.rpm</copy>
+    $ <copy>sudo yum install -y https://repo.mongodb.org/yum/redhat/8/mongodb-org/6.0/x86_64/RPMS/mongodb-database-tools-100.7.0.x86_64.rpm</copy>
     ```
     Your screen will look similar to this after running the commands.
  	![End of mongo install](./images/mongo-install.png)
@@ -156,5 +145,6 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, March 2023
+* **Author** - William Masdon, Kaylien Phan, Hermann Baer
+* **Contributors** -  David Start, Ranjan Priyadarshi
+* **Last Updated By/Date** - William Masdon, Database Product Manager, April 2023

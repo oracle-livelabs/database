@@ -69,12 +69,8 @@ Now you know what JSON is and also why so many people love it. Enough theory for
 In this workshop, you will explore: 
 *	How to store, query and process JSON documents in collections using the SODA API
 *	How to use SQL to query, generate and process JSON data
-*	How to convert JSON data to the relational model (for example: for analytics or reporting)
-*	How to generate JSON data from relational sources (for example: to serve a microservice)
-*	How to update JSON data
-*	How to perform transactions over JSON data
-*	How to use stored procedures with JSON business logic
-*   How to connect to Oracle Database using MongoDB tools
+*	How to use the Mongo API to query or manipulate data in the Oracle Database
+*	How to use the newest SQL Enhancements to work with JSON data
 
 ### Prerequisites
 
@@ -88,6 +84,6 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 
-* **Author** - Beda Hammerschmidt, Architect
-* **Contributors** -  Anoosha Pilli, Product Manager, Oracle Database
-* **Last Updated By/Date** - Anoosha Pilli, Brianna Ambler, June 2021
+* **Author** - William Masdon, Kaylien Phan, Hermann Baer
+* **Contributors** -  David Start, Ranjan Priyadarshi
+* **Last Updated By/Date** - William Masdon, Database Product Manager, April 2023
