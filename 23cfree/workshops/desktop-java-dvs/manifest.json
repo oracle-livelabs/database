@@ -9,9 +9,9 @@
           "filename": "../../introduction/sql-introduction.md"
       },
       {
-          "title": "Get Started with NoVNC",
-          "description": "Verify Setup of compute instance",
-          "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+        "title": "Get Started",
+        "description": "Using noVNC Remote Desktop",
+        "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
       },
       {
           "title": "Lab 1: Setup User",
