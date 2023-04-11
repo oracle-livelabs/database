@@ -155,5 +155,6 @@ You may **proceed to the next lab.**
 
 ## Acknowledgements
 
-- **Authors**- William Masdon, Product Manager, Database; Jeff Smith, Distinguished Product Manager, Database 
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, April 2023
+* **Author** - William Masdon, Kaylien Phan, Jeff Smith
+* **Contributors** -  David Start, Ranjan Priyadarshi
+* **Last Updated By/Date** - William Masdon, Database Product Manager, April 2023

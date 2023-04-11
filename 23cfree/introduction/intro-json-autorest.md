@@ -58,5 +58,6 @@ In order to do this workshop you need
 
 ## Acknowledgements
 
-- **Authors**- William Masdon, Product Manager, Database; Jeff Smith, Distinguished Product Manager, Database; Ranjan Priyadarshi, Senior Director, Database Product Management
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, April 2023
+* **Author** - William Masdon, Kaylien Phan, Jeff Smith
+* **Contributors** -  David Start, Ranjan Priyadarshi
+* **Last Updated By/Date** - William Masdon, Database Product Manager, April 2023

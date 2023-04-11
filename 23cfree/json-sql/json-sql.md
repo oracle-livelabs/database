@@ -10,10 +10,8 @@ A key characteristic of a JSON collection (like 'products') is that it is backed
 
 In the following, we show you how you can use SQL to work with the JSON data in a collection.
 
-Estimated Time: 30 minutes
+Estimated Time: 10 minutes
 
-Watch the video below for a quick walk-through of the lab.
-[Use SQL to work with JSON](videohub:1_mu4tx1rz)
 
 ### Objectives
 
@@ -24,7 +22,8 @@ In this lab, you will:
 
 ### Prerequisites
 
-* All previous labs have been successfully completed.
+- Oracle Database 23c Free Developer Release
+- All previous labs successfully completed
 
 ## Task 1: SQL Developer Web
 
@@ -496,5 +495,6 @@ Often, you do not know all the fields that occur in a collection of JSON data, e
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, March 2023
+* **Author** - William Masdon, Kaylien Phan, Hermann Baer
+* **Contributors** -  David Start, Ranjan Priyadarshi
+* **Last Updated By/Date** - William Masdon, Database Product Manager, April 2023
