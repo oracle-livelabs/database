@@ -3,7 +3,7 @@
 
 Before you get started, you will need an Oracle Cloud account. This lab walks you through the steps of getting an Oracle Cloud Free Tier account and signing in.
 
-Estimated Time: XYZ minutes
+Estimated Time: 5 minutes
 
 Existing Cloud Accounts
 If you already have access to an Oracle Cloud account, skip to Task 2 to sign in to your cloud tenancy.

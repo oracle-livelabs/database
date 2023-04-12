@@ -1,4 +1,4 @@
-# Provision an Autonomous Database
+# Provision an autonomous database
 
 ## Introduction
 

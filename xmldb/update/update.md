@@ -69,382 +69,387 @@ Note: Avoid the use of the ManagedCompartmentforPaaS compartment as this is an O
 Database Actions allows you to connect to your Autonomous Database through various browser-based tools. We will just be using the SQL workshop tool.
 9. You should be in the Database Actions panel. Click on the SQL card
 
-## Task 4: Updating XML Content
+## Task 4: Update XML Content
 
-### UQ1. Updating an entire XML document
-We can simply use the standard SQL update statement to update an entire XML document.
+1. Update an entire XML document
+    
+    We can simply use the standard SQL update statement to update an entire XML document. 
+    
+    Let’s check the content before issuing an updated statement.
 
-Let’s check the content before issuing an updated statement.
+    ```
+    <copy>
+    SELECT
+        P.DOC.GETCLOBVAL()
+    FROM
+        PURCHASEORDER P
+    WHERE
+        P.ID = 1;
+    </copy>
+    ```
 
-```
-<copy>
-SELECT
-    P.DOC.GETCLOBVAL()
-FROM
-    PURCHASEORDER P
-WHERE
-    P.ID = 1;
-```
-</copy>
+    Copy the above statement into the worksheet area and press "Run Statement".
 
-Copy the above statement into the worksheet area and press "Run Statement".
+    ![Pre-update](./images/img-1.png)
 
-![Pre-update](images/img-1.png)
+    
 
- 
+    Then, run the following SQL update statement to update an entire XML document.
 
-Then, run the following SQL update statement to update an entire XML document.
+    ```
+    <copy>
+    UPDATE PURCHASEORDER P
+    SET
+        P.DOC = XMLTYPE('<doc>updated doc</doc>')
+    WHERE
+        P.ID = 1;
+    </copy>
+    ```
 
-```
-<copy>
-UPDATE PURCHASEORDER P
-SET
-    P.DOC = XMLTYPE('<doc>updated doc</doc>')
-WHERE
-    P.ID = 1;
-```
-</copy>
+    Copy the above statement into the worksheet area and press "Run Statement".
 
-Copy the above statement into the worksheet area and press "Run Statement".
+    ![Update](./images/img-2.png)
 
-![Update](images/img-2.png)
+    
 
- 
+    Now let’s check the updated content.
 
-Now let’s check the updated content.
+    ```
+    <copy>
+    SELECT
+        P.DOC.GETCLOBVAL()
+    FROM
+        PURCHASEORDER P
+    WHERE
+        P.ID = 1;
+    </copy>
+    ```
 
-```
-<copy>
-SELECT
-    P.DOC.GETCLOBVAL()
-FROM
-    PURCHASEORDER P
-WHERE
-    P.ID = 1;
-```
-</copy>
+    Copy the above statement into the worksheet area and press "Run Statement".
 
-Copy the above statement into the worksheet area and press "Run Statement".
+    ![Post-update](./images/img-3.png)
 
-![Post-update](images/img-3.png)
+    You should see the updated XML doc for id 1.
 
-You should see the updated XML doc for id 1.
+    
 
- 
+    Now roll back to the previous content.
 
-Now roll back to the previous content.
+    ![Rollback](./images/img-4.png)
 
-![Rollback](images/img-4.png)
+    
 
- 
+2. Replace XML nodes
+    
+    In the previous example, we replaced the entire document. However, in most practical scenarios we just need to modify a part of the document. To do that, we can use XQuery update with a SQL update statement.
 
-### UQ2. Replacing XML nodes
-In the previous example, we replaced the entire document. However, in most practical scenarios we just need to modify a part of the document. To do that, we can use XQuery update with a SQL update statement.
+    In the following example, we will update the Requestor info in the XML document with the Reference value as 'ROY-3PDT'. 
 
-In the following example, we will update the Requestor info in the XML document with the Reference value as 'ROY-3PDT'. 
+    First, let's see the current value of the Requestor node.
 
-First, let's see the current value of the Requestor node.
+    ```
+    <copy>
+    SELECT
+        XMLQUERY('$p/PurchaseOrder/Requestor/text()'
+            PASSING PO.DOC AS "p"
+        RETURNING CONTENT).GETCLOBVAL() REQUESTOR
+    FROM
+        PURCHASEORDER PO
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
+            PASSING PO.DOC AS "p"
+        );
+    </copy>
+    ```
 
-```
-<copy>
-SELECT
-    XMLQUERY('$p/PurchaseOrder/Requestor/text()'
-        PASSING PO.DOC AS "p"
-    RETURNING CONTENT).GETCLOBVAL() REQUESTOR
-FROM
-    PURCHASEORDER PO
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
-        PASSING PO.DOC AS "p"
-    );
-```
-</copy>
+    Copy the above statement into the worksheet area and press "Run Statement".
 
-Copy the above statement into the worksheet area and press "Run Statement".
+    ![Pre-update](./images/img-5.png)
 
-![Pre-update](images/img-5.png)
+    
 
- 
+    Now we pass the new value 'XDB Team' as a variable $p2 to the XQuery expression and evaluate the expression for the documents having Reference value as 'ROY-3PDT'.
 
-Now we pass the new value 'XDB Team' as a variable $p2 to the XQuery expression and evaluate the expression for the documents having Reference value as 'ROY-3PDT'.
-
-```
-<copy>
-UPDATE PURCHASEORDER PO
-SET
-    PO.DOC = XMLQUERY('copy $i := $p1 modify
-                (for $j in $i/PurchaseOrder/Requestor
-                return replace value of node $j with $p2)
-                return $i'
-        PASSING PO.DOC AS "p1",
-        'XDB Team' AS "p2"
-    RETURNING CONTENT)
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
-        PASSING PO.DOC AS "p"
-    );
-```
-</copy>
-
-Copy the above statement into the worksheet area and press "Run Statement".
-
-![Update](images/img-6.png)
-
- 
-
-Now let’s see the updated content.
-
-```
-<copy>
-SELECT
-    XMLQUERY('$p/PurchaseOrder/Requestor/text()'
-        PASSING PO.DOC AS "p"
-    RETURNING CONTENT).GETCLOBVAL() REQUESTOR
-FROM
-    PURCHASEORDER PO
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
-        PASSING PO.DOC AS "p"
-    );
-
-ROLLBACK;
-```
-</copy>
-
-Copy the above statement into the worksheet area and press "Run Statement".
-
-![Post-update](images/img-7.png)
-
- 
-
-### UQ3. Inserting XML nodes
-The user may want to add a new XML node to an XML document. This example inserts a new LineItem element as a child of the element LineItems. 
-
-Before inserting a new XML node, let’s check the current content using this query:
-
-```
-<copy>
-SELECT
-    XMLQUERY('$p/PurchaseOrder/LineItems/LineItem[@ItemNumber=5]'
-        PASSING PO.DOC AS "p"
-    RETURNING CONTENT).GETCLOBVAL() ITEM
-FROM
-    PURCHASEORDER PO
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
-        PASSING PO.DOC AS "p"
-    );
-```
-</copy>
-
-Copy the above statement into the worksheet area and press "Run Statement".
-
-![Pre-update](images/img-8.png)
-
- 
-
-Now we will use the XQuery update statement to insert a new XML node into the document. The following query is inserting a new XML node LineItem with ItemNumber = 5 into an XML document having "ROY-3PDT" as its Reference value.
-
-```
-<copy>
-UPDATE PURCHASEORDER PO
-SET
-    PO.DOC = XMLQUERY('copy $i := $p1 modify
-                    (for $j in $i/PurchaseOrder/LineItems
-                    return (# ora:child-element-name LineItem #)
-                            {insert node $p2 into $j})
+    ```
+    <copy>
+    UPDATE PURCHASEORDER PO
+    SET
+        PO.DOC = XMLQUERY('copy $i := $p1 modify
+                    (for $j in $i/PurchaseOrder/Requestor
+                    return replace value of node $j with $p2)
                     return $i'
-        PASSING PO.DOC AS "p1",
-        XMLTYPE('<LineItem ItemNumber="5">
-                                    <Part Description="Keyboard" UnitPrice="100">1</Part>
-                                    <Quantity>1</Quantity>
-                                </LineItem>') AS "p2"
-    RETURNING CONTENT)
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
-        PASSING PO.DOC AS "p"
-    );
-```
-</copy>
+            PASSING PO.DOC AS "p1",
+            'XDB Team' AS "p2"
+        RETURNING CONTENT)
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
+            PASSING PO.DOC AS "p"
+        );
+    </copy>
+    ```
 
-Copy the above statement into the worksheet area and press "Run Statement".
+    Copy the above statement into the worksheet area and press "Run Statement".
 
-![Update](images/img-9.png)
+    ![Update](./images/img-6.png)
 
- 
+    
 
-Whether the new XML node was inserted or not, let’s run this query and see if it’s there:
+    Now let’s see the updated content.
 
-```
-<copy>
-SELECT
-    XMLQUERY('$p/PurchaseOrder/LineItems/LineItem[@ItemNumber=5]'
-        PASSING PO.DOC AS "p"
-    RETURNING CONTENT).GETCLOBVAL() ITEM
-FROM
-    PURCHASEORDER PO
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
-        PASSING PO.DOC AS "p"
-    );
-```
-</copy>
+    ```
+    <copy>
+    SELECT
+        XMLQUERY('$p/PurchaseOrder/Requestor/text()'
+            PASSING PO.DOC AS "p"
+        RETURNING CONTENT).GETCLOBVAL() REQUESTOR
+    FROM
+        PURCHASEORDER PO
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
+            PASSING PO.DOC AS "p"
+        );
 
-Copy the above statement into the worksheet area and press "Run Statement".
+    ROLLBACK;
+    </copy>
+    ```
 
-![Post-update](images/img-10.png)
+    Copy the above statement into the worksheet area and press "Run Statement".
 
- 
+    ![Post-update](./images/img-7.png)
 
-### UQ4. Deleting XML nodes
-In this example, we will use an XQuery update statement to delete an XML node, LineItem with ItemNumber = 5 from the XML documents having "ROY-3PDT" as the Reference value.
+    
 
-Let’s first check the current content in the document:
+3. Insert XML nodes
+    
+    The user may want to add a new XML node to an XML document. This example inserts a new LineItem element as a child of the element LineItems. 
 
-```
-<copy>
-SELECT
-    XMLQUERY('$p/PurchaseOrder/LineItems/LineItem[@ItemNumber=5]'
-        PASSING PO.DOC AS "p"
-    RETURNING CONTENT).GETCLOBVAL() ITEM
-FROM
-    PURCHASEORDER PO
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
-        PASSING PO.DOC AS "p"
-    );
-```
-</copy>
+    Before inserting a new XML node, let’s check the current content using this query:
 
-Copy the above statement into the worksheet area and press "Run Statement".
+    ```
+    <copy>
+    SELECT
+        XMLQUERY('$p/PurchaseOrder/LineItems/LineItem[@ItemNumber=5]'
+            PASSING PO.DOC AS "p"
+        RETURNING CONTENT).GETCLOBVAL() ITEM
+    FROM
+        PURCHASEORDER PO
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
+            PASSING PO.DOC AS "p"
+        );
+    </copy>
+    ```
 
-![Pre-update](images/img-11.png)
+    Copy the above statement into the worksheet area and press "Run Statement".
 
- 
+    ![Pre-update](./images/img-8.png)
 
-Then run the following update statement to delete the XML node:
+    
 
-```
-<copy>
-UPDATE PURCHASEORDER PO
-SET
-    PO.DOC = XMLQUERY('copy $i := $p modify
-                    delete nodes $i/PurchaseOrder/LineItems/LineItem[@ItemNumber="5"]
-                    return $i'
-        PASSING PO.DOC AS "p"
-    RETURNING CONTENT)
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
-        PASSING PO.DOC AS "p"
-    );
-```
-</copy>
+    Now we will use the XQuery update statement to insert a new XML node into the document. The following query is inserting a new XML node LineItem with ItemNumber = 5 into an XML document having "ROY-3PDT" as its Reference value.
 
-Copy the above statement into the worksheet area and press "Run Statement".
-
-![Update](images/img-12.png)
-
- 
-
-Now let’s check the updated content of the documents.
-
-```
-<copy>
-SELECT
-    XMLQUERY('$p/PurchaseOrder/LineItems/LineItem[@ItemNumber=5]'
-        PASSING PO.DOC AS "p"
-    RETURNING CONTENT).GETCLOBVAL() ITEM
-FROM
-    PURCHASEORDER PO
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
-        PASSING PO.DOC AS "p"
-    );
-```
-</copy>
-
-Copy the above statement into the worksheet area and press "Run Statement".
-
-![Post-update](images/img-13.png)
-
- 
-
-### UQ5. Creating an XML View of customized data
-Sometimes the size of the XML document is very big, or it may have some information that users are not interested in or maybe some confidentiality or other reasons, the users may want to see some customized or synthesized or even null data in some fields of the documents. In this example, we will show you how to achieve that. This query nullifies some of its content.
-
-```
-<copy>
-SELECT
-    XMLQUERY('copy $i := $p1 modify
-                        ((for $j in $i/PurchaseOrder/Actions
-                        return replace value of node $j with ()),
-                        (for $j in $i/PurchaseOrder/ShippingInstructions
-                        return replace value of node $j with ()),
+    ```
+    <copy>
+    UPDATE PURCHASEORDER PO
+    SET
+        PO.DOC = XMLQUERY('copy $i := $p1 modify
                         (for $j in $i/PurchaseOrder/LineItems
-                        return replace value of node $j with ()))
-                    return $i'
-        PASSING PO.DOC AS "p1"
-    RETURNING CONTENT).GETCLOBVAL() RESPONSE
-FROM
-    PURCHASEORDER PO
-WHERE
-    PO.ID = 2;
-```
-</copy>
+                        return (# ora:child-element-name LineItem #)
+                                {insert node $p2 into $j})
+                        return $i'
+            PASSING PO.DOC AS "p1",
+            XMLTYPE('<LineItem ItemNumber="5">
+                                        <Part Description="Keyboard" UnitPrice="100">1</Part>
+                                        <Quantity>1</Quantity>
+                                    </LineItem>') AS "p2"
+        RETURNING CONTENT)
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
+            PASSING PO.DOC AS "p"
+        );
+    </copy>
+    ```
 
-Copy the above statement into the worksheet area and press "Run Statement".
+    Copy the above statement into the worksheet area and press "Run Statement".
 
-![Pre-update](images/img-14.png)
+    ![Update](./images/img-9.png)
 
- 
+    
 
-Now let’s create a view on this.
+    Whether the new XML node was inserted or not, let’s run this query and see if it’s there:
 
-```
-<copy>
-CREATE OR REPLACE VIEW V_PO_SUMMARY OF XMLTYPE 
-WITH OBJECT ID 
-( 
-    XMLCAST(XMLQUERY('/PurchaseOrder/Reference' PASSING OBJECT_VALUE
-    RETURNING CONTENT) AS VARCHAR2(30)) 
-) 
-AS
-SELECT
-    XMLQUERY('copy $i := $p1 modify
-                        ((for $j in $i/PurchaseOrder/Actions
-                        return replace value of node $j with ()),
-                        (for $j in $i/PurchaseOrder/ShippingInstructions
-                        return replace value of node $j with ()),
-                        (for $j in $i/PurchaseOrder/LineItems
-                        return replace value of node $j with ()))
-                    return $i'
-        PASSING PO.DOC AS "p1"
-    RETURNING CONTENT)
-FROM
-    PURCHASEORDER PO
-WHERE
-    PO.ID = 2;
-```
-</copy>
+    ```
+    <copy>
+    SELECT
+        XMLQUERY('$p/PurchaseOrder/LineItems/LineItem[@ItemNumber=5]'
+            PASSING PO.DOC AS "p"
+        RETURNING CONTENT).GETCLOBVAL() ITEM
+    FROM
+        PURCHASEORDER PO
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
+            PASSING PO.DOC AS "p"
+        );
+    </copy>
+    ```
 
-Copy the above statement into the worksheet area and press "Run Statement".
+    Copy the above statement into the worksheet area and press "Run Statement".
 
-![Update](images/img-15.png)
+    ![Post-update](./images/img-10.png)
 
- 
+    
 
-```
-<copy>
-SELECT
-    T.OBJECT_VALUE.GETCLOBVAL()
-FROM
-    V_PO_SUMMARY T;
-```
-</copy>
+4. Delete XML nodes
+    
+    In this example, we will use an XQuery update statement to delete an XML node, LineItem with ItemNumber = 5 from the XML documents having "ROY-3PDT" as the Reference value.
 
-Copy the above statement into the worksheet area and press "Run Statement".
+    Let’s first check the current content in the document:
 
-![Post-update](images/img-16.png)
+    ```
+    <copy>
+    SELECT
+        XMLQUERY('$p/PurchaseOrder/LineItems/LineItem[@ItemNumber=5]'
+            PASSING PO.DOC AS "p"
+        RETURNING CONTENT).GETCLOBVAL() ITEM
+    FROM
+        PURCHASEORDER PO
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
+            PASSING PO.DOC AS "p"
+        );
+    </copy>
+    ```
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+
+    ![Pre-update](./images/img-11.png)
+
+    
+
+    Then run the following update statement to delete the XML node:
+
+    ```
+    <copy>
+    UPDATE PURCHASEORDER PO
+    SET
+        PO.DOC = XMLQUERY('copy $i := $p modify
+                        delete nodes $i/PurchaseOrder/LineItems/LineItem[@ItemNumber="5"]
+                        return $i'
+            PASSING PO.DOC AS "p"
+        RETURNING CONTENT)
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
+            PASSING PO.DOC AS "p"
+        );
+    </copy>
+    ```
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+
+    ![Update](./images/img-12.png)
+
+    
+
+    Now let’s check the updated content of the documents.
+
+    ```
+    <copy>
+    SELECT
+        XMLQUERY('$p/PurchaseOrder/LineItems/LineItem[@ItemNumber=5]'
+            PASSING PO.DOC AS "p"
+        RETURNING CONTENT).GETCLOBVAL() ITEM
+    FROM
+        PURCHASEORDER PO
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-3PDT"]'
+            PASSING PO.DOC AS "p"
+        );
+    </copy>
+    ```
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+
+    ![Post-update](./images/img-13.png)
+
+    
+
+5. Create an XML View of customized data
+    
+    Sometimes the size of the XML document is very big, or it may have some information that users are not interested in or maybe some confidentiality or other reasons, the users may want to see some customized or synthesized or even null data in some fields of the documents. In this example, we will show you how to achieve that. This query nullifies some of its content.
+
+    ```
+    <copy>
+    SELECT
+        XMLQUERY('copy $i := $p1 modify
+                            ((for $j in $i/PurchaseOrder/Actions
+                            return replace value of node $j with ()),
+                            (for $j in $i/PurchaseOrder/ShippingInstructions
+                            return replace value of node $j with ()),
+                            (for $j in $i/PurchaseOrder/LineItems
+                            return replace value of node $j with ()))
+                        return $i'
+            PASSING PO.DOC AS "p1"
+        RETURNING CONTENT).GETCLOBVAL() RESPONSE
+    FROM
+        PURCHASEORDER PO
+    WHERE
+        PO.ID = 2;
+    </copy>
+    ```
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+
+    ![Pre-update](./images/img-14.png)
+
+    
+
+    Now let’s create a view on this.
+
+    ```
+    <copy>
+    CREATE OR REPLACE VIEW V_PO_SUMMARY OF XMLTYPE 
+    WITH OBJECT ID 
+    ( 
+        XMLCAST(XMLQUERY('/PurchaseOrder/Reference' PASSING OBJECT_VALUE
+        RETURNING CONTENT) AS VARCHAR2(30)) 
+    ) 
+    AS
+    SELECT
+        XMLQUERY('copy $i := $p1 modify
+                            ((for $j in $i/PurchaseOrder/Actions
+                            return replace value of node $j with ()),
+                            (for $j in $i/PurchaseOrder/ShippingInstructions
+                            return replace value of node $j with ()),
+                            (for $j in $i/PurchaseOrder/LineItems
+                            return replace value of node $j with ()))
+                        return $i'
+            PASSING PO.DOC AS "p1"
+        RETURNING CONTENT)
+    FROM
+        PURCHASEORDER PO
+    WHERE
+        PO.ID = 2;
+    </copy>
+    ```
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+
+    ![Update](./images/img-15.png)
+
+    
+
+    ```
+    <copy>
+    SELECT
+        T.OBJECT_VALUE.GETCLOBVAL()
+    FROM
+        V_PO_SUMMARY T;
+    </copy>
+    ```
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+
+    ![Post-update](./images/img-16.png)
 
 You may now **proceed to the next lab**.
 

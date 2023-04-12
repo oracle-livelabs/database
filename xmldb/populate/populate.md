@@ -25,233 +25,236 @@ Note: Avoid the use of the ManagedCompartmentforPaaS compartment as this is an O
 Database Actions allows you to connect to your Autonomous Database through various browser-based tools. We will just be using the SQL workshop tool.
 9.	You should be in the Database Actions panel. Click on the SQL card.
 
-## Task 2: Create and populate a simple table with an XMLType column
-1.	You should be in the Database Actions panel. Click on the SQL card.
-When you first enter SQL, you will get a tour of the features. We recommend you step through it, but you can skip the tour by clicking on the "X". The tour is available at any time by clicking the tour button. 
-You can dismiss the warning that you are logged in as an ADMIN user.
-2.	We will create a simple table to record the sample purchase orders. 
-It contains a numeric column for purchase ID and an XMLType column for purchase details. 
+## Task 2: Create and Populate a Table with an XMLType Column
+1.	Go to Database Actions panel
 
-Copy the following into the 'Worksheet' area and press the "Run Statement" button:
+    Click on the SQL card. When you first enter SQL, you will get a tour of the features. We recommend you step through it, but you can skip the tour by clicking on the "X". The tour is available at any time by clicking the tour button. You can dismiss the warning that you are logged in as an ADMIN user.
 
-```
-<copy>
--- By default, the storage type is Binary XML
-CREATE TABLE purchaseorder
-(
-    id  NUMBER,
-    doc XMLTYPE
-);
-</copy>
-```
+2.	Create a table with XMLType column
 
-```
-<copy>
--- You can also specify the storage type
-CREATE TABLE PURCHASEORDER (
-    ID  NUMBER,
-    DOC XMLTYPE
-) XMLTYPE DOC STORE AS BINARY XML;
-</copy>
-```
-You should see the message "Table PURCHASEORDER created". 
+    We will create a simple table to record the sample purchase orders. It contains a numeric column for purchase ID and an XMLType column for purchase details. 
 
-![Create table](images/img-1.png)
+    Copy the following into the 'Worksheet' area and press the "Run Statement" button:
 
-On the left side, click the "Refresh" button to see your new table in the tables list.
-
-![Table list](images/img-2.png)
-
-3.	Populate the table with a few rows. 
-Use the 'trashcan' icon to delete the previous statement from the Worksheet area. Copy the following SQL into the worksheet area. Make sure you highlight the whole statement with your mouse and press the "Run Statement" button:
-
-Here we are assuming that the XML files are stored in the Object store. So, we will now load the XML data to our table from the Object store.
-
-**Note:** The value of OBJECT_URI has been modified here. ```url/livelab-xmldoc-1.xml``` is not the actual value.
-The actual link is the authenticated link retrieved from the object store. Please refer to object store how to get it.
-If you find it difficult to load the data into the tables, please use other approaches you find appropriate. The most easy to follow approach is ```insert into [TABLE] (...)```. 
-
-```
-<copy>
--- Create the credentials
-begin
-  DBMS_CLOUD.create_credential(
-    credential_name => 'OBJ_STORE_CRED',
-    username => 'your_email_address',
-    password => 'your_password'
-  );
-end;
-/ 
-</copy>
-```
-Now let’s insert the documents from the object store.
-
-```
-<copy>
--- Inserting xmldoc-1
-DECLARE
-    BLOB_IN   BLOB;
-    X         XMLTYPE;
-BEGIN
-    BLOB_IN := DBMS_CLOUD.GET_OBJECT(CREDENTIAL_NAME => 'OBJ_STORE_CRED', 
-                                     OBJECT_URI => 'url/livelab-xmldoc-1.xml'
+    ```
+    <copy>
+    -- By default, the storage type is Binary XML
+    CREATE TABLE purchaseorder
+    (
+        id  NUMBER,
+        doc XMLTYPE
     );
-    X := XMLTYPE(BLOB_IN, nls_charset_id('AL32UTF8'));
-    INSERT INTO PURCHASEORDER VALUES (
-        1,
-        X
-    );
-END;
-</copy>
-```
+    </copy>
+    ```
 
-![Insert from the object store](images/img-3.png)
+    ```
+    <copy>
+    -- You can also specify the storage type
+    CREATE TABLE PURCHASEORDER (
+        ID  NUMBER,
+        DOC XMLTYPE
+    ) XMLTYPE DOC STORE AS BINARY XML;
+    </copy>
+    ```
+    You should see the message "Table PURCHASEORDER created". 
 
-Similarly, we can insert other sample documents.
+    ![Create table](./images/img-1.png)
 
-```
-<copy>
--- Inserting xmldoc-2
-DECLARE
-    BLOB_IN   BLOB;
-    X         XMLTYPE;
-BEGIN
-    BLOB_IN := DBMS_CLOUD.GET_OBJECT(CREDENTIAL_NAME => 'OBJ_STORE_CRED', 
-                                     OBJECT_URI => 'url/livelab-xmldoc-2.xml'
-    );
-    X := XMLTYPE(BLOB_IN, nls_charset_id('AL32UTF8'));
-    INSERT INTO PURCHASEORDER VALUES (
-        2,
-        X
-    );
-END;
-</copy>
-```
+    On the left side, click the "Refresh" button to see your new table in the tables list.
 
-```
-<copy>
--- Inserting xmldoc-3
-DECLARE
-    BLOB_IN   BLOB;
-    X         XMLTYPE;
-BEGIN
-    BLOB_IN := DBMS_CLOUD.GET_OBJECT(CREDENTIAL_NAME => 'OBJ_STORE_CRED', 
-                                     OBJECT_URI => 'url/livelab-xmldoc-3.xml'
+    ![Table list](./images/img-2.png)
+
+3.	Populate the table with a few rows
+
+    Use the 'trashcan' icon to delete the previous statement from the Worksheet area. Copy the following SQL into the worksheet area. Make sure you highlight the whole statement with your mouse and press the "Run Statement" button:
+
+    Here we are assuming that the XML files are stored in the Object store. So, we will now load the XML data to our table from the Object store.
+
+    **Note:** The value of OBJECT_URI has been modified here. ```url/livelab-xmldoc-1.xml``` is not the actual value.
+    The actual link is the authenticated link retrieved from the object store. Please refer to object store how to get it.
+    If you find it difficult to load the data into the tables, please use other approaches you find appropriate. The most easy to follow approach is ```insert into [TABLE] (...)```. 
+
+    ```
+    <copy>
+    -- Create the credentials
+    begin
+    DBMS_CLOUD.create_credential(
+        credential_name => 'OBJ_STORE_CRED',
+        username => 'your_email_address',
+        password => 'your_password'
     );
-    X := XMLTYPE(BLOB_IN, nls_charset_id('AL32UTF8'));
+    end;
+    / 
+    </copy>
+    ```
+    Now let’s insert the documents from the object store.
+
+    ```
+    <copy>
+    -- Inserting xmldoc-1
+    DECLARE
+        BLOB_IN   BLOB;
+        X         XMLTYPE;
+    BEGIN
+        BLOB_IN := DBMS_CLOUD.GET_OBJECT(CREDENTIAL_NAME => 'OBJ_STORE_CRED', 
+                                        OBJECT_URI => 'url/livelab-xmldoc-1.xml'
+        );
+        X := XMLTYPE(BLOB_IN, nls_charset_id('AL32UTF8'));
+        INSERT INTO PURCHASEORDER VALUES (
+            1,
+            X
+        );
+    END;
+    </copy>
+    ```
+
+    ![Insert from the object store](./images/img-3.png)
+
+    Similarly, we can insert other sample documents.
+
+    ```
+    <copy>
+    -- Inserting xmldoc-2
+    DECLARE
+        BLOB_IN   BLOB;
+        X         XMLTYPE;
+    BEGIN
+        BLOB_IN := DBMS_CLOUD.GET_OBJECT(CREDENTIAL_NAME => 'OBJ_STORE_CRED', 
+                                        OBJECT_URI => 'url/livelab-xmldoc-2.xml'
+        );
+        X := XMLTYPE(BLOB_IN, nls_charset_id('AL32UTF8'));
+        INSERT INTO PURCHASEORDER VALUES (
+            2,
+            X
+        );
+    END;
+    </copy>
+    ```
+
+    ```
+    <copy>
+    -- Inserting xmldoc-3
+    DECLARE
+        BLOB_IN   BLOB;
+        X         XMLTYPE;
+    BEGIN
+        BLOB_IN := DBMS_CLOUD.GET_OBJECT(CREDENTIAL_NAME => 'OBJ_STORE_CRED', 
+                                        OBJECT_URI => 'url/livelab-xmldoc-3.xml'
+        );
+        X := XMLTYPE(BLOB_IN, nls_charset_id('AL32UTF8'));
+        INSERT INTO PURCHASEORDER VALUES (
+            3,
+            X
+        );
+    END;
+
+    COMMIT;
+    </copy>
+    ```
+
+    ```
+    <copy>
+    -- Check if all docs are inserted correctly
+    SELECT
+        t.DOC.GETCLOBVAL()
+    FROM
+        PURCHASEORDER t;
+    </copy>
+    ```
+
+    You can also use the external table approach to load the XML documents into your table. Here is the link for more info: [External table approach to load the data] (https://blogs.oracle.com/datawarehousing/post/loading-xml-data-from-your-object-store-into-autonomous-database)
+
+    If your XML documents are smaller, you can even use the ‘insert into’ statements to insert the docs into your table.
+
+    ```
+    <copy>
     INSERT INTO PURCHASEORDER VALUES (
         3,
-        X
+        '<PurchaseOrder>
+                        <Reference>ROY-1PDT</Reference>
+                        <Requestor>H. Roy 1</Requestor>
+                        <User>ROY-1</User>
+                        <CostCenter>H1</CostCenter>
+                        <ShippingInstructions>
+                            <name>H. Roy 1</name>
+                            <Address>
+                                <street>1 Nil Rd, Building 1</street>
+                                <city>SFO-1</city>
+                                <state>CA</state>
+                                <zipCode>99236</zipCode>
+                                <country>USA</country>
+                            </Address>
+                        </ShippingInstructions>
+                        <SpecialInstructions>Overnight</SpecialInstructions>
+                        <LineItems>
+                            <LineItem ItemNumber="1">
+                                <Part Description="Monitor" UnitPrice="350">1</Part>
+                                <Quantity>1</Quantity>
+                            </LineItem>
+                            <LineItem ItemNumber="2">
+                                <Part Description="Headphone" UnitPrice="550">1</Part>
+                                <Quantity>1</Quantity>
+                            </LineItem>
+                            <LineItem ItemNumber="3">
+                                <Part Description="Speaker" UnitPrice="750">1</Part>
+                                <Quantity>1</Quantity>
+                            </LineItem>
+                        </LineItems>
+                    </PurchaseOrder>'
     );
-END;
+    </copy>
+    ```
 
-COMMIT;
-</copy>
-```
+    You can choose any of the above approaches to insert the XML documents into the table. 
 
-```
-<copy>
--- Check if all docs are inserted correctly
-SELECT
-    t.DOC.GETCLOBVAL()
-FROM
-    PURCHASEORDER t;
-</copy>
-```
+    Let's insert two more documents - this time NULL document.
 
-You can also use the external table approach to load the XML documents into your table. Here is the link for more info: [External table approach to load the data] (https://blogs.oracle.com/datawarehousing/post/loading-xml-data-from-your-object-store-into-autonomous-database)
+    ```
+    <copy>
+    INSERT INTO purchaseorder
+    VALUES      (4, NULL);
 
-If your XML documents are smaller, you can even use the ‘insert into’ statements to insert the docs into your table.
+    INSERT INTO purchaseorder
+    VALUES      (5, NULL);
 
-```
-<copy>
-INSERT INTO PURCHASEORDER VALUES (
-    3,
-    '<PurchaseOrder>
-                    <Reference>ROY-1PDT</Reference>
-                    <Requestor>H. Roy 1</Requestor>
-                    <User>ROY-1</User>
-                    <CostCenter>H1</CostCenter>
-                    <ShippingInstructions>
-                        <name>H. Roy 1</name>
-                        <Address>
-                            <street>1 Nil Rd, Building 1</street>
-                            <city>SFO-1</city>
-                            <state>CA</state>
-                            <zipCode>99236</zipCode>
-                            <country>USA</country>
-                        </Address>
-                    </ShippingInstructions>
-                    <SpecialInstructions>Overnight</SpecialInstructions>
-                    <LineItems>
-                        <LineItem ItemNumber="1">
-                            <Part Description="Monitor" UnitPrice="350">1</Part>
-                            <Quantity>1</Quantity>
-                        </LineItem>
-                        <LineItem ItemNumber="2">
-                            <Part Description="Headphone" UnitPrice="550">1</Part>
-                            <Quantity>1</Quantity>
-                        </LineItem>
-                        <LineItem ItemNumber="3">
-                            <Part Description="Speaker" UnitPrice="750">1</Part>
-                            <Quantity>1</Quantity>
-                        </LineItem>
-                    </LineItems>
-                </PurchaseOrder>'
-);
-</copy>
-```
+    COMMIT;  
+    </copy>
+    ```
 
-You can choose any of the above approaches to insert the XML documents into the table. 
+    ```
+    <copy>
+    -- Check if all docs are inserted correctly
+    SELECT
+        t.DOC.GETCLOBVAL()
+    FROM
+        PURCHASEORDER t;
+    </copy>
+    ```
 
-Let's insert two more documents - this time NULL document.
+    Now the table PURCHASEORDER table should have 5 rows.
 
-```
-<copy>
-INSERT INTO purchaseorder
-VALUES      (4, NULL);
+    ![Number of rows](./images/img-4.png)
 
-INSERT INTO purchaseorder
-VALUES      (5, NULL);
+4.	Check that we have rows in the table
 
-COMMIT;  
-</copy>
-```
+    Copy the following simple SELECT into the worksheet area and press "Run Statement".
 
-```
-<copy>
--- Check if all docs are inserted correctly
-SELECT
-    t.DOC.GETCLOBVAL()
-FROM
-    PURCHASEORDER t;
-</copy>
-```
+    ```
+    <copy>
+    SELECT
+        t.id,
+        t.doc.getclobval()
+    FROM
+        PURCHASEORDER t;
+    </copy>
+    ```
 
-Now the table PURCHASEORDER table should have 5 rows.
+    You should see the rows you inserted. You can expand the view to see the whole text 
+    column by adjusting the column header. 
 
-![Number of rows](images/img-4.png)
+    ![Inserted documents](./images/img-5.png)
 
-4.	Check that we have rows in the table. 
-
-Copy the following simple SELECT into the worksheet area and press "Run Statement".
-
-```
-<copy>
-SELECT
-    t.id,
-    t.doc.getclobval()
-FROM
-    PURCHASEORDER t;
-</copy>
-```
-
-You should see the rows you inserted. You can expand the view to see the whole text 
-column by adjusting the column header. 
-
-![Inserted documents](images/img-5.png)
-
-If there are no rows shown, return to Step 3.
+    If there are no rows shown, return to Step 3.
 
 You may now **proceed to the next lab**.
 

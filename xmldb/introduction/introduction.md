@@ -1,12 +1,12 @@
 # Introduction
 
-## About this Workshop
+## About This Workshop
 
 In this workshop, we will discuss some of the basic capabilities of Oracle XML DB. After the workshop, the users will be able to understand how to store XML data in Oracle DB and how to access and manipulate them. 
 
-Estimated Time: 10 minutes
+Estimated Workshop Time: 3 hours, 30 minutes
 
-## What is XML?
+## What Is XML?
 
 XML is a human-readable, machine-readable, and self-describing format to represent data in a hierarchical format. Here is an example of an XML document containing information on a purchase order. 
 
@@ -52,11 +52,11 @@ XML is a human-readable, machine-readable, and self-describing format to represe
 </copy>
 ```
 
-## Why do we need to manage XML documents?
+## Why Do We Need To Manage XML Documents?
 
 XML is one of the popular ways to persist and exchange business-critical information. XML is an open standard, managed by the W3C, and under the control of no single vendor. Many industry segments have developed XML-based standards for representing information. These standards are typically based on XML Schema, a W3C-developed standard for defining the expected contents of a given XML File. XML-based standards can be found in healthcare, financial services, manufacturing, publishing, law enforcement, and the public sector. XML also provides the foundation for SOAP-based application development. In a growing number of situations, government regulation mandates the use of such standards when exchanging information. These trends have led to massive increases in the volume of XML that an organization needs to deal with and forced organizations to adopt XML platforms that manage XML with a similar degree of rigor and security to operational data.
 
-## What does Oracle XML DB offer?
+## What Does Oracle XML DB Offer?
 To meet this need, Oracle developed Oracle XML DB. Oracle XML DB is a high-performance, native XML storage, and retrieval technology that is delivered as a part of Oracle Database. Oracle XML DB allows an organization to manage XML content in the same way that it manages traditional relational data. This allows organizations to save costs and improve return on investment by using a single platform to manage and secure all their mission-critical data. Oracle XML DB was first released with Oracle 9iR2, and it has been enhanced in each subsequent major release of the database.
 
 
@@ -80,12 +80,12 @@ You may now **proceed to the next lab**.
 - [Database 19c - JSON] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=638)
 - [Developing with JSON and SODA in Oracle Database] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=831)
 - [JSON without Limits] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=836)
-- [Using the Database API for MongoDB] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3152)
+- [Use the Database API for MongoDB] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3152)
 - [Database API for MongoDB - The Basics] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3221)
 - [Full-Text Search in Oracle Database] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3286)
 - [Autonomous Database Dedicated](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=677)
 - [Manage and Monitor Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=553)
-- [Scaling and Performance in the Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=608)
+- [Scale and Performance in the Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=608)
 
 
 ## Acknowledgements

@@ -75,446 +75,454 @@ Database Actions allows you to connect to your Autonomous Database through vario
 
 ## Task 4: Queries
 
-### Q1. Getting the number of not-null XML documents
-Let’s first see how many not-null XML documents we have. The ‘where’ clause in the following statement filters the not-null documents.
- 
-Copy the following simple SELECT into the worksheet area and press "Run Statement".
-
-```
-<copy>
-SELECT
-    COUNT(*)
-FROM
-    PURCHASEORDER
-WHERE
-    DOC IS NOT NULL;
-</copy>
-``` 
-
-![Number of not-null documents](images/img-1.png)
-
-### Q2. Searching for the specific XML documents
-If we want to search for specific XML documents, we can use XMLExists SQL/XML function in the where clause. Based on the XQuery expression provided in the XMLExists function, it will filter out the XML documents we are looking for.
-
-This query will return the XML documents which satisfy the XPath /PurchaseOrder/Reference.
-
-```
-<copy>
-SELECT
-    P.DOC.GETCLOBVAL() XMLDOC
-FROM
-    PURCHASEORDER P
-WHERE
-    XMLEXISTS ( '/PurchaseOrder/Reference'
-        PASSING P.DOC
-    );
-</copy>
-``` 
-
-Copy the above statement into the worksheet area and press "Run Statement".
-
-![Documents satisfying the XPath](images/img-2.png)
- 
-
-The next query is even more specific, and it will return the XML documents where XPath /PurchaseOrder/Reference has 'ROY-1PDT' as the value.
-
-```
-<copy>
-SELECT
-    P.DOC.GETCLOBVAL() XMLDOC
-FROM
-    PURCHASEORDER P
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-1PDT"]'
-        PASSING P.DOC AS "p"
-    );
-</copy>
-``` 
-
-Copy the above statement into the worksheet area and press "Run Statement".
-
-![Documents satisfying the XPath and predicate](images/img-3.png)
-
-
-```
-<copy>
--- You can also use a bind variable to pass a value
-SELECT
-    P.DOC.GETCLOBVAL() XMLDOC
-FROM
-    PURCHASEORDER P
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference=$REF]'
-        PASSING P.DOC AS "p",
-        'ROY-1PDT' AS "REF"
-    );
-</copy>
-``` 
-
-Copy the above statement into the worksheet area and press "Run Statement".
- 
-![Documents satisfying the XPath and a bind predicate](images/img-4.png)
-
-
-### Q3. Accessing fragments or nodes of the XML documents
-In Q2, we get the specific XML documents. Now let's access the XMl fragments or nodes of those returned documents. To do that, we will use XMLQuery and pass an XQuery expression to XMLQuery to get the fragments or nodes we are looking for.
-
-The ‘where’ clause of this query will filter the documents that we are looking for and the XMLQuery will extract the fragments/nodes from those filtered XML documents. 
-
-```
-<copy>
-SELECT
-    XMLQUERY('/PurchaseOrder/ShippingInstructions'
-        PASSING P.DOC
-    RETURNING CONTENT).GETCLOBVAL() XMLNODE
-FROM
-    PURCHASEORDER P
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-1PDT"]'
-        PASSING P.DOC AS "p"
-    );
-</copy>
-``` 
-
-Copy the above statement into the worksheet area and press "Run Statement".
- 
-![Fragments satisfying the XPath and predicate](images/img-5.png)
-
-
-### Q4. Extracting the scalar value from XML fragments or nodes
-In Q2, we filter out some XML documents and then access the fragments or nodes of those documents in Q3. Now let's extract the scalar value of those fragments or nodes. To do that, we can use XMLCast to map the XQuery result to a SQL type.
-
-This query will return the scalar value of the ‘name’ node in ‘ShippingInstructions’ of the documents having 'ROY-1PDT' as the Reference value.
-
-```
-<copy>
-SELECT
-    XMLCAST(XMLQUERY('/PurchaseOrder/ShippingInstructions/name'
-        PASSING P.DOC
-    RETURNING CONTENT) AS VARCHAR2(50)) XMLNODE
-FROM
-    PURCHASEORDER P
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-1PDT"]'
-        PASSING P.DOC AS "p"
-    );
-</copy>
-``` 
-
-Copy the above statement into the worksheet area and press "Run Statement".
- 
-![Value of the fragments satisfying the XPath and predicate](images/img-6.png)
-
-
-You can also use the text() function for the same.
-
-```
-<copy>
-SELECT
-    XMLQUERY('/PurchaseOrder/ShippingInstructions/name/text()'
-        PASSING P.DOC
-    RETURNING CONTENT).GETCLOBVAL() XMLNODE_VAL
-FROM
-    PURCHASEORDER P
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-1PDT"]'
-        PASSING P.DOC AS "p"
-    );
-</copy>
-``` 
-
-Copy the above statement into the worksheet area and press "Run Statement".
-
-![XMLCAST alternative](images/img-7.png)
-
-
-### Q5. Generating relation data from XML data
-To decompose the result of an XQuery expression’s evaluation into the relational rows and columns of a new, virtual table, we will use XMLTable. We can insert this data into a relational table, or we can query it using SQL depending on the use cases.
-
-In Q3, we get the ShippingInstructions as an XML fragment. The following statement will give us the same fragment as a relational table.
-
-```
-<copy>
-SELECT
-    SI.*
-FROM
-    PURCHASEORDER P,
-    XMLTABLE ( '/PurchaseOrder/ShippingInstructions'
-            PASSING P.DOC
-        COLUMNS
-            NAME VARCHAR2(15) PATH 'name',
-            STREET VARCHAR2(30) PATH 'Address/street',
-            CITY VARCHAR2(15) PATH 'Address/city',
-            STATE VARCHAR2(10) PATH 'Address/state',
-            ZIPCODE VARCHAR2(10) PATH 'Address/zipCode',
-            COUNTRY VARCHAR2(30) PATH 'Address/country',
-            TELEPHONE VARCHAR2(15) PATH 'telephone'
-    )             SI
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-1PDT"]'
-        PASSING P.DOC AS "p"
-    );
-</copy>
-``` 
-
-Copy the above statement into the worksheet area and press "Run Statement".
- 
-![XML data to relational data](images/img-8.png)
-
-
-Furthermore, we can chain the XMLTable calls when we want to see data contained in multiple levels. For example, in the following example, the element PurchaseOrder is first decomposed to a relational view of two columns, reference as varchar2 and lineitem as XMLType. The lineitem column is then passed to a second XMLTable call to be broken into its various parts as multiple columns of relational values.
-
-```
-<copy>
-SELECT
-    PO.REFERENCE,
-    LI.*
-FROM
-    PURCHASEORDER P,
-    XMLTABLE ( '/PurchaseOrder'
-            PASSING P.DOC
-        COLUMNS
-            REFERENCE VARCHAR2(30) PATH 'Reference',
-            LINEITEM XMLTYPE PATH 'LineItems/LineItem'
-    )             PO,
-    XMLTABLE ( '/LineItem'
-            PASSING PO.LINEITEM
-        COLUMNS
-            ITEMNO NUMBER(3) PATH '@ItemNumber',
-            PARTNO NUMBER(3) PATH 'Part',
-            DESCRIPTION VARCHAR2(25) PATH 'Part/@Description',
-            UNITPRICE NUMBER(8, 4) PATH 'Part/@UnitPrice',
-            QUANTITY NUMBER(12, 2) PATH 'Quantity'
-    )             LI
-WHERE
-    XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-1PDT"]'
-        PASSING P.DOC AS "p"
-    );
-</copy>
-``` 
-
-Copy the above statement into the worksheet area and press "Run Statement".
- 
-![XMLTABLE chain](images/img-9.png)
-
-
-In the above examples, we have used very simple XQuery expression, and XPath expression, and passed them to the XMLTable function. However, users can pass any XQuery expression they want. In the following queries, we will use a little bit of complex XQuery just for demonstration purposes.
+1. Get the number of not-null XML documents
     
-```
-<copy>
-SELECT
-    T.OBJECT_VALUE.GETCLOBVAL()
-FROM
-    PURCHASEORDER P,
-    XMLTABLE ( 'for $r in /PurchaseOrder[Reference/text()=$REF] return $r'
-        PASSING P.DOC,
-        'ROY-3PDT' AS "REF"
-    )   T;
-</copy>
-``` 
+    Let’s first see how many not-null XML documents we have. The ‘where’ clause in the following statement filters the not-null documents.
+    
+    Copy the following simple SELECT into the worksheet area and press "Run Statement".
 
-Copy the above statement into the worksheet area and press "Run Statement".
- 
-![Complex xquery inside XMLTABLE](images/img-10.png)
+    ```
+    <copy>
+    SELECT
+        COUNT(*)
+    FROM
+        PURCHASEORDER
+    WHERE
+        DOC IS NOT NULL;
+    </copy>
+    ``` 
 
+    ![Number of not-null documents](./images/img-1.png)
 
-Similarly, we can have multiple predicates as follows:
+2. Search for the specific XML documents
 
-```
-<copy>
-SELECT
-    T.OBJECT_VALUE.GETCLOBVAL()
-FROM
-    PURCHASEORDER P,
-    XMLTABLE ( 'for $r in /PurchaseOrder[CostCenter=$CC or Requestor=$REQUESTOR or count(LineItems/LineItem) > $QUANTITY]/Reference return $r'
-        PASSING P.DOC,
-        'H1' AS "CC",
-        'H. Roy 1' AS "REQUESTOR",
-        1 AS "QUANTITY"
-    )   T;
-</copy>
-``` 
+    If we want to search for specific XML documents, we can use XMLExists SQL/XML function in the where clause. Based on the XQuery expression provided in the XMLExists function, it will filter out the XML documents we are looking for.
 
-Copy the above statement into the worksheet area and press "Run Statement".
- 
-![XQuery with multiple bind variables](images/img-11.png)
+    This query will return the XML documents which satisfy the XPath /PurchaseOrder/Reference.
 
+    ```
+    <copy>
+    SELECT
+        P.DOC.GETCLOBVAL() XMLDOC
+    FROM
+        PURCHASEORDER P
+    WHERE
+        XMLEXISTS ( '/PurchaseOrder/Reference'
+            PASSING P.DOC
+        );
+    </copy>
+    ``` 
 
-### Q6. Joining relational tables with XML tables/columns
-In Q5, we saw that we can join XMLTable calls. Here, we will show that you can join relational tables with XMLTable as well.
+    Copy the above statement into the worksheet area and press "Run Statement".
 
-Let’s first create a simple relational table, EMP, and then insert a few rows.
+    ![Documents satisfying the XPath](./images/img-2.png)
+    
 
-```
-<copy>
-CREATE TABLE EMP (
-    ID   NUMBER,
-    NAME VARCHAR(20)
-);
+    The next query is even more specific, and it will return the XML documents where XPath /PurchaseOrder/Reference has 'ROY-1PDT' as the value.
 
-insert into emp values(1, 'H. Roy 1');
-insert into emp values(2, 'H. Roy 2');
-insert into emp values(3, 'H. Roy 3');
+    ```
+    <copy>
+    SELECT
+        P.DOC.GETCLOBVAL() XMLDOC
+    FROM
+        PURCHASEORDER P
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-1PDT"]'
+            PASSING P.DOC AS "p"
+        );
+    </copy>
+    ``` 
 
-COMMIT;
-</copy>
-``` 
+    Copy the above statement into the worksheet area and press "Run Statement".
 
-Copy the above statement into the worksheet area and press "Run Statement".
-
-![EMP relational table](images/img-12.png)
- 
-
-```
-<copy>
-SELECT
-    *
-FROM
-    EMP;
-</copy>
-``` 
-
-Copy the above statement into the worksheet area and press "Run Statement".
-
-![EMP table entries](images/img-13.png)
+    ![Documents satisfying the XPath and predicate](./images/img-3.png)
 
 
-```
-<copy>
-SELECT
-    E.ID,
-    T.*
-FROM
-    EMP           E,
-    PURCHASEORDER P,
-    XMLTABLE ( 'for $r in /PurchaseOrder where $r/Reference=$REFERENCE return $r'
+    ```
+    <copy>
+    -- You can also use a bind variable to pass a value
+    SELECT
+        P.DOC.GETCLOBVAL() XMLDOC
+    FROM
+        PURCHASEORDER P
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference=$REF]'
+            PASSING P.DOC AS "p",
+            'ROY-1PDT' AS "REF"
+        );
+    </copy>
+    ``` 
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+    
+    ![Documents satisfying the XPath and a bind predicate](./images/img-4.png)
+
+
+3. Access fragments or nodes of the XML documents
+
+    In Q2, we get the specific XML documents. Now let's access the XMl fragments or nodes of those returned documents. To do that, we will use XMLQuery and pass an XQuery expression to XMLQuery to get the fragments or nodes we are looking for.
+
+    The ‘where’ clause of this query will filter the documents that we are looking for and the XMLQuery will extract the fragments/nodes from those filtered XML documents. 
+
+    ```
+    <copy>
+    SELECT
+        XMLQUERY('/PurchaseOrder/ShippingInstructions'
+            PASSING P.DOC
+        RETURNING CONTENT).GETCLOBVAL() XMLNODE
+    FROM
+        PURCHASEORDER P
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-1PDT"]'
+            PASSING P.DOC AS "p"
+        );
+    </copy>
+    ``` 
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+    
+    ![Fragments satisfying the XPath and predicate](./images/img-5.png)
+
+
+4. Extract the scalar value from XML fragments or nodes
+
+    In Q2, we filter out some XML documents and then access the fragments or nodes of those documents in Q3. Now let's extract the scalar value of those fragments or nodes. To do that, we can use XMLCast to map the XQuery result to a SQL type.
+
+    This query will return the scalar value of the ‘name’ node in ‘ShippingInstructions’ of the documents having 'ROY-1PDT' as the Reference value.
+
+    ```
+    <copy>
+    SELECT
+        XMLCAST(XMLQUERY('/PurchaseOrder/ShippingInstructions/name'
+            PASSING P.DOC
+        RETURNING CONTENT) AS VARCHAR2(50)) XMLNODE
+    FROM
+        PURCHASEORDER P
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-1PDT"]'
+            PASSING P.DOC AS "p"
+        );
+    </copy>
+    ``` 
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+    
+    ![Value of the fragments satisfying the XPath and predicate](./images/img-6.png)
+
+
+    You can also use the text() function for the same.
+
+    ```
+    <copy>
+    SELECT
+        XMLQUERY('/PurchaseOrder/ShippingInstructions/name/text()'
+            PASSING P.DOC
+        RETURNING CONTENT).GETCLOBVAL() XMLNODE_VAL
+    FROM
+        PURCHASEORDER P
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-1PDT"]'
+            PASSING P.DOC AS "p"
+        );
+    </copy>
+    ``` 
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+
+    ![XMLCAST alternative](./images/img-7.png)
+
+
+5. Generate relation data from XML data
+
+    To decompose the result of an XQuery expression’s evaluation into the relational rows and columns of a new, virtual table, we will use XMLTable. We can insert this data into a relational table, or we can query it using SQL depending on the use cases.
+
+    In Q3, we get the ShippingInstructions as an XML fragment. The following statement will give us the same fragment as a relational table.
+
+    ```
+    <copy>
+    SELECT
+        SI.*
+    FROM
+        PURCHASEORDER P,
+        XMLTABLE ( '/PurchaseOrder/ShippingInstructions'
+                PASSING P.DOC
+            COLUMNS
+                NAME VARCHAR2(15) PATH 'name',
+                STREET VARCHAR2(30) PATH 'Address/street',
+                CITY VARCHAR2(15) PATH 'Address/city',
+                STATE VARCHAR2(10) PATH 'Address/state',
+                ZIPCODE VARCHAR2(10) PATH 'Address/zipCode',
+                COUNTRY VARCHAR2(30) PATH 'Address/country',
+                TELEPHONE VARCHAR2(15) PATH 'telephone'
+        )             SI
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-1PDT"]'
+            PASSING P.DOC AS "p"
+        );
+    </copy>
+    ``` 
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+    
+    ![XML data to relational data](./images/img-8.png)
+
+
+    Furthermore, we can chain the XMLTable calls when we want to see data contained in multiple levels. For example, in the following example, the element PurchaseOrder is first decomposed to a relational view of two columns, reference as varchar2 and lineitem as XMLType. The lineitem column is then passed to a second XMLTable call to be broken into its various parts as multiple columns of relational values.
+
+    ```
+    <copy>
+    SELECT
+        PO.REFERENCE,
+        LI.*
+    FROM
+        PURCHASEORDER P,
+        XMLTABLE ( '/PurchaseOrder'
+                PASSING P.DOC
+            COLUMNS
+                REFERENCE VARCHAR2(30) PATH 'Reference',
+                LINEITEM XMLTYPE PATH 'LineItems/LineItem'
+        )             PO,
+        XMLTABLE ( '/LineItem'
+                PASSING PO.LINEITEM
+            COLUMNS
+                ITEMNO NUMBER(3) PATH '@ItemNumber',
+                PARTNO NUMBER(3) PATH 'Part',
+                DESCRIPTION VARCHAR2(25) PATH 'Part/@Description',
+                UNITPRICE NUMBER(8, 4) PATH 'Part/@UnitPrice',
+                QUANTITY NUMBER(12, 2) PATH 'Quantity'
+        )             LI
+    WHERE
+        XMLEXISTS ( '$p/PurchaseOrder[Reference="ROY-1PDT"]'
+            PASSING P.DOC AS "p"
+        );
+    </copy>
+    ``` 
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+    
+    ![XMLTABLE chain](./images/img-9.png)
+
+
+    In the above examples, we have used very simple XQuery expression, and XPath expression, and passed them to the XMLTable function. However, users can pass any XQuery expression they want. In the following queries, we will use a little bit of complex XQuery just for demonstration purposes.
+        
+    ```
+    <copy>
+    SELECT
+        T.OBJECT_VALUE.GETCLOBVAL()
+    FROM
+        PURCHASEORDER P,
+        XMLTABLE ( 'for $r in /PurchaseOrder[Reference/text()=$REF] return $r'
             PASSING P.DOC,
-            'ROY-1PDT' AS "REFERENCE"
-        COLUMNS
-            REQUESTOR PATH 'Requestor/text()',
-            INSTRUCTIONS PATH 'SpecialInstructions/text()'
-    )             T
-WHERE
-        E.NAME = T.REQUESTOR
-    AND ROWNUM <= 5;
-</copy>
-``` 
+            'ROY-3PDT' AS "REF"
+        )   T;
+    </copy>
+    ``` 
 
-Copy the above statement into the worksheet area and press "Run Statement".
- 
-![Joining XMLTABLE and EMP, a relational table](images/img-14.png)
+    Copy the above statement into the worksheet area and press "Run Statement".
+    
+    ![Complex xquery inside XMLTABLE](./images/img-10.png)
 
 
-In the above query, we have used the similar XMLTABLE query described in Q5 to keep it simple. Feel free to use other XMLTABLE queries and try different things.
+    Similarly, we can have multiple predicates as follows:
 
-### Q7. Constructing a new response document
-Let’s assume we have some purchase order XML documents containing detailed purchase information. We want to generate a new and smaller XML document containing only the required information as a response to an application request. The following query just does that:
+    ```
+    <copy>
+    SELECT
+        T.OBJECT_VALUE.GETCLOBVAL()
+    FROM
+        PURCHASEORDER P,
+        XMLTABLE ( 'for $r in /PurchaseOrder[CostCenter=$CC or Requestor=$REQUESTOR or count(LineItems/LineItem) > $QUANTITY]/Reference return $r'
+            PASSING P.DOC,
+            'H1' AS "CC",
+            'H. Roy 1' AS "REQUESTOR",
+            1 AS "QUANTITY"
+        )   T;
+    </copy>
+    ``` 
 
-```
-<copy>
-SELECT
-    XMLQUERY('<Response>{
-            $XML/PurchaseOrder/Reference,
-            $XML/PurchaseOrder/User,
-            $XML/PurchaseOrder/SpecialInstructions
-          }
-          </Response>'
-        PASSING P.DOC AS "XML"
-    RETURNING CONTENT).GETCLOBVAL() INITIAL_STATE
-FROM
-    PURCHASEORDER P
-WHERE
-    P.DOC IS NOT NULL;
-</copy>
-``` 
-
-Copy the above statement into the worksheet area and press "Run Statement".
- 
-![Customized XML fragment](images/img-15.png)
+    Copy the above statement into the worksheet area and press "Run Statement".
+    
+    ![XQuery with multiple bind variables](./images/img-11.png)
 
 
-The following query will do just the same.
+6. Join relational tables with XML tables/columns
 
-```
-<copy>
-SELECT
-    T.OBJECT_VALUE.GETCLOBVAL()
-FROM
-    PURCHASEORDER P,
-    XMLTABLE ( 'for $r in /PurchaseOrder
-          return 
-            <Response> 
-                { 
-                  $r/Reference, 
-                  $r/User, 
-                  $r/SpecialInstructions
-                }
-             </Response>'
-        PASSING P.DOC
-    )             T
-WHERE
-    P.DOC IS NOT NULL;
-</copy>
-``` 
+    In Q5, we saw that we can join XMLTable calls. Here, we will show that you can join relational tables with XMLTable as well.
 
-Copy the above statement into the worksheet area and press "Run Statement".
- 
-![Customized XML fragment](images/img-16.png)
+    Let’s first create a simple relational table, EMP, and then insert a few rows.
 
+    ```
+    <copy>
+    CREATE TABLE EMP (
+        ID   NUMBER,
+        NAME VARCHAR(20)
+    );
 
-### Q8. Serialize XML data 
-Now consider you have an application or product that does not support XMLType data. In that case, you can serialize the XML data as CLOB or BLOB and view or process it in your application or product. Oracle XML DB provides an XMLSerialize function to achieve this goal. XMLSerialize also allows control over the layout of the serialized XML:
+    insert into emp values(1, 'H. Roy 1');
+    insert into emp values(2, 'H. Roy 2');
+    insert into emp values(3, 'H. Roy 3');
 
-Here we are using the same Q7 queries inside the XMLSERIALIZE function.
+    COMMIT;
+    </copy>
+    ``` 
 
-```
-<copy>
-SELECT
-    XMLSERIALIZE(CONTENT XMLQUERY('<Response>{
-            $XML/PurchaseOrder/Reference,
-            $XML/PurchaseOrder/User,
-            $XML/PurchaseOrder/SpecialInstructions
-          }
-          </Response>'
-        PASSING P.DOC AS "XML"
-    RETURNING CONTENT) AS CLOB INDENT SIZE = 2) XMLCONTENT
-FROM
-    PURCHASEORDER P
-WHERE
-    P.DOC IS NOT NULL;
-</copy>
-``` 
+    Copy the above statement into the worksheet area and press "Run Statement".
 
-Copy the above statement into the worksheet area and press "Run Statement".
- 
-![Serialize XML data](images/img-17.png)
+    ![EMP relational table](./images/img-12.png)
+    
+
+    ```
+    <copy>
+    SELECT
+        *
+    FROM
+        EMP;
+    </copy>
+    ``` 
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+
+    ![EMP table entries](./images/img-13.png)
 
 
-```
-<copy>
-SELECT
-    XMLSERIALIZE(CONTENT COLUMN_VALUE AS CLOB INDENT SIZE = 2) XMLCONTENT
-FROM
-    PURCHASEORDER P,
-    XMLTABLE ( 'for $r in /PurchaseOrder
-          return 
-            <Response> 
-                { 
-                  $r/Reference, 
-                  $r/User, 
-                  $r/SpecialInstructions
-                }
-             </Response>'
-        PASSING P.DOC
-    )             T
-WHERE
-    P.DOC IS NOT NULL;
-</copy>
-``` 
+    ```
+    <copy>
+    SELECT
+        E.ID,
+        T.*
+    FROM
+        EMP           E,
+        PURCHASEORDER P,
+        XMLTABLE ( 'for $r in /PurchaseOrder where $r/Reference=$REFERENCE return $r'
+                PASSING P.DOC,
+                'ROY-1PDT' AS "REFERENCE"
+            COLUMNS
+                REQUESTOR PATH 'Requestor/text()',
+                INSTRUCTIONS PATH 'SpecialInstructions/text()'
+        )             T
+    WHERE
+            E.NAME = T.REQUESTOR
+        AND ROWNUM <= 5;
+    </copy>
+    ``` 
 
-Copy the above statement into the worksheet area and press "Run Statement".
- 
-![Serialize XML data](images/img-18.png)
+    Copy the above statement into the worksheet area and press "Run Statement".
+    
+    ![Joining XMLTABLE and EMP, a relational table](./images/img-14.png)
+
+
+    In the above query, we have used the similar XMLTABLE query described in Q5 to keep it simple. Feel free to use other XMLTABLE queries and try different things.
+
+7. Construct a new response document
+
+    Let’s assume we have some purchase order XML documents containing detailed purchase information. We want to generate a new and smaller XML document containing only the required information as a response to an application request. The following query just does that:
+
+    ```
+    <copy>
+    SELECT
+        XMLQUERY('<Response>{
+                $XML/PurchaseOrder/Reference,
+                $XML/PurchaseOrder/User,
+                $XML/PurchaseOrder/SpecialInstructions
+            }
+            </Response>'
+            PASSING P.DOC AS "XML"
+        RETURNING CONTENT).GETCLOBVAL() INITIAL_STATE
+    FROM
+        PURCHASEORDER P
+    WHERE
+        P.DOC IS NOT NULL;
+    </copy>
+    ``` 
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+    
+    ![Customized XML fragment](./images/img-15.png)
+
+
+    The following query will do just the same.
+
+    ```
+    <copy>
+    SELECT
+        T.OBJECT_VALUE.GETCLOBVAL()
+    FROM
+        PURCHASEORDER P,
+        XMLTABLE ( 'for $r in /PurchaseOrder
+            return 
+                <Response> 
+                    { 
+                    $r/Reference, 
+                    $r/User, 
+                    $r/SpecialInstructions
+                    }
+                </Response>'
+            PASSING P.DOC
+        )             T
+    WHERE
+        P.DOC IS NOT NULL;
+    </copy>
+    ``` 
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+    
+    ![Customized XML fragment](./images/img-16.png)
+
+
+8. Serialize XML data 
+
+    Now consider you have an application or product that does not support XMLType data. In that case, you can serialize the XML data as CLOB or BLOB and view or process it in your application or product. Oracle XML DB provides an XMLSerialize function to achieve this goal. XMLSerialize also allows control over the layout of the serialized XML:
+
+    Here we are using the same Q7 queries inside the XMLSERIALIZE function.
+
+    ```
+    <copy>
+    SELECT
+        XMLSERIALIZE(CONTENT XMLQUERY('<Response>{
+                $XML/PurchaseOrder/Reference,
+                $XML/PurchaseOrder/User,
+                $XML/PurchaseOrder/SpecialInstructions
+            }
+            </Response>'
+            PASSING P.DOC AS "XML"
+        RETURNING CONTENT) AS CLOB INDENT SIZE = 2) XMLCONTENT
+    FROM
+        PURCHASEORDER P
+    WHERE
+        P.DOC IS NOT NULL;
+    </copy>
+    ``` 
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+    
+    ![Serialize XML data](./images/img-17.png)
+
+
+    ```
+    <copy>
+    SELECT
+        XMLSERIALIZE(CONTENT COLUMN_VALUE AS CLOB INDENT SIZE = 2) XMLCONTENT
+    FROM
+        PURCHASEORDER P,
+        XMLTABLE ( 'for $r in /PurchaseOrder
+            return 
+                <Response> 
+                    { 
+                    $r/Reference, 
+                    $r/User, 
+                    $r/SpecialInstructions
+                    }
+                </Response>'
+            PASSING P.DOC
+        )             T
+    WHERE
+        P.DOC IS NOT NULL;
+    </copy>
+    ``` 
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+    
+    ![Serialize XML data](./images/img-18.png)
 
 You may now **proceed to the next lab**.
 

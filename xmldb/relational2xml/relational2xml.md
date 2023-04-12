@@ -32,7 +32,7 @@ Note: Avoid the use of the ManagedCompartmentforPaaS compartment as this is an O
 Database Actions allows you to connect to your Autonomous Database through various browser-based tools. We will just be using the SQL workshop tool.
 9. You should be in the Database Actions panel. Click on the SQL card
 
-## Task 3: Creating XMLType views 
+## Task 3: Create XMLType Views 
 We have learned how to generate relational data from XML content in Lab 4. In this lab, we will do just the opposite. We will generate XML content from relational data. In many ways, it will be useful. Just for example, you can send data from relational tables as a response to an application’s request in XML format. Let’s see how to achieve that.
 
 First, we will create two relational tables and then populate them with some sample data.
@@ -46,12 +46,12 @@ CREATE TABLE DEPARTMENTS (
     MANAGER_ID      NUMBER(6),
     LOCATION_ID     NUMBER(4)
 );
-```
 </copy>
+```
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![DEPARTMENTS table](images/img-1.png)
+![DEPARTMENTS table](./images/img-1.png)
  
 
 Table locations:
@@ -65,12 +65,12 @@ CREATE TABLE LOCATIONS (
     STATE_PROVINCE VARCHAR2(25),
     COUNTRY_ID     CHAR(2)
 );
-```
 </copy>
+```
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![LOCATIONS table](images/img-2.png)
+![LOCATIONS table](./images/img-2.png)
 
 
 ```
@@ -88,153 +88,155 @@ insert into locations values (1400, '1294 Abc', '94061', 'Redwood City', 'CA', '
 insert into locations values (1500, '1295 Abc', '94061', 'Redwood City', 'CA', 'US');
 
 commit;
-```
 </copy>
+```
 
 Copy the above statement into the worksheet area and press "Run Statement".
 
-![Populate and DEPARTMENTS LOCATIONS](images/img-3.png)
+![Populate and DEPARTMENTS LOCATIONS](./images/img-3.png)
 
  
 
-### QXR1. Generating XML data
-This query will transform relational data into XML data.
+1. Generate XML data
 
-```
-<copy>
-SELECT
-    XMLELEMENT(
-        "Department",
-        XMLATTRIBUTES(
-            D.DEPARTMENT_ID AS "DepartmentId"
-        ),
+    This query will transform relational data into XML data.
+
+    ```
+    <copy>
+    SELECT
         XMLELEMENT(
-            "Name",
-            D.DEPARTMENT_NAME
-        ),
-        XMLELEMENT(
-            "Location",
-            XMLFOREST(STREET_ADDRESS AS "Address",
-            CITY AS "City",
-            STATE_PROVINCE AS "State",
-            POSTAL_CODE AS "Zip",
-            COUNTRY_ID AS "Country")
-        )
-    ).GETCLOBVAL()
-FROM
-    DEPARTMENTS D,
-    LOCATIONS   L
-WHERE
-    D.LOCATION_ID = L.LOCATION_ID;
-```
-</copy>
+            "Department",
+            XMLATTRIBUTES(
+                D.DEPARTMENT_ID AS "DepartmentId"
+            ),
+            XMLELEMENT(
+                "Name",
+                D.DEPARTMENT_NAME
+            ),
+            XMLELEMENT(
+                "Location",
+                XMLFOREST(STREET_ADDRESS AS "Address",
+                CITY AS "City",
+                STATE_PROVINCE AS "State",
+                POSTAL_CODE AS "Zip",
+                COUNTRY_ID AS "Country")
+            )
+        ).GETCLOBVAL()
+    FROM
+        DEPARTMENTS D,
+        LOCATIONS   L
+    WHERE
+        D.LOCATION_ID = L.LOCATION_ID;
+    </copy>
+    ```
 
-Copy the above statement into the worksheet area and press "Run Statement".
+    Copy the above statement into the worksheet area and press "Run Statement".
 
-![XML data from relational data](images/img-4.png)
+    ![XML data from relational data](./images/img-4.png)
 
- 
-
-### QXR2. Creating XMLType views
-Now we will create a persistent XMLType view and then run XQuery over it.
-
-```
-<copy>
-CREATE OR REPLACE VIEW V_DEPARTMENTS_XML OF XMLTYPE 
-WITH OBJECT ID 
-( 
-    XMLCAST(XMLQUERY('/Department/Name' PASSING OBJECT_VALUE
-    RETURNING CONTENT) AS VARCHAR2(30)) 
-) 
-AS
-SELECT
-    XMLELEMENT(
-        "Department",
-        XMLATTRIBUTES(
-            D.DEPARTMENT_ID AS "DepartmentId"
-        ),
-        XMLELEMENT(
-            "Name",
-            D.DEPARTMENT_NAME
-        ),
-        XMLELEMENT(
-            "Location",
-            XMLFOREST(STREET_ADDRESS AS "Address",
-            CITY AS "City",
-            STATE_PROVINCE AS "State",
-            POSTAL_CODE AS "Zip",
-            COUNTRY_ID AS "Country"))
-    )
-FROM
-    DEPARTMENTS D,
-    LOCATIONS   L
-WHERE
-    D.LOCATION_ID = L.LOCATION_ID;
-```
-</copy>
-
-Copy the above statement into the worksheet area and press "Run Statement".
-
-![XMLType view](images/img-5.png)
-
- 
-
-```
-<copy>
-SELECT
-    V.OBJECT_VALUE.GETCLOBVAL()
-FROM
-    V_DEPARTMENTS_XML V;
-
-```
-</copy>
-
-Copy the above statement into the worksheet area and press "Run Statement".
-
-![XMLType view content](images/img-6.png)
- 
-
-### QXR3. Querying Over XMLType Views
     
-Let's find a department named "Administration".
 
-```
-<copy>
-SELECT
-    T.GETCLOBVAL()
-FROM
-    V_DEPARTMENTS_XML D,
-    XMLTABLE ( 'for $r in /Department[Name="Administration"]
-                return $r'
-        PASSING OBJECT_VALUE
-    )  T;
-```
-</copy>
+2. Create XMLType views
+    
+    Now we will create a persistent XMLType view and then run XQuery over it.
 
-Copy the above statement into the worksheet area and press "Run Statement".
+    ```
+    <copy>
+    CREATE OR REPLACE VIEW V_DEPARTMENTS_XML OF XMLTYPE 
+    WITH OBJECT ID 
+    ( 
+        XMLCAST(XMLQUERY('/Department/Name' PASSING OBJECT_VALUE
+        RETURNING CONTENT) AS VARCHAR2(30)) 
+    ) 
+    AS
+    SELECT
+        XMLELEMENT(
+            "Department",
+            XMLATTRIBUTES(
+                D.DEPARTMENT_ID AS "DepartmentId"
+            ),
+            XMLELEMENT(
+                "Name",
+                D.DEPARTMENT_NAME
+            ),
+            XMLELEMENT(
+                "Location",
+                XMLFOREST(STREET_ADDRESS AS "Address",
+                CITY AS "City",
+                STATE_PROVINCE AS "State",
+                POSTAL_CODE AS "Zip",
+                COUNTRY_ID AS "Country"))
+        )
+    FROM
+        DEPARTMENTS D,
+        LOCATIONS   L
+    WHERE
+        D.LOCATION_ID = L.LOCATION_ID;
+    </copy>
+    ```
 
-![Administration department](images/img-7.png)
+    Copy the above statement into the worksheet area and press "Run Statement".
 
- 
+    ![XMLType view](./images/img-5.png)
 
-Or let’s find the location of the Marketing department.
+    
 
-```
-<copy>
-SELECT
-    T.GETCLOBVAL()
-FROM
-    V_DEPARTMENTS_XML D,
-    XMLTABLE ( 'for $r in /Department[Name="Marketing"]
-                return $r/Location'
-        PASSING OBJECT_VALUE
-    )   T;
-```
-</copy>
+    ```
+    <copy>
+    SELECT
+        V.OBJECT_VALUE.GETCLOBVAL()
+    FROM
+        V_DEPARTMENTS_XML V;
 
-Copy the above statement into the worksheet area and press "Run Statement".
+    </copy>
+    ```
 
-![Department location](images/img-8.png)
+    Copy the above statement into the worksheet area and press "Run Statement".
+
+    ![XMLType view content](./images/img-6.png)
+    
+
+3. Query over XMLType views
+        
+    Let's find a department named "Administration".
+
+    ```
+    <copy>
+    SELECT
+        T.GETCLOBVAL()
+    FROM
+        V_DEPARTMENTS_XML D,
+        XMLTABLE ( 'for $r in /Department[Name="Administration"]
+                    return $r'
+            PASSING OBJECT_VALUE
+        )  T;
+    </copy>
+    ```
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+
+    ![Administration department](./images/img-7.png)
+
+    
+
+    Or let’s find the location of the Marketing department.
+
+    ```
+    <copy>
+    SELECT
+        T.GETCLOBVAL()
+    FROM
+        V_DEPARTMENTS_XML D,
+        XMLTABLE ( 'for $r in /Department[Name="Marketing"]
+                    return $r/Location'
+            PASSING OBJECT_VALUE
+        )   T;
+    </copy>
+    ```
+
+    Copy the above statement into the worksheet area and press "Run Statement".
+
+    ![Department location](./images/img-8.png)
 
 You may now **proceed to the next lab**.
 
