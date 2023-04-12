@@ -6,7 +6,7 @@
           "title": "Introduction",
           "description": "This is an introduction to Oracle Database 23c.",
           "type": "livelabs",
-          "filename": "../../introduction/sql-introduction.md"
+          "filename": "../../introduction/intro-java-json.md"
       },
       {
         "title": "Get Started",

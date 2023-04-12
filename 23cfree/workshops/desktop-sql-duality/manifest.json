@@ -18,7 +18,8 @@
             "description": "Creating the schema including JSON Duality Views",
             "type": "livelabs",
             "filename": "../../change-pw/change-pw.md"
-        },{
+        },
+        {
             "title": "Lab 2: Create the schema",
             "description": "Creating the schema including JSON Duality Views",
             "type": "livelabs",

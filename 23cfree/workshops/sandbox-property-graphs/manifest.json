@@ -6,7 +6,7 @@
           "title": "Introduction",
           "description": "This is an introduction to Oracle Database 23c.",
           "type": "livelabs",
-          "filename": "../../introduction/introduction.md"
+          "filename": "../../introduction/sql-introduction.md"
       },
       {
           "title": "Get Started with NoVNC",
@@ -17,19 +17,19 @@
           "title": "Lab 1: Setup",
           "description": "Creating the schema including JSON Duality Views",
           "type": "livelabs",
-          "filename": "../../../property-graphs-setup/property-graphs-setup.md"
+          "filename": "../../property-graphs-setup/property-graphs-setup.md"
       },
       {
           "title": "Lab 2: Graph",
           "description": "Using Property Graphs in 23c",
           "type": "livelabs",
-          "filename": "../../../property-graphs/property-graphs.md"
+          "filename": "../../property-graphs/property-graphs.md"
       },
       {
           "title": "Lab 3: APEX",
           "description": "Using Property Graphs in 23c",
           "type": "livelabs",
-          "filename": "../../../apex-property-graphs/apex-property-graphs.md"
+          "filename": "../../apex-property-graphs/apex-property-graphs.md"
       },
       {
         "title": "Need Help?",
