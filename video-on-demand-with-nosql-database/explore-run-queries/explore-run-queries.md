@@ -7,11 +7,18 @@ the tables you created, and execute queries using OCI Console.
 
 **And now, for the fun part, let’s look at some queries over the streaming data.**
 
-Estimated Time: 15 minutes
+_Estimated Time:_ 15 minutes
 
 ### Objectives
 
 * Writing and optimizing queries over nested array
+
+### Prerequisites
+
+* An Oracle Free Tier, Paid Account or Green Button
+* Connection to the Oracle NoSQL Database Cloud Service
+* Working knowledge of bash shell
+
 
 ## Task 1: Create the required indexes
 
@@ -395,7 +402,7 @@ order by sum($seriesInfo.episodes.minWatched) desc
 The query uses `idx_showid_seasonNum_minWatched` as a covering index as shown below.
 ![query10a-plan](./images/query10a-plan.png)
 
-## Task 3: Clean Up
+## Task 4: Clean Up
 
 This task deletes the tables and other OCI components that got created.
 
@@ -478,8 +485,8 @@ Select your compartment. Click the **freeTest** table, which will bring up the t
 ## Learn More
 
 
-* [Oracle NoSQL Database page](https://www.oracle.com/database/nosql-cloud.html)
-* [NoSQL SQL Reference Manual](https://docs.oracle.com/en/database/other-databases/nosql-database/22.1/sqlreferencefornosql/sql-reference-guide.pdf)
+* [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
+* [NoSQL SQL Reference Manual](https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/index.html)
 
 
 ## Acknowledgements

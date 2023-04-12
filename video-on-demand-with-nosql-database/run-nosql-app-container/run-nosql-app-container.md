@@ -15,7 +15,7 @@ container orchestration platform like Kubernetes. These use cases include: APIs,
 web applications, build and deployment jobs in CI/CD pipelines, automation tasks f
 or cloud operations, data/media processing jobs, development or test environments, and more.
 
-_Estimated Lab Time:_ 25 minutes
+_Estimated Time:_ 25 minutes
 
 ### Objectives
 
@@ -86,7 +86,7 @@ we are using both APIs to develop our application
 minimized it in which case you need to enlarge it. It is possible it may have
 become disconnected and/or timed out. In that case, restart it.
 
-![Cloud Shell](./images/cloud-shell.png)
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
 2. Execute the following environment setup shell script in the Cloud Shell to
 set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_COMPID`
@@ -104,7 +104,7 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
 
  1. Log into the OCI console using your tenancy.
 
-     ![Console](images/console-image.png)
+ ![Oracle Cloud Console](https://oracle-livelabs.github.io/common/images/console/home-page.png)
 
  2. On left side drop down (left of Oracle Cloud banner), go to Developer Services and then Containers & Artifacts - Container Instances.
 
@@ -117,7 +117,7 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
 
      ![Create Container Instance](images/create-container-instance-1.png)
 
-  Enter **demo-vod-example-app** as  name and Add the following Environment variables
+  Enter **demo-vod-example-app** as  name and add the following environment variables
      - `NOSQL_ServiceType` as a key and `useResourcePrincipal` as a value
      - `NOSQL_REGION` as a key and the value copied in Task 2 as a value
      - `NOSQL_COMPID` as a key and the value copied in Task 2 as a value
@@ -188,13 +188,13 @@ by the application, fetch the total watch time by all users
     --data '{"query":"query WatchTime { watchTime { showName seasonNum length } } "}'|jq
     </copy>
     ````
-
+You may now **proceed to the next lab.**
 
 ## Learn More
 
 
 * [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
-* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/pls/topic/lookup?ctx=cloud&id=CSNSD-GUID-88373C12-018E-4628-B241-2DFCB7B16DE8)
+* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/index.html)
 * [About Container Instance](https://docs.oracle.com/en-us/iaas/Content/container-instances/home.htm)
 
 

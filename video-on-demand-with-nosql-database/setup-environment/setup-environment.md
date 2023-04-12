@@ -25,12 +25,12 @@ This lab assumes you have:
 1. Log into the Oracle Cloud Console using your tenancy. Please make note of
 what region you are at.
 
-    ![console-image](images/console-image.png)
+    ![Oracle Cloud Console](https://oracle-livelabs.github.io/common/images/console/home-page.png)
 
 2. On left side drop down (left of Oracle Cloud banner), go to **Identity & Security**
 and then **Compartments.**
 
-    ![identity-security-compartment](images/identity-security-compartment.png)
+    ![Identity & Security](https://oracle-livelabs.github.io/common/images/console/id-compartment.png)
 
 3. Click **Create Compartment.** This opens up a new window.
 
@@ -50,8 +50,8 @@ place that in the Cloud Shell.
 1. Open the **Cloud Shell** in the top right menu. It can take about 2 minutes
 to get the Cloud Shell started.
 
-    ![cloud-shell](images/cloud-shell.png)
-
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
+  
 2. Execute the following in your Cloud Shell.
 
     ````

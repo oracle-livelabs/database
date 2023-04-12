@@ -14,7 +14,7 @@ In general, customers are interested in tracking things like: the episodes they 
 
 The streaming application backend collects data so reports such as, which is the most popular show and what is the average watch time of a show, can be generated.
 
-_Estimated Lab Time:_ 7 minutes
+_Estimated Time:_ 7 minutes
 
 ### Serverless Logic Tier
 
@@ -23,8 +23,6 @@ We selected this demo because it solves real world business problems. Many of th
   ![business-problem](images/business-problem.jpg)
 
 This application is running in all the Oracle Cloud Infrastructure regions.
-
-  ![demo-region](images/demo-region.jpg)
 
 The application behind the demo uses a three-tier architecture, representing the brains of the application. The features of these services enable you to build a serverless production application that is highly available, scalable, and secure.
 Your application can use thousands of servers, however, by leveraging the serverless paradigm you do not have to manage a single one.
@@ -154,15 +152,13 @@ You may now **proceed to the next lab.**
 
 * [About Architecting Microservices-based applications](https://docs.oracle.com/en/solutions/learn-architect-microservice/index.html)
 * [Speed Matters! Why Choosing the Right Database is Critical for Best Customer Experience?](https://blogs.oracle.com/nosql/post/speed-matters-why-choosing-the-right-database-is-critical-for-best-customer-experience)
-* [Process media by using serverless job management and ephemeral compute workers](https://docs.oracle.com/en/solutions/process-media-using-oci-services/index.html)
-* [Oracle NoSQL Database Multi-Region](https://blogs.oracle.com/nosql/post/oracle-nosql-database-multi-region-table-part1)
 * [About Security, Identity, and Compliance](https://www.oracle.com/security/)
 * [Application Development](https://www.oracle.com/application-development/)
 
 ### Services
 
 * [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
-* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/pls/topic/lookup?ctx=cloud&id=CSNSD-GUID-88373C12-018E-4628-B241-2DFCB7B16DE8)
+* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/index.html)
 * [About API Gateway](https://www.oracle.com/cloud/cloud-native/api-management/)
 * [AI Services](https://www.oracle.com/artificial-intelligence/ai-services/)
 * [Media Streams](https://www.oracle.com/cloud/media-streams/)

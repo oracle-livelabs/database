@@ -42,20 +42,20 @@ To start the Cloud Shell, we have to select our compartment first.
 Click on the 'hamburger' menu on the top left. Click on **Databases**
 and then click on **Tables**.
 
-    ![compartment-livelab](images/compartment-livelab.png)
+    ![Choose Compartment](images/nosql-tables.png)
 
 2. In the **Compartment** drop down on the left, pick you compartment.
 In Task 1, you should have taken note of your compartment. To find it, expand
 the root node (**c4u04**), then expand the **Livelabs** node.
 Your compartment should be listed under there.
-In this example we are using **LL11090-COMPARTMENT**.
+In this example we are using **LL45112-COMPARTMENT**.
 
     ![pick-compartment](images/pick-compartment.png)
 
 3. Open the **Cloud Shell** in the top right menu. It can take about 2 minutes
 to get the Cloud Shell started.
 
-    ![cloud-shell](images/cloud-shell.png)
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
 4. Execute the following in your Cloud Shell.
 

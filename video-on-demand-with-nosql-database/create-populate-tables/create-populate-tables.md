@@ -9,7 +9,7 @@ walk you through a couple of different approaches. Oracle NoSQL Database Cloud
 Service supports both schema-based and schema-less (JSON) modeling so we will
 create examples of both tables.
 
-_Estimated Lab Time:_ 25 minutes
+_Estimated Time:_ 25 minutes
 
 ### Objectives
 
@@ -92,7 +92,7 @@ We need to download those to the Cloud Shell first.
 
 1. Open the **Cloud Shell** from the top right menu.
 
-    ![cloud-shell](./images/cloud-shell.png)
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
 2. Execute the following environment setup shell script in the Cloud Shell. If you close/open the Cloud Shell, please re-execute it.
 
@@ -378,7 +378,7 @@ You may now **proceed to the next lab.**
 ## Learn More
 
 * [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
-* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/pls/topic/lookup?ctx=cloud&id=CSNSD-GUID-88373C12-018E-4628-B241-2DFCB7B16DE8)
+* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/index.html)
 * [About Cloud Shell](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm)
 
 

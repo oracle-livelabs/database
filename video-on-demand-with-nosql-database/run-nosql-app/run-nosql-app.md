@@ -5,7 +5,7 @@
 This lab picks up where lab 3 left off. We are going to explore in more detail
 the tables we created, load data, and execute queries using a GraphQL application.
 
-_Estimated Lab Time:_ 25 minutes
+_Estimated Time:_ 25 minutes
 
 ### Objectives
 
@@ -76,7 +76,7 @@ we are using both APIs to develop our application
     - SQL for rich access to JSON, more complex filtering expressions
     - Support for conjunctions and disjunctions in filter expressions
 
-    In the next Lab **Explore Data and Run Queries**, we will explore more on detail
+    In the Lab **Explore Data and Run Queries**, we will explore more on detail
  **SQL for rich access to JSON**. But let us continue with this Lab.
 
 ## Task 2: Restart the Cloud Shell
@@ -85,7 +85,7 @@ we are using both APIs to develop our application
  minimized it in which case you need to enlarge it. It is possible it may have
  become disconnected and/or timed out. In that case, restart it.
 
-     ![Cloud Shell](./images/cloud-shell.png)
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
  2. Execute the following environment setup shell script in the Cloud Shell to
  set up your environment. If you close/open the Cloud Shell Console, please re-execute it.
@@ -95,6 +95,7 @@ we are using both APIs to develop our application
      source ~/video-on-demand-with-nosql-database/env.sh
      </copy>
      ```
+     ![Cloud Shell](./images/cloud-shell-result.png)
 
 ## Task 3: Load Data and Examine It
 
@@ -116,7 +117,7 @@ we are using both APIs to develop our application
 
     Press the **Enter** key on your keypad to get the command line prompt back.
 
-3. Read back the data that we entered in the Lab 3 using the GraphQL query `Streams`.
+3. Lets review the data that we entered in the Lab 3 using the GraphQL query `Streams`.
 Execute in the Cloud Shell.
 
     ````
@@ -221,7 +222,7 @@ using a set of 46 shows.
     ````
 ## Task 4: Create Indexes
 
-In the next Lab **Explore Data and Run Queries**, we will see the power of
+In the Lab **Explore Data and Run Queries**, we will see the power of
 **SQL for rich access to JSON**. Before doing it, we will create the indexes on
 stream_acct table that will be handy while writing the queries.
 
@@ -246,11 +247,13 @@ In this task, we will create 3 of 5 indexes using a Node.js program.
     </copy>
     ```
 
+You may now **proceed to the next lab.**
+
 ## Learn More
 
 
 * [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
-* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/pls/topic/lookup?ctx=cloud&id=CSNSD-GUID-88373C12-018E-4628-B241-2DFCB7B16DE8)
+* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/index.html)
 * [Java API Reference Guide](https://docs.oracle.com/en/cloud/paas/nosql-cloud/csnjv/index.html)
 * [Node API Reference Guide](https://oracle.github.io/nosql-node-sdk/)
 * [Python API Reference Guide](https://nosql-python-sdk.readthedocs.io/en/latest/index.html)
