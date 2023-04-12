@@ -1,8 +1,8 @@
 # Introduction
 
-## About the JSON Duality Views Workshop
+## About the Exploring JSON Duality Views with Java Workshop
 
-This workshop focuses on working with JSON Duality Views in Oracle Database 23c.
+This workshop focuses on working with JSON Duality Views using Java in Oracle Database 23c.
 
 ### **JSON Duality**
 
@@ -27,7 +27,7 @@ Estimated Time: 30 minutes
 In this lab, you will:
 * Create JSON Duality Views
 * Perform insert, update, delete operations against JSON Duality Views
-* Perform both JSON and SQL operations against JSON Duality Views
+* Perform both JSON and SQL operations against JSON Duality Views in a Java application
 
 ### Prerequisites
 
@@ -41,6 +41,6 @@ In order to do this workshop you need
 * [Blog: Key benefits of JSON Relational Duality] (https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
 
 ## Acknowledgements
-* **Author** - Kaylien Phan, William Masdon
+* **Author** - Kaylien Phan, William Masdon, Josh Spiegel
 * **Contributors** - David Start, Ranjan Priyadarshi
 * **Last Updated By/Date** - Kaylien Phan, Database Product Management, April 2023
