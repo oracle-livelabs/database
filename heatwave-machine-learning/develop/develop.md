@@ -3,8 +3,9 @@
 ## Introduction
 
 MySQL HeatWave Machine Learning can easily be used for development tasks with existing Oracle services. New applications can also be created with the LAMP or other software stacks.
+We use here a sample PHP application.
 
-_Estimated Time:_ 30 minutes
+_Estimated Time:_ 20 minutes
 
 ### Objectives
 
@@ -15,24 +16,12 @@ In this lab, you will be guided through the following tasks:
 ### Prerequisites
 
 - An Oracle Trial or Paid Cloud Account
+- Some Experience with Linux text editors
 - Some Experience with PHP
 - Completed Lab 3
 
-## Task 1: Connect to HeatWave using Workbench
 
-Estimated Time: 5 minutes
-
-1. At this point, you can also use MySQL Workbench from your local machine to connect to the MySQL endpoint using your new Compute instance as a jump box.
-
-2. In your pre-installed MySQL Workbench, configure a connection using the method "Standard TCP/IP over SSH" and use the credentials of the Compute instance for SSH.
-
-    **MySQL Workbench Configuration for MDS HeatWAve**
-    ![MDS](./images/13workbench01.png " ")
-
-    **MySQL Workbench Use  for MDS HeatWAve**
-    ![MDS](./images/13workbench02.png " ")
-
-## TASK 2: Install App Server (APACHE)
+## TASK 1: Install Web Server (APACHE)
 
 1. If not already connected with SSH, on Command Line, connect to the Compute instance using SSH ... be sure to replace the  "private key file"  and the "new compute instance IP".
 
@@ -76,7 +65,9 @@ Estimated Time: 5 minutes
 
     **Example: http://129.213....**
 
-## TASK 3: Install PHP
+    ![MDS](./images/apache-test-page.png "iris-web-php")
+
+## TASK 2: Install PHP
 
 1. Install PHP:
 
@@ -120,15 +111,17 @@ Estimated Time: 5 minutes
 
     ```bash
         <copy><?php
-    phpinfo();
-    ?></copy>
-        ```
+        phpinfo();
+        ?></copy>
+    ```
 
-4. From your local machine, browse the page info.php
+4. From your local machine, browse the page info.php and verify that you can read the PHP settings
 
     **Example: http://129.213.167.../info.php**
 
-## TASK 4: Create Connection Test Code
+    ![MDS](./images/php-info.png "iris-web-php")
+
+## TASK 3: Create HeatWave ML Web App
 
 1. Security update"   set SELinux to allow Apache to connect to MySQL
 
@@ -136,79 +129,48 @@ Estimated Time: 5 minutes
     <copy> sudo setsebool -P httpd_can_network_connect 1 </copy>
     ```
 
-2. Create config.php
+2. Download and extract the iris application zip file
 
     ```bash
     <copy>cd /var/www/html</copy>
     ```
 
     ```bash
+    <copy> sudo wget https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/SZr8-GPTyHrSFHx9pvUYVAhHjoPQvae6fMnMygd73dLTFj_z6dxWBxXysen6iYf1/n/idazzjlcjqzj/b/workshops_bucket/o/iris_app.zip </copy>
+    ```
+
+    ```bash
+    <copy>sudo unzip iris_app.zip</copy>
+    ```
+
+3. Configure the application to connect to MySQL HeatWave. <br>
+   Replace the database IP in config.php file with your heatwave database IP and save the file.
+
+    ```bash
     <copy>sudo nano config.php</copy>
     ```
 
-3. Add the following code to the editor and save the file (ctr + o) (ctl + x)
+    ![MDS](./images/iris-web-php-config.png "iris-web-php")
 
-    ```bash
-    <copy><?php
-    // Database credentials
-    define('DB_SERVER', '10.0.1...');// MDS server IP address
-    define('DB_USERNAME', 'admin');
-    define('DB_PASSWORD', 'Welcome#12345');
-    define('DB_NAME', 'airportdb');
-    //Attempt to connect to MySQL database
-    $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-    // Check connection
-    if($link === false){
-        die("ERROR: Could not connect. " . mysqli_connect_error());
-    }
-    // Print host information
-    echo 'Successfull Connect.';
-    echo 'Host info: ' . mysqli_get_host_info($link);
-    ?>
-    </copy>
-    ```
-
-4. From your local machine, browse the page info.php
+4. From your local machine, browse the page config.php and check the successful connection message. If you receive an error, please fix it before continue
 
     **Test Config.php on Web Sever http://150.230..../config.php**
 
-## TASK 5: Create HeatWave ML Web App
+    ![MDS](./images/iris-web-php-config-ok.png "iris-web-php")
 
-1. Go to the development folder
+5. If the connection test is successful, run the application as follows:
 
-    ```bash
-    <copy>cd /var/www/html</copy>
-    ```
-
-2. Download the iris application zip file
-
-    ```bash
-    <copy> sudo wget https://objectstorage.us-phoenix-1.oraclecloud.com/p/2DOHO3J49Z66FDdv-C4tkEOjm5_XL6UWAECDaVoWGDVgCnSI1PajwAZpj2oFRp_A/n/idazzjlcjqzj/b/iris_app/o/iris.zip </copy>
-    ```
-
-    ```bash
-    <copy>sudo unzip iris.zip</copy>
-    ```
-
-    ```bash
-    <copy>cd /var/www/html/iris</copy>
-    ```
-
-    Replace the database IP in config.php file with your heatwave database IP and save the file.
-
-    ```bash
-    <copy>sudo nano config.php</copy>
-    ```
-
-    run the application as follows:
-
-    computeIP//iris/iris_web.php
+    **http://computeIP/index.php**
 
     ![MDS](./images/iris-web-php.png "iris-web-php")
+
+6. Insert test values in the text boxes (you can use the examples in the page) and press '**Submit**' button to see the prediction:
+
+     ![MDS](./images/iris-web-php-result.png "iris-web-php")
 
 ## Acknowledgements
 
 - **Author** - Perside Foster, MySQL Solution Engineering, Harsh Nayak, MySQL Solution Engineering
 
-- **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Priscila Galvao, MySQL Solution Engineering, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
+- **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Priscila Galvao, MySQL Solution Engineering, Nick Mader, MySQL Global Channel Enablement & Strategy Manager, Marco Carlessi, MySQL Solution Engineering
 - **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, July 2022

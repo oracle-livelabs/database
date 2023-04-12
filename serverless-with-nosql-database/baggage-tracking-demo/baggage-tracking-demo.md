@@ -8,18 +8,18 @@ _Estimated Lab Time:_ 7 minutes
 
 Watch the video below for a quick walk through of the lab.
 
-[](youtube:S91oa69whXA)
+[Video](youtube:S91oa69whXA)
 
 
 ### Serverless Logic Tier
 
 We selected this demo because it solves real world business problems. Many of those are listed on the slide.
 
-  ![](images/business-problem.png)
+  ![Business Problem](images/business-problem.png)
 
 This application is running in all the Oracle Cloud Infrastructure regions.
 
-  ![](images/demo-region.png)
+  ![Demo Regions](images/demo-region.png)
 
 The application behind the demo uses a three-tier architecture, representing the brains of the application. Integrating these components: an API Gateway, Streams, and Functions, in your logic tier can be revolutionary. The features of these services enable you to build a serverless production application that is highly available, scalable, and secure. Your application can use thousands of servers, however, by leveraging this pattern you do not have to manage a single one.
 
@@ -31,11 +31,11 @@ In addition, by using these managed services together you gain the following ben
 
 Here is a diagram of architecture behind the demo.
 
-  ![](images/arch-diagram.png)
+  ![Architecture Diagram](images/arch-diagram.png)
 
 Here is an architecture diagram at the component level.
 
-  ![](images/component-arch.png)
+  ![Components of the Architecture](images/component-arch.png)
 
 
 ### Objectives
@@ -65,13 +65,13 @@ What are a few goals of this application:
 
 1. In a browser window, enter ndcsdemo.com. Optionally you can use the QR code below.
 
-    ![](images/ndcs-google.png)
+    ![URL](images/ndcs-google.png)
 
-    ![](images/qr-code.png)
+    ![QR code](images/qr-code.png)
 
   This brings you to the welcome screen for Blue Mist airways.
 
-      ![](images/blue-mist.png)
+      ![Welcome Screen](images/blue-mist.png)
 
    **Note:** If you see a screen that says 'Blue Mist Employee Portal' and not 'Blue Mist Airways' then you are not using a phone device and instead using a laptop, desktop, or tablet. You have been taken to the employee portal. You can look at the information there but it not line up with the rest of the screen shots in this Lab.
 
@@ -79,25 +79,25 @@ What are a few goals of this application:
 
 1. Tap the **Track Your Baggage** button.
 
-      ![](images/blue-mist-track.png)
+      ![Track Your Baggage Menu](images/blue-mist-track.png)
 
   After doing so, you will get random baggage information for a traveler. Scroll through the information. In an application from a real airlines, a variety of different information is displayed.
 
-      ![](images/ferry-trip.png)
+      ![Current Trip](images/ferry-trip.png)
 
 ## Task 4: Select New Traveler
 
 1. Tap the **hamburger** button on the top right, and then press **Track Your Baggage** again. A new random traveler will be shown.
 
-      ![](images/hamburger-menu.png)
+      ![Application Menu](images/hamburger-menu.png)
 
-      ![](images/track-bag.png)
+      ![Track Your Baggage ](images/track-bag.png)
 
 ## Task 5:  Explore the JSON data record
 
 1. The data record is a JSON document with several nested arrays. Oracle NoSQL makes it easy to handle nested arrays.
 
-      ![](images/json-record.png)
+      ![JSON example](images/json-record.png)
 
 
 ## Task 6: Key takeaways
@@ -113,7 +113,7 @@ What are a few goals of this application:
 
   The benefits to customers are shown in this slide.
 
-      ![](images/benefits.png)
+      ![Benefits](images/benefits.png)
 
 You may now **proceed to the next lab.**
 
@@ -128,7 +128,7 @@ You may now **proceed to the next lab.**
 ### Services
 
 * [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
-* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/pls/topic/lookup?ctx=cloud&id=CSNSD-GUID-88373C12-018E-4628-B241-2DFCB7B16DE8)
+* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/dtddt/index.html)
 * [About API Gateway](https://docs.oracle.com/en-us/iaas/Content/APIGateway/Concepts/apigatewayoverview.htm)
 * [About Streaming](https://docs.oracle.com/en-us/iaas/Content/Streaming/Concepts/streamingoverview.htm)
 * [About Connector Hub](https://docs.oracle.com/en-us/iaas/Content/service-connector-hub/overview.htm)

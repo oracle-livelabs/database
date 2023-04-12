@@ -32,11 +32,26 @@ The tasks you will do in this step are:
 In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Command Line (SQLcl).  Oracle **SQLcl** is the modern, command line interface to the database. **SQLcl** has many key features that add to the value of the utility, including command history, in-line editing, auto complete using the TAB key and more. You can learn more about **SQLcl** [at the Oracle SQLcl website](https://www.oracle.com/database/technologies/appdev/sqlcl.html).
 
 
-1. Start SQLcl, set the sqlformat for easier on-screen viewing, and connect to **CDB1**.
+1. Set your Oracle environment, start SQLcl, set the sqlformat for easier on-screen viewing, and connect to **CDB1**.
 
     ```
     <copy>
+    cd /home/oracle/labs/multitenant
+    </copy>
+    ```
+
+    ```
+    <copy>. ~/.set-env-db.sh CDB1</copy>
+    ```
+    
+    ```
+    <copy>
     sql /nolog
+    </copy>
+    ```
+
+    ```
+    <copy>
     set sqlformat ANSICONSOLE
     </copy>
     ```
@@ -47,7 +62,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     </copy>
     ```
 
-    ![](./images/task1.1-connectcdb1.png " ")
+    ![Screenshot of terminal output](./images/task1.1-connectcdb1.png " ")
 
 2. Create and open the master application root.
 
@@ -60,7 +75,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     <copy>alter pluggable database wmStore_Master open;</copy>
     ```
 
-    ![](./images/task1.2-createmaster.png " ")
+    ![Screenshot of terminal output](./images/task1.2-createmaster.png " ")
 
 3. Define the application "wmStore" master.
 
@@ -88,10 +103,10 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     <copy>alter user wmStore_Admin default tablespace wmStore_TBS;</copy>
     ```
 
-    ![](./images/task1.3.1-createwmstoreadmin.png " ")
+    ![Screenshot of terminal output](./images/task1.3.1-createwmstoreadmin.png " ")
 
     ```
-    <copy>connect wmStore_Admin/Ora_DB4U@localhost:1521/wmStore_Master;</copy>
+    <copy>connect wmStore_Admin/Ora_DB4U@localhost:1521/wmStore_Master</copy>
     ```
 
     ```
@@ -101,7 +116,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     (Row_GUID         raw(16)           default Sys_GUID()                      primary key
     ,Name             varchar2(30)                                    not null  unique
     )
-    ;
+    /
     </copy>
     ```
 
@@ -112,7 +127,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     (Row_GUID         raw(16)           default Sys_GUID()                      primary key
     ,Name             varchar2(30)                                    not null  unique
     )
-    ;
+    /
     </copy>
     ```
 
@@ -125,7 +140,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     ,Order_Date       date              default   current_date        not null
     ,Campaign_ID      raw(16)           
     )
-    ;
+    /
     </copy>
     ```
 
@@ -135,11 +150,11 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     foreign key (Campaign_ID)
     references wm_Campaigns(Row_GUID)
     disable
-    ;
+    /
     </copy>
     ```
 
-    ![](./images/task1.3.2-createtable1.png " ")
+    ![Screenshot of terminal output](./images/task1.3.2-createtable1.png " ")
 
     ```
     <copy>
@@ -151,7 +166,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     ,Product_ID       raw(16)           not null
     ,Order_Qty        number(16,0)      not null
     )
-    ;
+    /
     </copy>
     ```
 
@@ -161,7 +176,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     foreign key (Order_ID)
     references wm_Orders(Row_GUID)
     disable
-    ;
+    /
     </copy>
     ```
 
@@ -171,7 +186,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     foreign key (Product_ID)
     references wm_Products(Row_GUID)
     disable
-    ;
+    /
     </copy>
     ```
 
@@ -197,11 +212,11 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     on   i.Product_ID = p.Row_GUID
     left outer join wm_Campaigns c
     on  o.Campaign_ID = c.Row_GUID
-    ;
+    /
     </copy>
     ```
 
-    ![](./images/task1.3.3-createtable2.png " ")
+    ![Screenshot of terminal output](./images/task1.3.3-createtable2.png " ")
 
     ```
     <copy>
@@ -229,12 +244,12 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     <copy>alter pluggable database application wmStore end install '1.0';</copy>
     ```
 
-    ![](./images/task1.3.4-insertvalues.png " ")
+    ![Screenshot of terminal output](./images/task1.3.4-insertvalues.png " ")
 
 4. Create the application seed PDB, which will be used to create additional application PDBs. Open the application seed PDB after it is created.
 
     ```
-    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master;</copy>
+    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master</copy>
     ```
 
     ```
@@ -245,7 +260,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     </copy>
     ```
 
-    ![](./images/task1.4-createseed.png " ")
+    ![Screenshot of terminal output](./images/task1.4-createseed.png " ")
 
 5. Sync the seed with the application wmStore.
 
@@ -257,12 +272,12 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     <copy>alter pluggable database application wmStore sync;</copy>
     ```
 
-    ![](./images/task1.5-syncseed.png " ")
+    ![Screenshot of terminal output](./images/task1.5-syncseed.png " ")
 
 6.  Provision separate application databases for each of the 4 stores.
 
     ```
-    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master;</copy>
+    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master</copy>
     ```
 
     ```
@@ -289,12 +304,12 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     <copy>alter pluggable database all open;</copy>
     ```
 
-    ![](./images/task1.6-createapppdb.png " ")
+    ![Screenshot of terminal output](./images/task1.6-createapppdb.png " ")
 
 7. Create franchise-specific data by running the supplied script. In SQLcl we'll use the "cd" command to execute scripts from the correct directory.
 
     ```
-    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master;</copy>
+    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master</copy>
     ```
 
     ```
@@ -305,7 +320,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
     <copy>@Franchise_Data_Lab1</copy>
     ```
 
-    ![](./images/task1.7-createfranchise.png " ")
+    ![Screenshot of terminal output](./images/task1.7-createfranchise.png " ")
 
 ## Task 2: PDB exploration
 In this section you will take a brief tour of the newly created SaaS estate.
@@ -348,12 +363,12 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task2.2-showpdbs.png " ")
+    ![Screenshot of terminal output](./images/task2.2-showpdbs.png " ")
 
 3. You should be able to set your container to Tulsa because `wmStore_Admin` is an Application Common user but it should fail if you try to set it to CDB$Root since that container is outside of the application container.
 
     ```
-    <copy>connect wmStore_Admin/Ora_DB4U@localhost:1521/wmStore_Master;</copy>
+    <copy>connect wmStore_Admin/Ora_DB4U@localhost:1521/wmStore_Master</copy>
     ```
 
     ```
@@ -364,12 +379,12 @@ The tasks you will do in this step are:
     <copy>alter session set container = CDB$Root;</copy>
     ```
 
-    ![](./images/task2.3-failsetroot.png " ")
+    ![Screenshot of terminal output](./images/task2.3-failsetroot.png " ")
 
 4. You can connect directly to application PDBs as the various local users. Keep in mind these are local users, it just happens to be that they have the same password. Notice that the local user for California cannot use the Tulsa container because it is local to the California container.
 
     ```
-    <copy>connect wm_admin/Ora_DB4U@localhost:1521/Tulsa;</copy>
+    <copy>connect wm_admin/Ora_DB4U@localhost:1521/Tulsa</copy>
     ```
 
     ```
@@ -384,9 +399,9 @@ The tasks you will do in this step are:
     <copy>alter session set container = Tulsa;</copy>
     ```
 
-    ![](./images/task2.4-cannotusetulsa.png " ")
+    ![Screenshot of terminal output](./images/task2.4-cannotusetulsa.png " ")
 
-5. Now you'll explore the data inside the application PDBs using some sample queries. Note that each store has its own products, sales campaigns, and order quantities. First you'll create a script to query each franchise's sales by product by campaign
+5. Now you'll explore the data inside the application PDBs using some sample queries. Note that each store has its own products, sales campaigns, and order quantities. You'll create and save a script to make it easy query each franchise's sales by product by campaign
 
     ```
     <copy>
@@ -407,13 +422,9 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task2.5-savescript.png " ")
+    ![Screenshot of terminal output](./images/task2.5-savescript.png " ")
 
-    ```
-    <copy>connect wmStore_Admin/Ora_DB4U@localhost:1521/NYC
-    @orders_by_product.sql
-    </copy>
-    ```
+    
 
     ```
     <copy>connect wmStore_Admin/Ora_DB4U@localhost:1521/Tulsa
@@ -433,7 +444,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task2.5-orders.png " ")
+    ![Screenshot of terminal output](./images/task2.5-orders.png " ")
 
 In this section you have observed how each application PDB has its own data through queries directly against each application PDB.  In an upcoming lab, you will learn how to run queries from the Application Root across multiple Application Tenant PDBs.
 
@@ -447,7 +458,7 @@ The tasks you will do in this step are:
 1. Create the upgrade of the pluggable databases.
 
     ```
-    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master;</copy>
+    <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master</copy>
     ```
 
     ```
@@ -499,11 +510,11 @@ The tasks you will do in this step are:
     on   i.Product_ID = p.Row_GUID
     left outer join wm_Campaigns c
     on  o.Campaign_ID = c.Row_GUID
-    ;
+    /
     </copy>
     ```
 
-    ![](./images/task3.1-createupgrade1.png " ")
+    ![Screenshot of terminal output](./images/task3.1-createupgrade1.png " ")
 
     ```
     <copy>
@@ -527,7 +538,7 @@ The tasks you will do in this step are:
     <copy>alter pluggable database application wmStore end upgrade;</copy>
     ```
 
-    ![](./images/task3.1-createupgrade2.png " ")
+    ![Screenshot of terminal output](./images/task3.1-createupgrade2.png " ")
 
 2. Apply the upgrade to Tulsa.
 
@@ -539,7 +550,7 @@ The tasks you will do in this step are:
     <copy>alter pluggable database application wmStore sync;</copy>
     ```
 
-    ![](./images/task3.2-upgradetulsa.png " ")
+    ![Screenshot of terminal output](./images/task3.2-upgradetulsa.png " ")
 
 3. Apply the upgrade to California and Tahoe.
 
@@ -559,7 +570,7 @@ The tasks you will do in this step are:
     <copy>alter pluggable database application wmStore sync;</copy>
     ```
 
-    ![](./images/task3.3-upgradecaliftahoe.png " ")
+    ![Screenshot of terminal output](./images/task3.3-upgradecaliftahoe.png " ")
 
 4. Take a look at a pluggable database where the upgrade was applied.
 
@@ -578,7 +589,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task3.4-lookupgradepdb.png " ")
+    ![Screenshot of terminal output](./images/task3.4-lookupgradepdb.png " ")
 
 5. Look at the application PDB **NYC** where the upgrade was not applied, comparing the table definitions and data to the application PDB that was upgraded.
 
@@ -597,7 +608,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task3.5-looknotupgradepdb.png " ")
+    ![Screenshot of terminal output](./images/task3.5-looknotupgradepdb.png " ")
 
 ## Task 4: Containers queries
 In this section we introduce a very powerful cross-container aggregation capability: **containers()** queries. Containers() queries enable an application administrator to connect to the Application Root and aggregate data with a single query across some or all Application Tenants (Franchises). This is another example of how Multitenant, with Application Containers, enables you to manage many Application Tenants as one, when needed. Notice values in the column Franchise come from `Con$Name`. Remember that containers() queries are executed in Root and all containers plugged into it.
@@ -624,7 +635,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-    ![](./images/task4.2-products.png " ")
+    ![Screenshot of terminal output](./images/task4.2-products.png " ")
 
 3. Query order quantities per campaign across all franchises.
 
@@ -640,7 +651,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-    ![](./images/task4.3-ordercount.png " ")
+    ![Screenshot of terminal output](./images/task4.3-ordercount.png " ")
 
 4. Query order volume by product across all franchises.
 
@@ -655,7 +666,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-    ![](./images/task4.4-ordervolume.png " ")
+    ![Screenshot of terminal output](./images/task4.4-ordervolume.png " ")
 
 ## Task 5: Application compatibility
 In this section you will explore the PDBs and learn how to set compatibility at the Application Master.
@@ -692,7 +703,7 @@ In this section you will explore the PDBs and learn how to set compatibility at 
     </copy>
     ```
 
-    ![](./images/task5.2-reviewpdb2.png " ")
+    ![Screenshot of terminal output](./images/task5.2-reviewpdb2.png " ")
 
 3. Connect to the master database and set the application compatibility to 2.0. Notice you will get an error because one of the databases is not currently at that version.
 
@@ -704,7 +715,7 @@ In this section you will explore the PDBs and learn how to set compatibility at 
     <copy>alter pluggable database application wmStore set compatibility version '2.0';</copy>
     ```
 
-    ![](./images/task5.3-compatibilityerror.png " ")
+    ![Screenshot of terminal output](./images/task5.3-compatibilityerror.png " ")
 
 4. Run the query below and notice that there are applications that are not at the current version. If you look at the output from the first query you can see that the NYC and `wmStore_Master$Seed` are still at 1.0.
 
@@ -712,7 +723,7 @@ In this section you will explore the PDBs and learn how to set compatibility at 
     <copy>select * from DBA_App_PDB_Status;</copy>
     ```
 
-    ![](./images/task5.4-noticeversion.png " ")
+    ![Screenshot of terminal output](./images/task5.4-noticeversion.png " ")
 
 5. Connect to NYC and bring that up to the current version.
 
@@ -724,7 +735,7 @@ In this section you will explore the PDBs and learn how to set compatibility at 
     <copy>alter pluggable database application wmStore sync;</copy>
     ```
 
-    ![](./images/task5.5-syncnyc.png " ")
+    ![Screenshot of terminal output](./images/task5.5-syncnyc.png " ")
 
 
 6. Connect to `wmStore_Master$Seed` and bring that up to the current version.
@@ -737,7 +748,7 @@ In this section you will explore the PDBs and learn how to set compatibility at 
     <copy>alter pluggable database application wmStore sync;</copy>
     ```
 
-    ![](./images/task5.6-syncmasterseed.png " ")
+    ![Screenshot of terminal output](./images/task5.6-syncmasterseed.png " ")
 
 7. Connect back to `wmStore_Master` and set the compatibility to 2.0. This time it should work.
 
@@ -749,13 +760,13 @@ In this section you will explore the PDBs and learn how to set compatibility at 
     <copy>alter pluggable database application wmStore set compatibility version '2.0';</copy>
     ```
 
-    ![](./images/task5.7-setcompatibility.png " ")
+    ![Screenshot of terminal output](./images/task5.7-setcompatibility.png " ")
 
     ```
     <copy>select * from DBA_App_PDB_Status;</copy>
     ```
 
-    ![](./images/task5.7-pdbappstatus.png " ")
+    ![Screenshot of terminal output](./images/task5.7-pdbappstatus.png " ")
 
 
 
@@ -786,7 +797,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task6.2-createdblink.png " ")
+    ![Screenshot of terminal output](./images/task6.2-createdblink.png " ")
 
 3. Create and open the Application Root Replicas (ARRs).
 
@@ -811,7 +822,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task6.3-openarrs.png " ")
+    ![Screenshot of terminal output](./images/task6.3-openarrs.png " ")
 
 4. Since the databases in CDB2 register with a listener with a non-default port (in this case, port 1522) you will need to update the ARRs with that port information. This is critical, since the proxy PDBs you will create require this configuration in order to communicate with their target PDBs.
 
@@ -837,7 +848,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task6.4-setarrporthost.png " ")
+    ![Screenshot of terminal output](./images/task6.4-setarrporthost.png " ")
 
 5. Create the `CDB$Root-level` DB Link to CDB2.
 
@@ -853,7 +864,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task6.5-createrootdblink.png " ")
+    ![Screenshot of terminal output](./images/task6.5-createrootdblink.png " ")
 
 6. Create the Application-Root-level DB Links to CDB2.
 
@@ -869,7 +880,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task6.6-createapprootdblink.png " ")
+    ![Screenshot of terminal output](./images/task6.6-createapprootdblink.png " ")
 
 7. Create and open Proxy PDBs for the Application Root Replicas.
 
@@ -887,7 +898,7 @@ The tasks you will do in this step are:
     <copy>alter pluggable database all open;</copy>
     ```
 
-    ![](./images/task6.7-openproxypdb.png " ")
+    ![Screenshot of terminal output](./images/task6.7-openproxypdb.png " ")
 
 8. Synchronize the Application Root Replicas (ARRs) by using their proxies.
 
@@ -907,7 +918,7 @@ The tasks you will do in this step are:
     <copy>alter pluggable database application wmStore sync;</copy>
     ```
 
-    ![](./images/task6.8-syncarrstoproxypdb.png " ")
+    ![Screenshot of terminal output](./images/task6.8-syncarrstoproxypdb.png " ")
 
 9. Create and open the Application Seed PDBs for `wmStore_International` and sync it with Application wmStore.
 
@@ -932,7 +943,7 @@ The tasks you will do in this step are:
     <copy>alter pluggable database application wmStore sync;</copy>
     ```
 
-    ![](./images/task6.9-intopenappseedpdbs.png " ")
+    ![Screenshot of terminal output](./images/task6.9-intopenappseedpdbs.png " ")
 
 10. Create and open the Application Seed PDBs for `wmStore_West` and sync it with Application wmStore.
 
@@ -957,7 +968,7 @@ The tasks you will do in this step are:
     <copy>alter pluggable database application wmStore sync;</copy>
     ```
 
-    ![](./images/task6.10-westopenappseedpdbs.png " ")
+    ![Screenshot of terminal output](./images/task6.10-westopenappseedpdbs.png " ")
 
 11. Connect to the `wmStore_International` Application Root Replica (ARR) and create a database link from that ARR to the CDB of the Master Root.
 
@@ -973,7 +984,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task6.11-connectintarr.png " ")
+    ![Screenshot of terminal output](./images/task6.11-connectintarr.png " ")
 
 12. Provision Application PDBs for the UK, Denmark and France franchises.
 
@@ -992,7 +1003,7 @@ The tasks you will do in this step are:
     admin user wm_admin identified by Ora_DB4U;</copy>
     ```
 
-    ![](./images/task6.12-provisionapppdb.png " ")
+    ![Screenshot of terminal output](./images/task6.12-provisionapppdb.png " ")
 
 13. Connect to the `wmStore_West` Application Root Replica (ARR) and create a database link from that ARR to the CDB of the Master Root.
 
@@ -1008,7 +1019,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task6.13-connectwestarr.png " ")
+    ![Screenshot of terminal output](./images/task6.13-connectwestarr.png " ")
 
 14. Provision Application PDBs for the Santa Monica and Japan franchises.
 
@@ -1022,7 +1033,7 @@ The tasks you will do in this step are:
     admin user wm_admin identified by Ora_DB4U;</copy>
     ```
 
-    ![](./images/task6.14-provisionfranchise.png " ")
+    ![Screenshot of terminal output](./images/task6.14-provisionfranchise.png " ")
 
 15. Switch to the container root and open all pluggable databases.
 
@@ -1034,7 +1045,7 @@ The tasks you will do in this step are:
     <copy>alter pluggable database all open;</copy>
     ```
 
-    ![](./images/task6.15-switchtoroot.png " ")
+    ![Screenshot of terminal output](./images/task6.15-switchtoroot.png " ")
 
 16. Create franchise-specific data by running a pre-supplied script.
 
@@ -1042,7 +1053,7 @@ The tasks you will do in this step are:
     <copy>@Franchise_Data_Lab6</copy>
     ```
 
-    ![](./images/task6.16-franchisedata.png " ")
+    ![Screenshot of terminal output](./images/task6.16-franchisedata.png " ")
 
 17. Connect to `wmStore_Master` and run a report of orders by franchise. Note the results include the stores who's application PDBs reside in **CDB2**; these are accessed through the Proxy PDBs that were created in **CDB1**.
 
@@ -1067,7 +1078,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task6.17-reportmaster.png " ")
+    ![Screenshot of terminal output](./images/task6.17-reportmaster.png " ")
 
 
 
@@ -1081,7 +1092,7 @@ The tasks you will do in this step are:
 
 1. Review the report output from the previous task.
 
-    ![](./images/task6.17-reportmaster.png " ")
+    ![Screenshot of terminal output](./images/task6.17-reportmaster.png " ")
 
 2. Now, relocate the application PDB **Tahoe** to `wmStore_West`.
 
@@ -1106,7 +1117,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task7.2-relocatetahoe.png " ")
+    ![Screenshot of terminal output](./images/task7.2-relocatetahoe.png " ")
 
 3. Rerun the report and take note of the change: the report results are basically the same, but now you can see that TAHOE is located in CDB2.
 
@@ -1131,7 +1142,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task7.3-rerunreport.png " ")
+    ![Screenshot of terminal output](./images/task7.3-rerunreport.png " ")
 
 Although we physically relocated an application PDB from one CDB to another, that move was transparent to our reporting application.
 
@@ -1169,7 +1180,7 @@ The tasks you will do in this step are:
     ,Type_Code   varchar2(30)   not null
     ,Value_Code  varchar2(30)   not null
     )
-    ;
+    /
     </copy>
     ```
 
@@ -1177,11 +1188,11 @@ The tasks you will do in this step are:
     <copy>
     alter table wm_List_Of_Values  add constraint wm_List_Of_Values_U1
     unique (Type_Code, Value_Code)
-    ;
+    /
     </copy>
     ```
 
-    ![](./images/task8.1-createupgrade1.png " ")
+    ![Screenshot of terminal output](./images/task8.1-createupgrade1.png " ")
 
     ```
     <copy>
@@ -1213,7 +1224,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task8.1-createupgrade2.png " ")
+    ![Screenshot of terminal output](./images/task8.1-createupgrade2.png " ")
 
     ```
     <copy>alter table wm_Orders disable constraint wm_Orders_F1;</copy>
@@ -1251,14 +1262,14 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task8.1-createupgrade3.png " ")
+    ![Screenshot of terminal output](./images/task8.1-createupgrade3.png " ")
 
 
     ```
     <copy>alter pluggable database application wmStore end upgrade;</copy>
     ```
 
-    ![](./images/task8.1-createupgrade4.png " ")
+    ![Screenshot of terminal output](./images/task8.1-createupgrade4.png " ")
 
 2. Sync some pluggable databases.
 
@@ -1290,7 +1301,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task8.2-syncpdbs1.png " ")
+    ![Screenshot of terminal output](./images/task8.2-syncpdbs1.png " ")
 
     ```
     <copy>connect system/Ora_DB4U@localhost:1522/FRANCE
@@ -1319,7 +1330,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task8.2-syncpdbs2.png " ")
+    ![Screenshot of terminal output](./images/task8.2-syncpdbs2.png " ")
 
 3. Now, run a query to list all the PDBs in CDB1.
 
@@ -1336,7 +1347,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task8.3-querycdb1.png " ")
+    ![Screenshot of terminal output](./images/task8.3-querycdb1.png " ")
 
 4. This query shows the types of data sharing present in the wmStore application.
 
@@ -1357,7 +1368,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task8.4-querymaster.png " ")
+    ![Screenshot of terminal output](./images/task8.4-querymaster.png " ")
 
 5. Query against the container Tulsa. Note all the data is visible but some data is being shared from the application master.
 
@@ -1376,7 +1387,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task8.5-querytulsa.png " ")
+    ![Screenshot of terminal output](./images/task8.5-querytulsa.png " ")
 
 ## Task 9: Application patches
 In this task we define an application patch. Patches are comparable to the application upgrades that we've seen in previous labs, but there are three important differences.
@@ -1497,7 +1508,7 @@ The tasks you will do in this step are:
     <copy>alter pluggable database application wmStore end patch;</copy>
     ```
 
-    ![](./images/task9.1-createpatch.png " ")
+    ![Screenshot of terminal output](./images/task9.1-createpatch.png " ")
 
 2. Apply the patch to some but not all databases.
 
@@ -1513,7 +1524,7 @@ The tasks you will do in this step are:
 
     </copy>
     ```
-    ![](./images/task9.2-applypatch.png " ")
+    ![Screenshot of terminal output](./images/task9.2-applypatch.png " ")
 
 ## Task 10: DBA views
 This section we introduce some DBA Views which are relevant to Application Containers.
@@ -1533,6 +1544,8 @@ The task you will do in this step is:
     desc DBA_PDBs
     </copy>
     ```
+
+   ![Screenshot of terminal output](./images/task10.1-dba_pdbs.png " ")
 
     ```
     <copy>
@@ -1560,9 +1573,9 @@ The task you will do in this step is:
     </copy>
     ```
 
-    ![](./images/task10.1-dba_pdbs.png " ")
+ 
 
-    ![](./images/task10.1-dba_pdbs_query.png " ")
+    ![Screenshot of terminal output](./images/task10.1-dba_pdbs_query.png " ")
 
 
 2. DBA\_APPLICATIONS
@@ -1583,7 +1596,7 @@ The task you will do in this step is:
     <copy>set echo off</copy>
     ```
 
-    ![](./images/task10.2-dba_applications.png " ")
+    ![Screenshot of terminal output](./images/task10.2-dba_applications.png " ")
 
 
 3. DBA\_APP\_VERSIONS
@@ -1596,7 +1609,7 @@ The task you will do in this step is:
     <copy>select * from DBA_App_Versions;</copy>
     ```
 
-    ![](./images/task10.3-dba_app_versions.png " ")
+    ![Screenshot of terminal output](./images/task10.3-dba_app_versions.png " ")
 
 4. DBA\_APP\_PATCHES
 
@@ -1608,7 +1621,7 @@ The task you will do in this step is:
     <copy>select * from DBA_App_Patches;</copy>
     ```
 
-    ![](./images/task10.4-dba_app_patches.png " ")
+    ![Screenshot of terminal output](./images/task10.4-dba_app_patches.png " ")
 
 5. DBA\_APP\_PDB\_STATUS
 
@@ -1620,7 +1633,7 @@ The task you will do in this step is:
     <copy>select * from DBA_App_PDB_Status;</copy>
     ```
 
-    ![](./images/task10.5-dba_app_pdb_status.png " ")
+    ![Screenshot of terminal output](./images/task10.5-dba_app_pdb_status.png " ")
 
 6. DBA\_APP\_STATEMENTS
 
@@ -1632,7 +1645,7 @@ The task you will do in this step is:
     <copy>select * from DBA_App_Statements;</copy>
     ```
 
-    ![](./images/task10.6-dba_app_statements.png " ")
+    ![Screenshot of terminal output](./images/task10.6-dba_app_statements.png " ")
 
 7. DBA\_APP\_ERRORS
 
@@ -1652,7 +1665,7 @@ The task you will do in this step is:
     <copy>set echo off</copy>
     ```
 
-    ![](./images/task10.7-dba_app_errors.png " ")
+    ![Screenshot of terminal output](./images/task10.7-dba_app_errors.png " ")
 
 ## Task 11: Diagnosing and correcting problems, restarting sync
 This section will explore the ability to restart the patching process after diagnosing errors.
@@ -1672,7 +1685,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task11.1-createindex.png " ")
+    ![Screenshot of terminal output](./images/task11.1-createindex.png " ")
 
 
 2. Attempt the sync and observe that it fails.
@@ -1684,7 +1697,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task11.2-syncerror.png " ")
+    ![Screenshot of terminal output](./images/task11.2-syncerror.png " ")
 
 3. Check for dba\_app\_errors.
 
@@ -1694,7 +1707,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task11.3-apperrors.png " ")
+    ![Screenshot of terminal output](./images/task11.3-apperrors.png " ")
 
 4. Correct the issue and try the sync again.
 
@@ -1710,7 +1723,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task11.4-syncsuccess.png " ")
+    ![Screenshot of terminal output](./images/task11.4-syncsuccess.png " ")
 
 ## Task 12: Container map
 This section we explore another location transparency technology: Container Map. Here we follow the expansion of Walt's Malts through the acquisition of a formerly independent distributor of Walt's Malts products. This company is named Terminally Chill, and their niche was selling Walt's Malts products through a number of small kiosks in various airports globally. The Terminally Chill application has a different design from the original wmStore application. Whereas wmStore was originally designed for standalone deployment, Terminally Chill used a single database to manage data for all kiosks in all airports. The application server tiers are designed to connect directly to a single database, with query predicates to retrieve data for the right airport and kiosk. In this lab, we'll see how Container Map can help accommodate applications of this design.
@@ -1735,7 +1748,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task12.1-create_termmaster.png " ")
+    ![Screenshot of terminal output](./images/task12.1-create_termmaster.png " ")
 
 2. Create the Application PDBs.
 
@@ -1760,7 +1773,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task12.2-term_app_pdbs.png " ")
+    ![Screenshot of terminal output](./images/task12.2-term_app_pdbs.png " ")
 
 3. Create the 1.0 Terminal Install.
 
@@ -1928,7 +1941,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task12.3-terminstall.png " ")
+    ![Screenshot of terminal output](./images/task12.3-terminstall.png " ")
 
 4. Sync the Application databases to install 1.0.
 
@@ -1952,7 +1965,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task12.4-synctermapp.png " ")
+    ![Screenshot of terminal output](./images/task12.4-synctermapp.png " ")
 
 5. Load the Terminal Data.
 
@@ -1960,7 +1973,7 @@ The tasks you will do in this step are:
     <copy>@Terminal_Data_Lab12</copy>
     ```
 
-    ![](./images/task12.5.1-dataload.png " ")
+    ![Screenshot of terminal output](./images/task12.5.1-dataload.png " ")
 
 6. Review the query results utilizing the Container Map: a "CONTAINERS" clause is not needed in the query, although it still fetches results from each Application PDB.
 
@@ -1980,7 +1993,7 @@ The tasks you will do in this step are:
     </copy>
     ```
 
-    ![](./images/task12.6-queryresult.png " ")
+    ![Screenshot of terminal output](./images/task12.6-queryresult.png " ")
 
 **Congratulations! You have completed this workshop!**
 
@@ -1989,4 +2002,4 @@ The tasks you will do in this step are:
 - **Author** - Patrick Wheeler, VP, Multitenant Product Management
 - **Adapted to Cloud by** -  David Start, OSPA
 - **Contributors** -  David Start, Anoosha Pilli, Rene Fontcha, Joseph Bernens
-- **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, October 2021
+- **Last Updated By/Date** - Joseph Bernens, Principal Solution Engineer, NACT Solution Engineering / March 2023
