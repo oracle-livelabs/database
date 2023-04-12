@@ -6,6 +6,9 @@ Most tasks will be completed using Oracle Cloud Infrastructure (OCI) Cloud Shell
 
 *Estimated Time*: 15 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Create Autonomous Database and set up environment](videohub:1_z2illnuw)
+
 ### Objectives
 - Provision an Autonomous Database (ADB)
 - Create Groups and Policies to be used later
@@ -111,10 +114,9 @@ You may now **proceed to the next lab.**
 
    In the **Create User** dialog box, enter the following:
 
-      - **Name:** Enter a unique First and Last name for the new user (for example, **User01**).
+      - **Name:** Enter a unique First and Last name for the new user (for example, **testuser**).
+      - **Description:** Enter a short description (for example **"This is a test user"**)
       - **Email:**  Preferably use a personal email address to which you have access (GMail, Yahoo, etc).
-      - Check the box of "Use the email address as the username".
-      - Check the box of "Assign cloud account administrator role".
 
     Click **Create**.
 
@@ -126,22 +128,40 @@ You may now **proceed to the next lab.**
 
    b) Click **Create/Reset Password**.  
 
-      ![Reset password](https://oracle-livelabs.github.io/security/identity-access-management/iam/images/image009.png)
+      ![New User](images/new-user.png)
 
    c) In the dialog, click **Create/Reset Password**.
 
-      ![Reset password](https://oracle-livelabs.github.io/security/identity-access-management/iam/images/create-password.png)
+      ![Reset password](images/reset-password.png)
 
    d) The new one-time password is displayed.
       Click the **Copy** link and then click **Close**. Make sure to copy this password to your notepad.
 
-      ![Copy password](https://oracle-livelabs.github.io/security/identity-access-management/iam/images/copy-password.png)
+      ![Copy password](images/copy-password.png)
 
-3. Sign in as the new user using a different web browser or an incognito window.
+3. Make the user an administrator.
+    
+    a) Click the **Navigation Menu** in the upper left, navigate to **Identity & Security** and select **Users**.
+
+	![id-users](https://oracle-livelabs.github.io/common/images/console/id-users.png " ")
+
+    b) Click the user you have made.
+
+    ![Users](images/list-of-users.png)
+
+    c) Scroll to the bottom of the page, click **Groups**, and then click **Add User to Group**.
+
+    ![User Groups](images/user-groups.png)
+
+    d) Select the administrator group and click **Add**.
+
+    ![Assigning Admin](images/assign-admin.png)
+
+4. Sign in as the new user using a different web browser or an incognito window.
 
    a) Click **Sign Out** from the user menu and log out of the admin user account completely.
 
-      ![Sign out](https://oracle-livelabs.github.io/security/identity-access-management/iam/images/sign-out.png)
+      ![Sign out](images/sign-out.png)
 
    b) Open a supported browser and go to the Console URL:  [https://cloud.oracle.com](https://cloud.oracle.com).
 

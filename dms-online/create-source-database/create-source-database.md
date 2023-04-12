@@ -26,7 +26,7 @@ In this lab, you will:
 The following task is *optional* if a source database is already present.
 
 1. You will need an SSH key pair for logging into your database and environments. If you don’t already have one, please create one.
-*Important*: The key needs to be in RSA format, other formats like OpenSSL are currently not supported. You can use a command like: `ssh-keygen -t rsa -N "" -b 2048 -C "<key_name>" -f <path/root_name>`
+*Important*: The key needs to be in RSA format, other formats like OpenSSL are currently not supported. You can use a command like: `ssh-keygen -t rsa -N "" -b 2048 -m PEM`
 
 2. In the OCI Console Menu, go to **Oracle Database > Oracle Base Database (VM, BM)**.
 
@@ -105,7 +105,7 @@ The following task is *optional* if a source database is already present.
 1. Open a SSH terminal to the database instance. The instructions are for Unix-style ssh command:
 
     ```
-    ssh -i <private_key_file> opc@<dbnode_public_ip>
+    <copy>ssh -i <private_key_file> opc@<dbnode_public_ip></copy>
     ```
 
 2. Create a new directory in the user volume:
@@ -137,7 +137,7 @@ The following task is *optional* if a source database is already present.
     <copy>alter session set container=PDB;</copy>
     ```
 
-    ![](images\show-pdbs-alter-session.png =50%x50%)
+    ![pdb session altered](images/show-pdbs-alter-session.png =50%x50%)
 
 5. Adding dummy data to the PDB
 

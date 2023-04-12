@@ -135,7 +135,7 @@ ttDaemonAdmin -stop
 TimesTen Daemon (PID: 190, port: 6624) stopped.
 ```
 
-## Task 3: Finally
+## Task 3: Log out of the TimesTen host
 
 Log out of the TimesTen host:
 
@@ -156,5 +156,5 @@ You can now **proceed to the Wrap Up**.
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Last Updated By/Date** - Jenny Bloom, March 2023
 
