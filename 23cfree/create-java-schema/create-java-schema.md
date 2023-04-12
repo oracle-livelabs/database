@@ -77,7 +77,7 @@ This lab assumes you have:
 
     ![Eclipse workspace](images/eclipse-empty.png)
 
-5. On the left side Package Explorer, click the dropdown menu for JdbcDuality -> src/main/java/com.example.formula1 -> Connections.java. This is the first file we will observe. It shows the Connection string that every Java Class in this program will utilize to connect to the database.
+5. On the left side Package Explorer, click the dropdown menu for JdbcDuality -> src/main/java/com.example.formula1 -> Connections.java. This is the first file we will observe. It shows the Connection string that every Java Class in this program will utilize to connect to the database. If you have changed your password in the last lab, please replace Welcome123 with your password.
 
     ![Java connection string](images/connections.png)
 
@@ -201,5 +201,6 @@ This lab assumes you have:
 * [JSON Duality View documentation](http://docs.oracle.com)
 
 ## Acknowledgements
-* **Author** - Kaylien Phan, Product Manager, Database Product Management
-* **Last Updated By/Date** - Kaylien Phan, Database Product Management, March 2023
+* **Author** - Kaylien Phan, William Masdon, Josh Spiegel
+* **Contributors** - David Start, Ranjan Priyadarshi
+* **Last Updated By/Date** - Kaylien Phan, Database Product Management, April 2023

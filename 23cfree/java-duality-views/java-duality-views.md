@@ -119,5 +119,6 @@ This lab assumes you have:
 * [JSON Duality View documentation](http://docs.oracle.com)
 
 ## Acknowledgements
-* **Author** - Kaylien Phan, Product Manager, Database Product Management
-* **Last Updated By/Date** - Kaylien Phan, Database Product Management, March 2023
+* **Author** - Kaylien Phan, William Masdon, Josh Spiegel
+* **Contributors** - David Start, Ranjan Priyadarshi
+* **Last Updated By/Date** - Kaylien Phan, Database Product Management, April 2023

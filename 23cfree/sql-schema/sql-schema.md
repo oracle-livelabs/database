@@ -35,7 +35,7 @@ This lab assumes you have:
     ```
     ![Image alt text](images/ords_url.png " ")
 
-3. To login use the username hol23c with the password you set in Task 1 in the browser.
+3. To login use the username hol23c with the password you set in Lab 1 in the browser.
 
     ![Image alt text](images/ords_login.png " ")
 
@@ -47,7 +47,7 @@ This lab assumes you have:
 
     ![Image alt text](images/sql_login.png " ")    
 
-## Task 3: Creating your database tables and JSON duality views
+## Task 2: Creating your database tables and JSON duality views
 1. As you go through this workshop, we will specify click the Run button or Run Script button. The Run button runs just one SQL Statement and formats the output into a data grid. The Run Script button runs many SQL statements and spools their output. We will highlight which to use.
 
     ![Image alt text](images/run_buttons.png " ")
@@ -174,38 +174,38 @@ Note: The script uses the new 23c syntax of if exists and if not exists. This pr
     ```
 		![Image alt text](images/create_race_dv.png " ")
 
-5. Now we will create the RACE\_DV duality view. Since this is for drivers, we don't want them creating teams or races so we set those to noinsert, noupdate, nodelete. Also they can update or insert a driver's race map but not remove them. You can either click the trash to clear the worksheet or delete what is there before pasting the code below. Click **Run Script**.
+5. Now we will create the DRIVER\_DV duality view. Since this is for drivers, we don't want them creating teams or races so we set those to noinsert, noupdate, nodelete. Also they can update or insert a driver's race map but not remove them. You can either click the trash to clear the worksheet or delete what is there before pasting the code below. Click **Run Script**.
 
-		```
-		<copy>
+	```
+	<copy>
     CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW driver_dv AS
     SELECT JSON {'driverId' IS d.driver_id,
-                'name'     IS d.name,
-                'points'   IS d.points,
-                UNNEST
-                    (SELECT JSON {'teamId' IS t.team_id,
-                                'team'   IS t.name WITH NOCHECK}
-                        FROM team t WITH NOINSERT NOUPDATE NODELETE
-                        WHERE t.team_id = d.team_id),
-                'race'     IS
-                    [ SELECT JSON {'driverRaceMapId' IS drm.driver_race_map_id,
-                                    UNNEST
-                                    (SELECT JSON {'raceId' IS r.race_id,
-                                                    'name'   IS r.name}
-                                        FROM race r WITH NOINSERT NOUPDATE NODELETE
-                                        WHERE r.race_id = drm.race_id),
-                                    'finalPosition'   IS drm.position}
-                        FROM driver_race_map drm WITH INSERT UPDATE NODELETE
-                        WHERE drm.driver_id = d.driver_id ]}
-        FROM driver d WITH INSERT UPDATE DELETE;
-		</copy>
+            'name'     IS d.name,
+            'points'   IS d.points,
+            UNNEST
+                (SELECT JSON {'teamId' IS t.team_id,
+                            'team'   IS t.name WITH NOCHECK}
+                    FROM team t WITH NOINSERT NOUPDATE NODELETE
+                    WHERE t.team_id = d.team_id),
+            'race'     IS
+                [ SELECT JSON {'driverRaceMapId' IS drm.driver_race_map_id,
+                                UNNEST
+                                (SELECT JSON {'raceId' IS r.race_id,
+                                                'name'   IS r.name}
+                                    FROM race r WITH NOINSERT NOUPDATE NODELETE
+                                    WHERE r.race_id = drm.race_id),
+                                'finalPosition'   IS drm.position}
+                    FROM driver_race_map drm WITH INSERT UPDATE NODELETE
+                    WHERE drm.driver_id = d.driver_id ]}
+    FROM driver d WITH INSERT UPDATE DELETE;
+	</copy>
     ```
     ![Image alt text](images/create_driver_dv.png " ")
 
-6. The last duality view is teams. When creating or modifying a team you can insert or update a driver. You can either click the trash to clear the worksheet or delete what is there before pasting the code below. Click **Run Script**.
+6. The last duality view is TEAMS\_DV. When creating or modifying a team you can insert or update a driver. You can either click the trash to clear the worksheet or delete what is there before pasting the code below. Click **Run Script**.
 
-		```
-		<copy>  
+	```
+	<copy>  
     CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW team_dv AS
     SELECT JSON {'teamId'  IS t.team_id,
                 'name'    IS t.name,
@@ -220,9 +220,9 @@ Note: The script uses the new 23c syntax of if exists and if not exists. This pr
 
     </copy>
     ```
-		![Image alt text](images/create_team_dv.png " ")
+	![Image alt text](images/create_team_dv.png " ")
 
-## Task 4: Populating the database
+## Task 3: Populating the database
 1. We are inserting a collection of team documents into TEAM\_DV. This automatically populates the driver and team table as well as the driver collection. If you remember the team duality view joins team and driver. It also allows inserts into both tables. Copy the sql below and click **Run Script**
 
     ```
@@ -257,13 +257,13 @@ Note: The script uses the new 23c syntax of if exists and if not exists. This pr
                                                 "name"     : "Lewis Hamilton",
                                                 "points"   : 0} ]}');
     COMMIT;
-		</copy>
-		```
-		![Image alt text](images/insert_team_dv.png " ")
+	</copy>
+	```
+	![Image alt text](images/insert_team_dv.png " ")
 
 2. Additionally, we are inserting a collection of race documents into RACE\_DV. This automatically populates the race table. Copy the sql below and click **Run Script**
 
-		```
+	```
     <copy>
     INSERT INTO race_dv VALUES ('{"raceId" : 201,
                                 "name"   : "Bahrain Grand Prix",
@@ -286,7 +286,7 @@ Note: The script uses the new 23c syntax of if exists and if not exists. This pr
     </copy>
     ```
 
-		![Image alt text](images/insert_race_dv.png " ")
+	![Image alt text](images/insert_race_dv.png " ")
 
 3. Populating a duality view automatically updates data shown in related duality views, by updating their underlying tables.
 
@@ -305,6 +305,7 @@ Note: The script uses the new 23c syntax of if exists and if not exists. This pr
 
     Your setup is now complete.
 
+4. You may now proceed to the next lab.
 
 ## Learn More
 
@@ -313,5 +314,6 @@ Note: The script uses the new 23c syntax of if exists and if not exists. This pr
 * [Blog: Key benefits of JSON Relational Duality] (https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
 
 ## Acknowledgements
-* **Author** - Kaylien Phan, Product Manager, Database Product Management
-* **Last Updated By/Date** - Kaylien Phan, Database Product Management, March 2023
+* **Author** - Kaylien Phan, William Masdon
+* **Contributors** - David Start, Ranjan Priyadarshi
+* **Last Updated By/Date** - Kaylien Phan, Database Product Management, April 2023

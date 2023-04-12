@@ -26,7 +26,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    select name from race where race_id = 204;
+    SELECT name FROM race where race_id = 204;
 
     INSERT INTO race_dv VALUES ('{"raceId" : 204,
                                 "name"   : "Miami Grand Prix",
@@ -34,7 +34,7 @@ This lab assumes you have:
                                 "date"   : "2022-05-08T00:00:00",
                                 "podium" : {}}');
 
-    select name from race where race_id = 204;
+    SELECT name FROM race where race_id = 204;
     </copy>
     ```
     ![Image alt text](images/task_1_1.png " ")
@@ -206,5 +206,6 @@ This lab assumes you have:
 * [Blog: Key benefits of JSON Relational Duality] (https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
 
 ## Acknowledgements
-* **Author** - Kaylien Phan, Product Manager, Database Product Management
-* **Last Updated By/Date** - Kaylien Phan, Database Product Management, March 2023
+* **Author** - Kaylien Phan, William Masdon
+* **Contributors** - David Start, Ranjan Priyadarshi
+* **Last Updated By/Date** - Kaylien Phan, Database Product Management, April 2023
