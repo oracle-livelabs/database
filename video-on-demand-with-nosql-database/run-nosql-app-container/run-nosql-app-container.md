@@ -148,7 +148,7 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
 
     ```
     <copy>
-    export IP_CI=132.145.144.79
+    export IP_CI=150.136.11.169
     </copy>
     ```
     **Note:** This will start the "demo-vod" application in the background.

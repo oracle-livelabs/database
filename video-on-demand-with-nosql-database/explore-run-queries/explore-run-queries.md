@@ -448,7 +448,7 @@ Select your compartment. Click the **freeTest** table, which will bring up the t
 
 4. Remove the 'demonosql' compartment. From upper left hand menu, go to **Identity and Security** then **Compartments** under 'Identity.'
 
-    ![remove-compartment](./images/remove-compartment.png)
+    ![Identity & Security](https://oracle-livelabs.github.io/common/images/console/id-compartment.png)
 
 5. The 'Compartments' screen appears and click **demonosql**
 
@@ -471,7 +471,7 @@ Select your compartment. Click the **freeTest** table, which will bring up the t
 
 4. Remove the 'demonosql' compartment. From upper left hand menu, go to **Identity and Security** then **Compartments** under 'Identity.'
 
-    ![remove-compartment](./images/remove-compartment.png)
+    ![Identity & Security](https://oracle-livelabs.github.io/common/images/console/id-compartment.png)
 
 5. The 'Compartments' screen appears and click **demonosql**
 
