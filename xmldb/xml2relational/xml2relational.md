@@ -11,7 +11,7 @@ In this lab, you will learn:
 -	Creating relational views from XML data
 
 ### Prerequisites
-Be logged into your Oracle Cloud Account.
+- Be logged into your Oracle Cloud Account.
 
 ## Task 1: Open Database Actions
 

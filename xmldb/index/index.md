@@ -13,7 +13,7 @@ In this lab, you will learn:
 -	Using XML Search Index.
 
 ### Prerequisites
-Be logged into your Oracle Cloud Account.
+- Be logged into your Oracle Cloud Account.
 
 ## Task 1: Open Database Actions
 1. Log in to the Oracle Cloud.

@@ -18,7 +18,7 @@ In this lab, you will learn:
 -	Creating XML Views of customized data
 
 ### Prerequisites
-Be logged into your Oracle Cloud Account.
+- Be logged into your Oracle Cloud Account.
 
 ## Task 1: XQuery Basics
 

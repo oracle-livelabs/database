@@ -10,7 +10,7 @@ In this lab, you will learn:
 -	Generating XML data from relational data
 
 ### Prerequisites
-Be logged into your Oracle Cloud Account.
+- Be logged into your Oracle Cloud Account.
 
 ## Task 1: SQL/XML publishing functions
 - XMLElement - Returns an XML value that is an XML element.

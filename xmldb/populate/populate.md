@@ -10,7 +10,7 @@ In this lab, you will learn:
 1.	How to create and populate a table with an XMLType column
 
 ### Prerequisites
-Be logged into your Oracle Cloud Account
+- Be logged into your Oracle Cloud Account
 
 ## Task 1: Open Database Actions
 1.	Log in to the Oracle Cloud.
@@ -68,7 +68,7 @@ Database Actions allows you to connect to your Autonomous Database through vario
 
     Use the 'trashcan' icon to delete the previous statement from the Worksheet area. Copy the following SQL into the worksheet area. Make sure you highlight the whole statement with your mouse and press the "Run Statement" button:
 
-    Here we are assuming that the XML files are stored in the Object store. So, we will now load the XML data to our table from the Object store.
+    Here we are assuming that the XML files are stored in the Object store. So, we will now load the XML data to our table from the Object store. If you are very new to the Object Store, then please consider finishing the Lab 5 from here [Full-Text workshop] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3286&p210_wec=&session=123567123391417).
 
     **Note:** The value of OBJECT_URI has been modified here. ```url/livelab-xmldoc-1.xml``` is not the actual value.
     The actual link is the authenticated link retrieved from the object store. Please refer to object store how to get it.

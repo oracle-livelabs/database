@@ -22,7 +22,7 @@ In this lab, you will learn:
 
 ### Prerequisites
 
-Be logged into your Oracle Cloud Account.
+- Be logged into your Oracle Cloud Account.
 
 ## Task 1: XQuery Basics
 

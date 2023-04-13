@@ -17,7 +17,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-* Be logged in to your Oracle Cloud Account
+- Be logged in to your Oracle Cloud Account
 
 ## Task 1: Choose Autonomous Transaction Processing from the Services Menu
 
