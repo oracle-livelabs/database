@@ -43,7 +43,7 @@ This lab assumes:
 
 1. Open Activities -> Google Chrome
 
-    ![Insert alt text](images/example.png)
+    ![Open Google Chrome](images/activities-chrome.png)
 
 
 2. Go to this URL and wait for the screen to load.
@@ -53,85 +53,85 @@ This lab assumes:
     </copy>
     ```
 
-    ![Insert alt text](images/example.png)
+    ![URL login screen](images/admin-services.png)
 
 
 3. Login as ADMIN with Welcome123# as the password
 
-    ![Insert alt text](images/example.png)
+    ![Login using credentials](images/login-details.png)
 
 4. You can see the welcome screen for APEX now. 
 
-    ![Insert alt text](images/example.png)
+    ![Welcome screen after login](images/welcome-to-apex.png)
 
 5. Click create workspace
 
-    ![Insert alt text](images/example.png)
+    ![workspace welcome screen](images/workspace-name.png)
 
 6. Name the workspace 'graph' and click Next
 
-    ![Insert alt text](images/example.png)
+    ![enter graph for the workspace](images/graph-next.png)
 
 7. Set reuse existing schema to Yes. Click the menu icon next to schema name and select HOL23C. Set your schema password to whatever but write it down. Leave the default for space quota.
 
-    ![Insert alt text](images/example.png)
+    ![Schema information input changes](images/schema-info.png)
 
 8. Admin username: admin, password: Welcome123#, email: your email.
 
-    ![Insert alt text](images/example.png)
+    ![admin password email input](images/admin-password-email.png)
 
 9. Review the output then click Create workspace.
 
-    ![Insert alt text](images/example.png)
+    ![Create workspace](images/create-workspace.png)
 
 10. Success! Now click done.
 
-    ![Insert alt text](images/example.png)
+    ![completetion screen](images/done.png)
 
 
 ## Task 2 : Import app
 
-1. In the upper right corner, click the admin icon then click logout.
-    ![Insert alt text](images/example.png)
+1. In the upper right corner, click the admin icon then click sign out.
+    ![sign out from admin](images/logout.png)
 
 
 2.  Log back in as the admin info you just created along with the workspace name as graph.
-    ![Insert alt text](images/example.png)
+    ![log back in](images/log-back-in.png)
 
 
 3. Change password
-    ![Insert alt text](images/example.png)
+    ![password change](images/change-password.png)
 
 
 4. App Builder -> Import
 
-    ![Insert alt text](images/example.png)
+    ![Import from app builder](images/app-builder-import.png)
 
 5. Click to add a file to open for import. Go to Home -> example -> graph -> f106.sql and open that file. Leave the defaults and click next.
 
-    ![Insert alt text](images/example.png)
+    ![Import f106 sql file](images/f106-import.png)
 
 6. Click next.
     
-7.  Leave all defaults, except check Reuse app 106 from file under Install Application and click build application. 
+7.  Leave all defaults, except check Reuse app 106 from file under Install Application and click Install Application. 
 
-    ![Insert alt text](images/example.png)
+    ![Install the application](images/install-application.png)
 
 8.  Click run application
 
-    ![Insert alt text](images/example.png)
+    ![Run the application](images/run-application.png)
 
 
 
 9.  Login
 
-    ![Insert alt text](images/example.png)
+    ![Log back in](images/login-final.png)
 
 
 10. Click property graph queries with pgq box
-    ![Insert alt text](images/example.png)
+    ![Property graph queries selection](images/property-graph-queries.png)
     
 11. Scroll through output.
-    ![Insert alt text](images/example.png)
+    ![Final scroll through the output](images/scroll-through.png)
 
 12. You have now completed this lab.
