@@ -27,7 +27,7 @@ This lab assumes you have:
 
 1. Click Activities in the upper left corner, then click Terminal.
 
-    ![Insert alt text](images/example.png)
+    ![Access Terminal through activities](images/activities-terminal.png)
 
 2. Go into the right directory.
 
@@ -35,7 +35,7 @@ This lab assumes you have:
     $ <copy>cd ~/examples</copy>
     ```
 
-    ![Insert alt text](images/example.png)
+    ![Open directory](images/directory.png)
 
 3. Pull down the materials for setup.
 
@@ -43,15 +43,15 @@ This lab assumes you have:
     $ <copy>wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/23cfree-property-graph.zip</copy>
     ```
 
-    ![Insert alt text](images/example.png)
+    ![Wget to pull materials](images/material-pulldown-setup.png)
 
-4. Unzip the file.
+4. Unzip the file and select Y for all files.
 
     ```
-    $ <copy>unzip -o 23cfree-property-graph.zip</copy>
+    $ <copy>unzip 23cfree-property-graph.zip</copy>
     ```
 
-    ![Insert alt text](images/example.png)
+    ![Unzip file](images/unzip-file.png)
 
 3. Remove the remaining zip file after you've unzpped it.
 
@@ -59,7 +59,7 @@ This lab assumes you have:
     $ <copy>rm -rf 23cfree-property-graph.zip</copy>
     ```
 
-    ![Insert alt text](images/example.png)
+    ![Remaining zip file removed](images/remove-zip.png)
 
 ## Task 2: Open SQL Developer
 
@@ -69,7 +69,7 @@ This lab assumes you have:
     $ <copy>cd /opt/sqldeveloper/</copy>
     ```
 
-    ![Insert alt text](images/example.png)
+    ![Open SQL developer](images/sql-directory.png)
 
 2. Run the command to start up SQL Developer.
 
@@ -77,40 +77,40 @@ This lab assumes you have:
     $ <copy>./sqldeveloper.sh</copy>
     ```
 
-    ![Insert alt text](images/example.png)
+    ![Command to start SQL](images/startup-sql.png)
 
 3. On the left side menu, you'll see hol23c_freepdb1 underneath Oracle Connections. Double click it to open the connection.
 
 
-    ![Insert alt text](images/example.png)
+    ![Open the connection](images/hol23c-connection.png)
 
 4. Fill out the connection information with your password. The default password we will be using throughout this lab is Welcome123#. If you have changed yours, please use that one. After you click okay, you should be connected to your user.
 
-    ![Insert alt text](images/example.png)
+    ![Login information](images/login-connection.png)
 
 5. Click File -> Open
 
-    ![Insert alt text](images/example.png)
+    ![Opening file](images/file-open.png)
 
 6. Click Home -> examples -> graph
 
-    ![Insert alt text](images/example.png)
+    ![Open graph](images/home-examples-graph.png)
 
 7. Open the CreateKeys.sql.
 
-    ![Insert alt text](images/example.png)
+    ![Open the sql file](images/open-createkeys.png)
 
 8. Click the button that shows a document with the small green play button on it to run the whole script. If it asks you to select a connection in a popup window, choose hol23c_freepdb1 from the drop down and then click okay.
 
-    ![Insert alt text](images/example.png)
+    ![Run script with play button](images/play-button.png)
 
-9. Scroll through the output to see that the data has been loaded.
+9. Scroll through the output to see that the data has been loaded. Disclaimer: If you see error, property graph does not exist, disregard it and move forward. 
 
-    ![Insert alt text](images/example.png)
+    ![Data output and disregard error](images/error-disregard.png)
 
 10. There should be about 5000 rows loaded into BANK_TRANSFERS and 1000 rows loaded in BANK_ACCOUNTS.
 
-    ![Insert alt text](images/example.png)
+    ![Shows the 5000 and 1000 rows](images/data-loaded.png)
 
 11. Your schema setup is now complete.
 
@@ -131,20 +131,9 @@ This lab assumes you have:
     ``` 
     <copy>ords serve > /dev/null 2>&1 &</copy>
     ```
-    
-3. To confirm ORDS has been installed and is anonymously accessible, open a browser and go to: 
 
-    ```
-    <copy>http://localhost:8080/ords/hol23c/soda/latest</copy>
-    ```
 
-    If all steps succeeded, you should see:
-
-    ```
-    {"items":[],"hasMore":false}
-    ```
-
-You may **proceed to the next lab.**
+Leave the terminal window up and you may **proceed to the next lab.**
 
 ## Learn More
 

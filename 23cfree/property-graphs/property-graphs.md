@@ -43,7 +43,7 @@ This lab assumes:
 
 1. Go back to your SQL Developer window and click on the tab named hol23c_freepdb1, not the CreateKeys.sql tab.
 
-    ![Insert alt text](images/example.png)
+    ![Open hol23c tab](images/sql-hol23-tab.png)
 
 
 2. Use the following SQL statement to create a graph using the ACCOUNTS table as vertex elements and the TRANSFERS table as edge elements. 
@@ -65,38 +65,36 @@ This lab assumes:
     </copy>
     ```
 
-    ![Insert alt text](images/example.png)
+    ![Create graph using Accounts and Transfers table](images/create-graph.png)
 
 
 3. You can check the metadata views to list the graph, its elements, their labels, and their properties. 
 
-    First we will be listing the graphs, but there is only one property graph we have created, so BANK_TRANSFERS will be the only entry.
+    First we will be listing the graphs, but there is only one property graph we have created, so BANK_GRAPH will be the only entry.
     ```
     <copy>
     select * from user_property_graphs;
     </copy>
     ```
 
-    ![Insert alt text](images/example.png)
+    ![Listing bank graph](images/bank-graph.png)
 
-4. This query shows the DDL for the BANK_TRANSFERS graph 
+4. This query shows the DDL for the BANK_GRAPH graph 
 
     ```
     <copy>
     SELECT dbms_metadata.get_ddl('PROPERTY_GRAPH', 'BANK_GRAPH') from dual;
     </copy>
     ```
-    ![Insert alt text](images/example.png)
 
-
-4. Here you can look at the elements of the BANK_TRANSFERS graph (i.e. its vertices and edges).
+4. Here you can look at the elements of the BANK_GRAPH graph (i.e. its vertices and edges).
     ```
     <copy>
     SELECT * FROM user_pg_elements WHERE graph_name='BANK_GRAPH';
     </copy>
     ```
 
-    ![Insert alt text](images/example.png)
+    ![Elements of bank graph](images/elements-bank-transfers.png)
 
 <!-- 5. These are the labels used in the graph.
     ```
@@ -115,7 +113,7 @@ This lab assumes:
     </copy>
     ```
 
-    ![Insert alt text](images/example.png)
+    ![Properties for labels](images/property-labels.png)
 
 <!-- 7. 
 
@@ -142,7 +140,7 @@ A common query in analyzing money flows is to see if there are a sequence of tra
     ) GROUP BY acct_id ORDER BY Num_Transfers DESC FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
-    ![Insert alt text](images/example.png)
+    ![Most incoming transfers accounts](images/incoming-transfers.png)
 
 
 2.  Find the top 10 accounts in the middle of a 2-hop chain of transfers
@@ -155,7 +153,7 @@ A common query in analyzing money flows is to see if there are a sequence of tra
     ) GROUP BY acct_id ORDER BY Num_In_Middle DESC FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
-    ![Insert alt text](images/example.png)
+    ![Top 10 accounts](images/top-ten-accounts.png)
 
 
 3. List accounts that received a transfer from account 387 in 1, 2, or 3 hops
@@ -170,7 +168,7 @@ A common query in analyzing money flows is to see if there are a sequence of tra
     </copy>
     ```
 
-    ![Insert alt text](images/example.png)
+    ![Accounts that received a transfer](images/transfer-accounts.png)
 
 
 4. Check if there are any 3-hop (triangles) transfers that start and end at the same account
@@ -179,12 +177,12 @@ A common query in analyzing money flows is to see if there are a sequence of tra
     SELECT acct_id, COUNT(1) AS Num_Triangles 
     FROM graph_table (BANK_GRAPH 
         MATCH (src) - []->{3} (src) 
-        COLUMNS (src.id COUNT acct_id) 
+        COLUMNS (src.id AS acct_id) 
     ) GROUP BY acct_id ORDER BY Num_Triangles DESC;
     </copy>
     ```
 
-    ![Insert alt text](images/example.png)
+    ![3hop triangle transfers](images/triangles-transfer.png)
 
 5. Check if there are any 4-hop transfers that start and end at the same account 
 
@@ -198,7 +196,7 @@ A common query in analyzing money flows is to see if there are a sequence of tra
     </copy>
     ```
 
-    ![Insert alt text](images/example.png)
+    ![4hop transfers](images/four-hop-transfer.png)
 
 6. Check if there are any 5-hop transfers that start and end at the same account
 
@@ -225,7 +223,7 @@ A common query in analyzing money flows is to see if there are a sequence of tra
     </copy>
     ```
 
-    ![Insert alt text](images/example.png)
+    ![How many accounts transferred money](images/money-transfer-accounts.png)
 
 8.  Query accounts by number of 3 to 5 hops cycles in descending order. Show top 10.
     ```
@@ -240,8 +238,6 @@ A common query in analyzing money flows is to see if there are a sequence of tra
 
     As you can see, though we are looking for longer lengths on the chain, there is no additional lines of code that need to be written.
 
-    ![Insert alt text](images/example.png)
-
-
+    ![Account queries](images/query-accounts.png)
 
 9. You have now completed this lab.
