@@ -199,7 +199,7 @@ Now let's issue some simple queries on the **movies** collection we just created
 
 6. Find bargains of all products costing 5 or less:
 
-	This query displays the documents with ids 100 and 102 as those documents have price less than 5.
+	This query displays the documents with ids 100 and 102 as those documents have price less than or equal to 5.
 
 	```
 	<copy>
@@ -255,7 +255,7 @@ More generally, constraints can be used to check the data being entered for vari
     }'
     );</copy>
     ```
-	![SQL navigation](./images/SQL-constraint-1.png)
+	![Create movies constraint in SQL](./images/create-movies-constraint.png)
 
 3. Add another constraint so that the price cannot be a negative number.
 
@@ -313,6 +313,7 @@ More generally, constraints can be used to check the data being entered for vari
 	</copy>
 	```
 	![create allowed item](./images/create-right-type.png)
+	![doc successfully created](./images/JSON-doc-created.png)
 
 7. Optionally, you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload.
 
@@ -333,7 +334,7 @@ More generally, constraints can be used to check the data being entered for vari
     /
     </copy>
     ```
-	![SQL to find JSON doc problem](./images/SQL-problem.png)
+	![SQL to find JSON doc problem](./images/SQL-with-error.png)
 
 8. You may also check the JSON Schema definition in your data dictionary. In the SQL tool, run:
 
@@ -345,7 +346,7 @@ More generally, constraints can be used to check the data being entered for vari
 	![SQL for data dictionary](./images/SQL-data-dict.png)
 
 
-	_Click the eye icon near any table value to view the full value._
+	_Click on a table cell then the eye icon to view the full value._
 
 You may now proceed to the next lab.
 
