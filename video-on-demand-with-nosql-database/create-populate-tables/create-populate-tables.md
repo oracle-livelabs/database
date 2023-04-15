@@ -168,7 +168,9 @@ screen. Click **Tables** on top right.
 
   Copy/Paste the following 3 commands below in the **SQL statement** text box. Because
   this JSON document is complex, it is easiest to copy/paste into the field.
-  However, you could have typed it all in. Then click on **Execute**
+  However, you could have typed it all in. You will notice at the end of our INSERT statement
+  we have a RETURNING clause.   This clause acts the same way as a SELECT clause and
+  in this case it returns the full row.  Click on **Execute**
 
   ![table-row-insert](./images/table-row-insert.png)
 
@@ -365,7 +367,10 @@ select all the rows from our table. Click **Execute**
 
     ![run-query](./images/run-query.png)
 
-  You will see in the bottom of the screen the row that we inserted.
+  You will see in the bottom of the screen the row that we inserted.  You will see
+  little arrows pointing either down or to the right.   You can arrows pointing to the
+  right to expand the contents OR click on the ones pointing down to compress the
+  contents.
 
   ![explore-row-select](./images/explore-row-select.png)
 

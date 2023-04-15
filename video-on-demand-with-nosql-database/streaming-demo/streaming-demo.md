@@ -83,34 +83,63 @@ Let us explore our API and showing some advantages of using GraphQL.
 
 With developer tools, you can know exactly what data you can request from your API without leaving your editor, you can highlight potential issues before sending a query, and you can take advantage of improved code intelligence. GraphQL applications are easily built with powerful tools like GraphiQL or Apollo GraphQL Studio.
 
-1. In a browser window, enter [https://studio.apollographql.com/sandbox/explorer](https://studio.apollographql.com/sandbox/explorer)
+1. In a browser window, enter [https://studio.apollographql.com/sandbox/explorer](https://studio.apollographql.com/sandbox/explorer).  When you go to the sandbox, you may initially see the error below.    This will go away once you perform step 2.
+
+![sandbox-error](images/sandbox-error.png)
+
 2. In the sandbox, copy/paste the following url:
 ````
 <copy>https://bmbbblriml5b2c36fifpqz5ieq.apigateway.eu-paris-1.oci.customer-oci.com/
 </copy>
 ````
-3. And now, you are ready to use our API
+3. You should see a screen that likes similar to the below image.  Click on the gear and the "Open connection settings" dialog will open.
 
 ![connection-settings](images/capture-connection-settings.png)
 
+Turn the "Auto Update" feature off by moving the slider bar from ON to OFF.  Then hit Save at bottom of window.
+
+![connection-settings2](images/capture-connection-settings2.png)
+
+This will add a new button at the top called "Refetch Schema"
+
+![connection-settings3](images/capture-connection-settings3.png)
+
+Now we are ready to play in the sandbox.
 
 ## Task 3: Ask for what you need, get exactly that
 
-Send a GraphQL query to your API and get exactly what you need, nothing more and nothing less. GraphQL queries always return predictable results. Apps using GraphQL are fast and stable because they control the data they get, not the server.
+By default, it may put you in a spot where it wants you to execute an Example Query.  Under "Documentation" you will see something similar to this image below.
+
+![Sandbox start](images/sandbox-start.png)
+
+If that is the case, click on the arrow next to "Query" and it will place you into "Root."  Now that you have moved over to "Root", watch the animated gif below.  This walks you through the steps of triggering a query.  You will build a query from scratch by hitting "Query", then adding the "Streams" array, followed by adding several fields to display.   Finally you will hit the "Query" button to execute the query.   You will see the results of your query to the right.  Feel free to select different fields and re-execute your query and watch how the results change.  
+
+Hopefully you see, tt is easy to build a GraphQL query in your API and get exactly what you need, nothing more and nothing less. GraphQL queries always return predictable results. Apps using GraphQL are fast and stable because they control the data they get, not the server.  
+
 
 ![Simple query](images/capture-graphql-simple-query.gif)
 
 
 ## Task 4: Describe what’s possible with a type system
 
-GraphQL APIs are organized in terms of types and fields, not endpoints. Access the full capabilities of your data from a single endpoint. GraphQL uses types to ensure Apps only ask for what’s possible and provide clear and helpful errors.
+GraphQL APIs are organized in terms of types and fields, not endpoints. Access the full capabilities of your data from a single endpoint. GraphQL uses types to ensure Apps only ask for what’s possible and provide clear and helpful errors.  We can take a look at the schema, and see the different fields and their associated types.  To move to the schema view, click the button marked in the graphic below.
+
+![Sandbox start](images/schema.png)
+
+
+After you do that, click on the SDL tab.
+
+![Sandbox start](images/schema-SDL.png)
+
+
+Next you should see something similar to the below image.   Go ahead and scroll through the list and review the different parts of the schema.
 
 ![graphql-schema](images/capture-graphql-schema.png)
 
 
 ## Task 5: Get many resources in a single request
 
-GraphQL queries access not just the properties of one resource but also smoothly follow references between them. While typical REST APIs require loading from multiple URLs, GraphQL APIs get all the data your app needs in a single request.
+GraphQL queries access not just the properties of one resource but also smoothly follow references between them. While typical REST APIs require loading from multiple URLs, GraphQL APIs get all the data your app needs in a single request.  This makes GraphQL Apps much more efficient than REST based Apps, especially in slow network environments.  In the animated gif below we are going to build a query that includes the people watching shows from the US.   After executing that request we are to add another resource to the original request and grab the watch time of various shows.   We will then execute the request again, thus demonstrating getting different resources from a single request.   Follow along and build this request in your environment.
 
 ![Multiple queries in one](images/capture-graphql-multi-query.gif)
 
@@ -135,12 +164,12 @@ If you prefer, you can use an API tool like Postman
 
 1. While this was a simple demo, it used many components that are available in Oracle Cloud Infrastructure today.
 
-  * Application is running live in all Oracle Cloud Infrastructure Regions
-  * Application uses Oracle Cloud Infrastructure traffic Management for
+  * The Activity Tracking application is running live in all Oracle Cloud Infrastructure Regions
+  * The Activity Tracking application uses Oracle Cloud Infrastructure traffic Management for
   Geo-Steering to steer network requests to closest Oracle Cloud Infrastructure region
-  * Uses Oracle Cloud Infrastructure API gateway
-  * Data stored in Oracle NoSQL Cloud Service as JSON documents
-  * GraphQL is a query language for your API, and a server-side runtime for executing queries using a type system (schema) you define for your data
+  * The Activity Tracking uses Oracle Cloud Infrastructure API gateway
+  * Data is stored in Oracle NoSQL Cloud Service as JSON documents
+  * GraphQL is a query language for your APIs, which provides a complete and understandable description of the data in your API.  It is easy to integrate with the Oracle NoSQL Database Cloud Service.
 
   The benefits to customers are shown in this slide.
 

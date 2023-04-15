@@ -44,41 +44,11 @@ In this task we will review the code using OCI Code Editor.
 
     ![Code](./images/appl-code.png)
 
-    Oracle NoSQL Database offers **flexible deployment** options to suit the needs of
-its customers. Whether deploying on an "On-Premises" cluster or utilizing the
-Oracle NoSQL Database Cloud Service, developers and end-users get the latest in
-NoSQL technology. Oracle offers a complete range of deployment options to
-support your NoSQL database, from on-premises to private cloud to public cloud.
+   Let's take a look at the function `createNoSQLClient` again.  In the
+   previous lab, we ran the application code using Cloud Shell and used
+   **delegation tokens**.  In this lab, we are going to be running
+   application using **Resource Principals**.
 
-    The function `createNoSQLClient` allows to illustrate this:
-    - You can use **Instance Principals** to do the connection to NoSQL Cloud Service as
-shown in this code instead of specifying the credentials. Once they are set up,
-you can configure your OKE cluster to isolate workloads across node pools,
-create a dynamic group, write your policies. Your application connects to Oracle
-NoSQL Database Cloud Service by using Instance Principals. You can Deploy your
-application using the Kubernetes command line tool kubectl from the
-instructions in a manifest file.
-e.g. We deploy our image [using GitHub Actions](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-vod.yml)
-
-    - In the previous lab, we ran the application code using Cloud Shell and using another way
-called **delegation token**
-
-    - In this lab, we are going to be running application code and we will deploy the application using **Resource Principals**.
-
-    - Finally, the default configuration in this code, allows you to do the Connection
-to on-premise non-secure configuration. It is not the topic of this Lab but if you
-want to learn more [click here](https://github.com/oracle/nosql-examples/blob/master/demo-livelab/video-on-demand-with-nosql-database/README.md)
-
-    - Otherwise, the rest of the code is exactly the same.
-
-    As a developer, you can access your data via an API or SQL. Review the rest of the code,
-we are using both APIs to develop our application
-    - Get, put, scan APIs for raw key/value pairs and tables – CRUD API
-    - SQL for rich access to JSON, more complex filtering expressions
-    - Support for conjunctions and disjunctions in filter expressions
-
-    In the next Lab **Explore Data and Run Queries**, we will explore more on detail
- **SQL for rich access to JSON**. But let us continue with this Lab.
 
 ## Task 2: Restart the Cloud Shell
 
@@ -112,8 +82,8 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
 
  3. Click on Create Container Instance. This opens up a new window.
 
-   Enter **Oracle NoSQL powers Video On-Demand applications** as  name.
-   Other information does not need to be changed for this LiveLab. Then click Next
+   Enter **Oracle NoSQL powers Video On-Demand applications** as the name.
+   Other information does not need to be changed for this LiveLab. Then click Next.
 
      ![Create Container Instance](images/create-container-instance-1.png)
 

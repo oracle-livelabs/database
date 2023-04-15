@@ -38,27 +38,30 @@ In this task we will review the code using OCI Code Editor.
 its customers. Whether deploying on an "On-Premises" cluster or utilizing the
 Oracle NoSQL Database Cloud Service, developers and end-users get the latest in
 NoSQL technology. Oracle offers a complete range of deployment options to
-support your NoSQL database, from on-premises to private cloud to public cloud.
+support your NoSQL database, from on-premises to private cloud to public cloud.  Depending
+on which deployment opiton you choose, you may need different authentication strategies.
 
-    The function `createNoSQLClient` allows to illustrate this:
+    The function `createNoSQLClient` illustrates the different authentication options in the case
+    statement.  If the function isnt visible in your screen, go ahead and scroll to it:
     - You can use **Instance Principals** to do the connection to NoSQL Cloud Service as
-shown in this code instead of specifying the credentials. Once they are set up,
-you can configure your OKE cluster to isolate workloads across node pools,
+shown in this code instead of specifying your credentials. Once Instance Principals are set up,
+[  you can configure your OKE cluster to isolate workloads across node pools,
 create a dynamic group, write your policies. Your application connects to Oracle
-NoSQL Database Cloud Service by using Instance Principals. You can Deploy your
+NoSQL Database Cloud Service by using Instance Principals. You can deploy your
 application using the Kubernetes command line tool kubectl from the
-instructions in a manifest file.
+instructions in a manifest file. MB: NOT SURE WHY TALKING ABOUT OKE here ]
 e.g. We deploy our image [using GitHub Actions](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-vod.yml)
 
-    - In this lab, we are going to be running application code and we need an instance
+    - You can use **Delegation Tokens** to do the connection to NoSQL Cloud Service
+    and in this lab, we are going to be running application code and we need an instance
 to run that from. We will run this application using Cloud Shell using another way
-called **delegation token**
+called **delegation token**   MB: NEEDS WORDING CHANGES
 
     - Finally, the default configuration in this code, allows you to do the Connection
 to on-premise non-secure configuration. It is not the topic of this Lab but if you
-want to learn more [click here](https://github.com/oracle/nosql-examples/blob/master/demo-livelab/video-on-demand-with-nosql-database/README.md)
+want to learn more [click here](https://github.com/oracle/nosql-examples/blob/master/demo-livelab/video-on-demand-with-nosql-database/README.md)  MB:  NEEDS WORDING CHANGES
 
-    - Otherwise, the rest of the code is exactly the same.
+    - Otherwise, the rest of the code is exactly the same.  MB: NEEDS REWORDING
 
     When you create a table, you can choose between **Provisioned Capacity** and
 **On-Demand Capacity**. With the availability of both models, businesses have total flexibility when
@@ -67,11 +70,11 @@ workload requirements. Such flexibility empowers businesses to solely focus on a
 innovations to delight their customers, making operational costs "worry-free" in their decision-making process.
 
     You can also modify the **Capacity mode** from Provisioned Capacity to On Demand Capacity and vice-versa.
+    The function `createTable` illustrates this.
 
-    - The function `createTable` allows to illustrate this
-
-    As a developer, you can access your data via an API or SQL. Review the rest of the code,
-we are using both APIs to develop our application
+    As a developer, you can access your data via an API or SQL. Review the rest of the code in
+in index.js and you will notice that we are using a combination of APIs and SQL statements
+in our sample application.
     - Get, put, scan APIs for raw key/value pairs and tables – CRUD API
     - SQL for rich access to JSON, more complex filtering expressions
     - Support for conjunctions and disjunctions in filter expressions
@@ -197,8 +200,8 @@ Going this route, you will be querying the data over REST. Execute in Cloud Shel
     ````
   In this case, the data is formatted as a nice JSON document.
 
-7. Load information for 91 users. For the shows, we will insert 5 randoms shows
-using a set of 46 shows.
+8. Load information for 91 users. For the shows, we will insert 5 random shows
+selected from a set of 46 shows.
 
   **Note**: During this load, You can minimize the Cloud Shell and explore the data
   in detail using the NoSQL Console as shown in Lab 3 - Task 4
@@ -213,7 +216,7 @@ using a set of 46 shows.
     ````
     ls: cannot access ../data/User: No such file or directory
     ````
-    it means that you forgot to load the data
+    it means that you forgot to unzip the data-show-demo.zip file.
     ````
     <copy>
     cd ~/video-on-demand-with-nosql-database/data/
