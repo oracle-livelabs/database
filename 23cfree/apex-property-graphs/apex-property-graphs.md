@@ -109,6 +109,8 @@ This lab assumes:
 
 5. Click to add a file to open for import. Go to Home -> example -> graph -> f106.sql and open that file. Leave the defaults and click next.
 
+    ![open f106 sql file](images/graph-f106-open.png)
+
     ![Import f106 sql file](images/f106-import.png)
 
 6. Click next.
@@ -132,6 +134,6 @@ This lab assumes:
     ![Property graph queries selection](images/property-graph-queries.png)
     
 11. Scroll through output.
-    ![Final scroll through the output](images/scroll-through.png)
+    ![Final scroll through the output](images/final-output.png)
 
 12. You have now completed this lab.
