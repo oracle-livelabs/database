@@ -129,9 +129,8 @@ This lab assumes you have:
 3. You have now completed this lab.
 
 ## Learn More
-
-- [JSON Relational Duality Blog](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
-- [23c Beta Docs - TO BE CHANGED](https://docs-stage.oracle.com/en/database/oracle/oracle-database/23/index.html)
+* [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
+* [SQL Property Graph syntax in Oracle Database 23c Free - Developer Release](https://docs.oracle.com/en/database/oracle/property-graph/23.1/spgdg/sql-ddl-statements-property-graphs.html#GUID-6EEB2B99-C84E-449E-92DE-89A5BBB5C96E)
 
 ## Acknowledgements
 

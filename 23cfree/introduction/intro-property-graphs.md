@@ -18,8 +18,12 @@ In this lab, you will:
 ### Prerequisites
  * Knowledge of SQL
 
-
 ## Learn More
-
 * [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
 * [SQL Property Graph syntax in Oracle Database 23c Free - Developer Release](https://docs.oracle.com/en/database/oracle/property-graph/23.1/spgdg/sql-ddl-statements-property-graphs.html#GUID-6EEB2B99-C84E-449E-92DE-89A5BBB5C96E)
+
+## Acknowledgements
+
+- **Author** - Kaylien Phan, Thea Lazarova, William Masdon
+- **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker
+- **Last Updated By/Date** - Kaylien Phan, Thea Lazarova

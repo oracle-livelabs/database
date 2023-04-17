@@ -1,10 +1,10 @@
-# Bank Transfers Graph Example with SQL/PGQ in 23c
+# Operational Property Graphs Example with SQL/PGQ in 23c
 
 ## Introduction
 
-In this lab you will query the newly create graph (that is, `bank_graph`) in PGQL paragraphs.
+In this lab you will query the newly create graph (that is, `bank_graph`) in SQL paragraphs.
 
-Estimated Time: 30 minutes.
+Estimated Time: 15 minutes.
 
 Watch the video below for a quick walk through of the lab.
 
@@ -12,23 +12,21 @@ Watch the video below for a quick walk through of the lab.
 
 ### Objectives
 Learn how to:
-- Use APEX and PGQL to query, analyze, and visualize a graph.
+- Use SQL to query, analyze, and visualize a graph.
 
 ### Prerequisites
 This lab assumes:
-- The graph user exists
-- You have logged into APEX
-- The graph bank_graph exists
+- The graph user and graph bank_graph exists
+- You're in SQL Developer and have logged into the database
 
-*See Lab \_\_ for instructions to complete these prerequisites.*
 
 ### Tables are
 | Name | Null? | Type |
 | ------- |:--------:| --------------:|
-| ACCT_ID | NOT NULL | NUMBER|
+| ID | NOT NULL | NUMBER|
 | NAME |  | VARCHAR2(4000) |
 | BALANCE |  | NUMBER |
-{: title="ACCOUNTS"}
+{: title="BANK_ACCOUNTS"}
 
 | Name | Null? | Type |
 | ------- |:--------:| --------------:|
@@ -37,7 +35,7 @@ This lab assumes:
 | DST\_ACCT\_ID |  | NUMBER |
 | DESCRIPTION |  | VARCHAR2(4000) |
 | AMOUNT |  | NUMBER |
-{: title="TRANSFERS"}
+{: title="BANK_TRANSFERS"}
 
 ## Task 1 : Define a graph view on these tables
 
@@ -46,7 +44,7 @@ This lab assumes:
     ![Open hol23c tab](images/sql-hol23-tab.png)
 
 
-2. Use the following SQL statement to create a graph using the ACCOUNTS table as vertex elements and the TRANSFERS table as edge elements. 
+2. Use the following SQL statement to create a graph using the BANK\_ACCOUNTS table as vertex elements and the BANK\_TRANSFERS table as edge elements. 
     ```
     <copy>
     CREATE PROPERTY GRAPH BANK_GRAPH 
@@ -87,7 +85,7 @@ This lab assumes:
     </copy>
     ```
 
-4. Here you can look at the elements of the BANK_GRAPH graph (i.e. its vertices and edges).
+5. Here you can look at the elements of the BANK_GRAPH graph (i.e. its vertices and edges).
     ```
     <copy>
     SELECT * FROM user_pg_elements WHERE graph_name='BANK_GRAPH';
@@ -127,7 +125,7 @@ This lab assumes:
     ![Insert alt text](images/example.png) -->
 
 
-## Task 2 : Query a transfer sequence
+## Task 2 : Query the bank graph
 A common query in analyzing money flows is to see if there are a sequence of transfers that connect one source account to a destination account. We'll be demonstrating that sequence of transfers in standard SQL.
 
 1. Let's start by finding which accounts have the most incoming transfers.
@@ -241,3 +239,13 @@ A common query in analyzing money flows is to see if there are a sequence of tra
     ![Account queries](images/query-accounts.png)
 
 9. You have now completed this lab.
+
+## Learn More
+* [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
+* [SQL Property Graph syntax in Oracle Database 23c Free - Developer Release](https://docs.oracle.com/en/database/oracle/property-graph/23.1/spgdg/sql-ddl-statements-property-graphs.html#GUID-6EEB2B99-C84E-449E-92DE-89A5BBB5C96E)
+
+## Acknowledgements
+
+- **Author** - Kaylien Phan, Thea Lazarova, William Masdon
+- **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker
+- **Last Updated By/Date** - Kaylien Phan, Thea Lazarova
