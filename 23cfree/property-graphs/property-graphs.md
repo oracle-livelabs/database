@@ -84,6 +84,9 @@ This lab assumes:
     SELECT dbms_metadata.get_ddl('PROPERTY_GRAPH', 'BANK_GRAPH') from dual;
     </copy>
     ```
+    
+    ![Shows DDL for bank graph](images/ddl-bankgraph.png)
+
 
 5. Here you can look at the elements of the BANK_GRAPH graph (i.e. its vertices and edges).
     ```
@@ -207,6 +210,8 @@ A common query in analyzing money flows is to see if there are a sequence of tra
     ) GROUP BY acct_id ORDER BY Num_5hop_Chains DESC;
     </copy>
     ```
+
+    ![5hop transfer](images/five-hop-transfers.png)
     
 7.  List some (any 10) accounts which had a 3 to 5 hop circular payment chain 
 
