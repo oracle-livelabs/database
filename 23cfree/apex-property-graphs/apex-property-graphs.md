@@ -56,7 +56,7 @@ This lab assumes:
     ![URL login screen](images/admin-services.png)
 
 
-3. Login as ADMIN with Welcome123# as the password
+3. Login as ADMIN with your password.
 
     ![Login using credentials](images/login-details.png)
 

@@ -1,8 +1,8 @@
-# Configure ORDS
+# Configure setup materials and tools
 
 ## Introduction
 
-Oracle Rest Data Service (ORDS) is a service that allows you to connect to the Oracle Database and use CRUD operations through REST calls. In this lab, you will setup ORDS to be used on the 23c Free Developer Release database. 
+In this lab, we'll be downloading materials and setting up the necessary tools required to execute the rest of the LiveLab. We'll also be opening SQL Developer and starting the ORDS service that you will need to use Oracle Application Express (APEX) later.
 
 Estimated Time: 5 minutes
 
@@ -11,9 +11,9 @@ Estimated Time: 5 minutes
 
 In this lab, you will:
 
-- Create a new schema for ORDS
-- Install ORDS on the database
-- Enable the ORDS Schema and allow anonymous access
+- Download the graph setup files and materials onto your noVNC instance
+- Open SQL Developer
+- Start running ORDS to enable APEX 
 
 ### Prerequisites
 
@@ -45,21 +45,21 @@ This lab assumes you have:
 
     ![Wget to pull materials](images/material-pulldown-setup.png)
 
-4. Unzip the file and select Y for all files.
+3. Unzip the file. Inside this zip file are the files to setup your schema and APEX application.
 
     ```
-    $ <copy>unzip 23cfree-property-graph.zip</copy>
+    $ <copy>unzip -o 23cfree-property-graph.zip</copy>
     ```
 
-    ![Unzip file](images/unzip-file.png)
+    <!-- ![Unzip file](images/unzip-file.png) -->
 
-3. Remove the remaining zip file after you've unzpped it.
+4. Remove the remaining zip file after you've unzpped it.
 
     ```
     $ <copy>rm -rf 23cfree-property-graph.zip</copy>
     ```
 
-    ![Remaining zip file removed](images/remove-zip.png)
+    <!-- ![Remaining zip file removed](images/remove-zip.png) -->
 
 ## Task 2: Open SQL Developer
 
@@ -108,23 +108,15 @@ This lab assumes you have:
 
     ![Data output and disregard error](images/error-disregard.png)
 
-10. There should be about 5000 rows loaded into BANK_TRANSFERS and 1000 rows loaded in BANK_ACCOUNTS.
+10. There should be about 5000 rows loaded into BANK\_TRANSFERS and 1000 rows loaded in BANK\_ACCOUNTS.
 
     ![Shows the 5000 and 1000 rows](images/data-loaded.png)
 
 11. Your schema setup is now complete.
 
-14. Once the install completes, you will see a few lines such as the ones below, denoting that ORDS has been installed and is now running. 
-
-    **NOTE:** You must leave this terminal open and the process running. Closing either will stop ORDS from running. 
-
-
-## Task 2: Enable ORDS in the schema
-
-*You don't need to take screenshots for this part*
+## Task 3: Enable ORDS in the schema
 
 1. In your terminal window, make a new tab by clicking File -> New Tab.
-
 
 2. Execute the following commands to start running ORDS. 
 
@@ -132,8 +124,9 @@ This lab assumes you have:
     <copy>ords serve > /dev/null 2>&1 &</copy>
     ```
 
+    **NOTE:** You must leave this terminal open and the process running. Closing either will stop ORDS from running, and you will not be able to access APEX later in this lab. 
 
-Leave the terminal window up and you may **proceed to the next lab.**
+3. You have now completed this lab.
 
 ## Learn More
 
@@ -142,5 +135,6 @@ Leave the terminal window up and you may **proceed to the next lab.**
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database 
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, March 2023
+- **Author** - Kaylien Phan, Thea Lazarova, William Masdon
+- **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker
+- **Last Updated By/Date** - Kaylien Phan, Thea Lazarova
