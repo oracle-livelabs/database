@@ -20,7 +20,7 @@
           "filename": "../../property-graphs-setup/property-graphs-setup.md"
       },
       {
-          "title": "Lab 2: Operational Property Graphs",
+          "title": "Lab 2: Operational Property Graphs Example with SQL/PGQ in 23c",
           "description": "Using Property Graphs in 23c",
           "type": "livelabs",
           "filename": "../../property-graphs/property-graphs.md"
