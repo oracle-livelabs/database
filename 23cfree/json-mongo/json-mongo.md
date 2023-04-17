@@ -25,8 +25,9 @@ In this lab, you will:
 
 PUT IN DISCLAIMER ABOUT DOWNLOADED MONGO TOOLS
 
-1. Open a new terminal window.
-	![Open new terminal](./images/new-terminal.png)
+1. Open your terminal window.
+
+    _If you closed your terminal window from the previous labs, please see steps in Lab 1 to reconnect to the host._
 
     Run the following commands to download and install Mongo Shell and Mongo Database Tools.
 
@@ -40,14 +41,14 @@ PUT IN DISCLAIMER ABOUT DOWNLOADED MONGO TOOLS
 
 ## Task 2: Interact with Oracle Database using Mongo API
 
-1. First, you must set the URI to the Mongo API running in ORDS on your machine. Copy and paste in the username, password, and host for your database and schema user. If you are using the green button, those values will be as follows: hol23c, Welcome123#, and localhost.
+1. First, you must set the URI to the Mongo API running in ORDS on your machine. Copy and paste in the username, password, and host for your database and schema user. If you are using the green button, those values will be as follows: hol23c, Welcome123, and localhost.
 
     ```
     $ <copy>export URI='mongodb://<user>:<password>@<host>:27017/<user>?authMechanism=PLAIN&authSource=$external&tls=true&retryWrites=false&loadBalanced=true'</copy>
     ```
 
     ```
-    Example: <copy>export URI='mongodb://hol23c:welcome123@localhost:27017/hol23c?authMechanism=PLAIN&authSource=$external&tls=true&retryWrites=false&loadBalanced=true'</copy>
+    Example: <copy>export URI='mongodb://hol23c:Welcome123@localhost:27017/hol23c?authMechanism=PLAIN&authSource=$external&tls=true&retryWrites=false&loadBalanced=true'</copy>
     ```
 
 2. Before we connect to the Mongo Shell, let's populate our database using the Mongo Tools. You will use a document from Object Storage to seed the data in your **movie** collection.
@@ -56,7 +57,6 @@ PUT IN DISCLAIMER ABOUT DOWNLOADED MONGO TOOLS
     $ <copy>curl -s https://objectstorage.us-ashburn-1.oraclecloud.com/n/c4u04/b/moviestream_gold/o/movie/movies.json | mongoimport --collection movies --drop --tlsInsecure --uri $URI
     </copy>
     ```
-    _If you have an error connecting to the host, see Lab 1 and repeat the commands to connect. You do not need to change the password._
     ![Populate the database](images/populate-mongo-db.png " ")
 
 3. Now with the URI set and the Mongo tools installed and the data inserted, we can connect to Mongo Shell. Run the command below to connect.
@@ -128,11 +128,14 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
     hol23c> <copy>db.movies.find ( { "year": {"$gt": 2020} } )
     </copy>
     ```
+    ![New result for after 2020](images/mongo-2020-new.png " ")
 
 3. Return to the browser window that contains SQL Developer Web. We will query for the same movies using the JSON tool. Navigate to the JSON tool using the menu in the top left corner of the webpage if you are not there already.
 	![Homepage Development JSON](./images/development-JSON.png)
 
-4. Let's edit the entries in SQL Developer Web and see the changes in Mongo Shell. First, double click on the document referencing the movie "SuperAction Mars." In the dialog page, change the year to 2025 and then save the document.
+4. Let's edit the entries in SQL Developer Web and see the changes in Mongo Shell. First, double click on the document referencing the movie "SuperAction Mars," or click the "Edit Document" icon next to it. In the dialog page, change the year to 2025 and then save the document.
+	![Find SuperAction Mars](./images/find-SuperAction-Mars.png)
+	![Edit SuperAction Mars](./images/edit-SuperAction-Mars.png)
 
 5. Finally, return the to Terminal window and using the Mongo Shell instance running, query for movies released after 2020 again. You will see the updated information for the "SuperAction Mars" movie.
 
@@ -140,7 +143,7 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
     hol23c> <copy>db.movies.find ( { "year": {"$gt": 2020} } )
     </copy>
     ```
-
+	![New result for after 2020 edit](./images/mongo-2020-edited.png)
 
 ## Learn More
 

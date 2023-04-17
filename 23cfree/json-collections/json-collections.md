@@ -6,7 +6,7 @@ Oracle is a relational database, meaning it typically stores data in rows and co
 
 To create a collection all you have to specify is the collection's name. Unlike a relational table, you do not have to provide any schema information. So, let's create a collection for the products we want to sell in the store.
 
-Estimated Time: 5 minutes
+Estimated Time: 20 minutes
 
 
 ### Objectives
@@ -208,13 +208,13 @@ Now let's issue some simple queries on the **movies** collection we just created
 	```
 	![QBE results for price less than 5](./images/QBE-5-result.png)
 
-7. Tighten the previous query to choose only movie documents:
+7. Tighten the previous query to choose only DVD format documents:
 
-	This query displays the documents whose ids are 100 and 102, as those documents have price less than 5 and are the type - movie.
+	This query displays the document id 100, as this document has a price less than 5 and is the format DVD.
 
 	```
 	<copy>
-	{"$and":[{"price":{"$lte":5}}, {"type":"movie"}]}
+	{"$and":[{"price":{"$lte":5}}, {" format":"DVD"}]}
 	</copy>
 	```
 	![QBE price less than 5 and not type = book ](./images/QBE-6-result.png)
