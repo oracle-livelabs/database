@@ -30,7 +30,7 @@ In this lab, you will:
 	```
     <copy>http://localhost:8080/ords/hol23c/_sdw</copy>
     ```
-	![Open Browser](./images/openBrowser.png)
+	![Open Browser](./images/open-browser.png)
 
 2. Sign in with the username and password of the schema with ORDS enabled. If you are using the green button, this user has already been created for you. Replace the `<new_password>` with the one you entered in Lab 1: Setup User.
 
@@ -38,15 +38,15 @@ In this lab, you will:
     username: hol23c
     password: <new_password>
     ```
-	![User Sign In](./images/ORDS-sign-in.png)
+	![User Sign In](./images/ords-sign-in.png)
 
 4. On the homepage, click the JSON tile under Development.
-	![Homepage Development JSON](./images/homepage-JSON.png)
+	![Homepage Development JSON](./images/homepage-json.png)
 
 5. To create a collection, click **Create Collection**.
 	A tour of this section may automatically begin when the page loads. You can click `next` to continue through the tour and return to this page.
 
-	![JSON Create Collection](./images/JSON-create-collection.png)
+	![JSON Create Collection](./images/json-create-collection.png)
 
 6. In the field **Collection Name**, provide the name **movies**. MAKE SURE you check the **MongoDB Compatible** box then click **Create**.
 	Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use MOVIES or Movies.
@@ -69,7 +69,7 @@ In this lab, you will:
 
 2. Click the *New JSON Document* button.
 
-	![new document button](./images/new-JSON-doc.png)
+	![new document button](./images/new-json-doc.png)
 
 3. A **New JSON Document** panel displays. Copy the following JSON object, paste it in the worksheet and click **Create**.
 
@@ -90,11 +90,11 @@ In this lab, you will:
 	</copy>
 	```
 
-	![add new document](./images/JSON-object.png)
+	![add new document](./images/json-object.png)
 
 4. A notification pops up that says A New Document is created and the new document is shown in the bottom section of the JSON workshop.
 
-	![new document confirmation popup](./images/popup-JSON-doc.png)
+	![new document confirmation popup](./images/popup-json-doc.png)
 
 5. Let's repeat this with the following documents:
 
@@ -163,8 +163,8 @@ Now let's issue some simple queries on the **movies** collection we just created
 	{"_id":101}
 	</copy>
 	```
-	![QBE doc with id 101](./images/QBE-1.png)
-	![QBE id 101 results](./images/QBE-1-result.png)
+	![QBE doc with id 101](./images/qbe-one-value.png)
+	![QBE id 101 results](./images/qbe-one-value-result.png)
 
 3.	Find all DVDs:
 
@@ -175,7 +175,7 @@ Now let's issue some simple queries on the **movies** collection we just created
 	{"format":"DVD"}
 	</copy>
 	```
-	![QBE DVD results](./images/QBE-2-result.png)
+	![QBE DVD results](./images/qbe-dvd-result.png)
 
 4.	Find all non-movies:
 
@@ -186,7 +186,7 @@ Now let's issue some simple queries on the **movies** collection we just created
 	{"type":{"$ne":"movie"}}
 	</copy>
 	```
-	![QBE for "not movies" result](./images/QBE-3-result.png)
+	![QBE for "not movies" result](./images/qbe-not-movies-result.png)
 
 5.	Find documents whose condition value contains "new", which means just document (with id) 101.
 
@@ -195,7 +195,7 @@ Now let's issue some simple queries on the **movies** collection we just created
 	{"condition":{"$like":"%new%"}}
 	</copy>
 	```
-	![QBE condition is new result](./images/QBE-4-result.png)
+	![QBE condition is new result](./images/qbe-new-result.png)
 
 6. Find bargains of all products costing 5 or less:
 
@@ -206,7 +206,7 @@ Now let's issue some simple queries on the **movies** collection we just created
 	{"price":{"$lte":5}}
 	</copy>
 	```
-	![QBE results for price less than 5](./images/QBE-5-result.png)
+	![QBE results for price less than 5](./images/qbe-lte5-result.png)
 
 7. Tighten the previous query to choose only DVD format documents:
 
@@ -217,7 +217,7 @@ Now let's issue some simple queries on the **movies** collection we just created
 	{"$and":[{"price":{"$lte":5}}, {" format":"DVD"}]}
 	</copy>
 	```
-	![QBE price less than 5 and not type = book ](./images/QBE-6-result.png)
+	![QBE price less than 5 and not type = book ](./images/qbe-lte5-dvd-result.png)
 
 ## Task 4: JSON and Constraints
 
@@ -229,7 +229,7 @@ More generally, constraints can be used to check the data being entered for vari
 
 1.  Let's add a check - or 'constraint' to check our data entry. We will do this using SQL Developer Web. Click the navigation menu on the top left and select **SQL** under Development.
 
-	![SQL navigation](./images/Development_SQL.png)
+	![SQL navigation](./images/development-sql.png)
 
 2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types.
 
@@ -267,13 +267,13 @@ More generally, constraints can be used to check the data being entered for vari
           );
 	</copy>
 	```
-	![add constraint](./images/SQL-constraint-2.png)
+	![add constraint](./images/sql-constraint-2.png)
 
 	JSON_Exists is a SQL/JSON function that checks that a SQL/JSON path expression selects at least one value in the JSON data. The selected value(s) are not extracted – only their existence is checked. Here, *$?(@.price.number() >= 0)* is a standard, SQL/JSON path expressions. You'll learn more about SQJ/JSON functions later in this lab.
 
 4. Once the **movie** table is altered, navigate back to JSON workshop. Click the navigation menu on the top left and select **JSON** under Development.
 
-	![JSON navigation](./images/Development_JSON.png)
+	![JSON navigation](./images/development-json.png)
 
 5. Validate that the following documents cannot get inserted, since fields are missing or are of wrong type.
 
@@ -313,7 +313,7 @@ More generally, constraints can be used to check the data being entered for vari
 	</copy>
 	```
 	![create allowed item](./images/create-right-type.png)
-	![doc successfully created](./images/JSON-doc-created.png)
+	![doc successfully created](./images/json-doc-created.png)
 
 7. Optionally, you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload.
 
@@ -334,7 +334,7 @@ More generally, constraints can be used to check the data being entered for vari
     /
     </copy>
     ```
-	![SQL to find JSON doc problem](./images/SQL-with-error.png)
+	![SQL to find JSON doc problem](./images/sql-with-error.png)
 
 8. You may also check the JSON Schema definition in your data dictionary. In the SQL tool, run:
 
@@ -343,7 +343,7 @@ More generally, constraints can be used to check the data being entered for vari
     select constraint_name, json_serialize(json_schema) from user_JSON_SCHEMA_COLUMNS where table_name = 'MOVIES';
     </copy>
     ```
-	![SQL for data dictionary](./images/SQL-data-dict.png)
+	![SQL for data dictionary](./images/sql-data-dict.png)
 
 
 	_Click on a table cell then the eye icon to view the full value._

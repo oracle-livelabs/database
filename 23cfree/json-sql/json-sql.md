@@ -21,8 +21,8 @@ In this lab, you will:
 * Use dot notation to extract values from JSON data.
 * Use nesting and unnesting methods to
 * Explore SQL/JSON path expressions to query JSON data.
-* Update documents using JSON_Mergepatch and JSON_transform.
-*Switch views between relational and JSON formatting.
+* Update documents using JSON\_Mergepatch and JSON\_transform.
+* Switch views between relational and JSON formatting.
 
 ### Prerequisites
 
@@ -38,8 +38,8 @@ In this lab, you will:
     http://localhost:8080/ords/hol23c/_sdw
     </copy>
     ```
-    ![SQL navigation](./images/nav_SQL.png)
-    ![SQL navigation](./images/Development_SQL.png)
+    ![SQL navigation](./images/nav-sql.png)
+    ![SQL development navigation](./images/development-sql.png)
 
 2. On the left side, click on MOVIES - this is the table for the 'movies' collection. To get the view displayed, you need to right-click on **MOVIES** and choose **Open**.
 
@@ -62,7 +62,7 @@ In this lab, you will:
     </copy>
     ```
 
-    ![JSON serialize function](./images/JSON-serialize.png " ")
+    ![JSON serialize function](./images/json-serialize.png " ")
 
 2. Simple dot notation - We can extract values from the JSON data using a simple notation (similar to JavaScript) directly from SQL.
 
@@ -74,7 +74,7 @@ In this lab, you will:
     fetch first 10 rows only;
     </copy>
     ```
-    ![simple dot notation](./images/JSON-simple-dot.png " ")
+    ![simple dot notation](./images/json-simple-dot.png " ")
 
     We use a trailing function like 'date()' or 'number()' to map a selected JSON scalar value to a SQL value.
 
@@ -90,7 +90,7 @@ In this lab, you will:
     from movies m nested data columns ("_id", title, year NUMBER) jt;
     </copy>
     ```
-    ![Extracting nested data](./images/JSON-extracting.png " ")
+    ![Extracting nested data](./images/json-extracting.png " ")
 
     As you can see we're extracting the '_id', the 'title' and the 'year' from each document. Instead of a trailing function we can specify an optional SQL data type like NUMBER - the default (used for the title) is a VARCHAR2(4000). Note that since _id starts with an underscore character it's necessary to put it in quotes.
 
@@ -157,7 +157,7 @@ JSON_VALUE takes one scalar value from the JSON data and returns it as a SQL sca
     where m.data.main_subject.string() is not null order by 1;
     </copy>
     ```
-    ![JSON value](./images/JSON_Value.png " ")
+    ![JSON value](./images/json-value.png " ")
 
 2.  JSON_Value can only select one scalar value. The following query will not return a result because it selects the array of actors.
 
@@ -166,7 +166,7 @@ JSON_VALUE takes one scalar value from the JSON data and returns it as a SQL sca
     select JSON_Value (data, '$.cast' ERROR ON ERROR) from movies;
     </copy>
     ```
-    ![JSON value null values on array](./images/JSON_value-error.png " ")
+    ![JSON value null values on array](./images/json-value-error.png " ")
 
 
 ### JSON_Query
@@ -180,7 +180,7 @@ Unlike JSON\_Value (which returns one SQL scalar value) the function JSON\_Query
     select JSON_Query(m.data, '$.cast') from movies m fetch first 10 rows only;
     </copy>
     ```
-    ![JSON query](./images/JSON_query.png " ")
+    ![JSON query](./images/json-query.png " ")
 
 
 ### JSON_Exists
@@ -197,7 +197,7 @@ JSON_Exists is used to filter rows, therefore you find it in the WHERE clause. I
     order by 1;
     </copy>
     ```
-    ![JSON exists](./images/JSON_exists.png " ")
+    ![JSON exists](./images/json-exists.png " ")
 
     This is expressed using a path predicate using the question mark (?) symbol and a comparison following in parentheses. The '@' symbol represents the current value being used in the comparison. For an array the context will be every item of the array - one can think of iterating through the array and performing the comparison for each item of the array. If any item satisfies the condition than JSON_Exists selects the row.
 
@@ -210,7 +210,7 @@ JSON_Exists is used to filter rows, therefore you find it in the WHERE clause. I
     where JSON_Exists(data, '$?(@.genre.size() >= 2 && @.genre == "Sci-Fi" && @.cast starts with "Sigourney")');
     </copy>
     ```
-    ![genres query](./images/JSON_exists-genres.png " ")
+    ![genres query](./images/json-exists-genres.png " ")
 
     SODA QBE filter expressions are rewritten to use JSON_Exists.
 
@@ -239,7 +239,7 @@ JSON\_Table is used to 'flatten' hierarchical JSON data to a table consisting of
     fetch first 10 rows only;
     </copy>
     ```
-    ![flatten hierachy with JSON table](./images/JSON_table.png " ")
+    ![flatten hierachy with JSON table](./images/json-table.png " ")
 
 2.  Like the other SQL/JSON operators the first input is the JSON data - the column 'data' from the products collection/table. The first path expressions, '$', is the row path expression - in this case, we select the entire document. It would be possible to directly access an embedded object or array here, for example '$.starring[*]' would then generate a row for each actor.
 
@@ -267,7 +267,7 @@ JSON\_Table is used to 'flatten' hierarchical JSON data to a table consisting of
     where m.data.title = 'Gladiator';
     </copy>
     ```
-    ![advanced JSON table](./images/JSON_table-advanced.png " ")
+    ![advanced JSON table](./images/json-table-advanced.png " ")
 
 3.  A common practice is to define a database view using JSON\_TABLE. Then you can describe and query the view like a relational table. Fast refreshable materialized views are possible with JSON\_Table but not covered in this lab.
 
@@ -330,7 +330,7 @@ JSON_Mergepatch follows RFC 7386 [https://datatracker.ietf.org/doc/html/rfc7386]
     where m.data.movie_id=3705;
     </copy>
     ```
-    ![JSON merge patch - initial query](./images/l4-t4-s1.png " ")
+    ![JSON merge patch - initial query](./images/json-mergepatch.png " ")
 
 2.  There are some actors missing, let's use mergepatch to update the cast array.
 
@@ -342,7 +342,7 @@ JSON_Mergepatch follows RFC 7386 [https://datatracker.ietf.org/doc/html/rfc7386]
     commit;
     </copy>
     ```
-    ![JSON merge patch update](./images/l4-t4-s2.png " ")
+    ![JSON merge patch update](./images/json-mergepatch-update.png " ")
 
 3.  Run the select query again to see the effect of the change: the cast was updated, and a note got added.
 
@@ -354,7 +354,7 @@ JSON_Mergepatch follows RFC 7386 [https://datatracker.ietf.org/doc/html/rfc7386]
 
     </copy>
     ```
-    ![JSON merge patch confirmation](./images/l4-t4-s3.png " ")
+    ![JSON merge patch confirmation](./images/json-mergepatch-note.png " ")
 
     JSON\_Mergepatch also allows you to delete a value (by setting it to null) but JSON\_Mergepatch is not able to handle updates on JSON\_Arrays. This can be done with JSON\_Transform.
 
@@ -374,7 +374,7 @@ JSON\_Transform, like the other SQL/JSON operators, relies on path expressions t
     where m.data.movie_id = 3705;
     </copy>
     ```
-    ![JSON transform - update](./images/l4-t4-s1-1.png " ")
+    ![JSON transform - update](./images/json-transform.png " ")
 
 2. Run the query to see our changes:
 
@@ -385,7 +385,7 @@ JSON\_Transform, like the other SQL/JSON operators, relies on path expressions t
     where m.data.movie_id=3705;
     </copy>
     ```
-    ![JSON transform - update](./images/l4-t4-s2-2.png " ")
+    ![JSON transform - update](./images/json-transform-new.png " ")
 
     *Learn more -* [Oracle SQL Function JSON_TRANSFORM](https://docs.oracle.com/en/database/oracle/oracle-database/21/adjsn/oracle-sql-function-json_transform.html#GUID-7BED994B-EAA3-4FF0-824D-C12ADAB862C1)
 
@@ -400,7 +400,7 @@ Irrespective of whether data is stored relationally or as JSON document, you can
     select JSON_OBJECT(*) from movie_view fetch first 10 rows only;
     </copy>
     ```
-    ![create emp table](./images/l4-t5-s1.png " ")
+    ![create emp table](./images/json-object.png " ")
 
 
 2. We can use `json_objectagg` to aggregate multiple records into a single document.
@@ -410,7 +410,7 @@ Irrespective of whether data is stored relationally or as JSON document, you can
     select json_objectagg( movie_title value num_genres) from movie_view where year = 1984;
     </copy>
     ```
-    ![JSON object - convert each row to JSON](./images/l4-t5-s2.png " ")
+    ![JSON object - convert each row to JSON](./images/json-objectagg.png " ")
 
 3.  We can also use `json_array` to extract multiple columns as array per record.
 
@@ -419,7 +419,7 @@ Irrespective of whether data is stored relationally or as JSON document, you can
     select json_array( movie_title, num_genres) from movie_view where year = 1984;
     </copy>
     ```
-    ![JSON object with column specifications](./images/l4-t5-s3.png " ")
+    ![JSON object with column specifications](./images/json-array.png " ")
 
 4. Lastly, we can extract all values of a single column as a single array with `json_arrayagg`.
 
@@ -428,7 +428,7 @@ Irrespective of whether data is stored relationally or as JSON document, you can
     select json_arrayAgg( movie_title) from movie_view where year = 1984;
     </copy>
     ```
-    ![JSON object agg](./images/l4-t5-s4.png " ")
+    ![JSON object agg](./images/json-arrayagg.png " ")
 
 
 ## Task 6: JSON Dataguide
@@ -443,7 +443,7 @@ Often, you do not know all the fields that occur in a collection of JSON data, e
     from movies;
     </copy>
     ```
-    ![JSON dataguide](./images/l4-t6-s1.png " ")
+    ![JSON dataguide](./images/json-dataguide.png " ")
     ```
     {
         "type": "object",
@@ -480,14 +480,14 @@ Often, you do not know all the fields that occur in a collection of JSON data, e
     /
     </copy>
     ```
-    ![create view from dataguide](./images/l4-t6-s2-declare.png " ")
+    ![create view from dataguide](./images/json-dataguide-declare.png " ")
 
     ```
     <copy>
     describe full_movie_view;
     </copy>
      ```
-    ![describe new view](./images/l4-t6-s2-view.png " ")
+    ![describe new view](./images/json-dataguide-view.png " ")
 
 3. Now let's check if everything worked as intended. Use this query to compare attributes of the generated view as compared to the one we created.
 
@@ -497,7 +497,7 @@ Often, you do not know all the fields that occur in a collection of JSON data, e
     </copy>
      ```
 
-    ![table comparison](./images/l4-t6-s3.png " ")
+    ![table comparison](./images/table-compare.png " ")
 
 ## Acknowledgements
 
