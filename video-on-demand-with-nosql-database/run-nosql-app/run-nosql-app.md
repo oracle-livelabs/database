@@ -34,34 +34,31 @@ In this task we will review the code using OCI Code Editor.
 
     ![Code](./images/appl-code.png)
 
-    Oracle NoSQL Database offers **flexible deployment** options to suit the needs of
+Oracle NoSQL Database offers **flexible deployment** options to suit the needs of
 its customers. Whether deploying on an "On-Premises" cluster or utilizing the
 Oracle NoSQL Database Cloud Service, developers and end-users get the latest in
 NoSQL technology. Oracle offers a complete range of deployment options to
 support your NoSQL database, from on-premises to private cloud to public cloud.  Depending
 on which deployment opiton you choose, you may need different authentication strategies.
 
-    The function `createNoSQLClient` illustrates the different authentication options in the case
-    statement.  If the function isnt visible in your screen, go ahead and scroll to it:
+The function `createNoSQLClient` illustrates the different authentication options in the case
+statement. We covered the authentication basics in Lab 2. If the function isnt visible in your
+screen, go ahead and scroll to it:
     - You can use **Instance Principals** to do the connection to NoSQL Cloud Service as
-shown in this code instead of specifying your credentials. Once Instance Principals are set up,
-[  you can configure your OKE cluster to isolate workloads across node pools,
-create a dynamic group, write your policies. Your application connects to Oracle
-NoSQL Database Cloud Service by using Instance Principals. You can deploy your
-application using the Kubernetes command line tool kubectl from the
-instructions in a manifest file. MB: NOT SURE WHY TALKING ABOUT OKE here ]
-e.g. We deploy our image [using GitHub Actions](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-vod.yml)
+shown in this code. Once Instance Principals are set up, you can make API calls to
+different Oracle Cloud Infrastructure services.  The benefit it applications running
+on those instances does not have to configure user credentials or a configuration file.
 
     - You can use **Delegation Tokens** to do the connection to NoSQL Cloud Service
-    and in this lab, we are going to be running application code and we need an instance
-to run that from. We will run this application using Cloud Shell using another way
-called **delegation token**   MB: NEEDS WORDING CHANGES
+    and in this lab we will use them.
 
-    - Finally, the default configuration in this code, allows you to do the Connection
-to on-premise non-secure configuration. It is not the topic of this Lab but if you
-want to learn more [click here](https://github.com/oracle/nosql-examples/blob/master/demo-livelab/video-on-demand-with-nosql-database/README.md)  MB:  NEEDS WORDING CHANGES
+    - You can use **Resource Principals** to do the connection to NoSQL Cloud Service as
+shown in this code.
 
-    - Otherwise, the rest of the code is exactly the same.  MB: NEEDS REWORDING
+    - Finally, the default configuration in this code, allows you to do the connection
+to on-premise non-secure configuration. It is not the topic of this workshop but if you
+want to learn more [check here.](https://github.com/oracle/nosql-examples/blob/master/demo-livelab/video-on-demand-with-nosql-database/README.md)
+
 
     When you create a table, you can choose between **Provisioned Capacity** and
 **On-Demand Capacity**. With the availability of both models, businesses have total flexibility when
@@ -79,8 +76,8 @@ in our sample application.
     - SQL for rich access to JSON, more complex filtering expressions
     - Support for conjunctions and disjunctions in filter expressions
 
-    In the Lab **Explore Data and Run Queries**, we will explore more on detail
- **SQL for rich access to JSON**. But let us continue with this Lab.
+In the Lab **Explore Data and Run Queries**, we will explore more on detail our
+rich SQL access into JSON objects. But for now, let's continue with this Lab.
 
 ## Task 2: Restart the Cloud Shell
 
