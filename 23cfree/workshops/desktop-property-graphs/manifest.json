@@ -15,7 +15,7 @@
       },
       {
           "title": "Lab 1: Configure setup materials and tools",
-          "description": "Creating the schema including JSON Duality Views",
+          "description": "Configure setup materials and tools",
           "type": "livelabs",
           "filename": "../../property-graphs-setup/property-graphs-setup.md"
       },
