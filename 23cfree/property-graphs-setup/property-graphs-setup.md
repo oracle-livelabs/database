@@ -1,8 +1,8 @@
-# Configure ORDS
+# Configure setup materials and tools
 
 ## Introduction
 
-Oracle Rest Data Service (ORDS) is a service that allows you to connect to the Oracle Database and use CRUD operations through REST calls. In this lab, you will setup ORDS to be used on the 23c Free Developer Release database. 
+In this lab, we'll be downloading materials and setting up the necessary tools required to execute the rest of the LiveLab. We'll also be opening SQL Developer and starting the ORDS service that you will need to use Oracle Application Express (APEX) later.
 
 Estimated Time: 5 minutes
 
@@ -11,9 +11,9 @@ Estimated Time: 5 minutes
 
 In this lab, you will:
 
-- Create a new schema for ORDS
-- Install ORDS on the database
-- Enable the ORDS Schema and allow anonymous access
+- Download the graph setup files and materials onto your noVNC instance
+- Open SQL Developer
+- Start running ORDS to enable APEX 
 
 ### Prerequisites
 
@@ -45,102 +45,173 @@ This lab assumes you have:
 
     ![Wget to pull materials](images/material-pulldown-setup.png)
 
-4. Unzip the file and select Y for all files.
+3. Unzip the file. Inside this zip file are the files to setup your schema and APEX application.
 
     ```
-    $ <copy>unzip 23cfree-property-graph.zip</copy>
+    $ <copy>unzip -o 23cfree-property-graph.zip</copy>
     ```
 
-    ![Unzip file](images/unzip-file.png)
+    <!-- ![Unzip file](images/unzip-file.png) -->
 
-3. Remove the remaining zip file after you've unzpped it.
+4. Remove the remaining zip file after you've unzpped it.
 
     ```
     $ <copy>rm -rf 23cfree-property-graph.zip</copy>
     ```
 
-    ![Remaining zip file removed](images/remove-zip.png)
+    <!-- ![Remaining zip file removed](images/remove-zip.png) -->
 
-## Task 2: Open SQL Developer
+## Task 2: Login and create APEX workspace
 
-1. Get into the correct directory to open SQL Developer.
+1. Open Activities -> Google Chrome
 
+    ![Open Google Chrome](images/activities-chrome.png)
+
+
+2. Go to this URL and wait for the screen to load.
     ```
-    $ <copy>cd /opt/sqldeveloper/</copy>
-    ```
-
-    ![Open SQL developer](images/sql-directory.png)
-
-2. Run the command to start up SQL Developer.
-
-    ```
-    $ <copy>./sqldeveloper.sh</copy>
+    <copy>
+    http://localhost:8080/ords/apex_admin
+    </copy>
     ```
 
-    ![Command to start SQL](images/startup-sql.png)
+    ![URL login screen](images/admin-services.png)
 
-3. On the left side menu, you'll see hol23c_freepdb1 underneath Oracle Connections. Double click it to open the connection.
+3. Login as ADMIN with your password.
 
+    ![Login using credentials](images/login-details.png)
 
-    ![Open the connection](images/hol23c-connection.png)
+4. You can see the welcome screen for APEX now. 
 
-4. Fill out the connection information with your password. The default password we will be using throughout this lab is Welcome123#. If you have changed yours, please use that one. After you click okay, you should be connected to your user.
+    ![Welcome screen after login](images/welcome-to-apex.png)
 
-    ![Login information](images/login-connection.png)
+5. Click create workspace
 
-5. Click File -> Open
+    ![workspace welcome screen](images/workspace-name.png)
 
-    ![Opening file](images/file-open.png)
+6. Name the workspace 'graph' and click Next
 
-6. Click Home -> examples -> graph
+    ![enter graph for the workspace](images/graph-next.png)
 
-    ![Open graph](images/home-examples-graph.png)
+7. Set reuse existing schema to Yes. Click the menu icon next to schema name and select HOL23C. Set your schema password to whatever but write it down. Leave the default for space quota.
 
-7. Open the CreateKeys.sql.
+    ![Schema information input changes](images/schema-info.png)
 
-    ![Open the sql file](images/open-createkeys.png)
+8. Admin username: admin, password: Welcome123#, email: your email.
 
-8. Click the button that shows a document with the small green play button on it to run the whole script. If it asks you to select a connection in a popup window, choose hol23c_freepdb1 from the drop down and then click okay.
+    ![admin password email input](images/admin-password-email.png)
 
-    ![Run script with play button](images/play-button.png)
+9. Review the output then click Create workspace.
 
-9. Scroll through the output to see that the data has been loaded. Disclaimer: If you see error, property graph does not exist, disregard it and move forward. 
+    ![Create workspace](images/create-workspace.png)
 
-    ![Data output and disregard error](images/error-disregard.png)
+10. Success! Now click done.
 
-10. There should be about 5000 rows loaded into BANK_TRANSFERS and 1000 rows loaded in BANK_ACCOUNTS.
+    ![completetion screen](images/done.png)
 
-    ![Shows the 5000 and 1000 rows](images/data-loaded.png)
+## Task 3: Create schema tables
 
-11. Your schema setup is now complete.
+1. In the upper right corner, click the admin icon then click sign out.
+    ![sign out from admin](images/logout.png)
 
-14. Once the install completes, you will see a few lines such as the ones below, denoting that ORDS has been installed and is now running. 
+2.  Log back in as the admin info you just created along with the workspace name as graph.
+    ![log back in](images/log-back-in.png)
 
-    **NOTE:** You must leave this terminal open and the process running. Closing either will stop ORDS from running. 
+3. Change password
+    ![password change](images/change-password.png)
 
+4. Click SQL Workshop -> Utilities -> Data Workshop
+    ![need image](images/example.png)
 
-## Task 2: Enable ORDS in the schema
+5. Click Load Data
+    ![need image](images/example.png)
 
-*You don't need to take screenshots for this part*
+6. Click Choose File
+    ![need image](images/example.png)
 
-1. In your terminal window, make a new tab by clicking File -> New Tab.
+7. Click to Home -> Examples -> Graph -> BANK_ACCOUNTS.csv
+    ![need image](images/example.png)
 
+8. Add the table name to be BANK_ACCOUNTS
+    ![need image](images/example.png)
 
-2. Execute the following commands to start running ORDS. 
+9. Accept the rest of the defaults and click load data
+    ![need image](images/example.png)
 
-    ``` 
-    <copy>ords serve > /dev/null 2>&1 &</copy>
+10. After seeing a successful load, click the X and click Load Data again.
+    ![need image](images/example.png)
+
+11. Now load the file by clicking to Home -> Examples -> Graph -> BANK_TRANSFERS.csv
+    ![need image](images/example.png)
+
+12. Add the table name to be BANK_ACCOUNTS
+    ![need image](images/example.png)
+
+13. Accept the rest of the defaults and click load data
+    ![need image](images/example.png)
+
+14. After seeing a successful load, click the X
+    ![need image](images/example.png)
+
+## Task 4: Alter the schema tables
+
+1. Click SQL Workshop -> SQL Commands
+
+2. Run each of the following commands one by one. You may erase the command sheet after executing.
+
     ```
+    $ <copy>ALTER TABLE bank_accounts DROP COLUMN ID;</copy>
+    ```
+    ![need image](images/example.png)
+
+3. 
+
+    ```
+    $ <copy>ALTER TABLE bank_transfers DROP COLUMN ID;</copy>
+    ```
+    ![need image](images/example.png)
+4. 
+
+    ```
+    $ <copy>ALTER TABLE bank_accounts ADD PRIMARY KEY (id);</copy>
+    ```
+    ![need image](images/example.png)
+
+5. 
+    ```
+    $ <copy>ALTER TABLE bank_transfers ADD PRIMARY KEY (txn_id);</copy>
+    ```
+    ![need image](images/example.png)
+
+6. 
+
+    ```
+    $ <copy>ALTER TABLE bank_transfers MODIFY src_acct_id REFERENCES bank_accounts (id);</copy>
+    ```
+    ![need image](images/example.png)
+
+7. 
+
+    ```
+    $ <copy>ALTER TABLE bank_transfers MODIFY dst_acct_id REFERENCES bank_accounts (id);</copy>
+    ```
+    ![need image](images/example.png)
+
+8. 
+
+    ```
+    $ <copy>SELECT * FROM USER_CONS_COLUMNS WHERE table_name IN ('BANK_ACCOUNTS', 'BANK_TRANSFERS');</copy>
+    ```
+    ![need image](images/example.png)
 
 
-Leave the terminal window up and you may **proceed to the next lab.**
 
 ## Learn More
-
-- [JSON Relational Duality Blog](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
-- [23c Beta Docs - TO BE CHANGED](https://docs-stage.oracle.com/en/database/oracle/oracle-database/23/index.html)
+* [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
+* [SQL Property Graph syntax in Oracle Database 23c Free - Developer Release](https://docs.oracle.com/en/database/oracle/property-graph/23.1/spgdg/sql-ddl-statements-property-graphs.html#GUID-6EEB2B99-C84E-449E-92DE-89A5BBB5C96E)
 
 ## Acknowledgements
 
-- **Author**- William Masdon, Product Manager, Database 
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, March 2023
+- **Author** - Kaylien Phan, Thea Lazarova, William Masdon
+- **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker
+- **Last Updated By/Date** - Kaylien Phan, Thea Lazarova

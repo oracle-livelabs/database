@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Work with JSON Relational Duality Views using SQL",
+  "workshoptitle": "Exploring Operational Property Graphs in 23c Free",
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
       {
@@ -14,19 +14,25 @@
           "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
       },
       {
-          "title": "Lab 1: Setup",
+          "title": "Lab 1: Setup User",
+          "description": "Creating the schema including JSON Duality Views",
+          "type": "livelabs",
+          "filename": "../../change-pw/change-pw.md"
+      },
+      {
+          "title": "Lab 2: Configure setup materials and tools",
           "description": "Creating the schema including JSON Duality Views",
           "type": "livelabs",
           "filename": "../../property-graphs-setup/property-graphs-setup.md"
       },
       {
-          "title": "Lab 2: Graph",
+          "title": "Lab 3: Operational Property Graphs Example with SQL/PGQ in 23c",
           "description": "Using Property Graphs in 23c",
           "type": "livelabs",
           "filename": "../../property-graphs/property-graphs.md"
       },
       {
-          "title": "Lab 3: APEX",
+          "title": "Bonus Lab: Integration with APEX",
           "description": "Using Property Graphs in 23c",
           "type": "livelabs",
           "filename": "../../apex-property-graphs/apex-property-graphs.md"
