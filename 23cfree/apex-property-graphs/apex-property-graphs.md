@@ -29,6 +29,8 @@ This lab assumes:
 
     ![open f106 sql file](images/graph-f106-open.png)
 
+    ![open f106 sql file](images/graph-f106-open.png)
+
     ![Import f106 sql file](images/f106-import.png)
 
 3. Click next.

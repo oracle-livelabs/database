@@ -1,4 +1,4 @@
-. # Create the schema including JSON Duality Views
+# Create the schema including JSON Duality Views
 
 ## Introduction
 
@@ -20,6 +20,7 @@ This lab assumes you have:
 ## Task 1: Setting database user password and starting ORDS
 
 1. The first step is to get to a command prompt. If you need to open a terminal and you are running in a Sandbox environment click on Activities and then Terminal.
+
     ![Open a new terminal](images/open-terminal.png " ")
 
 2. Next set your environment. The oraenv command will set all of the environment variables based on your database. When prompted type FREE for the database name or if you supplied a different database name use that.
@@ -29,6 +30,9 @@ This lab assumes you have:
      The Oracle base has been set to /opt/oracle
     [FREE:oracle@hol23cfdr:~]$
 		```
+
+    ![Set environment](images/set-envt-free1.png " ")
+
 
 3. Next connect to your database.
     ```
@@ -46,6 +50,7 @@ This lab assumes you have:
 
     SQL>
 		```
+    ![Connect to the database](images/connect-db-sysdba1.png " ")
 
 4. Next change to your pluggable database. If your pluggable database is a different name, make sure to change the command below.
     ```
@@ -55,6 +60,7 @@ This lab assumes you have:
 
     SQL>
 		```
+    ![Change to PDB](images/alter-session1.png " ")
 
 5. To change the password for the user hol23c use the "alter user <username> identified by <new password" command. The syntax below for the hol23c user, make sure to replace new\_password\_here to your new password. Throughout this workshop we will use the Welcome123 password.
     ```
@@ -67,6 +73,7 @@ This lab assumes you have:
 
     SQL>
     ```
+    ![Change password](images/change-password1.png " ")
 
 6. Once the password has been changed you can exit SQL Plus.
 
@@ -76,6 +83,8 @@ Disconnected from Oracle Database 23c Free, Release 23.0.0.0.0 - Developer-Relea
 Version 23.2.0.0.0
 [FREE:oracle@hol23cfdr:~]$
 		```
+
+    ![Exit](images/exit1.png " ")
 
 7. To start ORDS, from the same command prompt use the following command. The output of [1] 204454 is just an example, your output could be different.
 
@@ -87,6 +96,9 @@ Version 23.2.0.0.0
 
     **NOTE:** You must leave this terminal open and the process running. Closing either will stop ORDS from running, and you will not be able to access other applications that are used in this lab.
     ![Initial Setup](images/initial-setup.png " ")
+
+    ![Start ORDS](images/ords1.png " ")
+
 
 8. You may now proceed to the next lab.
 

@@ -53,6 +53,8 @@ This lab assumes you have:
 
     <!-- ![Unzip file](images/unzip-file.png) -->
 
+    ![Unzip the file](images/unzip2.png)
+
 4. Remove the remaining zip file after you've unzpped it.
 
     ```
@@ -60,6 +62,7 @@ This lab assumes you have:
     ```
 
     <!-- ![Remaining zip file removed](images/remove-zip.png) -->
+
 
 ## Task 2: Login and create APEX workspace
 
@@ -77,13 +80,13 @@ This lab assumes you have:
 
     ![URL login screen](images/admin-services.png)
 
-3. Login as ADMIN with your password.
+3. Login as ADMIN with your password Welcome123#.
 
     ![Login using credentials](images/login-details.png)
 
 4. You can see the welcome screen for APEX now. 
 
-    ![Welcome screen after login](images/welcome-to-apex.png)
+    ![Welcome screen after login](images/welcome-screen-apex2.png)
 
 5. Click create workspace
 
@@ -121,55 +124,57 @@ This lab assumes you have:
     ![password change](images/change-password.png)
 
 4. Click SQL Workshop -> Utilities -> Data Workshop
-    ![need image](images/example.png)
+    ![Data workshop](images/utilities-dataworkshop2.png)
 
 5. Click Load Data
-    ![need image](images/example.png)
+    ![Load data](images/load-data2.png)
 
 6. Click Choose File
-    ![need image](images/example.png)
+    ![Choose file](images/choose-file2.png)
 
 7. Click to Home -> Examples -> Graph -> BANK_ACCOUNTS.csv
-    ![need image](images/example.png)
+    ![Bank accounts graph](images/home-examples-graph27.png)
 
 8. Add the table name to be BANK_ACCOUNTS
-    ![need image](images/example.png)
+    ![Add table bank accounts](images/bankaccts28.png)
 
 9. Accept the rest of the defaults and click load data
-    ![need image](images/example.png)
+    ![Load the data](images/accept-defaults29.png)
 
 10. After seeing a successful load, click the X and click Load Data again.
-    ![need image](images/example.png)
+    ![successful load](images/after-success-load210.png)
 
 11. Now load the file by clicking to Home -> Examples -> Graph -> BANK_TRANSFERS.csv
-    ![need image](images/example.png)
+    ![bank transfers load](images/banktransfers-load211.png)
 
-12. Add the table name to be BANK_ACCOUNTS
-    ![need image](images/example.png)
+12. Add the table name to be BANK_TRANSFERS
+    ![add table name](images/bank-transfers-name212.png)
 
 13. Accept the rest of the defaults and click load data
-    ![need image](images/example.png)
+    ![Accept rest](images/btransfer-load-data213.png)
 
 14. After seeing a successful load, click the X
-    ![need image](images/example.png)
+    ![sucessful load](images/successful-load214.png)
 
 ## Task 4: Alter the schema tables
 
 1. Click SQL Workshop -> SQL Commands
+
+    ![SQL workshop commands](images/sqlworkshop-commands241.png)
 
 2. Run each of the following commands one by one. You may erase the command sheet after executing.
 
     ```
     $ <copy>ALTER TABLE bank_accounts DROP COLUMN ID;</copy>
     ```
-    ![need image](images/example.png)
+    ![alter bank accounts](images/run242.png)
 
 3. 
 
     ```
     $ <copy>ALTER TABLE bank_transfers DROP COLUMN ID;</copy>
     ```
-    ![need image](images/example.png)
+    ![alter bank transfers](images/run243.png)
 4. 
 
     ```
@@ -181,28 +186,28 @@ This lab assumes you have:
     ```
     $ <copy>ALTER TABLE bank_transfers ADD PRIMARY KEY (txn_id);</copy>
     ```
-    ![need image](images/example.png)
+    ![Alter bank transfers table](images/alter245.png)
 
 6. 
 
     ```
     $ <copy>ALTER TABLE bank_transfers MODIFY src_acct_id REFERENCES bank_accounts (id);</copy>
     ```
-    ![need image](images/example.png)
+    ![Alter bank transfers](images/alter246.png)
 
 7. 
 
     ```
     $ <copy>ALTER TABLE bank_transfers MODIFY dst_acct_id REFERENCES bank_accounts (id);</copy>
     ```
-    ![need image](images/example.png)
+    ![modify](images/alter247.png)
 
 8. 
 
     ```
     $ <copy>SELECT * FROM USER_CONS_COLUMNS WHERE table_name IN ('BANK_ACCOUNTS', 'BANK_TRANSFERS');</copy>
     ```
-    ![need image](images/example.png)
+    ![select from table](images/select248.png)
 
 
 
