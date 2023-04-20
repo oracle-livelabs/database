@@ -1,4 +1,4 @@
-. # Create the schema including JSON Duality Views
+# Create the schema including JSON Duality Views
 
 ## Introduction
 
