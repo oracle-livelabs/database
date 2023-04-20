@@ -339,10 +339,15 @@ JSON_Mergepatch follows RFC 7386 [https://datatracker.ietf.org/doc/html/rfc7386]
     update movies m
     set m.data = JSON_MERGEPATCH(data, '{"cast": ["Woody (Tom Hanks)", "Buzz Lightyear (Tim Allen)", "Bo Peep (Annie Potts)", "Forky (Tony Hale)"], "notes" : "virtual characters and voices"}')
     where m.data.movie_id = 3705;
-    commit;
     </copy>
     ```
     ![JSON merge patch update](./images/json-mergepatch-update.png " ")
+
+    Don't forget to commit your changes! 
+
+    ```
+    <copy>commit;</copy>
+    ```
 
 3.  Run the select query again to see the effect of the change: the cast was updated, and a note got added.
 

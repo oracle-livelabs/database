@@ -1,4 +1,4 @@
-. # Create the schema including JSON Duality Views
+# Create the schema including JSON Duality Views
 
 ## Introduction
 
@@ -84,9 +84,6 @@ Version 23.2.0.0.0
 [1] 204454
 [FREE:oracle@hol23cfdr:~]$
 		```
-
-    **NOTE:** You must leave this terminal open and the process running. Closing either will stop ORDS from running, and you will not be able to access other applications that are used in this lab.
-    ![Initial Setup](images/initial-setup.png " ")
 
 8. You may now proceed to the next lab.
 

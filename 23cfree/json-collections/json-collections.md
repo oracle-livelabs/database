@@ -30,6 +30,7 @@ In this lab, you will:
 	```
     <copy>http://localhost:8080/ords/hol23c/_sdw</copy>
     ```
+
 	![Open Browser](./images/open-browser.png)
 
 2. Sign in with the username and password of the schema with ORDS enabled. If you are using the green button, this user has already been created for you. Replace the `<new_password>` with the one you entered in Lab 1: Setup User.
@@ -38,9 +39,11 @@ In this lab, you will:
     username: hol23c
     password: <new_password>
     ```
+
 	![User Sign In](./images/ords-sign-in.png)
 
-4. On the homepage, click the JSON tile under Development.
+4. On the homepage, click the JSON tile under Development. You can ignore the guided tours when they pop up. 
+
 	![Homepage Development JSON](./images/homepage-json.png)
 
 5. To create a collection, click **Create Collection**.
@@ -214,7 +217,7 @@ Now let's issue some simple queries on the **movies** collection we just created
 
 	```
 	<copy>
-	{"$and":[{"price":{"$lte":5}}, {" format":"DVD"}]}
+	{"$and":[{"price":{"$lte":5}}, {"format":"DVD"}]}
 	</copy>
 	```
 	![QBE price less than 5 and not type = book ](./images/qbe-lte5-dvd-result.png)
@@ -322,7 +325,7 @@ More generally, constraints can be used to check the data being entered for vari
     with x as
     (
     SELECT DBMS_JSON_SCHEMA.validate_report(
-        JSON('{ _id": "upc9800432" ,
+        JSON('{ "_id": "upc9800432" ,
                 "title": "Love Everywhere",
                 "summary": "Plucky Brit falls in love with American actress",
                 "year": 2023,
