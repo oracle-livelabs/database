@@ -31,7 +31,7 @@ This lab assumes you have:
     [FREE:oracle@hol23cfdr:~]$
 		```
 
-    ![Set environment](images/set-envt-free1.png " ")
+    <!-- ![Set environment](images/set-envt-free1.png " ") -->
 
 
 3. Next connect to your database.
@@ -95,7 +95,6 @@ Version 23.2.0.0.0
 		```
 
     **NOTE:** You must leave this terminal open and the process running. Closing either will stop ORDS from running, and you will not be able to access other applications that are used in this lab.
-    ![Initial Setup](images/initial-setup.png " ")
 
     ![Start ORDS](images/ords1.png " ")
 

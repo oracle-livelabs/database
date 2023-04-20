@@ -5,11 +5,8 @@
 
 In this lab you will query the newly created graph (that is, `bank_graph`) using SQL/PGQ a new extension in SQL:2023.
 ​
+
 Estimated Time: 30 minutes.
-​
-Watch the video below for a quick walk through of the lab.
-​
-<!-- update video link. Previous iteration: [](youtube:XnE1yw2k5IU) -->
 ​
 ### Objectives
 Learn how to:
@@ -20,7 +17,7 @@ This lab assumes:
 - The database user exists and has the right roles and privileges.
 - The bank\_accounts and bank\_transfers tables exist. 
 ​
-### Tables are  
+### Tables are:  
 
 | Name | Null? | Type |
 | ------- |:--------:| --------------:|
@@ -37,7 +34,7 @@ This lab assumes:
 | DESCRIPTION |  | VARCHAR2(4000) |
 | AMOUNT |  | NUMBER |
 {: title="BANK_TRANSFERS"}
-​
+
 ## Task 1 : Define a graph view on these tables
 1. Stay in your SQL command window and click Clear Command after every time you execute a command. 
 ​     ![SQL command window](images/clear-command311.png " ")
@@ -62,11 +59,8 @@ This lab assumes:
     </copy>
     ```
 ​
-    <!-- REPLACE IMAGE ![Create graph using Accounts and Transfers table](images/create-graph.png) -->
+    ![Create graph using Accounts and Transfers table](images/create-graph.png)
 
-    ![need image](images/example.png)
-​
-​
 3. You can check the metadata views to list the graph, its elements, their labels, and their properties. 
 ​
     First we will be listing the graphs, but there is only one property graph we have created, so BANK\_GRAPH will be the only entry.
@@ -197,9 +191,10 @@ A common query in analyzing money flows is to see if there are a sequence of tra
     ) GROUP BY acct_id ORDER BY Num_5hop_Chains DESC;
     </copy>
     ```  
+
     Note that though we are looking for longer chains we reuse the same MATCH pattern with a modified parameter for the desired number of hops. This compactness and expressiveness is a primary benefit of the new SQL/PGQ functionality.
     
-​     ![5 hop transfers](images/five-hop-transfer326.png " ")
+    ![5 hop transfers](images/five-hop-transfer326.png " ")
 
 7.  Now that we know there are 3, 4, and 5-hop cycles let's list some (any 10) accounts that had these circular payment chains. 
    
@@ -233,7 +228,9 @@ A common query in analyzing money flows is to see if there are a sequence of tra
 ​
 9. When we created the `BANK_GRAPH` property graph we essentially created a view on the underlying tables and metadata. No data is duplicated. So any insert, update, or delete on the underlying tables will also be reflected in the property graph.   
 ​
-Now, let's insert some more data into BANK\_TRANSFERS. We will see that when rows are inserted in to the BANK\_TRANSFERS table, the BANK\_GRAPH is updated with corresponding edges.
+    Now, let's insert some more data into BANK\_TRANSFERS. We will see that when rows are inserted in to the BANK\_TRANSFERS table, the BANK\_GRAPH is updated with corresponding edges.
+
+    This is a PL/SQL command as the SQL Command window only permits one SQL command being run at a time and we wanted to make it easier for you. The "begin" and "end" make it clear that it is PL/SQL, not SQL.
    
     ```
     <copy>
@@ -278,7 +275,7 @@ Now, let's insert some more data into BANK\_TRANSFERS. We will see that when row
     ```
    ​     ![account 39](images/accountthirtynine3211.png " ")
 ​
-    It has 2.      
+    It has 0.      
 ​
 12.  So let's insert more transfers which create 3 more circular payment chains. We will be adding transfers from accounts **599**, **982**, and **407** into account **39**.
    
