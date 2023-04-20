@@ -19,57 +19,7 @@ This lab assumes:
 - The graph user and graph bank_graph exists
 - You have ORDS running so you can open APEX
 
-## Task 1 : Login and create APEX workspace
-
-1. Open Activities -> Google Chrome
-
-    ![Open Google Chrome](images/activities-chrome.png)
-
-
-2. Go to this URL and wait for the screen to load.
-    ```
-    <copy>
-    http://localhost:8080/ords/apex_admin
-    </copy>
-    ```
-
-    ![URL login screen](images/admin-services.png)
-
-
-3. Login as ADMIN with your password.
-
-    ![Login using credentials](images/login-details.png)
-
-4. You can see the welcome screen for APEX now. 
-
-    ![Welcome screen after login](images/welcome-to-apex.png)
-
-5. Click create workspace
-
-    ![workspace welcome screen](images/workspace-name.png)
-
-6. Name the workspace 'graph' and click Next
-
-    ![enter graph for the workspace](images/graph-next.png)
-
-7. Set reuse existing schema to Yes. Click the menu icon next to schema name and select HOL23C. Set your schema password to whatever but write it down. Leave the default for space quota.
-
-    ![Schema information input changes](images/schema-info.png)
-
-8. Admin username: admin, password: Welcome123#, email: your email.
-
-    ![admin password email input](images/admin-password-email.png)
-
-9. Review the output then click Create workspace.
-
-    ![Create workspace](images/create-workspace.png)
-
-10. Success! Now click done.
-
-    ![completetion screen](images/done.png)
-
-
-## Task 2 : Import APEX app to visualize queries
+## Task 1 : Import APEX app to visualize queries
 
 1. In the upper right corner, click the admin icon then click sign out.
     ![sign out from admin](images/logout.png)
@@ -122,7 +72,6 @@ This lab assumes:
 * [SQL Property Graph syntax in Oracle Database 23c Free - Developer Release](https://docs.oracle.com/en/database/oracle/property-graph/23.1/spgdg/sql-ddl-statements-property-graphs.html#GUID-6EEB2B99-C84E-449E-92DE-89A5BBB5C96E)
 
 ## Acknowledgements
-
 - **Author** - Kaylien Phan, Thea Lazarova, William Masdon
 - **Contributors** - Melliyal Annamalai, Jayant Sharma, Ramu Murakami Gutierrez, Rahul Tasker
 - **Last Updated By/Date** - Kaylien Phan, Thea Lazarova

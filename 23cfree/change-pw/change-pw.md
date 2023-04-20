@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Resetting the password for the hol23c user in the Oracle Database.
+Resetting the password for the hol23c user in the Oracle Database and starting up ORDS, which will be needed to start up other applications.
 
 Estimated Time: 5 minutes
 
@@ -17,7 +17,7 @@ This lab assumes you have:
 * Oracle Database 23c Free Developer Release
 * A terminal or console access to the database
 
-## Task 1: Setting database user password and starting SQL Developer Web
+## Task 1: Setting database user password and starting ORDS
 
 1. The first step is to get to a command prompt. If you need to open a terminal and you are running in a Sandbox environment click on Activities and then Terminal.
     ![Open a new terminal](images/open-terminal.png " ")
@@ -77,14 +77,17 @@ Version 23.2.0.0.0
 [FREE:oracle@hol23cfdr:~]$
 		```
 
-7. To start SQL Developer Web, from the same command prompt use the following command. This will run in the background and will stop if you exit the terminal. The output of [1] 204454 is just an example, your output could be different.
+7. To start ORDS, from the same command prompt use the following command. The output of [1] 204454 is just an example, your output could be different.
 
     ```
 		[FREE:oracle@hol23cfdr:~]$ <copy>ords serve > /dev/null 2>&1 &</copy>
 [1] 204454
 [FREE:oracle@hol23cfdr:~]$
 		```
+
+    **NOTE:** You must leave this terminal open and the process running. Closing either will stop ORDS from running, and you will not be able to access other applications that are used in this lab.
     ![Initial Setup](images/initial-setup.png " ")
+
 8. You may now proceed to the next lab.
 
 ## Learn More
