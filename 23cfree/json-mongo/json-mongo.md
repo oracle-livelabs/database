@@ -51,6 +51,8 @@ PUT IN DISCLAIMER ABOUT DOWNLOADED MONGO TOOLS
     Example: <copy>export URI='mongodb://hol23c:Welcome123@localhost:27017/hol23c?authMechanism=PLAIN&authSource=$external&tls=true&retryWrites=false&loadBalanced=true'</copy>
     ```
 
+    If you aren't using the green button environment and you have different values for those fields, you may need to escape some characters. Please click [this link](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/mongo-using-oracle-database-api-mongodb.html#ADBSA-GUID-44088366-81BF-4090-A5CF-09E56BB2ACAB) to learn how to escape characters in the URL. 
+
 2. Before we connect to the Mongo Shell, let's populate our database using the Mongo Tools. You will use a document from Object Storage to seed the data in your **movie** collection.
 
     ```
