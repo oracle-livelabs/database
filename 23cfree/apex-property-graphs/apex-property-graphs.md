@@ -21,51 +21,39 @@ This lab assumes:
 
 ## Task 1 : Import APEX app to visualize queries
 
-1. In the upper right corner, click the admin icon then click sign out.
-    ![sign out from admin](images/logout.png)
-
-
-2.  Log back in as the admin info you just created along with the workspace name as graph.
-    ![log back in](images/log-back-in.png)
-
-
-3. Change password
-    ![password change](images/change-password.png)
-
-
-4. App Builder -> Import
+1. App Builder -> Import
 
     ![Import from app builder](images/app-builder-import.png)
 
-5. Click to add a file to open for import. Go to Home -> example -> graph -> f106.sql and open that file. Leave the defaults and click next.
+2. Click to add a file to open for import. Go to Home -> example -> graph -> f106.sql and open that file. Leave the defaults and click next.
 
     ![open f106 sql file](images/graph-f106-open.png)
 
     ![Import f106 sql file](images/f106-import.png)
 
-6. Click next.
+3. Click next.
     
-7.  Leave all defaults, except check Reuse app 106 from file under Install Application and click Install Application. 
+4.  Leave all defaults, except check Reuse app 106 from file under Install Application and click Install Application. 
 
     ![Install the application](images/install-application.png)
 
-8.  Click run application
+5.  Click run application
 
     ![Run the application](images/run-application.png)
 
 
-9.  Login.
+6.  Login.
 
     ![Log back in](images/login-final.png)
 
 
-10. Click property graph queries with pgq box
+7. Click property graph queries with pgq box
     ![Property graph queries selection](images/property-graph-queries.png)
     
-11. Scroll through output.
+8. Scroll through output.
     ![Final scroll through the output](images/final-output.png)
 
-12. You have now completed this lab.
+9. You have now completed this lab.
 
 ## Learn More
 * [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
