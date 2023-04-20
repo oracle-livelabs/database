@@ -80,7 +80,7 @@ This lab assumes you have:
 
     ![URL login screen](images/admin-services.png)
 
-3. Login as ADMIN with your password Welcome123#.
+3. Login as ADMIN with your password Welcome123# or whatever you had set it to in Lab 1.
 
     ![Login using credentials](images/login-details.png)
 
@@ -157,15 +157,16 @@ This lab assumes you have:
     ![sucessful load](images/successful-load214.png)
 
 ## Task 4: Alter the schema tables
+Before we begin the rest of the lab, we wanted to emphasize that all of the following queries we are about to do can be achieved in SQL Developer. We are using APEX for simplicity and to show how it could be done through here, but these are standardized SQL commands that you could run on other tools, such as SQL Developer or SQL Developer Web.
 
 1. Click SQL Workshop -> SQL Commands
 
     ![SQL workshop commands](images/sqlworkshop-commands241.png)
 
-2. Run each of the following commands one by one. You may erase the command sheet after executing.
+2. Run each of the following commands one by one. You may erase the command sheet after executing by clicking Clear Command.
 
     ```
-    $ <copy>ALTER TABLE bank_accounts DROP COLUMN ID;</copy>
+    $ <copy>ALTER TABLE bank_accounts DROP COLUMN ID_1;</copy>
     ```
     ![alter bank accounts](images/run242.png)
 
@@ -180,7 +181,7 @@ This lab assumes you have:
     ```
     $ <copy>ALTER TABLE bank_accounts ADD PRIMARY KEY (id);</copy>
     ```
-    ![need image](images/example.png)
+    ![add primary key to bank_accounts](images/add-primary-key.png)
 
 5. 
     ```

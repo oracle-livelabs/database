@@ -29,11 +29,10 @@ This lab assumes:
 
     ![open f106 sql file](images/graph-f106-open.png)
 
-    ![open f106 sql file](images/graph-f106-open.png)
-
     ![Import f106 sql file](images/f106-import.png)
 
 3. Click next.
+    ![Import f106 sql file](images/f106-import-2.png)
     
 4.  Leave all defaults, except check Reuse app 106 from file under Install Application and click Install Application. 
 
