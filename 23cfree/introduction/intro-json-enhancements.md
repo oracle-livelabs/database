@@ -14,7 +14,7 @@ This workshop is not a 'cookbook' or 'design guideline' on how to build an onlin
 
 You can complete this entire workshop using your web browser. There is no need to install any extra software other than Mongo DB tools when you're prompted to do so. When writing a real application, you would call many of the functionalities from a programming language like Java, JavaScript(nodeJS) or Python.
 
-Estimated Time: 30 minutes
+Estimated Time:  1 hour 30 minutes
 
 Watch this quick video to know why JSON in Oracle Autonomous Database is awesome.
 
