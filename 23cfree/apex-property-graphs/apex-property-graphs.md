@@ -19,7 +19,55 @@ This lab assumes:
 - The graph user and graph bank_graph exists
 - You have ORDS running so you can open APEX
 
-## Task 1 : Import APEX app to visualize queries
+## Task 1: Login and create APEX workspace
+
+1. Open Activities -> Google Chrome
+
+    ![Open Google Chrome](images/activities-chrome.png)
+
+
+2. Go to this URL and wait for the screen to load.
+    ```
+    <copy>
+    http://localhost:8080/ords/apex_admin
+    </copy>
+    ```
+
+    ![URL login screen](images/admin-services.png)
+
+3. Login as ADMIN with the password Welcome123# and reset it to as you please.
+
+    ![Login using credentials](images/login-details.png)
+
+4. You can see the welcome screen for APEX now. 
+
+    ![Welcome screen after login](images/welcome-screen-apex2.png)
+
+5. Click create workspace
+
+    ![workspace welcome screen](images/workspace-name.png)
+
+6. Name the workspace 'graph' and click Next
+
+    ![enter graph for the workspace](images/graph-next.png)
+
+7. Set reuse existing schema to Yes. Click the menu icon next to schema name and select HOL23C. Leave the default for space quota and password.
+
+    ![Schema information input changes](images/schema-info.png)
+
+8. Admin username: admin, password: Welcome123#, email: your email.
+
+    ![admin password email input](images/admin-password-email.png)
+
+9. Review the output then click Create workspace.
+
+    ![Create workspace](images/create-workspace.png)
+
+10. Success! Now click done.
+
+    ![completetion screen](images/done.png)
+
+## Task 2 : Import APEX app to visualize queries
 
 1. App Builder -> Import
 
