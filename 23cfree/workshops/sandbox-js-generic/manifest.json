@@ -1,0 +1,27 @@
+{
+  "workshoptitle": "Simple Data Driven applications using JavaScript in Oracle Database 23c",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+      {
+          "title": "Introduction",
+          "description": "Introduction to Simple Data Driven applications using JavaScript workshop",
+          "filename": "../../introduction/intro-js-generic.md"
+      },
+      {
+          "title": "Get Started with NoVNC",
+          "description": "Verify Setup of compute instance",
+          "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+      },
+      {
+          "title": "Lab 1: Get started with JavaScript using a community module",
+          "description": "Set up your environment and implement the validator.js module in your application",
+          "type": "sandbox",
+          "filename": "../../js-generic-get-started-example/get-started-example.md"
+      },
+      {
+        "title": "Need Help?",
+        "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
+        "filename":"https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
+      }
+  ]
+}
