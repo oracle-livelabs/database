@@ -15,9 +15,13 @@
       {
           "title": "Lab 1: Get started with JavaScript using a community module",
           "description": "Set up your environment and implement the validator.js module in your application",
-          "type": "sandbox",
           "filename": "../../js-generic-get-started-example/get-started-example.md"
       },
+      {
+        "title": "Lab 2: Write JavaScript modules and environments",
+        "description": "Learn more about creating JavaScript modules and environments",
+        "filename": "../../js-generic-modules-environments/modules-environments.md"
+    },
       {
         "title": "Need Help?",
         "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",

@@ -8,7 +8,6 @@ Before jumping into the description of JavaScript features and all their details
 
 Estimated Time: 10 minutes
 
-
 ### Objectives
 
 In this lab, you will:
