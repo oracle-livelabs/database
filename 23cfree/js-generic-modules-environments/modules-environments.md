@@ -10,9 +10,10 @@ Estimated Lab Time: 10 minutes
 
 In this lab, you will:
 
-- Objective 1
-- Objective 2
-- Objective 3
+- Create a database session
+- Create JavaScript modules
+- Perform naming resolution using MLE environments
+- View dictionary information about modules and environments
 
 ### Prerequisites (Optional)
 
@@ -201,7 +202,7 @@ In addition, Data Guard replication ensures that the exact same code is present 
 
 	The environment will play a crucial role when exposing JavaScript code to SQL and PL/SQL, a topic that will be covered in a later lab.
 
-## Task 4: View dictionary information about modules
+## Task 4: View dictionary information about modules and environments
 
 A number of new dictionary views allow you to see which modules are present in your schema, which environments were created, and which import names have been mapped to modules. Existing views like `ALL_SOURCE` have been extended to show the module's source code.
 
