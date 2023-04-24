@@ -34,49 +34,49 @@ In this task we will review the code using OCI Code Editor.
 
     ![Code](./images/appl-code.png)
 
-Oracle NoSQL Database offers **flexible deployment** options to suit the needs of
+    Oracle NoSQL Database offers **flexible deployment** options to suit the needs of
 its customers. Whether deploying on an "On-Premises" cluster or utilizing the
 Oracle NoSQL Database Cloud Service, developers and end-users get the latest in
 NoSQL technology. Oracle offers a complete range of deployment options to
 support your NoSQL database, from on-premises to private cloud to public cloud.  Depending
 on which deployment opiton you choose, you may need different authentication strategies.
 
-The function `createNoSQLClient` illustrates the different authentication options in the case
-statement. We covered the authentication basics in Lab 2. If the function isnt visible in your
+  The function `createNoSQLClient` illustrates the different authentication options in the case
+statement. We covered the authentication basics in Lab 2. If the function is not visible in your
 screen, go ahead and scroll to it:
-    - You can use **Instance Principals** to do the connection to NoSQL Cloud Service as
+    * You can use **Instance Principals** to do the connection to NoSQL Cloud Service as
 shown in this code. Once Instance Principals are set up, you can make API calls to
 different Oracle Cloud Infrastructure services.  The benefit it applications running
 on those instances does not have to configure user credentials or a configuration file.
 
-    - You can use **Delegation Tokens** to do the connection to NoSQL Cloud Service
+    * You can use **Delegation Tokens** to do the connection to NoSQL Cloud Service
     and in this lab we will use them.
 
-    - You can use **Resource Principals** to do the connection to NoSQL Cloud Service as
+    * You can use **Resource Principals** to do the connection to NoSQL Cloud Service as
 shown in this code.
 
-    - Finally, the default configuration in this code, allows you to do the connection
+    * Finally, the default configuration in this code, allows you to do the connection
 to on-premise non-secure configuration. It is not the topic of this workshop but if you
 want to learn more [check here.](https://github.com/oracle/nosql-examples/blob/master/demo-livelab/video-on-demand-with-nosql-database/README.md)
 
 
-    When you create a table, you can choose between **Provisioned Capacity** and
+  When you create a table, you can choose between **Provisioned Capacity** and
 **On-Demand Capacity**. With the availability of both models, businesses have total flexibility when
 choosing the most cost-effective deployment to meet their business and application
 workload requirements. Such flexibility empowers businesses to solely focus on application
 innovations to delight their customers, making operational costs "worry-free" in their decision-making process.
 
-    You can also modify the **Capacity mode** from Provisioned Capacity to On Demand Capacity and vice-versa.
-    The function `createTable` illustrates this.
+  You can also modify the **Capacity mode** from Provisioned Capacity to On Demand Capacity and vice-versa.
+The function `createTable` illustrates this.
 
-    As a developer, you can access your data via an API or SQL. Review the rest of the code in
+  As a developer, you can access your data via an API or SQL. Review the rest of the code in
 in index.js and you will notice that we are using a combination of APIs and SQL statements
 in our sample application.
-    - Get, put, scan APIs for raw key/value pairs and tables – CRUD API
-    - SQL for rich access to JSON, more complex filtering expressions
-    - Support for conjunctions and disjunctions in filter expressions
+    * Get, put, scan APIs for raw key/value pairs and tables – CRUD API
+    * SQL for rich access to JSON, more complex filtering expressions
+    * Support for conjunctions and disjunctions in filter expressions
 
-In the Lab **Explore Data and Run Queries**, we will explore more on detail our
+    In the Lab **Explore Data and Run Queries**, we will explore more on detail our
 rich SQL access into JSON objects. But for now, let's continue with this Lab.
 
 ## Task 2: Restart the Cloud Shell
