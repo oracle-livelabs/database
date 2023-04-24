@@ -129,7 +129,6 @@ The Session token-based approach is similar but it adds a temporary session toke
 usually expires in an hour.   This is useful when a temporary authentication is
 required.
 
-
 Another way to handle authentication is with Instance and Resource Principals.
 
 Resource principals allow you to authenticate and access Oracle Cloud Infrastructure
@@ -148,9 +147,9 @@ are set up in IAM. You can think of them as an IAM service feature that enables
 instances to be authorized actors (or principals) to perform actions on service resources.
 
 Oracle NoSQL Database Cloud service has three different resource types, namely,
-nosql-tables, nosql-rows, and nosql-indexes. It also has one aggregate resource
-called nosql-family. Policies are created that allow a group to work in certain
-ways with specific types of resources such as nosql-tables in a particular
+`nosql-tables`, `nosql-rows`, and `nosql-indexes`. It also has one aggregate resource
+called `nosql-family`. Policies are created that allow a group to work in certain
+ways with specific types of resources such as `nosql-tables` in a particular
 compartment. All NoSQL tables belong to a defined compartment.
 In Task 1 of this Lab, we created the demonosql compartment and this is where
  we will create our tables.
@@ -176,7 +175,7 @@ function createClientResource() {
 }
 </copy>
 ```
-ALso in one of our next labs we are going to be running application code and we need an
+Also in one of our next labs we are going to be running application code and we need an
 instance to run that from. We will run that application using Cloud Shell
 with a delegation token.
 

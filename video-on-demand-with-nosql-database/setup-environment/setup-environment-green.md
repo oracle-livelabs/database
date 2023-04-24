@@ -95,19 +95,30 @@ will be used only in the Lab4
 **Oracle NoSQL Database Cloud Service uses Oracle Cloud Infrastructure Identity
 and Access Management to provide secure access to Oracle Cloud.** Oracle Cloud
 Infrastructure Identity and Access Management enables you to create user accounts
-and give users permission to inspect, read, use, or manage tables.
-Credentials are used for connecting your application to the service and are
-associated with a specific user.
+and give users permission to inspect, read, use, or manage NoSQL tables.  There are 4
+authentication methods available: API key-based, Session token-based
+(delegation tokens), Instance Principal and Resource Principal. The Oracle NoSQL Database
+SDKs allow you to provide the credentials for an application using any of these
+authentication methods. Credentials are typically associated with a specific user.
 
-The Oracle NoSQL Database SDKs allow you to provide the credentials to an application
-in multiple ways. The SDKs support a configuration file as well as one or more
-interfaces that allow direct specification of the information. You can use the
-SignatureProvider API to supply your credentials to NoSQL Database.
 Oracle NoSQL has SDKs in the following languages:  Java, Node.js, Python, Go, Spring and C#.
+The SDKs support a configuration file as well as API interfaces that allow direct
+specification of the credential information. You can use the
+SignatureProvider API to supply your API key-based credentials to NoSQL Database. The
+usual things provided include user OCID, tenancy OCID, private key, and fingerprint.
+The Session token-based approach is similar but it adds a temporary session token which
+usually expires in an hour.   This is useful when a temporary authentication is
+required.
 
 Another way to handle authentication is with Instance and Resource Principals.
-The Oracle NoSQL SDKs support both of them. Resource principals are primarily
-used when authenticating from functions.
+
+Resource principals allow you to authenticate and access Oracle Cloud Infrastructure
+resources.  A resource principal consists of a temporary session token (which
+typically is cached for 15 minutes) and secure
+credentials that enables the owner/user to authenticate to Oracle Cloud Infrastructure services.
+To use them you have to set up a dynamic group and create a policy that grants the
+dynamic group access to a resource.   These are typically used when authenticating
+into the NoSQL Cloud Service from functions (NoSQL Cloud Service would be the resource).
 
 Instance Principals is a capability in Oracle Cloud Infrastructure Identity
 and Access Management (IAM) that lets you make service calls from an instance.
@@ -117,9 +128,9 @@ are set up in IAM. You can think of them as an IAM service feature that enables
 instances to be authorized actors (or principals) to perform actions on service resources.
 
 Oracle NoSQL Database Cloud service has three different resource types, namely,
-nosql-tables, nosql-rows, and nosql-indexes. It also has one aggregate resource
-called nosql-family. Policies are created that allow a group to work in certain
-ways with specific types of resources such as nosql-tables in a particular
+`nosql-tables`, `nosql-rows`, and `nosql-indexes`. It also has one aggregate resource
+called `nosql-family`. Policies are created that allow a group to work in certain
+ways with specific types of resources such as `nosql-tables` in a particular
 compartment. All NoSQL tables belong to a defined compartment.
 In Task 1 of this Lab, we created the demonosql compartment and this is where
  we will create our tables.
