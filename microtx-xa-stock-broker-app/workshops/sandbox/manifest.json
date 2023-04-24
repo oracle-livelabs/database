@@ -1,0 +1,33 @@
+{
+  "workshoptitle": "Inconsistent Data and Financial Losses Are a Thing of the Past: Making Distributed Transactions Easy with Oracle MicroTx",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The Introduction is always second for LiveLabs. The title and contents menu title match for the Introduction.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Lab 1: Environment setup",
+      "description": "Verify Setup of compute instance",
+      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+    },
+    {
+      "title": "Lab 1: Run an LRA sample application",
+      "filename": "../../integrate-microtx-lib-files/integrate-microtx-lib-files.md"
+    },
+    {
+      "title": "Lab 3: Provision Autonomous Databases for Use as resource manager",
+      "filename": "../../adb-provision/adb-provision.md"
+    },
+    {
+      "title": "Lab 4: Run an XA sample application",
+      "filename": "../../run-xa-app/run-xa-app.md"
+    },
+    {
+      "title": "Need help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}
