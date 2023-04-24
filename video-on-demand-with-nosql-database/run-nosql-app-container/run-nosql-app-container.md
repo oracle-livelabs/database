@@ -49,6 +49,9 @@ In this task we will review the code using OCI Code Editor.
    **delegation tokens**.  In this lab, we are going to be running
    application using **Resource Principals**.
 
+   Note: When deploying using OKE, you will do the connection using **Instance Principals**. It is not the topic of this workshop but if you
+want to learn more [check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-vod.yml)
+and [here.](https://github.com/oracle/nosql-examples/blob/master/demo-livelab/video-on-demand-with-nosql-database/oracle-app-ndcs-deployment.yaml)
 
 ## Task 2: Restart the Cloud Shell
 
@@ -170,4 +173,4 @@ You may now **proceed to the next lab.**
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, January 2023
+* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Development, April 2023
