@@ -285,7 +285,7 @@ A common query in analyzing money flows is to see if there are a sequence of tra
 ​
 12.  So let’s insert more transfers which create some circular payment chains.
 
-    Add a step after step 13 to explain why there are 5 chains as a result of inserting 3 rows. We will be adding transfers from accounts **599**, **982**, and **407** into account **39**.
+    We will be adding transfers from accounts **599**, **982**, and **407** into account **39**.
    
     ```
     <copy>

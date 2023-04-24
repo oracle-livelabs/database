@@ -88,7 +88,7 @@ This lab assumes you have:
 
     ![Open the connection](images/hol23c-connection.png)
 
-4. Fill out the connection information with your password. The default password we will be using throughout this lab is Welcome123#. If you have changed yours, please use that one. After you click okay, you should be connected to your user.
+4. Fill out the connection information with your password. The default password we will be using throughout this lab is Welcome123. If you have changed yours, please use that one. After you click okay, you should be connected to your user.
 
     ![Login information](images/login-connection.png)
 
