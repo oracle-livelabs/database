@@ -79,6 +79,9 @@ In addition, Data Guard replication ensures that the exact same code is present 
 	 * @returns {string}
 	 */
 	function obj2String(inputObject) {
+		if ( typeof inputObject != 'object' ) {
+			throw "inputObject isn't an object";
+		}
 		return JSON.stringify(inputObject);
 	}
 
@@ -125,6 +128,9 @@ In addition, Data Guard replication ensures that the exact same code is present 
 	 * @returns {string}
 	 */
 	function obj2String(inputObject) {
+		if ( typeof inputObject != 'object' ) {
+			throw "inputObject isn't an object";
+		}
 		return JSON.stringify(inputObject);
 	}
 
@@ -159,25 +165,34 @@ In addition, Data Guard replication ensures that the exact same code is present 
 	<copy>
 	create mle module business_logic language javascript as
 
-	import { string2JSON } from 'helpers';
+	import { string2obj } from 'helpers';
 	
 	export function processOrder(orderData) {
-		const orderDataJSON = string2JSON(orderData);
+		
+		const orderDataJSON = string2obj(orderData);
 		const result = session.execute(`
 			insert into orders (
-			order_id, order_mode, customer_id, order_status,
-			order_total, sales_rep_id, promotion_id
-			) 
+				order_id,
+				order_date,
+				order_mode, 
+				customer_id, 
+				order_status,
+				order_total, 
+				sales_rep_id, 
+				promotion_id
+			)
 			select
-			jt.*
-				from json_table(:orderDataJSON, '$' columns
-				order_id path '$.order_id', 
-				order_mode path   '$.order_mode',
-				customer_id path  '$.customer_id', 
-				order_status path '$.order_status',
-				order_total path  '$.order_total', 
-				sales_rep_id path '$.sales_rep_id',
-				promotion_id path '$.promotion_id'
+				jt.*
+			from 
+				json_table(:orderDataJSON, '$' columns
+					order_id             path '$.order_id',
+					order_date timestamp path '$.order_date',
+					order_mode           path '$.order_mode',
+					customer_id          path '$.customer_id', 
+					order_status         path '$.order_status',
+					order_total          path '$.order_total', 
+					sales_rep_id         path '$.sales_rep_id',
+					promotion_id         path '$.promotion_id'
 			) jt`,
 			{
 				orderDataJSON: {
@@ -197,7 +212,24 @@ In addition, Data Guard replication ensures that the exact same code is present 
 	</copy>
 	```
 
-2. Understand name resolution in Multilingual Engine (MLE)
+	In case you don't have the sample schemas installed you can create the `ORDERS` table as follows
+
+	```sql
+	<copy>
+	create table orders (
+		order_id     number(12) not null,
+		order_date   date not null,
+		order_mode   varchar2(8),
+		customer_id  number(6) not null,
+		order_status number(2),
+		order_total  number(8,2),
+		sales_rep_id number(6),
+		promotion_id number(6)
+	);
+	</copy>
+	```
+
+2. Understand name resolution in JavaScript powered by Multilingual Engine (MLE)
 
 	The main difference between `business_logic` and `helper_module_inline` is the import statement: `business_logic` imports a function named `string2JSON` from the `helpers` module. This is very similar to how you import modules in `node.js` and `deno` projects. The main difference between client-side development and server-side development is the fact that modules are stored in the database in Oracle. A helper entity is needed to tell the runtime what 'helpers' is pointing to. MLE envs serve this purpose: they map an existing module like the `helper_module_inline` to a so-called _import name_ that can be used in import statements.
 
@@ -239,42 +271,41 @@ A number of new dictionary views allow you to see which modules are present in y
 	You should see the following output:
 
 	```
-	LINE TEXT
-	----- --------------------------------------------------------------------------------------
-		1 function string2obj(inputString) {
-		2	  if ( inputString === undefined ) {
-		3	      throw `must provide a string in the form of key1=value1;...;keyN=valueN`;
-		4	  }
-		5	  let myObject = {};
-		6	  if ( inputString.length === 0 ) {
-		7	      return myObject;
-		8	  }
-		9	  const kvPairs = inputString.split(";");
-		10	  kvPairs.forEach( pair => {
-		11	      const tuple = pair.split("=");
-		12	      if ( tuple.length === 1 ) {
-		13		  tuple[1] = false;
-		14	      } else if ( tuple.length != 2 ) {
-		15		  throw "parse error: you need to use exactly one '=' between " +
-		16			"key and value and not use '=' in either key or value";
-		17	      }
-		18	      myObject[tuple[0]] = tuple[1];
-		19	  });
-		20	  return myObject;
-		21 }
-		22
-		23 /**
-		24  * convert a JavaScript object to a string
-		25  * @param {object} inputObject - the object to transform to a string
-		26  * @returns {string}
-		27  */
-		28 function obj2String(inputObject) {
-		29	  return JSON.stringify(inputObject);
-		30 }
-		31
-		32 export { string2obj, obj2String }
-
-		32 rows selected.
+ LINE TEXT
+----- --------------------------------------------------------------------------------------
+    1 function string2obj(inputString) {
+    2     if ( inputString === undefined ) {
+    3         throw `must provide a string in the form of key1=value1;...;keyN=valueN`;
+    4     }
+    5     let myObject = {};
+    6     if ( inputString.length === 0 ) {
+    7         return myObject;
+    8     }
+    9     const kvPairs = inputString.split(";");
+   10     kvPairs.forEach( pair => {
+   11         const tuple = pair.split("=");
+   12         if ( tuple.length === 1 ) {
+   13             tuple[1] = false;
+   14         } else if ( tuple.length != 2 ) {
+   15             throw "parse error: you need to use exactly one '=' between " +
+   16                   "key and value and not use '=' in either key or value";
+   17         }
+   18         myObject[tuple[0]] = tuple[1];
+   19     });
+   20     return myObject;
+   21 }
+   22 /**
+   23  * convert a JavaScript object to a string
+   24  * @param {object} inputObject - the object to transform to a string
+   25  * @returns {string}
+   26  */
+   27 function obj2String(inputObject) {
+   28     if ( typeof inputObject != 'object' ) {
+   29         throw "inputObject isn't an object";
+   30     }
+   31     return JSON.stringify(inputObject);
+   32 }
+   33 export { string2obj, obj2String }
 ```
 
 2. View information about modules in your schema
