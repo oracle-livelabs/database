@@ -103,9 +103,7 @@ Version 23.2.0.0.0
 
 ## Learn More
 
-* [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
-* [JSON Duality View documentation](http://docs.oracle.com)
-* [Blog: Key benefits of JSON Relational Duality] (https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
+* [Introducing Oracle Database 23c Free – Developer Release](https://blogs.oracle.com/database/post/oracle-database-23c-free)
 
 ## Acknowledgements
 * **Author** - Kaylien Phan, William Masdon
