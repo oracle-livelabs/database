@@ -1,4 +1,4 @@
-# Title of the Lab
+# JavaScript Modules and Environments
 
 ## Introduction
 
@@ -15,7 +15,7 @@ In this lab, you will:
 - Perform naming resolution using MLE environments
 - View dictionary information about modules and environments
 
-### Prerequisites (Optional)
+### Prerequisites
 
 This lab assumes you have:
 

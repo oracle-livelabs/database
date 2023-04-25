@@ -59,7 +59,7 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
 	SQL> <copy>alter session set container = freepdb1;</copy>
 	```
 
-3. Create a new user in freepdb1
+3. Create a new user in freepdb1 with the necessary privileges to create, store and run JavaScript code
 
 	Next you need to prepare the creation of the developer account. The instructions in the following snippet create a new account, named `jstest`. It will be used to store JavaScript modules in the database.
 
@@ -78,7 +78,7 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
 
 	drop directory if exists javascript_src_dir;
 	create directory javascript_src_dir as '/home/oracle/hol23c';
-	grant read on directory javascript_src_dir to jstest;
+	grant read, write on directory javascript_src_dir to jstest;
 
 	exit</copy>
 	```
@@ -150,7 +150,7 @@ You can read more about creating JavaScript modules in Oracle Database 23c Free 
 
 ## Task 4: Expose the module's functionality to PL/SQL and SQL
 
-With the module successfully created in the schema the hardest part is complete. The validator module exposes quite a few string validators for any purpose imaginable, the project's GitHub page lists them all in a convenient tabular format. As per the introduction to this post, the project requires validation of an email address. A PL/SQL call specification links the module's JavaScript functions to SQL and PL/SQL. In this simple case a stand-alone function does the trick:
+With the module successfully created in the schema the hardest part is complete. The validator module exposes quite a few string validators for any purpose imaginable, the project's GitHub page lists them all in a convenient tabular format. As per the introduction to this lab the goal is to validate email addresses. A PL/SQL call specification links the module's JavaScript functions to SQL and PL/SQL. In this simple case a stand-alone function does the trick:
 
 ```sql
 <copy>
@@ -165,7 +165,7 @@ signature 'default.isEmail(string)';
 
 The validator library's `index.js` (in src/index.js in the project’s Github repository) declares the validator object as the module's default export, requiring the use of the `default` keyword in the function's signature.
 
-In case where multiple JavaScript functions are made available to PL/SQL and SQL you should probably encapsulate them in a package.
+In case where multiple JavaScript functions are made available to PL/SQL and SQL you should follow the industry's best practice and encapsulate them in a package.
 
 Please refer to chapter 5 in the JavaScript Developer's Guide for more information about call specifications and module calls.
 
@@ -185,6 +185,7 @@ select isEmail('user@example.com') as test3;
 
 - [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/index.html)
 - [Application Programming Interface (API) Reference](https://oracle-samples.github.io/mle-modules/)
+- [Validator.js on Github](https://github.com/validatorjs/validator.js)
 
 ## Acknowledgements
 

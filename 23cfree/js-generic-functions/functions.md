@@ -47,7 +47,6 @@ Connect to `freepdb1` just as you did in the previous labs, don't forget to subs
 ```bash
 <copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
 ```
-	
 
 ## Task 3: Create a simple call specification referring to functions in a module
 
