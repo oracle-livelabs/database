@@ -25,7 +25,7 @@ This lab assumes you have:
 ## Task 1: Download the graph setup materials
 
 
-1. Click Activities in the upper left corner, then click Terminal.
+1. Click Activities in the upper left corner, then click Terminal. Select File -> New Tab since ORDS is running in your current Terminal tab.
 
     ![Access Terminal through activities](images/activities-terminal.png)
 
@@ -104,7 +104,7 @@ This lab assumes you have:
 
     ![Open the sql file](images/open-createkeys.png)
 
-8. Click the button that shows a document with the small green play button on it to run the whole script. If it asks you to select a connection in a popup window, choose hol23c_freepdb1 from the drop down and then click okay.
+8. Click the button that shows a document with the small green play button on it to run the whole script. If it asks you to select a connection in a popup window, choose hol23c_freepdb1 from the drop down and then click OK.
 
     ![Run script with play button](images/play-button.png)
 
