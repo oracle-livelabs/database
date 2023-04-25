@@ -62,7 +62,7 @@ In this lab, you will:
     </copy>
     ```
 
-    ![JSON serialize function](./images/json-serialize.png " ")
+    ![JSON serialize function](./images/JSON-serialize.png " ")
 
 2. Simple dot notation - We can extract values from the JSON data using a simple notation (similar to JavaScript) directly from SQL.
 
@@ -74,7 +74,7 @@ In this lab, you will:
     fetch first 10 rows only;
     </copy>
     ```
-    ![simple dot notation](./images/json-simple-dot.png " ")
+    ![simple dot notation](./images/JSON-simple-dot.png " ")
 
     We use a trailing function like 'date()' or 'number()' to map a selected JSON scalar value to a SQL value.
 

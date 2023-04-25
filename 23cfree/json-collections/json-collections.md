@@ -72,7 +72,7 @@ In this lab, you will:
 
 2. Click the *New JSON Document* button.
 
-	![new document button](./images/new-json-doc.png)
+	![new document button](./images/new-JSON-doc.png)
 
 3. A **New JSON Document** panel displays. Copy the following JSON object, paste it in the worksheet and click **Create**.
 
@@ -93,11 +93,11 @@ In this lab, you will:
 	</copy>
 	```
 
-	![add new document](./images/json-object.png)
+	![add new document](./images/JSON-object.png)
 
 4. A notification pops up that says A New Document is created and the new document is shown in the bottom section of the JSON workshop.
 
-	![new document confirmation popup](./images/popup-json-doc.png)
+	![new document confirmation popup](./images/popup-JSON-doc.png)
 
 5. Let's repeat this with the following documents:
 
@@ -234,7 +234,7 @@ More generally, constraints can be used to check the data being entered for vari
 
 	![SQL navigation](./images/development-sql.png)
 
-2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types.
+2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types. **Enforcing a JSON schema is new functionality in Oracle Database 23c.**
 
     Copy and paste the query below in the worksheet and click the *Run query* button to run the SQL query to alter the **movie** table and add constraints.
 
@@ -270,7 +270,7 @@ More generally, constraints can be used to check the data being entered for vari
           );
 	</copy>
 	```
-	![add constraint](./images/sql-constraint-2.png)
+	![add constraint](./images/SQL-constraint-2.png)
 
 	JSON_Exists is a SQL/JSON function that checks that a SQL/JSON path expression selects at least one value in the JSON data. The selected value(s) are not extracted – only their existence is checked. Here, *$?(@.price.number() >= 0)* is a standard, SQL/JSON path expressions. You'll learn more about SQJ/JSON functions later in this lab.
 
@@ -318,7 +318,7 @@ More generally, constraints can be used to check the data being entered for vari
 	![create allowed item](./images/create-right-type.png)
 	![doc successfully created](./images/json-doc-created.png)
 
-7. Optionally, you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload.
+7. Optionally, you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload. **JSON schema is new functionality in Oracle Database 23c.**
 
     ```
     <copy>
@@ -337,16 +337,17 @@ More generally, constraints can be used to check the data being entered for vari
     /
     </copy>
     ```
-	![SQL to find JSON doc problem](./images/sql-with-error.png)
+	![SQL to find JSON doc problem](./images/SQL-with-error.png)
 
-8. You may also check the JSON Schema definition in your data dictionary. In the SQL tool, run:
+8. You may also check the JSON Schema definition in your data dictionary. **JSON schema is new functionality in Oracle Database 23c.**
+In the SQL tool, run:
 
     ```
     <copy>
     select constraint_name, json_serialize(json_schema) from user_JSON_SCHEMA_COLUMNS where table_name = 'MOVIES';
     </copy>
     ```
-	![SQL for data dictionary](./images/sql-data-dict.png)
+	![SQL for data dictionary](./images/SQL-data-dict.png)
 
 
 	_Click on a table cell then the eye icon to view the full value._
