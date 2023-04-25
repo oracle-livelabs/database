@@ -2,9 +2,9 @@
 
 ## Introduction
 
-In this lab, we will provision and configure the cloud resources required for the Workshop using *Oracle Resource Manager (ORM)*.  ORM will stand-up the Infrastructure using *Terraform* and perform some basic configuration using *Ansible*.  Don't panic, we'll go over how all this works while it is working.
+In this lab, we will provision and configure the cloud resources required for the Workshop using *Oracle Resource Manager (ORM)*.  ORM will stand-up the Infrastructure using *Terraform* and perform some basic configuration using *Ansible*.  Don't panic, we'll go over how all this works... while it is working.
 
-*Estimated Lab Time:* 15 minutes
+*Estimated Lab Time:* 10 minutes
 
 Watch the video below for a quick walk through of the lab.
 [](youtube:zNKxJjkq0Pw)
@@ -15,24 +15,28 @@ Watch the video below for a quick walk through of the lab.
 * Learn about Infrastructure as Code (IaC) and Terraform
 * Learn about Configuration Management and Ansible
 
-## Task 1: Configure Policies
+### Prerequisites
 
-## Task 2: Create a Compartment
+This lab assumes you have:
 
-## Task 3: Press the Magic Button
+    An Oracle Cloud account - Paid or Free-Tier
+    You have completed:
+        Lab 1: Prepare Setup
+
+## Task 1: Press the Magic Button
 
 Simply press the Magic Button to begin the deployment process:
 [![Deploy to Oracle Cloud][magic_button]][magic_arch_stack]
 
-## Task 3: Review the Stack Settings
+## Task 2: Review the Stack Settings
 
-## Task 4: Run and Review the Plan
+## Task 3: Run and Review the Plan
 
-## Task 5: Apply! the Stack
+## Task 4: Apply! the Stack
 
-## Task 6: Learn about Infrastructure as Code (IaC) using Terraform
+## Task 5: Learn about Infrastructure as Code (IaC) using Terraform
 
-## Task 7: Learn about Configuration Management using Ansible
+## Task 6: Learn about Configuration Management using Ansible
 
 ## Learn More
 
