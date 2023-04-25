@@ -53,6 +53,8 @@ This lab assumes you have:
 
     <!-- ![Unzip file](images/unzip-file.png) -->
 
+    ![Unzip the file](images/unzip2.png)
+
 4. Remove the remaining zip file after you've unzpped it.
 
     ```
@@ -61,148 +63,61 @@ This lab assumes you have:
 
     <!-- ![Remaining zip file removed](images/remove-zip.png) -->
 
-## Task 2: Login and create APEX workspace
-
-1. Open Activities -> Google Chrome
-
-    ![Open Google Chrome](images/activities-chrome.png)
 
 
-2. Go to this URL and wait for the screen to load.
-    ```
-    <copy>
-    http://localhost:8080/ords/apex_admin
-    </copy>
-    ```
+## Task 2: Open SQL Developer
 
-    ![URL login screen](images/admin-services.png)
-
-3. Login as ADMIN with your password.
-
-    ![Login using credentials](images/login-details.png)
-
-4. You can see the welcome screen for APEX now. 
-
-    ![Welcome screen after login](images/welcome-to-apex.png)
-
-5. Click create workspace
-
-    ![workspace welcome screen](images/workspace-name.png)
-
-6. Name the workspace 'graph' and click Next
-
-    ![enter graph for the workspace](images/graph-next.png)
-
-7. Set reuse existing schema to Yes. Click the menu icon next to schema name and select HOL23C. Set your schema password to whatever but write it down. Leave the default for space quota.
-
-    ![Schema information input changes](images/schema-info.png)
-
-8. Admin username: admin, password: Welcome123#, email: your email.
-
-    ![admin password email input](images/admin-password-email.png)
-
-9. Review the output then click Create workspace.
-
-    ![Create workspace](images/create-workspace.png)
-
-10. Success! Now click done.
-
-    ![completetion screen](images/done.png)
-
-## Task 3: Create schema tables
-
-1. In the upper right corner, click the admin icon then click sign out.
-    ![sign out from admin](images/logout.png)
-
-2.  Log back in as the admin info you just created along with the workspace name as graph.
-    ![log back in](images/log-back-in.png)
-
-3. Change password
-    ![password change](images/change-password.png)
-
-4. Click SQL Workshop -> Utilities -> Data Workshop
-    ![need image](images/example.png)
-
-5. Click Load Data
-    ![need image](images/example.png)
-
-6. Click Choose File
-    ![need image](images/example.png)
-
-7. Click to Home -> Examples -> Graph -> BANK_ACCOUNTS.csv
-    ![need image](images/example.png)
-
-8. Add the table name to be BANK_ACCOUNTS
-    ![need image](images/example.png)
-
-9. Accept the rest of the defaults and click load data
-    ![need image](images/example.png)
-
-10. After seeing a successful load, click the X and click Load Data again.
-    ![need image](images/example.png)
-
-11. Now load the file by clicking to Home -> Examples -> Graph -> BANK_TRANSFERS.csv
-    ![need image](images/example.png)
-
-12. Add the table name to be BANK_ACCOUNTS
-    ![need image](images/example.png)
-
-13. Accept the rest of the defaults and click load data
-    ![need image](images/example.png)
-
-14. After seeing a successful load, click the X
-    ![need image](images/example.png)
-
-## Task 4: Alter the schema tables
-
-1. Click SQL Workshop -> SQL Commands
-
-2. Run each of the following commands one by one. You may erase the command sheet after executing.
+1. Get into the correct directory to open SQL Developer.
 
     ```
-    $ <copy>ALTER TABLE bank_accounts DROP COLUMN ID;</copy>
+    $ <copy>cd /opt/sqldeveloper/</copy>
     ```
-    ![need image](images/example.png)
 
-3. 
+    ![Open SQL developer](images/sql-directory.png)
 
-    ```
-    $ <copy>ALTER TABLE bank_transfers DROP COLUMN ID;</copy>
-    ```
-    ![need image](images/example.png)
-4. 
+2. Run the command to start up SQL Developer.
 
     ```
-    $ <copy>ALTER TABLE bank_accounts ADD PRIMARY KEY (id);</copy>
+    $ <copy>./sqldeveloper.sh</copy>
     ```
-    ![need image](images/example.png)
 
-5. 
-    ```
-    $ <copy>ALTER TABLE bank_transfers ADD PRIMARY KEY (txn_id);</copy>
-    ```
-    ![need image](images/example.png)
+    ![Command to start SQL](images/startup-sql.png)
 
-6. 
+3. On the left side menu, you'll see hol23c_freepdb1 underneath Oracle Connections. Double click it to open the connection.
 
-    ```
-    $ <copy>ALTER TABLE bank_transfers MODIFY src_acct_id REFERENCES bank_accounts (id);</copy>
-    ```
-    ![need image](images/example.png)
 
-7. 
+    ![Open the connection](images/hol23c-connection.png)
 
-    ```
-    $ <copy>ALTER TABLE bank_transfers MODIFY dst_acct_id REFERENCES bank_accounts (id);</copy>
-    ```
-    ![need image](images/example.png)
+4. Fill out the connection information with your password. The default password we will be using throughout this lab is Welcome123. If you have changed yours, please use that one. After you click okay, you should be connected to your user.
 
-8. 
+    ![Login information](images/login-connection.png)
 
-    ```
-    $ <copy>SELECT * FROM USER_CONS_COLUMNS WHERE table_name IN ('BANK_ACCOUNTS', 'BANK_TRANSFERS');</copy>
-    ```
-    ![need image](images/example.png)
+5. Click File -> Open
+
+    ![Opening file](images/file-open.png)
+
+6. Click Home -> examples -> graph
+
+    ![Open graph](images/home-examples-graph.png)
+
+7. Open the CreateKeys.sql.
+
+    ![Open the sql file](images/open-createkeys.png)
+
+8. Click the button that shows a document with the small green play button on it to run the whole script. If it asks you to select a connection in a popup window, choose hol23c_freepdb1 from the drop down and then click okay.
+
+    ![Run script with play button](images/play-button.png)
+
+9. Scroll through the output to see that the data has been loaded. Disclaimer: If you see error, property graph does not exist, disregard it and move forward. 
+
+    ![Data output and disregard error](images/error-disregard.png)
+
+10. There should be about 5000 rows loaded into BANK\_TRANSFERS and 1000 rows loaded in BANK\_ACCOUNTS.
+
+    ![Shows the 5000 and 1000 rows](images/data-loaded.png)
+
+11. Your schema setup is now complete.
+
 
 
 
