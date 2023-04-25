@@ -62,9 +62,9 @@ This lab assumes you have:
 		```
     ![Change to PDB](images/alter-session1.png " ")
 
-5. To change the password for the user hol23c use the "alter user <username> identified by <new password" command. The syntax below for the hol23c user, make sure to replace new\_password\_here to your new password. Throughout this workshop we will use the Welcome123 password.
+5. To change the password for the user hol23c use the "alter user \[username\] identified by \[new password\]" command. The syntax below for the hol23c user, make sure to replace new\_password\_here to your new password. Throughout this workshop we will use the Welcome123 password.
     ```
-		<copy>alter user hol23c identified by </copy>new_password_here;
+		<copy>alter user hol23c identified by </copy> [new_password_here];
 		```
     ```
     SQL> alter user hol23c identified by Welcome123;
@@ -103,9 +103,7 @@ Version 23.2.0.0.0
 
 ## Learn More
 
-* [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
-* [JSON Duality View documentation](http://docs.oracle.com)
-* [Blog: Key benefits of JSON Relational Duality] (https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
+* [Introducing Oracle Database 23c Free – Developer Release](https://blogs.oracle.com/database/post/oracle-database-23c-free)
 
 ## Acknowledgements
 * **Author** - Kaylien Phan, William Masdon

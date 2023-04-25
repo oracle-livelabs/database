@@ -19,42 +19,101 @@ This lab assumes:
 - The graph user and graph bank_graph exists
 - You have ORDS running so you can open APEX
 
-## Task 1 : Import APEX app to visualize queries
+## Task 1: Login and create APEX workspace
 
-1. App Builder -> Import
+1. Open Activities -> Google Chrome
+
+    ![Open Google Chrome](images/activities-chrome.png)
+
+
+2. Go to this URL and wait for the screen to load.
+    ```
+    <copy>
+    http://localhost:8080/ords/apex_admin
+    </copy>
+    ```
+
+    ![URL login screen](images/admin-services.png)
+
+3. Login as ADMIN with the password Welcome123# and reset it to as you please.
+
+    ![Login using credentials](images/login-details.png)
+
+4. You can see the welcome screen for APEX now. 
+
+    ![Welcome screen after login](images/welcome-screen-apex2.png)
+
+5. Click create workspace
+
+    ![workspace welcome screen](images/workspace-name.png)
+
+6. Name the workspace 'graph' and click Next
+
+    ![enter graph for the workspace](images/graph-next.png)
+
+7. Set reuse existing schema to Yes. Click the menu icon next to schema name and select HOL23C. Leave the default for space quota and password. Click next.
+
+    ![Schema information input changes](images/schema-info.png)
+
+8. Admin username: admin, password: Welcome123#, email: your email.
+
+    ![admin password email input](images/admin-password-email.png)
+
+9. Review the output then click Create workspace.
+
+    ![Create workspace](images/create-workspace.png)
+
+10. Success! Now click done.
+
+    ![completetion screen](images/done.png)
+
+## Task 2: Import APEX app to visualize queries
+
+1. In the upper right corner, click the admin icon then click sign out.
+    ![sign out from admin](images/logout.png)
+
+
+2.  Log back in as the admin info you just created along with the workspace name as graph.
+    ![log back in](images/log-back-in.png)
+
+
+3. Change password
+    ![password change](images/change-password.png)
+
+4. App Builder -> Import
 
     ![Import from app builder](images/app-builder-import.png)
 
-2. Click to add a file to open for import. Go to Home -> example -> graph -> f106.sql and open that file. Leave the defaults and click next.
+5. Click to add a file to open for import. Go to Home -> examples -> graph -> f106.sql and open that file. Leave the defaults and click next.
 
     ![open f106 sql file](images/graph-f106-open.png)
 
     ![Import f106 sql file](images/f106-import.png)
 
-3. Click next.
+6. Click next.
     ![Import f106 sql file](images/f106-import-2.png)
     
-4.  Leave all defaults, except check Reuse app 106 from file under Install Application and click Install Application. 
+7.  Select Reuse Application ID 106 From Export File. Leave all other options and click Install Application.
 
     ![Install the application](images/install-application.png)
 
-5.  Click run application
+8.  Click run application
 
     ![Run the application](images/run-application.png)
 
 
-6.  Login.
+9.  Login.
 
     ![Log back in](images/login-final.png)
 
 
-7. Click property graph queries with pgq box
+10. Click Property Graph queries with SQL/PGQ box.
     ![Property graph queries selection](images/property-graph-queries.png)
     
-8. Scroll through output.
+11. Scroll through output.
     ![Final scroll through the output](images/final-output.png)
 
-9. You have now completed this lab.
+12. You have now completed this lab.
 
 ## Learn More
 * [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
