@@ -1,4 +1,4 @@
-# Work with JSON collections
+# Use Mongo API to interact with Oracle Database
 
 ## Introduction
 
@@ -23,7 +23,7 @@ In this lab, you will:
 
 ## Task 1: Download Mongo Shell and Mongo Database Tools
 
-PUT IN DISCLAIMER ABOUT DOWNLOADED MONGO TOOLS
+This lab has you download software from the YUM repo at repo.mongodb.org. This software is free. If you agree to their terms of use please continue on with this portion of the lab.
 
 1. Open your terminal window.
 
