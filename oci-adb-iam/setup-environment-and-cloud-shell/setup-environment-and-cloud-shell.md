@@ -34,7 +34,8 @@ throughout this workshop.
     this step and any others that use the "export" command. The environment variables created with "export" that are used in future steps are deleted when the Cloud Shell session ends.  
 
     ```
-    <copy>export ROOT_COMP_ID=`oci iam compartment list --include-root --raw-output --query "data[?contains(\"id\",'tenancy')].id | [0]"`</copy>
+    <copy>export ROOT_COMP_ID=`oci iam compartment list --include-root --raw-output --query "data[?contains(\"id\",'tenancy')].id | [0]"`
+    echo $ROOT_COMP_ID</copy>
     ```
 
 3. Create the name for your ADB
