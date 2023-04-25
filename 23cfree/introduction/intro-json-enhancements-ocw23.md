@@ -80,7 +80,8 @@ You may now proceed to the next lab.
 
 ## Learn More
 
-* [Overview of JSON](https://docs.oracle.com/en/database/oracle/oracle-database/21/adjsn/json-data.html#GUID-B2D82ED4-B007-4019-8B53-9D0CDA81C4FA)
+* [Overview of JSON](https://docs.oracle.com/en/database/oracle/oracle-database/23/adjsn/json-data.html#GUID-B2D82ED4-B007-4019-8B53-9D0CDA81C4FA)
+* [Otube: Oracle Moviestream - Powered by Autonomous Database](https://otube.oracle.com/media/Oracle+MovieStream+-+Powered+by+Autonomous+Database/1_g4d9hdfg)
 * [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
 * [JSON Duality View documentation](http://docs.oracle.com)
 
