@@ -14,7 +14,7 @@ In general, customers are interested in tracking things like: the episodes they 
 
 The streaming application backend collects data so reports such as, which is the most popular show and what is the average watch time of a show, can be generated.
 
-_Estimated Time:_ 7 minutes
+_Estimated Time:_ 12 minutes
 
 ### Serverless Logic Tier
 
@@ -125,13 +125,18 @@ By default, it may put you in a spot where it wants you to execute an Example Qu
 
 If that is the case, click on the arrow next to "Query" and it will place you into "Root."  Now that you have moved over to "Root", watch the animated gif below.  This walks you through the steps of triggering a query.  You will build a query from scratch by hitting "Query", then adding the "Streams" array, followed by adding several fields to display.   Finally you will hit the "Query" button to execute the query.   You will see the results of your query to the right.  Feel free to select different fields and re-execute your query and watch how the results change.  
 
-Hopefully you see, tt is easy to build a GraphQL query in your API and get exactly what you need, nothing more and nothing less. GraphQL queries always return predictable results. Apps using GraphQL are fast and stable because they control the data they get, not the server.  
+Hopefully you see, it is easy to build a GraphQL query in your API and get exactly what you need, nothing more and nothing less. GraphQL queries always return predictable results. Apps using GraphQL are fast and stable because they control the data they get, not the server.  
 
 
 ![Simple query](images/capture-graphql-simple-query.gif)
 
+## Task 4: Get many resources in a single request
 
-## Task 4: Describe what’s possible with a type system
+GraphQL queries access not just the properties of one resource but also smoothly follow references between them. While typical REST APIs require loading from multiple URLs, GraphQL APIs get all the data your app needs in a single request.  This makes GraphQL Apps much more efficient than REST based Apps, especially in slow network environments.  In the animated gif below we are going to build a query that includes the people watching shows from the US.   After executing that request we are to add another resource to the original request and grab the watch time of various shows.   We will then execute the request again, thus demonstrating getting different resources from a single request.   Follow along and build this request in your environment.
+
+![Multiple queries in one](images/capture-graphql-multi-query.gif)
+
+## Task 5: Describe what’s possible with a type system
 
 GraphQL APIs are organized in terms of types and fields, not endpoints. Access the full capabilities of your data from a single endpoint. GraphQL uses types to ensure Apps only ask for what’s possible and provide clear and helpful errors.  We can take a look at the schema, and see the different fields and their associated types.  To move to the schema view, click the button marked in the graphic below.
 
@@ -148,12 +153,6 @@ Next you should see something similar to the below image.   Go ahead and scroll 
 ![graphql-schema](images/capture-graphql-schema.png)
 
 
-## Task 5: Get many resources in a single request
-
-GraphQL queries access not just the properties of one resource but also smoothly follow references between them. While typical REST APIs require loading from multiple URLs, GraphQL APIs get all the data your app needs in a single request.  This makes GraphQL Apps much more efficient than REST based Apps, especially in slow network environments.  In the animated gif below we are going to build a query that includes the people watching shows from the US.   After executing that request we are to add another resource to the original request and grab the watch time of various shows.   We will then execute the request again, thus demonstrating getting different resources from a single request.   Follow along and build this request in your environment.
-
-![Multiple queries in one](images/capture-graphql-multi-query.gif)
-
 ## Task 6: Test using an unique URL
 
 In the previous tasks, we looked at the flexibility and the power of GraphQL to explore the data exposed by the Activity Tracking microservice of our Video on Demand streaming application.
@@ -168,7 +167,6 @@ your browser
 If you prefer, you can use an API tool like Postman
 
 ![graphql-url](images/capture-graphql-url.png)
-
 
 
 ## Task 7: Key takeaways
