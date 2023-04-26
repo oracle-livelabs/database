@@ -288,6 +288,8 @@ JSON\_Table is used to 'flatten' hierarchical JSON data to a table consisting of
     )) jt;
     </copy>
     ```
+    **Note that this view is using the new BOOLEAN data type, introduced in Oracle Database 23c.**
+    
     ![create view from JSON table](./images/view-created.png " ")
 
     Describe the movie_view:
