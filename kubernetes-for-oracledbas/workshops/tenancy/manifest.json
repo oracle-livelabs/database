@@ -1,9 +1,9 @@
 {
-    "workshoptitle": "CloudWorld 2023: Intro to Kubernetes and Microservices for Oracle DBAs",
+    "workshoptitle": "Intro to Kubernetes and Microservices for Oracle DBAs",
     "help": "livelabs-help-database_us@oracle.com",
     "variables": [
         "../../variables/variables.json",
-        "../../variables/variables-sandbox.json"
+        "../../variables/variables-tenancy.json"
     ],
     "tutorials": [
         {
@@ -29,7 +29,7 @@
         {
             "title": "Lab 3: Understand Kubernetes",
             "description": "Overview of K8s, comparing to familiar technologies",
-            "filename": "../../understand/understand-kubernetes.md"
+            "filename": "../../understand-kubernetes/understand-kubernetes.md"
         },
         {
             "title": "Lab 4: Deploy the OraOperator",
@@ -37,22 +37,22 @@
             "filename": "../../deploy-oraoperator/deploy-oraoperator.md"
         },
         {
-            "title": "Lab 5: Create a Containerised Database",
-            "description": "Create a Containerised Single Instance Database with the OraOperator",
+            "title": "Lab 5: Create a Containerised Single Instance Database (SIDB)",
+            "description": "Create a Single Instance Containerised Database with the OraOperator",
             "filename": "../../create-sidb/create-sidb.md"
         },
         {
-            "title": "Lab 6: Bind to the Autonomous Database",
+            "title": "Lab 6: Bind to an Autonomous Database (ADB)",
             "description": "Bind the OraOperator to the ADB",
             "filename": "../../bind-adb/bind-adb.md"
         },
         {
-            "title": "Lab 7: Perform Lifecycle Operations (ADB)",
+            "title": "Lab 7: Lifecycle Operations (ADB)",
             "description": "Perform Lifecycle Operations against the ADB",
             "filename": "../../lifecycle-adb/lifecycle-adb.md"
         },
         {
-            "title": "Lab 8: Perform Lifecycle Operations (SIDB)",
+            "title": "Lab 8: Lifecycle Operations (SIDB)",
             "description": "Perform Lifecycle Operations against the SIDB",
             "filename": "../../lifecycle-sidb/lifecycle-sidb.md"
         },

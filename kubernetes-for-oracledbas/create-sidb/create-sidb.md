@@ -22,7 +22,7 @@ This lab assumes you have:
 
 ## Task 1: Verify Access to the Oracle Container Registry
 
-## Task 2: Create an Secret for Container Registry Authentication
+## Task 2: Create a Secret for Container Registry Authentication
 
 ## Task 3: Create the SIDB Provision Manifest
 
