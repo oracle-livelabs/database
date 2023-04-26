@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, we will create the Oracle Cloud Infrastructure Policies required for least-privilege provisioning of the infrastructure and a Compartment to isolate the cloud resources created for this workshop.
+In this lab, we will create the Oracle Cloud Infrastructure (OCI) Compartment to isolate the cloud resources created for this workshop.
 
 *Estimated Lab Time:* 5 minutes
 
@@ -11,22 +11,17 @@ Watch the video below for a quick walk through of the lab.
 
 ### Objectives
 
-* Ensure you have the correct OCI Policies
 * Create an OCI Compartment
 
 ### Prerequisites
 
 This lab assumes you have:
 
-    An Oracle Cloud account - Paid or Free-Tier
+    An Oracle Cloud Free Tier Account
     You have completed:
         Get Started
 
-## Task 1: Configure Policies
-
-
-## Task 2: Create a Compartment
-
+## Task 1: Create a Compartment
 
 ## Learn More
 

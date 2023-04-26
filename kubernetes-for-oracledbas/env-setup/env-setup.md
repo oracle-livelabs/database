@@ -19,7 +19,7 @@ Watch the video below for a quick walk through of the lab.
 
 This lab assumes you have:
 
-    An Oracle Cloud account - Paid or Free-Tier
+    An Oracle Cloud account
     You have completed:
         Lab 1: Prepare Setup
 
