@@ -34,7 +34,7 @@ Connect to the pre-created Pluggable Database (PDB) `freepdb1` using the same cr
 
 A JavaScript module is a unit of MLE's language code stored in the database as a schema object. Storing code within the database is one of the main benefits of using JavaScript in Oracle Database 23c Free-Developer Release: rather than having to manage a fleet of application servers each with their own copy of the application, the database takes care of this for you.
 
-In addition, Data Guard replication ensures that the exact same code is present in both production and all physical standby databases. This way configuration drift, a common problem bound to occur when invoking the disaster recovery location, can be mitigated against.
+In addition, Data Guard replication ensures that the exact same code is present in both production and all physical standby databases. This way configuration drift, a common problem bound to occur when invoking the disaster recovery location, can be mitigated.
 
 > **Note**: A JavaScript module in MLE is equivalent to an ECMAScript 6 module. The terms MLE module and JavaScript module are used interchangeably in this lab.
 
@@ -159,9 +159,29 @@ In addition, Data Guard replication ensures that the exact same code is present 
 
 1. Reference existing modules
 
-    The more modular your code, the more reusable it is. JavaScript modules in Oracle Database 23c Free-Developer Release can reference other modules easily, allowing developers to follow a divide and conquer approach designing applications. The code shown in the following snippet makes use of `helper_module_inline` created earlier to convert a string representing an order before inserting it into a table.
+    The more modular your code, the more reusable it is. JavaScript modules in Oracle Database 23c Free-Developer Release can reference other modules easily, allowing developers to follow a divide and conquer approach designing applications. The code shown in the following snippet makes use of the module `helper_module_inline` created earlier to convert a string representing an order before inserting it into a table.
 
     > **Note**: Lab 4 will explain the use of the JavaScript SQL Driver in more detail.
+
+    The following example makes use of the `SH` sample schema. If you don't have the sample schemas installed in your PDB you can create a simplified version of the `ORDERS` table as follows:
+
+    ```sql
+    <copy>
+    create table orders (
+        order_id     number(12) not null,
+        order_date   date not null,
+        order_mode   varchar2(8),
+        customer_id  number(6) not null,
+        order_status number(2),
+        order_total  number(8,2),
+        sales_rep_id number(6),
+        promotion_id number(6),
+        constraint pk_orders primary key(order_id)
+    );
+    </copy>
+    ```
+
+    The `business_logic` module will insert an order into that table after converting a comma-separated string to a JSON document which is eventually parsed by `json_table()`.
 
     ```sql
     <copy>
@@ -214,26 +234,9 @@ In addition, Data Guard replication ensures that the exact same code is present 
     </copy>
     ```
 
-    In case you don't have the sample schemas installed you can create the `ORDERS` table as follows
-
-    ```sql
-    <copy>
-    create table orders (
-        order_id     number(12) not null,
-        order_date   date not null,
-        order_mode   varchar2(8),
-        customer_id  number(6) not null,
-        order_status number(2),
-        order_total  number(8,2),
-        sales_rep_id number(6),
-        promotion_id number(6)
-    );
-    </copy>
-    ```
-
 2. Understand name resolution in JavaScript powered by Multilingual Engine (MLE)
 
-    One new thing in `business_logic` compared to the previous modules is the import statement: `business_logic` imports a function named `string2JSON()` from the helpers module.
+    The `business_logic` module introduces a new concept: an (ECMAScript) `import` statement. `string2JSON()`, defined in the helpers module is imported into the module's namespace.
 
 3. Create an environment
 
@@ -248,11 +251,11 @@ In addition, Data Guard replication ensures that the exact same code is present 
     </copy>
     ```
 
-    The environment will play a crucial role when exposing JavaScript code to SQL and PL/SQL, a topic that will be covered in a later lab.
+    The environment will play a crucial role when exposing JavaScript code to SQL and PL/SQL, a topic that will be covered in the next lab (Lab 3).
 
 ## Task 4: View dictionary information about modules and environments
 
-A number of new dictionary views allow you to see which modules are present in your schema, which environments were created, and which import names have been mapped to modules. Existing views like `ALL_SOURCE` have been extended to show the module's source code.
+A number of dictionary views allow you to see which modules are present in your schema, which environments were created, and which import names have been mapped to modules. Existing views like `ALL_SOURCE` have been extended to show the module's source code.
 
 1. View the source code of `helper_module_inline`
 
@@ -274,7 +277,7 @@ A number of new dictionary views allow you to see which modules are present in y
 
     ```
     LINE TEXT
-    ----- --------------------------------------------------------------------------------------
+    ----- ------------------------------------------------------------------------------------
         1 function string2obj(inputString) {
         2     if ( inputString === undefined ) {
         3         throw `must provide a string in the form of key1=value1;...;keyN=valueN`;
@@ -284,30 +287,30 @@ A number of new dictionary views allow you to see which modules are present in y
         7         return myObject;
         8     }
         9     const kvPairs = inputString.split(";");
-    10     kvPairs.forEach( pair => {
-    11         const tuple = pair.split("=");
-    12         if ( tuple.length === 1 ) {
-    13             tuple[1] = false;
-    14         } else if ( tuple.length != 2 ) {
-    15             throw "parse error: you need to use exactly one '=' between " +
-    16                   "key and value and not use '=' in either key or value";
-    17         }
-    18         myObject[tuple[0]] = tuple[1];
-    19     });
-    20     return myObject;
-    21 }
-    22 /**
-    23  * convert a JavaScript object to a string
-    24  * @param {object} inputObject - the object to transform to a string
-    25  * @returns {string}
-    26  */
-    27 function obj2String(inputObject) {
-    28     if ( typeof inputObject != 'object' ) {
-    29         throw "inputObject isn't an object";
-    30     }
-    31     return JSON.stringify(inputObject);
-    32 }
-    33 export { string2obj, obj2String }
+        10     kvPairs.forEach( pair => {
+        11         const tuple = pair.split("=");
+        12         if ( tuple.length === 1 ) {
+        13             tuple[1] = false;
+        14         } else if ( tuple.length != 2 ) {
+        15             throw "parse error: you need to use exactly one '=' between " +
+        16                   "key and value and not use '=' in either key or value";
+        17         }
+        18         myObject[tuple[0]] = tuple[1];
+        19     });
+        20     return myObject;
+        21 }
+        22 /**
+        23  * convert a JavaScript object to a string
+        24  * @param {object} inputObject - the object to transform to a string
+        25  * @returns {string}
+        26  */
+        27 function obj2String(inputObject) {
+        28     if ( typeof inputObject != 'object' ) {
+        29         throw "inputObject isn't an object";
+        30     }
+        31     return JSON.stringify(inputObject);
+        32 }
+        33 export { string2obj, obj2String }
     ```
 
 2. View information about modules in your schema
