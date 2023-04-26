@@ -198,8 +198,12 @@ You may now **proceed to the next lab.**
 * [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
 * [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/index.html)
 * [About API Gateway](https://www.oracle.com/cloud/cloud-native/api-management/)
+* [About Container Engine for Kubernetes (OKE)](https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/)
+* [About Container Instance](https://www.oracle.com/cloud/cloud-native/container-instances/)
+
 * [AI Services](https://www.oracle.com/artificial-intelligence/ai-services/)
 * [Media Streams](https://www.oracle.com/cloud/media-streams/)
+
 
 ### References
 
