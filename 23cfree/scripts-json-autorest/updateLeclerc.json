@@ -1,0 +1,15 @@
+{
+  "driverId": 103,
+  "name": "Charles Leclerc",
+  "points": 25,
+  "teamId": 2,
+  "team": "Ferrari",
+  "race": [
+    {
+      "driverRaceMapId": 3,
+      "raceId": 201,
+      "name": "Blue Air Bahrain Grand Prix",
+      "finalPosition": 1
+    }
+  ]
+}
