@@ -5,6 +5,7 @@
         "../../variables/variables.json",
         "../../variables/variables-tenancy.json"
     ],
+    "include": {"create_compartment": "../../includes/create_compartment.md"},
     "tutorials": [
         {
             "title": "Introduction",
@@ -19,6 +20,7 @@
         {
             "title": "Lab 1: Prepare Setup",
             "description": "Setup Policies and Compartment",
+            "type": "tenancy",
             "filename": "../../prepare-setup/prepare-setup-tenancy.md"
         },
         {
@@ -67,9 +69,14 @@
             "filename": "../../deploy-application/deploy-application.md"
         },
         {
-            "title": "Lab 11: Clean up",
+            "title": "Lab 11: Clean up Infrastructure",
             "description": "Destroy the Infrastructure",
             "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md"
+        },
+        {
+            "title": "Lab 12: Delete the Compartment",
+            "description": "Delete the Compartment",
+            "filename": "../../delete_compartment/delete_compartment.md"
         },
         {
             "title": "Need Help?",

@@ -1,7 +1,7 @@
 {
-    "var1": "Variable 1 value",
-    "var2": "Variable 2 value",
-    "random_name": "LiveLabs rocks!",
+    "oci_compartment": "K8S4DBAS",
+    "oci_group": "K8S4DBAS_GROUP",
+    "oci_policy": "K8S4DBAS_POLICY",
     "number_of_ocpu_paid": "24",
     "number_of_ocpu_always_free": "2"
  }

@@ -2,48 +2,30 @@
 
 ## About this Workshop
 
-When people think Kubernetes and Microservices Architecture, the Oracle Converged Database normally doesn't spring to mind.  Instead a more 
-
-This workshop, developed by an Oracle DBA for Oracle DBAs, 
-
-Not only can the Oracle Database su
-
-Estimated Workshop Time: -- hours -- minutes (This estimate is for the entire workshop - it is the sum of the estimates provided for each of the labs included in the workshop.)
-
-*You may add an option video, using this format: [](youtube:YouTube video id)*
+Estimated Workshop Time: -- hours -- minutes
 
   [](youtube:zNKxJjkq0Pw)
 
 ### Objectives
 
-*List objectives for the workshop*
-
 In this workshop, you will learn:
 
-* The basics of a Kubernetes Cluster and Microservices Patterns
-* How to 
-* Query
+* The basics of Kubernetes and Microservices
+* How to perform lifecycle operations using the Oracle Operator for Kubernetes
+* Techniques to Monitor your databases using Microservices
 
-### Prerequisites (Optional)
-
-*List the prerequisites for this lab using the format below. Fill in whatever knowledge, accounts, etc. is needed to complete the lab. **Do NOT list** each previous lab as a prerequisite.*
+### Prerequisites
 
 This lab assumes you have:
-* An Oracle account
-* All previous labs successfully completed
 
-*This is the "fold" - below items are collapsed by default*
-
-In general, the Introduction does not have Steps.
+* Access to Oracle Cloud Infrastructure
+* An account for the Oracle Container Registry
 
 ## Learn More
 
-*(optional - include links to docs, white papers, blogs, etc)*
-
-* [URL text 1](http://docs.oracle.com)
-* [URL text 2](http://docs.oracle.com)
+* [Kubernetes](https://kubernetes.io/)
 
 ## Acknowledgements
-* **Author** - <Name, Title, Group>
-* **Contributors** -  <Name, Group> -- optional
-* **Last Updated By/Date** - <Name, Month Year>
+
+* **Author** - John Lathouwers, Developer Advocate, Database Development Operations
+* **Last Updated By/Date** - John Lathouwers, May 2023
