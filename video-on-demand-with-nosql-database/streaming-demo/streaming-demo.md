@@ -99,10 +99,10 @@ With developer tools, you can know exactly what data you can request from your A
 ![sandbox-error](images/sandbox-error.png)
 
 2. In the sandbox, copy/paste the following url:
-````
+```
 <copy>https://bmbbblriml5b2c36fifpqz5ieq.apigateway.eu-paris-1.oci.customer-oci.com/
 </copy>
-````
+```
 3. You should see a screen that likes similar to the below image.  Click on the gear and the "Open connection settings" dialog will open.
 
 ![connection-settings](images/capture-connection-settings.png)

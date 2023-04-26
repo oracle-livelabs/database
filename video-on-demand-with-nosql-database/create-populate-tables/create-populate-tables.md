@@ -9,7 +9,7 @@ walk you through a couple of different approaches. Oracle NoSQL Database Cloud
 Service supports both schema-based and schema-less (JSON) modeling so we will
 create examples of both tables.
 
-_Estimated Time:_ 25 minutes
+_Estimated Time:_ 5 minutes
 
 ### Objectives
 
@@ -96,7 +96,7 @@ We need to download those to the Cloud Shell first.
 
 2. Execute the following environment setup shell script in the Cloud Shell. If you close/open the Cloud Shell, please re-execute it.
 
-    ```
+    ```shell
     <copy>
     source ~/video-on-demand-with-nosql-database/env.sh
     </copy>
@@ -106,7 +106,7 @@ The CLI command for Oracle NoSQl is 'oci nosql <command>'. We will create a tabl
 and  echo the DDL statement so you can see what is being created.
 
 
-    ```
+    ```shell
     <copy>
     cd ~/video-on-demand-with-nosql-database
     DDL_TABLE=$(cat demo-vod/demo-stream-acct.ddl)
@@ -115,7 +115,7 @@ and  echo the DDL statement so you can see what is being created.
     ```
     The echo command will show you the DDL statement that you will execute next.
 
-    ```
+    ```shell
     <copy>
     oci nosql table create --compartment-id "$NOSQL_COMPID"   \
     --name stream_acct --ddl-statement "$DDL_TABLE" \
@@ -177,7 +177,7 @@ screen. Click **Tables** on top right.
 
   SQL statement 1
 
-  ````
+  ```
   <copy>
   INSERT INTO stream_acct VALUES(
   1,
@@ -233,11 +233,11 @@ screen. Click **Tables** on top right.
   )
   RETURNING *  
   </copy>
-  ````
+  ```
 
   SQL statement 2
 
-  ````
+  ```
   <copy>
   INSERT INTO stream_acct VALUES(
   2,
@@ -293,9 +293,9 @@ screen. Click **Tables** on top right.
   )
   RETURNING *
   </copy>
-  ````
+  ```
   SQL statement 3
-  ````
+  ```
   <copy>
   INSERT INTO stream_acct VALUES(
   3,
@@ -349,7 +349,7 @@ screen. Click **Tables** on top right.
   )
   RETURNING *  
   </copy>
-  ````
+  ```
 
   To summarize, in this Lab you have seen two different ways to insert data into a table.
 

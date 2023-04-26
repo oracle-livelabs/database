@@ -54,7 +54,7 @@ to get the Cloud Shell started.
 
 2. Execute the following in your Cloud Shell.
 
-    ````
+    ```shell
     <copy>
     cd $HOME
     rm -rf video-on-demand-with-nosql-database
@@ -64,7 +64,7 @@ to get the Cloud Shell started.
     sh unzip.sh
     cd $HOME
     </copy>
-    ````
+    ```
 
 3. Exit from Cloud Shell
 
@@ -160,7 +160,7 @@ Once they are set up, they are simple to use because all you need to do is call
 the appropriate authorization constructor.
 
 **NoSQL Database Node.js SDK**
-```
+```node
 <copy>
 function createClientResource() {
   return new NoSQLClient({
@@ -179,7 +179,7 @@ Also in one of our next labs we are going to be running application code and we 
 instance to run that from. We will run that application using Cloud Shell
 with a delegation token.
 
-```
+```node
 <copy>
 function createClientResource() {
   return new NoSQLClient({

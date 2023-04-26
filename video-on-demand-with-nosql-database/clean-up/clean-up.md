@@ -2,7 +2,10 @@
 
 ## Introduction
 
-This lab is finished. We wil delete all resources created.
+This lab is finished. We will delete all resources created.
+
+_Estimated Time:_ 5 minutes
+
 
 ## Task 1: Delete resources created using Cloud Shell
 
@@ -15,20 +18,20 @@ to get the Cloud Shell started.
 
 2. Execute the following in your Cloud Shell.
 
-    ````
+    ```
     <copy>
     source ~/video-on-demand-with-nosql-database/env.sh
     oci nosql table delete --compartment-id "$NOSQL_COMPID" --table-name-or-id stream_acct \
     --wait-for-state SUCCEEDED --wait-for-state FAILED
     </copy>
-    ````
-    ````
+    ```
+    ```
     <copy>
     cd $HOME
     rm -rf video-on-demand-with-nosql-database
     rm -rf video-on-demand-with-nosql-database.zip
     </copy>
-    ````
+    ```
 
 3. Exit from Cloud Shell
 
@@ -50,11 +53,11 @@ Click on the Test table, which will bring up the table details screen.  Hit Dele
    In the Container instance screen, click on the gateway with the name `Oracle NoSQL powers Video On-Demand applications`.
    Click on Delete
 
-   ![Container Instance](./images/delete-ci.png)
+   ![Delete Container Instance](./images/delete-ci.png)
 
    Wait until the status changed from Deleting to Deleted
 
-   ![Container Instance](./images/delete-ci-2.png)
+   ![Delete Container Instance](./images/delete-ci-2.png)
 
 ## Task 3: Delete resources created using Resource Manager - terraform
 

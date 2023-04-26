@@ -15,7 +15,7 @@ container orchestration platform like Kubernetes. These use cases include: APIs,
 web applications, build and deployment jobs in CI/CD pipelines, automation tasks f
 or cloud operations, data/media processing jobs, development or test environments, and more.
 
-_Estimated Time:_ 25 minutes
+_Estimated Time:_ 20 minutes
 
 ### Objectives
 
@@ -64,7 +64,7 @@ become disconnected and/or timed out. In that case, restart it.
 2. Execute the following environment setup shell script in the Cloud Shell to
 set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_COMPID`
 
-   ```
+  ```shell
   <copy>
   source ~/video-on-demand-with-nosql-database/env.sh
   </copy>
@@ -119,7 +119,7 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
 
 1. Set the variable IP_CI with the value copied in the previous section. Execute in the Cloud Shell.
 
-    ```
+    ```shell
     <copy>
     export IP_CI=150.136.11.169
     </copy>
@@ -129,18 +129,18 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
 2. Read back the data that we entered in the Lab 4 using the GraphQL query `Streams`.
 Execute in the Cloud Shell.
 
-    ````
+    ```shell
     <copy>
     curl --request POST --header 'content-type: application/json' --url $IP_CI:3000 \
 --data '{"query":"query Streams { streams { id  info { firstName  lastName country } }}"}' | jq
     </copy>
-    ````
+    ```
 
     This will display all the rows in the table currently without details about shows.
 
 3. Read data for a specific user using the GraphQL query `Stream($streamId: Int)`
 
-    ````
+    ```shell
     <copy>
     curl --request POST \
     --header 'content-type: application/json' \
@@ -148,19 +148,19 @@ Execute in the Cloud Shell.
     --data '{
   "query": "query Stream($streamId: Int) { user1:stream(id: $streamId) {id   info{ country shows {showName}} } }", "variables": { "streamId": 1} }'|jq
     </copy>
-    ````
+    ```
 
 5. Execute one of the reports using the GraphQL queries - For every show aired
 by the application, fetch the total watch time by all users
 
-    ````
+    ```shell
     <copy>
     curl --request POST \
     --header 'content-type: application/json' \
     --url $IP_CI:3000 \
     --data '{"query":"query WatchTime { watchTime { showName seasonNum length } } "}'|jq
     </copy>
-    ````
+    ```
 You may now **proceed to the next lab.**
 
 ## Learn More

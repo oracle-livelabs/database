@@ -7,7 +7,7 @@ the tables you created, and execute queries using OCI Console.
 
 **And now, for the fun part, let’s look at some queries over the streaming data.**
 
-_Estimated Time:_ 15 minutes
+_Estimated Time:_ 20 minutes
 
 ### Objectives
 
@@ -30,22 +30,22 @@ Click the **stream_acct** table. Under **Resources**, click **Indexes**. The lis
 ![list-indexes](./images/list-indexes.png)
 
 Create an index `idx_country_showid_date` as shown below.
-````
+```
 <copy>
 create index idx_country_showid_date on stream_acct(
     info.country as string,
     info.shows[].showId as integer,
     info.shows[].seriesInfo[].episodes[].date as string)
 </copy>    
-````
+```
 ![crtind-country-showid-date](./images/crtind-country-showid-date.png)
-````
+```
 <copy>
 create index idx_country_genre on stream_acct(
     info.country as string,
     info.shows[].genres[] as string)
 </copy>    
-````
+```
 ![crtind-country-genre](./images/crtind-country-genre.png)
 
 
@@ -62,14 +62,14 @@ Although Oracle NoSQL supports unnesting (but not subqueries), it also includes 
 Write a query that returns the number of users in USA that have shown an interest in the show with id 16.
 
 **Method 1:**
-````
+```
 <copy>
 select count(*) as cnt
 from stream_acct u
 where u.info.country = "USA" and
 u.info.shows.showId =any 16
 </copy>
-````
+```
 Notice the use of the `=any` operator here. Using the simple `=` operator would cause a runtime error to be raised, because `=` expects each of its operands to be at most one value, but the `u.info.shows.showId` path expression returns all the show ids in the shows array. Instead, the  `=any` acts like a `contains` here, i.e., it returns true if the shows array contains a show id with value 16.
 
 See [Sequence Comparison operators] (https://docs.oracle.com/en/database/other-databases/nosql-database/22.2/sqlreferencefornosql/sequence-comparison-operators.html) for more details on the `=any` operations.
@@ -77,14 +77,14 @@ See [Sequence Comparison operators] (https://docs.oracle.com/en/database/other-d
 **Method 2:**
 The query could also be written like this:
 
-````
+```
 <copy>
 select count(*) as cnt
 from stream_acct u
 where u.info.country = "USA" and
 exists u.info.shows[$element.showId = 16]
 </copy>
-````
+```
 
 Here, the `$element` variable iterates over the elements of the shows array and the condition `$element.showId = 16` selects the show whose id is 16. Since the path expression `u.info.shows[$element.showId = 16]` returns a set of shows (at most one show in this case), rather than a boolean value, the exists operator is needed to convert this set to a boolean value (returning true if the set is not empty).
 See [Path expressions](https://docs.oracle.com/en/database/other-databases/nosql-database/22.2/sqlreferencefornosql/path-expressions.html) for the full specification of path expressions.
@@ -110,14 +110,14 @@ To confirm the use of the index and to see what conditions are pushed to it, you
 Write a query that returns the details of users in USA who have watched at least one episode of show 16 after 2022-04-01.
 
 **Query 2 a:**
-````
+```
 <copy>
 select * as cnt
 from stream_acct u
 where u.info.country = "USA" and
 exists u.info.shows[$element.showId = 16].seriesInfo.episodes[$element.date > "2022-04-01"]
 </copy>
-````
+```
 
 In this example, the path expression after the `exists` operator drills down to the deepest arrays and applies filtering at 2 levels. The first `$element` variable iterates over the shows of each user and the `$element.showId = 16` condition selects the show with id 16. The second `$element` variable iterates over the episodes of that show and the condition selects the episodes with a date after 2022-04-01.
 
@@ -133,14 +133,14 @@ The query uses the `idx_country_showid_date` index. The index is not covering as
 Sometimes, you can easily make a very common mistake when writing the above query:
 
 **Query 2 b:**
-````
+```
 <copy>
 select * from stream_acct u
 where u.info.country = "USA" and
       u.info.shows.showId =any 16 and
       u.info.shows.seriesInfo.episodes.date >any "2022-04-01"
 </copy>
-````
+```
 The queries 2a and 2b are not equivalent! Query 2b returns the number of users in USA who have watched at least one episode of show 16 and have also watched an episode of some show (not necessarily show 16) after 2022-04-01. The 2 “any” predicates in this query are applied independent of each other.
 
 **Index Used:**
@@ -156,13 +156,13 @@ The query processor can identify which of the available indexes are beneficial f
 
 Write a query that returns the number of users who have watched at least one episode of show 15 after 2022-04-01.
 
-````
+```
 <copy>
 select count(*) as cnt
 from stream_acct u
 where exists u.info.shows[$element.showId = 15].seriesInfo.episodes[$element.date > "2022-04-01"]
 </copy>
-````
+```
 
 **Choice of Indexes:**
 
@@ -175,14 +175,14 @@ Whether `idx_showId` or `idx_country_showid_date` is better depends on how selec
 
 **Forcing the use of a specific index**
 
-````
+```
 <copy>
 select /*+ FORCE_INDEX(stream_acct idx_country_showid_date) */
 count(*) as cnt
 from stream_acct u
 where exists u.info.shows[$element.showId = 15].seriesInfo.episodes[$element.date > "2022-04-01"]
 </copy>
-````
+```
 In this example, you are forcing the use of index `idx_country_showid_date`. You can verify this from the query plan shown below.
 
 ![query3b-plan](./images/query3b-plan.png)
@@ -196,7 +196,7 @@ You can place conditions on the elements of any arrays.
 Write a query that returns the number of users in USA who have watched a French or Danish
 show in 2022.
 
-````
+```
 <copy>
 select count(*) as cnt
 from stream_acct u
@@ -206,7 +206,7 @@ where u.info.country = "USA" and
       exists $element.seriesInfo.episodes["2022-01-01" <= $element.date
       and $element.date <= "2022-12-31"] ]
 </copy>
-````
+```
 Here, the genres and episodes arrays are not nested into each other, but both are nested inside the shows array (hence genres and episodes are `sibling` arrays). Since both the genre and date conditions must apply to the same show, the conditions are written as two filtering predicates at the level of the shows array.
 
 **Indexes used:**
@@ -231,7 +231,7 @@ You can transform the shape of JSON documents and aggregate array elements.
 **Example:**
 
 Write a query that returns the user’s account, user ids, the total time the user has spent watching show 16, and an array containing information about all the episodes of show 16 that the user has watched. The users should have watched at least one episode of show 16 after 2022-4-01.
-````
+```
 <copy>
 select u.id,
 seq_sum(u.info.shows[$element.showId = 16].seriesInfo.episodes.minWatched) as time,
@@ -247,7 +247,7 @@ from stream_acct u
 where u.info.country = "USA" and
 exists u.info.shows[$element.showId = 16].seriesInfo.episodes[$element.date > "2022-04-01"]
 </copy>
-````
+```
 Each element of the array in the above query is a JSON document containing the show name, the season number, the episode id, and the date the episode was watched.
 
 When you execute the query for a sample data, the query returns a sample result that looks like this:
@@ -273,7 +273,7 @@ You can write more complex conditions on nested arrays.
 
 The query returns the number of users who have fully watched show 15 (all seasons and all episodes to their full length).
 
-````
+```
 <copy>
 select count(*) as cnt
 from users u
@@ -285,7 +285,7 @@ where u.info.shows.showId =any 15 and
       not seq_transform(u.info.shows[$element.showId=15].seriesInfo.episodes[],
                         $sq1.lengthMin = $sq1.minWatched) =any false
 </copy>
-````
+```
 
 Let’s look closer at the WHERE clause of this query. The first condition selects show 15. The second condition requires that the size of the series Info array for show 15 is equal to the number of seasons for show 15, that is, the user has watched all the seasons. This (and the following) condition is required because the data contain only the seasons and episodes that a user has actually watched, not all the available seasons/episodes of a show. The third condition requires that the user has watched all the episodes of each season of show 15. It does so by using a
 `seq_transform` expression to iterate over the seasons of show 15 and for each season, check if its number or episodes is equal to the size of its episodes array.
@@ -303,7 +303,7 @@ In the previous section you used path expressions with filtering conditions on a
 
 **Example:** For each user in USA who has watched at least one episode of show 16 after 2022-04-01, return one result for every episode of show 16 that the user has watched. Each such result contains the user's account and user ids, the show name, the season number, the episode id, and the date the episode was watched.
 
-````
+```
 <copy>
 select u.id,
        $show.showName, $season.seasonNum,
@@ -315,7 +315,7 @@ where u.info.country = "USA" and
       $show.showId = 16 and
       $show.seriesInfo.episodes.date >any "2022-04-01"
 </copy>
-````
+```
 Although a single table row satisfies the WHERE clause of this query, the result set of the query consists of 4 rows. The reason is that the query flattens the result array with four elements to produce 4 separate results as shown below.
 ![query7a-result](./images/query7a-result.png)
 
@@ -325,14 +325,14 @@ Although a single table row satisfies the WHERE clause of this query, the result
 
  For each show, write a query that returns the number of users who have shown an interest in that show. Sort the results by the number of users in descending order.
 
-````
+```
 <copy>
 select $show.showId, count(*) as cnt
 from stream_acct u, unnest(u.info.shows[] as $show)
 group by $show.showId
 order by count(*) desc
 </copy>
-````
+```
 Here the query orders the shows according to a measure of their popularity as shown below.
 ![query8a-result](./images/query8a-result.png)
 
@@ -349,14 +349,14 @@ The query uses the `idx_showid` index and the index is a covering one for this q
 
 For each show, return the total time users have spent watching that show. Sort the results in descending order of the total time.
 
-````
+```
 <copy>
 select $show.showId, sum($show.seriesInfo.episodes.minWatched) as totalTime
 from stream_acct u, unnest(u.info.shows[] as $show)
 group by $show.showId
 order by sum($show.seriesInfo.episodes.minWatched) desc
 </copy>
-````
+```
 The above query is similar to the previous one. It just sorts the shows according to a different measure
 of popularity as shown below.
 ![query9a-result](./images/query9a-result.png)
@@ -370,7 +370,7 @@ What if you didn’t have `idx_showid_minWatched`? Could this query have used `i
  the argument of `sum()`, you need to retrieve the full row. But what is the exact expression that should be computed as the argument of `sum()`? One might say that the expression is `info.shows.seriesInfo.episodes.minWatched`.
 However, this is not correct because the expression returns the minutes watched for all the show ids in the row, instead of just the show id of the current group. This analysis leads to the following equivalent query, which does use the `idx_showid` index. However, the index is not covering in this case as shown below.
 
-````
+```
 <copy>
 select $show.showId,
 sum(u.info.shows[$element.showId = $show.showId].
@@ -380,7 +380,7 @@ group by $show.showId
 order by sum(u.info.shows[$element.showId = $show.showId].
 seriesInfo.episodes.minWatched) desc
 </copy>
-````
+```
 ![query9b-plan](./images/query9b-plan.png)
 **Grouping by fields in a nested array**
 
@@ -388,7 +388,7 @@ seriesInfo.episodes.minWatched) desc
 
 For each show and associated season, return the total time users have spent watching that show and season. Sort the results in descending order by the total time.
 
-````
+```
 <copy>
 select $show.showId,
        $seriesInfo.seasonNum,
@@ -398,7 +398,7 @@ from stream_acct u, unnest(u.info.shows[] as $show,
 group by $show.showId, $seriesInfo.seasonNum
 order by sum($seriesInfo.episodes.minWatched) desc
 </copy>
-````
+```
 The query uses `idx_showid_seasonNum_minWatched` as a covering index as shown below.
 ![query10a-plan](./images/query10a-plan.png)
 

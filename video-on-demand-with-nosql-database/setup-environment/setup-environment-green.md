@@ -4,7 +4,7 @@
 
 This lab walks you through the steps necessary to create a proper operating environment.
 
-_Estimated Lab Time:_ 5 minutes
+_Estimated Lab Time:_ 2 minutes
 
 ### Objectives
 
@@ -59,7 +59,7 @@ to get the Cloud Shell started.
 
 4. Execute the following in your Cloud Shell.
 
-    ````
+    ```
     <copy>
     cd $HOME
     rm -rf video-on-demand-with-nosql-database
@@ -69,15 +69,15 @@ to get the Cloud Shell started.
     sh unzip.sh
     cd $HOME
     </copy>
-    ````
+    ```
 
 5. Edit the file env.sh and provide the **Compartment OCID** copied in the Task 1
 
-    ````
+    ```
     <copy>
       vi ~/video-on-demand-with-nosql-database/env.sh
     </copy>
-    ````
+    ```
 
     ![modify-env-sh](images/modify-env-sh.png)
 

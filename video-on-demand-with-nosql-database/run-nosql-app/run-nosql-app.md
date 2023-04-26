@@ -5,7 +5,7 @@
 This lab picks up where lab 3 left off. We are going to explore in more detail
 the tables we created, load data, and execute queries using a GraphQL application.
 
-_Estimated Time:_ 25 minutes
+_Estimated Time:_ 20 minutes
 
 ### Objectives
 
@@ -90,7 +90,7 @@ rich SQL access into JSON objects. But for now, let's continue with this Lab.
  2. Execute the following environment setup shell script in the Cloud Shell to
  set up your environment. If you close/open the Cloud Shell Console, please re-execute it.
 
-     ```
+     ```shell
      <copy>
      source ~/video-on-demand-with-nosql-database/env.sh
      </copy>
@@ -101,7 +101,7 @@ rich SQL access into JSON objects. But for now, let's continue with this Lab.
 
 1. Install the Node.js application. Execute in the Cloud Shell.
 
-    ```
+    ```shell
     <copy>
     cd ~/video-on-demand-with-nosql-database/demo-vod
     npm install
@@ -120,18 +120,18 @@ rich SQL access into JSON objects. But for now, let's continue with this Lab.
 3. Lets review the data that we entered in the Lab 3 using the GraphQL query `Streams`.
 Execute in the Cloud Shell.
 
-    ````
+    ```shell
     <copy>
     curl --request POST --header 'content-type: application/json' --url 'localhost:3000' \
 --data '{"query":"query Streams { streams { id  info { firstName  lastName country } }}"}' | jq
     </copy>
-    ````
+    ```
 
     This will display all the rows in the table currently without details about shows.
 
 4. Read data for a specific user using the GraphQL query `Stream($streamId: Int)`
 
-    ````
+    ```shell
     <copy>
     curl --request POST \
     --header 'content-type: application/json' \
@@ -139,19 +139,19 @@ Execute in the Cloud Shell.
     --data '{
   "query": "query Stream($streamId: Int) { user1:stream(id: $streamId) {id   info{ country shows {showName}} } }", "variables": { "streamId": 1} }'|jq
     </copy>
-    ````
+    ```
 
 5. Execute one of the reports using the GraphQL queries - For every show aired
 by the application, fetch the total watch time by all users
 
-    ````
+    ```shell
     <copy>
     curl --request POST \
     --header 'content-type: application/json' \
     --url 'localhost:3000' \
     --data '{"query":"query WatchTime { watchTime { showName seasonNum length } } "}'|jq
     </copy>
-    ````
+    ```
 
 6. Insert data into the stream_acct table using the GraphQL mutations.
 
@@ -159,42 +159,42 @@ by the application, fetch the total watch time by all users
     NoSQL store using the "demo-vod" application. The shell script will prompt the
     GraphQL and will execute it. Execute in Cloud Shell.
 
-    ````
+    ```shell
     <copy>
     cd ~/video-on-demand-with-nosql-database/example-graphql-query/
     </copy>
-    ````
+    ```
 
-    ````
+    ```shell
     <copy>
     sh create-stream.sh
     sh query-stream-by-id.sh
     </copy>
-    ````
+    ```
 
-    ````
+    ```shell
     <copy>
     sh update-stream.sh
     sh query-stream-by-id.sh
     </copy>
-    ````
+    ```
 
 
 7. You can also execute sql statements using Oracle Cloud Infrastructure CLI commands.
 Going this route, you will be querying the data over REST. Execute in Cloud Shell.
 
-    ````
+    ```shell
     <copy>
     SQL_STATEMENT="SELECT * from stream_acct a where a.info.country = 'USA'"
     echo "$SQL_STATEMENT"
     </copy>
-    ````
+    ```
 
-    ````
+    ```shell
     <copy>
     oci nosql query execute -c  $NOSQL_COMPID --statement "$SQL_STATEMENT"
     </copy>
-    ````
+    ```
   In this case, the data is formatted as a nice JSON document.
 
 8. Load information for 91 users. For the shows, we will insert 5 random shows
@@ -203,23 +203,25 @@ selected from a set of 46 shows.
   **Note**: During this load, You can minimize the Cloud Shell and explore the data
   in detail using the NoSQL Console as shown in Lab 3 - Task 4
 
-    ````
+    ```shell
     <copy>
     cd ~/video-on-demand-with-nosql-database/example-graphql-query/
     sh load.sh
     </copy>
-    ````
+    ```
     If you have an error saying,
-    ````
+    ```shell
+    <copy>
     ls: cannot access ../data/User: No such file or directory
-    ````
+    </copy>
+    ```
     it means that you forgot to unzip the data-show-demo.zip file.
-    ````
+    ```shell
     <copy>
     cd ~/video-on-demand-with-nosql-database/data/
     sh unzip.sh
     </copy>
-    ````
+    ```
 ## Task 4: Create Indexes
 
 In the Lab **Explore Data and Run Queries**, we will see the power of
@@ -231,7 +233,7 @@ You can create these indexes from the OCI console, OCI cli commands, Terraform o
 In this task, we will create 3 of 5 indexes using a Node.js program.
 
 1. Review the DDL commands
-    ```
+    ```shell
     <copy>
     cd ~/video-on-demand-with-nosql-database/demo-vod
     more demo-stream-acct-idx*.ddl | cat
@@ -239,8 +241,8 @@ In this task, we will create 3 of 5 indexes using a Node.js program.
     ```
 
 2. Execute the create-table.js application. Execute in the Cloud Shell.
-```
 
+    ```shell
     <copy>
     cd ~/video-on-demand-with-nosql-database/demo-vod
     node create-table.js
