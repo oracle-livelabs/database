@@ -72,7 +72,7 @@ In this lab, you will:
 
 2. Click the *New JSON Document* button.
 
-	![new document button](./images/new-JSON-doc.png)
+	![new document button](./images/new-json-doc.png)
 
 3. A **New JSON Document** panel displays. Copy the following JSON object, paste it in the worksheet and click **Create**.
 
@@ -93,11 +93,11 @@ In this lab, you will:
 	</copy>
 	```
 
-	![add new document](./images/JSON-object.png)
+	![add new document](./images/json-object.png)
 
 4. A notification pops up that says A New Document is created and the new document is shown in the bottom section of the JSON workshop.
 
-	![new document confirmation popup](./images/popup-JSON-doc.png)
+	![new document confirmation popup](./images/popup-json-doc.png)
 
 5. Let's repeat this with the following documents:
 
@@ -270,7 +270,7 @@ More generally, constraints can be used to check the data being entered for vari
           );
 	</copy>
 	```
-	![add constraint](./images/SQL-constraint-2.png)
+	![add constraint](./images/sql-constraint-2.png)
 
 	JSON_Exists is a SQL/JSON function that checks that a SQL/JSON path expression selects at least one value in the JSON data. The selected value(s) are not extracted – only their existence is checked. Here, *$?(@.price.number() >= 0)* is a standard, SQL/JSON path expressions. You'll learn more about SQJ/JSON functions later in this lab.
 
@@ -337,7 +337,7 @@ More generally, constraints can be used to check the data being entered for vari
     /
     </copy>
     ```
-	![SQL to find JSON doc problem](./images/SQL-with-error.png)
+	![SQL to find JSON doc problem](./images/sql-with-error.png)
 
 8. You may also check the JSON Schema definition in your data dictionary. **JSON schema is new functionality in Oracle Database 23c.**
 In the SQL tool, run:
@@ -347,7 +347,7 @@ In the SQL tool, run:
     select constraint_name, json_serialize(json_schema) from user_JSON_SCHEMA_COLUMNS where table_name = 'MOVIES';
     </copy>
     ```
-	![SQL for data dictionary](./images/SQL-data-dict.png)
+	![SQL for data dictionary](./images/sql-data-dict.png)
 
 
 	_Click on a table cell then the eye icon to view the full value._

@@ -10,7 +10,7 @@ A key characteristic of a JSON collection (like 'products') is that it is backed
 
 In the following, we show you how you can use SQL to work with the JSON data in a collection.
 
-Estimated Time: 1 hour
+Estimated Time: 45 minutes
 
 
 ### Objectives
@@ -62,7 +62,7 @@ In this lab, you will:
     </copy>
     ```
 
-    ![JSON serialize function](./images/JSON-serialize.png " ")
+    ![JSON serialize function](./images/json-serialize.png " ")
 
 2. Simple dot notation - We can extract values from the JSON data using a simple notation (similar to JavaScript) directly from SQL.
 
@@ -74,7 +74,7 @@ In this lab, you will:
     fetch first 10 rows only;
     </copy>
     ```
-    ![simple dot notation](./images/JSON-simple-dot.png " ")
+    ![simple dot notation](./images/json-simple-dot.png " ")
 
     We use a trailing function like 'date()' or 'number()' to map a selected JSON scalar value to a SQL value.
 
