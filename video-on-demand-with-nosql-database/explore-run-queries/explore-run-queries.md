@@ -72,7 +72,7 @@ u.info.shows.showId =any 16
 ```
 Notice the use of the `=any` operator here. Using the simple `=` operator would cause a runtime error to be raised, because `=` expects each of its operands to be at most one value, but the `u.info.shows.showId` path expression returns all the show ids in the shows array. Instead, the  `=any` acts like a `contains` here, i.e., it returns true if the shows array contains a show id with value 16.
 
-See [Sequence Comparison operators] (https://docs.oracle.com/en/database/other-databases/nosql-database/22.2/sqlreferencefornosql/sequence-comparison-operators.html) for more details on the `=any` operations.
+See [Sequence Comparison operators] (https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/sequence-comparison-operators.html) for more details on the `=any` operations.
 
 **Method 2:**
 The query could also be written like this:
@@ -87,12 +87,12 @@ exists u.info.shows[$element.showId = 16]
 ```
 
 Here, the `$element` variable iterates over the elements of the shows array and the condition `$element.showId = 16` selects the show whose id is 16. Since the path expression `u.info.shows[$element.showId = 16]` returns a set of shows (at most one show in this case), rather than a boolean value, the exists operator is needed to convert this set to a boolean value (returning true if the set is not empty).
-See [Path expressions](https://docs.oracle.com/en/database/other-databases/nosql-database/22.2/sqlreferencefornosql/path-expressions.html) for the full specification of path expressions.
+See [Path expressions](https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/path-expressions.html) for the full specification of path expressions.
 
 **Indexes used:**
 
 Both the above queries uses the `idx_country_showid_date` index. Both the query conditions are pushed to the index. In fact, the index is “covering” each query, i.e., it contains all the info needed by the query, and as a
-result, no table rows are scanned during execution. Click [Query Optimization ](https://docs.oracle.com/en/database/other-databases/nosql-database/22.2/sqlreferencefornosql/query-optimization.html) for more examples and details about
+result, no table rows are scanned during execution. Click [Query Optimization ](https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/query-optimization.html) for more examples and details about
 how indexes are used by queries.
 
 **Query Plan:**
@@ -112,7 +112,7 @@ Write a query that returns the details of users in USA who have watched at least
 **Query 2 a:**
 ```
 <copy>
-select * as cnt
+select *
 from stream_acct u
 where u.info.country = "USA" and
 exists u.info.shows[$element.showId = 16].seriesInfo.episodes[$element.date > "2022-04-01"]
@@ -260,7 +260,7 @@ In general, the `seq_transform` expression takes two other expressions as input.
 In this example, the source expression of the first (outer-most) `seq_transform` expression returns show 16. Then, the `$sk1` variable is bound to this show and the second `seq_transform` expression is evaluated. The source expression of this `seq_transform` returns all the show-16 seasons watched. For each such season, the `$sk2` variable is bound to it and the third `seq_transform` expression is evaluated. The source expression of this `seq_transform` returns all the episodes of the current season. Finally, the mapper expression of the third `seq_transform` constructs a json document with the needed info for each episode, extracting this info from the values bound to the `$sk1`, `$sk2`, and `$sk3` variables.
 
 The query also illustrates the use of a sequence aggregation function (`seq_sum`) to sum up the time spent by a user watching episodes that satisfy a condition (the episodes of show 16).
-Click [Sequence Aggregate functions](https://docs.oracle.com/en/database/other-databases/nosql-database/22.2/sqlreferencefornosql/sequence-aggregate-functions.html) for details on sequence aggregation functions.
+Click [Sequence Aggregate functions](https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/sequence-aggregate-functions.html) for details on sequence aggregation functions.
 The corresponding query plan showing the use of index is shown below.
 ![query5a-plan](./images/query5a-plan.png)
 
@@ -276,7 +276,7 @@ The query returns the number of users who have fully watched show 15 (all season
 ```
 <copy>
 select count(*) as cnt
-from users u
+from stream_acct  u
 where u.info.shows.showId =any 15 and
       size(u.info.shows[$element.showId = 15].seriesInfo) =
       u.info.shows[$element.showId = 15].numSeasons and
@@ -297,7 +297,7 @@ The query uses the index `idx_showId`, pushing the `showId` condition to it. The
 
 ## Task 3: Unnest if you really have to!
 
-In the previous section you used path expressions with filtering conditions on array elements, the `seq_transform` expression, and the sequence aggregation functions to avoid the need for unnesting and subqueries. In fact, probably the only case where unnesting is really needed is when you want to group by fields that are contained in arrays. You will not use grouping in the first example below. It is just to illustrate the concept of unnesting. However you will use grouping in the rest of the queries in this section. See [Unnest Arrays and Maps](https://docs.oracle.com/en/database/other-databases/nosql-database/22.2/sqlreferencefornosql/unnest-arrays-maps.html) for more details on unnesting queries.
+In the previous section you used path expressions with filtering conditions on array elements, the `seq_transform` expression, and the sequence aggregation functions to avoid the need for unnesting and subqueries. In fact, probably the only case where unnesting is really needed is when you want to group by fields that are contained in arrays. You will not use grouping in the first example below. It is just to illustrate the concept of unnesting. However you will use grouping in the rest of the queries in this section. See [Unnest Arrays and Maps](https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/unnest-arrays-maps.html) for more details on unnesting queries.
 
 **Unnesting for the sake of it**
 
@@ -341,7 +341,7 @@ Here the query orders the shows according to a measure of their popularity as sh
 The query uses the `idx_showid` index and the index is a covering one for this query. To make the use of this index possible, two Oracle NoSQL features have been used.
 ![query8a-plan](./images/query8a-plan.png)
 * The index was created with the `with unique keys per row` property. This informs the query processor that for any streaming user, the shows array cannot contain two or more shows with the same show id. The restriction is necessary because if duplicate show ids existed, they wouldn’t be included in the index, and as a result, the index would contain fewer entries than the number of elements in the shows arrays. So, use of such an index by the query would yield fewer results from the FROM clause than if the index was not used.
-* The `UNNEST` clause was used in the query to wrap the unnesting expression. Semantically, the `UNNEST` clause is a noop (no operator). However, if an index exists on the array(s) that are being unnested by a query, use of `UNNEST` is necessary for the index to be considered by the query. The `UNNEST` clause places some restrictions on what kind of expressions can appear in it (see [Limitation for expression usage in the UNNEST clause](https://docs.oracle.com/en/database/other-databases/nosql-database/22.2/sqlreferencefornosql/unnest-arrays-maps.html)]), and these restrictions make it easier for the query optimizer to “match” the index and the query.
+* The `UNNEST` clause was used in the query to wrap the unnesting expression. Semantically, the `UNNEST` clause is a noop (no operator). However, if an index exists on the array(s) that are being unnested by a query, use of `UNNEST` is necessary for the index to be considered by the query. The `UNNEST` clause places some restrictions on what kind of expressions can appear in it (see [Limitation for expression usage in the UNNEST clause](https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/unnest-arrays-maps.html)]), and these restrictions make it easier for the query optimizer to “match” the index and the query.
 
 **Grouping by a field in a top-level array, but aggregating over deeply nested fields**
 

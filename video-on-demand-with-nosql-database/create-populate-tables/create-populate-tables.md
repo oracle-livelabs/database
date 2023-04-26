@@ -124,8 +124,6 @@ and  echo the DDL statement so you can see what is being created.
     </copy>
     ```
     At the end of this command you should see a "status": "SUCCEEDED" on your screen.
-    Next we will create the second table.
-
 
 4. Minimize the Cloud Shell by clicking the **minimization button.**
 

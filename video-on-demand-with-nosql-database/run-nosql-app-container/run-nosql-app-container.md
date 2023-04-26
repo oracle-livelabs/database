@@ -124,7 +124,7 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
     export IP_CI=150.136.11.169
     </copy>
     ```
-    **Note:** This will start the "demo-vod" application in the background.
+    **Note:** The "demo-vod" application is running in the container.
 
 2. Read back the data that we entered in the Lab 4 using the GraphQL query `Streams`.
 Execute in the Cloud Shell.

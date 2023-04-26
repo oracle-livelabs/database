@@ -11,6 +11,7 @@ _Estimated Lab Time:_ 5 minutes
 In this lab you will:
 * Create a Compartment
 * Download Code Bundle
+* Deploy Infrastructure using Terraform
 * Learn about Credentials, and Policies
 
 ### Prerequisites
