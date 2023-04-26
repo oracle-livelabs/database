@@ -32,7 +32,7 @@ In this task we will review the code using OCI Code Editor.
 2. Go to the Code Editor, and open the file `index.js` in the following directory
 `video-on-demand-with-nosql-database/demo-vod` as shown in the screen-shot:
 
-    ![Code](./images/appl-code.png)
+    ![Code createNoSQLClient](./images/appl-code-connection.png)
 
     Oracle NoSQL Database offers **flexible deployment** options to suit the needs of
 its customers. Whether deploying on an "On-Premises" cluster or utilizing the
@@ -65,6 +65,8 @@ want to learn more [check here.](https://github.com/oracle/nosql-examples/blob/m
 choosing the most cost-effective deployment to meet their business and application
 workload requirements. Such flexibility empowers businesses to solely focus on application
 innovations to delight their customers, making operational costs "worry-free" in their decision-making process.
+
+   ![Code createTable](./images/appl-code.png)
 
   You can also modify the **Capacity mode** from Provisioned Capacity to On Demand Capacity and vice-versa.
 The function `createTable` illustrates this.

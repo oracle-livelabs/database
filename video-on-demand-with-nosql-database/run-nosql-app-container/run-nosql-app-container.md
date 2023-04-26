@@ -49,9 +49,16 @@ In this task we will review the code using OCI Code Editor.
    **delegation tokens**.  In this lab, we are going to be running
    application using **Resource Principals**.
 
-   Note: When deploying using OKE, you will do the connection using **Instance Principals**. It is not the topic of this workshop but if you
-want to learn more [check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-vod.yml)
-and [here.](https://github.com/oracle/nosql-examples/blob/master/demo-livelab/video-on-demand-with-nosql-database/oracle-app-ndcs-deployment.yaml)
+    * As discussed in the Lab 2 - Task 4: Understand Credentials, and Policies.
+To use them you have to set up a dynamic group and create a policy that grants
+the dynamic group access to a resource.
+We did it for you in **Lab 2 - Task 3: Deploy Infrastructure using Terraform**.
+Take a look at the `policy.tf` file in the following directory `video-on-demand-with-nosql-database`.
+    * In this Lab, We will use a container image that we deployed in GitHub Container Registry.
+Take a look to the `Dockerfile` in the following directory `video-on-demand-with-nosql-database/demo-vod`, and [check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/build-and-push-demo-vod-image.yml)
+
+    * Note: When deploying using OKE - see Lab 1, you will do the connection using **Instance Principals**. It is not the topic of this workshop but if you
+want to learn more read the `oracle-app-ndcs-deployment.yaml` file in the following directory `video-on-demand-with-nosql-database`. [Check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-vod.yml) to learn how to deploy using GitHub Actions.
 
 ## Task 2: Restart the Cloud Shell
 
