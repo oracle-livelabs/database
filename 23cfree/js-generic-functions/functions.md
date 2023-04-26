@@ -62,7 +62,7 @@ In this task you will learn how to create a call specification based on the MLE 
 
 1. Review the source code for `helper_module_inline`
 
-	Before you can invoke functions defined in a module you need to ensure they are exported.
+    Before you can invoke functions defined in a module you need to ensure they are exported.
 
     ```sql
     <copy>
@@ -368,7 +368,7 @@ In scenarios where you don't need the full flexibility of JavaScript modules and
 
 ## Task 6: View dictionary information about call specifications
 
-The data dictionary has been enhanced in Oracle Database 23c Free-Developer Release to provide information about call specifications. A new view, named `USER_MLE_PROCEDURES` provides the mapping between PL/SQL code units and JavaScript. There are of course corresponding _ALL/DBA/CDB_ views as well. 
+The data dictionary has been enhanced in Oracle Database 23c Free-Developer Release to provide information about call specifications. A new view, named `USER_MLE_PROCEDURES` provides the mapping between PL/SQL code units and JavaScript. There are of course corresponding _ALL/DBA/CDB_ views as well.
 
 1. Query `USER_MLE_PROCEDURES` to learn more about the existing call specifications
 
