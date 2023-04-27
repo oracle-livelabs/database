@@ -19,9 +19,9 @@
         },
         {
             "title": "Lab 1: Setup OCI Tenancy",
-            "description": "Setup Policies and Compartment (IAM)",
+            "description": "Setup Groups, Policies, and Compartment (IAM)",
             "type": "tenancy",
-            "filename": "../../setup-iam/setup-iam-tenancy.md"
+            "filename": "../../setup-iam/setup-iam.md"
         },
         {
             "title": "Lab 2: Environment Setup",
@@ -74,9 +74,10 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md"
         },
         {
-            "title": "Lab 12: Delete the Compartment",
-            "description": "Delete the Compartment",
-            "filename": "../../delete_compartment/delete_compartment.md"
+            "title": "Lab 12: Clean up OCI Tenancy",
+            "description": "Clean up Groups, Policies, and Compartment (IAM)",
+            "type": "tenancy",
+            "filename": "../../teardown-iam/teardown-iam.md"
         },
         {
             "title": "Need Help?",

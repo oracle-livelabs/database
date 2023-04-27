@@ -1,46 +1,62 @@
-# Provision and Configure the Cloud Infrastructure
+# Setup OCI Tenancy
 
 ## Introduction
 
 In this lab, we will create the Oracle Cloud Infrastructure (OCI) *Policies* required for least-privilege provisioning of the workshop infrastructure.  Additionally we will create an OCI *Compartment* to isolate the resources created during this workshop.
 
-**If you are not in the OCI Administrators group,** please have an OCI Administrator perform these each task for you.  If you are in the Administrators group, Tasks 3 and 4 are optional.
+<if type="tenancy">
 
-*Estimated Lab Time:* 5 minutes
+**If you are not in the OCI Administrators group,** please have an OCI Administrator perform these each task for you.
+
+</fi>
+
+*Estimated Lab Time:* 2 minutes
 
 Watch the video below for a quick walk through of the lab.
 [](youtube:zNKxJjkq0Pw)
 
 ### Objectives
 
-* Ensure you have the correct OCI Policies
 * Create an OCI Compartment
+* Ensure you have the correct OCI Policies
 
 ### Prerequisites
 
 This lab assumes you have:
 
-    An Oracle Cloud Paid Account
-    You have completed:
-        Get Started
+* An Oracle Cloud Paid Account
+* You have completed:
+  * Get Started
 
 ## Task 1: Open the Cloud Shell
 
 *Cloud Shell* is a web browser-based terminal accessible from the Oracle Cloud Console. *Cloud Shell* is free to use (within monthly tenancy limits), and provides access to a Linux shell, with a pre-authenticated OCI CLI, a pre-authenticated Ansible installation, Terraform and other useful tools.
 
-As a user in the Administrator group, log into the Oracle Cloud Console and open the *Cloud Shell*
+<if type="tenancy">
+
+As a user in the **Administrator** group, log into the Oracle Cloud Console and open the *Cloud Shell*
+
+</fi>
+
+<if type="freetier">
+
+Log into the Oracle Cloud Console and open the *Cloud Shell*
+
+</fi>
 
 ![cloud-shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
 ## Task 2: Create a Compartment
 
-A *Compartment* is a collection of cloud assets, like Databases, Oracle Kubernetes Clusters, Compute Instances, Load Balancers and so on.  You can think of a *Compartment* much like a database schema: a collection of tables, indexes, and other objects isolated from other schemas.  By default, a root *Compartment* (think SYSTEM schema) was created for you when you created your tenancy.  It is possible to create everything in the root *Compartment*, but Oracle recommends that you create sub-*Compartments* to help manage your resources more efficiently.
+A *Compartment* is a collection of cloud assets, including Databases, Oracle Kubernetes Clusters, Compute Instances, Load Balancers and so on.
+
+You can think of a *Compartment* much like a database schema: a collection of tables, indexes, and other objects isolated from other schemas.  By default, a root *Compartment* (think SYSTEM schema) was created for you when you created your tenancy.  It is possible to create everything in the root *Compartment*, but Oracle recommends that you create sub-*Compartments* to help manage your resources more efficiently.
 
 In the *Cloud Shell*, run the following commands to create a sub-*Compartment* to the root *Compartment*:
 
     ```bash
     <copy>
-    LL_COMPARTMENT=$(oci iam compartment create --name [](var:oci_compartment) --description [](var:description)" --compartment-id $OCI_TENANCY --query data.id --raw-output)
+    LL_COMPARTMENT=$(oci iam compartment create --name [](var:oci_compartment) --description "[](var:description)" --compartment-id $OCI_TENANCY --query data.id --raw-output)
     echo "Compartment OCID: $LL_COMPARTMENT"
     </copy>
     ```
@@ -64,13 +80,13 @@ In the *Cloud Shell*, run the following commands to create a *Group* and assign 
     Replace `<username>` with the OCI username:
 
    ```bash
-   LL_USER=$(oci iam user list --name <username> --raw-output | jq -r '.data[].id')
+   LL_USER=$(oci iam user list --name <username> | jq -r '.data[].id')
    ```
 
     For example:
 
     ```bash
-    LL_USER=$(oci iam user list --name first.last@url.com --raw-output | jq -r '.data[].id')`
+    LL_USER=$(oci iam user list --name first.last@url.com | jq -r '.data[].id')`
     ```
 
     You can get a list of usernames by running:
@@ -110,7 +126,7 @@ In the *Cloud Shell*, run the following commands to create a *Policy* statement 
 
     ```bash
     <copy>
-    LL_COMPARTMENT=$(oci iam compartment list --name [](var:oci_compartment) --raw-output | jq -r '.data[].id')
+    LL_COMPARTMENT=$(oci iam compartment list --name [](var:oci_compartment) | jq -r '.data[].id')
     oci iam policy create --compartment-id $LL_COMPARTMENT --description "[](var:description)" --name [](var:oci_group)_POLICY --statements file://[](var:oci_group)_policies.json
     </copy>
     ```
