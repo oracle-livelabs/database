@@ -18,10 +18,10 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
         },
         {
-            "title": "Lab 1: Prepare Setup",
-            "description": "Setup Policies and Compartment",
+            "title": "Lab 1: Setup OCI Tenancy",
+            "description": "Setup Policies and Compartment (IAM)",
             "type": "tenancy",
-            "filename": "../../prepare-setup/prepare-setup-tenancy.md"
+            "filename": "../../setup-iam/setup-iam-tenancy.md"
         },
         {
             "title": "Lab 2: Environment Setup",

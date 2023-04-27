@@ -40,7 +40,8 @@ In the *Cloud Shell*, run the following commands to create a sub-*Compartment* t
 
     ```bash
     <copy>
-    LL_COMPARTMENT=$(oci iam compartment create --name [](var:oci_compartment) --description "LiveLab" --compartment-id $OCI_TENANCY --query data.id --raw-output)
+    LL_COMPARTMENT=$(oci iam compartment create --name [](var:oci_compartment) --description [](var:description)" --compartment-id $OCI_TENANCY --query data.id --raw-output)
+    echo "Compartment OCID: $LL_COMPARTMENT"
     </copy>
     ```
 
@@ -52,29 +53,39 @@ In the *Cloud Shell*, run the following commands to create a *Group* and assign 
 
 1. Create a Group
 
-   ```bash
-   <copy>
-   LL_GROUP=$(oci iam group create --description "LiveLabs" --name [](var:oci_group) --query data.id --raw-output)
-   </copy>
-   ```
+    ```bash
+    <copy>
+    LL_GROUP=$(oci iam group create --description "[](var:description)" --name [](var:oci_group) --query data.id --raw-output)
+    echo "Group OCID: $LL_GROUP"
+    </copy>
+    ```
 
 2. Assign a variable with the OCID of the user performing the rest of the Live Lab workshop.
-   Replace `<username>` with the OCI username:
+    Replace `<username>` with the OCI username:
 
-   `LL_USER=$(oci iam user list --name <username> --raw-output | jq -r '.data[].id')`
+   ```bash
+   LL_USER=$(oci iam user list --name <username> --raw-output | jq -r '.data[].id')
+   ```
 
-   For example:
+    For example:
 
-   `LL_USER=$(oci iam user list --name first.last@url.com --raw-output | jq -r '.data[].id')`
+    ```bash
+    LL_USER=$(oci iam user list --name first.last@url.com --raw-output | jq -r '.data[].id')`
+    ```
 
-   You can get a list of usernames by running:
+    You can get a list of usernames by running:
 
-   `oci iam user list --all --query 'data[].name'`
+    ```bash
+    <copy>
+    oci iam user list --all --query 'data[].name'`
+    </copy>
+    ```
 
 3. Assign the User to the Group
 
     ```bash
     <copy>
+    LL_GROUP=$(oci iam group list --name [](var:oci_group) --query data.id --raw-output)
     oci iam group add-user --group-id $LL_GROUP --user-id $LL_USER
     </copy>
     ```
@@ -83,11 +94,24 @@ In the *Cloud Shell*, run the following commands to create a *Group* and assign 
 
 A *Policy* specifies who can access which OCI resources, and how.  A *Policy* simply allows a *Group* to work in certain ways with specific types of resources in a particular compartment.  In database terms, this is the process of granting privileges (*Policy*) to a role (*Group*) against a specific schema (*Compartment*).
 
-In the *Cloud Shell*, run the following commands to assign *Policies* to the *Group* against the *Compartment*:
+In the *Cloud Shell*, run the following commands to create a *Policy* statement and assign *Policies* to the *Group* against the *Compartment*:
+
+1. Create the *Policy* statement file:
 
     ```bash
     <copy>
+    cat > [](var:oci_group)_policies.json < EOF
     allow group [](var:oci_group) to use cloud-shell in tenancy
+    EOF
+    </copy>
+    ```
+
+2. Create the *Policy*:
+
+    ```bash
+    <copy>
+    LL_COMPARTMENT=$(oci iam compartment list --name [](var:oci_compartment) --raw-output | jq -r '.data[].id')
+    oci iam policy create --compartment-id $LL_COMPARTMENT --description "[](var:description)" --name [](var:oci_group)_POLICY --statements file://[](var:oci_group)_policies.json
     </copy>
     ```
 
