@@ -4,11 +4,7 @@
 
 In this lab, we will create the Oracle Cloud Infrastructure (OCI) *Policies* required for least-privilege provisioning of the workshop infrastructure.  Additionally we will create an OCI *Compartment* to isolate the resources created during this workshop.
 
-<if type="tenancy">
-
-**If you are not in the OCI Administrators group,** please have an OCI Administrator perform these each task for you.
-
-</fi>
+<if type="tenancy">**If you are not in the OCI Administrators group,** please have an OCI Administrator perform these each task for you.</fi>
 
 *Estimated Lab Time:* 2 minutes
 
@@ -32,17 +28,8 @@ This lab assumes you have:
 
 *Cloud Shell* is a web browser-based terminal accessible from the Oracle Cloud Console. *Cloud Shell* is free to use (within monthly tenancy limits), and provides access to a Linux shell, with a pre-authenticated OCI CLI, a pre-authenticated Ansible installation, Terraform and other useful tools.
 
-<if type="tenancy">
-
-As a user in the **Administrator** group, log into the Oracle Cloud Console and open the *Cloud Shell*
-
-</fi>
-
-<if type="freetier">
-
-Log into the Oracle Cloud Console and open the *Cloud Shell*
-
-</fi>
+<if type="tenancy">As a user in the **Administrator** group, log into the Oracle Cloud Console and open the *Cloud Shell*</fi>
+<if type="freetier">Log into the Oracle Cloud Console and open the *Cloud Shell*</fi>
 
 ![cloud-shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
@@ -54,12 +41,12 @@ You can think of a *Compartment* much like a database schema: a collection of ta
 
 In the *Cloud Shell*, run the following commands to create a sub-*Compartment* to the root *Compartment*:
 
-    ```bash
-    <copy>
-    LL_COMPARTMENT=$(oci iam compartment create --name [](var:oci_compartment) --description "[](var:description)" --compartment-id $OCI_TENANCY --query data.id --raw-output)
-    echo "Compartment OCID: $LL_COMPARTMENT"
-    </copy>
-    ```
+```bash
+<copy>
+LL_COMPARTMENT=$(oci iam compartment create --name [](var:oci_compartment) --description "[](var:description)" --compartment-id $OCI_TENANCY --query data.id --raw-output)
+echo "Compartment OCID: $LL_COMPARTMENT"
+</copy>
+```
 
 ## Task 3: Create a Group and Assign User
 
@@ -77,11 +64,12 @@ In the *Cloud Shell*, run the following commands to create a *Group* and assign 
     ```
 
 2. Assign a variable with the OCID of the user performing the rest of the Live Lab workshop.
+
     Replace `<username>` with the OCI username:
 
-   ```bash
-   LL_USER=$(oci iam user list --name <username> | jq -r '.data[].id')
-   ```
+    ```bash
+    LL_USER=$(oci iam user list --name <username> | jq -r '.data[].id')
+    ```
 
     For example:
 
@@ -102,6 +90,8 @@ In the *Cloud Shell*, run the following commands to create a *Group* and assign 
     ```bash
     <copy>
     LL_GROUP=$(oci iam group list --name [](var:oci_group) --query data.id --raw-output)
+    echo "Group OCID: $LL_GROUP"
+    echo "User OCID:  $LL_USER"
     oci iam group add-user --group-id $LL_GROUP --user-id $LL_USER
     </copy>
     ```
@@ -116,8 +106,10 @@ In the *Cloud Shell*, run the following commands to create a *Policy* statement 
 
     ```bash
     <copy>
-    cat > [](var:oci_group)_policies.json < EOF
-    allow group [](var:oci_group) to use cloud-shell in tenancy
+    cat > [](var:oci_group)_policies.json << EOF
+    [
+    "allow group [](var:oci_group) to use cloud-shell in tenancy"
+    ]
     EOF
     </copy>
     ```
@@ -126,8 +118,7 @@ In the *Cloud Shell*, run the following commands to create a *Policy* statement 
 
     ```bash
     <copy>
-    LL_COMPARTMENT=$(oci iam compartment list --name [](var:oci_compartment) | jq -r '.data[].id')
-    oci iam policy create --compartment-id $LL_COMPARTMENT --description "[](var:description)" --name [](var:oci_group)_POLICY --statements file://[](var:oci_group)_policies.json
+    oci iam policy create --compartment-id $OCI_TENANCY --description "[](var:description)" --name [](var:oci_group)_POLICY --statements file://[](var:oci_group)_policies.json
     </copy>
     ```
 
