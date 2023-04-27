@@ -10,7 +10,7 @@ A key characteristic of a JSON collection (like 'products') is that it is backed
 
 In the following, we show you how you can use SQL to work with the JSON data in a collection.
 
-Estimated Time: 1 hour
+Estimated Time: 45 minutes
 
 
 ### Objectives
@@ -288,6 +288,8 @@ JSON\_Table is used to 'flatten' hierarchical JSON data to a table consisting of
     )) jt;
     </copy>
     ```
+    **Note that this view is using the new BOOLEAN data type, introduced in Oracle Database 23c.**
+    
     ![create view from JSON table](./images/view-created.png " ")
 
     Describe the movie_view:

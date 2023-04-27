@@ -93,9 +93,11 @@ This lab has you download software from the YUM repo at repo.mongodb.org. This s
     ```
     ![Query result for after 2020](images/mongo-2020.png " ")
 
+    There's only one movie in our library that was released after 2020.
+
 ## Task 3: Interact interchangeably with Mongo API and SQL Developer Web
 
-Let's take some time to demonstrate the interactivity between the Oracle and Mongo tools we have installed on our machine.
+Let's take some time to demonstrate the interactivity between the Oracle and Mongo tools we have installed on our machine to see the different APIs working against the same data set.
 
 1. Use the Mongo Shell to insert 2 documents to our movie collection.
 
@@ -135,7 +137,7 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
 3. Return to the browser window that contains SQL Developer Web. We will query for the same movies using the JSON tool. Navigate to the JSON tool using the menu in the top left corner of the webpage if you are not there already.
 	![Homepage Development JSON](./images/development-json.png)
 
-4. Let's edit the entries in SQL Developer Web and see the changes in Mongo Shell. First, double click on the document referencing the movie "SuperAction Mars," or click the "Edit Document" icon next to it. In the dialog page, change the year to 2025 and then save the document.
+4. Let's edit the entries in SQL Developer Web and see the changes in Mongo Shell. First, double click on the document referencing the movie "SuperAction Mars," or click the "Edit Document" icon next to it. In the dialog page, change the year to 2025 and then save the document. Seems Tom Cruise is busy and won't have enough time to finish the movie before then.
 	![Find SuperAction Mars](./images/find-superaction-mars.png)
 	![Edit SuperAction Mars](./images/edit-superaction-mars.png)
 
