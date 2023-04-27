@@ -20,12 +20,12 @@
         },
 
         {
-          "title": "Lab 2: Create  HeatWave DB",
+          "title": "Lab 2: Create MySQL HeatWave Database",
           "filename": "../../create-heatwave-db/create-heatwave-db.md"
         },
 
         {
-          "title": "Lab 3: Create Compute Connect to MySQL HeatWave and Load DB Schema",
+          "title": "Lab 3: Create Compute, Connect to MySQL HeatWave, and Load DB Schema",
           "filename": "../../create-compute-connect-dbs/create-compute-connect-dbs.md"
         },
            

@@ -99,6 +99,7 @@ First, we're going to navigate back to the Autonomous Database and open SQL Deve
 
 4. The first thing we will need to do is create our credentials in order to access our Object Storage bucket from our Autonomous Database. Using the SQL Developer Web, copy and run the following statements. Note, the DBMS_CLOUD command, you will need the username and token that we copied in the lab above. The credential and token **need to be in single quotes** ''.
 
+
     ```
     <copy>
     SET DEFINE OFF;
