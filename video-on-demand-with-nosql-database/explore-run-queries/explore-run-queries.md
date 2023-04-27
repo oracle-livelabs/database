@@ -23,30 +23,57 @@ _Estimated Time:_ 20 minutes
 ## Task 1: Create the required indexes
 
 Before exploring nested arrays, create the indexes on `stream_acct` table that will be handy while writing the queries. You already created three indexes as part of the previous lab after creating **stream_acct** table.
-Given below are the DDL statements for creating the two new indexes. You will create these indexes from the OCI console as shown below. You can have the DDL statement as reference when you create the index in the OCI console.
+You will create two new indexes from the OCI console as shown below.
 
-Log in to the OCI console. From the hamburger menu, click **Databases**. Under Oracle NoSQL Databases, click **Tables**.
-Click the **stream_acct** table. Under **Resources**, click **Indexes**. The list of indexes already created in the table is listed.
+1. Log in to the OCI console. From the hamburger menu, click **Databases**. Under Oracle NoSQL Databases, click **Tables**.
+Click the **stream_acct** table. Under **Resources**, click **Indexes**.
+The list of indexes already created in the table is listed.
 ![list-indexes](./images/list-indexes.png)
 
-Create an index `idx_country_showid_date` as shown below.
-```
-<copy>
-create index idx_country_showid_date on stream_acct(
+2. Click on `Add Index` Button
+
+3. Create the index `idx_country_showid_date` using the following information.
+
+  Index column name|JSON path to index field|Type of JSON index field|
+  ---|---|---|
+  info|country|String
+  info|shows[].showId|Integer
+  info|seriesInfo[].episodes[].date|String
+  {: title="Index parameters"}
+
+  See the animated gif below with details on how to create the index
+
+  ![crtind-country-showid-date](./images/crtind-country-showid-date.gif)
+
+4. Create the index `idx_country_genre` using the following information.
+
+  Index column name|JSON path to index field|Type of JSON index field|
+  ---|---|---|
+  info|country|String
+  info|shows[].genres[]|String
+  {: title="Index parameters"}
+
+  See the animated gif below with details on how to create the index
+
+  ![crtind-country-genre](./images/crtind-country-genre.gif)
+
+
+5. Here are the DDL statement for reference.
+  ```
+  <copy>
+  create index idx_country_showid_date on stream_acct(
     info.country as string,
     info.shows[].showId as integer,
     info.shows[].seriesInfo[].episodes[].date as string)
-</copy>    
-```
-![crtind-country-showid-date](./images/crtind-country-showid-date.png)
-```
-<copy>
-create index idx_country_genre on stream_acct(
+  </copy>    
+  ```
+  ```
+  <copy>
+  create index idx_country_genre on stream_acct(
     info.country as string,
     info.shows[].genres[] as string)
-</copy>    
-```
-![crtind-country-genre](./images/crtind-country-genre.png)
+  </copy>    
+  ```
 
 
 ## Task 2: Don’t unnest that array!
