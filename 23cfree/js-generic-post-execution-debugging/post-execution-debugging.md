@@ -4,7 +4,7 @@
 
 Oracle's JavaScript Engine allows developers to debug their code by conveniently and efficiently collecting runtime state during program execution. After the code has finished executing, the collected data can be used to analyze program behavior and discover and fix bugs. This form of debugging is known as _post-execution debugging_.
 
-The post-execution debug option enables developers to instrument their code by specifying debug points in the code. Debug points allow logging program state conditionally or unconditionally, including values of individual variables as well as execution snapshots. Debug points are specified as JSON documents separate from the application code. No change to the application code is necessary for debug points to fire.
+The post-execution debug option enables developers to instrument their code by specifying debugpoints in the code. Debugpoints allow you to log program state conditionally or unconditionally, including values of individual variables as well as execution snapshots. Debugpoints are specified as JSON documents separate from the application code. No change to the application is necessary for debug points to fire.
 
 When activated, debug information is collected according to the debug specification and can be fetched for later analysis by a wide range of tools thanks to its standard format.
 
@@ -14,9 +14,11 @@ Estimated Lab Time: 15 minutes
 
 In this lab, you will:
 
-- Objective 1
-- Objective 2
-- Objective 3
+- Learn about the format of debug specifications
+- Create a debug specification for a JavaScript module
+- Run code with debugging enabled
+- Parse the debug output
+- Learn how to write code with an option to enable debugging dynamically at runtime
 
 ### Prerequisites
 
@@ -36,15 +38,15 @@ Connect to the pre-created Pluggable Database (PDB) `freepdb1` using the same cr
 
 ## Task 2: Prepare the debug specification
 
-The necessary debug specification is defined as a JSON document. It consists of 
+The necessary debug specification is defined as a JSON document. It consists of
 
 - A preamble
-- An array of debug points
+- An array of debugpoints
 
-Each debug point in turn defines
+Each debugpoint in turn defines
 
 - The location in the module's code where to fire
-- which action to take, optionally providing a condition for the probe to fire
+- Which action to take, optionally providing a condition for the probe to fire
 
 Actions include printing the value of a single variable (`watch` point) or taking a `snapshot` of all variables in the current scope.
 
@@ -143,7 +145,7 @@ Actions include printing the value of a single variable (`watch` point) or takin
 
 ## Task 3: Run the code with the debug specification attached
 
-This step brings it all together: the debug specification is stored in a variable of type `JSON`, the code is executed and with the debug specification attached, and the result is printed on screen.
+This step brings it all together. The debug specification is stored in a variable of type `JSON`, the code is executed with the debug specification attached, and the result is printed on screen.
 
 ```sql
 <copy>
@@ -200,7 +202,9 @@ begin
     l_success  := business_logic_pkg.process_order(l_order_as_string);
 
     -- get the debug output as JSON (not normally done this way, 
-    -- tools such as Database Actions should be used instead)
+    -- tools such as Database Actions should be used instead because
+    -- the debug output quickly becomes hard to read on screen when tracking
+    -- many variables)
     l_debugtext := dbms_mle.parse_debug_output(l_debugsink);
     dbms_output.put_line('-- debug output: ' ||
         json_serialize(l_debugtext returning clob pretty)
@@ -282,7 +286,7 @@ You can see that both probes fired:
 
 ## Task 5: Prepare for dynamic debugging
 
-In an ideal scenario post-execution debugging should be simple to enable without having to change any code, mabye even by a "super user" application account. Otherwise support will find it very hard to troubleshoot problems reported by the user base. Rather than hard-coding calls to `dbms_mle.enable_debugging()` and `dbms_mle.disable_debugging()`. In this task you will learn how to run business logic with debugging enabled on demand.
+In an ideal scenario post-execution debugging should be simple to enable without having to change any code, maybe even by a "super user" application account. Otherwise, support will find it very hard to troubleshoot problems reported by the user base. Rather than hard-coding calls to `dbms_mle.enable_debugging()` and `dbms_mle.disable_debugging()`, in this task you will learn how to run business logic with debugging enabled on demand.
 
 1. Create a table containing the debug specifications
 
@@ -379,7 +383,7 @@ In an ideal scenario post-execution debugging should be simple to enable without
     <copy>
     create or replace package body business_logic_pkg as
 
-        -- process_order() is now a a private function
+        -- process_order() is now a private function
         function process_order_prvt(
             p_order_data varchar2
         ) return boolean
@@ -542,7 +546,7 @@ In an ideal scenario post-execution debugging should be simple to enable without
     PL/SQL procedure successfully completed.
     ```
 
-    In addition to the information printed on screen you can find the result of the debug run in the `debug_run` table. Get run metadata as follows (assuming this was the first successful execution the run ID will be 1, please adjust as needed):
+    In addition to the information printed on screen you can find the result of the debug run in the `debug_run` table. Get run metadata as follows (assuming this was the first successful execution the run ID will be 1, adjust as needed):
 
     ```sql
     <copy>

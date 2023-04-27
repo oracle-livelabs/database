@@ -2,7 +2,7 @@
 
 ## Introduction
 
-All previous labs have carefully avoided accessing the data layer to ease the transition into server-side JavaScript development. Beginning with this lab you will use the SQL Driver to access the database. Whilst this lab sticks with the basic concepts the next lab focuses on JSON - both from a relational as well as from a document model's point of view.
+All previous labs have carefully avoided accessing the data layer to ease the transition into server-side JavaScript development. Beginning with this lab you will use the SQL Driver to access the database. Whilst this lab sticks with the basic concepts, the next lab focuses on JSON both from a relational as well as from a document model's point of view.
 
 Estimated Lab Time: 10 minutes
 
@@ -23,7 +23,7 @@ This lab assumes you have:
 
 ## Task 1: Get familiar with the SQL Driver
 
-The JavaScript SQL Driver is an integral part of Multilingual Engine (MLE). It is very similar to the client-side driver, `node-oracledb` to ease the transition from client-side code to an implementation within the database. Connection management is the main difference between the two. Whilst it is the developer's responsibility to establish a session with the database this step can be omitted in MLE since a session already exists.
+The JavaScript SQL Driver is an integral part of Multilingual Engine (MLE). It is very similar to the client-side driver, `node-oracledb` to ease the transition from client-side code to an implementation within the database. Connection management is the main difference between the two. Whilst it is the developer's responsibility to establish a session with the database this step can be omitted in MLE because a session already exists.
 
 There are two different ways to execute queries against the database
 
@@ -34,11 +34,11 @@ Both of these will be explained in depth in this lab.
 
 ## Task 2: Querying the database
 
-As part of this task you can learn more about selecting information from the database.
+By completing this task, you will learn more about selecting information from the database.
 
 1. Create a database session
 
-    Connect to `freepdb1` just as you did in the previous labs, don't forget to substitute the dummy password with yours
+    Connect to `freepdb1` just as you did in the previous labs, don't forget to substitute the dummy password with your own
 
     ```bash
     <copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
@@ -74,11 +74,13 @@ As part of this task you can learn more about selecting information from the dat
     </copy>
     ```
 
-    > **Note**: unlike `node-oracledb` the default `outFormat` for the MLE JavaScript SQL Driver in 23c Free-Developer Release changed to `oracledb.OUT_FORMAT_OBJECT`.
+    > **Note**: Unlike `node-oracledb` the default `outFormat` for the MLE JavaScript SQL Driver in 23c Free-Developer Release is `oracledb.OUT_FORMAT_OBJECT`.
 
 3. Query the database using variables provided in the global scope
 
-    A number of variables have been added to the global scope to enhance the developer experience. The complete list is available in chapter 6 of the JavaScript Developer's Guide. In this example you can learn how to re-write the previous module to make use of the variables in the global scope.
+    A number of variables have been added to the global scope to enhance the developer experience. In this example you can learn how to re-write the previous module to make use of the variables in the global scope.
+
+    For a complete list of available global variables, see JavaScript Developer’s Guide, chapter 6.
 
     ```js
     <copy>
@@ -110,12 +112,12 @@ As part of this task you can learn more about selecting information from the dat
 
     There are a few noteworthy differences in the code:
 
-    - Since `oracledb` is part of the global scope there is no need to import it 
-    - The `session` object refers to the default connection you'd otherwise have to obtain via an extra line of code
+    - Because `oracledb` is part of the global scope there is no need to import it
+    - The `session` object refers to the default connection you'd otherwise have to obtain using an extra line of code
 
 4. Use a `ResultSet` rather than a Direct Fetch
 
-    The previous examples demonstrated direct fetches, in other words all results are returned in the `result.rows` property. This can cause strain on the available memory if the result set is large. A more efficient way for fetching larger result sets is available in form of the `ResultSet`.
+    The previous examples demonstrated direct fetches. In other words all results are returned in the `result.rows` property. This can cause strain on the available memory if the result set is large. A more efficient way to fetch larger result sets is available in the form of the `ResultSet`.
 
     Create a sample table with some data first.
 
@@ -129,7 +131,7 @@ As part of this task you can learn more about selecting information from the dat
     </copy>
     ```
 
-    Next create an inline JavaScript function to iterate over the table. Inline JavaScript functions only permit importing modules built-into MLE _dynamically_ (see below for the API reference). Since dynamic imports require additional language elements to be used it is easier to refer to the `oracledb` and `session` objects in the global scope.
+    Next create an inline JavaScript function to iterate over the table. Inline JavaScript functions only permit importing modules built-into MLE _dynamically_ (see below for the API reference). Because dynamic imports require additional language elements to be used it is easier to refer to the `oracledb` and `session` objects in the global scope.
 
     ```js
     <copy>
@@ -166,7 +168,7 @@ As part of this task you can learn more about selecting information from the dat
 
 5. Using Bind Variables
 
-    So far none of the examples in this lab have made use of bind variables. Bind variables must be passed as the second argument to the `execute()` function, and they can be provided as an array or an object. This tasks makes use of the simplified syntax based on an array. Note that the order of the variables inside the array representing bind values must be aligned with the placeholders from the query text.
+    So far none of the examples in this lab have made use of bind variables. Bind variables must be passed as the second argument to the `execute()` function and they can be provided as an array or an object. This tasks makes use of the simplified syntax offered by an array. Note that the order of the variables inside the array representing bind values must be aligned with the placeholders from the query text.
 
     ```js
     <copy>
@@ -216,10 +218,10 @@ As part of this task you can learn more about selecting information from the dat
 
 ## Lab 3: Calling PL/SQL from JavaScript
 
-The previous lab showed you how to query the database using SQL. In addition to using plain SQL. You can make use of the rich PL/SQL API provided by the database. In this example you use the `DBMS_APPLICATION_INFO` package to instrument your code. This lab showcases a number of additional features:
+The previous lab showed you how to query the database using SQL. In addition to using plain SQL you can make use of the rich PL/SQL API provided by the database. In this example you will use the `DBMS_APPLICATION_INFO` package to instrument your code. This lab showcases several additional features:
 
 - IN and OUT (bind-) Variables
-- Global variables in a MLE module
+- Global variables in an MLE module
 - Private functions (`saveModuleAction()` and `setModuleAction()`)
 - Custom exception handling
 
@@ -442,7 +444,7 @@ The previous tasks in this lab focused on _reading_ from the database. In this p
 
 - [MLE API Reference](https://oracle-samples.github.io/mle-modules)
 - [node-oracledb](https://oracle.github.io/node-oracledb/)
-- Chapter 6 in [JavaScript Developer's Guide]() is dedicated to interacting with the database
+- Chapter 6 in [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/calling-plsql-and-sql-from-mle-js-code.html#GUID-69CF9858-66D7-45B6-ACAF-F08B059CF4F6) is dedicated to interacting with the database
 - [PL/SQL Packages and Types Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/arpls/index.html)
 
 ## Acknowledgements
