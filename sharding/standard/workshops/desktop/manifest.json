@@ -7,7 +7,7 @@
       "filename": "../../introduction/introduction.md"
     },
     {
-      "title": "Getting Started",
+      "title": "Get Started",
       "description": "Using noVNC Remote Desktop",
       "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
     },
@@ -29,7 +29,7 @@
       "filename": "../../migrate-to-sdb/migrate-to-sdb.md"
     },
     {
-      "title": "Lab 5: Database Request Routing to Shard",
+      "title": "Lab 5: Request Database Routing to Shard",
       "filename": "../../db-request-routing/db-request-routing.md"
     },
     {
