@@ -19,11 +19,12 @@ Watch the video below for a quick walk through of the lab.
 
 This lab assumes you have:
 
-    An Oracle Cloud account
-    You have completed:
-        Lab 1: Prepare Setup
+* You have completed:
+  * Lab 1: Setup OCI Tenancy
 
 ## Task 1: Press the Magic Button
+
+The below "Magic Button" will 
 
 Simply press the Magic Button to begin the deployment process:
 [![Deploy to Oracle Cloud][magic_button]][magic_arch_stack]

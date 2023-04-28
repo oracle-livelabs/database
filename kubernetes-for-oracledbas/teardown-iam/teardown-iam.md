@@ -20,7 +20,7 @@ Watch the video below for a quick walk through of the lab.
 *Cloud Shell* is a web browser-based terminal accessible from the Oracle Cloud Console. *Cloud Shell* is free to use (within monthly tenancy limits), and provides access to a Linux shell, with a pre-authenticated OCI CLI, a pre-authenticated Ansible installation, Terraform and other useful tools.
 
 <if type="tenancy">As a user in the **Administrator** group, log into the Oracle Cloud Console and open the *Cloud Shell*</fi>
-<if type="freetier">Log into the Oracle Cloud Console and open the *Cloud Shell*</fi>
+<if type="free-tier">Log into the Oracle Cloud Console and open the *Cloud Shell*</fi>
 
 ![cloud-shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 

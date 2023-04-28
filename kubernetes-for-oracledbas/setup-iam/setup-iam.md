@@ -29,7 +29,7 @@ This lab assumes you have:
 *Cloud Shell* is a web browser-based terminal accessible from the Oracle Cloud Console. *Cloud Shell* is free to use (within monthly tenancy limits), and provides access to a Linux shell, with a pre-authenticated OCI CLI, a pre-authenticated Ansible installation, Terraform and other useful tools.
 
 <if type="tenancy">As a user in the **Administrator** group, log into the Oracle Cloud Console and open the *Cloud Shell*</fi>
-<if type="freetier">Log into the Oracle Cloud Console and open the *Cloud Shell*</fi>
+<if type="free-tier">Log into the Oracle Cloud Console and open the *Cloud Shell*</fi>
 
 ![cloud-shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
@@ -89,7 +89,7 @@ In the *Cloud Shell*, run the following commands to create a *Group* and assign 
 
     ```bash
     <copy>
-    LL_GROUP=$(oci iam group list --name [](var:oci_group) --query data.id --raw-output)
+    LL_GROUP=$(oci iam group list --name [](var:oci_group) | jq -r .data[].id)
     echo "Group OCID: $LL_GROUP"
     echo "User OCID:  $LL_USER"
     oci iam group add-user --group-id $LL_GROUP --user-id $LL_USER
@@ -107,9 +107,24 @@ In the *Cloud Shell*, run the following commands to create a *Policy* statement 
     ```bash
     <copy>
     cat > [](var:oci_group)_policies.json << EOF
-    [
-    "allow group [](var:oci_group) to use cloud-shell in tenancy"
-    ]
+        [
+            "Allow group [](var:oci_group) to use cloud-shell in tenancy",
+            "Allow group [](var:oci_group) to read objectstorage-namespaces in tenancy",
+            "Allow group [](var:oci_group) to inspect buckets in tenancy",
+            "Allow group [](var:oci_group) to inspect compartments in tenancy",
+            "Allow group [](var:oci_group) to inspect dynamic-groups in tenancy",
+            "Allow group [](var:oci_group) to inspect tag-namespaces in tenancy",
+            "Allow group [](var:oci_group) to inspect tenancies in tenancy",
+            "Allow group [](var:oci_group) to manage dynamic-groups in tenancy where target.group.name = /*-worker-nodes-dyngrp/",
+            "Allow group [](var:oci_group) to manage autonomous-database-family in compartment [](var:oci_compartment)",
+            "Allow group [](var:oci_group) to manage cluster-family in compartment [](var:oci_compartment)",
+            "Allow group [](var:oci_group) to manage instance-family in compartment [](var:oci_compartment)",
+            "Allow group [](var:oci_group) to manage orm-stacks in compartment [](var:oci_compartment)",
+            "Allow group [](var:oci_group) to manage orm-jobs in compartment [](var:oci_compartment)",
+            "Allow group [](var:oci_group) to manage policies in compartment [](var:oci_compartment)",
+            "Allow group [](var:oci_group) to manage tag-namespaces in compartment [](var:oci_compartment)",
+            "Allow group [](var:oci_group) to manage virtual-network-family in compartment [](var:oci_compartment)",
+        ]
     EOF
     </copy>
     ```

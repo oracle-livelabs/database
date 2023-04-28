@@ -3,7 +3,7 @@
     "help": "livelabs-help-database_us@oracle.com",
     "variables": [
         "../../variables/variables.json",
-        "../../variables/variables-freetier.json"
+        "../../variables/variables-free-tier.json"
     ],
     "tutorials": [
         {
@@ -19,13 +19,13 @@
         {
             "title": "Lab 1: Setup OCI Free-tier Tenancy",
             "description": "Setup Groups, Policies, and Compartment (IAM)",
-            "type": "freetier",
+            "type": "free-tier",
             "filename": "../../setup-iam/setup-iam.md"
         },
         {
-            "title": "Lab 2: Environment Setup",
+            "title": "Lab 2: Deploy Workshop Stack",
             "description": "Using Oracle Resource Manager (ORM), Provision and Configure a Stack",
-            "filename": "../../env-setup/env-setup.md"
+            "filename": "../../setup-stack/setup-stack.md"
         },
         {
             "title": "Lab 3: Understand Kubernetes",
@@ -75,7 +75,7 @@
         {
             "title": "Lab 12: Clean up OCI Tenancy",
             "description": "Clean up Groups, Policies, and Compartment (IAM)",
-            "type": "freetier",
+            "type": "free-tier",
             "filename": "../../teardown-iam/teardown-iam.md"
         },
         {

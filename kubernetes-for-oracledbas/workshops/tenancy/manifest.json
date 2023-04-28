@@ -24,9 +24,9 @@
             "filename": "../../setup-iam/setup-iam.md"
         },
         {
-            "title": "Lab 2: Environment Setup",
+            "title": "Lab 2: Deploy Workshop Stack",
             "description": "Using Oracle Resource Manager (ORM), Provision and Configure a Stack",
-            "filename": "../../env-setup/env-setup.md"
+            "filename": "../../setup-stack/setup-stack.md"
         },
         {
             "title": "Lab 3: Understand Kubernetes",
