@@ -23,12 +23,12 @@ This lab assumes you have:
 
 ## Task 1: Get familiar with the SQL Driver
 
-The JavaScript SQL Driver is an integral part of Multilingual Engine (MLE). It is very similar to the client-side driver, `node-oracledb` to ease the transition from client-side code to an implementation within the database. Connection management is the main difference between the two. Whilst it is the developer's responsibility to establish a session with the database this step can be omitted in MLE because a session already exists.
+The SQL Driver is an integral part of the JavaScript Engine. It is very similar to the client-side driver, `node-oracledb` to ease the transition from client-side code to an implementation within the database. Connection management is the main difference between the two. In a client-side JavaScript environment a database connection has to be established explicitly. This is not necessary in the server-side environment because it executes in an existing database session.
 
-There are two different ways to execute queries against the database
+The SQL API is provided in the `oracledb` object which can be obtained in two different ways:
 
-- Using the `node-oracledb` compatible syntax
-- Using objects provided in JavaScript's global scope
+- Either by importing `mle-js-oracledb` explicitly
+- Or by using the global constant `oracledb`
 
 Both of these will be explained in depth in this lab.
 
@@ -44,7 +44,7 @@ By completing this task, you will learn more about selecting information from th
     <copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
     ```
 
-2. Query the database using the `node-oracledb`-compatible syntax
+2. Query the database by importing `mle-js-oracledb` explicitly
 
     ```js
     <copy>
@@ -76,7 +76,7 @@ By completing this task, you will learn more about selecting information from th
 
     > **Note**: Unlike `node-oracledb` the default `outFormat` for the MLE JavaScript SQL Driver in 23c Free-Developer Release is `oracledb.OUT_FORMAT_OBJECT`.
 
-3. Query the database using variables provided in the global scope
+3. Query the database using global constants
 
     A number of variables have been added to the global scope to enhance the developer experience. In this example you can learn how to re-write the previous module to make use of the variables in the global scope.
 
@@ -157,8 +157,10 @@ By completing this task, you will learn more about selecting information from th
 
     // use the iterable protocol with the resultSet
     for (let row of rs) {
-        console.log(`${row.OBJECT_ID}\t${row.OWNER}\t${row.OBJECT_NAME}`);
+        console.log(`${row.OBJECT_ID}    ${row.OWNER}    ${row.OBJECT_NAME}`);
     }
+
+    rs.close();
     ~';
     /
     </copy>
@@ -200,7 +202,7 @@ By completing this task, you will learn more about selecting information from th
 
     // use the iterable protocol with the resultSet
     for (let row of rs) {
-        console.log(`${row.OBJECT_ID}\t${row.OWNER}\t${row.OBJECT_NAME}`);
+        console.log(`${row.OBJECT_ID}    ${row.OWNER}    ${row.OBJECT_NAME}`);
         numRows++
     }
 
@@ -216,9 +218,13 @@ By completing this task, you will learn more about selecting information from th
 
     The newly created procedure `result_set_demo_binds` accepts integer values as input. Go ahead and try a few times to see if you can get output on your screen matching an `object_id` in the table.
 
-## Lab 3: Calling PL/SQL from JavaScript
+## Task 3: Calling PL/SQL from JavaScript
 
-The previous lab showed you how to query the database using SQL. In addition to using plain SQL you can make use of the rich PL/SQL API provided by the database. In this example you will use the `DBMS_APPLICATION_INFO` package to instrument your code. This lab showcases several additional features:
+The previous lab showed you how to query the database using SQL. In addition to using plain SQL you can make use of the rich PL/SQL API provided by the database. In this example you will use the `DBMS_APPLICATION_INFO` package to instrument your code. 
+
+`DBMS_APPLICATION_INFO` is an important PL/SQL package allowing you to instrument your code. Should you ever encounter performance degradation you can perform a detailed analysis based on the information available in the Automatic Workload Repository (provided you are licensed to use the Diagnostic Pack). Instrumenting the code using `DBMS_APPLICATION_INFO` is essential for troubleshooting issues involving connection-pooled applications.
+
+This task showcases several additional features:
 
 - IN and OUT (bind-) Variables
 - Global variables in an MLE module
@@ -238,12 +244,13 @@ The previous lab showed you how to query the database using SQL. In addition to 
     // private function - preserve the current values for module and action
     function saveModuleAction() {
 
+        // read the current module and action. Out-variables can be used
+        // to retrieve the actual values and store them in the global
+        // variable `savedModuleAction`.
         const result = session.execute(`
-            begin 
-                dbms_application_info.read_module(
-                    :l_prev_module, 
-                    :l_prev_action
-                ); 
+            begin dbms_application_info.read_module(
+                :l_prev_module, 
+                :l_prev_action); 
             end;`,
             {
                 l_prev_module: {
@@ -264,6 +271,8 @@ The previous lab showed you how to query the database using SQL. In addition to 
     // private function - restore the previous module and action
     function setModuleAction(module, action) {
 
+        // this call changes the current module and action to the
+        // values provided to the function
         session.execute(`
             begin dbms_application_info.set_module(
                 module_name => :module,
@@ -274,13 +283,28 @@ The previous lab showed you how to query the database using SQL. In addition to 
     }
 
     // public function - entry point to the demo
+    // to keep the example simple the changes in module
+    // and action are printed to the console
     export function moduleActionDemo(object_id) {
 
         // save the current module and action
         saveModuleAction();
 
+        // print current values for module and action to the console
+        console.log(
+            `Module and action are defined as 
+             - ${savedModuleAction.module}
+             - ${savedModuleAction.action}`
+        );
+
         // set module and action for this task
         setModuleAction('JavaScript PLSQL demo', object_id);
+
+        console.log(
+            `Module and action have now been set to
+             - ${savedModuleAction.module}
+             - ${savedModuleAction.action}`
+        );
 
         // execute the "application code"
         const result = session.execute(
@@ -305,7 +329,7 @@ The previous lab showed you how to query the database using SQL. In addition to 
         let numRows = 0;
 
         for (let row of rs) {
-            console.log(`${row.OBJECT_ID}\t${row.OWNER}\t${row.OBJECT_NAME}`);
+            console.log(`${row.OBJECT_ID}    ${row.OWNER}    ${row.OBJECT_NAME}`);
             numRows++
         }
 
@@ -314,12 +338,24 @@ The previous lab showed you how to query the database using SQL. In addition to 
         // check if any data was returned, throw an exception otherwise
         if ( numRows === 0 ) {
             // make sure module and action are set to their previous values
+            // before throwing the exception
             setModuleAction(savedModuleAction.module, saveModuleAction.action);
+            console.log(
+                `Module and action have been reset in the exception handler
+                - ${savedModuleAction.module}
+                - ${savedModuleAction.action}`
+            );
             throw `no data found for object ID ${p_object_id}`;
         }
         
         // make sure module and action are set to their previous values
+        // before returning from this function
         setModuleAction(savedModuleAction.module, saveModuleAction.action);
+        console.log(
+            `Module and action have been reset before exiting the function:
+             - ${savedModuleAction.module}
+             - ${savedModuleAction.action}`
+        );
     }
     /
     </copy>
@@ -356,7 +392,7 @@ The previous lab showed you how to query the database using SQL. In addition to 
     </copy>
     ```
 
-## Lab 4: Perform a DML operation
+## Task 4: Perform a DML operation
 
 The previous tasks in this lab focused on _reading_ from the database. In this part of the lab you will perform an insert operation for a change. Rather than providing all columns as part of the insert, you will use a primary key that is defined as an Identity Column.
 
@@ -397,15 +433,14 @@ The previous tasks in this lab focused on _reading_ from the database. In this p
             },
             id: {
                 dir: oracledb.BIND_OUT,
-                type: oracledb.STRING
+                type: oracledb.NUMBER
             }
         },
     );
 
     // by definition the outBinds array can contain only a single
-    // element in this scenario. The value must be converted from
-    // a string to a number or else an error occurs
-    return parseInt(result.outBinds.id[0]);
+    // element in this scenario. 
+    return result.outBinds.id[0];
     ~';
     /
     </copy>
@@ -442,10 +477,10 @@ The previous tasks in this lab focused on _reading_ from the database. In this p
 
 ## Learn More
 
-- [MLE API Reference](https://oracle-samples.github.io/mle-modules)
+- [Server-Side JavaScript API Documentation](https://oracle-samples.github.io/mle-modules/)
 - [node-oracledb](https://oracle.github.io/node-oracledb/)
 - Chapter 6 in [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/calling-plsql-and-sql-from-mle-js-code.html#GUID-69CF9858-66D7-45B6-ACAF-F08B059CF4F6) is dedicated to interacting with the database
-- [PL/SQL Packages and Types Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/arpls/index.html)
+- [DBMS_APPLICATION_INFO reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/arpls/DBMS_APPLICATION_INFO.html#GUID-14484F86-44F2-4B34-B34E-0C873D323EAD)
 
 ## Acknowledgements
 

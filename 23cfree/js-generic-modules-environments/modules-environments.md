@@ -24,7 +24,7 @@ This lab assumes you have:
 
 ## Task 1: Create a database session
 
-Connect to the pre-created Pluggable Database (PDB) `freepdb1` using the same credentials you supplied in [Lab 1](../js-generic-get-started-example/get-started-example.md).
+Connect to the pre-created Pluggable Database (PDB) `freepdb1` using the same credentials you supplied in Lab 1.
 
 ```bash
 <copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
@@ -155,7 +155,7 @@ In addition, Data Guard replication ensures that the exact same code is present 
     </copy>
     ```
 
-## Task 3: Perform naming resolution using MLE environments
+## Task 3: Perform name resolution using MLE environments
 
 1. Reference existing modules
 

@@ -13,33 +13,33 @@
           "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
       },
       {
-          "title": "Lab 1: Get started with JavaScript using a community module",
+          "title": "Lab 1: Get started with JavaScript development using a community module",
           "description": "Set up your environment and implement the validator.js module in your application",
           "filename": "../../js-generic-get-started-example/get-started-example.md"
       },
       {
-        "title": "Lab 2: Write JavaScript modules and environments",
+        "title": "Lab 2: Create JavaScript modules and environments",
         "description": "Learn more about creating JavaScript modules and environments",
         "filename": "../../js-generic-modules-environments/modules-environments.md"
       },
       {
-        "title": "Lab 3: Generate meaningful JavaScript functions",
+        "title": "Lab 3: Declare JavaScript functions",
         "description": "Learn how to expose JavaScript code in SQL and PL/SQL",
         "filename": "../../js-generic-functions/functions.md"
       },
       {
-        "title": "Lab 4: Interact with the database using the SQL Driver",
-        "description": "Learn how to access schema objects using the SQL Driver",
+        "title": "Lab 4: Interact with the database using the JavaScript SQL Driver",
+        "description": "Learn how to access schema objects using the JavaScript SQL Driver",
         "filename": "../../js-generic-sql-driver/sql-driver.md"
       },
       {
         "title": "Lab 5: Work effectively with JSON",
-        "description": "Learn how to work with JSON in both relational and document models",
+        "description": "Learn how to work with JSON using a document model",
         "filename": "../../js-generic-json/json.md"
       },
       {
         "title": "Lab 6: Get insights into your code using Post-Execution Debugging",
-        "description": "Learn how to use post-execution debugging for JavaScript modules",
+        "description": "Learn how to use Post-Execution debugging for JavaScript modules",
         "filename": "../../js-generic-post-execution-debugging/post-execution-debugging.md"
       },
       {

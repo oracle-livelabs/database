@@ -135,13 +135,13 @@ In this task you will learn how to create a call specification based on the MLE 
             p_inputString varchar2
         ) return JSON
             as mle module helper_module_inline
-            signature 'string2obj(string)';
+            signature 'string2obj';
         
         function obj2String(
             p_inputObject JSON
         ) return varchar2
             as mle module helper_module_inline
-            signature 'obj2String(any)';
+            signature 'obj2String';
 
     end helper_pkg;
     /
@@ -255,7 +255,7 @@ Before you can create a call specification for `processOrder()` you must ensure 
         ) return boolean
             as mle module business_logic
             env business_module_env
-            signature 'processOrder(string)';
+            signature 'processOrder';
     end business_logic_pkg;
     /
     </copy>
@@ -286,6 +286,38 @@ Before you can create a call specification for `processOrder()` you must ensure 
     </copy>
     ```
 
+    You should see the following output:
+
+    ```
+    SQL> l
+     1  declare
+     2    l_success  boolean := false;
+     3    l_str      varchar2(256);
+     4  begin
+     5    l_str := 'order_id=1;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42; sales_rep_id=1;promotion_id=1';
+     6    l_success := business_logic_pkg.process_order(l_str);
+     7
+     8    -- you should probably think of a better success/failure evaluation
+     9    if l_success then
+    10      dbms_output.put_line('success');
+    11    else
+    12      dbms_output.put_line('false');
+    13    end if;
+    14  end;
+    SQL> /
+    success
+    ```
+
+    In addition you will find a new row in the `ORDERS` table
+
+    ```
+    SQL> select count(*) from orders;
+
+      COUNT(*)
+    ----------
+             1
+    ```
+
 ## Task 5: Create inline JavaScript functions
 
 In scenarios where you don't need the full flexibility of JavaScript modules and environments you can save some keystrokes by using inline JavaScript functions.
@@ -313,6 +345,16 @@ In scenarios where you don't need the full flexibility of JavaScript modules and
     <copy>
     select hello('javascript') greeting;
     </copy>
+    ```
+
+    You should see the following output on screen:
+
+    ```
+    SQL> select hello('javascript') greeting;
+
+    GREETING
+    ------------------------
+    hello, javascript
     ```
 
 2. Convert string2obj() to an inline JavaScript function
@@ -364,6 +406,26 @@ In scenarios where you don't need the full flexibility of JavaScript modules and
         pretty
     ) string2obj;
     </copy>
+    ```
+
+    If you see the following output on screen everything went as expected:
+
+    ```
+    SQL> select json_serialize(
+      2    string2obj(
+      3      'order_id=1;order_date=2023-04-24T10:27:52;order_mode=mail;promotion_id=1'
+      4    )
+      5    pretty
+      6  ) string2obj;
+
+    STRING2OBJ
+    --------------------------------------------------
+    {
+    "order_id" : "1",
+    "order_date" : "2023-04-24T10:27:52",
+    "order_mode" : "mail",
+    "promotion_id" : "1"
+    }
     ```
 
 ## Task 6: View dictionary information about call specifications
