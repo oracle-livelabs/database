@@ -35,4 +35,4 @@ Some screenshots and videos may be different than what you see. These screenshot
   * Richard Evans, Database Security Product Management
   * Miles Novotny, Solution Engineer, North America Specalist Hub
   * Noah Galloso, Solution Engineer, North America Specalist Hub
-* **Last Updated By/Date** - Miles Novotny, December 2022
+* **Last Updated By/Date** - Miles Novotny, April 2023

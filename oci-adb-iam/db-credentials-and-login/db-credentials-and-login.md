@@ -47,7 +47,7 @@ This lab assumes that you have completed the previous labs and successfully enab
     ```
 
     ```
-    <copy>SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
+    SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
     _________________________________________________
     FALSE                                             
 
@@ -79,7 +79,7 @@ This lab assumes that you have completed the previous labs and successfully enab
 
     SYS_CONTEXT('USERENV','NETWORK_PROTOCOL')    
     ____________________________________________
-    tcps</copy>
+    tcps
     ```
 
 3. Add your OCI user to the **DB_ADMIN** group.
@@ -104,7 +104,7 @@ This lab assumes that you have completed the previous labs and successfully enab
     ```
 
     ```
-    <copy>SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
+    SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
     _________________________________________________
     TRUE                                              
 
@@ -136,7 +136,7 @@ This lab assumes that you have completed the previous labs and successfully enab
 
     SYS_CONTEXT('USERENV','NETWORK_PROTOCOL')    
     ____________________________________________
-    tcps</copy>
+    tcps
     ```
 
 ## Task 2: Connect to the database with a token.
@@ -163,7 +163,7 @@ This lab assumes that you have completed the previous labs and successfully enab
     ```
 
     ```
-    <copy>SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
+    SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
     _________________________________________________
     TRUE                                              
 
@@ -195,7 +195,7 @@ This lab assumes that you have completed the previous labs and successfully enab
 
     SYS_CONTEXT('USERENV','NETWORK_PROTOCOL')    
     ____________________________________________
-    tcps</copy>
+    tcps
     ```
 
 You may now **proceed to the next lab.**
@@ -210,4 +210,4 @@ You may now **proceed to the next lab.**
   * Richard Evans, Database Security Product Management
   * Miles Novotny, Solution Engineer, North America Specialist Hub
   * Noah Galloso, Solution Engineer, North America Specialist Hub
-* **Last Updated By/Date** - Miles Novotny, December 2022
+* **Last Updated By/Date** - Miles Novotny, April 2023

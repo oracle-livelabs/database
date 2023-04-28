@@ -142,7 +142,7 @@ You may now **proceed to the next lab.**
       ![Copy password](images/copy-password.png)
 
 3. Make the user an administrator.
-    
+
     a) Click the **Navigation Menu** in the upper left, navigate to **Identity & Security** and select **Users**.
 
 	![id-users](https://oracle-livelabs.github.io/common/images/console/id-users.png " ")
@@ -193,4 +193,4 @@ You may now **proceed to the next lab.**
   * Richard Evans, Database Security Product Management
   * Miles Novotny, Solution Engineer, North America Specialist Hub
   * Noah Galloso, Solution Engineer, North America Specialist Hub
-* **Last Updated By/Date** - Miles Novotny, December 2022
+* **Last Updated By/Date** - Miles Novotny, April 2023

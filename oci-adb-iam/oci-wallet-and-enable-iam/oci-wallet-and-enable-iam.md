@@ -62,9 +62,9 @@ This lab assumes that you have completed the previous labs and have created all 
 
 
     ```
-    <copy>NAME                      VALUE    
+    NAME                      VALUE    
     _________________________ ________
-    identity_provider_type    NONE</copy>
+    identity_provider_type    NONE
     ```
 
 4. Now enable IAM as the identity provider. Query the idenity provider again to see it updated to **OCI_IAM**.
@@ -75,9 +75,9 @@ This lab assumes that you have completed the previous labs and have created all 
     ```
 
     ```
-    <copy>NAME                      VALUE      
+    NAME                      VALUE      
     _________________________ __________
-    identity_provider_type    OCI_IAM</copy>
+    identity_provider_type    OCI_IAM
     ```
 
 5. Create the **user\_shared** user and grant it permissions to create sessions. Create the **sr\_dba\_role** role and grant it permissions. Quit the SQL session.
@@ -120,8 +120,8 @@ This lab assumes that you have completed the previous labs and have created all 
     The sqlnet.ora file should appear like this.
 
     ```
-    <copy>WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY=/home/{your OCI users directory}/adb_wallet)))
-    SSL_SERVER_DN_MATCH=yes</copy>
+    WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY=/home/{your OCI users directory}/adb_wallet)))
+    SSL_SERVER_DN_MATCH=yes
     ```
 
 4. Append the TOKEN_AUTH parameter to the ADB instance's tnsnames.ora entry so that an authorization token can be used instead of a password.
@@ -135,7 +135,7 @@ This lab assumes that you have completed the previous labs and have created all 
     The tnsnames.ora file should appear like this. Some values may vary, depending on your region, for example.
 
     ```
-    <copy>lltest_high = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.us-phoenix-1.oraclecloud.com))(connect_data=(service_name={your database service name}))(security=(ssl_server_cert_dn="CN=adwc.uscom-east-1.oraclecloud.com, OU=Oracle BMCS US, O=Oracle Corporation, L=Redwood City, ST=California, C=US")(TOKEN_AUTH=OCI_TOKEN)(TOKEN_AUTH=OCI_TOKEN)))</copy>
+    lltest_high = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.us-phoenix-1.oraclecloud.com))(connect_data=(service_name={your database service name}))(security=(ssl_server_cert_dn="CN=adwc.uscom-east-1.oraclecloud.com, OU=Oracle BMCS US, O=Oracle Corporation, L=Redwood City, ST=California, C=US")(TOKEN_AUTH=OCI_TOKEN)(TOKEN_AUTH=OCI_TOKEN)))
     ```
 
 You may now **proceed to the next lab.**
@@ -150,4 +150,4 @@ You may now **proceed to the next lab.**
   * Richard Evans, Database Security Product Management
   * Miles Novotny, Solution Engineer, North America Specialist Hub
   * Noah Galloso, Solution Engineer, North America Specialist Hub
-* **Last Updated By/Date** - Miles Novotny, December 2022
+* **Last Updated By/Date** - Miles Novotny, April 2023
