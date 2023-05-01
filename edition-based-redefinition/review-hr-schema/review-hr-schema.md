@@ -21,6 +21,8 @@ In this lab, you will
 
     Some operations like `CREATE EDITION`, `DROP EDITION`, `ALTER DATABASE DEFAULT EDITION`, etc., require elevated privileges that should not be granted to normal users.
 
+    By default, all procedures are considered definer's rights. You can designate a procedure to be an invoker's rights procedure by using the AUTHID CURRENT_USER clause when you create or modify it, or you can use the AUTHID DEFINER clause to make it a definer's rights procedure.
+
     For CI/CD testing, and therefore for production environments that rolled out with CI/CD pipelines, these procedures using `AUTHID DEFINER` will facilitate the integration without executing anything as DBA.
 
     Keep in mind, editions are shared among all schemas in the database, therefore all the schemas must belong to the same application and follow the same edition scheme. Different applications should be separated into different databases (or PDBs).

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-<a href="https://www.phpmyadmin.net/", target="\_blank">PhpMyAdmin</a> is a web-based MySQL management tool to help you manage MySQL databases.
+[PhpMyAdmin](https://www.phpmyadmin.net/) is a web-based MySQL management tool to help you manage MySQL databases.
 
 In this lab, we will deploy **phpMyAdmin** to Oracle Container Engine for Kubernetes to manage MySQL HeatWave.
 
@@ -26,7 +26,7 @@ In this lab, you will:
 
 ## Task 1: Verify OKE cluster
 
-1. Click the **Hamburger Menu** ![](images/hamburger.png) in the upper left, navigate to **Developer Services** and select **Kubernetes Cluster (OKE)**
+1. Click the **Hamburger Menu** ![OCI Menu](images/hamburger.png) in the upper left, navigate to **Developer Services** and select **Kubernetes Cluster (OKE)**
 
     ![Navigate to OKE](images/navigate-to-oke.png)
 
@@ -38,11 +38,11 @@ In this lab, you will:
 
 1. Connect to the **oke-operator** compute instance using OCI Cloud Shell
 
-	  ![Connect to VM](images/connect-to-vm.png)
+    ![Connect to VM](images/connect-to-vm.png)
 
 2. Create the phpMyAdmin YAML deployment script
 
-    ```
+  ```text
 <copy>
 cat <<EOF >>phpmyadmin.yaml
 ---
@@ -83,7 +83,7 @@ EOF
 
 3. Specify your MySQL private IP address in the YAML file, replace **MYSQL&#95;PRIVATE&#95;IP&#95;ADDRESS** with your MySQL Private IP Address. For example, if your MySQL Private IP address is 10.0.30.11, then the sed command will be "sed -i -e 's/MYSQL_HOST/10.0.30.11/g' phpmyadmin.yaml"
 
-    ```
+  ```text
  <copy>
  sed -i -e 's/MYSQL_HOST/<MYSQL_PRIVATE_IP_ADDRESS>/g' phpmyadmin.yaml
  </copy>
@@ -91,7 +91,7 @@ EOF
 
 4. Create the **phpmyadmin** namespace in OKE
 
-    ```
+  ```text
  <copy>
  kubectl create ns phpmyadmin
  </copy>
@@ -99,7 +99,7 @@ EOF
 
 5. Create the phpmyadmin service
 
-    ```
+  ```text
  <copy>
  kubectl apply -f phpmyadmin.yaml -n phpmyadmin
  </copy>
@@ -107,7 +107,7 @@ EOF
 
 6. Login to the operator VM and start the port-forward service
 
-    ```
+  ```text
 <copy>
 kubectl port-forward service/phpmyadmin-svc -n phpmyadmin --address 0.0.0.0 8080:80 &
 </copy>
@@ -115,17 +115,20 @@ kubectl port-forward service/phpmyadmin-svc -n phpmyadmin --address 0.0.0.0 8080
 
 7. Access the deployed phpMyAdmin application using your browser, **http:://&lt;PUBLIC&#95;IP of Operator VM&gt;:8080/**. Enter MySQL admin user, **admin**, and default password **Oracle#123**
 
-	  ![PhpMyAdmin](images/phpmyadmin.png)
+  ![PhpMyAdmin](images/phpmyadmin.png)
 
-	  Congratulations! You have completed all the labs.
+  Congratulations! You have completed all the labs.
 
 ## Acknowledgements
 
-* **Author**
-	* Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
-	* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
-* **Contributors**
-	* Perside Foster, MySQL Solution Engineering North America
-	* Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
+Author
 
-* **Last Updated By/Date** - Ryan Kuan, May 2022
+* Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
+* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
+
+Contributors
+
+* Perside Foster, MySQL Solution Engineering North America
+* Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
+
+Last Updated By/Date - Ryan Kuan, March 2023
