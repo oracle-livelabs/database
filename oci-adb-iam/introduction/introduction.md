@@ -1,6 +1,6 @@
 # Introduction
 
-### Why use Identity and Access Management with Autonomous Database
+## About this Workshop
 
 Managing users on a database-by-database basis is cumbersome, especially when working with a large number of databases. It can lead to mistakes where database user accounts exist long after the user has left the organization. Additionally, users within organizations change teams or are promoted but often never have their privileges from their previous role revoked. This causes them to end up overprivileged for their current responsibilities. Integrating database users with Oracle Identity and Access Management (IAM) is a quick and easy way to simplify user management across OCI managed databases such as the Autonomous Database, ExaCS, Base DBS and ExaCC.
 
