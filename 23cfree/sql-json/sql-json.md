@@ -42,17 +42,9 @@ This lab assumes you have:
 
     Note that the "etag" value supplied in the content is used for "out-of-the-box" optimistic locking, to prevent the well-known "lost update" problem that can occur with concurrent operations. During the replace by ID operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target duality view document.
 
-    If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. In case of such an error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value. To see that a replace using an eTag that is not the most recent fails, run the same command again. Copy the SQL below and click **Run Script**.
-
-    ```
-    <copy>
-    SELECT json_serialize(data PRETTY)
-    FROM race_dv WHERE json_value(data, '$.raceId') = 201;
-    </copy>
-    ```
-    ![Image alt text](images/task_1_1.png " ")
-
-2. You may have to adjust the update statement so that the etag matches the etag from the select statement above. Copy the SQL below and click **Run Script**.
+    If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. In case of such an error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value. 
+    
+    In other words, you may have to adjust the update statement so that the etag matches the etag from the select statement above. Copy the SQL below and click **Run Script**.
 
     ```
     <copy>
@@ -91,7 +83,7 @@ This lab assumes you have:
     </copy>
     ```
     ![Image alt text](images/task_2_2.png " ")
-3. Now see the updated results for the Bahrain Grand Prix. Copy the SQL below and click **Run Script**.
+2. Now see the updated results for the Bahrain Grand Prix. Copy the SQL below and click **Run Script**.
 
     ```
     <copy>
@@ -120,7 +112,7 @@ This lab assumes you have:
     ```
     ![Image alt text](images/task_3_1.png " ")
 
-2. Select from the view to ensure the change is in. In this example we are also showing that you can use json_value in there where clause. Copy the SQL below and click **Run Script**.
+2. Select from the view to ensure the change is in. In this example we are also showing that you can use json_value in the where clause. Copy the SQL below and click **Run Script**.
 
     ```
     <copy>
@@ -253,6 +245,8 @@ Switch Charles Leclerc's and George Russell's teams. This can be done by updatin
     ```
     ![Image alt text](images/task_6_1.png " ")
 
+2. You may now proceed to the next lab.
+
 ## Learn More
 
 * [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
@@ -260,5 +254,6 @@ Switch Charles Leclerc's and George Russell's teams. This can be done by updatin
 * [Blog: Key benefits of JSON Relational Duality] (https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
 
 ## Acknowledgements
-* **Author** - Kaylien Phan, Product Manager, Database Product Management
-* **Last Updated By/Date** - Kaylien Phan, Database Product Management, March 2023
+* **Author** - Kaylien Phan, William Masdon
+* **Contributors** - David Start, Ranjan Priyadarshi
+* **Last Updated By/Date** - Kaylien Phan, Database Product Management, April 2023

@@ -22,13 +22,62 @@ This lab assumes you have:
 
 ## Task 1: Opening your project in Eclipse
 
-1. Click Activities -> Show Applications. Open Eclipse.
+1. In the open terminal on the right, paste in this command to navigate to the Java code directory.
+
+
+    ```
+    <copy>
+    cd ~
+    cd examples/java
+    </copy>
+    ```
+
+2. Now paste this in to grab the latest version of the Java code. 
+
+
+    ```
+    <copy>
+    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/JdbcDuality.zip
+    </copy>
+    ```
+
+    ![Eclipse workspace](images/wget.png)
+
+
+
+3. Unzip the file.
+
+    ```
+    <copy>
+    unzip -o JdbcDuality.zip
+    </copy>
+    ```
+
+    ![Eclipse workspace](images/unzip.png)
+
+
+4. Paste in this command to navigate to the directory with the Eclipse application.
+
+    ```
+    <copy>
+    cd /
+    cd /u01/app/eclipse/
+    </copy>
+    ```
+
+    Then paste this to open the application.
+
+    ```
+    <copy>
+    ./eclipse
+    </copy>
+    ```
 
    Once Eclipse is launched, the workspace will open.
 
     ![Eclipse workspace](images/eclipse-empty.png)
 
-2. On the left side Package Explorer, click the dropdown menu for JdbcDuality -> src/main/java/com.example.formula1 -> Connections.java. This is the first file we will observe. It shows the Connection string that every Java Class in this program will utilize to connect to the database.
+5. On the left side Package Explorer, click the dropdown menu for JdbcDuality -> src/main/java/com.example.formula1 -> Connections.java. This is the first file we will observe. It shows the Connection string that every Java Class in this program will utilize to connect to the database. If you have changed your password in the last lab, please replace Welcome123# with your password.
 
     ![Java connection string](images/connections.png)
 
@@ -152,5 +201,6 @@ This lab assumes you have:
 * [JSON Duality View documentation](http://docs.oracle.com)
 
 ## Acknowledgements
-* **Author** - Kaylien Phan, Product Manager, Database Product Management
-* **Last Updated By/Date** - Kaylien Phan, Database Product Management, March 2023
+* **Author** - Kaylien Phan, William Masdon, Josh Spiegel
+* **Contributors** - David Start, Ranjan Priyadarshi
+* **Last Updated By/Date** - Kaylien Phan, Database Product Management, April 2023

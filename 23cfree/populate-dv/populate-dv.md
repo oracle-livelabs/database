@@ -75,7 +75,7 @@ This lab assumes you have:
 
     ![POST data for the Mercedes team](./images/insert_Mercedes.png)
 
-2. Examine the response you received from the database. You will see the Oracle Database generated two fields under a "_metadata" tag: "etag" and "asof".
+3. Examine the response you received from the database. You will see the Oracle Database generated two fields under a "_metadata" tag: "etag" and "asof".
 
     The eTag is a unqiue idenitifer for that version of the document used for optimistic locking. If you were to change the data in that document, the eTag would automatically change to signify a newer version of the document. The asof is a Table System Change Number (SCN) and can be used for Flashback queries. 
 
@@ -155,5 +155,6 @@ You may **proceed to the next lab.**
 
 ## Acknowledgements
 
-- **Authors**- William Masdon, Product Manager, Database; Jeff Smith, Distinguished Product Manager, Database 
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, April 2023
+* **Author** - William Masdon, Kaylien Phan, Jeff Smith
+* **Contributors** -  David Start, Ranjan Priyadarshi
+* **Last Updated By/Date** - William Masdon, Database Product Manager, April 2023

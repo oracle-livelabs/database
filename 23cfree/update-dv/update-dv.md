@@ -146,7 +146,7 @@ In this task, you will switch Charles Leclerc's and George Russell's teams by up
 7. Now do the same for the Ferrari team: 
 
     ```
-    $ <copy>curl -i -X PUT --data-binary @updateFerrari.json -H "Content-Type: application/json" http://hol2localhost3cfdr:8080/ords/hol23c/team_dv/302</copy>
+    $ <copy>curl -i -X PUT --data-binary @updateFerrari.json -H "Content-Type: application/json" http://localhost:8080/ords/hol23c/team_dv/302</copy>
     ```
 
     ![Update Ferrari team](./images/update_ferrari.png)
@@ -229,5 +229,6 @@ Congratulations! You have finished this workshop.
 
 ## Acknowledgements
 
-- **Authors**- William Masdon, Product Manager, Database; Jeff Smith, Distinguished Product Manager, Database 
-- **Last Updated By/Date** - William Masdon, Product Manager, Database, April 2023
+* **Author** - William Masdon, Kaylien Phan, Jeff Smith
+* **Contributors** -  David Start, Ranjan Priyadarshi
+* **Last Updated By/Date** - William Masdon, Database Product Manager, April 2023
