@@ -47,10 +47,10 @@ In addition, Data Guard replication ensures that the exact same code is present 
     language javascript as 
 
     /**
-        * convert a delimited string into key-value pairs and return JSON
-        * @param {string} inputString - the input string to be converted
-        * @returns {JSON}
-        */
+     * convert a delimited string into key-value pairs and return JSON
+     * @param {string} inputString - the input string to be converted
+     * @returns {JSON}
+     */
     function string2obj(inputString) {
         if ( inputString === undefined ) {
             throw `must provide a string in the form of key1=value1;...;keyN=valueN`;
@@ -74,10 +74,10 @@ In addition, Data Guard replication ensures that the exact same code is present 
     }
 
     /**
-        * convert a JavaScript object to a string
-        * @param {object} inputObject - the object to transform to a string
-        * @returns {string}
-        */
+     * convert a JavaScript object to a string
+     * @param {object} inputObject - the object to transform to a string
+     * @returns {string}
+     */
     function obj2String(inputObject) {
         if ( typeof inputObject != 'object' ) {
             throw "inputObject isn't an object";
@@ -96,10 +96,10 @@ In addition, Data Guard replication ensures that the exact same code is present 
     ```bash
     $ <copy>cat <<'EOF' > /home/oracle/hol23c/helper_module_bfile.js
     /**
-        * convert a delimited string into key-value pairs and return JSON
-        * @param {string} inputString - the input string to be converted
-        * @returns {JSON}
-        */
+     * convert a delimited string into key-value pairs and return JSON
+     * @param {string} inputString - the input string to be converted
+     * @returns {JSON}
+     */
     function string2obj(inputString) {
         if ( inputString === undefined ) {
             throw `must provide a string in the form of key1=value1;...;keyN=valueN`;
@@ -123,10 +123,10 @@ In addition, Data Guard replication ensures that the exact same code is present 
     }
 
     /**
-        * convert a JavaScript object to a string
-        * @param {object} inputObject - the object to transform to a string
-        * @returns {string}
-        */
+     * convert a JavaScript object to a string
+     * @param {object} inputObject - the object to transform to a string
+     * @returns {string}
+     */
     function obj2String(inputObject) {
         if ( typeof inputObject != 'object' ) {
             throw "inputObject isn't an object";
@@ -401,4 +401,4 @@ A number of dictionary views allow you to see which modules are present in your 
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach APRIL 2023
+- **Last Updated By/Date** - Martin Bach 02-MAY-2023

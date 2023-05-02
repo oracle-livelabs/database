@@ -46,7 +46,7 @@ JavaScript developers can choose from 2 options:
 - Refer to a function in a JavaScript module
 - Provide the JavaScript code inline with the PL/SQL code unit
 
-Both options will be addressed in this lab.
+Both options will be covered in this lab.
 
 ## Task 2: Establish a database connection
 
@@ -125,7 +125,7 @@ In this task you will learn how to create a call specification based on the MLE 
     - `string2obj(string)` returns a JavaScript object
     - `object2String(object)` returns a string
 
-    A PL/SQL function is the best fit. You can either create stand-alone functions like you did in lab 1, or as demonstrated in this case you can group the functions in a PL/SQL package. Using the syntax diagrams from step 1 you can create the call specification as follows:
+    A PL/SQL function is the best fit. You can either create stand-alone functions like you did in lab 1, or as demonstrated in this case you can group the functions in a PL/SQL package. Using the syntax diagrams from task 1 you can create the call specification as follows:
 
     ```sql
     <copy>
@@ -421,10 +421,10 @@ In scenarios where you don't need the full flexibility of JavaScript modules and
     STRING2OBJ
     --------------------------------------------------
     {
-    "order_id" : "1",
-    "order_date" : "2023-04-24T10:27:52",
-    "order_mode" : "mail",
-    "promotion_id" : "1"
+      "order_id" : "1",
+      "order_date" : "2023-04-24T10:27:52",
+      "order_mode" : "mail",
+      "promotion_id" : "1"
     }
     ```
 
@@ -484,4 +484,4 @@ The data dictionary has been enhanced in Oracle Database 23c Free-Developer Rele
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach APRIL 2023
+- **Last Updated By/Date** - Martin Bach 02-MAY-2023

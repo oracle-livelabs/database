@@ -498,7 +498,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
     SQL> select
       2      json_serialize(
       3          soda_demo_pkg.find_emp_by_ename('myCollection', 'JONES')
-      4          pretty) as result;/
+      4          pretty) as result;
 
     RESULT
     ------------------------------
@@ -730,10 +730,11 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
 
 ## Learn More
 
-- [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/mle-js-modules-and-environments.html#GUID-32E2D1BB-37A0-4BA8-AD29-C967A8CA0CE1) describes modules and environments in detail
+- [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/soda-collections-in-mle-js.html#GUID-58C2BBD9-837D-41CD-A9EF-4EA062F1E1E2) describes the SODA API in more detail
+- [Simple Oracle Document Access (SODA) landing page](https://docs.oracle.com/en/database/oracle/simple-oracle-document-access/)
 
 ## Acknowledgements
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach APRIL 2023
+- **Last Updated By/Date** - Martin Bach 02-MAY-2023

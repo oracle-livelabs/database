@@ -30,7 +30,7 @@ This lab assumes you have:
 
 ## Task 1: Create a database session
 
-Connect to the pre-created Pluggable Database (PDB) `freepdb1` using the same credentials you supplied in [Lab 1](../js-generic-get-started-example/get-started-example.md).
+Connect to the pre-created Pluggable Database (PDB) `freepdb1` using the same credentials you supplied in Lab 1.
 
 ```bash
 <copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
@@ -607,14 +607,10 @@ In an ideal scenario post-execution debugging should be simple to enable without
 
 ## Learn More
 
-- SQL Language Reference [CREATE MLE MODULE](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/create-mle-module.html#GUID-EF8D8EBC-2313-4C6C-A76E-1A739C304DCC)
-- SQL Language Reference [CREATE MLE ENV](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/create-mle-env.html#GUID-419C81FD-338D-495F-85CD-135D4D316718)
-- Chapter 2 in [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/mle-js-modules-and-environments.html#GUID-32E2D1BB-37A0-4BA8-AD29-C967A8CA0CE1) describes modules and environments in detail
-- [Database Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/index.html) contains the definition of all dictionary views
-- [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) section covering ECMAScript modules
+- Chapter 8 in [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/post-execution-debugging.html#GUID-100D0D45-205A-44C7-BEF6-2A3241F41BF4) describes modules and environments in detail
 
 ## Acknowledgements
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach APRIL 2023
+- **Last Updated By/Date** - Martin Bach 02-MAY-2023

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-All previous labs have carefully avoided accessing the data layer to ease the transition into server-side JavaScript development. Beginning with this lab you will use the SQL Driver to access the database. Whilst this lab sticks with the basic concepts, the next lab focuses on JSON both from a relational as well as from a document model's point of view.
+All previous labs have carefully avoided accessing the data layer to ease the transition into server-side JavaScript development. Beginning with this lab you will use the SQL Driver to access the database. Whilst this lab sticks with the basic concepts, the next lab focuses on JSON from a document model's point of view.
 
 Estimated Lab Time: 10 minutes
 
@@ -30,7 +30,7 @@ The SQL API is provided in the `oracledb` object which can be obtained in two di
 - Either by importing `mle-js-oracledb` explicitly
 - Or by using the global constant `oracledb`
 
-Both of these will be explained in depth in this lab.
+Both of these will be explained in depth in this lab. Refer to the Server-Side JavaScript API Documentation for more details about the `oracledb` object.
 
 ## Task 2: Querying the database
 
@@ -220,9 +220,9 @@ By completing this task, you will learn more about selecting information from th
 
 ## Task 3: Calling PL/SQL from JavaScript
 
-The previous lab showed you how to query the database using SQL. In addition to using plain SQL you can make use of the rich PL/SQL API provided by the database. In this example you will use the `DBMS_APPLICATION_INFO` package to instrument your code. 
+The previous lab showed you how to query the database using SQL. In addition to using plain SQL you can make use of the rich PL/SQL API provided by the database. In this example you will use the `DBMS_APPLICATION_INFO` package to instrument your code.
 
-`DBMS_APPLICATION_INFO` is an important PL/SQL package allowing you to instrument your code. Should you ever encounter performance degradation you can perform a detailed analysis based on the information available in the Automatic Workload Repository (provided you are licensed to use the Diagnostic Pack). Instrumenting the code using `DBMS_APPLICATION_INFO` is essential for troubleshooting issues involving connection-pooled applications.
+`DBMS_APPLICATION_INFO` is an important PL/SQL package allowing database developers to associate an application module and action with a session. Should your application ever encounter a performance degradation your operations team can perform a detailed analysis based on the information available in the Automatic Workload Repository (AWR) and Active Session History (ASH) provided the DIAGNOSTICS pack is licensed.
 
 This task showcases several additional features:
 
@@ -235,7 +235,7 @@ This task showcases several additional features:
 
     ```js
     <copy>
-    create or replace mle module plsql_demo
+    create or replace mle module plsql_demo 
     language javascript as
 
     // global variable used to preserve the existing module and action
@@ -266,6 +266,12 @@ This task showcases several additional features:
 
         savedModuleAction.module = result.outBinds.l_prev_module;
         savedModuleAction.action = result.outBinds.l_prev_action;
+
+        console.log(
+            `saveModuleAction(): module and action successfully retrieved as:
+            - module: ${savedModuleAction.module}
+            - action: ${savedModuleAction.action}`
+        );
     }
 
     // private function - restore the previous module and action
@@ -280,6 +286,12 @@ This task showcases several additional features:
             end;`,
             [ module, action ]
         );
+
+        console.log(
+            `setModuleAction(): module and action successfully updated to:
+            - module: ${module}
+            - action: ${action}`
+        );
     }
 
     // public function - entry point to the demo
@@ -290,21 +302,8 @@ This task showcases several additional features:
         // save the current module and action
         saveModuleAction();
 
-        // print current values for module and action to the console
-        console.log(
-            `Module and action are defined as 
-             - ${savedModuleAction.module}
-             - ${savedModuleAction.action}`
-        );
-
         // set module and action for this task
         setModuleAction('JavaScript PLSQL demo', object_id);
-
-        console.log(
-            `Module and action have now been set to
-             - ${savedModuleAction.module}
-             - ${savedModuleAction.action}`
-        );
 
         // execute the "application code"
         const result = session.execute(
@@ -329,7 +328,7 @@ This task showcases several additional features:
         let numRows = 0;
 
         for (let row of rs) {
-            console.log(`${row.OBJECT_ID}    ${row.OWNER}    ${row.OBJECT_NAME}`);
+            console.log(`Found a matching record: ${row.OBJECT_ID}    ${row.OWNER}    ${row.OBJECT_NAME}`);
             numRows++
         }
 
@@ -340,22 +339,12 @@ This task showcases several additional features:
             // make sure module and action are set to their previous values
             // before throwing the exception
             setModuleAction(savedModuleAction.module, saveModuleAction.action);
-            console.log(
-                `Module and action have been reset in the exception handler
-                - ${savedModuleAction.module}
-                - ${savedModuleAction.action}`
-            );
             throw `no data found for object ID ${p_object_id}`;
         }
-        
+
         // make sure module and action are set to their previous values
         // before returning from this function
         setModuleAction(savedModuleAction.module, saveModuleAction.action);
-        console.log(
-            `Module and action have been reset before exiting the function:
-             - ${savedModuleAction.module}
-             - ${savedModuleAction.action}`
-        );
     }
     /
     </copy>
@@ -376,6 +365,7 @@ This task showcases several additional features:
 
     ```sql
     <copy>
+    set serveroutput on
     declare
         l_object_id RESULT_SET_DEMO_T.object_id%type;
     begin
@@ -390,6 +380,36 @@ This task showcases several additional features:
     end;
     /
     </copy>
+    ```
+
+    The command should complete successfully, but results will vary because object IDs aren't guaranteed to be assigned in the same way for each database. Here is an example of a successful execution:
+
+    ```
+    SQL> declare
+      2  l_object_id RESULT_SET_DEMO_T.object_id%type;
+      3  begin
+      4  select
+      5      min(object_id)
+      6  into
+      7      l_object_id
+      8  from
+      9      RESULT_SET_DEMO_T;
+      10
+      11     moduleActionDemo(l_object_id);
+      12 end;
+      13 /
+    saveModuleAction(): module and action successfully retrieved as:
+    - module: SQL*Plus
+    - action: null
+    setModuleAction(): module and action successfully updated to:
+    - module: JavaScript PLSQL demo
+    - action: 138
+    Found a matching record: 138    SYS    ORA$BASE
+    setModuleAction(): module and action successfully updated to:
+    - module: SQL*Plus
+    - action: undefined
+
+    PL/SQL procedure successfully completed.
     ```
 
 ## Task 4: Perform a DML operation
@@ -410,6 +430,8 @@ The previous tasks in this lab focused on _reading_ from the database. In this p
     ```
 
 2. Create an inline JavaScript function to facilitate the insert statement
+
+    Note the use of an object to provide bind variables (both IN and OUT) to the statement. The out-variable will fetch the auto-generated value for the primary key and return it to the caller.
 
     ```js
     <copy>
@@ -478,7 +500,7 @@ The previous tasks in this lab focused on _reading_ from the database. In this p
 ## Learn More
 
 - [Server-Side JavaScript API Documentation](https://oracle-samples.github.io/mle-modules/)
-- [node-oracledb](https://oracle.github.io/node-oracledb/)
+- [node-oracledb Documentation](https://oracle.github.io/node-oracledb/)
 - Chapter 6 in [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/calling-plsql-and-sql-from-mle-js-code.html#GUID-69CF9858-66D7-45B6-ACAF-F08B059CF4F6) is dedicated to interacting with the database
 - [DBMS_APPLICATION_INFO reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/arpls/DBMS_APPLICATION_INFO.html#GUID-14484F86-44F2-4B34-B34E-0C873D323EAD)
 
@@ -486,4 +508,4 @@ The previous tasks in this lab focused on _reading_ from the database. In this p
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach APRIL 2023
+- **Last Updated By/Date** - Martin Bach 02-MAY-2023

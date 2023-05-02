@@ -74,7 +74,7 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
     grant db_developer_role to jstest;
     grant execute on javascript to jstest;
 
-    host mkdir /home/oracle/hol23c
+    host mkdir /home/oracle/hol23c 2> /dev/null || echo "directory exists"
 
     drop directory if exists javascript_src_dir;
     create directory javascript_src_dir as '/home/oracle/hol23c';
@@ -86,9 +86,7 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
     Save the snippet in a file, for example `${HOME}/hol23c/setup.sql` and execute it in `sqlplus`. You should still be connected to `freebdb1` as `SYS` as per the previous step. If not, connect to `freepdb1` as `SYS`.
 
     ```sql
-    <copy>
-    start ${HOME}/hol23c/setup.sql
-    </copy>
+    SQL> <copy>start ${HOME}/hol23c/setup.sql</copy>
     ```
 
     Here is the output of an execution:
@@ -119,8 +117,9 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
 
     Grant succeeded.
 
-    SQL> host mkdir /home/oracle/hol23c 2> /dev/null || echo "no need to create the directory, it exists"
-
+    SQL> host mkdir /home/oracle/hol23c 2> /dev/null || echo "directory exists"
+    directory exists
+    
     SQL> drop directory if exists javascript_src_dir;
 
     Directory dropped.
@@ -158,12 +157,28 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
     </copy>
     ```
 
+    This command should complete with acknowledgement that the command completed successfully as shown in this example:
+
+    ```
+    SQL> begin
+      2  ords.enable_schema;
+      3  commit;
+      4  end;
+    SQL> /
+
+    PL/SQL procedure successfully completed.
+    ```
+
+    Now disconnect from the database in preparation of the next step.
+
 ## Task 2: Get the ECMAScript version of the validator.js module
 
 The `validator` module can be downloaded from multiple sources. As long as you pick a trustworthy one it doesn't really matter where the file originates from. Ensure that you get the ECMAScript (ESM) version of the module from your preferred Content Delivery Network (CDN) as they are the only ones supported in Oracle. The necessary file has been staged on Object Storage and can be copied to the directory pointed at by `javascript_src_dir` as follows:
 
 ```bash
-curl -Lo /home/oracle/hol23c/validator.min.js 'https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/validator.min.jsvalidator.min.js'
+<copy>
+curl -Lo /home/oracle/hol23c/validator.min.js 'https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/validator.min.jsvalidator.min.js' 
+</copy>
 ```
 
 ## Task 3: Create the JavaScript module in the database
@@ -278,4 +293,4 @@ TRUE
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach APRIL 2023
+- **Last Updated By/Date** - Martin Bach 02-MAY-2023
