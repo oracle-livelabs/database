@@ -43,6 +43,11 @@
         "filename": "../../js-generic-post-execution-debugging/post-execution-debugging.md"
       },
       {
+        "title": "Lab 7: Instructions for setup, tear-down and backup",
+        "description": "Learn how to configure the lab, tear it down, and back up your progress",
+        "filename": "../../js-generic-appendix/appendix.md"
+      },
+      {
         "title": "Need Help?",
         "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
         "filename":"https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
