@@ -2,9 +2,9 @@
 
 ## Introduction
 
-JSON, short for JavaScript Object Notation has become the de-facto standard data interchange format and a very popular for storing data. Oracle's Converged Database has supported JSON for many years, each release adding functionality on top of an already impressive base. Oracle Database 23c Free - Developer Release is no exception.
+JSON, short for JavaScript Object Notation, has become the de-facto standard data interchange format and is a very popular for storing data. Oracle's Converged Database has supported JSON for many years, adding functionality with each release on top of an already impressive base. Oracle Database 23c Free - Developer Release is no exception.
 
-You already got a glimpse of JSON in `processOrder()`, part of the `business_logic` module. This function is called with a string argument. The string is made up of a series of key-value pairs separated by a semi-colon each. The input parameter was subsequently translated to a JSON object and used in an insert statement showcasing the `json_table` function.
+You already got a glimpse of JSON in `processOrder()`, part of the `business_logic` module. This function is called with a string argument. The string is made up of a series of key-value pairs, each separated by a semi-colon each. The input parameter was subsequently translated to a JSON object and used in an insert statement showcasing the `json_table` function.
 
 > **Note:** You could have stored the JSON document in a JSON column in the table directly, but then you wouldn't have seen how easy it is to convert JSON to a relational format
 
@@ -16,7 +16,7 @@ Estimated Lab Time: 10 minutes
 
 In this lab, you will:
 
-- Understand how to work with JSON using the document model (Simple Oracle Document Access - SODA)
+- Understand how to work with JSON using the document model (Simple Oracle Document Access (SODA))
 - Create SODA collections
 - Add documents to a collection
 - Search for a specific document in a collection
@@ -41,13 +41,13 @@ Connect to the pre-created Pluggable Database (PDB) `freepdb1` using the same cr
 
 ## Task 2: Understand the Simple Oracle Document Access model
 
-In this part of the lab you will learn who to interact with JSON using the Simple Oracle Document Access (SODA) model. The SODA API allows you to work with the database without ever having to resort to SQL's DML (Data Manipulation Language) and DDL (Data Definition Language) commands. Instead you follow the same approach you would when using specialised document databases while at the same time enjoying all the benefits of Oracle's Converged Database.
+In this part of the lab, you will learn how to interact with JSON using the Simple Oracle Document Access (SODA) model. The SODA API allows you to work with the database without ever having to resort to SQL's DML (Data Manipulation Language) and DDL (Data Definition Language) commands. Instead you follow the same approach you would when using specialised document databases while at the same time enjoying all the benefits of Oracle's Converged Database.
 
 The SODA API is based around the following concepts:
 
-- **SODADatabase**: The top-level object for SODA operations. This is acquired from an Oracle Database connection. A SODA database is an abstraction, allowing access to SODA collections in that SODA database, which then allow access to documents in those collections. A SODA database is analogous to an Oracle Database user or schema
+- **SODADatabase**: The top-level object for SODA operations. This is acquired from an Oracle Database connection. A SODA database is an abstraction, allowing access to SODA collections in that SODA database, which then allow access to documents in those collections. A SODA database is analogous to an Oracle Database user or schema.
 - **SODACollection**: Represents a collection of SODA documents. By default, collections allow JSON documents to be stored, and they add a default set of metadata to each document. This is recommended for most users.
-- **SODADocument**:Represents a document. Typically, the document content will be JSON. The document has properties including the content, a key, timestamps, and the media type. By default, document keys are automatically generated
+- **SODADocument**: Represents a document. Typically, the document content will be JSON. The document has properties including the content, a key, timestamps, and the media type. By default, document keys are automatically generated
 
 The code for this lab is very comprehensive. Rather than displaying just parts of it you will create the entire model in this step, followed by the call specification. The various steps in the next task discuss the relevant functions of the module in detail.
 
@@ -73,7 +73,7 @@ The code for this lab is very comprehensive. Rather than displaying just parts o
         }
 
         // drop the collection to complete this lab. In other scenarios
-        // this might be a dangerous operation since the collection and
+        // this might be a dangerous operation because the collection and
         // all its documents are removed permanently
         col.drop();
     }
@@ -298,11 +298,11 @@ The code for this lab is very comprehensive. Rather than displaying just parts o
     </copy>
     ```
 
-## Task 3: Interact with JSON using the Simple Oracle Document Access model
+## Task 3: Interact with JSON using the SODA API
 
-Simple Oracle Document Access (SODA) is a set of NoSQL-style APIs that let you create and store collections of documents (in particular JSON) in Oracle Database, retrieve them, and query them, without needing to know Structured Query Language (SQL) or how the documents are stored in the database.
+Simple Oracle Document Access (SODA) is a set of NoSQL-style APIs that let you create and store collections of documents (in particular JSON) in Oracle Database, retrieve them, and query them, without needing to know SQL or how the documents are stored in the database.
 
-SODA APIs exist for different programming languages and include support for MLE JavaScript. SODA APIs are document-centric. You can use any SODA implementation to perform create, read, update, and delete (CRUD) operations on documents of nearly any kind. You can also use any SODA implementation to query the content of JavaScript Object Notation (JSON) documents using pattern-matching: query-by-example (QBE). CRUD operations can be driven by document keys or by QBEs.
+SODA APIs exist for different programming languages and include support for MLE JavaScript. SODA APIs are document-centric. You can use any SODA implementation to perform create, read, update, and delete (CRUD) operations on documents of nearly any kind. You can also use any SODA implementation to query the content of JSON documents using pattern-matching: query-by-example (QBE). CRUD operations can be driven by document keys or by QBEs.
 
 The previous lab (concerning the JavaScript SQL driver) introduced a major difference between the client-side `node-oracledb` driver and the one found in the database. Rather than having to get a handle to the default database connection and writing additional code, a number of variables have been injected into the global scope. This approach is used throughout this lab.
 
@@ -332,7 +332,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
 
     Any code using the SODA API typically starts by creating or opening a collection. `createCollection()` is a generic function in this module used to access a given connection in later examples. Having a standard function for accessing a collection helps with code reusability.
 
-    Create a collection by calling the corresponding call-specification. Pick a suitable name like `myCollection` and stick with it througout this lab.
+    Create a collection by calling the corresponding call-specification. Pick a suitable name like `myCollection` and stick with it throughout this lab.
 
     ```sql
     <copy>
@@ -392,7 +392,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
     }
     ```
 
-    Execute the corresponding call-specification to insert 2 documents into the collection you just created.
+    Execute the corresponding call specification to insert 2 documents into the collection you just created.
 
     ```sql
     <copy>
@@ -446,7 +446,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
 
 3. Search for a specific document in the collection
 
-    The SODA API provides filter functions to be used with query-by-example (QBE) operators. This example demonstrates how to find a document (or set of documents) in a collection using a QBE.
+    The SODA API provides filter functions to be used with QBE operators. This example demonstrates how to find a document (or set of documents) in a collection using a QBE.
 
     ```js
     /** 
@@ -478,7 +478,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
     }
     ```
 
-    The function returns an array of employees matching the search criteria, the employee's name. In our scenario there aren't any duplicate `enames` stored in the collection, the function can therefore return an array with a maximum of 1 items. In case there aren't any hits an empty array is returned instead.
+    The function returns an array of employees matching the search criteria, the employee's name. In our scenario there aren't any duplicate `enames` stored in the collection, the function can therefore return an array with a maximum of 1 item. In case there aren't any hits an empty array is returned instead.
 
     Let's try and find an employee using the following example:
 
@@ -689,7 +689,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
                             1
     ```
 
-6. Clean this lab up by dropping the collection
+6. Clean up by dropping the collection
 
     Dropping a collection is like dropping a table in the relational world- it can be potentially dangerous! Only drop a collection if you are absolutely sure you don't need it anymore. Here is the except from the JavaScript module demonstrating how to drop a collection:
 
@@ -731,7 +731,6 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
 ## Learn More
 
 - [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/mle-js-modules-and-environments.html#GUID-32E2D1BB-37A0-4BA8-AD29-C967A8CA0CE1) describes modules and environments in detail
-
 
 ## Acknowledgements
 
