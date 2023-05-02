@@ -18,7 +18,7 @@ This lab assumes you have:
 
 ## Task 1: Recreate the JSTEST account
 
-Use the following snippet to create the JSTEST account. 
+Use the following snippet to create the JSTEST account.
 
 > **Note:** the account will be dropped as part of the script's execution!
 

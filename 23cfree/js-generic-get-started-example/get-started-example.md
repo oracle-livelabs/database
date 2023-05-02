@@ -161,8 +161,8 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
 
     ```
     SQL> begin
-      2  ords.enable_schema;
-      3  commit;
+      2    ords.enable_schema;
+      3    commit;
       4  end;
     SQL> /
 
