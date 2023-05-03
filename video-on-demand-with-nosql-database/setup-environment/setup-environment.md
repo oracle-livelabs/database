@@ -69,12 +69,6 @@ to get the Cloud Shell started.
 
 3. Exit from Cloud Shell
 
-4. Open the **OCI Code Editor** in the top right menu. It can take about 2 minutes
-to get the Code Editor started. You can continue the next Task. Cloud Editor
-will be used only in the Lab4
-
-    ![cloud-code-editor](images/cloud-code-editor.png)
-
 ## Task 3: Deploy Infrastructure using Terraform
 
 1. To deploy the application, we will use a terraform scripts provided for this Lab. Click on the 'Deploy to Oracle Cloud ' button.  This will create a new window in your browser.
@@ -108,7 +102,7 @@ will be used only in the Lab4
 
   ![stack-progress](images/stack-progress.png)
 
-  Once it has succeeded you can delete that window from your browser.
+  While it is running, go ahead and start Task 4. Once it has succeeded you can delete that window from your browser.
 
 ## Task 4: Understand Credentials, and Policies
 
