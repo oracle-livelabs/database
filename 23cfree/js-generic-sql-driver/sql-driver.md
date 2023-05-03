@@ -1,4 +1,4 @@
-# Interact with the database using the SQL Driver
+# Interact with the database using the JavaScript SQL Driver
 
 ## Introduction
 

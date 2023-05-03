@@ -1,4 +1,4 @@
-# JavaScript Modules and Environments
+# Create JavaScript Modules and Environments
 
 ## Introduction
 

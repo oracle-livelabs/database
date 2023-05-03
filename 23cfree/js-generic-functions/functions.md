@@ -1,4 +1,4 @@
-# Generate meaningful JavaScript functions
+# Declare JavaScript functions
 
 ## Introduction
 
@@ -117,6 +117,8 @@ In this task you will learn how to create a call specification based on the MLE 
         32 }
         33 export { string2obj, obj2String }
     ```
+
+    You can see in line 33 that both functions declared in the module are exported.
 
 2. Create call specification for `helper_module_inline`
 
