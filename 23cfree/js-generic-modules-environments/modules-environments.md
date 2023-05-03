@@ -155,6 +155,22 @@ In addition, Data Guard replication ensures that the exact same code is present 
     </copy>
     ```
 
+3. Create a JavaScript module with Database Actions
+
+    Database Actions is a web-based interface that uses Oracle REST Data Services (ORDS) to provide development, data studio, administration and monitoring features for Oracle Database. You REST-enabled your schema in the first lab by calling `ords.enable_schema`. With Database Actions you can create JavaScript modules using a browser interface.
+
+    Start by pointing your browser to TODO and log in to database actions using the password you assigned to the `jstest` user.
+
+    ![Database Actions login screen](images/sdw-login.jpg)
+
+    Once connected, navigate to the MLE JS tile
+
+    ![Database Actions main screen](images/sdw-main-page.jpg)
+
+    Once you opened the editor, paste the JavaScript portion of the code you used for `helper_module_inline` into the editor pane, assign a name to the module (`HELPER_MODULE_ORDS`) and use the disk icon to persist the module in the database.
+
+    ![Database Actions module editor](images/sdw-mle-module-editor.jpg)
+
 ## Task 3: Perform name resolution using MLE environments
 
 1. Reference existing modules
@@ -250,6 +266,10 @@ In addition, Data Guard replication ensures that the exact same code is present 
     );
     </copy>
     ```
+
+    Database Actions supports working with environments as well. From the drop down on the left navigation pane select "Environments" to obtain a list of environments. You should see the `BUSINESS_MODULE_ENV` listed. Right-click the environment's name and choose `Edit` to review the environment definition.
+
+    ![Database Actions MLE Environment editor](images/sdw-mle-env-editor.jpg)
 
     The environment will play a crucial role when exposing JavaScript code to SQL and PL/SQL, a topic that will be covered in the next lab (Lab 3).
 
