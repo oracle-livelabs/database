@@ -337,7 +337,7 @@ More generally, constraints can be used to check the data being entered for vari
     /
     </copy>
     ```
-	![SQL to find JSON doc problem](./images/sql-shows-schema-errors.png)
+	![SQL to find JSON doc problem](./images/sql-shows-schema-error.png)
 
 8. You may also check the JSON Schema definition in your data dictionary. **JSON schema is new functionality in Oracle Database 23c.**
 In the SQL tool, run:
