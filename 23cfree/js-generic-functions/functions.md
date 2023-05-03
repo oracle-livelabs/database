@@ -20,7 +20,7 @@ In this lab, you will:
 This lab assumes you have:
 
 - An Oracle Database 23c Free - Developer Release environment available to use
-- Created the `jstest` account as per Lab 1
+- Created the `emily` account as per Lab 1
 - Completed Lab 2 where you created a number of JavaScript modules in the database
 
 ## Task 1: Learn more about call specifications
@@ -53,7 +53,7 @@ Both options will be covered in this lab.
 Connect to `freepdb1` just as you did in the previous labs, and don't forget to substitute the dummy password with yours
 
 ```bash
-<copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
+<copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
 ```
 
 ## Task 3: Create a simple call specification referring to functions in a module

@@ -25,7 +25,7 @@ In this lab, you will:
 This lab assumes you have:
 
 - An Oracle Database 23c Free - Developer Release environment available to use
-- Created the `jstest` account as per Lab 1
+- Created the `emily` account as per Lab 1
 - Completed Lab 2 where you created a number of JavaScript modules in the database
 
 ## Task 1: Create a database session
@@ -33,7 +33,7 @@ This lab assumes you have:
 Connect to the pre-created Pluggable Database (PDB) `freepdb1` using the same credentials you supplied in Lab 1.
 
 ```bash
-<copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
+<copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
 ```
 
 ## Task 2: Prepare the debug specification
@@ -229,7 +229,7 @@ When executing the above code snippet the following information is printed on sc
   [
     {
       "at": {
-        "name": "JSTEST.BUSINESS_LOGIC",
+        "name": "EMILY.BUSINESS_LOGIC",
         "line": 6
       },
       "values": {
@@ -249,7 +249,7 @@ When executing the above code snippet the following information is printed on sc
   [
     {
       "at": {
-        "name": "JSTEST.BUSINESS_LOGIC",
+        "name": "EMILY.BUSINESS_LOGIC",
         "line": 38
       },
       "values": {

@@ -20,14 +20,14 @@ In this lab, you will:
 This lab assumes you have:
 
 - An Oracle Database 23c Free - Developer Release environment available to use
-- Created the `jstest` account as per Lab 1
+- Created the `emily` account as per Lab 1
 
 ## Task 1: Create a database session
 
 Connect to the pre-created Pluggable Database (PDB) `freepdb1` using the same credentials you supplied in Lab 1.
 
 ```bash
-<copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
+<copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
 ```
 
 ## Task 2: Create JavaScript modules
@@ -141,7 +141,7 @@ In addition, Data Guard replication ensures that the exact same code is present 
     With the file in place you can create the module in the next step. Create a database session first ...
 
     ```bash
-    <copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
+    <copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
     ```
 
     ... before you create the module
@@ -159,7 +159,7 @@ In addition, Data Guard replication ensures that the exact same code is present 
 
     Database Actions is a web-based interface that uses Oracle REST Data Services (ORDS) to provide development, data studio, administration and monitoring features for Oracle Database. You REST-enabled your schema in the first lab by calling `ords.enable_schema`. With Database Actions you can create JavaScript modules using a browser interface.
 
-    Start by pointing your browser to TODO and log in to database actions using the password you assigned to the `jstest` user.
+    Start by pointing your browser to TODO and log in to database actions using the password you assigned to the `emily` user.
 
     ![Database Actions login screen](images/sdw-login.jpg)
 

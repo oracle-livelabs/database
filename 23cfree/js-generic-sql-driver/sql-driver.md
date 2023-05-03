@@ -19,7 +19,7 @@ In this lab, you will:
 This lab assumes you have:
 
 - An Oracle Database 23c Free - Developer Release environment available to use
-- Created the `jstest` account as per Lab 1
+- Created the `emily` account as per Lab 1
 
 ## Task 1: Get familiar with the SQL Driver
 
@@ -41,7 +41,7 @@ By completing this task, you will learn more about selecting information from th
     Connect to `freepdb1` just as you did in the previous labs, don't forget to substitute the dummy password with your own
 
     ```bash
-    <copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
+    <copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
     ```
 
 2. Query the database by importing `mle-js-oracledb` explicitly
