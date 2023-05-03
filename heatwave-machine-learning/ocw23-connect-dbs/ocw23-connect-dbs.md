@@ -162,7 +162,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![compute active](./images/compute-active.png "compute active")
 
-## Task 3: Connect to MySQL Database System
+## Task 3: Coonect to Compute Instance using SSH
 
 1. Copy the public IP address of the active Compute Instance to your notepad
 
@@ -203,9 +203,9 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![connect signin](./images/connect-first-signin.png "connect signin ")
 
-    **Install MySQL Shell on the Compute Instance**
+## Task 3: Connect to MySQL Database System with MySQL Shell
 
-6. You will need a MySQL client tool to connect to your new MySQL DB System from your client machine.
+1. You will need a MySQL client tool to connect to your new MySQL DB System from your client machine.
 
     Install MySQL Shell with the following command (enter y for each question)
 
@@ -219,13 +219,13 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     **Connect to MySQL Database Service**
 
-7. From your Compute instance, connect to HEATWAVE-DB  using the MySQL Shell client tool.
+2. From your Compute instance, connect to HEATWAVE-DB  using the MySQL Shell client tool.
 
    The endpoint (IP Address) can be found in your notepad or  the MHEATWAVE-DB  System Details page, under the "Endpoint" "Private IP Address".
 
     ![mysql endpoint private ip](./images/mysql-endpoint-private-ip.png "mysql endpoint private ip")
 
-8. Use the following command to connect to MySQL using the MySQL Shell client tool. Be sure to add the HEATWAVE-DB private IP address at the end of the command. Also enter the admin user and the db password created on Lab 1
+3. Use the following command to connect to MySQL using the MySQL Shell client tool. Be sure to add the HEATWAVE-DB private IP address at the end of the command. Also enter the admin user and the db password created on Lab 1
 
     (Example  **mysqlsh -uadmin -p -h10.0.1..**)
 
@@ -236,6 +236,18 @@ You will need a compute Instance to connect to your brand new MySQL database.
     ```
 
     ![mysql shell first connect](./images/mysql-shell-first-connect.png "mysql shell first connect ")
+
+4. List schemas in your heatwave instance before Shell Load
+
+    ```bash
+        <copy>\sql</copy>
+    ```
+
+    ```bash
+        <copy>show databases;</copy>
+    ```
+
+    ![CONNECT](./images/list-schemas-before.png "list schemas before")
 
 You may now **proceed to the next lab**
 

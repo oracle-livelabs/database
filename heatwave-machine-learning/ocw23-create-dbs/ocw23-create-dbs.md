@@ -66,40 +66,80 @@ In this lab, you will be guided through the following tasks:
 8. When the Virtual Cloud Network creation completes, click 'View Virtual Cloud Network' to display the created VCN
     ![vcn creation completing](./images/vcn-wizard-view.png "vcn creation completing")
 
-9. On HEATWAVE-VCN page under 'Subnets in (root) Compartment', click  '**Private Subnet-HEATWAVE-VCN**'
-     ![vcn subnet](./images/vcn-details-subnet.png "vcn detqails subnet")
+## Task 2: Configure security list to allow MySQL incoming connections
 
-10. On Private Subnet-HEATWAVE-VCN page under 'Security Lists',  click  '**Security List for Private Subnet-HEATWAVE-VCN**'
-    ![VCN](./images/vcn-private-security-list.png "vcn private security list")
+1. On MDS-VCN page under 'Subnets in (root) Compartment', click  '**private subnet-heatwave-vcn**'
+     ![VCN](./images/vcn-details.png "Show VCN Details")
 
-11. On Security List for Private Subnet-HEATWAVE-VCN page under 'Ingress Rules', click '**Add Ingress Rules**'
-    ![vcn private subnet](./images/vcn-private-security-list-ingress.png "vcn private security list ingress")
+2. On Private Subnet-MDS-VCN page under 'Security Lists',  click  '**Security List for private subnet-heatwave-vcn**'
+    ![VCN](./images/vcn-security-list.png "Show Security Lists")
 
-12. On Add Ingress Rules page under Ingress Rule 1
+3. On Security List for Private Subnet-MDS-VCN page under 'Ingress Rules', click '**Add Ingress Rules**'
+    ![VCN](./images/vcn-mysql-ingress.png "Prepar for add Add Ingress Rules")
 
-    a. Add an Ingress Rule with Source CIDR
+4. On Add Ingress Rules page under Ingress Rule
+
+    Add an Ingress Rule with Source CIDR
 
     ```bash
     <copy>0.0.0.0/0</copy>
     ```
 
-    b. Destination Port Range
+    Destination Port Range
 
     ```bash
     <copy>3306,33060</copy>
-     ```
-
-    c. Description
-
-    ```bash
-    <copy>MySQL Port Access</copy>
     ```
 
-    d. Click 'Add Ingress Rule'
-    ![add ingres rule](./images/vcn-private-security-list-ingress-rules-mysql.png "vcn private security list ingress rukes mysql")
+    Description
 
-13. On Security List for Private Subnet-HEATWAVE-VCN page, the new Ingress Rules will be shown under the Ingress Rules List
-    ![show ingres rule](./images/vcn-private-security-list-ingress-display.png "vcn private security list ingress display")
+    ```bash
+       <copy>MySQL Port Access</copy>
+    ```
+
+5. Click 'Add Ingress Rule'
+    ![VCN](./images/vcn-mysql-add-ingress.png "Save  MySQL Ingress Rule  entries")
+
+6. On Security List for Private Subnet-MDS-VCN page, the new Ingress Rules will be shown under the Ingress Rules List
+    ![VCN](./images/vcn-mysql-ingress-completed.png "view  MySQL Ingress Rules")
+
+## Task 3: Configure security list to allow HTTP incoming connections
+
+1. Navigation Menu > Networking > Virtual Cloud Networks
+
+2. Open heatwave-vcn
+
+3. Click  public subnet-heatwave-vcn
+
+4. Click Default Security List for heatwave-vcn
+
+5. Click Add Ingress Rules page under Ingress Rule
+
+    Add an Ingress Rule with Source CIDR
+
+    ```bash
+    <copy>0.0.0.0/0</copy>
+    ```
+
+    Destination Port Range
+
+    ```bash
+    <copy>80,443</copy>
+    ```
+
+    Description
+
+    ```bash
+    <copy>Allow HTTP connections</copy>
+    ```
+
+6. Click 'Add Ingress Rule'
+
+    ![VCN](./images/vcn-ttp-add-ingress.png "Add HTTP Ingress Rule")
+
+7. On Security List for Default Security List for mds_vcn page, the new Ingress Rules will be shown under the Ingress Rules List
+
+    ![VCN](./images/vcn-ttp-ingress-completed.png"View VCN Completed HTTP Ingress rules")
 
 ## Task 2: Create MySQL Database for HeatWave (DB System) instance
 

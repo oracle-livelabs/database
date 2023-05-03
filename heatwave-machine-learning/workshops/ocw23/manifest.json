@@ -19,25 +19,26 @@
           "title": "Lab 1: Create MySQL Database System and HeatWave Cluster",
           "filename": "../../ocw23-create-dbs/ocw23-create-dbs.md"
         },
-
-        {
-          "title": "Lab 2: Connect to MySQL DB System",
-          "filename": "../../ocw23-connect-dbs/ocw23-connect-dbs.md"
-        },
          
         {
-          "title": "Lab 3: Add HeatWave cluster",
+          "title": "Lab 2: Add HeatWave cluster",
           "filename": "../../ocw23-add-heatwave-cluster/ocw23-add-heatwave-cluster.md"
         },
 
         {
+          "title": "Lab 3: Connect to MySQL DB System",
+          "filename": "../../ocw23-connect-dbs/ocw23-connect-dbs.md"
+        },
+
+
+        {
             "title": "Lab 4: Build HeatWave ML with SQL",
-            "filename": "../../do-heatwave-ml/do-heatwave-ml.md"
+            "filename": "../../ocw23-do-heatwave-ml/ocw23-do-heatwave-ml.md"
         },
 
         {
           "title": "Lab 5: Build HeatWave ML Web App with PHP",
-          "filename": "../../develop/develop.md"
+          "filename": "../../ocw23-develop/ocw23-develop.md"
         },
 
         {
