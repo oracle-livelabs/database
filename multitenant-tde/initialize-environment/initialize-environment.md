@@ -1,7 +1,7 @@
 # Initial Setup
 
 ## Introduction
-This is thr 1st in a 2 part series covering TDE and managing the keys.  This LiveLbas, Part 1, will cover working with wallets.  Part 2 will cover working with Oracle Key Vault (OKV)
+This is the 1st in a 2 part series covering TDE and managing the keys.  This LiveLbas, Part 1, will cover working with wallets.  Part 2 will cover working with Oracle Key Vault (OKV)
 
 Here is a list of topics that will be covered in the LiveLabs session
     -	Working with encryption keys
