@@ -1,38 +1,8 @@
-# Initial Setup
-
-## Introduction
-This is thr 1st in a 2 part series covering TDE and managing the keys.  This LiveLbas, Part 1, will cover working with wallets.  Part 2 will cover working with Oracle Key Vault (OKV)
-
-Here is a list of topics that will be covered in the LiveLabs session
-    -	Working with encryption keys
-    -	Working with wallets
-        o	What’s in the wallet
-        o	How it ties to the data files
-    -	How to see if data files are encrypted
-    -	How the Master Key matches to the wallet file
-    -	What happens during the cloning of a pdb within the cdb
-    -	What happens with unplugging a pdb and plugging it into another cdb
-        o	What happens to the encryption key that goes with the pdb
-
-DO WE INCLUDE THIS, I AM THNKING NOT
-Watch the video below for a quick walk-through of the lab.
-[Application containers](videohub:1_h092h1u8)
-
-### Prerequisites - DO WE DO ALL 3 OR JSUT SANDBOX??
-This lab assumes you have:
-- A Free Tier, Paid or LiveLabs Oracle Cloud account
-- You have completed:
-    - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
-    - Lab: Environment Setup
-    - Lab: Clone, Plug and Drop
-
-**NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
-
-## Task 1: Setup
+## Task 1: Backup CDB1 and CDB2
 This section starts you off with an unencrypted database & backing it up so you can re-run this lab multiple times if you want.
 
 The tasks you will do in this step are:
-    - SLog into the Oracle database and become oracle
+    - Log into the Oracle database and become oracle
     - Backup Container Database 1 (CDB1)
     - Backup CDB2
     - Look for a CDB1 wallet
@@ -90,15 +60,15 @@ Choose 1 for CDB1
         - It will stay unencrypted till you do another full backup 
         - The exception is the ZDLRA/RA21
 
-3. Look at the wallet for CDB1
+## Task 3: Look at the wallet for CDB1
     - Showing the default location 
     - Status 
     - Not even a wallet yet 
     - At this point CBD1 does not know about a wallet or encryption
 
-![Screen Capture of Wallet Check](./tde-images/wallet_check_CDB1.png " ")
+![Screen Capture of Wallet Check](./images/wallet_check_cdb1.png " ")
 
-4. Look at the wallet for CDB2
+## Task 4: Look at the wallet for CDB2
 
     ```
     <copy>
@@ -106,9 +76,9 @@ Choose 1 for CDB1
     </copy>
     ```
 
-![Screen Capture of Wallet Check](./images/wallet_check_CDB2.png " ")
+![Screen Capture of Wallet Check](./images/wallet_check_cdb2.png " ")
 
-5. At this point neither database knows about encryption and there is no wallet set so let's check the encryption status of CDB1
+## Task 5: At this point neither database knows about encryption and there is no wallet set so let's check the encryption status of CDB1
 
     ```
     <copy>
@@ -123,7 +93,7 @@ Choose 1 for CDB1
 
     ![Screenshot of terminal output](./images/cdb1-check-wallet-status.png " ")
 
-6. We can check the status of CDB2 and see the same thing
+## Task 6: We can check the status of CDB2 and see the same thing
     
     ```
     <copy>
@@ -131,7 +101,7 @@ Choose 1 for CDB1
     </copy>
     ```
 
-7. Steps to Create A Wallet
+## Task 7: Steps to Create A Wallet
 
     ```
     <copy>
@@ -220,7 +190,7 @@ Choose 1 for CDB1
     - Most common is a shared location: ex ACFS mount point
     - Cloud uses ACFS
 
-8. Check the Wallet Status For CDB1
+## Task 8: Check the Wallet Status For CDB1
 
     ```
     <copy>
@@ -235,7 +205,7 @@ Choose 1 for CDB1
 
 ![Screenshot of terminal output](./images/wallet-status-2.png " ")
 
-9. Check the Wallet Status For CDB2
+## Task 9: Check the Wallet Status For CDB2
 
     ```
     <copy>
@@ -245,7 +215,7 @@ Choose 1 for CDB1
 
 ![Screenshot of terminal output](./images/wallet-status-3.png " ")
 
-10. Set The master Key For CDB1 & PDB1
+## Task 10: Set The master Key For CDB1 & PDB1
 
     ```
     <copy>
@@ -332,7 +302,7 @@ CDB2
         - They are not encrypted at this point
             - If they were to be encrypted those are they keys that they would use
 
-11. Set The Algorithm
+## Task 11: Set The Algorithm
 
     - Run the script for CDB1
 
@@ -361,7 +331,7 @@ CDB2
 
     - We are now ready to encrypt
 
-12. Encrypt The Tablespaces
+## Task 12: Encrypt The Tablespaces
 
     - Run for CDB1
 
@@ -432,7 +402,7 @@ CDB2
         - You will see the same thing as CDB1
             NOTE:  The keys are different, so you have 4 Master Keys in 2 different wallets
 
-13. Clone PDB1 in CDB1
+## Task 13: Clone PDB1 in CDB1
 
     ```
     <copy>
@@ -499,7 +469,7 @@ CDB2
 
 ![Screenshot of terminal output](./images/pdbclone1-rekey-status.png " ") 
 
-14. Unplug PDBCLONE1 and plug into CDB2
+## Task 14: Unplug PDBCLONE1 and plug into CDB2
 
     ```
     <copy>
@@ -567,7 +537,7 @@ CDB2
     - If you want to restore to a point in time prior to unplugging, and you were backing it up all along, the database will need that key
     - If you do an archival backup and want to do a resote later you will need that key
 
-15. Check cdb2 
+## Task 15: Check cdb2 
 
 ```
     <copy>
@@ -589,4 +559,4 @@ CDB2
 ## Acknowledgements
 
 - **Authors/Contributors** - Sean Provost, Mike Sweeney, Bryan Grenn, Bill Pritchett, Rene Fontcha
-- **Last Updated By/Date** - Sean Provost, Enterprise Architect, April 2023
+- **Last Updated By/Date** - Sean Provost, Enterprise Architect, May 2023
