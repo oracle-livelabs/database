@@ -271,7 +271,13 @@ In addition, Data Guard replication ensures that the exact same code is present 
 
     ![Database Actions MLE Environment editor](images/sdw-mle-env-editor.jpg)
 
-    The environment will play a crucial role when exposing JavaScript code to SQL and PL/SQL, a topic that will be covered in the next lab (Lab 3).
+    The environment will play a crucial role when exposing JavaScript code to SQL and PL/SQL, a topic that will be covered in the next lab (Lab 3). It also helps you understand dependencies. Database Actions allows you to view these. Right-click on the `BUSINES_LOGIC` module in the tree view on the left-hand side and select "Dependencies Diagram". The following diagram is shown, showing `BUSINESS_LOGIC`'s dependency on `HELPER_FUNCTIONS_INLINE`.
+
+    ![Database Actions MLE Environment editor](images/sdw-mle-module-dependencies.jpg)
+
+    In case you don't see the connection between `HELPER_MODULE_INLINE` and `BUSINESS_LOGIC` you need to associate `BUSINESS_LOGIC_ENV` with the module. To do so, close the Dependency Diagram and right-click on the `BUSINESS_LOGIC` module. Select `Edit` and associate the `BUSINESS_MODULE_ENV` environment with the module. Should the drop-down be empty click on the reload icon next to it and try again
+
+    ![Database Actions MLE Environment editor](images/sdw-mle-associate-env-with-module.jpg)
 
 ## Task 4: View dictionary information about modules and environments
 
