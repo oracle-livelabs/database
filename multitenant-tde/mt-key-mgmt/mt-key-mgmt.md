@@ -54,7 +54,7 @@ Choose 1 for CDB1
             - But the data within the block did change because it was encrypted
     
     - If you only do an incremental merge then
-        - o	The data will stay unencrypted 
+        - The data will stay unencrypted 
         - You need to start over as it will take those incremental backups that are unencrypted, merge it into the full backup, which is unencrypted, and keep it unencrypted 
         - It will stay unencrypted till you do another full backup 
         - The exception is the ZDLRA/RA21
