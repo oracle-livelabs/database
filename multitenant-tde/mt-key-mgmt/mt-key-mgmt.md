@@ -9,7 +9,6 @@ The tasks you will do in this step are:
     - Look for CDB2 wallet
 
 
-
 Start with normal setup on CDB1
     - Run copy back on CDB1 to refresh the database prior to TDE being applied
 
