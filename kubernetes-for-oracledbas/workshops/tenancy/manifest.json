@@ -18,9 +18,9 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
         },
         {
-            "title": "Lab 1: Setup OCI Tenancy",
-            "description": "Setup Groups, Policies, and Compartment (IAM)",
+            "title": "Lab 1: Prepare the OCI Tenancy",
             "type": "tenancy",
+            "description": "Setup Groups, Policies, and Compartment (IAM)",
             "filename": "../../setup-iam/setup-iam.md"
         },
         {
@@ -71,12 +71,12 @@
         {
             "title": "Lab 11: Clean up Infrastructure",
             "description": "Destroy the Infrastructure",
-            "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md"
+            "filename": "../../teardown-stack/teardown-stack.md"
         },
         {
             "title": "Lab 12: Clean up OCI Tenancy",
-            "description": "Clean up Groups, Policies, and Compartment (IAM)",
             "type": "tenancy",
+            "description": "Clean up Groups, Policies, and Compartment (IAM)",
             "filename": "../../teardown-iam/teardown-iam.md"
         },
         {

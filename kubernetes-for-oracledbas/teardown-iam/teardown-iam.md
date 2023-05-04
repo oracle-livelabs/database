@@ -1,10 +1,13 @@
-# Setup OCI Tenancy
+# Clean up OCI Tenancy
+
+"Be careless in your dress if you must, but keep a tidy ~~soul~~ [tenancy]."
+\- Mark Twain
 
 ## Introduction
 
 In this lab, we will clean up the Oracle Cloud Infrastructure (OCI) *Policies*, *Group*, and *Compartment* that were created during this workshop.
 
-<if type="tenancy">**If you are not in the OCI Administrators group,** please have an OCI Administrator perform these each task for you.</fi>
+<if type="tenancy">**If you are not in the OCI Administrators group,** please have an OCI Administrator perform each of these tasks for you.</fi>
 
 *Estimated Lab Time:* 2 minutes
 
@@ -22,7 +25,7 @@ Watch the video below for a quick walk through of the lab.
 <if type="tenancy">As a user in the **Administrator** group, log into the Oracle Cloud Console and open the *Cloud Shell*</fi>
 <if type="free-tier">Log into the Oracle Cloud Console and open the *Cloud Shell*</fi>
 
-![cloud-shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
+![Open Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png "Open Cloud Shell")
 
 ## Task 2: Delete the Policies
 
@@ -30,14 +33,15 @@ In the *Cloud Shell*, run the following commands to delete the *Policy*:
 
 ```bash
 <copy>
-LL_POLICY=$(oci iam policy list --compartment-id $OCI_TENANCY --name [](var:oci_group)_POLICY --raw-output | jq -r '.data[].id')
+LL_POLICY=$(oci iam policy list --compartment-id $OCI_TENANCY --name [](var:oci_group)_POLICY | jq -r '.data[].id')
 echo "$LL_POLICY"
 if [[ ! -z $LL_POLICY ]]; then
     oci iam policy delete --policy-id $LL_POLICY --force
 fi
-
 </copy>
 ```
+
+Press "return" to ensure commands have run.
 
 ## Task 3: Delete the Group
 
@@ -51,12 +55,14 @@ In the *Cloud Shell*, run the following commands to delete the *Group*:
     echo "Group OCID: $LL_GROUP"
     if [[ ! -z $LL_GROUP ]]; then
         for user_id in $(oci iam group list-users --group-id $LL_GROUP | jq -r '.data[].id'); do
+            echo "Removing $user_id from $LL_GROUP"
             oci iam group remove-user --group-id $LL_GROUP --user-id $user_id --force
         done
     fi
-
     </copy>
     ```
+
+    Press "return" to ensure commands have run.
 
 2. Delete the Group
 
@@ -67,9 +73,10 @@ In the *Cloud Shell*, run the following commands to delete the *Group*:
     if [[ ! -z $LL_GROUP ]]; then
         oci iam group delete --group-id $LL_GROUP --force
     fi
-
     </copy>
     ```
+
+    Press "return" to ensure commands have run.
 
 ## Task 4: Delete the Compartment
 
@@ -82,16 +89,15 @@ echo "Compartment OCID: $LL_COMPARTMENT"
 if [[ ! -z $LL_COMPARTMENT ]]; then
     oci iam compartment delete --compartment-id $LL_COMPARTMENT --force
 fi
-
 </copy>
 ```
 
 ## Learn More
 
-* [OCI - Cloud Shell](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm)
-* [OCI - Managing Compartments](https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/managingcompartments.htm)
-* [OCI - Managing Groups](https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/managinggroups.htm)
-* [OCI - Getting Started with Policies](https://docs.oracle.com/en-us/iaas/Content/Identity/Concepts/policygetstarted.htm)
+* [OCI - Cloud Shell](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm "OCI - Cloud Shell")
+* [OCI - Managing Compartments](https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/managingcompartments.htm "OCI - Managing Compartments")
+* [OCI - Managing Groups](https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/managinggroups.htm "OCI - Managing Groups")
+* [OCI - Getting Started with Policies](https://docs.oracle.com/en-us/iaas/Content/Identity/Concepts/policygetstarted.htm "OCI - Getting Started with Policies")
 
 ## Acknowledgements
 

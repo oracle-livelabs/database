@@ -1,10 +1,13 @@
-# Setup OCI Tenancy
+# Prepare the OCI Tenancy
+
+"How often is happiness destroyed by preparation, foolish preparation!"
+\- Jane Austen, Emma
 
 ## Introduction
 
 In this lab, we will create the Oracle Cloud Infrastructure (OCI) *Policies* required for least-privilege provisioning of the workshop infrastructure.  Additionally we will create an OCI *Compartment* to isolate the resources created during this workshop.
 
-<if type="tenancy">**If you are not in the OCI Administrators group,** please have an OCI Administrator perform these each task for you.</fi>
+<if type="tenancy">**If you are not in the OCI Administrators group,** please have an OCI Administrator perform each of these tasks for you.</fi>
 
 *Estimated Lab Time:* 2 minutes
 
@@ -20,9 +23,9 @@ Watch the video below for a quick walk through of the lab.
 
 This lab assumes you have:
 
-* An Oracle Cloud Paid Account
+* An Oracle Cloud Paid or Free-Tier Account
 * You have completed:
-  * Get Started
+    * Get Started
 
 ## Task 1: Open the Cloud Shell
 
@@ -31,7 +34,7 @@ This lab assumes you have:
 <if type="tenancy">As a user in the **Administrator** group, log into the Oracle Cloud Console and open the *Cloud Shell*</fi>
 <if type="free-tier">Log into the Oracle Cloud Console and open the *Cloud Shell*</fi>
 
-![cloud-shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
+![Open Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png "Open Cloud Shell")
 
 ## Task 2: Create a Compartment
 
@@ -43,27 +46,27 @@ In the *Cloud Shell*, run the following commands to create a sub-*Compartment* t
 
 ```bash
 <copy>
-LL_COMPARTMENT=$(oci iam compartment create --name [](var:oci_compartment) --description "[](var:description)" --compartment-id $OCI_TENANCY --query data.id --raw-output)
-echo "Compartment OCID: $LL_COMPARTMENT"
+oci iam compartment create --name [](var:oci_compartment) --description "[](var:description)" --compartment-id $OCI_TENANCY
 </copy>
 ```
 
-## Task 3: Create a Group and Assign User
+## Task 3: Create a Group
 
 A *Group* is a collection of cloud users who all need the same type of access to a particular set of resources or compartment.  A *Group* is very similar to a database role, with a small twist of direction.  While a database role is granted to database users, a cloud user is assigned to a cloud *Group*.
 
-In the *Cloud Shell*, run the following commands to create a *Group* and assign the cloud user to it:
+In the *Cloud Shell*, run the following commands to create a *Group*:
 
-1. Create a Group
+```bash
+<copy>
+oci iam group create --description "[](var:description)" --name [](var:oci_group)
+</copy>
+```
 
-    ```bash
-    <copy>
-    LL_GROUP=$(oci iam group create --description "[](var:description)" --name [](var:oci_group) --query data.id --raw-output)
-    echo "Group OCID: $LL_GROUP"
-    </copy>
-    ```
+## Task 4: Assign User to Group
 
-2. Assign a variable with the OCID of the user performing the rest of the Live Lab workshop.
+Assign the *User* who will be carrying out the remaining Labs to the *Group* created in Task 3.  This could be yourself!
+
+1. Assign a variable with the OCID of the user performing the rest of the Live Lab workshop.
 
     Replace `<username>` with the OCI username:
 
@@ -85,7 +88,7 @@ In the *Cloud Shell*, run the following commands to create a *Group* and assign 
     </copy>
     ```
 
-3. Assign the User to the Group
+2. Assign the User to the Group
 
     ```bash
     <copy>
@@ -96,7 +99,9 @@ In the *Cloud Shell*, run the following commands to create a *Group* and assign 
     </copy>
     ```
 
-## Task 4: Apply Compartment Policies to the Group
+    Press "return" to ensure commands have run.
+
+## Task 4: Apply Policies to the Group
 
 A *Policy* specifies who can access which OCI resources, and how.  A *Policy* simply allows a *Group* to work in certain ways with specific types of resources in a particular compartment.  In database terms, this is the process of granting privileges (*Policy*) to a role (*Group*) against a specific schema (*Compartment*).
 
@@ -107,27 +112,31 @@ In the *Cloud Shell*, run the following commands to create a *Policy* statement 
     ```bash
     <copy>
     cat > [](var:oci_group)_policies.json << EOF
-        [
-            "Allow group [](var:oci_group) to use cloud-shell in tenancy",
-            "Allow group [](var:oci_group) to read objectstorage-namespaces in tenancy",
-            "Allow group [](var:oci_group) to inspect buckets in tenancy",
-            "Allow group [](var:oci_group) to inspect compartments in tenancy",
-            "Allow group [](var:oci_group) to inspect dynamic-groups in tenancy",
-            "Allow group [](var:oci_group) to inspect tag-namespaces in tenancy",
-            "Allow group [](var:oci_group) to inspect tenancies in tenancy",
-            "Allow group [](var:oci_group) to manage dynamic-groups in tenancy where target.group.name = /*-worker-nodes-dyngrp/",
-            "Allow group [](var:oci_group) to manage autonomous-database-family in compartment [](var:oci_compartment)",
-            "Allow group [](var:oci_group) to manage cluster-family in compartment [](var:oci_compartment)",
-            "Allow group [](var:oci_group) to manage instance-family in compartment [](var:oci_compartment)",
-            "Allow group [](var:oci_group) to manage orm-stacks in compartment [](var:oci_compartment)",
-            "Allow group [](var:oci_group) to manage orm-jobs in compartment [](var:oci_compartment)",
-            "Allow group [](var:oci_group) to manage policies in compartment [](var:oci_compartment)",
-            "Allow group [](var:oci_group) to manage tag-namespaces in compartment [](var:oci_compartment)",
-            "Allow group [](var:oci_group) to manage virtual-network-family in compartment [](var:oci_compartment)",
-        ]
+    [
+        "Allow group [](var:oci_group) to use cloud-shell in tenancy",
+        "Allow group [](var:oci_group) to use tag-namespaces in tenancy",
+        "Allow group [](var:oci_group) to read objectstorage-namespaces in tenancy",
+        "Allow group [](var:oci_group) to inspect buckets in tenancy",
+        "Allow group [](var:oci_group) to inspect dynamic-groups in tenancy",
+        "Allow group [](var:oci_group) to inspect tenancies in tenancy",
+        "Allow group [](var:oci_group) to inspect compartments in tenancy where target.compartment.name = '[](var:oci_compartment)'",
+        "Allow group [](var:oci_group) to manage dynamic-groups in tenancy where request.permission = 'DYNAMIC_GROUP_CREATE'",
+        "Allow group [](var:oci_group) to manage dynamic-groups in tenancy where target.group.name = /*-worker-nodes-dyngrp/",
+        "Allow group [](var:oci_group) to read load-balancers in compartment [](var:oci_compartment)",
+        "Allow group [](var:oci_group) to manage autonomous-database-family in compartment [](var:oci_compartment)",
+        "Allow group [](var:oci_group) to manage cluster-family in compartment [](var:oci_compartment)",
+        "Allow group [](var:oci_group) to manage instance-family in compartment [](var:oci_compartment)",
+        "Allow group [](var:oci_group) to manage orm-stacks in compartment [](var:oci_compartment)",
+        "Allow group [](var:oci_group) to manage orm-jobs in compartment [](var:oci_compartment)",
+        "Allow group [](var:oci_group) to manage policies in compartment [](var:oci_compartment)",
+        "Allow group [](var:oci_group) to manage tag-namespaces in compartment [](var:oci_compartment)",
+        "Allow group [](var:oci_group) to manage virtual-network-family in compartment [](var:oci_compartment)",
+    ]
     EOF
     </copy>
     ```
+
+    Press "return" to ensure commands have run.
 
 2. Create the *Policy*:
 
@@ -136,6 +145,8 @@ In the *Cloud Shell*, run the following commands to create a *Policy* statement 
     oci iam policy create --compartment-id $OCI_TENANCY --description "[](var:description)" --name [](var:oci_group)_POLICY --statements file://[](var:oci_group)_policies.json
     </copy>
     ```
+
+    When you create a *Policy*, make changes to an existing *Policy*, or delete a *Policy*, your changes go into effect typically within 10 seconds.
 
 ## Learn More
 
