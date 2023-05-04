@@ -10,7 +10,7 @@ The tasks you will do in this step are:
 
 
 
-1. Start with normal setup on CDB1
+Start with normal setup on CDB1
     - Run copy back on CDB1 to refresh the database prior to TDE being applied
 
     ```
@@ -32,7 +32,7 @@ Choose 1 for CDB1
     - If you don’t have the database access the wallet you will get messages that it can’t access the key
     - Be sure of steps before you do this to a database that you use normally
 
-2. Run copy back on CDB2 to refresh the database prior to TDE being applied
+## Task 2: Run copy back on CDB2 to refresh the database prior to TDE being applied
 
     ```
     <copy>
