@@ -18,7 +18,7 @@
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 2: MT key mgmt",
+      "title": "Lab 2: MT Key Management",
       "description": "Managing Keys in a Wallet with Multitenant",
       "filename": "../../mt-key-mgmt/mt-key-mgmt.md"
     },
