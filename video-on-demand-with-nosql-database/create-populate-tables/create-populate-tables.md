@@ -9,7 +9,7 @@ walk you through a couple of different approaches. Oracle NoSQL Database Cloud
 Service supports both schema-based and schema-less (JSON) modeling so we will
 create examples of both tables.
 
-_Estimated Time:_ 5 minutes
+_Estimated Time:_ 7 minutes
 
 ### Objectives
 
@@ -125,9 +125,7 @@ and  echo the DDL statement so you can see what is being created.
     ```
     At the end of this command you should see a "status": "SUCCEEDED" on your screen.
 
-4. Minimize the Cloud Shell by clicking the **minimization button.**
-
-    ![cloud-shell-small](./images/cloud-shell-small.png)
+4. Exit the Cloud Shell.
 
 
 ## Task 3:  Adding Data From the Oracle Cloud Console
@@ -360,7 +358,8 @@ inserted for each of the tables.
 
     ![table-row-select](./images/table-row-select.png)
 
-2. In the textbox **SQL statement**, keep the text `SELECT * FROM stream_acct` This will
+2. In the textbox **SQL statement**, check to see if the text **SELECT * FROM stream_acct** is
+present in the box.   If not, remove what is there and insert it.  This will
 select all the rows from our table. Click **Execute**
 
     ![run-query](./images/run-query.png)

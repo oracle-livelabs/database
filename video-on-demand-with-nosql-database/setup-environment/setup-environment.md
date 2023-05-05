@@ -4,7 +4,7 @@
 
 This lab walks you through the steps necessary to create a proper operating environment.
 
-_Estimated Lab Time:_ 5 minutes
+_Estimated Lab Time:_ 7 minutes
 
 ### Objectives
 
@@ -102,7 +102,7 @@ to get the Cloud Shell started.
 
   ![stack-progress](images/stack-progress.png)
 
-  While it is running, go ahead and start Task 4. Once it has succeeded you can delete that window from your browser.
+  While it is running, go ahead and start Task 4. Once it has succeeded you can sign out and  delete that window from your browser.
 
 ## Task 4: Understand Credentials, and Policies
 

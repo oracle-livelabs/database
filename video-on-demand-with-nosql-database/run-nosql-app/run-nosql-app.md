@@ -5,7 +5,7 @@
 This lab picks up where lab 3 left off. We are going to explore in more detail
 the tables we created, load data, and execute queries using a GraphQL application.
 
-_Estimated Time:_ 20 minutes
+_Estimated Time:_ 16 minutes
 
 ### Objectives
 
@@ -65,11 +65,11 @@ want to learn more [check here.](https://github.com/oracle/nosql-examples/blob/m
 choosing the most cost-effective deployment to meet their business and application
 workload requirements. Such flexibility empowers businesses to solely focus on application
 innovations to delight their customers, making operational costs "worry-free" in their decision-making process.
+You can also modify the **Capacity mode** from Provisioned Capacity to On Demand Capacity and vice-versa.
+The function `createTable` illustrates this.
 
    ![Code createTable](./images/appl-code.png)
 
-  You can also modify the **Capacity mode** from Provisioned Capacity to On Demand Capacity and vice-versa.
-The function `createTable` illustrates this.
 
   As a developer, you can access your data via an API or SQL. Review the rest of the code in
 in index.js and you will notice that we are using a combination of APIs and SQL statements
@@ -79,7 +79,8 @@ in our sample application.
     * Support for conjunctions and disjunctions in filter expressions
 
     In the Lab **Explore Data and Run Queries**, we will explore more on detail our
-rich SQL access into JSON objects. But for now, let's continue with this Lab.
+rich SQL access into JSON objects. But for now, let's continue with this Lab. Go ahead
+and exit from the Code Editor.
 
 ## Task 2: Restart the Cloud Shell
 
@@ -130,6 +131,7 @@ Execute in the Cloud Shell.
     ```
 
     This will display all the rows in the table currently without details about shows.
+    You should see  "id":1, "id":2, and "id":3 if you scroll through the output.
 
 4. Read data for a specific user using the GraphQL query `Stream($streamId: Int)`
 
@@ -251,7 +253,12 @@ In this task, we will create 3 of 5 indexes using a Node.js program.
     </copy>
     ```
 
-You may now **proceed to the next lab.**
+After it is done executing, you should see something similar to the following:
+
+  ![index-running](./images/create-index-result.png)
+
+
+Exit out of the Cloud Shell.  You may now **proceed to the next lab.**
 
 ## Learn More
 

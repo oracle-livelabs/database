@@ -60,6 +60,8 @@ Take a look to the `Dockerfile` in the following directory `video-on-demand-with
     * Note: When deploying using OKE - see Lab 1, you will do the connection using **Instance Principals**. It is not the topic of this workshop but if you
 want to learn more read the `oracle-app-ndcs-deployment.yaml` file in the following directory `video-on-demand-with-nosql-database`. [Check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-vod.yml) to learn how to deploy using GitHub Actions.
 
+When you are done looking at code, go ahead and exit from the Code Editor.
+
 ## Task 2: Restart the Cloud Shell
 
 1. Let's get back into the Cloud Shell. From the earlier lab, you may have
@@ -78,44 +80,43 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
   ```
 ![Cloud Shell](./images/cloud-shell-result.png)
 
-
+Minimize the Cloud Shell.
 
 ## Task 3: Deploy a Container Instance
 
- 1. Log into the OCI console using your tenancy.
 
- ![Oracle Cloud Console](https://oracle-livelabs.github.io/common/images/console/home-page.png)
-
- 2. On left side drop down (left of Oracle Cloud banner), go to Developer Services and then Containers & Artifacts - Container Instances.
+ 1. On left side drop down (left of Oracle Cloud banner), go to Developer Services and then Containers & Artifacts - Container Instances.
 
      ![Open Containers & Artifacts](images/menu-container-instance.png)
 
- 3. Click on Create Container Instance. This opens up a new window.
+ 2. Click on Create Container Instance. This opens up a new window.
 
    Enter **Oracle NoSQL powers Video On-Demand applications** as the name.
-   Other information does not need to be changed for this LiveLab. Then click Next.
+   Other information does not need to be changed for this LiveLab. Click **Next.**
 
      ![Create Container Instance](images/create-container-instance-1.png)
 
-  Enter **demo-vod-example-app** as  name and add the following environment variables
+    Enter **demo-vod-example-app** as the name.  Click on **select image**, and
+    a new screen appears.  Choose **external registry**, and
+    enter **ghcr.io/oracle/demo-vod-example-app:latest** as image and Click **Select Image**
+    at bottom of screen.
+
+       ![Create Container Instance](images/create-container-instance-2.png)
+
+    Scroll down and add the following environment variables
      - `NOSQL_ServiceType` as a key and `useResourcePrincipal` as a value
      - `NOSQL_REGION` as a key and the value copied in Task 2 as a value
      - `NOSQL_COMPID` as a key and the value copied in Task 2 as a value
 
      ![Create Container Instance](images/create-container-instance-3.png)
 
-   Click on **select image**, choose **external registry**,
-   enter **ghcr.io/oracle/demo-vod-example-app:latest** as image and Click **Select Image**
+   Click **Next.**
 
-     ![Create Container Instance](images/create-container-instance-2.png)
-
-   Click Next
-
- 4. Review and Click on create
+ 3. Review and Click on create
 
      ![Create Deployment](images/create-container-instance-4.png)
 
- 8. Wait few second until the deployment is created - Status will change from **Creating** to **Active**
+ 4. Wait few second until the deployment is created - Status will change from **Creating** to **Active**
 
      ![Create Deployment](images/create-container-instance-5.png)
 
@@ -124,11 +125,19 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
 
 ## Task 4: Read Data and Examine It
 
-1. Set the variable IP_CI with the value copied in the previous section. Execute in the Cloud Shell.
+1. Execute the following environment setup shell script in the Cloud Shell to
+set up your environment.
 
     ```shell
     <copy>
-    export IP_CI=150.136.11.169
+    source ~/video-on-demand-with-nosql-database/env.sh
+    </copy>
+    ```
+Set the variable IP_CI with the value copied in the previous section. Execute in the Cloud Shell.
+
+    ```shell
+    <copy>
+    export IP_CI=<copied Public IP address>
     </copy>
     ```
     **Note:** The "demo-vod" application is running in the container.
@@ -168,7 +177,7 @@ by the application, fetch the total watch time by all users
     --data '{"query":"query WatchTime { watchTime { showName seasonNum length } } "}'|jq
     </copy>
     ```
-You may now **proceed to the next lab.**
+Exit out of the Cloud Shell. You may now **proceed to the next lab.**
 
 ## Learn More
 
