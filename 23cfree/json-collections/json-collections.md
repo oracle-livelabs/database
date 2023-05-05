@@ -234,7 +234,7 @@ More generally, constraints can be used to check the data being entered for vari
 
 	![SQL navigation](./images/development-sql.png)
 
-2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types.
+2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types. **Enforcing a JSON schema is new functionality in Oracle Database 23c.**
 
     Copy and paste the query below in the worksheet and click the *Run query* button to run the SQL query to alter the **movie** table and add constraints.
 
@@ -318,7 +318,7 @@ More generally, constraints can be used to check the data being entered for vari
 	![create allowed item](./images/create-right-type.png)
 	![doc successfully created](./images/json-doc-created.png)
 
-7. Optionally, you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload.
+7. Optionally, you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload. **JSON schema is new functionality in Oracle Database 23c.**
 
     ```
     <copy>
@@ -337,9 +337,10 @@ More generally, constraints can be used to check the data being entered for vari
     /
     </copy>
     ```
-	![SQL to find JSON doc problem](./images/sql-with-error.png)
+	![SQL to find JSON doc problem](./images/sql-shows-schema-error.png)
 
-8. You may also check the JSON Schema definition in your data dictionary. In the SQL tool, run:
+8. You may also check the JSON Schema definition in your data dictionary. **JSON schema is new functionality in Oracle Database 23c.**
+In the SQL tool, run:
 
     ```
     <copy>
