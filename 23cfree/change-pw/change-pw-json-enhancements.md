@@ -16,6 +16,7 @@ In this lab, you will:
 
 This lab assumes you have:
 * Oracle Database 23c Free Developer Release
+* ORDS 22.3.0 or higher installed with enabled MongoDB API
 * A terminal or console access to the database
 
 ## Task 1: Setting database user password and ensure you can connect properly

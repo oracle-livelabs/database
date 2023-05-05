@@ -138,6 +138,12 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
 	![Homepage Development JSON](./images/development-json.png)
 
 4. Let's edit the entries in SQL Developer Web and see the changes in Mongo Shell. First, double click on the document referencing the movie "SuperAction Mars," or click the "Edit Document" icon next to it. In the dialog page, change the year to 2025 and then save the document. Seems Tom Cruise is busy and won't have enough time to finish the movie before then.
+
+    ```
+    <copy>{ "title": "SuperAction Mars" }
+    </copy>
+    ```
+
 	![Find SuperAction Mars](./images/find-superaction-mars.png)
 	![Edit SuperAction Mars](./images/edit-superaction-mars.png)
 
