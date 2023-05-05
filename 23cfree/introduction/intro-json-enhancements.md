@@ -8,7 +8,7 @@ This lab is organized into different topics, each topic consists of multiple ste
 
 ### Workshop Scenario
 
-In this workshop, we work on one of the core components of our online MovieStream service: the movies catalog(maybe you find your favorite movie?). We show how the movies catalog can be managed with JSON in a very schema-flexible way - allowing us to add and modify our offering on the fly, both using Mongo DB API or SQL. the main emphasis is to demonstrate the agility and flexibility of Oracle's converged database but to focus on the representation and manipulation of JSON data in the Oracle database.
+In this workshop, we work on one of the core components of our online MovieStream service: the movies catalog (maybe you find your favorite movie?). We show how the movies catalog can be managed with JSON in a very schema-flexible way - allowing us to add and modify our offering on the fly, both using Mongo DB API or SQL. the main emphasis is to demonstrate the agility and flexibility of Oracle's converged database but to focus on the representation and manipulation of JSON data in the Oracle database.
 
 This workshop is not a 'cookbook' or 'design guideline' on how to work with JSON data - the purpose is to illustrate various JSON features that the Oracle Database offers. That said, you likely find that many examples are applicable to your business needs!
 
@@ -67,14 +67,14 @@ Now you know what JSON is and also why so many people love it. Enough theory for
 ### Objectives
 
 In this workshop, you will explore: 
-*	How to store, query and process JSON documents in collections using the SODA API
+*	How to store, query and process JSON documents in collections using Database Actions
+*	How to use the Mongo API to query or manipulate date in the Oracle Database
 *	How to use SQL to query, generate and process JSON data
-*	How to use the Mongo API to query or manipulate data in the Oracle Database
 *	How to use the newest SQL Enhancements to work with JSON data
 
 ### Prerequisites
 
-- An Oracle Database 23c Free Developer Release or one running in a LiveLabs environment
+- An Oracle Database 23c Free Developer Release and ORDS running (with MongoDB API enabled), or a LiveLabs sandbox environment
 
 You may now proceed to the next lab.
 
@@ -83,8 +83,7 @@ You may now proceed to the next lab.
 * [Overview of JSON](https://docs.oracle.com/en/database/oracle/oracle-database/23/adjsn/json-data.html#GUID-B2D82ED4-B007-4019-8B53-9D0CDA81C4FA)
 * [Otube: Oracle Moviestream - Powered by Autonomous Database](https://otube.oracle.com/media/Oracle+MovieStream+-+Powered+by+Autonomous+Database/1_g4d9hdfg)
 * [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
-* [JSON Duality View documentation](http://docs.oracle.com)
-
+* [Installing Database API for MongoDB for any Oracle Database ](https://blogs.oracle.com/database/post/installing-database-api-for-mongodb-for-any-oracle-database)
 
 ## Acknowledgements
 
