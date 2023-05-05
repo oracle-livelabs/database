@@ -62,9 +62,9 @@ This lab assumes you have:
 		```
     ![Change to PDB](images/alter-session1.png " ")
 
-5. To change the password for the user hol23c use the "alter user <username> identified by <new password" command. The syntax below for the hol23c user, make sure to replace new\_password\_here to your new password. Throughout this workshop we will use the Welcome123 password.
+5. To change the password for the user hol23c use the "alter user \[username\] identified by \[new password\]" command. The syntax below for the hol23c user, make sure to replace new\_password\_here to your new password. Throughout this workshop we will use the Welcome123 password.
     ```
-		<copy>alter user hol23c identified by </copy>new_password_here;
+		<copy>alter user hol23c identified by </copy> [new_password_here];
 		```
     ```
     SQL> alter user hol23c identified by Welcome123;

@@ -62,9 +62,7 @@ This lab assumes:
 ​
     ![Create graph using Accounts and Transfers table](images/create-graph.png)
 
-3. You can check the metadata views to list the graph, its elements, their labels, and their properties. 
-​
-    First we will be listing the graphs, but there is only one property graph we have created, so BANK\_GRAPH will be the only entry.
+3. You can check the metadata views to list the graph, its elements, their labels, and their properties. First we will be listing the graphs, but there is only one property graph we have created, so BANK\_GRAPH will be the only entry.
     
     ```
     <copy>
@@ -111,6 +109,7 @@ This lab assumes:
 ​
 In this task we will run queries using SQL/PGQ's GRAPH_TABLE operator, MATCH clause, and COLUMNS clause. The GRAPH\_TABLE operator enables you to query the property graph by specifying a graph pattern to look for and return the results as a set of columns. The MATCH clause lets you specify the graph patterns, and the COLUMN clause lists the query output columns. Everything else is existing SQL syntax.
 ​
+
 A common query in analyzing money flows is to see if there are a sequence of transfers that connect one source account to a destination account. We'll be demonstrating that sequence of transfers in standard SQL.
 ​
 1. Let's start by finding the top 10 accounts which have the most incoming transfers. 
@@ -159,7 +158,7 @@ A common query in analyzing money flows is to see if there are a sequence of tra
     ![Accounts that received a transfer](images/transfer-accounts.png)
 
 ​
-4. We looked at accounts with the most incoming transfers and those which were simply conduits. Now let's query the graph to determine if there are any circular payment chains, i.e. a sequence of transfers that start and end at the saem account. First let's check if there are any 3-hop (triangles) transfers that start and end at the same account.
+4. We looked at accounts with the most incoming transfers and those which were simply conduits. Now let's query the graph to determine if there are any circular payment chains, i.e. a sequence of transfers that start and end at the same account. First let's check if there are any 3-hop (triangles) transfers that start and end at the same account.
     
     ```
     <copy>
@@ -285,7 +284,7 @@ A common query in analyzing money flows is to see if there are a sequence of tra
 ​
 12.  So let’s insert more transfers which create some circular payment chains.
 
-    Add a step after step 13 to explain why there are 5 chains as a result of inserting 3 rows. We will be adding transfers from accounts **599**, **982**, and **407** into account **39**.
+    We will be adding transfers from accounts **599**, **982**, and **407** into account **39**.
    
     ```
     <copy>
@@ -335,7 +334,7 @@ A common query in analyzing money flows is to see if there are a sequence of tra
     
     ![rerun query again](images/num-4hop-chains-39.png " ")
     
-15. Finally let's undo the changes and delete the new inserted rows.
+15. Finally let's undo the changes and delete the newly inserted rows.
    
     ```
     <copy>
@@ -346,7 +345,7 @@ A common query in analyzing money flows is to see if there are a sequence of tra
 
     ​![undo changes and delete rows](images/delete-sql.png " ")
 
-15. You have now completed this lab.
+16. You have now completed this lab.
 
 ## Learn More
 * [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
