@@ -1,6 +1,3 @@
-<!-- Updated March 24, 2020 -->
-
-
 # Query the Sales History Sample Schema
 
 ## Introduction
@@ -22,7 +19,7 @@ Estimated lab time: 10 minutes
 
 -   This lab requires completion of the preceding labs in the Contents menu on the left.
 
-## Task 1: Querying Tables
+## Task 1: Query Tables
 
 In this section, you execute the `SELECT` statement to retrieve data from tables and views. You can select rows and columns that you want to return in the output. In its simplest form, a `SELECT` statement must contain the following:
 -   A `SELECT` clause, which specifies columns containing the values to be matched
@@ -33,44 +30,44 @@ In this section, you execute the `SELECT` statement to retrieve data from tables
 
 1. You can display all columns of data in a table by entering an asterisk * after the SELECT keyword. Execute the following statement to view all rows and columns in the  `PROMOTIONS` table:
 
-    ````
+    ```
     <copy>SELECT *
     FROM sh.promotions;</copy>
-    ````
+    ```
 
-    ![](./images/select-star-from-sh-promotions.png " ")
+    ![Execute statement to view PROMOTIONS table](./images/select-star-from-sh-promotions.png " ")
 
 2. You can display specific columns of data in a table by specifying the column names in the SELECT statement. Execute the following statement to view the `PROMO_NAME` and `PROMO_END_DATE` columns in the `PROMOTIONS` table:
 
-    ````
+    ```
     <copy>SELECT promo_name, promo_end_date
     FROM sh.promotions;</copy>
-    ````
+    ```
 
-    ![](./images/select-promo-name-promo-end-date-from-promotions.png " ")
+    ![Execute statement to view two columns in PROMOTIONS table](./images/select-promo-name-promo-end-date-from-promotions.png " ")
 
-## Task 2: Restricting Data
+## Task 2: Restrict Data
 In this section, you use the `WHERE` clause to restrict the rows that are returned from the `SELECT` query. A `WHERE` clause contains a condition that must be met. It directly follows the `FROM` clause. If the condition is true, the row that meets the condition is returned.
 
 1. Modify the `SELECT` statement. Execute the following query to restrict the number of rows to where the `PROMO_SUBCATEGORY` has a value of `radio commercial`:
 
-    ````
+    ```
     <copy>SELECT *
 
     FROM sh.promotions
 
     WHERE promo_subcategory='radio commercial';</copy>
-    ````
+    ```
 
-    ![](./images/where-promo-subcategory-equals-radio-commercial.png " ")
+    ![Execute a query to restrict the number of rows](./images/where-promo-subcategory-equals-radio-commercial.png " ")
 
-## Task 3: Sorting Data
+## Task 3: Sort Data
 
 In this section, you use the `ORDER BY` clause to sort the rows that are retrieved from the `SELECT` statement. You specify the column based on the rows that must be sorted. You also specify the `ASC` keyword to display rows in ascending order (default), and you specify the `DESC` keyword to display rows in descending order.
 
 1. Execute the following `SELECT` statement to retrieve the `CUST_LAST_NAME`, `CUST_CREDIT_LIMIT`, and `CUST_YEAR_OF_BIRTH` columns of customers who live in the `Noord Holland` CUST\_STATE\_PROVINCE. Sort the rows in ascending order based on the `CUST_YEAR_OF_BIRTH` column.
 
-    ````
+    ```
     <copy>SELECT cust_last_name, cust_credit_limit, cust_year_of_birth
 
     FROM   sh.customers
@@ -78,13 +75,13 @@ In this section, you use the `ORDER BY` clause to sort the rows that are retriev
     WHERE  cust_state_province='Noord-Holland'
 
     ORDER BY cust_year_of_birth;</copy>
-    ````
+    ```
 
-    ![](./images/order-by-cust-year-of-birth.png " ")  
+    ![Use the ORDER BY clause](./images/order-by-cust-year-of-birth.png " ")  
 
 2. Modify the `SELECT` statement to display rows in descending order. Use the `DESC` keyword.
 
-    ````
+    ```
     <copy>SELECT cust_last_name, cust_credit_limit, cust_year_of_birth
 
     FROM   sh.customers
@@ -92,11 +89,11 @@ In this section, you use the `ORDER BY` clause to sort the rows that are retriev
     WHERE  cust_state_province='Noord-Holland'
 
     ORDER BY cust_year_of_birth DESC;</copy>
-    ````
+    ```
 
-  ![](./images/order-by-cust-year-of-birth-desc.png " ")  
+  ![Display rows in descending order](./images/order-by-cust-year-of-birth-desc.png " ")  
 
-## Task 4:  Ranking Data
+## Task 4:  Rank Data
 
 In this section, you use the `RANK ()` function to rank the rows that are retrieved from the `SELECT` statement. You can use the RANK function as an **aggregate**  function (takes multiple rows and returns a single number) or as an **analytical** function (takes criteria and shows a number for each record).
 
@@ -115,7 +112,7 @@ In this section, you use the `RANK ()` function to rank the rows that are retrie
     GROUP BY channel_desc;</copy>
     ```
 
-  ![](./images/ranking-data.png " ")  
+  ![Rank the data](./images/ranking-data.png " ")  
 
 You may now **proceed to the next lab.**
 
@@ -128,5 +125,4 @@ Click [here](https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt
 - **Author** - Rick Green, Principal Developer, Database User Assistance
 - **Contributor** - Supriya Ananth
 - **Adapted for Cloud by** - Rick Green
-- **Last Updated By/Date** - Kamryn Vinson, April 2022
-
+- **Last Updated By/Date** - Shilpa Sharma, March 2023

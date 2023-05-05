@@ -11,14 +11,14 @@ Estimated lab time: 25 minutes
 
 ### Objectives
 
--   As administrator create a database user (schema)
--   Assign privileges to the user
--   Enable database users to log in to the database using SQL Worksheet
--   As the user create tables, add and maintain records, and maintain the schema
+- As administrator create a database user (schema)
+- Assign privileges to the user
+- Enable database users to log in to the database using SQL Worksheet
+- As the user create tables, add and maintain records, and maintain the schema
 
 ### Prerequisites
 
--   This lab requires completion of the prior labs in the Contents menu on the left.
+- This lab requires completion of the prior labs in the Contents menu on the left.
 
 ## Task 1: Create a User
 Database administrators perform many tasks. One of their more common tasks is creating database users and assigning them unique usernames. After users log in to the database with their username and password, they can issue database SQL statements to create objects, query objects, and manage the database.
@@ -38,11 +38,11 @@ Creating a user is a way to create a schema. In this section, you execute the `C
 
 1. In this workshop's previous labs, you have been connecting SQL Worksheet to your autonomous database as the database administrator. Connected as administrator, open a SQL Worksheet and create a user named `ONLINE_SHOPPE`.
 
-    ````
+    ```
     <copy>CREATE USER online_shoppe IDENTIFIED BY Lab_practice1;</copy>
-    ````
+    ```
 
-  ![Create user](./images/user-created.png " ")
+    ![Create user](./images/user-created.png " ")
 
 ## Task 2: Assign Privileges
 When multiple users access database objects, you can control the authorization of the objects with privileges. Privileges control whether a user can modify an object that is owned by another user. They are granted or revoked either by:
@@ -84,14 +84,14 @@ Syntax: `GRANT <grant_privilege> TO <user>;`
     </copy>
     ```
 
-  ![](./images/assign-privileges.png " ")
+    ![Assign privileges to the user](./images/assign-privileges.png " ")
 
 ## Task 3: Provide SQL Worksheet Access to Database Users
 The ADMIN user can provide access to SQL Worksheet to other database users.
 
 Database users, who are not service administrators, do not have access to the Autonomous Database service console. The ADMIN user provides access to SQL Worksheet by enabling access for a user and providing a URL to access SQL Worksheet.
 
-  ![](./images/steps-enabling-user-access.png " ")
+  ![Conceptual diagram of steps enabling user access](./images/steps-enabling-user-access.png " ")
 
 1. To enable your newly created user to have schema access to SQL Worksheet, run the following code as the ADMIN user, substituting in your own **schema-name** and specifying a **schema-alias** as explained below:
 
@@ -99,9 +99,9 @@ Database users, who are not service administrators, do not have access to the Au
     <copy>BEGIN
       ORDS_ADMIN.ENABLE_SCHEMA(
         p_enabled => TRUE,
-        p_schema => 'schema-name',
+        p_schema => 'online_shoppe',
         p_url_mapping_type => 'BASE_PATH',
-        p_url_mapping_pattern => 'schema-alias',
+        p_url_mapping_pattern => 'coffee',
         p_auto_rest_auth => TRUE
         );
         COMMIT;
@@ -114,20 +114,13 @@ Database users, who are not service administrators, do not have access to the Au
     * `schema-alias` is an alias for the schema name to use in the URL to access SQL Worksheet. For this lab, use `coffee` as the schema alias.
     * `p_auto_rest_auth` specifies the REST /metadata-catalog/ endpoint requires authorization. REST uses the metadata-catalog to get a list of published services on the schema. Set this parameter to `TRUE`.
 
-  ![](./images/enable-sqldevweb-access-to-db-users.png " ")
+    ![Enable your user to have access to SQL Worksheet](./images/enable-sqldevweb-access-to-db-users.png " ")
 
 2. Now that you as the **administrator** have enabled user access for the specified schema, provide **users** the URL to access SQL Worksheet, as follows:
-    - Select the Autonomous Data Warehouse instance.
-    - On the instance details page click **Service Console**.
-  ![](./images/service-console.png " ")
-    - Click **Development** and then click **Database Actions**
-   ![](./images/database-actions.png " ")  
-    - Sign in using your admin username and password
-    ![](./images/signin.png " ")
-    - Click **SQL**
-    ![](./images/click-sql.png " ")
-    - Copy the URL at the top of the screen.
-    ![](./images/copy-url.png " ")    
+
+    - While you are still signed in to SQL Worksheet as the ADMIN user, copy the URL at the top of the screen.
+
+    ![Copy the URL at the top of the screen](./images/copy-url.png " ")    
 
   The copied URL is the same as the URL the **ADMIN** enters to access SQL Worksheet. For example:
 
@@ -139,7 +132,7 @@ Database users, who are not service administrators, do not have access to the Au
 
       `https://dbname.adb.us-ashburn-1.example.com/ords/coffee/_sdw/?nav=worksheet`
 
-4. Provide the user with the modified URL. To access SQL Worksheet, the user pastes the URL into their browser and then enters the schema's Username and Password in the Sign-in dialog.
+4. If you were back at your workplace, you would provide the user with the modified URL. To access SQL Worksheet, the user would paste the URL into their browser and then enter the schema's Username and Password in the Sign-in dialog.
 
 ## Task 4: Log in to SQL Worksheet as the Database User and Create Tables
 
@@ -149,16 +142,17 @@ Database users, who are not service administrators, do not have access to the Au
 
       At the log in prompt, provide your new user's username and password, such as `online_shoppe` and `Lab_practice1`.
 
-  ![](./images/login.png " ")
+    ![Enter your username and password](./images/login.png " ")
 
 2. Before creating tables in the ONLINE_SHOPPE schema, you should understand the concepts of  tables and integrity constraints.
 
     - **Table**: Basic unit of data storage in a database. Within a table, data is stored in rows and columns. You define a table with a table name, a set of columns, a data type, and a width.
-      ![](./images/employees.gif " ")
+
+    ![Diagram of the EMPLOYEES table](./images/employees.gif " ")
 
     - **Integrity constraints**: Rules for columns in a table. You specify these rules to enforce data integrity within the columns for which they are defined. Basic constraints on Oracle Database include the following:
 
-      ![](./images/constraints.gif " ")
+    ![Diagram showing types of integrity constraints](./images/constraints.gif " ")
 
       In this section, you execute the `CREATE TABLE` statement to create tables.
 
@@ -179,7 +173,7 @@ Database users, who are not service administrators, do not have access to the Au
       </copy>
       ```
 
-  ![](./images/create-table-customers.png " ")
+    ![Create the CUSTOMERS table](./images/create-table-customers.png " ")
 
 4. Create the `COMMODITIES` table with the `COMMODITY_ID` column as the primary key and the `UNIT_PRICE column` as a non-null column.
 
@@ -192,7 +186,7 @@ Database users, who are not service administrators, do not have access to the Au
       </copy>
       ```
 
-  ![](./images/create-table-commodities.png " ")
+    ![Create the COMMODITIES table](./images/create-table-commodities.png " ")
 
 5. Create the `ORDERS` table with:
     - `ORDER_ID` column as the primary key
@@ -215,10 +209,16 @@ Database users, who are not service administrators, do not have access to the Au
       </copy>
       ```
 
-  ![](./images/create-table-orders.png " ")
+    ![Create the ORDERS table](./images/create-table-orders.png " ")
 
 ## Task 5: Insert, Modify, and Delete Records
 In this section, you manipulate the records in the tables that you created.
+
+> **Note:** In Database Actions, a connection to the database is stateless.
+- In a stateless environment, each HTTPS request from a client such as SQL Worksheet maps to a new database session. Therefore, a session begins and ends with every SQL statement or script execution.
+- As the session state is not maintained, session attributes do not persist and commands such as ROLLBACK and COMMIT do not apply. If a SQL statement or script executes successfully, an implicit commit is performed. If it executes with an error, an implicit rollback is performed.
+- Therefore, when needed, include the ROLLBACK and COMMIT commands or session attributes in the PL/SQL code block that is sent to the database for a session.
+- SQL Worksheet is a handy tool to perform simple tasks, as in this lab. For the bulk of your database work, you will commonly use tools such as SQL Developer, SQLcl, and SQL*Plus augmented by Database Actions.
 
 1. **Inserting data**: You execute the `INSERT` statement to add rows of data to a database table.
 
@@ -241,14 +241,14 @@ In this section, you manipulate the records in the tables that you created.
     INSERT INTO orders VALUES ('R003', 'C003', 'M001', 6, 654);
     </copy>
     ```
-  ![](./images/insert-into-tables.png " ")
+    ![Insert data into the tables](./images/insert-into-tables.png " ")
 
 2. **Modifying data**: You use the `UPDATE` statement to modify rows of data in a database table. Execute the following statement to change the unit price of the DVD player from $109 to $129:
 
     ```
     <copy>UPDATE commodities SET unit_price = 129 WHERE commodity_name = 'DVD Player';</copy>
     ```
-  ![](./images/update-data.png " ")
+    ![Use the UPDATE statement to update the data](./images/update-data.png " ")
 
 3. **Deleting data**: You use the `DELETE` statement to delete rows of data from a database table. Execute the following statement to delete the first record in the ORDERS table:
 
@@ -256,40 +256,9 @@ In this section, you manipulate the records in the tables that you created.
     <copy>DELETE FROM orders WHERE order_id = 'R001';</copy>
     ```
 
-  ![](./images/delete-data.png " ")
+    ![Delete an order from a table](./images/delete-data.png " ")
 
-## Task 6: Undo and Save Records
-In this section, you use the `COMMIT` and `ROLLBACK` statements to change data permanently. You use the `ROLLBACK` statement to undo the work that was performed in your current transaction and you use the `COMMIT` statement to save the work that was performed in your current transaction.
-
-1. Execute the `COMMIT` statement to save the data manipulation transactions that you performed in the previous section.
-
-    ```
-    <copy>COMMIT;</copy>
-    ```   
-  ![](./images/commit.png " ")
-
-2. Execute the following statements to delete the row whose order ID is R002 and to query the `ORDERS` table to ensure that the record was deleted.
-
-    ```
-    <copy>DELETE FROM orders WHERE order_id = 'R002';
-    SELECT * FROM orders;</copy>
-    ```
-
-  ![](./images/delete-from-orders.png " ")
-    The output shows that the record was deleted successfully.
-
-3. Execute the following statements to undo deletion of the row whose order ID is R002 and to query the table to display the records:
-
-    ```
-    <copy>ROLLBACK;
-    SELECT * FROM orders;</copy>
-    ```
-  ![](./images/rollback.png " ")
-    The previous DELETE statement was rolled back.
-
-    **Note**: You cannot undo transactions after you save them permanently with the `COMMIT` statement.
-
-## Task 7: Remove Tables
+## Task 6: Remove Tables
 In this section, you execute the `DROP TABLE` statement to remove a table and its data from the database.
 
 **Syntax**: `DROP TABLE <table>;`
@@ -300,7 +269,7 @@ In this section, you execute the `DROP TABLE` statement to remove a table and it
     <copy>DROP TABLE customers;</copy>
     ```
 
-  ![](./images/drop-table-error-referential-integrity.png " ")
+    ![Drop the CUSTOMERS table](./images/drop-table-error-referential-integrity.png " ")
     An error message is displayed because of the referential integrity constraint on the `CUSTOMER_ID` column.
 
 2. Include the `CASCADE CONSTRAINTS` clause to remove the table and its referential integrity constraints.
@@ -309,9 +278,9 @@ In this section, you execute the `DROP TABLE` statement to remove a table and it
     <copy>DROP TABLE customers CASCADE CONSTRAINTS;</copy>
     ```
 
-  ![](./images/drop-table-cascade-constraints.png " ")
+    ![Use the CASCADE CONSTRAINTS clause](./images/drop-table-cascade-constraints.png " ")
 
-## Task 8: Revoke Privileges
+## Task 7: Revoke Privileges
 In this section, you execute the `REVOKE` statement to revoke user and role system privileges. To revoke a system privilege or a role, you must be assigned the privilege with the `ADMIN OPTION`.
 
 **Syntax**: `REVOKE <revoke_privilege> FROM <user>;`
@@ -322,11 +291,11 @@ In this section, you execute the `REVOKE` statement to revoke user and role syst
     <copy>REVOKE CREATE SESSION FROM online_shoppe;</copy>
     ```
 
-  ![](./images/revoke-create-session.png " ")
+    ![Revoke a user's CREATE SESSION privilege to connect](./images/revoke-create-session.png " ")
 
 2. Attempt to sign back in to SQL Worksheet as the **online_shoppe** user, by pasting into your browser the URL containing the alias that you used back in **Task 4: Log in to SQL Worksheet as the Database User and Create Tables**.
 
-  ![](./images/revoked-unauthorized.png " ")
+    ![Error message showing the user can no longer connect](./images/revoked-unauthorized.png " ")
     You cannot sign in because you no longer have the `CREATE SESSION` privilege.
 
 ## Want to Learn More?
@@ -338,4 +307,4 @@ Click [here](https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt
 - **Author** - Rick Green, Principal Developer, Database User Assistance
 - **Contributor** - Supriya Ananth
 - **Adapted for Cloud by** - Rick Green
-- **Last Updated By/Date** - Kamryn Vinson, April 2022
+- **Last Updated By/Date** - Shilpa Sharma, March 2023
