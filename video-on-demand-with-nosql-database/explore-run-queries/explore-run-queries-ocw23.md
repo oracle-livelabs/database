@@ -1,0 +1,355 @@
+# Explore Data and Run Queries
+
+## Introduction
+
+This lab picks up where Lab 5 left off. You are going to explore in more detail
+the tables you created, and execute queries using OCI Console.  
+
+**And now, for the fun part, let’s look at some queries over the streaming data.**
+
+_Estimated Time:_ 20 minutes
+
+### Objectives
+
+* Writing and optimizing queries over nested array
+
+### Prerequisites
+
+* An Oracle Free Tier, Paid Account or Green Button
+* Connection to the Oracle NoSQL Database Cloud Service
+* Working knowledge of bash shell
+
+
+## Task 1: Create the required indexes
+
+Before exploring nested arrays, create the indexes on `stream_acct` table that will be handy while writing the queries. You already created three indexes as part of the previous lab after creating **stream_acct** table.
+You will create two new indexes from the OCI console as shown below.
+
+1. From the hamburger menu, click **Databases**. Under Oracle NoSQL Databases, click **Tables**.
+Click the **stream_acct** table. Under **Resources**, click **Indexes**.
+The list of indexes already created in the table is listed.
+![list-indexes](./images/list-indexes.png)
+
+2. Click on `Add Index` Button
+
+3. Create the index `idx_country_showid_date` using the following information.
+
+  Index column name|JSON path to index field|Type of JSON index field|
+  ---|---|---|
+  info|country|String
+  info|shows[].showId|Integer
+  info|shows[].seriesInfo[].episodes[].date|String
+  {: title="Index parameters"}
+
+  See the animated gif below with details on how to create the index
+
+  ![crtind-country-showid-date](./images/crtind-country-showid-date.gif)
+
+  When done entering all the fields, click 'Add index' button.
+
+4. Create the index `idx_country_genre` using the following information.
+
+  Index column name|JSON path to index field|Type of JSON index field|
+  ---|---|---|
+  info|country|String
+  info|shows[].genres[]|String
+  {: title="Index parameters"}
+
+  See the animated gif below with details on how to create the index
+
+  ![crtind-country-genre](./images/crtind-country-genre.gif)
+
+When done entering all the fields, click 'Add index' button.
+
+5. Here are the DDL statement you would have used for reference.
+  ```
+  <copy>
+  create index idx_country_showid_date on stream_acct(
+    info.country as string,
+    info.shows[].showId as integer,
+    info.shows[].seriesInfo[].episodes[].date as string)
+  </copy>    
+  ```
+  ```
+  <copy>
+  create index idx_country_genre on stream_acct(
+    info.country as string,
+    info.shows[].genres[] as string)
+  </copy>    
+  ```
+
+
+## Task 2: Don’t unnest that array!
+
+People familiar with more traditional SQL on flat data may think that in order to do interesting things with arrays, the arrays have to be unnested and/or subqueries have to be employed (and in fact some commercial NoSQL systems require unnesting and subqueries to work with arrays).
+
+Unnesting, employed in the FROM clause, is like a row-level self-join operation. Assuming only one array is to be unnested, each table row is combined with each element of that array, which is contained in the row itself, to produce N tuples, where N is the size of the array.
+
+Although Oracle NoSQL supports unnesting (but not subqueries), it also includes various other features that make unnesting and subqueries unnecessary in most cases. In this section you will understand these features. Avoiding unnesting makes queries on arrays easier to write and more efficient to execute. However, some times unnesting is indeed unavoidable. In the next section, you learn examples of unnesting queries.
+
+1. **A simple introductory query**
+
+Click on  'Explore data' on the left so we can examine some of the data.
+
+![explore-data](./images/explore-data.png)
+
+Write a query that returns the number of users in USA that have shown an interest in the show with id 16.
+Copy and paste into SQL statement box and hit 'Execute.'
+
+**Method 1:**
+```
+<copy>
+select count(*) as cnt
+from stream_acct u
+where u.info.country = "USA" and
+u.info.shows.showId =any 16
+</copy>
+```
+Notice the use of the `=any` operator here. Using the simple `=` operator would cause a runtime error to be raised, because `=` expects each of its operands to be at most one value, but the `u.info.shows.showId` path expression returns all the show ids in the shows array. Instead, the  `=any` acts like a `contains` here, i.e., it returns true if the shows array contains a show id with value 16.
+
+See [Sequence Comparison operators] (https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/sequence-comparison-operators.html) for more details on the `=any` operations.
+
+**Method 2:**
+The query could also be written like this:
+
+```
+<copy>
+select count(*) as cnt
+from stream_acct u
+where u.info.country = "USA" and
+exists u.info.shows[$element.showId = 16]
+</copy>
+```
+
+Copy and paste into SQL statement box and hit 'Execute.' The result should be the same
+as the prior query.
+Here, the `$element` variable iterates over the elements of the shows array and the condition `$element.showId = 16` selects the show whose id is 16.
+Since the path expression `u.info.shows[$element.showId = 16]` returns a set of shows (at most one show in this case), rather than a boolean value, the exists operator is needed to convert this set to a boolean value (returning true if the set is not empty).
+See [Path expressions](https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/path-expressions.html) for the full specification of path expressions.
+
+**Indexes used:**
+
+Both the above queries uses the `idx_country_showid_date` index. Both the query conditions are pushed to the index. In fact, the index is “covering” each query, i.e., it contains all the info needed by the query, and as a
+result, no table rows are scanned during execution. Click [Query Optimization ](https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/query-optimization.html) for more examples and details about
+how indexes are used by queries.
+
+**Query Plan:**
+
+To confirm the use of the index and to see what conditions are pushed to it, you can display the query execution plan from the OCI console as shown below. Once you provide your query in the 'SQL statement' box, click **Show query execution plan** to view the execution plan for the query.
+
+**Method 1:**
+
+![query1a-plan](./images/query1a-plan.png)
+
+**Method 2:**
+
+![query1b-plan](./images/query1b-plan.png)
+
+**Note**: This query does not access any data in arrays nested under the shows array. This example is an introduction to some of the query features (e.g., the “any” comparison operators, the exists operator, and the filtering conditions inside path expression) that you will use in the more complex queries that follow.
+
+2. **Placing conditions on the elements of nested arrays**
+
+Write a query that returns the details of users in USA who have watched at least one episode of show 16 after 2022-04-01. Copy and paste into SQL statement box and hit 'Execute.'
+
+**Query 2 a:**
+```
+<copy>
+select *
+from stream_acct u
+where u.info.country = "USA" and
+exists u.info.shows[$element.showId = 16].seriesInfo.episodes[$element.date > "2022-04-01"]
+</copy>
+```
+
+In this example, the path expression after the `exists` operator drills down to the deepest arrays and applies filtering at 2 levels. The first `$element` variable iterates over the shows of each user and the `$element.showId = 16` condition selects the show with id 16. The second `$element` variable iterates over the episodes of that show and the condition selects the episodes with a date after 2022-04-01.
+
+**Index Used:**
+
+The query uses the `idx_country_showid_date` index. The index is not covering as you are fetching all the data from the table. You can view this index being used from the query plan as shown below.
+
+![query2a-plan](./images/query2a-plan.png)
+
+
+**Incorrect way of writing the above query:**
+
+Sometimes, you can easily make a very common mistake when writing the above query. Copy and paste into SQL statement box and hit 'Execute.'
+
+**Query 2 b:**
+```
+<copy>
+select * from stream_acct u
+where u.info.country = "USA" and
+      u.info.shows.showId =any 16 and
+      u.info.shows.seriesInfo.episodes.date >any "2022-04-01"
+</copy>
+```
+The queries 2a and 2b are not equivalent! Query 2b returns the number of users in USA who have watched at least one episode of show 16 and have also watched an episode of some show (not necessarily show 16) after 2022-04-01. The 2 “any” predicates in this query are applied independent of each other.
+
+**Index Used:**
+
+Query 2b uses the `idx_country_showid_date` index. However, only one of the two `any` conditions can be pushed to the index. In this case, the `showId` condition is pushed because it’s an equality condition whereas the date condition is a range one. The date condition must be applied on the table rows, which must be retrieved. Therefore, the index is not covering this query as shown below.
+
+![query2b-plan](./images/query2b-plan.png)
+3. **Which index to choose?**
+
+The query processor identifies which of the available indexes is used for a query. What happens when there is more than one index possible for the query? Can you force using a particular index? Let's review some examples to understand the usage of indexes in queries.
+
+**Example:**
+
+Write a query that returns the number of users who have watched at least one episode of show 15 after 2022-04-01. Copy and paste into SQL statement box and hit 'Execute.'
+
+```
+<copy>
+select count(*) as cnt
+from stream_acct u
+where exists u.info.shows[$element.showId = 15].seriesInfo.episodes[$element.date > "2022-04-01"]
+</copy>
+```
+
+**Choice of Indexes:**
+
+ In this case, the query can use either `idx_country_showid_date` or `idx_showId` based on the conditions specified in the WHERE clause, and it’s not clear which index is the better choice. If it chooses `idx_country_showid_date`, it will do a full scan of the whole index applying the two conditions on each index key. Recall that `idx_country_showid_date` is a 3 column index, and that the field country is not specified in the WHERE clause.  As a result, it will access and filter-out many non-qualifying index keys. If it chooses `idx_showId` (a single column index), it will scan only the index keys with `showId = 15`, but it will then have to retrieve the associated table rows in order to apply the date conditions on them. So,`idx_showid` scans far fewer index keys than `idx_country_showid_date`, but `idx_showId` is not covering whereas `idx_country_showid_date` is.  The query plan when using the `idx_showId` is shown below.
+
+![query3a-plan](./images/query3a-plan.png)
+
+Whether `idx_showId` or `idx_country_showid_date` is better depends on how selective the show id condition is. Oracle NoSQL does not currently collect statistics on index keys distribution, so it relies on a simple heuristic to choose among multiple applicable indexes. In this case, the heuristic chooses `idx_showId` on the assumption that the `showId = 15` predicate must be a highly selective one because `showId` is the complete key of an index. If this turns out to be the wrong choice, you can force the use of `idx_country_showid_date` by using an index hint, as shown in the next example.
+
+**Forcing the use of a specific index**
+
+Copy and paste into SQL statement box and hit 'Execute.'
+
+```
+<copy>
+select /*+ FORCE_INDEX(stream_acct idx_country_showid_date) */
+count(*) as cnt
+from stream_acct u
+where exists u.info.shows[$element.showId = 15].seriesInfo.episodes[$element.date > "2022-04-01"]
+</copy>
+```
+In this example, you are forcing the use of index `idx_country_showid_date`. You can verify this from the query plan shown below.
+
+![query3b-plan](./images/query3b-plan.png)
+
+4. **Placing conditions on the elements of sibling arrays**
+
+You can place conditions on the elements of any arrays.
+
+**Example:**
+
+Write a query that returns the number of users in USA who have watched a French or Danish
+show in 2022. Copy and paste into SQL statement box and hit 'Execute.'
+
+```
+<copy>
+select count(*) as cnt
+from stream_acct u
+where u.info.country = "USA" and
+      exists u.info.shows[
+      exists $element.genres[$element in ("french", "danish")] and
+      exists $element.seriesInfo.episodes["2022-01-01" <= $element.date
+      and $element.date <= "2022-12-31"] ]
+</copy>
+```
+Here, the genres and episodes arrays are not nested into each other, but both are nested inside the shows array (hence genres and episodes are `sibling` arrays). Since both the genre and date conditions must apply to the same show, the conditions are written as two filtering predicates at the level of the shows array.
+
+**Indexes used:**
+
+The query uses the `idx_country_genre `index. The country and genres conditions are pushed to the index. Two index scans will be performed: one scanning the keys with value (`USA`, `french`) and another scanning the keys with value (`USA`,`danish`). The date conditions will be applied on the table rows associated with the qualifying index keys. This can be viewed in the query plan as shown below.
+![query4a-plan](./images/query4a-plan.png)
+
+Two more things are worth mentioning here.
+
+* The query could have benefited by an index on all three fields: country, genre, and episode date. If such an index existed, all the query conditions could be pushed to the index. However, you cannot create such an index as all the arrays indexed must be nested into each other. Here the genres arrays and the episodes arrays do not satisfy this constraint.
+* The expression `exists $element.genres[$element in ("french", "danish")]` can been rewritten in one of the following ways:
+`exists $element.genres[$element = "french" or $element = "danish")]`
+or
+`$element.genres[] =any seq_concat(“french”, “danish”)`. However, either of these two forms would cause the condition to be pushed to the index as a `filtering predicate` and not as a `start/stop` predicate that establishes the boundaries of the index scan.  In this case, the country predicate is pushed as a start/stop predicate. In summary, the IN operator is optimizable, whereas the OR operator and an `any` operator whose right operand returns more than one value are not optimizable.
+
+Let's move onto another topic.
+
+5. **Aggregating array elements**
+
+You can transform the shape of JSON documents and aggregate array elements.
+
+**Example:**
+
+Write a query that returns the user’s account, user ids, the total time the user has spent watching show 16, and an array containing information about all the episodes of show 16 that the user has watched. The users should have watched at least one episode of show 16 after 2022-4-01. Copy and paste into SQL statement box and hit 'Execute.'
+```
+<copy>
+select u.id,
+seq_sum(u.info.shows[$element.showId = 16].seriesInfo.episodes.minWatched) as time,
+[ seq_transform(u.info.shows[$element.showId = 16],
+     seq_transform($sq1.seriesInfo[],
+        seq_transform($sq2.episodes[],
+        { "showName" : $sq1.showName,
+          "seasonNum" : $sq2.seasonNum,
+          "episodeId" : $sq3.episodeID,
+          "dateWatched" : $sq3.date}
+))) ] as episodes
+from stream_acct u
+where u.info.country = "USA" and
+exists u.info.shows[$element.showId = 16].seriesInfo.episodes[$element.date > "2022-04-01"]
+</copy>
+```
+Each element of the array in the above query is a JSON document containing the show name, the season number, the episode id, and the date the episode was watched.
+
+When you execute the query for a sample data, the query returns a sample result that looks like this:
+
+![query5a-result](./images/query5a-result.png)
+
+The query illustrates how the `seq_transform` expression can be used, together with JSON object and array constructors, to transform the shape of the stored data. In this case, information from arrays in 3 different levels is combined into a new single flat array.
+
+In general, the `seq_transform` expression takes two other expressions as input. It evaluates the first (`source`) expression, and for each value in the resulting sequence, it evaluates the second (`mapper`) expression. The result of the `seq_transform` expression itself is the concatenation of the values produced by the evaluations of the mapper expression. During these evaluations, a variable is available to reference the current value of the source expression. The name of the variable is `$sk n`, where n is the level of nesting of the `seq_transform` expression within other seq_transform expressions.
+
+In this example, the source expression of the first (outer-most) `seq_transform` expression returns show 16. Then, the `$sk1` variable is bound to this show and the second `seq_transform` expression is evaluated. The source expression of this `seq_transform` returns all the show-16 seasons watched. For each such season, the `$sk2` variable is bound to it and the third `seq_transform` expression is evaluated. The source expression of this `seq_transform` returns all the episodes of the current season. Finally, the mapper expression of the third `seq_transform` constructs a json document with the needed info for each episode, extracting this info from the values bound to the `$sk1`, `$sk2`, and `$sk3` variables.
+
+The query also illustrates the use of a sequence aggregation function (`seq_sum`) to sum up the time spent by a user watching episodes that satisfy a condition (the episodes of show 16).
+Click [Sequence Aggregate functions](https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/sequence-aggregate-functions.html) for details on sequence aggregation functions.
+The corresponding query plan showing the use of index is shown below.
+![query5a-plan](./images/query5a-plan.png)
+
+
+6. **Complex conditions on nested arrays**
+
+You can write more complex conditions on nested arrays.
+
+**Example:**
+
+The query returns the number of users who have fully watched show 15 (all seasons and all episodes to their full length). Copy and paste into SQL statement box and hit 'Execute.'
+
+```
+<copy>
+select count(*) as cnt
+from stream_acct  u
+where u.info.shows.showId =any 15 and
+      size(u.info.shows[$element.showId = 15].seriesInfo) =
+      u.info.shows[$element.showId = 15].numSeasons and
+      not seq_transform(u.info.shows[$element.showId = 15].seriesInfo[],
+                        $sq1.numEpisodes = size($sq1.episodes)) =any false and
+      not seq_transform(u.info.shows[$element.showId=15].seriesInfo.episodes[],
+                        $sq1.lengthMin = $sq1.minWatched) =any false
+</copy>
+```
+
+Let’s look closer at the WHERE clause of this query. The first condition selects show 15. The second condition requires that the size of the series Info array for show 15 is equal to the number of seasons for show 15, that is, the user watched all the seasons. This (and the following) condition is required because the data contains only the seasons and episodes that a user has actually watched, not all the available seasons/episodes of a show. The third condition requires that the user has watched all the episodes of each season of show 15. It does so by using a
+`seq_transform` expression to iterate over the seasons of show 15 and for each season, check if its number of episodes is equal to the size of its episodes array.
+
+The `seq_transform` returns the result of these checks, i.e., a sequence of true/false values. The rest of the condition checks that the sequence contains only true values. The fourth condition requires that the user has fully watched each episode of show 15. It does so in the same way as the third condition.
+
+The query uses the index `idx_showId`, pushing the `showId` condition to it. The other conditions cannot be pushed to any index. The query plan showed below shows the usage of this index.
+
+![query11a-plan](./images/query11a-plan.png)
+
+
+You may now **proceed to the next lab.**
+
+## Learn More
+
+
+* [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
+* [NoSQL SQL Reference Manual](https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/index.html)
+
+
+## Acknowledgements
+* **Author** - Markos Zaharioudakis, Software Architect, NoSQL Product Development
+* **Last Updated By/Date** - Vandana Rajamani, Principal UA developer, Oracle NoSQL Database, November 2022
