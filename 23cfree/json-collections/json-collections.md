@@ -200,18 +200,7 @@ Now let's issue some simple queries on the **movies** collection we just created
 	```
 	![QBE condition is new result](./images/qbe-new-result.png)
 
-6. Find bargains of all products costing 5 or less:
-
-	This query displays the documents with ids 100 and 102 as those documents have price less than or equal to 5.
-
-	```
-	<copy>
-	{"price":{"$lte":5}}
-	</copy>
-	```
-	![QBE results for price less than 5](./images/qbe-lte5-result.png)
-
-7. Tighten the previous query to choose only DVD format documents:
+6. Find bargains of all products costing 5 and choose only DVD format documents:
 
 	This query displays the document id 100, as this document has a price less than 5 and is the format DVD.
 
@@ -234,9 +223,17 @@ More generally, constraints can be used to check the data being entered for vari
 
 	![SQL navigation](./images/development-sql.png)
 
-2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types.
+2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types. **Enforcing a JSON schema is new functionality in Oracle Database 23c.**
 
-    Copy and paste the query below in the worksheet and click the *Run query* button to run the SQL query to alter the **movie** table and add constraints.
+	To quickly recap what the documents look like, let's look at the first JSON document quickly. (Don't worry, we will have a closer look into the SQL world with JSON later):
+	```
+	<copy>
+	select json_serialize(data pretty) from movies fetch first 1 rows only;
+	</copy>
+	```
+	![Single document in SQL](./images/show-single-json-in-sql.png)
+
+    Now copy and paste the query below in the worksheet and click the *Run query* button to run the SQL query to alter the **movie** table and add constraints.
 
     ```
     <copy>alter table movies add constraint movies_json_schema
@@ -318,7 +315,7 @@ More generally, constraints can be used to check the data being entered for vari
 	![create allowed item](./images/create-right-type.png)
 	![doc successfully created](./images/json-doc-created.png)
 
-7. Optionally, you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload.
+7. Now that was quite cumbersome to figure out the mistakes manually. But there's a better way: you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload. **JSON schema is new functionality in Oracle Database 23c.**
 
     ```
     <copy>
@@ -337,9 +334,12 @@ More generally, constraints can be used to check the data being entered for vari
     /
     </copy>
     ```
-	![SQL to find JSON doc problem](./images/sql-with-error.png)
+	The output shows you all the violations in detail, so that it is easier to address the issues.
 
-8. You may also check the JSON Schema definition in your data dictionary. In the SQL tool, run:
+	![SQL to find JSON doc problem](./images/sql-shows-schema-error.png)
+
+8. You may also check the JSON Schema definition in your data dictionary. **JSON schema is new functionality in Oracle Database 23c.**
+In the SQL tool, run:
 
     ```
     <copy>
