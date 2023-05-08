@@ -4,7 +4,6 @@ This section starts you off with an unencrypted database & backing it up so you 
 The tasks you will do in this step are
 
 1. Log into the Oracle database and become oracle
-    - test
 2. Backup Container Database 1 (CDB1)
 3. Backup CDB2
 4. Look for a CDB1 wallet
@@ -87,10 +86,10 @@ Start with normal setup on CDB1
     </copy>
     ```
 
-Shows tablespaces associated with the database 
-Whether they are encrypted or not 
-If they are encrypted what is the master key 
-Status is empty
+- Shows tablespaces associated with the database
+- Whether they are encrypted or not
+- If they are encrypted what is the master key
+- Status is empty
 
     ![Screenshot of terminal output](./images/cdb1-check-wallet-status.png " ")
 
@@ -124,16 +123,17 @@ Status is empty
 
 ![Screenshot of terminal output](./images/bounce-database.png " ")
     
-    - After the database comes back up from bounce
-        - Set tde configuration parameter
-            - In this case it is set to file
-            - What we are telling the database is
-                - In wallet root location, under the tde directory, I’m going to be using a wallet file
-                - If using Oracle Key Vault the configuration will say OKV instead of file
+- After the database comes back up from bounce
+    - Set tde configuration parameter
+        - In this case it is set to file
+        - What we are telling the database is
+            - In wallet root location, under the tde directory
+            - I’m going to be using a wallet file
+            - If using Oracle Key Vault the configuration will say OKV instead of file
 
 ![Screenshot of terminal output](./images/post-bounce.png " ")
 
-    - Create the keystore
+2. Create the keystore
     - Give it a wallet file
     - Give it a password
     - Open it
@@ -163,7 +163,7 @@ Status is empty
             - Anybody who has this will be able open the database and read the keys
     - Even is somebody got the database on the wallet they can’t get the key that is protecting that database
 
-    - Do the same for CDB2
+3. Do the same for CDB2
 
     ```
     <copy>
@@ -179,17 +179,17 @@ Status is empty
     - Use a unified wallet
 
 **Key Points For RAC Environments**
-    - In a RAC environment the key needs to be read by all the nodes in the RAC cluster
-    - Wallet can be in a shared location 
-        - Local copy 
-            - Copy over to all nodes
-        - ACFS mount that is seen by all of the nodes
-        - NFS mount that is seen by all of the nodes
-        - ASM
-            - If you leverage ASM when you backup the file you need to pull it form ASM and then back it up
-            - More complicated
+1. In a RAC environment the key needs to be read by all the nodes in the RAC cluster
+2. Wallet can be in a shared location 
+    - Local copy 
+        - Copy over to all nodes
+    - ACFS mount that is seen by all of the nodes
+    - NFS mount that is seen by all of the nodes
+    - ASM
+        - If you leverage ASM when you backup the file you need to pull it form ASM and then back it up
+        - More complicated
     - Most common is a shared location: ex ACFS mount point
-    - Cloud uses ACFS
+3. Cloud uses ACFS
 
 ## Task 8: Check the Wallet Status For CDB1
 
@@ -199,10 +199,10 @@ Status is empty
     </copy>
     ```
 
-    - Last time we ran this is said not available
-    - You will see the status as OPEN_NO_MASTER_KEY
-        - We have not set the key yet
-    - CDB1 & PDB1 both have the wallet open but no master key
+- Last time we ran this it said not available
+- You will see the status as OPEN_NO_MASTER_KEY
+    - We have not set the key yet
+- CDB1 & PDB1 both have the wallet open but no master key
 
 ![Screenshot of terminal output](./images/wallet-status-2.png " ")
 
@@ -225,15 +225,15 @@ Status is empty
     ```
 
 This script 
-    - Sets the encryption key for the CDB & PDB
-    - We are using a tag
-        - Tags are important to identify which key it is, especially when using OKV
-            - In OKV you have the visibility to all the databases that are set and all the keys that are managed
-            - The tag uniquely identifies the encryption key
-            - This makes it easier to manage the wallets and know exactly which key you are looking at
-    - This is the point of no return
-        - From this point forward the database expects the wallet and encryption key to be there when the database starts up
-    - Each PDB also has its own unique key
+- Sets the encryption key for the CDB & PDB
+- We are using a tag
+    - Tags are important to identify which key it is, especially when using OKV
+        - In OKV you have the visibility to all the databases that are set and all the keys that are managed
+        - The tag uniquely identifies the encryption key
+        - This makes it easier to manage the wallets and know exactly which key you are looking at
+- This is the point of no return
+    - From this point forward the database expects the wallet and encryption key to be there when the database starts up
+- Each PDB also has its own unique key
 
 Run this script to set the master encryption key for CDB2 and PDB2
 
@@ -245,8 +245,8 @@ Run this script to set the master encryption key for CDB2 and PDB2
 ![Screenshot of terminal output](./images/set-keys.png " ")
 
 Check the wallet status now that the master encryptions keys were created
-    - Status shows as OPEN
-    - Wallet is known and open
+- Status shows as OPEN
+- Wallet is known and open
 
 CDB1
 
