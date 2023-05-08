@@ -85,10 +85,10 @@ Choose 1 for CDB1
     </copy>
     ```
 
-    - Shows tablespaces associated with the database 
-    - Whether they are encrypted or not 
-    - If they are encrypted what is the master key 
-    - Status is empty
+- Shows tablespaces associated with the database 
+- Whether they are encrypted or not 
+- If they are encrypted what is the master key 
+- Status is empty
 
     ![Screenshot of terminal output](./images/cdb1-check-wallet-status.png " ")
 
