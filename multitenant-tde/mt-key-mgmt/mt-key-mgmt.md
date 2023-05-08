@@ -2,22 +2,22 @@
 This section starts you off with an unencrypted database & backing it up so you can re-run this lab multiple times if you want.
 
 The tasks you will do in this step are:
-    - Log into the Oracle database and become oracle
-    - Backup Container Database 1 (CDB1)
-    - Backup CDB2
-    - Look for a CDB1 wallet
-    - Look for CDB2 wallet
+1. Log into the Oracle database and become oracle
+2. Backup Container Database 1 (CDB1)
+3. Backup CDB2
+4. Look for a CDB1 wallet
+5. Look for CDB2 wallet
 
 
 Start with normal setup on CDB1
-    - Run copy back on CDB1 to refresh the database prior to TDE being applied
+1. Run copy back on CDB1 to refresh the database prior to TDE being applied
 
     ```
     <copy>
     source /usr/local/bin/.set-env-db.sh
     </copy>
     ```
-Choose 1 for CDB1
+2. Choose 1 for CDB1
 
     ```
     <copy>
@@ -26,10 +26,10 @@ Choose 1 for CDB1
     ```
 
 **Key Points** 
-    - Once you create a key for the database you are at the point of no return
-    - The database knows there is a wallet & master encryption key associated with it
-    - If you don’t have the database access the wallet you will get messages that it can’t access the key
-    - Be sure of steps before you do this to a database that you use normally
+1. Once you create a key for the database you are at the point of no return
+2. The database knows there is a wallet & master encryption key associated with it
+3.   If you don’t have the database access the wallet you will get messages that it can’t access the key
+4. Be sure of steps before you do this to a database that you use normally
 
 ## Task 2: Run copy back on CDB2 to refresh the database prior to TDE being applied
 
@@ -40,24 +40,24 @@ Choose 1 for CDB1
     ```
 
   **Key Points**   
-    - Once you do encrypt the database you need to do a full backup, as a best practice
-    - TDE encrypts the 
-        - Datafile
-        - Tablespace
-        - Data in the blocks
+1. Once you do encrypt the database you need to do a full backup, as a best practice
+2. TDE encrypts the 
+    a. Datafile
+    b. Tablespace
+    c. Data in the blocks
 
-    - TDE does NOT encrypt
-        - Block Headers
-            -  Means when you go to back it up nothing changed 
-            - If you do an incremental it won’t look at the database and say the data in the data file or tablespace changed because it got encrypted 
-            - All it knows is the header, which has the last update scn, didn’t change, so the block didn’t change 
-            - But the data within the block did change because it was encrypted
+3. TDE does NOT encrypt
+    a. Block Headers
+        i. Means when you go to back it up nothing changed 
+        ii. If you do an incremental it won’t look at the database and say the data in the data file or tablespace changed because it got encrypted 
+        iii. All it knows is the header, which has the last update scn, didn’t change, so the block didn’t change 
+        iv. But the data within the block did change because it was encrypted
     
-    - If you only do an incremental merge then
-        - The data will stay unencrypted 
-        - You need to start over as it will take those incremental backups that are unencrypted, merge it into the full backup, which is unencrypted, and keep it unencrypted 
-        - It will stay unencrypted till you do another full backup 
-        - The exception is the ZDLRA/RA21
+4. If you only do an incremental merge then
+    a. The data will stay unencrypted 
+    b. You need to start over as it will take those incremental backups that are unencrypted, merge it into the full backup, which is unencrypted, and keep it unencrypted 
+    c. It will stay unencrypted till you do another full backup 
+    d. The exception is the ZDLRA/RA21
 
 ## Task 3: Look at the wallet for CDB1
     - Showing the default location 
