@@ -2,7 +2,7 @@
 This section starts you off with an unencrypted database & backing it up so you can re-run this lab multiple times if you want.
 
 The tasks you will do in this step are
-Log into the Oracle database and become oracle
+1. Log into the Oracle database and become oracle
     2. Backup Container Database 1 (CDB1)
     3. Backup CDB2
     4. Look for a CDB1 wallet
