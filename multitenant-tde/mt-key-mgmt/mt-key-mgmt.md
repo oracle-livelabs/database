@@ -28,7 +28,7 @@ Start with normal setup on CDB1
 **Key Points** 
 1. Once you create a key for the database you are at the point of no return
 2. The database knows there is a wallet & master encryption key associated with it
-3.   If you don’t have the database access the wallet you will get messages that it can’t access the key
+3. If you don’t have the database access the wallet you will get messages that it can’t access the key
 4. Be sure of steps before you do this to a database that you use normally
 
 ## Task 2: Run copy back on CDB2 to refresh the database prior to TDE being applied
@@ -40,11 +40,11 @@ Start with normal setup on CDB1
     ```
 
   **Key Points**   
-1. Once you do encrypt the database you need to do a full backup, as a best practice
-2. TDE encrypts the
-- Datafile
-- Tablespace
-- Data in the blocks
+- Once you do encrypt the database you need to do a full backup, as a best practice
+- TDE encrypts the
+    - Datafile
+    - Tablespace
+    - Data in the blocks
 
 3. TDE does NOT encrypt
 - Block Headers
