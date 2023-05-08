@@ -43,11 +43,11 @@ Start with normal setup on CDB1
 1. Once you do encrypt the database you need to do a full backup, as a best practice
 2. TDE encrypts the 
     1. Datafile
-    b. Tablespace
-    c. Data in the blocks
+    2. Tablespace
+    3. Data in the blocks
 
 3. TDE does NOT encrypt
-    a. Block Headers
+    1. Block Headers
         i. Means when you go to back it up nothing changed 
         ii. If you do an incremental it won’t look at the database and say the data in the data file or tablespace changed because it got encrypted 
         iii. All it knows is the header, which has the last update scn, didn’t change, so the block didn’t change 
