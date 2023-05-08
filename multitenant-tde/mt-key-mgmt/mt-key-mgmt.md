@@ -4,6 +4,7 @@ This section starts you off with an unencrypted database & backing it up so you 
 The tasks you will do in this step are
 
 1. Log into the Oracle database and become oracle
+    - test
 2. Backup Container Database 1 (CDB1)
 3. Backup CDB2
 4. Look for a CDB1 wallet
@@ -29,7 +30,7 @@ Start with normal setup on CDB1
 1. Once you create a key for the database you are at the point of no return
 2. The database knows there is a wallet & master encryption key associated with it
 3. If you don’t have the database access the wallet you will get messages that it can’t access the key
-4. Be sure of steps before you do this to a database that you use normally
+4. Be sure of the steps before you do this to a database that you use normally
 
 ## Task 2: Run copy back on CDB2 to refresh the database prior to TDE being applied
 
