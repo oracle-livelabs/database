@@ -42,7 +42,7 @@ Start with normal setup on CDB1
   **Key Points**   
 1. Once you do encrypt the database you need to do a full backup, as a best practice
 2. TDE encrypts the 
-    a. Datafile
+    1. Datafile
     b. Tablespace
     c. Data in the blocks
 
@@ -62,9 +62,9 @@ Start with normal setup on CDB1
 
 ## Task 3: Look at the wallet for CDB1
 
-1. Showing the default location 
+1. Showing the default location
 2. Status
-3. Not even a wallet yet 
+3. Not even a wallet yet
 4. At this point CBD1 does not know about a wallet or encryption
 
 ![Screen Capture of Wallet Check](./images/wallet_check_cdb1.png " ")
