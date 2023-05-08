@@ -17,7 +17,6 @@ Start with normal setup on CDB1
     source /usr/local/bin/.set-env-db.sh
     </copy>
     ```
-
 2. Choose 1 for CDB1
 
     ```
