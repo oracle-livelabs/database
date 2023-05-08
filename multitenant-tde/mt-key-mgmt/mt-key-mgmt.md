@@ -65,7 +65,7 @@ Choose 1 for CDB1
     - Not even a wallet yet 
     - At this point CBD1 does not know about a wallet or encryption
 
-![Screen Capture of Wallet Check](./images/wallet_check_cdb1.png " ")
+    ![Screen Capture of Wallet Check](./images/wallet_check_cdb1.png " ")
 
 ## Task 4: Look at the wallet for CDB2
 
@@ -75,7 +75,7 @@ Choose 1 for CDB1
     </copy>
     ```
 
-![Screen Capture of Wallet Check](./images/wallet_check_cdb2.png " ")
+    ![Screen Capture of Wallet Check](./images/wallet_check_cdb2.png " ")
 
 ## Task 5: At this point neither database knows about encryption and there is no wallet set so let's check the encryption status of CDB1
 
