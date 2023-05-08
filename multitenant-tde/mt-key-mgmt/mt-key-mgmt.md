@@ -2,6 +2,7 @@
 This section starts you off with an unencrypted database & backing it up so you can re-run this lab multiple times if you want.
 
 The tasks you will do in this step are
+
 1. Log into the Oracle database and become oracle
 2. Backup Container Database 1 (CDB1)
 3. Backup CDB2
@@ -54,16 +55,18 @@ Start with normal setup on CDB1
         iv. But the data within the block did change because it was encrypted
     
 4. If you only do an incremental merge then
+
     a. The data will stay unencrypted 
     b. You need to start over as it will take those incremental backups that are unencrypted, merge it into the full backup, which is unencrypted, and keep it unencrypted 
     c. It will stay unencrypted till you do another full backup 
     d. The exception is the ZDLRA/RA21
 
 ## Task 3: Look at the wallet for CDB1
-    - Showing the default location 
-    - Status 
-    - Not even a wallet yet 
-    - At this point CBD1 does not know about a wallet or encryption
+
+1. Showing the default location 
+2. Status
+3. Not even a wallet yet 
+4. At this point CBD1 does not know about a wallet or encryption
 
     ![Screen Capture of Wallet Check](./images/wallet_check_cdb1.png " ")
 
