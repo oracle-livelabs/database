@@ -85,10 +85,10 @@ Choose 1 for CDB1
     </copy>
     ```
 
-- Shows tablespaces associated with the database 
-- Whether they are encrypted or not 
-- If they are encrypted what is the master key 
-- Status is empty
+Shows tablespaces associated with the database 
+Whether they are encrypted or not 
+If they are encrypted what is the master key 
+Status is empty
 
     ![Screenshot of terminal output](./images/cdb1-check-wallet-status.png " ")
 
@@ -108,7 +108,7 @@ Choose 1 for CDB1
     </copy>
     ```
 
-    - Goes out to CDB1, which has PDB1
+1. Goes out to CDB1, which has PDB1
     - Changes the wallet root parameter
         - Recommendation for 19 and above is to use the spfile parameter wallet root
     - Tells it that starting in this location that the wallet root is set at to look for the wallet associated with this database
