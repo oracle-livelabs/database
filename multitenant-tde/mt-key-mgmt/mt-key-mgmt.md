@@ -42,9 +42,9 @@ Start with normal setup on CDB1
   **Key Points**   
 1. Once you do encrypt the database you need to do a full backup, as a best practice
 2. TDE encrypts the 
-    1. Datafile
-    2. Tablespace
-    3. Data in the blocks
+- Datafile
+- Tablespace
+- Data in the blocks
 
 3. TDE does NOT encrypt
     1. Block Headers
