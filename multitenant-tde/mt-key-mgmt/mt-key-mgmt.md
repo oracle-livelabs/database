@@ -3,10 +3,10 @@ This section starts you off with an unencrypted database & backing it up so you 
 
 The tasks you will do in this step are
 1. Log into the Oracle database and become oracle
-    2. Backup Container Database 1 (CDB1)
-    3. Backup CDB2
-    4. Look for a CDB1 wallet
-    5. Look for CDB2 wallet
+2. Backup Container Database 1 (CDB1)
+3. Backup CDB2
+4. Look for a CDB1 wallet
+5. Look for CDB2 wallet
 
 
 Start with normal setup on CDB1
