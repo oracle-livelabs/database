@@ -1,34 +1,25 @@
-# Run an LRA Sample Application
+# Integrate MicroTx Client Libraries with XA Sample Application
 
 ## Introduction
 
-Run a sample application that uses the XA transaction protocol to book a trip and understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate the transactions. Using samples is the fastest way for you to get familiar with MicroTx.
+Run a sample application that uses the XA transaction protocol to buy stocks and understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate the transactions. Using samples is the fastest way for you to get familiar with MicroTx.
 The sample application code is available in the MicroTx distribution.
 
 Estimated Time: *10 minutes*
 
-Watch the video below for a quick walk-through of the lab.
-[Run an LRA Sample Application](videohub:1_0g2khxyc)
-
 ### About the XA Sample Application
 
-The sample application demonstrates how you can develop microservices that participate in LRA transactions while using MicroTx to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and a flight ticket. Only when you provide approval to confirm the provisional booking, the booking of the hotel room and flight ticket is confirmed. If you cancel the provisional booking, the hotel room and flight ticket that was blocked is released and the booking is canceled. The flight service in this example allows only two confirmed bookings by default. To test the failure scenario, the flight service sample app rejects any additional booking requests after two confirmed bookings. This leads to the cancellation (compensation) of a provisionally booked hotel within the trip and the trip is not booked.
+The sample application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions.
 
 The following figure shows a sample XA application, which contains several microservices, to demonstrate how you can develop microservices that participate in XA transactions.
-![Microservices in sample LRA application](./images/lra-sample-app.png)
-
-For more details, see [About the Sample LRA Application](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/set-sample-applications.html#GUID-C5332159-BD13-4210-A02E-475107919FD9) in the *Transaction Manager for Microservices Developer Guide*.
+![Microservices in sample XA application](./images/stock_broker_xa_app.png)
 
 ### Objectives
 
 In this lab, you will:
 
-* Configure Minikube
-* Start a tunnel between Minikube and MicroTx
-* Deploy Kiali and Jaeger in your minikube cluster (Optional)
-* Run the LRA sample application
-* View service graph of the mesh and distributed traces to track requests (Optional)
-* View source code of the sample application (Optional)
+* Configure the Stock Broker App as a Transaction Initiator
+* Configure the Stock Broker Application as a Transaction Participant
 
 ### Prerequisites
 
@@ -47,224 +38,336 @@ This lab assumes you have:
       </copy>
       ```
 
-## Task 1: Configure Minikube
+## Task 1: Configure the Stock Broker App as a Transaction Initiator
 
-Follow the instructions in this section to configure Minikube, and then run a sample application.
+Initialize an object of the `TrmUserTransaction` class in the application code for every new transaction. This object demarcates the transaction boundaries, which are begin, commit, or roll back. In your application code you must create this object before you begin a transaction.
 
-1. Click **Activities** in the remote desktop window to open a new terminal.
+1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is located at `/home/oracle/OTMM/otmm-<*version*>/samples/xa/java/bankapp/StockBroker/` in any code editor, and then uncomment the following lines of code. The following sample code is for the 22.3.2 release. Provide the correct version, based on the release that you want to use.
 
-2. Run the following command to start Minikube.
+    ```text
+    <dependency>
+      <groupId>com.oracle.tmm.jta</groupId>
+      <artifactId>TmmLib</artifactId>
+      <version>22.3.2</version>
+    </dependency>
+    ```
+
+2. Open the `UserStockTransactionServiceImpl.java` file in any code editor. This file is located in the `/home/oracle/OTMM/otmm-<*version*>/samples/xa/java/bankapp/StockBroker/src/main/java/com/oracle/tmm/stockbroker/service/impl/` folder.
+
+3. Import the `oracle.tmm.jta.TrmUserTransaction` package.
+
+    **Sample command**
 
     ```text
     <copy>
-    minikube start
+    import oracle.tmm.jta.TrmUserTransaction;
     </copy>
     ```
 
-   In rare situations, you may the error message shown below. This message indicates that the stack resources have not been successfully provisioned. In such cases, complete **Lab 6: Environment Clean Up** to delete the stack and clean up the resources. Then perform the steps in Lab 2 to recreate the stack.
+4. The following code sample demonstrates how to create an instance of the `TrmUserTransaction` object to buy stocks. You only need to add the code in bold. The other lines of code are provided only to help you identify where to place the code.
 
-   ![minikube start error](./images/minikube-start-error.png)
-
-3. Verify that all resources, such as pods and services, are ready before proceeding to the next task. Use the following command to retrieve the list of resources in the namespace `otmm` and their status.
+    **Sample command**
 
     ```text
     <copy>
-    kubectl get all -n otmm
+    ...
+    @Override
+    public BuyResponse buy(BuyStock buyStock) {
+      **TrmUserTransaction transaction = new TrmUserTransaction();**
+    ...
     </copy>
     ```
 
-    **Example output**
+5. The following sample demonstrates the code to begin the XA transaction to buy stocks. You only need to add the code in bold. The other lines of code are provided only to help you identify where to place the code.
 
-   ![Public IP address of ingress gateway](./images/get-all-resources-ready.png)
-
-## Task 2: Start a tunnel
-
-Before you start a transaction, you must start a tunnel between Minikube and MicroTx.
-
-1. Run the following command in a new terminal to start a tunnel. Keep this terminal window open.
+    **Sample command**
 
     ```text
     <copy>
-    minikube tunnel
+    ...
+    BuyResponse buyResponse = new BuyResponse();
+        try {
+            **transaction.begin(true);**
+            ... // Implement the business logic to begin a transaction.
     </copy>
     ```
 
-2. In another new terminal, run the following command to get the external IP address of the Istio ingress gateway.
+6. Specify the transaction boundaries for rolling back or committing the transaction. Based on your business logic, commit or rollback the transaction. You only need to add the code in bold. The other lines of code are provided only to help you identify where to place the code.
 
-    ```text
-    <copy>
-    kubectl get svc istio-ingressgateway -n istio-system
-    </copy>
-    ```
-
-    **Example output**
-
-    ![Public IP address of ingress gateway](./images/ingress-gateway-ip-address.png)
-
-    From the output note down the value of `EXTERNAL-IP`, which is the external IP address of the Istio ingress gateway. You will provide this value in the next step.
-
-    Let's consider that the value of the external IP in the above example is 192.0.2.117.
-
-3. Store the external IP address of the Istio ingress gateway in an environment variable named `CLUSTER_IPADDR` as shown in the following command.
-
-    ```text
-    <copy>
-    export CLUSTER_IPADDR=192.0.2.117
-    </copy>
-    ```
-
-    Note that, if you don't do this, then you must explicitly specify the IP address when required in the commands.
-
-4. Store the URL for the Trip Manager service, which is the transaction initiator service, in an environment variable as shown in the following command.
-
-    **Command syntax**
+    **Sample command**
 
     ```text
    <copy>
-    export TRIP_SERVICE_URL=http://<copied-external-IP-address>/trip-service/api/trip
+   ...
+    DebitResponse debitResponse = bankUtility.debit(coreBankEndpoint, buyStock.getUserAccountId(), totalStockPrice);
+        if (debitResponse.getHttpStatusCode() != Response.Status.OK.getStatusCode()) {
+            ...
+            **transaction.rollback();**
+            return buyResponse;
+        }
+        if (!stockBrokerTransactionService.creditMoneyToStockBroker(totalStockPrice)) {
+            ...
+            **transaction.rollback();**
+            return buyResponse;
+        }
+        if (!stockBrokerTransactionService.debitStocksFromStockBroker(buyStock.getStockSymbol(), buyStock.getStockUnits())) {
+            ...
+            **transaction.rollback();**
+            return buyResponse;
+        }
+        if (!stockBrokerTransactionService.creditStocksToUser(buyStock.getUserAccountId(), buyStock.getStockSymbol(), buyStock.getStockUnits())) {
+            ...
+            **transaction.rollback();**
+            return buyResponse;
+        }
+        **transaction.commit();**
+    ...
    </copy>
     ```
 
-    **Example command**
+7. The following code sample demonstrates how to create an instance of the `TrmUserTransaction` object to sell stocks. You only need to add the code in bold. The other lines of code are provided only to help you identify where to place the code.
+
+    **Sample command**
 
     ```text
     <copy>
-    export TRIP_SERVICE_URL=http://192.0.2.117/trip-service/api/trip
+    ...
+    @Override
+    public SellResponse sell(SellStock sellStock) {
+      **TrmUserTransaction transaction = new TrmUserTransaction();**
+    ...
     </copy>
     ```
 
-## Task 3: Deploy Kiali and Jaeger in the cluster (Optional)
-This optional task lets you deploy Kiali and Jaeger in the minikube cluster to view the service mesh graph and enable distributed tracing.
-Distributed tracing enables tracking a request through service mesh that is distributed across multiple services. This allows a deeper understanding about request latency, serialization and parallelism via visualization.
-You will be able to visualize the service mesh and the distributed traces after you have run the sample application in the following task.
-The following commands can be executed to deploy Kiali and Jaeger. Kiali requires prometheus which should also be deployed in the cluster.
+8. The following sample demonstrates the code to begin the XA transaction to buy stocks. You only need to add the code in bold. The other lines of code are provided only to help you identify where to place the code.
 
-1. Deploy Kiali.
+    **Sample command**
 
     ```text
     <copy>
-    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/kiali.yaml
+    ...
+    SellResponse sellResponse = new SellResponse();
+        try {
+            **transaction.begin(true);**
+            ... // Implement the business logic to begin a transaction.
     </copy>
     ```
-2. Deploy Prometheus.
+
+9. Specify the transaction boundaries for rolling back or committing the transaction. Based on your business logic, commit or rollback the transaction. You only need to add the code in bold. The other lines of code are provided only to help you identify where to place the code.
+
+    **Sample command**
 
     ```text
     <copy>
-    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/prometheus.yaml
+    ...
+    CreditResponse creditResponse = bankUtility.credit(coreBankEndpoint, sellStock.getUserAccountId(), totalStockPrice);
+            if (creditResponse.getHttpStatusCode() != Response.Status.OK.getStatusCode()) {
+                ...
+                **transaction.rollback();**
+                return sellResponse;
+            }
+            if (!stockBrokerTransactionService.debitMoneyFromStockBroker(totalStockPrice)) {
+                ...
+                **transaction.rollback();**
+                return sellResponse;
+            }
+            if (!stockBrokerTransactionService.creditStocksToStockBroker(sellStock.getStockSymbol(), sellStock.getStockUnits())) {
+                ...
+                **transaction.rollback();**
+                return sellResponse;
+            }
+            if (!stockBrokerTransactionService.debitStocksFromUser(sellStock.getUserAccountId(), sellStock.getStockSymbol(), sellStock.getStockUnits())) {
+                ...
+                **transaction.rollback();**
+                return sellResponse;
+            }
+            **transaction.commit();**
+            ...
     </copy>
     ```
-3. Deploy Jaeger.
+
+## Task 2: Configure the Stock Broker Application as a Transaction Participant
+
+Since the Stock broker app participates in the transaction in addition to initiating the transaction, you must make additional configurations for the application to participate in the transaction and communicate with its resource manager.
+
+When you integrate the MicroTx client library for Java with the Stock broker application, the library performs the following functions:
+
+* Enlists the participant service with the transaction coordinator.
+* Injects an `XADataSource` object for the participant application code to use through dependency injection. The MicroTx libraries automatically inject the configured data source into the participant services, so you must add the `@Inject` or `@Context` annotation to the application code. The application code runs the DML using this connection.
+* Calls the resource manager to perform operations.
+
+1. Open the `DatasourceConfigurations.java` file in any code editor. This file is located in the `/home/oracle/OTMM/otmm-<*version*>/samples/xa/java/bankapp/StockBroker/src/main/java/com/oracle/tmm/stockbroker` folder.
+
+2. In the transaction participant function or block, create a `PoolXADataSource` object and provide credentials and other details to connect to the resource manager. This object is used by the MicroTx client library. Add the following lines of code at the end of the existing code in the `DatasourceConfigurations.java` file, and then save the changes.
 
     ```text
     <copy>
-    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/jaeger.yaml
+    @Bean(name = "SBPoolXADataSource")
+    @Primary
+    public PoolXADataSource getXAPoolDataSource() {
+        PoolXADataSource xapds = null;
+        try {
+            xapds = PoolDataSourceFactory.getPoolXADataSource();
+            xapds.setConnectionFactoryClassName("oracle.jdbc.xa.client.OracleXADataSource");
+            xapds.setURL(url); //database connection string
+            xapds.setUser(username); //username to access the resource manager
+            xapds.setPassword(password); //password to access the resource manager
+            xapds.setMinPoolSize(Integer.valueOf(minPoolSize));
+            xapds.setInitialPoolSize(Integer.valueOf(initialPoolSize));
+            xapds.setMaxPoolSize(Integer.valueOf(maxPoolSize));
+        } catch (SQLException ea) {
+            log.severe("Error connecting to the database: " + ea.getMessage());
+        }
+        log.info("PoolXADataSource initialized successfully.");
+        return xapds;
+    }
     </copy>
     ```
-4. Start Kiali Dashboard. Open a new tab in the terminal window and execute the following command. Leave the terminal running. A browser window may pop up as well. Close the browser window.
+    It is your responsibility as an application developer to ensure that an XA-compliant JDBC driver and required parameters are set up while allocating PoolXADataSource.
+
+3. Open the `TMMConfigurations.java` file in any code editor. This file is located in the `/home/oracle/OTMM/otmm-<*version*>/samples/xa/java/bankapp/StockBroker/src/main/java/com/oracle/tmm/stockbroker` folder.
+
+4. Create a `PoolXADatasource` object. The following sample code describes how you can create the `PoolXADatasource` object at the beginning of the application code when you create a connection object. `PoolXADatasource` is an interface defined in JTA whose implementation is provided by the JDBC driver. The MicroTx client library uses this object to connect to database to start XA transactions and perform various operations such as prepare, commit, and rollback. The MicroTx library also provides a SQL connection object to the application code to execute DML using dependency injection.
 
     ```text
     <copy>
-    istioctl dashboard kiali
+    @Configuration
+    public class TMMConfigurations extends ResourceConfig {
+
+        @Autowired
+        private PoolXADataSource poolXADataSource;
     </copy>
     ```
-   An output will show a URL on which you can access the kiali dashboard in a browser tab:
-    http://localhost:20001/kiali
 
-5. Start Jaeger Dashboard. Open a new tab in the terminal window and execute the following command. Leave the terminal running. A browser window may pop up as well. Close the browser window.
+5. Register the listeners, XA resource callback, filters for MicroTX libraries, and MicroTx XA connection bindings.
 
     ```text
     <copy>
-    istioctl dashboard jaeger
+        public TMMConfigurations() {
+        //Jax-RS Resources
+        ...
+        **register(BuyStockEventListenerResource.class);**
+        **register(SellStockEventListenerResource.class);**
+
+        // OpenApi
+        register(OpenApiResource.class);
+
+        //Register the MicroTx XA Resource callback that coordinates with the transaction coordinator
+        register(XAResourceCallbacks.class);
+
+        // filters for the MicroTx libraries that intercept the JAX-RS calls and manages the XA Transactions
+        register(TrmTransactionRequestFilter.class);
+        register(TrmTransactionResponseFilter.class);
+
+        // MicroTx XA connection Bindings
+        register(new AbstractBinder() {
+            @Override
+            protected void configure() {
+                bindFactory(TrmConnectionFactory.class).to(Connection.class);
+                bindFactory(TrmXASQLStatementFactory.class).to(Statement.class);
+            }
+        });
+    }
+
+    // Register the MicroTx TrmSQLConnection object bean
+    **@Bean**
+    @TrmSQLConnection
+    @Lazy
+    @RequestScope
+    public Connection tmmSqlConnectionBean(){
+        return new TrmConnectionFactory().get();
+    }
+
+    // Register the MicroTx TrmXaConnection object bean
+    @Bean
+    @TrmXAConnection
+    @Lazy
+    @RequestScope
+    **public XAConnection tmmSqlXaConnectionBean(){**
+    **    return new TrmXAConnectionFactory().get();**
+    }
     </copy>
     ```
-   An output will show a URL on which you can access the jaeger dashboard in a browser tab:
-   http://localhost:16686
 
-## Task 4: Run the LRA sample application
-
-Run the sample LRA application to book a hotel room and flight ticket.
-
-1. Run the Trip Client application.
+6. In the transaction participant function or block, initialize the `poolXADataSource` object.
 
     ```text
     <copy>
-    cd /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/trip-client
-    java -jar target/trip-client.jar
+    @EventListener(ApplicationReadyEvent.class)
+    public void init() {
+        **initializeOracleXADataSource();**
+        initialiseLogger();
+    **//Initialises the datasource to the Trm library that manages the lifecycle of the XA transaction**
+    **private void initializeOracleXADataSource() {**
+        **TrmConfig.initXaDataSource(this.poolXADataSource);**
+    **}**
     </copy>
     ```
 
-    The Trip Booking Service console is displayed.
+7. Save the changes.
 
-2. Type **y** to confirm that you want to run the LRA sample application, and then press Enter.
-The sample application provisionally books a hotel room and a flight ticket and displays the details of the provisional booking.
+8. Open the `AccountServiceImpl.java` file in any code editor. This file is located in the `/home/oracle/OTMM/otmm-<*version*>/samples/xa/java/bankapp/StockBroker/src/service/impl/` folder.
 
-3. Type **y** to confirm the provisional booking, and then press Enter.
-
-    Your booking is confirmed and information about your confirmed booking is displayed.
-
-   ![Details of the confirmed booking](./images/lra-confirmation.png)
-
-4. Call the Trip-Service, Hotel Service and Flight Service REST APIs to view the list of the trip bookings, hotel bookings and flight bookings.
-
-   **Example command for Trip-Service**
+9. Insert the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application injects the `connection` object that is created by the MicroTx client library.
 
     ```text
     <copy>
-    curl --location --request GET http://$CLUSTER_IPADDR/trip-service/api/trip | jq
+    ...
+    **import oracle.tmm.jta.common.TrmSQLConnection;**
+    **import javax.inject.Inject;**
+    @Component
+    public class AccountServiceImpl implements AccountService {
+        **@Inject**
+        **@TrmSQLConnection**
+        **private Connection connection;**
+    ...
     </copy>
     ```
 
-   The following image provides an example output for Trip-Service. The type is Trip and the status is CONFIRMED.
-![Details of the confirmed booking](./images/trip-confirmation-json.png)
-
-   **Example command for Hotel Service**
+10. Delete all the occurrences of the following line of code as the connection is managed by the MicroTx client library.
 
     ```text
     <copy>
-    curl --location --request GET http://$CLUSTER_IPADDR/hotelService/api/hotel | jq
+    Connection connection = poolDataSource.getConnection();
     </copy>
     ```
 
-   **Example command for Flight Service**
+11. Save the changes.
+
+12. Open the `StockBrokerTransactionServiceImpl.java` file in any code editor. This file is located in the `/home/oracle/OTMM/otmm-<*version*>/samples/xa/java/bankapp/StockBroker/src/service/impl/` folder.
+
+13. Insert the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application injects the `connection` object that is created by the MicroTx client library.
 
     ```text
     <copy>
-    curl --location --request GET http://$CLUSTER_IPADDR/flightService/api/flight | jq
+    import oracle.tmm.jta.common.TrmSQLConnection;
+    @Component
+    public class StockBrokerTransactionServiceImpl implements StockBrokerTransactionService {
+
+    **@Inject**
+    **@TrmSQLConnection**
+    **private Connection connection;**
     </copy>
     ```
 
-## Task 5: View Service Mesh graph and Distributed Traces (Optional)
-You can perform this task only if you have performed Task 3. 
-To visualize what happens behind the scenes and how a trip booking request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you started in Task 3.
-1. Open a new browser tab and navigate to the Kiali dashboard URL - http://localhost:20001/kiali
+14. Delete all the occurrences of the following line of code as the connection is managed by the MicroTx client library.
 
-2. Select Graph for the otmm namespace.
-![Kiali Dashboard](images/kiali-dashboard-lra.png)
+    ```text
+    <copy>
+    Connection connection = poolDataSource.getConnection();
+    </copy>
+    ```
 
-3. Open a new browser tab and navigate to the Jaeger dashboard URL - http://localhost:16686
-4. Select istio-ingressgateway.istio-system from the Service list. You can see the list of traces with each trace representing a request. 
-![Jaeger Traces List](images/jaeger-traces-list.png)
-5. Select one of the traces to view.
-![Jaeger Trace for Confirmation Step](images/jaeger-trace-confirm-cancel.png)
-
-## Task 6: View source code of the sample application (Optional)
-The source code of the sample application is present in folder: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo
-- Trip Service Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/trip-manager
-- Hotel Service Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/hotel
-- Flight Service Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/flight
-- Trip Client Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/trip-client 
-
-You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files. To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
-
+15. Save the changes.
 
 You may now **proceed to the next lab** to run a sample XA application. If you do not want to proceed further and would like to finish the LiveLabs and clean up the resources, then complete **Lab 6: Environment Clean Up**.
 
 ## Learn More
 
-* [Develop Applications with LRA](https://doc.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/develop-lra-applications.html#GUID-63827BB6-7993-40B5-A753-AC42DE97F6F4)
+* [Develop Applications with XA](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
 
 ## Acknowledgements
 
 * **Author** - Sylaja Kannan, Principal User Assistance Developer
-* **Contributors** - Brijesh Kumar Deo
-* **Last Updated By/Date** - Sylaja, January 2023
+* **Contributors** - Brijesh Kumar Deo and Bharath MC
+* **Last Updated By/Date** - Sylaja, May 2023
