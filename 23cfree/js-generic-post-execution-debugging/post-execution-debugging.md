@@ -6,7 +6,7 @@ Oracle's JavaScript Engine allows developers to debug their code by conveniently
 
 The post-execution debug option enables developers to instrument their code by specifying debugpoints in the code. Debugpoints allow you to log program state conditionally or unconditionally, including values of individual variables as well as execution snapshots. Debugpoints are specified as JSON documents separate from the application code. No change to the application is necessary for debug points to fire.
 
-When activated, debug information is collected according to the debug specification and can be fetched for later analysis by a wide range of tools thanks to its standard format.
+When activated, debug information is collected according to the debug specification and can be fetched for later analysis by a wide range of tools thanks to its standard Java Profiler Heap Dump version 1.0.1 as defined in JDK6 format.
 
 Estimated Lab Time: 15 minutes
 
@@ -48,7 +48,7 @@ Each debugpoint in turn defines
 - The location in the module's code where to fire
 - Which action to take, optionally providing a condition for the probe to fire
 
-Actions include printing the value of a single variable (`watch` point) or taking a `snapshot` of all variables in the current scope.
+Actions include printing the value of a single variable (`watch` point) or taking a `snapshot` of all variables in the current scope. More information about the structure of the debugscpec can be found in JavaScript Developers Guide, chapter 8.
 
 1. Review the `business_logic` module's source code
 

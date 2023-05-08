@@ -120,6 +120,10 @@ In this task you will learn how to create a call specification based on the MLE 
 
     You can see in line 33 that both functions declared in the module are exported.
 
+    If you prefer a graphical user interface log into Database Actions and navigate to MLE JS from the Launchpad. Right-click on `HELPER_MODULE_INLINE` and select Edit from the context menu. This brings up the source code for the module:
+
+    ![Source code for HELPER_MODULE_INLINE in Database Actions](images/sdw-source-code.jpg)
+
 2. Create call specification for `helper_module_inline`
 
     You can see from the output above that both functions in the module are exported (line 32). This allows us to create call specifications. Before you go ahead and create one you need to decide whether you need a PL/SQL function or procedure. In the above case both JavaScript functions return data:
@@ -151,6 +155,16 @@ In this task you will learn how to create a call specification based on the MLE 
     ```
 
     Since `helper_module_inline` does not import functionality from any other module an `ENV` clause is not necessary.
+
+    You can of course create call specifications using Database Actions as well. Whilst still using the MLE JS editor, right-click on `HELPER_MODULE_BFILE` and choose `create call specification` as shown in this screenshot:
+
+    ![Create a call specification for HELPER_MODULE_BFILE in Database Actions](images/sdw-simple-call-spec.jpg)
+
+    Enter the details about your call specification in the wizard using the following screenshot as your reference
+
+    ![Create a call specification for HELPER_MODULE_BFILE in Database Actions-Details](images/sdw-simple-call-spec-details.jpg)
+
+    Experiment with the wizard for a bit, you can double-click the function parameters (inputString) and rename them if you like. It is possible to change the type as well should it be needed. A click on the Create button closes the wizard and creates the call specification.
 
 3. Invoke the JavaScript code
 
@@ -262,6 +276,12 @@ Before you can create a call specification for `processOrder()` you must ensure 
     /
     </copy>
     ```
+
+    The same can be achieved in Database Actions. Using the MLE JS view, right-click on `BUSINESS_LOGIC` as you did before with the helper modules. Call specifications for `processOrder()` require knowledge about the environment name. You can set this as shown in this screenshot:
+
+    ![Create a call specification for BUSINESS_LOG in Database Actions](images/sdw-call-spec-env-details.jpg)
+
+    Make sure to assign `BUSINESS_MODULE_ENV` as the Env. Name in the top right corner of the wizard. Click on Create to close the wizard and create the call specification.
 
 3. Invoke the JavaScript code
 
