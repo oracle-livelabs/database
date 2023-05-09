@@ -266,7 +266,7 @@ CDB2
 
 ![Screenshot of terminal output](./images/wallet-status-4.png " ")
 
-    - Check the key status for CDB1 again
+Check the key status for CDB1 again
 
     ```
     <copy>
@@ -282,11 +282,11 @@ CDB2
 ![Screenshot of terminal output](./images/master-encryption-key-1.png " ")
 ![Screenshot of terminal output](./images/master-encryption-key-2.png " ")
 
-    - The Activation Time is listed
-        - As you rotate through the keys it will show a new Activation Time
-        - This will show the history of the keys and when activated
+The Activation Time is listed
+    - As you rotate through the keys it will show a new Activation Time
+    - This will show the history of the keys and when activated
 
-    - Check the key status for CDB2 again
+- Check the key status for CDB2 again
 
     ```
     <copy>
@@ -294,14 +294,14 @@ CDB2
     </copy>
     ```
 
-    - Nothing should be encrypted at this point
-    - You should have 2 master Encryption Keys
+- Nothing should be encrypted at this point
+- You should have 2 master Encryption Keys
 
 ![Screenshot of terminal output](./images/master-encryption-key-cdb2.png " ")
 
-        - If you look at the keys for SYSAUX & SYSTEM they match the keys at the bottom
-        - They are not encrypted at this point
-            - If they were to be encrypted those are they keys that they would use
+- If you look at the keys for SYSAUX & SYSTEM they match the keys at the bottom
+- They are not encrypted at this point
+    - If they were to be encrypted those are they keys that they would use
 
 ## Task 11: Set The Algorithm
 
