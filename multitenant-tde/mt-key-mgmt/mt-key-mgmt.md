@@ -40,20 +40,18 @@ Start with normal setup on CDB1
     ```
 
   **Key Points**   
-- Once you do encrypt the database you need to do a full backup, as a best practice
-- TDE encrypts the
+1. Once you do encrypt the database you need to do a full backup, as a best practice
+2. TDE encrypts the
     - Datafile
     - Tablespace
     - Data in the blocks
-
-1. TDE does NOT encrypt
+3. TDE does NOT encrypt
 - Block Headers
     - Means when you go to back it up nothing changed
     - If you do an incremental it won’t look at the database and say the data in the data file or tablespace changed because it got encrypted 
     - All it knows is the header, which has the last update scn, didn’t change, so the block didn’t change 
     - But the data within the block did change because it was encrypted
-    
-2. If you only do an incremental merge then
+4. If you only do an incremental merge then
 - The data will stay unencrypted 
 - You need to start over as it will take those incremental backups that are unencrypted, merge it into the full backup, which is unencrypted, and keep it unencrypted 
 - It will stay unencrypted till you do another full backup 
