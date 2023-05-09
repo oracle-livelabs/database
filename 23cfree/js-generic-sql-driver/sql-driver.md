@@ -502,10 +502,10 @@ The previous tasks in this lab focused on _reading_ from the database. In this p
 - [Server-Side JavaScript API Documentation](https://oracle-samples.github.io/mle-modules/)
 - [node-oracledb Documentation](https://oracle.github.io/node-oracledb/)
 - Chapter 6 in [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/calling-plsql-and-sql-from-mle-js-code.html#GUID-69CF9858-66D7-45B6-ACAF-F08B059CF4F6) is dedicated to interacting with the database
-- [DBMS_APPLICATION_INFO reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/arpls/DBMS_APPLICATION_INFO.html#GUID-14484F86-44F2-4B34-B34E-0C873D323EAD)
+- [`DBMS_APPLICATION_INFO` reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/arpls/DBMS_APPLICATION_INFO.html#GUID-14484F86-44F2-4B34-B34E-0C873D323EAD)
 
 ## Acknowledgements
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 02-MAY-2023
+- **Last Updated By/Date** - Martin Bach 09-MAY-2023

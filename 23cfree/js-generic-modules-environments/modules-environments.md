@@ -171,6 +171,8 @@ In addition, Data Guard replication ensures that the exact same code is present 
 
     ![Database Actions module editor](images/sdw-mle-module-editor.jpg)
 
+    A short message should indicate that the module was indeed saved in the database.
+
 ## Task 3: Perform name resolution using MLE environments
 
 1. Reference existing modules
@@ -317,30 +319,30 @@ A number of dictionary views allow you to see which modules are present in your 
         7         return myObject;
         8     }
         9     const kvPairs = inputString.split(";");
-        10     kvPairs.forEach( pair => {
-        11         const tuple = pair.split("=");
-        12         if ( tuple.length === 1 ) {
-        13             tuple[1] = false;
-        14         } else if ( tuple.length != 2 ) {
-        15             throw "parse error: you need to use exactly one '=' between " +
-        16                   "key and value and not use '=' in either key or value";
-        17         }
-        18         myObject[tuple[0]] = tuple[1];
-        19     });
-        20     return myObject;
-        21 }
-        22 /**
-        23  * convert a JavaScript object to a string
-        24  * @param {object} inputObject - the object to transform to a string
-        25  * @returns {string}
-        26  */
-        27 function obj2String(inputObject) {
-        28     if ( typeof inputObject != 'object' ) {
-        29         throw "inputObject isn't an object";
-        30     }
-        31     return JSON.stringify(inputObject);
-        32 }
-        33 export { string2obj, obj2String }
+       10     kvPairs.forEach( pair => {
+       11         const tuple = pair.split("=");
+       12         if ( tuple.length === 1 ) {
+       13             tuple[1] = false;
+       14         } else if ( tuple.length != 2 ) {
+       15             throw "parse error: you need to use exactly one '=' between " +
+       16                   "key and value and not use '=' in either key or value";
+       17         }
+       18         myObject[tuple[0]] = tuple[1];
+       19     });
+       20     return myObject;
+       21 }
+       22 /**
+       23  * convert a JavaScript object to a string
+       24  * @param {object} inputObject - the object to transform to a string
+       25  * @returns {string}
+       26  */
+       27 function obj2String(inputObject) {
+       28     if ( typeof inputObject != 'object' ) {
+       29         throw "inputObject isn't an object";
+       30     }
+       31     return JSON.stringify(inputObject);
+       32 }
+       33 export { string2obj, obj2String }
     ```
 
 2. View information about modules in your schema
@@ -369,6 +371,7 @@ A number of dictionary views allow you to see which modules are present in your 
     BUSINESS_LOGIC                           JAVASCRIPT
     HELPER_MODULE_BFILE                      JAVASCRIPT
     HELPER_MODULE_INLINE                     JAVASCRIPT
+    HELPER_MODULE_ORDS                       JAVASCRIPT
     VALIDATOR                                JAVASCRIPT
     ```
 
@@ -431,4 +434,4 @@ A number of dictionary views allow you to see which modules are present in your 
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 02-MAY-2023
+- **Last Updated By/Date** - Martin Bach 09-MAY-2023

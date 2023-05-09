@@ -57,50 +57,50 @@ Actions include printing the value of a single variable (`watch` point) or takin
 
     LINE TEXT
     ---- ----------------------------------------------------------------------------
-    1    import { string2obj } from 'helpers';
-    2
-    3    export function processOrder(orderData) {
-    4
-    5      const orderDataJSON = string2obj(orderData);
-    6      const result = session.execute(`
-    7         insert into orders (
-    8             order_id,
-    9             order_date,
-    10             order_mode,
-    11             customer_id,
-    12             order_status,
-    13             order_total,
-    14             sales_rep_id,
-    15             promotion_id
-    16         )
-    17         select
-    18             jt.*
-    19         from
-    20             json_table(:orderDataJSON, '$' columns
-    21                 order_id             path '$.order_id',
-    22                 order_date timestamp path '$.order_date',
-    23                 order_mode           path '$.order_mode',
-    24                 customer_id          path '$.customer_id',
-    25                 order_status         path '$.order_status',
-    26                 order_total          path '$.order_total',
-    27                 sales_rep_id         path '$.sales_rep_id',
-    28                 promotion_id         path '$.promotion_id'
-    29         ) jt`,
-    30         {
-    31             orderDataJSON: {
-    32                 val: orderDataJSON,
-    33                 type: oracledb.DB_TYPE_JSON
-    34             }
-    35         }
-    36     );
-    37
-    38     if ( result.rowsAffected === 1 ) {
-    39         return true;
-    40     } else {
-    41         return false;
-    42     }
-    43 }
-
+       1 import { string2obj } from 'helpers';
+       2
+       3 export function processOrder(orderData) {
+       4
+       5   const orderDataJSON = string2obj(orderData);
+       6   const result = session.execute(`
+       7      insert into orders (
+       8          order_id,
+       9          order_date,
+      10          order_mode,
+      11          customer_id,
+      12          order_status,
+      13          order_total,
+      14          sales_rep_id,
+      15          promotion_id
+      16      )
+      17      select
+      18          jt.*
+      19      from
+      20          json_table(:orderDataJSON, '$' columns
+      21              order_id             path '$.order_id',
+      22              order_date timestamp path '$.order_date',
+      23              order_mode           path '$.order_mode',
+      24              customer_id          path '$.customer_id',
+      25              order_status         path '$.order_status',
+      26              order_total          path '$.order_total',
+      27              sales_rep_id         path '$.sales_rep_id',
+      28              promotion_id         path '$.promotion_id'
+      29      ) jt`,
+      30      {
+      31          orderDataJSON: {
+      32              val: orderDataJSON,
+      33              type: oracledb.DB_TYPE_JSON
+      34          }
+      35      }
+      36  );
+      37
+      38  if ( result.rowsAffected === 1 ) {
+      39      return true;
+      40  } else {
+      41      return false;
+      42  }
+      43 }
+  
     43 rows selected.
     ```
 
@@ -294,11 +294,15 @@ Database Actions supports debugging with a nice, graphical user interface. Start
 
     ![Prepare to create a new MLE Environment](images/sdw-create-mle-env.jpg)
 
-    From the wizard's left hand side, listing all available modules, add both `BUSINESS_LOGIC` and `HELPER_MODULE_INLINE` to the list of imported modules by highlighting them, followed by a click on the `>` arrow. Complete the wizard as per the screenshot, changing the properties highlighted by the red text boxes.
+    From the wizard's left hand side, listing all available modules, add both `BUSINESS_LOGIC` and `HELPER_MODULE_INLINE` to the list of imported modules by highlighting them, followed by a click on the `>` arrow. 
 
     ![Create the businessLogic MLE Environment using the Wizard](images/sdw-create-mle-env-wizard.jpg)
 
-    Click on the Create button to persist the environment in the database.
+    Complete the wizard as per the screenshot, changing the properties highlighted by the red text boxes.
+
+    ![Create the businessLogic MLE Environment using the Wizard](images/sdw-create-mle-env-wizard2.jpg)
+
+    Click on the "Create" button to persist the environment in the database.
 
 2. Create a JavaScript snippet
 
@@ -327,7 +331,7 @@ Database Actions supports debugging with a nice, graphical user interface. Start
 
     Clicking on the New Debug Specification button opens the wizard interface. Change the name to `hol23c_debug_spec` in the top left corner. Optionally select `BUSINESS_LOGIC` from the Module drop down to correlate the debug specification with the module's code.
 
-    Paste the following debug specification used earlier into the left panel as shown in the screenshot:
+    Paste the following debug specification into the left panel as shown in the screenshot:
 
     ```json
     <copy>
@@ -591,7 +595,7 @@ In an ideal world post-execution debugging should be simple to enable without ha
     declare
         l_order_as_string varchar2(512);
     begin
-        l_order_as_string := 'order_id=1;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
+        l_order_as_string := 'order_id=10;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
         business_logic_pkg.process_order(l_order_as_string, null);
     exception
         when others then
@@ -620,7 +624,7 @@ In an ideal world post-execution debugging should be simple to enable without ha
     declare
         l_order_as_string varchar2(512);
     begin
-        l_order_as_string := 'order_id=1;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
+        l_order_as_string := 'order_id=11;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
         business_logic_pkg.process_order(l_order_as_string, 1);
     exception
         when others then
@@ -653,89 +657,13 @@ In an ideal world post-execution debugging should be simple to enable without ha
         join debug_runs r
         on (md.id = r.id)
     where
-        r.id = 1
+        r.id = (select max(id) from debug_runs);
     </copy>
     ```
 
     The query produces the following output:
 
-    ```
-    SQL> select
-      2          json_serialize(md.debug_spec pretty) debug_spec,
-      3          json_serialize(dbms_mle.parse_debug_output(debug_info) pretty) debug_info,
-      4          (r.run_end - r.run_start) duration
-      5      from
-      6          debug_metadata md
-      7          join debug_runs r
-      8          on (md.id = r.id)
-      9      where
-      10*         r.id = 1
-
-    DEBUG_SPEC                               DEBUG_INFO                                         DURATION
-    ---------------------------------------- -------------------------------------------------- -----------------------------------
-    {                                        [                                                  +000000000 00:00:00.042830
-    "version" : "1.0",                       [
-    "debugpoints" :                            {
-    [                                            "at" :
-        {                                          {
-        "at" :                                     "name" : "EMILY.BUSINESS_LOGIC",
-        {                                          "line" : 6
-            "name" : "BUSINESS_LOGIC",             },
-            "line" : 6                             "values" :
-        },                                       {
-        "actions" :                                "orderDataJSON" :
-        [                                          {
-            {                                          "customer_id" : "1",
-            "type" : "watch",                        "order_date" : "2023-04-24T10:27:52",
-            "id" : "orderDataJSON"                   "order_id" : "1",
-            }                                          "order_mode" : "theMode",
-        ]                                            "order_status" : "2",
-        },                                             "order_total" : "42",
-        {                                              "promotion_id" : "1",
-        "at" :                                       "sales_rep_id" : "1"
-        {                                          }
-            "name" : "BUSINESS_LOGIC",             }
-            "line" : 38                          }
-        },                                   ],
-        "actions" :                          [
-        [                                      {
-            {                                      "at" :
-            "type" : "snapshot"                  {
-            }                                        "name" : "EMILY.BUSINESS_LOGIC",
-        ]                                          "line" : 38
-        }                                          },
-    ]                                            "values" :
-    }                                              {
-                                                    "result" :
-                                                    {
-                                                    "rowsAffected" : 1
-                                                    },
-                                                    "this" :
-                                                    {
-                                                    },
-                                                    "orderData" : "order_id=1;order_date=2023-
-                                            04-24T10:27:52;order_mode=theMode;customer_id=1;or
-                                            der_status=2;order_total=42;sales_rep_id=1;promoti
-                                            on_id=1",
-                                                    "orderDataJSON" :
-                                                    {
-                                                    "customer_id" : "1",
-                                                    "order_date" : "2023-04-24T10:27:52",
-                                                    "order_id" : "1",
-                                                    "order_mode" : "theMode",
-                                                    "order_status" : "2",
-                                                    "order_total" : "42",
-                                                    "promotion_id" : "1",
-                                                    "sales_rep_id" : "1"
-                                                    }
-                                                }
-                                                }
-                                            ]
-                                            ]
-
-
-    SQL>
-    ```
+    ![Output gathered by dynamic debugging](images/dynamic-debugging-output.jpg)
 
     Rather than displaying the JSON output on screen you can import it into any tool supporting its format and analyse it offline.
 
@@ -747,4 +675,4 @@ In an ideal world post-execution debugging should be simple to enable without ha
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 02-MAY-2023
+- **Last Updated By/Date** - Martin Bach 09-MAY-2023

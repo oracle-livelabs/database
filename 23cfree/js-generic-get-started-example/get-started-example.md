@@ -56,7 +56,7 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
 2. Once you are successfully connected to the database, switch to the pre-created Pluggable Database (PDB) `freepdb1`
 
     ```sql
-    SQL> <copy>alter session set container = freepdb1;</copy>
+    <copy>alter session set container = freepdb1;</copy>
     ```
 
 3. Create a new user in freepdb1 with the necessary privileges to create, store and run JavaScript code
@@ -86,7 +86,7 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
     Save the snippet in a file, for example `${HOME}/hol23c/setup.sql` and execute it in `sqlplus`. You should still be connected to `freebdb1` as `SYS` as per the previous step. If not, connect to `freepdb1` as `SYS`.
 
     ```sql
-    SQL> <copy>start ${HOME}/hol23c/setup.sql</copy>
+    <copy>start ${HOME}/hol23c/setup.sql</copy>
     ```
 
     Here is the output of an execution:
@@ -293,4 +293,4 @@ TRUE
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 02-MAY-2023
+- **Last Updated By/Date** - Martin Bach 09-MAY-2023
