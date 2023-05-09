@@ -73,14 +73,14 @@ become disconnected and/or timed out. In that case, restart it.
 2. Execute the following environment setup shell script in the Cloud Shell to
 set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_COMPID`
 
-  ```shell
-  <copy>
-  source ~/video-on-demand-with-nosql-database/env.sh
-  </copy>
-  ```
-![Cloud Shell](./images/cloud-shell-result.png)
+    ```shell
+    <copy>
+    source ~/video-on-demand-with-nosql-database/env.sh
+    </copy>
+    ```
+  ![Cloud Shell](./images/cloud-shell-result.png)
 
-Minimize the Cloud Shell.
+  Minimize the Cloud Shell.
 
 ## Task 3: Deploy a Container Instance
 

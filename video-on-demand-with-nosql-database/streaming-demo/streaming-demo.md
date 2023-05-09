@@ -94,28 +94,29 @@ Let us explore our API and showing some advantages of using GraphQL.
 
 With developer tools, you can know exactly what data you can request from your API without leaving your editor, you can highlight potential issues before sending a query, and you can take advantage of improved code intelligence. GraphQL applications are easily built with powerful tools like GraphiQL or Apollo GraphQL Studio.
 
-1. In a browser window, enter [https://studio.apollographql.com/sandbox/explorer](https://studio.apollographql.com/sandbox/explorer).  When you go to the sandbox, you may initially see the error below.    This will go away once you perform step 2.
+1. In a browser window, enter [https://studio.apollographql.com/sandbox/explorer](https://studio.apollographql.com/sandbox/explorer).  When you go to the sandbox, you may initially see the error below. This will go away once you perform step 2.
 
-![sandbox-error](images/sandbox-error.png)
+  ![sandbox-error](images/sandbox-error.png)
 
 2. In the sandbox, copy/paste the following url:
-```
-<copy>https://bmbbblriml5b2c36fifpqz5ieq.apigateway.eu-paris-1.oci.customer-oci.com/
-</copy>
-```
+
+    ```
+    <copy>https://bmbbblriml5b2c36fifpqz5ieq.apigateway.eu-paris-1.oci.customer-oci.com/</copy>
+    ```
+
 3. You should see a screen that likes similar to the below image.  Click on the gear and the "Open connection settings" dialog will open.
 
-![connection-settings](images/capture-connection-settings.png)
+  ![connection-settings](images/capture-connection-settings.png)
 
-Turn the "Auto Update" feature off by moving the slider bar from ON to OFF.  Then hit Save at bottom of window.
+  Turn the "Auto Update" feature off by moving the slider bar from ON to OFF.  Then hit Save at bottom of window.
 
-![connection-settings2](images/capture-connection-settings2.png)
+  ![connection-settings2](images/capture-connection-settings2.png)
 
-This will add a new button at the top called "Refetch Schema"
+  This will add a new button at the top called "Refetch Schema"
 
-![connection-settings3](images/capture-connection-settings3.png)
+  ![connection-settings3](images/capture-connection-settings3.png)
 
-Now we are ready to play in the sandbox.
+  Now we are ready to play in the sandbox.
 
 ## Task 3: Ask for what you need, get exactly that
 
