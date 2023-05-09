@@ -50,8 +50,7 @@ Click on the Test table, which will bring up the table details screen.  Hit Dele
 
 2. On the top left, go to menu, then Developer Services and then Containers & Artifacts - Container Instances.
 
-   In the Container instance screen, click on the gateway with the name `Oracle NoSQL powers Video On-Demand applications`.
-   Click on Delete
+   In the Container instance screen, click on the container with the name `Oracle NoSQL powers Video On-Demand applications`. Under 'More actions' click on Delete.
 
    ![Delete Container Instance](./images/delete-ci.png)
 
