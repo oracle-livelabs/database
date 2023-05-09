@@ -46,14 +46,14 @@ Start with normal setup on CDB1
     - Tablespace
     - Data in the blocks
 
-3. TDE does NOT encrypt
+1. TDE does NOT encrypt
 - Block Headers
-    1. Means when you go to back it up nothing changed
-    2. If you do an incremental it won’t look at the database and say the data in the data file or tablespace changed because it got encrypted 
-    3. All it knows is the header, which has the last update scn, didn’t change, so the block didn’t change 
-    4. But the data within the block did change because it was encrypted
+    - Means when you go to back it up nothing changed
+    - If you do an incremental it won’t look at the database and say the data in the data file or tablespace changed because it got encrypted 
+    - All it knows is the header, which has the last update scn, didn’t change, so the block didn’t change 
+    - But the data within the block did change because it was encrypted
     
-4. If you only do an incremental merge then
+2. If you only do an incremental merge then
 - The data will stay unencrypted 
 - You need to start over as it will take those incremental backups that are unencrypted, merge it into the full backup, which is unencrypted, and keep it unencrypted 
 - It will stay unencrypted till you do another full backup 
