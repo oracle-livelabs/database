@@ -1,4 +1,4 @@
-# Generate meaningful JavaScript functions
+# Declare JavaScript functions
 
 ## Introduction
 
@@ -20,7 +20,7 @@ In this lab, you will:
 This lab assumes you have:
 
 - An Oracle Database 23c Free - Developer Release environment available to use
-- Created the `jstest` account as per Lab 1
+- Created the `emily` account as per Lab 1
 - Completed Lab 2 where you created a number of JavaScript modules in the database
 
 ## Task 1: Learn more about call specifications
@@ -53,7 +53,7 @@ Both options will be covered in this lab.
 Connect to `freepdb1` just as you did in the previous labs, and don't forget to substitute the dummy password with yours
 
 ```bash
-<copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
+<copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
 ```
 
 ## Task 3: Create a simple call specification referring to functions in a module
@@ -92,31 +92,37 @@ In this task you will learn how to create a call specification based on the MLE 
         7         return myObject;
         8     }
         9     const kvPairs = inputString.split(";");
-        10     kvPairs.forEach( pair => {
-        11         const tuple = pair.split("=");
-        12         if ( tuple.length === 1 ) {
-        13             tuple[1] = false;
-        14         } else if ( tuple.length != 2 ) {
-        15             throw "parse error: you need to use exactly one '=' between " +
-        16                   "key and value and not use '=' in either key or value";
-        17         }
-        18         myObject[tuple[0]] = tuple[1];
-        19     });
-        20     return myObject;
-        21 }
-        22 /**
-        23  * convert a JavaScript object to a string
-        24  * @param {object} inputObject - the object to transform to a string
-        25  * @returns {string}
-        26  */
-        27 function obj2String(inputObject) {
-        28     if ( typeof inputObject != 'object' ) {
-        29         throw "inputObject isn't an object";
-        30     }
-        31     return JSON.stringify(inputObject);
-        32 }
-        33 export { string2obj, obj2String }
+       10     kvPairs.forEach( pair => {
+       11         const tuple = pair.split("=");
+       12         if ( tuple.length === 1 ) {
+       13             tuple[1] = false;
+       14         } else if ( tuple.length != 2 ) {
+       15             throw "parse error: you need to use exactly one '=' between " +
+       16                   "key and value and not use '=' in either key or value";
+       17         }
+       18         myObject[tuple[0]] = tuple[1];
+       19     });
+       20     return myObject;
+       21 }
+       22 /**
+       23  * convert a JavaScript object to a string
+       24  * @param {object} inputObject - the object to transform to a string
+       25  * @returns {string}
+       26  */
+       27 function obj2String(inputObject) {
+       28     if ( typeof inputObject != 'object' ) {
+       29         throw "inputObject isn't an object";
+       30     }
+       31     return JSON.stringify(inputObject);
+       32 }
+       33 export { string2obj, obj2String }
     ```
+
+    You can see in line 33 that both functions declared in the module are exported.
+
+    If you prefer a graphical user interface log into Database Actions and navigate to MLE JS from the Launchpad. Right-click on `HELPER_MODULE_INLINE` and select Edit from the context menu. This brings up the source code for the module:
+
+    ![Source code for HELPER_MODULE_INLINE in Database Actions](images/sdw-source-code.jpg)
 
 2. Create call specification for `helper_module_inline`
 
@@ -149,6 +155,16 @@ In this task you will learn how to create a call specification based on the MLE 
     ```
 
     Since `helper_module_inline` does not import functionality from any other module an `ENV` clause is not necessary.
+
+    You can of course create call specifications using Database Actions as well. Whilst still using the MLE JS editor, right-click on `HELPER_MODULE_BFILE` and choose `create call specification` as shown in this screenshot:
+
+    ![Create a call specification for HELPER_MODULE_BFILE in Database Actions](images/sdw-simple-call-spec.jpg)
+
+    Enter the details about your call specification in the wizard using the following screenshot as your reference. Change the defaults in the highlighted input fields.
+
+    ![Create a call specification for HELPER_MODULE_BFILE in Database Actions-Details](images/sdw-simple-call-spec-details.jpg)
+
+    Experiment with the wizard for a bit, you can double-click the function parameters (inputString) and rename them if you like. It is possible to change the type as well should it be needed (not in this example). A click on the "Create" button closes the wizard and creates the call specification.
 
 3. Invoke the JavaScript code
 
@@ -260,6 +276,12 @@ Before you can create a call specification for `processOrder()` you must ensure 
     /
     </copy>
     ```
+
+    The same can be achieved in Database Actions. Using the MLE JS view, right-click on `BUSINESS_LOGIC` as you did before with the helper modules. Call specifications for `processOrder()` require knowledge about the environment name. You can set this as shown in this screenshot:
+
+    ![Create a call specification for BUSINESS_LOG in Database Actions](images/sdw-call-spec-env-details.jpg)
+
+    Make sure to assign `BUSINESS_MODULE_ENV` as the Env. Name in the top right corner of the wizard. Click on "Create" to close the wizard and persist the call specification.
 
 3. Invoke the JavaScript code
 
@@ -455,7 +477,7 @@ The data dictionary has been enhanced in Oracle Database 23c Free-Developer Rele
 
 2. Understand the query output
 
-    The following is an example of the output generated by the previous query:
+    The following is an example of the output generated by the previous query, you may have additional rows returned.
 
     ```
     OBJECT_NAME          PROCEDURE_NAME       MODULE_NAME          ENV_NAME
@@ -484,4 +506,4 @@ The data dictionary has been enhanced in Oracle Database 23c Free-Developer Rele
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 02-MAY-2023
+- **Last Updated By/Date** - Martin Bach 09-MAY-2023

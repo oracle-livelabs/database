@@ -29,14 +29,14 @@ In this lab, you will:
 This lab assumes you have:
 
 - An Oracle Database 23c Free - Developer Release environment available to use
-- Created the `jstest` account as per Lab 1
+- Created the `emily` account as per Lab 1
 
 ## Task 1: Create a database session
 
 Connect to the pre-created Pluggable Database (PDB) `freepdb1` using the same credentials you supplied in Lab 1
 
 ```bash
-<copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
+<copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
 ```
 
 ## Task 2: Understand the Simple Oracle Document Access model

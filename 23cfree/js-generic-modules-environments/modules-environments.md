@@ -1,4 +1,4 @@
-# JavaScript Modules and Environments
+# Create JavaScript Modules and Environments
 
 ## Introduction
 
@@ -20,14 +20,14 @@ In this lab, you will:
 This lab assumes you have:
 
 - An Oracle Database 23c Free - Developer Release environment available to use
-- Created the `jstest` account as per Lab 1
+- Created the `emily` account as per Lab 1
 
 ## Task 1: Create a database session
 
 Connect to the pre-created Pluggable Database (PDB) `freepdb1` using the same credentials you supplied in Lab 1.
 
 ```bash
-<copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
+<copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
 ```
 
 ## Task 2: Create JavaScript modules
@@ -141,7 +141,7 @@ In addition, Data Guard replication ensures that the exact same code is present 
     With the file in place you can create the module in the next step. Create a database session first ...
 
     ```bash
-    <copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
+    <copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
     ```
 
     ... before you create the module
@@ -154,6 +154,24 @@ In addition, Data Guard replication ensures that the exact same code is present 
     /
     </copy>
     ```
+
+3. Create a JavaScript module with Database Actions
+
+    Database Actions is a web-based interface that uses Oracle REST Data Services (ORDS) to provide development, data studio, administration and monitoring features for Oracle Database. You REST-enabled your schema in the first lab by calling `ords.enable_schema`. With Database Actions you can create JavaScript modules using a browser interface.
+
+    Start by pointing your browser to TODO and log in to database actions using the password you assigned to the `emily` user.
+
+    ![Database Actions login screen](images/sdw-login.jpg)
+
+    Once connected, navigate to the MLE JS tile
+
+    ![Database Actions main screen](images/sdw-main-page.jpg)
+
+    Once you opened the editor, paste the JavaScript portion of the code you used for `helper_module_inline` into the editor pane, assign a name to the module (`HELPER_MODULE_ORDS`) and use the disk icon to persist the module in the database.
+
+    ![Database Actions module editor](images/sdw-mle-module-editor.jpg)
+
+    A short message should indicate that the module was indeed saved in the database.
 
 ## Task 3: Perform name resolution using MLE environments
 
@@ -251,7 +269,21 @@ In addition, Data Guard replication ensures that the exact same code is present 
     </copy>
     ```
 
-    The environment will play a crucial role when exposing JavaScript code to SQL and PL/SQL, a topic that will be covered in the next lab (Lab 3).
+    Database Actions supports working with environments as well, although they are required for proper rendering of dependencies and tab/code completion. From the drop down on the left navigation pane select "Environments" to obtain a list of environments. You should see the `BUSINESS_MODULE_ENV` listed. Right-click the environment's name and choose `Edit` to review the environment definition.
+
+    ![Database Actions MLE Environment editor](images/sdw-mle-env-editor.jpg)
+
+    The environment will play a crucial role when exposing JavaScript code to SQL and PL/SQL, a topic that will be covered in the next lab (Lab 3). It also helps you understand dependencies as displayed by Database Actions as they allow you to view these.
+
+    Right-click on the `BUSINES_LOGIC` module in the tree view on the left-hand side and select "Dependencies Diagram". The following diagram is shown, highlighting `BUSINESS_LOGIC`'s dependency on `HELPER_FUNCTIONS_INLINE`.
+
+    ![Database Actions MLE Environment editor](images/sdw-mle-module-dependencies.jpg)
+
+    In case you don't see the connection between `HELPER_MODULE_INLINE` and `BUSINESS_LOGIC` as per the print screen you need to associate `BUSINESS_LOGIC_ENV` with the module. To do so, close the Dependency Diagram and right-click on the `BUSINESS_LOGIC` module. Select `Edit` and associate the `BUSINESS_MODULE_ENV` environment with the module. Should the drop-down be empty click on the reload icon next to it and try again.
+
+    ![Database Actions MLE Environment editor](images/sdw-mle-associate-env-with-module.jpg)
+
+    > **Note:** it is possible to reference a single module in multiple environments, there is no strict 1:1 mapping between environment and module.
 
 ## Task 4: View dictionary information about modules and environments
 
@@ -287,30 +319,30 @@ A number of dictionary views allow you to see which modules are present in your 
         7         return myObject;
         8     }
         9     const kvPairs = inputString.split(";");
-        10     kvPairs.forEach( pair => {
-        11         const tuple = pair.split("=");
-        12         if ( tuple.length === 1 ) {
-        13             tuple[1] = false;
-        14         } else if ( tuple.length != 2 ) {
-        15             throw "parse error: you need to use exactly one '=' between " +
-        16                   "key and value and not use '=' in either key or value";
-        17         }
-        18         myObject[tuple[0]] = tuple[1];
-        19     });
-        20     return myObject;
-        21 }
-        22 /**
-        23  * convert a JavaScript object to a string
-        24  * @param {object} inputObject - the object to transform to a string
-        25  * @returns {string}
-        26  */
-        27 function obj2String(inputObject) {
-        28     if ( typeof inputObject != 'object' ) {
-        29         throw "inputObject isn't an object";
-        30     }
-        31     return JSON.stringify(inputObject);
-        32 }
-        33 export { string2obj, obj2String }
+       10     kvPairs.forEach( pair => {
+       11         const tuple = pair.split("=");
+       12         if ( tuple.length === 1 ) {
+       13             tuple[1] = false;
+       14         } else if ( tuple.length != 2 ) {
+       15             throw "parse error: you need to use exactly one '=' between " +
+       16                   "key and value and not use '=' in either key or value";
+       17         }
+       18         myObject[tuple[0]] = tuple[1];
+       19     });
+       20     return myObject;
+       21 }
+       22 /**
+       23  * convert a JavaScript object to a string
+       24  * @param {object} inputObject - the object to transform to a string
+       25  * @returns {string}
+       26  */
+       27 function obj2String(inputObject) {
+       28     if ( typeof inputObject != 'object' ) {
+       29         throw "inputObject isn't an object";
+       30     }
+       31     return JSON.stringify(inputObject);
+       32 }
+       33 export { string2obj, obj2String }
     ```
 
 2. View information about modules in your schema
@@ -339,6 +371,7 @@ A number of dictionary views allow you to see which modules are present in your 
     BUSINESS_LOGIC                           JAVASCRIPT
     HELPER_MODULE_BFILE                      JAVASCRIPT
     HELPER_MODULE_INLINE                     JAVASCRIPT
+    HELPER_MODULE_ORDS                       JAVASCRIPT
     VALIDATOR                                JAVASCRIPT
     ```
 
@@ -401,4 +434,4 @@ A number of dictionary views allow you to see which modules are present in your 
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 02-MAY-2023
+- **Last Updated By/Date** - Martin Bach 09-MAY-2023

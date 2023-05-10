@@ -56,29 +56,29 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
 2. Once you are successfully connected to the database, switch to the pre-created Pluggable Database (PDB) `freepdb1`
 
     ```sql
-    SQL> <copy>alter session set container = freepdb1;</copy>
+    <copy>alter session set container = freepdb1;</copy>
     ```
 
 3. Create a new user in freepdb1 with the necessary privileges to create, store and run JavaScript code
 
-    Next you need to prepare the creation of the developer account. The instructions in the following snippet create a new account, named `jstest`. It will be used to store JavaScript modules in the database.
+    Next you need to prepare the creation of the developer account. The instructions in the following snippet create a new account, named `emily`. It will be used to store JavaScript modules in the database.
 
     ```sql
     <copy>set echo on
-    drop user if exists jstest cascade;
+    drop user if exists emily cascade;
 
-    create user jstest identified by &secretpassword
+    create user emily identified by &secretpassword
     default tablespace users quota unlimited on users;
 
-    grant create session to jstest;
-    grant db_developer_role to jstest;
-    grant execute on javascript to jstest;
+    grant create session to emily;
+    grant db_developer_role to emily;
+    grant execute on javascript to emily;
 
     host mkdir /home/oracle/hol23c 2> /dev/null || echo "directory exists"
 
     drop directory if exists javascript_src_dir;
     create directory javascript_src_dir as '/home/oracle/hol23c';
-    grant read, write on directory javascript_src_dir to jstest;
+    grant read, write on directory javascript_src_dir to emily;
 
     exit</copy>
     ```
@@ -86,34 +86,34 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
     Save the snippet in a file, for example `${HOME}/hol23c/setup.sql` and execute it in `sqlplus`. You should still be connected to `freebdb1` as `SYS` as per the previous step. If not, connect to `freepdb1` as `SYS`.
 
     ```sql
-    SQL> <copy>start ${HOME}/hol23c/setup.sql</copy>
+    <copy>start ${HOME}/hol23c/setup.sql</copy>
     ```
 
     Here is the output of an execution:
 
     ```
     SQL> @hol23c/setup
-    SQL> drop user if exists jstest cascade;
+    SQL> drop user if exists emily cascade;
 
     User dropped.
 
-    SQL> create user jstest identified by &secretpassword
+    SQL> create user emily identified by &secretpassword
       2  default tablespace users quota unlimited on users;
     Enter value for secretpassword: yoursupersecretpasswordhere
-    old   1: create user jstest identified by &secretpassword
-    new   1: create user jstest identified by yoursupersecretpasswordhere
+    old   1: create user emily identified by &secretpassword
+    new   1: create user emily identified by yoursupersecretpasswordhere
 
     User created.
 
-    SQL> grant create session to jstest;
+    SQL> grant create session to emily;
 
     Grant succeeded.
 
-    SQL> grant db_developer_role to jstest;
+    SQL> grant db_developer_role to emily;
 
     Grant succeeded.
 
-    SQL> grant execute on javascript to jstest;
+    SQL> grant execute on javascript to emily;
 
     Grant succeeded.
 
@@ -128,7 +128,7 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
 
     Directory created.
 
-    SQL> grant read, write on directory javascript_src_dir to jstest;
+    SQL> grant read, write on directory javascript_src_dir to emily;
 
     Grant succeeded.
 
@@ -139,10 +139,10 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
 
 4. ORDS-enable the new schema
 
-    With the new account created you need to enable it for use with Oracle Restful Data Service (ORDS). You will point Database Actions against the schema in later modules. Connect to the database as the `jstest` user:
+    With the new account created you need to enable it for use with Oracle Restful Data Service (ORDS). You will point Database Actions against the schema in later modules. Connect to the database as the `emily` user:
 
     ```bash
-    <copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
+    <copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
     ```
 
     REST-enable the schema by calling `ords.enable_schema()`
@@ -185,10 +185,10 @@ curl -Lo /home/oracle/hol23c/validator.min.js 'https://objectstorage.us-ashburn-
 
 JavaScript in Oracle Database 23c Free - Developer Release allows you to load JavaScript modules using the `BFILE` clause, specifying a directory object and file name. You prepared for the `create mle module` command in the previous step, now it's time to execute it:
 
-1. Connect to the database as the `jstest` user:
+1. Connect to the database as the `emily` user:
 
     ```bash
-    <copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
+    <copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
     ```
 
 2. With the session established, create the module as follows:
@@ -293,4 +293,4 @@ TRUE
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 02-MAY-2023
+- **Last Updated By/Date** - Martin Bach 09-MAY-2023

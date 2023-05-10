@@ -1,4 +1,4 @@
-# Post Execution Debugging
+# Get insights into your code's behaviour using Post Execution Debugging
 
 ## Introduction
 
@@ -6,7 +6,7 @@ Oracle's JavaScript Engine allows developers to debug their code by conveniently
 
 The post-execution debug option enables developers to instrument their code by specifying debugpoints in the code. Debugpoints allow you to log program state conditionally or unconditionally, including values of individual variables as well as execution snapshots. Debugpoints are specified as JSON documents separate from the application code. No change to the application is necessary for debug points to fire.
 
-When activated, debug information is collected according to the debug specification and can be fetched for later analysis by a wide range of tools thanks to its standard format.
+When activated, debug information is collected according to the debug specification and can be fetched for later analysis by a wide range of tools thanks to its standard Java Profiler Heap Dump version 1.0.1 as defined in JDK6 format.
 
 Estimated Lab Time: 15 minutes
 
@@ -25,7 +25,7 @@ In this lab, you will:
 This lab assumes you have:
 
 - An Oracle Database 23c Free - Developer Release environment available to use
-- Created the `jstest` account as per Lab 1
+- Created the `emily` account as per Lab 1
 - Completed Lab 2 where you created a number of JavaScript modules in the database
 
 ## Task 1: Create a database session
@@ -33,7 +33,7 @@ This lab assumes you have:
 Connect to the pre-created Pluggable Database (PDB) `freepdb1` using the same credentials you supplied in Lab 1.
 
 ```bash
-<copy>sqlplus jstest/yourNewPasswordGoesHere@localhost/freepdb1</copy>
+<copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
 ```
 
 ## Task 2: Prepare the debug specification
@@ -48,7 +48,7 @@ Each debugpoint in turn defines
 - The location in the module's code where to fire
 - Which action to take, optionally providing a condition for the probe to fire
 
-Actions include printing the value of a single variable (`watch` point) or taking a `snapshot` of all variables in the current scope.
+Actions include printing the value of a single variable (`watch` point) or taking a `snapshot` of all variables in the current scope. More information about the structure of the debugscpec can be found in JavaScript Developers Guide, chapter 8.
 
 1. Review the `business_logic` module's source code
 
@@ -57,50 +57,50 @@ Actions include printing the value of a single variable (`watch` point) or takin
 
     LINE TEXT
     ---- ----------------------------------------------------------------------------
-    1    import { string2obj } from 'helpers';
-    2
-    3    export function processOrder(orderData) {
-    4
-    5      const orderDataJSON = string2obj(orderData);
-    6      const result = session.execute(`
-    7         insert into orders (
-    8             order_id,
-    9             order_date,
-    10             order_mode,
-    11             customer_id,
-    12             order_status,
-    13             order_total,
-    14             sales_rep_id,
-    15             promotion_id
-    16         )
-    17         select
-    18             jt.*
-    19         from
-    20             json_table(:orderDataJSON, '$' columns
-    21                 order_id             path '$.order_id',
-    22                 order_date timestamp path '$.order_date',
-    23                 order_mode           path '$.order_mode',
-    24                 customer_id          path '$.customer_id',
-    25                 order_status         path '$.order_status',
-    26                 order_total          path '$.order_total',
-    27                 sales_rep_id         path '$.sales_rep_id',
-    28                 promotion_id         path '$.promotion_id'
-    29         ) jt`,
-    30         {
-    31             orderDataJSON: {
-    32                 val: orderDataJSON,
-    33                 type: oracledb.DB_TYPE_JSON
-    34             }
-    35         }
-    36     );
-    37
-    38     if ( result.rowsAffected === 1 ) {
-    39         return true;
-    40     } else {
-    41         return false;
-    42     }
-    43 }
-
+       1 import { string2obj } from 'helpers';
+       2
+       3 export function processOrder(orderData) {
+       4
+       5   const orderDataJSON = string2obj(orderData);
+       6   const result = session.execute(`
+       7      insert into orders (
+       8          order_id,
+       9          order_date,
+      10          order_mode,
+      11          customer_id,
+      12          order_status,
+      13          order_total,
+      14          sales_rep_id,
+      15          promotion_id
+      16      )
+      17      select
+      18          jt.*
+      19      from
+      20          json_table(:orderDataJSON, '$' columns
+      21              order_id             path '$.order_id',
+      22              order_date timestamp path '$.order_date',
+      23              order_mode           path '$.order_mode',
+      24              customer_id          path '$.customer_id',
+      25              order_status         path '$.order_status',
+      26              order_total          path '$.order_total',
+      27              sales_rep_id         path '$.sales_rep_id',
+      28              promotion_id         path '$.promotion_id'
+      29      ) jt`,
+      30      {
+      31          orderDataJSON: {
+      32              val: orderDataJSON,
+      33              type: oracledb.DB_TYPE_JSON
+      34          }
+      35      }
+      36  );
+      37
+      38  if ( result.rowsAffected === 1 ) {
+      39      return true;
+      40  } else {
+      41      return false;
+      42  }
+      43 }
+  
     43 rows selected.
     ```
 
@@ -229,7 +229,7 @@ When executing the above code snippet the following information is printed on sc
   [
     {
       "at": {
-        "name": "JSTEST.BUSINESS_LOGIC",
+        "name": "EMILY.BUSINESS_LOGIC",
         "line": 6
       },
       "values": {
@@ -249,7 +249,7 @@ When executing the above code snippet the following information is printed on sc
   [
     {
       "at": {
-        "name": "JSTEST.BUSINESS_LOGIC",
+        "name": "EMILY.BUSINESS_LOGIC",
         "line": 38
       },
       "values": {
@@ -284,17 +284,117 @@ You can see that both probes fired:
     - `orderData`
     - `orderDataJSON`
 
-## Task 5: Prepare for dynamic debugging
+## Task 5: Use Database Actions to perform post-execution debugging
 
-In an ideal scenario post-execution debugging should be simple to enable without having to change any code, maybe even by a "super user" application account. Otherwise, support will find it very hard to troubleshoot problems reported by the user base. Rather than hard-coding calls to `dbms_mle.enable_debugging()` and `dbms_mle.disable_debugging()`, in this task you will learn how to run business logic with debugging enabled on demand.
+Database Actions supports debugging with a nice, graphical user interface. Start by logging into Database Actions using the EMILY account. Once logged in, navigate to "MLE JS". Rather than using the Editor panel, this time you need to switch to Snippets.
+
+1. Create a JavaScript environment
+
+    On the left-hand side of the screen select "Environments" from the drop down list. Next, click on the "..." icon and select "Create Environment" to open the "Create MLE Environment" Wizard.
+
+    ![Prepare to create a new MLE Environment](images/sdw-create-mle-env.jpg)
+
+    From the wizard's left hand side, listing all available modules, add both `BUSINESS_LOGIC` and `HELPER_MODULE_INLINE` to the list of imported modules by highlighting them, followed by a click on the `>` arrow. 
+
+    ![Create the businessLogic MLE Environment using the Wizard](images/sdw-create-mle-env-wizard.jpg)
+
+    Complete the wizard as per the screenshot, changing the properties highlighted by the red text boxes.
+
+    ![Create the businessLogic MLE Environment using the Wizard](images/sdw-create-mle-env-wizard2.jpg)
+
+    Click on the "Create" button to persist the environment in the database.
+
+2. Create a JavaScript snippet
+
+    Next you create a JavaScript code snippet invoking `processOrder()` from the `BUSINESS_LOGIC` module. Snippets require the use of Dynamic JavaScript imports which is why you are seeing an asynchronous function. Copy and paste the following code into the Snippet editor:
+
+    ```js
+    <copy>
+    (async () => {
+
+        const { processOrder } = await import ("businessLogic");
+
+        const orderDataString = 
+            "order_id=3;order_date=2023-04-24T10:27:52;order_mode=theMode" +
+            ";customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1";
+
+        processOrder(orderDataString);
+    })();
+    </copy>
+    ```
+
+3. Create a Debug Specification
+
+    In the next step you must associate the newly created environment with the snippet. From the environment drop-down at the top of the window, select `BUSINESS_LOGIC_ENV`. With the environment associated you can create a new debug spec as shown in the screenshot.
+
+    ![Create a debug spec in Database Action](images/sdw-create-debug-spec.jpg)
+
+    Clicking on the New Debug Specification button opens the wizard interface. Change the name to `hol23c_debug_spec` in the top left corner. Optionally select `BUSINESS_LOGIC` from the Module drop down to correlate the debug specification with the module's code.
+
+    Paste the following debug specification into the left panel as shown in the screenshot:
+
+    ```json
+    <copy>
+    {
+        "version": "1.0",
+        "debugpoints": [
+            {
+                "at": {
+                    "name": "BUSINESS_LOGIC",
+                    "line": 6
+                },
+                "actions": [
+                    {
+                        "type": "watch",
+                        "id": "orderDataJSON"
+                    }
+                ]
+            },
+            {
+                "at": {
+                    "name": "BUSINESS_LOGIC",
+                    "line": 38
+                },
+                "actions": [
+                    {
+                        "type": "watch",
+                        "id": "result"
+                    }
+                ]
+            }
+        ]
+    }
+    </copy>
+    ```
+
+    This is a screenshot of the completed wizard interface:
+
+    ![Database Actions Debug Specification Wizard](images/sdw-create-debug-spec-wizard.jpg)
+
+    Click on the "Create" button to save the debug specification.
+
+4. Run the code with debugging enabled
+
+    Back in the Snippets editor click on the "Debug Snippet" button highlighted in red in the following screenshot to run the JavaScript snippet with debugging enabled. Focus will automatically switch to the Debug Console where you can see the results of the debug run:
+
+    - The watchpoint fired in line 6 showing the value of `orderDataJSON`
+    - The second watchpoint fired as well, showing that exactly 1 row was affected by the insert statement
+
+    Clicking on little triangles expands the information provided, you can even click on the variable to see where in the code it is located.
+
+    ![Database Actions debug summary](images/sdw-debug-info.jpg)
+
+## Task 6 (optional): On-demand debugging
+
+In an ideal world post-execution debugging should be simple to enable without having to change any code, maybe even by a "super user" application account. Otherwise, support will find it very hard to troubleshoot problems reported by the user base. Rather than hard-coding calls to `dbms_mle.enable_debugging()` and `dbms_mle.disable_debugging()`, in this task you will learn how to run business logic with debugging enabled on demand.
 
 1. Create a table containing the debug specifications
 
     ```sql
     <copy>
     create table debug_metadata (
-        debug_id number generated always as identity,
-        constraint pk_debug_metadata primary key(debug_id),
+        id number generated always as identity,
+        constraint pk_debug_metadata primary key(id),
         debug_spec JSON not null,
         valid boolean not null
     );
@@ -349,10 +449,10 @@ In an ideal scenario post-execution debugging should be simple to enable without
     ```sql
     <copy>
     create table debug_runs (
-        run_id number generated always as identity,
-        constraint pk_debug_runs primary key(run_id),
-        debug_spec number not null,
-        constraint fk_spec_run foreign key (debug_spec) 
+        id number generated always as identity,
+        constraint pk_debug_runs primary key(id),
+        debug_spec_id number not null,
+        constraint fk_spec_run foreign key (debug_spec_id) 
             references debug_metadata,
         run_start timestamp,
         run_end timestamp,
@@ -370,8 +470,8 @@ In an ideal scenario post-execution debugging should be simple to enable without
     create or replace package business_logic_pkg as
 
         procedure process_order(
-            p_order_data varchar2,
-            p_debug_id debug_metadata.debug_id%type default null
+            p_order_data     varchar2,
+            p_debug_spec_id  debug_metadata.id%type default null
         );
 
     end business_logic_pkg;
@@ -393,18 +493,18 @@ In an ideal scenario post-execution debugging should be simple to enable without
         
         -- (public) wrapper function to process_order()
         procedure process_order(
-            p_order_data varchar2,
-            p_debug_id debug_metadata.debug_id%type default null
+            p_order_data     varchar2,
+            p_debug_spec_id  debug_metadata.id%type default null
         ) as
-            l_debugspec debug_metadata.debug_spec%type;
-            l_debugsink BLOB;
+            l_debugspec      debug_metadata.debug_spec%type;
+            l_debugsink      BLOB;
 
-            l_success   boolean := false;
-            l_run_start timestamp;
-            l_run_end   timestamp;
+            l_success        boolean := false;
+            l_run_start      timestamp;
+            l_run_end        timestamp;
         begin
             -- check if debugging is required
-            if p_debug_id is null then
+            if p_debug_spec_id is null then
                 -- run normally
                 dbms_output.put_line('running normally, no debug spec referenced in the call');
                 l_success := process_order_prvt(p_order_data);
@@ -422,13 +522,13 @@ In an ideal scenario post-execution debugging should be simple to enable without
                     from
                         debug_metadata
                     where
-                            debug_id = p_debug_id
+                            id = p_debug_spec_id
                         and valid;
                 exception
                     when no_data_found then
                         raise_application_error(
                             -20001, 
-                            'no such debug spec: ' || p_debug_id
+                            'cannot enable debugging, missing debug spec: ' || p_debug_spec_id
                         );
                     when others then
                         raise;
@@ -451,12 +551,12 @@ In an ideal scenario post-execution debugging should be simple to enable without
 
                 -- persist the debug information in the table
                 insert into debug_runs (
-                    debug_spec,
+                    debug_spec_id,
                     run_start,
                     run_end,
                     debug_info
                 ) values (
-                    p_debug_id,
+                    p_debug_spec_id,
                     l_run_start,
                     l_run_end,
                     l_debugsink
@@ -488,17 +588,14 @@ In an ideal scenario post-execution debugging should be simple to enable without
     </copy>
     ```
 
-## Task 6: Run code with optional debug info gathered
-
-1. Run the wrapper code with debugging disabled
+5. Run the wrapper code with debugging disabled
 
     ```sql
     <copy>
     declare
-        -- variables related to the business logic
         l_order_as_string varchar2(512);
     begin
-        l_order_as_string := 'order_id=1;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
+        l_order_as_string := 'order_id=10;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
         business_logic_pkg.process_order(l_order_as_string, null);
     exception
         when others then
@@ -518,15 +615,16 @@ In an ideal scenario post-execution debugging should be simple to enable without
     PL/SQL procedure successfully completed.
     ```
 
-2. Run the wrapper code with debugging enabled
+    The order has been successfully processed.
+
+6. Run the wrapper code with debugging enabled
 
     ```sql
     <copy>
     declare
-        -- variables related to the business logic
         l_order_as_string varchar2(512);
     begin
-        l_order_as_string := 'order_id=1;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
+        l_order_as_string := 'order_id=11;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
         business_logic_pkg.process_order(l_order_as_string, 1);
     exception
         when others then
@@ -552,65 +650,29 @@ In an ideal scenario post-execution debugging should be simple to enable without
     <copy>
     select
         json_serialize(md.debug_spec pretty) debug_spec,
-        r.run_start,
-        r.run_end
+        json_serialize(dbms_mle.parse_debug_output(debug_info) pretty) debug_info,
+        (r.run_end - r.run_start) duration
     from
         debug_metadata md
         join debug_runs r
-        on (md.debug_id = r.debug_spec)
+        on (md.id = r.id)
     where
-        r.run_id = 1
+        r.id = (select max(id) from debug_runs);
     </copy>
     ```
 
-    You will see output like this:
+    The query produces the following output:
 
-    ```
-    DEBUG_SPEC                          RUN_START                      RUN_END
-    ----------------------------------- ------------------------------ ------------------------------
-    {                                   26-APR-23 02.14.22.434468 PM   26-APR-23 02.14.22.463601 PM
-    "version" : "1.0",
-    "debugpoints" :
-    [
-        {
-        "at" :
-        {
-            "name" : "BUSINESS_LOGIC",
-            "line" : 6
-        },
-        "actions" :
-        [
-            {
-            "type" : "watch",
-            "id" : "orderDataJSON"
-            }
-        ]
-        },
-        {
-        "at" :
-        {
-            "name" : "BUSINESS_LOGIC",
-            "line" : 38
-        },
-        "actions" :
-        [
-            {
-            "type" : "snapshot"
-            }
-        ]
-        }
-    ]
-    }
-    ```
+    ![Output gathered by dynamic debugging](images/dynamic-debugging-output.jpg)
 
-    Now you can use whichever tool you like to pull the debug information from the `BLOB` column and anlyse it offline. You also have a history of debug activities including the results.
+    Rather than displaying the JSON output on screen you can import it into any tool supporting its format and analyse it offline.
 
 ## Learn More
 
-- Chapter 8 in [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/post-execution-debugging.html#GUID-100D0D45-205A-44C7-BEF6-2A3241F41BF4) describes modules and environments in detail
+- Chapter 8 in [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/post-execution-debugging.html#GUID-100D0D45-205A-44C7-BEF6-2A3241F41BF4) describes post-execution debugging in detail
 
 ## Acknowledgements
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 02-MAY-2023
+- **Last Updated By/Date** - Martin Bach 09-MAY-2023
