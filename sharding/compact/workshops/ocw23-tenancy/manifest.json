@@ -1,17 +1,17 @@
 {
-  "workshoptitle": "Boost Analytics Performance with Oracle Database In-Memory",
-  "help": "livelabs-help-db_us@oracle.com",
+  "workshoptitle": "Build an internet-scale app with a distributed database",
+  "help": "livelabs-help-license_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
-      "description": "About the In-Memory Workshop",
-      "type": "odbw",
+      "description": "Introduction",
+      "type": "ocw",
       "filename": "../../intro/intro.md"
     },
     {
       "title": "Get Started",
       "description": "Login to Oracle Cloud",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
     },
     {
       "title": "Lab 1: Prepare Setup",
@@ -31,19 +31,24 @@
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 4: Querying the In-Memory Column Store",
-      "description": "Queries on In-Memory Column Store",
-      "filename": "../../queries/queries.md"
+      "title": "Lab 4: About Eshop",
+      "description": "About Eshop",
+      "filename": "../../eshop/eshop.md"
     },
     {
-      "title": "Lab 5: Joins and Aggregation",
-      "description": "In-Memory Joins and Aggregation",
-      "filename": "../../joins-aggregations/joins-aggregations.md"
+      "title": "Lab 5: Explore Sharding Topology",
+      "description": "Exploring Sharding Topology",
+      "filename": "../../topology/topology.md"
     },
     {
-      "title": "Need Help?",
+       "title": "Lab 6: Clean up Stack and Instances",
+       "description": "Clean up ORM Stack and instances",
+       "filename": "../../cleanup/cleanup.md"
+     },
+    {
+      "title": "Oracle CloudWorld 2023 - Get Help",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+      "filename": "https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
     }
   ]
 }
