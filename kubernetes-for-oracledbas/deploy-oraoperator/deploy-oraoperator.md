@@ -17,13 +17,43 @@ Watch the video below for a quick walk through of the lab.
 
 This lab assumes you have:
 
-    An accessible Kubernetes Cluster
+* An accessible Kubernetes Cluster
 
-## Task 1: Install Cert-Manager
+## Task 1: Test Kubernetes Access
 
-## Task 2: Install Oracle Operator for Kubernetes
+```bash
+<copy>
+kubectl get all -A
+</copy>
+```
 
-## Task 3: Validate the Installations
+## Task 2: Install Cert-Manager
+
+```bash
+<copy>
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/latest/download/cert-manager.yaml
+</copy>
+```
+
+```bash
+<copy>
+kubectl get all -n cert-manager
+</copy>
+```
+
+## Task 3: Install Oracle Operator for Kubernetes
+
+```bash
+<copy>
+kubectl apply -f https://raw.githubusercontent.com/oracle/oracle-database-operator/main/oracle-database-operator.yaml
+</copy>
+```
+
+```bash
+<copy>
+kubectl get all -n oracle-database-operator-system
+</copy>
+```
 
 ## Learn More
 

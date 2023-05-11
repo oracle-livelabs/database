@@ -17,20 +17,85 @@ Watch the video below for a quick walk through of the lab.
 
 This lab assumes you have:
 
-    A Running and Healthy OraOperator
-    A provisioned Oracle ADB in OCI
+* A Running and Healthy OraOperator
+* A provisioned Oracle ADB in OCI
 
 ## Task 1: Retrieve the ADB OCID
 
-## Task 2: Create an API Key for Authentication
+```bash
+<copy>
+COMPARTMENT_OCID=$(oci iam compartment list --name K8S4DBAS | jq -r '.data[].id')
+ADB_OCID=$(oci db autonomous-database list --compartment-id $COMPARTMENT_OCID | jq -r '.data[].id')
+</copy>
+```
 
-## Task 3: Create ConfigMaps and Secrets
+## Task 2: Create Namespace
+
+```bash
+<copy>
+kubectl create namespace adb
+</copy>
+```
 
 ## Task 4: Create the Bind Manifest
 
+```bash
+<copy>
+cat > adb_bind.yaml << EOF
+apiVersion: v1
+stringData:
+  adb-admin-password: ZVVvOTRXZEcySFNzXzUtTg==
+kind: Secret
+metadata:
+  labels:
+    app.kubernetes.io/part-of: database
+  name: adb-admin-password
+  namespace: adb
+type: Opaque
+---
+apiVersion: v1
+stringData:
+  adb-instance-wallet-password: ZVVvOTRXZEcySFNzXzUtTg==
+kind: Secret
+metadata:
+  labels:
+    app.kubernetes.io/part-of: database
+  name: adb-instance-wallet-password
+  namespace: adb
+type: Opaque
+---
+apiVersion: database.oracle.com/v1alpha1
+kind: AutonomousDatabase
+metadata:
+  labels:
+    app.kubernetes.io/part-of: database
+  name: adb
+  namespace: adb
+spec:
+  details:
+    autonomousDatabaseOCID: $ADB_OCID
+    adminPassword:
+      k8sSecret:
+        name: adb-admin-password
+    wallet:
+      name: adb-tns-admin
+      password:
+        k8sSecret:
+          name: adb-instance-wallet-password
+EOF
+</copy>
+```
+
 ## Task 5: Apply the Bind Manifest
 
-## Task 6: Review Deployment and Logs
+kubectl apply -f adb.yaml
+
+## Task 6: Review Deployment and TNS_ADMIN
+
+kubectl get adb adb -n adb
+kubectl describe adb adb -n adb
+kubectl describe secrets adb-tns-admin -n adb
+
 
 ## Learn More
 

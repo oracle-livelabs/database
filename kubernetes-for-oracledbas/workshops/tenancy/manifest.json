@@ -59,22 +59,32 @@
             "filename": "../../lifecycle-sidb/lifecycle-sidb.md"
         },
         {
-            "title": "Lab 9: Observe your Databases",
-            "description": "Observe your Databases (Time Permitting)",
+            "title": "Lab 9: Lifecycle Operations (SIDB) - Patching",
+            "description": "Perform Lifecycle Operations against the SIDB",
+            "filename": "../../lifecycle-sidb/lifecycle-sidb-patching.md"
+        },
+        {
+            "title": "Lab 10: Lifecycle Operations (CDB/PDB)",
+            "description": "Perform Lifecycle Operations against a CDB/PDB",
+            "filename": "../../lifecycle-cdb/lifecycle-cdb.md"
+        },
+        {
+            "title": "Lab 11: Observe your Databases",
+            "description": "Observe your Databases",
             "filename": "../../observe-database/observe-database.md"
         },
         {
-            "title": "Lab 10: Deploy a Microservice Application",
+            "title": "Lab 12: Deploy a Microservice Application",
             "description": "Deploy a Microservice Application ",
             "filename": "../../deploy-application/deploy-application.md"
         },
         {
-            "title": "Lab 11: Clean up Infrastructure",
+            "title": "Lab 13: Clean up Infrastructure",
             "description": "Destroy the Infrastructure",
             "filename": "../../teardown-stack/teardown-stack.md"
         },
         {
-            "title": "Lab 12: Clean up OCI Tenancy",
+            "title": "Lab 14: Clean up OCI Tenancy",
             "type": "tenancy",
             "description": "Clean up Groups, Policies, and Compartment (IAM)",
             "filename": "../../teardown-iam/teardown-iam.md"
