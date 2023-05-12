@@ -9,7 +9,7 @@ Estimated Time: 2 minutes
 
 ## Task 1: Create compartment
 
-1. Log in to **OCI** and click on the **Hamburger Menu**![](images/hamburger.png) at the top left corner of the OCI console, and type **compartment** in the search box. Click on the **Compartments** in the search result
+1. Log in to **OCI** and click on the **Hamburger Menu**![OCI Menu](images/hamburger.png) at the top left corner of the OCI console, and type **compartment** in the search box. Click on the **Compartments** in the search result
 
     ![compartment](images/compartment.png)
 
@@ -20,13 +20,15 @@ Estimated Time: 2 minutes
 You may now **proceed to the next lab.**
 
 ## Acknowledgements
-* **Author**
-	* Rayes Huang, Cloud Solution Architect, OCI APAC
-	* Ryan Kuan, MySQL Cloud Engineer, MySQL APAC
 
-* **Contributors**
+Author
 
-	* Perside Foster, MySQL Solution Engineering
-	* Howie Owi, OCI Solution Specialist, OCI APAC
+* Rayes Huang, Cloud Solution Architect, OCI APAC
+* Ryan Kuan, MySQL Cloud Engineer, MySQL APAC
 
-* **Last Updated By/Date** - Ryan Kuan, March 2022
+Contributors
+
+* Perside Foster, MySQL Solution Engineering
+* Howie Owi, OCI Solution Specialist, OCI APAC
+
+Last Updated By/Date - Ryan Kuan, March 2023

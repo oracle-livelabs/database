@@ -32,23 +32,24 @@ The following task is *optional* if a suitable VCN is already present.
 
 1. In the OCI Console Menu, go to **Networking** > **Virtual Cloud Networks**.
 
-  ![](images/vcn-location.png)
+  ![Virtual Cloud Networks navigation](images/vcn-location.png)
 
 2. Pick a compartment on the left-hand side **Compartment** list. You need to have the necessary permissions for the compartment.
 
-  ![](images/create-vcn-in-compartment.png)
+  ![Pick a compartment for your vcn](images/create-vcn-in-compartment.png)
 
 3. Press **Start VCN Wizard** and pick **VCN with Internet Connectivity**.
 
-  ![](images/vcn-with-internet-wizard.png =50%x50%)
+  ![start VCN Wizard](images/vcn-with-internet-wizard.png )
+  
 
 4. Enter a **VCN Name**, such as VCN\_DMS\_LA. Leave CIDR block defaults, unless you need non-overlapping addresses for peering later. Press **Next**.
 
-  ![](images/vcn-configuration.png)
+  ![Enter a VCN Name](images/vcn-configuration.png)
 
 5. Review Summary and press **Create**.
 
-  ![](images/vcn-review-and-create.png)
+  ![Review Summary](images/vcn-review-and-create.png)
 
 ## Task 2: Update Security List for Virtual Cloud Network Subnet
 
@@ -56,19 +57,19 @@ This task assumes default permissions in your public subnet. If you disabled or 
 
 1. In the OCI Console Menu, go to **Networking** > **Virtual Cloud Networks** and pick your VCN.
 
-  ![](images/created-vcn.png)
+  ![pick your VCN](images/created-vcn.png)
 
 2. In the **Subnets** list, pick **Public Subnet-VCN NAME**.
 
-  ![](images/vcn-public-subnet.png)
+  ![pick Public Subnet](images/vcn-public-subnet.png)
 
 3. In the **Security Lists** list, pick **Default Security List for VCN NAME**.
 
-  ![](images/public-subnet-default-sl.png)
+  ![pick Default Security List](images/public-subnet-default-sl.png)
 
 4. In the **Ingress Rules** list press **Add Ingress Rules**.
 
-  ![](images/add-ingress.png)
+  ![press Add Ingress Rules](images/add-ingress.png)
 
 5. Enter the following values, otherwise leave defaults:
     - Source CIDR: **0.0.0.0/0**
@@ -76,7 +77,7 @@ This task assumes default permissions in your public subnet. If you disabled or 
     - Description: **OGG HTTPS**
     - Close dialog by pressing **Add Ingress Rules**.
 
-  ![](images/ogg-ingress.png =50%x50%)
+  ![enter values for source,destination port range and description](images/ogg-ingress.png =50%x50%)
 
 6. In the **Ingress Rules** list press **Add Ingress Rules**.
 
@@ -86,9 +87,9 @@ This task assumes default permissions in your public subnet. If you disabled or 
     - Description: **Oracle DB access for PEs**
     - Close dialog by pressing **Add Ingress Rules**.
 
-  ![](images/oracle-db-access-ingress.png =50%x50%)
+  ![Enter values for source,destination port range and description](images/oracle-db-access-ingress.png =50%x50%)
 
-![](images/ingress-rules.png)
+![display ingress rules](images/ingress-rules.png)
 
 You may now [proceed to the next lab](#next).
 
@@ -101,35 +102,35 @@ The following task is *optional* if a Vault is already present.
 
 1. In the OCI Console Menu, go to **Identity & Security** > **Vault**.
 
-  ![](images/vault-oci-menu.png)
+  ![vault menu navigation](images/vault-oci-menu.png)
 
 2. Pick a compartment on the left-hand side **Compartment** list.
 
 3. Press **Create Vault**.
 
-  ![](images/create-vault.png)
+  ![pick a compartment for the vault creation](images/create-vault.png)
 
 4. In the **Create Vault** dialog, enter a Name such as **DMS\_Vault**.
 
 5. Close the dialog by pressing **Create Vault**.
 
-  ![](images/vault-name.png =50%x50%)
+  ![press create Vault](images/vault-name.png =50%x50%)
 
 6. Wait until the state of the new vault is **Active**. This takes about 5 minutes.
 
-  ![](images/active-vault.png)
+  ![vault displays as active](images/active-vault.png)
 
 7. Click on the new vault and press **Create Key** in the **Master Encryption Keys** list.
 
-  ![](images/create-key.png)
+  ![press create key](images/create-key.png)
 
 8. In the **Create Key** dialog, enter a Name such as **DMS\_Key**.
 
 9. Close the dialog by pressing **Create Key**.
 
-  ![](images/name-key.png =50%x50%)
+  ![press create key after entering a name](images/name-key.png =50%x50%)
 
-![](images/created-key.png)
+![display key status](images/created-key.png)
 
 
 
@@ -139,11 +140,11 @@ Create an empty Object Storage bucket for use in the migration.
 
 1. In the OCI Console Menu, go to **Storage > Object Storage & Archive Storage**
 
-  ![](images/1.png =50%x*)
+  ![Object Storage menu navigation](images/menu-navigation.png =50%x*)
 
 2. Press **Create Bucket**
 
-  ![](images/2.png =50%x*)
+  ![press create bucket](images/create-bucket-button.png =50%x*)
 
 3. On the page Create Bucket, fill in the following entries, otherwise leave defaults:
 
@@ -151,7 +152,7 @@ Create an empty Object Storage bucket for use in the migration.
 
 4. Press **Create**
 
-  ![](images/3-4.png =50%x*)
+  ![Enter a name and complete by pressing create](images/bucket-create.png =50%x*)
 
 You may now [proceed to the next lab](#next).
 
