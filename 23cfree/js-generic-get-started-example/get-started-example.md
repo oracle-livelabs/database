@@ -27,7 +27,7 @@ This lab assumes you have:
 
 ## Task 1: Create a schema to store the JavaScript module
 
-All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The instructions refer to `sqlplus` but apart from the initial connection the two options are identical.
+All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The instructions refer to `sqlplus` but apart from the initial connection the two options are identical. Instead of typing the instructions you can use the "copy" button to copy the code to the clipboard. Select the terminal window you want to paste the code into, then hit CTRL + SHIT + V to insert the text at your cursor's position.
 
 1. Start by connecting to the database as `SYS`
 

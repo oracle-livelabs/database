@@ -155,11 +155,27 @@ In addition, Data Guard replication ensures that the exact same code is present 
     </copy>
     ```
 
-3. Create a JavaScript module with Database Actions
+## Task 3: Create a JavaScript module with Database Actions
 
-    Database Actions is a web-based interface that uses Oracle REST Data Services (ORDS) to provide development, data studio, administration and monitoring features for Oracle Database. You REST-enabled your schema in the first lab by calling `ords.enable_schema`. With Database Actions you can create JavaScript modules using a browser interface.
+Database Actions is a web-based interface that uses Oracle REST Data Services (ORDS) to provide development, data studio, administration and monitoring features for Oracle Database. You REST-enabled your schema in the first lab by calling `ords.enable_schema`. With Database Actions you can create JavaScript modules using a browser interface.
 
-    Start by pointing your browser to TODO and log in to database actions using the password you assigned to the `emily` user.
+1. Start ORDS
+
+    ORDS is pre-installed in your environment, but not started when you log in for the first time. To start the software open a new tab in your terminal by selecting "File", "New Tab" or by typing SHIFT + CTRL + T. Use this new tab to start ords as follows:
+
+    ```shell
+    <copy>
+    ords serve
+    </copy>
+    ```
+
+    ORDS will now start, it shouldn't take longer than 1 minute to become available. Please keep this tab open for the duration of your lab.
+
+2. Log in to Database Actions
+
+    Begin by starting a web browser. You should see a button named "Activities" in the top left corner of the screen. Clicking on it opens a panel allowing you to choose from either Chrome or Firefox. Pick the one you like best.
+
+    Next, point your browser to `http://localhost:8080/ords/emily/_sdw` and log in to database actions using the password you assigned to the `emily` user.
 
     ![Database Actions login screen](images/sdw-login.jpg)
 
@@ -167,13 +183,13 @@ In addition, Data Guard replication ensures that the exact same code is present 
 
     ![Database Actions main screen](images/sdw-main-page.jpg)
 
-    Once you opened the editor, paste the JavaScript portion of the code you used for `helper_module_inline` into the editor pane, assign a name to the module (`HELPER_MODULE_ORDS`) and use the disk icon to persist the module in the database.
+    With the editor (not Snippet) pane open, paste the JavaScript portion of the code you used for `helper_module_inline` into the editor pane, assign a name to the module (`HELPER_MODULE_ORDS`) and use the disk icon to persist the module in the database.
 
     ![Database Actions module editor](images/sdw-mle-module-editor.jpg)
 
     A short message should indicate that the module was indeed saved in the database.
 
-## Task 3: Perform name resolution using MLE environments
+## Task 4: Perform name resolution using MLE environments
 
 1. Reference existing modules
 
@@ -285,7 +301,7 @@ In addition, Data Guard replication ensures that the exact same code is present 
 
     > **Note:** it is possible to reference a single module in multiple environments, there is no strict 1:1 mapping between environment and module.
 
-## Task 4: View dictionary information about modules and environments
+## Task 5: View dictionary information about modules and environments
 
 A number of dictionary views allow you to see which modules are present in your schema, which environments were created, and which import names have been mapped to modules. Existing views like `ALL_SOURCE` have been extended to show the module's source code.
 
