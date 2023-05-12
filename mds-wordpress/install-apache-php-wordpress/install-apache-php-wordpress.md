@@ -191,11 +191,11 @@ phpinfo();
     ````
 
     ````
-    <copy>create user wp IDENTIFIED BY 'Welcome#12345';</copy>   
+    <copy>CREATE USER 'wp'@'%' IDENTIFIED WITH mysql_native_password BY 'Welcome#12345';</copy>   
     ````
 
     ````
-    <copy>GRANT ALL PRIVILEGES ON wordpress.* To wp;</copy>   
+    <copy>GRANT ALL PRIVILEGES ON wordpress.* To 'wp'@'%';</copy>   
     ````
 
     ````
