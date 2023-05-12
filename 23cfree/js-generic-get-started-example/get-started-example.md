@@ -83,10 +83,10 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
     exit</copy>
     ```
 
-    Save the snippet in a file, for example `${HOME}/hol23c/setup.sql` and execute it in `sqlplus`. You should still be connected to `freebdb1` as `SYS` as per the previous step. If not, connect to `freepdb1` as `SYS`.
+    Save the snippet in a file, for example `${HOME}/setup.sql` and execute it in `sqlplus`. The easiest way to do so is to type `host` in your current `sqlplus` or `sqlcl` session and use your favourite text editor to save the file. Once the file is in place, type `exit` to return to your database session. You should still be connected to `freebdb1` as `SYS` as per the previous step. If not, connect to `freepdb1` as `SYS`.
 
     ```sql
-    <copy>start ${HOME}/hol23c/setup.sql</copy>
+    <copy>start ${HOME}/setup.sql</copy>
     ```
 
     Here is the output of an execution:
