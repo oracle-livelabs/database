@@ -9,7 +9,7 @@ walk you through a couple of different approaches. Oracle NoSQL Database Cloud
 Service supports both schema-based and schema-less (JSON) modeling so we will
 create examples of both tables.
 
-_Estimated Lab Time:_ 25 minutes
+_Estimated Time:_ 7 minutes
 
 ### Objectives
 
@@ -92,11 +92,11 @@ We need to download those to the Cloud Shell first.
 
 1. Open the **Cloud Shell** from the top right menu.
 
-    ![cloud-shell](./images/cloud-shell.png)
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
 2. Execute the following environment setup shell script in the Cloud Shell. If you close/open the Cloud Shell, please re-execute it.
 
-    ```
+    ```shell
     <copy>
     source ~/video-on-demand-with-nosql-database/env.sh
     </copy>
@@ -106,7 +106,7 @@ The CLI command for Oracle NoSQl is 'oci nosql <command>'. We will create a tabl
 and  echo the DDL statement so you can see what is being created.
 
 
-    ```
+    ```shell
     <copy>
     cd ~/video-on-demand-with-nosql-database
     DDL_TABLE=$(cat demo-vod/demo-stream-acct.ddl)
@@ -115,7 +115,7 @@ and  echo the DDL statement so you can see what is being created.
     ```
     The echo command will show you the DDL statement that you will execute next.
 
-    ```
+    ```shell
     <copy>
     oci nosql table create --compartment-id "$NOSQL_COMPID"   \
     --name stream_acct --ddl-statement "$DDL_TABLE" \
@@ -124,12 +124,8 @@ and  echo the DDL statement so you can see what is being created.
     </copy>
     ```
     At the end of this command you should see a "status": "SUCCEEDED" on your screen.
-    Next we will create the second table.
 
-
-4. Minimize the Cloud Shell by clicking the **minimization button.**
-
-    ![cloud-shell-small](./images/cloud-shell-small.png)
+4. Exit the Cloud Shell.
 
 
 ## Task 3:  Adding Data From the Oracle Cloud Console
@@ -168,188 +164,190 @@ screen. Click **Tables** on top right.
 
   Copy/Paste the following 3 commands below in the **SQL statement** text box. Because
   this JSON document is complex, it is easiest to copy/paste into the field.
-  However, you could have typed it all in. Then click on **Execute**
+  However, you could have typed it all in. You will notice at the end of our INSERT statement
+  we have a RETURNING clause.   This clause acts the same way as a SELECT clause and
+  in this case it returns the full row.  Click on **Execute**
 
   ![table-row-insert](./images/table-row-insert.png)
 
 
   SQL statement 1
 
-  ````
-  <copy>
-  INSERT INTO stream_acct VALUES(
-  1,
-  {
-     "firstName" : "John",
-     "lastName" : "Sanders",
-     "country" : "USA",
-     "shows": [
-        {
-           "showName": "Call My Agent",
-           "showId": 12,
-           "type": "tvseries",
-		   "genres" : ["comedy", "crime", "english"],
-           "numSeasons" : 2,
-           "seriesInfo": [
-              {
-                 "seasonNum" : 1,
-                 "numEpisodes" : 2,
-                 "episodes": [
-                    { "episodeID" : 20, "lengthMin" : 40, "minWatched" : 40 , "date" : "2022-05-25" },
-                    { "episodeID" : 30, "lengthMin" : 42, "minWatched" : 42 , "date" : "2022-05-25"}
-                 ]
-              },
-              {
-                 "seasonNum": 2,
-                 "numEpisodes" : 2,
-                 "episodes": [
-                    { "episodeID" : 20, "lengthMin" : 50, "minWatched" : 50 , "date" : "2022-05-25"},
-                    { "episodeID" : 30, "lengthMin" : 46, "minWatched" : 46 , "date" : "2022-05-25"}
-                 ]
-              }
-          ]
-       },
-       {
-           "showName": "Rita",
-           "showId": 16,
-           "type": "tvseries",
-		   "genres" : ["comedy", "crime", "french"],
-           "numSeasons" : 1,
-           "seriesInfo": [
-              {
-                 "seasonNum" : 1,
-                 "numEpisodes" : 2,
-                 "episodes": [
-                     { "episodeID" : 20, "lengthMin" : 65, "minWatched" : 65 , "date" : "2022-05-25"},
-                     { "episodeID" : 30, "lengthMin" : 60, "minWatched" : 60 , "date" : "2022-05-25"}
-                  ]
-              }
-           ]
-        }
-      ]
-    }
-  )
-  RETURNING *  
-  </copy>
-  ````
+    ```
+    <copy>
+    INSERT INTO stream_acct VALUES(
+    1,
+    {
+       "firstName" : "John",
+       "lastName" : "Sanders",
+       "country" : "USA",
+       "shows": [
+          {
+             "showName": "Call My Agent",
+             "showId": 12,
+             "type": "tvseries",
+  		   "genres" : ["comedy", "crime", "english"],
+             "numSeasons" : 2,
+             "seriesInfo": [
+                {
+                   "seasonNum" : 1,
+                   "numEpisodes" : 2,
+                   "episodes": [
+                      { "episodeID" : 20, "lengthMin" : 40, "minWatched" : 40 , "date" : "2022-05-25" },
+                      { "episodeID" : 30, "lengthMin" : 42, "minWatched" : 42 , "date" : "2022-05-25"}
+                   ]
+                },
+                {
+                   "seasonNum": 2,
+                   "numEpisodes" : 2,
+                   "episodes": [
+                      { "episodeID" : 20, "lengthMin" : 50, "minWatched" : 50 , "date" : "2022-05-25"},
+                      { "episodeID" : 30, "lengthMin" : 46, "minWatched" : 46 , "date" : "2022-05-25"}
+                   ]
+                }
+            ]
+         },
+         {
+             "showName": "Rita",
+             "showId": 16,
+             "type": "tvseries",
+  		   "genres" : ["comedy", "crime", "french"],
+             "numSeasons" : 1,
+             "seriesInfo": [
+                {
+                   "seasonNum" : 1,
+                   "numEpisodes" : 2,
+                   "episodes": [
+                       { "episodeID" : 20, "lengthMin" : 65, "minWatched" : 65 , "date" : "2022-05-25"},
+                       { "episodeID" : 30, "lengthMin" : 60, "minWatched" : 60 , "date" : "2022-05-25"}
+                    ]
+                }
+             ]
+          }
+        ]
+      }
+    )
+    RETURNING *  
+    </copy>
+    ```
 
-  SQL statement 2
+    SQL statement 2
 
-  ````
-  <copy>
-  INSERT INTO stream_acct VALUES(
-  2,
-  {
-     "firstName" : "Tim",
-     "lastName" : "Greenberg",
-     "country" : "USA",
-     "shows": [
-        {
-           "showName": "Call My Agent",
-           "showId": 12,
-           "type": "tvseries",
-		   "genres" : ["comedy", "crime", "english"],		   
-           "numSeasons" : 2,
-           "seriesInfo": [
-              {
-                 "seasonNum" : 1,
-                 "numEpisodes" : 2,
-                 "episodes": [
-                    { "episodeID" : 20, "lengthMin" : 38, "minWatched" : 36 , "date" : "2022-05-25"},
-                    { "episodeID" : 30, "lengthMin" : 40, "minWatched" : 40 , "date" : "2022-05-25"}
-                 ]
-              },
-              {
-                 "seasonNum": 2,
-                 "numEpisodes" : 2,
-                 "episodes": [
-                    { "episodeID" : 20, "lengthMin" : 50, "minWatched" : 50 , "date" : "2022-05-25"},
-                    { "episodeID" : 30, "lengthMin" : 46, "minWatched" : 46 , "date" : "2022-05-25"}
-                 ]
-              }
-          ]
-       },
-       {
-           "showName": "Mr.Chef",
-           "showId": 13,
-           "type": "tvseries",
-   		   "genres" : ["action", "danish"],
-           "numSeasons" : 1,
-           "seriesInfo": [
-              {
-                 "seasonNum" : 1,
-                 "numEpisodes" : 2,
-                 "episodes": [
-                     { "episodeID" : 20, "lengthMin" : 65, "minWatched" : 65 , "date" : "2022-05-25"},
-                     { "episodeID" : 30, "lengthMin" : 60, "minWatched" : 60 , "date" : "2022-05-25"}
-                  ]
-              }
-           ]
-        }
-      ]
-    }
-  )
-  RETURNING *
-  </copy>
-  ````
-  SQL statement 3
-  ````
-  <copy>
-  INSERT INTO stream_acct VALUES(
-  3,
-  {
-     "firstName" : "Aniketh",
-     "lastName" : "Shubham",
-     "country" : "India",
-     "shows": [
-        {
-           "showName": "Apprentice",
-           "showId": 14,
-           "type": "tvseries",
-           "numSeasons" : 2,
-           "seriesInfo": [
-              {
-                 "seasonNum" : 1,
-                 "numEpisodes" : 2,
-                 "episodes": [
-                    { "episodeID" : 20, "lengthMin" : 40, "minWatched" : 40 , "date" : "2022-05-25"},
-                    { "episodeID" : 30, "lengthMin" : 42, "minWatched" : 42 , "date" : "2022-05-25"}
-                 ]
-              },
-              {
-                 "seasonNum": 2,
-                 "numEpisodes" : 2,
-                 "episodes": [
-                    { "episodeID" : 20, "lengthMin" : 50, "minWatched" : 50 , "date" : "2022-05-25"},
-                    { "episodeID" : 30, "lengthMin" : 46, "minWatched" : 46 , "date" : "2022-05-25"}
-                 ]
-              }
-          ]
-       },
-       {
-           "showName": "Mystery unfolded",
-           "showId": 15,
-           "showType": "tvseries",
-           "numSeasons" : 1,
-           "seriesInfo": [
-              {
-                 "seasonNum" : 1,
-                 "numEpisodes" : 2,
-                 "episodes": [
-                     { "episodeID" : 20, "lengthMin" : 65, "minWatched" : 65 , "date" : "2022-05-25"},
-                     { "episodeID" : 30, "lengthMin" : 60, "minWatched" : 60 , "date" : "2022-05-25"}
-                  ]
-              }
-           ]
-        }
-      ]
-    }
-  )
-  RETURNING *  
-  </copy>
-  ````
+    ```
+    <copy>
+    INSERT INTO stream_acct VALUES(
+    2,
+    {
+       "firstName" : "Tim",
+       "lastName" : "Greenberg",
+       "country" : "USA",
+       "shows": [
+          {
+             "showName": "Call My Agent",
+             "showId": 12,
+             "type": "tvseries",
+  		   "genres" : ["comedy", "crime", "english"],		   
+             "numSeasons" : 2,
+             "seriesInfo": [
+                {
+                   "seasonNum" : 1,
+                   "numEpisodes" : 2,
+                   "episodes": [
+                      { "episodeID" : 20, "lengthMin" : 38, "minWatched" : 36 , "date" : "2022-05-25"},
+                      { "episodeID" : 30, "lengthMin" : 40, "minWatched" : 40 , "date" : "2022-05-25"}
+                   ]
+                },
+                {
+                   "seasonNum": 2,
+                   "numEpisodes" : 2,
+                   "episodes": [
+                      { "episodeID" : 20, "lengthMin" : 50, "minWatched" : 50 , "date" : "2022-05-25"},
+                      { "episodeID" : 30, "lengthMin" : 46, "minWatched" : 46 , "date" : "2022-05-25"}
+                   ]
+                }
+            ]
+         },
+         {
+             "showName": "Mr.Chef",
+             "showId": 13,
+             "type": "tvseries",
+     		   "genres" : ["action", "danish"],
+             "numSeasons" : 1,
+             "seriesInfo": [
+                {
+                   "seasonNum" : 1,
+                   "numEpisodes" : 2,
+                   "episodes": [
+                       { "episodeID" : 20, "lengthMin" : 65, "minWatched" : 65 , "date" : "2022-05-25"},
+                       { "episodeID" : 30, "lengthMin" : 60, "minWatched" : 60 , "date" : "2022-05-25"}
+                    ]
+                }
+             ]
+          }
+        ]
+      }
+    )
+    RETURNING *
+    </copy>
+    ```
+    SQL statement 3
+    ```
+    <copy>
+    INSERT INTO stream_acct VALUES(
+    3,
+    {
+       "firstName" : "Aniketh",
+       "lastName" : "Shubham",
+       "country" : "India",
+       "shows": [
+          {
+             "showName": "Apprentice",
+             "showId": 14,
+             "type": "tvseries",
+             "numSeasons" : 2,
+             "seriesInfo": [
+                {
+                   "seasonNum" : 1,
+                   "numEpisodes" : 2,
+                   "episodes": [
+                      { "episodeID" : 20, "lengthMin" : 40, "minWatched" : 40 , "date" : "2022-05-25"},
+                      { "episodeID" : 30, "lengthMin" : 42, "minWatched" : 42 , "date" : "2022-05-25"}
+                   ]
+                },
+                {
+                   "seasonNum": 2,
+                   "numEpisodes" : 2,
+                   "episodes": [
+                      { "episodeID" : 20, "lengthMin" : 50, "minWatched" : 50 , "date" : "2022-05-25"},
+                      { "episodeID" : 30, "lengthMin" : 46, "minWatched" : 46 , "date" : "2022-05-25"}
+                   ]
+                }
+            ]
+         },
+         {
+             "showName": "Mystery unfolded",
+             "showId": 15,
+             "showType": "tvseries",
+             "numSeasons" : 1,
+             "seriesInfo": [
+                {
+                   "seasonNum" : 1,
+                   "numEpisodes" : 2,
+                   "episodes": [
+                       { "episodeID" : 20, "lengthMin" : 65, "minWatched" : 65 , "date" : "2022-05-25"},
+                       { "episodeID" : 30, "lengthMin" : 60, "minWatched" : 60 , "date" : "2022-05-25"}
+                    ]
+                }
+             ]
+          }
+        ]
+      }
+    )
+    RETURNING *  
+    </copy>
+    ```
 
-  To summarize, in this Lab you have seen two different ways to insert data into a table.
+    To summarize, in this Lab you have seen two different ways to insert data into a table.
 
 ## Task 4:  Show Data From the Console
 
@@ -360,12 +358,16 @@ inserted for each of the tables.
 
     ![table-row-select](./images/table-row-select.png)
 
-2. In the textbox **SQL statement**, keep the text `SELECT * FROM stream_acct` This will
+2. In the textbox **SQL statement**, check to see if the text **SELECT * FROM stream_acct** is
+present in the box.   If not, remove what is there and insert it.  This will
 select all the rows from our table. Click **Execute**
 
     ![run-query](./images/run-query.png)
 
-  You will see in the bottom of the screen the row that we inserted.
+  You will see in the bottom of the screen the row that we inserted.  You will see
+  little arrows pointing either down or to the right.   You can arrows pointing to the
+  right to expand the contents OR click on the ones pointing down to compress the
+  contents.
 
   ![explore-row-select](./images/explore-row-select.png)
 
@@ -378,10 +380,10 @@ You may now **proceed to the next lab.**
 ## Learn More
 
 * [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
-* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/pls/topic/lookup?ctx=cloud&id=CSNSD-GUID-88373C12-018E-4628-B241-2DFCB7B16DE8)
+* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/index.html)
 * [About Cloud Shell](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm)
 
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, August 2022
+* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Management, May 2023
