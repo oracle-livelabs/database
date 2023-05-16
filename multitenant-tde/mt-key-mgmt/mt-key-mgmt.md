@@ -326,7 +326,7 @@ The Activation Time is listed
     </copy>
     ```
 
-![Screenshot of terminal output](./images/set-algrythm-cdb2.png " ")
+![Screenshot of terminal output](./images/set-algorythm-cdb2.png " ")
 
     - We are now ready to encrypt
 
