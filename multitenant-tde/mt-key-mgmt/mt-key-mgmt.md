@@ -233,7 +233,7 @@ This script
     - From this point forward the database expects the wallet and encryption key to be there when the database starts up
 - Each PDB also has its own unique key
 
-Run this script to set the master encryption key for CDB2 and PDB2
+1. Run this script to set the master encryption key for CDB2 and PDB2
 
     ```
     <copy>
@@ -242,7 +242,7 @@ Run this script to set the master encryption key for CDB2 and PDB2
     ```
 ![Screenshot of terminal output](./images/set-keys.png " ")
 
-Check the wallet status now that the master encryptions keys were created
+2. Check the wallet status now that the master encryptions keys were created
 - Status shows as OPEN
 - Wallet is known and open
 
@@ -264,7 +264,7 @@ CDB2
 
 ![Screenshot of terminal output](./images/wallet-status-4.png " ")
 
-Check the key status for CDB1 again
+3. Check the key status for CDB1 again
 
     ```
     <copy>
@@ -272,10 +272,10 @@ Check the key status for CDB1 again
     </copy>
     ```
 
-    - No tablespaces are encrypted for CDB1
-    - It now shows 2 Master Keys
-        - 1 for the CDB
-        - 1 for the PDB
+- No tablespaces are encrypted for CDB1
+- It now shows 2 Master Keys
+    - 1 for the CDB
+    - 1 for the PDB
 
 ![Screenshot of terminal output](./images/master-encryption-key-1.png " ")
 ![Screenshot of terminal output](./images/master-encryption-key-2.png " ")
@@ -284,7 +284,7 @@ The Activation Time is listed
     - As you rotate through the keys it will show a new Activation Time
     - This will show the history of the keys and when activated
 
-- Check the key status for CDB2 again
+4. Check the key status for CDB2 again
 
     ```
     <copy>
@@ -303,7 +303,7 @@ The Activation Time is listed
 
 ## Task 11: Set The Algorithm
 
-    - Run the script for CDB1
+- Run the script for CDB1
 
     ```
     <copy>
@@ -312,11 +312,11 @@ The Activation Time is listed
     ```
 
 ![Screenshot of terminal output](./images/master-encryption-key-cdb2.png " ")
-        - By default it is set to AES128
-            - Recommendation is to set to AES256
-            - Gives a little more security
-        - Second parameter set is encrypt_new_tablespaces = ALWAYS
-        - By default any new tablespaces will be encrypted with AES256
+- By default it is set to AES128
+    - Recommendation is to set to AES256
+        - Gives a little more security
+    - Second parameter set is encrypt_new_tablespaces = ALWAYS
+    - By default any new tablespaces will be encrypted with AES256
 
     - Run the script for CDB2
 
@@ -328,11 +328,11 @@ The Activation Time is listed
 
 ![Screenshot of terminal output](./images/set-algorythm-cdb2.png " ")
 
-    - We are now ready to encrypt
+- We are now ready to encrypt
 
 ## Task 12: Encrypt The Tablespaces
 
-    - Run for CDB1
+1. Run for CDB1
 
     ```
     <copy>
@@ -340,20 +340,20 @@ The Activation Time is listed
     </copy>
     ```
 
-    - This is an on-line encryption
-        - Sequentially it is going through all the data files associated with the tablespace & creating a new copy of the data file that is encrypted.  
-        - It keeps track of any changes of that data file in that tablespace while it is doing that copy that is encrypted
-        - It applies those changes
-        - Under the covers it replaces the current data file with the new data file while the database is up and running
-        - When finished the space is reclaimed
+- This is an on-line encryption
+    - Sequentially it is going through all the data files associated with the tablespace & creating a new copy of the data file that is encrypted.  
+    - It keeps track of any changes of that data file in that tablespace while it is doing that copy that is encrypted
+    - It applies those changes
+    - Under the covers it replaces the current data file with the new data file while the database is up and running
+    - When finished the space is reclaimed
 
 **Key Points**
-    - You need to have enough additional space for the largest data file that is going to be encrypted because a second file will be created
-    - This can be done in parallel, but more data files are created in parallel so keep your free space in mind
-    - This can be at a later point in time
-    -   You don’t have to do all the tablespaces at once
+- You need to have enough additional space for the largest data file that is going to be encrypted because a second file will be created
+- This can be done in parallel, but more data files are created in parallel so keep your free space in mind
+- This can be at a later point in time
+-   You don’t have to do all the tablespaces at once
 
-    - Run the encryption for CDB2
+2. Run the encryption for CDB2
 
      ```
     <copy>
@@ -362,11 +362,11 @@ The Activation Time is listed
     ```
 
 **Key Points**
-    - When you are finished you need to do a full backup as an incremental will not see the tablespace as encrypted
-    - The backup should be done as-soon-as it is done encrypting
-    - If you do a restore to the data file before doing the full backup and applied the archive logs to bring it forward the restore would be unencrypted
+- When you are finished you need to do a full backup as an incremental will not see the tablespace as encrypted
+- The backup should be done as-soon-as it is done encrypting
+- If you do a restore to the data file before doing the full backup and applied the archive logs to bring it forward the restore would be unencrypted
 
-    - Look at the key status again and let's review what happened to the tablespaces and how this ties together
+- Look at the key status again and let's review what happened to the tablespaces and how this ties together
 
      ```
     <copy>
@@ -377,12 +377,12 @@ The Activation Time is listed
 ![Screenshot of terminal output](./images/key-status-1.png " ")
 
 
-    - You can see the Master Encryption Key is set for SYSAUX & SYSTEM
-    - It now shows as encrypted
-    - It shows as encrypted with AES256
-    - The keys starts with AZvR, which matches the key for the CDB
-    - If you look at the PDB the Master Encryption Key begins with AaUv & it matches the Key Id at the bottom
-        - NOTICE: TEMP & UNDO were not encrypted
+- You can see the Master Encryption Key is set for SYSAUX & SYSTEM
+- It now shows as encrypted
+- It shows as encrypted with AES256
+- The keys starts with AZvR, which matches the key for the CDB
+- If you look at the PDB the Master Encryption Key begins with AaUv & it matches the Key Id at the bottom
+    - NOTICE: TEMP & UNDO were not encrypted
         - Anytime you encrypt the tablespace that means that the data that originated in that tablespace stays encrypted anytime the database uses it for processing.
         - If you have a sort going on and that sort contains data that is in USERS, if it’s a join of multiple tables and only 1 of those tables resides in a tablespace that encrypted that whole join process becomes encrypted
         - Everything that starts with an encrypted tablespace inherits  encryption during sorts
@@ -390,7 +390,7 @@ The Activation Time is listed
         - No reason to encrypt temp again because anything that gets encrypted will stay encrypted
         - The same thing happens with UNDO as it would inherit the starting point of encrypted data, so there is no reason to encrypt this as well
 
-    - Check the key status for CDB2
+3. Check the key status for CDB2
 
     ```
     <copy>
@@ -398,37 +398,37 @@ The Activation Time is listed
     </copy>
     ```
 
-        - You will see the same thing as CDB1
-            NOTE:  The keys are different, so you have 4 Master Keys in 2 different wallets
+- You will see the same thing as CDB1
+    NOTE:  The keys are different, so you have 4 Master Keys in 2 different wallets
 
 ## Task 13: Clone PDB1 in CDB1
-
+1.
     ```
     <copy>
     /home/oracle/scripts/cloning//clonepdb1.sh
     </copy>
     ```
 
-    - This will create a pluggable database that is a clone of PDB1
-        - Calling it pdbclone1
-        - Doing the work in parallel
-        - You notice that because you are cloning a pdb that is encrypted it needs access to the encryption key
+- This will create a pluggable database that is a clone of PDB1
+    - Calling it pdbclone1
+    - Doing the work in parallel
+    - You notice that because you are cloning a pdb that is encrypted it needs access to the encryption key
 
 ![Screenshot of terminal output](./images/pdb1-clone-key.png " ")
 
-        - You have to give it the password for the keystore so it can take the datafiles associated with PDB1 and clone them into pdbclone1 and have access to that data
-        - You can see below that the keystore is open
+- You have to give it the password for the keystore so it can take the datafiles associated with PDB1 and clone them into pdbclone1 and have access to that data
+    - You can see below that the keystore is open
 
 ![Screenshot of terminal output](./images/pdb1-clone-keystore-open.png " ")
 
-    - When finished you can see the status of the PDB’s
-        - PDB1 – Open READ WRITE
-        - PDBCLONE1 – OPEN READ WRITE
+- When finished you can see the status of the PDB’s
+    - PDB1 – Open READ WRITE
+    - PDBCLONE1 – OPEN READ WRITE
 
 ![Screenshot of terminal output](./images/pdbclone1-open.png " ")
 
 
-    - Look at the key status 
+2. Look at the key status 
 
      ```
     <copy>
@@ -436,11 +436,11 @@ The Activation Time is listed
     </copy>
     ```
 
-        - Notice PDB1 and PDBCLONE1 have the same master encryption key
-        - The wallet only contains 2 keys
-            - Since you created a clone you do not want it to have the same Master Encryption Key
+- Notice PDB1 and PDBCLONE1 have the same master encryption key
+    - The wallet only contains 2 keys
+    - Since you created a clone you do not want it to have the same Master Encryption Key
 
-    - Re-key the pdb
+3. Re-key the pdb
 
      ```
     <copy>
