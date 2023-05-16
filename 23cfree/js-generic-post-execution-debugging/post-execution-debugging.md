@@ -198,7 +198,7 @@ begin
     dbms_mle.enable_debugging(l_debugspec, l_debugsink);
 
     -- run the business logic
-    l_order_as_string := 'order_id=1;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
+    l_order_as_string := 'order_id=10;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
     l_success  := business_logic_pkg.process_order(l_order_as_string);
 
     -- get the debug output as JSON (not normally done this way, 
@@ -257,7 +257,7 @@ When executing the above code snippet the following information is printed on sc
           "rowsAffected": 1
         },
         "this": {},
-        "orderData": "order_id=1;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1",
+        "orderData": "order_id=10;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1",
         "orderDataJSON": {
           "customer_id": "1",
           "order_date": "2023-04-24T10:27:52",
@@ -315,7 +315,7 @@ Database Actions supports debugging with a nice, graphical user interface. Start
         const { processOrder } = await import ("businessLogic");
 
         const orderDataString = 
-            "order_id=3;order_date=2023-04-24T10:27:52;order_mode=theMode" +
+            "order_id=13;order_date=2023-04-24T10:27:52;order_mode=theMode" +
             ";customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1";
 
         processOrder(orderDataString);
@@ -595,7 +595,7 @@ In an ideal world post-execution debugging should be simple to enable without ha
     declare
         l_order_as_string varchar2(512);
     begin
-        l_order_as_string := 'order_id=10;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
+        l_order_as_string := 'order_id=13;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
         business_logic_pkg.process_order(l_order_as_string, null);
     exception
         when others then
@@ -624,7 +624,7 @@ In an ideal world post-execution debugging should be simple to enable without ha
     declare
         l_order_as_string varchar2(512);
     begin
-        l_order_as_string := 'order_id=11;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
+        l_order_as_string := 'order_id=21;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
         business_logic_pkg.process_order(l_order_as_string, 1);
     exception
         when others then

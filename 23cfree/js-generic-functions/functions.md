@@ -2,7 +2,7 @@
 
 ## Introduction
 
-After creating JavaScript modules and environments in the previous lab you will now learn how to expose JavaScript code in SQL and PL/SQL. After completing this step you can call JavaScript code anywhere you can invoke SQL and PL/SQL functions. All client code,regardless whether it's written in Java, Python, or even with `node-oracledb`, can access JavaScript stored procedures.
+After creating JavaScript modules and environments in the previous lab you will now learn how to expose JavaScript code in SQL and PL/SQL. After completing this step you can call JavaScript code anywhere you can invoke SQL and PL/SQL functions. All client code, regardless whether it's written in Java, Python, or even with `node-oracledb`, can access JavaScript stored procedures.
 
 Estimated Lab Time: 10 minutes
 
@@ -25,7 +25,7 @@ This lab assumes you have:
 
 ## Task 1: Learn more about call specifications
 
-Call specifications are a standard extension to the PL/SQL language allowing you to provide instructions in a different programming language. Typically you would provide the function or procedure body in PL/SQL unless you want to link it to Java or JavaScript code.
+Call specifications are a standard extension to the PL/SQL language allowing you to provide instructions in a different programming language. The function or procedure bodies are typically expressed in PL/SQL, in this lab however you are going to create call specifications for JavaScript.
 
 Technically speaking the call specification follows the `IS|AS` keyword in the `CREATE PROCEDURE` or `CREATE FUNCTION` statement. Call specifications come in many different variants as you can see in the PL/SQL language reference. The following railroad diagram has been copied from the `CREATE PROCEDURE` statement.
 
@@ -126,12 +126,12 @@ In this task you will learn how to create a call specification based on the MLE 
 
 2. Create call specification for `helper_module_inline`
 
-    You can see from the output above that both functions in the module are exported (line 32). This allows us to create call specifications. Before you go ahead and create one you need to decide whether you need a PL/SQL function or procedure. In the above case both JavaScript functions return data:
+    You can see from the output above that both functions in the module are exported (line 35). This allows us to create call specifications. Before you go ahead and create one you need to decide whether you need a PL/SQL function or procedure. In the above case both JavaScript functions return data:
 
     - `string2obj(string)` returns a JavaScript object
     - `object2String(object)` returns a string
 
-    A PL/SQL function is the best fit. You can either create stand-alone functions like you did in lab 1, or as demonstrated in this case you can group the functions in a PL/SQL package. Using the syntax diagrams from task 1 you can create the call specification as follows:
+    A PL/SQL function is the best fit (PL/SQL procedures don't provide an option to return a value). You can either create stand-alone functions like you did in lab 1, or as demonstrated in this case you can group the functions in a PL/SQL package. Using the syntax diagrams from task 1 you can create the call specification as follows:
 
     ```sql
     <copy>
@@ -214,7 +214,7 @@ In this task you will learn how to create a call specification based on the MLE 
 
 ## Task 4: Create a call specification involving use of an MLE environment
 
-Creating call specifications for functions exported by the `business_logic` module requires an extra step. Remember from the previous lab that `business_logic` relies on `string2JSON()` provided by `helper_module_inline`. Here is the relevant section of the code:
+Creating call specifications for functions exported by the `business_logic` module requires an extra step. Remember from the previous lab that `business_logic` relies on `string2obj()` provided by `helper_module_inline`. Here is the relevant section of the code:
 
 ```sql
 create mle module business_logic language javascript as
@@ -346,7 +346,7 @@ In scenarios where you don't need the full flexibility of JavaScript modules and
 
 1. Hello World example using inline JavaScript code
 
-    As the name implies an inline function allows you to add the JavaScript code as if it were the PL/SQL body. Refer back to Task 1 and review the figure titled `javascript_declaration`: the lower half of the railroad diagram relates to inline JavaScript functions. In its simplest form you can write the classic `hello world()` like so:
+    As the name implies an inline function allows you to add the JavaScript code as if it were the PL/SQL body. Refer back to Task 1 and review the figure titled `javascript_declaration`: the lower half of the railroad diagram relates to inline JavaScript functions. In its simplest form you can write the classic `hello world` like so:
 
     ```sql
     <copy>
@@ -359,7 +359,7 @@ In scenarios where you don't need the full flexibility of JavaScript modules and
     </copy>
     ```
 
-    > **Note** JavaScript identifiers are case sensitive and therefore must be enclosed in double-quotes in the PL/SQL layer or else they won't't be recognised in the JavaScript portion of the code.
+    > **Note** JavaScript identifiers are case sensitive and therefore must be enclosed in double-quotes in the PL/SQL layer or else they won't be recognised in the JavaScript portion of the code.
 
     Proceed by executing the function.
 

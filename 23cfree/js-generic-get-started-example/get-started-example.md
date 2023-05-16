@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Before jumping into the description of JavaScript features and all their details let's begin with a practical example. Enhancing data quality is a focus area for many businesses. Data quality that is lacking prevents analysts from making properly informed decisions, and it all starts at the source system. In this lab you will read about validating email addresses, a common scenario in many applications. Validating email addresses isn't a new problem, and there are plenty of solutions available. This lab explores the open source `validator.js` module's `isEmail()` function and demonstrates how to use it in your application.
+Before jumping into the description of JavaScript features and all their details let's begin with a practical example. Enhancing data quality is a focus area for many businesses. Poor data quality prevents analysts from making properly informed decisions, and it all starts at the source system. In this lab you will read about validating email addresses, a common scenario in many applications. Validating email addresses isn't a new problem, and there are plenty of solutions available. This lab explores the open source `validator.js` module's `isEmail()` function and demonstrates how to use it in your application.
 
 > If you intend to use `validator.js` in your own project please refer to validator's GitHub project site for more details about the project's license and implications of use.
 
@@ -27,7 +27,7 @@ This lab assumes you have:
 
 ## Task 1: Create a schema to store the JavaScript module
 
-All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The instructions refer to `sqlplus` but apart from the initial connection the two options are identical. Instead of typing the instructions you can use the "copy" button to copy the code to the clipboard. Select the terminal window you want to paste the code into, then hit CTRL + SHIT + V to insert the text at your cursor's position.
+All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The instructions refer to `sqlplus` but apart from the initial connection the two options are identical. Instead of typing the instructions you can use the "copy" button to copy the code to the clipboard. Select the terminal window you want to paste the code into, then hit CTRL + SHIFT + V to insert the text at your cursor's position.
 
 1. Start by connecting to the database as `SYS`
 
@@ -59,9 +59,25 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
     <copy>alter session set container = freepdb1;</copy>
     ```
 
+    Verify whether you are in the correct container using the following query:
+
+    ```sql
+    <copy>select sys_context('userenv','con_name') as container_name;</copy>
+    ```
+
+    If you see `FREEPDB1` you are good to go.
+
+    ```
+    CONTAINER_NAME
+    ------------------------------------
+    FREEPDB1
+    ```
+
 3. Create a new user in freepdb1 with the necessary privileges to create, store and run JavaScript code
 
-    Next you need to prepare the creation of the developer account. The instructions in the following snippet create a new account, named `emily`. It will be used to store JavaScript modules in the database.
+    In this step you prepare the creation of the developer account. The instructions in the following snippet create a new account, named `emily`. It will be used to store JavaScript modules in the database.
+
+    Save the snippet in a file, for example `${HOME}/setup.sql` and execute it in `sqlcl` or `sqlplus`. You can use graphical text editors installed on the system via the Activities button or the command line.
 
     ```sql
     <copy>set echo on
@@ -83,13 +99,13 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
     exit</copy>
     ```
 
-    Save the snippet in a file, for example `${HOME}/setup.sql` and execute it in `sqlplus`. The easiest way to do so is to type `host` in your current `sqlplus` or `sqlcl` session and use your favourite text editor to save the file. Once the file is in place, type `exit` to return to your database session. You should still be connected to `freebdb1` as `SYS` as per the previous step. If not, connect to `freepdb1` as `SYS`.
+    You should still be connected to `freebdb1` as `SYS` as per the previous step. If not, connect to `freepdb1` as `SYS` before executing the following command:
 
     ```sql
     <copy>start ${HOME}/setup.sql</copy>
     ```
 
-    Here is the output of an execution:
+    Here is some sample output of an execution:
 
     ```
     SQL> @hol23c/setup

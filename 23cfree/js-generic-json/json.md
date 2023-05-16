@@ -720,6 +720,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
     ```sql
     <copy>
     begin
+        commit;
         soda_demo_pkg.drop_collection('myCollection');
     end;
     /

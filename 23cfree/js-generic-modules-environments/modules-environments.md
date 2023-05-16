@@ -43,7 +43,7 @@ In addition, Data Guard replication ensures that the exact same code is present 
     The easiest way to create a JavaScript module is to provide the JavaScript code inline with the `create mle module` statement.
 
     ```sql
-    <copy>create mle module helper_module_inline
+    <copy>create or replace mle module helper_module_inline
     language javascript as 
 
     /**
@@ -148,7 +148,7 @@ In addition, Data Guard replication ensures that the exact same code is present 
 
     ```sql
     <copy>
-    create mle module helper_module_bfile
+    create or replace mle module helper_module_bfile
     language javascript
     using bfile (javascript_src_dir, 'helper_module_bfile.js');
     /
@@ -215,7 +215,7 @@ Database Actions is a web-based interface that uses Oracle REST Data Services (O
     </copy>
     ```
 
-    The `business_logic` module will insert an order into that table after converting a comma-separated string to a JSON document which is eventually parsed by `json_table()`.
+    The `business_logic` module will insert an order into that table after converting a comma-separated string to a JSON document which is eventually parsed by `json_table()`. Inserting data into a table requires the use of the MLE JavaScript SQL driver which will be covered in a later lab.
 
     ```sql
     <copy>
@@ -285,21 +285,23 @@ Database Actions is a web-based interface that uses Oracle REST Data Services (O
     </copy>
     ```
 
-    Database Actions supports working with environments as well, although they are required for proper rendering of dependencies and tab/code completion. From the drop down on the left navigation pane select "Environments" to obtain a list of environments. You should see the `BUSINESS_MODULE_ENV` listed. Right-click the environment's name and choose `Edit` to review the environment definition.
+    Database Actions supports working with environments as well. From the drop down on the left navigation pane select "Environments" to obtain a list of environments. You should see the `BUSINESS_MODULE_ENV` listed. Right-click the environment's name and choose `Edit` to review the environment definition.
 
     ![Database Actions MLE Environment editor](images/sdw-mle-env-editor.jpg)
 
-    The environment will play a crucial role when exposing JavaScript code to SQL and PL/SQL, a topic that will be covered in the next lab (Lab 3). It also helps you understand dependencies as displayed by Database Actions as they allow you to view these.
+    The environment will play a crucial role when exposing JavaScript code to SQL and PL/SQL, a topic that will be covered in the next lab (Lab 3).
 
-    Right-click on the `BUSINES_LOGIC` module in the tree view on the left-hand side and select "Dependencies Diagram". The following diagram is shown, highlighting `BUSINESS_LOGIC`'s dependency on `HELPER_FUNCTIONS_INLINE`.
+    Database Actions provides a handy way of viewing code dependencies based on a given combination of module/environment. `BUSINESS_LOGIC` is the only module importing functionality provided by another module, and serves as an example.
 
-    ![Database Actions MLE Environment editor](images/sdw-mle-module-dependencies.jpg)
-
-    In case you don't see the connection between `HELPER_MODULE_INLINE` and `BUSINESS_LOGIC` as per the print screen you need to associate `BUSINESS_LOGIC_ENV` with the module. To do so, close the Dependency Diagram and right-click on the `BUSINESS_LOGIC` module. Select `Edit` and associate the `BUSINESS_MODULE_ENV` environment with the module. Should the drop-down be empty click on the reload icon next to it and try again.
+    Switch back to "Modules" in the left-hand tree view. Next, right-click on the `BUSINES_LOGIC` module in the tree view and select "Edit" from the context menu. This will load the module's code into the Editor pane. Now you need to associate `BUSINESS_LOGIC_ENV` with the module using the down-down menu as shown in this screenshot. Should the drop-down be empty click on the reload icon next to it and try again.
 
     ![Database Actions MLE Environment editor](images/sdw-mle-associate-env-with-module.jpg)
 
-    > **Note:** it is possible to reference a single module in multiple environments, there is no strict 1:1 mapping between environment and module.
+    Once the environment is associated with the module you can view the module's dependency diagram. Click on the module's name in the drop-down menu in the editor's top left corner (right above the `import { string2obj }` statement) and select "Code Dependencies Diagram". The following diagram is shown, highlighting `BUSINESS_LOGIC`'s dependency on `HELPER_MODULE_INLINE`.
+
+    ![Database Actions MLE Environment editor](images/sdw-mle-module-dependencies.jpg)
+
+    > **Note:** it is possible to reference a module in multiple environments, there is no strict 1:1 mapping between environment and module.
 
 ## Task 5: View dictionary information about modules and environments
 

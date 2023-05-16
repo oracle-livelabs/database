@@ -26,6 +26,9 @@ Make sure you are connected as `SYS` to `freepdb1` before executing the script.
 
 ```sql
 <copy>
+connect / as sysdba
+alter session set container = freepdb1;
+
 set echo on
 drop user if exists emily cascade;
 
