@@ -79,6 +79,7 @@ Start with normal setup on CDB1
 
 ## Task 5: At this point neither database knows about encryption and there is no wallet set so let's check the encryption status of CDB1
 
+1. Run this command
     ```
     <copy>
     /home/oracle/scripts/cloning/key_status.sh CDB1
@@ -93,7 +94,8 @@ Start with normal setup on CDB1
     ![Screenshot of terminal output](./images/cdb1-check-wallet-status.png " ")
 
 ## Task 6: We can check the status of CDB2 and see the same thing
-    
+
+   
     ```
     <copy>
     /home/oracle/scripts/cloning/key_status.sh CDB2
@@ -248,18 +250,18 @@ This script
 - Wallet is known and open
 
 CDB1
-
+1. Run the following command to check the wallet status of CDB1
     ```
     <copy>
     /home/oracle/scripts/cloning/wallet_status.sh CDB1
     </copy>
     ```
-
+2. 1. Run the following command to check the wallet status of CDB2
 CDB2
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/wallet_status.sh CDB1
+    /home/oracle/scripts/cloning/wallet_status.sh CDB2
     </copy>
     ```
 
@@ -304,7 +306,7 @@ The Activation Time is listed
 
 ## Task 11: Set The Algorithm
 
-- Run the script for CDB1
+1. Run the script for CDB1 to set the encryption algorithm
 
     ```
     <copy>
@@ -319,7 +321,7 @@ The Activation Time is listed
     - Second parameter set is encrypt_new_tablespaces = ALWAYS
     - By default any new tablespaces will be encrypted with AES256
 
-    - Run the script for CDB2
+2. Run the script for CDB2
 
     ```
     <copy>
@@ -333,7 +335,7 @@ The Activation Time is listed
 
 ## Task 12: Encrypt The Tablespaces
 
-1. Run for CDB1
+1. Encrypt the tablspaces in CDB1
 
     ```
     <copy>
@@ -367,7 +369,7 @@ The Activation Time is listed
 - The backup should be done as-soon-as it is done encrypting
 - If you do a restore to the data file before doing the full backup and applied the archive logs to bring it forward the restore would be unencrypted
 
-- Look at the key status again and let's review what happened to the tablespaces and how this ties together
+3. Look at the key status again and let's review what happened to the tablespaces and how this ties together
 
      ```
     <copy>
@@ -383,15 +385,15 @@ The Activation Time is listed
 - It shows as encrypted with AES256
 - The keys starts with AZvR, which matches the key for the CDB
 - If you look at the PDB the Master Encryption Key begins with AaUv & it matches the Key Id at the bottom
-    - NOTICE: TEMP & UNDO were not encrypted
-        - Anytime you encrypt the tablespace that means that the data that originated in that tablespace stays encrypted anytime the database uses it for processing.
-        - If you have a sort going on and that sort contains data that is in USERS, if it’s a join of multiple tables and only 1 of those tables resides in a tablespace that encrypted that whole join process becomes encrypted
-        - Everything that starts with an encrypted tablespace inherits  encryption during sorts
-        - If it spills over from memory into temp and temp is encrypted it will stay encrypted
-        - No reason to encrypt temp again because anything that gets encrypted will stay encrypted
-        - The same thing happens with UNDO as it would inherit the starting point of encrypted data, so there is no reason to encrypt this as well
+- NOTICE: TEMP & UNDO were not encrypted
+    - Anytime you encrypt the tablespace that means that the data that originated in that tablespace stays encrypted anytime the database uses it for processing.
+    - If you have a sort going on and that sort contains data that is in USERS, if it’s a join of multiple tables and only 1 of those tables resides in a tablespace that encrypted that whole join process becomes encrypted
+    - Everything that starts with an encrypted tablespace inherits  encryption during sorts
+    - If it spills over from memory into temp and temp is encrypted it will stay encrypted
+    - No reason to encrypt temp again because anything that gets encrypted will stay encrypted
+    - The same thing happens with UNDO as it would inherit the starting point of encrypted data, so there is no reason to encrypt this as well
 
-3. Check the key status for CDB2
+4. Check the key status for CDB2
 
     ```
     <copy>
@@ -403,7 +405,7 @@ The Activation Time is listed
     NOTE:  The keys are different, so you have 4 Master Keys in 2 different wallets
 
 ## Task 13: Clone PDB1 in CDB1
-1.
+1. Clone pdb1
     ```
     <copy>
     /home/oracle/scripts/cloning//clonepdb1.sh
@@ -454,7 +456,7 @@ The Activation Time is listed
     - This set the key for PDBCLONE1 and use that key for PDBCLONE1
         - Now PDB1 and PDBCLONE1 have separate encryption keys
 
-    - Check at the key status again
+4. Check at the key status again
 
      ```
     <copy>
@@ -462,37 +464,37 @@ The Activation Time is listed
     </copy>
     ```
 
-        - Master Key ID for PDBCLONE1 is now different & it has it’s own unique key
-        - If you look at the wallet there are now 3 keys
-        - The re-key went quickly because when we do a re-key it doesn’t change the encrypted data.  
-            - It changes the master encryption key which is used to encrypt the tablespace encryption key
+- Master Key ID for PDBCLONE1 is now different & it has it’s own unique key
+- If you look at the wallet there are now 3 keys
+- The re-key went quickly because when we do a re-key it doesn’t change the encrypted data
+    - It changes the master encryption key which is used to encrypt the tablespace encryption key
 
 ![Screenshot of terminal output](./images/pdbclone1-rekey-status.png " ") 
 
 ## Task 14: Unplug PDBCLONE1 and plug into CDB2
-
+1. Unplug pdbclone1
     ```
     <copy>
     /home/oracle/scripts/cloning/key_pdbclone1.sh
     </copy>
     ```
 
-        - This close’s pdbclone1
-        - It needs to be closed in order to unplug it
-            - Unplug’s into an xml file
-            - Notice the ENCRYPT USING transport_secret
+- This close’s pdbclone1
+    - It needs to be closed in order to unplug it
+        - Unplug’s into an xml file
+        - Notice the ENCRYPT USING transport_secret
 
 ![Screenshot of terminal output](./images/unplug.png " ")
 
-            - This takes a copy of the Master Encryption Key
-            - Brings it over to CDB2
-            - You want that key encrypted while it is being moved over
-            - Password protecting the Master Encryption Key that it is transporting
-        - Notice that pdbclone1 is not showing since it was unplugged
+- This takes a copy of the Master Encryption Key
+    - Brings it over to CDB2
+        - You want that key encrypted while it is being moved over
+        - Password protecting the Master Encryption Key that it is transporting
+    - Notice that pdbclone1 is not showing since it was unplugged
 
 ![Screenshot of terminal output](./images/pdbclone1-missing.png " ")
 
-    - Run
+2. Run to plug pdbclone1 into cdb2
 
      ```
     <copy>
@@ -500,22 +502,22 @@ The Activation Time is listed
     </copy>
     ```
 
-        - Takes pdbclone1 & plugs it in cdb2 
-        - Using the xml file you created during the unplug 
-        - Not copying over the temp file 
-        - Moves the key along with the password to decrypt it 
-        - Stores the key in the wallet for cdb2 
-        - Once you create it you connect to it
-        - You open the keystore for cdbclone1
-        - The state is saved as open
+- Takes pdbclone1 & plugs it in cdb2 
+- Using the xml file you created during the unplug 
+- Not copying over the temp file 
+- Moves the key along with the password to decrypt it 
+- Stores the key in the wallet for cdb2 
+- Once you create it you connect to it
+- You open the keystore for cdbclone1
+    - The state is saved as open
     
 ![Screenshot of terminal output](./images/move-pdbclone1.png " ")
 
-        -  With show pdbs you can see pdbclone1 is open for read write
+-  With show pdbs you can see pdbclone1 is open for read write
 
 ![Screenshot of terminal output](./images/show-pdbs.png " ")
 
-    - Lets look at the data files again
+3. Lets look at the data files again
 
 
     ```
