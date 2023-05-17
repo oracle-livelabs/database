@@ -1,4 +1,4 @@
-# Understanding Kubernetes
+# Understanding Microservices and Kubernetes
 
 ## Introduction
 
@@ -23,13 +23,13 @@ Given the size and sole beer offering, you choose a straightforward and efficien
 
 After a highly successful year, a range of fresh new beers, such as the "SQL Saison" and "OLAP Porter," were meticulously crafted to expand the brewery's offerings.  However, these additions required modifications to the current single schema objects.
 
-It became apparent that modifying the schema was not only challenging but also **prone to errors** and **disruptive** to the different operations the database supported.  In response, you made the strategic decision to segregate the inventory, brewing, and stock objects into dedicated schemas, ensuring **greater organisation** while **minimising potential disruptions** between the different operations.
+It became apparent that modifying the schema was not only challenging, but also **prone to errors** and **disruptive** to the different operations the database supported.  In response, you made the strategic decision to segregate the inventory, brewing, and stock objects into dedicated schemas, ensuring **greater organisation** while **minimising potential disruptions** between the different operations.
 
 ![Schema Progression](images/schema_ms.png "Schema Progression")
 
 As the brewery's reputation soared, the workforce expanded to include dedicated inventory and stock/e-commerce personnel, as well as new brewers.  Each team member brought valuable insights for enhancing their respective domains, necessitating adjustments to both the front-end application and the backend database schemas.  Simultaneously, the responsibility of upholding the database's performance and stability rested on your shoulders, requiring occasional upgrades, patches, and handling of planned outages.  However, **obtaining consensus for modifications** to the applications and **coordinating maintenance tasks** proved to be an insurmountable challenge.
 
-To alleviate the administrative overhead associated with change coordination, a resolution was reached to divide the infrastructure.  Each team was allocated its own dedicated database and application tier, granting them the freedom to **progress at their own pace** without impeding the progress or disrupting the other teams.
+To alleviate the administrative overhead associated with **change coordination**, a resolution was reached to divide the infrastructure.  Each team was allocated its own dedicated database and application tier, granting them the freedom to **progress at their own pace** without impeding the progress or disrupting the other teams.
 
 ![Database Progression](images/db_ms.png "Database Progression")
 
@@ -43,9 +43,7 @@ In general, everything is now running smoothly, but there is a **significant adm
 
 The IT department, including yourself, have been asked to reassess the infrastructure and explore possibilities for restructuring to address these problems.  Your colleagues are quick to suggest *Kubernetes*, an **orchestration** platform that **automates the deployment, scaling, and management** of your application Microservices as containers.
 
-
-
-Utilising Kubernetes at the brewery would simplify the management of the existing infrastructure and potentially allow you to consolidate it.  It will help enable developers to focus on building and deploying their applications without worrying about the underlying infrastructure.  Finally, it enable efficient application deployment, scaling, and automated management.
+Utilising Kubernetes at the brewery would simplify the management of the existing infrastructure and potentially allow you to consolidate it.  It will also enable developers to focus on building and deploying their applications without worrying about the underlying infrastructure.  Finally, it enable efficient application deployment, scaling, and automated management.
 
 ## Task 4: Why Kubernetes?
 
@@ -151,7 +149,7 @@ Let's consider a RAC node as an illustration for a container. Envision the abili
 
 A pod can be thought of as a logical host for containers, where each container within the pod shares the same IP address and port space. Containers within the same pod can communicate with each other using localhost, making it easier to build and manage interconnected applications.
 
-A Pod would be the equivalent of a "shared database server", where multiple databases, independent of eachother run on the same host.
+A Pod would be the equivalent of a "shared database server", where multiple databases, independent of each other run on the same host.
 </details>
 
 ## Task 4: Summarise
