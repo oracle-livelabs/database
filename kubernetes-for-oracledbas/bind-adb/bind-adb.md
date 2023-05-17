@@ -20,7 +20,30 @@ This lab assumes you have:
 * A Running and Healthy OraOperator
 * A provisioned Oracle ADB in OCI
 
-## Task 1: Retrieve the ADB OCID
+## Task 1: Create a Namespace
+
+In Kubernetes, a *Namespace* is a virtual cluster that provides a way to divide the physical Kubernetes cluster resources between multiple users or teams.
+
+
+
+
+It allows you to create a logical separation between resources in the same cluster, providing a way to isolate, manage and control access to these resources.
+
+```bash
+<copy>
+kubectl create namespace adb
+</copy>
+```
+
+### Namespace Best Practices
+
+* For production clusters, avoid using the `default` namespace. Instead, make other namespaces and use those.
+* Avoid creating namespaces with the prefix `kube-`, it is reserved for Kubernetes system namespaces.
+
+
+## Task 2: Retrieve the ADB OCID
+
+During the "Deploy Workshop Stack" Lab, a new Autonomous Database was provisioned in Oracle Cloud Infrastructure.  
 
 ```bash
 <copy>
@@ -29,15 +52,7 @@ ADB_OCID=$(oci db autonomous-database list --compartment-id $COMPARTMENT_OCID | 
 </copy>
 ```
 
-## Task 2: Create Namespace
-
-```bash
-<copy>
-kubectl create namespace adb
-</copy>
-```
-
-## Task 4: Create the Bind Manifest
+## Task 3: Create the Bind Manifest
 
 ```bash
 <copy>
@@ -86,16 +101,23 @@ EOF
 </copy>
 ```
 
-## Task 5: Apply the Bind Manifest
+## Task 4: Apply the Bind Manifest
 
+```bash
+<copy>
 kubectl apply -f adb.yaml
+</copy>
+```
 
-## Task 6: Review Deployment and TNS_ADMIN
+## Task 5: Review Deployment and TNS_ADMIN
 
+```bash
+<copy>
 kubectl get adb adb -n adb
 kubectl describe adb adb -n adb
 kubectl describe secrets adb-tns-admin -n adb
-
+</copy>
+```
 
 ## Learn More
 

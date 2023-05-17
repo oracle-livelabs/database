@@ -29,8 +29,8 @@
             "filename": "../../setup-stack/setup-stack.md"
         },
         {
-            "title": "Lab 3: Understand Kubernetes",
-            "description": "Overview of K8s, comparing to familiar technologies",
+            "title": "Lab 3: Understand Microservices and Kubernetes",
+            "description": "Overview of Microservices and K8s, comparing to familiar technologies",
             "filename": "../../understand-kubernetes/understand-kubernetes.md"
         },
         {

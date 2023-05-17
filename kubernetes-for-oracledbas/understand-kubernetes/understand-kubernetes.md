@@ -2,129 +2,187 @@
 
 ## Introduction
 
-In this lab, we will review the basics of Kubernetes.
+In this lab, we will review the basics of the Microservices Architecture and Kubernetes Infrastructure.
 
 *Estimated Lab Time:* 10 minutes
 
-Watch the video below for a quick walk through of the lab.
-[](youtube:zNKxJjkq0Pw)
-
 ### Objectives
 
+* Understand the Microservices Architecture
 * Understand the Kubernetes Infrastructure
-* Get comfortable with Kubernetes Concepts
 
-## Task 1: What are Kubernetes and Microservices?
+## Task 1: What are Microservices?
 
-Kubernetes is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications. It was originally developed by Google and is now maintained by the Cloud Native Computing Foundation (CNCF). Kubernetes provides a platform for managing and scaling distributed applications, making it easier to deploy and manage containerized applications.
+Imagine yourself in the role of a DBA for a new micro-brewery named "Query Brews."  It is a small-scale operation featuring a single standout beer known as the "Drop Cascade IPA," but your responsibilities as the DBA will be significant. You have been entrusted with designing and supporting the database that will:
 
-Microservices, on the other hand, is an architectural approach to building software systems that are made up of small, independently deployable services. Each service focuses on a specific business capability and communicates with other services through well-defined APIs. Microservices architecture is designed to break down large, monolithic applications into smaller, more manageable services that can be deployed and scaled independently.
+* Record ingredient inventory.
+* Manage the brewing process.
+* Track the available stock for sale.
 
-Kubernetes and Microservices are often used together because Kubernetes provides a platform for deploying, scaling, and managing microservices-based applications. Kubernetes makes it easy to deploy and manage containers, which are a key component of microservices architecture. Kubernetes provides features such as service discovery, load balancing, and automatic scaling, which are essential for building scalable and resilient microservices-based applications.
+Given the size and sole beer offering, you choose a straightforward and efficient approach by implementing a single schema design, enabling **seamless data access** and **streamlined querying** with **minimal complexity**.
 
-## Task 2: Why Kubernetes and Microservices?
+After a highly successful year, a range of fresh new beers, such as the "SQL Saison" and "OLAP Porter," were meticulously crafted to expand the brewery's offerings.  However, these additions required modifications to the current single schema objects.
 
-## Task 3: Kubernetes Infrastructure
+It became apparent that modifying the schema was not only challenging but also **prone to errors** and **disruptive** to the different operations the database supported.  In response, you made the strategic decision to segregate the inventory, brewing, and stock objects into dedicated schemas, ensuring **greater organisation** while **minimising potential disruptions** between the different operations.
 
-## Task 4: Namespaces
+![Schema Progression](images/schema_ms.png "Schema Progression")
 
-In Kubernetes, a namespace is a virtual cluster that provides a way to divide cluster resources between multiple users or teams. It allows you to create a logical separation between resources in the same cluster, providing a way to isolate, manage and control access to these resources.
+As the brewery's reputation soared, the workforce expanded to include dedicated inventory and stock/e-commerce personnel, as well as new brewers.  Each team member brought valuable insights for enhancing their respective domains, necessitating adjustments to both the front-end application and the backend database schemas.  Simultaneously, the responsibility of upholding the database's performance and stability rested on your shoulders, requiring occasional upgrades, patches, and handling of planned outages.  However, **obtaining consensus for modifications** to the applications and **coordinating maintenance tasks** proved to be an insurmountable challenge.
 
-By default, Kubernetes comes with four namespaces: default, kube-system, kube-public, and kube-node-lease. The default namespace is the one used for most applications, while the other namespaces are used by Kubernetes itself to manage its own components.
+To alleviate the administrative overhead associated with change coordination, a resolution was reached to divide the infrastructure.  Each team was allocated its own dedicated database and application tier, granting them the freedom to **progress at their own pace** without impeding the progress or disrupting the other teams.
 
-You can create additional namespaces to organize and manage your resources. This allows you to limit the scope of resources visible to different teams or applications. For example, you can create a separate namespace for your development environment, testing environment, and production environment, and manage the resources for each environment separately.
+![Database Progression](images/db_ms.png "Database Progression")
 
-Kubernetes provides several features that allow you to manage resources across different namespaces. For example, you can use labels and selectors to select resources across different namespaces, and you can configure network policies to control network traffic between resources in different namespaces.
+By initially dividing the schema and subsequently breaking down the architectural components by operation, including the database, into smaller, more manageable services capable of independent deployment and scalability, you have naturally embraced the concept of *Microservices*!
 
-## Task 5: Containers
+## Task 2: What is Kubernetes?
 
-In Kubernetes, a container is a lightweight, standalone, and executable software package that includes everything needed to run an application or a service, including the code, runtime, system tools, libraries, and settings. Containers are isolated from each other and from the host system, providing a secure and predictable environment for running applications.
+Query Brews has evolved into a national success with "Relational Red Ale" being voted the Countries Favourite!  Brews are being produced round-the-clock and the online store is getting tens-of-thousands hits per day.  Resources have been **over-allocated** to handle the peaks of the system and **additional hardware** has been purchased to implement High-Availability/Disaster Recovery to avoid outages.
 
-Kubernetes uses containers as the basic unit of deployment and management. Containers are deployed as part of a Pod, which is the smallest and simplest unit in Kubernetes. A Pod can contain one or more containers that share the same network namespace and can communicate with each other using the localhost interface.
+In general, everything is now running smoothly, but there is a **significant administrative burden** when it comes to upgrades and patching.  These tasks need to be carefully executed in a co-ordinated, rolling manner to prevent any service disruptions or outages.  Additionally, it is evident that there is a substantial amount of **computing resources being underutilised** to accommodate sales and production peaks, while the inventory system remains largely inactive except overnight when the batch processing is taking place.
 
-Containers in Kubernetes are typically created from Docker images, although other container runtimes like CRI-O and containerd are also supported. Kubernetes provides a container runtime interface (CRI) that allows different container runtimes to be used interchangeably.
+The IT department, including yourself, have been asked to reassess the infrastructure and explore possibilities for restructuring to address these problems.  Your colleagues are quick to suggest *Kubernetes*, an **orchestration** platform that **automates the deployment, scaling, and management** of your application Microservices as containers.
 
-Kubernetes provides several benefits when it comes to containers. It provides a platform-agnostic way of running and managing containers, allowing you to deploy the same application across different cloud providers and on-premises data centers. It also provides advanced features like load balancing, scaling, rolling updates, and self-healing, making it easy to manage and scale containerized applications in production.
 
-Overall, containers are a core building block of Kubernetes and a key technology for modern software development and deployment. They provide a lightweight and secure way to run applications, and Kubernetes provides a powerful platform for managing and scaling containerized applications in production.
 
-### Init Containers
+Utilising Kubernetes at the brewery would simplify the management of the existing infrastructure and potentially allow you to consolidate it.  It will help enable developers to focus on building and deploying their applications without worrying about the underlying infrastructure.  Finally, it enable efficient application deployment, scaling, and automated management.
 
-In Kubernetes, an Init Container is a container that runs before the main container in a Pod and is used to perform initialization tasks, such as setting up configuration files, populating a database, or running a script.
+## Task 4: Why Kubernetes?
 
-Init Containers are designed to run once and complete their task before the main container starts. This ensures that the main container only starts once all of the necessary initialization tasks have been completed. Init Containers are also useful for performing tasks that require specialized tools or knowledge that is not available in the main container.
+You have already addressed a number of operational issues at Query Brews by embracing the Microservices Architecture.  However, there are a number of infrastructure issues that have come to the surface that also need some attention.  Lets take a quick look at a few of these and explore why your colleagues have suggested Kubernetes:
 
-Init Containers are defined in the same Pod specification as the main container, but they have a separate container specification that defines the image, command, and arguments for the container. Init Containers are run in order, with each container starting after the previous one has completed.
+![K8s](images/k8s.png)
 
-Init Containers can be useful in a variety of scenarios, such as initializing a database, configuring a web server, or performing complex initialization tasks that require specialized tools or knowledge. They are a powerful tool for managing the initialization process in Kubernetes, providing a way to ensure that the main container starts only once all necessary initialization tasks have been completed.
+### Resource Optimisation and Scalability
 
-## Task 6: Pods
+Beer production stops on Wednesdays and Thursdays, giving the brewers a well needed break, with the focus shifting to online sales and stock.  This switch has a direct impact on the infrastructure as there is, understandably, a massive spike in the online web application and stock database on these weekend preparation days.  Instead of over-allocating resources to handle peaks, ideally it would be great to re-allocate resources and scale the applications up or down when needed.
 
-In Kubernetes, a pod is the smallest and simplest unit in the Kubernetes object model. A pod represents a single instance of a running process in a cluster, and it can contain one or more containers that share the same network namespace and mount the same volumes.
+With Kubernetes, you can efficiently allocate and manage resources. It intelligently schedules and balances services across the cluster, maximising resource utilisation and performance.  It also provides built-in scaling features.  Kubernetes allows you to easily increase or decrease the resources of your application based on demand, ensuring optimal resource utilisation and responsiveness.
 
-A pod is created and managed by the Kubernetes API server, and it is scheduled to run on a specific node in the cluster. Pods can be created, updated, and deleted using Kubernetes API calls or using declarative configuration files that describe the desired state of the pod.
+### High Availability
 
-Pods provide several benefits in Kubernetes. They provide a layer of abstraction that makes it easier to manage containerized applications. They also provide a way to group related containers together and ensure that they are always scheduled together on the same node. This makes it easier to manage dependencies between containers and ensures that they can communicate with each other over the same network namespace.
+A lot of infrastructure was put into place to ensure High Availability at Query Brews.  Each microservices has a number of application and database servers dedicated to them should node failures occur.  Unfortunately, due to their hardware isolation, just like with the resources, none of them can take advantage of the others hardware should multiple failures occur.
 
-One important thing to note about pods is that they are not designed to be long-lived. Pods are designed to be ephemeral, meaning that they can be created and destroyed dynamically in response to changes in the cluster. This allows Kubernetes to provide high availability and scaling capabilities for containerized applications.
+Kubernetes provides built-in mechanisms for high availability. It automatically restarts failed containers or reschedules them on other healthy nodes, minimising downtime and ensuring uninterrupted service availability while still maintaining isolation.  Combined this with the Resource Optimisation and Scalability features and hardware can be dramatically consolidated.
 
-## Task 7: ConfigMaps
+### Hybrid or Multi-Cloud Deployments
 
-In Kubernetes, a ConfigMap is an API object used to store configuration data in key-value pairs. ConfigMaps provide a way to decouple configuration data from application code, making it easier to manage and update configuration data without modifying the application code.
+As Query Brews continues to experience success, it may become more cost-effective for them to consider transitioning some of their services to the cloud instead of investing in additional hardware and expanding their data centre.
 
-ConfigMaps can be created manually using the Kubernetes API or using declarative configuration files. Once created, they can be referenced by pods and other Kubernetes objects using environment variables, command-line arguments, or volume mounts.
+Kubernetes supports hybrid or multi-cloud deployments. It provides portability and flexibility, allowing consistent management of applications across different environments, whether on-premises or across multiple cloud providers... Run the applications in the Cloud with the database on-premises, the options are endless.
 
-ConfigMaps are useful for storing configuration data such as environment variables, command-line arguments, configuration files, or any other configuration data that can be expressed as key-value pairs. This makes it easy to manage configuration data for containerized applications running in Kubernetes.
+## Task 3: Explore Kubernetes Components
 
-ConfigMaps can be updated dynamically by updating the corresponding ConfigMap object in Kubernetes. Once updated, all pods that reference the ConfigMap will receive the updated configuration data.
+Kubernetes appears to be a promising solution for addressing the infrastructure challenges faced by Query Brews. Although you may have never been exposed to Kubernetes, as an experienced Oracle DBA with knowledge of Oracle Real Application Clusters (**RAC**), you can leverage your familiarity with the concepts of distributed computing environments.  Drawing parallels between the two clustering technologies can help flatten the learning curve and ease the transition to Kubernetes.
 
-Overall, ConfigMaps are a powerful tool for managing configuration data in Kubernetes, providing a way to decouple configuration data from application code and making it easier to manage and update configuration data for containerized applications running in Kubernetes.
+Lets see how Kubernetes (**K8s**) Compares to an Oracle RAC running on Grid Infrastructure (**GI**).
 
-## Task 8: Secrets
+![GI vs K8s](images/gi_k8s.png "GI vs K8s")
 
-In Kubernetes, a Secret is an object that allows you to store and manage sensitive information, such as passwords, OAuth tokens, and SSH keys, in a secure way. Secrets are used to ensure that sensitive data is kept confidential and is not exposed to unauthorized users or processes.
+### *User Interface* - Kubectl and SRVCTL
 
-Secrets are similar to ConfigMaps in Kubernetes, but they are specifically designed to store sensitive information, while ConfigMaps are used to store configuration data.
+<details>
+When managing a RAC Cluster, such as creating, starting, stopping, or deleting cluster resources, your go-to CLI tool is SRVCTL (or CRSCTL if you're feeling brave).  A similar CLI tool is used for managing a K8s cluster, kubectl.
 
-When you create a Secret in Kubernetes, the data is stored in a base64-encoded format. The Secret can then be mounted as a volume in a Pod or referenced as an environment variable, allowing you to use the sensitive data in your application.
+Kubectl allows you to interact with the K8s API server and perform various operations such as deploying applications, managing pods, services, and scaling resources.  It operates at the container and cluster level, allowing management of pods, deployments, services, replica sets, and other Kubernetes-specific resources.
 
-Secrets are encrypted at rest in etcd, the distributed key-value store that Kubernetes uses to store its data. When you create a Secret, Kubernetes automatically encrypts the data and stores it securely in etcd.
+You will be using Kubectl throughout the workshop to interact with the K8s Cluster.
+</details>
 
-Overall, Secrets are a powerful tool for managing sensitive data in Kubernetes, providing a way to store and manage passwords, keys, and other sensitive information in a secure way.
+### *Control Plane*
 
-## Task 9: Deployments
+<details>
+Similar to the Clusterware stack in Oracle GI, the *Control Plane* in K8s plays a crucial role as the central point in managing and controlling cluster operations.  Both the GI Clusterware Stack and the K8s *Control Plane* are composed of multiple components that work together to provide essential services and functionalities such as high availability, scalability, and extensibility.
 
-In Kubernetes, a Deployment is an API object that manages a set of replica Pods. Deployments provide a way to declaratively manage the lifecycle of Pods, including their creation, scaling, rolling updates, and rollback.
+The K8s *Control Plane* consists of the following components:
 
-Deployments are used to ensure that a specified number of replica Pods are running at all times. Deployments also provide rolling updates and rollback capabilities, allowing you to update your application without downtime or interruption to the end users.
+* API Server: The API server exposes the Kubernetes API, which allows users, via kubectl, and other components to interact with the cluster.  It handles API requests, authentication, and authorisation.
+* Scheduler: The scheduler assigns pods to available nodes based on resource requirements, constraints, and other policies.
+* Controller Manager: The controller manager runs various controllers that handle cluster-wide functions such as node management, pod replication, and service discovery.
+* etcd: etcd is a distributed key-value store used by Kubernetes to store cluster configuration data, including the state of the cluster, configuration settings, and metadata.
 
-When a Deployment is created, Kubernetes creates and manages a ReplicaSet object that ensures the desired number of replica Pods are running. The ReplicaSet then creates and manages the actual Pods.
+### *etcd* and OCR
 
-Deployments provide several benefits in Kubernetes. They provide a declarative way to manage the desired state of your application, making it easy to create, scale, update, and rollback your application. They also provide high availability and fault tolerance for your application, ensuring that your application can continue to run even if some Pods fail.
+Oracle Cluster Registry (OCR) and etcd are both distributed key-value stores which maintain cluster state and configuration in their respective systems.
 
-Overall, Deployments are a powerful tool for managing the lifecycle of Pods in Kubernetes, providing a way to declaratively manage the desired state of your application and ensuring high availability and fault tolerance.
+OCR stores cluster configuration information, resource dependencies, and policies in a distributed manner.  It ensures consistency and synchronisation of cluster state across multiple nodes.
 
-## Task 10: Replicas
+Similarly, etcd stores critical cluster information, including configuration data, service discovery, and coordination among cluster nodes.  etcd provides a reliable and distributed data store that allows consistent data access and coordination among the nodes in the cluster.
 
-In Kubernetes, a Replica is a copy of a Pod that is created and managed by a ReplicaSet or a Deployment. Replicas are used to ensure that a specified number of identical Pods are running at all times, providing high availability and scalability for your applications.
+Just as in GI and the OCR, it is highly recommended to regularly backup the etcd data.
 
-Replicas are created and managed by a ReplicaSet or a Deployment. When you create a ReplicaSet or a Deployment, you specify the number of replicas that you want to create. The ReplicaSet or Deployment then creates and manages the replicas, ensuring that the specified number of replicas are running at all times.
+### *API Server* and CSSD
 
-Replicas are useful for creating scalable and fault-tolerant applications. By creating multiple identical replicas of a Pod, you can ensure that your application can continue to run even if some of the replicas fail. You can also use replicas to scale your application horizontally, by increasing or decreasing the number of replicas in response to changes in demand.
+Both the Oracle Cluster Synchronisation Services Daemon (CSSD) and Kubernetes API Server provide an interface for managing and controlling cluster operations, handle coordination among cluster nodes, and facilitate communication between various components in the cluster.
 
-Overall, replicas are a powerful tool for creating scalable and fault-tolerant applications in Kubernetes, providing a way to ensure high availability and scalability for your applications.
+The Kubernetes API Server accepts API requests from users, administrators, and other components, processing and executing them to manage the cluster's state and resources.  Similarly, the Oracle CSSD in Oracle Clusterware handles cluster synchronisation, coordinates actions among cluster nodes, and ensures consistent communication and control throughout the cluster.
+</details>
 
-## Task 11: Services
+### *Nodes* - Worker and RAC
 
-In Kubernetes, a Service is an abstraction layer that provides a stable IP address and DNS name for a set of replica Pods. Services allow you to expose your application to other components within a Kubernetes cluster or to the external network, providing a way to connect and communicate with your application.
+<details>
+A worker node is one of the key components that make up a Kubernetes cluster.  A worker node, just like a RAC node, is a physical or virtual machine.  It runs the containerised workloads orchestrated by Kubernetes similarly to a RAC node running a database instance.  Worker Nodes consists of several key components, including the container runtime (such as Docker), kubelet, and optional features like the kube-proxy.
 
-Services are used to abstract the network connectivity between a set of replica Pods and other components in the cluster, allowing you to refer to the set of Pods by a stable DNS name and IP address, regardless of the Pods' actual location or status.
+The worker node is responsible for executing and managing containers, as well as communicating with the control plane components of Kubernetes.
 
-When you create a Service in Kubernetes, you specify the set of replica Pods that the Service should connect to. Kubernetes creates an endpoint for the Service, which is a list of IP addresses of the replica Pods that the Service should route traffic to.
+### *Kubelet* and CRSD
 
-Services provide several benefits in Kubernetes. They allow you to abstract the network connectivity between Pods and other components in the cluster, providing a way to refer to the Pods by a stable DNS name and IP address. They also provide load balancing and fault tolerance, distributing traffic evenly among the replica Pods and ensuring that traffic continues to be routed even if some of the Pods fail.
+The Kubelet and the Cluster Ready Services Daemon (CRSD) operate at the node level and are responsible for managing and controlling resources on individual cluster nodes.  They both have built-in monitoring capabilities to detect failures and ensure the cluster, as well as its resources, remain highly available.
 
-Overall, Services are a powerful tool for managing the network connectivity of your applications in Kubernetes, providing a way to connect and communicate with your application and ensuring that traffic is distributed evenly among the replica Pods.
+### *Kube-Proxy*, *Services* and Listeners
+
+Kube-Proxy and Services provide the network abstraction and stable endpoints for accessing Microservices in a K8s cluster.  Kube-Proxy operates at the Node Level, just as Local Listeners do, while Services operate at the "Namespace" level and are similar to the SCAN Listener.  They all contribute to achieving high availability, load balancing, and routing.
+</details>
+
+### *Namespaces*
+
+<details>
+One distinct advantage to a K8s cluster that is not available in Grid Infrastructure clusters is the Namespace.  A Namespace is virtual clusters within the physical cluster and is used to create logical partitions and separate resources. They provide isolation, resource allocation, and security boundaries for applications running in the cluster.
+
+Consider when having to consolidate multiple databases onto the same cluster.  Isolation is difficult to achieve.  Sure you can implement strategies, such as instance caging, to address resource limits, but physical access to the database host brings challenges, especially with security boundaries and administrators.  Namespaces address these challenges in a K8s cluster and in the case of a database, you could have the Inventory, Brewing, and Stock databases all running in the same physcial cluster, in separate Namespaces to provide complete operational separation.
+</details>
+
+### *Containers and Pods*
+
+<details>
+Containerisation involves encapsulating an application, along with its dependencies and runtime environment, into a self-contained unit that can be executed consistently across different computing environments.
+
+Let's consider a RAC node as an illustration for a container. Envision the ability to bundle the OS, GI, ORACLE_HOMEs, TNS_ADMIN, along with all the necessary patches into a single, installable package.  You would then be able to effortlessly deploy it to either expand an existing cluster or establish a new one.  The time, effort, and potential for errors that could be eliminated would be substantial.
+
+A pod can be thought of as a logical host for containers, where each container within the pod shares the same IP address and port space. Containers within the same pod can communicate with each other using localhost, making it easier to build and manage interconnected applications.
+
+A Pod would be the equivalent of a "shared database server", where multiple databases, independent of eachother run on the same host.
+</details>
+
+## Task 4: Summarise
+
+Initially, when Query Brews began with its single beer offering, both the business and its supporting IT infrastructure were straightforward and manageable. At that point, adopting a Microservices Architecture and Kubernetes Infrastructure would have been excessive and unnecessary. However, as the business expanded, it became evident that adjustments were necessary to enable IT to scale alongside it.
+
+Microservices and Kubernetes are powerful tools and architectural approaches that would bring numerous benefits to Query Brews. However, whether they are the right choice depends on various factors and considerations.
+
+Here are some advantages and disadvantages to keep in mind:
+
+### Advantages
+
+* **Flexibility and Agility**: Microservices with Kubernetes promotes flexibility as each service can be developed, deployed, and updated independently.  This allows for faster development cycles and allows for developers to easily adapt to changing requirements.
+
+* **Scalability**: Microservices architecture allows for independent scaling of individual services based on their specific needs.  Kubernetes automates the scaling and distribution of the microservices within the cluster, ensuring efficient resource utilisation and cost efficiency.
+
+* **Fault Isolation**: With microservices, if one service fails or experiences issues, it does not affect the entire system and Kubernetes self-healing/fault tolerance features enables this seamlessly.
+
+* **Team Autonomy**: Microservices architecture and Kubernetes infrastructure enables different teams to work independently on different services.  This autonomy allows teams to choose the most efficient development processes and deployment strategies for their specific service.
+
+* **Continuous Deployment and DevOps**: Microservices are well-suited for continuous deployment and DevOps practices.  Since services can be deployed independently, updates and bug fixes can be rolled out more frequently, enabling faster delivery of new features.  Kubernetes can be used to orchestrate the rollouts.
+
+### Disadvantages
+
+* **Learning Curve**: Adopting microservices requires a shift in mindset and skill set for both development teams and operational teams.  Understanding and implementing the principles and best practices of microservices architecture may involve a learning curve.  Kubernetes, even for those familiar with related technologies, has its own set of tools, concepts, and terminologies that need to be understood.
+
+* **Increased Complexity**: Microservices and Kubernetes introduce additional complexity due to the distributed nature of the architecture.  Managing inter-service communication, data consistency, and service discovery can be challenging.
+
+* **Distributed System Challenges**: Effective communication between services is essential, but it can also introduce challenges such as latency, network failures, and longer response times. Therefore, it becomes imperative to establish resilient and robust communication mechanisms to mitigate these issues.
+
+* **Service Coordination**: In scenarios where multiple services need to work together to accomplish a task, coordinating and managing the flow of data and transactions across services can be complex and require careful design.
 
 ## Learn More
 
