@@ -20,13 +20,10 @@ This lab assumes you have:
 * A Running and Healthy OraOperator
 * The OraOperator bound to an ADB
 
-## Task 1: Retrieve the ADB OCID
-
-COMPARTMENT_OCID=$(oci iam compartment list --name K8S4DBAS | jq -r '.data[].id')
-ADB_OCID=$(oci db autonomous-database list --compartment-id $COMPARTMENT_OCID | jq -r '.data[].id')
-
 ## Task 1: Download the Wallet/TNSNames
 
+```bash
+<copy>
 export ORACLE_HOME=$(pwd)
 export TNS_ADMIN=$ORACLE_HOME/network/admin
 mkdir -p $ORACLE_HOME/network/admin
@@ -36,9 +33,19 @@ kubectl get secret/adb-tns-admin -n adb --template="{{ index .data \"tnsnames.or
 kubectl get secret/adb-tns-admin -n adb --template="{{ index .data \"sqlnet.ora\" | base64decode }}" > $ORACLE_HOME/network/admin/sqlnet.ora
 
 kubectl get secret/adb-tns-admin -n adb --template="{{ index .data \"cwallet.sso\" | base64decode }}" > $ORACLE_HOME/network/admin/cwallet.sso
+</copy>
+```
 
 ## Task 2: Manage ADMIN password
 
+```bash
+<copy>
+COMPARTMENT_OCID=$(oci iam compartment list --name K8S4DBAS | jq -r '.data[].id')
+ADB_OCID=$(oci db autonomous-database list --compartment-id $COMPARTMENT_OCID | jq -r '.data[].id')
+```
+
+```bash
+<copy>
 set +o history
 
 NOW=$(date +%y%m%d)
@@ -69,18 +76,30 @@ spec:
       k8sSecret:
         name: adb-admin-password-$NOW
 EOF
+</copy>
+```
 
+```bash
+<copy>
 kubectl apply -f adb_admin_pwd.yaml
 rm adb_admin_pwd.yaml
 set -o history
+</copy>
+```
 
 ## Task 3: Manually Connect to the ADB
 
+```bash
+<copy>
 sqlplus /nolog
 connect admin@eagledb_high
+</copy>
+```
 
 ## Task 4: Scale the OCPU and Storage
 
+```bash
+<copy>
 cat > adb_cpu_up.yaml << EOF
 ---
 apiVersion: database.oracle.com/v1alpha1
@@ -95,7 +114,11 @@ spec:
     dataStorageSizeInTBs: 2
     isAutoScalingEnabled: false
 EOF
+</copy>
+```
 
+```bash
+<copy>
 cat > adb_cpu_down.yaml << EOF
 ---
 apiVersion: database.oracle.com/v1alpha1
@@ -110,10 +133,12 @@ spec:
     dataStorageSizeInTBs: 1
     isAutoScalingEnabled: false
 EOF
+</copy>
+```
 
 These could be separated into different operations.  For example, just to scale the CPU:
 
-```bash
+```yaml
 ---
 apiVersion: database.oracle.com/v1alpha1
 kind: AutonomousDatabase
@@ -129,12 +154,15 @@ spec:
 
 We can also do manually:
 
+```bash
+<copy>
 kubectl edit autonomousdatabase adb -n adb
+</copy>
+```
 
 ## Task 7: Create Manual Backup
 
-
-
+```yaml
 apiVersion: database.oracle.com/v1alpha1
 kind: AutonomousDatabaseBackup
 metadata:
@@ -145,12 +173,19 @@ spec:
     k8sADB:
       name: adb
   displayName: adb-ad-hoc
+```
 
 ## Task 8: Restore from Backup
 
+```bash
+<copy>
 kubectl get AutonomousDatabaseBackup -n adb
 BACKUP_NAME=$(kubectl get AutonomousDatabaseBackup -n adb | tail -n 1 | awk '{print $1}')
+</copy>
+```
 
+```bash
+<copy>
 cat > adb_restore.yaml << EOF
 ---
 apiVersion: database.oracle.com/v1alpha1
@@ -169,12 +204,19 @@ spec:
     # pointInTime:
     #   timestamp: 2022-12-23 11:03:13 UTC
 EOF
+</copy>
+```
 
+```bash
+<copy>
 kubectl get adb -n adb
 kubectl describe adb adb-ad-hoc-restore -n adb
+</copy>
+```
 
 ## Task 6: Manually Stop and Start an Autonomous Database
 
+```yaml
 ---
 apiVersion: database.oracle.com/v1alpha1
 kind: AutonomousDatabase
@@ -184,10 +226,15 @@ metadata:
 spec:
   details:
     lifecycleState: STOPPED
+```
 
-Copy:
+```bash
+<copy>
 kubectl patch adb adb -n adb -p '{"spec":{"details":{"lifecycleState":"STOPPED"}}}' --type=merge
+</copy>
+```
 
+```yaml
 ---
 apiVersion: database.oracle.com/v1alpha1
 kind: AutonomousDatabase
@@ -197,9 +244,13 @@ metadata:
 spec:
   details:
     lifecycleState: AVAILABLE
+```
 
-Copy:
+```bash
+<copy>
 kubectl patch autonomousdatabase adb -n adb -p '{"spec":{"details":{"lifecycleState":"AVAILABLE"}}}' --type=merge
+</copy>
+```
 
 ## Schedule Start/Stop Jobs
 
@@ -207,6 +258,8 @@ kubectl patch autonomousdatabase adb -n adb -p '{"spec":{"details":{"lifecycleSt
 
 Create a role and bind it to the service account to provide the required access. In this case, we will use the "default" service account:
 
+```bash
+<copy>
 cat > adb_role.yaml << EOF
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -233,11 +286,15 @@ roleRef:
   name: autonomousdatabases-reader
   apiGroup: rbac.authorization.k8s.io
 EOF
+</copy>
+```
 
 After applying the Role and RoleBinding, the service account "default" in the "adb" namespace should have the necessary permissions to access the "autonomousdatabases" resource in the "database.oracle.com" API group.
 
 ### Schedule a CronJob
 
+```bash
+<copy>
 cat > adb_cron.yaml << EOF
 ---
 apiVersion: batch/v1
@@ -300,9 +357,15 @@ schedule: '30 8* **'
                 - '{"spec":{"details":{"lifecycleState":"AVAILABLE"}}}'
                 - '--type=merge'
 EOF
+</copy>
+```
 
+```bash
+<copy>
 kubectl get cronjob -n adb
 kubectl get jobs --watch -n adb
+</copy>
+```
 
 ## Learn More
 

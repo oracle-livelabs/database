@@ -22,15 +22,38 @@ This lab assumes you have:
 
 ## Task 1: Manually Connect to the SIDB
 
+```bash
+<copy>
 kubectl port-forward service/sidb 1521:1521 -n containerdb &
+</copy>
+```
+
+```bash
+<copy>
 sqlplus system/Welcome_1234@localhost:1521/ORCL1
+</copy>
+```
+
+```bash
+<copy>
 sqlplus system/Welcome_1234@localhost:1521/ORCLPDB1
+</copy>
+```
 
 ## Task 2: Connect to the SIDB Container
 
+```bash
+<copy>
 kubectl get pods -n containerdb
+</copy>
+```
+
+```bash
+<copy>
 POD=$(kubectl get pods -n containerdb --no-headers | awk '{print $1}')
 kubectl exec -it $POD -n containerdb -- /bin/bash
+</copy>
+```
 
 ## Task 3: Update Initialization Parameters
 
@@ -38,13 +61,25 @@ kubectl exec -it $POD -n containerdb -- /bin/bash
 
 ## Task 4: Update Database Configuration (Flashback, Archivelog)
 
+```bash
+<copy>
 kubectl patch singleinstancedatabase sidb-orcl1 --type merge -p '{"spec":{"archiveLog": true}}' -n containerdb
+</copy>
+```
+
+```bash
+<copy>
 kubectl patch singleinstancedatabase sidb-orcl1 --type merge -p '{"spec":{"forceLog": true}}' -n containerdb
+</copy>
+```
 
 ## Task 6: Clone Database
 
 Note: To clone a database, the source database must have archiveLog mode set to true.
 
+```bash
+<copy>
+cat > clone_sidb.yaml << EOF
 apiVersion: database.oracle.com/v1alpha1
 kind: SingleInstanceDatabase
 metadata:
@@ -63,8 +98,15 @@ spec:
     storageClass: "oci-bv"
     accessMode: "ReadWriteOnce"
   replicas: 1
+EOF
+</copy>
+```
 
+```bash
+<copy>
 kubectl get singleinstancedatabase -n containerdb
+</copy>
+```
 
 ## Learn More
 

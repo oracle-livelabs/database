@@ -25,23 +25,32 @@ This lab assumes you have:
 ## Task 2: Create a Namespace
 
 ```bash
+<copy>
 kubectl create namespace containerdb
+</copy>
 ```
 
 ## Task 2: Create a Secret for Container Registry Authentication
 
 ```bash
+<copy>
 kubectl create secret docker-registry oracle-container-registry-secret --docker-server=container-registry.oracle.com --docker-username='<oracle-sso-email-address>' --docker-password='<oracle-sso-password>' --docker-email='<oracle-sso-email-address>' -n containerdb
+</copy>
 ```
 
 ```bash
+<copy>
 kubectl describe secret oracle-container-registry-secret -n containerdb
 kubectl get secret oracle-container-registry-secret -n containerdb  --template="{{index .data \".dockerconfigjson\" | base64decode}}"
+</copy>
 ```
 
 ## Task 3: Create the SIDB Provision Manifest
 
 ```bash
+<copy>
+cat > adb_bind.yaml << EOF
+---
 apiVersion: v1
 kind: Secret
 metadata:
@@ -121,17 +130,22 @@ spec:
   ## ORDS image details
   image:
     pullFrom: container-registry.oracle.com/database/ords:21.4.2-gh
+EOF
+</copy>
 ```
 
 ## Task 4: Apply the SIDB Provision Manifest
 
 ```bash
+<copy>
 kubectl apply -f singleinstancedatabase_create.yaml
+</copy>
 ```
 
 ## Task 5: Review Deployment and Logs
 
 ```bash
+<copy>
 POD=$(kubectl get pods -n containerdb --no-headers | awk '{print $1}')
 
 kubectl describe pod $POD -n containerdb
@@ -143,21 +157,27 @@ kubectl get singleinstancedatabase sidb -n containerdb
 kubectl get singleinstancedatabase sidb -n containerdb -o "jsonpath={.status.connectString}"
 # PDB Connect String
 kubectl get singleinstancedatabase sidb -n containerdb -o "jsonpath={.status.pdbConnectString}"
+</copy>
 ```
 
 ## Task 6: Create Certificate Secrets
 
-```
+```bash
+<copy>
 openssl genrsa -out ca.key 2048
 openssl req -new -x509 -days 365 -key ca.key -subj "/C=CN/ST=GD/L=SZ/O=oracle, Inc./CN=oracle Root CA" -out ca.crt
 openssl req -newkey rsa:2048 -nodes -keyout tls.key -subj "/C=CN/ST=GD/L=SZ/O=oracle, Inc./CN=cdb-dev-ords" -out server.csr
 /usr/bin/echo "subjectAltName=DNS:cdb-dev-ords,DNS:www.example.com" > extfile.txt
 openssl x509 -req -extfile extfile.txt -days 365 -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out tls.crt
+</copy>
 ```
 
+```bash
+<copy>
 kubectl create secret tls db-tls --key="tls.key" --cert="tls.crt"  -n containerdb
 kubectl create secret generic db-ca --from-file=ca.crt -n containerdb
-
+</copy>
+```
 
 ## Learn More
 

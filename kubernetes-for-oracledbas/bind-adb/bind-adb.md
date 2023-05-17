@@ -24,9 +24,6 @@ This lab assumes you have:
 
 In Kubernetes, a *Namespace* is a virtual cluster that provides a way to divide the physical Kubernetes cluster resources between multiple users or teams.
 
-
-
-
 It allows you to create a logical separation between resources in the same cluster, providing a way to isolate, manage and control access to these resources.
 
 ```bash
@@ -39,7 +36,6 @@ kubectl create namespace adb
 
 * For production clusters, avoid using the `default` namespace. Instead, make other namespaces and use those.
 * Avoid creating namespaces with the prefix `kube-`, it is reserved for Kubernetes system namespaces.
-
 
 ## Task 2: Retrieve the ADB OCID
 

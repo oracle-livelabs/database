@@ -61,11 +61,11 @@ With Kubernetes, you can efficiently allocate and manage resources. It intellige
 
 A lot of infrastructure was put into place to ensure High Availability at Query Brews.  Each microservices has a number of application and database servers dedicated to them should node failures occur.  Unfortunately, due to their hardware isolation, just like with the resources, none of them can take advantage of the others hardware should multiple failures occur.
 
-Kubernetes provides built-in mechanisms for high availability. It automatically restarts failed containers or reschedules them on other healthy nodes, minimising downtime and ensuring uninterrupted service availability while still maintaining isolation.  Combined this with the Resource Optimisation and Scalability features and hardware can be dramatically consolidated.
+Kubernetes provides built-in mechanisms for high availability. It automatically restarts failed containers or reschedules them on other healthy nodes, minimising downtime and ensuring uninterrupted service availability while still maintaining isolation.  Combined this with the Resource Optimisation and Scalability features, the existing hardware can be consolidated.
 
 ### Hybrid or Multi-Cloud Deployments
 
-As Query Brews continues to experience success, it may become more cost-effective for them to consider transitioning some of their services to the cloud instead of investing in additional hardware and expanding their data centre.
+As Query Brews continues to experience success, it may become more cost-effective for them to consider transitioning some of their services to the cloud instead of investing in additional hardware and expanding the data centre.
 
 Kubernetes supports hybrid or multi-cloud deployments. It provides portability and flexibility, allowing consistent management of applications across different environments, whether on-premises or across multiple cloud providers... Run the applications in the Cloud with the database on-premises, the options are endless.
 
