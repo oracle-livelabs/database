@@ -440,6 +440,8 @@ A number of dictionary views allow you to see which modules are present in your 
     BUSINESS_MODULE_ENV  helpers                        HELPER_MODULE_INLINE
     ```
 
+You many now proceed to the next lab.
+
 ## Learn More
 
 - SQL Language Reference [CREATE MLE MODULE](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/create-mle-module.html#GUID-EF8D8EBC-2313-4C6C-A76E-1A739C304DCC)

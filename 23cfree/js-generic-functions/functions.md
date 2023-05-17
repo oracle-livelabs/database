@@ -496,6 +496,8 @@ The data dictionary has been enhanced in Oracle Database 23c Free-Developer Rele
     - In case of stand-alone PL/SQL functions and procedures `object_name` is populated and `procedure_name` is null
     - Inline JavaScript functions and procedures don't have a corresponding `module_name`
 
+You many now proceed to the next lab.
+
 ## Learn More
 
 - [Database PL/SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/lnpls/index.html)

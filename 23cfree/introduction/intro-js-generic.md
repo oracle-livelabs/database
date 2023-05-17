@@ -23,6 +23,8 @@ In this workshop, you will learn how to:
 - Work effectively with JSON
 - Get insights into your code's behaviour using Post Execution Debugging
 
+You may now proceed to the next lab.
+
 ## Learn More
 
 - [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/index.html)

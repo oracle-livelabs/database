@@ -294,7 +294,7 @@ Database Actions supports debugging with a nice, graphical user interface. Start
 
     ![Prepare to create a new MLE Environment](images/sdw-create-mle-env.jpg)
 
-    From the wizard's left hand side, listing all available modules, add both `BUSINESS_LOGIC` and `HELPER_MODULE_INLINE` to the list of imported modules by highlighting them, followed by a click on the `>` arrow. 
+    From the wizard's left hand side, listing all available modules, add both `BUSINESS_LOGIC` and `HELPER_MODULE_INLINE` to the list of imported modules by highlighting them, followed by a click on the `>` arrow.
 
     ![Create the businessLogic MLE Environment using the Wizard](images/sdw-create-mle-env-wizard.jpg)
 
@@ -666,6 +666,8 @@ In an ideal world post-execution debugging should be simple to enable without ha
     ![Output gathered by dynamic debugging](images/dynamic-debugging-output.jpg)
 
     Rather than displaying the JSON output on screen you can import it into any tool supporting its format and analyse it offline.
+
+You many now proceed to the next lab.
 
 ## Learn More
 

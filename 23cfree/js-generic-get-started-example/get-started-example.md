@@ -299,6 +299,8 @@ TEST3
 TRUE
 ```
 
+You many now proceed to the next lab.
+
 ## Learn More
 
 - [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/index.html)

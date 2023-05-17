@@ -497,6 +497,8 @@ The previous tasks in this lab focused on _reading_ from the database. In this p
     </copy>
     ```
 
+You many now proceed to the next lab.
+
 ## Learn More
 
 - [Server-Side JavaScript API Documentation](https://oracle-samples.github.io/mle-modules/)

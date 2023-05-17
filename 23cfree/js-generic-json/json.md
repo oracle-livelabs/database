@@ -729,6 +729,8 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
 
     You should see that the PL/SQL procedure has been completed successfully. The underlying table has been dropped, too.
 
+You many now proceed to the next lab.
+
 ## Learn More
 
 - [JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/soda-collections-in-mle-js.html#GUID-58C2BBD9-837D-41CD-A9EF-4EA062F1E1E2) describes the SODA API in more detail
