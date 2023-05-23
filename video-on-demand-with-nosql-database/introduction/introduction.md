@@ -12,7 +12,7 @@ Learn how Oracle NoSQL Database can provide a delightful developer experience wi
 
 This lab is based on data representing activity from customers using a Video on Demand streaming application. This lab walks you through the steps to create tables in Oracle NoSQL Database Cloud Service (NDCS), load data into the database, and perform basic queries. In addition, it lets you use an application that was developed by the Oracle NoSQL team based on the GraphQL API.
 
-_Estimated Time:_ 70 Minutes
+_Estimated Time:_ 90 Minutes
 
 
 ### About NoSQL database
@@ -47,7 +47,7 @@ This workshop assumes you have:
 ## Learn More
 
 * [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
-* [Oracle NoSQL Database Cloud Service documentation](https://docs.oracle.com/pls/topic/lookup?ctx=cloud&id=CSNSD-GUID-88373C12-018E-4628-B241-2DFCB7B16DE8)
+* [Oracle NoSQL Database Cloud Service documentation](https://docs.oracle.com/en/cloud/paas/nosql-cloud/index.html)
 * [About Cloud Shell](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm)
 * [About Code Editor](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/code_editor_intro.htm)
 
