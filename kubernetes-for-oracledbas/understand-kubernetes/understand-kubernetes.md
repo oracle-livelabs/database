@@ -21,7 +21,7 @@ Imagine yourself in the role of an Oracle DBA for a new micro-brewery, "Query Br
 * Manage the brewing process.
 * Track the available stock for sale.
 
-Given the size and sole beer offering, you choose a straightforward and efficient approach by implementing a single schema design, enabling **seamless data access** and **streamlined querying** with **minimal complexity**.  Each application has different data type requirements, but fortunately Oracle can handle them all preventing the need to support multiple special-purpose database technologies.
+Given the size and sole beer offering, you choose a straightforward and efficient approach by implementing a single schema design, enabling **seamless data access** and **streamlined querying** with **minimal complexity**.  Each application has different data type requirements, but fortunately Oracle can handle them all, preventing the need to support multiple special-purpose database technologies.
 
 ### *Local Legends* - Containers
 
@@ -86,7 +86,7 @@ With Kubernetes, you can efficiently allocate and manage resources. It intellige
 
 ### Observability
 
-As the infrastructure spread out to enable isolation, visibility and insights into the performance, health, and behavior of the applications and their databases became more difficult obtain.  Collating and centralising logging, metric, and health information to detect and resolve issues promptly, optimise resource utilisation, and ensure the overall health and availability of your system was a full-time job.
+As the infrastructure spread out to enable isolation, visibility and insights into the performance, health, and behaviour of the applications and their databases became more difficult obtain.  Collating and centralising logging, metric, and health information to detect and resolve issues promptly, optimise resource utilisation, and ensure the overall health and availability of your system was a full-time job.
 
 Kubernetes provides a solid foundation for observability by offering native support for logging, metrics, health checks, and resource monitoring. It also fosters an ecosystem of observability tools, such as Prometheus and Grafana, and integrations that further enhance the monitoring and troubleshooting capabilities of Kubernetes environments.
 
@@ -128,10 +128,10 @@ Similar to the Clusterware stack in Oracle GI, the *Control Plane* in K8s plays 
 
 The K8s *Control Plane* consists of the following components:
 
-* API Server: The API server exposes the Kubernetes API, which allows users, via kubectl, and other components to interact with the cluster.  It handles API requests, authentication, and authorisation.
-* Scheduler: The scheduler assigns pods to available nodes based on resource requirements, constraints, and other policies.
-* Controller Manager: The controller manager runs various controllers that handle cluster-wide functions such as node management, pod replication, and service discovery.
-* etcd: etcd is a distributed key-value store used by Kubernetes to store cluster configuration data, including the state of the cluster, configuration settings, and metadata.
+* **API Server:** The API server exposes the Kubernetes API, which allows users, via kubectl, and other components to interact with the cluster.  It handles API requests, authentication, and authorisation.
+* **Scheduler:** The scheduler assigns pods to available nodes based on resource requirements, constraints, and other policies.
+* **Controller Manager:** The controller manager runs various controllers that handle cluster-wide functions such as node management, pod replication, and service discovery.
+* **etcd:** etcd is a distributed key-value store used by Kubernetes to store cluster configuration data, including the state of the cluster, configuration settings, and metadata.
 
 ### *etcd* and OCR
 
@@ -167,7 +167,7 @@ Kube-Proxy and Services provide the network abstraction and stable endpoints for
 
 One distinct advantage to a K8s cluster that is not available in Grid Infrastructure clusters is the Namespace.  A Namespace is virtual clusters within the physical cluster and is used to create logical partitions and separate resources. They provide isolation, resource allocation, and security boundaries for applications running in the cluster.
 
-Consider when having to consolidate multiple databases onto the same cluster.  Isolation is difficult to achieve.  Sure you can implement strategies, such as instance caging, to address resource limits, but physical access to the database host brings challenges, especially with security boundaries and administrators.  Namespaces address these challenges in a K8s cluster and in the case of a database, you could have the Inventory, Brewing, and Stock databases all running in the same physcial cluster, in separate Namespaces to provide complete operational separation.
+Consider when having to consolidate multiple databases onto the same cluster.  Isolation is difficult to achieve.  Sure you can implement strategies, such as instance caging, to address resource limits, but physical access to the database host brings challenges, especially with security boundaries and administrators.  Namespaces address these challenges in a K8s cluster and in the case of a database, you could have the Inventory, Brewing, and Stock databases all running in the same physical cluster, in separate Namespaces to provide complete operational separation.
 
 ### *Containers and Pods*
 
@@ -218,4 +218,4 @@ Here are some advantages and disadvantages to keep in mind:
 ## Acknowledgements
 
 * **Author** - John Lathouwers, Developer Advocate, Database Development Operations
-* **Last Updated By/Date** - John Lathouwers, May 2023
+* **Last Updated By/Date** - John Lathouwers, June 2023

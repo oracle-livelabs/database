@@ -35,4 +35,4 @@ This lab assumes you have:
 ## Acknowledgements
 
 * **Author** - John Lathouwers, Developer Advocate, Database Development Operations
-* **Last Updated By/Date** - John Lathouwers, May 2023
+* **Last Updated By/Date** - John Lathouwers, June 2023
