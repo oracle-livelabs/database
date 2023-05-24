@@ -4,6 +4,8 @@
 
 In this lab, we will review the basics of the Microservices Architecture and Kubernetes Infrastructure.
 
+If you are already familiar and comfortable with these concepts/technology, please feel free to move onto [Get Started](https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md) for the hands-on portion of the Workshop.
+
 *Estimated Lab Time:* 10 minutes
 
 ### Objectives
@@ -13,49 +15,80 @@ In this lab, we will review the basics of the Microservices Architecture and Kub
 
 ## Task 1: What are Microservices?
 
-Imagine yourself in the role of a DBA for a new micro-brewery named "Query Brews."  It is a small-scale operation featuring a single standout beer known as the "Drop Cascade IPA," but your responsibilities as the DBA will be significant. You have been entrusted with designing and supporting the database that will:
+Imagine yourself in the role of an Oracle DBA for a new micro-brewery, "Query Brews".  It is a small-scale operation featuring a single standout beer known as the "Drop Cascade IPA," but your responsibilities as the Oracle DBA will be significant. You have been entrusted with designing and supporting the database that will:
 
 * Record ingredient inventory.
 * Manage the brewing process.
 * Track the available stock for sale.
 
-Given the size and sole beer offering, you choose a straightforward and efficient approach by implementing a single schema design, enabling **seamless data access** and **streamlined querying** with **minimal complexity**.
+Given the size and sole beer offering, you choose a straightforward and efficient approach by implementing a single schema design, enabling **seamless data access** and **streamlined querying** with **minimal complexity**.  Each application has different data type requirements, but fortunately Oracle can handle them all preventing the need to support multiple special-purpose database technologies.
+
+### *Local Legends* - Containers
 
 After a highly successful year, a range of fresh new beers, such as the "SQL Saison" and "OLAP Porter," were meticulously crafted to expand the brewery's offerings.  However, these additions required modifications to the current single schema objects.
 
-It became apparent that modifying the schema was not only challenging, but also **prone to errors** and **disruptive** to the different operations the database supported.  In response, you made the strategic decision to segregate the inventory, brewing, and stock objects into dedicated schemas, ensuring **greater organisation** while **minimising potential disruptions** between the different operations.
+It became apparent that modifying the single schema was challenging, **prone to errors**, and **disruptive** to the different operations the database supported.  In response, you made the strategic decision to segregate the inventory, brewing, and stock objects into dedicated schemas, ensuring **greater organisation** while **minimising potential disruptions** between the different operations during change operations.
 
 ![Schema Progression](images/schema_ms.png "Schema Progression")
 
-As the brewery's reputation soared, the workforce expanded to include dedicated inventory and stock/e-commerce personnel, as well as new brewers.  Each team member brought valuable insights for enhancing their respective domains, necessitating adjustments to both the front-end application and the backend database schemas.  Simultaneously, the responsibility of upholding the database's performance and stability rested on your shoulders, requiring occasional upgrades, patches, and handling of planned outages.  However, **obtaining consensus for modifications** to the applications and **coordinating maintenance tasks** proved to be an insurmountable challenge.
+In a sense, you can say that you **Containerised** the schemas based on their operational functionality.  It took a bit of work to get there though, you had to:
 
-To alleviate the administrative overhead associated with **change coordination**, a resolution was reached to divide the infrastructure.  Each team was allocated its own dedicated database and application tier, granting them the freedom to **progress at their own pace** without impeding the progress or disrupting the other teams.
+* Identify all object inter-dependencies required for each function to operate correctly.
+* Establish new Roles and Privileges for cross-schema access.
+* Build new Stored Procedures and Packages (APIs) to abstract underlying schema design changes.
+
+However, as a result, you now have:
+
+* **Enhanced Security** allowing for separation between the brewery's operations.
+* **Isolation** to develop individual brewery operation functionality without impacting the others.
+* **Portability** of each schema using tools such datapump and transportable tablespaces.
+
+### *National Icons* - Microservices
+
+Query Brews has evolved into a national success with "Relational Red Ale" being voted the Countries Favourite!  Ingredients are being shipped in by the truck-load, brews are being produced round-the-clock, and the online store is getting tens-of-thousands hits per day.  Unfortunately the database is struggling to perform during the customers "weekend preparations", which is having a negative impact on the other brewery operations.  It has also been a real struggle to co-ordinate database patches, upgrades, and outages with the different business units.
+
+Building on the benefits of the "containerised" schemas, you decide to take action and break the infrastructure up.   Each brewery function is allocated its own Real Application Cluster (RAC) database, ensuring:
+
+* **Improved Fault Tolerance and Resilience** both at the Application and Database layer by using High Availability Solutions, such as RAC.
+* **Improved Scalability** by allowing different parts of the system to scale based on its specific needs.
+* **Team Autonomy** each brewery unit can make independent decisions without impacting the entire system.
+* **Ease of Maintenance** by breaking the system down into smaller parts, the brewery's IT implementation is easier to understand, develop, test, and maintain.
 
 ![Database Progression](images/db_ms.png "Database Progression")
 
-By initially dividing the schema and subsequently breaking down the architectural components by operation, including the database, into smaller, more manageable services capable of independent deployment and scalability, you have naturally embraced the concept of *Microservices*!
+With this infrastructure re-organisation, you've naturally embraced the [**Microservices**](https://developer.oracle.com/technologies/microservices.html) architecture.  There have been challenges you had to overcome, including:
+
+* Handling distributed transactions across the different databases.
+* Messaging between the databases using [Transactional Event Queues (TxEventQ)](https://www.oracle.com/database/advanced-queuing/)
+
+However, with careful planning and taking advantage of the Oracle database features, utilising the Oracle Database in a Microservices Architecture has been an overwhelming success.
 
 ## Task 2: What is Kubernetes?
 
-Query Brews has evolved into a national success with "Relational Red Ale" being voted the Countries Favourite!  Brews are being produced round-the-clock and the online store is getting tens-of-thousands hits per day.  Resources have been **over-allocated** to handle the peaks of the system and **additional hardware** has been purchased to implement High-Availability/Disaster Recovery to avoid outages.
+As the Query Brew's reputation soars, a number of short-comings in the infrastructure has come to the surface.  The current infrastructure, which has significantly increased, has led to certain applications having **unused resources** while others are **overwhelmed** at different times of the day.  **Monitoring** the environment to get a holistic view of all operations, from the application to the database, is complex and requires a number of tools that necessitates integration and maintenance.  Additionally, **obtaining consensus for modifications** to the applications and **coordinating maintenance tasks** with the database has proved to be an insurmountable challenge.  These tasks need to be carefully **orchestrated** to prevent any service disruptions or outages.
 
-In general, everything is now running smoothly, but there is a **significant administrative burden** when it comes to upgrades and patching.  These tasks need to be carefully executed in a co-ordinated, rolling manner to prevent any service disruptions or outages.  Additionally, it is evident that there is a substantial amount of **computing resources being underutilised** to accommodate sales and production peaks, while the inventory system remains largely inactive except overnight when the batch processing is taking place.
+This is where *Kubernetes* can help... Kubernetes plays a crucial role by acting as an intelligent overseer for your Microservices, it:
 
-The IT department, including yourself, have been asked to reassess the infrastructure and explore possibilities for restructuring to address these problems.  Your colleagues are quick to suggest *Kubernetes*, an **orchestration** platform that **automates the deployment, scaling, and management** of your application Microservices as containers.
-
-Utilising Kubernetes at the brewery would simplify the management of the existing infrastructure and potentially allow you to consolidate it.  It will also enable developers to focus on building and deploying their applications without worrying about the underlying infrastructure.  Finally, it enable efficient application deployment, scaling, and automated management.
-
-## Task 4: Why Kubernetes?
-
-You have already addressed a number of operational issues at Query Brews by embracing the Microservices Architecture.  However, there are a number of infrastructure issues that have come to the surface that also need some attention.  Lets take a quick look at a few of these and explore why your colleagues have suggested Kubernetes:
+* Allows you to easily scale your applications based on demand.
+* Provides extensive capabilities for monitoring, alerting, visualisation, and log analysis.
+* Automatically handles application failures.
+* Simplifies deployment and updates of applications whether on-premises or in the Cloud.
 
 ![K8s](images/k8s.png)
 
+Let's take a closer look at some of these points:
+
 ### Resource Optimisation and Scalability
 
-Beer production stops on Wednesdays and Thursdays, giving the brewers a well needed break, with the focus shifting to online sales and stock.  This switch has a direct impact on the infrastructure as there is, understandably, a massive spike in the online web application and stock database on these weekend preparation days.  Instead of over-allocating resources to handle peaks, ideally it would be great to re-allocate resources and scale the applications up or down when needed.
+Beer production stops on Wednesdays and Thursdays, giving the brewers a well needed break, with the focus shifting to online sales and stock.  This switch has a direct impact on the infrastructure as there is, understandably, a massive spike in the online web application and stock database on "weekend preparation" days.  Instead of over-allocating resources to handle peaks, Kubernetes can be used re-allocate resources and scale the applications up or down when needed.
 
 With Kubernetes, you can efficiently allocate and manage resources. It intelligently schedules and balances services across the cluster, maximising resource utilisation and performance.  It also provides built-in scaling features.  Kubernetes allows you to easily increase or decrease the resources of your application based on demand, ensuring optimal resource utilisation and responsiveness.
+
+### Observability
+
+As the infrastructure spread out to enable isolation, visibility and insights into the performance, health, and behavior of the applications and their databases became more difficult obtain.  Collating and centralising logging, metric, and health information to detect and resolve issues promptly, optimise resource utilisation, and ensure the overall health and availability of your system was a full-time job.
+
+Kubernetes provides a solid foundation for observability by offering native support for logging, metrics, health checks, and resource monitoring. It also fosters an ecosystem of observability tools, such as Prometheus and Grafana, and integrations that further enhance the monitoring and troubleshooting capabilities of Kubernetes environments.
 
 ### High Availability
 
@@ -69,9 +102,13 @@ As Query Brews continues to experience success, it may become more cost-effectiv
 
 Kubernetes supports hybrid or multi-cloud deployments. It provides portability and flexibility, allowing consistent management of applications across different environments, whether on-premises or across multiple cloud providers... Run the applications in the Cloud with the database on-premises, the options are endless.
 
-## Task 3: Explore Kubernetes Components
+## Task 3: Kubernetes Infrastructure
 
-Kubernetes appears to be a promising solution for addressing the infrastructure challenges faced by Query Brews. Although you may have never been exposed to Kubernetes, as an experienced Oracle DBA with knowledge of Oracle Real Application Clusters (**RAC**), you can leverage your familiarity with the concepts of distributed computing environments.  Drawing parallels between the two clustering technologies can help flatten the learning curve and ease the transition to Kubernetes.
+At the heart of Kubernetes (K8s) is the cluster, it forms the core infrastructure where the Microservices are deployed, managed, and monitored.  Understanding the infrastructure and components of the Kubernetes (K8s) cluster is essential for providing the best Oracle database support to the Microservices running within it, which may include the Oracle database itself.
+
+### *Worldwide Trailblazers* - Kubernetes Cluster
+
+Even though you may have never been exposed to Kubernetes, as an experienced Oracle DBA with knowledge of Oracle Real Application Clusters (**RAC**), you can leverage your familiarity RAC and Grid Infrastructure to comprehend the Kubernetes infrastructure.  As Query Brews begins its transition to the Kubernetes environment, you embark on a journey to grasp the essential components of a Kubernetes cluster.
 
 Lets see how Kubernetes (**K8s**) Compares to an Oracle RAC running on Grid Infrastructure (**GI**).
 
@@ -79,17 +116,14 @@ Lets see how Kubernetes (**K8s**) Compares to an Oracle RAC running on Grid Infr
 
 ### *User Interface* - Kubectl and SRVCTL
 
-<details>
 When managing a RAC Cluster, such as creating, starting, stopping, or deleting cluster resources, your go-to CLI tool is SRVCTL (or CRSCTL if you're feeling brave).  A similar CLI tool is used for managing a K8s cluster, kubectl.
 
 Kubectl allows you to interact with the K8s API server and perform various operations such as deploying applications, managing pods, services, and scaling resources.  It operates at the container and cluster level, allowing management of pods, deployments, services, replica sets, and other Kubernetes-specific resources.
 
 You will be using Kubectl throughout the workshop to interact with the K8s Cluster.
-</details>
 
 ### *Control Plane*
 
-<details>
 Similar to the Clusterware stack in Oracle GI, the *Control Plane* in K8s plays a crucial role as the central point in managing and controlling cluster operations.  Both the GI Clusterware Stack and the K8s *Control Plane* are composed of multiple components that work together to provide essential services and functionalities such as high availability, scalability, and extensibility.
 
 The K8s *Control Plane* consists of the following components:
@@ -114,11 +148,9 @@ Just as in GI and the OCR, it is highly recommended to regularly backup the etcd
 Both the Oracle Cluster Synchronisation Services Daemon (CSSD) and Kubernetes API Server provide an interface for managing and controlling cluster operations, handle coordination among cluster nodes, and facilitate communication between various components in the cluster.
 
 The Kubernetes API Server accepts API requests from users, administrators, and other components, processing and executing them to manage the cluster's state and resources.  Similarly, the Oracle CSSD in Oracle Clusterware handles cluster synchronisation, coordinates actions among cluster nodes, and ensures consistent communication and control throughout the cluster.
-</details>
 
 ### *Nodes* - Worker and RAC
 
-<details>
 A worker node is one of the key components that make up a Kubernetes cluster.  A worker node, just like a RAC node, is a physical or virtual machine.  It runs the containerised workloads orchestrated by Kubernetes similarly to a RAC node running a database instance.  Worker Nodes consists of several key components, including the container runtime (such as Docker), kubelet, and optional features like the kube-proxy.
 
 The worker node is responsible for executing and managing containers, as well as communicating with the control plane components of Kubernetes.
@@ -130,19 +162,15 @@ The Kubelet and the Cluster Ready Services Daemon (CRSD) operate at the node lev
 ### *Kube-Proxy*, *Services* and Listeners
 
 Kube-Proxy and Services provide the network abstraction and stable endpoints for accessing Microservices in a K8s cluster.  Kube-Proxy operates at the Node Level, just as Local Listeners do, while Services operate at the "Namespace" level and are similar to the SCAN Listener.  They all contribute to achieving high availability, load balancing, and routing.
-</details>
 
 ### *Namespaces*
 
-<details>
 One distinct advantage to a K8s cluster that is not available in Grid Infrastructure clusters is the Namespace.  A Namespace is virtual clusters within the physical cluster and is used to create logical partitions and separate resources. They provide isolation, resource allocation, and security boundaries for applications running in the cluster.
 
 Consider when having to consolidate multiple databases onto the same cluster.  Isolation is difficult to achieve.  Sure you can implement strategies, such as instance caging, to address resource limits, but physical access to the database host brings challenges, especially with security boundaries and administrators.  Namespaces address these challenges in a K8s cluster and in the case of a database, you could have the Inventory, Brewing, and Stock databases all running in the same physcial cluster, in separate Namespaces to provide complete operational separation.
-</details>
 
 ### *Containers and Pods*
 
-<details>
 Containerisation involves encapsulating an application, along with its dependencies and runtime environment, into a self-contained unit that can be executed consistently across different computing environments.
 
 Let's consider a RAC node as an illustration for a container. Envision the ability to bundle the OS, GI, ORACLE_HOMEs, TNS_ADMIN, along with all the necessary patches into a single, installable package.  You would then be able to effortlessly deploy it to either expand an existing cluster or establish a new one.  The time, effort, and potential for errors that could be eliminated would be substantial.
@@ -150,11 +178,10 @@ Let's consider a RAC node as an illustration for a container. Envision the abili
 A pod can be thought of as a logical host for containers, where each container within the pod shares the same IP address and port space. Containers within the same pod can communicate with each other using localhost, making it easier to build and manage interconnected applications.
 
 A Pod would be the equivalent of a "shared database server", where multiple databases, independent of each other run on the same host.
-</details>
 
 ## Task 4: Summarise
 
-Initially, when Query Brews began with its single beer offering, both the business and its supporting IT infrastructure were straightforward and manageable. At that point, adopting a Microservices Architecture and Kubernetes Infrastructure would have been excessive and unnecessary. However, as the business expanded, it became evident that adjustments were necessary to enable IT to scale alongside it.
+Initially, when Query Brews began with its single beer offering, both the business and its supporting IT infrastructure were straightforward and manageable. At that point, adopting a Microservices Architecture and Kubernetes Infrastructure would have been excessive and unnecessary. However, as the business expanded, it became evident that adjustments were necessary to enable IT to scale alongside it.  Luckily, as an Oracle DBA, you played a crucial role in facilitating a smooth transition for the organisation to the new architecture and infrastructure. The Oracle database served as the central component of the data persistence layer, and your expertise ensured a seamless migration.
 
 Microservices and Kubernetes are powerful tools and architectural approaches that would bring numerous benefits to Query Brews. However, whether they are the right choice depends on various factors and considerations.
 
@@ -184,6 +211,7 @@ Here are some advantages and disadvantages to keep in mind:
 
 ## Learn More
 
+* [Oracle Converged Database](https://blogs.oracle.com/database/post/what-is-a-converged-database)
 * [Oracle Container Engine for Kubernetes (OKE)](https://www.oracle.com/uk/cloud/cloud-native/container-engine-kubernetes/)
 * [Kubernetes](https://kubernetes.io/)
 
