@@ -4,9 +4,9 @@
 
 There are two ways in which you can specify a location for the folder or file (or files) that constitute the table you want to load into HeatWave. One is by using Resource Principal. It is recommended that you use Resource Principal-based approach for access to data in Object Storage for more sensitive data as this approach is more secure.
 The second way is by using Pre-Authenticated Request URLs. For more information on creating PARS, see Using PARs. If you choose to use PAR URLs, we recommend that you use read-only PARs with Lakehouse and that you specify short expiration dates on your PARs. The expiration dates should align with your loading schedule. Since we are using a sample data set, we will make use of PAR URLs in this LiveLab.
-We already have several tables available in HeatWave that have been loaded from MySQL InnoDB storage. 
-We will now load the DELIVERY_ORDERS table from the Object Store. This is a large table with 30 million rows and contains information about the delivery vendor for orders.
+We already have several tables available in HeatWave that have been loaded from MySQL InnoDB storage.
 
+We will now load the DELIVERY_ORDERS table from the Object Store. This is a large table with 30 million rows and contains information about the delivery vendor for orders.
 
 ### Objectives
 
@@ -20,18 +20,17 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 - Some Experience with MySQL Shell
 - Completed Lab 5
 
-
 ## Task 1: Create the PAR Link for the "delivery_order" files
 
 1. To create a PAR URL
-    - navigate to Storage —> Buckets —> lakehouse-files —> order  folder.
-2. Select the first file —> delivery-orders-1.csv and click the three vertical dots.
-3. Click on ‘Create Pre-Authenticated Request’
-4. The ‘Object’ option will be pre-selected.
-5. Keep the other options for ‘Access Type’ unchanged.
-6. Click the ‘Create Pre-Authenticated Request’ button.
-7. Click the ‘Copy’ icon to copy the PAR URL.
-8. Save the generated PAR URL; you will need it in the next task 
+    - Navigate to **Storage —> Buckets —> lakehouse-files —> order**  folder.
+2. Select the first file —> **delivery-orders-1.csv** and click the three vertical dots.
+3. Click on **Create Pre-Authenticated Request**
+4. The **Object** option will be pre-selected.
+5. Keep the other options for **Access Type** unchanged.
+6. Click the **Create Pre-Authenticated Request** button.
+7. Click the **Copy** icon to copy the PAR URL.
+8. Save the generated PAR URL; you will need it in the next task
 
 ## Task 2: Connect to your MySQL HeatWave system using Cloud Shell
 
@@ -80,7 +79,22 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
     <copy>SET @db_list = '["mysql_customer_orders"]';</copy>
     ```
 
-3. This sets the parameters for the table name we want to load data into and other information about the source file in the object store. Substitute the PAR URL below with the one you generated in the previous task:
+3. This sets the parameters for the table name we want to load data into and other information about the source file in the object store. Substitute the **PAR URL** below with the one you generated in the previous task:
+
+    ```bash
+    <copy>SET @dl_tables = '[{
+    "db_name": "mysql_customer_orders",
+    "tables": [{
+        "table_name": "delivery_orders",
+        "dialect": 
+           {
+           "format": "csv",
+           "field_delimiter": "\\t",
+           "record_delimiter": "\\n"
+           },
+        "file": [{"par": **PAR URL**"}]
+    }] }]';</copy>
+    ```
 
     ```bash
     <copy>SET @dl_tables = '[{
@@ -96,7 +110,6 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
         "file": [{"par": "https://objectstorage.us-ashburn-1.oraclecloud.com/p/MAGNmpjq3Ej4wX6LN6KaE3R9AM2_h_fQDhfM5C9SbKXO_Zbe4MdrTvypV5XsyHkS/n/mysqlpm/b/lakehousefiles/o/delivery-orders-1.csv"}]
     }] }]';</copy>
     ```
-
 4. This command populates all the options needed by Autoload:
 
     ```bash
