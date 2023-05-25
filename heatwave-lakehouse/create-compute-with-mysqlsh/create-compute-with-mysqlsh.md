@@ -64,7 +64,7 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
 
     Note in the output there are two files, a *private key:`id_rsa` and a public key: `id_rsa.pub`. Keep the private key safe and don't share its content with anyone. The public key will be needed for various activities and can be uploaded to certain systems as well as copied and pasted to facilitate secure communications in the cloud.
 
-## Task 2: Create Compute instance
+## Task 2: Copy public SSH key value to Notepad
 
 You will need a compute Instance to connect to your brand new MySQL database.
 
@@ -86,18 +86,20 @@ You will need a compute Instance to connect to your brand new MySQL database.
 3. Copy the id_rsa.pub content the notepad
 
     Your notepad should look like this
-    ![CONNECT](./images/notepad-rsa-key.png "notepad rsa key ")  
+    ![CONNECT](./images/notepad-rsa-key.png "notepad rsa key ")
 
-4. To launch a Linux Compute instance, go to 
+## Task 3: Create Compute instance
+
+1. To launch a Linux Compute instance, go to 
     Navigation Menu
     Compute
     Instances
     ![CONNECT](./images/compute-launch.png "compute launch ")
 
-5. On Instances in **heatwave** Compartment, click  **Create Instance**
+2. On Instances in **heatwave** Compartment, click  **Create Instance**
     ![CONNECT](./images/compute-create.png "compute create")
 
-6. On Create Compute Instance
+3. On Create Compute Instance
 
     Enter Name
 
@@ -105,38 +107,44 @@ You will need a compute Instance to connect to your brand new MySQL database.
     <copy>heatwave-client</copy>
     ```
 
-7. Make sure **heatwave** compartment is selected
+4. Make sure **heatwave** compartment is selected
 
-8. On Placement, keep the selected Availability Domain
+5. On Placement, keep the selected Availability Domain
 
-9. On Image and Shape, keep the selected Image, Oracle Linux 8
+6. On Image and Shape, keep the selected Image, Oracle Linux 8
 
       ![CONNECT](./images/compute-oracle-linux.png "compute oracle linux")  
 
-10. Select Instance Shape: VM.Standard.E2.2
+7. Change the Instance Shape:
+    - Click **Change shape** button
+    - Click **Virtual Machine** box
+    - Click **AMD** box
+    - Click **VM.Standard.E4.Flex**
+    - Set Number of OCPUs to **8**
+    - Click the **Select Shape** button
 
-      ![CONNECT](./images/compute-shape-select.png "compute shape select")
- 
-11. On Networking, make sure '**heatwave-vcn**' is selected
+    ![CONNECT](./images/compute-shape-select.png "compute shape select")
+
+8. On Networking, make sure '**heatwave-vcn**' is selected
 
     'Assign a public IP address' should be set to Yes
 
     ![CONNECT](./images/compute-vcn.png "compute vcn.")
 
-12. On Add SSH keys, paste the public key from the notepad.
+9. On Add SSH keys, paste the public key from the notepad.
   
     ![CONNECT](./images/compute-id-rsa-paste.png "compute id rsa paste")
 
-13. Click '**Create**' to finish creating your Compute Instance.
+10. Click '**Create**' to finish creating your Compute Instance.
 
-14. The New Virtual Machine will be ready to use after a few minutes. The state will be shown as 'Provisioning' during the creation
+11. The New Virtual Machine will be ready to use after a few minutes. The state will be shown as 'Provisioning' during the creation
     ![CONNECT](./images/compute-provisioning.png "compute provisioning")
 
-15. The state 'Running' indicates that the Virtual Machine is ready to use.
+12. The state 'Running' indicates that the Virtual Machine is ready to use.
 
     ![CONNECT](./images/compute-running.png "compute running")
 
-## Task 3: Connect to Compute and Install MySQl Shell
+## Task 4: Connect to Compute and Install MySQl Shell
 
 1. Copy the public IP address of the active Compute Instance to your notepad
 
@@ -192,7 +200,6 @@ You will need a compute Instance to connect to your brand new MySQL database.
     ```
 
     ![CONNECT](./images/connect-shell.png "connect shell")
-
 
 You may now **proceed to the next lab**
 
