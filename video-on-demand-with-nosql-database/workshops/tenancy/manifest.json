@@ -50,6 +50,12 @@
 			"filename": "../../explore-run-queries/explore-run-queries.md"
 		},
 		{
+			"title": "Lab 7: Clean Up",
+			"description": "Perform clean-up",
+			"type": "freetier",
+			"filename": "../../clean-up/clean-up.md"
+		},
+		{
 			"title": "Need Help?",
 			"description": "Solutions to Common Problems and Directions for Receiving Live Help",
 			"filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
