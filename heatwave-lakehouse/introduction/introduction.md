@@ -1,5 +1,7 @@
 # Introduction
 
+## About this Workshop
+
 MySQL HeatWave is a fully managed database service, powered by the integrated
 HeatWave in-memory query accelerator. It’s the only cloud database service that
 combines transactions, analytics, and machine learning services into one MySQL
@@ -22,9 +24,7 @@ HeatWave Lakehouse. The deployment goals are:
 3. Highlight that Lakehouse offers you a way to perform analytics on top of their Object Store without moving any data into MySQL InnoDB storage.
 4. Highlight that you can perform queries on data from InnoDB, data from InnoDB loaded into HeatWave, and data loaded from Object Storage into HeatWave using standard MySQL syntax.
 
-
-
-_Estimated Lab Time:_ 1.5 hours +
+_Estimated Workshop Time:_ 1.5 hours +
 
 ### About Product/Technology
 

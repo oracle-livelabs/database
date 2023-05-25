@@ -96,20 +96,21 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
     }] }]';</copy>
     ```
 
-    ```bash
-    <copy>SET @dl_tables = '[{
+- It should look like the following example:
+
+    SET @dl_tables = '[{
     "db_name": "mysql_customer_orders",
     "tables": [{
         "table_name": "delivery_orders",
         "dialect": 
-           {
-           "format": "csv",
-           "field_delimiter": "\\t",
-           "record_delimiter": "\\n"
-           },
+        {
+        "format": "csv",
+        "field_delimiter": "\\t",
+        "record_delimiter": "\\n"
+        },
         "file": [{"par": "https://objectstorage.us-ashburn-1.oraclecloud.com/p/MAGNmpjq3Ej4wX6LN6KaE3R9AM2_h_fQDhfM5C9SbKXO_Zbe4MdrTvypV5XsyHkS/n/mysqlpm/b/lakehousefiles/o/delivery-orders-1.csv"}]
-    }] }]';</copy>
-    ```
+    }] }]';
+
 4. This command populates all the options needed by Autoload:
 
     ```bash
