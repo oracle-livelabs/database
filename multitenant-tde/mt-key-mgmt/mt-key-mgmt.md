@@ -529,8 +529,6 @@ Note
 - Once you create it you connect to it
 - You open the keystore for cdbclone1
     - The state is saved as open
-    
-![Screenshot of terminal output](./images/move-pdbclone1.png " ")
 
 -  With show pdbs you can see pdbclone1 is open for read write
 
