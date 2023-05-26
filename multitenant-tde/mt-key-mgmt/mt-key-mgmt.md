@@ -243,22 +243,23 @@ Notes
 
 ## Task 10: Set The master Key For CDB1 & PDB1
 
+Notes
+This script 
+1. Sets the encryption key for the CDB & PDB
+2. - We are using a tag
+3. - Tags are important to identify which key it is, especially when using OKV
+    - In OKV you have the visibility to all the databases that are set and all the keys that are managed
+    - The tag uniquely identifies the encryption key
+    - This makes it easier to manage the wallets and know exactly which key you are looking at
+4. This is the point of no return
+    - From this point forward the database expects the wallet and encryption key to be there when the database starts up
+5. Each PDB also has its own unique key
+
     ```
     <copy>
     /home/oracle/scripts/cloning/set_keys.sh CDB1
     </copy>
     ```
-
-This script 
-- Sets the encryption key for the CDB & PDB
-- We are using a tag
-    - Tags are important to identify which key it is, especially when using OKV
-        - In OKV you have the visibility to all the databases that are set and all the keys that are managed
-        - The tag uniquely identifies the encryption key
-        - This makes it easier to manage the wallets and know exactly which key you are looking at
-- This is the point of no return
-    - From this point forward the database expects the wallet and encryption key to be there when the database starts up
-- Each PDB also has its own unique key
 
 1. Run this script to set the master encryption key for CDB2 and PDB2
 
@@ -280,7 +281,7 @@ CDB1
     /home/oracle/scripts/cloning/wallet_status.sh CDB1
     </copy>
     ```
-2. 1. Run the following command to check the wallet status of CDB2
+2. Run the following command to check the wallet status of CDB2
 CDB2
 
     ```
@@ -339,8 +340,8 @@ The Activation Time is listed
     ```
 
 ![Screenshot of terminal output](./images/master-encryption-key-cdb2.png " ")
-- By default it is set to AES128
-    - Recommendation is to set to AES256
+    - By default it is set to AES128
+        - Recommendation is to set to AES256
         - Gives a little more security
     - Second parameter set is encrypt_new_tablespaces = ALWAYS
     - By default any new tablespaces will be encrypted with AES256
