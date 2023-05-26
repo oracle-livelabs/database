@@ -361,6 +361,12 @@ The Activation Time is listed
 ## Task 12: Encrypt The Tablespaces
 
 1. Encrypt the tablspaces in CDB1
+- This is an on-line encryption
+        - Sequentially it is going through all the data files associated with the tablespace & creating a new copy of the data file that is encrypted.  
+        - It keeps track of any changes of that data file in that tablespace while it is doing that copy that is encrypted
+    - It applies those changes
+    - Under the covers it replaces the current data file with the new data file while the database is up and running
+    - When finished the space is reclaimed
 
     ```
     <copy>
@@ -368,18 +374,14 @@ The Activation Time is listed
     </copy>
     ```
 
-- This is an on-line encryption
-    - Sequentially it is going through all the data files associated with the tablespace & creating a new copy of the data file that is encrypted.  
-    - It keeps track of any changes of that data file in that tablespace while it is doing that copy that is encrypted
-    - It applies those changes
-    - Under the covers it replaces the current data file with the new data file while the database is up and running
-    - When finished the space is reclaimed
-
 **Key Points**
 - You need to have enough additional space for the largest data file that is going to be encrypted because a second file will be created
 - This can be done in parallel, but more data files are created in parallel so keep your free space in mind
 - This can be at a later point in time
--   You don’t have to do all the tablespaces at once
+- You don’t have to do all the tablespaces at once
+- When you are finished you need to do a full backup as an incremental will not see the tablespace as encrypted
+- The backup should be done as-soon-as it is done encrypting
+- If you do a restore to the data file before doing the full backup and applied the archive logs to bring it forward the restore would be unencrypted
 
 2. Run the encryption for CDB2
 
@@ -388,11 +390,6 @@ The Activation Time is listed
     /home/oracle/scripts/cloning/encrypt_tablespaces.sh CDB2
     </copy>
     ```
-
-**Key Points**
-- When you are finished you need to do a full backup as an incremental will not see the tablespace as encrypted
-- The backup should be done as-soon-as it is done encrypting
-- If you do a restore to the data file before doing the full backup and applied the archive logs to bring it forward the restore would be unencrypted
 
 3. Look at the key status again and let's review what happened to the tablespaces and how this ties together
 
@@ -404,7 +401,7 @@ The Activation Time is listed
 
 ![Screenshot of terminal output](./images/key-status-1.png " ")
 
-
+Notes
 - You can see the Master Encryption Key is set for SYSAUX & SYSTEM
 - It now shows as encrypted
 - It shows as encrypted with AES256
@@ -426,7 +423,7 @@ The Activation Time is listed
     </copy>
     ```
 
-- You will see the same thing as CDB1
+    - You will see the same thing as CDB1
     NOTE:  The keys are different, so you have 4 Master Keys in 2 different wallets
 
 ## Task 13: Clone PDB1 in CDB1
