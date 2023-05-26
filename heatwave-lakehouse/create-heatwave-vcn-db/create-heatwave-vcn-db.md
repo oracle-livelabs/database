@@ -136,7 +136,7 @@ In this lab, you will be guided through the following tasks:
 
     ![VCN](./images/vcn-ttp-add-ingress.png "Add HTTP Ingress Rule")
 
-7. On Security List for Default Security List for mds_vcn page, the new Ingress Rules will be shown under the Ingress Rules List
+7. On Security List for Default Security List for heatwave-vcn page, the new Ingress Rules will be shown under the Ingress Rules List
 
     ![VCN](./images/vcn-ttp-ingress-completed.png"View VCN Completed HTTP Ingress rules")
 
@@ -241,13 +241,13 @@ In this lab, you will be guided through the following tasks:
 
 15. Use the Image below to identify your OCI Region.
 
-    ![MDS](./images/regionSelector.png " ")
+    ![HeatWave](./images/regionSelector.png " ")
 
 16. Click on your localized geographic area
 
     ## North America (NA)
 
-    **Tenancy Regions** Please select the same region that you are creating MDS in  
+    **Tenancy Regions** Please select the same region that you are creating **heatwave-db** in  
 
     <details>
     <summary>US East (Ashburn) Region - Copy and paste to PAR Source URL</summary>
@@ -275,7 +275,7 @@ In this lab, you will be guided through the following tasks:
     ```
     </details>
     ## Latin America (LAD)
-    **Tenancy Regions** Please select the same region that you are creating MDS in
+    **Tenancy Regions** Please select the same region that you are creating **heatwave-db** in
     <details>
     <summary>Brazil East (Sao Paulo) Region - Copy and paste to PAR Source URL</summary>
     <br>
