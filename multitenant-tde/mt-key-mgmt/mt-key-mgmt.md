@@ -375,13 +375,13 @@ The Activation Time is listed
     ```
 
 **Key Points**
-- You need to have enough additional space for the largest data file that is going to be encrypted because a second file will be created
-- This can be done in parallel, but more data files are created in parallel so keep your free space in mind
-- This can be at a later point in time
-- You don’t have to do all the tablespaces at once
-- When you are finished you need to do a full backup as an incremental will not see the tablespace as encrypted
-- The backup should be done as-soon-as it is done encrypting
-- If you do a restore to the data file before doing the full backup and applied the archive logs to bring it forward the restore would be unencrypted
+    - You need to have enough additional space for the largest data file that is going to be encrypted because a second file will be created
+    - This can be done in parallel, but more data files are created in parallel so keep your free space in mind
+    - This can be at a later point in time
+    - You don’t have to do all the tablespaces at once
+    - When you are finished you need to do a full backup as an incremental will not see the tablespace as encrypted
+    - The backup should be done as-soon-as it is done encrypting
+    - If you do a restore to the data file before doing the full backup and applied the archive logs to bring it forward the restore would be unencrypted
 
 2. Run the encryption for CDB2
 
@@ -402,18 +402,18 @@ The Activation Time is listed
 ![Screenshot of terminal output](./images/key-status-1.png " ")
 
 Notes
-- You can see the Master Encryption Key is set for SYSAUX & SYSTEM
-- It now shows as encrypted
-- It shows as encrypted with AES256
-- The keys starts with AZvR, which matches the key for the CDB
-- If you look at the PDB the Master Encryption Key begins with AaUv & it matches the Key Id at the bottom
-- NOTICE: TEMP & UNDO were not encrypted
-    - Anytime you encrypt the tablespace that means that the data that originated in that tablespace stays encrypted anytime the database uses it for processing.
-    - If you have a sort going on and that sort contains data that is in USERS, if it’s a join of multiple tables and only 1 of those tables resides in a tablespace that encrypted that whole join process becomes encrypted
-    - Everything that starts with an encrypted tablespace inherits  encryption during sorts
-    - If it spills over from memory into temp and temp is encrypted it will stay encrypted
-    - No reason to encrypt temp again because anything that gets encrypted will stay encrypted
-    - The same thing happens with UNDO as it would inherit the starting point of encrypted data, so there is no reason to encrypt this as well
+    - You can see the Master Encryption Key is set for SYSAUX & SYSTEM
+    - It now shows as encrypted
+    - It shows as encrypted with AES256
+    - The keys starts with AZvR, which matches the key for the CDB
+    - If you look at the PDB the Master Encryption Key begins with AaUv & it matches the Key Id at the bottom
+    - NOTICE: TEMP & UNDO were not encrypted
+        - Anytime you encrypt the tablespace that means that the data that originated in that tablespace stays encrypted anytime the database uses it for processing.
+        - If you have a sort going on and that sort contains data that is in USERS, if it’s a join of multiple tables and only 1 of those tables resides in a tablespace that encrypted that whole join process becomes encrypted
+        - Everything that starts with an encrypted tablespace inherits  encryption during sorts
+        - If it spills over from memory into temp and temp is encrypted it will stay encrypted
+        - No reason to encrypt temp again because anything that gets encrypted will stay encrypted
+        - The same thing happens with UNDO as it would inherit the starting point of encrypted data, so there is no reason to encrypt this as well
 
 4. Check the key status for CDB2
 
