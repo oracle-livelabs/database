@@ -51,7 +51,6 @@ Start with normal setup on CDB1
     - If you do an incremental it won’t look at the database and say the data in the data file or tablespace changed because it got encrypted 
     - All it knows is the header, which has the last update scn, didn’t change, so the block didn’t change 
     - But the data within the block did change because it was encrypted
-
 4. If you only do an incremental merge then
 - The data will stay unencrypted 
 - You need to start over as it will take those incremental backups that are unencrypted, merge it into the full backup, which is unencrypted, and keep it unencrypted 
@@ -60,14 +59,25 @@ Start with normal setup on CDB1
 
 ## Task 3: Look at the wallet for CDB1
 
-1. Showing the default location
-2. Status
-3. Not even a wallet yet
+    ```
+    <copy>
+    /home/oracle/scripts/cloning/wallet_status.sh CDB1
+    </copy>
+    ```
+
+1. You can see the default location of the wallet file.
+2. The wallet status will be given.
+3. You can see there is no wallet that has been created yet.
 4. At this point CBD1 does not know about a wallet or encryption
 
 ![Screen Capture of Wallet Check](./images/wallet-check-cdb1.png " ")
 
 ## Task 4: Look at the wallet for CDB2
+
+1. You can see the default location of the wallet file.
+2. The wallet status will be given.
+3. You can see there is no wallet that has been created yet.
+4. At this point CBD2 does not know about a wallet or encryption
 
     ```
     <copy>
@@ -95,12 +105,15 @@ Start with normal setup on CDB1
 
 ## Task 6: We can check the status of CDB2 and see the same thing
 
-   
     ```
     <copy>
     /home/oracle/scripts/cloning/key_status.sh CDB2
     </copy>
     ```
+- Shows tablespaces associated with the database
+- Whether they are encrypted or not
+- If they are encrypted what is the master key
+- Status is empty
 
 ## Task 7: Steps to Create A Wallet
 
@@ -116,13 +129,16 @@ Start with normal setup on CDB1
     - Tells it that starting in this location that the wallet root is set at to look for the wallet associated with this database
         - In this instance it will look for a subdirectory called tde
     - You will see the message to Bounce the database
-        - Changing the spfile parameter requires a database bounce
-            - Can set the wallet root location when you have a maintenance window & set the key
-                - This allows you to go down the encryption path later
-                - They don’t have to be done together
-                - Plan for a bounce before you start the encryption process
+        
+Notes
+- Changing the spfile parameter requires a database bounce
+- Can set the wallet root location when you have a maintenance window & set the key
+- This allows you to go down the encryption path later
+- They don’t have to be done together
+- Plan for a bounce before you start the encryption process
 
-![Screenshot of terminal output](./images/bounce-database.png " ")
+
+![Screenshot of terminal output](./images/bounce-database2.png " ")
     
 - After the database comes back up from bounce
     - Set tde configuration parameter
@@ -132,7 +148,7 @@ Start with normal setup on CDB1
             - I’m going to be using a wallet file
             - If using Oracle Key Vault the configuration will say OKV instead of file
 
-![Screenshot of terminal output](./images/post-bounce.png " ")
+![Screenshot of terminal output](./images/post-bounce2.png " ")
 
 2. Create the keystore
     - Give it a wallet file
@@ -140,19 +156,7 @@ Start with normal setup on CDB1
     - Open it
     - Changing to PDB1
     - Using a unified wallet
-        - This means the wallet that is used for the CDB contains the keys for the CDB and the PDB
-        - When you have Multi-Tenant the CDB and the PDB‘s all have independent keys
-        - In this case the 
-            - CDB has it’s own Master Encryption Key
-            - The PDB has it’s own Master Encryption Key
-            - If there were a second PDB it would also have it’s own unique Master Encryption Key
     - The script also creates a second wallet
-        - No password needed to read
-        - Database able to connect to it at startup
-        - When restarted it will auto read the wallet and pull any keys that are set in that wallet to do the encryption
-        - If you do not create an autologin wallet when you start the database you need to manually open up the wallet using the password in order to access the keys
-            - Not as secure a method, but less effort when you bounce the database
-            - Most customers use an auto login wallet
     - Note the 2 files in the directory
         - .p12 is the password file
             - Cannot access the file without the password
@@ -163,6 +167,22 @@ Start with normal setup on CDB1
             - You do not want to backup this file
             - Anybody who has this will be able open the database and read the keys
     - Even is somebody got the database on the wallet they can’t get the key that is protecting that database
+
+Notes
+- Using a unified wallet
+    - This means the wallet that is used for the CDB contains the keys for the CDB and the PDB
+    - When you have Multi-Tenant the CDB and the PDB‘s all have independent keys
+    - In this case the 
+        - CDB has it’s own Master Encryption Key
+        - The PDB has it’s own Master Encryption Key
+        - If there were a second PDB it would also have it’s own unique Master Encryption Key
+- The script also creates a second wallet
+    - No password needed to read
+    - Database able to connect to it at startup
+    - When restarted it will auto read the wallet and pull any keys that are set in that wallet to do the encryption
+    - If you do not create an autologin wallet when you start the database you need to manually open up the wallet using the password in order to access the keys
+        - Not as secure a method, but less effort when you bounce the database
+        - Most customers use an auto login wallet
 
 3. Do the same for CDB2
 
