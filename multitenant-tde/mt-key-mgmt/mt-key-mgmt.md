@@ -1,3 +1,16 @@
+# Introduction
+
+In this lab we will go through the steps to add a wallet & keys to CDB's and PDB's, uplug a PDB, plug it into a different CDB & then move the key.
+
+# Duration
+This lab should take 1 hour to complete
+
+# Prerequisites
+
+Familiarity with Database is desirable, but not required
+Some command line interface experience is desirable, but not required
+
+
 ## Task 1: Backup CDB1 and CDB2
 This section starts you off with an unencrypted database & backing it up so you can re-run this lab multiple times if you want.
 
