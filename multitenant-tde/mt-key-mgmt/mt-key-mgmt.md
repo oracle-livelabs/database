@@ -46,7 +46,7 @@ Start with normal setup on CDB1
     - Tablespace
     - Data in the blocks
 3. TDE does NOT encrypt
-- Block Headers
+    - Block Headers
     - Means when you go to back it up nothing changed
     - If you do an incremental it won’t look at the database and say the data in the data file or tablespace changed because it got encrypted 
     - All it knows is the header, which has the last update scn, didn’t change, so the block didn’t change 
@@ -220,10 +220,10 @@ Notes
     </copy>
     ```
 
-- Last time we ran this it said not available
-- You will see the status as OPEN_NO_MASTER_KEY
+1. Last time we ran this it said not available
+2. You will see the status as OPEN_NO_MASTER_KEY
     - We have not set the key yet
-- CDB1 & PDB1 both have the wallet open but no master key
+3. CDB1 & PDB1 both have the wallet open but no master key
 
 ![Screenshot of terminal output](./images/wallet-status-2.png " ")
 
@@ -234,6 +234,10 @@ Notes
     /home/oracle/scripts/cloning/create_wallet.sh CDB2
     </copy>
     ```
+1. Last time we ran this it said not available
+2. You will see the status as OPEN_NO_MASTER_KEY
+    - We have not set the key yet
+3. CDB2 & PDB2 both have the wallet open but no master key
 
 ![Screenshot of terminal output](./images/wallet-status-3.png " ")
 
@@ -266,8 +270,8 @@ This script
 ![Screenshot of terminal output](./images/set-keys.png " ")
 
 2. Check the wallet status now that the master encryptions keys were created
-- Status shows as OPEN
-- Wallet is known and open
+    - Status shows as OPEN
+    - Wallet is known and open
 
 CDB1
 1. Run the following command to check the wallet status of CDB1
