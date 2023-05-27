@@ -7,8 +7,8 @@ This lab should take 1 hour to complete
 
 # Prerequisites
 
-Familiarity with Database is desirable, but not required
-Some command line interface experience is desirable, but not required
+    - Familiarity with Database is desirable, but not required
+    - Some command line interface experience is desirable, but not required
 
 
 ## Task 1: Backup CDB1 and CDB2
