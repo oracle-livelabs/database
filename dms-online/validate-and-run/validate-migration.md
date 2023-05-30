@@ -79,7 +79,8 @@ In this lab, you will:
 
   ![Screenshot of completed phases](images/monitor-lag-waiting.png =90%x*)
 
-  9. Now data replication is in progress.Go back to your source database and execute the following script:
+  9. Now data replication is in progress. **If you want test the replication please continue, otherwise you can jump to step 15**.
+  Go back to your source database and execute the following script:
 
       ```
     <copy>
@@ -122,20 +123,20 @@ In this lab, you will:
 
   ![Screenshot of Oracle GoldenGate Services Manager Extracts](./images/extracts.png " ")
 
-  13. Observe the 1007 inserts we performed on the source database in the previous step:
+  12. Observe the 1007 inserts we performed on the source database in the previous step:
   ![Screenshot of Oracle GoldenGate table statistics Extract](./images/table-statistics.png " ")
 
-  14. Navigate back to Overview Tab and click on the existing replicat and navigate to **Statistics** tab:
+  13. Navigate back to Overview Tab and click on the existing replicat and navigate to **Statistics** tab:
   ![Screenshot of Oracle GoldenGate click on replicat](./images/click-on-target-replicats.png " ")
- 15. Observe the 1007 inserts we performed on the source database in the previous step, and how they were replicated to the target:
+ 14. Observe the 1007 inserts we performed on the source database in the previous step, and how they were replicated to the target:
   ![Screenshot of Oracle GoldenGate table statistics Extract](./images/target-statistics.png " ")
- 16. This is the point where a migration user would stop the source application so that no more transactions are applied to the source DB. You can now press **Resume** on the job to complete replication. In the Resume Job dialog, chose the **Switchover App** phase and press **Resume**. The Switchover App phase will gracefully stop replication and signal the target application to initiate transactions to the target DB.
+ 15. This is the point where a migration user would stop the source application so that no more transactions are applied to the source DB. You can now press **Resume** on the job to complete replication. In the Resume Job dialog, chose the **Switchover App** phase and press **Resume**. The Switchover App phase will gracefully stop replication and signal the target application to initiate transactions to the target DB.
 ![Screenshot of resume job switchover](./images/resume-job-switchover.png " ")
 
-17. After Job resumes and waits after Switchover App phase, press Resume. Select the last phase Cleanup and press Resume:
+16. After Job resumes and waits after Switchover App phase, press Resume. Select the last phase Cleanup and press Resume:
 ![Screenshot of resume job cleanup](./images/resume-job-cleanup.png " ")
 
-18. The migration runs the final cleanup phases and shows as Succeeded when finished:
+17. The migration runs the final cleanup phases and shows as Succeeded when finished:
 ![Screenshot of resume job cleanup completed](./images/cleanup-completed.png " ")
 ![Screenshot of succeeded Migration](./images/succeeded.png " ")
 
