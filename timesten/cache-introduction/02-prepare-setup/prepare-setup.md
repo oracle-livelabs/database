@@ -1,4 +1,4 @@
-# Prepare Setup
+# Prepare setup
 
 ## Introduction
 
@@ -84,4 +84,4 @@ This workshop requires a certain number of ports to be available, a requirement 
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, August 2022
+* **Last Updated By/Date** - Jenny Bloom, March 2023

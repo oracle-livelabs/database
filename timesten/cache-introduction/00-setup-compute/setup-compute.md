@@ -1,4 +1,4 @@
-# Setup Compute Instance
+# Setup compute instance
 
 ## Introduction
 
@@ -41,19 +41,19 @@ If you wish to use an existing network (see *Lab: Prepare Setup* for details of 
 2. Login to Oracle Cloud.
 3.  Open up the hamburger menu in the left hand corner.  Click **Developer Services**, choose **Resource Manager > Stacks**. Choose the compartment in which you would like to install. Click **Create Stack**.  
 
-  ![](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
+  ![Choose Developer Services and Resource Manager Stacks](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
 
-  ![](./images/create-stack.png " ")
+  ![Create stack](./images/create-stack.png " ")
 
 4.  Select **My Configuration**, choose the **.ZIP FILE** button, click the **Browse** link and select the zip file that you downloaded or drag-n-drop for the file explorer.
 
-  ![](./images/create-stack-novnc-1.png " ")
+  ![Select My Configuration and zipfile](./images/create-stack-novnc-1.png " ")
 
 5.  Click **Next**.
 
 6. Enter or select the following:
 
-  ![](./images/create-stack-novnc-2.png " ")
+  ![Provide input for Main configuration and options](./images/create-stack-novnc-2.png " ")
 
     - **Instance Count:** Accept the default, **1**.
     - **Select Availability Domain:** Select an availability domain from the dropdown list.
@@ -68,7 +68,7 @@ If you wish to use an existing network (see *Lab: Prepare Setup* for details of 
     - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Unchecked
     - **Instance Shape:** Accept the default shown or select from the dropdown. e.g. VM.Standard2.4
 
-  ![](./images/create-stack-novnc-3.png " ")
+  ![Uncheck flex shape button](./images/create-stack-novnc-3.png " ")
 
 10. In this section we are provisioning a new VCN with all the appropriate ingress and egress rules needed to run this workshop (recommended).
     - **Use Existing VCN?:** Accept the default by leaving this unchecked. This will create a **new VCN**.
@@ -77,18 +77,18 @@ If you wish to use an existing network (see *Lab: Prepare Setup* for details of 
 
 12. Make sure that **Run Apply** is checked and click **Create**.
 
-  ![](./images/create-stack-novnc-4.png " ")
+  ![Check Run Apply and Create](./images/create-stack-novnc-4.png " ")
 
 13. Your stack has now been created and the *Apply* action is running to deploy your environment.
 
-  ![](./images/create-stack-novnc-5.png " ")
+  ![Deploy stack environment](./images/create-stack-novnc-5.png " ")
 
-## Task 3: Terraform Apply
+## Task 3: Apply Terraform
 In the prior steps we elected to trigger the *terraform apply action* on stack creation.
 
 1.  Review the job output.
 
-  ![](./images/create-stack-novnc-9.png " ")
+  ![Review completed stack environment](./images/create-stack-novnc-9.png " ")
 
 2.  Congratulations, your environment has been created!  Click on the *Application Information* tab to get additional information about your environment.
 3.  Your public IP address(es), instance name(s), and remote desktop URL are displayed.
@@ -100,7 +100,7 @@ Terraform is a tool for building, changing, and versioning infrastructure safely
 
 Resource Manager is an Oracle Cloud Infrastructure service that enables you to automate the process of provisioning your Oracle Cloud Infrastructure resources. Using Terraform, Resource Manager helps you install, configure, and manage resources through the "infrastructure-as-code" model. To learn more about OCI Resource Manager, watch the video below.
 
-[](youtube:udJdVCz5HYs)
+[OCI Resource Manager youtube video](youtube:udJdVCz5HYs)
 
 ## Appendix 2: Troubleshooting Tips
 If you encountered any issues during the lab, follow the steps below to resolve them. If you are unable to resolve the issue, please skip to the **Need Help** section to submit your issue via our  upport forum.
@@ -113,7 +113,7 @@ If you encountered any issues during the lab, follow the steps below to resolve 
 - Instance shape selection grayed out
 
 ### **Issue #1:** Availability Domain Mismatch
-![](images/error-ad-mismatch.png  " ")
+![Availability Domain Mismatch error](images/error-ad-mismatch.png  " ")
 
 #### Issue #1 Description
 When creating a stack and using an existing VCN, the availability domain and the subnet must match otherwise the stack errors.  
@@ -127,7 +127,7 @@ When creating a stack and using an existing VCN, the availability domain and the
 6.  Click **Terraform Actions** -> **Apply**
 
 ### **Issue #2:** Flex Shape Not Found
-![](images/flex-shape-error.png  " ")
+![Flex shape not found error](images/flex-shape-error.png  " ")
 
 #### Issue #2 Description
 When creating a stack your ability to create an instance is based on the shapes and resources that you have available in your tenancy.
@@ -150,7 +150,7 @@ If you have other compute instances you are not using, you can go to those insta
 
 ### **Issue #3:** Limits Exceeded
 
-![](images/no-quota.png  " ")
+![Limits exceeded error](images/no-quota.png  " ")
 
 #### Issue #3 Description
 
@@ -176,7 +176,7 @@ If you have other compute instances you are not using, you can go to those insta
 
 ### **Issue #4:** Instance Shape Selection Grayed Out
 
-![](images/no-e3flex-in-tenant.png " ")
+![Instance shape selection grayed out issue](images/no-e3flex-in-tenant.png " ")
 
 #### Issue #4 Description
 When creating a stack selected the option *"Use Flexible Instance Shape with Adjustable OCPU Count"* but the *"Instance Shape"* selection is grayed out and the following error message displayed:***"Specify a value that satisfies the following regular expression: ^VM\.(Standard\.E3\.Flex)$"***
@@ -188,7 +188,7 @@ Modify your stack to use fixed shapes instead.
 
 1. Uncheck the option *"Use Flexible Instance Shape with Adjustable OCPU Count"* to use fixed shape instead.
 
-![](./images/standardshape.png " ")
+![Uncheck flexible instance shape](./images/standardshape.png " ")
 
 ## Appendix 3: Create Stack using an existing VCN
 
@@ -200,13 +200,13 @@ If you have an existing VCN which you wish to use, and are comfortable updating 
 2.  Login to Oracle Cloud.
 3.  Open up the hamburger menu in the left hand corner.  Choose the compartment in which you would like to install.  Choose **Developer Services** -> **Resource Manager > Stacks**.  
 
-  ![](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
+  ![Choose Developer Services and Resource Manager Stacks](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
 
-  ![](./images/create-stack.png " ")
+  ![Create stack](./images/create-stack.png " ")
 
 4. Select **My Configuration**, click the **Browse** link and select the zip file (dbsec-lab-mkplc-freetier.zip) that you downloaded. Click **Select**.
 
-  ![](./images/create-stack-novnc-1.png " ")
+  ![Select My Configuration and zipfile](./images/create-stack-novnc-1.png " ")
 
   Enter the following information:
   
@@ -218,7 +218,7 @@ If you have an existing VCN which you wish to use, and are comfortable updating 
 
 5. Click **Next**.
 
-  ![](./images/create-stack-novnc-6.png " ")
+  ![Choose Next](./images/create-stack-novnc-6.png " ")
 
   Enter or select the following:
   
@@ -236,18 +236,19 @@ If you have an existing VCN which you wish to use, and are comfortable updating 
     - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Unchecked
     - **Instance Shape:** Accept the default shown or select from the dropdown. e.g. VM.Standard.E2.4
 
-  ![](./images/create-stack-novnc-7.png " ")
+  ![Uncheck flex shape button](./images/create-stack-novnc-3.png " ")
 
 7. Review and click **Create**.
 
-  ![](./images/create-stack-novnc-8.png " ")
+  ![Click Create](./images/create-stack-novnc-8.png " ")
 
 8. Your stack has now been created and the *Apply* action is running to deploy your environment!
 
-  ![](./images/create-stack-novnc-5.png " ")
+  ![Deploy stack environment](./images/create-stack-novnc-5.png " ")
 
 You may now return to **Task 3: Terraform Apply** above.
 
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
-* **Last Updated By/Date** - Chris Jenkins, August 2022
+* **Last Updated By/Date** - Jenny Bloom, March 2023
+
