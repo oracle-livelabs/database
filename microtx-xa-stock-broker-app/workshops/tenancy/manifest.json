@@ -23,8 +23,8 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc-ssh.md"
     },
     {
-      "title": "Lab 3: Run an LRA sample application",
-      "filename": "../../run-lra-app/run-lra-app.md"
+      "title": "Lab 3: Integrate MicroTx Client Libraries with XA Sample Application",
+      "filename": "../../run-lra-app/integrate-microtx-lib-files.md"
     },
     {
       "title": "Lab 4: Provision Autonomous Databases for use as resource manager",
@@ -35,7 +35,7 @@
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {
-      "description": "Cleanly dispose of all OCI resources created by ORM for the workshop, and delete the stack",
+      "description": "Cleanly dispose all OCI resources created by ORM for the workshop, and delete the stack",
       "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md",
       "title": "Lab 6: Environment Cleanup"
     },

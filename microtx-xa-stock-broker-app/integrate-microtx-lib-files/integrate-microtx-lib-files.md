@@ -5,7 +5,7 @@
 Run a sample application that uses the XA transaction protocol to buy stocks and understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate the transactions. Using samples is the fastest way for you to get familiar with MicroTx.
 The sample application code is available in the MicroTx distribution.
 
-Estimated Time: *10 minutes*
+Estimated Time: *30 minutes*
 
 ### About the XA Sample Application
 
@@ -37,12 +37,13 @@ This lab assumes you have:
       sudo su - oracle
       </copy>
       ```
+* Configured Visual Studio Code to edit the code for Java applications.
 
 ## Task 1: Configure the Stock Broker App as a Transaction Initiator
 
 Initialize an object of the `TrmUserTransaction` class in the application code for every new transaction. This object demarcates the transaction boundaries, which are begin, commit, or roll back. In your application code you must create this object before you begin a transaction.
 
-1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is located at `/home/oracle/OTMM/otmm-<*version*>/samples/xa/java/bankapp/StockBroker/` in any code editor, and then uncomment the following lines of code. The following sample code is for the 22.3.2 release. Provide the correct version, based on the release that you want to use.
+1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is located in the `/home/oracle/OTMM/otmm-<*version*>/samples/xa/java/bankapp/StockBroker/` folder in any code editor, and then uncomment the following lines of code. The following sample code is for the 22.3.2 release. Provide the correct version, based on the release that you want to use.
 
     ```text
     <dependency>
@@ -52,9 +53,9 @@ Initialize an object of the `TrmUserTransaction` class in the application code f
     </dependency>
     ```
 
-2. Open the `UserStockTransactionServiceImpl.java` file in any code editor. This file is located in the `/home/oracle/OTMM/otmm-<*version*>/samples/xa/java/bankapp/StockBroker/src/main/java/com/oracle/tmm/stockbroker/service/impl/` folder.
+2. Open the `UserStockTransactionServiceImpl.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
-3. Import the `oracle.tmm.jta.TrmUserTransaction` package.
+3. Uncomment the following line of code to import the `oracle.tmm.jta.TrmUserTransaction` package.
 
     **Sample command**
 
@@ -64,126 +65,65 @@ Initialize an object of the `TrmUserTransaction` class in the application code f
     </copy>
     ```
 
-4. The following code sample demonstrates how to create an instance of the `TrmUserTransaction` object to buy stocks. You only need to add the code in bold. The other lines of code are provided only to help you identify where to place the code.
+4. Uncomment the following line of code to create an instance of the `TrmUserTransaction` object to buy stocks.
 
     **Sample command**
 
     ```text
     <copy>
-    ...
-    @Override
-    public BuyResponse buy(BuyStock buyStock) {
-      **TrmUserTransaction transaction = new TrmUserTransaction();**
-    ...
+    TrmUserTransaction transaction = new TrmUserTransaction();
     </copy>
     ```
 
-5. The following sample demonstrates the code to begin the XA transaction to buy stocks. You only need to add the code in bold. The other lines of code are provided only to help you identify where to place the code.
+5. Uncomment the following line of code to begin an XA transaction to buy stocks.
 
     **Sample command**
 
     ```text
     <copy>
-    ...
-    BuyResponse buyResponse = new BuyResponse();
-        try {
-            **transaction.begin(true);**
-            ... // Implement the business logic to begin a transaction.
+    transaction.begin(true);
     </copy>
     ```
 
-6. Specify the transaction boundaries for rolling back or committing the transaction. Based on your business logic, commit or rollback the transaction. You only need to add the code in bold. The other lines of code are provided only to help you identify where to place the code.
+6. Uncomment all the occurrences of the following lines of code to specify the transaction boundaries for rolling back or committing the transaction. Based on the application's business logic, commit or rollback the transaction.
 
     **Sample command**
 
     ```text
    <copy>
-   ...
-    DebitResponse debitResponse = bankUtility.debit(coreBankEndpoint, buyStock.getUserAccountId(), totalStockPrice);
-        if (debitResponse.getHttpStatusCode() != Response.Status.OK.getStatusCode()) {
-            ...
-            **transaction.rollback();**
-            return buyResponse;
-        }
-        if (!stockBrokerTransactionService.creditMoneyToStockBroker(totalStockPrice)) {
-            ...
-            **transaction.rollback();**
-            return buyResponse;
-        }
-        if (!stockBrokerTransactionService.debitStocksFromStockBroker(buyStock.getStockSymbol(), buyStock.getStockUnits())) {
-            ...
-            **transaction.rollback();**
-            return buyResponse;
-        }
-        if (!stockBrokerTransactionService.creditStocksToUser(buyStock.getUserAccountId(), buyStock.getStockSymbol(), buyStock.getStockUnits())) {
-            ...
-            **transaction.rollback();**
-            return buyResponse;
-        }
-        **transaction.commit();**
-    ...
+   transaction.rollback();
+   transaction.commit();
    </copy>
     ```
 
-7. The following code sample demonstrates how to create an instance of the `TrmUserTransaction` object to sell stocks. You only need to add the code in bold. The other lines of code are provided only to help you identify where to place the code.
-
+7. Uncomment the following line of code under `sell()` to create an instance of the `TrmUserTransaction` object to sell stocks.
     **Sample command**
 
     ```text
     <copy>
-    ...
-    @Override
-    public SellResponse sell(SellStock sellStock) {
-      **TrmUserTransaction transaction = new TrmUserTransaction();**
-    ...
+    TrmUserTransaction transaction = new TrmUserTransaction();
     </copy>
     ```
 
-8. The following sample demonstrates the code to begin the XA transaction to buy stocks. You only need to add the code in bold. The other lines of code are provided only to help you identify where to place the code.
+8. Uncomment the following line of code under `sell()` to begin the XA transaction to sell stocks.
 
     **Sample command**
 
     ```text
     <copy>
-    ...
-    SellResponse sellResponse = new SellResponse();
-        try {
-            **transaction.begin(true);**
-            ... // Implement the business logic to begin a transaction.
+    transaction.begin(true);
     </copy>
     ```
 
-9. Specify the transaction boundaries for rolling back or committing the transaction. Based on your business logic, commit or rollback the transaction. You only need to add the code in bold. The other lines of code are provided only to help you identify where to place the code.
+9. Uncomment all the occurrences of the following lines of code to specify the transaction boundaries for rolling back or committing the transaction. Based on your business logic, commit or rollback the transaction.
 
     **Sample command**
 
     ```text
-    <copy>
-    ...
-    CreditResponse creditResponse = bankUtility.credit(coreBankEndpoint, sellStock.getUserAccountId(), totalStockPrice);
-            if (creditResponse.getHttpStatusCode() != Response.Status.OK.getStatusCode()) {
-                ...
-                **transaction.rollback();**
-                return sellResponse;
-            }
-            if (!stockBrokerTransactionService.debitMoneyFromStockBroker(totalStockPrice)) {
-                ...
-                **transaction.rollback();**
-                return sellResponse;
-            }
-            if (!stockBrokerTransactionService.creditStocksToStockBroker(sellStock.getStockSymbol(), sellStock.getStockUnits())) {
-                ...
-                **transaction.rollback();**
-                return sellResponse;
-            }
-            if (!stockBrokerTransactionService.debitStocksFromUser(sellStock.getUserAccountId(), sellStock.getStockSymbol(), sellStock.getStockUnits())) {
-                ...
-                **transaction.rollback();**
-                return sellResponse;
-            }
-            **transaction.commit();**
-            ...
-    </copy>
+   <copy>
+   transaction.rollback();
+   transaction.commit();
+   </copy>
     ```
 
 ## Task 2: Configure the Stock Broker Application as a Transaction Participant
@@ -196,9 +136,9 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 * Injects an `XADataSource` object for the participant application code to use through dependency injection. The MicroTx libraries automatically inject the configured data source into the participant services, so you must add the `@Inject` or `@Context` annotation to the application code. The application code runs the DML using this connection.
 * Calls the resource manager to perform operations.
 
-1. Open the `DatasourceConfigurations.java` file in any code editor. This file is located in the `/home/oracle/OTMM/otmm-<*version*>/samples/xa/java/bankapp/StockBroker/src/main/java/com/oracle/tmm/stockbroker` folder.
+1. Open the `DatasourceConfigurations.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
 
-2. In the transaction participant function or block, create a `PoolXADataSource` object and provide credentials and other details to connect to the resource manager. This object is used by the MicroTx client library. Add the following lines of code at the end of the existing code in the `DatasourceConfigurations.java` file, and then save the changes.
+2. Uncomment the following lines of code in the transaction participant function or block to create a `PoolXADataSource` object and provide credentials and other details to connect to the resource manager. This object is used by the MicroTx client library.
 
     ```text
     <copy>
@@ -223,19 +163,42 @@ When you integrate the MicroTx client library for Java with the Stock broker app
     }
     </copy>
     ```
-    It is your responsibility as an application developer to ensure that an XA-compliant JDBC driver and required parameters are set up while allocating PoolXADataSource.
 
-3. Open the `TMMConfigurations.java` file in any code editor. This file is located in the `/home/oracle/OTMM/otmm-<*version*>/samples/xa/java/bankapp/StockBroker/src/main/java/com/oracle/tmm/stockbroker` folder.
+    It is your responsibility as an application developer to ensure that an XA-compliant JDBC driver and required parameters are set up while creating the `PoolXADataSource` object.
 
-4. Create a `PoolXADatasource` object. The following sample code describes how you can create the `PoolXADatasource` object at the beginning of the application code when you create a connection object. `PoolXADatasource` is an interface defined in JTA whose implementation is provided by the JDBC driver. The MicroTx client library uses this object to connect to database to start XA transactions and perform various operations such as prepare, commit, and rollback. The MicroTx library also provides a SQL connection object to the application code to execute DML using dependency injection.
+3. Open the `TMMConfigurations.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
+
+4. Uncomment the following lines of code to import the following packages.
 
     ```text
     <copy>
-    @Configuration
-    public class TMMConfigurations extends ResourceConfig {
+    import oracle.tmm.common.TrmConfig;
+    import oracle.tmm.jta.XAResourceCallbacks;
+    import oracle.tmm.jta.common.TrmConnectionFactory;
+    import oracle.tmm.jta.common.TrmSQLConnection;
+    import oracle.tmm.jta.common.TrmXAConnection;
+    import oracle.tmm.jta.common.TrmXAConnectionFactory;
+    import oracle.tmm.jta.common.TrmXASQLStatementFactory;
+    import oracle.tmm.jta.filter.TrmTransactionRequestFilter;
+    import oracle.tmm.jta.filter.TrmTransactionResponseFilter;
+    import oracle.ucp.jdbc.PoolXADataSource;
+    import org.glassfish.jersey.internal.inject.AbstractBinder;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.context.annotation.Bean;
+    import org.springframework.context.annotation.Lazy;
+    import org.springframework.web.context.annotation.RequestScope;
+    import javax.sql.XAConnection;
+    import java.sql.Connection;
+    import java.sql.Statement;
+    </copy>
+    ```
 
-        @Autowired
-        private PoolXADataSource poolXADataSource;
+4. Uncomment the following lines of code to create a `PoolXADatasource` object. `PoolXADatasource` is an interface defined in JTA whose implementation is provided by the JDBC driver. The MicroTx client library uses this object to connect to database to start XA transactions and perform various operations such as prepare, commit, and rollback. The MicroTx library also provides a SQL connection object to the application code to execute DML using dependency injection.
+
+    ```text
+    <copy>
+    @Autowired
+    private PoolXADataSource poolXADataSource;
     </copy>
     ```
 
@@ -243,34 +206,40 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 
     ```text
     <copy>
-        public TMMConfigurations() {
-        //Jax-RS Resources
-        ...
-        **register(BuyStockEventListenerResource.class);**
-        **register(SellStockEventListenerResource.class);**
+    //Register the MicroTx XA Resource callback that coordinates with the transaction coordinator
+    register(XAResourceCallbacks.class);
 
-        // OpenApi
-        register(OpenApiResource.class);
+    // filters for the MicroTx libraries that intercept the JAX-RS calls and manages the XA Transactions
+    register(TrmTransactionRequestFilter.class);
+    register(TrmTransactionResponseFilter.class);
 
-        //Register the MicroTx XA Resource callback that coordinates with the transaction coordinator
-        register(XAResourceCallbacks.class);
-
-        // filters for the MicroTx libraries that intercept the JAX-RS calls and manages the XA Transactions
-        register(TrmTransactionRequestFilter.class);
-        register(TrmTransactionResponseFilter.class);
-
-        // MicroTx XA connection Bindings
-        register(new AbstractBinder() {
-            @Override
-            protected void configure() {
-                bindFactory(TrmConnectionFactory.class).to(Connection.class);
-                bindFactory(TrmXASQLStatementFactory.class).to(Statement.class);
-            }
+    // MicroTx XA connection Bindings
+    register(new AbstractBinder() {
+        @Override
+        protected void configure() {
+            bindFactory(TrmConnectionFactory.class).to(Connection.class);
+            bindFactory(TrmXASQLStatementFactory.class).to(Statement.class);
+        }
         });
-    }
 
+6. Uncomment the following line of code to initialize the an XA data source object.
+
+    ```text
+    <copy>
+        initializeOracleXADataSource();
+        ...
+        private void initializeOracleXADataSource() {
+            TrmConfig.initXaDataSource(this.poolXADataSource);
+    }
+    </copy>
+    ```
+
+7. Initialize a Bean for the `TrmSQLConnection` object and `TrmXAConnection` object.
+
+    ```text
+    <copy>
     // Register the MicroTx TrmSQLConnection object bean
-    **@Bean**
+    @Bean
     @TrmSQLConnection
     @Lazy
     @RequestScope
@@ -283,44 +252,32 @@ When you integrate the MicroTx client library for Java with the Stock broker app
     @TrmXAConnection
     @Lazy
     @RequestScope
-    **public XAConnection tmmSqlXaConnectionBean(){**
-    **    return new TrmXAConnectionFactory().get();**
+    public XAConnection tmmSqlXaConnectionBean(){
+        return new TrmXAConnectionFactory().get();
     }
-    </copy>
-    ```
-
-6. In the transaction participant function or block, initialize the `poolXADataSource` object.
-
-    ```text
-    <copy>
-    @EventListener(ApplicationReadyEvent.class)
-    public void init() {
-        **initializeOracleXADataSource();**
-        initialiseLogger();
-    **//Initialises the datasource to the Trm library that manages the lifecycle of the XA transaction**
-    **private void initializeOracleXADataSource() {**
-        **TrmConfig.initXaDataSource(this.poolXADataSource);**
-    **}**
     </copy>
     ```
 
 7. Save the changes.
 
-8. Open the `AccountServiceImpl.java` file in any code editor. This file is located in the `/home/oracle/OTMM/otmm-<*version*>/samples/xa/java/bankapp/StockBroker/src/service/impl/` folder.
+8. Open the `AccountServiceImpl.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
-9. Insert the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application injects the `connection` object that is created by the MicroTx client library.
+9. Uncomment the following lines of code to import the required packages.
 
     ```text
     <copy>
-    ...
-    **import oracle.tmm.jta.common.TrmSQLConnection;**
-    **import javax.inject.Inject;**
-    @Component
-    public class AccountServiceImpl implements AccountService {
-        **@Inject**
-        **@TrmSQLConnection**
-        **private Connection connection;**
-    ...
+    import javax.inject.Inject;
+    import oracle.tmm.jta.common.TrmSQLConnection;
+    </copy>
+    ```
+
+10. Uncomment the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application injects the `connection` object that is created by the MicroTx client library.
+
+    ```text
+    <copy>
+    @Inject
+    @TrmSQLConnection
+    private Connection connection;
     </copy>
     ```
 
@@ -334,19 +291,24 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 
 11. Save the changes.
 
-12. Open the `StockBrokerTransactionServiceImpl.java` file in any code editor. This file is located in the `/home/oracle/OTMM/otmm-<*version*>/samples/xa/java/bankapp/StockBroker/src/service/impl/` folder.
+12. Open the `StockBrokerTransactionServiceImpl.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
-13. Insert the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application injects the `connection` object that is created by the MicroTx client library.
+13. Uncomment the following lines of code to import the required packages.
 
     ```text
     <copy>
+    import javax.inject.Inject;
     import oracle.tmm.jta.common.TrmSQLConnection;
-    @Component
-    public class StockBrokerTransactionServiceImpl implements StockBrokerTransactionService {
+    </copy>
+    ```
 
-    **@Inject**
-    **@TrmSQLConnection**
-    **private Connection connection;**
+13. Uncomment the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application injects the `connection` object that is created by the MicroTx client library.
+
+    ```text
+    <copy>
+    @Inject
+    @TrmSQLConnection
+    private Connection connection;
     </copy>
     ```
 

@@ -2,18 +2,15 @@
 
 ## Introduction
 
-This lab walks you through the steps to quickly provision an Oracle Autonomous Database (Autonomous Transaction Processing [ATP]) on Oracle Cloud. You will use this database in the subsequent labs of this workshop. For this lab, you must create two ATP instances. One ATP instance acts as a resource manager for Department 1 and the other ATP instance acts as resource manager for Department 2. Run the tasks in this lab in the remote desktop to create the database instances and download the database wallets within the remote desktop. When you directly download the wallet files in the remote desktop environment, you do not need to copy the wallet files from outside the environment.
+This lab walks you through the steps to quickly provision an Oracle Autonomous Database (Autonomous Transaction Processing [ATP]) on Oracle Cloud. You will use this database in the subsequent labs of this workshop. For this lab, you must create two ATP instances. One ATP instance acts as a resource manager for the Core Banking service and Branch Banking Service. The other ATP instance acts as resource manager for the Stock Broker service. Run the tasks in this lab in the remote desktop to create the database instances and download the database wallets within the remote desktop. When you directly download the wallet files in the remote desktop environment, you do not need to copy the wallet files from outside the environment.
 
 Estimated lab time: 20 minutes
-
-Watch the video below for a quick walk-through of the lab.
-[Provision an Oracle Autonomous Database for use as resource manager](videohub:1_9p3qtn2f)
 
 ### Objectives
 
 * Provision two new Autonomous Transaction Processing instances.
 * Download the wallet file for each ATP instance.
-* Create a table with sample values for Department 1 and Department 2 applications.
+* Create tables with sample values for the Core Banking, Branch Banking, and Stock Broker services.
 
 ### Prerequisites
 
@@ -40,7 +37,7 @@ Watch the video below for a quick walk-through of the lab.
 
 5. This console in the last screenshot shows that no databases yet exist. If there were a long list of databases, you could filter the list by the state of the databases (available, stopped, terminated, and so on). You can also sort by **Workload Type**. Here, the **Transaction Processing** workload type is selected.
 
-## Task 2: Create an Autonomous Database Instance for Department 1
+## Task 2: Create an Autonomous Database Instance for the Core Banking and Branch Banking Services
 
 1. Click **Create Autonomous Database** to start the instance creation process.
 
@@ -50,8 +47,8 @@ Watch the video below for a quick walk-through of the lab.
 3. Provide basic information for the autonomous database:
 
     * **Compartment** - Select a compartment for the database from the drop-down list. In the example below, **MyCompartment** was created ahead of time and chosen.
-    * **Display Name** - Enter a memorable name for the database for display purposes. For this lab, use **Department1DB**.
-    * **Database Name** - Use letters and numbers only, starting with a letter. Maximum length is 14 characters. (Underscores not initially supported.) For this lab, use **Department1DB**.
+    * **Display Name** - Enter a memorable name for the database for display purposes. For this lab, use **BankingServiceDB**.
+    * **Database Name** - Use letters and numbers only, starting with a letter. Maximum length is 14 characters. (Underscores not initially supported.) For this lab, use **BankingServiceDB**.
 
     ![Specify database instance configuration](./images/create-dept1-atp.png " ")
 
@@ -135,7 +132,7 @@ To download client credentials from the Oracle Cloud Infrastructure Console:
 
     ![Download wallet](./images/download-wallet.png)
 
-   By default, the filename is: `Wallet_`*databasename*`.zip`. For example, `Wallet_Department1DB.zip`. You can save this file with any filename you want.
+   By default, the filename is: `Wallet_`*databasename*`.zip`. For example, `Wallet_BankingServiceDB.zip`. You can save this file with any filename you want.
 
    You must protect this file to prevent unauthorized database access.
 
@@ -143,11 +140,11 @@ To download client credentials from the Oracle Cloud Infrastructure Console:
 
     ```text
     <copy>
-    unzip Wallet_Department1DB.zip -d <path to the Database_Wallet folder>
+    unzip Wallet_BankingServiceDB.zip -d <path to the Database_Wallet folder>
     </copy>
     ```
 
-8. Extract the wallet files to the `/home/oracle/OTMM/otmm-22.3/samples/xa/java/department-helidon/Database_Wallet/` folder. This folder contains the source code for the Department 1 participant application.
+8. Extract the wallet files to the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/CoreBanking/Database_Wallet` and `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/BranchBanking/Database_Wallet` folders. This folder contains the source code for the Core Banking and Branch Banking services respectively.
 
 ## Task 4: Connect with SQL Worksheet
 
@@ -175,105 +172,266 @@ Although you can connect to your autonomous database from local desktop tools, s
 
     After touring through the informational boxes, keep this SQL Worksheet open and please **proceed to the next task.**
 
-## Task 5: Create a Table for Department 1
+## Task 5: Create Tables in BankingServiceDB for the Core Banking Service
 
-To create a table with sample values for the Department 1 application, execute the `CREATE TABLE` statement.
+Create tables in the `BankingServiceDB` ATP instance and populate it with sample values for the Core Banking service.
 
 1. Ensure that you are connected to SQL Worksheet as administrator.
 
-2. Copy and paste the following code snippet to your SQL Worksheet to create an `accounts` table with `account_id` as the primary key. Replace `<password>` with a password that you want to specify for the `department_helidon` user. Remember the password that you specify.
+2. Copy and paste the following code snippet to your SQL Worksheet, and run the queries.
 
    **Syntax**
 
    ```text
    <copy>
-   CREATE USER department_helidon IDENTIFIED BY <password> QUOTA UNLIMITED ON DATA;
-   GRANT CREATE SESSION TO department_helidon;
-   ALTER SESSION SET CURRENT_SCHEMA=department_helidon;
-   CREATE TABLE accounts
-   (
-   account_id VARCHAR(10) not null,
-   name VARCHAR(60) not null,
-   amount decimal(10,2) not null,
-   PRIMARY KEY (account_id)
-   );
-   INSERT INTO accounts VALUES ('account1', 'account1', 1000.00);
-   INSERT INTO accounts VALUES ('account2', 'account2', 2000.00);
-   INSERT INTO accounts VALUES ('account3', 'account3', 3000.00);
-   INSERT INTO accounts VALUES ('account4', 'account4', 4000.00);
-   INSERT INTO accounts VALUES ('account5', 'account5', 5000.00);
+   -- Tables to be created
+    CREATE TABLE BRANCH
+    (
+        BRANCH_ID   NUMBER NOT NULL,
+        BRANCH_NAME VARCHAR2(20),
+        PHONE       VARCHAR2(14),
+        ADDRESS     VARCHAR2(60),
+        SERVICE_URL VARCHAR2(255),
+        LAST_ACCT   INTEGER,
+        PRIMARY KEY (BRANCH_ID)
+    );
+
+    CREATE TABLE ACCOUNT
+    (
+        ACCOUNT_ID NUMBER   NOT NULL,
+        BRANCH_ID  NUMBER   NOT NULL,
+        SSN        CHAR(12) NOT NULL,
+        FIRST_NAME VARCHAR2(20),
+        LAST_NAME  VARCHAR2(20),
+        MID_NAME   VARCHAR2(10),
+        PHONE      VARCHAR2(14),
+        ADDRESS    VARCHAR2(60),
+        PRIMARY KEY (ACCOUNT_ID)
+    );
+
+    CREATE TABLE HISTORY
+    (
+        TRANSACTION_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        ACCOUNT_ID          NUMBER       NOT NULL,
+        BRANCH_ID           NUMBER       NOT NULL,
+        TRANSACTION_TYPE    VARCHAR2(15) NOT NULL,
+        DESCRIPTION         VARCHAR2(1024),
+        AMOUNT              DECIMAL(20, 2) NOT NULL,
+        BALANCE             DECIMAL(20, 2) NOT NULL
+    );
    </copy>
    ```
 
-3. Run the queries one at a time.
+   ![Create table](./images/tables-core-banking.png)
 
-   ![Create table](./images/sql-dept1.png)
+   Tables with the names `BRANCH`, `ACCOUNT`, and `HISTORY` are created.
 
-   A table with the name `accounts` is created and populated with sample values.
-
-4. Run the following `SELECT` query on the `accounts` table to verify that the correct is available data in the table.
+3. Populate the tables with sample values.
 
    ```text
    <copy>
-   SELECT * from accounts;
-   </copy>
-   ```
+    -- BRANCH
+    INSERT INTO BRANCH (BRANCH_ID, BRANCH_NAME, PHONE, ADDRESS, SERVICE_URL, LAST_ACCT)
+    VALUES (1111, 'Arizona', '123-456-7891', '6001 N 24th St, Phoenix, Arizona 85016, United States', 'http://arizona-branch-bank:9095', 10002);
 
-## Task 6: Create an Autonomous Database Instance for Department 2
+    -- ACCOUNTS
+    INSERT INTO ACCOUNT (ACCOUNT_ID, BRANCH_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+    VALUES (10001, 1111, '873-61-1457', 'Adams', 'Lopez', 'D', '506-100-5886', '15311 Grove Ct. Arizona  95101');
+    INSERT INTO ACCOUNT (ACCOUNT_ID, BRANCH_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+    VALUES (10002, 1111, '883-71-8538', 'Smith', 'Mason', 'N', '403-200-5890', '15322 Grove Ct. Arizona  95101');
+    INSERT INTO ACCOUNT (ACCOUNT_ID, BRANCH_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+    VALUES (10003, 1111, '883-71-8538', 'Thomas', 'Dave', 'C', '603-700-5899', '15333 Grove Ct. Arizona  95101');
+    </copy>
+    ```
 
-Repeat tasks 1, 2, 3, and 4 to create another ATP database instance for Department 2 and download the wallet for the database.
+## Task 6: Create Tables in BankingServiceDB for the Branch Banking Service
 
-1. Repeat tasks 1 and 2 to create an Autonomous Database instance, which you will use as resource manager, for Department 2.
-
-    ![Specify database instance configuration](./images/create-dept2-atp.png " ")
-
-2. After creating the database, repeat task 3 to download the wallet file. Copy the contents of the unzipped wallet file to the `/home/oracle/OTMM/otmm-22.3/samples/xa/java/department-spring/Database_Wallet/` folder. This file contains the source code for the Department 2 participant application.
-
-3. Connect to the database using SQL Worksheet. Repeat task 4 to connect to the ATP database that you have created for Department 2 using SQL Worksheet.
-
-Proceed to the next task to create a table and populate it with sample values.
-
-## Task 7: Create a Table for Department 2
-
-To create a table with sample values for the Department 2 application, execute the `CREATE TABLE` statement.
+Create tables in the `BankingServiceDB` ATP instance and populate it with sample values for the Branch Banking service.
 
 1. Ensure that you are connected to SQL Worksheet as administrator.
 
-2. Copy and paste the following code snippet to your SQL Worksheet to create an `accounts` table with `account_id` as the primary key. Replace `<password>` with a password that you want to specify for the `department_spring` user. Remember the password that you specify.
+2. Copy and paste the following code snippet to your SQL Worksheet, and run the queries.
+
+   **Syntax**
+
+   ```text
+   <copy>
+   CREATE TABLE SAVINGS_ACCOUNT
+   (
+       ACCOUNT_ID NUMBER NOT NULL,
+       BRANCH_ID  NUMBER NOT NULL,
+       BALANCE    DECIMAL(20, 2) NOT NULL,
+       PRIMARY KEY (ACCOUNT_ID)
+   );
+   </copy>
+   ```
+
+   ![Create table](./images/tables-branch-banking.png)
+
+   Table with the name `SAVINGS_ACCOUNT` is created.
+
+3. Populate the `SAVINGS_ACCOUNT` table with sample values.
+
+   ```text
+   <copy>
+   -- Branch - Arizona
+   INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
+   VALUES (10001, 1111, 50000.0);
+   INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
+   VALUES (10002, 1111, 50000.0);
+   INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
+   VALUES (10003, 1111, 50000.0);
+   ```
+
+## Task 6: Create an Autonomous Database Instance for the Stock Broker Service
+
+Repeat tasks 1, 2, 3, and 4 to create another ATP database instance for the Stock Broker service and download the wallet for the database.
+
+1. Repeat tasks 1 and 2 to create an Autonomous Database instance, which you will use as resource manager, for the Stock Broker service.
+
+    ![Specify database instance configuration](./images/create-dept2-atp.png " ")
+
+2. After creating the database, repeat task 3 to download the wallet file. Copy the contents of the unzipped wallet file to the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/Database_Wallet` folder. This file contains the source code for the Stock Broker service.
+
+3. Connect to the database using SQL Worksheet. Repeat task 4 to connect to the ATP database that you have created for the Stock Broker service using SQL Worksheet.
+
+Proceed to the next task to create a table and populate it with sample values.
+
+## Task 7: Create Tables for the Stock Broker Service
+
+Create tables with sample values for the Stock Broker service.
+
+1. Ensure that you are connected to SQL Worksheet as administrator.
+
+2. Copy and paste the following code snippet to your SQL Worksheet, and then run the queries.
 
       **Syntax**
 
       ```text
       <copy>
-      CREATE USER department_spring IDENTIFIED BY <password> QUOTA UNLIMITED ON DATA;
-      GRANT CREATE SESSION TO department_spring;
-      ALTER SESSION SET CURRENT_SCHEMA=department_spring;
-      CREATE TABLE accounts
+      -- Tables to be created
+      -- Display stock units
+      CREATE TABLE CASH_ACCOUNT
       (
-      account_id VARCHAR(10) not null,
-      name VARCHAR(60) not null,
-      amount decimal(10,2) not null,
-      PRIMARY KEY (account_id)
+          ACCOUNT_ID   NUMBER       NOT NULL,
+          BALANCE      DECIMAL,
+          STOCK_BROKER VARCHAR2(20) NOT NULL,
+          PRIMARY KEY (ACCOUNT_ID)
       );
-      INSERT INTO accounts VALUES ('account1', 'account1', 1000.00);
-      INSERT INTO accounts VALUES ('account2', 'account2', 2000.00);
-      INSERT INTO accounts VALUES ('account3', 'account3', 3000.00);
-      INSERT INTO accounts VALUES ('account4', 'account4', 4000.00);
-      INSERT INTO accounts VALUES ('account5', 'account5', 5000.00);
+
+      -- Common account for Stock Broker. This is inserted during the initialization of the application.
+      CREATE TABLE STOCKS
+      (
+          STOCK_SYMBOL VARCHAR2(6)  NOT NULL,
+          COMPANY_NAME VARCHAR2(35) NOT NULL,
+          INDUSTRY     VARCHAR2(35) NOT NULL,
+          STOCK_PRICE  DECIMAL      NOT NULL,
+          PRIMARY KEY (STOCK_SYMBOL)
+      );
+
+      CREATE TABLE USER_ACCOUNT
+      (
+          ACCOUNT_ID NUMBER   NOT NULL,
+          SSN        CHAR(12) NOT NULL,
+          FIRST_NAME VARCHAR2(20),
+          LAST_NAME  VARCHAR2(20),
+          MID_NAME   VARCHAR2(10),
+          PHONE      VARCHAR2(14),
+          ADDRESS    VARCHAR2(60),
+          PRIMARY KEY (ACCOUNT_ID)
+      );
+
+      CREATE TABLE STOCK_BROKER_STOCKS
+      (
+          ACCOUNT_ID   NUMBER NOT NULL,
+          STOCK_SYMBOL VARCHAR2(6)  NOT NULL,
+          STOCK_UNITS  NUMBER NOT NULL,
+          PRIMARY KEY (ACCOUNT_ID, STOCK_SYMBOL),
+          CONSTRAINT FK_StockBroker_CashAccount
+              FOREIGN KEY (ACCOUNT_ID) REFERENCES CASH_ACCOUNT (ACCOUNT_ID) ON DELETE CASCADE,
+          CONSTRAINT FK_StockBrokerStocks_Stocks
+              FOREIGN KEY (STOCK_SYMBOL) REFERENCES STOCKS (STOCK_SYMBOL) ON DELETE CASCADE
+      );
+
+      CREATE TABLE USER_STOCKS
+      (
+          ACCOUNT_ID   NUMBER NOT NULL,
+          STOCK_SYMBOL VARCHAR2(6)  NOT NULL,
+          STOCK_UNITS  NUMBER NOT NULL,
+          PRIMARY KEY (ACCOUNT_ID, STOCK_SYMBOL),
+          CONSTRAINT FK_UserStocks_UserAccount
+              FOREIGN KEY (ACCOUNT_ID) REFERENCES USER_ACCOUNT (ACCOUNT_ID) ON DELETE CASCADE,
+          CONSTRAINT FK_UserStocks_Stocks
+              FOREIGN KEY (STOCK_SYMBOL) REFERENCES STOCKS (STOCK_SYMBOL) ON DELETE CASCADE
+      );
+
+      CREATE TABLE HISTORY
+      (
+          TRANSACTION_TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          ACCOUNT_ID       NUMBER       NOT NULL,
+          STOCK_OPERATION  VARCHAR2(15) NOT NULL,
+          STOCK_UNITS      NUMBER       NOT NULL,
+          STOCK_SYMBOL     VARCHAR2(6)  NOT NULL,
+          DESCRIPTION      VARCHAR2(1024)
+      );
       </copy>
       ```
 
-3. Run the queries one at a time.
+   ![Create table](./images/tables-stock-broker.png)
 
-   ![Create table](./images/sql-dept2.png)
+   Tables with the names `BRANCH`, `ACCOUNT`, and `HISTORY` are created.
 
-   A table with the name `accounts` is created and populated with sample values.
-
-4. Run the following `SELECT` query on the `accounts` table to verify that the correct is available data in the table.
+3. Populate the tables with sample values.
 
    ```text
    <copy>
-   SELECT * from accounts;
+   -- Initialize Database
+
+   INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+   VALUES ('BLUSC', 'Blue Semiconductor', 'Semiconductor Industry', 87.28);
+   INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+   VALUES ('SPRFD', 'Spruce Street Foods', 'Food Products', 152.55);
+   INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+   VALUES ('SVNCRP', 'Seven Corporation', 'Software consultants', 97.20);
+   INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+   VALUES ('TALLMF', 'Tall Manufacturers', 'Tall Manufacturing', 142.24);
+   INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+   VALUES ('VSNSYS', 'Vision Systems', 'Medical Equipments', 94.35);
+
+   INSERT INTO CASH_ACCOUNT(ACCOUNT_ID, BALANCE, STOCK_BROKER)
+   VALUES (9999999, 10000000, 'PENNYPACK');
+
+   -- Stockbroker stock account --
+   INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+   VALUES (9999999, 'BLUSC', 100000);
+   INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+   VALUES (9999999, 'SPRFD', 50000);
+   INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+   VALUES (9999999, 'SVNCRP', 90000);
+   INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+   VALUES (9999999, 'TALLMF', 80000);
+   INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+   VALUES (9999999, 'VSNSYS', 100000);
+
+   -- user accounts
+   INSERT INTO USER_ACCOUNT (ACCOUNT_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+   VALUES (10001, '873-61-1457', 'Adams', 'Lopez', 'D', '506-100-5886', '15311 Grove Ct. New York  95101');
+   INSERT INTO USER_ACCOUNT (ACCOUNT_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+   VALUES (10002, '883-71-8538', 'Smith', 'Mason', 'N', '403-200-5890', '15311 Grove Ct. New York  95101');
+   INSERT INTO USER_ACCOUNT (ACCOUNT_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+   VALUES (10003, '993-71-8500', 'Thomas', 'Dave', 'C', '603-700-5899', '15333 Grove Ct. Arizona  95101');
+
+   -- user stocks
+   INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+   VALUES (10001, 'BLUSC', 10);
+   INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+   VALUES (10001, 'SPRFD', 15);
+   INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+   VALUES (10001, 'SVNCRP', 20);
+   INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+   VALUES (10001, 'TALLMF', 30);
+   INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+   VALUES (10001, 'VSNSYS', 40);
    </copy>
    ```
 
@@ -286,5 +444,6 @@ You may now **proceed to the next lab.**
 
 ## Acknowledgements
 
-* **Author** - Richard Green, Alex Keh, Sylaja Kannan
-* **Last Updated By/Date** - Sylaja Kannan, December 2022
+* **Author** - Sylaja Kannan
+* **Contributors** - Bharath MC
+* **Last Updated By/Date** - Sylaja Kannan, June 2023

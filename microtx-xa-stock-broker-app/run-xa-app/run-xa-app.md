@@ -8,17 +8,12 @@ The sample application code is available in the MicroTx distribution. The MicroT
 
 Estimated Lab Time: *20 minutes*
 
-Watch the video below for a quick walk-through of the lab.
-[Run an LRA Sample Application](videohub:1_ta8uv36s)
-
 ### About XA Sample Application
 
 The following figure shows a sample XA application, which contains several microservices.
-![Microservices in the XA sample applications](./images/xa-sample-app-simple.png)
+![Microservices in the XA sample applications](./images/stock_broker_xa_app.png)
 
-The sample application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions. When you run the Teller application, it withdraws money from one department and deposits it to another department by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
-
-For more details, see [About the Sample XA Application](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/set-sample-applications.html#GUID-A181E2F7-00B4-421F-9EF9-DB8BF76DD53F) in the *Transaction Manager for Microservices Developer Guide*.
+The sample application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions. When a user purchases stocks using the Stock Broker service, it withdraws money from the Core Banking Service and deposits an equivalent amount of stocks by creating an XA transaction. Within the XA transaction, all actions such as purchase, sale, withdraw, and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
 ### Objectives
 
@@ -50,64 +45,181 @@ This lab assumes you have:
   </copy>
   ```
 
-## Task 1: Build Container Images for Sample XA Applications
+## Task 1: Configure Minikube and Start a Tunnel
 
-The code for the XA sample application is available in the installation bundle in the `/home/oracle/OTMM/otmm-22.3/samples/xa/java` folder. Build container images for each microservice in the XA sample application.
+Before you start a transaction, you must start a Minikube tunnel.
+
+1. Ensure that the minimum required memory and CPUs are available for Minikube.
+    ```text
+    <copy>
+    minikube config set memory 32768
+    </copy>
+    ```
+
+2. Start Minikube.
+    ```text
+    <copy>
+    minikube start
+    </copy>
+    ```
+
+3. Run the following command in a new terminal to start a tunnel. Keep this terminal window open.
+
+    ```text
+    <copy>
+    minikube tunnel
+    </copy>
+    ```
+
+4. Enter the password to access your local machine if you are asked to enter your password at the command prompt.
+
+5. In a new terminal, run the following command to note down the external IP address of the Istio ingress gateway.
+
+    ```text
+    <copy>
+    kubectl get svc istio-ingressgateway -n istio-system
+    </copy>
+    ```
+
+    From the output note down the value of `EXTERNAL-IP`, which is the external IP address of the Istio ingress gateway. You will provide this value in the next step.
+
+    **Example output**
+
+    ![Public IP address of ingress gateway](./images/ingress-gateway-ip-address.png)
+
+    Let's consider that the external IP in the above example is 192.0.2.117.
+
+6. Store the external IP address of the Istio ingress gateway in an environment variable named `CLUSTER_IPADDR` as shown in the following command.
+
+    ```text
+    <copy>
+    export CLUSTER_IPADDR=192.0.2.117
+    </copy>
+    ```
+
+    Note that, if you don't do this, then you must explicitly specify the IP address in the commands when required.
+
+
+## Task 2: Configure Keycloak
+
+1. Run the following command to note down the external IP address and port to access Keycloak.
+
+    ```text
+    <copy>
+    kubectl get svc -n keycloak
+    </copy>
+    ```
+
+    From the output note down the value of `EXTERNAL-IP` and `PORT(S)`, which is the external IP address and port of Keycloak. You will provide this value in the next step.
+
+    **Example output**
+
+    ![Public IP address of Keycloak](./images/keycloak-ip-address.png)
+
+    Let's consider that the external IP in the above example is 198.51.100.1. The IP address is 8080.
+
+2. Sign in to Keycloak. In a browser, enter the IP address and port number that you have copied in the previous step. The following example provides sample values. Provide the values based on your environment.
+
+    ```text
+    198.51.100.1:8080
+    ```
+
+3. Click **Administration Console**.
+
+4. Sign in to Keycloak with the initial administrator user with the username `admin` and password `admin`. After logging in, change the password for the admin user. For information about changing the password, see the Keycloak documentation.
+
+5. Create a new realm with the following details. For information about creating a realm, see the Keycloak documentation.
+    - **Realm name**: Enter **MicroTx-BankApp**.
+    - **Resource file**: Select the `MicroTx-BankApp-realm.json` file which is located at `/home/oracle/keycloak-config`. This file contains details about the users and their passwords.
+    - **Enabled**: Select this option.
+   ![Dialog box to Create a Realm](./images/create-realm.png)
+    A new realm with the provided name, **MicroTx-BankApp**, is created.
+
+6. Select the realm that you have created, and then click **Users** to view the list of users in the `MicroTx-BankApp` realm.
+   ![Dialog box to Create a Realm](./images/create-realm.png)
+
+7. Set password for the users. For information about setting password for users, see the Keycloak documentation.
+
+8. Click **Clients**, and then click **microtx-bankapp** in the **Clients list** tab. The `microtx-bankapp` client is created when you create the realm.
+    ![Dialog box to Create a Realm](./images/keycloak-select-client.png)
+
+    Details of the `microtx-bankapp` client are displayed.
+
+9. In the **Settings** tab, under **Access settings**, enter the external IP address of Istio ingress gateway for the **Root URL**, **Valid redirect URIs**, **Valid post logout redirect URIs**, and **Admin URL** fields. Provide the IP address of Istio ingress gateway that you have copied earlier.
+    ![Access Settings group in the Settings tab](./images/keycloak-client-ip.png)
+
+10. Click **Save**.
+
+11. Click the **Credentials** tab, and then note down the value of the **Client-secret**. You'll need to provide this value later.
+    ![Access Settings group in the Settings tab](./images/keycloak-client-secret.png)
+
+12. Click **Realm settings**, and then in the **Frontend URL** field of the **General** tab, enter the external IP address and port of the Keycloak server which you have copied in a previous step. For example, `http://198.51.100.1:8080`.
+    ![General Realm Settings](./images/keycloak-url.png)
+
+13. In the **Endpoints** field, click the **OpenID Endpoint Configuration** link. Configuration details are displayed in a new tab.
+
+14. Note down the value of the **issuer** URL. It is in the format, `http://<keycloak-ip-address>:<port>/realms/<name-of-realm-you-have-created>`. For example, `http://198.51.100.1:8080/realms/MicroTx-Bankapp. You'll need to provide this value later.
+
+15. Click **Save**.
+
+## Task 3: Build the Container Images for Sample XA Applications
+
+The code for the XA sample application is available in the installation bundle in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp` folder. Build container images for each microservice in the XA sample application.
 
 To build container images for each microservice in the sample:
 
-1. Run the following commands to build the container image for the Teller application.
+1. Run the following commands to build the container image for the Branch Banking service.
 
     ```text
     <copy>
-    cd /home/oracle/OTMM/otmm-22.3/samples/xa/java/teller
+    cd /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/BranchBanking
     </copy>
     ```
 
     ```text
     <copy>
-    minikube image build -t xa-java-teller:1.0 .</copy>
+    minikube image build -t branch-banking:1.0 .</copy>
     ```
 
    When the image is successfully built, the following message is displayed.
 
-   **Successfully tagged xa-java-teller:1.0**
+   **Successfully tagged branch-banking:1.0**
 
-2. Run the following commands to build the Docker image for the Department 1 application.
+2. Run the following commands to build the container image for the Core Banking service.
 
     ```text
     <copy>
-    cd /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-helidon
+    cd /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/CoreBanking
     </copy>
     ```
 
     ```text
     <copy>
-    minikube image build -t department-helidon:1.0 .
-    </copy>
-    ```
-
-   When the image is successfully built, the following message is displayed.
-
-   **Successfully tagged department-helidon:1.0**
-
-3. Run the following commands to build the Docker image for the Department 2 application.
-
-    ```text
-    <copy>
-    cd /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-spring
-    </copy>
-    ```
-
-    ```text
-    <copy>
-    minikube image build -t department-spring:1.0 .
+    minikube image build -t core-banking:1.0 .
     </copy>
     ```
 
    When the image is successfully built, the following message is displayed.
 
-   **Successfully tagged department-spring:1.0**
+   **Successfully tagged core-banking:1.0**
+
+3. Run the following commands to build the Docker image for the Stock Broker service.
+
+    ```text
+    <copy>
+    cd /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker
+    </copy>
+    ```
+
+    ```text
+    <copy>
+    minikube image build -t stockbroker:1.0 .
+    </copy>
+    ```
+
+   When the image is successfully built, the following message is displayed.
+
+   **Successfully tagged stockbroker:1.0**
 
 The container images that you have created are available in your Minikube container registry.
 
@@ -119,9 +231,9 @@ In the `values.yaml` file, specify the image to pull, the credentials to use whe
 
 To provide the configuration and environment details in the `values.yaml` file:
 
-1. Open the values.yaml file, which is in the `/home/oracle/OTMM/otmm-22.3/samples/xa/java/helmcharts/transfer` folder, in any code editor. This file contains sample values. Replace these sample values with values that are specific to your environment.
+1. Open the `values.yaml` file, which is located in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts` folder, in any code editor. This file contains sample values. Replace these sample values with values that are specific to your environment.
 
-2. Provide the details of the ATP database instances, that you have created, in the `values.yaml` file, so that the Department A and Department B sample microservices can access the resource manager.
+2. Provide the details of the ATP database instances, that you have created, in the `values.yaml` file, so that the Core Banking, Branch Banking, and Stock Broker services can access their resource manager.
 
     * `connectString`: Enter the connect string to access the database in the following format. The host, port and service_name for the connection string can be found on the DB Connection Tab under Connection Strings as shown in screenshot below.
 
@@ -168,33 +280,32 @@ Install the XA sample application in the `otmm` namespace, where you have instal
 
     ```text
     <copy>
-    cd /home/oracle/OTMM/otmm-22.3/samples/xa/java/helmcharts
+    cd /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts
     </copy>
     ```
 
     ```text
     <copy>
-    helm install sample-xa-app --namespace otmm transfer/ --values transfer/values.yaml
+    helm install bankapp --namespace otmm bankapp/ --values bankapp/values.yaml
     </copy>
     ```
 
-   Where, `sample-xa-app` is the name of the application that you want to install. You can provide another name to the installed application.
+   Where, `bankapp` is the name of the application that you want to install. You can provide another name to the installed application.
 
-2. Verify that the application has been deployed successfully.
-
-    ```text
-    <copy>
-    helm list -n otmm
-    </copy>
-    ```
-
-   In the output, verify that the `STATUS` of the `sample-xa-app` is `deployed.
+   In the output, verify that the `STATUS` of the `bankapp` is `deployed`.
 
    **Example output**
 
-   ![Helm install success](./images/helm-install-deployed.png)
+    ```text
+    NAME: bankapp
+    LAST DEPLOYED: TUe May 23 10:52:14 2023
+    NAMESPACE: otmm
+    STATUS: deployed
+    REVISION: 1
+    TEST SUITE: None
+    ```
 
-3. If you need to make any changes in the `values.yaml` file, then uninstall `sample-xa-app`. Update the `values.yaml` file, and then reinstall the `sample-xa-app`. Perform step 1 as described in this task again to reinstall `sample-xa-app`.  and install it again by perform step 1. Otherwise, skip this step and go to the next step.
+2. If you don't need to make any changes to the `values.yaml` file, skip this step and go to the next step. If you need to modify the `values.yaml` file, then uninstall `bankapp`. Update the `values.yaml` file, and then reinstall `bankapp`. Perform step 1 as described in this task again to reinstall `bankapp`.
 
     ```text
     <copy>
@@ -202,55 +313,17 @@ Install the XA sample application in the `otmm` namespace, where you have instal
     </copy>
     ```
 
-4. Verify that all resources, such as pods and services, are ready. Proceed to the next step only when all resources are ready. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
+3. Verify that all resources, such as pods and services, are ready. Proceed to the next step only when all resources are running. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
 
     ```text
     <copy>
-    kubectl get all -n otmm
+    kubectl get pods -n otmm
     </copy>
     ```
+    The following image shows a sample output.
+   ![Get details of the pods and services](./images/get-pods-details.png)
 
-## Task 4: Start a Tunnel
-
-Before you start a transaction, you must start a Minikube tunnel.
-
-1. Run the following command in a new terminal to start a tunnel. Keep this terminal window open.
-
-    ```text
-    <copy>
-    minikube tunnel
-    </copy>
-    ```
-
-2. Enter the password to access your local machine if you are asked to enter your password at the command prompt.
-
-3. In a new terminal, run the following command to note down the external IP address of the Istio ingress gateway.
-
-    ```text
-    <copy>
-    kubectl get svc istio-ingressgateway -n istio-system
-    </copy>
-    ```
-
-    From the output note down the value of `EXTERNAL-IP`, which is the external IP address of the Istio ingress gateway. You will provide this value in the next step.
-
-    **Example output**
-
-    ![Public IP address of ingress gateway](./images/ingress-gateway-ip-address.png)
-
-    Let's consider that the external IP in the above example is 192.0.2.117.
-
-4. Store the external IP address of the Istio ingress gateway in an environment variable named `CLUSTER_IPADDR` as shown in the following command.
-
-    ```text
-    <copy>
-    export CLUSTER_IPADDR=192.0.2.117
-    </copy>
-    ```
-
-    Note that, if you don't do this, then you must explicitly specify the IP address in the commands when required.
-
-## Task 5: Deploy Kiali and Jaeger in the cluster (Optional)
+## Task 5: Deploy Kiali and Jaeger in the cluster (optional)
 **You can skip this task if you have already deployed Kiali and Jaeger in your cluster while performing Lab 3. However, ensure you have started Kiali and Jaeger dashboards as shown in steps 4 and 5.** 
 This optional task lets you deploy Kiali and Jaeger in the minikube cluster to view the service mesh graph and enable distributed tracing.
 Distributed tracing enables tracking a request through service mesh that is distributed across multiple services. This allows a deeper understanding about request latency, serialization and parallelism via visualization.
@@ -302,7 +375,11 @@ The following commands can be executed to deploy Kiali and Jaeger. Kiali require
 
 Run an XA transaction When you run the Teller application, it withdraws money from one department and deposits it to another department by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
-1. Before you start the transaction, run the following commands to check the balance in Department 1 and Department 2 accounts.
+1. Access the bank application. In a browser, type `192.0.2.117/bankapp`, where `192.0.2.117` is the external IP address of the Istio ingress gateway which you have noted down in task 1.
+
+2. Enter your Keycloak username and password.
+
+Before you start the transaction, run the following commands to check the balance in Department 1 and Department 2 accounts.
 
     **Example command to check balance in Department 1**
 
@@ -406,5 +483,5 @@ To bring up the Text Editor, click on Activities (top left) -> Show Applications
 ## Acknowledgements
 
 * **Author** - Sylaja Kannan, Principal User Assistance Developer
-* **Contributors** - Brijesh Kumar Deo
-* **Last Updated By/Date** - Sylaja, January 2023
+* **Contributors** - Brijesh Kumar Deo, Bharath MC
+* **Last Updated By/Date** - Sylaja, June 2023
