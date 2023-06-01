@@ -1,14 +1,14 @@
-# Prepare Source 
+# Prepare XTTS on Source and Target  
 
 ## Introduction
 
-In this lab, you will enable archive logging on source database and create the database directory for Data Pump export.
+In this lab, you will create the target PDB and a few additional objects.
 
-Estimated Time: 5 minutes
+Estimated Time: 15 minutes
 
 ### Objectives
 
-- Enable archive logging on source database
+- Initialize a new target PDB.
 
 ### Prerequisites
 
