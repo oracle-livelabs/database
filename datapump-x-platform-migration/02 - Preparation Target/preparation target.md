@@ -1,8 +1,8 @@
-# Prepare Setup
+# Prepare Target
 
 ## Introduction
 
-In this lab, you will create the target PDB.
+In this lab, you will create the target PDB and a few additional objects.
 
 Estimated Time: 15 minutes
 
@@ -18,10 +18,10 @@ This lab assumes you have:
 
 ## Task 1: Open terminal window and create three directories
 
-Click on the Terminal icon   
+Click on the Terminal icon
 ![terminal](./images/Terminal.png " ")
 
-In the terminal window create 3 directrories; one for the datapump dump, another one for the SOURCE and the third directory for the TARGET files
+In the terminal window create 3 directories; one for the datapump dump, another one for the SOURCE and the third directory for the TARGET files
 
     ```
     <copy>
@@ -73,9 +73,6 @@ When creating a PDB the admin user needs to exist. You can delete it later on if
 
 
 
-## Task 1: Download Oracle Resource Manager (ORM) stack zip file
-
-## Task 1: Download Oracle Resource Manager (ORM) stack zip file
 
 
 ## Acknowledgements
