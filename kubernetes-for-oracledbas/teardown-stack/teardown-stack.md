@@ -1,6 +1,6 @@
 # Clean up Infrastructure
 
-"Eat, Sleep, ~~Rave~~ Destroy, Repeat" - Fatboy Slim, Riva Starr
+"~~Eat~~ Plan, ~~Sleep~~ Apply, ~~Rave~~ Destroy, Repeat" - Fatboy Slim, Riva Starr
 
 ## Introduction
 
@@ -19,7 +19,7 @@ This lab assumes you have:
 
 * An Oracle Cloud account
 * You have completed:
-    * [Lab 2: Deploy Workshop Stack](../setup-stack/setup-stack.md)
+  * [Lab 2: Deploy Workshop Stack](../setup-stack/setup-stack.md)
 
 ## Task 1: Destroy ORM Stack Created Resources
 

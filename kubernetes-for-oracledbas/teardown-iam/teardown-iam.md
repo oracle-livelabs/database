@@ -33,10 +33,16 @@ In the *Cloud Shell*, run the following commands to delete the *Policy*:
 
 ```bash
 <copy>
-LL_POLICY=$(oci iam policy list --compartment-id $OCI_TENANCY --name [](var:oci_group)_POLICY | jq -r '.data[].id')
-echo "$LL_POLICY"
-if [[ ! -z $LL_POLICY ]]; then
-    oci iam policy delete --policy-id $LL_POLICY --force
+POLICY_OCID=$(oci iam policy list \
+    --compartment-id $OCI_TENANCY \
+    --name [](var:oci_group)_POLICY | jq -r '.data[].id')
+
+echo "Policy OCID: $POLICY_OCID"
+
+if [[ ! -z $POLICY_OCID ]]; then
+    oci iam policy delete \
+        --policy-id $POLICY_OCID \
+        --force
 fi
 </copy>
 ```
@@ -51,12 +57,15 @@ In the *Cloud Shell*, run the following commands to delete the *Group*:
 
     ```bash
     <copy>
-    LL_GROUP=$(oci iam group list --name [](var:oci_group) | jq -r '.data[].id')
-    echo "Group OCID: $LL_GROUP"
-    if [[ ! -z $LL_GROUP ]]; then
-        for user_id in $(oci iam group list-users --group-id $LL_GROUP | jq -r '.data[].id'); do
-            echo "Removing $user_id from $LL_GROUP"
-            oci iam group remove-user --group-id $LL_GROUP --user-id $user_id --force
+    GROUP_OCID=$(oci iam group list 
+        --name [](var:oci_group) | jq -r '.data[].id')
+
+    echo "Group OCID: $GROUP_OCID"
+
+    if [[ ! -z $GROUP_OCID ]]; then
+        for user_id in $(oci iam group list-users --group-id $GROUP_OCID | jq -r '.data[].id'); do
+            echo "Removing $user_id from $GROUP_OCID"
+            oci iam group remove-user --group-id $GROUP_OCID --user-id $user_id --force
         done
     fi
     </copy>
@@ -68,10 +77,15 @@ In the *Cloud Shell*, run the following commands to delete the *Group*:
 
     ```bash
     <copy>
-    LL_GROUP=$(oci iam group list --name [](var:oci_group) | jq -r '.data[].id')
-    echo "Group OCID: $LL_GROUP"
-    if [[ ! -z $LL_GROUP ]]; then
-        oci iam group delete --group-id $LL_GROUP --force
+    GROUP_OCID=$(oci iam group list 
+        --name [](var:oci_group) | jq -r '.data[].id')
+
+    echo "Group OCID: $GROUP_OCID"
+
+    if [[ ! -z $GROUP_OCID ]]; then
+        oci iam group delete \
+            --group-id $GROUP_OCID \
+            --force
     fi
     </copy>
     ```
@@ -84,10 +98,15 @@ In the *Cloud Shell*, run the following commands to delete the sub-*Compartment*
 
 ```bash
 <copy>
-LL_COMPARTMENT=$(oci iam compartment list --name [](var:oci_compartment) | jq -r '.data[].id')
-echo "Compartment OCID: $LL_COMPARTMENT"
-if [[ ! -z $LL_COMPARTMENT ]]; then
-    oci iam compartment delete --compartment-id $LL_COMPARTMENT --force
+COMPARTMENT_OCID=$(oci iam compartment list \
+    --name [](var:oci_compartment) | jq -r '.data[].id')
+
+echo "Compartment OCID: $COMPARTMENT_OCID"
+
+if [[ ! -z $COMPARTMENT_OCID ]]; then
+    oci iam compartment delete \
+        --compartment-id $COMPARTMENT_OCID \
+        --force
 fi
 </copy>
 ```
