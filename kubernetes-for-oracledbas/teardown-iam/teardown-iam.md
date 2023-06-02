@@ -65,7 +65,10 @@ In the *Cloud Shell*, run the following commands to delete the *Group*:
     if [[ ! -z $GROUP_OCID ]]; then
         for user_id in $(oci iam group list-users --group-id $GROUP_OCID | jq -r '.data[].id'); do
             echo "Removing $user_id from $GROUP_OCID"
-            oci iam group remove-user --group-id $GROUP_OCID --user-id $user_id --force
+            oci iam group remove-user \
+                --group-id $GROUP_OCID \
+                --user-id $user_id \
+                --force
         done
     fi
     </copy>
