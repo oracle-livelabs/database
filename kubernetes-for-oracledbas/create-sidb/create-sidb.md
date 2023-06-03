@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, we use the OraOperator to create a Single Instance Database inside the Kubernetes Cluster.
+In this lab, you will the OraOperator to create a Single Instance Database inside the Kubernetes Cluster.
 
 *Estimated Lab Time:* 5 minutes
 
@@ -17,16 +17,40 @@ Watch the video below for a quick walk through of the lab.
 
 This lab assumes you have:
 
-* A Running and Healthy OraOperator
+* [Generated a Kubeconfig File](?lab=generate-kubeconfig)
+* A [Running and Healthy OraOperator](?lab=deploy-oraoperator)
+* A provisioned Oracle ADB in OCI
 * Authentication Credentials to Oracle's Container Registry
 
-## Task 1: Verify Access to the Oracle Container Registry
+## Kubernetes Custom Resources and Controllers
 
-## Task 2: Create a Namespace
+The OraOperator introduces Oracle specific, **Custom Resource Definition (CRD)** types to the Kubernetes Cluster, such as, but not limited to, the Single Instance Database.  This CRD defines the structure and behaviour of a **SingleInstanceDatabase** type and allows you to create or bind to an existing one.
+
+In order to manage the SingleInstanceDatabase type, the OraOperator also introduces custom **Controllers** to manage the SingleInstanceDatabase type within the Kubernetes cluster. These controllers act as "built-in SOPs" specifically designed for handling the SingleInstanceDatabase resource.
+
+The controllers provide a declarative API, allowing users to specify the desired state of the SingleInstanceDatabase resource.  They continuously monitor the current state of the resource and take actions to reconcile any differences between the desired state and the actual state.
+
+These actions that the SingleInstanceDatabase controller can perform includes:
+
+* Provisioning
+* Configuring ArchiveLog, Flashback and ForceLog
+* Configuring init.ora Parameters
+* Cloning
+* Patching
+* Decommissioning
+
+You will use the OraOperator to perform some of these actions in the [Lifecycle Operations - Single Instance Database (SIDB)](?lab=lifecycle-sidb) Lab.
+
+## Task 1: Create a Namespace
+
+In Kubernetes, a *Namespace* is a virtual cluster that provides a way to divide the physical Kubernetes cluster resources logically between multiple users or teams.  Additionally, Namespaces enable fine-grained control over access and resource allocation.  By defining appropriate Role-Based Access Control (RBAC) policies, you can control which users or groups have access to specific Namespaces and the resources within them.
+
+In Cloud Shell, create a namespace for the AutonomousDatabase Resources:
+In Cloud Shell:
 
 ```bash
 <copy>
-kubectl create namespace containerdb
+kubectl create namespace sidb
 </copy>
 ```
 
@@ -34,14 +58,14 @@ kubectl create namespace containerdb
 
 ```bash
 <copy>
-kubectl create secret docker-registry oracle-container-registry-secret --docker-server=container-registry.oracle.com --docker-username='<oracle-sso-email-address>' --docker-password='<oracle-sso-password>' --docker-email='<oracle-sso-email-address>' -n containerdb
+kubectl create secret docker-registry oracle-container-registry-secret --docker-server=container-registry.oracle.com --docker-username='<oracle-sso-email-address>' --docker-password='<oracle-sso-password>' --docker-email='<oracle-sso-email-address>' -n sidb
 </copy>
 ```
 
 ```bash
 <copy>
-kubectl describe secret oracle-container-registry-secret -n containerdb
-kubectl get secret oracle-container-registry-secret -n containerdb  --template="{{index .data \".dockerconfigjson\" | base64decode}}"
+kubectl describe secret oracle-container-registry-secret -n sidb
+kubectl get secret oracle-container-registry-secret -n sidb  --template="{{index .data \".dockerconfigjson\" | base64decode}}"
 </copy>
 ```
 

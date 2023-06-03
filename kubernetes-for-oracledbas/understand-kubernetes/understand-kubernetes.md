@@ -2,7 +2,56 @@
 
 ## Introduction
 
-In this lab, we will review the basics of the Microservices Architecture and Kubernetes Infrastructure.
+It is not uncommon for the Oracle DBA to have little or no exposure to Microservices Architecture or Kubernetes Infrastructure, in fact, the same could be said for Microservice Developers and the Oracle Database.
+
+This is an unfortunate situation, for both the DBA and Developer, which often results in the Oracle Database being overlooked as a viable data store solution for Microservice projects.
+
+>often results in the Oracle Database being overlooked as a viable data store solution for Microservice projects
+
+However, this couldn't be further from the truth.  Not only is the Oracle Database a suitable data store solution for Microservice projects, it could also be the 
+
+
+when move from a traditional Monolithic 
+
+
+You may not have had the exposure due to specialised databases being used instead
+New SOPs have had to be implemented
+Unnecessary when Oracle can handle it all
+
+
+
+The emergence of Microservice architecture
+
+In recent years, you may have noticed the trend of Microservices emerging in the world of software development.  Monolithic applications are being broken down into smaller, independent services that can be developed, deployed, and scaled individually.  With this architectural shift, there has been a proliferation of "specialised" databases being introduced into estates to support new Microservice projects.
+
+> there has been a proliferation of "specialised" databases being introduced into estates
+
+As an Oracle DBA, 
+
+and the Oracle Database is often overlooked as a feasible data store for Microservices.
+
+Organisations are adopting the Microservices Architecture and Kubernetes
+
+With the increasing adoption of Microservices Architecture and Kubernetes Infrastructure, there has been a proliferation of "specialised" databases catering to these implementations.  Regrettably, the Oracle Database often goes unnoticed when it comes to considering these architecture and infrastructure solutions, but not for good reason.
+
+> the Oracle Database often goes unnoticed when it comes to considering these architecture and infrastructure solutions
+
+
+
+As more companies adopt Microservices Architecture and Kubernetes Infrastructure, there has been a  of "specialised" databases entering the market to support these implementations.  Unfortunately the Oracle Database can be overlooked for these architecture and infrastructure solutions.
+
+
+As an Oracle DBA, you may have noticed the introduction of several different, "specialised" databases being deployed into your estate to support Microservice Applications running in Kubernetes Clusters.  
+
+
+
+This often occurs because the Oracle Database is overlooked as a viable persistent storage solution for these architecture and infrastructure solutions, resulting in a lack of exposure for the Oracle DBA.
+
+> Often, the Oracle Database is overlooked... for these architecture and infrastructure solutions
+
+In this lab, you can explore the fundamental aspects of the Microservices Architecture and Kubernetes Infrastructure, learn how to 
+
+This will empower you, the Oracle DBA, to not only gain proficiency in these solutions but also to advocate for the Oracle Database as the optimal database storage solution.
 
 If you are already familiar and comfortable with these concepts/technology, please feel free to move onto [Get Started](https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md) for the hands-on portion of the Workshop.
 
@@ -15,13 +64,16 @@ If you are already familiar and comfortable with these concepts/technology, plea
 
 ## Task 1: What are Microservices?
 
+By definintion, Microservices 
+
+
 Imagine yourself in the role of an Oracle DBA for a new micro-brewery, "Query Brews".  It is a small-scale operation featuring a single standout beer known as the "Drop Cascade IPA," but your responsibilities as the Oracle DBA will be significant. You have been entrusted with designing and supporting the database that will:
 
 * Record ingredient inventory.
 * Manage the brewing process.
 * Track the available stock for sale.
 
-Given the size and sole beer offering, you choose a straightforward and efficient approach by implementing a single schema design, enabling **seamless data access** and **streamlined querying** with **minimal complexity**.  Each application has different data type requirements, but fortunately Oracle can handle them all, preventing the need to support multiple special-purpose database technologies.
+Given the size and sole beer offering, you choose a straightforward and efficient approach by implementing a single schema design, enabling **seamless data access** and **streamlined querying** with **minimal complexity**.  Each application has different data type requirements, but fortunately Oracle can handle them all, eliminating the need to support multiple special-purpose database technologies.
 
 ### *Local Legends* - Containers
 

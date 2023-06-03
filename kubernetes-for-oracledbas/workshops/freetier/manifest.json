@@ -33,47 +33,52 @@
             "filename": "../../understand-kubernetes/understand-kubernetes.md"
         },
         {
-            "title": "Lab 4: Deploy the OraOperator",
+            "title": "Lab 4: Generate a Kubeconfig File",
+            "description": "Get access to the Kubernetes Cluster",
+            "filename": "../../generate-kubeconfig/generate-kubeconfig.md"
+        },
+        {
+            "title": "Lab 5: Deploy the OraOperator",
             "description": "The Oracle Operator for Kubernetes",
             "filename": "../../deploy-oraoperator/deploy-oraoperator.md"
         },
         {
-            "title": "Lab 5: Create a Containerised Single Instance Database (SIDB)",
+            "title": "Lab 6: Create a Containerised Single Instance Database (SIDB)",
             "description": "Create a Single Instance Containerised Database with the OraOperator",
             "filename": "../../create-sidb/create-sidb.md"
         },
         {
-            "title": "Lab 6: Bind to an Autonomous Database (ADB)",
+            "title": "Lab 7: Bind to an Autonomous Database (ADB)",
             "description": "Bind the OraOperator to the ADB",
             "filename": "../../bind-adb/bind-adb.md"
         },
         {
-            "title": "Lab 7: Lifecycle Operations (ADB)",
+            "title": "Lab 8: Lifecycle Operations (ADB)",
             "description": "Perform Lifecycle Operations against the ADB",
             "filename": "../../lifecycle-adb/lifecycle-adb.md"
         },
         {
-            "title": "Lab 8: Lifecycle Operations (SIDB)",
+            "title": "Lab 9: Lifecycle Operations (SIDB)",
             "description": "Perform Lifecycle Operations against the SIDB",
             "filename": "../../lifecycle-sidb/lifecycle-sidb.md"
         },
         {
-            "title": "Lab 9: Observe your Databases",
+            "title": "Lab 10: Observe your Databases",
             "description": "Observe your Databases (Time Permitting)",
             "filename": "../../observe-database/observe-database.md"
         },
         {
-            "title": "Lab 10: Deploy a Microservice Application",
+            "title": "Lab 11: Deploy a Microservice Application",
             "description": "Deploy a Microservice Application ",
             "filename": "../../deploy-application/deploy-application.md"
         },
         {
-            "title": "Lab 11: Clean up Infrastructure",
+            "title": "Lab 12: Clean up Infrastructure",
             "description": "Destroy the Infrastructure",
             "filename": "../../teardown-stack/teardown-stack.md"
         },
         {
-            "title": "Lab 12: Clean up OCI Tenancy",
+            "title": "Lab 13: Clean up OCI Tenancy",
             "type": "free-tier",
             "description": "Clean up Groups, Policies, and Compartment (IAM)",
             "filename": "../../teardown-iam/teardown-iam.md"

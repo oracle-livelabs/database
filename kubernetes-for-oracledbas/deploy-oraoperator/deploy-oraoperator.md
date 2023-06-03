@@ -17,7 +17,7 @@ Watch the video below for a quick walk through of the lab.
 
 This lab assumes you have:
 
-* An accessible Kubernetes Cluster
+* Have [generated a Kubeconfig File](?lab=generate-kubeconfig)
 
 ## Kubernetes Operators
 
@@ -31,37 +31,13 @@ In short, human operators become extensions of the SMEs.
 
 Like the human operator, the OraOperator in K8s, is an extension of the Oracle DBA in a K8s cluster.  The OraOperator is developed and supported by Oracle, with "built-in SOPs" for provisioning, configuring, and managing the lifecycle of Oracle databases deployed within or outside K8s clusters, including Cloud databases.
 
-## Task 1: Create the Kubeconfig file
-
-In OCI, navigate to Developer Services -> Kubernetes Clusters(OKE).
-
-![OCI OKE Navigation](images/oci_oke_nav.png "OCI OKE Navigation")
-
-Select your cluster and click the "Access Cluster" button. Follow the steps to "Manage the cluster via Cloud Shell".
-
-![OCI Create Kubeconfig](images/oci_create_kubeconfig.png "OCI Create Kubeconfig")
-
-Paste the copied command into Cloud Shell.  This will create a configuration file, the `kubeconfig`, that `kubectl` uses to access the cluster.
-
-## Task 2: Test Kubernetes Access
-
-Just as with `srvctl`, used to query the resources in a Oracle Grid Infrastructure Cluster, use `kubectl` to query the resources in the K8s cluster.
-
-```bash
-<copy>
-kubectl get all -A
-</copy>
-```
-
-The command should return a table like structure of pods and namespaces.  If an error is returned, ensure the K8s cluster is up and running and that the `kubeconfig` file was properly generated (Task 1).
-
-## Task 3: Install Cert-Manager
+## Task 1: Install Cert-Manager
 
 The OraOperator uses webhooks, automated messages sent from apps when something happens, to intercept and validate user requests to the OraOperator before they are persisted in etcd.  A sort of table check-constraint to ensure the input is valid before inserting it.
 
 Webhooks require TLS certificates that are generated and managed by Cert-Manager, an open-source certificate management solution designed for Kubernetes.
 
-To install Cert-Manager:
+To install Cert-Manager, in Cloud Shell run:
 
 ```bash
 <copy>
@@ -100,9 +76,9 @@ replicaset.apps/cert-manager-cainjector-7c9d98fd74   1         1         1      
 replicaset.apps/cert-manager-webhook-8bd7f6948       1         1         1       7m55s
 ```
 
-## Task 4: Install Oracle Operator for Kubernetes
+## Task 2: Install Oracle Operator for Kubernetes
 
-To install the OraOperator:
+To install the OraOperator, in Cloud Shell run:
 
 ```bash
 <copy>
