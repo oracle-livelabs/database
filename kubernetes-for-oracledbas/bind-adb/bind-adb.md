@@ -27,11 +27,11 @@ This lab assumes you have:
 
 ## Kubernetes Custom Resources and Controllers
 
-The OraOperator introduces Oracle specific, **Custom Resource Definition (CRD)** types to the Kubernetes Cluster, such as, but not limited to, the Autonomous Database.  This CRD defines the structure and behaviour of a **AutonomousDatabase** type and allows you to create or bind to an existing one.
+The OraOperator introduces Oracle specific, **Custom Resource Definition (CRD)** types to the Kubernetes (K8s) cluster, such as, but not limited to, the Autonomous Database.  This **CRD** defines the structure and behaviour of a **AutonomousDatabase** type and allows you to create or bind to an existing one.
 
-In order to manage the AutonomousDatabase type, the OraOperator also introduces custom **Controllers** to manage the AutonomousDatabase type within the Kubernetes cluster. These controllers act as "built-in SOPs" specifically designed for handling the AutonomousDatabase resource.
+In order to manage the **AutonomousDatabase** type, the OraOperator also introduces custom **Controllers** to manage the  **AutonomousDatabase** type within the K8s cluster. These controllers act as "built-in SOPs" specifically designed for handling the  **AutonomousDatabase** resource.
 
-The controllers provide a declarative API, allowing users to specify the desired state of the AutonomousDatabase resource.  They continuously monitor the current state of the resource and take actions to reconcile any differences between the desired state and the actual state.
+The controllers provide a declarative API, allowing users to specify the desired state of the  **AutonomousDatabase** resource.  They continuously monitor the current state of the resource and take actions to reconcile any differences between the desired state and the actual state.
 
 ![OraOperator for ADB](images/k8s_operator_adb.png "OraOperator for ADB")
 
@@ -49,7 +49,7 @@ You will use the OraOperator to perform some of these actions in this Lab and th
 
 ## Task 1: Create a Namespace
 
-In Kubernetes, a *Namespace* is a virtual cluster that provides a way to divide the physical Kubernetes cluster resources logically between multiple users or teams.  Additionally, Namespaces enable fine-grained control over access and resource allocation.  By defining appropriate Role-Based Access Control (RBAC) policies, you can control which users or groups have access to specific Namespaces and the resources within them.
+In K8s, a *Namespace* is a virtual cluster that provides a way to divide the physical K8s cluster resources logically between multiple users or teams.  Additionally, Namespaces enable fine-grained control over access and resource allocation.  By defining appropriate Role-Based Access Control (RBAC) policies, you can control which users or groups have access to specific Namespaces and the resources within them.
 
 In Cloud Shell, create a namespace for the AutonomousDatabase Resources:
 
@@ -68,7 +68,7 @@ namespace/adb created
 ### Namespace Best Practices
 
 * For production clusters, avoid using the `default` namespace. Instead, make other namespaces and use those.
-* Avoid creating namespaces with the prefix `kube-`, it is reserved for Kubernetes system namespaces.
+* Avoid creating namespaces with the prefix `kube-`, it is reserved for K8s system namespaces.
 
 ## Task 1: Retrieve the existing ADB OCID
 
@@ -274,7 +274,7 @@ Ensure you are in the K8S4DBAS Compartment and you will see the `DEVOPSDB` being
 
 * [Oracle Autonomous Database](https://www.oracle.com/uk/autonomous-database/)
 * [OCI - Instance Principal](https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/callingservicesfrominstances.htm)
-* [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
+* [Kubernetes Secrets](https://K8s.io/docs/concepts/configuration/secret/)
 
 ## Acknowledgements
 
