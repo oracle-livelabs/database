@@ -1,8 +1,8 @@
-# Deploy the Oracle Operator for Kubernetes (OraOperator)
+# Generate the Kubeconfig File
 
 ## Introduction
 
-This lab will walk you through establishing a connection to the Kubernetes Cluster.
+This lab will walk you through establishing a connection to the Kubernetes cluster by generating a `kubeconfig` file.
 
 *Estimated Lab Time:* 1 minute
 
@@ -18,6 +18,10 @@ Watch the video below for a quick walk through of the lab.
 This lab assumes you have:
 
 * An accessible Oracle Kubernetes Engine Cluster provisioned
+
+## Kubeconfig File
+
+The Kubernetes command-line tool, `kubectl`, relies on the Kubeconfig file for logging in and working with Kubernetes clusters.  It holds important details like cluster info, login methods, and user credentials.
 
 ## Task 1: Create the Kubeconfig file
 
@@ -44,3 +48,13 @@ kubectl get all -A
 ```
 
 The command should return a table like structure of pods and namespaces.  If an error is returned, ensure the K8s cluster is up and running and that the `kubeconfig` file was properly generated in *Task 1*.
+
+## Learn More
+
+* [Command line tool (kubectl)](https://kubernetes.io/docs/reference/kubectl/)
+* [Organizing Cluster Access Using kubeconfig Files](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/)
+
+## Acknowledgements
+
+* **Author** - John Lathouwers, Developer Advocate, Database Development Operations
+* **Last Updated By/Date** - John Lathouwers, May 2023

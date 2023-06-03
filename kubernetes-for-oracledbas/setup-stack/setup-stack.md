@@ -5,7 +5,7 @@
 
 ## Introduction
 
-In this lab, we will provision and configure the cloud resources required for the Workshop using *Oracle Resource Manager (ORM)*.  ORM will stand-up the Infrastructure using *Terraform* and perform some basic configuration using *Ansible*.  Don't panic, we'll go over how all this works... while it is working.
+In this lab, you will provision and configure the cloud resources required for the Workshop using *Oracle Resource Manager (ORM)*.  ORM will stand-up the Infrastructure using *Terraform* and could also perform some basic configuration using *Ansible*.  Don't panic, how all this works will be explored... while it is working.
 
 *Estimated Lab Time:* 20 minutes
 

@@ -29,16 +29,19 @@ In order to manage the AutonomousDatabase type, the OraOperator also introduces 
 
 The controllers provide a declarative API, allowing users to specify the desired state of the AutonomousDatabase resource.  They continuously monitor the current state of the resource and take actions to reconcile any differences between the desired state and the actual state.
 
-These actions that the AutonomousDatabase controller can perform includes:
+![OraOperator for ADB](images/k8s_operator_adb.png "OraOperator for ADB")
 
-* Scale the OCPU core count or storage
-* Rename an Autonomous Database
+The actions that the AutonomousDatabase controller can perform includes:
+
+* Create an Autonomous Database
 * Manage ADMIN database user password
 * Download instance credentials (wallets)
+* Scale the OCPU core count or storage
+* Rename an Autonomous Database
 * Stop/Start/Terminate an Autonomous Database
-* Delete the resource from the cluster
+* Delete the resource from the K8s cluster
 
-You will use the OraOperator to perform some of these actions in the [Lifecycle Operations - Oracle Autonomous Database (ADB)](?lab=lifecycle-adb) Lab.
+You will use the OraOperator to perform some of these actions in the [Lifecycle Operations (ADB)](?lab=lifecycle-adb) Lab.
 
 ## Task 1: Create a Namespace
 
@@ -89,15 +92,9 @@ echo "ADB OCID: $ADB_OCID"
 
 It is important to highlight that during the creation of the OCI resources, Instance Principals were established that allow the K8s nodes to manage the ADB.  This includes changing its ADMIN password.
 
-The password currently assigned to the ADB was randomised and is unknown, but when you bind to the ADB via the OraOperator, you are instructing the controllers to modify the ADB to the newly defined, desired state.  In regards to the ADMIN password, it will currently not be what you will define in the K8s Secret, and will therefor be modified accordingly.
+The password currently assigned to the ADB was randomised and is unknown, but when you bind to the ADB via the OraOperator, you are instructing the Controller to modify the ADB to the newly defined, desired state.  In regards to the ADMIN password, it will currently not be what you will define in the K8s Secret, and will therefor be modified accordingly.
 
-In Cloud Shell, generate a base64 encoded password string.  You can choose any password so long as it complies with the Database Complexity rules:
-
-* The password must be between 12 and 30 characters long and must include at least one uppercase letter, one lowercase letter, and one numeric character.
-* The password cannot contain the username.
-* The password cannot be one of the last four passwords used for the same username.
-* The password cannot contain the double quote (") character.
-* The password must not be the same password that is set less than 24 hours ago.
+In Cloud Shell, generate a base64 encoded password string.  You can choose any password so long as it complies with the [Password Complexity](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/manage-users-create.html#GUID-72DFAF2A-C4C3-4FAC-A75B-846CC6EDBA3F) rules.
 
 Generate a Base64 encoded string of the new password:
 
@@ -216,8 +213,8 @@ kubectl get AutonomousDatabase adb -n adb
 With the exception of the **DISPLAY NAME** and **DB NAME**, you should see similar output:
 
 ```text
-NAME   DISPLAY NAME   DB NAME      STATE       DEDICATED   OCPUS   STORAGE (TB)   WORKLOAD TYPE   CREATED
-adb    STINGRAYDB     STINGRAYDB   AVAILABLE   false       1       1              OLTP            1970-01-01 23:59:59 UTC
+NAME   DISPLAY NAME   DB NAME      STATE       DEDICATED   OCPUS   
+adb    STINGRAYDB     STINGRAYDB   AVAILABLE   false       1    
 ```
 
 To get more details, lets describe the resource (`kubectl describe <resource_type> <resource_name> -n <namespace>`):

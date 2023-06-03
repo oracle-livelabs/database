@@ -28,7 +28,7 @@ This lab assumes you have:
 
 ## Task 1: Open the Cloud Shell
 
-*Cloud Shell* is a web browser-based terminal accessible from the Oracle Cloud Console. *Cloud Shell* is free to use (within monthly tenancy limits), and provides access to a Linux shell, with a pre-authenticated OCI CLI, a pre-authenticated Ansible installation, Terraform and other useful tools.
+*Cloud Shell* is a web browser-based terminal accessible from the Oracle Cloud Console. *Cloud Shell* is free to use (within monthly tenancy limits), and provides access to a Linux shell, with a pre-authenticated OCI CLI, Ansible installation, Terraform and other useful tools.
 
 <if type="tenancy">As a user in the **Administrator** group, open the *Cloud Shell*</fi>
 <if type="free-tier">Open the *Cloud Shell*</fi>
@@ -54,7 +54,7 @@ oci iam compartment create \
 
 ## Task 3: Create a Group
 
-A *Group* is a collection of cloud users who all need the same type of access to a particular set of resources or compartment.  A *Group* is very similar to a database role, with a small twist of direction.  While a database role is granted to database users, a cloud user is assigned to a cloud *Group*.
+A *Group* is a collection of cloud users who all need the same type of access to a particular set of resources or compartment.  A *Group* is very similar to a database role.  Privileges, or in the case of OCI, *Policies* will be granted to the *Group* and cloud users can then be assigned to the cloud *Group* to inherit those *Policies*.
 
 In the *Cloud Shell*, run the following commands to create a *Group*:
 
@@ -68,7 +68,7 @@ oci iam group create \
 
 ## Task 4: Assign User to Group
 
-Assign the *User* who will be carrying out the remaining Labs to the *Group* created in Task 3.  This could be yourself!
+Assign the cloud *User* who will be carrying out the remaining Labs to the *Group* created in Task 3.  This could be yourself!
 
 1. Assign a variable with the OCID of the user performing the rest of the Live Lab workshop.
 
@@ -84,7 +84,7 @@ Assign the *User* who will be carrying out the remaining Labs to the *Group* cre
     USER_OCID=$(oci iam user list --name first.last@url.com | jq -r '.data[].id')
     ```
 
-    You can get a list of usernames by running:
+    If you don't know the username, you can get a list by running:
 
     ```bash
     <copy>
@@ -97,19 +97,22 @@ Assign the *User* who will be carrying out the remaining Labs to the *Group* cre
     ```bash
     <copy>
     GROUP_OCID=$(oci iam group list --name [](var:oci_group) | jq -r .data[].id)
+    
     echo "Group OCID: $GROUP_OCID"
+    
     echo "User OCID:  $USER_OCID"
+    
     oci iam group add-user --group-id $GROUP_OCID --user-id $USER_OCID
     </copy>
     ```
 
     Press "return" to ensure commands have run.
 
-## Task 4: Apply Policies to the Group
+## Task 5: Apply Policies to the Group
 
 A *Policy* specifies who can access which OCI resources, and how.  A *Policy* simply allows a *Group* to work in certain ways with specific types of resources in a particular compartment.  In database terms, this is the process of granting privileges (*Policy*) to a role (*Group*) against a specific schema (*Compartment*).
 
-In the *Cloud Shell*, run the following commands to create a *Policy* statement and assign *Policies* to the *Group* against the *Compartment*:
+In the *Cloud Shell*, run the following commands to create a *Policy* statement file and assign *Policies* to the *Group* against the *Compartment*:
 
 1. Create the *Policy* statement file:
 

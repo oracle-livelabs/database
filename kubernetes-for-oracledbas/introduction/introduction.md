@@ -6,7 +6,7 @@ Oracle DBAs: Explore Microservices Architecture and Kubernetes Infrastructure wi
 
 As an Oracle DBA you are likely more familiar with the concepts behind Microservices and Kubernetes than you may realise.  In fact, you've probably been naturally evolving the Oracle databases you support into a Microservices-like architecture running on a Kubernetes-like infrastructure.
 
-This workshop was designed by an Oracle DBA, for an Oracle DBA, to introduce the concepts of Microservices and Kubernetes so you can confidently support your organisations next Microservice project.
+This workshop was designed by an Oracle DBA, for an Oracle DBA, to introduce the concepts of Microservices and Kubernetes so you can confidently support your organisations next Microservice project with the Oracle Database.
 
 Estimated Workshop Time: -- hours -- minutes
 

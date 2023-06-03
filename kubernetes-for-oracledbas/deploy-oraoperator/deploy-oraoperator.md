@@ -23,11 +23,13 @@ This lab assumes you have:
 
 In Kubernetes (K8s), an **Operator** is a software component that extends the behavior of K8s clusters without modifying the Kubernetes code itself.
 
-K8s Operators are designed to mimic the role of a human data centre operator: The human operator gains their system knowledge from the Subject Matter Experts (SMEs) through documented Standard Operation Procedures (SOPs).  Over time, the human operator also gains the experience of how the systems should behave and how to respond when problems occur, enhancing the maturity of the SOPs.  They may even take responsibility for some of the SMEs tasks such as: deploying software, performing generic configurations, and lifecycle management.
+K8s Operators are designed to mimic the role of a human data centre operator: 
+
+The human operator gains their system knowledge from the Subject Matter Experts (SMEs) through documented Standard Operation Procedures (SOPs).  Over time, the human operator also gains the experience of how the systems should behave and how to respond when problems occur, enhancing the maturity of the SOPs.  They may even take responsibility for some of the SMEs tasks such as: deploying software, performing generic configurations, and lifecycle management.
+
+![Operator/DBA Relationship](images/dba_oper_dev.png "Operator/DBA Relationship")
 
 In short, human operators become extensions of the SMEs.
-
-![Operator/DBA Relationship](images/operator_dba.png "Operator/DBA Relationship")
 
 Like the human operator, the OraOperator in K8s, is an extension of the Oracle DBA in a K8s cluster.  The OraOperator is developed and supported by Oracle, with "built-in SOPs" for provisioning, configuring, and managing the lifecycle of Oracle databases deployed within or outside K8s clusters, including Cloud databases.
 
