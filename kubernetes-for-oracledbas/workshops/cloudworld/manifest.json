@@ -49,7 +49,7 @@
             "filename": "../../deploy-oraoperator/deploy-oraoperator.md"
         },
         {
-            "title": "Lab 6: Bind to an Autonomous Database (ADB)",
+            "title": "Lab 6: Provision/Bind to an ADB",
             "type": "cloudworld",
             "description": "Bind the OraOperator to the ADB",
             "filename": "../../bind-adb/bind-adb.md"

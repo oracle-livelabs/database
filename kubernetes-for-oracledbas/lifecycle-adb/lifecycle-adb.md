@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, we use the OraOperator to perform Lifecycle operations against an Oracle Autonomous Database (ADB).
+In this lab, you use the OraOperator to perform Lifecycle operations against an Oracle Autonomous Database (ADB).
 
 *Estimated Lab Time:* 5 minutes
 
@@ -17,26 +17,49 @@ Watch the video below for a quick walk through of the lab.
 
 This lab assumes you have:
 
-* A Running and Healthy OraOperator
-* The OraOperator bound to an ADB
+* [Generated a Kubeconfig File](?lab=generate-kubeconfig)
+* A [Running and Healthy OraOperator](?lab=deploy-oraoperator)
+* The [OraOperator bound to an ADB](?lab=bind-adb)
 
-## Task 1: Download the Wallet/TNSNames
+## Task 1: Database Connectivity
+
+As you are working with an ADB, there are numerous ways to download the Wallet to access the Database using mTLS.  One way is by extracting the K8s Wallet secret that was created for you by the OraOperator.
+
+In Cloud Shell:
 
 ```bash
 <copy>
 export ORACLE_HOME=$(pwd)
 export TNS_ADMIN=$ORACLE_HOME/network/admin
 mkdir -p $ORACLE_HOME/network/admin
-
+# Extract the tnsnames.ora secret
 kubectl get secret/adb-tns-admin -n adb --template="{{ index .data \"tnsnames.ora\" | base64decode }}" > $ORACLE_HOME/network/admin/tnsnames.ora
-
+# Extract the sqlnet.ora secret
 kubectl get secret/adb-tns-admin -n adb --template="{{ index .data \"sqlnet.ora\" | base64decode }}" > $ORACLE_HOME/network/admin/sqlnet.ora
-
+# Extract the Wallet for mTLS
 kubectl get secret/adb-tns-admin -n adb --template="{{ index .data \"cwallet.sso\" | base64decode }}" > $ORACLE_HOME/network/admin/cwallet.sso
 </copy>
 ```
 
-## Task 2: Manage ADMIN password
+Feel free to examine the contents of the files created by extracting the different secrets (e.g `cat $ORACLE_HOME/network/admin/tnsnames.ora`)
+
+When binding to the ADB in a [previous lab](?lab=bind-adb), you would have changed the ADMIN password.  If you have forgotten the password you set, you can retrieve it from the secret:
+
+```bash
+<copy>
+kubectl get secrets/adb-admin-password -n adb --template="{{index .data \"adb-admin-password\" | base64decode}}"
+<copy>
+```
+
+Now connect to the ADB via SQL*Plus, using the ADMIN password from the secret:
+
+```bash
+<copy>
+SERVICE_NAME=$(kubectl get adb -n adb -o json | jq -r .items[0].spec.details.dbName)_TP
+sqlplus admin@$SERVICE_NAME
+</copy>
+```
+
 
 ```bash
 <copy>
@@ -87,14 +110,11 @@ set -o history
 </copy>
 ```
 
+
+
 ## Task 3: Manually Connect to the ADB
 
-```bash
-<copy>
-sqlplus /nolog
-connect admin@eagledb_high
-</copy>
-```
+
 
 ## Task 4: Scale the OCPU and Storage
 
