@@ -60,11 +60,9 @@ This lab assumes you have:
 ## Task 2: Create database tables
 
 
-1. You will now create tables in the ORDS-enabled schema. First, you must login to the database and update your workshop user's password. To do this, we will install SQLcl, a command line tool used to interact with your database. 
+1. You will now create tables in the ORDS-enabled schema. First, you must login to the database and update your workshop user's password. 
 
     ```
-    $ <copy>sudo yum install -y sqlcl</copy>
-    $ <copy>export JAVA_HOME=/usr/java/jdk-11.0.10</copy>
     $ <copy>sql / as sysdba</copy>
     ```
 
