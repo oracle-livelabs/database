@@ -1,5 +1,8 @@
 # Deploy the Oracle Operator for Kubernetes (OraOperator)
 
+"If everything seems under control, you're not moving fast enough."
+\​- Mario Andretti.
+
 ## Introduction
 
 This lab will walk you through deploying the Oracle Operator for Kubernetes (OraOperator).
@@ -23,7 +26,7 @@ This lab assumes you have:
 
 In Kubernetes (K8s), an **Operator** is a software component that extends the behavior of K8s clusters without modifying the Kubernetes code itself.
 
-K8s Operators are designed to mimic the role of a human data centre operator: 
+K8s Operators are designed to mimic the role of a human data centre operator:
 
 The human operator gains their system knowledge from the Subject Matter Experts (SMEs) through documented Standard Operation Procedures (SOPs).  Over time, the human operator also gains the experience of how the systems should behave and how to respond when problems occur, enhancing the maturity of the SOPs.  They may even take responsibility for some of the SMEs tasks such as: deploying software, performing generic configurations, and lifecycle management.
 

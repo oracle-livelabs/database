@@ -1,5 +1,8 @@
 # Generate the Kubeconfig File
 
+"Invention, my dear friends, is 93% perspiration, 6% electricity, 4% evaporation, and 2% butterscotch ripple."
+\- Willy Wonka
+
 ## Introduction
 
 This lab will walk you through establishing a connection to the Kubernetes cluster by generating a `kubeconfig` file.

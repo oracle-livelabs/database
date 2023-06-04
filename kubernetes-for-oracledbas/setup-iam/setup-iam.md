@@ -37,7 +37,7 @@ This lab assumes you have:
 
 ## Task 2: Create a Compartment
 
-A *Compartment* is a collection of cloud assets, including Databases, Oracle Kubernetes Clusters, Compute Instances, Load Balancers and so on.
+A *Compartment* is a collection of cloud assets, including Databases, Oracle Kubernetes clusters, Compute Instances, Load Balancers and so on.
 
 You can think of a *Compartment* much like a database schema: a collection of tables, indexes, and other objects isolated from other schemas.  By default, a root *Compartment* (think SYSTEM schema) was created for you when your tenancy was established.  It is possible to create everything in the root *Compartment*, but Oracle recommends that you create sub-*Compartments* to help manage your resources more efficiently.
 

@@ -49,7 +49,7 @@ You will use the OraOperator to perform some of these actions in this Lab and th
 
 ## Task 1: Create a Namespace
 
-In K8s, a *Namespace* is a virtual cluster that provides a way to divide the physical K8s cluster resources logically between multiple users or teams.  Additionally, Namespaces enable fine-grained control over access and resource allocation.  By defining appropriate Role-Based Access Control (RBAC) policies, you can control which users or groups have access to specific Namespaces and the resources within them.
+In K8s, a *Namespace* is a virtual cluster that provides a way to divide the physical K8s cluster resources logically between multiple users or teams.  Additionally, Namespaces enable fine-grained control over access and resource allocation.  By defining appropriate Role-Based Access Control (RBAC) policies, you can control which users or groups have access to specific resources within Namespaces.  You'll see an example of this when scheduling a Stop/Start CronJob.
 
 In Cloud Shell, create a namespace for the AutonomousDatabase Resources:
 
@@ -94,12 +94,12 @@ echo "ADB OCID: $ADB_OCID"
 
 The above commands will also store the Compartment OCID which will be used to provision a new ADB from K8s.
 
-## Task 3: Create a new ADB
+## Task 3: Define a new ADB
 
 Use the OraOperator to provision a new Autonomous Database by creating a manifest file that will:
 
-* Create a Secret to hold the ADMIN password
-* Provision an new ADB
+* Define a Secret to hold the ADMIN password
+* Provision a new ADB
 
 ```bash
 <copy>
@@ -134,16 +134,16 @@ EOF
 </copy>
 ```
 
-The above YAML invokes the K8s built-in `v1` API to create an `Opaque` `Secret` resource called `adb-devops-admin-password` with the value of `Th1s_W1ll_N0t_l1v3`.
+The above YAML invokes the K8s built-in `v1` API to define an `Opaque` `Secret` resource called `adb-devops-admin-password` with the value of `Th1s_W1ll_N0t_l1v3`.  As the `Secret` doen't currently exist, it will be created and K8s will store the base64 encoded value of the password.
 
-It will also access the OraOperators' custom controller API `database.oracle.com/v1alpha1` to create an `AutonomousDatabase` (custom) resource in the `$COMPARTMENT_OCID` (substituted by the real value stored in *Task 2*) with the self-explanatory properties in the `spec.details` section.
+The YAML will also access the OraOperators' custom controller API `database.oracle.com/v1alpha1` to define an `AutonomousDatabase` (custom) resource in the `$COMPARTMENT_OCID` (substituted by the real value stored in *Task 2*) with the self-explanatory properties in the `spec.details` section.
 
 **Important:** the `spec.hardLink: true` field indicates that if you delete this `AutonomousDatabase` resource from the K8s cluster, also delete the ADB associated with it.
 > Good for DevOps CI/CD... Bad for Production!
 
 If it were set to `false` then deleting the resource from K8s would *NOT* delete ADB itself.
 
-Create the new ADB in the `adb` namespace:
+Define the new ADB in the `adb` namespace:
 
 ```bash
 <copy>
@@ -170,7 +170,7 @@ Ensure you are in the K8S4DBAS Compartment and you will see the `DEVOPSDB` being
 
 ## Task 3: Bind to an existing ADB
 
-Create a manifest file for an existing ADB leveraging the **AutonomousDatabase** Custom Resource, using its OCID to identify it:
+Create a manifest file to define a resource for an existing ADB, leveraging the **AutonomousDatabase** Custom Resource:
 
 ```bash
 <copy>
@@ -188,7 +188,7 @@ EOF
 </copy>
 ```
 
-The above YAML sends a request to the `database.oracle.com/v1alpha1` API exposed by the OraOperator controller to create a resource of `kind: AutonomousDatabase`.
+The above YAML sends a request to the `database.oracle.com/v1alpha1` API exposed by the OraOperator controller to define a resource of `kind: AutonomousDatabase`.
 
 The resource `name` will be called `adb-existing`.  
 
@@ -199,7 +199,7 @@ It will bind to an existing ADB with `autonomousDatabaseOCID` equal to `$ADB_OCI
 
 If it were set to `true` then deleting the resource from K8s *WOULD* delete ADB itself.
 
-Create a the **AutonomousDatabase** Custom Resource in K8s by applying the manifest file to the `adb` namespace:
+Define the **AutonomousDatabase** Custom Resource in K8s by applying the manifest file to the `adb` namespace:
 
 ```bash
 <copy>
