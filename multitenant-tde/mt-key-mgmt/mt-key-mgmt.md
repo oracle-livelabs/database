@@ -7,9 +7,9 @@ This lab should take 1 hour to complete
 
 # Prerequisites
 
-    - Familiarity with Database is desirable, but not required
-    - Some command line interface experience is desirable, but not required
-    - A Free OCI Cloud Tier, Paid OCI Cloud account or LiveLabs Oracle Cloud account
+- Familiarity with Database is desirable, but not required
+- Some command line interface experience is desirable, but not required
+- A Free OCI Cloud Tier, Paid OCI Cloud account or LiveLabs Oracle Cloud account
 
 
 ## Task 1: Backup CDB1 and CDB2
