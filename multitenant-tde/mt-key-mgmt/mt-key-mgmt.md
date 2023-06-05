@@ -151,9 +151,8 @@ Note
 - They don’t have to be done together
 - Plan for a bounce before you start the encryption process
 
-
 ![Screenshot of terminal output](./images/bounce-database2.png " ")
-    
+
 - After the database comes back up from bounce
     - Set tde configuration parameter
         - In this case it is set to file
