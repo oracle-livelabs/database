@@ -65,7 +65,7 @@ When creating a PDB the admin user needs to exist. You can delete it later on if
   ```
     <copy>    
 		alter session set container=PDB3;
-		CREATE OR REPLACE DIRECTORY "DATAPUMP_DIR" AS '/home/oracle/DP/DUMP';
+		CREATE OR REPLACE DIRECTORY "XTTS_METADATA_DIR" AS '/home/oracle/XTTS/DUMP/';
     </copy>
   ```
 
