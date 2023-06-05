@@ -24,7 +24,7 @@ The tasks you will do in this step are
 5. Look for CDB2 wallet
 
 Start with normal setup on CDB1
-1. Run copy back on CDB1 to refresh the database prior to TDE being applied
+1. Run the script below to reset CDB1 prior to the the introduction of TDE on CDB1.  This will refresh the database prior to TDE being applied.
 
     ```
     <copy>
