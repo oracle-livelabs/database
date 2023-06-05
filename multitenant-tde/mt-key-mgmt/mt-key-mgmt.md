@@ -578,11 +578,11 @@ Note
     </copy>
     ```
 
-        - PDB2 is the same as before with its own encryption key
-        - PDBCLONE1 was brought in
-        - It has its own encryption key
-            - If you scroll up you will see it is the same key that was left in the wallet for CDB1
-        - The wallet shows 3 encryption keys
+- PDB2 is the same as before with its own encryption key
+- PDBCLONE1 was brought in
+- It has its own encryption key
+    - If you scroll up you will see it is the same key that was left in the wallet for CDB1
+- The wallet shows 3 encryption keys
 
 ![Screenshot of terminal output](./images/cdb2-with-pdbclone1.png " ")
 
