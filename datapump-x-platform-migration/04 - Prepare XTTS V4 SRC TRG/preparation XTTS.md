@@ -2,21 +2,24 @@
 
 ## Introduction
 
-In this lab, you will create the target PDB and a few additional objects.
+In this lab, you will unzip the XTTS V4 files on source/target and create the XTTS properties file required by the tool.
 
 Estimated Time: 15 minutes
 
 ### Objectives
 
-- Initialize a new target PDB.
+- Setup XTTS V4.
+
 
 ### Prerequisites
 
 This lab assumes you have:
 
 - Connected to the Hands On Lab
+- A terminal window open on source.
+- Another terminal window open on target
 
-## Task 1: Set the source database environment
+## Task 1: Source database terminal window
 
 Click on the Terminal icon to open a second session
 ![terminal](./images/Terminal.png " ")
@@ -24,26 +27,21 @@ Click on the Terminal icon to open a second session
 First set the source environment and start SQL*Plus
 
   ```
-    <copy>
-    . upgr
-    sqlplus / as sysdba
-    </copy>
+  <copy>
+     cd /home/oracle/XTTS/SOURCE
+     unzip ~/Desktop/rman_xttconvert_VER4.3.zip 
+  </copy>
  ```
 
 ![Login to CDB3](./images/Source_UPGR_env_sqlplus.png " ")
 
-
-## Task 2: enable Source database archive logging and create the database directory for Data Pump export
+## Task 2: Target database terminal window
 
 
   ```
     <copy>
-    archive log list
-		shutdown immediate
-		STARTUP MOUNT
-		ALTER DATABASE ARCHIVELOG;
-		ALTER DATABASE OPEN;
-    CREATE OR REPLACE DIRECTORY "XTTS_METADATA_DIR" AS '/home/oracle/XTTS/DUMP';
+     cd /home/oracle/XTTS/TARGET
+     unzip ~/Desktop/rman_xttconvert_VER4.3.zip 
     </copy>
   ```
 
