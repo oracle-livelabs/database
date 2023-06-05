@@ -25,7 +25,7 @@ In the terminal window create 3 directories; one for the datapump dump, another 
 
     ```
     <copy>
-    mkdir -p /home/oracle/DP/DUMP /home/oracle/DP/SOURCE/tmp /home/oracle/DP/TARGET/tmp
+    mkdir -p /home/oracle/DP/DUMP /home/oracle/XTTS/SOURCE/tmp /home/oracle/XTTS/TARGET/tmp
     </copy>
     ```
 

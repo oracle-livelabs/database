@@ -72,9 +72,6 @@ It is important to mention that this feature works cross-platform and cross-endi
 
 - You can use the full transporatble tablespace method to upgrade a database from an Oracle Database 11g Release 2 (11.2.0.3) or later to Oracle Database 23c.
 
-### Migrating data using Oracle Data Pump
-
-- ???
 
 You may now *proceed to the next lab*.
 
