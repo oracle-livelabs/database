@@ -14,7 +14,7 @@
     },
     {
       "title": "Lab 1: Integrate MicroTx Client Libraries with XA Sample Application",
-      "filename": "../../run-lra-app/integrate-microtx-lib-files.md"
+      "filename": "../../integrate-microtx-lib-files/integrate-microtx-lib-files.md"
     },
     {
       "title": "Lab 2: Provision Autonomous Databases for use as resource manager",

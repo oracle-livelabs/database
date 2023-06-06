@@ -155,15 +155,19 @@ Before you start a transaction, you must start a Minikube tunnel.
 
 15. Click **Save**.
 
-16. Open the `values.yaml` file, which is located in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts` folder. This file contains sample values. Enter the values that you have noted down for the following fields under `security` in `UserBanking`.
+## Task 3: Provide Access Details in the values.yaml File
 
-    * `clientSecret`: Enter the value of the client secret value that you had copied in step 11.
-    * `issuerURL`: Enter the URL that you had copied in step 14.
+Edit the `values.yaml` file to provide the URL to access Keycloak and other access details.
+
+1. Open the `values.yaml` file, which is located in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts` folder.  Enter the values that you have noted down for the following fields under `security` in `UserBanking`.
+
+    * `clientSecret`: Enter the value of the client secret value that you had copied in step 11 of Task 2.
+    * `issuerURL`: Enter the URL that you had copied in step 14 of Task 2.
     * `logoutRedirectURL`: Enter the URL in the format, `http://$CLUSTER_IPADDR/bankapp`. Where, `CLUSTER_IPADDR` is the external IP address of the Istio ingress gateway that you have noted down in Task 1. For example, `http://192.0.2.117/bankapp`.
 
-17. Save the changes you have made to the `values.yaml` file.
+2. Save the changes you have made to the `values.yaml` file.
 
-## Task 3: Build the Container Images for Sample XA Applications
+## Task 4: Build the Container Images for Sample XA Applications
 
 The code for the XA sample application is available in the installation bundle in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp` folder. Build container images for each microservice in the XA sample application.
 
@@ -356,86 +360,6 @@ Run an XA transaction When you run the Teller application, it withdraws money fr
 
 4. Click **Buy Stocks**.
 
-
-
-Before you start the transaction, run the following commands to check the balance in Department 1 and Department 2 accounts.
-
-    **Example command to check balance in Department 1**
-
-    ```text
-    <copy>
-    curl --location \
-    --request GET http://$CLUSTER_IPADDR/dept1/account1 | jq
-    </copy>
-    ```
-
-   **Example command to check balance in Department 2**
-
-    ```text
-    <copy>
-    curl --location \
-    --request GET http://$CLUSTER_IPADDR/dept2/account2 | jq
-    </copy>
-    ```
-
-2. Transfer an amount of 50 from Department 1, account1 to Department 2, account2.
-
-    **Example command**
-
-    ```text
-    <copy>
-    curl --location \
-    --request POST http://$CLUSTER_IPADDR/transfers \
-    --header 'Content-Type: application/json' \
-    --data-raw '{"from" : "account1", "to" : "account2", "amount" : 50}'
-     </copy>
-    ```
-
-    HTTP status 200 in the response indicates that the transfer was successfully completed.
-
-3. Check balances in Department 1, account1 and Department 2, account2 to verify that the amounts reflect correctly after the transaction. Run the following commands to confirm the transaction.
-
-    **Example command to check balance in Department 1**
-
-    ```text
-    <copy>
-    curl --location \
-    --request GET http://$CLUSTER_IPADDR/dept1/account1 | jq
-    </copy>
-    ```
-
-    **Example command to check balance in Department 2**
-
-    ```text
-    <copy>
-    curl --location \
-    --request GET http://$CLUSTER_IPADDR/dept2/account2 | jq
-    </copy>
-    ```
-
-4. Transfer an amount of 50 from Department 1, account1 to an account that does not exist in Department 2, such as account7. Since account7 does not exist, the deposit fails and MicroTx rolls back the withdraw action.
-
-    **Example command**
-
-    ```text
-    <copy>
-    curl --location \
-    --request POST http://$CLUSTER_IPADDR/transfers \
-    --header 'Content-Type: application/json' \
-    --data-raw '{"from" : "account1", "to" : "account7", "amount" : 50}'
-    </copy>
-    ```
-
-5. Check the balance in Department 1, account 1 to verify that the account balance is correct, and no amount was withdrawn.
-
-   **Example command**
-
-    ```text
-    <copy>
-    curl --location \
-    --request GET http://$CLUSTER_IPADDR/dept1/account1 | jq
-    </copy>
-    ```
 ## Task 8: View Service Mesh graph and Distributed Traces (Optional)
 
 You can perform this task only if you have deployed Kiali and Jaeger in your cluster.
@@ -448,10 +372,10 @@ To visualize what happens behind the scenes and how a trip booking request is pr
 5. Select a trace to view it.
 
 ## Task 9: View Source Code of the Sample Application (Optional)
-The source code of the sample application is present in folder: /home/oracle/OTMM/otmm-22.3.2/samples/xa/java/bankapp
-- Teller Service Source code: /home/oracle/OTMM/otmm-22.3/samples/xa/java/teller
-- Department 1 Service Source code: /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-helidon
-- Department 2 Service Source code: /home/oracle/OTMM/otmm-22.3/samples/xa/java/department-spring
+The source code for the following sample applications is present in the `/home/oracle/OTMM/otmm-22.3.2/samples/xa/java/bankapp` folder.
+- Teller Service source code: /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/
+- Department 1 Service source code: /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/
+- Department 2 Service source code: /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/
 
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
 To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.

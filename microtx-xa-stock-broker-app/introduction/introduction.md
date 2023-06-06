@@ -10,9 +10,9 @@ Estimated Workshop Time: *1 hours 20 minutes*
 
 In this workshop, you will learn how to:
 
-* Provide configuration information for the MicroTx library properties for every participant and initiator application.
-* Include the MicroTx client libraries in your application to configure your Java application as a transaction initiator.
-* Include the MicroTx client libraries in your application to configure your Java application as a transaction participant.
+* Provide configuration information for the MicroTx library properties for a participant application and initiator application.
+* Include the MicroTx client libraries in your application to configure your Java application as a transaction initiator service. A transaction initiator service starts and ends a transaction.
+* Include the MicroTx client libraries in your application to configure your Java application as a transaction participant. A transaction participant service only joins the transaction. They do not initiate a transaction.
 * Run the sample application which uses the XA transaction protocol.
 
 ### Prerequisites
