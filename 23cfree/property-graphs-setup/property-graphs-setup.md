@@ -37,9 +37,7 @@ This lab assumes you have:
     ```
     $ <copy>cd ~/examples</copy>
     ```
-
-    ![Open directory](images/directory.png)
-
+    
 3. Pull down the materials for setup.
 
     ```
