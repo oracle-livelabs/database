@@ -8,7 +8,7 @@ Estimated Time: 15 minutes
 
 ### Objectives
 
-- Setup XTTS V4.
+- Mandatory checks for XTTS.
 
 
 ### Prerequisites
@@ -21,8 +21,20 @@ This lab assumes you have:
 - Prepared the source
 - Prepared the target
 
+## Task 0: Transportable Tablespace Method Supported by Source and Target OS Platforms
+Before you begin check on source database if the OS you want to migrate your database to is supported by TTS:
+  ```
+    <copy>
+    col platform_name format A20
+    set line 200
+    set pages 999
+    select * from v$transportable_platform order by platform_id;
+    </copy>
+  ```
+
+
 ## Task 1: DBTIMEZONE
-When having timezone data stored in your database make sure the SOURCE and TARGET database are located in the same timezone. 
+Although it is not necessary in our hands on lab (we do not have tables with timezone columns having local timezone datatypes (Time Zone with Local Time Zone = __TZLTZ__) in our lab) you should always check if that's also true in your database environment. So check if you have user tables with timezone data stored in your database and then make sure the SOURCE and TARGET database are located in the same timezone. 
 Open on source and target SQL*Plus and execute:
   ```
     <copy>
@@ -30,6 +42,23 @@ Open on source and target SQL*Plus and execute:
     </copy>
   ```
 ![DBTIMEZONE](./images/DBTIMEZONE.png " ")
+
+  ```
+    <copy>
+    set line 200
+    col owner format A20
+    select t.owner, count(*)
+    FROM
+      dba_tab_cols t
+      INNER JOIN dba_objects o ON o.owner = t.owner AND t.table_name = o.object_name
+      WHERE
+        t.data_type LIKE '%WITH LOCAL TIME ZONE' 
+        AND o.object_type = 'TABLE' 
+--        AND o.owner in (select username from dba_users where oracle_maintained='N')
+      group by t.owner;
+    </copy>
+  ```
+
 
 ## Task 2: Source and Target character sets 
 The source and target database must use compatible database character sets.
@@ -93,7 +122,33 @@ Same check as in the previous task but this time for user indexes
   ```
 ![self_contained_TBS](./images/check_user_indexes_system_sysaux.png " ")
 
-## Task 6: Configuring default RMAN settings on Source
+## Task 6: IOT Tables
+IOT tables might get corrupted during XTTS copy and you should copy them again during the downtime. So check if you have IOT tables you have to handle  manually:
+  ```
+    <copy>
+     set line 200
+     set pages 999
+     col owner format a20
+     col table_name format a35
+     select owner,table_name,iot_type from dba_tables where iot_type like '%IOT%' 
+     and table_name not like 'DR$%' 
+     -- and owner not in (select username from dba_users where oracle_maintained='Y')
+     ;
+    </copy>
+  ```
+
+
+## Task 7: Binary XMLTYPE Columns
+In versions prior 12.2 metadata imports failed when having tables with XMLTYPE columns. You need to exclude them from the metadata export and handle the content manually during  the downtime. A check if you have XML types stored in your database is:
+
+  ```
+    <copy>
+    select distinct p.tablespace_name from dba_tablespaces p, dba_xml_tables x, dba_users u, all_all_tables t where t.table_name=x.table_name and t.tablespace_name=p.tablespace_name and x.owner=u.username;
+    select distinct p.tablespace_name from dba_tablespaces p, dba_xml_tab_cols x, dba_users u, all_all_tables t where t.table_name=x.table_name and t.tablespace_name=p.tablespace_name and x.owner=u.username;
+    </copy>
+  ```
+
+## Task 8: Configuring default RMAN settings on Source
 The next parameters you're going to set for RMAN work well in the hands on lab. For your environment you might have to adopt them by increasing parallelism, the backup destination etc.
 
 On source start the rman console: 
