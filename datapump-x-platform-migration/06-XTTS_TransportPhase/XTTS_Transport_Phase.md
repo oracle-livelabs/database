@@ -35,6 +35,7 @@ Open SQL*Plus, connect "as sysdba" and execute:
      ALTER TABLESPACE USERS read only;
      set pages 999
      select tablespace_name, STATUS from dba_tablespaces order by 2,1;
+
     </copy>
   ```
 
@@ -48,6 +49,7 @@ On source change into the XTTS Source directory and execute the final backup:
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
+
     </copy>
   ```
 
@@ -155,6 +157,7 @@ The incremental restore needs the "res.txt" and "incrbackups.txt" files from sou
     <copy>
      cp /home/oracle/XTTS/SOURCE/tmp/res.txt /home/oracle/XTTS/TARGET/tmp/res.txt
      cp /home/oracle/XTTS/SOURCE/tmp/incrbackups.txt /home/oracle/XTTS/TARGET/tmp/incrbackups.txt
+
     </copy>
   ```
 
@@ -166,6 +169,7 @@ And start the restore:
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
+
     </copy>
   ```
 
@@ -226,6 +230,7 @@ So create an Exp_Metadata.par file copying the following commands to the source 
      echo TRANSPORTABLE=ALWAYS >>Exp_Metadata.par
      echo VERSION=12 >>Exp_Metadata.par
      cat Exp_Metadata.par
+
     </copy>
   ```
 
@@ -236,6 +241,7 @@ and execute expdp using this par file
   ```
     <copy>
      expdp system/oracle@UPGR parfile=Exp_Metadata.par
+
     </copy>
   ```
 ![create_metadata_export_par](./images/metadata_export.png " ")
@@ -457,6 +463,7 @@ Also here we first create the import parameter file:
      echo transport_datafiles=/u02/oradata/CDB3/pdb3/USERS_4.dbf >>Imp_Metadata.par
      echo transport_datafiles=/u02/oradata/CDB3/pdb3/TPCCTAB_5.dbf >>Imp_Metadata.par
      cat Imp_Metadata.par
+
     <copy>
   ```
 
@@ -466,6 +473,7 @@ And import the metadata into the PDB3 using this Imp_Metadata.par parameter file
   ```
    <copy>
      impdp system/oracle@pdb3 parfile=Imp_Metadata.par
+     
     <copy>
   ```
 ![incremental_backup](./images/metadata_import.png " ")

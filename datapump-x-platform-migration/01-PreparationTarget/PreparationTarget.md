@@ -26,6 +26,7 @@ In the terminal window create 3 directories; one for the datapump dump, another 
     ```
     <copy>
     mkdir -p /home/oracle/DP/DUMP /home/oracle/XTTS/SOURCE/tmp /home/oracle/XTTS/TARGET/tmp
+
     </copy>
     ```
 
@@ -39,6 +40,7 @@ In the terminal window create 3 directories; one for the datapump dump, another 
     <copy>
     . cdb3
     sqlplus / as sysdba
+
     </copy>
   ```
 
@@ -52,6 +54,7 @@ When creating a PDB the admin user needs to exist. You can delete it later on if
     create pluggable database PDB3 admin user adm identified by adm file_name_convert=('pdbseed', 'pdb3');
     alter pluggable database pdb3 open;
     alter pluggable database PDB3 save state;
+
     </copy>
   ```
 
@@ -66,6 +69,7 @@ When creating a PDB the admin user needs to exist. You can delete it later on if
     <copy>    
 		alter session set container=PDB3;
 		CREATE OR REPLACE DIRECTORY "XTTS_METADATA_DIR" AS '/home/oracle/XTTS/DUMP/';
+    
     </copy>
   ```
 

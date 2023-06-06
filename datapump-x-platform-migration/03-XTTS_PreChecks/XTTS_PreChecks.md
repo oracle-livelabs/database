@@ -39,6 +39,7 @@ Open on source and target SQL*Plus and execute:
   ```
     <copy>
     SELECT   DBTIMEZONE FROM   dual;
+
     </copy>
   ```
 ![DBTIMEZONE](./images/DBTIMEZONE.png " ")
@@ -56,6 +57,7 @@ Open on source and target SQL*Plus and execute:
         AND o.object_type = 'TABLE' 
 --        AND o.owner in (select username from dba_users where oracle_maintained='N')
       group by t.owner;
+
     </copy>
   ```
 
@@ -70,6 +72,7 @@ The source and target database must use compatible database character sets.
      set pages 999
      set line 200
      select * from v$nls_parameters;
+
     </copy>
   ```
 * [General Limitations on Transporting Data](https://docs.oracle.com/en/database/oracle/oracle-database/19/spucd/general-limitations-on-transporting-data.html#GUID-28800719-6CB9-4A71-95DD-4B61AA603173)
@@ -83,6 +86,7 @@ In this hands on lab you're going to transport the two tablespaces "TPCCTAB" and
     <copy>
      EXEC SYS.DBMS_TTS.TRANSPORT_SET_CHECK ('TPCCTAB,USERS',True,True);
      SELECT * FROM transport_set_violations;
+
     </copy>
   ```
 ![self_contained_TBS](./images/self_contained_TBS.png " ")
@@ -100,6 +104,7 @@ As SYSTEM and SYSAUX tablespaces are not copied from source to target, it's good
      -- (select username from dba_users 
      -- where oracle_maintained='Y') 
      and tablespace_name in ( 'SYSTEM', 'SYSAUX');
+
     </copy>
   ```
 ![self_contained_TBS](./images/check_user_data_system_sysaux.png " ")
@@ -118,6 +123,7 @@ Same check as in the previous task but this time for user indexes
      where owner not in ('WMSYS','XDB','SYSTEM','SYS','LBACSYS','OUTLN','DBSNMP','APPQOSSYS')
      -- owner not in (select username from dba_users where oracle_maintained='Y') 
      and tablespace_name in ( 'SYSTEM', 'SYSAUX') order by 1,2;
+
     </copy>
   ```
 ![self_contained_TBS](./images/check_user_indexes_system_sysaux.png " ")
@@ -134,6 +140,7 @@ IOT tables might get corrupted during XTTS copy and you should copy them again d
      and table_name not like 'DR$%' 
      -- and owner not in (select username from dba_users where oracle_maintained='Y')
      ;
+
     </copy>
   ```
 
@@ -145,6 +152,7 @@ In versions prior 12.2 metadata imports failed when having tables with XMLTYPE c
     <copy>
     select distinct p.tablespace_name from dba_tablespaces p, dba_xml_tables x, dba_users u, all_all_tables t where t.table_name=x.table_name and t.tablespace_name=p.tablespace_name and x.owner=u.username;
     select distinct p.tablespace_name from dba_tablespaces p, dba_xml_tab_cols x, dba_users u, all_all_tables t where t.table_name=x.table_name and t.tablespace_name=p.tablespace_name and x.owner=u.username;
+
     </copy>
   ```
 
@@ -156,6 +164,7 @@ On source start the rman console:
   ```
     <copy>
      rman target /
+
     </copy>
   ```
 
@@ -167,6 +176,7 @@ in RMAN terminology the target database identifies the database which you're goi
      CONFIGURE DEFAULT DEVICE TYPE TO DISK;
      configure  DEVICE TYPE DISK PARALLELISM 8;
      exit;
+
     </copy>
   ```
 ![self_contained_TBS](./images/rman_default_target_settings.png " ")

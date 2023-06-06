@@ -14,7 +14,8 @@ Outlined below are the steps you will execute assisted by the XTTS V4 Perl scrip
 Estimated Workshop Time: 90 minutes
 
 
-???? DO WE WANT TO ADD A WORKSHOP VIDEO???
+VIDEO TO BE ADDED
+
 
 ### Objectives
 

@@ -30,6 +30,7 @@ On source change into the XTTS Source directory and create the xtt.properties fi
     <copy>
      cd /home/oracle/XTTS/SOURCE
      vi xtt.properties
+
     </copy>
   ```
 
@@ -253,6 +254,7 @@ While the source database remains active, you're now going to back it up:
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
+
     </copy>
   ```
 
@@ -353,6 +355,7 @@ The initial restore on Target requires the "xtt.properties" and "res.txt" file f
      cd /home/oracle/XTTS/TARGET/
      cp /home/oracle/XTTS/SOURCE/xtt.properties /home/oracle/XTTS/TARGET/xtt.properties 
      cp /home/oracle/XTTS/SOURCE/tmp/res.txt /home/oracle/XTTS/TARGET/tmp/res.txt
+
     </copy>
   ```
 ![copy_xtt.properties_and_res.txt](./images/cp_xtt_properties_res_txt.png " ")
@@ -363,6 +366,7 @@ Starting restore:
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
+     
     </copy>
   ```
 ![self_contained_TBS](./images/initial_restore.png " ")

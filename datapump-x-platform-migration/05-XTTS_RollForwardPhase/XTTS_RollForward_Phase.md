@@ -23,12 +23,31 @@ This lab assumes you have:
 - Successfully executed initial backup
 - Successfully executed initial restore
 
+## Task 0: Changing Source Database
+Let's do some changes in the source database... So open SQL*Plus:
+  ```
+    <copy>
+     sqlplus  TPCC/oracle
+     
+    </copy>
+  ```
+
+  ```
+    <copy>
+     create table mydict as select * from dba_objects;
+
+    </copy>
+  ```
+
+
+
 ## Task 1: Incremental Backup on Source
 On source change into the XTTS Source directory and execute the incremental backup:
 
   ```
     <copy>
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
+
     </copy>
   ```
 
@@ -105,6 +124,7 @@ The incremental restore needs the "res.txt" and "incrbackups.txt" files from sou
     <copy>
      cp /home/oracle/XTTS/SOURCE/tmp/res.txt /home/oracle/XTTS/TARGET/tmp/res.txt
      cp /home/oracle/XTTS/SOURCE/tmp/incrbackups.txt /home/oracle/XTTS/TARGET/tmp/incrbackups.txt
+
     </copy>
   ```
 
@@ -116,6 +136,7 @@ And start the restore:
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
+
     </copy>
   ```
 
