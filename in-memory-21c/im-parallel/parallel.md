@@ -2,13 +2,13 @@
 
 ## Introduction
 
-Watch a preview video of creating In-Memory Column Store
+Watch an introduction video of using Database In-Memory:
 
-[YouTube video](youtube:U9BmS53KuGs)
+[YouTube video](youtube:P6GZaykqHwI)
 
 Watch the video below for a walk through of the In-Memory parallel features lab:
 
-[In-Memory Parallel](videohub:1_ohs9hpw0)
+[In-Memory Parallel](videohub:1_p53hdys3)
 
 *Estimated Lab Time:* 10 Minutes.
 
