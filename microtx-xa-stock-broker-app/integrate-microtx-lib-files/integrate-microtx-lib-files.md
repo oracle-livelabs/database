@@ -46,11 +46,13 @@ Initialize an object of the `TrmUserTransaction` class in the application code f
 1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is located in the `/home/oracle/OTMM/otmm-<*version*>/samples/xa/java/bankapp/StockBroker/` folder in any code editor, and then uncomment the following lines of code. The following sample code is for the 22.3.2 release. Provide the correct version, based on the release that you want to use.
 
     ```text
+    <copy>
     <dependency>
       <groupId>com.oracle.tmm.jta</groupId>
       <artifactId>TmmLib</artifactId>
       <version>22.3.2</version>
     </dependency>
+    </copy>
     ```
 
 2. Open the `UserStockTransactionServiceImpl.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
@@ -221,6 +223,8 @@ When you integrate the MicroTx client library for Java with the Stock broker app
             bindFactory(TrmXASQLStatementFactory.class).to(Statement.class);
         }
         });
+    </copy>
+    ```
 
 6. Uncomment the following line of code to initialize the an XA data source object.
 
@@ -332,4 +336,4 @@ You may now **proceed to the next lab** to run a sample XA application. If you d
 
 * **Author** - Sylaja Kannan, Principal User Assistance Developer
 * **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja, May 2023
+* **Last Updated By/Date** - Sylaja, June 2023

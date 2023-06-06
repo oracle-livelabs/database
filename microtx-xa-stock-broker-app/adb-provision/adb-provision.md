@@ -146,7 +146,58 @@ To download client credentials from the Oracle Cloud Infrastructure Console:
 
 8. Extract the wallet files to the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/CoreBanking/Database_Wallet` and `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/BranchBanking/Database_Wallet` folders. This folder contains the source code for the Core Banking and Branch Banking services respectively.
 
-## Task 4: Connect with SQL Worksheet
+## Task 4: Update the values.yaml File
+
+The sample application files also contain the `values.yaml` file. This is the manifest file, which contains the deployment configuration details for the XA sample application. Provide details about the ATP database instances, that you have created, in the `values.yaml` file, so that the Core Banking, Branch Banking, and Stock Broker services can access their resource manager.
+
+To provide the details of the ATP database instances in the `values.yaml` file:
+
+1. Open the `values.yaml` file, which is located in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts` folder.
+
+2. Provide values for the following fields under `CoreBanking` and `ArizonaBranchBank` in the `values.yaml` file. Since Core Banking and Branch Banking services use the same ATP database instance, enter the same values under `CoreBanking` and `ArizonaBranchBank`.
+
+    * `connectString`: Enter the connect string to access the database in the following format. The host, port and service_name for the connection string can be found on the **DB Connection Tab** under **Connection Strings** as shown in screenshot below.
+
+      **Syntax**
+
+        ```text
+        <copy>
+        jdbc:oracle:thin:@tcps://<host>:<port>/<service_name>?retry_count=20&retry_delay=3&wallet_location=Database_Wallet
+        </copy>
+        ```
+
+    * `databaseUser`: Enter the user name to access the database, such as ADMIN. Use ADMIN if as you will create tables and insert sample data.
+    * `databasePassword`: Enter the password to access the database for the specific user. Use the ADMIN user password as you will create tables and insert sample data.
+
+    ![DB connection string](./images/db-connection-string.png)
+
+3. Similarly, under `StockBroker` enter values for the database connection string, user name, and password for the ATP database instance that you have created for the Stock Broker service.
+
+   The `values.yaml` file contains many properties. For readability, only the resource manager properties for which you must provide values are listed in the following sample code snippet.
+
+    ```text
+    <copy>
+    CoreBanking:
+      ...
+      connectString: "jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bbcldfxbtjvtddi_tmmwsdb3_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet"
+      databaseUser: db_user
+      databasePassword: db_user_password
+    StockBroker:
+      ...
+      connectString: "jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bdcldfxbtjvtddi_tmmwsdb56_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet"
+      databaseUser: db_user
+      databasePassword: db_user_password
+    ArizonaBranchBank:
+      ...
+      connectString: "jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bdcldfxbtjvtddi_tmmwsdb3_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet"
+      databaseUser: db_user
+      databasePassword: db_user_password
+    </copy>
+    ```
+
+3. Save your changes.
+
+## Task 5: Connect with SQL Worksheet
 
 Although you can connect to your autonomous database from local desktop tools, such as Oracle SQL Developer, you can conveniently access the browser-based SQL Worksheet directly from your Autonomous Database console.
 
@@ -172,7 +223,7 @@ Although you can connect to your autonomous database from local desktop tools, s
 
     After touring through the informational boxes, keep this SQL Worksheet open and please **proceed to the next task.**
 
-## Task 5: Create Tables in BankingServiceDB for the Core Banking Service
+## Task 6: Create Tables in BankingServiceDB for the Core Banking Service
 
 Create tables in the `BankingServiceDB` ATP instance and populate it with sample values for the Core Banking service.
 
@@ -244,7 +295,7 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
     </copy>
     ```
 
-## Task 6: Create Tables in BankingServiceDB for the Branch Banking Service
+## Task 7: Create Tables in BankingServiceDB for the Branch Banking Service
 
 Create tables in the `BankingServiceDB` ATP instance and populate it with sample values for the Branch Banking service.
 
@@ -254,17 +305,17 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
 
    **Syntax**
 
-   ```text
-   <copy>
-   CREATE TABLE SAVINGS_ACCOUNT
-   (
-       ACCOUNT_ID NUMBER NOT NULL,
-       BRANCH_ID  NUMBER NOT NULL,
-       BALANCE    DECIMAL(20, 2) NOT NULL,
-       PRIMARY KEY (ACCOUNT_ID)
-   );
-   </copy>
-   ```
+      ```text
+      <copy>
+      CREATE TABLE SAVINGS_ACCOUNT
+      (
+        ACCOUNT_ID NUMBER NOT NULL,
+        BRANCH_ID  NUMBER NOT NULL,
+        BALANCE    DECIMAL(20, 2) NOT NULL,
+        PRIMARY KEY (ACCOUNT_ID)
+      );
+      </copy>
+      ```
 
    ![Create table](./images/tables-branch-banking.png)
 
@@ -283,7 +334,7 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
    VALUES (10003, 1111, 50000.0);
    ```
 
-## Task 6: Create an Autonomous Database Instance for the Stock Broker Service
+## Task 8: Create an Autonomous Database Instance for the Stock Broker Service
 
 Repeat tasks 1, 2, 3, and 4 to create another ATP database instance for the Stock Broker service and download the wallet for the database.
 
@@ -297,7 +348,7 @@ Repeat tasks 1, 2, 3, and 4 to create another ATP database instance for the Stoc
 
 Proceed to the next task to create a table and populate it with sample values.
 
-## Task 7: Create Tables for the Stock Broker Service
+## Task 9: Create Tables for the Stock Broker Service
 
 Create tables with sample values for the Stock Broker service.
 
@@ -307,7 +358,7 @@ Create tables with sample values for the Stock Broker service.
 
       **Syntax**
 
-      ```text
+      ``` text
       <copy>
       -- Tables to be created
       -- Display stock units
@@ -377,63 +428,63 @@ Create tables with sample values for the Stock Broker service.
       </copy>
       ```
 
-   ![Create table](./images/tables-stock-broker.png)
+    Tables with the names `BRANCH`, `ACCOUNT`, and `HISTORY` are created.
 
-   Tables with the names `BRANCH`, `ACCOUNT`, and `HISTORY` are created.
+   ![Create table](./images/tables-stock-broker.png)
 
 3. Populate the tables with sample values.
 
-   ```text
-   <copy>
-   -- Initialize Database
+      ```text
+      <copy>
+      -- Initialize Database
 
-   INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
-   VALUES ('BLUSC', 'Blue Semiconductor', 'Semiconductor Industry', 87.28);
-   INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
-   VALUES ('SPRFD', 'Spruce Street Foods', 'Food Products', 152.55);
-   INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
-   VALUES ('SVNCRP', 'Seven Corporation', 'Software consultants', 97.20);
-   INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
-   VALUES ('TALLMF', 'Tall Manufacturers', 'Tall Manufacturing', 142.24);
-   INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
-   VALUES ('VSNSYS', 'Vision Systems', 'Medical Equipments', 94.35);
+      INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+      VALUES ('BLUSC', 'Blue Semiconductor', 'Semiconductor Industry', 87.28);
+      INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+      VALUES ('SPRFD', 'Spruce Street Foods', 'Food Products', 152.55);
+      INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+      VALUES ('SVNCRP', 'Seven Corporation', 'Software consultants', 97.20);
+      INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+      VALUES ('TALLMF', 'Tall Manufacturers', 'Tall Manufacturing', 142.24);
+      INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+      VALUES ('VSNSYS', 'Vision Systems', 'Medical Equipments', 94.35);
 
-   INSERT INTO CASH_ACCOUNT(ACCOUNT_ID, BALANCE, STOCK_BROKER)
-   VALUES (9999999, 10000000, 'PENNYPACK');
+      INSERT INTO CASH_ACCOUNT(ACCOUNT_ID, BALANCE, STOCK_BROKER)
+      VALUES (9999999, 10000000, 'PENNYPACK');
 
-   -- Stockbroker stock account --
-   INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
-   VALUES (9999999, 'BLUSC', 100000);
-   INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
-   VALUES (9999999, 'SPRFD', 50000);
-   INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
-   VALUES (9999999, 'SVNCRP', 90000);
-   INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
-   VALUES (9999999, 'TALLMF', 80000);
-   INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
-   VALUES (9999999, 'VSNSYS', 100000);
+      -- Stockbroker stock account --
+      INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+      VALUES (9999999, 'BLUSC', 100000);
+      INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+      VALUES (9999999, 'SPRFD', 50000);
+      INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+      VALUES (9999999, 'SVNCRP', 90000);
+      INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+      VALUES (9999999, 'TALLMF', 80000);
+      INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+      VALUES (9999999, 'VSNSYS', 100000);
 
-   -- user accounts
-   INSERT INTO USER_ACCOUNT (ACCOUNT_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
-   VALUES (10001, '873-61-1457', 'Adams', 'Lopez', 'D', '506-100-5886', '15311 Grove Ct. New York  95101');
-   INSERT INTO USER_ACCOUNT (ACCOUNT_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
-   VALUES (10002, '883-71-8538', 'Smith', 'Mason', 'N', '403-200-5890', '15311 Grove Ct. New York  95101');
-   INSERT INTO USER_ACCOUNT (ACCOUNT_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
-   VALUES (10003, '993-71-8500', 'Thomas', 'Dave', 'C', '603-700-5899', '15333 Grove Ct. Arizona  95101');
+      -- user accounts
+      INSERT INTO USER_ACCOUNT (ACCOUNT_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+      VALUES (10001, '873-61-1457', 'Adams', 'Lopez', 'D', '506-100-5886', '15311 Grove Ct. New York  95101');
+      INSERT INTO USER_ACCOUNT (ACCOUNT_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+      VALUES (10002, '883-71-8538', 'Smith', 'Mason', 'N', '403-200-5890', '15311 Grove Ct. New York  95101');
+      INSERT INTO USER_ACCOUNT (ACCOUNT_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+      VALUES (10003, '993-71-8500', 'Thomas', 'Dave', 'C', '603-700-5899', '15333 Grove Ct. Arizona  95101');
 
-   -- user stocks
-   INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
-   VALUES (10001, 'BLUSC', 10);
-   INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
-   VALUES (10001, 'SPRFD', 15);
-   INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
-   VALUES (10001, 'SVNCRP', 20);
-   INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
-   VALUES (10001, 'TALLMF', 30);
-   INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
-   VALUES (10001, 'VSNSYS', 40);
-   </copy>
-   ```
+      -- user stocks
+      INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+      VALUES (10001, 'BLUSC', 10);
+      INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+      VALUES (10001, 'SPRFD', 15);
+      INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+      VALUES (10001, 'SVNCRP', 20);
+      INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+      VALUES (10001, 'TALLMF', 30);
+      INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+      VALUES (10001, 'VSNSYS', 40);
+      </copy>
+      ```
 
 You may now **proceed to the next lab.**
 
