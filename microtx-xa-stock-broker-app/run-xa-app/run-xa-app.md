@@ -1,31 +1,30 @@
-# Run an XA sample application
+# Run the Bank and Trading Application to Trade in Stocks
 
 ## Introduction
 
-Run the XA sample application to transfer an amount from one department to another and to understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate XA transactions.
+Run the Bank and Trading application to purchase or sell stocks and to understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate XA transactions.
 
-The sample application code is available in the MicroTx distribution. The MicroTx library files are already integrated with the sample application code.
+Estimated Lab Time: *30 minutes*
 
-Estimated Lab Time: *20 minutes*
+### About the Bank and Trading Application
 
-### About XA Sample Application
+The following figure shows the Bank and Trading application, which contains several microservices.
+![Microservices in the Bank and Trading application](./images/stock_broker_xa_app.png)
 
-The following figure shows a sample XA application, which contains several microservices.
-![Microservices in the XA sample applications](./images/stock_broker_xa_app.png)
-
-The sample application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions. When a user purchases stocks using the Stock Broker service, it withdraws money from the Core Banking Service and deposits an equivalent amount of stocks by creating an XA transaction. Within the XA transaction, all actions such as purchase, sale, withdraw, and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
+The Bank and Trading application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions. When a user purchases stocks using the Stock Broker service, it withdraws money from the Core Banking Service and deposits an equivalent amount of stocks by creating an XA transaction. Within the XA transaction, all actions such as purchase, sale, withdraw, and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
 ### Objectives
 
 In this lab, you will:
 
-* Build container images for each microservice from the XA sample application code. After building the container images, the images are available in your Minikube container registry.
-* Update the `values.yaml` file, which contains the deployment configuration details for the XA sample application.
-* Install the Sample XA Application. While installing the sample application, Helm uses the configuration details you provide in the `values.yaml` file.
-* Deploy Kiali and Jaeger in your minikube cluster (Optional and if not already deployed)
-* Run an XA transaction to withdraw an amount from Department A and deposit it in Department B.
-* View service graph of the mesh and distributed traces to track requests (Optional)
-* View source code of the sample application (Optional)
+* Build container images for each microservice from the sample application code. After building the container images, the images are available in your Minikube container registry.
+* Update the `values.yaml` file, which contains the deployment configuration details for the Bank and Trading application.
+* Install the Bank and Trading application. While installing the application, Helm uses the configuration details you provide in the `values.yaml` file.
+* (Optional) Deploy Kiali and Jaeger in your minikube cluster
+* Purchase stocks using the Bank and Trading application.
+* Sell stocks using the Bank and Trading application.
+* (Optional) View service graph of the mesh and distributed traces to track requests
+* (Optional) View source code of the sample application
 
 ### Prerequisites
 
@@ -167,9 +166,9 @@ Edit the `values.yaml` file to provide the URL to access Keycloak and other acce
 
 2. Save the changes you have made to the `values.yaml` file.
 
-## Task 4: Build the Container Images for Sample XA Applications
+## Task 4: Build the Container Images for the Microservices in the Bank and Trading Application
 
-The code for the XA sample application is available in the installation bundle in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp` folder. Build container images for each microservice in the XA sample application.
+The code for the Bank and Trading application is available in the installation bundle in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp` folder. Build container images for each microservice in the Bank and Trading application.
 
 To build container images for each microservice in the sample:
 
@@ -230,7 +229,7 @@ The container images that you have created are available in your Minikube contai
 
 ## Task 4: Update the values.yaml File
 
-The sample application files also contain the `values.yaml` file. This is the manifest file, which contains the deployment configuration details for the XA sample application.
+The sample application files also contain the `values.yaml` file. This is the manifest file, which contains the deployment configuration details for the Bank and Trading application.
 
 The `values.yaml` file provides details about the Docker images of each microservice, the credentials to use when pulling the Docker images, and details to access the resource managers. While installing the sample application, Helm uses the values you provide to pull the sample application images from the Minikube container registry.
 
@@ -242,11 +241,11 @@ To provide the configuration and environment details in the `values.yaml` file:
 
 3. Save your changes.
 
-## Task 5: Install the Sample XA Application
+## Task 5: Install the Bank and Trading Application
 
-Install the XA sample application in the `otmm` namespace, where you have installed MicroTx. While installing the sample application, Helm uses the configuration details you provide in the values.yaml file.
+Install the Bank and Trading application in the `otmm` namespace, where you have installed MicroTx. While installing the sample application, Helm uses the configuration details you provide in the values.yaml file.
 
-1. Run the following commands to install the XA sample application.
+1. Run the following commands to install the Bank and Trading application.
 
     ```text
     <copy>
@@ -343,24 +342,67 @@ Run the following commands to deploy Kiali and Jaeger in a Minikube cluster.
 
    From the output, note down the URL. This is the URL on which you can access the Jaeger dashboard in a browser. For example, `http://localhost:16686`.
 
-## Task 7: Run an XA Transaction
+## Task 7: Purchase Stocks
 
-Run an XA transaction When you run the Teller application, it withdraws money from one department and deposits it to another department by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
+When you send a request to purchase stocks, the Stock Broker service debits the required amount from the Core Banking service. The Core Banking service in turns sends the debit amount request to the Branch Banking service. Once the amount is successfully debited from the your bank account, the Stock Broker service purchases the stocks and deposits the purchased stocks into your account. The microservices use the XA protocol and MicroTx to manage the transactions. Within an XA transaction, all actions such as debit amount and deposit stocks either succeed, or all actions are rolled back in case of a failure of any one or more actions.
 
 1. Access the bank application. In a browser, type `192.0.2.117/bankapp`, where `192.0.2.117` is the external IP address of the Istio ingress gateway which you have noted down in Task 1.
     The Keycloak login page is displayed.
 
-2. Enter the username and password to access the Keycloak instance which you have configured in Task 2.
-    The Bank and Trading application's Console is displayed as shown in the following figure.
-    ![Microservices in the XA sample applications](./images/stock_broker_app_landingpage.png)
+2. Enter the username and password to access the Keycloak instance. Enter the password that you had provided in Task 2 for the preconfigured users.
+    The Bank and Trading application's console is displayed as shown in the following figure.
+    ![Bank and Trading application's console](./images/stock_broker_app_landingpage.png)
 
-3.  Click **Trading**.
+3. Click **Trading**.
     The Stock Trading page is displayed as shown in the following image.
-    ![Microservices in the XA sample applications](./images/stock_broker_app_tradepage.png)
+    ![Stock Trading page](./images/stock_broker_app_tradepage.png)
 
-4. Click **Buy Stocks**.
+4. Click **Buy Stocks**, and then click **Buy Stocks**.
 
-## Task 8: View Service Mesh graph and Distributed Traces (Optional)
+5. In the **Purchase Stocks** dialog box, enter the following details.
+    1. Select the stock that you want to purchase.
+    2. Enter the number of units of the stock that you want to purchase.
+    3. (Optional.) Enter remarks, if any, regarding your purchase.
+       ![Purchase Stock dialog box](./images/purchase_stocks.png)
+    4. Click **Confirmation**, and then review the details of the purchase.
+    5. Click **Confirm** to purchase the stocks.
+       After the Stock Broker service purchases the stocks and deposits it in your account, the **Transaction ID** and **Result** are displayed on the screen.
+       ![Summary section in the Purchase Stock dialog box](./images/purchase_stocks_summary.png)
+    6. Click **Close** to close the **Purchase Stocks** dialog box.
+
+6. Click **Stocks** to view the updated list of stocks.
+    ![User Portfolio Details section](./images/updated_purchased_stocks_list.png)
+
+## Task 8: Sell Stocks
+
+When you send a request to sell stocks, the Stock Broker service sells the stocks if the stocks are available in your portfolio. Next, the Stock Broker service credits the amount received to the Core Banking service. The Core Banking service in turns sends the credit amount request to the Branch Banking service to credit the amount to your account. The microservices use the XA protocol and MicroTx to manage the transactions. Within an XA transaction, all actions such as credit amount and sell stocks either succeed, or all actions are rolled back in case of a failure of any one or more actions.
+
+1. Access the bank application. In a browser, type `192.0.2.117/bankapp`, where `192.0.2.117` is the external IP address of the Istio ingress gateway which you have noted down in Task 1.
+    The Keycloak login page is displayed.
+
+2. Enter the username and password to access the Keycloak instance. Enter the password that you had provided in Task 2 for the preconfigured users.
+    The Bank and Trading application's console is displayed as shown in the following figure.
+    ![Bank and Trading application's console](./images/stock_broker_app_landingpage.png)
+
+3. Click **Trading**.
+    The Stock Trading page is displayed as shown in the following image.
+    ![User Portfolio Details section](./images/updated_purchased_stocks_list.png)
+
+4. Click **Sell Stocks**, and then click **Sell Stocks**.
+
+5. In the **Sell Stocks** dialog box, enter the following details.
+    1. Select the stock that you want to sell.
+    2. Enter the number of units of the stock that you want to sell.
+    3. (Optional.) Enter remarks, if any, regarding your sale.
+    4. Click **Confirmation**, and then review the details of the sale.
+    5. Click **Confirm** to sell the stocks.
+       After the Stock Broker service sells the stocks and deposits the money in your account, the **Transaction ID** and **Result** are displayed on the screen.
+    6. Click **Close** to close the **Sell Stocks** dialog box.
+
+6. Click **Stocks** to view the updated list of stocks.
+     ![Stock Trading page](./images/stock_broker_app_tradepage.png)
+
+## Task 9: View Service Mesh graph and Distributed Traces (Optional)
 
 You can perform this task only if you have deployed Kiali and Jaeger in your cluster.
 To visualize what happens behind the scenes and how a trip booking request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you started in Task 3.
@@ -371,11 +413,12 @@ To visualize what happens behind the scenes and how a trip booking request is pr
 4. In the **Service** drop-down list, select **istio-ingressgateway**. A list of traces is displayed where each trace represents a request.
 5. Select a trace to view it.
 
-## Task 9: View Source Code of the Sample Application (Optional)
+## Task 10: View Source Code of the Sample Application (Optional)
 The source code for the following sample applications is present in the `/home/oracle/OTMM/otmm-22.3.2/samples/xa/java/bankapp` folder.
-- Teller Service source code: /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/
-- Department 1 Service source code: /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/
-- Department 2 Service source code: /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/
+- Stock Broker Service source code: /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker
+- Branch Banking Service source code: /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/BranchBanking
+- Core Banking Service source code: /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/CoreBanking
+- User Banking Service source code: /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/UserBanking
 
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
 To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
