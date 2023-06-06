@@ -116,6 +116,7 @@ This lab assumes:
 12. Click the hamburger menu in the upper left corner of the application and click "Using the Graph Visualization Plugin".
 
 13. Scroll through the output to see the Graph Viz plugin utilized.
+    ![Graph viz](images/graph-viz.png)
 
 14. You have now completed this lab.
 
