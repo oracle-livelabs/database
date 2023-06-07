@@ -55,9 +55,9 @@ On source change into the XTTS Source directory and execute the final backup:
 
 ![incremental_backup](./images/incremental_backup.png " ")
 
-The full output looks like:
-
-  ```
+<details>
+ <summary>*click here to see the full final backup log file*</summary>
+  ``` text
     $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
     ============================================================
     trace file is /home/oracle/XTTS/SOURCE/tmp/backup_Jun5_Mon_16_30_17_571//Jun5_Mon_16_30_17_571_.log
@@ -137,6 +137,7 @@ The full output looks like:
     New /home/oracle/XTTS/SOURCE/tmp/xttplan.txt with FROM SCN's generated
     [UPGR] oracle@hol:~/XTTS/SOURCE
   ```
+</details>
 
 The process finishes with a few warnings similar to:
 __DECLARE*__
@@ -176,8 +177,10 @@ And start the restore:
 ![incremental_restore](./images/final_incr_restore.png " ")
 
 The full output looks like:
-    
-  ```text
+<details>
+ <summary>*click here to see the full final restore log file*</summary>
+
+  ``` text
 [CDB3] oracle@hol:~/XTTS/TARGET
 $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
 ============================================================
@@ -215,6 +218,7 @@ End of rollforward phase
 
 [CDB3] oracle@hol:~/XTTS/TARGET
   ```
+</details>
 
 ## Task 3: Metadata Export on Source
 As the source and target database version differ too much, we need to export and import the metadata information.
@@ -246,8 +250,11 @@ and execute expdp using this par file
   ```
 ![create_metadata_export_par](./images/metadata_export.png " ")
 
-The full log looks like:
-  ```
+
+<details>
+ <summary>*click here to see the full Metadata EXPDP log file*</summary>
+
+  ``` text
     $ expdp system/oracle@UPGR parfile=Exp_Metadata.par
     
     Export: Release 11.2.0.4.0 - Production on Mon Jun 5 17:08:28 2023
@@ -448,6 +455,7 @@ The full log looks like:
       /u02/oradata/UPGR/users01.dbf
     Job "SYSTEM"."SYS_EXPORT_FULL_01" successfully completed at Mon Jun 5 17:11:56 2023 elapsed 0 00:03:25
   ```
+</details>
 
 ## Task 4: Metadata Import on Target
 Also here we first create the import parameter file:
@@ -478,8 +486,10 @@ And import the metadata into the PDB3 using this Imp_Metadata.par parameter file
   ```
 ![incremental_backup](./images/metadata_import.png " ")
 
-The full log looks like:
-  ```
+<details>
+ <summary>*click here to see the full Metadata IMPDP log file*</summary>
+
+  ``` text
 $ impdp system/oracle@pdb3 parfile=Imp_Metadata.par
 
 Import: Release 21.0.0.0.0 - Production on Mon Jun 5 17:37:33 2023
@@ -1296,6 +1306,8 @@ ORA-21700: object does not exist or is marked for delete
 05-JUN-23 17:39:55.611: W-1      Completed 57 DATABASE_EXPORT/SCHEMA/TABLE/TABLE_DATA objects in 1641 seconds
 05-JUN-23 17:39:55.724: Job "SYSTEM"."SYS_IMPORT_FULL_01" completed with 64 error(s) at Mon Jun 5 17:39:55 2023 elapsed 0 00:02:20
   ```
+</details>
+The errors you see are not related to the user objects we transferred. So you can ignore them here.
 
 
 

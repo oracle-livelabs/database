@@ -8,7 +8,7 @@ Estimated Time: 15 minutes
 
 ### Objectives
 
-- Mandatory checks for XTTS.
+- Recommended checks for XTTS.
 
 
 ### Prerequisites
@@ -28,13 +28,15 @@ Before you begin check on source database if the OS you want to migrate your dat
     col platform_name format A20
     set line 200
     set pages 999
-    select * from v$transportable_platform order by platform_id;
+    select * from v$transportable_platform 
+    where platform_id=13 
+    order by platform_id;
     </copy>
   ```
-
+![TARGET_PLATFORM_SUPPORTED](./images/Target_Platform_Supported.png " ")
 
 ## Task 1: DBTIMEZONE
-Although it is not necessary in our hands on lab (we do not have tables with timezone columns having local timezone datatypes (Time Zone with Local Time Zone = __TZLTZ__) in our lab) you should always check if that's also true in your database environment. So check if you have user tables with timezone data stored in your database and then make sure the SOURCE and TARGET database are located in the same timezone. 
+You should always check the SOURCE and TARGET database are located in the same timezone. 
 Open on source and target SQL*Plus and execute:
   ```
     <copy>
@@ -43,6 +45,8 @@ Open on source and target SQL*Plus and execute:
     </copy>
   ```
 ![DBTIMEZONE](./images/DBTIMEZONE.png " ")
+
+In our example source and target databases are in different timezones. This might cause issues when your source database tables have columns with "__TimeStamp with Local Time Zone__ (TSLTZ)". You can execute the next query to see if the source database uses these data types: 
 
   ```
     <copy>
@@ -60,9 +64,10 @@ Open on source and target SQL*Plus and execute:
 
     </copy>
   ```
+![tzltz_data_types](./images/timezone_data_types.png " ")
+In the Hands-On-Lab there are no TSLTZ data types used. So no need to sync both DBTIMEZONEs or to handle data manually with expdp/impdp.
 
-
-## Task 2: Source and Target character sets 
+## Task 2: Source and Target Character Sets 
 The source and target database must use compatible database character sets.
 
   ```
@@ -78,8 +83,8 @@ The source and target database must use compatible database character sets.
 * [General Limitations on Transporting Data](https://docs.oracle.com/en/database/oracle/oracle-database/19/spucd/general-limitations-on-transporting-data.html#GUID-28800719-6CB9-4A71-95DD-4B61AA603173)
 
 
-## Task 3: XTTS tablespace violations on Source  
-For transportable tablespaces another mandatory requirement is that all tablespaced you're going to transport are self contained.
+## Task 3: XTTS Tablespace Violations on Source  
+For transportable tablespaces another requirement is that all tablespaces you're going to transport are self contained.
 In this hands on lab you're going to transport the two tablespaces "TPCCTAB" and "USERS". So let's check if they are self contained:
 
   ```
@@ -91,7 +96,7 @@ In this hands on lab you're going to transport the two tablespaces "TPCCTAB" and
   ```
 ![self_contained_TBS](./images/self_contained_TBS.png " ")
 
-## Task 4: User data in SYSTEM/SYSAUX tablespace on Source
+## Task 4: User Data in SYSTEM/SYSAUX Tablespace on Source
 As SYSTEM and SYSAUX tablespaces are not copied from source to target, it's good practice to check if they might accidentally contain user data:
 
   ```
@@ -110,7 +115,7 @@ As SYSTEM and SYSAUX tablespaces are not copied from source to target, it's good
 ![self_contained_TBS](./images/check_user_data_system_sysaux.png " ")
 
 
-## Task 5: User indexes in SYSTEM/SYSAUX tablespace on Source
+## Task 5: User Indexes in SYSTEM/SYSAUX Tablespace on Source
 Same check as in the previous task but this time for user indexes
 
   ```
@@ -129,7 +134,9 @@ Same check as in the previous task but this time for user indexes
 ![self_contained_TBS](./images/check_user_indexes_system_sysaux.png " ")
 
 ## Task 6: IOT Tables
-IOT tables might get corrupted during XTTS copy and you should copy them again during the downtime. So check if you have IOT tables you have to handle  manually:
+IOT tables might get corrupted during XTTS copy when copying to HP platforms. 
+* [Corrupt IOT when using Transportable Tablespace to HP from different OS (Doc ID 1334152.1) ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1334152.1&displayIndex=1)
+
   ```
     <copy>
      set line 200
@@ -139,14 +146,18 @@ IOT tables might get corrupted during XTTS copy and you should copy them again d
      select owner,table_name,iot_type from dba_tables where iot_type like '%IOT%' 
      and table_name not like 'DR$%' 
      -- and owner not in (select username from dba_users where oracle_maintained='Y')
+     and owner not in ('WMSYS','XDB','SYSTEM','SYS','LBACSYS','OUTLN','DBSNMP','APPQOSSYS')
      ;
 
     </copy>
   ```
 
+![IOT_Tables](./images/IOT_Output.png " ")
+
+You can ignore this output because you're not moving to HP platform.
 
 ## Task 7: Binary XMLTYPE Columns
-In versions prior 12.2 metadata imports failed when having tables with XMLTYPE columns. You need to exclude them from the metadata export and handle the content manually during  the downtime. A check if you have XML types stored in your database is:
+In versions prior 12.2 metadata imports failed when having tables with XMLTYPE columns. You need to exclude them from the metadata export and handle the content manually during the downtime. A check if you have XML types stored in your database is:
 
   ```
     <copy>
@@ -155,33 +166,27 @@ In versions prior 12.2 metadata imports failed when having tables with XMLTYPE c
 
     </copy>
   ```
+![IOT_Tables](./images/XML_Data.png " ")
 
-## Task 8: Configuring default RMAN settings on Source
-The next parameters you're going to set for RMAN work well in the hands on lab. For your environment you might have to adopt them by increasing parallelism, the backup destination etc.
+Only XML data in SYSAUX tablespace which you're not going to migrate. So ignore it.
 
-On source start the rman console: 
+* [Is it supported to do a Transport Tablespace (TTS) Import with Data Pump on a tablespace with binary XML objects ? (Doc ID 1908140.1) ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1908140.1&displayIndex=1)
+
+
+## Task 8: Global Temporary Tables
+Global temporary tables do not belong to any tablespace, so they are not transported to the target database. Let's see if we have some global temporary tables and to which user they might belong:
+
 
   ```
     <copy>
-     rman target /
+     SELECT table_name FROM dba_tables WHERE temporary= 'Y'
+     and owner not in ('WMSYS','XDB','SYSTEM','SYS','LBACSYS','OUTLN','DBSNMP','APPQOSSYS')
+     -- owner not in (select username from dba_users where oracle_maintained='Y') 
+     ;
 
     </copy>
   ```
-
-Please be aware:
-in RMAN terminology the target database identifies the database which you're going to back up - so in the migration terminology the source database
-
-  ```
-    <copy>
-     CONFIGURE DEFAULT DEVICE TYPE TO DISK;
-     configure  DEVICE TYPE DISK PARALLELISM 8;
-     exit;
-
-    </copy>
-  ```
-![self_contained_TBS](./images/rman_default_target_settings.png " ")
-
-
+![GlobalTempTable](./images/GlobalTempTables.png " ")
 
 
 

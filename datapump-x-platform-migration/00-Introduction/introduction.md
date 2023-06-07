@@ -2,7 +2,7 @@
 
 ## About this Workshop
 
-In this lab you will migrate an 11.2.0.4 database directly into a 21c PDB using version 4 of the Cross Platform Transportable Tablespace (XTTS) Perl script. This script handles cross platform migrations, conversions from little to big endianness (or vice versa) or like in our case migrations on the same host. 
+In this lab you will migrate an 11.2.0.4 database directly into a 21c PDB using version 4 of the __Cross Platform Transportable Tablespace (XTTS) Perl__ script. This script automatically handles cross platform migrations including conversions from little to big endianness (or vice versa). But you can also use it like in our case to migrate directly into a PDB. 
 The prerequisites are outlined in [MOS note #2471245.1: V4 Reduce Transportable Tablespace Downtime using Cross Platform Incremental Backup](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2471245.1&displayIndex=1). Another helpful document is [MOS note #1454872.1: Transportable Tablespace (TTS) Restrictions and Limitations: Details, Reference, and Version Where Applicable ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1454872.1&displayIndex=1).
 
 Outlined below are the steps you will execute assisted by the XTTS V4 Perl script:
@@ -30,11 +30,11 @@ In this workshop, you will:
 
 ### Prerequisites
 
-* 
+* n/a
 
-  ## About the workshop contents
+## About the workshop content
 
-This workshop is preloaded with 4 different Oracle Homes and 5 databases.
+This workshop is preloaded with 4 different Oracle Homes and 6 databases.
 You can switch between environments with the shortcuts shown in the last column of the below diagram.
 
 ![](./images/HOL_environment.png " ")
@@ -46,7 +46,7 @@ The 4 different Oracle Homes are:
 - Oracle 19c      – /u01/app/oracle/product/19
 - Oracle 21c      – /u01/app/oracle/product/21
 
-The workshop also contains 6 different databases for running the various upgrade and migration scenarios in each lab.
+The workshop also contains 6 different databases for running various upgrade and migration scenarios. Today's HOL session will use the UPGR 11.2.0.4 database as source and create a PDB3 in the 21c CDB3.
 
 - UPGR – 11.2.0.4 database (non-CDB)
 - FTEX – 11.2.0.4 database (non-CDB)

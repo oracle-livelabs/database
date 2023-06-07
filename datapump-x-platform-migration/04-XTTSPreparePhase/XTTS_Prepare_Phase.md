@@ -1,9 +1,7 @@
 # Prepare Phase  
 
 ## Introduction
-
-In this lab, you will prepare the XTTS properties file used by the XTTS Perl V4 scripts and execute the initial backup and restore.
-During this exercise the source database remains active and anyone can update it.
+"__PREPARE PHASE__" is the first phase in the XTTS transfer. Here you keep the source database active and everyone can continue to use it.
 
 Estimated Time: 15 minutes
 
@@ -18,13 +16,13 @@ Estimated Time: 15 minutes
 This lab assumes you have:
 
 - Connected to the Hands On Lab
-- A terminal window open on source.
-- Another terminal window open on target
-- Prepared the source
-- Prepared the target
+- A terminal window open to source.
+- Another terminal window open to target
+- Source and target prepared.
+- XTTS prechecks done
 
 ## Task 1: XTTS properties file
-On source change into the XTTS Source directory and create the xtt.properties file using vi. Here the steps:
+On source change into the XTTS Source directory and create the xtt.properties file using vi (for those of you who are not familiar with vi, no worries, you get the necessary vi commands shortly). So here the steps:
 
   ```
     <copy>
@@ -34,10 +32,11 @@ On source change into the XTTS Source directory and create the xtt.properties fi
     </copy>
   ```
 
-The vi editor is now open in your console. 
+The vi editor is now open in your terminal session and shows "New File" at the bottom.
+
 ![open_vi](./images/vi_xtt_properties.png " ")
 
-Now copy the content of the xtt.properties file from below:
+Copy the content of the xtt.properties file from below (and scroll down for further instructions):
 
   ```
     <copy>
@@ -225,27 +224,26 @@ destconnstr=sys/oracle@cdb3
     </copy>
   ```
 
-Switch to the source shell still having the vi editor open.
+Switch to the source terminal window still having the vi editor open.
 Press now the letter "i" to switch the vi editor into the insert mode. The last line in vi changes from  "xtt.properties [New file]" to "-- Insert --"
-
 
 
 ![insert_vi](./images/vi_insert.png " ")
 
-Paste the xtt.properties content into vi:
+Paste the xtt.properties content into vi. The last lines look like:
 
 ![paste_vi](./images/paste_xtt_properties.png " ")
 
 Press the "Escape" key (the last line in vi changes again):
 ![vi_escape](./images/vi_escape.png " ")
 
+The "-- Insert --" is gone. To save your new file and to exit from vi type ":wq!" 
 
-and type ":wq!"
 ![write_quit_vi](./images/write_quit_vi.png " ")
 
 
 ## Task 2: Initial Backup 
-While the source database remains active, you're now going to back it up:
+While the source database remains active, you're now going to back it up for the first time:
 
 
   ```
@@ -259,8 +257,8 @@ While the source database remains active, you're now going to back it up:
   ```
 
 
-The full output looks like:
-    
+<details>
+ <summary>*click here to open/close the full backup log*</summary>
   ```text
     [UPGR] oracle@hol:~/XTTS/SOURCE
     $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
@@ -343,7 +341,7 @@ The full output looks like:
     =============================================================
     [UPGR] oracle@hol:~/XTTS/SOURCE
   ```
-
+</details>
 
 
 ## Task 3: Initial Restore  
@@ -371,8 +369,9 @@ Starting restore:
   ```
 ![self_contained_TBS](./images/initial_restore.png " ")
 
-And the complete output:
-  ```
+<details>
+ <summary>*click here to open the full restore log*</summary>
+  ```text
   [CDB3] oracle@hol:~/XTTS/TARGET
 $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
 ============================================================
@@ -410,7 +409,7 @@ Performing convert for file 5
 
 [CDB3] oracle@hol:~/XTTS/TARGET
   ```
-
+</details>
 
 
 

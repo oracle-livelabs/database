@@ -16,7 +16,7 @@ This lab assumes you have:
 
 - Connected to the Hands On Lab
 
-## Task 1: Open terminal window and create three directories
+## Task 1: Open Terminal Window and Create Three Directories
 
 Open two terminal Windows by clicking on the Terminal icon
 ![terminal](./images/Terminal.png " ")
@@ -27,20 +27,19 @@ Activate the target terminal window and create 3 directories; one for the datapu
   ```
     <copy>
     mkdir -p /home/oracle/DP/DUMP /home/oracle/XTTS/SOURCE/tmp /home/oracle/XTTS/TARGET/tmp
-
     </copy>
   ```
 
 ![Create_Dir_OS](./images/create_directory_os.png " ")
 
 
-## Task 2: source the target environment and start SQL*Plus
+## Task 2: Set the Target Environment and Start SQL*Plus
 
 
   ```
     <copy>
     . cdb3
-    sqlplus / as sysdba
+    sqlplus / as sysdba 
 
     </copy>
   ```
@@ -48,7 +47,7 @@ Activate the target terminal window and create 3 directories; one for the datapu
 ![Login to CDB3](./images/source_cdb3.png " ")
 
 
-## Task 3: Create the PDB
+## Task 3: In SQL*Plus Create the Target PDB
 When creating a PDB the admin user needs to exist. You can delete it later on if desired. Once the PDB3 is created you need to start it up.
   ```
     <copy>
@@ -63,14 +62,14 @@ When creating a PDB the admin user needs to exist. You can delete it later on if
 
 
 
-## Task 4: Create the database directory used by datapump
+## Task 4: In SQL*Plus Create the Database Directory Used by Data Pump
  and create some additional objects for the migration.
 
   ```
     <copy>    
 		alter session set container=PDB3;
 		CREATE OR REPLACE DIRECTORY "XTTS_METADATA_DIR" AS '/home/oracle/XTTS/DUMP/';
-    
+    exit;
     </copy>
   ```
 

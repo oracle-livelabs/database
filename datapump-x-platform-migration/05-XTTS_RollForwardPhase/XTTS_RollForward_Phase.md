@@ -26,7 +26,7 @@ This lab assumes you have:
 ## Task 0: Adding Table and Data File to Source Database
 Let's do some changes in the source database... So open SQL*Plus:
 
-### New table
+### Add a New Table
 
   ```
     <copy>
@@ -45,12 +45,10 @@ Let's do some changes in the source database... So open SQL*Plus:
 
 ![new_table](./images/cre_oject_copy.png " ")
 
-### New Data File
+### Add a New Data File
   ```
     <copy>
-     sqlplus  / as sysdba <<EOF 
-     
-     EOF
+     sqlplus  / as sysdba 
      
     </copy>
   ```
@@ -77,9 +75,10 @@ On source change into the XTTS Source directory and execute the incremental back
 
 ![incremental_backup](./images/incremental_backup.png " ")
 
-The full output looks like:
+<details>
+ <summary>*click here to see the full incremental backup log file*</summary>
 
-  ```
+  ``` text
     [UPGR] oracle@hol:~/XTTS/SOURCE
     $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
     ============================================================
@@ -138,6 +137,7 @@ The full output looks like:
     New /home/oracle/XTTS/SOURCE/tmp/xttplan.txt with FROM SCN's generated
     [UPGR] oracle@hol:~/XTTS/SOURCE
   ```
+</details>
 
 ## Task 2: Incremental Restore on Target
 
@@ -166,9 +166,10 @@ And start the restore:
 
 ![incremental_restore](./images/incremental_restore.png " ")
 
-The full output looks like:
-    
-  ```text
+<details>
+ <summary>*click here to see the full incremental restore log file*</summary>
+
+  ``` text
 $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
 ============================================================
 trace file is /home/oracle/XTTS/TARGET/tmp/restore_Jun5_Mon_15_59_20_665//Jun5_Mon_15_59_20_665_.log
@@ -205,10 +206,10 @@ End of rollforward phase
 
 [CDB3] oracle@hol:~/XTTS/TARGET 
   ```
+</details>
 
 
-
-You can execute these two tasks whenever you want. As they will minimize your downtime window you should run them on the cutover day more frequently to minimize the delta.
+You can execute the incremental backup and restore whenever you want. As they will minimize your downtime window you can run them on the cutover day more frequently to minimize the delta.
 
 
 
