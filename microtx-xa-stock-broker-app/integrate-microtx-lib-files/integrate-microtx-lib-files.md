@@ -2,17 +2,23 @@
 
 ## Introduction
 
-Run a sample application that uses the XA transaction protocol to buy stocks and understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate the transactions. Using samples is the fastest way for you to get familiar with MicroTx.
-The sample application code is available in the MicroTx distribution.
+This lab walks you through all the steps to integrate the functionality provided by the Oracle® Transaction Manager for Microservices (MicroTx) client libraries with an application. Use MicroTx client libraries to register the required interceptors and callbacks, to obtain a connection to the application's resource manager, and to delineate transaction boundaries which indicate that an XA transaction has started, and then to commit or roll back the transaction.
+Use XA when strong consistency is required, similar to consistency provided by the local database transactions, where all the ACID properties of a transaction are present. For example, financial applications.
+Different business use cases require different levels of consistency. For example, financial applications that move funds require strong global consistency. The XA transaction protocol is a good fit for such applications as XA offers the best transaction consistency with the least amount of developer effort.
+participant microservices must use the MicroTx client libraries which registers callbacks and provides implementation of the callbacks for the resource manager. As shown in the following image, MicroTx communicates with the resource managers to commit or roll back the transaction. MicroTx connects with each resource manager involved in the transaction to prepare, commit, or rollback the transaction. The participant service provides the credentials to the coordinator to access the resource manager.
 
-Estimated Time: *30 minutes*
+Estimated Time: *20 minutes*
 
 ### About the Banking and Trading Application
 
-The Banking and Trading application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions.
+The Banking and Trading application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions. When a user purchases stocks using the Stock Broker service, it withdraws money from the Core Banking Service and deposits an equivalent amount of stocks by creating an XA transaction. Within the XA transaction, all actions such as purchase, sale, withdraw, and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
 The following figure shows the various microservices in the Banking and Trading application. This application demonstrates how you can develop microservices that participate in XA transactions.
 ![Microservices in Banking and Trading application](./images/stock_broker_xa_app.png)
+
+Resource managers manage stateful resources such as databases, queuing or messaging systems, and caches.
+
+The service must meet ACID requirements, so an XA transaction is initiated and both withdraw and deposit are called in the context of this transaction.
 
 ### Objectives
 

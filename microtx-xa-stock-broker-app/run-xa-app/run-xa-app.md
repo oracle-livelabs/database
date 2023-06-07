@@ -4,14 +4,10 @@
 
 Run the Banking and Trading application to purchase and sell stocks and to understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate XA transactions.
 
+Run a sample application that uses the XA transaction protocol to buy stocks and understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate the transactions. Using samples is the fastest way for you to get familiar with MicroTx.
+The sample application code is available in the MicroTx distribution.
+
 Estimated Lab Time: *30 minutes*
-
-### About the Banking and Trading Application
-
-The following figure shows the Banking and Trading application, which contains several microservices.
-![Microservices in the Banking and Trading application](./images/stock_broker_xa_app.png)
-
-The Banking and Trading application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions. When a user purchases stocks using the Stock Broker service, it withdraws money from the Core Banking Service and deposits an equivalent amount of stocks by creating an XA transaction. Within the XA transaction, all actions such as purchase, sale, withdraw, and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
 ### Objectives
 
@@ -172,9 +168,9 @@ To provide the configuration and environment details in the `values.yaml` file:
 
 4. Save the changes you have made to the `values.yaml` file.
 
-## Task 4: Build the Container Images for the Microservices in the Banking and Trading Application
+## Task 4: Build Container Images for Each Microservice
 
-The code for the Banking and Trading application is available in the installation bundle in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp` folder. Build container images for each microservice in the Banking and Trading application.
+The code for the Banking and Trading application is available in the installation bundle in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp` folder. The container image for the User Banking service is pre-built and available for your use. Build container images for all the other microservices in the Banking and Trading application.
 
 To build container images for each microservice in the sample:
 
