@@ -56,13 +56,29 @@ This lab assumes that you have completed the previous labs and created all resou
     <copy>oci iam group delete --group-id $DB_ADMIN_OCID</copy>
     ```
 
-5. You may now close your cloud shell session, as you will use the OCI Console to delete the final resource. Click on the hamburger icon in the top left corner. Choose **Identity and Security** then **Policies**.
+5. You may now close your cloud shell session, as you will use the OCI Console to delete the final resources. Click on the hamburger icon in the top left corner. Choose **Identity and Security** then **Policies**.
 
     ![Identity and Security](https://oracle-livelabs.github.io/common/images/console/id-policies.png " ")
 
-6. Ensure that you are in your root compartment, and you should see the policiy called **grant-adb-access**. Click the box next to its name then click delete.
+6. Ensure that you are in your root compartment, and you should see the policiy called **grant-adb-access**. Check the box next to its name then click **Delete**.
 
     ![Policy Page - Delete](images/delete-policy.png)
+
+7. Next you will click on the **Profile** icon in the top right corner and choose **My profile**.
+
+    ![Navigate to user profile](images/user-profile.png)
+
+8. Scroll down to the bottom of the page, choose **Database passwords**. Find the database password that you created in this lab, identified by the description "DB password for your OCI account". Check the box next to it and choose **Delete**.
+
+    ![Delete database password](images/delete-database-password.png)
+
+## Appendix: Delete federated IAM user
+
+1. This step is only necessary if you followed the steps in the Lab 1 appendix to create a federated IAM user. Log out of OCI with the federated user. Log back in with your original user and delete the federated user with the following command.
+
+    ```
+    <copy>oci iam user delete --user-id [Federated user OCID]</copy>
+    ```
 
 Your OCI tenancy should now be cleared of all lab resources.
 
@@ -71,4 +87,4 @@ Your OCI tenancy should now be cleared of all lab resources.
   * Richard Evans, Database Security Product Management
   * Miles Novotny, Solution Engineer, North America Specialist Hub
   * Noah Galloso, Solution Engineer, North America Specialist Hub
-* **Last Updated By/Date** - Miles Novotny, December 2022
+* **Last Updated By/Date** - Miles Novotny, April 2023
