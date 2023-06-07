@@ -2,14 +2,14 @@
 
 ## Introduction
 
-This lab walks you through the steps of setting up a Database Cloud Service (DBCS) Virtual Machine (VM) with Oracle Database 19c. For more information on DBCS and VM Database Systems visit the *Learn More* tab at the bottom of the page.
+This lab walks you through the steps of setting up an Oracle Base Database Virtual Machine (VM) with Oracle Database 19c. For more information on DBCS and VM Database Systems visit the *Learn More* tab at the bottom of the page.
 
 Estimated Lab Time: 75-90 minutes
 
 ### Objectives
 
 In this lab, you will:
-* Create a VM Database System as the Source Database
+* Create an Oracle Base Database Virtual Machine (VM) as the Source Database
 * Gather Database information for Connectivity
 * Add data to the Pluggable Database
 
@@ -26,15 +26,15 @@ In this lab, you will:
 The following task is *optional* if a source database is already present.
 
 1. You will need an SSH key pair for logging into your database and environments. If you don’t already have one, please create one.
-*Important*: The key needs to be in RSA format, other formats like OpenSSL are currently not supported. You can use a command like: `ssh-keygen -t rsa -N "" -b 2048 -C "<key_name>" -f <path/root_name>`
+*Important*: The key needs to be in RSA format, other formats like OpenSSL are currently not supported. You can use a command like: `ssh-keygen -t rsa -N "" -b 2048 -m PEM`
 
 2. In the OCI Console Menu, go to **Oracle Database > Bare Metal, VM, and Exadata**.
 
-  ![](images/bare-metal-vm-exadata.png)
+  ![navigation menu](images/bare-metal-vm-exadata.png)
 
 3. Press **Create DB System**.
 
-  ![](images/create-db-system.png)
+  ![Create DB System](images/create-db-system.png)
 
 4. Enter the following values, otherwise leave defaults. You can adjust shapes and storage to your use case requirements and available quota.
     - Name: **SourceDB**
@@ -44,11 +44,11 @@ The following task is *optional* if a source database is already present.
     - Client subnet: **Public Subnet-VCN\_DMS\_LA** (Or your subnet name)
     - Hostname prefix: **sourcedb**
 
-  ![](images/name-your-source.png)
+  ![name your source](images/name-your-source.png)
 
-  ![](images/dbLT.png)
+  ![upload SSH keys](images/dbLT.png)
 
-  ![](images/specify-network-info.png)
+  ![specify network information](images/specify-network-info.png)
 
 5. Press **Next**.
 
@@ -56,18 +56,18 @@ The following task is *optional* if a source database is already present.
     - Database name: **sourcedb**
     - Press **Change Database Image**
 
-    ![](images/change-db.png)
+    ![Provide information for the database](images/change-db.png)
 
     - Select **Display all available versions**
     - Check the box for version number **19.10.0.0**
     - Press **Select**
 
-    ![](images/1910db.png)
+    ![select software image](images/software-image.png)
 
     - PDB name: **pdb**
     - Create administrator credentials – Password: *password of your choice*
 
-  ![](images/pdb-name-and-sys-password.png)
+  ![press create database](images/pdb-name-and-sys-password.png)
 
 7. Press **Create DB System**.
 
@@ -78,19 +78,19 @@ The following task is *optional* if a source database is already present.
 
 1. Open the database system **SourceDB** in the **DB Systems** table.
 
-  ![](images/open-sourcedb.png)
+  ![Open the database system](images/open-sourcedb.png)
 
 2. Open the database **sourcedb** in the **Databases** table.
 
-  ![](images/databases-sourcedb.png)
+  ![click sourcedb in the Databases table](images/databases-sourcedb.png)
 
 3. Press **DB Connection**.
 
-  ![](images/db-connect.png)
+  ![Press DB Connection.](images/db-connect.png)
 
 4. Press **Show** next to the **Easy Connect** Connection String. A string similar to **sourcedb.sub12062328210.vcndmsla.oraclevcn.com:1521/sourcedb\_iad158.sub12062328210.vcndmsla.oraclevcn.com** should be shown. Copy the string after the */* into a notepad, in this case **sourcedb\_iad158.sub12062328210.vcndmsla.oraclevcn.com**. This is the service name of your CDB, you will need this string later for accessing your database and creating migrations. Close the dialog.
 
-  ![](images/easy-connect-string.png)
+  ![Press Show next to the Easy Connect](images/easy-connect-string.png)
 
 5. Also note the service name of the PDB into a notepad, you need to replace the first section of the CDB service name with the PDB name(if you named it something else, use that), in this case **pdb.sub12062328210.vcndmsla.oraclevcn.com**
 
@@ -98,14 +98,14 @@ The following task is *optional* if a source database is already present.
 
 7. The Nodes list shows the **sourcedb** node. Note the **Public IP Address** and **Private IP Address** of the node into a notepad, in this case **129.146.173.28** and **10.0.0.55**.
 
-  ![](images/source-db-ip-addresses.png)
+  ![Note the Public IP Address and Private IP Address ](images/source-db-ip-addresses.png)
 
 ## Task 3: Adding Data to the Database
 
 1. Open a SSH terminal to the database instance. The instructions are for Unix-style ssh command:
 
     ```
-    ssh -i <private_key_file> opc@<dbnode_public_ip>
+    <copy> ssh -i <private_key_file> opc@<dbnode_public_ip> </copy>
     ```
 
 2. Create a new directory in the user volume:
@@ -137,7 +137,7 @@ The following task is *optional* if a source database is already present.
     <copy>alter session set container=PDB;</copy>
     ```
 
-    ![](images\show-pdbs-alter-session.png =50%x50%)
+    ![alter session set container](images/show-pdbs-alter-session.png =50%x50%)
 
 5. Adding dummy data to the PDB
 

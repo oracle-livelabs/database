@@ -326,6 +326,7 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
       ```
       Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
       ![View config file](images/config-file.png)
+        
 4. Go to your project directory. Under this directory, you will see the example source code ```Program.cs```. Overwrite the content of this file with the content of ```HelloWorld.cs```.
 Build and run your project as shown below.
 *Note: You have multiple dotnet target frameworks which are supported. Currently the supported frameworks are .NET Core 3.1 and .NET 5.0, so you must specify the target framework to use. The command below will automatically download and install Oracle NoSQL Database SDK package as a dependency of your project.*

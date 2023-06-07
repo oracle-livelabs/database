@@ -6,6 +6,9 @@ This lab walks you through the steps to quickly provision an Oracle Autonomous D
 
 Estimated lab time: 20 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Provision an Oracle Autonomous Database for use as resource manager](videohub:1_9p3qtn2f)
+
 ### Objectives
 
 * Provision two new Autonomous Transaction Processing instances.
@@ -62,7 +65,9 @@ Estimated lab time: 20 minutes
 
 6. Configure the database:
 
+    <if type="tenancy"> 
     * **Always Free** - If your cloud account offers it, select this option to create an always free autonomous database, which comes with 1 CPU and 20 GB of storage. If you don't have this option, select the details mentioned below to create an autonomous database.
+    </if>
     * **Choose database version** - Select a database version from the available versions.
     * **OCPU count** - Number of CPUs for your service. For this lab, specify **1 CPU**.  An Always Free database comes with 1 CPU.
     * **Storage (TB)** - Select your storage capacity in terabytes. For this lab, specify **0.02 TB** of storage (20 GB). An Always Free database comes with 20 GB of storage.
@@ -70,7 +75,12 @@ Estimated lab time: 20 minutes
     * **Storage Auto Scaling** - For this lab, you can disable storage auto scaling. The Always Free database does not scale up/down.
     * **New Database Preview** - If a checkbox is available to preview a new database version, do **not** select it.
 
+    <if type="tenancy">
     ![Configure the database](./images/configure-db.png " ")
+    </if>
+    <if type="sandbox">
+    ![Configure the database](./images/configure-db-sandbox.png " ")
+    </if>
 
 7. Create administrator credentials:
 

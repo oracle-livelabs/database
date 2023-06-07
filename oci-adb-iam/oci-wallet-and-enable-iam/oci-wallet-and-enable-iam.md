@@ -6,6 +6,9 @@ In this lab you will generate a wallet file for your ADB. This wallet file can b
 
 *Estimated Lab Time*: 20 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Generate ADB Wallet and Set IAM as Identity Provider](videohub:1_dq2gunqo)
+
 ### Objectives
 - Generate a wallet file for your ADB
 - Access your ADB with the wallet file and configure IAM as the identity provider
@@ -29,16 +32,18 @@ This lab assumes that you have completed the previous labs and have created all 
     <copy>oci db autonomous-database generate-wallet --autonomous-database-id $ADB_OCID --password Oracle123+ --file $HOME/adb_wallet/lltest_wallet.zip</copy>
     ```
 
-3. Navigate to the adb_wallet directory.
+## Task 2: Enable OCI IAM as the identity provider and provision global schema and role
+
+1. Navigate to the adb_wallet directory.
 
     ```
     <copy>cd $HOME/adb_wallet</copy>
     ```
 
-## Task 2: Enable OCI IAM as the identity provider
-
-1. Open the SQL command line, then connect to the database using the wallet file.
+2. Open the SQL command line, then connect to the database using the wallet file.
     >**Note:** This command only works from inside the adb_wallet folder. Insure that you have navigated to it as shown in the previous steps.
+
+    >**Note:** When using SQL, do not paste commands using Crtl-V as hidden characters will also be inserted resulting in an error of unknown command. You can use Crtl-Shift-V as a substitute if using a keyboard to insert copied code.
 
     ```
     <copy>sql /nolog</copy>
@@ -49,7 +54,7 @@ This lab assumes that you have completed the previous labs and have created all 
     conn admin/Oracle123+Oracle123+@lltest_high</copy>
     ```
 
-2. Query to select the identity provider, and see that it is **NONE** by default.
+3. Query to select the identity provider, and see that it is **NONE** by default.
 
     ```
     <copy>select name, value from v$parameter where name ='identity_provider_type';</copy>
@@ -57,12 +62,12 @@ This lab assumes that you have completed the previous labs and have created all 
 
 
     ```
-    <copy>NAME                      VALUE    
+    NAME                      VALUE    
     _________________________ ________
-    identity_provider_type    NONE</copy>
+    identity_provider_type    NONE
     ```
 
-3. Now enable IAM as the identity provider. Query the idenity provider again to see it updated to **OCI_IAM**.
+4. Now enable IAM as the identity provider. Query the idenity provider again to see it updated to **OCI_IAM**.
 
     ```
     <copy>exec dbms_cloud_admin.enable_external_authentication('OCI_IAM');
@@ -70,12 +75,12 @@ This lab assumes that you have completed the previous labs and have created all 
     ```
 
     ```
-    <copy>NAME                      VALUE      
+    NAME                      VALUE      
     _________________________ __________
-    identity_provider_type    OCI_IAM</copy> 
+    identity_provider_type    OCI_IAM
     ```
 
-4. Create the **user\_shared** user and grant it permissions to create sessions. Create the **sr\_dba\_role** role and grant it permissions. Quit the SQL session.
+5. Create the **user\_shared** user and grant it permissions to create sessions. Create the **sr\_dba\_role** role and grant it permissions. Quit the SQL session.
 
     ```
     <copy>create user user_shared identified globally as 'IAM_GROUP_NAME=All_DB_Users';
@@ -112,12 +117,25 @@ This lab assumes that you have completed the previous labs and have created all 
     cat sqlnet.ora</copy>
     ```
 
-4. Append the TOKEN_AUTH parameter to the ADB instance's tnsname.ora entry so that an authorization token can be used instead of a password.
+    The sqlnet.ora file should appear like this.
+
+    ```
+    WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY=/home/{your OCI users directory}/adb_wallet)))
+    SSL_SERVER_DN_MATCH=yes
+    ```
+
+4. Append the TOKEN_AUTH parameter to the ADB instance's tnsnames.ora entry so that an authorization token can be used instead of a password.
 
     ```
     <copy>head -1 tnsnames.ora.orig | sed -e 's/)))/)(TOKEN_AUTH=OCI_TOKEN)))/' > tnsnames.ora
 
     cat tnsnames.ora</copy>
+    ```
+
+    The tnsnames.ora file should appear like this. Some values may vary, depending on your region, for example.
+
+    ```
+    lltest_high = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.us-phoenix-1.oraclecloud.com))(connect_data=(service_name={your database service name}))(security=(ssl_server_cert_dn="CN=adwc.uscom-east-1.oraclecloud.com, OU=Oracle BMCS US, O=Oracle Corporation, L=Redwood City, ST=California, C=US")(TOKEN_AUTH=OCI_TOKEN)(TOKEN_AUTH=OCI_TOKEN)))
     ```
 
 You may now **proceed to the next lab.**
@@ -132,4 +150,4 @@ You may now **proceed to the next lab.**
   * Richard Evans, Database Security Product Management
   * Miles Novotny, Solution Engineer, North America Specialist Hub
   * Noah Galloso, Solution Engineer, North America Specialist Hub
-* **Last Updated By/Date** - Miles Novotny, December 2022
+* **Last Updated By/Date** - Miles Novotny, April 2023
