@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Maintain transaction consistency with Oracle Transaction Manager for Microservices",
+  "workshoptitle": "Inconsistent Data and Financial Losses Are a Thing of the Past: Making Distributed Transactions Easy with Oracle MicroTx",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -8,7 +8,7 @@
       "filename": "../../introduction/introduction.md"
     },
     {
-      "title": "Get started with noVNC remote desktop",
+      "title": "Get Started with noVNC Remote Desktop",
       "description": "Using noVNC Remote Desktop",
       "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
     },
@@ -17,11 +17,11 @@
       "filename": "../../integrate-microtx-lib-files/integrate-microtx-lib-files.md"
     },
     {
-      "title": "Lab 2: Provision Autonomous Databases for use as resource manager",
+      "title": "Lab 2: Provision Autonomous Databases for Use as Resource Manager",
       "filename": "../../adb-provision/adb-provision.md"
     },
     {
-      "title": "Lab 3: Run an XA sample application",
+      "title": "Lab 3: Trade Stocks with the Banking and Trading Application",
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {

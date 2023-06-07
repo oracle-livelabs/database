@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Maintain transaction consistency with Oracle Transaction Manager for Microservices",
+  "workshoptitle": "Inconsistent Data and Financial Losses Are a Thing of the Past: Making Distributed Transactions Easy with Oracle MicroTx",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -27,18 +27,18 @@
       "filename": "../../integrate-microtx-lib-files/integrate-microtx-lib-files.md"
     },
     {
-      "title": "Lab 4: Provision Autonomous Databases for use as resource manager",
+      "title": "Lab 4: Provision Autonomous Databases for use as Resource Manager",
       "type": "tenancy",
       "filename": "../../adb-provision/adb-provision.md"
     },
     {
-      "title": "Lab 5: Run an XA sample application",
+      "title": "Lab 5: Trade Stocks with the Banking and Trading Application",
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {
       "description": "Cleanly dispose all OCI resources created by ORM for the workshop, and delete the stack",
       "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md",
-      "title": "Lab 6: Environment Cleanup"
+      "title": "Lab 6: Clean Up the Environment"
     },
     {
       "title": "Need help?",

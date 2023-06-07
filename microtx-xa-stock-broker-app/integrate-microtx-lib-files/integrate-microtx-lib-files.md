@@ -1,4 +1,4 @@
-# Integrate MicroTx Client Libraries with XA Sample Application
+# Integrate MicroTx Client Libraries with the Banking and Trading Application
 
 ## Introduction
 
@@ -7,19 +7,19 @@ The sample application code is available in the MicroTx distribution.
 
 Estimated Time: *30 minutes*
 
-### About the XA Sample Application
+### About the Banking and Trading Application
 
-The sample application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions.
+The Banking and Trading application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions.
 
-The following figure shows a sample XA application, which contains several microservices, to demonstrate how you can develop microservices that participate in XA transactions.
-![Microservices in sample XA application](./images/stock_broker_xa_app.png)
+The following figure shows the various microservices in the Banking and Trading application. This application demonstrates how you can develop microservices that participate in XA transactions.
+![Microservices in Banking and Trading application](./images/stock_broker_xa_app.png)
 
 ### Objectives
 
 In this lab, you will:
 
-* Configure the Stock Broker App as a Transaction Initiator
-* Configure the Stock Broker Application as a Transaction Participant
+* Configure the Stock Broker service as a Transaction Initiator
+* Configure the Stock Broker service as a Transaction Participant
 
 ### Prerequisites
 
@@ -326,7 +326,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 
 15. Save the changes.
 
-You may now **proceed to the next lab** to run a sample XA application. If you do not want to proceed further and would like to finish the LiveLabs and clean up the resources, then complete **Lab 6: Environment Clean Up**.
+You may now **proceed to the next lab** to run the Banking and Trading Application.
 
 ## Learn More
 

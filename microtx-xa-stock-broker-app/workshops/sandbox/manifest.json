@@ -8,8 +8,8 @@
       "filename": "../../introduction/introduction.md"
     },
     {
-      "title": "Lab 1: Environment setup",
-      "description": "Verify Setup of compute instance",
+      "title": "Lab 1: Set Up the Environment",
+      "description": "Verify the setup of the Compute instance.",
       "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
     },
     {
@@ -17,12 +17,12 @@
       "filename": "../../integrate-microtx-lib-files/integrate-microtx-lib-files.md"
     },
     {
-      "title": "Lab 3: Provision Autonomous Databases for Use as resource manager",
+      "title": "Lab 3: Provision Autonomous Databases for Use as Resource Manager",
       "type": "sandbox",
       "filename": "../../adb-provision/adb-provision.md"
     },
     {
-      "title": "Lab 4: Run an XA sample application",
+      "title": "Lab 4: Trade Stocks with the Banking and Trading Application",
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {

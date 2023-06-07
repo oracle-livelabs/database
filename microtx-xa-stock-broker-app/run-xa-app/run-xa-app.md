@@ -1,30 +1,30 @@
-# Run the Bank and Trading Application to Trade in Stocks
+# Trade Stocks with the Banking and Trading Application
 
 ## Introduction
 
-Run the Bank and Trading application to purchase or sell stocks and to understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate XA transactions.
+Run the Banking and Trading application to purchase and sell stocks and to understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate XA transactions.
 
 Estimated Lab Time: *30 minutes*
 
-### About the Bank and Trading Application
+### About the Banking and Trading Application
 
-The following figure shows the Bank and Trading application, which contains several microservices.
-![Microservices in the Bank and Trading application](./images/stock_broker_xa_app.png)
+The following figure shows the Banking and Trading application, which contains several microservices.
+![Microservices in the Banking and Trading application](./images/stock_broker_xa_app.png)
 
-The Bank and Trading application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions. When a user purchases stocks using the Stock Broker service, it withdraws money from the Core Banking Service and deposits an equivalent amount of stocks by creating an XA transaction. Within the XA transaction, all actions such as purchase, sale, withdraw, and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
+The Banking and Trading application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions. When a user purchases stocks using the Stock Broker service, it withdraws money from the Core Banking Service and deposits an equivalent amount of stocks by creating an XA transaction. Within the XA transaction, all actions such as purchase, sale, withdraw, and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
 ### Objectives
 
 In this lab, you will:
 
-* Build container images for each microservice from the sample application code. After building the container images, the images are available in your Minikube container registry.
-* Update the `values.yaml` file, which contains the deployment configuration details for the Bank and Trading application.
-* Install the Bank and Trading application. While installing the application, Helm uses the configuration details you provide in the `values.yaml` file.
+* Build container images for each microservice in the Banking and Trading application. After building the container images, the images are available in your Minikube container registry.
+* Update the `values.yaml` file, which contains the deployment configuration details for the Banking and Trading application.
+* Install the Banking and Trading application. While installing the application, Helm uses the configuration details you provide in the `values.yaml` file.
 * (Optional) Deploy Kiali and Jaeger in your minikube cluster
-* Purchase stocks using the Bank and Trading application.
-* Sell stocks using the Bank and Trading application.
+* Purchase stocks using the Banking and Trading application.
+* Sell stocks using the Banking and Trading application.
 * (Optional) View service graph of the mesh and distributed traces to track requests
-* (Optional) View source code of the sample application
+* (Optional) View source code of the Banking and Trading application
 
 ### Prerequisites
 
@@ -156,19 +156,25 @@ Before you start a transaction, you must start a Minikube tunnel.
 
 ## Task 3: Provide Access Details in the values.yaml File
 
-Edit the `values.yaml` file to provide the URL to access Keycloak and other access details.
+The folder that contains the Banking and Trading application code also contains the `values.yaml` file. This is the manifest file, which contains the deployment configuration details for the Banking and Trading application. Edit the `values.yaml` file to provide the URL to access Keycloak and other access details.
 
-1. Open the `values.yaml` file, which is located in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts` folder.  Enter the values that you have noted down for the following fields under `security` in `UserBanking`.
+To provide the configuration and environment details in the `values.yaml` file:
+
+1. Open the `values.yaml` file, which is located in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts` folder.
+
+2. Enter values that you have noted down for the following fields under `security` in `UserBanking`.
 
     * `clientSecret`: Enter the value of the client secret value that you had copied in step 11 of Task 2.
     * `issuerURL`: Enter the URL that you had copied in step 14 of Task 2.
     * `logoutRedirectURL`: Enter the URL in the format, `http://$CLUSTER_IPADDR/bankapp`. Where, `CLUSTER_IPADDR` is the external IP address of the Istio ingress gateway that you have noted down in Task 1. For example, `http://192.0.2.117/bankapp`.
 
-2. Save the changes you have made to the `values.yaml` file.
+3. Under `StockBroker`, set `deploymentEnabled` to `true`. You must set this flag to true before deploying the Stock Broker service.
 
-## Task 4: Build the Container Images for the Microservices in the Bank and Trading Application
+4. Save the changes you have made to the `values.yaml` file.
 
-The code for the Bank and Trading application is available in the installation bundle in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp` folder. Build container images for each microservice in the Bank and Trading application.
+## Task 4: Build the Container Images for the Microservices in the Banking and Trading Application
+
+The code for the Banking and Trading application is available in the installation bundle in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp` folder. Build container images for each microservice in the Banking and Trading application.
 
 To build container images for each microservice in the sample:
 
@@ -227,25 +233,11 @@ To build container images for each microservice in the sample:
 
 The container images that you have created are available in your Minikube container registry.
 
-## Task 4: Update the values.yaml File
+## Task 5: Install the Banking and Trading Application
 
-The sample application files also contain the `values.yaml` file. This is the manifest file, which contains the deployment configuration details for the Bank and Trading application.
+Install the Banking and Trading application in the `otmm` namespace, where you have installed MicroTx. While installing the Banking and Trading application, Helm uses the configuration details you have provided in the `values.yaml` file.
 
-The `values.yaml` file provides details about the Docker images of each microservice, the credentials to use when pulling the Docker images, and details to access the resource managers. While installing the sample application, Helm uses the values you provide to pull the sample application images from the Minikube container registry.
-
-To provide the configuration and environment details in the `values.yaml` file:
-
-1. Open the `values.yaml` file, which is located in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts` folder, in any code editor. This file contains sample values. Replace these sample values with values that are specific to your environment.
-
-2. Under `StockBroker`, set `deploymentEnabled` to `true`. You must set this flag to true before deploying the Stock Broker service.
-
-3. Save your changes.
-
-## Task 5: Install the Bank and Trading Application
-
-Install the Bank and Trading application in the `otmm` namespace, where you have installed MicroTx. While installing the sample application, Helm uses the configuration details you provide in the values.yaml file.
-
-1. Run the following commands to install the Bank and Trading application.
+1. Run the following commands to install the Banking and Trading application.
 
     ```text
     <copy>
@@ -350,11 +342,11 @@ When you send a request to purchase stocks, the Stock Broker service debits the 
     The Keycloak login page is displayed.
 
 2. Enter the username and password to access the Keycloak instance. Enter the password that you had provided in Task 2 for the preconfigured users.
-    The Bank and Trading application's console is displayed as shown in the following figure.
-    ![Bank and Trading application's console](./images/stock_broker_app_landingpage.png)
+    The Banking and Trading application's console is displayed as shown in the following figure.
+    ![Banking and Trading application's console](./images/stock_broker_app_landingpage.png)
 
 3. Click **Trading**.
-    The Stock Trading page is displayed as shown in the following image.
+    The Stock Trading page is displayed. Identify the stock that you want to purchase and the number of units of the stock that are currently available in your account. For example, let's consider that you want to purchase shares of the Blue Semiconductor. The following image shows that you have 10 shares of Blue Semiconductor.
     ![Stock Trading page](./images/stock_broker_app_tradepage.png)
 
 4. Click **Buy Stocks**, and then click **Buy Stocks**.
@@ -371,6 +363,7 @@ When you send a request to purchase stocks, the Stock Broker service debits the 
     6. Click **Close** to close the **Purchase Stocks** dialog box.
 
 6. Click **Stocks** to view the updated list of stocks.
+   The following image shows the number of shares of Blue Semiconductor has increased by 5, the purchased amount, in your account.
     ![User Portfolio Details section](./images/updated_purchased_stocks_list.png)
 
 ## Task 8: Sell Stocks
@@ -381,11 +374,11 @@ When you send a request to sell stocks, the Stock Broker service sells the stock
     The Keycloak login page is displayed.
 
 2. Enter the username and password to access the Keycloak instance. Enter the password that you had provided in Task 2 for the preconfigured users.
-    The Bank and Trading application's console is displayed as shown in the following figure.
-    ![Bank and Trading application's console](./images/stock_broker_app_landingpage.png)
+    The Banking and Trading application's console is displayed as shown in the following figure.
+    ![Banking and Trading application's console](./images/stock_broker_app_landingpage.png)
 
 3. Click **Trading**.
-    The Stock Trading page is displayed as shown in the following image.
+    The Stock Trading page is displayed. Identify the stock that you want to sell and the number of units of the stock that are currently available in your account. For example, let's consider that you want to sell 5 shares of the Blue Semiconductor. The following image shows that you currently have 15 shares of Blue Semiconductor.
     ![User Portfolio Details section](./images/updated_purchased_stocks_list.png)
 
 4. Click **Sell Stocks**, and then click **Sell Stocks**.
@@ -394,12 +387,15 @@ When you send a request to sell stocks, the Stock Broker service sells the stock
     1. Select the stock that you want to sell.
     2. Enter the number of units of the stock that you want to sell.
     3. (Optional.) Enter remarks, if any, regarding your sale.
+       ![Sell Stock dialog box](./images/sell_stocks.png)
     4. Click **Confirmation**, and then review the details of the sale.
     5. Click **Confirm** to sell the stocks.
-       After the Stock Broker service sells the stocks and deposits the money in your account, the **Transaction ID** and **Result** are displayed on the screen.
+       After the Stock Broker service sells the stocks and deposits the money in your bank account, the **Transaction ID** and **Result** are displayed on the screen as shown in the following image.
+       ![Sell Stock dialog box](./images/sell_stocks.png)
     6. Click **Close** to close the **Sell Stocks** dialog box.
 
 6. Click **Stocks** to view the updated list of stocks.
+   The following image shows the number of shares of Blue Semiconductor has reduced by 5, the number of shares you have sold, in your account.
      ![Stock Trading page](./images/stock_broker_app_tradepage.png)
 
 ## Task 9: View Service Mesh graph and Distributed Traces (Optional)
@@ -413,12 +409,14 @@ To visualize what happens behind the scenes and how a trip booking request is pr
 4. In the **Service** drop-down list, select **istio-ingressgateway**. A list of traces is displayed where each trace represents a request.
 5. Select a trace to view it.
 
-## Task 10: View Source Code of the Sample Application (Optional)
-The source code for the following sample applications is present in the `/home/oracle/OTMM/otmm-22.3.2/samples/xa/java/bankapp` folder.
-- Stock Broker Service source code: /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker
-- Branch Banking Service source code: /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/BranchBanking
-- Core Banking Service source code: /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/CoreBanking
-- User Banking Service source code: /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/UserBanking
+## Task 10: View Source Code of the Banking and Trading Application (Optional)
+
+Source code for the following microservices is present in the `/home/oracle/OTMM/otmm-22.3.2/samples/xa/java/bankapp` folder.
+
+* Source code for the Stock Broker Service is available at `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker`.
+* Source code for the Branch Banking Service is available at `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/BranchBanking`.
+* Source code for the Core Banking Service is available at`/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/CoreBanking`.
+* Source code for the User Banking Service is available at `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/UserBanking`.
 
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
 To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
