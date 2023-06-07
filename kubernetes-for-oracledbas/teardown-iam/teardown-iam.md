@@ -5,7 +5,7 @@
 
 ## Introduction
 
-In this lab, we will clean up the Oracle Cloud Infrastructure (OCI) *Policies*, *Group*, and *Compartment* that were created during this workshop.
+In this lab, you will clean up the Oracle Cloud Infrastructure (OCI) *Policies*, *Group*, and *Compartment* that were created during this workshop.
 
 <if type="tenancy">**If you are not in the OCI Administrators group,** please have an OCI Administrator perform each of these tasks for you.</fi>
 
@@ -43,6 +43,9 @@ if [[ ! -z $POLICY_OCID ]]; then
     oci iam policy delete \
         --policy-id $POLICY_OCID \
         --force
+    if (( $? == 0)); then
+        echo "Policy Deleted"
+    fi
 fi
 </copy>
 ```
@@ -57,7 +60,7 @@ In the *Cloud Shell*, run the following commands to delete the *Group*:
 
     ```bash
     <copy>
-    GROUP_OCID=$(oci iam group list 
+    GROUP_OCID=$(oci iam group list \
         --name [](var:oci_group) | jq -r '.data[].id')
 
     echo "Group OCID: $GROUP_OCID"
@@ -80,7 +83,7 @@ In the *Cloud Shell*, run the following commands to delete the *Group*:
 
     ```bash
     <copy>
-    GROUP_OCID=$(oci iam group list 
+    GROUP_OCID=$(oci iam group list \
         --name [](var:oci_group) | jq -r '.data[].id')
 
     echo "Group OCID: $GROUP_OCID"
@@ -89,6 +92,9 @@ In the *Cloud Shell*, run the following commands to delete the *Group*:
         oci iam group delete \
             --group-id $GROUP_OCID \
             --force
+        if (( $? == 0)); then
+            echo "Group Deleted"
+        fi
     fi
     </copy>
     ```
@@ -110,6 +116,9 @@ if [[ ! -z $COMPARTMENT_OCID ]]; then
     oci iam compartment delete \
         --compartment-id $COMPARTMENT_OCID \
         --force
+    if (( $? == 0)); then
+        echo "Compartment Scheduled for Deletion"
+    fi
 fi
 </copy>
 ```

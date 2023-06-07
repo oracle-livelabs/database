@@ -70,7 +70,28 @@ oci iam group create \
 
 Assign the cloud *User* who will be carrying out the remaining Labs to the *Group* created in Task 3.  This could be yourself!
 
-1. Assign a variable with the OCID of the user performing the rest of the Live Lab workshop.
+If you are setting this up for yourself as you have Administrator access, run in Cloud Shell:
+
+```bash
+<copy>
+    GROUP_OCID=$(oci iam group list --name [](var:oci_group) | jq -r .data[].id)
+    
+    echo "Group OCID: $GROUP_OCID"
+    
+    echo "User OCID:  $OCI_CS_USER_OCID"
+    
+    oci iam group add-user --group-id $GROUP_OCID --user-id $OCI_CS_USER_OCID
+</copy>
+```
+
+Otherwise, if you are an Administrator setting this up for another user.
+
+1. Find the users OCID:
+    Replace `<username>` with the OCI username:
+
+    ```bash
+    USER_OCID=$(oci iam user list --name <username> | jq -r '.data[].id')
+    ```
 
     Replace `<username>` with the OCI username:
 

@@ -60,26 +60,7 @@ kubectl get all -n cert-manager
 
 The output will be similar to:
 
-```text
-NAME                                           READY   STATUS    RESTARTS   AGE
-pod/cert-manager-5968f94ffb-5tf4b              1/1     Running   0          7m55s
-pod/cert-manager-cainjector-7c9d98fd74-rwqdd   1/1     Running   0          7m55s
-pod/cert-manager-webhook-8bd7f6948-kr2t9       1/1     Running   0          7m55s
-
-NAME                           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
-service/cert-manager           ClusterIP   10.44.196.215   <none>        9402/TCP   7m55s
-service/cert-manager-webhook   ClusterIP   10.44.39.41     <none>        443/TCP    7m55s
-
-NAME                                      READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/cert-manager              1/1     1            1           7m55s
-deployment.apps/cert-manager-cainjector   1/1     1            1           7m55s
-deployment.apps/cert-manager-webhook      1/1     1            1           7m55s
-
-NAME                                                 DESIRED   CURRENT   READY   AGE
-replicaset.apps/cert-manager-5968f94ffb              1         1         1       7m55s
-replicaset.apps/cert-manager-cainjector-7c9d98fd74   1         1         1       7m55s
-replicaset.apps/cert-manager-webhook-8bd7f6948       1         1         1       7m55s
-```
+![kubectl get all -n cert-manager](images/kubectl_cert_manager.png "kubectl get all -n cert-manager")
 
 ## Task 2: Install Oracle Operator for Kubernetes
 
@@ -101,22 +82,7 @@ kubectl get all -n oracle-database-operator-system
 
 The output will be similar to:
 
-```text
-NAME                                                               READY   STATUS    RESTARTS   AGE
-pod/oracle-database-operator-controller-manager-64678cdc97-6xxfb   1/1     Running   0          8m36s
-pod/oracle-database-operator-controller-manager-64678cdc97-kqcgl   1/1     Running   0          8m36s
-pod/oracle-database-operator-controller-manager-64678cdc97-pjl94   1/1     Running   0          8m36s
-
-NAME                                                                  TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
-service/oracle-database-operator-controller-manager-metrics-service   ClusterIP   10.44.239.33   <none>        8443/TCP   8m36s
-service/oracle-database-operator-webhook-service                      ClusterIP   10.44.15.60    <none>        443/TCP    8m36s
-
-NAME                                                          READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/oracle-database-operator-controller-manager   3/3     3            3           8m36s
-
-NAME                                                                     DESIRED   CURRENT   READY   AGE
-replicaset.apps/oracle-database-operator-controller-manager-64678cdc97   3         3         3       8m36s
-```
+![kubectl get all -n oracle-database-operator-system](images/kubectl_oraoper.png "kubectl get all -n oracle-database-operator-system")
 
 ## Learn More
 

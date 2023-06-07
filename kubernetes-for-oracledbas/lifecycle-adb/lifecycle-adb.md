@@ -1,10 +1,13 @@
 # Lifecycle Operations - Oracle Autonomous Database (ADB)
 
+"Life is really simple, but we insist on making it complicated."
+\- Confucius
+
 ## Introduction
 
 In this lab, you use the OraOperator to perform Lifecycle operations against an Oracle Autonomous Database (ADB).
 
-*Estimated Lab Time:* 10 minutes
+*Estimated Lab Time:* 15 minutes
 
 Watch the video below for a quick walk through of the lab.
 [](youtube:zNKxJjkq0Pw)
@@ -21,158 +24,113 @@ This lab assumes you have:
 * A [Running and Healthy OraOperator](?lab=deploy-oraoperator)
 * The [OraOperator bound to an ADB](?lab=bind-adb)
 
-## Task 1: Retrieve the existing ADB OCID
+## Task 1: Create Manifest for new ADB
 
-During the [Deploy Workshop Stack Lab](?lab=setup-stack), a new Autonomous Database was provisioned in Oracle Cloud Infrastructure for you.
+Use the OraOperator to provision a new Autonomous Database by creating a manifest file that will:
 
-Retrieve the OCID for the Autonomous Database, by running the following in Cloud Shell:
-
-```bash
-<copy>
-# Get the Compartment OCID
-COMPARTMENT_OCID=$(oci iam compartment list \
-  --name [](var:oci_compartment) | 
-  jq -r '.data[].id')
-
-# Get the ADB OCID from the Compartment
-ADB_OCID=$(oci db autonomous-database list \
-  --compartment-id $COMPARTMENT_OCID | 
-  jq -r '.data[].id')
-
-echo "ADB OCID: $ADB_OCID"
-</copy>
-```
-
-## Task 2: Set Password/Generate Wallet
-
-The password currently assigned to the ADB was randomised and is unknown, so you will need to set it for connectivity.  As calls to the OraOperator controllers are declarative you will be instructing the Controller to modify the ADB to the newly defined, desired state.  In regards to the ADMIN password, it will currently not be what you will define in the K8s Secret, and therefor it will be modified accordingly.
-
-Additionally, the ADB was provisioned with mTLS, so you will need a Wallet to connect to the ADB securely.  You'll create a Secret for the Wallet password and the OraOperator will download the wallet into another Secret.
-
-In Cloud Shell, assign the `ADB_PWD` variable a password (for Workshop purposes only).  You can choose any password so long as it complies with the [Password Complexity](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/manage-users-create.html#GUID-72DFAF2A-C4C3-4FAC-A75B-846CC6EDBA3F) rules.
-
-For example:
+* Define a Secret to hold the ADMIN password
+* Provision a new ADB
 
 ```bash
 <copy>
-ADB_PWD=$(echo "K8s4DBAs_$(date +%H%S%M)")
-</copy>
-```
-
-Start a manifest file to create a Secret and apply it to the exiting ADB:
-
-```bash
-<copy>
-cat > adb_modify.yaml << EOF
+cat > adb_provision.yaml << EOF
 ---
 apiVersion: v1
 kind: Secret
 type: Opaque
 metadata:
-  name: adb-admin-password
+  name: adb-devops-admin-password
 stringData:
-  adb-admin-password: $ADB_PWD
----
-apiVersion: v1
-kind: Secret
-type: Opaque
-metadata:
-  name: adb-instance-wallet-password
-stringData:
-  adb-instance-wallet-password: $ADB_PWD
+  adb-devops-admin-password: Th1s_W1ll_N0t_l1v3
 ---
 apiVersion: database.oracle.com/v1alpha1
 kind: AutonomousDatabase
 metadata:
-  name: adb-existing
+  name: adb-devops
 spec:
+  hardLink: true
   details:
-    autonomousDatabaseOCID: $ADB_OCID
+    compartmentOCID: $COMPARTMENT_OCID
+    dbName: DEVOPSDB
+    displayName: DEVOPSDB
+    dbVersion: 19c
+    dbWorkload: OLTP
+    cpuCoreCount: 1
+    dataStorageSizeInTBs: 1
     adminPassword:
       k8sSecret:
-        name: adb-admin-password
-    wallet:
-      name: adb-tns-admin
-      password:
-        k8sSecret:
-          name: adb-instance-wallet-password
+        name:  adb-devops-admin-password
 EOF
 </copy>
 ```
 
-Take a quick look at the syntax:  
+The above YAML invokes the K8s built-in `v1` API to define an `Opaque` `Secret` resource called `adb-devops-admin-password` with the value of `Th1s_W1ll_N0t_l1v3`.  As the `Secret` doesn't currently exist, it will be created and K8s will store the base64 encoded value of the password.
 
-You are defining two resources of `kind: Secret` of `type: Opaque`.  The first is named: `adb-admin-password` and the second is named: `adb-instance-wallet-password`.  The last part of the manifest **redefines** the `adb-existing` resource, setting the adminPassword and wallet.  Under the wallet section, you are specifying the name of the `Secret`, `adb-tns-admin` that will be defined to to store the wallet.
+The YAML will also access the OraOperators' custom controller API `database.oracle.com/v1alpha1` to define an `AutonomousDatabase` (custom) resource in the `$COMPARTMENT_OCID` (substituted by the real value stored in *Task 2*) with the self-explanatory properties in the `spec.details` section.
 
-Apply the manifest in Cloud Shell:
+**Important:** the `spec.hardLink: true` field indicates that if you delete this `AutonomousDatabase` resource from the K8s cluster, also delete the ADB associated with it.
+> Good for DevOps CI/CD... Bad for Production!
+
+If it were set to `false` then deleting the resource from K8s would *NOT* delete ADB itself.
+
+## Task 2: Apply the new ADB Manifest
+
+Define the new ADB in the `adb` namespace:
 
 ```bash
 <copy>
-kubectl apply -f adb_modify.yaml -n adb
+kubectl apply -f adb_provision.yaml -n adb
 </copy>
 ```
 
 Output:
 
 ```text
-secret/adb-admin-password created
-secret/adb-instance-wallet-password created
-autonomousdatabase.database.oracle.com/adb-existing configured
+secret/adb-new-admin-password created
+autonomousdatabase.database.oracle.com/adb-new created
 ```
 
-Get the Secrets in the ADB namespace (`kubectl get secrets -n <namespace>`):
+## Task 3: Verify new ADB Provisioning
+
+In the OCI Console, navigate to Oracle Database -> Autonomous Database.  
+
+![Navigate to ADB](images/adb_navigation.png "Navigate to ADB")
+
+Ensure you are in the K8S4DBAS Compartment and you will see the `DEVOPSDB` being provisioned.
+
+![ADB Provisioning](images/adb_provisioning.png "ADB Provisioning")
+
+## Task 4: Delete the Provisioned ADB
+
+The ADB provisioned by the OraOperator is great for DevOps, after which it should be deleted.  The physical ADB is deleted because you specified a `hardLink` between the K8s resource and the database.  There is no reason to keep its ADMIN secret around, so delete that as well:
 
 ```bash
 <copy>
-kubectl get secrets -n adb
+kubectl delete adb adb-devops -n adb
+kubectl delete secret adb-devops-admin-password -n adb
 </copy>
 ```
 
 Output:
 
 ```text
-NAME                           TYPE     DATA   AGE
-adb-admin-password             Opaque   1      13m
-adb-instance-wallet-password   Opaque   1      13m
-adb-tns-admin                  Opaque   9      13m
+autonomousdatabase.database.oracle.com "adb-devops" deleted
+secret "adb-devops-admin-password" deleted
 ```
 
-You created the first two and instructed OraOperator to create the third `adb-tns-admin`.  Take a closer look at the **adb-tns-admin** secret by describing it (`kubectl describe secrets <secret_name> -n <namespace>`):
+## Task 5: Verify ADB Termination
 
-```bash
-<copy>
-kubectl describe secrets adb-tns-admin -n adb
-</copy>
-```
+In the OCI Console, navigate to Oracle Database -> Autonomous Database.  
 
-Output:
+![Navigate to ADB](images/adb_navigation.png "Navigate to ADB")
 
-```text
-Name:         adb-tns-admin
-Namespace:    adb
-Labels:       app=adb
-Annotations:  <none>
+Ensure you are in the K8S4DBAS Compartment and you will see the `DEVOPSDB` being terminated.
 
-Type:  Opaque
+![ADB Terminating](images/adb_terminating.png "ADB Terminating")
 
-Data
-====
-ojdbc.properties:  691 bytes
-sqlnet.ora:        114 bytes
-cwallet.sso:       5349 bytes
-ewallet.p12:       5304 bytes
-ewallet.pem:       5710 bytes
-keystore.jks:      3191 bytes
-tnsnames.ora:      1310 bytes
-truststore.jks:    2056 bytes
-README:            3037 bytes
-```
+## Task 6: Database Connectivity
 
-You'll see what equates to a `TNS_ADMIN` directory, and in fact, this Secret will be used by applications for just that purpose.
-
-## Task 3: Database Connectivity
-
-As you are working with an ADB, there are numerous ways to download the Wallet to access the Database using mTLS.  One way is by extracting the K8s Wallet secret that was created for you by the OraOperator.
+As you are working with an ADB, there are numerous ways to download the Wallet to access the Database using mTLS.  One way is by extracting the K8s Wallet secret that was just created for you by the OraOperator.
 
 In Cloud Shell:
 
@@ -181,18 +139,24 @@ In Cloud Shell:
 export ORACLE_HOME=$(pwd)
 export TNS_ADMIN=$ORACLE_HOME/network/admin
 mkdir -p $ORACLE_HOME/network/admin
+
 # Extract the tnsnames.ora secret
-kubectl get secret/adb-tns-admin -n adb --template="{{ index .data \"tnsnames.ora\" | base64decode }}" > $ORACLE_HOME/network/admin/tnsnames.ora
+kubectl get secret/adb-tns-admin -n adb \
+  --template="{{ index .data \"tnsnames.ora\" | base64decode }}" > $ORACLE_HOME/network/admin/tnsnames.ora
+
 # Extract the sqlnet.ora secret
-kubectl get secret/adb-tns-admin -n adb --template="{{ index .data \"sqlnet.ora\" | base64decode }}" > $ORACLE_HOME/network/admin/sqlnet.ora
+kubectl get secret/adb-tns-admin -n adb \
+  --template="{{ index .data \"sqlnet.ora\" | base64decode }}" > $ORACLE_HOME/network/admin/sqlnet.ora
+
 # Extract the Wallet for mTLS
-kubectl get secret/adb-tns-admin -n adb --template="{{ index .data \"cwallet.sso\" | base64decode }}" > $ORACLE_HOME/network/admin/cwallet.sso
+kubectl get secret/adb-tns-admin -n adb \
+  --template="{{ index .data \"cwallet.sso\" | base64decode }}" > $ORACLE_HOME/network/admin/cwallet.sso
 </copy>
 ```
 
 Feel free to examine the contents of the files created by extracting the different secrets (e.g `cat $ORACLE_HOME/network/admin/tnsnames.ora`)
 
-In `Task 2` you set a new password for the ADB, if you have forgotten it, you can retrieve it from the secret:
+In a previous lab you set a new password for the ADB, if you have forgotten it, you can retrieve it from the secret:
 
 ```bash
 <copy>
@@ -200,7 +164,7 @@ kubectl get secrets/adb-admin-password -n adb --template="{{index .data \"adb-ad
 <copy>
 ```
 
-Now connect to the ADB via SQL*Plus, using the ADMIN password from the secret:
+Now connect to the ADB via SQL*Plus, using the ADMIN password from the secret; extract the name of the database from the resource for the Service Name:
 
 ```bash
 <copy>
@@ -212,7 +176,7 @@ sqlplus admin@$SERVICE_NAME
 
 You should get the all familiar `SQL>` prompt.  `EXIT` when ready.
 
-## Task 4: Scale the OCPU and Storage
+## Task 7: Scale the OCPU and Storage
 
 You can again, **redefine** the ADB resource to adjust its OCPU and Storage.  While you could create a new manifest file and apply it, try a different approach and use the `kubectl patch` functionality to update the **AutonomousDatabase** resource in place.  
 
@@ -250,14 +214,14 @@ In the vi editor:
 
 1. Move the cursor over the `2` value for cpuCoreCount and type `x`
 2. Type `i` and `<space>` `1`, hit the `esc` key
-3. Repeat the 1 and 2 for dataStorageSizeInTBs
+3. Repeat steps 1 and 2 for dataStorageSizeInTBs
 4. Type `:wq`
 
 ![Edit ADB](images/adb_edit.png "Edit ADB")
 
 In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB back in a "Scaling In Progress" state, decreasing the OCPU and Storage.
 
-## Task 5: Scheduled Stop and Start
+## Task 8: Scheduled Stop and Start
 
 You can execute any of the methods you used to scale the ADB to also change the ADBs `lifecycleState` (AVAILABLE or STOPPED) manually.  However, you can also take advantage of another built-in K8s resource, the `CronJob`, to schedule a a change in the `lifecycleState`.  
 
@@ -310,14 +274,11 @@ kubectl apply -f adb_role.yaml -n adb
 
 Output:
 
-```text
-role.rbac.authorization.k8s.io/autonomousdatabases-reader created
-rolebinding.rbac.authorization.k8s.io/autonomousdatabases-reader-binding created
-```
+![ADB RBAC](images/adb_rbac.png "ADB RBAC")
 
 ### Schedule a CronJob
 
-The below manifest will create two CronJob resources to stop the ADB at 1800 everyday and start it at 0800 everyday.  Modify the `adb-stop` schedule to be 1-2 minute from now so that you can see it work (hint: type `date` in Cloud Shell to ensure you are using the correct timezone):
+The below manifest will create two CronJob resources to stop the ADB at 1800 everyday and start it at 0800 everyday:
 
 ```bash
 <copy>
@@ -394,10 +355,7 @@ kubectl apply -f adb_cron.yaml -n adb
 
 Output:
 
-```text
-cronjob.batch/adb-stop created
-cronjob.batch/adb-start created
-```
+![ADB Cron](images/adb_cron.png "ADB Cron")
 
 Take a quick look at the cronjobs in the `adb` namespace:
 
@@ -409,10 +367,20 @@ kubectl get cronjob -n adb
 
 Output:
 
-```text
-NAME        SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
-adb-start   00 8 * * *    False     0        <none>          32s
-adb-stop    00 18 * * *   False     0        <none>          82m
+![ADB CronJob](images/adb_cronjob.png "ADB CronJob")
+
+Reschedule the `adb-stop` CronJob to run 1 minute from now and verify the update:
+
+```bash
+<copy>
+NEW_SCHED="$(date -d '1 mins' +'%M %H') * * *"
+
+kubectl patch CronJob adb-stop -n adb \
+  -p '{"spec":{"schedule": "'"${NEW_SCHED}"'" }}' \
+  --type=merge
+
+kubectl get cronjob -n adb
+<copy>
 ```
 
 This next command will watch the CronJobs and output when one runs. If you scheduled the job to run 1 minute from now, wait for that 1 minute to elapse.
@@ -425,13 +393,7 @@ kubectl get jobs --watch -n adb
 
 Output after 1 minute:
 
-```text
-NAME                COMPLETIONS   DURATION   AGE
-adb-stop-28098047   0/1                      0s
-adb-stop-28098047   0/1           0s         0s
-adb-stop-28098047   0/1           5s         5s
-adb-stop-28098047   1/1           5s         5s
-```
+![ADB CronJob Stop](images/adb_cron_stop.png "ADB CronJob Stop")
 
 In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB in a "Stopping" state.
 

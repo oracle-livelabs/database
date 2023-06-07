@@ -261,6 +261,12 @@ Here are some advantages and disadvantages to keep in mind:
 
 * **Service Coordination**: In scenarios where multiple services need to work together to accomplish a task, coordinating and managing the flow of data and transactions across services can be complex and require careful design.
 
+## Task 5: Check the status of the Stack Deployment
+
+The Stack should now be available for you to use, check that it has Succeeded.
+
+![Job Details](images/job_details.png "Job Details")
+
 ## Learn More
 
 * [Oracle Converged Database](https://blogs.oracle.com/database/post/what-is-a-converged-database)

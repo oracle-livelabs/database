@@ -24,7 +24,17 @@ This lab assumes you have:
 
 ## Kubeconfig File
 
-The Kubernetes command-line tool, `kubectl`, relies on the Kubeconfig file for logging in and working with Kubernetes clusters.  It holds important details like cluster info, login methods, and user credentials.
+The Kubernetes command-line tool, `kubectl`, relies on the "Kubeconfig file" for logging in and working with Kubernetes clusters.  The kubeconfig file, which is not named kubeconfig but rather `config`, holds important details like cluster info, login methods, and user credentials.  It is usually found in `$HOME/.kube/config`, but can be placed anywhere with the `KUBECONFIG` environment file pointing to its directory.
+
+With kubeconfig files, you can organize your clusters, users, and namespaces. You can also define contexts to quickly and easily switch between clusters and namespaces.
+
+Suppose you have a development and test cluster.  In the development cluster you work in your own namespace and in the test cluster all DBAs share the same namespace.  Additionally, the development cluster permits username/password authentication, while in the test cluster, you must use a certificate.
+
+![Kubeconfig Context](images/kubeconfig_context.png "Kubeconfig Context")
+
+All this information can be stored in a single kubeconfig file and you can define a `context` to group the cluster, user AuthN, and namespace together.  Switching between clusters would then be a matter of changing the context, similar to: `kubectl config use-context development` to use the development cluster.
+
+The Production cluster information maybe stored in an entirely different kubeconfig file, using it would be a matter of setting the `KUBECONFIG` environment variable to its location.
 
 ## Task 1: Create the Kubeconfig file
 
@@ -50,7 +60,9 @@ kubectl get all -A
 </copy>
 ```
 
-The command should return a table like structure of pods and namespaces.  If an error is returned, ensure the K8s cluster is up and running and that the `kubeconfig` file was properly generated in *Task 1*.
+The command should return all the resources in the K8s cluster.  If an error is returned, ensure the K8s cluster is up and running and that the `kubeconfig` file was properly generated in *Task 1*.
+
+![kubectl get all -A](images/kubectl_get_all.png "kubectl get all -A")
 
 ## Learn More
 

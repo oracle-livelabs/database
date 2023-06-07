@@ -7,7 +7,7 @@
 
 In this lab, you will provision and configure the cloud resources required for the Workshop using *Oracle Resource Manager (ORM)*.  ORM will stand-up the Infrastructure using *Terraform* and could also perform some basic configuration using *Ansible*.  Don't panic, how all this works will be explored... while it is working.
 
-*Estimated Lab Time:* 20 minutes
+*Estimated Lab Time:* 10 minutes
 
 Watch the video below for a quick walk through of the lab.
 [](youtube:zNKxJjkq0Pw)
@@ -57,9 +57,11 @@ For example, the IaC in this particular stack is used in two different OCI Marke
 
 but it has been slimmed down, via variables, specifically for this workshop.  This demonstrates how easy it is to modify infrastructure configurations, as needed, without requiring any changes to the underlying code.
 
-### We are not going to change anything on this page and click "Next"
+Tick the "Show Database Options?" to see what can be customised, but please do not change any values.
 
 ![Configuration Variables](images/configuration_variables.png "Configuration Variables")
+
+### Please do not change anything on this page, click "Next"
 
 ## Task 4: Apply! the Stack
 
@@ -74,35 +76,40 @@ The Infrastructure deployment and configuration will take approximately **15 min
 
 ## Task 5: Learn about Infrastructure as Code (IaC) using Terraform
 
-Terraform is a tool for managing infrastructure as code (IaC). IaC is the practice of writing code to describe the infrastructure of your application or service, rather than manually configuring it using a graphical user interface (GUI) or command-line interface (CLI). By defining your infrastructure as code, you can version control your infrastructure configurations, automate deployments, and make your infrastructure more reliable, scalable, and maintainable.
+Terraform is a tool for managing infrastructure as code (IaC) that can be version-controlled.  Take a look at the IaC that creates the Autonomous Oracle Database (ADB) for this Workshop:
 
-Terraform works by defining your infrastructure using a declarative configuration language. You write code that describes the resources you want to create, such as virtual machines, networks, and storage, and how they should be configured, such as the size, location, and permissions. Terraform then uses this code to create and manage your infrastructure, ensuring that it matches the desired state specified in the configuration.
+![ADB Terraform](images/adb_terraform.png "ADB Terraform")
 
-By using Terraform, you can:
+The ADB is defined, in 16 lines, using the `oci_database_autonomous_database` resource from the [Oracle provided Terraform OCI provider](https://registry.terraform.io/providers/oracle/oci/latest/docs).  Most the arguments are set by variables, allowing you to customise the ADB without having to rewrite the code which describes it.  When you **Apply** the IaC, it calls underlying APIs to provision the resource as it is defined, and records it in a "State" file.
 
-* Manage infrastructure at scale: With Terraform, you can manage thousands of resources across multiple environments with a single, consistent workflow.
-* Automate deployments: Terraform allows you to automate the creation, updating, and deletion of infrastructure, making it easier to deploy and manage your applications.
-* Increase collaboration: By using a version-controlled infrastructure configuration, you can collaborate more easily with other developers and stakeholders, and track changes over time.
+For the DBA this is invaluable as it means you can define the ADB once, use variables where permitted and constants where mandated for your organisations standards.  Those 16 lines of IaC can then be used over and over to provision, and tear-down, hundreds of ADBs.  As Terraform is declarative, that IaC can also be used to modify existing ADBs that were created by by it, by comparing the configuration in the "State" file with the real-world resources.
+
+Take the `cpu_core_count = var.adb_cpu_core_count` argument for example.  
+
+During the ORM interview phase, when you ticked the "Show Database Options?" the `Autonomous Database CPU Core Count` was set to `1`.  That value was assigned to `var.adb_cpu_core_count` during provisioning.
+
+After the Stack has provisioned, you could "Edit" the Stack, change the database's CPU Core Count to `2`, Apply, and your ADB will be modified accordingly.  Alternatively, if the ADB was modified outside of the IaC (someone has increased the CPU to `3`), it has "drifted" from the configuration stored in the "State".  Running an **Apply** will reconcile that drift and modify the ADB back to desired state as defined in the IaC.
+
+Other benefits of IaC:
+
+* **Manage infrastructure at scale:** you can manage thousands of resources across multiple environments with a single, consistent workflow.
+* **Increase collaboration:** By using a version-controlled infrastructure configuration, you can collaborate more easily with other developers and stakeholders, and track changes to your infrastructure over time.
 
 ## Task 6: Learn about Configuration Management using Ansible
 
-Ansible is an open-source automation tool used for configuration management, application deployment, and task automation. It is designed to be simple and easy to use, and it uses a declarative language to describe the desired state of a system, allowing users to focus on the "what" instead of the "how".
+Ansible is an open-source automation tool used in this Stack for Configuration Management.  It is designed to be simple and easy to use, and much like Terraform, uses a declarative language to describe the desired state of a system, allowing you to focus on the "what" instead of the "how".
 
-Ansible works by connecting to nodes (servers, virtual machines, or containers) and running "tasks" on them. Tasks are defined in playbooks, which are YAML files that specify the actions to be taken on each node. Playbooks can contain a series of tasks, and they can also include conditionals, loops, and error handling.
+All of what you do manually in this Workshop can be automated by Ansible as part of the Stack deployment, but only the Configuration of an "Ingress Controller" has been left enabled.  You will see the "Ingress Controller" later in the Workshop when deploying your Microservice Application.
 
-One of the key benefits of Ansible is its agent-less architecture. Unlike other automation tools that require agents to be installed on each node, Ansible uses SSH or WinRM to connect to nodes and run tasks directly on them. This makes it easier to manage and secure the nodes, as there are no additional components that need to be installed.
+> All of what you do manually in this Workshop can be automated by Ansible
 
-Ansible also has a feature called "playbooks," which allow you to define a series of tasks to be executed on a set of hosts. Playbooks are written in YAML, making them easy to read and write.
+In the Workshop Stack, Terraform will write a number of variable and inventory files (2) describing the Infrastructure that it has provisioned.  It will then call Ansible (3) to run Playbooks (a series of tasks that include conditionals, loops, and error handling) against the infrastructure definition (4) to configure it (5).  
 
-With Ansible, you can also use "roles" to organize your tasks into reusable components. A role is a collection of tasks, templates, files, and variables that can be shared across playbooks. This makes it easy to manage complex configurations and repeatable tasks.
+![Terraform and Ansible](images/terraform_ansible.png "Terraform and Ansible")
 
-Finally, Ansible has a robust community and ecosystem, with many third-party modules available for common tasks like interacting with cloud providers, databases, and other services.
+While Ansible can be used to configure any type of Infrastructure, it is limited to the Kubernetes cluster in this Workshop.
 
-Overall, Ansible is a powerful tool for automating IT tasks and managing infrastructure as code, and it's relatively easy to get started with even if you have no prior experience with it.
-
-## Task 7: Check the status of the Stack Deployment
-
-![Job Details](images/job_details.png "Job Details")
+It is important to note, Ansible has a robust community and ecosystem, with many third-party modules available for common tasks like interacting with cloud providers, databases, and other services.  Oracle has released an [OCI Ansible Collection](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansible.htm) to support the automation of cloud configurations and the orchestration of complex operational processes.
 
 ## Learn More
 

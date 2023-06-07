@@ -7,7 +7,7 @@
 
 In this lab, you will provision a new Oracle Autonomous Database (ADB) and bind to an existing one using the OraOperator.
 
-*Estimated Lab Time:* 5 minutes
+*Estimated Lab Time:* 10 minutes
 
 Watch the video below for a quick walk through of the lab.
 [](youtube:zNKxJjkq0Pw)
@@ -70,7 +70,7 @@ namespace/adb created
 * For production clusters, avoid using the `default` namespace. Instead, make other namespaces and use those.
 * Avoid creating namespaces with the prefix `kube-`, it is reserved for K8s system namespaces.
 
-## Task 1: Retrieve the existing ADB OCID
+## Task 2: Retrieve the existing ADB OCID
 
 During the [Deploy Workshop Stack Lab](?lab=setup-stack), a new Autonomous Database was provisioned in Oracle Cloud Infrastructure for you.
 
@@ -85,6 +85,7 @@ COMPARTMENT_OCID=$(oci iam compartment list \
 
 # Get the ADB OCID from the Compartment
 ADB_OCID=$(oci db autonomous-database list \
+  --lifecycle-state AVAILABLE \
   --compartment-id $COMPARTMENT_OCID | 
   jq -r '.data[].id')
 
@@ -92,85 +93,9 @@ echo "ADB OCID: $ADB_OCID"
 </copy>
 ```
 
-The above commands will also store the Compartment OCID which will be used to provision a new ADB from K8s.
+## Task 3: Create a manifest to Bind
 
-## Task 3: Define a new ADB
-
-Use the OraOperator to provision a new Autonomous Database by creating a manifest file that will:
-
-* Define a Secret to hold the ADMIN password
-* Provision a new ADB
-
-```bash
-<copy>
-cat > adb_provision.yaml << EOF
----
-apiVersion: v1
-kind: Secret
-type: Opaque
-metadata:
-  name: adb-devops-admin-password
-stringData:
-  adb-new-admin-password: Th1s_W1ll_N0t_l1v3
----
-apiVersion: database.oracle.com/v1alpha1
-kind: AutonomousDatabase
-metadata:
-  name: adb-devops
-spec:
-  hardLink: true
-  details:
-    compartmentOCID: $COMPARTMENT_OCID
-    dbName: DEVOPSDB
-    displayName: DEVOPSDB
-    dbVersion: 19c
-    dbWorkload: OLTP
-    cpuCoreCount: 1
-    dataStorageSizeInTBs: 1
-    adminPassword:
-      k8sSecret:
-        name:  adb-devops-admin-password
-EOF
-</copy>
-```
-
-The above YAML invokes the K8s built-in `v1` API to define an `Opaque` `Secret` resource called `adb-devops-admin-password` with the value of `Th1s_W1ll_N0t_l1v3`.  As the `Secret` doen't currently exist, it will be created and K8s will store the base64 encoded value of the password.
-
-The YAML will also access the OraOperators' custom controller API `database.oracle.com/v1alpha1` to define an `AutonomousDatabase` (custom) resource in the `$COMPARTMENT_OCID` (substituted by the real value stored in *Task 2*) with the self-explanatory properties in the `spec.details` section.
-
-**Important:** the `spec.hardLink: true` field indicates that if you delete this `AutonomousDatabase` resource from the K8s cluster, also delete the ADB associated with it.
-> Good for DevOps CI/CD... Bad for Production!
-
-If it were set to `false` then deleting the resource from K8s would *NOT* delete ADB itself.
-
-Define the new ADB in the `adb` namespace:
-
-```bash
-<copy>
-kubectl apply -f adb_provision.yaml -n adb
-</copy>
-```
-
-Output:
-
-```text
-secret/adb-new-admin-password created
-autonomousdatabase.database.oracle.com/adb-new created
-```
-
-## Task 4: Verify ADB Provisioning
-
-In the OCI Console, navigate to Oracle Database -> Autonomous Database.  
-
-![Navigate to ADB](images/adb_navigation.png "Navigate to ADB")
-
-Ensure you are in the K8S4DBAS Compartment and you will see the `DEVOPSDB` being provisioned.
-
-![ADB Provisioning](images/adb_provisioning.png "ADB Provisioning")
-
-## Task 3: Bind to an existing ADB
-
-Create a manifest file to define a resource for an existing ADB, leveraging the **AutonomousDatabase** Custom Resource:
+Create a manifest file to define the resource of an existing ADB, leveraging the **AutonomousDatabase** Custom Resource:
 
 ```bash
 <copy>
@@ -199,6 +124,8 @@ It will bind to an existing ADB with `autonomousDatabaseOCID` equal to `$ADB_OCI
 
 If it were set to `true` then deleting the resource from K8s *WOULD* delete ADB itself.
 
+## Task 4: Apply the existing ADB Manifest
+
 Define the **AutonomousDatabase** Custom Resource in K8s by applying the manifest file to the `adb` namespace:
 
 ```bash
@@ -213,9 +140,9 @@ Output:
 autonomousdatabase.database.oracle.com/adb-existing created
 ```
 
-## Task 4: Review the Existing ADB Custom Resource
+## Task 5: Review the Existing ADB Custom Resource
 
-The bind manifest create a new *AutonomousDatabase* resource called *adb-existing* in the *adb* namespace.
+The bind manifest created a new *AutonomousDatabase* resource called *adb-existing* in the *adb* namespace.
 
 To retrieve its details run (`kubectl get <resource> <resource_name> -n <namespace>`):
 
@@ -227,48 +154,124 @@ kubectl get AutonomousDatabase adb-existing -n adb
 
 With the exception of the **DISPLAY NAME** and **DB NAME**, you should see similar output:
 
-```text
-NAME   DISPLAY NAME   DB NAME      STATE       DEDICATED   OCPUS   
-adb    STINGRAYDB     STINGRAYDB   AVAILABLE   false       1    
-```
+![kubectl get AutonomousDatabase adb-existing -n adb](images/kubectl_get_adb.png "kubectl get AutonomousDatabase adb-existing -n adb")
 
-To get more details, lets describe the resource (`kubectl describe <resource_type> <resource_name> -n <namespace>`):
+To get more details, lets describe the resource (`kubectl describe <resource_type> <resource_name> -n <namespace>`).  Use the resource_type alias `adb` for `AutonomousDatabase`:
 
 ```bash
 <copy>
-kubectl describe AutonomousDatabase adb-existing -n adb
+kubectl describe adb adb-existing -n adb
 </copy>
 ```
 
-A lot of interesting information will be displayed including CPU and Storage settings, Connection Strings, and its Lifecycle State (AVAILABLE).
+A lot of interesting information will be displayed including CPU and Storage settings, Connection Strings, and its Lifecycle State (AVAILABLE).  You will modify these fields later to manage the ADB via K8s.
 
-## Task 5: Delete the Provisioned ADB
+## Task 6: Generate Password/Generate Wallet Manifest
 
-The ADB provisioned by the OraOperator is great for DevOps, after which it should be deleted.  The physical ADB is deleted because you specified a `hardLink` between the K8s resource and the database.
+The password currently assigned to the ADB was randomised and is unknown, so you will need to set it for connectivity.  As calls to the OraOperator controllers are declarative you will be instructing the Controller to modify the ADB to the newly defined, desired state.  In regards to the ADMIN password, it will currently not be what you will define in the K8s Secret, and therefor it will be modified accordingly.
+
+Additionally, the ADB was provisioned with mTLS, so you will need a Wallet to connect to the ADB securely.  You'll create a Secret for the Wallet password and the OraOperator will download the wallet into another Secret.
+
+In Cloud Shell, assign the `ADB_PWD` variable a password (for Workshop purposes only).  You can choose any password so long as it complies with the [Password Complexity](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/manage-users-create.html#GUID-72DFAF2A-C4C3-4FAC-A75B-846CC6EDBA3F) rules.
+
+For example:
 
 ```bash
 <copy>
-kubectl delete adb adb-devops -n adb
-kubectl delete secret adb-devops-admin-password -n adb
+ADB_PWD=$(echo "K8s4DBAs_$(date +%H%S%M)")
+</copy>
+```
+
+Start a manifest file to create a Secret and apply it to the exiting ADB:
+
+```bash
+<copy>
+cat > adb_modify.yaml << EOF
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: adb-admin-password
+stringData:
+  adb-admin-password: $ADB_PWD
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: adb-instance-wallet-password
+stringData:
+  adb-instance-wallet-password: $ADB_PWD
+---
+apiVersion: database.oracle.com/v1alpha1
+kind: AutonomousDatabase
+metadata:
+  name: adb-existing
+spec:
+  details:
+    autonomousDatabaseOCID: $ADB_OCID
+    adminPassword:
+      k8sSecret:
+        name: adb-admin-password
+    wallet:
+      name: adb-tns-admin
+      password:
+        k8sSecret:
+          name: adb-instance-wallet-password
+EOF
+</copy>
+```
+
+Take a quick look at the syntax:  
+
+You are defining two resources of `kind: Secret` of `type: Opaque`.  The first is named: `adb-admin-password` and the second is named: `adb-instance-wallet-password`.  The last part of the manifest **redefines** the `adb-existing` resource, setting the adminPassword and wallet.  Under the wallet section, you are specifying the name of the `Secret`, `adb-tns-admin` that will be defined to to store the wallet.
+
+## Task 7: Apply Manifest
+
+Apply the manifest in Cloud Shell:
+
+```bash
+<copy>
+kubectl apply -f adb_modify.yaml -n adb
 </copy>
 ```
 
 Output:
 
 ```text
-autonomousdatabase.database.oracle.com "adb-devops" deleted
-secret "adb-devops-admin-password" deleted
+secret/adb-admin-password created
+secret/adb-instance-wallet-password created
+autonomousdatabase.database.oracle.com/adb-existing configured
 ```
 
-## Task 6: Verify ADB Termination
+## Task 8: Review ADB Secrets
 
-In the OCI Console, navigate to Oracle Database -> Autonomous Database.  
+Get the Secrets in the ADB namespace (`kubectl get secrets -n <namespace>`):
 
-![Navigate to ADB](images/adb_navigation.png "Navigate to ADB")
+```bash
+<copy>
+kubectl get secrets -n adb
+</copy>
+```
 
-Ensure you are in the K8S4DBAS Compartment and you will see the `DEVOPSDB` being terminated.
+Output:
 
-![ADB Terminating](images/adb_terminating.png "ADB Terminating")
+![ADB Secrets](images/adb_secrets.png "ADB Secrets")
+
+You created the first two and instructed OraOperator to create the third `adb-tns-admin`.  Take a closer look at the **adb-tns-admin** secret by describing it (`kubectl describe secrets <secret_name> -n <namespace>`):
+
+```bash
+<copy>
+kubectl describe secrets adb-tns-admin -n adb
+</copy>
+```
+
+Output:
+
+![kubectl describe secrets adb-tns-admin -n adb](images/adb_tns_admin.png "kubectl describe secrets adb-tns-admin -n adb")
+
+You'll see what equates to a `TNS_ADMIN` directory, and in fact, this Secret will be used by applications for just that purpose.
 
 ## Learn More
 
