@@ -45,6 +45,7 @@ First set the source environment and start SQL*Plus
 		ALTER DATABASE ARCHIVELOG;
 		ALTER DATABASE OPEN;
     CREATE OR REPLACE DIRECTORY "XTTS_METADATA_DIR" AS '/home/oracle/XTTS/DUMP';
+    alter user TPCC identified by oracle;
     
     </copy>
   ```

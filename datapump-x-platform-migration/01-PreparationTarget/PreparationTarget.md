@@ -18,19 +18,20 @@ This lab assumes you have:
 
 ## Task 1: Open terminal window and create three directories
 
-Click on the Terminal icon
+Open two terminal Windows by clicking on the Terminal icon
 ![terminal](./images/Terminal.png " ")
 
-In the terminal window create 3 directories; one for the datapump dump, another one for the SOURCE and the third directory for the TARGET files
+For better visibility the source database will use a light blue and the target database a light green background. 
+Activate the target terminal window and create 3 directories; one for the datapump dump, another one for the SOURCE and the third directory for the TARGET files
 
-    ```
+  ```
     <copy>
     mkdir -p /home/oracle/DP/DUMP /home/oracle/XTTS/SOURCE/tmp /home/oracle/XTTS/TARGET/tmp
 
     </copy>
-    ```
+  ```
 
-![Login to CDB3](./images/create_directory_os.png " ")
+![Create_Dir_OS](./images/create_directory_os.png " ")
 
 
 ## Task 2: source the target environment and start SQL*Plus

@@ -38,10 +38,6 @@
       "filename": "../../06-XTTS_TransportPhase/XTTS_Transport_Phase.md"
     },
     {
-      "title": "Lab 6: AutoUpgrade",
-      "filename": "../../upgrade/upgrade-to-19c.md"
-    },
-    {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"

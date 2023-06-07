@@ -25,14 +25,8 @@ In this workshop, you will:
 * Create the XTTS properties file
 * Run the initial backup and recovery
 * Run incremental backup and restore
-* Start the workload again
-* Run an AWR Diff Report
-* Use SQL Performance Analyzer
-* Ensure plan stability with SQL Plan Management
-* Tune with SQL Tuning Advisor
-* Plugin your upgraded database into Multitenant
-* Unplug/plug/upgrade a PDBs
-* Migrate another database with Full Transportable Export/import
+* Run final incremental backup and restore
+* Export and Import Metadata
 
 ### Prerequisites
 
@@ -52,26 +46,21 @@ The 4 different Oracle Homes are:
 - Oracle 19c      – /u01/app/oracle/product/19
 - Oracle 21c      – /u01/app/oracle/product/21
 
-The workshop also contains 5 different databases for running the various upgrade and migration scenarios in each lab.
+The workshop also contains 6 different databases for running the various upgrade and migration scenarios in each lab.
 
 - UPGR – 11.2.0.4 database (non-CDB)
 - FTEX – 11.2.0.4 database (non-CDB)
 - DB12 – 12.2.0.1 database (non-CDB)
 - CDB1 – 12.2.0.1 database (CDB)
-- CDB2 – 19.11.0 database (CDB)
-
-These are the tasks you can complete in the lab.
-
-![](./images/architecture_upgrade19c_LAB.png " ")
-
-## Upgrade and data migration methods and processes
-
-### Transportable Tablespaces using Perl V4 scripts
-
-It is important to mention that this feature works cross-platform and cross-endianness!
+- CDB2 – 19c database (CDB)
+- CDB3 – 21c database (CDB)
 
 
-- You can use the full transporatble tablespace method to upgrade a database from an Oracle Database 11g Release 2 (11.2.0.3) or later to Oracle Database 23c.
+## Transportable Tablespaces using Perl V4 Scripts Workshop
+
+You can use the full transportable tablespace method to upgrade a database from an Oracle Database 11g Release 2 (11.2.0.3) or later to Oracle Database 23c.
+Although the XTTS Perl V4 scripts are able to migrate __cross-platform and cross-endianness__ this hands-on-lab will use a single Linux machine as source and target platform. The source database (11.2.0.4) will be migrated directly into a 21c PDB.
+ 
 
 
 You may now *proceed to the next lab*.

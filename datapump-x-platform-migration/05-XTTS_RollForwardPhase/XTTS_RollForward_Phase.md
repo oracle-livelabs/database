@@ -23,8 +23,11 @@ This lab assumes you have:
 - Successfully executed initial backup
 - Successfully executed initial restore
 
-## Task 0: Changing Source Database
+## Task 0: Adding Table and Data File to Source Database
 Let's do some changes in the source database... So open SQL*Plus:
+
+### New table
+
   ```
     <copy>
      sqlplus  TPCC/oracle
@@ -34,11 +37,32 @@ Let's do some changes in the source database... So open SQL*Plus:
 
   ```
     <copy>
-     create table mydict as select * from dba_objects;
+     create table object_copy as select * from user_objects;
+     exit;
 
     </copy>
   ```
 
+![new_table](./images/cre_oject_copy.png " ")
+
+### New Data File
+  ```
+    <copy>
+     sqlplus  / as sysdba <<EOF 
+     
+     EOF
+     
+    </copy>
+  ```
+
+  ```
+    <copy>
+     alter tablespace TPCCTAB add datafile '/u02/oradata/UPGR/tpcctab02.dbf' size 1M;
+     exit;
+    </copy>
+  ```
+
+![new_datafile](./images/add_datafile_tbs.png " ")
 
 
 ## Task 1: Incremental Backup on Source
