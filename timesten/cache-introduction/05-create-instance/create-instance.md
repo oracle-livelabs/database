@@ -206,7 +206,7 @@ ConnectionCharacterSet=AL32UTF8
 
 - The file defines **sampledb** and **sampledbcs** ODBC Data Source Names (DSNs). ODBC is TimesTen’s native API, though TimesTen also provides, or supports, many other commonly used database APIs such as JDBC, Oracle Call Interface, ODP.NET, cx_Oracle (for Python) and node-oracledb (for Node.js).
 
-- The **sampledb** DSN is a _direct mode_, or _server_DSN_. It defines the parameters and connectivity for a database hosted by this TimesTen instance. Tools, utilities, and applications running on this host (tthost1) can connect via this DSN using TimesTen’s low latency ‘direct mode’ connectivity mechanism. This database is also accessible remotely using TimesTen’s client-server connectivity.
+- The **sampledb** DSN is a _direct mode_, or _server DSN_. It defines the parameters and connectivity for a database hosted by this TimesTen instance. Tools, utilities, and applications running on this host (tthost1) can connect via this DSN using TimesTen’s low latency ‘direct mode’ connectivity mechanism. This database is also accessible remotely using TimesTen’s client-server connectivity.
 
 - The **sampledbcs** DSN is a _client DSN_. It defines connectivity parameters for a server DSN that tools, utilities, and applications can connect to using TimesTen’s client-server connectivity mechanism. In this example, the DSN defines client-server access for the local **sampledb** server DSN.
 
