@@ -3,29 +3,15 @@
 ## Introduction
 
 This lab walks you through all the steps to integrate the functionality provided by the Oracle® Transaction Manager for Microservices (MicroTx) client libraries with an application. Use MicroTx client libraries to register the required interceptors and callbacks, to obtain a connection to the application's resource manager, and to delineate transaction boundaries which indicate that an XA transaction has started, and then to commit or roll back the transaction.
-Use XA when strong consistency is required, similar to consistency provided by the local database transactions, where all the ACID properties of a transaction are present. For example, financial applications.
-Different business use cases require different levels of consistency. For example, financial applications that move funds require strong global consistency. The XA transaction protocol is a good fit for such applications as XA offers the best transaction consistency with the least amount of developer effort.
-participant microservices must use the MicroTx client libraries which registers callbacks and provides implementation of the callbacks for the resource manager. As shown in the following image, MicroTx communicates with the resource managers to commit or roll back the transaction. MicroTx connects with each resource manager involved in the transaction to prepare, commit, or rollback the transaction. The participant service provides the credentials to the coordinator to access the resource manager.
 
-Estimated Time: *20 minutes*
-
-### About the Banking and Trading Application
-
-The Banking and Trading application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions. When a user purchases stocks using the Stock Broker service, it withdraws money from the Core Banking Service and deposits an equivalent amount of stocks by creating an XA transaction. Within the XA transaction, all actions such as purchase, sale, withdraw, and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
-
-The following figure shows the various microservices in the Banking and Trading application. This application demonstrates how you can develop microservices that participate in XA transactions.
-![Microservices in Banking and Trading application](./images/stock_broker_xa_app.png)
-
-Resource managers manage stateful resources such as databases, queuing or messaging systems, and caches.
-
-The service must meet ACID requirements, so an XA transaction is initiated and both withdraw and deposit are called in the context of this transaction.
+Estimated Time: *5 minutes*
 
 ### Objectives
 
 In this lab, you will:
 
-* Configure the Stock Broker service as a Transaction Initiator
-* Configure the Stock Broker service as a Transaction Participant
+* Configure the Stock Broker service as a Transaction initiator. A transaction initiator service starts and ends a transaction.
+* Configure the Stock Broker service as a Transaction participant. A transaction participant service joins the transaction. The Stock Broker service initiates the transaction, and then participates in it. After starting a transaction to buy or sell shares, the Stock Broker service also participates in the transaction to deposit or withdraw the shares from a user's account.
 
 ### Prerequisites
 
@@ -47,9 +33,14 @@ This lab assumes you have:
 
 ## Task 1: Configure the Stock Broker App as a Transaction Initiator
 
-Initialize an object of the `TrmUserTransaction` class in the application code for every new transaction. This object demarcates the transaction boundaries, which are begin, commit, or roll back. In your application code you must create this object before you begin a transaction.
+Uncomment all the lines of code in the following files to integrate the functionality provided by the MicroTx client libraries with the Stock Broker application.
 
-1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is located in the `/home/oracle/OTMM/otmm-<*version*>/samples/xa/java/bankapp/StockBroker/` folder in any code editor, and then uncomment the following lines of code. The following sample code is for the 22.3.2 release. Provide the correct version, based on the release that you want to use.
+* `pom.xml` file located in the `/home/oracle/OTMM/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/` folder
+* `UserStockTransactionServiceImpl.java` file located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application
+
+The following section provides reference information about each line of code that you must uncomment and its purpose. You can skip this reading this section, if you only want to quickly uncomment the code and run the application. You can return to this section later to understand the purpose of each line of code that you uncomment.
+
+1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is located in the `/home/oracle/OTMM/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/` folder in any code editor, and then uncomment the following lines of code. The following sample code is for the 22.3.2 release. Provide the correct version, based on the release that you want to use.
 
     ```text
     <copy>
@@ -73,7 +64,7 @@ Initialize an object of the `TrmUserTransaction` class in the application code f
     </copy>
     ```
 
-4. Uncomment the following line of code to create an instance of the `TrmUserTransaction` object to buy stocks.
+4. Uncomment the following line of code to initialize an object of the `TrmUserTransaction` class in the application code for every new transaction. This object demarcates the transaction boundaries, which are begin, commit, or roll back. In your application code you must create this object before you begin a transaction.
 
     **Sample command**
 
@@ -136,7 +127,17 @@ Initialize an object of the `TrmUserTransaction` class in the application code f
 
 ## Task 2: Configure the Stock Broker Application as a Transaction Participant
 
-Since the Stock broker app participates in the transaction in addition to initiating the transaction, you must make additional configurations for the application to participate in the transaction and communicate with its resource manager.
+Since the Stock broker application participates in the transaction in addition to initiating the transaction, you must make additional configurations for the application to participate in the transaction and communicate with its resource manager.
+
+Uncomment all the lines of code in the following files:
+
+* `DatasourceConfigurations.java` file located in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
+* `TMMConfigurations.java` file located in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
+* `AccountServiceImpl.java` file located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
+* `StockBrokerTransactionServiceImpl.java` file located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
+
+
+The following section provides reference information about each line of code that you must uncomment and its purpose. You can skip this reading this section, if you only want to quickly uncomment the code and run the application. You can return to this section later to understand the purpose of each line of code that you uncomment.
 
 When you integrate the MicroTx client library for Java with the Stock broker application, the library performs the following functions:
 

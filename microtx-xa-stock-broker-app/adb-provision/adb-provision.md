@@ -1,4 +1,4 @@
-# Provision an Oracle Autonomous Database for use as resource manager
+# Provision Autonomous Databases for Use as Resource Manager
 
 ## Introduction
 

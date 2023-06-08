@@ -13,12 +13,12 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
     },
     {
-      "title": "Lab 1: Prepare setup",
+      "title": "Lab 1: Prepare",
       "description": "How to download your ORM stack and update security rules for an existing VCN",
       "filename": "../../prepare-setup/prepare-setup.md"
     },
     {
-      "title": "Lab 2: Environment setup",
+      "title": "Lab 2: Set Up the Environment",
       "description": "How to provision the workshop environment and connect to it",
       "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc-ssh.md"
     },

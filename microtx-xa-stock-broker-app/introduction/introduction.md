@@ -26,6 +26,27 @@ This lab assumes you have:
 
 Let's begin! If you need to create an Oracle Cloud account, click **Get Started** in the **Contents** menu on the left. Otherwise, if you have an existing account, click **Lab 1**.
 
+## About the Banking and Trading Application
+
+The Banking and Trading application demonstrates how you can develop microservices that participate in a distributed transaction while using MicroTx to coordinate the requests. You can use the application to withdraw or deposit an amount, as well as buy and sell stocks. Since financial applications that move funds require strong global consistency, the application uses XA transaction protocol.
+
+When a user purchases stocks using the Stock Broker service, the application withdraws money from the Core Banking Service and deposits an equivalent amount of stocks by creating an XA transaction. Within the XA transaction, all actions such as purchase, sale, withdraw, and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
+
+Participant microservices must use the MicroTx client libraries which registers callbacks and provides implementation of the callbacks for the resource manager. As shown in the following image, MicroTx communicates with the resource managers to commit or roll back the transaction. MicroTx connects with each resource manager involved in the transaction to prepare, commit, or rollback the transaction. The participant service provides the credentials to the coordinator to access the resource manager.
+
+The following figure shows the various microservices in the Banking and Trading application.
+![Microservices in Banking and Trading application](./images/stock_broker_xa_app.png)
+
+* The MicroTx coordinator manages transactions amongst the participant services.
+
+* The Stock Broker microservice initiates the transactions, so it is called an transaction initiator service. The user interacts with this microservice to buy and sell shares. When a new request is created, the helper method that is exposed in the MicroTx library runs the begin() method to start the transaction. This microservice also contains the business logic to issue the commit and roll back calls. After initiating the transaction, the Stock Broker service also participates in the transaction. So you have to configure the Stock Broker microservice as an initiator and as a participant service. It uses resources from the Stock Broker Service ATP instance.
+
+* The Core Banking and Branch Banking services participate in the transactions related to the trade in stocks, so they are called participant services. They do not initiate the transaction to buy or sell stocks. The MicroTx library includes headers that enable the participant services to automatically enlist in the transaction. These microservices expose REST APIs to get the account balance and to withdraw or deposit money from a specified account. They also use resources from the Banking Service ATP instance.
+
+* Resource managers manage stateful resources such as databases, queuing or messaging systems, and caches.
+
+The service must meet ACID requirements, so withdraw amount, transfer amount, deposit stocks, sell stocks, debit amount, or credit amount are called in the context of the XA transaction.
+
 ## Task: Learn More
 
 * [Oracle® Transaction Manager for Microservices Developer Guide](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/index.html)
