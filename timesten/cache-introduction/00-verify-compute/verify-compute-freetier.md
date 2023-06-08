@@ -80,4 +80,4 @@ You can now **proceed to the next lab**.
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
 * **Contributors** - LiveLabs Team
-* **Last Updated By/Date** - Jenny Bloom, February 2023
+* **Last Updated By/Date** - Jenny Bloom, June 2023

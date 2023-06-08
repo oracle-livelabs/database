@@ -260,5 +260,5 @@ Keep your terminal session to tthost1 open ready for the next lab.
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Last Updated By/Date** - Jenny Bloom, June 2023
 
