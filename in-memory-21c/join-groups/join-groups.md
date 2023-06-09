@@ -2,13 +2,13 @@
 
 ## Introduction
 
-Watch a preview video of creating In-Memory Column Store
+Watch a demo of creating In-Memory Join Groups:
 
-[YouTube video](youtube:U9BmS53KuGs)
+[YouTube video](youtube:yQj6CcFRips)
 
-Watch the video below for a walk through of the In-memory Join Groups lab.
+Watch the video below for a walk through of the In-memory Join Groups lab:
 
-[In-Memory Join Groups](videohub:1_ohs9hpw0)
+[In-Memory Join Groups](videohub:1_k4gc25ck)
 
 *Estimated Lab Time:* 10 Minutes.
 
