@@ -2,13 +2,13 @@
 
 ## Introduction
 
-Watch a preview video of creating In-Memory Column Store
+Watch a demo video of using In-Memory Spatial:
 
-[YouTube video](youtube:U9BmS53KuGs)
+<!--- [YouTube video](youtube:Cfq0ghw-m0w) --->
 
 Watch the video below for a walk through of the In-Memory Spatial lab:
 
-[In-Memory Spatial](videohub:1_ohs9hpw0)
+[In-Memory Spatial](videohub:1_vdm8taun)
 
 *Estimated Lab Time:* 10 Minutes.
 
@@ -942,7 +942,7 @@ SQL>
 
     Notice that the "Predicate Information" has changed quite a bit. Now the virtual columns are being accessed to determine location. We also see in the statistics section that "IM scan EU..." statistics have appeared now that IMEs are being accessed.
 
-12. (Optional) You can run remove the changes made during this lab by running the following script.    
+12. (Optional) You can run remove the changes made during this lab by running the following script.
 
     Run the script *12\_spatial\_cleanup.sql*
 
