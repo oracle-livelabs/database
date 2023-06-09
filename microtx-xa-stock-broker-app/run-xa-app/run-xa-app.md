@@ -417,6 +417,7 @@ Source code for the following microservices is present in the `/home/oracle/OTMM
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
 To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
 
+You may now **proceed to the next lab**.
 
 ## Learn More
 

@@ -233,19 +233,24 @@ When you integrate the MicroTx client library for Java with the Stock broker app
     </copy>
     ```
 
-6. Uncomment the following line of code to initialize the an XA data source object.
+6. Uncomment the following line of code in the `init()` method to initialize the an XA data source object.
+    ```text
+    <copy>
+    initializeOracleXADataSource();
+    </copy>
+    ```
+
+7. Uncomment the following line of code to call the XA data source object that you have initialized.
 
     ```text
     <copy>
-        initializeOracleXADataSource();
-        ...
-        private void initializeOracleXADataSource() {
-            TrmConfig.initXaDataSource(this.poolXADataSource);
+    private void initializeOracleXADataSource() {
+        TrmConfig.initXaDataSource(this.poolXADataSource);
     }
     </copy>
     ```
 
-7. Initialize a Bean for the `TrmSQLConnection` object and `TrmXAConnection` object.
+8. Initialize a Bean for the `TrmSQLConnection` object and `TrmXAConnection` object.
 
     ```text
     <copy>
@@ -269,11 +274,11 @@ When you integrate the MicroTx client library for Java with the Stock broker app
     </copy>
     ```
 
-7. Save the changes.
+9. Save the changes.
 
-8. Open the `AccountServiceImpl.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
+10. Open the `AccountServiceImpl.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
-9. Uncomment the following lines of code to import the required packages.
+11. Uncomment the following lines of code to import the required packages.
 
     ```text
     <copy>
@@ -282,7 +287,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
     </copy>
     ```
 
-10. Uncomment the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application injects the `connection` object that is created by the MicroTx client library.
+12. Uncomment the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application injects the `connection` object that is created by the MicroTx client library.
 
     ```text
     <copy>
@@ -292,7 +297,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
     </copy>
     ```
 
-10. Delete all the occurrences of the following line of code as the connection is managed by the MicroTx client library.
+13. Delete all the occurrences of the following line of code as the connection is managed by the MicroTx client library.
 
     ```text
     <copy>
@@ -300,11 +305,11 @@ When you integrate the MicroTx client library for Java with the Stock broker app
     </copy>
     ```
 
-11. Save the changes.
+14. Save the changes.
 
-12. Open the `StockBrokerTransactionServiceImpl.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
+15. Open the `StockBrokerTransactionServiceImpl.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
-13. Uncomment the following lines of code to import the required packages.
+16. Uncomment the following lines of code to import the required packages.
 
     ```text
     <copy>
@@ -313,7 +318,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
     </copy>
     ```
 
-13. Uncomment the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application injects the `connection` object that is created by the MicroTx client library.
+17. Uncomment the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application injects the `connection` object that is created by the MicroTx client library.
 
     ```text
     <copy>
@@ -323,7 +328,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
     </copy>
     ```
 
-14. Delete all the occurrences of the following line of code as the connection is managed by the MicroTx client library.
+18. Delete all the occurrences of the following line of code as the connection is managed by the MicroTx client library.
 
     ```text
     <copy>
@@ -331,9 +336,9 @@ When you integrate the MicroTx client library for Java with the Stock broker app
     </copy>
     ```
 
-15. Save the changes.
+19. Save the changes.
 
-You may now **proceed to the next lab** to run the Banking and Trading Application.
+You may now **proceed to the next lab**.
 
 ## Learn More
 

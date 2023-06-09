@@ -2,13 +2,13 @@
 
 ## Introduction
 
-This lab walks you through the steps to quickly provision an Oracle Autonomous Database (Autonomous Transaction Processing [ATP]) on Oracle Cloud. You will use this database in the subsequent labs of this workshop. For this lab, you must create two ATP instances. One ATP instance acts as a resource manager for the Core Banking service and Branch Banking Service. The other ATP instance acts as resource manager for the Stock Broker service. Run the tasks in this lab in the remote desktop to create the database instances and download the database wallets within the remote desktop. When you directly download the wallet files in the remote desktop environment, you do not need to copy the wallet files from outside the environment.
+This lab walks you through the steps to quickly provision Oracle Autonomous Database (Autonomous Transaction Processing [ATP]) on Oracle Cloud. You will use this database in the subsequent labs of this workshop. For this lab, you must create two ATP instances. One ATP instance acts as a resource manager for the Core Banking service and Branch Banking Service. The other ATP instance acts as resource manager for the Stock Broker service. Run the tasks in this lab in the remote desktop to create the database instances and download the database wallets within the remote desktop. When you directly download the wallet files in the remote desktop environment, you do not need to copy the wallet files from outside the environment.
 
 Estimated lab time: 20 minutes
 
 ### Objectives
 
-* Provision two new Autonomous Transaction Processing instances.
+* Provision two new ATP instances.
 * Download the wallet file for each ATP instance.
 * Create tables with sample values for the Core Banking, Branch Banking, and Stock Broker services.
 
@@ -153,58 +153,7 @@ To download client credentials from the Oracle Cloud Infrastructure Console:
 
 8. Extract the wallet files to the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/CoreBanking/Database_Wallet` and `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/BranchBanking/Database_Wallet` folders. This folder contains the source code for the Core Banking and Branch Banking services respectively.
 
-## Task 4: Update the values.yaml File
-
-The sample application files also contain the `values.yaml` file. This is the manifest file, which contains the deployment configuration details for the XA sample application. Provide details about the ATP database instances, that you have created, in the `values.yaml` file, so that the Core Banking, Branch Banking, and Stock Broker services can access their resource manager.
-
-To provide the details of the ATP database instances in the `values.yaml` file:
-
-1. Open the `values.yaml` file, which is located in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts` folder.
-
-2. Provide values for the following fields under `CoreBanking` and `ArizonaBranchBank` in the `values.yaml` file. Since Core Banking and Branch Banking services use the same ATP database instance, enter the same values under `CoreBanking` and `ArizonaBranchBank`.
-
-    * `connectString`: Enter the connect string to access the database in the following format. The host, port and service_name for the connection string can be found on the **DB Connection Tab** under **Connection Strings** as shown in screenshot below.
-
-      **Syntax**
-
-        ```text
-        <copy>
-        jdbc:oracle:thin:@tcps://<host>:<port>/<service_name>?retry_count=20&retry_delay=3&wallet_location=Database_Wallet
-        </copy>
-        ```
-
-    * `databaseUser`: Enter the user name to access the database, such as ADMIN. Use ADMIN if as you will create tables and insert sample data.
-    * `databasePassword`: Enter the password to access the database for the specific user. Use the ADMIN user password as you will create tables and insert sample data.
-
-    ![DB connection string](./images/db-connection-string.png)
-
-3. Similarly, under `StockBroker` enter values for the database connection string, user name, and password for the ATP database instance that you have created for the Stock Broker service.
-
-   The `values.yaml` file contains many properties. For readability, only the resource manager properties for which you must provide values are listed in the following sample code snippet.
-
-    ```text
-    <copy>
-    CoreBanking:
-      ...
-      connectString: "jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bbcldfxbtjvtddi_tmmwsdb3_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet"
-      databaseUser: db_user
-      databasePassword: db_user_password
-    StockBroker:
-      ...
-      connectString: "jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bdcldfxbtjvtddi_tmmwsdb56_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet"
-      databaseUser: db_user
-      databasePassword: db_user_password
-    ArizonaBranchBank:
-      ...
-      connectString: "jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bdcldfxbtjvtddi_tmmwsdb3_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet"
-      databaseUser: db_user
-      databasePassword: db_user_password
-    </copy>
-    ```
-
-3. Save your changes.
-
-## Task 5: Connect with SQL Worksheet
+## Task 4: Connect with SQL Worksheet
 
 Although you can connect to your autonomous database from local desktop tools, such as Oracle SQL Developer, you can conveniently access the browser-based SQL Worksheet directly from your Autonomous Database console.
 
@@ -230,7 +179,7 @@ Although you can connect to your autonomous database from local desktop tools, s
 
     After touring through the informational boxes, keep this SQL Worksheet open and please **proceed to the next task.**
 
-## Task 6: Create Tables in BankingServiceDB for the Core Banking Service
+## Task 5: Create Tables in BankingServiceDB for the Core Banking Service
 
 Create tables in the `BankingServiceDB` ATP instance and populate it with sample values for the Core Banking service.
 
@@ -302,15 +251,13 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
     </copy>
     ```
 
-## Task 7: Create Tables in BankingServiceDB for the Branch Banking Service
+## Task 6: Create Tables in BankingServiceDB for the Branch Banking Service
 
 Create tables in the `BankingServiceDB` ATP instance and populate it with sample values for the Branch Banking service.
 
 1. Ensure that you are connected to SQL Worksheet as administrator.
 
 2. Copy and paste the following code snippet to your SQL Worksheet, and run the queries.
-
-   **Syntax**
 
       ```text
       <copy>
@@ -330,18 +277,19 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
 
 3. Populate the `SAVINGS_ACCOUNT` table with sample values.
 
-   ```text
-   <copy>
-   -- Branch - Arizona
-   INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
-   VALUES (10001, 1111, 50000.0);
-   INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
-   VALUES (10002, 1111, 50000.0);
-   INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
-   VALUES (10003, 1111, 50000.0);
-   ```
+      ```text
+      <copy>
+      -- Branch - Arizona
+      INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
+      VALUES (10001, 1111, 50000.0);
+      INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
+      VALUES (10002, 1111, 50000.0);
+      INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
+      VALUES (10003, 1111, 50000.0);
+      </copy>
+      ```
 
-## Task 8: Create an Autonomous Database Instance for the Stock Broker Service
+## Task 7: Create an Autonomous Database Instance for the Stock Broker Service
 
 Repeat tasks 1, 2, 3, and 4 to create another ATP database instance for the Stock Broker service and download the wallet for the database.
 
@@ -355,15 +303,13 @@ Repeat tasks 1, 2, 3, and 4 to create another ATP database instance for the Stoc
 
 Proceed to the next task to create a table and populate it with sample values.
 
-## Task 9: Create Tables for the Stock Broker Service
+## Task 8: Create Tables for the Stock Broker Service
 
 Create tables with sample values for the Stock Broker service.
 
 1. Ensure that you are connected to SQL Worksheet as administrator.
 
 2. Copy and paste the following code snippet to your SQL Worksheet, and then run the queries.
-
-      **Syntax**
 
       ``` text
       <copy>
@@ -376,7 +322,6 @@ Create tables with sample values for the Stock Broker service.
           STOCK_BROKER VARCHAR2(20) NOT NULL,
           PRIMARY KEY (ACCOUNT_ID)
       );
-
       -- Common account for Stock Broker. This is inserted during the initialization of the application.
       CREATE TABLE STOCKS
       (
@@ -386,7 +331,6 @@ Create tables with sample values for the Stock Broker service.
           STOCK_PRICE  DECIMAL      NOT NULL,
           PRIMARY KEY (STOCK_SYMBOL)
       );
-
       CREATE TABLE USER_ACCOUNT
       (
           ACCOUNT_ID NUMBER   NOT NULL,
@@ -398,7 +342,6 @@ Create tables with sample values for the Stock Broker service.
           ADDRESS    VARCHAR2(60),
           PRIMARY KEY (ACCOUNT_ID)
       );
-
       CREATE TABLE STOCK_BROKER_STOCKS
       (
           ACCOUNT_ID   NUMBER NOT NULL,
@@ -410,7 +353,6 @@ Create tables with sample values for the Stock Broker service.
           CONSTRAINT FK_StockBrokerStocks_Stocks
               FOREIGN KEY (STOCK_SYMBOL) REFERENCES STOCKS (STOCK_SYMBOL) ON DELETE CASCADE
       );
-
       CREATE TABLE USER_STOCKS
       (
           ACCOUNT_ID   NUMBER NOT NULL,
@@ -422,7 +364,6 @@ Create tables with sample values for the Stock Broker service.
           CONSTRAINT FK_UserStocks_Stocks
               FOREIGN KEY (STOCK_SYMBOL) REFERENCES STOCKS (STOCK_SYMBOL) ON DELETE CASCADE
       );
-
       CREATE TABLE HISTORY
       (
           TRANSACTION_TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -492,6 +433,57 @@ Create tables with sample values for the Stock Broker service.
       VALUES (10001, 'VSNSYS', 40);
       </copy>
       ```
+
+## Task 9: Update the values.yaml File
+
+The sample application files also contain the `values.yaml` file. This is the manifest file, which contains the deployment configuration details for the XA sample application. Provide details about the ATP database instances, that you have created, in the `values.yaml` file, so that the Core Banking, Branch Banking, and Stock Broker services can access their resource manager.
+
+To provide the details of the ATP database instances in the `values.yaml` file:
+
+1. Open the `values.yaml` file, which is located in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts/bankapp` folder.
+
+2. Provide values for the following fields under `CoreBanking` and `ArizonaBranchBank` in the `values.yaml` file. Since Core Banking and Branch Banking services use the same ATP database instance, enter the same values under `CoreBanking` and `ArizonaBranchBank`.
+
+    * `databaseUrl`: Enter the connect string to access the database in the following format. The host, port and service_name for the connection string can be found on the **DB Connection Tab** under **Connection Strings** as shown in screenshot below.
+
+      **Syntax**
+
+        ```text
+        <copy>
+        jdbc:oracle:thin:@tcps://<host>:<port>/<service_name>?retry_count=20&retry_delay=3&wallet_location=Database_Wallet
+        </copy>
+        ```
+
+    * `databaseUser`: Enter the user name to access the database, such as ADMIN. Use ADMIN if as you will create tables and insert sample data.
+    * `databasePassword`: Enter the password to access the database for the specific user. Use the ADMIN user password as you will create tables and insert sample data.
+
+    ![DB connection string](./images/db-connection-string.png)
+
+3. Similarly, under `StockBroker` enter values for the database connection string, user name, and password for the ATP database instance that you have created for the Stock Broker service.
+
+   The `values.yaml` file contains many properties. For readability, only the resource manager properties for which you must provide values are listed in the following sample code snippet.
+
+    ```text
+    <copy>
+    CoreBanking:
+      ...
+      databaseUrl: "jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bbcldfxbtjvtddi_tmmwsdb3_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet"
+      databaseUser: db_user
+      databasePassword: db_user_password
+    StockBroker:
+      ...
+      databaseUrl: "jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bdcldfxbtjvtddi_tmmwsdb56_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet"
+      databaseUser: db_user
+      databasePassword: db_user_password
+    ArizonaBranchBank:
+      ...
+      databaseUrl: "jdbc:oracle:thin:@tcps://adb.us-ashburn-1.oraclecloud.com:1522/bdcldfxbtjvtddi_tmmwsdb3_tp.adb.oraclecloud.com?retry_count=20&retry_delay=3&wallet_location=Database_Wallet"
+      databaseUser: db_user
+      databasePassword: db_user_password
+    </copy>
+    ```
+
+3. Save your changes.
 
 You may now **proceed to the next lab.**
 
