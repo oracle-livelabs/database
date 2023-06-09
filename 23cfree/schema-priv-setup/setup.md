@@ -39,9 +39,9 @@ CREATE USER u2 IDENTIFIED BY password2;
 
 ## Task 2: Create two tables under Schema 1 
 
-Moving on to Task 2, we will create two tables under Schema 1. The first table, inventory_no_reservations, will serve as a normal table without any special features. The second table, inventory_reservations, will be created with lock-free reservations. This feature enables efficient management of reservations for specific columns, and we will bind it to the 'budget' column in our case.
+Moving on to Task 2, we will create two tables under Schema 1. The first table, inventory\_no\_reservations, will serve as a normal table without any special features. The second table, inventory\_reservations, will be created with lock-free reservations. This feature enables efficient management of reservations for specific columns, and we will bind it to the 'budget' column in our case.
 
-1. Create the first table. Table 1 would be inventory_no_reservations (normal table)
+1. Create the first table. Table 1 would be inventory\_no\_reservations (normal table)
 
 
 ````
@@ -55,7 +55,7 @@ CREATE TABLE s1.inventory_no_reservations (
 </copy>
 ````
 
-2. Create a second table with lock-free reservations. Table 2 would be inventory_reservations (lock free reservation table)
+2. Create a second table with lock-free reservations. Table 2 would be inventory\_reservations (lock free reservation table)
 
 * Modify the `CREATE TABLE` command to enable lock-free reservation as follows:  
  
@@ -83,7 +83,7 @@ CREATE TABLE s1.inventory_reservations (
 ````
 ## Task 3: Insert a few rows into each. 
 
-Task 3 focuses on inserting a few rows into each of the tables we created. We will insert data into the inventory_no_reservations table and the inventory_reservations table. This step will provide us with initial data to work with in the subsequent labs.
+Task 3 focuses on inserting a few rows into each of the tables we created. We will insert data into the inventory\_no\_reservations table and the inventory\_reservations table. This step will provide us with initial data to work with in the subsequent labs.
 
 1. Insert data into the first table:
 
