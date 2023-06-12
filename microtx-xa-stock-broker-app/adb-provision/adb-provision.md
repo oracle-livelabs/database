@@ -187,13 +187,13 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
 
 2. Copy and paste the following code snippet to your SQL Worksheet, and run the queries.
 
-   **Syntax**
+      **Syntax**
 
-   ```text
-   <copy>
-   -- Tables to be created
-    CREATE TABLE BRANCH
-    (
+      ```text
+      <copy>
+      -- Tables to be created
+      CREATE TABLE BRANCH
+      (
         BRANCH_ID   NUMBER NOT NULL,
         BRANCH_NAME VARCHAR2(20),
         PHONE       VARCHAR2(14),
@@ -201,10 +201,10 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
         SERVICE_URL VARCHAR2(255),
         LAST_ACCT   INTEGER,
         PRIMARY KEY (BRANCH_ID)
-    );
+      );
 
-    CREATE TABLE ACCOUNT
-    (
+      CREATE TABLE ACCOUNT
+      (
         ACCOUNT_ID NUMBER   NOT NULL,
         BRANCH_ID  NUMBER   NOT NULL,
         SSN        CHAR(12) NOT NULL,
@@ -214,10 +214,10 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
         PHONE      VARCHAR2(14),
         ADDRESS    VARCHAR2(60),
         PRIMARY KEY (ACCOUNT_ID)
-    );
+      );
 
-    CREATE TABLE HISTORY
-    (
+      CREATE TABLE HISTORY
+      (
         TRANSACTION_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         ACCOUNT_ID          NUMBER       NOT NULL,
         BRANCH_ID           NUMBER       NOT NULL,
@@ -225,31 +225,31 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
         DESCRIPTION         VARCHAR2(1024),
         AMOUNT              DECIMAL(20, 2) NOT NULL,
         BALANCE             DECIMAL(20, 2) NOT NULL
-    );
-   </copy>
-   ```
+      );
+      </copy>
+      ```
 
-   ![Create table](./images/tables-core-banking.png)
+      ![Create table](./images/tables-core-banking.png)
 
-   Tables with the names `BRANCH`, `ACCOUNT`, and `HISTORY` are created.
+      Tables with the names `BRANCH`, `ACCOUNT`, and `HISTORY` are created.
 
 3. Populate the tables with sample values.
 
-   ```text
-   <copy>
-    -- BRANCH
-    INSERT INTO BRANCH (BRANCH_ID, BRANCH_NAME, PHONE, ADDRESS, SERVICE_URL, LAST_ACCT)
-    VALUES (1111, 'Arizona', '123-456-7891', '6001 N 24th St, Phoenix, Arizona 85016, United States', 'http://arizona-branch-bank:9095', 10002);
+      ```text
+      <copy>
+      -- BRANCH
+      INSERT INTO BRANCH (BRANCH_ID, BRANCH_NAME, PHONE, ADDRESS, SERVICE_URL, LAST_ACCT)
+      VALUES (1111, 'Arizona', '123-456-7891', '6001 N 24th St, Phoenix, Arizona 85016, United States', 'http://arizona-branch-bank:9095', 10002);
 
-    -- ACCOUNTS
-    INSERT INTO ACCOUNT (ACCOUNT_ID, BRANCH_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
-    VALUES (10001, 1111, '873-61-1457', 'Adams', 'Lopez', 'D', '506-100-5886', '15311 Grove Ct. Arizona  95101');
-    INSERT INTO ACCOUNT (ACCOUNT_ID, BRANCH_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
-    VALUES (10002, 1111, '883-71-8538', 'Smith', 'Mason', 'N', '403-200-5890', '15322 Grove Ct. Arizona  95101');
-    INSERT INTO ACCOUNT (ACCOUNT_ID, BRANCH_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
-    VALUES (10003, 1111, '883-71-8538', 'Thomas', 'Dave', 'C', '603-700-5899', '15333 Grove Ct. Arizona  95101');
-    </copy>
-    ```
+      -- ACCOUNTS
+      INSERT INTO ACCOUNT (ACCOUNT_ID, BRANCH_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+      VALUES (10001, 1111, '873-61-1457', 'Adams', 'Lopez', 'D', '506-100-5886', '15311 Grove Ct. Arizona  95101');
+      INSERT INTO ACCOUNT (ACCOUNT_ID, BRANCH_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+      VALUES (10002, 1111, '883-71-8538', 'Smith', 'Mason', 'N', '403-200-5890', '15322 Grove Ct. Arizona  95101');
+      INSERT INTO ACCOUNT (ACCOUNT_ID, BRANCH_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+      VALUES (10003, 1111, '883-71-8538', 'Thomas', 'Dave', 'C', '603-700-5899', '15333 Grove Ct. Arizona  95101');
+      </copy>
+      ```
 
 ## Task 6: Create Tables in BankingServiceDB for the Branch Banking Service
 
