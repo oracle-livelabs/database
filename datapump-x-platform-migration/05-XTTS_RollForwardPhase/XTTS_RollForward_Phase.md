@@ -3,7 +3,7 @@
 ## Introduction
 
 In the roll forward phase the source database remains active. You can take as many incremental backups and restores as you like. 
-A good practice is to start the migration some time before the cutover. Then run these initial backup and restore operations a few times during the day and on the cutover day minimize the delta by for example running these initial backup/restore commands every hour.
+A good practice is to start the migration some time before the cutover. Run an initial backup and restore and run these incremental backup and restore operations a few times during the day. On the cutover day minimize the delta by for example running these incremental backup/restore commands every hour.
 
 Estimated Time: 15 minutes
 
@@ -24,17 +24,17 @@ This lab assumes you have:
 - Successfully executed initial restore
 
 ## Task 0: Adding Table and Data File to Source Database
-Let's do some changes in the source database... So open SQL*Plus:
+As mentioned, in this phase the database is up and open so everyone can use it. Let's do some changes in the source database... 
 
 ### Add a New Table
-
+Connect with SQL*Plus as TPCC user to the source database:
   ```
     <copy>
      sqlplus  TPCC/oracle
      
     </copy>
   ```
-
+and create a table:
   ```
     <copy>
      create table object_copy as select * from user_objects;
@@ -46,13 +46,14 @@ Let's do some changes in the source database... So open SQL*Plus:
 ![new_table](./images/cre_oject_copy.png " ")
 
 ### Add a New Data File
+This time connect as sysdba to the source database:
   ```
     <copy>
      sqlplus  / as sysdba 
      
     </copy>
   ```
-
+and execute:
   ```
     <copy>
      alter tablespace TPCCTAB add datafile '/u02/oradata/UPGR/tpcctab02.dbf' size 1M;
@@ -68,6 +69,9 @@ On source change into the XTTS Source directory and execute the incremental back
 
   ```
     <copy>
+     cd /home/oracle/XTTS/SOURCE
+     export XTTDEBUG=0
+     export TMPDIR=${PWD}/tmp
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
 
     </copy>
@@ -212,6 +216,7 @@ End of rollforward phase
 You can execute the incremental backup and restore whenever you want. As they will minimize your downtime window you can run them on the cutover day more frequently to minimize the delta.
 
 
+You may now *proceed to the next lab*.
 
 
 ## Acknowledgements

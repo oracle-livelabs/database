@@ -18,7 +18,7 @@ This lab assumes you have:
 
 ## Task 1: Set the Source Database Environment
 
-Open the second Terminal session, set the source environment and start SQL*Plus:
+Activate the second terminal window, set the source environment and start SQL*Plus:
 
   ```
     <copy>
@@ -77,6 +77,7 @@ in RMAN terminology the target database identifies the database which you're goi
 ![configure_RMAN_Source](./images/rman_default_target_settings.png " ")
 
 
+You may now *proceed to the next lab*.
 
 
 ## Acknowledgements

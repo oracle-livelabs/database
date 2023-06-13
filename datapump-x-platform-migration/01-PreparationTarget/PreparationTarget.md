@@ -21,8 +21,8 @@ This lab assumes you have:
 Open two terminal Windows by clicking on the Terminal icon
 ![terminal](./images/Terminal.png " ")
 
-For better visibility the source database will use a light blue and the target database a light green background. 
-Activate the target terminal window and create 3 directories; one for the datapump dump, another one for the SOURCE and the third directory for the TARGET files
+For better visibility the source database will use a light blue and the target database a light green background.<br>
+Activate the target terminal window and create 3 directories; one for the Data Pump dump file, another one for the SOURCE and the third directory for the TARGET files.
 
   ```
     <copy>
@@ -76,6 +76,7 @@ When creating a PDB the admin user needs to exist. You can delete it later on if
 ![create Database Directory Target](./images/create_database_directory_PDB3.png " ")
 
 
+You may now *proceed to the next lab*.
 
 
 

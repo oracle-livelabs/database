@@ -28,7 +28,15 @@ This lab assumes you have:
 
 ## Task 1: Setting Tablespaces to "read only" on Source
 
-Open SQL*Plus, connect "as sysdba" and execute:
+Open SQL*Plus, connect "as sysdba"
+  ```
+    <copy>
+     sqlplus  / as sysdba 
+     
+    </copy>
+  ```
+and execute:
+
   ```
     <copy>
      ALTER TABLESPACE TPCCTAB read only;
@@ -41,8 +49,8 @@ Open SQL*Plus, connect "as sysdba" and execute:
 
 ![set_tbs_readonly](./images/source_tbs_readonly.png " ")
 
-## Task 1: Final Backup on Source
-On source change into the XTTS Source directory and execute the final backup:
+## Task 1: Final Incremental Backup on Source
+On source change into the XTTS Source directory and execute the final incremental backup:
 
   ```
     <copy>
@@ -53,7 +61,7 @@ On source change into the XTTS Source directory and execute the final backup:
     </copy>
   ```
 
-![incremental_backup](./images/incremental_backup.png " ")
+![final_backup](./images/final_incremental_backup.png " ")
 
 <details>
  <summary>*click here to see the full final backup log file*</summary>
@@ -139,20 +147,20 @@ On source change into the XTTS Source directory and execute the final backup:
   ```
 </details>
 
-The process finishes with a few warnings similar to:
-__DECLARE*__
-__ERROR at line 1:
-ORA-20001: TABLESPACE(S) IS READONLY OR,
-OFFLINE JUST CONVERT, COPY
-ORA-06512: at line 284__
+The process finishes with a few warnings similar to:<br>
+__DECLARE*__<br>
+__ERROR at line 1:<br>
+ORA-20001: TABLESPACE(S) IS READONLY OR,<br>
+OFFLINE JUST CONVERT, COPY<br>
+ORA-06512: at line 284__<br>
 
 You can safely ignore those warnings as they only tell you that you're going to back up a "read only" tablespace.
 
 
-## Task 2: Final Restore on Target
+## Task 2: Final Incremental Restore on Target
 
 Open the Target console.
-The incremental restore needs the "res.txt" and "incrbackups.txt" files from source. So copy them:
+The final incremental restore needs the "res.txt" and "incrbackups.txt" files from source. So copy them:
 
   ```
     <copy>
@@ -221,7 +229,7 @@ End of rollforward phase
 </details>
 
 ## Task 3: Metadata Export on Source
-As the source and target database version differ too much, we need to export and import the metadata information.
+As the source and target database version differ too much, we can't use __Data Pump network_link__ and need to export and import the metadata information instead.
 
 So create an Exp_Metadata.par file copying the following commands to the source database terminal window:
 
@@ -458,7 +466,7 @@ and execute expdp using this par file
 </details>
 
 ## Task 4: Metadata Import on Target
-Also here we first create the import parameter file:
+Also here we first create the import parameter file. Copy and paste the content to the target console:
 
   ```
    <copy>
@@ -1307,8 +1315,10 @@ ORA-21700: object does not exist or is marked for delete
 05-JUN-23 17:39:55.724: Job "SYSTEM"."SYS_IMPORT_FULL_01" completed with 64 error(s) at Mon Jun 5 17:39:55 2023 elapsed 0 00:02:20
   ```
 </details>
-The errors you see are not related to the user objects we transferred. So you can ignore them here.
 
+It's always good practice to check out each error you see in the log file and check out its root cause. Here the errors you see are not related to the user objects we transferred and you can ignore them.
+
+Also a good practice is to verify after the migration a few things like if you migrated all user objects (tabes, triggers, views...), if the sequence numbers match. 
 
 
 

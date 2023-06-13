@@ -21,7 +21,7 @@ This lab assumes you have:
 - Source and target prepared.
 - XTTS prechecks done
 
-## Task 1: XTTS properties file
+## Task 1: XTTS Properties File
 On source change into the XTTS Source directory and create the xtt.properties file using vi (for those of you who are not familiar with vi, no worries, you get the necessary vi commands shortly). So here the steps:
 
   ```
@@ -412,7 +412,7 @@ Performing convert for file 5
   ```
 </details>
 
-
+You may now *proceed to the next lab*.
 
 
 

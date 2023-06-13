@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will unzip the XTTS V4 files on source/target and create the XTTS properties file required by the tool.
+In this lab, you will execute common XTTS pre-checks.
 
 Estimated Time: 15 minutes
 
@@ -22,7 +22,8 @@ This lab assumes you have:
 - Prepared the target
 
 ## Task 0: Transportable Tablespace Method Supported by Source and Target OS Platforms
-Before you begin check on source database if the OS you want to migrate your database to is supported by TTS:
+Before you begin check on source database if the OS you want to migrate your database to is supported by TTS. <br>
+By the way, the platform_id for the target Linux platform is 13, so let's see if it is supported to use XTTS:
   ```
     <copy>
     col platform_name format A20
@@ -35,8 +36,9 @@ Before you begin check on source database if the OS you want to migrate your dat
   ```
 ![TARGET_PLATFORM_SUPPORTED](./images/Target_Platform_Supported.png " ")
 
+
 ## Task 1: DBTIMEZONE
-You should always check the SOURCE and TARGET database are located in the same timezone. 
+You should always check that your SOURCE and TARGET database are located in the same timezone. 
 Open on source and target SQL*Plus and execute:
   ```
     <copy>
@@ -46,7 +48,7 @@ Open on source and target SQL*Plus and execute:
   ```
 ![DBTIMEZONE](./images/DBTIMEZONE.png " ")
 
-In our example source and target databases are in different timezones. This might cause issues when your source database tables have columns with "__TimeStamp with Local Time Zone__ (TSLTZ)". You can execute the next query to see if the source database uses these data types: 
+You'll see, in our example source and target databases are in different timezones. This might cause issues when your source database tables have columns with "__TimeStamp with Local Time Zone__ (TSLTZ)". You can execute the next query to see if the source database uses these data types: 
 
   ```
     <copy>
@@ -80,7 +82,7 @@ The source and target database must use compatible database character sets.
 
     </copy>
   ```
-* [General Limitations on Transporting Data](https://docs.oracle.com/en/database/oracle/oracle-database/19/spucd/general-limitations-on-transporting-data.html#GUID-28800719-6CB9-4A71-95DD-4B61AA603173)
+* Details about "[General Limitations on Transporting Data](https://docs.oracle.com/en/database/oracle/oracle-database/19/spucd/general-limitations-on-transporting-data.html#GUID-28800719-6CB9-4A71-95DD-4B61AA603173)" are mentioned in the manual
 
 
 ## Task 3: XTTS Tablespace Violations on Source  
@@ -174,7 +176,7 @@ Only XML data in SYSAUX tablespace which you're not going to migrate. So ignore 
 
 
 ## Task 8: Global Temporary Tables
-Global temporary tables do not belong to any tablespace, so they are not transported to the target database. Let's see if we have some global temporary tables and to which user they might belong:
+Global temporary tables do not belong to any tablespace, so they are not transported to the target database. Let's see if we have some global temporary tables and who might own them:
 
 
   ```
@@ -188,7 +190,10 @@ Global temporary tables do not belong to any tablespace, so they are not transpo
   ```
 ![GlobalTempTable](./images/GlobalTempTables.png " ")
 
+There are no global temporary tables in our lab. When you have them in your database, you can migrate them using Data Pump export/import or generate the metadata from these tables and created them in the target database.
 
+
+You may now *proceed to the next lab*.
 
 
 
