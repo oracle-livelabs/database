@@ -26,7 +26,7 @@ This lab assumes you have:
 
 ## Task 1: Verify OKE cluster
 
-1. Click the **Hamburger Menu** ![](images/hamburger.png) in the upper left, navigate to **Developer Services** and select **Kubernetes Cluster (OKE)**
+1. Click the **Hamburger Menu** ![OCI Menu](images/hamburger.png) in the upper left, navigate to **Developer Services** and select **Kubernetes Cluster (OKE)**
 
     ![Navigate to OKE](images/navigate-to-oke.png)
 
@@ -58,51 +58,52 @@ This lab assumes you have:
 
 6. Connect to the **oke-operator** compute instance using OCI Cloud Shell
 
-	![Connect to VM](images/connect-to-vm.png)
+    ![Connect to VM](images/connect-to-vm.png)
 
 7. Paste the command copied in Step 6 in the command line and hit **Enter** to set up the access to OKE
-	![Set up access to OKE](images/oke-setup-access-vm.png)
+    ![Set up access to OKE](images/oke-setup-access-vm.png)
 
 ## Task 3: Deploy ingress-controller to OKE
 
 1. Apply the ingress controller deployment YAML to **OKE**
 
-    ```
-	<copy>
+    ```text
+    <copy>
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml
-	</copy>
+    </copy>
     ```
 
 2. Check the status of deployed namespace and services
 
-    ```
-	<copy>
+    ```text
+    <copy>
     kubectl get all -n ingress-nginx
-  </copy>
-  ```
+    </copy>
+    ```
+
 3. Retrieve the Public IP of the ingress controller services
 
-	```
-<copy>
-kubectl get service -n ingress-nginx --watch
-</copy>
-```
+    ```text
+    <copy>
+    kubectl get service -n ingress-nginx --watch
+    </copy>
+    ```
 
-	Once you have the External IP provisioned, you can press CTL+C to terminate the command
+    Once you have the External IP provisioned, you can press CTL+C to terminate the command
 
 ## Task 4: Deploy sample 'hello world' application
 
 1. Create 'helloworld' namespace
 
-	```
-  <copy>
-	kubectl create ns helloworld
-  </copy>
-	```
+    ```text
+    <copy>
+    kubectl create ns helloworld
+    </copy>
+    ```
 
 2. Deploying hello world application to 'helloworld' namespace
 
-    ```
+    ```text
     <copy>
     cat <<EOF | kubectl apply -n helloworld -f -
     apiVersion: apps/v1
@@ -146,17 +147,17 @@ kubectl get service -n ingress-nginx --watch
 
 3. Check the application deployment in 'helloworld' namespace
 
-	```
-	<copy>
-	kubectl get all -n helloworld
-	</copy>
-	```
+    ```text
+    <copy>
+    kubectl get all -n helloworld
+    </copy>
+    ```
 
-	![Deploy Hello World Application](images/deploy-helloworld-app.png)
+    ![Deploy Hello World Application](images/deploy-helloworld-app.png)
 
 4. Deploy Ingress Resource 'helloworld-ing' to 'helloworld' namespace
 
-	```
+  ```text
 <copy>
 cat <<EOF | kubectl apply -n helloworld -f -
 apiVersion: networking.k8s.io/v1
@@ -189,20 +190,21 @@ EOF
 
   Take note of the external public IP for the service
 
-	>**Note** The Public IP of the the Ingress Resource **helloworld-ing** will take sometime to be assigned, monitor the creation until the Public IP address is assigned
+  >**Note** The Public IP of the the Ingress Resource **helloworld-ing** will take sometime to be assigned, monitor the creation until the Public IP address is assigned
 
-	```
-	<copy>
-	kubectl get svc -n ingress-nginx
-	</copy>
-	```
-	```
-	<copy>
-	kubectl get ing -n helloworld
-	</copy>
-	```
+  ```text
+  <copy>
+  kubectl get svc -n ingress-nginx
+  </copy>
+  ```
 
-	![Check Ingress status](images/check-ingress-status.png)
+  ```text
+  <copy>
+  kubectl get ing -n helloworld
+  </copy>
+  ```
+
+  ![Check Ingress status](images/check-ingress-status.png)
 
 2. Open a browser and access your 'hello world' application using the external IP address. (e.g. http://xxx.xxx.xxx.xxx:/helloworld)
 
@@ -212,21 +214,24 @@ EOF
 
 1. Remove the 'helloworld' namespace (hello world application, ingress)
 
-	```
-	<copy>
-	kubectl delete ns helloworld
-	</copy>
-	```
+  ```text
+  <copy>
+  kubectl delete ns helloworld
+  </copy>
+  ```
 
   You may now **proceed to the next lab.**
 
 ## Acknowledgements
 
-* **Author**
-	* Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
-	* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
-* **Contributors**
-	* Perside Foster, MySQL Solution Engineering North America
-	* Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
+Author
 
-* **Last Updated By/Date** - Ryan Kuan, May 2022
+* Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
+* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
+
+Contributors
+
+* Perside Foster, MySQL Solution Engineering North America
+* Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
+
+Last Updated By/Date - Ryan Kuan, March 2023

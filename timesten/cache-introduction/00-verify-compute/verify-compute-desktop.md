@@ -15,7 +15,7 @@ This lab shows you how to login to your pre-created compute instance running on 
 
 This lab assumes:
 
-- You have successfully provisioned a workshop compute instance either in the LiveLabs sandbix or in your own tenancy.
+- You have successfully provisioned a workshop compute instance either in the LiveLabs sandbox or in your own tenancy.
 - If you using the LiveLabs sandbox, and you wish to use SSH to access the compute instance, that you have an RSA format SSH private/public key pair to use to access the compute instance (optional).
 
 If you wish to use the NoVNC graphical desktop to access the workshop compute instance, please complete **tasks 1 and 2** below.
@@ -126,4 +126,4 @@ You can now **proceed to the next lab**.
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
 * **Contributors** - LiveLabs Team
-* **Last Updated By/Date** - Jenny Bloom, February 2023
+* **Last Updated By/Date** - Jenny Bloom, June 2023

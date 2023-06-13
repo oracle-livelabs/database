@@ -4,13 +4,14 @@
 
 This lab walks you through the steps necessary to create a proper operating environment.
 
-_Estimated Lab Time:_ 5 minutes
+_Estimated Lab Time:_ 7 minutes
 
 ### Objectives
 
 In this lab you will:
 * Create a Compartment
 * Download Code Bundle
+* Deploy Infrastructure using Terraform
 * Learn about Credentials, and Policies
 
 ### Prerequisites
@@ -25,12 +26,12 @@ This lab assumes you have:
 1. Log into the Oracle Cloud Console using your tenancy. Please make note of
 what region you are at.
 
-    ![console-image](images/console-image.png)
+    ![Oracle Cloud Console](https://oracle-livelabs.github.io/common/images/console/home-page.png)
 
 2. On left side drop down (left of Oracle Cloud banner), go to **Identity & Security**
 and then **Compartments.**
 
-    ![identity-security-compartment](images/identity-security-compartment.png)
+    ![Identity & Security](https://oracle-livelabs.github.io/common/images/console/id-compartment.png)
 
 3. Click **Create Compartment.** This opens up a new window.
 
@@ -50,11 +51,11 @@ place that in the Cloud Shell.
 1. Open the **Cloud Shell** in the top right menu. It can take about 2 minutes
 to get the Cloud Shell started.
 
-    ![cloud-shell](images/cloud-shell.png)
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
 2. Execute the following in your Cloud Shell.
 
-    ````
+    ```shell
     <copy>
     cd $HOME
     rm -rf video-on-demand-with-nosql-database
@@ -64,15 +65,9 @@ to get the Cloud Shell started.
     sh unzip.sh
     cd $HOME
     </copy>
-    ````
+    ```
 
 3. Exit from Cloud Shell
-
-4. Open the **OCI Code Editor** in the top right menu. It can take about 2 minutes
-to get the Code Editor started. You can continue the next Task. Cloud Editor
-will be used only in the Lab4
-
-    ![cloud-code-editor](images/cloud-code-editor.png)
 
 ## Task 3: Deploy Infrastructure using Terraform
 
@@ -107,26 +102,37 @@ will be used only in the Lab4
 
   ![stack-progress](images/stack-progress.png)
 
-  Once it has succeeded you can delete that window from your browser.
+  While it is running, go ahead and start Task 4. Once it has succeeded you can sign out and  delete that window from your browser.
 
 ## Task 4: Understand Credentials, and Policies
 
 **Oracle NoSQL Database Cloud Service uses Oracle Cloud Infrastructure Identity
 and Access Management to provide secure access to Oracle Cloud.** Oracle Cloud
 Infrastructure Identity and Access Management enables you to create user accounts
-and give users permission to inspect, read, use, or manage tables.
-Credentials are used for connecting your application to the service and are
-associated with a specific user.
+and give users permission to inspect, read, use, or manage NoSQL tables.  There are 4
+authentication methods available: API key-based, Session token-based
+(delegation tokens), Instance Principal and Resource Principal. The Oracle NoSQL Database
+SDKs allow you to provide the credentials for an application using any of these
+authentication methods. Credentials are typically associated with a specific user.
 
-The Oracle NoSQL Database SDKs allow you to provide the credentials to an application
-in multiple ways. The SDKs support a configuration file as well as one or more
-interfaces that allow direct specification of the information. You can use the
-SignatureProvider API to supply your credentials to NoSQL Database.
 Oracle NoSQL has SDKs in the following languages:  Java, Node.js, Python, Go, Spring and C#.
+The SDKs support a configuration file as well as API interfaces that allow direct
+specification of the credential information. You can use the
+SignatureProvider API to supply your API key-based credentials to NoSQL Database. The
+usual things provided include user OCID, tenancy OCID, private key, and fingerprint.
+The Session token-based approach is similar but it adds a temporary session token which
+usually expires in an hour.   This is useful when a temporary authentication is
+required.
 
 Another way to handle authentication is with Instance and Resource Principals.
-The Oracle NoSQL SDKs support both of them. Resource principals are primarily
-used when authenticating from functions.
+
+Resource principals allow you to authenticate and access Oracle Cloud Infrastructure
+resources.  A resource principal consists of a temporary session token (which
+typically is cached for 15 minutes) and secure
+credentials that enables the owner/user to authenticate to Oracle Cloud Infrastructure services.
+To use them you have to set up a dynamic group and create a policy that grants the
+dynamic group access to a resource.   These are typically used when authenticating
+into the NoSQL Cloud Service from functions (NoSQL Cloud Service would be the resource).
 
 Instance Principals is a capability in Oracle Cloud Infrastructure Identity
 and Access Management (IAM) that lets you make service calls from an instance.
@@ -136,9 +142,9 @@ are set up in IAM. You can think of them as an IAM service feature that enables
 instances to be authorized actors (or principals) to perform actions on service resources.
 
 Oracle NoSQL Database Cloud service has three different resource types, namely,
-nosql-tables, nosql-rows, and nosql-indexes. It also has one aggregate resource
-called nosql-family. Policies are created that allow a group to work in certain
-ways with specific types of resources such as nosql-tables in a particular
+`nosql-tables`, `nosql-rows`, and `nosql-indexes`. It also has one aggregate resource
+called `nosql-family`. Policies are created that allow a group to work in certain
+ways with specific types of resources such as `nosql-tables` in a particular
 compartment. All NoSQL tables belong to a defined compartment.
 In Task 1 of this Lab, we created the demonosql compartment and this is where
  we will create our tables.
@@ -149,7 +155,7 @@ Once they are set up, they are simple to use because all you need to do is call
 the appropriate authorization constructor.
 
 **NoSQL Database Node.js SDK**
-```
+```node
 <copy>
 function createClientResource() {
   return new NoSQLClient({
@@ -164,11 +170,11 @@ function createClientResource() {
 }
 </copy>
 ```
-In the next labs we are going to be running application code and we need an
-instance to run that from. We will run this application using Cloud Shell
-using another way called delegation token
+Also in one of our next labs we are going to be running application code and we need an
+instance to run that from. We will run that application using Cloud Shell
+with a delegation token.
 
-```
+```node
 <copy>
 function createClientResource() {
   return new NoSQLClient({
@@ -196,4 +202,4 @@ You may now **proceed to the next lab.**
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, March 2023
+* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Development, April 2023

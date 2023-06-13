@@ -15,7 +15,7 @@ container orchestration platform like Kubernetes. These use cases include: APIs,
 web applications, build and deployment jobs in CI/CD pipelines, automation tasks f
 or cloud operations, data/media processing jobs, development or test environments, and more.
 
-_Estimated Lab Time:_ 25 minutes
+_Estimated Time:_ 20 minutes
 
 ### Objectives
 
@@ -44,41 +44,23 @@ In this task we will review the code using OCI Code Editor.
 
     ![Code](./images/appl-code.png)
 
-    Oracle NoSQL Database offers **flexible deployment** options to suit the needs of
-its customers. Whether deploying on an "On-Premises" cluster or utilizing the
-Oracle NoSQL Database Cloud Service, developers and end-users get the latest in
-NoSQL technology. Oracle offers a complete range of deployment options to
-support your NoSQL database, from on-premises to private cloud to public cloud.
+   Let's take a look at the function `createNoSQLClient` again.  In the
+   previous lab, we ran the application code using Cloud Shell and used
+   **delegation tokens**.  In this lab, we are going to be running
+   application using **Resource Principals**.
 
-    The function `createNoSQLClient` allows to illustrate this:
-    - You can use **Instance Principals** to do the connection to NoSQL Cloud Service as
-shown in this code instead of specifying the credentials. Once they are set up,
-you can configure your OKE cluster to isolate workloads across node pools,
-create a dynamic group, write your policies. Your application connects to Oracle
-NoSQL Database Cloud Service by using Instance Principals. You can Deploy your
-application using the Kubernetes command line tool kubectl from the
-instructions in a manifest file.
-e.g. We deploy our image [using GitHub Actions](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-vod.yml)
+    * As discussed in the Lab 2 - Task 4: Understand Credentials, and Policies.
+To use them you have to set up a dynamic group and create a policy that grants
+the dynamic group access to a resource.
+We did it for you in **Lab 2 - Task 3: Deploy Infrastructure using Terraform**.
+Take a look at the `policy.tf` file in the following directory `video-on-demand-with-nosql-database`.
+    * In this Lab, We will use a container image that we deployed in GitHub Container Registry.
+Take a look to the `Dockerfile` in the following directory `video-on-demand-with-nosql-database/demo-vod`, and [check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/build-and-push-demo-vod-image.yml)
 
-    - In the previous lab, we ran the application code using Cloud Shell and using another way
-called **delegation token**
+    * Note: When deploying using OKE - see Lab 1, you will do the connection using **Instance Principals**. It is not the topic of this workshop but if you
+want to learn more read the `oracle-app-ndcs-deployment.yaml` file in the following directory `video-on-demand-with-nosql-database`. [Check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-vod.yml) to learn how to deploy using GitHub Actions.
 
-    - In this lab, we are going to be running application code and we will deploy the application using **Resource Principals**.
-
-    - Finally, the default configuration in this code, allows you to do the Connection
-to on-premise non-secure configuration. It is not the topic of this Lab but if you
-want to learn more [click here](https://github.com/oracle/nosql-examples/blob/master/demo-livelab/video-on-demand-with-nosql-database/README.md)
-
-    - Otherwise, the rest of the code is exactly the same.
-
-    As a developer, you can access your data via an API or SQL. Review the rest of the code,
-we are using both APIs to develop our application
-    - Get, put, scan APIs for raw key/value pairs and tables – CRUD API
-    - SQL for rich access to JSON, more complex filtering expressions
-    - Support for conjunctions and disjunctions in filter expressions
-
-    In the next Lab **Explore Data and Run Queries**, we will explore more on detail
- **SQL for rich access to JSON**. But let us continue with this Lab.
+When you are done looking at code, go ahead and exit from the Code Editor.
 
 ## Task 2: Restart the Cloud Shell
 
@@ -86,56 +68,55 @@ we are using both APIs to develop our application
 minimized it in which case you need to enlarge it. It is possible it may have
 become disconnected and/or timed out. In that case, restart it.
 
-![Cloud Shell](./images/cloud-shell.png)
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
 2. Execute the following environment setup shell script in the Cloud Shell to
 set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_COMPID`
 
-   ```
-  <copy>
-  source ~/video-on-demand-with-nosql-database/env.sh
-  </copy>
-  ```
-![Cloud Shell](./images/cloud-shell-result.png)
+    ```shell
+    <copy>
+    source ~/video-on-demand-with-nosql-database/env.sh
+    </copy>
+    ```
+  ![Cloud Shell](./images/cloud-shell-result.png)
 
-
+  Minimize the Cloud Shell.
 
 ## Task 3: Deploy a Container Instance
 
- 1. Log into the OCI console using your tenancy.
 
-     ![Console](images/console-image.png)
-
- 2. On left side drop down (left of Oracle Cloud banner), go to Developer Services and then Containers & Artifacts - Container Instances.
+ 1. On left side drop down (left of Oracle Cloud banner), go to Developer Services and then Containers & Artifacts - Container Instances.
 
      ![Open Containers & Artifacts](images/menu-container-instance.png)
 
- 3. Click on Create Container Instance. This opens up a new window.
+ 2. Click on Create Container Instance. This opens up a new window.
 
-   Enter **Oracle NoSQL powers Video On-Demand applications** as  name.
-   Other information does not need to be changed for this LiveLab. Then click Next
+   Enter **Oracle NoSQL powers Video On-Demand applications** as the name.
+   Other information does not need to be changed for this LiveLab. Click **Next.**
 
      ![Create Container Instance](images/create-container-instance-1.png)
 
-  Enter **demo-vod-example-app** as  name and Add the following Environment variables
+    Enter **demo-vod-example-app** as the name.  Click on **select image**, and
+    a new screen appears.  Choose **external registry**, and
+    enter **ghcr.io/oracle/demo-vod-example-app:latest** as image and Click **Select Image**
+    at bottom of screen.
+
+       ![Create Container Instance](images/create-container-instance-2.png)
+
+    Scroll down and add the following environment variables
      - `NOSQL_ServiceType` as a key and `useResourcePrincipal` as a value
      - `NOSQL_REGION` as a key and the value copied in Task 2 as a value
      - `NOSQL_COMPID` as a key and the value copied in Task 2 as a value
 
      ![Create Container Instance](images/create-container-instance-3.png)
 
-   Click on **select image**, choose **external registry**,
-   enter **ghcr.io/oracle/demo-vod-example-app:latest** as image and Click **Select Image**
+   Click **Next.**
 
-     ![Create Container Instance](images/create-container-instance-2.png)
-
-   Click Next
-
- 4. Review and Click on create
+ 3. Review and Click on create
 
      ![Create Deployment](images/create-container-instance-4.png)
 
- 8. Wait few second until the deployment is created - Status will change from **Creating** to **Active**
+ 4. Wait few second until the deployment is created - Status will change from **Creating** to **Active**
 
      ![Create Deployment](images/create-container-instance-5.png)
 
@@ -144,30 +125,38 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
 
 ## Task 4: Read Data and Examine It
 
-1. Set the variable IP_CI with the value copied in the previous section. Execute in the Cloud Shell.
+1. Execute the following environment setup shell script in the Cloud Shell to
+set up your environment.
 
-    ```
+    ```shell
     <copy>
-    export IP_CI=132.145.144.79
+    source ~/video-on-demand-with-nosql-database/env.sh
     </copy>
     ```
-    **Note:** This will start the "demo-vod" application in the background.
+Set the variable IP_CI with the value copied in the previous section. Execute in the Cloud Shell.
+
+    ```shell
+    <copy>
+    export IP_CI=<copied Public IP address>
+    </copy>
+    ```
+    **Note:** The "demo-vod" application is running in the container.
 
 2. Read back the data that we entered in the Lab 4 using the GraphQL query `Streams`.
 Execute in the Cloud Shell.
 
-    ````
+    ```shell
     <copy>
     curl --request POST --header 'content-type: application/json' --url $IP_CI:3000 \
 --data '{"query":"query Streams { streams { id  info { firstName  lastName country } }}"}' | jq
     </copy>
-    ````
+    ```
 
     This will display all the rows in the table currently without details about shows.
 
 3. Read data for a specific user using the GraphQL query `Stream($streamId: Int)`
 
-    ````
+    ```shell
     <copy>
     curl --request POST \
     --header 'content-type: application/json' \
@@ -175,29 +164,29 @@ Execute in the Cloud Shell.
     --data '{
   "query": "query Stream($streamId: Int) { user1:stream(id: $streamId) {id   info{ country shows {showName}} } }", "variables": { "streamId": 1} }'|jq
     </copy>
-    ````
+    ```
 
 5. Execute one of the reports using the GraphQL queries - For every show aired
 by the application, fetch the total watch time by all users
 
-    ````
+    ```shell
     <copy>
     curl --request POST \
     --header 'content-type: application/json' \
     --url $IP_CI:3000 \
     --data '{"query":"query WatchTime { watchTime { showName seasonNum length } } "}'|jq
     </copy>
-    ````
-
+    ```
+Exit out of the Cloud Shell. You may now **proceed to the next lab.**
 
 ## Learn More
 
 
 * [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
-* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/pls/topic/lookup?ctx=cloud&id=CSNSD-GUID-88373C12-018E-4628-B241-2DFCB7B16DE8)
+* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/index.html)
 * [About Container Instance](https://docs.oracle.com/en-us/iaas/Content/container-instances/home.htm)
 
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, January 2023
+* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Development, April 2023

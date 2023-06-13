@@ -10,7 +10,7 @@ Queries that need data from multiple shards, and queries that do not specify a s
 *Estimated Lab Time:* 20 minutes.
 
 Watch the video below for a quick walk through of the lab.
-[Database Request Rout to Shard](videohub:1_yxecewxc)
+[Request Database Routing to Shard](videohub:1_yxecewxc)
 
 ### Objectives
 
