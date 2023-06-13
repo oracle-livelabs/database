@@ -2,7 +2,7 @@
 
 ## About this Workshop
 
-In this lab you will migrate an 11.2.0.4 database directly into a 21c PDB using version 4 of the __Cross Platform Transportable Tablespace (XTTS) Perl__ script. This script automatically handles cross platform migrations including conversions from little to big endianness (or vice versa). But you can also use it like in our case to migrate directly into a PDB. 
+In this lab you will migrate an 11.2.0.4 database directly into a 21c PDB using version 4 of the __Cross Platform Transportable Tablespace (XTTS) Perl__ script. This script automatically handles cross platform migrations including conversions from little to big endianness (or vice versa). But you can also use it like in our case to migrate directly into a PDB running on the same platform and host. 
 The prerequisites are outlined in [MOS note #2471245.1: V4 Reduce Transportable Tablespace Downtime using Cross Platform Incremental Backup](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2471245.1&displayIndex=1). Another helpful document is [MOS note #1454872.1: Transportable Tablespace (TTS) Restrictions and Limitations: Details, Reference, and Version Where Applicable ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1454872.1&displayIndex=1).
 
 Outlined below are the steps you will execute assisted by the XTTS V4 Perl script:

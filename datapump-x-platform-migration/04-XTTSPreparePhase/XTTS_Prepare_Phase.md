@@ -40,187 +40,188 @@ Copy the content of the xtt.properties file from below (and scroll down for furt
 
   ```
     <copy>
-## xtt.properties
-## (Doc ID 2471245.1)
-##
-## Properties file for xttdriver.pl
-##
-## Properties to set are the following:
-##   tablespaces
-##   platformid
-##   dest_datafile_location
-##   dest_scratch_location
-##   cnvinst_home
-##   cnvinst_sid
-##   asm_home
-##   asm_sid
-##   parallel
-##   rollparallel
-##   getfileparallel
-##   metatransfer
-##   destuser
-##   desthost
-##   desttmpdir
-##   srcconnstr
-##   destconnstr
-##   allowstandby
-##   usermantransport
-##
-## See documentation below and My Oracle Support Note 2471245.1 for details on V4.
-##
-##
-##
-## Next parameters are needed ONLY when using dbms_file_transfer package
-## source database directory pointing to the SOURCE datafile location
-##
-## srcdir=XTTS_SOURCE_DIR1
-##
-## target database directory pointing to the TARGET datafile location
-##
-## dstdir=XTTS_TARGET_DIR
-## srclink=XTTS_SOURCE_LNK
-## Tablespaces to transport
-## ========================
-##
-## tablespaces
-## -----------
-## Comma separated list of tablespaces to transport from source database to destination databa
-## Do NOT use quotes
-## Specify tablespace names in CAPITAL letters.
-## Be sure there are NO space between the names
-## TABLESPACES w/o sys, system, sysaux, temp and undo - list is comma separated without spaces!
-tablespaces=TPCCTAB,USERS
-## Source database platform ID
-## ===========================
-##
-## platformid
-## ----------
-## Source database platform id, obtained from V$DATABASE.PLATFORM_ID
-platformid=13
-## SOURCE system file locations
-## ============================
-##
-## src_scratch_location
-## ------------
-## Location where datafile copies and incremental backups are created on the source system.
-##
-## This location may be an NFS-mounted filesystem that is shared with the
-## destination system, in which case it should reference the same NFS location
-## as the dest_scratch_location property for the destination system.
-src_scratch_location=/home/oracle/XTTS/DUMP
-## DESTINATION system file locations
-## =================================
-##
-## dest_datafile_location
-## -------------
-##
-## This is the FINAL location of the datafiles to be used by the destination database.
-## Be sure there are NO TRAILING space
-## Location where the converted datafile copies will be written in the destination.
-## If using ASM, this should be set to the disk group name:
-## dest_datafile_location=+DATAMCH
-dest_datafile_location=/u02/oradata/CDB3/pdb3/
-## dest_scratch_location
-## -----------
-## This is the location where datafile copies and backups are placed on the destination system
-## transferred manually from the souce system.  This location must have
-## sufficient free space to hold copies of all datafiles and backups being transported.
-##
-## This location may be a DBFS-mounted filesystem.
-##
-## This location may be an NFS-mounted filesystem that is shared with the
-## source system in which case it should reference the same NFS location
-## as the src_scratch_location for the source system.
-## dest_scratch_location=/dest_backups/
-dest_scratch_location=/home/oracle/XTTS/DUMP
-## asm_home, asm_sid
-## -----------------
-## Grid home and SID for the ASM instance that runs on the destination
-## system when the destination datafiles will reside on ASM.
-##
-#asm_home=/u01/app/11.2.0.4/grid
-#asm_sid=+ASM1
-#asm_home=/u01/app/12.1.0.2/grid
-#asm_sid=+ASM1
-## Parallel parameters
-## ===================
-##
-## parallel
-## --------
-## Parallel defines the channel parallelism used in copying (prepare phase),
-## converting.
-##
-## Note: Incremental backup creation parallelism is defined by RMAN
-## configuration for DEVICE TYPE DISK PARALLELISM.
-##
-## If undefined, default value is 8.
-parallel=8
-## rollparallel
-## ------------
-## Defines the level of parallelism for the -r roll forward operation.
-##
-## If undefined, default value is 0 (serial roll forward).
-rollparallel=2
-## getfileparallel
-## ---------------
-## Defines the level of parallelism for the -G operation
-##
-## If undefined, default value is 1. Max value supported is 8.
-## This will be enhanced in the future to support more than 8
-## depending on the destination system resources.
-#getfileparallel=4
-## metatransfer
-## ---------------
-## If passwordless ssh is enabled between the source and the destination, the
-## script can automatically transfer the temporary files and the backups from
-## source to destination. Other parameters like desthost, desttmpdir needs to
-## be defined for this to work. destuser is optional
-## metatransfer=1
-#metatransfer=1
-## destuser
-## ---------
-## The username that will be used for copying the files from source to dest
-## using scp. This is optional
-## dest_user=username
-# dest_user=DESTUSERDUMP
-## desthost
-## --------
-## This will be the name of the destination host.
-## dest_host=machinename
-#dest_host=hol.localdomain
-## desttmpdir
-## ---------------
-## This should be defined to same directory as TMPDIR for getting the
-## temporary files. The incremental backups will be copied to directory pointed
-## by stageondest parameter.
-## desttmpdir=/ogg/oraacs/XTTS
-#desttmpdir=DUMPTARGET/XTTS/ogg/oraacs/XTTS
-## dumpdir
-## ---------
-## The directory in which the dump file be restored to. If this is not specified
-## then TMPDIR is used.
-## dumpdir=/ogg/oraacs/XTTS
-## using scp. This is optional
-## dumpdir=
-## srcconnstr
-## ---------
-## Only needs to be set in CDB environment. Specifies connect string of the
-## source pluggable database
-#srcconnstr=sys/knl_test7@cdb1_pdb1
-## destconnstr
-## ---------
-## Only needs to be set in CDB environment. Specifies connect string of the
-## destination pluggable database
-destconnstr=sys/oracle@cdb3
-## allowstandby
-## ---------
-## This will allow the script to be run from standby database.
-## allowstandby=1
-## usermantransport
-## -----------------
-## This should be set if using 12c.
-#usermantransport=1
-## usermantransport=1
+    ## xtt.properties
+    ## (Doc ID 2471245.1)
+    ##
+    ## Properties file for xttdriver.pl
+    ##
+    ## Properties to set are the following:
+    ##   tablespaces
+    ##   platformid
+    ##   dest_datafile_location
+    ##   dest_datafile_location
+    ##   dest_scratch_location
+    ##   cnvinst_home
+    ##   cnvinst_sid
+    ##   asm_home
+    ##   asm_sid
+    ##   parallel
+    ##   rollparallel
+    ##   getfileparallel
+    ##   metatransfer
+    ##   destuser
+    ##   desthost
+    ##   desttmpdir
+    ##   srcconnstr
+    ##   destconnstr
+    ##   allowstandby
+    ##   usermantransport
+    ##
+    ## See documentation below and My Oracle Support Note 2471245.1 for details on V4.
+    ##
+    ##
+    ##
+    ## Next parameters are needed ONLY when using dbms_file_transfer package
+    ## source database directory pointing to the SOURCE datafile location
+    ##
+    ## srcdir=XTTS_SOURCE_DIR1
+    ##
+    ## target database directory pointing to the TARGET datafile location
+    ##
+    ## dstdir=XTTS_TARGET_DIR
+    ## srclink=XTTS_SOURCE_LNK
+    ## Tablespaces to transport
+    ## ========================
+    ##
+    ## tablespaces
+    ## -----------
+    ## Comma separated list of tablespaces to transport from source database to destination databa
+    ## Do NOT use quotes
+    ## Specify tablespace names in CAPITAL letters.
+    ## Be sure there are NO space between the names
+    ## TABLESPACES w/o sys, system, sysaux, temp and undo - list is comma separated without spaces!
+    tablespaces=TPCCTAB,USERS
+    ## Source database platform ID
+    ## ===========================
+    ##
+    ## platformid
+    ## ----------
+    ## Source database platform id, obtained from V$DATABASE.PLATFORM_ID
+    platformid=13
+    ## SOURCE system file locations
+    ## ============================
+    ##
+    ## src_scratch_location
+    ## ------------
+    ## Location where datafile copies and incremental backups are created on the source system.
+    ##
+    ## This location may be an NFS-mounted filesystem that is shared with the
+    ## destination system, in which case it should reference the same NFS location
+    ## as the dest_scratch_location property for the destination system.
+    src_scratch_location=/home/oracle/XTTS/DUMP
+    ## DESTINATION system file locations
+    ## =================================
+    ##
+    ## dest_datafile_location
+    ## -------------
+    ##
+    ## This is the FINAL location of the datafiles to be used by the destination database.
+    ## Be sure there are NO TRAILING space
+    ## Location where the converted datafile copies will be written in the destination.
+    ## If using ASM, this should be set to the disk group name:
+    ## dest_datafile_location=+DATAMCH
+    dest_datafile_location=/u02/oradata/CDB3/pdb3/
+    ## dest_scratch_location
+    ## -----------
+    ## This is the location where datafile copies and backups are placed on the destination system
+    ## transferred manually from the souce system.  This location must have
+    ## sufficient free space to hold copies of all datafiles and backups being transported.
+    ##
+    ## This location may be a DBFS-mounted filesystem.
+    ##
+    ## This location may be an NFS-mounted filesystem that is shared with the
+    ## source system in which case it should reference the same NFS location
+    ## as the src_scratch_location for the source system.
+    ## dest_scratch_location=/dest_backups/
+    dest_scratch_location=/home/oracle/XTTS/DUMP
+    ## asm_home, asm_sid
+    ## -----------------
+    ## Grid home and SID for the ASM instance that runs on the destination
+    ## system when the destination datafiles will reside on ASM.
+    ##
+    #asm_home=/u01/app/11.2.0.4/grid
+    #asm_sid=+ASM1
+    #asm_home=/u01/app/12.1.0.2/grid
+    #asm_sid=+ASM1
+    ## Parallel parameters
+    ## ===================
+    ##
+    ## parallel
+    ## --------
+    ## Parallel defines the channel parallelism used in copying (prepare phase),
+    ## converting.
+    ##
+    ## Note: Incremental backup creation parallelism is defined by RMAN
+    ## configuration for DEVICE TYPE DISK PARALLELISM.
+    ##
+    ## If undefined, default value is 8.
+    parallel=8
+    ## rollparallel
+    ## ------------
+    ## Defines the level of parallelism for the -r roll forward operation.
+    ##
+    ## If undefined, default value is 0 (serial roll forward).
+    rollparallel=2
+    ## getfileparallel
+    ## ---------------
+    ## Defines the level of parallelism for the -G operation
+    ##
+    ## If undefined, default value is 1. Max value supported is 8.
+    ## This will be enhanced in the future to support more than 8
+    ## depending on the destination system resources.
+    #getfileparallel=4
+    ## metatransfer
+    ## ---------------
+    ## If passwordless ssh is enabled between the source and the destination, the
+    ## script can automatically transfer the temporary files and the backups from
+    ## source to destination. Other parameters like desthost, desttmpdir needs to
+    ## be defined for this to work. destuser is optional
+    ## metatransfer=1
+    #metatransfer=1
+    ## destuser
+    ## ---------
+    ## The username that will be used for copying the files from source to dest
+    ## using scp. This is optional
+    ## dest_user=username
+    # dest_user=DESTUSERDUMP
+    ## desthost
+    ## --------
+    ## This will be the name of the destination host.
+    ## dest_host=machinename
+    #dest_host=hol.localdomain
+    ## desttmpdir
+    ## ---------------
+    ## This should be defined to same directory as TMPDIR for getting the
+    ## temporary files. The incremental backups will be copied to directory pointed
+    ## by stageondest parameter.
+    ## desttmpdir=/ogg/oraacs/XTTS
+    #desttmpdir=DUMPTARGET/XTTS/ogg/oraacs/XTTS
+    ## dumpdir
+    ## ---------
+    ## The directory in which the dump file be restored to. If this is not specified
+    ## then TMPDIR is used.
+    ## dumpdir=/ogg/oraacs/XTTS
+    ## using scp. This is optional
+    ## dumpdir=
+    ## srcconnstr
+    ## ---------
+    ## Only needs to be set in CDB environment. Specifies connect string of the
+    ## source pluggable database
+    #srcconnstr=sys/knl_test7@cdb1_pdb1
+    ## destconnstr
+    ## ---------
+    ## Only needs to be set in CDB environment. Specifies connect string of the
+    ## destination pluggable database
+    destconnstr=sys/oracle@pdb3
+    ## allowstandby
+    ## ---------
+    ## This will allow the script to be run from standby database.
+    ## allowstandby=1
+    ## usermantransport
+    ## -----------------
+    ## This should be set if using 12c.
+    #usermantransport=1
+    ## usermantransport=1
     </copy>
   ```
 
