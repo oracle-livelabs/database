@@ -79,6 +79,7 @@ Enable source database archive logging and create the database directory for Dat
     ALTER DATABASE OPEN;
     CREATE OR REPLACE DIRECTORY "XTTS_METADATA_DIR" AS '/home/oracle/XTTS/DUMP';
     alter user TPCC identified by oracle;
+    exit
     
     </copy>
   ```
