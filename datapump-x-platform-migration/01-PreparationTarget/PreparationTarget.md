@@ -16,12 +16,15 @@ This lab assumes you have:
 
 - Connected to the Hands On Lab
 
-## Task 1: Open Terminal Window and Create OS Target Directory
+## Task 1: Open Terminal Window, Create OS Target Directory and Unzip XTTS ZIP File
 
+### Open Terminal Window
 Open two terminal Windows by clicking on the Terminal icon
 ![terminal](./images/Terminal.png " ")
 
-For better visibility the source database will use a light blue and the target database a light green background.<br>
+For better visibility the source database will use a light blue and the target database a light green background.
+
+### Create OS Target Directory
 Activate the target terminal window and create a directory for the XTTS TARGET files.
 
   ```
@@ -31,6 +34,18 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
   ```
 
 ![Create_TARGTE_OS_Dir](./images/create_TARGET_OS_DIR.png " ")
+
+### Unzip XTTS ZIP file
+
+  ```
+    <copy>
+    cd /home/oracle/XTTS/TARGET/
+    unzip /home/oracle/Desktop/rman_xttconvert_VER4.3.zip
+
+    </copy>
+  ```
+
+![Unzip_XTTS](./images/XTTS_unzip_TRG.png " ")
 
 
 ## Task 2: Set the Target Environment and Start SQL*Plus

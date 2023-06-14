@@ -21,7 +21,7 @@ This lab assumes you have:
 - Source and target prepared.
 - XTTS prechecks done
 
-## Task 1: XTTS Properties File
+## Task 2: XTTS Properties File
 On source change into the XTTS Source directory and create the xtt.properties file using vi (for those of you who are not familiar with vi, no worries, you get the necessary vi commands shortly). So here the steps:
 
   ```
@@ -243,7 +243,7 @@ The "-- Insert --" is gone. To save your new file and to exit from vi type ":wq!
 ![write_quit_vi](./images/write_quit_vi.png " ")
 
 
-## Task 2: Initial Backup 
+## Task 3: Initial Backup 
 While the source database remains active, you're now going to back it up for the first time:
 
 
@@ -260,50 +260,51 @@ While the source database remains active, you're now going to back it up for the
 
 <details>
  <summary>*click here to open/close the full backup log*</summary>
+
   ```text
     [UPGR] oracle@hol:~/XTTS/SOURCE
     $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
     ============================================================
     trace file is /home/oracle/XTTS/SOURCE/tmp/backup_Jun5_Mon_14_46_08_289//Jun5_Mon_14_46_08_289_.log
     =============================================================
-    
+
     --------------------------------------------------------------------
     Parsing properties
     --------------------------------------------------------------------
-    
-    
+
+
     --------------------------------------------------------------------
     Done parsing properties
     --------------------------------------------------------------------
-    
-    
+
+
     --------------------------------------------------------------------
     Checking properties
     --------------------------------------------------------------------
-    
-    
+
+
     --------------------------------------------------------------------
     Done checking properties
     --------------------------------------------------------------------
-    
-    
+
+
     --------------------------------------------------------------------
     Starting prepare phase
     --------------------------------------------------------------------
-    
+
     scalar(or2
     XXX: adding here for 2, 0, TPCCTAB,USERS
-    
+
     --------------------------------------------------------------------
     Find list of datafiles in system
     --------------------------------------------------------------------
-    
+
     sqlplus -L -s  / as sysdba  @/home/oracle/XTTS/SOURCE/tmp/backup_Jun5_Mon_14_46_08_289//diff.sql /u02/oradata/CDB3/pdb3/
-    
+
     --------------------------------------------------------------------
     Done finding list of datafiles in system
     --------------------------------------------------------------------
-    
+
     Prepare source for Tablespaces:
                       'TPCCTAB'  /home/oracle/XTTS/DUMP
     xttpreparesrc.sql for 'TPCCTAB' started at Mon Jun  5 14:46:08 2023
@@ -324,11 +325,11 @@ While the source database remains active, you're now going to back it up for the
                       ''''  /home/oracle/XTTS/DUMP
     xttpreparesrc.sql for '''' started at Mon Jun  5 14:46:34 2023
     xttpreparesrc.sql for  ended at Mon Jun  5 14:46:34 2023
-    
+
     --------------------------------------------------------------------
     Done with prepare phase
     --------------------------------------------------------------------
-    
+
     Prepare newscn for Tablespaces: 'TPCCTAB'
     Prepare newscn for Tablespaces: 'USERS'
     Prepare newscn for Tablespaces: ''''''''''''
@@ -345,7 +346,9 @@ While the source database remains active, you're now going to back it up for the
 </details>
 
 
-## Task 3: Initial Restore  
+
+
+## Task 4: Initial Restore  
 The initial restore on Target requires the "xtt.properties" and "res.txt" file from source. In this hands on lab exercise the source and target machine are the same, so you can simply use the copy command:
 
 
@@ -368,12 +371,13 @@ Starting restore:
      
     </copy>
   ```
-![self_contained_TBS](./images/initial_restore.png " ")
+![initial_restore](./images/initial_restore.png " ")
 
 <details>
  <summary>*click here to open the full restore log*</summary>
+ 
   ```text
-  [CDB3] oracle@hol:~/XTTS/TARGET
+[CDB3] oracle@hol:~/XTTS/TARGET
 $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
 ============================================================
 trace file is /home/oracle/XTTS/TARGET/tmp/restore_Jun5_Mon_15_23_48_597//Jun5_Mon_15_23_48_597_.log
@@ -409,8 +413,10 @@ Performing convert for file 5
 --------------------------------------------------------------------
 
 [CDB3] oracle@hol:~/XTTS/TARGET
+
   ```
 </details>
+
 
 You may now *proceed to the next lab*.
 

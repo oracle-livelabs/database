@@ -16,7 +16,7 @@ This lab assumes you have:
 
 - Connected to the Hands On Lab
 
-## Task 1: Open Terminal Window and Create OS Source Directories
+## Task 1: Create OS Source Directories and Unzip XTTS ZIP File
 Activate the source terminal window and create two directories; one for the Data Pump dump file, another one for the SOURCE.
 
 ### Source directory for XTTS
@@ -38,6 +38,18 @@ Activate the source terminal window and create two directories; one for the Data
   ```
 
 ![Create_Dir_OS](./images/Create_DUMP_Dir.png " ")
+
+### Unzip XTTS ZIP file
+
+  ```
+    <copy>
+    cd /home/oracle/XTTS/SOURCE/
+    unzip /home/oracle/Desktop/rman_xttconvert_VER4.3.zip
+
+    </copy>
+  ```
+
+![Unzip_XTTS](./images/XTTS_unzip_SRC.png " ")
 
 ## Task 2: Set the Source Database Environment
 
