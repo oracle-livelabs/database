@@ -16,9 +16,32 @@ This lab assumes you have:
 
 - Connected to the Hands On Lab
 
-## Task 1: Set the Source Database Environment
+## Task 1: Open Terminal Window and Create OS Source Directories
+Activate the source terminal window and create two directories; one for the Data Pump dump file, another one for the SOURCE.
 
-Activate the second terminal window, set the source environment and start SQL*Plus:
+### Source directory for XTTS
+
+  ```
+    <copy>
+    mkdir -p /home/oracle/XTTS/SOURCE/tmp 
+    </copy>
+  ```
+
+![Create_Dir_OS](./images/Create_Source_XTTS_Dir.png " ")
+
+### DUMP directory for the Metadata Dump Output
+
+  ```
+    <copy>
+    mkdir -p /home/oracle/DP/DUMP 
+    </copy>
+  ```
+
+![Create_Dir_OS](./images/Create_DUMP_Dir.png " ")
+
+## Task 2: Set the Source Database Environment
+
+Activate source terminal window, set the source environment and start SQL*Plus:
 
   ```
     <copy>
@@ -31,7 +54,7 @@ Activate the second terminal window, set the source environment and start SQL*Pl
 ![Login to CDB3](./images/Source_UPGR_env_sqlplus.png " ")
 
 
-## Task 2: Configure Source Database
+## Task 3: Configure Source Database
 Enable source database archive logging and create the database directory for Data Pump export. Also alter the TPCC user's password:
 
 
@@ -54,7 +77,7 @@ Enable source database archive logging and create the database directory for Dat
 
 You might also consider enabling __Block Change Tracking (BCT)__ using the command "alter database enable block change tracking".
 
-## Task 3: Configuring Default RMAN Settings on Source
+## Task 4: Configuring Default RMAN Settings on Source
 The next parameters you're going to set for RMAN work well in the hands on lab. For your environment you might have to adopt them by increasing parallelism, the backup destination etc.
 
 On source start the rman console: 

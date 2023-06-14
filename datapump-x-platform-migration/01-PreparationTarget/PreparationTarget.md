@@ -16,21 +16,21 @@ This lab assumes you have:
 
 - Connected to the Hands On Lab
 
-## Task 1: Open Terminal Window and Create Three Directories
+## Task 1: Open Terminal Window and Create OS Target Directory
 
 Open two terminal Windows by clicking on the Terminal icon
 ![terminal](./images/Terminal.png " ")
 
 For better visibility the source database will use a light blue and the target database a light green background.<br>
-Activate the target terminal window and create 3 directories; one for the Data Pump dump file, another one for the SOURCE and the third directory for the TARGET files.
+Activate the target terminal window and create a directory for the XTTS TARGET files.
 
   ```
     <copy>
-    mkdir -p /home/oracle/DP/DUMP /home/oracle/XTTS/SOURCE/tmp /home/oracle/XTTS/TARGET/tmp
+    mkdir -p /home/oracle/XTTS/TARGET/tmp
     </copy>
   ```
 
-![Create_Dir_OS](./images/create_directory_os.png " ")
+![Create_TARGTE_OS_Dir](./images/create_TARGET_OS_DIR.png " ")
 
 
 ## Task 2: Set the Target Environment and Start SQL*Plus
