@@ -27,6 +27,7 @@ On source change into the XTTS Source directory and create the xtt.properties fi
   ```
     <copy>
      cd /home/oracle/XTTS/SOURCE
+     mv xtt.properties xtt.properties_ORIG
      vi xtt.properties
 
     </copy>
@@ -108,7 +109,7 @@ Copy the content of the xtt.properties file from below (and scroll down for furt
     ## This location may be an NFS-mounted filesystem that is shared with the
     ## destination system, in which case it should reference the same NFS location
     ## as the dest_scratch_location property for the destination system.
-    src_scratch_location=/home/oracle/XTTS/DUMP
+    src_scratch_location=/home/oracle/XTTS/RMAN
     ## DESTINATION system file locations
     ## =================================
     ##
@@ -133,7 +134,7 @@ Copy the content of the xtt.properties file from below (and scroll down for furt
     ## source system in which case it should reference the same NFS location
     ## as the src_scratch_location for the source system.
     ## dest_scratch_location=/dest_backups/
-    dest_scratch_location=/home/oracle/XTTS/DUMP
+    dest_scratch_location=/home/oracle/XTTS/RMAN
     ## asm_home, asm_sid
     ## -----------------
     ## Grid home and SID for the ASM instance that runs on the destination
@@ -375,7 +376,7 @@ Starting restore:
 
 <details>
  <summary>*click here to open the full restore log*</summary>
- 
+
   ```text
 [CDB3] oracle@hol:~/XTTS/TARGET
 $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L

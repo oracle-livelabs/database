@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will execute common XTTS pre-checks.
+In this lab, you will execute common XTTS pre-checks in SQL*Plus.
 
 Estimated Time: 15 minutes
 
