@@ -51,6 +51,9 @@ Enable source database archive logging and create the database directory for Dat
 
 ![Login to CDB3](./images/enable_archive_logging.png " ")
 
+
+You might also consider enabling __Block Change Tracking (BCT)__ using the command "alter database enable block change tracking".
+
 ## Task 3: Configuring Default RMAN Settings on Source
 The next parameters you're going to set for RMAN work well in the hands on lab. For your environment you might have to adopt them by increasing parallelism, the backup destination etc.
 
