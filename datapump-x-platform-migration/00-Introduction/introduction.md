@@ -22,7 +22,7 @@ VIDEO TO BE ADDED
 In this workshop, you will:
 
 * Setup a target PDB
-* Prepare the source database 
+* Prepare the source database
 * Create the XTTS properties file
 * Run the initial backup and recovery
 * Run incremental backup and restore
