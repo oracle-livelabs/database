@@ -17,28 +17,20 @@ This lab assumes you have:
 - Connected to the Hands On Lab
 
 ## Task 1: Create OS Source Directories and Unzip XTTS ZIP File
-Activate the source terminal window and create two directories; one for the Data Pump dump file, another one for the SOURCE.
+Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another one as XTTS SOURCE and a third directory for RMAN backup/restore files.
 
-### Source directory for XTTS and RMAN 
+### Source directory for XTTS 
 
   ```
     <copy>
     mkdir -p /home/oracle/XTTS/SOURCE/tmp 
+    mkdir -p /home/oracle/XTTS/DUMP
     mkdir -p /home/oracle/XTTS/RMAN
     </copy>
   ```
 
-![Create_Dir_OS](./images/Create_Source_XTTS_Dir.png " ")
+![Create_Source_OS_Dir](./images/Create_Source_OS_DIR.png " ")
 
-### DUMP directory for the Metadata Dump Output
-
-  ```
-    <copy>
-    mkdir -p /home/oracle/DP/DUMP 
-    </copy>
-  ```
-
-![Create_Dir_OS](./images/Create_DUMP_Dir.png " ")
 
 ### Unzip XTTS ZIP file
 

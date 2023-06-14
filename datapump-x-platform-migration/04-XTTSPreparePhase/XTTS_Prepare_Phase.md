@@ -21,7 +21,7 @@ This lab assumes you have:
 - Source and target prepared.
 - XTTS prechecks done
 
-## Task 2: XTTS Properties File
+## Task 1: XTTS Properties File
 On source change into the XTTS Source directory and create the xtt.properties file using vi (for those of you who are not familiar with vi, no worries, you get the necessary vi commands shortly). So here the steps:
 
   ```
@@ -244,7 +244,7 @@ The "-- Insert --" is gone. To save your new file and to exit from vi type ":wq!
 ![write_quit_vi](./images/write_quit_vi.png " ")
 
 
-## Task 3: Initial Backup 
+## Task 2: Initial Backup 
 While the source database remains active, you're now going to back it up for the first time:
 
 
@@ -349,7 +349,7 @@ While the source database remains active, you're now going to back it up for the
 
 
 
-## Task 4: Initial Restore  
+## Task 3: Initial Restore  
 The initial restore on Target requires the "xtt.properties" and "res.txt" file from source. In this hands on lab exercise the source and target machine are the same, so you can simply use the copy command:
 
 

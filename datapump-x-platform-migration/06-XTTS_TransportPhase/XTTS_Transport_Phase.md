@@ -43,6 +43,7 @@ and execute:
      ALTER TABLESPACE USERS read only;
      set pages 999
      select tablespace_name, STATUS from dba_tablespaces order by 2,1;
+     exit;
 
     </copy>
   ```
@@ -65,6 +66,7 @@ On source change into the XTTS Source directory and execute the final incrementa
 
 <details>
  <summary>*click here to see the full final backup log file*</summary>
+
   ``` text
     $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
     ============================================================
@@ -97,8 +99,9 @@ On source change into the XTTS Source directory and execute the final incrementa
     
     scalar(or2
     XXX: adding here for 2, 0, TPCCTAB,USERS
-    Added fname here 1:/home/oracle/XTTS/DUMP/USERS_4.tf
-    Added fname here 1:/home/oracle/XTTS/DUMP/TPCCTAB_5.tf
+    Added fname here 1:/home/oracle/XTTS/RMAN/USERS_4.tf
+    Added fname here 1:/home/oracle/XTTS/RMAN/TPCCTAB_5.tf
+    Added fname here 1:/home/oracle/XTTS/RMAN/TPCCTAB_6.tf
     ============================================================
     No new datafiles added
     =============================================================
@@ -112,7 +115,7 @@ On source change into the XTTS Source directory and execute the final incrementa
     Starting incremental backup
     --------------------------------------------------------------------
     
-    
+
     --------------------------------------------------------------------
     Done backing up incrementals
     --------------------------------------------------------------------
@@ -478,6 +481,7 @@ Also here we first create the import parameter file. Copy and paste the content 
      echo full=y >>Imp_Metadata.par
      echo transport_datafiles=/u02/oradata/CDB3/pdb3/USERS_4.dbf >>Imp_Metadata.par
      echo transport_datafiles=/u02/oradata/CDB3/pdb3/TPCCTAB_5.dbf >>Imp_Metadata.par
+     echo transport_datafiles=/u02/oradata/CDB3/pdb3/TPCCTAB_6.dbf >>Imp_Metadata.par
      cat Imp_Metadata.par
 
     <copy>
@@ -489,9 +493,10 @@ And import the metadata into the PDB3 using this Imp_Metadata.par parameter file
   ```
    <copy>
      impdp system/oracle@pdb3 parfile=Imp_Metadata.par
-     
+
     <copy>
   ```
+
 ![incremental_backup](./images/metadata_import.png " ")
 
 <details>

@@ -115,11 +115,17 @@ On source change into the XTTS Source directory and execute the incremental back
     
     scalar(or2
     XXX: adding here for 2, 0, TPCCTAB,USERS
-    Added fname here 1:/home/oracle/XTTS/DUMP/USERS_4.tf
-    Added fname here 1:/home/oracle/XTTS/DUMP/TPCCTAB_5.tf
+    Added fname here 1:/home/oracle/XTTS/RMAN/USERS_4.tf
+    Added fname here 1:/home/oracle/XTTS/RMAN/TPCCTAB_5.tf
+    Added fname here 2:/home/oracle/XTTS/RMAN/TPCCTAB_6.tf , fname is /u02/oradata/CDB3/pdb3/TPCCTAB_6.dbf
     ============================================================
-    No new datafiles added
+    1 new datafiles added
     =============================================================
+    TPCCTAB,/home/oracle/XTTS/RMAN/TPCCTAB_6.tf
+    ============================================================
+    Running prepare cmd for new filesx TPCCTAB_6.tf
+    =============================================================
+    Adding file to transfer:TPCCTAB_6.tf
     Prepare newscn for Tablespaces: 'TPCCTAB'
     Prepare newscn for Tablespaces: 'USERS'
     Prepare newscn for Tablespaces: ''''
@@ -146,7 +152,45 @@ On source change into the XTTS Source directory and execute the incremental back
 ## Task 2: Incremental Restore on Target
 
 Open the Target console.
-The incremental restore needs the "res.txt" and "incrbackups.txt" files from source. So copy them:
+The incremental restore needs the "res.txt" and "incrbackups.txt" files from source. <br>
+Before overwriting the files __res.txt__ and __incrbackups.txt__ on target, let's compare the source and target files:
+
+Source:
+  ```
+    <copy>
+     cat /home/oracle/XTTS/SOURCE/tmp/res.txt 
+     cat /home/oracle/XTTS/SOURCE/tmp/incrbackups.txt 
+
+    </copy>
+  ```
+![res.txt_SRC](./images/res.txt_SRC.png " ") 
+
+Target:
+  ```
+    <copy>
+     cat /home/oracle/XTTS/TARGET/tmp/res.txt
+     cat /home/oracle/XTTS/TARGET/tmp/incrbackups.txt
+
+    </copy>
+  ```
+![res.txt_TRG](./images/res.txt_TRG.png " ") 
+
+Take a closer look at both outputs. Both contain the details from your initial backup
+  ```text
+     #0:::4,13,USERS_4.dbf,0,5565595,0,0,0,USERS,USERS_4.dbf
+     #0:::5,13,TPCCTAB_5.dbf,0,5565554,0,0,0,TPCCTAB,TPCCTAB_5.dbf
+  ```
+
+The difference between source and target res.txt is the incremental backup entry you just executed on source. These details including the newly added datafile
+  ```text
+    #0:::6,13,TPCCTAB_6,0,5566205,0,0,0,TPCCTAB,TPCCTAB_6.dbf
+    #1:::6,13,1h1umiis_1_1,5566205,5566075,0,0,0,TPCCTAB_6.dbf,TPCCTAB_6.dbf
+    #1:::4,13,1i1umiiu_1_1,5565595,5566115,0,0,0,USERS_4.dbf,USERS_4.dbf
+    #1:::5,13,1g1umiis_1_1,5565554,5566075,0,0,0,TPCCTAB_5.dbf,TPCCTAB_5.dbf
+  ```
+are missing in the target res.txt.
+
+So let's continue with the process and copy both files from the source to the target directory:
 
   ```
     <copy>
@@ -196,6 +240,11 @@ Checking properties
 
 --------------------------------------------------------------------
 Done checking properties
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+Performing convert for file 6
 --------------------------------------------------------------------
 
 
