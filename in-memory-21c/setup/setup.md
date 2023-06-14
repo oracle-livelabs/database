@@ -1,4 +1,4 @@
-# Setting up the In-Memory column store
+# Set up the In-Memory column store
 
 ## Introduction
 
@@ -12,7 +12,7 @@ Quick walk through on how to enable In-Memory.
 
 [Setting up the In-Memory column store](videohub:1_dg318frc)
 
-Estimated Time: 30 minutes
+*Estimated Lab Time:* 15 Minutes.
 
 ### Objectives
 

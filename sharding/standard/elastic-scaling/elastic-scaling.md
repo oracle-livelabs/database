@@ -7,7 +7,7 @@ Now, we will add the shard (on shd3) to the Shard Database and thus elastically 
 *Estimated Lab Time:* 30 minutes.
 
 Watch the video below for a quick walk through of the lab.
-[](youtube:oojbS9Wp1RQ)
+[Elastic Scaling](videohub:1_gz6r23yf)
 
 ### Objectives
 
@@ -446,7 +446,7 @@ This lab assumes you have:
 
 
 
-10. From you laptop, launch a browser and use the URL: `http://xxx.xxx.xxx.xxx:8081`. Using the public ip address of the catalog host and the port number is 8081.
+10. Within your remote desktop on cata, launch a chrome browser and use the URL: `http://localhost:8081`.
 
     ![Display of catalog host and port.](images/cataloghost.png)
 

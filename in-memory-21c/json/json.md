@@ -1,13 +1,16 @@
 # JSON
 
 ## Introduction
-Watch the video below to get an overview of joins using Database In-Memory.
 
-[YouTube video](youtube:CHPQ6hAymvM)
+Watch the video below to get an overview of using JSON with Database In-Memory:
+
+[YouTube video](youtube:yITeIIrlWLA)
 
 Watch the video below for a walk through of the In-Memory JSON Lab:
 
 [JSON](videohub:1_5rf7ugsx)
+
+*Estimated Lab Time:* 15 Minutes.
 
 ### Objectives
 

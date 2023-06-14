@@ -51,7 +51,7 @@ In this lab, you will:
 
 7. Confirm that you wish to terminate your Oracle Autonomous Database in the confirmation dialog. Type your database name in the input field and click **Terminate Autonomous Database**.
 
-    Here, as we wish to terminate **DEMOATP** Oracle Autonomous Database, we type **DEMOATP** and click **Terminate Autonomous Database**.
+    Here, as we wish to terminate **OCIDemo** Oracle Autonomous Database, we type **OCIDemo** and click **Terminate Autonomous Database**.
 
     ![Confirm to terminate your Oracle Autonomous Database, type your database name in the confirmation dialog and click Terminate Autonomous Database](./images/demoatp-terminate.png " ")
 

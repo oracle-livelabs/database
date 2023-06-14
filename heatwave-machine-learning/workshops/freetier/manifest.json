@@ -15,22 +15,27 @@
         },
 
         {
-            "title": "Lab 1: Create MySQL HeatWave and Cluster",
+          "title": "Lab 1: Create Local SSH Key",
+          "description": "The Introduction is always second. The title and contents menu title match for the Introduction.",
+          "filename": "https://oracle-livelabs.github.io/common/labs/generate-ssh-key-local/generate-ssh-keys-local.md"
+      },
+        {
+            "title": "Lab 2: Create MySQL HeatWave",
             "filename": "../../create-dbs/create-dbs.md"
         },
 
         {
-          "title": "Lab 2: Connect to MySQL HeatWave",
-          "filename": "../../connect-dbs/connect-dbs.md"
+          "title": "Lab 3: Add HeatWave Cluster to MySQL Database Service and connect",
+          "filename": "../../add-cluster/add-cluster.md"
         },
 
         {
-            "title": "Lab 3: Build HeatWave ML with SQL",
+            "title": "Lab 4: Build HeatWave ML with SQL",
             "filename": "../../do-heatwave-ml/do-heatwave-ml.md"
         },
 
         {
-          "title": "Lab 4: Build HeatWave ML Web App with PHP",
+          "title": "Lab 5: Build HeatWave ML Web App with PHP",
           "filename": "../../develop/develop.md"
         },
 

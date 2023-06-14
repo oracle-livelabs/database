@@ -28,11 +28,17 @@
     },
     {
       "title": "Lab 4: Provision Autonomous Databases for use as resource manager",
+      "type": "tenancy",
       "filename": "../../adb-provision/adb-provision.md"
     },
     {
       "title": "Lab 5: Run an XA sample application",
       "filename": "../../run-xa-app/run-xa-app.md"
+    },
+    {
+      "description": "Cleanly dispose of all OCI resources created by ORM for the workshop, and delete the stack",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md",
+      "title": "Lab 6: Environment Cleanup"
     },
     {
       "title": "Need help?",

@@ -6,6 +6,8 @@ Watch the video below for a quick walk-through of the In-memory Joins and Aggreg
 
 [In-Memory Joins and Aggregations](videohub:1_gx8ajh93)
 
+*Estimated Lab Time:* 15 Minutes.
+
 ### Objectives
 
 -   Learn how to enable In-Memory on the Oracle Database

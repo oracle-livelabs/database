@@ -20,7 +20,7 @@ Estimated Time: 90 minutes
 
 ### About HeatWave
 
-HeatWave is a distributed, scalable, shared-nothing, in-memory, hybrid columnar, query processing engine designed for extreme performance. It is enabled when you add a HeatWave cluster to a MySQL DB System. To know more about HeatWave Cluster <a href="https://dev.mysql.com/doc/heatwave/en/heatwave-introduction.html" target="\_blank">**Click Here**</a>
+HeatWave is a distributed, scalable, shared-nothing, in-memory, hybrid columnar, query processing engine designed for extreme performance. It is enabled when you add a HeatWave cluster to a MySQL DB System. More detail information about [HeatWave Cluster](https://dev.mysql.com/doc/heatwave/en/heatwave-introduction.html)
 
 ### Objectives
 
@@ -40,23 +40,24 @@ The following OCI architecture diagram depicts all the resources to be created a
 * Oracle Container Engine for Kubernetes
 * MySQL HeatWave
 
-	![OCI Architecture](images/oci-architecture.png)
+ ![OCI Architecture](images/oci-architecture.png)
 
 ### Prerequisites (Optional)
 
 * You have an Oracle account
 * You have enough privileges to use OCI
-* You have one Compute instance having <a href="https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html" target="\_blank">**MySQL Shell**</a> installed on it.
+* You have one Compute instance having [MySQL Shell](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html) installed on it
 
 ## Acknowledgements
 
-* **Author**
+Author
 
-  * Rayes Huang, Cloud Solution Architect, OCI APAC
-  * Ryan Kuan, MySQL Cloud Engineer, MySQL APAC
+* Rayes Huang, Cloud Solution Architect, OCI APAC
+* Ryan Kuan, MySQL Cloud Engineer, MySQL APAC
 
-* **Contributors**
-  * Perside Foster, MySQL Solution Engineering
-  * Howie Owi, OCI Solution Specialist, OCI APAC
+Contributors
 
-* **Last Updated By/Date** - Ryan Kuan, March 2022
+* Perside Foster, MySQL Solution Engineering
+* Howie Owi, OCI Solution Specialist, OCI APAC
+
+Last Updated By/Date - Ryan Kuan, March 2023
