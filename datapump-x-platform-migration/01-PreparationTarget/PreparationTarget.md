@@ -20,7 +20,7 @@ This lab assumes you have:
 
 ### Open Terminal Window
 Open two terminal Windows by clicking on the Terminal icon
-![terminal](./images/Terminal.png " ")
+![terminal](./images/terminal.png " ")
 
 For better visibility the source database will use a light blue and the target database a light green background.
 
@@ -33,7 +33,7 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
     </copy>
   ```
 
-![Create_TARGTE_OS_Dir](./images/create_TARGET_OS_DIR.png " ")
+![Create_TARGTE_OS_Dir](./images/create_target_os_dir.png " ")
 
 ### Unzip XTTS ZIP file
 
@@ -45,7 +45,7 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
     </copy>
   ```
 
-![Unzip_XTTS](./images/XTTS_unzip_TRG.png " ")
+![Unzip_XTTS](./images/xtts_unzip_trg.png " ")
 
 
 ## Task 2: Set the Target Environment and Start SQL*Plus
@@ -88,7 +88,7 @@ When creating a PDB the admin user needs to exist. You can delete it later on if
     </copy>
   ```
 
-![create Database Directory Target](./images/create_database_directory_PDB3.png " ")
+![create Database Directory Target](./images/create_database_directory_pdb3.png " ")
 
 
 You may now *proceed to the next lab*.

@@ -29,7 +29,7 @@ Activate the source terminal window and create three directories; one for the Da
     </copy>
   ```
 
-![Create_Source_OS_Dir](./images/Create_Source_OS_DIR.png " ")
+![Create_Source_OS_Dir](./images/create_source_os_dir.png " ")
 
 
 ### Unzip XTTS ZIP file
@@ -42,7 +42,7 @@ Activate the source terminal window and create three directories; one for the Da
     </copy>
   ```
 
-![Unzip_XTTS](./images/XTTS_unzip_SRC.png " ")
+![Unzip_XTTS](./images/xtts_unzip_src.png " ")
 
 ## Task 2: Set the Source Database Environment
 
@@ -56,7 +56,7 @@ Activate source terminal window, set the source environment and start SQL*Plus:
     </copy>
  ```
 
-![Login to CDB3](./images/Source_UPGR_env_sqlplus.png " ")
+![Login to CDB3](./images/source_upgr_env_sqlplus.png " ")
 
 
 ## Task 3: Configure Source Database

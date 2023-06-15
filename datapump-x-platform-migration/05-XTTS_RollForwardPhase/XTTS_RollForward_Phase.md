@@ -162,7 +162,7 @@ Source:
 
     </copy>
   ```
-![res.txt_SRC](./images/res.txt_SRC.png " ") 
+![res.txt_SRC](./images/res.txt_src.png " ") 
 
 Target:
   ```
@@ -171,7 +171,7 @@ Target:
 
     </copy>
   ```
-![res.txt_TRG](./images/res.txt_TRG.png " ") 
+![res.txt_TRG](./images/res.txt_trg.png " ") 
 
 Take a closer look at both output files posted next to each other below. Both contain the details from your initial backup. <br>
 The difference between source and target res.txt is the incremental backup entry you just executed on source plus the initial load of the newly added datafile:

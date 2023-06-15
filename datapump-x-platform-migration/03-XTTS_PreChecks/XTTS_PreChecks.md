@@ -34,7 +34,7 @@ By the way, the platform_id for the target Linux platform is 13, so let's see if
     order by platform_id;
     </copy>
   ```
-![TARGET_PLATFORM_SUPPORTED](./images/Target_Platform_Supported.png " ")
+![TARGET_PLATFORM_SUPPORTED](./images/target_platform_supported.png " ")
 
 
 ## Task 1: DBTIMEZONE
@@ -46,7 +46,7 @@ Open on source and target SQL*Plus and execute:
 
     </copy>
   ```
-![DBTIMEZONE](./images/DBTIMEZONE.png " ")
+![DBTIMEZONE](./images/dbtimezone.png " ")
 
 You'll see, in our example source and target databases are in different timezones. This might cause issues when your source database tables have columns with "__TimeStamp with Local Time Zone__ (TSLTZ)". You can execute the next query to see if the source database uses these data types: 
 
@@ -96,7 +96,7 @@ In this hands on lab you're going to transport the two tablespaces "TPCCTAB" and
 
     </copy>
   ```
-![self_contained_TBS](./images/self_contained_TBS.png " ")
+![self_contained_TBS](./images/self_contained_tbs.png " ")
 
 ## Task 4: User Data in SYSTEM/SYSAUX Tablespace on Source
 As SYSTEM and SYSAUX tablespaces are not copied from source to target, it's good practice to check if they might accidentally contain user data:
@@ -154,7 +154,7 @@ IOT tables might get corrupted during XTTS copy when copying to HP platforms.
     </copy>
   ```
 
-![IOT_Tables](./images/IOT_Output.png " ")
+![IOT_Tables](./images/iot_output.png " ")
 
 You can ignore this output because you're not moving to HP platform.
 
@@ -168,7 +168,7 @@ In versions prior 12.2 metadata imports failed when having tables with XMLTYPE c
 
     </copy>
   ```
-![IOT_Tables](./images/XML_Data.png " ")
+![IOT_Tables](./images/xml_data.png " ")
 
 Only XML data in SYSAUX tablespace which you're not going to migrate. So ignore it.
 
@@ -188,7 +188,7 @@ Global temporary tables do not belong to any tablespace, so they are not transpo
 
     </copy>
   ```
-![GlobalTempTable](./images/GlobalTempTables.png " ")
+![GlobalTempTable](./images/global_temp_tables.png " ")
 
 There are no global temporary tables in our lab. When you have them in your database, you can migrate them using Data Pump export/import or generate the metadata from these tables and created them in the target database.
 

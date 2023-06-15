@@ -6,36 +6,36 @@
     {
       "title": "Introduction",
       "description": "The Introduction to XTTS Upgrade to 21c Workshop.",
-      "filename": "../../00-Introduction/introduction.md"
+      "filename": "../../00-introduction/introduction.md"
     },
     {
       "title": "Lab 1: Preparing the Target",
       "description": "Adding a PDB to the Target CDB",
-      "filename": "../../01-PreparationTarget/PreparationTarget.md"
+      "filename": "../../01-preparationtarget/preparationtarget.md"
     },
     {
       "title": "Lab 2: Preparing the Source",
       "description": "Preparing the source database for XTTS usage",
-      "filename": "../../02-PreparationSource/PreparationSource.md"
+      "filename": "../../02-preparationsource/preparationsource.md"
     },
     {
       "title": "Lab 3: Performing XTTS PreChecks on Source database",
       "description": "Summary of some pre checks to execute on Source database",
-      "filename": "../../03-XTTS_PreChecks/XTTS_PreChecks.md"
+      "filename": "../../03-xtts_prechecks/xtts_prechecks.md"
     },
     {
       "title": "Lab 4: XTTS Prepare Phase",
       "description": "The prepare phase ",
-      "filename": "../../04-XTTS_PreparePhase/XTTS_Prepare_Phase.md"
+      "filename": "../../04-xtts_preparephase/xtts_prepare_phase.md"
     },
     {
       "title": "Lab 5: XTTS Roll Forward Phase",
       "description": "The roll forward phase ",
-      "filename": "../../05-XTTS_RollForwardPhase"
+      "filename": "../../05-xtts_rollforwardphase/xtts_rollforward_phase.md"
     },
     {
       "title": "Lab 6: XTTS Transport Phase",
-      "filename": "../../06-XTTS_TransportPhase/XTTS_Transport_Phase.md"
+      "filename": "../../06-xtts_transportphase/xtts_transport_phase.md"
     },
     {
       "title": "Need Help?",
