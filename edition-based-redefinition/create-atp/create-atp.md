@@ -118,7 +118,7 @@ You have successfully created ATP database [proceed to the next lab](#next) for 
 
 ## Learn more
 
-Go to [the documentation](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/user/autonomous-workflow.html#GUID-5780368D-6D40-475C-8DEB-DBA14BA675C3) on the typical workflow for using Oracle Autonomous Database Serverless Infrastructure .
+Go to [the documentation](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/user/autonomous-workflow.html#GUID-5780368D-6D40-475C-8DEB-DBA14BA675C3) on the typical workflow for using Oracle Autonomous Database Serverless.
 
 ## Acknowledgements
 
