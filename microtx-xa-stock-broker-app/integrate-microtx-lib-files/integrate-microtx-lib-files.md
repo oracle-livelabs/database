@@ -1,4 +1,4 @@
-# Integrate MicroTx Client Libraries with the Banking and Trading Application
+# Integrate MicroTx Client Libraries with the Bank and Stock-Trading application
 
 ## Introduction
 
@@ -24,7 +24,7 @@ This lab assumes you have:
   * Lab 2: Environment setup
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
-      ```text
+      ```
       <copy>
       sudo su - oracle
       </copy>
@@ -42,7 +42,7 @@ The following section provides reference information about each line of code tha
 
 1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is located in the `/home/oracle/OTMM/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/` folder in any code editor, and then uncomment the following lines of code. The following sample code is for the 22.3.2 release. Provide the correct version, based on the release that you want to use.
 
-    ```text
+    ```
     <copy>
     <dependency>
       <groupId>com.oracle.tmm.jta</groupId>
@@ -58,7 +58,7 @@ The following section provides reference information about each line of code tha
 
     **Sample command**
 
-    ```text
+    ```java
     <copy>
     import oracle.tmm.jta.TrmUserTransaction;
     </copy>
@@ -68,7 +68,7 @@ The following section provides reference information about each line of code tha
 
     **Sample command**
 
-    ```text
+    ```java
     <copy>
     TrmUserTransaction transaction = new TrmUserTransaction();
     </copy>
@@ -78,7 +78,7 @@ The following section provides reference information about each line of code tha
 
     **Sample command**
 
-    ```text
+    ```java
     <copy>
     transaction.begin(true);
     </copy>
@@ -88,7 +88,7 @@ The following section provides reference information about each line of code tha
 
     **Sample command**
 
-    ```text
+    ```java
    <copy>
    transaction.rollback();
    transaction.commit();
@@ -98,7 +98,7 @@ The following section provides reference information about each line of code tha
 7. Uncomment the following line of code under `sell()` to create an instance of the `TrmUserTransaction` object to sell stocks.
     **Sample command**
 
-    ```text
+    ```java
     <copy>
     TrmUserTransaction transaction = new TrmUserTransaction();
     </copy>
@@ -108,7 +108,7 @@ The following section provides reference information about each line of code tha
 
     **Sample command**
 
-    ```text
+    ```java
     <copy>
     transaction.begin(true);
     </copy>
@@ -118,7 +118,7 @@ The following section provides reference information about each line of code tha
 
     **Sample command**
 
-    ```text
+    ```java
    <copy>
    transaction.rollback();
    transaction.commit();
@@ -149,7 +149,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 
 2. Uncomment the following lines of code in the transaction participant function or block to create a `PoolXADataSource` object and provide credentials and other details to connect to the resource manager. This object is used by the MicroTx client library.
 
-    ```text
+    ```java
     <copy>
     @Bean(name = "SBPoolXADataSource")
     @Primary
@@ -179,7 +179,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 
 4. Uncomment the following lines of code to import the following packages.
 
-    ```text
+    ```java
     <copy>
     import oracle.tmm.common.TrmConfig;
     import oracle.tmm.jta.XAResourceCallbacks;
@@ -204,7 +204,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 
 4. Uncomment the following lines of code to create a `PoolXADatasource` object. `PoolXADatasource` is an interface defined in JTA whose implementation is provided by the JDBC driver. The MicroTx client library uses this object to connect to database to start XA transactions and perform various operations such as prepare, commit, and rollback. The MicroTx library also provides a SQL connection object to the application code to execute DML using dependency injection.
 
-    ```text
+    ```java
     <copy>
     @Autowired
     private PoolXADataSource poolXADataSource;
@@ -213,7 +213,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 
 5. Register the listeners, XA resource callback, filters for MicroTX libraries, and MicroTx XA connection bindings.
 
-    ```text
+    ```java
     <copy>
     //Register the MicroTx XA Resource callback that coordinates with the transaction coordinator
     register(XAResourceCallbacks.class);
@@ -234,7 +234,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
     ```
 
 6. Uncomment the following line of code in the `init()` method to initialize the an XA data source object.
-    ```text
+    ```java
     <copy>
     initializeOracleXADataSource();
     </copy>
@@ -242,7 +242,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 
 7. Uncomment the following line of code to call the XA data source object that you have initialized.
 
-    ```text
+    ```java
     <copy>
     private void initializeOracleXADataSource() {
         TrmConfig.initXaDataSource(this.poolXADataSource);
@@ -252,7 +252,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 
 8. Initialize a Bean for the `TrmSQLConnection` object and `TrmXAConnection` object.
 
-    ```text
+    ```java
     <copy>
     // Register the MicroTx TrmSQLConnection object bean
     @Bean
@@ -280,7 +280,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 
 11. Uncomment the following lines of code to import the required packages.
 
-    ```text
+    ```java
     <copy>
     import javax.inject.Inject;
     import oracle.tmm.jta.common.TrmSQLConnection;
@@ -289,7 +289,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 
 12. Uncomment the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application injects the `connection` object that is created by the MicroTx client library.
 
-    ```text
+    ```java
     <copy>
     @Inject
     @TrmSQLConnection
@@ -299,7 +299,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 
 13. Delete all the occurrences of the following line of code as the connection is managed by the MicroTx client library.
 
-    ```text
+    ```java
     <copy>
     Connection connection = poolDataSource.getConnection();
     </copy>
@@ -311,7 +311,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 
 16. Uncomment the following lines of code to import the required packages.
 
-    ```text
+    ```java
     <copy>
     import javax.inject.Inject;
     import oracle.tmm.jta.common.TrmSQLConnection;
@@ -320,7 +320,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 
 17. Uncomment the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application injects the `connection` object that is created by the MicroTx client library.
 
-    ```text
+    ```java
     <copy>
     @Inject
     @TrmSQLConnection
@@ -330,7 +330,7 @@ When you integrate the MicroTx client library for Java with the Stock broker app
 
 18. Delete all the occurrences of the following line of code as the connection is managed by the MicroTx client library.
 
-    ```text
+    ```java
     <copy>
     Connection connection = poolDataSource.getConnection();
     </copy>
@@ -346,6 +346,6 @@ You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
-* **Author** - Sylaja Kannan, Principal User Assistance Developer
+* **Author** - Sylaja Kannan
 * **Contributors** - Brijesh Kumar Deo and Bharath MC
 * **Last Updated By/Date** - Sylaja, June 2023

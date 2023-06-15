@@ -5,9 +5,6 @@ This lab will show you how to download the Oracle Resource Manager (ORM) stack z
 
 *Estimated Lab Time:* 10 minutes
 
-Watch the video below for a quick walk-through of the lab.
-[Prepare Setup](videohub:1_ycv4qeb2)
-
 ### Objectives
 -   Download ORM stack
 -   Configure an existing Virtual Cloud Network (VCN)
@@ -27,7 +24,7 @@ This lab assumes you have:
 
 Oracle strongly recommends that you use this stack to create a self-contained or dedicated VCN with your instance(s). Skip to *Task 3* to follow our recommendations. If you would rather use an existing VCN, then proceed to the next task to update your existing VCN with the required Ingress rules.
 
-## Task 2: Add security rules to an existing VCN
+## Task 2: Add Security Rules to an Existing VCN
 
 This workshop requires a certain number of ports to be available, a requirement that can be met by using the default ORM stack execution that creates a dedicated VCN. To use an existing VCN/subnet, the following rules should be added to the security list.
 
@@ -63,7 +60,7 @@ This workshop requires a certain number of ports to be available, a requirement 
 7. Click **Add Ingress Rules**.
 8. Repeat steps [5-7] until you create a rule for each port listed in the table.
 
-## Task 3: Setup Compute
+## Task 3: Set Up a Compute Instance
 Using the details from the two tasks that you have previously completed, proceed to the next lab *Environment Setup* to set up your workshop environment using Oracle Resource Manager (ORM) and use one of the following options:
 
 -  Create Stack:  *Compute + Networking* (Oracle strongly recommends that you use this option.)
@@ -74,4 +71,4 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
 * **Contributors** - Meghana Banka
-* **Last Updated By/Date** - Sylaja Kannan, December 2022
+* **Last Updated By/Date** - Sylaja Kannan, June 2023

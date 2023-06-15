@@ -145,7 +145,7 @@ To download client credentials from the Oracle Cloud Infrastructure Console:
 
 7. Unzip the wallet file into the `Database_Wallet` folder. Replace the ZIP file name in following example code based on your environment.
 
-    ```text
+    ```
     <copy>
     unzip Wallet_BankingServiceDB.zip -d <path to the Database_Wallet folder>
     </copy>
@@ -159,7 +159,7 @@ Although you can connect to your autonomous database from local desktop tools, s
 
 1. In your database's details page, click **Database Actions**.
 
-    ![Click the Database Actions button](images/atp-dept1-db-action.png " ")
+    ![Click the Database Actions button](images/click-database-actions-button.png " ")
 
     A sign-in page for Database Actions is displayed.
 
@@ -189,7 +189,7 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
 
       **Syntax**
 
-      ```text
+      ```SQL
       <copy>
       -- Tables to be created
       CREATE TABLE BRANCH
@@ -235,7 +235,7 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
 
 3. Populate the tables with sample values.
 
-      ```text
+      ```SQL
       <copy>
       -- BRANCH
       INSERT INTO BRANCH (BRANCH_ID, BRANCH_NAME, PHONE, ADDRESS, SERVICE_URL, LAST_ACCT)
@@ -259,7 +259,7 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
 
 2. Copy and paste the following code snippet to your SQL Worksheet, and run the queries.
 
-      ```text
+      ```SQL
       <copy>
       CREATE TABLE SAVINGS_ACCOUNT
       (
@@ -277,7 +277,7 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
 
 3. Populate the `SAVINGS_ACCOUNT` table with sample values.
 
-      ```text
+      ```SQL
       <copy>
       -- Branch - Arizona
       INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
@@ -293,13 +293,13 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
 
 Repeat tasks 1, 2, 3, and 4 to create another ATP database instance for the Stock Broker service and download the wallet for the database.
 
-1. Repeat tasks 1 and 2 to create an Autonomous Database instance, which you will use as resource manager, for the Stock Broker service.
+1. Repeat [task 1](#task-1-choose-atp-from-the-services-menu) and [task 2](#task-2-create-an-autonomous-database-instance-for-the-core-banking-and-branch-banking-services) to create an Autonomous Database instance, which you will use as a resource manager, for the Stock Broker service.
 
     ![Specify database instance configuration](./images/create-dept2-atp.png " ")
 
-2. After creating the database, repeat task 3 to download the wallet file. Copy the contents of the unzipped wallet file to the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/Database_Wallet` folder. This file contains the source code for the Stock Broker service.
+2. After creating the database, repeat [task 3](#task-3-download-the-wallet-files) to download the wallet file. Copy the contents of the unzipped wallet file to the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/Database_Wallet` folder. This file contains the source code for the Stock Broker service.
 
-3. Connect to the database using SQL Worksheet. Repeat task 4 to connect to the ATP database that you have created for the Stock Broker service using SQL Worksheet.
+3. Connect to the database using SQL Worksheet. Repeat [task 4](#task-4-connect-with-sql-worksheet) to connect to the ATP database that you have created for the Stock Broker service using SQL Worksheet.
 
 Proceed to the next task to create a table and populate it with sample values.
 
@@ -311,7 +311,7 @@ Create tables with sample values for the Stock Broker service.
 
 2. Copy and paste the following code snippet to your SQL Worksheet, and then run the queries.
 
-      ``` text
+      ```SQL
       <copy>
       -- Tables to be created
       -- Display stock units
@@ -382,7 +382,7 @@ Create tables with sample values for the Stock Broker service.
 
 3. Populate the tables with sample values.
 
-      ```text
+      ```SQL
       <copy>
       -- Initialize Database
 
@@ -448,7 +448,7 @@ To provide the details of the ATP database instances in the `values.yaml` file:
 
       **Syntax**
 
-        ```text
+        ```
         <copy>
         jdbc:oracle:thin:@tcps://<host>:<port>/<service_name>?retry_count=20&retry_delay=3&wallet_location=Database_Wallet
         </copy>
@@ -463,7 +463,7 @@ To provide the details of the ATP database instances in the `values.yaml` file:
 
    The `values.yaml` file contains many properties. For readability, only the resource manager properties for which you must provide values are listed in the following sample code snippet.
 
-    ```text
+    ```
     <copy>
     CoreBanking:
       ...
@@ -495,5 +495,5 @@ You may now **proceed to the next lab.**
 ## Acknowledgements
 
 * **Author** - Sylaja Kannan
-* **Contributors** - Bharath MC
+* **Contributors** - Brijesh Kumar Deo and Bharath MC
 * **Last Updated By/Date** - Sylaja Kannan, June 2023
