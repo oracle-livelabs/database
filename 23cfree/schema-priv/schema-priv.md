@@ -1,5 +1,7 @@
 # Lab 2: Schema Privilege Management
 
+## Introduction
+
 Welcome to Lab 2: Schema Privilege Management!
 
 In this lab, we will explore the management of schema privileges in Oracle. By granting select, insert, update, and delete privileges on specific tables to users, we can control their access within a schema. We will also examine the functionality of schema privileges versus select grants.
@@ -9,13 +11,15 @@ Join us as we dive into Schema Privilege Management, log in as different users, 
 Estimated Time: 10 minutes
 
 ### Prerequisites
+
 * Basic understanding of Oracle database management.
 * Familiarity with SQL and database concepts such as tables, queries, and user privileges.
 * Access to an Oracle database environment with appropriate permissions to create and modify users, tables, and privileges.
 * An existing schema or the ability to create a new schema for testing purposes.
 Note: Ensure that you have the necessary access and privileges to perform the tasks mentioned in the lab.
 
-### Objectives 
+### Objectives
+
 * Understand schema privilege management in Oracle.
 * Learn to grant select, insert, update, and delete privileges on specific tables.
 * Compare schema privileges with select grants and their limitations.
@@ -27,8 +31,8 @@ Note: Ensure that you have the necessary access and privileges to perform the ta
 * Differentiate regular tables from lock-free reservation tables.
 * Set the stage for future exploration of the Lock-Free Reservation feature.
 
-##
 ## Task 1: Grant Privileges to Users
+
 Task 1 involves granting privileges to users for accessing tables within a schema. We will grant select, insert, update, and delete privileges on the inventory\_no\_reservations table to User 1 (u1) and schema privileges for select, insert, update, and delete operations to User 2 (u2) on Schema 1.
 
 1. Grant select/insert/update/delete  priveldges on the inventory\_no\_reservations table to u1

@@ -1,5 +1,7 @@
 # Lab 1: Setup - User Creation and Table Initialization
 
+## Introduction
+
 In this lab, we will focus on setting up the necessary components for our Oracle database environment. We will create two users, User 1 and User 2, and initialize two tables under Schema 1.
 
 By following the instructions provided, you will complete the setup process and have the necessary users and tables ready for further exploration in the Oracle live lab. Let's dive in and get started with Lab 1!
@@ -20,7 +22,6 @@ In order to do this workshop you need
 * Insert data into the inventory\_no\_reservations table with two rows: Product A and Product B.
 * Insert data into the inventory\_reservations table with two rows: Product C and Product D.
 
-##
 ## Task 1: Create Users
 
 Task 1 involves creating the users. By executing the provided SQL statements, we will create User 1 and User 2, each with their respective passwords. These users will be used for various tasks in the upcoming labs.

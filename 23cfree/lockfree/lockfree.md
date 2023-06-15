@@ -1,5 +1,7 @@
 # Lab 3: Lock-Free Reservations
 
+## Introduction
+
 Welcome to the Final Lab: Lock-Free Reservations!
 
 In this lab, we will explore the concept of lock-free reservations and their impact on database transactions. By performing normal updates and utilizing lock-free reservations, we will observe session behavior and the advantages of this feature. Join us as we jump into the final lab and experience the benefits of lock-free reservations in improving performance and user experience. Let's get started!
@@ -27,8 +29,8 @@ Estimated Time: 10 minutes
 * Learn how committing changes and rolling back transactions affect lock-free reservations.
 * Recognize the restoration of reserved amounts in the budget column with lock-free reservations.
 
-##
 ## Task 1: Normal Update
+
 Task 1 focuses on normal updates. By opening three windows as User 2, we will perform updates on the inventory\_no\_reservations table. In Window 1, we will decrease the budget of a record by 100 but refrain from committing the changes. In Window 2, we will attempt to update the same record by 100, resulting in a session hang due to the uncommitted changes in Window 1. Similarly, in Window 3, we will decrease the record by 200, causing another session hang. We will then commit the changes in Window 1, releasing one of the other two windows. If any freed-up window encounters an error when committing, we will take note of the error message. Note that an insufficient budget amount will cause an abort.
 
 1. Open 3 windows u2, u2, u2
