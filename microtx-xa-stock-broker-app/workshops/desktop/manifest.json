@@ -8,6 +8,11 @@
       "filename": "../../introduction/introduction.md"
     },
     {
+      "title": "Log In",
+      "description": "Using noVNC Remote Desktop",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs-novnc.md"
+    },
+    {
       "title": "Get Started with noVNC Remote Desktop",
       "description": "Using noVNC Remote Desktop",
       "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"

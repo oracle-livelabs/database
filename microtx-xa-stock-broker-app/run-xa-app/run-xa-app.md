@@ -31,7 +31,7 @@ This lab assumes you have:
   * Get Started
   * Lab 1: Prepare setup
   * Lab 2: Environment setup
-  * Lab 4: Provision an Oracle Autonomous Database for use as resource manager
+  * Lab 4: Provision Autonomous Databases for Use as Resource Manager
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
   ```
@@ -156,13 +156,13 @@ The folder that contains the Bank and Stock-Trading application code also contai
 
 To provide the configuration and environment details in the `values.yaml` file:
 
-1. Open the `values.yaml` file, which is located in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts` folder.
+1. Open the `values.yaml` file, which is in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts` folder.
 
 2. Enter values that you have noted down for the following fields under `security` in `UserBanking`.
 
-    * `clientSecret`: Enter the value of the client secret value that you had copied in step 11 of [task 2](#task-2-configure-keycloak).
-    * `issuerURL`: Enter the URL that you had copied in step 14 of [task 2](#task-2-configure-keycloak).
-    * `logoutRedirectURL`: Enter the URL in the format, `http://$CLUSTER_IPADDR/bankapp`. Where, `CLUSTER_IPADDR` is the external IP address of the Istio ingress gateway that you have noted down in [Task 1](#task-1-configure-minikube-and-start-a-tunnel). For example, `http://192.0.2.117/bankapp`.
+    * `clientSecret`: Enter the value of the client secret value that you had copied in step 11 of [Task 2](#Task2:ConfigureKeycloak).
+    * `issuerURL`: Enter the URL that you had copied in step 14 of [Task 2](#Task2:ConfigureKeycloak).
+    * `logoutRedirectURL`: Enter the URL in the format, `http://$CLUSTER_IPADDR/bankapp`. Where, `CLUSTER_IPADDR` is the external IP address of the Istio ingress gateway that you have noted down in [Task 1](#Task1:ConfigureMinikubeandStartaTunnel). For example, `http://192.0.2.117/bankapp`.
 
 3. Under `StockBroker`, set `deploymentEnabled` to `true`. You must set this flag to true before deploying the Stock Broker service.
 
@@ -332,12 +332,12 @@ Run the following commands to deploy Kiali and Jaeger in a Minikube cluster.
 
 ## Task 7: Purchase Stocks
 
-When you send a request to purchase stocks, the Stock Broker service debits the required amount from the Core Banking service. The Core Banking service in turns sends the debit amount request to the Branch Banking service. Once the amount is successfully debited from the your bank account, the Stock Broker service purchases the stocks and deposits the purchased stocks into your account. The microservices use the XA protocol and MicroTx to manage the transactions. Within an XA transaction, all actions such as debit amount and deposit stocks either succeed, or all actions are rolled back in case of a failure of any one or more actions.
+When you send a request to purchase stocks, the Stock Broker service debits the required amount from the Core Banking service. The Core Banking service in turns sends the debit amount request to the Branch Banking service. Once the amount is successfully debited from your bank account, the Stock Broker service purchases the stocks and deposits the purchased stocks into your account. The microservices use the XA protocol and MicroTx to manage the transactions. Within an XA transaction, all actions such as debit amount and deposit stocks either succeed, or all actions are rolled back in case of a failure of any one or more actions.
 
-1. Access the bank application. In a browser, type `192.0.2.117/bankapp`, where `192.0.2.117` is the external IP address of the Istio ingress gateway which you have noted down in [task 1](#task-1-configure-minikube-and-start-a-tunnel).
+1. Access the bank application. In a browser, type `192.0.2.117/bankapp`, where `192.0.2.117` is the external IP address of the Istio ingress gateway which you have noted down in [Task 1](#Task1:ConfigureMinikubeandStartaTunnel).
     The Keycloak login page is displayed.
 
-2. Enter the username and password to access the Keycloak instance. Enter the password that you had provided in [task 2](#task-2-configure-keycloak) for the preconfigured users.
+2. Enter the username and password to access the Keycloak instance. Enter the password that you had provided in [Task 2](#Task2:ConfigureKeycloak) for the preconfigured users.
     The Bank and Stock-Trading application's console is displayed as shown in the following figure.
     ![Bank and Stock-Trading application's console](./images/stock-broker-app-landingpage.png)
 
@@ -366,10 +366,10 @@ When you send a request to purchase stocks, the Stock Broker service debits the 
 
 When you send a request to sell stocks, the Stock Broker service sells the stocks if the stocks are available in your portfolio. Next, the Stock Broker service credits the amount received to the Core Banking service. The Core Banking service in turns sends the credit amount request to the Branch Banking service to credit the amount to your account. The microservices use the XA protocol and MicroTx to manage the transactions. Within an XA transaction, all actions such as credit amount and sell stocks either succeed, or all actions are rolled back in case of a failure of any one or more actions.
 
-1. Access the bank application. In a browser, type `192.0.2.117/bankapp`, where `192.0.2.117` is the external IP address of the Istio ingress gateway which you have noted down in [Task 1](#task-1-configure-minikube-and-start-a-tunnel).
+1. Access the bank application. In a browser, type `192.0.2.117/bankapp`, where `192.0.2.117` is the external IP address of the Istio ingress gateway which you have noted down in [Task 1](#Task1:ConfigureMinikubeandStartaTunnel).
     The Keycloak login page is displayed.
 
-2. Enter the username and password to access the Keycloak instance. Enter the password that you had provided in [task 2](#task-2-configure-keycloak) for the preconfigured users.
+2. Enter the username and password to access the Keycloak instance. Enter the password that you had provided in [Task 2](#Task2:ConfigureKeycloak) for the preconfigured users.
     The Bank and Stock-Trading application's console is displayed as shown in the following figure.
     ![Bank and Stock-Trading application's console](./images/stock-broker-app-landingpage.png)
 
@@ -397,7 +397,7 @@ When you send a request to sell stocks, the Stock Broker service sells the stock
 ## Task 9: View Service Mesh graph and Distributed Traces (Optional)
 
 You can perform this task only if you have deployed Kiali and Jaeger in your cluster.
-To visualize what happens behind the scenes and how a trip booking request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you started in [task 6](#task-6-deploy-kiali-and-jaeger-optional).
+To visualize what happens behind the scenes and how a trip booking request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you started in [Task 6](#Task6:DeployKialiandJaeger(Optional)).
 
 1. Open a new browser tab and navigate to the Kiali dashboard URL - http://localhost:20001/kiali
 2. Select Graph for the otmm namespace.

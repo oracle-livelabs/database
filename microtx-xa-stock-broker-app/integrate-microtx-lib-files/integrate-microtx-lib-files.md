@@ -38,9 +38,9 @@ Uncomment all the lines of code in the following files to integrate the function
 * `pom.xml` file located in the `/home/oracle/OTMM/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/` folder
 * `UserStockTransactionServiceImpl.java` file located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application
 
-The following section provides reference information about each line of code that you must uncomment and its purpose. You can skip this reading this section, if you only want to quickly uncomment the code and run the application. You can return to this section later to understand the purpose of each line of code that you uncomment.
+The following section provides reference information about each line of code that you must uncomment and its purpose. You can skip this reading this section if you only want to quickly uncomment the code and run the application. You can return to this section later to understand the purpose of each line of code that you uncomment.
 
-1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is located in the `/home/oracle/OTMM/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/` folder in any code editor, and then uncomment the following lines of code. The following sample code is for the 22.3.2 release. Provide the correct version, based on the release that you want to use.
+1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is in the `/home/oracle/OTMM/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/` folder in any code editor, and then uncomment the following lines of code. The following sample code is for the 22.3.2 release. Provide the correct version, based on the release that you want to use.
 
     ```
     <copy>
@@ -52,7 +52,7 @@ The following section provides reference information about each line of code tha
     </copy>
     ```
 
-2. Open the `UserStockTransactionServiceImpl.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
+2. Open the `UserStockTransactionServiceImpl.java` file in any code editor. This file is in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
 3. Uncomment the following line of code to import the `oracle.tmm.jta.TrmUserTransaction` package.
 
@@ -143,11 +143,11 @@ Uncomment all the lines of code in the following files:
 * `AccountServiceImpl.java` file located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 * `StockBrokerTransactionServiceImpl.java` file located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
-The following section provides reference information about each line of code that you must uncomment and its purpose. You can skip this reading this section, if you only want to quickly uncomment the code and run the application. You can return to this section later to understand the purpose of each line of code that you uncomment.
+The following section provides reference information about each line of code that you must uncomment and its purpose. You can skip this reading this section if you only want to quickly uncomment the code and run the application. You can return to this section later to understand the purpose of each line of code that you uncomment.
 
 To configure the Stock Broker application as a transaction participant:
 
-1. Open the `DatasourceConfigurations.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
+1. Open the `DatasourceConfigurations.java` file in any code editor. This file is in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
 
 2. Uncomment the following lines of code in the transaction participant function or block to create a `PoolXADataSource` object and provide credentials and other details to connect to the resource manager. This object is used by the MicroTx client library.
 
@@ -177,7 +177,7 @@ To configure the Stock Broker application as a transaction participant:
 
     It is your responsibility as an application developer to ensure that an XA-compliant JDBC driver and required parameters are set up while creating the `PoolXADataSource` object.
 
-3. Open the `TMMConfigurations.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
+3. Open the `TMMConfigurations.java` file in any code editor. This file is in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
 
 4. Uncomment the following lines of code to import the following packages.
 
@@ -213,7 +213,7 @@ To configure the Stock Broker application as a transaction participant:
     </copy>
     ```
 
-5. Register the listeners, XA resource callback, filters for MicroTX libraries, and MicroTx XA connection bindings.
+5. Register the listeners, XA resource callback, filters for MicroTx libraries, and MicroTx XA connection bindings.
 
     ```java
     <copy>
@@ -235,7 +235,7 @@ To configure the Stock Broker application as a transaction participant:
     </copy>
     ```
 
-6. Uncomment the following line of code in the `init()` method to initialize the an XA data source object.
+6. Uncomment the following line of code in the `init()` method to initialize an XA data source object.
     ```java
     <copy>
     initializeOracleXADataSource();
@@ -278,7 +278,7 @@ To configure the Stock Broker application as a transaction participant:
 
 9. Save the changes.
 
-10. Open the `AccountServiceImpl.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
+10. Open the `AccountServiceImpl.java` file in any code editor. This file is in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
 11. Uncomment the following lines of code to import the required packages.
 
@@ -309,7 +309,7 @@ To configure the Stock Broker application as a transaction participant:
 
 14. Save the changes.
 
-15. Open the `StockBrokerTransactionServiceImpl.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
+15. Open the `StockBrokerTransactionServiceImpl.java` file in any code editor. This file is in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
 16. Uncomment the following lines of code to import the required packages.
 

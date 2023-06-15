@@ -2,21 +2,21 @@
 
 ## Introduction
 
-This lab walks you through the steps to quickly provision Oracle Autonomous Database (Autonomous Transaction Processing [ATP]) on Oracle Cloud. You will use this database in the subsequent labs of this workshop. For this lab, you must create two ATP instances. One ATP instance acts as a resource manager for the Core Banking service and Branch Banking Service. The other ATP instance acts as resource manager for the Stock Broker service. Run the tasks in this lab in the remote desktop to create the database instances and download the database wallets within the remote desktop. When you directly download the wallet files in the remote desktop environment, you do not need to copy the wallet files from outside the environment.
+This lab walks you through the steps to quickly provision Oracle Autonomous Transaction Processing Serverless (ATP-S) on Oracle Cloud. You will use this database in the subsequent labs of this workshop. For this lab, you must create two ATP-S instances. One ATP-S instance acts as a resource manager for the Core Banking service and Branch Banking Service. The other ATP-S instance acts as resource manager for the Stock Broker service. Run the tasks in this lab in the remote desktop to create the database instances and download the database wallets within the remote desktop. When you directly download the wallet files in the remote desktop environment, you do not need to copy the wallet files from outside the environment.
 
 Estimated lab time: 20 minutes
 
 ### Objectives
 
-* Provision two new ATP instances.
-* Download the wallet file for each ATP instance.
+* Provision two new ATP-S instances.
+* Download the wallet file for each ATP-S instance.
 * Create tables with sample values for the Core Banking, Branch Banking, and Stock Broker services.
 
 ### Prerequisites
 
 * This lab requires completion of the **Get Started** section in the Contents menu on the left.
 
-## Task 1: Choose ATP from the Services Menu
+## Task 1: Choose ATP-S from the Services Menu
 
 1. Log in to the Oracle Cloud, as shown in the previous lab.
 2. Once you are logged in, you are taken to the cloud services dashboard where you can see all the services available to you. Click the navigation menu in the upper left to show top level navigation choices.
@@ -29,11 +29,11 @@ Estimated lab time: 20 minutes
 
     ![Select Autonomous Transaction Processing from menu](./images/select-atp.png)
 
-4. On the left side, make sure your **Workload Type** is **Transaction Processing** or **All** to see your Autonomous Transaction Processing instances. You can use the **Compartment** drop-down menu to select a compartment. Select your root compartment, or another compartment of your choice where you will create your new ATP instance. If you want to learn how to create a new compartment, click [here](https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#Working). To learn more about compartments, click [here](https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/settinguptenancy.htm#Setting_Up_Your_Tenancy).
+4. On the left side, make sure your **Workload Type** is **Transaction Processing** or **All** to see your ATP-S instances. You can use the **Compartment** drop-down menu to select a compartment. Select your root compartment, or another compartment of your choice where you will create your new ATP-S instance. If you want to learn how to create a new compartment, click [here](https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#Working). To learn more about compartments, click [here](https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/settinguptenancy.htm#Setting_Up_Your_Tenancy).
 
  **Note** - Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
 
-   ![View Oracle Autonomous Transaction Processing Databases in compartment](./images/atp-compartment.png)
+   ![View ATP-S instances in compartment](./images/atp-compartment.png)
 
 5. This console in the last screenshot shows that no databases yet exist. If there were a long list of databases, you could filter the list by the state of the databases (available, stopped, terminated, and so on). You can also sort by **Workload Type**. Here, the **Transaction Processing** workload type is selected.
 
@@ -111,12 +111,12 @@ Estimated lab time: 20 minutes
     ![Click Create Autonomous Database button](./images/create-adb-button.png)
 
 12. Your instance will begin provisioning. In a few minutes the state will turn from Provisioning to Available. At this point, your Autonomous Transaction Processing database is ready to use! Have a look at your instance's details here including its name, database version, CPU count and storage size.
-![Provisioning an Autonomous Database instance](./images/atp-dept1-prov.png)
+![Provisioning an ATP-S instance](./images/atp-dept1-prov.png)
 
-    Provisioning an Autonomous Database instance.
+    Provisioning an ATP-S instance.
 
-    ![Autonomous Database instance successfully provisioned](./images/atp-dept1-success.png)
-    Autonomous Database instance successfully provisioned.
+    ![ATP-S instance successfully provisioned](./images/atp-dept1-success.png)
+    ATP-S instance is successfully provisioned.
 
 ## Task 3: Download the Wallet Files
 
@@ -155,7 +155,7 @@ To download client credentials from the Oracle Cloud Infrastructure Console:
 
 ## Task 4: Connect with SQL Worksheet
 
-Although you can connect to your autonomous database from local desktop tools, such as Oracle SQL Developer, you can conveniently access the browser-based SQL Worksheet directly from your Autonomous Database console.
+Although you can connect to your ATP-S instance from local desktop tools, such as Oracle SQL Developer, you can conveniently access the browser-based SQL Worksheet directly from your Autonomous Database console.
 
 1. In your database's details page, click **Database Actions**.
 
@@ -181,11 +181,11 @@ Although you can connect to your autonomous database from local desktop tools, s
 
 ## Task 5: Create Tables in BankingServiceDB for the Core Banking Service
 
-Create tables in the `BankingServiceDB` ATP instance and populate it with sample values for the Core Banking service.
+Create tables in the `BankingServiceDB` ATP-S instance and populate it with sample values for the Core Banking service.
 
 1. Ensure that you are connected to SQL Worksheet as administrator.
 
-2. Copy and paste the following code snippet to your SQL Worksheet, and run the queries.
+2. Copy and paste the following code snippet to your SQL Worksheet and run the queries.
 
       **Syntax**
 
@@ -253,11 +253,11 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
 
 ## Task 6: Create Tables in BankingServiceDB for the Branch Banking Service
 
-Create tables in the `BankingServiceDB` ATP instance and populate it with sample values for the Branch Banking service.
+Create tables in the `BankingServiceDB` ATP-S instance and populate it with sample values for the Branch Banking service.
 
 1. Ensure that you are connected to SQL Worksheet as administrator.
 
-2. Copy and paste the following code snippet to your SQL Worksheet, and run the queries.
+2. Copy and paste the following code snippet to your SQL Worksheet and run the queries.
 
       ```SQL
       <copy>
@@ -289,9 +289,9 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
       </copy>
       ```
 
-## Task 7: Create an Autonomous Database Instance for the Stock Broker Service
+## Task 7: Create an ATP-S Instance for the Stock Broker Service
 
-Repeat tasks 1, 2, 3, and 4 to create another ATP database instance for the Stock Broker service and download the wallet for the database.
+Repeat tasks 1, 2, 3, and 4 to create another ATP-S instance for the Stock Broker service and download the database wallet.
 
 1. Repeat [Task 1](#Task1:ChooseATPfromtheServicesMenu) and [Task 2](#Task2:CreateanAutonomousDatabaseInstancefortheCoreBankingandBranchBankingServices) to create an Autonomous Database instance, which you will use as a resource manager, for the Stock Broker service.
 
@@ -438,11 +438,11 @@ Create tables with sample values for the Stock Broker service.
 
 The sample application files also contain the `values.yaml` file. This is the manifest file, which contains the deployment configuration details for the XA sample application. Provide details about the ATP database instances, that you have created, in the `values.yaml` file, so that the Core Banking, Branch Banking, and Stock Broker services can access their resource manager.
 
-To provide the details of the ATP database instances in the `values.yaml` file:
+To provide the details of the ATP-S database instances in the `values.yaml` file:
 
-1. Open the `values.yaml` file, which is located in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts/bankapp` folder.
+1. Open the `values.yaml` file, which is in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts/bankapp` folder.
 
-2. Provide values for the following fields under `CoreBanking` and `ArizonaBranchBank` in the `values.yaml` file. Since Core Banking and Branch Banking services use the same ATP database instance, enter the same values under `CoreBanking` and `ArizonaBranchBank`.
+2. Provide values for the following fields under `CoreBanking` and `ArizonaBranchBank` in the `values.yaml` file. Since Core Banking and Branch Banking services use the same ATP-S database instance, enter the same values under `CoreBanking` and `ArizonaBranchBank`.
 
     * `databaseUrl`: Enter the connect string to access the database in the following format. The host, port and service_name for the connection string can be found on the **DB Connection Tab** under **Connection Strings** as shown in screenshot below.
 
@@ -459,7 +459,7 @@ To provide the details of the ATP database instances in the `values.yaml` file:
 
     ![DB connection string](./images/db-connection-string.png)
 
-3. Similarly, under `StockBroker` enter values for the database connection string, user name, and password for the ATP database instance that you have created for the Stock Broker service.
+3. Similarly, under `StockBroker` enter values for the database connection string, user name, and password for the ATP-S instance that you have created for the Stock Broker service.
 
    The `values.yaml` file contains many properties. For readability, only the resource manager properties for which you must provide values are listed in the following sample code snippet.
 
@@ -489,7 +489,7 @@ You may now **proceed to the next lab.**
 
 ## Learn More
 
-* [Using Oracle Autonomous Database on Shared Exadata Infrastructure](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/user/autonomous-workflow.html#GUID-5780368D-6D40-475C-8DEB-DBA14BA675C3)
+* [Using Oracle Autonomous Database on Serverless Exadata Infrastructure](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/user/autonomous-workflow.html#GUID-5780368D-6D40-475C-8DEB-DBA14BA675C3)
 * [Database Concepts](https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt/introduction-to-oracle-database.html#GUID-A42A6EF0-20F8-4F4B-AFF7-09C100AE581E)
 
 ## Acknowledgements
