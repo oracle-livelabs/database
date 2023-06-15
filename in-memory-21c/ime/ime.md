@@ -2,13 +2,13 @@
 
 ## Introduction
 
-Watch a preview video of creating In-Memory Column Store
+Watch a demo of using In-Memory Expressions:
 
-[YouTube video](youtube:U9BmS53KuGs)
+[YouTube video](youtube:RQ5bOOQd4co)
 
 Watch the video below for a walk through of the In-Memory Expressions lab:
 
-[In-Memory Expressions](videohub:1_ohs9hpw0)
+[In-Memory Expressions](videohub:1_fyorhrt7)
 
 *Estimated Lab Time:* 10 Minutes.
 

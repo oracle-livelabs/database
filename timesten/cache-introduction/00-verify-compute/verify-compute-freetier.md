@@ -60,7 +60,7 @@ To make the best use of your display, perform the following tasks to render your
 
 During the execution of this workshop you will need to copy text from the workshop instructions (use the copy button provided) to a terminal session (remote desktop or SSH). As direct copy/paste between your local browser and the NoVNC desktop isn't supported, you may proceed as indicated below to enable an alternative local-to-remote clipboard using the NoVNC Clipboard.
 
-1. Continuing from the last task above, Select the *clipboard* icon
+1. Continue from the last task above, Select the *clipboard* icon
 
     ![Select clipboard icon](./images/novnc-clipboard-1.png " ")
 
@@ -68,7 +68,7 @@ During the execution of this workshop you will need to copy text from the worksh
 
     ![Paste text into the clipboard text box](./images/novnc-clipboard-2.png " ")
 
-*Note:* Please make sure you initialize your clipboard with step [1] shown in the screenshot above before opening the target application in which you intend to paste the text. Otherwise will find the *paste* function in the context menu grayed out when attempting to paste for the first time.
+*Note:* Please make sure you initialize your clipboard with step [1] shown in the screenshot above before opening the target application in which you intend to paste the text. Otherwise you will find the *paste* function in the context menu grayed out when attempting to paste for the first time.
     
 **IMPORTANT:** Due to the slightly cumbersome nature of copying between your host system and the NoVNC session, we recommend that you perform all of the copy/paste actions within the NoVNC session itself, as this avoids the use of the NoVNC clipboard. Alternatively, access the workshop's compute instance using SSH and copy/paste between the lab instructions displayed in your local browser and your SSH session.
 
@@ -80,4 +80,4 @@ You can now **proceed to the next lab**.
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
 * **Contributors** - LiveLabs Team
-* **Last Updated By/Date** - Jenny Bloom, February 2023
+* **Last Updated By/Date** - Jenny Bloom, June 2023
