@@ -257,7 +257,7 @@ While the source database remains active, you're now going to back it up for the
 
     </copy>
   ```
-
+![initial_restore](./images/initial_backup.png " ")
 
 <details>
  <summary>*click here to open/close the full backup log*</summary>

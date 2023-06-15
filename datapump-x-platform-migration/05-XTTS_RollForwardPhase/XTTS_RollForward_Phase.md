@@ -159,7 +159,6 @@ Source:
   ```
     <copy>
      cat /home/oracle/XTTS/SOURCE/tmp/res.txt 
-     cat /home/oracle/XTTS/SOURCE/tmp/incrbackups.txt 
 
     </copy>
   ```
@@ -169,26 +168,16 @@ Target:
   ```
     <copy>
      cat /home/oracle/XTTS/TARGET/tmp/res.txt
-     cat /home/oracle/XTTS/TARGET/tmp/incrbackups.txt
 
     </copy>
   ```
 ![res.txt_TRG](./images/res.txt_TRG.png " ") 
 
-Take a closer look at both outputs. Both contain the details from your initial backup
-  ```text
-     #0:::4,13,USERS_4.dbf,0,5565595,0,0,0,USERS,USERS_4.dbf
-     #0:::5,13,TPCCTAB_5.dbf,0,5565554,0,0,0,TPCCTAB,TPCCTAB_5.dbf
-  ```
+Take a closer look at both output files posted next to each other below. Both contain the details from your initial backup. <br>
+The difference between source and target res.txt is the incremental backup entry you just executed on source plus the initial load of the newly added datafile:
 
-The difference between source and target res.txt is the incremental backup entry you just executed on source. These details including the newly added datafile
-  ```text
-    #0:::6,13,TPCCTAB_6,0,5566205,0,0,0,TPCCTAB,TPCCTAB_6.dbf
-    #1:::6,13,1h1umiis_1_1,5566205,5566075,0,0,0,TPCCTAB_6.dbf,TPCCTAB_6.dbf
-    #1:::4,13,1i1umiiu_1_1,5565595,5566115,0,0,0,USERS_4.dbf,USERS_4.dbf
-    #1:::5,13,1g1umiis_1_1,5565554,5566075,0,0,0,TPCCTAB_5.dbf,TPCCTAB_5.dbf
-  ```
-are missing in the target res.txt.
+![res.txt_SRC_TRG](./images/res_txt_src_trg.png " ")
+
 
 So let's continue with the process and copy both files from the source to the target directory:
 

@@ -1325,7 +1325,7 @@ It's always good practice to check out each error you see in the log file and ch
 
 Also a good practice is to verify after the migration a few things like if you migrated all user objects (tabes, triggers, views...), if the sequence numbers match. 
 
-
+Congratulations! You completed all stages of this XTTS lab migrating an Oracle 11g database directly intoa a 21c PDB successfully!
 
 ## Acknowledgements
 * **Author** - Klaus Gronau
