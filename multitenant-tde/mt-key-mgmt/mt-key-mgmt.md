@@ -1,12 +1,21 @@
-## Introduction
+### Introduction
 
 In this lab we will go through the steps to add a wallet & keys to CDB's and PDB's, uplug a PDB, plug it into a different CDB & then move the key.
 
-## Duration
-This lab should take 1 hour to complete
+*Estimated Workshop Time* :60 Minutes
 
-## Prerequisites
+### Objectives
+1.
+2. 
+3. 
 
+### Prerequisites
+
+- A Free Tier, Paid or LiveLabs Oracle Cloud account
+- You have completed:
+    Lab: Prepare Setup (Free-tier and Paid Tenants only)
+    Lab: Environment Setup
+    Lab: Initialize environment
 - Familiarity with Database is desirable, but not required
 - Some command line interface experience is desirable, but not required
 - A Free OCI Cloud Tier, Paid OCI Cloud account or LiveLabs Oracle Cloud account
