@@ -14,7 +14,7 @@ The diagram below shows you the different phases of the XTTS V4 script, which st
 Estimated Workshop Time: 90 minutes
 
 
-VIDEO TO BE ADDED
+__VIDEO TO BE ADDED__
 
 
 ### Objectives
@@ -38,7 +38,7 @@ In this workshop, you will:
 This workshop is preloaded with 4 different Oracle Homes and 6 databases.
 You can switch between environments with the shortcuts shown in the last column of the below diagram.
 
-![](./images/HOL_environment.png " ")
+![Hands_On_Lab_Env](./images/HOL_environment.png " ")
 
 The 4 different Oracle Homes are:
 
