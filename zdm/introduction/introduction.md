@@ -35,7 +35,7 @@ Zero Downtime Migration supports both online and offline migration, and can perf
 
 For the purpose of this workshop we will be completing a logical offline migration using an Oracle Cloud Infrastructure (OCI) object storage bucket.
 
-The migration will consist of moving data from the source database to an OCI object storage bucket from which it then gets transferred to the target Oracle autonomous database on a shared infrastructure.  
+The migration will consist of moving data from the source database to an OCI object storage bucket from which it then gets transferred to the target Oracle autonomous database serverless.
 
 ## Workshop Objectives
 
