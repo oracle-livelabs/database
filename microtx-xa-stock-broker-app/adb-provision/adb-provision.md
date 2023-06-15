@@ -293,13 +293,13 @@ Create tables in the `BankingServiceDB` ATP instance and populate it with sample
 
 Repeat tasks 1, 2, 3, and 4 to create another ATP database instance for the Stock Broker service and download the wallet for the database.
 
-1. Repeat [task 1](#task-1-choose-atp-from-the-services-menu) and [task 2](#task-2-create-an-autonomous-database-instance-for-the-core-banking-and-branch-banking-services) to create an Autonomous Database instance, which you will use as a resource manager, for the Stock Broker service.
+1. Repeat [Task 1](#Task1:ChooseATPfromtheServicesMenu) and [Task 2](#Task2:CreateanAutonomousDatabaseInstancefortheCoreBankingandBranchBankingServices) to create an Autonomous Database instance, which you will use as a resource manager, for the Stock Broker service.
 
     ![Specify database instance configuration](./images/create-dept2-atp.png " ")
 
-2. After creating the database, repeat [task 3](#task-3-download-the-wallet-files) to download the wallet file. Copy the contents of the unzipped wallet file to the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/Database_Wallet` folder. This file contains the source code for the Stock Broker service.
+2. After creating the database, repeat [Task 3](#Task3:DownloadtheWalletFiles) to download the wallet file. Copy the contents of the unzipped wallet file to the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/Database_Wallet` folder. This file contains the source code for the Stock Broker service.
 
-3. Connect to the database using SQL Worksheet. Repeat [task 4](#task-4-connect-with-sql-worksheet) to connect to the ATP database that you have created for the Stock Broker service using SQL Worksheet.
+3. Connect to the database using SQL Worksheet. Repeat [Task 4](#Task4:ConnectwithSQLWorksheet) to connect to the ATP database that you have created for the Stock Broker service using SQL Worksheet.
 
 Proceed to the next task to create a table and populate it with sample values.
 

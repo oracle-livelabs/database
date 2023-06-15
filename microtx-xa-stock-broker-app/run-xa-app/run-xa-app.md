@@ -162,7 +162,7 @@ To provide the configuration and environment details in the `values.yaml` file:
 
     * `clientSecret`: Enter the value of the client secret value that you had copied in step 11 of [task 2](#task-2-configure-keycloak).
     * `issuerURL`: Enter the URL that you had copied in step 14 of [task 2](#task-2-configure-keycloak).
-    * `logoutRedirectURL`: Enter the URL in the format, `http://$CLUSTER_IPADDR/bankapp`. Where, `CLUSTER_IPADDR` is the external IP address of the Istio ingress gateway that you have noted down in [task 1](#task-1-configure-minikube-and-start-a-tunnel). For example, `http://192.0.2.117/bankapp`.
+    * `logoutRedirectURL`: Enter the URL in the format, `http://$CLUSTER_IPADDR/bankapp`. Where, `CLUSTER_IPADDR` is the external IP address of the Istio ingress gateway that you have noted down in [Task 1](#task-1-configure-minikube-and-start-a-tunnel). For example, `http://192.0.2.117/bankapp`.
 
 3. Under `StockBroker`, set `deploymentEnabled` to `true`. You must set this flag to true before deploying the Stock Broker service.
 
@@ -339,11 +339,11 @@ When you send a request to purchase stocks, the Stock Broker service debits the 
 
 2. Enter the username and password to access the Keycloak instance. Enter the password that you had provided in [task 2](#task-2-configure-keycloak) for the preconfigured users.
     The Bank and Stock-Trading application's console is displayed as shown in the following figure.
-    ![Bank and Stock-Trading application's console](./images/stock_broker_app_landingpage.png)
+    ![Bank and Stock-Trading application's console](./images/stock-broker-app-landingpage.png)
 
 3. Click **Trading**.
     The Stock Trading page is displayed. Identify the stock that you want to purchase and the number of units of the stock that are currently available in your account. For example, let's consider that you want to purchase shares of the Blue Semiconductor. The following image shows that you have 10 shares of Blue Semiconductor.
-    ![Stock Trading page](./images/stock_broker_app_tradepage.png)
+    ![Stock Trading page](./images/stock-broker-app-tradepage.png)
 
 4. Click **Buy Stocks**, and then click **Buy Stocks**.
 
@@ -351,31 +351,31 @@ When you send a request to purchase stocks, the Stock Broker service debits the 
     1. Select the stock that you want to purchase.
     2. Enter the number of units of the stock that you want to purchase.
     3. (Optional.) Enter remarks, if any, regarding your purchase.
-       ![Purchase Stock dialog box](./images/purchase_stocks.png)
+       ![Purchase Stock dialog box](./images/purchase-stocks.png)
     4. Click **Confirmation**, and then review the details of the purchase.
     5. Click **Confirm** to purchase the stocks.
        After the Stock Broker service purchases the stocks and deposits it in your account, the **Transaction ID** and **Result** are displayed on the screen.
-       ![Summary section in the Purchase Stock dialog box](./images/purchase_stocks_summary.png)
+       ![Summary section in the Purchase Stock dialog box](./images/purchase-stocks-summary.png)
     6. Click **Close** to close the **Purchase Stocks** dialog box.
 
 6. Click **Stocks** to view the updated list of stocks.
    The following image shows the number of shares of Blue Semiconductor has increased by 5, the purchased amount, in your account.
-    ![User Portfolio Details section](./images/purchased_stocks_list.png)
+    ![User Portfolio Details section](./images/purchased-stocks-list.png)
 
 ## Task 8: Sell Stocks
 
 When you send a request to sell stocks, the Stock Broker service sells the stocks if the stocks are available in your portfolio. Next, the Stock Broker service credits the amount received to the Core Banking service. The Core Banking service in turns sends the credit amount request to the Branch Banking service to credit the amount to your account. The microservices use the XA protocol and MicroTx to manage the transactions. Within an XA transaction, all actions such as credit amount and sell stocks either succeed, or all actions are rolled back in case of a failure of any one or more actions.
 
-1. Access the bank application. In a browser, type `192.0.2.117/bankapp`, where `192.0.2.117` is the external IP address of the Istio ingress gateway which you have noted down in [task 1](#task-1-configure-minikube-and-start-a-tunnel).
+1. Access the bank application. In a browser, type `192.0.2.117/bankapp`, where `192.0.2.117` is the external IP address of the Istio ingress gateway which you have noted down in [Task 1](#task-1-configure-minikube-and-start-a-tunnel).
     The Keycloak login page is displayed.
 
 2. Enter the username and password to access the Keycloak instance. Enter the password that you had provided in [task 2](#task-2-configure-keycloak) for the preconfigured users.
     The Bank and Stock-Trading application's console is displayed as shown in the following figure.
-    ![Bank and Stock-Trading application's console](./images/stock_broker_app_landingpage.png)
+    ![Bank and Stock-Trading application's console](./images/stock-broker-app-landingpage.png)
 
 3. Click **Trading**.
     The Stock Trading page is displayed. Identify the stock that you want to sell and the number of units of the stock that are currently available in your account. For example, let's consider that you want to sell 5 shares of the Blue Semiconductor. The following image shows that you currently have 15 shares of Blue Semiconductor.
-    ![User Portfolio Details section](./images/purchased_stocks_list.png)
+    ![User Portfolio Details section](./images/purchased-stocks-list.png)
 
 4. Click **Sell Stocks**, and then click **Sell Stocks**.
 
@@ -383,16 +383,16 @@ When you send a request to sell stocks, the Stock Broker service sells the stock
     1. Select the stock that you want to sell.
     2. Enter the number of units of the stock that you want to sell.
     3. (Optional.) Enter remarks, if any, regarding your sale.
-       ![Sell Stock dialog box](./images/sell_stocks.png)
+       ![Sell Stock dialog box](./images/sell-stocks.png)
     4. Click **Confirmation**, and then review the details of the sale.
     5. Click **Confirm** to sell the stocks.
        After the Stock Broker service sells the stocks and deposits the money in your bank account, the **Transaction ID** and **Result** are displayed on the screen as shown in the following image.
-       ![Sell Stock dialog box](./images/sell_stocks.png)
+       ![Sell Stock dialog box](./images/sell-stocks.png)
     6. Click **Close** to close the **Sell Stocks** dialog box.
 
 6. Click **Stocks** to view the updated list of stocks.
    The following image shows the number of shares of Blue Semiconductor has reduced by 5, the number of shares you have sold, in your account.
-     ![Stock Trading page](./images/stock_broker_app_tradepage.png)
+     ![Stock Trading page](./images/stock-broker-app-tradepage.png)
 
 ## Task 9: View Service Mesh graph and Distributed Traces (Optional)
 

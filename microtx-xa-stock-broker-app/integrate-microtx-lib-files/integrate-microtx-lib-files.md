@@ -96,6 +96,7 @@ The following section provides reference information about each line of code tha
     ```
 
 7. Uncomment the following line of code under `sell()` to create an instance of the `TrmUserTransaction` object to sell stocks.
+
     **Sample command**
 
     ```java
@@ -129,6 +130,12 @@ The following section provides reference information about each line of code tha
 
 Since the Stock broker application participates in the transaction in addition to initiating the transaction, you must make additional configurations for the application to participate in the transaction and communicate with its resource manager.
 
+When you integrate the MicroTx client library for Java with the Stock broker application, the library performs the following functions:
+
+* Enlists the participant service with the transaction coordinator.
+* Injects an `XADataSource` object for the participant application code to use through dependency injection. The MicroTx libraries automatically inject the configured data source into the participant services, so you must add the `@Inject` or `@Context` annotation to the application code. The application code runs the DML using this connection.
+* Calls the resource manager to perform operations.
+
 Uncomment all the lines of code in the following files:
 
 * `DatasourceConfigurations.java` file located in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
@@ -136,14 +143,9 @@ Uncomment all the lines of code in the following files:
 * `AccountServiceImpl.java` file located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 * `StockBrokerTransactionServiceImpl.java` file located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
-
 The following section provides reference information about each line of code that you must uncomment and its purpose. You can skip this reading this section, if you only want to quickly uncomment the code and run the application. You can return to this section later to understand the purpose of each line of code that you uncomment.
 
-When you integrate the MicroTx client library for Java with the Stock broker application, the library performs the following functions:
-
-* Enlists the participant service with the transaction coordinator.
-* Injects an `XADataSource` object for the participant application code to use through dependency injection. The MicroTx libraries automatically inject the configured data source into the participant services, so you must add the `@Inject` or `@Context` annotation to the application code. The application code runs the DML using this connection.
-* Calls the resource manager to perform operations.
+To configure the Stock Broker application as a transaction participant:
 
 1. Open the `DatasourceConfigurations.java` file in any code editor. This file is located in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
 

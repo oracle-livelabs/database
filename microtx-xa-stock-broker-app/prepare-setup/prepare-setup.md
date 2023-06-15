@@ -22,7 +22,7 @@ This lab assumes you have:
 
 2. Save the ZIP file in your downloads folder.
 
-Oracle strongly recommends that you use this stack to create a self-contained or dedicated VCN with your instance(s). Skip to *Task 3* to follow our recommendations. If you would rather use an existing VCN, then proceed to the next task to update your existing VCN with the required Ingress rules.
+Oracle strongly recommends that you use this stack to create a self-contained or dedicated VCN with your instance(s). Skip to [Task 3](#task-3-set-up-a-compute-instance) to follow our recommendations. If you would rather use an existing VCN, then proceed to the next task to update your existing VCN with the required Ingress rules.
 
 ## Task 2: Add Security Rules to an Existing VCN
 
@@ -64,7 +64,7 @@ This workshop requires a certain number of ports to be available, a requirement 
 Using the details from the two tasks that you have previously completed, proceed to the next lab *Environment Setup* to set up your workshop environment using Oracle Resource Manager (ORM) and use one of the following options:
 
 -  Create Stack:  *Compute + Networking* (Oracle strongly recommends that you use this option.)
--  Create Stack:  *Compute only* with an existing VCN where security lists have been updated as per *Task 2* above
+-  Create Stack:  *Compute only* with an existing VCN where security lists have been updated as per [Task 2](#task-2-add-security-rules-to-an-existing-vcn).
 
 You may now **proceed to the next lab**.
 
