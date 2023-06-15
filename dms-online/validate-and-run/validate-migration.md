@@ -45,13 +45,22 @@ In this lab, you will:
   ![Screnshot of click on phases](images/click-phases.png =20%x*)
 
 8. Phases will be shown, and status will be updated as phases are completed. It can take 2 minutes before the first phase is shown.
-    ![Screenshot of phases with updated status](images/Pump.png =90%x*)
-
+    
 9. If a phase has failed, it will show with the status **Failed**. In this case, press **Download Log** to learn more about the reason for failure. Press **Abort** on a failed job to allow further jobs or deleting of the migration.
 
-  ![Screenshot of dowload log](images/download-log.png =90%x*)
+  ![Screenshot of phases with updated status](images/job-details.png =90%x*)
 
-10. Once all phases show complete, move to the next step.
+10. In this case **Validate premigration advisor** phase has failed.CPAT is a tool that will assess your source database instance, checking for potentially problematic content and other factors that could impede a successful migration. If you click on the link it will take you to a summary view. 
+![Screenshot of CPAT summary](images/media-types.png =90%x*)
+
+11. You can click on every check and access to the check details. You will be presented with a description of the issue, the impact and a recommended action. You can mark the check to be excluded from the migration.
+
+  ![Screenshot of check exclusion](images/exclude-check.png )
+
+12. Since we took care of the problematic finding the validation Job can be run again. This process should be repeated until “Validate premigration advisor” phase completes with no error.
+![Screenshot of successful validation](images/job-details-succeeded.png =90%x*)
+
+13. Once all phases show complete, move to the next step.
 
 ## Task 2: Run Migration
 

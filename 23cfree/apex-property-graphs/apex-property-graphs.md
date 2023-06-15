@@ -21,9 +21,9 @@ This lab assumes:
 
 ## Task 1: Login and create APEX workspace
 
-1. Open Activities -> Google Chrome
+1. Open Activities -> Google Chrome. If your Chrome is already open and you are trying to create a new window, press control + N or select the dropdown of Google Chrome in the top left corner and click New Window.
 
-    ![Open Google Chrome](images/activities-chrome.png)
+    ![Open Google Chrome](images/activities-chrome-2.png)
 
 
 2. Go to this URL and wait for the screen to load.
@@ -35,7 +35,7 @@ This lab assumes:
 
     ![URL login screen](images/admin-services.png)
 
-3. Login as ADMIN with the password Welcome123# and reset it to as you please.
+3. Login as ADMIN with the password Welcome123# and reset it as you please.
 
     ![Login using credentials](images/login-details.png)
 
@@ -55,7 +55,7 @@ This lab assumes:
 
     ![Schema information input changes](images/schema-info.png)
 
-8. Admin username: admin, password: Welcome123#, email: your email.
+8. Admin username: admin, password: Welcome123#, email: your email. We will be resetting this password later on as well.
 
     ![admin password email input](images/admin-password-email.png)
 
@@ -77,7 +77,7 @@ This lab assumes:
     ![log back in](images/log-back-in.png)
 
 
-3. Change password
+3. Reset password.
     ![password change](images/change-password.png)
 
 4. App Builder -> Import
@@ -107,13 +107,18 @@ This lab assumes:
     ![Log back in](images/login-final.png)
 
 
-10. Click Property Graph queries with SQL/PGQ box.
+10. Click Property Graph queries with SQL box.
     ![Property graph queries selection](images/property-graph-queries.png)
     
-11. Scroll through output.
+11. Scroll through output to see the queries that you had ran in the prior lab visualized.
     ![Final scroll through the output](images/final-output.png)
 
-12. You have now completed this lab.
+12. Click the hamburger menu in the upper left corner of the application and click "Using the Graph Visualization Plugin".
+
+13. Scroll through the output to see the Graph Viz plugin utilized.
+    ![Graph viz](images/graph-viz.png)
+
+14. You have now completed this lab.
 
 ## Learn More
 * [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
