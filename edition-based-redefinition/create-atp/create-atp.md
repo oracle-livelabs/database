@@ -50,7 +50,7 @@ In this lab, you will
 
 5. Choose a deployment type. Select the deployment type for your database from the choices:
 
-    - **Shared Infrastructure** - For this lab, choose **Shared Infrastructure** as the deployment type.
+    - **Serverless** - For this lab, choose **Serverless** as the deployment type.
 
     ![Choose a deployment type.](./images/atp-deployment.png " ")
 
@@ -118,7 +118,7 @@ You have successfully created ATP database [proceed to the next lab](#next) for 
 
 ## Learn more
 
-Go to [the documentation](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/user/autonomous-workflow.html#GUID-5780368D-6D40-475C-8DEB-DBA14BA675C3) on the typical workflow for using Oracle Autonomous Database on Shared Exadata Infrastructure .
+Go to [the documentation](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/user/autonomous-workflow.html#GUID-5780368D-6D40-475C-8DEB-DBA14BA675C3) on the typical workflow for using Oracle Autonomous Database Serverless Infrastructure .
 
 ## Acknowledgements
 
