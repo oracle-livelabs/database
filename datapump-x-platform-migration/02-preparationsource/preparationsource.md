@@ -29,7 +29,7 @@ Activate the source terminal window and create three directories; one for the Da
     </copy>
   ```
 
-![Create_Source_OS_Dir](./images/create-source-os-dir.png " ")
+![Create Source OS Directory](./images/create-source-os-dir.png " ")
 
 
 ### Unzip XTTS ZIP file
@@ -42,7 +42,7 @@ Activate the source terminal window and create three directories; one for the Da
     </copy>
   ```
 
-![Unzip_XTTS](./images/xtts-unzip-src.png " ")
+![Unzipping the XTTS Perl V4 ZIP file on source](./images/xtts-unzip-src.png " ")
 
 ## Task 2: Set the Source Database Environment
 
@@ -56,7 +56,7 @@ Activate source terminal window, set the source environment and start SQL*Plus:
     </copy>
  ```
 
-![Login to CDB3](./images/source-upgr-env-sqlplus.png " ")
+![Login to source 11.2.0.4 database](./images/source-upgr-env-sqlplus.png " ")
 
 
 ## Task 3: Configure Source Database
@@ -78,7 +78,7 @@ Enable source database archive logging and create the database directory for Dat
   ```
 
 
-![Login to CDB3](./images/enable-archive-logging.png " ")
+![Enabling archive logging in source database](./images/enable-archive-logging.png " ")
 
 
 You might also consider enabling __Block Change Tracking (BCT)__ using the command "alter database enable block change tracking".
@@ -106,7 +106,7 @@ in RMAN terminology the target database identifies the database which you're goi
 
     </copy>
   ```
-![configure_RMAN_Source](./images/rman-default-target-settings.png " ")
+![configure default RMAN parameters on source database side](./images/rman-default-target-settings.png " ")
 
 
 You may now *proceed to the next lab*.

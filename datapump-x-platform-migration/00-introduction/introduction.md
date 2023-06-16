@@ -7,7 +7,7 @@ The prerequisites are outlined in [MOS note #2471245.1: V4 Reduce Transportable 
 
 The diagram below shows you the different phases of the XTTS V4 script, which steps are are executed in the particular phase by the perl scripts and if the source database is up and available for normal use:
 
-![xtts workflow](./images/xtts-workflow.png " ")
+![Cross platform transportable tablespace workflow](./images/xtts-workflow.png " ")
 
 
 
@@ -38,7 +38,7 @@ In this workshop, you will:
 This workshop is preloaded with 4 different Oracle Homes and 6 databases.
 You can switch between environments with the shortcuts shown in the last column of the below diagram.
 
-![Hands_On_Lab_Env](./images/hol-environment.png " ")
+![Hands On Lab Environment](./images/hol-environment.png " ")
 
 The 4 different Oracle Homes are:
 
@@ -69,7 +69,7 @@ You may now *proceed to the next lab*.
 ## Learn More
 
 * [Database Upgrade Guide Documentation - 19c](https://docs.oracle.com/en/database/oracle/oracle-database/19/upgrd/intro-to-upgrading-oracle-database.html#GUID-FA024F34-A61A-4C4B-AA60-C123A9191A16)
-* [Database Upgrade Blog](https://MikeDietrichDE.coms)
+* [Database Upgrade Blog](https://MikeDietrichDE.com)
 * [Oracle Databases Release and Support Coverage](https://support.oracle.com/epmos/faces/DocumentDisplay?id=742060.1&displayIndex=1)
 * [V4 Reduce Transportable Tablespace Downtime using Cross Platform Incremental Backup](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2471245.1&displayIndex=1)
 * [Transportable Tablespace (TTS) Restrictions and Limitations: Details, Reference, and Version Where Applicable ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1454872.1&displayIndex=1)

@@ -43,7 +43,7 @@ and create a table:
     </copy>
   ```
 
-![new_table](./images/cre-oject-copy.png " ")
+![creating a new table in TPCC acount](./images/cre-oject-copy.png " ")
 
 ### Add a New Data File
 This time connect as sysdba to the source database:
@@ -61,7 +61,7 @@ and execute:
     </copy>
   ```
 
-![new_datafile](./images/add-datafile-tbs.png " ")
+![adding new datafile to TBS TPCCTAB](./images/add-datafile-tbs.png " ")
 
 
 ## Task 1: Incremental Backup on Source
@@ -77,7 +77,7 @@ On source change into the XTTS Source directory and execute the incremental back
     </copy>
   ```
 
-![incremental_backup](./images/incremental-backup.png " ")
+![starting incremental backup](./images/incremental-backup.png " ")
 
 <details>
  <summary>*click here to see the full incremental backup log file*</summary>
@@ -162,7 +162,7 @@ Source:
 
     </copy>
   ```
-![res.txt_SRC](./images/res-txt-src.png " ") 
+![res.txt content on source](./images/res-txt-src.png " ") 
 
 Target:
   ```
@@ -171,12 +171,12 @@ Target:
 
     </copy>
   ```
-![res.txt_TRG](./images/res-txt-trg.png " ") 
+![res.txt content on target](./images/res-txt-trg.png " ") 
 
 Take a closer look at both output files posted next to each other below. Both contain the details from your initial backup. <br>
 The difference between source and target res.txt is the incremental backup entry you just executed on source plus the initial load of the newly added datafile:
 
-![res.txt_SRC_TRG](./images/res-txt-src-trg.png " ")
+![res.txt from source and target next to each other showing differences](./images/res-txt-src-trg.png " ")
 
 
 So let's continue with the process and copy both files from the source to the target directory:
@@ -189,7 +189,7 @@ So let's continue with the process and copy both files from the source to the ta
     </copy>
   ```
 
-![incremental_restore_prep](./images/incr-restore-copy.png " ") 
+![copying incrbackups.txt and rest.txt from source to target](./images/incr-restore-copy.png " ") 
 
 And start the restore:
   ```
@@ -201,7 +201,7 @@ And start the restore:
     </copy>
   ```
 
-![incremental_restore](./images/incremental-restore.png " ")
+![starting incremental restore£](./images/incremental-restore.png " ")
 
 <details>
  <summary>*click here to see the full incremental restore log file*</summary>

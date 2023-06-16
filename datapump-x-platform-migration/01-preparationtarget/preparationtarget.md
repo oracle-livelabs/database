@@ -20,7 +20,7 @@ This lab assumes you have:
 
 ### Open Terminal Window
 Open two terminal Windows by clicking on the Terminal icon
-![terminal](./images/terminal.png " ")
+![Screenshot of the Linux Hands On Lab Terminal icon](./images/terminal.png " ")
 
 For better visibility the source database will use a light blue and the target database a light green background.
 
@@ -33,7 +33,7 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
     </copy>
   ```
 
-![Create_TARGTE_OS_Dir](./images/create-target-os-dir.png " ")
+![Create_TARGTE OS directory ](./images/create-target-os-dir.png " ")
 
 ### Unzip XTTS ZIP file
 
@@ -45,7 +45,7 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
     </copy>
   ```
 
-![Unzip_XTTS](./images/xtts-unzip-trg.png " ")
+![Unzipping the XTTS Perl V4 ZIP file on target](./images/xtts-unzip-trg.png " ")
 
 
 ## Task 2: Set the Target Environment and Start SQL*Plus
@@ -73,7 +73,7 @@ When creating a PDB the admin user needs to exist. You can delete it later on if
     </copy>
   ```
 
-![Create CDB3](./images/cdb3-create-pdb3.png " ")
+![Create PDB3 in CDB3](./images/cdb3-create-pdb3.png " ")
 
 
 
@@ -88,7 +88,7 @@ When creating a PDB the admin user needs to exist. You can delete it later on if
     </copy>
   ```
 
-![create Database Directory Target](./images/create-database-directory-pdb3.png " ")
+![create database directory in PDB3](./images/create-database-directory-pdb3.png " ")
 
 
 You may now *proceed to the next lab*.
