@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Upgrading 11.2.0.4 Database to 21c Using XTTS Perl V4 Scripts",
+  "workshoptitle": "Data Pump Cross-Platform Migration",
   "support": "https://community.oracle.com/mosc/categories/oracle_database",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
