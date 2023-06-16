@@ -35,7 +35,7 @@ On source change into the XTTS Source directory and create the xtt.properties fi
 
 The vi editor is now open in your terminal session and shows "New File" at the bottom.
 
-![open_vi](./images/vi_xtt_properties.png " ")
+![open_vi](./images/vi-xtt-properties.png " ")
 
 Copy the content of the xtt.properties file from below (and scroll down for further instructions):
 
@@ -230,18 +230,18 @@ Switch to the source terminal window still having the vi editor open.
 Press now the letter "i" to switch the vi editor into the insert mode. The last line in vi changes from  "xtt.properties [New file]" to "-- Insert --"
 
 
-![insert_vi](./images/vi_insert.png " ")
+![insert_vi](./images/vi-insert.png " ")
 
 Paste the xtt.properties content into vi. The last lines look like:
 
-![paste_vi](./images/paste_xtt_properties.png " ")
+![paste_vi](./images/paste-xtt-properties.png " ")
 
 Press the "Escape" key (the last line in vi changes again):
-![vi_escape](./images/vi_escape.png " ")
+![vi_escape](./images/vi-escape.png " ")
 
 The "-- Insert --" is gone. To save your new file and to exit from vi type ":wq!" 
 
-![write_quit_vi](./images/write_quit_vi.png " ")
+![write_quit_vi](./images/write-quit-vi.png " ")
 
 
 ## Task 2: Initial Backup 
@@ -257,7 +257,7 @@ While the source database remains active, you're now going to back it up for the
 
     </copy>
   ```
-![initial_restore](./images/initial_backup.png " ")
+![initial_restore](./images/initial-backup.png " ")
 
 <details>
  <summary>*click here to open/close the full backup log*</summary>
@@ -361,7 +361,7 @@ The initial restore on Target requires the "xtt.properties" and "res.txt" file f
 
     </copy>
   ```
-![copy_xtt.properties_and_res.txt](./images/cp_xtt_properties_res_txt.png " ")
+![copy_xtt.properties_and_res.txt](./images/cp-xtt-properties-res-txt.png " ")
 
 Starting restore:
   ```
@@ -372,7 +372,7 @@ Starting restore:
      
     </copy>
   ```
-![initial_restore](./images/initial_restore.png " ")
+![initial_restore](./images/initial-restore.png " ")
 
 <details>
  <summary>*click here to open the full restore log*</summary>

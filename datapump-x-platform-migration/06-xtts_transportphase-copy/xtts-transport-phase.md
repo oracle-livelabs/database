@@ -48,7 +48,7 @@ and execute:
     </copy>
   ```
 
-![set_tbs_readonly](./images/source_tbs_readonly.png " ")
+![set_tbs_readonly](./images/source-tbs-readonly.png " ")
 
 ## Task 1: Final Incremental Backup on Source
 On source change into the XTTS Source directory and execute the final incremental backup:
@@ -62,7 +62,7 @@ On source change into the XTTS Source directory and execute the final incrementa
     </copy>
   ```
 
-![final_backup](./images/final_incremental_backup.png " ")
+![final_backup](./images/final-incremental-backup.png " ")
 
 <details>
  <summary>*click here to see the full final backup log file*</summary>
@@ -173,7 +173,7 @@ The final incremental restore needs the "res.txt" and "incrbackups.txt" files fr
     </copy>
   ```
 
-![final_restore_prep](./images/fin_restore_copy.png " ")
+![final_restore_prep](./images/final-restore-copy.png " ")
 
 And start the restore:
   ```
@@ -185,7 +185,7 @@ And start the restore:
     </copy>
   ```
 
-![incremental_restore](./images/final_incr_restore.png " ")
+![incremental_restore](./images/final-incr-restore.png " ")
 
 The full output looks like:
 <details>
@@ -249,7 +249,7 @@ So create an Exp_Metadata.par file copying the following commands to the source 
     </copy>
   ```
 
-![create_metadata_export_par](./images/create_metadata_expdp_par.png " ")
+![create_metadata_export_par](./images/create-metadata-expdp-par.png " ")
 
 and execute expdp using this par file
 
@@ -259,7 +259,7 @@ and execute expdp using this par file
 
     </copy>
   ```
-![create_metadata_export_par](./images/metadata_export.png " ")
+![create_metadata_export_par](./images/metadata-export.png " ")
 
 
 <details>
@@ -487,7 +487,7 @@ Also here we first create the import parameter file. Copy and paste the content 
     <copy>
   ```
 
-![incremental_backup](./images/cre_metadata_impdp_par.png " ")
+![incremental_backup](./images/create-metadata-impdp-par.png " ")
 
 And import the metadata into the PDB3 using this Imp_Metadata.par parameter file:
   ```
@@ -497,7 +497,7 @@ And import the metadata into the PDB3 using this Imp_Metadata.par parameter file
     <copy>
   ```
 
-![incremental_backup](./images/metadata_import.png " ")
+![incremental_backup](./images/metadata-import.png " ")
 
 <details>
  <summary>*click here to see the full Metadata IMPDP log file*</summary>

@@ -21,21 +21,21 @@
     {
       "title": "Lab 3: Performing XTTS PreChecks on Source database",
       "description": "Summary of some pre checks to execute on Source database",
-      "filename": "../../03-xtts_prechecks/xtts_prechecks.md"
+      "filename": "../../03-xtts_prechecks/xtts-prechecks.md"
     },
     {
       "title": "Lab 4: XTTS Prepare Phase",
       "description": "The prepare phase ",
-      "filename": "../../04-xtts_preparephase/xtts_prepare_phase.md"
+      "filename": "../../04-xtts-preparephase/xtts-prepare-phase.md"
     },
     {
       "title": "Lab 5: XTTS Roll Forward Phase",
       "description": "The roll forward phase ",
-      "filename": "../../05-xtts_rollforwardphase/xtts_rollforward_phase.md"
+      "filename": "../../05-xtts-rollforwardphase/xtts-rollforward-phase.md"
     },
     {
       "title": "Lab 6: XTTS Transport Phase",
-      "filename": "../../06-xtts_transportphase/xtts_transport_phase.md"
+      "filename": "../../06-xtts-transportphase/xtts-transport-phase.md"
     },
     {
       "title": "Need Help?",

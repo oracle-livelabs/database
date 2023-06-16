@@ -34,7 +34,7 @@ By the way, the platform_id for the target Linux platform is 13, so let's see if
     order by platform_id;
     </copy>
   ```
-![TARGET_PLATFORM_SUPPORTED](./images/target_platform_supported.png " ")
+![TARGET_PLATFORM_SUPPORTED](./images/target-platform-supported.png " ")
 
 
 ## Task 1: DBTIMEZONE
@@ -66,7 +66,7 @@ You'll see, in our example source and target databases are in different timezone
 
     </copy>
   ```
-![tzltz_data_types](./images/timezone_data_types.png " ")
+![tzltz_data_types](./images/timezone-data-types.png " ")
 In the Hands-On-Lab there are no TSLTZ data types used. So no need to sync both DBTIMEZONEs or to handle data manually with expdp/impdp.
 
 ## Task 2: Source and Target Character Sets 
@@ -96,7 +96,7 @@ In this hands on lab you're going to transport the two tablespaces "TPCCTAB" and
 
     </copy>
   ```
-![self_contained_TBS](./images/self_contained_tbs.png " ")
+![self_contained_TBS](./images/self-contained-tbs.png " ")
 
 ## Task 4: User Data in SYSTEM/SYSAUX Tablespace on Source
 As SYSTEM and SYSAUX tablespaces are not copied from source to target, it's good practice to check if they might accidentally contain user data:
@@ -114,7 +114,7 @@ As SYSTEM and SYSAUX tablespaces are not copied from source to target, it's good
 
     </copy>
   ```
-![self_contained_TBS](./images/check_user_data_system_sysaux.png " ")
+![self_contained_TBS](./images/check-user-data-system-sysaux.png " ")
 
 
 ## Task 5: User Indexes in SYSTEM/SYSAUX Tablespace on Source
@@ -133,7 +133,7 @@ Same check as in the previous task but this time for user indexes
 
     </copy>
   ```
-![self_contained_TBS](./images/check_user_indexes_system_sysaux.png " ")
+![self_contained_TBS](./images/check-user-indexes-system-sysaux.png " ")
 
 ## Task 6: IOT Tables
 IOT tables might get corrupted during XTTS copy when copying to HP platforms. 
@@ -154,7 +154,7 @@ IOT tables might get corrupted during XTTS copy when copying to HP platforms.
     </copy>
   ```
 
-![IOT_Tables](./images/iot_output.png " ")
+![IOT_Tables](./images/iot-output.png " ")
 
 You can ignore this output because you're not moving to HP platform.
 
@@ -168,7 +168,7 @@ In versions prior 12.2 metadata imports failed when having tables with XMLTYPE c
 
     </copy>
   ```
-![IOT_Tables](./images/xml_data.png " ")
+![IOT_Tables](./images/xml-data.png " ")
 
 Only XML data in SYSAUX tablespace which you're not going to migrate. So ignore it.
 
@@ -188,7 +188,7 @@ Global temporary tables do not belong to any tablespace, so they are not transpo
 
     </copy>
   ```
-![GlobalTempTable](./images/global_temp_tables.png " ")
+![GlobalTempTable](./images/global-temp-tables.png " ")
 
 There are no global temporary tables in our lab. When you have them in your database, you can migrate them using Data Pump export/import or generate the metadata from these tables and created them in the target database.
 
