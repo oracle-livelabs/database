@@ -1,4 +1,4 @@
-# Integrate MicroTx Client Libraries with the Bank and Stock-Trading application
+# Integrate MicroTx Client Libraries with the Bank and Stock-Trading Application
 
 ## Introduction
 

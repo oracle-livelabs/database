@@ -1,4 +1,4 @@
-# Trade Stocks with the Bank and Stock-Trading application
+# Trade Stocks with the Bank and Stock-Trading Application
 
 ## Introduction
 
@@ -45,6 +45,7 @@ This lab assumes you have:
 Before you start a transaction, you must start a Minikube tunnel.
 
 1. Ensure that the minimum required memory and CPUs are available for Minikube.
+
     ```
     <copy>
     minikube config set memory 32768
@@ -52,6 +53,7 @@ Before you start a transaction, you must start a Minikube tunnel.
     ```
 
 2. Start Minikube.
+
     ```
     <copy>
     minikube start
@@ -93,7 +95,6 @@ Before you start a transaction, you must start a Minikube tunnel.
     ```
 
     Note that, if you don't do this, then you must explicitly specify the IP address in the commands when required.
-
 
 ## Task 2: Configure Keycloak
 
@@ -277,6 +278,7 @@ Install the Bank and Stock-Trading application in the `otmm` namespace, where yo
     kubectl get pods -n otmm
     </copy>
     ```
+
     The following image shows a sample output.
    ![Get details of the pods and services](./images/get-pods-details.png)
 
@@ -396,12 +398,12 @@ When you send a request to sell stocks, the Stock Broker service sells the stock
 
 ## Task 9: View Service Mesh graph and Distributed Traces (Optional)
 
-You can perform this task only if you have deployed Kiali and Jaeger in your cluster.
+Perform this task only if you have deployed Kiali and Jaeger in your cluster.
 To visualize what happens behind the scenes and how a trip booking request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you started in [Task 6](#Task6:DeployKialiandJaeger(Optional)).
 
-1. Open a new browser tab and navigate to the Kiali dashboard URL - http://localhost:20001/kiali
+1. Open a new browser tab and navigate to the Kiali dashboard URL - <http://localhost:20001/kiali>
 2. Select Graph for the otmm namespace.
-3. Open a new browser tab and navigate to the Jaeger dashboard URL - http://localhost:16686
+3. Open a new browser tab and navigate to the Jaeger dashboard URL - <http://localhost:16686>
 4. In the **Service** drop-down list, select **istio-ingressgateway**. A list of traces is displayed where each trace represents a request.
 5. Select a trace to view it.
 

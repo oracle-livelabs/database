@@ -2,13 +2,13 @@
 
 ## Introduction
 
-This lab walks you through the steps to quickly provision Oracle Autonomous Transaction Processing Serverless (ATP-S) on Oracle Cloud. You will use this database in the subsequent labs of this workshop. For this lab, you must create two ATP-S instances. One ATP-S instance acts as a resource manager for the Core Banking service and Branch Banking Service. The other ATP-S instance acts as resource manager for the Stock Broker service. Run the tasks in this lab in the remote desktop to create the database instances and download the database wallets within the remote desktop. When you directly download the wallet files in the remote desktop environment, you do not need to copy the wallet files from outside the environment.
+This lab walks you through the steps to quickly provision Autonomous Transaction Processing Serverless (ATP-S) instances on Oracle Cloud. You will use this database in the subsequent labs of this workshop. For this lab, you must create two ATP-S instances. One ATP-S instance acts as a resource manager for the Core Banking service and Branch Banking Service. The other ATP-S instance acts as resource manager for the Stock Broker service. Run the tasks in this lab in the remote desktop to create the database instances and download the database wallets within the remote desktop. When you directly download the wallet files in the remote desktop environment, you do not need to copy the wallet files from outside the environment.
 
 Estimated lab time: 20 minutes
 
 ### Objectives
 
-* Provision two new ATP-S instances.
+* Provision two new Autonomous Database Serverless instances.
 * Download the wallet file for each ATP-S instance.
 * Create tables with sample values for the Core Banking, Branch Banking, and Stock Broker services.
 
@@ -56,9 +56,9 @@ Estimated lab time: 20 minutes
 
     ![Chose a workload type](./images/adb-workload-type.png " ")
 
-5. Choose a deployment type. For this lab, choose **Shared Infrastructure** as the deployment type.
+5. Choose a deployment type. For this lab, choose **Serverless** as the deployment type.
 
-    ![Choose a deployment type](./images/deployment-type.png " ")
+    ![Choose a deployment type](./images/choose-deployment-type.png " ")
 
 6. Configure the database:
 
@@ -293,7 +293,7 @@ Create tables in the `BankingServiceDB` ATP-S instance and populate it with samp
 
 Repeat tasks 1, 2, 3, and 4 to create another ATP-S instance for the Stock Broker service and download the database wallet.
 
-1. Repeat [Task 1](#Task1:ChooseATPfromtheServicesMenu) and [Task 2](#Task2:CreateanAutonomousDatabaseInstancefortheCoreBankingandBranchBankingServices) to create an Autonomous Database instance, which you will use as a resource manager, for the Stock Broker service.
+1. Repeat [Task 1](#Task1:ChooseATPSfromtheServicesMenu) and [Task 2](#Task2:CreateanAutonomousDatabaseInstancefortheCoreBankingandBranchBankingServices) to create an Autonomous Database instance, which you will use as a resource manager, for the Stock Broker service.
 
     ![Specify database instance configuration](./images/create-dept2-atp.png " ")
 
@@ -489,7 +489,7 @@ You may now **proceed to the next lab.**
 
 ## Learn More
 
-* [Using Oracle Autonomous Database on Serverless Exadata Infrastructure](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/user/autonomous-workflow.html#GUID-5780368D-6D40-475C-8DEB-DBA14BA675C3)
+* [Using Oracle Autonomous Database on Serverless Infrastructure](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/user/autonomous-workflow.html#GUID-5780368D-6D40-475C-8DEB-DBA14BA675C3)
 * [Database Concepts](https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt/introduction-to-oracle-database.html#GUID-A42A6EF0-20F8-4F4B-AFF7-09C100AE581E)
 
 ## Acknowledgements
