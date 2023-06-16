@@ -7,7 +7,7 @@ The prerequisites are outlined in [MOS note #2471245.1: V4 Reduce Transportable 
 
 The diagram below shows you the different phases of the XTTS V4 script, which steps are are executed in the particular phase by the perl scripts and if the source database is up and available for normal use:
 
-![xtts workflow](./images/xtts_workflow.png " ")
+![xtts workflow](./images/xtts-workflow.png " ")
 
 
 
@@ -38,7 +38,7 @@ In this workshop, you will:
 This workshop is preloaded with 4 different Oracle Homes and 6 databases.
 You can switch between environments with the shortcuts shown in the last column of the below diagram.
 
-![Hands_On_Lab_Env](./images/hol_environment.png " ")
+![Hands_On_Lab_Env](./images/hol-environment.png " ")
 
 The 4 different Oracle Homes are:
 
