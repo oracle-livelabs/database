@@ -35,12 +35,12 @@ This lab assumes you have:
 
 Uncomment all the lines of code in the following files to integrate the functionality provided by the MicroTx client libraries with the Stock Broker application.
 
-* `pom.xml` file located in the `/home/oracle/OTMM/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/` folder
+* `pom.xml` file located in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/` folder
 * `UserStockTransactionServiceImpl.java` file located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application
 
 The following section provides reference information about each line of code that you must uncomment and its purpose. You can skip this reading this section if you only want to quickly uncomment the code and run the application. You can return to this section later to understand the purpose of each line of code that you uncomment.
 
-1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is in the `/home/oracle/OTMM/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/` folder in any code editor, and then uncomment the following lines of code. The following sample code is for the 22.3.2 release. Provide the correct version, based on the release that you want to use.
+1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/` folder in any code editor, and then uncomment the following lines of code. The following sample code is for the 22.3.2 release. Provide the correct version, based on the release that you want to use.
 
     ```
     <copy>

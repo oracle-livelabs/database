@@ -161,8 +161,8 @@ To provide the configuration and environment details in the `values.yaml` file:
 
 2. Enter values that you have noted down for the following fields under `security` in `UserBanking`.
 
-    * `clientSecret`: Enter the value of the client secret value that you had copied in step 11 of [Task 2](#Task2:ConfigureKeycloak).
-    * `issuerURL`: Enter the URL that you had copied in step 14 of [Task 2](#Task2:ConfigureKeycloak).
+    * `clientSecret`: Enter the value of the client secret value that you had copied in step 10 of [Task 2](#Task2:ConfigureKeycloak).
+    * `issuerURL`: Enter the URL that you had copied in step 13 of [Task 2](#Task2:ConfigureKeycloak).
     * `logoutRedirectURL`: Enter the URL in the format, `http://$CLUSTER_IPADDR/bankapp`. Where, `CLUSTER_IPADDR` is the external IP address of the Istio ingress gateway that you have noted down in [Task 1](#Task1:ConfigureMinikubeandStartaTunnel). For example, `http://192.0.2.117/bankapp`.
 
 3. Under `StockBroker`, set `deploymentEnabled` to `true`. You must set this flag to true before deploying the Stock Broker service.
@@ -409,7 +409,7 @@ To visualize what happens behind the scenes and how a trip booking request is pr
 
 ## Task 10: View Source Code of the Bank and Stock-Trading application (Optional)
 
-Source code for the following microservices is present in the `/home/oracle/OTMM/otmm-22.3.2/samples/xa/java/bankapp` folder.
+Source code for the following microservices is present in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp` folder.
 
 * Source code for the Stock Broker Service is available at `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker`.
 * Source code for the Branch Banking Service is available at `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/BranchBanking`.

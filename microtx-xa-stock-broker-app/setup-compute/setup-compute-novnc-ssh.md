@@ -1,4 +1,4 @@
-# Set up compute instance
+# Set Up Compute Instance
 
 ## Introduction
 This lab will show you how to set up a Resource Manager stack that will generate the Oracle Cloud objects needed to run your workshop.
@@ -75,7 +75,8 @@ Your options are:
     - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Keep the default as checked (unless you plan on using a fixed shape)
     - **Instance Shape:** Keep the default or select from the list of Flex shapes in the dropdown menu (e.g *VM.Standard.E4.Flex*).
     - **Instance OCPUS:** Enter 3 to provision an instance with 3 OCPUs.
-    If don't have the required quota for Flex Shapes or you prefer to use fixed shapes, follow the instructions below.  Otherwise, skip to the next step.
+
+      If don't have the required quota for Flex Shapes or you prefer to use fixed shapes, follow the instructions below.  Otherwise, skip to the next step.
 
     - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Unchecked
     - **Instance Shape:** Accept the default shown or select from the dropdown. e.g. VM.Standard2.2
