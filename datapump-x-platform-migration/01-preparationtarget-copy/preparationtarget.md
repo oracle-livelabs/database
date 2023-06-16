@@ -33,7 +33,7 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
     </copy>
   ```
 
-![Create_TARGTE_OS_Dir](./images/create_target_os_dir.png " ")
+![Create_TARGTE_OS_Dir](./images/create-target-os-dir.png " ")
 
 ### Unzip XTTS ZIP file
 
@@ -45,7 +45,7 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
     </copy>
   ```
 
-![Unzip_XTTS](./images/xtts_unzip_trg.png " ")
+![Unzip_XTTS](./images/xtts-unzip-trg.png " ")
 
 
 ## Task 2: Set the Target Environment and Start SQL*Plus
@@ -59,7 +59,7 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
     </copy>
   ```
 
-![Login to CDB3](./images/source_cdb3.png " ")
+![Login to CDB3](./images/source-cdb3.png " ")
 
 
 ## Task 3: In SQL*Plus Create the Target PDB
@@ -73,7 +73,7 @@ When creating a PDB the admin user needs to exist. You can delete it later on if
     </copy>
   ```
 
-![Create CDB3](./images/cdb3_create_pdb3.png " ")
+![Create CDB3](./images/cdb3-create-pdb3.png " ")
 
 
 
@@ -88,7 +88,7 @@ When creating a PDB the admin user needs to exist. You can delete it later on if
     </copy>
   ```
 
-![create Database Directory Target](./images/create_database_directory_pdb3.png " ")
+![create Database Directory Target](./images/create-database-directory-pdb3.png " ")
 
 
 You may now *proceed to the next lab*.
