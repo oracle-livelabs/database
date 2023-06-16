@@ -20,7 +20,7 @@
     {
       "title": "Lab 2: Set Up the Environment",
       "description": "How to provision the workshop environment and connect to it",
-      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc-ssh.md"
+      "filename": "../../setup-compute/setup-compute-novnc-ssh.md"
     },
     {
       "title": "Lab 3: Integrate MicroTx Client Libraries with XA Sample Application",
