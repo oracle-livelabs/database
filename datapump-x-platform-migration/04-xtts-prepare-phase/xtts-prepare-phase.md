@@ -21,37 +21,33 @@ This lab assumes you have:
 - Source and target prepared.
 - XTTS prechecks done
 
-## Task 1: XTTS Properties File (__SOURCE__)
-On source change into the XTTS Source directory and create the xtt.properties file using vi (for those of you who are not familiar with vi, no worries, you get the necessary vi commands shortly). So here the steps:
+## Task 0: Overview
+In this task you're goint ot run the initial backup and restore using the xtts package.
+
+
+
+## Task 1: XTTS Properties File (SOURCE)
+On source change into the XTTS Source directory and copy the xtt.properties containing all necessary parameters to run this lab.
 
   ```
     <copy>
      cd /home/oracle/XTTS/SOURCE
     </copy>
   ```
+![change into XTTS source dir](./images/switch-src-xtts-dir.png " ")
 
-First __rename__ the xtt.properties file shipped in the ZIP file:
   ```
     <copy>
-     mv xtt.properties xtt.properties_ORIG
+     cp /home/oracle/XTTS/xtt.properties .
     </copy>
   ```
+![DBTIMEZONE output source](./images/cpy-xtt-properties.png " ")
 
-Now open a __new__ and __empty__ xtt.properties file
-  ```
-    <copy>
-     vi xtt.properties
-    </copy>
-  ```
+<details>
+ <summary>*click here to see the xtt.properties file content*</summary>
 
-The vi editor is now open in your terminal session and shows "New File" at the bottom.
 
-![opening vi](./images/vi-xtt-properties.png " ")
-
-Copy the content of the xtt.properties file from below (and scroll down for further instructions):
-
-  ```
-    <copy>
+  ``` text
     ## xtt.properties
     ## (Doc ID 2471245.1)
     ##
@@ -234,36 +230,29 @@ Copy the content of the xtt.properties file from below (and scroll down for furt
     ## This should be set if using 12c.
     #usermantransport=1
     ## usermantransport=1
-    </copy>
   ```
+</details>
 
-Switch to the source terminal window still having the vi editor open.
- 
-  ```
-Press now the letter "i"
-  ```
-to switch the vi editor into the insert mode. The last line in vi changes from  "xtt.properties [New file]" to "-- Insert --"
+<details>
+ <summary>*click here if you want to see the xtt.properties parameters you're going to use in this lab and a short description*</summary>
 
 
-![switching to vi insert mode](./images/vi-insert.png " ")
+| Parameter | Comment |
+| :-------- | :-----|
+| tablespaces=TPCCTAB,USERS | Comma separated list of tablespaces to transport from source database to destination database |
+| platformid=13 | Source database platform id, obtained from V$DATABASE.PLATFORM_ID |
+| src_scratch_location=/home/oracle/XTTS/RMAN | Location where datafile copies and incremental backups are created on the source system |
+| dest_datafile_location=/u02/oradata/CDB3/pdb3/ | This is the FINAL location of the datafiles to be used by the destination database |
+| parallel=8 | Parallel defines the channel parallelism used in copying (prepare phase), converting (NOT RMAN) |
+| rollparallel=2 | Defines the level of parallelism for the roll forward operation |
+| destconnstr=sys/oracle@pdb3 | Only needs to be set in CDB environment. Specifies connect string of the destination pluggable database |
+{: title="xtts.properties parameters used in this lab"}
 
-Paste the xtt.properties content into vi. The last lines look like:
-
-![pasting xtts.properties content into vi](./images/paste-xtt-properties.png " ")
-
-  ```
-Press the "Escape" key 
-  ```
-the last line in vi changes again:
-
-![escaping from vi insert mode](./images/vi-escape.png " ")
-
-The "-- Insert --" is gone. To save your new file and to exit from vi type ":wq!" 
-
-![saving vi content and exiting](./images/write-quit-vi.png " ")
+</details>
 
 
-## Task 2: Initial Backup (__SOURCE__)
+
+## Task 2: Initial Backup (SOURCE)
 While the source database remains active, you're now going to back it up for the first time:
 
 
@@ -273,8 +262,10 @@ While the source database remains active, you're now going to back it up for the
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
     </copy>
+
+    Hit ENTER/RETURN to execute ALL commands.
   ```
-__Hit ENTER/RETURN__
+![prepare initial backup](./images/prepare-phase-backup-src.png " ")
   ```
     <copy>
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
@@ -373,7 +364,7 @@ __Hit ENTER/RETURN__
 
 
 
-## Task 3: Initial Restore (__TARGET__)
+## Task 3: Initial Restore (TARGET)
 The initial restore on Target requires the "xtt.properties" and "res.txt" file from source. In this hands on lab exercise the source and target machine are the same, so you can simply use the copy command:
 
 
@@ -382,11 +373,16 @@ The initial restore on Target requires the "xtt.properties" and "res.txt" file f
      cd /home/oracle/XTTS/TARGET/
     </copy>
   ```
-    ```
+
+![changing to the target XTTS directory](./images/prepare-phase-cd-target-dir.png " ")
+
+  ```
     <copy>
      cp /home/oracle/XTTS/SOURCE/xtt.properties /home/oracle/XTTS/TARGET/xtt.properties 
     </copy>
   ```
+![copying xtt.properties from source to target](./images/cpy-xtt-properties-src-trg.png " ")
+
   ```
     <copy>
      cp /home/oracle/XTTS/SOURCE/tmp/res.txt /home/oracle/XTTS/TARGET/tmp/res.txt
@@ -394,18 +390,24 @@ The initial restore on Target requires the "xtt.properties" and "res.txt" file f
   ```
 
 
-![copying xtt.properties and res.txt to target](./images/cp-xtt-properties-res-txt.png " ")
+![copying rest.txt from source to target](./images/cpy-res-txt-src-trg.png " ")
 
 Starting restore:
   ```
     <copy>
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
+    </copy>
+
+    Hit ENTER/RETURN to execute ALL commands.
+  ```
+![set restore environment on target](./images/env-initial-restore.png " ")
+
+  ```
+    <copy>
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
     </copy>
   ```
-__Hit ENTER/RETURN__
-
 ![executing initial restore on target](./images/initial-restore.png " ")
 
 <details>
@@ -451,6 +453,45 @@ Performing convert for file 5
 
   ```
 </details>
+
+
+## Task 4: Files created in this task (SOURCE & TARGET)
+
+### Source
+The xtt.properties file:
+  ```
+    <copy>
+    ls -al /home/oracle/XTTS/SOURCE/xtt.properties
+    </copy>
+  ```
+![source xtt.properties file](./images/ls-src-xtt-properties.png " ")
+
+Content of the XTTS/SOURCE/tmp dircetory containing logs and help files used by XTTS:
+  ```
+    <copy>
+    ls -al /home/oracle/XTTS/SOURCE/tmp/
+    </copy>
+  ```
+![xtts source tmp directory content](./images/ls-xtts-tmp-src.png " ")
+
+And the RMAN directory containg the datafile backup:
+  ```
+    <copy>
+    ls -al /home/oracle/XTTS/RMAN
+    </copy>
+  ```
+![RMAN backup datafiles](./images/ls-rman-src.png " ")
+
+
+### TARGET
+We copied the xtt.properties and the res.txt file from source to target. So they match. As we also share the RMAN backup directory between source and target, they will match as well.
+Only interesting direcory is the  XTTS/tmp directory on target:
+  ```
+    <copy>
+    ls -al /home/oracle/XTTS/TARGET/tmp
+    </copy>
+  ```
+![RMAN backup datafiles](./images/ls-prepare-target-tmp-dir.png " ")
 
 
 You may now *proceed to the next lab*.

@@ -110,6 +110,70 @@ Hit ENTER/RETURN to execute ALL commands.
 
 ![create database directory in PDB3](./images/create-database-directory-pdb3.png " ")
 
+## Task 5: Start Oracle Listener (TARGET)
+  ```
+    <copy>
+    lsnrctl start
+    </copy>
+  ```
+
+![start database listener on target](./images/prepare-target-start-listener.png " ")
+
+<details>
+ <summary>*click here to see the xtt.properties file content*</summary>
+
+
+  ``` text
+[CDB3] oracle@hol:~/XTTS/TARGET
+$ lsnrctl start
+
+LSNRCTL for Linux: Version 21.0.0.0.0 - Production on 01-JUN-2023 15:47:58
+
+Copyright (c) 1991, 2021, Oracle.  All rights reserved.
+
+Starting /u01/app/oracle/product/21/bin/tnslsnr: please wait...
+
+TNSLSNR for Linux: Version 21.0.0.0.0 - Production
+System parameter file is /u01/app/oracle/product/19/network/admin/listener.ora
+Log messages written to /u01/app/oracle/diag/tnslsnr/hol/listener/alert/log.xml
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=hol)(PORT=1521)))
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1521)))
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=hol)(PORT=1521)))
+STATUS of the LISTENER
+------------------------
+Alias                     LISTENER
+Version                   TNSLSNR for Linux: Version 21.0.0.0.0 - Production
+Start Date                01-JUN-2023 15:48:00
+Uptime                    0 days 0 hr. 0 min. 0 sec
+Trace Level               off
+Security                  ON: Local OS Authentication
+SNMP                      OFF
+Listener Parameter File   /u01/app/oracle/product/19/network/admin/listener.ora
+Listener Log File         /u01/app/oracle/diag/tnslsnr/hol/listener/alert/log.xml
+Listening Endpoints Summary...
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=hol)(PORT=1521)))
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1521)))
+Services Summary...
+Service "CDB1" has 1 instance(s).
+  Instance "CDB1", status UNKNOWN, has 1 handler(s) for this service...
+Service "CDB2" has 1 instance(s).
+  Instance "CDB2", status UNKNOWN, has 1 handler(s) for this service...
+Service "CDB3" has 1 instance(s).
+  Instance "CDB3", status UNKNOWN, has 1 handler(s) for this service...
+Service "DB12" has 1 instance(s).
+  Instance "DB12", status UNKNOWN, has 1 handler(s) for this service...
+Service "FTEX" has 1 instance(s).
+  Instance "FTEX", status UNKNOWN, has 1 handler(s) for this service...
+Service "UP19" has 1 instance(s).
+  Instance "UP19", status UNKNOWN, has 1 handler(s) for this service...
+Service "UPGR" has 1 instance(s).
+  Instance "UPGR", status UNKNOWN, has 1 handler(s) for this service...
+The command completed successfully
+
+  ```
+</details>
+
 
 You may now *proceed to the next lab*.
 
