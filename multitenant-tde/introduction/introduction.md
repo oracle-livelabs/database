@@ -3,11 +3,11 @@
 ## Encryption & Key Management with Wallets of Oracle Multitenant Databases
 
 With the increased risk of a cyberattacks protection of one of your most valuable asset’s, your data, is vital.  Data within the Oracle database is generally the most vital and/or sensitive data within the company.  The best way to start protecting that data is with Transparent Data Encryption (TDE).  Some of the benefits of using TDE are:
-    -	Helps address security and compliance needs
-    -	There is no need to change the applications that are accessing  the database
-    -	Users and applications are not aware the data is encrypted
-    -	There is little downtime involved
-    -	Your data is safe, even if the media is stolen
+- Helps address security and compliance needs
+- There is no need to change the applications that are accessing  the database
+- Users and applications are not aware the data is encrypted
+- There is little downtime involved
+- Your data is safe, even if the media is stolen
 
 TDE encrypts sensitive data stored in data files. To prevent unauthorized decryption, TDE stores the encryption keys in a security module external to the database, called a keystore.  In this module we will focus on how to encrypt the database when working with Pluggable databases (PDB) , containers (CDB) and wallets as the keystore.  There will be a future LiveLabs using OKV as the keystore, so keep an eye out for that.
 
