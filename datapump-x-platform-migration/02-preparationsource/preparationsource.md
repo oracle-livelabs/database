@@ -16,11 +16,11 @@ This lab assumes you have:
 
 - Connected to the Hands On Lab
 
-## Task 1: Open Terminal Window, Create OS SOURCE Directory and Unzip XTTS ZIP File
+## Task 1: Open Terminal Window, Create OS SOURCE Directory and Unzip XTTS ZIP File (SOURCE)
 
 ### Open Terminal Window 
 Open another terminal windows by clicking on the "Terminal" icon. <br> 
-You can use this terminal window to execute all commands related to the __SOURCE__ database.
+Use this second terminal window to execute all commands related to the __SOURCE__ database.
 
 ![Screenshot of the Linux Hands On Lab Terminal icon](./images/terminal.png " ")
 
@@ -28,7 +28,7 @@ All following screenshots related to the __SOURCE__ will have a __light blue__ b
 
 
 
-### Create OS Directories (__SOURCE__)
+### Create OS Directories (SOURCE)
 Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another one as XTTS SOURCE and a third directory for RMAN backup/restore files.
 
   ```
@@ -36,37 +36,41 @@ Activate the source terminal window and create three directories; one for the Da
     mkdir -p /home/oracle/XTTS/SOURCE/tmp 
     </copy>
   ```
+![Create XTTS Source OS Directory](./images/mkdir-xtts-src-os-dir.png " ")
+
   ```
     <copy>
     mkdir -p /home/oracle/XTTS/DUMP
     </copy>
   ```
+![Create Source OS Directory](./images/mkdir-xtts-dump-dir.png " ")
+
   ```
     <copy>
     mkdir -p /home/oracle/XTTS/RMAN
     </copy>
   ```
 
+![Create Source OS Directory](./images/mkdir-xtts-rman-dir.png " ")
 
-![Create Source OS Directory](./images/create-source-os-dir.png " ")
 
-
-### Unzip XTTS ZIP file (__SOURCE__)
+### Unzip XTTS ZIP file (SOURCE)
 
   ```
     <copy>
     cd /home/oracle/XTTS/SOURCE/
     </copy>
   ```
+![Unzipping the XTTS Perl V4 ZIP file on source](./images/change-xtts-src-dir.png " ")
+
   ```
     <copy>
-    unzip /home/oracle/Desktop/rman-xttconvert_VER4.3.zip
+    unzip /home/oracle/XTTS/rman_xttconvert_VER4.3.zip
     </copy>
   ```
+![Unzipping the XTTS Perl V4 ZIP file on source](./images/unzip-xtts-src.png " ")
 
-![Unzipping the XTTS Perl V4 ZIP file on source](./images/xtts-unzip-src.png " ")
-
-## Task 2: Set the Source Database Environment (__SOURCE__)
+## Task 2: Set the Source Database Environment (SOURCE)
 
 Activate source terminal window, set the source environment and start SQL*Plus:
 
@@ -75,16 +79,17 @@ Activate source terminal window, set the source environment and start SQL*Plus:
     . upgr
     </copy>
  ```
+![Set source database environment](./images/source-src-env.png " ")
+
   ```
     <copy>
     sqlplus / as sysdba
     </copy>
  ```
+![Login to source 11.2.0.4 database](./images/start-sqlplus-src.png " ")
 
-![Login to source 11.2.0.4 database](./images/source-upgr-env-sqlplus.png " ")
 
-
-## Task 3: Configure Source Database (__SOURCE__)
+## Task 3: Configure Source Database (SOURCE)
 Enable source database archive logging and create the database directory for Data Pump export. Also alter the TPCC user's password:
 
 
@@ -100,15 +105,15 @@ Enable source database archive logging and create the database directory for Dat
     alter user TPCC identified by oracle;
     exit
     </copy>
+
+    Hit ENTER/RETURN to execute ALL commands.
   ```
-__Hit ENTER/RETURN__
 
-![Enabling archive logging in source database](./images/enable-archive-logging.png " ")
-
+![Enabling archive logging in source database](./images/start-src-db-enable-archive.png " ")
 
 You might also consider enabling __Block Change Tracking (BCT)__ using the command "alter database enable block change tracking".
 
-## Task 4: Configuring Default RMAN Settings (__SOURCE__)
+## Task 4: Configuring Default RMAN Settings (SOURCE)
 The next parameters you're going to set for RMAN work well in the hands on lab. For your environment you might have to adopt them by increasing parallelism, the backup destination etc.
 
 On source start the rman console: 
@@ -128,8 +133,10 @@ in RMAN terminology the target database identifies the database which you're goi
      configure  DEVICE TYPE DISK PARALLELISM 8;
      exit;
     </copy>
+
+    Hit ENTER/RETURN to execute ALL commands.
   ```
-__Hit ENTER/RETURN__
+
 ![configure default RMAN parameters on source database side](./images/rman-default-target-settings.png " ")
 
 

@@ -16,18 +16,18 @@ This lab assumes you have:
 
 - Connected to the Hands On Lab
 
-## Task 1: Open Terminal Window, Create OS Target Directory and Unzip XTTS ZIP File
+## Task 1: Open Terminal Window, Create OS Target Directory and Unzip XTTS ZIP File (TARGET)
 
 ### Open Terminal Window 
 Open a terminal windows by clicking on the "Terminal" icon. <br>
-You can use this terminal window to execute all commands related to the __TARGET__ database.
+Use this terminal window to execute all commands related to the __TARGET__ database.
 
 ![Screenshot of the Linux Hands On Lab Terminal icon](./images/terminal.png " ")
 
 All following screenshots related to the __TARGET__ will have a light green_ background color.
 
 
-### Create OS Directory (__TARGET__)
+### Create OS Directory (TARGET)
 Activate the target terminal window and create a directory for the XTTS TARGET files.
 
   ```
@@ -38,7 +38,7 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
 
 ![Create TARGET OS directory ](./images/create-target-os-dir.png " ")
 
-### change into XTTS working directory (__TARGET__)
+### change into XTTS working directory (TARGET)
 
 
   ```
@@ -49,7 +49,7 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
 
 ![change into XTTS TARGET OS working directory ](./images/change-target-working-dir.png " ")
 
-### Unzip XTTS ZIP file (__TARGET__)
+### Unzip XTTS ZIP file (TARGET)
   ```
     <copy>
     unzip /home/oracle/XTTS/rman_xttconvert_VER4.3.zip
@@ -58,7 +58,7 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
 ![Unzipping the XTTS Perl V4 ZIP file on target](./images/unzip-xtts-target.png " ")
 
 
-## Task 2: Set Target Environment and Start SQL*Plus (__TARGET__)
+## Task 2: Set Target Environment and Start SQL*Plus (TARGET)
 
 
   ```
@@ -76,7 +76,7 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
 ![Login to CDB3](./images/open-target-sqlplus.png " ")
 
 
-## Task 3: In SQL*Plus Start the Container Database __CDB3__ and Create the Pluggable Database __PDB3__ (__TARGET__)
+## Task 3: In SQL*Plus Start the Container Database CDB3 and Create the Pluggable Database PDB3 (TARGET)
 When creating a PDB the admin user needs to exist. You can delete it later on if desired. Once the PDB3 is created you need to start it up and save its state.
 
   ```
@@ -94,7 +94,7 @@ When creating a PDB the admin user needs to exist. You can delete it later on if
 
 
 
-## Task 4: In SQL*Plus Create the Database Directory Used by Data Pump (__TARGET__)
+## Task 4: In SQL*Plus Create the Database Directory Used by Data Pump (TARGET)
  and create some additional objects for the migration.
 
   ```
