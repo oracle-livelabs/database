@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will execute common XTTS pre-checks in SQL*Plus.
+In this lab, you will execute common XTTS pre-checks in SQL*Plus. Each task will also contain the information, if you have to execute this step on source, target or both.
 
 Estimated Time: 15 minutes
 
@@ -21,50 +21,91 @@ This lab assumes you have:
 - Prepared the source
 - Prepared the target
 
-## Task 0: Start SQL*Plus (__SOURCE__)
+## Task 0: Start SQL*Plus (SOURCE and TARGET)
+
+### Source
   ```
     <copy>
     sqlplus / as sysdba
     </copy>
  ```
 
-![Login to source 11.2.0.4 database](./images/source-upgr-env-sqlplus.png " ")
+![Login to source 11.2.0.4 database](./images/open-prechecks-sqlplus-src.png " ")
 
+### Target
+  ```
+    <copy>
+    sqlplus / as sysdba
+    </copy>
+ ```
+![Login to target 21c database](./images/open-prechecks-sqlplus-trg.png " ")
 
-## Task 1: Transportable Tablespace Method Supported by Source and Target OS Platforms (__SOURCE__)
+## Task 1: Transportable Tablespace Method Supported by Source and Target OS Platforms (SOURCE)
 Before you begin check on source database if the OS you want to migrate your database to is supported by TTS. <br>
 By the way, the platform_id for the target Linux platform is 13, so let's see if it is supported to use XTTS:
   ```
     <copy>
-    col platform_name format A20
-    set line 200
-    set pages 999
+    @/home/oracle/scripts/Task1
+    </copy>
+  ```
+
+<details>
+ <summary>*click here to see the SQL Statement*</summary>
+
+  ``` text
     select * from v$transportable_platform 
     where platform_id=13 
     order by platform_id;
-    </copy>
+
   ```
-__Hit ENTER/RETURN__
+</details>
 
-![Check if target platform is supported](./images/target-platform-supported.png " ")
+![Check if target platform is supported](./images/precheck-task1-src.png " ")
 
 
-## Task 2: DBTIMEZONE (__SOURCE__)
+## Task 2: DBTIMEZONE (SOURCE & Target)
 You should always check that your SOURCE and TARGET database are located in the same timezone. 
-Open on source and target SQL*Plus and execute:
+
+### DBTIMEZONE (SOURCE and TARGET)
+Execute on __Source__ and __Target__:
   ```
     <copy>
-    SELECT DBTIMEZONE FROM dual;
+    @/home/oracle/scripts/Task2a
     </copy>
   ```
-![Checking DBTIMEZONE](./images/dbtimezone.png " ")
+<details>
+ <summary>*click here to see the SQL statement*</summary>
 
-When you open on target also SQL*Plus and execute the same command, you'll see, in this lab source and target databases are in different timezones. This might cause issues when your source database tables have columns with "__TimeStamp with Local Time Zone__ (TSLTZ)". You can execute the next query to see if the source database uses these data types: 
+  ``` text
+SELECT DBTIMEZONE FROM dual;
+  ```
+</details>
+
+The __SOURCE__ output:
+
+![Checking DBTIMEZONE on source](./images/precheck-task2a-src.png " ")
+
+The __TARGET__ output:
+
+![Checking DBTIMEZONE on target](./images/precheck-task2a-trg.png " ")
+
+You see, in this lab source and target databases are in different timezones. This might cause issues during metadata import when your source database tables have columns with "__TimeStamp with Local Time Zone__ (TSLTZ)".
+
+
+### CHECK for TimeStamp with Local Time Zone (TSLTZ) Data Type (SOURCE)
+So check now if your source database has tables having columns with "__TimeStamp with Local Time Zone__ (TSLTZ)": 
 
   ```
     <copy>
-    set line 200
-    col owner format A20
+    @/home/oracle/scripts/Task2b
+    </copy>
+  ```
+
+<details>
+ <summary>*click here to see the SQL statement*</summary>
+
+
+  ``` text
     select t.owner, count(*)
     FROM
       dba_tab_cols t
@@ -72,146 +113,227 @@ When you open on target also SQL*Plus and execute the same command, you'll see, 
       WHERE
         t.data_type LIKE '%WITH LOCAL TIME ZONE' 
         AND o.object_type = 'TABLE' 
---        AND o.owner in (select username from dba_users where oracle_maintained='N')
       group by t.owner;
-    </copy>
-  ```
-__Hit ENTER/RETURN__
 
-![Checking for Timestamp with local timezone dataypes](./images/timezone-data-types.png " ")
+  ```
+</details>
+
+
+![Checking on source for Timestamp with local timezone dataypes](./images/precheck-task2b-src.png " ")
 In the Hands-On-Lab there are no TSLTZ data types used. So no need to sync both DBTIMEZONEs or to handle data manually with expdp/impdp.
 
-## Task 3: Source and Target Character Sets 
+## Task 3: Character Sets (SOURCE & TARGET)
 The source and target database must use compatible database character sets.
 
   ```
     <copy>
-     col parameter format a35
-     col VALUE format a35
-     set pages 999
-     set line 200
-     select * from v$nls_parameters;
+     @/home/oracle/scripts/Task3
     </copy>
   ```
-__Hit ENTER/RETURN__
+
+<details>
+ <summary>*click here to see the SQL statement*</summary>
+
+
+  ``` text
+select parameter,value from v$nls_parameters
+where parameter like '%CHARACTERSET';
+  ```
+</details>
+
+The __SOURCE__ output:
+
+![DBTIMEZONE output source](./images/precheck-task3-src.png " ")
+
+The __TARGET__ output:
+
+![DBTIMEZONE output target](./images/precheck-task3-trg.png " ")
+
+Both character sets in our lab match. 
 
 * Details about "[General Limitations on Transporting Data](https://docs.oracle.com/en/database/oracle/oracle-database/19/spucd/general-limitations-on-transporting-data.html#GUID-28800719-6CB9-4A71-95DD-4B61AA603173)" are mentioned in the manual
 
 
-## Task 4: XTTS Tablespace Violations (__SOURCE__) 
+## Task 4: XTTS Tablespace Violations (SOURCE) 
 For transportable tablespaces another requirement is that all tablespaces you're going to transport are self contained.
 In this hands on lab you're going to transport the two tablespaces "TPCCTAB" and "USERS". So let's check if they are self contained:
 
   ```
     <copy>
-     EXEC SYS.DBMS_TTS.TRANSPORT_SET_CHECK ('TPCCTAB,USERS',True,True);
-     SELECT * FROM transport_set_violations;
+    @/home/oracle/scripts/Task4
     </copy>
   ```
-__Hit ENTER/RETURN__
 
-![Checking that all tablespaces to migrate are self contained](./images/self-contained-tbs.png " ")
+<details>
+ <summary>*click here to see the SQL statement*</summary>
 
-## Task 5: User Data in SYSTEM/SYSAUX Tablespace (__SOURCE__)
+
+  ``` text
+     EXEC SYS.DBMS_TTS.TRANSPORT_SET_CHECK ('TPCCTAB,USERS',True,True);
+     SELECT * FROM transport_set_violations;
+
+  ```
+</details>
+
+![Checking on source that all tablespaces to migrate are self contained](./images/precheck-task4-src.png " ")
+
+## Task 5: User Data in SYSTEM/SYSAUX Tablespace (SOURCE)
 As SYSTEM and SYSAUX tablespaces are not copied from source to target, it's good practice to check if they might accidentally contain user data:
 
   ```
     <copy>
-     set line 200
-     col owner format A20
-     col table_name format A50
+     @/home/oracle/scripts/Task5
+    </copy>
+  ```
+
+<details>
+ <summary>*click here to see the SQL statement*</summary>
+
+
+  ``` text
      select owner, table_name, temporary from dba_tables where 
      owner not in ('WMSYS','XDB','SYSTEM','SYS','LBACSYS','OUTLN','DBSNMP','APPQOSSYS')
      -- (select username from dba_users 
      -- where oracle_maintained='Y') 
      and tablespace_name in ( 'SYSTEM', 'SYSAUX');
-    </copy>
   ```
-__Hit ENTER/RETURN__
+</details>
 
-![checking if there are user tables in system or sysaux TBS](./images/check-user-data-system-sysaux.png " ")
+![checking if there are user tables in system or sysaux TBS](./images/precheck-task5-src.png " ")
 
 
-## Task 6: User Indexes in SYSTEM/SYSAUX Tablespace (__SOURCE__)
+## Task 6: User Indexes in SYSTEM/SYSAUX Tablespace (SOURCE)
 Same check as in the previous task but this time for user indexes
 
   ```
     <copy>
-     set line 200
-     col owner format A20
-     col table_name format A50
-     col index_name format A50
+     @/home/oracle/scripts/Task6
+    </copy>
+  ```
+
+<details>
+ <summary>*click here to see the SQL statement*</summary>
+
+
+  ``` text
      select  owner, table_name,index_name from dba_indexes
      where owner not in ('WMSYS','XDB','SYSTEM','SYS','LBACSYS','OUTLN','DBSNMP','APPQOSSYS')
      -- owner not in (select username from dba_users where oracle_maintained='Y') 
      and tablespace_name in ( 'SYSTEM', 'SYSAUX') order by 1,2;
-    </copy>
+
   ```
-__Hit ENTER/RETURN__
+</details>
 
-![checking if there are user indexes in system or sysaux TBS](./images/check-user-indexes-system-sysaux.png " ")
 
-## Task 7: IOT Tables (__SOURCE__)
+![checking if there are user indexes in system or sysaux TBS](./images/precheck-task6-src.png " ")
+
+## Task 7: IOT Tables (SOURCE)
 IOT tables might get corrupted during XTTS copy when copying to HP platforms. 
 * [Corrupt IOT when using Transportable Tablespace to HP from different OS (Doc ID 1334152.1) ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1334152.1&displayIndex=1)
 
   ```
     <copy>
-     set line 200
-     set pages 999
-     col owner format a20
-     col table_name format a35
+     @/home/oracle/scripts/Task7
+    </copy>
+  ```
+
+
+<details>
+ <summary>*click here to see the SQL statement*</summary>
+
+
+  ``` text
      select owner,table_name,iot_type from dba_tables where iot_type like '%IOT%' 
      and table_name not like 'DR$%' 
      -- and owner not in (select username from dba_users where oracle_maintained='Y')
-     and owner not in ('WMSYS','XDB','SYSTEM','SYS','LBACSYS','OUTLN','DBSNMP','APPQOSSYS')
-     ;
-    </copy>
-  ```
-__Hit ENTER/RETURN__
+     and owner not in ('WMSYS','XDB','SYSTEM','SYS','LBACSYS','OUTLN','DBSNMP','APPQOSSYS');
 
-![Checking if we have to take care of IOT tables](./images/iot-output.png " ")
+  ```
+</details>
+
+
+![Checking if we have to take care of IOT tables](./images/precheck-task7-src.png " ")
 
 You can ignore this output because you're not moving to HP platform.
 
-## Task 8: Binary XMLTYPE Columns (__SOURCE__)
+## Task 8: Binary XMLTYPE Columns (SOURCE)
 In versions prior 12.2 metadata imports failed when having tables with XMLTYPE columns. You need to exclude them from the metadata export and handle the content manually during the downtime. A check if you have XML types stored in your database is:
 
   ```
     <copy>
-    select distinct p.tablespace_name from dba_tablespaces p, dba_xml_tables x, dba_users u, all_all_tables t where t.table_name=x.table_name and t.tablespace_name=p.tablespace_name and x.owner=u.username;
-    select distinct p.tablespace_name from dba_tablespaces p, dba_xml_tab_cols x, dba_users u, all_all_tables t where t.table_name=x.table_name and t.tablespace_name=p.tablespace_name and x.owner=u.username;
+     @/home/oracle/scripts/Task8
     </copy>
   ```
-__Hit ENTER/RETURN__
 
-![Checking if we have to take care of binary XML datatypes](./images/xml-data.png " ")
+
+<details>
+ <summary>*click here to see the SQL statement*</summary>
+
+
+  ``` text
+    select distinct p.tablespace_name from dba_tablespaces p, dba_xml_tables x, dba_users u, all_all_tables t where t.table_name=x.table_name and t.tablespace_name=p.tablespace_name and x.owner=u.username;
+
+    select distinct p.tablespace_name from dba_tablespaces p, dba_xml_tab_cols x, dba_users u, all_all_tables t where t.table_name=x.table_name and t.tablespace_name=p.tablespace_name and x.owner=u.username;
+
+  ```
+</details>
+
+![Checking if we have to take care of binary XML datatypes](./images/precheck-task8-src.png " ")
 
 Only XML data in SYSAUX tablespace which you're not going to migrate. So ignore it.
 
 * [Is it supported to do a Transport Tablespace (TTS) Import with Data Pump on a tablespace with binary XML objects ? (Doc ID 1908140.1) ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1908140.1&displayIndex=1)
 
 
-## Task 9: Global Temporary Tables (__SOURCE__)
+## Task 9: Global Temporary Tables (SOURCE)
 Global temporary tables do not belong to any tablespace, so they are not transported to the target database. Let's see if we have some global temporary tables and who might own them:
 
 
   ```
     <copy>
+     @/home/oracle/scripts/Task9
+    </copy>
+  ```
+
+<details>
+ <summary>*click here to see the SQL statement*</summary>
+
+
+  ``` text
      SELECT table_name FROM dba_tables WHERE temporary= 'Y'
      and owner not in ('WMSYS','XDB','SYSTEM','SYS','LBACSYS','OUTLN','DBSNMP','APPQOSSYS')
      -- owner not in (select username from dba_users where oracle_maintained='Y') 
      ;
+
+  ```
+</details>
+
+![Checking if we have GLOBAL temporary tables on source](./images/precheck-task9-src.png " ")
+
+There are no global temporary tables in our lab. When you have them in your database, you can migrate them using Data Pump export/import or generate the metadata from these tables and created them in the target database.
+
+## Task 10: Exit SQL*Plus (SOURCE & TARGET)
+
+### SOURCE
+  ```
+    <copy>
      exit;
     </copy>
   ```
-  __Hit ENTER/RETURN__
+
+![Exit from SQL*Plus on source](./images/precheck-task10-src.png " ")
+
+### TARGET
+  ```
+    <copy>
+     exit;
+    </copy>
+  ```
+![Exit from SQL*Plus on target](./images/precheck-task10-trg.png " ")
 
 
 
-![Checking if we have GLOBAL temporary tables](./images/global-temp-tables.png " ")
 
-There are no global temporary tables in our lab. When you have them in your database, you can migrate them using Data Pump export/import or generate the metadata from these tables and created them in the target database.
 
 
 You may now *proceed to the next lab*.
