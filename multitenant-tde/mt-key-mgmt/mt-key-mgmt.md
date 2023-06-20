@@ -5,9 +5,9 @@ In this lab we will go through the steps to add a wallet & keys to CDB's and PDB
 *Estimated Workshop Time* :60 Minutes
 
 ### Objectives
-1.
-2. 
-3. 
+1. Add TDE to a Pluggable Database (PDB) & Container
+2. Move PDB to another container
+3. Move key for that database to new container
 
 ### Prerequisites
 
@@ -23,14 +23,6 @@ In this lab we will go through the steps to add a wallet & keys to CDB's and PDB
 
 ## Task 1: Backup CDB1 and CDB2
 This section starts you off with an unencrypted database & backing it up so you can re-run this lab multiple times if you want.
-
-The tasks you will do in this step are
-
-1. Log into the Oracle database and become oracle
-2. Backup Container Database 1 (CDB1)
-3. Backup CDB2
-4. Look for a CDB1 wallet
-5. Look for CDB2 wallet
 
 Start with normal setup on CDB1
 1. Run the script below to reset CDB1 prior to the the introduction of TDE on CDB1.  This will refresh the database prior to TDE being applied.
