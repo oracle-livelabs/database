@@ -36,21 +36,29 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
     </copy>
   ```
 
-![Create_TARGTE OS directory ](./images/create-target-os-dir.png " ")
+![Create TARGET OS directory ](./images/create-target-os-dir.png " ")
 
-### Unzip XTTS ZIP file (__TARGET__)
+### change into XTTS working directory (__TARGET__)
+
 
   ```
     <copy>
     cd /home/oracle/XTTS/TARGET/
-    unzip /home/oracle/Desktop/rman_xttconvert_VER4.3.zip
     </copy>
   ```
 
-![Unzipping the XTTS Perl V4 ZIP file on target](./images/xtts-unzip-trg.png " ")
+![change into XTTS TARGET OS working directory ](./images/change-target-working-dir.png " ")
+
+### Unzip XTTS ZIP file (__TARGET__)
+  ```
+    <copy>
+    unzip /home/oracle/XTTS/rman_xttconvert_VER4.3.zip
+    </copy>
+  ```
+![Unzipping the XTTS Perl V4 ZIP file on target](./images/unzip-xtts-target.png " ")
 
 
-## Task 2: Set the Target Environment and Start SQL*Plus (__TARGET__)
+## Task 2: Set Target Environment and Start SQL*Plus (__TARGET__)
 
 
   ```
@@ -58,17 +66,19 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
     . cdb3
     </copy>
   ```
+![Setting target database environment](./images/source-target-database-env.png " ")
   ```
     <copy>
     sqlplus / as sysdba 
     </copy>
   ```
 
-![Login to CDB3](./images/source-cdb3.png " ")
+![Login to CDB3](./images/open-target-sqlplus.png " ")
 
 
-## Task 3: In SQL*Plus Create the Target PDB (__TARGET__)
-When creating a PDB the admin user needs to exist. You can delete it later on if desired. Once the PDB3 is created you need to start it up.
+## Task 3: In SQL*Plus Start the Container Database __CDB3__ and Create the Pluggable Database __PDB3__ (__TARGET__)
+When creating a PDB the admin user needs to exist. You can delete it later on if desired. Once the PDB3 is created you need to start it up and save its state.
+
   ```
     <copy>
     startup
@@ -76,10 +86,11 @@ When creating a PDB the admin user needs to exist. You can delete it later on if
     alter pluggable database pdb3 open;
     alter pluggable database PDB3 save state;
     </copy>
+    
+    Hit ENTER/RETURN to execute ALL commands.
   ```
-__Hit ENTER/RETURN__
 
-![Create PDB3 in CDB3](./images/cdb3-create-pdb3.png " ")
+![Create PDB3 in CDB3](./images/start-cdb3-create-pdb3.png " ")
 
 
 
@@ -88,12 +99,14 @@ __Hit ENTER/RETURN__
 
   ```
     <copy>
-		alter session set container=PDB3;
-		CREATE OR REPLACE DIRECTORY "XTTS_METADATA_DIR" AS '/home/oracle/XTTS/DUMP/';
+    alter session set container=PDB3;
+    CREATE OR REPLACE DIRECTORY "XTTS_METADATA_DIR" AS '/home/oracle/XTTS/DUMP/';
     exit;
     </copy>
+
+Hit ENTER/RETURN to execute ALL commands.
   ```
-__Hit ENTER/RETURN__
+
 
 ![create database directory in PDB3](./images/create-database-directory-pdb3.png " ")
 
