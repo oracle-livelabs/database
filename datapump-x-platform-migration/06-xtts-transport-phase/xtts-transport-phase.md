@@ -26,13 +26,12 @@ This lab assumes you have:
 - Successfully executed incremental backup(s)
 - Successfully executed incremental restore(s)
 
-## Task 1: Setting Tablespaces to "read only" on Source
+## Task 1: Setting Tablespaces to "read only" (__SOURCE__)
 
 Open SQL*Plus, connect "as sysdba"
   ```
     <copy>
      sqlplus  / as sysdba 
-     
     </copy>
   ```
 and execute:
@@ -44,13 +43,13 @@ and execute:
      set pages 999
      select tablespace_name, STATUS from dba_tablespaces order by 2,1;
      exit;
-
     </copy>
   ```
+__Hit ENTER/RETURN__
 
 ![set source tablespaces to read only](./images/source-tbs-readonly.png " ")
 
-## Task 1: Final Incremental Backup on Source
+## Task 1: Final Incremental Backup (__SOURCE__)
 On source change into the XTTS Source directory and execute the final incremental backup:
 
   ```
@@ -58,9 +57,9 @@ On source change into the XTTS Source directory and execute the final incrementa
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
-
     </copy>
   ```
+__Hit ENTER/RETURN__
 
 ![execute final incremental backup](./images/final-incremental-backup.png " ")
 
@@ -160,7 +159,7 @@ ORA-06512: at line 284__<br>
 You can safely ignore those warnings as they only tell you that you're going to back up a "read only" tablespace.
 
 
-## Task 2: Final Incremental Restore on Target
+## Task 2: Final Incremental Restore (__TARGET__)
 
 Open the Target console.
 The final incremental restore needs the "res.txt" and "incrbackups.txt" files from source. So copy them:
@@ -168,8 +167,11 @@ The final incremental restore needs the "res.txt" and "incrbackups.txt" files fr
   ```
     <copy>
      cp /home/oracle/XTTS/SOURCE/tmp/res.txt /home/oracle/XTTS/TARGET/tmp/res.txt
+    </copy>
+  ```
+  ```
+    <copy>
      cp /home/oracle/XTTS/SOURCE/tmp/incrbackups.txt /home/oracle/XTTS/TARGET/tmp/incrbackups.txt
-
     </copy>
   ```
 
@@ -181,9 +183,9 @@ And start the restore:
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
-
     </copy>
   ```
+__Hit ENTER/RETURN__
 
 ![starting final incremental restore](./images/final-incr-restore.png " ")
 
@@ -231,7 +233,7 @@ End of rollforward phase
   ```
 </details>
 
-## Task 3: Metadata Export on Source
+## Task 3: Metadata Export (__SOURCE__)
 As the source and target database version differ too much, we can't use __Data Pump network_link__ and need to export and import the metadata information instead.
 
 So create an Exp_Metadata.par file copying the following commands to the source database terminal window:
@@ -245,9 +247,9 @@ So create an Exp_Metadata.par file copying the following commands to the source 
      echo TRANSPORTABLE=ALWAYS >>Exp_Metadata.par
      echo VERSION=12 >>Exp_Metadata.par
      cat Exp_Metadata.par
-
     </copy>
   ```
+__Hit ENTER/RETURN__
 
 ![create metadata export Data Pump parameter file on source ](./images/create-metadata-expdp-par.png " ")
 
@@ -256,7 +258,6 @@ and execute expdp using this par file
   ```
     <copy>
      expdp system/oracle@UPGR parfile=Exp_Metadata.par
-
     </copy>
   ```
 ![execute metadata data pump export on source ](./images/metadata-export.png " ")
@@ -468,7 +469,7 @@ and execute expdp using this par file
   ```
 </details>
 
-## Task 4: Metadata Import on Target
+## Task 4: Metadata Import (__TARGET__)
 Also here we first create the import parameter file. Copy and paste the content to the target console:
 
   ```
@@ -483,9 +484,9 @@ Also here we first create the import parameter file. Copy and paste the content 
      echo transport_datafiles=/u02/oradata/CDB3/pdb3/TPCCTAB_5.dbf >>Imp_Metadata.par
      echo transport_datafiles=/u02/oradata/CDB3/pdb3/TPCCTAB_6.dbf >>Imp_Metadata.par
      cat Imp_Metadata.par
-
     <copy>
   ```
+__Hit ENTER/RETURN__
 
 ![create metadata data pump import parameter file](./images/create-metadata-impdp-par.png " ")
 
@@ -493,7 +494,6 @@ And import the metadata into the PDB3 using this Imp_Metadata.par parameter file
   ```
    <copy>
      impdp system/oracle@pdb3 parfile=Imp_Metadata.par
-
     <copy>
   ```
 

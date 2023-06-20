@@ -21,15 +21,26 @@ This lab assumes you have:
 - Source and target prepared.
 - XTTS prechecks done
 
-## Task 1: XTTS Properties File
+## Task 1: XTTS Properties File (__SOURCE__)
 On source change into the XTTS Source directory and create the xtt.properties file using vi (for those of you who are not familiar with vi, no worries, you get the necessary vi commands shortly). So here the steps:
 
   ```
     <copy>
      cd /home/oracle/XTTS/SOURCE
-     mv xtt.properties xtt.properties_ORIG
-     vi xtt.properties
+    </copy>
+  ```
 
+First __rename__ the xtt.properties file shipped in the ZIP file:
+  ```
+    <copy>
+     mv xtt.properties xtt.properties_ORIG
+    </copy>
+  ```
+
+Now open a __new__ and __empty__ xtt.properties file
+  ```
+    <copy>
+     vi xtt.properties
     </copy>
   ```
 
@@ -227,7 +238,11 @@ Copy the content of the xtt.properties file from below (and scroll down for furt
   ```
 
 Switch to the source terminal window still having the vi editor open.
-Press now the letter "i" to switch the vi editor into the insert mode. The last line in vi changes from  "xtt.properties [New file]" to "-- Insert --"
+ 
+  ```
+Press now the letter "i"
+  ```
+to switch the vi editor into the insert mode. The last line in vi changes from  "xtt.properties [New file]" to "-- Insert --"
 
 
 ![switching to vi insert mode](./images/vi-insert.png " ")
@@ -236,7 +251,11 @@ Paste the xtt.properties content into vi. The last lines look like:
 
 ![pasting xtts.properties content into vi](./images/paste-xtt-properties.png " ")
 
-Press the "Escape" key (the last line in vi changes again):
+  ```
+Press the "Escape" key 
+  ```
+the last line in vi changes again:
+
 ![escaping from vi insert mode](./images/vi-escape.png " ")
 
 The "-- Insert --" is gone. To save your new file and to exit from vi type ":wq!" 
@@ -244,7 +263,7 @@ The "-- Insert --" is gone. To save your new file and to exit from vi type ":wq!
 ![saving vi content and exiting](./images/write-quit-vi.png " ")
 
 
-## Task 2: Initial Backup 
+## Task 2: Initial Backup (__SOURCE__)
 While the source database remains active, you're now going to back it up for the first time:
 
 
@@ -253,10 +272,15 @@ While the source database remains active, you're now going to back it up for the
      cd /home/oracle/XTTS/SOURCE
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
-     $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
-
     </copy>
   ```
+__Hit ENTER/RETURN__
+  ```
+    <copy>
+     $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
+    </copy>
+  ```
+
 ![Starting initial backup](./images/initial-backup.png " ")
 
 <details>
@@ -349,18 +373,27 @@ While the source database remains active, you're now going to back it up for the
 
 
 
-## Task 3: Initial Restore  
+## Task 3: Initial Restore (__TARGET__)
 The initial restore on Target requires the "xtt.properties" and "res.txt" file from source. In this hands on lab exercise the source and target machine are the same, so you can simply use the copy command:
 
 
   ```
     <copy>
      cd /home/oracle/XTTS/TARGET/
-     cp /home/oracle/XTTS/SOURCE/xtt.properties /home/oracle/XTTS/TARGET/xtt.properties 
-     cp /home/oracle/XTTS/SOURCE/tmp/res.txt /home/oracle/XTTS/TARGET/tmp/res.txt
-
     </copy>
   ```
+    ```
+    <copy>
+     cp /home/oracle/XTTS/SOURCE/xtt.properties /home/oracle/XTTS/TARGET/xtt.properties 
+    </copy>
+  ```
+  ```
+    <copy>
+     cp /home/oracle/XTTS/SOURCE/tmp/res.txt /home/oracle/XTTS/TARGET/tmp/res.txt
+    </copy>
+  ```
+
+
 ![copying xtt.properties and res.txt to target](./images/cp-xtt-properties-res-txt.png " ")
 
 Starting restore:
@@ -369,9 +402,10 @@ Starting restore:
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
-     
     </copy>
   ```
+__Hit ENTER/RETURN__
+
 ![executing initial restore on target](./images/initial-restore.png " ")
 
 <details>

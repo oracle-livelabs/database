@@ -18,13 +18,14 @@ This lab assumes you have:
 
 ## Task 1: Open Terminal Window, Create OS Target Directory and Unzip XTTS ZIP File
 
-### Open Terminal Window
-Open two terminal Windows by clicking on the Terminal icon
+### Open Terminal Window 
+Open two terminal windows by clicking on the Terminal icon. You could arrange them next to each other and one terminal will be used to execute all __SOURCE__ related commands, the other one all commands for the __TARGET__.
+
 ![Screenshot of the Linux Hands On Lab Terminal icon](./images/terminal.png " ")
 
-For better visibility the source database will use a light blue and the target database a light green background.
+For better distinctness we changed the background color of our terminal windows and all screenshots with a __light blue__ will represent command executed on __SOURCE__, screenshots with __light_green__ represent the target database.
 
-### Create OS Target Directory
+### Create OS Directory (__TARGET__)
 Activate the target terminal window and create a directory for the XTTS TARGET files.
 
   ```
@@ -35,58 +36,62 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
 
 ![Create_TARGTE OS directory ](./images/create-target-os-dir.png " ")
 
-### Unzip XTTS ZIP file
+### Unzip XTTS ZIP file (__TARGET__)
 
   ```
     <copy>
     cd /home/oracle/XTTS/TARGET/
     unzip /home/oracle/Desktop/rman_xttconvert_VER4.3.zip
-
     </copy>
   ```
 
 ![Unzipping the XTTS Perl V4 ZIP file on target](./images/xtts-unzip-trg.png " ")
 
 
-## Task 2: Set the Target Environment and Start SQL*Plus
+## Task 2: Set the Target Environment and Start SQL*Plus (__TARGET__)
 
 
   ```
     <copy>
     . cdb3
+    </copy>
+  ```
+  ```
+    <copy>
     sqlplus / as sysdba 
-
     </copy>
   ```
 
 ![Login to CDB3](./images/source-cdb3.png " ")
 
 
-## Task 3: In SQL*Plus Create the Target PDB
+## Task 3: In SQL*Plus Create the Target PDB (__TARGET__)
 When creating a PDB the admin user needs to exist. You can delete it later on if desired. Once the PDB3 is created you need to start it up.
   ```
     <copy>
+    startup
     create pluggable database PDB3 admin user adm identified by adm file_name_convert=('pdbseed', 'pdb3');
     alter pluggable database pdb3 open;
     alter pluggable database PDB3 save state;
-
     </copy>
   ```
+__Hit ENTER/RETURN__
 
 ![Create PDB3 in CDB3](./images/cdb3-create-pdb3.png " ")
 
 
 
-## Task 4: In SQL*Plus Create the Database Directory Used by Data Pump
+## Task 4: In SQL*Plus Create the Database Directory Used by Data Pump (__TARGET__)
  and create some additional objects for the migration.
 
   ```
-    <copy>    
+    <copy>
 		alter session set container=PDB3;
 		CREATE OR REPLACE DIRECTORY "XTTS_METADATA_DIR" AS '/home/oracle/XTTS/DUMP/';
     exit;
     </copy>
   ```
+__Hit ENTER/RETURN__
 
 ![create database directory in PDB3](./images/create-database-directory-pdb3.png " ")
 

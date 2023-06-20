@@ -21,7 +21,17 @@ This lab assumes you have:
 - Prepared the source
 - Prepared the target
 
-## Task 0: Transportable Tablespace Method Supported by Source and Target OS Platforms
+## Task 0: Start SQL*Plus (__SOURCE__)
+  ```
+    <copy>
+    sqlplus / as sysdba
+    </copy>
+ ```
+
+![Login to source 11.2.0.4 database](./images/source-upgr-env-sqlplus.png " ")
+
+
+## Task 1: Transportable Tablespace Method Supported by Source and Target OS Platforms (__SOURCE__)
 Before you begin check on source database if the OS you want to migrate your database to is supported by TTS. <br>
 By the way, the platform_id for the target Linux platform is 13, so let's see if it is supported to use XTTS:
   ```
@@ -34,21 +44,22 @@ By the way, the platform_id for the target Linux platform is 13, so let's see if
     order by platform_id;
     </copy>
   ```
+__Hit ENTER/RETURN__
+
 ![Check if target platform is supported](./images/target-platform-supported.png " ")
 
 
-## Task 1: DBTIMEZONE
+## Task 2: DBTIMEZONE (__SOURCE__)
 You should always check that your SOURCE and TARGET database are located in the same timezone. 
 Open on source and target SQL*Plus and execute:
   ```
     <copy>
-    SELECT   DBTIMEZONE FROM   dual;
-
+    SELECT DBTIMEZONE FROM dual;
     </copy>
   ```
 ![Checking DBTIMEZONE](./images/dbtimezone.png " ")
 
-You'll see, in our example source and target databases are in different timezones. This might cause issues when your source database tables have columns with "__TimeStamp with Local Time Zone__ (TSLTZ)". You can execute the next query to see if the source database uses these data types: 
+When you open on target also SQL*Plus and execute the same command, you'll see, in this lab source and target databases are in different timezones. This might cause issues when your source database tables have columns with "__TimeStamp with Local Time Zone__ (TSLTZ)". You can execute the next query to see if the source database uses these data types: 
 
   ```
     <copy>
@@ -63,13 +74,14 @@ You'll see, in our example source and target databases are in different timezone
         AND o.object_type = 'TABLE' 
 --        AND o.owner in (select username from dba_users where oracle_maintained='N')
       group by t.owner;
-
     </copy>
   ```
+__Hit ENTER/RETURN__
+
 ![Checking for Timestamp with local timezone dataypes](./images/timezone-data-types.png " ")
 In the Hands-On-Lab there are no TSLTZ data types used. So no need to sync both DBTIMEZONEs or to handle data manually with expdp/impdp.
 
-## Task 2: Source and Target Character Sets 
+## Task 3: Source and Target Character Sets 
 The source and target database must use compatible database character sets.
 
   ```
@@ -79,13 +91,14 @@ The source and target database must use compatible database character sets.
      set pages 999
      set line 200
      select * from v$nls_parameters;
-
     </copy>
   ```
+__Hit ENTER/RETURN__
+
 * Details about "[General Limitations on Transporting Data](https://docs.oracle.com/en/database/oracle/oracle-database/19/spucd/general-limitations-on-transporting-data.html#GUID-28800719-6CB9-4A71-95DD-4B61AA603173)" are mentioned in the manual
 
 
-## Task 3: XTTS Tablespace Violations on Source  
+## Task 4: XTTS Tablespace Violations (__SOURCE__) 
 For transportable tablespaces another requirement is that all tablespaces you're going to transport are self contained.
 In this hands on lab you're going to transport the two tablespaces "TPCCTAB" and "USERS". So let's check if they are self contained:
 
@@ -93,12 +106,13 @@ In this hands on lab you're going to transport the two tablespaces "TPCCTAB" and
     <copy>
      EXEC SYS.DBMS_TTS.TRANSPORT_SET_CHECK ('TPCCTAB,USERS',True,True);
      SELECT * FROM transport_set_violations;
-
     </copy>
   ```
+__Hit ENTER/RETURN__
+
 ![Checking that all tablespaces to migrate are self contained](./images/self-contained-tbs.png " ")
 
-## Task 4: User Data in SYSTEM/SYSAUX Tablespace on Source
+## Task 5: User Data in SYSTEM/SYSAUX Tablespace (__SOURCE__)
 As SYSTEM and SYSAUX tablespaces are not copied from source to target, it's good practice to check if they might accidentally contain user data:
 
   ```
@@ -111,13 +125,14 @@ As SYSTEM and SYSAUX tablespaces are not copied from source to target, it's good
      -- (select username from dba_users 
      -- where oracle_maintained='Y') 
      and tablespace_name in ( 'SYSTEM', 'SYSAUX');
-
     </copy>
   ```
+__Hit ENTER/RETURN__
+
 ![checking if there are user tables in system or sysaux TBS](./images/check-user-data-system-sysaux.png " ")
 
 
-## Task 5: User Indexes in SYSTEM/SYSAUX Tablespace on Source
+## Task 6: User Indexes in SYSTEM/SYSAUX Tablespace (__SOURCE__)
 Same check as in the previous task but this time for user indexes
 
   ```
@@ -130,12 +145,13 @@ Same check as in the previous task but this time for user indexes
      where owner not in ('WMSYS','XDB','SYSTEM','SYS','LBACSYS','OUTLN','DBSNMP','APPQOSSYS')
      -- owner not in (select username from dba_users where oracle_maintained='Y') 
      and tablespace_name in ( 'SYSTEM', 'SYSAUX') order by 1,2;
-
     </copy>
   ```
+__Hit ENTER/RETURN__
+
 ![checking if there are user indexes in system or sysaux TBS](./images/check-user-indexes-system-sysaux.png " ")
 
-## Task 6: IOT Tables
+## Task 7: IOT Tables (__SOURCE__)
 IOT tables might get corrupted during XTTS copy when copying to HP platforms. 
 * [Corrupt IOT when using Transportable Tablespace to HP from different OS (Doc ID 1334152.1) ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1334152.1&displayIndex=1)
 
@@ -150,24 +166,25 @@ IOT tables might get corrupted during XTTS copy when copying to HP platforms.
      -- and owner not in (select username from dba_users where oracle_maintained='Y')
      and owner not in ('WMSYS','XDB','SYSTEM','SYS','LBACSYS','OUTLN','DBSNMP','APPQOSSYS')
      ;
-
     </copy>
   ```
+__Hit ENTER/RETURN__
 
 ![Checking if we have to take care of IOT tables](./images/iot-output.png " ")
 
 You can ignore this output because you're not moving to HP platform.
 
-## Task 7: Binary XMLTYPE Columns
+## Task 8: Binary XMLTYPE Columns (__SOURCE__)
 In versions prior 12.2 metadata imports failed when having tables with XMLTYPE columns. You need to exclude them from the metadata export and handle the content manually during the downtime. A check if you have XML types stored in your database is:
 
   ```
     <copy>
     select distinct p.tablespace_name from dba_tablespaces p, dba_xml_tables x, dba_users u, all_all_tables t where t.table_name=x.table_name and t.tablespace_name=p.tablespace_name and x.owner=u.username;
     select distinct p.tablespace_name from dba_tablespaces p, dba_xml_tab_cols x, dba_users u, all_all_tables t where t.table_name=x.table_name and t.tablespace_name=p.tablespace_name and x.owner=u.username;
-
     </copy>
   ```
+__Hit ENTER/RETURN__
+
 ![Checking if we have to take care of binary XML datatypes](./images/xml-data.png " ")
 
 Only XML data in SYSAUX tablespace which you're not going to migrate. So ignore it.
@@ -175,7 +192,7 @@ Only XML data in SYSAUX tablespace which you're not going to migrate. So ignore 
 * [Is it supported to do a Transport Tablespace (TTS) Import with Data Pump on a tablespace with binary XML objects ? (Doc ID 1908140.1) ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1908140.1&displayIndex=1)
 
 
-## Task 8: Global Temporary Tables
+## Task 9: Global Temporary Tables (__SOURCE__)
 Global temporary tables do not belong to any tablespace, so they are not transported to the target database. Let's see if we have some global temporary tables and who might own them:
 
 
@@ -185,9 +202,13 @@ Global temporary tables do not belong to any tablespace, so they are not transpo
      and owner not in ('WMSYS','XDB','SYSTEM','SYS','LBACSYS','OUTLN','DBSNMP','APPQOSSYS')
      -- owner not in (select username from dba_users where oracle_maintained='Y') 
      ;
-
+     exit;
     </copy>
   ```
+  __Hit ENTER/RETURN__
+
+
+
 ![Checking if we have GLOBAL temporary tables](./images/global-temp-tables.png " ")
 
 There are no global temporary tables in our lab. When you have them in your database, you can migrate them using Data Pump export/import or generate the metadata from these tables and created them in the target database.

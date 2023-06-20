@@ -16,7 +16,7 @@ This lab assumes you have:
 
 - Connected to the Hands On Lab
 
-## Task 1: Create OS Source Directories and Unzip XTTS ZIP File
+## Task 1: Create OS Source Directories and Unzip XTTS ZIP File (__SOURCE__)
 Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another one as XTTS SOURCE and a third directory for RMAN backup/restore files.
 
 ### Source directory for XTTS 
@@ -24,47 +24,63 @@ Activate the source terminal window and create three directories; one for the Da
   ```
     <copy>
     mkdir -p /home/oracle/XTTS/SOURCE/tmp 
+    </copy>
+  ```
+  ```
+    <copy>
     mkdir -p /home/oracle/XTTS/DUMP
+    </copy>
+  ```
+  ```
+    <copy>
     mkdir -p /home/oracle/XTTS/RMAN
     </copy>
   ```
 
+
 ![Create Source OS Directory](./images/create-source-os-dir.png " ")
 
 
-### Unzip XTTS ZIP file
+### Unzip XTTS ZIP file 
 
   ```
     <copy>
     cd /home/oracle/XTTS/SOURCE/
-    unzip /home/oracle/Desktop/rman-xttconvert-VER4.3.zip
-
+    </copy>
+  ```
+  ```
+    <copy>
+    unzip /home/oracle/Desktop/rman-xttconvert_VER4.3.zip
     </copy>
   ```
 
 ![Unzipping the XTTS Perl V4 ZIP file on source](./images/xtts-unzip-src.png " ")
 
-## Task 2: Set the Source Database Environment
+## Task 2: Set the Source Database Environment (__SOURCE__)
 
 Activate source terminal window, set the source environment and start SQL*Plus:
 
   ```
     <copy>
     . upgr
+    </copy>
+ ```
+  ```
+    <copy>
     sqlplus / as sysdba
-
     </copy>
  ```
 
 ![Login to source 11.2.0.4 database](./images/source-upgr-env-sqlplus.png " ")
 
 
-## Task 3: Configure Source Database
+## Task 3: Configure Source Database (__SOURCE__)
 Enable source database archive logging and create the database directory for Data Pump export. Also alter the TPCC user's password:
 
 
   ```
     <copy>
+    startup
     archive log list
     shutdown immediate
     STARTUP MOUNT
@@ -73,17 +89,16 @@ Enable source database archive logging and create the database directory for Dat
     CREATE OR REPLACE DIRECTORY "XTTS_METADATA_DIR" AS '/home/oracle/XTTS/DUMP';
     alter user TPCC identified by oracle;
     exit
-    
     </copy>
   ```
-
+__Hit ENTER/RETURN__
 
 ![Enabling archive logging in source database](./images/enable-archive-logging.png " ")
 
 
 You might also consider enabling __Block Change Tracking (BCT)__ using the command "alter database enable block change tracking".
 
-## Task 4: Configuring Default RMAN Settings on Source
+## Task 4: Configuring Default RMAN Settings (__SOURCE__)
 The next parameters you're going to set for RMAN work well in the hands on lab. For your environment you might have to adopt them by increasing parallelism, the backup destination etc.
 
 On source start the rman console: 
@@ -91,7 +106,6 @@ On source start the rman console:
   ```
     <copy>
      rman target /
-
     </copy>
   ```
 
@@ -103,9 +117,9 @@ in RMAN terminology the target database identifies the database which you're goi
      CONFIGURE DEFAULT DEVICE TYPE TO DISK;
      configure  DEVICE TYPE DISK PARALLELISM 8;
      exit;
-
     </copy>
   ```
+__Hit ENTER/RETURN__
 ![configure default RMAN parameters on source database side](./images/rman-default-target-settings.png " ")
 
 
