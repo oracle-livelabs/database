@@ -16,10 +16,20 @@ This lab assumes you have:
 
 - Connected to the Hands On Lab
 
-## Task 1: Create OS Source Directories and Unzip XTTS ZIP File (__SOURCE__)
-Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another one as XTTS SOURCE and a third directory for RMAN backup/restore files.
+## Task 1: Open Terminal Window, Create OS SOURCE Directory and Unzip XTTS ZIP File
 
-### Source directory for XTTS 
+### Open Terminal Window 
+Open another terminal windows by clicking on the "Terminal" icon. <br> 
+You can use this terminal window to execute all commands related to the __SOURCE__ database.
+
+![Screenshot of the Linux Hands On Lab Terminal icon](./images/terminal.png " ")
+
+All following screenshots related to the __SOURCE__ will have a __light blue__ background color.
+
+
+
+### Create OS Directories (__SOURCE__)
+Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another one as XTTS SOURCE and a third directory for RMAN backup/restore files.
 
   ```
     <copy>
@@ -41,7 +51,7 @@ Activate the source terminal window and create three directories; one for the Da
 ![Create Source OS Directory](./images/create-source-os-dir.png " ")
 
 
-### Unzip XTTS ZIP file 
+### Unzip XTTS ZIP file (__SOURCE__)
 
   ```
     <copy>
