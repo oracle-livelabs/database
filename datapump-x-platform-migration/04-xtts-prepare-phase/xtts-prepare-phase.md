@@ -1,7 +1,8 @@
 # Prepare Phase  
 
 ## Introduction
-"__PREPARE PHASE__" is the first phase in the XTTS transfer. Here you keep the source database active and everyone can continue to use it.
+"__PREPARE PHASE__" is the first phase in the XTTS transfer. You're going to back up on source database the datafiles belonging to the tablespaces you want to transfer using XTTS. After a successful backup you're going to restore them on the target database side. <br>
+During this complete process the source database remains active and everyone can continue to use it.
 
 Estimated Time: 15 minutes
 
@@ -20,10 +21,6 @@ This lab assumes you have:
 - Another terminal window open to target
 - Source and target prepared.
 - XTTS prechecks done
-
-## Task 0: Overview
-In this task you're goint ot run the initial backup and restore using the xtts package.
-
 
 
 ## Task 1: XTTS Properties File (SOURCE)
@@ -455,7 +452,7 @@ Performing convert for file 5
 </details>
 
 
-## Task 4: Summary of this Lab
+## Summary of this Lab
 
 In this lab we executed the initial backup and restore using the parameter file xtt.properties containing information about the tablespaces we want to transfer:
 
@@ -492,7 +489,7 @@ and the another mandatory driving file for the restore - the res.txt file - plus
 
 
 #### Restore (TARGET)
-We copied the xtt.properties and the res.txt file from source to target. RMAN read the same files the backup process created - so these files match between source and target. An interesting directory created by the restore process is the target XTTS/tmp directory containing the log files:
+You copied the xtt.properties and the res.txt file from source to target. RMAN read the same files the backup process created - so these files match between source and target. An interesting directory created by the restore process is the target XTTS/tmp directory containing the log files:
   ```
     <copy>
     ls -al /home/oracle/XTTS/TARGET/tmp

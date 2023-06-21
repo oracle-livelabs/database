@@ -256,6 +256,7 @@ End of rollforward phase
 
 You can execute the incremental backup and restore whenever you want. As they will minimize your downtime window you can run them on the cutover day more frequently to minimize the delta.
 
+## Summary of this Lab
 
 You may now *proceed to the next lab*.
 
