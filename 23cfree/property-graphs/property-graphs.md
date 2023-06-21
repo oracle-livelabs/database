@@ -3,7 +3,7 @@
 ## Introduction
 
 
-In this lab you will query the newly created graph (that is, `bank_graph`) using SQL/PGQ a new extension in SQL:2023.
+In this lab you will query the newly created graph (that is, `bank_graph`) using SQL/PGQ, a new extension in SQL:2023.
 ​
 
 Estimated Time: 30 minutes.
@@ -113,7 +113,7 @@ This lab assumes:
 In this task we will run queries using SQL/PGQ's GRAPH_TABLE operator, MATCH clause, and COLUMNS clause. The GRAPH\_TABLE operator enables you to query the property graph by specifying a graph pattern to look for and return the results as a set of columns. The MATCH clause lets you specify the graph patterns, and the COLUMN clause lists the query output columns. Everything else is existing SQL syntax.
 ​
 
-A common query in analyzing money flows is to see if there are a sequence of transfers that connect one source account to a destination account. We'll be demonstrating that sequence of transfers in standard SQL.
+A common query in analyzing money flows is to see if there is a sequence of transfers that connect one source account to a destination account. We'll be demonstrating that sequence of transfers in standard SQL.
 ​
 1. Let's start by finding the top 10 accounts which have the most incoming transfers. 
     
@@ -205,7 +205,7 @@ A common query in analyzing money flows is to see if there are a sequence of tra
     
     ![5 hop transfers](images/five-hop-transfers.png " ")
 
-7.  Now that we know there are 3, 4, and 5-hop cycles let's list some (any 10) accounts that had these circular payment chains. 
+7.  Now that we know there are 3, 4, and 5-hop cycles, let's list some (any 10) accounts that had these circular payment chains. 
    
     ```
     <copy>
