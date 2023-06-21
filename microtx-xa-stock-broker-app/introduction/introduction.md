@@ -6,27 +6,7 @@ As organizations rush to adopt microservices architecture, they often run into p
 
 In this workshop, you will learn how to use MicroTx to maintain data consistency across several microservices by deploying and running a Bank and Stock-Trading application. This application contains several microservices and it uses distributed, two-phase commit transaction (XA). It is very simple to use MicroTx. After installing MicroTx, you only need to integrate the MicroTx libraries with your application code to manage transactions. In this workshop, you will learn how you can integrate the MicroTx client libraries with the Bank and Stock-Trading application. During the transaction, each microservice also makes updates to a resource manager to track the change in the amount and stocks. When you run the Bank and Stock-Trading application, you will be able to see how MicroTx ensures consistency of transactions across the distributed microservices and their resource managers. You will also integrate MicroTx with the Kubernetes ecosystem by using tools, such as Kiali and Jaeger, to visualize the flow of requests between MicroTx and the microservices.
 
-Estimated Workshop Time: *1 hours 30 minutes*
-
-### Objectives
-
-In this workshop, you will learn how to:
-
-* Provision Oracle Autonomous Database instances and use them as resource managers for microservices.
-* Configure the required properties so that MicroTx can connect to the resource manager and microservices.
-* Include the MicroTx client libraries in your application to configure your Java application as a transaction initiator service. A transaction initiator service starts and ends a transaction.
-* Include the MicroTx client libraries in your application to configure your Java application as a transaction participant. A transaction participant service only joins the transaction. They do not initiate a transaction.
-* Run the Bank and Stock-Trading application to buy and sell stocks.
-* Use tools, such as Kiali and Jaeger, to visualize the flow of requests between MicroTx and the microservices.
-
-### Prerequisites
-
-This lab assumes you have:
-- An Oracle Cloud account
-
-Let's begin! If you need to create an Oracle Cloud account, click **Get Started** in the **Contents** menu on the left. Otherwise, if you have an existing account, click **Lab 1**.
-
-## About the Bank and Stock-Trading application
+### About the Bank and Stock-Trading application
 
 The Bank and Stock-Trading application demonstrates how you can develop microservices that participate in a distributed transaction while using MicroTx to coordinate the requests. You can use the application to withdraw or deposit an amount, as well as buy and sell stocks. Since financial applications that move funds require strong global consistency, the application uses XA transaction protocol.
 
@@ -46,6 +26,26 @@ The following figure shows the various microservices in the Bank and Stock-Tradi
 * Resource managers manage stateful resources such as databases, queuing or messaging systems, and caches.
 
 The service must meet ACID requirements, so withdraw amount, transfer amount, deposit stocks, sell stocks, debit amount, or credit amount are called in the context of the XA transaction.
+
+Estimated Workshop Time: 1 hours 30 minutes
+
+### Objectives
+
+In this workshop, you will learn how to:
+
+* Provision Oracle Autonomous Database instances and use them as resource managers for microservices.
+* Configure the required properties so that MicroTx can connect to the resource manager and microservices.
+* Include the MicroTx client libraries in your application to configure your Java application as a transaction initiator service. A transaction initiator service starts and ends a transaction.
+* Include the MicroTx client libraries in your application to configure your Java application as a transaction participant. A transaction participant service only joins the transaction. They do not initiate a transaction.
+* Run the Bank and Stock-Trading application to buy and sell stocks.
+* Use tools, such as Kiali and Jaeger, to visualize the flow of requests between MicroTx and the microservices.
+
+### Prerequisites
+
+This lab assumes you have:
+- An Oracle Cloud account
+
+Let's begin! If you need to create an Oracle Cloud account, click **Get Started** in the **Contents** menu on the left. Otherwise, if you have an existing account, click **Lab 1**.
 
 ## Task: Learn More
 

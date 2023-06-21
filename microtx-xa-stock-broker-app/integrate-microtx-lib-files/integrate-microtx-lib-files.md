@@ -4,7 +4,7 @@
 
 This lab walks you through all the steps to integrate the functionality provided by the Oracle® Transaction Manager for Microservices (MicroTx) client libraries with an application. Use MicroTx client libraries to register the required interceptors and callbacks, to obtain a connection to the application's resource manager, and to delineate transaction boundaries which indicate that an XA transaction has started, and then to commit or roll back the transaction.
 
-Estimated Time: *5 minutes*
+Estimated Time: 5 minutes
 
 ### Objectives
 

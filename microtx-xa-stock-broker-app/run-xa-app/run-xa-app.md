@@ -7,7 +7,7 @@ Run the Bank and Stock-Trading application to purchase and sell stocks and to un
 Run a sample application that uses the XA transaction protocol to buy stocks and understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate the transactions. Using samples is the fastest way for you to get familiar with MicroTx.
 The sample application code is available in the MicroTx distribution.
 
-Estimated Lab Time: *25 minutes*
+Estimated Lab Time: 25 minutes
 
 ### Objectives
 

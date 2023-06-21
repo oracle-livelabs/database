@@ -8,6 +8,8 @@ Estimated lab time: 20 minutes
 
 ### Objectives
 
+In this lab, you will:
+
 * Provision two new Autonomous Database Serverless instances.
 * Download the wallet file for each ATP-S instance.
 * Create tables with sample values for the Core Banking, Branch Banking, and Stock Broker services.
@@ -18,24 +20,24 @@ Estimated lab time: 20 minutes
 
 ## Task 1: Choose ATP-S from the Services Menu
 
-1. Log in to the Oracle Cloud, as shown in the previous lab.
-2. Once you are logged in, you are taken to the cloud services dashboard where you can see all the services available to you. Click the navigation menu in the upper left to show top level navigation choices.
+1. Log in to the Oracle Cloud.
+2. Once you log in, the cloud services dashboard shows all the services available to you. Click the navigation menu in the upper left to show top level navigation choices.
 
-    **Note:** You can also directly access your Autonomous Transaction Processing service in the **Quick Actions** section of the dashboard.
+    > **Note:** You can also directly access your Autonomous Data Warehouse or Autonomous Transaction Processing service in the __Quick Actions__ section of the dashboard.
 
-    ![Begin navigation in OCI menu](./images/begin-oci-menu.png)
+    ![Oracle home page.](./images/oci-navigation.png " ")
 
-3. This lab shows provisioning of an Autonomous Transaction Processing database, so click **Oracle Database** -> **Autonomous Transaction Processing**.
+3. Click **Oracle Database** -> **Autonomous Transaction Processing**.
 
-    ![Select Autonomous Transaction Processing from menu](./images/select-atp.png)
+    ![Click Autonomous Data Warehouse.](./images/oci-navigation-adw.png " ")
 
-4. On the left side, make sure your **Workload Type** is **Transaction Processing** or **All** to see your ATP-S instances. You can use the **Compartment** drop-down menu to select a compartment. Select your root compartment, or another compartment of your choice where you will create your new ATP-S instance. If you want to learn how to create a new compartment, click [here](https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#Working). To learn more about compartments, click [here](https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/settinguptenancy.htm#Setting_Up_Your_Tenancy).
+4. On the left side, make sure your **Workload Type** is **Transaction Processing** or **All** to see your ATP-S instances. Use the **Compartment** drop-down menu to select a compartment.
 
  **Note** - Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
 
    ![View ATP-S instances in compartment](./images/atp-compartment.png)
 
-5. This console in the last screenshot shows that no databases yet exist. If there were a long list of databases, you could filter the list by the state of the databases (available, stopped, terminated, and so on). You can also sort by **Workload Type**. Here, the **Transaction Processing** workload type is selected.
+5. This console shows that no databases exist as yet. If there were a long list of databases, you could filter the list by the state of the databases (Available, Stopped, Terminated).
 
 ## Task 2: Create an Autonomous Database Instance for the Core Banking and Branch Banking Services
 
