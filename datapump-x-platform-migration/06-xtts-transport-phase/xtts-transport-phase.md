@@ -528,7 +528,7 @@ Also here we first create the import parameter file. Copy and paste the content 
 | METRICS=Y | This setting indicates you want additional information about the job reported to the Data Pump log file  |
 | LOGTIME=ALL | Adds timestamp information to import opertaions  |
 | FULL=Y | Specifies that you want to perform a full database mode export   |
-| transport_datafiles=/u02/oradata/CDB3/pdb3/USERS_4.dbf | list of data files that are imported into the target database  |
+| transport\_datafiles=/u02/oradata/CDB3/pdb3/USERS_4.dbf | list of data files that are imported into the target database  |
 {: title="Data Pump Metadata import parameter file"}
 
 </details>
