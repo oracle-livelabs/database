@@ -120,7 +120,7 @@ Hit ENTER/RETURN to execute ALL commands.
 ![start database listener on target](./images/prepare-target-start-listener.png " ")
 
 <details>
- <summary>*click here to see the xtt.properties file content*</summary>
+ <summary>*click here to see the full listener startup output*</summary>
 
 
   ``` text

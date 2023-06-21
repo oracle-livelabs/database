@@ -238,8 +238,8 @@ On source change into the XTTS Source directory and copy the xtt.properties cont
 | :-------- | :-----|
 | tablespaces=TPCCTAB,USERS | Comma separated list of tablespaces to transport from source database to destination database |
 | platformid=13 | Source database platform id, obtained from V$DATABASE.PLATFORM_ID |
-| src_scratch_location=/home/oracle/XTTS/RMAN | Location where datafile copies and incremental backups are created on the source system |
-| dest_datafile_location=/u02/oradata/CDB3/pdb3/ | This is the FINAL location of the datafiles to be used by the destination database |
+| src\_scratch\_location=/home/oracle/XTTS/RMAN | Location where datafile copies and incremental backups are created on the source system |
+| dest\_datafile\_location=/u02/oradata/CDB3/pdb3/ | This is the FINAL location of the datafiles to be used by the destination database |
 | parallel=8 | Parallel defines the channel parallelism used in copying (prepare phase), converting (NOT RMAN) |
 | rollparallel=2 | Defines the level of parallelism for the roll forward operation |
 | destconnstr=sys/oracle@pdb3 | Only needs to be set in CDB environment. Specifies connect string of the destination pluggable database |
