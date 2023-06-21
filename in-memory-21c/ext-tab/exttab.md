@@ -2,23 +2,25 @@
 
 ## Introduction
 
-Watch a preview video of creating In-Memory Column Store
+Watch a preview video of In-Memory External Tables:
 
-[YouTube video](youtube:U9BmS53KuGs)
+[YouTube video](youtube:XWAqd5mQUI4)
 
 Watch the video below for a walk through of the In-Memory External Tables lab:
 
-[In-Memory External Tables](videohub:1_ohs9hpw0)
+[In-Memory External Tables](videohub:1_qpu3720o)
 
 *Estimated Lab Time:* 10 Minutes.
 
 ### Objectives
 
--   Learn how to enable In-Memory on the Oracle Database
--   Perform various queries on the In-Memory Column Store
+- Learn how to enable In-Memory on the Oracle Database
+- Perform various queries on the In-Memory Column Store
 
 ### Prerequisites
+
 This lab assumes you have:
+
 - A Free Tier, Paid or LiveLabs Oracle Cloud account
 - You have completed:
     - Get Started with noVNC Remote Desktop

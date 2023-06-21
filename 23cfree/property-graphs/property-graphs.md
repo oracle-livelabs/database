@@ -41,6 +41,9 @@ This lab assumes:
     ![Open hol23c tab](images/sql-hol23-tab.png)
 ​
 2. Use the following SQL statement to create a property graph called BANK\_GRAPH using the BANK\_ACCOUNTS table as the vertices and the BANK_TRANSFERS table as edges. 
+
+    **NOTE:** To avoid conflicting SQL queries, please erase the SQL worksheet after each command is executed. We will continue to use the document button with the green play symbol for the remainder of this lab.
+
     
     ```
     <copy>
@@ -235,6 +238,8 @@ A common query in analyzing money flows is to see if there are a sequence of tra
 9. When we created the `BANK_GRAPH` property graph we essentially created a view on the underlying tables and metadata. No data is duplicated. So any insert, update, or delete on the underlying tables will also be reflected in the property graph.   
 ​
     Now, let's insert some more data into BANK\_TRANSFERS. We will see that when rows are inserted in to the BANK\_TRANSFERS table, the BANK\_GRAPH is updated with corresponding edges.
+
+    Run this 
    
     ```
     <copy>
@@ -288,11 +293,9 @@ A common query in analyzing money flows is to see if there are a sequence of tra
    
     ```
     <copy>
-    begin
     INSERT INTO bank_transfers VALUES (5008, 559, 39, null, 1000);
     INSERT INTO bank_transfers VALUES (5009, 982, 39, null, 1000);
     INSERT INTO bank_transfers VALUES (5010, 407, 39, null, 1000);
-    end;
     </copy>
     ```
   ​  

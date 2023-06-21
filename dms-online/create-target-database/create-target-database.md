@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab walks you through the steps of creating an Autonomous Transaction Processing Shared instance for your target database.
+This lab walks you through the steps of creating an Autonomous Transaction Processing Serverless instance for your target database.
 
   [](youtube:c-DUIePFKco)
 
