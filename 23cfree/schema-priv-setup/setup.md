@@ -1,4 +1,4 @@
-# Lab 1: Setup - User Creation and Table Initialization
+# Setup - User Creation and Table Initialization
 
 ## Introduction
 
@@ -8,11 +8,6 @@ By following the instructions provided, you will complete the setup process and 
 
 Estimated Time: 10 minutes
 
-### Prerequisites
-
-In order to do this workshop you need
-* An Oracle 23c Free Developer Release Database or one running in a LiveLabs environment
-
 ### Objectives
 
 * Create two users, User 1 and User 2, for the Oracle database environment.
@@ -21,6 +16,11 @@ In order to do this workshop you need
 * Create the inventory\_reservations table with the following columns: id, product\_name, quantity, budget (reservable), and a minimum_balance constraint.
 * Insert data into the inventory\_no\_reservations table with two rows: Product A and Product B.
 * Insert data into the inventory\_reservations table with two rows: Product C and Product D.
+
+### Prerequisites
+
+In order to do this workshop you need
+* An Oracle 23c Free Developer Release Database or one running in a LiveLabs environment
 
 ## Task 1: Create Users
 
@@ -125,3 +125,9 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
     ```
 
 You many now **proceed to the next lab**
+
+## Acknowledgements
+
+* **Author(s)** - Blake Hendricks, Database Product Manager
+* **Contributor(s)** - Vasudha Krishnaswamy, Russ Lowenthal
+* **Last Updated By/Date** - 6/21/2023
