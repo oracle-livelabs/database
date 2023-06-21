@@ -98,7 +98,7 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
 
     Enter **demo-vod-example-app** as the name.  Click on **select image**, and
     a new screen appears.  Choose **external registry**, and
-    enter **ghcr.io/oracle/demo-vod-example-app:latest** as image and Click **Select Image**
+    enter **ghcr.io** as Registry hostname, **oracle/demo-vod-example-app** as image and Click **Select Image**
     at bottom of screen.
 
        ![Create Container Instance](images/create-container-instance-2.png)
