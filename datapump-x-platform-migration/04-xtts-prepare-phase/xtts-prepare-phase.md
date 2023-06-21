@@ -392,6 +392,7 @@ The initial restore on Target requires the "xtt.properties" and "res.txt" file f
 Starting restore:
   ```
     <copy>
+     cd /home/oracle/XTTS/TARGET
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
     </copy>

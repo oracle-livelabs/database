@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In the last phase, the transport phase, it is mandatory to set the tablespaces you copied to read only state. So before doing that, make sure there are no active sessions actively using objects in the copied tablespaces.
+This last phase, the transport phase, is also doing an incremental backup and restore. The difference between the previous and this lab that now it is mandatory to set the tablespaces you copied to read only. So before doing that, make sure there are no active sessions/open transcations using objects in the copied tablespaces.
 
 Estimated Time: 15 minutes
 
@@ -26,40 +26,56 @@ This lab assumes you have:
 - Successfully executed incremental backup(s)
 - Successfully executed incremental restore(s)
 
-## Task 1: Setting Tablespaces to "read only" (__SOURCE__)
+## Task 1: Setting Tablespaces to "read only" (SOURCE)
 
-Open SQL*Plus, connect "as sysdba"
+Connect with "/ as sysdba" using SQL*Plus to the source database:
   ```
     <copy>
      sqlplus  / as sysdba 
     </copy>
   ```
+
+![open sqlplus source](./images/transport-phase-sqlplus-src.png " ")
+
 and execute:
 
   ```
     <copy>
      ALTER TABLESPACE TPCCTAB read only;
      ALTER TABLESPACE USERS read only;
-     set pages 999
-     select tablespace_name, STATUS from dba_tablespaces order by 2,1;
+     select tablespace_name, STATUS from dba_tablespaces 
+     where status='READ ONLY' order by 2,1;
      exit;
     </copy>
+
+     Hit ENTER/RETURN to execute ALL commands.
   ```
-__Hit ENTER/RETURN__
 
-![set source tablespaces to read only](./images/source-tbs-readonly.png " ")
 
-## Task 1: Final Incremental Backup (__SOURCE__)
+![set source tablespaces to read only](./images/transfer-phase-read-only-tbs.png " ")
+
+## Task 1: Final Incremental Backup (SOURCE)
 On source change into the XTTS Source directory and execute the final incremental backup:
 
   ```
     <copy>
+     cd /home/oracle/XTTS/SOURCE
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
+    </copy>
+
+     Hit ENTER/RETURN to execute ALL commands.
+  ```
+
+
+![setting XTTS env on source](./images/env-final-backup.png " ")
+
+  ```
+    <copy>
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
     </copy>
   ```
-__Hit ENTER/RETURN__
+
 
 ![execute final incremental backup](./images/final-incremental-backup.png " ")
 
@@ -159,35 +175,47 @@ ORA-06512: at line 284__<br>
 You can safely ignore those warnings as they only tell you that you're going to back up a "read only" tablespace.
 
 
-## Task 2: Final Incremental Restore (__TARGET__)
+## Task 2: Final Incremental Restore (TARGET)
 
 Open the Target console.
-The final incremental restore needs the "res.txt" and "incrbackups.txt" files from source. So copy them:
+The final incremental restore also needs the "res.txt" and "incrbackups.txt" files from source. So copy them:
 
   ```
     <copy>
      cp /home/oracle/XTTS/SOURCE/tmp/res.txt /home/oracle/XTTS/TARGET/tmp/res.txt
     </copy>
   ```
+
+![copying res.txt from source to target](./images/final-restore-copy-res-txt.png " ")
+
   ```
     <copy>
      cp /home/oracle/XTTS/SOURCE/tmp/incrbackups.txt /home/oracle/XTTS/TARGET/tmp/incrbackups.txt
     </copy>
   ```
 
-![copying incrbackups.txt and res.txt from source to target](./images/final-restore-copy.png " ")
+![copying incrbackups.txt from source to target](./images/final-restore-copy-incrbackup-txt.png " ")
 
 And start the restore:
   ```
     <copy>
+     cd /home/oracle/XTTS/TARGET
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
+    </copy>
+
+     Hit ENTER/RETURN to execute ALL commands.
+  ```
+
+![starting final incremental restore](./images/env-final-restore.png " ")
+  ```
+    <copy>
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
     </copy>
   ```
-__Hit ENTER/RETURN__
 
-![starting final incremental restore](./images/final-incr-restore.png " ")
+![starting final incremental restore](./images/final-incremental-restore.png " ")
+
 
 The full output looks like:
 <details>
@@ -233,31 +261,40 @@ End of rollforward phase
   ```
 </details>
 
-## Task 3: Metadata Export (__SOURCE__)
-As the source and target database version differ too much, we can't use __Data Pump network_link__ and need to export and import the metadata information instead.
-
-So create an Exp_Metadata.par file copying the following commands to the source database terminal window:
+## Task 3: Metadata Export (SOURCE)
+As the source and target database version differ too much, you can't use __Data Pump network_link__ and need to export and import the metadata information instead.
+The Data Pump export parameter file "Exp_Metadata.par" was already created for you and is located in "/home/oracle/XTTS/"
 
   ```
     <copy>
-     echo DIRECTORY=XTTS_METADATA_DIR >Exp_Metadata.par
-     echo DUMPFILE=exp_Metadata.dmp >>Exp_Metadata.par
-     echo logfile=XTTS_export_metadata.log >>Exp_Metadata.par
-     echo FULL=Y >>Exp_Metadata.par
-     echo TRANSPORTABLE=ALWAYS >>Exp_Metadata.par
-     echo VERSION=12 >>Exp_Metadata.par
-     cat Exp_Metadata.par
+     cat /home/oracle/XTTS/Exp_Metadata.par
     </copy>
   ```
-__Hit ENTER/RETURN__
 
-![create metadata export Data Pump parameter file on source ](./images/create-metadata-expdp-par.png " ")
+![view metadata export Data Pump parameter file on source ](./images/metadat-export-par.png " ")
+
+<details>
+ <summary>*click here if you want to see the Data Pump export parameter file and a short description*</summary>
+
+
+| Parameter | Comment |
+| :-------- | :-----|
+| DIRECTORY=XTTS\_METADATA\_DIR | Specifies the default location to which Export can write the dump file set and the log file |
+| DUMPFILE=exp\_Metadata.dmp | Is the name of the dump file |
+| logfile=XTTS\_export\_metadata.log | This parameter specifies the name for the log file of the export job. |
+| FULL=Y | FULL specifies that you want to perform a full database mode export  |
+| TRANSPORTABLE=ALWAYS | In a full mode export (full=y), using the transportable option results in a full transportable export which exports all objects and data necessary to create a complete copy of the database.  |
+| VERSION=12 | Specifies the version of database objects that you want to export. Only database objects and attributes that are compatible with the specified release are exported.  |
+{: title="Data Pump Metadata export parameter file"}
+
+</details>
+
 
 and execute expdp using this par file
 
   ```
     <copy>
-     expdp system/oracle@UPGR parfile=Exp_Metadata.par
+     expdp system/oracle@UPGR parfile=/home/oracle/XTTS/Exp_Metadata.par
     </copy>
   ```
 ![execute metadata data pump export on source ](./images/metadata-export.png " ")
@@ -469,31 +506,39 @@ and execute expdp using this par file
   ```
 </details>
 
-## Task 4: Metadata Import (__TARGET__)
+## Task 4: Metadata Import (TARGET)
 Also here we first create the import parameter file. Copy and paste the content to the target console:
-
-  ```
-   <copy>
-     echo DIRECTORY=XTTS_METADATA_DIR >Imp_Metadata.par
-     echo logfile=XTTS_import_metadata.log  >>Imp_Metadata.par
-     echo DUMPFILE=exp_Metadata.dmp >>Imp_Metadata.par
-     echo METRICS=Y >>Imp_Metadata.par
-     echo LOGTIME=ALL >>Imp_Metadata.par
-     echo full=y >>Imp_Metadata.par
-     echo transport_datafiles=/u02/oradata/CDB3/pdb3/USERS_4.dbf >>Imp_Metadata.par
-     echo transport_datafiles=/u02/oradata/CDB3/pdb3/TPCCTAB_5.dbf >>Imp_Metadata.par
-     echo transport_datafiles=/u02/oradata/CDB3/pdb3/TPCCTAB_6.dbf >>Imp_Metadata.par
-     cat Imp_Metadata.par
+ ```
     <copy>
+     cat /home/oracle/XTTS/Imp_Metadata.par
+    </copy>
   ```
-__Hit ENTER/RETURN__
 
-![create metadata data pump import parameter file](./images/create-metadata-impdp-par.png " ")
+![View Data Pump import parameter file on target ](./images/metadata-import-parameter-file.png " ")
+
+<details>
+ <summary>*click here if you want to see the Data Pump import parameter file and a short description*</summary>
+
+
+| Parameter | Comment |
+| :-------- | :-----|
+| DIRECTORY=XTTS\_METADATA\_DIR | Is the default location from which Import can read the dump file set and create the log file |
+| DUMPFILE=exp\_Metadata.dmp | Is the name of the dump file the import is going to read|
+| logfile=XTTS\_import\_metadata.log | This parameter specifies the name for the log file of the import job |
+| METRICS=Y | This setting indicates you want additional information about the job reported to the Data Pump log file  |
+| LOGTIME=ALL | Adds timestamp information to import opertaions  |
+| FULL=Y | Specifies that you want to perform a full database mode export   |
+| transport_datafiles=/u02/oradata/CDB3/pdb3/USERS_4.dbf | list of data files that are imported into the target database  |
+{: title="Data Pump Metadata import parameter file"}
+
+</details>
+
+
 
 And import the metadata into the PDB3 using this Imp_Metadata.par parameter file:
   ```
    <copy>
-     impdp system/oracle@pdb3 parfile=Imp_Metadata.par
+     impdp system/oracle@pdb3 parfile=/home/oracle/XTTS/Imp_Metadata.par
     <copy>
   ```
 
