@@ -23,47 +23,51 @@ This lab assumes you have:
 - Successfully executed initial backup
 - Successfully executed initial restore
 
-## Task 0: Adding Table and Data File to Source Database (__SOURCE__)
-As mentioned, in this phase the database is up and open so everyone can use it. Let's do some changes in the source database... 
+## Task 0: Adding Table and Data File to Source Database (SOURCE)
+As mentioned, in this (and the previous) phase the database is up everyone can use it. So there are changes in the database and you might have added tables, datafiles etc. So let's add a datafile to tthe tablespace we're transferring and also a table.
 
-### Add a New Table
+### Add a New Table (SOURCE)
 Connect with SQL*Plus as TPCC user to the source database:
   ```
     <copy>
      sqlplus  TPCC/oracle
     </copy>
   ```
+
+![connecting to source database](./images/roll-forward-open-sqlplus-src.png " ")
 and create a table:
   ```
     <copy>
      create table object_copy as select * from user_objects;
-     exit;
     </copy>
   ```
-__Hit ENTER/RETURN__
 
-![creating a new table in TPCC acount](./images/cre-oject-copy.png " ")
+![creating a new table in TPCC acount](./images/cre-object-copy.png " ")
 
-### Add a New Data File (__SOURCE__)
+### Add a New Data File (SOURCE)
 This time connect as sysdba to the source database:
   ```
     <copy>
-     sqlplus  / as sysdba 
+     connect / as sysdba 
     </copy>
   ```
+![connect as sysdba to source](./images/roll-forward-sysdba-conn.png " ")
+
 and execute:
   ```
     <copy>
      alter tablespace TPCCTAB add datafile '/u02/oradata/UPGR/tpcctab02.dbf' size 1M;
      exit;
     </copy>
+
+     Hit ENTER/RETURN to execute ALL commands.
   ```
-__Hit ENTER/RETURN__
-
-![adding new datafile to TBS TPCCTAB](./images/add-datafile-tbs.png " ")
 
 
-## Task 1: Incremental Backup (__SOURCE__)
+![adding new datafile to TBS TPCCTAB](./images/roll-forward-add-datafile.png " ")
+
+
+## Task 1: Incremental Backup (SOURCE)
 On source change into the XTTS Source directory and execute the incremental backup:
 
   ```
@@ -71,11 +75,19 @@ On source change into the XTTS Source directory and execute the incremental back
      cd /home/oracle/XTTS/SOURCE
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
+    </copy>
+
+    Hit ENTER/RETURN to execute ALL commands.
+  ```
+![starting incremental backup](./images/env-incremental-backup.png " ")
+
+
+
+  ```
+    <copy>
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
     </copy>
   ```
-__Hit ENTER/RETURN__
-
 ![starting incremental backup](./images/incremental-backup.png " ")
 
 <details>
@@ -148,11 +160,11 @@ __Hit ENTER/RETURN__
   ```
 </details>
 
-## Task 2: Incremental Restore (__TARGET__)
+## Task 2: Incremental Restore (TARGET)
 
 The incremental restore needs the "res.txt" and "incrbackups.txt" files from source. Both are the driving files for the XTTS process.
 You just performed your first incremental backup so there's no previous version of "incrbackups.txt" file. <br>
-But the initial load already created the res.txt and you probably remember that you copied it already from source to target in the previous LAB.
+But the initial load already created the res.txt and you probably remember that you copied it already from source to target in the previous LAB. So let's compare both before starting the restore....
 
 ### Comparing Source and Target res.txt
 So before overwriting __res.txt__ on target, let's check out the content of this file on source and target:
@@ -197,12 +209,23 @@ So let's continue with the process and copy both files from the source to the ta
 And start the restore:
   ```
     <copy>
+     cd /home/oracle/XTTS/TARGET
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
+    </copy>
+
+     Hit ENTER/RETURN to execute ALL commands.
+  ```
+
+
+![starting incremental restore£](./images/env-incremental-restore.png " ")
+
+  ```
+    <copy>
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
     </copy>
   ```
-__Hit ENTER/RETURN__
+
 
 ![starting incremental restore£](./images/incremental-restore.png " ")
 
@@ -257,6 +280,50 @@ End of rollforward phase
 You can execute the incremental backup and restore whenever you want. As they will minimize your downtime window you can run them on the cutover day more frequently to minimize the delta.
 
 ## Summary of this Lab
+In this lab you executed an incremental backup and restore. You can repeat this process as often as you want and probably more frequently on the cutover day. </br>
+The only requirement for each incremental restore is the current res.txt and incrbackup.txt from the backup.
+
+![incremental backup restore process flow](./images/incremental-backup-restore.png " ")
+
+### Backup (SOURCE)
+You used on Source the xtt.properties file created in the previous lab:
+
+  ```
+    <copy>
+    ls -al /home/oracle/XTTS/SOURCE/xtt.properties
+    </copy>
+  ```
+![source xtt.properties file](./images/ls-src-xtt-properties.png " ")
+
+Listing the directory content created in the RMAN backup location containing the backup of the datafiles and the incremental backup(s):
+
+  ```
+    <copy>
+    ls -al /home/oracle/XTTS/RMAN
+    </copy>
+  ```
+![RMAN backup datafiles](./images/roll-forward-incr-backup-files.png " ")
+
+
+and the other two mandatory driving files for the restore - the res.txt and incrbackup.txt file - plus all log files of the backup are located in:
+  ```
+    <copy>
+    ls -al /home/oracle/XTTS/SOURCE/tmp/
+    </copy>
+  ```
+![xtts source tmp directory content](./images/roll-forward-ls-src.png " ")
+
+
+
+#### Restore (TARGET)
+You copied the xtt.properties and the res.txt file from source to target. RMAN read the same files the backup process created - so these files match between source and target. An interesting directory created by the restore process is the target XTTS/tmp directory containing the log files:
+  ```
+    <copy>
+    ls -al /home/oracle/XTTS/TARGET/tmp
+    </copy>
+  ```
+![RMAN backup datafiles](./images/roll-forward-ls-target.png " ")
+
 
 You may now *proceed to the next lab*.
 

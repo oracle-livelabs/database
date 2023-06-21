@@ -454,9 +454,9 @@ Performing convert for file 5
 
 ## Summary of this Lab
 
-In this lab we executed the initial backup and restore using the parameter file xtt.properties containing information about the tablespaces we want to transfer:
+In this lab you executed the initial backup and restore using the parameter file xtt.properties containing information about the tablespaces you want to transfer:
 
-![source xtt.properties file](./images/initial_backup_restore.png " ")
+![source xtt.properties file](./images/initial-backup-restore.png " ")
 
 ### Backup (SOURCE)
 On Source we created the xtt.properties file:
@@ -468,7 +468,7 @@ On Source we created the xtt.properties file:
   ```
 ![source xtt.properties file](./images/ls-src-xtt-properties.png " ")
 
-Executing the backup created rman backup files in:
+Listing the directory content created in the RMAN backup location:
 
   ```
     <copy>
@@ -476,7 +476,6 @@ Executing the backup created rman backup files in:
     </copy>
   ```
 ![RMAN backup datafiles](./images/ls-rman-src.png " ")
-
 
 and the another mandatory driving file for the restore - the res.txt file - plus all log files of the backup are located in:
   ```
