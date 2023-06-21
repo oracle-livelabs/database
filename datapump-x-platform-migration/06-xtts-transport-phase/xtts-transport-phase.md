@@ -52,7 +52,7 @@ and execute:
   ```
 
 
-![set source tablespaces to read only](./images/transfer-phase-read-only-tbs.png " ")
+![set source tablespaces to read only](./images/transport-phase-read-only-tbs.png " ")
 
 ## Task 1: Final Incremental Backup (SOURCE)
 On source change into the XTTS Source directory and execute the final incremental backup:
