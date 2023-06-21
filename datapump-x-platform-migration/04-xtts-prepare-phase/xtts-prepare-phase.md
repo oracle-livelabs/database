@@ -455,10 +455,15 @@ Performing convert for file 5
 </details>
 
 
-## Task 4: Files created in this task (SOURCE & TARGET)
+## Task 4: Summary of this Lab
 
-### Source
-The xtt.properties file:
+In this lab we executed the initial backup and restore using the parameter file xtt.properties containing information about the tablespaces we want to transfer:
+
+![source xtt.properties file](./images/initial_backup_restore.png " ")
+
+### Backup (SOURCE)
+On Source we created the xtt.properties file:
+
   ```
     <copy>
     ls -al /home/oracle/XTTS/SOURCE/xtt.properties
@@ -466,15 +471,8 @@ The xtt.properties file:
   ```
 ![source xtt.properties file](./images/ls-src-xtt-properties.png " ")
 
-Content of the XTTS/SOURCE/tmp dircetory containing logs and help files used by XTTS:
-  ```
-    <copy>
-    ls -al /home/oracle/XTTS/SOURCE/tmp/
-    </copy>
-  ```
-![xtts source tmp directory content](./images/ls-xtts-tmp-src.png " ")
+Executing the backup created rman backup files in:
 
-And the RMAN directory containg the datafile backup:
   ```
     <copy>
     ls -al /home/oracle/XTTS/RMAN
@@ -483,9 +481,18 @@ And the RMAN directory containg the datafile backup:
 ![RMAN backup datafiles](./images/ls-rman-src.png " ")
 
 
-### TARGET
-We copied the xtt.properties and the res.txt file from source to target. So they match. As we also share the RMAN backup directory between source and target, they will match as well.
-Only interesting direcory is the  XTTS/tmp directory on target:
+and the another mandatory driving file for the restore - the res.txt file - plus all log files of the backup are located in:
+  ```
+    <copy>
+    ls -al /home/oracle/XTTS/SOURCE/tmp/
+    </copy>
+  ```
+![xtts source tmp directory content](./images/ls-xtts-tmp-src.png " ")
+
+
+
+#### Restore (TARGET)
+We copied the xtt.properties and the res.txt file from source to target. RMAN read the same files the backup process created - so these files match between source and target. An interesting directory created by the restore process is the target XTTS/tmp directory containing the log files:
   ```
     <copy>
     ls -al /home/oracle/XTTS/TARGET/tmp
