@@ -1,4 +1,4 @@
-# XTTS PreChecks on Source Database
+# XTTS PreChecks on source Database
 
 ## Introduction
 
@@ -15,13 +15,13 @@ Estimated Time: 15 minutes
 
 This lab assumes you have:
 
-- Connected to the Hands On Lab
+- Connected to the lab
 - A terminal window open on source.
 - Another terminal window open on target
 - Prepared the source
 - Prepared the target
 
-## Task 0: Start SQL*Plus (SOURCE and TARGET)
+## Start SQL*Plus (SOURCE and TARGET)
 
 ### Source
   ```
@@ -41,8 +41,8 @@ This lab assumes you have:
 ![Login to target 21c database](./images/open-prechecks-sqlplus-trg.png " ")
 
 ## Task 1: Transportable Tablespace Method Supported by Source and Target OS Platforms (SOURCE)
-Before you begin check on source database if the OS you want to migrate your database to is supported by TTS. <br>
-By the way, the platform_id for the target Linux platform is 13, so let's see if it is supported to use XTTS:
+Before you begin check on source database if the OS you want to migrate your database to is supporting datafile conversion. <br>
+By the way, the platform_id for the target Linux platform is 13:
   ```
     <copy>
     @/home/oracle/scripts/Task1
@@ -63,11 +63,9 @@ By the way, the platform_id for the target Linux platform is 13, so let's see if
 ![Check if target platform is supported](./images/precheck-task1-src.png " ")
 
 
-## Task 2: DBTIMEZONE (SOURCE & Target)
-You should always check that your SOURCE and TARGET database are located in the same timezone. 
-
-### DBTIMEZONE (SOURCE and TARGET)
-Execute on __Source__ and __Target__:
+## Task 2: Database Timezone (SOURCE and TARGET)
+You should always check that your source and target database are using in the same database timezone (dbtimezone). 
+Execute on __source__ and __target__:
   ```
     <copy>
     @/home/oracle/scripts/Task2a
@@ -77,19 +75,19 @@ Execute on __Source__ and __Target__:
  <summary>*click here to see the SQL statement*</summary>
 
   ``` text
-SELECT DBTIMEZONE FROM dual;
+select dbtimezone from dual;
   ```
 </details>
 
-The __SOURCE__ output:
+The __source__ output:
 
 ![Checking DBTIMEZONE on source](./images/precheck-task2a-src.png " ")
 
-The __TARGET__ output:
+The __target__ output:
 
 ![Checking DBTIMEZONE on target](./images/precheck-task2a-trg.png " ")
 
-You see, in this lab source and target databases are in different timezones. This might cause issues during metadata import when your source database tables have columns with "__TimeStamp with Local Time Zone__ (TSLTZ)".
+In this lab there are no tables with "__TimeStamp with Local Time Zone__ (TSLTZ)" columns. No further action needed. Had there been such columns, you must change one of the databases or move the offending tables using a regular Data Pump export/import. 
 
 
 ### CHECK for TimeStamp with Local Time Zone (TSLTZ) Data Type (SOURCE)
@@ -107,12 +105,12 @@ So check now if your source database has tables having columns with "__TimeStamp
 
   ``` text
     select t.owner, count(*)
-    FROM
+    from
       dba_tab_cols t
-      INNER JOIN dba_objects o ON o.owner = t.owner AND t.table_name = o.object_name
-      WHERE
-        t.data_type LIKE '%WITH LOCAL TIME ZONE' 
-        AND o.object_type = 'TABLE' 
+      inner join dba_objects o on o.owner = t.owner and t.table_name = o.object_name
+      where
+        t.data_type like '%WITH LOCAL TIME ZONE' 
+        and o.object_type = 'TABLE' 
       group by t.owner;
 
   ```
@@ -120,9 +118,9 @@ So check now if your source database has tables having columns with "__TimeStamp
 
 
 ![Checking on source for Timestamp with local timezone dataypes](./images/precheck-task2b-src.png " ")
-In the Hands-On-Lab there are no TSLTZ data types used. So no need to sync both DBTIMEZONEs or to handle data manually with expdp/impdp.
+In the lab there are no TSLTZ data types used. So no need to sync both DBTIMEZONEs or to handle data manually with expdp/impdp.
 
-## Task 3: Character Sets (SOURCE & TARGET)
+## Task 3: Character Sets (SOURCE and TARGET)
 The source and target database must use compatible database character sets.
 
   ```
@@ -141,11 +139,11 @@ where parameter like '%CHARACTERSET';
   ```
 </details>
 
-The __SOURCE__ output:
+The __source__ output:
 
 ![DBTIMEZONE output source](./images/precheck-task3-src.png " ")
 
-The __TARGET__ output:
+The __target__ output:
 
 ![DBTIMEZONE output target](./images/precheck-task3-trg.png " ")
 
@@ -156,7 +154,7 @@ Both character sets in our lab match.
 
 ## Task 4: XTTS Tablespace Violations (SOURCE) 
 For transportable tablespaces another requirement is that all tablespaces you're going to transport are self contained.
-In this hands on lab you're going to transport the two tablespaces "TPCCTAB" and "USERS". So let's check if they are self contained:
+In this lab you're going to transport the two tablespaces "TPCCTAB" and "USERS". So let's check if they are self contained:
 
   ```
     <copy>
@@ -169,8 +167,8 @@ In this hands on lab you're going to transport the two tablespaces "TPCCTAB" and
 
 
   ``` text
-     EXEC SYS.DBMS_TTS.TRANSPORT_SET_CHECK ('TPCCTAB,USERS',True,True);
-     SELECT * FROM transport_set_violations;
+     exec sys.dbms_tts.transport_set_check ('TPCCTAB,USERS',True,True);
+     select * from transport_set_violations;
 
   ```
 </details>
@@ -178,7 +176,7 @@ In this hands on lab you're going to transport the two tablespaces "TPCCTAB" and
 ![Checking on source that all tablespaces to migrate are self contained](./images/precheck-task4-src.png " ")
 
 ## Task 5: User Data in SYSTEM/SYSAUX Tablespace (SOURCE)
-As SYSTEM and SYSAUX tablespaces are not copied from source to target, it's good practice to check if they might accidentally contain user data:
+It's good practice to check if SYSTEM and SYSAUX tablespaces might accidentally contain user data:
 
   ```
     <copy>
@@ -257,7 +255,7 @@ IOT tables might get corrupted during XTTS copy when copying to HP platforms.
 You can ignore this output because you're not moving to HP platform.
 
 ## Task 8: Binary XMLTYPE Columns (SOURCE)
-In versions prior 12.2 metadata imports failed when having tables with XMLTYPE columns. You need to exclude them from the metadata export and handle the content manually during the downtime. A check if you have XML types stored in your database is:
+In Oracle Database 12.1 and earlier you can't move tables with XMLTYPEs using transportable tablespaces. Ensure there are no such tables: 
 
   ```
     <copy>
@@ -280,7 +278,7 @@ In versions prior 12.2 metadata imports failed when having tables with XMLTYPE c
 
 ![Checking if we have to take care of binary XML datatypes](./images/precheck-task8-src.png " ")
 
-Only XML data in SYSAUX tablespace which you're not going to migrate. So ignore it.
+Only XML data in SYSAUX tablespace which you're not going to migrate. So ignore them. Had there been such tables, you must move them using Data Pump export/import.
 
 * [Is it supported to do a Transport Tablespace (TTS) Import with Data Pump on a tablespace with binary XML objects ? (Doc ID 1908140.1) ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1908140.1&displayIndex=1)
 
@@ -300,7 +298,7 @@ Global temporary tables do not belong to any tablespace, so they are not transpo
 
 
   ``` text
-     SELECT table_name FROM dba_tables WHERE temporary= 'Y'
+     select table_name FROM dba_tables WHERE temporary= 'Y'
      and owner not in ('WMSYS','XDB','SYSTEM','SYS','LBACSYS','OUTLN','DBSNMP','APPQOSSYS')
      -- owner not in (select username from dba_users where oracle_maintained='Y') 
      ;
@@ -312,9 +310,9 @@ Global temporary tables do not belong to any tablespace, so they are not transpo
 
 There are no global temporary tables in our lab. When you have them in your database, you can migrate them using Data Pump export/import or generate the metadata from these tables and created them in the target database.
 
-## Task 10: Exit SQL*Plus (SOURCE & TARGET)
+## Task 10: Exit SQL*Plus (SOURCE and TARGET)
 
-### SOURCE
+### source
   ```
     <copy>
      exit;
@@ -323,7 +321,7 @@ There are no global temporary tables in our lab. When you have them in your data
 
 ![Exit from SQL*Plus on source](./images/precheck-task10-src.png " ")
 
-### TARGET
+### target
   ```
     <copy>
      exit;

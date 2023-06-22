@@ -2,23 +2,24 @@
 
 ## Introduction
 
-This last phase, the transport phase, is also doing an incremental backup and restore. The difference between the previous and this lab that now it is mandatory to set the tablespaces you copied to read only. So before doing that, make sure there are no active sessions/open transcations using objects in the copied tablespaces.
+This last phase, the transport phase, requires a downtime. Before you start the last incremental backup it is mandatory to set the tablespaces you copied to read only. </br>
+__ATTENTION__: Make sure there are no active sessions/open transcations using objects in the copied tablespaces.
 
 Estimated Time: 15 minutes
 
 ### Objectives
 
 - Execute final incremental backup and restore.
-- Export Metadata using Data Pump
-- Import Metadata using Data Pump
+- Export metadata using Data Pump
+- Import metadata using Data Pump
 
 
 ### Prerequisites
 
 This lab assumes you have:
 
-- Connected to the Hands On Lab
-- A terminal window open on source.
+- Connected to the lab
+- A terminal window open on source
 - Another terminal window open on target
 - Prepared the source
 - Successfully executed initial backup
@@ -177,7 +178,7 @@ You can safely ignore those warnings as they only tell you that you're going to 
 
 ## Task 2: Final Incremental Restore (TARGET)
 
-Open the Target console.
+Open the target console.
 The final incremental restore also needs the "res.txt" and "incrbackups.txt" files from source. So copy them:
 
   ```
@@ -196,7 +197,7 @@ The final incremental restore also needs the "res.txt" and "incrbackups.txt" fil
 
 ![copying incrbackups.txt from source to target](./images/final-restore-copy-incrbackup-txt.png " ")
 
-And start the restore:
+And start the restore which recovers the target data files until exact the same SCN as the source database data files:
   ```
     <copy>
      cd /home/oracle/XTTS/TARGET
@@ -285,7 +286,8 @@ The Data Pump export parameter file "Exp_Metadata.par" was already created for y
 | FULL=Y | FULL specifies that you want to perform a full database mode export  |
 | TRANSPORTABLE=ALWAYS | In a full mode export (full=y), using the transportable option results in a full transportable export which exports all objects and data necessary to create a complete copy of the database.  |
 | VERSION=12 | Specifies the version of database objects that you want to export. Only database objects and attributes that are compatible with the specified release are exported.  |
-{: title="Data Pump Metadata export parameter file"}
+| PARALLEL=4 | Although not used in this lab it might be helpful in a real migration scenario  |
+{: title="Data Pump Metadata Export Parameter File"}
 
 </details>
 
@@ -301,7 +303,7 @@ and execute expdp using this par file
 
 
 <details>
- <summary>*click here to see the full Metadata EXPDP log file*</summary>
+ <summary>*click here to see the full metadata EXPDP log file*</summary>
 
   ``` text
     $ expdp system/oracle@UPGR parfile=Exp_Metadata.par
@@ -507,7 +509,8 @@ and execute expdp using this par file
 </details>
 
 ## Task 4: Metadata Import (TARGET)
-Also here we first create the import parameter file. Copy and paste the content to the target console:
+Also the metadata import parameter file was precreated for you:
+
  ```
     <copy>
      cat /home/oracle/XTTS/Imp_Metadata.par
@@ -529,13 +532,15 @@ Also here we first create the import parameter file. Copy and paste the content 
 | LOGTIME=ALL | Adds timestamp information to import opertaions  |
 | FULL=Y | Specifies that you want to perform a full database mode export   |
 | transport\_datafiles=/u02/oradata/CDB3/pdb3/USERS_4.dbf | list of data files that are imported into the target database  |
-{: title="Data Pump Metadata import parameter file"}
+{: title="Data Pump Metadata Import Parameter File"}
 
 </details>
 
 
 
 And import the metadata into the PDB3 using this Imp_Metadata.par parameter file:
+__ATTENTION__: Only proceed once the export on SOURCE has been completed.
+
   ```
    <copy>
      impdp system/oracle@pdb3 parfile=/home/oracle/XTTS/Imp_Metadata.par
@@ -545,7 +550,7 @@ And import the metadata into the PDB3 using this Imp_Metadata.par parameter file
 ![execute data pump metadata import](./images/metadata-import.png " ")
 
 <details>
- <summary>*click here to see the full Metadata IMPDP log file*</summary>
+ <summary>*click here to see the full metadata IMPDP log file*</summary>
 
   ``` text
 $ impdp system/oracle@pdb3 parfile=Imp_Metadata.par
@@ -1366,11 +1371,23 @@ ORA-21700: object does not exist or is marked for delete
   ```
 </details>
 
-It's always good practice to check out each error you see in the log file and check out its root cause. Here the errors you see are not related to the user objects we transferred and you can ignore them.
+You should examine the Data Pump log files. Any errors should be investigated to determine whether they are significant for the import. Full transportable export/import often produces error on internal objects which can be ignored in most cases.
 
-Also a good practice is to verify after the migration a few things like if you migrated all user objects (tabes, triggers, views...), if the sequence numbers match. 
 
-Congratulations! You completed all stages of this XTTS lab migrating an Oracle 11g database directly intoa a 21c PDB successfully!
+### Check
+Do you remember that you created a table "object_copy" in "tpcc"?
+You can now check if source and target match using SQL*Plus and the statement:
+  ```
+    <copy>
+     select count(*) from tpcc.object_copy;
+    </copy>
+  ```
+
+
+
+### Congratulations! 
+You completed all stages of this XTTS lab migrating an Oracle 11g database directly into a 21c PDB successfully!
+
 
 ## Acknowledgements
 * **Author** - Klaus Gronau

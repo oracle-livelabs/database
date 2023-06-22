@@ -16,15 +16,15 @@ Estimated Time: 15 minutes
 
 This lab assumes you have:
 
-- Connected to the Hands On Lab
-- A terminal window open on source.
+- Connected to the lab
+- A terminal window open on source
 - Another terminal window open on target
 - Prepared the source
 - Successfully executed initial backup
 - Successfully executed initial restore
 
-## Task 0: Adding Table and Data File to Source Database (SOURCE)
-As mentioned, in this (and the previous) phase the database is up everyone can use it. So there are changes in the database and you might have added tables, datafiles etc. So let's add a datafile to tthe tablespace we're transferring and also a table.
+## Task 1: Adding Table and Data File to Source Database (SOURCE)
+In this (and the previous) phase the database is up and there is no downtime yet. Users make changes in the source database. Let's simulate that by creating a table and adding a data file.
 
 ### Add a New Table (SOURCE)
 Connect with SQL*Plus as TPCC user to the source database:
@@ -67,7 +67,7 @@ and execute:
 ![adding new datafile to TBS TPCCTAB](./images/roll-forward-add-datafile.png " ")
 
 
-## Task 1: Incremental Backup (SOURCE)
+## Task 2: Incremental Backup (SOURCE)
 On source change into the XTTS Source directory and execute the incremental backup:
 
   ```
@@ -160,7 +160,9 @@ On source change into the XTTS Source directory and execute the incremental back
   ```
 </details>
 
-## Task 2: Incremental Restore (TARGET)
+When you take a closer look at the log file, you see, the XTTS script managed everything for you. It recognized a new data file was added to the tablespace and it took  care of it.
+
+## Task 3: Incremental Restore (TARGET)
 
 The incremental restore needs the "res.txt" and "incrbackups.txt" files from source. Both are the driving files for the XTTS process.
 You just performed your first incremental backup so there's no previous version of "incrbackups.txt" file. <br>
@@ -286,7 +288,7 @@ The only requirement for each incremental restore is the current res.txt and inc
 ![incremental backup restore process flow](./images/incremental-backup-restore.png " ")
 
 ### Backup (SOURCE)
-You used on Source the xtt.properties file created in the previous lab:
+You used on source the xtt.properties file created in the previous lab:
 
   ```
     <copy>

@@ -1,30 +1,30 @@
 # Prepare Phase  
 
 ## Introduction
-"__PREPARE PHASE__" is the first phase in the XTTS transfer. You're going to back up on source database the datafiles belonging to the tablespaces you want to transfer using XTTS. After a successful backup you're going to restore them on the target database side. <br>
-During this complete process the source database remains active and everyone can continue to use it.
+This is the first phase in the process. You will backup the data files belonging to the listed tablespaces in the source database. Then, you can restore the data files in the target database.
+
 
 Estimated Time: 15 minutes
 
 ### Objectives
 
-- Create XTTS V4 properties file.
-- Execute initial backup and restore.
+- Create XTTS properties file
+- Execute initial backup and restore
 
 
 ### Prerequisites
 
 This lab assumes you have:
 
-- Connected to the Hands On Lab
-- A terminal window open to source.
+- Connected to the lab
+- A terminal window open to source
 - Another terminal window open to target
-- Source and target prepared.
+- Source and target prepared
 - XTTS prechecks done
 
 
 ## Task 1: XTTS Properties File (SOURCE)
-On source change into the XTTS Source directory and copy the xtt.properties containing all necessary parameters to run this lab.
+On source change into the XTTS source directory and copy the xtt.properties containing all necessary parameters to run this lab.
 
   ```
     <copy>
@@ -250,7 +250,10 @@ On source change into the XTTS Source directory and copy the xtt.properties cont
 
 
 ## Task 2: Initial Backup (SOURCE)
-While the source database remains active, you're now going to back it up for the first time:
+While the source database remains active, you're now going to back it up for the first time.
+The XTTS script offers two helpful environment variables we're going to set all the time we call it: </br>
+* XTTDEBUG will allow you to quickly enable tracing (valid trace leveles are 0...3) 
+* TMPDIR is the directory where XTTS will store its temporary files 
 
 
   ```
@@ -362,7 +365,7 @@ While the source database remains active, you're now going to back it up for the
 
 
 ## Task 3: Initial Restore (TARGET)
-The initial restore on Target requires the "xtt.properties" and "res.txt" file from source. In this hands on lab exercise the source and target machine are the same, so you can simply use the copy command:
+The initial restore on target requires the "xtt.properties" and "res.txt" file from source. In this lab the source and target machine are the same, so you can simply use the copy command (in a real migration you might store it on a network share or use scp to copy the files). The RMAN backup sets are stored in a folder . Since it is the same host, we don't need to copy the backup sets. You would need to do that in a real migration except you put the files on a network share or enable copying in the xtt.properties file.
 
 
   ```
@@ -460,7 +463,7 @@ In this lab you executed the initial backup and restore using the parameter file
 ![source xtt.properties file](./images/initial-backup-restore.png " ")
 
 ### Backup (SOURCE)
-On Source we created the xtt.properties file:
+On source we created the xtt.properties file:
 
   ```
     <copy>

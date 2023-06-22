@@ -1,4 +1,4 @@
-# Prepare Source 
+# Prepare source 
 
 ## Introduction
 
@@ -14,36 +14,36 @@ Estimated Time: 5 minutes
 
 This lab assumes you have:
 
-- Connected to the Hands On Lab
+- Connected to the lab
 
-## Task 1: Open Terminal Window, Create OS SOURCE Directory and Unzip XTTS ZIP File (SOURCE)
+## Task 1: Open Terminal Window, Create OS Source Directory and Unzip XTTS ZIP File (SOURCE)
 
 ### Open Terminal Window 
 Open another terminal windows by clicking on the "Terminal" icon. <br> 
-Use this second terminal window to execute all commands related to the __SOURCE__ database.
+Use this second terminal window to execute all commands related to the __source__ database.
 
 ![Screenshot of the Linux Hands On Lab Terminal icon](./images/terminal.png " ")
 
-All following screenshots related to the __SOURCE__ will have a __light blue__ background color.
+All following screenshots related to the __source__ will have a __light blue__ background color.
 
 
 
 ### Create OS Directories (SOURCE)
-Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another one as XTTS SOURCE and a third directory for RMAN backup/restore files.
+Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another one as XTTS source and a third directory for RMAN backup/restore files.
 
   ```
     <copy>
     mkdir -p /home/oracle/XTTS/SOURCE/tmp 
     </copy>
   ```
-![Create XTTS Source OS Directory](./images/mkdir-xtts-src-os-dir.png " ")
+![Create XTTS source OS Directory](./images/mkdir-xtts-src-os-dir.png " ")
 
   ```
     <copy>
     mkdir -p /home/oracle/XTTS/DUMP
     </copy>
   ```
-![Create Source OS Directory](./images/mkdir-xtts-dump-dir.png " ")
+![Create source OS Directory](./images/mkdir-xtts-dump-dir.png " ")
 
   ```
     <copy>
@@ -51,7 +51,7 @@ Activate the source terminal window and create three directories; one for the Da
     </copy>
   ```
 
-![Create Source OS Directory](./images/mkdir-xtts-rman-dir.png " ")
+![Create source OS Directory](./images/mkdir-xtts-rman-dir.png " ")
 
 
 ### Unzip XTTS ZIP file (SOURCE)
@@ -95,14 +95,13 @@ Enable source database archive logging and create the database directory for Dat
 
   ```
     <copy>
-    startup
+    startup mount
     archive log list
-    shutdown immediate
-    STARTUP MOUNT
-    ALTER DATABASE ARCHIVELOG;
-    ALTER DATABASE OPEN;
-    CREATE OR REPLACE DIRECTORY "XTTS_METADATA_DIR" AS '/home/oracle/XTTS/DUMP';
-    alter user TPCC identified by oracle;
+    alter database archivelog;
+    alter database enable block change tracking;
+    alter database open;
+    create or replace directory "XTTS_METADATA_DIR" as '/home/oracle/XTTS/DUMP';
+    alter user tpcc identified by oracle;
     exit
     </copy>
 
@@ -114,7 +113,7 @@ Enable source database archive logging and create the database directory for Dat
 You might also consider enabling __Block Change Tracking (BCT)__ using the command "alter database enable block change tracking".
 
 ## Task 4: Configuring Default RMAN Settings (SOURCE)
-The next parameters you're going to set for RMAN work well in the hands on lab. For your environment you might have to adopt them by increasing parallelism, the backup destination etc.
+The next parameters you're going to set for RMAN work well in the lab. For your environment you might have to adopt them by increasing parallelism, the backup destination etc.
 
 On source start the rman console: 
 
@@ -129,8 +128,8 @@ in RMAN terminology the target database identifies the database which you're goi
 
   ```
     <copy>
-     CONFIGURE DEFAULT DEVICE TYPE TO DISK;
-     configure  DEVICE TYPE DISK PARALLELISM 8;
+     configure default device type to disk;
+     configure  device type disk parallelism 8;
      exit;
     </copy>
 

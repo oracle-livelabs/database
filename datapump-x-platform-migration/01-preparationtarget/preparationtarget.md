@@ -1,4 +1,4 @@
-# Prepare Target
+# Prepare target
 
 ## Introduction
 
@@ -14,21 +14,21 @@ Estimated Time: 15 minutes
 
 This lab assumes you have:
 
-- Connected to the Hands On Lab
+- Connected to the lab
 
 ## Task 1: Open Terminal Window, Create OS Target Directory and Unzip XTTS ZIP File (TARGET)
 
 ### Open Terminal Window 
 Open a terminal windows by clicking on the "Terminal" icon. <br>
-Use this terminal window to execute all commands related to the __TARGET__ database.
+Use this terminal window to execute all commands related to the __target__ database.
 
 ![Screenshot of the Linux Hands On Lab Terminal icon](./images/terminal.png " ")
 
-All following screenshots related to the __TARGET__ will have a light green_ background color.
+All following screenshots related to the __target__ will have a light green_ background color.
 
 
 ### Create OS Directory (TARGET)
-Activate the target terminal window and create a directory for the XTTS TARGET files.
+Activate the target terminal window and create a directory for the XTTS target files.
 
   ```
     <copy>
@@ -36,7 +36,7 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
     </copy>
   ```
 
-![Create TARGET OS directory ](./images/create-target-os-dir.png " ")
+![Create target OS directory ](./images/create-target-os-dir.png " ")
 
 ### change into XTTS working directory (TARGET)
 
@@ -47,7 +47,7 @@ Activate the target terminal window and create a directory for the XTTS TARGET f
     </copy>
   ```
 
-![change into XTTS TARGET OS working directory ](./images/change-target-working-dir.png " ")
+![change into XTTS target OS working directory ](./images/change-target-working-dir.png " ")
 
 ### Unzip XTTS ZIP file (TARGET)
   ```
@@ -124,7 +124,7 @@ Hit ENTER/RETURN to execute ALL commands.
 
 
   ``` text
-[CDB3] oracle@hol:~/XTTS/TARGET
+[CDB3] oracle@hol:~/XTTS/target
 $ lsnrctl start
 
 LSNRCTL for Linux: Version 21.0.0.0.0 - Production on 01-JUN-2023 15:47:58
