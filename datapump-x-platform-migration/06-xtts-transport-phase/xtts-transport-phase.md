@@ -1376,10 +1376,26 @@ You should examine the Data Pump log files. Any errors should be investigated to
 
 ### Check
 Do you remember that you created a table "object_copy" in "tpcc"?
-You can now check if source and target match using SQL*Plus and the statement:
+You can now check if source and target match using SQL*Plus:
+
+### Source
   ```
     <copy>
-     select count(*) from tpcc.object_copy;
+     sqlplus tpcc/oracle
+    </copy>
+  ```
+
+### Target
+  ```
+    <copy>
+     sqlplus tpcc/oracle@pdb3
+    </copy>
+  ```
+
+### SQL Statement (SOURCE and TARGET)
+  ```
+    <copy>
+     select count(*) from object_copy;
     </copy>
   ```
 
