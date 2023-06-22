@@ -263,7 +263,7 @@ End of rollforward phase
 </details>
 
 ## Task 3: Metadata Export (SOURCE)
-As the source and target database version differ too much, you can't use __Data Pump network_link__ and need to export and import the metadata information instead.
+Between this source and target database version, you can't use __Data Pump network_link__ (will fail with ORA-39169) and you have to export and import the metadata information instead.
 The Data Pump export parameter file "Exp_Metadata.par" was already created for you and is located in "/home/oracle/XTTS/"
 
   ```
