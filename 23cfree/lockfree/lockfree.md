@@ -1,4 +1,4 @@
-# Lab 3: Lock-Free Reservations
+# Lock-Free Reservations
 
 ## Introduction
 
@@ -10,14 +10,6 @@ In this lab, we will explore the concept of lock-free reservations and their imp
 
 Estimated Time: 10 minutes
 
-### Prerequisites
-
-* Basic understanding of database concepts and transactions.
-* Familiarity with SQL queries and syntax.
-* Access to an Oracle database system.
-* User credentials with sufficient privileges to perform updates and create tables.
-* Knowledge of session behavior and transaction management.
-
 ### Objectives
 
 * Understand the concept of lock-free reservations and their benefits.
@@ -28,6 +20,14 @@ Estimated Time: 10 minutes
 * Handle session errors caused by going below the "threshold" with lock-free reservations.
 * Learn how committing changes and rolling back transactions affect lock-free reservations.
 * Recognize the restoration of reserved amounts in the budget column with lock-free reservations.
+
+### Prerequisites
+
+* Basic understanding of database concepts and transactions.
+* Familiarity with SQL queries and syntax.
+* Access to an Oracle database system.
+* User credentials with sufficient privileges to perform updates and create tables.
+* Knowledge of session behavior and transaction management.
 
 ## Task 1: Normal Update
 
@@ -143,8 +143,8 @@ Note: Using the same 3 windows
     </copy>
     ```
 
-## **Acknowledgements**
+## Acknowledgements
 
-* **Author(s)** - Blake Hendricks, Autonomous Database Product Manager
-* **Contributor(s)** - Vasudha Krishnaswamy
-* **Last Updated By/Date** - 6/7/2023
+* **Author(s)** - Blake Hendricks, Database Product Manager
+* **Contributor(s)** - Vasudha Krishnaswamy, Russ Lowenthal
+* **Last Updated By/Date** - 6/21/2023
