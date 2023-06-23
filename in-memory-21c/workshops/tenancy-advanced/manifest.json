@@ -1,0 +1,86 @@
+{
+  "workshoptitle": "Learn How Database In-Memory Enables Real-Time Analytics",
+  "help": "andy.rivenes@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "About the In-Memory Workshop",
+      "filename": "../../intro/intro.md"
+    },
+    {
+      "title": "Lab 1: Initialize Environment",
+      "description": "Initialize Environment",
+      "filename": "../../initialize-environment/initialize-environment.md"
+    },
+    {
+      "title": "Lab 2: Set up the In-Memory Column Store",
+      "description": "Populate and administer the In-Memory column store",
+      "filename": "../../setup/setup.md"
+    },
+    {
+      "title": "Lab 3: In-Memory Expressions",
+      "description": "Using In-Memory Expressions",
+      "filename": "../../ime/ime.md"
+    },
+    {
+      "title": "Lab 4: Joins Groups",
+      "description": "Using In-Memory Joins Groups",
+      "filename": "../../join-groups/join-groups.md"
+    },
+    {
+      "title": "Lab 5: In-Memory Optimized Arithmetic",
+      "description": "Using In-Memory Optimized Arithmetic",
+      "filename": "../../im-arith/im-arith.md"
+    },
+    {
+      "title": "Lab 6: JSON and the In-Memory column store",
+      "description": "Using JSON with the In-Memory column store",
+      "filename": "../../json/json.md"
+    },
+    {
+      "title": "Lab 7: In-Memory External Tables",
+      "description": "Using external tables with Database In-Memory",
+      "filename": "../../ext-tab/exttab.md"
+    },
+    {
+      "title": "Lab 8: In-Memory Full Text Columns",
+      "description": "Using In-Memory Full Text Columns",
+      "filename": "../../im-text/full-text-col.md"
+    },
+    {
+      "title": "Lab 9: In-Memory Spatial",
+      "description": "In-Memory Spatial",
+      "filename": "../../im-spatial/im-spatial.md"
+    },
+    {
+      "title": "Lab 10: In-Memory Hybrid Scans",
+      "description": "In-Memory Hybrid Scans",
+      "filename": "../../hybrid-scans/im-hybrid-scans.md"
+    },
+    {
+      "title": "Lab 11: Automatic Data Optimization",
+      "description": "Using In-Memory with Automatic Data Optimization",
+      "filename": "../../ado/ado.md"
+    },
+    {
+      "title": "Lab 12: Automatic In-Memory",
+      "description": "Using Automatic In-Memory",
+      "filename": "../../aim/aim.md"
+    },
+    {
+      "title": "Lab 13: Automatic In-Memory Level High",
+      "description": "Using Automatic In-Memory with level high",
+      "filename": "../../aim-high/aim-high.md"
+    },
+    {
+      "title": "Lab 14: In-Memory Parallel Features",
+      "description": "Using In-Memory with parallel features",
+      "filename": "../../im-parallel/parallel.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}
