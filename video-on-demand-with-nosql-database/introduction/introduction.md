@@ -39,7 +39,7 @@ In this workshop you will:
 ### Prerequisites
 
 This workshop assumes you have:
-  * An Oracle Free Tier, Paid Account or Green Button
+  * An Oracle Free Tier or Paid Account
   * Programming knowledge in java, python or node.js
   * Understanding of query languages
 
