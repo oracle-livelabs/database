@@ -8,26 +8,21 @@
             "description": "Introduction",
             "filename": "../../chance-js/Introduction/chance-js.md"
         },
-
-       
         {
             "title": "Get Started with NoVNC",
             "description": "Verify Setup of compute instance",
             "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
         },
-
         {
             "title": "Lab 1: Setup User and ORDS",
             "description": "Setup User",
             "filename": "./../../change-pw/change-pw-json-enhancements.md"
         },
-
         {
             "title": "Lab 2: Getting Started with Chance",
             "description": "Setting up",
             "filename": "../../chance-js/Setting_Up/chance_setup-js.md"
         },
-       
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",

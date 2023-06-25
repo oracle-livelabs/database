@@ -6,7 +6,7 @@
         {
             "title": "Introduction",
             "description": "Introduction",
-            "filename": "../../introduction/intro-json-enhancements.md"
+            "filename": "../../chance-js/Introduction/chance-js.md"
         },
         {
             "title": "Get Started with NoVNC",
@@ -19,19 +19,9 @@
             "filename": "./../../change-pw/change-pw-json-enhancements.md"
         },
         {
-            "title": "Lab 2: Work with JSON Collections",
-            "description": "Work with JSON Collections",
-            "filename": "./../../json-collections/json-collections.md"
-        },
-       {
-            "title": "Lab 3: Use Mongo API to interact with Oracle Database",
-            "description": "Use Mongo API to interact with Oracle Database",
-            "filename": "./../../json-mongo/json-mongo.md"
-        },
-        {
-            "title": "Lab 4: Use SQL to work with JSON",
-            "description": "Use SQL to work with JSON",
-            "filename": "./../../json-sql/json-sql.md"
+            "title": "Lab 2: Getting Started with Chance",
+            "description": "Setting up",
+            "filename": "../../chance-js/Setting_Up/chance_setup-js.md"
         },
         {
             "title": "Need Help?",
