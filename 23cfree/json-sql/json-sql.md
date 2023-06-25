@@ -330,7 +330,7 @@ JSON_Mergepatch follows RFC 7386 [https://datatracker.ietf.org/doc/html/rfc7386]
 
     ```
     <copy>
-    select m.data.movie_id, m.data.title, m.data.duration, m.data.gross.number(), json_query (data, '$.cast'), m.data.notes
+    select m.data.movie_id, m.data.title, m.data.duration, m.data.gross.number() gross, json_query (data, '$.cast') cast, m.data.notes
     from movies m
     where m.data.movie_id=3705;
     </copy>
@@ -358,7 +358,7 @@ JSON_Mergepatch follows RFC 7386 [https://datatracker.ietf.org/doc/html/rfc7386]
 
     ```
     <copy>
-    select m.data.movie_id, m.data.title, m.data.duration, m.data.gross.number(), json_query (data, '$.cast'), m.data.notes
+    select m.data.movie_id, m.data.title, m.data.duration, m.data.gross.number() gross, json_query (data, '$.cast') cast, m.data.notes
     from movies m
     where m.data.movie_id=3705;
 
