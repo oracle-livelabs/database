@@ -2,7 +2,7 @@
 
 ## About this Workshop
 
-Autonomous Database Shared - like all other versions and editions of Oracle Database - has a built-in text search engine, Oracle Text. This is a really powerful feature of the converged database, that people often don&#39;t even realize they have. Want to find a mis-spelled company name? Want to find all comments in a work log that mention &#39;failure&#39; and &#39;hardware&#39;? No problem, Oracle Text can do that - and lots more.
+Autonomous Database Serverless - like all other versions and editions of Oracle Database - has a built-in text search engine, Oracle Text. This is a really powerful feature of the converged database, that people often don&#39;t even realize they have. Want to find a mis-spelled company name? Want to find all comments in a work log that mention &#39;failure&#39; and &#39;hardware&#39;? No problem, Oracle Text can do that - and lots more.
 
 You can easily create text indexes on VARCHAR2, CLOB or BLOB columns in the database, and search them using word-based content searches.
 
