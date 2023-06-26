@@ -17,8 +17,7 @@ Estimated Time: 45 minutes
 
 In this lab, you will:
 
-* Use JSON_Serialize to convert binary JSON data to a human-readable string.
-* Use dot notation to extract values from JSON data.
+* Use simple dot notation to extract values from JSON data.
 * Use nesting and unnesting methods to
 * Explore SQL/JSON path expressions to query JSON data.
 * Update documents using JSON\_Mergepatch and JSON\_transform.
@@ -27,9 +26,10 @@ In this lab, you will:
 ### Prerequisites
 
 - Oracle Database 23c Free Developer Release
+- ORDS up and running (for Database Actions). Alternatively, you can use sqlplus or sqlcl
 - All previous labs successfully completed
 
-## Task 1: SQL Developer Web
+## Task 1: Explore the table behind your JSON collection
 
 1. Open Database Actions (if you don't already have it open). Either choose **SQL** under Development from the launchpad, or click on the navigation menu on the top left and select **SQL** under Development.
 
@@ -41,24 +41,24 @@ In this lab, you will:
     ![SQL navigation](./images/nav-sql.png)
     ![SQL development navigation](./images/development-sql.png)
 
-2. On the left side, click on MOVIES - this is the table for the 'movies' collection. To get the view displayed, you need to right-click on **MOVIES** and choose **Open**.
+2. On the left side, click on MOVIES - this is the table for the 'movies' collection. To get the details about its data structure displayed, you need to right-click on **MOVIES** and choose **Open**.
 
     ![Open table](./images/open-movies.png)
     ![View table](./images/table-view.png)
 
-    You see that the table 'MOVIES' has 5 columns: an 'ID' which is a unique identifier for the document (and in the case of MongoDB-compatible collections, is taken from the "_id" field in the JSON), a column 'DATA' which holds the JSON document, 2 metadata columns to keep track of creation and update timestamps and 'VERSION' which is typically a hash value for the document and allows us to keep caches in sync (similar to an eTag). None of this is really important at this point as we will only use the DATA column in the following examples.
+    You see that the table 'MOVIES' has 5 columns: an 'ID' which is a unique identifier for the document (and in the case of MongoDB-compatible collections, is taken from the "_id" field in the JSON), a column 'DATA' which holds the JSON document in Oracle's binary OSON format, 2 metadata columns to keep track of creation and update timestamps and 'VERSION' which is typically a hash value for the document and allows us to keep caches in sync (similar to an eTag). None of this is really important at this point as we will only use the DATA column in the following examples. The DATA column holds our JSON document within the collection MOVIES.
 
     *Learn more -* [Use Oracle Database Actions with JSON Collections](https://docs.oracle.com/en/cloud/paas/autonomous-json-database/ajdug/use-oracle-database-actions-json-collections1.html) and [Use SQL With JSON Data](https://docs.oracle.com/en/database/oracle/oracle-database/21/adjsn/json-in-oracle-database.html#GUID-04377B36-654B-47C4-A480-535E00E46D1F)
 
 ## Task 2: JSON Fundamentals
 
-1. Because the JSON data is stored in a binary representation (for query and update efficiency) we need to convert it to a human-readable string using JSON_Serialize.
+1. Because the JSON data is stored in a binary representation in OSON format (for query and update efficiency) we need to convert it to a human-readable string using JSON_Serialize.
 
     Copy and paste this query into SQL Developer Web worksheet and run it. It returns 9 (random) documents from the table/collection.
 
     ```
     <copy>
-    select JSON_Serialize(data) from movies where rownum < 10;
+    select JSON_Serialize(data pretty) from movies where rownum < 10;
     </copy>
     ```
 
@@ -68,7 +68,10 @@ In this lab, you will:
 
     ```
     <copy>
-    select m.data.opening_date.date(), m.data.title, m.data.list_price.number()  from movies m
+    select m.data.opening_date.date() as opening_date
+         , m.data.title               as title
+         , m.data.list_price.number() as price  
+    from movies m
     where m.data.list_price.number() = 1.99
     order by 1 desc
     fetch first 10 rows only;
@@ -86,13 +89,13 @@ In this lab, you will:
 
     ```
     <copy>
-    select jt.*
-    from movies m nested data columns ("_id", title, year NUMBER) jt;
+    SELECT jt.*
+    FROM movies m NESTED data COLUMNS ("_id", title, year NUMBER) jt;
     </copy>
     ```
     ![Extracting nested data](./images/json-extracting.png " ")
 
-    As you can see we're extracting the '_id', the 'title' and the 'year' from each document. Instead of a trailing function we can specify an optional SQL data type like NUMBER - the default (used for the title) is a VARCHAR2(4000). Note that since _id starts with an underscore character it's necessary to put it in quotes.
+    As you can see we're extracting the '_id', the 'title' and the 'year' from each document. Instead of a trailing function we can specify an optional SQL data type like NUMBER - the default (used for the title) is a VARCHAR2(4000). Note that since _id starts with an underscore character it's necessary to put it in quotes. Note also that the other attributes we are extracting are case sensitive. So you need to use 'title' and cannot use 'Title'.
 
 2.  We could have written this query with the simple dot notation, as well, because we do not drill into any JSON array yet. Let's do that in  this query, by using the NESTED clause also in the *COLUMNS* clause.
 
@@ -144,22 +147,21 @@ Now let's look at the different SQL/JSON operators step by step:
 
 ### JSON_Value
 
-JSON_VALUE takes one scalar value from the JSON data and returns it as a SQL scalar value.
+JSON_VALUE takes one **scalar** value from the JSON data and returns it as a SQL scalar value.
 
-1.  The first argument is the input, the column 'data' from the products collection/table. This is followed by a path expression, in this case, we select the value for field 'format'. The optional 'returning' clause allows us to specify the return type, in this case, a varchar2 value of length 10. Because not every product has a 'format' value (only the movies do) there are cases where no value can be selected. By default NULL is returned in this case. The optional ON EMPTY clause allows us to specify a default value (like 'none') or to raise an error - with ERROR ON EMPTY.
-
-    _There is a bug in SQL Developer Web which means it does not parse this query correctly, if you see the error: "ORA-00923: FROM keyword not found where expected" then just make sure the whole query is selected before you attempt to run it._
+1.  The first argument is the input, the column 'data' from the products collection/table. This is followed by a path expression, in this case, we select the value for field 'main\_subject'. The optional 'returning' clause allows us to specify the return type, in this case, a varchar2 value of length 100. Because not every product has a 'main\_subject' value there are cases where no value can be selected. By default NULL is returned in this case. The optional ON EMPTY clause allows us to specify a default value (like 'none') or to raise an error - with ERROR ON EMPTY.
 
     ```
     <copy>
-    select distinct JSON_VALUE (data, '$.main_subject' returning varchar2(100) default 'none' on empty)
+    select distinct JSON_VALUE (data, '$.main_subject' 
+            returning varchar2(100) default 'none' on empty) subject
     from movies m
-    where m.data.main_subject.string() is not null order by 1;
+    order by 1;
     </copy>
     ```
     ![JSON value](./images/json-value.png " ")
 
-2.  JSON_Value can only select one scalar value. The following query will not return a result because it selects the array of actors.
+2.  JSON_Value can only select one scalar value. The following query will not return a result because it selects the array of actors. (The default is NULL ON ERROR)
 
     ```
     <copy>
@@ -171,7 +173,7 @@ JSON_VALUE takes one scalar value from the JSON data and returns it as a SQL sca
 
 ### JSON_Query
 
-Unlike JSON\_Value (which returns one SQL scalar value) the function JSON\_Query can extract complex values (objects or arrays), and it can also return multiple values as a new JSON array. The result of JSON_Query is JSON data itself, for example an object or array.
+Unlike JSON\_Value (which returns one SQL scalar value) the function JSON\_Query can extract complex values (objects or arrays), and it can also return multiple values as a new JSON array. The result of JSON_Query is **JSON data** itself, for example an object or array.
 
 1. This query extracts the embedded array of actors. Scroll down the `Query Result` to see the values.
 
@@ -181,6 +183,8 @@ Unlike JSON\_Value (which returns one SQL scalar value) the function JSON\_Query
     </copy>
     ```
     ![JSON query](./images/json-query.png " ")
+
+    *Learn more -* [SQL/JSON Condition JSON_QUERY](https://docs.oracle.com/en/database/oracle/oracle-database/23/adjsn/function-JSON_QUERY.html#GUID-D64C7BE9-335D-449C-916D-1123539BF1FB)
 
 
 ### JSON_Exists
@@ -197,9 +201,9 @@ JSON_Exists is used to filter rows, therefore you find it in the WHERE clause. I
     order by 1;
     </copy>
     ```
-    ![JSON exists](./images/json-exists.png " ")
-
     This is expressed using a path predicate using the question mark (?) symbol and a comparison following in parentheses. The '@' symbol represents the current value being used in the comparison. For an array the context will be every item of the array - one can think of iterating through the array and performing the comparison for each item of the array. If any item satisfies the condition than JSON_Exists selects the row.
+
+    ![JSON exists](./images/json-exists.png " ")
 
 2.  The following selects all movies with two or more genres, one genre has to be 'Sci-Fi' and an actor's name has to begin with 'Sigourney'.
 
@@ -212,11 +216,11 @@ JSON_Exists is used to filter rows, therefore you find it in the WHERE clause. I
     ```
     ![genres query](./images/json-exists-genres.png " ")
 
-    SODA QBE filter expressions are rewritten to use JSON_Exists.
+    (Fun tidbit: SODA QBE filter expressions as you used before in Database Actions in the UI are rewritten to use JSON_Exists.)
 
     *Note:* Indexes can be added to speed up finding the right documents.
 
-    *Learn more -* [SQL/JSON Condition JSON_EXISTS](https://docs.oracle.com/en/database/oracle/oracle-database/21/adjsn/condition-JSON_EXISTS.html#GUID-D60A7E52-8819-4D33-AEDB-223AB7BDE60A)
+    *Learn more -* [SQL/JSON Condition JSON_EXISTS](https://docs.oracle.com/en/database/oracle/oracle-database/23/adjsn/condition-JSON_EXISTS.html#GUID-D60A7E52-8819-4D33-AEDB-223AB7BDE60A)
 
 ### JSON_Table
 
@@ -239,36 +243,35 @@ JSON\_Table is used to 'flatten' hierarchical JSON data to a table consisting of
     fetch first 10 rows only;
     </copy>
     ```
-    ![flatten hierachy with JSON table](./images/json-table.png " ")
-
+   
 2.  Like the other SQL/JSON operators the first input is the JSON data - the column 'data' from the products collection/table. The first path expressions, '$', is the row path expression - in this case, we select the entire document. It would be possible to directly access an embedded object or array here, for example '$.starring[*]' would then generate a row for each actor.
 
     The *columns* clause then lists each column. Let's go over this line by line:
     *	The '_id' column is defined to be a number instead of the default VARCHAR2(4000).
-    *	The next column is called 'ProductName' which is not a field name in the JSON data, we therefore need to tell which field name we want to use. This is done by providing a title column path expression, '$.title', which targets field 'title'. We also set the data type to be a VARCHAR2 of length 50.
-    *	The column 'type' uses the same name as the field in the JSON, therefore we do not need to provide a path expression. Also, we accept the default datatype.
-    *	Field 'actors' does not exist, so we map the actors, which are elements of array 'starring', to column 'actors' using path expression '$.starring'. We use FORMAT JSON to specify JSON\_Table that this column has JSON\_Query  semantics and the returned value is JSON itself - in this case, we extract the embedded array.
+    *	The next column is called 'movie_title' which is not a field name in the JSON data, we therefore need to tell which field name we want to use. This is done by providing a title column path expression, '$.title', which targets field 'title'. We also set the data type to be a VARCHAR2 of length 100.
+    *	Field 'actors' does not exist, so we map the actors, which are elements of array 'cast', to column 'actors' using path expression '$.cast'. We use FORMAT JSON to specify JSON\_Table that this column has JSON\_Query  semantics and the returned value is JSON itself - in this case, we extract the embedded array.
     *	Similarly, we use the keyword 'EXISTS' to specify that the next column ('year') or JSON_Exists semantics. We're not interested in the actual year value - only if a value exists or not. You will therefore see true|false values for this column (or 1|0 if you change the return type to NUMBER).
-    *	The last column 'numGenres' is an example of using a path item method (or trailing function), in this case, we call 'size()' on an array to count the number of values in the array. There are many other trailing functions that can be used.
+    *	The last column 'num_genres' is an example of using a path item method (or trailing function), in this case, we call 'size()' on an array to count the number of values in the array. There are many other trailing functions that can be used.
 
-    Multiple JSON arrays on the same level can also be projected out by using 'nested paths' on the same level, as the following example shows with the array of actors and genres. The values of the sibling arrays are returned in separate rows instead of merging them into the same row, for two reasons: The arrays could be of different sizes and there is no clear rule on how to combine values from different arrays. In this example, 'genres' and 'actors' have nothing to do with each other. Why should the first actor name be placed in the same row as the first genre? This is why you see the NULL values in the result. This is a UNION join.
+ ![flatten hierachy with JSON table](./images/json-table.png " ")
 
-    ```
-    <copy>
-    select jt.*
-    from movies m,
-    JSON_TABLE (data, '$' columns (
-    title,
-    nested path '$.cast[*]'
-    columns (actor path '$'),
-    nested path '$.genre[*]'
-    columns (genre path '$')
+Note the column actors for the first title 'SuperAction Mars', which has an array of two actors. Like with the simplified nested syntax, you can unflatten this embedded array by another nested clause inside the column expression as follows:
+```
+<copy>select jt.*
+from movies m,
+JSON_TABLE (data, '$' columns (
+    "_id",
+    movie_title varchar2(100) path '$.title',
+    NESTED path '$.cast[*]' columns (actor path '$'),
+    year EXISTS,
+    num_genres NUMBER path '$.genre.size()'
     )) jt
-    where m.data.title = 'Gladiator';
-    </copy>
-    ```
-    ![advanced JSON table](./images/json-table-advanced.png " ")
-
+order by m.data.year.number() desc
+fetch first 10 rows only;
+</copy>
+```
+ ![flatten hierachy with JSON table two levels](./images/json-table-2.png " ")
+   
 3.  A common practice is to define a database view using JSON\_TABLE. Then you can describe and query the view like a relational table. Fast refreshable materialized views are possible with JSON\_Table but not covered in this lab.
 
     For example, create view movie_view as:
@@ -327,7 +330,7 @@ JSON_Mergepatch follows RFC 7386 [https://datatracker.ietf.org/doc/html/rfc7386]
 
     ```
     <copy>
-    select m.data.movie_id, m.data.title, m.data.duration, m.data.gross.number(), json_query (data, '$.cast'), m.data.notes
+    select m.data.movie_id, m.data.title, m.data.duration, m.data.gross.number() gross, json_query (data, '$.cast') cast, m.data.notes
     from movies m
     where m.data.movie_id=3705;
     </copy>
@@ -355,7 +358,7 @@ JSON_Mergepatch follows RFC 7386 [https://datatracker.ietf.org/doc/html/rfc7386]
 
     ```
     <copy>
-    select m.data.movie_id, m.data.title, m.data.duration, m.data.gross.number(), json_query (data, '$.cast'), m.data.notes
+    select m.data.movie_id, m.data.title, m.data.duration, m.data.gross.number() gross, json_query (data, '$.cast') cast, m.data.notes
     from movies m
     where m.data.movie_id=3705;
 
