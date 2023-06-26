@@ -6,7 +6,7 @@
         {
             "title": "Introduction",
             "description": "Introduction",
-            "filename": "../../chance-js/Introduction/chance-js.md"
+            "filename": "../../introduction/intro-chance-js.md"
         },
         {
             "title": "Get Started with NoVNC",
@@ -16,12 +16,12 @@
         {
             "title": "Lab 1: Setup User and ORDS",
             "description": "Setup User",
-            "filename": "./../../change-pw/change-pw-json-enhancements.md"
+            "filename": "./../../change-pw/change-pw.md"
         },
         {
             "title": "Lab 2: Getting Started with Chance",
             "description": "Setting up",
-            "filename": "../../chance-js/Setting_Up/chance_setup-js.md"
+            "filename": "../../chance-js/chance-js.md"
         },
         {
             "title": "Need Help?",

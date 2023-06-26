@@ -18,7 +18,34 @@ In this lab you will have:
 This labs assumes you have: 
 * Oracle Database 23c Free Developer Release
 * All previous labs sucessfully completed 
-* SQL Developer Web 23.1 or a comptatible tool for running SQL statments
+* SQL Developer Web 23.1 or a comptatible tool for running SQL statements
+
+## Task 0: Connecting to your database user
+
+1. Your browser should still be open, if not just open a new one. If running in a Sandbox go to Activities and then at the top click on new window. If Chrome is not running then click on Chrome.
+
+    ![Image alt text](images/new_chrome_window.png " ")
+
+2. The address for SQL Developer Web on your machine is below. Copy and paste that into the browser.
+    **Note:** If you did not start ORDs, ORDs stopped working or you closed that terminal in the previous lab, go back and complete the steps in that lab to start ORDs otherwise it will not be running to login here.
+    ```
+    <copy>
+    http://localhost:8080/ords/hol23c/_sdw
+    </copy>
+    ```
+    ![Image alt text](images/ords_url.png " ")
+
+3. To login use the username hol23c with the password you set in Lab 1 in the browser.
+
+    ![Image alt text](images/ords_login.png " ")
+
+4. To be able to run SQL statements you will need the sql worksheet. Click on SQL to launch that.
+
+    ![Image alt text](images/ords_landing_page_launch.png " ")
+
+5. You are now logged in and should be at a screen that looks like this.
+
+    ![Image alt text](images/sql_login.png " ")    
 
 ## Task 1: Setup
 
@@ -412,8 +439,8 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     </copy>
     ```
 
-6. -- Generate 2 random dates (which includes time for Oracle database)
-   -- first one is a DATE, second one is a formatted string (or varchar2)
+6. Generate 2 random dates (which includes time for Oracle database)
+   first one is a DATE, second one is a formatted string (or varchar2)
     ```
     <copy>
     select chance."date", to_char( chance."date", 'yyyy-mm-dd hh24:mi:ss' );
