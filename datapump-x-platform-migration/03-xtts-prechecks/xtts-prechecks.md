@@ -48,7 +48,7 @@ Also check on target if the OS you want to migrate from is supporting datafile c
 The platform_id for the target Linux platform is 13:
   ```
     <copy>
-    @/home/oracle/scripts/task2
+    @/home/oracle/xtts/scripts/task2
     </copy>
   ```
 
@@ -69,7 +69,7 @@ The platform_id for the target Linux platform is 13:
 In this lab you migrate from Linux to Linux, so we can execute the same check on target:
   ```
     <copy>
-    @/home/oracle/scripts/task2
+    @/home/oracle/xtts/scripts/task2
     </copy>
   ```
 
@@ -91,7 +91,7 @@ You should always check that your source and target database are using in the sa
 Execute on __source__ and __target__:
   ```
     <copy>
-    @/home/oracle/scripts/task3a
+    @/home/oracle/xtts/scripts/task3a
     </copy>
   ```
 <details>
@@ -118,7 +118,7 @@ So check now if your source database has tables having columns with "__TimeStamp
 
   ```
     <copy>
-    @/home/oracle/scripts/task3b
+    @/home/oracle/xtts/scripts/task3b
     </copy>
   ```
 
@@ -148,7 +148,7 @@ The source and target database must use compatible database character sets.
 
   ```
     <copy>
-     @/home/oracle/scripts/task4
+     @/home/oracle/xtts/scripts/task4
     </copy>
   ```
 
@@ -181,7 +181,7 @@ In this lab you're going to transport the two tablespaces "TPCCTAB" and "USERS".
 
   ```
     <copy>
-    @/home/oracle/scripts/task5
+    @/home/oracle/xtts/scripts/task5
     </copy>
   ```
 
@@ -203,7 +203,7 @@ It's good practice to check if SYSTEM and SYSAUX tablespaces might accidentally 
 
   ```
     <copy>
-     @/home/oracle/scripts/task6
+     @/home/oracle/xtts/scripts/task6
     </copy>
   ```
 
@@ -228,7 +228,7 @@ Same check as in the previous task but this time for user indexes
 
   ```
     <copy>
-     @/home/oracle/scripts/task7
+     @/home/oracle/xtts/scripts/task7
     </copy>
   ```
 
@@ -254,7 +254,7 @@ IOT tables might get corrupted during XTTS copy when copying to HP platforms.
 
   ```
     <copy>
-     @/home/oracle/scripts/task8
+     @/home/oracle/xtts/scripts/task8
     </copy>
   ```
 
@@ -282,7 +282,7 @@ In Oracle Database 12.1 and earlier you can't move tables with XMLTYPEs using tr
 
   ```
     <copy>
-     @/home/oracle/scripts/task9
+     @/home/oracle/xtts/scripts/task9
     </copy>
   ```
 
@@ -312,7 +312,7 @@ Global temporary tables do not belong to any tablespace, so they are not transpo
 
   ```
     <copy>
-     @/home/oracle/scripts/task10
+     @/home/oracle/xtts/scripts/task10
     </copy>
   ```
 
