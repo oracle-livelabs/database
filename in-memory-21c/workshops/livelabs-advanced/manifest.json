@@ -1,6 +1,6 @@
 {
   "workshoptitle": "Learn How Database In-Memory Enables Real-Time Analytics",
-  "help": "livelabs-help-db_us@oracle.com",
+  "help": "andy.rivenes@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
@@ -18,7 +18,7 @@
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 3: Setting up the In-Memory Column Store",
+      "title": "Lab 3: Set up the In-Memory Column Store",
       "description": "Populating and administering the In-Memory column store",
       "filename": "../../setup/setup.md"
     },
@@ -50,12 +50,12 @@
     {
       "title": "Lab 9: In-Memory Full Text Columns",
       "description": "Using In-Memory Full Text Columns",
-      "filename": "../../text/full-text-col.md"
+      "filename": "../../im-text/full-text-col.md"
     },
     {
       "title": "Lab 10: In-Memory Spatial",
       "description": "In-Memory Spatial",
-      "filename": "../../spatial/im-spatial.md"
+      "filename": "../../im-spatial/im-spatial.md"
     },
     {
       "title": "Lab 11: In-Memory Hybrid Scans",
@@ -80,7 +80,7 @@
     {
       "title": "Lab 15: In-Memory Parallel Features",
       "description": "Using In-Memory with parallel features",
-      "filename": "../../parallel/parallel.md"
+      "filename": "../../im-parallel/parallel.md"
     },
     {
       "title": "Need Help?",
