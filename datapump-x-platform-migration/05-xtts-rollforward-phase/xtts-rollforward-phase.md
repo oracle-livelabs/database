@@ -337,5 +337,5 @@ You may now *proceed to the next lab*.
 
 ## Acknowledgements
 * **Author** - Klaus Gronau
-* **Contributors** -  
+* **Contributors** Mike Dietrich, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023

@@ -278,7 +278,7 @@ The Data Pump export parameter file "Exp_Metadata.par" was already created for y
 ### Step 1: Copy Prepared Export Data Pump Parameter File (SOURCE)
   ```
     <copy>
-     cat /home/oracle/xtts/Exp_Metadata.par
+     cat /home/oracle/xtts/exp_metadata.par
     </copy>
   ```
 
@@ -291,8 +291,8 @@ The Data Pump export parameter file "Exp_Metadata.par" was already created for y
 | Parameter | Comment |
 | :-------- | :-----|
 | DIRECTORY=XTTS\_METADATA\_DIR | Specifies the default location to which Export can write the dump file set and the log file |
-| DUMPFILE=exp\_Metadata.dmp | Is the name of the dump file |
-| logfile=XTTS\_export\_metadata.log | This parameter specifies the name for the log file of the export job. |
+| DUMPFILE=exp\_metadata.dmp | Is the name of the dump file |
+| logfile=xtts\_export\_metadata.log | This parameter specifies the name for the log file of the export job. |
 | FULL=Y | FULL specifies that you want to perform a full database mode export  |
 | TRANSPORTABLE=ALWAYS | In a full mode export (full=y), using the transportable option results in a full transportable export which exports all objects and data necessary to create a complete copy of the database.  |
 | VERSION=12 | Specifies the version of database objects that you want to export. Only database objects and attributes that are compatible with the specified release are exported.  |
@@ -307,7 +307,7 @@ Execute expdp using this copied par file:
 
   ```
     <copy>
-     expdp system/oracle@UPGR parfile=/home/oracle/xtts/Exp_Metadata.par
+     expdp system/oracle@UPGR parfile=/home/oracle/xtts/exp_metadata.par
     </copy>
   ```
 ![execute metadata data pump export on source ](./images/metadata-export.png " ")
@@ -526,7 +526,7 @@ Also the metadata import parameter file was precreated for you.
 
  ```
     <copy>
-     cat /home/oracle/xtts/Imp_Metadata.par
+     cat /home/oracle/xtts/imp_metadata.par
     </copy>
   ```
 
@@ -539,8 +539,8 @@ Also the metadata import parameter file was precreated for you.
 | Parameter | Comment |
 | :-------- | :-----|
 | DIRECTORY=XTTS\_METADATA\_DIR | Is the default location from which Import can read the dump file set and create the log file |
-| DUMPFILE=exp\_Metadata.dmp | Is the name of the dump file the import is going to read|
-| logfile=XTTS\_import\_metadata.log | This parameter specifies the name for the log file of the import job |
+| DUMPFILE=exp\_metadata.dmp | Is the name of the dump file the import is going to read|
+| logfile=xtts\_import\_metadata.log | This parameter specifies the name for the log file of the import job |
 | METRICS=Y | This setting indicates you want additional information about the job reported to the Data Pump log file  |
 | LOGTIME=ALL | Adds timestamp information to import opertaions  |
 | FULL=Y | Specifies that you want to perform a full database mode export   |
@@ -556,7 +556,7 @@ __ATTENTION__: Only proceed once the export on SOURCE has been completed.
 
   ```
    <copy>
-     impdp system/oracle@pdb3 parfile=/home/oracle/xtts/Imp_Metadata.par
+     impdp system/oracle@pdb3 parfile=/home/oracle/xtts/imp_metadata.par
     <copy>
   ```
 
@@ -1420,5 +1420,5 @@ You completed all stages of this XTTS lab migrating an Oracle 11g database direc
 
 ## Acknowledgements
 * **Author** - Klaus Gronau
-* **Contributors** -  
+* **Contributors** Mike Dietrich, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023
