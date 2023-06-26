@@ -27,7 +27,7 @@ Use this terminal window to execute all commands related to the __target__ datab
 All following screenshots related to the __target__ will have a light green_ background color.
 
 
-### Create OS Directory (TARGET)
+### Step 1: Create OS Directory (TARGET)
 Activate the target terminal window and create a directory for the XTTS target files.
 
   ```
@@ -38,7 +38,7 @@ Activate the target terminal window and create a directory for the XTTS target f
 
 ![Create target OS directory ](./images/create-target-os-dir.png " ")
 
-### change into XTTS working directory (TARGET)
+### Step 2: Change into XTTS Working Directory (TARGET)
 
 
   ```
@@ -49,7 +49,7 @@ Activate the target terminal window and create a directory for the XTTS target f
 
 ![change into XTTS target OS working directory ](./images/change-target-working-dir.png " ")
 
-### Unzip XTTS ZIP file (TARGET)
+### Step 3: Unzip XTTS ZIP file (TARGET)
   ```
     <copy>
     unzip /home/oracle/XTTS/rman_xttconvert_VER4.3.zip

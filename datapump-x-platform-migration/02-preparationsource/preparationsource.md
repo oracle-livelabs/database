@@ -28,7 +28,7 @@ All following screenshots related to the __source__ will have a __light blue__ b
 
 
 
-### Create OS Directories (SOURCE)
+### Step 1: Create OS Directories XTTS/SOURCE (SOURCE)
 Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another one as XTTS source and a third directory for RMAN backup/restore files.
 
   ```
@@ -38,12 +38,16 @@ Activate the source terminal window and create three directories; one for the Da
   ```
 ![Create XTTS source OS Directory](./images/mkdir-xtts-src-os-dir.png " ")
 
+### Step 2: Create OS Directories XTTS/DUMP (SOURCE)
+
   ```
     <copy>
     mkdir -p /home/oracle/XTTS/DUMP
     </copy>
   ```
 ![Create source OS Directory](./images/mkdir-xtts-dump-dir.png " ")
+
+### Step 3: Create OS Directories XTTS/RMAN (SOURCE)
 
   ```
     <copy>
@@ -54,7 +58,7 @@ Activate the source terminal window and create three directories; one for the Da
 ![Create source OS Directory](./images/mkdir-xtts-rman-dir.png " ")
 
 
-### Unzip XTTS ZIP file (SOURCE)
+### Step 4: Unzip XTTS ZIP File (SOURCE)
 
   ```
     <copy>
@@ -71,6 +75,7 @@ Activate the source terminal window and create three directories; one for the Da
 ![Unzipping the XTTS Perl V4 ZIP file on source](./images/unzip-xtts-src.png " ")
 
 ## Task 2: Set the Source Database Environment (SOURCE)
+### Step 1: Set Source Environment (SOURCE)
 
 Activate source terminal window, set the source environment and start SQL*Plus:
 
@@ -81,6 +86,7 @@ Activate source terminal window, set the source environment and start SQL*Plus:
  ```
 ![Set source database environment](./images/source-src-env.png " ")
 
+### Step 2: Start SQL*Plus (SOURCE)
   ```
     <copy>
     sqlplus / as sysdba
@@ -117,6 +123,7 @@ The next parameters you're going to set for RMAN work well in the lab. For your 
 
 On source start the rman console: 
 
+### Step 1: Open RMAN Console (SOURCE)
   ```
     <copy>
      rman target /
@@ -126,6 +133,7 @@ On source start the rman console:
 Please be aware:
 in RMAN terminology the target database identifies the database which you're going to back up - so in the migration terminology the source database
 
+### Step 2: Configure Default Parameters (SOURCE)
   ```
     <copy>
      configure default device type to disk;

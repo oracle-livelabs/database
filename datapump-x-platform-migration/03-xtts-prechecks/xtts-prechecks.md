@@ -23,7 +23,7 @@ This lab assumes you have:
 
 ## Start SQL*Plus (SOURCE and TARGET)
 
-### Source
+### Step 1: Source
   ```
     <copy>
     sqlplus / as sysdba
@@ -32,7 +32,7 @@ This lab assumes you have:
 
 ![Login to source 11.2.0.4 database](./images/open-prechecks-sqlplus-src.png " ")
 
-### Target
+### Step 2: Target
   ```
     <copy>
     sqlplus / as sysdba
@@ -312,7 +312,7 @@ There are no global temporary tables in our lab. When you have them in your data
 
 ## Task 10: Exit SQL*Plus (SOURCE and TARGET)
 
-### source
+### Step 1: Exit SQL*Plus on Source 
   ```
     <copy>
      exit;
@@ -321,6 +321,7 @@ There are no global temporary tables in our lab. When you have them in your data
 
 ![Exit from SQL*Plus on source](./images/precheck-task10-src.png " ")
 
+### Step 1: Exit SQL*Plus on Target 
 ### target
   ```
     <copy>

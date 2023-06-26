@@ -29,6 +29,7 @@ This lab assumes you have:
 
 ## Task 1: Setting Tablespaces to "read only" (SOURCE)
 
+### Step 1: Open SQL*Plus (SOURCE)
 Connect with "/ as sysdba" using SQL*Plus to the source database:
   ```
     <copy>
@@ -38,6 +39,7 @@ Connect with "/ as sysdba" using SQL*Plus to the source database:
 
 ![open sqlplus source](./images/transport-phase-sqlplus-src.png " ")
 
+### Step 2: Set Tablespaces Read Only (SOURCE)
 and execute:
 
   ```
@@ -58,6 +60,7 @@ and execute:
 ## Task 1: Final Incremental Backup (SOURCE)
 On source change into the XTTS Source directory and execute the final incremental backup:
 
+### Step 1: Setting Environment for Final Backup (SOURCE)
   ```
     <copy>
      cd /home/oracle/XTTS/SOURCE
@@ -68,15 +71,14 @@ On source change into the XTTS Source directory and execute the final incrementa
      Hit ENTER/RETURN to execute ALL commands.
   ```
 
-
 ![setting XTTS env on source](./images/env-final-backup.png " ")
 
+### Step 2: Starting Final Backup (SOURCE)
   ```
     <copy>
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
     </copy>
   ```
-
 
 ![execute final incremental backup](./images/final-incremental-backup.png " ")
 
@@ -179,7 +181,9 @@ You can safely ignore those warnings as they only tell you that you're going to 
 ## Task 2: Final Incremental Restore (TARGET)
 
 Open the target console.
-The final incremental restore also needs the "res.txt" and "incrbackups.txt" files from source. So copy them:
+The final incremental restore also needs the "res.txt" and "incrbackups.txt" files from source. 
+
+### Step 1: Copy "res.txt" (TARGET)
 
   ```
     <copy>
@@ -189,6 +193,7 @@ The final incremental restore also needs the "res.txt" and "incrbackups.txt" fil
 
 ![copying res.txt from source to target](./images/final-restore-copy-res-txt.png " ")
 
+### Step 2: Copy "incrbackups.txt" (TARGET)
   ```
     <copy>
      cp /home/oracle/XTTS/SOURCE/tmp/incrbackups.txt /home/oracle/XTTS/TARGET/tmp/incrbackups.txt
@@ -197,7 +202,8 @@ The final incremental restore also needs the "res.txt" and "incrbackups.txt" fil
 
 ![copying incrbackups.txt from source to target](./images/final-restore-copy-incrbackup-txt.png " ")
 
-And start the restore which recovers the target data files until exact the same SCN as the source database data files:
+### Step 3: Setting Environment for Final Restore (TARGET)
+
   ```
     <copy>
      cd /home/oracle/XTTS/TARGET
@@ -209,6 +215,9 @@ And start the restore which recovers the target data files until exact the same 
   ```
 
 ![starting final incremental restore](./images/env-final-restore.png " ")
+
+### Step 3: Starting Final Restore (TARGET)
+And start the restore which recovers the target data files until exact the same SCN as the source database data files:
   ```
     <copy>
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
@@ -266,6 +275,7 @@ End of rollforward phase
 Between this source and target database version, you can't use __Data Pump network_link__ (will fail with ORA-39169) and you have to export and import the metadata information instead.
 The Data Pump export parameter file "Exp_Metadata.par" was already created for you and is located in "/home/oracle/XTTS/"
 
+### Step 1: Copy Prepared Export Data Pump Parameter File (SOURCE)
   ```
     <copy>
      cat /home/oracle/XTTS/Exp_Metadata.par
@@ -291,8 +301,9 @@ The Data Pump export parameter file "Exp_Metadata.par" was already created for y
 
 </details>
 
+### Step2: Execute Export Data Pump (SOURCE)
+Execute expdp using this copied par file:
 
-and execute expdp using this par file
 
   ```
     <copy>
@@ -509,7 +520,9 @@ and execute expdp using this par file
 </details>
 
 ## Task 4: Metadata Import (TARGET)
-Also the metadata import parameter file was precreated for you:
+Also the metadata import parameter file was precreated for you.
+
+### Step 1: Copy Prepared Import Data Pump Parameter File (TARGET)
 
  ```
     <copy>
@@ -537,7 +550,7 @@ Also the metadata import parameter file was precreated for you:
 </details>
 
 
-
+### Step2: Execute Import Data Pump (TARGET)
 And import the metadata into the PDB3 using this Imp_Metadata.par parameter file:
 __ATTENTION__: Only proceed once the export on SOURCE has been completed.
 
@@ -1374,25 +1387,25 @@ ORA-21700: object does not exist or is marked for delete
 You should examine the Data Pump log files. Any errors should be investigated to determine whether they are significant for the import. Full transportable export/import often produces error on internal objects which can be ignored in most cases.
 
 
-### Check
+## Check
 Do you remember that you created a table "object_copy" in "tpcc"?
 You can now check if source and target match using SQL*Plus:
 
-### Source
+### Step 1: Open SQL*Plus (SOURCE)
   ```
     <copy>
      sqlplus tpcc/oracle
     </copy>
   ```
 
-### Target
+### Step 2: Open SQL*Plus (TARGET)
   ```
     <copy>
      sqlplus tpcc/oracle@pdb3
     </copy>
   ```
 
-### SQL Statement (SOURCE and TARGET)
+### Step 3: SQL Statement (SOURCE and TARGET)
   ```
     <copy>
      select count(*) from object_copy;
@@ -1401,7 +1414,7 @@ You can now check if source and target match using SQL*Plus:
 
 
 
-### Congratulations! 
+## Congratulations! 
 You completed all stages of this XTTS lab migrating an Oracle 11g database directly into a 21c PDB successfully!
 
 
