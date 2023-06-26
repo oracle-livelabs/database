@@ -21,7 +21,7 @@ This lab assumes you have:
 - Prepared the source
 - Prepared the target
 
-## Start SQL*Plus (SOURCE and TARGET)
+## Task 1: Start SQL*Plus (SOURCE and TARGET)
 
 ### Step 1: Source
   ```
@@ -40,12 +40,15 @@ This lab assumes you have:
  ```
 ![Login to target 21c database](./images/open-prechecks-sqlplus-trg.png " ")
 
-## Task 1: Transportable Tablespace Method Supported by Source and Target OS Platforms (SOURCE)
-Before you begin check on source database if the OS you want to migrate your database to is supporting datafile conversion. <br>
-By the way, the platform_id for the target Linux platform is 13:
+## Task 2: Transportable Tablespace Method Supported by Source and Target OS Platforms (SOURCE and TARGET)
+Before you begin check on source, if the OS you want to migrate your database to, is supporting datafile conversion. <br>
+Also check on target if the OS you want to migrate from is supporting datafile conversion.
+
+### Step 1: Check SOURCE
+The platform_id for the target Linux platform is 13:
   ```
     <copy>
-    @/home/oracle/scripts/Task1
+    @/home/oracle/scripts/task2
     </copy>
   ```
 
@@ -54,21 +57,41 @@ By the way, the platform_id for the target Linux platform is 13:
 
   ``` text
     select * from v$transportable_platform 
-    where platform_id=13 
+    where platform_name like 'Linux%' 
     order by platform_id;
 
   ```
 </details>
 
-![Check if target platform is supported](./images/precheck-task1-src.png " ")
+![Check if target platform is supported](./images/precheck-task2-src.png " ")
 
+### Step 2: Check TARGET
+In this lab you migrate from Linux to Linux, so we can execute the same check on target:
+  ```
+    <copy>
+    @/home/oracle/scripts/task2
+    </copy>
+  ```
 
-## Task 2: Database Timezone (SOURCE and TARGET)
+<details>
+ <summary>*click here to see the SQL Statement*</summary>
+
+  ``` text
+    select * from v$transportable_platform 
+    where platform_name like 'Linux%' 
+    order by platform_id;
+
+  ```
+</details>
+
+![Check if target platform is supported](./images/precheck-task2-trg.png " ")
+
+## Task 3: Database Timezone (SOURCE and TARGET)
 You should always check that your source and target database are using in the same database timezone (dbtimezone). 
 Execute on __source__ and __target__:
   ```
     <copy>
-    @/home/oracle/scripts/Task2a
+    @/home/oracle/scripts/task3a
     </copy>
   ```
 <details>
@@ -81,11 +104,11 @@ select dbtimezone from dual;
 
 The __source__ output:
 
-![Checking DBTIMEZONE on source](./images/precheck-task2a-src.png " ")
+![Checking DBTIMEZONE on source](./images/precheck-task3a-src.png " ")
 
 The __target__ output:
 
-![Checking DBTIMEZONE on target](./images/precheck-task2a-trg.png " ")
+![Checking DBTIMEZONE on target](./images/precheck-task3a-trg.png " ")
 
 In this lab there are no tables with "__TimeStamp with Local Time Zone__ (TSLTZ)" columns. No further action needed. Had there been such columns, you must change one of the databases or move the offending tables using a regular Data Pump export/import. 
 
@@ -95,7 +118,7 @@ So check now if your source database has tables having columns with "__TimeStamp
 
   ```
     <copy>
-    @/home/oracle/scripts/Task2b
+    @/home/oracle/scripts/task3b
     </copy>
   ```
 
@@ -120,12 +143,12 @@ So check now if your source database has tables having columns with "__TimeStamp
 ![Checking on source for Timestamp with local timezone dataypes](./images/precheck-task2b-src.png " ")
 In the lab there are no TSLTZ data types used. So no need to sync both DBTIMEZONEs or to handle data manually with expdp/impdp.
 
-## Task 3: Character Sets (SOURCE and TARGET)
+## Task 4: Character Sets (SOURCE and TARGET)
 The source and target database must use compatible database character sets.
 
   ```
     <copy>
-     @/home/oracle/scripts/Task3
+     @/home/oracle/scripts/task4
     </copy>
   ```
 
@@ -141,24 +164,24 @@ where parameter like '%CHARACTERSET';
 
 The __source__ output:
 
-![DBTIMEZONE output source](./images/precheck-task3-src.png " ")
+![DBTIMEZONE output source](./images/precheck-task4-src.png " ")
 
 The __target__ output:
 
-![DBTIMEZONE output target](./images/precheck-task3-trg.png " ")
+![DBTIMEZONE output target](./images/precheck-task4-trg.png " ")
 
 Both character sets in our lab match. 
 
 * Details about "[General Limitations on Transporting Data](https://docs.oracle.com/en/database/oracle/oracle-database/19/spucd/general-limitations-on-transporting-data.html#GUID-28800719-6CB9-4A71-95DD-4B61AA603173)" are mentioned in the manual
 
 
-## Task 4: XTTS Tablespace Violations (SOURCE) 
+## Task 5: XTTS Tablespace Violations (SOURCE) 
 For transportable tablespaces another requirement is that all tablespaces you're going to transport are self contained.
 In this lab you're going to transport the two tablespaces "TPCCTAB" and "USERS". So let's check if they are self contained:
 
   ```
     <copy>
-    @/home/oracle/scripts/Task4
+    @/home/oracle/scripts/task5
     </copy>
   ```
 
@@ -173,14 +196,14 @@ In this lab you're going to transport the two tablespaces "TPCCTAB" and "USERS".
   ```
 </details>
 
-![Checking on source that all tablespaces to migrate are self contained](./images/precheck-task4-src.png " ")
+![Checking on source that all tablespaces to migrate are self contained](./images/precheck-task5-src.png " ")
 
-## Task 5: User Data in SYSTEM/SYSAUX Tablespace (SOURCE)
+## Task 6: User Data in SYSTEM/SYSAUX Tablespace (SOURCE)
 It's good practice to check if SYSTEM and SYSAUX tablespaces might accidentally contain user data:
 
   ```
     <copy>
-     @/home/oracle/scripts/Task5
+     @/home/oracle/scripts/task6
     </copy>
   ```
 
@@ -197,15 +220,15 @@ It's good practice to check if SYSTEM and SYSAUX tablespaces might accidentally 
   ```
 </details>
 
-![checking if there are user tables in system or sysaux TBS](./images/precheck-task5-src.png " ")
+![checking if there are user tables in system or sysaux TBS](./images/precheck-task6-src.png " ")
 
 
-## Task 6: User Indexes in SYSTEM/SYSAUX Tablespace (SOURCE)
+## Task 7: User Indexes in SYSTEM/SYSAUX Tablespace (SOURCE)
 Same check as in the previous task but this time for user indexes
 
   ```
     <copy>
-     @/home/oracle/scripts/Task6
+     @/home/oracle/scripts/task7
     </copy>
   ```
 
@@ -223,7 +246,7 @@ Same check as in the previous task but this time for user indexes
 </details>
 
 
-![checking if there are user indexes in system or sysaux TBS](./images/precheck-task6-src.png " ")
+![checking if there are user indexes in system or sysaux TBS](./images/precheck-task7-src.png " ")
 
 ## Task 7: IOT Tables (SOURCE)
 IOT tables might get corrupted during XTTS copy when copying to HP platforms. 
@@ -231,7 +254,7 @@ IOT tables might get corrupted during XTTS copy when copying to HP platforms.
 
   ```
     <copy>
-     @/home/oracle/scripts/Task7
+     @/home/oracle/scripts/task8
     </copy>
   ```
 
@@ -250,16 +273,16 @@ IOT tables might get corrupted during XTTS copy when copying to HP platforms.
 </details>
 
 
-![Checking if we have to take care of IOT tables](./images/precheck-task7-src.png " ")
+![Checking if we have to take care of IOT tables](./images/precheck-task8-src.png " ")
 
 You can ignore this output because you're not moving to HP platform.
 
-## Task 8: Binary XMLTYPE Columns (SOURCE)
+## Task 9: Binary XMLTYPE Columns (SOURCE)
 In Oracle Database 12.1 and earlier you can't move tables with XMLTYPEs using transportable tablespaces. Ensure there are no such tables: 
 
   ```
     <copy>
-     @/home/oracle/scripts/Task8
+     @/home/oracle/scripts/task9
     </copy>
   ```
 
@@ -276,20 +299,20 @@ In Oracle Database 12.1 and earlier you can't move tables with XMLTYPEs using tr
   ```
 </details>
 
-![Checking if we have to take care of binary XML datatypes](./images/precheck-task8-src.png " ")
+![Checking if we have to take care of binary XML datatypes](./images/precheck-task9-src.png " ")
 
 Only XML data in SYSAUX tablespace which you're not going to migrate. So ignore them. Had there been such tables, you must move them using Data Pump export/import.
 
 * [Is it supported to do a Transport Tablespace (TTS) Import with Data Pump on a tablespace with binary XML objects ? (Doc ID 1908140.1) ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1908140.1&displayIndex=1)
 
 
-## Task 9: Global Temporary Tables (SOURCE)
+## Task 10: Global Temporary Tables (SOURCE)
 Global temporary tables do not belong to any tablespace, so they are not transported to the target database. Let's see if we have some global temporary tables and who might own them:
 
 
   ```
     <copy>
-     @/home/oracle/scripts/Task9
+     @/home/oracle/scripts/task10
     </copy>
   ```
 
@@ -306,11 +329,11 @@ Global temporary tables do not belong to any tablespace, so they are not transpo
   ```
 </details>
 
-![Checking if we have GLOBAL temporary tables on source](./images/precheck-task9-src.png " ")
+![Checking if we have GLOBAL temporary tables on source](./images/precheck-task10-src.png " ")
 
 There are no global temporary tables in our lab. When you have them in your database, you can migrate them using Data Pump export/import or generate the metadata from these tables and created them in the target database.
 
-## Task 10: Exit SQL*Plus (SOURCE and TARGET)
+## Task 11: Exit SQL*Plus (SOURCE and TARGET)
 
 ### Step 1: Exit SQL*Plus on Source 
   ```
@@ -319,7 +342,7 @@ There are no global temporary tables in our lab. When you have them in your data
     </copy>
   ```
 
-![Exit from SQL*Plus on source](./images/precheck-task10-src.png " ")
+![Exit from SQL*Plus on source](./images/precheck-task11-src.png " ")
 
 ### Step 1: Exit SQL*Plus on Target 
 ### target
@@ -328,7 +351,7 @@ There are no global temporary tables in our lab. When you have them in your data
      exit;
     </copy>
   ```
-![Exit from SQL*Plus on target](./images/precheck-task10-trg.png " ")
+![Exit from SQL*Plus on target](./images/precheck-task11-trg.png " ")
 
 
 

@@ -63,7 +63,7 @@ On source change into the XTTS Source directory and execute the final incrementa
 ### Step 1: Setting Environment for Final Backup (SOURCE)
   ```
     <copy>
-     cd /home/oracle/XTTS/SOURCE
+     cd /home/oracle/xtts/source
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
     </copy>
@@ -88,7 +88,7 @@ On source change into the XTTS Source directory and execute the final incrementa
   ``` text
     $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
     ============================================================
-    trace file is /home/oracle/XTTS/SOURCE/tmp/backup_Jun5_Mon_16_30_17_571//Jun5_Mon_16_30_17_571_.log
+    trace file is /home/oracle/xtts/source/tmp/backup_Jun5_Mon_16_30_17_571//Jun5_Mon_16_30_17_571_.log
     =============================================================
     
     --------------------------------------------------------------------
@@ -117,9 +117,9 @@ On source change into the XTTS Source directory and execute the final incrementa
     
     scalar(or2
     XXX: adding here for 2, 0, TPCCTAB,USERS
-    Added fname here 1:/home/oracle/XTTS/RMAN/USERS_4.tf
-    Added fname here 1:/home/oracle/XTTS/RMAN/TPCCTAB_5.tf
-    Added fname here 1:/home/oracle/XTTS/RMAN/TPCCTAB_6.tf
+    Added fname here 1:/home/oracle/xtts/rman/USERS_4.tf
+    Added fname here 1:/home/oracle/xtts/rman/TPCCTAB_5.tf
+    Added fname here 1:/home/oracle/xtts/rman/TPCCTAB_6.tf
     ============================================================
     No new datafiles added
     =============================================================
@@ -148,7 +148,7 @@ On source change into the XTTS Source directory and execute the final incrementa
     ####################################################################
     Warning:
     ------
-    Warnings found in executing /home/oracle/XTTS/SOURCE/tmp/backup_Jun5_Mon_16_30_17_571//xttpreparenextiter.sql
+    Warnings found in executing /home/oracle/xtts/source/tmp/backup_Jun5_Mon_16_30_17_571//xttpreparenextiter.sql
     ####################################################################
     Prepare newscn for Tablespaces: 'USERS'
     DECLARE*
@@ -160,11 +160,11 @@ On source change into the XTTS Source directory and execute the final incrementa
     ####################################################################
     Warning:
     ------
-    Warnings found in executing /home/oracle/XTTS/SOURCE/tmp/backup_Jun5_Mon_16_30_17_571//xttpreparenextiter.sql
+    Warnings found in executing /home/oracle/xtts/source/tmp/backup_Jun5_Mon_16_30_17_571//xttpreparenextiter.sql
     ####################################################################
     Prepare newscn for Tablespaces: ''''''''''''
-    New /home/oracle/XTTS/SOURCE/tmp/xttplan.txt with FROM SCN's generated
-    [UPGR] oracle@hol:~/XTTS/SOURCE
+    New /home/oracle/xtts/source/tmp/xttplan.txt with FROM SCN's generated
+    [UPGR] oracle@hol:~/xtts/source
   ```
 </details>
 
@@ -187,7 +187,7 @@ The final incremental restore also needs the "res.txt" and "incrbackups.txt" fil
 
   ```
     <copy>
-     cp /home/oracle/XTTS/SOURCE/tmp/res.txt /home/oracle/XTTS/TARGET/tmp/res.txt
+     cp /home/oracle/xtts/source/tmp/res.txt /home/oracle/xtts/target/tmp/res.txt
     </copy>
   ```
 
@@ -196,7 +196,7 @@ The final incremental restore also needs the "res.txt" and "incrbackups.txt" fil
 ### Step 2: Copy "incrbackups.txt" (TARGET)
   ```
     <copy>
-     cp /home/oracle/XTTS/SOURCE/tmp/incrbackups.txt /home/oracle/XTTS/TARGET/tmp/incrbackups.txt
+     cp /home/oracle/xtts/source/tmp/incrbackups.txt /home/oracle/xtts/target/tmp/incrbackups.txt
     </copy>
   ```
 
@@ -206,7 +206,7 @@ The final incremental restore also needs the "res.txt" and "incrbackups.txt" fil
 
   ```
     <copy>
-     cd /home/oracle/XTTS/TARGET
+     cd /home/oracle/xtts/target
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
     </copy>
@@ -232,10 +232,10 @@ The full output looks like:
  <summary>*click here to see the full final restore log file*</summary>
 
   ``` text
-[CDB3] oracle@hol:~/XTTS/TARGET
+[CDB3] oracle@hol:~/xtts/target
 $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
 ============================================================
-trace file is /home/oracle/XTTS/TARGET/tmp/restore_Jun5_Mon_16_54_14_139//Jun5_Mon_16_54_14_139_.log
+trace file is /home/oracle/xtts/target/tmp/restore_Jun5_Mon_16_54_14_139//Jun5_Mon_16_54_14_139_.log
 =============================================================
 
 --------------------------------------------------------------------
@@ -267,18 +267,18 @@ Start rollforward
 End of rollforward phase
 --------------------------------------------------------------------
 
-[CDB3] oracle@hol:~/XTTS/TARGET
+[CDB3] oracle@hol:~/xtts/target
   ```
 </details>
 
 ## Task 3: Metadata Export (SOURCE)
 Between this source and target database version, you can't use __Data Pump network_link__ (will fail with ORA-39169) and you have to export and import the metadata information instead.
-The Data Pump export parameter file "Exp_Metadata.par" was already created for you and is located in "/home/oracle/XTTS/"
+The Data Pump export parameter file "Exp_Metadata.par" was already created for you and is located in "/home/oracle/xtts/"
 
 ### Step 1: Copy Prepared Export Data Pump Parameter File (SOURCE)
   ```
     <copy>
-     cat /home/oracle/XTTS/Exp_Metadata.par
+     cat /home/oracle/xtts/Exp_Metadata.par
     </copy>
   ```
 
@@ -307,7 +307,7 @@ Execute expdp using this copied par file:
 
   ```
     <copy>
-     expdp system/oracle@UPGR parfile=/home/oracle/XTTS/Exp_Metadata.par
+     expdp system/oracle@UPGR parfile=/home/oracle/xtts/Exp_Metadata.par
     </copy>
   ```
 ![execute metadata data pump export on source ](./images/metadata-export.png " ")
@@ -509,7 +509,7 @@ Execute expdp using this copied par file:
     Master table "SYSTEM"."SYS_EXPORT_FULL_01" successfully loaded/unloaded
     ******************************************************************************
     Dump file set for SYSTEM.SYS_EXPORT_FULL_01 is:
-      /home/oracle/XTTS/DUMP/exp_Metadata.dmp
+      /home/oracle/xtts/dump/exp_Metadata.dmp
     ******************************************************************************
     Datafiles required for transportable tablespace TPCCTAB:
       /u02/oradata/UPGR/tpcctab01.dbf
@@ -526,7 +526,7 @@ Also the metadata import parameter file was precreated for you.
 
  ```
     <copy>
-     cat /home/oracle/XTTS/Imp_Metadata.par
+     cat /home/oracle/xtts/Imp_Metadata.par
     </copy>
   ```
 
@@ -556,7 +556,7 @@ __ATTENTION__: Only proceed once the export on SOURCE has been completed.
 
   ```
    <copy>
-     impdp system/oracle@pdb3 parfile=/home/oracle/XTTS/Imp_Metadata.par
+     impdp system/oracle@pdb3 parfile=/home/oracle/xtts/Imp_Metadata.par
     <copy>
   ```
 

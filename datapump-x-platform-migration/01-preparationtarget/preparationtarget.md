@@ -32,7 +32,7 @@ Activate the target terminal window and create a directory for the XTTS target f
 
   ```
     <copy>
-    mkdir -p /home/oracle/XTTS/TARGET/tmp
+    mkdir -p /home/oracle/xtts/target/tmp
     </copy>
   ```
 
@@ -43,7 +43,7 @@ Activate the target terminal window and create a directory for the XTTS target f
 
   ```
     <copy>
-    cd /home/oracle/XTTS/TARGET/
+    cd /home/oracle/xtts/target/
     </copy>
   ```
 
@@ -52,7 +52,7 @@ Activate the target terminal window and create a directory for the XTTS target f
 ### Step 3: Unzip XTTS ZIP file (TARGET)
   ```
     <copy>
-    unzip /home/oracle/XTTS/rman_xttconvert_VER4.3.zip
+    unzip /home/oracle/xtts/rman_xttconvert_VER4.3.zip
     </copy>
   ```
 ![Unzipping the XTTS Perl V4 ZIP file on target](./images/unzip-xtts-target.png " ")
@@ -82,9 +82,9 @@ When creating a PDB the admin user needs to exist. You can delete it later on if
   ```
     <copy>
     startup
-    create pluggable database PDB3 admin user adm identified by adm file_name_convert=('pdbseed', 'pdb3');
+    create pluggable database pdb3 admin user adm identified by adm file_name_convert=('pdbseed', 'pdb3');
     alter pluggable database pdb3 open;
-    alter pluggable database PDB3 save state;
+    alter pluggable database pdb3 save state;
     </copy>
     
     Hit ENTER/RETURN to execute ALL commands.
@@ -99,8 +99,8 @@ When creating a PDB the admin user needs to exist. You can delete it later on if
 
   ```
     <copy>
-    alter session set container=PDB3;
-    CREATE OR REPLACE DIRECTORY "XTTS_METADATA_DIR" AS '/home/oracle/XTTS/DUMP/';
+    alter session set container=pdb3;
+    CREATE OR REPLACE DIRECTORY "XTTS_METADATA_DIR" AS '/home/oracle/xtts/dump/';
     exit;
     </copy>
 
@@ -124,7 +124,7 @@ Hit ENTER/RETURN to execute ALL commands.
 
 
   ``` text
-[CDB3] oracle@hol:~/XTTS/target
+[CDB3] oracle@hol:~/xtts/target
 $ lsnrctl start
 
 LSNRCTL for Linux: Version 21.0.0.0.0 - Production on 01-JUN-2023 15:47:58

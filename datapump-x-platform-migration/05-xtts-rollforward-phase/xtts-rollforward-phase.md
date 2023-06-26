@@ -75,7 +75,7 @@ On source change into the XTTS Source directory and execute the incremental back
 ### Step 1: Setting Environment for Incremental Backup (SOURCE)
   ```
     <copy>
-     cd /home/oracle/XTTS/SOURCE
+     cd /home/oracle/xtts/source
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
     </copy>
@@ -97,10 +97,10 @@ On source change into the XTTS Source directory and execute the incremental back
  <summary>*click here to see the full incremental backup log file*</summary>
 
   ``` text
-    [UPGR] oracle@hol:~/XTTS/SOURCE
+    [UPGR] oracle@hol:~/xtts/source
     $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
     ============================================================
-    trace file is /home/oracle/XTTS/SOURCE/tmp/backup_Jun5_Mon_15_40_20_162//Jun5_Mon_15_40_20_162_.log
+    trace file is /home/oracle/xtts/source/tmp/backup_Jun5_Mon_15_40_20_162//Jun5_Mon_15_40_20_162_.log
     =============================================================
     
     --------------------------------------------------------------------
@@ -129,13 +129,13 @@ On source change into the XTTS Source directory and execute the incremental back
     
     scalar(or2
     XXX: adding here for 2, 0, TPCCTAB,USERS
-    Added fname here 1:/home/oracle/XTTS/RMAN/USERS_4.tf
-    Added fname here 1:/home/oracle/XTTS/RMAN/TPCCTAB_5.tf
-    Added fname here 2:/home/oracle/XTTS/RMAN/TPCCTAB_6.tf , fname is /u02/oradata/CDB3/pdb3/TPCCTAB_6.dbf
+    Added fname here 1:/home/oracle/xtts/rman/USERS_4.tf
+    Added fname here 1:/home/oracle/xtts/rman/TPCCTAB_5.tf
+    Added fname here 2:/home/oracle/xtts/rman/TPCCTAB_6.tf , fname is /u02/oradata/CDB3/pdb3/TPCCTAB_6.dbf
     ============================================================
     1 new datafiles added
     =============================================================
-    TPCCTAB,/home/oracle/XTTS/RMAN/TPCCTAB_6.tf
+    TPCCTAB,/home/oracle/xtts/rman/TPCCTAB_6.tf
     ============================================================
     Running prepare cmd for new filesx TPCCTAB_6.tf
     =============================================================
@@ -158,8 +158,8 @@ On source change into the XTTS Source directory and execute the incremental back
     Prepare newscn for Tablespaces: 'TPCCTAB'
     Prepare newscn for Tablespaces: 'USERS'
     Prepare newscn for Tablespaces: ''''''''''''
-    New /home/oracle/XTTS/SOURCE/tmp/xttplan.txt with FROM SCN's generated
-    [UPGR] oracle@hol:~/XTTS/SOURCE
+    New /home/oracle/xtts/source/tmp/xttplan.txt with FROM SCN's generated
+    [UPGR] oracle@hol:~/xtts/source
   ```
 </details>
 
@@ -177,7 +177,7 @@ So before overwriting __res.txt__ on target, let's check out the content of this
 Source:
   ```
     <copy>
-     cat /home/oracle/XTTS/SOURCE/tmp/res.txt 
+     cat /home/oracle/xtts/source/tmp/res.txt 
     </copy>
   ```
 ![res.txt content on source](./images/res-txt-src.png " ") 
@@ -185,7 +185,7 @@ Source:
 Target:
   ```
     <copy>
-     cat /home/oracle/XTTS/TARGET/tmp/res.txt
+     cat /home/oracle/xtts/target/tmp/res.txt
     </copy>
   ```
 ![res.txt content on target](./images/res-txt-trg.png " ") 
@@ -200,13 +200,13 @@ So let's continue with the process and copy both files from the source to the ta
 
   ```
     <copy>
-     cp /home/oracle/XTTS/SOURCE/tmp/res.txt /home/oracle/XTTS/TARGET/tmp/res.txt
+     cp /home/oracle/xtts/source/tmp/res.txt /home/oracle/xtts/target/tmp/res.txt
     </copy>
   ```
 ### Step 2: Copy "incrbackups.txt" (TARGET)
   ```
     <copy>
-     cp /home/oracle/XTTS/SOURCE/tmp/incrbackups.txt /home/oracle/XTTS/TARGET/tmp/incrbackups.txt
+     cp /home/oracle/xtts/source/tmp/incrbackups.txt /home/oracle/xtts/target/tmp/incrbackups.txt
     </copy>
   ```
 
@@ -216,7 +216,7 @@ So let's continue with the process and copy both files from the source to the ta
 And start the restore:
   ```
     <copy>
-     cd /home/oracle/XTTS/TARGET
+     cd /home/oracle/xtts/target
      export XTTDEBUG=0
      export TMPDIR=${PWD}/tmp
     </copy>
@@ -242,7 +242,7 @@ And start the restore:
   ``` text
 $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
 ============================================================
-trace file is /home/oracle/XTTS/TARGET/tmp/restore_Jun5_Mon_15_59_20_665//Jun5_Mon_15_59_20_665_.log
+trace file is /home/oracle/xtts/target/tmp/restore_Jun5_Mon_15_59_20_665//Jun5_Mon_15_59_20_665_.log
 =============================================================
 
 --------------------------------------------------------------------
@@ -279,7 +279,7 @@ Start rollforward
 End of rollforward phase
 --------------------------------------------------------------------
 
-[CDB3] oracle@hol:~/XTTS/TARGET 
+[CDB3] oracle@hol:~/xtts/target 
   ```
 </details>
 
@@ -297,7 +297,7 @@ You used on source the xtt.properties file created in the previous lab:
 
   ```
     <copy>
-    ls -al /home/oracle/XTTS/SOURCE/xtt.properties
+    ls -al /home/oracle/xtts/source/xtt.properties
     </copy>
   ```
 ![source xtt.properties file](./images/ls-src-xtt-properties.png " ")
@@ -306,7 +306,7 @@ Listing the directory content created in the RMAN backup location containing the
 
   ```
     <copy>
-    ls -al /home/oracle/XTTS/RMAN
+    ls -al /home/oracle/xtts/rman
     </copy>
   ```
 ![RMAN backup datafiles](./images/roll-forward-incr-backup-files.png " ")
@@ -315,7 +315,7 @@ Listing the directory content created in the RMAN backup location containing the
 and the other two mandatory driving files for the restore - the res.txt and incrbackup.txt file - plus all log files of the backup are located in:
   ```
     <copy>
-    ls -al /home/oracle/XTTS/SOURCE/tmp/
+    ls -al /home/oracle/xtts/source/tmp/
     </copy>
   ```
 ![xtts source tmp directory content](./images/roll-forward-ls-src.png " ")
@@ -326,7 +326,7 @@ and the other two mandatory driving files for the restore - the res.txt and incr
 You copied the xtt.properties and the res.txt file from source to target. RMAN read the same files the backup process created - so these files match between source and target. An interesting directory created by the restore process is the target XTTS/tmp directory containing the log files:
   ```
     <copy>
-    ls -al /home/oracle/XTTS/TARGET/tmp
+    ls -al /home/oracle/xtts/target/tmp
     </copy>
   ```
 ![RMAN backup datafiles](./images/roll-forward-ls-target.png " ")
