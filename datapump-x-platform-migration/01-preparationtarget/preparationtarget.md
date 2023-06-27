@@ -19,18 +19,18 @@ This lab assumes you have:
 ## Task 1: Open Terminal Window, Create OS Target Directory and Unzip XTTS ZIP File (TARGET)
 
 ### Open Terminal Window 
-Click on the xtts icon 
+Click on the "xtts" icon 
 ![Screenshot of the Linux Hands On Lab Terminal icon](./images/xtts-source-target-terminal.png " ")
-which will open two terminal sessions; a light green one which you can use to perform all __target__ related operations 
-![Screenshot of the HOL target terminal session](./images/target-terminal.png " ")
-and a light blue one for all __source__ tasks
-![Screenshot of the HOL source terminal session](./images/source-terminal.png " ")
+which will open a terminal session with two tabs; you can use the light green tab to execute all __target__ related commands 
+![Screenshot of the HOL target terminal session](./images/target-terminal.png =50%x50%)
+and the light blue one for all __source__:
+![Screenshot of the HOL source terminal session](./images/source-terminal.png =50%x50%)
 
 The screenshots in this lab will use the same coloring.
 
 
 ### Step 1: Create OS Directory (TARGET)
-Activate the target terminal window and create a directory for the XTTS target files.
+Activate the terminal target tab window and create a directory for the XTTS target files.
 
   ```
     <copy>
