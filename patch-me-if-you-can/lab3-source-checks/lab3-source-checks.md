@@ -1,4 +1,4 @@
-## Lab 3 - Checks in the SOURCE Environment
+# Lab 3 - Checks in the SOURCE Environment
 
 We will use this lab to check several things in the source environment while the installation in the new environment progresses.
 

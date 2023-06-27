@@ -1,4 +1,4 @@
-## Lab 5 - In-Place Patching
+# Lab 5 - In-Place Patching
 The benefit of the out-of-place patching method is not only that the previous home is preserved for a potential fallback but it only allows much shorter downtime. In order to see the difference you could patch now the 19.18.0 source home in-place.
 
 **Task 1 - Checks for in-place patching**
