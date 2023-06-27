@@ -16,17 +16,7 @@ This lab assumes you have:
 
 - Connected to the lab
 
-## Task 1: Open Terminal Window, Create OS Source Directory and Unzip XTTS ZIP File (SOURCE)
-
-### Open Terminal Window 
-Open another terminal windows by clicking on the "Terminal" icon. <br> 
-Use this second terminal window to execute all commands related to the __source__ database.
-
-![Screenshot of the Linux Hands On Lab Terminal icon](./images/terminal.png " ")
-
-All following screenshots related to the __source__ will have a __light blue__ background color.
-
-
+## Task 1: Create OS Source Directory and Unzip XTTS ZIP File (SOURCE)
 
 ### Step 1: Create OS Directories (SOURCE)
 Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another one as XTTS source and a third directory for RMAN backup/restore files.

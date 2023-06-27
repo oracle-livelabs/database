@@ -19,12 +19,14 @@ This lab assumes you have:
 ## Task 1: Open Terminal Window, Create OS Target Directory and Unzip XTTS ZIP File (TARGET)
 
 ### Open Terminal Window 
-Open a terminal windows by clicking on the "Terminal" icon. <br>
-Use this terminal window to execute all commands related to the __target__ database.
+Click on the xtts icon 
+![Screenshot of the Linux Hands On Lab Terminal icon](./images/xtts-source-target-terminal.png " ")
+which will open two terminal sessions; a light green one which you can use to perform all __target__ related operations 
+![Screenshot of the HOL target terminal session](./images/target-terminal.png " ")
+and a light blue one for all __source__ tasks
+![Screenshot of the HOL source terminal session](./images/source-terminal.png " ")
 
-![Screenshot of the Linux Hands On Lab Terminal icon](./images/terminal.png " ")
-
-All following screenshots related to the __target__ will have a light green_ background color.
+The screenshots in this lab will use the same coloring.
 
 
 ### Step 1: Create OS Directory (TARGET)
