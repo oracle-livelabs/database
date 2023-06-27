@@ -29,7 +29,7 @@ In this lab, you will:
 
 3. Click **Oracle Database** -> **Autonomous Transaction Processing**.
 
-    ![Click Autonomous Data Warehouse.](./images/oci-navigation-adw.png " ")
+    ![Select ATP.](https://oracle-livelabs.github.io/common/images/console/database-atp.png " ")
 
 4. On the left side, make sure your **Workload Type** is **Transaction Processing** or **All** to see your ATP-S instances. Use the **Compartment** drop-down menu to select a compartment.
 
