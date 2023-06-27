@@ -20,11 +20,11 @@ This lab assumes you have:
 
 ### Open Terminal Window 
 Click on the "xtts" icon 
-![Screenshot of the Linux Hands On Lab Terminal icon](./images/xtts-source-target-terminal.png " ")
+![Screenshot of the Linux Hands On Lab Terminal icon](./images/xtts-source-target-terminal.png =40%x40%)
 which will open a terminal session with two tabs; you can use the light green tab to execute all __target__ related commands 
-![Screenshot of the HOL target terminal session](./images/target-terminal.png =50%x50%)
+![Screenshot of the HOL target terminal session](./images/target-terminal-tab.png =50%x50%)
 and the light blue one for all __source__:
-![Screenshot of the HOL source terminal session](./images/source-terminal.png =50%x50%)
+![Screenshot of the HOL source terminal session](./images/source-terminal-tab.png =50%x50%)
 
 The screenshots in this lab will use the same coloring.
 
