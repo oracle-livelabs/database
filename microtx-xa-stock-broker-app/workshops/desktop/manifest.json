@@ -1,0 +1,38 @@
+{
+  "workshoptitle": "Simplify distributed transactions with Oracle MicroTx to prevent inconsistent data and financial losses",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The Introduction is always second for LiveLabs. The title and contents menu title match for the Introduction.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Log In",
+      "description": "Using noVNC Remote Desktop",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs-novnc.md"
+    },
+    {
+      "title": "Get Started with noVNC Remote Desktop",
+      "description": "Using noVNC Remote Desktop",
+      "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+    },
+    {
+      "title": "Lab 1: Integrate MicroTx Client Libraries with XA Sample Application",
+      "filename": "../../integrate-microtx-lib-files/integrate-microtx-lib-files.md"
+    },
+    {
+      "title": "Lab 2: Provision Autonomous Databases for Use as Resource Manager",
+      "filename": "../../adb-provision/adb-provision.md"
+    },
+    {
+      "title": "Lab 3: Trade Stocks with the Bank and Stock-Trading Application",
+      "filename": "../../run-xa-app/run-xa-app.md"
+    },
+    {
+      "title": "Need help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}
