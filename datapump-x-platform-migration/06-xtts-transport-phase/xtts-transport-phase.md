@@ -275,7 +275,7 @@ End of rollforward phase
 Between this source and target database version, you can't use __Data Pump network_link__ (will fail with ORA-39169) and you have to export and import the metadata information instead.
 The Data Pump export parameter file "Exp_Metadata.par" was already created for you and is located in "/home/oracle/xtts/"
 
-### Step 1: Copy Prepared Export Data Pump Parameter File (SOURCE)
+### Step 1: Prepared Export Data Pump Parameter File (SOURCE)
   ```
     <copy>
      cat /home/oracle/xtts/exp_metadata.par
@@ -522,7 +522,7 @@ Execute expdp using this copied par file:
 ## Task 4: Metadata Import (TARGET)
 Also the metadata import parameter file was precreated for you.
 
-### Step 1: Copy Prepared Import Data Pump Parameter File (TARGET)
+### Step 1: Prepared Import Data Pump Parameter File (TARGET)
 
  ```
     <copy>
@@ -1386,8 +1386,215 @@ ORA-21700: object does not exist or is marked for delete
 
 You should examine the Data Pump log files. Any errors should be investigated to determine whether they are significant for the import. Full transportable export/import often produces error on internal objects which can be ignored in most cases.
 
+## Task 5: Metadata SQL (SOURCE/TARGET)
+Sometimes you need to analyze the root cause of an import failure. Did you know, you can create the metadat of your database from the Data Pump dump file?
 
-## Check
+## Task 3: Metadata Export (SOURCE)
+Between this source and target database version, you can't use __Data Pump network_link__ (will fail with ORA-39169) and you have to export and import the metadata information instead.
+The Data Pump export parameter file "Exp_Metadata.par" was already created for you and is located in "/home/oracle/xtts/"
+
+### Step 1: Prepared Export Data Pump Parameter File (SOURCE)
+  ```
+    <copy>
+     cat /home/oracle/xtts/sql_metadata_exp.par
+    </copy>
+  ```
+
+![view metadata export Data Pump parameter file on source ](./images/sql-metadat-export-par.png " ")
+
+<details>
+ <summary>*click here if you want to see the Data Pump export parameter file and a short description*</summary>
+
+
+| Parameter | Comment |
+| :-------- | :-----|
+| directory=XTTS\_METADATA\_DIR | Specifies the default location to which export can write the dump file set and the log file |
+| dumpfile=upgr\_metadata\_%U.dmp | Is the name of the dump file |
+| cluster=N | Restricts to execute the current job on the node where it was started  |
+| job_name=cre_metadata_exp | Specifies a job name for the metadata export  |
+| content=metadata_only | Exports only metadata  |
+| filesize=10737418240 | Restricts the export of the Data Pump export to given amount of bytes  |
+| logfile=cre\_metadata\_exp.log | This parameter specifies the name for the log file of the export job. |
+| full=y | FULL specifies that you want to perform a full database mode export  |
+| parallel=1 | In 11.2 metadata is only exported with parallelism of 1  |
+{: title="Data Pump Metadata Export Parameter File"}
+
+</details>
+
+### Step2: Execute Export Data Pump (SOURCE)
+Execute expdp using this copied par file:
+
+
+  ```
+    <copy>
+     expdp system/oracle@UPGR parfile=/home/oracle/xtts/sql_metadata_exp.par
+    </copy>
+  ```
+![execute metadata data pump export on source ](./images/sql-metadata-export.png " ")
+
+
+<details>
+ <summary>*click here to see the full metadata EXPDP log file*</summary>
+
+  ``` text
+ [UPGR] oracle@hol:~/xtts
+$ expdp system/oracle@UPGR parfile=/home/oracle/xtts/sql_metadata_exp.par
+
+Export: Release 11.2.0.4.0 - Production on Tue Jun 27 11:28:51 2023
+
+Copyright (c) 1982, 2011, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+Starting "SYSTEM"."CRE_METADATA_EXP":  system/********@UPGR parfile=/home/oracle/xtts/sql_metadata_exp.par
+Processing object type DATABASE_EXPORT/TABLESPACE
+Processing object type DATABASE_EXPORT/PROFILE
+Processing object type DATABASE_EXPORT/SYS_USER/USER
+Processing object type DATABASE_EXPORT/SCHEMA/USER
+Processing object type DATABASE_EXPORT/ROLE
+Processing object type DATABASE_EXPORT/GRANT/SYSTEM_GRANT/PROC_SYSTEM_GRANT
+Processing object type DATABASE_EXPORT/SCHEMA/GRANT/SYSTEM_GRANT
+Processing object type DATABASE_EXPORT/SCHEMA/ROLE_GRANT
+Processing object type DATABASE_EXPORT/SCHEMA/DEFAULT_ROLE
+Processing object type DATABASE_EXPORT/SCHEMA/TABLESPACE_QUOTA
+Processing object type DATABASE_EXPORT/RESOURCE_COST
+Processing object type DATABASE_EXPORT/TRUSTED_DB_LINK
+Processing object type DATABASE_EXPORT/SCHEMA/SEQUENCE/SEQUENCE
+Processing object type DATABASE_EXPORT/DIRECTORY/DIRECTORY
+Processing object type DATABASE_EXPORT/DIRECTORY/GRANT/OWNER_GRANT/OBJECT_GRANT
+Processing object type DATABASE_EXPORT/CONTEXT
+Processing object type DATABASE_EXPORT/SCHEMA/PUBLIC_SYNONYM/SYNONYM
+Processing object type DATABASE_EXPORT/SCHEMA/SYNONYM
+Processing object type DATABASE_EXPORT/SCHEMA/TYPE/TYPE_SPEC
+Processing object type DATABASE_EXPORT/SYSTEM_PROCOBJACT/PRE_SYSTEM_ACTIONS/PROCACT_SYSTEM
+Processing object type DATABASE_EXPORT/SYSTEM_PROCOBJACT/PROCOBJ
+Processing object type DATABASE_EXPORT/SYSTEM_PROCOBJACT/POST_SYSTEM_ACTIONS/PROCACT_SYSTEM
+Processing object type DATABASE_EXPORT/SCHEMA/PROCACT_SCHEMA
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/TABLE
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/PRE_TABLE_ACTION
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/GRANT/OWNER_GRANT/OBJECT_GRANT
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/COMMENT
+Processing object type DATABASE_EXPORT/SCHEMA/PACKAGE/PACKAGE_SPEC
+Processing object type DATABASE_EXPORT/SCHEMA/FUNCTION/FUNCTION
+Processing object type DATABASE_EXPORT/SCHEMA/PROCEDURE/PROCEDURE
+Processing object type DATABASE_EXPORT/SCHEMA/PACKAGE/COMPILE_PACKAGE/PACKAGE_SPEC/ALTER_PACKAGE_SPEC
+Processing object type DATABASE_EXPORT/SCHEMA/FUNCTION/ALTER_FUNCTION
+Processing object type DATABASE_EXPORT/SCHEMA/PROCEDURE/ALTER_PROCEDURE
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/INDEX/INDEX
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/CONSTRAINT/CONSTRAINT
+Processing object type DATABASE_EXPORT/SCHEMA/VIEW/VIEW
+Processing object type DATABASE_EXPORT/SCHEMA/VIEW/GRANT/OWNER_GRANT/OBJECT_GRANT
+Processing object type DATABASE_EXPORT/SCHEMA/VIEW/COMMENT
+Processing object type DATABASE_EXPORT/SCHEMA/PACKAGE_BODIES/PACKAGE/PACKAGE_BODY
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/CONSTRAINT/REF_CONSTRAINT
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/POST_TABLE_ACTION
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/TRIGGER
+Processing object type DATABASE_EXPORT/SCHEMA/POST_SCHEMA/PROCACT_SCHEMA
+Processing object type DATABASE_EXPORT/AUDIT
+Master table "SYSTEM"."CRE_METADATA_EXP" successfully loaded/unloaded
+******************************************************************************
+Dump file set for SYSTEM.CRE_METADATA_EXP is:
+  /home/oracle/XTTS/DUMP/upgr_metadata_01.dmp
+Job "SYSTEM"."CRE_METADATA_EXP" successfully completed at Tue Jun 27 11:29:37 2023 elapsed 0 00:00:44
+  ```
+</details>
+
+
+
+### Step 3 Prepared Metadata SQL Import Parameter File
+  ```
+    <copy>
+     cat /home/oracle/xtts/sql_metadata_imp.par
+    </copy>
+  ```
+
+![view metadata export Data Pump parameter file on source ](./images/metadat-export-par.png " ")
+
+<details>
+ <summary>*click here if you want to see the Data Pump export parameter file and a short description*</summary>
+
+
+| Parameter | Comment |
+| :-------- | :-----|
+| DIRECTORY=XTTS\_METADATA\_DIR | Specifies the default location to which Export can write the dump file set and the log file |
+| DUMPFILE=exp\_metadata.dmp | Is the name of the dump file |
+| logfile=xtts\_export\_metadata.log | This parameter specifies the name for the log file of the export job. |
+| sqlfile=upgr_metadata.sql | The name of the file containing SQL statements of the metadata  |
+| job_name=cre_metadata | The name of the import Data Pump job  |
+{: title="Data Pump Metadata Import SQL Parameter File"}
+
+</details>
+
+
+### Step 4 Generating SQL
+
+
+  ```
+   <copy>
+     impdp system/oracle@pdb3 parfile=/home/oracle/xtts/sql_metadata_imp.par
+    <copy>
+  ```
+
+![execute data pump metadata import](./images/sql-metadata-import.png " ")
+
+<details>
+ <summary>*click here to see the full metadata IMPDP log file*</summary>
+
+  ``` text
+[CDB3] oracle@hol:~/xtts
+$ impdp system/oracle@pdb3 parfile=/home/oracle/xtts/sql_metadata_imp.par
+
+Import: Release 21.0.0.0.0 - Production on Tue Jun 27 11:42:33 2023
+Version 21.5.0.0.0
+
+Copyright (c) 1982, 2021, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
+Master table "SYSTEM"."CRE_METADATA" successfully loaded/unloaded
+Starting "SYSTEM"."CRE_METADATA":  system/********@pdb3 parfile=/home/oracle/xtts/sql_metadata_imp.par
+Processing object type DATABASE_EXPORT/TABLESPACE
+Processing object type DATABASE_EXPORT/PROFILE
+Processing object type DATABASE_EXPORT/SYS_USER/USER
+Processing object type DATABASE_EXPORT/SCHEMA/USER
+Processing object type DATABASE_EXPORT/ROLE
+Processing object type DATABASE_EXPORT/GRANT/SYSTEM_GRANT/PROC_SYSTEM_GRANT
+Processing object type DATABASE_EXPORT/SCHEMA/GRANT/SYSTEM_GRANT
+Processing object type DATABASE_EXPORT/SCHEMA/ROLE_GRANT
+Processing object type DATABASE_EXPORT/SCHEMA/DEFAULT_ROLE
+Processing object type DATABASE_EXPORT/SCHEMA/TABLESPACE_QUOTA
+Processing object type DATABASE_EXPORT/RESOURCE_COST
+Processing object type DATABASE_EXPORT/TRUSTED_DB_LINK
+Processing object type DATABASE_EXPORT/SCHEMA/SEQUENCE/SEQUENCE
+Processing object type DATABASE_EXPORT/DIRECTORY/DIRECTORY
+Processing object type DATABASE_EXPORT/DIRECTORY/GRANT/OWNER_GRANT/OBJECT_GRANT
+Processing object type DATABASE_EXPORT/CONTEXT
+Processing object type DATABASE_EXPORT/SCHEMA/TYPE/TYPE_SPEC
+Processing object type DATABASE_EXPORT/SYSTEM_PROCOBJACT/PRE_SYSTEM_ACTIONS/PROCACT_SYSTEM
+Processing object type DATABASE_EXPORT/SYSTEM_PROCOBJACT/PROCOBJ
+Processing object type DATABASE_EXPORT/SYSTEM_PROCOBJACT/POST_SYSTEM_ACTIONS/PROCACT_SYSTEM
+Processing object type DATABASE_EXPORT/SCHEMA/PROCACT_SCHEMA
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/TABLE
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/PRE_TABLE_ACTION
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/GRANT/OWNER_GRANT/OBJECT_GRANT
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/COMMENT
+Processing object type DATABASE_EXPORT/SCHEMA/PACKAGE/PACKAGE_SPEC
+Processing object type DATABASE_EXPORT/SCHEMA/PROCEDURE/PROCEDURE
+Processing object type DATABASE_EXPORT/SCHEMA/PACKAGE/COMPILE_PACKAGE/PACKAGE_SPEC/ALTER_PACKAGE_SPEC
+Processing object type DATABASE_EXPORT/SCHEMA/PROCEDURE/ALTER_PROCEDURE
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/INDEX/INDEX
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/CONSTRAINT/CONSTRAINT
+Processing object type DATABASE_EXPORT/SCHEMA/VIEW/VIEW
+Processing object type DATABASE_EXPORT/SCHEMA/PACKAGE_BODIES/PACKAGE/PACKAGE_BODY
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/CONSTRAINT/REF_CONSTRAINT
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/POST_TABLE_ACTION
+Processing object type DATABASE_EXPORT/SCHEMA/TABLE/TRIGGER
+Processing object type DATABASE_EXPORT/SCHEMA/POST_SCHEMA/PROCACT_SCHEMA
+Processing object type DATABASE_EXPORT/AUDIT
+Job "SYSTEM"."CRE_METADATA" successfully completed at Tue Jun 27 11:42:44 2023 elapsed 0 00:00:09
+  ```
+</details>
+
+## Task  6: Check
 Do you remember that you created a table "object_copy" in "tpcc"?
 You can now check if source and target match using SQL*Plus:
 
