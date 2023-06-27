@@ -1,5 +1,6 @@
 # Lab 6 - Cleanup Inventory and Final Checks
 
+## Introduction 
 You are done now. You did patch out-of place what we highly recommend, and you may have done also a more work-intense in-place patching exercise. So, let us check some things in the environment. 
 
 Use the Oracle 19.19.0 TAB of your terminal.

@@ -1,5 +1,7 @@
 # Lab 2 - Installation and Patching
 
+## Introduction 
+
 In this lab exercise you will install Oracle Database 19.19.0 into a separate home and patch it fully unattended in one single operation. Out-of-place patching is the preferred method, not only for the Database home but also for the Grid Infrastructure Home.
 
 **This is the list of software and patches you are going to install now:**
