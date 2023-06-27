@@ -2,15 +2,32 @@
 
 We will use this lab to check several things in the source environment while the installation in the new environment progresses.
 
-**Task 1 - Checks**
+## Task 1 - Checks
+
+### Step 1: Set the Source Database Environment
+
 Switch to the other tab titled "19.18.0 Source Home" and set the environment.
-`. cdb2`
+  ```
+    <copy>
+    . cdb2
+    </copy>
+  ```
+  
+### Step 2: Current Installed Patches
 
 Check the installed patches in the current 19.18.0 home:
-`./OPatch/opatch lspatches`
+ 
+  ```
+    <copy>
+    ./OPatch/opatch lspatches
+    </copy>
+  ```
 
-You will receive this output:
-```
+
+<details>
+ <summary>*click here to see the full output*</summary>
+
+  ``` text
 35246710;HIGH DIRECT PATH READ AFTER 19.18 DBRU PATCHING
 35213579;MERGE ON DATABASE RU 19.18.0.0.0 OF 35037877 35046819
 35162446;NEED BEHAVIOR CHANGE TO BE SWITCHED OFF
@@ -32,31 +49,56 @@ You will receive this output:
 34786990;OJVM RELEASE UPDATE: 19.18.0.0.230117 (34786990)
 34765931;Database Release Update : 19.18.0.0.230117 (34765931)
 29585399;OCW RELEASE UPDATE 19.3.0.0.0 (29585399)
-```
+  ```
+</details>
+
+### Step 3: Current Java Version
 
 Check the current JDK version:
-`$ $ORACLE_HOME/jdk/bin/java -version`
+  ```
+    <copy>
+     $ORACLE_HOME/jdk/bin/java -version
+    </copy>
+  ```
 
-Out will be:
-```
-java version "1.8.0_351"
-Java(TM) SE Runtime Environment (build 1.8.0_351-b10)
-Java HotSpot(TM) 64-Bit Server VM (build 25.351-b10, mixed mode)
-[CDB2] oracle@hol:/u01/app/oracle/product/19
-```
+<details>
+ <summary>*click here to see the full output*</summary>
+
+  ``` text
+   java version "1.8.0_351"
+   Java(TM) SE Runtime Environment (build 1.8.0_351-b10)
+   Java HotSpot(TM) 64-Bit Server VM (build 25.351-b10, mixed mode)
+   [CDB2] oracle@hol:/u01/app/oracle/product/19
+  ```
+</details>
+
+
+### Step 4: Current Perl Version
 
 Check the current PERL version:
-`$ $ORACLE_HOME/perl/bin/perl -version`
+  ```
+    <copy>
+     $ORACLE_HOME/perl/bin/perl -version
+    </copy>
+  ```
+
 
 Take notice of the current version. We will check afterwards whether the PERL version has been updated as well.
 `This is perl 5, version 36, subversion 0 (v5.36.0) built for x86_64-linux-thread-multi`
 
+### Step 5: Current Time Zone
+
 Then check the current time zone version in the container database:
-```
-sqlplus / as sysdba
-column VALUE$ format a8
-select VALUE$, CON_ID from containers(SYS.PROPS$) where NAME='DST_PRIMARY_TT_VERSION' order by CON_ID;
-```
+
+  ```
+    <copy>
+     sqlplus / as sysdba
+     column VALUE$ format a8
+     select VALUE$, CON_ID from containers(SYS.PROPS$) where NAME='DST_PRIMARY_TT_VERSION' order by CON_ID;
+    </copy>
+
+     Hit ENTER/RETURN to execute ALL commands.
+  ```
 
 Currently, the database uses the default timezone version deployed with Oracle Database 19c.
 ```
@@ -67,13 +109,29 @@ VALUE$	     CON_ID
 ```
 
 Close SQL*Plus:
-`exit`
+  ```
+    <copy>
+     exit
+    </copy>
+  ```
+
+### Step 6: Datapatch Sanity Check
 
 And finally, you will do a `datapatch` sanity check:
-`$ORACLE_HOME/OPatch/datapatch -sanity_checks`
+
+  ```
+    <copy>
+     $ORACLE_HOME/OPatch/datapatch -sanity_checks
+    </copy>
+  ```
+
 
 Except for the scheduler warning, everything looks good.
-```
+
+<details>
+ <summary>*click here to see the full output*</summary>
+
+  ``` text
 $ $ORACLE_HOME/OPatch/datapatch -sanity_checks
 SQL Patching sanity checks version 19.18.0.0.0 on Mon 26 Jun 2023 11:24:42 PM CEST
 Copyright (c) 2021, 2023, Oracle.  All rights reserved.
@@ -114,12 +172,20 @@ Refer to MOS Note and debug log
 /u01/app/oracle/product/19/cfgtoollogs/sqlpatch/sanity_checks_20230626_232442_21784/sanity_checks_debug_20230626_232442_21784.log
 
 SQL Patching sanity checks completed on Mon 26 Jun 2023 11:25:08 PM CEST
-```
+  ```
+</details>
 
-**Task 2 - Finish the patch installation**
-At this point the patching installation should be completed. Switch to the tab titled "19.19.0 Home". You should see the followiung output:
 
-```
+
+
+## Task 2 - Finish the Patch Installation
+
+At this point the patching installation should be completed. Switch to the tab titled "19.19.0 Home". You should see the following output:
+
+<details>
+ <summary>*click here to see the full output*</summary>
+
+  ``` text
 $ . /home/oracle/patch/install_patch.sh 
 
 Preparing the home to patch...
@@ -156,32 +222,55 @@ Execute /u01/app/oracle/product/1919/root.sh on the following nodes:
 
 
 Successfully Setup Software.
-```
+  ```
+</details>
+
+### Step 1: Logon as root
 
 Logon as `root` and type the password `oracle`:
-```
-su root
-```
+  ```
+    <copy>
+     su root
+    </copy>
+  ```
 
-```
-oracle
-```
+and then enter:
+  ```
+    <copy>
+     oracle
+    </copy>
+  ```
+
+### Step 2: Execute root.sh
 
 Then execute the root.sh script:
-`/u01/app/oracle/product/1919/root.sh`
+  ```
+    <copy>
+     /u01/app/oracle/product/1919/root.sh
+    </copy>
+  ```
 
-Unfortunately, `root.sh` is hanging. But you can check the logfile mentioned on the screen in the other tab of your terminal window.. It says:
+Unfortunately, `root.sh` is hanging. But you can check the logfile mentioned on the screen in the other tab of your terminal window. It says:
 ```
 Now product-specific root actions will be performed.
 ```
+
 Let us ignore that and `CTRL+C` the script. It is rerunnable, and a second execution would complete. But this is not necessary. 
 
-Exit from the `root` user and confirm that you are `oracle` again:
-```
-exit
-whoami
-```
+### Step 3: Exit from root
 
+Exit from the `root` user and confirm that you are `oracle` again:
+
+  ```
+    <copy>
+     exit
+     whoami
+    </copy>
+
+     Hit ENTER/RETURN to execute ALL commands.
+  ```
+
+You may now *proceed to the next lab*
 
 
 

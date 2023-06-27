@@ -2,7 +2,12 @@
 In this lab exercise you will patch the CDB2 database from 19.18.0 to 19.19.0 with just two commands.
 
 A simple config file for AutoUpgrade is provided already for your convenience:
-`cat /home/oracle/scripts/CDB2_patch.cfg` 
+  ```
+    <copy>
+     cat /home/oracle/scripts/CDB2_patch.cfg
+    </copy>
+  ```
+  
 
 This is the config file:
 ```
@@ -15,14 +20,26 @@ upg1.restoration=no
 upg1.timezone_upg=yes
 [CDB2] root@hol:/u01/app/oracle/product/1919
 ```
+### Step 1: Update AutoUpgrade
 
 Copy a more recent version of AutoUpgrade into your 19.19.0 home:
-`yes | cp /home/oracle/stage/autoupgrade.jar $ORACLE_HOME/rdbms/admin/autoupgrade.jar`
+
+  ```
+    <copy>
+     yes | cp /home/oracle/stage/autoupgrade.jar $ORACLE_HOME/rdbms/admin/autoupgrade.jar 
+    </copy>
+  ```
+
+### Step 2: Check AutoUpgrade Version
 
 Then check the version:
-```
-java -jar  $ORACLE_HOME/rdbms/admin/autoupgrade.jar -version
-```
+
+  ```
+    <copy>
+     java -jar  $ORACLE_HOME/rdbms/admin/autoupgrade.jar -version
+    </copy>
+  ```
+
 
 ```
 build.version 23.1.230224
@@ -34,11 +51,22 @@ build.type production
 build.label (HEAD, tag: v23.1, origin/stable_devel, stable_devel)
 ```
 
+### Step 3: Analyze with AutoUpgrade
+
 Now you will do an analyze run at first. 
-`java -jar  $ORACLE_HOME/rdbms/admin/autoupgrade.jar -config /home/oracle/scripts/CDB2_patch.cfg -mode analyze`
+
+  ```
+    <copy>
+     java -jar  $ORACLE_HOME/rdbms/admin/autoupgrade.jar -config /home/oracle/scripts/CDB2_patch.cfg -mode analyze
+    </copy>
+  ```
 
 It will complete within within less than half a minute.
-```
+
+<details>
+ <summary>*click here to see the full output*</summary>
+
+  ``` text
 $ java -jar  $ORACLE_HOME/rdbms/admin/autoupgrade.jar -config /home/oracle/scripts/CDB2_patch.cfg -mode analyze
 AutoUpgrade is not fully tested on OpenJDK 64-Bit Server VM, Oracle recommends to use Java HotSpot(TM)
 AutoUpgrade 23.1.230224 launched with default internal options
@@ -58,15 +86,25 @@ Jobs failed                    [0]
 Please check the summary report at:
 /home/oracle/logs/cfgtoollogs/upgrade/auto/status/status.html
 /home/oracle/logs/cfgtoollogs/upgrade/auto/status/status.log
-```
+  ```
+</details>
+
+### Step 4: AutoUpgrade Log File
 
 Check the logfile for any additional tasks. See the last line:
-```
-cat /home/oracle/logs/cfgtoollogs/upgrade/auto/status/status.log
-```
+
+  ```
+    <copy>
+     cat /home/oracle/logs/cfgtoollogs/upgrade/auto/status/status.log
+    </copy>
+  ```
 
 No additional tasks needed. You can progress.
-```
+
+<details>
+ <summary>*click here to see the full status log output*</summary>
+
+  ``` text
 $ cat /home/oracle/logs/cfgtoollogs/upgrade/auto/status/status.log
 ==========================================
           Autoupgrade Summary Report
@@ -88,16 +126,33 @@ $ cat /home/oracle/logs/cfgtoollogs/upgrade/auto/status/status.log
 [Detail]        /home/oracle/logs/CDB2/100/prechecks/cdb2_preupgrade.log
                 Check passed and no manual intervention needed
 ------------------------------------------
+  ```
+</details>
+
 ```
+
+```
+### Step 5: AutoUpgrade Deploy
 
 You can start AutoUpgrade now in deploy mode.
 It will lift the database into the new home and execute all necessary tasks.
-`java -jar  $ORACLE_HOME/rdbms/admin/autoupgrade.jar -config /home/oracle/scripts/CDB2_patch.cfg -mode deploy`
 
+  ```
+    <copy>
+     java -jar  $ORACLE_HOME/rdbms/admin/autoupgrade.jar -config /home/oracle/scripts/CDB2_patch.cfg -mode deploy
+    </copy>
+  ```
+
+### Step 6: AutoUpgrade Progress
 You can monitor it in the job interface easily with a refresh interval:
-`lsj -a 10`
+  ```
+    <copy>
+     lsj -a 10
+    </copy>
+  ```
 
 It will do an automatic refresh from now on.
+
 ```
 upg> lsj -a 10
 upg> +----+-------+---------+---------+-------+----------+-------+-------+
@@ -110,3 +165,4 @@ Total jobs 1
 The command lsj is running every 10 seconds. PRESS ENTER TO EXIT
 ```
 
+You may now *proceed to the next lab*
