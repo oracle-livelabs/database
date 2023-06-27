@@ -110,6 +110,7 @@ Following patches will be rolled back from Oracle Home on application of the pat
 
 Now you can follow the opatch advice and just rollback the entire list of patches. Just make sure you remove the spaces between "comma" and "patchnumber":
 
+  ```
     <copy>
      $ORACLE_HOME/OPatch/opatch nrollback -id 34879016,34871935,34810252,34793099,34783802,33973908
     </copy>

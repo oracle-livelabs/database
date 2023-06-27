@@ -84,7 +84,7 @@ Check the current PERL version:
   ```
 
 
-Take notice of the current version. We will check afterwards whether the PERL version has been updated as well.
+Take notice of the current version. We will check afterwards whether the PERL version has been updated as well. </br>
 `This is perl 5, version 36, subversion 0 (v5.36.0) built for x86_64-linux-thread-multi`
 
 ### Step 5: Current Time Zone

@@ -22,9 +22,18 @@ upg1.restoration=no
 upg1.timezone_upg=yes
 [CDB2] root@hol:/u01/app/oracle/product/1919
 ```
-### Step 1: Update AutoUpgrade
+## Task 1 - Update AutoUpgrade
 
 Copy a more recent version of AutoUpgrade into your 19.19.0 home:
+
+???
+  ```
+    <copy>
+     cp -f /home/oracle/stage/autoupgrade.jar $ORACLE_HOME/rdbms/admin/autoupgrade.jar 
+    </copy>
+  ```
+???
+
 
   ```
     <copy>
@@ -32,7 +41,7 @@ Copy a more recent version of AutoUpgrade into your 19.19.0 home:
     </copy>
   ```
 
-### Step 2: Check AutoUpgrade Version
+## Task 2 - Check AutoUpgrade Version
 
 Then check the version:
 
@@ -53,7 +62,7 @@ build.type production
 build.label (HEAD, tag: v23.1, origin/stable_devel, stable_devel)
 ```
 
-### Step 3: Analyze with AutoUpgrade
+## Task 3 - Analyze with AutoUpgrade
 
 Now you will do an analyze run at first. 
 
@@ -91,7 +100,7 @@ Please check the summary report at:
   ```
 </details>
 
-### Step 4: AutoUpgrade Log File
+## Task 4 - AutoUpgrade Log File
 
 Check the logfile for any additional tasks. See the last line:
 
@@ -134,7 +143,7 @@ $ cat /home/oracle/logs/cfgtoollogs/upgrade/auto/status/status.log
 ```
 
 ```
-### Step 5: AutoUpgrade Deploy
+## Task 5 - AutoUpgrade Deploy
 
 You can start AutoUpgrade now in deploy mode.
 It will lift the database into the new home and execute all necessary tasks.
@@ -145,7 +154,7 @@ It will lift the database into the new home and execute all necessary tasks.
     </copy>
   ```
 
-### Step 6: AutoUpgrade Progress
+## Task 6 - AutoUpgrade Progress
 You can monitor it in the job interface easily with a refresh interval:
   ```
     <copy>

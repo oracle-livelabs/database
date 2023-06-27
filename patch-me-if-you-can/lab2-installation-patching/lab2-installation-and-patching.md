@@ -122,25 +122,6 @@ You can either copy & paste the entire command or call the script below:
   ```
 </details>
 
-```
-./runInstaller -applyRU /home/oracle/stage/ru/35042068  \
- -applyOneOffs /home/oracle/stage/ojvm/35050341,/home/oracle/stage/dpbp/35261302,/home/oracle/stage/mrp/35333937/34340632,/home/oracle/stage/mrp/35333937/35012562,/home/oracle/stage/mrp/35333937/35037877,/home/oracle/stage/mrp/35333937/35116995,/home/oracle/stage/mrp/35333937/35225526 \
-   -silent -ignorePrereqFailure -waitforcompletion \
-    oracle.install.option=INSTALL_DB_SWONLY \
-    UNIX_GROUP_NAME=oinstall \
-    INVENTORY_LOCATION=/u01/app/oraInventory \
-    ORACLE_HOME=/u01/app/oracle/product/1919 \
-    ORACLE_BASE=/u01/app/oracle \
-    oracle.install.db.InstallEdition=EE \
-    oracle.install.db.OSDBA_GROUP=dba \
-    oracle.install.db.OSOPER_GROUP=dba \
-    oracle.install.db.OSBACKUPDBA_GROUP=dba \
-    oracle.install.db.OSDGDBA_GROUP=dba \
-    oracle.install.db.OSKMDBA_GROUP=dba \
-    oracle.install.db.OSRACDBA_GROUP=dba \
-    SECURITY_UPDATES_VIA_MYORACLESUPPORT=false \
-    DECLINE_SECURITY_UPDATES=true
-```
 
 <details>
  <summary>*Or click here to copy the script command*</summary>
@@ -155,10 +136,9 @@ You can either copy & paste the entire command or call the script below:
 
 The installation will take approximately 10 minutes. 
 
-Once the installation is completed, you will need to execute `root.sh` at the end of the following lab.
+Once the installation is completed, you will need to execute `root.sh` at the end of the following lab. </br>
 
-
-You may now *proceed to the next lab*
+In the mean time while the patch is installed you may *proceed to the next lab*.
 
 
 
