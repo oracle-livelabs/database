@@ -32,9 +32,9 @@ This lab assumes you have:
 
 4. Check that Shape looks as per picture below and that Node Count is set to 2, and then click the button Add HeatWave Cluster.
 
->**Note** The minimum number of HeatWave node is 1. In order to accelerate your complex queries, it is recommended to create at least 2 nodes in the HeatWave cluster so that the queries can be executed in parallel in multiple HeatWave nodes.
-
     ![Review HeatWave](images/heatwave-review.png)
+
+    >**Note** The minimum number of HeatWave node is 1. In order to accelerate your complex queries, it is recommended to create at least 2 nodes in the HeatWave cluster so that the queries can be executed in parallel in multiple HeatWave nodes.
 
 5. You will be brought back to the main page where you can check for the creation status. After some seconds you should see the nodes in Creating status.
     ![Create HeatWave](images/heatwave-create.png)
