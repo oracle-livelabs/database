@@ -19,7 +19,7 @@ This lab assumes you have:
 ## Task 1: Create OS Source Directory and Unzip XTTS ZIP File (SOURCE)
 
 ### Step 1: Create OS Directories (SOURCE)
-Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another one as XTTS source and a third directory for RMAN backup/restore files.
+Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another one as XTTS source and a third directory for RMAN files.
 
   ```
     <copy>
