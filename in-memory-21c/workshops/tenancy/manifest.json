@@ -46,9 +46,14 @@
       "filename": "../../joins-aggregations/joins-aggregations.md"
     },
     {
-      "title": "Lab 7: JSON and the In-Memory Column Store",
+      "title": "Lab 7: JSON and the In-Memory column store",
       "description": "Using JSON with the In-Memory column store",
       "filename": "../../json/json.md"
+    },
+    {
+      "title": "Lab 8: Automatic In-Memory Level High",
+      "description": "Using Automatic In-Memory with level high",
+      "filename": "../../aim-high/aim-high.md"
     },
     {
       "title": "Environment Cleanup",
@@ -56,8 +61,9 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md"
     },
     {
-      "title": "Oracle CloudWorld 2023 - Get Help",
-      "filename": "https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
     }
   ]
 }

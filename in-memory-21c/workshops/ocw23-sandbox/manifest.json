@@ -8,32 +8,32 @@
       "filename": "../../intro/intro.md"
     },
     {
-      "title": "Get Started",
-      "description": "Using noVNC Remote Desktop",
-      "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+      "title": "Lab 1: Environment Setup",
+      "description": "Verify Setup of compute instance",
+      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
     },
     {
-      "title": "Lab 1: Initialize Environment",
+      "title": "Lab 2: Initialize Environment",
       "description": "Initialize Environment",
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 2: Setting up the In-Memory Column Store",
+      "title": "Lab 3: Setting up the In-Memory Column Store",
       "description": "Populating and administering the In-Memory column store",
       "filename": "../../setup/setup.md"
     },
     {
-      "title": "Lab 3: Querying the In-Memory Column Store",
+      "title": "Lab 4: Querying the In-Memory Column Store",
       "description": "Queries on In-Memory Column Store",
       "filename": "../../queries/queries.md"
     },
     {
-      "title": "Lab 4: Joins and Aggregation",
+      "title": "Lab 5: Joins and Aggregation",
       "description": "In-Memory Joins and Aggregation",
       "filename": "../../joins-aggregations/joins-aggregations.md"
     },
     {
-      "title": "Lab 5: JSON and the In-Memory Column Store",
+      "title": "Lab 6: JSON and the In-Memory Column Store",
       "description": "Using JSON with the In-Memory column store",
       "filename": "../../json/json.md"
     },
