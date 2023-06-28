@@ -9,96 +9,78 @@
     },
     {
       "title": "Get Started",
-      "description": "Login to Oracle Cloud",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+      "description": "Using noVNC Remote Desktop",
+      "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
     },
     {
-      "title": "Lab 1: Prepare Setup",
-      "description": "How to download your ORM stack and update security rules for an existing VCN",
-      "publisheddate": "09/28/2020",
-      "filename": "../../prepare-setup/prepare-setup.md",
-      "type": "advanced"
-    },
-    {
-      "title": "Lab 2: Environment Setup",
-      "description": "How to provision the workshop environment and connect to it",
-      "publisheddate": "06/30/2020",
-      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc-ssh.md"
-    },
-    {
-      "title": "Lab 3: Initialize Environment",
+      "title": "Lab 1: Initialize Environment",
       "description": "Initialize Environment",
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 4: Setting up the In-Memory Column Store",
+      "title": "Lab 2: Setting up the In-Memory Column Store",
       "description": "Populating and administering the In-Memory column store",
       "filename": "../../setup/setup.md"
     },
     {
-      "title": "Lab 5: In-Memory Expressions",
+      "title": "Lab 3: In-Memory Expressions",
       "description": "Using In-Memory Expressions",
       "filename": "../../ime/ime.md"
     },
     {
-      "title": "Lab 6: Joins Groups",
+      "title": "Lab 4: Joins Groups",
       "description": "Using In-Memory Joins Groups",
       "filename": "../../join-groups/join-groups.md"
     },
     {
-      "title": "Lab 7: In-Memory Optimized Arithmetic",
+      "title": "Lab 5: In-Memory Optimized Arithmetic",
       "description": "Using In-Memory Optimized Arithmetic",
       "filename": "../../im-arith/im-arith.md"
     },
     {
-      "title": "Lab 8: JSON and the In-Memory column store",
+      "title": "Lab 6: JSON and the In-Memory column store",
       "description": "Using JSON with the In-Memory column store",
       "filename": "../../json/json.md"
     },
     {
-      "title": "Lab 9: In-Memory External Tables",
+      "title": "Lab 7: In-Memory External Tables",
       "description": "Using external tables with Database In-Memory",
       "filename": "../../ext-tab/exttab.md"
     },
     {
-      "title": "Lab 10: In-Memory Full Text Columns",
+      "title": "Lab 8: In-Memory Full Text Columns",
       "description": "Using In-Memory Full Text Columns",
       "filename": "../../im-text/full-text-col.md"
     },
     {
-      "title": "Lab 11: In-Memory Spatial",
+      "title": "Lab 9: In-Memory Spatial",
       "description": "In-Memory Spatial",
       "filename": "../../im-spatial/im-spatial.md"
     },
     {
-      "title": "Lab 12: In-Memory Hybrid Scans",
+      "title": "Lab 10: In-Memory Hybrid Scans",
       "description": "In-Memory Hybrid Scans",
       "filename": "../../hybrid-scans/im-hybrid-scans.md"
     },
     {
-      "title": "Lab 13: Automatic Data Optimization",
+      "title": "Lab 11: Automatic Data Optimization",
       "description": "Using In-Memory with Automatic Data Optimization",
       "filename": "../../ado/ado.md"
     },
     {
-      "title": "Lab 14: Automatic In-Memory",
+      "title": "Lab 12: Automatic In-Memory",
       "description": "Using Automatic In-Memory",
       "filename": "../../aim/aim.md"
     },
     {
-      "title": "Lab 15: Automatic In-Memory Level High",
+      "title": "Lab 13: Automatic In-Memory Level High",
       "description": "Using Automatic In-Memory with level high",
       "filename": "../../aim-high/aim-high.md"
     },
     {
-      "title": "Lab 16: In-Memory Parallel Features",
+      "title": "Lab 14: In-Memory Parallel Features",
       "description": "Using In-Memory with parallel features",
       "filename": "../../im-parallel/parallel.md"
-    },
-    {
-      "title": "Environment Cleanup",
-      "description": "Cleanly dispose of all OCI resources created by ORM for the workshop, and delete the stack",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md"
     },
     {
       "title": "Need Help?",
