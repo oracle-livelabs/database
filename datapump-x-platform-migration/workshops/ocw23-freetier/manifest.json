@@ -39,6 +39,11 @@
       "filename": "../../06-xtts-transport-phase/xtts-transport-phase.md"
     },
     {
+      "title": "Lab 7: Hint and Check",
+      "description": "To keep in mind",
+      "filename": "../../07-checks/checks.md"
+    },
+    {
             "title": "Oracle CloudWorld 2023 - Get Help",
             "filename": "https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
     }
