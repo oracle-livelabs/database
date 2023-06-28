@@ -276,7 +276,7 @@ $
   ```
 </details>
 
-## Task 3: TTS Metadata Export (SOURCE)
+## Task 3: TTS Export (SOURCE)
 Between this source and target database version, you can't use __Data Pump network_link__ (will fail with ORA-39169) and you have to export and import the metadata information instead.
 The Data Pump export parameter file "exp_metadata.par" was already created for you and is located in "/home/oracle/xtts/"
 
@@ -530,7 +530,7 @@ $
   ```
 </details>
 
-## Task 4: Metadata Import (TARGET)
+## Task 4: TTS Import (TARGET)
 Also the metadata import parameter file was precreated for you.
 
 ### Step 1: Prepared Import Data Pump Parameter File (TARGET)
@@ -585,8 +585,6 @@ Version 21.5.0.0.0
 
 Copyright (c) 1982, 2021, Oracle and/or its affiliates.  All rights reserved.
 
-UDI-28002: operation generated ORACLE error 28002
-ORA-28002: the password will expire within 7 days
 
 Connected to: Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
 28-JUN-23 15:56:37.853: W-1 Startup on instance 1 took 1 seconds
