@@ -50,7 +50,7 @@ This lab assumes you have:
 
 3. Deploy Grafana application with Load Balancer service
 
-    ```text
+    ```bash
 <copy>
 cat << EOF | kubectl apply -n grafana -f -
 ---
