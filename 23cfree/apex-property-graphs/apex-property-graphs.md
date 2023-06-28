@@ -43,7 +43,7 @@ This lab assumes:
 
     ![Welcome screen after login](images/welcome-screen-apex2.png)
 
-5. Click create workspace
+5. Click Create Workspace
 
     ![workspace welcome screen](images/workspace-name.png)
 
@@ -51,25 +51,25 @@ This lab assumes:
 
     ![enter graph for the workspace](images/graph-next.png)
 
-7. Set reuse existing schema to Yes. Click the menu icon next to schema name and select HOL23C. Leave the default for space quota and password. Click next.
+7. Set reuse existing schema to Yes. Click the menu icon next to schema name and select HOL23C. Leave the default for space quota and password. Click Next.
 
     ![Schema information input changes](images/schema-info.png)
 
-8. Admin username: admin, password: Welcome123#, email: your email. We will be resetting this password later on as well.
+8. Administrator Username: admin, Administrator Password: Welcome123#, Email: your email. We will be resetting this password later on as well. Click Next.
 
     ![admin password email input](images/admin-password-email.png)
 
-9. Review the output then click Create workspace.
+9. Review the output then click Create Workspace.
 
     ![Create workspace](images/create-workspace.png)
 
-10. Success! Now click done.
+10. Success! Now click Done.
 
     ![completetion screen](images/done.png)
 
 ## Task 2: Import APEX app to visualize queries
 
-1. In the upper right corner, click the admin icon then click sign out.
+1. In the upper right corner, click the admin icon then click Sign out.
     ![sign out from admin](images/logout.png)
 
 
@@ -84,7 +84,7 @@ This lab assumes:
 
     ![Import from app builder](images/app-builder-import.png)
 
-5. Click to add a file to open for import. Go to Home -> examples -> graph -> f106.sql and open that file. Leave the defaults and click next.
+5. Click to add a file to open for import. Go to Home -> examples -> graph -> f101.sql and select that file. Leave the defaults and click Next.
 
     ![open f106 sql file](images/graph-f106-open.png)
 
@@ -97,12 +97,13 @@ This lab assumes:
 
     ![Install the application](images/install-application.png)
 
-8.  Click run application
+8.  Click Run Application.
 
     ![Run the application](images/run-application.png)
 
 
 9.  Login.
+    **NOTE:** admin is case-sensitive.
 
     ![Log back in](images/login-final.png)
 

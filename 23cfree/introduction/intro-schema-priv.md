@@ -63,14 +63,13 @@ In order to do this workshop you need
 
 You may **proceed to the next lab.**
 
-
-## Acknowledgements
-
-* **Author(s)** - Blake Hendricks, Database Product Manager
-* **Contributor(s)** - Vasudha Krishnaswamy
-* **Last Updated By/Date** - 5/25/2023
-
 ## Learn More
 
 * [Lock-Free Reservations Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/adfns/using-lock-free-reservation.html#GUID-60D87F8F-AD9B-40A6-BB3C-193FFF0E60BB)
 * [Schema Priveledges](https://oracle-base.com/articles/23c/schema-privileges-23c)
+
+## Acknowledgements
+
+* **Author(s)** - Blake Hendricks, Database Product Manager
+* **Contributor(s)** - Vasudha Krishnaswamy, Russ Lowenthal
+* **Last Updated By/Date** - 6/21/2023
