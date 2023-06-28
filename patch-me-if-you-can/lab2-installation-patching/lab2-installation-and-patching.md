@@ -5,12 +5,12 @@
 In this lab exercise you will install Oracle Database 19.19.0 into a separate home and patch it fully unattended in one single operation. Out-of-place patching is the preferred method, not only for the Database home but also for the Grid Infrastructure Home.
 
 **This is the list of software and patches you are going to install now:**
-19.3.0 base release
-New opatch version
-19.19.0 Release Update
-19.19.0 Oracle JVM Bundle
-19.19.0 Data Pump Bundle Patch
-19.19.0.0.230516 Monthly Recommended Patch 1 for 19.19.0
+* 19.3.0 base release
+* New opatch version
+* 19.19.0 Release Update
+* 19.19.0 Oracle JVM Bundle
+* 19.19.0 Data Pump Bundle Patch
+* 19.19.0.0.230516 Monthly Recommended Patch 1 for 19.19.0
 
 ## Task 1 - Base Release Installation
 Create now the new Oracle Home for 19.19.0, unzip the base release and refresh opatch. 

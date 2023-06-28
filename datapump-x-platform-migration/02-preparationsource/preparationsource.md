@@ -46,21 +46,22 @@ Activate the source terminal window and create three directories; one for the Da
 ![Create source OS Directory](./images/mkdir-xtts-rman-dir.png " ")
 
 
-### Step 2: Unzip XTTS ZIP File (SOURCE)
-
+### Step 2: XTTS ZIP File (SOURCE)
+Switch to the source directory
   ```
     <copy>
     cd /home/oracle/xtts/source/
     </copy>
   ```
-![Unzipping the XTTS Perl V4 ZIP file on source](./images/change-xtts-src-dir.png " ")
+![change XTTS source directory](./images/change-xtts-src-dir.png " ")
+and unzip 'rman_xttconvert_VER4.3.zip' 
 
   ```
     <copy>
     unzip /home/oracle/xtts/rman_xttconvert_VER4.3.zip
     </copy>
   ```
-![Unzipping the XTTS Perl V4 ZIP file on source](./images/unzip-xtts-src.png " ")
+![Unzip the XTTS Perl V4 ZIP file on source](./images/unzip-xtts-src.png " ")
 
 ## Task 2: Configure Source Database (SOURCE)
 ### Step 1: Set Source Environment (SOURCE)

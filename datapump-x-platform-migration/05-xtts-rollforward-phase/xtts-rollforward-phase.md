@@ -20,8 +20,9 @@ This lab assumes you have:
 - A terminal window open on source
 - Another terminal window open on target
 - Prepared the source
-- Successfully executed initial backup
-- Successfully executed initial restore
+- Successfully executed initial backup (prepare phase)
+- Successfully executed initial restore (prepare phase)
+
 
 ## Task 1: Adding Table and Data File to Source Database (SOURCE)
 In this (and the previous) phase the database is up and there is no downtime yet. Users make changes in the source database. Let's simulate that by creating a table and adding a data file.
@@ -97,69 +98,70 @@ On source change into the XTTS Source directory and execute the incremental back
  <summary>*click here to see the full incremental backup log file*</summary>
 
   ``` text
-    [UPGR] oracle@hol:~/xtts/source
-    $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
-    ============================================================
-    trace file is /home/oracle/xtts/source/tmp/backup_Jun5_Mon_15_40_20_162//Jun5_Mon_15_40_20_162_.log
-    =============================================================
-    
-    --------------------------------------------------------------------
-    Parsing properties
-    --------------------------------------------------------------------
-    
-    
-    --------------------------------------------------------------------
-    Done parsing properties
-    --------------------------------------------------------------------
-    
-    
-    --------------------------------------------------------------------
-    Checking properties
-    --------------------------------------------------------------------
-    
-    
-    --------------------------------------------------------------------
-    Done checking properties
-    --------------------------------------------------------------------
-    
-    
-    --------------------------------------------------------------------
-    Backup incremental
-    --------------------------------------------------------------------
-    
-    scalar(or2
-    XXX: adding here for 2, 0, TPCCTAB,USERS
-    Added fname here 1:/home/oracle/xtts/rman/USERS_4.tf
-    Added fname here 1:/home/oracle/xtts/rman/TPCCTAB_5.tf
-    Added fname here 2:/home/oracle/xtts/rman/TPCCTAB_6.tf , fname is /u02/oradata/CDB3/pdb3/TPCCTAB_6.dbf
-    ============================================================
-    1 new datafiles added
-    =============================================================
-    TPCCTAB,/home/oracle/xtts/rman/TPCCTAB_6.tf
-    ============================================================
-    Running prepare cmd for new filesx TPCCTAB_6.tf
-    =============================================================
-    Adding file to transfer:TPCCTAB_6.tf
-    Prepare newscn for Tablespaces: 'TPCCTAB'
-    Prepare newscn for Tablespaces: 'USERS'
-    Prepare newscn for Tablespaces: ''''
-    Prepare newscn for Tablespaces: ''''
-    Prepare newscn for Tablespaces: ''''
-    
-    --------------------------------------------------------------------
-    Starting incremental backup
-    --------------------------------------------------------------------
-    
-    
-    --------------------------------------------------------------------
-    Done backing up incrementals
-    --------------------------------------------------------------------
-    
-    Prepare newscn for Tablespaces: 'TPCCTAB'
-    Prepare newscn for Tablespaces: 'USERS'
-    Prepare newscn for Tablespaces: ''''''''''''
-    New /home/oracle/xtts/source/tmp/xttplan.txt with FROM SCN's generated
-    [UPGR] oracle@hol:~/xtts/source
+[UPGR] oracle@hol:~/xtts/source
+$ $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
+============================================================
+trace file is /home/oracle/xtts/source/tmp/backup_Jun28_Wed_14_45_44_65//Jun28_Wed_14_45_44_65_.log
+=============================================================
+
+--------------------------------------------------------------------
+Parsing properties
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+Done parsing properties
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+Checking properties
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+Done checking properties
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+Backup incremental
+--------------------------------------------------------------------
+
+scalar(or2
+XXX: adding here for 2, 0, TPCCTAB,USERS
+Added fname here 1:/home/oracle/xtts/rman/USERS_4.tf
+Added fname here 1:/home/oracle/xtts/rman/TPCCTAB_5.tf
+Added fname here 2:/home/oracle/xtts/rman/TPCCTAB_6.tf , fname is /u02/oradata/CDB3/pdb3/TPCCTAB_6.dbf
+============================================================
+1 new datafiles added
+=============================================================
+TPCCTAB,/home/oracle/xtts/rman/TPCCTAB_6.tf
+============================================================
+Running prepare cmd for new filesx TPCCTAB_6.tf
+=============================================================
+Adding file to transfer:TPCCTAB_6.tf
+Prepare newscn for Tablespaces: 'TPCCTAB'
+Prepare newscn for Tablespaces: 'USERS'
+Prepare newscn for Tablespaces: ''''
+Prepare newscn for Tablespaces: ''''
+Prepare newscn for Tablespaces: ''''
+
+--------------------------------------------------------------------
+Starting incremental backup
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+Done backing up incrementals
+--------------------------------------------------------------------
+
+Prepare newscn for Tablespaces: 'TPCCTAB'
+Prepare newscn for Tablespaces: 'USERS'
+Prepare newscn for Tablespaces: ''''''''''''
+New /home/oracle/xtts/source/tmp/xttplan.txt with FROM SCN's generated
+[UPGR] oracle@hol:~/xtts/source
+$
   ```
 </details>
 
@@ -190,19 +192,27 @@ Target:
   ```
 ![res.txt content on target](./images/res-txt-trg.png " ") 
 
-Take a closer look at both output files posted next to each other below. Both contain the details from your initial backup. <br>
-The difference between source and target res.txt is the incremental backup entry you just executed on source plus the initial load of the newly added datafile:
+Take a closer look at both output files posted next to each other below. The first two lines match and contain details from your initial backup taken during the prepare phase. <br>
+The difference between source and target res.txt starts in line three beginning with with "#0:::6". This entry was added by the roll forward phase. It is the initial copy of the newly added datafile. In addition you'll see an incremental backup of all data files marked with "#1":
 
-![res.txt from source and target next to each other showing differences](./images/res-txt-src-trg.png " ")
+| res.txt source | res.txt target |
+| :--------: | :-----:|
+| ![res.txt content on source](./images/res-txt-src.png " ")  | ![res.txt content on target](./images/res-txt-trg.png " ") |
+{: title="Comparing res.txt between source and target"}
+
+
+
 
 ### Step 1: Copy "res.txt" (TARGET)
-So let's continue with the process and copy both files from the source to the target directory:
+So let's continue with the process and copy the updated res.txt and the newly created incrbackups.txt from the source to the target directory:
 
   ```
     <copy>
      cp /home/oracle/xtts/source/tmp/res.txt /home/oracle/xtts/target/tmp/res.txt
     </copy>
   ```
+  [copying rest.txt from source to target](./images/copy-res-txt.png " ") 
+
 ### Step 2: Copy "incrbackups.txt" (TARGET)
   ```
     <copy>
@@ -210,10 +220,10 @@ So let's continue with the process and copy both files from the source to the ta
     </copy>
   ```
 
-![copying incrbackups.txt and rest.txt from source to target](./images/incr-restore-copy.png " ") 
+![copying incrbackups.txt and rest.txt from source to target](./images/copy-incrbackups-txt.png " ") 
 
 ### Step 3: Start Incremental Restore (TARGET)
-And start the restore:
+Set the incremental restore environment:
   ```
     <copy>
      cd /home/oracle/xtts/target
@@ -226,6 +236,8 @@ And start the restore:
 
 
 ![setting incremental restore env](./images/env-incremental-restore.png " ")
+
+and start the restore:
 
   ```
     <copy>
@@ -240,9 +252,10 @@ And start the restore:
  <summary>*click here to see the full incremental restore log file*</summary>
 
   ``` text
+[CDB3] oracle@hol:~/xtts/target
 $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
 ============================================================
-trace file is /home/oracle/xtts/target/tmp/restore_Jun5_Mon_15_59_20_665//Jun5_Mon_15_59_20_665_.log
+trace file is /home/oracle/xtts/target/tmp/restore_Jun28_Wed_15_13_32_781//Jun28_Wed_15_13_32_781_.log
 =============================================================
 
 --------------------------------------------------------------------
@@ -279,7 +292,8 @@ Start rollforward
 End of rollforward phase
 --------------------------------------------------------------------
 
-[CDB3] oracle@hol:~/xtts/target 
+[CDB3] oracle@hol:~/xtts/target
+$
   ```
 </details>
 
@@ -293,7 +307,7 @@ The only requirement for each incremental restore is the current res.txt and inc
 ![incremental backup restore process flow](./images/incremental-backup-restore.png " ")
 
 ### Backup (SOURCE)
-You used on source the xtt.properties file created in the previous lab:
+You used on source the xtt.properties file created in the previous lab without updating it (no new tablespace was added; only a datafile and this is handled by the package automatically):
 
   ```
     <copy>
@@ -322,14 +336,17 @@ and the other two mandatory driving files for the restore - the res.txt and incr
 
 
 
-#### Restore (TARGET)
-You copied the xtt.properties and the res.txt file from source to target. RMAN read the same files the backup process created - so these files match between source and target. An interesting directory created by the restore process is the target XTTS/tmp directory containing the log files:
+### Restore (TARGET)
+You copied the xtt.properties and the res.txt file from source to target. RMAN restore read from the same location where the backup process created the incremental backup files - so all these files match between source and target. </br>
+An interesting directory created by the restore process is in the target XTTS/tmp directory containing the log files:
   ```
     <copy>
     ls -al /home/oracle/xtts/target/tmp
     </copy>
   ```
 ![RMAN backup datafiles](./images/roll-forward-ls-target.png " ")
+
+The first directory belongs to the restore executed in the prepare phase, the second one to the incremental backup from the roll forward phase.
 
 
 You may now *proceed to the next lab*.

@@ -269,7 +269,7 @@ The XTTS script offers two helpful environment variables we're going to set all 
   ```
 ![prepare initial backup](./images/prepare-phase-backup-src.png " ")
 
-### Step 2: Sstarting Initial Backup (SOURCE)
+### Step 2: Starting Initial Backup (SOURCE)
   ```
     <copy>
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
@@ -282,86 +282,86 @@ The XTTS script offers two helpful environment variables we're going to set all 
  <summary>*click here to open/close the full backup log*</summary>
 
   ```text
-    [UPGR] oracle@hol:~/xtts/source
-    $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
-    ============================================================
-    trace file is /home/oracle/xtts/source/tmp/backup_Jun5_Mon_14_46_08_289//Jun5_Mon_14_46_08_289_.log
-    =============================================================
+[UPGR] oracle@hol:~/xtts/source
+$ $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
+============================================================
+trace file is /home/oracle/xtts/source/tmp/backup_Jun28_Wed_14_09_34_232//Jun28_Wed_14_09_34_232_.log
+=============================================================
 
-    --------------------------------------------------------------------
-    Parsing properties
-    --------------------------------------------------------------------
-
-
-    --------------------------------------------------------------------
-    Done parsing properties
-    --------------------------------------------------------------------
+--------------------------------------------------------------------
+Parsing properties
+--------------------------------------------------------------------
 
 
-    --------------------------------------------------------------------
-    Checking properties
-    --------------------------------------------------------------------
+--------------------------------------------------------------------
+Done parsing properties
+--------------------------------------------------------------------
 
 
-    --------------------------------------------------------------------
-    Done checking properties
-    --------------------------------------------------------------------
+--------------------------------------------------------------------
+Checking properties
+--------------------------------------------------------------------
 
 
-    --------------------------------------------------------------------
-    Starting prepare phase
-    --------------------------------------------------------------------
+--------------------------------------------------------------------
+Done checking properties
+--------------------------------------------------------------------
 
-    scalar(or2
-    XXX: adding here for 2, 0, TPCCTAB,USERS
 
-    --------------------------------------------------------------------
-    Find list of datafiles in system
-    --------------------------------------------------------------------
+--------------------------------------------------------------------
+Starting prepare phase
+--------------------------------------------------------------------
 
-    sqlplus -L -s  / as sysdba  @/home/oracle/xtts/source/tmp/backup_Jun5_Mon_14_46_08_289//diff.sql /u02/oradata/CDB3/pdb3/
+scalar(or2
+XXX: adding here for 2, 0, TPCCTAB,USERS
 
-    --------------------------------------------------------------------
-    Done finding list of datafiles in system
-    --------------------------------------------------------------------
+--------------------------------------------------------------------
+Find list of datafiles in system
+--------------------------------------------------------------------
 
-    Prepare source for Tablespaces:
-                      'TPCCTAB'  /home/oracle/xtts/dump
-    xttpreparesrc.sql for 'TPCCTAB' started at Mon Jun  5 14:46:08 2023
-    xttpreparesrc.sql for  ended at Mon Jun  5 14:46:08 2023
-    Prepare source for Tablespaces:
-                      'USERS'  /home/oracle/xtts/dump
-    xttpreparesrc.sql for 'USERS' started at Mon Jun  5 14:46:27 2023
-    xttpreparesrc.sql for  ended at Mon Jun  5 14:46:27 2023
-    Prepare source for Tablespaces:
-                      ''''  /home/oracle/xtts/dump
-    xttpreparesrc.sql for '''' started at Mon Jun  5 14:46:32 2023
-    xttpreparesrc.sql for  ended at Mon Jun  5 14:46:32 2023
-    Prepare source for Tablespaces:
-                      ''''  /home/oracle/xtts/dump
-    xttpreparesrc.sql for '''' started at Mon Jun  5 14:46:33 2023
-    xttpreparesrc.sql for  ended at Mon Jun  5 14:46:33 2023
-    Prepare source for Tablespaces:
-                      ''''  /home/oracle/xtts/dump
-    xttpreparesrc.sql for '''' started at Mon Jun  5 14:46:34 2023
-    xttpreparesrc.sql for  ended at Mon Jun  5 14:46:34 2023
+sqlplus -L -s  / as sysdba  @/home/oracle/xtts/source/tmp/backup_Jun28_Wed_14_09_34_232//diff.sql /u02/oradata/CDB3/pdb3/
 
-    --------------------------------------------------------------------
-    Done with prepare phase
-    --------------------------------------------------------------------
+--------------------------------------------------------------------
+Done finding list of datafiles in system
+--------------------------------------------------------------------
 
-    Prepare newscn for Tablespaces: 'TPCCTAB'
-    Prepare newscn for Tablespaces: 'USERS'
-    Prepare newscn for Tablespaces: ''''''''''''
-    New /home/oracle/xtts/source/tmp/xttplan.txt with FROM SCN's generated
-    scalar(or2
-    XXX: adding here for 2, 0, TPCCTAB,USERS
-    Added fname here 1:/home/oracle/xtts/dump/USERS_4.tf
-    Added fname here 1:/home/oracle/xtts/dump/TPCCTAB_5.tf
-    ============================================================
-    No new datafiles added
-    =============================================================
-    [UPGR] oracle@hol:~/xtts/source
+Prepare source for Tablespaces:
+                  'TPCCTAB'  /home/oracle/xtts/rman
+xttpreparesrc.sql for 'TPCCTAB' started at Wed Jun 28 14:09:34 2023
+xttpreparesrc.sql for  ended at Wed Jun 28 14:09:34 2023
+Prepare source for Tablespaces:
+                  'USERS'  /home/oracle/xtts/rman
+xttpreparesrc.sql for 'USERS' started at Wed Jun 28 14:09:46 2023
+xttpreparesrc.sql for  ended at Wed Jun 28 14:09:46 2023
+Prepare source for Tablespaces:
+                  ''''  /home/oracle/xtts/rman
+xttpreparesrc.sql for '''' started at Wed Jun 28 14:09:50 2023
+xttpreparesrc.sql for  ended at Wed Jun 28 14:09:50 2023
+Prepare source for Tablespaces:
+                  ''''  /home/oracle/xtts/rman
+xttpreparesrc.sql for '''' started at Wed Jun 28 14:09:51 2023
+xttpreparesrc.sql for  ended at Wed Jun 28 14:09:51 2023
+Prepare source for Tablespaces:
+                  ''''  /home/oracle/xtts/rman
+xttpreparesrc.sql for '''' started at Wed Jun 28 14:09:52 2023
+xttpreparesrc.sql for  ended at Wed Jun 28 14:09:52 2023
+
+--------------------------------------------------------------------
+Done with prepare phase
+--------------------------------------------------------------------
+
+Prepare newscn for Tablespaces: 'TPCCTAB'
+Prepare newscn for Tablespaces: 'USERS'
+Prepare newscn for Tablespaces: ''''''''''''
+New /home/oracle/xtts/source/tmp/xttplan.txt with FROM SCN's generated
+scalar(or2
+XXX: adding here for 2, 0, TPCCTAB,USERS
+Added fname here 1:/home/oracle/xtts/rman/USERS_4.tf
+Added fname here 1:/home/oracle/xtts/rman/TPCCTAB_5.tf
+============================================================
+No new datafiles added
+=============================================================
+[UPGR] oracle@hol:~/xtts/source
   ```
 </details>
 
@@ -426,7 +426,7 @@ Starting restore:
 [CDB3] oracle@hol:~/xtts/target
 $ $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
 ============================================================
-trace file is /home/oracle/xtts/target/tmp/restore_Jun5_Mon_15_23_48_597//Jun5_Mon_15_23_48_597_.log
+trace file is /home/oracle/xtts/target/tmp/restore_Jun28_Wed_14_14_06_386//Jun28_Wed_14_14_06_386_.log
 =============================================================
 
 --------------------------------------------------------------------
@@ -459,7 +459,7 @@ Performing convert for file 5
 --------------------------------------------------------------------
 
 [CDB3] oracle@hol:~/xtts/target
-
+$
   ```
 </details>
 

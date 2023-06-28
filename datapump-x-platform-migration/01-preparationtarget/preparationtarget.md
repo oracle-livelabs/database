@@ -62,13 +62,17 @@ Activate the terminal target tab window and create a directory for the XTTS targ
 
 ## Task 2: Set Target Environment and Start SQL*Plus (TARGET)
 
-
+### Step 1: Set Environment
   ```
     <copy>
     . cdb3
     </copy>
   ```
 ![Setting target database environment](./images/source-target-database-env.png " ")
+The command line prompt changes and common environment variables are now set.
+
+### Step 2: Open SQL*Plus
+
   ```
     <copy>
     sqlplus / as sysdba 
@@ -79,7 +83,7 @@ Activate the terminal target tab window and create a directory for the XTTS targ
 
 
 ## Task 3: In SQL*Plus Start the Container Database CDB3 and Create the Pluggable Database PDB3 (TARGET)
-When creating a PDB the admin user needs to exist. You can delete it later on if desired. Once the PDB3 is created you need to start it up and save its state.
+When creating a PDB the admin must be created as well. You can delete it later on if desired. Once the PDB3 is created you need to start it up and save its state.
 
   ```
     <copy>
@@ -129,7 +133,7 @@ Hit ENTER/RETURN to execute ALL commands.
 [CDB3] oracle@hol:~/xtts/target
 $ lsnrctl start
 
-LSNRCTL for Linux: Version 21.0.0.0.0 - Production on 01-JUN-2023 15:47:58
+LSNRCTL for Linux: Version 21.0.0.0.0 - Production on 28-JUN-2023 11:36:56
 
 Copyright (c) 1991, 2021, Oracle.  All rights reserved.
 
@@ -146,7 +150,7 @@ STATUS of the LISTENER
 ------------------------
 Alias                     LISTENER
 Version                   TNSLSNR for Linux: Version 21.0.0.0.0 - Production
-Start Date                01-JUN-2023 15:48:00
+Start Date                28-JUN-2023 11:36:56
 Uptime                    0 days 0 hr. 0 min. 0 sec
 Trace Level               off
 Security                  ON: Local OS Authentication
@@ -172,7 +176,8 @@ Service "UP19" has 1 instance(s).
 Service "UPGR" has 1 instance(s).
   Instance "UPGR", status UNKNOWN, has 1 handler(s) for this service...
 The command completed successfully
-
+[CDB3] oracle@hol:~/xtts/target
+$
   ```
 </details>
 

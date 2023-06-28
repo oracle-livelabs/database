@@ -44,8 +44,8 @@ This lab assumes you have:
 Before you begin check on source, if the OS you want to migrate your database to, is supporting datafile conversion. <br>
 Also check on target if the OS you want to migrate from is supporting datafile conversion.
 
-### Step 1: Check SOURCE
-The platform_id for the target Linux platform is 13:
+So execute on __source__ and __target__:
+
   ```
     <copy>
     @/home/oracle/xtts/scripts/task2
@@ -62,27 +62,12 @@ The platform_id for the target Linux platform is 13:
 
   ```
 </details>
+
+Output from __source__:
 
 ![Check if target platform is supported](./images/precheck-task2-src.png " ")
 
-### Step 2: Check TARGET
-In this lab you migrate from Linux to Linux, so we can execute the same check on target:
-  ```
-    <copy>
-    @/home/oracle/xtts/scripts/task2
-    </copy>
-  ```
-
-<details>
- <summary>*click here to see the SQL Statement*</summary>
-
-  ``` text
-    select * from v$transportable_platform 
-    where platform_name like 'Linux%' 
-    order by platform_id;
-
-  ```
-</details>
+Output from __target__:
 
 ![Check if target platform is supported](./images/precheck-task2-trg.png " ")
 
@@ -114,7 +99,7 @@ In this lab there are no tables with "__TimeStamp with Local Time Zone__ (TSLTZ)
 
 
 ### CHECK for TimeStamp with Local Time Zone (TSLTZ) Data Type (SOURCE)
-So check now if your source database has tables having columns with "__TimeStamp with Local Time Zone__ (TSLTZ)": 
+As both time zones differ check now if your source database has tables having columns with "__TimeStamp with Local Time Zone__ (TSLTZ)": 
 
   ```
     <copy>
@@ -140,11 +125,14 @@ So check now if your source database has tables having columns with "__TimeStamp
 </details>
 
 
-![Checking on source for Timestamp with local timezone dataypes](./images/precheck-task2b-src.png " ")
+![Checking on source for Timestamp with local timezone dataypes](./images/precheck-task3b-src.png " ")
 In the lab there are no TSLTZ data types used. So no need to sync both DBTIMEZONEs or to handle data manually with expdp/impdp.
 
 ## Task 4: Character Sets (SOURCE and TARGET)
-The source and target database must use compatible database character sets.
+The source and target database must use compatible database character sets. 
+* Details about compatible character sets "[General Limitations on Transporting Data](https://docs.oracle.com/en/database/oracle/oracle-database/19/spucd/general-limitations-on-transporting-data.html#GUID-28800719-6CB9-4A71-95DD-4B61AA603173)" are mentioned in the manual
+
+So execute the next script again on __source__ and __target__:
 
   ```
     <copy>
@@ -170,9 +158,9 @@ The __target__ output:
 
 ![DBTIMEZONE output target](./images/precheck-task4-trg.png " ")
 
-Both character sets in our lab match. 
+Both character sets in our lab match and no further action needed. 
 
-* Details about "[General Limitations on Transporting Data](https://docs.oracle.com/en/database/oracle/oracle-database/19/spucd/general-limitations-on-transporting-data.html#GUID-28800719-6CB9-4A71-95DD-4B61AA603173)" are mentioned in the manual
+
 
 
 ## Task 5: XTTS Tablespace Violations (SOURCE) 
@@ -222,6 +210,8 @@ It's good practice to check if SYSTEM and SYSAUX tablespaces might accidentally 
 
 ![checking if there are user tables in system or sysaux TBS](./images/precheck-task6-src.png " ")
 
+Just in case there would have been user data in SYSTEM/SYSAUX tablespace it will now be the right moment to correct this.
+
 
 ## Task 7: User Indexes in SYSTEM/SYSAUX Tablespace (SOURCE)
 Same check as in the previous task but this time for user indexes
@@ -249,8 +239,10 @@ Same check as in the previous task but this time for user indexes
 ![checking if there are user indexes in system or sysaux TBS](./images/precheck-task7-src.png " ")
 
 ## Task 7: IOT Tables (SOURCE)
-IOT tables might get corrupted during XTTS copy when copying to HP platforms. 
+IOT tables might get corrupted during XTTS copy when copying especially to HP platforms. 
 * [Corrupt IOT when using Transportable Tablespace to HP from different OS (Doc ID 1334152.1) ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1334152.1&displayIndex=1)
+Even though we migrate to Linux it's worth to check it and to bear in mind.
+
 
   ```
     <copy>
@@ -292,9 +284,15 @@ In Oracle Database 12.1 and earlier you can't move tables with XMLTYPEs using tr
 
 
   ``` text
-    select distinct p.tablespace_name from dba_tablespaces p, dba_xml_tables x, dba_users u, all_all_tables t where t.table_name=x.table_name and t.tablespace_name=p.tablespace_name and x.owner=u.username;
+    select distinct p.tablespace_name from dba_tablespaces p, dba_xml_tables x, dba_users u, all_all_tables t 
+    where t.table_name=x.table_name 
+    and t.tablespace_name=p.tablespace_name 
+    and x.owner=u.username;
 
-    select distinct p.tablespace_name from dba_tablespaces p, dba_xml_tab_cols x, dba_users u, all_all_tables t where t.table_name=x.table_name and t.tablespace_name=p.tablespace_name and x.owner=u.username;
+    select distinct p.tablespace_name from dba_tablespaces p, dba_xml_tab_cols x, dba_users u, all_all_tables t 
+    where t.table_name=x.table_name 
+    and t.tablespace_name=p.tablespace_name 
+    and x.owner=u.username;
 
   ```
 </details>
@@ -335,23 +333,20 @@ There are no global temporary tables in our lab. When you have them in your data
 
 ## Task 11: Exit SQL*Plus (SOURCE and TARGET)
 
-### Step 1: Exit SQL*Plus on Source 
+Execute on __source__ and __target__:
+
   ```
     <copy>
      exit;
     </copy>
   ```
+Output on __source__:
 
-![Exit from SQL*Plus on source](./images/precheck-task11-src.png " ")
+![Exit from SQL*Plus on source](./images/disconnect-sqlplus-src.png " ")
 
-### Step 1: Exit SQL*Plus on Target 
-### target
-  ```
-    <copy>
-     exit;
-    </copy>
-  ```
-![Exit from SQL*Plus on target](./images/precheck-task11-trg.png " ")
+and the output on __target__
+
+![Exit from SQL*Plus on target](./images/disconnect-sqlplus-trg.png " ")
 
 
 
