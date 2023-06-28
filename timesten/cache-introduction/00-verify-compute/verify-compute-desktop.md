@@ -15,7 +15,7 @@ This lab shows you how to login to your pre-created compute instance running on 
 
 This lab assumes:
 
-- You have successfully provisioned a workshop compute instance either in the LiveLabs sandbix or in your own tenancy.
+- You have successfully provisioned a workshop compute instance either in the LiveLabs sandbox or in your own tenancy.
 - If you using the LiveLabs sandbox, and you wish to use SSH to access the compute instance, that you have an RSA format SSH private/public key pair to use to access the compute instance (optional).
 
 If you wish to use the NoVNC graphical desktop to access the workshop compute instance, please complete **tasks 1 and 2** below.
@@ -32,24 +32,26 @@ To make the best use of your display, perform the following tasks to render your
 
 1. Click on the small gray tab on the middle-left side of your screen to open the control bar.
 
-    ![](./images/novnc-fullscreen-1.png " ")
+    ![Click left gray tab](./images/novnc-fullscreen-1.png " ")
 
 2. Select *Fullscreen* to render the session on your entire screen.
 
-    ![](./images/novnc-fullscreen-2.png " ")
-    ![](./images/novnc-fullscreen-3.png " ")
-    
+    ![Select Full Screen icon](./images/novnc-fullscreen-2.png " ")
+    ![Full Screen](./images/novnc-fullscreen-3.png " ")
+
+ *Note:* The Full-screen option is available if the browser supports it. Switch to another browser if you don't see the full-screen option in the control bar.
+ 
 ## Task 2: Enable Copy/Paste from Local to Remote Desktop
 
 During the execution of this workshop you will need to copy text from the workshop instructions (use the copy button provided) to a terminal session (remote desktop or SSH). As direct copy/paste between your local browser and the NoVNC desktop isn't supported, you may proceed as indicated below to enable an alternative local-to-remote clipboard using the NoVNC Clipboard.
 
 1. Continuing from the last task above, Select the *clipboard* icon
 
-    ![](./images/novnc-clipboard-1.png " ")
+    ![Select clipboard icon](./images/novnc-clipboard-1.png " ")
 
 2. Copy some text from your local computer as illustrated below and paste into the clipboard widget, then finally open up the desired application (e.g. Terminal) and paste accordingly using *mouse controls*
 
-    ![](./images/novnc-clipboard-2.png " ")
+    ![Paste text into the clipboard text box](./images/novnc-clipboard-2.png " ")
 
 *Note:* Please make sure you initialize your clipboard with step [1] shown in the screenshot above before opening the target application in which you intend to paste the text. Otherwise will find the *paste* function in the context menu grayed out when attempting to paste for the first time.
     
@@ -76,21 +78,21 @@ This assumes that you already have an RSA type SSH key-pair available on the loc
     </copy>
     ```
 
-    ![](./images/novnc-copy-pub-key-4.png " ")
+    ![Open authorized_keys file](./images/novnc-copy-pub-key-4.png " ")
     
     Enter append mode in vi (type **A**), and start a new line if required.
 
 3. From the local system (e.g. your laptop), with the exception of *Putty* users, locate the SSH _public_ key from your key-pair, open it, and copy the entire content to the clipboard.
 
-    ![](./images/novnc-copy-pub-key-1.png " ")
+    ![List public key using cat command](./images/novnc-copy-pub-key-1.png " ")
 
     If using *Putty* you must load the private key (*.ppk*) into *Puttygen* utility to see the relevant public key block to copy. Do not copy the content of the public key file directly as it will not work.
 
-    ![](./images/novnc-copy-pub-key-2.png " ")
+    ![Locate public key using putty](./images/novnc-copy-pub-key-2.png " ")
 
 4. Paste the copied public key into the remote clipboard first, then into the terminal where you opened the *authorized_keys* file for editing.
 
-    ![](./images/novnc-copy-pub-key-3.png " ")
+    ![Paste public key to clipboard](./images/novnc-copy-pub-key-3.png " ")
 
 5. Save and exit the *vi* editor (press the **Escape** key then type **ZZ**).
 
@@ -124,4 +126,4 @@ You can now **proceed to the next lab**.
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
 * **Contributors** - LiveLabs Team
-* **Last Updated By/Date** - Chris Jenkins, August 2022
+* **Last Updated By/Date** - Jenny Bloom, June 2023

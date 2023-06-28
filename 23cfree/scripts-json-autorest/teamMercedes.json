@@ -1,0 +1,17 @@
+{
+    "teamId": 2,
+    "name": "Mercedes",
+    "points": 0,
+    "driver": [
+      {
+        "driverId": 105,
+        "name": "George Russell",
+        "points": 0
+      },
+      {
+        "driverId": 106,
+        "name": "Lewis Hamilton",
+        "points": 0
+      }
+    ]
+}

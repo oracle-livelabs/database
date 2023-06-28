@@ -69,7 +69,6 @@ This workshop contains different language implementation in the form of differen
 <if type="Python">
 
 1. Make sure that python is installed in your system.
-
 2. You can install the Python SDK through the Python Package Index with the command given below.
 ```
  <copy> pip3 install borneo </copy>
@@ -167,7 +166,7 @@ Use `vi` or `nano` or any text editor to create a file named `config` in the `.o
       </copy>
       ```
 Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
-![](images/config-file.png)
+![View config file](images/config-file.png)
 When `SignatureProvider` is constructed without any parameters, the default [Configuration File](https://docs.cloud.oracle.com/iaas/Content/API/Concepts/sdkconfig.htm) is located in the `~/.oci/config` directory.
 
 4. Compile your java code using the command `mvn compile`.
@@ -202,7 +201,7 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
       </copy>
       ```
     Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
-      ![](images/config-file.png)
+      ![View config file](images/config-file.png)
 
 4. Execute the sample application:
    Open the Command Prompt, and navigate to the directory where you saved the `HelloWorld.py` program.
@@ -248,7 +247,7 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
       </copy>
       ```
       Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
-      ![](images/config-file.png)
+      ![View config file](images/config-file.png)
 
 4.  Execute the sample application:
     Initialize a new module for the example program.
@@ -295,7 +294,7 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
       </copy>
       ```
       Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
-      ![](images/config-file.png)
+      ![View config file](images/config-file.png)
 
 4. Execute the Sample Application
    Open the Command Prompt, and navigate to the directory where you saved the `HelloWorld.js` program.
@@ -312,7 +311,7 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
 1. Download the provided [HelloWorld.cs](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.cs) file and move it to your home directory.
 2. Review the sample application. You can access the [.NET API  Reference Guide](https://oracle.github.io/nosql-dotnet-sdk/index.html) to reference .NET classes and methods included in this sample application.
 
-   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.cs](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.cs), replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Save the file and close it.
+   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.cs](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.cs), replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Also modify the region parameter to your home region in the code ( For example if your home region is Ashburn set the region parameter as ```Region = Region.US_ASHBURN_1```). Save the file and close it.
 
 3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Add OCID, tenancy ID, fingerprint & key credentials in the `config` file.
 
@@ -326,8 +325,11 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
       </copy>
       ```
       Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
-      ![](images/config-file.png)
-4. Run your Application as shown below. This command will build and run the application.
+      ![View config file](images/config-file.png)
+        
+4. Go to your project directory. Under this directory, you will see the example source code ```Program.cs```. Overwrite the content of this file with the content of ```HelloWorld.cs```.
+Build and run your project as shown below.
+*Note: You have multiple dotnet target frameworks which are supported. Currently the supported frameworks are .NET Core 3.1 and .NET 5.0, so you must specify the target framework to use. The command below will automatically download and install Oracle NoSQL Database SDK package as a dependency of your project.*
 
 ```
 <copy>
@@ -340,21 +342,21 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
 
 1. On the left hand menu, click **NoSQL Database**.
 
-  ![](images/nosql-cloud.png)
+  ![Click NoSQL Database](images/nosql-cloud.png)
 
 2. Click **HelloWorldTable** to open the details page.
 
   *If you do not see HelloWorldTable select your correct compartment ( that you mentioned in your code) on the left dropdown.*
 
-  ![](images/open-helloworldtable.png)
+  ![Click HelloWorldTable](images/open-helloworldtable.png)
 
 3. Click **Table Rows** under Resources.
 
-  ![](images/helloworldtable.png)
+  ![Table Rows](images/helloworldtable.png)
 
 4. Click Run Query to execute the select statement and display the record inserted into the table.
 
-  ![](images/run-query.png)
+  ![Run Query](images/run-query.png)
 
 Congratulations! You have completed the workshop.
 
@@ -362,7 +364,7 @@ This application accesses Oracle NoSQL Database Cloud Service, but most likely y
 
 ## Learn More
 
-* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/pls/topic/lookup?ctx=cloud&id=CSNSD-GUID-88373C12-018E-4628-B241-2DFCB7B16DE8)
+* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/dtddt/index.html)
 * [Oracle NoSQL Database Cloud Service page](https://cloud.oracle.com/en_US/nosql)
 <if type="Java">
 * [Java API Reference Guide](https://docs.oracle.com/en/cloud/paas/nosql-cloud/csnjv/index.html)
@@ -380,4 +382,4 @@ This application accesses Oracle NoSQL Database Cloud Service, but most likely y
 ## Acknowledgements
 * **Author** - Dave Rubin, Senior Director, NoSQL and Embedded Database Development and Michael Brey, Director, NoSQL Product Development
 * **Contributors** - Jaden McElvey, Technical Lead - Oracle LiveLabs Intern
-* **Last Updated By/Date** -Vandana Rajamani, Database User Assistance, December 2021
+* **Last Updated By/Date** -Vandana Rajamani, Database User Assistance, February 2023
