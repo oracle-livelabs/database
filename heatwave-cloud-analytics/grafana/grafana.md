@@ -52,6 +52,7 @@ This lab assumes you have:
 
     ```bash
 <copy>
+
 cat << EOF | kubectl apply -n grafana -f -
 ---
 apiVersion: v1

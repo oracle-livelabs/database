@@ -24,27 +24,27 @@ In this lab, you will be guided through the following tasks:
 
 1. Sign in to your Oracle Cloud account to set up the API Key along with the config file. Navigate to the 'Profile' icon on the top-right once on the homepage of Oracle Cloud. From there, click either on the "first link" or click on "User settings"
 
-    ![OCI Homepage Profile Icon](./images/nav-config0.png "nav-config")
+    ![OCI Homepage Profile Icon](./images/nav-config0-new.png "nav-config")
 
-    ![OCI Profile Icon Expanded - User Settings](./images/nav-config1.png "nav-config2")
+    ![OCI Profile Icon Expanded - User Settings](./images/nav-config1-new.png "nav-config2")
 
     **Note:** you should be on the below "User Details" page, once finished with the previous step
 
-    ![OCI User Details Page](./images/config-page1.png "config-page")
+    ![OCI User Details Page](./images/config-page1-new.png "config-page")
 
 2. Scroll down on that same page until you see the ‘Resources’ section on the left. Click “API Keys” and “Add API Key”
 
-    ![OCI User Details Page - Resources Section](./images/nav-page-1.png "config-page2")
+    ![OCI User Details Page - Resources Section](./images/nav-page-1-new.png "config-page2")
 
-    ![User Details Page - API Key Section](./images/add-api1.png "config-page3")
+    ![User Details Page - API Key Section](./images/add-api1-new.png "config-page3")
 
 3. When you click on 'Add API Key' a popup will appear saying "Add API Key". On that popup, select ‘Generate API Key Pair’ and download both the “Private Key” and “Public Key”. Afterwards, click “Add”
 
-    ![Add API Key Popup](./images/add-api02.png "add-apikey")
+    ![Add API Key Popup](./images/add-api02-new.png "add-apikey")
 
 4. Once you ‘Add’ the API Key, a new popup will appear saying “Configuration File Preview”. Copy the contents of the file, save it in a notepad, and click 'Close' afterwards to exit out of the Configuration File Preview
 
-    ![Configuration File Preview Popup](./images/add-config2.png "copy-config")
+    ![Configuration File Preview Popup](./images/add-config2-new.png "copy-config")
 
 ## Task 2: Setup the "config" file in the Compute/on-prem
 
@@ -117,25 +117,25 @@ In this lab, you will be guided through the following tasks:
 
 1. Once you are all done with setting up the '.oci/config' file, navigate back to Oracle Cloud and create an Object Storage Bucket. On the homepage of Oracle Cloud, go to the ‘hamburger’ menu or the ‘navigation’ menu on top left. Navigate to ‘Storage’ and select "Buckets" under 'Object Storage & Archive Storage'
 
-    ![OCI Navigation Menu](./images/oci-nav.png "oci-navigation-menu")
+    ![OCI Navigation Menu](./images/oci-nav-new.png "oci-navigation-menu")
 
-    ![OCI Object Storage Menu](./images/buck-nav.png "bucket-navigation")
+    ![OCI Object Storage Menu](./images/buck-nav-new.png "bucket-navigation")
 
-3. Once on the Buckets page, make sure you have the right Compartment selected. Afterwards, click “Create Bucket”
+2. Once on the Buckets page, make sure you have the right Compartment selected. Afterwards, click “Create Bucket”
 
-    ![Object Storage Landing Page](./images/create-buck1.png "create-bucket")
+    ![Object Storage Landing Page](./images/create-buck1-new.png "create-bucket")
 
-4. Name the bucket “MySQL-Bucket”, keep the ‘Default Storage Tier’ to “Standard” and click Create
+3. Name the bucket “MySQL-Bucket”, keep the ‘Default Storage Tier’ to “Standard” and click Create
 
     ```bash
     <copy>MySQL-Bucket</copy>
     ```
 
-    ![Bucket Creation Page](./images/name-buck1.png "name-bucket")
+    ![Bucket Creation Page](./images/name-buck1-new.png "name-bucket")
 
-5. Click on the Bucket Name and note down the “Bucket Name” as well as “Namespace” which can be found under ‘Bucket Information’
+4. Click on the Bucket Name and note down the “Bucket Name” as well as “Namespace” which can be found under ‘Bucket Information’
 
-    ![Bucket Details Page](./images/buck-ns1.png "name-ns-bucket")
+    ![Bucket Details Page](./images/buck-ns1-new.png "name-ns-bucket")
 
 ## Task 4: Perform the MySQL Shell Dump
 
@@ -161,7 +161,7 @@ In this lab, you will be guided through the following tasks:
     <copy>\js</copy>
     ```
     ```bash
-    <copy>util.dumpInstance("sampledump", {"osBucketName": "MySQL-Bucket", "osNamespace": "idazzjlcjqzj", "ocimds": "true", "compatibility": ["strip_restricted_grants", "strip_definers"], users: "true", dryRun:"true"})</copy>
+    <copy>util.dumpInstance("sampledump", {"osBucketName": "MySQL-Bucket", "osNamespace": "idazzjlcjqzj", "ocimds": "true", "compatibility": ["force_innodb", "strip_restricted_grants", "strip_definers", "create_invisible_pks", "skip_invalid_accounts"], users: "true", dryRun:"true"})</copy>
     ```
 
     ![MySQL Shell Dump Utility - Output](./images/dry-shell-dump1.png "dryrun-shell-dump")
@@ -173,7 +173,7 @@ In this lab, you will be guided through the following tasks:
 3. Once you are done with the previous step, execute the same “util.dumpInstance()” command again but this time, change the “dryRun” option to “false”. (When dryRun is set to true, it will not perform the actual dump but instead, displays information on what would be dumped and performs compatibility checks)
 
     ```bash
-    <copy>util.dumpInstance("sampledump", {"osBucketName": "MySQL-Bucket", "osNamespace": "idazzjlcjqzj", "ocimds": "true", "compatibility": ["strip_restricted_grants", "strip_definers"], users: "true", dryRun:"false"})</copy>
+    <copy>util.dumpInstance("sampledump", {"osBucketName": "MySQL-Bucket", "osNamespace": "idazzjlcjqzj", "ocimds": "true", "compatibility": ["force_innodb", "strip_restricted_grants", "strip_definers", "create_invisible_pks", "skip_invalid_accounts"], users: "true", dryRun:"false"})</copy>
     ```
 
     ![MySQL Shell Dump Utility - Output](./images/shell-dump1.png "shell-dump")
@@ -181,7 +181,7 @@ In this lab, you will be guided through the following tasks:
 
 4. Once the dump is complete, navigate back to Oracle Cloud and to the Object Storage bucket we created earlier (MySQL-Bucket). Check to see if you see your files under “sampledump” from the util.dumpInstance()
 
-    ![Bucket Dump Files](./images/confirm-dump1.png "confirm-dump")
+    ![Bucket Dump Files](./images/confirm-dump1-new.png "confirm-dump")
 
 This concludes this lab. You may now **proceed to the next lab.**
 
@@ -189,4 +189,4 @@ This concludes this lab. You may now **proceed to the next lab.**
 
 - **Author** - Ravish Patel, MySQL Solution Engineering
 - **Contributor** - Perside Foster, MySQL Solution Engineering
-- **Last Updated By/Date** - Ravish Patel, March 2023
+- **Last Updated By/Date** - Ravish Patel, June 2023

@@ -2,15 +2,13 @@
 
 ## Introduction
 
-Blockchain tables are append-only tables in which only insert operations are allowed. Deleting rows is either prohibited or restricted based on time. Rows in a blockchain table are made tamper-resistant by special sequencing & chaining algorithms. You can verify that rows have not been tampered. A hash value that is part of the row metadata is used to chain and validate rows.
+In the upcoming lab, we will be delving into the exciting world of blockchain technology, albeit focusing on a specific subset of its capabilities. Specifically, our primary objective will be to create and manage blockchain tables. Through this, we will learn how to efficiently insert data into the tables and how to manage rows in the blockchain.
 
-Blockchain tables enable you to implement a centralized ledger model where all participants in the blockchain network have access to the same tamper-resistant ledger.
+Beyond this, blockchain technology presents us with the opportunity to sign a specific record and verify the entire blockchain ledger. This is made possible by utilizing a certificate directory, which enables us to ensure the integrity of the blockchain. To sign a record, we can generate a certificate and add it to the directory, generate the byte code for the record we want to sign, and then use the certificate to sign the record. Subsequently, to verify the integrity of the entire blockchain, we can cross-check that all signed records match their respective byte codes and that the digital signatures match the certificates in the directory.
 
-A centralized ledger model reduces administrative overheads of setting a up a decentralized ledger network, leads to a relatively lower latency compared to decentralized ledgers, enhances developer productivity, reduces the time to market, and leads to significant savings for the organization. Database users can continue to use the same tools and practices that they would use for other database application development.
+In this lab, we will examine a banking example, deviating from our previous scenario of Oracle MovieStreams.
 
-For this lab we will deviate from our Oracle MovieStreams scenario and take a look at a banking example.
-
-Estimated Lab Time: 30 minutes
+Estimated Lab Time: 20 minutes
 
 ### Objectives
 
@@ -43,7 +41,7 @@ Please proceed to STEP 4 if you are already connected to Autonomous Database wit
 
 4. The `CREATE BLOCKCHAIN TABLE` statement requires additional attributes. The `NO DROP`, `NO DELETE`, `HASHING USING`, and `VERSION` clauses are mandatory.
 
-    Create a Blockchain table named `bank_ledger` that will maintain a tamper-resistant ledger of current and historical transactions using the SHA2_512 hashing algorithm. Rows of the `bank_ledger` blockchain table can never be deleted. Moreover the blockchain table can be dropped only after 16 days of inactivity.
+    Create a Blockchain table named `bank_ledger` that will maintain a tamper-resistant ledger of current and historical transactions using the SHA2_512 hashing algorithm. Rows of the `bank_ledger` blockchain table can never be deleted. Moreover, the blockchain table can be dropped only after 16 days of inactivity.
 
 	```
 	<copy>
@@ -102,7 +100,7 @@ Please proceed to STEP 4 if you are already connected to Autonomous Database wit
 
 	![showing the blockchain tables](./images/blockchain-user.png " ")
 
-9. Use the `USER_TAB_COLS` view to display all internal column names used to store internal information like the users number, the users signature.
+9. Use the `USER_TAB_COLS` view to display all internal column names used to store internal information like the user's number, the user's signature.
 
 	```
 	<copy>
@@ -114,7 +112,7 @@ Please proceed to STEP 4 if you are already connected to Autonomous Database wit
 
 	![showing the query being executed](./images/blockchain-query.png " ")
 
-10. Query the `bank_ledger` blockchain table to display all the values in the blockchain table including values of internal columns.
+10. Query the `bank_ledger` blockchain table to display all the values in the blockchain table, including values of internal columns.
 
 	```
 	<copy>
@@ -248,9 +246,9 @@ Similar to managing rows within the retention period, managing the blockchain ta
 
 	![showing the dba view](./images/dba-view.png " ")
 
-In this lab we focused on a very small subset of the capabilities of blockchain. Our primary focus was on creating and managing blockchain tables. We learned how to insert data into these tables and how to manage rows in the blockchain. Blockchain technology also enables you to sign a specific record and verify the entire blockchain ledger through a process involving a certificate directory. To sign a record, you can create a certificate and add it to the directory, generate the byte code for the record you want to sign, and use the certificate to sign the record. To verify the integrity of the entire blockchain, you can check that all signed records match their respective byte codes, and that the digital signatures match the certificates in the directory. 
+In the lab, we focused on a subset of the capabilities of blockchain, primarily on creating and managing blockchain tables. We learned how to insert data into these tables and manage rows in the blockchain. Additionally, we explored the process of signing a record and verifying the integrity of the entire blockchain through a certificate directory. By generating a certificate and adding it to the directory, we were able to sign a specific record, and by cross-checking that all signed records match their respective byte codes and digital signatures, we verified the integrity of the entire blockchain.
 
-If you're interested in learning more about blockchain like signing records and verifying the ledger, check out this LiveLab
+If you're keen on exploring the fascinating world of blockchain technology and learning more about signing records and verifying ledgers, we highly recommend checking out the LiveLab below. This interactive and immersive learning experience will provide you with hands-on experience in creating and managing blockchain tables, signing specific records, and verifying the entire blockchain's integrity through a certificate directory.
 
 - [Blockchain in the Oracle Database](https://apexapps.oracle.com/pls/apex/f?p=133:180:114026617672312::::wid:746)
 

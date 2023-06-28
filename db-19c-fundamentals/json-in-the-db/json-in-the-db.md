@@ -2,9 +2,9 @@
 
 ## Introduction
 
-The 19c generation of Oracle's converged database offers customers; best of breed support for all data types (e.g. relational, JSON, XML, spatial, graph, OLAP, etc.), and industry leading performance, scalability, availability and security for all their operational, analytical and other mixed workloads. A JSON collection stores JSON documents alongside some metadata like the time of creation or update. Collections offer operations like inserts, deletes, index creation or queries. We will be using Oracle SQL Developer Web (also known as Database Actions) - a development environment and a database administration interface for Oracle Database in the Oracle Public Cloud. For a complete integrated development environment, see Oracle SQL Developer User's Guide linked at the bottom of the lab.
+The 19c generation of Oracle's converged database offers you best of breed support for all data types (e.g. relational, JSON, XML, spatial, graph, OLAP, etc.), and industry leading performance, scalability, availability and security for all their operational, analytical and other mixed workloads. A JSON collection stores JSON documents alongside some metadata like the time of creation or update. Collections offer operations like inserts, deletes, index creation or queries. We will be using Oracle SQL Developer Web (also known as Database Actions) - a development environment and a database administration interface for the Oracle Database in the Oracle Public Cloud. For a complete integrated development environment, see Oracle SQL Developer User's Guide linked at the bottom of the lab.
 
-In order to create a collection all you have to specify is the collection's name. Unlike a relational table you do not have to provide any schema information. For our JSON lab, we'll be working with a collection of merchandise that our fictitious movie streaming company "Oracle MovieStream" sells.
+In order to create a collection, all you have to do is specify the collection's name. Unlike a relational table, you do not have to provide any schema information. For our JSON lab, we'll be working with a collection of merchandise that our fictitious movie streaming company, "Oracle MovieStream," sells.
 
 Estimated Time: 15 minutes
 
@@ -179,7 +179,7 @@ Now let's issue some simple queries on the *merchandise* collection we just crea
 
 3.	Find all T-shirts:
 
-	Running the query will displays two documents with category T-Shirts.
+	Running the query will display two documents with category T-Shirts.
 
 	```
 	<copy>
@@ -214,7 +214,7 @@ Now let's issue some simple queries on the *merchandise* collection we just crea
 
 JSON data is "schema flexible", you can add whatever data you like to a JSON document. But sometimes you will wish to impose some required structure on that data. That can be done through SQL by creating indexes and/or constraints on the JSON collection.
 
-An index will aid fast access to an item (for example speeding up access via the "category" field), but can also be used to impose uniqueness (a unique index or primary key constraint), or to enforce particular datatypes (by triggering an error if the datatype is not what is expected).
+An index will aid fast access to an item (for example speeding up access via the "category" field), but can also be used to impose uniqueness (a unique index or primary key constraint), or to enforce particular data types (by triggering an error if the datatype is not what is expected).
 
 More generally, constraints can be used to check the data being entered for various aspects.
 
@@ -246,7 +246,7 @@ More generally, constraints can be used to check the data being entered for vari
 
 	![JSON navigation](./images/nav2-json.png)
 
-4. Validate that the following documents cannot get inserted as fields are missing or of the wrong type.
+4. Validate that the following documents cannot get inserted if fields are missing or of the wrong type.
 
 	Click New JSON Document icon, copy and paste the following query in the worksheet and click **Create**.
 
@@ -260,7 +260,7 @@ More generally, constraints can be used to check the data being entered for vari
 	![create a not-allowed item](./images/tester.png)
 	![constraint error message](./images/error2.png)
 
-5. The following document now satisfies all the constraints: the "id" is a unique number, the category is a string, and the baseCost is a positive number. Lets add the document.
+5. The following document now satisfies all the constraints: the "id" is a unique number, the category is a string, and the baseCost is a positive number. Let's add the document.
 
 	```
 	<copy>
@@ -282,7 +282,7 @@ More generally, constraints can be used to check the data being entered for vari
 	![Add the top gun data](./images/add-hat.png)
 ## Task 5: Using SQL on JSON 
 
-So far, we've focused mostly on the document store API where we dealt with JSON data as a collection of documents. But there is another way to interact with your JSON data: SQL. SQL is a very mature query language. Oracle added new operators to work with JSON data (we created an open standard called SQL/JSON which was adopted by the ISO SQL standard). A key characteristic of a JSON collection (like 'merchandise') is that it is backed by a table - a table then gets auto-created when you create a collection so that you do not have to specify columns and data types. In the following we show you how you can use SQL to work with the JSON data in a collection.
+So far, we've focused mostly on the document store API where we dealt with JSON data as a collection of documents. But there is another way to interact with your JSON data: SQL. SQL is a very mature query language. Oracle added new operators to work with JSON data (we created an open standard called SQL/JSON which was adopted by the ISO SQL standard). A key characteristic of a JSON collection (like 'merchandise') is that it is backed by a table - a table then gets auto-created when you create a collection so that you do not have to specify columns and data types. Next, we'll use SQL to work with the JSON data in a collection.
 
 
 
@@ -294,7 +294,7 @@ So far, we've focused mostly on the document store API where we dealt with JSON 
 
     ![View products table](./images/products-table.png)
 
-    You see that the table 'MERCHANDISE' has 5 columns: an 'ID' which is a unique identifier for the document (and in the case of MongoDB-compatible collections, is taken from the "_id" field in the JSON), a column 'DATA' which holds the JSON document, 2 metadata columns to keep track of creation and update timestamps and 'VERSION' which is typically a hash value for the document and allows to keep caches in sync (similar to an eTag). None of this is really important at this point as we will only use the DATA column in the following examples.
+    You see that the table 'MERCHANDISE' has 5 columns: an 'ID' which is a unique identifier for the document (and in the case of MongoDB-compatible collections, is taken from the "_id" field in the JSON), a column 'DATA' which holds the JSON document, 2 metadata columns to keep track of creation and update timestamps and 'VERSION' which is typically a hash value for the document used to keep caches in sync (similar to an eTag). 
 
 
 3. Because the JSON data is stored in a binary representation (for query and update efficiency) we need to convert it to a human-readable string using JSON_Serialize.
