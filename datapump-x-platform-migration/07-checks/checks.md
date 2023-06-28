@@ -247,11 +247,23 @@ $
   ```
 </details>
 
+If you want to take a look at the metadata SQL file, you can use this command on __target__:
+
+  ```
+    <copy>
+     more /home/oracle/xtts/dump/upgr_metadata.sql
+    </copy>
+  ```
+![connect with SQL*Plus to source](./images/sqlplus-src.png " ") 
+
+
+
 ## Task  3: Check
 Do you remember that you created a table "object_copy" in "tpcc" at the beginning of the roll forward phase?
 You can now check if source and target match using SQL*Plus:
 
 ### Step 1: Open SQL*Plus (SOURCE)
+
   ```
     <copy>
      sqlplus tpcc/oracle
@@ -265,7 +277,7 @@ You can now check if source and target match using SQL*Plus:
      sqlplus tpcc/oracle@pdb3
     </copy>
   ```
-![connect with SQL*Plus to target](./images/sqlplus-trg.png " ") 
+![ccontent of the metadata SQL file](./images/metadata-sql-file.png " ") 
 
 ### Step 3: SQL Statement (SOURCE and TARGET)
   ```
