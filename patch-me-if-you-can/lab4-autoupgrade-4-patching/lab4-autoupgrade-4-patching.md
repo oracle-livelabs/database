@@ -115,10 +115,10 @@ You can monitor it in the job interface easily with a refresh interval:
 It will do an automatic refresh from now on.
 
 
-You may now *proceed to the next lab*
 ![autoupgrade refresh](./images/autoupgrade-status-refresh.png " ")
 
 
+You may now *proceed to the next lab*
 
 ## Acknowledgements
 * **Author** - Mike Dietrich 
