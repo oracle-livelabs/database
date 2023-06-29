@@ -4,7 +4,7 @@
 
 A HeatWave cluster comprise of a MySQL DB System node and two or more HeatWave nodes. The MySQL DB System node includes a plugin that is responsible for cluster management, loading data into the HeatWave cluster, query scheduling, and returning query result.
 
-![Connect](./images/heatwave-lab-setup.png "heatwave lab setup ")
+![Lakehouse Architecture](./images/heatwave-lab-setup.png "heatwave lab setup ")
 
 _Estimated Time:_ 15 minutes
 
@@ -27,38 +27,38 @@ In this lab, you will be guided through the following task:
     Databases
         MySQL
 
-    ![CONNECT](./images/db-list.png "db list")
+    ![Database List](./images/db-list.png "Database List")
 
 2. Click the `heatwave-db` Database System link
 
-    ![CONNECT](./images/mysql-heatwave-active.png "db active ")
+    ![Active Database](./images/mysql-heatwave-active.png "db active ")
 
 3. In the list of DB Systems, click the **heatwave-db** system. click **More Action ->  Add HeatWave Cluster**.
-    ![Connect](./images/mysql-heatwave-more.png "mysql heatwave more")
+    ![Databse Detail](./images/mysql-heatwave-more.png "mysql heatwave more")
 
 4. Estiamte cluster nodes
-    ![Connect](./images/heatwave-cluster-estimate-node.png "heatwave cluster add estimate node")
+    ![Cluster Estimate](./images/heatwave-cluster-estimate-node.png "heatwave cluster add estimate node")
 
 5. Generate Estimate and review loaded data then  hit cancel
 
-    ![Connect](./images/heatwave-cluster-generate-estimate.png "heatwave cluster generate  estimate ")
+    ![Regenerate Estimate](./images/heatwave-cluster-generate-estimate.png "heatwave cluster generate  estimate ")
 
 6. Enable the **MySQL HeatWave LakeHouse** checkbox
 
 7. Set **Node Count to 2** for this Lab Click **Add HeatWave Cluster** to create the HeatWave cluster
 
-    ![Connect](./images/mysql-add-heatwave-cluster.png "mysql add heatwave cluster")
+    ![Activate Lakehouse](./images/mysql-add-heatwave-cluster.png "mysql add heatwave cluster")
 
 8. HeatWave creation will take about 10 minutes. From the DB display page scroll down to the Resources section.
 
 9. Click the **HeatWave** link. Your completed HeatWave Cluster Information section will look like this:
-    ![Connect](./images/mysql-heat-cluster-complete.png "mysql heat cluster complete ")
+    ![Completed Cluster Creation](./images/mysql-heat-cluster-complete.png "mysql heat cluster complete ")
 
 ## Task 2: Connect to database using MySQL Shell
 
 ***IMPORTANT**  When the HeatWave culster has been create  **Click Enable** “MySQL HeatWave Lakehouse” to activate HeatWave Lakehouse in the cluster
 
-![Connect](./images/heatwave-cluster-lakehouse.png "heatwave cluster lakehouse")
+![Lakehouse Enabled](./images/heatwave-cluster-lakehouse.png "heatwave cluster lakehouse")
 
 1. If not already connected with SSH, on Command Line, connect to the Compute instance using SSH ... be sure replace the  "private key file"  and the "new compute instance ip"
 
@@ -76,7 +76,7 @@ In this lab, you will be guided through the following task:
     <copy>mysqlsh -uadmin -p -h 10.0.1.... --sql</copy>
     ```
 
-    ![CONNECT](./images/connect-myslqsh.png "connect myslqsh")
+    ![MySQL Shell connected DB](./images/connect-myslqsh.png "connect myslqsh")
 
 3. List schemas in your heatwave instance
 
@@ -84,7 +84,7 @@ In this lab, you will be guided through the following task:
         <copy>show databases;</copy>
     ```
 
-    ![CONNECT](./images/list-schemas-after.png "list schemas after")
+    ![Database Schema List](./images/list-schemas-after.png "list schemas after")
 
 4. View  the mysql\_customer\_orders total records per table in
 
@@ -92,7 +92,7 @@ In this lab, you will be guided through the following task:
     <copy>SELECT table_name, table_rows FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'mysql_customer_orders';</copy>
     ```
 
-    ![CONNECT](./images/mysql-customer-orders-list.png "mysql customer orders list")
+    ![Databse Tables](./images/mysql-customer-orders-list.png "mysql customer orders list")
 
 You may now **proceed to the next lab**
 

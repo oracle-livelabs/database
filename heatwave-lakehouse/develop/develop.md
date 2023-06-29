@@ -203,9 +203,10 @@ In this lab, you will be guided through the following tasks:
 
     Example: http://129.213.167..../dbtest.php  
 
-    ![Connect](./images/order-app-output.png " order app output")
+    ![Application output](./images/order-app-output.png " order app output")
 
 ## Learn More
+
 [https://dev.mysql.com/doc/heatwave/en/mys-hw-lakehouse.html](https://dev.mysql.com/doc/heatwave/en/mys-hw-lakehouse.html)
 
 ## Acknowledgements

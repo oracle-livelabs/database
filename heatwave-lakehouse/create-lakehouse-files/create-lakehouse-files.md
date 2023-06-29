@@ -60,35 +60,35 @@ A set of files have been created for you to use in this workshop. You will use t
     <copy>ls -l</copy>
     ```
 
-    ![cloud storage bucket](./images/datafiles-list.png "datafiles list")
+    ![bucket file list](./images/datafiles-list.png "datafiles list")
 
 ## Task 2: Create Object Storage bucket
 
 1. From the Console navigation menu, click **Storage**.
 2. Under Object Storage, click Buckets
-    ![cloud storage bucket](./images/cloud-storage-menu.png "cloud storage menu")
+    ![bucket menu](./images/cloud-storage-menu.png "cloud storage menu")
 
     **NOTE:** Ensure the correct Compartment is selected : Select **root**
 
 3. Click Create Bucket. The Create Bucket pane is displayed.
 
-    ![cloud storage bucket](./images/cloud-storage-bucket.png "cloud storage bucket")
+    ![bucket create pane](./images/cloud-storage-bucket.png "cloud storage bucket")
 
 4. Enter the Bucket Name **lakehouse-files**
 5. Under Default Storage Tier, click Standard. Leave all the other fields at their default values.
 
-    ![cloud storage bucket](./images/create-lakehous-bucket.png "create bucket")
+    ![Add bucket name](./images/create-lakehous-bucket.png "create bucket")
 
 6. Create the  Pre-Authenticated Request URL for the bucket
      - a. Click on the 3 dots to the right of the **lakehouse-files** bucket  Click on ‘Create Pre-Authenticated Request’
-        ![cloud storage bucket](./images/create-lakehous-bucket-par-dots.png "bucket par dots")
-        ![cloud storage bucket](./images/create-lakehous-bucket-par-load.png "bucket par load")
+        ![lakehouse-files 3 dots](./images/create-lakehous-bucket-par-dots.png "bucket par dots")
+        ![Create PAR](./images/create-lakehous-bucket-par-load.png "bucket par load")
      - b. The ‘Bucket’ option will be pre-selected
      - c. For 'Access Type' select 'Permit object write
      - d. Click the Create "Pre-Authenticated Request' button
-        ![cloud storage bucket](./images/create-lakehous-bucket-par-load-button.png " bucket par load button")
+        ![PAR Button](./images/create-lakehous-bucket-par-load-button.png " bucket par load button")
      - e. Click the ‘Copy’ icon to copy the PAR URL
-        ![cloud storage bucket](./images/create-lakehous-bucket-par-copy-load.png "bucket par load copy")
+        ![Copy PAR](./images/create-lakehous-bucket-par-copy-load.png "bucket par load copy")
      - f. Save the generated PAR URL; you will need it in the next task
 
 ## Task 3: Add files into  the Bucket using the saved PAR URL
@@ -103,7 +103,7 @@ A set of files have been created for you to use in this workshop. You will use t
     <copy>ls -l</copy>
     ```
 
-    ![cloud storage bucket](./images/datafiles-list.png "datafiles list")
+    ![bucket file list](./images/datafiles-list.png "datafiles list")
 
 2. Add the delivery-orders-1.csv file to the storage bucket by modifying the following statement with the example below. You must replace the **(PAR URL)** value with the saved generated **PAR URL** from the previous Task.
 

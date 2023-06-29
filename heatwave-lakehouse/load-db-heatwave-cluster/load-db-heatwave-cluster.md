@@ -6,7 +6,7 @@ A HeatWave cluster comprise of a MySQL DB System node and two or more HeatWave n
 
 In this lab, you will load data and run queries in the HeatWave Cluster. You will see the query performance improvements on HeatWave compare to MySQL.
 
-![Connect](./images/heatwave-lab-setup.png "heatwave lab setup ")
+![Setup Lab](./images/heatwave-lab-setup.png "heatwave lab setup ")
 
 _Estimated Time:_ 15 minutes
 
@@ -33,7 +33,7 @@ In this lab, you will be guided through the following task:
     <copy>mysqlsh -uadmin -p -h 10.0.1... --sql </copy>
     ```
 
-    ![Connect](./images/mysql-shell-login.png " mysql shell login")
+    ![MySQL shell Connect](./images/mysql-shell-login.png " mysql shell login")
 
 4. Run the following Auto Parallel Load command to load the  mysql\_customer\_orders tables data into the HeatWavecluster
 
@@ -43,9 +43,9 @@ In this lab, you will be guided through the following task:
 
 5. The completed load cluster screen should look like this:
 
-    ![Connect](./images/load-cluster-begin.png "load cluster begin")
+    ![Cluster load start](./images/load-cluster-begin.png "load cluster begin")
 
-    ![Connect](./images/load-cluster-end.png "load cluster end")
+    ![Cluster load end](./images/load-cluster-end.png "load cluster end")
 
 6. Verify that the tables are loaded in the HeatWave cluster. Loaded tables have an AVAIL_RPDGSTABSTATE load status.
 
@@ -57,7 +57,7 @@ In this lab, you will be guided through the following task:
     <copy>SELECT NAME, LOAD_STATUS FROM rpd_tables,rpd_table_id WHERE rpd_tables.ID = rpd_table_id.ID;</copy>
     ```
 
-    ![Connect](./images/heatwave-loaded-data.png "heatwave loaded data")
+    ![Cluster is loaded](./images/heatwave-loaded-data.png "heatwave loaded data")
 
 ## Task 2: Run Queries in HeatWave
 
@@ -67,7 +67,7 @@ In this lab, you will be guided through the following task:
     <copy>mysqlsh -uadmin -p -h 10.0.1... --sql </copy>
     ```
 
-    ![Connect](./images/mysql-shell-login.png " mysql shell login")
+    ![MySQl Shell Connect](./images/mysql-shell-login.png " mysql shell login")
 
 2. Change to the mysql\_customer\_orders database
 
@@ -120,7 +120,7 @@ In this lab, you will be guided through the following task:
 
     - With HeatWave Cluster **ON: .3509 seconds**
 
-    ![Connect](./images/mysql-customer-order.png "mysql customer order ")
+    ![mysql-customer-order data](./images/mysql-customer-order.png "mysql customer order ")
 
 6. To compare the HeatWave execution time with MySQL DB System execution time, disable the `use_secondary_engine` variable to see how long it takes to run the same query on the MySQL DB System. For example:
 

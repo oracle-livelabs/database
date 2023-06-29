@@ -23,23 +23,23 @@ In this final task of loading data we will load data into a table DELIVERY_VENDO
 1. As in the earlier tasks, we will first create a PAR URL to the file we want to load. Here, the entire data is in a single table
 
 2. To create a PAR URL go to menu **Storage —> Buckets**
-    ![CONNECT](./images/storage-bucket-menu.png "storage bucket menu")
+    ![create a PAR URL](./images/storage-bucket-menu.png "storage bucket menu")
 
 3. Select **lakehouse-files** bucket.
 4. Select the file —> **delivery-vendor.pq** and click the three vertical dots.
 5. Click on **Create Pre-Authenticated Request**
 
-    ![CONNECT](./images/storage-create-par-vendor.png "storage create par vendors")
+    ![lakehouse-files 3 dots](./images/storage-create-par-vendor.png "storage create par vendors")
 
 6. The **Object** option will be pre-selected.
 7. Keep **Permit object reads** selected
 8. Kep the other options for **Access Type** unchanged.
 9. Click the **Create Pre-Authenticated Request** button.
 
-    ![CONNECT](./images/storage-create-par-vendor-page.png "storage create par  vendors page")
+    ![Create vendor PAR](./images/storage-create-par-vendor-page.png "storage create par  vendors page")
 
 10. Click the **Copy** icon to copy the PAR URL. 
-    ![CONNECT](./images/storage-create-par-vendor-page-copy.png "storage create par vendors page copy") 
+    !T[Copy vendor PAR](./images/storage-create-par-vendor-page-copy.png "storage create par vendors page copy") 
 
 11. Save the generated PAR URL; you will need it in the next task
 
@@ -57,7 +57,7 @@ In this final task of loading data we will load data into a table DELIVERY_VENDO
     <copy>mysqlsh -uadmin -p -h 10.0.1... --sql </copy>
     ```
 
-    ![Connect](./images/mysql-shell-login.png " mysql shell login")
+    ![MySQl Shell Connect](./images/mysql-shell-login.png " mysql shell login")
 
 3. Select the mysql\_customer\_orders database for use
 
@@ -113,8 +113,7 @@ In this final task of loading data we will load data into a table DELIVERY_VENDO
     ```
 
 10. Output of steps 5 thru 9
-    ![Connect](./images/create-vendor-table.png " create vendor table")
-
+    ![Create Vendor](./images/create-vendor-table.png " create vendor table")
 
 You may now **proceed to the next lab**
 

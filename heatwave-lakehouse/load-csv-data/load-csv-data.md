@@ -25,23 +25,23 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
 1. To create a PAR URL
     - Go to menu **Storage —> Buckets**
-     ![CONNECT](./images/storage-bucket-menu.png "storage bucket menu")
+     ![Bucket menu](./images/storage-bucket-menu.png "storage bucket menu")
 
     - Select **lakehouse-files —> order**  folder.
 2. Select the first file —> **delivery-orders-1.csv** and click the three vertical dots.
 3. Click on **Create Pre-Authenticated Request**
 
-    ![CONNECT](./images/storage-create-par-orders.png "storage create par orders")
+    ![delivery-orders-1.csv 3 dots](./images/storage-create-par-orders.png "storage create par orders")
 
 4. The **Object** option will be pre-selected.
 5. Keep **Permit object reads** selected
 6. Kep the other options for **Access Type** unchanged.
 7. Click the **Create Pre-Authenticated Request** button.
 
-    ![CONNECT](./images/storage-create-par-orders-page.png "storage create par orders page")
+    ![Create PAR](./images/storage-create-par-orders-page.png "storage create par orders page")
 
 8. Click the **Copy** icon to copy the PAR URL.
-    ![CONNECT](./images/storage-create-par-orders-page-copy.png "storage create par orders page copy")
+    ![Copy PAR](./images/storage-create-par-orders-page-copy.png "storage create par orders page copy")
 
 9. Save the generated PAR URL; you will need it in the next task
 
@@ -53,7 +53,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
     <copy>mysqlsh -uadmin -p -h 10.0.1... --sql </copy>
     ```
 
-    ![Connect](./images/mysql-shell-login.png " mysql shell login")
+    ![MySQL Shell Connect](./images/mysql-shell-login.png " mysql shell login")
 
 2. List schemas in your heatwave instance
 
@@ -61,7 +61,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
         <copy>show databases;</copy>
     ```
 
-    ![CONNECT](./images/list-schemas-after.png "list schemas after")
+    ![Databse Schemas](./images/list-schemas-after.png "list schemas after")
 
 3. Change to the mysql\_customer\_orders database
 
@@ -147,11 +147,11 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
     <copy>SELECT log->>"$.sql" AS "Load Script" FROM sys.heatwave_autopilot_report WHERE type = "sql" ORDER BY id;</copy>
     ```
 
-    ![CONNECT](./images/load-script-dryrun.png "load script dryrun")
+    ![Dryrub script](./images/load-script-dryrun.png "load script dryrun")
 
 8. The execution result conatins the SQL statements needed to create the table and then load this table data from the Object Store into HeatWave.
 
-    ![CONNECT](./images/create-delivery-order.png "create delivery order")
+    ![Create Table](./images/create-delivery-order.png "create delivery order")
 
 9. Copy the **CREATE TABLE** command from the results. It should look like the following example
 
@@ -175,7 +175,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
 13. The create command and result should look lie this
 
-    ![CONNECT](./images/create-delivery-table.png "create delivery table")
+    ![Delivery Table creat](./images/create-delivery-table.png "create delivery table")
 
 ## Task 4: Load complete DELIVERY table from Object Store into MySQL HeatWave
 
@@ -185,7 +185,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
     <copy>desc delivery_orders;</copy>
     ```
 
-    ![CONNECT](./images/describe-delivery-table.png "describe delivery table")
+    ![Delivery Table structure](./images/describe-delivery-table.png "describe delivery table")
 
 2. Now load the data from the Object Store into the ORDERS table.
 
@@ -221,7 +221,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
 6. Your output for steps 2 thru 5 should look like this:
 
-    ![CONNECT](./images/load-delivery-table.png "load delivery table")
+    ![Add data to table](./images/load-delivery-table.png "load delivery table")
 
 7. Your DELIVERY table is now ready to be used in queries with other tables. In the next lab, we will see how to load additional data for the DELIVERY table from the Object Store using different options.
 
@@ -242,7 +242,7 @@ We will use the second option which Loads the data by specifying a PAR URL for a
     - a. From your OCI console, navigate to your lakehouse-files bucket in OCI.
     - b. Select the folder —> order and click the three vertical dots.
 
-        ![CONNECT](./images/storage-delivery-orders-folder.png "storage delivery order folder")
+        ![Select  folderT](./images/storage-delivery-orders-folder.png "storage delivery order folder")
 
     - c. Click on ‘Create Pre-Authenticated Request’
     - d. Click to select the ‘Objects with prefix’ option under ‘PreAuthentcated Request Target’.
@@ -250,13 +250,13 @@ We will use the second option which Loads the data by specifying a PAR URL for a
     - g. Click to select the ‘Enable Object Listing’ checkbox.
     - h. Click the ‘Create Pre-Authenticated Request’ button.
 
-       ![CONNECT](./images/storage-delivery-orders-folder-page.png "storage delivery order folder page")
+       ![Create Folder PAR](./images/storage-delivery-orders-folder-page.png "storage delivery order folder page")
 
     - i. Click the ‘Copy’ icon to copy the PAR URL.
     - j. Save the generated PAR URL; you will need it later.
     - k. You can test the URL out by pasting it in your browser. It should return output like this:
 
-        ![CONNECT](./images/storage-delivery-orders-folder-list.png "storage delivery order folder list")
+        ![List folder file](./images/storage-delivery-orders-folder-list.png "storage delivery order folder list")
 
 3. Since we have already created the table, we will not run Autopilot again. Instead we will simply go ahead and change the table definition to point it to this new PAR URL as the table source.
 
@@ -272,7 +272,7 @@ We will use the second option which Loads the data by specifying a PAR URL for a
 
     **Output**
 
-    ![CONNECT](./images/load-all-delivery-table.png "load all delivery table")
+    ![Add data to Table](./images/load-all-delivery-table.png "load all delivery table")
 
 6. Load data into the DELIVERY table:
 
@@ -289,7 +289,7 @@ We will use the second option which Loads the data by specifying a PAR URL for a
     The DELIVERY table now has 34 million rows.
 8. Output of steps 6 and 7
 
-![CONNECT](./images/load-final-delivery-table.png "load final delivery table")
+![Add data to tabel](./images/load-final-delivery-table.png "load final delivery table")
 
 You may now **proceed to the next lab**
 

@@ -30,9 +30,9 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
 
 1. To start the Oracle Cloud shell, go to your Cloud console and click the cloud shell icon at the top right of the page. This will open the Cloud Shell in the browser, the first time it takes some time to generate it.
 
-    ![CONNECT](./images/cloudshellopen.png "cloudshellopen ")
+    ![Open Cloudshell](./images/cloudshellopen.png "cloudshellopen ")
 
-    ![CONNECT](./images/cloudshell-welcome.png "cloudshell welcome ")
+    ![Cloudshell Message](./images/cloudshell-welcome.png "cloudshell welcome ")
 
     *Note: You can use the icons in the upper right corner of the Cloud Shell window to minimize, maximize, restart, and close your Cloud Shell session.
 
@@ -46,7 +46,7 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
 
     Here is what it should look like.  
 
-    ![CONNECT](./images/ssh-keygen.png "ssh keygen ")
+    ![Generate SSH Key](./images/ssh-keygen.png "ssh keygen ")
 
 3. The public  and  private SSH keys  are stored in ~/.ssh/id_rsa.pub.
 
@@ -60,7 +60,7 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
     <copy>ls</copy>
     ```
 
-    ![CONNECT](./images/ssh-list.png "ssh list ")
+    ![SSH files list](./images/ssh-list.png "ssh list ")
 
     Note in the output there are two files, a *private key:`id_rsa` and a public key: `id_rsa.pub`. Keep the private key safe and don't share its content with anyone. The public key will be needed for various activities and can be uploaded to certain systems as well as copied and pasted to facilitate secure communications in the cloud.
 
@@ -73,7 +73,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 2. Do the followings steps to copy the public SSH key to the  notepad
 
     Open the Cloud shell
-    ![CONNECT](./images/cloudshell-copy-ssh.png "cloudshell copy ssh")
+    ![Copy SSh Key](./images/cloudshell-copy-ssh.png "cloudshell copy ssh")
 
     Enter the following command  
 
@@ -81,12 +81,12 @@ You will need a compute Instance to connect to your brand new MySQL database.
     <copy>cat ~/.ssh/id_rsa.pub</copy>
     ```
 
-    ![CONNECT](./images/cloudshell-cat.png "cloudshell cat") 
+    ![Display SSH Key](./images/cloudshell-cat.png "cloudshell cat") 
 
 3. Copy the id_rsa.pub content the notepad
 
     Your notepad should look like this
-    ![CONNECT](./images/notepad-rsa-key.png "notepad rsa key ")
+    ![Completed SSH key](./images/notepad-rsa-key.png "notepad rsa key ")
 
 ## Task 3: Create Compute instance
 
@@ -94,10 +94,10 @@ You will need a compute Instance to connect to your brand new MySQL database.
     Navigation Menu
     Compute
     Instances
-    ![CONNECT](./images/compute-launch.png "compute launch ")
+    ![Compute Template](./images/compute-launch.png "compute launch ")
 
 2. On Instances in **heatwave** Compartment, click  **Create Instance**
-    ![CONNECT](./images/compute-create.png "compute create")
+    ![Create Compute button](./images/compute-create.png "compute create")
 
 3. On Create Compute Instance
 
@@ -113,7 +113,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 6. Keep the selected Image, Oracle Linux 8
 
-      ![CONNECT](./images/compute-oracle-linux.png "compute oracle linux")  
+      ![Use Linux OS](./images/compute-oracle-linux.png "compute oracle linux")  
 
 7. Change the Instance Shape:
     - Click **Change shape** button
@@ -122,26 +122,26 @@ You will need a compute Instance to connect to your brand new MySQL database.
     - Click **VM.Standard.E2.2**
     - Click the **Select Shape** button
 
-    ![CONNECT](./images/compute-shape-select.png "compute shape select")
+    ![New Shape](./images/compute-shape-select.png "compute shape select")
 
 8. On Networking, make sure '**heatwave-vcn**' is selected
 
     'Assign a public IP address' should be set to Yes
 
-    ![CONNECT](./images/compute-vcn.png "compute vcn.")
+    ![Select VCN](./images/compute-vcn.png "compute vcn.")
 
 9. On Add SSH keys, paste the public key from the notepad.
   
-    ![CONNECT](./images/compute-id-rsa-paste.png "compute id rsa paste")
+    ![Add SSH key](./images/compute-id-rsa-paste.png "compute id rsa paste")
 
 10. Click '**Create**' to finish creating your Compute Instance.
 
 11. The New Virtual Machine will be ready to use after a few minutes. The state will be shown as 'Provisioning' during the creation
-    ![CONNECT](./images/compute-provisioning.png "compute provisioning")
+    ![Provision Compute](./images/compute-provisioning.png "compute provisioning")
 
 12. The state 'Running' indicates that the Virtual Machine is ready to use.
 
-    ![CONNECT](./images/compute-running.png "compute running")
+    ![Completed Compute](./images/compute-running.png "compute running")
 
 ## Task 4: Connect to Compute and Install MySQl Shell
 
@@ -150,11 +150,11 @@ You will need a compute Instance to connect to your brand new MySQL database.
     - Go to Navigation Menu
             Compute
             Instances
-    ![CONNECT](./images/compute-list.png "compute list")
+    ![Navigate to Compute ](./images/compute-list.png "compute list")
 
     - Click the `heatwave-cient` Instance link
 
-    ![CONNECT](./images/compute-running.png "compute public ip")
+    ![Compute Instance List](./images/compute-running.png "compute public ip")
 
     - Copy `heatwave-cient` plus  the `Public IP Address` to the notepad
 
@@ -164,11 +164,11 @@ You will need a compute Instance to connect to your brand new MySQL database.
             Databases
             MySQL
 
-     ![CONNECT](./images/db-list.png "db list")
+     ![Database list](./images/db-list.png "db list")
 
     - Click the `heatwave-db` Database System link
 
-     ![CONNECT](./images/mysql-heatwave-active.png "db active ")
+     ![Active Database](./images/mysql-heatwave-active.png "db active ")
 
     - Copy `heatwave-db` plus the `Private IP Address` to the notepad
 
@@ -184,7 +184,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
     <copy>ssh -i ~/.ssh/id_rsa opc@<your_compute_instance_ip></copy>
     ```
 
-    ![CONNECT](./images/connect-signin.png "connect signin")
+    ![SSH Connected](./images/connect-signin.png "connect signin")
 
     **Install MySQL Shell on the Compute Instance**
 
@@ -198,7 +198,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
     <copy>sudo yum install mysql-shell -y</copy>
     ```
 
-    ![CONNECT](./images/connect-shell.png "connect shell")
+    ![MySQL Shell Install](./images/connect-shell.png "connect shell")
 
 You may now **proceed to the next lab**
 
