@@ -31,9 +31,9 @@ In this workshop, you will:
 
 * n/a
 
-## About the workshop content
+## Lab Environment
 
-This workshop is preloaded with four different Oracle Homes and six databases.
+This lab is preloaded with four different Oracle Homes and seven databases.
 You can switch between environments with the shortcuts shown in the last column of the below diagram.
 
 ![Hands On Lab Environment](./images/hol-environment.png " ")
@@ -45,7 +45,7 @@ The four different Oracle Homes are:
 - Oracle 19c      – /u01/app/oracle/product/19
 - Oracle 21c      – /u01/app/oracle/product/21
 
-The workshop also contains 6 different databases for running various upgrade and migration scenarios. This lab will use the UPGR 11.2.0.4 database as source and create a PDB3 in the 21c CDB3.
+The workshop also contains 6 different databases for running various upgrade and migration scenarios. This lab will use the __UPGR__ 11.2.0.4 database as source and create a __PDB3__ in the 21c __CDB3__.
 
 - UPGR – 11.2.0.4 database (non-CDB)
 - FTEX – 11.2.0.4 database (non-CDB)

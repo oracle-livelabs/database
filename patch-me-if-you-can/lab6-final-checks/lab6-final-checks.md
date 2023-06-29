@@ -91,3 +91,9 @@ Now you see no difference. But PERL updates get delivered with Release Updates s
 Congratulations from the entire Oracle Database Upgrade, Migration and Patching team. You completed the Hands-On Lab "Patch me if you can" successfully. Next time, we'll approach the Grid Infrastructure patching together. 
 
 But for now, relax - and thanks for taking the time to complete this lab.
+
+
+## Acknowledgements
+* **Author** - Mike Dietrich 
+* **Contributors** Klaus Gronau, Daniel Overby Hansen  
+* **Last Updated By/Date** - Klaus Gronau, June 2023

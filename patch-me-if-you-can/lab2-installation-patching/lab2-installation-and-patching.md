@@ -15,29 +15,37 @@ In this lab exercise you will install Oracle Database 19.19.0 into a separate ho
 ## Task 1 - Base Release Installation
 Create now the new Oracle Home for 19.19.0, unzip the base release and refresh opatch. 
 
-Start by **double-clicking at the "patching" icon** on the desktop (add screenshot). It will open an xterm (Terminal Window) with two open tabs.
+Start by **double-clicking at the "patching" icon** on the desktop:
 
-Switch to your designated environment. All variables will be set automatically.
+![Screenshot of the Linux Hands On Lab Terminal icon](./images/patching-icon.png =40%x40%)
+
+It will open an xterm (Terminal Window) with two open tabs.
+
+Switch to the tab called "19.18.0 TARGET Home". All variables will be set automatically executing:
+
   ```
     <copy>
      . cdb1919
     </copy>
   ```
-
-Create the new Oracle Home directory
+![Source target environment](./images/source-target-env.png " ")
+  Create the new Oracle Home directory
 
   ```
     <copy>
-     mkdir 1919
+     mkdir /u01/app/oracle/product/1919
     </copy>
   ```
+
+![create new directory 1919](./images/mkdir-target-1919.png " ")
 and change into it
 
   ```
     <copy>
-     cd 1919
+     cd /u01/app/oracle/product/1919
     </copy>
   ```
+![change into directory 1919](./images/cd-target-dir-1919.png " ")
 
 As next step, unzip the 19.3.0 base image from the staging location into this directory.
 
@@ -46,6 +54,7 @@ As next step, unzip the 19.3.0 base image from the staging location into this di
      unzip /home/oracle/stage/LINUX.X64_193000_db_home.zip -d /u01/app/oracle/product/1919
     </copy>
   ```
+![unzip Oracle software](./images/unzip-oracle-software.png " ")
 
 Then remove the OPatch directory 
 
@@ -54,6 +63,7 @@ Then remove the OPatch directory
       rm -rf OPatch
     </copy>
   ```
+![remove original opatch](./images/remove-opatch.png " ")
 
 and unzip the new OPatch from staging into this new Oracle Home. This step is important since older OPatch versions won't have the features we are using today.
 
@@ -62,13 +72,11 @@ and unzip the new OPatch from staging into this new Oracle Home. This step is im
      unzip /home/oracle/stage/p6880880_210000_Linux-x86-64.zip -d /u01/app/oracle/product/1919/
     </copy>
   ```
+![unzip new opatch](./images/unzip-opatch-software.png " ")
 
 ## Task 2 - Patch Installation
 
 The patches you are going to install are all unpacked into separate directories.
-
-<details>
- <summary>*click here to see the patch file structure*</summary>
 
   ``` text
 /home/oracle/stage
@@ -90,14 +98,14 @@ The patches you are going to install are all unpacked into separate directories.
     ├── 35042068
     └── PatchSearch.xml
   ```
-</details>
+
 
 To install all the patches in one single action, you will use the `-applyRU` and `-applyOneOffs` option of the Oracle Universal Installer. Since MRPs were unknown to the OUI a while ago you need to call every included patch separately.
 
-You can either copy & paste the entire command or call the script below:
+You can either copy & paste the entire command or call a script. Open only one of the next two choices, copy the command and paste it into your target termina tab.
 
 <details>
- <summary>*click here if you want to copy & paste the command*</summary>
+ <summary>*click here if you want to copy the command*</summary>
 
   ``` text
       <copy>
@@ -120,11 +128,82 @@ You can either copy & paste the entire command or call the script below:
     DECLINE_SECURITY_UPDATES=true
     </copy>
   ```
+![runInstaller output ](./images/run-installer-output.png " ")
+<details>
+ <summary>*click here to see the full output*</summary>
+
+  ``` text
+[CDB2] oracle@hol:/u01/app/oracle/product/1919
+$ ./runInstaller -applyRU /home/oracle/stage/ru/35042068  \
+>  -applyOneOffs /home/oracle/stage/ojvm/35050341,/home/oracle/stage/dpbp/35261302,/home/oracle/stage/mrp/35333937/34340632,/home/oracle/stage/mrp/35333937/35012562,/home/oracle/stage/mrp/35333937/35037877,/home/oracle/stage/mrp/35333937/35116995,/home/oracle/stage/mrp/35333937/35225526 \
+>    -silent -ignorePrereqFailure -waitforcompletion \
+>     oracle.install.option=INSTALL_DB_SWONLY \
+>     UNIX_GROUP_NAME=oinstall \
+>     INVENTORY_LOCATION=/u01/app/oraInventory \
+>     ORACLE_HOME=/u01/app/oracle/product/1919 \
+>     ORACLE_BASE=/u01/app/oracle \
+>     oracle.install.db.InstallEdition=EE \
+>     oracle.install.db.OSDBA_GROUP=dba \
+>     oracle.install.db.OSOPER_GROUP=dba \
+>     oracle.install.db.OSBACKUPDBA_GROUP=dba \
+>     oracle.install.db.OSDGDBA_GROUP=dba \
+>     oracle.install.db.OSKMDBA_GROUP=dba \
+>     oracle.install.db.OSRACDBA_GROUP=dba \
+>     SECURITY_UPDATES_VIA_MYORACLESUPPORT=false \
+>     DECLINE_SECURITY_UPDATES=true
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = "UTF-8",
+	LANG = "en_US.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to a fallback locale ("en_US.UTF-8").
+Preparing the home to patch...
+Applying the patch /home/oracle/stage/ru/35042068...
+Successfully applied the patch.
+Applying the patch /home/oracle/stage/ojvm/35050341...
+Successfully applied the patch.
+Applying the patch /home/oracle/stage/dpbp/35261302...
+Successfully applied the patch.
+Applying the patch /home/oracle/stage/mrp/35333937/34340632...
+Successfully applied the patch.
+Applying the patch /home/oracle/stage/mrp/35333937/35012562...
+Successfully applied the patch.
+Applying the patch /home/oracle/stage/mrp/35333937/35037877...
+Successfully applied the patch.
+Applying the patch /home/oracle/stage/mrp/35333937/35116995...
+Successfully applied the patch.
+Applying the patch /home/oracle/stage/mrp/35333937/35225526...
+Successfully applied the patch.
+The log can be found at: /u01/app/oraInventory/logs/InstallActions2023-06-29_12-40-26PM/installerPatchActions_2023-06-29_12-40-26PM.log
+Launching Oracle Database Setup Wizard...
+
+The response file for this session can be found at:
+ /u01/app/oracle/product/1919/install/response/db_2023-06-29_12-40-26PM.rsp
+
+You can find the log of this install session at:
+ /u01/app/oraInventory/logs/InstallActions2023-06-29_12-40-26PM/installActions2023-06-29_12-40-26PM.log
+
+As a root user, execute the following script(s):
+	1. /u01/app/oracle/product/1919/root.sh
+
+Execute /u01/app/oracle/product/1919/root.sh on the following nodes:
+[hol]
+
+
+Successfully Setup Software.
+[CDB2] oracle@hol:/u01/app/oracle/product/1919
+$
+  ```
 </details>
 
+</details>
+
+or
 
 <details>
- <summary>*Or click here to copy the script command*</summary>
+ <summary>*click here to copy the script command*</summary>
 
   ``` text
     <copy>
@@ -144,3 +223,8 @@ In the mean time while the patch is installed you may *proceed to the next lab*.
 
 
 
+
+## Acknowledgements
+* **Author** - Mike Dietrich 
+* **Contributors** Klaus Gronau, Daniel Overby Hansen  
+* **Last Updated By/Date** - Klaus Gronau, June 2023

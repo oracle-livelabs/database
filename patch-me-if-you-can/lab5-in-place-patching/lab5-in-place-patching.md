@@ -468,3 +468,9 @@ OPatch succeeded.
 ```
 
 You are done with in-place patching and can may *proceed to the next lab*.
+
+
+## Acknowledgements
+* **Author** - Mike Dietrich 
+* **Contributors** Klaus Gronau, Daniel Overby Hansen  
+* **Last Updated By/Date** - Klaus Gronau, June 2023
