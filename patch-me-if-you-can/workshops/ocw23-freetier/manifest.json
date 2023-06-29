@@ -4,32 +4,32 @@
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
-      "title": "Introduction and Overview",
+      "title": "Lab 1: Introduction and Overview",
       "description": "The Introduction to Patching.",
       "filename": "../../lab1-introduction-overview/lab1-introduction-and-overview.md"
     },
     {
-      "title": "Installation and Patching",
+      "title": "Lab 2: Installation and Patching",
       "description": "Install Oracle database into a separate OH and patch it unattended.",
       "filename": "../../lab2-installation-patching/lab2-installation-and-patching.md"
     },
     {
-      "title": "Checks in the SOURCE Environment",
+      "title": "Lab 3: Checks in the SOURCE Environment",
       "description": "Common checks when patching",
       "filename": "../../lab3-source-checks/lab3-source-checks.md"
     },
     {
-      "title": "AutoUpgrade for patching",
+      "title": "Lab 4: AutoUpgrade for patching",
       "description": "Use AutoUpgrade for patching.",
       "filename": "../../lab4-autoupgrade-4-patching/lab4-autoupgrade-4-patching.md"
     },
     {
-      "title": "In-Place Patching",
+      "title": "Lab 5: In-Place Patching",
       "description": "Patching an existing OH.",
       "filename": "../../lab5-in-place-patching/lab5-in-place-patching.md"
     },
     {
-      "title": "Inventory Cleanup and Final Checks",
+      "title": "Lab 6: Inventory Cleanup and Final Checks",
       "filename": "../../lab6-final-checks/lab6-final-checks.md"
     },
     {
