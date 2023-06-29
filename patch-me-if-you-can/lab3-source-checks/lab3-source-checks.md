@@ -13,7 +13,8 @@ Switch to the other tab titled "19.18.0 Source Home" and set the environment.
     . cdb2
     </copy>
   ```
-  
+  ![runInstaller output ](./images/source-source-env.png " ")
+
 ### Step 2: Current Installed Patches
 
 Check the installed patches in the current 19.18.0 home:
@@ -23,12 +24,14 @@ Check the installed patches in the current 19.18.0 home:
     ./OPatch/opatch lspatches
     </copy>
   ```
-
+  ![Opatch lspatches output ](./images/opatch-lspatches.png " ")
 
 <details>
- <summary>*click here to see the full output*</summary>
+ <summary>*click here to see the full opatch output*</summary>
 
   ``` text
+[CDB2] oracle@hol:/u01/app/oracle/product/19
+$ ./OPatch/opatch lspatches
 35246710;HIGH DIRECT PATH READ AFTER 19.18 DBRU PATCHING
 35213579;MERGE ON DATABASE RU 19.18.0.0.0 OF 35037877 35046819
 35162446;NEED BEHAVIOR CHANGE TO BE SWITCHED OFF
@@ -50,6 +53,10 @@ Check the installed patches in the current 19.18.0 home:
 34786990;OJVM RELEASE UPDATE: 19.18.0.0.230117 (34786990)
 34765931;Database Release Update : 19.18.0.0.230117 (34765931)
 29585399;OCW RELEASE UPDATE 19.3.0.0.0 (29585399)
+
+OPatch succeeded.
+[CDB2] oracle@hol:/u01/app/oracle/product/19
+$
   ```
 </details>
 
@@ -61,17 +68,8 @@ Check the current JDK version:
      $ORACLE_HOME/jdk/bin/java -version
     </copy>
   ```
+  ![Java version output ](./images/java-version.png " ")
 
-<details>
- <summary>*click here to see the full output*</summary>
-
-  ``` text
-   java version "1.8.0_351"
-   Java(TM) SE Runtime Environment (build 1.8.0_351-b10)
-   Java HotSpot(TM) 64-Bit Server VM (build 25.351-b10, mixed mode)
-   [CDB2] oracle@hol:/u01/app/oracle/product/19
-  ```
-</details>
 
 
 ### Step 4: Current Perl Version
@@ -83,38 +81,67 @@ Check the current PERL version:
     </copy>
   ```
 
+![Java version output ](./images/perl-version.png " ")
 
-Take notice of the current version. We will check afterwards whether the PERL version has been updated as well. </br>
-`This is perl 5, version 36, subversion 0 (v5.36.0) built for x86_64-linux-thread-multi`
+<details>
+ <summary>*click here to see the full perl output*</summary>
+
+  ``` text
+[CDB2] oracle@hol:/u01/app/oracle/product/19
+$ $ORACLE_HOME/perl/bin/perl -version
+
+This is perl 5, version 36, subversion 0 (v5.36.0) built for x86_64-linux-thread-multi
+
+Copyright 1987-2022, Larry Wall
+
+Perl may be copied only under the terms of either the Artistic License or the
+GNU General Public License, which may be found in the Perl 5 source kit.
+
+Complete documentation for Perl, including FAQ lists, should be found on
+this system using "man perl" or "perldoc perl".  If you have access to the
+Internet, point your browser at https://www.perl.org/, the Perl Home Page.
+
+[CDB2] oracle@hol:/u01/app/oracle/product/19
+$
+  ```
+</details>
+
+Take notice of the current version "__This is perl 5, version 36, subversion 0 (v5.36.0) built for x86_64-linux-thread-multi__". 
+We will check afterwards whether the PERL version has been updated as well. </br>
+
 
 ### Step 5: Current Time Zone
 
-Then check the current time zone version in the container database:
-
+Then check the current time zone version in the container database.
+Open SQL*Plus:
   ```
     <copy>
      sqlplus / as sysdba
-     column VALUE$ format a8
-     select VALUE$, CON_ID from containers(SYS.PROPS$) where NAME='DST_PRIMARY_TT_VERSION' order by CON_ID;
     </copy>
+  ```
+![Open SQL*Plus](./images/sqlplus-lab3.png " ")
+
+and execute the SQL:
+  ```
+    <copy>
+     column VALUE$ format a8
+     select VALUE$, CON_ID from containers(SYS.PROPS$) 
+     where NAME='DST_PRIMARY_TT_VERSION' order by CON_ID;
+     </copy>
 
      Hit ENTER/RETURN to execute ALL commands.
   ```
-
+![Timezone of database](./images/dst-cdb.png " ")
 Currently, the database uses the default timezone version deployed with Oracle Database 19c.
-```
-VALUE$	     CON_ID
--------- ----------
-32		  1
-32		  2
-```
 
-Close SQL*Plus:
+
+Exit from SQL*Plus:
   ```
     <copy>
      exit
     </copy>
   ```
+![exit SQL*Plus](./images/exit-sqlplus.png " ")
 
 ### Step 6: Datapatch Sanity Check
 
@@ -126,18 +153,19 @@ And finally, you will do a `datapatch` sanity check:
     </copy>
   ```
 
+![datapatch sanity check](./images/datapatch-sanity-check.png " ")
 
-Except for the scheduler warning, everything looks good.
 
 <details>
- <summary>*click here to see the full output*</summary>
+ <summary>*click here to see the full datapatch sanity check output*</summary>
 
   ``` text
+[CDB2] oracle@hol:/u01/app/oracle/product/19
 $ $ORACLE_HOME/OPatch/datapatch -sanity_checks
-SQL Patching sanity checks version 19.18.0.0.0 on Mon 26 Jun 2023 11:24:42 PM CEST
+SQL Patching sanity checks version 19.18.0.0.0 on Thu 29 Jun 2023 02:50:33 PM CEST
 Copyright (c) 2021, 2023, Oracle.  All rights reserved.
 
-Log file for this invocation: /u01/app/oracle/product/19/cfgtoollogs/sqlpatch/sanity_checks_20230626_232442_21784/sanity_checks_20230626_232442_21784.log
+Log file for this invocation: /u01/app/oracle/product/19/cfgtoollogs/sqlpatch/sanity_checks_20230629_145033_5663/sanity_checks_20230629_145033_5663.log
 
 Running checks
 Checks completed. Printing report:
@@ -156,11 +184,9 @@ Check: Scheduled Jobs - NOT OK (WARNING)
   Message: There are current running or scheduled jobs set to run on the next hour. Scheduled jobs may have an impact when run during patching.
   CDB$ROOT:
     JOB_NAME,NEXT_RUN_DATE,SCHEMA_NAME,STATE
-    CLEANUP_ONLINE_IND_BUILD,26-JUN-23 11.31.11.725568 PM +02:00,SYS,SCHEDULED
-    CLEANUP_ONLINE_PMO,26-JUN-23 11.31.51.369376 PM +02:00,SYS,SCHEDULED
-    CLEANUP_TAB_IOT_PMO,26-JUN-23 11.31.21.570852 PM +02:00,SYS,SCHEDULED
-    RSE$CLEAN_RECOVERABLE_SCRIPT,27-JUN-23 12.00.00.893871 AM EUROPE/VIENNA,SYS,SCHEDULED
-    SM$CLEAN_AUTO_SPLIT_MERGE,27-JUN-23 12.00.00.859886 AM EUROPE/VIENNA,SYS,SCHEDULED
+    CLEANUP_ONLINE_IND_BUILD,29-JUN-23 03.31.11.107160 PM +02:00,SYS,SCHEDULED
+    CLEANUP_ONLINE_PMO,29-JUN-23 03.31.51.696187 PM +02:00,SYS,SCHEDULED
+    CLEANUP_TAB_IOT_PMO,29-JUN-23 03.31.21.515067 PM +02:00,SYS,SCHEDULED
 Check: Optim dictionary upgrade parameter - OK
 Check: Queryable Inventory locks - OK
 Check: Queryable Inventory package - OK
@@ -170,24 +196,47 @@ Check: Guardium processes - OK
 Check: Locale - OK
 
 Refer to MOS Note and debug log
-/u01/app/oracle/product/19/cfgtoollogs/sqlpatch/sanity_checks_20230626_232442_21784/sanity_checks_debug_20230626_232442_21784.log
+/u01/app/oracle/product/19/cfgtoollogs/sqlpatch/sanity_checks_20230629_145033_5663/sanity_checks_debug_20230629_145033_5663.log
 
-SQL Patching sanity checks completed on Mon 26 Jun 2023 11:25:08 PM CEST
+SQL Patching sanity checks completed on Thu 29 Jun 2023 02:51:07 PM CEST
+[CDB2] oracle@hol:/u01/app/oracle/product/19
+$
+[CDB2] oracle@hol:/u01/app/oracle/product/19
+$
   ```
 </details>
 
-
+Except for the scheduler warning, everything looks good.
 
 
 ## Task 2 - Finish the Patch Installation
 
 At this point the patching installation should be completed. Switch to the tab titled "19.19.0 Home". You should see the following output:
 
+![runinstaller output](./images/runinstaller-output.png " ")
+
 <details>
- <summary>*click here to see the full output*</summary>
+ <summary>*click here to see the full runInstaller output*</summary>
 
   ``` text
-$ . /home/oracle/patch/install_patch.sh 
+[CDB2] oracle@hol:/u01/app/oracle/product/1919
+$ ./runInstaller -applyRU /home/oracle/stage/ru/35042068  \
+>  -applyOneOffs /home/oracle/stage/ojvm/35050341,/home/oracle/stage/dpbp/35261302,/home/oracle/stage/mrp/35333937/34340632,/home/oracle/stage/mrp/35333937/35012562,/home/oracle/stage/mrp/35333937/35037877,/home/oracle/stage/mrp/35333937/35116995,/home/oracle/stage/mrp/35333937/35225526 \
+>    -silent -ignorePrereqFailure -waitforcompletion \
+>     oracle.install.option=INSTALL_DB_SWONLY \
+>     UNIX_GROUP_NAME=oinstall \
+>     INVENTORY_LOCATION=/u01/app/oraInventory \
+>     ORACLE_HOME=/u01/app/oracle/product/1919 \
+>     ORACLE_BASE=/u01/app/oracle \
+>     oracle.install.db.InstallEdition=EE \
+>     oracle.install.db.OSDBA_GROUP=dba \
+>     oracle.install.db.OSOPER_GROUP=dba \
+>     oracle.install.db.OSBACKUPDBA_GROUP=dba \
+>     oracle.install.db.OSDGDBA_GROUP=dba \
+>     oracle.install.db.OSKMDBA_GROUP=dba \
+>     oracle.install.db.OSRACDBA_GROUP=dba \
+>     SECURITY_UPDATES_VIA_MYORACLESUPPORT=false \
+>     DECLINE_SECURITY_UPDATES=true
 
 Preparing the home to patch...
 Applying the patch /home/oracle/stage/ru/35042068...
@@ -206,23 +255,25 @@ Applying the patch /home/oracle/stage/mrp/35333937/35116995...
 Successfully applied the patch.
 Applying the patch /home/oracle/stage/mrp/35333937/35225526...
 Successfully applied the patch.
-The log can be found at: /u01/app/oraInventory/logs/InstallActions2023-06-26_10-49-18PM/installerPatchActions_2023-06-26_10-49-18PM.log
+The log can be found at: /u01/app/oraInventory/logs/InstallActions2023-06-29_12-40-26PM/installerPatchActions_2023-06-29_12-40-26PM.log
 Launching Oracle Database Setup Wizard...
 
 The response file for this session can be found at:
- /u01/app/oracle/product/1919/install/response/db_2023-06-26_10-49-18PM.rsp
+ /u01/app/oracle/product/1919/install/response/db_2023-06-29_12-40-26PM.rsp
 
 You can find the log of this install session at:
- /u01/app/oraInventory/logs/InstallActions2023-06-26_10-49-18PM/installActions2023-06-26_10-49-18PM.log
+ /u01/app/oraInventory/logs/InstallActions2023-06-29_12-40-26PM/installActions2023-06-29_12-40-26PM.log
 
 As a root user, execute the following script(s):
 	1. /u01/app/oracle/product/1919/root.sh
 
-Execute /u01/app/oracle/product/1919/root.sh on the following nodes: 
+Execute /u01/app/oracle/product/1919/root.sh on the following nodes:
 [hol]
 
 
 Successfully Setup Software.
+[CDB2] oracle@hol:/u01/app/oracle/product/1919
+$
   ```
 </details>
 
@@ -234,13 +285,18 @@ Logon as `root` and type the password `oracle`:
      su root
     </copy>
   ```
+![su root](./images/sudo-root.png " ")
 
-and then enter:
+and enter:
   ```
     <copy>
      oracle
     </copy>
   ```
+When you're logged in, you see:
+![after logon](./images/root-logon.png " ")
+
+You can see the command prompt changed to "__[CDB2] root@hol:/u01/app/oracle/product/1919__".
 
 ### Step 2: Execute root.sh
 
@@ -250,13 +306,32 @@ Then execute the root.sh script:
      /u01/app/oracle/product/1919/root.sh
     </copy>
   ```
+![executing root.sh](./images/root-sh.png " ")
 
-Unfortunately, `root.sh` is hanging. But you can check the logfile mentioned on the screen in the other tab of your terminal window. It says:
-```
+<details>
+ <summary>*click here to see the full root.sh output*</summary>
+
+  ``` text
+[CDB2] root@hol:/u01/app/oracle/product/1919
+$ cat /u01/app/oracle/product/1919/install/root_hol.localdomain_2023-06-29_15-13-29-989736331.log
+Performing root user operation.
+
+The following environment variables are set as:
+    ORACLE_OWNER= oracle
+    ORACLE_HOME=  /u01/app/oracle/product/1919
+   Copying dbhome to /usr/local/bin ...
+   Copying oraenv to /usr/local/bin ...
+   Copying coraenv to /usr/local/bin ...
+
+Entries will be added to the /etc/oratab file as needed by
+Database Configuration Assistant when a database is created
+Finished running generic part of root script.
 Now product-specific root actions will be performed.
-```
+[CDB2] root@hol:/u01/app/oracle/product/1919
+$
+  ```
+</details>
 
-Let us ignore that and `CTRL+C` the script. It is rerunnable, and a second execution would complete. But this is not necessary. 
 
 ### Step 3: Exit from root
 
@@ -265,11 +340,23 @@ Exit from the `root` user and confirm that you are `oracle` again:
   ```
     <copy>
      exit
+    </copy>
+  ```
+
+![exiting root](./images/exit-root.png " ")
+
+The command prompt changes from __root@__ back to __oracle@__.
+
+### Step 4: Check
+
+Confirm that you are `oracle` again:
+
+  ```
+    <copy>
      whoami
     </copy>
-
-     Hit ENTER/RETURN to execute ALL commands.
   ```
+![after logon](./images/whoami-oracle.png " ")
 
 You may now *proceed to the next lab*
 

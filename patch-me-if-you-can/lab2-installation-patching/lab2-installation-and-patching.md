@@ -21,7 +21,8 @@ Start by **double-clicking at the "patching" icon** on the desktop:
 
 It will open an xterm (Terminal Window) with two open tabs.
 
-Switch to the tab called "19.18.0 TARGET Home". All variables will be set automatically executing:
+### Step 2: Setting the Environment
+Switch to the tab called "19.18.0 TARGET Home". All variables will be set when executing: 
 
   ```
     <copy>
@@ -29,7 +30,8 @@ Switch to the tab called "19.18.0 TARGET Home". All variables will be set automa
     </copy>
   ```
 ![Source target environment](./images/source-target-env.png " ")
-  Create the new Oracle Home directory
+
+### Step 2: Create the new Oracle Home Directory
 
   ```
     <copy>
@@ -38,7 +40,8 @@ Switch to the tab called "19.18.0 TARGET Home". All variables will be set automa
   ```
 
 ![create new directory 1919](./images/mkdir-target-1919.png " ")
-and change into it
+
+### Step 3: Change into new Oracle_Home
 
   ```
     <copy>
@@ -47,6 +50,7 @@ and change into it
   ```
 ![change into directory 1919](./images/cd-target-dir-1919.png " ")
 
+### Step 4: Unzip Base Image
 As next step, unzip the 19.3.0 base image from the staging location into this directory.
 
   ```
@@ -56,6 +60,7 @@ As next step, unzip the 19.3.0 base image from the staging location into this di
   ```
 ![unzip Oracle software](./images/unzip-oracle-software.png " ")
 
+### Step 5: OPatch
 Then remove the OPatch directory 
 
   ```
@@ -73,6 +78,7 @@ and unzip the new OPatch from staging into this new Oracle Home. This step is im
     </copy>
   ```
 ![unzip new opatch](./images/unzip-opatch-software.png " ")
+
 
 ## Task 2 - Patch Installation
 
@@ -105,7 +111,7 @@ To install all the patches in one single action, you will use the `-applyRU` and
 You can either copy & paste the entire command or call a script. Open only one of the next two choices, copy the command and paste it into your target termina tab.
 
 <details>
- <summary>*click here if you want to copy the command*</summary>
+ <summary>*click here to copy the whole runInstaller command*</summary>
 
   ``` text
       <copy>
@@ -129,6 +135,24 @@ You can either copy & paste the entire command or call a script. Open only one o
     </copy>
   ```
 ![runInstaller output ](./images/run-installer-output.png " ")
+</details>
+
+or
+
+<details>
+ <summary>*click here to copy the command used execute the script*</summary>
+
+  ``` text
+    <copy>
+     . /home/oracle/patch/install_patch.sh
+    </copy>
+  ```
+</details>
+
+
+
+The installation will take approximately 10 minutes. 
+
 <details>
  <summary>*click here to see the full output*</summary>
 
@@ -151,14 +175,7 @@ $ ./runInstaller -applyRU /home/oracle/stage/ru/35042068  \
 >     oracle.install.db.OSRACDBA_GROUP=dba \
 >     SECURITY_UPDATES_VIA_MYORACLESUPPORT=false \
 >     DECLINE_SECURITY_UPDATES=true
-perl: warning: Setting locale failed.
-perl: warning: Please check that your locale settings:
-	LANGUAGE = (unset),
-	LC_ALL = (unset),
-	LC_CTYPE = "UTF-8",
-	LANG = "en_US.UTF-8"
-    are supported and installed on your system.
-perl: warning: Falling back to a fallback locale ("en_US.UTF-8").
+
 Preparing the home to patch...
 Applying the patch /home/oracle/stage/ru/35042068...
 Successfully applied the patch.
@@ -197,23 +214,6 @@ Successfully Setup Software.
 $
   ```
 </details>
-
-</details>
-
-or
-
-<details>
- <summary>*click here to copy the script command*</summary>
-
-  ``` text
-    <copy>
-     /home/oracle/patch/install_patch.sh
-    </copy>
-  ```
-</details>
-
-
-The installation will take approximately 10 minutes. 
 
 Once the installation is completed, you will need to execute `root.sh` at the end of the following lab. </br>
 
