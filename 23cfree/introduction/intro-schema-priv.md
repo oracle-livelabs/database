@@ -4,6 +4,10 @@
 ## About this workshop
 Welcome to Live Labs, where we explore and delve into the fascinating realm of Oracle database management! In today's session, we will be focusing on two intriguing topics: Oracle Schema Level Privileges and Lock Free Column Reservations.
 
+Estimated Time: 30 Minutes
+
+### About Schema Priveleges and Lock-Free Reservations
+
 ### **Schema Level Privileges**
 
 Oracle Schema Level Privileges play a pivotal role in controlling access and security within an Oracle database. A schema, in Oracle, can be thought of as a logical container that holds database objects such as tables, views, procedures, and more. With schema level privileges, we can grant or revoke permissions to users or roles, ensuring that the right individuals have the appropriate level of access to the schema's objects.
@@ -43,9 +47,6 @@ So, whether you're an Oracle enthusiast, a database administrator, or simply eag
 * Simplified Transaction Management: Lock Free Column Reservations simplify transaction management by minimizing the need for explicit locks and reducing the complexity associated with deadlock detection and resolution. This can result in simpler and more robust transactional workflows.
 
 By completing these labs, you will gain practical experience in setting up a database environment, granting privileges, and utilizing the lock-free reservations feature in Oracle. Have a great learning experience!
-
-
-Estimated Time: 30 Minutes
 
 ### **Objectives**
 
