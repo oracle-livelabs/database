@@ -28,7 +28,7 @@ Task 1 involves creating the users. By executing the provided SQL statements, we
 
 1. Create two users
 
-* Create user 1 and user 2
+    * Create user 1 and user 2
 
     ```
     <copy>
@@ -57,7 +57,7 @@ Moving on to Task 2, we will create two tables under Schema 1. The first table, 
 
 2. Create a second table with lock-free reservations. Table 2 would be inventory\_reservations (lock free reservation table)
 
-* Modify the `CREATE TABLE` command to enable lock-free reservation as follows:  
+    * Modify the `CREATE TABLE` command to enable lock-free reservation as follows:  
 
     ```
     <copy>
@@ -68,7 +68,7 @@ Moving on to Task 2, we will create two tables under Schema 1. The first table, 
     </copy>
     ```
 
-* Create the table with the reservable keyword to enable lock free reservations to a specific column. In this case we bind it to the `budget` variable.
+    * Create the table with the reservable keyword to enable lock free reservations to a specific column. In this case we bind it to the `budget` variable.
 
     ```
     <copy>
@@ -88,7 +88,7 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
 
 1. Insert data into the first table:
 
-* Inserting rows into inventory\_no\_reservations table
+    * Inserting rows into inventory\_no\_reservations table
 
     ```
     <copy>
@@ -108,7 +108,7 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
 
 2. Insert data into the second table:
 
-* Inserting rows into inventory\_reservations table
+    * Inserting rows into inventory\_reservations table
 
     ```
     <copy>

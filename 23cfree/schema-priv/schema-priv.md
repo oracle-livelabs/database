@@ -37,19 +37,19 @@ Task 1 involves granting privileges to users for accessing tables within a schem
 
 1. Grant select/insert/update/delete privileges on the inventory\_no\_reservations table to u1
 
-    ````
+    ```
     <copy>
     GRANT SELECT, INSERT, UPDATE, DELETE ON s1.inventory_no_reservations TO u1;
     </copy>
-    ````
+    ```
 
 2. Grant schema priveledges select/insert/update/delete to u2
 
-    ````
+    ```
     <copy>
     Grant SELECT ANY TABLE on SCHEMA s1 to u2;
     </copy>
-    ````
+    ```
 
 ## Task 2: Test the new feature of Schema Privileges versus Select Grants by logging into Users
 
@@ -65,7 +65,7 @@ By logging in as User 1, we will verify the user and attempt to query Table 1. A
     </copy>
     ```
 
-* Input the following to verify user:
+    * Input the following to verify user:
 
     ```
     <copy>
@@ -73,7 +73,7 @@ By logging in as User 1, we will verify the user and attempt to query Table 1. A
     </copy>
     ```
 
-* Query the table 1 from the user.
+    * Query the table 1 from the user.
 
     ```
     <copy>
@@ -81,7 +81,7 @@ By logging in as User 1, we will verify the user and attempt to query Table 1. A
     </copy>
     ```
 
-* Query the second table from s1 schema and be mindful of what happens.
+    * Query the second table from s1 schema and be mindful of what happens.
 
     ```
     <copy>
@@ -99,7 +99,7 @@ User 1 can not access this table because they do not have schema priveledges fea
     </copy>
     ```
 
-* Input the following to verify user:
+    * Input the following to verify user:
 
     ```
     <copy>
@@ -107,7 +107,7 @@ User 1 can not access this table because they do not have schema priveledges fea
     </copy>
     ```
 
-* Query the table 1 from the user.
+    * Query the table 1 from the user.
 
     ```
     <copy>
@@ -115,7 +115,7 @@ User 1 can not access this table because they do not have schema priveledges fea
     </copy>
     ```
 
-* Query the second table from s1 schema and be mindful of what happens.
+    * Query the second table from s1 schema and be mindful of what happens.
 
     ```
     <copy>
@@ -138,7 +138,7 @@ User 1 can not access this table because they do not have schema priveledges fea
     </copy>
     ```
 
-* Insert Data into the Third Table
+    * Insert Data into the Third Table
 
     ```
     <copy>
@@ -158,7 +158,7 @@ User 1 can not access this table because they do not have schema priveledges fea
     </copy>
     ```
 
-* Input the following to verify user:
+    * Input the following to verify user:
 
     ```
     <copy>
@@ -166,7 +166,7 @@ User 1 can not access this table because they do not have schema priveledges fea
     </copy>
     ```
 
-* Query the third table for the user.
+    * Query the third table for the user.
 
     ```
     <copy>
@@ -184,7 +184,7 @@ User 1 can not access this table because they do not have schema priveledges fea
     </copy>
     ```
 
-* Input the following to verify user:
+    * Input the following to verify user:
 
     ```
     <copy>
@@ -192,7 +192,7 @@ User 1 can not access this table because they do not have schema priveledges fea
     </copy>
     ```
 
-* Query the third table for the user.
+    * Query the third table for the user.
 
     ```
     <copy>
