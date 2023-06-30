@@ -7,13 +7,15 @@ We will use this lab to check several things in the source environment while the
 
 ### Step 1: Set the Source Database Environment
 
-Switch to the other tab titled "19.18.0 Home" and set the environment.
+Switch to the other tab titled "19.18.0 Home" 
+![runInstaller output ](./images/19-18-home.png " ")
+and set the environment.
   ```
     <copy>
     . cdb2
     </copy>
   ```
-  ![runInstaller output ](./images/source-source-env.png " ")
+  ![runInstaller output ](./images/source-19-18-env.png " ")
 
 ### Step 2: Current Installed Patches
 

@@ -22,8 +22,8 @@ Start by **double-clicking at the "patching" icon** on the desktop:
 It will open an xterm (Terminal Window) with two open tabs.
 
 ### Step 2: Setting the Environment
-Switch to the tab called "19.18.0 Home". 
-![19.18 HOME tab](./images/19-18-home.png " ")
+Switch to the tab called "19.19.0 Home". 
+![19.18 HOME tab](./images/19-19-home.png " ")
 
 All variables will be set when executing: 
 
@@ -32,7 +32,7 @@ All variables will be set when executing:
      . cdb1919
     </copy>
   ```
-![Source target environment](./images/source-19-18-env.png " ")
+![Source target environment](./images/source-19-19-env.png " ")
 
 ### Step 2: Create the new Oracle Home Directory
 
@@ -111,7 +111,7 @@ The patches you are going to install are all unpacked into separate directories.
 
 To install all the patches in one single action, you will use the `-applyRU` and `-applyOneOffs` option of the Oracle Universal Installer. Since MRPs were unknown to the OUI a while ago you need to call every included patch separately.
 
-You can either copy & paste the entire command or call a script. Open only one of the next two choices, copy the command and paste it into your target termina tab.
+You can either copy & paste the entire command or call a script. Open only one of the next two choices, copy the command and paste it into your target terminal tab.
 
 <details>
  <summary>*click here to copy the whole runInstaller command*</summary>
@@ -150,7 +150,7 @@ or
      sh /home/oracle/patch/install_patch.sh
     </copy>
   ```
-![runInstaller output ](./images/run-installer-shell-output.png " ")
+![runInstaller shell script output ](./images/run-installer-shell-output.png " ")
 </details>
 
 
