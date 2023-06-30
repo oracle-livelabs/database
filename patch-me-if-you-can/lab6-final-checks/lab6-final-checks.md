@@ -14,13 +14,16 @@ Use the Oracle 19.19.0 TAB of your terminal.
      sqlplus  / as sysdba 
     </copy>
   ```
-
+![start sql*plus](./images/open-sqlplus.png " ")
   ```
     <copy>
     column value$ format a8
     select con_id, object_type, owner from CDB_OBJECTS where status='INVALID';
     </copy>
+
+     Hit ENTER/RETURN to execute ALL commands.
   ```
+![check for invalid objects](./images/invalid-objects-check.png " ")
 
 There should be no invalid objects.
 
@@ -32,19 +35,13 @@ The default time zone is DST V.32. But since the Release Update 19.18.0 all exis
      select VALUE$, CON_ID from containers(SYS.PROPS$) where NAME='DST_PRIMARY_TT_VERSION' order by CON_ID;
     </copy>
   ```
+![check for timezone file](./images/check-timezone-file.png " ")
+
+Remember that the version before upgrade was DST V.32 as you did check and verify in the previous labs. 
 
 That is pretty awesome. Please be aware that AutoUpgrade by default will not adjust the time zone when you patch. But we set it intentionally, and the containers have been updated.
 
-```
-SQL> select VALUE$, CON_ID from containers(SYS.PROPS$) where NAME='DST_PRIMARY_TT_VERSION' order by CON_ID
 
-VALUE$	     CON_ID
--------- ----------
-41		  1
-41		  2
-```
-
-Remember that the version before upgrade was DST V.32 as you did check and verify in the previous labs. 
 
 At this point, please `exit` SQL*Plus.
   ```
@@ -52,7 +49,7 @@ At this point, please `exit` SQL*Plus.
      exit
     </copy>
   ```
-
+![exit sql*plus](./images/exit-sqlplus.png " ")
 
 
 ## Task 3 - Check JDK version
@@ -63,16 +60,11 @@ Please check whether the JDK version has been upgraded as well.
      /u01/app/oracle/product/1919/jdk/bin/java -version
     </copy>
   ```
-
+![java version](./images/check-java-version.png " ")
 
 This is intended. You will always get the n-1 version of JDK, i.e. the version which was current at the code freeze date for the content of the Release Update. If you need a newer JDK version, you please need to download and apply it afterwards. The version before patching was `java version "1.8.0_351"`.
 
-```
-$ /u01/app/oracle/product/1919/jdk/bin/java -version
-java version "1.8.0_361"
-Java(TM) SE Runtime Environment (build 1.8.0_361-b09)
-Java HotSpot(TM) 64-Bit Server VM (build 25.361-b09, mixed mode
-```
+
 
 ## Task 4 - Check PERL version
 Final check here is about whether PERL has been patched, too. The version before patching was v5.36.0).
@@ -82,7 +74,7 @@ Final check here is about whether PERL has been patched, too. The version before
      $ORACLE_HOME/perl/bin/perl -version
     </copy>
   ```
-
+![perl version](./images/perl-version.png " ")
 
 Now you see no difference. But PERL updates get delivered with Release Updates since January 2023. Hence, in this case, there was no update for 19.19.0.
 
