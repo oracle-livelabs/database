@@ -17,7 +17,7 @@ Create now the new Oracle Home for 19.19.0, unzip the base release and refresh o
 
 Start by **double-clicking at the "patching" icon** on the desktop:
 
-![Screenshot of the Linux Hands On Lab Terminal icon](./images/patching-icon.png )
+![Screenshot of the Linux Hands On Lab Terminal icon](./images/patching-icon.png =20%x20%)
 
 It will open an xterm (Terminal Window) with two open tabs.
 
