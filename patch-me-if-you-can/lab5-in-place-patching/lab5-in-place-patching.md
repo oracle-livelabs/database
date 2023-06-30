@@ -6,6 +6,9 @@ The benefit of the out-of-place patching method is not only that the previous ho
 ## Task 1 - Checks for in-place patching
 Please switch to the other tab titled "__19.18.0 Home__",
 
+![19.18 Tab](./images/19-18-home.png " ")
+
+
 ### Step 1: Environment
 Set the environment for the UP19 database. It is currently shutdown since it needs to be shutdown while we patch.
   ```
