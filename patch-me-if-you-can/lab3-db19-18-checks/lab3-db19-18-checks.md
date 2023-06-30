@@ -8,7 +8,7 @@ We will use this lab to check several things in the source environment while the
 ### Step 1: Set the Source Database Environment
 
 Switch to the other tab titled "19.18.0 Home" 
-![runInstaller output ](./images/19-18-home.png " ")
+![activate 19.18 tab ](./images/19-18-home.png " ")
 and set the environment.
   ```
     <copy>
@@ -213,7 +213,7 @@ Except for the scheduler warning, everything looks good.
 
 ## Task 2 - Finish the Patch Installation
 
-At this point the patching installation should be completed. Switch to the tab titled "19.19.0 Home". You should see the following output:
+At this point the patching installation should be completed. Switch to the tab titled "__19.19.0 Home__". You should see the following output:
 
 ![runinstaller output](./images/runinstaller-output.png " ")
 
@@ -310,29 +310,6 @@ Then execute the root.sh script:
   ```
 ![executing root.sh](./images/root-sh.png " ")
 
-<details>
- <summary>*click here to see the full root.sh output*</summary>
-
-  ``` text
-[CDB2] root@hol:/u01/app/oracle/product/1919
-$ cat /u01/app/oracle/product/1919/install/root_hol.localdomain_2023-06-29_15-13-29-989736331.log
-Performing root user operation.
-
-The following environment variables are set as:
-    ORACLE_OWNER= oracle
-    ORACLE_HOME=  /u01/app/oracle/product/1919
-   Copying dbhome to /usr/local/bin ...
-   Copying oraenv to /usr/local/bin ...
-   Copying coraenv to /usr/local/bin ...
-
-Entries will be added to the /etc/oratab file as needed by
-Database Configuration Assistant when a database is created
-Finished running generic part of root script.
-Now product-specific root actions will be performed.
-[CDB2] root@hol:/u01/app/oracle/product/1919
-$
-  ```
-</details>
 
 
 ### Step 3: Exit from root
