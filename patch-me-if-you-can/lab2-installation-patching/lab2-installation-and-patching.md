@@ -22,14 +22,17 @@ Start by **double-clicking at the "patching" icon** on the desktop:
 It will open an xterm (Terminal Window) with two open tabs.
 
 ### Step 2: Setting the Environment
-Switch to the tab called "19.18.0 TARGET Home". All variables will be set when executing: 
+Switch to the tab called "19.18.0 Home". 
+![19.18 HOME tab](./images/19-18-home.png " ")
+
+All variables will be set when executing: 
 
   ```
     <copy>
      . cdb1919
     </copy>
   ```
-![Source target environment](./images/source-target-env.png " ")
+![Source target environment](./images/source-19-18-env.png " ")
 
 ### Step 2: Create the new Oracle Home Directory
 
@@ -144,9 +147,10 @@ or
 
   ``` text
     <copy>
-     . /home/oracle/patch/install_patch.sh
+     sh /home/oracle/patch/install_patch.sh
     </copy>
   ```
+![runInstaller output ](./images/run-installer-shell-output.png " ")
 </details>
 
 
