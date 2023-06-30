@@ -16,7 +16,7 @@
     {
       "title": "Lab 3: Checks in the SOURCE Environment",
       "description": "Common checks when patching",
-      "filename": "../../lab3-source-checks/lab3-source-checks.md"
+      "filename": "../../lab3-source-checks/lab3-db19-18-checks.md"
     },
     {
       "title": "Lab 4: AutoUpgrade for patching",

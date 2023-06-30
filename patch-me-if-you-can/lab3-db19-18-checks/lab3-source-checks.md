@@ -1,4 +1,4 @@
-# Lab 3 - Checks in the SOURCE Environment
+# Lab 3 - Checks in the 19.18 Environment
 
 ## Introduction 
 We will use this lab to check several things in the source environment while the installation in the new environment progresses.
@@ -7,7 +7,7 @@ We will use this lab to check several things in the source environment while the
 
 ### Step 1: Set the Source Database Environment
 
-Switch to the other tab titled "19.18.0 Source Home" and set the environment.
+Switch to the other tab titled "19.18.0 Home" and set the environment.
   ```
     <copy>
     . cdb2
