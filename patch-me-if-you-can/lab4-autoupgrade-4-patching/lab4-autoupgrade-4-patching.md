@@ -3,7 +3,7 @@
 ## Introduction 
 In this lab exercise you will patch the CDB2 database from 19.18.0 to 19.19.0 with just two commands.
 
-### Step 1: Activate the 19.19 Tab
+### Step 1: Switch to the "__19.19.0 Home__" Tab
 
 ![switch to 1919 tab](./images/activate-1919-tab.png " ")
 

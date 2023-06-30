@@ -3,7 +3,7 @@
 ## Introduction 
 You are done now. You did patch out-of place what we highly recommend, and you may have done also a more work-intense in-place patching exercise. So, let us check some things in the environment. 
 
-Use the Oracle "__19.19 Home__" TAB of your terminal.
+Use the Oracle "__19.19.0 Home__" TAB of your terminal.
 ![start sql*plus](./images/19-19-home.png " ")
 
 ## Task 1 - Invalid Object Check

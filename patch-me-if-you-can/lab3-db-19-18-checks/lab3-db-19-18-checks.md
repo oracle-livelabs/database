@@ -7,7 +7,8 @@ We will use this lab to check several things in the source environment while the
 
 ### Step 1: Set the Source Database Environment
 
-Switch to the other tab titled "19.18.0 Home" 
+Switch to the other tab titled "__19.18.0 Home__" 
+
 ![activate 19.18 tab ](./images/19-18-home.png " ")
 and set the environment.
   ```

@@ -22,7 +22,8 @@ Start by **double-clicking at the "patching" icon** on the desktop:
 It will open an xterm (Terminal Window) with two open tabs.
 
 ### Step 2: Setting the Environment
-Switch to the tab called "19.19.0 Home". 
+Switch to the tab called "__19.19.0 Home__". 
+
 ![19.18 HOME tab](./images/19-19-home.png " ")
 
 All variables will be set when executing: 
