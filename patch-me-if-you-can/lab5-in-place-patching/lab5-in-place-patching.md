@@ -347,86 +347,9 @@ OPatch succeeded.
   ```
 </details>
 
-And this works as you can see in the output below:
 
 
-<details>
- <summary>*click here to see the full opatch output*</summary>
-
-  ``` text
-$ $ORACLE_HOME/OPatch/opatch nrollback -id 34879016,34871935,34810252,34793099,34783802,33973908
-Oracle Interim Patch Installer version 12.2.0.1.37
-Copyright (c) 2023, Oracle Corporation.  All rights reserved.
-
-
-Oracle Home       : /u01/app/oracle/product/19
-Central Inventory : /u01/app/oraInventory
-   from           : /u01/app/oracle/product/19/oraInst.loc
-OPatch version    : 12.2.0.1.37
-OUI version       : 12.2.0.7.0
-Log file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2023-06-27_08-32-47AM_1.log
-
-
-Patches will be rolled back in the following order: 
-   34879016   34871935   34810252   34793099   34783802   33973908
-The following patch(es) will be rolled back: 34879016  34871935  34810252  34793099  34783802  33973908  
-
-Please shutdown Oracle instances running out of this ORACLE_HOME on the local system.
-(Oracle Home = '/u01/app/oracle/product/19')
-
-
-Is the local system ready for patching? [y|n]
-y
-User Responded with: Y
-
-Rolling back patch 34879016...
-
-RollbackSession rolling back interim patch '34879016' from OH '/u01/app/oracle/product/19'
-
-Patching component oracle.rdbms, 19.0.0.0.0...
-RollbackSession removing interim patch '34879016' from inventory
-
-Rolling back patch 34871935...
-
-RollbackSession rolling back interim patch '34871935' from OH '/u01/app/oracle/product/19'
-
-Patching component oracle.rdbms, 19.0.0.0.0...
-RollbackSession removing interim patch '34871935' from inventory
-
-Rolling back patch 34810252...
-
-RollbackSession rolling back interim patch '34810252' from OH '/u01/app/oracle/product/19'
-
-Patching component oracle.rdbms, 19.0.0.0.0...
-RollbackSession removing interim patch '34810252' from inventory
-
-Rolling back patch 34793099...
-
-RollbackSession rolling back interim patch '34793099' from OH '/u01/app/oracle/product/19'
-
-Patching component oracle.rdbms, 19.0.0.0.0...
-RollbackSession removing interim patch '34793099' from inventory
-
-Rolling back patch 34783802...
-
-RollbackSession rolling back interim patch '34783802' from OH '/u01/app/oracle/product/19'
-
-Patching component oracle.rdbms, 19.0.0.0.0...
-RollbackSession removing interim patch '34783802' from inventory
-
-Rolling back patch 33973908...
-
-RollbackSession rolling back interim patch '33973908' from OH '/u01/app/oracle/product/19'
-
-Patching component oracle.rdbms, 19.0.0.0.0...
-RollbackSession removing interim patch '33973908' from inventory
-Log file location: /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2023-06-27_08-32-47AM_1.log
-
-OPatch succeeded.
-  ```
-</details>
-
-## Task 3 - More rollback is required
+## Task 3 - More Rollback Required
 Unfortunately, we are not done yet with rollback activities.
 
 When you check again:
@@ -1004,7 +927,7 @@ Next step is to apply the Data Pump Bundle Patch for 19.19.0. You could do this 
     </copy>
   ```
 
-![opatch apply datapump bundle patch](./images/transport-phase-read-only-tbs.png " ")
+![opatch apply datapump bundle patch](./images/opatch-apply-datapump-bundle-patch.png " ")
 
 
 ## Task 7 - Apply the MRP1 for 19.19.0
@@ -1015,7 +938,7 @@ Now you see a significant difference to the other processes. Since MRPs are a co
      cd /home/oracle/stage/mrp/35333937 
     </copy>
   ```
-![set source tablespaces to read only](./images/transport-phase-read-only-tbs.png " ")
+![cd to mrp1 stage dir](./images/cd-mrp.png " ")
   ```
     <copy>
      $ORACLE_HOME/OPatch/opatch napply /home/oracle/stage/mrp/35333937 -verbose 
@@ -1023,13 +946,12 @@ Now you see a significant difference to the other processes. Since MRPs are a co
   ```
 
 You already know the procedure - when opatch asks if you want to continue, answer with "__y__":
-![opatch data pump bundle patch apply](./images/opatch-apply-datapump-bundle-patch.png " ")
+![opatch mrp patch apply](./images/opatch-apply-mrp.png " ")
 
 <details>
  <summary>*click here to see the full final backup log file*</summary>
 
   ``` text
-[UP19] oracle@hol:~/stage/dpbp/35261302
 $ $ORACLE_HOME/OPatch/opatch apply
 Oracle Interim Patch Installer version 12.2.0.1.37
 Copyright (c) 2023, Oracle Corporation.  All rights reserved.
@@ -1042,21 +964,6 @@ OPatch version    : 12.2.0.1.37
 OUI version       : 12.2.0.7.0
 Log file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2023-06-30_09-30-51AM_1.log
 
-Verifying environment and performing prerequisite checks...
-OPatch continues with these patches:   35261302
-
-Do you want to proceed? [y|n]
-y
-User Responded with: Y
-All checks passed.
-Backing up files...
-Applying interim patch '35261302' to OH '/u01/app/oracle/product/19'
-
-Patching component oracle.rdbms, 19.0.0.0.0...
-
-Patching component oracle.rdbms.dbscripts, 19.0.0.0.0...
-Patch 35261302 successfully applied.
-Log file location: /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2023-06-30_09-30-51AM_1.log
 
 OPatch succeeded.
 [UP19] oracle@hol:~/stage/dpbp/35261302
@@ -1103,91 +1010,7 @@ This is a non-CDB so you won't execute the "ALTER PLUGGABLE DATABASE" command. S
  <summary>*click here to see the full datapatch output*</summary>
 
   ``` text
-[UP19] oracle@hol:~/stage/dpbp/35261302
-$ $ORACLE_HOME/OPatch/datapatch -verbose
-SQL Patching tool version 19.19.0.0.0 Production on Fri Jun 30 09:44:05 2023
-Copyright (c) 2012, 2023, Oracle.  All rights reserved.
-
-Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_20485_2023_06_30_09_44_05/sqlpatch_invocation.log
-
-Connecting to database...OK
-Gathering database info...done
-Bootstrapping registry and package to current versions...done
-Determining current state...done
-
-Current state of interim SQL patches:
-Interim patch 33192694 (OJVM RELEASE UPDATE: 19.13.0.0.211019 (33192694)):
-  Binary registry: Not installed
-  SQL registry: Not installed
-Interim patch 33561310 (OJVM RELEASE UPDATE: 19.14.0.0.220118 (33561310)):
-  Binary registry: Not installed
-  SQL registry: Rolled back successfully on 20-JUL-22 09.16.52.848607 PM
-Interim patch 34086870 (OJVM RELEASE UPDATE: 19.16.0.0.220719 (34086870)):
-  Binary registry: Not installed
-  SQL registry: Rolled back successfully on 26-JAN-23 10.10.34.728972 PM
-Interim patch 34411846 (OJVM RELEASE UPDATE: 19.17.0.0.221018 (34411846)):
-  Binary registry: Not installed
-  SQL registry: Not installed
-Interim patch 34734035 (MERGE ON DATABASE RU 19.17.0.0.0 OF 34650250 34660465 24338134 25143018 26565187):
-  Binary registry: Not installed
-  SQL registry: Not installed
-Interim patch 34786990 (OJVM RELEASE UPDATE: 19.18.0.0.230117 (34786990)):
-  Binary registry: Not installed
-  SQL registry: Applied successfully on 26-JAN-23 10.10.35.917858 PM
-Interim patch 34861493 (RESYNC CATALOG FAILED IN ZDLRA CATALOG AFTER PROTECTED DATABASE PATCHED TO 19.17):
-  Binary registry: Not installed
-  SQL registry: Applied successfully on 22-MAY-23 12.21.27.534479 PM
-Interim patch 34972375 (DATAPUMP BUNDLE PATCH 19.18.0.0.0):
-  Binary registry: Not installed
-  SQL registry: Applied successfully on 26-JAN-23 10.10.36.894411 PM
-Interim patch 35050341 (OJVM RELEASE UPDATE: 19.19.0.0.230418 (35050341)):
-  Binary registry: Installed
-  SQL registry: Not installed
-Interim patch 35160800 (GG IE FAILS WITH ORA-14400 AT SYSTEM.LOGMNRC_USER AFTER ORACLE DB UPGRADE TO 19.18DBRU):
-  Binary registry: Not installed
-  SQL registry: Applied successfully on 22-MAY-23 12.21.27.542160 PM
-Interim patch 35261302 (DATAPUMP BUNDLE PATCH 19.19.0.0.0):
-  Binary registry: Installed
-  SQL registry: Not installed
-
-Current state of release update SQL patches:
-  Binary registry:
-    19.19.0.0.0 Release_Update 230322020406: Installed
-  SQL registry:
-    Applied 19.18.0.0.0 Release_Update 230111171738 successfully on 26-JAN-23 10.10.35.913910 PM
-
-Adding patches to installation queue and performing prereq checks...done
-Installation queue:
-  The following interim patches will be rolled back:
-    34786990 (OJVM RELEASE UPDATE: 19.18.0.0.230117 (34786990))
-    34861493 (RESYNC CATALOG FAILED IN ZDLRA CATALOG AFTER PROTECTED DATABASE PATCHED TO 19.17)
-    34972375 (DATAPUMP BUNDLE PATCH 19.18.0.0.0)
-    35160800 (GG IE FAILS WITH ORA-14400 AT SYSTEM.LOGMNRC_USER AFTER ORACLE DB UPGRADE TO 19.18DBRU)
-  Patch 35042068 (Database Release Update : 19.19.0.0.230418 (35042068)):
-    Apply from 19.18.0.0.0 Release_Update 230111171738 to 19.19.0.0.0 Release_Update 230322020406
-  The following interim patches will be applied:
-    35050341 (OJVM RELEASE UPDATE: 19.19.0.0.230418 (35050341))
-    35261302 (DATAPUMP BUNDLE PATCH 19.19.0.0.0)
-
-Installing patches...
-Patch installation complete.  Total patches installed: 7
-
-Validating logfiles...done
-Patch 34786990 rollback: SUCCESS
-  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/34786990/25032666/34786990_rollback_UP19_2023Jun30_09_45_19.log (no errors)
-Patch 34861493 rollback: SUCCESS
-  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/34861493/25121986/34861493_rollback_UP19_2023Jun30_09_46_23.log (no errors)
-Patch 34972375 rollback: SUCCESS
-  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/34972375/25075164/34972375_rollback_UP19_2023Jun30_09_46_28.log (no errors)
-Patch 35160800 rollback: SUCCESS
-  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35160800/25179433/35160800_rollback_UP19_2023Jun30_09_46_29.log (no errors)
-Patch 35042068 apply: SUCCESS
-  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35042068/25183678/35042068_apply_UP19_2023Jun30_09_46_31.log (no errors)
-Patch 35050341 apply: SUCCESS
-  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35050341/25148755/35050341_apply_UP19_2023Jun30_09_46_23.log (no errors)
-Patch 35261302 apply: SUCCESS
-  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35261302/25192070/35261302_apply_UP19_2023Jun30_09_47_40.log (no errors)
-SQL Patching tool complete on Fri Jun 30 09:49:00 2023
+[bn, 
 [UP19] oracle@hol:~/stage/dpbp/35261302
 $
   ```
