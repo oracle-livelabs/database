@@ -21,15 +21,15 @@ Watch the video below for an overview of Oracle Multitenant.
 
 Please *proceed to the next lab*.
 
-## Learn more
+# Learn more
 
 - Oracle Advanced Security Guide
-<a href="https://docs.oracle.com/en/database/oracle/oracle-database/19/asoag/introduction-to-oracle-advanced-security.html"> </a>
+- <a href="https://docs.oracle.com/en/database/oracle/oracle-database/19/asoag/introduction-to-oracle-advanced-security.html"> </a>
 
 - Introduction to TDE
-<a href="https://docs.oracle.com/en/database/oracle/oracle-database/19/asoag/introduction-to-transparent-data-encryption.html"> </a>
+- <a href="https://docs.oracle.com/en/database/oracle/oracle-database/19/asoag/introduction-to-transparent-data-encryption.html"> </a>
 
-## Acknowledgements
+# Acknowledgements
 
 - **Authors/Contributors** - Sean Provost, Mike Sweeney, Bryan Grenn, Bill Pritchett, Rene Fontcha
 - **Last Updated By/Date** - Sean Provost, Enterprise Architect, May 2023
