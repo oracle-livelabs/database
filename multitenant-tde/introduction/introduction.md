@@ -24,10 +24,10 @@ Please *proceed to the next lab*.
 # Learn more
 
 - Oracle Advanced Security Guide
-- <a href="https://docs.oracle.com/en/database/oracle/oracle-database/19/asoag/introduction-to-oracle-advanced-security.html"> </a>
+https://docs.oracle.com/en/database/oracle/oracle-database/19/asoag/introduction-to-oracle-advanced-security.html
 
 - Introduction to TDE
-- <a href="https://docs.oracle.com/en/database/oracle/oracle-database/19/asoag/introduction-to-transparent-data-encryption.html"> </a>
+https://docs.oracle.com/en/database/oracle/oracle-database/19/asoag/introduction-to-transparent-data-encryption.html
 
 # Acknowledgements
 
