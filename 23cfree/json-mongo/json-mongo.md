@@ -6,6 +6,8 @@ With our JSON Collection created in the Oracle Database, we can use Mongo APIs t
 
 Estimated Time: 10 minutes
  
+Watch the video below for a quick walk through of the lab.
+[Watch the video](videohub:1_pypv5ivy)
 
 ### Objectives
 
