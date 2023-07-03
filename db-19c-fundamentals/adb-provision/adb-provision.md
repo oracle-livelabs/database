@@ -80,9 +80,10 @@ In this lab, you will:
 
 5. Choose a deployment type. Select the deployment type for your database from the choices:
 
-    - **Shared Infrastructure** - For this lab, choose **Shared Infrastructure** as the deployment type.
+    - **Serverless** - For this lab, choose **Serverless** as the deployment type.
     - **Dedicated Infrastructure** - Or, you could have chosen Dedicated Infrastructure as the deployment type.
 
+    ![Choose deployment type](./images/choose-deployment-type.png)
 
 6. Configure the database:
 

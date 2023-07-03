@@ -58,4 +58,4 @@ In this lab, you will learn how to:
 
 - **Contributors** - Perside Foster, MySQL Solution Engineering
 
-- **Last Updated By/Date** - Ravish Patel, MySQL Solution Engineering, March 2023
+- **Last Updated By/Date** - Ravish Patel, MySQL Solution Engineering, June 2023

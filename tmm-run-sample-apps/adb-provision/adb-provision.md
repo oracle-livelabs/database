@@ -59,13 +59,15 @@ Watch the video below for a quick walk-through of the lab.
 
     ![Chose a workload type](./images/adb-workload-type.png " ")
 
-5. Choose a deployment type. For this lab, choose **Shared Infrastructure** as the deployment type.
+5. Choose a deployment type. For this lab, choose **Serverless** as the deployment type.
 
     ![Choose a deployment type](./images/deployment-type.png " ")
 
 6. Configure the database:
 
+    <if type="tenancy"> 
     * **Always Free** - If your cloud account offers it, select this option to create an always free autonomous database, which comes with 1 CPU and 20 GB of storage. If you don't have this option, select the details mentioned below to create an autonomous database.
+    </if>
     * **Choose database version** - Select a database version from the available versions.
     * **OCPU count** - Number of CPUs for your service. For this lab, specify **1 CPU**.  An Always Free database comes with 1 CPU.
     * **Storage (TB)** - Select your storage capacity in terabytes. For this lab, specify **0.02 TB** of storage (20 GB). An Always Free database comes with 20 GB of storage.
@@ -73,7 +75,12 @@ Watch the video below for a quick walk-through of the lab.
     * **Storage Auto Scaling** - For this lab, you can disable storage auto scaling. The Always Free database does not scale up/down.
     * **New Database Preview** - If a checkbox is available to preview a new database version, do **not** select it.
 
+    <if type="tenancy">
     ![Configure the database](./images/configure-db.png " ")
+    </if>
+    <if type="sandbox">
+    ![Configure the database](./images/configure-db-sandbox.png " ")
+    </if>
 
 7. Create administrator credentials:
 
@@ -281,7 +288,7 @@ You may now **proceed to the next lab.**
 
 ## Learn More
 
-* [Using Oracle Autonomous Database on Shared Exadata Infrastructure](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/user/autonomous-workflow.html#GUID-5780368D-6D40-475C-8DEB-DBA14BA675C3)
+* [Using Oracle Autonomous Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/user/autonomous-workflow.html#GUID-5780368D-6D40-475C-8DEB-DBA14BA675C3)
 * [Database Concepts](https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt/introduction-to-oracle-database.html#GUID-A42A6EF0-20F8-4F4B-AFF7-09C100AE581E)
 
 ## Acknowledgements

@@ -33,7 +33,7 @@ Estimated Workshop Time: 70 minutes
 
 ## Workshop Objectives
 - Get comfortable with Oracle's public cloud services
-- Provision a new Autonomous Database instance on Shared Infrastructure
+- Provision a new Autonomous Database Serverless instance
 - Run sample queries against the sample data sets
 - Create a schema, create a user, assign privileges, and create tables
 
