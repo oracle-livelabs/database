@@ -1,12 +1,23 @@
-# Lab 6 - Cleanup Inventory and Final Checks
+# Lab 6: Cleanup Inventory and Final Checks
 
 ## Introduction 
 You are done now. You did patch out-of place what we highly recommend, and you may have done also a more work-intense in-place patching exercise. So, let us check some things in the environment. 
 
-Use the Oracle "__19.19.0 Home__" TAB of your terminal.
+Estimated Time: 15 minutes
+
+### Objectives
+
+Final Checks
+
+### Prerequisites
+
+This lab assumes you have:
+
+- Connected to the lab
+- Use the Oracle "__19.19.0 Home__" TAB of your terminal.
 ![start sql*plus](./images/19-19-home.png " ")
 
-## Task 1 - Invalid Object Check
+## Task 1: Invalid Object Check
 
 ### Step 1: Open SQL*Plus
 
@@ -28,7 +39,7 @@ Use the Oracle "__19.19.0 Home__" TAB of your terminal.
 
 There should be no invalid objects.
 
-## Task 2 - Check Time Zone
+## Task 2: Check Time Zone
 The default time zone is DST V.32. But since the Release Update 19.18.0 all existing time zone files will be delivered. Please check if the automated patching with AutoUpgrade has updated the time zone. Remember, that the config file had upg1.timezone_upg=yes set intentionally:
 
   ```
@@ -53,7 +64,7 @@ At this point, please `exit` SQL*Plus.
 ![exit sql*plus](./images/exit-sqlplus.png " ")
 
 
-## Task 3 - Check JDK version
+## Task 3: Check JDK version
 Please check whether the JDK version has been upgraded as well.
 
   ```
@@ -67,7 +78,7 @@ This is intended. You will always get the n-1 version of JDK, i.e. the version w
 
 
 
-## Task 4 - Check PERL version
+## Task 4: Check PERL version
 Final check here is about whether PERL has been patched, too. The version before patching was v5.36.0).
 
   ```
@@ -79,7 +90,7 @@ Final check here is about whether PERL has been patched, too. The version before
 
 Now you see no difference. But PERL updates get delivered with Release Updates since January 2023. Hence, in this case, there was no update for 19.19.0.
 
-## Task 5 - You are done!
+## Task 5: You are done!
 
 Congratulations from the entire Oracle Database Upgrade, Migration and Patching team. You completed the Hands-On Lab "Patch me if you can" successfully. Next time, we'll approach the Grid Infrastructure patching together. 
 

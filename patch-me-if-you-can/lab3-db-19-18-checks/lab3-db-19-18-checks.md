@@ -1,15 +1,27 @@
-# Lab 3 - Checks in the 19.18 Environment
+# Lab 3: Checks in the 19.18 Environment
 
 ## Introduction 
 We will use this lab to check several things in the source environment while the installation in the new environment progresses.
 
-## Task 1 - Checks
+Estimated Time: 15 minutes
+
+### Objectives
+
+Generic Checks
+
+### Prerequisites
+
+This lab assumes you have:
+
+- Connected to the lab
+- Switch to the other tab titled "__19.18.0 Home__" 
+![activate 19.18 tab ](./images/19-18-home.png " ")
+
+## Task 1: Checks
 
 ### Step 1: Set the Source Database Environment
 
-Switch to the other tab titled "__19.18.0 Home__" 
 
-![activate 19.18 tab ](./images/19-18-home.png " ")
 and set the environment.
   ```
     <copy>
@@ -212,7 +224,7 @@ $
 Except for the scheduler warning, everything looks good.
 
 
-## Task 2 - Finish the Patch Installation
+## Task 2: Finish the Patch Installation
 
 At this point the patching installation should be completed. Switch to the tab titled "__19.19.0 Home__". You should see the following output:
 

@@ -1,24 +1,25 @@
-# Lab 4 - Using AutoUpgrade for Patching
+# Lab 4: Using AutoUpgrade for Patching
 
 ## Introduction 
 In this lab exercise you will patch the CDB2 database from 19.18.0 to 19.19.0 with just two commands.
 
-### Step 1: Switch to the "__19.19.0 Home__" Tab
+Estimated Time: 15 minutes
 
-![switch to 1919 tab](./images/activate-1919-tab.png " ")
+### Objectives
 
-### Step 2: Preconfigured AutoUpgrade Config File
+Autoupgrade for patching
 
-A simple config file for AutoUpgrade is provided already for your convenience:
-  ```
-    <copy>
-     cat /home/oracle/scripts/CDB2_patch.cfg
-    </copy>
-  ```
-![autoupgrade config file](./images/1919-autoupgrade-cfg.png " ")
+### Prerequisites
+
+This lab assumes you have:
+
+- Connected to the lab
+- Activate the tab __19.19.0 Home__
+![switch to 1919 tab](./images/19-19-home.png " ")
 
 
-## Task 1 - Update AutoUpgrade
+
+## Task 1: Update AutoUpgrade
 
 Copy a more recent version of AutoUpgrade into your 19.19.0 home:
 
@@ -29,7 +30,7 @@ Copy a more recent version of AutoUpgrade into your 19.19.0 home:
   ```
 ![copy newer version of autoupgrade.jar](./images/cpy-new-autoupgrade-jar.png " ")
 
-## Task 2 - Check AutoUpgrade Version
+## Task 2: Check AutoUpgrade Version
 
 Then check the version:
 
@@ -41,7 +42,17 @@ Then check the version:
 ![autoupgrade version](./images/autoupgrade-version.png " ")
 
 
-## Task 3 - Analyze with AutoUpgrade
+## Tak 3: Preconfigured AutoUpgrade Config File
+
+A simple config file for AutoUpgrade is provided already for your convenience:
+  ```
+    <copy>
+     cat /home/oracle/scripts/CDB2_patch.cfg
+    </copy>
+  ```
+![autoupgrade config file](./images/1919-autoupgrade-cfg.png " ")
+
+## Task 4: Analyze with AutoUpgrade
 
 Now you will do an analyze run at first. 
 
@@ -65,7 +76,7 @@ Autoupgrade is not awaiting any input from you. Just lean back - it will complet
  ![autoupgrade analyze output](./images/autoupgrade-analyze.png " ")
 </details>
 
-## Task 4 - AutoUpgrade Log File
+## Task 5: AutoUpgrade Log File
 
 Check the logfile for any additional tasks. See the last line:
 
@@ -87,7 +98,7 @@ Check the logfile for any additional tasks. See the last line:
 No additional tasks needed. You can progress.
 
 
-## Task 5 - AutoUpgrade Deploy
+## Task 6: AutoUpgrade Deploy
 
 You can start AutoUpgrade now in deploy mode.
 It will lift the database into the new home and execute all necessary tasks.
@@ -104,7 +115,7 @@ Again you see the autoupgrade command prompt
 
 and this time you can use it to monitor  the autoupgrade progress.
 
-## Task 6 - AutoUpgrade Progress
+## Task 7: AutoUpgrade Progress
 You can monitor it in the job interface easily with a refresh interval:
   ```
     <copy>

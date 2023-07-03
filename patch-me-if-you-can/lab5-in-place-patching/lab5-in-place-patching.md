@@ -1,12 +1,26 @@
-# Lab 5 - In-Place Patching
+# Lab 5: In-Place Patching
 
 ## Introduction 
 The benefit of the out-of-place patching method is not only that the previous home is preserved for a potential fallback but it only allows much shorter downtime. In order to see the difference you could patch now the 19.18.0 home in-place.
 
-## Task 1 - Checks for in-place patching
-Please switch to the other tab titled "__19.18.0 Home__",
+Estimated Time: 25 minutes
+
+### Objectives
+
+Patching an existing Oracle_Home
+
+### Prerequisites
+
+This lab assumes you have:
+
+- Connected to the lab
+
+- Please switch to the other tab titled "__19.18.0 Home__",
 
 ![19.18 Tab](./images/19-18-home.png " ")
+
+## Task 1: Checks for in-place patching
+
 
 
 ### Step 1: Environment
@@ -231,7 +245,7 @@ Part of the output is the following paragraph:
 Why do you need to rollback anything?
 The reason is that Release Updates will be merged automatically. But in this case the 19.18.0 home has additional patches applied. And those need to be rolled back at first.
 
-## Task 2 - Patch rollback
+## Task 2: Patch rollback
 
 Do you want to go this route? Really?
 
@@ -349,7 +363,7 @@ OPatch succeeded.
 
 
 
-## Task 3 - More Rollback Required
+## Task 3: More Rollback Required
 Unfortunately, we are not done yet with rollback activities.
 
 When you check again:
@@ -596,7 +610,7 @@ $
 
 Once they are removed, the conflict check passes, and you can continue.
 
-## Task 4 - Apply RU 19.19.0
+## Task 4: Apply RU 19.19.0
 You see, it is a lot of extra work to patch in-place. So far, you did only cleanup. But now, finally, you can start applying the patches. You will start with the Release Update 19.19.0
 
   ```
@@ -835,7 +849,7 @@ $
   ```
 </details>
 
-## Task 5 - Apply the OJVM 19.19.0 Bundle Patch
+## Task 5: Apply the OJVM 19.19.0 Bundle Patch
 
 Now you need to apply the OJVM Bundle Patch on top.
 
@@ -911,7 +925,7 @@ OPatch completed with warnings.
 </details>
 
 
-## Task 6 - Apply the Data Pump Bundle Patch 19.19.0
+## Task 6: Apply the Data Pump Bundle Patch 19.19.0
 Next step is to apply the Data Pump Bundle Patch for 19.19.0. You could do this online while the database is up and running. But since we want all patches to be in place when we execute `datapatch` later on, it is best to apply it right now.
 
   ```
@@ -968,7 +982,7 @@ OPatch succeeded.
 
 
 
-## Task 7 - Apply the MRP1 for 19.19.0
+## Task 7: Apply the MRP1 for 19.19.0
 Now you see a significant difference to the other processes. Since MRPs are a conjunction of one-off patches, you will use `opatch napply` now.
 
   ```
@@ -1415,7 +1429,7 @@ $
 </details>
 
 
-## Task 8 - Start the database and invoke datapatch
+## Task 8: Start the database and invoke datapatch
 As your home has now received all patches, you need to startup the UP19 database and apply all SQL and PL/SQL changes to it with datapatch:
 
 ### Step 1: Open SQL*Plus
@@ -1544,7 +1558,7 @@ SQL Patching tool complete on Mon Jul  3 10:39:34 2023
 
 
 
-## Task 9 - Inventory Check and Summary
+## Task 9: Inventory Check and Summary
 Now you see __why out-of-place patching is far superior__ over in-place patching. While you prepared a new home fully unattended before, in contrast you've had to do all the manual work now all by yourself. 
 In addition, the downtime was factors higher. 
 And finally, in the case of the CDB2, AutoUpgrade had done the entire job for you. In the in-place patching exercise it was all on you.

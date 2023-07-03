@@ -1,10 +1,13 @@
-# Lab 2 - Installation and Patching
+# Lab 2: Installation and Patching
 
 ## Introduction 
 
 In this lab exercise you will install Oracle Database 19.19.0 into a separate home and patch it fully unattended in one single operation. Out-of-place patching is the preferred method, not only for the Database home but also for the Grid Infrastructure Home.
 
-**This is the list of software and patches you are going to install now:**
+Estimated Time: 15 minutes
+
+### Objectives
+
 * 19.3.0 base release
 * New opatch version
 * 19.19.0 Release Update
@@ -12,7 +15,15 @@ In this lab exercise you will install Oracle Database 19.19.0 into a separate ho
 * 19.19.0 Data Pump Bundle Patch
 * 19.19.0.0.230516 Monthly Recommended Patch 1 for 19.19.0
 
-## Task 1 - Base Release Installation
+### Prerequisites
+
+This lab assumes you have:
+
+- Connected to the lab
+
+
+
+## Task 1: Base Release Installation
 Create now the new Oracle Home for 19.19.0, unzip the base release and refresh opatch. 
 
 Start by **double-clicking at the "patching" icon** on the desktop:
@@ -84,7 +95,7 @@ and unzip the new OPatch from staging into this new Oracle Home. This step is im
 ![unzip new opatch](./images/unzip-opatch-software.png " ")
 
 
-## Task 2 - Patch Installation
+## Task 2: Patch Installation
 
 The patches you are going to install are all unpacked into separate directories.
 
