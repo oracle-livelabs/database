@@ -43,6 +43,7 @@ The current Oracle Home is: `/u01/app/oracle/product/19`
 - CDB2 - Container database
 - UP19 - non-CDB database
 
+You may *proceed to the next lab*.
 
 ## Acknowledgements
 * **Author** - Mike Dietrich 

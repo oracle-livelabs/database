@@ -1575,7 +1575,7 @@ Now finally, check the inventory:
 ![opatch lspatches output](./images/opatch-lspatches.png " ")
 ```
 
-You are done with in-place patching and can *proceed to the next lab*.
+You are done with in-place patching and you may *proceed to the next lab*.
 
 
 ## Acknowledgements
