@@ -18,7 +18,7 @@ Set the environment for the UP19 database. It is currently shutdown since it nee
   ```
 ![source 19.18 env](./images/source-1918-env.png " ")
 
-### Step 2: Switch Directory
+### Step 2: Switch to 19.19 RU Directory
 
 Then enter the patch directory for the Release Update 19.19.0:
   ```
@@ -26,7 +26,7 @@ Then enter the patch directory for the Release Update 19.19.0:
      cd /home/oracle/stage/ru/35042068
     </copy>
   ```
-![change into patch dir](./images/cd-patch-dir.png " ")
+![change into patch dir](./images/cd-ru-patch-dir.png " ")
 
 ### Step 3: Patch Conflict Checker
 
@@ -218,7 +218,7 @@ OPatch succeeded.
 
 Part of the output is the following paragraph:
 
-    ```
+    ``` 
     - Please rollback the relevant overlay patches of the subset patches which are conflicting and apply the superset patch
     Summary of Conflict Analysis:
 
