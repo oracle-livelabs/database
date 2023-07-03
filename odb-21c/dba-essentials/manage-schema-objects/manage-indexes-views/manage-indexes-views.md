@@ -46,6 +46,7 @@ You can view indexes for *HR* schema.
    ![Columns pane](./images/columns.png " ")
 
    The Columns pane displays the following fields:
+
        - INDEX_OWNER
        - INDEX_NAME
        - TABLE_OWNER
@@ -53,12 +54,12 @@ You can view indexes for *HR* schema.
        - COLUMN_NAME
        - COLUMN_POSITION
        - DESCEND
-
 6. Click on the Details pane to view additional information about the index.
 
    ![Details pane](./images/details-pane.png " ")
 
    The Details pane displays the following few important fields:
+
        - CREATED
        - LAST_DDL_TIME
        - OWNER
@@ -148,6 +149,7 @@ You can see all the existing views in your database. In this lab, you will use t
        - **Triggers:** This displays the trigger actions you used to update the tables underlying the view.
 
        - **Errors:** This pane displays the errors if there are any. 
+ 
 
    ![Columns pane](./images/columns-pane-details-view.png " ")
 

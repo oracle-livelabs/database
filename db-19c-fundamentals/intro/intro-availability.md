@@ -1,6 +1,10 @@
 # Introduction
 
-## About Oracle Database 19c
+# About this Workshop
+
+This workshop lets you try out new features in Oracle Database 19c. All the labs are independent of each other, so you don't need to do them in any particular order. If needed, a lab starts with instructions on how to prepare your environment, and ends with instructions on how to restore your environment back to its original state. For most lab steps, you enter a command in the terminal window. For database actions, you use SQL*Plus.
+
+### About Oracle Database 19c
 
 Oracle Database 19c provides the most advanced SQL engine on the planet. It complies with the latest ISO SQL standard, making it not only the most comprehensive database but also the most open one. It supports highly sophisticated analytics alongside and with no impact on OLTP workloads, eliminating the need to develop and orchestrate complex, fragile, and inconsistent data movement between different specialized data stores. Oracle’s SQL engine ships with integrated machine learning algorithms and allows developers to easily apply them on the data directly, hence moving the computation to the data—rather than having to pull the data out of the database and perform the calculation within the application. Using this capability, developers can create real-time prediction models directly on the data itself and act on insights more quickly and easily than ever before.
 
@@ -12,15 +16,28 @@ Extend this with the move to autonomy provided by Oracle Autonomous Database, a 
 
 With the Oracle Autonomous Database, developers can fully concentrate on the applications they write and the business’s requirements, rather than having to think about the data tier. And to make this even easier the Oracle Autonomous Database environment can be provisioned in minutes with a few simple clicks or an API call to the Oracle Cloud.
 
-## About the Oracle Database 19c Availability New Features Workshop
-
-This workshop lets you try out new features in Oracle Database 19c. All the labs are independent of each other, so you don't need to do them in any particular order. If needed, a lab starts with instructions on how to prepare your environment, and ends with instructions on how to restore your environment back to its original state. For most lab steps, you enter a command in the terminal window. For database actions, you use SQL*Plus.
-
 > **Note**: Currently, this workshop is not supported in an Always Free environment. If you are using the LiveLabs environment (green button), please note that the **Install Oracle Database 19c with Automatic Root Script Execution** lab is not available.
 
-### General Labs
+Estimated Time: 160 minutes
 
-The following general database overall enhancement labs are available:
+### Objectives
+
+In this workshop, you will:
+
+- Explore new features included in the release of Oracle Database 19c.
+
+### Prerequisites
+
+This lab assumes that you have:
+
+- Familiarity with Database is desirable, but not required
+Understanding of basic SQL terms
+- Some understanding of cloud and database terms is helpful
+- Familiarity with Oracle Cloud Infrastructure (OCI) is helpful
+
+### Availability Enhancement Labs
+
+The following availability database overall enhancement labs are available:
 
 - Install Oracle Database 19c with Automatic Root Script Execution
 - Clone a PDB from a Remote CDB by Using DBCA in Silent Mode
@@ -31,7 +48,7 @@ The following general database overall enhancement labs are available:
 - Use RMAN to Connect to a PDB to Use the Recovery Catalog
 - Explore Automatic Deletion of Flashback Logs
 
-If you would like to watch us do the general enhancement labs, click [here](https://youtu.be/Kdw7uugt0-E).
+If you would like to watch us do the availability enhancement labs, click [here](https://youtu.be/Kdw7uugt0-E).
 
 ### Security Enhancement Labs
 
@@ -46,4 +63,4 @@ The following security enhancement labs are available:
 ## Acknowledgements
 
 - **Author**- Jody Glover, Principal User Assistance Developer, Database Development
-- **Last Updated By/Date** - Matthew McDaniel, Austin Specialist Hub, February 24 2022
+- **Last Updated By/Date** - Matthew McDaniel, Austin Specialist Hub, March 29 2023

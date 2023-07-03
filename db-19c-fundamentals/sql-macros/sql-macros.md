@@ -1,9 +1,9 @@
 # Using SQM Scalar and Table Expressions
 
 ## Introduction
-This lab only contains a small section of the SQL updates added to Oracle Database 19c. For the full list see the 'Learn More' section at the bottom. SQL Macros is a new, simpler way to encapsulate complex processing logic directly within SQL. SQL Macros allow developers to encapsulate complex processing within a new structure called a "macro" which can then be used within SQL statement. Essentially there two types of SQL Macros: SCALAR and TABLE.  SCALAR expressions can be used in SELECT list, WHERE/HAVING, GROUP BY/ORDER BY clauses.  TABLE expressions are used in a FROM-clause.
+This lab only contains a small section of the SQL updates added to Oracle Database 19c. For the full list, see the 'Learn More' section at the bottom. SQL Macros is a new, simpler way to encapsulate complex processing logic directly within SQL. SQL Macros allow developers to encapsulate complex processing within a new structure called a "macro" which can then be used within SQL statement. Essentially, there are two types of SQL Macros: SCALAR and TABLE.  SCALAR expressions can be used in SELECT list, WHERE/HAVING, GROUP BY/ORDER BY clauses.  TABLE expressions are used in a FROM-clause.
 
-You can create SQL Macros (SQM) to factor out common SQL expressions and statements into reusable, parameterized constructs that can be used in other SQL statements. SQL Macros have an important advantage over ordinary PL/SQL functions in that they make the reusable SQL code completely transparent to the optimizer – and that brings big benefits! It makes it possible for the optimizer to transform the original code for efficient execution because the underlying query inside the macro function can be merged into outer query. That means there is no context switching between PL/SQL and SQL and the query inside the macro function is now executed under same snapshot as outer query. So we get both simplicity and faster execution.
+You can create SQL Macros (SQM) to factor out common SQL expressions and statements into reusable, parameterized constructs that can be used in other SQL statements. SQL Macros have an important advantage over ordinary PL/SQL functions in that they make the reusable SQL code completely transparent to the optimizer – and that brings big benefits! It makes it possible for the optimizer to transform the original code for efficient execution because the underlying query inside the macro function can be merged into the outer query. That means there is no context switching between PL/SQL and SQL and the query inside the macro function is now executed under the same snapshot as the outer query. So we get both simplicity and faster execution.
 
 This lab shows how to use SQL Macro as scalar and table expressions.
 
@@ -36,7 +36,7 @@ In this lab, you will:
 	![JSON Database Actions](./images/db-actions-logout.png)
 	![JSON Database Actions](./images/db-actions-login-lab.png)
 
-4. First, lets look at creating a function and NOT using SQL macros. Lets say we were interested in giving a discount to out for a holiday. Lets create a function called holiday_discount.
+4. First, we will focus on developing a function without employing SQL macros. Suppose we intend to offer a holiday discount to our customers. In that case, we can create a function named holiday\_discount.
 
     ```
     <copy>
@@ -51,7 +51,7 @@ In this lab, you will:
     /
     </copy>
     ```
-5. Now lets take a look at our results.
+5. Now let's take a look at our results.
 
     ```
     <copy>
@@ -59,12 +59,12 @@ In this lab, you will:
     FROM custsales where actual_price > 2 fetch first 10 rows only;
     </copy>
     ```
-    That works fine. However calling a function from SQL takes CPU overhead. In the case of this demo it may not be much, but switching between SQL and PL/SQL causes CPU usage and it can become significant as our use case increases. 
+    That works fine. However, calling a function from SQL takes CPU overhead. In the case of this demo it may not be much, but switching between SQL and PL/SQL causes CPU usage and it can become significant as our use case increases. 
 
     ![Check California tax output](./images/total-sales.png)
 
 
-6. Now lets recreate our function as a SQL Macro Scalar. It will follow a very similar approach.
+6. Now, let's recreate our function as a SQL Macro Scalar. It will follow a very similar approach.
 
     ```
     <copy>
@@ -79,7 +79,7 @@ In this lab, you will:
     /
     </copy>
     ```
-7. Again, lets take a look at our results.
+7. Again, we can take a look at our results.
 
     ```
     <copy>
@@ -91,11 +91,11 @@ In this lab, you will:
     ```
 
 
-    We also have the ability to set SQL tracing with Autonomous database and check the files to compare our PL/SQL vs SQL Macros, however we wont cover that here today. If you're interested in learning more see the 'Learn More' section below.
+    We also have the ability to set SQL tracing with Autonomous database and check the files to compare our PL/SQL vs SQL Macros, however we won't cover that here today. If you're interested in learning more, see the 'Learn More' section below.
 
 ## Task 2: Use SQL Macros as table expressions 
 
-1. Lets go ahead and create another SQL Macro. This time we will be looking at creating SQL Macros as table expressions. We're going to create the macro to calculate the total sales per customer.
+1. Let's go ahead and create another SQL Macro. This time, we will be looking at creating SQL Macros as table expressions. We're going to create the macro to calculate the total sales per customer.
 
     ```
     <copy>
@@ -122,7 +122,7 @@ In this lab, you will:
     ![Sales and IT Budget](./images/sqm.png " ")
 
 
-3. We can see that creating SQL Macros is similar to creating user defined functions. To reiterate, using a SQL macros doesn't cause the additional CPU overhead that functions do. Rather than performing any action during the query execution, the SQM actions occurs during the optimization of the query. 
+3. We can see that creating SQL Macros is similar to creating user defined functions. To reiterate, using SQL macros doesn't cause the additional CPU overhead that functions do. Rather than performing any action during the query execution, the SQM actions occur during the optimization of the query. 
 
 6. Last, we can use the `USER_PROCEDURES` view to display the values of the `SQL_MACRO` column.
 
@@ -145,4 +145,4 @@ You may now proceed to the next lab.
 
 * **Author** - Killian Lynch, Database Product Management
 * **Contributors** - Dominic Giles
-* **Last Updated By/Date** - Killian Lynch July 2022
+* **Last Updated By/Date** - Killian Lynch Feb 2023

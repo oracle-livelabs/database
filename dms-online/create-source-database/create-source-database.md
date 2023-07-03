@@ -40,8 +40,8 @@ The following task is *optional* if a source database is already present.
     - Name: **SourceDB**
     - Add public SSH keys: *Upload the public key file you use.*
     - Choose a license type: **License Included**
-    - Virtual cloud network: **VCN\_DMS\_LA** (Or your VCN name)
-    - Client subnet: **Public Subnet-VCN\_DMS\_LA** (Or your subnet name)
+    - Virtual cloud network: **VCN\_DMS** (Or your VCN name)
+    - Client subnet: **Public Subnet-VCN\_DMS** (Or your subnet name)
     - Hostname prefix: **sourcedb**
 
   ![Screenshot of enter db name details](images/name-your-source.png)
@@ -100,62 +100,7 @@ The following task is *optional* if a source database is already present.
 
   ![Screenshot of source db ip address](images/source-db-ip-addresses.png)
 
-## Task 3: Adding Data to the Database
 
-1. Open a SSH terminal to the database instance. The instructions are for Unix-style ssh command:
-
-    ```
-    <copy>ssh -i <private_key_file> opc@<dbnode_public_ip></copy>
-    ```
-
-2. Create a new directory in the user volume:
-
-    ```
-    <copy>sudo su - oracle</copy>
-    ```
-    ```
-    <copy>mkdir /u01/app/oracle/dumpdir</copy>
-    ```
-3. Connect as sysdba to alter the streams pool size:
-
-    ```
-    <copy>sqlplus / as sysdba</copy>
-    ```
-
-3. Set the streams pool size = 2GB:
-
-    ```
-    <copy>alter system set streams_pool_size=2G scope=both SID='sourcedb';</copy>
-    ```
-4. Changing to the PDB
-
-    ```
-    <copy>show pdbs;</copy>
-    ```
-
-    ```
-    <copy>alter session set container=PDB;</copy>
-    ```
-
-    ![pdb session altered](images/show-pdbs-alter-session.png =50%x50%)
-
-5. Adding dummy data to the PDB
-
-    ```
-    <copy>CREATE TABLE Persons (
-        PersonID int,
-        LastName varchar(255),
-        FirstName varchar(255),
-        Address varchar(255),
-        City varchar(255)
-    );</copy>
-    ```
-    ```
-    <copy>INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) Values ('1', 'Lynch', 'Killian', '123way', 'Austin');</copy>
-    ```  
-    ```
-    <copy> quit;</copy>
-    ```
 You may now [proceed to the next lab](#next).
 
 ## Learn More

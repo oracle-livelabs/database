@@ -18,6 +18,7 @@
     },
     {
       "title": "Lab 3: Provision Autonomous Databases for Use as resource manager",
+      "type": "sandbox",
       "filename": "../../adb-provision/adb-provision.md"
     },
     {

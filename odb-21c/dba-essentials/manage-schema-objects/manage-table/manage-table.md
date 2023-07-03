@@ -53,6 +53,7 @@ From Oracle Database Actions, you can view existing tables in your Autonomous Da
    ![Open Table](./images/open-table.png " ")
 
   This option opens a window that displays the properties of the selected table. The properties window displays information for the following properties of the table:
+
       - the Columns
       - the Data
       - the Constraints
