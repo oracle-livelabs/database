@@ -219,7 +219,7 @@ For more details see [Oracle Sharding documentation] (https://docs.oracle.com/en
     </copy>
     ```
 
-    ![check row count at shard](./images/shardcount.jpg " ")
+    ![<check row count at shard>](./images/shardcount.jpg " ")
 
    You can find the difference in the row count between the shard catalog and the shard-database (porcl1cdb\_porcl1pdb, porcl2cdb\_porcl2pdb, porcl3cdb\_porcl3pdb).
 

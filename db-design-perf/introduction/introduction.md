@@ -29,7 +29,7 @@ This workshop requires an Oracle Cloud account.
 
 ### Workshop Objectives
 - Get comfortable with Oracle's public cloud services
-- Provision of a new Autonomous Database instance on Shared Infrastructure
+- Provision of a new Autonomous Database Serverless instance
 - Establish an initial database schema and conduct a performance benchmark
 - Optimize the design for throughput and concurrency
 
