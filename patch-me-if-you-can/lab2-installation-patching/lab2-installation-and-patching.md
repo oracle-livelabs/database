@@ -128,7 +128,7 @@ You can either copy & paste the entire command or call a script. Open only one o
 <details>
  <summary>*click here to copy the whole runInstaller command*</summary>
 
-  ``` text
+  ```
       <copy>
     ./runInstaller -applyRU /home/oracle/stage/ru/35042068  \
  -applyOneOffs /home/oracle/stage/ojvm/35050341,/home/oracle/stage/dpbp/35261302,/home/oracle/stage/mrp/35333937/34340632,/home/oracle/stage/mrp/35333937/35012562,/home/oracle/stage/mrp/35333937/35037877,/home/oracle/stage/mrp/35333937/35116995,/home/oracle/stage/mrp/35333937/35225526 \
@@ -157,7 +157,7 @@ or
 <details>
  <summary>*click here to copy the command used execute the script*</summary>
 
-  ``` text
+  ```
     <copy>
      sh /home/oracle/patch/install_patch.sh
     </copy>
