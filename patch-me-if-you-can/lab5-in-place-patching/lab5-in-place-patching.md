@@ -38,7 +38,7 @@ Start running the patching conflict check:
   ```
 
 You will receive a very long output listing several thousands of bug numbers fixed by the RU. We cut the output off here:
-![opatch conflict checker](./images/opatch-conflict-checker.png " ")
+![opatch conflict checker](./images/opatch-conflict-checker-1.png " ")
 
 <details>
  <summary>*click here to see the full opatch conflict checker output*</summary>
@@ -214,7 +214,7 @@ OPatch succeeded.
 
 
 
-### Step 4: Attention
+### Attention
 
 Part of the output is the following paragraph:
 
@@ -604,7 +604,7 @@ You see, it is a lot of extra work to patch in-place. So far, you did only clean
      cd /home/oracle/stage/ru/35042068
     </copy>
   ```
-![cd into patch directory](./images/cd-patch-dir.png " ")
+![cd into patch directory](./images/cd-ru-patch-dir.png " ")
 
   ```
     <copy>
@@ -929,29 +929,11 @@ Next step is to apply the Data Pump Bundle Patch for 19.19.0. You could do this 
 
 ![opatch apply datapump bundle patch](./images/opatch-apply-datapump-bundle-patch.png " ")
 
-
-## Task 7 - Apply the MRP1 for 19.19.0
-Now you see a significant difference to the other processes. Since MRPs are a conjunction of one-off patches, you will use `opatch napply` now.
-
-  ```
-    <copy>
-     cd /home/oracle/stage/mrp/35333937 
-    </copy>
-  ```
-![cd to mrp1 stage dir](./images/cd-mrp.png " ")
-  ```
-    <copy>
-     $ORACLE_HOME/OPatch/opatch napply /home/oracle/stage/mrp/35333937 -verbose 
-    </copy>
-  ```
-
-You already know the procedure - when opatch asks if you want to continue, answer with "__y__":
-![opatch mrp patch apply](./images/opatch-apply-mrp.png " ")
-
 <details>
  <summary>*click here to see the full final backup log file*</summary>
 
   ``` text
+[UP19] oracle@hol:~/stage/dpbp/35261302
 $ $ORACLE_HOME/OPatch/opatch apply
 Oracle Interim Patch Installer version 12.2.0.1.37
 Copyright (c) 2023, Oracle Corporation.  All rights reserved.
@@ -964,9 +946,470 @@ OPatch version    : 12.2.0.1.37
 OUI version       : 12.2.0.7.0
 Log file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2023-06-30_09-30-51AM_1.log
 
+Verifying environment and performing prerequisite checks...
+OPatch continues with these patches:   35261302
+
+Do you want to proceed? [y|n]
+y
+User Responded with: Y
+All checks passed.
+Backing up files...
+Applying interim patch '35261302' to OH '/u01/app/oracle/product/19'
+
+Patching component oracle.rdbms, 19.0.0.0.0...
+
+Patching component oracle.rdbms.dbscripts, 19.0.0.0.0...
+Patch 35261302 successfully applied.
+Log file location: /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2023-06-30_09-30-51AM_1.log
 
 OPatch succeeded.
-[UP19] oracle@hol:~/stage/dpbp/35261302
+  ```
+</details>
+
+
+
+## Task 7 - Apply the MRP1 for 19.19.0
+Now you see a significant difference to the other processes. Since MRPs are a conjunction of one-off patches, you will use `opatch napply` now.
+
+  ```
+    <copy>
+     cd /home/oracle/stage/mrp/35333937 
+    </copy>
+  ```
+![cd to mrp1 stage dir](./images/cd-mrp-patch-dir.png " ")
+  ```
+    <copy>
+     $ORACLE_HOME/OPatch/opatch napply /home/oracle/stage/mrp/35333937 -verbose 
+    </copy>
+  ```
+
+You already know the procedure - when opatch asks if you want to continue or when it asks if the system is ready for patching, answer with "__y__":
+![opatch mrp patch apply](./images/opatch-apply-mrp.png " ")
+
+<details>
+ <summary>*click here to see the full final backup log file*</summary>
+
+  ``` text
+$ $ORACLE_HOME/OPatch/opatch napply /home/oracle/stage/mrp/35333937 -verbose
+
+
+[UP19] oracle@hol:~/stage/mrp/35333937
+$ $ORACLE_HOME/OPatch/opatch napply /home/oracle/stage/mrp/35333937 -verbose
+Oracle Interim Patch Installer version 12.2.0.1.37
+Copyright (c) 2023, Oracle Corporation.  All rights reserved.
+
+Environment:
+   OPatch.ORACLE_HOME=/u01/app/oracle/product/19
+   oracle.installer.invPtrLoc=/u01/app/oracle/product/19/oraInst.loc
+   oracle.installer.oui_loc=/u01/app/oracle/product/19/oui
+   oracle.installer.library_loc=/u01/app/oracle/product/19/oui/lib/linux64
+   oracle.installer.startup_location=/u01/app/oracle/product/19/oui
+   OPatch.PLATFORM_ID=
+   os.name=Linux
+   OPatch.NO_FUSER=
+   OPatch.SKIP_VERIFY=null
+   OPatch.SKIP_VERIFY_SPACE=null
+   oracle.installer.clusterEnabled=false
+   TRACING.ENABLED=null
+   TRACING.LEVEL=null
+   OPatch.DEBUG=false
+   OPATCH_VERSION=12.2.0.1.37
+   Bundled OPatch Property File=properties
+   Minimum OUI version: 10.2
+   OPatch.PATH=/u01/app/oracle/product/19/bin:/u01/app/oracle/product/19/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/oracle/.local/bin:/home/oracle/bin
+   OPatch.MW_HOME=
+   OPatch.WL_HOME=
+   OPatch.COMMON_COMPONENTS_HOME=
+
+
+
+Oracle Home       : /u01/app/oracle/product/19
+Central Inventory : /u01/app/oraInventory
+   from           : /u01/app/oracle/product/19/oraInst.loc
+OPatch version    : 12.2.0.1.37
+OUI version       : 12.2.0.7.0
+Log file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2023-06-30_09-32-12AM_1.log
+
+Verifying environment and performing prerequisite checks...
+Lock the home to access inventory.
+
+Running prerequisite check "CheckMinimumOPatchVersion" ...
+
+All patches can be applied using this OPatch.
+Prerequisite check "CheckMinimumOPatchVersion" passed.
+
+Running prerequisite check "CheckPatchingModel" ...
+Prerequisite check "CheckPatchingModel" passed.
+
+Running prerequisite check "CheckPatchsetUpdateCompatible" ...
+All the Patch Set Updates are compatible.
+
+Running prerequisite check "CheckPatchsetUpdateComponents" ...
+
+All the components to be upgraded can be done successfully.
+All the Patchset Updates have proper components to be upgraded..
+
+Running prerequisite check "CheckFusionAppsCompatible" ...
+OPatch is compatible with OUI for Fusion Apps patching.
+
+Running prerequisite check "CheckForInputValues" ...
+Input values is present for the all the actions of the given patches.
+
+Running prerequisite check "CheckSystemSpace" ...
+
+Finding the total space needed...
+
+Total space needed for the patches are: 32925128
+
+Checking if enough space is present on the disk...
+
+Required amount of space is availale on the disk
+Enough system space is available.
+
+Running prerequisite check "CheckSystemCommandAvailable" ...
+
+Fuser command is needed
+
+Archive command is needed
+
+Make commands is needed
+
+All the required commands are available.
+All the required system commands are present.
+
+Fuser command is needed
+
+Archive command is needed
+
+Make commands is needed
+
+All the required commands are available.
+All the required system commands are present.
+
+Fuser command is needed
+
+Archive command is needed
+
+Make commands is needed
+
+All the required commands are available.
+All the required system commands are present.
+
+All the required commands are available.
+All the required system commands are present.
+
+Fuser command is needed
+
+Archive command is needed
+
+Make commands is needed
+
+All the required commands are available.
+All the required system commands are present.
+
+Running prerequisite check "CheckPatchApplicableOnCurrentPlatform" ...
+
+Patch [PatchObject: loc.= /home/oracle/stage/mrp/35333937/34340632, , patch ID= 34340632, cooked patch ID= 34340632_Apr_7_2023_04_47_28,
+[PatchComponent: name= oracle.rdbms, version=19.0.0.0.0, required=false, language=en, CopyActions=No Copy Actions, JarActions=No Jar Actions, ArchiveActions=[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwqa.o", lineNumber="3", childPath="/kwqa.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwqa.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwqa.o" path="%ORACLE_HOME%/lib" shaolue="D84E96AEBF33E277BCCFF15DB50283A27188D8EF" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwqdl.o", lineNumber="4", childPath="/kwqdl.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwqdl.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwqdl.o" path="%ORACLE_HOME%/lib" shaolue="B41A116B8594B4B4FF8D4A731A6FEF3847CC9B92" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwqi.o", lineNumber="5", childPath="/kwqi.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwqi.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwqi.o" path="%ORACLE_HOME%/lib" shaolue="F6FAB85CCA6FC8743996886069C08ABA3D7DB66C" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwqic.o", lineNumber="6", childPath="/kwqic.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwqic.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwqic.o" path="%ORACLE_HOME%/lib" shaolue="FDFB5FCE56CF66B64FF29E4E2AB92890DBEF9DCC" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwqid.o", lineNumber="7", childPath="/kwqid.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwqid.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwqid.o" path="%ORACLE_HOME%/lib" shaolue="D20B92C535798298942B697C630A59F99E407D75" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwqj.o", lineNumber="8", childPath="/kwqj.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwqj.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwqj.o" path="%ORACLE_HOME%/lib" shaolue="7162DBDC957AE2798B1C8C5AF6779D987A864779" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwqs.o", lineNumber="9", childPath="/kwqs.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwqs.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwqs.o" path="%ORACLE_HOME%/lib" shaolue="7FD50A3D0E12C79CA816ED72A2703619B4760EFA" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwsbpt.o", lineNumber="10", childPath="/kwsbpt.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwsbpt.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwsbpt.o" path="%ORACLE_HOME%/lib" shaolue="EF448E2A12AEABB1FAF84B37B673EDF213D5B5BD" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwscp.o", lineNumber="11", childPath="/kwscp.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwscp.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwscp.o" path="%ORACLE_HOME%/lib" shaolue="22A65DCD5054A871CA67DC1DFC0F3AED611206B8" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwsc.o", lineNumber="12", childPath="/kwsc.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwsc.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwsc.o" path="%ORACLE_HOME%/lib" shaolue="7EF8D96F6C173FAEB3125FC2829790011A28FED7" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwsd.o", lineNumber="13", childPath="/kwsd.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwsd.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwsd.o" path="%ORACLE_HOME%/lib" shaolue="0C85039F97D759826E3A1817A0C0C2EE0994AF3D" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwsdly.o", lineNumber="14", childPath="/kwsdly.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwsdly.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwsdly.o" path="%ORACLE_HOME%/lib" shaolue="E41703D9F5DB748CC6F04A003787BFB40AE7FD10" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwse.o", lineNumber="15", childPath="/kwse.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwse.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwse.o" path="%ORACLE_HOME%/lib" shaolue="E88CACAB0F45DFC2B3EB01549D6E1610E7DEAD6A" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwsexq.o", lineNumber="16", childPath="/kwsexq.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwsexq.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwsexq.o" path="%ORACLE_HOME%/lib" shaolue="161FF0E8DB90433E8CE4CCC45FA0CAB666EC3131" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwslb.o", lineNumber="17", childPath="/kwslb.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwslb.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwslb.o" path="%ORACLE_HOME%/lib" shaolue="196805DBCE2830477D12036668C7C681038E10E2" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwsmc.o", lineNumber="18", childPath="/kwsmc.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwsmc.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwsmc.o" path="%ORACLE_HOME%/lib" shaolue="E70CF68AE39F38A18224C46E1273A0F2FF1DAC29" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwsmcld.o", lineNumber="19", childPath="/kwsmcld.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwsmcld.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwsmcld.o" path="%ORACLE_HOME%/lib" shaolue="419D0B214E1199CAD0FA6459827684EF09CD740E" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwsmcv.o", lineNumber="20", childPath="/kwsmcv.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwsmcv.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwsmcv.o" path="%ORACLE_HOME%/lib" shaolue="31744AAA9FD3BB78B81F46905931616C18F3BB4E" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwsmcx.o", lineNumber="21", childPath="/kwsmcx.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwsmcx.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwsmcx.o" path="%ORACLE_HOME%/lib" shaolue="74F1A7E7277B687B0754E05C4880ABC5E493B565" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwspt.o", lineNumber="22", childPath="/kwspt.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwspt.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwspt.o" path="%ORACLE_HOME%/lib" shaolue="234CBB871979E7E63A9D82C872E9A20B97CCB473" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwssh.o", lineNumber="23", childPath="/kwssh.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwssh.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwssh.o" path="%ORACLE_HOME%/lib" shaolue="9B0E81CE955E5E79640F8AF60AC938DD435AD492" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwsnsm.o", lineNumber="24", childPath="/kwsnsm.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwsnsm.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwsnsm.o" path="%ORACLE_HOME%/lib" shaolue="E3B80E687761BCF488DB188A73D3ECCBCD99B213" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwssa.o", lineNumber="25", childPath="/kwssa.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwssa.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwssa.o" path="%ORACLE_HOME%/lib" shaolue="F102435E45FA0E8B2597B542D0CF757FDC340BBD" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwssi.o", lineNumber="26", childPath="/kwssi.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwssi.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwssi.o" path="%ORACLE_HOME%/lib" shaolue="0EB150C0F520F700DB22ACEC85A28C72FAF9313A" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kwssnmap.o", lineNumber="27", childPath="/kwssnmap.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kwssnmap.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kwssnmap.o" path="%ORACLE_HOME%/lib" shaolue="C53F8995A5DC862520C7B76FD19B6AC919C3AB52" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kpon.o", lineNumber="28", childPath="/kpon.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kpon.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kpon.o" path="%ORACLE_HOME%/lib" shaolue="70E0F41116E5ADF9FE5BDDE41DA5CCF27FF0C320" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kpond.o", lineNumber="29", childPath="/kpond.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kpond.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kpond.o" path="%ORACLE_HOME%/lib" shaolue="4DD71AB17C5B9B29DD44051AFD8AC0F449B9BE91" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kspt.o", lineNumber="30", childPath="/kspt.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kspt.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kspt.o" path="%ORACLE_HOME%/lib" shaolue="B56D9FB8EF7157F01B9CBC32723E7B2F3D465885" />"], DeleteActions=No Delete Actions, DeleteJarActions=No DeleteJar Actions, PluginActions =No Plugin Actions, No External Plugin Actions, MakeActions=[MakeAction: changeDirectory="rdbms/lib", makeFile="ins_rdbms.mk", makeTarget="ioracle", lineNumber="31", parentPath="%ORACLE_HOME%/rdbms/lib/ins_rdbms.mk" rawMakeAction="<make change_dir="%ORACLE_HOME%/rdbms/lib" make_file="ins_rdbms.mk" make_target="ioracle" />"], StringSubsActions=No StringSubs Actions,"]
+ Plugin-actions=false
+[PatchInventory: PatchID= 34340632, isMiniPatchSet = false, CreationDate = Apr_7_2023_04_47_28, [ Bug = [Bug : id= 34340632, desc= AQAH  SMART MONITORING &amp; RESILIENCY IN QUEUE KGL MEMORY USAGE, base= true], ], [ Platform = (Platform : ID= 226, desc= Linux x86-64), , [ Executables =  (bin/oracle), ], Instance_shutdown = true], Instance shutdown message = , Online_rac_installable= true, sql_patch= false, sql_patch_database_startup_mode= , fmw_rolling= false, fmw_feature_bearing= false, SQl_migrate= false], Patch Type : singleton], Product Family : db], Patching Model : one-off], Language Supported by the Patch : en], Translatable? : false], Not Rollbackable? : false], Patch Description : AQAH  SMART MONITORING &amp; RESILIENCY IN QUEUE KGL MEMORY USAGE}, Unique Patch Identifier : 25180767], Applicable Product Type : ], [ Prereq Bugs = ], [ Prereq Oneoffs = 35042068 ], [ WLS Prereq Oneoffs = ], [ Coreq Oneoffs = ], [ Overlay Oneoffs = 35042068 ], [ System component List = ], [ Application shutdown List = ], [ Products = ], [ Components to be upgraded = ], [ Applicable Target Entities = ] ] : Platform ID matched is 226
+
+Patch [PatchObject: loc.= /home/oracle/stage/mrp/35333937/35012562, , patch ID= 35012562, cooked patch ID= 35012562_Apr_7_2023_19_25_43,
+[PatchComponent: name= oracle.rdbms, version=19.0.0.0.0, required=false, language=en, CopyActions=No Copy Actions, JarActions=No Jar Actions, ArchiveActions=[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kko.o", lineNumber="3", childPath="/kko.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kko.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kko.o" path="%ORACLE_HOME%/lib" shaolue="24E671E9A8084A6EDC6212ED51B208D24F36FDD0" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/qksbg.o", lineNumber="4", childPath="/qksbg.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/qksbg.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/qksbg.o" path="%ORACLE_HOME%/lib" shaolue="5AD5E4D4A3FB80649AB8BE0F9CFBB6670803AC32" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/qkscr.o", lineNumber="5", childPath="/qkscr.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/qkscr.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/qkscr.o" path="%ORACLE_HOME%/lib" shaolue="F7727F7A2895ED3934EC21AFEB50A8DD0790F5D2" />"],[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/qksfm.o", lineNumber="6", childPath="/qksfm.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/qksfm.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/qksfm.o" path="%ORACLE_HOME%/lib" shaolue="FDB807E1A16E95DA921AB340432E4BE4B108FC40" />"], DeleteActions=No Delete Actions, DeleteJarActions=No DeleteJar Actions, PluginActions =No Plugin Actions, No External Plugin Actions, MakeActions=[MakeAction: changeDirectory="rdbms/lib", makeFile="ins_rdbms.mk", makeTarget="ioracle", lineNumber="7", parentPath="%ORACLE_HOME%/rdbms/lib/ins_rdbms.mk" rawMakeAction="<make change_dir="%ORACLE_HOME%/rdbms/lib" make_file="ins_rdbms.mk" make_target="ioracle" />"], StringSubsActions=No StringSubs Actions,"]
+ Plugin-actions=false
+[PatchInventory: PatchID= 35012562, isMiniPatchSet = false, CreationDate = Apr_7_2023_19_25_43, [ Bug = [Bug : id= 35012562, desc= OR EXPANSION IS NOT PICKED UP IN QUERY WITH CONTAINS OPERATOR AFTER UPGRADE TO 19C, base= true], ], [ Platform = (Platform : ID= 226, desc= Linux x86-64), , [ Executables =  (bin/oracle), ], Instance_shutdown = true], Instance shutdown message = , Online_rac_installable= true, sql_patch= false, sql_patch_database_startup_mode= , fmw_rolling= false, fmw_feature_bearing= false, SQl_migrate= false], Patch Type : singleton], Product Family : db], Patching Model : one-off], Language Supported by the Patch : en], Translatable? : false], Not Rollbackable? : false], Patch Description : OR EXPANSION IS NOT PICKED UP IN QUERY WITH CONTAINS OPERATOR AFTER UPGRADE TO 19C}, Unique Patch Identifier : 25172325], Applicable Product Type : ], [ Prereq Bugs = ], [ Prereq Oneoffs = 35042068 ], [ WLS Prereq Oneoffs = ], [ Coreq Oneoffs = ], [ Overlay Oneoffs = 35042068 ], [ System component List = ], [ Application shutdown List = ], [ Products = ], [ Components to be upgraded = ], [ Applicable Target Entities = ] ] : Platform ID matched is 226
+
+Patch [PatchObject: loc.= /home/oracle/stage/mrp/35333937/35037877, , patch ID= 35037877, cooked patch ID= 35037877_Apr_7_2023_06_46_37,
+[PatchComponent: name= oracle.rdbms, version=19.0.0.0.0, required=false, language=en, CopyActions=No Copy Actions, JarActions=No Jar Actions, ArchiveActions=[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kzp.o", lineNumber="3", childPath="/kzp.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kzp.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kzp.o" path="%ORACLE_HOME%/lib" shaolue="23F0205BA55C7049006333E46BCC26771553100C" />"], DeleteActions=No Delete Actions, DeleteJarActions=No DeleteJar Actions, PluginActions =No Plugin Actions, No External Plugin Actions, MakeActions=[MakeAction: changeDirectory="rdbms/lib", makeFile="ins_rdbms.mk", makeTarget="ioracle", lineNumber="4", parentPath="%ORACLE_HOME%/rdbms/lib/ins_rdbms.mk" rawMakeAction="<make change_dir="%ORACLE_HOME%/rdbms/lib" make_file="ins_rdbms.mk" make_target="ioracle" />"], StringSubsActions=No StringSubs Actions,"]
+ Plugin-actions=false
+[PatchInventory: PatchID= 35037877, isMiniPatchSet = false, CreationDate = Apr_7_2023_06_46_37, [ Bug = [Bug : id= 35037877, desc= EM CODE IS BROKEN IN 19.18, base= true], ], [ Platform = (Platform : ID= 226, desc= Linux x86-64), , [ Executables =  (bin/oracle), ], Instance_shutdown = true], Instance shutdown message = , Online_rac_installable= true, sql_patch= false, sql_patch_database_startup_mode= , fmw_rolling= false, fmw_feature_bearing= false, SQl_migrate= false], Patch Type : singleton], Product Family : db], Patching Model : one-off], Language Supported by the Patch : en], Translatable? : false], Not Rollbackable? : false], Patch Description : EM CODE IS BROKEN IN 19.18}, Unique Patch Identifier : 25162522], Applicable Product Type : ], [ Prereq Bugs = ], [ Prereq Oneoffs = 35042068 ], [ WLS Prereq Oneoffs = ], [ Coreq Oneoffs = ], [ Overlay Oneoffs = 35042068 ], [ System component List = ], [ Application shutdown List = ], [ Products = ], [ Components to be upgraded = ], [ Applicable Target Entities = ] ] : Platform ID matched is 226
+
+Genereic Platform ID 0is specified for patch : 35116995
+
+Patch [PatchObject: loc.= /home/oracle/stage/mrp/35333937/35225526, , patch ID= 35225526, cooked patch ID= 35225526_Apr_11_2023_00_01_06,
+[PatchComponent: name= oracle.rdbms, version=19.0.0.0.0, required=false, language=en, CopyActions=No Copy Actions, JarActions=No Jar Actions, ArchiveActions=[ArchiveAction: archiveName="libserver19.a", path="lib", objectName="lib/libserver19.a/kks1.o", lineNumber="3", childPath="/kks1.o", parentPath="%ORACLE_HOME%/lib/libserver19.a", sourcePath="%patch_path%/files/lib/libserver19.a/kks1.o" rawArchiveAction="<archive backup_in_zip="false" name="libserver19.a" object_name="lib/libserver19.a/kks1.o" path="%ORACLE_HOME%/lib" shaolue="552BF367564839871524388B8B67BB62EFC1A9D7" />"], DeleteActions=No Delete Actions, DeleteJarActions=No DeleteJar Actions, PluginActions =No Plugin Actions, No External Plugin Actions, MakeActions=[MakeAction: changeDirectory="rdbms/lib", makeFile="ins_rdbms.mk", makeTarget="ioracle", lineNumber="4", parentPath="%ORACLE_HOME%/rdbms/lib/ins_rdbms.mk" rawMakeAction="<make change_dir="%ORACLE_HOME%/rdbms/lib" make_file="ins_rdbms.mk" make_target="ioracle" />"], StringSubsActions=No StringSubs Actions,"]
+ Plugin-actions=false
+[PatchInventory: PatchID= 35225526, isMiniPatchSet = false, CreationDate = Apr_11_2023_00_01_06, [ Bug = [Bug : id= 35225526, desc= FRA E18POD EPM | ORA-00942  TABLE OR VIEW DOES NOT EXIST WHEN RUNNING SELECT QUERY, base= true], ], [ Platform = (Platform : ID= 226, desc= Linux x86-64), , [ Executables =  (bin/oracle), ], Instance_shutdown = true], Instance shutdown message = , Online_rac_installable= true, sql_patch= false, sql_patch_database_startup_mode= , fmw_rolling= false, fmw_feature_bearing= false, SQl_migrate= false], Patch Type : singleton], Product Family : db], Patching Model : one-off], Language Supported by the Patch : en], Translatable? : false], Not Rollbackable? : false], Patch Description : FRA E18POD EPM | ORA-00942  TABLE OR VIEW DOES NOT EXIST WHEN RUNNING SELECT QUERY}, Unique Patch Identifier : 25186445], Applicable Product Type : ], [ Prereq Bugs = ], [ Prereq Oneoffs = 35042068 ], [ WLS Prereq Oneoffs = ], [ Coreq Oneoffs = ], [ Overlay Oneoffs = 35042068 ], [ System component List = ], [ Application shutdown List = ], [ Products = ], [ Components to be upgraded = ], [ Applicable Target Entities = ] ] : Platform ID matched is 226
+All the given patches are applicable on the current platform.
+
+Running prerequisite check "CheckApplicable" ...
+
+The patch components are applicable.
+Proceeding for the patch actions checks.
+
+All the patches components, actions are applicable.
+
+The patch components are applicable.
+Proceeding for the patch actions checks.
+
+All the patches components, actions are applicable.
+
+The patch components are applicable.
+Proceeding for the patch actions checks.
+
+All the patches components, actions are applicable.
+
+The patch components are applicable.
+Proceeding for the patch actions checks.
+
+All the patches components, actions are applicable.
+
+The patch components are applicable.
+Proceeding for the patch actions checks.
+
+All the patches components, actions are applicable.
+All the components & actions of the given patches are applicable.
+No auto-rollback of Patchset Updates due to oneoffs has been checked.
+
+Running prerequisite check "CheckActiveFilesAndExecutables" ...
+
+Invoking fuser on the executable list...
+Invoking fuser on "/u01/app/oracle/product/19/bin/oracle"
+
+There are no active executables.
+None of the executables are active.
+
+Invoking fuser on the executable list...
+
+There are no active executables.
+None of the executables are active.
+
+Invoking fuser on the executable list...
+
+There are no active executables.
+None of the executables are active.
+
+Invoking fuser on the executable list...
+
+There are no active executables.
+None of the executables are active.
+
+Invoking fuser on the executable list...
+
+There are no active executables.
+None of the executables are active.
+
+Running prerequisite check "CheckPatchApplyDependents" ...
+All the required patch(es) are present in the Oracle Home.
+
+Running prerequisite check "CheckMultipleTranslationPatches" ...
+OPatch continues with these patches:   34340632  35012562  35037877  35116995  35225526
+
+Do you want to proceed? [y|n]
+y
+User Responded with: Y
+Running Prerequisite check "CheckApplicableProduct"...
+
+Create a merged patch using patch 34340632
+Add component oracle.rdbms, 19.0.0.0.0
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add ArchiveAction for libserver19.a
+  add MakeAction for ioracle
+Running Prerequisite check "CheckApplicableProduct"...
+
+Create a merged patch using patch 35012562
+Running Prerequisite check "CheckApplicableProduct"...
+
+Create a merged patch using patch 35037877
+Running Prerequisite check "CheckApplicableProduct"...
+
+Create a merged patch using patch 35116995
+Add component oracle.rdbms.dbscripts, 19.0.0.0.0
+Running Prerequisite check "CheckApplicableProduct"...
+
+Create a merged patch using patch 35225526
+
+NApply: backed-up files are under "/u01/app/oracle/product/19/.patch_storage/NApply/2023-06-30_09-32-12AM"
+
+All checks passed.
+
+Please shutdown Oracle instances running out of this ORACLE_HOME on the local system.
+(Oracle Home = '/u01/app/oracle/product/19')
+
+
+Is the local system ready for patching? [y|n]
+y
+User Responded with: Y
+Backing up files...
+Back up Oracle Home Inventory from "/u01/app/oracle/product/19/inventory/ContentsXML/comps.xml" to "/u01/app/oracle/product/19/.patch_storage/NApply/2023-06-30_09-32-12AM/backup/inventory/ContentsXML/comps.xml".
+Create restore file "/u01/app/oracle/product/19/.patch_storage/NApply/2023-06-30_09-32-12AM/restore.sh".
+Creating script "/u01/app/oracle/product/19/.patch_storage/NApply/2023-06-30_09-32-12AM/restore.sh"...
+
+Bugs fixed by this patch 34340632:
+   34340632: AQAH  SMART MONITORING &amp; RESILIENCY IN QUEUE KGL MEMORY USAGE
+
+Applying interim patch '34340632' to OH '/u01/app/oracle/product/19'
+Creating mode file for apply
+ApplySession: back up files for system roll-back
+Executing '/usr/bin/ar -t /u01/app/oracle/product/19/lib/libserver19.a'
+Executing '/usr/bin/ar  -xc  /u01/app/oracle/product/19/lib/libserver19.a kwssa.o kwssnmap.o kwsnsm.o kwssh.o kpond.o kwssi.o kwsmc.o kwsmcld.o kwsexq.o kwqid.o kwqic.o kwqs.o kwspt.o kwqi.o kwqj.o kwsdly.o kwsc.o kwqa.o kwse.o kwsd.o kwslb.o kpon.o kspt.o kwsmcx.o kwsmcv.o kwsbpt.o kwscp.o kwqdl.o'
+
+Patching component oracle.rdbms, 19.0.0.0.0...
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwqa.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwqdl.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwqi.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwqic.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwqid.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwqj.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwqs.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsbpt.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwscp.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsc.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsd.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsdly.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwse.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsexq.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwslb.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsmc.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsmcld.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsmcv.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsmcx.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwspt.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwssh.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsnsm.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwssa.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwssi.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwssnmap.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kpon.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kpond.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kspt.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+Executing '/usr/bin/ar -rc /u01/app/oracle/product/19/lib/libserver19.a /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwqa.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwqdl.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwqi.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwqic.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwqid.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwqj.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwqs.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsbpt.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwscp.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsc.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsd.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsdly.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwse.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsexq.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwslb.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsmc.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsmcld.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsmcv.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsmcx.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwspt.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwssh.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwsnsm.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwssa.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwssi.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kwssnmap.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kpon.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kpond.o /home/oracle/stage/mrp/35333937/34340632/files/lib/libserver19.a/kspt.o'
+     Archive Action done
+Re-link is delayed. It will be done in the end.
+Creating script "/u01/app/oracle/product/19/.patch_storage/34340632_Apr_7_2023_04_47_28/rollback.sh"...
+
+Bugs fixed by this patch 35012562:
+   35012562: OR EXPANSION IS NOT PICKED UP IN QUERY WITH CONTAINS OPERATOR AFTER UPGRADE TO 19C
+
+Applying interim patch '35012562' to OH '/u01/app/oracle/product/19'
+Creating mode file for apply
+ApplySession: back up files for system roll-back
+Executing '/usr/bin/ar -t /u01/app/oracle/product/19/lib/libserver19.a'
+Executing '/usr/bin/ar  -xc  /u01/app/oracle/product/19/lib/libserver19.a qkscr.o qksfm.o kko.o qksbg.o'
+
+Patching component oracle.rdbms, 19.0.0.0.0...
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/35012562/files/lib/libserver19.a/kko.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/35012562/files/lib/libserver19.a/qksbg.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/35012562/files/lib/libserver19.a/qkscr.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/35012562/files/lib/libserver19.a/qksfm.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+Executing '/usr/bin/ar -rc /u01/app/oracle/product/19/lib/libserver19.a /home/oracle/stage/mrp/35333937/35012562/files/lib/libserver19.a/kko.o /home/oracle/stage/mrp/35333937/35012562/files/lib/libserver19.a/qksbg.o /home/oracle/stage/mrp/35333937/35012562/files/lib/libserver19.a/qkscr.o /home/oracle/stage/mrp/35333937/35012562/files/lib/libserver19.a/qksfm.o'
+     Archive Action done
+Re-link is delayed. It will be done in the end.
+Creating script "/u01/app/oracle/product/19/.patch_storage/35012562_Apr_7_2023_19_25_43/rollback.sh"...
+
+Bugs fixed by this patch 35037877:
+   35037877: EM CODE IS BROKEN IN 19.18
+
+Applying interim patch '35037877' to OH '/u01/app/oracle/product/19'
+Creating mode file for apply
+ApplySession: back up files for system roll-back
+Executing '/usr/bin/ar -t /u01/app/oracle/product/19/lib/libserver19.a'
+Executing '/usr/bin/ar  -xc  /u01/app/oracle/product/19/lib/libserver19.a kzp.o'
+
+Patching component oracle.rdbms, 19.0.0.0.0...
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/35037877/files/lib/libserver19.a/kzp.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+Executing '/usr/bin/ar -rc /u01/app/oracle/product/19/lib/libserver19.a /home/oracle/stage/mrp/35333937/35037877/files/lib/libserver19.a/kzp.o'
+     Archive Action done
+Re-link is delayed. It will be done in the end.
+Creating script "/u01/app/oracle/product/19/.patch_storage/35037877_Apr_7_2023_06_46_37/rollback.sh"...
+
+Bugs fixed by this patch 35116995:
+   35116995: 19.X DATAPATCH FAILS WITH ORA-01422 ,ORA-20004  NO FILE FOUND IN SCRIPT RDBMS/ADMIN/NOTHING.SQL
+
+Applying interim patch '35116995' to OH '/u01/app/oracle/product/19'
+Creating mode file for apply
+ApplySession: back up files for system roll-back
+
+Patching component oracle.rdbms.dbscripts, 19.0.0.0.0...
+     CopyAction: src="/home/oracle/stage/mrp/35333937/35116995/files/rdbms/admin/prvtsqlpatch.plb", dst="/u01/app/oracle/product/19/rdbms/admin/prvtsqlpatch.plb"
+     CopyAction done
+Re-link is delayed. It will be done in the end.
+Creating script "/u01/app/oracle/product/19/.patch_storage/35116995_Mar_29_2023_20_01_24/rollback.sh"...
+
+Bugs fixed by this patch 35225526:
+   35225526: FRA E18POD EPM | ORA-00942  TABLE OR VIEW DOES NOT EXIST WHEN RUNNING SELECT QUERY
+
+Applying interim patch '35225526' to OH '/u01/app/oracle/product/19'
+Creating mode file for apply
+ApplySession: back up files for system roll-back
+Executing '/usr/bin/ar -t /u01/app/oracle/product/19/lib/libserver19.a'
+Executing '/usr/bin/ar  -xc  /u01/app/oracle/product/19/lib/libserver19.a kks1.o'
+
+Patching component oracle.rdbms, 19.0.0.0.0...
+     ArchiveAction: src = "/home/oracle/stage/mrp/35333937/35225526/files/lib/libserver19.a/kks1.o", dst = "/u01/app/oracle/product/19/lib/libserver19.a"
+Executing '/usr/bin/ar -rc /u01/app/oracle/product/19/lib/libserver19.a /home/oracle/stage/mrp/35333937/35225526/files/lib/libserver19.a/kks1.o'
+     Archive Action done
+Re-link is delayed. It will be done in the end.
+Creating script "/u01/app/oracle/product/19/.patch_storage/35225526_Apr_11_2023_00_01_06/rollback.sh"...
+
+Done applying all patches.
+
+     MakeAction: makeFile = "/u01/app/oracle/product/19/rdbms/lib/ins_rdbms.mk", target = "ioracle", directory = "/u01/app/oracle/product/19/rdbms/lib", makeCmd = "/usr/bin/make -f ins_rdbms.mk ioracle ORACLE_HOME=/u01/app/oracle/product/19 OPATCH_SESSION=napply"
+
+Make result:
+  Command: /usr/bin/make -f ins_rdbms.mk ioracle ORACLE_HOME=/u01/app/oracle/product/19 OPATCH_SESSION=napply
+
+  Returned code: 0
+  Stdout output:
+chmod 755 /u01/app/oracle/product/19/bin
+cd /u01/app/oracle/product/19/rdbms/lib/;\
+/usr/bin/ar r  /u01/app/oracle/product/19/rdbms/lib/libknlopt.a `/usr/bin/ar t /u01/app/oracle/product/19/rdbms/lib/libknlopt.a` ;
+
+ - Linking Oracle
+rm -f /u01/app/oracle/product/19/rdbms/lib/oracle
+/u01/app/oracle/product/19/bin/orald  -o /u01/app/oracle/product/19/rdbms/lib/oracle -m64 -z noexecstack -Wl,--disable-new-dtags -L/u01/app/oracle/product/19/rdbms/lib/ -L/u01/app/oracle/product/19/lib/ -L/u01/app/oracle/product/19/lib/stubs/   -Wl,-E /u01/app/oracle/product/19/rdbms/lib/opimai.o /u01/app/oracle/product/19/rdbms/lib/ssoraed.o /u01/app/oracle/product/19/rdbms/lib/ttcsoi.o -Wl,--whole-archive -lperfsrv19 -Wl,--no-whole-archive /u01/app/oracle/product/19/lib/nautab.o /u01/app/oracle/product/19/lib/naeet.o /u01/app/oracle/product/19/lib/naect.o /u01/app/oracle/product/19/lib/naedhs.o /u01/app/oracle/product/19/rdbms/lib/config.o  -ldmext -lserver19 -lodm19 -lofs -lcell19 -lnnet19 -lskgxp19 -lsnls19 -lnls19  -lcore19 -lsnls19 -lnls19 -lcore19 -lsnls19 -lnls19 -lxml19 -lcore19 -lunls19 -lsnls19 -lnls19 -lcore19 -lnls19 -lclient19  -lvsnst19 -lcommon19 -lgeneric19 -lknlopt -loraolap19 -lskjcx19 -lslax19 -lpls19  -lrt -lplp19 -ldmext -lserver19 -lclient19  -lvsnst19 -lcommon19 -lgeneric19 `if [ -f /u01/app/oracle/product/19/lib/libavserver19.a ] ; then echo "-lavserver19" ; else echo "-lavstub19"; fi` `if [ -f /u01/app/oracle/product/19/lib/libavclient19.a ] ; then echo "-lavclient19" ; fi` -lknlopt -lslax19 -lpls19  -lrt -lplp19 -ljavavm19 -lserver19  -lwwg  `cat /u01/app/oracle/product/19/lib/ldflags`    -lncrypt19 -lnsgr19 -lnzjs19 -ln19 -lnl19 -lngsmshd19 -lnro19 `cat /u01/app/oracle/product/19/lib/ldflags`    -lncrypt19 -lnsgr19 -lnzjs19 -ln19 -lnl19 -lngsmshd19 -lnnzst19 -lzt19 -lztkg19 -lmm -lsnls19 -lnls19  -lcore19 -lsnls19 -lnls19 -lcore19 -lsnls19 -lnls19 -lxml19 -lcore19 -lunls19 -lsnls19 -lnls19 -lcore19 -lnls19 -lztkg19 `cat /u01/app/oracle/product/19/lib/ldflags`    -lncrypt19 -lnsgr19 -lnzjs19 -ln19 -lnl19 -lngsmshd19 -lnro19 `cat /u01/app/oracle/product/19/lib/ldflags`    -lncrypt19 -lnsgr19 -lnzjs19 -ln19 -lnl19 -lngsmshd19 -lnnzst19 -lzt19 -lztkg19   -lsnls19 -lnls19  -lcore19 -lsnls19 -lnls19 -lcore19 -lsnls19 -lnls19 -lxml19 -lcore19 -lunls19 -lsnls19 -lnls19 -lcore19 -lnls19 `if /usr/bin/ar tv /u01/app/oracle/product/19/rdbms/lib/libknlopt.a | grep "kxmnsd.o" > /dev/null 2>&1 ; then echo " " ; else echo "-lordsdo19 -lserver19"; fi` -L/u01/app/oracle/product/19/ctx/lib/ -lctxc19 -lctx19 -lzx19 -lgx19 -lctx19 -lzx19 -lgx19 -lclscest19 -loevm -lclsra19 -ldbcfg19 -lhasgen19 -lskgxn2 -lnnzst19 -lzt19 -lxml19 -lgeneric19 -locr19 -locrb19 -locrutl19 -lhasgen19 -lskgxn2 -lnnzst19 -lzt19 -lxml19 -lgeneric19  -lgeneric19 -lorazip -loraz -llzopro5 -lorabz2 -lorazstd -loralz4 -lipp_z -lipp_bz2 -lippdc -lipps -lippcore  -lippcp -lsnls19 -lnls19  -lcore19 -lsnls19 -lnls19 -lcore19 -lsnls19 -lnls19 -lxml19 -lcore19 -lunls19 -lsnls19 -lnls19 -lcore19 -lnls19 -lsnls19 -lunls19  -lsnls19 -lnls19  -lcore19 -lsnls19 -lnls19 -lcore19 -lsnls19 -lnls19 -lxml19 -lcore19 -lunls19 -lsnls19 -lnls19 -lcore19 -lnls19 -lasmclnt19 -lcommon19 -lcore19  -ledtn19 -laio -lons  -lmql1 -lipc1    -lfthread19    `cat /u01/app/oracle/product/19/lib/sysliblist` -Wl,-rpath,/u01/app/oracle/product/19/lib -lm    `cat /u01/app/oracle/product/19/lib/sysliblist` -ldl -lm   -L/u01/app/oracle/product/19/lib `test -x /usr/bin/hugeedit -a -r /usr/lib64/libhugetlbfs.so && test -r /u01/app/oracle/product/19/rdbms/lib/shugetlbfs.o && echo -Wl,-zcommon-page-size=2097152 -Wl,-zmax-page-size=2097152 -lhugetlbfs`
+rm -f /u01/app/oracle/product/19/bin/oracle
+mv /u01/app/oracle/product/19/rdbms/lib/oracle /u01/app/oracle/product/19/bin/oracle
+chmod 6751 /u01/app/oracle/product/19/bin/oracle
+(if [ ! -f /u01/app/oracle/product/19/bin/crsd.bin ]; then \
+    getcrshome="/u01/app/oracle/product/19/srvm/admin/getcrshome" ; \
+    if [ -f "$getcrshome" ]; then \
+        crshome="`$getcrshome`"; \
+        if [ -n "$crshome" ]; then \
+            if [ $crshome != /u01/app/oracle/product/19 ]; then \
+                oracle="/u01/app/oracle/product/19/bin/oracle"; \
+                $crshome/bin/setasmgidwrap oracle_binary_path=$oracle; \
+            fi \
+        fi \
+    fi \
+fi\
+);
+
+  Stderr output:
+
+
+     Make Action done
+Patches 34340632,35012562,35037877,35116995,35225526 successfully applied.
+Log file location: /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2023-06-30_09-32-12AM_1.log
+
+OPatch succeeded.
+
 $
   ```
 </details>
@@ -1010,9 +1453,92 @@ This is a non-CDB so you won't execute the "ALTER PLUGGABLE DATABASE" command. S
  <summary>*click here to see the full datapatch output*</summary>
 
   ``` text
-[bn, 
-[UP19] oracle@hol:~/stage/dpbp/35261302
-$
+[UP19] oracle@hol:~/stage/mrp/35333937
+$ $ORACLE_HOME/OPatch/datapatch -verbose
+SQL Patching tool version 19.19.0.0.0 Production on Mon Jul  3 10:34:14 2023
+Copyright (c) 2012, 2023, Oracle.  All rights reserved.
+
+Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_22294_2023_07_03_10_34_14/sqlpatch_invocation.log
+
+Connecting to database...OK
+Gathering database info...done
+Bootstrapping registry and package to current versions...done
+Determining current state...done
+
+Current state of interim SQL patches:
+Interim patch 33192694 (OJVM RELEASE UPDATE: 19.13.0.0.211019 (33192694)):
+  Binary registry: Not installed
+  SQL registry: Not installed
+Interim patch 33561310 (OJVM RELEASE UPDATE: 19.14.0.0.220118 (33561310)):
+  Binary registry: Not installed
+  SQL registry: Rolled back successfully on 20-JUL-22 09.16.52.848607 PM
+Interim patch 34086870 (OJVM RELEASE UPDATE: 19.16.0.0.220719 (34086870)):
+  Binary registry: Not installed
+  SQL registry: Rolled back successfully on 26-JAN-23 10.10.34.728972 PM
+Interim patch 34411846 (OJVM RELEASE UPDATE: 19.17.0.0.221018 (34411846)):
+  Binary registry: Not installed
+  SQL registry: Not installed
+Interim patch 34734035 (MERGE ON DATABASE RU 19.17.0.0.0 OF 34650250 34660465 24338134 25143018 26565187):
+  Binary registry: Not installed
+  SQL registry: Not installed
+Interim patch 34786990 (OJVM RELEASE UPDATE: 19.18.0.0.230117 (34786990)):
+  Binary registry: Not installed
+  SQL registry: Applied successfully on 26-JAN-23 10.10.35.917858 PM
+Interim patch 34861493 (RESYNC CATALOG FAILED IN ZDLRA CATALOG AFTER PROTECTED DATABASE PATCHED TO 19.17):
+  Binary registry: Not installed
+  SQL registry: Applied successfully on 22-MAY-23 12.21.27.534479 PM
+Interim patch 34972375 (DATAPUMP BUNDLE PATCH 19.18.0.0.0):
+  Binary registry: Not installed
+  SQL registry: Applied successfully on 26-JAN-23 10.10.36.894411 PM
+Interim patch 35050341 (OJVM RELEASE UPDATE: 19.19.0.0.230418 (35050341)):
+  Binary registry: Installed
+  SQL registry: Not installed
+Interim patch 35160800 (GG IE FAILS WITH ORA-14400 AT SYSTEM.LOGMNRC_USER AFTER ORACLE DB UPGRADE TO 19.18DBRU):
+  Binary registry: Not installed
+  SQL registry: Applied successfully on 22-MAY-23 12.21.27.542160 PM
+Interim patch 35261302 (DATAPUMP BUNDLE PATCH 19.19.0.0.0):
+  Binary registry: Installed
+  SQL registry: Not installed
+
+Current state of release update SQL patches:
+  Binary registry:
+    19.19.0.0.0 Release_Update 230322020406: Installed
+  SQL registry:
+    Applied 19.18.0.0.0 Release_Update 230111171738 successfully on 26-JAN-23 10.10.35.913910 PM
+
+Adding patches to installation queue and performing prereq checks...done
+Installation queue:
+  The following interim patches will be rolled back:
+    34786990 (OJVM RELEASE UPDATE: 19.18.0.0.230117 (34786990))
+    34861493 (RESYNC CATALOG FAILED IN ZDLRA CATALOG AFTER PROTECTED DATABASE PATCHED TO 19.17)
+    34972375 (DATAPUMP BUNDLE PATCH 19.18.0.0.0)
+    35160800 (GG IE FAILS WITH ORA-14400 AT SYSTEM.LOGMNRC_USER AFTER ORACLE DB UPGRADE TO 19.18DBRU)
+  Patch 35042068 (Database Release Update : 19.19.0.0.230418 (35042068)):
+    Apply from 19.18.0.0.0 Release_Update 230111171738 to 19.19.0.0.0 Release_Update 230322020406
+  The following interim patches will be applied:
+    35050341 (OJVM RELEASE UPDATE: 19.19.0.0.230418 (35050341))
+    35261302 (DATAPUMP BUNDLE PATCH 19.19.0.0.0)
+
+Installing patches...
+Patch installation complete.  Total patches installed: 7
+
+Validating logfiles...done
+Patch 34786990 rollback: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/34786990/25032666/34786990_rollback_UP19_2023Jul03_10_35_32.log (no errors)
+Patch 34861493 rollback: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/34861493/25121986/34861493_rollback_UP19_2023Jul03_10_36_55.log (no errors)
+Patch 34972375 rollback: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/34972375/25075164/34972375_rollback_UP19_2023Jul03_10_37_00.log (no errors)
+Patch 35160800 rollback: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35160800/25179433/35160800_rollback_UP19_2023Jul03_10_37_00.log (no errors)
+Patch 35042068 apply: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35042068/25183678/35042068_apply_UP19_2023Jul03_10_37_03.log (no errors)
+Patch 35050341 apply: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35050341/25148755/35050341_apply_UP19_2023Jul03_10_36_55.log (no errors)
+Patch 35261302 apply: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35261302/25192070/35261302_apply_UP19_2023Jul03_10_38_13.log (no errors)
+SQL Patching tool complete on Mon Jul  3 10:39:34 2023
+
   ```
 </details>
 
