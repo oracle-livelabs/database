@@ -7,6 +7,22 @@
 
 In this lab, you use the OraOperator to perform Lifecycle operations against an Oracle Autonomous Database (ADB).
 
+In order to manage the **AutonomousDatabase** type, the OraOperator has custom **Controllers** to manage the  **AutonomousDatabase** type within the K8s cluster. These controllers act as "built-in SOPs" specifically designed for handling the  **AutonomousDatabase** resource.
+
+The controllers provide a declarative API, allowing users to specify the desired state of the  **AutonomousDatabase** resource.  They continuously monitor the current state of the resource and take actions to reconcile any differences between the desired state and the actual state.
+
+![OraOperator for ADB](images/k8s_operator_adb.png "OraOperator for ADB")
+
+The actions that the AutonomousDatabase controller can perform includes:
+
+* Create an Autonomous Database
+* Manage ADMIN database user password
+* Download instance credentials (wallets)
+* Scale the OCPU core count or storage
+* Rename an Autonomous Database
+* Stop/Start/Terminate an Autonomous Database
+* Delete the resource from the K8s cluster
+
 *Estimated Lab Time:* 15 minutes
 
 Watch the video below for a quick walk through of the lab.

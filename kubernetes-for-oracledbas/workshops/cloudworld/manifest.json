@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "Intro to Kubernetes and Microservices for Oracle DBAs",
+    "workshoptitle": "Intro to Microservices and Kubernetes for Oracle DBAs",
     "help": "livelabs-help-database_us@oracle.com",
     "variables": [
         "../../variables/variables.json",
@@ -10,83 +10,117 @@
             "title": "Introduction",
             "type": "cloudworld",
             "description": "The Introduction is always first. The title and contents menu title match for the Introduction.",
-            "filename": "../../introduction/introduction.md"
+            "filename": "../../introduction/introduction.md",
+            "last_reviewed": "30-June-2023"
         },
         {
             "title": "Get Started",
             "type": "cloudworld",
             "description": "Cloud Login",
-            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md",
+            "last_reviewed": "N/A"
         },
         {
             "title": "Lab 1: Prepare the OCI Tenancy",
             "type": "cloudworld",
             "description": "Setup Groups, Policies, and Compartment (IAM)",
-            "filename": "../../setup-iam/setup-iam.md"
+            "filename": "../../prepare-oci/prepare-oci.md",
+            "last_reviewed": "30-June-2023"
         },
         {
             "title": "Lab 2: Deploy Workshop Stack",
             "type": "cloudworld",
             "description": "Using Oracle Resource Manager (ORM), Provision and Configure a Stack",
-            "filename": "../../setup-stack/setup-stack.md"
+            "filename": "../../deploy-stack/deploy-stack.md",
+            "last_reviewed": "30-June-2023"
         },
         {
-            "title": "Lab 3: Understand Microservices and Kubernetes",
+            "title": "Lab 3: Connect to Oracle Autonomous Database",
             "type": "cloudworld",
-            "description": "Overview of Microservices and K8s, comparing to familiar technologies",
-            "filename": "../../understand-kubernetes/understand-kubernetes.md"
+            "description": "Connect to the ADB",
+            "filename": "../../sqldevweb-login/sqldevweb-login.md",
+            "last_reviewed": ""
         },
         {
-            "title": "Lab 4: Generate the Kubeconfig File",
+            "title": "Lab 4: Understand Microservices",
+            "type": "cloudworld",
+            "description": "Overview of Microservices, comparing to familiar technologies",
+            "filename": "../../understand-microservices/understand-microservices.md",
+            "last_reviewed": ""
+        },
+        {
+            "title": "Lab 5: Understand Kubernetes",
+            "type": "cloudworld",
+            "description": "Overview of K8s, comparing to familiar technologies",
+            "filename": "../../understand-kubernetes/understand-kubernetes.md",
+            "last_reviewed": ""
+        },
+        {
+            "title": "Lab 6: Generate the Kubeconfig File",
             "type": "cloudworld",
             "description": "Generate Kubeconfig",
-            "filename": "../../generate-kubeconfig/generate-kubeconfig.md"
+            "filename": "../../generate-kubeconfig/generate-kubeconfig.md",
+            "last_reviewed": ""
         },
         {
-            "title": "Lab 5: Deploy the OraOperator",
+            "title": "Lab 7: Deploy the OraOperator",
             "type": "cloudworld",
             "description": "The Oracle Operator for Kubernetes",
-            "filename": "../../deploy-oraoperator/deploy-oraoperator.md"
+            "filename": "../../deploy-oraoperator/deploy-oraoperator.md",
+            "last_reviewed": ""
         },
         {
-            "title": "Lab 6: Bind to an ADB",
+            "title": "Lab 8: Bind to an ADB",
             "type": "cloudworld",
             "description": "Bind the OraOperator to the ADB",
-            "filename": "../../bind-adb/bind-adb.md"
+            "filename": "../../bind-adb/bind-adb.md",
+            "last_reviewed": ""
         },
         {
-            "title": "Lab 7: Lifecycle Operations (ADB)",
+            "title": "Lab 9: Lifecycle Operations (ADB)",
             "type": "cloudworld",
             "description": "Perform Lifecycle Operations against the ADB",
-            "filename": "../../lifecycle-adb/lifecycle-adb.md"
+            "filename": "../../lifecycle-adb/lifecycle-adb.md",
+            "last_reviewed": ""
         },
         {
-            "title": "Lab 8: Deploy a Microservice Application",
+            "title": "Lab 10: Deploy a Microservice Application",
             "type": "cloudworld",
             "description": "Deploy a Microservice Application ",
-            "filename": "../../deploy-application/deploy-application.md"
+            "filename": "../../deploy-application/deploy-application.md",
+            "last_reviewed": ""
         },
         {
-            "title": "Lab 10: Clean up Infrastructure",
+            "title": "Lab 11: Clean up Infrastructure",
             "type": "cloudworld",
             "description": "Destroy the Infrastructure",
-            "filename": "../../teardown-stack/teardown-stack.md"
+            "filename": "../../teardown-stack/teardown-stack.md",
+            "last_reviewed": ""
         },
         {
-            "title": "Lab 11: Clean up OCI Tenancy",
+            "title": "Lab 12: Clean up OCI Tenancy",
             "type": "cloudworld",
             "description": "Clean up Groups, Policies, and Compartment (IAM)",
-            "filename": "../../teardown-iam/teardown-iam.md"
+            "filename": "../../teardown-iam/teardown-iam.md",
+            "last_reviewed": ""
+        },
+        {
+            "title": "Workshop Troubleshooting",
+            "description": "Solutions to Common Problems and Directions for Workshop",
+            "filename": "../../troubleshooting/troubleshooting.md",
+            "last_reviewed": "N/A"
         },
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md",
+            "last_reviewed": "N/A"
         },
         {
             "title": "Other LiveLabs you might like",
             "description": "Other LiveLabs you might like",
-            "filename": "../../other-livelabs/other-livelabs.md"
+            "filename": "../../other-livelabs/other-livelabs.md",
+            "last_reviewed": ""
         }
     ]
 }

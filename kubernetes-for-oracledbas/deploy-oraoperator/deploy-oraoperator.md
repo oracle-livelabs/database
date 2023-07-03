@@ -5,7 +5,15 @@
 
 ## Introduction
 
-This lab will walk you through deploying the Oracle Operator for Kubernetes (OraOperator).
+This lab will walk you through deploying the Oracle Operator for Kubernetes (OraOperator).  In Kubernetes (K8s), an **Operator** is a software component that extends the behaviour of K8s clusters without modifying the Kubernetes code itself.  
+
+K8s Operators are designed to mimic the role of a human data centre operator:
+
+The human operator gains their system knowledge from the Subject Matter Experts (SMEs) through documented Standard Operation Procedures (SOPs).  Over time, the human operator also gains the experience of how the systems should behave and how to respond when problems occur, enhancing the maturity of the SOPs.  They may even take responsibility for some of the SMEs tasks such as: deploying software, performing generic configurations, and lifecycle management.
+
+![Operator/DBA Relationship](images/dba_oper_dev.png "Operator/DBA Relationship")
+
+In short, human operators become extensions of the SMEs, and in this case, the OraOperator becomes an extension of the Oracle DBA.
 
 *Estimated Lab Time:* 5 minutes
 
@@ -21,20 +29,6 @@ Watch the video below for a quick walk through of the lab.
 This lab assumes you have:
 
 * Have [generated a Kubeconfig File](?lab=generate-kubeconfig)
-
-## Kubernetes Operators
-
-In Kubernetes (K8s), an **Operator** is a software component that extends the behavior of K8s clusters without modifying the Kubernetes code itself.
-
-K8s Operators are designed to mimic the role of a human data centre operator:
-
-The human operator gains their system knowledge from the Subject Matter Experts (SMEs) through documented Standard Operation Procedures (SOPs).  Over time, the human operator also gains the experience of how the systems should behave and how to respond when problems occur, enhancing the maturity of the SOPs.  They may even take responsibility for some of the SMEs tasks such as: deploying software, performing generic configurations, and lifecycle management.
-
-![Operator/DBA Relationship](images/dba_oper_dev.png "Operator/DBA Relationship")
-
-In short, human operators become extensions of the SMEs.
-
-Like the human operator, the OraOperator in K8s, is an extension of the Oracle DBA in a K8s cluster.  The OraOperator is developed and supported by Oracle, with "built-in SOPs" for provisioning, configuring, and managing the lifecycle of Oracle databases deployed within or outside K8s clusters, including Cloud databases.
 
 ## Task 1: Install Cert-Manager
 
@@ -62,7 +56,9 @@ The output will be similar to:
 
 ![kubectl get all -n cert-manager](images/kubectl_cert_manager.png "kubectl get all -n cert-manager")
 
-## Task 2: Install Oracle Operator for Kubernetes
+## Task 2: Install OraOperator
+
+The OraOperator in K8s, is an extension of the Oracle DBA in a K8s cluster.  The OraOperator is developed and supported by Oracle, with "built-in SOPs" for provisioning, configuring, and managing the lifecycle of Oracle databases deployed within or outside K8s clusters, including Cloud databases.
 
 To install the OraOperator, in Cloud Shell run:
 
@@ -71,6 +67,12 @@ To install the OraOperator, in Cloud Shell run:
 kubectl apply -f https://raw.githubusercontent.com/oracle/oracle-database-operator/main/oracle-database-operator.yaml
 </copy>
 ```
+
+The output will look similar to this:
+
+![OraOperator Install](images/oraoperator_install.png "OraOperator Install")
+
+Notice the `customresourcedefinition.apiextensions.k8s.io` resources that were installed.  These **CRDs** define the structure and behaviour of a number of Oracle Database types and allows you to manage them natively in Kubernetes.
 
 To check its installed resources:
 
@@ -83,6 +85,8 @@ kubectl get all -n oracle-database-operator-system
 The output will be similar to:
 
 ![kubectl get all -n oracle-database-operator-system](images/kubectl_oraoper.png "kubectl get all -n oracle-database-operator-system")
+
+Notice the 
 
 ## Learn More
 

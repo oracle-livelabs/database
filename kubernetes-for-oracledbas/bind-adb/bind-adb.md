@@ -7,6 +7,12 @@
 
 In this lab, you will provision a new Oracle Autonomous Database (ADB) and bind to an existing one using the OraOperator.
 
+In order to manage the **AutonomousDatabase** type, the OraOperator also introduces custom **Controllers** to manage the  **AutonomousDatabase** type within the K8s cluster. These controllers act as "built-in SOPs" specifically designed for handling the  **AutonomousDatabase** resource.
+
+The controllers provide a declarative API, allowing users to specify the desired state of the  **AutonomousDatabase** resource.  They continuously monitor the current state of the resource and take actions to reconcile any differences between the desired state and the actual state.
+
+![OraOperator for ADB](images/k8s_operator_adb.png "OraOperator for ADB")
+
 *Estimated Lab Time:* 10 minutes
 
 Watch the video below for a quick walk through of the lab.
@@ -25,31 +31,9 @@ This lab assumes you have:
 * A [Running and Healthy OraOperator](?lab=deploy-oraoperator)
 * A provisioned Oracle ADB in OCI
 
-## Kubernetes Custom Resources and Controllers
-
-The OraOperator introduces Oracle specific, **Custom Resource Definition (CRD)** types to the Kubernetes (K8s) cluster, such as, but not limited to, the Autonomous Database.  This **CRD** defines the structure and behaviour of a **AutonomousDatabase** type and allows you to create or bind to an existing one.
-
-In order to manage the **AutonomousDatabase** type, the OraOperator also introduces custom **Controllers** to manage the  **AutonomousDatabase** type within the K8s cluster. These controllers act as "built-in SOPs" specifically designed for handling the  **AutonomousDatabase** resource.
-
-The controllers provide a declarative API, allowing users to specify the desired state of the  **AutonomousDatabase** resource.  They continuously monitor the current state of the resource and take actions to reconcile any differences between the desired state and the actual state.
-
-![OraOperator for ADB](images/k8s_operator_adb.png "OraOperator for ADB")
-
-The actions that the AutonomousDatabase controller can perform includes:
-
-* Create an Autonomous Database
-* Manage ADMIN database user password
-* Download instance credentials (wallets)
-* Scale the OCPU core count or storage
-* Rename an Autonomous Database
-* Stop/Start/Terminate an Autonomous Database
-* Delete the resource from the K8s cluster
-
-You will use the OraOperator to perform some of these actions in this Lab and the [Lifecycle Operations (ADB)](?lab=lifecycle-adb) Lab.
-
 ## Task 1: Create a Namespace
 
-In K8s, a *Namespace* is a virtual cluster that provides a way to divide the physical K8s cluster resources logically between multiple users or teams.  Additionally, Namespaces enable fine-grained control over access and resource allocation.  By defining appropriate Role-Based Access Control (RBAC) policies, you can control which users or groups have access to specific resources within Namespaces.  You'll see an example of this when scheduling a Stop/Start CronJob.
+In K8s, a *Namespace* is a virtual cluster that provides a way to divide the physical K8s cluster resources logically between multiple users or teams.  You can think of Namespaces similarly to Schemas, a logical collection of objects, or in the case of K8s, resources.
 
 In Cloud Shell, create a namespace for the AutonomousDatabase Resources:
 
@@ -113,7 +97,7 @@ EOF
 </copy>
 ```
 
-The above YAML sends a request to the `database.oracle.com/v1alpha1` API exposed by the OraOperator controller to define a resource of `kind: AutonomousDatabase`.
+The above YAML sends a request to the `database.oracle.com/v1alpha1` API exposed by the OraOperator to define a resource of `kind: AutonomousDatabase`.
 
 The resource `name` will be called `adb-existing`.  
 
@@ -168,7 +152,7 @@ A lot of interesting information will be displayed including CPU and Storage set
 
 ## Task 6: Generate Password/Generate Wallet Manifest
 
-The password currently assigned to the ADB was randomised and is unknown, so you will need to set it for connectivity.  As calls to the OraOperator controllers are declarative you will be instructing the Controller to modify the ADB to the newly defined, desired state.  In regards to the ADMIN password, it will currently not be what you will define in the K8s Secret, and therefor it will be modified accordingly.
+The password currently assigned to the ADB was randomised and is unknown, so you will need to set it for connectivity.  As calls to the OraOperator controllers are declarative you will be instructing the Controller to modify the ADB to the newly defined, desired state.  
 
 Additionally, the ADB was provisioned with mTLS, so you will need a Wallet to connect to the ADB securely.  You'll create a Secret for the Wallet password and the OraOperator will download the wallet into another Secret.
 

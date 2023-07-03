@@ -24,7 +24,7 @@ Watch the video below for a quick walk through of the lab.
 This lab assumes you have:
 
 * An Oracle Cloud Paid or Free-Tier Account
-* You are logged into OCI as illustrated in **Get Started**
+* You are logged into OCI as illustrated in [Get Started](https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md "Get Started")
 
 ## Task 1: Open the Cloud Shell
 
@@ -37,9 +37,7 @@ This lab assumes you have:
 
 ## Task 2: Create a Compartment
 
-A *Compartment* is a collection of cloud assets, including Databases, Oracle Kubernetes clusters, Compute Instances, Load Balancers and so on.
-
-You can think of a *Compartment* much like a database schema: a collection of tables, indexes, and other objects isolated from other schemas.  By default, a root *Compartment* (think SYSTEM schema) was created for you when your tenancy was established.  It is possible to create everything in the root *Compartment*, but Oracle recommends that you create sub-*Compartments* to help manage your resources more efficiently.
+A *Compartment* is a collection of cloud assets, including Databases, the Oracle Kubernetes Engine (OKE), Compute Instances, Load Balancers and so on.
 
 In the *Cloud Shell*, run the following commands to create a sub-*Compartment* to the root *Compartment* for holding all the resources created by the Workshop:
 
@@ -52,9 +50,11 @@ oci iam compartment create \
 </copy>
 ```
 
+You can think of a *Compartment* much like a database schema: a collection of tables, indexes, and other objects isolated from other schemas.  By default, a root *Compartment* (think SYSTEM schema) was created for you when your tenancy was established.  It is possible to create everything in the root *Compartment*, but Oracle recommends that you create sub-*Compartments* to help manage your resources more efficiently.
+
 ## Task 3: Create a Group
 
-A *Group* is a collection of cloud users who all need the same type of access to a particular set of resources or compartment.  A *Group* is very similar to a database role.  Privileges, or in the case of OCI, *Policies* will be granted to the *Group* and cloud users can then be assigned to the cloud *Group* to inherit those *Policies*.
+A *Group* is a collection of cloud users who all need the same type of access to a particular set of resources or compartment.
 
 In the *Cloud Shell*, run the following commands to create a *Group*:
 
@@ -66,6 +66,8 @@ oci iam group create \
 </copy>
 ```
 
+A *Group* is very similar to a database role.  Privileges, or in the case of OCI, *Policies* will be granted to the *Group* and cloud users can then be assigned to the cloud *Group* to inherit those *Policies*.
+
 ## Task 4: Assign User to Group
 
 Assign the cloud *User* who will be carrying out the remaining Labs to the *Group* created in Task 3.  This could be yourself!
@@ -74,25 +76,19 @@ If you are setting this up for yourself as you have Administrator access, run in
 
 ```bash
 <copy>
-    GROUP_OCID=$(oci iam group list --name [](var:oci_group) | jq -r .data[].id)
-    
-    echo "Group OCID: $GROUP_OCID"
-    
-    echo "User OCID:  $OCI_CS_USER_OCID"
-    
-    oci iam group add-user --group-id $GROUP_OCID --user-id $OCI_CS_USER_OCID
+GROUP_OCID=$(oci iam group list --name [](var:oci_group) | jq -r .data[].id)
+
+echo "Group OCID: $GROUP_OCID"
+
+echo "User OCID:  $OCI_CS_USER_OCID"
+
+oci iam group add-user --group-id $GROUP_OCID --user-id $OCI_CS_USER_OCID
 </copy>
 ```
 
 Otherwise, if you are an Administrator setting this up for another user.
 
 1. Find the users OCID:
-    Replace `<username>` with the OCI username:
-
-    ```bash
-    USER_OCID=$(oci iam user list --name <username> | jq -r '.data[].id')
-    ```
-
     Replace `<username>` with the OCI username:
 
     ```bash
@@ -190,4 +186,4 @@ In the *Cloud Shell*, run the following commands to create a *Policy* statement 
 ## Acknowledgements
 
 * **Author** - John Lathouwers, Developer Advocate, Database Development Operations
-* **Last Updated By/Date** - John Lathouwers, May 2023
+* **Last Updated By/Date** - John Lathouwers, July 2023
