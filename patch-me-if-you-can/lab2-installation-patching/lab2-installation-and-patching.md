@@ -32,67 +32,72 @@ Start by **double-clicking at the "patching" icon** on the desktop:
 
 It will open an xterm (Terminal Window) with two open tabs.
 
-1. Setting the Environment
+1. Setting the Environment </br> 
 Switch to the tab called "__19.19.0 Home__". 
 
-![19.18 HOME tab](./images/19-19-home.png " ")
+    ![19.18 HOME tab](./images/19-19-home.png " ")
 
-All variables will be set when executing: 
+    All variables will be set when executing: 
 
-  ```
+    ```
     <copy>
-     . cdb1919
+    . cdb1919
     </copy>
-  ```
-![Source target environment](./images/source-19-19-env.png " ")
+    ```
+
+    ![Source target environment](./images/source-19-19-env.png " ")
 
 2. Create the new Oracle Home Directory
 
-  ```
+    ```
     <copy>
-     mkdir /u01/app/oracle/product/1919
+    mkdir /u01/app/oracle/product/1919
     </copy>
-  ```
+    ```
 
-![create new directory 1919](./images/mkdir-target-1919.png " ")
+    ![create new directory 1919](./images/mkdir-target-1919.png " ")
 
 3. Change into new Oracle_Home
 
-  ```
+    ```
     <copy>
-     cd /u01/app/oracle/product/1919
+    cd /u01/app/oracle/product/1919
     </copy>
-  ```
-![change into directory 1919](./images/cd-target-dir-1919.png " ")
+    ```
 
-4. Unzip Base Image
+    ![change into directory 1919](./images/cd-target-dir-1919.png " ")
+
+4. Unzip Base Image </br>
 As next step, unzip the 19.3.0 base image from the staging location into this directory.
 
-  ```
+    ```
     <copy>
-     unzip /home/oracle/stage/LINUX.X64_193000_db_home.zip -d /u01/app/oracle/product/1919
+    unzip /home/oracle/stage/LINUX.X64_193000_db_home.zip -d /u01/app/oracle/product/1919
     </copy>
-  ```
-![unzip Oracle software](./images/unzip-oracle-software.png " ")
+    ```
 
-5. OPatch
+    ![unzip Oracle software](./images/unzip-oracle-software.png " ")
+
+5. OPatch </br> 
 Then remove the OPatch directory 
 
-  ```
+    ```
     <copy>
-      rm -rf OPatch
+    rm -rf OPatch
     </copy>
-  ```
-![remove original opatch](./images/remove-opatch.png " ")
+    ```
 
-and unzip the new OPatch from staging into this new Oracle Home. This step is important since older OPatch versions won't have the features we are using today.
+    ![remove original opatch](./images/remove-opatch.png " ")
 
-  ```
+    and unzip the new OPatch from staging into this new Oracle Home. This step is important since older OPatch versions won't have the features we are using today.
+
+    ```
     <copy>
-     unzip /home/oracle/stage/p6880880_210000_Linux-x86-64.zip -d /u01/app/oracle/product/1919/
+    unzip /home/oracle/stage/p6880880_210000_Linux-x86-64.zip -d /u01/app/oracle/product/1919/
     </copy>
-  ```
-![unzip new opatch](./images/unzip-opatch-software.png " ")
+    ```
+
+    ![unzip new opatch](./images/unzip-opatch-software.png " ")
 
 
 ## Task 2: Patch Installation

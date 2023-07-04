@@ -21,207 +21,209 @@ This lab assumes you have:
 
 1. Set the Source Database Environment
 
-
-and set the environment.
-  ```
+    ```
     <copy>
     . cdb2
     </copy>
-  ```
-  ![runInstaller output ](./images/source-19-18-env.png " ")
+    ```
+
+    ![runInstaller output ](./images/source-19-18-env.png " ")
 
 2. Current Installed Patches
-
 Check the installed patches in the current 19.18.0 home:
  
-  ```
+    ```
     <copy>
     ./OPatch/opatch lspatches
     </copy>
-  ```
-  ![Opatch lspatches output ](./images/opatch-lspatches.png " ")
+    ```
 
-<details>
- <summary>*click here to see the full opatch output*</summary>
+    ![Opatch lspatches output ](./images/opatch-lspatches.png " ")
 
-  ``` text
-[CDB2] oracle@hol:/u01/app/oracle/product/19
-$ ./OPatch/opatch lspatches
-35246710;HIGH DIRECT PATH READ AFTER 19.18 DBRU PATCHING
-35213579;MERGE ON DATABASE RU 19.18.0.0.0 OF 35037877 35046819
-35162446;NEED BEHAVIOR CHANGE TO BE SWITCHED OFF
-35160800;GG IE FAILS WITH ORA-14400 AT SYSTEM.LOGMNRC_USER AFTER ORACLE DB UPGRADE TO 19.18DBRU
-35156936;ORA-7445 [KFFBNEW()+351]  AFTER CONVERT TO ASM FLEX DISKGROUP
-34974052;DIRECT NFS CONNECTION RESET MESSAGES
-34879016;ALL SESSIONS HANG DUE TO INST_RCV BUFFER IS NOT GETTING WRITE PERMISSION
-34871935;SBI  QUEUE BUILDUP - SESSIONS SPIKE WITH GC CURRENT REQUEST  (6-DEC-2022)
-34861493;RESYNC CATALOG FAILED IN ZDLRA CATALOG AFTER PROTECTED DATABASE PATCHED TO 19.17
-34810252;SPIN OFF FOR BUG 34808861 [ORA-00600  INTERNAL ERROR CODE, ARGUMENTS  [KFDS_GETSEGREUSEENQ01] TERMINATED ALL DB INSTANCES
-34793099;STRESS FA CDB CREATION FAILS ON 19.17 WITH THE ORA-00704  BOOTSTRAP PROCESS FAILURE WHILE OPENING PDB$SEED
-34783802;PARALLEL QUERY ON PARTITIONED TABLE RETURNS WRONG RESULT
-34557500;CTWR CAUSED MULTIPLE INSTANCES IN HUNG STATE ON THE RAC STANDBY DATABASE
-34340632;AQAH  SMART MONITORING &amp; RESILIENCY IN QUEUE KGL MEMORY USAGE
-33973908;DBWR NOT PICKING UP WRITES FOR SOME TIME
-32727143;TRANSACTION-LEVEL CONTENT ISOLATION FOR TRANSACTION-DURATION GLOBAL TEMPORARY TABLES
-31222103;STRESS RAC ATPD FAN EVENTS ARE NOT GETTING PROCESSED WITH 21C GI AND 19.4 DB
-34972375;DATAPUMP BUNDLE PATCH 19.18.0.0.0
-34786990;OJVM RELEASE UPDATE: 19.18.0.0.230117 (34786990)
-34765931;Database Release Update : 19.18.0.0.230117 (34765931)
-29585399;OCW RELEASE UPDATE 19.3.0.0.0 (29585399)
+    <details>
+    <summary>*click here to see the full opatch output*</summary>
 
-OPatch succeeded.
-[CDB2] oracle@hol:/u01/app/oracle/product/19
-$
-  ```
-</details>
+      ``` text
+    [CDB2] oracle@hol:/u01/app/oracle/product/19
+    $ ./OPatch/opatch lspatches
+    35246710;HIGH DIRECT PATH READ AFTER 19.18 DBRU PATCHING
+    35213579;MERGE ON DATABASE RU 19.18.0.0.0 OF 35037877 35046819
+    35162446;NEED BEHAVIOR CHANGE TO BE SWITCHED OFF
+    35160800;GG IE FAILS WITH ORA-14400 AT SYSTEM.LOGMNRC_USER AFTER ORACLE DB UPGRADE TO 19.18DBRU
+    35156936;ORA-7445 [KFFBNEW()+351]  AFTER CONVERT TO ASM FLEX DISKGROUP
+    34974052;DIRECT NFS CONNECTION RESET MESSAGES
+    34879016;ALL SESSIONS HANG DUE TO INST_RCV BUFFER IS NOT GETTING WRITE PERMISSION
+    34871935;SBI  QUEUE BUILDUP - SESSIONS SPIKE WITH GC CURRENT REQUEST  (6-DEC-2022)
+    34861493;RESYNC CATALOG FAILED IN ZDLRA CATALOG AFTER PROTECTED DATABASE PATCHED TO 19.17
+    34810252;SPIN OFF FOR BUG 34808861 [ORA-00600  INTERNAL ERROR CODE, ARGUMENTS  [KFDS_GETSEGREUSEENQ01] TERMINATED ALL DB INSTANCES
+    34793099;STRESS FA CDB CREATION FAILS ON 19.17 WITH THE ORA-00704  BOOTSTRAP PROCESS FAILURE WHILE OPENING PDB$SEED
+    34783802;PARALLEL QUERY ON PARTITIONED TABLE RETURNS WRONG RESULT
+    34557500;CTWR CAUSED MULTIPLE INSTANCES IN HUNG STATE ON THE RAC STANDBY DATABASE
+    34340632;AQAH  SMART MONITORING &amp; RESILIENCY IN QUEUE KGL MEMORY USAGE
+    33973908;DBWR NOT PICKING UP WRITES FOR SOME TIME
+    32727143;TRANSACTION-LEVEL CONTENT ISOLATION FOR TRANSACTION-DURATION GLOBAL TEMPORARY TABLES
+    31222103;STRESS RAC ATPD FAN EVENTS ARE NOT GETTING PROCESSED WITH 21C GI AND 19.4 DB
+    34972375;DATAPUMP BUNDLE PATCH 19.18.0.0.0
+    34786990;OJVM RELEASE UPDATE: 19.18.0.0.230117 (34786990)
+    34765931;Database Release Update : 19.18.0.0.230117 (34765931)
+    29585399;OCW RELEASE UPDATE 19.3.0.0.0 (29585399)
 
-3. Current Java Version
+    OPatch succeeded.
+    [CDB2] oracle@hol:/u01/app/oracle/product/19
+    $
+      ```
+    </details>
 
+3. Current Java Version </br>
 Check the current JDK version:
-  ```
+
+    ```
     <copy>
-     $ORACLE_HOME/jdk/bin/java -version
+    $ORACLE_HOME/jdk/bin/java -version
     </copy>
-  ```
-  ![Java version output ](./images/java-version.png " ")
+    ```
+
+    ![Java version output ](./images/java-version.png " ")
 
 
-
-4. Current Perl Version
-
+4. Current Perl Version <br>
 Check the current PERL version:
-  ```
+
+    ```
     <copy>
-     $ORACLE_HOME/perl/bin/perl -version
+    $ORACLE_HOME/perl/bin/perl -version
     </copy>
-  ```
+    ```
 
-![Java version output ](./images/perl-version.png " ")
+    ![Perl version output ](./images/perl-version.png " ")
 
-<details>
- <summary>*click here to see the full perl output*</summary>
+    <details>
+    <summary>*click here to see the full Perl output*</summary>
 
-  ``` text
-[CDB2] oracle@hol:/u01/app/oracle/product/19
-$ $ORACLE_HOME/perl/bin/perl -version
+      ``` text
+    [CDB2] oracle@hol:/u01/app/oracle/product/19
+    $ $ORACLE_HOME/perl/bin/perl -version
 
-This is perl 5, version 36, subversion 0 (v5.36.0) built for x86_64-linux-thread-multi
+    This is perl 5, version 36, subversion 0 (v5.36.0) built for x86_64-linux-thread-multi
 
-Copyright 1987-2022, Larry Wall
+    Copyright 1987-2022, Larry Wall
 
-Perl may be copied only under the terms of either the Artistic License or the
-GNU General Public License, which may be found in the Perl 5 source kit.
+    Perl may be copied only under the terms of either the Artistic License or the
+    GNU General Public License, which may be found in the Perl 5 source kit.
 
-Complete documentation for Perl, including FAQ lists, should be found on
-this system using "man perl" or "perldoc perl".  If you have access to the
-Internet, point your browser at https://www.perl.org/, the Perl Home Page.
+    Complete documentation for Perl, including FAQ lists, should be found on
+    this system using "man perl" or "perldoc perl".  If you have access to the
+    Internet, point your browser at https://www.perl.org/, the Perl Home Page.
 
-[CDB2] oracle@hol:/u01/app/oracle/product/19
-$
-  ```
-</details>
+    [CDB2] oracle@hol:/u01/app/oracle/product/19
+    $
+      ```
+    </details>
 
-Take notice of the current version "__This is perl 5, version 36, subversion 0 (v5.36.0) built for x86_64-linux-thread-multi__". 
-We will check afterwards whether the PERL version has been updated as well. </br>
+    Take notice of the current version "__This is perl 5, version 36, subversion 0 (v5.36.0) built for x86_64-linux-thread-multi__". 
+    We will check afterwards whether the PERL version has been updated as well. </br>
 
 
-5. Current Time Zone
-
-Then check the current time zone version in the container database.
-Open SQL*Plus:
-  ```
+5. Current Time Zone </br> 
+Then check the current time zone version in the container database. Open SQL*Plus:
+    ```
     <copy>
-     sqlplus / as sysdba
+    sqlplus / as sysdba
     </copy>
-  ```
-![Open SQL*Plus](./images/sqlplus-lab3.png " ")
+    ```
 
-and execute the SQL:
-  ```
+    ![Open SQL*Plus](./images/sqlplus-lab3.png " ")
+
+    and execute the SQL:
+
+    ```
     <copy>
-     column VALUE$ format a8
-     select VALUE$, CON_ID from containers(SYS.PROPS$) 
-     where NAME='DST_PRIMARY_TT_VERSION' order by CON_ID;
-     </copy>
-
-     Hit ENTER/RETURN to execute ALL commands.
-  ```
-![Timezone of database](./images/dst-cdb.png " ")
-Currently, the database uses the default timezone version deployed with Oracle Database 19c.
-
-
-Exit from SQL*Plus:
-  ```
-    <copy>
-     exit
+    column VALUE$ format a8
+    select VALUE$, CON_ID from containers(SYS.PROPS$) 
+    where NAME='DST_PRIMARY_TT_VERSION' order by CON_ID;
     </copy>
-  ```
-![exit SQL*Plus](./images/exit-sqlplus.png " ")
 
-6. Datapatch Sanity Check
+    Hit ENTER/RETURN to execute ALL commands.
+    ```
 
+    ![Timezone of database](./images/dst-cdb.png " ")
+
+    Currently, the database uses the default timezone version deployed with Oracle Database 19c.
+
+
+    Exit from SQL*Plus:
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
+    ![exit SQL*Plus](./images/exit-sqlplus.png " ")
+
+6. Datapatch Sanity Check <br>
 And finally, you will do a `datapatch` sanity check:
 
-  ```
+    ```
     <copy>
-     $ORACLE_HOME/OPatch/datapatch -sanity_checks
+    $ORACLE_HOME/OPatch/datapatch -sanity_checks
     </copy>
-  ```
+    ```
 
-![datapatch sanity check](./images/datapatch-sanity-check.png " ")
+    ![datapatch sanity check](./images/datapatch-sanity-check.png " ")
 
 
-<details>
- <summary>*click here to see the full datapatch sanity check output*</summary>
+    <details>
+    <summary>*click here to see the full datapatch sanity check output*</summary>
 
-  ``` text
-[CDB2] oracle@hol:/u01/app/oracle/product/19
-$ $ORACLE_HOME/OPatch/datapatch -sanity_checks
-SQL Patching sanity checks version 19.18.0.0.0 on Thu 29 Jun 2023 02:50:33 PM CEST
-Copyright (c) 2021, 2023, Oracle.  All rights reserved.
+    ``` text
+    [CDB2] oracle@hol:/u01/app/oracle/product/19
+    $ $ORACLE_HOME/OPatch/datapatch -sanity_checks
+    SQL Patching sanity checks version 19.18.0.0.0 on Thu 29 Jun 2023 02:50:33 PM CEST
+    Copyright (c) 2021, 2023, Oracle.  All rights reserved.
 
-Log file for this invocation: /u01/app/oracle/product/19/cfgtoollogs/sqlpatch/sanity_checks_20230629_145033_5663/sanity_checks_20230629_145033_5663.log
+    Log file for this invocation: /u01/app/oracle/product/19/cfgtoollogs/sqlpatch/sanity_checks_20230629_145033_5663/sanity_checks_20230629_145033_5663.log
 
-Running checks
-Checks completed. Printing report:
+    Running checks
+    Checks completed. Printing report:
 
-Check: DB Components status - OK
-Check: PDB Violations - OK
-Check: System invalid objects - OK
-Check: Tablespace Status - OK
-Check: Backup jobs - OK
-Check: Temp Datafile exists - OK
-Check: Datapump running - OK
-Check: Container status - OK
-Check: Encryption wallet - OK
-Check: Dictionary statistics gathering - OK
-Check: Scheduled Jobs - NOT OK (WARNING)
-  Message: There are current running or scheduled jobs set to run on the next hour. Scheduled jobs may have an impact when run during patching.
-  CDB$ROOT:
-    JOB_NAME,NEXT_RUN_DATE,SCHEMA_NAME,STATE
-    CLEANUP_ONLINE_IND_BUILD,29-JUN-23 03.31.11.107160 PM +02:00,SYS,SCHEDULED
-    CLEANUP_ONLINE_PMO,29-JUN-23 03.31.51.696187 PM +02:00,SYS,SCHEDULED
-    CLEANUP_TAB_IOT_PMO,29-JUN-23 03.31.21.515067 PM +02:00,SYS,SCHEDULED
-Check: Optim dictionary upgrade parameter - OK
-Check: Queryable Inventory locks - OK
-Check: Queryable Inventory package - OK
-Check: Queryable Inventory external table - OK
-Check: Imperva processes - OK
-Check: Guardium processes - OK
-Check: Locale - OK
+    Check: DB Components status - OK
+    Check: PDB Violations - OK
+    Check: System invalid objects - OK
+    Check: Tablespace Status - OK
+    Check: Backup jobs - OK
+    Check: Temp Datafile exists - OK
+    Check: Datapump running - OK
+    Check: Container status - OK
+    Check: Encryption wallet - OK
+    Check: Dictionary statistics gathering - OK
+    Check: Scheduled Jobs - NOT OK (WARNING)
+      Message: There are current running or scheduled jobs set to run on the next hour. Scheduled jobs may have an impact when run during patching.
+      CDB$ROOT:
+        JOB_NAME,NEXT_RUN_DATE,SCHEMA_NAME,STATE
+        CLEANUP_ONLINE_IND_BUILD,29-JUN-23 03.31.11.107160 PM +02:00,SYS,SCHEDULED
+        CLEANUP_ONLINE_PMO,29-JUN-23 03.31.51.696187 PM +02:00,SYS,SCHEDULED
+        CLEANUP_TAB_IOT_PMO,29-JUN-23 03.31.21.515067 PM +02:00,SYS,SCHEDULED
+    Check: Optim dictionary upgrade parameter - OK
+    Check: Queryable Inventory locks - OK
+    Check: Queryable Inventory package - OK
+    Check: Queryable Inventory external table - OK
+    Check: Imperva processes - OK
+    Check: Guardium processes - OK
+    Check: Locale - OK
 
-Refer to MOS Note and debug log
-/u01/app/oracle/product/19/cfgtoollogs/sqlpatch/sanity_checks_20230629_145033_5663/sanity_checks_debug_20230629_145033_5663.log
+    Refer to MOS Note and debug log
+    /u01/app/oracle/product/19/cfgtoollogs/sqlpatch/sanity_checks_20230629_145033_5663/sanity_checks_debug_20230629_145033_5663.log
 
-SQL Patching sanity checks completed on Thu 29 Jun 2023 02:51:07 PM CEST
-[CDB2] oracle@hol:/u01/app/oracle/product/19
-$
-[CDB2] oracle@hol:/u01/app/oracle/product/19
-$
-  ```
-</details>
+    SQL Patching sanity checks completed on Thu 29 Jun 2023 02:51:07 PM CEST
+    [CDB2] oracle@hol:/u01/app/oracle/product/19
+    $
+    [CDB2] oracle@hol:/u01/app/oracle/product/19
+    $
+    ```
+    </details>
 
-Except for the scheduler warning, everything looks good.
+    Except for the scheduler warning, everything looks good.
 
 
 ## Task 2: Finish the Patch Installation
@@ -292,63 +294,67 @@ $
   ```
 </details>
 
-1. Logon as root
-
+1. Logon as root </br>
 Logon as `root` and type the password `oracle`:
-  ```
+
+    ```
     <copy>
-     su root
+    su root
     </copy>
-  ```
-![su root](./images/sudo-root.png " ")
+    ```
 
-and enter:
-  ```
+    ![su root](./images/sudo-root.png " ")
+
+    and enter:
+
+    ```
     <copy>
-     oracle
+    oracle
     </copy>
-  ```
-When you're logged in, you see:
-![after logon](./images/root-logon.png " ")
+    ```
 
-You can see the command prompt changed to "__[CDB2] root@hol:/u01/app/oracle/product/1919__".
+    When you're logged in, you see:
 
-2. Execute root.sh
+    ![after logon](./images/root-logon.png " ")
 
+    You can see the command prompt changed to "__[CDB2] root@hol:/u01/app/oracle/product/1919__".
+
+2. Execute root.sh </br>
 Then execute the root.sh script:
-  ```
+
+    ```
     <copy>
-     /u01/app/oracle/product/1919/root.sh
+    /u01/app/oracle/product/1919/root.sh
     </copy>
-  ```
-![executing root.sh](./images/root-sh.png " ")
+    ```
+
+    ![executing root.sh](./images/root-sh.png " ")
 
 
 
-3. Exit from root
-
+3. Exit from root </br>
 Exit from the `root` user and confirm that you are `oracle` again:
 
-  ```
+    ```
     <copy>
-     exit
+    exit
     </copy>
-  ```
+    ```
 
-![exiting root](./images/exit-root.png " ")
+    ![exiting root](./images/exit-root.png " ")
 
-The command prompt changes from __root@__ back to __oracle@__.
+    The command prompt changes from __root@__ back to __oracle@__.
 
-4. Check
-
+4. Check </br> 
 Confirm that you are `oracle` again:
 
-  ```
+    ```
     <copy>
-     whoami
+    whoami
     </copy>
-  ```
-![after logon](./images/whoami-oracle.png " ")
+    ```
+
+    ![after logon](./images/whoami-oracle.png " ")
 
 You may now *proceed to the next lab*
 
