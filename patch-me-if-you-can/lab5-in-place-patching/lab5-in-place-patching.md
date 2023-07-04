@@ -375,7 +375,7 @@ Then you need to check at first which patches need to be rolled back.
 1. Additional Rollback Required </br>
 Unfortunately, we are not done yet with rollback activities.
 
-When you check again:
+    When you check again:
 
     ```
     <copy>
