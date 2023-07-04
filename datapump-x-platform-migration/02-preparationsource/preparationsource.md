@@ -18,77 +18,81 @@ This lab assumes you have:
 
 ## Task 1: Create OS Source Directory and Unzip XTTS ZIP File (SOURCE)
 
-1. Create OS Directories (SOURCE)
+1. Create OS Directories (SOURCE) </br>
 Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another one as XTTS source and a third directory for RMAN files.
 
-  ```
+    ```
     <copy>
     mkdir -p /home/oracle/xtts/source/tmp 
     </copy>
-  ```
-![Create XTTS source OS Directory](./images/mkdir-xtts-src-os-dir.png " ")
+    ```
 
+    ![Create XTTS source OS Directory](./images/mkdir-xtts-src-os-dir.png " ")
 
-  ```
+    ```
     <copy>
     mkdir -p /home/oracle/xtts/dump
     </copy>
-  ```
-![Create source OS Directory](./images/mkdir-xtts-dump-dir.png " ")
+    ```
 
+    ![Create source OS Directory](./images/mkdir-xtts-dump-dir.png " ")
 
-  ```
+    ```
     <copy>
     mkdir -p /home/oracle/xtts/rman
     </copy>
-  ```
+    ```
 
-![Create source OS Directory](./images/mkdir-xtts-rman-dir.png " ")
+    ![Create source OS Directory](./images/mkdir-xtts-rman-dir.png " ")
 
 
-2. XTTS ZIP File (SOURCE)
+2. XTTS ZIP File (SOURCE) </br>
 Switch to the source directory
-  ```
+
+    ```
     <copy>
     cd /home/oracle/xtts/source/
     </copy>
-  ```
-![change XTTS source directory](./images/change-xtts-src-dir.png " ")
-and unzip 'rman_xttconvert_VER4.3.zip' 
+    ```
 
-  ```
+    ![change XTTS source directory](./images/change-xtts-src-dir.png " ")
+
+    and unzip 'rman_xttconvert_VER4.3.zip' 
+
+    ```
     <copy>
     unzip /home/oracle/xtts/rman_xttconvert_VER4.3.zip
     </copy>
-  ```
-![Unzip the XTTS Perl V4 ZIP file on source](./images/unzip-xtts-src.png " ")
+    ```
+
+    ![Unzip the XTTS Perl V4 ZIP file on source](./images/unzip-xtts-src.png " ")
 
 ## Task 2: Configure Source Database (SOURCE)
-1. Set Source Environment (SOURCE)
-
+1. Set Source Environment (SOURCE) </br>
 Activate source terminal window, set the source environment and start SQL*Plus:
 
-  ```
+    ```
     <copy>
     . upgr
     </copy>
- ```
-![Set source database environment](./images/source-src-env.png " ")
+    ```
+
+    ![Set source database environment](./images/source-src-env.png " ")
 
 2. Start SQL*Plus (SOURCE)
-  ```
+
+    ```
     <copy>
     sqlplus / as sysdba
     </copy>
- ```
-![Login to source 11.2.0.4 database](./images/start-sqlplus-src.png " ")
+    ```
+
+    ![Login to source 11.2.0.4 database](./images/start-sqlplus-src.png " ")
 
 
-3. Database Changes (SOURCE)
-Enable source database archive logging and create the database directory for Data Pump export. Also alter the TPCC user's password:
+3. Database Changes (SOURCE) </br> Enable source database archive logging and create the database directory for Data Pump export. Also alter the TPCC user's password:
 
-
-  ```
+    ```
     <copy>
     startup mount
     archive log list
@@ -101,40 +105,40 @@ Enable source database archive logging and create the database directory for Dat
     </copy>
 
     Hit ENTER/RETURN to execute ALL commands.
-  ```
+    ```
 
-![Enabling archive logging in source database](./images/start-src-db-enable-archive.png " ")
+    ![Enabling archive logging in source database](./images/start-src-db-enable-archive.png " ")
 
-You might also consider enabling __Block Change Tracking (BCT)__ using the command "alter database enable block change tracking".
+    You might also consider enabling __Block Change Tracking (BCT)__ using the command "alter database enable block change tracking".
 
 ## Task 4: Configuring Default RMAN Settings (SOURCE)
 The next parameters you're going to set for RMAN work well in the lab. For your environment you might have to adopt them by increasing parallelism, the backup destination etc.
 
-1. Open RMAN Console (SOURCE)
+1. Open RMAN Console (SOURCE) </br>
 On source start the rman console connecting to the source database: 
 
-  ```
+    ```
     <copy>
-     rman target /
+    rman target /
     </copy>
-  ```
+    ```
 
-Please be aware:
-in RMAN terminology the target database identifies the database which you're going to back up - so in the migration terminology the source database. 
+    Please be aware:
+    in RMAN terminology the target database identifies the database which you're going to back up - so in the migration terminology the source database. 
 
 2. Update Default RMAN Settings
 
-  ```
+    ```
     <copy>
-     configure default device type to disk;
-     configure  device type disk parallelism 8;
-     exit;
+    configure default device type to disk;
+    configure  device type disk parallelism 8;
+    exit;
     </copy>
 
     Hit ENTER/RETURN to execute ALL commands.
-  ```
+    ```
 
-![configure default RMAN parameters on source database side](./images/rman-default-target-settings.png " ")
+    ![configure default RMAN parameters on source database side](./images/rman-default-target-settings.png " ")
 
 
 You may now *proceed to the next lab*.

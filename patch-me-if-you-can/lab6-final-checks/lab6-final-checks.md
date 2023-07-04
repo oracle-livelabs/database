@@ -21,23 +21,26 @@ This lab assumes you have:
 
 1. Open SQL*Plus
 
-  ```
-    <copy>
-     sqlplus  / as sysdba 
-    </copy>
-  ```
-![start sql*plus](./images/open-sqlplus.png " ")
+    ``` bash
+      <copy>
+      sqlplus  / as sysdba 
+      </copy>
+    ```
+
+    ![start sql*plus](./images/open-sqlplus.png " ")
 
 2. Check for Invalid Objects
-  ```
-    <copy>
-    column value$ format a8
-    select con_id, object_type, owner from CDB_OBJECTS where status='INVALID';
-    </copy>
 
-     Hit ENTER/RETURN to execute ALL commands.
-  ```
-![check for invalid objects](./images/invalid-objects-check.png " ")
+    ```
+      <copy>
+      column value$ format a8
+      select con_id, object_type, owner from CDB_OBJECTS where status='INVALID';
+      </copy>
+
+      Hit ENTER/RETURN to execute ALL commands.
+    ```
+
+    ![check for invalid objects](./images/invalid-objects-check.png " ")
 
 There should be no invalid objects.
 

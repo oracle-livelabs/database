@@ -65,23 +65,26 @@ Activate the terminal target tab window and create a directory for the XTTS targ
 ## Task 2: Set Target Environment and Start SQL*Plus (TARGET)
 
 1. Set Environment
-  ```
-    <copy>
-    . cdb3
-    </copy>
-  ```
-![Setting target database environment](./images/source-target-database-env.png " ")
-The command line prompt changes and common environment variables are now set.
+
+    ```
+   <copy>
+   . cdb3
+   </copy>
+    ```
+
+    ![Setting target database environment](./images/source-target-database-env.png " ")
+
+    The command line prompt changes and common environment variables are now set.
 
 2. Open SQL*Plus
 
-  ```
+    ```
     <copy>
     sqlplus / as sysdba 
-    </copy>
-  ```
+    </copy>   
+    ```
 
-![Login to CDB3](./images/open-target-sqlplus.png " ")
+    ![Login to CDB3](./images/open-target-sqlplus.png " ")
 
 
 ## Task 3: In SQL*Plus Start the Container Database CDB3 and Create the Pluggable Database PDB3 (TARGET)

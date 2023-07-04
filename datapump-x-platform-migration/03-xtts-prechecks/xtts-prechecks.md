@@ -24,33 +24,37 @@ This lab assumes you have:
 ## Task 1: Start SQL*Plus (SOURCE and TARGET)
 
 1. Source
-  ```
+
+    ```
     <copy>
     sqlplus / as sysdba
     </copy>
- ```
+    ```
 
-![Login to source 11.2.0.4 database](./images/open-prechecks-sqlplus-src.png " ")
+    ![Login to source 11.2.0.4 database](./images/open-prechecks-sqlplus-src.png " ")
 
 2. Target
-  ```
+
+    ```
     <copy>
     sqlplus / as sysdba
     </copy>
- ```
-![Login to target 21c database](./images/open-prechecks-sqlplus-trg.png " ")
+    ```
 
-## Task 2: Transportable Tablespace Method Supported by Source and Target OS Platforms (SOURCE and TARGET)
+    ![Login to target 21c database](./images/open-prechecks-sqlplus-trg.png " ")
+
+## Task 2: Transportable Tablespace Method Supported by Source and Target OS Platforms (SOURCE and TARGET) 
+
 Before you begin check on source, if the OS you want to migrate your database to, is supporting datafile conversion. <br>
 Also check on target if the OS you want to migrate from is supporting datafile conversion.
 
 So execute on __source__ and __target__:
 
-  ```
+    ```
     <copy>
     @/home/oracle/xtts/scripts/task2
     </copy>
-  ```
+    ```
 
 <details>
  <summary>*click here to see the SQL Statement*</summary>
@@ -73,6 +77,7 @@ Output from __target__:
 
 ## Task 3: Database Timezone (SOURCE and TARGET)
 You should always check that your source and target database are using in the same database timezone (dbtimezone). 
+
 Execute on __source__ and __target__:
   ```
     <copy>
