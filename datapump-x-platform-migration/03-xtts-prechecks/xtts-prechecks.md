@@ -23,7 +23,7 @@ This lab assumes you have:
 
 ## Task 1: Start SQL*Plus (SOURCE and TARGET)
 
-### Step 1: Source
+1. Source
   ```
     <copy>
     sqlplus / as sysdba
@@ -32,7 +32,7 @@ This lab assumes you have:
 
 ![Login to source 11.2.0.4 database](./images/open-prechecks-sqlplus-src.png " ")
 
-### Step 2: Target
+2. Target
   ```
     <copy>
     sqlplus / as sysdba

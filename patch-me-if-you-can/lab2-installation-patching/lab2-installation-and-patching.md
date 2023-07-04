@@ -32,7 +32,7 @@ Start by **double-clicking at the "patching" icon** on the desktop:
 
 It will open an xterm (Terminal Window) with two open tabs.
 
-### Step 2: Setting the Environment
+1. Setting the Environment
 Switch to the tab called "__19.19.0 Home__". 
 
 ![19.18 HOME tab](./images/19-19-home.png " ")
@@ -46,7 +46,7 @@ All variables will be set when executing:
   ```
 ![Source target environment](./images/source-19-19-env.png " ")
 
-### Step 2: Create the new Oracle Home Directory
+2. Create the new Oracle Home Directory
 
   ```
     <copy>
@@ -56,7 +56,7 @@ All variables will be set when executing:
 
 ![create new directory 1919](./images/mkdir-target-1919.png " ")
 
-### Step 3: Change into new Oracle_Home
+3. Change into new Oracle_Home
 
   ```
     <copy>
@@ -65,7 +65,7 @@ All variables will be set when executing:
   ```
 ![change into directory 1919](./images/cd-target-dir-1919.png " ")
 
-### Step 4: Unzip Base Image
+4. Unzip Base Image
 As next step, unzip the 19.3.0 base image from the staging location into this directory.
 
   ```
@@ -75,7 +75,7 @@ As next step, unzip the 19.3.0 base image from the staging location into this di
   ```
 ![unzip Oracle software](./images/unzip-oracle-software.png " ")
 
-### Step 5: OPatch
+5. OPatch
 Then remove the OPatch directory 
 
   ```

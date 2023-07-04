@@ -27,7 +27,7 @@ This lab assumes you have:
 ## Task 1: Adding Table and Data File to Source Database (SOURCE)
 In this (and the previous) phase the database is up and there is no downtime yet. Users make changes in the source database. Let's simulate that by creating a table and adding a data file.
 
-### Step 1: Start SQL*Plus (SOURCE)
+1. Start SQL*Plus (SOURCE)
 Connect with SQL*Plus as TPCC user to the source database:
   ```
     <copy>
@@ -36,7 +36,7 @@ Connect with SQL*Plus as TPCC user to the source database:
   ```
 
 ![connecting to source database](./images/roll-forward-open-sqlplus-src.png " ")
-### Step 2: Add a New Table (SOURCE)
+2. Add a New Table (SOURCE)
 
   ```
     <copy>
@@ -46,7 +46,7 @@ Connect with SQL*Plus as TPCC user to the source database:
 
 ![creating a new table in TPCC acount](./images/cre-object-copy.png " ")
 
-### Step 3: Connect a sysdba (SOURCE)
+3. Connect a sysdba (SOURCE)
 This time connect as sysdba to the source database:
   ```
     <copy>
@@ -55,7 +55,7 @@ This time connect as sysdba to the source database:
   ```
 ![connect as sysdba to source](./images/roll-forward-sysdba-conn.png " ")
 
-### Step 4: Add a New Data File (SOURCE)
+4. Add a New Data File (SOURCE)
 and execute:
   ```
     <copy>
@@ -73,7 +73,7 @@ and execute:
 ## Task 2: Incremental Backup (SOURCE)
 On source change into the XTTS Source directory and execute the incremental backup:
 
-### Step 1: Setting Environment for Incremental Backup (SOURCE)
+1. Setting Environment for Incremental Backup (SOURCE)
   ```
     <copy>
      cd /home/oracle/xtts/source
@@ -85,7 +85,7 @@ On source change into the XTTS Source directory and execute the incremental back
   ```
 ![starting incremental backup](./images/env-incremental-backup.png " ")
 
-### Step 2: Starting Incremental Backup (SOURCE)
+2. Starting Incremental Backup (SOURCE)
 
   ```
     <copy>
@@ -203,7 +203,7 @@ The difference between source and target res.txt starts in line three beginning 
 
 
 
-### Step 1: Copy "res.txt" (TARGET)
+1. Copy "res.txt" (TARGET)
 So let's continue with the process and copy the updated res.txt and the newly created incrbackups.txt from the source to the target directory:
 
   ```
@@ -213,7 +213,7 @@ So let's continue with the process and copy the updated res.txt and the newly cr
   ```
   [copying rest.txt from source to target](./images/copy-res-txt.png " ") 
 
-### Step 2: Copy "incrbackups.txt" (TARGET)
+2. Copy "incrbackups.txt" (TARGET)
   ```
     <copy>
      cp /home/oracle/xtts/source/tmp/incrbackups.txt /home/oracle/xtts/target/tmp/incrbackups.txt
@@ -222,7 +222,7 @@ So let's continue with the process and copy the updated res.txt and the newly cr
 
 ![copying incrbackups.txt and rest.txt from source to target](./images/copy-incrbackups-txt.png " ") 
 
-### Step 3: Start Incremental Restore (TARGET)
+3. Start Incremental Restore (TARGET)
 Set the incremental restore environment:
   ```
     <copy>

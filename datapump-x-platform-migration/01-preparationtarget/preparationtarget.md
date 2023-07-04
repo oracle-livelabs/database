@@ -31,7 +31,7 @@ and the __light blue__ one for all __source__:
 The screenshots in this lab will use the same coloring.
 
 
-### Step 1: Create OS Directory (TARGET)
+1. Create OS Directory (TARGET)
 Activate the terminal target tab window and create a directory for the XTTS target files.
 
   ```
@@ -42,7 +42,7 @@ Activate the terminal target tab window and create a directory for the XTTS targ
 
 ![Create target OS directory ](./images/create-target-os-dir.png " ")
 
-### Step 2: Change into XTTS Working Directory (TARGET)
+2. Change into XTTS Working Directory (TARGET)
 
 
   ```
@@ -53,7 +53,7 @@ Activate the terminal target tab window and create a directory for the XTTS targ
 
 ![change into XTTS target OS working directory ](./images/change-target-working-dir.png " ")
 
-### Step 3: Unzip XTTS ZIP file (TARGET)
+3. Unzip XTTS ZIP file (TARGET)
   ```
     <copy>
     unzip /home/oracle/xtts/rman_xttconvert_VER4.3.zip
@@ -64,7 +64,7 @@ Activate the terminal target tab window and create a directory for the XTTS targ
 
 ## Task 2: Set Target Environment and Start SQL*Plus (TARGET)
 
-### Step 1: Set Environment
+1. Set Environment
   ```
     <copy>
     . cdb3
@@ -73,7 +73,7 @@ Activate the terminal target tab window and create a directory for the XTTS targ
 ![Setting target database environment](./images/source-target-database-env.png " ")
 The command line prompt changes and common environment variables are now set.
 
-### Step 2: Open SQL*Plus
+2. Open SQL*Plus
 
   ```
     <copy>

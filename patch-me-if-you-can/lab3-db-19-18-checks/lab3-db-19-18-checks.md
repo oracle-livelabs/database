@@ -19,7 +19,7 @@ This lab assumes you have:
 
 ## Task 1: Checks
 
-### Step 1: Set the Source Database Environment
+1. Set the Source Database Environment
 
 
 and set the environment.
@@ -30,7 +30,7 @@ and set the environment.
   ```
   ![runInstaller output ](./images/source-19-18-env.png " ")
 
-### Step 2: Current Installed Patches
+2. Current Installed Patches
 
 Check the installed patches in the current 19.18.0 home:
  
@@ -75,7 +75,7 @@ $
   ```
 </details>
 
-### Step 3: Current Java Version
+3. Current Java Version
 
 Check the current JDK version:
   ```
@@ -87,7 +87,7 @@ Check the current JDK version:
 
 
 
-### Step 4: Current Perl Version
+4. Current Perl Version
 
 Check the current PERL version:
   ```
@@ -125,7 +125,7 @@ Take notice of the current version "__This is perl 5, version 36, subversion 0 (
 We will check afterwards whether the PERL version has been updated as well. </br>
 
 
-### Step 5: Current Time Zone
+5. Current Time Zone
 
 Then check the current time zone version in the container database.
 Open SQL*Plus:
@@ -158,7 +158,7 @@ Exit from SQL*Plus:
   ```
 ![exit SQL*Plus](./images/exit-sqlplus.png " ")
 
-### Step 6: Datapatch Sanity Check
+6. Datapatch Sanity Check
 
 And finally, you will do a `datapatch` sanity check:
 
@@ -292,7 +292,7 @@ $
   ```
 </details>
 
-### Step 1: Logon as root
+1. Logon as root
 
 Logon as `root` and type the password `oracle`:
   ```
@@ -313,7 +313,7 @@ When you're logged in, you see:
 
 You can see the command prompt changed to "__[CDB2] root@hol:/u01/app/oracle/product/1919__".
 
-### Step 2: Execute root.sh
+2. Execute root.sh
 
 Then execute the root.sh script:
   ```
@@ -325,7 +325,7 @@ Then execute the root.sh script:
 
 
 
-### Step 3: Exit from root
+3. Exit from root
 
 Exit from the `root` user and confirm that you are `oracle` again:
 
@@ -339,7 +339,7 @@ Exit from the `root` user and confirm that you are `oracle` again:
 
 The command prompt changes from __root@__ back to __oracle@__.
 
-### Step 4: Check
+4. Check
 
 Confirm that you are `oracle` again:
 

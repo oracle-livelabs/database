@@ -19,7 +19,7 @@ This lab assumes you have:
 
 ## Task 1: Invalid Object Check
 
-### Step 1: Open SQL*Plus
+1. Open SQL*Plus
 
   ```
     <copy>
@@ -27,6 +27,8 @@ This lab assumes you have:
     </copy>
   ```
 ![start sql*plus](./images/open-sqlplus.png " ")
+
+2. Check for Invalid Objects
   ```
     <copy>
     column value$ format a8

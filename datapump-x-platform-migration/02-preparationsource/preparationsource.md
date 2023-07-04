@@ -18,7 +18,7 @@ This lab assumes you have:
 
 ## Task 1: Create OS Source Directory and Unzip XTTS ZIP File (SOURCE)
 
-### Step 1: Create OS Directories (SOURCE)
+1. Create OS Directories (SOURCE)
 Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another one as XTTS source and a third directory for RMAN files.
 
   ```
@@ -46,7 +46,7 @@ Activate the source terminal window and create three directories; one for the Da
 ![Create source OS Directory](./images/mkdir-xtts-rman-dir.png " ")
 
 
-### Step 2: XTTS ZIP File (SOURCE)
+2. XTTS ZIP File (SOURCE)
 Switch to the source directory
   ```
     <copy>
@@ -64,7 +64,7 @@ and unzip 'rman_xttconvert_VER4.3.zip'
 ![Unzip the XTTS Perl V4 ZIP file on source](./images/unzip-xtts-src.png " ")
 
 ## Task 2: Configure Source Database (SOURCE)
-### Step 1: Set Source Environment (SOURCE)
+1. Set Source Environment (SOURCE)
 
 Activate source terminal window, set the source environment and start SQL*Plus:
 
@@ -75,7 +75,7 @@ Activate source terminal window, set the source environment and start SQL*Plus:
  ```
 ![Set source database environment](./images/source-src-env.png " ")
 
-### Step 2: Start SQL*Plus (SOURCE)
+2. Start SQL*Plus (SOURCE)
   ```
     <copy>
     sqlplus / as sysdba
@@ -84,7 +84,7 @@ Activate source terminal window, set the source environment and start SQL*Plus:
 ![Login to source 11.2.0.4 database](./images/start-sqlplus-src.png " ")
 
 
-### Step 3: Database Changes (SOURCE)
+3. Database Changes (SOURCE)
 Enable source database archive logging and create the database directory for Data Pump export. Also alter the TPCC user's password:
 
 
@@ -110,7 +110,7 @@ You might also consider enabling __Block Change Tracking (BCT)__ using the comma
 ## Task 4: Configuring Default RMAN Settings (SOURCE)
 The next parameters you're going to set for RMAN work well in the lab. For your environment you might have to adopt them by increasing parallelism, the backup destination etc.
 
-### Step 1: Open RMAN Console (SOURCE)
+1. Open RMAN Console (SOURCE)
 On source start the rman console connecting to the source database: 
 
   ```
@@ -122,7 +122,7 @@ On source start the rman console connecting to the source database:
 Please be aware:
 in RMAN terminology the target database identifies the database which you're going to back up - so in the migration terminology the source database. 
 
-### Step 2: Update Default RMAN Settings
+2. Update Default RMAN Settings
 
   ```
     <copy>

@@ -33,7 +33,7 @@ This lab assumes you have:
 ## Task 1: Metadata Export (SOURCE)
 Sometimes you need to analyze the root cause of an import failure. Did you know, you can create the metadata of your database using Data Pump?
 
-### Step 1: Prepared Export Data Pump Parameter File (SOURCE)
+1. Prepared Export Data Pump Parameter File (SOURCE)
 
   ```
     <copy>
@@ -62,7 +62,7 @@ Sometimes you need to analyze the root cause of an import failure. Did you know,
 
 </details>
 
-### Step2: Execute Export Data Pump (SOURCE)
+2. Execute Export Data Pump (SOURCE)
 Execute a metadata export using this par file:
 
 
@@ -148,7 +148,7 @@ $
 
 ## Task 2: Generate Metadata SQL Using Import (TARGET)
 
-### Step 1: Prepared Metadata SQL Import Parameter File
+1. Prepared Metadata SQL Import Parameter File
   ```
     <copy>
      cat /home/oracle/xtts/sql_metadata_imp.par
@@ -173,7 +173,7 @@ $
 </details>
 
 So you're going to create a SQL file containing all metadata called "upgr_metadata.sql" located in the database directory "XTTS_METADATA_DIR" (=)
-### Step 3: Generating Metadata SQL
+2.  Generating Metadata SQL
 
 
   ```
@@ -262,7 +262,7 @@ If you want to take a look at the metadata SQL file, you can use this command on
 Do you remember that you created a table "object_copy" in "tpcc" at the beginning of the roll forward phase?
 You can now check if source and target match using SQL*Plus:
 
-### Step 1: Open SQL*Plus (SOURCE)
+1. Open SQL*Plus (SOURCE)
 
   ```
     <copy>
@@ -271,7 +271,7 @@ You can now check if source and target match using SQL*Plus:
   ```
 ![connect with SQL*Plus to source](./images/sqlplus-src.png " ") 
 
-### Step 2: Open SQL*Plus (TARGET)
+2. Open SQL*Plus (TARGET)
   ```
     <copy>
      sqlplus tpcc/oracle@pdb3
@@ -279,7 +279,7 @@ You can now check if source and target match using SQL*Plus:
   ```
 ![ccontent of the metadata SQL file](./images/metadata-sql-file.png " ") 
 
-### Step 3: SQL Statement (SOURCE and TARGET)
+3. SQL Statement (SOURCE and TARGET)
   ```
     <copy>
      select count(*) from object_copy;
@@ -291,7 +291,7 @@ You can now check if source and target match using SQL*Plus:
 | ![amount of rows source](./images/result-src.png " ")  | ![amount of rows target](./images/result-trg.png " ") |
 {: title="Compare table on source and target"}
 
-### Step 4: Exit SQL*Plus (SOURCE and TARGET)
+4. Exit SQL*Plus (SOURCE and TARGET)
 
   ```
     <copy>

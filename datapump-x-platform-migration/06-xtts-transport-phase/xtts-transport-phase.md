@@ -30,7 +30,7 @@ This lab assumes you have:
 
 ## Task 1: Setting Tablespaces to "read only" (SOURCE)
 
-### Step 1: Open SQL*Plus (SOURCE)
+1. Open SQL*Plus (SOURCE)
 Connect with "/ as sysdba" using SQL*Plus to the source database:
   ```
     <copy>
@@ -40,7 +40,7 @@ Connect with "/ as sysdba" using SQL*Plus to the source database:
 
 ![open sqlplus source](./images/transport-phase-sqlplus-src.png " ")
 
-### Step 2: Set Tablespaces Read Only (SOURCE)
+2. Set Tablespaces Read Only (SOURCE)
 and execute:
 
   ```
@@ -61,7 +61,7 @@ and execute:
 ## Task 2: Final Incremental Backup (SOURCE)
 On source change into the XTTS Source directory and execute the final incremental backup:
 
-### Step 1: Setting Environment for Final Backup (SOURCE)
+1. Setting Environment for Final Backup (SOURCE)
   ```
     <copy>
      cd /home/oracle/xtts/source
@@ -74,7 +74,7 @@ On source change into the XTTS Source directory and execute the final incrementa
 
 ![setting XTTS env on source](./images/env-final-backup.png " ")
 
-### Step 2: Starting Final Backup (SOURCE)
+2. Starting Final Backup (SOURCE)
   ```
     <copy>
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
@@ -186,7 +186,7 @@ You can safely ignore those warnings as they only tell you that you're going to 
 Open the target console.
 The final incremental restore also needs the "res.txt" and "incrbackups.txt" files from source. 
 
-### Step 1: Copy "res.txt" (TARGET)
+1. Copy "res.txt" (TARGET)
 
   ```
     <copy>
@@ -196,7 +196,7 @@ The final incremental restore also needs the "res.txt" and "incrbackups.txt" fil
 
 ![copying res.txt from source to target](./images/final-restore-copy-res-txt.png " ")
 
-### Step 2: Copy "incrbackups.txt" (TARGET)
+2. Copy "incrbackups.txt" (TARGET)
 
   ```
     <copy>
@@ -206,7 +206,7 @@ The final incremental restore also needs the "res.txt" and "incrbackups.txt" fil
 
 ![copying incrbackups.txt from source to target](./images/final-restore-copy-incrbackup-txt.png " ")
 
-### Step 3: Setting Environment for Final Restore (TARGET)
+3. Setting Environment for Final Restore (TARGET)
 
   ```
     <copy>
@@ -220,7 +220,7 @@ The final incremental restore also needs the "res.txt" and "incrbackups.txt" fil
 
 ![starting final incremental restore](./images/env-final-restore.png " ")
 
-### Step 3: Starting Final Restore (TARGET)
+4. Starting Final Restore (TARGET)
 And start the restore which recovers the target data files until exact the same SCN as the source database data files:
   ```
     <copy>
@@ -280,7 +280,7 @@ $
 Between this source and target database version, you can't use __Data Pump network_link__ (will fail with ORA-39169) and you have to export and import the metadata information instead.
 The Data Pump export parameter file "exp_metadata.par" was already created for you and is located in "/home/oracle/xtts/"
 
-### Step 1: Prepared Export Data Pump Parameter File (SOURCE)
+1. Prepared Export Data Pump Parameter File (SOURCE)
   ```
     <copy>
      cat /home/oracle/xtts/exp_metadata.par
@@ -305,7 +305,7 @@ The Data Pump export parameter file "exp_metadata.par" was already created for y
 
 </details>
 
-### Step2: Execute Export Data Pump (SOURCE)
+2. Execute Export Data Pump (SOURCE)
 Execute expdp using this copied par file:
 
 
@@ -533,7 +533,7 @@ $
 ## Task 5: TTS Import (TARGET)
 Also the metadata import parameter file was precreated for you.
 
-### Step 1: Prepared Import Data Pump Parameter File (TARGET)
+1. Prepared Import Data Pump Parameter File (TARGET)
 
  ```
     <copy>
@@ -561,7 +561,7 @@ Also the metadata import parameter file was precreated for you.
 </details>
 
 
-### Step2: Execute TTS Import Data Pump (TARGET)
+2. Execute TTS Import Data Pump (TARGET)
 And import the metadata into the PDB3 using this Imp_Metadata.par parameter file:
 __ATTENTION__: Only proceed once the export on SOURCE has been completed.
 

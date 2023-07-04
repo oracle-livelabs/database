@@ -23,7 +23,7 @@ This lab assumes you have:
 
 
 
-### Step 1: Environment
+1. Environment
 Set the environment for the UP19 database. It is currently shutdown since it needs to be shutdown while we patch.
   ```
     <copy>
@@ -32,7 +32,7 @@ Set the environment for the UP19 database. It is currently shutdown since it nee
   ```
 ![source 19.18 env](./images/source-1918-env.png " ")
 
-### Step 2: Switch to 19.19 RU Directory
+2. Switch to 19.19 RU Directory
 
 Then enter the patch directory for the Release Update 19.19.0:
   ```
@@ -42,7 +42,7 @@ Then enter the patch directory for the Release Update 19.19.0:
   ```
 ![change into patch dir](./images/cd-ru-patch-dir.png " ")
 
-### Step 3: Patch Conflict Checker
+3. Patch Conflict Checker
 
 Start running the patching conflict check:
   ```
@@ -253,7 +253,7 @@ If not, you have our full sympathy - and we'd ask you to continue straight to th
 
 In case you'd like to learn about the complexities of in-place patching instead, then continue in the current lab.
 
-### Step 1: Evaluate Patches to Roll Back
+1. Evaluate Patches to Roll Back
 
 Then you need to check at first which patches need to be rolled back.
 
@@ -272,6 +272,7 @@ Following patches will be rolled back from Oracle Home on application of the pat
 
 Now you can follow the opatch advice and just rollback the entire list of patches. Just make sure you remove the spaces between "comma" and "patchnumber":
 
+2. Rollback Patches 
   ```
     <copy>
      $ORACLE_HOME/OPatch/opatch nrollback -id 34879016,34871935,34810252,34793099,34783802,33973908
@@ -1432,7 +1433,7 @@ $
 ## Task 8: Start the database and invoke datapatch
 As your home has now received all patches, you need to startup the UP19 database and apply all SQL and PL/SQL changes to it with datapatch:
 
-### Step 1: Open SQL*Plus
+1. Open SQL*Plus
 
   ```
     <copy>
@@ -1441,7 +1442,7 @@ As your home has now received all patches, you need to startup the UP19 database
   ```
 ![open sql*plus](./images/start-sqlplus.png " ")
 
-### Step 2: Start Database
+2. Start Database
   ```
     <copy>
     startup
@@ -1455,7 +1456,7 @@ As your home has now received all patches, you need to startup the UP19 database
 
 This is a non-CDB so you won't execute the "ALTER PLUGGABLE DATABASE" command. Still, we use this as a standard command since it will not harm but in case of having PDBs, it will ensure that your PDBs get started.
 
-### Step 3: Run "datapatch"
+3. Run "datapatch"
   ```
     <copy>
      $ORACLE_HOME/OPatch/datapatch -verbose 

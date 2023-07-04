@@ -26,7 +26,7 @@ This lab assumes you have:
 ## Task 1: XTTS Properties File (SOURCE)
 On source change into the XTTS source directory and copy the xtt.properties containing all necessary parameters to run this lab.
 
-### Step 1: Changing into XTTS/SOURCE Directory (SOURCE)
+1. Changing into XTTS/SOURCE Directory (SOURCE)
   ```
     <copy>
      cd /home/oracle/xtts/source
@@ -34,7 +34,7 @@ On source change into the XTTS source directory and copy the xtt.properties cont
   ```
 ![change into XTTS source dir](./images/switch-src-xtts-dir.png " ")
 
-### Step 2: Copy Prepared xtt.properties file (SOURCE)
+2. Copy Prepared xtt.properties file (SOURCE)
   ```
     <copy>
      cp /home/oracle/xtts/xtt.properties .
@@ -257,7 +257,7 @@ The XTTS script offers two helpful environment variables we're going to set all 
 * XTTDEBUG will allow you to quickly enable tracing (valid trace leveles are 0...3) 
 * TMPDIR is the directory where XTTS will store its temporary files 
 
-### Step 1: Setting Environment for Initial Backup (SOURCE)
+1. Setting Environment for Initial Backup (SOURCE)
   ```
     <copy>
      cd /home/oracle/xtts/source
@@ -269,7 +269,7 @@ The XTTS script offers two helpful environment variables we're going to set all 
   ```
 ![prepare initial backup](./images/prepare-phase-backup-src.png " ")
 
-### Step 2: Starting Initial Backup (SOURCE)
+2. Starting Initial Backup (SOURCE)
   ```
     <copy>
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --backup -L
@@ -371,7 +371,7 @@ No new datafiles added
 ## Task 3: Initial Restore (TARGET)
 The initial restore on target requires the "xtt.properties" and "res.txt" file from source. In this lab the source and target machine are the same, so you can simply use the copy command (in a real migration you might store it on a network share or use scp to copy the files). The RMAN backup sets are stored in a folder . Since it is the same host, we don't need to copy the backup sets. You would need to do that in a real migration except you put the files on a network share or enable copying in the xtt.properties file.
 
-### Step 1: Changing into XTTS/TARGET Directory (TARGET)
+1. Changing into XTTS/TARGET Directory (TARGET)
   ```
     <copy>
      cd /home/oracle/xtts/target/
@@ -380,7 +380,7 @@ The initial restore on target requires the "xtt.properties" and "res.txt" file f
 
 ![changing to the target XTTS directory](./images/prepare-phase-cd-target-dir.png " ")
 
-### Step 2: Copying xtt.properties from Source (TARGET)
+2. Copying xtt.properties from Source (TARGET)
   ```
     <copy>
      cp /home/oracle/xtts/source/xtt.properties /home/oracle/xtts/target/xtt.properties 
@@ -388,7 +388,7 @@ The initial restore on target requires the "xtt.properties" and "res.txt" file f
   ```
 ![copying xtt.properties from source to target](./images/cpy-xtt-properties-src-trg.png " ")
 
-### Step 3: Copying res.txt from Source (TARGET)
+3. Copying res.txt from Source (TARGET)
   ```
     <copy>
      cp /home/oracle/xtts/source/tmp/res.txt /home/oracle/xtts/target/tmp/res.txt
@@ -398,7 +398,7 @@ The initial restore on target requires the "xtt.properties" and "res.txt" file f
 
 ![copying rest.txt from source to target](./images/cpy-res-txt-src-trg.png " ")
 
-### Step 4: Setting Environment for Initial Restore (TARGET)
+4. Setting Environment for Initial Restore (TARGET)
 Starting restore:
   ```
     <copy>
@@ -411,7 +411,7 @@ Starting restore:
   ```
 ![set restore environment on target](./images/env-initial-restore.png " ")
 
-### Step 5: Starting Initial Restore (TARGET)
+5. Starting Initial Restore (TARGET)
   ```
     <copy>
      $ORACLE_HOME/perl/bin/perl xttdriver.pl --restore -L
