@@ -122,8 +122,11 @@ Hit ENTER/RETURN to execute ALL commands.
 
 ![create database directory in PDB3](./images/create-database-directory-pdb3.png " ")
 
-<if type="Aber">  Hello World! </if>
+
 <if type="KgR">
+COMMENT: TYPE IS NOT DEFINED; SO THIS SECTION DOES NOT APPEAR
+IT IS TO HIDE THE LISTENER START JUST IN CASE I NEED IT AGAIN
+
 ## Task 5: Start Oracle Listener (TARGET)
   ```
     <copy>
