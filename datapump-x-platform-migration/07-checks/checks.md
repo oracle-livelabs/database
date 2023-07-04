@@ -172,7 +172,7 @@ Execute a metadata export using this par file:
 
     </details>
 
-So you're going to create a SQL file containing all metadata called "upgr_metadata.sql" located in the database directory "XTTS_METADATA_DIR" (=)
+    So you're going to create a SQL file containing all metadata called "upgr\_metadata.sql" located in the database directory "XTTS\_METADATA\_DIR" 
 
 2.  Generating Metadata SQL
 
