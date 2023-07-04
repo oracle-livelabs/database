@@ -52,8 +52,8 @@ Sometimes you need to analyze the root cause of an import failure. Did you know,
     | directory=XTTS\_METADATA\_DIR | Specifies the default location to which export can write the dump file set and the log file |
     | dumpfile=upgr\_metadata\_%U.dmp | Is the name of the dump file |
     | cluster=N | Restricts to execute the current job on the node where it was started  |
-    | job_name=cre_metadata_exp | Specifies a job name for the metadata export  |
-    | content=metadata_only | Exports only metadata  |
+    | job_name=cre\_metadata\_exp | Specifies a job name for the metadata export  |
+    | content=metadata\_only | Exports only metadata  |
     | filesize=10737418240 | Restricts the export of the Data Pump export to given amount of bytes  |
     | logfile=cre\_metadata\_exp.log | This parameter specifies the name for the log file of the export job. |
     | full=y | FULL specifies that you want to perform a full database mode export  |
@@ -76,7 +76,7 @@ Execute a metadata export using this par file:
     <details>
     <summary>*click here to see the full metadata EXPDP log file*</summary>
 
-      ``` text
+    ``` text
     [UPGR] oracle@hol:~/xtts/source
     $ expdp system/oracle@UPGR parfile=/home/oracle/xtts/sql_metadata_exp.par
 
@@ -158,7 +158,7 @@ Execute a metadata export using this par file:
     ![view metadata import Data Pump parameter file on source ](./images/sql-metadat-import-par.png " ")
 
     <details>
-    <summary>*click here if you want to see the Data Pump export parameter file and a short description*</summary>
+    <summary>*click here if you want to see the Data Pump import parameter file and a short description*</summary>
 
 
     | Parameter | Comment |
@@ -166,13 +166,14 @@ Execute a metadata export using this par file:
     | DIRECTORY=XTTS\_METADATA\_DIR | Specifies the default location to which Export can write the dump file set and the log file |
     | DUMPFILE=exp\_metadata.dmp | Is the name of the dump file |
     | logfile=xtts\_export\_metadata.log | This parameter specifies the name for the log file of the export job. |
-    | sqlfile=upgr_metadata.sql | The name of the file containing SQL statements of the metadata  |
-    | job_name=cre_metadata | The name of the import Data Pump job  |
+    | sqlfile=upgr\_metadata.sql | The name of the file containing SQL statements of the metadata  |
+    | job\_name=cre\_metadata | The name of the import Data Pump job  |
     {: title="Data Pump Metadata Import SQL Parameter File"}
 
     </details>
 
     So you're going to create a SQL file containing all metadata called "upgr\_metadata.sql" located in the database directory "XTTS\_METADATA\_DIR" 
+
 
 2.  Generating Metadata SQL
 
