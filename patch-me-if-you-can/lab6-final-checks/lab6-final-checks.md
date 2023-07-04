@@ -22,9 +22,9 @@ This lab assumes you have:
 1. Open SQL*Plus
 
     ``` bash
-      <copy>
-      sqlplus  / as sysdba 
-      </copy>
+    <copy>
+    sqlplus  / as sysdba 
+    </copy>
     ```
 
     ![start sql*plus](./images/open-sqlplus.png " ")
@@ -59,7 +59,6 @@ Remember that the version before upgrade was DST V.32 as you did check and verif
 That is pretty awesome. Please be aware that AutoUpgrade by default will not adjust the time zone when you patch. But we set it intentionally, and the containers have been updated.
 
 
-
 At this point, please `exit` SQL*Plus.
   ```
     <copy>
@@ -77,6 +76,7 @@ Please check whether the JDK version has been upgraded as well.
      /u01/app/oracle/product/1919/jdk/bin/java -version
     </copy>
   ```
+  
 ![java version](./images/check-java-version.png " ")
 
 This is intended. You will always get the n-1 version of JDK, i.e. the version which was current at the code freeze date for the content of the Release Update. If you need a newer JDK version, you please need to download and apply it afterwards. The version before patching was `java version "1.8.0_351"`.
