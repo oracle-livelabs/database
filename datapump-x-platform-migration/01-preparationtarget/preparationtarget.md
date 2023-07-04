@@ -34,32 +34,33 @@ The screenshots in this lab will use the same coloring.
 1. Create OS Directory (TARGET)
 Activate the terminal target tab window and create a directory for the XTTS target files.
 
-  ```
+    ```
     <copy>
     mkdir -p /home/oracle/xtts/target/tmp
     </copy>
-  ```
+    ```
 
-![Create target OS directory ](./images/create-target-os-dir.png " ")
+    ![Create target OS directory ](./images/create-target-os-dir.png " ")
 
 2. Change into XTTS Working Directory (TARGET)
 
-
-  ```
+    ```
     <copy>
     cd /home/oracle/xtts/target/
     </copy>
-  ```
+    ```
 
-![change into XTTS target OS working directory ](./images/change-target-working-dir.png " ")
+    ![change into XTTS target OS working directory ](./images/change-target-working-dir.png " ")
 
 3. Unzip XTTS ZIP file (TARGET)
-  ```
+
+    ```
     <copy>
     unzip /home/oracle/xtts/rman_xttconvert_VER4.3.zip
     </copy>
-  ```
-![Unzipping the XTTS Perl V4 ZIP file on target](./images/unzip-xtts-target.png " ")
+    ```
+
+    ![Unzipping the XTTS Perl V4 ZIP file on target](./images/unzip-xtts-target.png " ")
 
 
 ## Task 2: Set Target Environment and Start SQL*Plus (TARGET)
@@ -67,9 +68,9 @@ Activate the terminal target tab window and create a directory for the XTTS targ
 1. Set Environment
 
     ```
-   <copy>
-   . cdb3
-   </copy>
+    <copy>
+    . cdb3
+    </copy>
     ```
 
     ![Setting target database environment](./images/source-target-database-env.png " ")
