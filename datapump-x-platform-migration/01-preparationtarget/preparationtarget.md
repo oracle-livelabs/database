@@ -122,9 +122,8 @@ Hit ENTER/RETURN to execute ALL commands.
 
 ![create database directory in PDB3](./images/create-database-directory-pdb3.png " ")
 
-
-<if type=“KgR”>
-
+<if type="Aber">  Hello World! </if>
+<if type="KgR">
 ## Task 5: Start Oracle Listener (TARGET)
   ```
     <copy>
