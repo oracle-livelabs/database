@@ -280,7 +280,7 @@ And start the restore which recovers the target data files until exact the same 
     </details>
 
 ## Task 4: TTS Export (SOURCE)
-Between this source and target database version, you can't use __Data Pump network_link__ (will fail with ORA-39169) and you have to export and import the metadata information instead.
+Between this source and target database version, you can't use __Data Pump network\_link__ (will fail with ORA-39169) and you have to export and import the metadata information instead.
 The Data Pump export parameter file "exp_metadata.par" was already created for you and is located in "/home/oracle/xtts/"
 
 1. Prepared Export Data Pump Parameter File (SOURCE)

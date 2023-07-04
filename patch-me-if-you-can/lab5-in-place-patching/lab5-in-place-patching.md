@@ -373,9 +373,8 @@ Then you need to check at first which patches need to be rolled back.
 ## Task 3: More Rollback Required
 
 1. Additional Rollback Required </br>
-Unfortunately, we are not done yet with rollback activities.
-
-    When you check again:
+Unfortunately, we are not done yet with rollback activities. </br>
+When you check again:
 
     ```
     <copy>

@@ -74,7 +74,7 @@ and execute:
     ![adding new datafile to TBS TPCCTAB](./images/roll-forward-add-datafile.png " ")
 
 
-## Task 2: Incremental Backup (SOURCE) </br>
+## Task 2: Incremental Backup (SOURCE) 
 On source change into the XTTS Source directory and execute the incremental backup:
 
 1. Setting Environment for Incremental Backup (SOURCE)
@@ -360,7 +360,7 @@ An interesting directory created by the restore process is in the target XTTS/tm
     ls -al /home/oracle/xtts/target/tmp
     </copy>
   ```
-  
+
 ![RMAN backup datafiles](./images/roll-forward-ls-target.png " ")
 
 The first directory belongs to the restore executed in the prepare phase, the second one to the incremental backup from the roll forward phase.

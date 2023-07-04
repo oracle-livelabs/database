@@ -42,7 +42,7 @@ This lab assumes you have:
 
     ![check for invalid objects](./images/invalid-objects-check.png " ")
 
-There should be no invalid objects.
+    There should be no invalid objects.
 
 ## Task 2: Check Time Zone
 The default time zone is DST V.32. But since the Release Update 19.18.0 all existing time zone files will be delivered. Please check if the automated patching with AutoUpgrade has updated the time zone. Remember, that the config file had upg1.timezone_upg=yes set intentionally:
@@ -76,7 +76,7 @@ Please check whether the JDK version has been upgraded as well.
      /u01/app/oracle/product/1919/jdk/bin/java -version
     </copy>
   ```
-  
+
 ![java version](./images/check-java-version.png " ")
 
 This is intended. You will always get the n-1 version of JDK, i.e. the version which was current at the code freeze date for the content of the Release Update. If you need a newer JDK version, you please need to download and apply it afterwards. The version before patching was `java version "1.8.0_351"`.
