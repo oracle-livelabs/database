@@ -58,7 +58,7 @@ and execute:
 
 ![set source tablespaces to read only](./images/transport-phase-read-only-tbs.png " ")
 
-## Task 1: Final Incremental Backup (SOURCE)
+## Task 2: Final Incremental Backup (SOURCE)
 On source change into the XTTS Source directory and execute the final incremental backup:
 
 ### Step 1: Setting Environment for Final Backup (SOURCE)
@@ -181,7 +181,7 @@ ORA-06512: at line 284__<br>
 You can safely ignore those warnings as they only tell you that you're going to back up a "read only" tablespace.
 
 
-## Task 2: Final Incremental Restore (TARGET)
+## Task 3: Final Incremental Restore (TARGET)
 
 Open the target console.
 The final incremental restore also needs the "res.txt" and "incrbackups.txt" files from source. 
@@ -276,7 +276,7 @@ $
   ```
 </details>
 
-## Task 3: TTS Export (SOURCE)
+## Task 4: TTS Export (SOURCE)
 Between this source and target database version, you can't use __Data Pump network_link__ (will fail with ORA-39169) and you have to export and import the metadata information instead.
 The Data Pump export parameter file "exp_metadata.par" was already created for you and is located in "/home/oracle/xtts/"
 
@@ -530,7 +530,7 @@ $
   ```
 </details>
 
-## Task 4: TTS Import (TARGET)
+## Task 5: TTS Import (TARGET)
 Also the metadata import parameter file was precreated for you.
 
 ### Step 1: Prepared Import Data Pump Parameter File (TARGET)
