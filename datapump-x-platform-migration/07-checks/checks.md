@@ -149,11 +149,11 @@ Execute a metadata export using this par file:
 
 1. Prepared Metadata SQL Import Parameter File
 
-        ```
-        <copy>
-        cat /home/oracle/xtts/sql_metadata_imp.par
-        </copy>
-        ```
+    ```
+    <copy>
+    cat /home/oracle/xtts/sql_metadata_imp.par
+    </copy>
+    ```
 
     ![view metadata import Data Pump parameter file on source ](./images/sql-metadat-import-par.png " ")
 
@@ -177,11 +177,11 @@ Execute a metadata export using this par file:
 
 2.  Generating Metadata SQL
 
-        ```
-        <copy>
-        impdp system/oracle@pdb3 parfile=/home/oracle/xtts/sql_metadata_imp.par
-        </copy>
-        ```
+    ```
+    <copy>
+    impdp system/oracle@pdb3 parfile=/home/oracle/xtts/sql_metadata_imp.par
+    </copy>
+    ```
 
     ![execute data pump metadata import](./images/sql-metadata-import.png " ")
 
