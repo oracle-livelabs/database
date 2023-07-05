@@ -1661,15 +1661,20 @@ Starting with opatch version 37 you can check if you have inactive patches in yo
     </details>
 
 
-2. Clean up Inactive Patches
-</br>
+2. Clean up Inactive Patches</br>
+
 a `RETAIN_INACTIVE_PATCHES`
 b `RETAIN\_INACTIVE\_PATCHES`
 c "RETAIN_INACTIVE_PATCHES"
 d "RETAIN\_INACTIVE\_PATCHES"
 e RETAIN_INACTIVE_PATCHES
 f RETAIN\_INACTIVE\_PATCHES
-
+    a1 `RETAIN_INACTIVE_PATCHES`
+    b1 `RETAIN\_INACTIVE\_PATCHES`
+    c1 "RETAIN_INACTIVE_PATCHES"
+    d1 "RETAIN\_INACTIVE\_PATCHES"
+    e1 RETAIN_INACTIVE_PATCHES
+    f1 RETAIN\_INACTIVE\_PATCHES
 
     ```
     <copy>
