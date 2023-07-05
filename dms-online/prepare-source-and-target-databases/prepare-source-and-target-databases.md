@@ -281,8 +281,15 @@ In this lab, you will:
     </copy>
     ```
     Your source DB now has a user HR01 with a table EMPL that has 1000 rows.
+    
+5. This table is to demonstrate the Cloud Pre Migration advisor (CPAT) functionality during Validation on Lab 8.
+    ```
+    <copy>
+    CREATE TABLE image_table2 ( id NUMBER, image ORDImage ) LOB(image.source.localData) STORE AS SECUREFILE;
+    </copy>
+    ```
 
-5. Exit SQL.
+6. Exit SQL.
 
     ```
     <copy>

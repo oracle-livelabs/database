@@ -2,13 +2,13 @@
 
 ## Introduction
 
-Watch a preview video of creating In-Memory Column Store
+Watch a preview video of using Automatic In-Memory:
 
-[YouTube video](youtube:U9BmS53KuGs)
+[YouTube video](youtube:pFWjl1G7uDI)
 
 Watch the video below for a walk through of the Automatic In-Memory lab:
 
-[Automatic In-Memory](videohub:1_ohs9hpw0)
+[Automatic In-Memory](videohub:1_ke3hxh05)
 
 *Estimated Lab Time:* 15 Minutes.
 
