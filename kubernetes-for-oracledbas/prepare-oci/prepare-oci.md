@@ -1,8 +1,5 @@
 # Prepare the OCI Tenancy
 
-"How often is happiness destroyed by preparation, foolish preparation!"
-\- Jane Austen, Emma
-
 ## Introduction
 
 In this lab, you will create the Oracle Cloud Infrastructure (OCI) *Policies* required for least-privilege provisioning of the workshop infrastructure.  Additionally you will create an OCI *Compartment* to isolate the resources created during this workshop.

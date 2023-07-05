@@ -25,8 +25,6 @@ This lab assumes you have:
 
 ## Task 1: Create a Namespace
 
-In K8s, a *Namespace* is a virtual cluster that provides a way to divide the physical K8s cluster resources logically between multiple users or teams.  Additionally, Namespaces enable fine-grained control over access and resource allocation.  By defining appropriate Role-Based Access Control (RBAC) policies, you can control which users or groups have access to specific resources within Namespaces.  You'll see an example of this when scheduling a Stop/Start CronJob.
-
 In Cloud Shell, create a namespace for the Microservice Application:
 
 ~~~bash
@@ -41,28 +39,23 @@ Output:
 namespace/sqldev-web created
 ~~~
 
-### Namespace Best Practices
-
-* For production clusters, avoid using the `default` namespace. Instead, make other namespaces and use those.
-* Avoid creating namespaces with the prefix `kube-`, it is reserved for K8s system namespaces.
-
 ## Task 2: Create the Database Secrets
 
 Your application will want to talk to the Oracle Database and to do so, just like a non-Microservice application, it will need both Authentication credentials and Database (Names) Resolution strings.  Whether you use Oracle Enterprise User Security and LDAP or username/passwords and TNS_ADMIN, the general requirements will be the same.
 
 ### Names Resolution
 
-For the Database (Names) Resolution, copy the wallet secret from the `adb` namespace to the `sqlweb-dev` namespace.  This can be done with a `kubectl` one-liner, in Cloud Shell:
+For the Database (Names) Resolution, copy the wallet secret from the `demo` namespace to the `sqlweb-dev` namespace.  This can be done with a `kubectl` one-liner, in Cloud Shell:
 
 ~~~bash
 <copy>
-kubectl get secret adb-tns-admin -n adb -o json | 
+kubectl get secret adb-tns-admin -n demo -o json | 
     jq 'del(.metadata | .ownerReferences, .namespace, .resourceVersion, .uid)' | 
     kubectl apply -n sqldev-web -f -
 </copy>
 ~~~
 
-The above command will export the `adb-tns-admin` secret from the `adb` namespaces to JSON while excluding some metadata fields and load the secret back into the K8s `sqldev-web` namespace.
+The above command will export the `adb-tns-admin` secret from the `demo` namespaces to JSON while excluding some metadata fields and load the secret back into the K8s `sqldev-web` namespace.
 
 After the copy is done, you can query the new secret: `kubectl get secrets -n sqldev-web`
 
@@ -74,9 +67,9 @@ Set some variables to assist in creating the K8s manifests for Authentication by
 
 ~~~bash
 <copy>
-ADB_PWD=$(kubectl get secrets/adb-admin-password -n adb --template="{{index .data \"adb-admin-password\" | base64decode}}")
+ADB_PWD=$(kubectl get secrets/adb-admin-password -n demo --template="{{index .data \"adb-admin-password\" | base64decode}}")
 
-SERVICE_NAME=$(kubectl get adb -n adb -o json | jq -r .items[0].spec.details.dbName)_TP
+SERVICE_NAME=$(kubectl get adb -n demo -o json | jq -r .items[0].spec.details.dbName)_TP
 </copy>
 ~~~
 

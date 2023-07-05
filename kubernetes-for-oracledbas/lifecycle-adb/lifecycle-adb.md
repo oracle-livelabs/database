@@ -148,7 +148,7 @@ Ensure you are in the K8S4DBAS Compartment and you will see the `DEVOPSDB` being
 
 As you are working with an ADB, there are numerous ways to download the Wallet to access the Database using mTLS.  One way is by extracting the K8s Wallet secret that was just created for you by the OraOperator.
 
-In Cloud Shell:
+Using the pre-created ADB secrets, in Cloud Shell:
 
 ```bash
 <copy>
@@ -436,3 +436,37 @@ kubectl patch adb adb-existing -n adb -p '{"spec":{"details":{"lifecycleState":"
 
 * **Author** - John Lathouwers, Developer Advocate, Database Development Operations
 * **Last Updated By/Date** - John Lathouwers, May 2023
+
+
+
+
+CREATE DATABASE LINK "PARTICIPANTADMINLINK"
+   USING '(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST="adb.us-ashburn-1.oraclecloud.com")(PORT=1522))(CONNECT_DATA=(SERVICE_NAME=gdfa7d153cd68c7_sagadb2_tp.adb.oraclecloud.com))(SECURITY=(MY_WALLET_DIRECTORY="/u03/dbfs/FF8D55E55B29505FE053A516000A91FA/data/dpdump")(SSL_SERVER_DN_MATCH=TRUE)(SSL_SERVER_CERT_DN="sagadb2_tp = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.us-ashburn-1.oraclecloud.com))(connect_data=(service_name=gdfa7d153cd68c7_sagadb2_tp.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+")))'
+
+
+BEGIN
+     DBMS_CLOUD_ADMIN.CREATE_DATABASE_LINK(
+          db_link_name => 'TEST',
+          hostname => 'adb.us-ashburn-1.oraclecloud.com',
+          port => '1522',
+          service_name => 'gdfa7d153cd68c7_sagadb2_tp.adb.oraclecloud.com',
+          ssl_server_cert_dn => NULL,
+          credential_name => 'PARTICIPANTADMINCRED',
+          directory_name => '/u03/dbfs/FF8D55E55B29505FE053A516000A91FA/data/dpdump',
+          private_target => FALSE);
+END;
+/
+
+BEGIN
+     DBMS_CLOUD_ADMIN.CREATE_DATABASE_LINK(
+          db_link_name => 'TESTLINK', 
+          hostname => 'adb.us-ashburn-1.oraclecloud.com',
+          port => '1522',
+          service_name => 'gdfa7d153cd68c7_sagadb2_tp.adb.oraclecloud.com',
+          ssl_server_cert_dn => NULL,
+          credential_name => 'PARTICIPANTADMINCRED',
+          directory_name => '/u03/dbfs/FF8D55E55B29505FE053A516000A91FA/data/dpdump',
+          private_target => TRUE);
+END;
+/

@@ -1,13 +1,10 @@
 # Deploy the Oracle Operator for Kubernetes (OraOperator)
 
-"If everything seems under control, you're not moving fast enough."
-\​- Mario Andretti.
-
 ## Introduction
 
 This lab will walk you through deploying the Oracle Operator for Kubernetes (OraOperator).  In Kubernetes (K8s), an **Operator** is a software component that extends the behaviour of K8s clusters without modifying the Kubernetes code itself.  
 
-K8s Operators are designed to mimic the role of a human data centre operator:
+> K8s Operators are designed to mimic the role of a human data centre operator
 
 The human operator gains their system knowledge from the Subject Matter Experts (SMEs) through documented Standard Operation Procedures (SOPs).  Over time, the human operator also gains the experience of how the systems should behave and how to respond when problems occur, enhancing the maturity of the SOPs.  They may even take responsibility for some of the SMEs tasks such as: deploying software, performing generic configurations, and lifecycle management.
 
@@ -28,15 +25,44 @@ Watch the video below for a quick walk through of the lab.
 
 This lab assumes you have:
 
-* Have [generated a Kubeconfig File](?lab=generate-kubeconfig)
+* [Generated a Kubeconfig File](?lab=generate-kubeconfig)
+* [Created a demo namespace](?lab=generate-kubeconfig#ChangethedefaultNamespaceContext)
 
-## Task 1: Install Cert-Manager
+## Task 1: Kubernetes Resources
 
-The OraOperator uses webhooks, automated messages sent from apps when something happens, to intercept and validate user requests to the OraOperator before they are persisted in etcd.  A sort of table check-constraint to ensure the input is valid before inserting it.
+In the Oracle Database there are built-in Datatypes (CHAR, DATE, INTEGER, etc.) that define the structure of the data and the ways of operating on it.  However, there maybe cases where you may want extend on the built-in Datatypes and define additional kinds of data.  This can be accomplished with "User-Defined Datatypes".
 
-Webhooks require TLS certificates that are generated and managed by Cert-Manager, an open-source certificate management solution designed for Kubernetes.
+Similarly Kubernetes has built-in resources, or API endpoints, that usually represent a collection of concrete objects on the cluster, like a namespace or nodes.  And similarly to User-Defined Datatypes, you can extend the API in Kubernetes to define additional resources using **Custom Resource Definitions**, or **CRDs**.
 
-To install Cert-Manager, in Cloud Shell run:
+Take a look at the built-in resources available, along with their shortnames, API group, whether they are namespaced, and their kind, in your cluster.  
+
+In Cloud Shell:
+
+```bash
+<copy>
+kubectl api-resources
+</copy>
+```
+
+You'll notice there doesn't appear to be anything related to an Oracle Database.  When you install the OraOperator later in this Lab, you will be extending the Kubernetes API in order to define an Oracle Database in Kubernetes, making it "Kubernetes Native".
+
+On their own though, Custom Resources only let you define your objects, but when you combine them with a **Custom Controller**, you now have an **Operator** and a true declarative API to fully manage your new resources.
+
+## Task 2: Resource Controllers
+
+The **kube-control-manager**, which is a core component of the Control Plane, operates in a continuous loop to monitor the current state of the cluster via the **kube-apiserver**.  It manages controllers, including **Custom Controllers** which continuously watch and maintain the desired state of resources.
+
+![kube-control-manager](images/kube-control-manager.png "kube-control-manager")
+
+You will take a closer look at the OraOperator controllers after the installation of the OraOperator, but keep in mind the APIs are declarative.  This will mean that if you define a new Oracle Database **Custom Resource** and it does not currently exist, it is the Controllers responsibility to bring that resource to the desired state... that is: create it.
+
+## Task 3: Install OraOperator
+
+The OraOperator is developed and supported by Oracle, with **Custom Controllers** for provisioning, configuring, and managing the lifecycle of Oracle databases deployed within or outside Kubernetes clusters, including Cloud databases.
+
+To install the OraOperator, you will first need to install a dependency, **cert-manager**:
+
+In Cloud Shell run:
 
 ```bash
 <copy>
@@ -56,11 +82,7 @@ The output will be similar to:
 
 ![kubectl get all -n cert-manager](images/kubectl_cert_manager.png "kubectl get all -n cert-manager")
 
-## Task 2: Install OraOperator
-
-The OraOperator in K8s, is an extension of the Oracle DBA in a K8s cluster.  The OraOperator is developed and supported by Oracle, with "built-in SOPs" for provisioning, configuring, and managing the lifecycle of Oracle databases deployed within or outside K8s clusters, including Cloud databases.
-
-To install the OraOperator, in Cloud Shell run:
+Next to install the OraOperator, in Cloud Shell run:
 
 ```bash
 <copy>
@@ -71,8 +93,6 @@ kubectl apply -f https://raw.githubusercontent.com/oracle/oracle-database-operat
 The output will look similar to this:
 
 ![OraOperator Install](images/oraoperator_install.png "OraOperator Install")
-
-Notice the `customresourcedefinition.apiextensions.k8s.io` resources that were installed.  These **CRDs** define the structure and behaviour of a number of Oracle Database types and allows you to manage them natively in Kubernetes.
 
 To check its installed resources:
 
@@ -86,11 +106,26 @@ The output will be similar to:
 
 ![kubectl get all -n oracle-database-operator-system](images/kubectl_oraoper.png "kubectl get all -n oracle-database-operator-system")
 
-Notice the 
+Notice all the resources in the namespace are **Custom Controllers** which will watch your cluster to ensure the new **Custom Resources** are in their desired state.
+
+### Custom Resource Definitions
+
+Finally, rerun query to get the `api-resources`, but this time filter it on the new **database.oracle.com** group:
+
+```bash
+<copy>
+kubectl api-resources --api-group=database.oracle.com
+</copy>
+```
+
+You will now see all the new CRDs introduced by the OraOperator.
+
+![kubectl api-resources --api-group=database.oracle.com](images/oraoperator_crds.png "kubectl api-resources --api-group=database.oracle.com")
 
 ## Learn More
 
 * [Kubernetes Operators](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/)
+* [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
 * [Oracle Operator for Kubernetes](https://github.com/oracle/oracle-database-operator)
 * [Cert-Manager](https://cert-manager.io/)
 

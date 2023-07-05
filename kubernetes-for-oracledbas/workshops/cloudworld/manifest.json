@@ -11,7 +11,7 @@
             "type": "cloudworld",
             "description": "The Introduction is always first. The title and contents menu title match for the Introduction.",
             "filename": "../../introduction/introduction.md",
-            "last_reviewed": "30-June-2023"
+            "last_reviewed": "04-July-2023"
         },
         {
             "title": "Get Started",
@@ -25,41 +25,34 @@
             "type": "cloudworld",
             "description": "Setup Groups, Policies, and Compartment (IAM)",
             "filename": "../../prepare-oci/prepare-oci.md",
-            "last_reviewed": "30-June-2023"
+            "last_reviewed": "04-July-2023"
         },
         {
             "title": "Lab 2: Deploy Workshop Stack",
             "type": "cloudworld",
             "description": "Using Oracle Resource Manager (ORM), Provision and Configure a Stack",
             "filename": "../../deploy-stack/deploy-stack.md",
-            "last_reviewed": "30-June-2023"
+            "last_reviewed": "04-July-2023"
         },
         {
-            "title": "Lab 3: Connect to Oracle Autonomous Database",
-            "type": "cloudworld",
-            "description": "Connect to the ADB",
-            "filename": "../../sqldevweb-login/sqldevweb-login.md",
-            "last_reviewed": ""
-        },
-        {
-            "title": "Lab 4: Understand Microservices",
+            "title": "Lab 3: Understand Microservices",
             "type": "cloudworld",
             "description": "Overview of Microservices, comparing to familiar technologies",
             "filename": "../../understand-microservices/understand-microservices.md",
-            "last_reviewed": ""
+            "last_reviewed": "04-July-2023"
         },
         {
-            "title": "Lab 5: Understand Kubernetes",
-            "type": "cloudworld",
-            "description": "Overview of K8s, comparing to familiar technologies",
-            "filename": "../../understand-kubernetes/understand-kubernetes.md",
-            "last_reviewed": ""
-        },
-        {
-            "title": "Lab 6: Generate the Kubeconfig File",
+            "title": "Lab 4: Generate the Kubeconfig File",
             "type": "cloudworld",
             "description": "Generate Kubeconfig",
             "filename": "../../generate-kubeconfig/generate-kubeconfig.md",
+            "last_reviewed": "04-July-2023"
+        },
+        {
+            "title": "Lab 5: Explore the Cluster",
+            "type": "cloudworld",
+            "description": "Explore the Kubernetes Cluster",
+            "filename": "../../explore-cluster/explore-cluster.md",
             "last_reviewed": ""
         },
         {
@@ -67,6 +60,13 @@
             "type": "cloudworld",
             "description": "The Oracle Operator for Kubernetes",
             "filename": "../../deploy-oraoperator/deploy-oraoperator.md",
+            "last_reviewed": ""
+        },
+        {
+            "title": "Lab 5: Launch a Pod",
+            "type": "cloudworld",
+            "description": "Overview of K8s, comparing to familiar technologies",
+            "filename": "../../understand-kubernetes/understand-kubernetes.md",
             "last_reviewed": ""
         },
         {
@@ -91,6 +91,13 @@
             "last_reviewed": ""
         },
         {
+            "title": "Lab 4: Connect to Oracle Autonomous Database",
+            "type": "cloudworld",
+            "description": "Connect to the ADB",
+            "filename": "../../sqldevweb-login/sqldevweb-login.md",
+            "last_reviewed": ""
+        },
+        {
             "title": "Lab 11: Clean up Infrastructure",
             "type": "cloudworld",
             "description": "Destroy the Infrastructure",
@@ -101,7 +108,7 @@
             "title": "Lab 12: Clean up OCI Tenancy",
             "type": "cloudworld",
             "description": "Clean up Groups, Policies, and Compartment (IAM)",
-            "filename": "../../teardown-iam/teardown-iam.md",
+            "filename": "../../teardown-iam/teardown-iam.md",   
             "last_reviewed": ""
         },
         {

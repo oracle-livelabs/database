@@ -1,8 +1,5 @@
 # Provision and Configure the Cloud Infrastructure
 
-"And sure enough, even waiting will end... if you can just wait long enough."
-\- William Faulkner
-
 ## Introduction
 
 In this lab, you will provision and configure the Oracle Cloud resources required for the Workshop using *Oracle Resource Manager (ORM)*.  ORM will stand-up the Infrastructure using *Terraform* and perform some basic Configuration using *Ansible*.  
@@ -18,7 +15,7 @@ Watch the video below for a quick walk through of the lab.
 
 * Deploy the Oracle Resource Manager (ORM) Stack
 * Learn about Infrastructure as Code (IaC) and Terraform
-* Learn about Configuration Management and Ansible
+* Learn about Configuration Management (CM) and Ansible
 
 ### Prerequisites
 
@@ -28,7 +25,7 @@ This lab assumes you have:
 
 ## Task 1: Click the Magic Button
 
-The below "Magic Button" will take you directly to the the Create Stack page in the Oracle Cloud Infrastructure (OCI) Console. The button is linked to the Terraform configuration file package which contains the Infrastructure as Code for this workshop.
+The below "Magic Button" will take you directly to the the Create Stack page in the Oracle Cloud Infrastructure (OCI) Console. The button is linked to the Terraform and Ansible configuration file package, referred to as the Stack, which contains the IaC/CM for this workshop.
 
 ### **Notes**
 
@@ -46,7 +43,7 @@ The below "Magic Button" will take you directly to the the Create Stack page in 
 2. Change "Create in compartment" to: `[](var:oci_compartment)`
 3. Click "Next"
 
-![Stack Information](images/stack_information.png "Stack Information")
+![Stack Information](./images/stack_information.png "Stack Information")
 
 ## Task 3: Review the Configuration Variables
 
@@ -61,7 +58,7 @@ but it has been slimmed down, via variables, specifically for this workshop.  Th
 
 Tick the "Show Database Options?" to see what can be customised, but please do not change any values.
 
-![Configuration Variables](images/configuration_variables.png "Configuration Variables")
+![Configuration Variables](./images/configuration_variables.png "Configuration Variables")
 
 ### Please do not change anything on this page, click "Next"
 
@@ -72,9 +69,9 @@ We're ready to deploy the Infrastructure and do some minor Configuration Managem
 1. Tick "Run apply"
 2. Click "Create"
 
-![Review](images/review.png "Review")
+![Review](./images/review.png "Review")
 
-The Infrastructure deployment and configuration will take approximately **15 minutes**.  Grab a cup of tea and continue to the next tasks to learn about IaC using Terraform and Ansible for Configuration Management using Ansible.
+The Infrastructure deployment and configuration will take approximately **15 minutes**.  Grab a cup of tea and continue to the next tasks to learn about IaC using Terraform and Configuration Management using Ansible.
 
 ### Troubleshooting
 
@@ -82,15 +79,13 @@ When using OCI Free Tier, it is possible that the Stack deployment will fail due
 
 ## Task 5: Learn about Infrastructure as Code (IaC) using Terraform
 
-Terraform is a tool for managing infrastructure as code (IaC) that can be version-controlled.  Take a look at the IaC that creates the Autonomous Oracle Database (ADB) for this Workshop:
+Terraform is a tool for managing infrastructure as code (IaC) that can be version-controlled.  Take a look at the IaC that creates the Autonomous Oracle Database (ADB) for this Workshop.  The ADB is defined, in 16 lines, using the `oci_database_autonomous_database` resource from the [Oracle provided Terraform OCI provider](https://registry.terraform.io/providers/oracle/oci/latest/docs).  Most the arguments are set by variables, allowing you to customise the ADB without having to rewrite the code which describes it.  When you **Apply** the IaC, it calls underlying APIs to provision the resource as it is defined, and records it in a "State" file.
 
-![ADB Terraform](images/adb_terraform.png "ADB Terraform")
-
-The ADB is defined, in 16 lines, using the `oci_database_autonomous_database` resource from the [Oracle provided Terraform OCI provider](https://registry.terraform.io/providers/oracle/oci/latest/docs).  Most the arguments are set by variables, allowing you to customise the ADB without having to rewrite the code which describes it.  When you **Apply** the IaC, it calls underlying APIs to provision the resource as it is defined, and records it in a "State" file.
-
-> use variables where permitted and constants where mandated
+![ADB Terraform](./images/adb_terraform.png "ADB Terraform")
 
 For the DBA this is invaluable as it means you can define the ADB once, use variables where permitted and constants where mandated for your organisations standards.  Those 16 lines of IaC can then be used over and over to provision, and tear-down, hundreds of ADBs.  
+
+> use variables where permitted and constants where mandated
 
 As Terraform is declarative, that IaC can also be used to modify existing ADBs that were created by by it, by comparing the configuration in the "State" file with the real-world resources.
 
@@ -111,7 +106,7 @@ Scroll through and familiarise yourself with the logs.  Whether using ORM or any
 * Plan counts
 * The actions being performed
 
-![Terraform Log](images/terraform_log.png "Terraform Log")
+![Terraform Log](./images/terraform_log.png "Terraform Log")
 
 **Best Practice** It is best practice to run a `terraform plan` and review what actions will take place before running a `terraform apply` to implement those actions.  This ensures that resources (databases, networks, etc) are not accidentally modified or deleted.
 
@@ -123,9 +118,9 @@ All of what you do manually in this Workshop can be automated by Ansible as part
 
 > All of what you do manually in this Workshop can be automated by Ansible
 
-In the Workshop Stack, Terraform will write a number of variable and inventory files (2) describing the Infrastructure that it has provisioned.  It will then call Ansible (3) to run Playbooks (a series of tasks that include conditionals, loops, and error handling) against the infrastructure definition (4) to configure it (5).  
+In the Workshop Stack, Terraform will write a number of variable and inventory files **(2)** describing the Infrastructure that it has provisioned.  It will then call Ansible **(3)** to run Playbooks (a series of tasks that include conditionals, loops, and error handling) against the infrastructure definition **(4)** to configure it **(5)**.  
 
-![Terraform and Ansible](images/terraform_ansible.png "Terraform and Ansible")
+![Terraform and Ansible](./images/terraform_ansible.png "Terraform and Ansible")
 
 ## Task 7: Review the Logs - Ansible
 
@@ -133,7 +128,7 @@ While Ansible can be used to configure any type of Infrastructure, it is limited
 
 Scrolling through the actions section of the log, you will see Ansible kick into action to start Configuration Management.
 
-![Ansible Log](images/ansible_log.png "Ansible Log")
+![Ansible Log](./images/ansible_log.png "Ansible Log")
 
 It is important to note, Ansible has a robust community and ecosystem, with many third-party modules available for common tasks like interacting with cloud providers, databases, and other services.  
 

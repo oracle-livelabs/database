@@ -1,15 +1,8 @@
 # Provision and Bind to an Oracle Autonomous Database (ADB)
 
-"If you build it, they will come."
-\- Ray Kinsella (paraphrased)
-
 ## Introduction
 
 In this lab, you will provision a new Oracle Autonomous Database (ADB) and bind to an existing one using the OraOperator.
-
-In order to manage the **AutonomousDatabase** type, the OraOperator also introduces custom **Controllers** to manage the  **AutonomousDatabase** type within the K8s cluster. These controllers act as "built-in SOPs" specifically designed for handling the  **AutonomousDatabase** resource.
-
-The controllers provide a declarative API, allowing users to specify the desired state of the  **AutonomousDatabase** resource.  They continuously monitor the current state of the resource and take actions to reconcile any differences between the desired state and the actual state.
 
 ![OraOperator for ADB](images/k8s_operator_adb.png "OraOperator for ADB")
 
@@ -31,30 +24,7 @@ This lab assumes you have:
 * A [Running and Healthy OraOperator](?lab=deploy-oraoperator)
 * A provisioned Oracle ADB in OCI
 
-## Task 1: Create a Namespace
-
-In K8s, a *Namespace* is a virtual cluster that provides a way to divide the physical K8s cluster resources logically between multiple users or teams.  You can think of Namespaces similarly to Schemas, a logical collection of objects, or in the case of K8s, resources.
-
-In Cloud Shell, create a namespace for the AutonomousDatabase Resources:
-
-```bash
-<copy>
-kubectl create namespace adb
-</copy>
-```
-
-Output:
-
-```text
-namespace/adb created
-```
-
-### Namespace Best Practices
-
-* For production clusters, avoid using the `default` namespace. Instead, make other namespaces and use those.
-* Avoid creating namespaces with the prefix `kube-`, it is reserved for K8s system namespaces.
-
-## Task 2: Retrieve the existing ADB OCID
+## Task 1: Retrieve the existing ADB OCID
 
 During the [Deploy Workshop Stack Lab](?lab=setup-stack), a new Autonomous Database was provisioned in Oracle Cloud Infrastructure for you.
 
@@ -77,7 +47,7 @@ echo "ADB OCID: $ADB_OCID"
 </copy>
 ```
 
-## Task 3: Create a manifest to Bind
+## Task 2: Create a manifest to Bind
 
 Create a manifest file to define the resource of an existing ADB, leveraging the **AutonomousDatabase** Custom Resource:
 
@@ -101,20 +71,20 @@ The above YAML sends a request to the `database.oracle.com/v1alpha1` API exposed
 
 The resource `name` will be called `adb-existing`.  
 
-It will bind to an existing ADB with `autonomousDatabaseOCID` equal to `$ADB_OCID` (substituted by the real value stored in *Task 2*).
+It will bind to an existing ADB with `autonomousDatabaseOCID` equal to `$ADB_OCID` (substituted by the real value stored in *Task 1*).
 
 **Important:** the `spec.hardLink: false` (default) field indicates that if you delete this `AutonomousDatabase` resource from the K8s cluster, *do not* delete the ADB associated with it.
 > Good for Production... Bad for DevOps!
 
 If it were set to `true` then deleting the resource from K8s *WOULD* delete ADB itself.
 
-## Task 4: Apply the existing ADB Manifest
+## Task 3: Apply the existing ADB Manifest
 
 Define the **AutonomousDatabase** Custom Resource in K8s by applying the manifest file to the `adb` namespace:
 
 ```bash
 <copy>
-kubectl apply -f adb_bind.yaml -n adb
+kubectl apply -f adb_bind.yaml
 </copy>
 ```
 
@@ -124,15 +94,15 @@ Output:
 autonomousdatabase.database.oracle.com/adb-existing created
 ```
 
-## Task 5: Review the Existing ADB Custom Resource
+## Task 4: Review the Existing ADB Custom Resource
 
 The bind manifest created a new *AutonomousDatabase* resource called *adb-existing* in the *adb* namespace.
 
-To retrieve its details run (`kubectl get <resource> <resource_name> -n <namespace>`):
+To retrieve its details run (`kubectl get <resource> <resource_name> -n <namespace>`).  You can omit the `-n <namespace>` as your `kubeconfig` context has already set it for you:
 
 ```bash
 <copy>
-kubectl get AutonomousDatabase adb-existing -n adb
+kubectl get AutonomousDatabase adb-existing
 </copy>
 ```
 
@@ -144,13 +114,15 @@ To get more details, lets describe the resource (`kubectl describe <resource_typ
 
 ```bash
 <copy>
-kubectl describe adb adb-existing -n adb
+kubectl describe adb adb-existing
 </copy>
 ```
 
 A lot of interesting information will be displayed including CPU and Storage settings, Connection Strings, and its Lifecycle State (AVAILABLE).  You will modify these fields later to manage the ADB via K8s.
 
-## Task 6: Generate Password/Generate Wallet Manifest
+Note that in the last command `AutonomousDatabase` was abbreviated to `adb`.  This is the "SHORTNAME" for the `AutonomousDatabase` kind determined by running `kubectl api-resources`.
+
+## Task 5: Generate Password/Generate Wallet Manifest
 
 The password currently assigned to the ADB was randomised and is unknown, so you will need to set it for connectivity.  As calls to the OraOperator controllers are declarative you will be instructing the Controller to modify the ADB to the newly defined, desired state.  
 
@@ -211,13 +183,13 @@ Take a quick look at the syntax:
 
 You are defining two resources of `kind: Secret` of `type: Opaque`.  The first is named: `adb-admin-password` and the second is named: `adb-instance-wallet-password`.  The last part of the manifest **redefines** the `adb-existing` resource, setting the adminPassword and wallet.  Under the wallet section, you are specifying the name of the `Secret`, `adb-tns-admin` that will be defined to to store the wallet.
 
-## Task 7: Apply Manifest
+## Task 6: Apply Manifest
 
 Apply the manifest in Cloud Shell:
 
 ```bash
 <copy>
-kubectl apply -f adb_modify.yaml -n adb
+kubectl apply -f adb_modify.yaml
 </copy>
 ```
 
@@ -229,13 +201,13 @@ secret/adb-instance-wallet-password created
 autonomousdatabase.database.oracle.com/adb-existing configured
 ```
 
-## Task 8: Review ADB Secrets
+## Task 7: Review ADB Secrets
 
 Get the Secrets in the ADB namespace (`kubectl get secrets -n <namespace>`):
 
 ```bash
 <copy>
-kubectl get secrets -n adb
+kubectl get secrets
 </copy>
 ```
 
@@ -247,7 +219,7 @@ You created the first two and instructed OraOperator to create the third `adb-tn
 
 ```bash
 <copy>
-kubectl describe secrets adb-tns-admin -n adb
+kubectl describe secrets adb-tns-admin
 </copy>
 ```
 
