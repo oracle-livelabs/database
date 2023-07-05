@@ -52,7 +52,7 @@ Query Brews has evolved into a national success with "Relational Red Ale" being 
 
 Building on the benefits of the "containerised" schemas, you and your team of DBAs decide to take action and break the infrastructure up.
 
-![Isolated Database](./images/pdb_schema.png "Isolated Database")
+![Isolated Database](./images/isolated_schema.png "Isolated Database")
 *Microservices*
 
 Each brewery function is allocated its own database, ensuring:
