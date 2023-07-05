@@ -159,8 +159,7 @@ Execute a metadata export using this par file:
 
     <details>
     <summary>*click here if you want to see the Data Pump import parameter file and a short description*</summary>
-
-
+    
     | Parameter | Comment |
     | :-------- | :-----|
     | DIRECTORY=XTTS\_METADATA\_DIR | Specifies the default location to which Export can write the dump file set and the log file |
@@ -169,7 +168,6 @@ Execute a metadata export using this par file:
     | sqlfile=upgr\_metadata.sql | The name of the file containing SQL statements of the metadata  |
     | job\_name=cre\_metadata | The name of the import Data Pump job  |
     {: title="Data Pump Metadata Import SQL Parameter File"}
-
     </details>
 
     So you're going to create a SQL file containing all metadata called "upgr\_metadata.sql" located in the database directory "XTTS\_METADATA\_DIR" 

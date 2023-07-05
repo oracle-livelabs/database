@@ -559,7 +559,7 @@ Also the metadata import parameter file was precreated for you.
     | metrics=y | This setting indicates you want additional information about the job reported to the Data Pump log file  |
     | logtime=all | Adds timestamp information to import opertaions  |
     | full=y | Specifies that you want to perform a full database mode export   |
-    | transport\_datafiles=\<list of files\> | list of data files that are imported into the target database  |
+    | transport\_datafiles=<list of files> | list of data files that are imported into the target database  |
     {: title="Data Pump Metadata Import Parameter File"}
 
     </details>
