@@ -1,7 +1,9 @@
-# Lab 6: Cleanup Inventory and Final Checks
+# Lab 6:  Final Checks
 
 ## Introduction 
 You are done now. You did patch out-of place what we highly recommend, and you may have done also a more work-intense in-place patching exercise. So, let us check some things in the environment. 
+
+![Process flow lab 6](./images/lab6-process-flow.png " ")
 
 Estimated Time: 15 minutes
 

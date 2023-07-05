@@ -2,7 +2,11 @@
 
 ## Introduction 
 
-In this lab exercise you will install Oracle Database 19.19.0 into a separate home and patch it fully unattended in one single operation. Out-of-place patching is the preferred method, not only for the Database home but also for the Grid Infrastructure Home.
+In this lab exercise you will install Oracle Database 19.19.0 into a separate home and patch it fully unattended in one single operation. 
+
+![Process flow lab 2](./images/lab2-process-flow.png " ")
+
+Out-of-place patching is the preferred method, not only for the Database home but also for the Grid Infrastructure Home.
 
 Estimated Time: 15 minutes
 
@@ -47,7 +51,7 @@ Switch to the tab called "__19.19.0 Home__".
 
     ![Source target environment](./images/source-19-19-env.png " ")
 
-2. Create the new Oracle Home Directory
+2. Create the new 19.19 Oracle Home Directory
 
     ```
     <copy>
@@ -57,7 +61,7 @@ Switch to the tab called "__19.19.0 Home__".
 
     ![create new directory 1919](./images/mkdir-target-1919.png " ")
 
-3. Change into new Oracle_Home
+3. Change into 19.19 Oracle_Home
 
     ```
     <copy>
@@ -128,54 +132,52 @@ The patches you are going to install are all unpacked into separate directories.
 
 To install all the patches in one single action, you will use the `-applyRU` and `-applyOneOffs` option of the Oracle Universal Installer. Since MRPs were unknown to the OUI a while ago you need to call every included patch separately.
 
-You can either copy & paste the entire command or call a script. Open only one of the next two choices, copy the command and paste it into your target terminal tab.
+You can either copy & paste the entire command (first option) or call a script (second option). Use only __one__ of the next two options, copy the command and paste it into the "19.19.0 Home" terminal tab.
 
-<details>
- <summary>*click here to copy the whole runInstaller command*</summary>
+SIDE NOTE: While the installation is ongoing, please switch to the 19.18 tab and continue with the next lab. You're going to execute the "root.sh" script later on in one of the next labs.
 
-  ```
-      <copy>
-    ./runInstaller -applyRU /home/oracle/stage/ru/35042068  \
- -applyOneOffs /home/oracle/stage/ojvm/35050341,/home/oracle/stage/dpbp/35261302,/home/oracle/stage/mrp/35333937/34340632,/home/oracle/stage/mrp/35333937/35012562,/home/oracle/stage/mrp/35333937/35037877,/home/oracle/stage/mrp/35333937/35116995,/home/oracle/stage/mrp/35333937/35225526 \
-   -silent -ignorePrereqFailure -waitforcompletion \
-    oracle.install.option=INSTALL_DB_SWONLY \
-    UNIX_GROUP_NAME=oinstall \
-    INVENTORY_LOCATION=/u01/app/oraInventory \
-    ORACLE_HOME=/u01/app/oracle/product/1919 \
-    ORACLE_BASE=/u01/app/oracle \
-    oracle.install.db.InstallEdition=EE \
-    oracle.install.db.OSDBA_GROUP=dba \
-    oracle.install.db.OSOPER_GROUP=dba \
-    oracle.install.db.OSBACKUPDBA_GROUP=dba \
-    oracle.install.db.OSDGDBA_GROUP=dba \
-    oracle.install.db.OSKMDBA_GROUP=dba \
-    oracle.install.db.OSRACDBA_GROUP=dba \
-    SECURITY_UPDATES_VIA_MYORACLESUPPORT=false \
-    DECLINE_SECURITY_UPDATES=true
-    </copy>
-  ```
-![runInstaller output ](./images/run-installer-output.png " ")
-</details>
 
-or
-
-<details>
- <summary>*click here to copy the command used execute the script*</summary>
-
-  ```
+1. Option
+    ```
     <copy>
-     sh /home/oracle/patch/install_patch.sh
+    ./runInstaller -applyRU /home/oracle/stage/ru/35042068  \
+    -applyOneOffs /home/oracle/stage/ojvm/35050341,/home/oracle/stage/dpbp/35261302,/home/oracle/stage/mrp/35333937/34340632,/home/oracle/stage/mrp/35333937/35012562,/home/oracle/stage/mrp/35333937/35037877,/home/oracle/stage/mrp/35333937/35116995,/home/oracle/stage/mrp/35333937/35225526 \
+      -silent -ignorePrereqFailure -waitforcompletion \
+        oracle.install.option=INSTALL_DB_SWONLY \
+        UNIX_GROUP_NAME=oinstall \
+        INVENTORY_LOCATION=/u01/app/oraInventory \
+        ORACLE_HOME=/u01/app/oracle/product/1919 \
+        ORACLE_BASE=/u01/app/oracle \
+        oracle.install.db.InstallEdition=EE \
+        oracle.install.db.OSDBA_GROUP=dba \
+        oracle.install.db.OSOPER_GROUP=dba \
+        oracle.install.db.OSBACKUPDBA_GROUP=dba \
+        oracle.install.db.OSDGDBA_GROUP=dba \
+        oracle.install.db.OSKMDBA_GROUP=dba \
+        oracle.install.db.OSRACDBA_GROUP=dba \
+        SECURITY_UPDATES_VIA_MYORACLESUPPORT=false \
+        DECLINE_SECURITY_UPDATES=true
     </copy>
-  ```
-![runInstaller shell script output ](./images/run-installer-shell-output.png " ")
-</details>
+    ```
+    ![runInstaller output ](./images/run-installer-output.png " ")
+
+
+2. Option
+
+    ```
+    <copy>
+    sh /home/oracle/patch/install_patch.sh
+    </copy>
+    ```
+
+    ![runInstaller shell script output ](./images/run-installer-shell-output.png " ")
 
 
 
 The installation will take approximately 10 minutes. 
 
 <details>
- <summary>*click here to see the full output*</summary>
+ <summary>*click here to see the full runInstaller.sh output*</summary>
 
   ``` text
 [CDB2] oracle@hol:/u01/app/oracle/product/1919
@@ -236,9 +238,8 @@ $
   ```
 </details>
 
-Once the installation is completed, you will need to execute `root.sh` at the end of the following lab. </br>
+The patch install is taking about ten minutes. While the patch install is ongoing *proceed to the next lab*. You're going to execute `root.sh` at the end of the following lab. 
 
-In the mean time while the patch is installed you may *proceed to the next lab*.
 
 
 

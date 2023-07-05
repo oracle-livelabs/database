@@ -1,7 +1,10 @@
 # Lab 3: Checks in the 19.18 Environment
 
 ## Introduction 
-We will use this lab to check several things in the source environment while the installation in the new environment progresses.
+We will use this lab to check several things in the 19.18 environment while the installation in the 19.19 environment progresses. At the end of this lab we're going to execute then "root.sh" in the 19.19 tab.
+
+![Process flow lab 3](./images/lab3-process-flow.png " ")
+
 
 Estimated Time: 15 minutes
 
@@ -15,6 +18,7 @@ This lab assumes you have:
 
 - Connected to the lab
 - Switch to the other tab titled "__19.18.0 Home__" 
+
 ![activate 19.18 tab ](./images/19-18-home.png " ")
 
 ## Task 1: Checks

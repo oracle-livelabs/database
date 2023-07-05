@@ -5,7 +5,7 @@
   "tutorials": [
     {
       "title": "Lab 1: Introduction and Overview",
-      "description": "The Introduction to Patching.",
+      "description": "The Introduction to Patching",
       "filename": "../../lab1-introduction-overview/lab1-introduction-and-overview.md"
     },
     {
@@ -14,18 +14,18 @@
       "filename": "../../lab2-installation-patching/lab2-installation-and-patching.md"
     },
     {
-      "title": "Lab 3: Checks in the SOURCE Environment",
+      "title": "Lab 3: Checks in the 19.18 Environment",
       "description": "Common checks when patching",
       "filename": "../../lab3-db-19-18-checks/lab3-db-19-18-checks.md"
     },
     {
       "title": "Lab 4: AutoUpgrade for patching",
-      "description": "Use AutoUpgrade for patching.",
+      "description": "Use AutoUpgrade for patching",
       "filename": "../../lab4-autoupgrade-4-patching/lab4-autoupgrade-4-patching.md"
     },
     {
       "title": "Lab 5: In-Place Patching",
-      "description": "Patching an existing OH.",
+      "description": "Patching an existing OH",
       "filename": "../../lab5-in-place-patching/lab5-in-place-patching.md"
     },
     {

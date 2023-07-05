@@ -3,6 +3,8 @@
 ## Introduction 
 In this lab exercise you will patch the CDB2 database from 19.18.0 to 19.19.0 with just two commands.
 
+![Process flow lab 4](./images/lab4-process-flow.png " ")
+
 Estimated Time: 15 minutes
 
 ### Objectives
@@ -101,7 +103,7 @@ No additional tasks needed. You can progress.
 ## Task 6: AutoUpgrade Deploy
 
 You can start AutoUpgrade now in deploy mode.
-It will lift the database into the new home and execute all necessary tasks.
+It will lift the database into the new 19.19 home and execute all necessary tasks.
 
   ```
     <copy>

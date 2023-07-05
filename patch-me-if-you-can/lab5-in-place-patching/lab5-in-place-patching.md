@@ -3,6 +3,8 @@
 ## Introduction 
 The benefit of the out-of-place patching method is not only that the previous home is preserved for a potential fallback but it only allows much shorter downtime. In order to see the difference you could patch now the 19.18.0 home in-place.
 
+![Process flow lab 5](./images/lab5-process-flow.png " ")
+
 Estimated Time: 25 minutes
 
 ### Objectives
@@ -1598,8 +1600,24 @@ SQL Patching tool complete on Mon Jul  3 10:39:34 2023
 </details>
 
 
+## Task 9: Opatch Cleanup
 
-## Task 9: Inventory Check and Summary
+  ```
+    <copy>
+     $ORACLE_HOME/OPatch/opatch util listorderedinactivepatches
+    </copy>
+  ```
+
+
+  ```
+    <copy>
+     $ORACLE_HOME/OPatch/opatch util deleteinactivepatches
+    </copy>
+  ```
+
+
+
+## Task 10: Inventory Check and Summary
 
 Now you see __why out-of-place patching is far superior__ over in-place patching. While you prepared a new home fully unattended before, in contrast you've had to do all the manual work now all by yourself. 
 In addition, the downtime was factors higher. 
