@@ -1,17 +1,16 @@
-# Working with JSON and the Duality Views
+# Run queries using the DBMS_SEARCH index
 
 ## Introduction
 
-This lab walks you through the steps to create a dbms_search index and add tables to it.
+This lab walks you through the steps of how to use a DBMS_SEARCH index.
 
 Estimated Time: 10 minutes
 
 ### Objectives
 
 In this lab, you will:
-* Create a DBMS_SEARCH index
-* Add tables to the index
-* Explore the layout of the index, the data that has been indexed, and the metadata which will later be used to fetch back results
+* Perform a simple search
+* Use the search index results to link back to the original table for additional information
 
 ### Prerequisites
 
@@ -24,7 +23,7 @@ This lab assumes you have:
 
 Before we start we need to be logged into SQL Developer Web. If you've just finished the previous lab, you should already be in it. If not, go back and repeat Lab 2 task 1.
 
-A DBMS|_SEARCH index is a JSON search index, which is a special type of Oracle Text index designed for JSON data. As such, we can use Oracle Text's standard CONTAINS clause, or the JSON-specific JSON\_TEXTCONTAINS search against it.
+A DBMS\_SEARCH index is a JSON search index, which is a special type of Oracle Text index designed for JSON data. As such, we can use Oracle Text's standard CONTAINS clause, or the JSON-specific JSON\_TEXTCONTAINS search against it.
 
 1. First, let's remind ourselves what sources we have in our index. We can do that by querying the METADATA column of the index table. By using a GROUP BY expression we can see the number of rows for each source:
 
@@ -38,7 +37,11 @@ A DBMS|_SEARCH index is a JSON search index, which is a special type of Oracle T
 
     ![source count](images/source-count.png " ")
 
+    You'll see that we have a single row for every row of every table we have indexed.
+
 2. Next we're going to do a simple CONTAINS search to fetch the metadata for all indexed rows where the word 'johnson' occurs. The CONTAINS clause takes the column name to search (in our case DATA, **not** METADATA, since DATA is the indexed column), and a search string. It returns > 0 for rows which match. The search string is not case-sensitive.
+
+    Note that when you actually look into column DATA in our search index, you will find the column to be empty. We do not store the original raw data in the search index, but this column rather acts as a proxy for the original data in the original tables we have indexed.
 
     Paste the following and click "Run":
 
@@ -51,7 +54,7 @@ A DBMS|_SEARCH index is a JSON search index, which is a special type of Oracle T
 
     ![simple CONTAINS search](images/simple-contains.png " ")
 
-    Remember, we're only fetching the **METADATA** here. So we won't see the original data, just sufficient info to allow us to know *where* the data can be found. In this case, we get one hit in the HR employees table, and several from the SH customers table. Let's exclude the tables in the SR schema and see what we get:
+    Remember, we're only fetching the **METADATA** here. So we won't see the original data, just sufficient info to allow us to know *where* the data can be found. In this case, we get one hit in the HR employees table, and several from the SH customers table. Let's exclude the tables in the SH schema and see what we get:
 
     ```
     <copy>
@@ -98,7 +101,7 @@ So far we've just fetched back metadata telling us where the search terms can be
     {"OWNER":"HR","SOURCE":"EMPLOYEE_JOBS","KEY":{"EMPLOYEE_ID":100}}
     ```
 
-    We can see that the KEY field is actually an array. This is to allow for composite primary keys, but all our tables and views have singleton primary keys, so that's not an issue. Using "simple dot notation", we can refer to the key value here as <tablealias>.<columnname>.KEY.EMPLOYEE_ID. So to 
+    We can see that the KEY field is actually an object. This is to allow for composite primary keys. All our tables and views have singleton primary keys, so using "simple dot notation", we can refer to the key value here as "TABLE ALIAS".METADATA.KEY.EMPLOYEE_ID. So to 
     to search in the employees data and join the original table, we can run:
 
     ```
