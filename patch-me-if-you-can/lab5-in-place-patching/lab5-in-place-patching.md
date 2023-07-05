@@ -239,7 +239,7 @@ Start running the patching conflict check:
 Part of the output is the following paragraph:
 
     ``` 
-    - Please rollback the relevant overlay patches of the subset patches which are conflicting and apply the superset patch
+    Please rollback the relevant overlay patches of the subset patches which are conflicting and apply the superset patch
     Summary of Conflict Analysis:
 
     There are no patches that can be applied now.
@@ -649,11 +649,7 @@ You see, it is a lot of extra work to patch in-place. So far, you did only clean
     </copy>
     ```
 
-    Also here opatch asks you if you want to continue - answer again with "__y__":
-
-    ![opatch apply](./images/opatch-apply.png " ")
-
-    and it asks you if the system is ready for patching which you can answer with "__y__" as well:
+    Here opatch asks you if you want to continue and if the system is ready for patching. Anwer both questions with "__y__":
 
     ![opatch apply](./images/opatch-apply-2.png " ")
 
@@ -1600,24 +1596,7 @@ SQL Patching tool complete on Mon Jul  3 10:39:34 2023
 </details>
 
 
-## Task 9: Opatch Cleanup
-
-  ```
-    <copy>
-     $ORACLE_HOME/OPatch/opatch util listorderedinactivepatches
-    </copy>
-  ```
-
-
-  ```
-    <copy>
-     $ORACLE_HOME/OPatch/opatch util deleteinactivepatches
-    </copy>
-  ```
-
-
-
-## Task 10: Inventory Check and Summary
+## Task 9: Inventory Check and Summary
 
 Now you see __why out-of-place patching is far superior__ over in-place patching. While you prepared a new home fully unattended before, in contrast you've had to do all the manual work now all by yourself. 
 In addition, the downtime was factors higher. 
@@ -1634,6 +1613,162 @@ Finally check the inventory:
 
 ![opatch lspatches output](./images/opatch-lspatches.png " ")
 
+
+## Task 10: Opatch Cleanup
+So you think you're done with the in-pace patching?
+Starting with opatch version 37 you can check if you have inactive patches in your ORACLE_HOME directory and remove them.
+
+1. Inactive Patches
+
+    ```
+    <copy>
+    $ORACLE_HOME/OPatch/opatch util listorderedinactivepatches
+    </copy>
+    ```
+
+    ![opatch inactive patches output](./images/opatch-inactive-patches.png " ")
+
+    <details>
+    <summary>*click here to see the full opatch listorderedinactivepatches putput*</summary>
+
+    ``` text
+    [UP19] oracle@hol:~/stage/mrp/35333937
+    $ $ORACLE_HOME/OPatch/opatch util listorderedinactivepatches
+    Oracle Interim Patch Installer version 12.2.0.1.37
+    Copyright (c) 2023, Oracle Corporation.  All rights reserved.
+
+
+    Oracle Home       : /u01/app/oracle/product/19
+    Central Inventory : /u01/app/oraInventory
+      from           : /u01/app/oracle/product/19/oraInst.loc
+    OPatch version    : 12.2.0.1.37
+    OUI version       : 12.2.0.7.0
+    Log file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2023-07-03_10-40-06AM_1.log
+
+    Invoking utility "listorderedinactivepatches"
+    List Inactive patches option provided
+
+    The oracle home has the following inactive patch(es) and their respective overlay patches:
+    -Inactive RU/CPU 34765931, installed on: Tue Jan 24 00:00:14 CET 2023, with overlays: 34861493, 31222103, 34557500, 35156936, 35246710, 34974052, 32727143, 35160800, 35162446
+    -Inactive RU/CPU 34411846, installed on: Tue Nov 08 22:35:03 CET 2022, with no overlays
+    -Inactive RU/CPU 34786990, installed on: Thu Jan 26 17:41:26 CET 2023, with no overlays
+    Total: 3 inactive RU/CPU patch(es) and 9 inactive overlay patch(es).
+
+    OPatch succeeded.
+    [UP19] oracle@hol:~/stage/mrp/35333937
+    $
+    ```
+    </details>
+
+
+2. Clean up Inactive Patches
+
+    ```
+    <copy>
+    $ORACLE_HOME/OPatch/opatch util deleteinactivepatches
+    </copy>
+    ```
+
+    ![opatch delete inactive patches ](./images/opatch-deleteinactive-patches-1.png " ")
+
+    So what does this message
+    ``` text
+    Warning: The value of parameter RETAIN_INACTIVE_PATCHES set to 0 is not supported
+    The number of inactive patches in oracle home is 3. RETAIN_INACTIVE_PATCHES must be set between 1 and 2, inclusive.
+    Please update the value of RETAIN_INACTIVE_PATCHES in OPatch config file OPatch/config/opatch.properties
+    ```
+    mean? </br>
+    __RETAIN_INACTIVE_PATCHES__ is the amount of inactive patches opatch will not delete. You have 3 inactive patches in your ORACLE_HOME, opatch must keep the last inactive one, so you can set the parameter value to either 1 or 2 depending on how many inactive patches you want to keep. </br>
+    Currently the parameter is set to zero:
+
+    ```
+    <copy>
+    grep RETAIN $ORACLE_HOME/OPatch/config/opatch.properties
+    </copy>
+    ```
+
+    ![value retain_inactive_patches_parameter ](./images/retain-inactive-patches.png " ")    
+
+3. Update __opatch.properties__ file </br>
+   Change the parameter __RETAIN_INACTIVE_PATCHES__ in $ORACLE_HOME/OPatch/config/opatch.properties to one:
+
+    ```
+    <copy>
+    sed -i_ORIG -e 's/RETAIN_INACTIVE_PATCHES=0/RETAIN_INACTIVE_PATCHES=1/' $ORACLE_HOME/OPatch/config/opatch.properties
+    </copy>
+    ```
+
+    ![value retain_inactive_patches_parameter ](./images/sed-retain.png " ")    
+
+    sed takes a backup of the current "opatch.properties" file and then changes the RETAIN_INACTIVE_PATCHES parameter value to 1:
+
+    <copy>
+    grep RETAIN $ORACLE_HOME/OPatch/config/opatch.properties
+    </copy>
+    ```
+
+    ![value retain_inactive_patches_parameter ](./images/retain-inactive-patches-1.png " ")    
+
+
+4. Clean up all Inactive Patches Except Last One </br>
+It's a good idea to run this task always with the "-silent" option, because depending on the amount of patches "opatch deleteinactivepatches" has to remove, this might take a while: 
+
+    ```
+    <copy>
+    $ORACLE_HOME/OPatch/opatch util deleteinactivepatches -silent
+    </copy>
+    ```
+
+    ![opatch delete inactive patches ](./images/opatch-deleteinactive-patches-silent.png " ")
+
+    <details>
+    <summary>*click here to see the full opatch deleteinactivepatches output*</summary>
+
+    ``` text
+    [UP19] oracle@hol:~/stage/mrp/35333937
+    $ $ORACLE_HOME/OPatch/opatch util deleteinactivepatches -silent
+    Oracle Interim Patch Installer version 12.2.0.1.37
+    Copyright (c) 2023, Oracle Corporation.  All rights reserved.
+
+
+    Oracle Home       : /u01/app/oracle/product/19
+    Central Inventory : /u01/app/oraInventory
+      from           : /u01/app/oracle/product/19/oraInst.loc
+    OPatch version    : 12.2.0.1.37
+    OUI version       : 12.2.0.7.0
+    Log file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2023-07-05_12-49-27PM_1.log
+
+    Invoking utility "deleteinactivepatches"
+    Inactive Patches Cleanup option provided
+    Delete Inactive Patches .......
+
+    Opatch will delete the following inactive patch(es) and their overlays:
+    -Inactive RU/CPU 34765931, installed on: Tue Jan 24 00:00:14 CET 2023, with overlays: 34861493, 31222103, 34557500, 35156936, 35246710, 34974052, 32727143, 35160800, 35162446
+    -Inactive RU/CPU 34411846, installed on: Tue Nov 08 22:35:03 CET 2022, with no overlays
+    Total: 2 inactive RU/CPU patch(es) and 9 inactive overlay patch(es).
+
+    OPatch will keep the following inactive patch(es) and their overlays:
+    -Inactive RU/CPU 34786990, installed on: Thu Jan 26 17:41:26 CET 2023, with no overlays
+    Total: 1 inactive RU/CPU patch(es) and 0 inactive overlay patch(es).
+
+    Do you want to proceed? [y|n]
+    Y (auto-answered by -silent)
+    User Responded with: Y
+    Deleted patch: 34861493
+    Deleted patch: 31222103
+    Deleted patch: 34557500
+    Deleted patch: 35156936
+    Deleted patch: 35246710
+    Deleted patch: 34974052
+    Deleted patch: 32727143
+    Deleted patch: 35160800
+    Deleted patch: 35162446
+    Deleted patch: 34765931
+    Deleted patch: 34411846
+
+    OPatch succeeded.
+    ```
+</details>
 
 You are done with in-place patching and you may *proceed to the next lab*.
 
