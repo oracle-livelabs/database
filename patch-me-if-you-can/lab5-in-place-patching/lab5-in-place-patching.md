@@ -1678,8 +1678,7 @@ Starting with opatch version 37 you can check if you have inactive patches in yo
     Please update the value of RETAIN_INACTIVE_PATCHES in OPatch config file OPatch/config/opatch.properties
     ```
     mean? </br>
-    __RETAIN_INACTIVE_PATCHES__ is the amount of inactive patches opatch will not delete. You have 3 inactive patches in your ORACLE_HOME, opatch must keep the last inactive one, so you can set the parameter value to either 1 or 2 depending on how many inactive patches you want to keep. </br>
-    Currently the parameter is set to zero:
+    __RETAIN\_INACTIVE\_PATCHES__ is the amount of inactive patches opatch will not delete.    Currently the parameter is set to zero:
 
     ```
     <copy>
@@ -1688,9 +1687,12 @@ Starting with opatch version 37 you can check if you have inactive patches in yo
     ```
 
     ![value retain_inactive_patches_parameter ](./images/retain-inactive-patches.png " ")    
+    
+    You have 3 inactive patches in your ORACLE_HOME, opatch must keep at least the last inactive one, so you can set the parameter value to either 1 or 2 depending on how many inactive patches you want to keep. </br>
+ 
 
 3. Update __opatch.properties__ file </br>
-   Change the parameter __RETAIN_INACTIVE_PATCHES__ in $ORACLE_HOME/OPatch/config/opatch.properties to one:
+   Change the parameter __RETAIN\_INACTIVE\_PATCHES__ in $ORACLE_HOME/OPatch/config/opatch.properties to one:
 
     ```
     <copy>
@@ -1700,8 +1702,9 @@ Starting with opatch version 37 you can check if you have inactive patches in yo
 
     ![value retain_inactive_patches_parameter ](./images/sed-retain.png " ")    
 
-    sed takes a backup of the current "opatch.properties" file and then changes the RETAIN_INACTIVE_PATCHES parameter value to 1:
+    sed takes a backup of the current "opatch.properties" file and then changes the RETAIN\_INACTIVE\_PATCHES parameter value to 1:
 
+    ```
     <copy>
     grep RETAIN $ORACLE_HOME/OPatch/config/opatch.properties
     </copy>
