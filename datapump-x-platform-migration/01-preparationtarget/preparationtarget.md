@@ -24,9 +24,9 @@ __Double click__ the "xtts" icon
 ![Screenshot of the Linux Hands On Lab Terminal icon](./images/xtts-source-target-terminal.png " ")
 
 which will open a terminal session with two tabs; you can use the __light green__ tab to execute all __target__ related commands 
-![Screenshot of the HOL target terminal session](./images/target-terminal-tab.png =50%x50%)
+![Screenshot of the HOL target terminal session](./images/target-terminal-tab.png " ")
 and the __light blue__ one for all __source__:
-![Screenshot of the HOL source terminal session](./images/source-terminal-tab.png =50%x50%)
+![Screenshot of the HOL source terminal session](./images/source-terminal-tab.png " ")
 
 The screenshots in this lab will use the same coloring.
 
