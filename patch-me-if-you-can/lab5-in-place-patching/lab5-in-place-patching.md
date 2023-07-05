@@ -1662,6 +1662,14 @@ Starting with opatch version 37 you can check if you have inactive patches in yo
 
 
 2. Clean up Inactive Patches
+</br>
+a `RETAIN_INACTIVE_PATCHES`
+b `RETAIN\_INACTIVE\_PATCHES`
+c "RETAIN_INACTIVE_PATCHES"
+d "RETAIN\_INACTIVE\_PATCHES"
+e RETAIN_INACTIVE_PATCHES
+f RETAIN\_INACTIVE\_PATCHES
+
 
     ```
     <copy>
@@ -1679,8 +1687,6 @@ Starting with opatch version 37 you can check if you have inactive patches in yo
     ```
     mean? </br>
      `RETAIN_INACTIVE_PATCHES` is the amount of inactive patches opatch will not delete. Currently the parameter is set to zero:
-
-
 
     ```
     <copy>
