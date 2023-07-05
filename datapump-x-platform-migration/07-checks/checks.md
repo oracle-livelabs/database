@@ -177,11 +177,11 @@ Execute a metadata export using this par file:
 
 2.  Generating Metadata SQL
 
-    ```
-    <copy>
-    impdp system/oracle@pdb3 parfile=/home/oracle/xtts/sql_metadata_imp.par
-    <copy>
-    ```
+        ```
+        <copy>
+        impdp system/oracle@pdb3 parfile=/home/oracle/xtts/sql_metadata_imp.par
+        </copy>
+        ```
 
     ![execute data pump metadata import](./images/sql-metadata-import.png " ")
 
