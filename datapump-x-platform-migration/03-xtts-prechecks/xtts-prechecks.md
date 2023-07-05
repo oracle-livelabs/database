@@ -50,11 +50,11 @@ Also check on target if the OS you want to migrate from is supporting datafile c
 
 So execute on __source__ and __target__:
 
-    ```
-    <copy>
-    @/home/oracle/xtts/scripts/task2
-    </copy>
-    ```
+  ```
+   <copy>
+   @/home/oracle/xtts/scripts/task2
+   </copy>
+  ```
 
 <details>
  <summary>*click here to see the SQL Statement*</summary>
@@ -243,7 +243,7 @@ Same check as in the previous task but this time for user indexes
 
 ![checking if there are user indexes in system or sysaux TBS](./images/precheck-task7-src.png " ")
 
-## Task 7: IOT Tables (SOURCE)
+## Task 8: IOT Tables (SOURCE)
 IOT tables might get corrupted during XTTS copy when copying especially to HP platforms. 
 * [Corrupt IOT when using Transportable Tablespace to HP from different OS (Doc ID 1334152.1) ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1334152.1&displayIndex=1)
 Even though we migrate to Linux it's worth to check it and to bear in mind.

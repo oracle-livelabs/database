@@ -25,7 +25,8 @@ In this workshop, you will:
 * Run the initial backup and recovery
 * Run incremental backup and restore
 * Run final incremental backup and restore
-* Export and Import Metadata
+* TTS Export and Import
+* Perform some Checks
 
 ### Prerequisites
 

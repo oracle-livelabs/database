@@ -25,7 +25,7 @@ __Double click__ the "xtts" icon
 
 which will open a terminal session with two tabs; you can use the __light green__ tab to execute all __target__ related commands 
 ![Screenshot of the HOL target terminal session](./images/target-terminal-tab.png " ")
-and the __light blue__ one for all __source__:
+and the __light blue__ one for all __source__ related activities:
 ![Screenshot of the HOL source terminal session](./images/source-terminal-tab.png " ")
 
 The screenshots in this lab will use the same coloring.
@@ -89,7 +89,7 @@ Activate the terminal target tab window and create a directory for the XTTS targ
 
 
 ## Task 3: In SQL*Plus Start the Container Database CDB3 and Create the Pluggable Database PDB3 (TARGET)
-When creating a PDB the admin must be created as well. You can delete it later on if desired. Once the PDB3 is created you need to start it up and save its state.
+When creating a PDB the admin user must be created as well. You can delete it later on if desired. Once the PDB3 is created you need to start it up and save its state.
 
   ```
     <copy>

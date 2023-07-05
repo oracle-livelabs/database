@@ -158,26 +158,6 @@ Execute a metadata export using this par file:
     ![view metadata import Data Pump parameter file on source ](./images/sql-metadat-import-par.png " ")
 
     <details>
-    <summary>*click here if you want to see the Data Pump export parameter file and a short description*</summary>
-
-
-    | Parameter | Comment |
-    | :-------- | :-----|
-    | directory=XTTS\_METADATA\_DIR | Specifies the default location to which export can write the dump file set and the log file |
-    | dumpfile=upgr\_metadata\_%U.dmp | Is the name of the dump file |
-    | cluster=N | Restricts to execute the current job on the node where it was started  |
-    | job_name=cre\_metadata\_exp | Specifies a job name for the metadata export  |
-    | content=metadata\_only | Exports only metadata  |
-    | filesize=10737418240 | Restricts the export of the Data Pump export to given amount of bytes  |
-    | logfile=cre\_metadata\_exp.log | This parameter specifies the name for the log file of the export job. |
-    | full=y | FULL specifies that you want to perform a full database mode export  |
-    | parallel=1 | In 11.2 metadata is only exported with parallelism of 1  |
-    {: title="Data Pump Metadata Export Parameter File"}
-
-    </details>
-
-
-    <details>
     <summary>*click here if you want to see the Data Pump import parameter file and a short description*</summary>
 
 
