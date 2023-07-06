@@ -1662,7 +1662,11 @@ Starting with opatch version 37 you can check if you have inactive patches in yo
 
 
 2. Clean up Inactive Patches</br>
+OPatch by default cleans up all older patches except the most recent one. 
 
+<if type="KgR">
+COMMENT: TYPE IS NOT DEFINED; SO THIS SECTION DOES NOT APPEAR
+IT IS TO HIDE THE LISTENER START JUST IN CASE I NEED IT AGAIN
 
     ```
     <copy>
@@ -1715,7 +1719,11 @@ Starting with opatch version 37 you can check if you have inactive patches in yo
 
 
 4. Clean up all Inactive Patches Except Last One </br>
-It's a good idea to run this task always with the "-silent" option, because depending on the amount of patches "opatch deleteinactivepatches" has to remove, this might take a while: 
+
+</if>
+
+
+    It's a good idea to run this task always with the "-silent" option, because depending on the amount of patches "opatch deleteinactivepatches" has to remove, this might take a while: 
 
     ```
     <copy>
