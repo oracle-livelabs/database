@@ -139,7 +139,7 @@ SIDE NOTE: While the installation is ongoing, please switch to the 19.18 tab and
 1. Option - Shell Script
 
 <details>
- <summary>*run a shell script (and _only_ run this shell script if you do not want to execute the second option)*</summary>
+ <summary>*run a shell script (and _only_ run this shell script if you do not want to copy/paste the complete runInstaller command)*</summary>
 
   ``` text
 
@@ -214,7 +214,7 @@ $
   ```
 </details>
 
-2. Option - use runInstaller (only run this shell script if you didn't execute the first option)
+2. Option - use runInstaller (only execute runInstaller if you didn't execute the shell script)
     ```
     <copy>
     ./runInstaller -applyRU /home/oracle/stage/ru/35042068  \
