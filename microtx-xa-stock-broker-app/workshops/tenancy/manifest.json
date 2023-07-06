@@ -42,7 +42,7 @@
     {
       "description": "Cleanly dispose all OCI resources created by ORM for the workshop, and delete the stack",
       "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md",
-      "title": "Lab 6: Clean Up"
+      "title": "Lab 7: Clean Up"
     },
     {
       "title": "Need help?",
