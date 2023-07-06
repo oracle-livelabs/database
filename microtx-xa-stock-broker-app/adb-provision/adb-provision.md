@@ -4,7 +4,7 @@
 
 This lab walks you through the steps to quickly provision Autonomous Transaction Processing Serverless (ATP-S) instances on Oracle Cloud. You will use this database in the subsequent labs of this workshop. For this lab, you must create two ATP-S instances. One ATP-S instance acts as a resource manager for the Core Banking service and Branch Banking Service. The other ATP-S instance acts as resource manager for the Stock Broker service. Run the tasks in this lab in the remote desktop to create the database instances and download the database wallets within the remote desktop. When you directly download the wallet files in the remote desktop environment, you do not need to copy the wallet files from outside the environment.
 
-Estimated lab time: 20 minutes
+Estimated Time: 20 minutes
 
 ### Objectives
 
@@ -25,7 +25,7 @@ In this lab, you will:
 
     > **Note:** You can also directly access your Autonomous Data Warehouse or Autonomous Transaction Processing service in the __Quick Actions__ section of the dashboard.
 
-    ![Oracle home page.](./images/oci-navigation.png " ")
+    ![Oracle home page.](https://github.com/oracle-livelabs/common/blob/main/images/console/navigation.png " ")
 
 3. Click **Oracle Database** -> **Autonomous Transaction Processing**.
 
@@ -110,14 +110,14 @@ In this lab, you will:
 
 11. Click **Create Autonomous Database**.
 
-    ![Click Create Autonomous Database button](./images/create-adb-button.png)
-
 12. Your instance will begin provisioning. In a few minutes the state will turn from Provisioning to Available. At this point, your Autonomous Transaction Processing database is ready to use! Have a look at your instance's details here including its name, database version, CPU count and storage size.
-![Provisioning an ATP-S instance](./images/atp-dept1-prov.png)
+
+    ![Provisioning an ATP-S instance](./images/atp-dept1-prov.png)
 
     Provisioning an ATP-S instance.
 
     ![ATP-S instance successfully provisioned](./images/atp-dept1-success.png)
+
     ATP-S instance is successfully provisioned.
 
 ## Task 3: Download the Wallet Files
