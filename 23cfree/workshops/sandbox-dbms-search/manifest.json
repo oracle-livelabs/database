@@ -14,8 +14,8 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
         },
         {
-            "title": "Lab 1: Create the schema",
-            "description": "Creating the schema including JSON Duality Views",
+            "title": "Lab 1: Create the sample schemas",
+            "description": "Creating the sample schemas for our search index",
             "type": "livelabs",
             "filename": "../../dbms-search-schema/dbms-search-schema.md"
         },
@@ -26,8 +26,8 @@
             "filename": "../../dbms-search-index/dbms-search-index.md"
         },
         {
-            "title": "Lab 3: Run queries against DBMS_SEARCH index",
-            "description": "Explore different types of queries against the index",
+            "title": "Lab 3: Run queries using the DBMS_SEARCH index",
+            "description": "Explore different types of queries using the search index",
             "type": "livelabs",
             "filename": "../../dbms-search-queries/dbms-search-queries.md"
         },
