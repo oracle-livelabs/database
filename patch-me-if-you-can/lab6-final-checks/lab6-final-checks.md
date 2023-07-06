@@ -29,6 +29,8 @@ This lab assumes you have:
 | :------------: | :------------: |
 | ``` <copy> sqlplus  / as sysdba </copy> ```) | ``` <copy> sqlplus  / as sysdba </copy> ``` |
 |  ![start sql*plus](./images/open-sqlplus.png " ") |  ![start sql*plus](./images/open-sqlplus.png " ") |
+|  |  |
+
 {: title="19.18 and 19.19 Homes"}
 
 
