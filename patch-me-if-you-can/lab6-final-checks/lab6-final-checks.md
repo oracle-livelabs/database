@@ -25,15 +25,13 @@ This lab assumes you have:
 
 ## Task 1: Invalid Object Check
 
-1. Open SQL*Plus
+| 19.18.0 Home | 19.19.0 Home |
+| :------------: | :------------: |
+| ``` <copy> sqlplus  / as sysdba </copy> ```) | ``` <copy> sqlplus  / as sysdba </copy> ``` |
+|  ![start sql*plus](./images/open-sqlplus.png " ") |  ![start sql*plus](./images/open-sqlplus.png " ") |
+{: title="19.18 and 19.19 Homes"}
 
-    ``` bash
-    <copy>
-    sqlplus  / as sysdba 
-    </copy>
-    ```
 
-    ![start sql*plus](./images/open-sqlplus.png " ")
 
 2. Check for Invalid Objects
 
