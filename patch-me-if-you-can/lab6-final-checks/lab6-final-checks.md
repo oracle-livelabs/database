@@ -20,18 +20,24 @@ This lab assumes you have:
 
 | 19.18.0 Home | 19.19.0 Home |
 | :------------: | :------------: |
-| ![19.19 Tab](./images/19-19-home.png " ") | ![19.19 Tab](./images/19-19-home.png " ") |
-{: title="19.18 and 19.19 Homes"}
+| ![19.18 Tab](./images/19-18-home.png " ") | ![19.19 Tab](./images/19-19-home.png " ") |
+{: title="19.18 and 19.19 Tab"}
 
 ## Task 1: Invalid Object Check
 
-| 19.18.0 Home | 19.19.0 Home |
-| :------------: | :------------: |
-| ``` <copy> sqlplus  / as sysdba </copy> ```) | ``` <copy> sqlplus  / as sysdba </copy> ``` |
-|  ![start sql*plus](./images/open-sqlplus.png " ") |  ![start sql*plus](./images/open-sqlplus.png " ") |
-|  |  |
+1. Start SQL*Plus </br>
+Execute in 19.18 and 19.19 tab:
 
-{: title="19.18 and 19.19 Homes"}
+    ```
+    <copy>
+    sqlplus  / as sysdba 
+    </copy> 
+    ```
+
+    | 19.18.0 Home | 19.19.0 Home |
+    | :------------: | :------------: |
+    |  ![start sql*plus 19.18](./images/open-sqlplus-18.png " ") |  ![start sql*plus 19.19](./images/open-sqlplus.png " ") |
+    {: title="19.18 and 19.19 SQL*Plus "}
 
 
 
@@ -46,7 +52,11 @@ This lab assumes you have:
       Hit ENTER/RETURN to execute ALL commands.
     ```
 
-    ![check for invalid objects](./images/invalid-objects-check.png " ")
+    | 19.18.0 Home | 19.19.0 Home |
+    | :------------: | :------------: |
+    |  ![check for invalid objects](./images/invalid-objects-check-18.png " ") |  ![check for invalid objects](./images/invalid-objects-check.png " ") |
+    {: title="19.18 and 19.19 Invalid objects "}
+    
 
     There should be no invalid objects.
 
@@ -58,7 +68,13 @@ The default time zone is DST V.32. But since the Release Update 19.18.0 all exis
      select VALUE$, CON_ID from containers(SYS.PROPS$) where NAME='DST_PRIMARY_TT_VERSION' order by CON_ID;
     </copy>
   ```
-![check for timezone file](./images/check-timezone-file.png " ")
+
+  | 19.18.0 Home | 19.19.0 Home |
+  | :------------: | :------------: |
+  |  ![check for timezone file](./images/check-timezone-file-18.png " ") |  ![check for timezone file](./images/check-timezone-file.png " ") |
+  {: title="19.18 and 19.19 Time Zone "}
+
+
 
 Remember that the version before upgrade was DST V.32 as you did check and verify in the previous labs. 
 
@@ -71,7 +87,12 @@ At this point, please `exit` SQL*Plus.
      exit
     </copy>
   ```
-![exit sql*plus](./images/exit-sqlplus.png " ")
+
+  | 19.18.0 Home | 19.19.0 Home |
+  | :------------: | :------------: |
+  |  ![exit sql*plus](./images/exit-sqlplus-18.png " ") |  ![exit sql*plus](./images/exit-sqlplus.png " ") |
+  {: title="19.18 and 19.19 Exit SQL*Plus "}
+
 
 
 ## Task 3: Check JDK version
@@ -83,7 +104,13 @@ Please check whether the JDK version has been upgraded as well.
     </copy>
   ```
 
-![java version](./images/check-java-version.png " ")
+  | 19.18.0 Home | 19.19.0 Home |
+  | :------------: | :------------: |
+  |  ![java version](./images/check-java-version-18.png " ") |  ![java version](./images/check-java-version.png " ") |
+  {: title="19.18 and 19.19 Java Version "}
+
+
+
 
 This is intended. You will always get the n-1 version of JDK, i.e. the version which was current at the code freeze date for the content of the Release Update. If you need a newer JDK version, you please need to download and apply it afterwards. The version before patching was `java version "1.8.0_351"`.
 
@@ -97,7 +124,13 @@ Now check if PERL has been patched, too. The version before patching was v5.36.0
      $ORACLE_HOME/perl/bin/perl -version
     </copy>
   ```
-![perl version](./images/perl-version.png " ")
+
+  | 19.18.0 Home | 19.19.0 Home |
+  | :------------: | :------------: |
+  | ![perl version](./images/perl-version-18.png " ") |  ![perl version](./images/perl-version.png " ") |
+  {: title="19.18 and 19.19 Exit SQL*Plus "}
+
+
 
 Now you see no difference. But PERL updates get delivered with Release Updates since January 2023. Hence, in this case, there was no update for 19.19.0.
 
@@ -110,7 +143,13 @@ $ORACLE_HOME/OPatch/opatch lspatches
 </copy>
 ```
 
-![lspatches](./images/lspatches.png " ")
+  | 19.18.0 Home | 19.19.0 Home |
+  | :------------: | :------------: |
+  |  ![lspatches](./images/lspatches-18.png " ") |  ![lspatches](./images/lspatches.png " ") |
+  {: title="19.18 and 19.19 lspatches "}
+
+
+
 
 2. listorderedinactivepatches
 
@@ -119,7 +158,14 @@ $ORACLE_HOME/OPatch/opatch lspatches
     $ORACLE_HOME/OPatch/opatch util listorderedinactivepatches
     </copy>
     ```
-![lspatches](./images/listorderedinactivepatches.png " ")
+
+  | 19.18.0 Home | 19.19.0 Home |
+  | :------------: | :------------: |
+  |  ![lspatches](./images/listorderedinactivepatches-18.png " ") |  ![lspatches](./images/listorderedinactivepatches.png " ") |
+  {: title="19.18 and 19.19 listorderedinactivepatches "}
+
+
+
 
 ## Task 6: You are done!
 
