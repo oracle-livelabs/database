@@ -8,7 +8,7 @@ This lab is organized into different topics, each topic consists of multiple ste
 
 ### Workshop Scenario
 
-In this workshop, we work on one of the core components of our online MovieStream service: the movies catalog (maybe you find your favorite movie?). We show how the movies catalog can be managed with JSON in a very schema-flexible way - allowing us to add and modify our offering on the fly, both using Mongo DB API or SQL. the main emphasis is to demonstrate the agility and flexibility of Oracle's converged database but to focus on the representation and manipulation of JSON data in the Oracle database.
+In this workshop, we work on one of the core components of our online MovieStream service: the movies catalog (maybe you will find your favorite movie?). We show how the movies catalog can be managed with JSON in a very schema-flexible way - allowing us to add and modify our offering on the fly, both using Mongo DB API or SQL. The main emphasis is to demonstrate the agility and flexibility of Oracle's converged database but to focus on the representation and manipulation of JSON data in the Oracle database.
 
 This workshop is not a 'cookbook' or 'design guideline' on how to work with JSON data - the purpose is to illustrate various JSON features that the Oracle Database offers. That said, you likely find that many examples are applicable to your business needs!
 
