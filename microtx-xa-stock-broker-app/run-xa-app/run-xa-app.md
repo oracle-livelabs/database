@@ -22,9 +22,8 @@ This lab assumes you have:
 * An Oracle Cloud account.
 * Successfully completed the previous labs:
     * Get Started
-    * Get Started
     * Lab 1: Prepare setup
-    * Lab 2: Environment setup
+    * Lab 2: Set Up the Environment
     * Lab 3: Integrate MicroTx Client Libraries with the Stock Broker Microservice
     * Lab 4: Provision Autonomous Databases for Use as Resource Manager
     * Lab 5: Deploy the Bank and Stock-Trading Application

@@ -21,9 +21,9 @@ This lab assumes you have:
 
 * An Oracle Cloud account.
 * Successfully completed all previous labs:
-  * Get Started
-  * Lab 1: Prepare setup
-  * Lab 2: Environment setup
+    * Get Started
+    * Lab 1: Prepare setup
+    * Lab 2: Set Up the Environment
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
       ```
