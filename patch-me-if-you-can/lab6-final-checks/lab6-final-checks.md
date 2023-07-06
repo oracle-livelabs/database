@@ -1,7 +1,7 @@
 # Lab 6:  Final Checks
 
 ## Introduction 
-You are done now. You did patch out-of place what we highly recommend, and you may have done also a more work-intense in-place patching exercise. So, let us check some things in the environment. 
+You are done now. You did patch out-of place what we highly recommend, and you may have done also a more work-intense in-place patching exercise. So, let us check some things in both environment. 
 
 ![Process flow lab 6](./images/lab6-process-flow.png " ")
 
@@ -9,15 +9,19 @@ Estimated Time: 15 minutes
 
 ### Objectives
 
-Final Checks
+Final Checks in both patched environments
 
 ### Prerequisites
 
 This lab assumes you have:
 
 - Connected to the lab
-- Use the Oracle "__19.19.0 Home__" TAB of your terminal.
-![start sql*plus](./images/19-19-home.png " ")
+- Use the Oracle "__19.19.0 Home__" and "__19.18.0 Home__" TAB of your terminal.
+
+| 19.18.0 Home | 19.19.0 Home |
+| :------------: | :------------: |
+| ![19.19 Tab](./images/19-19-home.png " ") | ![19.19 Tab](./images/19-19-home.png " ") |
+{: title="19.18 and 19.19 Homes"}
 
 ## Task 1: Invalid Object Check
 
@@ -98,15 +102,24 @@ Now check if PERL has been patched, too. The version before patching was v5.36.0
 Now you see no difference. But PERL updates get delivered with Release Updates since January 2023. Hence, in this case, there was no update for 19.19.0.
 
 
-## Task 5: lspatches Check
-And a final opatch lspatches check:
+## Task 5: Opatch Checks
+1. lspatches
+```
+<copy>
+$ORACLE_HOME/OPatch/opatch lspatches
+</copy>
+```
 
-  ```
-    <copy>
-     $ORACLE_HOME/OPatch/opatch lspatches
-    </copy>
-  ```
 ![lspatches](./images/lspatches.png " ")
+
+2. listorderedinactivepatches
+
+    ```
+    <copy>
+    $ORACLE_HOME/OPatch/opatch util listorderedinactivepatches
+    </copy>
+    ```
+![lspatches](./images/listorderedinactivepatches.png " ")
 
 ## Task 6: You are done!
 
