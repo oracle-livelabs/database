@@ -97,7 +97,12 @@ Final check here is about whether PERL has been patched, too. The version before
 
 Now you see no difference. But PERL updates get delivered with Release Updates since January 2023. Hence, in this case, there was no update for 19.19.0.
 
-## Task 5: You are done!
+
+## Task 5: Inventory Check
+
+
+
+## Task 6: You are done!
 
 Congratulations from the entire Oracle Database Upgrade, Migration and Patching team. You completed the Hands-On Lab "Patch me if you can" successfully. Next time, we'll approach the Grid Infrastructure patching together. 
 
