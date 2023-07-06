@@ -86,7 +86,7 @@ This is intended. You will always get the n-1 version of JDK, i.e. the version w
 
 
 ## Task 4: Check PERL version
-Final check here is about whether PERL has been patched, too. The version before patching was v5.36.0).
+Now check if PERL has been patched, too. The version before patching was v5.36.0).
 
   ```
     <copy>
@@ -98,9 +98,15 @@ Final check here is about whether PERL has been patched, too. The version before
 Now you see no difference. But PERL updates get delivered with Release Updates since January 2023. Hence, in this case, there was no update for 19.19.0.
 
 
-## Task 5: Inventory Check
+## Task 5: lspatches Check
+And a final opatch lspatches check:
 
-
+  ```
+    <copy>
+     $ORACLE_HOME/OPatch/opatch lspatches
+    </copy>
+  ```
+![lspatches](./images/lspatches.png " ")
 
 ## Task 6: You are done!
 
