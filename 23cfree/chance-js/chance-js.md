@@ -37,7 +37,7 @@ This labs assumes you have:
 
 3. To login use the username hol23c with the password you set in Lab 1 in the browser.
 
-    ![Image alt text](images/ords_login.png "_")
+    ![Image alt text](images/ords_login.png "")
 
 4. To be able to run SQL statements you will need the sql worksheet. Click on SQL to launch that.
 
@@ -92,7 +92,7 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
 1. The latest version available at the time of writing is 1.1.11, so let's download it into our mle folder so that it can be used by the database
     ```
     <copy>
-    curl -Lo ./mle/chance.js https://cdn.jsdelivr.net/npm/chance@1.1.11/+esm 
+    cURL -Lo ./mle/chance.js https://cdn.jsdelivr.net/npm/chance@1.1.11/+esm 
     </copy>
     ```
 
