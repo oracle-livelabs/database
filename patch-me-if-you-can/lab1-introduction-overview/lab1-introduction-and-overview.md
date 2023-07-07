@@ -2,7 +2,7 @@
 
 ## About this Workshop
 In this Database Patching lab you will make yourself familiar with the options of a completely unattended installation including patches. Then you'll do out-of-place patching of database with AutoUpgrade. The final step in contrast will be an in-place patching operation causing more downtime.
-![Lab activities](./images/overview-patch-me-if-cou-can.png " ")
+![Lab activities](./images/overview-patch-me-if-you-can.png " ")
 
 
 The patching does include not only a Release Update (RU) but also the Oracle Java Virtual Machine Bundle (OJVM), a Monthly Recommended Patch (MRP) and the Data Pump Bundle Patch (DPBP). You will cleanup, and you will do a rollback to the previous bundle as well.

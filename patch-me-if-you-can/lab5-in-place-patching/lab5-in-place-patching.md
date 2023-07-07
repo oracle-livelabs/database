@@ -238,15 +238,15 @@ Start running the patching conflict check:
 
 Part of the output is the following paragraph:
 
-    ``` 
-    Please rollback the relevant overlay patches of the subset patches which are conflicting and apply the superset patch
-    Summary of Conflict Analysis:
+``` text
+Please rollback the relevant overlay patches of the subset patches which are conflicting and apply the superset patch
+Summary of Conflict Analysis:
 
-    There are no patches that can be applied now.
+There are no patches that can be applied now.
 
-    Following patches have conflicts. Please contact Oracle Support and get the merged patch of the patches : 
-    34340632, 34972375, 35042068, 35213579
-    ```
+Following patches have conflicts. Please contact Oracle Support and get the merged patch of the patches : 
+34340632, 34972375, 35042068, 35213579
+```
 
 Why do you need to rollback anything?
 The reason is that Release Updates will be merged automatically. But in this case the 19.18.0 home has additional patches applied. And those need to be rolled back at first.
