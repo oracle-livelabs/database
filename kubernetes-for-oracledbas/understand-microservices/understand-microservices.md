@@ -4,7 +4,7 @@
 
 Many Oracle DBAs may have limited or no formal exposure to Microservices Architecture, but it is highly likely that you have instinctively adopted and implemented microservice concepts in the Oracle Database, even without realising it.
 
-This Lab provides an overview of the Microservices Architecture and does not include any Hands-On Activities.  If you are already familiar and comfortable with Microserivce Architecture, please feel free to move onto the next Lab for the hands-on portion of the Workshop.
+This Lab provides an overview of the Microservices Architecture and does not include any Hands-On Activities.  If you are already familiar and comfortable with Microservice Architecture, please feel free to move onto the next Lab for the hands-on portion of the Workshop.
 
 *Estimated Lab Time:* 2 minutes
 
@@ -104,7 +104,7 @@ Here are some advantages and disadvantages to keep in mind:
 
 * **Continuous Deployment and DevOps**: Microservices are well-suited for continuous deployment and DevOps practices.  Since services can be deployed independently, updates and bug fixes can be rolled out more frequently, enabling faster delivery of new features.
 
-### Disadvantages
+### Considerations
 
 * **Learning Curve**: Adopting microservices requires a shift in mindset and skill set for both development teams and operational teams.  Understanding and implementing the principles and best practices of microservices architecture may involve a learning curve.
 
@@ -121,5 +121,6 @@ Here are some advantages and disadvantages to keep in mind:
 
 ## Acknowledgements
 
-* **Author** - John Lathouwers, Developer Advocate, Database Development Operations
+* **Authors** - [](var:authors)
+* **Contributors** - [](var:contributors)
 * **Last Updated By/Date** - John Lathouwers, June 2023

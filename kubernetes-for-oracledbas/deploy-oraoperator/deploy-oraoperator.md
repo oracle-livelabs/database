@@ -10,7 +10,7 @@ The human operator gains their system knowledge from the Subject Matter Experts 
 
 ![Operator/DBA Relationship](images/dba_oper_dev.png "Operator/DBA Relationship")
 
-In short, human operators become extensions of the SMEs, and in this case, the OraOperator becomes an extension of the Oracle DBA.
+In short, human operators become extensions of the SMEs, and in this case, the Oracle Operator for Kubernetes becomes an extension of the Oracle DBA.
 
 *Estimated Lab Time:* 5 minutes
 
@@ -25,8 +25,8 @@ Watch the video below for a quick walk through of the lab.
 
 This lab assumes you have:
 
-* [Generated a Kubeconfig File](?lab=generate-kubeconfig)
-* [Created a demo namespace](?lab=generate-kubeconfig#ChangethedefaultNamespaceContext)
+* [Generated a Kubeconfig File](?lab=AccesstheKubernetesCluster)
+* [Are using the demo namespace](?lab=AccesstheKubernetesCluster#ChangethedefaultNamespaceContext)
 
 ## Task 1: Kubernetes Resources
 
@@ -54,7 +54,7 @@ The **kube-control-manager**, which is a core component of the Control Plane, op
 
 ![kube-control-manager](images/kube-control-manager.png "kube-control-manager")
 
-You will take a closer look at the OraOperator controllers after the installation of the OraOperator, but keep in mind the APIs are declarative.  This will mean that if you define a new Oracle Database **Custom Resource** and it does not currently exist, it is the Controllers responsibility to bring that resource to the desired state... that is: create it.
+You will take a closer look at the OraOperator controllers after the installation of the OraOperator, but keep in mind the APIs are declarative.  This means that if you define a new Oracle Database **Custom Resource** and it does not currently exist, it is the Controllers responsibility to bring that resource to the desired state... that is: create it.
 
 ## Task 3: Install OraOperator
 

@@ -1,4 +1,4 @@
-# Provision and Configure the Cloud Infrastructure
+# Deploy Workshop Stack
 
 ## Introduction
 
@@ -134,6 +134,10 @@ It is important to note, Ansible has a robust community and ecosystem, with many
 
 Oracle has released an [OCI Ansible Collection](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansible.htm) to support the automation of cloud configurations and the orchestration of complex operational processes.
 
+## Common Issues
+
+* [Out of Capacity](?lab=troubleshooting#OutofCapacity)
+
 ## Learn More
 
 * [Oracle Resource Manager (ORM)](https://www.oracle.com/uk/devops/resource-manager/)
@@ -143,12 +147,9 @@ Oracle has released an [OCI Ansible Collection](https://docs.oracle.com/en-us/ia
 
 ## Acknowledgements
 
-* **Author** - John Lathouwers, Developer Advocate, Database Development Operations
+* **Authors** - [](var:authors)
+* **Contributors** - [](var:contributors)
 * **Last Updated By/Date** - John Lathouwers, July 2023
 
 [magic_button]: https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg
 [magic_arch_stack]: https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle/microservices-datadriven/releases/download/23.5.1/hol-k8s4dbas.zip
-
-## Common Issues
-
-* [Out of Capacity](?lab=troubleshooting#OutofCapacity)

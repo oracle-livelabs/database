@@ -182,5 +182,6 @@ In the *Cloud Shell*, run the following commands to create a *Policy* statement 
 
 ## Acknowledgements
 
-* **Author** - John Lathouwers, Developer Advocate, Database Development Operations
+* **Authors** - [](var:authors)
+* **Contributors** - [](var:contributors)
 * **Last Updated By/Date** - John Lathouwers, July 2023

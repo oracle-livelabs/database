@@ -1,4 +1,4 @@
-# Generate the Kubeconfig File
+# Access the Kubernetes Cluster
 
 ## Introduction
 
@@ -87,28 +87,28 @@ You will only have one context defined, but suppose you have a development and t
 
 All this information can be stored in a single kubeconfig file and you can define a `context` to group the cluster, user AuthN, and namespace together.
 
-Rename the existing context to `default`:
+Rename the existing context to `demo`:
 
 ```bash
 <copy>
-kubectl config rename-context $(kubectl config current-context) default
+kubectl config rename-context $(kubectl config current-context) demo
 </copy>
 ```
 
-Create a new Namespace called `demo` and point a new context at it:
+Create a new Namespace called `sqldev-web` and point a new context at it:
 
 ```bash
 <copy>
-kubectl create namespace demo
+kubectl create namespace sqldev-web
 
-kubectl config set-context test \
---namespace=demo \
+kubectl config set-context sqldev-web \
+--namespace=sqldev-web \
 --cluster=$(kubectl config get-clusters | tail -1) \
 --user=$(kubectl config get-users | tail -1)
 </copy>
 ```
 
-You should now have two contexts, one named default and one named demo:  
+You'll use the `sqldev-web` namespace later in the Workshop to deploy your Microservice Application.  You should now have two contexts, one named `demo` and one named `sqldev-web`:  
 
 ```bash
 <copy>
@@ -138,5 +138,6 @@ For Production clusters, you may consider storing its context in an entirely dif
 
 ## Acknowledgements
 
-* **Author** - John Lathouwers, Developer Advocate, Database Development Operations
+* **Authors** - [](var:authors)
+* **Contributors** - [](var:contributors)
 * **Last Updated By/Date** - John Lathouwers, May 2023

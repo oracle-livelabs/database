@@ -42,10 +42,10 @@
             "last_reviewed": "04-July-2023"
         },
         {
-            "title": "Lab 4: Generate the Kubeconfig File",
+            "title": "Lab 4: Access the Kubernetes Cluster",
             "type": "cloudworld",
             "description": "Generate Kubeconfig",
-            "filename": "../../generate-kubeconfig/generate-kubeconfig.md",
+            "filename": "../../access-cluster/access-cluster.md",
             "last_reviewed": "04-July-2023"
         },
         {
@@ -56,42 +56,35 @@
             "last_reviewed": ""
         },
         {
-            "title": "Lab 7: Deploy the OraOperator",
+            "title": "Lab 6: Deploy the OraOperator",
             "type": "cloudworld",
             "description": "The Oracle Operator for Kubernetes",
             "filename": "../../deploy-oraoperator/deploy-oraoperator.md",
             "last_reviewed": ""
         },
         {
-            "title": "Lab 5: Launch a Pod",
-            "type": "cloudworld",
-            "description": "Overview of K8s, comparing to familiar technologies",
-            "filename": "../../understand-kubernetes/understand-kubernetes.md",
-            "last_reviewed": ""
-        },
-        {
-            "title": "Lab 8: Bind to an ADB",
+            "title": "Lab 7: Bind to an ADB",
             "type": "cloudworld",
             "description": "Bind the OraOperator to the ADB",
             "filename": "../../bind-adb/bind-adb.md",
             "last_reviewed": ""
         },
         {
-            "title": "Lab 9: Lifecycle Operations (ADB)",
+            "title": "Lab 8: Lifecycle Operations (ADB)",
             "type": "cloudworld",
             "description": "Perform Lifecycle Operations against the ADB",
             "filename": "../../lifecycle-adb/lifecycle-adb.md",
             "last_reviewed": ""
         },
         {
-            "title": "Lab 10: Deploy a Microservice Application",
+            "title": "Lab 9: Deploy a Microservice Application",
             "type": "cloudworld",
             "description": "Deploy a Microservice Application ",
             "filename": "../../deploy-application/deploy-application.md",
             "last_reviewed": ""
         },
         {
-            "title": "Lab 4: Connect to Oracle Autonomous Database",
+            "title": "Lab 10: Connect to Oracle Autonomous Database",
             "type": "cloudworld",
             "description": "Connect to the ADB",
             "filename": "../../sqldevweb-login/sqldevweb-login.md",

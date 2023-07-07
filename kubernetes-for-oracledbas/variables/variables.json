@@ -2,5 +2,7 @@
     "description": "K8s4DBAs LiveLabs",
     "oci_compartment": "K8S4DBAS",
     "oci_group": "K8S4DBAS_GROUP",
-    "oci_policy": "K8S4DBAS_POLICY"
+    "oci_policy": "K8S4DBAS_POLICY",
+    "authors": "John Lathouwers, Developer Evangelist, Oracle Database",
+    "contributors": "Andy Tael, Developer Evangelist, Oracle Database"
  }

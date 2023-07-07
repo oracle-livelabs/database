@@ -36,5 +36,6 @@ This lab assumes you have:
 
 ## Acknowledgements
 
-* **Author** - John Lathouwers, Developer Advocate, Database Development Operations
+* **Authors** - [](var:authors)
+* **Contributors** - [](var:contributors)
 * **Last Updated By/Date** - John Lathouwers, July 2023
