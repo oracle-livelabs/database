@@ -53,7 +53,6 @@ echo "complete -o default -F __start_kubectl k" >> ~/.bashrc
 </copy>
 ```
 
-
 ## Task 2: View Worker Nodes
 
 Nodes are the workhorse of a Kubernetes cluster, so the number of control and worker nodes deployed on a cluster is vital for the administrator to be aware of.
@@ -79,7 +78,10 @@ Operating System information on the node (OS_IMAGE)
 Kernel version on the node (KERNEL-VERSION)
 Container runtime information and version (CONTAINER-RUNTIME)
 
-## Task 3: Lookup Namespaces and Security Information
+## Task 3: Lookup Namespaces
+
+
+## Task 4: Lookup Pods
 
 
 ## Task 4: Lookup Services and Endpoint

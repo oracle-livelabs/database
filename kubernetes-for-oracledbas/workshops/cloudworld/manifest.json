@@ -25,28 +25,28 @@
             "type": "cloudworld",
             "description": "Setup Groups, Policies, and Compartment (IAM)",
             "filename": "../../prepare-oci/prepare-oci.md",
-            "last_reviewed": "04-July-2023"
+            "last_reviewed": "07-July-2023"
         },
         {
             "title": "Lab 2: Deploy Workshop Stack",
             "type": "cloudworld",
             "description": "Using Oracle Resource Manager (ORM), Provision and Configure a Stack",
             "filename": "../../deploy-stack/deploy-stack.md",
-            "last_reviewed": "04-July-2023"
+            "last_reviewed": "07-July-2023"
         },
         {
             "title": "Lab 3: Understand Microservices",
             "type": "cloudworld",
             "description": "Overview of Microservices, comparing to familiar technologies",
             "filename": "../../understand-microservices/understand-microservices.md",
-            "last_reviewed": "04-July-2023"
+            "last_reviewed": "07-July-2023"
         },
         {
             "title": "Lab 4: Access the Kubernetes Cluster",
             "type": "cloudworld",
             "description": "Generate Kubeconfig",
             "filename": "../../access-cluster/access-cluster.md",
-            "last_reviewed": "04-July-2023"
+            "last_reviewed": "07-July-2023"
         },
         {
             "title": "Lab 5: Explore the Cluster",
@@ -60,7 +60,7 @@
             "type": "cloudworld",
             "description": "The Oracle Operator for Kubernetes",
             "filename": "../../deploy-oraoperator/deploy-oraoperator.md",
-            "last_reviewed": ""
+            "last_reviewed": "07-July-2023"
         },
         {
             "title": "Lab 7: Bind to an ADB",
