@@ -1662,7 +1662,7 @@ Starting with opatch version 37 you can check if you have inactive patches in yo
 
 
 2. Clean up Inactive Patches</br>
-When invoking OPatch clean up, it will by default preserve the recent applied patch and the patch before this one. If you want to preserve the last 2, 3 or more patches, you can configure it by altering "RETAIN_INACTIVE_PATCHES" in "$ORACLE_HOME/OPatch/config/opatch.properties" file. Deleting all older patches by setting this parameter to 0 is currently not possible.
+    When invoking OPatch clean up, it will by default preserve the recent applied patch and the patch before this one. If you want to preserve the last 2, 3 or more patches, you can configure it by altering "RETAIN_INACTIVE_PATCHES" in "$ORACLE_HOME/OPatch/config/opatch.properties" file. Deleting all older patches by setting this parameter to 0 is currently not possible.
 
 <if type="KgR">
 COMMENT: TYPE IS NOT DEFINED; SO THIS SECTION DOES NOT APPEAR

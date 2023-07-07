@@ -130,8 +130,12 @@ It will do an automatic refresh from now on.
 
 ![autoupgrade refresh](./images/autoupgrade-status-refresh.png " ")
 
+__As this job will run for about 30 minutes, you may now *proceed to the next lab*__.
 
-You may now *proceed to the next lab*
+Once the job finished you'll see an output similar to:
+![autoupgrade refresh](./images/autoupgrade-status-finish.png " ")
+
+
 
 ## Acknowledgements
 * **Author** - Mike Dietrich 

@@ -36,7 +36,7 @@ Execute in 19.18 and 19.19 tab:
 
     | 19.18.0 Home | 19.19.0 Home |
     | :------------: | :------------: |
-    |  ![start sql*plus 19.18](./images/open-sqlplus-18.png " ") |  ![start sql*plus 19.19](./images/open-sqlplus.png " ") |
+    |  ![start SQL*Plus 19.18](./images/sqlplus-18.png " ") |  ![start SQL*Plus 19.19](./images/sqlplus-19.png " ") |
     {: title="19.18 and 19.19 SQL*Plus "}
 
 
@@ -54,43 +54,59 @@ Execute in 19.18 and 19.19 tab:
 
     | 19.18.0 Home | 19.19.0 Home |
     | :------------: | :------------: |
-    |  ![check for invalid objects](./images/invalid-objects-check-18.png " ") |  ![check for invalid objects](./images/invalid-objects-check.png " ") |
+    |  ![check for invalid objects](./images/invalid-objects-check-18.png " ") |  ![check for invalid objects](./images/invalid-objects-check-19.png " ") |
     {: title="19.18 and 19.19 Invalid objects "}
     
 
-    There should be no invalid objects.
+    There should be no invalid objects. </br>
 
-## Task 2: Check Time Zone
+    COMMENT: Even though the upgraded 19.18 database isn't a CDB/PDB you can use the same statement in both environments.
+
+## Task 2: Check Time Zone Version
 The default time zone is DST V.32. But since the Release Update 19.18.0 all existing time zone files will be delivered. Please check if the automated patching with AutoUpgrade has updated the time zone. Remember, that the config file had upg1.timezone_upg=yes set intentionally:
 
-  ```
+1. Latest available Time Zone Version
+    ```
     <copy>
-     select VALUE$, CON_ID from containers(SYS.PROPS$) where NAME='DST_PRIMARY_TT_VERSION' order by CON_ID;
+    SELECT dbms_dst.get_latest_timezone_version from dual;
     </copy>
-  ```
+    ```
+
+    | 19.18.0 Home | 19.19.0 Home |
+    | :------------: | :------------: |
+    |  ![check for latest available timezone version](./images/latest-available-timezone-file-18.png " ") |  ![check for latest available timezone version](./images/latest-available-timezone-file-19.png " ") |
+    {: title="19.18 and 19.19 Latest Available Time Zone Version"}
+
+    Both updated databases have the latest available time zone version installed. But was this version also applied to the database?
+
+2. Time Zone Version
+    ```
+    <copy>
+    select VALUE$, CON_ID from containers(SYS.PROPS$) where NAME='DST_PRIMARY_TT_VERSION' order by CON_ID;
+    </copy>
+    ```
+
+    | 19.18.0 Home | 19.19.0 Home |
+    | :------------: | :------------: |
+    |  ![check for timezone version](./images/check-timezone-file-18.png " ") |  ![check for timezone version](./images/check-timezone-file-19.png " ") |
+    {: title="19.18 and 19.19 Time Zone Version"}
+
+    There's a difference in the timezone version. The manually upgraded 19.18 Oracle_Home database still shows the original 19.18 time zone version whereas the autoupgraded database shows the current version.
+    The reason for this difference is you only applied patches and executed datapatch to the 19.18 Oracle_Home. This does __NOT__ update your timezone version. </br>
+    In the autoupgrade config file we specified "upg1.timezone_upg=yes" which upgraded the timezone version automatically for all containers to the latest available version. </br>
+    So just in case you would use named time zones in your database, you now have to manually upgrade the time zone version in the 19.18 env. A good MOS note to start with is the next step for your manually upgraded database would be a manual timzone upgrade as described in [MOS note 	Applying the DSTv42 update for the Oracle Database (Doc ID 2941491.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=412160.1)
+
+3. Exit SQL*Plus </br>
+    At this point, please `exit` SQL*Plus.
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
 
   | 19.18.0 Home | 19.19.0 Home |
   | :------------: | :------------: |
-  |  ![check for timezone file](./images/check-timezone-file-18.png " ") |  ![check for timezone file](./images/check-timezone-file.png " ") |
-  {: title="19.18 and 19.19 Time Zone "}
-
-
-
-Remember that the version before upgrade was DST V.32 as you did check and verify in the previous labs. 
-
-That is pretty awesome. Please be aware that AutoUpgrade by default will not adjust the time zone when you patch. But we set it intentionally, and the containers have been updated.
-
-
-At this point, please `exit` SQL*Plus.
-  ```
-    <copy>
-     exit
-    </copy>
-  ```
-
-  | 19.18.0 Home | 19.19.0 Home |
-  | :------------: | :------------: |
-  |  ![exit sql*plus](./images/exit-sqlplus-18.png " ") |  ![exit sql*plus](./images/exit-sqlplus.png " ") |
+  |  ![exit sql*plus](./images/exit-sqlplus-18.png " ") |  ![exit sql*plus](./images/exit-sqlplus-19.png " ") |
   {: title="19.18 and 19.19 Exit SQL*Plus "}
 
 
@@ -100,13 +116,13 @@ Please check whether the JDK version has been upgraded as well.
 
   ```
     <copy>
-     /u01/app/oracle/product/1919/jdk/bin/java -version
+     $ORACLE_HOME/jdk/bin/java -version
     </copy>
   ```
 
   | 19.18.0 Home | 19.19.0 Home |
   | :------------: | :------------: |
-  |  ![java version](./images/check-java-version-18.png " ") |  ![java version](./images/check-java-version.png " ") |
+  |  ![java version](./images/check-java-version-18.png " ") |  ![java version](./images/check-java-version-19.png " ") |
   {: title="19.18 and 19.19 Java Version "}
 
 
@@ -127,8 +143,8 @@ Now check if PERL has been patched, too. The version before patching was v5.36.0
 
   | 19.18.0 Home | 19.19.0 Home |
   | :------------: | :------------: |
-  | ![perl version](./images/perl-version-18.png " ") |  ![perl version](./images/perl-version.png " ") |
-  {: title="19.18 and 19.19 Exit SQL*Plus "}
+  | ![perl version](./images/check-perl-version-18.png " ") |  ![perl version](./images/check-perl-version-19.png " ") |
+  {: title="19.18 and 19.19 Perl Version "}
 
 
 
@@ -137,16 +153,16 @@ Now you see no difference. But PERL updates get delivered with Release Updates s
 
 ## Task 5: Opatch Checks
 1. lspatches
-```
-<copy>
-$ORACLE_HOME/OPatch/opatch lspatches
-</copy>
-```
+    ```
+    <copy>
+    $ORACLE_HOME/OPatch/opatch lspatches
+    </copy>
+    ```
 
-  | 19.18.0 Home | 19.19.0 Home |
-  | :------------: | :------------: |
-  |  ![lspatches](./images/lspatches-18.png " ") |  ![lspatches](./images/lspatches.png " ") |
-  {: title="19.18 and 19.19 lspatches "}
+    | 19.18.0 Home | 19.19.0 Home |
+    | :------------: | :------------: |
+    |  ![opatch lspatches](./images/lspatches-18.png " ") |  ![opatch lspatches](./images/lspatches-19.png " ") |
+    {: title="19.18 and 19.19 lspatches "}
 
 
 
@@ -161,7 +177,8 @@ $ORACLE_HOME/OPatch/opatch lspatches
 
   | 19.18.0 Home | 19.19.0 Home |
   | :------------: | :------------: |
-  |  ![lspatches](./images/listorderedinactivepatches-18.png " ") |  ![lspatches](./images/listorderedinactivepatches.png " ") |
+  |  ![lspatches](./images/listorderedinactivepatches-18.png " ") |  ![lspatches](./images/listorderedinactivepatches-19.png " ") |
+  | Inactive RU/CPU 34786990 is a left over from the previous cleanup where you removed all inactive patches exceüt of the last one | But what is "Inactive RU/CPU 29517242"?  Remember, you first unzipped/installed the 19.3.0.0 base release. This bug is just the tracker for the 19.3.0.0 code line.|
   {: title="19.18 and 19.19 listorderedinactivepatches "}
 
 

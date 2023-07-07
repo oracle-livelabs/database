@@ -134,7 +134,7 @@ To install all the patches in one single action, you will use the `-applyRU` and
 
 You can either copy & paste the entire command (first option) or call a script (second option). Use only __one__ of the next two options, copy the command and paste it into the "19.19.0 Home" terminal tab.
 
-SIDE NOTE: While the installation is ongoing, please switch to the 19.18 tab and continue with the next lab. You're going to execute the "root.sh" script later on in one of the next labs.
+SIDE NOTE: *While the installation is ongoing, please switch to the 19.18 tab and continue with the next lab. You're going to execute the "root.sh" script later on in one of the next labs.*
 
 1. Option - Shell Script
 

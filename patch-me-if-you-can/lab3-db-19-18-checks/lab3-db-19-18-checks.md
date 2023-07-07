@@ -38,7 +38,7 @@ Check the installed patches in the current 19.18.0 home:
  
     ```
     <copy>
-    ./OPatch/opatch lspatches
+    $ORACLE_HOME/OPatch/opatch lspatches
     </copy>
     ```
 
@@ -49,7 +49,7 @@ Check the installed patches in the current 19.18.0 home:
 
       ``` text
     [CDB2] oracle@hol:/u01/app/oracle/product/19
-    $ ./OPatch/opatch lspatches
+    $ $ORACLE_HOME/OPatch/opatch lspatches
     35246710;HIGH DIRECT PATH READ AFTER 19.18 DBRU PATCHING
     35213579;MERGE ON DATABASE RU 19.18.0.0.0 OF 35037877 35046819
     35162446;NEED BEHAVIOR CHANGE TO BE SWITCHED OFF
