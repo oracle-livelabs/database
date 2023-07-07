@@ -3,7 +3,7 @@
 ## Introduction
 This lab will show you how to download the Oracle Resource Manager (ORM) stack zip file needed to set up the resource needed to run this workshop. This workshop requires a compute instance running the Transaction Manager for Microservices image with a Virtual Cloud Network (VCN).
 
-Estimated Lab Time: 10 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 -   Download ORM stack

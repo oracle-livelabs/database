@@ -18,7 +18,7 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
     },
     {
-      "title": "Lab 1: Integrate MicroTx Client Libraries with XA Sample Application",
+      "title": "Lab 1: Integrate MicroTx Client Libraries with the Stock Broker Microservice",
       "filename": "../../integrate-microtx-lib-files/integrate-microtx-lib-files.md"
     },
     {
@@ -26,7 +26,11 @@
       "filename": "../../adb-provision/adb-provision.md"
     },
     {
-      "title": "Lab 3: Trade Stocks with the Bank and Stock-Trading Application",
+      "title": "Lab 3: Deploy the Bank and Stock-Trading Application",
+      "filename": "../../deploy-stock-trading-app/deploy-stock-trading-app.md"
+    },
+    {
+      "title": "Lab 4: Trade Stocks with the Bank and Stock-Trading Application",
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {
