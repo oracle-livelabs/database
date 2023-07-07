@@ -5,7 +5,7 @@ The benefit of the out-of-place patching method is not only that the previous ho
 
 ![Process flow lab 5](./images/lab5-process-flow.png " ")
 
-Estimated Time: 25 minutes
+Estimated Time: 45 minutes
 
 ### Objectives
 

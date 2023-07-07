@@ -8,7 +8,7 @@ In this lab exercise you will install Oracle Database 19.19.0 into a separate ho
 
 Out-of-place patching is the preferred method, not only for the Database home but also for the Grid Infrastructure Home.
 
-Estimated Time: 15 minutes
+Estimated Time: 5 minutes (task 2 will run in background for 25 minutes)
 
 ### Objectives
 

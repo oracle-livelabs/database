@@ -5,7 +5,7 @@ In this lab exercise you will patch the CDB2 database from 19.18.0 to 19.19.0 wi
 
 ![Process flow lab 4](./images/lab4-process-flow.png " ")
 
-Estimated Time: 15 minutes
+Estimated Time: 5 minutes (runs unattended for 20 minutes)
 
 ### Objectives
 

@@ -5,7 +5,7 @@ You are done now. You did patch out-of place what we highly recommend, and you m
 
 ![Process flow lab 6](./images/lab6-process-flow.png " ")
 
-Estimated Time: 15 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 
@@ -90,10 +90,10 @@ Execute in 19.18 and 19.19 tab:
     |  ![check for timezone version](./images/check-timezone-file-18.png " ") |  ![check for timezone version](./images/check-timezone-file-19.png " ") |
     {: title="19.18 and 19.19 Time Zone Version"}
 
-    There's a difference in the timezone version. The manually upgraded 19.18 Oracle\_Home database still shows the original 19.18 time zone version whereas the autoupgraded database shows the current version.
-    The reason for this difference is you only applied patches and executed datapatch to the 19.18 Oracle\_Home. This does __NOT__ update your timezone version. </br>
+    There's a difference in the timezone version. The manually upgraded 19.18 Oracle\_Home database still shows the original 19.18 time zone version whereas the autoupgraded shows the current version.
+    The reason for this difference is you only applied patches to 19.18 environment and executed datapatch. This does __NOT__ update your timezone version. </br>
     In the autoupgrade config file we specified "upg1.timezone_upg=yes" which upgraded the timezone version automatically for all containers to the latest available version. </br>
-    So just in case you would use named time zones in your database, you now have to manually upgrade the time zone version in the 19.18 env. A good MOS note to start with is the next step for your manually upgraded database would be a manual timzone upgrade as described in [MOS note 	Applying the DSTv42 update for the Oracle Database (Doc ID 2941491.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=412160.1)
+    So just in case you would use named time zones in your database, you now have to manually upgrade the time zone version in the 19.18 env. A good MOS note to start with is the next step for your manually upgraded database would be a manual timezone upgrade as described in [MOS note 	Applying the DSTv42 update for the Oracle Database (Doc ID 2941491.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=412160.1)
 
 3. Exit SQL\*Plus </br>
     At this point, please `exit` SQL*Plus.
