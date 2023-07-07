@@ -63,7 +63,6 @@ Execute in 19.18 and 19.19 tab:
     COMMENT: Even though the upgraded 19.18 database isn't a CDB/PDB you can use the same statement in both environments.
 
 ## Task 2: Check Time Zone Version
-The default time zone is DST V.32. But since the Release Update 19.18.0 all existing time zone files will be delivered. Please check if the automated patching with AutoUpgrade has updated the time zone. Remember, that the config file had upg1.timezone_upg=yes set intentionally:
 
 1. Latest available Time Zone Version
     ```
@@ -91,8 +90,8 @@ The default time zone is DST V.32. But since the Release Update 19.18.0 all exis
     |  ![check for timezone version](./images/check-timezone-file-18.png " ") |  ![check for timezone version](./images/check-timezone-file-19.png " ") |
     {: title="19.18 and 19.19 Time Zone Version"}
 
-    There's a difference in the timezone version. The manually upgraded 19.18 Oracle_Home database still shows the original 19.18 time zone version whereas the autoupgraded database shows the current version.
-    The reason for this difference is you only applied patches and executed datapatch to the 19.18 Oracle_Home. This does __NOT__ update your timezone version. </br>
+    There's a difference in the timezone version. The manually upgraded 19.18 `Oracle_Home` database still shows the original 19.18 time zone version whereas the autoupgraded database shows the current version.
+    The reason for this difference is you only applied patches and executed datapatch to the 19.18 `Oracle_Home`. This does __NOT__ update your timezone version. </br>
     In the autoupgrade config file we specified "upg1.timezone_upg=yes" which upgraded the timezone version automatically for all containers to the latest available version. </br>
     So just in case you would use named time zones in your database, you now have to manually upgrade the time zone version in the 19.18 env. A good MOS note to start with is the next step for your manually upgraded database would be a manual timzone upgrade as described in [MOS note 	Applying the DSTv42 update for the Oracle Database (Doc ID 2941491.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=412160.1)
 
@@ -178,7 +177,7 @@ Now you see no difference. But PERL updates get delivered with Release Updates s
   | 19.18.0 Home | 19.19.0 Home |
   | :------------: | :------------: |
   |  ![lspatches](./images/listorderedinactivepatches-18.png " ") |  ![lspatches](./images/listorderedinactivepatches-19.png " ") |
-  | Inactive RU/CPU 34786990 is a left over from the previous cleanup where you removed all inactive patches exceüt of the last one | But what is "Inactive RU/CPU 29517242"?  Remember, you first unzipped/installed the 19.3.0.0 base release. This bug is just the tracker for the 19.3.0.0 code line.|
+  | Inactive RU/CPU 34786990 is a left over from the previous cleanup where you removed all inactive patches except of the last one | But what is "Inactive RU/CPU 29517242"?  Remember, you first unzipped/installed the 19.3.0.0 base release. This bug is just the tracker for the 19.3.0.0 code line.|
   {: title="19.18 and 19.19 listorderedinactivepatches "}
 
 
