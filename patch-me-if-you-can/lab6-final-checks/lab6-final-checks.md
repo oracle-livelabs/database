@@ -95,7 +95,7 @@ Execute in 19.18 and 19.19 tab:
     In the autoupgrade config file we specified "upg1.timezone_upg=yes" which upgraded the timezone version automatically for all containers to the latest available version. </br>
     So just in case you would use named time zones in your database, you now have to manually upgrade the time zone version in the 19.18 env. A good MOS note to start with is the next step for your manually upgraded database would be a manual timzone upgrade as described in [MOS note 	Applying the DSTv42 update for the Oracle Database (Doc ID 2941491.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=412160.1)
 
-3. Exit SQL*Plus </br>
+3. Exit SQL\*Plus </br>
     At this point, please `exit` SQL*Plus.
     ```
     <copy>
