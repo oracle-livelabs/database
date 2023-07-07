@@ -134,8 +134,6 @@ The password currently assigned to the ADB was randomised and is unknown, so you
 
 Additionally, the ADB was provisioned with mTLS, so you will need a Wallet to connect to the ADB securely.  You'll create a **Secret** for the Wallet password and the OraOperator will download the wallet into another **Secret**.
 
-
-
 In Cloud Shell, assign the `ADB_PWD` variable a password (for Workshop purposes only).  You can choose any password so long as it complies with the [Password Complexity](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/manage-users-create.html#GUID-72DFAF2A-C4C3-4FAC-A75B-846CC6EDBA3F) rules.
 
 For example:
