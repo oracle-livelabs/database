@@ -67,7 +67,7 @@
             "type": "cloudworld",
             "description": "Bind the OraOperator to the ADB",
             "filename": "../../bind-adb/bind-adb.md",
-            "last_reviewed": ""
+            "last_reviewed": "07-July-2023"
         },
         {
             "title": "Lab 8: Lifecycle Operations (ADB)",
@@ -84,21 +84,14 @@
             "last_reviewed": ""
         },
         {
-            "title": "Lab 10: Connect to Oracle Autonomous Database",
-            "type": "cloudworld",
-            "description": "Connect to the ADB",
-            "filename": "../../sqldevweb-login/sqldevweb-login.md",
-            "last_reviewed": ""
-        },
-        {
-            "title": "Lab 11: Clean up Infrastructure",
+            "title": "Lab 10: Clean up Infrastructure",
             "type": "cloudworld",
             "description": "Destroy the Infrastructure",
             "filename": "../../teardown-stack/teardown-stack.md",
             "last_reviewed": ""
         },
         {
-            "title": "Lab 12: Clean up OCI Tenancy",
+            "title": "Lab 11: Clean up OCI Tenancy",
             "type": "cloudworld",
             "description": "Clean up Groups, Policies, and Compartment (IAM)",
             "filename": "../../teardown-iam/teardown-iam.md",   

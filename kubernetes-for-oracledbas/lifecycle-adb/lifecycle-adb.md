@@ -1,17 +1,12 @@
 # Lifecycle Operations - Oracle Autonomous Database (ADB)
 
-"Life is really simple, but we insist on making it complicated."
-\- Confucius
-
 ## Introduction
 
 In this lab, you use the OraOperator to perform Lifecycle operations against an Oracle Autonomous Database (ADB).
 
-In order to manage the **AutonomousDatabase** type, the OraOperator has custom **Controllers** to manage the  **AutonomousDatabase** type within the K8s cluster. These controllers act as "built-in SOPs" specifically designed for handling the  **AutonomousDatabase** resource.
+In order to manage the **AutonomousDatabase** type, the OraOperator has **Custom Controllers** to manage the  **AutonomousDatabase** type within the K8s cluster. These controllers act as "built-in SOPs" specifically designed for handling the  **AutonomousDatabase** resource.
 
-The controllers provide a declarative API, allowing users to specify the desired state of the  **AutonomousDatabase** resource.  They continuously monitor the current state of the resource and take actions to reconcile any differences between the desired state and the actual state.
-
-![OraOperator for ADB](images/k8s_operator_adb.png "OraOperator for ADB")
+The **Custom Controllers** provide a declarative API, allowing users to specify the desired state of the  **AutonomousDatabase** resource.  They continuously monitor the current state of the resource and take actions to reconcile any differences between the desired state and the actual state.
 
 The actions that the AutonomousDatabase controller can perform includes:
 
@@ -36,7 +31,7 @@ Watch the video below for a quick walk through of the lab.
 
 This lab assumes you have:
 
-* [Generated a Kubeconfig File](?lab=generate-kubeconfig)
+* [Generated a Kubeconfig File](?lab=access-cluster)
 * A [Running and Healthy OraOperator](?lab=deploy-oraoperator)
 * The [OraOperator bound to an ADB](?lab=bind-adb)
 
@@ -91,11 +86,11 @@ If it were set to `false` then deleting the resource from K8s would *NOT* delete
 
 ## Task 2: Apply the new ADB Manifest
 
-Define the new ADB in the `adb` namespace:
+Define the new ADB cluster:
 
 ```bash
 <copy>
-kubectl apply -f adb_provision.yaml -n adb
+kubectl apply -f adb_provision.yaml
 </copy>
 ```
 
@@ -118,12 +113,12 @@ Ensure you are in the K8S4DBAS Compartment and you will see the `DEVOPSDB` being
 
 ## Task 4: Delete the Provisioned ADB
 
-The ADB provisioned by the OraOperator is great for DevOps, after which it should be deleted.  The physical ADB is deleted because you specified a `hardLink` between the K8s resource and the database.  There is no reason to keep its ADMIN secret around, so delete that as well:
+The ADB provisioned by the OraOperator is great for DevOps, after which it should be deleted.  The physical ADB will be deleted because you specified a `hardLink` between the K8s resource and the database.  There is no reason to keep its ADMIN secret around, so delete that as well:
 
 ```bash
 <copy>
-kubectl delete adb adb-devops -n adb
-kubectl delete secret adb-devops-admin-password -n adb
+kubectl delete adb adb-devops
+kubectl delete secret adb-devops-admin-password
 </copy>
 ```
 
@@ -157,15 +152,15 @@ export TNS_ADMIN=$ORACLE_HOME/network/admin
 mkdir -p $ORACLE_HOME/network/admin
 
 # Extract the tnsnames.ora secret
-kubectl get secret/adb-tns-admin -n adb \
+kubectl get secret/adb-tns-admin \
   --template="{{ index .data \"tnsnames.ora\" | base64decode }}" > $ORACLE_HOME/network/admin/tnsnames.ora
 
 # Extract the sqlnet.ora secret
-kubectl get secret/adb-tns-admin -n adb \
+kubectl get secret/adb-tns-admin \
   --template="{{ index .data \"sqlnet.ora\" | base64decode }}" > $ORACLE_HOME/network/admin/sqlnet.ora
 
 # Extract the Wallet for mTLS
-kubectl get secret/adb-tns-admin -n adb \
+kubectl get secret/adb-tns-admin \
   --template="{{ index .data \"cwallet.sso\" | base64decode }}" > $ORACLE_HOME/network/admin/cwallet.sso
 </copy>
 ```
@@ -176,7 +171,7 @@ In a previous lab you set a new password for the ADB, if you have forgotten it, 
 
 ```bash
 <copy>
-kubectl get secrets/adb-admin-password -n adb --template="{{index .data \"adb-admin-password\" | base64decode}}"
+kubectl get secrets/adb-admin-password --template="{{index .data \"adb-admin-password\" | base64decode}}"
 <copy>
 ```
 
@@ -184,7 +179,7 @@ Now connect to the ADB via SQL*Plus, using the ADMIN password from the secret; e
 
 ```bash
 <copy>
-SERVICE_NAME=$(kubectl get adb -n adb -o json | jq -r .items[0].spec.details.dbName)_TP
+SERVICE_NAME=$(kubectl get adb -o json | jq -r .items[0].spec.details.dbName)_TP
 
 sqlplus admin@$SERVICE_NAME
 </copy>
@@ -200,7 +195,7 @@ The usage of the `--type=merge` is known as a *JSON Merge Patch* and simply spec
 
 ```bash
 <copy>
-kubectl patch AutonomousDatabase adb-existing -n adb \
+kubectl patch AutonomousDatabase adb-existing \
   -p '{"spec":{"details":{"cpuCoreCount":2,"dataStorageSizeInTBs":2}}}' \
   --type=merge
 </copy>
@@ -220,7 +215,7 @@ You've now have seen how to apply a manifest to define and redefine a K8s resour
 
 ```bash
 <copy>
-kubectl edit AutonomousDatabase adb-existing -n adb
+kubectl edit AutonomousDatabase adb-existing
 </copy>
 ```
 
@@ -284,7 +279,7 @@ Apply the Role and RoleBinding resources:
 
 ```bash
 <copy>
-kubectl apply -f adb_role.yaml -n adb
+kubectl apply -f adb_role.yaml
 </copy>
 ```
 
@@ -365,7 +360,7 @@ Apply the manifest:
 
 ```bash
 <copy>
-kubectl apply -f adb_cron.yaml -n adb
+kubectl apply -f adb_cron.yaml
 </copy>
 ```
 
@@ -377,7 +372,7 @@ Take a quick look at the cronjobs in the `adb` namespace:
 
 ```bash
 <copy>
-kubectl get cronjob -n adb
+kubectl get cronjob
 <copy>
 ```
 
@@ -391,11 +386,11 @@ Reschedule the `adb-stop` CronJob to run 1 minute from now and verify the update
 <copy>
 NEW_SCHED="$(date -d '1 mins' +'%M %H') * * *"
 
-kubectl patch CronJob adb-stop -n adb \
+kubectl patch CronJob adb-stop \
   -p '{"spec":{"schedule": "'"${NEW_SCHED}"'" }}' \
   --type=merge
 
-kubectl get cronjob -n adb
+kubectl get cronjob
 <copy>
 ```
 
@@ -403,7 +398,7 @@ This next command will watch the CronJobs and output when one runs. If you sched
 
 ```bash
 <copy>
-kubectl get jobs --watch -n adb
+kubectl get jobs --watch
 </copy>
 ```
 
@@ -417,13 +412,13 @@ In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you 
 
 You can also check the logs of the job by replacing `<job_name>` in the following command:
 
- `kubectl logs job/<job_name> -n adb`
+ `kubectl logs job/<job_name>`
 
 Make sure to start your ADB for future labs:
 
 ```bash
 <copy>
-kubectl patch adb adb-existing -n adb -p '{"spec":{"details":{"lifecycleState":"AVAILABLE"}}}' --type=merge
+kubectl patch adb adb-existing -p '{"spec":{"details":{"lifecycleState":"AVAILABLE"}}}' --type=merge
 </copy>
 ```
 
@@ -434,39 +429,6 @@ kubectl patch adb adb-existing -n adb -p '{"spec":{"details":{"lifecycleState":"
 
 ## Acknowledgements
 
-* **Author** - John Lathouwers, Developer Advocate, Database Development Operations
-* **Last Updated By/Date** - John Lathouwers, May 2023
-
-
-
-
-CREATE DATABASE LINK "PARTICIPANTADMINLINK"
-   USING '(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST="adb.us-ashburn-1.oraclecloud.com")(PORT=1522))(CONNECT_DATA=(SERVICE_NAME=gdfa7d153cd68c7_sagadb2_tp.adb.oraclecloud.com))(SECURITY=(MY_WALLET_DIRECTORY="/u03/dbfs/FF8D55E55B29505FE053A516000A91FA/data/dpdump")(SSL_SERVER_DN_MATCH=TRUE)(SSL_SERVER_CERT_DN="sagadb2_tp = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.us-ashburn-1.oraclecloud.com))(connect_data=(service_name=gdfa7d153cd68c7_sagadb2_tp.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
-")))'
-
-
-BEGIN
-     DBMS_CLOUD_ADMIN.CREATE_DATABASE_LINK(
-          db_link_name => 'TEST',
-          hostname => 'adb.us-ashburn-1.oraclecloud.com',
-          port => '1522',
-          service_name => 'gdfa7d153cd68c7_sagadb2_tp.adb.oraclecloud.com',
-          ssl_server_cert_dn => NULL,
-          credential_name => 'PARTICIPANTADMINCRED',
-          directory_name => '/u03/dbfs/FF8D55E55B29505FE053A516000A91FA/data/dpdump',
-          private_target => FALSE);
-END;
-/
-
-BEGIN
-     DBMS_CLOUD_ADMIN.CREATE_DATABASE_LINK(
-          db_link_name => 'TESTLINK', 
-          hostname => 'adb.us-ashburn-1.oraclecloud.com',
-          port => '1522',
-          service_name => 'gdfa7d153cd68c7_sagadb2_tp.adb.oraclecloud.com',
-          ssl_server_cert_dn => NULL,
-          credential_name => 'PARTICIPANTADMINCRED',
-          directory_name => '/u03/dbfs/FF8D55E55B29505FE053A516000A91FA/data/dpdump',
-          private_target => TRUE);
-END;
-/
+* **Authors** - [](var:authors)
+* **Contributors** - [](var:contributors)
+* **Last Updated By/Date** - John Lathouwers, July 2023
