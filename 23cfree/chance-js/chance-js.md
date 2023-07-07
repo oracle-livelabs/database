@@ -37,7 +37,7 @@ This labs assumes you have:
 
 3. To login use the username hol23c with the password you set in Lab 1 in the browser.
 
-    ![Image alt text](images/ords_login.png " ")
+    ![Image alt text](images/ords_login.png "_")
 
 4. To be able to run SQL statements you will need the sql worksheet. Click on SQL to launch that.
 
