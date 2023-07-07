@@ -11,12 +11,6 @@ Estimated Time: 30 minutes
 -   Create an invalid PL/SQL procedure 
 -   Validate invalid schema objects in the procedure
 
-In this lab you will use Database Actions to validate invalid Schema objects. You will create a new PL/SQL procedure and also change the table that is referenced in the procedure.   
-Estimated Time: 30 minutes
-
-**Background**
-As a database administrator (DBA), you may be asked to revalidate schema objects that have become invalid. Schema objects (such as triggers, procedures, or views) can be invalidated when changes are made to objects on which they depend. For example, if a PL/SQL procedure contains a query on a table and you modify table columns that are referenced in the query, then the PL/SQL procedure becomes invalid. You revalidate schema objects by compiling them.
-
 ### Objectives  
 
 Create an invalid PL/SQL procedure and validate the invalid schema objects in the procedure.
