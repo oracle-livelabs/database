@@ -129,7 +129,7 @@ phpinfo();
 1. Install WordPress required packages.
 
     ````
-    <copy>sudo yum install -y php-mysqlnd php-zip php-gd php-mcrypt php-mbstring php-xml php-json</copy>   
+    <copy>sudo yum install -y php-mysqlnd php-zip php-gd php-mbstring php-xml php-json</copy>   
     ````
 
     ````
@@ -191,11 +191,11 @@ phpinfo();
     ````
 
     ````
-    <copy>create user wp IDENTIFIED BY 'Welcome#12345';</copy>   
+    <copy>CREATE USER 'wp'@'%' IDENTIFIED WITH mysql_native_password BY 'Welcome#12345';</copy>   
     ````
 
     ````
-    <copy>GRANT ALL PRIVILEGES ON wordpress.* To wp;</copy>   
+    <copy>GRANT ALL PRIVILEGES ON wordpress.* To 'wp'@'%';</copy>   
     ````
 
     ````

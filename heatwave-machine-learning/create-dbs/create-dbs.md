@@ -1,41 +1,45 @@
-# Create MySQL Database HeatWave
+# Create MySQL HeatWave Database System
+
+![mysql heatwave](./images/mysql-heatwave-logo.jpg "mysql heatwave")
 
 ## Introduction
 
-In this lab, you will create and configure a Virtual Cloud Network and a MySQL HeatWave Database System. 
+In this lab, you will create a Virtual Cloud Network and create the MySQL HeatWave DB System.  
 
-_Estimated Time:_ 15 minutes
+_Estimated Time:_ 20 minutes
+
+[//]:    [](youtube:Uz_PXHzO9ac)
 
 ### Objectives
 
 In this lab, you will be guided through the following tasks:
 
-- Create a Virtual Cloud Network
-- Create MySQL HeatWave Database
+- Create Virtual Cloud Network
+- Create MySQL HeatWave (DB System) Instance
 
 ### Prerequisites
 
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with MySQL Shell
 
-## Task 1: Create a Virtual Cloud Network
+## Task 1: Create Virtual Cloud Network
 
-1. Click **Navigation Menu** in the up-left corner of the page
+1. You should be signed in to Oracle Cloud!
 
-    ![VCN](./images/01dashboard.png"dashboard")
+    Click **Navigation Menu**,
 
-2. Click **Virtual Cloud Networks**
+    ![OCI Console Home Page](./images/homepage.png " home page")
 
-    ![VCN](./images/03vcn-nav-menu.png"vcn-nav-menu")
+2. Click  **Networking**, then **Virtual Cloud Networks**  
+    ![menu vcn](./images/home-menu-networking-vcn.png "home menu networking vcn ")
 
 3. Click **Start VCN Wizard**
-
-    ![VCN](./images/03vcn-wizard.png"vcn-wizard")
+    ![vcn wizard](./images/vcn-wizard-menu.png "vcn wizard ")
 
 4. Select 'Create VCN with Internet Connectivity'
 
     Click 'Start VCN Wizard'
-    ![VCN](./images/03vcn-create.png "vcn-create ")
+    ![start vcn wizard](./images/vcn-wizard-start.png "start vcn wizard ")
 
 5. Create a VCN with Internet Connectivity
 
@@ -44,44 +48,36 @@ In this lab, you will be guided through the following tasks:
     VCN Name:
 
     ```bash
-    <copy>MDS-VCN</copy>
+    <copy>HEATWAVE-VCN</copy>
     ```
 
     Compartment: Select  **(root)**
 
     Your screen should look similar to the following
-
-    ![VCN](./images/03vcn-create-screen.png "vcn-create-screen")
+    ![select compartment](./images/vcn-wizard-compartment.png "select compartment")
 
 6. Click 'Next' at the bottom of the screen
 
 7. Review Oracle Virtual Cloud Network (VCN), Subnets, and Gateways
 
-    Click '**Create**' to create the VCN
+    Click 'Create' to create the VCN
+    ![create vcn](./images/vcn-wizard-create.png "create vcn")
 
-    ![VCN](./images/03vcn-create-button.png "vcn-create-button")
+8. When the Virtual Cloud Network creation completes, click 'View Virtual Cloud Network' to display the created VCN
+    ![vcn creation completing](./images/vcn-wizard-view.png "vcn creation completing")
 
-8. The Virtual Cloud Network creation is completing.
-   Then click '**View VCN**' to display the created VCN
+## Task 2: Configure security list to allow MySQL incoming connections
 
-    ![VCN](./images/03vcn-create-complete.png "vcn-create-complete ")
+1. On MDS-VCN page under 'Subnets in (root) Compartment', click  '**private subnet-heatwave-vcn**'
+     ![Show VCN](./images/vcn-details.png "Show VCN Details")
 
-9. On MDS-VCN page under 'Subnets in (root) Compartment', click  '**Private Subnet-MDS-VCN**'
+2. On Private Subnet-MDS-VCN page under 'Security Lists',  click  '**Security List for private subnet-heatwave-vcn**'
+    ![VCN Security Lists](./images/vcn-security-list.png "Show Security Lists")
 
-    ![VCN](./images/03vcn-create-display.png "vcn-create-display ")
+3. On Security List for Private Subnet-MDS-VCN page under 'Ingress Rules', click '**Add Ingress Rules**'
+    ![VCN Add Ingress Rules](./images/vcn-mysql-ingress.png "Prepar for add Add Ingress Rules")
 
-
-10. On Private Subnet-MDS-VCN page under 'Security Lists',  click  '**Security List for Private Subnet-MDS-VCN**'
-
-     ![VCN](./images/03vcn-subnets.png "vcn-subnets")
-    
-11. On Security List for Private Subnet-MDS-VCN page under 'Ingress Rules', click '**Add Ingress Rules**'
-
-    ![VCN](./images/03vcn-seclist.png " vcn-seclist")
-
-    ![VCN](./images/03vcn-ingress.png "vcn-ingress ")
-
-12. On Add Ingress Rules page under Ingress Rule 1
+4. On Add Ingress Rules page under Ingress Rule
 
     Add an Ingress Rule with Source CIDR
 
@@ -98,38 +94,26 @@ In this lab, you will be guided through the following tasks:
     Description
 
     ```bash
-    <copy>MySQL Port Access</copy>
+       <copy>MySQL Port Access</copy>
     ```
 
-    Click 'Add Ingress Rule'
+5. Click 'Add Ingress Rule'
+    ![VCN MySQL Ingress Rule  entries](./images/vcn-mysql-add-ingress.png "Save  MySQL Ingress Rule  entries")
 
-        ![VCN](./images/03vcn-ingress-rule.png "vcn-ingress-rule")
+6. On Security List for Private Subnet-MDS-VCN page, the new Ingress Rules will be shown under the Ingress Rules List
+    ![VCN MySQL Ingress Rules](./images/vcn-mysql-ingress-completed.png "view  MySQL Ingress Rules")
 
-13. On Security List for Private Subnet-MDS-VCN page, the new Ingress Rules will be shown under the Ingress Rules List
+## Task 3: Configure security list to allow HTTP incoming connections
 
-    ![VCN](./images/03vcn-ingress-rule-list.png "vcn-ingress-rule-list")
+1. Navigation Menu > Networking > Virtual Cloud Networks
 
-14. Because we want also create a web application in last lab, we open now the port 80/HTTP. <br>
-    Click **Navigation Menu**, **Networking**, then **Virtual Cloud Networks**
+2. Open heatwave-vcn
 
-    ![VCN](./images/03vcn-nav-menu.png"vcn-nav-menu")
+3. Click  public subnet-heatwave-vcn
 
-15. Click the VCN name '**MDS-VCN**' to show the subnets
+4. Click Default Security List for heatwave-vcn
 
-    ![VCN](./images/03vcn-list.png"vcn-list")
-
-16. Click the subnet '**Public Subnet-MDS-VCN**' to show the associated security lists
-
-    ![VCN](./images/03vcn-create-display.png"vcn-create-display")
-
-17. On Public Subnet-MDS-VCN page under 'Security Lists', click '**Default Security List for MDS-VCN**'
-
-    ![VCN](./images/03vcn-public-security-lists.png"vcn-public-security-lists")
-
-18. On Security List for Public Subnet-MDS-VCN page under 'Ingress Rules', click '**Add Ingress Rules**'
-    ![VCN](./images/03vcn-ingress.png "vcn-ingress ")
-
-19. On Add Ingress Rules page under Ingress Rule 1
+5. Click Add Ingress Rules page under Ingress Rule
 
     Add an Ingress Rule with Source CIDR
 
@@ -140,122 +124,136 @@ In this lab, you will be guided through the following tasks:
     Destination Port Range
 
     ```bash
-    <copy>80</copy>
+    <copy>80,443</copy>
     ```
 
     Description
 
     ```bash
-    <copy>HTTP Access</copy>
+    <copy>Allow HTTP connections</copy>
     ```
 
-    Click 'Add Ingress Rule'
-        ![VCN](./images/03vcn-ingress-rule-80.png "vcn-ingress-rule-80")
+6. Click 'Add Ingress Rule'
 
-20. On Security List for Public Subnet-MDS-VCN page, the new Ingress Rules will be shown under the Ingress Rules List
-    ![VCN](./images/03vcn-public-ingress-rule-list.png "vcn-public-ingress-rule-list")
+    ![VCN HTTP Ingress Rule](./images/vcn-ttp-add-ingress.png "Add HTTP Ingress Rule")
 
-## Task 2: Create a MySQL Database for HeatWave (DB System) 
+7. On Security List for Default Security List for mds_vcn page, the new Ingress Rules will be shown under the Ingress Rules List
 
-1. Go to Navigation Menu
+    ![VCN Completed HTTP Ingress rules](./images/vcn-ttp-ingress-completed.png"View VCN Completed HTTP Ingress rules")
+
+## Task 2: Create MySQL Database for HeatWave (DB System) instance
+
+1. Click on Navigation Menu
          Databases
          MySQL
-         DB Systems
-    ![MDS](./images/04mysql-nav-menu.png " mysql-nav-menu")
+    ![home menu mysq](./images/home-menu-database-mysql.png "home menu mysql")
 
-2. Click 'Create MySQL DB System'
+2. Click 'Create DB System'
+    ![mysql create button](./images/mysql-menu.png " mysql create button")
 
-    ![MDS](./images/04mysql-create-db.png "mysql-create-db")
+3. Create MySQL DB System dialog by completing the fields in each section
 
-3. Create MySQL DB System dialog and complete the fields in each section
-
-    - Provide basic information for the DB System
-    - Setup your required DB System
+    - Provide DB System information
+    - Setup the DB system
     - Create Administrator credentials
     - Configure Networking
     - Configure placement
     - Configure hardware
     - Exclude Backups
-    - Advanced Options - Set  Host Name
+    - Set up Advanced Options
 
-4. Provide basic information for the DB System:
+4. For DB System Option Select **Development or Testing**
 
-    Select Compartment **(root)**
+    ![heatwave db option](./images/mysql-create-option-develpment.png "heatwave db option")
 
-    Enter Name
+5. Provide basic information for the DB System:
 
-    ```bash
-    <copy>MDS-HW</copy>
-    ```
+    a. Select Compartment **(root)**
 
-    Enter Description
+    b. Enter Name
 
     ```bash
-    <copy>MySQL Database Service HeatWave instance</copy>
+    <copy>HEATWAVE-DB</copy>
     ```
 
-    Select **HeatWave** to specify a HeatWave DB System
-
-    ![MDS](./images/04mysql-select-heatwave.png "mysql-select-heatwave")
-
-5. Create Administrator Credentials (write username and password to notepad for later use)
-
-    **Enter Username** : admin 
-
-    **Enter Password** : 
-
-    **Confirm Password** (value should match the password for later use)
-
-    ![MDS](./images/04mysql-set-password.png "mysql-set-password")
-
-6. On Configure networking, keep the default values
-
-    Virtual Cloud Network: **MDS-VCN**
-
-    Subnet: **Private Subnet-MDS-VCN (Regional)**
-
-    ![MDS](./images/04mysql-vcn.png "mysql-vcn")
-
-7. On Configure hardware, keep default shape as **MySQL.HeatWave.VM.Standard.E3**
-
-    Data Storage Size (GB) Set value to:  **512**
+    c. Enter Description
 
     ```bash
-    <copy>512</copy>
+    <copy>MySQL HeatWave Database Instance</copy>
     ```
 
-    ![MDS](./images/04mysql-data-storage.png "mysqldata-storage")
+    d. Create Administrator Credentials
 
-8. On Configure Backups, disable 'Enable Automatic Backup'
+    **Enter Username** (write username to notepad for later use)
 
-    ![MDS](./images/04mysqlset-backup.png "mysqlset-backup")
+    **Enter Password** (write password to notepad for later use)
 
-9. Go to the Networking tab, in the Hostname field enter (same as DB System Name):
+    **Confirm Password** (value should match password for later use)
+
+    ![heatwave db admin](./images/mysql-create-admin.png "heatwave db admin ")
+
+6. Select **“Standalone”** and enable **“Configure MySQL HeatWave”**
+    ![HeatWave Type selection](./images/mysql-heatwave-system-selection.png "mysql heatwave system selection")
+7. On Configure networking, keep the default values
+
+    a. Virtual Cloud Network: **HEATWAVE-VCN**
+
+    b. Subnet: **Private Subnet-HEATWAVE-VCN (Regional)**
+
+    c. On Configure placement under 'Availability Domain'
+
+    Select AD-1  ...  Do not check 'Choose a Fault Domain' for this DB System.
+
+    ![heatwave db network ad](./images/mysql-create-network-ad.png "heatwave db network ad ")
+
+8. On Configure hardware, keep default shape as **MySQL.HeatWave.VM.Standard.E3**
+
+    Data Storage Size (GB) Set value to:  **1024**
 
     ```bash
-    <copy>MDS-HW</copy>
+    <copy>1024</copy>
     ```
 
-10. Click the '**Create**' button
+    ![heatwave db  hardware](./images/mysql-create-db-hardware.png"heatwave db hardware ")
 
-    ![MDS](./images/04mysql-create-button.png " mysql_create-button")
+9. On Configure Backups, disable 'Enable Automatic Backup'
 
-    
+    ![heatwave db  backup](./images/mysql-create-backup.png " heatwave db  backup")
 
-11. The New MySQL DB System will be ready to use after a few minutes
+10. Click on Show Advanced Options
+
+11. Go to the Networking tab, in the Hostname field enter (same as DB System Name):
+
+    ```bash
+        <copy>HEATWAVE-HW</copy> 
+    ```  
+
+    ![heatwave db advanced](./images/mysql-create-advanced.png "heatwave db advanced ")
+
+12. Review **Create MySQL DB System**  Screen
+
+    ![heatwave db create](./images/mysql-create.png "heatwave db create ")
+  
+
+    Click the '**Create**' button
+
+13. The New MySQL DB System will be ready to use after a few minutes
 
     The state will be shown as 'Creating' during the creation
+    ![show creeation state](./images/mysql-create-in-progress.png"show creeation state")
 
-    ![MDS](./images/04mysql-create-display.png"mysql-create-display ")
+14. The state 'Active' indicates that the DB System is ready for use
 
-12. The state 'Active' indicates that the DB System is ready for use
+    On HEATWAVE-HW Page, check the MySQL Endpoint (Private IP Address)
 
-    On MDS-HW Page, check the MySQL Endpoint (Private IP Address)
+    ![heatwave endpoint](./images/mysql-detail-active.png"heatwave endpoint")
 
-    ![MDS](./images/04mysql-create-active.png"mysql-create-active ")
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
 - **Author** - Perside Foster, MySQL Solution Engineering
-- **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Priscila Galvao, MySQL Solution Engineering, Nick Mader, MySQL Global Channel Enablement & Strategy Manager, Frédéric Descamps, MySQL Community Manager, Marco Carlessi, MySQL Solution Engineering
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, July 2022
+
+- **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Priscila Galvao, MySQL Solution Engineering, Nick Mader, MySQL Global Channel Enablement & Strategy Manager, Frédéric Descamps, MySQL Community Manager
+
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, February 2022

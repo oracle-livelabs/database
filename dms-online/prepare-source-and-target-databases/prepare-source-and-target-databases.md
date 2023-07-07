@@ -281,8 +281,15 @@ In this lab, you will:
     </copy>
     ```
     Your source DB now has a user HR01 with a table EMPL that has 1000 rows.
+    
+5. This table is to demonstrate the Cloud Pre Migration advisor (CPAT) functionality during Validation on Lab 8.
+    ```
+    <copy>
+    CREATE TABLE image_table2 ( id NUMBER, image ORDImage ) LOB(image.source.localData) STORE AS SECUREFILE;
+    </copy>
+    ```
 
-5. Exit SQL.
+6. Exit SQL.
 
     ```
     <copy>
@@ -320,25 +327,47 @@ To perform the migration, DMS will require several passwords, for simplicity, le
 ## Task 5: Enable ggadmin user on target database
 
 The next steps will connect to the target ADB instance and enable the standard ggadmin user. You can skip these steps if the user is already enabled. 
+The connection will be thru the Oracle GoldenGate instance using sqlplus.
+
+Make sure the Autonomous Database regional wallet has been placed in /u02/deployments/Marketplace/etc/adb. If not, you can download the zip file from OCI Console and unzip it there.
+Modify sqlnet.ora so it correctly has the wallet location (needed if connecting with sqlplus):
 
 1. Enter the following commands:
 
     ```
     <copy>
-    export TNS_ADMIN=/u02/deployments/Target/etc 
-
+    cat sqlnet.ora
+    WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="/u02/deployments/Marketplace/etc/adb"))) SSL_SERVER_DN_MATCH=yes
 
     </copy>
-
     ```
-
+2. You need to set the following Export variables:    
     ```
     <copy>
-    $ORACLE_HOME/bin/sqlplus admin/ATP password@targetatp_high
-
+    EXPORT ORACLE_HOME="/U01/APP/OGG/LIB/INSTANTCLIENT"
     </copy>
     ```
-
+    ```
+    <copy>
+    EXPORT LD_LIBRARY_PATH="$ORACLE_HOME"
+    </copy>
+    ```
+     ```
+    <copy>
+    EXPORT PATH="$ORACLE_HOME:$PATH"
+    </copy>
+    ```
+      ```
+    <copy>
+    EXPORT TNS_ADMIN="/U02/DEPLOYMENTS/MARKETPLACE/ETC/ADB"
+    </copy>
+    ```
+      ```
+    <copy>
+    $ORACLE_HOME/SQLPLUS ADMIN/ <DB PASSWORD>@ ADW_name
+    </copy>
+    ```
+    
 2. In SQL Plus enter the following commands:
 
     ```

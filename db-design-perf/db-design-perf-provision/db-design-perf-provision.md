@@ -94,7 +94,7 @@ Estimated Lab Time: 10 minutes
 
 5. Choose a deployment type. Select the deployment type for your database from the choices:
 
-    - __Shared Infrastructure__ - For this lab, choose __Shared Infrastructure__ as the deployment type.
+    - __Serverless__ - For this lab, choose __Serverless__ as the deployment type.
 
     ![Deployment type section](./images/p08-deployment-type-section.png " ")
 

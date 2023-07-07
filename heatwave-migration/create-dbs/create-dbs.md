@@ -27,15 +27,15 @@ In this lab, you will be guided through the following tasks:
 
 1. Login to Oracle Cloud (OCI), click on the “Hamburger” menu on the top left. Navigate to “Networking” and “Virtual Cloud Networks”
 
-    ![OCI Navigation Menu](./images/ham-menu.png "oci-hamburger-menu")
+    ![OCI Navigation Menu](./images/ham-menu-new.png "oci-hamburger-menu")
 
-    ![OCI Navigation VCN Menu](./images/vcn-menu.png "navigate-to-vcn")
+    ![OCI Navigation VCN Menu](./images/vcn-menu-new.png "navigate-to-vcn")
 
 2. Once on the Virtual Cloud Networks page, click “Start VCN Wizard” and select “Create VCN with Internet Connectivity”
 
-    ![OCI VCN Page](./images/vcn-wiz-2.png "create-vcn")
+    ![OCI VCN Page](./images/vcn-wiz-2-new.png "create-vcn")
 
-    ![VCN Wizard](./images/vcn-wiz1.png "vcn-wizard")
+    ![VCN Wizard](./images/vcn-wiz1-new.png "vcn-wizard")
 
 3. Name your VCN “MySQL-VCN” while making sure you are in the correct Compartment. Leave everything as it is, and click “Next”
 
@@ -43,25 +43,25 @@ In this lab, you will be guided through the following tasks:
     <copy>MySQL-VCN</copy>
     ```
 
-    ![VCN Creation Page](./images/name-vcn.png "name-vcn-wizard")
+    ![VCN Creation Page](./images/name-vcn-new.png "name-vcn-wizard")
 
 4. Review all the information and click “Create”
 
-    ![Review VCN Creation Page](./images/review-vcn.png "review-vcn-wizard")
+    ![Review VCN Creation Page](./images/review-vcn-new.png "review-vcn-wizard")
 
 5. Once the VCN is created, click “View Virtual Cloud Network”
 
-    ![VCN Setup Complete Page](./images/view-vcn.png "view-vcn-wizard")
+    ![VCN Setup Complete Page](./images/view-vcn-new.png "view-vcn-wizard")
 
 6. Once on the MySQL-VCN page, under “Resources” click “Subnets” and go to the “Private-Subnet-MySQL-VCN”
 
-    ![VCN Subnet Page](./images/resources-vcn.png "resources-vcn")
+    ![VCN Subnet Page](./images/resources-vcn-new.png "resources-vcn")
 
 7. On the Private Subnet page, under “Security Lists”, click on “Security List for Private Subnet-MySQL-VCN” and select “Add Ingress Rules”
 
-    ![Security List VCN Private Subnet](./images/sc-vcn.png "seclist-vcn")
+    ![Security List VCN Private Subnet](./images/sc-vcn-new.png "seclist-vcn")
 
-    ![Add Ingress Rules Button](./images/add-ingr.png "add-ingress")
+    ![Add Ingress Rules Button](./images/add-ingr-new.png "add-ingress")
 
 8. For the ‘Source CIDR’ enter “0.0.0.0/0”, select "TCP" for the 'IP Protocol' and for the Destination Port Range, enter “3306,33060”. In the ‘Description’ section, write “MySQL Port Access”
 
@@ -77,19 +77,19 @@ In this lab, you will be guided through the following tasks:
     <copy>MySQL Port Access</copy>
     ```
 
-    ![Add Ingress Rule](./images/add-rule.png "add-ingress-rule")
+    ![Add Ingress Rule](./images/add-rule-new.png "add-ingress-rule")
 
 ## Task 2: Create SSH Key in OCI using Cloud Shell
 
 1. Inside Oracle Cloud, navigate to "Cloud Shell" under 'Developer tools' next to your Home Region
 
-    ![OCI Developer Tools Icon](./images/devtools.png "developer-tools")
+    ![OCI Developer Tools Icon](./images/devtools-new.png "developer-tools")
 
-    ![Cloud Shell Button](./images/devtools-cldshell.png "cloud-shell")
+    ![Cloud Shell Button](./images/devtools-cldshell-new.png "cloud-shell")
 
 2. Once the Cloud Shell loads, it should look similar to this:
 
-    ![Cloud Shell Prompt](./images/cld-shell-prmpt.png "cloud-shell-prompt")
+    ![Cloud Shell Prompt](./images/cld-shell-prmpt-new.png "cloud-shell-prompt")
 
 3. Inside your Cloud Shell, execute the command to create an SSH key-pair
 
@@ -123,11 +123,11 @@ In this lab, you will be guided through the following tasks:
 
 1. Within Oracle Cloud, go to the Navigation or Hamburger menu and under Compute, select “Instances”
 
-    ![OCI Navigation Compute Menu](./images/compute.png "nav-compute")
+    ![OCI Navigation Compute Menu](./images/compute-new.png "nav-compute")
 
 2. Make sure you are in the right compartment, and click “Create instance”
 
-    ![OCI Compute Page](./images/create-compute.png "create-compute")
+    ![OCI Compute Page](./images/create-compute-new.png "create-compute")
 
 3. Name your compute instance "MySQL-Compute". For Placement, leave it at default. For Image and Shape, make sure "Oracle Linux 8" is selected and choose an appropriate Shape that fits your needs. Under Networking, make sure the Public Subnet of your MySQL-VCN is selected
 
@@ -135,19 +135,19 @@ In this lab, you will be guided through the following tasks:
     <copy>MySQL-Compute</copy>
     ```
 
-    ![OCI Compute Creation Page](./images/create-compute2.png "create-compute2")
+    ![OCI Compute Creation Page](./images/create-compute2-new.png "create-compute2")
 
-    ![Compute Image and Shape](./images/compute-image.png "create-compute3")
+    ![Compute Image and Shape](./images/compute-image-new.png "create-compute3")
 
-    ![Networking for Compute](./images/pub-sub.png "public-subnet")
+    ![Networking for Compute](./images/pub-sub-new.png "public-subnet")
 
 4. Lastly for the 'Add SSH keys', select "Paste public keys" and paste the contents of the id_rsa.pub file here that we copied in Step 4 of Lab 1 Task 2. After pasting your public key, leave everything default and click "Create"
 
-    ![Paste Public SSH Key/Create Compute](./images/add-ssh.png "pubkey-compute")
+    ![Paste Public SSH Key/Create Compute](./images/add-ssh-new.png "pubkey-compute")
 
 5. Your Compute instance will be ready in a few minutes. Copy the Public IP address of your Compute instance afterwards.
 
-    ![Compute Running](./images/ready-compute.png "ready-compute")
+    ![Compute Running](./images/ready-compute-new.png "ready-compute")
 
 6. After copying the Public IP of your Compute, open/restore Cloud Shell. Once Cloud Shell loads, perform the ssh command to connect to your Compute instance
 
@@ -155,7 +155,7 @@ In this lab, you will be guided through the following tasks:
     <copy>ssh -i ~/.ssh/id_rsa opc@<your_compute_instance_ip></copy>
     ```
 
-    ![SSH into Compute](./images/ssh-compute.png "ssh-into-compute")
+    ![SSH into Compute](./images/ssh-compute-new.png "ssh-into-compute")
 
 ## Task 4: Install MySQL Community Edition in your on-prem environment
 
@@ -283,4 +283,4 @@ In this lab, you will be guided through the following tasks:
 
 - **Author** - Ravish Patel, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Solution Engineering
-- **Last Updated By/Date** - Ravish Patel, MySQL Solution Engineering, March 2023
+- **Last Updated By/Date** - Ravish Patel, MySQL Solution Engineering, June 2023
