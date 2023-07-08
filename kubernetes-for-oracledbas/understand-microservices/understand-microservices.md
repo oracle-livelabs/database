@@ -27,7 +27,7 @@ Given the size and sole beer offering, you choose a straightforward and efficien
 
 ### *Local Legends* - Containers
 
-After a highly successful year, a range of fresh new beers, such as the "SQL Saison" and "OLAP Porter," it became apparent that maintaining the single schema was challenging, **prone to errors**, and **disruptive** to the different operations the database supported.  In response, you made the strategic decision to segregate the stock, orders, and customer objects into dedicated schemas.
+After a highly successful year and a fresh, new range of beers, such as the "SQL Saison" and "OLAP Porter," it became apparent that maintaining the single schema was challenging, **prone to errors**, and **disruptive** to the different operations the database supported.  In response, you made the strategic decision to segregate the stock, orders, and customer objects into dedicated schemas.
 
 This architectural change ensured **greater organisation** while **minimising potential disruptions** between the different operations.
 
@@ -90,7 +90,7 @@ But before you do, here's a summary of the key aspects of the Microservices Arch
 
 Microservices is great architectural approach that brought numerous benefits to Query Brews. However, adopting a Microservices Architecture depends on various factors and considerations.
 
-Here are some advantages and disadvantages to keep in mind:
+Here are some advantages and considerations to keep in mind:
 
 ### Advantages
 
@@ -123,4 +123,4 @@ Here are some advantages and disadvantages to keep in mind:
 
 * **Authors** - [](var:authors)
 * **Contributors** - [](var:contributors)
-* **Last Updated By/Date** - John Lathouwers, June 2023
+* **Last Updated By/Date** - John Lathouwers, July 2023

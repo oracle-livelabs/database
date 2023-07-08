@@ -1,8 +1,5 @@
 # Clean up OCI Tenancy
 
-"Be careless in your dress if you must, but keep a tidy ~~soul~~ [tenancy]."
-\- Mark Twain
-
 ## Introduction
 
 In this lab, you will clean up the Oracle Cloud Infrastructure (OCI) *Policies*, *Group*, and *Compartment* that were created during this workshop.
@@ -10,9 +7,6 @@ In this lab, you will clean up the Oracle Cloud Infrastructure (OCI) *Policies*,
 <if type="tenancy">**If you are not in the OCI Administrators group,** please have an OCI Administrator perform each of these tasks for you.</fi>
 
 *Estimated Lab Time:* 2 minutes
-
-Watch the video below for a quick walk through of the lab.
-[](youtube:zNKxJjkq0Pw)
 
 ### Objectives
 
@@ -132,5 +126,6 @@ fi
 
 ## Acknowledgements
 
-* **Author** - John Lathouwers, Developer Advocate, Database Development Operations
-* **Last Updated By/Date** - John Lathouwers, May 2023
+* **Authors** - [](var:authors)
+* **Contributors** - [](var:contributors)
+* **Last Updated By/Date** - John Lathouwers, July 2023

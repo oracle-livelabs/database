@@ -8,9 +8,6 @@ In this lab, you will create the Oracle Cloud Infrastructure (OCI) *Policies* re
 
 *Estimated Lab Time:* 2 minutes
 
-Watch the video below for a quick walk through of the lab.
-[](youtube:zNKxJjkq0Pw)
-
 ### Objectives
 
 * Create an OCI Compartment

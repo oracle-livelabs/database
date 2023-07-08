@@ -12,9 +12,6 @@ You can think of the `kubeconfig` file as consolidated version of the `TNS_ADMIN
 
 *Estimated Lab Time:* 10 minute
 
-Watch the video below for a quick walk through of the lab.
-[](youtube:zNKxJjkq0Pw)
-
 ### Objectives
 
 * Establish a connection and interact with the cluster
@@ -27,15 +24,13 @@ This lab assumes you have:
 
 ## Task 1: Create the Kubeconfig file
 
-In OCI, navigate to Developer Services -> Kubernetes Clusters(OKE).
+1. In OCI, navigate to Developer Services -> Kubernetes Clusters(OKE).
+    ![OCI OKE Navigation](images/oci_oke_nav.png "OCI OKE Navigation")
 
-![OCI OKE Navigation](images/oci_oke_nav.png "OCI OKE Navigation")
+2. Select your cluster and click the "Access Cluster" button. Follow the steps to "Manage the cluster via Cloud Shell".
+    ![OCI Create Kubeconfig](images/oci_create_kubeconfig.png "OCI Create Kubeconfig")
 
-Select your cluster and click the "Access Cluster" button. Follow the steps to "Manage the cluster via Cloud Shell".
-
-![OCI Create Kubeconfig](images/oci_create_kubeconfig.png "OCI Create Kubeconfig")
-
-Paste the copied command into Cloud Shell.  This will create a configuration file, the `kubeconfig`, that `kubectl` uses to access the cluster in the default location of `$HOME/.kube/config`.
+3. Paste the copied command into Cloud Shell.  This will create a configuration file, the `kubeconfig`, that `kubectl` uses to access the cluster in the default location of `$HOME/.kube/config`.
 
 ## Task 2: Test Kubernetes Access
 
@@ -67,64 +62,69 @@ The above command will prompt the **kube-apiserver** to query the **etcd** datab
 
 ## Task 3: Change the default Namespace Context
 
-With kubeconfig files, you can organize your clusters, users, and namespaces. You can also define contexts to quickly and easily switch between clusters and namespaces.  This is the equivalent of having multiple **connection strings** in your `tnsnames.ora` file allowing you to connect to different databases.
+With kubeconfig files, you can organize your clusters, users, and **namespaces**. You can also define **contexts** to quickly and easily switch between clusters and **namespaces**.  This is the equivalent of having multiple connection strings in your `tnsnames.ora` file allowing you to connect to different databases.
 
 ### namespaces
 
 In an Oracle Database, schema's provide a mechanism for isolating database objects within the same database.  Namespaces in Kubernetes are similar to schemas, they provide a means for isolating groups of resources within a single cluster.  Resources in a namespace, just like objects in a schema, need to be unique within a namespace, but not across namespaces.
 
-Take a look at your existing configuration and default context, in Cloud Shell:
+1. Take a look at your context, in Cloud Shell:
 
-```bash
-<copy>
-kubectl config view --minify
-</copy>
-```
+    ```bash
+    <copy>
+    kubectl config get-contexts
+    </copy>
+    ```
 
-You will only have one context defined, but suppose you have a development and test cluster.  In the development cluster you work in your own namespace and in the test cluster all DBAs share the same namespace.  Additionally, the development cluster permits username/password authentication, while in the test cluster, you must use a certificate.
+    You will only have one context defined, but suppose you have a development and test cluster.  In the development cluster you work in your own namespace and in the test cluster all DBAs share the same namespace.  Additionally, the development cluster permits username/password authentication, while in the test cluster, you must use a certificate.
 
-![Kubeconfig Context](images/kubeconfig_context.png "Kubeconfig Context")
+    ![Kubeconfig Context](images/kubeconfig_context.png "Kubeconfig Context")
 
-All this information can be stored in a single kubeconfig file and you can define a `context` to group the cluster, user AuthN, and namespace together.
+    All this information can be stored in a single kubeconfig file and you can define a `context` to group the cluster, user AuthN, and namespace together.
 
-Rename the existing context to `demo`:
+2. Rename the existing context to `demo`:
 
-```bash
-<copy>
-kubectl config rename-context $(kubectl config current-context) demo
-</copy>
-```
+    ```bash
+    <copy>
+    kubectl config rename-context $(kubectl config current-context) demo
+    </copy>
+    ```
 
-Create a new Namespace called `sqldev-web` and point a new context at it:
+3. Create a new Namespace called `sqldev-web` and point a new context at it:
 
-```bash
-<copy>
-kubectl create namespace sqldev-web
+    ```bash
+    <copy>
+    kubectl create namespace sqldev-web
 
-kubectl config set-context sqldev-web \
---namespace=sqldev-web \
---cluster=$(kubectl config get-clusters | tail -1) \
---user=$(kubectl config get-users | tail -1)
-</copy>
-```
+    kubectl config set-context sqldev-web \
+    --namespace=sqldev-web \
+    --cluster=$(kubectl config get-clusters | tail -1) \
+    --user=$(kubectl config get-users | tail -1)
+    </copy>
+    ```
 
-You'll use the `sqldev-web` namespace later in the Workshop to deploy your Microservice Application.  You should now have two contexts, one named `demo` and one named `sqldev-web`:  
+    You'll use the `sqldev-web` namespace later in the Workshop to deploy your Microservice Application.  
 
-```bash
-<copy>
-kubectl config view --minify
-</copy>
-```
+4. You should now have two contexts, one named `demo` and one named `sqldev-web`:  
 
-Although in our example both contexts point to the same user and cluster, you can see how easy it is create different isolated environments.  Switching between clusters, users, and/or namespaces would simply involve changing the context.
+    ```bash
+    <copy>
+    kubectl config get-contexts
+    </copy>
+    ```
 
-Change your context to `demo`:
+    Although in our example both contexts point to the same user and cluster, you can see how easy it is create different isolated environments.  Switching between clusters, users, and/or namespaces would simply involve changing the context.
 
-```bash
-<copy>
-kubectl config use-context demo
-</copy>
-```
+5. Ensure your context is set to `demo`:
+
+    ```bash
+    <copy>
+    kubectl config use-context demo
+    kubectl config get-contexts
+    </copy>
+    ```
+
+    ![Context](images/contexts.png "Contexts")
 
 For Production clusters, you may consider storing its context in an entirely different kubeconfig file to limit access and prevent mistakes.  Using the `production` context would be a matter of setting the `KUBECONFIG` environment variable to its location.
 

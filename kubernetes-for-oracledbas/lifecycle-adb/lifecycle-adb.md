@@ -4,11 +4,9 @@
 
 In this lab, you use the OraOperator to perform Lifecycle operations against an Oracle Autonomous Database (ADB).
 
-In order to manage the **AutonomousDatabase** type, the OraOperator has **Custom Controllers** to manage the  **AutonomousDatabase** type within the K8s cluster. These controllers act as "built-in SOPs" specifically designed for handling the  **AutonomousDatabase** resource.
+In order to manage the **AutonomousDatabase** type, the OraOperator has **Custom Controllers** to manage the  **AutonomousDatabase** type within the Kubernetes cluster. These controllers act as "built-in Standard Operating Procedures" specifically designed for handling the **AutonomousDatabase** resource type.
 
-The **Custom Controllers** provide a declarative API, allowing users to specify the desired state of the  **AutonomousDatabase** resource.  They continuously monitor the current state of the resource and take actions to reconcile any differences between the desired state and the actual state.
-
-The actions that the AutonomousDatabase controller can perform includes:
+The actions that the OraOperator support for the AutonomousDatabase resource type includes:
 
 * Create an Autonomous Database
 * Manage ADMIN database user password
@@ -16,12 +14,9 @@ The actions that the AutonomousDatabase controller can perform includes:
 * Scale the OCPU core count or storage
 * Rename an Autonomous Database
 * Stop/Start/Terminate an Autonomous Database
-* Delete the resource from the K8s cluster
+* Delete the resource from the Kubernetes cluster
 
 *Estimated Lab Time:* 15 minutes
-
-Watch the video below for a quick walk through of the lab.
-[](youtube:zNKxJjkq0Pw)
 
 ### Objectives
 
@@ -35,183 +30,93 @@ This lab assumes you have:
 * A [Running and Healthy OraOperator](?lab=deploy-oraoperator)
 * The [OraOperator bound to an ADB](?lab=bind-adb)
 
-## Task 1: Create Manifest for new ADB
+## Task 1: Database Connectivity
 
-Use the OraOperator to provision a new Autonomous Database by creating a manifest file that will:
+In the [Bind to an ADB](?lab=bind-adb) Lab, you redefined the `adb-existing` resource to include its mTLS Wallet.  The OraOperator created a new **Secret** called `adb-tns-admin` with the wallets contents.
 
-* Define a Secret to hold the ADMIN password
-* Provision a new ADB
+1. Extract the `adb-tns-admin` Secret:
 
-```bash
-<copy>
-cat > adb_provision.yaml << EOF
----
-apiVersion: v1
-kind: Secret
-type: Opaque
-metadata:
-  name: adb-devops-admin-password
-stringData:
-  adb-devops-admin-password: Th1s_W1ll_N0t_l1v3
----
-apiVersion: database.oracle.com/v1alpha1
-kind: AutonomousDatabase
-metadata:
-  name: adb-devops
-spec:
-  hardLink: true
-  details:
-    compartmentOCID: $COMPARTMENT_OCID
-    dbName: DEVOPSDB
-    displayName: DEVOPSDB
-    dbVersion: 19c
-    dbWorkload: OLTP
-    cpuCoreCount: 1
-    dataStorageSizeInTBs: 1
-    adminPassword:
-      k8sSecret:
-        name:  adb-devops-admin-password
-EOF
-</copy>
-```
+    ```bash
+    <copy>
+    export ORACLE_HOME=$(pwd)
+    export TNS_ADMIN=$ORACLE_HOME/network/admin
+    mkdir -p $ORACLE_HOME/network/admin
 
-The above YAML invokes the K8s built-in `v1` API to define an `Opaque` `Secret` resource called `adb-devops-admin-password` with the value of `Th1s_W1ll_N0t_l1v3`.  As the `Secret` doesn't currently exist, it will be created and K8s will store the base64 encoded value of the password.
+    # Extract the tnsnames.ora secret
+    kubectl get secret/adb-tns-admin \
+      --template="{{ index .data \"tnsnames.ora\" | base64decode }}" > $ORACLE_HOME/network/admin/tnsnames.ora
 
-The YAML will also access the OraOperators' custom controller API `database.oracle.com/v1alpha1` to define an `AutonomousDatabase` (custom) resource in the `$COMPARTMENT_OCID` (substituted by the real value stored in *Task 2*) with the self-explanatory properties in the `spec.details` section.
+    # Extract the sqlnet.ora secret
+    kubectl get secret/adb-tns-admin \
+      --template="{{ index .data \"sqlnet.ora\" | base64decode }}" > $ORACLE_HOME/network/admin/sqlnet.ora
 
-**Important:** the `spec.hardLink: true` field indicates that if you delete this `AutonomousDatabase` resource from the K8s cluster, also delete the ADB associated with it.
-> Good for DevOps CI/CD... Bad for Production!
+    # Extract the Wallet for mTLS
+    kubectl get secret/adb-tns-admin \
+      --template="{{ index .data \"cwallet.sso\" | base64decode }}" > $ORACLE_HOME/network/admin/cwallet.sso
+    </copy>
+    ```
 
-If it were set to `false` then deleting the resource from K8s would *NOT* delete ADB itself.
+2. Feel free to examine the contents of the files created by extracting the different secrets (e.g `cat $ORACLE_HOME/network/admin/tnsnames.ora`)
 
-## Task 2: Apply the new ADB Manifest
+3. Retrieve the `adb-admin-password` Secret value:
 
-Define the new ADB cluster:
+    ```bash
+    <copy>
+    ADB_PWD=$(kubectl get secrets/adb-admin-password --template="{{index .data \"adb-admin-password\" | base64decode}}")
+    </copy>
+    ```
 
-```bash
-<copy>
-kubectl apply -f adb_provision.yaml
-</copy>
-```
+4. Connect to the ADB via SQL*Plus:
 
-Output:
+    ```bash
+    <copy>
+    SERVICE_NAME=$(kubectl get adb -o json | jq -r .items[0].spec.details.dbName)_TP
 
-```text
-secret/adb-new-admin-password created
-autonomousdatabase.database.oracle.com/adb-new created
-```
+    sqlplus admin@$SERVICE_NAME
+    </copy>
+    ```
 
-## Task 3: Verify new ADB Provisioning
+    You should get the all familiar `SQL>` prompt.  `EXIT` when ready.
 
-In the OCI Console, navigate to Oracle Database -> Autonomous Database.  
+Everything you needed to make a connection to the ADB could be obtained from Kubernetes.  Applications in Kubernetes using the ADB as a backend data store will be able to do the same.
 
-![Navigate to ADB](images/adb_navigation.png "Navigate to ADB")
+## Task 2: Scale the OCPU and Storage - Up
 
-Ensure you are in the K8S4DBAS Compartment and you will see the `DEVOPSDB` being provisioned.
+1. **Redefine** the ADB resource to adjust its OCPU and Storage.  While you could modify the manifest file used to bind to the ADB and apply it, try a different approach and use the `kubectl patch` functionality to update the **AutonomousDatabase** resource in place.
 
-![ADB Provisioning](images/adb_provisioning.png "ADB Provisioning")
+    The usage of the `--type=merge` is known as a *JSON Merge Patch* and simply specifies what should be different after execution.
 
-## Task 4: Delete the Provisioned ADB
+    ```bash
+    <copy>
+    kubectl patch AutonomousDatabase adb-existing \
+      -p '{"spec":{"details":{"cpuCoreCount":2,"dataStorageSizeInTBs":2}}}' \
+      --type=merge
+    </copy>
+    ```
 
-The ADB provisioned by the OraOperator is great for DevOps, after which it should be deleted.  The physical ADB will be deleted because you specified a `hardLink` between the K8s resource and the database.  There is no reason to keep its ADMIN secret around, so delete that as well:
+    Output:
 
-```bash
-<copy>
-kubectl delete adb adb-devops
-kubectl delete secret adb-devops-admin-password
-</copy>
-```
+    ```text
+    autonomousdatabase.database.oracle.com/adb-existing patched
+    ```
 
-Output:
+2. In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB in a "Scaling In Progress" state, increasing the OCPU and Storage.
 
-```text
-autonomousdatabase.database.oracle.com "adb-devops" deleted
-secret "adb-devops-admin-password" deleted
-```
+    ![ADB Scaling](images/adb_scaling.png "ADB Scaling")
 
-## Task 5: Verify ADB Termination
+3. You can also watch the ADB Resource scale from Kubernetes.  You'll already be familiar with the `kubectl get` command; by appending a `-w` you can put `kubectl` into a "Watch" loop:
 
-In the OCI Console, navigate to Oracle Database -> Autonomous Database.  
+    ```bash
+    <copy>
+    kubectl get adb adb-existing -w
+    </copy>
+    ```
 
-![Navigate to ADB](images/adb_navigation.png "Navigate to ADB")
+    Press `Ctrl-C` to break the loop
 
-Ensure you are in the K8S4DBAS Compartment and you will see the `DEVOPSDB` being terminated.
+## Task 3: Scale the OCPU and Storage - Down
 
-![ADB Terminating](images/adb_terminating.png "ADB Terminating")
-
-## Task 6: Database Connectivity
-
-As you are working with an ADB, there are numerous ways to download the Wallet to access the Database using mTLS.  One way is by extracting the K8s Wallet secret that was just created for you by the OraOperator.
-
-Using the pre-created ADB secrets, in Cloud Shell:
-
-```bash
-<copy>
-export ORACLE_HOME=$(pwd)
-export TNS_ADMIN=$ORACLE_HOME/network/admin
-mkdir -p $ORACLE_HOME/network/admin
-
-# Extract the tnsnames.ora secret
-kubectl get secret/adb-tns-admin \
-  --template="{{ index .data \"tnsnames.ora\" | base64decode }}" > $ORACLE_HOME/network/admin/tnsnames.ora
-
-# Extract the sqlnet.ora secret
-kubectl get secret/adb-tns-admin \
-  --template="{{ index .data \"sqlnet.ora\" | base64decode }}" > $ORACLE_HOME/network/admin/sqlnet.ora
-
-# Extract the Wallet for mTLS
-kubectl get secret/adb-tns-admin \
-  --template="{{ index .data \"cwallet.sso\" | base64decode }}" > $ORACLE_HOME/network/admin/cwallet.sso
-</copy>
-```
-
-Feel free to examine the contents of the files created by extracting the different secrets (e.g `cat $ORACLE_HOME/network/admin/tnsnames.ora`)
-
-In a previous lab you set a new password for the ADB, if you have forgotten it, you can retrieve it from the secret:
-
-```bash
-<copy>
-kubectl get secrets/adb-admin-password --template="{{index .data \"adb-admin-password\" | base64decode}}"
-<copy>
-```
-
-Now connect to the ADB via SQL*Plus, using the ADMIN password from the secret; extract the name of the database from the resource for the Service Name:
-
-```bash
-<copy>
-SERVICE_NAME=$(kubectl get adb -o json | jq -r .items[0].spec.details.dbName)_TP
-
-sqlplus admin@$SERVICE_NAME
-</copy>
-```
-
-You should get the all familiar `SQL>` prompt.  `EXIT` when ready.
-
-## Task 7: Scale the OCPU and Storage
-
-You can again, **redefine** the ADB resource to adjust its OCPU and Storage.  While you could create a new manifest file and apply it, try a different approach and use the `kubectl patch` functionality to update the **AutonomousDatabase** resource in place.  
-
-The usage of the `--type=merge` is known as a *JSON Merge Patch* and simply specifies what should be different after execution.
-
-```bash
-<copy>
-kubectl patch AutonomousDatabase adb-existing \
-  -p '{"spec":{"details":{"cpuCoreCount":2,"dataStorageSizeInTBs":2}}}' \
-  --type=merge
-</copy>
-```
-
-Output:
-
-```text
-autonomousdatabase.database.oracle.com/adb-existing patched
-```
-
-In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB in a "Scaling In Progress" state, increasing the OCPU and Storage.
-
-![ADB Scaling](images/adb_scaling.png "ADB Scaling")
-
-You've now have seen how to apply a manifest to define and redefine a K8s resource, but you can also edit the resource directly:
+You've now have seen how to apply a manifest and use `kubectl patch` to redefine a Kubernetes resource, but you can also edit the resource directly:
 
 ```bash
 <copy>
@@ -232,195 +137,250 @@ In the vi editor:
 
 In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB back in a "Scaling In Progress" state, decreasing the OCPU and Storage.
 
-## Task 8: Scheduled Stop and Start
+Of course you can also watch it from Kubernetes:
 
-You can execute any of the methods you used to scale the ADB to also change the ADBs `lifecycleState` (AVAILABLE or STOPPED) manually.  However, you can also take advantage of another built-in K8s resource, the `CronJob`, to schedule a a change in the `lifecycleState`.  
+```bash
+<copy>
+kubectl get adb adb-existing -w
+</copy>
+```
 
-This is especially useful for Autonomous Databases as when the database is STOPPED, you are not charged for the CPUs.
+Press `Ctrl-C` to break the loop
 
-Now up to this point you have pretty much been able to do everything in the K8s cluster and you might be wondering about security.  The access you are using from the `kubeconfig` file has given you `SYSDBA` like privileges in the K8s cluster.  
+## Task 4: Role Based Access Controls (RBAC)
+
+Now up to this point you have pretty much been able to do everything in the Kubernetes cluster and you might be wondering about security.  The access you are using from the `kubeconfig` file has given you `SYSDBA` like privileges in the Kubernetes cluster.
+
 > you might be wondering about security
 
-However, in this next example, you will be using an in-built `Service Account` called `default` to stop and start your ADB on a schedule.  The `default` account doesn't have any privileges on your **AutonomousDatabase** resource, so you will need to create a `Role` and grant, or "bind", that `Role` to the `default` account:
+However, in the next Tasks, you will be using an in-built `Service Account` called `default` to stop and start your ADB on a schedule.  The `default` account doesn't have any privileges on your **AutonomousDatabase** resources and so you will need to grant them using the **Role** and **RoleBinding** resources.
 
-### Grant Permissions
+1. Verify that you can have the necessary roles that will enable you to stop and start an `adb` resource :
 
-Create a role called `autonomousdatabases-reader` which has permissions to `get`, `list`, and `patch` the Autonomous Database.  Bind that role with a resource called `autonomousdatabases-reader-binding` to the `ServiceAccount` `default` to provide it with the required access:
+    ```bash
+    <copy>
+    kubectl auth can-i list adb
+    kubectl auth can-i get adb
+    kubectl auth can-i patch adb
+    </copy>
+    ```
 
-```bash
-<copy>
-cat > adb_role.yaml << EOF
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: autonomousdatabases-reader
-rules:
-- apiGroups: ["database.oracle.com"]
-  resources: ["autonomousdatabases"]
-  verbs: ["get", "list", "patch"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: autonomousdatabases-reader-binding
-subjects:
-- kind: ServiceAccount
-  name: default
-roleRef:
-  kind: Role
-  name: autonomousdatabases-reader
-  apiGroup: rbac.authorization.k8s.io
-EOF
-</copy>
-```
+2. Verify that the `default Service Account` does not:
 
-Apply the Role and RoleBinding resources:
+    ```bash
+    <copy>
+    kubectl auth can-i list adb --as system:serviceaccount:default:default
+    kubectl auth can-i get adb --as system:serviceaccount:default:default
+    kubectl auth can-i patch adb --as system:serviceaccount:default:default
+    </copy>
+    ```
 
-```bash
-<copy>
-kubectl apply -f adb_role.yaml
-</copy>
-```
+    You should see a "no" response for all the above.
 
-Output:
+3. Start a manifest to create a new role called `autonomousdatabases-reader` which has permissions to `get`, `list`, and `patch` an `autonomousdatabases` resource (i.e. `CREATE ROLE autonomousdatabases-reader; GRANT get, list, patch TO autonomousdatabases-reader`):
 
-![ADB RBAC](images/adb_rbac.png "ADB RBAC")
+    ```bash
+    <copy>
+    cat > adb_rbac.yaml << EOF
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: Role
+    metadata:
+      name: autonomousdatabases-reader
+    rules:
+    - apiGroups: ["database.oracle.com"]
+      resources: ["autonomousdatabases"]
+      verbs: ["get", "list", "patch"]
+    EOF
+    </copy>
+    ```
+
+4. Append to the manifest a RoleBinding (i.e. `GRANT ROLE autonomousdatabases-reader TO default;`):
+
+    ```bash
+    <copy>
+    cat >> adb_rbac.yaml << EOF
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    metadata:
+      name: autonomousdatabases-reader-binding
+    subjects:
+    - kind: ServiceAccount
+      name: default
+    roleRef:
+      kind: Role
+      name: autonomousdatabases-reader
+      apiGroup: rbac.authorization.k8s.io
+    EOF
+    </copy>
+    ```
+
+5. Apply the Role and RoleBinding resources:
+
+    ```bash
+    <copy>
+    kubectl apply -f adb_role.yaml
+    </copy>
+    ```
+
+    Output:
+
+    ```text
+    role.rbac.authorization.k8s.io/autonomousdatabases-reader created
+    rolebinding.rbac.authorization.k8s.io/autonomousdatabases-reader-binding created
+    ```
+
+6. Verify that the `default Service Account` now has the ability to stop/start the `adb` resource:
+
+    ```bash
+    <copy>
+    kubectl auth can-i list adb --as system:serviceaccount:default:default
+    kubectl auth can-i get adb --as system:serviceaccount:default:default
+    kubectl auth can-i patch adb --as system:serviceaccount:default:default
+    </copy>
+    ```
+
+    You should see a "yes" response for all the above.
+
+## Task 5: Scheduled Stop and Start
+
+You can execute any of the methods you used to scale the ADB to also change the ADBs `lifecycleState` (AVAILABLE or STOPPED) manually.  However, you can also take advantage of another built-in Kubernetes resource, the **CronJob**, to schedule a change to the `lifecycleState`.  
+
+This is especially useful for Autonomous Databases as when the database is STOPPED, you are not charged for the CPUs.  With the **Role** and **RoleBindings** in-place for the `default Service Account`, create a **CronJob**:
 
 ### Schedule a CronJob
 
-The below manifest will create two CronJob resources to stop the ADB at 1800 everyday and start it at 0800 everyday:
+1. Create a manifest for two CronJob resources to stop the ADB at 1800 everyday and start it at 0800 everyday:
 
-```bash
-<copy>
-cat > adb_cron.yaml << EOF
----
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  name: adb-stop
-spec:
-  schedule: "00 18 * * *"
-  concurrencyPolicy: Forbid
-  jobTemplate:
+    ```bash
+    <copy>
+    cat > adb_cron.yaml << EOF
+    ---
+    apiVersion: batch/v1
+    kind: CronJob
+    metadata:
+      name: adb-stop
     spec:
-      ttlSecondsAfterFinished: 86400
-      backoffLimit: 2
-      activeDeadlineSeconds: 600
-      template:
+      schedule: "00 18 * * *"
+      concurrencyPolicy: Forbid
+      jobTemplate:
         spec:
-          restartPolicy: Never
-          containers:
-            - name: kubectl
-              image: bitnami/kubectl
-              command:
-                - 'kubectl'
-                - 'patch'
-                - 'adb'
-                - 'adb-existing'
-                - '-n'
-                - 'adb'
-                - '-p'
-                - '{"spec":{"details":{"lifecycleState":"STOPPED"}}}'
-                - '--type=merge'
----
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  name: adb-start
-spec:
-  schedule: "00 8 * * *"
-  concurrencyPolicy: Forbid
-  jobTemplate:
+          ttlSecondsAfterFinished: 86400
+          backoffLimit: 2
+          activeDeadlineSeconds: 600
+          template:
+            spec:
+              restartPolicy: Never
+              containers:
+                - name: kubectl
+                  image: bitnami/kubectl
+                  command:
+                    - 'kubectl'
+                    - 'patch'
+                    - 'adb'
+                    - 'adb-existing'
+                    - '-p'
+                    - '{"spec":{"details":{"lifecycleState":"STOPPED"}}}'
+                    - '--type=merge'
+    ---
+    apiVersion: batch/v1
+    kind: CronJob
+    metadata:
+      name: adb-start
     spec:
-      ttlSecondsAfterFinished: 86400
-      backoffLimit: 2
-      activeDeadlineSeconds: 600
-      template:
+      schedule: "00 8 * * *"
+      concurrencyPolicy: Forbid
+      jobTemplate:
         spec:
-          restartPolicy: Never
-          containers:
-            - name: kubectl
-              image: bitnami/kubectl
-              command:
-                - 'kubectl'
-                - 'patch'
-                - 'adb'
-                - 'adb-existing'
-                - '-n'
-                - 'adb'
-                - '-p'
-                - '{"spec":{"details":{"lifecycleState":"AVAILABLE"}}}'
-                - '--type=merge'
-EOF
-</copy>
-```
+          ttlSecondsAfterFinished: 86400
+          backoffLimit: 2
+          activeDeadlineSeconds: 600
+          template:
+            spec:
+              restartPolicy: Never
+              containers:
+                - name: kubectl
+                  image: bitnami/kubectl
+                  command:
+                    - 'kubectl'
+                    - 'patch'
+                    - 'adb'
+                    - 'adb-existing'
+                    - '-p'
+                    - '{"spec":{"details":{"lifecycleState":"AVAILABLE"}}}'
+                    - '--type=merge'
+    EOF
+    </copy>
+    ```
 
-Apply the manifest:
+    The **CronJob** is using the same `patch` method you used to scale the OCPU and Storage up.
 
-```bash
-<copy>
-kubectl apply -f adb_cron.yaml
-</copy>
-```
+2. Apply the manifest:
 
-Output:
+    ```bash
+    <copy>
+    kubectl apply -f adb_cron.yaml
+    </copy>
+    ```
 
-![ADB Cron](images/adb_cron.png "ADB Cron")
+    Output:
 
-Take a quick look at the cronjobs in the `adb` namespace:
+    ![ADB Cron](images/adb_cron.png "ADB Cron")
 
-```bash
-<copy>
-kubectl get cronjob
-<copy>
-```
+3. Take a quick look at the cronjobs in the `adb` namespace:
 
-Output:
+    ```bash
+    <copy>
+    kubectl get cronjob
+    <copy>
+    ```
 
-![ADB CronJob](images/adb_cronjob.png "ADB CronJob")
+    Output:
 
-Reschedule the `adb-stop` CronJob to run 1 minute from now and verify the update:
+    ![ADB CronJob](images/adb_cronjob.png "ADB CronJob")
 
-```bash
-<copy>
-NEW_SCHED="$(date -d '1 mins' +'%M %H') * * *"
+4. Reschedule the `adb-stop` CronJob to run 1 minute from now and verify the update:
 
-kubectl patch CronJob adb-stop \
-  -p '{"spec":{"schedule": "'"${NEW_SCHED}"'" }}' \
-  --type=merge
+    ```bash
+    <copy>
+    NEW_SCHED="$(date -d '1 mins' +'%M %H') * * *"
 
-kubectl get cronjob
-<copy>
-```
+    kubectl patch CronJob adb-stop \
+      -p '{"spec":{"schedule": "'"${NEW_SCHED}"'" }}' \
+      --type=merge
 
-This next command will watch the CronJobs and output when one runs. If you scheduled the job to run 1 minute from now, wait for that 1 minute to elapse.
+    kubectl get cronjob
+    <copy>
+    ```
 
-```bash
-<copy>
-kubectl get jobs --watch
-</copy>
-```
+5. Watch the CronJobs. If you scheduled the job to run 1 minute from now, wait for that 1 minute to elapse.
 
-Output after 1 minute:
+    ```bash
+    <copy>
+    kubectl get jobs --w
+    </copy>
+    ```
 
-![ADB CronJob Stop](images/adb_cron_stop.png "ADB CronJob Stop")
+    Output after 1 minute:
 
-In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB in a "Stopping" state.
+    ![ADB CronJob Stop](images/adb_cron_stop.png "ADB CronJob Stop")
 
-![Stop ADB](images/adb_stop.png "Stop ADB")
+    In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB in a "Stopping" state.
 
-You can also check the logs of the job by replacing `<job_name>` in the following command:
+    ![Stop ADB](images/adb_stop.png "Stop ADB")
 
- `kubectl logs job/<job_name>`
+    You can also check the logs of the job by replacing `<job_name>` in the following command:
 
-Make sure to start your ADB for future labs:
+    `kubectl logs job/<job_name>`
 
-```bash
-<copy>
-kubectl patch adb adb-existing -p '{"spec":{"details":{"lifecycleState":"AVAILABLE"}}}' --type=merge
-</copy>
-```
+6. Start your ADB for future Labs:
+
+    ```bash
+    <copy>
+    kubectl patch adb adb-existing -p '{"spec":{"details":{"lifecycleState":"AVAILABLE"}}}' --type=merge
+    </copy>
+    ```
 
 ## Learn More
 

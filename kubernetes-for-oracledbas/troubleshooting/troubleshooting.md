@@ -34,5 +34,6 @@ Ensure the "Run apply" checkbox is ticked and click "Save changes"
 
 ## Acknowledgements
 
-* **Author** - John Lathouwers, Developer Advocate, Database Development Operations
-* **Last Updated By/Date** - John Lathouwers, July 2024
+* **Authors** - [](var:authors)
+* **Contributors** - [](var:contributors)
+* **Last Updated By/Date** - John Lathouwers, July 2023

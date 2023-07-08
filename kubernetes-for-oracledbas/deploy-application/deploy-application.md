@@ -8,9 +8,6 @@ The application will be the SQL Web Developer from Oracle Rest Data Services (OR
 
 *Estimated Lab Time:* 20 minutes
 
-Watch the video below for a quick walk through of the lab.
-[](youtube:zNKxJjkq0Pw)
-
 ### Objectives
 
 * Have a running Microservice Application connected to the Oracle Database
@@ -19,24 +16,23 @@ Watch the video below for a quick walk through of the lab.
 
 This lab assumes you have:
 
-* [Generated a Kubeconfig File](?lab=generate-kubeconfig)
+* [Generated a Kubeconfig File](?lab=access-cluster)
 * A [Running and Healthy OraOperator](?lab=deploy-oraoperator)
 * The [OraOperator bound to an ADB](?lab=bind-adb)
 
-## Task 1: Create a Namespace
+## Task 1: Switch Context
 
-In Cloud Shell, create a namespace for the Microservice Application:
+In the [Access the Kubernetes Cluster](?lab=access-cluster#task3changethedefaultnamespacecontext) Lab, you created a new `sqldev-web` namespace and a **Context** to set it as the working **Namespace**.  
+
+You will use the `sqldev-web` namespace for your Application while the ADB resource resides in the `default` namespace.  This is to illustrate how different teams (Developers and DBAs) can manage their resources in their own "virtual clusters", reducing the impact they have on each other, and to allow additional security via **RBAC**.  
+
+To switch and verify your context:
 
 ~~~bash
 <copy>
-kubectl create namespace sqldev-web
+kubectl config use-context sqldev-web
+kubectl config get-contexts
 </copy>
-~~~
-
-Output:
-
-~~~text
-namespace/sqldev-web created
 ~~~
 
 ## Task 2: Create the Database Secrets
@@ -45,17 +41,17 @@ Your application will want to talk to the Oracle Database and to do so, just lik
 
 ### Names Resolution
 
-For the Database (Names) Resolution, copy the wallet secret from the `demo` namespace to the `sqlweb-dev` namespace.  This can be done with a `kubectl` one-liner, in Cloud Shell:
+For the Database (Names) Resolution, copy the wallet secret from the `default` namespace to the `sqlweb-dev` namespace.  This can be done with a `kubectl` one-liner, in Cloud Shell:
 
 ~~~bash
 <copy>
-kubectl get secret adb-tns-admin -n demo -o json | 
+kubectl get secret adb-tns-admin -n default -o json | 
     jq 'del(.metadata | .ownerReferences, .namespace, .resourceVersion, .uid)' | 
     kubectl apply -n sqldev-web -f -
 </copy>
 ~~~
 
-The above command will export the `adb-tns-admin` secret from the `demo` namespaces to JSON while excluding some metadata fields and load the secret back into the K8s `sqldev-web` namespace.
+The above command will export the `adb-tns-admin` secret from the `default` namespace to JSON, exclude some metadata fields, and load the secret back into the K8s `sqldev-web` namespace.
 
 After the copy is done, you can query the new secret: `kubectl get secrets -n sqldev-web`
 
@@ -63,17 +59,19 @@ After the copy is done, you can query the new secret: `kubectl get secrets -n sq
 
 ### Authentication
 
-Set some variables to assist in creating the K8s manifests for Authentication by using the Secrets and data from the AutonomousDatabase resources in the `adb` namespace:
+Set some variables to assist in creating the K8s manifests for Authentication by using the Secrets and data from the AutonomousDatabase resources in the `default` namespace:
 
 ~~~bash
 <copy>
-ADB_PWD=$(kubectl get secrets/adb-admin-password -n demo --template="{{index .data \"adb-admin-password\" | base64decode}}")
+ADB_PWD=$(kubectl get secrets/adb-admin-password -n default --template="{{index .data \"adb-admin-password\" | base64decode}}")
 
-SERVICE_NAME=$(kubectl get adb -n demo -o json | jq -r .items[0].spec.details.dbName)_TP
+SERVICE_NAME=$(kubectl get adb -n default -o json | jq -r .items[0].spec.details.dbName)_TP
 </copy>
 ~~~
 
-Start a Manifest file for the Application Deployment, starting with the Authentication secrets:
+## Task 3: Start a Manifest File
+
+Start a Manifest file for the Application Deployment.  Insert the Authentication secrets:
 
 ~~~bash
 <copy>
@@ -93,15 +91,15 @@ EOF
 </copy>
 ~~~
 
-## Task 3: Create the ConfigMaps
+## Task 4: Create the ConfigMaps
 
 You'll create two ConfigMaps, one will be the ORDS configuration file and the other will be a Liquibase ChangeLog.
 
-A *ConfigMap* is like a *Secret* but to store non-confidential data. Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume.
+A **ConfigMap** is like a **Secret** but to store non-confidential data. Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume.
 
 ### ORDS Configuration
 
-The ORDS configuration does not store any sensitive data, so build a manifest to create a *ConfigMap* of its configuration file.  The ConfigMap will be mounted as a file into the Container and used by the ORDS process to start the application.
+The ORDS configuration does not store any sensitive data, so build a manifest to create a **ConfigMap** of its configuration file.  The **ConfigMap** will be mounted as a file into the Container and used by the ORDS process to start the application.
 
 Append the `ords-config` ConfigMap to the Application Deployment manifest:
 
@@ -209,41 +207,60 @@ EOF
 </copy>
 ~~~
 
-## Task 4: Create the Deployment
+By using a variable for the passwords, you are not exposing any sensitive information in your code.  The value for the variable will be set using environment variables in the applications deployment specification.
+
+## Task 5: Create the Application
 
 Finally, define the Application deployment manifest itself.  It looks like a lot is going on there, but if you break it down it's not all that complicated.
 
-Ignore the first couple of lines for now, you'll get to those later in the lab.
+1. Create a StatefulSet
 
-First we see the `initContainers`.  This is the Liquibase container that will startup before the the `containers` section.  It will mount the `adb-tns-admin` Secret to the `/opt/oracle/network/admin` directory and `liquibase-changelog` ConfigMap to the `/opt/oracle/network/admin` inside the Container.  It will then pull the `SQLcl` image from Oracle's Container Registry and run the `liquibase.sql` against the database defined in the `db-secret` Secret.
+    For Lab purposes only, define this Application as a StatefulSet to ensure the names of the pods are predictable.  Call this application `sqldev-web` with a single **Pod** as defined by `replicas`.  Create **Volumes** of the **ConfigMaps** and **Secrets** so the application can mount them into its containers.  YThe purpose of the other keys will be explored later in the Lab.
 
-Next is the `container`, the application you are deploying.  In addition to mounting the `adb-tns-admin` Secret to the `/opt/oracle/network/admin` directory for Names Resolution, it will also mount the `ords-config` ConfigMap to the `/home/oracle/ords/config` directory.
-
-It will download the `ORDS` image from Oracle's Container Registry, generate a wallet for the database password and startup the ORDS server in standalone mode.
-
-Append the deployment code to the existing manifest file:
-
-~~~bash
-<copy>
-cat >> sqldev-web.yaml << EOF
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: sqldev-web
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: sqldev-web
-  template:
+    ~~~bash
+    <copy>
+    cat >> sqldev-web.yaml << EOF
+    ---
+    apiVersion: apps/v1
+    kind: StatefulSet
     metadata:
-      labels:
-        app: sqldev-web
+      name: sqldev-web
     spec:
+      replicas: 1
+      volumes:
+        - name: ords-config
+          configMap:
+            name: ords-config
+        - name: ords-wallet
+          emptyDir: {}
+        - name: liquibase-changelog
+          configMap:
+            name: liquibase-changelog
+        - name: tns-admin
+          secret:
+            secretName: adb-tns-admin
+      selector:
+        matchLabels:
+          app: sqldev-web
+      template:
+        metadata:
+          labels:
+            app: sqldev-web
+        spec:
+    EOF
+    </copy>
+    ~~~
+
+2. Add the `initContainers`.  
+
+    This is the Liquibase container that will startup before the the `containers` section.  It will **VolumeMount** the `adb-tns-admin` Secret to the `/opt/oracle/network/admin` directory and `liquibase-changelog` ConfigMap to the `/opt/oracle/network/admin` inside the Container.  It will then pull the `SQLcl` image from Oracle's Container Registry and run the `liquibase.sql` against the database defined in the `db-secret` Secret.
+
+    ~~~bash
+    <copy>
+    cat >> sqldev-web.yaml << EOF
       initContainers:
       - name: liquibase
-        image: container-registry.oracle.com/database/sqlcl:23.1.0
+        image: container-registry.oracle.com/database/sqlcl:[](var:sqlcl_version)
         imagePullPolicy: IfNotPresent
         args: ["-L", "-nohistory", "\$(LB_COMMAND_USERNAME)/\$(LB_COMMAND_PASSWORD)@\$(LB_COMMAND_URL)", "@liquibase.sql"]
         env:
@@ -276,88 +293,92 @@ spec:
         - mountPath: /opt/oracle/sql_scripts
           name: liquibase-changelog
           readOnly: true
-      containers:
-        - image: "container-registry.oracle.com/database/ords:23.1.3"
-          imagePullPolicy: IfNotPresent
-          name: sqldev-web
-          command:
-            - /bin/bash
-            - -c
-            - |
-              ords --config \$ORDS_CONFIG config secret --password-stdin db.password <<< \$ORDS_PWD;
-              ords --config \$ORDS_CONFIG serve
-          env:
-            - name: IGNORE_APEX
-              value: "TRUE"
-            - name: ORDS_CONFIG
-              value: /home/oracle/ords/config
-            - name: ORACLE_HOME
-              value: /opt/oracle/ords
-            - name: ORDS_PWD
-              valueFrom:
-                secretKeyRef:
-                  name: db-secrets
-                  key: ords.password
-            - name: LB_COMMAND_SERVICE
-              valueFrom:
-                secretKeyRef:
-                  name: db-secrets
-                  key: db.service_name
-          volumeMounts:
-            - name: ords-config
-              mountPath: "/home/oracle/ords/config/databases/default/"
-              readOnly: true
-            - name: ords-wallet
-              mountPath: "/home/oracle/ords/config/databases/default/wallet"
-              readOnly: false
-            - name: tns-admin
-              mountPath: "/opt/oracle/ords/network/admin"
-              readOnly: true
-            - name: liquibase-changelog
-              mountPath: "/opt/oracle/sql_scripts"
-              readOnly: true
-          ports:
-            - containerPort: 8080
-          securityContext:
-            capabilities:
-              drop:
-                - ALL
-            runAsNonRoot: true
-            runAsUser: 54321
-            readOnlyRootFilesystem: false
-            allowPrivilegeEscalation: false
-      volumes:
-        - name: ords-config
-          configMap:
-            name: ords-config
-        - name: ords-wallet
-          emptyDir: {}
-        - name: liquibase-changelog
-          configMap:
-            name: liquibase-changelog
-        - name: tns-admin
-          secret:
-            secretName: adb-tns-admin
-EOF
-</copy>
-~~~
+    EOF
+    </copy>
+    ~~~
 
-## Task 5: Deploy the Application
+3. Add the `container`, the application you are deploying.  
+
+    In addition to mounting the `adb-tns-admin` Secret to the `/opt/oracle/network/admin` directory for Names Resolution, it will also mount the `ords-config` ConfigMap to the `/home/oracle/ords/config` directory.
+
+    The **Pod** will download the `ORDS` image from Oracle's Container Registry, generate a wallet for the database password and startup the ORDS server in standalone mode.
+
+    Append the deployment code to the existing manifest file:
+
+    ~~~bash
+    <copy>
+    cat >> sqldev-web.yaml << EOF
+          containers:
+            - image: "container-registry.oracle.com/database/ords:23.1.3"
+              imagePullPolicy: IfNotPresent
+              name: sqldev-web
+              command:
+                - /bin/bash
+                - -c
+                - |
+                  ords --config \$ORDS_CONFIG config secret --password-stdin db.password <<< \$ORDS_PWD;
+                  ords --config \$ORDS_CONFIG serve
+              env:
+                - name: IGNORE_APEX
+                  value: "TRUE"
+                - name: ORDS_CONFIG
+                  value: /home/oracle/ords/config
+                - name: ORACLE_HOME
+                  value: /opt/oracle/ords
+                - name: ORDS_PWD
+                  valueFrom:
+                    secretKeyRef:
+                      name: db-secrets
+                      key: ords.password
+                - name: LB_COMMAND_SERVICE
+                  valueFrom:
+                    secretKeyRef:
+                      name: db-secrets
+                      key: db.service_name
+              volumeMounts:
+                - name: ords-config
+                  mountPath: "/home/oracle/ords/config/databases/default/"
+                  readOnly: true
+                - name: ords-wallet
+                  mountPath: "/home/oracle/ords/config/databases/default/wallet"
+                  readOnly: false
+                - name: tns-admin
+                  mountPath: "/opt/oracle/ords/network/admin"
+                  readOnly: true
+                - name: liquibase-changelog
+                  mountPath: "/opt/oracle/sql_scripts"
+                  readOnly: true
+              ports:
+                - containerPort: 8080
+              securityContext:
+                capabilities:
+                  drop:
+                    - ALL
+                runAsNonRoot: true
+                runAsUser: 54321
+                readOnlyRootFilesystem: false
+                allowPrivilegeEscalation: false
+
+    EOF
+    </copy>
+    ~~~
+
+## Task 6: Deploy the Application
 
 You now have a single manifest that will deploy everything you need for your application, apply it and watch it come to life:
 
 ~~~bash
 <copy>
-kubectl apply -f sqldev-web.yaml -n sqldev-web
-kubectl get pod/sqldev-web-0 -n sqldev-web -w
+kubectl apply -f sqldev-web.yaml
+kubectl get pod/sqldev-web-0 -w
 </copy>
 ~~~
 
 ![Launch Application](images/launch_app.png "Launch Application")
 
-## Task 6: Expose your Application
+## Task 7: Expose your Application
 
-Now that your application is up and running, and given it is a web application, you need to allow access to it.  First you'll create a `Service` to expose your application to the network.  
+Now that your application is up and running, and given it is a web application, you need to allow access to it.  First you'll create a **Service** to expose your application to the network.  
 
 Take a look back at the manifest for your application and the first couple of lines, specifically these ones:
 
@@ -369,78 +390,84 @@ spec:
       app: sqldev-web
 ~~~
 
-Only one `replica` was created, which translates to the single pod `sqldev-web-0` in the namespace.  If you think of replica's as an instance in a RAC database, when you only have one it is easy to route traffic to it.  However, if you have multiple instances and they can go up and down independently, ensuring High Availability, then you need something to keep track of those "Endpoints" for routing traffic.  In a RAC, this is the SCAN Listener, in a K8s cluster, this is a `Service`.
+Only one `replica` was created, which translates to the single pod `sqldev-web-0` in the namespace.  If you think of replica's as an instance in a RAC database, when you only have one it is easy to route traffic to it.  However, if you have multiple instances and they can go up and down independently, ensuring High Availability, then you need something to keep track of those "Endpoints" for routing traffic.  In a RAC, this is the SCAN Listener, in a K8s cluster, this is a **Service**.
 
-Let's define the Service for your application, routing all traffic from port 80 to 8080 (the port the application is listening on).  The `selector` from your deployment will need to match the `selector` in the service, this is how it knows which pods are valid endpoints:
+1. Define the **Service** for your application, routing all traffic from port 443 to 8080 (the port the application is listening on).
 
-~~~bash
-<copy>
-cat > sqldev-web-service.yaml << EOF
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: sqldev-web
-spec:
-  selector:
-    app: sqldev-web
-  ports:
-    - name: http
-      port: 80
-      targetPort: 8080
-EOF
-</copy>
-~~~
+    The `selector` from your deployment will need to match the `selector` in the service, this is how it knows which **Pods** are valid endpoints:
 
-Apply the Service manifest, and query your namespace:
+    ~~~bash
+    <copy>
+    cat > sqldev-web-service.yaml << EOF
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: sqldev-web
+    spec:
+      selector:
+        app: sqldev-web
+      ports:
+        - name: http
+          port: 80
+          targetPort: 8080
+    EOF
+    </copy>
+    ~~~
 
-~~~bash
-<copy>
-kubectl apply -f sqldev-web-service.yaml -n sqldev-web
-kubectl get all -n sqldev-web
-</copy>
-~~~
+2. Apply the Service manifest, and query your namespace:
 
-![Application Service](images/app_service.png "Application Service")
+    ~~~bash
+    <copy>
+    kubectl apply -f sqldev-web-service.yaml
+    kubectl get all
+    </copy>
+    ~~~
 
-## Task 7: Create the Ingress
+    ![Application Service](images/app_service.png "Application Service")
 
-The `Service` exposed the application to the K8s Cluster, for you to access it from a Web Browser, it needs to be exposed to outside the cluster.  During the provisioning of the Stack, the Ansible portion deployed a Microservice Application called `ingress-nginx`.  That service interacted with Oracle Cloud Infrastructure and spun up a LoadBalancer.  To expose the application to the LoadBalancer, create an `Ingress` resource that will interact with the `ingress-nginx` Microservice to allow your application to be accessed from outsid the cluster:
+## Task 8: Create the Ingress
 
-~~~bash
-<copy>
-cat > sqldev-web-ingress.yaml << EOF
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: sqldev-web
-spec:
-  ingressClassName: nginx
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: sqldev-web
-            port:
-              number: 80
-EOF
-</copy>
-~~~
+The **Service** exposed the application to the Kubernetes Cluster, for you to access it from a Web Browser, it needs to be exposed outside the cluster.  During the provisioning of the Stack, the Ansible portion deployed a Microservice Application called `ingress-nginx`.  That service interacted with Oracle Cloud Infrastructure, via the **cloud-controller-manager** and spun up a LoadBalancer.  To expose the application to the LoadBalancer, create an `Ingress` resource that will interact with the `ingress-nginx` Microservice to allow your application to be accessed from outside the cluster:
 
-~~~bash
-<copy>
-kubectl apply -f sqldev-web-ingress.yaml -n sqldev-web
-kubectl get ingress -n sqldev-web
-</copy>
-~~~
+1. Create the Ingress manifest file:
 
-![Application Ingress](images/app_ingress.png "Application Ingress")
+    ~~~bash
+    <copy>
+    cat > sqldev-web-ingress.yaml << EOF
+    ---
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: sqldev-web
+    spec:
+      ingressClassName: nginx
+      rules:
+      - http:
+          paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sqldev-web
+                port:
+                  number: 443
+    EOF
+    </copy>
+    ~~~
 
-## Task 8: Access Microservice Application
+2. Apply the Manifest and query the resource:
+
+    ~~~bash
+    <copy>
+    kubectl apply -f sqldev-web-ingress.yaml
+    kubectl get ingress
+    </copy>
+    ~~~
+
+    ![Application Ingress](images/app_ingress.png "Application Ingress")
+
+## Task 9: Access Microservice Application
 
 In the output from the Ingress, copy the IP and visit: `http://<IP>/ords/sql-developer`:
 
@@ -452,8 +479,11 @@ Log into your Application and Explore!
 
 * [SQLcl](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/23.1/index.html)
 * [Liquibase](https://www.liquibase.org/)
+* [Oracle Rest Data Services](https://docs.oracle.com/en/database/oracle/oracle-rest-data-services/)
+* [Kubernetes ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/)
 
 ## Acknowledgements
 
-* **Author** - John Lathouwers, Developer Advocate, Database Development Operations
-* **Last Updated By/Date** - John Lathouwers, May 2023
+* **Authors** - [](var:authors)
+* **Contributors** - [](var:contributors)
+* **Last Updated By/Date** - John Lathouwers, July 2023

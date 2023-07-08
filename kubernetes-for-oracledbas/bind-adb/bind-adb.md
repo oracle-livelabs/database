@@ -1,13 +1,10 @@
-# Provision and Bind to an Oracle Autonomous Database (ADB)
+# Bind to an Oracle Autonomous Database (ADB)
 
 ## Introduction
 
 In this lab, you will provision a new Oracle Autonomous Database (ADB) and bind to an existing one using the OraOperator.
 
 *Estimated Lab Time:* 10 minutes
-
-Watch the video below for a quick walk through of the lab.
-[](youtube:zNKxJjkq0Pw)
 
 ### Objectives
 
@@ -47,11 +44,11 @@ echo "ADB OCID: $ADB_OCID"
 
 ## Task 2: Create a manifest to Bind
 
-Create a manifest file to define the resource of an existing ADB, leveraging the **AutonomousDatabase CRD** from the OraOperator:
+1. Create a manifest file to define the resource of an existing ADB, leveraging the **AutonomousDatabase CRD** from the OraOperator:
 
 ```bash
 <copy>
-cat > adb_bind.yaml << EOF
+cat > adb_existing.yaml << EOF
 ---
 apiVersion: database.oracle.com/v1alpha1
 kind: AutonomousDatabase
@@ -72,6 +69,7 @@ The resource `name` will be called `adb-existing`.
 It will bind to an existing ADB with `autonomousDatabaseOCID` equal to `$ADB_OCID` (substituted by the real value stored in *Task 1*).
 
 **Important:** the `spec.hardLink: false` (default) field indicates that if you delete this `AutonomousDatabase` resource from the K8s cluster, *do not* delete the ADB associated with it.
+
 > Good for Production... Bad for DevOps!
 
 If it were set to `true` then deleting the resource from K8s *WOULD* delete ADB itself.
@@ -82,7 +80,7 @@ Define the **AutonomousDatabase** Custom Resource in K8s by applying the manifes
 
 ```bash
 <copy>
-kubectl apply -f adb_bind.yaml
+kubectl apply -f adb_existing.yaml
 </copy>
 ```
 
@@ -94,122 +92,160 @@ autonomousdatabase.database.oracle.com/adb-existing created
 
 ## Task 4: Review the Existing ADB Custom Resource
 
-The bind manifest created a new *AutonomousDatabase* resource called *adb-existing* in the *adb* namespace.
+1. Retrieve the **adb-existing** resource details by running (`kubectl get <resource> <resource_name> -n <namespace>`).  You can omit the `-n <namespace>` as your **kubeconfig** context has already set it to **demo** for you:
 
-To retrieve its details run (`kubectl get <resource> <resource_name> -n <namespace>`).  You can omit the `-n <namespace>` as your `kubeconfig` context has already set it for you:
+    ```bash
+    <copy>
+    kubectl get AutonomousDatabase adb-existing
+    </copy>
+    ```
 
-```bash
-<copy>
-kubectl get AutonomousDatabase adb-existing
-</copy>
-```
+    With the exception of the **DISPLAY NAME** and **DB NAME**, you should see similar output:
 
-With the exception of the **DISPLAY NAME** and **DB NAME**, you should see similar output:
+    ![kubectl get AutonomousDatabase adb-existing](images/kubectl_get_adb.png "kubectl get AutonomousDatabase adb-existing")
 
-![kubectl get AutonomousDatabase adb-existing](images/kubectl_get_adb.png "kubectl get AutonomousDatabase adb-existing")
+2. Describe the **adb-existing** resource (`kubectl describe <resource_type> <resource_name> -n <namespace>`) to get more details.  Use the resource_type alias `adb` for `AutonomousDatabase` to save some typing.  You can view all the resource_type alias short names by running: `kubectl api-resources`
 
-To get more details, lets describe the resource (`kubectl describe <resource_type> <resource_name> -n <namespace>`).  Use the resource_type alias `adb` for `AutonomousDatabase`:
+    ```bash
+    <copy>
+    kubectl describe adb adb-existing
+    </copy>
+    ```
 
-```bash
-<copy>
-kubectl describe adb adb-existing
-</copy>
-```
+    A lot of useful information will be displayed including CPU and Storage settings, Connection Strings, and its Lifecycle State (AVAILABLE).  You will modify these fields later to manage the ADB via K8s.
 
-A lot of interesting information will be displayed including CPU and Storage settings, Connection Strings, and its Lifecycle State (AVAILABLE).  You will modify these fields later to manage the ADB via K8s.
+## Task 5: Secrets
 
-Note that in the last command `AutonomousDatabase` was abbreviated to `adb`.  This is the "SHORTNAME" for the `AutonomousDatabase` kind determined by running `kubectl api-resources`.
+A Kubernetes Secret is an API object used to store sensitive information such as passwords, tokens, or keys.  It is important to note that a Secret, by default, is not encrypted only base64-encoded, but they are still useful.  
 
-## Task 5: Kubernetes Secrets
-
-Secrets are another API object used to store sensitive information such as passwords, tokens, or keys.  It is important to note that a Secret, by default, is not encrypted only base64-encoded, but they are still useful.  
+> a Secret, by default, is not encrypted
 
 Suppose you've written a bit of code to remotely check tablespace usage.  You first test it on one database hard-coding the authentication (AuthN) credentials into the script for convenience while testing.  It works great but you'll need to remove the AuthN credentials from the code and add a function to retrieve them from an external source.  Once you've done this, you can safely share your tablespace check code with the world without exposing confidential data.
 
+![Secrets](images/secrets.png "Secrets")
+
 Kubernetes Secrets are that external source which decouples sensitive information from your application code.  This ensures your application is distributable and portable, without exposing confidential data.
 
-## Task 6: Generate Password/Generate Wallet Manifest
+## Task 6: Create Secrets
 
-The password currently assigned to the ADB was randomised and is unknown, so you will need to set it for connectivity.  As calls to the OraOperator controllers are declarative you will be instructing the Controller to modify the ADB to the newly defined, desired state.  
+If you take a closer look at the output from Task 4: `kubectl describe adb adb-existing` you'll notice that the resources does not have a value for the ADMIN password or the Wallet:
 
-Additionally, the ADB was provisioned with mTLS, so you will need a Wallet to connect to the ADB securely.  You'll create a **Secret** for the Wallet password and the OraOperator will download the wallet into another **Secret**.
-
-In Cloud Shell, assign the `ADB_PWD` variable a password (for Workshop purposes only).  You can choose any password so long as it complies with the [Password Complexity](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/manage-users-create.html#GUID-72DFAF2A-C4C3-4FAC-A75B-846CC6EDBA3F) rules.
-
-For example:
-
-```bash
-<copy>
-ADB_PWD=$(echo "K8s4DBAs_$(date +%H%S%M)")
-</copy>
-```
-
-Start a manifest file to create a **Secret** and apply it to the exiting ADB:
-
-```bash
-<copy>
-cat > adb_modify.yaml << EOF
----
-apiVersion: v1
-kind: Secret
-type: Opaque
-metadata:
-  name: adb-admin-password
-stringData:
-  adb-admin-password: $ADB_PWD
----
-apiVersion: v1
-kind: Secret
-type: Opaque
-metadata:
-  name: adb-instance-wallet-password
-stringData:
-  adb-instance-wallet-password: $ADB_PWD
----
-apiVersion: database.oracle.com/v1alpha1
-kind: AutonomousDatabase
-metadata:
-  name: adb-existing
+```yaml
+...
 spec:
-  details:
-    autonomousDatabaseOCID: $ADB_OCID
-    adminPassword:
+  Details:
+    Admin Password:
       k8sSecret:
-        name: adb-admin-password
-    wallet:
-      name: adb-tns-admin
-      password:
+...
+    Wallet:
+      Password:
         k8sSecret:
-          name: adb-instance-wallet-password
-EOF
-</copy>
 ```
 
-Take a quick look at the syntax:  
+Create two secrets which will applied to those values.
 
-You are defining two resources of `kind: Secret` of `type: Opaque`.  The first is named: `adb-admin-password` and the second is named: `adb-instance-wallet-password`.  The last part of the manifest **redefines** the `adb-existing` resource, setting the adminPassword and wallet.  Under the wallet section, you are specifying the name of the `Secret`, `adb-tns-admin` that will be defined to to store the wallet.
+1. In Cloud Shell, assign the `ADB_PWD` variable a password (for Workshop purposes only).  You can choose any password so long as it complies with the [Password Complexity](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/manage-users-create.html#GUID-72DFAF2A-C4C3-4FAC-A75B-846CC6EDBA3F) rules.
 
-## Task 7: Apply Manifest
+    ```bash
+    <copy>
+    ADB_PWD=$(echo "K8s4DBAs_$(date +%H%S%M)")
+    </copy>
+    ```
 
-Apply the manifest in Cloud Shell:
+2. Create a Secret that will hold the database ADMIN and ADB wallet password:
 
-```bash
-<copy>
-kubectl apply -f adb_modify.yaml
-</copy>
-```
+    ```bash
+    <copy>
+    cat > adb_secrets.yaml << EOF
+    ---
+    apiVersion: v1
+    kind: Secret
+    type: Opaque
+    metadata:
+      name: adb-admin-password
+    stringData:
+      adb-admin-password: $ADB_PWD
+    ---
+    apiVersion: v1
+    kind: Secret
+    type: Opaque
+    metadata:
+      name: adb-instance-wallet-password
+    stringData:
+      adb-instance-wallet-password: $ADB_PWD
+    EOF
+    </copy>
+    ```
 
-Output:
+    Take a quick look at the syntax:  
 
-```text
-secret/adb-admin-password created
-secret/adb-instance-wallet-password created
-autonomousdatabase.database.oracle.com/adb-existing configured
-```
+    You are using the "core" API, `v1` and defining two resources of `kind: Secret` of `type: Opaque`.  They are named: `adb-admin-password` and `adb-instance-wallet-password` respectively.  Secret `adb-admin-password` has a single key/value data: `adb-admin-password:$ADB_PWD` while `adb-instance-wallet-password` has a single key/value data: `adb-instance-wallet-password:$ADB_PWD`
 
-## Task 7: Review ADB Secrets
+3. Create the resources and query it in Kubernetes:
 
-Get the **Secrets** in the ADB namespace (`kubectl get secrets -n <namespace>`):
+    ```bash
+    <copy>
+    kubectl apply -f adb_secrets.yaml
+
+    kubectl get secrets
+    </copy>
+    ```
+
+    Output:
+
+    ```bash
+    secret/adb-admin-password created
+    secret/adb-instance-wallet-password created
+
+    NAME                           TYPE     DATA   AGE
+    adb-admin-password             Opaque   1      3s
+    adb-instance-wallet-password   Opaque   1      3s
+    ```
+
+## Task 7: Redefine the ADB - Add Secrets
+
+Now that you've defined two Secrets in Kubernetes, redefine the `adb-existing` resource to use them.  Keep in mind that when you redefine the `adb-existing` resource with the **Secrets**, the ADB bound to it will no longer be in the desired state.  The OraOperator controllers will update the real-world ADB to reconcile the differences.
+
+1. Update the previously created `adb_existing.yaml` file with the new **Secret** definitions:
+
+    ```bash
+    <copy>
+    cat >> adb_existing.yaml << EOF
+        adminPassword:
+          k8sSecret:
+            name: adb-admin-password
+        wallet:
+          name: adb-tns-admin
+          password:
+            k8sSecret:
+              name: adb-instance-wallet-password
+    EOF
+    </copy>
+    ```
+
+    Take a quick look at the syntax:  
+
+    You are appending to the `adb_existing.yaml` manifest to **redefine** the `adb-existing` resource, setting the `spec.details.adminPassword` and `spec.details.wallet` keys.  Under the wallet section, you are specifying the name of a `Secret`, `adb-tns-admin`, that the OraOperator will define to to store the wallet.
+
+2. Apply the manifest in Cloud Shell:
+
+    ```bash
+    <copy>
+    kubectl apply -f adb_existing.yaml
+    </copy>
+    ```
+
+    Output:
+
+    ```text
+    secret/adb-admin-password created
+    secret/adb-instance-wallet-password created
+    autonomousdatabase.database.oracle.com/adb-existing configured
+    ```
+
+## Task 8: Review ADB Wallet Secrets
+
+Get the **Secrets** (`kubectl get secrets [-n <namespace>]`):
 
 ```bash
 <copy>
@@ -221,7 +257,7 @@ Output:
 
 ![ADB Secrets](images/adb_secrets.png "ADB Secrets")
 
-You created the first two and instructed OraOperator to create the third `adb-tns-admin`.  Take a closer look at the **adb-tns-admin** **Secret** by describing it (`kubectl describe secrets <secret_name> -n <namespace>`):
+You created the first two **Secrets** and instructed OraOperator to create the third `adb-tns-admin`.  Take a closer look at the **adb-tns-admin** **Secret** by describing it (`kubectl describe secrets <secret_name> [-n <namespace>]`):
 
 ```bash
 <copy>
@@ -238,7 +274,6 @@ You'll see what equates to a `TNS_ADMIN` directory, and in fact, this **Secret**
 ## Learn More
 
 * [Oracle Autonomous Database](https://www.oracle.com/uk/autonomous-database/)
-* [OCI - Instance Principal](https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/callingservicesfrominstances.htm)
 * [Kubernetes Secrets](https://K8s.io/docs/concepts/configuration/secret/)
 
 ## Acknowledgements

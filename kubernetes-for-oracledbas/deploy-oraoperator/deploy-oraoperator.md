@@ -8,14 +8,11 @@ This lab will walk you through deploying the Oracle Operator for Kubernetes (Ora
 
 The human operator gains their system knowledge from the Subject Matter Experts (SMEs) through documented Standard Operation Procedures (SOPs).  Over time, the human operator also gains the experience of how the systems should behave and how to respond when problems occur, enhancing the maturity of the SOPs.  They may even take responsibility for some of the SMEs tasks such as: deploying software, performing generic configurations, and lifecycle management.
 
-![Operator/DBA Relationship](images/dba_oper_dev.png "Operator/DBA Relationship")
+![Operator](images/dba_oper_dev.png "Operator")
 
 In short, human operators become extensions of the SMEs, and in this case, the Oracle Operator for Kubernetes becomes an extension of the Oracle DBA.
 
 *Estimated Lab Time:* 5 minutes
-
-Watch the video below for a quick walk through of the lab.
-[](youtube:zNKxJjkq0Pw)
 
 ### Objectives
 
@@ -25,8 +22,8 @@ Watch the video below for a quick walk through of the lab.
 
 This lab assumes you have:
 
-* [Generated a Kubeconfig File](?lab=AccesstheKubernetesCluster)
-* [Are using the demo namespace](?lab=AccesstheKubernetesCluster#ChangethedefaultNamespaceContext)
+* [Generated a Kubeconfig File](?lab=access-cluster)
+* [Are using the demo namespace](?lab=access-cluster#Task3:ChangethedefaultNamespaceContext)
 
 ## Task 1: Kubernetes Resources
 
@@ -54,86 +51,109 @@ Kubernetes comes with a set of built-in Controllers that run inside the **kube-c
 
 ![kube-control-manager](images/kube-control-manager.png "kube-control-manager")
 
-To see a built-in Controller in action, you will delete pods and see new ones created in their place.  
+## Task 3: Controller In Action
 
-Your cluster comes with a built-in DNS server, `coredns`.  The `coredns` pods are tied to a Deployment that stipulates there should always be two `coredns` pods running (i.e. two **Replicas**) at all times.
+To see a Controller in action, you will delete pods resulting in a Deployment resource being in an undesired state.  The Controller will automatically reconcile the Deployment back to the desired state.
 
-List out the `coredns` pods:
+![controller](images/controller.png "controller")
 
-```bash
-<copy>
-kubectl get pods -l k8s-app=kube-dns -n kube-system
-</copy>
-```
+1. Your cluster comes with a built-in DNS server, `coredns`.  The `coredns` pods are tied to a Deployment that stipulates there should be two `coredns` pods running (i.e. two **Replicas**) at all times.  
 
-Note their names, specifically the suffixed hash and their AGE.  Delete and re-list them:
+    *Note*: The number of Pods may vary depending on the number of Worker Nodes in your cluster.
 
-```bash
-<copy>
-kubectl delete pods -l k8s-app=kube-dns -n kube-system
-kubectl get pods -l k8s-app=kube-dns -n kube-system
-</copy>
-```
+    Take a look at the `coredns` deployment, it should show **2/2** Pods are in the desired **READY** state:
 
-The controller which watches Deployments recognised that after you deleted the pods, the Deployment was not in the defined state (0 of 2 Replica) and reconciled it by starting up two new pods.
+    ```bash
+    <copy>
+    kubectl get deployment coredns -n kube-system
+    </copy>
+    ```
 
-You can probably predict where this is going... you will need **Controllers** to handle the **CRDs** that define Oracle Databases in a Kubernetes Cluster.  Again, fortunately Kubernetes allows you to extend the clusters capabilities with **Custom Controllers**.  The specific type of **Custom Controller** that will monitor and change the Oracle Database **CRDs** is known as an **Operator**, which brings us to the OraOperator.
+    ![coredns Deployment](images/coredns_deployment.png "coredns Deployment")
 
-## Task 3: Install OraOperator
+2. List out the `coredns` pods:
+
+    ```bash
+    <copy>
+    kubectl get pods -l k8s-app=kube-dns -n kube-system
+    </copy>
+    ```
+
+    Note their names, specifically the suffixed hash and their AGE.  
+
+3. Delete the Pods and re-query them:
+
+    ```bash
+    <copy>
+    kubectl delete pods -l k8s-app=kube-dns -n kube-system
+    </copy>
+    ```
+
+    ```bash
+    <copy>
+    kubectl get pods -l k8s-app=kube-dns -n kube-system
+    </copy>
+    ```
+
+You can probably predict where this is going... you will need **Controllers** to handle the **CRDs** that define Oracle Databases in a Kubernetes Cluster.  
+
+Fortunately Kubernetes allows you to extend the clusters capabilities with **Custom Controllers**.  The specific type of **Custom Controller** that will monitor and change the Oracle Database **CRDs** is known as an **Operator**, which brings us to the OraOperator.
+
+## Task 4: Install OraOperator
 
 The OraOperator is developed and supported by Oracle, with **Custom Controllers** for provisioning, configuring, and managing the lifecycle of Oracle Databases, defined by **CRDs**, deployed within or outside Kubernetes clusters.
 
 To install the OraOperator, you will first need to install a dependency, **cert-manager**:
 
-In Cloud Shell run:
+1. Install **cert-manager**.  In Cloud Shell run:
 
-```bash
-<copy>
-kubectl apply -f https://github.com/jetstack/cert-manager/releases/latest/download/cert-manager.yaml
-</copy>
-```
+    ```bash
+    <copy>
+    kubectl apply -f https://github.com/jetstack/cert-manager/releases/latest/download/cert-manager.yaml
+    </copy>
+    ```
 
-To check its installed resources:
+2. Check cert-managers installed resources:
 
-```bash
-<copy>
-kubectl get all -n cert-manager
-</copy>
-```
+    ```bash
+    <copy>
+    kubectl get all -n cert-manager
+    </copy>
+    ```
 
-The output will be similar to:
+    The output will be similar to:
 
-![kubectl get all -n cert-manager](images/kubectl_cert_manager.png "kubectl get all -n cert-manager")
+    ![kubectl get all -n cert-manager](images/kubectl_cert_manager.png "kubectl get all -n cert-manager")
 
-Next to install the OraOperator, in Cloud Shell run:
+3. Install the OraOperator. In Cloud Shell run:
 
-```bash
-<copy>
-kubectl apply -f https://raw.githubusercontent.com/oracle/oracle-database-operator/main/oracle-database-operator.yaml
-</copy>
-```
+    ```bash
+    <copy>
+    kubectl apply -f https://raw.githubusercontent.com/oracle/oracle-database-operator/main/oracle-database-operator.yaml
+    </copy>
+    ```
 
-The output will look similar to this:
+    The output will look similar to this:
 
-![OraOperator Install](images/oraoperator_install.png "OraOperator Install")
+    ![OraOperator Install](images/oraoperator_install.png "OraOperator Install")
 
-To check its installed resources:
+4. Check OraOperators installed resources:
 
-```bash
-<copy>
-kubectl get all -n oracle-database-operator-system
-</copy>
-```
+    ```bash
+    <copy>
+    kubectl get all -n oracle-database-operator-system
+    </copy>
+    ```
 
-The output will be similar to:
+    The output will be similar to:
 
-![kubectl get all -n oracle-database-operator-system](images/kubectl_oraoper.png "kubectl get all -n oracle-database-operator-system")
+    ![kubectl get all -n oracle-database-operator-system](images/kubectl_oraoper.png "kubectl get all -n oracle-database-operator-system")
 
-Notice all the resources in the namespace are **Custom Controllers** which will watch your cluster to ensure the new **CRDs** are in their desired state.
+    The output shows a Deployment named `oracle-database-operator-controller-manager`. This is the **Operator's Custom Controller** manager which will watch your cluster to ensure any Oracle Database **CRDs** are in their desired state.
 
-### Custom Resource Definitions
+## Task 5: OraOperator CRDs
 
-Finally, rerun query to get the `api-resources`, but this time filter it on the new **database.oracle.com** group:
+Rerun the query which returned the `api-resources`, but this time filter it on the new **database.oracle.com** group:
 
 ```bash
 <copy>
@@ -141,7 +161,7 @@ kubectl api-resources --api-group=database.oracle.com
 </copy>
 ```
 
-You will now see all the new **CRDs** introduced by the OraOperator.
+You will now see all the new **CRDs** introduced by the OraOperator that will be managed by the `oracle-database-operator-controller-manager`.
 
 ![kubectl api-resources --api-group=database.oracle.com](images/oraoperator_crds.png "kubectl api-resources --api-group=database.oracle.com")
 

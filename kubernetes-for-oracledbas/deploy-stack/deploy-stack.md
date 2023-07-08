@@ -4,12 +4,9 @@
 
 In this lab, you will provision and configure the Oracle Cloud resources required for the Workshop using *Oracle Resource Manager (ORM)*.  ORM will stand-up the Infrastructure using *Terraform* and perform some basic Configuration using *Ansible*.  
 
-Don't panic, how this works will be explored... while it is working.
+Don't panic, how this works will be explored... while it is working.  
 
 *Estimated Lab Time:* 10 minutes
-
-Watch the video below for a quick walk through of the lab.
-[](youtube:zNKxJjkq0Pw)
 
 ### Objectives
 
@@ -22,6 +19,23 @@ Watch the video below for a quick walk through of the lab.
 This lab assumes you have:
 
 * An Oracle Cloud User with the policies outlined in [Prepare the OCI Tenancy](?lab=prepare-oci "Prepare OCI")
+
+## Infrastructure Overview
+
+At the end of this lab, the following Cloud Infrastructure will have been created for you:
+
+* Virtual Cloud Network (VCN)
+    * Public Subnet
+    * Private Subnet
+    * NAT and Internet Gateways
+    * Network Security Groups
+* Flexible Load Balancer
+* Oracle Kubernetes Engine (OKE)
+    * Managed Control Plane
+    * Two Worker Nodes
+* Autonomous Database
+
+![Cloud Infrastructure](images/baas.png "Cloud Infrastructure")
 
 ## Task 1: Click the Magic Button
 
@@ -69,19 +83,21 @@ We're ready to deploy the Infrastructure and do some minor Configuration Managem
 1. Tick "Run apply"
 2. Click "Create"
 
-![Review](./images/review.png "Review")
+![Review](images/review.png "Review")
 
 The Infrastructure deployment and configuration will take approximately **15 minutes**.  Grab a cup of tea and continue to the next tasks to learn about IaC using Terraform and Configuration Management using Ansible.
 
 ### Troubleshooting
 
-When using OCI Free Tier, it is possible that the Stack deployment will fail due to a lack of compute resources in your chosen region.  Fear not and realise the power of Infrastructure as Code!  Should the Stack Deployment fail due to **"Out of host capacity."**, please follow the [Out of Capacity](?lab=troubleshooting#OutofCapacity) guide.
+When using OCI Free Tier, it is possible that the Stack deployment will fail due to a lack of compute resources in your chosen region.  Fear not and realise the power of Infrastructure as Code!  
+
+Should the Stack Deployment fail due to **"Out of host capacity."**, please follow the [Out of Capacity](?lab=troubleshooting#OutofCapacity) guide.
 
 ## Task 5: Learn about Infrastructure as Code (IaC) using Terraform
 
 Terraform is a tool for managing infrastructure as code (IaC) that can be version-controlled.  Take a look at the IaC that creates the Autonomous Oracle Database (ADB) for this Workshop.  The ADB is defined, in 16 lines, using the `oci_database_autonomous_database` resource from the [Oracle provided Terraform OCI provider](https://registry.terraform.io/providers/oracle/oci/latest/docs).  Most the arguments are set by variables, allowing you to customise the ADB without having to rewrite the code which describes it.  When you **Apply** the IaC, it calls underlying APIs to provision the resource as it is defined, and records it in a "State" file.
 
-![ADB Terraform](./images/adb_terraform.png "ADB Terraform")
+![ADB Terraform](images/adb_terraform.png "ADB Terraform")
 
 For the DBA this is invaluable as it means you can define the ADB once, use variables where permitted and constants where mandated for your organisations standards.  Those 16 lines of IaC can then be used over and over to provision, and tear-down, hundreds of ADBs.  
 
@@ -106,7 +122,7 @@ Scroll through and familiarise yourself with the logs.  Whether using ORM or any
 * Plan counts
 * The actions being performed
 
-![Terraform Log](./images/terraform_log.png "Terraform Log")
+![Terraform Log](images/terraform_log.png "Terraform Log")
 
 **Best Practice** It is best practice to run a `terraform plan` and review what actions will take place before running a `terraform apply` to implement those actions.  This ensures that resources (databases, networks, etc) are not accidentally modified or deleted.
 
@@ -120,7 +136,7 @@ All of what you do manually in this Workshop can be automated by Ansible as part
 
 In the Workshop Stack, Terraform will write a number of variable and inventory files **(2)** describing the Infrastructure that it has provisioned.  It will then call Ansible **(3)** to run Playbooks (a series of tasks that include conditionals, loops, and error handling) against the infrastructure definition **(4)** to configure it **(5)**.  
 
-![Terraform and Ansible](./images/terraform_ansible.png "Terraform and Ansible")
+![Terraform and Ansible](images/terraform_ansible.png "Terraform and Ansible")
 
 ## Task 7: Review the Logs - Ansible
 
@@ -128,7 +144,7 @@ While Ansible can be used to configure any type of Infrastructure, it is limited
 
 Scrolling through the actions section of the log, you will see Ansible kick into action to start Configuration Management.
 
-![Ansible Log](./images/ansible_log.png "Ansible Log")
+![Ansible Log](images/ansible_log.png "Ansible Log")
 
 It is important to note, Ansible has a robust community and ecosystem, with many third-party modules available for common tasks like interacting with cloud providers, databases, and other services.  
 

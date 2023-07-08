@@ -2,81 +2,86 @@
 
 ## Introduction
 
-In this lab you will explore the the Kubernetes Cluster.  You've already
+In this lab you will explore the the Kubernetes Cluster.  You've already 
 
 ### Objectives
 
 ### Prerequisites
 
-## Task 1: kubectl-fu
+## Task 1: What is a Kubernetes Cluster?
 
-I say kube-C-T-L, some say kube-control, while others opt for kube-cuddle; but no matter how you say it there's no point in typing it and its verbs out all the time.
+So you've deployed a Kubernetes cluster, created a `kubeconfig` file to access it, and created a namespace for an application that you are going to deploy later in the Workshop... but what is a Kubernetes Cluster?
 
-Two cheats to save you precious time interacting with Kubernetes is **Autocompletion** and an **Alias**:
+To put in Oracle DBA terms; a Kubernetes Cluster is to a Microservice Application what a Real Application Cluster (RAC) is to Single Instance Databases (SIDB).  
 
-### Autocompletion
+RAC provides fault-tolerance, high-availability, resource management, and scalability to a SIDB while the Grid Infrastructure component is essentially an orchestration system used to deploy, configure, and manage the nodes and instances within the cluster.  Kubernetes does all this, and more, for containerised applications.
 
-To enable autocompletion in your current shell run:
+In fact, a Kubernetes Cluster and a RAC Cluster share very similar concepts.  We already touched on `etcd`, the equivalent of the `Oracle Cluster Registry (OCR)` 
 
-```bash
-<copy>
-# bash-completion package should be installed first (it is in Cloud Shell)
-source <(kubectl completion bash) 
-</copy>
-```
 
-To add autocomplete permanently:
+will touch on a few of the core concepts here and explore more throughout the remaining Labs.
 
-```bash
-<copy>
-echo "source <(kubectl completion bash)" >> ~/.bashrc
-</copy>
-```
+## Task 1: Manifest Files
 
-### Alias
+## Task 2: Pods
 
-You will see `k` being used online as an alias to `kubectl`, to set this up and have it work with the above autocompletion, run:
+
+
+Take a quick look at what **Pods** are running on your newly built cluster, use the `--all-namespaces`, or its shorthand `-A`, to return **Pods** from all namespaces:
 
 ```bash
 <copy>
-alias k=kubectl
-complete -o default -F __start_kubectl k
+kubectl get pods -A
 </copy>
 ```
 
-and to make it permanent in your shell:
+
+
+**Pods** are the Sun of a Kubernetes Cluster, that is, everything in the cluster revolves around **Pods**.  They are the smallest deployable unit of computing in Kubernetes and contain your application all wrapped up into a nice logical host object.
+
+
+
+
+Kubernetes is an orchestration system to deploy and manage containers. Containers are not managed
+individually; instead they are part of a larger object called a Pod. A Pod consists of one or more containers which share an
+IP address, access to storage and namespace. Typically one container in a Pod runs an application while other containers
+support the primary application.
+
+
+
+## Task 1: View Worker Nodes
+
+Worker Nodes are often referred to as the backbone of a Kubernetes cluster, as they form the foundation and perform the bulk of the computational and operational tasks. They have three main components:
+
+* Kubelet
+* Container Runtime
+* Kube-Proxy
+
+which handle the actual workload by running containers, executing applications, and processing requests, making them an essential component in the cluster's functioning.
+
+![Worker Nodes](images/worker_nodes.png "Worker Nodes")
+
+To view the nodes in the cluster, query the kube-apiserver:
 
 ```bash
 <copy>
-echo "alias k=kubectl" >> ~/.bashrc
-echo "complete -o default -F __start_kubectl k" >> ~/.bashrc
-</copy>
-```
-
-## Task 2: View Worker Nodes
-
-Nodes are the workhorse of a Kubernetes cluster, so the number of control and worker nodes deployed on a cluster is vital for the administrator to be aware of.
-
-Concisely confirm the node information.
-
-This command display an abridged listing showing the node names (NAME), node roles (ROLES) and the Kubernetes version (VERSION)
-
-```bash
-kubectl get nodes
-```
-
-Return more detailed information about the nodes.
-
-```bash
 kubectl get nodes -o wide
+</copy>
 ```
 
-This command shows the more detailed information than the previous command by including this additional information:
+## Kubelet
 
-Internal and External IP information (INTERNAL-IP and EXTERNAL-IP)
-Operating System information on the node (OS_IMAGE)
-Kernel version on the node (KERNEL-VERSION)
-Container runtime information and version (CONTAINER-RUNTIME)
+You can see the nodes by querying the kube-apiserver because the Kubelet on each node has registered itself with the cluster.  The kubelet is a system process that does most of the node worker heavy-lifting.  It  accepts API calls for **Pod** specifications and interacts with the Container Runtime to ensure   
+
+## Container Runtime
+
+The output from `kubectl get nodes -o wide` displays the nodes **Container Runtime**, which in your cluster will be `CRI-O`, a lightweight alternative to using Docker or Podman.  
+
+
+
+## Kube-Proxy
+
+
 
 ## Task 3: Lookup Namespaces
 
