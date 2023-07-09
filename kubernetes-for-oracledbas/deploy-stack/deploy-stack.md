@@ -20,9 +20,11 @@ This lab assumes you have:
 
 * An Oracle Cloud User with the policies outlined in [Prepare the OCI Tenancy](?lab=prepare-oci "Prepare OCI")
 
-## Infrastructure Overview
+### Infrastructure Overview
 
 At the end of this lab, the following Cloud Infrastructure will have been created for you:
+
+![Cloud Infrastructure](images/baas.png "Cloud Infrastructure")
 
 * Virtual Cloud Network (VCN)
     * Public Subnet
@@ -34,8 +36,6 @@ At the end of this lab, the following Cloud Infrastructure will have been create
     * Managed Control Plane
     * Two Worker Nodes
 * Autonomous Database
-
-![Cloud Infrastructure](images/baas.png "Cloud Infrastructure")
 
 ## Task 1: Click the Magic Button
 

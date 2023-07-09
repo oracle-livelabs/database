@@ -22,9 +22,9 @@ This lab assumes you have:
 
 ## Task 1: Switch Context
 
-In the [Access the Kubernetes Cluster](?lab=access-cluster#task3changethedefaultnamespacecontext) Lab, you created a new `sqldev-web` namespace and a **Context** to set it as the working **Namespace**.  
+In the [Access the Kubernetes Cluster](?lab=access-cluster#task3changethedefaultnamespacecontext) Lab, you created a new `sqldev-web` namespace and a *Context* to set it as the working *Namespace*.  
 
-You will use the `sqldev-web` namespace for your Application while the ADB resource resides in the `default` namespace.  This is to illustrate how different teams (Developers and DBAs) can manage their resources in their own "virtual clusters", reducing the impact they have on each other, and to allow additional security via **RBAC**.  
+You will use the `sqldev-web` *namespace* for your Application while the ADB resource resides in the `default` *namespace*.  This is to illustrate how different teams (Developers and DBAs) can manage their resources in their own "virtual clusters", reducing the impact they have on each other, and to allow additional security via Role Based Access Controls (*RBAC*).  
 
 To switch and verify your context:
 
@@ -41,7 +41,7 @@ Your application will want to talk to the Oracle Database and to do so, just lik
 
 ### Names Resolution
 
-For the Database (Names) Resolution, copy the wallet secret from the `default` namespace to the `sqlweb-dev` namespace.  This can be done with a `kubectl` one-liner, in Cloud Shell:
+For the Database (Names) Resolution, copy the wallet *Secret* from the `default` *namespace* to the `sqlweb-dev` *namespace*.  This can be done with a `kubectl` one-liner:
 
 ~~~bash
 <copy>
@@ -51,15 +51,21 @@ kubectl get secret adb-tns-admin -n default -o json |
 </copy>
 ~~~
 
-The above command will export the `adb-tns-admin` secret from the `default` namespace to JSON, exclude some metadata fields, and load the secret back into the K8s `sqldev-web` namespace.
+The above command will export the `adb-tns-admin` *Secret* from the `default` *namespace* to JSON, exclude some metadata fields, and load the *Secret* back into the Kubernetes `sqldev-web` *namespace*.
 
-After the copy is done, you can query the new secret: `kubectl get secrets -n sqldev-web`
+After the copy is done, you can query the new *Secret*: 
+
+```bash
+<copy>
+kubectl get secrets -n sqldev-web`
+<copy>
+```
 
 ![ADB Copy Secret](images/adb_sqldev.png "ADB Copy Secret")
 
 ### Authentication
 
-Set some variables to assist in creating the K8s manifests for Authentication by using the Secrets and data from the AutonomousDatabase resources in the `default` namespace:
+Set some variables to assist in creating the Kubernetes *manifest file* for Authentication by using the *Secrets* and data from the AutonomousDatabase resources in the `default` *namespace*:
 
 ~~~bash
 <copy>
@@ -71,7 +77,7 @@ SERVICE_NAME=$(kubectl get adb -n default -o json | jq -r .items[0].spec.details
 
 ## Task 3: Start a Manifest File
 
-Start a Manifest file for the Application Deployment.  Insert the Authentication secrets:
+Start a *manifest file* for the Application Deployment.  Insert the Authentication *Secrets*:
 
 ~~~bash
 <copy>
@@ -93,15 +99,15 @@ EOF
 
 ## Task 4: Create the ConfigMaps
 
-You'll create two ConfigMaps, one will be the ORDS configuration file and the other will be a Liquibase ChangeLog.
+You'll create two *ConfigMaps*, one will be the ORDS configuration file and the other will be a Liquibase ChangeLog.
 
-A **ConfigMap** is like a **Secret** but to store non-confidential data. Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume.
+A *ConfigMap* is like a *Secret* but to store non-confidential data. *Pods* can consume *ConfigMaps* as environment variables, command-line arguments, or as configuration files in a *Volume*.
 
 ### ORDS Configuration
 
-The ORDS configuration does not store any sensitive data, so build a manifest to create a **ConfigMap** of its configuration file.  The **ConfigMap** will be mounted as a file into the Container and used by the ORDS process to start the application.
+The ORDS configuration does not store any sensitive data, so build a *manifest file* to create a *ConfigMap* of its configuration file.  The *ConfigMap* will be mounted as a file into the Container and used by the ORDS process to start the application.
 
-Append the `ords-config` ConfigMap to the Application Deployment manifest:
+Append the `ords-config` *ConfigMap* to the Application Deployment *manifest file*:
 
 ~~~bash
 <copy>
@@ -135,15 +141,15 @@ EOF
 
 ### Liquibase ChangeLog
 
-In an ADB, the `ORDS_PUBLIC_USER` already exists for providing Rest Data Services out-of-the-box, you'll want to avoid messing with that database user.  Instead, you'll want to create a new, similar user for your application.  You can do this as part of the deployment using **SQLcl + Liquibase** inside what is known as an **initContainer**.
+In an ADB, the `ORDS_PUBLIC_USER` already exists for providing Rest Data Services out-of-the-box, you'll want to avoid messing with that database user.  Instead, you'll want to create a new, similar user for your application.  You can do this as part of the deployment using **SQLcl + Liquibase** inside what is known as an *initContainer*.
 
-An **initContainer** is just like an regular application container, except it will run to completion and stop.  They are perfect for ensuring the database has the correct users, permissions, and objects present for the application container to use.  
+An *initContainer* is just like an regular application container, except it will run to completion and stop.  They are perfect for ensuring the database has the correct users, permissions, and objects present for the application container to use.  
 
-**Liquibase** is an open-source tool that enables you to define, manage, and version control your database schema. It utilises ChangeLogs, which contain a series of database changes, to modify and evolve your schema. These ChangeLogs are applied to the database, and Liquibase keeps track of the changes that have been executed, allowing for easier management and tracking of database schema modifications.
+**Liquibase** is an open-source tool that enables you to define, manage, and version control your database schema. It utilises ChangeLogs, which contain a series of database changes, to modify and evolve your schema. These ChangeLogs are applied to the database, and **Liquibase** keeps track of the changes that have been executed, allowing for easier management and tracking of database schema modifications.
 
 ![initContainer](images/initContainer.png "initContainer")
 
-The below ConfigMap will create two new users in the ADB: `ORDS_PUBLIC_USER_K8` and `ORDS_PLSQL_GATEWAY_K8`.  It will also grant the required permissions for them to run the SQL Developer Web application.
+The below *ConfigMap* will create two new users in the ADB: `ORDS_PUBLIC_USER_K8` and `ORDS_PLSQL_GATEWAY_K8`.  It will also grant the required permissions for them to run the SQL Developer Web application.
 
 ~~~bash
 <copy>
@@ -207,15 +213,15 @@ EOF
 </copy>
 ~~~
 
-By using a variable for the passwords, you are not exposing any sensitive information in your code.  The value for the variable will be set using environment variables in the applications deployment specification.
+By using a variable for the passwords, you are not exposing any sensitive information in your code.  The value for the variable will be set using environment variables in the Applications *Deployment* specification.
 
 ## Task 5: Create the Application
 
-Finally, define the Application deployment manifest itself.  It looks like a lot is going on there, but if you break it down it's not all that complicated.
+Finally, define the Application *Deployment* manifest itself.  It looks like a lot is going on, but if you break it down it's not all that complicated.
 
-1. Create a StatefulSet
+1. Create a *StatefulSet*
 
-    For Lab purposes only, define this Application as a StatefulSet to ensure the names of the pods are predictable.  Call this application `sqldev-web` with a single **Pod** as defined by `replicas`.  Create **Volumes** of the **ConfigMaps** and **Secrets** so the application can mount them into its containers.  YThe purpose of the other keys will be explored later in the Lab.
+    For Lab purposes only, define this Application as a *StatefulSet* to ensure the names of the *Pods* are predictable.  Call this application `sqldev-web` with a single *Pod* as defined by *replicas*.  Create *Volumes* of the *ConfigMaps* and *Secrets* so the application can mount them into its containers.  The purpose of the other keys will be explored later in the Lab.
 
     ~~~bash
     <copy>
@@ -251,9 +257,9 @@ Finally, define the Application deployment manifest itself.  It looks like a lot
     </copy>
     ~~~
 
-2. Add the `initContainers`.  
+2. Add the *initContainers*.  
 
-    This is the Liquibase container that will startup before the the `containers` section.  It will **VolumeMount** the `adb-tns-admin` Secret to the `/opt/oracle/network/admin` directory and `liquibase-changelog` ConfigMap to the `/opt/oracle/network/admin` inside the Container.  It will then pull the `SQLcl` image from Oracle's Container Registry and run the `liquibase.sql` against the database defined in the `db-secret` Secret.
+    This is the **Liquibase** container that will startup before the the `containers` section.  It will *VolumeMount* the `adb-tns-admin` *Secret* to the `/opt/oracle/network/admin` directory and `liquibase-changelog` *ConfigMap* to the `/opt/oracle/network/admin` inside the Container.  It will then pull the `SQLcl` image from Oracle's Container Registry and run the `liquibase.sql` against the database defined in the `db-secret` *Secret*.
 
     ~~~bash
     <copy>
@@ -299,11 +305,11 @@ Finally, define the Application deployment manifest itself.  It looks like a lot
 
 3. Add the `container`, the application you are deploying.  
 
-    In addition to mounting the `adb-tns-admin` Secret to the `/opt/oracle/network/admin` directory for Names Resolution, it will also mount the `ords-config` ConfigMap to the `/home/oracle/ords/config` directory.
+    In addition to mounting the `adb-tns-admin` *Secret* to the `/opt/oracle/network/admin` directory for Names Resolution, it will also mount the `ords-config` *ConfigMap* to the `/home/oracle/ords/config` directory.
 
-    The **Pod** will download the `ORDS` image from Oracle's Container Registry, generate a wallet for the database password and startup the ORDS server in standalone mode.
+    The *Pod* will download the `ORDS` image from Oracle's Container Registry, generate a wallet for the database password and startup the ORDS server in standalone mode.
 
-    Append the deployment code to the existing manifest file:
+    Append the deployment code to the existing *manifest file*:
 
     ~~~bash
     <copy>
@@ -365,7 +371,7 @@ Finally, define the Application deployment manifest itself.  It looks like a lot
 
 ## Task 6: Deploy the Application
 
-You now have a single manifest that will deploy everything you need for your application, apply it and watch it come to life:
+You now have a single *manifest file* that will deploy everything you need for your application, apply it and watch it come to life:
 
 ~~~bash
 <copy>
@@ -378,9 +384,9 @@ kubectl get pod/sqldev-web-0 -w
 
 ## Task 7: Expose your Application
 
-Now that your application is up and running, and given it is a web application, you need to allow access to it.  First you'll create a **Service** to expose your application to the network.  
+Now that your application is up and running, and given it is a web application, you need to allow access to it.  First you'll create a *Service* to expose your application to the network.  
 
-Take a look back at the manifest for your application and the first couple of lines, specifically these ones:
+Take a look back at the *manifest file* for your application and the first couple of lines, specifically these ones:
 
 ~~~yaml
 spec:
@@ -390,11 +396,11 @@ spec:
       app: sqldev-web
 ~~~
 
-Only one `replica` was created, which translates to the single pod `sqldev-web-0` in the namespace.  If you think of replica's as an instance in a RAC database, when you only have one it is easy to route traffic to it.  However, if you have multiple instances and they can go up and down independently, ensuring High Availability, then you need something to keep track of those "Endpoints" for routing traffic.  In a RAC, this is the SCAN Listener, in a K8s cluster, this is a **Service**.
+Only one *replica* was created, which translates to the single *Pod* `sqldev-web-0` in the *Namespace*.  If you think of *replica's* as an instance in a RAC database, when you only have one it is easy to route traffic to it.  However, if you have multiple instances and they can go up and down independently, ensuring High Availability, then you need something to keep track of those "Endpoints" for routing traffic.  In a RAC, this is the SCAN Listener, in a K8s cluster, this is a *Service*.
 
-1. Define the **Service** for your application, routing all traffic from port 443 to 8080 (the port the application is listening on).
+1. Define the *Service* for your application, routing all traffic from port 443 to 8080 (the port the application is listening on).
 
-    The `selector` from your deployment will need to match the `selector` in the service, this is how it knows which **Pods** are valid endpoints:
+    The `selector` from your deployment will need to match the `selector` in the service, this is how it knows which *Pods* are valid endpoints:
 
     ~~~bash
     <copy>
@@ -415,7 +421,7 @@ Only one `replica` was created, which translates to the single pod `sqldev-web-0
     </copy>
     ~~~
 
-2. Apply the Service manifest, and query your namespace:
+2. Apply the *Service* manifest, and query your *Namespace*:
 
     ~~~bash
     <copy>
@@ -428,9 +434,9 @@ Only one `replica` was created, which translates to the single pod `sqldev-web-0
 
 ## Task 8: Create the Ingress
 
-The **Service** exposed the application to the Kubernetes Cluster, for you to access it from a Web Browser, it needs to be exposed outside the cluster.  During the provisioning of the Stack, the Ansible portion deployed a Microservice Application called `ingress-nginx`.  That service interacted with Oracle Cloud Infrastructure, via the **cloud-controller-manager** and spun up a LoadBalancer.  To expose the application to the LoadBalancer, create an `Ingress` resource that will interact with the `ingress-nginx` Microservice to allow your application to be accessed from outside the cluster:
+The *Service* exposed the application to the Kubernetes Cluster, for you to access it from a Web Browser, it needs to be exposed outside the cluster.  During the provisioning of the Stack, the **Ansible** portion deployed a Microservice Application called `ingress-nginx`.  That service interacted with Oracle Cloud Infrastructure, via the *cloud-controller-manager* and spun up a LoadBalancer.  To expose the application to the LoadBalancer, create an `Ingress` resource that will interact with the `ingress-nginx` Microservice to allow your application to be accessed from outside the cluster:
 
-1. Create the Ingress manifest file:
+1. Create the Ingress *manifest file*:
 
     ~~~bash
     <copy>
@@ -456,7 +462,7 @@ The **Service** exposed the application to the Kubernetes Cluster, for you to ac
     </copy>
     ~~~
 
-2. Apply the Manifest and query the resource:
+2. Apply the *manifest file* and query the resource:
 
     ~~~bash
     <copy>

@@ -85,13 +85,13 @@ Otherwise, if you are an Administrator setting this up for another user.
 1. Find the users OCID:
     Replace `<username>` with the OCI username:
 
-    ```bash
+    ```
     USER_OCID=$(oci iam user list --name <username> | jq -r '.data[].id')
     ```
 
     For example:
 
-    ```bash
+    ```
     USER_OCID=$(oci iam user list --name first.last@url.com | jq -r '.data[].id')
     ```
 

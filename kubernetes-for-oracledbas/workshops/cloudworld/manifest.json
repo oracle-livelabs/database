@@ -70,17 +70,17 @@
             "last_reviewed": "08-July-2023"
         },
         {
-            "title": "Lab 8: Lifecycle Operations (ADB)",
+            "title": "Lab 8: Lifecycle Operations - ADB",
             "type": "cloudworld",
             "description": "Perform Lifecycle Operations against the ADB",
             "filename": "../../lifecycle-adb/lifecycle-adb.md",
             "last_reviewed": "08-July-2023"
         },
         {
-            "title": "Lab 9: Provisioning (ADB)",
+            "title": "Lab 9: Provision - ADB",
             "type": "cloudworld",
             "description": "Perform Lifecycle Operations against the ADB",
-            "filename": "../../lifecycle-adb/lifecycle-adb.md",
+            "filename": "../../provision-adb/provision-adb.md",
             "last_reviewed": "08-July-2023"
         },
         {

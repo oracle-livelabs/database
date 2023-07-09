@@ -2,13 +2,20 @@
 
 ## Introduction
 
-In this lab you will explore the the Kubernetes Cluster.  You've already 
+In this lab you will explore the the Kubernetes Cluster.  You've already seen the *kube-apiserver* and *etcd* components of the *Control Plane* node, now explore the rest of the cluster to gain a better understanding of the **why** and **how** Kubernetes is an exciting technology.
 
 ### Objectives
 
+* Understand the Core Compenents of Kubernetes
+
 ### Prerequisites
 
-## Task 1: What is a Kubernetes Cluster?
+This lab assumes you have:
+
+* An accessible Oracle Kubernetes Engine Cluster
+* [Generated a Kubeconfig File](?lab=access-cluster)
+
+## Task 1: Pods
 
 So you've deployed a Kubernetes cluster, created a `kubeconfig` file to access it, and created a namespace for an application that you are going to deploy later in the Workshop... but what is a Kubernetes Cluster?
 
