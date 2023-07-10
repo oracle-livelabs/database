@@ -360,7 +360,7 @@ This is especially useful for Autonomous Databases as when the database is STOPP
     <copy>
     ```
 
-5. Watch the *CronJobs*. 
+5. Watch the *CronJobs*.
 
     If you scheduled the job to run 1 minute from now, wait for that 1 minute to elapse.
 

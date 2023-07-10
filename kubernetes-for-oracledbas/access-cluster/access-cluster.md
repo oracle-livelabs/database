@@ -37,7 +37,7 @@ Just as with *sqlplus*, used to query the objects in an Oracle Database, use *ku
 
 ### kube-apiserver
 
-*kubectl* makes API calls to the clusters *kube-apiserver* on the *Control Plane* node.  In addition to the *kube-apiserver*, the *Control Plane* node contains all the core components of the cluster required to manage the *Worker* nodes, the workhourses of the cluster.
+*kubectl* makes API calls to the clusters *kube-apiserver* on the *Control Plane* node.  In addition to the *kube-apiserver*, the *Control Plane* node contains all the core components of the cluster required to manage the *Worker* nodes, the workhorses of the cluster.
 
 ![kube-apiserver](images/kube-apiserver.png "kube-apiserver")
 

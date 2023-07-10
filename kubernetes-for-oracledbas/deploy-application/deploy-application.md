@@ -53,13 +53,13 @@ kubectl get secret adb-tns-admin -n default -o json |
 
 The above command will export the `adb-tns-admin` *Secret* from the `default` *namespace* to JSON, exclude some metadata fields, and load the *Secret* back into the Kubernetes `sqldev-web` *namespace*.
 
-After the copy is done, you can query the new *Secret*: 
+After the copy is done, you can query the new *Secret*:
 
-```bash
+~~~bash
 <copy>
 kubectl get secrets -n sqldev-web`
-<copy>
-```
+</copy>
+~~~
 
 ![ADB Copy Secret](images/adb_sqldev.png "ADB Copy Secret")
 

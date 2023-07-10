@@ -85,13 +85,13 @@ Otherwise, if you are an Administrator setting this up for another user.
 1. Find the users OCID:
     Replace `<username>` with the OCI username:
 
-    ```
+    ```text
     USER_OCID=$(oci iam user list --name <username> | jq -r '.data[].id')
     ```
 
     For example:
 
-    ```
+    ```text
     USER_OCID=$(oci iam user list --name first.last@url.com | jq -r '.data[].id')
     ```
 
@@ -169,7 +169,6 @@ In the *Cloud Shell*, run the following commands to create a *Policy* statement 
     ```
 
     When you create a *Policy*, make changes to an existing *Policy*, or delete a *Policy*, your changes go into effect typically within 10 seconds.
-
 
 You may now **proceed to the next lab**
 
