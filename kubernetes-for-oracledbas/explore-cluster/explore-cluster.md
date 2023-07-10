@@ -156,7 +156,7 @@ The *kube-apiserver* then persisted that "`your-pod` should be running on `nodeX
 
 4. Update the *manifest file* to instruct the *kube-scheduler* that `your-pod` **should not** run on the `$ORIG_NODE`
 
-    This uses quite an advanced feature, `podAntiAffinity`, simply to demonstrate how the *kube-scheduler* will pick a node based on constraints.
+    This uses quite an advanced feature, `nodeAffinity`, simply to demonstrate how the *kube-scheduler* can pick a node based on constraints.
 
     ```bash
     <copy>
