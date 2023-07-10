@@ -161,11 +161,11 @@ You can create a view for *HR* Schema.
 
 2. Click the Object submenu (three vertical dots next to Search field) and select **Create Object**.
 
-   >Note: To create a view from an existing template for a selected schema, in the Navigator tab, select the view to create from, right-click and select **Use as Template**.
+       >Note: To create a view from an existing template for a selected schema, in the Navigator tab, select the view to create from, right-click and select **Use as Template**.
 
-   ![Create View](./images/create-view.png " ")
+       ![Create View](./images/create-view.png " ")
 
-   A View Properties dialog box opens.
+       A View Properties dialog box opens.
 
 3. Specify the following field values:
 
