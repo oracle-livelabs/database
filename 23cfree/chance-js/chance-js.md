@@ -178,6 +178,8 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     chance.yearStr = chance.year;
     chance.year = function (doc) { return parseInt(chance.yearStr(doc)); }
     export {chance, template};
+    
+    /
     </copy>
     ```
 
@@ -391,6 +393,9 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     function zodiac( p_doc in json ) return varchar2 as mle module chance_extended env chance_module_env signature 'chance.zodiac';
     function zodiac return varchar2 as mle module chance_extended env chance_module_env signature 'chance.zodiac';
     function template( p_doc in json ) return json as mle module chance_extended env chance_module_env signature 'template';
+    end;
+    
+    /
     </copy>
     ```
 
@@ -406,8 +411,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
 2. Generate a random string
     ```
     <copy>
-    select chance.string( json { 'length': 5 } );
-    CHANCE.STRING(JSON{'LENGTH':5})  
+    select chance.string( json { 'length': 5 } ); 
     </copy>
     ```
 
@@ -415,7 +419,6 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     ```
     <copy>
     select chance.string( json { 'length': 10 } ) connect by level <= 7;
-    CHANCE.STRING(JSON{'LENGTH':10})
     </copy>
     ```
 
@@ -430,7 +433,6 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     ```
     <copy>
     select chance.cc( json { 'type': 'Mastercard' } );
-    CHANCE.CC(JSON{'TYPE':'MASTERCARD'})
     </copy>
     ```
 
@@ -439,7 +441,6 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     ```
     <copy>
     select chance."date", to_char( chance."date", 'yyyy-mm-dd hh24:mi:ss' );
-    date TO_CHAR(CHANCE."DATE",'YYYY-MM-DDHH24:MI:SS')
     </copy>
     ```
 
@@ -448,7 +449,6 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     ```
     <copy>
     select chance."date"( json{ 'string': true } );
-    CHANCE."DATE"(JSON{'STRING':TRUE})
     </copy>
     ```
 
@@ -456,7 +456,6 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     ```
     <copy>
     select chance."date"( json{ 'string': true, 'american': false } );
-    CHANCE."DATE"(JSON{'STRING':TRUE,'AMERICAN':FALSE})
     </copy>
     ```
 
@@ -468,13 +467,12 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     ```
 
 10. Here you can see some limitations or flexibility (depending on your point of view) of interoperability between JavaScript and PL/SQL.
+    When passing a JSON parameter, we can ask for an extended generation mode for a given data generator. But the PL/SQL function signatures have to
+    be compatible because PL/SQL is strongly typed. Hence the trick here is to have a third signature for that case:
     ```
-    <copy>
     function "date" return date as mle module chance_extended env chance_module_env signature 'chance.date';
     function "date"( p_doc in json ) return varchar2 as mle module chance_extended env chance_module_env signature 'chance.date';
-     This one will help:
-     function "date"( p_doc in json, p_will_be_date in boolean ) return date as mle module chance_extended env chance_module_env signature 'chance.date'; 
-    </copy>
+    function "date"( p_doc in json, p_will_be_date in boolean ) return date as mle module chance_extended env chance_module_env signature 'chance.date'; 
     ```
 
 11. This one will help
@@ -491,7 +489,6 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     ```
     <copy>
     select chance."date"( json{ 'year': 2023 }, true );
-    CHANCE."DATE"(JSON{'YEAR':2023},TRUE)
     </copy>
     ```
 
@@ -509,7 +506,6 @@ If you've taken a look at the extended MLE module above, you may have seen some 
     ```
     <copy>
     select chance.template (json{'tags': ['word', 3]} );
-    CHANCE.TEMPLATE(JSON{'TAGS' : ['WORD',3]})
     </copy>
     ```
 
@@ -517,7 +513,6 @@ If you've taken a look at the extended MLE module above, you may have seen some 
     ```
     <copy>
     select chance.template( json { 'name': 'name', 'age': 'age', 'address': 'address' } );
-    CHANCE.TEMPLATE(JSON{'NAME':'NAME','AGE':'AGE','ADDRESS':'ADDRESS'})
     </copy>
     ```
 
