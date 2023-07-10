@@ -1,8 +1,10 @@
-# Integrate MicroTx Client Libraries with the Bank and Stock-Trading Application
+# Integrate MicroTx Client Libraries with the Stock Broker Microservice
 
 ## Introduction
 
 This lab walks you through all the steps to integrate the functionality provided by the Oracle® Transaction Manager for Microservices (MicroTx) client libraries with an application. Use MicroTx client libraries to register the required interceptors and callbacks, to obtain a connection to the application's resource manager, and to delineate transaction boundaries which indicate that an XA transaction has started, and then to commit or roll back the transaction.
+
+The Bank and Stock-Trading application contains the following microservices: Core Banking, Branch Banking, User Banking, and Stock Broker services. The MicroTx client library files are already integrated with the Core Banking, Branch Banking, and User Banking services. In this lab you will integrate the MicroTx client library files with the Stock Broker service.
 
 Estimated Time: 5 minutes
 
@@ -19,9 +21,9 @@ This lab assumes you have:
 
 * An Oracle Cloud account.
 * Successfully completed all previous labs:
-  * Get Started
-  * Lab 1: Prepare setup
-  * Lab 2: Environment setup
+    * Get Started
+    * Lab 1: Prepare setup
+    * Lab 2: Set Up the Environment
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
       ```
@@ -29,7 +31,9 @@ This lab assumes you have:
       sudo su - oracle
       </copy>
       ```
-* Configured Visual Studio Code to edit the code for Java applications.
+* Configured Visual Studio Code to edit the code for Java applications. Click **File** > **Preferences** > **Profiles (Java General)** > **Java General** as shown in the following image.
+
+    ![Configure Visual Studio Code to edit the code for Java applications.](./images/configure-vss-for-java.png " ")
 
 ## Task 1: Configure the Stock Broker App as a Transaction Initiator
 
