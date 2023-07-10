@@ -25,7 +25,7 @@ In this lab, you will:
 
     > **Note:** You can also directly access your Autonomous Data Warehouse or Autonomous Transaction Processing service in the __Quick Actions__ section of the dashboard.
 
-    ![Oracle home page.](https://github.com/oracle-livelabs/common/blob/main/images/console/navigation.png " ")
+    ![Oracle home page.](https://oracle-livelabs.github.io/common/images/console/navigation.png " ")
 
 3. Click **Oracle Database** -> **Autonomous Transaction Processing**.
 
