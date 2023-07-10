@@ -55,8 +55,6 @@ kubectl get all -A
 
 If an error is returned, ensure the Kubernetes cluster is up and running and that the *kubeconfig* file was properly generated in *Task 1*.
 
-
-
 ### etcd
 
 *etcd* is a a B+tree key-value store that contains all the Kubernetes cluster information in JSON format.  It is the equivalent of the Oracle Database's Data Dictionary and should be regularly backed-up.  When considering High-Availability, distributing *etcd* across many nodes is of key importance.
