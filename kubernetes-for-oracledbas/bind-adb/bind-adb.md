@@ -273,6 +273,8 @@ Output:
 
 You'll see what equates to a `TNS_ADMIN` directory, and in fact, this *Secret* will be used by applications for just that purpose.
 
+You may now **proceed to the next lab**
+
 ## Learn More
 
 * [Oracle Autonomous Database](https://www.oracle.com/uk/autonomous-database/)

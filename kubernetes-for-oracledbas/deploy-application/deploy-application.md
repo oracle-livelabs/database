@@ -481,6 +481,8 @@ In the output from the Ingress, copy the IP and visit: `http://<IP>/ords/sql-dev
 
 Log into your Application and Explore!
 
+You may now **proceed to the next lab**
+
 ## Learn More
 
 * [SQLcl](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/23.1/index.html)

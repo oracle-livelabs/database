@@ -150,6 +150,8 @@ It is important to note, Ansible has a robust community and ecosystem, with many
 
 Oracle has released an [OCI Ansible Collection](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansible.htm) to support the automation of cloud configurations and the orchestration of complex operational processes.
 
+You may now **proceed to the next lab**
+
 ## Common Issues
 
 * [Out of Capacity](?lab=troubleshooting#OutofCapacity)

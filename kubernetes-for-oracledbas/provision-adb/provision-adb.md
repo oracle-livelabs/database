@@ -162,6 +162,8 @@ kubectl delete secret adb-devops-admin-password
 
     ![ADB Terminating](images/adb_terminating.png "ADB Terminating")
 
+You may now **proceed to the next lab**
+
 ## Learn More
 
 * [Oracle Autonomous Database](https://www.oracle.com/uk/autonomous-database/)

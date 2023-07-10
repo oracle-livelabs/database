@@ -110,6 +110,8 @@ Here are some advantages and considerations to keep in mind:
 
 * **Service Coordination**: In scenarios where multiple services need to work together to accomplish a task, coordinating and managing the flow of data and transactions across services can be complex and require careful design.
 
+You may now **proceed to the next lab**
+
 ## Learn More
 
 * [Microservices](https://microservices.io)

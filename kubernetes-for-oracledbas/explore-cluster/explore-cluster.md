@@ -15,135 +15,90 @@ This lab assumes you have:
 * An accessible Oracle Kubernetes Engine Cluster
 * [Generated a Kubeconfig File](?lab=access-cluster)
 
+Running a container on a laptop is relatively simple. But connecting containers across multiple hosts, scaling them, deploying
+applications without downtime, and service discovery among several aspects, can be difficult.
+
 ## Task 1: Pods
 
-So you've deployed a Kubernetes cluster, created a `kubeconfig` file to access it, and created a namespace for an application that you are going to deploy later in the Workshop... but what is a Kubernetes Cluster?
+*Pods* are the data of a Database.  Without data, you don't need a table, without tables you don't need a schema or an instance... there is no point to a Database without data and similarly, there is no point to Kubernetes without *Pods*.  Everything in Kubernetes revolves around *Pods*, the smallest computing object in a Kubernetes Cluster.
 
-To put in Oracle DBA terms; a Kubernetes Cluster is to a Microservice Application what a Real Application Cluster (RAC) is to Single Instance Databases (SIDB).  
+*Pods* consists of one or more *Containers*, applications with all their libraries and dependencies, packaged to run in any environment.
 
-RAC provides fault-tolerance, high-availability, resource management, and scalability to a SIDB while the Grid Infrastructure component is essentially an orchestration system used to deploy, configure, and manage the nodes and instances within the cluster.  Kubernetes does all this, and more, for containerised applications.
+1. Start a *Pod* called `mypod` that runs the container image `nginx`, a lightweight webserver:
 
-In fact, a Kubernetes Cluster and a RAC Cluster share very similar concepts.  We already touched on `etcd`, the equivalent of the `Oracle Cluster Registry (OCR)` 
+    ```bash
+    <copy>
+    kubectl run mypod --image=nginx --restart=Never
+    kubectl get pod mypod -o wide
+    </copy>
+    ```
 
+2. Access your *Pod* and make a call to the webserver.
 
-will touch on a few of the core concepts here and explore more throughout the remaining Labs.
+    With the webserver application currently only accessible inside the cluster, connect to pod in order to access it.
 
-## Task 1: Manifest Files
+    ```bash
+    <copy>
+    kubectl exec -it pod mypod -c nginx -- /bin/bash -c "curl localhost"
+    </copy>
+    ```
 
-## Task 2: Pods
+3. Cause an unrecoverable Failure and query the *Pod*:
 
-
-
-Take a quick look at what **Pods** are running on your newly built cluster, use the `--all-namespaces`, or its shorthand `-A`, to return **Pods** from all namespaces:
-
-```bash
-<copy>
-kubectl get pods -A
-</copy>
-```
-
-
-
-**Pods** are the Sun of a Kubernetes Cluster, that is, everything in the cluster revolves around **Pods**.  They are the smallest deployable unit of computing in Kubernetes and contain your application all wrapped up into a nice logical host object.
-
-
-
-
-Kubernetes is an orchestration system to deploy and manage containers. Containers are not managed
-individually; instead they are part of a larger object called a Pod. A Pod consists of one or more containers which share an
-IP address, access to storage and namespace. Typically one container in a Pod runs an application while other containers
-support the primary application.
+    ```bash
+    <copy>
+    kubectl exec -it pod/mypod -- /bin/bash -c "kill 1"
+    kubectl get pod mypod
+    </copy>
+    ```
 
 
 
-## Task 1: View Worker Nodes
 
-Worker Nodes are often referred to as the backbone of a Kubernetes cluster, as they form the foundation and perform the bulk of the computational and operational tasks. They have three main components:
+## Task 2: Worker Nodes
 
-* Kubelet
-* Container Runtime
-* Kube-Proxy
+*Worker Nodes* are often referred to as the backbone of a Kubernetes cluster, as they form the foundation and perform the bulk of the computational and operational tasks. They have three main components:
 
-which handle the actual workload by running containers, executing applications, and processing requests, making them an essential component in the cluster's functioning.
+* *Container Runtime* - Responsible for pulling container and running container images. 
+* *Kubelet* - The primary `node-agent` responsible for interacting with the *Container Runtime* to ensure that containers are running and healthy on the node. 
+* *Kube-Proxy* - Acts as a sort of proxy and loadbalancer, responsible for routing traffic to the appropriate container based on IP and port number of the incoming request.
 
 ![Worker Nodes](images/worker_nodes.png "Worker Nodes")
 
-To view the nodes in the cluster, query the kube-apiserver:
+1. Ask the *kube-apiserver* about your *Worker Nodes*
 
-```bash
-<copy>
-kubectl get nodes -o wide
-</copy>
-```
+    ```bash
+    <copy>
+    kubectl get nodes -o wide
+    </copy>
+    ```
 
-## Kubelet
+2. Connect to a *Worker Node*
 
-You can see the nodes by querying the kube-apiserver because the Kubelet on each node has registered itself with the cluster.  The kubelet is a system process that does most of the node worker heavy-lifting.  It  accepts API calls for **Pod** specifications and interacts with the Container Runtime to ensure   
+    ```bash
+    <copy>
+    kubectl debug node/10.157.124.4 -it --image=oraclelinux:8
+    </copy>
+    ```
 
-## Container Runtime
+3. See the core process that make this a *Worker Node* in the cluster:
 
-The output from `kubectl get nodes -o wide` displays the nodes **Container Runtime**, which in your cluster will be `CRI-O`, a lightweight alternative to using Docker or Podman.  
+    ```bash
+    <copy>
+    ps -e |grep crio
+    ps -e |grep kubelet
+    ps -e |grep kube-proxy
+    </copy>
+    ```
 
+You may now **proceed to the next lab**
 
+## Learn More
 
-## Kube-Proxy
+[Kubernetes Worker Nodes](https://kubernetes.io/docs/concepts/architecture/nodes/)
 
+## Acknowledgements
 
-
-## Task 3: Lookup Namespaces
-
-
-## Task 4: Lookup Pods
-
-
-## Task 4: Lookup Services and Endpoint
-Namespaces provide the mechanism for applications deployed onto a cluster to isolate resources from each other when deployed in a cluster.
-
-List all of the namespaces present.
-
-
-Copy
-kubectl get namespaces -A
-
-
-Lookup Secrets deployed on the Kubernetes cluster.
-
-Kubernetes uses Secrets to hold confidential data, such as passwords, keys, or tokens. It helps by keeping them separate from the container image, thereby ensuring no confidential data remains with the application code contained within the container.
-
-
-Copy
-kubectl get secrets -A
-
-Lookup Services and Endpoint
-Services within a Kubernetes cluster represent the endpoint(s) used to access applications deployed onto the cluster instead of connecting directly to a container. Which allows an individual pod to terminate, or be replaced, without interrupting the end user’s interaction with the application.
-
-Endpoints track and map the IP addresses of the objects created for a Service to ensure all traffic is routed correctly to the correct application and is managed automatically by Kubernetes. However, if debugging an issue, this is how to look up their details.
-
-List all the Services deployed.
-
-
-Copy
-kubectl get services -A
-
-List all the Pods deployed on the Kubernetes cluster.
-
-List any Endpoints on the Kubernetes cluster.
-
-
-Copy
-kubectl get endpoints -A
-
-
-Copy
-kubectl get pods -A
-
-
-Lookup Pod Information
-Retrieve information about any pod deployed on the cluster.
-
-The previous kubectl get pods -A command returns a list of all the pods currently running on the cluster. Because this is a fresh install of Oracle Cloud Native Environment, only the ‘system’ pods are running. However, kubectl can retrieve more information about any of these deployed pods. All that needs noting are the NAMESPACE and NAME values. Because many pods are dynamically assigned names, these values may change from those shown when you execute the same command. However, the etcd pod should remain the same, so this is the example used for the lab.
-
-
-Copy
-kubectl describe pods etcd-ocne-control -n kube-system
-
+* **Authors** - [](var:authors)
+* **Contributors** - [](var:contributors)
+* **Last Updated By/Date** - John Lathouwers, May 2023

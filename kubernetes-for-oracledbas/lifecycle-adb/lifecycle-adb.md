@@ -390,6 +390,8 @@ This is especially useful for Autonomous Databases as when the database is STOPP
     </copy>
     ```
 
+You may now **proceed to the next lab**
+
 ## Learn More
 
 * [Oracle Autonomous Database](https://www.oracle.com/uk/autonomous-database/)

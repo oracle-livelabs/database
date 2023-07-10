@@ -163,6 +163,8 @@ You will now see all the new *CRDs* introduced by the **OraOperator** that will 
 
 ![kubectl api-resources --api-group=database.oracle.com](images/oraoperator_crds.png "kubectl api-resources --api-group=database.oracle.com")
 
+You may now **proceed to the next lab**
+
 ## Learn More
 
 * [Kubernetes Operators](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/)

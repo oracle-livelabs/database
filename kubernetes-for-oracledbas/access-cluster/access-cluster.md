@@ -131,6 +131,8 @@ In an Oracle Database, schema's provide a mechanism for isolating database objec
 
 For Production clusters, you may consider storing its context in an entirely different kubeconfig file to limit access and prevent mistakes.  Using the `production` context would be a matter of setting the `KUBECONFIG` environment variable to its location.
 
+You may now **proceed to the next lab**
+
 ## Learn More
 
 * [Command line tool (kubectl)](https://kubernetes.io/docs/reference/kubectl/)

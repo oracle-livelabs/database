@@ -117,6 +117,8 @@ fi
 </copy>
 ```
 
+You may now **proceed to the next lab**
+
 ## Learn More
 
 * [OCI - Cloud Shell](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm "OCI - Cloud Shell")

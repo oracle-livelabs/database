@@ -170,6 +170,9 @@ In the *Cloud Shell*, run the following commands to create a *Policy* statement 
 
     When you create a *Policy*, make changes to an existing *Policy*, or delete a *Policy*, your changes go into effect typically within 10 seconds.
 
+
+You may now **proceed to the next lab**
+
 ## Learn More
 
 * [OCI - Cloud Shell](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm)
