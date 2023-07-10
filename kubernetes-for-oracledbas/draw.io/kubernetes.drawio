@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2023-07-10T08:19:48.768Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.5.1 Chrome/112.0.5615.204 Electron/24.6.0 Safari/537.36" etag="W68Wr_9TFDNZOAVtvCr3" version="21.5.1" type="device">
+<mxfile host="Electron" modified="2023-07-10T15:17:46.933Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.5.1 Chrome/112.0.5615.204 Electron/24.6.0 Safari/537.36" etag="gJx5EBUUNFp3Pb0VW5NW" version="21.5.1" type="device">
   <diagram name="Page-1" id="EP78m_guM2NGAbF6yLtC">
     <mxGraphModel dx="776" dy="712" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -63,7 +63,7 @@
             <mxPoint x="-11" y="-2" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="VF-F0CnbNoAk2hL9MY8E-23" value="kube-controller-manager" style="locked=1;" parent="0" visible="0" />
+        <mxCell id="VF-F0CnbNoAk2hL9MY8E-23" value="kube-controller-manager" style="locked=1;" parent="0" />
         <mxCell id="VF-F0CnbNoAk2hL9MY8E-25" value="" style="group" vertex="1" connectable="0" parent="VF-F0CnbNoAk2hL9MY8E-23">
           <mxGeometry x="280" y="130" width="150" height="40" as="geometry" />
         </mxCell>
@@ -89,7 +89,7 @@
         <mxCell id="VF-F0CnbNoAk2hL9MY8E-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.219;entryY=0.95;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" edge="1" parent="VF-F0CnbNoAk2hL9MY8E-26" source="VF-F0CnbNoAk2hL9MY8E-27" target="VF-F0CnbNoAk2hL9MY8E-11">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="VF-F0CnbNoAk2hL9MY8E-34" value="cloud-controller-manager" style="locked=1;" parent="0" visible="0" />
+        <mxCell id="VF-F0CnbNoAk2hL9MY8E-34" value="cloud-controller-manager" style="locked=1;" parent="0" />
         <mxCell id="VF-F0CnbNoAk2hL9MY8E-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=classic;startFill=1;dashed=1;exitX=0.844;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="VF-F0CnbNoAk2hL9MY8E-34" source="VF-F0CnbNoAk2hL9MY8E-35" target="VF-F0CnbNoAk2hL9MY8E-11">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>

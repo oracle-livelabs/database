@@ -159,7 +159,7 @@ Now up to this point you have pretty much been able to do everything in the Kube
 
 However, in the next Tasks, you will be using an in-built *Service Account* called `default` to stop and start your ADB on a schedule.  The `default` account doesn't have any privileges on your **AutonomousDatabase** resources and so you will need to grant them using the *Role* and *RoleBinding* resources.
 
-1. Verify that you can have the necessary *Roles* that will enable you to stop and start an `adb` resource :
+1. Verify that you have the necessary *Roles* that will enable you to stop and start an `adb` resource :
 
     ```bash
     <copy>
@@ -330,8 +330,6 @@ This is especially useful for Autonomous Databases as when the database is STOPP
     </copy>
     ```
 
-    Output:
-
     ![ADB Cron](images/adb_cron.png "ADB Cron")
 
 3. Take a quick look at the *CronJobs*:
@@ -339,10 +337,8 @@ This is especially useful for Autonomous Databases as when the database is STOPP
     ```bash
     <copy>
     kubectl get cronjob
-    <copy>
+    </copy>
     ```
-
-    Output:
 
     ![ADB CronJob](images/adb_cronjob.png "ADB CronJob")
 
@@ -357,7 +353,7 @@ This is especially useful for Autonomous Databases as when the database is STOPP
       --type=merge
 
     kubectl get cronjob
-    <copy>
+    </copy>
     ```
 
 5. Watch the *CronJobs*.
@@ -370,7 +366,7 @@ This is especially useful for Autonomous Databases as when the database is STOPP
     </copy>
     ```
 
-    Output after 1 minute:
+    After 1 minute:
 
     ![ADB CronJob Stop](images/adb_cron_stop.png "ADB CronJob Stop")
 

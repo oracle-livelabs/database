@@ -27,7 +27,7 @@ This lab assumes you have:
 
 ## Task 1: Kubernetes Resources
 
-Kubernetes has built-in resources, or API endpoints, that usually represent a collection of concrete objects on the cluster.  You've already looked at a few of them in previous labs including *nodes*, *namespaces*, *pods*, and *services*.
+Kubernetes has built-in resources, or API endpoints, that usually represent a collection of concrete objects on the cluster.  You've already looked at a few of them in previous labs including *Nodes*, *Namespaces*, *Pods*, and *Deployments*.
 
 Take a look at the built-in resources available in your cluster:
 
@@ -45,13 +45,15 @@ When you install the OraOperator later in this Lab, it will create *CRDs* allowi
 
 On their own though, Kubernetes Resources only let you define your objects in the cluster.  When you combine a Resource with a *Controller* you have a true declarative API to fully manage your Resources.
 
-Kubernetes comes with a set of built-in *Controllers* that run inside the *kube-control-manager* which operates in a continuous loop to monitor the current state of built-in resources, like *Deployments*.  It is the *Controllers* job to watch and make changes to the built-in resources to ensure they match the desired configuration.
+Kubernetes comes with a set of built-in *Controllers* that run inside the *kube-control-manager* which operates in a continuous loop to monitor the current state of built-in resources, like *Deployments*.  
+
+It is the *Controllers* job to watch the built-in resources and send instructions that will ensure the built-in resources match the desired configuration.
 
 ![kube-control-manager](images/kube-control-manager.png "kube-control-manager")
 
 ## Task 3: Controller In Action
 
-To see a *Controller* in action, you will delete pods resulting in a *Deployment* resource being in an undesired state.  The Controller will automatically reconcile the *Deployment* back to the desired state.
+To see a *Controller* in action, you will delete pods resulting in a *Deployment* resource being in an undesired state.  The Controller will automatically send instructions on how to bring the *Deployment* back to the desired state.
 
 ![controller](images/controller.png "controller")
 

@@ -63,6 +63,8 @@ This lab assumes you have:
     </copy>
     ```
 
+    You won't get the same output as in Step 2 as the application is no longer running.
+
 5. Delete the *Pod*
 
     ```bash
@@ -75,7 +77,9 @@ If you are familiar with running containerised applications on your Desktop, thi
 
 ## Task 2: Worker Nodes
 
-*Worker Nodes* are often referred to as the backbone of a Kubernetes cluster, as they form the foundation and perform the bulk of the computational and operational tasks. They have three main components:
+*Worker Nodes* are often referred to as the backbone of a Kubernetes cluster. They form the foundation and perform the bulk of the computational and operational tasks.
+
+*Worker Nodes* have three main components:
 
 * *Container Runtime* - Responsible for pulling containers and running the container images.
 * *Kubelet* - The primary `node-agent` responsible for interacting with the *Container Runtime* to ensure that containers are running and healthy on the node.
@@ -124,11 +128,11 @@ If you are familiar with running containerised applications on your Desktop, thi
 
 ## Task 3: kube-scheduler
 
-When you interacted with the *kube-apiserver* to create `your-pod`, the *kube-scheduler* determined which *Worker Node* it could run, or *scheduled*, based on constraints and available resources.  
+When you interacted with the *kube-apiserver* to create `your-pod`, the *kube-scheduler* determined which *Worker Node* it could be run, or *scheduled*, based on constraints and available resources.  
 
 ![kube-scheduler](images/kube-scheduler.png "kube-scheduler")
 
-The *kube-apiserver* then stored the information in *etcd* that "`your-pod` should run on nodeX," following that decision made by the kube-scheduler.  The *kubelet* on `nodeX`, after asking the *kube-apiserver* what should be running on it, interacted with the *container runtime* to ensure that `your-pod` was running, as it was defined, with the containers described in that *Pod*Spec.
+The *kube-apiserver* then stored the information in *etcd* that "`your-pod` should run on nodeX," following that decision made by the *kube-scheduler*.  The *kube-apiserver* then instructs the *kubelet* on `nodeX` to execute the actions against the `nodeX` *container runtime* to ensure `your-pod` is running, as it was defined, with the containers described in that *Pod*Spec.
 
 1. Create a *manifest file* for `your-pod`
 
@@ -218,6 +222,8 @@ The *kube-apiserver* then stored the information in *etcd* that "`your-pod` shou
     </copy>
     ```
 
+**Bonus**: What happens if you constrained the *Pod* from being *scheduled* on all **Worker Nodes**?
+
 ## Task 3: ReplicaSet
 
 In *Task 1* when you caused an unrecoverable failure of `your-pod` the application was no longer available... **a full outage**... until you manually recreated `your-pod`.  In that case, you might as well do away with Kubernetes as it gives you no advantage of running your container outside the cluster.  Kubernetes, however, is an orchestration system and you can tell it: "I always want one instance, or *replica*, of my container to be running".
@@ -284,7 +290,7 @@ In *Task 1* when you caused an unrecoverable failure of `your-pod` the applicati
     </copy>
     ```
 
-    Requery your *replica*:
+    Re-query your *replica*:
 
     ```bash
     <copy>        
@@ -384,7 +390,6 @@ While running *Pods* is at the heart of Kubernetes, it is uncommon to run them d
     kubectl delete -f your-pod-deployment.yaml
     </copy>
     ```
-
 
 This lab has given you a general idea of the basics of a Kubernetes Cluster.  More concepts will be explored as you move through the rest of the Workshop.
 

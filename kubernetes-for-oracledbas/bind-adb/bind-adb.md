@@ -44,7 +44,7 @@ echo "ADB OCID: $ADB_OCID"
 
 ## Task 2: Create a manifest to Bind
 
-1. Create a *manifest file* to define the resource of an existing ADB, leveraging the *AutonomousDatabase CRD* from the OraOperator:
+Create a *manifest file* to define the resource of an existing ADB, leveraging the *AutonomousDatabase CRD* from the OraOperator:
 
 ```bash
 <copy>
