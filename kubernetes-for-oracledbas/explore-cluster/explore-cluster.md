@@ -8,7 +8,7 @@ In this lab you will explore the the Kubernetes Cluster.  You've already seen th
 
 ### Objectives
 
-* Understand the Core Compenents of Kubernetes
+* Understand the Core Components of Kubernetes
 
 ### Prerequisites
 
@@ -44,6 +44,8 @@ This lab assumes you have:
     </copy>
     ```
 
+    ![curl output](images/curl-output.png "curl output")
+
 3. Cause a failure and query the *Pod*:
 
     ```bash
@@ -75,9 +77,9 @@ If you are familiar with running containerised applications on your Desktop, thi
 
 *Worker Nodes* are often referred to as the backbone of a Kubernetes cluster, as they form the foundation and perform the bulk of the computational and operational tasks. They have three main components:
 
-* *Container Runtime* - Responsible for pulling container and running container images.
+* *Container Runtime* - Responsible for pulling containers and running the container images.
 * *Kubelet* - The primary `node-agent` responsible for interacting with the *Container Runtime* to ensure that containers are running and healthy on the node.
-* *Kube-Proxy* - Acts as a sort of proxy and loadbalancer, responsible for routing traffic to the appropriate container based on IP and port number of the incoming request.
+* *Kube-Proxy* - Acts as a sort of proxy and load-balancer, responsible for routing traffic to the appropriate container based on IP and port number of the incoming request.
 
 ![Worker Nodes](images/worker_nodes.png "Worker Nodes")
 
@@ -89,32 +91,44 @@ If you are familiar with running containerised applications on your Desktop, thi
     </copy>
     ```
 
+    Your output will be similar to:
+
+    ![kubectl get nodes -o wide](images/get-nodes.png "kubectl get nodes -o wide")
+
+    which shows you the Nodes status, Kubernetes Version, OS, and Container Runtime version.
+
 2. Connect to a *Worker Node*
 
     ```bash
     <copy>
-    NODE_IP=$(kubectl get nodes -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}')
+    NODE_IP=$(kubectl get nodes \
+      -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}')
+    
     kubectl debug node/$NODE_IP -it --image=oraclelinux:8
     </copy>
     ```
 
-3. See the core process that make this a *Worker Node* in the cluster:
+3. See the core process that make this a *Worker Node* in the cluster (make sure to `exit`):
 
     ```bash
     <copy>
     ps -e |grep crio
     ps -e |grep kubelet
     ps -e |grep kube-proxy
+
+    exit
     </copy>
     ```
 
+    ![Worker Node](images/worker-node.png "Worker Node")
+
 ## Task 3: kube-scheduler
 
-When you interacted with the *kube-apiserver* to create `your-pod`, the *kube-scheduler* determined which *Worker Node* it could be placed on based on constraints and available resources.  
+When you interacted with the *kube-apiserver* to create `your-pod`, the *kube-scheduler* determined which *Worker Node* it could run, or *scheduled*, based on constraints and available resources.  
 
 ![kube-scheduler](images/kube-scheduler.png "kube-scheduler")
 
-The *kube-apiserver* then persisted that "`your-pod` should be running on `nodeX`" into *etcd* based on the determination made by the *kube-scheduler*.  The *kubelet* on `nodeX`, after asking the *kube-apiserver* what should be running on it, interacted with the *container runtime* to ensure that `your-pod` was running, as it was defined, with the containers described in that *Pod*Spec.
+The *kube-apiserver* then stored the information in *etcd* that "`your-pod` should run on nodeX," following that decision made by the kube-scheduler.  The *kubelet* on `nodeX`, after asking the *kube-apiserver* what should be running on it, interacted with the *container runtime* to ensure that `your-pod` was running, as it was defined, with the containers described in that *Pod*Spec.
 
 1. Create a *manifest file* for `your-pod`
 
@@ -206,7 +220,7 @@ The *kube-apiserver* then persisted that "`your-pod` should be running on `nodeX
 
 ## Task 3: ReplicaSet
 
-In *Task 1* when you caused an unrecoverable failure of `your-pod` the application was no longer available... **a full outage**... until you manually recreated `your-pod`.  In that case, you might as well do away with Kubernetes as it gives you no advantage of running your container outside the cluster.  Kubernetes, however, is an orchestration system and you can tell it "I always want one instance, or *replica*, of my container to be running at all times".
+In *Task 1* when you caused an unrecoverable failure of `your-pod` the application was no longer available... **a full outage**... until you manually recreated `your-pod`.  In that case, you might as well do away with Kubernetes as it gives you no advantage of running your container outside the cluster.  Kubernetes, however, is an orchestration system and you can tell it: "I always want one instance, or *replica*, of my container to be running".
 
 1. Create a *ReplicaSet* to create your *Pod*
 
@@ -238,11 +252,13 @@ In *Task 1* when you caused an unrecoverable failure of `your-pod` the applicati
 
     In the above **manifest file** you are calling the `apps/v1` API to create a *ReplicaSet* called `your-pod-replica` to maintain `your-pod`.  The *labels* field is important.  It tells the *kubelet* to look for *Pods* with the *label* `tier=frontend` and ensure there are `x replicas` of it (in this case `1`).
 
-2. Create your *ReplicaSet*
+2. Create and query your *ReplicaSet*
 
     ```bash
     <copy>
     kubectl apply -f your-pod-replica.yaml
+
+    kubectl get replicaset
     </copy>
     ```
 
@@ -256,17 +272,29 @@ In *Task 1* when you caused an unrecoverable failure of `your-pod` the applicati
 
     Take note of the "Restarts" Column
 
+    ![replica](images/replica.png "Images")
+
 4. Cause a failure and query the *Pod*:
 
     ```bash
     <copy>
     POD_NAME=$(kubectl get pod -l "tier=frontend" -o custom-columns=NAME:.metadata.name --no-headers)
+
     kubectl exec -it $POD_NAME -- /bin/bash -c "kill 1"
+    </copy>
+    ```
+
+    Requery your *replica*:
+
+    ```bash
+    <copy>        
     kubectl get pod -l "tier=frontend"
     </copy>
     ```
 
     This time `your-pod-replica` was automatically restarted for you and your application, while experiencing a brief outage, continues to be available.
+
+    ![replica restart](images/replica-restart.png "replica restart")
 
 5. Scale the *ReplicaSet*
 
@@ -281,6 +309,8 @@ In *Task 1* when you caused an unrecoverable failure of `your-pod` the applicati
 
     Now you'll see two *Pods* giving your application higher availability.
 
+    ![replica scale](images/replica-scale.png "replica scale")
+
 6. Delete the *ReplicaSet*
 
     ```bash
@@ -294,7 +324,7 @@ In *Task 1* when you caused an unrecoverable failure of `your-pod` the applicati
 While running *Pods* is at the heart of Kubernetes, it is uncommon to run them directly or as *ReplicaSets* as you did in **Task 1 and 3**.  You will, most of the time, run a *Pod* as part of a *Deployment* and less often as part of a *StatefulSet* or *DaemonSet*.
 
 * **Deployment** - Manages *ReplicaSets* (which manage *Pods*).  *Deployments* allow you to change the desired state of your *Pod* at a controlled rate.
-* **StatefulSet** - Like *Deployments* but ensures *Pods* created and recreated with a persistent identifier.  This is useful when using persistent storage as it allows Kubernetes to match that persistent storage with its *Pod*
+* **StatefulSet** - Like *Deployments* but ensures *Pods* are created and recreated with a persistent identifier.  This is useful when using persistent storage as it allows Kubernetes to match that persistent storage with its *Pod*
 * **DaemonSet** - Ensures that all eligible *Worker Nodes* run a copy of its *Pod*.  A *DaemonSet* does not have the concept of a *ReplicaSet*, rather its `replicas` is equal to the number of eligible *Worker Nodes*
 
 1. Create a *manifest file* for `your-pod-deployment`
@@ -347,18 +377,27 @@ While running *Pods* is at the heart of Kubernetes, it is uncommon to run them d
 
     If the `watch` was quick enough, you would have seen that the *Deployment* caused the upgrade to be rolled out.  It ensured that the specified number of `replica` were always available, replacing *Pods* with the older `nginx` with *Pods* running the newer version in a graceful manner.
 
+4. Delete your *Deployment*
+
+    ```bash
+    <copy>
+    kubectl delete -f your-pod-deployment.yaml
+    </copy>
+    ```
+
+
 This lab has given you a general idea of the basics of a Kubernetes Cluster.  More concepts will be explored as you move through the rest of the Workshop.
 
 You may now **proceed to the next lab**
 
 ## Learn More
 
-[Kubernetes Worker Nodes](https://kubernetes.io/docs/concepts/architecture/nodes/)
-[Kubernetes Control Plane Components](https://kubernetes.io/docs/concepts/overview/components/)
-[Kubernetes ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)
-[Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
-[Kubernetes StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
-[Kubernetes DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
+* [Kubernetes Worker Nodes](https://kubernetes.io/docs/concepts/architecture/nodes/)
+* [Kubernetes Control Plane Components](https://kubernetes.io/docs/concepts/overview/components/)
+* [Kubernetes ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)
+* [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+* [Kubernetes StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
+* [Kubernetes DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
 
 ## Acknowledgements
 
