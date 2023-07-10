@@ -1,6 +1,6 @@
 {
     "workshoptitle": "Intro to Microservices and Kubernetes for Oracle DBAs",
-    "help": "john.lathouwers@oracle.com",
+    "help": "livelabs-help-dbmaa_us@oracle.com",
     "variables": [
         "../../variables/variables.json",
         "../../variables/variables-cloudworld.json"
