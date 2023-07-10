@@ -56,7 +56,7 @@ A simple config file for AutoUpgrade is provided already for your convenience:
 
 ## Task 4: Analyze with AutoUpgrade
 
-Now you will do an analyze run at first. 
+Now you will do an analysis run first. 
 
   ```
     <copy>
@@ -69,7 +69,7 @@ Now you will do an analyze run at first.
 Don't get confused when it displays something like
 ![confusion](./images/confusion-screen.png " ")
 
-Autoupgrade is not awaiting any input from you. Just lean back - it will complete within within less than half a minute.
+Autoupgrade is not awaiting any input from you. Just lean back - it will complete within less than half a minute.
 
 
 <details>
@@ -97,7 +97,7 @@ Check the logfile for any additional tasks. See the last line:
 ![confusion](./images/autoupgrade-status-log.png " ")
 </details>
 
-No additional tasks needed. You can progress.
+No additional tasks are needed. You can progress.
 
 
 ## Task 6: AutoUpgrade Deploy
@@ -132,12 +132,12 @@ It will do an automatic refresh from now on.
 
 __As this job will run for about 30 minutes, you may now *proceed to the next lab*__.
 
-Once the job finished you'll see an output similar to:
+Once the job is finished you'll see an output similar to:
 ![autoupgrade refresh](./images/autoupgrade-status-finish.png " ")
 
 
 
-## Acknowledgements
+## Acknowledgments
 * **Author** - Mike Dietrich 
 * **Contributors** Klaus Gronau, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023

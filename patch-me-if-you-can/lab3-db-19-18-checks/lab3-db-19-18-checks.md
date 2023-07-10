@@ -125,7 +125,7 @@ Check the current PERL version:
     </details>
 
     Take notice of the current version "__This is perl 5, version 36, subversion 0 (v5.36.0) built for x86_64-linux-thread-multi__". 
-    We will check afterwards whether the PERL version has been updated as well. </br>
+    We will check afterward whether the PERL version has been updated as well. </br>
 
 
 5. Current Time Zone </br> 
@@ -364,7 +364,7 @@ You may now *proceed to the next lab*
 
 
 
-## Acknowledgements
+## Acknowledgments
 * **Author** - Mike Dietrich 
 * **Contributors** Klaus Gronau, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023

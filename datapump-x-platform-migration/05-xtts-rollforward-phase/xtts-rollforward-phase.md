@@ -204,7 +204,7 @@ Target:
 ![res.txt content on target](./images/res-txt-trg.png " ") 
 
 Take a closer look at both output files posted next to each other below. The first two lines match and contain details from your initial backup taken during the prepare phase. <br>
-The difference between source and target res.txt starts in line three beginning with with "#0:::6". This entry was added by the roll forward phase. It is the initial copy of the newly added datafile. In addition you'll see an incremental backup of all data files marked with "#1":
+The difference between source and target res.txt starts in line three beginning with "#0:::6". This entry was added by the roll forward phase. It is the initial copy of the newly added datafile. In addition you'll see an incremental backup of all data files marked with "#1":
 
 | res.txt source | res.txt target |
 | :--------: | :-----:|
@@ -369,7 +369,7 @@ The first directory belongs to the restore executed in the prepare phase, the se
 You may now *proceed to the next lab*.
 
 
-## Acknowledgements
+## Acknowledgments
 * **Author** - Klaus Gronau
 * **Contributors** Mike Dietrich, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023

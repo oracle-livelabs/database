@@ -1,7 +1,7 @@
 # Lab 5: In-Place Patching
 
 ## Introduction 
-The benefit of the out-of-place patching method is not only that the previous home is preserved for a potential fallback but it only allows much shorter downtime. In order to see the difference you could patch now the 19.18.0 home in-place.
+The benefit of the out-of-place patching method is not only that the previous home is preserved for a potential fallback but it only allows much shorter downtime. To see the difference you could patch now the 19.18.0 home in-place.
 
 ![Process flow lab 5](./images/lab5-process-flow.png " ")
 
@@ -260,9 +260,9 @@ If not, you have our full sympathy - and we'd ask you to continue straight to th
 In case you'd like to learn about the complexities of in-place patching instead, then continue in the current lab.
 
 1. Evaluate Patches to Roll Back </br> 
-Then you need to check at first which patches need to be rolled back.
+Then you need to check first which patches need to be rolled back.
 
-    These are the patches opatch told you needing rollback:
+    These are the patches opatch told you needed rollback:
 
     ```
     Following patches will be rolled back from Oracle Home on application of the patches in the given list : 
@@ -649,7 +649,7 @@ You see, it is a lot of extra work to patch in-place. So far, you did only clean
     </copy>
     ```
 
-    Here opatch asks you if you want to continue and if the system is ready for patching. Anwer both questions with "__y__":
+    Here opatch asks you if you want to continue and if the system is ready for patching. Answer both questions with "__y__":
 
     ![opatch apply](./images/opatch-apply-2.png " ")
 
@@ -1598,7 +1598,7 @@ SQL Patching tool complete on Mon Jul  3 10:39:34 2023
 
 ## Task 9: Inventory Check and Summary
 
-Now you see __why out-of-place patching is far superior__ over in-place patching. While you prepared a new home fully unattended before, in contrast you've had to do all the manual work now all by yourself. 
+Now you see __why out-of-place patching is far superior__ to in-place patching. While you prepared a new home fully unattended before, in contrast you've had to do all the manual work now all by yourself. 
 In addition, the downtime was factors higher. 
 And finally, in the case of the CDB2, AutoUpgrade had done the entire job for you. In the in-place patching exercise it was all on you.
 
@@ -1629,7 +1629,7 @@ Starting with opatch version 37 you can check if you have inactive patches in yo
     ![opatch inactive patches output](./images/opatch-inactive-patches.png " ")
 
     <details>
-    <summary>*click here to see the full opatch listorderedinactivepatches putput*</summary>
+    <summary>*click here to see the full opatch listorderedinactivepatches output*</summary>
 
     ``` text
     [UP19] oracle@hol:~/stage/mrp/35333937
@@ -1785,7 +1785,7 @@ IT IS TO HIDE THE LISTENER START JUST IN CASE I NEED IT AGAIN
 You are done with in-place patching and you may *proceed to the next lab*.
 
 
-## Acknowledgements
+## Acknowledgments
 * **Author** - Mike Dietrich 
 * **Contributors** Klaus Gronau, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023

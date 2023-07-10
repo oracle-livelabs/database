@@ -319,7 +319,7 @@ You can now check if source and target match using SQL*Plus:
 You completed all stages of this XTTS lab migrating an Oracle 11g database directly into a 21c PDB successfully!
 
 
-## Acknowledgements
+## Acknowledgments
 * **Author** - Klaus Gronau
 * **Contributors** Mike Dietrich, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023

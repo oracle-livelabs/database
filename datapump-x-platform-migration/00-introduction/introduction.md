@@ -2,7 +2,7 @@
 
 ## About this Workshop
 
-In this lab you will migrate an 11.2.0.4 database directly into a 21c PDB using the __Cross Platform Transportable Tablespace (XTTS)__ script. This script automatically handles cross platform migrations including conversions from little to big endianness (or vice versa). You can also use it to migrate directly into a PDB running on the same platform and host. 
+In this lab you will migrate an 11.2.0.4 database directly into a 21c PDB using the __Cross Platform Transportable Tablespace (XTTS)__ script. This script automatically handles cross-platform migrations including conversions from little to big endianness (or vice versa). You can also use it to migrate directly into a PDB running on the same platform and host. 
 The prerequisites are outlined in [MOS note #2471245.1: V4 Reduce Transportable Tablespace Downtime using Cross Platform Incremental Backup](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2471245.1&displayIndex=1). Another helpful document is [MOS note #1454872.1: Transportable Tablespace (TTS) Restrictions and Limitations: Details, Reference, and Version Where Applicable ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1454872.1&displayIndex=1).
 
 The diagram below shows you the different phases of the XTTS including the steps being executed in a particular phase by the XTTS scripts and if the source database is up and available for normal use:
@@ -59,7 +59,7 @@ The workshop also contains 6 different databases for running various upgrade and
 ## Transportable Tablespaces using XTTS Scripts Workshop
 
 You can use the transportable tablespace method to upgrade a database from an Oracle Database 11g Release 2 (11.2.0.3) or later to Oracle Database 23c.
-Although the XTTS scripts are able to migrate __cross-platform and cross-endianness__ this lab will use a single Linux machine as source and target platform. The source database (11.2.0.4) will be migrated directly into a 21c PDB.
+Although the XTTS scripts can migrate __cross-platform and cross-endianness__ this lab will use a single Linux machine as source and target platform. The source database (11.2.0.4) will be migrated directly into a 21c PDB.
  
 
 
@@ -72,7 +72,7 @@ You may now *proceed to the next lab*.
 * [V4 Reduce Transportable Tablespace Downtime using Cross Platform Incremental Backup](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2471245.1&displayIndex=1)
 * [Transportable Tablespace (TTS) Restrictions and Limitations: Details, Reference, and Version Where Applicable ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1454872.1&displayIndex=1)
 
-## Acknowledgements
+## Acknowledgments
 * **Author** - Klaus Gronau
 * **Contributors** Mike Dietrich, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023

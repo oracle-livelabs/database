@@ -5,7 +5,7 @@ In this Database Patching lab you will make yourself familiar with the options o
 ![Lab activities](./images/overview-patch-me-if-you-can.png " ")
 
 
-The patching does include not only a Release Update (RU) but also the Oracle Java Virtual Machine Bundle (OJVM), a Monthly Recommended Patch (MRP) and the Data Pump Bundle Patch (DPBP). You will cleanup, and you will do a rollback to the previous bundle as well.
+The patching does include not only a Release Update (RU) but also the Oracle Java Virtual Machine Bundle (OJVM), a Monthly Recommended Patch (MRP) and the Data Pump Bundle Patch (DPBP). You will clean up, and you will do a rollback to the previous bundle as well.
 
 
 Estimated Workshop Time: 90 minutes
@@ -51,7 +51,7 @@ The current Oracle Home is: `/u01/app/oracle/product/19`
 
 You may *proceed to the next lab*.
 
-## Acknowledgements
+## Acknowledgments
 * **Author** - Mike Dietrich 
 * **Contributors** Klaus Gronau, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023

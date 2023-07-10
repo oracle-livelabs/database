@@ -2,8 +2,8 @@
 
 ## Introduction
 
-This last phase, the transport phase, requires a downtime. Before you start the last incremental backup it is mandatory to set the tablespaces you copied to read only. </br>
-__ATTENTION__: Make sure there are no active sessions/open transcations using objects in the copied tablespaces.
+This last phase, the transport phase, requires downtime. Before you start the last incremental backup it is mandatory to set the tablespaces you copied to read only. </br>
+__ATTENTION__: Make sure there are no active sessions/open transacations using objects in the copied tablespaces.
 
 Estimated Time: 15 minutes
 
@@ -1404,13 +1404,13 @@ And import the metadata into the PDB3 using this Imp_Metadata.par parameter file
       ```
     </details>
 
-You should examine the Data Pump log files. Any errors should be investigated to determine whether they are significant for the import. Full transportable export/import often produces error on internal objects which can be ignored in most cases.
+You should examine the Data Pump log files. Any errors should be investigated to determine whether they are significant for the import. Full transportable export/import often produces errors on internal objects which can be ignored in most cases.
 
 
 You may now *proceed to the next lab*.
 
 
-## Acknowledgements
+## Acknowledgments
 * **Author** - Klaus Gronau
 * **Contributors** Mike Dietrich, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023

@@ -1,7 +1,7 @@
 # Lab 6:  Final Checks
 
 ## Introduction 
-You are done now. You did patch out-of place what we highly recommend, and you may have done also a more work-intense in-place patching exercise. So, let us check some things in both environment. 
+You are done now. You did patch out-of place which we highly recommend, and you may have done also a more work-intense in-place patching exercise. So, let us check some things in both environments. 
 
 ![Process flow lab 6](./images/lab6-process-flow.png " ")
 
@@ -190,7 +190,7 @@ Congratulations from the entire Oracle Database Upgrade, Migration and Patching 
 But for now, relax - and thanks for taking the time to complete this lab.
 
 
-## Acknowledgements
+## Acknowledgments
 * **Author** - Mike Dietrich 
 * **Contributors** Klaus Gronau, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023

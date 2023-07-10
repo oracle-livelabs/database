@@ -249,7 +249,7 @@ The patch install is taking about ten minutes. While the patch install is ongoin
 
 
 
-## Acknowledgements
+## Acknowledgments
 * **Author** - Mike Dietrich 
 * **Contributors** Klaus Gronau, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023
