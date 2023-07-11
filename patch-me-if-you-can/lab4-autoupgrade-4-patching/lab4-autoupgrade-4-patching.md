@@ -1,7 +1,7 @@
 # Lab 4: Using AutoUpgrade for Patching
 
 ## Introduction 
-In this lab exercise you will patch the CDB2 database from 19.18.0 to 19.19.0 with just two commands.
+In this lab, you will patch the CDB2 database from 19.18.0 to 19.19.0 with just two commands.
 
 ![Process flow lab 4](./images/lab4-process-flow.png " ")
 
@@ -80,7 +80,7 @@ Autoupgrade is not awaiting any input from you. Just lean back - it will complet
 
 ## Task 5: AutoUpgrade Log File
 
-Check the logfile for any additional tasks. See the last line:
+Check the log file for any additional tasks. See the last line:
 
   ```
     <copy>
@@ -115,7 +115,7 @@ It will lift the database into the new 19.19 home and execute all necessary task
 Again you see the autoupgrade command prompt
 ![autoupgrade deploy](./images/autoupgrade-command-prompt.png " ")
 
-and this time you can use it to monitor  the autoupgrade progress.
+and , you can use it to monitor  the autoupgrade progress.
 
 ## Task 7: AutoUpgrade Progress
 You can monitor it in the job interface easily with a refresh interval:
@@ -132,7 +132,7 @@ It will do an automatic refresh from now on.
 
 __As this job will run for about 30 minutes, you may now *proceed to the next lab*__.
 
-Once the job is finished you'll see an output similar to:
+Once the job finishes, you'll see an output similar to:
 ![autoupgrade refresh](./images/autoupgrade-status-finish.png " ")
 
 

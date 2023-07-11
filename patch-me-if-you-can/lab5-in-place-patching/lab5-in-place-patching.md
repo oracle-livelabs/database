@@ -1,7 +1,7 @@
 # Lab 5: In-Place Patching
 
 ## Introduction 
-The benefit of the out-of-place patching method is not only that the previous home is preserved for a potential fallback but it only allows much shorter downtime. To see the difference you could patch now the 19.18.0 home in-place.
+The benefit of the out-of-place patching method is that you preserve the previous home. Also, it shortens the downtime required. To illustrate the difference, you will patch the 19.18.0 home in-place.
 
 ![Process flow lab 5](./images/lab5-process-flow.png " ")
 
@@ -9,7 +9,7 @@ Estimated Time: 45 minutes
 
 ### Objectives
 
-Patching an existing Oracle_Home
+Patching an existing Oracle Home
 
 ### Prerequisites
 
@@ -26,7 +26,7 @@ This lab assumes you have:
 
 
 1. Environment </br>
-Set the environment for the UP19 database. It is currently shutdown since it needs to be shutdown while we patch.
+Set the environment for the UP19 database. It is currently shut down since. During in-place patches, the database must be shut down.
 
     ```
     <copy>
@@ -56,12 +56,12 @@ Start running the patching conflict check:
     </copy>
     ```
 
-    You will receive a very long output listing several thousands of bug numbers fixed by the RU. We cut the output off here:
+    You will receive a very long output listing several thousands of bug numbers fixed by the RU. Truncated output:
 
     ![opatch conflict checker](./images/opatch-conflict-checker-1.png " ")
 
     <details>
-    <summary>*click here to see the full opatch conflict checker output*</summary>
+    <summary>*click here to see the full OPatch conflict checker output*</summary>
 
     ``` text
     [UP19] oracle@hol:~/stage/ru/35042068
@@ -248,8 +248,8 @@ Following patches have conflicts. Please contact Oracle Support and get the merg
 34340632, 34972375, 35042068, 35213579
 ```
 
-Why do you need to rollback anything?
-The reason is that Release Updates will be merged automatically. But in this case the 19.18.0 home has additional patches applied. And those need to be rolled back at first.
+Why do you need to roll back anything?
+OPatch will merge the old and new Release Update automatically. That does not cause a conflict. But in this case the 19.18.0 home has additional patches applied. Those must be rolled back.
 
 ## Task 2: Patch rollback
 
@@ -257,12 +257,12 @@ Do you want to go this route? Really?
 
 If not, you have our full sympathy - and we'd ask you to continue straight to the next lab for cleanup and final checks.
 
-In case you'd like to learn about the complexities of in-place patching instead, then continue in the current lab.
+If you'd like to learn about the complexities of in-place patching instead, continue in the current lab.
 
 1. Evaluate Patches to Roll Back </br> 
-Then you need to check first which patches need to be rolled back.
+Then you need to check first which patches you must roll back.
 
-    These are the patches opatch told you needed rollback:
+    These are the patches OPatch told you needed rollback:
 
     ```
     Following patches will be rolled back from Oracle Home on application of the patches in the given list : 
@@ -276,7 +276,7 @@ Then you need to check first which patches need to be rolled back.
     - 34783802
     - 33973908
 
-    Now you can follow the opatch advice and just rollback the entire list of patches. Just make sure you remove the spaces between "comma" and "patchnumber":
+    Now you can follow the OPatch advice and just roll back the entire list of patches. Just make sure you remove the spaces between "comma" and "patchnumber":
 
 2. Rollback Patches 
 
@@ -288,12 +288,12 @@ Then you need to check first which patches need to be rolled back.
 
     Opatch will ask you if you want to continue rolling back the patches - answer with "__y__":
 
-    ![confirm opatch patches rollback ](./images/opatch-rollback-patches.png " ")
+    ![confirm OPatch patches rollback ](./images/opatch-rollback-patches.png " ")
 
     Opatch continues to roll back the listed patches.
 
     <details>
-    <summary>*click here to see the opatch rollback output*</summary>
+    <summary>*click here to see the OPatch rollback output*</summary>
 
     ``` text
     [UP19] oracle@hol:~/stage/ru/35042068
@@ -375,7 +375,7 @@ Then you need to check first which patches need to be rolled back.
 ## Task 3: More Rollback Required
 
 1. Additional Rollback Required </br>
-Unfortunately, we are not done yet with rollback activities. </br>
+Unfortunately, you are not done yet with rollback activities. </br>
 When you check again:
 
     ```
@@ -384,10 +384,10 @@ When you check again:
     </copy>
     ```
 
-    ![second opatch conflict checker](./images/opatch-conflict-checker-2.png " ")
+    ![second OPatch conflict checker](./images/opatch-conflict-checker-2.png " ")
 
     <details>
-    <summary>*click here to see the full opatch conflict checker output*</summary>
+    <summary>*click here to see the full OPatch conflict checker output*</summary>
 
     ``` text
     [UP19] oracle@hol:~/stage/ru/35042068
@@ -537,7 +537,7 @@ When you check again:
     34340632, 34972375, 35042068, 35213579
     ```
 
-    Now this message is even more misleading since the third of the patches listed isn't even in the Oracle Home. You would find out if you'd try to remove it. We skip this part and rather run an opatch lsinventory which tells us what is installed right now.
+    This message is even more misleading since the third of the patches listed isn't even in the Oracle Home. You would find out if you'd try to remove it. You skip this part and rather run an opatch lsinventory which tells us what the Oracle Home contains.
 
 2. Opatch lspatches Output 
 
@@ -550,7 +550,7 @@ When you check again:
     ![opatch lsinventory](./images/opatch-lsinventory.png " ")
 
 
-    Now I can tell you that the Data Pump Bundle Patch must be removed since it is a huge collection of one-off fixes. And the MRP installed into the 19.18.0 home must be removed as well. It doesn't identify itself as MRP but lists the one-off patches instead. You need to remove all of them as well before you can proceed.
+    You must roll back the Data Pump Bundle Patch since it is a huge collection of one-off fixes (merge patch). Also, you must roll back the MRP. The MRP doesn't identify itself as one, but lists the one-off patches instead. 
 
 3. Opatch nrollback
 
@@ -566,7 +566,7 @@ When you check again:
 
 
     <details>
-    <summary>*click here to see the second full opatch rollback output*</summary>
+    <summary>*click here to see the second full OPatch rollback output*</summary>
 
     ``` text
     [UP19] oracle@hol:~/stage/ru/35042068
@@ -626,10 +626,10 @@ When you check again:
     </details>
 
 
-    Once they are removed, the conflict check passes, and you can continue.
+    Once OPatch has rolled back the patches, the conflict check passes, and you can continue.
 
 ## Task 4: Apply RU 19.19.0
-You see, it is a lot of extra work to patch in-place. So far, you did only cleanup. But now, finally, you can start applying the patches. You will start with the Release Update 19.19.0
+It is evident that you need a lot of extra work to patch in-place. So far, you only only prepared for the patch. But now, finally, you can start applying the patches. You will start with the Release Update 19.19.0
 
 1. Change Directory
 
@@ -649,12 +649,12 @@ You see, it is a lot of extra work to patch in-place. So far, you did only clean
     </copy>
     ```
 
-    Here opatch asks you if you want to continue and if the system is ready for patching. Answer both questions with "__y__":
+    Here OPatch asks you if you want to continue and if the system is ready for patching. Answer both questions with "__y__":
 
     ![opatch apply](./images/opatch-apply-2.png " ")
 
     <details>
-    <summary>*click here to see the full opatch apply output*</summary>
+    <summary>*click here to see the full OPatch apply output*</summary>
 
     ``` text
     [UP19] oracle@hol:~/stage/ru/35042068
@@ -892,9 +892,9 @@ Now you need to apply the OJVM Bundle Patch on top.
     </copy>
     ```
 
-    Same procedure - opatch asks you if you want to proceed and the system is ready for patching. Answer both with "__y__":
+    Same procedure - OPatch asks you if you want to proceed, and if the system is ready for patching. Answer both with "__y__":
 
-    ![opatch apply ojvm](./images/opatch-apply-ojvm.png " ")
+    ![OPatch apply ojvm](./images/opatch-apply-ojvm.png " ")
 
     <details>
     <summary>*click here to see the full OJVM patch apply*</summary>
@@ -953,7 +953,7 @@ Now you need to apply the OJVM Bundle Patch on top.
 
 
 ## Task 6: Apply the Data Pump Bundle Patch 19.19.0
-Next step is to apply the Data Pump Bundle Patch for 19.19.0. You could do this online while the database is up and running. But since we want all patches to be in place when we execute `datapatch` later on, it is best to apply it right now.
+The next step is to apply the Data Pump Bundle Patch for 19.19.0. You could do this online while the database is up and running. But since you want all patches to be in place when you execute `datapatch` later on, it is best to apply it right now.
 
 1. Change Directory
 
@@ -973,7 +973,7 @@ Next step is to apply the Data Pump Bundle Patch for 19.19.0. You could do this 
     </copy>
     ```
 
-    ![opatch apply datapump bundle patch](./images/opatch-apply-datapump-bundle-patch.png " ")
+    ![OPatch apply datapump bundle patch](./images/opatch-apply-datapump-bundle-patch.png " ")
 
     <details>
     <summary>*click here to see the full final backup log file*</summary>
@@ -1035,9 +1035,9 @@ Now you see a significant difference to the other processes. Since MRPs are a co
     </copy>
     ```
 
-    You already know the procedure - when opatch asks if you want to continue or when it asks if the system is ready for patching, answer with "__y__":
+    You already know the procedure - when OPatch asks if you want to continue or when it asks if the system is ready for patching, answer with "__y__":
 
-    ![opatch mrp patch apply](./images/opatch-apply-mrp.png " ")
+    ![OPatch mrp patch apply](./images/opatch-apply-mrp.png " ")
 
     <details>
     <summary>*click here to see the full final backup log file*</summary>
@@ -1469,7 +1469,7 @@ Now you see a significant difference to the other processes. Since MRPs are a co
 
 
 ## Task 8: Start the database and invoke datapatch
-As your home has now received all patches, you need to startup the UP19 database and apply all SQL and PL/SQL changes to it with datapatch:
+As your home has now received all patches, you need to start up the UP19 database and apply all SQL and PL/SQL changes to it with datapatch:
 
 1. Open SQL*Plus
 
@@ -1492,7 +1492,7 @@ As your home has now received all patches, you need to startup the UP19 database
   ```
 ![start database](./images/start-database.png " ")
 
-This is a non-CDB so you won't execute the "ALTER PLUGGABLE DATABASE" command. Still, we use this as a standard command since it will not harm but in case of having PDBs, it will ensure that your PDBs get started.
+This is a non-CDB, so you won't execute the `ALTER PLUGGABLE DATABASE` command. For simplicity, this lab includes the command in non-CDB databases as well. It does not harm.
 
 3. Run "datapatch"
   ```
@@ -1598,9 +1598,9 @@ SQL Patching tool complete on Mon Jul  3 10:39:34 2023
 
 ## Task 9: Inventory Check and Summary
 
-Now you see __why out-of-place patching is far superior__ to in-place patching. While you prepared a new home fully unattended before, in contrast you've had to do all the manual work now all by yourself. 
-In addition, the downtime was factors higher. 
-And finally, in the case of the CDB2, AutoUpgrade had done the entire job for you. In the in-place patching exercise it was all on you.
+Now you see __why out-of-place patching is far superior__ to in-place patching. While you prepared a new home fully unattended before, you've had to do all the manual work now by yourself.
+In addition, you needed more downtime. 
+And finally, in the case of the CDB2, AutoUpgrade had done the entire job for you. In the in-place patching exercise, it was all on you.
 
 Finally check the inventory:
 
@@ -1611,12 +1611,11 @@ Finally check the inventory:
   ```
 
 
-![opatch lspatches output](./images/opatch-lspatches.png " ")
+![OPatch lspatches output](./images/opatch-lspatches.png " ")
 
 
 ## Task 10: Opatch Cleanup
-So you think you're done with the in-pace patching?
-Starting with opatch version 37 you can check if you have inactive patches in your ORACLE_HOME directory and remove them.
+So you think you're done with the in-pace patching? You should also check for inactive patches in your Oracle Home. You can remove inactive patches to reduce the size of the Oracle Home and improve patching runtime.
 
 1. Inactive Patches
 
@@ -1626,10 +1625,10 @@ Starting with opatch version 37 you can check if you have inactive patches in yo
     </copy>
     ```
 
-    ![opatch inactive patches output](./images/opatch-inactive-patches.png " ")
+    ![OPatch inactive patches output](./images/opatch-inactive-patches.png " ")
 
     <details>
-    <summary>*click here to see the full opatch listorderedinactivepatches output*</summary>
+    <summary>*click here to see the full OPatch listorderedinactivepatches output*</summary>
 
     ``` text
     [UP19] oracle@hol:~/stage/mrp/35333937
@@ -1662,7 +1661,7 @@ Starting with opatch version 37 you can check if you have inactive patches in yo
 
 
 2. Clean up Inactive Patches</br>
-    When invoking OPatch clean up, it will by default preserve the recent applied patch and the patch before this one. If you want to preserve the last 2, 3 or more patches, you can configure it by altering `RETAIN_INACTIVE_PATCHES` in "$ORACLE_HOME/OPatch/config/opatch.properties" file. Deleting all older patches by setting this parameter to 0 is currently not possible.
+    When invoking OPatch clean-up, it will preserve the recent applied patch and the patch before this one. You can change this by altering `RETAIN_INACTIVE_PATCHES` in `$ORACLE_HOME/OPatch/config/opatch.properties` file. 
 
 <if type="KgR">
 COMMENT: TYPE IS NOT DEFINED; SO THIS SECTION DOES NOT APPEAR
@@ -1674,7 +1673,7 @@ IT IS TO HIDE THE LISTENER START JUST IN CASE I NEED IT AGAIN
     </copy>
     ```
 
-    ![opatch delete inactive patches ](./images/opatch-deleteinactive-patches-1.png " ")
+    ![OPatch delete inactive patches ](./images/opatch-deleteinactive-patches-1.png " ")
 
     So what does this message
     ``` text
@@ -1683,7 +1682,7 @@ IT IS TO HIDE THE LISTENER START JUST IN CASE I NEED IT AGAIN
     Please update the value of RETAIN_INACTIVE_PATCHES in OPatch config file OPatch/config/opatch.properties
     ```
     mean? </br>
-     `RETAIN_INACTIVE_PATCHES` is the amount of inactive patches opatch will not delete. Currently the parameter is set to zero:
+     `RETAIN_INACTIVE_PATCHES` is the amount of inactive patches OPatch will not delete. Currently the parameter is set to zero:
 
     ```
     <copy>
@@ -1693,7 +1692,7 @@ IT IS TO HIDE THE LISTENER START JUST IN CASE I NEED IT AGAIN
 
     ![value retain_inactive_patches_parameter ](./images/retain-inactive-patches.png " ")    
     
-    You have 3 inactive patches in your ORACLE_HOME, opatch must keep at least the last inactive one, so you can set the parameter value to either 1 or 2 depending on how many inactive patches you want to keep. </br>
+    You have 3 inactive patches in your ORACLE_HOME, OPatch must keep at least the last inactive one, so you can set the parameter value to either 1 or 2 depending on how many inactive patches you want to keep. </br>
  
 
 3. Update __opatch.properties__ file </br>
@@ -1723,7 +1722,7 @@ IT IS TO HIDE THE LISTENER START JUST IN CASE I NEED IT AGAIN
 </if>
 
 
-    It's a good idea to run this task always with the "-silent" option, because depending on the amount of patches "opatch deleteinactivepatches" has to remove, this might take a while: 
+    It's a good idea to run this task always with the `-silent` option, because depending on the amount of patches `opatch deleteinactivepatches` has to remove, this might take a while: 
 
     ```
     <copy>
