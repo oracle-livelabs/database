@@ -19,13 +19,13 @@ This lab assumes you have:
 ## Task 1: Open Terminal Window, Create OS Target Directory and Unzip XTTS ZIP File (TARGET)
 
 ### Open Terminal Window 
-__Double click__ the "xtts" icon 
+__Double-click__ the "xtts" icon 
 
 ![Screenshot of the Linux Hands On Lab Terminal icon](./images/xtts-source-target-terminal.png " ")
 
-which will open a terminal session with two tabs; you can use the __light green__ tab to execute all __target__ related commands 
+which will open a terminal session with two tabs; you can use the __light green__ tab to execute all the __target__ related commands 
 ![Screenshot of the HOL target terminal session](./images/target-terminal-tab.png " ")
-and the __light blue__ one for all __source__ related activities:
+and the __light blue__ one for all the __source__ related activities:
 ![Screenshot of the HOL source terminal session](./images/source-terminal-tab.png " ")
 
 The screenshots in this lab will use the same coloring.
@@ -75,7 +75,7 @@ Activate the terminal target tab window and create a directory for the XTTS targ
 
     ![Setting target database environment](./images/source-target-database-env.png " ")
 
-    The command line prompt changes and common environment variables are now set.
+    The command line prompt changes and you have now set common environment variables.
 
 2. Open SQL*Plus
 
@@ -89,7 +89,7 @@ Activate the terminal target tab window and create a directory for the XTTS targ
 
 
 ## Task 3: In SQL*Plus Start the Container Database CDB3 and Create the Pluggable Database PDB3 (TARGET)
-When creating a PDB the admin user must be created as well. You can delete it later on if desired. Once the PDB3 is created you need to start it up and save its state.
+When creating a PDB, the database must create the admin user as well. You can delete it later on if desired. Once you have created PDB3, you need to start it up and save its state.
 
   ```
     <copy>
@@ -107,7 +107,7 @@ When creating a PDB the admin user must be created as well. You can delete it la
 
 
 ## Task 4: In SQL*Plus Create the Database Directory Used by Data Pump (TARGET)
- and create some additional objects for the migration.
+Create some additional objects for the migration.
 
   ```
     <copy>
@@ -200,5 +200,5 @@ You may now *proceed to the next lab*.
 
 ## Acknowledgements
 * **Author** - Klaus Gronau
-* **Contributors** -  
+* **Contributors** - Daniel Overby Hansen
 * **Last Updated By/Date** - Klaus Gronau, June 2023

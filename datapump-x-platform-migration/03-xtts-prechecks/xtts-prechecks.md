@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will execute common XTTS pre-checks in SQL*Plus. Each task will also contain the information, if you have to execute this step on source, target or both.
+In this lab, you will execute common XTTS pre-checks in SQL*Plus. Each task will also contain the information if you have to execute this step on source, target, or both.
 
 Estimated Time: 15 minutes
 
@@ -16,8 +16,8 @@ Estimated Time: 15 minutes
 This lab assumes you have:
 
 - Connected to the lab
-- A terminal window open on source.
-- Another terminal window open on target
+- A terminal window open on the source.
+- Another terminal window open on the target
 - Prepared the source
 - Prepared the target
 
@@ -45,10 +45,10 @@ This lab assumes you have:
 
 ## Task 2: Transportable Tablespace Method Supported by Source and Target OS Platforms (SOURCE and TARGET) 
 
-Before you begin check on source, if the OS you want to migrate your database to, is supporting datafile conversion. <br>
-Also check on target if the OS you want to migrate from is supporting datafile conversion.
+Before you begin, check on source if the OS you want to migrate your database to, supports datafile conversion. <br>
+Also, check on target if the OS you want to migrate from, supports datafile conversion.
 
-So execute on __source__ and __target__:
+So, execute on __source__ and __target__:
 
   ```
    <copy>
@@ -76,7 +76,7 @@ Output from __target__:
 ![Check if target platform is supported](./images/precheck-task2-trg.png " ")
 
 ## Task 3: Database Timezone (SOURCE and TARGET)
-You should always check that your source and target database are using in the same database timezone (dbtimezone). 
+You should always check that your source and target database use the same database timezone (dbtimezone). 
 
 Execute on __source__ and __target__:
   ```
@@ -100,11 +100,11 @@ The __target__ output:
 
 ![Checking DBTIMEZONE on target](./images/precheck-task3a-trg.png " ")
 
-In this lab there are no tables with "__TimeStamp with Local Time Zone__ (TSLTZ)" columns. No further action needed. Had there been such columns, you must change one of the databases or move the offending tables using a regular Data Pump export/import. 
+In this lab, there are no tables with "__TimeStamp with Local Time Zone__ (TSLTZ)" columns. No further action is needed. Had there been such columns, you must change one of the databases or move the offending tables using a regular Data Pump export/import. 
 
 
 ### CHECK for TimeStamp with Local Time Zone (TSLTZ) Data Type (SOURCE)
-As both time zones differ check now if your source database has tables having columns with "__TimeStamp with Local Time Zone__ (TSLTZ)": 
+As both time zones differ, check now if your source database has tables having columns with "__TimeStamp with Local Time Zone__ (TSLTZ)": 
 
   ```
     <copy>
@@ -131,11 +131,11 @@ As both time zones differ check now if your source database has tables having co
 
 
 ![Checking on source for Timestamp with local timezone dataypes](./images/precheck-task3b-src.png " ")
-In the lab there are no TSLTZ data types used. So no need to sync both DBTIMEZONEs or to handle data manually with expdp/impdp.
+In the lab, there are no TSLTZ data types used. So there is no need to sync both DBTIMEZONEs or handle data manually with expdp/impdp.
 
 ## Task 4: Character Sets (SOURCE and TARGET)
 The source and target database must use compatible database character sets. 
-* Details about compatible character sets "[General Limitations on Transporting Data](https://docs.oracle.com/en/database/oracle/oracle-database/19/spucd/general-limitations-on-transporting-data.html#GUID-28800719-6CB9-4A71-95DD-4B61AA603173)" are mentioned in the manual
+* Details about compatible character sets "[General Limitations on Transporting Data](https://docs.oracle.com/en/database/oracle/oracle-database/19/spucd/general-limitations-on-transporting-data.html#GUID-28800719-6CB9-4A71-95DD-4B61AA603173)" are mentioned in the documentation.
 
 So execute the next script again on __source__ and __target__:
 
@@ -163,14 +163,14 @@ The __target__ output:
 
 ![DBTIMEZONE output target](./images/precheck-task4-trg.png " ")
 
-Both character sets in our lab match and no further action needed. 
+Both character sets in our lab match, and no further action is needed. 
 
 
 
 
 ## Task 5: XTTS Tablespace Violations (SOURCE) 
-For transportable tablespaces another requirement is that all tablespaces you're going to transport are self contained.
-In this lab you're going to transport the two tablespaces "TPCCTAB" and "USERS". So let's check if they are self contained:
+For transportable tablespaces, another requirement is that all tablespaces you're going to transport are self-contained.
+In this lab, you will transport the tablespaces "TPCCTAB" and "USERS". So let's check if they are self-contained:
 
   ```
     <copy>
@@ -215,8 +215,7 @@ It's good practice to check if SYSTEM and SYSAUX tablespaces might accidentally 
 
 ![checking if there are user tables in system or sysaux TBS](./images/precheck-task6-src.png " ")
 
-Just in case there would have been user data in SYSTEM/SYSAUX tablespace it will now be the right moment to correct this.
-
+If there were user data in the SYSTEM or SYSAUX tablespaces, it would now be the right moment to correct this.
 
 ## Task 7: User Indexes in SYSTEM/SYSAUX Tablespace (SOURCE)
 Same check as in the previous task but this time for user indexes
@@ -244,9 +243,9 @@ Same check as in the previous task but this time for user indexes
 ![checking if there are user indexes in system or sysaux TBS](./images/precheck-task7-src.png " ")
 
 ## Task 8: IOT Tables (SOURCE)
-IOT tables might get corrupted during XTTS copy when copying especially to HP platforms. 
+IOT tables might get corrupted during XTTS copy when copying, especially to HP platforms. 
 * [Corrupt IOT when using Transportable Tablespace to HP from different OS (Doc ID 1334152.1) ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1334152.1&displayIndex=1)
-Even though we migrate to Linux it's worth to check it and to bear in mind.
+Even though you migrate to Linux, it's worth checking and bearing in mind.
 
 
   ```
@@ -270,12 +269,12 @@ Even though we migrate to Linux it's worth to check it and to bear in mind.
 </details>
 
 
-![Checking if we have to take care of IOT tables](./images/precheck-task8-src.png " ")
+![Checking if you have to take care of IOT tables](./images/precheck-task8-src.png " ")
 
 You can ignore this output because you're not moving to HP platform.
 
 ## Task 9: Binary XMLTYPE Columns (SOURCE)
-In Oracle Database 12.1 and earlier you can't move tables with XMLTYPEs using transportable tablespaces. Ensure there are no such tables: 
+In Oracle Database 12.1 and earlier, you can't move tables with XMLTYPEs using transportable tablespaces. Ensure there are no such tables: 
 
   ```
     <copy>
@@ -302,15 +301,15 @@ In Oracle Database 12.1 and earlier you can't move tables with XMLTYPEs using tr
   ```
 </details>
 
-![Checking if we have to take care of binary XML datatypes](./images/precheck-task9-src.png " ")
+![Checking if you have to take care of binary XML datatypes](./images/precheck-task9-src.png " ")
 
-Only XML data in SYSAUX tablespace which you're not going to migrate. So ignore them. Had there been such tables, you must move them using Data Pump export/import.
+Only XML data in SYSAUX tablespace, which you're not going to migrate. So ignore them. Had there been such tables, you must move them using Data Pump export/import.
 
 * [Is it supported to do a Transport Tablespace (TTS) Import with Data Pump on a tablespace with binary XML objects ? (Doc ID 1908140.1) ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1908140.1&displayIndex=1)
 
 
 ## Task 10: Global Temporary Tables (SOURCE)
-Global temporary tables do not belong to any tablespace, so they are not transported to the target database. Let's see if we have some global temporary tables and who might own them:
+Global temporary tables do not belong to any tablespace, so they Data Pump does not transport them to the target database. Let's see if you have some global temporary tables and who might own them:
 
 
   ```
@@ -332,9 +331,9 @@ Global temporary tables do not belong to any tablespace, so they are not transpo
   ```
 </details>
 
-![Checking if we have GLOBAL temporary tables on source](./images/precheck-task10-src.png " ")
+![Checking if you have GLOBAL temporary tables on source](./images/precheck-task10-src.png " ")
 
-There are no global temporary tables in our lab. When you have them in your database, you can migrate them using Data Pump export/import or generate the metadata from these tables and created them in the target database.
+There are no global temporary tables in our lab. When you have them in your database, you can migrate them using Data Pump export/import or generate the metadata from these tables and create them in the target database.
 
 ## Task 11: Exit SQL*Plus (SOURCE and TARGET)
 
@@ -345,11 +344,11 @@ Execute on __source__ and __target__:
      exit;
     </copy>
   ```
-Output on __source__:
+Output on the __source__:
 
 ![Exit from SQL*Plus on source](./images/disconnect-sqlplus-src.png " ")
 
-and the output on __target__
+and the output on the __target__
 
 ![Exit from SQL*Plus on target](./images/disconnect-sqlplus-trg.png " ")
 

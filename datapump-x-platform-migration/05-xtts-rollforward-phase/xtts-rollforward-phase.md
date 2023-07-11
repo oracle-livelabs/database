@@ -2,8 +2,8 @@
 
 ## Introduction
 
-In the roll forward phase the source database remains active. You can take as many incremental backups and restores as you like. 
-A good practice is to start the migration some time before the cutover. Run an initial backup and restore and run these incremental backup and restore operations a few times during the day. On the cutover day minimize the delta by for example running these incremental backup/restore commands every hour.
+In the roll forward phase, the source database remains active. You can take as many incremental backups and restores as you like. 
+A good practice is to start the migration some time before the cutover. Run an initial backup and restore and then run these incremental backup and restore operations a few times during the day. On the cutover day, minimize the time required for this process by increasing the frequency. For example, do it every hour.
 
 Estimated Time: 15 minutes
 
@@ -17,15 +17,15 @@ Estimated Time: 15 minutes
 This lab assumes you have:
 
 - Connected to the lab
-- A terminal window open on source
-- Another terminal window open on target
+- A terminal window open on the source
+- Another terminal window open on the target
 - Prepared the source
 - Successfully executed initial backup (prepare phase)
 - Successfully executed initial restore (prepare phase)
 
 
 ## Task 1: Adding Table and Data File to Source Database (SOURCE)
-In this (and the previous) phase the database is up and there is no downtime yet. Users make changes in the source database. Let's simulate that by creating a table and adding a data file.
+In this (and the previous) phase, the database is up, and there is no downtime yet. Users make changes in the source database. Let's simulate that by creating a table and adding a data file.
 
 1. Start SQL\*Plus (SOURCE) </br>
 Connect with SQL*Plus as TPCC user to the source database:
@@ -172,13 +172,13 @@ On source change into the XTTS Source directory and execute the incremental back
       ```
     </details>
 
-    When you take a closer look at the log file, you see, the XTTS script managed everything for you. It recognized a new data file was added to the tablespace and it took  care of it.
+    When you look at the log file, you see the XTTS script managed everything for you. It recognized you added a new data file to the tablespace, and it took care of it.
 
 ## Task 3: Incremental Restore (TARGET)
 
-The incremental restore needs the "res.txt" and "incrbackups.txt" files from source. Both are the driving files for the XTTS process.
-You just performed your first incremental backup so there's no previous version of "incrbackups.txt" file. <br>
-But the initial load already created the res.txt and you probably remember that you copied it already from source to target in the previous LAB. So let's compare both before starting the restore....
+The incremental restore needs the "res.txt" and "incrbackups.txt" files from the source. Both are the driving files for the XTTS process.
+You just performed your first incremental backup, so there's no previous version of "incrbackups.txt" file. <br>
+But the initial load already created the res.txt and you probably remember that you copied it already from source to target in the previous lab. So, let's compare both before starting the restore....
 
 ### Comparing Source and Target res.txt
 So before overwriting __res.txt__ on target, let's check out the content of this file on source and target:
@@ -204,7 +204,7 @@ Target:
 ![res.txt content on target](./images/res-txt-trg.png " ") 
 
 Take a closer look at both output files posted next to each other below. The first two lines match and contain details from your initial backup taken during the prepare phase. <br>
-The difference between source and target res.txt starts in line three beginning with with "#0:::6". This entry was added by the roll forward phase. It is the initial copy of the newly added datafile. In addition you'll see an incremental backup of all data files marked with "#1":
+The difference between source and target res.txt starts in line three beginning with "#0:::6". The roll forward phase added this entry. It is the initial copy of the newly added datafile. In addition, you'll see an incremental backup of all data files marked with "#1":
 
 | res.txt source | res.txt target |
 | :--------: | :-----:|
@@ -311,16 +311,16 @@ Set the incremental restore environment:
     </details>
 
 
-You can execute the incremental backup and restore whenever you want. As they will minimize your downtime window you can run them on the cutover day more frequently to minimize the delta.
+You can execute the incremental backup and restore whenever you want. As they will minimize your downtime window, you can run them on the cutover day more frequently to minimize the delta.
 
 ## Summary of this Lab
-In this lab you executed an incremental backup and restore. You can repeat this process as often as you want and probably more frequently on the cutover day. </br>
+In this lab, you executed an incremental backup and restore. You can repeat this process more often and more frequently on the cutover day. </br>
 The only requirement for each incremental restore is the current res.txt and incrbackup.txt from the backup.
 
 ![incremental backup restore process flow](./images/incremental-backup-restore.png " ")
 
 ### Backup (SOURCE)
-You used on source the xtt.properties file created in the previous lab without updating it (no new tablespace was added; only a datafile and this is handled by the package automatically):
+On source, you used the xtt.properties file created in the previous lab without updating it (no new tablespace was added; only a datafile and the script handled it automatically):
 
   ```
     <copy>
@@ -353,7 +353,7 @@ and the other two mandatory driving files for the restore - the res.txt and incr
 
 
 ### Restore (TARGET)
-You copied the xtt.properties and the res.txt file from source to target. RMAN restore read from the same location where the backup process created the incremental backup files - so all these files match between source and target. </br>
+You copied the xtt.properties and the res.txt file from source to target. RMAN restore read from the same location where the backup process created the incremental backup files - so all these files match on source and target. </br>
 An interesting directory created by the restore process is in the target XTTS/tmp directory containing the log files:
   ```
     <copy>
@@ -363,7 +363,7 @@ An interesting directory created by the restore process is in the target XTTS/tm
 
 ![RMAN backup datafiles](./images/roll-forward-ls-target.png " ")
 
-The first directory belongs to the restore executed in the prepare phase, the second one to the incremental backup from the roll forward phase.
+The first directory belongs to the restore executed in the prepare phase, and the second one to the incremental backup from the roll forward phase.
 
 
 You may now *proceed to the next lab*.
