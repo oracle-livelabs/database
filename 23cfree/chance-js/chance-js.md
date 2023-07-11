@@ -552,3 +552,5 @@ If you've taken a look at the extended MLE module above, you may have seen some 
 
 * Meilleures Salutations/Best Regards
 * Loïc Lefèvre | Oracle Product Management | Mobile: +33 (0)62 980 1042
+* <b>Author</b> : Loïc Lefèvre 
+* <b>Contributors</b>: Loïc Lefèvre, Dan Williams
