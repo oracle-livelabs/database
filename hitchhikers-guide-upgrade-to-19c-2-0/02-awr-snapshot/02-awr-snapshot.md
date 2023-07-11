@@ -225,29 +225,29 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     * *num_days*, type *2*, hit RETURN.
     * *begin_snap*, type the first *Snap Id*, hit RETURN.
     * *end_snap*, type the last *Snap Id*, hit RETURN.
-    * *directory\_name*, type *DATA\_PUMP\_DIR*, hit RETURN.
+    * *directory_name*, type *DATA_PUMP_DIR*, hit RETURN.
     * *file_name*, hit RETURN.
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     SQL> @?/rdbms/admin/awrextr.sql
-    #############
+    ~~~~~~~~~~~~~
     AWR EXTRACT
-    #############
-    ####################################################################
-    #  This script will extract the AWR data for a range of snapshots  #
-    #  into a dump file.  The script will prompt users for the         #
-    #  following information:                                          #
-    #     (1) database id                                              #
-    #     (2) snapshot range to extract                                #
-    #     (3) name of directory object                                 #
-    #     (4) name of dump file                                        #
-    ####################################################################
+    ~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ~  This script will extract the AWR data for a range of snapshots  ~
+    ~  into a dump file.  The script will prompt users for the         ~
+    ~  following information:                                          ~
+    ~     (1) database id                                              ~
+    ~     (2) snapshot range to extract                                ~
+    ~     (3) name of directory object                                 ~
+    ~     (4) name of dump file                                        ~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
     Databases in this Workload Repository schema
-    ############################################
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     DB Id             DB Name            Host
     ------------ ------------ ---------------
@@ -263,7 +263,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
 
 
     Specify the number of days of snapshots to choose from
-    ######################################################
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Entering the number of days (n) will result in the most recent
     (n) days of snapshots being listed.  Pressing <return> without
     specifying a number lists all completed snapshots.
@@ -311,7 +311,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     Using the dump directory: DATA_PUMP_DIR
 
     Specify the Name of the Extract Dump File
-    #########################################
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     The prefix for the default dump file name is awrdat_111_120.
     To use this name, press <return> to continue, otherwise enter
     an alternative.
@@ -320,12 +320,12 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
 
     Using the dump file prefix: awrdat_111_120
     |
-    | #############################################
+    | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     |  The AWR extract dump file will be located
     |  in the following directory/file:
     |   /u01/app/oracle/admin/UPGR/dpdump/
     |   awrdat_111_120.dmp
-    | #############################################
+    | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     |
     |  *** AWR Extract Started ...
     |

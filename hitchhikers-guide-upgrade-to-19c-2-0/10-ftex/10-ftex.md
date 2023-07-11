@@ -764,7 +764,7 @@ FTEX is easier than transportable tablespaces because Data Pump handles most of 
 * Import directly into the multitenant architecture.
 * Import to a different platform and Endian format
 
-You can combine FTEX with incremental backups to shorten the downtime during migration. Try it in the *Data Pump Cross-Platform Migration* lab. 
+You can combine FTEX with incremental backups to shorten the downtime during migration. See *Learn More* below and try it in the *Data Pump Cross-Platform Migration* lab. 
 
 * Documentation, [Scenarios for Full Transportable Export/import](https://docs.oracle.com/en/database/oracle/oracle-database/19/admin/transporting-data.html#GUID-FA4AAD15-5305-45A9-9644-DB7D7DCD30D2)
 * Techincal brief, [Full Transportable Export and Import](https://www.oracle.com/technetwork/database/enterprise-edition/full-transportable-wp-18c-4394831.pdf)
