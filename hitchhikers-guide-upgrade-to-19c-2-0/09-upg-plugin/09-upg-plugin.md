@@ -608,8 +608,11 @@ Still connected to CDB2 (the target CDB), you will now plug in UPGR and convert 
 
     ```
     <copy>
-    startup force
+    shutdown immediate
+    startup
     </copy>
+     
+    Be sure to hit RETURN
     ```
     
     <details>
