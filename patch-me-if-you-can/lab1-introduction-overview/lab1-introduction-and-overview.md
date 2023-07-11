@@ -1,11 +1,11 @@
 # Lab 1: Introduction and Overview
 
 ## About this Workshop
-In this Database Patching lab, you will make yourself familiar with the options of a completely unattended installation including patches. Then you'll do out-of-place patching of the database with AutoUpgrade. The final step in contrast will be an in-place patching operation causing more downtime.
+In this Database Patching lab, you will familiarize with the options of a completely unattended installation, including patches. Then you'll do out-of-place patching of a database with AutoUpgrade. To show the difference, the final step is an in-place patching operation causing more downtime.
 ![Lab activities](./images/overview-patch-me-if-you-can.png " ")
 
 
-The patching does include not only a Release Update (RU) but also the Oracle Java Virtual Machine Bundle (OJVM), a Monthly Recommended Patch (MRP), and the Data Pump Bundle Patch (DPBP). You will clean up, and you will do a rollback to the previous bundle as well.
+The patching does include not only a Release Update (RU) but also the Oracle Java Virtual Machine Bundle (OJVM), a Monthly Recommended Patch (MRP), and the Data Pump Bundle Patch (DPBP). You will clean up, and do a rollback as well.
 
 
 Estimated Workshop Time: 90 minutes
@@ -14,7 +14,7 @@ Estimated Workshop Time: 90 minutes
 ## Lab Environment
 
 
-This lab is preloaded with four different Oracle Homes and seven databases.
+This lab contains four different Oracle Homes and seven databases.
 You can switch between environments with the shortcuts shown in the last column of the below diagram.
 
 ![Hands On Lab Environment](./images/hol-environment.png " ")
@@ -26,7 +26,7 @@ The four different Oracle Homes are:
 - Oracle 19c      – /u01/app/oracle/product/19
 - Oracle 21c      – /u01/app/oracle/product/21
 
-The workshop also contains 7 different databases for running various upgrade and migration scenarios. This lab will use "UP19" 19c (non-CDB) and CDB2 19c (CDB) databases as source.
+The workshop also contains seven different databases for running various upgrade and migration scenarios. This lab will use "UP19" 19c (non-CDB) and CDB2 19c (CDB) databases as sources.
 
 - UPGR – 11.2.0.4 database (non-CDB)
 - FTEX – 11.2.0.4 database (non-CDB)

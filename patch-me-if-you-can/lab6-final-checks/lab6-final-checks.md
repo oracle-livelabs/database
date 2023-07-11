@@ -1,7 +1,7 @@
 # Lab 6:  Final Checks
 
 ## Introduction 
-You are done now. You did patch out-of place which we highly recommend, and you may have done also a more work-intense in-place patching exercise. So, let us check some things in both environments. 
+You did patch out-of-place, which Oracle highly recommend, and you may have also done a more work-intense in-place patching exercise. So, let us check some things in both environments. 
 
 ![Process flow lab 6](./images/lab6-process-flow.png " ")
 
@@ -60,7 +60,7 @@ Execute in 19.18 and 19.19 tab:
 
     There should be no invalid objects. </br>
 
-    COMMENT: Even though the upgraded 19.18 database isn't a CDB/PDB you can use the same statement in both environments.
+    COMMENT: Even though the upgraded 19.18 database isn't a CDB/PDB, you can use the same statement in both environments.
 
 ## Task 2: Check Time Zone Version
 
@@ -90,10 +90,10 @@ Execute in 19.18 and 19.19 tab:
     |  ![check for timezone version](./images/check-timezone-file-18.png " ") |  ![check for timezone version](./images/check-timezone-file-19.png " ") |
     {: title="19.18 and 19.19 Time Zone Version"}
 
-    There's a difference in the timezone version. The manually upgraded 19.18 Oracle\_Home database still shows the original 19.18 time zone version whereas the autoupgraded shows the current version.
-    The reason for this difference is you only applied patches to 19.18 environment and executed datapatch. This does __NOT__ update your timezone version. </br>
-    In the autoupgrade config file we specified "upg1.timezone_upg=yes" which upgraded the timezone version automatically for all containers to the latest available version. </br>
-    So just in case you would use named time zones in your database, you now have to manually upgrade the time zone version in the 19.18 env. A good MOS note to start with is the next step for your manually upgraded database would be a manual timezone upgrade as described in [MOS note 	Applying the DSTv42 update for the Oracle Database (Doc ID 2941491.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=412160.1)
+    There's a difference in the timezone version. The manually upgraded 19.18 Oracle Home database still shows the original 19.18 time zone version, whereas the one you patched using AutoUpgrade shows the current version.
+    The difference is because you only applied patches to 19.18 environment and executed `datapatch`. This does __NOT__ update your timezone file version. </br>
+    In the autoupgrade config file, you specified "upg1.timezone_upg=yes" which upgraded the timezone version automatically for all containers to the latest available version. </br>
+    In case you use named time zones in your database, you now have to manually upgrade the time zone version in the 19.18 environment. A good MOS note to start with is the next step for your manually upgraded database would be a manual timezone upgrade as described in [MOS note 	Applying the DSTv42 update for the Oracle Database (Doc ID 2941491.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=412160.1)
 
 3. Exit SQL\*Plus </br>
     At this point, please `exit` SQL*Plus.
@@ -111,7 +111,7 @@ Execute in 19.18 and 19.19 tab:
 
 
 ## Task 3: Check JDK version
-Please check whether the JDK version has been upgraded as well.
+Please check whether the Release Update also included an update for JDK.
 
   ```
     <copy>
@@ -127,12 +127,12 @@ Please check whether the JDK version has been upgraded as well.
 
 
 
-This is intended. You will always get the n-1 version of JDK, i.e. the version which was current at the code freeze date for the content of the Release Update. If you need a newer JDK version, you please need to download and apply it afterwards. The version before patching was `java version "1.8.0_351"`.
+This is intended. You will always get the n-1 version of JDK, i.e., the version which was current at the code freeze date for the content of the Release Update. If you need a newer JDK version, you can download and apply it afterward. The version before patching was *1.8.0_351*.
 
 
 
 ## Task 4: Check PERL version
-Now check if PERL has been patched, too. The version before patching was v5.36.0).
+Please check whether the Release Update also included an update for PERL. The version before patching was v5.36.0.
 
   ```
     <copy>
@@ -177,7 +177,7 @@ Now you see no difference. But PERL updates get delivered with Release Updates s
   | 19.18.0 Home | 19.19.0 Home |
   | :------------: | :------------: |
   |  ![lspatches](./images/listorderedinactivepatches-18.png " ") |  ![lspatches](./images/listorderedinactivepatches-19.png " ") |
-  | Inactive RU/CPU 34786990 is a left over from the previous cleanup where you removed all inactive patches except of the last one | But what is "Inactive RU/CPU 29517242"?  Remember, you first unzipped/installed the 19.3.0.0 base release. This bug is just the tracker for the 19.3.0.0 code line.|
+  | Inactive RU/CPU 34786990 is a leftover from the previous cleanup where you removed all inactive patches except the last one | But what is "Inactive RU/CPU 29517242"?  Remember, you first unzipped/installed the 19.3.0.0 base release. This bug is just the tracker for the 19.3.0.0 code line.|
   {: title="19.18 and 19.19 listorderedinactivepatches "}
 
 

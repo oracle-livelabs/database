@@ -2,13 +2,13 @@
 
 ## Introduction 
 
-In this lab exercise you will install Oracle Database 19.19.0 into a separate home and patch it fully unattended in one single operation. 
+In this lab, you will install Oracle Database 19.19.0 into a separate home and patch it fully unattended in one operation. 
 
 ![Process flow lab 2](./images/lab2-process-flow.png " ")
 
 Out-of-place patching is the preferred method, not only for the Database home but also for the Grid Infrastructure Home.
 
-Estimated Time: 5 minutes (task 2 will run in background for 25 minutes)
+Estimated Time: 5 minutes (task 2 will run in the background for 25 minutes)
 
 ### Objectives
 
@@ -28,7 +28,7 @@ This lab assumes you have:
 
 
 ## Task 1: Base Release Installation
-Create now the new Oracle Home for 19.19.0, unzip the base release and refresh opatch. 
+Create the new Oracle Home for 19.19.0, unzip the base release, and update opatch. 
 
 Start by **double-clicking at the "patching" icon** on the desktop:
 
@@ -41,7 +41,7 @@ Switch to the tab called "__19.19.0 Home__".
 
     ![19.18 HOME tab](./images/19-19-home.png " ")
 
-    All variables will be set when executing: 
+    You set all variables when executing: 
 
     ```
     <copy>
@@ -72,7 +72,7 @@ Switch to the tab called "__19.19.0 Home__".
     ![change into directory 1919](./images/cd-target-dir-1919.png " ")
 
 4. Unzip Base Image </br>
-As next step, unzip the 19.3.0 base image from the staging location into this directory.
+As the next step, unzip the 19.3.0 base image from the staging location into this directory.
 
     ```
     <copy>
@@ -93,7 +93,7 @@ Then remove the OPatch directory
 
     ![remove original opatch](./images/remove-opatch.png " ")
 
-    and unzip the new OPatch from staging into this new Oracle Home. This step is important since older OPatch versions won't have the features we are using today.
+    and unzip the new OPatch from staging into this new Oracle Home. This step is important since older OPatch versions won't have the features you are using today.
 
     ```
     <copy>
@@ -130,11 +130,11 @@ The patches you are going to install are all unpacked into separate directories.
   ```
 
 
-To install all the patches in one single action, you will use the `-applyRU` and `-applyOneOffs` option of the Oracle Universal Installer. Since MRPs were unknown to the OUI a while ago you need to call every included patch separately.
+To install all the patches in one action, you will use the `-applyRU` and `-applyOneOffs` options of the Oracle Universal Installer (OUI). OUI is not yet aware of the MRP concept, so you must reference each individual patch included in the MRP.
 
-You can either copy & paste the entire command (first option) or call a script (second option). Use only __one__ of the next two options, copy the command and paste it into the "19.19.0 Home" terminal tab.
+You can either copy & paste the entire command (first option) or call a script (second option). Use only __one__ of the next two options, copy the command, and paste it into the "19.19.0 Home" terminal tab.
 
-SIDE NOTE: *While the installation is ongoing, please switch to the 19.18 tab and continue with the next lab. You're going to execute the "root.sh" script later on in one of the next labs.*
+NOTE: *While the installation is ongoing, please switch to the 19.18 tab and continue with the next lab. You will execute the "root.sh" script in one of the next labs.*
 
 1. Option - Shell Script
 
@@ -238,16 +238,7 @@ $
     ```
     ![runInstaller output ](./images/run-installer-output.png " ")
 
-
-
-
-The patch install is taking about ten minutes. While the patch install is ongoing *proceed to the next lab*. You're going to execute `root.sh` at the end of the following lab. 
-
-
-
-
-
-
+Installing the patches takes about ten minutes. While the patch install is ongoing *proceed to the next lab*. You will execute `root.sh` at the end of the following lab. 
 
 ## Acknowledgments
 * **Author** - Mike Dietrich 

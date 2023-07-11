@@ -1,7 +1,7 @@
 # Lab 3: Checks in the 19.18 Environment
 
 ## Introduction 
-We will use this lab to check several things in the 19.18 environment while the installation in the 19.19 environment progresses. At the end of this lab we're going to execute then "root.sh" in the 19.19 tab.
+You will use this lab to check several things in the 19.18 environment while the installation in the 19.19 environment progresses. At the end of this lab, you will complete the installation of the new Oracle Home from the previous lab.
 
 ![Process flow lab 3](./images/lab3-process-flow.png " ")
 
@@ -125,7 +125,7 @@ Check the current PERL version:
     </details>
 
     Take notice of the current version "__This is perl 5, version 36, subversion 0 (v5.36.0) built for x86_64-linux-thread-multi__". 
-    We will check afterward whether the PERL version has been updated as well. </br>
+    You will check afterward whether the patch updated the PERL version as well. </br>
 
 
 5. Current Time Zone </br> 
@@ -232,7 +232,7 @@ And finally, you will do a `datapatch` sanity check:
 
 ## Task 2: Finish the Patch Installation
 
-At this point the patching installation should be completed. Switch to the tab titled "__19.19.0 Home__". You should see the following output:
+At this point, the installer should be done installing the patches. Switch to the tab titled "__19.19.0 Home__". You should see the following output:
 
 ![runinstaller output](./images/runinstaller-output.png " ")
 
@@ -317,11 +317,11 @@ Logon as `root` and type the password `oracle`:
     </copy>
     ```
 
-    When you're logged in, you see:
+    After logging in, you see:
 
     ![after logon](./images/root-logon.png " ")
 
-    You can see the command prompt changed to "__[CDB2] root@hol:/u01/app/oracle/product/1919__".
+    The command prompt changed to "__[CDB2] root@hol:/u01/app/oracle/product/1919__".
 
 2. Execute root.sh </br>
 Then execute the root.sh script:
