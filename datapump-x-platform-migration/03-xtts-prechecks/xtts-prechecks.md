@@ -339,7 +339,7 @@ There are no global temporary tables in our lab. When you have them in your data
 
 </if>
 
-## Task 11: Exit SQL*Plus (SOURCE and TARGET)
+## Task 8: Exit SQL*Plus (SOURCE and TARGET)
 
 Execute on __source__ and __target__:
 
