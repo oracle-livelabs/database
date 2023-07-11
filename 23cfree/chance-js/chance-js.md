@@ -20,7 +20,7 @@ This labs assumes you have:
 * All previous labs sucessfully completed 
 * SQL Developer Web 23.1 or a comptatible tool for running SQL statements
 
-## Task 0: Connecting to your database user
+## Task 1: Connecting to your database user
 
 1. Your browser should still be open, if not just open a new one. If running in a Sandbox go to Activities and then at the top click on new window. If Chrome is not running then click on Chrome.
 
@@ -47,7 +47,7 @@ This labs assumes you have:
 
     ![Image alt text](images/sql_login.png " ")    
 
-## Task 1: Setup
+## Task 2: Setup
 
 1. First things first, let's start
   Remark: The following scripts are run on an Oracle database 23c FREE - Developer Release using sqlplus.
@@ -85,7 +85,7 @@ This labs assumes you have:
     </copy>
     ```
 
-## Task 2: Installing the Chance.js ES Module
+## Task 3: Installing the Chance.js ES Module
 For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.com/package/npm/chance) module from [Victor Quinn](https://www.victorquinn.com/about/) under [MIT License](https://en.wikipedia.org/wiki/MIT_License). This module is really interesting when working on data as it provides _numerous_ ways to "generate random numbers, characters, strings, names, addresses, dice, and pretty much anything else"; in brief 100+ new data generators.
 
 
@@ -183,7 +183,7 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     </copy>
     ```
 
-## Task 3: Integrating the SQL engine with the JavaScript MLE using PL/SQL functions
+## Task 4: Integrating the SQL engine with the JavaScript MLE using PL/SQL functions
 Installing a PL/SQL package to make Chance functions accessible in SQL
 
 1. See how the chance module env MLE environment is being used so that dependencies resolution goes well
@@ -399,7 +399,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     </copy>
     ```
 
-## Task 4: Using Chance.js functions in SQL
+## Task 5: Using Chance.js functions in SQL
 
 1. Generate a random string
     ```
@@ -499,7 +499,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     </copy>
     ```
 
-## Task 5: Using extended Chance.js functions in SQL
+## Task 6: Using extended Chance.js functions in SQL
 If you've taken a look at the extended MLE module above, you may have seen some additional code. In fact, while looking for JavaScript data generators, I found out that Fony.js (MIT License) from [Safia Abdalla](https://github.com/captainsafia) provided an interesting concept of `JSON template`. So I've decided to integrate it and improve it to benefit from the additional possibilities offered by `Chance.js` in terms of generator customization using a JSON document as a parameter. The result is that the `template()` function can now be used to generate random JSON documents based on JSON templates!
 
 1. Generate a JSON document containing tags as an array of 3 words
@@ -530,25 +530,25 @@ If you've taken a look at the extended MLE module above, you may have seen some 
     ```
 
 
-This would bring some interesting ability to populate the [JSON Relational Duality Views](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/loe.html) examples from the 23c FREE documentation.
+* This would bring some interesting ability to populate the [JSON Relational Duality Views](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/loe.html) examples from the 23c FREE documentation.
 
 ## Conclusion
-We've seen how to import an ES Module inside the Oracle database 23c FREE Developer Release thanks to the JavaScript MultiLingual Engine. We've also seen how dependencies resolution work using an MLE environment.
+* We've seen how to import an ES Module inside the Oracle database 23c FREE Developer Release thanks to the JavaScript MultiLingual Engine. We've also seen how dependencies resolution work using an MLE environment.
 
-As you can see, the possibilities are infinite and benefiting from such a data generator for both simple values but also JSON documents is incredibly useful. This could be used for [Oracle Application Express](https://apex.oracle.com/en/) (APEX) applications, demos, random data for unit testing, etc.
+* As you can see, the possibilities are infinite and benefiting from such a data generator for both simple values but also JSON documents is incredibly useful. This could be used for [Oracle Application Express](https://apex.oracle.com/en/) (APEX) applications, demos, random data for unit testing, etc.
 
-And now, it's up to you!
+* And now, it's up to you!
 
 ## Resources to continue learning
-As Jeff Smith said in his [blog post on MLE JS Modules & Snippets](https://www.thatjeffsmith.com/archive/2023/04/oracle-23c-free-developer-release-mle-js-modules-snippets/), we _highly_ recommend reading the [23c JavaScript Developer Guide (Docs.)](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/).
+* As Jeff Smith said in his [blog post on MLE JS Modules & Snippets](https://www.thatjeffsmith.com/archive/2023/04/oracle-23c-free-developer-release-mle-js-modules-snippets/), we _highly_ recommend reading the [23c JavaScript Developer Guide (Docs.)](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/).
 
-You may want also to review Martin Bach's [blog post on Using JavaScript community modules in Oracle Database 23c Free - Developer Release](https://blogs.oracle.com/developers/post/using-javascript-community-modules-in-oracle-database-23c-free-developer-release) which I've stolen some of the commands used here.
+* You may want also to review Martin Bach's [blog post on Using JavaScript community modules in Oracle Database 23c Free - Developer Release](https://blogs.oracle.com/developers/post/using-javascript-community-modules-in-oracle-database-23c-free-developer-release) which I've stolen some of the commands used here.
 
-Don't forget to provide us your feedback on the [23c FREE community forum](https://forums.oracle.com/ords/apexds/domain/dev-community/category/oracle-database-free) that we monitor and where you can provide feedback.
+* Don't forget to provide us your feedback on the [23c FREE community forum](https://forums.oracle.com/ords/apexds/domain/dev-community/category/oracle-database-free) that we monitor and where you can provide feedback.
 
 <!-- ## Thanks -->
 ## Acknowlegements
-### Quote by Loïc Lefèvre: "I would never have discovered the possibilities highlighted here without the help of Martin Bach and Lucas Victor Braun-Lohrer, respectively Product Manager for JavaScript MLE and Program Manager at Oracle Labs; so thanks a lot"!!!
+  <b>Quote by Loïc Lefèvre: "I would never have discovered the possibilities highlighted here without the help of Martin Bach and Lucas Victor Braun-Lohrer, respectively Product Manager for JavaScript MLE and Program Manager at Oracle Labs; so thanks a lot"!!!</b>
 
-Meilleures Salutations/Best Regards
-Loïc Lefèvre | Oracle Product Management | Mobile: +33 (0)62 980 1042
+* Meilleures Salutations/Best Regards
+* Loïc Lefèvre | Oracle Product Management | Mobile: +33 (0)62 980 1042
