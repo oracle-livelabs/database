@@ -361,7 +361,7 @@ While running *Pods* is at the heart of Kubernetes, it is uncommon to run them d
     </copy>
     ```
 
-    This *manifest file* looks similar to the *ReplicaSet* manifest; but you are making one change to the *Pod* specification.  Previously you were using the `latest` version of `nginx`.  This is generally **bad practice** as you are handing over the applications version control over to the *container engine*.
+    This *manifest file* looks similar to the *ReplicaSet* manifest; but you have changed the `kind` to *Deployment* and are making another change to the *Pod* specification.  Previously you were using the `latest` version of `nginx`.  This is generally **bad practice** as you are handing over the applications version control over to the *container engine*.  Now you are following **best practices** and specifying a specific version of `nginx`.
 
 2. Create your *Deployment* and list out `your-pod-deployments`
 
