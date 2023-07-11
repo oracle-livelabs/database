@@ -242,6 +242,8 @@ Same check as in the previous task but this time for user indexes
 
 ![checking if there are user indexes in system or sysaux TBS](./images/precheck-task7-src.png " ")
 
+
+<if type="KgR">
 ## Task 8: IOT Tables (SOURCE)
 IOT tables might get corrupted during XTTS copy when copying, especially to HP platforms. 
 * [Corrupt IOT when using Transportable Tablespace to HP from different OS (Doc ID 1334152.1) ](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1334152.1&displayIndex=1)
@@ -334,6 +336,8 @@ Global temporary tables do not belong to any tablespace, so they Data Pump does 
 ![Checking if you have GLOBAL temporary tables on source](./images/precheck-task10-src.png " ")
 
 There are no global temporary tables in our lab. When you have them in your database, you can migrate them using Data Pump export/import or generate the metadata from these tables and create them in the target database.
+
+</if>
 
 ## Task 11: Exit SQL*Plus (SOURCE and TARGET)
 
