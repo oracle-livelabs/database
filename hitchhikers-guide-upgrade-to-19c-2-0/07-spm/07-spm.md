@@ -94,10 +94,10 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
 
 
       EXISTING BASELINES
-      ~~~~~~~~~~~~~~~~~~
+      ##################
 
       PLANS PERFORMANCE
-      ~~~~~~~~~~~~~~~~~
+      #################
 
             Plan ET Avg      ET Avg      CPU Avg     CPU Avg           BG Avg       BG Avg     Rows Avg     Rows Avg       Executions       Executions                                   ET 100th    ET 99th     ET 97th     ET 95th     CPU 100th   CPU 99th    CPU 97th    CPU 95th
       Hash Value AWR (ms)    MEM (ms)    AWR (ms)    MEM (ms)             AWR          MEM          AWR          MEM              AWR              MEM   MIN Cost   MAX Cost  NL  HJ  MJ Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)
@@ -150,7 +150,7 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
       PLANS:0
 
       RESULTING BASELINES
-      ~~~~~~~~~~~~~~~~~~~
+      ###################
 
       CREATED             PLAN_NAME                      ENA ACC FIX REP ADA ORIGIN                        LAST_EXECUTED       LAST_MODIFIED       DESCRIPTION
       ------------------- ------------------------------ --- --- --- --- --- ----------------------------- ------------------- ------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -165,11 +165,11 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
       2023-07-08T07:24:45 SQL_PLAN_5ma3t8pb1mjb745221865 YES YES NO  YES NO  1159862373  1159862373 3642382161
 
       SQL PLAN BASELINES
-      ~~~~~~~~~~~~~~~~~~
+      ##################
       Error: neither SQL handle nor plan name specified
 
       RESULTING BASELINES
-      ~~~~~~~~~~~~~~~~~~~
+      ###################
 
       CREATED             PLAN_NAME                      ENA ACC FIX REP ADA ORIGIN                        LAST_EXECUTED       LAST_MODIFIED       DESCRIPTION
       ------------------- ------------------------------ --- --- --- --- --- ----------------------------- ------------------- ------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------
