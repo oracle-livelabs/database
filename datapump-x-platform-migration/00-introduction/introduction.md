@@ -4,6 +4,8 @@
 
 In this lab, you will migrate an 11.2.0.4 database directly into a 21c PDB using the __Cross-Platform Transportable Tablespace (XTTS)__ script. This script automatically handles cross-platform migrations, including conversions from little to big endianness (or vice versa). You can also migrate directly into a PDB running on the same platform and host. [MOS note #2471245.1: V4 Reduce Transportable Tablespace Downtime using Cross Platform Incremental Backup](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2471245.1&displayIndex=1) outlines the prerequisites.
 
+Although the lab uses an Oracle Database 11.2.0.4, for migrations, it is strongly recommended to stay on supported releases, apply the recent-most Release Update, and, for Oracle Database 19c, additionally install the Data Pump Bundle Patch (MOS Doc ID [2819284.1](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2819284.1)).
+
 The diagram below shows you the different phases of the XTTS, including the steps being executed in a particular phase by the XTTS scripts and if the source database is up and available for normal use:
 
 ![Cross platform transportable tablespace workflow](./images/xtts-workflow.png " ")
