@@ -121,8 +121,6 @@ To install the OraOperator, you will first need to install a dependency, **cert-
     </copy>
     ```
 
-    The output will be similar to:
-
     ![kubectl get all -n cert-manager](images/kubectl_cert_manager.png "kubectl get all -n cert-manager")
 
 3. Install the **OraOperator**:
@@ -133,8 +131,6 @@ To install the OraOperator, you will first need to install a dependency, **cert-
     </copy>
     ```
 
-    The output will look similar to this:
-
     ![OraOperator Install](images/oraoperator_install.png "OraOperator Install")
 
 4. Check **OraOperator** installed resources:
@@ -144,8 +140,6 @@ To install the OraOperator, you will first need to install a dependency, **cert-
     kubectl get all -n oracle-database-operator-system
     </copy>
     ```
-
-    The output will be similar to:
 
     ![kubectl get all -n oracle-database-operator-system](images/kubectl_oraoper.png "kubectl get all -n oracle-database-operator-system")
 
