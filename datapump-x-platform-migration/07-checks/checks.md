@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This final lab is listing some checks you might perform after a migration. It also gives you a quick way how to create a metadata SQL output for all objects in your database.
+This final lab lists some checks you might perform after a migration. It also gives you a quick way to create a metadata SQL output for all objects in your database.
 
 Estimated Time: 15 minutes
 
@@ -17,8 +17,8 @@ Estimated Time: 15 minutes
 This lab assumes you have:
 
 - Connected to the lab
-- A terminal window open on source
-- Another terminal window open on target
+- A terminal window open on the source
+- Another terminal window open on the target
 - Prepared the source
 - Successfully executed initial backup (prepare phase)
 - Successfully executed initial restore (prepare phase)
@@ -26,12 +26,12 @@ This lab assumes you have:
 - Successfully executed incremental restore(s) (roll forward phase)
 - Successfully executed final backup (transport phase)
 - Successfully executed final restore (transport phase)
-- executed the TTS expdp and impdp (transport phase)
+- Executed the TTS export and import (transport phase)
 
 
 
 ## Task 1: Metadata Export (SOURCE)
-Sometimes you need to analyze the root cause of an import failure. Did you know, you can create the metadata of your database using Data Pump?
+Sometimes you need to analyze the root cause of an import failure. Did you know, you can extract the metadata of your database into a regular text file using Data Pump?
 
 1. Prepared Export Data Pump Parameter File (SOURCE)
 
@@ -261,7 +261,7 @@ Execute a metadata export using this par file:
 
 
 ## Task  3: Check 
-Do you remember that you created a table "object_copy" in "tpcc" at the beginning of the roll forward phase?
+Do you remember creating a table "object_copy" in "tpcc" at the beginning of the roll forward phase?
 You can now check if source and target match using SQL*Plus:
 
 1. Open SQL*Plus (SOURCE)
@@ -316,8 +316,7 @@ You can now check if source and target match using SQL*Plus:
 
 
 ## Congratulations! 
-You completed all stages of this XTTS lab migrating an Oracle 11g database directly into a 21c PDB successfully!
-
+You successfully completed all stages of this XTTS lab migrating an Oracle 11g database directly into a 21c PDB!
 
 ## Acknowledgments
 * **Author** - Klaus Gronau

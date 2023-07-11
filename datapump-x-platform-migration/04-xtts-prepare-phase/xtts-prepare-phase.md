@@ -17,14 +17,14 @@ Estimated Time: 15 minutes
 This lab assumes you have:
 
 - Connected to the lab
-- A terminal window open to source
-- Another terminal window open to target
+- A terminal window open to the source
+- Another terminal window open to the target
 - Source and target prepared
 - XTTS prechecks done
 
 
 ## Task 1: XTTS Properties File (SOURCE)
-On source change into the XTTS source directory and copy the xtt.properties containing all necessary parameters to run this lab.
+On source, change into the XTTS source directory and copy the xtt.properties containing all necessary parameters to run this lab.
 
 1. Changing into XTTS/SOURCE Directory (SOURCE)
 
@@ -376,7 +376,7 @@ The XTTS script offers two helpful environment variables we're going to set all 
 
 
 ## Task 3: Initial Restore (TARGET)
-The initial restore on target requires the "xtt.properties" and "res.txt" files from source. In this lab the source and target machine are the same, so you can simply use the copy command (in a real migration you might store it on a network share or use scp to copy the files). The RMAN backup sets are stored in a folder. Since it is the same host, we don't need to copy the backup sets. You would need to do that in a real migration except you put the files on a network share or enable copying in the xtt.properties file.
+The initial restore on target requires the "xtt.properties" and "res.txt" files from the source. In this lab, the source and target machine are the same, so you can simply use the copy command (in a real migration, you might store it on a network share or use scp to copy the files). The script stores the RMAN backup sets in a folder. Since it is the same host, we don't need to copy the backup sets. You would need to do that in a real migration, except you put the files on a network share or enable copying in the xtt.properties file.
 
 1. Changing into XTTS/TARGET Directory (TARGET)
 
@@ -481,12 +481,12 @@ Starting restore:
 
 ## Summary of this Lab
 
-In this lab you executed the initial backup and restore using the parameter file xtt.properties containing information about the tablespaces you want to transfer:
+In this lab, you executed the initial backup and restore using the parameter file xtt.properties containing information about the tablespaces you want to transfer:
 
 ![source xtt.properties file](./images/initial-backup-restore.png " ")
 
 ### Backup (SOURCE)
-On source we created the xtt.properties file:
+On source, we created the xtt.properties file:
 
   ```
     <copy>
@@ -518,7 +518,7 @@ and the other mandatory driving file for the restore - the res.txt file - plus a
 
 
 #### Restore (TARGET)
-You copied the xtt.properties and the res.txt file from source to target. RMAN read the same files the backup process created - so these files match between source and target. An interesting directory created by the restore process is the target XTTS/tmp directory containing the log files:
+You copied the xtt.properties and the res.txt file from source to target. RMAN read the same files the backup process created - so these files match on source and target. An interesting directory created by the restore process is the target XTTS/tmp directory containing the log files:
   ```
     <copy>
     ls -al /home/oracle/xtts/target/tmp

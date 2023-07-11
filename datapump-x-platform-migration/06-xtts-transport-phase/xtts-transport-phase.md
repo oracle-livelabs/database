@@ -2,8 +2,8 @@
 
 ## Introduction
 
-This last phase, the transport phase, requires downtime. Before you start the last incremental backup it is mandatory to set the tablespaces you copied to read only. </br>
-__ATTENTION__: Make sure there are no active sessions/open transacations using objects in the copied tablespaces.
+This last phase, the transport phase, requires downtime. Before you start the final incremental backup, you must set the tablespaces you copy to read only. </br>
+__ATTENTION__: Make sure no active sessions/open transcations use objects in the tablespaces.
 
 Estimated Time: 15 minutes
 
@@ -19,8 +19,8 @@ Estimated Time: 15 minutes
 This lab assumes you have:
 
 - Connected to the lab
-- A terminal window open on source
-- Another terminal window open on target
+- A terminal window open on the source
+- Another terminal window open on the target
 - Prepared the source
 - Successfully executed initial backup (prepare phase)
 - Successfully executed initial restore (prepare phase)
@@ -181,13 +181,13 @@ On source change into the XTTS Source directory and execute the final incrementa
     OFFLINE JUST CONVERT, COPY<br>
     ORA-06512: at line 284__<br>
 
-    You can safely ignore those warnings as they only tell you that you're going to back up a "read only" tablespace.
+    You can safely ignore those warnings as they only tell you that you will back up a "read only" tablespace.
 
 
 ## Task 3: Final Incremental Restore (TARGET)
 
 Open the target console.
-The final incremental restore also needs the "res.txt" and "incrbackups.txt" files from source. 
+The final incremental restore also needs the "res.txt" and "incrbackups.txt" files from the source. 
 
 1. Copy "res.txt" (TARGET)
 
@@ -224,7 +224,7 @@ The final incremental restore also needs the "res.txt" and "incrbackups.txt" fil
     ![starting final incremental restore](./images/env-final-restore.png " ")
 
 4. Starting Final Restore (TARGET) </br>
-And start the restore which recovers the target data files until exact the same SCN as the source database data files:
+And start the restore, which recovers the target data files until exactly the same SCN as the source database data files:
 
     ```
     <copy>
@@ -280,7 +280,7 @@ And start the restore which recovers the target data files until exact the same 
     </details>
 
 ## Task 4: TTS Export (SOURCE)
-Between this source and target database version, you can't use __Data Pump network\_link__ (will fail with ORA-39169) and you have to export and import the metadata information instead.
+Between this source and target database version (11.2.0.4 and 21), you can't use __Data Pump network\_link__ (will fail with ORA-39169). Instead, you must use dump files for the metadata.
 The Data Pump export parameter file "exp_metadata.par" was already created for you and is located in "/home/oracle/xtts/"
 
 1. Prepared Export Data Pump Parameter File (SOURCE)
@@ -535,7 +535,7 @@ Execute expdp using this copied par file:
     </details>
 
 ## Task 5: TTS Import (TARGET)
-Also the metadata import parameter file was precreated for you.
+Also, you can use the pre-created metadata import parameter file.
 
 1. Prepared Import Data Pump Parameter File (TARGET)
 
@@ -1404,7 +1404,7 @@ And import the metadata into the PDB3 using this Imp_Metadata.par parameter file
       ```
     </details>
 
-You should examine the Data Pump log files. Any errors should be investigated to determine whether they are significant for the import. Full transportable export/import often produces errors on internal objects which can be ignored in most cases.
+You should examine the Data Pump log files. You should investigate any errors to determine whether they are significant for the import. Full transportable export/import often produces error on internal objects which you can safely ignore in most cases.
 
 
 You may now *proceed to the next lab*.

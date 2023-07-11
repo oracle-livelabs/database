@@ -2,13 +2,13 @@
 
 ## Introduction
 
-In this lab, you will enable archive logging on source database and create the database directory for Data Pump export.
+In this lab, you will enable archive logging on the source database and create the database directory for Data Pump export.
 
 Estimated Time: 5 minutes
 
 ### Objectives
 
-- Enable archive logging on source database
+- Prepare the source database
 
 ### Prerequisites
 
@@ -19,7 +19,7 @@ This lab assumes you have:
 ## Task 1: Create OS Source Directory and Unzip XTTS ZIP File (SOURCE)
 
 1. Create OS Directories (SOURCE) </br>
-Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another one as XTTS source and a third directory for RMAN files.
+Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another as XTTS source, and a third directory for RMAN files.
 
     ```
     <copy>
@@ -69,7 +69,7 @@ Switch to the source directory
 
 ## Task 2: Configure Source Database (SOURCE)
 1. Set Source Environment (SOURCE) </br>
-Activate source terminal window, set the source environment and start SQL*Plus:
+Activate the source terminal window, set the source environment, and start SQL*Plus:
 
     ```
     <copy>
@@ -90,7 +90,7 @@ Activate source terminal window, set the source environment and start SQL*Plus:
     ![Login to source 11.2.0.4 database](./images/start-sqlplus-src.png " ")
 
 
-3. Database Changes (SOURCE) </br> Enable source database archive logging and create the database directory for Data Pump export. Also alter the TPCC user's password:
+3. Database Changes (SOURCE) </br> Enable source database archive logging and create the database directory for Data Pump export. Also, alter the TPCC user's password:
 
     ```
     <copy>
@@ -111,10 +111,10 @@ Activate source terminal window, set the source environment and start SQL*Plus:
 
 
 ## Task 4: Configuring Default RMAN Settings (SOURCE)
-The next parameters you're going to set for RMAN work well in the lab. For your environment you might have to adopt them by increasing parallelism, the backup destination etc.
+The next parameters you will set for RMAN work well in the lab. For your environment, you might have to adopt them by increasing parallelism, the backup destination, etc.
 
 1. Open RMAN Console (SOURCE) </br>
-On source start the rman console connecting to the source database: 
+On the source, start the RMAN console connecting to the source database: 
 
     ```
     <copy>
@@ -123,7 +123,7 @@ On source start the rman console connecting to the source database:
     ```
 
     Please be aware:
-    in RMAN terminology the target database identifies the database which you're going to back up - so in the migration terminology the source database. 
+    In RMAN terminology, the target database identifies the database which you will back up - so in the migration terminology, the source database. 
 
 2. Update Default RMAN Settings
 
