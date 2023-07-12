@@ -218,7 +218,7 @@ If you are using MacOS, you can also connect using a terminal application such a
 
 3. Unzip the archive
 
-    ```
+    ```bash
     <copy>
     unzip ocw23-keys
     </copy>
