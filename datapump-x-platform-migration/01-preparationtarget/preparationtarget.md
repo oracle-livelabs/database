@@ -88,31 +88,82 @@ Activate the terminal target tab window and create a directory for the XTTS targ
     ![Login to CDB3](./images/open-target-sqlplus.png " ")
 
 
-## Task 3: In SQL*Plus Start the Container Database CDB3 and Create the Pluggable Database PDB3 (TARGET)
+## Task 3: In SQL*Plus Enable Archive Logging and Enable Flashback and Create the Pluggable Database PDB3 (TARGET)
+
+In the "transport phase" you will create a guaranteed restore point which you can use to flash back the __target__ database just in case something goes wrong during the TTS import.
+
+1. Start Container Database and Enable Archive Logging
+
+    ```
+    <copy>
+    startup mount
+    alter database archivelog;
+    alter database open;
+    </copy>
+        
+    Hit ENTER/RETURN to execute ALL commands.
+    ```
+
+    ![enable archive logging and start CDB3](./images/enable-archive-startup-target.png " ")
+
+2. Check for Local Undo
+With local undo, each PDB will have its own undo tablespace.
+
+    ```
+    <copy>
+    col property_name for a20
+    col property_value for a15
+    col description for a30
+    select * from database_properties where property_name='LOCAL_UNDO_ENABLED';
+    </copy>
+        
+    Hit ENTER/RETURN to execute ALL commands.
+    ```
+    ![check local undo setting](./images/select-local-undo.png " ")
+
+The container database is already configured with local_undo. No further action needed here.
+
+
+3. Enable Flashback 
+Creating the recovery OS directory and enabling flashback:
+
+    ```
+    <copy>
+    host mkdir /u02/fast_recovery_area/CDB3
+    alter system set db_recovery_file_dest_size=1024G scope=both;
+    alter system set db_recovery_file_dest= '/u02/fast_recovery_area/CDB3' scope=both;
+    alter database flashback on;
+    </copy>
+      
+    Hit ENTER/RETURN to execute ALL commands.
+    ```
+
+    ![enable flashback](./images/enable-flashback.png " ")
+
+## Task 4: Create the Pluggable Database PDB3 (TARGET)
+
 When creating a PDB, the database must create the admin user as well. You can delete it later on if desired. Once you have created PDB3, you need to start it up and save its state.
 
   ```
-    <copy>
-    startup
-    create pluggable database pdb3 admin user adm identified by adm file_name_convert=('pdbseed', 'pdb3');
-    alter pluggable database pdb3 open;
-    alter pluggable database pdb3 save state;
-    </copy>
-    
-    Hit ENTER/RETURN to execute ALL commands.
+  <copy>
+  create pluggable database pdb3 admin user adm identified by adm file_name_convert=('pdbseed', 'pdb3');
+  alter pluggable database pdb3 open;
+  alter pluggable database pdb3 save state;
+  </copy>
+  
+  Hit ENTER/RETURN to execute ALL commands.
   ```
 
-![Create PDB3 in CDB3](./images/start-cdb3-create-pdb3.png " ")
+  ![Create PDB3 in CDB3](./images/create-pdb3.png " ")
 
 
-
-## Task 4: In SQL*Plus Create the Database Directory Used by Data Pump (TARGET)
+## Task 4: Create the Database Directory Used by Data Pump (TARGET)
 Create some additional objects for the migration.
 
   ```
     <copy>
     alter session set container=pdb3;
-    CREATE OR REPLACE DIRECTORY "XTTS_METADATA_DIR" AS '/home/oracle/xtts/dump/';
+    create or replace directory "XTTS_METADATA_DIR" AS '/home/oracle/xtts/dump/';
     exit;
     </copy>
 
@@ -127,7 +178,7 @@ Hit ENTER/RETURN to execute ALL commands.
 COMMENT: TYPE IS NOT DEFINED; SO THIS SECTION DOES NOT APPEAR
 IT IS TO HIDE THE LISTENER START JUST IN CASE I NEED IT AGAIN
 
-## Task 5: Start Oracle Listener (TARGET)
+## Task 5: Start the Oracle Listener (TARGET)
   ```
     <copy>
     lsnrctl start
