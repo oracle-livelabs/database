@@ -1453,6 +1453,36 @@ And import the metadata into the PDB3 using this Imp_Metadata.par parameter file
 
 You should examine the Data Pump log files. You should investigate any errors to determine whether they are significant for the import. Full transportable export/import often produces errors on internal objects which you can safely ignore in most cases.
 
+<details>
+ <summary>*Click here if you want to see how to flashback the import*</summary>
+
+__SIDE NOTE__: </br>
+    At the very end of the TTS import, the database starts to update the  restored data files header. The following process only works when the import process aborts _BEFORE_ the data files were updated by the database. 
+
+First start the TTS import:
+ ![start TTS import](./images/start-impdp.png " ")
+
+Killing it in the middle:
+ ![kill TTS import](./images/kill-import.png " ")
+
+and the killed import shows:
+ ![output of the killed import](./images/output-killed-import.png " ")
+
+open SQL\*Plus, close the PDB and flash it back:
+ ![flash back PDB](./images/flashback-pdb.png " ")
+
+Before opening the PDB with the resetlogs command rename the restored data files (else they will be deleted):
+ ![rename data files and open resetlogs](./images/pdb-open-restlogs.png " ")
+
+Once the PDB is open, move the data files back:
+ ![mv data files back](./images/mv-datafiles-back.png " ")
+
+and start the TTS import again:
+ ![restart TTS import again](./images/restart-import.png " ")
+
+</details>
+
+
 
 You may now *proceed to the next lab*.
 

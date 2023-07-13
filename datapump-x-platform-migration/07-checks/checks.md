@@ -282,7 +282,7 @@ You can now check if source and target match using SQL*Plus:
     </copy>
     ```
 
-    ![content of the metadata SQL file](./images/metadata-sql-file.png " ") 
+    ![content of the metadata SQL file](./images/sqlplus-trg.png " ") 
 
 3. SQL Statement (SOURCE and TARGET)
 
