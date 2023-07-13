@@ -73,6 +73,7 @@ This lab assumes you have:
     ```
     $ <copy>sqldeveloper</copy>
     ```
+    ![Command to start SQL](images/sql-open.png)
 
     ![Command to start SQL](images/startup-sql.png)
 

@@ -46,5 +46,7 @@ Using the details from the two tasks above, proceed to the lab **Setup Compute I
 
 ## Acknowledgements
 - **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
-- **Contributors** -  
+
+- **Contributors** - Meghana Banka
+
 - **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, December 2021

@@ -9,7 +9,7 @@
       },
       { 
         
-        "title": "Get Started with NoVNC",
+        "title": "Get Started",
         "description": "Verify Setup of compute instance",
         "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
       },
@@ -32,6 +32,11 @@
           "title": "Need Help?",
           "description": "Solutions to Common Problems and Directions for Receiving Live Help",
           "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
-      }
+      },
+      {
+        "title": "Support",
+        "description": "How to receive support",
+        "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
   ]
 }
