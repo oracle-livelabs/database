@@ -55,4 +55,4 @@ Free Tier workshops unless the Always Free environment is available.* **[Free Ti
 
 ## Acknowledgements
 * **Authors** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director NoSQL Development
-* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, August 2022
+* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, July 2023
