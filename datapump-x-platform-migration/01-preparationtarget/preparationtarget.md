@@ -88,7 +88,7 @@ Activate the terminal target tab window and create a directory for the XTTS targ
     ![Login to CDB3](./images/open-target-sqlplus.png " ")
 
 
-## Task 3: In SQL*Plus Enable Archive Logging and Enable Flashback and Create the Pluggable Database PDB3 (TARGET)
+## Task 3: In SQL*Plus Enable Archive Logging and Enable Flashback (TARGET)
 
 In the "transport phase" you will create a guaranteed restore point which you can use to flash back the __target__ database just in case something goes wrong during the TTS import.
 
