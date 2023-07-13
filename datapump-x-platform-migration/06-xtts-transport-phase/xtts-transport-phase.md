@@ -534,7 +534,54 @@ Execute expdp using this copied par file:
       ```
     </details>
 
-## Task 5: TTS Import (TARGET)
+## Task 5: Create Guaranteed Flashback Restore Point (TARGET)
+It's now a good time to create a guaranteed flashback restore point allowing you to flash back the target database just in case something goes wrong with the import.
+
+1. Open SQL\*Plus (TARGET)
+
+    ```
+    <copy>
+    sqlplus / as sysdba
+    </copy>
+    ```
+
+    ![Output V$RETSORE_POINT ](./images/start-sqlplus.png " ")
+
+2. Create Guaranteed Restore Point (TARGET)
+
+    ```
+    <copy>
+    create restore point pdb3_before_tts_import for pluggable database pdb3 guarantee flashback database;
+    </copy>
+    ```
+
+    ![Output V$RETSORE_POINT ](./images/create-restore-point.png " ")
+
+3. Output from V$RESTORE_POINT (TARGET)
+
+    ```
+    <copy>
+    set line 200
+    set num 20
+    col name format A25
+    select scn, guarantee_flashback_database, name, con_id from v$restore_point order by name;
+    </copy>
+
+    Hit ENTER/RETURN to execute ALL commands.
+    ```
+
+    ![Output V$RETSORE_POINT ](./images/restore-point-output.png " ")
+
+4. Exit SQL\*Plus
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
+    ![exit SQL*Plus ](./images/exit-sqlplus.png " ")
+## Task 6: TTS Import (TARGET)
 Also, you can use the pre-created metadata import parameter file.
 
 1. Prepared Import Data Pump Parameter File (TARGET)
