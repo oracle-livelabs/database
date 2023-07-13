@@ -106,8 +106,8 @@ In the "transport phase" you will create a guaranteed restore point which you ca
 
     ![enable archive logging and start CDB3](./images/enable-archive-startup-target.png " ")
 
-2. Check for Local Undo
-With local undo, each PDB will have its own undo tablespace.
+2. Check for Local Undo </br>
+    With local undo, each PDB will have its own undo tablespace.
 
     ```
     <copy>
@@ -121,11 +121,11 @@ With local undo, each PDB will have its own undo tablespace.
     ```
     ![check local undo setting](./images/select-local-undo.png " ")
 
-The container database is already configured with local_undo. No further action needed here.
+    The container database is already configured with local_undo. No further action needed here.
 
 
-3. Enable Flashback 
-Creating the recovery OS directory and enabling flashback:
+3. Enable Flashback </br>
+    Creating the recovery OS directory and enabling flashback:
 
     ```
     <copy>
