@@ -188,21 +188,18 @@ Geo-Steering to steer network requests to closest Oracle Cloud Infrastructure re
     You may now **proceed to the next lab.**
 
 ## Learn More
-
 * [About Architecting Microservices-based applications](https://docs.oracle.com/en/solutions/learn-architect-microservice/index.html)
 * [Speed Matters! Why Choosing the Right Database is Critical for Best Customer Experience?](https://blogs.oracle.com/nosql/post/speed-matters-why-choosing-the-right-database-is-critical-for-best-customer-experience)
 * [About Security, Identity, and Compliance](https://www.oracle.com/security/)
 * [Application Development](https://www.oracle.com/application-development/)
 
-### Services
-
-* [Oracle NoSQL Database Cloud page](https://www.oracle.com/database/nosql-cloud.html)
-* [About Oracle NoSQL Database Cloud](https://docs.oracle.com/en/cloud/paas/nosql-cloud/index.html)
+* [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
+* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/index.html)
 * [About API Gateway](https://www.oracle.com/cloud/cloud-native/api-management/)
 * [About Container Engine for Kubernetes (OKE)](https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/)
 * [About Container Instance](https://www.oracle.com/cloud/cloud-native/container-instances/)
 
-* [About AI](https://www.oracle.com/artificial-intelligence/ai-services/)
+* [About AI Services](https://www.oracle.com/artificial-intelligence/ai-services/)
 * [About Media Streams](https://www.oracle.com/cloud/media-streams/)
 
 
