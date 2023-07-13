@@ -157,7 +157,7 @@ When creating a PDB, the database must create the admin user as well. You can de
   ![Create PDB3 in CDB3](./images/create-pdb3.png " ")
 
 
-## Task 4: Create the Database Directory Used by Data Pump (TARGET)
+## Task 5: Create the Database Directory Used by Data Pump (TARGET)
 Create some additional objects for the migration.
 
   ```
@@ -178,7 +178,7 @@ Hit ENTER/RETURN to execute ALL commands.
 COMMENT: TYPE IS NOT DEFINED; SO THIS SECTION DOES NOT APPEAR
 IT IS TO HIDE THE LISTENER START JUST IN CASE I NEED IT AGAIN
 
-## Task 5: Start the Oracle Listener (TARGET)
+## Task 6: Start the Oracle Listener (TARGET)
   ```
     <copy>
     lsnrctl start
