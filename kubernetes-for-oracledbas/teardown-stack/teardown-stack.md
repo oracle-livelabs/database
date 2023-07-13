@@ -4,7 +4,7 @@
 
 Upon completing your labs, it is recommended that you perform a cleanup to dispose of all OCI resources created by Oracle Resource Manager (ORM). This lab will guide you to properly destroy these resources and delete the stack.
 
-Estimated Time: 10 minutes
+*Estimated Time:* 10 minutes
 
 ### Objectives
 

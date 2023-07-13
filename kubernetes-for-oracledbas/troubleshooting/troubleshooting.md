@@ -4,33 +4,27 @@
 
 Every effort is made to ensure this Workshop functions in its entirety without any errors.  Unfortunately, variables and the continual evolution of technology will inevitably cause some tasks to fail.  Below are known issues and their resolutions.
 
-## Out of Capacity
+## Task 1: Out of Capacity
 
 When [deploying the Stack](?lab=deploy-stack#Task4:ApplytheStack "Deploy Stack") with the defaults, it may fail due to compute capacity issues.  This can be resolved by changing the shape of the compute instances.
 
-### Task 1: Stack Details
+1. Use the breadcrumb to navigate back to the "Stack Details"
 
-Use the breadcrumb to navigate back to the "Stack Details"
+    ![Stack Details Breadcrumb](images/stack_details.png "Stack Details Breadcrumb")
 
-![Stack Details Breadcrumb](images/stack_details.png "Stack Details Breadcrumb")
+2. Select the "Edit" Dropdown and Click "Edit Stack"
 
-### Task 2: Edit Stack
+    ![Edit Stack](images/edit_stack.png "Edit Stack")
 
-Select the "Edit" Dropdown and Click "Edit Stack"
+3. On the first screen, "Stack Information", click "Next".  On the "Configure Variables" screen, change the `Node Worker Pool Shape` and click "Next".
 
-![Edit Stack](images/edit_stack.png "Edit Stack")
+    ![Change Shape](images/change_shape.png "Change Shape")
 
-### Task 3: Change Worker Pool Shape
+4. Apply the Stack
 
-On the first screen, "Stack Information", click "Next".  On the "Configure Variables" screen, change the `Node Worker Pool Shape` and click "Next".
+    Ensure the "Run apply" checkbox is ticked and click "Save changes"
 
-![Change Shape](images/change_shape.png "Change Shape")
-
-### Task 4: Apply the Stack
-
-Ensure the "Run apply" checkbox is ticked and click "Save changes"
-
-![Apply Stack](images/apply_stack.png "Apply Stack")
+    ![Apply Stack](images/apply_stack.png "Apply Stack")
 
 ## Acknowledgements
 

@@ -10,7 +10,7 @@ You can think of the *kubeconfig* file as consolidated version of the `TNS_ADMIN
 * Login Methods
 * User Credentials
 
-*Estimated Lab Time:* 10 minute
+*Estimated Time:* 10 minute
 
 ### Objectives
 
@@ -41,13 +41,13 @@ Just as with *sqlplus*, used to query the objects in an Oracle Database, use *ku
 
 ![kube-apiserver](images/kube-apiserver.png "kube-apiserver")
 
-In Cloud Shell, run:
+1. In Cloud Shell, run:
 
-```bash
-<copy>
-kubectl get all -A
-</copy>
-```
+    ```bash
+    <copy>
+    kubectl get all -A
+    </copy>
+    ```
 
 `kubectl get all -A` will prompt the *kube-apiserver* to query the *etcd* database which will return all the resources, across all *namespaces* (`-A`), in the Kubernetes cluster.
 

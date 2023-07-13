@@ -6,7 +6,7 @@ In this lab, you will provision and configure the Oracle Cloud resources require
 
 Don't panic, how this works will be explored... while it is working.  
 
-*Estimated Lab Time:* 10 minutes
+*Estimated Time:* 10 minutes
 
 ### Objectives
 
@@ -70,11 +70,11 @@ For example, the IaC in this particular stack is used in two different OCI Marke
 
 but it has been slimmed down, via variables, specifically for this workshop.  This demonstrates how easy it is to modify infrastructure configurations, as needed, without requiring any changes to the underlying code.
 
-Tick the "Show Database Options?" to see what can be customised, but please do not change any values.
+1. Tick the "Show Database Options?" to see what can be customised, but **please do not change any values**.
 
-![Configuration Variables](./images/configuration_variables.png "Configuration Variables")
+    ![Configuration Variables](./images/configuration_variables.png "Configuration Variables")
 
-### Please do not change anything on this page, click "Next"
+2. Please do not change anything on this page, click "Next"
 
 ## Task 4: Apply! the Stack
 
@@ -91,7 +91,7 @@ The Infrastructure deployment and configuration will take approximately **15 min
 
 When using OCI Free Tier, it is possible that the Stack deployment will fail due to a lack of compute resources in your chosen region.  Fear not and realise the power of Infrastructure as Code!  
 
-Should the Stack Deployment fail due to **"Out of host capacity."**, please follow the [Out of Capacity](?lab=troubleshooting#OutofCapacity) guide.
+Should the Stack Deployment fail due to **"Out of host capacity."**, please follow the [Out of Capacity](?lab=troubleshooting#Task1:OutofCapacity) guide.
 
 ## Task 5: Learn about Infrastructure as Code (IaC) using Terraform
 

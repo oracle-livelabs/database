@@ -6,7 +6,7 @@ In this lab, you will clean up the Oracle Cloud Infrastructure (OCI) *Policies*,
 
 <if type="tenancy">**If you are not in the OCI Administrators group,** please have an OCI Administrator perform each of these tasks for you.</fi>
 
-*Estimated Lab Time:* 2 minutes
+*Estimated Time:* 2 minutes
 
 ### Objectives
 
@@ -23,28 +23,28 @@ In this lab, you will clean up the Oracle Cloud Infrastructure (OCI) *Policies*,
 
 ## Task 2: Delete the Policies
 
-In the *Cloud Shell*, run the following commands to delete the *Policy*:
+1. In the *Cloud Shell*, run the following commands to delete the *Policy*:
 
-```bash
-<copy>
-POLICY_OCID=$(oci iam policy list \
-    --compartment-id $OCI_TENANCY \
-    --name [](var:oci_group)_POLICY | jq -r '.data[].id')
+    ```bash
+    <copy>
+    POLICY_OCID=$(oci iam policy list \
+        --compartment-id $OCI_TENANCY \
+        --name [](var:oci_group)_POLICY | jq -r '.data[].id')
 
-echo "Policy OCID: $POLICY_OCID"
+    echo "Policy OCID: $POLICY_OCID"
 
-if [[ ! -z $POLICY_OCID ]]; then
-    oci iam policy delete \
-        --policy-id $POLICY_OCID \
-        --force
-    if (( $? == 0)); then
-        echo "Policy Deleted"
+    if [[ ! -z $POLICY_OCID ]]; then
+        oci iam policy delete \
+            --policy-id $POLICY_OCID \
+            --force
+        if (( $? == 0)); then
+            echo "Policy Deleted"
+        fi
     fi
-fi
-</copy>
-```
+    </copy>
+    ```
 
-Press "return" to ensure commands have run.
+    Press "return" to ensure commands have run.
 
 ## Task 3: Delete the Group
 
@@ -97,25 +97,25 @@ In the *Cloud Shell*, run the following commands to delete the *Group*:
 
 ## Task 4: Delete the Compartment
 
-In the *Cloud Shell*, run the following commands to delete the sub-*Compartment* from the root *Compartment*:
+1. In the *Cloud Shell*, run the following commands to delete the sub-*Compartment* from the root *Compartment*:
 
-```bash
-<copy>
-COMPARTMENT_OCID=$(oci iam compartment list \
-    --name [](var:oci_compartment) | jq -r '.data[].id')
+    ```bash
+    <copy>
+    COMPARTMENT_OCID=$(oci iam compartment list \
+        --name [](var:oci_compartment) | jq -r '.data[].id')
 
-echo "Compartment OCID: $COMPARTMENT_OCID"
+    echo "Compartment OCID: $COMPARTMENT_OCID"
 
-if [[ ! -z $COMPARTMENT_OCID ]]; then
-    oci iam compartment delete \
-        --compartment-id $COMPARTMENT_OCID \
-        --force
-    if (( $? == 0)); then
-        echo "Compartment Scheduled for Deletion"
+    if [[ ! -z $COMPARTMENT_OCID ]]; then
+        oci iam compartment delete \
+            --compartment-id $COMPARTMENT_OCID \
+            --force
+        if (( $? == 0)); then
+            echo "Compartment Scheduled for Deletion"
+        fi
     fi
-fi
-</copy>
-```
+    </copy>
+    ```
 
 You may now **proceed to the next lab**
 

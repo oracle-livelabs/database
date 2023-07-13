@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "Intro to Microservices and Kubernetes for Oracle DBAs",
+    "workshoptitle": "Microservices and Kubernetes for an Oracle DBA",
     "help": "livelabs-help-dbmaa_us@oracle.com",
     "variables": [
         "../../variables/variables.json"
@@ -100,7 +100,7 @@
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-            "filename": "cloud-world/need-help.md",
+            "filename": "../../cloud-world/need-help.md",
             "last_reviewed": "N/A"
         },
         {

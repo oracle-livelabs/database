@@ -2,7 +2,7 @@
 
 ## Introduction
 
-![Cloud World Logo](images/ocw23-dark-2.png)
+![CloudWorld Logo](images/ocw23-dark-2.png "CloudWorld Logo")
 
 It is a pleasure to welcome you to the Oracle CloudWorld Hands-On Lab (HOL) Experience. We want to encourage you to get hands-on in each session and follow the hands-on lab instructions.
 
@@ -86,16 +86,13 @@ Here you can find a quick guide explaining how to access the LiveLabs Sandbox en
 *Please note*: Some hands-on labs provide access to preconfigured environments using noVNC (see Step 2b). Your session host will inform you about the applicable access method.
 
 1. Using your *Oracle Account Login* go to [LiveLabs](https://developer.oracle.com/livelabs). Open a workshop, click **Start**, and then **Run on LiveLabs** to request a reservation for this workshop.
+  ![Run on LiveLabs](images/run-on-livelabs.png =20%x* " ")
 
-    ![Run on LiveLabs](images/run-on-livelabs.png =20%x* " ")
-
-2. Fill out information on the *Reserve Workshop* page. Check **I consent to recieve emails from LiveLabs for my reservation**. Click **Submit Reservation**.
-
-    ![Submit Reservation](images/submit-reservation.png =20%x* " ")
+2. Fill out information on the *Reserve Workshop* page. Check **I consent to receive emails from LiveLabs for my reservation**. Click **Submit Reservation**.
+  ![Submit Reservation](images/submit-reservation.png =20%x* " ")
 
 3. After creating a reservation for a LiveLab Workshop, you will receive an e-mail indicating that your reservation is being processed, followed by an e-mail indicating that your environment has been created.
-
-    ![Reservation email](images/livelab-env-created-email.png =20%x* " ")
+  ![Reservation email](images/livelab-env-created-email.png =20%x* " ")
 
 >**Note:** You will receive the second created e-mail just before your selected reservation time.
 
@@ -151,7 +148,7 @@ You can use Oracle Cloud Shell to connect to your remote server using SSH.
 
 1. After you log in to OCI, open Oracle Cloud Shell. If it is the first time using Cloud Shell, it may take a minute or so to start up.
 
-    ![open cloud shell](images/open-cloud-shell.png)
+    ![open cloud shell](images/open-cloud-shell.png "Open Cloud Shell")
 
 2. Download the SSH keys using wget
 
@@ -173,7 +170,7 @@ You can use Oracle Cloud Shell to connect to your remote server using SSH.
 
    You will find the following files:
 
-      * ocw23-rsa (privayte key)
+      * ocw23-rsa (private key)
       * ocw23-rsa.pub (public key)
       * ocw23-rsa.ppk (private key in Putty format - for Windows only)
 
@@ -189,7 +186,7 @@ You can use Oracle Cloud Shell to connect to your remote server using SSH.
 
     ```bash
     <copy>
-    ssh -i ocw23-rsa <user>@<ip-adress>
+    ssh -i ocw23-rsa <user>@<ip-address>
     </copy>
     ```
 
@@ -198,7 +195,7 @@ You can use Oracle Cloud Shell to connect to your remote server using SSH.
 
 ### Option 2 (MacOS): Connect using MacOS Terminal
 
-If you are using MacOS, you can also connect using a terminal application such as the default Termional application.
+If you are using MacOS, you can also connect using a terminal application such as the default Terminal application.
 
 1. Open the terminal application of your choice:
 
@@ -228,7 +225,7 @@ If you are using MacOS, you can also connect using a terminal application such a
 
    You will find the following files:
 
-      * ocw23-rsa (privayte key)
+      * ocw23-rsa (private key)
       * ocw23-rsa.pub (public key)
       * ocw23-rsa.ppk (private key in Putty format - for Windows only)
 
@@ -244,7 +241,7 @@ If you are using MacOS, you can also connect using a terminal application such a
 
     ```bash
     <copy>
-    ssh -i ocw23-rsa <user>@<ip-adress>
+    ssh -i ocw23-rsa <user>@<ip-address>
     </copy>
     ```
 
@@ -266,15 +263,15 @@ You must have Putty installed. [Download Putty](https://www.putty.org/)
 
 2. Unzip the file and copy the file ocw23-rsa.ppk to a folder of your choice, for example to your Windows Desktop.
 
-    ![copy ppk to dekstop](images/putty-copy-to-desktop.png)
+    ![copy ppk to desktop](images/putty-copy-to-desktop.png "Copy PPK")
 
 3. Open Putty and add ocw23-rsa.ppk to configuration settings
 
-    ![copy ppk to dekstop](images/putty-config.png)
+    ![copy ppk to desktop](images/putty-config.png "Add PPK")
 
 4. Provide connection details (optional step 2 and 3: save the settings for later use)
 
-    ![connect using putty](images/putty-connect.png)
+    ![connect using putty](images/putty-connect.png "Connect using Putty")
 
 You will be prompted for the username once you click 'Open'
 
@@ -308,7 +305,7 @@ More information on using SSH in PowerShell can be found here: [PowerShell remot
 
    You will find the following files:
 
-      * ocw23-rsa (privayte key)
+      * ocw23-rsa (private key)
       * ocw23-rsa.pub (public key)
       * ocw23-rsa.ppk (private key in Putty format - for Windows only)
 
@@ -316,7 +313,7 @@ More information on using SSH in PowerShell can be found here: [PowerShell remot
 
     ```bash
     <copy>
-    ssh -i ocw23-rsa <user>@<ip-adress>
+    ssh -i ocw23-rsa <user>@<ip-address>
     </copy>
     ```
 
@@ -349,7 +346,7 @@ You can use Windows Subsystem for Linux (WSL or WSL2) to connect to a remote ser
 
    You will find the following files:
 
-      * ocw23-rsa (privayte key)
+      * ocw23-rsa (private key)
       * ocw23-rsa.pub (public key)
       * ocw23-rsa.ppk (private key in Putty format - for Windows only)
 
@@ -365,12 +362,13 @@ You can use Windows Subsystem for Linux (WSL or WSL2) to connect to a remote ser
 
     ```bash
     <copy>
-    ssh -i ocw23-rsa <user>@<ip-adress>
+    ssh -i ocw23-rsa <user>@<ip-address>
     </copy>
     ```
 
 <hr>
 <br>
+
 ### Option 6 (Linux): Connect using Linux terminal
 
 1. Open a terminal application in Linux
@@ -395,7 +393,7 @@ You can use Windows Subsystem for Linux (WSL or WSL2) to connect to a remote ser
 
    You will find the following files:
 
-      * ocw23-rsa (privayte key)
+      * ocw23-rsa (private key)
       * ocw23-rsa.pub (public key)
       * ocw23-rsa.ppk (private key in Putty format - for Windows only)
 
@@ -411,7 +409,7 @@ You can use Windows Subsystem for Linux (WSL or WSL2) to connect to a remote ser
 
     ```bash
     <copy>
-    ssh -i ocw23-rsa <user>@<ip-adress>
+    ssh -i ocw23-rsa <user>@<ip-address>
     </copy>
     ```
 
@@ -423,7 +421,7 @@ Are you looking for the next hands-on lab to visit? Have a look at the [Session 
 
 Always know what is going on.
 
-![CloudWorld Agenda](https://www.oracle.com/content/published/api/v1.1/assets/CONT1E0D09E6A6DD4366BF066A1B7671C8CC/native?cb=_cache_2d16&channelToken=e8a0673b81ca460986a44e776a18fa0a)
+![CloudWorld Agenda](https://www.oracle.com/content/published/api/v1.1/assets/CONT1E0D09E6A6DD4366BF066A1B7671C8CC/native?cb=_cache_2d16&channelToken=e8a0673b81ca460986a44e776a18fa0a "CloudWorld Agenda")
 
 ## Visit the Oracle Community Theater and Community Lab!
 
