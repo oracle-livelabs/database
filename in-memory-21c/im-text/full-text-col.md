@@ -2,23 +2,25 @@
 
 ## Introduction
 
-Watch a preview video of creating In-Memory Column Store
+Watch a demo of using In-Memory Full Text Columns:
 
-[YouTube video](youtube:U9BmS53KuGs)
+[YouTube video](youtube:hrGefjpMLeY)
 
 Watch the video below for a walk through of the In-Memory Full Text Columns lab:
 
-[In-Memory Full Text Columns](videohub:1_ohs9hpw0)
+[In-Memory Full Text Columns](videohub:1_0vnj781i)
 
 *Estimated Lab Time:* 10 Minutes.
 
 ### Objectives
 
--   Learn how to enable In-Memory on the Oracle Database
--   Perform various queries on the In-Memory Column Store
+- Learn how to enable In-Memory on the Oracle Database
+- Perform various queries on the In-Memory Column Store
 
 ### Prerequisites
+
 This lab assumes you have:
+
 - A Free Tier, Paid or LiveLabs Oracle Cloud account
 - You have completed:
     - Get Started with noVNC Remote Desktop

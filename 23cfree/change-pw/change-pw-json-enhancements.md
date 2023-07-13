@@ -6,6 +6,9 @@ In this section we will reset the password for the hol23c user in the Oracle Dat
 
 Estimated Time: 5 minutes
 
+Watch the video below for a quick walk through of the lab.
+[Watch the video](videohub:1_yw4z73hk)
+
 ### Objectives
 
 In this lab, you will:
