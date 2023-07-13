@@ -12,7 +12,7 @@ Learn how Oracle NoSQL Database can provide a delightful developer experience wi
 
 This lab is based on data representing activity from customers using a Video on Demand streaming application. This lab walks you through the steps to create tables in Oracle NoSQL Database Cloud Service (NDCS), load data into the database, and perform basic queries. In addition, it lets you use an application that was developed by the Oracle NoSQL team based on the GraphQL API.
 
-_Estimated Time:_ 90 Minutes
+_Estimated Workshop Time:_ 90 Minutes
 
 
 ### About NoSQL database
@@ -43,6 +43,8 @@ This workshop assumes you have:
   * Programming knowledge in java, python or node.js
   * Understanding of query languages
 
+*Note: If you have a **Free Tier**  account, when your Free Trial credits expire your account will be converted to an **Always Free** account. You will not be able to conduct
+Free Tier workshops unless the Always Free environment is available.* **[Free Tier FAQ](https://www.oracle.com/cloud/free/faq.html)**
 
 ## Learn More
 
@@ -54,5 +56,3 @@ This workshop assumes you have:
 ## Acknowledgements
 * **Authors** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director NoSQL Development
 * **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, August 2022
-
-*Note: If you have a **Free Tier**  account, when your Free Trial credits expire your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available.* **[Free Tier FAQ](https://www.oracle.com/cloud/free/faq.html)**

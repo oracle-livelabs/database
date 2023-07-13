@@ -4,7 +4,7 @@
 
 This lab walks you through the steps necessary to create a proper operating environment.
 
-_Estimated Lab Time:_ 7 minutes
+_Estimated Time:_ 7 minutes
 
 ### Objectives
 
@@ -106,16 +106,18 @@ to get the Cloud Shell started.
 
 ## Task 4: Understand Credentials, and Policies
 
-**Oracle NoSQL Database Cloud Service uses Oracle Cloud Infrastructure Identity
-and Access Management to provide secure access to Oracle Cloud.** Oracle Cloud
+  1. Read the following information.
+
+    **Oracle NoSQL Database Cloud Service uses Oracle Cloud Infrastructure Identity
 Infrastructure Identity and Access Management enables you to create user accounts
+and Access Management to provide secure access to Oracle Cloud.** Oracle Cloud
 and give users permission to inspect, read, use, or manage NoSQL tables.  There are 4
 authentication methods available: API key-based, Session token-based
 (delegation tokens), Instance Principal and Resource Principal. The Oracle NoSQL Database
 SDKs allow you to provide the credentials for an application using any of these
 authentication methods. Credentials are typically associated with a specific user.
 
-Oracle NoSQL has SDKs in the following languages:  Java, Node.js, Python, Go, Spring and C#.
+    Oracle NoSQL has SDKs in the following languages:  Java, Node.js, Python, Go, Spring and C#.
 The SDKs support a configuration file as well as API interfaces that allow direct
 specification of the credential information. You can use the
 SignatureProvider API to supply your API key-based credentials to NoSQL Database. The
@@ -124,9 +126,9 @@ The Session token-based approach is similar but it adds a temporary session toke
 usually expires in an hour.   This is useful when a temporary authentication is
 required.
 
-Another way to handle authentication is with Instance and Resource Principals.
+    Another way to handle authentication is with Instance and Resource Principals.
 
-Resource principals allow you to authenticate and access Oracle Cloud Infrastructure
+    Resource principals allow you to authenticate and access Oracle Cloud Infrastructure
 resources.  A resource principal consists of a temporary session token (which
 typically is cached for 15 minutes) and secure
 credentials that enables the owner/user to authenticate to Oracle Cloud Infrastructure services.
@@ -134,14 +136,14 @@ To use them you have to set up a dynamic group and create a policy that grants t
 dynamic group access to a resource.   These are typically used when authenticating
 into the NoSQL Cloud Service from functions (NoSQL Cloud Service would be the resource).
 
-Instance Principals is a capability in Oracle Cloud Infrastructure Identity
+    Instance Principals is a capability in Oracle Cloud Infrastructure Identity
 and Access Management (IAM) that lets you make service calls from an instance.
 With instance principals, you don’t need to configure user credentials or
 rotate the credentials. Instances themselves are a principal type in IAM and
 are set up in IAM. You can think of them as an IAM service feature that enables
 instances to be authorized actors (or principals) to perform actions on service resources.
 
-Oracle NoSQL Database Cloud service has three different resource types, namely,
+    Oracle NoSQL Database Cloud service has three different resource types, namely,
 `nosql-tables`, `nosql-rows`, and `nosql-indexes`. It also has one aggregate resource
 called `nosql-family`. Policies are created that allow a group to work in certain
 ways with specific types of resources such as `nosql-tables` in a particular
@@ -149,49 +151,51 @@ compartment. All NoSQL tables belong to a defined compartment.
 In Task 1 of this Lab, we created the demonosql compartment and this is where
  we will create our tables.
 
-You can use **Instance Principals** to do the connection to NoSQL Cloud Service
+    You can use **Instance Principals** to do the connection to NoSQL Cloud Service
 as shown below in the Node.js example instead of specifying the credentials.
 Once they are set up, they are simple to use because all you need to do is call
 the appropriate authorization constructor.
 
-**NoSQL Database Node.js SDK**
-```node
-<copy>
-function createClientResource() {
-  return new NoSQLClient({
-      region: process.env.NOSQL_REGION ,
-      compartment:process.env.NOSQL_COMPID,
-      auth: {
-        iam: {
-            useInstancePrincipal: true
+    **NoSQL Database Node.js SDK**
+
+    ```node
+    <copy>
+    function createClientResource() {
+      return new NoSQLClient({
+        region: process.env.NOSQL_REGION ,
+        compartment:process.env.NOSQL_COMPID,
+          auth: {
+            iam: {
+              useInstancePrincipal: true
+          }
         }
-      }
-  });
-}
-</copy>
-```
-Also in one of our next labs we are going to be running application code and we need an
+      });
+    }
+    </copy>
+    ```
+
+   Also in one of our next labs we are going to be running application code and we need an
 instance to run that from. We will run that application using Cloud Shell
 with a delegation token.
 
-```node
-<copy>
-function createClientResource() {
-  return new NoSQLClient({
-    region: process.env.NOSQL_REGION ,
-    compartment:process.env.NOSQL_COMPID,
-    auth: {
-      iam: {
-          useInstancePrincipal: true,
-          delegationTokenProvider: process.env.OCI_DELEGATION_TOKEN_FILE
-      }
+    ```node
+    <copy>
+    function createClientResource() {
+      return new NoSQLClient({
+        region: process.env.NOSQL_REGION ,
+        compartment:process.env.NOSQL_COMPID,
+        auth: {
+          iam: {
+              useInstancePrincipal: true,
+              delegationTokenProvider: process.env.OCI_DELEGATION_TOKEN_FILE
+          }
+        }
+      });
     }
-  });
-}
-</copy>
-```
+    </copy>
+    ```
 
-You may now **proceed to the next lab.**
+   You may now **proceed to the next lab.**
 
 ## Learn More
 
