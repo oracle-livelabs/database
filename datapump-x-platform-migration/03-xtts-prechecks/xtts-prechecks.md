@@ -1,4 +1,4 @@
-# XTTS PreChecks on source Database
+# XTTS PreChecks on the Source Database
 
 ## Introduction
 

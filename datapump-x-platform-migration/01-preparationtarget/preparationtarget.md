@@ -1,4 +1,4 @@
-# Prepare target
+# Prepare the Target
 
 ## Introduction
 
