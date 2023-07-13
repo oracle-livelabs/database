@@ -45,7 +45,8 @@ This workshop assumes you have:
   * Understanding of query languages
 
 *Note: If you have a **Free Tier**  account, when your Free Trial credits expire your account will be converted to an **Always Free** account. You will not be able to conduct
-Free Tier workshops unless the Always Free environment is available.* **[Free Tier FAQ](https://www.oracle.com/cloud/free/faq.html)**
+Free Tier workshops unless the Always Free environment is available.  The Oracle NoSQL Database Cloud Service has **Always Free** access in the Phoenix region only.* 
+**[Free Tier FAQ](https://www.oracle.com/cloud/free/faq.html)**
 
 ## Learn More
 
