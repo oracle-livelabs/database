@@ -6,7 +6,7 @@ In this lab, you will create the Oracle Cloud Infrastructure (OCI) *Policies* re
 
 <if type="tenancy">**If you are not in the OCI Administrators group,** please have an OCI Administrator perform each of these tasks for you.</fi>
 
-*Estimated Lab Time:* 2 minutes
+*Estimated Time:* 2 minutes
 
 ### Objectives
 
@@ -35,14 +35,16 @@ A *Compartment* is a collection of cloud assets, including Databases, the Oracle
 
 In the *Cloud Shell*, run the following commands to create a sub-*Compartment* to the root *Compartment* for holding all the resources created by the Workshop:
 
-```bash
-<copy>
-oci iam compartment create \
-    --name [](var:oci_compartment) \
-    --description "[](var:description)" \
-    --compartment-id $OCI_TENANCY
-</copy>
-```
+1. Create Compartment
+
+    ```bash
+    <copy>
+    oci iam compartment create \
+        --name [](var:oci_compartment) \
+        --description "[](var:description)" \
+        --compartment-id $OCI_TENANCY
+    </copy>
+    ```
 
 You can think of a *Compartment* much like a database schema: a collection of tables, indexes, and other objects isolated from other schemas.  By default, a root *Compartment* (think SYSTEM schema) was created for you when your tenancy was established.  It is possible to create everything in the root *Compartment*, but Oracle recommends that you create sub-*Compartments* to help manage your resources more efficiently.
 
@@ -50,15 +52,15 @@ You can think of a *Compartment* much like a database schema: a collection of ta
 
 A *Group* is a collection of cloud users who all need the same type of access to a particular set of resources or compartment.
 
-In the *Cloud Shell*, run the following commands to create a *Group*:
+1. In the *Cloud Shell*, run the following commands to create a *Group*:
 
-```bash
-<copy>
-oci iam group create \
-    --name [](var:oci_group) \
-    --description "[](var:description)"
-</copy>
-```
+    ```bash
+    <copy>
+    oci iam group create \
+        --name [](var:oci_group) \
+        --description "[](var:description)"
+    </copy>
+    ```
 
 A *Group* is very similar to a database role.  Privileges, or in the case of OCI, *Policies* will be granted to the *Group* and cloud users can then be assigned to the cloud *Group* to inherit those *Policies*.
 
@@ -66,21 +68,23 @@ A *Group* is very similar to a database role.  Privileges, or in the case of OCI
 
 Assign the cloud *User* who will be carrying out the remaining Labs to the *Group* created in Task 3.  This could be yourself!
 
-If you are setting this up for yourself as you have Administrator access, run in Cloud Shell:
+**If you are setting this up for yourself as you have Administrator access:**
 
-```bash
-<copy>
-GROUP_OCID=$(oci iam group list --name [](var:oci_group) | jq -r .data[].id)
+1. In Cloud Shell:
 
-echo "Group OCID: $GROUP_OCID"
+    ```bash
+    <copy>
+    GROUP_OCID=$(oci iam group list --name [](var:oci_group) | jq -r .data[].id)
 
-echo "User OCID:  $OCI_CS_USER_OCID"
+    echo "Group OCID: $GROUP_OCID"
 
-oci iam group add-user --group-id $GROUP_OCID --user-id $OCI_CS_USER_OCID
-</copy>
-```
+    echo "User OCID:  $OCI_CS_USER_OCID"
 
-Otherwise, if you are an Administrator setting this up for another user.
+    oci iam group add-user --group-id $GROUP_OCID --user-id $OCI_CS_USER_OCID
+    </copy>
+    ```
+
+**If you are an Administrator setting this up for another user:**
 
 1. Find the users OCID:
     Replace `<username>` with the OCI username:

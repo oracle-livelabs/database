@@ -4,7 +4,7 @@
 
 In this lab you will explore the the Kubernetes Cluster.  You've already seen the *kube-apiserver* and *etcd* components of the *Control Plane* node, now explore the rest of the cluster to gain a better understanding of the **why** and **how** Kubernetes is an exciting technology.
 
-*Estimated Lab Time:* 10 minutes
+*Estimated Time:* 10 minutes
 
 ### Objectives
 

@@ -4,7 +4,7 @@
 
 In this lab, you use the **OraOperator** to Provision and Terminate an Oracle Autonomous Database (ADB).  This process is invaluable for DevOps Testing operations where you require a short-lived Oracle Database.
 
-*Estimated Lab Time:* 5 minutes
+*Estimated Time:* 5 minutes
 
 ### Objectives
 
@@ -83,20 +83,20 @@ Use the **OraOperator** to provision a new ADB by creating a *manifest file* tha
 
 ## Task 2: Apply the new ADB Manifest
 
-Define the new ADB database:
+1. Define the new ADB database:
 
-```bash
-<copy>
-kubectl apply -f adb_provision.yaml
-</copy>
-```
+    ```bash
+    <copy>
+    kubectl apply -f adb_provision.yaml
+    </copy>
+    ```
 
-Output:
+    Output:
 
-```text
-secret/adb-devops-admin-password created
-autonomousdatabase.database.oracle.com/adb-devops created
-```
+    ```text
+    secret/adb-devops-admin-password created
+    autonomousdatabase.database.oracle.com/adb-devops created
+    ```
 
 ## Task 3: Verify new ADB Provisioning
 
@@ -120,27 +120,29 @@ autonomousdatabase.database.oracle.com/adb-devops created
 
 ## Task 4: Delete the Provisioned ADB
 
-The ADB provisioned by the **OraOperator** is great for DevOps, after which it should be deleted.  The physical ADB will be deleted because you specified a `hardLink` between the Kubernetes resource and the database.  There is no reason to keep its ADMIN secret around, so delete everything in the adb_provision.yaml manifest... by using the manifest:
+The ADB provisioned by the **OraOperator** is great for DevOps, after which it should be deleted.  The physical ADB will be deleted because you specified a `hardLink` between the Kubernetes resource and the database.  There is no reason to keep its ADMIN secret around, so delete everything in the adb_provision.yaml manifest.
 
-```bash
-<copy>
-kubectl delete -f adb_provision.yaml
-</copy>
-```
+1. Delete the resource, using the *manifest file*:
 
-Output:
+    ```bash
+    <copy>
+    kubectl delete -f adb_provision.yaml
+    </copy>
+    ```
 
-```text
-autonomousdatabase.database.oracle.com "adb-devops" deleted
-secret "adb-devops-admin-password" deleted
-```
+    Output:
 
-*Note* that you could have also deleted each resource individually by running:
+    ```text
+    autonomousdatabase.database.oracle.com "adb-devops" deleted
+    secret "adb-devops-admin-password" deleted
+    ```
 
-```text
-kubectl delete adb adb-devops
-kubectl delete secret adb-devops-admin-password
-```
+    *Note* that you could have also deleted each resource individually by running:
+
+    ```text
+    kubectl delete adb adb-devops
+    kubectl delete secret adb-devops-admin-password
+    ```
 
 ## Task 5: Verify ADB Termination
 

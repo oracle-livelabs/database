@@ -16,7 +16,7 @@ The actions that the **OraOperator** support for the AutonomousDatabase resource
 * Stop/Start/Terminate an Autonomous Database
 * Delete the resource from the Kubernetes cluster
 
-*Estimated Lab Time:* 15 minutes
+*Estimated Time:* 15 minutes
 
 ### Objectives
 
@@ -122,34 +122,36 @@ Everything you needed to make a connection to the ADB could be obtained from Kub
 
 You've now have seen how to apply a *manifest file* and use `kubectl patch` to redefine a Kubernetes resource, but you can also edit the resource directly:
 
-```bash
-<copy>
-kubectl edit AutonomousDatabase adb-existing
-</copy>
-```
+1. Edit the resource:
 
-Find the `cpuCoreCount` and `dataStorageSizeInTBs` fields (they should both be set to 2) and change them back to 1:
+    ```bash
+    <copy>
+    kubectl edit AutonomousDatabase adb-existing
+    </copy>
+    ```
 
-In the vi editor:
+    Find the `cpuCoreCount` and `dataStorageSizeInTBs` fields (they should both be set to 2) and change them back to 1:
 
-1. Move the cursor over the `2` value for cpuCoreCount and type `x`
-2. Type `i` and `<space>` `1`, hit the `esc` key
-3. Repeat steps 1 and 2 for dataStorageSizeInTBs
-4. Type `:wq`
+    In the vi editor:
 
-![Edit ADB](images/adb_edit.png "Edit ADB")
+    1. Move the cursor over the `2` value for cpuCoreCount and type `x`
+    2. Type `i` and `<space>` `1`, hit the `esc` key
+    3. Repeat steps 1 and 2 for dataStorageSizeInTBs
+    4. Type `:wq`
 
-In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB back in a "Scaling In Progress" state, decreasing the OCPU and Storage.
+    ![Edit ADB](images/adb_edit.png "Edit ADB")
 
-Of course you can also watch it from Kubernetes:
+2. In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB back in a "Scaling In Progress" state, decreasing the OCPU and Storage.
 
-```bash
-<copy>
-kubectl get adb adb-existing -w
-</copy>
-```
+3. Of course you can also watch it from Kubernetes:
 
-Press `Ctrl-C` to break the loop
+    ```bash
+    <copy>
+    kubectl get adb adb-existing -w
+    </copy>
+    ```
+
+    Press `Ctrl-C` to break the loop
 
 ## Task 4: Role Based Access Controls (RBAC)
 

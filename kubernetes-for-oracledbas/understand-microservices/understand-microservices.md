@@ -6,7 +6,7 @@ Many Oracle DBAs may have limited or no formal exposure to *Microservices Archit
 
 This Lab provides an overview of the *Microservices Architecture* and does not include any Hands-On Activities.  If you are already familiar and comfortable with *Microservice Architecture*, please feel free to move onto the next Lab for the hands-on portion of the Workshop.
 
-*Estimated Lab Time:* 2 minutes
+*Estimated Time:* 2 minutes
 
 ### Objectives
 

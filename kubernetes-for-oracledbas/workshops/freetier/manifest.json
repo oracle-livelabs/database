@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "Intro to Microservices and Kubernetes for Oracle DBAs",
+    "workshoptitle": "Microservices and Kubernetes for an Oracle DBA",
     "help": "livelabs-help-dbmaa_us@oracle.com",
     "variables": [
         "../../variables/variables.json"

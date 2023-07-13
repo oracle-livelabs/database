@@ -6,7 +6,7 @@ You will deploy an Microservice Application which will create a new user in the 
 
 The application will be the SQL Web Developer from Oracle Rest Data Services (ORDS).
 
-*Estimated Lab Time:* 20 minutes
+*Estimated Time:* 20 minutes
 
 ### Objectives
 
@@ -26,14 +26,14 @@ In the [Access the Kubernetes Cluster](?lab=access-cluster#task3changethedefault
 
 You will use the `sqldev-web` *namespace* for your Application while the ADB resource resides in the `default` *namespace*.  This is to illustrate how different teams (Developers and DBAs) can manage their resources in their own "virtual clusters", reducing the impact they have on each other, and to allow additional security via Role Based Access Controls (*RBAC*).  
 
-To switch and verify your context:
+1. To switch and verify your context:
 
-~~~bash
-<copy>
-kubectl config use-context sqldev-web
-kubectl config get-contexts
-</copy>
-~~~
+    ~~~bash
+    <copy>
+    kubectl config use-context sqldev-web
+    kubectl config get-contexts
+    </copy>
+    ~~~
 
 ## Task 2: Create the Database Secrets
 
@@ -41,61 +41,65 @@ Your application will want to talk to the Oracle Database and to do so, just lik
 
 ### Names Resolution
 
-For the Database (Names) Resolution, copy the wallet *Secret* from the `default` *namespace* to the `sqlweb-dev` *namespace*.  This can be done with a `kubectl` one-liner:
+For the Database (Names) Resolution, copy the wallet *Secret* from the `default` *namespace* to the `sqlweb-dev` *namespace*.  
 
-~~~bash
-<copy>
-kubectl get secret adb-tns-admin -n default -o json | 
-    jq 'del(.metadata | .ownerReferences, .namespace, .resourceVersion, .uid)' | 
-    kubectl apply -n sqldev-web -f -
-</copy>
-~~~
+1. This can be done with a `kubectl` one-liner:
 
-The above command will export the `adb-tns-admin` *Secret* from the `default` *namespace* to JSON, exclude some metadata fields, and load the *Secret* back into the Kubernetes `sqldev-web` *namespace*.
+    ~~~bash
+    <copy>
+    kubectl get secret adb-tns-admin -n default -o json | 
+        jq 'del(.metadata | .ownerReferences, .namespace, .resourceVersion, .uid)' | 
+        kubectl apply -n sqldev-web -f -
+    </copy>
+    ~~~
 
-After the copy is done, you can query the new *Secret*:
+    The above command will export the `adb-tns-admin` *Secret* from the `default` *namespace* to JSON, exclude some metadata fields, and load the *Secret* back into the Kubernetes `sqldev-web` *namespace*.
 
-~~~bash
-<copy>
-kubectl get secrets -n sqldev-web`
-</copy>
-~~~
+2. Query the new *Secret*:
 
-![ADB Copy Secret](images/adb_sqldev.png "ADB Copy Secret")
+    ~~~bash
+    <copy>
+    kubectl get secrets -n sqldev-web`
+    </copy>
+    ~~~
+
+    ![ADB Copy Secret](images/adb_sqldev.png "ADB Copy Secret")
 
 ### Authentication
 
-Set some variables to assist in creating the Kubernetes *manifest file* for Authentication by using the *Secrets* and data from the AutonomousDatabase resources in the `default` *namespace*:
+1. Set some variables to assist in creating the Kubernetes *manifest file* for Authentication by using the *Secrets* and data from the AutonomousDatabase resources in the `default` *namespace*:
 
-~~~bash
-<copy>
-ADB_PWD=$(kubectl get secrets/adb-admin-password -n default --template="{{index .data \"adb-admin-password\" | base64decode}}")
+    ~~~bash
+    <copy>
+    ADB_PWD=$(kubectl get secrets/adb-admin-password -n default --template="{{index .data \"adb-admin-password\" | base64decode}}")
 
-SERVICE_NAME=$(kubectl get adb -n default -o json | jq -r .items[0].spec.details.dbName)_TP
-</copy>
-~~~
+    SERVICE_NAME=$(kubectl get adb -n default -o json | jq -r .items[0].spec.details.dbName)_TP
+    </copy>
+    ~~~
 
 ## Task 3: Start a Manifest File
 
-Start a *manifest file* for the Application Deployment.  Insert the Authentication *Secrets*:
+Start a *manifest file* for the Application Deployment.  
 
-~~~bash
-<copy>
-cat > sqldev-web.yaml << EOF
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: db-secrets
-type: Opaque
-stringData:
-  db.username: ADMIN
-  db.password: ${ADB_PWD}
-  db.service_name: ${SERVICE_NAME}
-  ords.password: ${ADB_PWD}
-EOF
-</copy>
-~~~
+1. Insert the Authentication *Secrets*:
+
+    ~~~bash
+    <copy>
+    cat > sqldev-web.yaml << EOF
+    ---
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: db-secrets
+    type: Opaque
+    stringData:
+      db.username: ADMIN
+      db.password: ${ADB_PWD}
+      db.service_name: ${SERVICE_NAME}
+      ords.password: ${ADB_PWD}
+    EOF
+    </copy>
+    ~~~
 
 ## Task 4: Create the ConfigMaps
 
@@ -107,37 +111,37 @@ A *ConfigMap* is like a *Secret* but to store non-confidential data. *Pods* can 
 
 The ORDS configuration does not store any sensitive data, so build a *manifest file* to create a *ConfigMap* of its configuration file.  The *ConfigMap* will be mounted as a file into the Container and used by the ORDS process to start the application.
 
-Append the `ords-config` *ConfigMap* to the Application Deployment *manifest file*:
+1. Append the `ords-config` *ConfigMap* to the Application Deployment *manifest file*:
 
-~~~bash
-<copy>
-cat >> sqldev-web.yaml << EOF
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: ords-config
-  labels:
-    name: ords-config
-data:
-  pool.xml: |-
-    <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-    <properties>
-    <entry key="feature.sdw">true</entry>
-    <entry key="restEnabledSql.active">true</entry>
-    <entry key="db.connectionType">tns</entry>
-    <entry key="db.tnsDirectory">/opt/oracle/ords/network/admin</entry>
-    <entry key="db.tnsAliasName">${SERVICE_NAME}</entry>
-    <entry key="db.username">ORDS_PUBLIC_USER_K8</entry>
-    <entry key="plsql.gateway.mode">proxied</entry>
-    <entry key="database.api.enabled">true</entry>
-    <entry key="jdbc.MaxLimit">50</entry>
-    <entry key="jdbc.InitialLimit">10</entry>
-    </properties>
-EOF
-</copy>
-~~~
+    ~~~bash
+    <copy>
+    cat >> sqldev-web.yaml << EOF
+    ---
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: ords-config
+      labels:
+        name: ords-config
+    data:
+      pool.xml: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+        <properties>
+        <entry key="feature.sdw">true</entry>
+        <entry key="restEnabledSql.active">true</entry>
+        <entry key="db.connectionType">tns</entry>
+        <entry key="db.tnsDirectory">/opt/oracle/ords/network/admin</entry>
+        <entry key="db.tnsAliasName">${SERVICE_NAME}</entry>
+        <entry key="db.username">ORDS_PUBLIC_USER_K8</entry>
+        <entry key="plsql.gateway.mode">proxied</entry>
+        <entry key="database.api.enabled">true</entry>
+        <entry key="jdbc.MaxLimit">50</entry>
+        <entry key="jdbc.InitialLimit">10</entry>
+        </properties>
+    EOF
+    </copy>
+    ~~~
 
 ### Liquibase ChangeLog
 
@@ -151,67 +155,69 @@ An *initContainer* is just like an regular application container, except it will
 
 The below *ConfigMap* will create two new users in the ADB: `ORDS_PUBLIC_USER_K8` and `ORDS_PLSQL_GATEWAY_K8`.  It will also grant the required permissions for them to run the SQL Developer Web application.
 
-~~~bash
-<copy>
-cat >> sqldev-web.yaml << EOF
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: liquibase-changelog
-data:
-  liquibase.sql: "liquibase update -chf changelog.sql"
-  changelog.sql: |-
-    -- liquibase formatted sql
+1. Append the *ConfigMap* to your application manifest:
 
-    -- changeset gotsysdba:1 endDelimiter:/
-    DECLARE
-        L_USER  VARCHAR2(255);
-    BEGIN
+    ~~~bash
+    <copy>
+    cat >> sqldev-web.yaml << EOF
+    ---
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: liquibase-changelog
+    data:
+      liquibase.sql: "liquibase update -chf changelog.sql"
+      changelog.sql: |-
+        -- liquibase formatted sql
+
+        -- changeset gotsysdba:1 endDelimiter:/
+        DECLARE
+            L_USER  VARCHAR2(255);
         BEGIN
-            SELECT USERNAME INTO L_USER FROM DBA_USERS WHERE USERNAME='ORDS_PUBLIC_USER_K8';
-            execute immediate 'ALTER USER "ORDS_PUBLIC_USER_K8" IDENTIFIED BY "\${ORDS_PWD}"';
-        EXCEPTION WHEN NO_DATA_FOUND THEN
-            execute immediate 'CREATE USER "ORDS_PUBLIC_USER_K8" IDENTIFIED BY "\${ORDS_PWD}"';
-        END;
+            BEGIN
+                SELECT USERNAME INTO L_USER FROM DBA_USERS WHERE USERNAME='ORDS_PUBLIC_USER_K8';
+                execute immediate 'ALTER USER "ORDS_PUBLIC_USER_K8" IDENTIFIED BY "\${ORDS_PWD}"';
+            EXCEPTION WHEN NO_DATA_FOUND THEN
+                execute immediate 'CREATE USER "ORDS_PUBLIC_USER_K8" IDENTIFIED BY "\${ORDS_PWD}"';
+            END;
+            BEGIN
+                SELECT USERNAME INTO L_USER FROM DBA_USERS WHERE USERNAME='ORDS_PLSQL_GATEWAY_K8';
+                execute immediate 'ALTER USER "ORDS_PLSQL_GATEWAY_K8" IDENTIFIED BY "\${ORDS_PWD}"';
+            EXCEPTION WHEN NO_DATA_FOUND THEN
+                execute immediate 'CREATE USER "ORDS_PLSQL_GATEWAY_K8" IDENTIFIED BY "\${ORDS_PWD}"';
+            END;
+        END;    
+        /
+        --rollback drop user "ORDS_PUBLIC_USER_K8" cascade;
+        --rollback drop user "ORDS_PLSQL_GATEWAY_K8" cascade;
+
+        -- changeset gotsysdba:2
+        GRANT CONNECT TO ORDS_PUBLIC_USER_K8;
+        ALTER USER ORDS_PUBLIC_USER_K8 PROFILE ORA_APP_PROFILE;
+        GRANT CONNECT TO ORDS_PLSQL_GATEWAY_K8;
+        ALTER USER ORDS_PLSQL_GATEWAY_K8 PROFILE ORA_APP_PROFILE;
+        ALTER USER ORDS_PLSQL_GATEWAY_K8 GRANT CONNECT THROUGH ORDS_PUBLIC_USER_K8;
+
+        -- changeset gotsysdba:3 endDelimiter:/
         BEGIN
-            SELECT USERNAME INTO L_USER FROM DBA_USERS WHERE USERNAME='ORDS_PLSQL_GATEWAY_K8';
-            execute immediate 'ALTER USER "ORDS_PLSQL_GATEWAY_K8" IDENTIFIED BY "\${ORDS_PWD}"';
-        EXCEPTION WHEN NO_DATA_FOUND THEN
-            execute immediate 'CREATE USER "ORDS_PLSQL_GATEWAY_K8" IDENTIFIED BY "\${ORDS_PWD}"';
+            ORDS_ADMIN.PROVISION_RUNTIME_ROLE (
+                p_user => 'ORDS_PUBLIC_USER_K8',
+                p_proxy_enabled_schemas => TRUE
+            );
         END;
-    END;    
-    /
-    --rollback drop user "ORDS_PUBLIC_USER_K8" cascade;
-    --rollback drop user "ORDS_PLSQL_GATEWAY_K8" cascade;
+        /
 
-    -- changeset gotsysdba:2
-    GRANT CONNECT TO ORDS_PUBLIC_USER_K8;
-    ALTER USER ORDS_PUBLIC_USER_K8 PROFILE ORA_APP_PROFILE;
-    GRANT CONNECT TO ORDS_PLSQL_GATEWAY_K8;
-    ALTER USER ORDS_PLSQL_GATEWAY_K8 PROFILE ORA_APP_PROFILE;
-    ALTER USER ORDS_PLSQL_GATEWAY_K8 GRANT CONNECT THROUGH ORDS_PUBLIC_USER_K8;
-
-    -- changeset gotsysdba:3 endDelimiter:/
-    BEGIN
-        ORDS_ADMIN.PROVISION_RUNTIME_ROLE (
-            p_user => 'ORDS_PUBLIC_USER_K8',
-            p_proxy_enabled_schemas => TRUE
-        );
-    END;
-    /
-
-    -- changeset gotsysdba:4 endDelimiter:/
-    BEGIN
-        ORDS_ADMIN.CONFIG_PLSQL_GATEWAY (
-            p_runtime_user => 'ORDS_PUBLIC_USER_K8',
-            p_plsql_gateway_user => 'ORDS_PLSQL_GATEWAY_K8'
-        );
-    END;
-    /
-EOF
-</copy>
-~~~
+        -- changeset gotsysdba:4 endDelimiter:/
+        BEGIN
+            ORDS_ADMIN.CONFIG_PLSQL_GATEWAY (
+                p_runtime_user => 'ORDS_PUBLIC_USER_K8',
+                p_plsql_gateway_user => 'ORDS_PLSQL_GATEWAY_K8'
+            );
+        END;
+        /
+    EOF
+    </copy>
+    ~~~
 
 By using a variable for the passwords, you are not exposing any sensitive information in your code.  The value for the variable will be set using environment variables in the Applications *Deployment* specification.
 
@@ -371,16 +377,18 @@ Finally, define the Application *Deployment* manifest itself.  It looks like a l
 
 ## Task 6: Deploy the Application
 
-You now have a single *manifest file* that will deploy everything you need for your application, apply it and watch it come to life:
+You now have a single *manifest file* that will deploy everything you need for your application.
 
-~~~bash
-<copy>
-kubectl apply -f sqldev-web.yaml
-kubectl get pod/sqldev-web-0 -w
-</copy>
-~~~
+1. Apply the *manifest file* and watch it come to life:
 
-![Launch Application](images/launch_app.png "Launch Application")
+    ~~~bash
+    <copy>
+    kubectl apply -f sqldev-web.yaml
+    kubectl get pod/sqldev-web-0 -w
+    </copy>
+    ~~~
+
+    ![Launch Application](images/launch_app.png "Launch Application")
 
 ## Task 7: Expose your Application
 

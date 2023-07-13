@@ -12,7 +12,7 @@ The human operator gains their system knowledge from the Subject Matter Experts 
 
 In short, human operators become extensions of the SMEs, and in this case, the Oracle Operator for Kubernetes becomes an extension of the Oracle DBA.
 
-*Estimated Lab Time:* 5 minutes
+*Estimated Time:* 5 minutes
 
 ### Objectives
 
@@ -29,13 +29,13 @@ This lab assumes you have:
 
 Kubernetes has built-in resources, or API endpoints, that usually represent a collection of concrete objects on the cluster.  You've already looked at a few of them in previous labs including *Nodes*, *Namespaces*, *Pods*, and *Deployments*.
 
-Take a look at the built-in resources available in your cluster:
+1. Take a look at the built-in resources available in your cluster:
 
-```bash
-<copy>
-kubectl api-resources
-</copy>
-```
+    ```bash
+    <copy>
+    kubectl api-resources
+    </copy>
+    ```
 
 You'll notice there doesn't appear to be anything related to an Oracle Database.  Fortunately, Kubernetes allows you to extend the capabilities of your cluster with *Custom Resource Definitions*, or *CRDs*.
 
@@ -147,17 +147,17 @@ To install the OraOperator, you will first need to install a dependency, **cert-
 
 ## Task 5: OraOperator CRDs
 
-Rerun the query which returned the `api-resources`, but this time filter it on the new **database.oracle.com** group:
+1. Rerun the query which returned the `api-resources`, but this time filter it on the new **database.oracle.com** group:
 
-```bash
-<copy>
-kubectl api-resources --api-group=database.oracle.com
-</copy>
-```
+    ```bash
+    <copy>
+    kubectl api-resources --api-group=database.oracle.com
+    </copy>
+    ```
 
-You will now see all the new *CRDs* introduced by the **OraOperator** that will be managed by the `oracle-database-operator-controller-manager`.
+    You will now see all the new *CRDs* introduced by the **OraOperator** that will be managed by the `oracle-database-operator-controller-manager`.
 
-![kubectl api-resources --api-group=database.oracle.com](images/oraoperator_crds.png "kubectl api-resources --api-group=database.oracle.com")
+    ![kubectl api-resources --api-group=database.oracle.com](images/oraoperator_crds.png "kubectl api-resources --api-group=database.oracle.com")
 
 You may now **proceed to the next lab**
 
