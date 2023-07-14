@@ -39,15 +39,15 @@ Task 1 involves granting privileges to users for accessing tables within a schem
 
     ```
     <copy>
-    GRANT SELECT, INSERT, UPDATE, DELETE ON s1.inventory_no_reservations TO u1;
+    GRANT SELECT, INSERT, UPDATE, DELETE ON c##s1.inventory_no_reservations TO c##u1;
     </copy>
     ```
 
-2. Grant schema priveledges select/insert/update/delete to u2
+2. Grant schema level priveledges select/insert/update/delete to u2
 
     ```
     <copy>
-    Grant SELECT ANY TABLE on SCHEMA s1 to u2;
+    Grant SELECT ANY TABLE on SCHEMA c##s1 to c##u2;
     </copy>
     ```
 
@@ -57,11 +57,25 @@ Task 2 focuses on testing the new schema privilege feature and comparing it with
 
 By logging in as User 1, we will verify the user and attempt to query Table 1. As expected, User 1 will not be able to access the inventory\_no\_reservations table due to the absence of schema privileges. However, when we log in as User 2, we will observe successful queries on Table 1 and also attempt to query the second table in the schema, inventory\_reservations.
 
-1. Login to user 1
+1. Grant Create Session privilege by logging into sqlplus as sysdba and then login to user 1 with the username and password you selected.
 
     ```
     <copy>
-    sqlplus "username/password"@connect_identifier
+    sqlplus / as sysdba
+    </copy>
+    ```
+
+    ```
+    <copy>
+    GRANT CREATE SESSION TO C##U1;
+    </copy>
+    ```
+
+    * Login to user 1. Make sure you `exit` the SQL session to login as different user.
+
+    ```
+    <copy>
+    sqlplus "username/password"
     </copy>
     ```
 
@@ -77,7 +91,7 @@ By logging in as User 1, we will verify the user and attempt to query Table 1. A
 
     ```
     <copy>
-    select * from s1.inventory_no_reservations;
+    select * from c##s1.inventory_no_reservations;
     </copy>
     ```
 
@@ -85,17 +99,31 @@ By logging in as User 1, we will verify the user and attempt to query Table 1. A
 
     ```
     <copy>
-    select * from s1.inventory_no_reservations;
+    select * from c##s1.inventory_reservations;
     </copy>
     ```
 
 User 1 can not access this table because they do not have schema priveledges feature enabled. Watch what happens next with user 2 who has schema priveledges enabled.
 
-2. Login to user 2
+2. Grant Create Session privilege by logging into sqlplus as sysdba and then login to user 2 with the username and password you selected.
 
     ```
     <copy>
-    sqlplus "username/password"@connect_identifier
+    sqlplus / as sysdba
+    </copy>
+    ```
+
+    ```
+    <copy>
+    GRANT CREATE SESSION TO C##U2;
+    </copy>
+    ```
+
+    * Login to user 2. Make sure you `exit` the SQL session to login as different user.
+
+    ```
+    <copy>
+    sqlplus "username/password"
     </copy>
     ```
 
@@ -111,7 +139,7 @@ User 1 can not access this table because they do not have schema priveledges fea
 
     ```
     <copy>
-    select * from s1.inventory_no_reservations;
+    select * from c##s1.inventory_no_reservations;
     </copy>
     ```
 
@@ -119,7 +147,7 @@ User 1 can not access this table because they do not have schema priveledges fea
 
     ```
     <copy>
-    select * from s1.inventory_reservations;
+    select * from c##s1.inventory_reservations;
     </copy>
     ```
 
@@ -127,9 +155,17 @@ User 1 can not access this table because they do not have schema priveledges fea
 
 1. Create the third table:
 
+    * Login to sqlplus as sys user again. Please make sure to exit the SQL session again to login as a different user.
+
     ```
     <copy>
-    CREATE TABLE s1.inventory_third_table (
+    sqlplus / as sysdba
+    </copy>
+    ```
+
+    ```
+    <copy>
+    CREATE TABLE c##s1.inventory_third_table (
       id NUMBER,
       product_name VARCHAR2(50),
       quantity NUMBER,
@@ -142,10 +178,10 @@ User 1 can not access this table because they do not have schema priveledges fea
 
     ```
     <copy>
-    INSERT INTO s1.inventory_third_table (id, product_name, quantity, budget)
+    INSERT INTO c##s1.inventory_third_table (id, product_name, quantity, budget)
     VALUES (3, 'Product E', 7, 29.99);
 
-    INSERT INTO s1.inventory_third_table (id, product_name, quantity, budget)
+    INSERT INTO c##s1.inventory_third_table (id, product_name, quantity, budget)
     VALUES (4, 'Product F', 12, 39.99);
     </copy>
     ```
@@ -154,7 +190,7 @@ User 1 can not access this table because they do not have schema priveledges fea
 
     ```
     <copy>
-    sqlplus "username/password"@connect_identifier
+    sqlplus "username/password"
     </copy>
     ```
 
@@ -170,7 +206,7 @@ User 1 can not access this table because they do not have schema priveledges fea
 
     ```
     <copy>
-    select * from s1.inventory_third_table;
+    select * from c##s1.inventory_third_table;
     </copy>
     ```
 
@@ -180,7 +216,7 @@ User 1 can not access this table because they do not have schema priveledges fea
 
     ```
     <copy>
-    sqlplus "username/password"@connect_identifier
+    sqlplus "username/password"
     </copy>
     ```
 
@@ -196,7 +232,7 @@ User 1 can not access this table because they do not have schema priveledges fea
 
     ```
     <copy>
-    select * from s1.inventory_third_table;
+    select * from c##s1.inventory_third_table;
     </copy>
     ```
 
