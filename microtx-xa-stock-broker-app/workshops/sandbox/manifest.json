@@ -1,0 +1,43 @@
+{
+  "workshoptitle": "Simplify distributed transactions with Oracle MicroTx to prevent inconsistent data and financial losses",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "About the workshop and description of the Bank and Stock-Trading application.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "This is the prerequisite for customers using the Sandbox. The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs.md"
+    },
+    {
+      "title": "Lab 1: Set Up the Environment",
+      "description": "Verify the setup of the Compute instance.",
+      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+    },
+    {
+      "title": "Lab 2: Integrate MicroTx Client Libraries with the Stock Broker Microservice",
+      "filename": "../../integrate-microtx-lib-files/integrate-microtx-lib-files.md"
+    },
+    {
+      "title": "Lab 3: Provision Autonomous Databases for Use as Resource Manager",
+      "type": "sandbox",
+      "filename": "../../adb-provision/adb-provision.md"
+    },
+    {
+      "title": "Lab 4: Deploy the Bank and Stock-Trading Application",
+      "filename": "../../deploy-stock-trading-app/deploy-stock-trading-app.md"
+    },
+    {
+      "title": "Lab 5: Trade Stocks with the Bank and Stock-Trading Application",
+      "filename": "../../run-xa-app/run-xa-app.md"
+    },
+    {
+      "title": "Need help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}

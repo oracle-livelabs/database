@@ -1,0 +1,113 @@
+{
+    "workshoptitle": "Microservices and Kubernetes for an Oracle DBA",
+    "help": "livelabs-help-dbmaa_us@oracle.com",
+    "variables": [
+        "../../variables/variables.json"
+    ],
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "The Introduction is always first. The title and contents menu title match for the Introduction.",
+            "filename": "../../introduction/introduction.md",
+            "last_reviewed": "04-July-2023"
+        },
+        {
+            "title": "Get Started",
+            "description": "Cloud Login",
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md",
+            "last_reviewed": "N/A"
+        },
+        {
+            "title": "Lab 1: Prepare the OCI Tenancy",
+            "type": "cloudworld",
+            "description": "Setup Groups, Policies, and Compartment (IAM)",
+            "filename": "../../prepare-oci/prepare-oci.md",
+            "last_reviewed": "08-July-2023"
+        },
+        {
+            "title": "Lab 2: Deploy Workshop Stack",
+            "description": "Using Oracle Resource Manager (ORM), Provision and Configure a Stack",
+            "filename": "../../deploy-stack/deploy-stack.md",
+            "last_reviewed": "08-July-2023"
+        },
+        {
+            "title": "Lab 3: Understand Microservices",
+            "description": "Overview of Microservices, comparing to familiar technologies",
+            "filename": "../../understand-microservices/understand-microservices.md",
+            "last_reviewed": "08-July-2023"
+        },
+        {
+            "title": "Lab 4: Access the Kubernetes Cluster",
+            "description": "Generate Kubeconfig",
+            "filename": "../../access-cluster/access-cluster.md",
+            "last_reviewed": "08-July-2023"
+        },
+        {
+            "title": "Lab 5: Explore the Cluster",
+            "description": "Explore the Kubernetes Cluster",
+            "filename": "../../explore-cluster/explore-cluster.md",
+            "last_reviewed": ""
+        },
+        {
+            "title": "Lab 6: Deploy the OraOperator",
+            "description": "The Oracle Operator for Kubernetes",
+            "filename": "../../deploy-oraoperator/deploy-oraoperator.md",
+            "last_reviewed": "08-July-2023"
+        },
+        {
+            "title": "Lab 7: Bind to an ADB",
+            "description": "Bind the OraOperator to the ADB",
+            "filename": "../../bind-adb/bind-adb.md",
+            "last_reviewed": "08-July-2023"
+        },
+        {
+            "title": "Lab 8: Lifecycle Operations - ADB",
+            "description": "Perform Lifecycle Operations against the ADB",
+            "filename": "../../lifecycle-adb/lifecycle-adb.md",
+            "last_reviewed": "08-July-2023"
+        },
+        {
+            "title": "Lab 9: Provision - ADB",
+            "description": "Perform Lifecycle Operations against the ADB",
+            "filename": "../../provision-adb/provision-adb.md",
+            "last_reviewed": "08-July-2023"
+        },
+        {
+            "title": "Lab 10: Deploy a Microservice Application",
+            "description": "Deploy a Microservice Application ",
+            "filename": "../../deploy-application/deploy-application.md",
+            "last_reviewed": "08-July-2023"
+        },
+        {
+            "title": "Lab 11: Clean up Infrastructure",
+            "type": "cloudworld",
+            "description": "Destroy the Infrastructure",
+            "filename": "../../teardown-stack/teardown-stack.md",
+            "last_reviewed": "08-July-2023"
+        },
+        {
+            "title": "Lab 12: Clean up OCI Tenancy",
+            "description": "Clean up Groups, Policies, and Compartment (IAM)",
+            "filename": "../../teardown-iam/teardown-iam.md",   
+            "last_reviewed": ""
+        },
+        {
+            "title": "Workshop Troubleshooting",
+            "description": "Solutions to Common Problems and Directions for Workshop",
+            "filename": "../../troubleshooting/troubleshooting.md",
+            "last_reviewed": "08-July-2023"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename": "../../cloud-world/need-help.md",
+            "last_reviewed": "N/A"
+        },
+        {
+            "title": "Other LiveLabs you might like",
+            "description": "Other LiveLabs you might like",
+            "filename": "../../other-livelabs/other-livelabs.md",
+            "last_reviewed": "08-July-2023"
+        }
+    ]
+}
