@@ -22,7 +22,7 @@ This lab assumes you have:
 
 
 ## Task 1: Inserting into SQL tables and duality views
-1. To demonstrate how the underlying base tables are populated when adding an entry into the JSON Duality View, we will first check the base table to ensure the record does not exist. Then, we will insert a record into the duality view and check the base table again. Run the following code:
+1. To demonstrate how the underlying base tables are populated when adding an entry into the JSON Duality View, we will first check the base table to ensure the record does not exist. Then, we will insert a record into the duality view and check the base table again. Copy the sql below and click **Run Script**
 
     ```
     <copy>
@@ -46,7 +46,7 @@ This lab assumes you have:
     ```
     ![adding the movie](images/little.png " ")
 
-2. In this step, we will perform the opposite operation. First, we will look at the duality view, then insert a record into the base table, and finally check the duality view for the updated record. Run the following code:
+2. In this step, we will perform the opposite operation. First, we will look at the duality view, then insert a record into the base table, and finally check the duality view for the updated record. Copy the sql below and click **Run Script**
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
@@ -64,7 +64,7 @@ This lab assumes you have:
 
 ## Task 2: Update and replace a document by ID
 
-1. In the previous lab, you learned how to insert records into a SQL table and a document into the duality view. Now, we will go one step further and update the Kids genre table using SQL. This change will be reflected in all documents that contain the Kids genre. Run the following code:
+1. In the previous lab, you learned how to insert records into a SQL table and a document into the duality view. Now, we will go one step further and update the Kids genre table using SQL. This change will be reflected in all documents that contain the Kids genre. Copy the sql below and click **Run Script**
 
     ```
     <copy>
@@ -76,7 +76,7 @@ This lab assumes you have:
 
     ![showing the genre 25 isnt there](images/no_description.png " ")
 
-2. Run the following code to update the description of the Kids genre:
+2. Let's update the description of the Kids genre. Copy the sql below and click **Run Statement**
  
     ```
     <copy>
@@ -87,7 +87,7 @@ This lab assumes you have:
     ```
     ![showing the update ](images/kids_description.png " ")
 
-3. Now, let's check the Genres table again to see the updated description. Run the following code:
+3. Now, let's check the Genres table again to see the updated description. Copy the sql below and click **Run Script**
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
@@ -98,7 +98,7 @@ This lab assumes you have:
 
     ![showing the new kids description](images/new_kids_genre.png " ")
 
-4. Next, let's examine all movies that contain the Kids genre to see the updated description. Run the following code:
+4. Next, let's examine all movies that contain the Kids genre to see the updated description. Copy the sql below and click **Run Script**
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
@@ -107,7 +107,7 @@ This lab assumes you have:
     ```
     ![showing all the movies with the kids genre](images/updated_kids_description.png " ")
 
-5. Finally, since we made an update via an SQL INSERT statement, let's insert a record via the Duality View. We will add a description to the Family genre. First, check the current description. Run the following code:
+5. Finally, since we made an update via an SQL INSERT statement, let's insert a record via the Duality View. We will add a description to the Family genre. First, check the current description. Copy the sql below and click **Run Script**
 
     ```
     <copy>
@@ -116,7 +116,7 @@ This lab assumes you have:
     ```
     ![checking for a description in the family genre](images/fam_description.png " ")
 
-6. Update the Genres Duality View and add the description by running the following code:
+6. Update the Genres Duality View and add the description for the Family genre. Copy the sql below and click **Run Script**
     ```
     <copy>
     UPDATE GENRES_DV g set g.data = json_transform(data, SET '$.genre_description' = 'Family: Heartwarming and inclusive entertainment for all ages. Dive into a world of love, laughter, and togetherness as you embark on delightful adventures and celebrate the power of family bonds.') WHERE g.data.genre_name = 'Family';
@@ -124,7 +124,7 @@ This lab assumes you have:
     ```
     ![adding a genre description to family](images/family_update.png " ")
 
-7. Lastly, let's check the Duality Views containing the Family genre to see the updated description. Run the following code:
+7. Lastly, let's check the Duality Views containing the Family genre to see the updated description. Copy the sql below and click **Run Script**
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
