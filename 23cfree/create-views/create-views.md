@@ -25,7 +25,7 @@ This lab assumes you have:
 ## Task 1: Create the duality views
 
 
-1. Create the `GENRES_DV` duality view. You can either click the trash to clear the worksheet or delete what is there before pasting the code below. Click the **Run** button.
+1. Create the `GENRES_DV` duality view. You can either click the trash to clear the worksheet or delete what is there before pasting the code below. Copy the sql below and click **Run Statement**
 
     ```
     <copy>
@@ -40,7 +40,7 @@ This lab assumes you have:
     ```
 	![Creating the genre view](images/genre_dv.png " ")
 
-2. The next view we will create the `MOVIE_DETAILS_DV` duality view. Since this is for movie details, want them creating new movies as they become available  so we set those to @insert, @update, @delete. You can either click the trash to clear the worksheet or delete what is there before pasting the code below. Click the **Run** button.
+2. The next view we will create the `MOVIE_DETAILS_DV` duality view. Since this is for movie details, want them creating new movies as they become available  so we set those to @insert, @update, @delete. You can either click the trash to clear the worksheet or delete what is there before pasting the code below. Copy the sql below and click **Run Statement**
 
 	```
 	<copy>
@@ -70,7 +70,7 @@ This lab assumes you have:
 
 
 ## Task 2: Adding to our movie schema
-1. Insert a new genre into the `GENRES_DV` table to include kid-friendly movies. Use the following SQL script: Copy the sql below and click the **Run** button.
+1. Insert a new genre into the `GENRES_DV` table to include kid-friendly movies. Use the following SQL script: Copy the sql below and click **Run Statement**
 
 	```
 	<copy>
@@ -114,7 +114,7 @@ This lab assumes you have:
 
 3. Populating a duality view automatically updates the data shown in related duality views by updating their underlying tables. For example, inserting documents into the `MOVIES_DV` duality view updates both the `MOVIE_DETAILS` table and the movies to genre mappings table.
 
-To verify the changes, you can list the contents of the `MOVIES_DV` and `GENRES_DV` duality views. These views are based on the `MOVIES_DETAILS` and genres tables, respectively. Use the following SQL script:
+    To verify the changes, you can list the contents of the `MOVIES_DV` and `GENRES_DV` duality views. These views are based on the `MOVIES_DETAILS` and genres tables, respectively. Copy the sql below and click **Run Script**:
 
     ```
     <copy>
@@ -151,12 +151,12 @@ To verify the changes, you can list the contents of the `MOVIES_DV` and `GENRES_
     ```
     ![showing no document](images/rat_etag.png " ")
 
-3. This shows us the current etage is, "etag" : "6BC843789BC84C54723E8DE208B3168C". Lets replace the full document and replace the summary and genres details.
+3. This shows us the current etage is, "etag" : "E5AB725AD046CA8BE4AA301E08CB4329". Lets replace the full document and replace the summary and genres details.
     ```
     <copy>
 
     UPDATE movies_dv
-        SET data = ('{"etag" : "6BC843789BC84C54723E8DE208B3168C",
+        SET data = ('{"etag" : "E5AB725AD046CA8BE4AA301E08CB4329",
                 "movie_id" : 4005,
                 "title" : "Ratatouille",
                 "budget" : 150000000,
@@ -198,7 +198,7 @@ To verify the changes, you can list the contents of the `MOVIES_DV` and `GENRES_
     SELECT json_serialize(data PRETTY) FROM movies_dv m WHERE m.data.movie_id= 4005;
     </copy>
     ```
-    We can see the genres, Family, Animation, Kids, and Adventure along with the a new etag of 212D1F6865F6FD0BAB515DD763DA57C3.
+    We can see the genres, Family, Animation, Kids, and Adventure along with the a new etag of 03D7F05ED195CFF7728D568AC069C909.
 
     ![showing the newly created document](images/new_etag.png " ")
 
