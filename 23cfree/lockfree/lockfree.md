@@ -164,6 +164,6 @@ Note: Using the same 3 windows please `Ctrl+C` to get out of session hangs.
 
 ## Acknowledgements
 
-* **Author(s)** - Blake Hendricks, Database Product Manager
+* **Author(s)** - Blake Hendricks, Product Manager
 * **Contributor(s)** - Vasudha Krishnaswamy, Russ Lowenthal
-* **Last Updated By/Date** - 6/21/2023
+* **Last Updated By/Date** - 7/17/2023

@@ -17,11 +17,9 @@ Estimated Time: 10 minutes
 * Compare schema privileges with select grants and their limitations.
 * Observe the impact of schema privileges on user table access.
 * Compare user access capabilities with and without schema privileges.
-* Verify user access by logging in as different users and querying tables.
 * Demonstrate user access restrictions to a newly created table based on schema privileges.
 * Explore the benefits of lock-free reservations for performance and user experience.
 * Differentiate regular tables from lock-free reservation tables.
-* Set the stage for future exploration of the Lock-Free Reservation feature.
 
 ### Prerequisites
 
