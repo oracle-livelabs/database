@@ -58,32 +58,39 @@ This labs assumes you have:
     </copy> 
     ```
 
-2. Next, let's create a new user named developer and grant the right privileges for getting started:
+2. Next, let's edit hol23c and grant the right privileges for getting started:
 
     ```
     <copy>
-    create user developer identified by "free";
-    alter user developer quota unlimited on users; 
-    grant DB_DEVELOPER_ROLE to developer; 
-    grant execute on javascript to developer;
-    </copy>
-    ```
-
-3. Create the user and grant privileges
-    ```
-    <copy> 
-    grant DB_DEVELOPER_ROLE to developer;
-    grant execute on javascript to developer; 
+    sqlplus / as sysdba
+    alter session set container = freepdb1;
     </copy>
     ```
 
 4. Create the directory to access filesystem where we'll download our ES Modules
     ```
-    <copy> 
-    create directory mle_dir as '/home/oracle/mle';
-    grant read on directory mle_dir to developer; 
+    <copy>
+    grant DB_DEVELOPER_ROLE to hol23c; 
+    grant execute on javascript to hol23c;
     </copy>
     ```
+
+
+5. Create the directory to access filesystem where we'll download our ES Modules
+    ```
+    <copy> 
+    create directory mle_dir as '/home/oracle/mle';
+    grant read on directory mle_dir to hol23c; 
+    </copy>
+    ```
+
+6. Exit SQL
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+    
 
 ## Task 3: Installing the Chance.js ES Module
 For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.com/package/npm/chance) module from [Victor Quinn](https://www.victorquinn.com/about/) under [MIT License](https://en.wikipedia.org/wiki/MIT_License). This module is really interesting when working on data as it provides _numerous_ ways to "generate random numbers, characters, strings, names, addresses, dice, and pretty much anything else"; in brief 100+ new data generators.
@@ -96,35 +103,43 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     </copy>
     ```
 
-2. And now connect as a developer, run 
+2. And now connect as a hol23c, run 
+    ```
+    <copy>
+    sqlplus hol23c/'YourPassword'@freepdb1;
+    </copy>
+    ```
+
+3. And now connected as `hol23c`, run 
     ```
     <copy>
     SET VERIFY OFF
     </copy>
     ```
 
-3. And now connected as `developer`, run
+4. And now connected as `hol23c`, run 
     ```
     <copy>
     SET DEFINE OFF
     </copy>
-    ```  
+    ```
 
-4. creates the MLE module named chance_module
+5. creates the MLE module named chance_module
     ```
     <copy>
     create or replace mle module chance_module language javascript version '1.1.11' using bfile( mle_dir, 'chance.js' );
+    /
     </copy>
     ```  
 
-5. creates the corresponding MLE environment that will help for managing dependencies at runtime
+6. creates the corresponding MLE environment that will help for managing dependencies at runtime
     ```
     <copy>
     create or replace mle env chance_module_env imports ('chance' module chance_module);
     </copy>
     ```
 
-6. creates a new 'extended' module that will export properly the functions for future usage in PL/SQL
+7. creates a new 'extended' module that will export properly the functions for future usage in PL/SQL
     ```
     <copy>
     create or replace mle module chance_extended language javascript version '1.1.11' as
