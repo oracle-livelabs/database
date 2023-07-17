@@ -2,13 +2,13 @@
 
 ## Introduction
 
-Watch a preview video of creating In-Memory Column Store
+Watch a preview video of using Automatic Data Optimization:
 
-[YouTube video](youtube:U9BmS53KuGs)
+[YouTube video](youtube:m4Jiu9WTXPk)
 
 Watch the video below for a walk through of the Automatic Data Optimization lab:
 
-[Automatic Data Optimization](videohub:1_ohs9hpw0)
+[Automatic Data Optimization](videohub:1_wd5fhmfp)
 
 *Estimated Lab Time:* 10 Minutes.
 

@@ -27,7 +27,7 @@ This lab assumes you have:
     ```
     [FREE:oracle@hol23cfdr:~]$ <copy>. oraenv</copy>
      ORACLE_SID = [FREE] ? FREE
-     The Oracle base has been set to /opt/oracle
+     The Oracle base has been set to /opt/oracle OR The Oracle base remains unchanged with value /opt/oracle.
     [FREE:oracle@hol23cfdr:~]$
 		```
 
