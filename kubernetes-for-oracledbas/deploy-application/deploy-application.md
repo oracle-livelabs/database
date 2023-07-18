@@ -425,6 +425,7 @@ Only one *replica* was created, which translates to the single *Pod* `sqldev-web
         - name: http
           port: 80
           targetPort: 8080
+          protocol: TCP
     EOF
     </copy>
     ```
@@ -465,7 +466,7 @@ The *Service* exposed the application to the Kubernetes Cluster, for you to acce
               service:
                 name: sqldev-web
                 port:
-                  number: 443
+                  name: http
     EOF
     </copy>
     ```
@@ -475,7 +476,14 @@ The *Service* exposed the application to the Kubernetes Cluster, for you to acce
     ```bash
     <copy>
     kubectl apply -f sqldev-web-ingress.yaml
-    kubectl get ingress
+    </copy>
+    ```
+
+3. Watch the `ingress` resource until a Public IP is available:
+
+    ```bash
+    <copy>
+    kubectl get ingress -w
     </copy>
     ```
 
