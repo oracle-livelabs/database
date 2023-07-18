@@ -1,62 +1,47 @@
 {
-  "workshoptitle": "Hitchhiker's Guide for Upgrading to Oracle Database 19c",
-  "support": "https://community.oracle.com/tech/developers/categories/database-19c",
+  "workshoptitle": "Data Pump Cross-Platform Migration",
+  "support": "https://community.oracle.com/mosc/categories/oracle_database",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
-      "description": "The Introduction to Upgrade to 19c Workshop.",
-      "filename": "../../introduction/introduction.md"
+      "description": "Introduction to Transportable Tablespaces Cross Platform Upgrade to 21c Workshop.",
+      "filename": "../../00-introduction/introduction.md"
     },
     {
-      "title": "Lab 1: Environment Setup",
-      "description": "Verify Setup of compute instance",
-      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-novnc.md"
+      "title": "Lab 1: Prepare the Target",
+      "description": "Adding a PDB to the Target CDB",
+      "filename": "../../01-preparationtarget/preparationtarget.md"
     },
     {
-      "title": "Lab 2: Initialize Environment",
-      "description": "Initialize Environment",
-      "filename": "../../initialize-environment/initialize-environment.md"
+      "title": "Lab 2: Prepare the Source",
+      "description": "Preparing the source database for XTTS usage",
+      "filename": "../../02-preparationsource/preparationsource.md"
     },
     {
-      "title": "Lab 3: Generate AWR Snapshot",
-      "filename": "../../awr-snapshot/awr-snapshot.md"
+      "title": "Lab 3: Perform XTTS PreChecks on Source database",
+      "description": "Summary of some pre checks to execute on Source database",
+      "filename": "../../03-xtts-prechecks/xtts-prechecks.md"
     },
     {
-      "title": "Lab 4: Capture and Preserve SQL",
-      "filename": "../../capture-sql/capture-sql.md"
+      "title": "Lab 4: XTTS Prepare Phase",
+      "description": "The prepare phase ",
+      "filename": "../../04-xtts-prepare-phase/xtts-prepare-phase.md"
     },
     {
-      "title": "Lab 5: AutoUpgrade",
-      "filename": "../../upgrade/upgrade-to-19c.md"
+      "title": "Lab 5: XTTS Roll Forward Phase",
+      "description": "The roll forward phase ",
+      "filename": "../../05-xtts-rollforward-phase/xtts-rollforward-phase.md"
     },
     {
-      "title": "Lab 6: AWR Compare Report",
-      "filename": "../../awr-compare/awr-compare.md"
+      "title": "Lab 6: XTTS Transport Phase",
+      "description": "The transport phase ",
+      "filename": "../../06-xtts-transport-phase/xtts-transport-phase.md"
     },
     {
-      "title": "Lab 7: SQL Performance Analyzer",
-      "filename": "../../sql/sql-perf-analyzer.md"
-    },
-    {
-      "title": "Lab 8: SQL Plan Management",
-      "filename": "../../sql/sql-plan-mgmt.md"
-    },
-    {
-      "title": "Lab 9: SQL Tuning Advisor",
-      "filename": "../../sql/sql-tuning-advisor.md"
-    },
-    {
-      "title": "Lab 10: Plugin UPGR into CDB2",
-      "filename": "../../upgrade/plugin-upgr-cdb2.md"
-    },
-    {
-      "title": "Lab 11: Transportable Export/Import",
-      "filename": "../../migrate-ftex/migrate-ftex.md"
-    },
-    {
-      "title": "Lab 12: Unplug Plug Upgrade",
-      "filename": "../../upgrade/unplug-plug-upgr.md"
+      "title": "Lab 7: Hint and Check",
+      "description": "To keep in mind",
+      "filename": "../../07-checks/checks.md"
     },
     {
       "title": "Need Help?",
