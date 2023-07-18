@@ -66,13 +66,19 @@ In the [Bind to an ADB](?lab=bind-adb) Lab, you redefined the `adb-existing` res
     </copy>
     ```
 
-4. Connect to the ADB via SQL*Plus:
+4. Retrieve the `SERVICE_NAME` from the ADB resource and save to an environment variable:
 
     ```bash
     <copy>
     SERVICE_NAME=$(kubectl get adb -o json | jq -r .items[0].spec.details.dbName)_TP
+    </copy>
+    ```
 
-    sqlplus admin@$SERVICE_NAME
+5. Connect to the ADB via SQL*Plus:
+
+    ```bash
+    <copy>
+    sqlplus admin/$ADB_PWD@$SERVICE_NAME
     </copy>
     ```
 
@@ -228,7 +234,7 @@ However, in the next Tasks, you will be using an in-built *Service Account* call
 
     ```bash
     <copy>
-    kubectl apply -f adb_role.yaml
+    kubectl apply -f adb_rbac.yaml
     </copy>
     ```
 

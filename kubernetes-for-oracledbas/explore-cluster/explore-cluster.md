@@ -51,6 +51,11 @@ This lab assumes you have:
     ```bash
     <copy>
     kubectl exec -it your-pod -- /bin/bash -c "kill 1"
+    </copy>
+    ```
+
+    ```bash
+    <copy>
     kubectl get pod your-pod -o wide
     </copy>
     ```
@@ -107,7 +112,7 @@ If you are familiar with running containerised applications on your Desktop, thi
     <copy>
     NODE_IP=$(kubectl get nodes \
       -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}')
-    
+
     kubectl debug node/$NODE_IP -it --image=oraclelinux:8
     </copy>
     ```
@@ -293,7 +298,7 @@ In *Task 1* when you caused an unrecoverable failure of `your-pod` the applicati
     Re-query your *replica*:
 
     ```bash
-    <copy>        
+    <copy>
     kubectl get pod -l "tier=frontend"
     </copy>
     ```
@@ -311,7 +316,7 @@ In *Task 1* when you caused an unrecoverable failure of `your-pod` the applicati
     kubectl scale --replicas=2 replicaset/your-pod-replica
     kubectl get pod -l "tier=frontend"
     </copy>
-    ```  
+    ```
 
     Now you'll see two *Pods* giving your application higher availability.
 
@@ -323,7 +328,7 @@ In *Task 1* when you caused an unrecoverable failure of `your-pod` the applicati
     <copy>
     kubectl delete -f your-pod-replica.yaml
     </copy>
-    ```  
+    ```
 
 ## Task 4: Deployment, StatefulSet, DaemonSet
 
@@ -377,8 +382,15 @@ While running *Pods* is at the heart of Kubernetes, it is uncommon to run them d
     You are going to upgrade `nginx` from `1.14.2` to `1.25.1`.  This will show the power of the *Deployment* and you are encouraged to try the same thing with the *ReplicaSet* to understand the additional functionality a *Deployment* brings.  Use the Linux `watch` command so you don't miss out on the action:
 
     ```bash
+    <copy>
     sed -i s/"1.14.2"/"1.25.1"/g your-pod-deployment.yaml
+    </copy>
+    ```
+
+    ```bash
+    <copy>    
     kubectl apply -f your-pod-deployment.yaml && watch -n 1 -d kubectl get pod -l "tier=frontend"
+    </copy>
     ```
 
     If the `watch` was quick enough, you would have seen that the *Deployment* caused the upgrade to be rolled out.  It ensured that the specified number of `replica` were always available, replacing *Pods* with the older `nginx` with *Pods* running the newer version in a graceful manner.

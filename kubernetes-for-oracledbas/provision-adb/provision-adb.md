@@ -110,7 +110,7 @@ Use the **OraOperator** to provision a new ADB by creating a *manifest file* tha
 
     Press `Ctrl-C` to break the loop
 
-2. In the OCI Console, navigate to Oracle Database -> Autonomous Database.  
+2. In the OCI Console, navigate to Oracle Database -> Autonomous Database.
 
     ![Navigate to ADB](images/adb_navigation.png "Navigate to ADB")
 
@@ -146,17 +146,7 @@ The ADB provisioned by the **OraOperator** is great for DevOps, after which it s
 
 ## Task 5: Verify ADB Termination
 
-1. Watch the ADB being terminated from Kubernetes:
-
-    ```bash
-    <copy>
-    kubectl get adb adb-devops -w
-    </copy>
-    ```
-
-    Press `Ctrl-C` to break the loop
-
-2. In the OCI Console, navigate to Oracle Database -> Autonomous Database.  
+1. In the OCI Console, navigate to Oracle Database -> Autonomous Database.
 
     ![Navigate to ADB](images/adb_navigation.png "Navigate to ADB")
 
