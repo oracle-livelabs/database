@@ -1,10 +1,4 @@
 {  
-  ## CSS style to remove whitespaces from images in tables
-  
-  .image-table img {
-  display: block;
-  margin: 0 auto;
-  }
   "workshoptitle": "Patch Me If You Can",
   "support": "https://community.oracle.com/tech/developers/categories/database-19c",
   "help": "livelabs-help-db_us@oracle.com",

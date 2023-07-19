@@ -1,3 +1,9 @@
+
+.image-table img {
+display: block;
+margin: 0 auto;
+}
+
 # Lab 6:  Final Checks
 
 ## Introduction 
