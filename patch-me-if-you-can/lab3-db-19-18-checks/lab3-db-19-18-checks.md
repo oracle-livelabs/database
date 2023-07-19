@@ -334,6 +334,8 @@ Then execute the root.sh script:
 
     ![executing root.sh](./images/root-sh.png " ")
 
+    When you open the log file you'll see what the root.sh script did:
+    ![root.sh log file](./images/root-sh-log.png " ")
 
 
 3. Exit from root </br>
