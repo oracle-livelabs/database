@@ -176,12 +176,12 @@ Now you see no difference. But PERL updates get delivered with Release Updates s
     </copy>
     ```
 
-{: .image-table}
-  | 19.18.0 Home | 19.19.0 Home |
-  | :------------: | :------------: |
-  |![lspatches](./images/listorderedinactivepatches-18.png " ")|![lspatches](./images/listorderedinactivepatches-19.png " ")|
-  | Inactive RU/CPU 34786990 is a leftover from the previous cleanup where you removed all inactive patches except the last one | But what is "Inactive RU/CPU 29517242"?  Remember, you first unzipped/installed the 19.3.0.0 base release. This bug is just the tracker for the 19.3.0.0 code line.|
-  {: title="19.18 and 19.19 listorderedinactivepatches "}
+    {: .image-table}
+    | 19.18.0 Home | 19.19.0 Home |
+    | :------------: | :------------: |
+    |![lspatches](./images/listorderedinactivepatches-18.png " ")|![lspatches](./images/listorderedinactivepatches-19.png " ")|
+    | Inactive RU/CPU 34786990 is a leftover from the previous cleanup where you removed all inactive patches except the last one | But what is "Inactive RU/CPU 29517242"?  Remember, you first unzipped/installed the 19.3.0.0 base release. This bug is just the tracker for the 19.3.0.0 code line.|
+    {: title="19.18 and 19.19 listorderedinactivepatches "}
 
 
 
