@@ -1,4 +1,4 @@
-<link href="table-style.css" rel="stylesheet"></link> 
+<link href="./table-style.css" rel="stylesheet"></link> 
 
 # Lab 6:  Final Checks
 
