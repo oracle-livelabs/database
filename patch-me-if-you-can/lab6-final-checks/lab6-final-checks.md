@@ -1,9 +1,4 @@
-``` {css, echo=FALSE}
-  .image-table img {
-    display: block;
-    margin: 0 auto;
-  }
-```
+<link href="./table-style.css" rel="stylesheet"></link> 
 
 
 # Lab 6:  Final Checks
