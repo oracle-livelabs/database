@@ -1,6 +1,3 @@
-<link href="./table-style.css" rel="stylesheet"></link> 
-
-
 # Lab 6:  Final Checks
 
 ## Introduction 
@@ -177,7 +174,6 @@ Now you see no difference. But PERL updates get delivered with Release Updates s
     </copy>
     ```
 
-{: .image-table}
 | 19.18.0 Home | 19.19.0 Home |
 | :------------: | :------------: |
 |![lspatches](./images/listorderedinactivepatches-18.png " ")|![lspatches](./images/listorderedinactivepatches-19.png " ")|
