@@ -20,7 +20,7 @@ This labs assumes you have:
 * All previous labs sucessfully completed 
 * SQL Developer Web 23.1 or a comptatible tool for running SQL statements
 
-## Task 1: Connecting to your database user
+## Task 1: Connect to your database user
 
 1. Your browser should still be open, if not just open a new one. If running in a Sandbox go to Activities and then at the top click on new window. If Chrome is not running then click on Chrome.
 
@@ -92,7 +92,7 @@ This labs assumes you have:
     ```
     
 
-## Task 3: Installing the Chance.js ES Module
+## Task 3: Install Chance.js ES Module
 For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.com/package/npm/chance) module from [Victor Quinn](https://www.victorquinn.com/about/) under [MIT License](https://en.wikipedia.org/wiki/MIT_License). This module is really interesting when working on data as it provides _numerous_ ways to "generate random numbers, characters, strings, names, addresses, dice, and pretty much anything else"; in brief 100+ new data generators.
 
 
@@ -110,14 +110,14 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     </copy>
     ```
 
-3. And now connected as `hol23c`, run 
+3. Now that you're connected as `hol23c`, run 
     ```
     <copy>
     SET VERIFY OFF
     </copy>
     ```
 
-4. And now connected as `hol23c`, run 
+4. Now that you're connected as `hol23c`, run 
     ```
     <copy>
     SET DEFINE OFF
@@ -198,7 +198,7 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     </copy>
     ```
 
-## Task 4: Integrating the SQL engine with the JavaScript MLE using PL/SQL functions
+## Task 4: Lets intergrate the SQL engine with the JavaScript MLE using PL/SQL functions
 Installing a PL/SQL package to make Chance functions accessible in SQL
 
 1. See how the chance module env MLE environment is being used so that dependencies resolution goes well
@@ -414,7 +414,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     </copy>
     ```
 
-## Task 5: Using Chance.js functions in SQL
+## Task 5: Chance.js functions in SQL
 
 1. Generate a random string
     ```
@@ -487,7 +487,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     ```
     function "date" return date as mle module chance_extended env chance_module_env signature 'chance.date';
     function "date"( p_doc in json ) return varchar2 as mle module chance_extended env chance_module_env signature 'chance.date';
-    function "date"( p_doc in json, p_will_be_date in boolean ) return date as mle module chance_extended env chance_module_env signature 'chance.date'; 
+    function "date"( p_doc in json, p_will_be_date in boolean ) return date as mle module chance_extended env chance_module_env signature 'chance.date';
     ```
 
 11. This one will help
@@ -514,7 +514,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     </copy>
     ```
 
-## Task 6: Using extended Chance.js functions in SQL
+## Task 6: Extended Chance.js functions in SQL
 If you've taken a look at the extended MLE module above, you may have seen some additional code. In fact, while looking for JavaScript data generators, I found out that Fony.js (MIT License) from [Safia Abdalla](https://github.com/captainsafia) provided an interesting concept of `JSON template`. So I've decided to integrate it and improve it to benefit from the additional possibilities offered by `Chance.js` in terms of generator customization using a JSON document as a parameter. The result is that the `template()` function can now be used to generate random JSON documents based on JSON templates!
 
 1. Generate a JSON document containing tags as an array of 3 words
