@@ -26,11 +26,18 @@ In the [Access the Kubernetes Cluster](?lab=access-cluster#task3changethedefault
 
 You will use the `sqldev-web` *namespace* for your Application while the ADB resource resides in the `default` *namespace*.  This is to illustrate how different teams (Developers and DBAs) can manage their resources in their own "virtual clusters", reducing the impact they have on each other, and to allow additional security via Role Based Access Controls (*RBAC*).
 
-1. To switch and verify your context:
+1. Switch to `sqldev-web` context:
 
     ```bash
     <copy>
     kubectl config use-context sqldev-web
+    </copy>
+    ```
+
+1. Verify context:
+
+    ```bash
+    <copy>
     kubectl config get-contexts
     </copy>
     ```
@@ -379,14 +386,23 @@ Finally, define the Application *Deployment* manifest itself.  It looks like a l
 
 You now have a single *manifest file* that will deploy everything you need for your application.
 
-1. Apply the *manifest file* and watch it come to life:
+1. Apply the *manifest file*:
 
     ```bash
     <copy>
     kubectl apply -f sqldev-web.yaml
+    </copy>
+    ```
+
+2. Watch the *Pod* come to life:
+
+    ```bash
+    <copy>
     kubectl get pod/sqldev-web-0 -w
     </copy>
     ```
+
+    Press `Ctrl-C` to break the loop
 
     ![Launch Application](images/launch_app.png "Launch Application")
 
@@ -430,11 +446,18 @@ Only one *replica* was created, which translates to the single *Pod* `sqldev-web
     </copy>
     ```
 
-2. Apply the *Service* manifest, and query your *Namespace*:
+2. Apply the *Service* manifest:
 
     ```bash
     <copy>
     kubectl apply -f sqldev-web-service.yaml
+    </copy>
+    ```
+
+3. Query your *Namespace* to view the *Service*:
+
+    ```bash
+    <copy>
     kubectl get all
     </copy>
     ```
@@ -487,15 +510,35 @@ The *Service* exposed the application to the Kubernetes Cluster, for you to acce
     </copy>
     ```
 
+    Press `Ctrl-C` to break the loop
+
     ![Application Ingress](images/app_ingress.png "Application Ingress")
 
-## Task 9: Access Microservice Application
+## Task 9: Access the Microservice Application
 
 In the output from the Ingress, copy the IP and visit: `http://<IP>/ords/sql-developer`:
 
 ![Application Login](images/app_login.png "Application Login")
 
 Log into your Application and Explore!
+
+## Task 10: Delete the Microservice Application
+
+While you could delete the individual resources manually, or by using the *manifest file*, another way to delete this Microservice Application is to delete the *namespace* it is deployed in.
+
+1. Delete the `sqldev-web` *Namespace*:
+
+    ```bash
+    <copy>
+    kubectl delete namespace sqldev-web
+    </copy>
+    ```
+
+    ![kubectl delete namespace sql-dev](images/delete_namespace.png "kubectl delete namespace sql-dev")
+
+2. Refresh your browser accessing the application:
+
+    ![Application Down](images/FourOhFour.png "Application Down")
 
 You may now **proceed to the next lab**
 
