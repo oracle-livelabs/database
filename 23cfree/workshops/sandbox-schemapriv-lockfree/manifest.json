@@ -9,7 +9,7 @@
       },
       { 
       
-        "title": "Get Started",
+        "title": "Get Started!",
         "description": "Verify Setup of compute instance",
         "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
       },
