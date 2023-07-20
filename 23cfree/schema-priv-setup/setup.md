@@ -26,17 +26,105 @@ In order to do this workshop you need
 
 Task 1 involves creating the users. By executing the provided SQL statements, we will create User 1 and User 2, each with their respective passwords. These users will be used for various tasks in the upcoming labs.
 
-1. Create two users
+1. The first step is to get to a command prompt. If you need to open a terminal and you are running in a Sandbox environment click on Activities and then Terminal.
 
-    * Create schema1, user 1 and user 2. Make sure to use a unique username and whatever password you want to select
+    ![Access Terminal](images/open-terminal.png "Terminal")
+
+2. Setup database users and environment
+
+    * Login to sqlplus
+    ```
+    <copy>
+    sqlplus / as sysdba
+    </copy>
+    ```
+    ![Access Terminal](images/connect-db-sysdba1.png "Terminal")
+
+    * Switch session from container database to pluggable database 1
+    ```
+    <copy>
+    alter session set container = FREEPDB1;
+    </copy>
+    ```
+
+    ![Access Terminal](images/alter-session1.png "Terminal")
+
+
+    * Change system user password
 
     ```
     <copy>
-    CREATE USER c##s1 IDENTIFIED BY password1;
+    alter user system identified by Welcome123;
+    </copy>
+    ```
+    ![Access Terminal](images/alter-user.png "Terminal")
 
-    CREATE USER c##u1 IDENTIFIED BY password1;
 
-    CREATE USER c##u2 IDENTIFIED BY password2;
+    * Exit the session
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
+    * Login to system user in pdb1
+
+    ```
+    <copy>
+    sqlplus system/Weclome123@FREEPDB1
+    </copy>
+    ```
+
+3. Create two users
+
+    * Login to system user in pdb1
+
+    ```
+    <copy>
+    sqlplus system/Welcome123@FREEPDB1
+    </copy>
+    ```
+
+    * Create schema1, user 1 and user 2. You can use whatever password you want to select!
+
+    ```
+    <copy>
+    CREATE USER s1 IDENTIFIED BY Welcome123;
+    </copy>
+    ```
+
+    ```
+    <copy>
+    CREATE USER u1 IDENTIFIED BY Welcome123;
+    </copy>
+    ```
+
+    ```
+    <copy>
+    CREATE USER u2 IDENTIFIED BY Welcome123;
+    </copy>
+    ```
+
+    * Provide the roles and priveledges to user 1 and 2 for this lab setup like so:
+
+    ```
+    <copy>
+    GRANT CONNECT to u1;
+    GRANT CREATE SESSION TO u1;
+    </copy>
+    ```
+
+    ```
+    <copy>
+    GRANT CONNECT to u2;
+    </copy>
+    ```
+
+    * You can test connection to users as shown below. Make sure to exit or reconnect to system user shown in step 2 above for the next task.
+
+    ```
+    <copy>
+    CONNECT u1/Welcome123@FREEPDB1;
     </copy>
     ```
 
@@ -48,7 +136,7 @@ Moving on to Task 2, we will create two tables under Schema 1. The first table, 
 
     ```
     <copy>
-    CREATE TABLE C##s1.inventory_no_reservations (
+    CREATE TABLE s1.inventory_no_reservations (
       id NUMBER PRIMARY KEY,
       product_name VARCHAR2(50),
       quantity NUMBER,
@@ -63,7 +151,7 @@ Moving on to Task 2, we will create two tables under Schema 1. The first table, 
 
     ```
     <copy>
-    CREATE TABLE C##s1.inventory_reservations (
+    CREATE TABLE s1.inventory_reservations (
       id NUMBER PRIMARY KEY,
       product_name VARCHAR2(50),
       quantity NUMBER,
@@ -82,7 +170,7 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
 
     ```
     <copy>
-    INSERT INTO C##s1.inventory_no_reservations (id, product_name, quantity, budget)
+    INSERT INTO s1.inventory_no_reservations (id, product_name, quantity, budget)
     VALUES (1, 'Product A', 10, 700);
     commit;
     </copy>
@@ -90,7 +178,7 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
 
     ```
     <copy>
-    INSERT INTO C##s1.inventory_no_reservations (id, product_name, quantity, budget)
+    INSERT INTO s1.inventory_no_reservations (id, product_name, quantity, budget)
     VALUES (2, 'Product B', 5, 200);
     commit;
     </copy>
@@ -102,7 +190,7 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
 
     ```
     <copy>
-    INSERT INTO c##s1.inventory_reservations (id, product_name, quantity, budget)
+    INSERT INTO s1.inventory_reservations (id, product_name, quantity, budget)
     VALUES (1, 'Product C', 8, 1000);
     commit;
     </copy>
@@ -110,7 +198,7 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
 
     ```
     <copy>
-    INSERT INTO c##s1.inventory_reservations (id, product_name, quantity, budget)
+    INSERT INTO s1.inventory_reservations (id, product_name, quantity, budget)
     VALUES (2, 'Product D', 3, 500);
     commit;
     </copy>
@@ -121,5 +209,5 @@ You many now **proceed to the next lab**
 ## Acknowledgements
 
 * **Author(s)** - Blake Hendricks, Database Product Manager
-* **Contributor(s)** - Vasudha Krishnaswamy, Russ Lowenthal
+* **Contributor(s)** - Vasudha Krishnaswamy, Russ Lowenthal, Vijay Balebail
 * **Last Updated By/Date** - 7/17/2023
