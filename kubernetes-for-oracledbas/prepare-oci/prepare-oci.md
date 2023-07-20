@@ -24,10 +24,9 @@ This lab assumes you have:
 
 *Cloud Shell* is a web browser-based terminal accessible from the Oracle Cloud Console. *Cloud Shell* is free to use (within monthly tenancy limits), and provides access to a Linux shell, with a pre-authenticated OCI CLI, Ansible installation, Terraform and other useful tools.
 
-<if type="tenancy">As a user in the **Administrator** group, open the *Cloud Shell*</fi>
-<if type="free-tier">Open the *Cloud Shell*</fi>
+1. Open the *Cloud Shell*
 
-![Open Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png "Open Cloud Shell")
+    ![Open Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png "Open Cloud Shell")
 
 ## Task 2: Create a Compartment
 
@@ -68,25 +67,10 @@ A *Group* is very similar to a database role.  Privileges, or in the case of OCI
 
 Assign the cloud *User* who will be carrying out the remaining Labs to the *Group* created in Task 3.  This could be yourself!
 
-**If you are setting this up for yourself as you have Administrator access:**
+1. Find the users OCID (**Optional**):
 
-1. In Cloud Shell:
+    **Skip this Step if you are setting this up for yourself, if you are an Administrator setting this up for another user:**
 
-    ```bash
-    <copy>
-    GROUP_OCID=$(oci iam group list --name [](var:oci_group) | jq -r .data[].id)
-
-    echo "Group OCID: $GROUP_OCID"
-
-    echo "User OCID:  $OCI_CS_USER_OCID"
-
-    oci iam group add-user --group-id $GROUP_OCID --user-id $OCI_CS_USER_OCID
-    </copy>
-    ```
-
-**If you are an Administrator setting this up for another user:**
-
-1. Find the users OCID:
     Replace `<username>` with the OCI username:
 
     ```text
@@ -107,21 +91,25 @@ Assign the cloud *User* who will be carrying out the remaining Labs to the *Grou
     </copy>
     ```
 
-2. Assign the User to the Group
+2. Get the *Group* OCID:
 
     ```bash
     <copy>
     GROUP_OCID=$(oci iam group list --name [](var:oci_group) | jq -r .data[].id)
-    
+
     echo "Group OCID: $GROUP_OCID"
-    
-    echo "User OCID:  $USER_OCID"
-    
-    oci iam group add-user --group-id $GROUP_OCID --user-id $USER_OCID
     </copy>
     ```
 
-    Press "return" to ensure commands have run.
+3. Assign the *User* to the *Group*:
+
+    ```bash
+    <copy>
+    echo "User OCID:  ${USER_OCID:-$OCI_CS_USER_OCID}"
+
+    oci iam group add-user --group-id $GROUP_OCID --user-id ${USER_OCID:-$OCI_CS_USER_OCID}
+    </copy>
+    ```
 
 ## Task 5: Apply Policies to the Group
 
