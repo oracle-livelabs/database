@@ -33,11 +33,19 @@ Note: Ensure that you have the necessary access and privileges to perform the ta
 
 Task 1 involves granting privileges to users for accessing tables within a schema. We will grant select, insert, update, and delete privileges on the inventory\_no\_reservations table to User 1 (u1) and schema privileges for select, insert, update, and delete operations to User 2 (u2) on Schema 1.
 
-1. Grant select/insert/update/delete privileges on the inventory\_no\_reservations table to u1
+1. Login to user 1 with the username and password you selected. If you are already in an sql session you can just type `exit` to quit session.
 
     ```
     <copy>
-    GRANT SELECT, INSERT, UPDATE, DELETE ON c##s1.inventory_no_reservations TO c##u1;
+    sqlplus system/Welcome123@FREEPDB1
+    </copy>
+    ```
+
+    * Grant select/insert/update/delete privileges on the inventory\_no\_reservations table to u1
+
+    ```
+    <copy>
+    GRANT SELECT, INSERT, UPDATE, DELETE ON s1.inventory_no_reservations TO u1;
     </copy>
     ```
 
@@ -45,7 +53,10 @@ Task 1 involves granting privileges to users for accessing tables within a schem
 
     ```
     <copy>
-    Grant SELECT ANY TABLE on SCHEMA c##s1 to c##u2;
+    Grant SELECT ANY TABLE on SCHEMA s1 to u2;
+    Grant INSERT ANY TABLE on SCHEMA s1 to u2;
+    Grant UPDATE ANY TABLE on SCHEMA s1 to u2;
+    Grant DELETE ANY TABLE on SCHEMA s1 to u2;
     </copy>
     ```
 
@@ -55,25 +66,11 @@ Task 2 focuses on testing the new schema privilege feature and comparing it with
 
 By logging in as User 1, we will verify the user and attempt to query Table 1. As expected, User 1 will not be able to access the inventory\_no\_reservations table due to the absence of schema privileges. However, when we log in as User 2, we will observe successful queries on Table 1 and also attempt to query the second table in the schema, inventory\_reservations.
 
-1. Grant Create Session privilege by logging into sqlplus as sysdba and then login to user 1 with the username and password you selected.
+1.  Login to user 1.
 
     ```
     <copy>
-    sqlplus / as sysdba
-    </copy>
-    ```
-
-    ```
-    <copy>
-    GRANT CREATE SESSION TO C##U1;
-    </copy>
-    ```
-
-    * Login to user 1. Make sure you `exit` the SQL session to login as different user.
-
-    ```
-    <copy>
-    sqlplus "username/password"
+    CONNECT u1/Welcome123@FREEPDB1;
     </copy>
     ```
 
@@ -89,7 +86,7 @@ By logging in as User 1, we will verify the user and attempt to query Table 1. A
 
     ```
     <copy>
-    select * from c##s1.inventory_no_reservations;
+    select * from s1.inventory_no_reservations;
     </copy>
     ```
 
@@ -97,31 +94,17 @@ By logging in as User 1, we will verify the user and attempt to query Table 1. A
 
     ```
     <copy>
-    select * from c##s1.inventory_reservations;
+    select * from s1.inventory_reservations;
     </copy>
     ```
 
 User 1 can not access this table because they do not have schema priveledges feature enabled. Watch what happens next with user 2 who has schema priveledges enabled.
 
-2. Grant Create Session privilege by logging into sqlplus as sysdba and then login to user 2 with the username and password you selected.
+2. Login to user 2 with the username and password you selected.
 
     ```
     <copy>
-    sqlplus / as sysdba
-    </copy>
-    ```
-
-    ```
-    <copy>
-    GRANT CREATE SESSION TO C##U2;
-    </copy>
-    ```
-
-    * Login to user 2. Make sure you `exit` the SQL session to login as different user.
-
-    ```
-    <copy>
-    sqlplus "username/password"
+    CONNECT u2/Welcome123@FREEPDB1;
     </copy>
     ```
 
@@ -137,7 +120,7 @@ User 1 can not access this table because they do not have schema priveledges fea
 
     ```
     <copy>
-    select * from c##s1.inventory_no_reservations;
+    select * from s1.inventory_no_reservations;
     </copy>
     ```
 
@@ -145,7 +128,7 @@ User 1 can not access this table because they do not have schema priveledges fea
 
     ```
     <copy>
-    select * from c##s1.inventory_reservations;
+    select * from s1.inventory_reservations;
     </copy>
     ```
 
@@ -153,17 +136,17 @@ User 1 can not access this table because they do not have schema priveledges fea
 
 1. Create the third table:
 
-    * Login to sqlplus as sys user again. Please make sure to exit the SQL session again to login as a different user.
+    * Login to sqlplus as sys user again. 
 
     ```
     <copy>
-    sqlplus / as sysdba
+    CONNECT system/Welcome123@FREEPDB1;
     </copy>
     ```
 
     ```
     <copy>
-    CREATE TABLE c##s1.inventory_third_table (
+    CREATE TABLE s1.inventory_third_table (
       id NUMBER,
       product_name VARCHAR2(50),
       quantity NUMBER,
@@ -176,10 +159,10 @@ User 1 can not access this table because they do not have schema priveledges fea
 
     ```
     <copy>
-    INSERT INTO c##s1.inventory_third_table (id, product_name, quantity, budget)
+    INSERT INTO s1.inventory_third_table (id, product_name, quantity, budget)
     VALUES (3, 'Product E', 7, 29.99);
 
-    INSERT INTO c##s1.inventory_third_table (id, product_name, quantity, budget)
+    INSERT INTO s1.inventory_third_table (id, product_name, quantity, budget)
     VALUES (4, 'Product F', 12, 39.99);
     </copy>
     ```
@@ -188,7 +171,7 @@ User 1 can not access this table because they do not have schema priveledges fea
 
     ```
     <copy>
-    sqlplus "username/password"
+    CONNECT u1/Welcome123@FREEPDB1;
     </copy>
     ```
 
@@ -204,17 +187,17 @@ User 1 can not access this table because they do not have schema priveledges fea
 
     ```
     <copy>
-    select * from c##s1.inventory_third_table;
+    select * from s1.inventory_third_table;
     </copy>
     ```
 
-  Notice how there is no way user 1 can access the newly created table under the schema.
+  Notice how there is no way user 1 can access the newly created table under the schema due to not have schema level priveledges which grant access to all tables. Now watch what happens with u2.
 
 3. Login to u2
 
     ```
     <copy>
-    sqlplus "username/password"
+    CONNECT u2/Welcome123@FREEPDB1;
     </copy>
     ```
 
@@ -230,7 +213,7 @@ User 1 can not access this table because they do not have schema priveledges fea
 
     ```
     <copy>
-    select * from c##s1.inventory_third_table;
+    select * from s1.inventory_third_table;
     </copy>
     ```
 

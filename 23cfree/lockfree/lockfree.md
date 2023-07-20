@@ -33,19 +33,30 @@ Estimated Time: 10 minutes
 
 Task 1 focuses on normal updates. By opening three windows as User 2, we will perform updates on the inventory\_no\_reservations table. In Window 1, we will decrease the budget of a record by 100 but refrain from committing the changes. In Window 2, we will attempt to update the same record by 100, resulting in a session hang due to the uncommitted changes in Window 1. Similarly, in Window 3, we will decrease the record by 200, causing another session hang. We will then commit the changes in Window 1, releasing one of the other two windows. If any freed-up window encounters an error when committing, we will take note of the error message. Note that an insufficient budget amount will cause an abort.
 
-1. Login to u2 and Open 3 windows u2, u2, u2.
+1. Login to u2 and Open 3 different terminal windows connected u2.
+
+    * If you are already in the sql session just type this to connect
 
     ```
     <copy>
-    sqlplus username/password
+    CONNECT u2/Welcome123@FREEPDB1;
     </copy>
     ```
+
+    * If you are out of the sql session by way of `exit` connect this way:
+    ```
+    <copy>
+    sqlplus u2/Welcome123@FREEPDB1;
+    </copy>
+    ```
+
+Once connected proceed to step 2.
 
 2. In Window 1 update table1 (inventory\_no\_reservations) decrease a record by 100 but don’t commit
 
     ```
     <copy>
-    UPDATE c##s1.inventory_no_reservations
+    UPDATE s1.inventory_no_reservations
     SET budget = budget - 100 where ID = 1;
     </copy>
     ```
@@ -54,7 +65,7 @@ Task 1 focuses on normal updates. By opening three windows as User 2, we will pe
 
     ```
     <copy>
-    UPDATE c##s1.inventory_no_reservations
+    UPDATE s1.inventory_no_reservations
     SET budget = budget - 100
     WHERE ID = 1;
 
@@ -66,7 +77,7 @@ Task 1 focuses on normal updates. By opening three windows as User 2, we will pe
 
     ```
     <copy>
-    UPDATE c##s1.inventory_no_reservations
+    UPDATE s1.inventory_no_reservations
     SET budget = budget - 200
     WHERE ID = 1;
 
@@ -78,7 +89,7 @@ Task 1 focuses on normal updates. By opening three windows as User 2, we will pe
 
     ```
     <copy>
-    UPDATE c##s1.inventory_no_reservations
+    UPDATE s1.inventory_no_reservations
     SET budget = budget - 100
     WHERE ID = 1;
 
@@ -86,9 +97,8 @@ Task 1 focuses on normal updates. By opening three windows as User 2, we will pe
     </copy>
     ```
 
-6. Once the windows are freed up, proceed to the next step.
+6. Once the last two windows are freed up, and you are able to commit, proceed to the next step. Note that the lack of concurrency to execute multiple commits simulateneously is caused by not having lock-free reservations enabled for the table.
 
-Note: An insufficient budget amount causes an abort.
 
 ## Task 2: Lock-Free Reservations
 
@@ -100,17 +110,17 @@ Note: Using the same 3 windows please `Ctrl+C` to get out of session hangs.
 
     ```
     <copy>
-    UPDATE c##s1.inventory_reservations
+    UPDATE s1.inventory_reservations
     SET budget = budget - 200 where ID = 1;
 
     </copy>
     ```
 
-2. Window 2 update table 2 and decrease the same record by 200. Make sure you press `Ctrl+C` to revitalize your session. 
+2. Window 2 update table 2 and decrease the same record by 200. Make sure you press `Ctrl+C` to revitalize your session.
 
     ```
     <copy>
-    UPDATE c##s1.inventory_reservations
+    UPDATE s1.inventory_reservations
     SET budget = budget - 200
     WHERE ID = 1;
 
@@ -132,7 +142,7 @@ Note: Using the same 3 windows please `Ctrl+C` to get out of session hangs.
 
     ```
     <copy>
-    UPDATE c##s1.inventory_reservations
+    UPDATE s1.inventory_reservations
     SET budget = budget - 300
     WHERE ID = 1;
 
@@ -143,7 +153,7 @@ Note: Using the same 3 windows please `Ctrl+C` to get out of session hangs.
 
     ```
     <copy>
-    UPDATE c##s1.inventory_reservations
+    UPDATE s1.inventory_reservations
     SET budget = budget + 200
     WHERE ID = 1;
 
@@ -155,7 +165,7 @@ Note: Using the same 3 windows please `Ctrl+C` to get out of session hangs.
 
     ```
     <copy>
-    UPDATE c##s1.inventory_reservations
+    UPDATE s1.inventory_reservations
     SET budget = budget - 200 where ID = 1;
 
     COMMIT;
