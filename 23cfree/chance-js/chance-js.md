@@ -84,7 +84,7 @@ This labs assumes you have:
     </copy>
     ```
 
-6. Exit SQL
+6. Exit SQLPLUS
     ```
     <copy>
     exit
@@ -490,14 +490,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     function "date"( p_doc in json, p_will_be_date in boolean ) return date as mle module chance_extended env chance_module_env signature 'chance.date';
     ```
 
-11. This one will help
-    ```
-    <copy>
-    function "date"( p_doc in json, p_will_be_date in boolean ) return date as mle module chance_extended env chance_module_env signature 'chance.date'; 
-    </copy>
-    ```
-
-12. If we had a second parameter then we allow the resulting type to be an Oracle database DATE instead of a VARCHAR2
+11. If we had a second parameter then we allow the resulting type to be an Oracle database DATE instead of a VARCHAR2
     Generate a random date with a fixed year
     Passing true as the second argument (p_will_be_date) so that 
     the returned JavaScript date is properly casted into a DATE
@@ -507,7 +500,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     </copy>
     ```
 
-13. Generate a random timezone
+12. Generate a random timezone
     ```
     <copy>
     select chance.timezone;
@@ -565,7 +558,5 @@ If you've taken a look at the extended MLE module above, you may have seen some 
 ## Acknowlegements
   <b>Quote by Loïc Lefèvre: "I would never have discovered the possibilities highlighted here without the help of Martin Bach and Lucas Victor Braun-Lohrer, respectively Product Manager for JavaScript MLE and Program Manager at Oracle Labs; so thanks a lot"!!!</b>
 
-* Meilleures Salutations/Best Regards
-* Loïc Lefèvre | Oracle Product Management | Mobile: +33 (0)62 980 1042
-* <b>Author</b> : Loïc Lefèvre 
-* <b>Contributors</b>: Loïc Lefèvre, Dan Williams
+* <b>Author</b> : Loïc Lefèvre, Dan Williams
+* <b>Contributors</b>: Martin Bach, Lucas Victor Braun-Lohrer
