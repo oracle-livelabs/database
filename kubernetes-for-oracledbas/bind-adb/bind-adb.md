@@ -84,11 +84,7 @@ If it were set to `true` then deleting the resource from Kubernetes *WOULD* dele
     </copy>
     ```
 
-    Output:
-
-    ```text
-    autonomousdatabase.database.oracle.com/adb-existing created
-    ```
+    ![kubectl apply -f adb_existing.yaml](images/adb_apply.png "kubectl apply -f adb_existing.yaml")
 
 ## Task 4: Review the Existing ADB Custom Resource
 
@@ -183,26 +179,23 @@ Create two *Secrets* which will applied to those values.
 
     You are using the "core" API, `v1` and defining two resources of `kind: Secret` of `type: Opaque`.  They are named: `adb-admin-password` and `adb-instance-wallet-password` respectively.  *Secret* `adb-admin-password` has a single key/value data: `adb-admin-password:$ADB_PWD` while `adb-instance-wallet-password` has a single key/value data: `adb-instance-wallet-password:$ADB_PWD`
 
-3. Create the *Secret* resources and query them in Kubernetes:
+3. Create the *Secret* resources:
 
     ```bash
     <copy>
     kubectl apply -f adb_secrets.yaml
+    </copy>
+    ```
 
+4. Query the *Secret* resources:
+
+    ```bash
+    <copy>
     kubectl get secrets
     </copy>
     ```
 
-    Output:
-
-    ```text
-    secret/adb-admin-password created
-    secret/adb-instance-wallet-password created
-
-    NAME                           TYPE     DATA   AGE
-    adb-admin-password             Opaque   1      3s
-    adb-instance-wallet-password   Opaque   1      3s
-    ```
+    ![ADB Secrets Output](images/secrets_output.png "ADB Secrets Output")
 
 ## Task 7: Redefine the ADB - Add Secrets
 
@@ -237,13 +230,7 @@ Now that you've defined two *Secrets* in Kubernetes, redefine the `adb-existing`
     </copy>
     ```
 
-    Output:
-
-    ```text
-    secret/adb-admin-password created
-    secret/adb-instance-wallet-password created
-    autonomousdatabase.database.oracle.com/adb-existing configured
-    ```
+    ![ADB Modify](images/adb_secrets.png "ADB Modify")
 
 ## Task 8: Review ADB Wallet Secrets
 

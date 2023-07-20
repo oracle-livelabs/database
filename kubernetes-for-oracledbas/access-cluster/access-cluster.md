@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab will walk you through establishing a connection to the Kubernetes cluster by generating a *kubeconfig* file.  
+This lab will walk you through establishing a connection to the Kubernetes cluster by generating a *kubeconfig* file.
 
 You can think of the *kubeconfig* file as consolidated version of the `TNS_ADMIN` directory files.  Just as the files in the `TNS_ADMIN` directory contain all the information required to connect to your Oracle Databases, the *kubeconfig* file contains all the information required to connect to your Kubernetes clusters including:
 
@@ -29,11 +29,12 @@ This lab assumes you have:
 
 2. Select your cluster and click the "Access Cluster" button. Follow the steps to "Manage the cluster via Cloud Shell".
     ![OCI Create Kubeconfig](images/oci_create_kubeconfig.png "OCI Create Kubeconfig")
+
 3. Paste the copied command into Cloud Shell.  This will create a configuration file, the *kubeconfig*, that *kubectl* uses to access the cluster in the default location of `$HOME/.kube/config`.
 
 ## Task 2: Test Kubernetes Access
 
-Just as with *sqlplus*, used to query the objects in an Oracle Database, use *kubectl* to query the resources in the Kubernetes cluster.  
+Just as with *sqlplus*, used to query the objects in an Oracle Database, use *kubectl* to query the resources in the Kubernetes cluster.
 
 ### kube-apiserver
 
@@ -91,12 +92,18 @@ In an Oracle Database, schema's provide a mechanism for isolating database objec
     </copy>
     ```
 
-3. Create a new *Namespace* called `sqldev-web` and point a new context at it:
+3. Create a new *Namespace* called `sqldev-web`:
 
     ```bash
     <copy>
     kubectl create namespace sqldev-web
+    </copy>
+    ```
 
+4. Create a new context that points to the `sqldev-web` *namespace*:
+
+    ```bash
+    <copy>
     kubectl config set-context sqldev-web \
     --namespace=sqldev-web \
     --cluster=$(kubectl config get-clusters | tail -1) \
@@ -104,9 +111,9 @@ In an Oracle Database, schema's provide a mechanism for isolating database objec
     </copy>
     ```
 
-    You'll use the `sqldev-web` *namespace* later in the Workshop to deploy your Microservice Application.  
+    You'll use the `sqldev-web` *namespace* later in the Workshop to deploy your Microservice Application.
 
-4. You should now have two contexts, one named `demo` and one named `sqldev-web`:  
+5. You should now have two contexts, one named `demo` and one named `sqldev-web`:
 
     ```bash
     <copy>
@@ -116,7 +123,7 @@ In an Oracle Database, schema's provide a mechanism for isolating database objec
 
     Although in our example both contexts point to the same user and cluster, you can see how easy it is create different isolated environments.  Switching between clusters, users, and/or *namespaces* would simply involve changing the context.
 
-5. Ensure your context is set to `demo`:
+6. Ensure your context is set to `demo`:
 
     ```bash
     <copy>
