@@ -8,6 +8,7 @@ This workshop focuses on SQL Domains and Features in Oracle Database 23c.
 Responding to the demand from developers for access to the newest Oracle database developer features, Oracle is, for the first time ever, releasing the next version of the Oracle Database to the developer community first, with Oracle Database 23c Free – Developer Release (short Oracle Database 23c Free). In this workshop, we'll explore 10 major features to bring extra power to your daily database needs, while saving you time and effort. We'll then dive in depth to SQL domains.
 
 The SQL domain functionality is a very powerful new "tool" for application development in 23c. In general SQL domains allow users to declare the intended usage for columns with a separate data dictionary objects so that abstract domain specific knowledge can be easily reused. You can use them to provide additional information to a stored column and you can define and validate data with them. Not only relational columns can be validated but also JSON data with the new VALIDATE clause. Like other database objects it can be created, dropped and altered. With it you have the freedom to change the validation logic or information without changing the table definition. If you want to learn more about it, check out the examples in the documentation. There you will find more examples also about multi-column domain and flexible domains which are not covered in this posting.
+
 Estimated Time: 30 minutes
 
 ### Objectives
