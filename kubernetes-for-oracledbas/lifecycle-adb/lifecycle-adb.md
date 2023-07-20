@@ -40,7 +40,7 @@ In the [Bind to an ADB](?lab=bind-adb) Lab, you redefined the `adb-existing` res
     <copy>
     export ORACLE_HOME=$(pwd)
     export TNS_ADMIN=$ORACLE_HOME/network/admin
-    mkdir -p $ORACLE_HOME/network/admin
+    mkdir -p $ORACLE_HOME/network/adminrr
 
     # Extract the tnsnames.ora secret
     kubectl get secret/adb-tns-admin \
@@ -56,7 +56,13 @@ In the [Bind to an ADB](?lab=bind-adb) Lab, you redefined the `adb-existing` res
     </copy>
     ```
 
-2. Feel free to examine the contents of the files created by extracting *Secret* data (e.g `cat $ORACLE_HOME/network/admin/tnsnames.ora`)
+2. Feel free to examine the contents of the files created by extracting *Secret* data:
+
+    ```bash
+    <copy>
+    cat $ORACLE_HOME/network/admin/tnsnames.ora
+    </copy>
+    ```
 
 3. Retrieve the `adb-admin-password` *Secret* value and save to an environment variable:
 
@@ -66,13 +72,19 @@ In the [Bind to an ADB](?lab=bind-adb) Lab, you redefined the `adb-existing` res
     </copy>
     ```
 
-4. Connect to the ADB via SQL*Plus:
+4. Retrieve the `SERVICE_NAME` from the ADB resource and save to an environment variable:
 
     ```bash
     <copy>
     SERVICE_NAME=$(kubectl get adb -o json | jq -r .items[0].spec.details.dbName)_TP
+    </copy>
+    ```
 
-    sqlplus admin@$SERVICE_NAME
+5. Connect to the ADB via SQL*Plus:
+
+    ```bash
+    <copy>
+    sqlplus admin/$ADB_PWD@$SERVICE_NAME
     </copy>
     ```
 
@@ -96,11 +108,7 @@ Everything you needed to make a connection to the ADB could be obtained from Kub
     </copy>
     ```
 
-    Output:
-
-    ```text
-    autonomousdatabase.database.oracle.com/adb-existing patched
-    ```
+    ![ADB Patched](images/adb_patched.png "ADB Patched")
 
 2. In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB in a "Scaling In Progress" state, increasing the OCPU and Storage.
 
@@ -228,16 +236,11 @@ However, in the next Tasks, you will be using an in-built *Service Account* call
 
     ```bash
     <copy>
-    kubectl apply -f adb_role.yaml
+    kubectl apply -f adb_rbac.yaml
     </copy>
     ```
 
-    Output:
-
-    ```text
-    role.rbac.authorization.k8s.io/autonomousdatabases-reader created
-    rolebinding.rbac.authorization.k8s.io/autonomousdatabases-reader-binding created
-    ```
+    ![RBAC](images/rbac.png "RBAC")
 
 6. Verify that the `default Service Account` now has the ability to stop/start the `adb` resource:
 
