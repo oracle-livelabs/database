@@ -105,7 +105,7 @@ Task 1 involves creating the users. By executing the provided SQL statements, we
     </copy>
     ```
 
-    * Provide the roles and priveledges to user 1 and 2 for this lab setup like so:
+    * Provide the roles and privileges to user 1 and 2 for this lab setup like so:
 
     ```
     <copy>
