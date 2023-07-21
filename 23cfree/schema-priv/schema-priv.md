@@ -49,7 +49,7 @@ Task 1 involves granting privileges to users for accessing tables within a schem
     </copy>
     ```
 
-2. Grant schema level priveledges select/insert/update/delete to u2
+2. Grant schema level privileges select/insert/update/delete to u2
 
     ```
     <copy>
@@ -62,9 +62,13 @@ Task 1 involves granting privileges to users for accessing tables within a schem
 
 ## Task 2: Test the new feature of Schema Privileges versus Select Grants by logging into Users
 
-Task 2 focuses on testing the new schema privilege feature and comparing it with select grants. User 1, with limited access to Table 1 and objects within the schema, will not have schema privileges enabled. User 2, on the other hand, will have schema-level access. During the lab, we will log in as each user and observe their access to different tables within the schema.
+Schema-level privileges: are permissions that are granted to a user or a role at the schema level, allowing them to perform certain actions on all objects within that schema. These privileges are typically applied to the entire schema and are not object-specific.
 
-By logging in as User 1, we will verify the user and attempt to query Table 1. As expected, User 1 will not be able to access the inventory\_no\_reservations table due to the absence of schema privileges. However, when we log in as User 2, we will observe successful queries on Table 1 and also attempt to query the second table in the schema, inventory\_reservations.
+SELECT grants: are more specific and are used to control read access to individual tables or views within a schema. When a user or role is granted SELECT privileges on a specific table or view, they can query the data from that particular object. SELECT grants provide a finer level of control compared to schema-level privileges, allowing administrators to restrict access to sensitive data while permitting read access to other parts of the schema.
+
+Task 2 focuses on testing the new schema privilege feature and comparing it with select grants. User 1 will not have Schema level privileges and User 2 will. During the lab, we will log in as each user and observe their access to different tables within the schema.
+
+By logging in as User 1, we will verify the user and attempt to query Table 1. As expected, User 1 will not be able to access the inventory\_no\_reservations table due to the absence of schema privileges. 
 
 1.  Login to user 1.
 
@@ -98,7 +102,11 @@ By logging in as User 1, we will verify the user and attempt to query Table 1. A
     </copy>
     ```
 
-User 1 can not access this table because they do not have schema priveledges feature enabled. Watch what happens next with user 2 who has schema priveledges enabled.
+Note: User 1 can not access this table because they do not have schema privileges feature enabled. 
+
+However, when we log in as User 2, we will observe successful queries on Table 1 and also attempt to query the second table in the schema, inventory\_reservations.
+
+Watch what happens next with user 2 who has schema privileges enabled:
 
 2. Login to user 2 with the username and password you selected.
 
@@ -191,7 +199,7 @@ User 1 can not access this table because they do not have schema priveledges fea
     </copy>
     ```
 
-  Notice how there is no way user 1 can access the newly created table under the schema due to not have schema level priveledges which grant access to all tables. Now watch what happens with u2.
+  Notice how there is no way user 1 can access the newly created table under the schema due to not have schema level privileges which grant access to all tables. Now watch what happens with u2.
 
 3. Login to u2
 
@@ -218,6 +226,8 @@ User 1 can not access this table because they do not have schema priveledges fea
     ```
 
   This is awesome! We can tell that u2 is entitled to access all tables within the schema.
+
+  Well done on completing the Schema Level Privileges lab! You now have a solid understanding of how to grant and manage privileges at the schema level, allowing different users varying levels of access to tables within the schema. This knowledge empowers you to implement secure and efficient access controls for your database objects. Keep leveraging schema-level privileges to ensure a well-organized and controlled database environment. Your expertise in Oracle database management is growing, and you're on your way to becoming an exceptional database administrator!
 
   The lab will set the stage for the next session, where we will explore the Lock-Free Reservation feature. We will update the inventory\_reservations table and examine the difference in behavior between regular tables and lock-free reservation tables. This feature addresses the issue of session hangs caused by conventional tables, where multiple commits can lead to delays.
 
