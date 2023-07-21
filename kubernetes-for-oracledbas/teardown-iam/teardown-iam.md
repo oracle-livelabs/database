@@ -16,14 +16,15 @@ In this lab, you will clean up the Oracle Cloud Infrastructure (OCI) *Policies*,
 
 *Cloud Shell* is a web browser-based terminal accessible from the Oracle Cloud Console. *Cloud Shell* is free to use (within monthly tenancy limits), and provides access to a Linux shell, with a pre-authenticated OCI CLI, a pre-authenticated Ansible installation, Terraform and other useful tools.
 
-<if type="tenancy">As a user in the **Administrator** group, log into the Oracle Cloud Console and open the *Cloud Shell*</fi>
-<if type="free-tier">Log into the Oracle Cloud Console and open the *Cloud Shell*</fi>
+1. Log into the Oracle Cloud Console and open the *Cloud Shell*</fi>
 
-![Open Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png "Open Cloud Shell")
+    ![Open Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png "Open Cloud Shell")
 
 ## Task 2: Delete the Policies
 
-1. In the *Cloud Shell*, run the following commands to delete the *Policy*:
+In *Cloud Shell*, delete the *Policy*.
+
+1. Get the *Policy* OCID:
 
     ```bash
     <copy>
@@ -32,7 +33,13 @@ In this lab, you will clean up the Oracle Cloud Infrastructure (OCI) *Policies*,
         --name [](var:oci_group)_POLICY | jq -r '.data[].id')
 
     echo "Policy OCID: $POLICY_OCID"
+    </copy>
+    ```
 
+2. Delete the *Policy*:
+
+    ```bash
+    <copy>
     if [[ ! -z $POLICY_OCID ]]; then
         oci iam policy delete \
             --policy-id $POLICY_OCID \
@@ -44,13 +51,11 @@ In this lab, you will clean up the Oracle Cloud Infrastructure (OCI) *Policies*,
     </copy>
     ```
 
-    Press "return" to ensure commands have run.
-
 ## Task 3: Delete the Group
 
-In the *Cloud Shell*, run the following commands to delete the *Group*:
+In *Cloud Shell*, delete the *Group*.
 
-1. Remove Users from Group
+1. Get the *Group* OCID:
 
     ```bash
     <copy>
@@ -58,7 +63,13 @@ In the *Cloud Shell*, run the following commands to delete the *Group*:
         --name [](var:oci_group) | jq -r '.data[].id')
 
     echo "Group OCID: $GROUP_OCID"
+    </copy>
+    ```
 
+2. Remove Users from *Group*:
+
+    ```bash
+    <copy>
     if [[ ! -z $GROUP_OCID ]]; then
         for user_id in $(oci iam group list-users --group-id $GROUP_OCID | jq -r '.data[].id'); do
             echo "Removing $user_id from $GROUP_OCID"
@@ -71,17 +82,10 @@ In the *Cloud Shell*, run the following commands to delete the *Group*:
     </copy>
     ```
 
-    Press "return" to ensure commands have run.
-
-2. Delete the Group
+3. Delete the *Group*:
 
     ```bash
     <copy>
-    GROUP_OCID=$(oci iam group list \
-        --name [](var:oci_group) | jq -r '.data[].id')
-
-    echo "Group OCID: $GROUP_OCID"
-
     if [[ ! -z $GROUP_OCID ]]; then
         oci iam group delete \
             --group-id $GROUP_OCID \
@@ -93,11 +97,11 @@ In the *Cloud Shell*, run the following commands to delete the *Group*:
     </copy>
     ```
 
-    Press "return" to ensure commands have run.
-
 ## Task 4: Delete the Compartment
 
-1. In the *Cloud Shell*, run the following commands to delete the sub-*Compartment* from the root *Compartment*:
+In *Cloud Shell*, delete the *Compartment*.
+
+1. Get the *Compartment* OCID:
 
     ```bash
     <copy>
@@ -106,6 +110,13 @@ In the *Cloud Shell*, run the following commands to delete the *Group*:
 
     echo "Compartment OCID: $COMPARTMENT_OCID"
 
+    </copy>
+    ```
+
+2. Delete the *Compartment*:
+
+    ```bash
+    <copy>
     if [[ ! -z $COMPARTMENT_OCID ]]; then
         oci iam compartment delete \
             --compartment-id $COMPARTMENT_OCID \
