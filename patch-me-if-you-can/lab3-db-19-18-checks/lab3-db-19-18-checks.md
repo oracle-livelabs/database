@@ -299,23 +299,15 @@ $
 </details>
 
 1. Logon as root </br>
-Logon as `root` and type the password `oracle`:
+  Normally you're now executing the root.sh script. In the lab environment switching to root is forbidden. So you'not going to execute the next steps, instead we post the output you would get:
 
     ```
-    <copy>
     su root
-    </copy>
     ```
 
     ![su root](./images/sudo-root.png " ")
 
-    and enter:
-
-    ```
-    <copy>
-    oracle
-    </copy>
-    ```
+    and enter the root password.
 
     After logging in, you see:
 
@@ -324,12 +316,10 @@ Logon as `root` and type the password `oracle`:
     The command prompt changed to "__[CDB2] root@hol:/u01/app/oracle/product/1919__".
 
 2. Execute root.sh </br>
-Then execute the root.sh script:
+    
 
     ```
-    <copy>
-    /u01/app/oracle/product/1919/root.sh
-    </copy>
+     /u01/app/oracle/product/1919/root.sh
     ```
 
     ![executing root.sh](./images/root-sh.png " ")
@@ -339,13 +329,11 @@ Then execute the root.sh script:
 
 
 3. Exit from root </br>
-Exit from the `root` user and confirm that you are `oracle` again:
+
 
     ```
-    <copy>
     exit
-    </copy>
-    ```
+     ```
 
     ![exiting root](./images/exit-root.png " ")
 
@@ -355,9 +343,7 @@ Exit from the `root` user and confirm that you are `oracle` again:
 Confirm that you are `oracle` again:
 
     ```
-    <copy>
     whoami
-    </copy>
     ```
 
     ![after logon](./images/whoami-oracle.png " ")
