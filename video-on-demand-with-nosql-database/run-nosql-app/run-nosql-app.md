@@ -274,4 +274,4 @@ Exit out of the Cloud Shell.  You may now **proceed to the next lab.**
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Development, April 2023
+* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Development, July 2023
