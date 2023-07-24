@@ -259,7 +259,7 @@ If not, you have our full sympathy - and we'd ask you to continue straight to th
 If you'd like to learn about the complexities of in-place patching instead, continue in the current lab.
 
 1. Evaluate Patches to Roll Back </br> 
-Then you need to check first which patches you must roll back.
+    Then you need to check first which patches you must roll back.
 
     These are the patches OPatch told you needed rollback:
 
@@ -279,12 +279,12 @@ Then you need to check first which patches you must roll back.
 
 2. Rollback Patches 
 
-__Attention__
-opatch rollback will only finish successfully when the autoupgarde process of the previous lab 4 finished successfully.
-Else you will get an opatch error 73
-![opatch error 73](./images/opatch-73.png " ")
-and when scrolling up a little bit telling you there's still an "oracle" process active:
-![Process flow lab 4](./images/opatch-error-oracle-active.png " ")
+    __Attention__
+    opatch rollback will only finish successfully when the autoupgarde process of the previous lab 4 finished successfully.
+    Else you will get an opatch error 73
+    ![opatch error 73](./images/opatch-73.png " ")
+    and when scrolling up a little bit telling you there's still an "oracle" process active:
+    ![Process flow lab 4](./images/opatch-error-oracle-active.png " ")
 
     ```
     <copy>
