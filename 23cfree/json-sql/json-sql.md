@@ -12,6 +12,8 @@ In the following, we show you how you can use SQL to work with the JSON data in 
 
 Estimated Time: 45 minutes
 
+Watch the video below for a quick walk through of the lab.
+[Watch the video](videohub:1_yu8ie1t8)
 
 ### Objectives
 

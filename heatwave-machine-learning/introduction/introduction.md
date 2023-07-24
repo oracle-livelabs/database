@@ -1,5 +1,7 @@
 # Introduction
 
+![mysql heatwave](./images/mysql-heatwave-logo.jpg "mysql heatwave")
+
 This workshop is based on [MySQL HeatWave User Guide: Iris Data Set Machine Learning Quickstart](https://dev.mysql.com/doc/heatwave/en/hwml-iris-example.html)
 
 HeatWave is a massively parallel, high-performance, in-memory query accelerator that accelerates MySQL performance by orders of magnitude for analytics workloads, mixed workloads, and machine learning. A HeatWave Cluster consists of a MySQL DB System and HeatWave nodes that store data in memory and process analytics and machine learning queries.

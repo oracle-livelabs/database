@@ -17,11 +17,9 @@ Estimated Time: 10 minutes
 * Compare schema privileges with select grants and their limitations.
 * Observe the impact of schema privileges on user table access.
 * Compare user access capabilities with and without schema privileges.
-* Verify user access by logging in as different users and querying tables.
 * Demonstrate user access restrictions to a newly created table based on schema privileges.
 * Explore the benefits of lock-free reservations for performance and user experience.
 * Differentiate regular tables from lock-free reservation tables.
-* Set the stage for future exploration of the Lock-Free Reservation feature.
 
 ### Prerequisites
 
@@ -35,71 +33,52 @@ Note: Ensure that you have the necessary access and privileges to perform the ta
 
 Task 1 involves granting privileges to users for accessing tables within a schema. We will grant select, insert, update, and delete privileges on the inventory\_no\_reservations table to User 1 (u1) and schema privileges for select, insert, update, and delete operations to User 2 (u2) on Schema 1.
 
-1. Grant select/insert/update/delete privileges on the inventory\_no\_reservations table to u1
+1. Login to user 1 with the username and password you selected. If you are already in an sql session you can just type `exit` to quit session.
 
-    ````
+    ```
+    <copy>
+    sqlplus system/Welcome123@FREEPDB1
+    </copy>
+    ```
+
+    * Grant select/insert/update/delete privileges on the inventory\_no\_reservations table to u1
+
+    ```
     <copy>
     GRANT SELECT, INSERT, UPDATE, DELETE ON s1.inventory_no_reservations TO u1;
     </copy>
-    ````
+    ```
 
-2. Grant schema priveledges select/insert/update/delete to u2
+2. Grant schema level privileges select/insert/update/delete to u2
 
-    ````
+    ```
     <copy>
     Grant SELECT ANY TABLE on SCHEMA s1 to u2;
+    Grant INSERT ANY TABLE on SCHEMA s1 to u2;
+    Grant UPDATE ANY TABLE on SCHEMA s1 to u2;
+    Grant DELETE ANY TABLE on SCHEMA s1 to u2;
     </copy>
-    ````
+    ```
 
 ## Task 2: Test the new feature of Schema Privileges versus Select Grants by logging into Users
 
-Task 2 focuses on testing the new schema privilege feature and comparing it with select grants. User 1, with limited access to Table 1 and objects within the schema, will not have schema privileges enabled. User 2, on the other hand, will have schema-level access. During the lab, we will log in as each user and observe their access to different tables within the schema.
+Schema-level privileges: are permissions that are granted to a user or a role at the schema level, allowing them to perform certain actions on all objects within that schema. These privileges are typically applied to the entire schema and are not object-specific.
 
-By logging in as User 1, we will verify the user and attempt to query Table 1. As expected, User 1 will not be able to access the inventory\_no\_reservations table due to the absence of schema privileges. However, when we log in as User 2, we will observe successful queries on Table 1 and also attempt to query the second table in the schema, inventory\_reservations.
+SELECT grants: are more specific and are used to control read access to individual tables or views within a schema. When a user or role is granted SELECT privileges on a specific table or view, they can query the data from that particular object. SELECT grants provide a finer level of control compared to schema-level privileges, allowing administrators to restrict access to sensitive data while permitting read access to other parts of the schema.
 
-1. Login to user 1
+Task 2 focuses on testing the new schema privilege feature and comparing it with select grants. User 1 will not have Schema level privileges and User 2 will. During the lab, we will log in as each user and observe their access to different tables within the schema.
 
-    ```
-    <copy>
-    sqlplus "username/password"@connect_identifier
-    </copy>
-    ```
+By logging in as User 1, we will verify the user and attempt to query Table 1. As expected, User 1 will not be able to access the inventory\_no\_reservations table due to the absence of schema privileges. 
 
-* Input the following to verify user:
+1.  Login to user 1.
 
     ```
     <copy>
-    show user
+    CONNECT u1/Welcome123@FREEPDB1;
     </copy>
     ```
 
-* Query the table 1 from the user.
-
-    ```
-    <copy>
-    select * from s1.inventory_no_reservations;
-    </copy>
-    ```
-
-* Query the second table from s1 schema and be mindful of what happens.
-
-    ```
-    <copy>
-    select * from s1.inventory_no_reservations;
-    </copy>
-    ```
-
-User 1 can not access this table because they do not have schema priveledges feature enabled. Watch what happens next with user 2 who has schema priveledges enabled.
-
-2. Login to user 2
-
-    ```
-    <copy>
-    sqlplus "username/password"@connect_identifier
-    </copy>
-    ```
-
-* Input the following to verify user:
+    * Input the following to verify user:
 
     ```
     <copy>
@@ -107,7 +86,7 @@ User 1 can not access this table because they do not have schema priveledges fea
     </copy>
     ```
 
-* Query the table 1 from the user.
+    * Query the table 1 from the user.
 
     ```
     <copy>
@@ -115,7 +94,45 @@ User 1 can not access this table because they do not have schema priveledges fea
     </copy>
     ```
 
-* Query the second table from s1 schema and be mindful of what happens.
+    * Query the second table from s1 schema and be mindful of what happens.
+
+    ```
+    <copy>
+    select * from s1.inventory_reservations;
+    </copy>
+    ```
+
+Note: User 1 can not access this table because they do not have schema privileges feature enabled. 
+
+However, when we log in as User 2, we will observe successful queries on Table 1 and also attempt to query the second table in the schema, inventory\_reservations.
+
+Watch what happens next with user 2 who has schema privileges enabled:
+
+2. Login to user 2 with the username and password you selected.
+
+    ```
+    <copy>
+    CONNECT u2/Welcome123@FREEPDB1;
+    </copy>
+    ```
+
+    * Input the following to verify user:
+
+    ```
+    <copy>
+    show user
+    </copy>
+    ```
+
+    * Query the table 1 from the user.
+
+    ```
+    <copy>
+    select * from s1.inventory_no_reservations;
+    </copy>
+    ```
+
+    * Query the second table from s1 schema and be mindful of what happens.
 
     ```
     <copy>
@@ -126,6 +143,14 @@ User 1 can not access this table because they do not have schema priveledges fea
   Additionally, we will create a third table, inventory\_third\_table, based on the existing inventory table in Schema 1. We will insert data into this new table and observe the access permissions for User 1 and User 2. While User 2 will have access to the new table, User 1 will not, highlighting the impact of schema privileges on user access.
 
 1. Create the third table:
+
+    * Login to sqlplus as sys user again. 
+
+    ```
+    <copy>
+    CONNECT system/Welcome123@FREEPDB1;
+    </copy>
+    ```
 
     ```
     <copy>
@@ -138,7 +163,7 @@ User 1 can not access this table because they do not have schema priveledges fea
     </copy>
     ```
 
-* Insert Data into the Third Table
+    * Insert Data into the Third Table
 
     ```
     <copy>
@@ -154,11 +179,11 @@ User 1 can not access this table because they do not have schema priveledges fea
 
     ```
     <copy>
-    sqlplus "username/password"@connect_identifier
+    CONNECT u1/Welcome123@FREEPDB1;
     </copy>
     ```
 
-* Input the following to verify user:
+    * Input the following to verify user:
 
     ```
     <copy>
@@ -166,7 +191,7 @@ User 1 can not access this table because they do not have schema priveledges fea
     </copy>
     ```
 
-* Query the third table for the user.
+    * Query the third table for the user.
 
     ```
     <copy>
@@ -174,17 +199,17 @@ User 1 can not access this table because they do not have schema priveledges fea
     </copy>
     ```
 
-  Notice how there is no way user 1 can access the newly created table under the schema.
+  Notice how there is no way user 1 can access the newly created table under the schema due to not have schema level privileges which grant access to all tables. Now watch what happens with u2.
 
 3. Login to u2
 
     ```
     <copy>
-    sqlplus "username/password"@connect_identifier
+    CONNECT u2/Welcome123@FREEPDB1;
     </copy>
     ```
 
-* Input the following to verify user:
+    * Input the following to verify user:
 
     ```
     <copy>
@@ -192,7 +217,7 @@ User 1 can not access this table because they do not have schema priveledges fea
     </copy>
     ```
 
-* Query the third table for the user.
+    * Query the third table for the user.
 
     ```
     <copy>
@@ -201,6 +226,8 @@ User 1 can not access this table because they do not have schema priveledges fea
     ```
 
   This is awesome! We can tell that u2 is entitled to access all tables within the schema.
+
+  Well done on completing the Schema Level Privileges lab! You now have a solid understanding of how to grant and manage privileges at the schema level, allowing different users varying levels of access to tables within the schema. This knowledge empowers you to implement secure and efficient access controls for your database objects. Keep leveraging schema-level privileges to ensure a well-organized and controlled database environment. Your expertise in Oracle database management is growing, and you're on your way to becoming an exceptional database administrator!
 
   The lab will set the stage for the next session, where we will explore the Lock-Free Reservation feature. We will update the inventory\_reservations table and examine the difference in behavior between regular tables and lock-free reservation tables. This feature addresses the issue of session hangs caused by conventional tables, where multiple commits can lead to delays.
 

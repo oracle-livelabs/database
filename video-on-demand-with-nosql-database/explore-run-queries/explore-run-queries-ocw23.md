@@ -30,7 +30,7 @@ Click the **stream_acct** table. Under **Resources**, click **Indexes**.
 The list of indexes already created in the table is listed.
 ![list-indexes](./images/list-indexes.png)
 
-2. Click on `Add Index` Button
+2. Click on `Add Index` button.
 
 3. Create the index `idx_country_showid_date` using the following information.
 
@@ -41,7 +41,7 @@ The list of indexes already created in the table is listed.
   info|shows[].seriesInfo[].episodes[].date|String
   {: title="Index parameters"}
 
-  See the animated gif below with details on how to create the index
+  See the animated gif below with details on how to create the index.
 
   ![crtind-country-showid-date](./images/crtind-country-showid-date.gif)
 
@@ -55,7 +55,7 @@ The list of indexes already created in the table is listed.
   info|shows[].genres[]|String
   {: title="Index parameters"}
 
-  See the animated gif below with details on how to create the index
+  See the animated gif below with details on how to create the index.
 
   ![crtind-country-genre](./images/crtind-country-genre.gif)
 
@@ -262,7 +262,7 @@ Although Oracle NoSQL supports unnesting (but not subqueries), it also includes 
 
   ![query4a-plan](./images/query4a-plan.png)
 
-  Two more things are worth mentioning here.
+  Two more things are worth mentioning here:
 
     * The query could have benefited by an index on all three fields: country, genre, and episode date. If such an index existed, all the query conditions could be pushed to the index. However, you cannot create such an index as all the arrays indexed must be nested into each other. Here the genres arrays and the episodes arrays do not satisfy this constraint.
     * The expression `exists $element.genres[$element in ("french", "danish")]` can been rewritten in one of the following ways:
