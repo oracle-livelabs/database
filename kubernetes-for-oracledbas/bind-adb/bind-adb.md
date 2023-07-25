@@ -29,13 +29,13 @@ During the [Deploy Workshop Stack Lab](?lab=deploy-stack), a new Autonomous Data
     <copy>
     # Get the Compartment OCID
     COMPARTMENT_OCID=$(oci iam compartment list \
-      --name [](var:oci_compartment) | 
+      --name [](var:oci_compartment) |
       jq -r '.data[].id')
 
     # Get the ADB OCID from the Compartment
     ADB_OCID=$(oci db autonomous-database list \
       --lifecycle-state AVAILABLE \
-      --compartment-id $COMPARTMENT_OCID | 
+      --compartment-id $COMPARTMENT_OCID |
       jq -r '.data[].id')
 
     echo "ADB OCID: $ADB_OCID"
@@ -64,7 +64,7 @@ During the [Deploy Workshop Stack Lab](?lab=deploy-stack), a new Autonomous Data
 
 The above YAML sends a request to the `database.oracle.com/v1alpha1` API exposed by the **OraOperator** to define a resource of `kind: AutonomousDatabase`.
 
-The resource `name` will be called `adb-existing`.  
+The resource `name` will be called `adb-existing`.
 
 It will bind to an existing ADB with `autonomousDatabaseOCID` equal to `$ADB_OCID` (substituted by the real value stored in *Task 1*).
 
@@ -84,11 +84,7 @@ If it were set to `true` then deleting the resource from Kubernetes *WOULD* dele
     </copy>
     ```
 
-    Output:
-
-    ```text
-    autonomousdatabase.database.oracle.com/adb-existing created
-    ```
+    ![kubectl apply -f adb_existing.yaml](images/adb_apply.png "kubectl apply -f adb_existing.yaml")
 
 ## Task 4: Review the Existing ADB Custom Resource
 
@@ -116,7 +112,7 @@ If it were set to `true` then deleting the resource from Kubernetes *WOULD* dele
 
 ## Task 5: Secrets
 
-A Kubernetes *Secret* is an API object used to store sensitive information such as passwords, tokens, or keys.  It is important to note that a *Secret*, by default, is not encrypted only base64-encoded, but they are still useful.  
+A Kubernetes *Secret* is an API object used to store sensitive information such as passwords, tokens, or keys.  It is important to note that a *Secret*, by default, is not encrypted only base64-encoded, but they are still useful.
 
 > a Secret, by default, is not encrypted
 
@@ -144,7 +140,7 @@ spec:
 
 Create two *Secrets* which will applied to those values.
 
-1. In Cloud Shell, assign the `ADB_PWD` variable a password (for Workshop purposes only).  
+1. In Cloud Shell, assign the `ADB_PWD` variable a password (for Workshop purposes only).
 
     You can choose any password so long as it complies with the [Password Complexity](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/manage-users-create.html#GUID-72DFAF2A-C4C3-4FAC-A75B-846CC6EDBA3F) rules.
 
@@ -179,30 +175,27 @@ Create two *Secrets* which will applied to those values.
     </copy>
     ```
 
-    Take a quick look at the syntax:  
+    Take a quick look at the syntax:
 
     You are using the "core" API, `v1` and defining two resources of `kind: Secret` of `type: Opaque`.  They are named: `adb-admin-password` and `adb-instance-wallet-password` respectively.  *Secret* `adb-admin-password` has a single key/value data: `adb-admin-password:$ADB_PWD` while `adb-instance-wallet-password` has a single key/value data: `adb-instance-wallet-password:$ADB_PWD`
 
-3. Create the *Secret* resources and query them in Kubernetes:
+3. Create the *Secret* resources:
 
     ```bash
     <copy>
     kubectl apply -f adb_secrets.yaml
+    </copy>
+    ```
 
+4. Query the *Secret* resources:
+
+    ```bash
+    <copy>
     kubectl get secrets
     </copy>
     ```
 
-    Output:
-
-    ```text
-    secret/adb-admin-password created
-    secret/adb-instance-wallet-password created
-
-    NAME                           TYPE     DATA   AGE
-    adb-admin-password             Opaque   1      3s
-    adb-instance-wallet-password   Opaque   1      3s
-    ```
+    ![ADB Secrets Output](images/secrets_output.png "ADB Secrets Output")
 
 ## Task 7: Redefine the ADB - Add Secrets
 
@@ -225,7 +218,7 @@ Now that you've defined two *Secrets* in Kubernetes, redefine the `adb-existing`
     </copy>
     ```
 
-    Take a quick look at the syntax:  
+    Take a quick look at the syntax:
 
     You are appending to the `adb_existing.yaml` manifest to **redefine** the `adb-existing` resource, setting the `spec.details.adminPassword` and `spec.details.wallet` keys.  Under the wallet section, you are specifying the name of a *Secret*, `adb-tns-admin`, that the OraOperator will define to to store the wallet.
 
@@ -237,13 +230,7 @@ Now that you've defined two *Secrets* in Kubernetes, redefine the `adb-existing`
     </copy>
     ```
 
-    Output:
-
-    ```text
-    secret/adb-admin-password created
-    secret/adb-instance-wallet-password created
-    autonomousdatabase.database.oracle.com/adb-existing configured
-    ```
+    ![ADB Modify](images/adb_secrets.png "ADB Modify")
 
 ## Task 8: Review ADB Wallet Secrets
 
@@ -257,7 +244,7 @@ Now that you've defined two *Secrets* in Kubernetes, redefine the `adb-existing`
 
     ![ADB Secrets](images/adb_secrets.png "ADB Secrets")
 
-    You created the first two *Secrets* and instructed OraOperator to create the third named `adb-tns-admin`.  
+    You created the first two *Secrets* and instructed OraOperator to create the third named `adb-tns-admin`.
 
 2. Take a closer look at the **adb-tns-admin** *Secret* by describing it (`kubectl describe secrets <secret_name> [-n <namespace>]`):
 
