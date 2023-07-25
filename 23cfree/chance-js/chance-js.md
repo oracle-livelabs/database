@@ -63,28 +63,45 @@ This labs assumes you have:
     ```
     <copy>
     sqlplus / as sysdba
+    </copy>
+    ```
+
+3. Next, alter session container 
+    ```
+    <copy>
     alter session set container = freepdb1;
     </copy>
     ```
 
-4. Create the directory to access filesystem where we'll download our ES Modules
+4. Now, lets grant DB_DDEVELOPER_ROLE to hol23c
     ```
     <copy>
     grant DB_DEVELOPER_ROLE to hol23c; 
+    </copy>
+    ```
+
+5. Then, we grant access to execute javascript 
+    ```
+    <copy> 
     grant execute on javascript to hol23c;
     </copy>
     ```
 
-
-5. Create the directory to access filesystem where we'll download our ES Modules
+6. Create the directory to access filesystem where we'll download our ES Modules
     ```
     <copy> 
     create directory mle_dir as '/home/oracle/mle';
-    grant read on directory mle_dir to hol23c; 
     </copy>
     ```
 
-6. Exit SQLPLUS
+7. Grant access filesystem where we'll download our ES Modules
+    ```
+    <copy>
+    grant read on directory mle_dir to hol23c;
+    </copy>
+    ```
+
+8. Exit SQLPLUS
     ```
     <copy>
     exit
