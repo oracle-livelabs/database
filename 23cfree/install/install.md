@@ -117,6 +117,13 @@ This lab assumes you have:
     ```
     ![Image alt text](images/.png " ")
 
+9. If your listener was configured on a different port or you wanted to see your listener configuration you can use the lsnrctl command. You can use this port in the later commands if you are not running on port 1521.
+    ````
+    <copy>
+    lsnrctl status
+    </copy>
+    ````
+
 9. Connect to your database
     ```
     <copy>
@@ -125,7 +132,7 @@ This lab assumes you have:
     ```
     ![Image alt text](images/.png " ")
 
-10. To see if your database is up and running you can use the following command
+10. The show pdbs commands will list the pluggable databases running in your container. Once you switch to a pluggable database that same command will list just the current pluggable.
     ```
     <copy>
     show pdbs
@@ -194,27 +201,35 @@ This lab assumes you have:
 
 17. Run the install script into the <b>Pluggable</b> database. It's important that you install into the pluggable and not the container. Please review the architecture section of the APEX documentation in the additional information section for different deployment modes. This script will take about 5-7 minutes to complete.
     ````
+    <copy>
     cd /u01/app/oracle/apex
     sqlplus / as sysdba
 
     ALTER SESSION SET CONTAINER = FREEPDB1;
-
-    @apexins.sql SYSAUX SYSAUX TEMP /i/ -- This will take about 5-7 minutes
-
-    exit;
+    </copy>
     ````
-
+    ````
+    <copy>  
+    @apexins.sql SYSAUX SYSAUX TEMP /i/
+    </copy>
+    ````
+    ````
+    <copy>
+    exit;
+    </copy>
+    ````
 18. Run the change password script into the <b>Pluggable</b> database. Accept ADMIN for the username. Accept ADMIN for the email. Provide a password. I will be using Welcome123# for my examples.
     ````
     <copy>
     sql / as sysdba
     ALTER SESSION SET CONTAINER = FREEPDB1;
+    </copy>
+    ````
+    ````
+    <copy>
     @apxchpwd.sql
     </copy>
     ````
-
-    When the script finishes exit.
-
     ````
     <copy>
     exit;
@@ -228,12 +243,13 @@ This lab assumes you have:
     ALTER SESSION SET CONTAINER = FREEPDB1;
     ALTER USER APEX_PUBLIC_USER ACCOUNT UNLOCK;
     ALTER USER APEX_PUBLIC_USER IDENTIFIED BY Welcome123#;
+    </copy>
+    ````
+    ````
+    <copy>
     @apex_rest_config.sql
     </copy>
     ````
-
-    Make sure to exit when the script is done.
-
     ````
     <copy>
     exit;
@@ -256,7 +272,15 @@ This lab assumes you have:
     cd /u01/app/oracle/ords/scripts/installer
     sqlplus / as sysdba
     ALTER SESSION SET CONTAINER = FREEPDB1;
+    </copy>
+    ````
+    ````
+    <copy>
     @ords_installer_privileges.sql hol23c
+    </copy>
+    ````
+    ````
+    <copy>
     exit;
     </copy>
     ````
