@@ -256,7 +256,7 @@ Execute a metadata export using this par file:
     </copy>
     ```
 
-    ![connect with SQL*Plus to source](./images/sqlplus-src.png " ") 
+    ![connect with SQL*Plus to source](./images/metadata-sql-file.png " ") 
 
 
 

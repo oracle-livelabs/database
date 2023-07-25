@@ -16,9 +16,8 @@ Patching an existing Oracle Home
 This lab assumes you have:
 
 - Connected to the lab
-
+- Successfully finished autoupgrade as outlined in Lab 4
 - Please switch to the other tab titled "__19.18.0 Home__",
-
 ![19.18 Tab](./images/19-18-home.png " ")
 
 ## Task 1: Checks for in-place patching
@@ -260,7 +259,7 @@ If not, you have our full sympathy - and we'd ask you to continue straight to th
 If you'd like to learn about the complexities of in-place patching instead, continue in the current lab.
 
 1. Evaluate Patches to Roll Back </br> 
-Then you need to check first which patches you must roll back.
+    Then you need to check first which patches you must roll back.
 
     These are the patches OPatch told you needed rollback:
 
@@ -279,6 +278,13 @@ Then you need to check first which patches you must roll back.
     Now you can follow the OPatch advice and just roll back the entire list of patches. Just make sure you remove the spaces between "comma" and "patchnumber":
 
 2. Rollback Patches 
+
+    __Attention__
+    opatch rollback will only finish successfully when the autoupgarde process of the previous lab 4 finished successfully.
+    Else you will get an opatch error 73
+    ![opatch error 73](./images/opatch-73.png " ")
+    and when scrolling up a little bit telling you there's still an "oracle" process active:
+    ![Process flow lab 4](./images/opatch-error-oracle-active.png " ")
 
     ```
     <copy>
@@ -966,6 +972,7 @@ The next step is to apply the Data Pump Bundle Patch for 19.19.0. You could do t
 ![cd into datapump bundle patch directory ](./images/cd-datapump-bundle-patch.png " ")
 
 2. Opatch Apply
+When opatch asks, confrm yith "y":
 
     ```
     <copy>
@@ -1473,127 +1480,127 @@ As your home has now received all patches, you need to start up the UP19 databas
 
 1. Open SQL*Plus
 
-  ```
+    ```
     <copy>
     sqlplus / as sysdba
     </copy>
-  ```
-![open sql*plus](./images/start-sqlplus.png " ")
+      ```
+    ![open sql*plus](./images/start-sqlplus.png " ")
 
 2. Start Database
-  ```
+    ```
     <copy>
     startup
     alter pluggable database all open;
     exit
     </copy>
 
-     Hit ENTER/RETURN to execute ALL commands.
-  ```
-![start database](./images/start-database.png " ")
+    Hit ENTER/RETURN to execute ALL commands.
+    ```
+    ![start database](./images/start-database.png " ")
 
-This is a non-CDB, so you won't execute the `ALTER PLUGGABLE DATABASE` command. For simplicity, this lab includes the command in non-CDB databases as well. It does not harm.
+    This is a non-CDB, so you won't execute the `ALTER PLUGGABLE DATABASE` command. For simplicity, this lab includes the command in non-CDB databases as well. It does not harm.
 
 3. Run "datapatch"
-  ```
+    ```
     <copy>
-     $ORACLE_HOME/OPatch/datapatch -verbose 
+    $ORACLE_HOME/OPatch/datapatch -verbose 
     </copy>
-  ```
-![run datapatch](./images/datapatch-output.png " ")
+    ```
+    ![run datapatch](./images/datapatch-output.png " ")
 
-<details>
- <summary>*click here to see the full datapatch output*</summary>
+    <details>
+    <summary>*click here to see the full datapatch output*</summary>
 
-  ``` text
-[UP19] oracle@hol:~/stage/mrp/35333937
-$ $ORACLE_HOME/OPatch/datapatch -verbose
-SQL Patching tool version 19.19.0.0.0 Production on Mon Jul  3 10:34:14 2023
-Copyright (c) 2012, 2023, Oracle.  All rights reserved.
+      ``` text
+    [UP19] oracle@hol:~/stage/mrp/35333937
+    $ $ORACLE_HOME/OPatch/datapatch -verbose
+    SQL Patching tool version 19.19.0.0.0 Production on Mon Jul  3 10:34:14 2023
+    Copyright (c) 2012, 2023, Oracle.  All rights reserved.
 
-Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_22294_2023_07_03_10_34_14/sqlpatch_invocation.log
+    Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_22294_2023_07_03_10_34_14/sqlpatch_invocation.log
 
-Connecting to database...OK
-Gathering database info...done
-Bootstrapping registry and package to current versions...done
-Determining current state...done
+    Connecting to database...OK
+    Gathering database info...done
+    Bootstrapping registry and package to current versions...done
+    Determining current state...done
 
-Current state of interim SQL patches:
-Interim patch 33192694 (OJVM RELEASE UPDATE: 19.13.0.0.211019 (33192694)):
-  Binary registry: Not installed
-  SQL registry: Not installed
-Interim patch 33561310 (OJVM RELEASE UPDATE: 19.14.0.0.220118 (33561310)):
-  Binary registry: Not installed
-  SQL registry: Rolled back successfully on 20-JUL-22 09.16.52.848607 PM
-Interim patch 34086870 (OJVM RELEASE UPDATE: 19.16.0.0.220719 (34086870)):
-  Binary registry: Not installed
-  SQL registry: Rolled back successfully on 26-JAN-23 10.10.34.728972 PM
-Interim patch 34411846 (OJVM RELEASE UPDATE: 19.17.0.0.221018 (34411846)):
-  Binary registry: Not installed
-  SQL registry: Not installed
-Interim patch 34734035 (MERGE ON DATABASE RU 19.17.0.0.0 OF 34650250 34660465 24338134 25143018 26565187):
-  Binary registry: Not installed
-  SQL registry: Not installed
-Interim patch 34786990 (OJVM RELEASE UPDATE: 19.18.0.0.230117 (34786990)):
-  Binary registry: Not installed
-  SQL registry: Applied successfully on 26-JAN-23 10.10.35.917858 PM
-Interim patch 34861493 (RESYNC CATALOG FAILED IN ZDLRA CATALOG AFTER PROTECTED DATABASE PATCHED TO 19.17):
-  Binary registry: Not installed
-  SQL registry: Applied successfully on 22-MAY-23 12.21.27.534479 PM
-Interim patch 34972375 (DATAPUMP BUNDLE PATCH 19.18.0.0.0):
-  Binary registry: Not installed
-  SQL registry: Applied successfully on 26-JAN-23 10.10.36.894411 PM
-Interim patch 35050341 (OJVM RELEASE UPDATE: 19.19.0.0.230418 (35050341)):
-  Binary registry: Installed
-  SQL registry: Not installed
-Interim patch 35160800 (GG IE FAILS WITH ORA-14400 AT SYSTEM.LOGMNRC_USER AFTER ORACLE DB UPGRADE TO 19.18DBRU):
-  Binary registry: Not installed
-  SQL registry: Applied successfully on 22-MAY-23 12.21.27.542160 PM
-Interim patch 35261302 (DATAPUMP BUNDLE PATCH 19.19.0.0.0):
-  Binary registry: Installed
-  SQL registry: Not installed
+    Current state of interim SQL patches:
+    Interim patch 33192694 (OJVM RELEASE UPDATE: 19.13.0.0.211019 (33192694)):
+      Binary registry: Not installed
+      SQL registry: Not installed
+    Interim patch 33561310 (OJVM RELEASE UPDATE: 19.14.0.0.220118 (33561310)):
+      Binary registry: Not installed
+      SQL registry: Rolled back successfully on 20-JUL-22 09.16.52.848607 PM
+    Interim patch 34086870 (OJVM RELEASE UPDATE: 19.16.0.0.220719 (34086870)):
+      Binary registry: Not installed
+      SQL registry: Rolled back successfully on 26-JAN-23 10.10.34.728972 PM
+    Interim patch 34411846 (OJVM RELEASE UPDATE: 19.17.0.0.221018 (34411846)):
+      Binary registry: Not installed
+      SQL registry: Not installed
+    Interim patch 34734035 (MERGE ON DATABASE RU 19.17.0.0.0 OF 34650250 34660465 24338134 25143018 26565187):
+      Binary registry: Not installed
+      SQL registry: Not installed
+    Interim patch 34786990 (OJVM RELEASE UPDATE: 19.18.0.0.230117 (34786990)):
+      Binary registry: Not installed
+      SQL registry: Applied successfully on 26-JAN-23 10.10.35.917858 PM
+    Interim patch 34861493 (RESYNC CATALOG FAILED IN ZDLRA CATALOG AFTER PROTECTED DATABASE PATCHED TO 19.17):
+      Binary registry: Not installed
+      SQL registry: Applied successfully on 22-MAY-23 12.21.27.534479 PM
+    Interim patch 34972375 (DATAPUMP BUNDLE PATCH 19.18.0.0.0):
+      Binary registry: Not installed
+      SQL registry: Applied successfully on 26-JAN-23 10.10.36.894411 PM
+    Interim patch 35050341 (OJVM RELEASE UPDATE: 19.19.0.0.230418 (35050341)):
+      Binary registry: Installed
+      SQL registry: Not installed
+    Interim patch 35160800 (GG IE FAILS WITH ORA-14400 AT SYSTEM.LOGMNRC_USER AFTER ORACLE DB UPGRADE TO 19.18DBRU):
+      Binary registry: Not installed
+      SQL registry: Applied successfully on 22-MAY-23 12.21.27.542160 PM
+    Interim patch 35261302 (DATAPUMP BUNDLE PATCH 19.19.0.0.0):
+      Binary registry: Installed
+      SQL registry: Not installed
 
-Current state of release update SQL patches:
-  Binary registry:
-    19.19.0.0.0 Release_Update 230322020406: Installed
-  SQL registry:
-    Applied 19.18.0.0.0 Release_Update 230111171738 successfully on 26-JAN-23 10.10.35.913910 PM
+    Current state of release update SQL patches:
+      Binary registry:
+        19.19.0.0.0 Release_Update 230322020406: Installed
+      SQL registry:
+        Applied 19.18.0.0.0 Release_Update 230111171738 successfully on 26-JAN-23 10.10.35.913910 PM
 
-Adding patches to installation queue and performing prereq checks...done
-Installation queue:
-  The following interim patches will be rolled back:
-    34786990 (OJVM RELEASE UPDATE: 19.18.0.0.230117 (34786990))
-    34861493 (RESYNC CATALOG FAILED IN ZDLRA CATALOG AFTER PROTECTED DATABASE PATCHED TO 19.17)
-    34972375 (DATAPUMP BUNDLE PATCH 19.18.0.0.0)
-    35160800 (GG IE FAILS WITH ORA-14400 AT SYSTEM.LOGMNRC_USER AFTER ORACLE DB UPGRADE TO 19.18DBRU)
-  Patch 35042068 (Database Release Update : 19.19.0.0.230418 (35042068)):
-    Apply from 19.18.0.0.0 Release_Update 230111171738 to 19.19.0.0.0 Release_Update 230322020406
-  The following interim patches will be applied:
-    35050341 (OJVM RELEASE UPDATE: 19.19.0.0.230418 (35050341))
-    35261302 (DATAPUMP BUNDLE PATCH 19.19.0.0.0)
+    Adding patches to installation queue and performing prereq checks...done
+    Installation queue:
+      The following interim patches will be rolled back:
+        34786990 (OJVM RELEASE UPDATE: 19.18.0.0.230117 (34786990))
+        34861493 (RESYNC CATALOG FAILED IN ZDLRA CATALOG AFTER PROTECTED DATABASE PATCHED TO 19.17)
+        34972375 (DATAPUMP BUNDLE PATCH 19.18.0.0.0)
+        35160800 (GG IE FAILS WITH ORA-14400 AT SYSTEM.LOGMNRC_USER AFTER ORACLE DB UPGRADE TO 19.18DBRU)
+      Patch 35042068 (Database Release Update : 19.19.0.0.230418 (35042068)):
+        Apply from 19.18.0.0.0 Release_Update 230111171738 to 19.19.0.0.0 Release_Update 230322020406
+      The following interim patches will be applied:
+        35050341 (OJVM RELEASE UPDATE: 19.19.0.0.230418 (35050341))
+        35261302 (DATAPUMP BUNDLE PATCH 19.19.0.0.0)
 
-Installing patches...
-Patch installation complete.  Total patches installed: 7
+    Installing patches...
+    Patch installation complete.  Total patches installed: 7
 
-Validating logfiles...done
-Patch 34786990 rollback: SUCCESS
-  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/34786990/25032666/34786990_rollback_UP19_2023Jul03_10_35_32.log (no errors)
-Patch 34861493 rollback: SUCCESS
-  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/34861493/25121986/34861493_rollback_UP19_2023Jul03_10_36_55.log (no errors)
-Patch 34972375 rollback: SUCCESS
-  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/34972375/25075164/34972375_rollback_UP19_2023Jul03_10_37_00.log (no errors)
-Patch 35160800 rollback: SUCCESS
-  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35160800/25179433/35160800_rollback_UP19_2023Jul03_10_37_00.log (no errors)
-Patch 35042068 apply: SUCCESS
-  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35042068/25183678/35042068_apply_UP19_2023Jul03_10_37_03.log (no errors)
-Patch 35050341 apply: SUCCESS
-  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35050341/25148755/35050341_apply_UP19_2023Jul03_10_36_55.log (no errors)
-Patch 35261302 apply: SUCCESS
-  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35261302/25192070/35261302_apply_UP19_2023Jul03_10_38_13.log (no errors)
-SQL Patching tool complete on Mon Jul  3 10:39:34 2023
+    Validating logfiles...done
+    Patch 34786990 rollback: SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/34786990/25032666/34786990_rollback_UP19_2023Jul03_10_35_32.log (no errors)
+    Patch 34861493 rollback: SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/34861493/25121986/34861493_rollback_UP19_2023Jul03_10_36_55.log (no errors)
+    Patch 34972375 rollback: SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/34972375/25075164/34972375_rollback_UP19_2023Jul03_10_37_00.log (no errors)
+    Patch 35160800 rollback: SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35160800/25179433/35160800_rollback_UP19_2023Jul03_10_37_00.log (no errors)
+    Patch 35042068 apply: SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35042068/25183678/35042068_apply_UP19_2023Jul03_10_37_03.log (no errors)
+    Patch 35050341 apply: SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35050341/25148755/35050341_apply_UP19_2023Jul03_10_36_55.log (no errors)
+    Patch 35261302 apply: SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/35261302/25192070/35261302_apply_UP19_2023Jul03_10_38_13.log (no errors)
+    SQL Patching tool complete on Mon Jul  3 10:39:34 2023
 
-  ```
-</details>
+      ```
+    </details>
 
 
 ## Task 9: Inventory Check and Summary
