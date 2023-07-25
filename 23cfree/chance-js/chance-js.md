@@ -555,8 +555,9 @@ If you've taken a look at the extended MLE module above, you may have seen some 
 * Don't forget to provide us your feedback on the [23c FREE community forum](https://forums.oracle.com/ords/apexds/domain/dev-community/category/oracle-database-free) that we monitor and where you can provide feedback.
 
 <!-- ## Thanks -->
-## Acknowlegements
+## Acknowledgements
   <b>Quote by Loïc Lefèvre: "I would never have discovered the possibilities highlighted here without the help of Martin Bach and Lucas Victor Braun-Lohrer, respectively Product Manager for JavaScript MLE and Program Manager at Oracle Labs; so thanks a lot"!!!</b>
 
 * <b>Author</b> : Loïc Lefèvre, Dan Williams
 * <b>Contributors</b>: Martin Bach, Lucas Victor Braun-Lohrer
+* <b>Last Updated By/Date<b> - Dan Williams, Database Product Management, July 2023
