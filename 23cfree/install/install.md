@@ -218,10 +218,13 @@ This lab assumes you have:
     exit;
     </copy>
     ````
-18. Run the change password script into the <b>Pluggable</b> database. Accept ADMIN for the username. Accept ADMIN for the email. Provide a password. I will be using Welcome123# for my examples.
+18. Run the change password script into the <b>Pluggable</b> database. When prompted use the values below
+- Username: Use the default ADMIN
+- Email: Use the default ADMIN
+- Password: Provide a password, I will use Welcome123#
     ````
     <copy>
-    sql / as sysdba
+    sqlplus / as sysdba
     ALTER SESSION SET CONTAINER = FREEPDB1;
     </copy>
     ````
@@ -239,8 +242,12 @@ This lab assumes you have:
 19. Unlock and set the passwords for the various accounts in the <b>Pluggable</b> database. You will be prompted during the rest config script. I'm going to use Welcome123# for my examples but you can use any password you want.
     ````
     <copy>
-    sql / as sysdba
+    sqlplus / as sysdba
     ALTER SESSION SET CONTAINER = FREEPDB1;
+    </copy>
+    ````
+    ````
+    <copy>
     ALTER USER APEX_PUBLIC_USER ACCOUNT UNLOCK;
     ALTER USER APEX_PUBLIC_USER IDENTIFIED BY Welcome123#;
     </copy>
