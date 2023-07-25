@@ -15,7 +15,6 @@ Learn how to:
 - Use JSON to create, modify, and delete data within a JRDV's underlying tables
 - Explore the optional limits that JRDVs can enforce against creating and modifying data
 
-
 ### Prerequisites
 This lab assumes:
 - You have already finished all prior labs
@@ -79,16 +78,13 @@ Some of the most impressive and unique characteristics of JRDVs are their capabi
 
     ![Insert By JRDV](images/insert-by-jrdv.png)
 
-
 2. Updating data within JRDV documents is also possible - again, simply by applying a SQL UPDATE statement against the JRDV itself.
 
     ![Update By JRDV](images/update-by-jrdv.png)
 
-
 3. And of course, we can delete data within JRDVs by applying a SQL DELETE statement against the JRDV itself.
 
     ![Delete By JRDV](images/delete-by-jrdv.png)
-
 
 ## Task 4: Managing Data Via HTTP Commands
 
@@ -104,11 +100,9 @@ Since we started ORDS successfully in Task #1, we can now explore how to use HTT
 
     ![Update via CURL](images/update-by-curl.png)
 
-
 3. Finally, let's try to delete some data from one of our JRDV documents thru the HTTP DELETE command. Issue the following command via CURL:
 
     ![Delete via CURL](images/delete-by-curl.png)
-
 
 ## Task 5: Limit JRDVs From Undesired Data Manipulation
 
