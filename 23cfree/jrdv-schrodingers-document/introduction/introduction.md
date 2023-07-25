@@ -1,6 +1,6 @@
 # Introduction
 
-![Logo](images/ZDCLogo.png)
+![Logo](images/zdc-logo.png)
 
 ### Community-Contributed Workshop
 
