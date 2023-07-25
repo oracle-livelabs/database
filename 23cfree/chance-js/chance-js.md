@@ -4,7 +4,7 @@
 
 This post explains how to use the [Chance.js](https://www.jsdelivr.com/package/npm/chance) library and how to provide JSON template feature inspired from the [Fony.js](https://github.com/captainsafia/fony) library so that you can generate random JSON data using SQL:
 
-Estimated Time: 25 minutes 
+Estimated Time: 25 minutes
 
 ### Objectives 
 
