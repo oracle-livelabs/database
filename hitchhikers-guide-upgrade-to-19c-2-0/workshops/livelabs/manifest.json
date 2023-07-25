@@ -1,0 +1,62 @@
+{
+  "workshoptitle": "Hitchhiker's Guide for Upgrading to Oracle Database 19c",
+  "support": "https://community.oracle.com/tech/developers/categories/database-19c",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The Introduction to Upgrade to 19c Workshop.",
+      "filename": "../../00-introduction/00-introduction.md"
+    },
+    {
+      "title": "Lab 1: Initialize Environment",
+      "description": "Initialize Environment",
+      "filename": "../../01-initialize-environment/01-initialize-environment.md"
+    },
+    {
+      "title": "Lab 2: Generate AWR Snapshot",
+      "filename": "../../02-awr-snapshot/02-awr-snapshot.md"
+    },
+    {
+      "title": "Lab 3: Capture and Preserve SQL",
+      "filename": "../../03-capture-sql/03-capture-sql.md"
+    },
+    {
+      "title": "Lab 4: AutoUpgrade",
+      "filename": "../../04-autoupgrade/04-autoupgrade.md"
+    },
+    {
+      "title": "Lab 5: AWR Compare Periods",
+      "filename": "../../05-awr-compare/05-awr-compare.md"
+    },
+    {
+      "title": "Lab 6: SQL Performance Analyzer",
+      "filename": "../../06-spa/06-spa.md"
+    },
+    {
+      "title": "Lab 7: SQL Plan Management",
+      "filename": "../../07-spm/07-spm.md"
+    },
+    {
+      "title": "Lab 8: SQL Tuning Advisor",
+      "filename": "../../08-sqltune/08-sqltune.md"
+    },
+    {
+      "title": "Lab 9: Plugin UPGR into CDB2",
+      "filename": "../../09-upg-plugin/09-upg-plugin.md"
+    },
+    {
+      "title": "Lab 10: Full Transportable Export/Import",
+      "filename": "../../10-ftex/10-ftex.md"
+    },
+    {
+      "title": "Lab 11: Unplug-plug Upgrade",
+      "filename": "../../11-unplug-plug/11-unplug-plug.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}

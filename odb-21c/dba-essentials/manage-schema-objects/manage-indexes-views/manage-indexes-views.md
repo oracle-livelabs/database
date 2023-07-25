@@ -46,30 +46,31 @@ You can view indexes for *HR* schema.
    ![Columns pane](./images/columns.png " ")
 
    The Columns pane displays the following fields:
-   - INDEX_OWNER
-   - INDEX_NAME
-   - TABLE_OWNER
-   - TABLE_NAME
-   - COLUMN_NAME
-   - COLUMN_POSITION
-   - DESCEND
 
+       - INDEX_OWNER
+       - INDEX_NAME
+       - TABLE_OWNER
+       - TABLE_NAME
+       - COLUMN_NAME
+       - COLUMN_POSITION
+       - DESCEND
 6. Click on the Details pane to view additional information about the index.
 
    ![Details pane](./images/details-pane.png " ")
 
    The Details pane displays the following few important fields:
-   - CREATED
-   - LAST_DDL_TIME
-   - OWNER
-   - INDEX_NAME
-   - INDEX_TYPE
-   - TABLE_OWNER
-   - TABLE_TYPE
-   - UNIQUENESS
-   - COMPRESSION
-   - PREFIX_LENGTH
-   - TABLESPACE_NAME
+
+       - CREATED
+       - LAST_DDL_TIME
+       - OWNER
+       - INDEX_NAME
+       - INDEX_TYPE
+       - TABLE_OWNER
+       - TABLE_TYPE
+       - UNIQUENESS
+       - COMPRESSION
+       - PREFIX_LENGTH
+       - TABLESPACE_NAME
 
 7. Click on the Statistics pane.
 
@@ -135,19 +136,20 @@ You can see all the existing views in your database. In this lab, you will use t
 
 3. The different panes in the dialog are as follows:
  
-   - **Columns pane:** You can view all the columns of the view.
+       - **Columns pane:** You can view all the columns of the view.
 
-   - **Data pane:** You can insert a row in this pane. Double click on the cell to fill the values of the row you insert.
+       - **Data pane:** You can insert a row in this pane. Double click on the cell to fill the values of the row you insert.
 
-   - **Grants:** This pane displays the roles you grant for the selected view.
+       - **Grants:** This pane displays the roles you grant for the selected view.
 
-   - **Dependencies:** This pane displays the dependency information of all the tables used in the selected view.
+       - **Dependencies:** This pane displays the dependency information of all the tables used in the selected view.
 
-   - **Details:** You can view information like the Creation date, owner of the view, Name of the view, the SQL statement you use to create the view.
+       - **Details:** You can view information like the Creation date, owner of the view, Name of the view, the SQL statement you use to create the view.
 
-   - **Triggers:** This displays the trigger actions you used to update the tables underlying the view.
+       - **Triggers:** This displays the trigger actions you used to update the tables underlying the view.
 
-   - **Errors:** This pane displays the errors if there are any. 
+       - **Errors:** This pane displays the errors if there are any. 
+ 
 
    ![Columns pane](./images/columns-pane-details-view.png " ")
 
@@ -159,11 +161,11 @@ You can create a view for *HR* Schema.
 
 2. Click the Object submenu (three vertical dots next to Search field) and select **Create Object**.
 
-   >Note: To create a view from an existing template for a selected schema, in the Navigator tab, select the view to create from, right-click and select **Use as Template**.
+       >Note: To create a view from an existing template for a selected schema, in the Navigator tab, select the view to create from, right-click and select **Use as Template**.
 
-   ![Create View](./images/create-view.png " ")
+       ![Create View](./images/create-view.png " ")
 
-   A View Properties dialog box opens.
+       A View Properties dialog box opens.
 
 3. Specify the following field values:
 
