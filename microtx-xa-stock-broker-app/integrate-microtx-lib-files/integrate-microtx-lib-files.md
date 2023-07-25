@@ -352,7 +352,7 @@ You can register your initiator and participant services to receive notification
 
 2. Uncomment the `TransactionEventsUtility.java` class, located in the `/com/oracle/tmm/stockbroker/utils/` package of the `StockBroker` application.
 
-3. Update the `TMMConfigurations.java` file, located in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application, to .
+3. Update the `TMMConfigurations.java` file, located in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
 
     1. Add the following lines of code to import the listeners that you have uncommented.
 
@@ -378,11 +378,11 @@ You can register your initiator and participant services to receive notification
 
     1. Add the following line of code to import the `TransactionEventsUtility` package.
 
-    ```java
-    <copy>
-    import com.oracle.tmm.stockbroker.utils.TransactionEventsUtility;
-    </copy>
-    ```
+        ```java
+        <copy>
+        import com.oracle.tmm.stockbroker.utils.TransactionEventsUtility;
+        </copy>
+        ```
 
     2. Add the following line of code.
 
@@ -393,7 +393,7 @@ You can register your initiator and participant services to receive notification
         </copy>
         ```
 
-    3. Add a line of code, `transactionEventsUtility.registerStockTransactionEvents(buyStock);`, to register the purchase of stocks.
+    3. Add a line of code, `transactionEventsUtility.registerStockTransactionEvents(buyStock)`, to register the purchase of stocks.
 
         ```java
         <copy>
@@ -411,7 +411,7 @@ You can register your initiator and participant services to receive notification
         </copy>
         ```
 
-   4. Add a line of code, `transactionEventsUtility.registerStockTransactionEvents(sellStock);` to register the sale of stocks.
+    4. Add a line of code, `transactionEventsUtility.registerStockTransactionEvents(sellStock)` to register the sale of stocks.
 
         ```java
         <copy>
@@ -428,7 +428,6 @@ You can register your initiator and participant services to receive notification
         }
         </copy>
         ```
-
 
 You may now **proceed to the next lab**.
 
