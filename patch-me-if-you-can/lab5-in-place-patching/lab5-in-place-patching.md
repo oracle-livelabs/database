@@ -280,11 +280,11 @@ If you'd like to learn about the complexities of in-place patching instead, cont
 2. Rollback Patches 
 
     __Attention__
-    opatch rollback will only finish successfully when the autoupgarde process of the previous lab 4 finished successfully.
-    Else you will get an opatch error 73
+    When opatch fails with error 73
     ![opatch error 73](./images/opatch-73.png " ")
     and when scrolling up a little bit telling you there's still an "oracle" process active:
     ![Process flow lab 4](./images/opatch-error-oracle-active.png " ")
+    wait a few minutes and retry the rollback.
 
     ```
     <copy>
