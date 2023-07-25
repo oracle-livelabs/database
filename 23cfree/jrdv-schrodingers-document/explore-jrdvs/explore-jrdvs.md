@@ -110,11 +110,11 @@ One extremely useful feature of JRDVs is that while they do permit data to be ma
 
 1. Open and execute the file named **prohibiting-jrdv-dml.sql.** It creates a new JRDV named **WONTWORK.** 
 
-    ![Insert By CURL](images/FINISHTHIS.png)
+    ![Insert By CURL](images/finish-this.png)
 
 2. Next, pen and execute the file named **failing-jrdv-dml.sql** and review the results. You should see that the DML statement failed because {finish this narrative ...}
 
-    ![Insert By CURL](images/FINISHTHIS.png)
+    ![Insert By CURL](images/finish-this.png)
 
 3. You have now completed this lab. The next lab is optional but recommended.
 
