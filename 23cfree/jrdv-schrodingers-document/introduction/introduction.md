@@ -41,7 +41,7 @@ Estimated Time: 50 minutes
 
 ### Let's Get Started!
 
-Click [here](?lab=initalize_livelabs_environment), select **Get Started** from the menu on the left, or click the arrow below to start the workshop.
+Click [here](?lab=initalize-livelabs-environment), select **Get Started** from the menu on the left, or click the arrow below to start the workshop.
 
 ## Learn More
 
