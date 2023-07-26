@@ -282,9 +282,9 @@ If you'd like to learn about the complexities of in-place patching instead, cont
     __Attention__
     When opatch fails with error 73
     ![opatch error 73](./images/opatch-73.png " ")
-    scroll up a little bit telling you there's still an "oracle" process active:
+    scroll up a little bit and when you see a message stating there's an active "oracle" process:
     ![Process flow lab 4](./images/opatch-error-oracle-active.png " ")
-    wait a few minutes and retry the rollback.
+    then wait a few minutes and retry the rollback.
 
     ```
     <copy>
