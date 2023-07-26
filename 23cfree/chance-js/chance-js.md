@@ -229,7 +229,7 @@ export { chance, template };
     /
     </copy>
     ```
-    ![Image alt text](images/Lab2_task3_step7.png " _") 
+    ![Image alt text](images/Lab2_task3_step7b.png " _")
 
 ## Task 4: Lets intergrate the SQL engine with the JavaScript MLE using PL/SQL functions
 Installing a PL/SQL package to make Chance functions accessible in SQL
