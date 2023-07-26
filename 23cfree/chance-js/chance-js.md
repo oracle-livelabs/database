@@ -141,7 +141,7 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     </copy>
     ```
 
-5. creates the MLE module named chance_module
+5. Creates the MLE module named chance_module
     ```
     <copy>
     create or replace mle module chance_module language javascript version '1.1.11' using bfile( mle_dir, 'chance.js' );
@@ -149,68 +149,69 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     </copy>
     ```  
 
-6. creates the corresponding MLE environment that will help for managing dependencies at runtime
+6. Creates the corresponding MLE environment that will help for managing dependencies at runtime
     ```
     <copy>
     create or replace mle env chance_module_env imports ('chance' module chance_module);
     </copy>
     ```
 
-7. creates a new 'extended' module that will export properly the functions for future usage in PL/SQL
+7. Creates a new 'extended' module that will export properly the functions for future usage in PL/SQL
     ```
     <copy>
+    create or replace mle env chance_module_env imports ('chance' module chance_module);
     create or replace mle module chance_extended language javascript version '1.1.11' as
-    import Chance from 'chance';
-    const chance = new Chance();
-    const chanceTypes = Object.keys(Object.getPrototypeOf(chance));
+import Chance from 'chance';
+const chance = new Chance();
+const chanceTypes = Object.keys(Object.getPrototypeOf(chance));
 
-    function valid(type) {
+function valid(type) {
     return chanceTypes.indexOf(type) !== -1;
-    }
-    function getArrayValue(definition) {
+}
+
+function getArrayValue(definition) {
     if (definition.length !== 2) {
-    return null;
+        return null;
     }
     const type = definition[0];
     const count = definition[1];
     if (!valid(type) || typeof count !== "number" || count === 0) {
-    return null;
+        return null;
     }
-    return new Array(count).fill(null).map(function() {
-    return getValue(type);
+    return new Array(count).fill(null).map(function () {
+        return getValue(type);
     });
-    }
+}
 
-    function getValue(type) {
+function getValue(type) {
     if (Array.isArray(type)) {
-    return getArrayValue(type);
+        return getArrayValue(type);
     }
     if (typeof type === "object" && !Array.isArray(type) && type != null) {
-    var result = template(type);
-    return result._$_chance ? result._$_chance : result;
+        var result = template(type);
+        return result._$_chance ? result._$_chance : result;
     }
     try {
-    return chance[type]();
+        return chance[type]();
     } catch (exception) {
-    return null;
+        return null;
     }
-    }
+}
 
-    function template(json_template) {
+function template(json_template) {
     const output = {};
-    Object.keys(json_template).map(function(key, index) {
-    if (typeof key === "string" && key.charAt(0) === '$' && valid(key.substring(1))) {
-    output['_$_chance'] = chance[key.substring(1)](json_template[key]);
-    } else {
-    output[key] = getValue(json_template[key]);
-    }
+    Object.keys(json_template).map(function (key, index) {
+        if (typeof key === "string" && key.charAt(0) === '$' && valid(key.substring(1))) {
+            output['_$_chance'] = chance[key.substring(1)](json_template[key]);
+        } else {
+            output[key] = getValue(json_template[key]);
+        }
     });
     return output;
-    }
-    chance.yearStr = chance.year;
-    chance.year = function (doc) { return parseInt(chance.yearStr(doc)); }
-    export {chance, template};
-    
+}
+chance.yearStr = chance.year;
+chance.year = function (doc) { return parseInt(chance.yearStr(doc)); }
+export { chance, template };
     /
     </copy>
     ```

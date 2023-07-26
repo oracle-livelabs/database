@@ -5,7 +5,7 @@
     "tutorials": [
         {
             "title": "Introduction",
-            "description": "Introduction",
+            "description": "Introduction to JavaScript ES Modules in 23c FREE and use them in SQL queries!",
             "filename": "../../introduction/intro-chance-js.md"
         },
         {
