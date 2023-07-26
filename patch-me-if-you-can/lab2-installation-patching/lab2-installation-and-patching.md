@@ -238,7 +238,7 @@ $
     ```
     ![runInstaller output ](./images/run-installer-output.png " ")
 
-Installing the patches takes about ten minutes. While the patch install is ongoing *proceed to the next lab*. You will execute `root.sh` at the end of the following lab. 
+Installing the patches takes about ten minutes. While the patch install is ongoing *proceed to the next lab*. You get back to this session at the end of the following lab. 
 
 ## Acknowledgments
 * **Author** - Mike Dietrich 
