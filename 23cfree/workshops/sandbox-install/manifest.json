@@ -26,19 +26,19 @@
             "filename": "../../config_tools/config_tools.md"
         },
         {
-            "title": "Lab 3: Tools Setup",
+            "title": "Lab 3: Data Setup",
             "description": "Setting up the various tools",
             "type": "livelabs",
             "filename": "../../sql-schema/sql-schema.md"
         },
         {
-            "title": "Lab 4: Tools Setup",
+            "title": "Lab 4: JSON Duality Views",
             "description": "Setting up the various tools",
             "type": "livelabs",
             "filename": "../../sql-json/sql-json.md"
         },
         {
-            "title": "Lab 5: Tools Setup",
+            "title": "Lab 5: 23c New Features",
             "description": "Setting up the various tools",
             "type": "livelabs",
             "filename": "../../sql-23c-features/sql-23c-features.md"
