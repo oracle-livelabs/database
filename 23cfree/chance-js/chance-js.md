@@ -76,7 +76,7 @@ This labs assumes you have:
     ```
     ![Image alt text](images/Lab2_task2_step3.png " _") 
 
-4. Now, lets grant DB_DEVELOPER_ROLE to hol23c
+4. Now, lets grant the DB DEVELOPER_ROLE to hol23c
     ```
     <copy>
     grant DB_DEVELOPER_ROLE to hol23c; 
