@@ -49,7 +49,7 @@ Task 1 involves granting privileges to users for accessing tables within a schem
     </copy>
     ```
 
-2. Grant schema level privileges select/insert/update/delete to u2
+2. Grant schema level privileges select/insert/update/delete to u2. Make sure to press enter three times after executing this statement to commit the remaining statements.
 
     ```
     <copy>
