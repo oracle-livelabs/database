@@ -6,7 +6,7 @@
             "title": "Introduction",
             "description": "This is an introduction to Oracle Database 23c Free",
             "type": "livelabs",
-            "filename": "../../introduction/install_introduction.md"
+            "filename": "../../introduction/install-introduction.md"
         },
         {
             "title": "Get Started with NoVNC",
