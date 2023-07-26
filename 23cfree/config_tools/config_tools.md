@@ -101,6 +101,8 @@ This lab assumes you have:
     <copy>
     sqlplus / as sysdba
     ALTER SESSION SET CONTAINER = FREEPDB1;
+
+
     </copy>
     ````
     ````
@@ -111,6 +113,8 @@ This lab assumes you have:
     ````
     <copy>
     exit;
+
+    
     </copy>
     ````
 
@@ -204,7 +208,7 @@ This lab assumes you have:
 25. Enable hol23c the ability to use ORDS.
     ````
     <copy>
-    sqlplus hol23c/Welcome123#@ll23c:1521/freepdb1
+    sqlplus hol23c/Welcome123#@localhost:1521/freepdb1
     </copy>
     ````
     ````
