@@ -4,13 +4,11 @@
 
 ## Introduction
 
-A HeatWave cluster comprise of a MySQL DB System node and two or more HeatWave nodes. The MySQL DB System node includes a plugin that is responsible for cluster management, loading data into the HeatWave cluster, query scheduling, and returning query result.
+A HeatWave cluster comprise of a MySQL DB System and one or more HeatWave nodes. The MySQL DB System includes a plugin that is responsible for cluster management, loading data into the HeatWave cluster, query scheduling, and returning query result.
 
 ![heatwave architect](./images/mysql-heatwave-architecture.png "heatwave architect ")
 
 _Estimated Time:_ 10 minutes
-
-[//]:    [](youtube:OzqCt3XATto)
 
 ### Objectives
 
@@ -22,9 +20,9 @@ In this lab, you will be guided through the following task:
 
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with MySQL Shell
-- Completed Lab 2
+- Completed Lab 1
 
-## Task 1: Add a HeatWave Cluster to thge HEATWAVE-DB MySQL Database System
+## Task 1: Add a HeatWave Cluster to the HEATWAVE-DB MySQL Database System
 
 1. Open the navigation menu  
     - Databases
@@ -55,4 +53,4 @@ You may now **proceed to the next lab**
 
 - **Author** - Perside Foster, MySQL Solution Engineering
 - **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Priscila Galvao, MySQL Solution Engineering, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, February 2022
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, July 2023
