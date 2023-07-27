@@ -40,16 +40,6 @@ Task 1 involves creating the users. By executing the provided SQL statements, we
     ```
     ![Access Terminal](images/connect-db-sysdba1.png "Terminal")
 
-    * Switch session from container database to pluggable database 1
-    ```
-    <copy>
-    alter session set container = FREEPDB1;
-    </copy>
-    ```
-
-    ![Access Terminal](images/alter-session1.png "Terminal")
-
-
     * Change system user password
 
     ```
@@ -58,6 +48,15 @@ Task 1 involves creating the users. By executing the provided SQL statements, we
     </copy>
     ```
     ![Access Terminal](images/alter-user.png "Terminal")
+
+    * Switch session from container database to pluggable database 1
+    ```
+    <copy>
+    alter session set container = FREEPDB1;
+    </copy>
+    ```
+
+    ![Access Terminal](images/alter-session1.png "Terminal")
 
 
     * Exit the session
@@ -71,7 +70,7 @@ Task 1 involves creating the users. By executing the provided SQL statements, we
 
     ```
     <copy>
-    sqlplus system/Weclome123@FREEPDB1
+    sqlplus system/Welcome123@FREEPDB1
     </copy>
     ```
 
@@ -110,6 +109,11 @@ Task 1 involves creating the users. By executing the provided SQL statements, we
     ```
     <copy>
     GRANT CONNECT to u1;
+    </copy>
+    ```
+
+    ```
+    <copy>
     GRANT CREATE SESSION TO u1;
     </copy>
     ```
@@ -133,6 +137,14 @@ Task 1 involves creating the users. By executing the provided SQL statements, we
 Moving on to Task 2, we will create two tables under Schema 1. The first table, inventory\_no\_reservations, will serve as a normal table without any special features. The second table, inventory\_reservations, will be created with lock-free reservations. This feature enables efficient management of reservations for specific columns, and we will bind it to the 'budget' column in our case.
 
 1. Create the first table. Table 1 would be inventory\_no\_reservations (normal table)
+
+* Connect to system user
+
+    ```
+    <copy>
+    CONNECT system/Welcome123@FREEPDB1;
+    </copy>
+    ```
 
     ```
     <copy>
@@ -165,6 +177,15 @@ Moving on to Task 2, we will create two tables under Schema 1. The first table, 
 Task 3 focuses on inserting a few rows into each of the tables we created. We will insert data into the inventory\_no\_reservations table and the inventory\_reservations table. This step will provide us with initial data to work with in the subsequent labs.
 
 1. Insert data into the first table:
+
+    * Create unlimited quota on the tablespace
+    ```
+    <copy>
+    ALTER USER s1 QUOTA UNLIMITED ON users;
+    commit;
+    </copy>
+    ```
+
 
     * Inserting rows into inventory\_no\_reservations table
 

@@ -34,7 +34,7 @@ In this lab, you will be guided through the following task:
 
 1. If not already connected with SSH, connect to Compute instance using Cloud Shell
 
-    (Example: **ssh -i MDS-Client opc@132.145.17....**)
+    (Example: **ssh -i id_rsa opc@132.145.17....**)
 
 2. On the command line, connect to MySQL using the MySQL Shell client tool with the following command:
 
@@ -44,7 +44,7 @@ In this lab, you will be guided through the following task:
 
     ![Connect](./images/heatwave-load-shell.png "heatwave-load-shell ")
 
-3. In this lab we use the administrative account previously created, but if you want to use a dedicated MySQL user, please remember to grant the following privileges to use HeatWave ML
+3. In this lab we use the administrative account previously created, but if you want to use a dedicated MySQL user, please remember to grant the following privileges to use HeatWave AutoML
 
     a. SELECT and ALTER privileges on the schema that contains the machine learning datasets
 
@@ -96,7 +96,7 @@ In this lab, you will be guided through the following task:
     <copy>CALL sys.ML_TRAIN('ml_data.iris_train', 'class',JSON_OBJECT('task', 'classification'), @iris_model);</copy>
     ```
 
-2. When the training operation finishes, the model handle is assigned to the @iris_model session variable, and the model is stored in your model catalog. You can view the entry in your model catalog using the following query, where user1 is your MySQL account name:
+2. When the training operation finishes, the model handle is assigned to the @iris_model session variable, and the model is stored in your model catalog. You can view the entry in your model catalog using the following query:
 
     ```bash
     <copy>SELECT model_id, model_handle, train_table_name FROM ML_SCHEMA_admin.MODEL_CATALOG;</copy>
@@ -189,7 +189,7 @@ In this lab, you will be guided through the following task:
 
 ## Task 6: Score your machine learning model to assess its reliability and unload the model
 
-1. Score the model using ML\_SCORE to assess the model's reliability. This example uses the balanced_accuracy metric, which is one of the many scoring metrics supported by HeatWave ML.
+1. Score the model using ML\_SCORE to assess the model's reliability. This example uses the balanced_accuracy metric, which is one of the many scoring metrics supported by HeatWave AutoML.
 
     ```bash
     <copy>CALL sys.ML_SCORE('ml_data.iris_validate', 'class', @iris_model, 'balanced_accuracy', @score,null);</copy>
@@ -210,10 +210,11 @@ In this lab, you will be guided through the following task:
     <copy>CALL sys.ML_MODEL_UNLOAD(@iris_model);</copy>
     ```
 
-    To avoid consuming too much space, it is good practice to unload a model when you are finished using it.
+    **Note** To avoid consuming too much space, it is good practice to unload a model when you are finished using it.
+
 ## Learn More
 
-* [Oracle Cloud Infrastructure MySQL Database Service Documentation ](https://docs.cloud.oracle.com/en-us/iaas/MySQL-database)
+* [Oracle Cloud Infrastructure MySQL Database Service Documentation](https://docs.cloud.oracle.com/en-us/iaas/MySQL-database)
 * [MySQL Database Documentation](https://www.MySQL.com)
 
 ## Acknowledgements
@@ -223,4 +224,4 @@ In this lab, you will be guided through the following task:
 - **Contributors** - Salil Pradhan, Principal Product Manager,
 Nick Mader, MySQL Global Channel Enablement & Strategy Manager
 Marco Carlessi, MySQL Solution Engineering
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, May 2022
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, Jul 2023
