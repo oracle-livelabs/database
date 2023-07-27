@@ -37,8 +37,13 @@
         },
 
         {
-          "title": "Lab 5: Build HeatWave AutoML Web App with PHP",
+          "title": "Lab 5: (BONUS) Build HeatWave AutoML Web App with PHP",
           "filename": "../../develop/develop.md"
+        },
+        
+        {
+          "title": "Lab6: Stop OCI Services",
+          "filename": "../../stop-services/stop-services.md"
         },
 
         {
