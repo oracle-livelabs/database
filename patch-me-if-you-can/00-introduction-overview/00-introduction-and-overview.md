@@ -1,4 +1,4 @@
-# Lab 1: Introduction and Overview
+Introduction and Overview
 
 ## About this Workshop
 In this Database Patching lab, you will familiarize with the options of a completely unattended installation, including patches. Then you'll do out-of-place patching of a database with AutoUpgrade. To show the difference, the final step is an in-place patching operation causing more downtime.

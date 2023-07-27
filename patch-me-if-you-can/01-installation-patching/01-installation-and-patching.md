@@ -1,4 +1,4 @@
-# Lab 2: Installation and Patching
+# Lab 1: Installation and Patching
 
 ## Introduction 
 
