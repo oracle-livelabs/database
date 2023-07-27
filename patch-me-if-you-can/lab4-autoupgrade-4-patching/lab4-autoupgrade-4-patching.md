@@ -16,6 +16,7 @@ Autoupgrade for patching
 This lab assumes you have:
 
 - Connected to the lab
+- Successfully executed root.sh as outlined in Lab 3 Task 2
 - Activate the tab __19.19.0 Home__
 ![switch to 1919 tab](./images/19-19-home.png " ")
 
