@@ -49,7 +49,7 @@ Task 1 involves granting privileges to users for accessing tables within a schem
     </copy>
     ```
 
-2. Grant schema level privileges select/insert/update/delete to u2. 
+2. Grant schema level privileges to u2. 
 
     ```
     <copy>
@@ -59,7 +59,7 @@ Task 1 involves granting privileges to users for accessing tables within a schem
 
 ## Task 2: Test the new feature of Schema Privileges versus Select Grants by logging into Users
 
-Schema-level privileges: are permissions that are granted to a user or a role at the schema level, allowing them to perform certain actions on all objects within that schema. These privileges are typically applied to the entire schema and are not object-specific.
+Schema-level privileges: are permissions that are granted to a user or a role at the schema level, allowing them to perform certain actions on all objects within that schema. These privileges are typically applied to the entire schema and are not object-specific. Some examples are: Create, Alter, Drop, Select, Insert, Update, Delete, and Execute.
 
 SELECT grants: are more specific and are used to control read access to individual tables or views within a schema. When a user or role is granted SELECT privileges on a specific table or view, they can query the data from that particular object. SELECT grants provide a finer level of control compared to schema-level privileges, allowing administrators to restrict access to sensitive data while permitting read access to other parts of the schema.
 
