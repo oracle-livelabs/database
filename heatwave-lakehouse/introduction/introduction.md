@@ -32,7 +32,7 @@ MySQL HeatWave Lakehouse is 17X faster than Snowflake and 6X faster than Amazon 
 
 In this lab, you will be guided through the following steps:
 
-- Create MySQL Database for HeatWave DB System
+- Create MySQL Database for HeatWave DB System with Compartment and VCN
 - Add HeatWave cluster to DB System
 - Connect to MySQL HeatWave DB
 - Run Autopilot
