@@ -165,7 +165,6 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
     ```
     <copy>
     ALTER USER s1 QUOTA UNLIMITED ON users;
-    commit;
     </copy>
     ```
 
