@@ -31,7 +31,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![Login to source 11.2.0.4 database](./images/open-prechecks-sqlplus-src.png " ")
+
 
 2. Target
 
@@ -41,7 +41,11 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![Login to target 21c database](./images/open-prechecks-sqlplus-trg.png " ")
+| Source | Target |
+| :-------- | :-----|
+| ```  <copy>  sqlplus / as sysdba </copy> ```| ```  <copy>    sqlplus / as sysdba   </copy>    ``` |
+|![Login to source 11.2.0.4 database](./images/open-prechecks-sqlplus-src.png " ")|![Login to target 21c database](./images/open-prechecks-sqlplus-trg.png " ")|
+{: title=“SQL*Plus Ourtput from Source and Target”}
 
 ## Task 2: Transportable Tablespace Method Supported by Source and Target OS Platforms (SOURCE and TARGET) 
 
