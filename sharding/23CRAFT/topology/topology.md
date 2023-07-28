@@ -190,92 +190,15 @@ Notice that the log index is increasing as there are read and write operations a
 
 
 
-## Task 5: Test High Availability 
+## Task 5: Perform Failover Test
 
 What happens when one of the available shard databases goes down or is taken down for maintenance? 
 Failover test by stopping shard1  to create shard1 down situation. 
 
-1. Before starting the failover test, lets connect to the catalog database as schema, app_shard and create a sharded table  and insert some data
-
-   ```
-    <copy>
-    sudo podman exec -it pcatalog /bin/bash
-    </copy>
-    ```
-2. connect to sqlplus and run this command to enable the following parameter on catalog.
-   Re-start the catalog & all the 3 shards (cdb level).
-
-    ```
-    <copy>
-     alter system set shard_enable_raft_follower_read = TRUE scope=both;
-    </copy>
-    ```
-   ![<alter_parameter_shard_enable_raft_follower_read>](./images/t5_alter_parameter.png " ")  
-
-2. Connect to catalog and run sqlplus to set the container=PCAT1PDB.
-
-    ```
-    <copy>
-    alter session set container=PCAT1PDB;
-    </copy>
-    ```
-    ![<connect_catalog>](./images/t5_connect_catalog.png " ")  
-
-3. Enable shard DDL on PCAT1PDB
-
-   ```
-    <copy>
-    alter session enable shard ddl;
-    </copy>
-    ```
 
 
-4. Connect to app_shard schema  and create customers table 
 
-   ```
-    <copy>
-    conn app_shard/app_shard@PCAT1PDB
-    </copy>
-    ```
-
-   ```
-    <copy>
-     create sharded table Customers
-  (
-    CustId      varchar2(100) NOT NULL,
-    FirstName   varchar2(100),
-    LastName    varchar2(100),
-    Passwd      raw(60),
-    CONSTRAINT pk_customers PRIMARY KEY (CustId)
-  ) tablespace SET TPS_SET_1
-  partition by CONSISTENT HASH (CustId) partitions AUTO;
-   </copy>
-    ```
-
-![<create_sharded_table>](./images/t5_create_table.png " ")  
-
-5. Insert the data into app_shard.customers table
-
-    ```
-    <copy>
-    insert into Customers values(1,'moody','ragi',utl_raw.cast_to_raw('hello world')); 
-    insert into Customers values(2,'randy','Beridze',utl_raw.cast_to_raw('hello world1'));
-    insert into Customers values(3,'ravi','Bettle',utl_raw.cast_to_raw('hello world2'));
-    insert into Customers values(4,'zach','boron',utl_raw.cast_to_raw('hello world3'));
-    insert into Customers values(5,'laura','crain',utl_raw.cast_to_raw('hello world4'));
-    insert into Customers values(6,'shreya','sharma',utl_raw.cast_to_raw('hello world6'));
-    insert into Customers values(7,'trish','jackson',utl_raw.cast_to_raw('hello world7'));
-    insert into Customers values(8,'ilena','samme',utl_raw.cast_to_raw('hello world8'));
-    insert into Customers values(9,'brad','crusee',utl_raw.cast_to_raw('hello world9'));
-    insert into Customers values(10,'tom','peats',utl_raw.cast_to_raw('hello world20'));
-    commit;
-
-   </copy>
-    ```
-    ![<insert_data>](./images/t5_insert_data.png " ")  
-
-
-6.  Run the below command as **oracle** user to check the status for all the containers.
+1.  Run the below command as **oracle** user to check the status for all the containers.
 
     ```
     <copy>
@@ -285,7 +208,8 @@ Failover test by stopping shard1  to create shard1 down situation.
 
     ![<podman_containers_status>](./images/t5_podman_containers.png " ")  
 
-7.  Run the below command as **oracle** user to stop shard1.
+
+2.  Run the below command as **oracle** to connect to shard1.
 
     ```
     <copy>
@@ -293,7 +217,7 @@ Failover test by stopping shard1  to create shard1 down situation.
     </copy>
     ```
 
-8.  Connect to shard1 "sqlplus / as sysdba" and shutdown the shard1
+3.  Connect to shard1 "sqlplus / as sysdba" and shutdown the shard1
 
     ```
     <copy>
@@ -303,7 +227,13 @@ Failover test by stopping shard1  to create shard1 down situation.
 
     ![<stop_shard_1>](./images/t5_HA_shut_down_shard1.png " ")  
 
-9. Check the status for RU's on another session and you will see that database porcl1cdb_porcl1pdb is not present.
+4. Switch to GSM1 on another session and check the status for RU's and you will see that database porcl1cdb_porcl1pdb is not present.
+
+    ```
+    <copy>
+    sudo podman exec -i -t gsm1 /bin/bash
+    </copy>
+    ```
 
     ```
     <copy>
@@ -319,46 +249,24 @@ Failover test by stopping shard1  to create shard1 down situation.
 
     ![<chunk_status_after_shard1_down>](./images/t5_HA_status_chunks_after_shard1_down.png " ")  
 
-10. If we run the same select statement either by connecting the catalog or to the one of available shard, it will return the same set of data.
+5. Start the shard1 using the startup command from sqlplus, to reflect that shard1 is joining back.
 
     ```
     <copy>
-    sudo podman exec -it shard2 /bin/bash
-    </copy>
-    ```
-
-Connect to "sqlplus / as sysdba" and set the PDB (container=PORCL2PDB)and run the select statement for the table app_shard.customers.
-    ```
-    <copy>
-    alter session set container=PORCL2PDB;
-    </copy>
-    ```
-
- ![<connect_shard2>](./images/t5_connect_shard2.png " ")
-
-  
-    <copy>
-    select * from app_shard.customers order by 1;
-    </copy>
-
-
-   ![<select_data_shard2>](./images/t5_select_data_shard2.png " ")  
-
-You will see that shard down situation has no affect on the availability of the data.
-
-11. Start the shard1 using the startup command from sqlplus, to create situation of shard1 joining back
-
-    ```
-    <copy>
-   startup
+    startup
     </copy>
     ```
 
     ![<start_shard1>](./images/t5_HA_startup_shard1.png " ")
 
 
-12. Check the status of shard and RU's and see that shard1 has joined back
+6. On a parallel session switch to GSM1, check the status of shard, RU's and see that shard1 has joined back.
 
+    ```
+    <copy>
+    sudo podman exec -i -t gsm1 /bin/bash
+    </copy>
+    ```
 
     ```
     <copy>
