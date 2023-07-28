@@ -59,28 +59,11 @@ Task 1 involves creating the users. By executing the provided SQL statements, we
     ![Access Terminal](images/alter-session1.png "Terminal")
 
 
-    * Exit the session
-    ```
-    <copy>
-    exit
-    </copy>
-    ```
-
     * Login to system user in pdb1
 
     ```
     <copy>
-    sqlplus system/Welcome123@FREEPDB1
-    </copy>
-    ```
-
-3. Create two users
-
-    * Login to system user in pdb1
-
-    ```
-    <copy>
-    sqlplus system/Welcome123@FREEPDB1
+    CONNECT system/Welcome123@FREEPDB1
     </copy>
     ```
 
