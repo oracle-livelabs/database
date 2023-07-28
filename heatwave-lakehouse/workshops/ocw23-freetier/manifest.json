@@ -15,7 +15,7 @@
         },
 
         {
-          "title": "Lab 1: Create VCN and MySQL HeatWave DB System while loading DB Data",
+          "title": "Lab 1: Create Compartment, VCN and MySQL HeatWave DB System while loading DB Data",
           "filename": "../../create-heatwave-vcn-db/create-heatwave-vcn-db.md"
         },
 
@@ -25,17 +25,17 @@
         },
         
         {
-          "title": "Lab 3: Create and store data for Lakehouse",
+          "title": "Lab 3: Upload data to Object Storage for HeatWave Lakehouse",
           "filename": "../../create-lakehouse-files/create-lakehouse-files.md"  
         },
 
         {
-          "title": "Lab 4: Add HeatWave Cluster and Test MySQL Shell",
+          "title": "Lab 4: Add HeatWave Cluster to the DB sytem",
           "filename": "../../add-heatwave-cluster/add-heatwave-cluster.md"
         },
         
         {
-          "title": "Lab 5: Load mysql_customer_orders Data into HeatWave Cluster ",
+          "title": "Lab 5: Load data into HeatWave Cluster ",
           "filename": "../../load-db-heatwave-cluster/load-db-heatwave-cluster.md"
         },
 
@@ -50,10 +50,15 @@
         },
 
         {
-          "title": "Lab 8: Develop MySQL HeatWave Apps with LAMP (Bonus)",
+          "title": "Lab 8: (Bonus) Develop MySQL HeatWave Apps with LAMP",
           "filename": "../../develop/develop.md"
         }, 
-      
+
+        {
+          "title": "Lab9: Stop OCI Services",
+          "filename": "../../stop-services/stop-services.md"
+        },
+
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
