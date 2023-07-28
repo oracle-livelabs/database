@@ -344,6 +344,91 @@ To configure the Stock Broker application as a transaction participant:
 
 19. Save the changes.
 
+## Task 3: Enable Transaction History (Optional)
+
+You can register your initiator and participant services to receive notifications when an event occurs. To achieve this you must perform the additional steps described in this task.
+
+1. Uncomment the `BuyStockEventListenerResource.java` and `SellStockEventListenerResource.java` classes, located in the `/com/oracle/tmm/stockbroker/listeners/` package of the `StockBroker` application. The `StockBroker` application files are available in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/` folder.
+
+2. Uncomment the `TransactionEventsUtility.java` class, located in the `/com/oracle/tmm/stockbroker/utils/` package of the `StockBroker` application.
+
+3. Update the `TMMConfigurations.java` file, located in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
+
+    1. Add the following lines of code to import the listeners that you have uncommented.
+
+        ```java
+        <copy>
+        import com.oracle.tmm.stockbroker.listeners.BuyStockEventListenerResource;
+		import com.oracle.tmm.stockbroker.listeners.SellStockEventListenerResource;
+        </copy>
+        ```
+
+    2. Add the following lines of code within the `TMMConfigurations()` method to register the `BuyStockEventListenerResource.java` and `SellStockEventListenerResource.java` classes.
+
+        ```java
+        <copy>
+        ...
+        register(BuyStockEventListenerResource.class);
+        register(SellStockEventListenerResource.class);
+        ...
+        </copy>
+        ```
+
+4. Update the `UserStockTransactionServiceImpl.java` class, located in the `/com/oracle/tmm/stockbroker/service/impl` package of the `StockBroker` application. Add the following lines of code to register the transaction events within the transaction boundary. Note that you must register the transaction event after the transaction begins.
+
+    1. Add the following line of code to import the `TransactionEventsUtility` package.
+
+        ```java
+        <copy>
+        import com.oracle.tmm.stockbroker.utils.TransactionEventsUtility;
+        </copy>
+        ```
+
+    2. Add the following line of code.
+
+        ```java
+        <copy>
+        @Autowired
+        TransactionEventsUtility transactionEventsUtility;
+        </copy>
+        ```
+
+    3. Add a line of code, `transactionEventsUtility.registerStockTransactionEvents(buyStock)`, to register the purchase of stocks.
+
+        ```java
+        <copy>
+        @Override
+        public BuyResponse buy(BuyStock buyStock) {
+        TrmUserTransaction transaction = new TrmUserTransaction();
+        BuyResponse buyResponse = new BuyResponse();
+        try {
+           transaction.begin(true);
+           // Add the following line of code after the transaction begins.
+           transactionEventsUtility.registerStockTransactionEvents(buyStock);
+           buyResponse.setTransactionId(transaction.getTransactionID());
+           ...
+        }
+        </copy>
+        ```
+
+    4. Add a line of code, `transactionEventsUtility.registerStockTransactionEvents(sellStock)` to register the sale of stocks.
+
+        ```java
+        <copy>
+        @Override
+        public SellResponse sell(SellStock sellStock) {
+        TrmUserTransaction transaction = new TrmUserTransaction();
+        SellResponse sellResponse = new SellResponse();
+        try {
+            transaction.begin(true);
+            // Add the following line of code after the transaction begins.
+            transactionEventsUtility.registerStockTransactionEvents(sellStock);
+            sellResponse.setTransactionId(transaction.getTransactionID());
+            ...
+        }
+        </copy>
+        ```
+
 You may now **proceed to the next lab**.
 
 ## Learn More

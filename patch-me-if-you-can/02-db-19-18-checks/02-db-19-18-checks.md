@@ -1,4 +1,4 @@
-# Lab 3: Checks in the 19.18 Environment
+# Lab 2: Checks in the 19.18 Environment
 
 ## Introduction 
 You will use this lab to check several things in the 19.18 environment while the installation in the 19.19 environment progresses. At the end of this lab, you will complete the installation of the new Oracle Home from the previous lab.
