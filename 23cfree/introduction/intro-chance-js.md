@@ -20,3 +20,11 @@ This labs assumes you have:
 * All previous labs successfully completed 
 * SQL Developer Web 23.1 or a compatible tool for running SQL statements
 
+## Learn More
+
+* [Introducing Oracle Database 23c Free – Developer Release](https://blogs.oracle.com/developers/post/how-to-import-javascript-es-modules-in-23c-free-and-use-them-in-sql-queries)
+
+## Acknowledgements
+* **Author** - Dan Williams, Loïc Lefèvre 
+* **Contributors** - Martin Bach, Lucas Victor Braun-Lohrer
+* **Last Updated By/Date** - Dan Williams, Database Product Management, July 2023
