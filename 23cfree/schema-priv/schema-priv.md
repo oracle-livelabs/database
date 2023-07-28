@@ -53,7 +53,7 @@ Task 1 involves granting privileges to users for accessing tables within a schem
 
     ```
     <copy>
-    GRANT ALL PRIVILEGES ON s1 TO u2;
+    GRANT ALL PRIVILEGES ON s1.inventory_no_reservations TO u2;
     </copy>
     ```
 
