@@ -33,11 +33,11 @@ Note: Ensure that you have the necessary access and privileges to perform the ta
 
 Task 1 involves granting privileges to users for accessing tables within a schema. We will grant select, insert, update, and delete privileges on the inventory\_no\_reservations table to User 1 (u1) and schema privileges for select, insert, update, and delete operations to User 2 (u2) on Schema 1.
 
-1. Login to user 1 with the username and password you selected. If you are already in an sql session you can just type `exit` to quit session.
+1. Login to user 1 with the username and password you selected.
 
     ```
     <copy>
-    sqlplus system/Welcome123@FREEPDB1
+    CONNECT system/Welcome123@FREEPDB1
     </copy>
     ```
 
@@ -53,10 +53,7 @@ Task 1 involves granting privileges to users for accessing tables within a schem
 
     ```
     <copy>
-    Grant SELECT ANY TABLE on SCHEMA s1 to u2;
-    Grant INSERT ANY TABLE on SCHEMA s1 to u2;
-    Grant UPDATE ANY TABLE on SCHEMA s1 to u2;
-    Grant DELETE ANY TABLE on SCHEMA s1 to u2;
+    GRANT ALL PRIVILEGES ON SCHEMA_NAME TO USER_NAME;
     </copy>
     ```
 
