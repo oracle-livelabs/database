@@ -26,7 +26,7 @@ MySQL HeatWave Lakehouse is 17X faster than Snowflake and 6X faster than Amazon 
 
 #### MySQL HeatWave Lakehouse, lets users process and query hundreds of terabytes of data in the object store
 
-  ![lakehouse diagram](./images/mysql_heatwave_lakehouse.png "MySQL HeatWave Lakehouse")
+  ![lakehouse diagram](./images/mysql-heatwave-lakehouse.png "MySQL HeatWave Lakehouse")
 
 ### Objectives
 
