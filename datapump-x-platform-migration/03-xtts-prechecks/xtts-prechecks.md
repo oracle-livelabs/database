@@ -40,7 +40,7 @@ This lab assumes you have:
     ```
 
 | Source | Target |
-| :-------- | :-----|
+| :--: | :--: |
 | ![Login to source 11.2.0.4 database](./images/open-prechecks-sqlplus-src.png " ") | ![Login to target 21c database](./images/open-prechecks-sqlplus-trg.png " ") |
 {: title="SQL*Plus Output from Source and Target"}
 
@@ -69,7 +69,7 @@ So, execute on __source__ and __target__:
 </details>
 
 | Source | Target |
-| :-------- | :-----|
+| :--: | :--: |
 |![Check if target platform is supported](./images/precheck-task2-src.png " ")|![Check if target platform is supported](./images/precheck-task2-trg.png " ")|
 {: title="Transportable Tablespace Method Supported on Source and Target"}
 
@@ -93,7 +93,7 @@ select dbtimezone from dual;
 
 
 | Source | Target |
-| :-------- | :-----|
+| :--: | :--: |
 |![Checking DBTIMEZONE on source](./images/precheck-task3a-src.png " ")|![Checking DBTIMEZONE on target](./images/precheck-task3a-trg.png " ")|
 {: title="DBTIMEZONE Output from Source and Target"}
 
@@ -125,10 +125,9 @@ As both time zones differ, check now if your source database has tables having c
 
   ```
 </details>
-| Source | Target |
-| :-------- | :-----|
-|![Checking on source for Timestamp with local timezone dataypes](./images/precheck-task3b-src.png " ")| n/a |
-{: title="Tables on Source with LOCAL TIMEZONE Data Types"}
+
+
+![Checking on source for Timestamp with local timezone dataypes](./images/precheck-task3b-src.png " ")
 
 
 In the lab, there are no TSLTZ data types used. So there is no need to sync both DBTIMEZONEs or handle data manually with expdp/impdp.
@@ -156,7 +155,7 @@ where parameter like '%CHARACTERSET';
 </details>
 
 | Source | Target |
-| :-------- | :-----|
+| :--: | :--: |
 |![DBTIMEZONE output source](./images/precheck-task4-src.png " ")|![DBTIMEZONE output target](./images/precheck-task4-trg.png " ")|
 {: title="Character Set Output from Source and Target"}
 
@@ -348,11 +347,13 @@ Execute on __source__ and __target__:
   ```
 Output on the __source__:
 
-![Exit from SQL*Plus on source](./images/disconnect-sqlplus-src.png " ")
+| Source | Target |
+| :--: | :--: |
+|![Exit from SQL*Plus on source](./images/disconnect-sqlplus-src.png " ")|![Exit from SQL*Plus on target](./images/disconnect-sqlplus-trg.png " ")|
+{: title="Exit from SQL*Plus"}
 
-and the output on the __target__
 
-![Exit from SQL*Plus on target](./images/disconnect-sqlplus-trg.png " ")
+
 
 
 
