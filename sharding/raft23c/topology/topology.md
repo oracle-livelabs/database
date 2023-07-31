@@ -3,6 +3,8 @@
 ## Introduction   
 Oracle Sharding is a scalability and availability feature for custom-designed OLTP applications that enables the distribution and replication of data across a pool of Oracle databases that do not share hardware or software. The pool of databases is presented to the application as a single logical database.
 
+Raft Replication is a built-in Oracle Sharding capability that integrates data replication with transaction execution in a sharded database. Raft replication enables fast automatic failover with zero data loss.
+
 This workshop is configured with a custom image having all the required podman containers for Sharding using 23c GSM and 23c SIDB Beta Images.
 
 In this workshop, we attempt to use minimal resources to show the demonstration, and in the process we chose a single compute instance to install all of the Oracle Sharding components and appclient.
