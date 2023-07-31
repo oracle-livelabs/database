@@ -22,7 +22,7 @@ This labs assumes you have:
 
 ## Learn More
 
-* [Introducing Oracle Database 23c Free – Developer Release](https://blogs.oracle.com/developers/post/how-to-import-javascript-es-modules-in-23c-free-and-use-them-in-sql-queries)
+* [Blog - How to import JavaScript ES Modules in 23c FREE and use them in SQL queries!](https://blogs.oracle.com/developers/post/how-to-import-javascript-es-modules-in-23c-free-and-use-them-in-sql-queries)
 
 ## Acknowledgements
 * **Author** - Dan Williams, Loïc Lefèvre 

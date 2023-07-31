@@ -17,37 +17,10 @@ In this lab you will have:
 
 This labs assumes you have: 
 * Oracle Database 23c Free Developer Release
-* All previous labs sucessfully completed 
-* SQL Developer Web 23.1 or a comptatible tool for running SQL statements
+* All previous labs successfully completed 
+* SQL Developer Web 23.1 or a compatible tool for running SQL statements
 
-## Task 1: Connect to your database user
-
-1. Your browser should still be open, if not just open a new one. If running in a Sandbox go to Activities and then at the top click on new window. If Chrome is not running then click on Chrome.
-
-    ![Image alt text](images/new_chrome_window.png " ")
-
-2. The address for SQL Developer Web on your machine is below. Copy and paste that into the browser.
-    **Note:** If you did not start ORDs, ORDs stopped working or you closed that terminal in the previous lab, go back and complete the steps in that lab to start ORDs otherwise it will not be running to login here.
-    ```
-    <copy>
-    http://localhost:8080/ords/hol23c/_sdw
-    </copy>
-    ```
-    ![Image alt text](images/ords_url.png " ")
-
-3. To login use the username hol23c with the password you set in Lab 1 in the browser.
-
-    ![Image alt text](images/ords_login.png "")
-
-4. To be able to run SQL statements you will need the sql worksheet. Click on SQL to launch that.
-
-    ![Image alt text](images/ords_landing_page_launch.png " ")
-
-5. You are now logged in and should be at a screen that looks like this.
-
-    ![Image alt text](images/sql_login.png " ")
-
-## Task 2: Setup
+## Task 1: Setup
 
 1. First things first, let's start
   Remark: The following scripts are run on an Oracle database 23c FREE - Developer Release using sqlplus.
@@ -117,7 +90,7 @@ This labs assumes you have:
     ![Image alt text](images/lab2_task2_step8.png "_") 
     
 
-## Task 3: Install Chance.js ES Module
+## Task 2: Install Chance.js ES Module
 For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.com/package/npm/chance) module from [Victor Quinn](https://www.victorquinn.com/about/) under [MIT License](https://en.wikipedia.org/wiki/MIT_License). This module is really interesting when working on data as it provides _numerous_ ways to "generate random numbers, characters, strings, names, addresses, dice, and pretty much anything else"; in brief 100+ new data generators.
 
 
@@ -231,7 +204,7 @@ export { chance, template };
     ```
     ![Image alt text](images/lab2_task3_step7b.png " _")
 
-## Task 4: Lets intergrate the SQL engine with the JavaScript MLE using PL/SQL functions
+## Task 3: Lets intergrate the SQL engine with the JavaScript MLE using PL/SQL functions
 Installing a PL/SQL package to make Chance functions accessible in SQL
 
 1. See how the chance module env MLE environment is being used so that dependencies resolution goes well
@@ -448,7 +421,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     ```
     ![Image alt text](images/lab2_task4_step1.png " _") 
 
-## Task 5: Chance.js functions in SQL
+## Task 4: Chance.js functions in SQL
 
 1. Generate a random string
     ```
@@ -552,7 +525,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     ```
      ![Image alt text](images/lab2_task5_step12.png " _") 
 
-## Task 6: Extended Chance.js functions in SQL
+## Task 5: Extended Chance.js functions in SQL
 If you've taken a look at the extended MLE module above, you may have seen some additional code. In fact, while looking for JavaScript data generators, I found out that Fony.js (MIT License) from [Safia Abdalla](https://github.com/captainsafia) provided an interesting concept of `JSON template`. So I've decided to integrate it and improve it to benefit from the additional possibilities offered by `Chance.js` in terms of generator customization using a JSON document as a parameter. The result is that the `template()` function can now be used to generate random JSON documents based on JSON templates!
 
 1. Generate a JSON document containing tags as an array of 3 words
