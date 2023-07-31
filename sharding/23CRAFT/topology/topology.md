@@ -186,17 +186,14 @@ Notice that the log index is increasing as there are read and write operations a
 
     ![<workload_RU_log_index>](./images/t4_workload_log_index.png " ")
 
-6. You can stop the workload using ctrl+c.
+6. You can keep running the workload while you perform the next task.
 
 
 
 ## Task 5: Perform Failover Test
 
 What happens when one of the available shard databases goes down or is taken down for maintenance? 
-Failover test by stopping shard1  to create shard1 down situation. 
-
-
-
+Failover test by stopping shard1 to create shard1 down situation. 
 
 1.  Run the below command as **oracle** user to check the status for all the containers.
 
@@ -227,7 +224,7 @@ Failover test by stopping shard1  to create shard1 down situation.
 
     ![<stop_shard_1>](./images/t5_HA_shut_down_shard1.png " ")  
 
-4. Switch to GSM1 on another session and check the status for RU's and you will see that database porcl1cdb_porcl1pdb is not present.
+4. Switch to GSM1 on another terminal session and check the status for RU's and you will see that database porcl1cdb_porcl1pdb is not present.
 
     ```
     <copy>
@@ -248,6 +245,8 @@ Failover test by stopping shard1  to create shard1 down situation.
     ```
 
     ![<chunk_status_after_shard1_down>](./images/t5_HA_status_chunks_after_shard1_down.png " ")  
+
+You will see that shard1 down situation has no impact on the running workload.
 
 5. Start the shard1 using the startup command from sqlplus, to reflect that shard1 is joining back.
 
@@ -283,7 +282,8 @@ Failover test by stopping shard1  to create shard1 down situation.
     ```
 
     ![<chunk_status_after_startup_shard1>](./images/t5_HA_status_chunks_after_startup_shard1.png " ")  
-
+    
+You can stop the workload that ran in the previous task using Ctrl+C.
 
 
 ## Task 6: Scaling UP with Raft Replication
