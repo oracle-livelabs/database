@@ -222,7 +222,7 @@ Failover test by stopping shard1 to create shard1 down situation.
     </copy>
     ```
 
-    ![<stop_shard_1>](./images/t5_HA_shut_down_shard1.png " ")  
+    ![<stop_shard_1>](./images/t5_ha_shut_down_shard1.png " ")  
 
 4. Switch to GSM1 on another terminal session and check the status for RU's and you will see that database porcl1cdb_porcl1pdb is not present.
 
@@ -244,7 +244,7 @@ Failover test by stopping shard1 to create shard1 down situation.
     </copy>
     ```
 
-    ![<chunk_status_after_shard1_down>](./images/t5_HA_status_chunks_after_shard1_down.png " ")  
+    ![<chunk_status_after_shard1_down>](./images/t5_ha_status_chunks_after_shard1_down.png " ")  
 
 You will see that shard1 down situation has no impact on the running workload.
 
@@ -256,7 +256,7 @@ You will see that shard1 down situation has no impact on the running workload.
     </copy>
     ```
 
-    ![<start_shard1>](./images/t5_HA_startup_shard1.png " ")
+    ![<start_shard1>](./images/t5_ha_startup_shard1.png " ")
 
 
 6. On a parallel session switch to GSM1, check the status of shard, RU's and see that shard1 has joined back.
@@ -273,7 +273,7 @@ You will see that shard1 down situation has no impact on the running workload.
     </copy>
     ```
 
-    ![<chunk_status_after_startup_shard1>](./images/t5_HA_shard_status_after_startup.png " ")  
+    ![<chunk_status_after_startup_shard1>](./images/t5_ha_shard_status_after_startup.png " ")  
 
     ```
     <copy>
@@ -281,7 +281,7 @@ You will see that shard1 down situation has no impact on the running workload.
     </copy>
     ```
 
-    ![<chunk_status_after_startup_shard1>](./images/t5_HA_status_chunks_after_startup_shard1.png " ")  
+    ![<chunk_status_after_startup_shard1>](./images/t5_ha_status_chunks_after_startup_shard1.png " ")  
     
 You can stop the workload that ran in the previous task using Ctrl+C.
 
@@ -320,7 +320,7 @@ Run in the terminal as **oracle** user to Create SHARD4 database container
 
 You have to wait until GSM shard set up is completed. Please refer the below screenshot:
 
-![<GSM_shard_setup_completed>](./images/t6_add_shard4_logs_GSM_Shard_setup_completed.png " ")
+![<GSM_shard_setup_completed>](./images/t6_add_shard4_logs_gsm_Shard_setup_completed.png " ")
 
 
 3. Once the DB is up and running, complete the below commands to   complete the GSM configuration to deploy the new SHARD4:
@@ -347,7 +347,7 @@ You have to wait until GSM shard set up is completed. Please refer the below scr
     </copy>
     ```
 
-    ![<connect to shard director>](./images/t6_connect_GSM1.png " ")
+    ![<connect to shard director>](./images/t6_connect_gsm1.png " ")
 
      ```
     <copy>
