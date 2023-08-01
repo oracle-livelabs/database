@@ -57,7 +57,7 @@ Switch to the source directory
 
     ![change XTTS source directory](./images/change-xtts-src-dir.png " ")
 
-    and unzip 'rman_xttconvert_VER4.3.zip' 
+    and unzip 'rman\_xttconvert\_VER4.3.zip' 
 
     ```
     <copy>

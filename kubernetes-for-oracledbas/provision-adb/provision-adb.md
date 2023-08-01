@@ -91,12 +91,7 @@ Use the **OraOperator** to provision a new ADB by creating a *manifest file* tha
     </copy>
     ```
 
-    Output:
-
-    ```text
-    secret/adb-devops-admin-password created
-    autonomousdatabase.database.oracle.com/adb-devops created
-    ```
+    ![ADB Provision](images/adb_provision.png "ADB Provision")
 
 ## Task 3: Verify new ADB Provisioning
 
@@ -110,7 +105,7 @@ Use the **OraOperator** to provision a new ADB by creating a *manifest file* tha
 
     Press `Ctrl-C` to break the loop
 
-2. In the OCI Console, navigate to Oracle Database -> Autonomous Database.  
+2. In the OCI Console, navigate to Oracle Database -> Autonomous Database.
 
     ![Navigate to ADB](images/adb_navigation.png "Navigate to ADB")
 
@@ -130,12 +125,7 @@ The ADB provisioned by the **OraOperator** is great for DevOps, after which it s
     </copy>
     ```
 
-    Output:
-
-    ```text
-    autonomousdatabase.database.oracle.com "adb-devops" deleted
-    secret "adb-devops-admin-password" deleted
-    ```
+    ![ADB Terminate](images/adb_terminate.png "ADB Terminate")
 
     *Note* that you could have also deleted each resource individually by running:
 
@@ -146,17 +136,7 @@ The ADB provisioned by the **OraOperator** is great for DevOps, after which it s
 
 ## Task 5: Verify ADB Termination
 
-1. Watch the ADB being terminated from Kubernetes:
-
-    ```bash
-    <copy>
-    kubectl get adb adb-devops -w
-    </copy>
-    ```
-
-    Press `Ctrl-C` to break the loop
-
-2. In the OCI Console, navigate to Oracle Database -> Autonomous Database.  
+1. In the OCI Console, navigate to Oracle Database -> Autonomous Database.
 
     ![Navigate to ADB](images/adb_navigation.png "Navigate to ADB")
 
