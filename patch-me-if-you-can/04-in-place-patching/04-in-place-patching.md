@@ -1,4 +1,4 @@
-# Lab 5: In-Place Patching
+# Lab 4: In-Place Patching
 
 ## Introduction 
 The benefit of the out-of-place patching method is that you preserve the previous home. Also, it shortens the downtime required. To illustrate the difference, you will patch the 19.18.0 home in-place.
@@ -282,9 +282,9 @@ If you'd like to learn about the complexities of in-place patching instead, cont
     __Attention__
     When opatch fails with error 73
     ![opatch error 73](./images/opatch-73.png " ")
-    scroll up a little bit telling you there's still an "oracle" process active:
+    you will also see a message stating there's an active "oracle" process:
     ![Process flow lab 4](./images/opatch-error-oracle-active.png " ")
-    wait a few minutes and retry the rollback.
+    then wait a few minutes and retry the rollback. This can happen when the autoupgrade process did not yet restart the database from the new ORACLE_HOME directory
 
     ```
     <copy>

@@ -1,4 +1,4 @@
-# Lab 6:  Final Checks
+# Lab 5:  Final Checks
 
 ## Introduction 
 You did patch out-of-place, which Oracle highly recommend, and you may have also done a more work-intense in-place patching exercise. So, let us check some things in both environments. 

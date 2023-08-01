@@ -59,28 +59,11 @@ Task 1 involves creating the users. By executing the provided SQL statements, we
     ![Access Terminal](images/alter-session1.png "Terminal")
 
 
-    * Exit the session
-    ```
-    <copy>
-    exit
-    </copy>
-    ```
-
     * Login to system user in pdb1
 
     ```
     <copy>
-    sqlplus system/Welcome123@FREEPDB1
-    </copy>
-    ```
-
-3. Create two users
-
-    * Login to system user in pdb1
-
-    ```
-    <copy>
-    sqlplus system/Welcome123@FREEPDB1
+    CONNECT system/Welcome123@FREEPDB1
     </copy>
     ```
 
@@ -104,7 +87,7 @@ Task 1 involves creating the users. By executing the provided SQL statements, we
     </copy>
     ```
 
-    * Provide the roles and privileges to user 1 and 2 for this lab setup like so:
+    * Provide the following roles so the users can connect to the database, execute queries, and access database objects like so:
 
     ```
     <copy>
@@ -182,6 +165,11 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
     ```
     <copy>
     ALTER USER s1 QUOTA UNLIMITED ON users;
+    </copy>
+    ```
+
+    ```
+    <copy>
     commit;
     </copy>
     ```
@@ -193,14 +181,24 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
     <copy>
     INSERT INTO s1.inventory_no_reservations (id, product_name, quantity, budget)
     VALUES (1, 'Product A', 10, 700);
-    commit;
     </copy>
     ```
 
     ```
     <copy>
+    commit;
+    </copy>
+    ```    
+
+    ```
+    <copy>
     INSERT INTO s1.inventory_no_reservations (id, product_name, quantity, budget)
     VALUES (2, 'Product B', 5, 200);
+    </copy>
+    ```
+
+    ```
+    <copy>
     commit;
     </copy>
     ```

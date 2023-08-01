@@ -1,4 +1,4 @@
-# Lab 4: Using AutoUpgrade for Patching
+# Lab 3: Using AutoUpgrade for Patching
 
 ## Introduction 
 In this lab, you will patch the CDB2 database from 19.18.0 to 19.19.0 with just two commands.
