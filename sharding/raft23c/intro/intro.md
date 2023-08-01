@@ -9,7 +9,7 @@ Raft replication automatically reconfigures replication in case of shard host fa
 
 *Estimated Workshop Time:*  2 hours
 
-![RAFT introduction](images/raft_intro.png " ")
+![RAFT introduction](images/raft-intro.png " ")
 
 ### Objectives
 In this workshop, you will gain first-hand experience in utilizing the Shard Native Replication within Oracle Sharding, enabling participants to manage RAFT-enabled replication for robust distributed database solutions
@@ -26,7 +26,6 @@ We will use Podman containers and demonstrate multiple use cases.
 ### Prerequisites
 - An Oracle Cloud Account - Please view this workshop's LiveLabs landing page to see which environments are supported
 
-*Note: If you have a **Free Trial** account, when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)***
 
 You may now proceed to the next lab.
 

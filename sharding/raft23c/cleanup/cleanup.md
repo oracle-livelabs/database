@@ -16,8 +16,8 @@ Estimated Time - 5 minutes
 
 ### Prerequisites
 
-- You should have provisioned the **Learn how to use Oracle Sharding for mission-critical, internet-scale apps** workshop using a terraform stack
-- To provision this workshop, there are detailed instructions in Lab 1 of [Learn how to use Oracle Sharding for mission-critical, internet-scale apps](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=866) workshop.
+- You should have provisioned the **Learn how to use RAFT Replication to build resilient distributed databases** workshop using a terraform stack
+- To provision this workshop, there are detailed instructions in Lab 1 of [Learn how to use RAFT Replication to build resilient distributed databases](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=866) workshop.
 
 ## Task 1: Terminate a Provisioned Oracle Autonomous Database Instance
 
@@ -44,7 +44,8 @@ Estimated Time - 5 minutes
 
 ## Learn More
 
-- [Oracle Sharding Documentation] (https://docs.oracle.com/en/database/oracle/oracle-database/19/shard/sharding-overview.html#GUID-0F39B1FB-DCF9-4C8A-A2EA-88705B90C5BF)
+-  **RAFT Replication** 
+[RAFT Replication documentation for internal purposes] (https://docs-uat.us.oracle.com/en/database/oracle/oracle-database/23/shard/oracle-sharding-raft-replication.html#GUID-AB5D3A4B-51BD-456C-B03E-4C6B3EDB4C2B)
 
 ## Acknowledgements
 

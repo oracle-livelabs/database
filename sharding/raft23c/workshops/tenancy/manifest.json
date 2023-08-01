@@ -1,6 +1,6 @@
 {
   "workshoptitle": "Learn how to use RAFT Replication to build resilient distributed databases",
-  "help": "livelabs-help-license_us@oracle.com",
+  "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
