@@ -121,7 +121,7 @@ Moving on to Task 2, we will create two tables under Schema 1. The first table, 
 
 1. Create the first table. Table 1 would be inventory\_no\_reservations (normal table)
 
-* Connect to system user
+    * Connect to system user
 
     ```
     <copy>
@@ -165,11 +165,6 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
     ```
     <copy>
     ALTER USER s1 QUOTA UNLIMITED ON users;
-    </copy>
-    ```
-
-    ```
-    <copy>
     commit;
     </copy>
     ```
@@ -180,28 +175,12 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
     ```
     <copy>
     INSERT INTO s1.inventory_no_reservations (id, product_name, quantity, budget)
-    VALUES (1, 'Product A', 10, 700);
-    </copy>
-    ```
-
-    ```
-    <copy>
-    commit;
-    </copy>
-    ```    
-
-    ```
-    <copy>
-    INSERT INTO s1.inventory_no_reservations (id, product_name, quantity, budget)
+    VALUES (1, 'Product A', 10, 700), 
     VALUES (2, 'Product B', 5, 200);
-    </copy>
-    ```
-
-    ```
-    <copy>
     commit;
     </copy>
     ```
+
 
 2. Insert data into the second table:
 
@@ -210,14 +189,7 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
     ```
     <copy>
     INSERT INTO s1.inventory_reservations (id, product_name, quantity, budget)
-    VALUES (1, 'Product C', 8, 1000);
-    commit;
-    </copy>
-    ```
-
-    ```
-    <copy>
-    INSERT INTO s1.inventory_reservations (id, product_name, quantity, budget)
+    VALUES (1, 'Product C', 8, 1000), 
     VALUES (2, 'Product D', 3, 500);
     commit;
     </copy>
