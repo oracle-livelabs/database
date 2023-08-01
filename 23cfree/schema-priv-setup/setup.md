@@ -107,27 +107,11 @@ Task 1 involves creating the users. By executing the provided SQL statements, we
     </copy>
     ```
 
-    * You can test connection to users as shown below. Make sure to exit or reconnect to system user shown in step 2 above for the next task.
-
-    ```
-    <copy>
-    CONNECT u1/Welcome123@FREEPDB1;
-    </copy>
-    ```
-
 ## Task 2: Create two tables under Schema 1
 
 Moving on to Task 2, we will create two tables under Schema 1. The first table, inventory\_no\_reservations, will serve as a normal table without any special features. The second table, inventory\_reservations, will be created with lock-free reservations. This feature enables efficient management of reservations for specific columns, and we will bind it to the 'budget' column in our case.
 
 1. Create the first table. Table 1 would be inventory\_no\_reservations (normal table)
-
-    * Connect to system user
-
-    ```
-    <copy>
-    CONNECT system/Welcome123@FREEPDB1;
-    </copy>
-    ```
 
     ```
     <copy>
@@ -169,14 +153,14 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
     </copy>
     ```
 
-
     * Inserting rows into inventory\_no\_reservations table
 
     ```
     <copy>
-    INSERT INTO s1.inventory_no_reservations (id, product_name, quantity, budget)
-    VALUES (1, 'Product A', 10, 700), 
-    VALUES (2, 'Product B', 5, 200);
+    INSERT INTO s1.inventory_no_reservations
+    VALUES
+    (1, 'Product A', 10, 700), 
+    (2, 'Product B', 5, 200);
     commit;
     </copy>
     ```
@@ -188,9 +172,10 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
 
     ```
     <copy>
-    INSERT INTO s1.inventory_reservations (id, product_name, quantity, budget)
-    VALUES (1, 'Product C', 8, 1000), 
-    VALUES (2, 'Product D', 3, 500);
+    INSERT INTO s1.inventory_reservations
+    VALUES
+    (1, 'Product C', 8, 1000), 
+    (2, 'Product D', 3, 500);
     commit;
     </copy>
     ```

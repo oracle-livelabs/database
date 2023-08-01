@@ -164,11 +164,11 @@ Watch what happens next with user 2 who has schema privileges enabled:
 
     ```
     <copy>
-    INSERT INTO s1.inventory_third_table (id, product_name, quantity, budget)
-    VALUES (3, 'Product E', 7, 29.99);
-
-    INSERT INTO s1.inventory_third_table (id, product_name, quantity, budget)
-    VALUES (4, 'Product F', 12, 39.99);
+    INSERT INTO s1.inventory_third_table
+    VALUES
+    (3, 'Product E', 7, 29.99),
+    (4, 'Product F', 12, 39.99);
+    COMMIT;
     </copy>
     ```
 
