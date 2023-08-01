@@ -41,7 +41,7 @@ This labs assumes you have:
     ```
     ![Image alt text](images/lab2_task2_step2.png "_")
 
-3. Next, alter session container 
+3. Next, we will alter our session container 
     ```
     <copy>
     alter session set container = freepdb1;
@@ -57,7 +57,7 @@ This labs assumes you have:
     ```
     ![Image alt text](images/lab2_task2_step4.png "_") 
 
-5. Then, we grant access to execute javascript 
+5. Then, we grant access to execute javascript
     ```
     <copy> 
     grant execute on javascript to hol23c;
@@ -110,7 +110,7 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     ```
     ![Image alt text](images/lab2_task3_step2.png "_") 
 
-3. Now that you're connected as `hol23c`, run 
+3. Now that you're connected as `hol23c`, run SET VERIFY OFF. This will avoid SQL Plus displaying before and after images of each line that contains a substitution variable
     ```
     <copy>
     SET VERIFY OFF
@@ -118,7 +118,7 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     ```
     ![Image alt text](images/lab2_task3_step3.png "_") 
 
-4. Now that you're connected as `hol23c`, run 
+4. Now that you're connected as `hol23c`, run SET DEFINE OFF. This will prevent substitution issues since we are using PL/SQL since '&' creates issues with script
     ```
     <copy>
     SET DEFINE OFF
@@ -431,7 +431,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     ```
     ![Image alt text](images/lab2_task5_step1.png " _") 
 
-2. Generate a random string
+2. Generate a random string with the length of 5 
     ```
     <copy>
     select chance.string( json { 'length': 5 } ); 
@@ -575,7 +575,6 @@ If you've taken a look at the extended MLE module above, you may have seen some 
 
 * Don't forget to provide us your feedback on the [23c FREE community forum](https://forums.oracle.com/ords/apexds/domain/dev-community/category/oracle-database-free) that we monitor and where you can provide feedback.
 
-<!-- ## Thanks -->
 ## Acknowledgements
   <b>Quote by Loïc Lefèvre: "I would never have discovered the possibilities highlighted here without the help of Martin Bach and Lucas Victor Braun-Lohrer, respectively Product Manager for JavaScript MLE and Program Manager at Oracle Labs; so thanks a lot"!!!</b>
 
