@@ -1,4 +1,4 @@
-# Use MySQL HeatWave For Development  
+# Develop MySQL HeatWave App with LAMP
 
 ## Introduction
 
@@ -118,7 +118,7 @@ In this lab, you will be guided through the following tasks:
 
    Example: http://129.213.167.../info.php
 
-## Task 3: Create MySQl HeatWave / PHP connect app
+## Task 3: Create MySQL HeatWave / PHP connect app
 
 1. Security update"   set SELinux to allow Apache to connect to MySQL
 
