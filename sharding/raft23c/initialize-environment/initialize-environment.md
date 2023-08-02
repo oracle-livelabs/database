@@ -15,9 +15,9 @@ Watch the video for a quick walk through of the Initialize Environment lab.
 
 ### Prerequisites
 This lab assumes you have:
-- A Free Tier, Paid or LiveLabs Oracle Cloud account
+- An Oracle Cloud account
 - You have completed:
-    - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
+    - Lab: Prepare Setup 
     - Lab: Environment Setup
 
 ## Task 1: Validate That Required Processes are Up and Running.
