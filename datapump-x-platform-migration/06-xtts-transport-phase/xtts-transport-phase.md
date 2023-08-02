@@ -310,7 +310,7 @@ The Data Pump export parameter file "exp_metadata.par" was already created for y
     </details>
 
 2. Execute Export Data Pump (SOURCE) </br>
-Execute expdp using this copied par file:
+Execute expdp using this prepared par file:
 
     ```
     <copy>

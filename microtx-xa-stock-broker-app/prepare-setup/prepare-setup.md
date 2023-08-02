@@ -18,7 +18,8 @@ This lab assumes you have:
 ## Task 1: Download Oracle Resource Manager (ORM) stack ZIP file
 1.  Click the following link to download the Resource Manager ZIP file that you need to build your environment.
 
-    - [tmm-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/PszwMj5X-ILvE5_5yNipJvl2qTiqDxcFEjC219McuqtGmycd2vAQhlfaXTX7gfuY/n/natdsecurity/b/stack/o/tmm-mkplc-freetier.zip)
+    - [ll-orm-microtx-xa-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/ll-orm-microtx-xa-freetier.zip
+)
 
 2. Save the ZIP file in your downloads folder.
 

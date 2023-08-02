@@ -47,9 +47,9 @@ The below "Magic Button" will take you directly to the the Create Stack page in 
 * If you are logged into OCI, you will not be prompted to login.  Verify you are in the correct tenancy as the correct user.
 * If the [](var:oci_compartment) Compartment does not exist, you are either in the wrong tenancy or logged in as the wrong user.
 
-### Press the Magic Button to begin the deployment process
+1. **Press the Magic Button to begin the deployment process**
 
-[![Deploy to Oracle Cloud][magic_button]][magic_arch_stack]
+    [![Deploy to Oracle Cloud][magic_button]][magic_arch_stack]
 
 ## Task 2: Update the Stack Information
 
@@ -142,7 +142,7 @@ In the Workshop Stack, Terraform will write a number of variable and inventory f
 
 ![Terraform and Ansible](images/terraform_ansible.png "Terraform and Ansible")
 
-## Task 7: Review the Logs - Ansible
+## Task 8: Review the Logs - Ansible
 
 While Ansible can be used to configure any type of Infrastructure, it is limited to the Oracle Kubernetes Engine in this Workshop.
 

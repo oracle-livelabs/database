@@ -1,8 +1,8 @@
-# Test Mysql HeatWave Cluster
+# Load data into HeatWave Cluster
 
 ## Introduction
 
-A HeatWave cluster comprise of a MySQL DB System node and two or more HeatWave nodes. The MySQL DB System node includes a plugin that is responsible for cluster management, loading data into the HeatWave cluster, query scheduling, and returning query result.
+A HeatWave cluster comprise of a MySQL DB System and one or more HeatWave nodes. The MySQL DB System  includes a plugin that is responsible for cluster management, loading data into the HeatWave cluster, query scheduling, and returning query result.
 
 In this lab, you will load data and run queries in the HeatWave Cluster. You will see the query performance improvements on HeatWave compare to MySQL.
 
@@ -21,7 +21,7 @@ In this lab, you will be guided through the following task:
 
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with MySQL Shell
-- Completed Lab 2
+- Completed Lab 4
 
 ## Task 1: Load Schema Data into HeatWave Cluster
 
@@ -35,7 +35,7 @@ In this lab, you will be guided through the following task:
 
     ![MySQL shell Connect](./images/mysql-shell-login.png " mysql shell login")
 
-4. Run the following Auto Parallel Load command to load the  mysql\_customer\_orders tables data into the HeatWavecluster
+4. Run the following Auto Parallel Load command to load the  mysql\_customer\_orders tables data into the HeatWave Cluster
 
     ```bash
     <copy>CALL sys.heatwave_load(JSON_ARRAY('mysql_customer_orders'), NULL);</copy>

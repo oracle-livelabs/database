@@ -263,13 +263,15 @@ Install the Bank and Stock-Trading application in the `otmm` namespace, where yo
     TEST SUITE: None
     ```
 
-2. If you don't need to make any changes to the `values.yaml` file, skip this step and go to the next step. If you need to modify the `values.yaml` file, then uninstall `bankapp`. Update the `values.yaml` file, and then reinstall `bankapp`. Perform step 1 as described in this task again to reinstall `bankapp`.
+2. If you don't need to make any changes to the `values.yaml` file, skip this step and go to the next step. If you need to modify the `values.yaml` file, then uninstall `bankapp`.
 
     ```
     <copy>
-    helm uninstall sample-xa-app --namespace otmm
+    helm uninstall bankapp --namespace otmm
     </copy>
     ```
+
+    Update the `values.yaml` file, and then reinstall `bankapp`. Perform step 1 as described in this task again to reinstall `bankapp`.
 
 3. Verify that all resources, such as pods and services, are ready. Proceed to the next step only when all resources are running. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
 
