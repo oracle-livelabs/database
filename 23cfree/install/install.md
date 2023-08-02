@@ -1,24 +1,27 @@
-# Create the schema including JSON Duality Views
+# Installing and configuring Oracle Database 23c Free
 
 ## Introduction
 
-This lab walks you through the setup steps to create the user, tables, and JSON duality views needed to execute the rest of this workshop. Then you will populate the views and tables.
+This lab walks you through installing the database software, creating the database and creating the workshop user on Linux.
 
-Estimated Time: 10 minutes
+There are other deployment options that will not be covered in the workshop but will be linked in the Learn More section. These include Docker and VirtualBox deployments.
+
+Estimated Time: 25 minutes
 
 ### Objectives
 
 In this lab, you will:
-* Login as your database user
-* Create the JSON Duality Views and base tables needed
-* Populate your database
+* Setup the operating system
+* Install the database software
+* Create the database
+* Create the workshop user
 
 ### Prerequisites
 
 This lab assumes you have:
-* Oracle Database 23c Free Developer Release
+* A virtual machine running Linux (or running the LiveLabs Sandbox environment)
 * All previous labs successfully completed
-* SQL Developer Web 23.1 or a compatible tool for running SQL statements
+* Access to the internet to download the software
 
 ## Task 1: Operating System Setup
 
@@ -26,7 +29,7 @@ This lab assumes you have:
 
     ![Open Terminal](images/.png " ")
 
-2. Create the directories needed for this workshop
+2. Create the directories needed for this workshop.
 
     ```
     <copy>
@@ -40,7 +43,7 @@ This lab assumes you have:
     ```
     ![Make Directories](images/.png " ")
 
-2. Before installing you should check to see if anything is running on port 1521. This is what the configure command will use when creating the listener. If it cannot it will try and use another port. If a service is running on that port you can try and restart it to see if it will restart on another port.
+2. Before installing you should check to see if anything is running on port 1521. This is what the database configure command will use when creating the listener. If it cannot it will try and use another port. If a service is running on that port you can try and restart it to see if it will restart on another port. If you choose to run with a different port then just make sure to adjust the commands as you go with the correct port.
 
     ````
     <copy>
@@ -48,17 +51,33 @@ This lab assumes you have:
     </copy>
     ````
 
-8. Restart the service using the "sudo systemctl restart" command
+    Restart the service using the "sudo systemctl restart" command. Make sure to replace the text below the the service from the previous command
 
     ````
     <copy>
     sudo systemctl restart <replace with service>
+    </copy>
+    ````
 
+    Verify port 1521 is available
+
+    ````
+    <copy>
     sudo netstat -anp|grep 1521
     </copy>
     ````
 
-3. Get the download for 23c Free
+3. Enable the developer repo to be able to run the prerequisites check as a part of the install
+    ```
+    <copy>
+    sudo dnf config-manager --set-enabled ol8_developer
+    </copy>
+    ```
+    ![Image alt text](images/.png " ")
+
+## Task 2: Database Setup
+
+4. Get the download for 23c Free
     ```
     <copy>
     cd /u01/downloads
@@ -67,24 +86,13 @@ This lab assumes you have:
     ```
     ![Download Install](images/.png " ")
 
-## Task 2: Database Setup
-
-4. Enable the developer repo to be able to run the prerequisites check as a part of the install
-    ```
-    <copy>
-    sudo dnf config-manager --set-enabled ol8_developer
-    </copy>
-    ```
-    ![Image alt text](images/.png " ")
-
-5. Install the database software. This will take about 5-10 minutes.
+5. Install the database software using the dnf command. This will take about 5-10 minutes.
     ```
     <copy>
     sudo dnf -y localinstall /u01/downloads/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
     </copy>
     ```
     ![Image alt text](images/.png " ")   
-
 
 6. Create the database. You will be prompted for a password to be used for the database accounts. You can use any password here but you will need it later so note it down. For my examples I will use Welcome123# This should take about 5-10 minutes.
     ```
@@ -93,8 +101,6 @@ This lab assumes you have:
     </copy>
     ```
     ![Image alt text](images/.png " ")
-
-
 
 7. To see if your database is up and running you can use the following command
     ```
@@ -106,7 +112,7 @@ This lab assumes you have:
 
 ## Task 3: Environment and User Setup
 
-8. To set your environment each time Oracle logs in add these lines to your profile. This will specifically set it for the FREE database
+8. To set your environment each time Oracle logs in add these lines to your profile. This will specifically set it for the FREE database. Also this adds SQLcl and ORDS to your path.
     ```
     <copy>
     echo "export ORAENV_ASK=NO" >> /home/oracle/.bashrc
@@ -128,7 +134,7 @@ This lab assumes you have:
     </copy>
     ````
 
-9. Connect to your database
+9. Connect to your database.
     ```
     <copy>
     sqlplus / as sysdba
@@ -140,23 +146,41 @@ This lab assumes you have:
     ```
     <copy>
     show pdbs
-
+    </copy>
+    ```
+    ```
+    <copy>
     alter session set container = FREEPDB1;
-
+    </copy>
+    ```
+    ```
+    <copy>
     show pdbs
     </copy>
     ```
     ![Image alt text](images/.png " ")
 
 11. We will be using the user hol23c throughout the workshop. You can specify any password you want. I'm going to use Welcome123# for my examples.
-    ```
+    ````
     <copy>
     create user hol23c identified by Welcome123#;
+    </copy>
+    ````
+    ````
+    <copy>
     alter user hol23c quota unlimited on users;
+    </copy>
+    ````
+    ````
+    <copy>
     grant create session to hol23c;
+    </copy>
+    ````
+    ````
+    <copy>
     exit;
     </copy>
-    ```
+    ````
     ![Image alt text](images/.png " ")
 
 
@@ -165,11 +189,11 @@ This lab assumes you have:
 
 ## Learn More
 
-* [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
-* [JSON Duality View documentation](http://docs.oracle.com)
-* [Blog: Key benefits of JSON Relational Duality] (https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
+* [Oracle Database 23c Free](https://www.oracle.com/database/free/)
+* [Oracle Database 23c Free VirtualBox](https://www.oracle.com/database/technologies/databaseappdev-vm.html)
+* [Oracle Database 23c Free Container Registry] (https://container-registry.oracle.com/ords/f?p=113:4:112914043940836:::4:P4_REPOSITORY,AI_REPOSITORY,AI_REPOSITORY_NAME,P4_REPOSITORY_NAME,P4_EULA_ID,P4_BUSINESS_AREA_ID:1863,1863,Oracle%20Database%20Free,Oracle%20Database%20Free,1,0&cs=3-haFlG-90qFrGzapB3ZZKxCvYhvfy4ccKlJqINEzxLICyIrcVO0Z-LAjLfL_wZBJBJXiXL6hSD7D2iOrkITQfg)
 
 ## Acknowledgements
-* **Author** - Kaylien Phan, William Masdon
-* **Contributors** - David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - Kaylien Phan, Database Product Management, April 2023
+* **Author** - David Start
+* **Contributors** - David Start
+* **Last Updated By/Date** - David Start, Database Product Management, August 2023
