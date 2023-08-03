@@ -3,7 +3,7 @@
 ## Introduction
 This lab will show you how to download the Oracle Resource Manager (ORM) stack zip file needed to setup the resource needed to run this workshop. This workshop requires a compute instance running the Oracle Database Sharding Marketplace image and a Virtual Cloud Network (VCN).
 
-*Estimated Lab Time:* 10 minutes
+*Estimated Time:* 10 minutes
 
 Watch the video for a quick walk through of the Prepare Setup lab.
 
@@ -52,20 +52,6 @@ Please note for RAFT Replication Lab:
 - Recommended CPU: 6 OCPU
 
 You may now proceed to the next lab.
-
-## Rate this Workshop
-When you are finished don't forget to rate this workshop!  We rely on this feedback to help us improve and refine our LiveLabs catalog.  Follow the steps to submit your rating.
-
-1.  Go back to your **workshop homepage** in LiveLabs by searching for your workshop and clicking the Launch button.
-2.  Click on the **Brown Button** to re-access the workshop  
-
-    ![workshop homepage](https://oracle-livelabs.github.io/common/labs/cloud-login/images/workshop-homepage-2.png " ")
-
-3.  Click **Rate this workshop**
-
-    ![rate this workshop](https://oracle-livelabs.github.io/common/labs/cloud-login/images/rate-this-workshop.png " ")
-
-If you selected the **Green Button** for this workshop and still have an active reservation, you can also rate by going to My Reservations -> Launch Workshop.
 
 ## Acknowledgements
 * **Author** - Deeksha Sehgal, Oracle Database Sharding Product Management, Senior Product Manager
