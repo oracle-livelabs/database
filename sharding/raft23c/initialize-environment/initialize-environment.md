@@ -4,7 +4,7 @@
 
 In this lab we will review and startup all components required to successfully run this workshop.
 
-*Estimated Lab Time:* 10 Minutes.
+*Estimated Time:* 10 Minutes.
 
 Watch the video for a quick walk through of the Initialize Environment lab.
 
