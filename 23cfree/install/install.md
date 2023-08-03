@@ -191,7 +191,8 @@ This lab assumes you have:
 
 * [Oracle Database 23c Free](https://www.oracle.com/database/free/)
 * [Oracle Database 23c Free VirtualBox](https://www.oracle.com/database/technologies/databaseappdev-vm.html)
-* [Oracle Database 23c Free Container Registry] (https://container-registry.oracle.com/ords/f?p=113:4:112914043940836:::4:P4_REPOSITORY,AI_REPOSITORY,AI_REPOSITORY_NAME,P4_REPOSITORY_NAME,P4_EULA_ID,P4_BUSINESS_AREA_ID:1863,1863,Oracle%20Database%20Free,Oracle%20Database%20Free,1,0&cs=3-haFlG-90qFrGzapB3ZZKxCvYhvfy4ccKlJqINEzxLICyIrcVO0Z-LAjLfL_wZBJBJXiXL6hSD7D2iOrkITQfg)
+* [Oracle Database Container Registry] (https://container-registry.oracle.com/ords/f?p=113:4)
+* [Oracle Database Container Registry] (https://apexapps-stage.oracle.com/pls/apex/dbpm/r/livelabs/home)
 
 ## Acknowledgements
 * **Author** - David Start
