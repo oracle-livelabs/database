@@ -4,7 +4,7 @@
 ## About this workshop
 Welcome to Live Labs, where we explore and delve into the fascinating realm of Oracle database management! In today's session, we will be focusing on two intriguing topics: Oracle Schema Level Privileges and Lock Free Column Reservations.
 
-Estimated Time: 30 Minutes
+Estimated Workshop Time: 30 Minutes
 
 ### About Schema Priveleges and Lock-Free Reservations
 
@@ -73,4 +73,4 @@ You may **proceed to the next lab.**
 
 * **Author(s)** - Blake Hendricks, Database Product Manager
 * **Contributor(s)** - Vasudha Krishnaswamy, Russ Lowenthal
-* **Last Updated By/Date** - 6/21/2023
+* **Last Updated By/Date** - 7/1/2023
