@@ -580,4 +580,4 @@ If you've taken a look at the extended MLE module above, you may have seen some 
 
 * <b>Author</b> : Loïc Lefèvre, Dan Williams
 * <b>Contributors</b>: Martin Bach, Lucas Victor Braun-Lohrer
-* <b>Last Updated By/Date</b> - Dan Williams, Database Product Management, July 2023
+* <b>Last Updated By/Date</b> - Dan Williams, Database Product Management, August 2023
