@@ -1,45 +1,49 @@
 # Introduction
 
-## About the JSON Duality Views Workshop
+## About the Installing and Configuring Oracle Database 23c Free Workshop
 
-This workshop focuses on working with JSON Duality Views in Oracle Database 23c.
+This workshop focuses on installing and creating Oracle Database 23c Free, configuring the related tools and then exploring a sampling of Oracle Database 23c Free features.
 
-### **JSON Duality**
+### **Oracle Database 23c Free**
 
-JSON Relational Duality is a landmark capability in Oracle Database 23c providing game-changing flexibility and simplicity for Oracle Database developers. This breakthrough innovation overcomes the historical challenges developers have faced when building applications, using relational or document models.
+Oracle Database 23c Free is a new, free offering of the industry-leading Oracle Database that enterprises worldwide rely on every day. It can be downloaded straight from the Internet with no oracle.com user account or license click-through requirements, enabling simple and fast access to the world’s only converged database that supports all data models and workload types. Whether you are a developer, a data scientist, a DBA, an educator, or just interested in databases, Oracle Database 23c Free—Developer Release is the ideal way to get started. Oracle Database 23c Free is packaged for ease of use and a full-featured experience, making it the perfect entry-level database for anyone who wants to build and run data-driven apps. Its built-in upward compatibility with Oracle Database Enterprise Edition and Oracle Database cloud services ensures that users can move to any other Oracle Database offering anytime.
 
-“JSON Relational Duality in Oracle Database 23c brings substantial simplicity and flexibility to modern app dev,” said Carl Olofson, research Vice President, Data Management Software, IDC. “It addresses the age-old object - relational mismatch problem, offering an option for developers to pick the best storage and access formats needed for each use case without having to worry about data structure, data mapping, data consistency, or performance tuning. No other specialized document databases offer such a revolutionary solution.”
+### **Tools - SQLcl**
 
-JSON Relational Duality helps to converge the benefits of both document and relational worlds. Developers now get the flexibility and data access benefits of the JSON document model, plus the storage efficiency and power of the relational model. The new feature enabling this convergence is JSON Relational Duality View (Will be referred below as Duality View).
+Oracle SQL Developer Command Line (SQLcl) is a free command line interface for Oracle Database. It allows you to interactively or batch execute SQL and PL/SQL. SQLcl provides in-line editing, statement completion, and command recall for a feature-rich experience, all while also supporting your previously written SQL*Plus scripts.
 
-Key benefits of JSON Relational Duality:
-- Experience extreme flexibility in building apps using Duality View. Developers can access the same data relationally or as hierarchical documents based on their use case and are not forced into making compromises because of the limitations of the underlying database. Build document-centric apps on relational data or create SQL apps on documents.
-- Experience simplicity by retrieving and storing all the data needed for an app in a single database operation. Duality Views provide fully updateable JSON views over data. Apps can read a document, make necessary changes, and write the document back without worrying about underlying data structure, mapping, consistency, or performance tuning. 
-- Enable flexibility and simplicity in building multiple apps on same data. Developers can use the power of Duality View to define multiple JSON Views across overlapping groups of tables. This flexible data modeling makes building multiple apps against the same data easy and efficient.
-- Duality Views eliminate the inherent problem of data duplication and data inconsistency in document databases. Duality Views are fully ACID (atomicity, consistency, isolation, durability) transactions across multiple documents and tables. It eliminates data duplication across documents data, whereas consistency is maintained automatically. 
-- Build apps that support high concurrency access and updates. Traditional locks don’t work well for modern apps. A new lock-free concurrency control provided with Duality View supports high concurrency updates. The new-lock free concurrency control also works efficiently for interactive applications since the data is not locked during human thinking time.
+### **Tools - Database Actions**
+Formerly known as SQL Developer Web, Database Actions brings you your favorite Oracle Database desktop tool’s features and experience to your browser! Delivered as a single-page web application, Database Actions is powered by Oracle REST Data Services (ORDS). Database Actions offers, a worksheet for running queries and scripts, the ability to manage and browse your data dictionary, a REST development environment for your REST APIs and AUTOREST enabled objects, an interface for Oracle’s JSON Document Store (SODA), a DBA console for managing the database, a data model reporting solution, and access to PerfHub.
 
-Estimated Time: 30 minutes
+### **Tools - APEX**
+Oracle APEX is the world's most popular enterprise low-code application platform that enables you to build scalable, secure web and mobile apps, with world-class features, that can be deployed anywhere – cloud or on premises. Using APEX, developers can quickly develop and deploy compelling apps that solve real problems and provide immediate value. You don't need to be an expert in a vast array of technologies to deliver sophisticated solutions. Focus on solving the problem and let APEX take care of the rest.
+
+Estimated Time: 90 minutes
 
 ### Objectives
 
 In this lab, you will:
-* Create JSON Duality Views
-* Perform insert, update, and delete operations against JSON Duality Views
-* Perform both JSON and SQL operations against JSON Duality Views
+* Install and create an Oracle 23c Free Database
+* Configure tools to use with the database
+* Try out some of the new features of the Oracle 23c Free Database
 
 ### Prerequisites
 
 In order to do this workshop you need
-* An Oracle 23c Free Developer Release Database or one running in a LiveLabs environment
+* A LiveLabs Sandbox environment
+or
+* A Linux VM running a GUI that is compatible with Oracle Database 23c Free
 
 ## Learn More
 
-* [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
-* [JSON Duality View documentation](http://docs.oracle.com)
-* [Blog: Key benefits of JSON Relational Duality] (https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
+* [Oracle Database 23c Free](https://www.oracle.com/database/free/)
+* [Blog: Introducing Oracle Database 23c Free – Developer Release](https://blogs.oracle.com/database/post/oracle-database-23c-free)
+* [Oracle SQLcl] (https://www.oracle.com/database/sqldeveloper/technologies/sqlcl)
+* [Oracle Database Actions] (https://www.oracle.com/database/sqldeveloper/technologies/db-actions/)
+* [Oracle APEX] (https://www.oracle.com/tools/downloads/apex-downloads)
+
 
 ## Acknowledgements
-* **Author** - Kaylien Phan, William Masdon
-* **Contributors** - David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - Kaylien Phan, Database Product Management, April 2023
+* **Author** - David Start
+* **Contributors** - David Start
+* **Last Updated By/Date** - David Start, Database Product Management, August 2023

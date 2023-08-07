@@ -4,7 +4,7 @@
 
 This lab walks you through the setup steps to create the user, tables, and JSON duality views needed to execute the rest of this workshop. Then you will populate the views and tables.
 
-Estimated Time: 10 minutes
+Estimated Time: 20 minutes
 
 ### Objectives
 
@@ -82,7 +82,7 @@ This lab assumes you have:
     ```
     <copy>
     cd /u01/app/oracle/apex
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
     ```
     ```
@@ -106,7 +106,7 @@ This lab assumes you have:
 - Password: Provide a password, I will use Welcome123#
     ```
     <copy>
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
     ```
     ```
@@ -128,7 +128,7 @@ This lab assumes you have:
 19. Unlock and set the passwords for the various accounts in the <b>Pluggable</b> database. You will be prompted during the rest config script. I'm going to use Welcome123# for my examples but you can use any password you want.
     ```
     <copy>
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
     ```
     ```
@@ -168,7 +168,7 @@ This lab assumes you have:
     ```
     <copy>
     cd /u01/app/oracle/ords/scripts/installer
-    sqlplus / as sysdba
+    sql / as sysdba
     </copy>
     ```
     ```
@@ -222,7 +222,7 @@ This lab assumes you have:
 25. Enable hol23c the ability to use ORDS.
     ```
     <copy>
-    sqlplus hol23c/Welcome123#@localhost:1521/freepdb1
+    sql hol23c/Welcome123#@localhost:1521/freepdb1
     </copy>
     ```
     ```
@@ -271,11 +271,11 @@ This lab assumes you have:
 
 ## Learn More
 
-* [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
-* [JSON Duality View documentation](http://docs.oracle.com)
-* [Blog: Key benefits of JSON Relational Duality] (https://blogs.oracle.com/database/post/key-benefits-of-json-relational-duality-experience-it-today-using-oracle-database-23c-free-developer-release)
+* [Oracle SQLcl] (https://www.oracle.com/database/sqldeveloper/technologies/sqlcl)
+* [Oracle Database Actions] (https://www.oracle.com/database/sqldeveloper/technologies/db-actions/)
+* [Oracle APEX] (https://www.oracle.com/tools/downloads/apex-downloads)
 
 ## Acknowledgements
-* **Author** - Kaylien Phan, William Masdon
-* **Contributors** - David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - Kaylien Phan, Database Product Management, April 2023
+* **Author** - David Start
+* **Contributors** - David Start
+* **Last Updated By/Date** - David Start, Database Product Management, August 2023

@@ -102,6 +102,13 @@ This lab assumes you have:
     ```
     ![Image alt text](images/.png " ")
 
+7. When the create finishes it will give you the two connection strings for your pluggable and container databases. If you used a different port it will be in the connection string.
+    ```
+    Connect to Oracle Database using one of the connect strings:
+    Pluggable database: ll23c.livelabs.oraclevcn.com:1521/FREEPDB1
+    Multitenant container database: ll23c.livelabs.oraclevcn.com:1521
+    ```
+
 7. To see if your database is up and running you can use the following command
     ```
     <copy>
@@ -192,7 +199,6 @@ This lab assumes you have:
 * [Oracle Database 23c Free](https://www.oracle.com/database/free/)
 * [Oracle Database 23c Free VirtualBox](https://www.oracle.com/database/technologies/databaseappdev-vm.html)
 * [Oracle Database Container Registry] (https://container-registry.oracle.com/ords/f?p=113:4)
-* [Oracle Database Container Registry] (https://apexapps-stage.oracle.com/pls/apex/dbpm/r/livelabs/home)
 
 ## Acknowledgements
 * **Author** - David Start
