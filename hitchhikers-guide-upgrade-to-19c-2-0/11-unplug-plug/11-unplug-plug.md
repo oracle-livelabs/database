@@ -258,7 +258,6 @@ AutoUpgrade informed you that you are ready to upgrade the PDB. Use AutoUpgrade 
     . cdb2
     sqlplus / as sysdba
     show pdbs
-    exit
     </copy>
      
     Be sure to hit RETURN
@@ -285,13 +284,18 @@ AutoUpgrade informed you that you are ready to upgrade the PDB. Use AutoUpgrade 
     ---------- ------------------------------ ---------- ----------
              2                       PDB$SEED  READ ONLY         NO
              3                           PDB3 READ WRITE         NO
-    SQL> exit
-    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.18.0.0.0
     ```
     </details>    
 
     Notice how the PDB is open in *read write* mode and unrestricted. This indicates the plug-in and upgrade went fine. Otherwise, AutoUpgrade would also inform you.
+
+5. Exit SQL*Plus.    
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
 
 Congratulations! You have completed the lab.
 
@@ -310,4 +314,4 @@ When you plug in a lower release PDB, it will open in *restricted* mode. As each
 
 * **Author** - Mike Dietrich, Database Product Management
 * **Contributors** -  Daniel Overby Hansen, Roy Swonger, Sanjay Rupprel, Cristian Speranta, Kay Malcolm
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2023
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2023
