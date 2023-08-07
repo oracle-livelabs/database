@@ -60,7 +60,7 @@ This lab assumes that you have completed the previous labs and created all resou
 
     ![Identity and Security](https://oracle-livelabs.github.io/common/images/console/id-policies.png " ")
 
-6. Ensure that you are in your root compartment, and you should see the policiy called **grant-adb-access**. Check the box next to its name then click **Delete**.
+6. Ensure that you are in your root compartment, and you should see the policy called **grant-adb-access**. Check the box next to its name then click **Delete**.
 
     ![Policy Page - Delete](images/delete-policy.png)
 

@@ -6,6 +6,8 @@ In this lab, you will migrate a non-CDB database (FTEX) running on Oracle Databa
 
 Estimated Time: 15 minutes
 
+[](videohub:1_fs5oba05)
+
 ### Objectives
 
 In this lab, you will:
@@ -725,12 +727,13 @@ You can now move the data files to the target system and start the Data Pump imp
     </copy>
     ```
 
-7. Check the PDB.
+7. Check the PDB and exit.
 
     ```
     <copy>
     show con_id
-    show con_name
+    show con_name 
+    exit
     </copy>
     ```
 
