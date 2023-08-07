@@ -10,6 +10,10 @@ In this lab, we will explore the concept of lock-free reservations and their imp
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+
+[Lock Free Video](videohub:1_u652vn55)
+
 ### Objectives
 
 * Understand the concept of lock-free reservations and their benefits.
