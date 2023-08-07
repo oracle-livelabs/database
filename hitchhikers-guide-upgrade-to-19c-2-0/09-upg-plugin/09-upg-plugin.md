@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will convert a non-CDB database (UPGR) to a PDB in a CDB (CDB2). For learning purposes, you will do the process manually. Normally, it is recommended to use AutoUpgrade. In the appendix, you compare the two methods.
+In this lab, you will convert a non-CDB database (UPGR) to a PDB in a CDB (CDB2). For learning purposes, you will first do the process manually. Then, using AutoUpgrade. This allows you to compare the two methods.
 
 Estimated Time: 30 minutes
 
@@ -795,14 +795,25 @@ Now that you know how to manually perform a PDB conversion, you can explore the 
     </copy>
     ```
 
-5. When AutoUpgrade reports *Job 100 completed* then the PDB conversion is done. Shut down the old source database.
+5. When AutoUpgrade reports *Job 100 completed* then the PDB conversion is done. 
+
+6. Set the environment to the old source database and connect.
 
     ```
     <copy>
     . up19
-    sqlplus / as sysdba<<EOF
-        shutdown immediate;
-    EOF
+    sqlplus / as sysdba
+    </copy>
+
+    Be sure to hit RETURN
+    ```    
+
+6. Shut down the old source database.
+
+    ```
+    <copy>
+    shutdown immediate;
+    exit
     </copy>
 
     Be sure to hit RETURN
