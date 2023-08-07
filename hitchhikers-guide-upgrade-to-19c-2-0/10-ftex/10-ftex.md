@@ -730,7 +730,7 @@ You can now move the data files to the target system and start the Data Pump imp
     ```
     <copy>
     show con_id
-    show con_name
+    show con_name 
     exit
     </copy>
     ```
