@@ -10,6 +10,8 @@ Out-of-place patching is the preferred method, not only for the Database home bu
 
 Estimated Time: 5 minutes (task 2 will run in the background for 25 minutes)
 
+[](videohub:1_18w1mn9x)
+
 ### Objectives
 
 * 19.3.0 base release

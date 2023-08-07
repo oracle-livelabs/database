@@ -455,36 +455,38 @@ Use MOVE RU to move a follower replica of a replication unit from one shard data
     ![<Chunk_status_after_MOVE_RU>](./images/t7-chunk-status-after-move-ru.png " ")
 
 ## Task 8: Copy Replication Units
-
 Copy a replication unit from one shard database to another using COPY RU. This allows you to instantiate or repair a replica of a replication unit on the target shard database. 
 
-
-1. If the target database doesn't contain the specified replication unit then the total number of replicas for the given replication unit should be below replication factor (3), unless -replace is specified.
+1. If the target database doesn't contain the specified      replication unit then the total number of replicas for the given replication unit should be below replication factor (3), unless -replace is specified.
  
-When we use the replace option, the copy is done and also the replica is removed from the shard which is specified with the replace option thus keeping the replica count to be 3.
+    When we use the replace option, the copy is done and also the replica is removed from the shard which is specified with the replace option thus keeping the replica count to be 3.
 
-Connect to GSM1, run in the terminal as **oracle** user and connect to the shard director server.
+
+    Connect to GSM1, run in the terminal as **oracle** user and connect to the shard director server.
+
     ```
     <copy>
     sudo podman exec -i -t gsm1 /bin/bash
     </copy>
     ```
+    
+    Connect with GSM1 and run the below command to check the status.
 
-Connect with GSM1 and run the below command to check the status.
+
     ```
     <copy>
     gdsctl status ru -show_chunks
     </copy>
     ```
-![<chunk_status_before_copy_RU>](./images/t8-chunk-status-before-copy-ru.png " ")
+    ![<chunk_status_before_copy_RU>](./images/t8-chunk-status-before-copy-ru.png " ")
     
-Run the below command to copy the RU. Choose the RU (follower) in the source shard and copy it to one of the shard where that RU doesn't exist. Use replace option with the shard from where you would like to remove that RU.
+    Run the below command to copy the RU. Choose the RU (follower) in the source shard and copy it to one of the shard where that RU doesn't exist. Use replace option with the shard from where you would like to remove that RU.
     ```
     <copy>
     gdsctl copy ru -ru 1 -source porcl3cdb_porcl3pdb -target porcl2cdb_porcl2pdb -replace porcl4cdb_porcl4pdb
     </copy>
     ```
-![<copy_RU>](./images/t8-copy-ru.png " ")
+    ![<copy_RU>](./images/t8-copy-ru.png " ")
 
 2. You can check the status of the replication unit after the copy command is completed
     ```
@@ -493,7 +495,7 @@ Run the below command to copy the RU. Choose the RU (follower) in the source sha
     </copy>
     ```
    
-![<chunk_status_after_copy_RU>](./images/t8-chunk-status-after-copy-ru.png " ")
+    ![<chunk_status_after_copy_RU>](./images/t8-chunk-status-after-copy-ru.png " ")
 
 
 
@@ -514,8 +516,8 @@ Scaling down can be done using REMOVE SHARD and load balancing using MOVE RU.
 2. We want to Scale Down by removing the SHARD4.
 We will first change the replication unit leaders from shard4 to other shards and move the RUs from the SHARD4 to other shards
 
-Move the RUs from SHARD4 to other shards:
-We perform move ru until all the RU are moved from shard4 to other shards.
+    Move the RUs from SHARD4 to other shards:
+    We perform move ru until all the RU are moved from shard4 to other shards.
     ```
     <copy>
     gdsctl switchover ru -ru 7 -database porcl1cdb_porcl1pdb
@@ -527,16 +529,16 @@ We perform move ru until all the RU are moved from shard4 to other shards.
     </copy>
     ```
 
-  ![<change_leader>](./images/t9-switchover-ru-leader.png " ")   
+    ![<change_leader>](./images/t9-switchover-ru-leader.png " ")   
 
-  check the status of chunks after switchover
+    check the status of chunks after switchover
     
     ```
     <copy>
     gdsctl status ru -show_chunks
     </copy>
     ```
- ![<status_after_switchover>](./images/t9-after-switchover.png " ")
+    ![<status_after_switchover>](./images/t9-after-switchover.png " ")
 
     ```
     <copy>
@@ -548,7 +550,7 @@ We perform move ru until all the RU are moved from shard4 to other shards.
     gdsctl move ru -ru 8 -source porcl4cdb_porcl4pdb -target porcl2cdb_porcl2pdb
     </copy>
     ```
-  ![<move_ru_before_scale_down>](./images/t9-move-ru.png " ")
+    ![<move_ru_before_scale_down>](./images/t9-move-ru.png " ")
 
 
 3. Check the status after the move.
@@ -630,26 +632,13 @@ This is the end of the Oracle Sharding RAFT Replication Workshop.
 
 
 
-## **Appendix 1**: RAFT Replication Overview
+
+## Appendix 1: RAFT Replication Overview
 
 **RAFT Replication** 
 
  - [RAFT Replication documentation for internal purposes] (https://docs-uat.us.oracle.com/en/database/oracle/oracle-database/23/shard/oracle-sharding-raft-replication.html#GUID-AB5D3A4B-51BD-456C-B03E-4C6B3EDB4C2B)
 
-
-## Rate this Workshop
-When you are finished don't forget to rate this workshop!  We rely on this feedback to help us improve and refine our LiveLabs catalog.  Follow the steps to submit your rating.
-
-1.  Go back to your **workshop homepage** in LiveLabs by searching for your workshop and clicking the Launch button.
-2.  Click on the **Brown Button** to re-access the workshop  
-
-    ![](https://oracle-livelabs.github.io/common/labs/cloud-login/images/workshop-homepage-2.png " ")
-
-3.  Click **Rate this workshop**
-
-    ![](https://oracle-livelabs.github.io/common/labs/cloud-login/images/rate-this-workshop.png " ")
-
-If you selected the **Green Button** for this workshop and still have an active reservation, you can also rate by going to My Reservations -> Launch Workshop.
 
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Oracle Database Sharding Product Management, Senior Product Manager
