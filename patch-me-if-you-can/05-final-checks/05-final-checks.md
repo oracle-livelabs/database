@@ -7,6 +7,8 @@ You did patch out-of-place, which Oracle highly recommend, and you may have also
 
 Estimated Time: 10 minutes
 
+[](videohub:1_fj1cp4dn)
+
 ### Objectives
 
 Final Checks in both patched environments

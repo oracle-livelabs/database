@@ -6,6 +6,8 @@ In this lab, you will unplug a PDB (PDB3) from a CDB (CDB1) running on Oracle Da
 
 Estimated Time: 20 minutes
 
+[](videohub:1_qw34nap3)
+
 ### Objectives
 
 In this lab, you will:

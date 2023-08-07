@@ -6,6 +6,8 @@ In this lab, you will migrate a non-CDB database (FTEX) running on Oracle Databa
 
 Estimated Time: 15 minutes
 
+[](videohub:1_fs5oba05)
+
 ### Objectives
 
 In this lab, you will:
