@@ -6,6 +6,8 @@ In this lab, you will execute common XTTS pre-checks in SQL*Plus. Each task will
 
 Estimated Time: 15 minutes
 
+[](videohub:1_1q1ejrfc)
+
 ### Objectives
 
 - Recommended checks for XTTS.

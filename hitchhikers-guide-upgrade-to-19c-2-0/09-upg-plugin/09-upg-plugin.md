@@ -6,6 +6,8 @@ In this lab, you will convert a non-CDB database (UPGR) to a PDB in a CDB (CDB2)
 
 Estimated Time: 30 minutes
 
+[](videohub:1_w2g72fta)
+
 ### Objectives
 
 In this lab, you will:

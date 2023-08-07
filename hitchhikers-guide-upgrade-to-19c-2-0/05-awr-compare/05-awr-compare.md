@@ -8,6 +8,8 @@ Those reports give you a first indication of issues you may see (or performance 
 
 Estimated Time: 10 minutes
 
+[](videohub:1_qw25mprv)
+
 ### Objectives
 
 In this lab, you will:
