@@ -6,6 +6,8 @@ In this lab, you will capture and preserve SQL statements and information from t
 
 Estimated Time: 5 minutes
 
+[](videohub:1_p43f7t1o)
+
 ### Objectives
 
 In this lab, you will:

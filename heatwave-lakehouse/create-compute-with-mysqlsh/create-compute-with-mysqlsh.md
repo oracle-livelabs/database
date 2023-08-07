@@ -48,7 +48,9 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
 
     ![Generate SSH Key](./images/ssh-keygen.png "ssh keygen ")
 
-3. The public  and  private SSH keys  are stored in ~/.ssh/id_rsa.pub.
+3. The SSH keys are stored as follows:
+    - public SSH key stored in ~/.ssh/id_rsa.pub.
+    - private SSH keys stored in ~/.ssh/id_rsa
 
 4. Examine the two files that you just created.
 
@@ -62,7 +64,17 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
 
     ![SSH files list](./images/ssh-list.png "ssh list ")
 
-    Note in the output there are two files, a *private key:`id_rsa` and a public key: `id_rsa.pub`. Keep the private key safe and don't share its content with anyone. The public key will be needed for various activities and can be uploaded to certain systems as well as copied and pasted to facilitate secure communications in the cloud.
+    **Note** in the output there are two files, a *private key:`id_rsa` and a public key: `id_rsa.pub`. Keep the private key safe and don't share its content with anyone. The public key will be needed for various activities and can be uploaded to certain systems as well as copied and pasted to facilitate secure communications in the cloud.
+
+5. To asign the right permissions to your SSH keys, run the following command:
+
+    ```bash
+    <copy>chmod 600 id_rsa.pub</copy>
+    ```
+
+    ```bash
+    <copy>chmod 600 id_rsa</copy>
+    ```
 
 ## Task 2: Copy public SSH key value to Notepad
 
@@ -113,7 +125,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 6. Keep the selected Image, Oracle Linux 8
 
-      ![Use Linux OS](./images/compute-oracle-linux.png "compute oracle linux")  
+    ![Use Linux OS](./images/compute-oracle-linux.png "compute oracle linux")  
 
 7. Change the Instance Shape:
     - Click **Change shape** button
@@ -150,13 +162,13 @@ You will need a compute Instance to connect to your brand new MySQL database.
     - Go to Navigation Menu
             Compute
             Instances
-    ![Navigate to Compute ](./images/compute-list.png "compute list")
+        ![Navigate to Compute ](./images/compute-list.png "compute list")
 
     - Click the `heatwave-cient` Instance link
 
-    ![Compute Instance List](./images/compute-running.png "compute public ip")
+        ![Compute Instance List](./images/compute-running.png "compute public ip")
 
-    - Copy `heatwave-cient` plus  the `Public IP Address` to the notepad
+    - Copy the compute name `heatwave-cient`  and  the `Public IP Address` to the notepad
 
 2. Copy the private IP address of the active MySQl Database heatwave-client Service Instance to your notepad
 
@@ -164,14 +176,14 @@ You will need a compute Instance to connect to your brand new MySQL database.
             Databases
             MySQL
 
-     ![Database list](./images/db-list.png "db list")
+        ![Database list](./images/db-list.png "db list")
 
     - Click the `heatwave-db` Database System link
 
-     ![Active Database](./images/mysql-heatwave-active.png "db active ")
+        ![HeatWave create complete](./images/mysql-heatwave-active.png"mysql heatwave active ")
 
-    - Copy `heatwave-db` plus the `Private IP Address` to the notepad
-
+    - Select the **Connections** tab, copy the database nane `heatwave-db`  and the `Private IP Address` to the notepad
+        ![HeatWave create complete connection](./images/mysql-heatwave-connection-tab.png"mysql heatwave connection ")
 3. Indicate the location of the private key you created earlier with **heatwave-client**.
 
     Enter the username **opc** and the Public **IP Address**.
