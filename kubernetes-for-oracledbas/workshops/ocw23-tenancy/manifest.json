@@ -61,21 +61,21 @@
             "last_reviewed": "08-July-2023"
         },
         {
-            "title": "Lab 8: Lifecycle Operations - ADB",
+            "title": "Lab 8: Deploy a Microservice Application",
+            "description": "Deploy a Microservice Application ",
+            "filename": "../../deploy-application/deploy-application.md",
+            "last_reviewed": "08-July-2023"
+        },
+        {
+            "title": "Lab 9: Lifecycle Operations - ADB",
             "description": "Perform Lifecycle Operations against the ADB",
             "filename": "../../lifecycle-adb/lifecycle-adb.md",
             "last_reviewed": "08-July-2023"
         },
         {
-            "title": "Lab 9: Provision - ADB",
+            "title": "Lab 10: Provision - ADB",
             "description": "Perform Lifecycle Operations against the ADB",
             "filename": "../../provision-adb/provision-adb.md",
-            "last_reviewed": "08-July-2023"
-        },
-        {
-            "title": "Lab 10: Deploy a Microservice Application",
-            "description": "Deploy a Microservice Application ",
-            "filename": "../../deploy-application/deploy-application.md",
             "last_reviewed": "08-July-2023"
         },
         {
@@ -98,7 +98,7 @@
             "last_reviewed": "08-July-2023"
         },
         {
-            "title": "Need Help?",
+            "title": "CloudWorld - Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
             "filename": "../../cloud-world/need-help.md",
             "last_reviewed": "N/A"

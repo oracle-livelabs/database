@@ -78,19 +78,20 @@ Before you upgrade the PDB, it is a good idea to check it for upgrade readiness.
     ```
 
     ``` text
-    global.autoupg_log_dir=/home/oracle/logs/lab11
+    global.autoupg_log_dir=/home/oracle/logs
     upg1.source_home=/u01/app/oracle/product/12.2.0.1
     upg1.target_home=/u01/app/oracle/product/19
     upg1.sid=CDB1
     upg1.pdbs=PDB3
     upg1.target_cdb=CDB2
-    upg1.target_pdb_copy_option=file_name_convert=none
+    upg1.log_dir=/home/oracle/logs
+    upg1.target_pdb_copy_option=file_name_convert=('CDB1', 'CDB2')
     ```
 
     * AutoUpgrade unplugs the PDBs specified by `pdbs`.
     * From the database specified by `sid`.
     * Plugs them into the database specified by `target_cdb`.
-    * `target_pdb_copy_option` instructs AutoUpgrade to copy the data files as part of the plug-in operation. Because there is no `file_name_convert` specified, the target database will use OMF and automatically assign file names. 
+    * `target_pdb_copy_option` instructs AutoUpgrade to copy the data files as part of the plug-in operation. The target database determines the new file names by replacing *CDB1* with *CDB2* in the original file name.
     * Since AutoUpgrade copies the data files, the source PDB remains intact in CDB1. You can use it for fallback (if necessary).
 
 2. Use AutoUpgrade to analyze the PDB before the upgrade. The analysis is usually fast. Wait for it to complete or use `lsj` command to monitor the progress.
@@ -120,8 +121,8 @@ Before you upgrade the PDB, it is a good idea to check it for upgrade readiness.
     Jobs failed                    [0]
 
     Please check the summary report at:
-    /home/oracle/logs/lab11/cfgtoollogs/upgrade/auto/status/status.html
-    /home/oracle/logs/lab11/cfgtoollogs/upgrade/auto/status/status.log    
+    /home/oracle/logs/cfgtoollogs/upgrade/auto/status/status.html
+    /home/oracle/logs/cfgtoollogs/upgrade/auto/status/status.log    
     ```
     </details>
 
@@ -131,14 +132,14 @@ Before you upgrade the PDB, it is a good idea to check it for upgrade readiness.
 
     ```
     <copy>
-    cat /home/oracle/logs/lab11/cfgtoollogs/upgrade/auto/status/status.log
+    cat /home/oracle/logs/cfgtoollogs/upgrade/auto/status/status.log
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cat /home/oracle/logs/lab11/cfgtoollogs/upgrade/auto/status/status.log
+    $ cat /home/oracle/logs/cfgtoollogs/upgrade/auto/status/status.log
     ==========================================
             Autoupgrade Summary Report
     ==========================================
@@ -155,8 +156,8 @@ Before you upgrade the PDB, it is a good idea to check it for upgrade readiness.
     [Status]        SUCCESS
     [Start Time]    2023-07-05 10:21:28
     [Duration]       
-    [Log Directory] /home/oracle/logs/lab11/CDB1/100/prechecks
-    [Detail]        /home/oracle/logs/lab11/CDB1/100/prechecks/cdb1_preupgrade.log
+    [Log Directory] /home/oracle/logs/CDB1/100/prechecks
+    [Detail]        /home/oracle/logs/CDB1/100/prechecks/cdb1_preupgrade.log
                     Check passed and no manual intervention needed
     ------------------------------------------
     ```
@@ -168,7 +169,7 @@ Before you upgrade the PDB, it is a good idea to check it for upgrade readiness.
 
     ```
     <copy>
-    firefox /home/oracle/logs/lab11/cfgtoollogs/upgrade/auto/status/status.html &
+    firefox /home/oracle/logs/cfgtoollogs/upgrade/auto/status/status.html &
     </copy>
     ```
 
@@ -243,8 +244,8 @@ AutoUpgrade informed you that you are ready to upgrade the PDB. Use AutoUpgrade 
 
 
     Please check the summary report at:
-    /home/oracle/logs/lab11/cfgtoollogs/upgrade/auto/status/status.html
-    /home/oracle/logs/lab11/cfgtoollogs/upgrade/auto/status/status.log
+    /home/oracle/logs/cfgtoollogs/upgrade/auto/status/status.html
+    /home/oracle/logs/cfgtoollogs/upgrade/auto/status/status.log
     ```
     </details>
 
