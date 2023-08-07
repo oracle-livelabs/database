@@ -137,7 +137,7 @@ Note: Using the same 3 windows.
 
     * Note: Notice how the session does not hang like it did using old normal updates in the last task. This is due to the concurrency Lock-Free enables for dba user experience.
 
-* Commit Window 1
+    * Commit Window 1
 
     ```
     <copy>
