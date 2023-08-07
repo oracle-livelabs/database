@@ -314,4 +314,4 @@ When you plug in a lower release PDB, it will open in *restricted* mode. As each
 
 * **Author** - Mike Dietrich, Database Product Management
 * **Contributors** -  Daniel Overby Hansen, Roy Swonger, Sanjay Rupprel, Cristian Speranta, Kay Malcolm
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2023
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2023

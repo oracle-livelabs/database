@@ -854,4 +854,4 @@ You may now *proceed to the next lab*.
 ## Acknowledgements
 * **Author** - Mike Dietrich
 * **Contributors** - Daniel Overby Hansen, Roy Swonger, Sanjay Rupprel, Cristian Speranta, Kay Malcolm
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2023
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2023

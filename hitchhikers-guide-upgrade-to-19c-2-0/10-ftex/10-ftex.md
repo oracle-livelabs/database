@@ -787,4 +787,4 @@ You can combine FTEX with incremental backups to shorten the downtime during mig
 
 * **Author** - Mike Dietrich, Database Product Management
 * **Contributors** - Daniel Overby Hansen, Roy Swonger, Sanjay Rupprel, Cristian Speranta, Kay Malcolm
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2023
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2023
