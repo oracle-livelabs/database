@@ -725,12 +725,13 @@ You can now move the data files to the target system and start the Data Pump imp
     </copy>
     ```
 
-7. Check the PDB.
+7. Check the PDB and exit.
 
     ```
     <copy>
     show con_id
-    show con_name
+    show con_name 
+    exit
     </copy>
     ```
 
