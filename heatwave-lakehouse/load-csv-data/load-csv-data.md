@@ -50,7 +50,13 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
 ## Task 2: Connect to your MySQL HeatWave system using Cloud Shell
 
-1. If not already connected then connect to MySQL using the MySQL Shell client tool with the following command:
+1. If not already connected with SSH, on Command Line, connect to the Compute instance using SSH ... be sure replace the  "private key file"  and the "new compute instance ip"
+
+     ```bash
+    <copy>ssh -i private_key_file opc@new_compute_instance_ip</copy>
+     ```
+
+2. If not already connected to MySQL then connect to MySQL using the MySQL Shell client tool with the following command:
 
     ```bash
     <copy>mysqlsh -uadmin -p -h 10.0.1... --sql </copy>
@@ -58,7 +64,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
     ![MySQL Shell Connect](./images/mysql-shell-login.png " mysql shell login")
 
-2. List schemas in your heatwave instance
+3. List schemas in your heatwave instance
 
     ```bash
         <copy>show databases;</copy>
@@ -66,7 +72,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
     ![Databse Schemas](./images/list-schemas-after.png "list schemas after")
 
-3. Change to the mysql\_customer\_orders database
+4. Change to the mysql\_customer\_orders database
 
     Enter the following command at the prompt
 
@@ -74,7 +80,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
     <copy>USE mysql_customer_orders;</copy>
     ```
 
-4. To see a list of the tables available in the mysql\_customer\_orders schema
+5. To see a list of the tables available in the mysql\_customer\_orders schema
 
     Enter the following command at the prompt
 
@@ -113,18 +119,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
     - It should look like the following example (Be sure to include the PAR Link inside at of quotes("")):
 
-        *SET @dl_tables = '[{
-        "db_name": "mysql_customer_orders",
-        "tables": [{
-            "table_name": "delivery_orders",
-            "dialect":
-            {
-            "format": "csv",
-            "field_delimiter": "\\t",
-            "record_delimiter": "\\n"
-            },
-            "file": [{"par": "https://objectstorage.us-ashburn-1.oraclecloud.com/p/MAGNmpjq3Ej4wX6LN6KaE3R9AM2_h_fQDhfM5C9SbKXO_Zbe4MdrTvypV5XsyHkS/n/mysqlpm/b/lakehousefiles/o/delivery-orders-1.csv"}]
-        }] }]';*
+    ![autopilot set table example](./images/set-table-example.png "autopilot set table example")
 
 4. This command populates all the options needed by Autoload:
 
@@ -158,7 +153,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
 9. Copy the **CREATE TABLE** command from the results. It should look like the following example
 
-    *CREATE TABLE `mysql_customer_orders`.`delivery_orders`( `col_1` int unsigned NOT NULL, `col_2` bigint unsigned NOT NULL, `col_3` tinyint unsigned NOT NULL, `col_4` varchar(9) NOT NULL COMMENT 'RAPID_COLUMN=ENCODING=VARLEN', `col_5` tinyint unsigned NOT NULL, `col_6` tinyint unsigned NOT NULL, `col_7` tinyint unsigned NOT NULL) ENGINE=lakehouse SECONDARY_ENGINE=RAPID ENGINE_ATTRIBUTE='{"file": [{"par": "https://objectstorage.us-ashburn-1.oraclecloud.com/p/MAGNmpjq3Ej4wX6LN6KaE3R9AM2_h_fQDhfM5C9SbKXO_Zbe4MdrTvypV5XsyHkS/n/mysqlpm/b/lakehousefiles/o/delivery-orders-1.csv"}], "dialect": {"format": "csv", "field_delimiter": "\\t", "record_delimiter": "\\n"}}';*
+    ![autopilot create table with no field name](./images/create-table-no-fieldname.png "autopilot create table with no field name")
 
 10. Modify the **CREATE TABLE** command to replace the generic column names, such as **col\_1**, with descriptive column names. Use the following values:
 
@@ -172,7 +167,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
 11. Your modified **CREATE TABLE** command  should look like the following example:
 
-    *CREATE TABLE `mysql_customer_orders`.`delivery_orders`( `orders_delivery` int unsigned NOT NULL, `order_id` bigint unsigned NOT NULL, `customer_id` tinyint unsigned NOT NULL, `order_status` varchar(9) NOT NULL COMMENT 'RAPID_COLUMN=ENCODING=VARLEN', `store_id` tinyint unsigned NOT NULL, `delivery_vendor_id` tinyint unsigned NOT NULL, `estimated_time_hours` tinyint unsigned NOT NULL) ENGINE=lakehouse SECONDARY_ENGINE=RAPID ENGINE_ATTRIBUTE='{"file": [{"par": "https://objectstorage.us-ashburn-1.oraclecloud.com/p/Jl8AjjtkPT8TDZZ-lK2qDj8oxVEZ2ah09fJN9Gl7XfhNBWBpzdvwOXkxx9Yz_SLi/n/iddftbilrksk/b/lakehouse-files-plf/o/order/delivery-orders-1.csv"}], "dialect": {"format": "csv", "field_delimiter": "\\t", "record_delimiter": "\\n"}}';*
+    ![autopilot create table with field name](./images/create-table-fieldname.png "autopilot create table with field name")
 
 12. Execute the modified **CREATE TABLE** command to create the delivery_orders table.
 
@@ -271,8 +266,7 @@ We will use the second option which Loads the data by specifying a PAR URL for a
 
 5. Your command  should look like the following example. Now Execute your modified command
 
-    *ALTER TABLE `mysql_customer_orders`.`delivery_orders` ENGINE_ATTRIBUTE='{"file": [{"par": "https://objectstorage.us-ashburn-1.oraclecloud.com/p/4EayDq3tv-D08oTTPja-2XEYZSQ0v5cG87CFNc31wT724QB5R21C1UXbK0_snbZA/n/mysqlpm/b/lakehousefiles/o/"}], "dialect": {"format": "csv", "field_delimiter": "\\t", "record_delimiter": "\\n"}}';*
-
+    ![autopilot alter table](./images/alter-table.png "autopilot alter table")
     **Output**
 
     ![Add data to Table](./images/load-all-delivery-table.png "load all delivery table")
