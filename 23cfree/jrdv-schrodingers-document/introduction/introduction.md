@@ -1,12 +1,10 @@
 # Introduction
 
-![Logo](images/zdc-logo.png)
-
-### Community-Contributed Workshop
-
-* **Author:** Jim Czuprynski, Oracle ACE Director, Zero Defect Computing, Inc.
-
 ## About this Workshop
+
+**Community Contributed Workshop**
+![Logo](images/zdc-logo.png)
+**Author** - Jim Czuprynski - Oracle ACE Director, Zero Defect Computing, Inc.
 
 This LiveLab session focuses on a real-world environmental and climate issue: how to effectively plant trees in urban "heat islands" to mitigate increasing temperatures by creating shaded areas. [Recent environmental studies](https://docs.oracle.com/ReplaceThisLink.html) reveal that disadvantaged urban areas have disproportionally higher temperatures during summer months because so few trees exist; in fact, suburban areas of the same metropolitan geographies may experience temperatures as much as 20 F cooler when compared to their urban counterparts, simply because those areas have much denser shade tree coverage.
 
