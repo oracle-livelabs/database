@@ -6,6 +6,8 @@ In this lab, we will review and startup all components required to successfully 
 
 Estimated Time: 5 Minutes.
 
+[](videohub:1_5k8l6a9k)
+
 ### Objectives
 
 In this lab, you will:

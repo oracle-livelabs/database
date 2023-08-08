@@ -62,12 +62,23 @@ In this lab, you will be guided through the following task:
         <copy>util.loadDump("https://objectstorage.us-ashburn-1.oraclecloud.com/p/0pZRzTl1hFLchwAcornQVePE7eXxp1u6rjVVF3i7a5qN7HASVk4CtTQ9BK9y4xIG/n/mysqlpm/b/plf_mysql_customer_orders/o/mco_nocoupon_dump_05242023/", {progressFile: "progress.json", loadIndexes:false})</copy>
         ```
 
+        **Note**: If you get errors like the one below, the **mysql\_customer\_orders** schema already exists. You used the correct PAR Link to load the data during the creation process in Lab1. Don't worry; everything is okay.
+
+         *ERROR: Schema `mysql_customer_orders` already contains a table named customers*
+
     - c. Make sure the **mysql\_customer\_orders** schema was loaded
 
         ```bash
         <copy>show databases;</copy>
         ```
+
         ![Database Schema List](./images/list-schemas-after.png "list schemas second view")
+
+    - d. Change to SQL mode
+
+        ```bash
+        <copy>\sql</copy>
+        ```
 
 5. View  the mysql\_customer\_orders total records per table in
 

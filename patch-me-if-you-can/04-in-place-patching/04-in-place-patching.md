@@ -7,6 +7,8 @@ The benefit of the out-of-place patching method is that you preserve the previou
 
 Estimated Time: 45 minutes
 
+[](videohub:1_a1xbv705)
+
 ### Objectives
 
 Patching an existing Oracle Home
