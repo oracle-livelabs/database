@@ -1,24 +1,26 @@
-# Create the schema including JSON Duality Views
+# Configure the Tools
 
 ## Introduction
 
-This lab walks you through the setup steps to create the user, tables, and JSON duality views needed to execute the rest of this workshop. Then you will populate the views and tables.
+This lab walks you through configuring SQLcl, APEX and ORDS.
 
 Estimated Time: 20 minutes
 
 ### Objectives
 
 In this lab, you will:
-* Login as your database user
-* Create the JSON Duality Views and base tables needed
-* Populate your database
+* Configure SQLcl
+* Configure APEX
+* Configure ORDS
+* Login to Database Actions (SQL Developer Web)
 
 ### Prerequisites
 
 This lab assumes you have:
-* Oracle Database 23c Free Developer Release
-* All previous labs successfully completed
-* SQL Developer Web 23.1 or a compatible tool for running SQL statements
+* Completed all previous workshops
+* Have a Linux VM running Oracle 23c Free Database
+* Have access to a GUI on the Linux VM to run Database Actions (SQL Developer Web)
+
 
 ## Task 1: Setup SQLcl
 
@@ -257,7 +259,7 @@ This lab assumes you have:
 
 27. Open a browser
 
-28. Navigate to the SQL Developer Web by going to the following address
+28. Navigate to SQL Developer Web by going to the following address
     ```
     <copy>
     http://localhost:8080/ords/

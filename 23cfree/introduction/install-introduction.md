@@ -18,7 +18,7 @@ Formerly known as SQL Developer Web, Database Actions brings you your favorite O
 ### **Tools - APEX**
 Oracle APEX is the world's most popular enterprise low-code application platform that enables you to build scalable, secure web and mobile apps, with world-class features, that can be deployed anywhere – cloud or on premises. Using APEX, developers can quickly develop and deploy compelling apps that solve real problems and provide immediate value. You don't need to be an expert in a vast array of technologies to deliver sophisticated solutions. Focus on solving the problem and let APEX take care of the rest.
 
-Estimated Time: 90 minutes
+Estimated Time: 75 minutes
 
 ### Objectives
 
