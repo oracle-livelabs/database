@@ -110,7 +110,7 @@ In this lab, you will:
     - __Always Free__ - For this lab, we recommend you leave Always Free checked if it is available to you.
     </if>
     - __Choose database version__ - Select 19c from the database version. Note: This lab should work on a 21c AJD database as well.
-    - __ECPU count__ - Number of ECPUs for your service. For this lab, leave the default __2 ECPU__. If you choose an Always Free database, it comes with 2 ECPU.
+    - __ECPU count__ - Number of ECPUs for your service. For this lab, leave the default __2 ECPUs__. If you choose an Always Free database, it comes with 2 ECPUs.
     - __Storage (TB)__ - Select your storage capacity in terabytes. For this lab, leave the default __1 TB__ of storage. If you choose an Always Free database, it comes with 20 GB of storage.
     - __Auto Scaling__ - For this lab, keep auto scaling enabled, to allow the system to automatically use up to three times more CPU and IO resources to meet workload demand.
 
