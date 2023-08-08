@@ -30,7 +30,7 @@ This labs assumes you have:
     mkdir mle
     </copy> 
     ```
-    ![Image alt text](images/lab2_task2_step1.png "_")
+    ![Making directory](images/lab2_task2_step1.png "_")
 
 2. Next, let's edit hol23c and grant the right privileges for getting started:
 
@@ -39,7 +39,7 @@ This labs assumes you have:
     sqlplus / as sysdba 
     </copy>
     ```
-    ![Image alt text](images/lab2_task2_step2.png "_")
+    ![Logging into database](images/lab2_task2_step2.png "_")
 
 3. Next, we will alter our session container 
     ```
@@ -47,7 +47,7 @@ This labs assumes you have:
     alter session set container = freepdb1;
     </copy>
     ```
-    ![Image alt text](images/lab2_task2_step3.png "_") 
+    ![Alter session container](images/lab2_task2_step3.png "_") 
 
 4. Now, lets grant the DB DEVELOPER_ROLE to hol23c
     ```
@@ -55,7 +55,7 @@ This labs assumes you have:
     grant DB_DEVELOPER_ROLE to hol23c; 
     </copy>
     ```
-    ![Image alt text](images/lab2_task2_step4.png "_") 
+    ![Granting role to hol23c](images/lab2_task2_step4.png "_") 
 
 5. Then, we grant access to execute javascript
     ```
@@ -63,7 +63,7 @@ This labs assumes you have:
     grant execute on javascript to hol23c;
     </copy>
     ```
-    ![Image alt text](images/lab2_task2_step5.png "_") 
+    ![Granting to execute JavaScript](images/lab2_task2_step5.png "_") 
 
 6. Create the directory to access filesystem where we'll download our ES Modules
     ```
@@ -71,7 +71,7 @@ This labs assumes you have:
     create directory mle_dir as '/home/oracle/mle';
     </copy>
     ```
-    ![Image alt text](images/lab2_task2_step6.png "_") 
+    ![Making directory as a specific path](images/lab2_task2_step6.png "_") 
 
 7. Grant access filesystem where we'll download our ES Modules
     ```
@@ -79,7 +79,7 @@ This labs assumes you have:
     grant read on directory mle_dir to hol23c;
     </copy>
     ```
-    ![Image alt text](images/lab2_task2_step7.png "_") 
+    ![Granting ability to read directory](images/lab2_task2_step7.png "_") 
 
 8. Exit SQLPLUS
     ```
@@ -87,7 +87,7 @@ This labs assumes you have:
     exit
     </copy>
     ```
-    ![Image alt text](images/lab2_task2_step8.png "_") 
+    ![Exiting Sqlplus](images/lab2_task2_step8.png "_") 
     
 
 ## Task 2: Install Chance.js ES Module
@@ -100,7 +100,7 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     curl -Lo ./mle/chance.js https://cdn.jsdelivr.net/npm/chance@1.1.11/+esm 
     </copy>
     ```
-    ![Image alt text](images/lab2_task3_step1.png "_") 
+    ![Downloading chance file](images/lab2_task3_step1.png "_") 
 
 2. And now connect as a hol23c, run 
     ```
@@ -108,7 +108,7 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     sqlplus hol23c/'YourPassword'@freepdb1;
     </copy>
     ```
-    ![Image alt text](images/lab2_task3_step2.png "_") 
+    ![Updating your sqlplus password](images/lab2_task3_step2.png "_") 
 
 3. Now that you're connected as `hol23c`, run SET VERIFY OFF. This will avoid SQL Plus displaying before and after images of each line that contains a substitution variable
     ```
@@ -116,7 +116,7 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     SET VERIFY OFF
     </copy>
     ```
-    ![Image alt text](images/lab2_task3_step3.png "_") 
+    ![Setting verify to off](images/lab2_task3_step3.png "_") 
 
 4. Now that you're connected as `hol23c`, run SET DEFINE OFF. This will prevent substitution issues since we are using PL/SQL since '&' creates issues with script
     ```
@@ -124,7 +124,7 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     SET DEFINE OFF
     </copy>
     ```
-    ![Image alt text](images/lab2_task3_step4.png "_") 
+    ![Setting define to off](images/lab2_task3_step4.png "_") 
 
 5. Creates the MLE module named chance_module
     ```
@@ -133,7 +133,7 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     /
     </copy>
     ```  
-    ![Image alt text](images/lab2_task3_step5.png "_") 
+    ![Creating mle module](images/lab2_task3_step5.png "_") 
 
 6. Creates the corresponding MLE environment that will help for managing dependencies at runtime
     ```
@@ -141,7 +141,7 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     create or replace mle env chance_module_env imports ('chance' module chance_module);
     </copy>
     ```
-    ![Image alt text](images/lab2_task3_step6.png "_")
+    ![Mange dependencies for MLE environment](images/lab2_task3_step6.png "_")
 
 7. Creates a new 'extended' module that will export properly the functions for future usage in PL/SQL
     ```
@@ -202,7 +202,7 @@ export { chance, template };
     /
     </copy>
     ```
-    ![Image alt text](images/lab2_task3_step7b.png " _")
+    ![Creating extended module environment](images/lab2_task3_step7b.png " _")
 
 ## Task 3: Lets intergrate the SQL engine with the JavaScript MLE using PL/SQL functions
 Installing a PL/SQL package to make Chance functions accessible in SQL
@@ -415,11 +415,10 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     function zodiac return varchar2 as mle module chance_extended env chance_module_env signature 'chance.zodiac';
     function template( p_doc in json ) return json as mle module chance_extended env chance_module_env signature 'template';
     end;
-    
     /
     </copy>
     ```
-    ![Image alt text](images/lab2_task4_step1.png " _") 
+    ![Seeing how chance env is being used ](images/lab2_task4_step1.png " _") 
 
 ## Task 4: Chance.js functions in SQL
 
@@ -429,7 +428,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     select chance.string;
     </copy>
     ```
-    ![Image alt text](images/lab2_task5_step1.png " _") 
+    ![Selecting a string](images/lab2_task5_step1.png " _") 
 
 2. Generate a random string with the length of 5 
     ```
@@ -437,7 +436,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     select chance.string( json { 'length': 5 } ); 
     </copy>
     ```
-     ![Image alt text](images/lab2_task5_step2.png " _") 
+     ![Selecting a string with length of five](images/lab2_task5_step2.png " _") 
 
 3. Generate 7 random strings with 10 chars 
     ```
@@ -445,7 +444,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     select chance.string( json { 'length': 10 } ) connect by level <= 7;
     </copy>
     ```
-     ![Image alt text](images/lab2_task5_step3.png " _") 
+     ![Selecting a string with length of 10](images/lab2_task5_step3.png " _") 
 
 4. Generate 5 prime numbers (between 0 to 10000)
     ```
@@ -453,7 +452,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     select chance.prime connect by level <= 5;
     </copy>
     ```
-     ![Image alt text](images/lab2_task5_step4.png " _") 
+     ![Selecting 5 prime numbers](images/lab2_task5_step4.png " _") 
 
 5. Generate a random credit card number (Mastercard)
     ```
@@ -461,7 +460,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     select chance.cc( json { 'type': 'Mastercard' } );
     </copy>
     ```
-     ![Image alt text](images/lab2_task5_step5.png " _") 
+     ![Selecting a credit card number using chance](images/lab2_task5_step5.png " _") 
 
 6. Generate 2 random dates (which includes time for Oracle database)
    first one is a DATE, second one is a formatted string (or varchar2)
@@ -470,7 +469,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     select chance."date", to_char( chance."date", 'yyyy-mm-dd hh24:mi:ss' );
     </copy>
     ```
-     ![Image alt text](images/lab2_task5_step6.png " _") 
+     ![Selecting random dates](images/lab2_task5_step6.png " _") 
 
 7. Generate a random date as a string (or varchar2)
    here, the format is the one from Chance: american (28th of January 2024, MM/DD/YYYY)
@@ -479,7 +478,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     select chance."date"( json{ 'string': true } );
     </copy>
     ```
-     ![Image alt text](images/lab2_task5_step7.png " _") 
+     ![Selecting date](images/lab2_task5_step7.png " _") 
 
 8. Generate a random date as a string (or varchar2), but this time with format DD/MM/YYYY
     ```
@@ -487,7 +486,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     select chance."date"( json{ 'string': true, 'american': false } );
     </copy>
     ```
-     ![Image alt text](images/lab2_task5_step8.png " _") 
+     ![Selecting a date with a specific format](images/lab2_task5_step8.png " _") 
 
 9. Generate a random date with a fixed year
     ```
@@ -495,7 +494,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     select chance."date"( json{ 'year': 2023 } );
     </copy>
     ```
-     ![Image alt text](images/lab2_task5_step9.png " _") 
+     ![Selecting by random fixed year](images/lab2_task5_step9.png " _") 
 
 10. Here you can see some limitations or flexibility (depending on your point of view) of interoperability between JavaScript and PL/SQL.
     When passing a JSON parameter, we can ask for an extended generation mode for a given data generator. But the PL/SQL function signatures have to
@@ -515,7 +514,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     select chance."date"( json{ 'year': 2023 }, true );
     </copy>
     ```
-     ![Image alt text](images/lab2_task5_step11.png " _") 
+     ![Selecting date ](images/lab2_task5_step11.png " _") 
 
 12. Generate a random timezone
     ```
@@ -523,7 +522,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
     select chance.timezone;
     </copy>
     ```
-     ![Image alt text](images/lab2_task5_step12.png " _") 
+     ![Selecting a random timezone](images/lab2_task5_step12.png " _") 
 
 ## Task 5: Extended Chance.js functions in SQL
 If you've taken a look at the extended MLE module above, you may have seen some additional code. In fact, while looking for JavaScript data generators, I found out that Fony.js (MIT License) from [Safia Abdalla](https://github.com/captainsafia) provided an interesting concept of `JSON template`. So I've decided to integrate it and improve it to benefit from the additional possibilities offered by `Chance.js` in terms of generator customization using a JSON document as a parameter. The result is that the `template()` function can now be used to generate random JSON documents based on JSON templates!
@@ -542,9 +541,9 @@ If you've taken a look at the extended MLE module above, you may have seen some 
     select chance.template( json { 'name': 'name', 'age': 'age', 'address': 'address' } );
     </copy>
     ```
-    ![Image alt text](images/lab2_task6_step2.png " _") 
+    ![Selecting to get a JSON document](images/lab2_task6_step2.png " _") 
 
-3. Generate 2 random JSON documents for fictious races
+3. Generate 2 random JSON documents for fictitious races
    We display the JSON document formatted for better readability
     ```
     <copy>
@@ -556,7 +555,7 @@ If you've taken a look at the extended MLE module above, you may have seen some 
     connect by level <= 2;
     </copy>
     ```
-    ![Image alt text](images/lab2_task6_step3.png " _") 
+    ![Selecting two fictitious races](images/lab2_task6_step3.png " _") 
 
 
 * This would bring some interesting ability to populate the [JSON Relational Duality Views](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/loe.html) examples from the 23c FREE documentation.
