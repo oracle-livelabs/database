@@ -6,6 +6,8 @@ In this lab, you will enable archive logging on the source database and create t
 
 Estimated Time: 5 minutes
 
+[](videohub:1_6r0h36gm)
+
 ### Objectives
 
 - Prepare the source database
