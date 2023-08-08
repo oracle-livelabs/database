@@ -43,7 +43,7 @@ This lab assumes you have:
     ```
     ![Make Directories](images/.png " ")
 
-2. Before installing you should check to see if anything is running on port 1521. This is what the database configure command will use when creating the listener. If it cannot it will try and use another port. If a service is running on that port you can try and restart it to see if it will restart on another port. If you choose to run with a different port then just make sure to adjust the commands as you go with the correct port.
+3. Before installing you should check to see if anything is running on port 1521. This is what the database configure command will use when creating the listener. If it cannot it will try and use another port. If a service is running on that port you can try and restart it to see if it will restart on another port. If you choose to run with a different port then just make sure to adjust the commands as you go with the correct port.
 
     ````
     <copy>
@@ -51,7 +51,7 @@ This lab assumes you have:
     </copy>
     ````
 
-    Restart the service using the "sudo systemctl restart" command. Make sure to replace the text below the the service from the previous command
+    If any services are returned you can try and restart them and see if they move to another port. If nothing was returned continue to the next step. Restart the service using the "sudo systemctl restart" command. Make sure to replace the text below the the service from the previous command
 
     ````
     <copy>
@@ -67,7 +67,7 @@ This lab assumes you have:
     </copy>
     ````
 
-3. Enable the developer repo to be able to run the prerequisites check as a part of the install
+4. Enable the developer repo to be able to run the prerequisites check as a part of the install
     ```
     <copy>
     sudo dnf config-manager --set-enabled ol8_developer
@@ -77,7 +77,7 @@ This lab assumes you have:
 
 ## Task 2: Database Setup
 
-4. Get the download for 23c Free
+1. Get the download for 23c Free
     ```
     <copy>
     cd /u01/downloads
@@ -86,7 +86,7 @@ This lab assumes you have:
     ```
     ![Download Install](images/.png " ")
 
-5. Install the database software using the dnf command. This will take about 5-10 minutes.
+2. Install the database software using the dnf command. This will take about 5-10 minutes.
     ```
     <copy>
     sudo dnf -y localinstall /u01/downloads/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
@@ -94,7 +94,7 @@ This lab assumes you have:
     ```
     ![Image alt text](images/.png " ")   
 
-6. Create the database. You will be prompted for a password to be used for the database accounts. You can use any password here but you will need it later so note it down. For my examples I will use Welcome123# This should take about 5-10 minutes.
+3. Create the database. You will be prompted for a password to be used for the database accounts. You can use any password here but you will need it later so note it down. For my examples I will use Welcome123# This should take about 5-10 minutes.
     ```
     <copy>
     sudo /etc/init.d/oracle-free-23c configure
@@ -102,14 +102,14 @@ This lab assumes you have:
     ```
     ![Image alt text](images/.png " ")
 
-7. When the create finishes it will give you the two connection strings for your pluggable and container databases. If you used a different port it will be in the connection string.
+4. When the create finishes it will give you the two connection strings for your pluggable and container databases. If you used a different port it will be in the connection string.
     ```
     Connect to Oracle Database using one of the connect strings:
     Pluggable database: ll23c.livelabs.oraclevcn.com:1521/FREEPDB1
     Multitenant container database: ll23c.livelabs.oraclevcn.com:1521
     ```
 
-7. To see if your database is up and running you can use the following command
+5. To see if your database is up and running you can use the following command
     ```
     <copy>
     sudo /etc/init.d/oracle-free-23c status
@@ -119,7 +119,7 @@ This lab assumes you have:
 
 ## Task 3: Environment and User Setup
 
-8. To set your environment each time Oracle logs in add these lines to your profile. This will specifically set it for the FREE database. Also this adds SQLcl and ORDS to your path.
+1. To set your environment each time Oracle logs in add these lines to your profile. This will specifically set it for the FREE database. Also this adds SQLcl and ORDS to your path.
     ```
     <copy>
     echo "export ORAENV_ASK=NO" >> /home/oracle/.bashrc
@@ -134,14 +134,14 @@ This lab assumes you have:
     ```
     ![Image alt text](images/.png " ")
 
-9. If your listener was configured on a different port or you wanted to see your listener configuration you can use the lsnrctl command. You can use this port in the later commands if you are not running on port 1521.
+2. If your listener was configured on a different port or you wanted to see your listener configuration you can use the lsnrctl command. You can use this port in the later commands if you are not running on port 1521.
     ````
     <copy>
     lsnrctl status
     </copy>
     ````
 
-9. Connect to your database.
+3. Connect to your database.
     ```
     <copy>
     sqlplus / as sysdba
@@ -149,7 +149,7 @@ This lab assumes you have:
     ```
     ![Image alt text](images/.png " ")
 
-10. The show pdbs commands will list the pluggable databases running in your container. Once you switch to a pluggable database that same command will list just the current pluggable.
+4. The show pdbs commands will list the pluggable databases running in your container. Once you switch to a pluggable database that same command will list just the current pluggable.
     ```
     <copy>
     show pdbs
@@ -167,7 +167,7 @@ This lab assumes you have:
     ```
     ![Image alt text](images/.png " ")
 
-11. We will be using the user hol23c throughout the workshop. You can specify any password you want. I'm going to use Welcome123# for my examples.
+5. We will be using the user hol23c throughout the workshop. You can specify any password you want. I'm going to use Welcome123# for my examples.
     ````
     <copy>
     create user hol23c identified by Welcome123#;
@@ -191,7 +191,7 @@ This lab assumes you have:
     ![Image alt text](images/.png " ")
 
 
-30. You may proceed to the next lab.
+6. You may proceed to the next lab.
 
 
 ## Learn More

@@ -29,7 +29,7 @@ This lab assumes you have:
     ![Open Terminal](images/.png " ")
 
 
-12. One thing to be aware of is this image has a newer version of Java installed on it and the environment variable JAVA_HOME is pointing at that. Some of the utilities require a higher version.
+2. One thing to be aware of is this image has a newer version of Java installed on it and the environment variable JAVA_HOME is pointing at that. Some of the utilities require a higher version.
     ```
     <copy>
     java -version
@@ -39,7 +39,7 @@ This lab assumes you have:
     ```
     ![Image alt text](images/.png " ")
 
-13. Download and unzip the latest version of SQLcl
+3. Download and unzip the latest version of SQLcl
     ```
     <copy>
     cd /u01/app/oracle
@@ -49,14 +49,14 @@ This lab assumes you have:
     </copy>
     ```
 
-14. Test out SQLcl by connecting to the database. Notice the command is sql not sqlplus
+4. Test out SQLcl by connecting to the database. Notice the command is sql not sqlplus
     ```
     <copy>
     sql / as sysdba
     </copy>
     ```
 
-15. You can explore the database if you want. When you get done type exit
+5. You can explore the database if you want. When you get done type exit
     ```
     <copy>
     show pdbs;
@@ -70,7 +70,7 @@ This lab assumes you have:
 
 ## Task 2: Setup APEX
 
-16. Download and unzip the latest version of APEX
+1. Download and unzip the latest version of APEX
     ```
     <copy>
     cd /u01/app/oracle
@@ -80,7 +80,7 @@ This lab assumes you have:
     </copy>
     ```
 
-17. Run the install script into the <b>Pluggable</b> database. It's important that you install into the pluggable and not the container. Please review the architecture section of the APEX documentation in the additional information section for different deployment modes. This script will take about 5-7 minutes to complete.
+2. Run the install script into the <b>Pluggable</b> database. It's important that you install into the pluggable and not the container. Please review the architecture section of the APEX documentation in the additional information section for different deployment modes. This script will take about 5-7 minutes to complete.
     ```
     <copy>
     cd /u01/app/oracle/apex
@@ -102,7 +102,7 @@ This lab assumes you have:
     exit;
     </copy>
     ```
-18. Run the change password script into the <b>Pluggable</b> database. When prompted use the values below
+3. Run the change password script into the <b>Pluggable</b> database. When prompted use the values below
 - Username: Use the default ADMIN
 - Email: Use the default ADMIN
 - Password: Provide a password, I will use Welcome123#
@@ -127,7 +127,7 @@ This lab assumes you have:
     </copy>
     ```
 
-19. Unlock and set the passwords for the various accounts in the <b>Pluggable</b> database. You will be prompted during the rest config script. I'm going to use Welcome123# for my examples but you can use any password you want.
+4. Unlock and set the passwords for the various accounts in the <b>Pluggable</b> database. You will be prompted during the rest config script. I'm going to use Welcome123# for my examples but you can use any password you want.
     ```
     <copy>
     sql / as sysdba
@@ -156,7 +156,7 @@ This lab assumes you have:
 
 ## Task 2: Setup ORDS
 
-20. Download the latest version of ORDS.
+1. Download the latest version of ORDS.
     ```
     <copy>
     cd /u01/app/oracle/ords
@@ -166,7 +166,7 @@ This lab assumes you have:
     </copy>
     ```
 
-21. You will need to grant the correct privileges to the hol23c user.
+2. You will need to grant the correct privileges to the hol23c user.
     ```
     <copy>
     cd /u01/app/oracle/ords/scripts/installer
@@ -189,7 +189,7 @@ This lab assumes you have:
     </copy>
     ```
 
-22. Copy the images directory from APEX to the ORDS directory
+3. Copy the images directory from APEX to the ORDS directory
     ```
     <copy>
     cd /u01/app/oracle/ords
@@ -197,7 +197,7 @@ This lab assumes you have:
     </copy>
     ```
 
-23. Install ORDS answering the prompts with the following responses:
+4. Install ORDS answering the prompts with the following responses:
 - Installation: 2
 - Connection: 1
 - Hostname: localhost
@@ -212,16 +212,15 @@ This lab assumes you have:
 - Protocol: 1 HTTP
 - HTTP port: 8080
 - Static resources location: /u01/app/oracle/ords/images
-
     ```
     <copy>
     ords install
     </copy>
     ```
 
-24. After the installation has completed, the screen stops scrolling and you see the line "Oracle REST Data Services initialized" Stop ORDS by pressing CTRL-C
+5. After the installation has completed, the screen stops scrolling and you see the line "Oracle REST Data Services initialized" Stop ORDS by pressing CTRL-C
 
-25. Enable hol23c the ability to use ORDS.
+6. Enable hol23c the ability to use ORDS.
     ```
     <copy>
     sql hol23c/Welcome123#@localhost:1521/freepdb1
@@ -250,25 +249,25 @@ This lab assumes you have:
 
 ## Task 4: Login
 
-26. Restart ORDS. Wait about 30 seconds for it to finish starting before proceeding.
+1. Restart ORDS. Wait about 30 seconds for it to finish starting before proceeding.
     ```
     <copy>
     ords serve
     </copy>
     ```
 
-27. Open a browser
+2. Open a browser
 
-28. Navigate to SQL Developer Web by going to the following address
+3. Navigate to SQL Developer Web by going to the following address
     ```
     <copy>
     http://localhost:8080/ords/
     </copy>
     ```
 
-29. Log into sql dev web as hol23c with your password. I used Welcome123#
+4. Log into sql dev web as hol23c with your password. I used Welcome123#
 
-30. You may proceed to the next lab.
+5. You may proceed to the next lab.
 
 
 ## Learn More
