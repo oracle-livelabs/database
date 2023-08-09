@@ -18,7 +18,7 @@ This lab assumes you have:
 * Oracle Database 23c Free Developer Release
 * A terminal or console access to the database
 
-## Task 1:Resetting database user password
+## Task 1: Resetting database user password
 
 1. The first step is to get to a command prompt. If you need to open a terminal and you are running in a Sandbox environment, click on Activities and then Terminal.
 
