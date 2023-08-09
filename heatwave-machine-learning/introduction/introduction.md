@@ -34,6 +34,7 @@ The sepal is the part that encases and protects the flower when it is in the bud
 _Estimated Time:_ 2 hours
 
 Watch the video below for a quick walk-through of the lab.
+
 [Automate ML Apps with MySQL HeatWave](videohub:1_mgj1acg7)
 
 ### About Product/Technology
