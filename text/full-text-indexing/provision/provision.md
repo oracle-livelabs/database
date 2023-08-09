@@ -96,7 +96,7 @@ In this lab, you will:
 
 5. Choose a deployment type: Select the deployment type for your database from the choices:
 
-    - __Shared Infrastructure__ - For this lab, choose __Shared Infrastructure__ as the deployment type.
+    - __Serverless__ - For this lab, choose __Serverless__ as the deployment type.
     - __Dedicated Infrastructure__ - Alternatively, you could have chosen Dedicated Infrastructure as the deployment type.
 
     ![Choose a deployment type.](./images/deployment-type.png " ")
@@ -110,7 +110,7 @@ In this lab, you will:
     - __Always Free__ - For this lab, we recommend you leave Always Free checked if it is available to you.
     </if>
     - __Choose database version__ - Select 19c from the database version. Note: This lab should work on a 21c AJD database as well.
-    - __OCPU count__ - Number of OCPUs for your service. For this lab, leave the default __1 OCPU__. If you choose an Always Free database, it comes with 1 OCPU.
+    - __ECPU count__ - Number of ECPUs for your service. For this lab, leave the default __2 ECPUs__. If you choose an Always Free database, it comes with 2 ECPUs.
     - __Storage (TB)__ - Select your storage capacity in terabytes. For this lab, leave the default __1 TB__ of storage. If you choose an Always Free database, it comes with 20 GB of storage.
     - __Auto Scaling__ - For this lab, keep auto scaling enabled, to allow the system to automatically use up to three times more CPU and IO resources to meet workload demand.
 

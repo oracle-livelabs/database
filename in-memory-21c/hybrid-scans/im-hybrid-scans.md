@@ -2,13 +2,13 @@
 
 ## Introduction
 
-Watch a preview video of creating In-Memory Column Store
+Watch a demo video of using In-Memory Hybrid Scans:
 
-[YouTube video](youtube:U9BmS53KuGs)
+[YouTube video](youtube:JR9Kpg5Vnjs)
 
 Watch the video below for a walk through of the In-Memory Spatial lab:
 
-[In-Memory Hybrid Scans](videohub:1_ohs9hpw0)
+[In-Memory Hybrid Scans](videohub:1_ks50clxz)
 
 *Estimated Lab Time:* 10 Minutes.
 

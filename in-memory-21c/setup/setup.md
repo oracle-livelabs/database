@@ -1,4 +1,4 @@
-# Setting up the In-Memory column store
+# Set up the In-Memory column store
 
 ## Introduction
 

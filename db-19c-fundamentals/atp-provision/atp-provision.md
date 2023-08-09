@@ -80,15 +80,16 @@ In this lab, you will:
 
 5. Choose a deployment type. Select the deployment type for your database from the choices:
 
-    - **Shared Infrastructure** - For this lab, choose **Shared Infrastructure** as the deployment type.
+    - **Serverless** - For this lab, choose **Serverless** as the deployment type.
     - **Dedicated Infrastructure** - Or, you could have chosen Dedicated Infrastructure as the deployment type.
 
+    ![Choose deployment type](./images/choose-deployment-type.png)
 
 6. Configure the database:
 
-    - **Always Free** - If your Cloud Account is an Always Free account, you can select this option to create an always free autonomous database. An always free database comes with 1 CPU and 20 GB of storage. For this lab, we recommend you check **Always Free** option.
+    - **Always Free** - If your Cloud Account is an Always Free account, you can select this option to create an always free autonomous database. An always free database comes with at least 2 CPUs and 20 GB of storage. For this lab, we recommend you check **Always Free** option.
     - **Choose database version** - Select database version 19c from the available versions.
-    - **OCPU count** - Number of CPUs for your service. For this lab, specify **1 CPU**. If you choose an Always Free database, it comes with 1 CPU.
+    - **ECPU count** - Number of CPUs for your service. For this lab, specify **2 CPUs**. If you choose an Always Free database, it comes with at least 2 CPUs.
     - **Storage (TB)** - Select your storage capacity in terabytes. For this lab, specify **1 TB** of storage. Or, if you choose an Always Free database, it comes with 20 GB of storage.
     - **Auto Scaling** - For always free accounts (this lab), auto scaling will be disabled.
     - **New Database Preview** - If a checkbox is available to preview a new database version, do NOT select it.
@@ -134,7 +135,7 @@ In this lab, you will:
 
     ![Create Autonomous Database](./images/create-adb.png " ")
 
-11.  Your instance will begin provisioning. In a few minutes, the state will turn from *Provisioning* to *Available*. At this point, your Autonomous Transaction Processing database is ready to use! Have a look at your instance's details here including its name, database version, OCPU count, and storage size.
+11.  Your instance will begin provisioning. In a few minutes, the state will turn from *Provisioning* to *Available*. At this point, your Autonomous Transaction Processing database is ready to use! Have a look at your instance's details here including its name, database version, ECPU count, and storage size.
 
 
     ![Show Autonomous Database](images/adb-available-freetier.png)
