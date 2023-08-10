@@ -27,7 +27,7 @@ This section starts you off with an unencrypted database & backing it up so you 
 
 Start with normal setup on CDB1
 
-1. Run the script below to reset CDB1 prior to the introduction of TDE on CDB1.  This will refresh the database prior to TDE being applied.
+1. Run this and select *1* to set your environment to **CDB1**.
 
     ```
     <copy>
@@ -35,7 +35,7 @@ Start with normal setup on CDB1
     </copy>
     ```
 
-2. Choose 1 for CDB1
+2. Refresh the database prior to the introduction of TDE
 
     ```
     <copy>
@@ -44,12 +44,12 @@ Start with normal setup on CDB1
     ```
 
 >>**Notes:**
-1. Once you create a key for the database you are at the point of no return
-2. The database knows there is a wallet & master encryption key associated with it
-3. If you don’t have the database access the wallet you will get messages that it can’t access the key
-4. Be sure of the steps before you do this to a database that you use normally
+- Once you create a key for the database you are at the point of no return
+- The database knows there is a wallet & master encryption key associated with it
+- If you don’t have the database access the wallet you will get messages that it can’t access the key
+- Be sure of the steps before you do this to a database that you use normally
 
-3. Run copy back on CDB2 to refresh the database prior to TDE being applied
+3. Perform the same action on CDB2 to refresh the database prior to TDE being applied
 
     ```
     <copy>
@@ -58,18 +58,18 @@ Start with normal setup on CDB1
     ```
 
 >>**Notes:**
-1. Once you do encrypt the database you need to do a full backup, as a best practice
-2. TDE encrypts the
+- Once you do encrypt the database you need to do a full backup, as a best practice
+- TDE encrypts the
     - Datafile
     - Tablespace
     - Data in the blocks
-3. TDE does NOT encrypt
+- TDE does NOT encrypt
     - Block Headers
     - Means when you go to back it up nothing changed
     - If you do an incremental it won’t look at the database and say the data in the data file or tablespace changed because it got encrypted
     - All it knows is the header, which has the last update scn, didn’t change, so the block didn’t change
     - But the data within the block did change because it was encrypted
-4. If you only do an incremental merge then
+- If you only do an incremental merge then
     - The data will stay unencrypted
     - You need to start over as it will take those incremental backups that are unencrypted, merge it into the full backup, which is unencrypted, and keep it unencrypted
     - It will stay unencrypted till you do another full backup
@@ -86,10 +86,10 @@ Start with normal setup on CDB1
     ![Screen Capture of Wallet Check](./images/wallet-check-cdb1.png " ")
 
 >>**Notes:**
-1. You can see the default location of the wallet file.
-2. The wallet status will be given.
-3. You can see there is no wallet that has been created yet.
-4. At this point CBD1 does not know about a wallet or encryption
+- You can see the default location of the wallet file.
+- The wallet status will be given.
+- You can see there is no wallet that has been created yet.
+- At this point CBD1 does not know about a wallet or encryption
 
 
 5. Look at the wallet for CDB2
@@ -103,10 +103,10 @@ Start with normal setup on CDB1
     ![Screen Capture of Wallet Check](./images/wallet-check-cdb2.png " ")
 
 >>**Notes:**
-1. You can see the default location of the wallet file.
-2. The wallet status will be given.
-3. You can see there is no wallet that has been created yet.
-4. At this point CBD2 does not know about a wallet or encryption
+- You can see the default location of the wallet file.
+- The wallet status will be given.
+- You can see there is no wallet that has been created yet.
+- At this point CBD2 does not know about a wallet or encryption
 
 At this point neither database knows about encryption and there is no wallet set so let's check the encryption status of CDB1
 
@@ -138,7 +138,7 @@ At this point neither database knows about encryption and there is no wallet set
 
 In this section we will create a wallet for each CDB. For ease of execution, all steps needed have been provided in the script below
 
-1. Create Wallet for CDB1, which has PDB1
+1. Create a wallet for CDB1, which has PDB1
 
     ```
     <copy>
@@ -146,12 +146,12 @@ In this section we will create a wallet for each CDB. For ease of execution, all
     </copy>
     ```
 
-This script will perform the following:
+    This script will perform the following:
 
-- Changes the wallet root parameter. Recommendation for 19 and above is to use the spfile parameter wallet root
-- Tells it that starting in this location that the wallet root is set at to look for the wallet associated with this database
-- In this instance it will look for a subdirectory called *tde*
-- You will see the message to Bounce the database
+    - Changes the wallet root parameter. Recommendation for 19 and above is to use the spfile parameter wallet root
+    - Tells it that starting in this location that the wallet root is set at to look for the wallet associated with this database
+    - In this instance it will look for a subdirectory called *tde*
+    - You will see the message to Bounce the database
 
 >>**Notes:**
 - Changing the spfile parameter requires a database bounce
@@ -160,7 +160,7 @@ This script will perform the following:
 - They don’t have to be done together
 - Plan for a bounce before you start the encryption process
 
-![Screenshot of terminal output](./images/bounce-database2.png " ")
+  ![Screenshot of terminal output](./images/bounce-database2.png " ")
 
 >>**Notes:**
 - After the database comes back up from the bounce the following tasks are performed by the script
@@ -171,28 +171,28 @@ This script will perform the following:
       - I’m going to be using a wallet file
       - If using Oracle Key Vault the configuration will say OKV instead of file
 
-![Screenshot of terminal output](./images/post-bounce2.png " ")
+  ![Screenshot of terminal output](./images/post-bounce2.png " ")
 
 2. Create the keystore
 
-The following tasks are performed in this step:
+    The following tasks are performed in this step:
 
-- Give it a wallet file
-- Give it a password
-- Open it
-- Changing to PDB1
-- Using a unified wallet
-- The script also creates a second wallet
-- Note the 2 files in the directory
-    - .p12 is the password file
-        - Cannot access the file without the password
-        - Need to back this up when you backup the database
-        - It should not be with the database
-        - Use to add keys and make changes to the wallet
-    - .sso is the auto login wallet
-        - You do not want to backup this file
-        - Anybody who has this will be able open the database and read the keys
-- Even if somebody got the database on the wallet they can’t get the key that is protecting that database
+    - Give it a wallet file
+    - Give it a password
+    - Open it
+    - Changing to PDB1
+    - Using a unified wallet
+    - The script also creates a second wallet
+    - Note the 2 files in the directory
+        - *.p12* is the password file
+            - Cannot access the file without the password
+            - Need to back this up when you backup the database
+            - It should not be with the database
+            - Use to add keys and make changes to the wallet
+        - *.sso* is the auto login wallet
+            - You do not want to backup this file
+            - Anybody who has this will be able open the database and read the keys
+    - Even if somebody got the database on the wallet they can’t get the key that is protecting that database
 
 >>**Notes:**
 - Using a unified wallet
@@ -217,13 +217,6 @@ The following tasks are performed in this step:
     /home/oracle/scripts/cloning/create_wallet.sh CDB2
     </copy>
     ```
-
-    - Create the keystore
-    - Give it a wallet file
-    - Give it a password
-    - Open it
-    - Changing to PDB2
-    - Use a unified wallet
 
 >>**Notes:**
 Note For RAC Environments
@@ -266,16 +259,14 @@ Same as for CDB1 and PDB1, CDB2 & PDB2 both have the wallet open but no master k
 
 ## Task 3:  Set The master Key
 
+The *`set_keys.sh`* script used in this section will set the encryption key for the CDB & PDB, and will rely on the tag feature.
+
+Tags are important to identify keys, especially when using OKV where keys are stored in a centralized vault and managed for multiple databases. In such instances, the tag allows to uniquely identify the encryption key
+
 >>**Notes:**
-- The `set_keys.sh` script used in this section will
-    - Set the encryption key for the CDB & PDB
-    - Use a tag. Tags are important to identify keys, especially when using OKV
-        - In OKV you have the visibility to all the databases that are set and all the keys that are managed
-        - The tag uniquely identifies the encryption key
-        - This makes it easier to manage the wallets and know exactly which key you are looking at
-    - This is the point of no return
-    - From this point forward the database expects the wallet and encryption key to be there when the database starts up
-    - Each PDB also has its own unique key
+- This is the point of no return
+- From this point forward the database expects the wallet and encryption key to be there when the database starts up
+- Each PDB also has its own unique key
 
 1. Set the master encryption key for CDB1 and PDB1
 
@@ -332,7 +323,7 @@ Same as for CDB1 and PDB1, CDB2 & PDB2 both have the wallet open but no master k
     ![Screenshot of terminal output](./images/master-encryption-key-1.png " ")
     ![Screenshot of terminal output](./images/master-encryption-key-2.png " ")
 
-The Activation Time is listed
+    The Activation Time is listed
 
     - As you rotate through the keys it will show a new Activation Time
     - This will show the history of the keys and when activated
@@ -348,7 +339,7 @@ The Activation Time is listed
     - Nothing should be encrypted at this point
     - You should have 2 master Encryption Keys
 
-![Screenshot of terminal output](./images/master-encryption-key-cdb2.png " ")
+    ![Screenshot of terminal output](./images/master-encryption-key-cdb2.png " ")
 
     - If you look at the keys for SYSAUX & SYSTEM they match the keys at the bottom
     - They are not encrypted at this point
@@ -387,7 +378,7 @@ We are now ready to encrypt
 
 3. Encrypt the tablespaces in CDB1
 
-This is an on-line encryption and will perform the following:
+    This is an on-line encryption and will perform the following:
 
     - Sequentially going through all the data files associated with the tablespace and creating a new encrypted copy.  
     - Keeping track of any changes to each data file during the process and applying them after the encryption is completed
