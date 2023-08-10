@@ -64,7 +64,7 @@ This lab assumes you have:
 
 ## Task 2: Update and replace a document by ID
 
-1. In the previous lab, you learned how to insert records into a SQL table and a document into the duality view. Now, we will go one step further and update the Kids genre table using SQL. This change will be reflected in all documents that contain the Kids genre. Copy the sql below and click **Run Script**
+1. Like the previous lab, lets make an update to the `GENRES_DV`. The important thing to note here is, this change will be reflected in **all documents** that contain the Kids genre. Copy the sql below and click **Run Script**
 
     ```
     <copy>
@@ -87,7 +87,7 @@ This lab assumes you have:
     ```
     ![showing the update ](images/kids_description.png " ")
 
-3. Now, let's check the Genres table again to see the updated description. Copy the sql below and click **Run Script**
+3. Now, let's check the `GENERES` table again to see the updated description. Copy the sql below and click **Run Script**
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
@@ -107,7 +107,7 @@ This lab assumes you have:
     ```
     ![showing all the movies with the kids genre](images/updated_kids_description.png " ")
 
-5. Finally, since we made an update via an SQL INSERT statement, let's insert a record via the Duality View. We will add a description to the Family genre. First, check the current description. Copy the sql below and click **Run Script**
+5. Finally, since we made an update via a SQL INSERT statement, let's insert a record via the Duality View. We will add a description to the Family genre. First, check the current description. Copy the sql below and click **Run Script**
 
     ```
     <copy>
