@@ -6,6 +6,8 @@ All previous labs have carefully avoided accessing the data layer to ease the tr
 
 Estimated Lab Time: 10 minutes
 
+[](videohub:1_2si62dv6)
+
 ### Objectives
 
 In this lab, you will:
