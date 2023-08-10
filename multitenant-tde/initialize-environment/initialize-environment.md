@@ -74,16 +74,15 @@ This lab assumes you have:
 
     ![](./images/ADD_IMAGE_HEREinit-multitenant.png " ")
 
-<!-- for 21c image only.
-2. Create Database Links. During this workshop you will use database links *cdb1_dblink* and *cdb2_dblink* to perform tasks across between the two CDBs
+<!-- for 21c image only. -->
+2. Create Database Links. During this workshop you will use database links *`cdb1_dblink`* and *`cdb2_dblink`* to perform tasks across between the two CDBs
 
     ```
     <copy>
     cat initCDBs.sh
     . ./initCDBs.sh
     </copy>
-    ``` 
-    -->
+    ```
 
 You may now proceed to the next lab.
 
@@ -156,5 +155,6 @@ You may now proceed to the next lab.
     ```
 
 ## Acknowledgements
-- **Authors/Contributors** - Sean Provost, Mike Sweeney, Bryan Grenn, Bill Pritchett, Rene Fontcha
-- **Last Updated By/Date** - Sean Provost, Enterprise Architect, May 2023
+* **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
+- **Contributors** - Sean Provost, Mike Sweeney, Bryan Grenn, Bill Pritchett
+- **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, August 2023
