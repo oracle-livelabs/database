@@ -3,7 +3,6 @@
 ## Introduction
 
 Before we can create new JSON Relational Duality Views (JRDVs), we must first create and populate tables and other database objects containing our data sources. This lab assumes that you have already installed the Oracle Database 23c Free Developer Release on a pluggable database.
-<!--and have started ORDS-->
 
 Estimated Time: 8 minutes
 
@@ -19,6 +18,9 @@ In this lab, you will:
 This lab assumes you have:
 - Oracle Database 23c Free Developer Release
 - Completed all previous labs successfully
+
+Watch the video below for a quick walk through of the lab.
+[Set Up Your Environment walkthrough](videohub:1_bm92oiqn)
 
 ## Task 1: Download the schema creation and population scripts
 

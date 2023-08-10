@@ -29,34 +29,125 @@ This lab assumes you have:
 * All previous labs successfully completed
 * SQL Developer Web 23.1 or a compatible tool for running SQL statements
 
-## Task 1: Connecting to your database user
+## Task 1: Create a sample table
 
-1. Your browser should still be open, if not just open a new one. If running in a Sandbox go to Activities and then at the top click on new window. If Chrome is not running then click on Chrome.
+To start, we'll create a sample table called "emp". This is data will help us to leverage some of the new features in SQL.
 
-    ![New Chrome window navigation](images/new_chrome_window.png " ")
-
-2. The address for SQL Developer Web on your machine is below. Copy and paste that into the browser.
-    >Note: If you did not start ORDs, ORDs stopped working or you closed that terminal, go back and complete the steps in Lab 2 to start ORDs. It must be running to log in here.
+1. Copy the following sample table creation script.
+    >**NOTE: **We will continue using the password `Welcome123` for this lab. If you choose to use a different password, please remember to change the codelines where applicable.
 
     ```
+    Rem  Copyright (c) 2016 by Oracle Corporation
+    Rem
+    Rem  You may not use the identified files except in compliance with The MIT
+    Rem  License (the "License.")
+    Rem
+    Rem  You may obtain a copy of the License at
+    Rem  https://github.com/oracle/Oracle.NET/blob/master/LICENSE
+    Rem
+    Rem  Unless required by applicable law or agreed to in writing, software
+    Rem  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+    Rem  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    Rem
+    Rem  See the License for the specific language governing permissions and
+    Rem  limitations under the License.
+    Rem
+    Rem  NAME
+    REM    scott.sql
+    Rem
+    Rem  DESCRIPTION
+    Rem    SCOTT is a database user whose schema is used for Oracle code demonstrations
+    Rem    Be sure to replace <PASSWORD> on lines 31 and 34 with your preferred password.
     <copy>
-    http://localhost:8080/ords/hol23c/_sdw
+    SET TERMOUT OFF
+    SET ECHO OFF
+
+    rem CONGDON    Invoked in RDBMS at build time.	 29-DEC-1988
+    rem OATES:     Created: 16-Feb-83
+
+    CREATE USER SCOTT;
+    GRANT CONNECT,RESOURCE,UNLIMITED TABLESPACE TO SCOTT IDENTIFIED BY Welcome123;
+    ALTER USER SCOTT DEFAULT TABLESPACE USERS;
+    ALTER USER SCOTT TEMPORARY TABLESPACE TEMP;
+    CONNECT SCOTT/Welcome123
+    DROP TABLE DEPT;
+    CREATE TABLE DEPT
+        (DEPTNO NUMBER(2) CONSTRAINT PK_DEPT PRIMARY KEY,
+        DNAME VARCHAR2(14) ,
+        LOC VARCHAR2(13) ) ;
+    DROP TABLE EMP;
+    CREATE TABLE EMP
+        (EMPNO NUMBER(4) CONSTRAINT PK_EMP PRIMARY KEY,
+        ENAME VARCHAR2(10),
+        JOB VARCHAR2(9),
+        MGR NUMBER(4),
+        HIREDATE DATE,
+        SAL NUMBER(7,2),
+        COMM NUMBER(7,2),
+        DEPTNO NUMBER(2) CONSTRAINT FK_DEPTNO REFERENCES DEPT);
+    INSERT INTO DEPT VALUES
+        (10,'ACCOUNTING','NEW YORK');
+    INSERT INTO DEPT VALUES (20,'RESEARCH','DALLAS');
+    INSERT INTO DEPT VALUES
+        (30,'SALES','CHICAGO');
+    INSERT INTO DEPT VALUES
+        (40,'OPERATIONS','BOSTON');
+    INSERT INTO EMP VALUES
+    (7369,'SMITH','CLERK',7902,to_date('17-12-1980','dd-mm-yyyy'),800,NULL,20);
+    INSERT INTO EMP VALUES
+    (7499,'ALLEN','SALESMAN',7698,to_date('20-2-1981','dd-mm-yyyy'),1600,300,30);
+    INSERT INTO EMP VALUES
+    (7521,'WARD','SALESMAN',7698,to_date('22-2-1981','dd-mm-yyyy'),1250,500,30);
+    INSERT INTO EMP VALUES
+    (7566,'JONES','MANAGER',7839,to_date('2-4-1981','dd-mm-yyyy'),2975,NULL,20);
+    INSERT INTO EMP VALUES
+    (7654,'MARTIN','SALESMAN',7698,to_date('28-9-1981','dd-mm-yyyy'),1250,1400,30);
+    INSERT INTO EMP VALUES
+    (7698,'BLAKE','MANAGER',7839,to_date('1-5-1981','dd-mm-yyyy'),2850,NULL,30);
+    INSERT INTO EMP VALUES
+    (7782,'CLARK','MANAGER',7839,to_date('9-6-1981','dd-mm-yyyy'),2450,NULL,10);
+    INSERT INTO EMP VALUES
+    (7788,'SCOTT','ANALYST',7566,to_date('13-JUL-87')-85,3000,NULL,20);
+    INSERT INTO EMP VALUES
+    (7839,'KING','PRESIDENT',NULL,to_date('17-11-1981','dd-mm-yyyy'),5000,NULL,10);
+    INSERT INTO EMP VALUES
+    (7844,'TURNER','SALESMAN',7698,to_date('8-9-1981','dd-mm-yyyy'),1500,0,30);
+    INSERT INTO EMP VALUES
+    (7876,'ADAMS','CLERK',7788,to_date('13-JUL-87')-51,1100,NULL,20);
+    INSERT INTO EMP VALUES
+    (7900,'JAMES','CLERK',7698,to_date('3-12-1981','dd-mm-yyyy'),950,NULL,30);
+    INSERT INTO EMP VALUES
+    (7902,'FORD','ANALYST',7566,to_date('3-12-1981','dd-mm-yyyy'),3000,NULL,20);
+    INSERT INTO EMP VALUES
+    (7934,'MILLER','CLERK',7782,to_date('23-1-1982','dd-mm-yyyy'),1300,NULL,10);
+    DROP TABLE BONUS;
+    CREATE TABLE BONUS
+        (
+        ENAME VARCHAR2(10)	,
+        JOB VARCHAR2(9)  ,
+        SAL NUMBER,
+        COMM NUMBER
+        ) ;
+    DROP TABLE SALGRADE;
+    CREATE TABLE SALGRADE
+        ( GRADE NUMBER,
+        LOSAL NUMBER,
+        HISAL NUMBER );
+    INSERT INTO SALGRADE VALUES (1,700,1200);
+    INSERT INTO SALGRADE VALUES (2,1201,1400);
+    INSERT INTO SALGRADE VALUES (3,1401,2000);
+    INSERT INTO SALGRADE VALUES (4,2001,3000);
+    INSERT INTO SALGRADE VALUES (5,3001,9999);
+    COMMIT;
+
+    SET TERMOUT ON
+    SET ECHO ON
     </copy>
     ```
-    ![ORDS url entered into the browser](images/ords_url.png "ORDs url")
 
-3. To login use the username hol23c with the password you set into the browser.
+    2.Paste into SQL Developer Web.
 
-    ![Logging into ORDS with hol23 credentials](images/ords_login.png "ORDs login")
-
-4. To be able to run SQL statements you will need in the sql worksheet. Click on **SQL**.
-
-    ![Database Actions Launchpad with SQL Navigation](images/ords_landing_page_launch.png "Database Actions Launchpad")
-
-5. You are now logged in and should be at a screen that looks like this.
-
-    ![Landing page for SQL](images/sql_login.png "SQL landing page")
-
+    3. Press the run icon to create the table.
 
 ## Task 2: Aliases in GROUP BY clause
 
@@ -178,20 +269,12 @@ Oracle Database 23c introduces the new BOOLEAN datatype. This leverages the use 
     Ron                                                                                                  TRUE
     ```
 
-    ```
-    SQL> <copy>select dump(is_sleeping) from test_boolean where name = 'Ron';​</copy>
-
-    DUMP(IS_SLEEPING)
-    --------------------------------------------------------------------------------
-    Typ=252 Len=1: 1
-    ```
-
 ## Task 5: IF [NOT] EXISTS DDL clause
 
 ​Starting with Oracle Database 23c, the new "IF [NOT] EXISTS" DDL clause allows to decide how DDL errors will be handled. This simplifies the DDL scripting, as potential errors due to objects existence or inexistence can be hidden to the scripting.
 1. Let's assume the table DEPT exists:
     ```
-    SQL> desc dept
+    SQL> <copy>desc dept;</copy>
     Name                                      Null?    Type
     ----------------------------------------- -------- ----------------------------
     DEPTNO                                    NOT NULL NUMBER(2)
@@ -241,7 +324,7 @@ Another interesting feature ensuring better coexistence and compatibility with o
     insert into DEPT values (70,'MANUFACTURING','DETROIT');
     ```
 
-    Oracle Database 23c, similar to other databases like PostgreSQL, introduced the new syntax allowing for inserting all these rows in a single one `INSERT` statement, so you may insert several tuples in one DML.
+    Oracle Database 23c introduced the new syntax allowing for inserting all these rows in a single one `INSERT` statement, so you may insert several tuples in one DML.
     ```
     SQL> <copy>insert into DEPT values
         (50,'HR','LOS ANGELES'),
@@ -254,7 +337,7 @@ Another interesting feature ensuring better coexistence and compatibility with o
 
 ## Task 8: RETURNING clause of UPDATE and MERGE statement
 
-This clause has been implemented long time ago as a part of `EXECUTE IMMEDIATE` statement. However in Oracle Database 23c we can find it as a part of traditional, static DML statements. 
+This clause has been implemented long ago as a part of `EXECUTE IMMEDIATE` statement. However in Oracle Database 23c we can find it as a part of traditional, static DML statements.
 1. In this case it allows for obtaining old and new values of columns from a row processed by such statement:
     ```
     SQL> <copy>SELECT ename, sal FROM emp WHERE ename = 'KING';</copy>
@@ -291,7 +374,7 @@ This clause has been implemented long time ago as a part of `EXECUTE IMMEDIATE` 
 
 ## Task 9: Joins in UPDATE and DELETE
 
-You may update table date via joins - based on foreign table conditions. There is no need for sub selects or `IN` clause. 
+You may update table data via joins - based on foreign table conditions. There is no need for sub selects or `IN` clause. 
 1. For example, instead of using this statement prior to 23c:
     ```
     update emp e set e.sal=e.sal*2
@@ -311,8 +394,8 @@ You may update table date via joins - based on foreign table conditions. There i
 
 ## Task 10: Annotations, new metadata for database objects
 
-Annotations are optional meta data for database objects. An annotation is either a name-value pair or name by itself. The name and optional value are freeform text fields.  An annotation is represented as a subordinate element to the database object to which the annotation has been added. Supported schema objects include tables, views, materialized views, and indexes. With annotations you may store and retrieve metadata about a database objects. You can use it to customize business logic, user interfaces or provide metada to metatdata repositories. It can be added with CREATE or ALTER statement. - on table or column level. 
-With annotations you may store and retrieve metadata about a database objects. You can use it to customize business logic, user interfaces or provide metada to metatdata repositories.
+Annotations are optional meta data for database objects. An annotation is either a name-value pair or name by itself. The name and optional value are freeform text fields.  An annotation is represented as a subordinate element to the database object to which the annotation has been added. Supported schema objects include tables, views, materialized views, and indexes. With annotations you may store and retrieve metadata about a database objects. You can use it to customize business logic, user interfaces or provide metada to metatdata repositories. It can be added with CREATE or ALTER statement. - on table or column level.
+With annotations you may store and retrieve metadata about a database objects. You can use it to customize business logic, user interfaces or provide metadata to metadata repositories.
 
 1. Let's create an annotated table `EMP_ANNOTATED` with column and table annotations.
 
