@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Pluggables, Clones and Containers: Oracle Multitenant Fundamentals",
+  "workshoptitle": "Get the most from pluggables, clones, and containers with Oracle Multitenant",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -33,7 +33,7 @@
       "filename": "./../../app-containers/app-containers.md"
     },
     {
-            "title": "Oracle CloudWorld 2022 - Get Help",
+            "title": "Oracle CloudWorld 2023 - Get Help",
             "filename": "https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
    }
   ]
