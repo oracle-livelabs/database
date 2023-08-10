@@ -128,7 +128,7 @@ This lab assumes you have:
     SELECT json_serialize(data PRETTY) FROM GENRES_DV g WHERE g.data.genre_id = 25;
     </copy>
     ```
-    ![Image alt text](images/kids-genre.png " ")
+    ![Adding the Kids genre](images/kids-genre.png " ")
 
     ```
     <copy>
@@ -136,7 +136,7 @@ This lab assumes you have:
     FROM movies_dv WHERE json_value(data, '$.movie_id') IN (4004, 4005);
     </copy>
     ```
-    ![Image alt text](images/select-surfs.png " ")
+    ![selecting the surfs up movie ](images/select-surfs.png " ")
 
 
 ## Task 3: Replace and fetch a document by ID
