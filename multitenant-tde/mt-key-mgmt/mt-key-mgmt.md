@@ -1,6 +1,8 @@
-### Introduction
+# Securely Clone, Unplug/Plug PDBs Using Transparent Database Encryption (TDE)
 
-In this lab we will go through the steps to add a wallet & keys to CDB's and PDB's, uplug a PDB, plug it into a different CDB & then move the key.
+## Introduction
+
+In this lab we will go through the steps to add a wallet & keys to CDB's and PDB's, unplug a PDB, plug it into a different CDB & then move the key.
 
 *Estimated Workshop Time* :60 Minutes
 
