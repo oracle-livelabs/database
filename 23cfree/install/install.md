@@ -81,7 +81,7 @@ This lab assumes you have:
     ```
     <copy>
     cd /u01/downloads
-    wget https://download.oracle.com/otn-pub/otn_software/db-free/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
+    wget -q --show-progress https://download.oracle.com/otn-pub/otn_software/db-free/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
     </copy>
     ```
     ![Download Install](images/.png " ")
@@ -141,15 +141,12 @@ This lab assumes you have:
     </copy>
     ````
 
-3. Connect to your database.
+3. Connect to your database. The show pdbs commands will list the pluggable databases running in your container. Once you switch to a pluggable database that same command will list just the current pluggable.
     ```
     <copy>
     sqlplus / as sysdba
     </copy>
     ```
-    ![Image alt text](images/.png " ")
-
-4. The show pdbs commands will list the pluggable databases running in your container. Once you switch to a pluggable database that same command will list just the current pluggable.
     ```
     <copy>
     show pdbs

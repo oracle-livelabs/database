@@ -43,7 +43,7 @@ This lab assumes you have:
     ```
     <copy>
     cd /u01/app/oracle
-    wget https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-latest.zip
+    wget -q --show-progress https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-latest.zip
     unzip sqlcl-latest.zip
     rm sqlcl-latest.zip
     </copy>
@@ -74,7 +74,7 @@ This lab assumes you have:
     ```
     <copy>
     cd /u01/app/oracle
-    wget https://download.oracle.com/otn_software/apex/apex-latest.zip
+    wget -q --show-progress https://download.oracle.com/otn_software/apex/apex-latest.zip
     unzip apex-latest.zip
     rm apex-latest.zip
     </copy>
@@ -160,7 +160,7 @@ This lab assumes you have:
     ```
     <copy>
     cd /u01/app/oracle/ords
-    wget https://download.oracle.com/otn_software/java/ords/ords-latest.zip
+    wget -q --show-progress https://download.oracle.com/otn_software/java/ords/ords-latest.zip
     unzip ords-latest.zip
     rm ords-latest.zip
     </copy>
