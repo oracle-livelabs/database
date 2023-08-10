@@ -6,6 +6,8 @@ In this lab, you will convert a non-CDB database (UPGR) to a PDB in a CDB (CDB2)
 
 Estimated Time: 30 minutes
 
+[](videohub:1_w2g72fta)
+
 ### Objectives
 
 In this lab, you will:
@@ -797,28 +799,6 @@ Now that you know how to manually perform a PDB conversion, you can explore the 
 
 5. When AutoUpgrade reports *Job 100 completed* then the PDB conversion is done. 
 
-6. Set the environment to the old source database and connect.
-
-    ```
-    <copy>
-    . up19
-    sqlplus / as sysdba
-    </copy>
-
-    Be sure to hit RETURN
-    ```    
-
-6. Shut down the old source database.
-
-    ```
-    <copy>
-    shutdown immediate;
-    exit
-    </copy>
-
-    Be sure to hit RETURN
-    ```    
-
 6. Connect to the new PDB, *UP19PDB*.
     
     ```
@@ -852,7 +832,15 @@ Now that you know how to manually perform a PDB conversion, you can explore the 
     UP19PDB              READ WRITE           NO
 
     ```
-    </details>    
+    </details>
+
+8. Exit from SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```    
 
 9. In this task, you did not check for plug-in compatibility using a manifest file (like you did in tasks 1 and 2). On a real database you should do that; it is best practice. When you need to check for plug-in compatibility, you can generate the manifest file without having the database in read-only mode.
 
@@ -866,4 +854,4 @@ You may now *proceed to the next lab*.
 ## Acknowledgements
 * **Author** - Mike Dietrich
 * **Contributors** - Daniel Overby Hansen, Roy Swonger, Sanjay Rupprel, Cristian Speranta, Kay Malcolm
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2023
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2023

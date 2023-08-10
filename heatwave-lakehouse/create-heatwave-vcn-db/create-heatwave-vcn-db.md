@@ -214,6 +214,7 @@ In this lab, you will be guided through the following tasks:
 7. Create Administrator Credentials
 
     **Enter Username** (write username to notepad for later use)
+    - **Note**: user name is case sensitive so use **admin** to match the the labs' connect string example
 
     **Enter Password** (write password to notepad for later use)
 
@@ -253,10 +254,10 @@ In this lab, you will be guided through the following tasks:
 
 12. Click on Show Advanced Options
 
-13. Go to the Networking tab, in the Hostname field enter  (same as DB System Name):
+13. Go to the Connections tab, in the Hostname field enter  (same as DB System Name):
 
     ```bash
-        <copy>heatwave-db</copy> 
+    <copy>heatwave-db</copy> 
     ```
 
     ![HeatWave add host](./images/mysql-host.png "mysql host ")
@@ -326,11 +327,10 @@ In this lab, you will be guided through the following tasks:
     ![HeatWave create state](./images/mysql-heatwave-creating.png "mysql heatwave creating ")
 
 21. The state 'Active' indicates that the DB System is ready for use
-
-    On heatwave-db Page, check and save the Endpoint (Private IP Address). Later, you will need this value to connect to the Heatwave DB using the MySQL Shell client tool.
-
     ![HeatWave create complete](./images/mysql-heatwave-active.png"mysql heatwave active ")
 
+22. On **heatwave-db** Page,select the **Connections** tab, check and save the Endpoint (Private IP Address). Later, you will need this value to connect to the Heatwave DB using the MySQL Shell client tool.
+    ![HeatWave create complete connection](./images/mysql-heatwave-connection-tab.png"mysql heatwave connection ")
 You may now **proceed to the next lab**
 
 ## Acknowledgements

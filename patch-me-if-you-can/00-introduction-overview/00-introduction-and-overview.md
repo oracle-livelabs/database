@@ -10,6 +10,7 @@ The patching does include not only a Release Update (RU) but also the Oracle Jav
 
 Estimated Workshop Time: 90 minutes
 
+[](videohub:1_vk0m7zp8)
 
 ## Lab Environment
 

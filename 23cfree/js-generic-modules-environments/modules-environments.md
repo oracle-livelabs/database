@@ -6,6 +6,8 @@ After the previous lab introduced JavaScript in Oracle Database 23c Free - Devel
 
 Estimated Lab Time: 10 minutes
 
+[](videohub:1_n99vou1t)
+
 ### Objectives
 
 In this lab, you will:
