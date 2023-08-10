@@ -567,7 +567,7 @@ If you've taken a look at the extended MLE module above, you may have seen some 
 
 * And now, it's up to you!
 
-## Resources to continue learning
+## Learn More
 * As Jeff Smith said in his [blog post on MLE JS Modules & Snippets](https://www.thatjeffsmith.com/archive/2023/04/oracle-23c-free-developer-release-mle-js-modules-snippets/), we _highly_ recommend reading the [23c JavaScript Developer Guide (Docs.)](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/).
 
 * You may want also to review Martin Bach's [blog post on Using JavaScript community modules in Oracle Database 23c Free - Developer Release](https://blogs.oracle.com/developers/post/using-javascript-community-modules-in-oracle-database-23c-free-developer-release) which I've stolen some of the commands used here.
