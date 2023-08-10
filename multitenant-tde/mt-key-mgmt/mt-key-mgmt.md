@@ -153,25 +153,25 @@ In this section we will create a wallet for each CDB. For ease of execution, all
     - In this instance it will look for a subdirectory called *tde*
     - You will see the message to Bounce the database
 
->>**Notes:**
-- Changing the spfile parameter requires a database bounce
-- Can set the wallet root location when you have a maintenance window and set the key
-- This allows you to go down the encryption path later
-- They don’t have to be done together
-- Plan for a bounce before you start the encryption process
+    ![Screenshot of terminal output](./images/bounce-database2.png " ")
 
-  ![Screenshot of terminal output](./images/bounce-database2.png " ")
+    Keep the following in mind:
 
->>**Notes:**
-- After the database comes back up from the bounce the following tasks are performed by the script
-  - Set tde configuration parameter
-    - In this case it is set to file
+    - Changing the spfile parameter requires a database bounce
+    - Can set the wallet root location when you have a maintenance window and set the key
+    - This allows you to go down the encryption path later
+    - They don’t have to be done together
+    - Plan for a bounce before you start the encryption process
+
+    After the database comes back up from the bounce the following tasks are performed by the script
+
+    - Set tde configuration parameter. In this case it is set to file
     - What we are telling the database is
       - In wallet root location, under the tde directory
       - I’m going to be using a wallet file
       - If using Oracle Key Vault the configuration will say OKV instead of file
 
-  ![Screenshot of terminal output](./images/post-bounce2.png " ")
+    ![Screenshot of terminal output](./images/post-bounce2.png " ")
 
 2. Create the keystore
 
