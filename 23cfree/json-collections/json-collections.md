@@ -8,6 +8,8 @@ To create a collection all you have to specify is the collection's name. Unlike 
 
 Estimated Time: 20 minutes
 
+Watch the video below for a quick walk through of the lab.
+[Watch the video](videohub:1_6ajt3iiz)
 
 ### Objectives
 

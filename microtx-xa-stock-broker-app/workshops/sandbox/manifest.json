@@ -4,7 +4,7 @@
   "tutorials": [
     {
       "title": "Introduction",
-      "description": "The Introduction is always second for LiveLabs. The title and contents menu title match for the Introduction.",
+      "description": "About the workshop and description of the Bank and Stock-Trading application.",
       "filename": "../../introduction/introduction.md"
     },
     {
@@ -18,7 +18,7 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
     },
     {
-      "title": "Lab 2: Integrate MicroTx Client Libraries with XA Sample Application",
+      "title": "Lab 2: Integrate MicroTx Client Libraries with the Stock Broker Microservice",
       "filename": "../../integrate-microtx-lib-files/integrate-microtx-lib-files.md"
     },
     {
@@ -27,7 +27,11 @@
       "filename": "../../adb-provision/adb-provision.md"
     },
     {
-      "title": "Lab 4: Trade Stocks with the Bank and Stock-Trading Application",
+      "title": "Lab 4: Deploy the Bank and Stock-Trading Application",
+      "filename": "../../deploy-stock-trading-app/deploy-stock-trading-app.md"
+    },
+    {
+      "title": "Lab 5: Trade Stocks with the Bank and Stock-Trading Application",
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {

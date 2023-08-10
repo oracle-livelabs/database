@@ -69,9 +69,9 @@ Watch the video below for a quick walk-through of the lab.
     * **Always Free** - If your cloud account offers it, select this option to create an always free autonomous database, which comes with 1 CPU and 20 GB of storage. If you don't have this option, select the details mentioned below to create an autonomous database.
     </if>
     * **Choose database version** - Select a database version from the available versions.
-    * **OCPU count** - Number of CPUs for your service. For this lab, specify **1 CPU**.  An Always Free database comes with 1 CPU.
+    * **ECPU count** - Number of CPUs for your service. For this lab, specify **2 CPUs**.  An Always Free database comes with 2 CPUs.
     * **Storage (TB)** - Select your storage capacity in terabytes. For this lab, specify **0.02 TB** of storage (20 GB). An Always Free database comes with 20 GB of storage.
-    * **OCPU Auto Scaling** - For this lab, you can disable OCPU auto scaling. Auto scaling allows the system to automatically use up to three times more CPU and IO resources to meet workload demand. The Always Free database does not scale up/down.
+    * **ECPU Auto Scaling** - For this lab, you can disable OCPU auto scaling. Auto scaling allows the system to automatically use up to three times more CPU and IO resources to meet workload demand. The Always Free database does not scale up/down.
     * **Storage Auto Scaling** - For this lab, you can disable storage auto scaling. The Always Free database does not scale up/down.
     * **New Database Preview** - If a checkbox is available to preview a new database version, do **not** select it.
 

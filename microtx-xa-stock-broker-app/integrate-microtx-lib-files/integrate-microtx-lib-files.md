@@ -1,8 +1,10 @@
-# Integrate MicroTx Client Libraries with the Bank and Stock-Trading Application
+# Integrate MicroTx Client Libraries with the Stock Broker Microservice
 
 ## Introduction
 
 This lab walks you through all the steps to integrate the functionality provided by the Oracle® Transaction Manager for Microservices (MicroTx) client libraries with an application. Use MicroTx client libraries to register the required interceptors and callbacks, to obtain a connection to the application's resource manager, and to delineate transaction boundaries which indicate that an XA transaction has started, and then to commit or roll back the transaction.
+
+The Bank and Stock-Trading application contains the following microservices: Core Banking, Branch Banking, User Banking, and Stock Broker services. The MicroTx client library files are already integrated with the Core Banking, Branch Banking, and User Banking services. In this lab you will integrate the MicroTx client library files with the Stock Broker service.
 
 Estimated Time: 5 minutes
 
@@ -19,9 +21,9 @@ This lab assumes you have:
 
 * An Oracle Cloud account.
 * Successfully completed all previous labs:
-  * Get Started
-  * Lab 1: Prepare setup
-  * Lab 2: Environment setup
+    * Get Started
+    * Lab 1: Prepare setup
+    * Lab 2: Set Up the Environment
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
       ```
@@ -29,7 +31,9 @@ This lab assumes you have:
       sudo su - oracle
       </copy>
       ```
-* Configured Visual Studio Code to edit the code for Java applications.
+* Configured Visual Studio Code to edit the code for Java applications. Click **File** > **Preferences** > **Profiles (Java General)** > **Java General** as shown in the following image.
+
+    ![Configure Visual Studio Code to edit the code for Java applications.](./images/configure-vss-for-java.png " ")
 
 ## Task 1: Configure the Stock Broker App as a Transaction Initiator
 
@@ -339,6 +343,91 @@ To configure the Stock Broker application as a transaction participant:
     ```
 
 19. Save the changes.
+
+## Task 3: Enable Transaction History (Optional)
+
+You can register your initiator and participant services to receive notifications when an event occurs. To achieve this you must perform the additional steps described in this task.
+
+1. Uncomment the `BuyStockEventListenerResource.java` and `SellStockEventListenerResource.java` classes, located in the `/com/oracle/tmm/stockbroker/listeners/` package of the `StockBroker` application. The `StockBroker` application files are available in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker/` folder.
+
+2. Uncomment the `TransactionEventsUtility.java` class, located in the `/com/oracle/tmm/stockbroker/utils/` package of the `StockBroker` application.
+
+3. Update the `TMMConfigurations.java` file, located in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
+
+    1. Add the following lines of code to import the listeners that you have uncommented.
+
+        ```java
+        <copy>
+        import com.oracle.tmm.stockbroker.listeners.BuyStockEventListenerResource;
+		import com.oracle.tmm.stockbroker.listeners.SellStockEventListenerResource;
+        </copy>
+        ```
+
+    2. Add the following lines of code within the `TMMConfigurations()` method to register the `BuyStockEventListenerResource.java` and `SellStockEventListenerResource.java` classes.
+
+        ```java
+        <copy>
+        ...
+        register(BuyStockEventListenerResource.class);
+        register(SellStockEventListenerResource.class);
+        ...
+        </copy>
+        ```
+
+4. Update the `UserStockTransactionServiceImpl.java` class, located in the `/com/oracle/tmm/stockbroker/service/impl` package of the `StockBroker` application. Add the following lines of code to register the transaction events within the transaction boundary. Note that you must register the transaction event after the transaction begins.
+
+    1. Add the following line of code to import the `TransactionEventsUtility` package.
+
+        ```java
+        <copy>
+        import com.oracle.tmm.stockbroker.utils.TransactionEventsUtility;
+        </copy>
+        ```
+
+    2. Add the following line of code.
+
+        ```java
+        <copy>
+        @Autowired
+        TransactionEventsUtility transactionEventsUtility;
+        </copy>
+        ```
+
+    3. Add a line of code, `transactionEventsUtility.registerStockTransactionEvents(buyStock)`, to register the purchase of stocks.
+
+        ```java
+        <copy>
+        @Override
+        public BuyResponse buy(BuyStock buyStock) {
+        TrmUserTransaction transaction = new TrmUserTransaction();
+        BuyResponse buyResponse = new BuyResponse();
+        try {
+           transaction.begin(true);
+           // Add the following line of code after the transaction begins.
+           transactionEventsUtility.registerStockTransactionEvents(buyStock);
+           buyResponse.setTransactionId(transaction.getTransactionID());
+           ...
+        }
+        </copy>
+        ```
+
+    4. Add a line of code, `transactionEventsUtility.registerStockTransactionEvents(sellStock)` to register the sale of stocks.
+
+        ```java
+        <copy>
+        @Override
+        public SellResponse sell(SellStock sellStock) {
+        TrmUserTransaction transaction = new TrmUserTransaction();
+        SellResponse sellResponse = new SellResponse();
+        try {
+            transaction.begin(true);
+            // Add the following line of code after the transaction begins.
+            transactionEventsUtility.registerStockTransactionEvents(sellStock);
+            sellResponse.setTransactionId(transaction.getTransactionID());
+            ...
+        }
+        </copy>
+        ```
 
 You may now **proceed to the next lab**.
 

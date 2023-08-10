@@ -1,10 +1,12 @@
-# Deploy Bank and Stock-Trading Application
+# Deploy the Bank and Stock-Trading Application
 
 ## Introduction
 
+The Bank and Stock-Trading application contains several microservices that interact with each other to complete a transaction. The Stock Broker microservice initiates the transactions to purchase and sell shares, so it is called a transaction initiator service. The Core Banking, Branch Banking, and User Banking services participate in the transactions related to the trade in stocks, so they are called participant services.
 
+To deploy the application, you must build each microservice as a container image and provide the deployment details in a YAML file.
 
-Estimated Lab Time: 20 minutes
+Estimated Time: 20 minutes
 
 ### Objectives
 
@@ -25,7 +27,8 @@ This lab assumes you have:
 * Successfully completed the previous labs:
     * Get Started
     * Lab 1: Prepare setup
-    * Lab 2: Environment setup
+    * Lab 2: Set Up the Environment
+    * Lab 3: Integrate MicroTx Client Libraries with the Stock Broker Microservice
     * Lab 4: Provision Autonomous Databases for Use as Resource Manager
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
@@ -260,13 +263,15 @@ Install the Bank and Stock-Trading application in the `otmm` namespace, where yo
     TEST SUITE: None
     ```
 
-2. If you don't need to make any changes to the `values.yaml` file, skip this step and go to the next step. If you need to modify the `values.yaml` file, then uninstall `bankapp`. Update the `values.yaml` file, and then reinstall `bankapp`. Perform step 1 as described in this task again to reinstall `bankapp`.
+2. If you don't need to make any changes to the `values.yaml` file, skip this step and go to the next step. If you need to modify the `values.yaml` file, then uninstall `bankapp`.
 
     ```
     <copy>
-    helm uninstall sample-xa-app --namespace otmm
+    helm uninstall bankapp --namespace otmm
     </copy>
     ```
+
+    Update the `values.yaml` file, and then reinstall `bankapp`. Perform step 1 as described in this task again to reinstall `bankapp`.
 
 3. Verify that all resources, such as pods and services, are ready. Proceed to the next step only when all resources are running. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
 

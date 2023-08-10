@@ -132,7 +132,7 @@ We're going to allow the HR user to access some of the tables in the SH schema.
 
     ![grant SELECT access](images/grants.png " ")
 
-## Task 3: Enable schemas for ORDS
+## Task 3: Enable the HR schema for ORDS
 
 1.  Still in our terminal window, start SQLcl and log in to the HR schema in the PDB. If you chose a password other than "oracle" earlier, you will need to use it here:
 
@@ -143,7 +143,7 @@ We're going to allow the HR user to access some of the tables in the SH schema.
     </copy>
     ```
 
-2.  To be able to use ORDS, we must enable it from the schema we wish to use:
+2.  To be able to use Database Actions (formerly known as SQL Developer Web), we must enable it from the schema we wish to use:
 
     ```
     <copy>
