@@ -75,14 +75,14 @@ Estimated Lab Time: 10 minutes
 
     - __Always Free__ - Select always free Autonomous Database configuration options.
     - __Choose database version__ - Select a database version from the available versions.
-    - __OCPU count__ - Number of CPUs for your service. For this lab, specify __1 CPU__.
+    - __ECPU count__ - Number of CPUs for your service. For this lab, specify __2 CPU__.
     - __Storage (TB)__ - Select your storage capacity in terabytes. For this lab, specify __1 TB__ of storage.
-    - __OCPU Auto Scaling__ - For this lab, keep auto scaling enabled, to allow the system to automatically use up to three times more CPU and IO resources to meet workload demand.
+    - __ECPU Auto Scaling__ - For this lab, keep auto scaling enabled, to allow the system to automatically use up to three times more CPU and IO resources to meet workload demand.
     - __New Database Preview__ - If a checkbox is available to preview a new database version, do __not__ select it.
 
     **Note**: If you opt for the always free Autonomous Database option, you can only choose the database version, all other configuration options are greyed out.
 
-    ![Configure the database](./images/configure-db.png " ")
+    ![Configure the database](./images/configure-db-ecpu.png " ")
 
 7. Create administrator credentials:
 
