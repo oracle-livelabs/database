@@ -6,20 +6,18 @@ In this lab you will leverage Oracle APEX's Native Map Region to visualize the d
 
 Estimated Time: 5 minutes.
 
-<!-- Watch the video below for a quick walk through of the lab. -->
-
-<!-- update video link. Previous iteration: [](youtube:XnE1yw2k5IU) -->
-
 ### Objectives
 Learn how to:
 - Use Oracle APEX's Native Map Region to view a simple map that visualizes tree planting progress within Chicago's heat islands
-
 
 ### Prerequisites
 This lab assumes you have:
 - Oracle Database 23c Free Developer Release
 - Completed all previous labs successfully
 - ORDS still running so that you can run the sample APEX application
+
+Watch the video below for a quick walk through of the lab.
+[Visualize Geospatial Data within JSON Relational Duality Views walkthrough](videohub:1_9vwc5dmc)
 
 ## Task 1: Create the APEX Environment
 
@@ -35,7 +33,7 @@ This lab assumes you have:
 
 3. Run the following script from this terminal window:
     ```
-    <copy>@/home/oracle/examples/create_apex_environment.sql;</copy>
+    <copy>@/home/oracle/examples/jsonrdv/create_apex_environment.sql;</copy>
     ```
 
     ![Configure APEX Environment](images/post-apex-environment-creation.png)
@@ -69,7 +67,6 @@ Now that our APEX environment is fully configured, we'll use the installed APEX 
 
     ![Open Google Chrome](images/activities-chrome.png)
 
-
 2. Go to this URL and wait for the screen to load. Supply **TPS** for the workspace, **admin** for the username, and **Welcome123#** as the password.
     ```
     <copy>
@@ -77,7 +74,6 @@ Now that our APEX environment is fully configured, we'll use the installed APEX 
     </copy>
     ```
     ![Login using credentials](images/apex-dev-login.png)
-
 
 3. Select the *App Builder* option.
 
@@ -99,7 +95,7 @@ Now that our APEX environment is fully configured, we'll use the installed APEX 
 
     ![Connect APEX session](images/app-302-hol23c-login.png)
 
-## Task 3: Visualize Tree Planting Progress Within Heat Islands 
+## Task 3: Visualize Tree Planting Progress Within Heat Islands
 
 1. Select page  **Heat Islands** page from the left-hand-side menu. A map of the Chicago metropolitan area, centered near many of the 25 heat islands identified and catalogued in the HEAT_ISLANDS table, is displayed.
 
@@ -109,23 +105,25 @@ Now that our APEX environment is fully configured, we'll use the installed APEX 
 
     - Observe the intensity of the color scheme for these heat islands. The color scheme is based on the median income of the populous living within the heat island.
 
-    ![View Heat Island Map](images/app-302-initial-view.png)
+   ![View Heat Island Map](images/app-302-initial-view.png)
 
     - Navigate to and then zoom into one of the heat islands that shows green, yellow, and red icons within them. The icons represent trees that were newly planted by the volunteer teams.
 
-    - If you click on the heat island polygon, some of its attributes - including its census tract information, median income levels, and area in square miles - will be displayed.
+    - If you click on the heat island polygon, some of its attributes - including its census tract information, median income levels, and area in square miles - will be displayed.  
 
-    ![Explore Heat Islands](images/app-302-heat-island-details.png)
+   ![Explore Heat Islands](images/app-302-heat-island-details.png)
 
     - Finally, click on a few of the icons within the heat island to see attributes of the planted tree, including its common name and its precise latitude and longitude.
 
-    ![Explore Planted Trees](images/app-302-tree-details.png)
+   ![Explore Planted Trees](images/app-302-tree-details.png)
+
 
 3. Close the application, return to the APEX development environment, and sign out.
 
-    ![exitapplication](images/apex-dev-logout.png)
+    ![exit application](images/apex-dev-logout.png)
 
-You have now completed this lab.
+
+4. You have now completed this lab.
 
 ## Learn More
 * [Oracle Database 23c: Spatial Concepts](https://docs.oracle.com/en/database/oracle/oracle-database/23/spatl/spatial-concepts.html#GUID-67E4037F-C40F-442A-8662-837DD5539784)
@@ -135,4 +133,4 @@ You have now completed this lab.
 ## Acknowledgements
 * **Author** - Kaylien Phan, William Masdon, Jim Czuprynski
 * **Contributors** - Jim Czuprynski, LiveLabs Contributor, Zero Defect Computing, Inc.
-* **Last Updated By/Date** - Jim Czuprynski, July 2023
+* **Last Updated By/Date** - Jim Czuprynski, Aug 2023
