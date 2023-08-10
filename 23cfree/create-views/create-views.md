@@ -25,27 +25,27 @@ This lab assumes you have:
 ## Task 1: Create the duality views
 
 
-1. Create the `GENRES_DV` duality view. You can either click the trash to clear the worksheet or delete what is there before pasting the code below. Copy the sql below and click **Run Statement**
+1. We create Duality views by defining the documents structure and describing where the data comes from. The following Duality View we will create will list the generes table information. We can also define each operation thats possible against the underlying table. Here we are setting `WITH INSERT UPDATE DELETE`. 
+    
+    Create the `genres_dv` duality view. You can either click the trash to clear the worksheet or delete what is there before pasting the code below. Copy the sql below and click **Run Script**
 
     ```
     <copy>
-    create or replace json duality view genres_dv
-     as GENERES @INSERT @UPDATE @DELETE
-    {
-        genre_id : GENERE_ID,
-        genre_name : GENERE_NAME
-        genre_description : GENERE_DESCRIPTION
-    }
+    CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW genres_dv2 AS
+    SELECT JSON {'genre_id' : g.GENERE_ID,
+            'genre_name' : g.GENERE_NAME,
+            'genre_description' : g.GENERE_DESCRIPTION}
+    FROM generes g WITH INSERT UPDATE DELETE;
 	</copy>
     ```
-	![Creating the genre view](images/genre_dv.png " ")
+	![Creating the genre view](images/genre-dv.png " ")
 
-2. The next view we will create the `MOVIE_DETAILS_DV` duality view. Since this is for movie details, want them creating new movies as they become available  so we set those to @insert, @update, @delete. You can either click the trash to clear the worksheet or delete what is there before pasting the code below. Copy the sql below and click **Run Statement**
+2. On the other hand, we can use a GraphQL syntax to create the view. In this example we will create the `movies_dv` duality view. With GraphQL we will rely on the database to work out the relationships between the tables. The `movies_dv` lists out movie details including an array of generes within movie_details. Since this is for the movie_details table we set those to @insert, @update, @delete. You can either click the trash to clear the worksheet or delete what is there before pasting the code below. Copy the GraphQL syntax below and click **Run Script**
 
 	```
 	<copy>
-    create or replace json duality view movies_dv
-        as MOVIE_DETAILS @INSERT @UPDATE @DELETE
+    CREATE OR REPLACE JSON DUALITY VIEW movies_dv
+        AS MOVIE_DETAILS @insert @update @delete
         {
             movie_id : MOVIE_ID
             title : TITLE
@@ -54,7 +54,7 @@ This lab assumes you have:
             year : YEAR
             runtime : RUNTIME
             summary : SUMMARY
-        genres : MOVIES_GENERE_MAP @INSERT @UPDATE @DELETE {
+        genres : MOVIES_GENERE_MAP @insert @update @delete {
                 GenreToMovieID : MG_ID
                 GENERES
                 @unnest {
@@ -65,9 +65,16 @@ This lab assumes you have:
      };
 	</copy>
     ```
-    ![Creating the movie view](images/movies_dv.png " ")
+    ![Creating the movie view](images/movies-dv.png " ")
 
+3. Now that we have our Duality Views, lets see how teh `genres_dv` looks. Copy the sql below and click **Run Script**
 
+	```
+	<copy>
+    SELECT json_serialize(data PRETTY) FROM genres_dv;
+	</copy>
+    ```
+    ![Showing the movie view](images/movie-dv-select.png " ")
 
 ## Task 2: Adding to our movie schema
 1. Insert a new genre into the `GENRES_DV` table to include kid-friendly movies. Use the following SQL script: Copy the sql below and click **Run Statement**
@@ -114,7 +121,14 @@ This lab assumes you have:
 
 3. Populating a duality view automatically updates the data shown in related duality views by updating their underlying tables. For example, inserting documents into the `MOVIES_DV` duality view updates both the `MOVIE_DETAILS` table and the movies to genre mappings table.
 
-    To verify the changes, you can list the contents of the `MOVIES_DV` and `GENRES_DV` duality views. These views are based on the `MOVIES_DETAILS` and genres tables, respectively. Copy the sql below and click **Run Script**:
+    To verify the changes, you can list the contents of the `MOVIES_DV` and `GENRES_DV` duality views. These views are based on the `MOVIES_DETAILS` and `GENERES` tables, respectively. Copy the sql below and click **Run Script**:
+
+    ```
+    <copy>
+    SELECT json_serialize(data PRETTY) FROM GENRES_DV g WHERE g.data.genre_id = 25;
+    </copy>
+    ```
+    ![Image alt text](images/kids-genre.png " ")
 
     ```
     <copy>
@@ -122,19 +136,12 @@ This lab assumes you have:
     FROM movies_dv WHERE json_value(data, '$.movie_id') IN (4004, 4005);
     </copy>
     ```
-    ![Image alt text](images/select_surfs.png " ")
-    ```
-    <copy>
-    SELECT json_serialize(data PRETTY) FROM GENRES_DV g WHERE g.data.genre_id = 25;
-    </copy>
-    ```
-
-    ![Image alt text](images/kids_genre.png " ")
+    ![Image alt text](images/select-surfs.png " ")
 
 
 ## Task 3: Replace and fetch a document by ID
 
-1. Now lets add more movies into our new Kids genre by updating the appropriate movies entry with the details of each new movie.
+1. Now lets add more movies with our new Kids genre by updating the appropriate movies entry with the details of each new movie.
 
     Note that the "etag" value supplied in the content is used for "out-of-the-box" optimistic locking, to prevent the well-known "lost update" problem that can occur with concurrent operations. During the replace by ID operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target duality view document.
 
@@ -149,9 +156,9 @@ This lab assumes you have:
     SELECT json_serialize(data PRETTY) FROM movies_dv m WHERE m.data.movie_id= 4005;
     </copy>
     ```
-    ![showing no document](images/rat_etag.png " ")
+    ![showing no document](images/rat-etag.png " ")
 
-3. This shows us the current etage is, "etag" : "E5AB725AD046CA8BE4AA301E08CB4329". Lets replace the full document and replace the summary and genres details.
+3. This shows us the current etage is, "etag" : "E5AB725AD046CA8BE4AA301E08CB4329". Lets replace the full document and replace the summary and genres details. Copy the SQL below and click **Run Script**.
     ```
     <copy>
 
@@ -163,7 +170,7 @@ This lab assumes you have:
                 "list_price" : 0,
                 "year" : 2007,
                 "runtime" : 110,
-                "summary" : "Ratatouille, released in 2007, tells the heartwarming story of Remy, a talented rat with a passion for cooking. When Remy finds himself in the bustling culinary world of Paris, he …n worker. Together, they create extraordinary gastronomic delights while facing challenges, pursuing dreams, and proving that anyone can achieve greatness with determination and a dash of creativity. Ratatouille celebrates the joy of following ones passion, the power of embracing differences, and the delectable art of cooking.",
+                "summary" : "Ratatouille is a heartwarming animated film produced by Pixar Animation Studios. It tells the story of Remy, a rat with a remarkable talent and passion for cooking. Living in the sewers of Paris, Remy dreams of becoming a renowned chef. His journey takes an unexpected turn when he forms an unlikely alliance with Linguini, a young garbage boy at a prestigious restaurant.",
                 "genres" : 
                 [
                     {
@@ -189,7 +196,7 @@ This lab assumes you have:
     COMMIT;
     </copy>
     ```
-    ![showing Ratatouille JSON document ](images/update_rat.png " ")
+    ![showing Ratatouille JSON document ](images/update-rat.png " ")
 
 4. Now let's check the updated genres for the Ratatouille  movie along with the new etag. Copy the SQL below and click **Run Script**.
 
@@ -200,12 +207,20 @@ This lab assumes you have:
     ```
     We can see the genres, Family, Animation, Kids, and Adventure along with the a new etag of 03D7F05ED195CFF7728D568AC069C909.
 
-    ![showing the newly created document](images/new_etag.png " ")
+    ![showing the newly created document](images/new-etag.png " ")
 
 
 ## Task 4: Update specific fields in the document identified by a predicate
 
-1. Now we'll update a genre in the Peter Pan movie to contain the new Kids genre. Here we use json\_transform to update specific fields.
+1. Now we'll update a genre in the Peter Pan movie to contain the new Kids genre. First lets take a look at our Peter Pan movie document and notice that we don't currently have any Kids genre associated with the movie.
+
+    ```
+    <copy>
+    SELECT json_serialize(data PRETTY)
+    FROM movies_dv WHERE json_value(data, '$.movie_id') = 2355;
+    </copy>
+    ```
+    Here we use json\_transform to update specific fields.
 
     An alternative approach is to use json_mergepatch, which is standardized, but is limited to simple object field updates and cannot be used for updating specific array elements. The json\_transform function, however, can be used to update specific array elements.
 
@@ -216,7 +231,7 @@ This lab assumes you have:
     UPDATE movies_dv m set data = json_transform(data, APPEND '$.genres' =  JSON {'genre_id' : 25, 'genre_name' : 'Kids'} ) WHERE m.data.movie_id = 2355;
     </copy>
     ```
-    ![adding a new genre](images/pan_update.png " ")
+    ![adding a new genre](images/pan-update.png " ")
 
 2. Select from the view to ensure the change is in. In this example we are also showing that you can use json_value in the where clause. Copy the SQL below and click **Run Script**.
 
@@ -226,7 +241,7 @@ This lab assumes you have:
     FROM movies_dv WHERE json_value(data, '$.movie_id') = 2355;
     </copy>
     ```
-    ![showing the genre we just added](images/pan_kids.png " ")
+    ![showing the genre we just added](images/pan-kids.png " ")
 
 You may now **proceed to the next lab** 
 
