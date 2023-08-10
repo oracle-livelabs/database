@@ -2,10 +2,13 @@
 
 ## Introduction
 
-In this lab you will load data from object storage into HeatWave.
+To load data from Object Storage to HeatWave, you need to specify the location of the file or folder objects in your Object Storage.
 
-There are two ways in which you can specify a location for the folder or file (or files) that constitute the table you want to load into HeatWave. One is by using Resource Principal. It is recommended that you use Resource Principal-based approach for access to data in Object Storage for more sensitive data as this approach is more secure.
-The second way is by using Pre-Authenticated Request URLs. For more information on creating PARS, see Using PARs. If you choose to use PAR, we recommend that you use read-only PARs with Lakehouse and that you specify short expiration dates on your PARs. The expiration dates should align with your loading schedule. Since we are using a sample data set, we will make use of PAR in this LiveLab. We already have several tables available in HeatWave that have been loaded from MySQL InnoDB storage.
+1. Use [Resource Principal](https://docs.oracle.com/en-us/iaas/autonomous-database-serverless/doc/resource-principal-enable.html) - It is recommended that you use Resource Principal-based approach for access to data in Object Storage for more sensitive data as this approach is more secure.
+
+2. Use [Pre-Authenticated Request URLs (PARs)](https://docs.oracle.com/en-us/iaas/Content/Object/Tasks/usingpreauthenticatedrequests.htm) - If you choose to use PARs, we recommend that you use read-only PARs with Lakehouse and specify short expiration dates for your PARs. The expiration dates should align with your loading schedule. 
+
+Since we are using a sample data set, we will make use of PAR in this LiveLab. We already have several tables available in HeatWave that have been loaded from MySQL.
 
 We will now load the DELIVERY_ORDERS table from the Object Store. This is a large table with 30 million rows and contains information about the delivery vendor for orders.
 
@@ -47,7 +50,13 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
 ## Task 2: Connect to your MySQL HeatWave system using Cloud Shell
 
-1. If not already connected then connect to MySQL using the MySQL Shell client tool with the following command:
+1. If not already connected with SSH, on Command Line, connect to the Compute instance using SSH ... be sure replace the  "private key file"  and the "new compute instance ip"
+
+     ```bash
+    <copy>ssh -i private_key_file opc@new_compute_instance_ip</copy>
+     ```
+
+2. If not already connected to MySQL then connect to MySQL using the MySQL Shell client tool with the following command:
 
     ```bash
     <copy>mysqlsh -uadmin -p -h 10.0.1... --sql </copy>
@@ -55,7 +64,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
     ![MySQL Shell Connect](./images/mysql-shell-login.png " mysql shell login")
 
-2. List schemas in your heatwave instance
+3. List schemas in your heatwave instance
 
     ```bash
         <copy>show databases;</copy>
@@ -63,7 +72,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
     ![Databse Schemas](./images/list-schemas-after.png "list schemas after")
 
-3. Change to the mysql\_customer\_orders database
+4. Change to the mysql\_customer\_orders database
 
     Enter the following command at the prompt
 
@@ -71,7 +80,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
     <copy>USE mysql_customer_orders;</copy>
     ```
 
-4. TO see a list of the tables available in the mysql\_customer\_orders schema
+5. To see a list of the tables available in the mysql\_customer\_orders schema
 
     Enter the following command at the prompt
 
@@ -110,18 +119,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
     - It should look like the following example (Be sure to include the PAR Link inside at of quotes("")):
 
-        *SET @dl_tables = '[{
-        "db_name": "mysql_customer_orders",
-        "tables": [{
-            "table_name": "delivery_orders",
-            "dialect":
-            {
-            "format": "csv",
-            "field_delimiter": "\\t",
-            "record_delimiter": "\\n"
-            },
-            "file": [{"par": "https://objectstorage.us-ashburn-1.oraclecloud.com/p/MAGNmpjq3Ej4wX6LN6KaE3R9AM2_h_fQDhfM5C9SbKXO_Zbe4MdrTvypV5XsyHkS/n/mysqlpm/b/lakehousefiles/o/delivery-orders-1.csv"}]
-        }] }]';*
+    ![autopilot set table example](./images/set-table-example.png "autopilot set table example")
 
 4. This command populates all the options needed by Autoload:
 
@@ -147,7 +145,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
     <copy>SELECT log->>"$.sql" AS "Load Script" FROM sys.heatwave_autopilot_report WHERE type = "sql" ORDER BY id;</copy>
     ```
 
-    ![Dryrub script](./images/load-script-dryrun.png "load script dryrun")
+    ![Dryrun script](./images/load-script-dryrun.png "load script dryrun")
 
 8. The execution result conatins the SQL statements needed to create the table and then load this table data from the Object Store into HeatWave.
 
@@ -155,7 +153,7 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
 9. Copy the **CREATE TABLE** command from the results. It should look like the following example
 
-    *CREATE TABLE `mysql_customer_orders`.`delivery_orders`( `col_1` int unsigned NOT NULL, `col_2` bigint unsigned NOT NULL, `col_3` tinyint unsigned NOT NULL, `col_4` varchar(9) NOT NULL COMMENT 'RAPID_COLUMN=ENCODING=VARLEN', `col_5` tinyint unsigned NOT NULL, `col_6` tinyint unsigned NOT NULL, `col_7` tinyint unsigned NOT NULL) ENGINE=lakehouse SECONDARY_ENGINE=RAPID ENGINE_ATTRIBUTE='{"file": [{"par": "https://objectstorage.us-ashburn-1.oraclecloud.com/p/MAGNmpjq3Ej4wX6LN6KaE3R9AM2_h_fQDhfM5C9SbKXO_Zbe4MdrTvypV5XsyHkS/n/mysqlpm/b/lakehousefiles/o/delivery-orders-1.csv"}], "dialect": {"format": "csv", "field_delimiter": "\\t", "record_delimiter": "\\n"}}';*
+    ![autopilot create table with no field name](./images/create-table-no-fieldname.png "autopilot create table with no field name")
 
 10. Modify the **CREATE TABLE** command to replace the generic column names, such as **col\_1**, with descriptive column names. Use the following values:
 
@@ -169,13 +167,13 @@ We will now load the DELIVERY_ORDERS table from the Object Store. This is a larg
 
 11. Your modified **CREATE TABLE** command  should look like the following example:
 
-    *CREATE TABLE `mysql_customer_orders`.`delivery_orders`( `orders_delivery` int unsigned NOT NULL, `order_id` bigint unsigned NOT NULL, `customer_id` tinyint unsigned NOT NULL, `order_status` varchar(9) NOT NULL COMMENT 'RAPID_COLUMN=ENCODING=VARLEN', `store_id` tinyint unsigned NOT NULL, `delivery_vendor_id` tinyint unsigned NOT NULL, `estimated_time_hours` tinyint unsigned NOT NULL) ENGINE=lakehouse SECONDARY_ENGINE=RAPID ENGINE_ATTRIBUTE='{"file": [{"par": "https://objectstorage.us-ashburn-1.oraclecloud.com/p/Jl8AjjtkPT8TDZZ-lK2qDj8oxVEZ2ah09fJN9Gl7XfhNBWBpzdvwOXkxx9Yz_SLi/n/iddftbilrksk/b/lakehouse-files-plf/o/order/delivery-orders-1.csv"}], "dialect": {"format": "csv", "field_delimiter": "\\t", "record_delimiter": "\\n"}}';*
+    ![autopilot create table with field name](./images/create-table-fieldname.png "autopilot create table with field name")
 
 12. Execute the modified **CREATE TABLE** command to create the delivery_orders table.
 
 13. The create command and result should look lie this
 
-    ![Delivery Table creat](./images/create-delivery-table.png "create delivery table")
+    ![Delivery Table create](./images/create-delivery-table.png "create delivery table")
 
 ## Task 4: Load complete DELIVERY table from Object Store into MySQL HeatWave
 
@@ -242,7 +240,7 @@ We will use the second option which Loads the data by specifying a PAR URL for a
     - a. From your OCI console, navigate to your lakehouse-files bucket in OCI.
     - b. Select the folder —> order and click the three vertical dots.
 
-        ![Select  folderT](./images/storage-delivery-orders-folder.png "storage delivery order folder")
+        ![Select  folder](./images/storage-delivery-orders-folder.png "storage delivery order folder")
 
     - c. Click on ‘Create Pre-Authenticated Request’
     - d. Click to select the ‘Objects with prefix’ option under ‘PreAuthentcated Request Target’.
@@ -268,8 +266,7 @@ We will use the second option which Loads the data by specifying a PAR URL for a
 
 5. Your command  should look like the following example. Now Execute your modified command
 
-    *ALTER TABLE `mysql_customer_orders`.`delivery_orders` ENGINE_ATTRIBUTE='{"file": [{"par": "https://objectstorage.us-ashburn-1.oraclecloud.com/p/4EayDq3tv-D08oTTPja-2XEYZSQ0v5cG87CFNc31wT724QB5R21C1UXbK0_snbZA/n/mysqlpm/b/lakehousefiles/o/"}], "dialect": {"format": "csv", "field_delimiter": "\\t", "record_delimiter": "\\n"}}';*
-
+    ![autopilot alter table](./images/alter-table.png "autopilot alter table")
     **Output**
 
     ![Add data to Table](./images/load-all-delivery-table.png "load all delivery table")

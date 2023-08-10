@@ -1,4 +1,4 @@
-# Set Up Compute Instance
+# Set Up the Environment
 
 ## Introduction
 This lab will show you how to set up a Resource Manager stack that will generate the Oracle Cloud objects needed to run your workshop.
