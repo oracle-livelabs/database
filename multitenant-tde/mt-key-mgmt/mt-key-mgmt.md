@@ -2,13 +2,13 @@
 
 ## Introduction
 
-In this lab we will go through the steps to add a wallet & keys to CDB's and PDB's, unplug a PDB, plug it into a different CDB & then move the key.
+In this lab we will go through the steps to add a wallet and keys to CDB's and PDB's, unplug a PDB, plug it into a different CDB and then move the key.
 
 *Estimated Workshop Time* :60 Minutes
 
 ### Objectives
 
-1. Add TDE to a Pluggable Database (PDB) & Container
+1. Add TDE to a Pluggable Database (PDB) and Container
 2. Move PDB to another container
 3. Move key for that database to new container
 
@@ -23,7 +23,7 @@ his lab assumes you have:
 
 ## Task 1: Backup CDB1 and CDB2
 
-This section starts you off with an unencrypted database & backing it up so you can re-run this lab multiple times if you want.
+This section starts you off with an unencrypted database and backing it up so you can re-run this lab multiple times if you want.
 
 Start with normal setup on CDB1
 
@@ -45,7 +45,7 @@ Start with normal setup on CDB1
 
 >>**Notes:**
 - Once you create a key for the database you are at the point of no return
-- The database knows there is a wallet & master encryption key associated with it
+- The database knows there is a wallet and master encryption key associated with it
 - If you don’t have the database access the wallet you will get messages that it can’t access the key
 - Be sure of the steps before you do this to a database that you use normally
 
@@ -155,7 +155,7 @@ In this section we will create a wallet for each CDB. For ease of execution, all
 
 >>**Notes:**
 - Changing the spfile parameter requires a database bounce
-- Can set the wallet root location when you have a maintenance window & set the key
+- Can set the wallet root location when you have a maintenance window and set the key
 - This allows you to go down the encryption path later
 - They don’t have to be done together
 - Plan for a bounce before you start the encryption process
@@ -242,7 +242,7 @@ Note For RAC Environments
 
     ![Screenshot of terminal output](./images/wallet-status-2.png " ")
 
-The last time we ran this status check the value was **NOT AVAILABLE**. It has now evolved to **`OPEN_NO_MASTER_KEY`** since we are yet to set the key. As a result, while CDB1 & PDB1 both have the wallet open, there is no master key
+The last time we ran this status check the value was **NOT AVAILABLE**. It has now evolved to **`OPEN_NO_MASTER_KEY`** since we are yet to set the key. As a result, while CDB1 and PDB1 both have the wallet open, there is no master key
 
 5. Check the Wallet Status For CDB2
 
@@ -254,12 +254,12 @@ The last time we ran this status check the value was **NOT AVAILABLE**. It has n
 
     ![Screenshot of terminal output](./images/wallet-status-3.png " ")
 
-Same as for CDB1 and PDB1, CDB2 & PDB2 both have the wallet open but no master key
+Same as for CDB1 and PDB1, CDB2 and PDB2 both have the wallet open but no master key
 
 
 ## Task 3:  Set The master Key
 
-The *`set_keys.sh`* script used in this section will set the encryption key for the CDB & PDB, and will rely on the tag feature.
+The *`set_keys.sh`* script used in this section will set the encryption key for the CDB and PDB, and will rely on the tag feature.
 
 Tags are important to identify keys, especially when using OKV where keys are stored in a centralized vault and managed for multiple databases. In such instances, the tag allows to uniquely identify the encryption key
 
@@ -341,7 +341,7 @@ Tags are important to identify keys, especially when using OKV where keys are st
 
     ![Screenshot of terminal output](./images/master-encryption-key-cdb2.png " ")
 
-    - If you look at the keys for SYSAUX & SYSTEM they match the keys at the bottom
+    - If you look at the keys for SYSAUX and SYSTEM they match the keys at the bottom
     - They are not encrypted at this point
         - If they were to be encrypted those are they keys that they would use
 
@@ -419,12 +419,12 @@ We are now ready to encrypt
     ![Screenshot of terminal output](./images/key-status-1.png " ")
 
 >>**Note:**
-- You can see the Master Encryption Key is set for SYSAUX & SYSTEM
+- You can see the Master Encryption Key is set for SYSAUX and SYSTEM
 - It now shows as encrypted
 - It shows as encrypted with AES256
 - The keys starts with AZvR, which matches the key for the CDB
-- If you look at the PDB the Master Encryption Key begins with AaUv & it matches the Key Id at the bottom
-- NOTICE: TEMP & UNDO were not encrypted
+- If you look at the PDB the Master Encryption Key begins with AaUv and it matches the Key Id at the bottom
+- NOTICE: TEMP and UNDO were not encrypted
     - Anytime you encrypt the tablespace that means that the data that originated in that tablespace stays encrypted anytime the database uses it for processing.
     - If you have a sort going on and that sort contains data that is in USERS, if it’s a join of multiple tables and only 1 of those tables resides in a tablespace that encrypted that whole join process becomes encrypted
     - Everything that starts with an encrypted tablespace inherits  encryption during sorts
@@ -502,7 +502,7 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
     </copy>
     ```
 
-    - Master Key ID for PDBCLONE1 is now different & it has it’s own unique key
+    - Master Key ID for PDBCLONE1 is now different and it has it’s own unique key
     - If you look at the wallet there are now 3 keys
     - The re-key went quickly because when we do a re-key it doesn’t change the encrypted data
         - It changes the master encryption key which is used to encrypt the tablespace encryption key
@@ -522,7 +522,7 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
     - This closes pdbclone1
         - It needs to be closed in order to unplug it
         - Unplugs into an xml file
-        - Notice the ENCRYPT USING `transport_secret`
+        - Notice the ENCRYPT USING *`transport_secret`*
     - This also takes a copy of the Master Encryption Key and brings it over to CDB2
         - You want that key encrypted while it is being moved over
         - Password protecting the Master Encryption Key that it is transporting
@@ -538,7 +538,7 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
     </copy>
     ```
 
-    - Takes pdbclone1 & plugs it in cdb2
+    - Takes pdbclone1 and plugs it in cdb2
     - Using the xml file you created during the unplug
     - Not copying over the temp file
     - Moves the key along with the password to decrypt it
