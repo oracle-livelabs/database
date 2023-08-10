@@ -16,7 +16,7 @@ This lab assumes you have:
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
 1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
 
-    - [sample-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/clKCvIhItftqqFoXdipFq5oukh0jVuwcKEMHVdqOPXN7oUqaoGwPZsimi5pgpfpR/n/natdsecurity/b/stack/o/sample-mkplc-freetier.zip)
+    - [db-multitenant-tde-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/sFrKEVpD4MUuUMxpEaThiklLNzF4JLa6j7TrhynMUuoJyXwAEQJsiecu9SE0Rsqi/n/natdsecurity/b/stack/o/db-multitenant-tde-mkplc-freetier.zip)
 
 2.  Save in your downloads folder.
 
