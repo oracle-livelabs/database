@@ -8,7 +8,7 @@ Once User defined sharded env configuration is done and you find the result of g
 
 In this lab, you will:
 
-* Find how to create a Sharded schema in User-Defined Sharding env, created Sharded tables, duplicated tables, and run a few DMLs.
+* Find how to create a Sharded schema in User-Defined Sharding env, create Sharded tables, duplicated tables, and run a few DMLs.
 * Testing the use-cases
 
 ### Prerequisites
