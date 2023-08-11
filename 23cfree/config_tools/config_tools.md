@@ -110,9 +110,9 @@ This lab assumes you have:
     ![Install Software](images/tools-2-2b.png " ")
 
 3. Run the change password script into the <b>Pluggable</b> database. When prompted use the values below
-- Username: Use the default ADMIN
-- Email: Use the default ADMIN
-- Password: Provide a password, I will use Welcome123#
+    - Username: Use the default ADMIN
+    - Email: Use the default ADMIN
+    - Password: Provide a password, I will use Welcome123#
     ```
     <copy>
     sql / as sysdba
@@ -210,20 +210,20 @@ This lab assumes you have:
     ![Copying Directory](images/tools-3-3.png " ")
 
 4. Install ORDS answering the prompts with the following responses:
-- Installation: 2
-- Connection: 1
-- Hostname: localhost
-- Port: 1521 (Unless you used a different one)
-- Service Name: <b>FREEPDB1 (The PDB not the container)</b>
-- username: hol23c
-- password: Welcome123# (Unless you used a different one for hol23c)
-- Default tablespace: SYSAUX
-- Temporary Tablespace: TEMP
-- Features: 1 Database Actions (Enables all features)
-- Configuration: 1 Configure and Start
-- Protocol: 1 HTTP
-- HTTP port: 8080
-- Static resources location: /u01/app/oracle/ords/images
+    - Installation: 2
+    - Connection: 1
+    - Hostname: localhost
+    - Port: 1521 (Unless you used a different one)
+    - Service Name: <b>FREEPDB1 (The PDB not the container)</b>
+    - username: hol23c
+    - password: Welcome123# (Unless you used a different one for hol23c)
+    - Default tablespace: SYSAUX
+    - Temporary Tablespace: TEMP
+    - Features: 1 Database Actions (Enables all features)
+    - Configuration: 1 Configure and Start
+    - Protocol: 1 HTTP
+    - HTTP port: 8080
+    - Static resources location: /u01/app/oracle/ords/images
     ```
     <copy>
     ords install

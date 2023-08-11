@@ -104,8 +104,8 @@ This lab assumes you have:
 4. When the create finishes it will give you the two connection strings for your pluggable and container databases. If you used a different port it will be in the connection string.
     ```
     Connect to Oracle Database using one of the connect strings:
-    Pluggable database: ll23c.livelabs.oraclevcn.com:1522/FREEPDB1
-    Multitenant container database: ll23c.livelabs.oraclevcn.com:1522
+    Pluggable database: hol23cfdr.livelabs.oraclevcn.com/FREEPDB1
+    Multitenant container database: hol23cfdr.livelabs.oraclevcn.com
     ```
 
 5. To see if your database is up and running you can use the following command
