@@ -6,10 +6,6 @@ In this lab you will create a set of new JSON Relational Duality Views (JRDVs) t
 
 Estimated Time: 5 minutes.
 
-<!-- Watch the video below for a quick walk through of the lab. -->
-
-<!-- update video link. Previous iteration: [](youtube:XnE1yw2k5IU) -->
-
 ### Objectives
 Learn how to:
 - Create new JRDVs
@@ -19,6 +15,9 @@ Learn how to:
 This lab assumes:
 - You have already finished all prior labs
 - You still have your SQL Developer session open from the prior lab step
+
+Watch the video below for a quick walk through of the lab.
+[Create JSON Relational Duality Views walkthrough](videohub:1_16ew3f5s)
 
 ## Task 1: Create New JRDVs
 
