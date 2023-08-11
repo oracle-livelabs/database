@@ -1,4 +1,4 @@
-# Explore Oracle's User-Defined Sharding Method Topology to Achieving Data Sovereignty
+# Explore Oracle's User-Defined Sharding Method Topology to achieve Data Sovereignty
 
 ## Introduction
 
@@ -185,6 +185,8 @@ This lab assumes you have:
 * [Oracle Sharding Overview] (<https://docs.oracle.com/en/database/oracle/oracle-database/19/shard/sharding-overview.html#GUID-0F39B1FB-DCF9-4C8A-A2EA-88705B90C5BF>)
 
 * [Oracle Sharding Architecture and Concepts] (<https://docs.oracle.com/en/database/oracle/oracle-database/19/shard/oracle-sharding-architecture-and-concepts1.html#GUID-9DC0048A-2D6E-4759-BA80-10F8855E6871>)
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 * **Authors** - Ajay Joshi, Oracle Database Sharding Product Management, Sharding Solutions Architect

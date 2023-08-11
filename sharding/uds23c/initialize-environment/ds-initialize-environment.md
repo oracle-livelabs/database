@@ -61,7 +61,7 @@ This lab assumes you have:
         </copy>
         ```
 
-You may now proceed to the next lab.
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 * **Authors** - Ajay Joshi, Oracle Database Sharding Product Management, Sharding Solutions Architect

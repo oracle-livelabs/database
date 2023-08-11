@@ -48,7 +48,7 @@ Please note for Data Sovereignty with Oracle Sharding Lab:
 - Recommended memory: 48G
 - Recommended CPU: 6 OCPU
 
-You may now proceed to the next lab.
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 * **Authors** - Ajay Joshi, Oracle Database Sharding Product Management, Sharding Solutions Architect

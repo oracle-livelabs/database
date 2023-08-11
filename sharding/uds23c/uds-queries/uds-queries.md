@@ -145,7 +145,7 @@ This lab assumes you have:
     ```
 ![<Catalog duplicated table row count>](./images/uds-connect-gsm-service-shard-2.png " ")
 
-
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 

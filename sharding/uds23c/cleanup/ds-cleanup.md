@@ -47,6 +47,8 @@ Estimated Time - 5 minutes
 -  **Oracle Sharding - User-Defined Method** 
 [Oracle Sharding - User-Defined Method Documentation for more details] (https://docs.oracle.com/en/database/oracle/oracle-database/21/shard/oracle-sharding-architecture-and-concepts1.html#GUID-37F20817-EFD5-400B-A082-41171C0B6D1C)
 
+You may now **proceed to the next lab**.
+
 ## Acknowledgements
 * **Authors** - Ajay Joshi, Oracle Database Sharding Product Management, Sharding Solutions Architect
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma

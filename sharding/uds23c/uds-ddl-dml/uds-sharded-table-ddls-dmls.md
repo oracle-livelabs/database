@@ -188,6 +188,8 @@ This lab assumes you have:
     commit;
     ```
 
+You may now **proceed to the next lab**.
+
 ## Acknowledgements
 
 * **Authors** - Ajay Joshi, Oracle Database Sharding Product Management, Sharding Solutions Architect

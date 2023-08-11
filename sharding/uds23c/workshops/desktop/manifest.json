@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Learn how to Achieve Data Sovereignty with Oracle Sharding in distributed databases",
+  "workshoptitle": "Learn how to achieve Data Sovereignty with Oracle Globally distributed database",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -31,12 +31,12 @@
     },
     {
       "title": "Lab 4: Explore User-Defined Sharding Topology",
-      "description": "Exploring Sharding Topology",
+      "description": "Explore User-Defined Sharding Topology",
       "filename": "../../topology/ds-topology.md"
     },
     {
-      "title": "Lab 5: Sample User-Defined Sharding Schema, Data insertion",
-      "description": "Sample User-Defined Sharding Schema, Data insertion",
+      "title": "Lab 5: Sample User-Defined Sharding Schema and Data insertion",
+      "description": "Sample User-Defined Sharding Schema and Data insertion",
       "filename": "../../uds-ddl-dml/uds-sharded-table-ddls-dmls.md"
     },
     {
