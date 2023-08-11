@@ -16,9 +16,13 @@ This lab assumes you have:
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
 1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
 
+<if type="basics">
     - [db-inmemory-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/rqWEYKMxHiewzXChyF-aEOPZR_KMP-XKwzIJPgakxXfRpNn3DLXKArp_07ujM0O2/n/natdsecurity/b/stack/o/db-inmemory-mkplc-freetier.zip)
+</if>
+<if type="advanced">
+    - [db-inmemory-advanced-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4oOnb02ndDJodtDxY8-c0bB_yjZ4geW4BnFAK9eNBEWnYLAPbkX__nH1UNHRjR2G/n/natdsecurity/b/stack/o/db-inmemory-advanced-mkplc-freetier.zip)
+</if>
 
- 
 2.  Save in your downloads folder.
 
 We strongly recommend using this stack to create a self-contained/dedicated VCN with your instance(s). Skip to *Task 3* to follow our recommendations. If you would rather use an existing VCN then proceed to the next task to update your existing VCN with the required Ingress rules.

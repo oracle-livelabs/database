@@ -41,7 +41,7 @@ This lab assumes you have:
 6. You can check the HeatWave creation progress by selecting the **Work Request**
     ![HeatWave Progress](images/heatwave-progress.png)
 
-7. After completion, the node status will switch to Active status. The process will take some time to complete. You can go to the next Task in the meantime.
+7. After completion, the node status will switch to Active status. The process will take some time to complete. Once the HeatWave cluster is created, you can go to the next task.
 
 ## Task 2: Accelerate long running queries on HeatWave
 

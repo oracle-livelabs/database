@@ -33,6 +33,6 @@ Some screenshots and videos may be different than what you see. These screenshot
 ## Acknowledgements
 * **Author**
   * Richard Evans, Database Security Product Management
-  * Miles Novotny, Solution Engineer, North America Specalist Hub
-  * Noah Galloso, Solution Engineer, North America Specalist Hub
+  * Miles Novotny, Solution Engineer, North America Specialist Hub
+  * Noah Galloso, Solution Engineer, North America Specialist Hub
 * **Last Updated By/Date** - Miles Novotny, April 2023

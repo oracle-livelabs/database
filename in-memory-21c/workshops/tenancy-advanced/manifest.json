@@ -1,6 +1,6 @@
 {
   "workshoptitle": "Learn How Database In-Memory Enables Real-Time Analytics",
-  "help": "andy.rivenes@oracle.com",
+  "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
@@ -16,7 +16,8 @@
       "title": "Lab 1: Prepare Setup",
       "description": "How to download your ORM stack and update security rules for an existing VCN",
       "publisheddate": "09/28/2020",
-      "filename": "../../prepare-setup/prepare-setup.md"
+      "filename": "../../prepare-setup/prepare-setup.md",
+      "type": "advanced"
     },
     {
       "title": "Lab 2: Environment Setup",
@@ -30,8 +31,8 @@
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 4: Set up the In-Memory Column Store",
-      "description": "Populate and administer the In-Memory column store",
+      "title": "Lab 4: Setting up the In-Memory Column Store",
+      "description": "Populating and administering the In-Memory column store",
       "filename": "../../setup/setup.md"
     },
     {
@@ -93,6 +94,11 @@
       "title": "Lab 16: In-Memory Parallel Features",
       "description": "Using In-Memory with parallel features",
       "filename": "../../im-parallel/parallel.md"
+    },
+    {
+      "title": "Environment Cleanup",
+      "description": "Cleanly dispose of all OCI resources created by ORM for the workshop, and delete the stack",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md"
     },
     {
       "title": "Need Help?",
