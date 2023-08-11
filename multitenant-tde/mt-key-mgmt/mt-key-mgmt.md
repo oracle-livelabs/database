@@ -79,7 +79,7 @@ Start with normal setup on CDB1
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/wallet_status.sh CDB1
+    ~oracle/labs/multitenant/tde/wallet_status.sh CDB1
     </copy>
     ```
 
@@ -96,7 +96,7 @@ Start with normal setup on CDB1
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/wallet_status.sh CDB2
+    ~oracle/labs/multitenant/tde/wallet_status.sh CDB2
     </copy>
     ```
 
@@ -114,7 +114,7 @@ At this point neither database knows about encryption and there is no wallet set
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/key_status.sh CDB1
+    ~oracle/labs/multitenant/tde/key_status.sh CDB1
     </copy>
     ```
 
@@ -130,7 +130,7 @@ At this point neither database knows about encryption and there is no wallet set
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/key_status.sh CDB2
+    ~oracle/labs/multitenant/tde/key_status.sh CDB2
     </copy>
     ```
 
@@ -142,7 +142,7 @@ In this section we will create a wallet for each CDB. For ease of execution, all
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/create_wallet.sh CDB1
+    ~oracle/labs/multitenant/tde/create_wallet.sh CDB1
     </copy>
     ```
 
@@ -214,7 +214,7 @@ In this section we will create a wallet for each CDB. For ease of execution, all
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/create_wallet.sh CDB2
+    ~oracle/labs/multitenant/tde/create_wallet.sh CDB2
     </copy>
     ```
 
@@ -236,7 +236,7 @@ Note For RAC Environments
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/create_wallet.sh CDB1
+    ~oracle/labs/multitenant/tde/create_wallet.sh CDB1
     </copy>
     ```
 
@@ -248,7 +248,7 @@ The last time we ran this status check the value was **NOT AVAILABLE**. It has n
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/create_wallet.sh CDB2
+    ~oracle/labs/multitenant/tde/create_wallet.sh CDB2
     </copy>
     ```
 
@@ -272,7 +272,7 @@ Tags are important to identify keys, especially when using OKV where keys are st
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/set_keys.sh CDB1
+    ~oracle/labs/multitenant/tde/set_keys.sh CDB1
     </copy>
     ```
 
@@ -280,7 +280,7 @@ Tags are important to identify keys, especially when using OKV where keys are st
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/set_keys.sh CDB2
+    ~oracle/labs/multitenant/tde/set_keys.sh CDB2
     </copy>
     ```
 
@@ -290,7 +290,7 @@ Tags are important to identify keys, especially when using OKV where keys are st
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/wallet_status.sh CDB1
+    ~oracle/labs/multitenant/tde/wallet_status.sh CDB1
     </copy>
     ```
 
@@ -301,7 +301,7 @@ Tags are important to identify keys, especially when using OKV where keys are st
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/wallet_status.sh CDB2
+    ~oracle/labs/multitenant/tde/wallet_status.sh CDB2
     </copy>
     ```
 
@@ -311,7 +311,7 @@ Tags are important to identify keys, especially when using OKV where keys are st
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/key_status.sh CDB1
+    ~oracle/labs/multitenant/tde/key_status.sh CDB1
     </copy>
     ```
 
@@ -332,7 +332,7 @@ Tags are important to identify keys, especially when using OKV where keys are st
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/key_status.sh CDB2
+    ~oracle/labs/multitenant/tde/key_status.sh CDB2
     </copy>
     ```
 
@@ -353,7 +353,7 @@ In this section we will encrypt tablespaces. However before proceeding we need t
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/set_algorythm.sh CDB1
+    ~oracle/labs/multitenant/tde/set_algorythm.sh CDB1
     </copy>
     ```
 
@@ -368,7 +368,7 @@ In this section we will encrypt tablespaces. However before proceeding we need t
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/set_algorythm.sh CDB2
+    ~oracle/labs/multitenant/tde/set_algorythm.sh CDB2
     </copy>
     ```
 
@@ -387,7 +387,7 @@ We are now ready to encrypt
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/encrypt_tablespaces.sh CDB1
+    ~oracle/labs/multitenant/tde/encrypt_tablespaces.sh CDB1
     </copy>
     ```
 
@@ -404,7 +404,7 @@ We are now ready to encrypt
 
      ```
     <copy>
-    /home/oracle/scripts/cloning/encrypt_tablespaces.sh CDB2
+    ~oracle/labs/multitenant/tde/encrypt_tablespaces.sh CDB2
     </copy>
     ```
 
@@ -412,7 +412,7 @@ We are now ready to encrypt
 
      ```
     <copy>
-    /home/oracle/scripts/cloning/key_status.sh CDB1
+    ~oracle/labs/multitenant/tde/key_status.sh CDB1
     </copy>
     ```
 
@@ -436,7 +436,7 @@ We are now ready to encrypt
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/key_status.sh CDB2
+    ~oracle/labs/multitenant/tde/key_status.sh CDB2
     </copy>
     ```
 
@@ -448,7 +448,7 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/clonepdb1.sh
+    ~oracle/labs/multitenant/tde/clonepdb1.sh
     </copy>
     ```
 
@@ -473,7 +473,7 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
 
      ```
     <copy>
-    /home/oracle/scripts/cloning/key_status.sh CDB1
+    ~oracle/labs/multitenant/tde/key_status.sh CDB1
     </copy>
     ```
 
@@ -485,7 +485,7 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
 
      ```
     <copy>
-    /home/oracle/scripts/cloning/key_pdbclone1.sh
+    ~oracle/labs/multitenant/tde/key_pdbclone1.sh
     </copy>
     ```
 
@@ -498,7 +498,7 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
 
      ```
     <copy>
-    /home/oracle/scripts/cloning/key_status.sh CDB1
+    ~oracle/labs/multitenant/tde/key_status.sh CDB1
     </copy>
     ```
 
@@ -515,7 +515,7 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/key_pdbclone1.sh
+    ~oracle/labs/multitenant/tde/key_pdbclone1.sh
     </copy>
     ```
 
@@ -534,7 +534,7 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
 
      ```
     <copy>
-    /home/oracle/scripts/cloning/key_status.sh CDB1
+    ~oracle/labs/multitenant/tde/key_status.sh CDB1
     </copy>
     ```
 
@@ -554,7 +554,7 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/key_status.sh CDB1
+    ~oracle/labs/multitenant/tde/key_status.sh CDB1
     </copy>
     ```
 
@@ -575,7 +575,7 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
 
     ```
     <copy>
-    /home/oracle/scripts/cloning/key_status.sh CDB2
+    ~oracle/labs/multitenant/tde/key_status.sh CDB2
     </copy>
     ```
 

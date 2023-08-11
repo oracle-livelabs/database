@@ -63,12 +63,14 @@ This lab assumes you have:
     clear
     cd ~oracle/labs
     rm -rf ~oracle/labs/*
-    wget -O novnc-multitenant-tde.zip BUCKET_LINK_HERE
-    unzip -qo novnc-multitenant-tde.zip
-    rm -f novnc-multitenant-tde.zip
+    wget -O novnc-multitenant.zip https://objectstorage.us-ashburn-1.oraclecloud.com/p/OsVZaMBsS-TArKa1EQNkZSB0SGptkNZwSd21lloGfE27nsRinQNvRm0G9ekds4zB/n/c4u04/b/livelabsfiles/o/labfiles/novnc-multitenant.zip
+    unzip -qo novnc-multitenant.zip
+    rm -f novnc-multitenant.zip
     cd multitenant
     chmod +x *.sh
     ls -ltrh
+    chmod +x tde/*.sh
+    ls -ltrh tde
     </copy>
     ```
 
