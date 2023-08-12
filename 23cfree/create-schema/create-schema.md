@@ -40,7 +40,7 @@ This lab assumes you have:
     ![Set environment](images/oraenv.png " ")
 
 
-3. Next click [here](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRg[…]/livelabsfiles/o/data-management-library-files/swingbench02262023_jdk11.zip) to download the latest version of Swingbench.
+3. Next click [here](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/swingbench02262023_jdk11.zip) to download the latest version of Swingbench.
 
 4. Once the download is complete, open a terminal or command prompt on your computer and navigate to the location where the file was saved.
 
@@ -165,10 +165,13 @@ This lab assumes you have:
     </copy>
 	```
     ![Showing the terminal](images/ords-serve.png " ")
+    ![Showing the terminal](images/ords-serve-message.png " ")
 
-6. IIf you are running this in a Sandbox, go to Activities and then click on New Window at the top. If Chrome is not running, click on Chrome.
+6. If Google Chrome isnt running, go to **Activities** and then click on the Google Chrome symbol. If a new window doesn't appear, click **Google Chrome** and **New Window** at the top. 
 
-    ![opening a new chrome window](images/new_chrome_window.png " ")
+    ![opening a new chrome window](images/google.png " ")
+    ![opening a new chrome window](images/new-chrome-window.png " ")
+
 
 7. Copy and paste the following address into the browser. This is the address for SQL Developer Web on your machine. Note: If you did not start ORDs, ORDs stopped working or you closed that terminal in the previous lab, go back and complete the steps in that lab to start ORDs otherwise it will not be running to login here.
 
@@ -180,7 +183,7 @@ This lab assumes you have:
 
 8. Sign in to SQL Developer Web using the movie schema with the username movie and password movie.
 
-    ![Ords login](images/ords_url.png " ")
+    ![Ords login](images/ords-url.png " ")
 
 Congratulations! You have finished the setup for this workshop. You may now **proceed to the next lab** 
 

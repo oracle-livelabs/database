@@ -10,6 +10,8 @@ When activated, debug information is collected according to the debug specificat
 
 Estimated Lab Time: 15 minutes
 
+[](videohub:1_hag5m05i)
+
 ### Objectives
 
 In this lab, you will:
