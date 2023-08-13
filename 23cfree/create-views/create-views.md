@@ -25,13 +25,13 @@ This lab assumes you have:
 ## Task 1: Create the duality views
 
 
-1. We create Duality views by defining the documents structure and describing where the data comes from. The following Duality View we will create will list the generes table information. We can also define each operation thats possible against the underlying table. Here we are setting `WITH INSERT UPDATE DELETE`. 
+1. We create Duality Views by defining the documents structure and describing where the data comes from. The following Duality View we  create will list the `genres` table information. We can also define each operation against the underlying table. Here we are setting `WITH INSERT UPDATE DELETE`. 
     
     Create the `genres_dv` duality view. You can either click the trash to clear the worksheet or delete what is there before pasting the code below. Copy the sql below and click **Run Script**
 
     ```
     <copy>
-    CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW genres_dv2 AS
+    CREATE OR REPLACE JSON DUALITY VIEW genres_dv AS
     SELECT JSON {'genre_id' : g.GENERE_ID,
             'genre_name' : g.GENERE_NAME,
             'genre_description' : g.GENERE_DESCRIPTION}
@@ -40,7 +40,7 @@ This lab assumes you have:
     ```
 	![Creating the genre view](images/genre-dv.png " ")
 
-2. On the other hand, we can use a GraphQL syntax to create the view. In this example we will create the `movies_dv` duality view. With GraphQL we will rely on the database to work out the relationships between the tables. The `movies_dv` lists out movie details including an array of generes within movie_details. Since this is for the movie_details table we set those to @insert, @update, @delete. You can either click the trash to clear the worksheet or delete what is there before pasting the code below. Copy the GraphQL syntax below and click **Run Script**
+2. On the other hand, we can use a GraphQL syntax to create the view. In this example we will create the `movies_dv` duality view. With GraphQL we will rely on the database to work out the relationships between the tables. The `movies_dv` lists out movie details including an array of genres. We will also set this view to @insert, @update, @delete. You can either click the trash icon to clear the worksheet or delete what is there before pasting the code below. Copy the GraphQL syntax below and click **Run Script**
 
 	```
 	<copy>
@@ -67,7 +67,7 @@ This lab assumes you have:
     ```
     ![Creating the movie view](images/movies-dv.png " ")
 
-3. Now that we have our Duality Views, lets see how teh `genres_dv` looks. Copy the sql below and click **Run Script**
+3. Now that we have our Duality Views created, lets see how the `genres_dv` looks. Copy the sql below and click **Run Script**
 
 	```
 	<copy>
@@ -77,7 +77,7 @@ This lab assumes you have:
     ![Showing the movie view](images/movie-dv-select.png " ")
 
 ## Task 2: Adding to our movie schema
-1. Insert a new genre into the `GENRES_DV` table to include kid-friendly movies. Use the following SQL script: Copy the sql below and click **Run Statement**
+1. Insert a new genre into the `GENRES_DV` table to include kid-friendly movies. Copy the sql below and click **Run Statement**
 
 	```
 	<copy>
@@ -86,7 +86,16 @@ This lab assumes you have:
     ```
     ![adding into genre](images/kids.png " ")
 
-2. Insert a collection of documents into `MOVIES_DV`. This automatically populates the `MOVIE_DETAILS` and the `MOVIE_GENERE_MAPPING` table. If you remember the movies duality view joins movie_details and movies to genre mappings. It also allows inserts into both tables. Copy the sql below and click **Run Script**
+2. Populating a duality view automatically updates the data shown in related duality views by updating their underlying tables. Lets take a look at the `genres_dv` Duality View. Copy the sql below and click **Run Script**:
+
+    ```
+    <copy>
+    SELECT json_serialize(data PRETTY) FROM GENRES_DV g WHERE g.data.genre_name = 'Kids';
+    </copy>
+    ```
+    ![Adding the Kids genre](images/kids-genre.png " ")
+
+3. Insert a collection of documents into `MOVIES_DV`. This automatically populates the `MOVIE_DETAILS` and the `MOVIE_GENERE_MAPPING` table. If you remember the movies duality view joins movie_details and movies to genre mappings. It also allows inserts into both tables. Copy the sql below and click **Run Script**
 
     ```
     <copy>
@@ -119,21 +128,14 @@ This lab assumes you have:
 	![adding new movies](images/surfs.png " ")
 
 
-3. Populating a duality view automatically updates the data shown in related duality views by updating their underlying tables. For example, inserting documents into the `MOVIES_DV` duality view updates both the `MOVIE_DETAILS` table and the movies to genre mappings table.
+3. to reiterate, populating a duality view automatically updates the data shown in related duality views by updating their underlying tables. For example, inserting documents into the `MOVIES_DV` duality view updates both the `MOVIE_DETAILS` table and the `movies_genere_map` table.
 
-    To verify the changes, you can list the contents of the `MOVIES_DV` and `GENRES_DV` duality views. These views are based on the `MOVIES_DETAILS` and `GENERES` tables, respectively. Copy the sql below and click **Run Script**:
-
-    ```
-    <copy>
-    SELECT json_serialize(data PRETTY) FROM GENRES_DV g WHERE g.data.genre_id = 25;
-    </copy>
-    ```
-    ![Adding the Kids genre](images/kids-genre.png " ")
+    To verify the changes, list the contents of the `MOVIES_DV` duality view. Copy the sql below and click **Run Script**:
 
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
-    FROM movies_dv WHERE json_value(data, '$.movie_id') IN (4004, 4005);
+    FROM movies_dv WHERE json_value(data, '$.title') IN ('Surfs Up', 'Ratatouille');
     </copy>
     ```
     ![selecting the surfs up movie ](images/select-surfs.png " ")
@@ -153,12 +155,12 @@ This lab assumes you have:
 
     ```
     <copy>
-    SELECT json_serialize(data PRETTY) FROM movies_dv m WHERE m.data.movie_id= 4005;
+    SELECT json_serialize(data PRETTY) FROM movies_dv m WHERE m.data.title = 'Ratatouille';
     </copy>
     ```
     ![showing no document](images/rat-etag.png " ")
 
-3. This shows us the current etage is, "etag" : "E5AB725AD046CA8BE4AA301E08CB4329". Lets replace the full document and replace the summary and genres details. Copy the SQL below and click **Run Script**.
+3. This shows us the current etag is, "etag" : "E5AB725AD046CA8BE4AA301E08CB4329". Lets replace the full document and change the summary section as well as add genres details. Copy the SQL below and click **Run Script**.
     ```
     <copy>
 
@@ -202,7 +204,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    SELECT json_serialize(data PRETTY) FROM movies_dv m WHERE m.data.movie_id= 4005;
+    SELECT json_serialize(data PRETTY) FROM movies_dv m WHERE m.data.title = 'Ratatouille';
     </copy>
     ```
     We can see the genres, Family, Animation, Kids, and Adventure along with the a new etag of 03D7F05ED195CFF7728D568AC069C909.
@@ -217,7 +219,7 @@ This lab assumes you have:
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
-    FROM movies_dv WHERE json_value(data, '$.movie_id') = 2355;
+    FROM movies_dv WHERE json_value(data, '$.title') = 'Peter Pan';
     </copy>
     ```
     Here we use json\_transform to update specific fields.
@@ -228,17 +230,17 @@ This lab assumes you have:
 
     ```
     <copy>
-    UPDATE movies_dv m set data = json_transform(data, APPEND '$.genres' =  JSON {'genre_id' : 25, 'genre_name' : 'Kids'} ) WHERE m.data.movie_id = 2355;
+    UPDATE movies_dv m set data = json_transform(data, APPEND '$.genres' =  JSON {'genre_id' : 25, 'genre_name' : 'Kids'} ) WHERE m.data.title = 'Peter Pan';
     </copy>
     ```
     ![adding a new genre](images/pan-update.png " ")
 
-2. Select from the view to ensure the change is in. In this example we are also showing that you can use json_value in the where clause. Copy the SQL below and click **Run Script**.
+2. Select from the view to ensure the change is in. Copy the SQL below and click **Run Script**.
 
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
-    FROM movies_dv WHERE json_value(data, '$.movie_id') = 2355;
+    FROM movies_dv WHERE json_value(data, '$.title') = 'Peter Pan';
     </copy>
     ```
     ![showing the genre we just added](images/pan-kids.png " ")
