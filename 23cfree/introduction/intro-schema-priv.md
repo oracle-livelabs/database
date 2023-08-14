@@ -6,6 +6,11 @@ Welcome to Live Labs, where we explore and delve into the fascinating realm of O
 
 Estimated Workshop Time: 30 Minutes
 
+Watch the video below for a quick walk-through of the lab.
+
+[Lock Free Video](videohub:1_np89hzce)
+
+
 ### About Schema Priveleges and Lock-Free Reservations
 
 ### **Schema Level Privileges**
