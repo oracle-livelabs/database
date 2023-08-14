@@ -113,12 +113,12 @@ This lab assumes you have:
     );
     
     INSERT INTO MOVIES_DV VALUES('{ "movie_id" : 4005,
-                                "title" : "Ratatouille",
-                                "budget" : 150000000,
+                                "title" : "Rango",
+                                "budget" : 135000000,
                                 "list_price" : 0,
-                                "year" : 2007,
-                                "runtime" : 110,
-                                "summary" : "Remy dreams of becoming a great chef, despite being a rat in a definitely rodent-phobic profession. He moves to Paris to follow his dream, and with…prove his culinary abilities to a great food critic but is the food good? A Pixar animation.",
+                                "year" : 2011,
+                                "runtime" : 107,
+                                "summary" : "A chameleon (Johnny Depp) who has lived as a sheltered family pet finds himself in the grip of an identity crisis. Rango wonders how to stand out when it is his nature to blend in. When he accidentally winds up in a frontier town called Dirt, he takes the first step on a transformational journey as the town's new sheriff. Though at first Rango only role-plays, a series of thrilling situations and outrageous encounters forces him to become a real hero.",
                                 "genres" : [
                                     
                                 ]}'
@@ -135,7 +135,7 @@ This lab assumes you have:
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
-    FROM movies_dv WHERE json_value(data, '$.title') IN ('Surfs Up', 'Ratatouille');
+    FROM movies_dv WHERE json_value(data, '$.title') IN ('Surfs Up', 'Rango');
     </copy>
     ```
     ![selecting the surfs up movie ](images/select-surfs.png " ")
@@ -151,11 +151,11 @@ This lab assumes you have:
     
     In other words, you may have to adjust the update statement so that the etag matches the etag from the select statement above. 
     
-2. First lets take a look at the movie Ratatouille movie we just added so we can see the current etag. Copy the SQL below and click **Run Script**.
+2. First lets take a look at the movie Rango movie we just added so we can see the current etag. Copy the SQL below and click **Run Script**.
 
     ```
     <copy>
-    SELECT json_serialize(data PRETTY) FROM movies_dv m WHERE m.data.title = 'Ratatouille';
+    SELECT json_serialize(data PRETTY) FROM movies_dv m WHERE m.data.title = 'Rango';
     </copy>
     ```
     ![showing no document](images/rat-etag.png " ")
@@ -167,12 +167,12 @@ This lab assumes you have:
     UPDATE movies_dv
         SET data = ('{"etag" : "E5AB725AD046CA8BE4AA301E08CB4329",
                 "movie_id" : 4005,
-                "title" : "Ratatouille",
-                "budget" : 150000000,
+                "title" : "Rango",
+                "budget" : 135000000,
                 "list_price" : 0,
-                "year" : 2007,
-                "runtime" : 110,
-                "summary" : "Ratatouille is a heartwarming animated film produced by Pixar Animation Studios. It tells the story of Remy, a rat with a remarkable talent and passion for cooking. Living in the sewers of Paris, Remy dreams of becoming a renowned chef. His journey takes an unexpected turn when he forms an unlikely alliance with Linguini, a young garbage boy at a prestigious restaurant.",
+                "year" : 2011,
+                "runtime" : 107,
+                "summary" : "A chameleon (Johnny Depp) who has lived as a sheltered family pet finds himself in the grip of an identity crisis. Rango wonders how to stand out when it is his nature to blend in. When he accidentally winds up in a frontier town called Dirt, he takes the first step on a transformational journey as the town's new sheriff. Though at first Rango only role-plays, a series of thrilling situations and outrageous encounters forces him to become a real hero.",
                 "genres" : 
                 [
                     {
@@ -198,13 +198,13 @@ This lab assumes you have:
     COMMIT;
     </copy>
     ```
-    ![showing Ratatouille JSON document ](images/update-rat.png " ")
+    ![showing Rango JSON document ](images/update-rat.png " ")
 
-4. Now let's check the updated genres for the Ratatouille  movie along with the new etag. Copy the SQL below and click **Run Script**.
+4. Now let's check the updated genres for the Rango  movie along with the new etag. Copy the SQL below and click **Run Script**.
 
     ```
     <copy>
-    SELECT json_serialize(data PRETTY) FROM movies_dv m WHERE m.data.title = 'Ratatouille';
+    SELECT json_serialize(data PRETTY) FROM movies_dv m WHERE m.data.title = 'Rango';
     </copy>
     ```
     We can see the genres, Family, Animation, Kids, and Adventure along with the a new etag of 03D7F05ED195CFF7728D568AC069C909.
