@@ -26,7 +26,7 @@ This lab assumes you have:
 
 1. Open a terminal if you don't currently have one open. To open one Click on Activities and then Terminal.
 
-    ![Open Terminal](images/tool-1-1.png " ")
+    ![Open Terminal](images/tools-1-1.png " ")
 
 
 2. One thing to be aware of is this image has a newer version of Java installed on it and the environment variable JAVA_HOME is pointing at that. Some of the utilities require a higher version.
@@ -296,6 +296,6 @@ This lab assumes you have:
 * [Oracle APEX Installation Architecture Choices] (https://docs.oracle.com/en/database/oracle/apex/23.1/htmig/understanding-installation-choices.html#GUID-A805FD4D-6049-429D-9DD2-717C75D96E62)
 
 ## Acknowledgements
-* **Author** - David Start
-* **Contributors** - David Start
+* **Author** - David Start, Database Product Management
+* **Contributors** - David Start, Database Product Management
 * **Last Updated By/Date** - David Start, Database Product Management, August 2023

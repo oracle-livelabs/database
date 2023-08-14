@@ -198,6 +198,6 @@ This lab assumes you have:
 * [Oracle Database Container Registry (Search for 23c Free)] (https://container-registry.oracle.com/ords/f?p=113:4)
 
 ## Acknowledgements
-* **Author** - David Start
-* **Contributors** - David Start
+* **Author** - David Start, Database Product Management
+* **Contributors** - David Start, Database Product Management
 * **Last Updated By/Date** - David Start, Database Product Management, August 2023
