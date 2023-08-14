@@ -1,4 +1,4 @@
-# Configure the Tools
+# Tools Setup
 
 ## Introduction
 

@@ -1,4 +1,4 @@
-# Installing and configuring Oracle Database 23c Free
+# Install and configure Oracle Database 23c Free
 
 ## Introduction
 
@@ -188,7 +188,7 @@ This lab assumes you have:
     ![Set Environment](images/install-3-4.png " ")
 
 
-5. You may proceed to the next lab.
+5. You may now **proceed to the next lab**
 
 
 ## Learn More
