@@ -10,6 +10,10 @@ In this lab, we will explore the concept of lock-free reservations and their imp
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+
+[Lock Free Video](videohub:1_u652vn55)
+
 ### Objectives
 
 * Understand the concept of lock-free reservations and their benefits.
@@ -133,7 +137,7 @@ Note: Using the same 3 windows.
 
     * Note: Notice how the session does not hang like it did using old normal updates in the last task. This is due to the concurrency Lock-Free enables for dba user experience.
 
-* Commit Window 1
+    * Commit Window 1
 
     ```
     <copy>
