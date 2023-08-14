@@ -128,7 +128,7 @@ This lab assumes you have:
 	![adding new movies](images/surfs.png " ")
 
 
-3. to reiterate, populating a duality view automatically updates the data shown in related duality views by updating their underlying tables. For example, inserting documents into the `MOVIES_DV` duality view updates both the `MOVIE_DETAILS` table and the `movies_genere_map` table.
+4. to reiterate, populating a duality view automatically updates the data shown in related duality views by updating their underlying tables. For example, inserting documents into the `MOVIES_DV` duality view updates both the `MOVIE_DETAILS` table and the `movies_genere_map` table.
 
     To verify the changes, list the contents of the `MOVIES_DV` duality view. Copy the sql below and click **Run Script**:
 
@@ -160,19 +160,19 @@ This lab assumes you have:
     ```
     ![showing no document](images/rat-etag.png " ")
 
-3. This shows us the current etag is, "etag" : "E5AB725AD046CA8BE4AA301E08CB4329". Lets replace the full document and change the summary section as well as add genres details. Copy the SQL below and click **Run Script**.
+3. This shows us the current etag is, "etag" : "40058B09BA1F4CD1A2F55CE4FF20C5BB". Lets replace the full document and change the summary section as well as add genres details. Copy the SQL below and click **Run Script**.
     ```
     <copy>
 
     UPDATE movies_dv
-        SET data = ('{"etag" : "E5AB725AD046CA8BE4AA301E08CB4329",
+        SET data = ('{"etag" : "40058B09BA1F4CD1A2F55CE4FF20C5BB",
                 "movie_id" : 4005,
                 "title" : "Rango",
                 "budget" : 135000000,
                 "list_price" : 0,
                 "year" : 2011,
                 "runtime" : 107,
-                "summary" : "A chameleon (Johnny Depp) who has lived as a sheltered family pet finds himself in the grip of an identity crisis. Rango wonders how to stand out when it is his nature to blend in. When he accidentally winds up in a frontier town called Dirt, he takes the first step on a transformational journey as the town's new sheriff. Though at first Rango only role-plays, a series of thrilling situations and outrageous encounters forces him to become a real hero.",
+                "summary" : "A chameleon (Johnny Depp) who has lived as a sheltered family pet finds himself in the grip of an identity crisis. Rango wonders how to stand out when it is his nature to blend in. When he accidentally winds up in a frontier town called Dirt, he takes the first step on a transformational journey as the towns new sheriff. Though at first Rango only role-plays, a series of thrilling situations and outrageous encounters forces him to become a real hero.",
                 "genres" : 
                 [
                     {
@@ -207,7 +207,7 @@ This lab assumes you have:
     SELECT json_serialize(data PRETTY) FROM movies_dv m WHERE m.data.title = 'Rango';
     </copy>
     ```
-    We can see the genres, Family, Animation, Kids, and Adventure along with the a new etag of 03D7F05ED195CFF7728D568AC069C909.
+    We can see the genres, Family, Animation, Kids, and Adventure along with the a new etag of 0DBB134B6BD9262AF91E51CF1AE71460.
 
     ![showing the newly created document](images/new-etag.png " ")
 
