@@ -285,7 +285,7 @@ This lab assumes you have:
 4. Log into sql dev web as hol23c with your password. I used Welcome123#.
     ![Login](images/tools-4-4.png " ")
 
-5. You may proceed to the next lab.
+5. You may now **proceed to the next lab**
     ![Finshed Lab](images/tools-4-5.png " ")
 
 ## Learn More
