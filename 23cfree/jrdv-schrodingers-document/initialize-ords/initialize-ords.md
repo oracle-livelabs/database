@@ -73,7 +73,7 @@ This lab assumes you have:
 
 
 2. To confirm ORDS is running, you can run the ps -ef | grep java command, as shown below. Your results may be slightly different, but as long as you see one java process running and ORDS is mentioned in the results, it is running.
-    
+
     ![Verify ORDS](images/confirm_ords.png)
 
 3. You may now proceed to the next lab.
