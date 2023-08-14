@@ -707,15 +707,24 @@ You can now move the data files to the target system and start the Data Pump imp
     SYS.DBMS_UTILITY.EXEC_DDL_STATEMENT('GRANT EXECUTE ON DBMS_DEFER_SYS TO "DBA"');COMMIT; END;
     ```
 
-5. Users should now connect to the migrated database. Shut down the old source database.
+5. Users should now connect to the migrated database. Set the environment to the old source database.
 
     ```
     <copy>
     . ftex
-    sqlplus / as sysdba<<EOF
-       shutdown immediate
-    EOF
+    sqlplus / as sysdba
     </copy>
+    ```
+    
+5. Shut down the old source database.
+
+    ```
+    <copy>
+    shutdown immediate
+    exit
+    </copy>
+
+    Be sure to hit RETURN
     ```
 
 6. You can now connect to the migrated PDB.
@@ -778,4 +787,4 @@ You can combine FTEX with incremental backups to shorten the downtime during mig
 
 * **Author** - Mike Dietrich, Database Product Management
 * **Contributors** - Daniel Overby Hansen, Roy Swonger, Sanjay Rupprel, Cristian Speranta, Kay Malcolm
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2023
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2023

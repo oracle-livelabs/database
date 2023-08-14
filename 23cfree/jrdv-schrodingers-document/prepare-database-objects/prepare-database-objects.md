@@ -3,9 +3,8 @@
 ## Introduction
 
 Before we can create new JSON Relational Duality Views (JRDVs), we must first create and populate tables and other database objects containing our data sources. This lab assumes that you have already installed the Oracle Database 23c Free Developer Release on a pluggable database.
-<!--and have started ORDS-->
 
-Estimated Time: 10 minutes
+Estimated Time: 8 minutes
 
 ### Objectives
 
@@ -20,14 +19,15 @@ This lab assumes you have:
 - Oracle Database 23c Free Developer Release
 - Completed all previous labs successfully
 
+Watch the video below for a quick walk through of the lab.
+[Set Up Your Environment walkthrough](videohub:1_bm92oiqn)
+
 ## Task 1: Download the schema creation and population scripts
 
 1. Click Activities in the upper left corner, then click Terminal.
 
-    <!-- Select File -> New Tab since ORDS is running in your current Terminal tab.-->
-
     ![Access Terminal through activities](images/activities-terminal.png)
-
+<!-- Select File -> New Tab since ORDS is running in your current Terminal tab.-->
 2. Go into the right directory.
 
     ```
@@ -39,10 +39,10 @@ This lab assumes you have:
 3. Pull down the materials for setup.
 
     ```
-    $ <copy>wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/b1_vZe_9llVqw_oTDq-SQyRrkDshcuABTHc6QuUDG984jfUi0mbk5x7pOZ7mPDPh/n/c4u04/b/livelabsfiles/o/partner-solutions/schroedingers-document-json-relational-duality-views/jsonrdv.zip</copy>
+    $ <copy>wget https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/-uNLyukKajWT_ik79EXzPs3bWyhaZzSEoaclosdmQhYjZMlKoRDDMcQgmxfSbY4P/n/c4u04/b/livelabsfiles/o/partner-solutions/json-relational-duality-views-in-23c/jsonrdv.zip</copy>
     ```
 
-    ![Wget to pull materials](images/material-pulldown-setup.png)
+    <!--![Wget to pull materials](images/material-pulldown-setup.png)-->
 
 4. Unzip the file. Inside this zip file are the files to set up your schema's database objects and create JRDVs.
 
@@ -60,9 +60,10 @@ This lab assumes you have:
 
     <!-- ![Remaining zip file removed](images/remove-zip.png) -->
 
+
 ## Task 2: Open SQL Developer
 
-1. From an open Terminal Window, navigate to the correct directory to open SQL Developer, and then run the command to start up SQL Developer. 
+1. From an open Terminal Window, navigate to the correct directory to open SQL Developer, and then run the command to start up SQL Developer.
 
     ```
     $ <copy>cd /opt/sqldeveloper/</copy>
@@ -96,13 +97,13 @@ This lab assumes you have:
 
 3. First, we will create and populate all database objects our JRDV examples will be using.
 
-    - Open the file named **create_tables.sql** by clicking on the File ... Open icon.
+    - Open the file named **create_tables.sql** by clicking on the File ... Open icon. 
     - Click the button that shows a document with the small green play button on it to run the whole script.
     - If it asks you to select a connection in a popup window, choose **hol23c_freepdb1** from the drop down and then click OK.
 
-    ![Create tables](./images/create_tables.png)
+    ![Create tables](images/create_tables.png)
 
-4.  You should see that all of the following actions have completed successfully:
+4. You should see that all of the following actions have completed successfully:
 
     - All tables have been proactively dropped (if they had existed) and were then created.
     - Tables were loaded using either the SQL Developer LOAD command or by inserting rows directly into tables.
@@ -111,11 +112,13 @@ This lab assumes you have:
 
     ![Table Population Results](./images/post-schema-population.png)
 
-5. Your schema setup is now complete. You may proceed to the next lab.
+5. Your schema setup is now complete. 
+
+You may now **proceed to the next lab.**
 
 ## Learn More
 - [Oracle SQL Developer 23.1 Concepts and Usage](https://docs.oracle.com/en/database/oracle/sql-developer/23.1/rptug/sql-developer-concepts-usage.html#GUID-464C045C-FBDF-417A-A20B-037D294B3BDA)
-- [Oracle SQLcl 23.2 User Guide] (https://docs.oracle.com/en/database/oracle/sql-developer-command-line/23.2/)
+- [Oracle SQLcl 23.2 User Guide](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/23.2/)
 - [Indexing and Querying Spatial Data](https://docs.oracle.com/en/database/oracle/oracle-database/23/spatl/indexing-querying-spatial-data.html)
 
 ## Acknowledgements

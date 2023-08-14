@@ -18,7 +18,7 @@ This lab assumes you have:
 * Oracle Database 23c Free Developer Release
 * A terminal or console access to the database
 
-## Task 1:Resetting database user password
+## Task 1: Resetting database user password
 
 1. The first step is to get to a command prompt. If you need to open a terminal and you are running in a Sandbox environment, click on Activities and then Terminal.
 
@@ -73,7 +73,7 @@ This lab assumes you have:
 
 
 2. To confirm ORDS is running, you can run the ps -ef | grep java command, as shown below. Your results may be slightly different, but as long as you see one java process running and ORDS is mentioned in the results, it is running.
-    
+
     ![Verify ORDS](images/confirm_ords.png)
 
 3. You may now proceed to the next lab.

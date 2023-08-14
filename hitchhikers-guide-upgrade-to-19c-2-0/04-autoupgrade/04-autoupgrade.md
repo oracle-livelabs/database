@@ -555,4 +555,4 @@ It is the only recommended way to upgrade Oracle Database.
 ## Acknowledgements
 * **Author** - Mike Dietrich, Database Product Management
 * **Contributors** - Roy Swonger, Kay Malcolm, Database Product Management
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2023
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2023
