@@ -195,7 +195,7 @@ This lab assumes you have:
 
 * [Oracle Database 23c Free](https://www.oracle.com/database/free/)
 * [Oracle Database 23c Free VirtualBox](https://www.oracle.com/database/technologies/databaseappdev-vm.html)
-* [Oracle Database Container Registry] (https://container-registry.oracle.com/ords/f?p=113:4)
+* [Oracle Database Container Registry (Search for 23c Free)] (https://container-registry.oracle.com/ords/f?p=113:4)
 
 ## Acknowledgements
 * **Author** - David Start
