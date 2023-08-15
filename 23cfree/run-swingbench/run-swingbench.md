@@ -1,4 +1,4 @@
-# Run a Swingbench Workload
+# Run Swingbench
 
 ## Introduction
 

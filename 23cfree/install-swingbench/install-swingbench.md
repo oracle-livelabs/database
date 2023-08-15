@@ -1,4 +1,4 @@
-# Setup and configure Swingbench
+# Install and configure Swingbench
 
 ## Introduction
 
