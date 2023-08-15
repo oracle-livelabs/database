@@ -42,7 +42,7 @@ The ORDS installation includes SQL Developer Web, an online tool for managing yo
 
     ![showing the sql tile](./images/show-views.png)
 
-3. Right click on the `GENRES_DV`, hover the mouse over **REST** and click **Enable**.
+3. Right click on the `GENRES_DV`, hover the mouse over **REST** and click **Enable** if it isn't already enabled. See the picture below NOTE: If it is enabled already, it will say Disable... instead. If you see Disable... you don't have to do anything. Skip to number 5.
 
     ![showing the genres duality view ](./images/genre_rest.png)
 
