@@ -1,10 +1,14 @@
-# Working with JSON and the Duality Views
+# Analyze the Swingbench Stress Test
 
 ## Introduction
 
-In this lab, you will explore the power of duality views, which allow you to seamlessly work with both SQL and JSON data in Oracle Database. You will learn how to create duality views, populate them with data using SQL or JSON, and perform operations on the integrated data. Get ready to harness the flexibility and convenience of JSON Relational Duality Views!
+Welcome to Lab 3 of the "Swingbench Unleashed: Conquer Database Stress Testing" workshop! Now that you've run your stress test using Swingbench, it's time to dive into the invaluable insights it has generated. In this lab, we'll guide you through the process of analyzing the results of your stress test, helping you identify performance bottlenecks and understand how your database system behaves under stress.
 
-Estimated Time: 20 minutes
+The data you've collected during the stress test holds the key to optimizing your system's performance. By the end of this lab, you'll have the tools to interpret Swingbench-generated reports, graphs, and metrics. This understanding will empower you to make informed decisions to improve your database's resilience and responsiveness.
+
+Get ready to uncover the hidden performance patterns within your system as we dissect the results of your Swingbench stress test!
+
+Estimated Time: 5 minutes
 
 ### Objectives
 
@@ -17,9 +21,11 @@ In this lab, you will:
 
 This lab assumes you have:
 
-* Oracle Database 23c Free Developer Release
-* All previous labs successfully completed
-* SQL Developer Web 23.1 or a compatible tool for running SQL statements
+* **Appreciate Result Significance:** Understand the importance of analyzing stress test results to uncover performance insights.
+* **Interpret Performance Metrics:** Learn how to interpret Swingbench-generated performance metrics, such as throughput, response time, and resource utilization.
+* **Identify Bottlenecks:** Spot performance bottlenecks and issues within the system through the analysis of generated reports and graphs.
+* **Understand Performance Impact:** Gain insights into how different factors, such as transaction load and system resources, impact database performance.
+* **Formulate Improvement Strategies:** Begin formulating strategies to address identified bottlenecks and enhance database performance.
 
 
 ## Task 1: Create the duality views

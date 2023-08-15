@@ -1,20 +1,25 @@
-# Prepare your environment for the workshop 
+# Install and configure Swingbench
 
 ## Introduction
 
-This lab provides a step-by-step guide to help you get started with the JSON Duality LiveLab. In this lab, you will create the necessary schema and tables need for the following labs.
+Welcome to the "Swingbench Unleashed: Conquer Database Stress Testing" workshop! In this hands-on session, we will dive into the world of Swingbench, a powerful tool designed to simulate real-world database workloads and stress test your database systems effectively.
 
-In this lab, we will be installing Swingbench, a powerful performance testing tool for Oracle databases. Swingbench allows you to simulate realistic workloads, measure system performance, and evaluate scalability. It assists in load testing, stress testing, and benchmarking Oracle environments, helping you identify bottlenecks, optimize configurations, and ensure the efficiency and reliability of Oracle-based applications. We will focus on the Oracle MovieStreams schema, which creates the required tablespace, users, and tables for this lab.
+As databases play a critical role in today's software landscape, understanding how your system performs under stress is paramount. Swingbench offers a controlled environment where you can replicate actual scenarios, helping you identify performance bottlenecks before they impact your users.
 
-Estimated Time: 15 minutes
+In this first lab, we will guide you through the essential steps of setting up and configuring Swingbench. Think of it as laying the foundation for our stress testing journey. By the end of this lab, you'll have Swingbench up and running, ready to simulate various workloads on your target database.
+
+So, whether you're a seasoned database professional looking to enhance your stress testing skills or a newcomer eager to learn, let's embark on this journey to master Swingbench and conquer the art of database stress testing.
+
+Estimated Time: 5 minutes
 
 ### Objectives
 
 In this lab, you will:
-* Install Swingbench
-* Create the schema
-* Start up Oracle REST Data Services (ORDS)
-* Connect to SQL Developer Web via the browser
+* **Understand Swingbench's Role:** Grasp the significance of Swingbench as a tool for simulating realistic database workloads and stress testing.
+* **Install Swingbench:** Download and install Swingbench on their local machine or designated environment.
+* **Configure Connection to Database:** Successfully configure Swingbench to connect to a target database for stress testing.
+* **Customize Configuration:** Familiarize themselves with key Swingbench configuration options for tailoring the workload simulation.
+
 
 ### Prerequisites
 
@@ -40,7 +45,7 @@ This lab assumes you have:
     ![Set environment](images/oraenv.png " ")
 
 
-3. Next click [here](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/23c/swingbench15082023_jdk11.zip) to download the latest version of Swingbench.
+3. Next click [here](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/swingbench02262023_jdk11.zip) to download the latest version of Swingbench.
 
 4. Once the download is complete, open a terminal or command prompt on your computer and navigate to the location where the file was saved.
 
