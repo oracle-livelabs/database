@@ -171,7 +171,7 @@ For this task you need the following info from previous steps:
       - Source Database file system SSL wallet path:
           - **/u01/app/oracle/dumpdir/wallet/opt/oracle/dcs/commonstore/wallets/newssl**
      
-          ![Screenshot for migration options](images/test-migration.png =60%x*)
+          ![Screenshot for migration options](images/test-migration-1.png =60%x*)
 
 
   7. Check **Use Online Replication**
