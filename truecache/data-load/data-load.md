@@ -4,19 +4,22 @@
 
 *Describe the lab in one or two sentences, for example:* This lab walks you through the steps to ...
 
-Estimated Time: -- minutes
+Estimated Time: 20 minutes
 
-### About <Product/Technology> (Optional)
-Enter background information here about the technology/feature or product used in this lab - no need to repeat what you covered in the introduction. Keep this section fairly concise. If you find yourself needing more than two sections/paragraphs, please utilize the "Learn More" section.
+### About Oracle True Cache
+Modern applications often require massive scalability in terms of both the number of connections and the amount of data that can be cached.
+
+A popular approach is to place caches in front of the database. Those caches rely on the fact that applications often don't need to see the most current data. For example, when someone browses a flight reservation system, the system can show flight data that's one second old. When someone reserves a flight, then the system shows the most current data.
+
+Oracle True Cache satisfies queries by using only data from its buffer cache. Like Oracle Active Data Guard, True Cache is a fully functional, read-only replication of the primary database, except that it's mostly diskless.
 
 ### Objectives
 
 *List objectives for this lab using the format below*
 
 In this lab, you will:
-* Objective 1
-* Objective 2
-* Objective 3
+* Find how to create a  schema in in the newly created env, create tables.
+* Upload data to those tables
 
 ### Prerequisites (Optional)
 
@@ -29,37 +32,32 @@ This lab assumes you have:
 
 *Below, is the "fold"--where items are collapsed by default.*
 
-## Task 1: Concise Task Description
+## Task 1: Create user and tables
 
 (optional) Task 1 opening paragraph.
 
-1. Step 1
+1.
 
 	![Image alt text](images/sample1.png)
 
-  To create a link to local file you want the reader to download, use the following formats. _The filename must be in lowercase letters and CANNOT include any spaces._
+Open a terminal window and execute below as opc user.
 
-	Download the [starter file](files/starter-file.sql) SQL code.
+<copy>
+sudo podman ps -a
+</copy>
+2. Connect podman primary image (dbmc)
 
-	When the file type is recognized by the browser, it will attempt to render it. So you can use the following format to force the download dialog box.
+<copy>
+podman exec -it dbmc /bin/bash
+</copy>
 
-	Download the [sample JSON code](files/sample.json?download=1).
+3. Execute step1 as the sysdba user.
 
-  > Note: do not include zip files, CSV, PDF, PSD, JAR, WAR, EAR, bin, or exe files - you must have those objects stored somewhere else. We highly recommend using Oracle Cloud Object Store and creating a PAR URL instead. See [Using Pre-Authenticated Requests](https://docs.cloud.oracle.com/en-us/iaas/Content/Object/Tasks/usingpreauthenticatedrequests.htm)
+4. Run the step2 and step3 as transaction user.
 
-2. Step 2
+## Task 2: Load data into tables
 
-  ![Image alt text](images/sample1.png)
-
-4. Example with inline navigation icon ![Image alt text](images/sample2.png) click **Navigation**.
-
-5. Example with bold **text**.
-
-   If you add another paragraph, add 3 spaces before the line.
-
-## Task 2: Concise Task Description
-
-1. Step 1 - tables sample
+1. Run step4 as the transaction user
 
   Use tables sparingly:
 
@@ -69,34 +67,15 @@ This lab assumes you have:
   | 2 |Some text or a link | More text |
   | 3 | Some text or a link | More text |
 
-2. You can also include bulleted lists - make sure to indent 4 spaces:
 
-    - List item 1
-    - List item 2
-
-3. Code examples
-
-    ```
-    Adding code examples
-  	Indentation is important for the code example to appear inside the step
-    Multiple lines of code
-  	<copy>Enclose the text you want to copy in <copy></copy>.</copy>
-    ```
-
-4. Code examples that include variables
-
-	```
-  <copy>ssh -i <ssh-key-file></copy>
-  ```
+You may now proceed to the next lab.
 
 ## Learn More
 
-*(optional - include links to docs, white papers, blogs, etc)*
-
-* [URL text 1](http://docs.oracle.com)
-* [URL text 2](http://docs.oracle.com)
+-  **Oracle True Cache ** 
+[True Cache documentation for internal purposes] (https://docs-uat.us.oracle.com/en/database/oracle/oracle-database/23/odbtc/oracle-true-cache.html#GUID-147CD53B-DEA7-438C-9639-EDC18DAB114B)
 
 ## Acknowledgements
-* **Author** - <Name, Title, Group>
-* **Contributors** -  <Name, Group> -- optional
-* **Last Updated By/Date** - <Name, Month Year>
+* **Authors** - Sambit Panda, Consulting Member of Technical Staff , Vivek Vishwanathan Software Developer, Oracle Database Product Management
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Thirumalai Thathachary
+* **Last Updated By/Date** - Vivek Vishwanathan ,Software Developer, Oracle Database Product Management, August 2023
