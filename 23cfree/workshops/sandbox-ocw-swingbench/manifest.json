@@ -1,0 +1,40 @@
+{
+    "workshoptitle": "Swingbench Unleashed: Conquer Database Stress Testing",
+      "help": "livelabs-help-db_us@oracle.com",
+      "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Learn the power of Swingbench",
+            "type": "livelabs",
+            "filename": "../../introduction/swingbench-introduction.md"
+        },
+        {
+            "title": "Get Started with NoVNC",
+            "description": "Verify Setup of compute instance",
+            "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+        },
+        {
+            "title": "Lab 1: Install and configure Swingbench",
+            "description": "Install and configure Swingbench",
+            "type": "livelabs",
+            "filename": "../../install-swingbench/install-swingbench.md"
+        },
+        {
+            "title": "Lab 2: Run Swingbench",
+            "description": "Create and run a Swingbench workload",
+            "type": "livelabs",
+            "filename": "../../run-swingbench/run-swingbench.md"
+        },
+        {
+            "title": "Lab 3: Analyze the Swingbench stress test",
+            "description": "Creating the Duality Views",
+            "type": "livelabs",
+            "filename": "../../analyze-swingbench/analyze-swingbench.md"
+        },
+        {
+          "title": "Oracle CloudWorld 2023 - Support",
+          "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
+          "filename":"https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
+        }
+    ]
+}
