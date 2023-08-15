@@ -26,7 +26,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    SELECT * FROM movie_details where movie_id = 4006;
+    SELECT * FROM movie_details where title = 'Stuart Little';
 
     INSERT INTO MOVIES_DV VALUES('{ "movie_id" : 4006,
                                 "title" : "Stuart Little",
@@ -41,7 +41,7 @@ This lab assumes you have:
                                             "genre_name" : "Family"}]}'
     );
 
-    SELECT * FROM movie_details where movie_id = 4006;
+    SELECT * FROM movie_details where title = 'Stuart Little';
     </copy>
     ```
     ![adding the movie](images/little.png " ")
@@ -50,31 +50,32 @@ This lab assumes you have:
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
-    FROM GENRES_DV WHERE json_value(data, '$.genre_id') = 26;
+    FROM GENRES_DV WHERE json_value(data, '$.genre_name') = 'Psychological Thriller';
 
     INSERT INTO generes
     VALUES(26, 'Psychological Thriller', 'Psychological Thriller: mind-bending suspense, intricate narratives, and gripping twists that keep you on edge. Prepare for intense psychological tension and thrilling storytelling.');
 
     SELECT json_serialize(data PRETTY)
-    FROM GENRES_DV WHERE json_value(data, '$.genre_id') = 26;
+    FROM GENRES_DV WHERE json_value(data, '$.genre_name') = 'Psychological Thriller';
+
     </copy>
     ```
     
     ![adding a new description](images/psy_thriller.png " ")
 
-## Task 2: Update and replace a document by ID
+## Task 2: Duality View benefits
 
 1. Like the previous lab, lets make an update to the `GENRES_DV`. The important thing to note here is, this change will be reflected in **all documents** that contain the Kids genre. Copy the sql below and click **Run Script**
 
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
-    FROM GENRES_DV WHERE json_value(data, '$.genre_id') = 25;
+    FROM GENRES_DV WHERE json_value(data, '$.genre_name') = 'Kids';
     </copy>
     ```
     We can see that the Kids genre exists but has no description. Let's update this via SQL.
 
-    ![showing the genre 25 isnt there](images/no_description.png " ")
+    ![showing the genre 25 description is not there](images/no_description.png " ")
 
 2. Let's update the description of the Kids genre. Copy the sql below and click **Run Statement**
  
@@ -91,7 +92,7 @@ This lab assumes you have:
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
-    FROM GENRES_DV WHERE json_value(data, '$.genre_id') = 25;
+    FROM GENRES_DV WHERE json_value(data, '$.genre_name') = 'Kids';
     </copy>
     ```
     We can see that the Kids genre now has a new description.
