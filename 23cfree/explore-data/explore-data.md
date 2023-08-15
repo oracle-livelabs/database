@@ -58,9 +58,9 @@ This lab assumes you have:
 
     ```
     <copy>
-    desc GENERES;
+    desc GENRES;
     desc MOVIE_DETAILS;
-    desc MOVIES_GENERE_MAP;
+    desc MOVIES_GENRE_MAP;
     </copy>
     ```
     ![looking at the data](images/desc-tables.png " ")

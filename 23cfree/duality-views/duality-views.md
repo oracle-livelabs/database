@@ -52,7 +52,7 @@ This lab assumes you have:
     SELECT json_serialize(data PRETTY)
     FROM GENRES_DV WHERE json_value(data, '$.genre_name') = 'Psychological Thriller';
 
-    INSERT INTO generes
+    INSERT INTO genres
     VALUES(26, 'Psychological Thriller', 'Psychological Thriller: mind-bending suspense, intricate narratives, and gripping twists that keep you on edge. Prepare for intense psychological tension and thrilling storytelling.');
 
     SELECT json_serialize(data PRETTY)
@@ -81,14 +81,14 @@ This lab assumes you have:
  
     ```
     <copy>
-    UPDATE GENERES
-    SET GENERE_DESCRIPTION = 'Kids genre: captivating, educational, and imaginative films that bring joy to young viewers. Explore enchanting adventures and relatable characters, creating cherished memories for families.'
-    WHERE GENERE_ID = 25;
+    UPDATE GENRES
+    SET GENRE_DESCRIPTION = 'Kids genre: captivating, educational, and imaginative films that bring joy to young viewers. Explore enchanting adventures and relatable characters, creating cherished memories for families.'
+    WHERE GENRE_ID = 25;
     </copy>
     ```
     ![showing the update ](images/kids_description.png " ")
 
-3. Now, let's check the `GENERES` table again to see the updated description. Copy the sql below and click **Run Script**
+3. Now, let's check the `GENRES` table again to see the updated description. Copy the sql below and click **Run Script**
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
@@ -112,7 +112,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    SELECT GENERE_DESCRIPTION FROM GENERES WHERE GENERE_NAME = 'Family';
+    SELECT GENRE_DESCRIPTION FROM GENRES WHERE GENRE_NAME = 'Family';
     </copy>
     ```
     ![checking for a description in the family genre](images/fam_description.png " ")

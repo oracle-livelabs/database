@@ -32,10 +32,10 @@ This lab assumes you have:
     ```
     <copy>
     CREATE OR REPLACE JSON DUALITY VIEW genres_dv AS
-    SELECT JSON {'genre_id' : g.GENERE_ID,
-            'genre_name' : g.GENERE_NAME,
-            'genre_description' : g.GENERE_DESCRIPTION}
-    FROM generes g WITH INSERT UPDATE DELETE;
+    SELECT JSON {'genre_id' : g.GENRE_ID,
+            'genre_name' : g.GENRE_NAME,
+            'genre_description' : g.GENRE_DESCRIPTION}
+    FROM genres g WITH INSERT UPDATE DELETE;
 	</copy>
     ```
 	![Creating the genre view](images/genre-dv.png " ")
@@ -54,13 +54,13 @@ This lab assumes you have:
             year : YEAR
             runtime : RUNTIME
             summary : SUMMARY
-        genres : MOVIES_GENERE_MAP @insert @update @delete {
+        genres : MOVIES_GENRE_MAP @insert @update @delete {
                 GenreToMovieID : MG_ID
-                GENERES
+                GENRES
                 @unnest {
-                    genre_id : GENERE_ID,
-                    genre_name : GENERE_NAME,
-                    genre_description: GENERE_DESCRIPTION}
+                    genre_id : GENRE_ID,
+                    genre_name : GENRE_NAME,
+                    genre_description: GENRE_DESCRIPTION}
                 }
      };
 	</copy>
@@ -95,7 +95,7 @@ This lab assumes you have:
     ```
     ![Adding the Kids genre](images/kids-genre.png " ")
 
-3. Insert a collection of documents into `MOVIES_DV`. This automatically populates the `MOVIE_DETAILS` and the `MOVIE_GENERE_MAPPING` table. If you remember the movies duality view joins movie_details and movies to genre mappings. It also allows inserts into both tables. Copy the sql below and click **Run Script**
+3. Insert a collection of documents into `MOVIES_DV`. This automatically populates the `MOVIE_DETAILS` and the `MOVIE_GENRE_MAPPING` table. If you remember the movies duality view joins movie_details and movies to genre mappings. It also allows inserts into both tables. Copy the sql below and click **Run Script**
 
     ```
     <copy>
@@ -128,7 +128,7 @@ This lab assumes you have:
 	![adding new movies](images/surfs.png " ")
 
 
-4. to reiterate, populating a duality view automatically updates the data shown in related duality views by updating their underlying tables. For example, inserting documents into the `MOVIES_DV` duality view updates both the `MOVIE_DETAILS` table and the `movies_genere_map` table.
+4. to reiterate, populating a duality view automatically updates the data shown in related duality views by updating their underlying tables. For example, inserting documents into the `MOVIES_DV` duality view updates both the `MOVIE_DETAILS` table and the `movies_genre_map` table.
 
     To verify the changes, list the contents of the `MOVIES_DV` duality view. Copy the sql below and click **Run Script**:
 
