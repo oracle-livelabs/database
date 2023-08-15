@@ -120,6 +120,14 @@ This lab assumes you have:
 
     ![Showing the swingbench UI](images/completing.png " ")
 
+17. To make this workshop as realistic as possible, let's introduce the business scenario you will be working with - **Oracle MovieStream**.
+
+    ![Logo graphic of Oracle MovieStream](images/moviestream-logo.jpeg)
+
+    * Oracle MovieStream is a fictitious online movie streaming company. Customers log into Oracle MovieStream using their computers, tablets, and phones, where they are presented with a personalized list of movies based on their viewing history. The company is now looking for better, smarter ways to track performance, identify customers for targeted campaigns promoting new services and movies, and improve the streaming platform. The scenarios in this workshop are based on challenges that companies face in their businesses. We hope that the labs and workshops will provide you with insights into how Oracle can help you solve these common everyday business and technical challenges.
+
+    * During this workshop, we will primarily focus on three key tables: `genres`, `movie_details`, and `movies_genre_map`. As we progress through the upcoming labs, we will explore the creation of duality views spanning across these tables. Additionally, we will explore techniques for efficiently adding, updating, and manipulating the underlying data within these tables using the duality views.
+
 ## Task 2: Start ORDS
 
 1. Open a new tab in the terminal by selecting **File** and **New Tab** 
