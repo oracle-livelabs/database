@@ -12,14 +12,14 @@ Estimated Time - 5 minutes
 
 ### Objectives
 
-- Terminate and tear down all resources/instances used in the Oracle Sharding Lab.
+- Terminate and tear down all resources/instances used in the Oracle True cache Lab.
 
 ### Prerequisites
 
-- You should have provisioned the **Learn how to use RAFT Replication to build resilient distributed databases** workshop using a terraform stack
-- To provision this workshop, there are detailed instructions in Lab 1 of [Learn how to use RAFT Replication to build resilient distributed databases](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=866) workshop.
+- You should have provisioned the **Application performance improvement with True Cache** workshop using a terraform stack
+- To provision this workshop, there are detailed instructions in Lab 1 of [Application performance improvement with True Cache](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=11454) workshop.
 
-## Task 1: Terminate a Provisioned Oracle Autonomous Database Instance
+## Task 1: Terminate a Provisioned Oracle Database Instance
 
 1. Login to Oracle cloud
 
@@ -43,12 +43,8 @@ Estimated Time - 5 minutes
   You have successfully cleaned up your  instance.
 
 ## Learn More
-
--  **Oracle True Cache ** 
 [True Cache documentation for internal purposes] (https://docs-uat.us.oracle.com/en/database/oracle/oracle-database/23/odbtc/oracle-true-cache.html#GUID-147CD53B-DEA7-438C-9639-EDC18DAB114B)
 
-
-## Acknowledgements
 
 ## Acknowledgements
 * **Authors** - Sambit Panda, Consulting Member of Technical Staff , Vivek Vishwanathan Software Developer, Oracle Database Product Management
