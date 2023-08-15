@@ -97,6 +97,7 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
 1. The latest version available at the time of writing is 1.1.11, so let's download it into our mle folder so that it can be used by the database
     ```
     <copy>
+    echo "151.101.141.229 cdn.jsdelivr.net"| sudo tee --append /etc/hosts
     curl -Lo ./mle/chance.js https://cdn.jsdelivr.net/npm/chance@1.1.11/+esm 
     </copy>
     ```
