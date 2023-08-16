@@ -13,12 +13,14 @@ Learn how to:
 - Use JSON to create, modify, and delete data within a JRDV's underlying tables
 - Explore the optional limits that JRDVs can enforce against creating and modifying data
 
-
 ### Prerequisites
 This lab assumes:
 - You have already finished all prior labs
 - You have already started ORDS as instructed in Lab #2
 - You still have your SQL Developer session open from the prior lab step
+
+Watch the video below for a quick walk through of the lab.
+[Explore Feature Sets of JSON Relational Duality Views walkthrough](videohub:1_b7q5ieox)
 
 ## Task 1: Configure REST-Enabled JRDVs
 

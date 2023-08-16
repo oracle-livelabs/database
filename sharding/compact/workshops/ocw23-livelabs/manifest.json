@@ -1,0 +1,37 @@
+{
+  "workshoptitle": "Build an Internet-Scale App with Oracle Globally Distributed Database",
+  "help": "livelabs-help-license_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "This lab provides an overview of Oracle Sharding and how to use it for mission-critical, internet-scale apps",
+      "type": "ocw",
+      "filename": "../../intro/intro.md"
+    },
+    {
+      "title": "Lab 1: Environment Setup",
+      "description": "Verify Setup of compute instance",
+      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-novnc.md"
+    },
+    {
+      "title": "Lab 2: Initialize Environment",
+      "description": "Initialize Environment",
+      "filename": "../../initialize-environment/initialize-environment.md"
+    },
+    {
+      "title": "Lab 3: About Eshop",
+      "description": "About Eshop",
+      "filename": "../../eshop/eshop.md"
+    },
+    {
+      "title": "Lab 4: Explore Sharding Topology",
+      "description": "Exploring Sharding Topology",
+      "filename": "../../topology/topology.md"
+    },
+    {
+      "title": "Oracle CloudWorld 2023 - Get Help",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
+    }
+  ]
+}

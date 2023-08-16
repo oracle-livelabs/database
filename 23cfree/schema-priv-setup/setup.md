@@ -8,6 +8,10 @@ By following the instructions provided, you will complete the setup process and 
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+
+[Setup Tutorial](videohub:1_rkprm8hq)
+
 ### Objectives
 
 * Create two users, User 1 and User 2, for the Oracle database environment.
