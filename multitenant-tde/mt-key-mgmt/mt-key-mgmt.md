@@ -89,11 +89,14 @@ We start off with an unencrypted database and backing it up so you can re-run th
 
    ![Screenshot of terminal output](./images/task1.3-whoisconnected.png " ")
 
-4. Initialize backup/recovery and create the baseline backup for **CDB1**
+4. Backup **CDB1** and  **CDB2** (Optional)
+
+    Run the following command to perform a backup of the two container databases that will be used during this lab. This backup operations takes about 15 minutes to complete.
 
     ```
     <copy>
-    /home/oracle/labs/multitenant/tde/backup/create_backup.sh CDB1
+    ~/labs/multitenant/tde/backup_all_db.sh
+    tail -f
     </copy>
     ```
 
@@ -102,16 +105,6 @@ We start off with an unencrypted database and backing it up so you can re-run th
 - The database knows there is a wallet and master encryption key associated with it
 - If you don’t have the database access the wallet you will get messages that it can’t access the key
 - Be sure of the steps before you do this to a database that you use normally
-
-5. Initialize backup/recovery and create the baseline backup for **CDB2**
-
-    ```
-    <copy>
-    /home/oracle/labs/multitenant/tde/backup/create_backup.sh CDB2
-    </copy>
-    ```
-
->>**Notes:**
 - Once you do encrypt the database you need to do a full backup, as a best practice
 - TDE encrypts the
     - Datafile
@@ -129,7 +122,7 @@ We start off with an unencrypted database and backing it up so you can re-run th
     - It will stay unencrypted till you do another full backup
     - The exception is the ZDLRA/RA21
 
-4. Look at the wallet for CDB1
+5. Look at the wallet for CDB1
 
     ```
     <copy>
@@ -146,7 +139,7 @@ We start off with an unencrypted database and backing it up so you can re-run th
 - At this point CBD1 does not know about a wallet or encryption
 
 
-5. Look at the wallet for CDB2
+6. Look at the wallet for CDB2
 
     ```
     <copy>
@@ -164,7 +157,7 @@ We start off with an unencrypted database and backing it up so you can re-run th
 
 At this point neither database knows about encryption and there is no wallet set so let's check the encryption status of CDB1
 
-6. Run this command
+7. Run this command
 
     ```
     <copy>
@@ -180,7 +173,7 @@ At this point neither database knows about encryption and there is no wallet set
 - If they are encrypted what is the master key
 - Status is empty
 
-7. We can check the status of CDB2 and see the same thing
+8. We can check the status of CDB2 and see the same thing
 
     ```
     <copy>
@@ -666,23 +659,15 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
 ## Task 7: Reset the Environment (Optional)
 While executing this workshop should you need to get a fresh start midway through the execution or simply want to reset the database back to the initial unencrypted state, perform the following tasks.
 
-1. Restore **CDB1**
+1. Restore all databases (**CDB1** and **CDB2**)
 
     ```
     <copy>
-    /home/oracle/labs/multitenant/tde/backup/copyfiles_back_CDB1.sh
+    /home/oracle/labs/multitenant/tde/restore_all_db.sh
     </copy>
     ```
 
-2. Restore **CDB2**
-
-    ```
-    <copy>
-    /home/oracle/labs/multitenant/tde/backup/copyfiles_back_CDB2.sh
-    </copy>
-    ```
-
-3. Check the existence of a wallet for **CDB1**
+2. Check the existence of a wallet for **CDB1**
 
     ```
     <copy>
@@ -699,7 +684,7 @@ While executing this workshop should you need to get a fresh start midway throug
 - At this point CBD1 does not know about a wallet or encryption
 
 
-4. Check the existence of a wallet for **CDB2**
+3. Check the existence of a wallet for **CDB2**
 
     ```
     <copy>
@@ -717,7 +702,7 @@ While executing this workshop should you need to get a fresh start midway throug
 
 At this point neither database knows about encryption and there is no wallet set so let's check the encryption status on the two CDBs
 
-5. Check the encryption status of **CDB1**
+4. Check the encryption status of **CDB1**
 
     ```
     <copy>
@@ -733,7 +718,7 @@ At this point neither database knows about encryption and there is no wallet set
 - If they are encrypted what is the master key
 - Status is empty
 
-6. Check the encryption status of **CDB2**
+5. Check the encryption status of **CDB2**
 
     ```
     <copy>
