@@ -4,6 +4,10 @@
 
 This workshop focuses on working with JSON Duality Views using Java in Oracle Database 23c.
 
+If you would like, you can watch the video below for a quick walk-through of the lab. 
+[Change password](videohub:1_q12u7wb5)
+
+
 ### **JSON Duality**
 
 JSON Relational Duality is a landmark capability in Oracle Database 23c providing game-changing flexibility and simplicity for Oracle Database developers. This breakthrough innovation overcomes the historical challenges developers have faced when building applications, using relational or document models.
