@@ -12,7 +12,7 @@ Estimated Time - 5 minutes
 
 ### Objectives
 
-- Terminate and tear down all resources/instances used in the Oracle True cache Lab.
+- Terminate and tear down all resources/instances used in the Oracle True Cache Lab.
 
 ### Prerequisites
 

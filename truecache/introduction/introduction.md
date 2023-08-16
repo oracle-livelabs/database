@@ -11,7 +11,7 @@ True Cache can be used to scale a read-mostly application even without partition
 
 *Estimated Workshop Time:* 1 hour 
 
-![TrueCache introduction](images/truecache-intro.png " ")
+![True Cache introduction](images/True Cache-intro.png " ")
 
 ### Objectives
 Run this hands-on workshop to learn how to use True Cache to improve scalability by offloading queries and reducing the number of requests and connections to the primary database.
@@ -19,7 +19,7 @@ Run this hands-on workshop to learn how to use True Cache to improve scalability
 Once you complete your setup, the next lab will cover:
 
 - Creating and loading data to a transaction based schema
-- Running a Java based application using jdbc to connect to the database and run different transactions against primary database first and true cache instance after that, to display how true cache could improve application performance. 
+- Running a Java based application using jdbc to connect to the database and run different transactions against primary database first and True Cache instance after that, to display how True Cache could improve application performance. 
 
 
 ### Prerequisites (Optional)

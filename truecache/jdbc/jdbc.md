@@ -14,7 +14,7 @@ The application used here is a transaction processing application, which does va
 
 In this lab, you will:
 * Run the application while connecting to primary database 
-* Run the application while connecting to true cache and observe the difference in performance
+* Run the application while connecting to True Cache and observe the difference in performance
 
 ### Prerequisites (Optional)
 
@@ -26,11 +26,11 @@ This lab assumes you have:
 
 1. Set JAVA_HOME by running the setjava17.sh
 
-2. Test the connection to true cache by running the BasicApp.sh. The successful outcome of the script 
-makes sure that jdbc is able to connect to true cache instance through the oracle.jdbc.useTrueCacheDriverConnection=true parameter.
-2. Run the application by running TransactionApp.sh , this will first run the application against primary for 2 minutes than it will run the application against true cache instance for 2 minutes with 50 threads.
+2. Test the connection to True Cache by running the BasicApp.sh. The successful outcome of the script 
+makes sure that jdbc is able to connect to True Cache instance through the oracle.jdbc.useTrue CacheDriverConnection=true parameter.
+2. Run the application by running TransactionApp.sh , this will first run the application against primary for 2 minutes than it will run the application against True Cache instance for 2 minutes with 50 threads.
 
-3. Observe the improve in performance while using true cache.
+3. Observe the improve in performance while using True Cache.
 
 4. You could modify the TransactionApp.sh, to increase the number of users and duration of the test.
 
