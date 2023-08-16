@@ -21,10 +21,10 @@ his lab assumes you have:
     - Lab: Environment Setup
     - Lab: Initialize environment
 
-## Task 1: Backup CDB1 and CDB2
-In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Command Line (SQLcl).  Oracle **SQLcl** is the modern, command line interface to the database. **SQLcl** has many key features that add to the value of the utility, including command history, in-line editing, auto-complete using the TAB key and more. You can learn more about **SQLcl** [at the Oracle SQLcl website](https://www.oracle.com/database/technologies/appdev/sqlcl.html).
+## Task 1: Validate the non-encryption state
+In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Command Line (SQLcl).  Oracle **SQLcl** is the modern, command line interface to the database. **SQLcl** has many key features that add to the value of the utility, including command history, in-line editing, auto-complete using the TAB key and more. You can learn more about **SQLcl** at the product homepage [ here](https://www.oracle.com/database/sqldeveloper/technologies/sqlcl/).
 
-We start off with an unencrypted database and backing it up so you can re-run this lab multiple times if you so choose.
+We start off with an unencrypted database and will be validating that state in this session
 
 1. All scripts for this lab are stored in the `labs/multitenant/tde` folder and are run as the oracle user. Let's navigate to the path now.
 
@@ -42,7 +42,7 @@ We start off with an unencrypted database and backing it up so you can re-run th
 
     ```
     <copy>
-    sql sys/Ora_DB4U@localhost:1521/cdb1 as sysdba
+    sql / as sysdba
     </copy>
     ```
 
@@ -56,7 +56,7 @@ We start off with an unencrypted database and backing it up so you can re-run th
 
     ![Screenshot of terminal output](./images/task1.2-connectcdb1.png " ")
 
-3. Create a script to check to see who you are connected as. At any point in the lab you can run this script to see who or where you are connected. We'll save this script for future use and call it "whoami.sql".
+3. Create a script to check to see who you are connected as. At any point in the lab you can run this script to see who or where you are connected. We'll save this script for future use and call it *`whoami.sql`*.
 
     ```
     <copy>
@@ -75,7 +75,6 @@ We start off with an unencrypted database and backing it up so you can re-run th
 
       save whoami.sql
 
-
     </copy>
     ```
 
@@ -89,38 +88,6 @@ We start off with an unencrypted database and backing it up so you can re-run th
 
    ![Screenshot of terminal output](./images/task1.3-whoisconnected.png " ")
 
-4. Backup **CDB1** and  **CDB2** (Optional)
-
-    Run the following command to perform a backup of the two container databases that will be used during this lab. This backup operations takes about 15 minutes to complete.
-
-    ```
-    <copy>
-    ~/labs/multitenant/tde/backup_all_db.sh
-    tail -f
-    </copy>
-    ```
-
->>**Notes:**
-- Once you create a key for the database you are at the point of no return
-- The database knows there is a wallet and master encryption key associated with it
-- If you don’t have the database access the wallet you will get messages that it can’t access the key
-- Be sure of the steps before you do this to a database that you use normally
-- Once you do encrypt the database you need to do a full backup, as a best practice
-- TDE encrypts the
-    - Datafile
-    - Tablespace
-    - Data in the blocks
-- TDE does NOT encrypt
-    - Block Headers
-    - Means when you go to back it up nothing changed
-    - If you do an incremental it won’t look at the database and say the data in the data file or tablespace changed because it got encrypted
-    - All it knows is the header, which has the last update scn, didn’t change, so the block didn’t change
-    - But the data within the block did change because it was encrypted
-- If you only do an incremental merge then
-    - The data will stay unencrypted
-    - You need to start over as it will take those incremental backups that are unencrypted, merge it into the full backup, which is unencrypted, and keep it unencrypted
-    - It will stay unencrypted till you do another full backup
-    - The exception is the ZDLRA/RA21
 
 5. Look at the wallet for CDB1
 
@@ -181,11 +148,45 @@ At this point neither database knows about encryption and there is no wallet set
     </copy>
     ```
 
-## Task 2: Create A Wallet
+## Task 2: Backup **CDB1** and  **CDB2** (Optional)
+
+**Warning**: *This backup operation takes about 30 minutes to complete, is optional, and may be skipped. The main reason for performing this task is simply so that you can re-run this lab multiple times if you so choose, or restart midway if you make a mistake*
+
+1. Run the following command to perform a backup of the two container databases that will be used during this lab.
+
+    ```
+    <copy>
+    ~oracle/labs/multitenant/tde/backup_all_db.sh  
+    </copy>
+    ```
+
+>>**Notes:**
+- Once you create a key for the database you are at the point of no return
+- The database knows there is a wallet and master encryption key associated with it
+- If you don’t have the database access the wallet you will get messages that it can’t access the key
+- Be sure of the steps before you do this to a database that you use normally
+- Once you do encrypt the database you need to do a full backup, as a best practice
+- TDE encrypts the
+    - Datafile
+    - Tablespace
+    - Data in the blocks
+- TDE does NOT encrypt
+    - Block Headers
+    - Means when you go to back it up nothing changed
+    - If you do an incremental it won’t look at the database and say the data in the data file or tablespace changed because it got encrypted
+    - All it knows is the header, which has the last update scn, didn’t change, so the block didn’t change
+    - But the data within the block did change because it was encrypted
+- If you only do an incremental merge then
+    - The data will stay unencrypted
+    - You need to start over as it will take those incremental backups that are unencrypted, merge it into the full backup, which is unencrypted, and keep it unencrypted
+    - It will stay unencrypted till you do another full backup
+    - The exception is the ZDLRA/RA21
+
+## Task 3: Create A Wallet
 
 In this section we will create a wallet for each CDB. For ease of execution, all steps needed have been provided in the script below
 
-1. Create a wallet for CDB1, which has PDB1
+1. Create the wallet and Keystore for CDB1, which has PDB1
 
     ```
     <copy>
@@ -220,9 +221,7 @@ In this section we will create a wallet for each CDB. For ease of execution, all
 
     ![Screenshot of terminal output](./images/post-bounce2.png " ")
 
-2. Create the keystore
-
-    The following tasks are performed in this step:
+    For the keystore the following tasks are performed in this step:
 
     - Give it a wallet file
     - Give it a password
@@ -257,7 +256,7 @@ In this section we will create a wallet for each CDB. For ease of execution, all
     - Not as secure a method, but less effort when you bounce the database
     - Most customers use an auto login wallet
 
-3. Repeat [1-2] for CDB2
+2. Repeat [1] for CDB2
 
     ```
     <copy>
@@ -279,11 +278,11 @@ Note For RAC Environments
     - Most common is a shared location: ex ACFS mount point
 3. Cloud uses ACFS
 
-4. Check the Wallet Status For CDB1
+3. Check the Wallet Status For CDB1
 
     ```
     <copy>
-    ~oracle/labs/multitenant/tde/create_wallet.sh CDB1
+    ~oracle/labs/multitenant/tde/wallet_status.sh CDB1
     </copy>
     ```
 
@@ -291,11 +290,11 @@ Note For RAC Environments
 
 The last time we ran this status check the value was **NOT AVAILABLE**. It has now evolved to **`OPEN_NO_MASTER_KEY`** since we are yet to set the key. As a result, while CDB1 and PDB1 both have the wallet open, there is no master key
 
-5. Check the Wallet Status For CDB2
+4. Check the Wallet Status For CDB2
 
     ```
     <copy>
-    ~oracle/labs/multitenant/tde/create_wallet.sh CDB2
+    ~oracle/labs/multitenant/tde/wallet_status.sh CDB2
     </copy>
     ```
 
@@ -304,7 +303,7 @@ The last time we ran this status check the value was **NOT AVAILABLE**. It has n
 Same as for CDB1 and PDB1, CDB2 and PDB2 both have the wallet open but no master key
 
 
-## Task 3:  Set The master Key
+## Task 4:  Set The master Key
 
 The *`set_keys.sh`* script used in this section will set the encryption key for the CDB and PDB, and will rely on the tag feature.
 
@@ -372,7 +371,6 @@ Tags are important to identify keys, especially when using OKV where keys are st
         - 1 for the PDB
 
     ![Screenshot of terminal output](./images/master-encryption-key-1.png " ")
-    ![Screenshot of terminal output](./images/master-encryption-key-2.png " ")
 
     The Activation Time is listed
 
@@ -396,7 +394,7 @@ Tags are important to identify keys, especially when using OKV where keys are st
     - They are not encrypted at this point
         - If they were to be encrypted those are they keys that they would use
 
-## Task 4: Encrypt The Tablespaces
+## Task 5: Encrypt The Tablespaces
 
 In this section we will encrypt tablespaces. However before proceeding we need to set an encryption algorithm on the two CDBs
 
@@ -404,11 +402,11 @@ In this section we will encrypt tablespaces. However before proceeding we need t
 
     ```
     <copy>
-    ~oracle/labs/multitenant/tde/set_algorythm.sh CDB1
+    ~oracle/labs/multitenant/tde/set_algorithm.sh CDB1
     </copy>
     ```
 
-    ![Screenshot of terminal output](./images/master-encryption-key-cdb2.png " ")
+    ![Screenshot of terminal output](./images/set_algorithm_cdb1.png " ")
 
 >>**Notes:**    
 - By default it is set to AES128. However the recommendation is to set to AES256, which provides a little more security
@@ -419,11 +417,11 @@ In this section we will encrypt tablespaces. However before proceeding we need t
 
     ```
     <copy>
-    ~oracle/labs/multitenant/tde/set_algorythm.sh CDB2
+    ~oracle/labs/multitenant/tde/set_algorithm.sh CDB2
     </copy>
     ```
 
-    ![Screenshot of terminal output](./images/set-algorythm-cdb2.png " ")
+    ![Screenshot of terminal output](./images/set_algorithm_cdb2.png " ")
 
 We are now ready to encrypt
 
@@ -441,6 +439,8 @@ We are now ready to encrypt
     ~oracle/labs/multitenant/tde/encrypt_tablespaces.sh CDB1
     </copy>
     ```
+
+    ![Screenshot of terminal output](./images/encrypt_tablespaces_cdb1.png " ")
 
 >>**Note:**
 - You need to have enough additional space for the largest data file that is going to be encrypted because a second file will be created
@@ -493,13 +493,13 @@ We are now ready to encrypt
 
 You will see the same thing as CDB1. The keys are different, so you have 4 Master Keys in 2 different wallets
 
-## Task 5: Clone PDB1 in CDB1
+## Task 6: Clone PDB1 in CDB1
 
 1. Clone pdb1
 
     ```
     <copy>
-    ~oracle/labs/multitenant/tde/clonepdb1.sh
+    ~oracle/labs/multitenant/tde/clone_pdb1.sh
     </copy>
     ```
 
@@ -560,13 +560,13 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
 
     ![Screenshot of terminal output](./images/pdbclone1-rekey-status.png " ")
 
-## Task 6: Unplug PDBCLONE1 and plug into CDB2
+## Task 7: Unplug PDBCLONE1 and plug into CDB2
 
 1. Unplug pdbclone1
 
     ```
     <copy>
-    ~oracle/labs/multitenant/tde/key_pdbclone1.sh
+    ~oracle/labs/multitenant/tde/unplug_pdbclone1.sh
     </copy>
     ```
 
@@ -585,7 +585,7 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
 
      ```
     <copy>
-    ~oracle/labs/multitenant/tde/key_status.sh CDB1
+    ~oracle/labs/multitenant/tde/plug_pdbclone1.sh
     </copy>
     ```
 
@@ -656,14 +656,14 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
     - It will stay unencrypted till you do another full backup
     - The exception is the ZDLRA/RA21
 
-## Task 7: Reset the Environment (Optional)
+## Task 8: Reset the Environment (Optional)
 While executing this workshop should you need to get a fresh start midway through the execution or simply want to reset the database back to the initial unencrypted state, perform the following tasks.
 
 1. Restore all databases (**CDB1** and **CDB2**)
 
     ```
     <copy>
-    /home/oracle/labs/multitenant/tde/restore_all_db.sh
+    ~oracle/labs/multitenant/tde/restore_all_db.sh
     </copy>
     ```
 
