@@ -46,7 +46,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    unzip ~/Downloads/swingbench02262023_jdk11.zip -d ~/Downloads
+    unzip ~/Downloads/swingbench15082023_jdk11.zip -d ~/Downloads
     </copy>
 	```
     ![unzip swingbench](images/downloadswing.png " ")
