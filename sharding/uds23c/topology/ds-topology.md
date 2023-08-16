@@ -30,7 +30,7 @@ This lab assumes you have:
   * Lab: Environment Setup
   * Lab: Initialize Environment
 
-### Task 1: Check for containers in your VM
+## Task 1: Check for containers in your VM
 
 1. Open a terminal window and execute below as **opc** user.
 
@@ -42,7 +42,7 @@ This lab assumes you have:
 
      ![<podman containers>](./images/uds-podman-containers.png " ")
 
-### Task 2: Explore the User-Defined Sharding configuration
+## Task 2: Explore the User-Defined Sharding configuration
 
 2.  The user-defined sharding method  provides a means to achieve regulatory compliance by enabling user-defined data placement It allows you to use a range or list of countries to partition data among the shards by letting you explicitly specify the mapping of data to individual shards.
     User-Defined Sharding Definitions

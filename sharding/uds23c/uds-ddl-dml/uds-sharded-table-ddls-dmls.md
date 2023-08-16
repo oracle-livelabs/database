@@ -1,5 +1,7 @@
 # Sample User Defined sharded schema
 
+## Introduction
+
 Once User defined sharded env configuration is done and you find the result of gdsctl validate command as expect without error, Sharded schema can be created. In this lab all DDL steps are for information purpose only and those are already done in the lab env so that we can query the sharded db and verify how we can achive data sovereignty with Oracle's user defined sharding in the distributed databases.
 
 *Estimated Time*:  30 minutes
@@ -20,8 +22,9 @@ This lab assumes you have:
   * Lab: Prepare Setup
   * Lab: Environment Setup
   * Lab: Initialize Environment
+  * Lab: Explore User-Defined Sharding Topology
 
-### Task 1: Check for containers in your VM
+## Task 1: Check for containers in your VM
 
 1. Open a terminal window and execute below as **opc** user.
 
@@ -43,7 +46,7 @@ This lab assumes you have:
 
      ![<Connect podman Catalog Image pcatalog>](./images/uds-connect-catalog-podman-image.png " ")
 
-### Task 2: Connect sysdba user to create a sharded schema user
+## Task 2: Connect sysdba user to create a sharded schema user
 
 3. Create a sharded schema user
 
@@ -153,7 +156,7 @@ This lab assumes you have:
     alter table transactions.payments add constraint payments_fk foreign key (account_id, country_cd) references accounts(account_id, country_cd);
     ```
 
-### Task 3. Insert data in parent sharded table: accounts
+## Task 3. Insert data in parent sharded table: accounts
 13. From the same database connection (already connected to transactions user from the catalog database), insert a few sample records for each sharding key (country_cd) defined in the create ddl statement for parent sharded table Accounts. Data are already inserted and below are for reference.
 
     ```
@@ -172,7 +175,7 @@ This lab assumes you have:
     commit;
     ```
 
-### Task 4. Create a Synchronous duplicated table ( a new feature in 23c )
+## Task 4. Create a Synchronous duplicated table ( a new feature in 23c )
 14. Duplicated tables are created when have same data needed on the catalog and all sharded DBs.
 
     ```
@@ -180,7 +183,7 @@ This lab assumes you have:
     create duplicated table dup_sync_1(payment_type_id number(5), payment_type varchar2(100),created_utc TIMESTAMP NOT NULL) SYNCHRONOUS;
     ```
 
-### Task 5. Insert sample data in Synchronous duplicated table: dup_sync_1
+## Task 5. Insert sample data in Synchronous duplicated table: dup_sync_1
 15. Data are already inserted and below are for reference.
     ```
     insert into dup_sync_1 (payment_type_id, payment_type,created_utc) values(1,'Electronic Fund Transfer', systimestamp);
