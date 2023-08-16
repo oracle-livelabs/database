@@ -26,24 +26,21 @@ This lab assumes you have:
 
 ## Task 1: Create user and tables
 
-1.
-
-	![Image alt text](images/sample1.png)
-
-Open a terminal window and execute below as opc user.
+1. Open a terminal window and execute below as opc user.
 
 <copy>
 sudo podman ps -a
 </copy>
+
 2. Connect podman primary image (dbmc)
 
 <copy>
 podman exec -it dbmc /bin/bash
 </copy>
 
-3. Execute step1 as the sysdba user.
+3. Execute step1 as the sysdba user. This will create the transaction user and provide necessary permission to the transaction user.
 
-4. Run the step2 and step3 as transaction user.
+4. Run the step2 and step3 as the newly created transaction user.
 
 ## Task 2: Load data into tables
 

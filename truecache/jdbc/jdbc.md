@@ -26,8 +26,8 @@ This lab assumes you have:
 
 1. Set JAVA_HOME by running the setjava17.sh
 
-	![Image alt text](images/sample2.png)
-
+2. Test the connection to true cache by running the BasicApp.sh. The successful outcome of the script 
+makes sure that jdbc is able to connect to true cache instance through the oracle.jdbc.useTrueCacheDriverConnection=true parameter.
 2. Run the application by running TransactionApp.sh , this will first run the application against primary for 2 minutes than it will run the application against true cache instance for 2 minutes with 50 threads.
 
 3. Observe the improve in performance while using true cache.
