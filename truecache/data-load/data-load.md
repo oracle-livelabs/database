@@ -1,10 +1,8 @@
-# Title of the Lab
+# Load data into database
 
 ## Introduction
 
-*Describe the lab in one or two sentences, for example:* This lab walks you through the steps to ...
-
-Estimated Time: 20 minutes
+*Estimated Time:* 20 minutes
 
 ### About Oracle True Cache
 Modern applications often require massive scalability in terms of both the number of connections and the amount of data that can be cached.
@@ -15,7 +13,6 @@ Oracle True Cache satisfies queries by using only data from its buffer cache. Li
 
 ### Objectives
 
-*List objectives for this lab using the format below*
 
 In this lab, you will:
 * Find how to create a  schema in in the newly created env, create tables.
@@ -23,18 +20,11 @@ In this lab, you will:
 
 ### Prerequisites (Optional)
 
-*List the prerequisites for this lab using the format below. Fill in whatever knowledge, accounts, etc. is needed to complete the lab. Do NOT list each previous lab as a prerequisite.*
-
 This lab assumes you have:
 * An Oracle Cloud account
 * All previous labs successfully completed
 
-
-*Below, is the "fold"--where items are collapsed by default.*
-
 ## Task 1: Create user and tables
-
-(optional) Task 1 opening paragraph.
 
 1.
 
@@ -58,14 +48,6 @@ podman exec -it dbmc /bin/bash
 ## Task 2: Load data into tables
 
 1. Run step4 as the transaction user
-
-  Use tables sparingly:
-
-  | Column 1 | Column 2 | Column 3 |
-  | --- | --- | --- |
-  | 1 | Some text or a link | More text  |
-  | 2 |Some text or a link | More text |
-  | 3 | Some text or a link | More text |
 
 
 You may now proceed to the next lab.

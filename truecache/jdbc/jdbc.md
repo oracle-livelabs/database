@@ -1,8 +1,7 @@
-# Title of the Lab
+# Use True Cache through JDBC
 
 ## Introduction
 
-*Describe the lab in one or two sentences, for example:* This lab walks you through the steps to ...
 
 Estimated Lab Time: 10 minutes
 
@@ -13,32 +12,27 @@ The application used here is a transaction processing application, which does va
 
 ### Objectives
 
-*List objectives for this lab using the format below*
-
 In this lab, you will:
 * Run the application while connecting to primary database 
 * Run the application while connecting to true cache and observe the difference in performance
 
 ### Prerequisites (Optional)
 
-*List the prerequisites for this lab using the format below. Fill in whatever knowledge, accounts, etc. is necessary to complete the lab. Do NOT list each previous lab as a prerequisite.*
-
 This lab assumes you have:
 * An Oracle Cloud account
 * All previous labs successfully completed
 
-
-*This is the "fold" - below items are collapsed by default*
-
 ## Task 1: Run the application
-
-(optional) Task 1 opening paragraph.
 
 1. Set JAVA_HOME by running the setjava17.sh
 
-	![Image alt text](images/sample1.png)
+	![Image alt text](images/sample2.png)
 
 2. Run the application by running TransactionApp.sh , this will first run the application against primary for 2 minutes than it will run the application against true cache instance for 2 minutes with 50 threads.
+
+3. Observe the improve in performance while using true cache.
+
+4. You could modify the TransactionApp.sh, to increase the number of users and duration of the test.
 
 ## Learn More
 
