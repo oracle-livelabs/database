@@ -6,6 +6,8 @@ This post explains how to use the [Chance.js](https://www.jsdelivr.com/package/n
 
 Estimated Time: 15 minutes
 
+[Lab 2](videohub:1_q4xy59m2)
+
 ### Objectives 
 
 In this lab you will have: 
