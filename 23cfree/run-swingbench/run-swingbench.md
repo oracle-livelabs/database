@@ -1,17 +1,22 @@
-# Create the JSON Duality Views
+# Run Swingbench
 
 ## Introduction
 
-This lab guides you through the setup steps to create the JSON duality views required to execute the rest of this workshop.
 
-Estimated Time: 10 minutes
+In this lab, we're diving deeper into Swingbench as we guide you through the process of running your first stress test. Now that you have Swingbench configured and ready, it's time to unleash its power to simulate real-world workloads on your database system.
+
+Stress testing is all about pushing your system to its limits and observing how it behaves under heavy loads. Swingbench will allow you to mimic user activities and transactions, giving you valuable insights into your database's performance characteristics. By the end of this lab, you'll have a stress test running and a wealth of data to analyze in the next session.
+
+
+Estimated Time: 5 minutes
 
 ### Objectives
 
 In this lab, you will:
 
-* Connect to your database user
-* Understand your data
+* **Select a Benchmark:** Understand the available benchmark types in Swingbench and choose an appropriate one for their use case.
+* **Configure Workload:** Customize workload parameters, including the number of users, transaction mix, and think time, to reflect real-world scenarios.
+* **Initiate Stress Test:** Start a Swingbench stress test and monitor its progress within the tool.
 
 ### Prerequisites
 
@@ -19,7 +24,7 @@ This lab assumes you have:
 
 * Installed Oracle Database 23c Free Developer Release
 * Successfully completed all previous labs
-* SQL Developer Web 23.1 or a compatible tool for running SQL statements*
+
 
 
 ## Task 1: Connecting to your database user
