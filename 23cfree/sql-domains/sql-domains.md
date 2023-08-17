@@ -26,6 +26,8 @@ This lab assumes you have:
 * All previous labs successfully completed
 * SQL Developer Web 23.1 or a compatible tool for running SQL statements
 
+[SQL 23c Domains walkthrough](videohub:1_2f1zmgrm)
+
 ## Task 1: Create a single column domain
 
 1. First, let's get familiar with the syntax. To create a SQL Domain, use `CREATE DOMAIN`:
