@@ -33,12 +33,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    sudo mkdir /u01
-    sudo chown oracle:oinstall /u01
-    mkdir /u01/downloads
-    mkdir /u01/app
-    mkdir /u01/app/oracle
-    mkdir /u01/app/oracle/ords
+    sudo -s
     </copy>
     ```
     ![Make Directories](images/install-1-2.png " ")
@@ -47,14 +42,14 @@ This lab assumes you have:
 
     ````
     <copy>
-    sudo netstat -anp|grep 1521
+    netstat -anp|grep 1521
     </copy>
     ````
     ![Check Port](images/install-1-3.png " ")
-    If any services are returned you can try and restart them and see if they move to another port. If nothing was returned continue to the next step. Restart the service using the "sudo systemctl restart" command. Make sure to replace the text below the the service from the previous command
+    If any services are returned you can try and restart them and see if they move to another port. If nothing was returned continue to the next step. For a majority of the services you can restart the service using the "sudo systemctl restart" command. Make sure to replace the text below the the service from the previous command. For some of the services you might have to look up how to restart them.
     ````
     <copy>
-    sudo systemctl restart <replace with service>
+    systemctl restart <replace with service>
     </copy>
     ````
     ![Restart Services](images/install-1-3a.png " ")
@@ -69,7 +64,7 @@ This lab assumes you have:
 4. Enable the developer repo to be able to run the prerequisites check as a part of the install
     ```
     <copy>
-    sudo dnf config-manager --set-enabled ol8_developer
+    dnf config-manager --set-enabled ol8_developer
     </copy>
     ```
     ![Enable Repository](images/install-1-4.png " ")
@@ -79,7 +74,7 @@ This lab assumes you have:
 1. Get the download for 23c Free
     ```
     <copy>
-    cd /u01/downloads
+    cd /tmp
     wget -q --show-progress https://download.oracle.com/otn-pub/otn_software/db-free/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
     </copy>
     ```
@@ -88,7 +83,7 @@ This lab assumes you have:
 2. Install the database software using the dnf command. This will take about 5-10 minutes.
     ```
     <copy>
-    sudo dnf -y localinstall /u01/downloads/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
+    dnf -y localinstall /u01/downloads/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
     </copy>
     ```
     ![Install Software](images/install-2-2.png " ")   
@@ -96,7 +91,7 @@ This lab assumes you have:
 3. Create the database. You will be prompted for a password to be used for the database accounts. You can use any password here but you will need it later so note it down. For my examples I will use Welcome123# This should take about 5-10 minutes.
     ```
     <copy>
-    sudo /etc/init.d/oracle-free-23c configure
+    /etc/init.d/oracle-free-23c configure
     </copy>
     ```
     ![Create Database](images/install-2-3.png " ")
@@ -111,7 +106,15 @@ This lab assumes you have:
 5. To see if your database is up and running you can use the following command
     ```
     <copy>
-    sudo /etc/init.d/oracle-free-23c status
+    /etc/init.d/oracle-free-23c status
+    </copy>
+    ```
+    ![Database Status](images/install-2-5.png " ")
+
+6. Exit out of root
+    ```
+    <copy>
+    exit
     </copy>
     ```
     ![Database Status](images/install-2-5.png " ")
@@ -126,7 +129,7 @@ This lab assumes you have:
     echo ". /usr/local/bin/oraenv" >> /home/oracle/.bashrc
     echo "unset ORAENV_ASK" >> /home/oracle/.bashrc
     echo "export JAVA_HOME=/usr/bin/java" >> /home/oracle/.bashrc
-    echo "export PATH=\$PATH:\$ORACLE_HOME/bin:/u01/app/oracle/ords/bin:/u01/app/oracle/sqlcl/bin" >> /home/oracle/.bashrc
+    echo "export PATH=\$PATH:\$ORACLE_HOME/bin" >> /home/oracle/.bashrc
 
     . /home/oracle/.bashrc
     </copy>
@@ -196,6 +199,7 @@ This lab assumes you have:
 * [Oracle Database 23c Free](https://www.oracle.com/database/free/)
 * [Oracle Database 23c Free VirtualBox](https://www.oracle.com/database/technologies/databaseappdev-vm.html)
 * [Oracle Database Container Registry (Search for 23c Free)] (https://container-registry.oracle.com/ords/f?p=113:4)
+* [Oracle Database 23c Free Installation](https://docs.oracle.com/en/database/oracle/oracle-database/23/xeinl/index.html#Oracle%C2%AE-Database-Free)
 
 ## Acknowledgements
 * **Author** - David Start, Database Product Management

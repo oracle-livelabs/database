@@ -32,6 +32,8 @@ This lab assumes you have:
 2. One thing to be aware of is this image has a newer version of Java installed on it and the environment variable JAVA_HOME is pointing at that. Some of the utilities require a higher version.
     ```
     <copy>
+    sudo dnf install -y java
+
     java -version
 
     echo $JAVA_HOME
@@ -39,13 +41,10 @@ This lab assumes you have:
     ```
     ![Java version](images/tools-1-2.png " ")
 
-3. Download and unzip the latest version of SQLcl
+3. Install SQLcl
     ```
     <copy>
-    cd /u01/app/oracle
-    wget -q --show-progress https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-latest.zip
-    unzip sqlcl-latest.zip
-    rm sqlcl-latest.zip
+    sudo dnf install -y sqlcl
     </copy>
     ```
     ![Download Software](images/tools-1-3.png " ")
@@ -73,13 +72,10 @@ This lab assumes you have:
 
 ## Task 2: Setup APEX
 
-1. Download and unzip the latest version of APEX
+1. Install APEX
     ```
     <copy>
-    cd /u01/app/oracle
-    wget -q --show-progress https://download.oracle.com/otn_software/apex/apex-latest.zip
-    unzip apex-latest.zip
-    rm apex-latest.zip
+    sudo dnf install -y oracle-apex23.1.noarch
     </copy>
     ```
     ![Download Software](images/tools-2-1.png " ")
@@ -87,7 +83,7 @@ This lab assumes you have:
 2. Run the install script into the <b>Pluggable</b> database. It's important that you install into the pluggable and not the container. Please review the architecture section of the APEX documentation in the additional information section for different deployment modes. This script will take about 5-7 minutes to complete.
     ```
     <copy>
-    cd /u01/app/oracle/apex
+    cd /opt/oracle/apex/23.1.0
     sql / as sysdba
     </copy>
     ```
@@ -168,10 +164,7 @@ This lab assumes you have:
 1. Download the latest version of ORDS.
     ```
     <copy>
-    cd /u01/app/oracle/ords
-    wget -q --show-progress https://download.oracle.com/otn_software/java/ords/ords-latest.zip
-    unzip ords-latest.zip
-    rm ords-latest.zip
+    sudo dnf install -y ords
     </copy>
     ```
     ![Download Software](images/tools-3-1.png " ")
@@ -179,7 +172,7 @@ This lab assumes you have:
 2. You will need to grant the correct privileges to the hol23c user.
     ```
     <copy>
-    cd /u01/app/oracle/ords/scripts/installer
+    cd /opt/oracle/ords/scripts/installer
     sql / as sysdba
     </copy>
     ```
@@ -203,8 +196,7 @@ This lab assumes you have:
 3. Copy the images directory from APEX to the ORDS directory
     ```
     <copy>
-    cd /u01/app/oracle/ords
-    cp -r /u01/app/oracle/apex/images .
+    cp -r /opt/oracle/apex/23.1.0/images /opt/oracle/ords
     </copy>
     ```
     ![Copying Directory](images/tools-3-3.png " ")
@@ -223,10 +215,10 @@ This lab assumes you have:
     - Configuration: 1 Configure and Start
     - Protocol: 1 HTTP
     - HTTP port: 8080
-    - Static resources location: /u01/app/oracle/ords/images
+    - Static resources location: /opt/oracle/ords/images
     ```
     <copy>
-    ords install
+    ords --config /etc/ords/config install
     </copy>
     ```
     ![Installing Software](images/tools-3-4.png " ")
@@ -266,7 +258,7 @@ This lab assumes you have:
 1. Restart ORDS. Wait about 30 seconds for it to finish starting before proceeding.
     ```
     <copy>
-    ords serve &
+    sudo systemctl start ords
     </copy>
     ```
     ![Start Service](images/tools-4-1.png " ")
