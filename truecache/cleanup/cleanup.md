@@ -8,7 +8,7 @@ Data cannot be recovered from destroyed resources.
 
 This lab walks you through the steps to running a Destroy Job
 
-Estimated Time - 5 minutes
+*Estimated Time:* 5 minutes
 
 ### Objectives
 

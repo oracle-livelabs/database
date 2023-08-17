@@ -2,6 +2,8 @@
 
 ## Introduction
 
+In this lab, you will create the transaction processing schema and load data into it.
+
 *Estimated Time:* 20 minutes
 
 ### About Oracle True Cache
@@ -28,15 +30,18 @@ This lab assumes you have:
 
 1. Open a terminal window and execute below as opc user.
 
+```
 <copy>
 sudo podman ps -a
 </copy>
+```
 
 2. Connect podman primary image (dbmc)
-
+```
 <copy>
 podman exec -it dbmc /bin/bash
 </copy>
+```
 
 3. Execute step1 as the sysdba user. This will create the transaction user and provide necessary permission to the transaction user.
 
