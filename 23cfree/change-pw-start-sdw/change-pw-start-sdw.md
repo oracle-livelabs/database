@@ -26,7 +26,10 @@ This lab assumes you have:
 2. Next set your environment. The oraenv command will set all of the environment variables based on your database. When prompted type FREE for the database name or if you supplied a different database name use that.
     ```
     [FREE:oracle@hol23cfdr:~]$ <copy>. oraenv</copy>
-     ORACLE_SID = [FREE] ? FREE
+    ```
+    ```
+     ORACLE_SID = [FREE] ? <copy>FREE</copy>
+
      The Oracle base has been set to /opt/oracle OR The Oracle base remains unchanged with value /opt/oracle.
     [FREE:oracle@hol23cfdr:~]$
 		```
@@ -42,7 +45,6 @@ This lab assumes you have:
     Version 23.2.0.0.0
 
     Copyright (c) 1982, 2023, Oracle.  All rights reserved.
-
 
     Connected to:
     Oracle Database 23c Free, Release 23.0.0.0.0 - Developer-Release
@@ -64,7 +66,7 @@ This lab assumes you have:
 
 5. To change the password for the user hol23c use the "alter user \[username\] identified by \[new password\]" command. The syntax below for the hol23c user, make sure to replace new\_password\_here to your new password. Throughout this workshop we will use the Welcome123 password.
     ```
-		<copy>alter user hol23c identified by </copy> [new_password_here];
+		<copy>alter user hol23c identified by </copy>[new_password_here];
 		```
     ```
     SQL> alter user hol23c identified by Welcome123;

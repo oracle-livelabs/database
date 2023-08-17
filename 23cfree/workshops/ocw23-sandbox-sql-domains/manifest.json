@@ -17,7 +17,7 @@
             "title": "Lab 1: Setup User",
             "description": "Change user password and start ORDS",
             "type": "livelabs",
-            "filename": "../../change-pw-start-sdw/change-pw-start-sdw.md"
+            "filename": "../../change-pw/change-pw-sql.md"
         },
         {
             "title": "Lab 2: Power Up with 23c SQL Features",
