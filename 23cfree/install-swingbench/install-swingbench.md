@@ -16,9 +16,9 @@ Estimated Time: 5 minutes
 
 In this lab, you will:
 * **Understand Swingbench's Role:** Grasp the significance of Swingbench as a tool for simulating realistic database workloads and stress testing.
-* **Install Swingbench:** Download and install Swingbench on their local machine or designated environment.
+* **Install Swingbench:** Download and install Swingbench on your local machine or designated environment.
 * **Configure Connection to Database:** Successfully configure Swingbench to connect to a target database for stress testing.
-* **Customize Configuration:** Familiarize themselves with key Swingbench configuration options for tailoring the workload simulation.
+* **Customize Configuration:** Learn key Swingbench configuration options for tailoring the workload simulation.
 
 
 ### Prerequisites
@@ -45,16 +45,15 @@ This lab assumes you have:
     ![Set environment](images/oraenv.png " ")
 
 
-3. Next click [here](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/swingbench02262023_jdk11.zip) to download the latest version of Swingbench.
+3. Next click **[here](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/23c/swingbench15082023_jdk11.zip)** to download the latest version of Swingbench.
 
 4. Once the download is complete, open a terminal or command prompt on your computer and navigate to the location where the file was saved.
 
     ```
     <copy>
-    unzip ~/Downloads/swingbench02262023_jdk11.zip -d ~/Downloads
+    unzip ~/Downloads/swingbench15082023_jdk11.zip -d ~/Downloads
     </copy>
 	```
-    ![unzip swingbench](images/downloadswing.png " ")
 
 5. Navigate to the directory where Swingbench is installed. If Swingbench is installed in the "swingbench" folder within your home directory, you can use the following command:
 
@@ -67,24 +66,29 @@ This lab assumes you have:
 
   ![Change to Swingbench directory](images/swingnav.png " ")
 
-6. Once you are in the "swingbench/bin" directory, run the following command to execute the Movie Stream Install Wizard:
+6. Once you are in the "swingbench/bin" directory, run the following command to execute the Order Entry Install Wizard:
+    > **Note:** You can also run the wizards from the command in a noninteractive mode where you specify all of the options but for this demo we will use the GUI  
 
     ```
     <copy>
-    ./moviewizard
+    ./oewizard
     </copy>
     ```
 
-    This command starts the Movie Stream Install Wizard, which guides you through the installation and configuration process for the Movie Stream workload.
-    ![Connect to the database](images/moviewizard.png " ")
+    This command starts the Order Entry Install Wizard, which guides you through the installation and configuration process for the Order Entry workload.
+    ![Connect to the database](images/oewizard.png " ")
 
-7. When the Movie Stream wizard opens, click **Next** to get started.
+7. When the Order Entry wizard opens, click **Next** to get started.
 
-8. Make sure the **Create the Movie Stream Schema** box is checked and click **Next**.
+8. When prompted make sure the **Version 2.0** is selected.
+
+    ![Showing the swingbench UI](images/version-two.png " ")
+
+9. Make sure the **Create the Order Entry Schema** box is checked and click **Next**.
 
     ![Showing the swingbench UI](images/create-schema.png " ")
 
-9. Under the "Connect string" box, copy (Ctrl + V) or type the following:
+10. Under the "Connect string" box, copy (Ctrl + V) or type the following:
 
     ```
     <copy>
@@ -102,10 +106,10 @@ This lab assumes you have:
     ```
     Once finished press **Next**
     
-    ![Showing the swingbench UI](images/movie-pass.png " ")
+    ![Showing the swingbench UI](images/movie-connect.png " ")
 
 
-12. Change the username to **movie** and leave the default password of movie, then click **Next** 
+12. Change the Schema's Tablespace to **users** and leave the default username and password of soe, then click **Next** 
 
     ![Showing the swingbench UI](images/movie.png " ")
 
@@ -121,91 +125,50 @@ This lab assumes you have:
 
     ![Showing the swingbench UI](images/parallelism.png " ")
 
-16. This step may take approximately 1-2 minutes to complete. You can continue to the next section while this process runs in the background.
+16. This step may take approximately 1-2 minutes to complete.
 
     ![Showing the swingbench UI](images/completing.png " ")
 
-17. To make this workshop as realistic as possible, let's introduce the business scenario you will be working with - **Oracle MovieStream**.
+17. Once the schema has been created **click** OK. You can now close out the Order Entry Schema builder.
 
-    ![Logo graphic of Oracle MovieStream](images/moviestream-logo.jpeg)
 
-    * Oracle MovieStream is a fictitious online movie streaming company. Customers log into Oracle MovieStream using their computers, tablets, and phones, where they are presented with a personalized list of movies based on their viewing history. The company is now looking for better, smarter ways to track performance, identify customers for targeted campaigns promoting new services and movies, and improve the streaming platform. The scenarios in this workshop are based on challenges that companies face in their businesses. We hope that the labs and workshops will provide you with insights into how Oracle can help you solve these common everyday business and technical challenges.
+## Task 2: Looking at our data
 
-    * During this workshop, we will primarily focus on three key tables: `genres`, `movie_details`, and `movies_genre_map`. As we progress through the upcoming labs, we will explore the creation of duality views spanning across these tables. Additionally, we will explore techniques for efficiently adding, updating, and manipulating the underlying data within these tables using the duality views.
-
-## Task 2: Start ORDS
-
-1. Open a new tab in the terminal by selecting **File** and **New Tab** 
-
-    ![Opening a new terminal](images/new-tab.png " ")
-
-2. Now you will need the Movie Schema to finish creating. Once its done, to enable the RESTful services for the new movie schema, sign into SQL*Plus using the newly created movie user. Once logged in, copy the following command into the terminal:
-
+1. If you don't already have a terminal open, open a new one. Lets take a look at what we just created. We can do this with a utility inside swingbench called sbutil. You need to navigate back to the bin directory where we ran the install wizard. If you are already there, skip to step two otherwise copy and paste the following command:
 
     ```
     <copy>
-    sqlplus movie/movie@//localhost:1521/FREEPDB1
-    </copy>
-    ```
-    ![Showing the terminal](images/sql-login.png " ")
-
-3. Run the following command in SQL*Plus:
-
-    ```
-    <copy>
-    BEGIN
-        ORDS.ENABLE_SCHEMA(p_enabled => TRUE, p_schema => 'MOVIE');
-        END;
-        /
-    </copy>
-    ```
-    ![Showing the terminal](images/ords-enable.png " ")
-
-4. Exit SQL*Plus by running the following command:
-
-    ```
-    <copy>
-    exit
-    </copy>
-    ```
-    ![Showing the terminal](images/exit1.png " ")
-
-5. To start ORDS, enter the following command in the same command prompt window:
-
-    ```
-	<copy>
-    ords serve &
+    cd Downloads/swingbench/bin
     </copy>
 	```
-    ![Showing the terminal](images/ords-serve.png " ")
-    ![Showing the terminal](images/ords-serve-message.png " ")
 
-6. If Google Chrome isnt running, go to **Activities** and then click on the Google Chrome symbol. If a new window doesn't appear, click **Google Chrome** and **New Window** at the top. 
-
-    ![opening a new chrome window](images/google.png " ")
-    ![opening a new chrome window](images/new-chrome-window.png " ")
-
-
-7. Copy and paste the following address into the browser. This is the address for SQL Developer Web on your machine. Note: If you did not start ORDs, ORDs stopped working or you closed that terminal in the previous lab, go back and complete the steps in that lab to start ORDs otherwise it will not be running to login here.
+2. The first thing we want to do is validate the schema was successfully created. From the bin directory run the following command
 
     ```
     <copy>
-    http://localhost:8080/ords/sql-developer
+    ./sbutil -cs //localhost:1521/FREEPDB1 -u soe -p soe -soe -val
     </copy>
+	```
+    ![Showing the swingbench UI](images/validate.png " ")
+
+3. We can see there is nothing invalid or missing. Lets take a look at what was created. From the bin directory run the following command
+
     ```
-
-8. Sign in to SQL Developer Web using the movie schema with the username movie and password movie.
-
-    ![Ords login](images/ords-url.png " ")
+    <copy>
+    ./sbutil -cs //localhost:1521/FREEPDB1 -u soe -p soe -soe -tables
+    </copy>
+	```
+    ![Showing the swingbench UI](images/sbutil.png " ")
 
 Congratulations! You have finished the setup for this workshop. You may now **proceed to the next lab** 
 
 
 ## Learn More
 
-* [Introducing Oracle Database 23c Free – Developer Release](https://blogs.oracle.com/database/post/oracle-database-23c-free)
+* [About Swingbench](https://www.dominicgiles.com/swingbench/#about-swingbench)
+* [About Order Entry in Swingbench](https://www.dominicgiles.com/swingbench/#setting-up)
 
 ## Acknowledgements
 * **Author** - Killian Lynch, Oracle Database Product Management, Product Manager
 * **Contributors** - Dominic Giles, Oracle Database Product Management, Distinguished Product Manager
-* **Last Updated By/Date** - Killian Lynch, Oracle Database Product Management, Product Manager, May 2023
+* **Last Updated By/Date** - Killian Lynch, Oracle Database Product Management, Product Manager, August 2023
