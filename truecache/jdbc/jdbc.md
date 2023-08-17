@@ -2,6 +2,7 @@
 
 ## Introduction
 
+In this lab, you will test the connection to true cache through jdbc and run the transaction processing application against primary database first and true cache instance afterwards and observe the improvement in performance. 
 
 Estimated Lab Time: 10 minutes
 
@@ -36,7 +37,6 @@ makes sure that jdbc is able to connect to True Cache instance through the oracl
 
 ## Learn More
 
--  **Oracle True Cache ** 
 [True Cache documentation for internal purposes] (https://docs-uat.us.oracle.com/en/database/oracle/oracle-database/23/odbtc/oracle-true-cache.html#GUID-147CD53B-DEA7-438C-9639-EDC18DAB114B)
 
 
