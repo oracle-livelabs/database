@@ -1,10 +1,10 @@
 {
-  "workshoptitle": "The Title of the Workshop is defined in the manifest",
+  "workshoptitle": "Securing Multitenant Databases Using Transparent Database Encryption (TDE)",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
-      "description": "The Introduction is always second for LiveLabs. The title and contents menu title match for the Introduction.",
+      "description": "Introduction.",
       "filename": "../../introduction/introduction.md"
     },
     {

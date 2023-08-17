@@ -18,17 +18,16 @@ As you go through the lesson we have also added best practices throughout the mo
 
 Watch the video below for an overview of Oracle Multitenant.
 
-[Back to Basics with Transparent Data Encryption (TDE)](https://youtu.be/JflshZKgxYs)
+[Back to Basics with Transparent Data Encryption (TDE)](youtube:JflshZKgxYs)
 
-Please *proceed to the next lab*.
+You may now proceed to the next lab.
 
 ## Learn more
 
-[Oracle Advanced Security Guide](https://docs.oracle.com/en/database/oracle/oracle-database/19/asoag/introduction-to-oracle-advanced-security.html)
-
-[Introduction to TDE](https://docs.oracle.com/en/database/oracle/oracle-database/19/asoag/introduction-to-transparent-data-encryption.html)
+- [Oracle Advanced Security Guide](https://docs.oracle.com/en/database/oracle/oracle-database/19/asoag/introduction-to-oracle-advanced-security.html)
+- [Introduction to TDE](https://docs.oracle.com/en/database/oracle/oracle-database/19/asoag/introduction-to-transparent-data-encryption.html)
 
 ## Acknowledgements
-
-- **Authors/Contributors** - Sean Provost, Mike Sweeney, Bryan Grenn, Bill Pritchett, Rene Fontcha
-- **Last Updated By/Date** - Sean Provost, Enterprise Architect, May 2023
+- **Authors** - Sean Provost, Enterprise Architect
+- **Contributors** - Mike Sweeney, Bryan Grenn, Bill Pritchett, Rene Fontcha
+- **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, August 2023
