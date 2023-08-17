@@ -1,5 +1,9 @@
 # Introduction
 
+## About This Workshop
+
+Run this hands-on workshop to learn how to use True Cache to improve scalability by offloading queries and reducing the number of requests and connections to the primary database. This workshop is based on a compute instance (a online transaction processing application) connected to a Primary database configured with True Cache. The demo application is a Java program using the 23c JDBC driver. Its simulates a high number of transactions for the primary database and how off loading the read only queries to true cache helps in application performance.
+
 ## About Oracle True Cache
 
 Oracle Database True Cache is an in-memory, consistent, and automatically managed SQL and key-value (object) cache. True Cache is conceptually a disk less Active Data Guard (ADG). Many large scale Web applications faces performance issues when a a database becomes the bottleneck. Run this hands-on workshop to learn how to use True Cache to improve scalability by offloading queries and reducing the number of requests and connections to the primary database.
@@ -11,7 +15,7 @@ True Cache can be used to scale a read-mostly application even without partition
 
 *Estimated Workshop Time:* 1 hour 
 
-![True Cache introduction](images/True Cache-intro.png " ")
+![True Cache introduction](https://oracle-livelabs.github.io/database/truecache/introduction/images/truecache-intro.png " ")
 
 ### Objectives
 Run this hands-on workshop to learn how to use True Cache to improve scalability by offloading queries and reducing the number of requests and connections to the primary database.
