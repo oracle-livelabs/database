@@ -10,6 +10,11 @@ Join us as we dive into Schema Privilege Management, log in as different users, 
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+
+[Schema Privilege Video](videohub:1_vj794ym6)
+
+
 ### Objectives
 
 * Understand schema privilege management in Oracle.

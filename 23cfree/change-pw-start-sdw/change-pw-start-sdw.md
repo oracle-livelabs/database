@@ -29,7 +29,6 @@ This lab assumes you have:
     ```
     ```
      ORACLE_SID = [FREE] ? <copy>FREE</copy>
-
      The Oracle base has been set to /opt/oracle OR The Oracle base remains unchanged with value /opt/oracle.
     [FREE:oracle@hol23cfdr:~]$
 		```
