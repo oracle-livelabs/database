@@ -29,7 +29,7 @@ This lab assumes you have:
     ![Open Terminal](images/tools-1-1.png " ")
 
 
-2. One thing to be aware of is this image has a newer version of Java installed on it and the environment variable JAVA_HOME is pointing at that. Some of the utilities require a higher version.
+2. A newer version of java will need to be installed and you will need to ensure the environment variable JAVA_HOME is pointing at it. Some of the utilities require a higher version.
     ```
     <copy>
     sudo dnf install -y java
@@ -76,6 +76,7 @@ This lab assumes you have:
     ```
     <copy>
     sudo dnf install -y oracle-apex23.1.noarch
+    sudo dnf install -y oracle-apex23.1-images.noarch
     </copy>
     ```
     ![Download Software](images/tools-2-1.png " ")
