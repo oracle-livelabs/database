@@ -28,6 +28,7 @@ This lab assumes you have:
 * Oracle Database 23c Free Developer Release
 * All previous labs successfully completed
 
+[SQL 23c Features walkthrough](videohub:1_7ggddw60)
 ## Task 1: Start SQL*Plus
 To dive into these features, we'll be using SQL*Plus - an interactive and batch query tool that is installed with every Oracle Database installation. It has a command-line user interface.
 
