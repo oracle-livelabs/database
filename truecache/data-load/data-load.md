@@ -30,18 +30,18 @@ This lab assumes you have:
 
 1. Open a terminal window and execute below as opc user.
 
-```
-<copy>
-sudo podman ps -a
-</copy>
-```
+    ```
+    <copy>
+    sudo podman ps -a
+    </copy>
+    ```
 
 2. Connect podman primary image (dbmc)
-```
-<copy>
-podman exec -it dbmc /bin/bash
-</copy>
-```
+    ```
+    <copy>
+    podman exec -it dbmc /bin/bash
+    </copy>
+    ```
 
 3. Execute step1 as the sysdba user. This will create the transaction user and provide necessary permission to the transaction user.
 
@@ -55,8 +55,6 @@ podman exec -it dbmc /bin/bash
 You may now proceed to the next lab.
 
 ## Learn More
-
--  **Oracle True Cache ** 
 [True Cache documentation for internal purposes] (https://docs-uat.us.oracle.com/en/database/oracle/oracle-database/23/odbtc/oracle-true-cache.html#GUID-147CD53B-DEA7-438C-9639-EDC18DAB114B)
 
 ## Acknowledgements
