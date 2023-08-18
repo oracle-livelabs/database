@@ -17,6 +17,8 @@ or cloud operations, data/media processing jobs, development or test environment
 
 _Estimated Time:_ 20 minutes
 
+[Walkthrough Lab 05: Deploy the Activity Tracking application using Container Instances](videohub:1_mwp455k5)
+
 ### Objectives
 
 * Deploy the application using Container Instance

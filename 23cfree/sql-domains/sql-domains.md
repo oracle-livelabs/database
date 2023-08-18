@@ -148,7 +148,7 @@ This lab assumes you have:
     Schwinn                   oracle.com
     King                      aol.com
     ```
-3. Another way to monitor SQl domains are data dictionary views such as `USER_DOMAIN`, `USER_DOMAIN_COLS`, and `USER_DOMAIN_CONSTRAINTS` (also with `ALL/DBA`).
+3. Another way to monitor SQL domains are data dictionary views such as `USER_DOMAIN`, `USER_DOMAIN_COLS`, and `USER_DOMAIN_CONSTRAINTS` (also with `ALL/DBA`).
 
     Here are some examples:
     ```
@@ -299,9 +299,11 @@ The 23c Oracle database supports not only the JSON datatype but also **JSON sche
 
 1. The following example shows how to use an inline schema definition in a `CREATE TABLE` command (the shorthand syntax without a check constraint).
     ```
+    <copy>
     create table person
     (id NUMBER,
     p_record JSON VALIDATE '<json-schema>')
+    </copy>
     ```
 
     SQL domains also support JSON validation now. The difference between the inline schema definition and the SQL domain is that a SQL domain stores a reference to the SQL domain (call by reference instead of call by value). If the SQL domain changes, so does the validation logic. If the SQL domain is dropped, validation does not happen and an error to this effect is raised.

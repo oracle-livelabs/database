@@ -42,7 +42,7 @@
             "filename": "../../prepare-source-and-target-databases/prepare-source-and-target-databases.md"
         },
         {
-            "title": "Lab 7: Register and Setup Migration",
+            "title": "Lab 7: Database Connection and Setup Migration",
             "filename": "../../register-and-migrate/create-registered-databases.md"
         },
         {

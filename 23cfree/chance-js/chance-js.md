@@ -6,6 +6,8 @@ This post explains how to use the [Chance.js](https://www.jsdelivr.com/package/n
 
 Estimated Time: 15 minutes
 
+[Lab 2](videohub:1_q4xy59m2)
+
 ### Objectives 
 
 In this lab you will have: 
@@ -97,6 +99,7 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
 1. The latest version available at the time of writing is 1.1.11, so let's download it into our mle folder so that it can be used by the database
     ```
     <copy>
+    echo "151.101.141.229 cdn.jsdelivr.net"| sudo tee --append /etc/hosts
     curl -Lo ./mle/chance.js https://cdn.jsdelivr.net/npm/chance@1.1.11/+esm 
     </copy>
     ```
@@ -560,14 +563,14 @@ If you've taken a look at the extended MLE module above, you may have seen some 
 
 * This would bring some interesting ability to populate the [JSON Relational Duality Views](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/loe.html) examples from the 23c FREE documentation.
 
-## Conclusion
+## Conclusion 
 * We've seen how to import an ES Module inside the Oracle database 23c FREE Developer Release thanks to the JavaScript MultiLingual Engine. We've also seen how dependencies resolution work using an MLE environment.
 
 * As you can see, the possibilities are infinite and benefiting from such a data generator for both simple values but also JSON documents is incredibly useful. This could be used for [Oracle Application Express](https://apex.oracle.com/en/) (APEX) applications, demos, random data for unit testing, etc.
 
 * And now, it's up to you!
 
-## Resources to continue learning
+## Learn More 
 * As Jeff Smith said in his [blog post on MLE JS Modules & Snippets](https://www.thatjeffsmith.com/archive/2023/04/oracle-23c-free-developer-release-mle-js-modules-snippets/), we _highly_ recommend reading the [23c JavaScript Developer Guide (Docs.)](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/).
 
 * You may want also to review Martin Bach's [blog post on Using JavaScript community modules in Oracle Database 23c Free - Developer Release](https://blogs.oracle.com/developers/post/using-javascript-community-modules-in-oracle-database-23c-free-developer-release) which I've stolen some of the commands used here.
