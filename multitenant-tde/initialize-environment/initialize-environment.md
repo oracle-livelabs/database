@@ -63,27 +63,28 @@ This lab assumes you have:
     clear
     cd ~oracle/labs
     rm -rf ~oracle/labs/*
-    wget -O novnc-multitenant-tde.zip BUCKET_LINK_HERE
-    unzip -qo novnc-multitenant-tde.zip
-    rm -f novnc-multitenant-tde.zip
+    wget -O novnc-multitenant.zip https://objectstorage.us-ashburn-1.oraclecloud.com/p/OsVZaMBsS-TArKa1EQNkZSB0SGptkNZwSd21lloGfE27nsRinQNvRm0G9ekds4zB/n/c4u04/b/livelabsfiles/o/labfiles/novnc-multitenant.zip
+    unzip -qo novnc-multitenant.zip
+    rm -f novnc-multitenant.zip
     cd multitenant
     chmod +x *.sh
     ls -ltrh
+    chmod +x tde/*.sh
+    ls -ltrh tde
     </copy>
     ```
 
     ![](./images/ADD_IMAGE_HEREinit-multitenant.png " ")
 
-<!-- for 21c image only.
-2. Create Database Links. During this workshop you will use database links *cdb1_dblink* and *cdb2_dblink* to perform tasks across between the two CDBs
+<!-- for 21c image only. -->
+2. Create Database Links. During this workshop you will use database links *`cdb1_dblink`* and *`cdb2_dblink`* to perform tasks across between the two CDBs
 
     ```
     <copy>
     cat initCDBs.sh
     . ./initCDBs.sh
     </copy>
-    ``` 
-    -->
+    ```
 
 You may now proceed to the next lab.
 
@@ -156,5 +157,6 @@ You may now proceed to the next lab.
     ```
 
 ## Acknowledgements
-- **Authors/Contributors** - Sean Provost, Mike Sweeney, Bryan Grenn, Bill Pritchett, Rene Fontcha
-- **Last Updated By/Date** - Sean Provost, Enterprise Architect, May 2023
+* **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
+- **Contributors** - Sean Provost, Mike Sweeney, Bryan Grenn, Bill Pritchett
+- **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, August 2023
