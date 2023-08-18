@@ -28,29 +28,60 @@ This lab assumes you have:
 
 ## Task 1: Create user and tables
 
-1. Open a terminal window and execute below as opc user.
+1. Open a terminal window and connect to the podman container for primary database
 
     ```
     <copy>
-    sudo podman ps -a
+    podman exec -it dbmc1 /bin/bash
     </copy>
     ```
-
-2. Connect podman primary image (dbmc)
+![primary database](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataload.png " ")
+2. Connect to the database as a sysdba user
     ```
     <copy>
-    podman exec -it dbmc /bin/bash
+    sqlplus / as sysdba
     </copy>
     ```
 
-3. Execute step1 as the sysdba user. This will create the transaction user and provide necessary permission to the transaction user.
+3. Alter session to login to PDB
+    ```
+    <copy>
+    alter session set container=PRODPDB;
+    </copy>
+    ```
 
-4. Run the step2 and step3 as the newly created transaction user.
+4. Execute step1 as the sysdba user. This will create the transaction user and provide necessary permission to the transactions user.
+
+![dataload step1](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep1.png " ")
+
+4. Log on to SALES service as the transactions user and run the step2 and step3.
+
+![dataload step3](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep3.png " ")
 
 ## Task 2: Load data into tables
 
-1. Run step4 as the transaction user
+1. Run step4 as the transactions user
+![dataload step4](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep4.png " ")
 
+2. After completion of step4, it should display the commit complete message.
+![dataload commit](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadcommit.png " ")
+
+## Task 3: Verify True Cache 
+
+1. Open a terminal window and connect to the podman container for true cache.
+    ```
+    <copy>
+    podman exec -it tcmc1 /bin/bash
+    </copy>
+    ```
+![dataload truecache](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecache.png " ")
+
+2. Login to the database using the transaction user.
+![dataload truecache login](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecachelogin.png " ")
+
+
+3. Verify the role of the database.
+![dataload truecache verify](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecacheverify.png " ")
 
 You may now proceed to the next lab.
 

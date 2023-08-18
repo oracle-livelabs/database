@@ -29,13 +29,14 @@ This lab assumes you have:
 
 2.  Open a terminal session and proceed as indicated below to validate the services.
 
-    - Oracle primary container Details
+    - Log on to Podman and check for podman containers: 
 
         ```
         <copy>
         sudo podman ps -a
         </copy>
         ```
+        ![podman containers](https://oracle-livelabs.github.io/database/truecache/initialize-environment/images/truecache-podman.png " ")
 
     - If a container is stopped and not in running state then try to restart it by using below docker command.
 

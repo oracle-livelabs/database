@@ -25,15 +25,24 @@ This lab assumes you have:
 
 ## Task 1: Run the application
 
-1. Set JAVA_HOME by running the setjava17.sh
+1. Login to application podman container
 
-2. Test the connection to True Cache by running the BasicApp.sh. The successful outcome of the script 
-makes sure that jdbc is able to connect to True Cache instance through the oracle.jdbc.useTrue CacheDriverConnection=true parameter.
-2. Run the application by running TransactionApp.sh , this will first run the application against primary for 2 minutes than it will run the application against True Cache instance for 2 minutes with 50 threads.
+    ```
+    <copy>
+    podman exec -it appmc1 /bin/bash
+    </copy>
+    ```
+![app container](https://oracle-livelabs.github.io/database/truecache/jdbc/images/appcontainer.png " ")
 
-3. Observe the improve in performance while using True Cache.
+2. Test the connection to True Cache by running the BasicApp.sh present in /stage/clientapp directory. The successful outcome of the script makes sure that jdbc is able to connect to True Cache instance through the oracle.jdbc.useTrue CacheDriverConnection=true parameter.
+![basic app](https://oracle-livelabs.github.io/database/truecache/jdbc/images/basicapp.png " ")
 
-4. You could modify the TransactionApp.sh, to increase the number of users and duration of the test.
+3. Run the application by running TransactionApp.sh , this will first run the application against primary for 2 minutes than it will run the application against True Cache instance for 2 minutes with 50 threads.
+![transaction app](https://oracle-livelabs.github.io/database/truecache/jdbc/images/transactionapp.png " ")
+
+4. Observe the improve in performance while using True Cache.
+
+5. You could modify the TransactionApp.sh, to increase the number of users and duration of the test.
 
 ## Learn More
 
