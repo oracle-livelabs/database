@@ -29,7 +29,7 @@ This lab assumes you have:
 
     ![Open Terminal](images/install-1-1.png " ")
 
-2. Create the directories needed for this workshop.
+2. Switch to root for the next set of commands including the install
 
     ```
     <copy>
@@ -83,7 +83,7 @@ This lab assumes you have:
 2. Install the database software using the dnf command. This will take about 5-10 minutes.
     ```
     <copy>
-    dnf -y localinstall /u01/downloads/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
+    dnf -y localinstall /tmp/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
     </copy>
     ```
     ![Install Software](images/install-2-2.png " ")   
@@ -111,7 +111,7 @@ This lab assumes you have:
     ```
     ![Database Status](images/install-2-5.png " ")
 
-6. Exit out of root
+6. Exit out of root and back to oracle
     ```
     <copy>
     exit
@@ -121,7 +121,7 @@ This lab assumes you have:
 
 ## Task 3: Environment and User Setup
 
-1. To set your environment each time Oracle logs in add these lines to your profile. This will specifically set it for the FREE database. Also this adds SQLcl and ORDS to your path.
+1. To set your environment each time Oracle logs in add these lines to your profile. This will specifically set it for the FREE database.
     ```
     <copy>
     echo "export ORAENV_ASK=NO" >> /home/oracle/.bashrc

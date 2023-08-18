@@ -29,7 +29,7 @@ This lab assumes you have:
     ![Open Terminal](images/tools-1-1.png " ")
 
 
-2. A newer version of java will need to be installed and you will need to ensure the environment variable JAVA_HOME is pointing at it. Some of the utilities require a higher version.
+2. A newer version of java will be installed and you will need to ensure the environment variable JAVA_HOME is pointing at it. Some of the utilities require a higher version.
     ```
     <copy>
     sudo dnf install -y java
@@ -41,7 +41,7 @@ This lab assumes you have:
     ```
     ![Java version](images/tools-1-2.png " ")
 
-3. Install SQLcl
+3. Install SQLcl using dnf.
     ```
     <copy>
     sudo dnf install -y sqlcl
@@ -49,7 +49,7 @@ This lab assumes you have:
     ```
     ![Download Software](images/tools-1-3.png " ")
 
-4. Test out SQLcl by connecting to the database. Notice the command is sql not sqlplus
+4. Test out SQLcl by connecting to the database. Notice the command is sql not sqlplus.
     ```
     <copy>
     sql / as sysdba
@@ -57,7 +57,7 @@ This lab assumes you have:
     ```
     ![Database Login](images/tools-1-4.png " ")
 
-5. You can explore the database if you want. When you get done type exit
+5. You can explore the database if you want. When you get done type exit.
     ```
     <copy>
     show pdbs
@@ -72,7 +72,7 @@ This lab assumes you have:
 
 ## Task 2: Setup APEX
 
-1. Install APEX
+1. Install APEX using dnf.
     ```
     <copy>
     sudo dnf install -y oracle-apex23.1.noarch
@@ -162,7 +162,7 @@ This lab assumes you have:
 
 ## Task 3: Setup ORDS
 
-1. Download the latest version of ORDS.
+1. Install ORDS using the dnf command.
     ```
     <copy>
     sudo dnf install -y ords
@@ -226,6 +226,7 @@ This lab assumes you have:
 
 5. After the installation has completed, the screen stops scrolling and you see the line "Oracle REST Data Services initialized" Stop ORDS by pressing CTRL-C
     ![Stop Service](images/tools-3-5.png " ")
+
 6. Enable hol23c the ability to use ORDS.
     ```
     <copy>
