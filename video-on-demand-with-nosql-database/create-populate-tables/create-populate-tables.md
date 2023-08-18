@@ -11,6 +11,8 @@ create examples of both tables.
 
 _Estimated Time:_ 7 minutes
 
+[Walkthrough Lab 03: Create Tables, Load Tables](videohub:1_kon3yjis)
+
 ### Objectives
 
 * Create 2 tables with provisioned reads/sec, writes/sec, and GB storage
