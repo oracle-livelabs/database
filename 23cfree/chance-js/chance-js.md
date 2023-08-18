@@ -6,6 +6,8 @@ This post explains how to use the [Chance.js](https://www.jsdelivr.com/package/n
 
 Estimated Time: 15 minutes
 
+[Lab 2](videohub:1_q4xy59m2)
+
 ### Objectives 
 
 In this lab you will have: 
@@ -97,6 +99,7 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
 1. The latest version available at the time of writing is 1.1.11, so let's download it into our mle folder so that it can be used by the database
     ```
     <copy>
+    echo "151.101.141.229 cdn.jsdelivr.net"| sudo tee --append /etc/hosts
     curl -Lo ./mle/chance.js https://cdn.jsdelivr.net/npm/chance@1.1.11/+esm 
     </copy>
     ```

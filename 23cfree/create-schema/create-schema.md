@@ -40,13 +40,13 @@ This lab assumes you have:
     ![Set environment](images/oraenv.png " ")
 
 
-3. Next click [here](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/swingbench02262023_jdk11.zip) to download the latest version of Swingbench.
+3. Next click [here](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/23c/swingbench15082023_jdk11.zip) to download the latest version of Swingbench.
 
 4. Once the download is complete, open a terminal or command prompt on your computer and navigate to the location where the file was saved.
 
     ```
     <copy>
-    unzip ~/Downloads/swingbench02262023_jdk11.zip -d ~/Downloads
+    unzip ~/Downloads/swingbench15082023_jdk11.zip -d ~/Downloads
     </copy>
 	```
     ![unzip swingbench](images/downloadswing.png " ")
@@ -119,6 +119,14 @@ This lab assumes you have:
 16. This step may take approximately 1-2 minutes to complete. You can continue to the next section while this process runs in the background.
 
     ![Showing the swingbench UI](images/completing.png " ")
+
+17. To make this workshop as realistic as possible, let's introduce the business scenario you will be working with - **Oracle MovieStream**.
+
+    ![Logo graphic of Oracle MovieStream](images/moviestream-logo.jpeg)
+
+    * Oracle MovieStream is a fictitious online movie streaming company. Customers log into Oracle MovieStream using their computers, tablets, and phones, where they are presented with a personalized list of movies based on their viewing history. The company is now looking for better, smarter ways to track performance, identify customers for targeted campaigns promoting new services and movies, and improve the streaming platform. The scenarios in this workshop are based on challenges that companies face in their businesses. We hope that the labs and workshops will provide you with insights into how Oracle can help you solve these common everyday business and technical challenges.
+
+    * During this workshop, we will primarily focus on three key tables: `genres`, `movie_details`, and `movies_genre_map`. As we progress through the upcoming labs, we will explore the creation of duality views spanning across these tables. Additionally, we will explore techniques for efficiently adding, updating, and manipulating the underlying data within these tables using the duality views.
 
 ## Task 2: Start ORDS
 

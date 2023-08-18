@@ -15,7 +15,7 @@
       },
       {
           "title": "Lab 1: Setup User",
-          "description": "Creating the schema including JSON Duality Views",
+          "description": "Setup User",
           "type": "livelabs",
           "filename": "../../change-pw/change-pw.md"
       },
