@@ -28,6 +28,7 @@ This lab assumes you have:
 * Oracle Database 23c Free Developer Release
 * All previous labs successfully completed
 
+[SQL 23c Features walkthrough](videohub:1_7ggddw60)
 ## Task 1: Start SQL*Plus
 To dive into these features, we'll be using SQL*Plus - an interactive and batch query tool that is installed with every Oracle Database installation. It has a command-line user interface.
 
@@ -44,7 +45,7 @@ To dive into these features, we'll be using SQL*Plus - an interactive and batch 
     ```
 
 ## Task 2: FROM clause - now optional
-An interesting feature introduced in Oracle Database 23c is optionality of FROM clause in SELECT statements. Up to this version this clause was obligatory.
+An interesting feature introduced in Oracle Database 23c is optionality of FROM clause in SELECT statements. Up to this version the FROM clause was obligatory.
 
 1. For example, consider the following statement:
     ```
@@ -57,11 +58,10 @@ An interesting feature introduced in Oracle Database 23c is optionality of FROM 
     ORA-00923: FROM keyword not found where expected
     ```
 
-    However, this SQL Developer Web is using Oracle Database 23c, so we can successfully execute the statement. Try now by entering this into the workspace and clicking "run".
+    However, in Oracle Database 23c we can successfully execute the statement. Try now in SQL*Plus.
     ```
     <copy>SELECT sysdate;</copy>
     ```
-    ![run buttons](images/run_buttons.png)
 
     Success! This feature ensures better compatibility across databases.
     ```
@@ -77,40 +77,42 @@ Oracle Database 23c introduces the new BOOLEAN datatype. This leverages the use 
 1. To see this in action, let's first, we'll create a table called TEST_BOOLEAN.
     ```
     <copy>
-    create table if not exists TEST_BOOLEAN
-    ( name VARCHAR2(100),
-    IS_SLEEPING BOOLEAN);
+    CREATE TABLE TEST_BOOLEAN (name VARCHAR2(100), IS_SLEEPING BOOLEAN);
     </copy>
     Table created.​
     ```
 
-2. Let's fill our new table with data. The value `IS_SLEEPING` will be set to `FALSE` as default.
+2. Let's fill our new table with data. The value `IS_SLEEPING` will be `NOT NULL` set to `FALSE` as default.
     ```
-    <copy>alter table TEST_BOOLEAN modify
-        (IS_SLEEPING boolean NOT NULL),
-        (IS_SLEEPING default FALSE);</copy>
+    <copy>ALTER TABLE TEST_BOOLEAN modify (IS_SLEEPING boolean NOT NULL);
+    </copy>
     Table altered.
     ```
-    Here, you can see the different types of Boolean input for Mick, Keith, and Ron. All are valid.
-    This one uses the default "FALSE" value.
     ```
-    <copy>insert into TEST_BOOLEAN (name) values ('Mick');</copy>
+    <copy>ALTER TABLE TEST_BOOLEAN modify (IS_SLEEPING default FALSE);
+    Table altered.
+    </copy>
+    ```
+    Here, you can see the different types of Boolean input for Mick, Keith, and Ron. All are valid.
+    This one uses the default "FALSE" value - Mick is not sleeping.
+    ```
+    <copy>INSERT INTO TEST_BOOLEAN (name) values ('Mick');</copy>
     ​1 row created.​
     ```
-    This one uses a "NO" value.
+    This one uses a "NO" value - Keith is not sleeping.
     ```
-    <copy>insert into TEST_BOOLEAN (name, is_sleeping) values ('Keith','NO');</copy>
+    <copy>INSERT INTO TEST_BOOLEAN (name, is_sleeping) values ('Keith','NO');</copy>
     ​1 row created.
     ```
-    This row uses a "1" value.
+    This row uses a "1" value - Ron is sleeping.
     ```
-    <copy>insert into TEST_BOOLEAN (name, is_sleeping) values ('Ron',1);</copy>
+    <copy>INSERT INTO TEST_BOOLEAN (name, is_sleeping) values ('Ron',1);</copy>
     1 row created.
     ```
 
 3. Now let's see the see some results based on our Boolean values.
     ```
-    <copy>select name from test_boolean where not is_sleeping;</copy>
+    <copy>SELECT name FROM test_boolean WHERE NOT is_sleeping;</copy>
     NAME
     --------------------------------------------------------------------------------
     Mick
@@ -119,7 +121,7 @@ Oracle Database 23c introduces the new BOOLEAN datatype. This leverages the use 
 
     ```
     <copy>set linesize window
-    select * from test_boolean;</copy>
+    SELECT * FROM test_boolean;</copy>
 
     NAME                                                                                                 IS_SLEEPING
     ---------------------------------------------------------------------------------------------------- -----------
@@ -150,6 +152,8 @@ Oracle Database 23c introduces the new BOOLEAN datatype. This leverages the use 
     ```
 
 3. Similarly, we can use this feature to create tables, if they do not already exist. Let's go ahead and create that DEPT table.
+    >NOTE: Any trailing numbers when pasting these into the terminal will not effect the command.select
+
     ```
     <copy>
     CREATE TABLE IF NOT EXISTS DEPT
@@ -230,7 +234,7 @@ Starting from Oracle database 23c, table values constructor has been extended. I
 
 1. The following statement looks like a kind of table function on the fly.
     ```
-    <copy>select * from (VALUES (50,'HR'), (60,'DEV'), (70,'AI')) virt_dept (deptno, dname);</copy>
+    <copy>SELECT * FROM (VALUES (50,'HR'), (60,'DEV'), (70,'AI')) virt_dept (deptno, dname);</copy>
 
         DEPTNO DNA
     ---------- ---
@@ -284,9 +288,16 @@ This clause has been implemented long ago as a part of `EXECUTE IMMEDIATE` state
     ```
 
     ```
-    <copy>VARIABLE old_salary NUMBER
-    VARIABLE new_salary NUMBER
-
+    <copy>VARIABLE old_salary NUMBER;
+    </copy>
+    ```
+    ```
+    <copy>
+    VARIABLE new_salary NUMBER;
+    </copy>
+    ```
+    ```
+    <copy>
     UPDATE emp
         SET sal=sal+1000
         WHERE ename = 'KING'
@@ -296,14 +307,18 @@ This clause has been implemented long ago as a part of `EXECUTE IMMEDIATE` state
     ```
 
     ```
-    <copy>PRINT old_salary</copy>
+    <copy>
+    PRINT old_salary;
+    </copy>
     OLD_SALARY
     ----------
         5000
     ```
 
     ```
-    <copy>PRINT new_salary</copy>
+    <copy>
+    PRINT new_salary;
+    </copy>
     NEW_SALARY
     ----------
         6000
@@ -311,27 +326,22 @@ This clause has been implemented long ago as a part of `EXECUTE IMMEDIATE` state
 
 ## Task 9: Joins in UPDATE and DELETE
 
-You may update table data via joins - based on foreign table conditions. There is no need for sub selects or `IN` clause. 
+You may update table data via joins - based on foreign table conditions. There is no need for sub selects or `IN` clause.
 1. For example, instead of using this statement prior to 23c:
     ```
-    update emp e set e.sal=e.sal*2
-    where e.deptno in
-    (select d.deptno from dept d where e.deptno=d.deptno
-    and d.dname='RESEARCH')
+    UPDATE emp e set e.sal=e.sal*2
+    WHERE e.deptno in
+    (SELECT d.deptno FROM dept d WHERE e.deptno=d.deptno
+    and d.dname='RESEARCH');
     ```
 
     With Oracle 23c, you can now use:
     ```
-    <copy>update emp e set e.sal=e.sal*2
-    from dept d
-    where e.deptno=d.deptno
+    <copy>UPDATE emp e set e.sal=e.sal*2
+    FROM dept d
+    WHERE e.deptno=d.deptno
     and d.dname='RESEARCH';</copy>
     5 rows updated.
-    ```
-    ```
-    <copy>
-    select * from user_annotations_usage;
-    </copy>
     ```
 
 ## Task 10: Annotations, new metadata for database objects
@@ -343,17 +353,18 @@ With annotations you may store and retrieve metadata about a database objects. Y
 
     ```
     <copy>
-    create table emp_annotated
-    ( empno number annotations(identity, display 'person_identity', details 'person_info'),
+    CREATE TABLE emp_annotated
+    (empno number annotations(identity, display 'person_identity', details 'person_info'),
     ename varchar2(50),
     salary number annotations (display 'person_salary', col_hidden))
-    annotations (display 'employee_table')
-    /
+    annotations (display 'employee_table');
     </copy>
     ```
     Data Dictionary views such as `USER_ANNOTATIONS` and `USER_ANNOTATIONS_USAGE` can help to monitor the usage.
     ```
-    <copy>select * from user_annotations_usage;</copy>
+    <copy>
+    SELECT * FROM user_annotations_usage;
+    </copy>
     ```
 
 ## Task 11: "Light weight object types" with SQL Domains
@@ -362,25 +373,41 @@ A SQL domain is a dictionary object that belongs to a schema and encapsulates a 
 SQL Domains allow users to declare the intended usage for columns. They are data dictionary objects so that abstract domain specific knowledge can be easily reused.
 
 1. We'll look at these in more detail in the next lab, but for now, let's try a quick example. We'll create a domain named `yearbirth` and table named `person`.
+    Domain creation is for admin level users. First, exit from sql*plus, then log in as sysdba.
     ```
-    <copy>create domain yearbirth as number(4)
+    <copy>
+    exit
+    </copy>
+    ```
+    ```
+    <copy>
+    sqlplus / as sys admin
+    </copy>
+    ```
+2. Now create the domain `yearbirth` and the table `person`.
+    ```
+    <copy>CREATE DOMAIN yearbirth as number(4)
         constraint check ((trunc(yearbirth) = yearbirth) and (yearbirth >= 1900))
         display (case when yearbirth < 2000 then '19-' ELSE '20-' end)||mod(yearbirth, 100)
         order (yearbirth -1900)
         annotations (title 'yearformat');
-
-    create table person
-        ( id number(5),
+    Table created.
+    </copy>
+    ```
+    ```
+    <copy>
+    CREATE TABLE person
+        (id number(5),
         name varchar2(50),
         salary number,
         person_birth number(4) DOMAIN yearbirth
         )
-        annotations (display 'person_table');</copy>
-
+        annotations (display 'person_table');
+    </copy>
     Table created.
     ```
     ```
-    <copy>desc person</copy>
+    <copy>desc person;</copy>
     ```
 
     ```
@@ -389,17 +416,17 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     ID                                                                                  NUMBER(5)
     NAME                                                                                VARCHAR2(50)
     SALARY                                                                              NUMBER
-    PERSON_BIRTH                                                                        NUMBER(4) SCOTT.YEARBIRTH
+    PERSON_BIRTH                                                                        NUMBER(4) SYS.YEARBIRTH
     ```
 
 2. Now let's add data to our table.
     ```
-    <copy>insert into person values (1,'MARTIN',3000, 1988);</copy>
+    <copy>INSERT INTO person values (1,'MARTIN',3000, 1988);</copy>
     ```
 
 3. With the new function `DOMAIN_DISPLAY` you can display the property.
     ```
-    <copy>select DOMAIN_DISPLAY(person_birth) from person;</copy>
+    <copy>SELECT DOMAIN_DISPLAY(person_birth) FROM person;</copy>
     ```
 
     ```
@@ -410,7 +437,7 @@ SQL Domains allow users to declare the intended usage for columns. They are data
 
 4. Domain usage and Annotations can be monitored with data dictionary views.
     ```
-    <copy>select * from user_annotations_usage;</copy>
+    <copy>SELECT * FROM user_annotations_usage;</copy>
     ```
 
     ```
@@ -443,4 +470,4 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 * **Author** - Ulrike Schwinn, Distinguished Data Management Expert; Hope Fisher, Program Manager
 * **Contributors** - Witold Swierzy, Data Management Expert; Stephane Duprat, Technical End Specialist
-* **Last Updated By/Date** - Hope Fisher, June 2023
+* **Last Updated By/Date** - Hope Fisher, Aug 2023
