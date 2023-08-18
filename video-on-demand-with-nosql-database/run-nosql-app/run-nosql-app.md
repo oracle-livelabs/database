@@ -7,6 +7,8 @@ the tables we created, load data, and execute queries using a GraphQL applicatio
 
 _Estimated Time:_ 16 minutes
 
+[Walkthrough Lab 04: Run the Activity Tracking application](videohub:1_0firnbxx)
+
 ### Objectives
 
 * Understand the different tables
