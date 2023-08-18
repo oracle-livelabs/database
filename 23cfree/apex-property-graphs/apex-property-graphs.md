@@ -6,9 +6,8 @@ In this lab you will view the queries created the graph (that is, `bank_graph`) 
 
 Estimated Time: 10 minutes.
 
-<!-- Watch the video below for a quick walk through of the lab. -->
-
-<!-- update video link. Previous iteration: [](youtube:XnE1yw2k5IU) -->
+Watch the video below for a quick walk-through of the lab. 
+[Walkthrough](videohub:1_ypjlr8es)
 
 ### Objectives
 Learn how to:
