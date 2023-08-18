@@ -37,7 +37,6 @@ You may now **proceed to the next lab**
 
 - [Achieving Data Sovereignty with Oracle Sharding : Release 23 Internal link](https://docs.oracle.com/en/database/oracle/oracle-database/21/shard/achieving-data-sovereignty-oracle-sharding1.html#GUID-4AA1D64A-F89B-462A-BA4E-F04038665999)
 
-You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
