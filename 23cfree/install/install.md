@@ -38,7 +38,7 @@ This lab assumes you have:
     ```
     ![Make Directories](images/install-1-2new.png " ")
 
-3. Before installing you should check to see if anything is running on port 1521. This is what the database configure command will use when creating the listener. If it cannot it will try and use another port. If a service is running on that port you can try and restart it to see if it will restart on another port. If you choose to run with a different port then just make sure to adjust the commands as you go with the correct port.
+3. Before installing you should check to see if anything is running on port 1521. **If nothing is running on port 1521 you can skip to the next step.** This port is what the database configure command will use when creating the listener. If it cannot use the port it will try and use another port. You can either reboot the server and see if the service using 1521 moves to another port or restart the service. If you choose to not to move the service and just let the database run on a port other than 1521 just make sure to adjust the commands later in the workshop to use the new port.
 
     ````
     <copy>
@@ -46,28 +46,41 @@ This lab assumes you have:
     </copy>
     ````
     ![Check Port](images/install-1-3.png " ")
-    If any services are returned you can try and restart them and see if they move to another port. If nothing was returned continue to the next step. For a majority of the services you can restart the service using the "sudo systemctl restart" command. Make sure to replace the text below the the service from the previous command. For some of the services you might have to look up how to restart them.
+
+    **Option 1:** If any services are returned you could try and reboot the server and see if they move to a different port. If you reboot you will need to wait for the server to restart and then reconnect to it and then relogin as root.
+
+    ````
+    <copy>
+    reboot
+    </copy>
+    ````
+    ![Reboot](images/install-1-3anew.png " ")
+
+    **Option 2:** The other option is to try and restart the services see if they move to another port. For a majority of the services you can restart the service using the "sudo systemctl restart" command. Make sure to replace the text below the the service from the previous command. For some of the services you might have to look up how to restart them.
+
     ````
     <copy>
     systemctl restart <replace with service>
     </copy>
     ````
-    ![Restart Services](images/install-1-3a.png " ")
-    Verify port 1521 is available
+    ![Restart Services](images/install-1-3bnew.png " ")
+
+4. Verify port 1521 is available
+
     ````
     <copy>
     netstat -anp|grep 1521
     </copy>
     ````
-    ![Verify Port](images/install-1-3b.png " ")
+    ![Verify Port](images/install-1-3cnew.png " ")
 
-4. Enable the developer repo to be able to run the prerequisites check as a part of the install
+5. Enable the developer repo to be able to run the prerequisites check as a part of the install
     ```
     <copy>
     dnf config-manager --set-enabled ol8_developer
     </copy>
     ```
-    ![Enable Repository](images/install-1-4new.png " ")
+    ![Enable Repository](images/install-1-5new.png " ")
 
 ## Task 2: Database Setup
 
