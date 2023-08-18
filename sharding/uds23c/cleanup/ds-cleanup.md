@@ -21,14 +21,14 @@ Estimated Time - 5 minutes
 
 ## Task 1: Terminate a Provisioned Oracle Autonomous Database Instance
 
-1. Login to Oracle cloud
+1. Login to Oracle Cloud
 
 2. Open the navigation menu and click **Developer Services**. Under **Resource Manager**, click **Stacks**.
   ![stack](./images/stack.png " ")
 
 3. Choose the compartment that you chose in Lab 1 to install your stack (on the left side of the page).
 
-4.  Click the name of the stack that you created in Lab 1.The Stack details page opens.
+4. Click the name of the stack that you created in Lab 1.The Stack details page opens.
 
 5. Click **Destroy**.
 

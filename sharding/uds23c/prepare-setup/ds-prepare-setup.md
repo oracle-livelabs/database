@@ -22,7 +22,7 @@ This lab assumes you have:
 
 2.  Save in your downloads folder.
 
-We strongly recommend using this stack to create a self-contained/dedicated VCN with your instance(s). Skip to *Step 3* to follow our recommendations. If you would rather use an exiting VCN then proceed to the next step as indicated below to update your existing VCN with the required Egress rules.
+We strongly recommend using this stack to create a self-contained/dedicated VCN with your instance(s). Skip to *Task 3* to follow our recommendations. If you would rather use an exiting VCN then proceed to the next step as indicated below to update your existing VCN with the required Egress rules.
 
 ## Task 2: Adding Security Rules to an Existing VCN
 This workshop requires a certain number of ports to be available, a requirement that can be met by using the default ORM stack execution that creates a dedicated VCN. In order to use an existing VCN the following ports should be added to Egress rules
@@ -34,15 +34,15 @@ ToDo Add Table
 3.  Under Resources, select Security Lists
 4.  Click on Default Security Lists under the Create Security List button
 5.  Click Add Ingress Rule button
-6.  Enter the following:  
+6.  Enter the following:
     - Source CIDR: 0.0.0.0/0
     - Destination Port Range: *Refer to above table*
 7.  Click the Add Ingress Rules button
 
-## Task 3: Setup Compute   
+## Task 3: Setup Compute
 Using the details from the two steps above, proceed to the lab *Environment Setup* to setup your workshop environment using Oracle Resource Manager (ORM) and one of the following options:
 -  Create Stack:  *Compute + Networking*
--  Create Stack:  *Compute only* with an existing VCN where security lists have been updated as per *Step 2* above
+-  Create Stack:  *Compute only* with an existing VCN where security lists have been updated as per *Task 2* above
 
 Please note for Data Sovereignty with Oracle Sharding Lab:
 - Recommended memory: 48G
