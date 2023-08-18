@@ -470,4 +470,4 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 * **Author** - Ulrike Schwinn, Distinguished Data Management Expert; Hope Fisher, Program Manager
 * **Contributors** - Witold Swierzy, Data Management Expert; Stephane Duprat, Technical End Specialist
-* **Last Updated By/Date** - Hope Fisher, June 2023
+* **Last Updated By/Date** - Hope Fisher, Aug 2023
