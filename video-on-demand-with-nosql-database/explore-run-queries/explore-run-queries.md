@@ -9,6 +9,8 @@ the tables you created, and execute queries using OCI Console.
 
 _Estimated Time:_ 20 minutes
 
+[Walkthrough Lab 06:  Explore Data, Run Queries](videohub:1_tx19uuiy)
+
 ### Objectives
 
 * Writing and optimizing queries over nested array
