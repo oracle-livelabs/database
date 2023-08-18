@@ -50,10 +50,8 @@ This lab assumes you have:
 
     You may consult the [documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/index.html) to get a detailed description of the different parts of SQL domain syntax.
 
-    > Note: The Run button runs just one SQL Statement and formats the output into a data grid. The Run Script button runs many SQL statements and spools their output.
-    ![Image alt text](images/run_buttons.png " ")
-
 2. To get an idea how to use it, let's create a simple example - an email domain - and use it in a person table.
+    >Note: As a reminder, and trailing numbers when pasting into terminal will not effect command output.
     ```
     <copy>
     create domain if not exists myemail_domain AS VARCHAR2(100)
@@ -69,6 +67,9 @@ This lab assumes you have:
     ```
     <copy>
     drop table if exists person;
+    </copy>
+    ```
+    ```<copy>
     create table person
         ( p_id number(5),
         p_name varchar2(50),
@@ -85,12 +86,17 @@ This lab assumes you have:
 
     ```
     <copy>
-    insert into person values (1,'Bold',3000,null);
-    insert into person values (1,'Schulte',1000, 'user-schulte@gmx.net');
-    insert into person values (1,'Walter',1000,'user_walter@t_online.de');
-    insert into person values (1,'Schwinn',1000, 'UserSchwinn@oracle.com');
-    insert into person values (1,'King',1000, 'user-king@aol.com');
+    insert into person values (1,'Bold',3000,null),
+    (1,'Schulte',1000, 'user-schulte@gmx.net'),
+    (1,'Walter',1000,'user_walter@t_online.de'),
+    (1,'Schwinn',1000, 'UserSchwinn@oracle.com'),
+    (1,'King',1000, 'user-king@aol.com');
+    </copy>
+    5 rows created.
+    ```
+    <copy>
     commit;
+    Commit complete.
     </copy>
     ```
 
@@ -101,9 +107,10 @@ This lab assumes you have:
     You will get the following error message:
     ```
     ERROR at line 1:
-    ORA-11534: check constraint (SCOTT.SYS_C008254) due to domain constraint
-    SCOTT.EMAIL_C of domain SCOTT.MYEMAIL_DOMAIN violated
+    ORA-11534: check constraint (SYS.SYS_C008254) due to domain constraint
+    SYS.EMAIL_C of domain SYS.MYEMAIL_DOMAIN violated
     ```
+    The number of your constraint may vary slightly from the `SYS_C008254` shown here, but the error is the same.
 
 6. Now let's query the table PERSON.
     ```
@@ -132,13 +139,13 @@ This lab assumes you have:
     P_ID                                         NUMBER(5)
     P_NAME                                       VARCHAR2(50)
     P_SAL                                        NUMBER
-    P_EMAIL                                      NOT NULL VARCHAR2(100) SCOTT.MYEMAIL_DOMAIN
+    P_EMAIL                                      NOT NULL VARCHAR2(100) SYS.MYEMAIL_DOMAIN
     ```
 2. As previously mentioned, there are new domain functions you may use in conjunction with the table columns to get more information about the domain properties. `DOMAIN_NAME` for example returns the qualified domain name of the domain that the argument is associated with, `DOMAIN_DISPLAY` returns the domain display expression for the domain that the argument is associated with. More information can be found in the [documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/index.html).
     ```
-    SQL> <copy>col p_name format a25</copy>
-    SQL> <copy>col DISPLAY format a25</copy>
-    SQL> <copy>select p_name, domain_display(p_email) "Display" from person;</copy>
+    <copy>col p_name format a25</copy>
+    <copy>col DISPLAY format a25</copy>
+    <copy>select p_name, domain_display(p_email) "Display" from person;</copy>
     ```
 
     ```
@@ -154,8 +161,8 @@ This lab assumes you have:
 
     Here are some examples:
     ```
-    SQL> <copy>col owner format a15</copy>
-    SQL> <copy>select owner, name, data_display from user_domains;</copy>
+    <copy>col owner format a15</copy>
+    <copy>select owner, name, data_display from user_domains;</copy>
     ```
 
     ```
@@ -163,12 +170,12 @@ This lab assumes you have:
     --------------- ------------------------------
     DATA_DISPLAY
     ------------------------------------------------------
-    SCOTT           MYEMAIL_DOMAIN
+    SYS           MYEMAIL_DOMAIN
     SUBSTR(myemail_domain, INSTR(myemail_domain, '@') + 1)
     ```
 
     ```
-    SQL> <copy>select * from user_domain_constraints where domain_name='MYEMAIL_DOMAIN';</copy>
+    <copy>select * from user_domain_constraints where domain_name='MYEMAIL_DOMAIN';</copy>
     ```
 
     ```
@@ -178,12 +185,12 @@ This lab assumes you have:
     -------------------------------------------------------------------------------- --------
     DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY INVALID ORIGIN_CON_ID
     -------------- --------- ------------- -------------- --- ---- ------- -------------
-    EMAIL_C                        SCOTT           MYEMAIL_DOMAIN       C
+    EMAIL_C                        SYS           MYEMAIL_DOMAIN       C
     REGEXP_LIKE (myemail_domain, '^(\S+)\@(\S+)\.(\S+)$')                            ENABLED
-    NOT DEFERRABLE IMMEDIATE VALIDATED     USER NAME                                   3
-    SYS_DOMAIN_C0034               SCOTT           MYEMAIL_DOMAIN       C
+    NOT DEFERRABLE IMMEDIATE VALIDATED     USER NAME                                   1
+    SYS_DOMAIN_C0034               SYS           MYEMAIL_DOMAIN       C
     "MYEMAIL_DOMAIN" IS NOT NULL                                                     ENABLED
-    NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME                              3
+    NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME                              1
     ```
 
 4. But what about the "good old" package `DBMS_METADATA` to get the `DDL` command?
@@ -191,10 +198,10 @@ This lab assumes you have:
     Let's try `GET_DDL` and use `SQL_DOMAIN` as an object_type argument.
 
     ```
-    SQL> <copy>select dbms_metadata.get_ddl('SQL_DOMAIN', 'MYEMAIL_DOMAIN') from dual;</copy>
+    <copy>select dbms_metadata.get_ddl('SQL_DOMAIN', 'MYEMAIL_DOMAIN') from dual;</copy>
     ```
 
-    And et voila you will get the result.
+    And et voila you will get a similar result.
 
     ```
     DBMS_METADATA.GET_DDL('SQL_DOMAIN','MYEMAIL_DOMAIN')
@@ -210,7 +217,7 @@ In addition, to make it easier for you to start with Oracle provides built-in do
 
 1. Another way to get this information is to query `ALL_DOMAINS` and filter on owner `SYS`. Then you will receive the built-in domains.
     ```
-    SQL> <copy>select name from all_domains where owner='SYS';</copy>
+    <copy>select name from all_domains where owner='SYS';</copy>
     ```
 
     ```
@@ -228,8 +235,10 @@ In addition, to make it easier for you to start with Oracle provides built-in do
     ```
 2. Let's investigate the domain `EMAIL_D` for email entries. Query the data dictionary views or use the package `DBMS_METADATA` to get the definition.
     ```
-    SQL> <copy>col domain_ddl format a100</copy>
-    SQL> <copy>select dbms_metadata.get_ddl('SQL_DOMAIN', 'EMAIL_D','SYS') domain_ddl from dual;</copy>
+    <copy>col domain_ddl format a100</copy>
+    ```
+    ```
+    <copy>select dbms_metadata.get_ddl('SQL_DOMAIN', 'EMAIL_D','SYS') domain_ddl from dual;</copy>
     ```
 
     ```
@@ -242,7 +251,12 @@ In addition, to make it easier for you to start with Oracle provides built-in do
 3. Now let's re-create our table `PERSON`.
     ```
     <copy>
-    create table person
+    drop table if exists person;
+    </copy>
+    ```
+    ```
+    <copy>
+    create table if not exists person
     ( p_id number(5),
     p_name varchar2(50),
     p_sal number,
@@ -270,7 +284,7 @@ In addition, to make it easier for you to start with Oracle provides built-in do
     ORA-11517: the column data type does not match the domain column
     ```
 
-4. In the next step let's insert some data.
+4. Let's insert some data.
     ```
     <copy>insert into person values (1,'Bold',3000,null);</copy>
     1 row created.
@@ -301,11 +315,9 @@ The 23c Oracle database supports not only the JSON datatype but also **JSON sche
 
 1. The following example shows how to use an inline schema definition in a `CREATE TABLE` command (the shorthand syntax without a check constraint).
     ```
-    <copy>
-    create table person
+    create table if not exists person
     (id NUMBER,
     p_record JSON VALIDATE '<json-schema>')
-    </copy>
     ```
 
     SQL domains also support JSON validation now. The difference between the inline schema definition and the SQL domain is that a SQL domain stores a reference to the SQL domain (call by reference instead of call by value). If the SQL domain changes, so does the validation logic. If the SQL domain is dropped, validation does not happen and an error to this effect is raised.
@@ -313,7 +325,7 @@ The 23c Oracle database supports not only the JSON datatype but also **JSON sche
 2. Let's give an example using a SQL domain with the JSON validation clause `[VALIDATE USING <json_schema_string>]`. The JSON schema describes a person JSON document.
     ```
     <copy>
-    create domain p_record domain AS JSON VALIDATE USING '{
+    create domain p_recorddomain AS JSON VALIDATE USING '{
     "type": "object",
     "properties": {
         "first_name": { "type": "string" },
@@ -330,8 +342,15 @@ The 23c Oracle database supports not only the JSON datatype but also **JSON sche
                     }
                 }
     }' ;
-
-    create person (id NUMBER,
+    </copy>
+    ```
+    ```
+    <copy>
+    drop table if exists person;
+    </copy>
+    ```
+    ```
+    create table if not exists person (id NUMBER,
                 p_record JSON DOMAIN p_recorddomain);
     </copy>
     ```
@@ -349,13 +368,13 @@ The 23c Oracle database supports not only the JSON datatype but also **JSON sche
                 "state": "Virginia",
                 "country": "United States"
             }
-                                    }');
+    }');
     </copy>
     ```
 
 4. The next record is not a valid entry.
     ```
-    SQL> <copy>insert into person values (2, '{
+    <copy>insert into person values (2, '{
     "name": "George Washington",
     "birthday": "February 22, 1732",
     "address": "Mount Vernon, Virginia, United States"
@@ -372,10 +391,14 @@ The 23c Oracle database supports not only the JSON datatype but also **JSON sche
 
     Automatically a check constraint to validate the schema is created. Query `USER_DOMAIN_CONSTRAINTS` to verify this.
     ```
-    SQL> <copy>set long 400</copy>
-    SQL> <copy>col name format a20</copy>
-    SQL> <copy>select name, generated, constraint_type, search_condition
-        from user_domain_constraints where domain_name like 'P_RECORD%'</copy>
+    <copy>set long 400;</copy>
+    ```
+    ```
+    <copy>col name format a20;</copy>
+    ```
+    ```
+    <copy>select name, generated, constraint_type, search_condition
+        from user_domain_constraints where domain_name like 'P_RECORD%';</copy>
     ```
 
     ```
@@ -410,4 +433,4 @@ You have now **completed this workshop**.
 
 ## Acknowledgements
 * **Author** - Ulrike Schwinn, Distinguished Data Management Expert; Hope Fisher, Program Manager
-* **Last Updated By/Date** - Hope Fisher, June 2023
+* **Last Updated By/Date** - Hope Fisher, Aug 2023
