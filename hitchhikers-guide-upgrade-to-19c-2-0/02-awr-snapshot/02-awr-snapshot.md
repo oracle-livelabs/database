@@ -6,6 +6,8 @@ In this lab, you will execute an application workload using HammerDB on the UPGR
 
 Estimated Time: 15 Minutes.
 
+[](videohub:1_344d06hb)
+
 ### Objectives
 
 In this lab, you will:

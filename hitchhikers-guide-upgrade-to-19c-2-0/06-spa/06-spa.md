@@ -6,6 +6,8 @@ In this lab, you will use the SQL Performance Analyzer (SPA) that is a part of t
 
 Estimated Time: 10 minutes
 
+[](videohub:1_141rt83h)
+
 ### Objectives
 
 In this lab, you will:

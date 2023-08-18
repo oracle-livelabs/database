@@ -12,6 +12,8 @@ The diagram below shows you the different phases of the XTTS, including the step
 
 Estimated Workshop Time: 90 minutes
 
+[](videohub:1_683mjfdg)
+
 ### Objectives
 
 In this workshop, you will:

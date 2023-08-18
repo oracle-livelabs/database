@@ -8,6 +8,8 @@ This lab walks you through a Video on Demand streaming application demo created 
 
 _Estimated Time:_ 12 minutes
 
+[Walkthrough Lab 01: Video on Demand streaming - Activity Tracking Demo](videohub:1_91x8kepr)
+
 ### Activity Tracking service
 
 Consider a Video on Demand streaming application. It streams various shows that customers across the globe watch. Shows can have a number of seasons and a season can have multiple episodes. You need a modern, persistent meta-data store to keep track of customer activity.

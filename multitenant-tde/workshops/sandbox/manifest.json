@@ -1,10 +1,10 @@
 {
-  "workshoptitle": "The Title of the Workshop is defined in the manifest",
-  "help": "livelabs-help-**enterarea**_us@oracle.com",
+  "workshoptitle": "Pluggables, Clones and Containers: Securing Oracle Multitenant with Transparent Database Encryption (TDE)",
+  "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
-      "description": "The Introduction is always second for LiveLabs. The title and contents menu title match for the Introduction.",
+      "description": "Introduction.",
       "filename": "../../introduction/introduction.md"
     },
     {
@@ -22,7 +22,7 @@
       "description": "Managing Keys in a Wallet with Multitenant",
       "filename": "../../mt-key-mgmt/mt-key-mgmt.md"
     },
-        {
+    {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
