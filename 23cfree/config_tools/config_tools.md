@@ -39,7 +39,7 @@ This lab assumes you have:
     echo $JAVA_HOME
     </copy>
     ```
-    ![Java version](images/tools-1-2.png " ")
+    ![Java Install](images/tools-1-2new.png " ")
 
 3. Install SQLcl using dnf.
     ```
@@ -47,7 +47,7 @@ This lab assumes you have:
     sudo dnf install -y sqlcl
     </copy>
     ```
-    ![Download Software](images/tools-1-3.png " ")
+    ![Download Software](images/tools-1-3new.png " ")
 
 4. Test out SQLcl by connecting to the database. Notice the command is sql not sqlplus.
     ```
@@ -72,14 +72,15 @@ This lab assumes you have:
 
 ## Task 2: Setup APEX
 
-1. Install APEX using dnf.
+1. Install APEX using dnf. The first command installs apex and the second adds the images directory that will be used later. What you will also notice is this has a dependency on ORDS and install it.
     ```
     <copy>
     sudo dnf install -y oracle-apex23.1.noarch
     sudo dnf install -y oracle-apex23.1-images.noarch
     </copy>
     ```
-    ![Download Software](images/tools-2-1.png " ")
+    ![Download Software](images/tools-2-1anew.png " ")
+    ![Download Software](images/tools-2-1bnew.png " ")
 
 2. Run the install script into the <b>Pluggable</b> database. It's important that you install into the pluggable and not the container. Please review the architecture section of the APEX documentation in the additional information section for different deployment modes. This script will take about 5-7 minutes to complete.
     ```
@@ -162,13 +163,13 @@ This lab assumes you have:
 
 ## Task 3: Setup ORDS
 
-1. Install ORDS using the dnf command.
+1. Install ORDS using the dnf command. What you will see is that it is already installed. This happened when the images directory was installed.
     ```
     <copy>
     sudo dnf install -y ords
     </copy>
     ```
-    ![Download Software](images/tools-3-1.png " ")
+    ![Download Software](images/tools-3-1new.png " ")
 
 2. You will need to grant the correct privileges to the hol23c user.
     ```
@@ -192,7 +193,7 @@ This lab assumes you have:
     exit;
     </copy>
     ```
-    ![Grant Privileges](images/tools-3-2.png " ")
+    ![Grant Privileges](images/tools-3-2new.png " ")
 
 3. Copy the images directory from APEX to the ORDS directory
     ```
@@ -200,7 +201,7 @@ This lab assumes you have:
     cp -r /opt/oracle/apex/23.1.0/images /opt/oracle/ords
     </copy>
     ```
-    ![Copying Directory](images/tools-3-3.png " ")
+    ![Copying Directory](images/tools-3-3new.png " ")
 
 4. Install ORDS answering the prompts with the following responses:
     - Installation: 2
@@ -222,7 +223,7 @@ This lab assumes you have:
     ords --config /etc/ords/config install
     </copy>
     ```
-    ![Installing Software](images/tools-3-4.png " ")
+    ![Installing Software](images/tools-3-4new.png " ")
 
 5. After the installation has completed, the screen stops scrolling and you see the line "Oracle REST Data Services initialized" Stop ORDS by pressing CTRL-C
     ![Stop Service](images/tools-3-5.png " ")
@@ -263,7 +264,7 @@ This lab assumes you have:
     sudo systemctl start ords
     </copy>
     ```
-    ![Start Service](images/tools-4-1.png " ")
+    ![Start Service](images/tools-4-1new.png " ")
 
 2. Open a browser. If you have one currently open you can click on new window. If not click on activities and then browser.
     ![Open Browser](images/tools-4-2.png " ")

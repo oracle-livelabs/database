@@ -36,7 +36,7 @@ This lab assumes you have:
     sudo -s
     </copy>
     ```
-    ![Make Directories](images/install-1-2.png " ")
+    ![Make Directories](images/install-1-2new.png " ")
 
 3. Before installing you should check to see if anything is running on port 1521. This is what the database configure command will use when creating the listener. If it cannot it will try and use another port. If a service is running on that port you can try and restart it to see if it will restart on another port. If you choose to run with a different port then just make sure to adjust the commands as you go with the correct port.
 
@@ -56,7 +56,7 @@ This lab assumes you have:
     Verify port 1521 is available
     ````
     <copy>
-    sudo netstat -anp|grep 1521
+    netstat -anp|grep 1521
     </copy>
     ````
     ![Verify Port](images/install-1-3b.png " ")
@@ -67,7 +67,7 @@ This lab assumes you have:
     dnf config-manager --set-enabled ol8_developer
     </copy>
     ```
-    ![Enable Repository](images/install-1-4.png " ")
+    ![Enable Repository](images/install-1-4new.png " ")
 
 ## Task 2: Database Setup
 
@@ -78,7 +78,7 @@ This lab assumes you have:
     wget -q --show-progress https://download.oracle.com/otn-pub/otn_software/db-free/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
     </copy>
     ```
-    ![Download Software](images/install-2-1.png " ")
+    ![Download Software](images/install-2-1new.png " ")
 
 2. Install the database software using the dnf command. This will take about 5-10 minutes.
     ```
@@ -86,7 +86,7 @@ This lab assumes you have:
     dnf -y localinstall /tmp/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
     </copy>
     ```
-    ![Install Software](images/install-2-2.png " ")   
+    ![Install Software](images/install-2-2new.png " ")   
 
 3. Create the database. You will be prompted for a password to be used for the database accounts. You can use any password here but you will need it later so note it down. For my examples I will use Welcome123# This should take about 5-10 minutes.
     ```
@@ -94,7 +94,7 @@ This lab assumes you have:
     /etc/init.d/oracle-free-23c configure
     </copy>
     ```
-    ![Create Database](images/install-2-3.png " ")
+    ![Create Database](images/install-2-3new.png " ")
 
 4. When the create finishes it will give you the two connection strings for your pluggable and container databases. If you used a different port it will be in the connection string.
     ```
@@ -117,7 +117,7 @@ This lab assumes you have:
     exit
     </copy>
     ```
-    ![Database Status](images/install-2-5.png " ")
+    ![Switch back to Oracle](images/install-2-6.png " ")
 
 ## Task 3: Environment and User Setup
 
@@ -134,7 +134,7 @@ This lab assumes you have:
     . /home/oracle/.bashrc
     </copy>
     ```
-    ![Set Environment](images/install-3-1.png " ")
+    ![Set Environment](images/install-3-1new.png " ")
 
 2. If your listener was configured on a different port or you wanted to see your listener configuration you can use the lsnrctl command. You can use this port in the later commands if you are not running on port 1521.
     ````
