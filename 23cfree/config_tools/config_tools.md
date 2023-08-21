@@ -21,6 +21,7 @@ This lab assumes you have:
 * Have a Linux VM running Oracle 23c Free Database
 * Have access to a GUI on the Linux VM to run Database Actions (SQL Developer Web)
 
+[Lab Walkthrough](videohub:1_17wvzaf1)
 
 ## Task 1: Setup SQLcl
 
@@ -57,7 +58,7 @@ This lab assumes you have:
     ```
     ![Database Login](images/tools-1-4.png " ")
 
-5. You can explore the database if you want. When you get done type exit.
+5. You can explore the database if you want. When you get done type exit. Your first few commands might take a little longer as the environment is initializing.
     ```
     <copy>
     show pdbs

@@ -23,6 +23,9 @@ This lab assumes you have:
 * All previous labs successfully completed
 * Access to the internet to download the software
 
+Watch the video below for a quick walk-through of the lab.
+[Lab Walkthrough](videohub:1_3l6mzbfq)
+
 ## Task 1: Operating System Setup
 
 1. Open a terminal if you don't currently have one open. To open one Click on Activities and then Terminal.
