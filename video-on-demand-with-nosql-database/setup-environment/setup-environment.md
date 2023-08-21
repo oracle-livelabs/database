@@ -6,6 +6,7 @@ This lab walks you through the steps necessary to create a proper operating envi
 
 _Estimated Time:_ 7 minutes
 
+[Walkthrough Lab 02: Prepare Your Environment](videohub:1_r2zc4vve)
 
 ### Objectives
 

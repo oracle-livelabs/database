@@ -1,12 +1,23 @@
 # Introduction
 
-## About the Installing and Configuring Oracle Database 23c Free Workshop
+## About the Install and Configure Oracle Database 23c Free Workshop
 
 This workshop focuses on installing and creating Oracle Database 23c Free, configuring the related tools and then exploring a sampling of Oracle Database 23c Free features.
 
 ### **Oracle Database 23c Free**
 
-Oracle Database 23c Free is a new, free offering of the industry-leading Oracle Database that enterprises worldwide rely on every day. It can be downloaded straight from the Internet with no oracle.com user account or license click-through requirements, enabling simple and fast access to the world’s only converged database that supports all data models and workload types. Whether you are a developer, a data scientist, a DBA, an educator, or just interested in databases, Oracle Database 23c Free—Developer Release is the ideal way to get started. Oracle Database 23c Free is packaged for ease of use and a full-featured experience, making it the perfect entry-level database for anyone who wants to build and run data-driven apps. Its built-in upward compatibility with Oracle Database Enterprise Edition and Oracle Database cloud services ensures that users can move to any other Oracle Database offering anytime.
+Oracle Database 23c Free is a new, free offering of the industry-leading Oracle Database that enterprises worldwide rely on every day. It can be downloaded straight from the Internet with no oracle.com user account or license click-through requirements, enabling simple and fast access to the world’s only converged database that supports all data models and workload types. Whether you are a developer, a data scientist, a DBA, an educator, or just interested in databases, Oracle Database 23c Free is the ideal way to get started. Oracle Database 23c Free is packaged for ease of use and a full-featured experience, making it the perfect entry-level database for anyone who wants to build and run data-driven apps. Its built-in upward compatibility with Oracle Database Enterprise Edition and Oracle Database cloud services ensures that users can move to any other Oracle Database offering anytime.
+
+Oracle Database 23c Free Release includes:
+
+- JSON Relational Duality: Developers can build applications in either relational or JSON paradigms with a single source of truth and benefit from the strengths of both—relational and document models. Data is held once, but can be accessed, written, and modified with either approach. Developers benefit from the best of both JSON and relational models, including ACID compliant transactions and concurrency controls, which means they no longer have to make tradeoffs between complex object-relational mappings or data inconsistency issues.
+- JavaScript Stored Procedures (powered by GraalVM): JavaScript code can now be executed closer to data than ever before by writing JavaScript Stored Procedures or loading existing JavaScript libraries into Oracle Database. Support for JavaScript code improves developer productivity by allowing reuse of existing business logic straight inside the data tier and reuse of JavaScript developer skills. JavaScript code invocation can be intermixed with SQL and PL/SQL, providing polyglot programming language support.
+- JSON Schema: Developers can now ensure and validate JSON document structures via industry-standard JSON Schemas, enabling the confident and reliable use of the JSON data format.
+- Operational Property Graphs: Developers can now build both transactional and analytical property graph applications with Oracle Database, using its industry-leading, new SQL standard property graph queries support, including running graph analytics on top of both relational and JSON data.
+- Oracle Kafka APIs: Kafka applications can now run against Oracle Database Transactional Event Queues with minimal code changes. This enables much more robust microservices built using transactional events that perform event operations and database changes in a single atomic transaction.
+- SQL Domains: The new domain construct can act as lightweight type modifiers that centrally document intended data usage, extending and drastically improving SQL standard domains. This allows developers to better understand how data is used and improves overall data quality, without the complexity and incompatibility of usage-specific data types or user-defined types.
+- Annotations: Database metadata can now be stored directly alongside the data with the new annotation mechanism inside the Oracle Database. Developers can annotate common data model attributes for tables, columns, views, indexes, and more—providing a central, lightweight, declarative facility to register and exchange usage properties across applications. Storing the metadata along with the data guarantees consistency and universal accessibility to any user or application that uses the data.
+- As well as many others including some you will get to try out in this workshop.
 
 ### **Tools - SQLcl**
 
@@ -44,6 +55,6 @@ or
 
 
 ## Acknowledgements
-* **Author** - David Start
-* **Contributors** - David Start
+* **Author** - David Start, Database Product Management
+* **Contributors** - David Start, Database Product Management
 * **Last Updated By/Date** - David Start, Database Product Management, August 2023

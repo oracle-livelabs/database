@@ -16,8 +16,8 @@ Estimated Time - 5 minutes
 
 ### Prerequisites
 
-- You should have provisioned the **Learn how to use RAFT Replication to build resilient distributed databases** workshop using a terraform stack
-- To provision this workshop, there are detailed instructions in Lab 1 of [Learn how to use RAFT Replication to build resilient distributed databases](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=866) workshop.
+- You should have provisioned the workshop **Learn how to use RAFT Replication to build resilient distributed databases** using a terraform stack
+- To provision this workshop, there are detailed instructions in Lab 1 of [Learn how to use RAFT Replication to build resilient distributed databases](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3772) workshop.
 
 ## Task 1: Terminate a Provisioned Oracle Autonomous Database Instance
 
