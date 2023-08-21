@@ -8,6 +8,9 @@ The application will be the SQL Web Developer from Oracle Rest Data Services (OR
 
 *Estimated Time:* 20 minutes
 
+[Lab 1](videohub:1_7f7gm9v2)
+
+
 ### Objectives
 
 * Have a running Microservice Application connected to the Oracle Database

@@ -8,6 +8,9 @@ In this lab, you will clean up the Oracle Cloud Infrastructure (OCI) *Policies*,
 
 *Estimated Time:* 2 minutes
 
+[Lab 1](videohub:1_scvvpro0)
+
+
 ### Objectives
 
 * Leave no trace of the Workshop

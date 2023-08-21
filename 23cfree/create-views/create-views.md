@@ -6,6 +6,8 @@ In this lab, you will explore the power of duality views, which allow you to sea
 
 Estimated Time: 20 minutes
 
+[Lab 1](videohub:1_2tvbf75z)
+
 ### Objectives
 
 In this lab, you will:
