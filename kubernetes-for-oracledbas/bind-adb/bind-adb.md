@@ -6,6 +6,9 @@ In this lab, you will provision a new Oracle Autonomous Database (ADB) and bind 
 
 *Estimated Time:* 10 minutes
 
+[Lab 7](videohub:1_wdee00m6)
+
+
 ### Objectives
 
 * Provision a new Oracle Autonomous Database (ADB) using the **OraOperator**
