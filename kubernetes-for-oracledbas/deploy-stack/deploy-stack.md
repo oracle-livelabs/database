@@ -8,7 +8,7 @@ Don't panic, how this works will be explored... while it is working.
 
 *Estimated Time:* 10 minutes
 
-[Lab 1](videohub:1_m7hbhi0v)
+[Lab 2](videohub:1_m7hbhi0v)
 
 
 ### Objectives

@@ -6,7 +6,7 @@ In this lab, you will provision a new Oracle Autonomous Database (ADB) and bind 
 
 *Estimated Time:* 10 minutes
 
-[Lab 1](videohub:1_wdee00m6)
+[Lab 7](videohub:1_wdee00m6)
 
 
 ### Objectives

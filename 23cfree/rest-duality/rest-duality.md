@@ -6,7 +6,7 @@ This lab focuses on populating, querying, and updating Duality Views in the Orac
 
 Estimated Time: 10 minutes
 
-[Lab 1](videohub:1_l54mu3jg)
+[Lab 5](videohub:1_l54mu3jg)
 
 ### Objectives
 

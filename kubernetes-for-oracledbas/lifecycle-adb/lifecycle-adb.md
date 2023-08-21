@@ -18,7 +18,7 @@ The actions that the **OraOperator** support for the AutonomousDatabase resource
 
 *Estimated Time:* 15 minutes
 
-[Lab 1](videohub:1_2me0ogqv)
+[Lab 9](videohub:1_2me0ogqv)
 
 
 ### Objectives
