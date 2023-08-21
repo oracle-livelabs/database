@@ -1,5 +1,7 @@
 # Sample Queries to Validate for Sharded DBs
 
+## Introduction
+
 Once User defined sharded schema is ready, We can query the sharded tables from catalog and each shard to validate data.
 
 *Estimated Time*:  30 minutes
@@ -20,10 +22,13 @@ This lab assumes you have:
   * Lab: Prepare Setup
   * Lab: Environment Setup
   * Lab: Initialize Environment
+  * Lab: Explore User-Defined Sharding Topology
+  * Lab: Sample User-Defined Sharding Schema and Data insertion
 
-### Task 1: Check for containers in your VM
 
-1. Open a terminal window and execute below as **opc** user.
+## Task 1: Connect Schema user to query sharded table(s)
+
+1. Check for containers in your VM. To tdo this, Open a terminal window and execute below as **opc** user.
 
     ```
     <copy>
@@ -33,8 +38,6 @@ This lab assumes you have:
 
      ![<podman containers>](./images/uds-podman-containers.png " ")
 
-
-### Task 2: Connect Schema user to query sharded table(s)
 
 2. User Defined sharded schema and tables are created and data are inserted for this lab. Connect Shard1 DB, Shard2 DB, Catalog DB and compare query results from sharded table accounts on each db.
     ```
@@ -67,36 +70,36 @@ This lab assumes you have:
     ![<Catalog sharded table queries>](./images/uds-connect-catalog-sharded-table-queries.png " ")
 
 
-### Task 3: Validate query for a Synchronous Duplicated table from catalog and each shard
+## Task 3: Validate query for a Synchronous Duplicated table from catalog and each shard
 
-6. Connect to each sharded DBs, run the same query for a Synchronous Duplicated table and results would be same from each sharded dbs. Synchronous Duplicated tables support two phase commit. ALL DDL and DML operations for Synchronous Duplicated table to be performed at the catalog DB
+1. Connect to each sharded DBs, run the same query for a Synchronous Duplicated table and results would be same from each sharded dbs. Synchronous Duplicated tables support two phase commit. ALL DDL and DML operations for Synchronous Duplicated table to be performed at the catalog DB
     ```
     <copy>
     select * from dup_sync_1;
     </copy>
     ```
 
-7. Connect Shard1 and run a query on duplicated table to get row count.
+2. Connect Shard1 and run a query on duplicated table to get row count.
 
 
     ![<Shard1 duplicated table row count>](./images/uds-connect-shard1-duplicated-table-count.png " ")
 
 
-8. Connect Shard2 and run a query on duplicated table to get row count.
+3. Connect Shard2 and run a query on duplicated table to get row count.
 
 
     ![<Shard2 duplicated table row count>](./images/uds-connect-shard2-duplicated-table-count.png " ")
 
 
-9. Connect Catalog and run a query on duplicated table to get row count.
+4. Connect Catalog and run a query on duplicated table to get row count.
 
 
     ![<Catalog duplicated table row count>](./images/uds-connect-catalog-duplicated-table-count.png " ")
 
 
-### Task 4: Connect Catalog DB using GSM local service : GDS$CATALOG
+## Task 4: Connect Catalog DB using GSM local service : GDS$CATALOG
 
-10. Connect the Catalog using gsm service for proxy routing and run a cross shard query
+1. Connect the Catalog using gsm service for proxy routing and run a cross shard query
     ```
     <copy>
     sqlplus transactions/****************@oshard-gsm1.example.com:1522/GDS\$CATALOG.oradbcloud
@@ -106,9 +109,9 @@ This lab assumes you have:
     ![<Catalog duplicated table row count>](./images/uds-query-gds-catalog-local-service.png " ")
 
 
-### Task 5: connect and query using global services which were created by gdsctl add service command
+## Task 5: Connect and query using global services which were created by gdsctl add service command
 
-11. This kind of connections to be used from Application to provide a sharding key for runtime DB connection.
+1. This kind of connections to be used from Application to provide a sharding key for runtime DB connection.
 
     ```
     <copy>
@@ -120,9 +123,9 @@ This lab assumes you have:
     ![<Catalog duplicated table row count>](./images/uds-connect-gsm-service-directRoutingApp.png " ")
 
 
-### Task 6: Connect Shard1 using gsm service for direct routing and run a query
+## Task 6: Connect Shard1 using gsm service for direct routing and run a query
 
-12. This kind of connections to be used from Application to provide a sharding key belongs to shard1 for DB connection to Shard1.
+1. This kind of connections to be used from Application to provide a sharding key belongs to shard1 for DB connection to Shard1.
 
     ```
     <copy>
@@ -135,7 +138,7 @@ This lab assumes you have:
 
 ## Task 7: Connect Shard2 using gsm service for direct routing and run a query
 
-13. This kind of connections to be used from Application to provide a sharding key belongs to shard2 for DB connection to Shard2.
+1. This kind of connections to be used from Application to provide a sharding key belongs to shard2 for DB connection to Shard2.
 
     ```
     <copy>

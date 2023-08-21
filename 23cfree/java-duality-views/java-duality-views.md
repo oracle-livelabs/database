@@ -21,7 +21,7 @@ This lab assumes you have:
 * Eclipse or a compatible IDE for executing Java code
 
 Watch the video below for a quick walk-through of the lab. 
-[Change password](videohub:1_rle2cqce)
+[Walkthrough](videohub:1_rle2cqce)
 
 ## Task 1: Find documents matching a filter (aka predicate)
 

@@ -1,5 +1,7 @@
 # Sample User Defined sharded schema
 
+## Introduction
+
 Once User defined sharded env configuration is done and you find the result of gdsctl validate command as expect without error, Sharded schema can be created. In this lab all DDL steps are for information purpose only and those are already done in the lab env so that we can query the sharded db and verify how we can achive data sovereignty with Oracle's user defined sharding in the distributed databases.
 
 *Estimated Time*:  30 minutes
@@ -20,8 +22,9 @@ This lab assumes you have:
   * Lab: Prepare Setup
   * Lab: Environment Setup
   * Lab: Initialize Environment
+  * Lab: Explore User-Defined Sharding Topology
 
-### Task 1: Check for containers in your VM
+## Task 1: Check for containers in your VM
 
 1. Open a terminal window and execute below as **opc** user.
 
@@ -43,9 +46,9 @@ This lab assumes you have:
 
      ![<Connect podman Catalog Image pcatalog>](./images/uds-connect-catalog-podman-image.png " ")
 
-### Task 2: Connect sysdba user to create a sharded schema user
+## Task 2: Connect sysdba user to create a sharded schema user
 
-3. Create a sharded schema user
+1. Create a sharded schema user
 
     ```
     sqlplus / as sysdba
@@ -59,7 +62,7 @@ This lab assumes you have:
     CREATE USER transactions IDENTIFIED BY ****************;
     ```
 
-4. Grant Roles
+2. Grant Roles
 
     ```
     GRANT CONNECT, RESOURCE, alter session TO transactions;
@@ -70,27 +73,27 @@ This lab assumes you have:
     GRANT CREATE MATERIALIZED VIEW TO transactions;
     ```
 
-5. Create tablespaces for shard1 and shard2 in respective shardspaces for each shard
+3. Create tablespaces for shard1 and shard2 in respective shardspaces for each shard
 
     ```
     CREATE TABLESPACE tbs_shardspace1 IN SHARDSPACE shardspace1;
     CREATE TABLESPACE tbs_shardspace2 IN SHARDSPACE shardspace2;
     ```
 
-6. Connect Schema user to create sharded table(s), a Synchronous Duplicated table and populated data
+4. Connect Schema user to create sharded table(s), a Synchronous Duplicated table and populated data
 
     ```
     connect transactions/****************@PCAT1PDB;
     ```
 
-7. If sharded tables (payments and accounts) already exists drop those before re-create tables.
+5. If sharded tables (payments and accounts) already exists drop those before re-create tables.
 
     ```
     drop table payments cascade constraints;
     drop table accounts cascade constraints;
     ```
 
-8. Create First (parent) sharded table in user-defined-sharding table family for Data Sovereignty
+6. Create First (parent) sharded table in user-defined-sharding table family for Data Sovereignty
 
     ```
     CREATE SHARDED TABLE accounts
@@ -110,7 +113,7 @@ This lab assumes you have:
     );
     ```
 
-9. Create unique index explicitly while adding Primary Key in parent table accounts
+7. Create unique index explicitly while adding Primary Key in parent table accounts
 
     ```
     <copy>
@@ -118,7 +121,7 @@ This lab assumes you have:
     alter table transactions.accounts add constraint accounts_pk primary key (account_id, country_cd) using index accounts_pk_idx;
     ```
 
-10. Create a Child sharded table in user-defined-sharding table family for Data Sovereignty
+8. Create a Child sharded table in user-defined-sharding table family for Data Sovereignty
 
     ```
     CREATE SHARDED TABLE payments
@@ -140,21 +143,21 @@ This lab assumes you have:
     );
     ```
 
-11. Create unique index explicitly while adding Primary Key in child table payments
+9. Create unique index explicitly while adding Primary Key in child table payments
 
     ```
     create unique index payments_pk_idx ON transactions.payments (payment_id, account_id, country_cd) local;
     alter table transactions.payments add constraint payments_pk primary key (payment_id, account_id, country_cd) using index payments_pk_idx;
     ```
 
-12. Add Foreign key in child table payments refers parent table accounts
+10. Add Foreign key in child table payments refers parent table accounts
 
     ```
     alter table transactions.payments add constraint payments_fk foreign key (account_id, country_cd) references accounts(account_id, country_cd);
     ```
 
-### Task 3. Insert data in parent sharded table: accounts
-13. From the same database connection (already connected to transactions user from the catalog database), insert a few sample records for each sharding key (country_cd) defined in the create ddl statement for parent sharded table Accounts. Data are already inserted and below are for reference.
+## Task 3. Insert data in parent sharded table: accounts
+1. From the same database connection (already connected to transactions user from the catalog database), insert a few sample records for each sharding key (country_cd) defined in the create ddl statement for parent sharded table Accounts. Data are already inserted and below are for reference.
 
     ```
     insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('USA',1,1,10000,sysdate);
@@ -172,16 +175,16 @@ This lab assumes you have:
     commit;
     ```
 
-### Task 4. Create a Synchronous duplicated table ( a new feature in 23c )
-14. Duplicated tables are created when have same data needed on the catalog and all sharded DBs.
+## Task 4. Create a Synchronous duplicated table ( a new feature in 23c )
+1. Duplicated tables are created when have same data needed on the catalog and all sharded DBs.
 
     ```
     -- drop table dup_sync_1 cascade constraints;
     create duplicated table dup_sync_1(payment_type_id number(5), payment_type varchar2(100),created_utc TIMESTAMP NOT NULL) SYNCHRONOUS;
     ```
 
-### Task 5. Insert sample data in Synchronous duplicated table: dup_sync_1
-15. Data are already inserted and below are for reference.
+## Task 5. Insert sample data in Synchronous duplicated table: dup_sync_1
+1. Data are already inserted and below are for reference.
     ```
     insert into dup_sync_1 (payment_type_id, payment_type,created_utc) values(1,'Electronic Fund Transfer', systimestamp);
     insert into dup_sync_1 (payment_type_id, payment_type,created_utc) values(2,'Credit Card', systimestamp);
