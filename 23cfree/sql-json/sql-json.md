@@ -49,36 +49,36 @@ This lab assumes you have:
     ```
     <copy>
     UPDATE race_dv
-      SET data = ('{"etag" : "2E8DC09543DD25DC7D588FB9734D962B",
+    SET data = ('{"_metadata": {"etag" : "2E8DC09543DD25DC7D588FB9734D962B"},
                     "raceId" : 201,
                     "name"   : "Bahrain Grand Prix",
                     "laps"   : 57,
                     "date"   : "2022-03-20T00:00:00",
                     "podium" :
-                      {"winner"         : {"name" : "Charles Leclerc",
-                                           "time" : "01:37:33.584"},
-                       "firstRunnerUp"  : {"name" : "Carlos Sainz Jr",
-                                           "time" : "01:37:39.182"},
-                       "secondRunnerUp" : {"name" : "Lewis Hamilton",
-                                           "time" : "01:37:43.259"}},
+                    {"winner"         : {"name" : "Charles Leclerc",
+                                        "time" : "01:37:33.584"},
+                    "firstRunnerUp"  : {"name" : "Carlos Sainz Jr",
+                                        "time" : "01:37:39.182"},
+                    "secondRunnerUp" : {"name" : "Lewis Hamilton",
+                                        "time" : "01:37:43.259"}},
                     "result" : [ {"driverRaceMapId" : 3,
-                                  "position"        : 1,
-                                  "driverId"        : 103,
-                                  "name"            : "Charles Leclerc"},
-                                 {"driverRaceMapId" : 4,
-                                  "position"        : 2,
-                                  "driverId"        : 104,
-                                  "name"            : "Carlos Sainz Jr"},
-                                 {"driverRaceMapId" : 9,
-                                  "position"        : 3,
-                                  "driverId"        : 106,
-                                  "name"            : "Lewis Hamilton"},
-                                 {"driverRaceMapId" : 10,
-                                  "position"        : 4,
-                                  "driverId"        : 105,
-                                  "name"            : "George Russell"} ]}')
-        WHERE json_value(data, '$.raceId') = 201;
-
+                                "position"        : 1,
+                                "driverId"        : 103,
+                                "name"            : "Charles Leclerc"},
+                                {"driverRaceMapId" : 4,
+                                "position"        : 2,
+                                "driverId"        : 104,
+                                "name"            : "Carlos Sainz Jr"},
+                                {"driverRaceMapId" : 9,
+                                "position"        : 3,
+                                "driverId"        : 106,
+                                "name"            : "Lewis Hamilton"},
+                                {"driverRaceMapId" : 10,
+                                "position"        : 4,
+                                "driverId"        : 105,
+                                "name"            : "George Russell"} ]}')
+    WHERE json_value(data, '$.raceId') = 201;
+    
     COMMIT;
     </copy>
     ```

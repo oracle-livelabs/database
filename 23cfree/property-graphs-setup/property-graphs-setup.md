@@ -6,6 +6,8 @@ In this lab, we'll be downloading materials and setting up the necessary tools r
 
 Estimated Time: 5 minutes
 
+Watch the video below for a quick walk-through of the lab. 
+[Walkthrough](videohub:1_lvc3vcko)
 
 ### Objectives
 

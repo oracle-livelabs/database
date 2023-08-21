@@ -11,6 +11,8 @@ create examples of both tables.
 
 _Estimated Time:_ 7 minutes
 
+[Walkthrough Lab 03: Create Tables, Load Tables](videohub:1_kon3yjis)
+
 ### Objectives
 
 * Create 2 tables with provisioned reads/sec, writes/sec, and GB storage
@@ -386,4 +388,4 @@ You may now **proceed to the next lab.**
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Management, May 2023
+* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Management, July 2023
