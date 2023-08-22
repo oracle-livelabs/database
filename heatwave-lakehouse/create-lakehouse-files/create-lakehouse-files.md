@@ -1,8 +1,8 @@
-# Create and store data for Lakehouse
+# Upload data to Object Storage for HeatWave Lakehouse
 
 ## Introduction
 
-A set of files have been created for you to use in this workshop. You will use the files to create your own lakehouse cloud storage bucket.
+A set of files have been created for you to use in this workshop. You will create an object storage bucket and upload the files to it.
 
 ### Objectives
 
@@ -68,7 +68,7 @@ A set of files have been created for you to use in this workshop. You will use t
 2. Under Object Storage, click Buckets
     ![bucket menu](./images/cloud-storage-menu.png "cloud storage menu")
 
-    **NOTE:** Ensure the correct Compartment is selected : Select **root**
+    **NOTE:** Ensure the correct Compartment is selected : Select **lakehouse**
 
 3. Click Create Bucket. The Create Bucket pane is displayed.
 

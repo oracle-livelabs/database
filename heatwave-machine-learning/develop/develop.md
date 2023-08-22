@@ -20,7 +20,7 @@ In this lab, you will be guided through the following tasks:
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with Linux text editors
 - Some Experience with PHP
-- Completed Lab 3
+- Completed Lab 5
 
 
 ## Task 1: Install Web Server (APACHE)
@@ -175,4 +175,4 @@ In this lab, you will be guided through the following tasks:
 - **Author** - Perside Foster, MySQL Solution Engineering, Harsh Nayak, MySQL Solution Engineering
 
 - **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Priscila Galvao, MySQL Solution Engineering, Nick Mader, MySQL Global Channel Enablement & Strategy Manager, Marco Carlessi, MySQL Solution Engineering
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, July 2022
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, Jul 2023

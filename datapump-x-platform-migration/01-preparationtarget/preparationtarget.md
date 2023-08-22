@@ -6,6 +6,8 @@ In this lab, you will create the target PDB and a few additional objects.
 
 Estimated Time: 15 minutes
 
+[](videohub:1_ibb76ov8)
+
 ### Objectives
 
 - Initialize a new target PDB.

@@ -7,6 +7,8 @@ __ATTENTION__: Make sure no active sessions/open transactions use objects in the
 
 Estimated Time: 15 minutes
 
+[](videohub:1_o5m63gr6)
+
 ### Objectives
 
 - Execute final incremental backup and restore.
@@ -310,7 +312,7 @@ The Data Pump export parameter file "exp_metadata.par" was already created for y
     </details>
 
 2. Execute Export Data Pump (SOURCE) </br>
-Execute expdp using this copied par file:
+Execute expdp using this prepared par file:
 
     ```
     <copy>

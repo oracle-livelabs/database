@@ -2,9 +2,11 @@
 
 ## Introduction
 
-In this lab, you will convert a non-CDB database (UPGR) to a PDB in a CDB (CDB2). For learning purposes, you will do the process manually. Normally, it is recommended to use AutoUpgrade. In the appendix, you compare the two methods.
+In this lab, you will convert a non-CDB database (UPGR) to a PDB in a CDB (CDB2). For learning purposes, you will first do the process manually. Then, using AutoUpgrade. This allows you to compare the two methods.
 
 Estimated Time: 30 minutes
+
+[](videohub:1_w2g72fta)
 
 ### Objectives
 
@@ -712,14 +714,23 @@ Still connected to CDB2 (the target CDB), you will now plug in UPGR and convert 
 
 Now that you know how to manually perform a PDB conversion, you can explore the easy option: AutoUpgrade. Using a different database (UP19), you will perform the same operation but this time using AutoUpgrade. Both the non-CDB and CDB is running on Oracle Database 19c. AutoUpgrade detects this and will skip the upgrade and proceed directly to the plug-in operation. 
 
-1. Set the environment to UP19 and start it up.
+1. Set the environment to UP19 and connect.
 
     ```
     <copy>
     . up19
-    sqlplus / as sysdba<<EOF
-        startup;
-    EOF
+    sqlplus / as sysdba
+    </copy>
+
+    Be sure to hit RETURN
+    ```
+
+2. Start the database.
+
+    ```
+    <copy>
+    startup;
+    exit
     </copy>
 
     Be sure to hit RETURN
@@ -786,18 +797,7 @@ Now that you know how to manually perform a PDB conversion, you can explore the 
     </copy>
     ```
 
-5. When AutoUpgrade reports *Job 100 completed* then the PDB conversion is done. Shut down the old source database.
-
-    ```
-    <copy>
-    . up19
-    sqlplus / as sysdba<<EOF
-        shutdown immediate;
-    EOF
-    </copy>
-
-    Be sure to hit RETURN
-    ```    
+5. When AutoUpgrade reports *Job 100 completed* then the PDB conversion is done. 
 
 6. Connect to the new PDB, *UP19PDB*.
     
@@ -832,7 +832,15 @@ Now that you know how to manually perform a PDB conversion, you can explore the 
     UP19PDB              READ WRITE           NO
 
     ```
-    </details>    
+    </details>
+
+8. Exit from SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```    
 
 9. In this task, you did not check for plug-in compatibility using a manifest file (like you did in tasks 1 and 2). On a real database you should do that; it is best practice. When you need to check for plug-in compatibility, you can generate the manifest file without having the database in read-only mode.
 
@@ -846,4 +854,4 @@ You may now *proceed to the next lab*.
 ## Acknowledgements
 * **Author** - Mike Dietrich
 * **Contributors** - Daniel Overby Hansen, Roy Swonger, Sanjay Rupprel, Cristian Speranta, Kay Malcolm
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2023
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2023

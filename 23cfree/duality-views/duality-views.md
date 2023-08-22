@@ -6,6 +6,8 @@ This lab demonstrates the extreme flexibility of JSON Duality Views in the Oracl
 
 Estimated Time: 20 minutes
 
+[Lab 4](videohub:1_w820xz7v)
+
 ### Objectives
 
 In this lab, you will:
@@ -26,7 +28,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    SELECT * FROM movie_details where movie_id = 4006;
+    SELECT * FROM movie_details where title = 'Stuart Little';
 
     INSERT INTO MOVIES_DV VALUES('{ "movie_id" : 4006,
                                 "title" : "Stuart Little",
@@ -41,7 +43,7 @@ This lab assumes you have:
                                             "genre_name" : "Family"}]}'
     );
 
-    SELECT * FROM movie_details where movie_id = 4006;
+    SELECT * FROM movie_details where title = 'Stuart Little';
     </copy>
     ```
     ![adding the movie](images/little.png " ")
@@ -50,48 +52,49 @@ This lab assumes you have:
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
-    FROM GENRES_DV WHERE json_value(data, '$.genre_id') = 26;
+    FROM GENRES_DV WHERE json_value(data, '$.genre_name') = 'Psychological Thriller';
 
-    INSERT INTO generes
+    INSERT INTO genres
     VALUES(26, 'Psychological Thriller', 'Psychological Thriller: mind-bending suspense, intricate narratives, and gripping twists that keep you on edge. Prepare for intense psychological tension and thrilling storytelling.');
 
     SELECT json_serialize(data PRETTY)
-    FROM GENRES_DV WHERE json_value(data, '$.genre_id') = 26;
+    FROM GENRES_DV WHERE json_value(data, '$.genre_name') = 'Psychological Thriller';
+
     </copy>
     ```
     
     ![adding a new description](images/psy_thriller.png " ")
 
-## Task 2: Update and replace a document by ID
+## Task 2: Duality View benefits
 
-1. In the previous lab, you learned how to insert records into a SQL table and a document into the duality view. Now, we will go one step further and update the Kids genre table using SQL. This change will be reflected in all documents that contain the Kids genre. Copy the sql below and click **Run Script**
+1. Like the previous lab, lets make an update to the `GENRES_DV`. The important thing to note here is, this change will be reflected in **all documents** that contain the Kids genre. Copy the sql below and click **Run Script**
 
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
-    FROM GENRES_DV WHERE json_value(data, '$.genre_id') = 25;
+    FROM GENRES_DV WHERE json_value(data, '$.genre_name') = 'Kids';
     </copy>
     ```
     We can see that the Kids genre exists but has no description. Let's update this via SQL.
 
-    ![showing the genre 25 isnt there](images/no_description.png " ")
+    ![showing the genre 25 description is not there](images/no_description.png " ")
 
 2. Let's update the description of the Kids genre. Copy the sql below and click **Run Statement**
  
     ```
     <copy>
-    UPDATE GENERES
-    SET GENERE_DESCRIPTION = 'Kids genre: captivating, educational, and imaginative films that bring joy to young viewers. Explore enchanting adventures and relatable characters, creating cherished memories for families.'
-    WHERE GENERE_ID = 25;
+    UPDATE GENRES
+    SET GENRE_DESCRIPTION = 'Kids genre: captivating, educational, and imaginative films that bring joy to young viewers. Explore enchanting adventures and relatable characters, creating cherished memories for families.'
+    WHERE GENRE_ID = 25;
     </copy>
     ```
     ![showing the update ](images/kids_description.png " ")
 
-3. Now, let's check the Genres table again to see the updated description. Copy the sql below and click **Run Script**
+3. Now, let's check the `GENRES` table again to see the updated description. Copy the sql below and click **Run Script**
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
-    FROM GENRES_DV WHERE json_value(data, '$.genre_id') = 25;
+    FROM GENRES_DV WHERE json_value(data, '$.genre_name') = 'Kids';
     </copy>
     ```
     We can see that the Kids genre now has a new description.
@@ -107,11 +110,11 @@ This lab assumes you have:
     ```
     ![showing all the movies with the kids genre](images/updated_kids_description.png " ")
 
-5. Finally, since we made an update via an SQL INSERT statement, let's insert a record via the Duality View. We will add a description to the Family genre. First, check the current description. Copy the sql below and click **Run Script**
+5. Finally, since we made an update via a SQL INSERT statement, let's insert a record via the Duality View. We will add a description to the Family genre. First, check the current description. Copy the sql below and click **Run Script**
 
     ```
     <copy>
-    SELECT GENERE_DESCRIPTION FROM GENERES WHERE GENERE_NAME = 'Family';
+    SELECT GENRE_DESCRIPTION FROM GENRES WHERE GENRE_NAME = 'Family';
     </copy>
     ```
     ![checking for a description in the family genre](images/fam_description.png " ")

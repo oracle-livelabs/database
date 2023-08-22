@@ -8,7 +8,7 @@ HeatWave is a massively parallel, high-performance, in-memory query accelerator 
 
 ## About this Workshop
 
-In this workshop, you will use the capabilities of HeatWave Machine Learning (ML) to implement a project which classifies species of Iris flowers. This project is also known as the Hello World version of Machine Learning. You will create and use a predictive machine learning model to step through preparing data, using the ML\_TRAIN routine to train a model, and using ML\_PREDICT\_ and ML\_EXPLAIN\_ routines to generate predictions and explanations. Finally, you will assess the quality of a model using the ML_SCORE routine and how to view a model explanation to understand how your model works.
+In this workshop, you will use the capabilities of HeatWave AutoML to implement a project which classifies species of Iris flowers. This project is also known as the Hello World version of Machine Learning. You will create and use a predictive machine learning model to step through preparing data, using the ML\_TRAIN routine to train a model, and using ML\_PREDICT\_ and ML\_EXPLAIN\_ routines to generate predictions and explanations. Finally, you will assess the quality of a model using the ML_SCORE routine and how to view a model explanation to understand how your model works.
 
 The workshop uses the publicly available [Iris Data Set] (https://archive.ics.uci.edu/ml/datasets/Iris)  from the UCI Machine Learning Repository and MySQL HeatWave version 8.0.32.
 
@@ -33,9 +33,13 @@ The sepal is the part that encases and protects the flower when it is in the bud
 
 _Estimated Time:_ 2 hours
 
+Watch the video below for a quick walk-through of the lab.
+
+[Automate ML Apps with MySQL HeatWave](videohub:1_mgj1acg7)
+
 ### About Product/Technology
 
-HeatWave ML makes it easy to use machine learning, whether you are a novice user or an experienced ML practitioner. You provide the data, and HeatWave ML analyzes the characteristics of the data and creates an optimized machine learning model that you can use to generate predictions and explanations. An ML model makes predictions by identifying patterns in your data and applying those patterns to unseen data. HeatWave ML explanations help you understand how predictions are made, such as which features of a dataset contribute most to a prediction.
+HeatWave ML makes it easy to use machine learning, whether you are a novice user or an experienced ML practitioner. You provide the data, and HeatWave AutoML analyzes the characteristics of the data and creates an optimized machine learning model that you can use to generate predictions and explanations. An ML model makes predictions by identifying patterns in your data and applying those patterns to unseen data. HeatWave ML explanations help you understand how predictions are made, such as which features of a dataset contribute most to a prediction.
 
   ![Machine learning is easier with MySQL HeatWave](./images/heatwave-ml-easy.png "heatwave-ml-easy")
 
@@ -68,4 +72,4 @@ In this lab, you will be guided through the following steps:
 - **Contributors** - Salil Pradhan, Principal Product Manager,
 Nick Mader, MySQL Global Channel Enablement & Strategy Manager
 Marco Carlessi, MySQL Solution Engineering
-- **Last Updated By/Date** - Marco Carlessi, MySQL Solution Engineering, Feb 2023
+- **Last Updated By/Date** - Marco Carlessi, MySQL Solution Engineering, Jul 2023

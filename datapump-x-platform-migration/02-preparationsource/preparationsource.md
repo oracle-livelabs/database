@@ -6,6 +6,8 @@ In this lab, you will enable archive logging on the source database and create t
 
 Estimated Time: 5 minutes
 
+[](videohub:1_6r0h36gm)
+
 ### Objectives
 
 - Prepare the source database
@@ -57,7 +59,7 @@ Switch to the source directory
 
     ![change XTTS source directory](./images/change-xtts-src-dir.png " ")
 
-    and unzip 'rman_xttconvert_VER4.3.zip' 
+    and unzip 'rman\_xttconvert\_VER4.3.zip' 
 
     ```
     <copy>

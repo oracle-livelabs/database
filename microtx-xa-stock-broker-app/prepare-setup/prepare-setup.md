@@ -18,11 +18,11 @@ This lab assumes you have:
 ## Task 1: Download Oracle Resource Manager (ORM) stack ZIP file
 1.  Click the following link to download the Resource Manager ZIP file that you need to build your environment.
 
-    - [tmm-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/PszwMj5X-ILvE5_5yNipJvl2qTiqDxcFEjC219McuqtGmycd2vAQhlfaXTX7gfuY/n/natdsecurity/b/stack/o/tmm-mkplc-freetier.zip)
+    - [ll-orm-microtx-xa-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/ll-orm-microtx-xa-freetier.zip)
 
 2. Save the ZIP file in your downloads folder.
 
-Oracle strongly recommends that you use this stack to create a self-contained or dedicated VCN with your instance(s). Skip to [Task 3](#task-3-set-up-a-compute-instance) to follow our recommendations. If you would rather use an existing VCN, then proceed to the next task to update your existing VCN with the required Ingress rules.
+Oracle strongly recommends that you use this stack to create a self-contained or dedicated VCN with your instance(s). Skip to Task 3 to follow our recommendations. If you would rather use an existing VCN, then proceed to the next task to update your existing VCN with the required Ingress rules.
 
 ## Task 2: Add Security Rules to an Existing VCN
 
@@ -64,11 +64,11 @@ This workshop requires a certain number of ports to be available, a requirement 
 Using the details from the two tasks that you have previously completed, proceed to the next lab *Environment Setup* to set up your workshop environment using Oracle Resource Manager (ORM) and use one of the following options:
 
 -  Create Stack:  *Compute + Networking* (Oracle strongly recommends that you use this option.)
--  Create Stack:  *Compute only* with an existing VCN where security lists have been updated as per [Task 2](#task-2-add-security-rules-to-an-existing-vcn).
+-  Create Stack:  *Compute only* with an existing VCN where security lists have been updated as per Task 2.
 
 You may now **proceed to the next lab**.
 
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
-* **Contributors** - Meghana Banka
-* **Last Updated By/Date** - Sylaja Kannan, June 2023
+* **Contributors** - Meghana Banka, Brijesh Deo
+* **Last Updated By/Date** - Sylaja Kannan, July 2023

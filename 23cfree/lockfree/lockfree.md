@@ -10,6 +10,10 @@ In this lab, we will explore the concept of lock-free reservations and their imp
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+
+[Lock Free Video](videohub:1_u652vn55)
+
 ### Objectives
 
 * Understand the concept of lock-free reservations and their benefits.
@@ -30,6 +34,9 @@ Estimated Time: 10 minutes
 * Knowledge of session behavior and transaction management.
 
 ## Task 1: Normal Update
+
+
+In the realm of database management, traditional updates in Oracle databases were once considered the standard method for modifying data within a table.
 
 Task 1 focuses on normal updates. By opening three windows as User 2, we will perform updates on the inventory\_no\_reservations table. In Window 1, we will decrease the budget of a record by 100 but refrain from committing the changes. In Window 2, we will attempt to update the same record by 100, resulting in a session hang due to the uncommitted changes in Window 1. Similarly, in Window 3, we will decrease the record by 200, causing another session hang. We will then commit the changes in Window 1, releasing one of the other two windows. If any freed-up window encounters an error when committing, we will take note of the error message. Note that an insufficient budget amount will cause an abort.
 
@@ -89,22 +96,22 @@ Once connected proceed to step 2.
 
     ```
     <copy>
-    UPDATE s1.inventory_no_reservations
-    SET budget = budget - 100
-    WHERE ID = 1;
-
     COMMIT;
     </copy>
     ```
 
-6. Once the last two windows are freed up, and you are able to commit, proceed to the next step. Note that the lack of concurrency to execute multiple commits simulateneously is caused by not having lock-free reservations enabled for the table.
+6. Once the last two windows are freed up, and you are able to commit, proceed to the next step. 
+
+Key Insight: This approach is now increasingly becoming a thing of the past as Oracle has evolved to offer more efficient and scalable alternatives like lock-free reservations. Unlike the conventional update process, lock-free reservations utilize advanced concurrency control mechanisms, enabling multiple transactions to work concurrently on the same data without imposing locks that can hinder performance and introduce potential conflicts.
 
 
 ## Task 2: Lock-Free Reservations
 
+This innovation fosters a more streamlined and responsive data processing environment, allowing for faster and more seamless data modifications without compromising data integrity. Lock-free reservations have revolutionized the way databases handle updates, providing a more optimized and scalable solution in the present digital landscape.
+
 Task 2 introduces the concept of lock-free reservations. Using the same three windows, we will now perform updates on the inventory\_reservations table. In Window 1, we will decrease the budget of a record by 200 without committing. In Window 2, we will decrease the same record by 200, and unlike before, the session will not hang. In Window 3, we will attempt to decrease the record by 200, going below the "threshold," which will result in a session error. We will then commit the changes in Window 1 and rollback the changes in Window 2. Finally, we will run the transaction again in Window 3, which should succeed because we have restored the reserved amount in the budget column.
 
-Note: Using the same 3 windows please `Ctrl+C` to get out of session hangs.
+Note: Using the same 3 windows.
 
 1. Window 1 update table 2 (inventory\_reservations) table decrease the record by 200. Do not commit.
 
@@ -116,7 +123,7 @@ Note: Using the same 3 windows please `Ctrl+C` to get out of session hangs.
     </copy>
     ```
 
-2. Window 2 update table 2 and decrease the same record by 200. Make sure you press `Ctrl+C` to revitalize your session.
+2. Window 2 update table 2 and decrease the same record by 200.
 
     ```
     <copy>
@@ -130,7 +137,7 @@ Note: Using the same 3 windows please `Ctrl+C` to get out of session hangs.
 
     * Note: Notice how the session does not hang like it did using old normal updates in the last task. This is due to the concurrency Lock-Free enables for dba user experience.
 
-* Commit Window 1
+    * Commit Window 1
 
     ```
     <copy>
@@ -171,6 +178,8 @@ Note: Using the same 3 windows please `Ctrl+C` to get out of session hangs.
     COMMIT;
     </copy>
     ```
+
+Congratulations on completing the Lock-Free Reservations lab! You have experienced firsthand how this innovative feature enhances database performance by enabling concurrent updates to specific columns without session hanging. With lock-free reservations, you can ensure smoother and more efficient operations, providing a seamless user experience. Keep leveraging these powerful capabilities to optimize your database management and stay ahead in your Oracle journey!
 
 ## Acknowledgements
 
