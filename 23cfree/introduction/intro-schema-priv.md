@@ -4,6 +4,15 @@
 ## About this workshop
 Welcome to Live Labs, where we explore and delve into the fascinating realm of Oracle database management! In today's session, we will be focusing on two intriguing topics: Oracle Schema Level Privileges and Lock Free Column Reservations.
 
+Estimated Workshop Time: 30 Minutes
+
+Watch the video below for a quick walk-through of the lab.
+
+[Lock Free Video](videohub:1_np89hzce)
+
+
+### About Schema Priveleges and Lock-Free Reservations
+
 ### **Schema Level Privileges**
 
 Oracle Schema Level Privileges play a pivotal role in controlling access and security within an Oracle database. A schema, in Oracle, can be thought of as a logical container that holds database objects such as tables, views, procedures, and more. With schema level privileges, we can grant or revoke permissions to users or roles, ensuring that the right individuals have the appropriate level of access to the schema's objects.
@@ -44,9 +53,6 @@ So, whether you're an Oracle enthusiast, a database administrator, or simply eag
 
 By completing these labs, you will gain practical experience in setting up a database environment, granting privileges, and utilizing the lock-free reservations feature in Oracle. Have a great learning experience!
 
-
-Estimated Time: 30 Minutes
-
 ### **Objectives**
 
 In this lab, you will:
@@ -63,14 +69,13 @@ In order to do this workshop you need
 
 You may **proceed to the next lab.**
 
-
-## Acknowledgements
-
-* **Author(s)** - Blake Hendricks, Database Product Manager
-* **Contributor(s)** - Vasudha Krishnaswamy
-* **Last Updated By/Date** - 5/25/2023
-
 ## Learn More
 
 * [Lock-Free Reservations Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/adfns/using-lock-free-reservation.html#GUID-60D87F8F-AD9B-40A6-BB3C-193FFF0E60BB)
 * [Schema Priveledges](https://oracle-base.com/articles/23c/schema-privileges-23c)
+
+## Acknowledgements
+
+* **Author(s)** - Blake Hendricks, Database Product Manager
+* **Contributor(s)** - Vasudha Krishnaswamy, Russ Lowenthal
+* **Last Updated By/Date** - 7/1/2023
