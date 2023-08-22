@@ -6,8 +6,11 @@ In this lab you will view the queries created the graph (that is, `bank_graph`) 
 
 Estimated Time: 10 minutes.
 
+<if type="livelabs">
 Watch the video below for a quick walk-through of the lab. 
-[Walkthrough](videohub:1_ypjlr8es)
+[Change password](videohub:1_ypjlr8es)
+</if>
+
 
 ### Objectives
 Learn how to:

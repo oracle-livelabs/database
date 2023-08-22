@@ -12,6 +12,9 @@ You can think of the *kubeconfig* file as consolidated version of the `TNS_ADMIN
 
 *Estimated Time:* 10 minute
 
+[Lab 4](videohub:1_ff2m583f)
+
+
 ### Objectives
 
 * Establish a connection and interact with the cluster
