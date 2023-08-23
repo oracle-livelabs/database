@@ -28,7 +28,7 @@ The LiveLabs Sandbox environment comes with a pre-created Autonomous Database (A
 
     ![Navigate to Autonomous Transaction Processing](images/navigate-atp.png " ")
 
-3. Select the compartment you were assigned. Expand the **root** compartment and then the **Livelabs** compartment. Select the **Compartment** assigned to you.You can verify the compartment assigned to you from the credentials page. Example: LLxxxxx-COMPARTMENT. Make sure to select the right compartment assigned to you, if not you will not be able to see the ATP database.
+3. Select the compartment you were assigned. Expand the **root** compartment and then the **Livelabs** compartment. Select the **Compartment** assigned to you.You can verify the compartment assigned to you from the credentials page. Example: LL57859-COMPARTMENT. Make sure to select the right compartment assigned to you, if not you will not be able to see the ATP database.
 
     ![Select Compartment](images/select-compartment.png " ")
 

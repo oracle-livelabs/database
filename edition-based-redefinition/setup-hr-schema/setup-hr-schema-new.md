@@ -44,15 +44,23 @@ In this lab, you will
 
    ![ATP Credentials](images/atp-credentials.png " ")
 
-   For example if your database name is "EBRONLINE57859", use "ebronline57859_medium" as connect string.
+   For example if your database name is "EBRONLINE57859", use "ebronline57859_medium" as connect string. 
 
     ```text
     <copy>connect admin@ebronline57859_medium</copy>
     ```
+    You are required to select a service when you connect to ATP database,currently there are five services available as listed below. We are going to use **medium** service in this lab.
+
+    - databasename_tpurgent
+    - databasename_tp
+    - databasename_high
+    - databasename_medium
+    - databasename_low
+
     We will use anyone of the below connect strings depending on the user we would like to connect in upcoming labs.Save the connect command line for later use
 
-    - **connect admin@ebronline57859\_medium** 
-    - **connect hr@ebronline57859\_medium**
+    - **connect admin@ebronline57859\_medium**  --- Use this for admin user
+    - **connect hr@ebronline57859\_medium** --- Use this for HR user
 
    ![ATP Connect](images/atp-connect.png " ")
 

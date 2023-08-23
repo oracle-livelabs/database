@@ -50,7 +50,7 @@ Estimated Workshop Time : 2 hours
 
 ### Workshop prerequisites
 
-There are no prerequisites if you run this lab in a LiveLabs sandbox environment. An Autonomous database serverless (Autonomous Transactio Processing ) will be provisioned and made available to use.
+There are no prerequisites if you run this lab in a LiveLabs sandbox environment. An Autonomous database serverless (Autonomous Transaction Processin-ATP) will be provisioned and made available to use.
 
 You can also run this workshop with the Always Free offering in your tenancy! You will need an OCI Free Tier subscription with an Autonomous Database available.
 
