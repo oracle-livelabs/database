@@ -120,6 +120,8 @@ We have pre-created these scripts and the scope of the lab is not to explain the
     <copy>sql /nolog</copy>
     ```
 
+    **Replace ebronline_medium with your connection string. You must have noted down your connect strings in Lab 2**
+    
     ```text
     <copy>set cloudconfig ebronline.zip</copy>
     <copy>connect hr/Welcome#Welcome#123@ebronline_medium</copy>
