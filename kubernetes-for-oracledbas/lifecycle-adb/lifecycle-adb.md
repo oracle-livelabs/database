@@ -18,6 +18,9 @@ The actions that the **OraOperator** support for the AutonomousDatabase resource
 
 *Estimated Time:* 15 minutes
 
+[Lab 9](videohub:1_2me0ogqv)
+
+
 ### Objectives
 
 * Perform Lifecycle Operations on an ADB using the **OraOperator**

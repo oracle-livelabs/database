@@ -17,8 +17,10 @@ This lab assumes you have:
 * Oracle Database 23c Free Developer Release
 * A terminal or console access to the database
 
+<if type="livelabs">
 Watch the video below for a quick walk-through of the lab. The lab instructions on the left might not match the workshop you are currently in, but the steps in the terminal on the right remain the same.
 [Change password](videohub:1_x4hgmc2i)
+</if>
 
 ## Task 1: Setting database user password and starting ORDS
 
