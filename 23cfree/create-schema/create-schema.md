@@ -8,6 +8,8 @@ In this lab, we will be installing Swingbench, a powerful performance testing to
 
 Estimated Time: 15 minutes
 
+[Lab 1](videohub:1_3rgp8l51)
+
 ### Objectives
 
 In this lab, you will:
