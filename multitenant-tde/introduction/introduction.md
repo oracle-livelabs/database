@@ -14,7 +14,7 @@ TDE encrypts sensitive data stored in data files. To prevent unauthorized decryp
 
 As you go through the lesson we have also added best practices throughout the module.  There are things that you should be careful of when working with TDE and moving PDB’s between containers, like what happens if you have moved a database to a different container, but need to retore the current version from the previous container.  
 
-*Estimated Workshop Time*: 1.5 hours
+*Estimated Time*: 1.5 hours
 
 Watch the video below for an overview of Oracle Multitenant.
 
