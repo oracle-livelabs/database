@@ -91,7 +91,7 @@ Watch the video below for a quick walk-through of the lab.
     ```
     <copy>
     cd /tmp
-    wget -q --show-progress https://download.oracle.com/otn-pub/otn_software/db-free/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
+    wget -q --show-progress https://download.oracle.com/otn-pub/otn_software/db-free/oracle-database-free-23c-*.el8.x86_64.rpm
     </copy>
     ```
     ![Download Software](images/install-2-1new.png " ")

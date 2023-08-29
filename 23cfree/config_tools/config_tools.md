@@ -33,7 +33,7 @@ This lab assumes you have:
 2. A newer version of java will be installed and you will need to ensure the environment variable JAVA_HOME is pointing at it. Some of the utilities require a higher version.
     ```
     <copy>
-    sudo dnf install -y java
+    sudo dnf install -y java-17-openjdk.x86_64
 
     java -version
 
