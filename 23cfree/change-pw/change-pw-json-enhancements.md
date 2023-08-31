@@ -35,7 +35,7 @@ This lab assumes you have:
 
     **NOTE:** We did not use nohup or send the output to /dev/null to verify that ORDS is properly started and the MongoDB API enabled. This is for demonstration purposes. So you must leave this terminal open and the process running. Closing either will stop ORDS from running, and you will not be able to access other applications that are used in this lab.
 
-    Also, under some rare circumstances you can experience ORDS to crash if not all ORDS components are properly initialized before you start using Database Actions. Having a separate terminal with the ORDS output ensures to see ORDS working. It takes ORDS somewhere between 60 to 120 seconds to initialize.
+    Also, under some rare circumstances you can experience the JVM to crash if not all ORDS components are properly initialized before you start using Database Actions. Having a separate terminal with the ORDS output ensures to see ORDS working. It takes ORDS somewhere between 60 to 120 seconds to initialize.
 
 
   If ORDS started successfully and the MongoDB API is successfully enabled, then you will see an output similar to the following:
