@@ -16,7 +16,7 @@ You can use a 1-node virtual database system to complete labs and tutorials that
 
 1. From the Console menu, click on **Bare Metal, VM, and Exadata**.
 
-  ![](https://raw.githubusercontent.com/oracle/learning-library/master/common/images/console/database-dbcs.png " ")
+  ![](https://oracle-livelabs.github.io/common/images/console/database-dbcs.png " ")
 
 2. Select the compartment you want to create the database in and click on **Create DB System**.
 

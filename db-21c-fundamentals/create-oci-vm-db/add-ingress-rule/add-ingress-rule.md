@@ -14,7 +14,7 @@ Oracle Cloud Infrastructure provides a quick and easy way to create an Oracle Da
 
 1. After logging into your Oracle Cloud account, click the **Navigation Menu** in the upper left, navigate to **Networking**, and select **Virtual Cloud Networks**.
 
-	![](https://raw.githubusercontent.com/oracle/learning-library/master/common/images/console/networking-vcn.png " ")
+	![](https://oracle-livelabs.github.io/common/images/console/networking-vcn.png " ")
 
 3. On the left menu, click **Security Lists**.
 
