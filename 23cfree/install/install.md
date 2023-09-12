@@ -91,6 +91,7 @@ Watch the video below for a quick walk-through of the lab.
     ```
     <copy>
     cd /tmp
+
     wget  -q --show-progress https://objectstorage.us-ashburn-1.oraclecloud.com/p/jyHA4nclWcTaekNIdpKPq3u2gsLb00v_1mmRKDIuOEsp--D6GJWS_tMrqGmb85R2/n/c4u04/b/livelabsfiles/o/labfiles/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
     </copy>
     ```
