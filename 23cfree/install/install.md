@@ -91,7 +91,8 @@ Watch the video below for a quick walk-through of the lab.
     ```
     <copy>
     cd /tmp
-    wget -q --show-progress https://download.oracle.com/otn-pub/otn_software/db-free/oracle-database-free-23c-*.el8.x86_64.rpm
+
+    wget  -q --show-progress https://objectstorage.us-ashburn-1.oraclecloud.com/p/jyHA4nclWcTaekNIdpKPq3u2gsLb00v_1mmRKDIuOEsp--D6GJWS_tMrqGmb85R2/n/c4u04/b/livelabsfiles/o/labfiles/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
     </copy>
     ```
     ![Download Software](images/install-2-1new.png " ")
@@ -99,7 +100,7 @@ Watch the video below for a quick walk-through of the lab.
 2. Install the database software using the dnf command. This will take about 5-10 minutes.
     ```
     <copy>
-    dnf -y localinstall /tmp/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
+    dnf -y localinstall /tmp/oracle-database-free-23c-*.el8.x86_64.rpm
     </copy>
     ```
     ![Install Software](images/install-2-2new.png " ")   
