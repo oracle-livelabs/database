@@ -33,15 +33,14 @@ This lab assumes you have:
 2. A newer version of java will be installed and you will need to ensure the environment variable JAVA_HOME is pointing at it. Some of the utilities require a higher version.
     ```
     <copy>
-    sudo dnf install -y graalvm-17-jdk.x86_64
+    sudo dnf install -y jdk-17.x86_64
 
     java -version
 
     echo $JAVA_HOME
     </copy>
-    sudo dnf install -y graalvm-20-jdk.x86_64 jdk-18.x86_64 graalvm-17-jdk.x86_64
     ```
-    ![Java Install](images/tools-1-2new.png " ")
+    ![Java Install](images/tools-1-2a.png " ")
 
 3. Install SQLcl using dnf.
     ```
