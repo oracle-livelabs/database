@@ -43,7 +43,7 @@ In the [Bind to an ADB](?lab=bind-adb) Lab, you redefined the `adb-existing` res
     <copy>
     export ORACLE_HOME=$(pwd)
     export TNS_ADMIN=$ORACLE_HOME/network/admin
-    mkdir -p $ORACLE_HOME/network/adminrr
+    mkdir -p $ORACLE_HOME/network/admin
 
     # Extract the tnsnames.ora secret
     kubectl get secret/adb-tns-admin \
@@ -131,7 +131,7 @@ Everything you needed to make a connection to the ADB could be obtained from Kub
 
 ## Task 3: Scale the CPU and Storage - Down
 
-You've now have seen how to apply a *manifest file* and use `kubectl patch` to redefine a Kubernetes resource, but you can also edit the resource directly:
+You have now seen how to apply a *manifest file* and use `kubectl patch` to redefine a Kubernetes resource, but you can also edit the resource directly:
 
 1. Edit the resource:
 
@@ -152,7 +152,7 @@ You've now have seen how to apply a *manifest file* and use `kubectl patch` to r
 
     ![Edit ADB](images/adb_edit.png "Edit ADB")
 
-2. In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB back in a "Scaling In Progress" state, decreasing the CPU and Storage.
+2. In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB in the "Scaling In Progress" state, decreasing the CPU and Storage.
 
 3. Of course you can also watch it from Kubernetes:
 

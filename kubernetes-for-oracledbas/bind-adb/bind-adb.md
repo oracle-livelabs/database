@@ -223,7 +223,7 @@ Now that you've defined two *Secrets* in Kubernetes, redefine the `adb-existing`
 
     Take a quick look at the syntax:
 
-    You are appending to the `adb_existing.yaml` manifest to **redefine** the `adb-existing` resource, setting the `spec.details.adminPassword` and `spec.details.wallet` keys.  Under the wallet section, you are specifying the name of a *Secret*, `adb-tns-admin`, that the OraOperator will define to to store the wallet.
+    You are appending to the `adb_existing.yaml` manifest to **redefine** the `adb-existing` resource, setting the `spec.details.adminPassword` and `spec.details.wallet` keys.  Under the wallet section, you are specifying the name of a *Secret*, `adb-tns-admin`, that the OraOperator will define to store the wallet.
 
 2. Apply the manifest:
 
