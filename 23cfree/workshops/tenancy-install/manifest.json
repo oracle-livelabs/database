@@ -57,7 +57,8 @@
             "title": "Lab 5: 23c New Features",
             "description": "Setting up the various tools",
             "type": "livelabs",
-            "filename": "../../sql-23c-features/sql-23c-features.md"
+            "filename": "../../sql-23c-features/sql-23c-features.md",
+            "type": "23c-install"
         },
         {
           "title": "Need Help?",
