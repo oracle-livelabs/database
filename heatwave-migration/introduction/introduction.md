@@ -48,7 +48,7 @@ In this lab, you will learn how to:
 
 ### Prerequisites
 
-- An [Oracle Free Tier] (https://www.oracle.com/cloud/free/), Paid or a LiveLabs Cloud Account
+- An Oracle Cloud Account
 - Some Experience with MySQL Shell - [MySQL shell] (https://dev.MySQL.com/doc/MySQL-shell/8.0/en/)
 
 
@@ -58,4 +58,4 @@ In this lab, you will learn how to:
 
 - **Contributors** - Perside Foster, MySQL Solution Engineering
 
-- **Last Updated By/Date** - Ravish Patel, MySQL Solution Engineering, March 2023
+- **Last Updated By/Date** - Ravish Patel, MySQL Solution Engineering, June 2023

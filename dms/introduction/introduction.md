@@ -15,19 +15,19 @@ DMS provides high performance, fully managed approach to migrating databases fro
 * **Offline**: The Migration makes a point-in-time copy of the source to the target database. Any changes to the source database during migration are not copied, requiring any applications to stay offline for the duration of the migration.
 * **Online**: The Migration makes a point-in-time copy and replicates all subsequent changes from the source to the target database. This allows applications to stay online during the migration and then be switched over from source to target database.
 
-In the current release of DMS we support Oracle databases located on-premises, in third-party clouds, or on OCI as the source and Oracle Autonomous Database shared or dedicated as the target database. Below is a table of supported configurations;
+In the current release of DMS we support Oracle databases located on-premises, in third-party clouds, or on OCI as the source and Oracle Autonomous Database serverless or dedicated as the target database. Below is a table of supported configurations;
 
 |                  |  |     
 |--------------------------|-------------------------|
-| Source Databases | Oracle DB 11g, 12c, 18c, 19c: <br>on-premises, third-party cloud, OCI  |   
-| Target Databases | ADB shared and dedicated |    
+| Source Databases | Oracle DB 11g, 12c, 18c, 19c, 21c: <br>on-premises, third-party cloud, OCI  |   
+| Target Databases | ADB serverless and dedicated <br> Co-managed Oracle Base Database (VM, BM)<br> Exadata on Oracle Public Cloud. |    
 | Migration Modes  | Direct Access to Source <br>(VPN or Fast Connect) Indirect Access to Source <br>(Agent on Source Env) |                        |  
 | Initial Load <br> (Offline Migration) | Logical Migration using <br>Data Pump to Object Store <br>Data Pump using SQLnet |  |
 | Replication <br> (Online Migration) | GoldenGate Marketplace |
 
 The DMS service runs as a managed cloud service separate from the user's tenancy and resources. The service operates as a multitenant service in a DMS Service Tenancy and communicates with the user's resources using Private Endpoints (PEs). PEs are managed by DMS and are transparent to the user.
 
-![](images/dms-simplified-topology-2.png =80%x*)
+![DMS topology](images/dms-simplified-topology-2.png =80%x*)
 
 * **DMS Control Plane**: Used by DMS end user to manage Migration and Registered Database objects. The control plane is exposed through the DMS Console UI as well as the REST API.
 * **DMS Data Plane**: Managed by DMS Control Plane and transparent to the user. The GGS Data Plane manages ongoing migration jobs and communicates with the user's databases and GoldenGate instance using PEs. The DMS data plane does not store any customer data, as data flows through GoldenGate and Data Pump directly within the user's tenancy.

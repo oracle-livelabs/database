@@ -2,7 +2,7 @@
 
 ## Introduction
 
-<a href="https://superset.apache.org/", target="\_blank">Superset</a> is one of the top Apache projects that offers a set of tools to build dashboards to visualize data stored in your database.
+[Superset](https://superset.apache.org/) is one of the top Apache projects that offers a set of tools to build dashboards to visualize data stored in your database.
 
 In this lab, you will deploy **Superset** using Helm to Oracle Container Engine for Kubernetes infrastructure, and create a simple dashboard for **MySQL HeatWave**.
 
@@ -32,11 +32,11 @@ This lab assumes you have:
 
 ## Task 1: Verify OKE cluster
 
-1. Click the **Hamburger Menu** ![](images/hamburger.png) in the upper left, navigate to **Developer Services** and select **Kubernetes Cluster (OKE)**
+1. Click the **Hamburger Menu** ![OCI Menu](images/hamburger.png) in the upper left, navigate to **Developer Services** and select **Kubernetes Cluster (OKE)**
 
     ![Navigate to OKE](images/navigate-to-oke.png)
 
-2. 2. Select the Compartment (e.g. HOL-Compartment) that you provisioned the OKE cluster, and verify the status of **oke_cluster** is **Active**
+2. Select the Compartment (e.g. HOL-Compartment) that you provisioned the OKE cluster, and verify the status of **oke_cluster** is **Active**
 
     ![Verify OKE](images/click-cluster.png)
 
@@ -44,13 +44,13 @@ This lab assumes you have:
 
 1. Connect to the **oke-operator** compute instance using OCI Cloud Shell
 
-	![Connect to VM](images/connect-to-vm.png)
+    ![Connect to VM](images/connect-to-vm.png)
 
 2. Install **helm** CLI client to **oke-operator** compute instance
 
     >**Note** Skip this step if you have helm client installed already
 
-    ```
+    ```text
     <copy>
     curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 |bash -
     </copy>
@@ -60,7 +60,7 @@ This lab assumes you have:
 
 3. Add **Superset** to helm repository
 
-    ```
+    ```text
     <copy>
     helm repo add superset https://apache.github.io/superset
     </copy>
@@ -70,7 +70,7 @@ This lab assumes you have:
 
 4. Generate **superset-custom-values.yaml** (update any specific variables if required) and install Superset package
 
-    ```
+    ```text
     <copy>
     helm show values superset/superset  > superset-custom-values.yaml
     kubectl create ns superset
@@ -82,7 +82,7 @@ This lab assumes you have:
 
 5. Verify the deployment status of Superset application
 
-    ```
+    ```text
     <copy>
     helm list -n superset
     kubectl get all -n superset
@@ -93,21 +93,23 @@ This lab assumes you have:
 
 6. Disable the **firewalld** service in **oke-operator** compute instance
 
-    ```
+    ```text
     <copy>
     sudo systemctl stop firewalld
     sudo systemctl disable firewalld
     </copy>
     ```
+
     > **Note** The purpose of this step is to simplify and allow port-forwarding service to the **oke-operator** compute instance. You should not disable the firewalld service in production
 
 7. Start port-forwarding to Superset service.
 
-    ```
+    ```text
     <copy>
     kubectl port-forward service/superset --address 0.0.0.0 8088:8088 -n superset &
     </copy>
     ```
+
     > **Note** This is an alternative way to access OKE services via kubernetes port-forwarding function that is different from using ingress-controller. Port-forwarding is only used for development and testing purposes only
 
 ## Task 3: Edit VCN Security List
@@ -142,7 +144,7 @@ This lab assumes you have:
 
 ## Task 5: Connect Superset to MySQL
 
-1. Login to OCI Console, select the **Hamburger Menu** ![](images/hamburger.png), type in **mysql** in the seach bar, select **DB System**
+1. Login to OCI Console, select the **Hamburger Menu** ![OCI Menu](images/hamburger.png), type in **mysql** in the seach bar, select **DB System**
 
 2. Click on **MySQLInstance**
     ![DB System](images/oci-mysql-dbsystem.png)
@@ -166,7 +168,7 @@ This lab assumes you have:
 
 ## Task 6: Execute SQL
 
-1.  Expand **SQL Lab** in Superset dashboard, and select **SQL Editor**
+1. Expand **SQL Lab** in Superset dashboard, and select **SQL Editor**
     ![SQL Editor menu](images/superset-sqllab-menu.png)
     ![SQL Editor menu](images/superset-sql-editor.png)
 
@@ -177,11 +179,14 @@ This lab assumes you have:
 
 ## Acknowledgements
 
-* **Author**
-	* Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
-	* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
-* **Contributors**
-	* Perside Foster, MySQL Solution Engineering North America
-	* Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
+Author
 
-* **Last Updated By/Date** - Ryan Kuan, May 2022
+* Ivan Ma, MySQL Solutions Engineer, MySQL Asia Pacific
+* Ryan Kuan, MySQL Cloud Engineer, MySQL Asia Pacific
+
+Contributors
+
+* Perside Foster, MySQL Solution Engineering North America
+* Rayes Huang, OCI Solution Specialist, OCI Asia Pacific
+
+Last Updated By/Date - Ryan Kuan, March 2023

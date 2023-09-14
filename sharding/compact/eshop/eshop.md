@@ -19,7 +19,7 @@ Typically, multiple technologies and products are required to develop such an ap
 
 The entire eShop application, including database configuration, front-end UI, and application logic, was developed within a two-week time frame.
 
-[](youtube:CAXepxXPC7Q)
+[Eshop Application](youtube:CAXepxXPC7Q)
 
 Watch the video below for a quick walk-through of the lab.
 [Build Applications with Oracle Sharding](videohub:1_5e2gjpn4)
@@ -247,11 +247,11 @@ When you are finished don't forget to rate this workshop!  We rely on this feedb
 1.  Go back to your **workshop homepage** in LiveLabs by searching for your workshop and clicking the Launch button.
 2.  Click on the **Brown Button** to re-access the workshop  
 
-    ![](https://oracle-livelabs.github.io/common/labs/cloud-login/images/workshop-homepage-2.png " ")
+    ![workshop homepage](https://oracle-livelabs.github.io/common/labs/cloud-login/images/workshop-homepage-2.png " ")
 
 3.  Click **Rate this workshop**
 
-    ![](https://oracle-livelabs.github.io/common/labs/cloud-login/images/rate-this-workshop.png " ")
+    ![rate this workshop](https://oracle-livelabs.github.io/common/labs/cloud-login/images/rate-this-workshop.png " ")
 
 If you selected the **Green Button** for this workshop and still have an active reservation, you can also rate by going to My Reservations -> Launch Workshop.
 

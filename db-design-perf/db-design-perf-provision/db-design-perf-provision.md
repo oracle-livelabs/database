@@ -94,27 +94,27 @@ Estimated Lab Time: 10 minutes
 
 5. Choose a deployment type. Select the deployment type for your database from the choices:
 
-    - __Shared Infrastructure__ - For this lab, choose __Shared Infrastructure__ as the deployment type.
+    - __Serverless__ - For this lab, choose __Serverless__ as the deployment type.
 
     ![Deployment type section](./images/p08-deployment-type-section.png " ")
 
 6. Configure the database:
 
 <if type="freetier">
-    - __Always Free__ - For this lab, you can select this option to create an always free autonomous database, or not choose this option and create a database using your paid subscription. An always-free database comes with 1 CPU and 20 GB of storage.
+    - __Always Free__ - For this lab, you can select this option to create an always free autonomous database, or not choose this option and create a database using your paid subscription. An always-free database comes with 2 CPUs and 20 GB of storage.
 </if>
 <if type="livelabs">
     - __Always Free__ - If visible, do not select this option.
 </if>
     - __Choose database version__ - Select a database version 19c from the available versions.
 <if type="freetier">
-    - __OCPU count__ - Number of CPUs for your service. For this lab, specify __2 CPUs__. Or, if you choose an always-free database, it comes with 1 CPU.
+    - __ECPU count__ - Number of CPUs for your service. For this lab, specify __4 CPUs__. Or, if you choose an always-free database, it comes with 2 CPUs.
 </if>
 <if type="livelabs">
-    - __OCPU count__ - Number of CPUs for your service. For this lab, specify __2 CPUs__.
+    - __ECPU count__ - Number of CPUs for your service. For this lab, specify __4 CPUs__.
 </if>
     - __Storage (TB)__ - Select your storage capacity in terabytes. If you select a storage size, specify __1 TB__ of storage.
-    - __OCPU Auto Scaling__ - For this lab, ensure auto-scaling is disabled to give a fixed allocation of resources to perform your benchmarks under the same conditions.
+    - __ECPU Auto Scaling__ - For this lab, ensure auto-scaling is disabled to give a fixed allocation of resources to perform your benchmarks under the same conditions.
     - __Storage auto Scaling__ - For this lab, ensure auto-scaling of storage is disabled.
     - __New Database Preview__ - If a checkbox is available to preview a new database version, do __not__ select it.
 

@@ -14,24 +14,36 @@
           "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
         },
 
+        
         {
-            "title": "Lab 1: Create MySQL HeatWave",
-            "filename": "../../create-dbs/create-dbs.md"
+          "title": "Lab 1: Create MySQL Database System and HeatWave Cluster",
+          "filename": "../../create-dbs/create-dbs.md"
+        },
+         
+        {
+          "title": "Lab 2: Add HeatWave cluster",
+          "filename": "../../add-heatwave-cluster/add-heatwave-cluster.md"
         },
 
         {
-          "title": "Lab 2: Add HeatWave Cluster to MySQL Database Service and connect",
-          "filename": "../../add-cluster/add-cluster.md"
+          "title": "Lab 3: Connect to MySQL DB System",
+          "filename": "../../connect-dbs/connect-dbs.md"
         },
 
+
         {
-            "title": "Lab 3: Build HeatWave ML with SQL",
+            "title": "Lab 4: Build HeatWave AutoML with SQL",
             "filename": "../../do-heatwave-ml/do-heatwave-ml.md"
         },
 
         {
-          "title": "Lab 4: Build HeatWave ML Web App with PHP",
+          "title": "Lab 5: (BONUS) Build HeatWave AutoML Web App with PHP",
           "filename": "../../develop/develop.md"
+        },
+        
+        {
+          "title": "Lab6: Stop OCI Services",
+          "filename": "../../stop-services/stop-services.md"
         },
 
         {

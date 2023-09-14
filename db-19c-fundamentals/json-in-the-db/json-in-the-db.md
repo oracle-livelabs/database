@@ -2,9 +2,9 @@
 
 ## Introduction
 
-The 19c generation of Oracle's converged database offers customers; best of breed support for all data types (e.g. relational, JSON, XML, spatial, graph, OLAP, etc.), and industry leading performance, scalability, availability and security for all their operational, analytical and other mixed workloads. A JSON collection stores JSON documents alongside some metadata like the time of creation or update. Collections offer operations like inserts, deletes, index creation or queries. We will be using Oracle SQL Developer Web (also known as Database Actions) - a development environment and a database administration interface for Oracle Database in the Oracle Public Cloud. For a complete integrated development environment, see Oracle SQL Developer User's Guide linked at the bottom of the lab.
+The 19c generation of Oracle's converged database offers you best of breed support for all data types (e.g. relational, JSON, XML, spatial, graph, OLAP, etc.), and industry leading performance, scalability, availability and security for all their operational, analytical and other mixed workloads. A JSON collection stores JSON documents alongside some metadata like the time of creation or update. Collections offer operations like inserts, deletes, index creation or queries. We will be using Oracle SQL Developer Web (also known as Database Actions) - a development environment and a database administration interface for the Oracle Database in the Oracle Public Cloud. For a complete integrated development environment, see Oracle SQL Developer User's Guide linked at the bottom of the lab.
 
-In order to create a collection all you have to specify is the collection's name. Unlike a relational table you do not have to provide any schema information. For our JSON lab, we'll be working with a collection of products that our fictitious retro movie and book retail store "RockBuster" sells.
+In order to create a collection, all you have to do is specify the collection's name. Unlike a relational table, you do not have to provide any schema information. For our JSON lab, we'll be working with a collection of merchandise that our fictitious movie streaming company, "Oracle MovieStream," sells.
 
 Estimated Time: 15 minutes
 
@@ -21,25 +21,28 @@ In this lab, you will:
 * Find JSON documents in a collection
 * Learn about JSON and Constraints
 * Use SQL on JSON data
+
 ### Prerequisites
 
 * Have provisioned an Autonomous Database instance
+* Have completed the 19C Setup Lab
 
 ## Task 1: Create Collection
 
-1. After your Autonomous Database has finished provisioning, click on the **Database Actions** button located at the top of the screen. 
+1. If you're not already looking at the SQL Developer Web interface, locate your Autonomous Database by clicking the hamburger menu in the top left of the screen, selecting Oracle Databases and choose Autonomous Database. **If you already have SQL Developer Web up and are logged in as the NF19C user, skip to step 4.**
+ 
+  ![locate adb](./images/locate-adb.png " ")
+ 
+2. Select the name of your database and click on the Database Actions button located at the top of the screen.
 
-	![Database Action](./images/database-actions.png)
+   ![db actions](./images/database-actions.png " ")
+   
+3. Log into Database Actions as the NF19C user.
+	![JSON Database Actions](./images/db-actions-logout.png)
+	![JSON Database Actions](./images/db-actions-login-lab.png)
 
-2. If you're not automatically logged in, sign in as ADMIN. Your password will be the password you specified when you created the database.
 
-	![Database Actions Login](./images/db-actions-login.png)
-
-3. (Optional database password reset) If you need to reset your database password its very simple to do so. Click on **More actions** from the OCI console screen and select **Administrator Password**. Fill in your new password and select **Change**. After you select **Change**, follow from step 1 above.
-
-	![Reset DB Password](./images/db-password-reset.png)
-
-4. Next, select the JSON tile on the left hand side of the screen.
+4. Select the JSON tile on the left hand side of the screen.
 
 	![JSON Database Actions](./images/db-actions-json.png)
 
@@ -48,21 +51,21 @@ In this lab, you will:
 
 	![Create Collection](./images/create-collection.png)
 
-6. Provide a name for the collection in the field, we'll call it  **products** and click **Create**. MAKE SURE you check the **MongoDB Compatible** box. Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use PRODUCTS or Products.
+6. Provide a name for the collection in the field, we'll call it  **merchandise** and click **Create**. MAKE SURE you check the **MongoDB Compatible** box. Note that the collection name is case-sensitive. You must enter merchandise in all lower-case, don't use MERCHANDISE or Merchandise.
 
 	![New collection: products](./images/new-products.png)
 
-7. A notification pops up informing you the `products` collections is created.
+7. A notification pops up informing you the `Merchandise` collections is created.
 
 	![New collection notification](./images/popup.png)
 
-8. Click the refresh button to verify the `products` collection is created.
+8. Click the refresh button to verify the `Merchandise` collection is created.
 
 	![Refresh button](./images/refreshed.png)
 
 ## Task 2: Insert Documents
 
-1. Double click **products** collection to show the **JSON-products** worksheet.
+1. Double click **Merchandise** collection to show the **JSON-merchandise** worksheet if it is not up.
 
 	![products worksheet](./images/double-clicked.png)
 
@@ -76,15 +79,15 @@ In this lab, you will:
 	<copy>
 	{
 		"_id": 100,
-		"type":"movie",
-		"title": "Coming to America",
-		"format": "DVD",
-		"condition": "acceptable",
-		"price": 5,
-		"comment": "DVD in excellent condition, cover is blurred",
-		"starring": ["Eddie Murphy", "Arsenio Hall", "James Earl Jones", "John Amos"],
-		"year": 1988,
-		"decade": "80s"
+		"category":"T-shirts",
+		"name":"Men's Standard T-shirt",
+		"color": "Red",
+		"description":"Plain Red T-shirt with the Oracle MovieSteams logo on the back",
+		"baseCost":"4.33",
+		"Material": [
+			"Organic Cotton"
+		],
+		"produced": "USA"
 	}
 	</copy>
 	```
@@ -103,19 +106,15 @@ In this lab, you will:
 	<copy>
 	{
 		"_id": 101,
-		"title": "The Thing",
-		"type": "movie",
-		"format": "DVD",
-		"condition": "like new",
-		"price": 9.50,
-		"comment": "still sealed",
-		"starring": [
-			"Kurt Russel",
-			"Wilford Brimley",
-			"Keith David"
+		"category":"T-shirts",
+		"name":"Men's Premium Organic T-shirt",
+		"color": "Black",
+		"description":"Plain black T-shirt with the Oracle MovieSteam logo",
+		"baseCost":"4.33",
+		"Material": [
+			"Organic Cotton"
 		],
-		"year": 1982,
-		"decade": "80s"
+		"produced": "USA"
 	}
 	</copy>
 	```
@@ -124,18 +123,15 @@ In this lab, you will:
 	<copy>
 	{
 		"_id": 102,
-		"title": "Aliens",
-		"type": "movie",
-		" format ": "VHS",
-		"condition": "unknown, cassette looks ok",
-		"price": 2.50,
-		"starring": [
-			"Sigourney Weaver",
-			"Michael Bien",
-			"Carrie Henn"
+		"category":"Sweatshirts",
+		"name":"Unisex Standard Sweatshirt",
+		"color": "Blue",
+		"baseCost":"17.6",
+		"Material": [
+			"80% Cotton",
+			"20% Polyester"
 		],
-		"year": 1986,
-		"decade": "80s"
+		"produced": "USA"
 	}
 	</copy>
 	```
@@ -144,13 +140,16 @@ In this lab, you will:
 	<copy>
 		{
 		"_id": 103,
-		"title": "The Thing",
-		"type": "book",
-		"condition": "okay",
-		"price": 2.50,
-		"author":"Alan Dean Forster",
-		"year": 1982,
-		"decade": "80s"
+		"category":"Hats",
+		"name":"Unisex Baseball Cap",
+		"color": "Black",
+		"description": "Plain black hat with the a white Oracle MovieSteam logo",
+		"baseCost":"5.6",
+		"Material": [
+			"80% Wool",
+			"20% Polyester"
+		],
+		"produced": "USA"
 	}
 	</copy>
 	```
@@ -163,7 +162,7 @@ The simplest form of a QBE just contains a key-value pair. Any selected document
 
 The following are examples for QBEs. You can copy them into the corresponding window (see screenshot) and execute them. Obviously, in a real application those QBE-expressions would be issued directly from the programming language - the SODA drivers have APIs for common application programming languages: Python, etc.
 
-Now let's issue some simple queries on the *products* collection we just created.
+Now let's issue some simple queries on the *merchandise* collection we just created.
 
 1. Copy and paste the following queries in the worksheet and click Run Query button to run a query.
 
@@ -177,66 +176,45 @@ Now let's issue some simple queries on the *products* collection we just created
 	</copy>
 	```
 	![doc with id 101](./images/id101.png)
-	![id 101 results](./images/id101-results.png)
 
-3.	Find all DVDs:
+3.	Find all T-shirts:
 
-	Running the query will displays two documents with format DVD.
+	Running the query will display two documents with category T-Shirts.
 
 	```
 	<copy>
-	{"format":"DVD"}
+	{"category":"T-shirts"}
 	</copy>
 	```
-	![DVD search results](./images/dvd-results.png)
+	![T-shirts search results](./images/tshirt-results.png)
 
 4.	Find all non-movies:
 
-	This query displays the documents that are not of type - movies, which means just the document with id 103.
+	This query displays the documents that are not of type - T-shirts.
 
 	```
 	<copy>
-	{"type":{"$ne":"movie"}}
+	{"category":{"$ne":"T-shirts"}}
 	</copy>
 	```
-	![results for "not movies" search](./images/not-movies.png)
+	![results for "not T-shirts" search](./images/not-tshirts.png)
 
-5.	Find documents whose condition value contains "new", which means just document (with id) 101.
+
+5. Find bargains of all merchandise costing 15 or less:
 
 	```
 	<copy>
-	{"condition":{"$like":"%new%"}}
+	{"baseCost":{"$lte":15}}
 	</copy>
 	```
-	![condition is new results](./images/new.png)
+	![results for price less than 15](./images/less5.png)
 
-6. Find bargains of all products costing 5 or less:
-
-	This query displays the documents with ids 100, 102 and 103 as those documents have price less than 5.
-
-	```
-	<copy>
-	{"price":{"$lte":5}}
-	</copy>
-	```
-	![results for price less than 5](./images/less5.png)
-
-7. Tighten previous query to choose only movie documents:
-
-	This query displays the documents whose ids are 100, 102 as those documents have price less than 5 and not the type - book.
-
-	```
-	<copy>
-	{"$and":[{"price":{"$lte":5}}, {"type":"movie"}]}
-	</copy>
-	```
-	![price less than 5 and not type = book ](./images/less5-movie.png)
 
 ## Task 4: JSON and Constraints
 
 JSON data is "schema flexible", you can add whatever data you like to a JSON document. But sometimes you will wish to impose some required structure on that data. That can be done through SQL by creating indexes and/or constraints on the JSON collection.
 
-An index will aid fast access to an item (for example speeding up access via the "title" field), but can also be used to impose uniqueness (a unique index or primary key constraint), or to enforce particular datatypes (by triggering an error if the datatype is not what is expected).
+An index will aid fast access to an item (for example speeding up access via the "category" field), but can also be used to impose uniqueness (a unique index or primary key constraint), or to enforce particular data types (by triggering an error if the datatype is not what is expected).
 
 More generally, constraints can be used to check the data being entered for various aspects.
 
@@ -244,31 +222,31 @@ More generally, constraints can be used to check the data being entered for vari
 
 	![SQL navigation](./images/nav.png)
 
-> **Note**: Ignore the warning message about being logged in as ADMIN. This is a demo, not a best practice.
 
-2. Check constraint to make sure every product has a title of string data type and price >=0. 
 
-	Add a constraint to make sure that every item has at least a title and the price. We want the price to be a non-negative number and title to be a string.
+2. Check constraint to make sure every product has a category of string data type and baseCost >=0. 
 
-	Copy and paste the query below in the worksheet and click Run query button to run the SQL query to alter products table and add constraints.
+	Add a constraint to make sure that every item has at least a category and the baseCost. We want the baseCost to be a non-negative number and category to be a string.
+
+	Copy and paste the query below in the worksheet and click Run query button to run the SQL query to alter merchandise table and add constraints.
 
 	```
 	<copy>
-	alter table products add constraint required_fields 
+	alter table merchandise add constraint required_fields 
 		check (
-				JSON_EXISTS(data, '$?(@.title.type() == "string" && @.price.number() > 0)')
+				JSON_EXISTS(data, '$?(@.category.type() == "string" && @.baseCost.number() > 0)')
 			  );
 	</copy>
 	```
 	![add constraint](./images/sql-query.png)
 
-	JSON_Exists is a SQL/JSON function that checks that a SQL/JSON path expression selects at least one value in the JSON data. The selected value(s) are not extracted – only their existence is checked. Here, *$?(@.title.type() == "string" && @.price.number() > 0)* is a standard, SQL/JSON path expressions. You'll learn more about SQJ/JSON functions later in this lab.
+	JSON_Exists is a SQL/JSON function that checks that a SQL/JSON path expression selects at least one value in the JSON data. The selected value(s) are not extracted – only their existence is checked. Here, *$?(@.category.type() == "string" && @.baseCost.number() > 0)* is a standard, SQL/JSON path expressions. You'll learn more about SQJ/JSON functions later in this lab.
 
-3. Once the *products* table is altered, navigate back to JSON workshop. Click the navigation menu on the top left and select **JSON** under Development.
+3. Once the *merchandise* table is altered, navigate back to JSON workshop. Click the navigation menu on the top left and select **JSON** under Development.
 
 	![JSON navigation](./images/nav2-json.png)
 
-4. Validate that the following documents cannot get inserted as fields are missing or of the wrong type.
+4. Validate that the following documents cannot get inserted if fields are missing or of the wrong type.
 
 	Click New JSON Document icon, copy and paste the following query in the worksheet and click **Create**.
 
@@ -276,37 +254,35 @@ More generally, constraints can be used to check the data being entered for vari
 
 	```
 	<copy>
-	{"_id":"200","title":"Top Gun"}
+	{"_id":"104","category":"Hats"}
 	</copy>
 	```
 	![create a not-allowed item](./images/tester.png)
 	![constraint error message](./images/error2.png)
 
-5. The following document now satisfies all the constraints: the "id" is a unique number, the title is a string, and the price is a positive number. Lets add the document.
+5. The following document now satisfies all the constraints: the "id" is a unique number, the category is a string, and the baseCost is a positive number. Let's add the document.
 
 	```
 	<copy>
-	{
-		"_id": 200,
-		"title": "Top Gun",
-		"category": "VHS",
-		"condition": "like new",
-		"price": 8,
-		"starring": [
-			"Tom Cruise",
-			"Kelly McGillis",
-			"Anthony Edwards",
-			"Val Kilmer"
+		{
+		"_id": 104,
+		"category":"Hats",
+		"name":"Unisex Baseball Cap",
+		"color": "Red",
+		"description": "Red hat with the a Black Oracle MovieSteam logo",
+		"baseCost":"7.5",
+		"Material": [
+			"80% Wool",
+			"20% Polyester"
 		],
-		"year": 1986,
-		"decade": "80s"
+		"produced": "USA"
 	}
 	</copy>
 	```
-	![Add the top gun data](./images/add-top-gun.png)
+	![Add the top gun data](./images/add-hat.png)
 ## Task 5: Using SQL on JSON 
 
-So far, we've focused mostly on the document store API where we dealt with JSON data as a collection of documents. But there is another way to interact with your JSON data: SQL. SQL is a very mature query language. Oracle added new operators to work with JSON data (we created an open standard called SQL/JSON which was adopted by the ISO SQL standard). A key characteristic of a JSON collection (like 'products') is that it is backed by a table - a table then gets auto-created when you create a collection so that you do not have to specify columns and data types. In the following we show you how you can use SQL to work with the JSON data in a collection.
+So far, we've focused mostly on the document store API where we dealt with JSON data as a collection of documents. But there is another way to interact with your JSON data: SQL. SQL is a very mature query language. Oracle added new operators to work with JSON data (we created an open standard called SQL/JSON which was adopted by the ISO SQL standard). A key characteristic of a JSON collection (like 'merchandise') is that it is backed by a table - a table then gets auto-created when you create a collection so that you do not have to specify columns and data types. Next, we'll use SQL to work with the JSON data in a collection.
 
 
 
@@ -314,11 +290,11 @@ So far, we've focused mostly on the document store API where we dealt with JSON 
 
     ![SQL navigation](./images/nav-sql.png)
 
-2. On the left side, click on PRODUCTS - this is the table for the 'products' collection. To get the view displayed, you need to right-click on **PRODUCTS** and choose **Open**.
+2. On the left side, click on MERCHANDISE - this is the table for the 'merchandise' collection. To get the view displayed, you need to right-click on **MERCHANDISE** and choose **Open**.
 
     ![View products table](./images/products-table.png)
 
-    You see that the table 'PRODUCTS' has 5 columns: an 'ID' which is a unique identifier for the document (and in the case of MongoDB-compatible collections, is taken from the "_id" field in the JSON), a column 'DATA' which holds the JSON document, 2 metadata columns to keep track of creation and update timestamps and 'VERSION' which is typically a hash value for the document and allows to keep caches in sync (similar to an eTag). None of this is really important at this point as we will only use the DATA column in the following examples.
+    You see that the table 'MERCHANDISE' has 5 columns: an 'ID' which is a unique identifier for the document (and in the case of MongoDB-compatible collections, is taken from the "_id" field in the JSON), a column 'DATA' which holds the JSON document, 2 metadata columns to keep track of creation and update timestamps and 'VERSION' which is typically a hash value for the document used to keep caches in sync (similar to an eTag). 
 
 
 3. Because the JSON data is stored in a binary representation (for query and update efficiency) we need to convert it to a human-readable string using JSON_Serialize.
@@ -327,7 +303,7 @@ So far, we've focused mostly on the document store API where we dealt with JSON 
 
     ```
     <copy>
-    select JSON_Serialize(data) from products;
+    select JSON_Serialize(data) from merchandise;
     </copy>
     ```
 
@@ -335,15 +311,14 @@ So far, we've focused mostly on the document store API where we dealt with JSON 
 
 4. Simple dot notation - We can extract values from the JSON data using a simple notation (similar to JavaScript) directly from SQL.
 
-    For example, running the below query shows all movies costing more than 5.
+    For example, running the below query shows all hats costing more than 5.
 
     ```
     <copy>
     select JSON_Serialize(data)
-    from products p
-    where p.data.type.string() = 'movie'
-    and p.data.format.string() = 'DVD'
-    and p.data.price.number() > 5;
+    from merchandise m
+    where m.data.category.string() = 'Hats'
+    and m.data.baseCost.number() > 5;
     </copy>
     ```
     ![simple dot notation in WHERE clause](./images/more-5.png " ")
@@ -354,9 +329,9 @@ So far, we've focused mostly on the document store API where we dealt with JSON 
 
     ```
     <copy>
-    select p.data.title.string(), p.data.year.number()
-    from products p
-    where p.data.type.string() = 'movie'
+    select m.data.category.string(), m.data.color.string()
+    from merchandise m
+    where m.data.category.string() = 'Hats'
     order by 2 DESC;
     </copy>
     ```
@@ -364,70 +339,19 @@ So far, we've focused mostly on the document store API where we dealt with JSON 
 
 6. It is also possible to use aggregation or grouping with values from the JSON data.
 
-    The following calculates the average price of movies per decade.
+    The following calculates the average baseCost of the merchandise by category.
 
     ```
     <copy>
-    select p.data.decade.string(),
-           avg(p.data.price.number())
-    from products p
-    where p.data.type.string() = 'movie'
-    group by p.data.decade.string();
+    select m.data.category.string(),
+           avg(m.data.baseCost.number())
+    from merchandise m
+    group by m.data.category.string();
     </copy>
     ```
     ![aggregation operation with AVG function and simple dot notation](./images/average-function.png " ")
-
-
-
-	All above examples extracted singleton values from the JSON data - values that only occurred once per document (like title or price). But JSON can have nested arrays - how can we access those?
-
-7. Let's say we want to extract all actor names. They occur as JSON strings in the array called 'starring'. Since one movie has typically more than one actor the overall number of actor names is larger than the number of documents. We therefore need a mechanism that generates rows - a row source. This is why we use the 'nested' clause in the FROM part of the query - here we generate the rows and extract the value we're interested in as column values.
-
-    The simplest example is the following, run it first then we will explain it.
-
-    ```
-    <copy>
-    select jt.*
-    from products p nested data columns ("_id", title, year NUMBER) jt;
-    </copy>
-    ```
-    ![nested data operation](./images/nested-ops.png " ")
-
-    As you can see we're extracting the '_id', the 'title' and the 'year' from each document. Instead of a trailing function we can specify an optional SQL data type like NUMBER - the default (used for the title) is a VARCHAR2(4000). Note that since _id starts with an underscore character it's necessary to put it in quotes.
-
-8.  We could have written this query with the simple dot notation, as well, because we do not drill into any JSON array yet. Let's do that in  this query, by using the NESTED clause also in the COLUMNS clause.
-
-    ```
-    <copy>
-    select jt.*
-    from products p nested data columns ("_id", title, year NUMBER, nested starring[*] columns (actor path '$')) jt;
-    </copy>
-    ```
-    ![nested data with drill into JSON array](./images/nested-with-drill.png " ")
-
-    The second 'nested' acts over the JSON array called 'starring'. The '[*]' means that we want to select every item of the array; [0] would only select the first one, for example. Then the second columns clause defines which value we want to extract from inside the array. The 'starring' array consists only of string values; we therefore need to select the entire value. This is done with the path expression '$'. We give selected values the column name 'actor'. You will learn more about path expressions in the next step.
-
-9.  It is also possible to directly access the actors ('starring' array) as the following query shows: here we only select the actor names.
-
-    ```
-    <copy>
-    select jt.*
-    from products p nested data.starring[*] columns (actor path '$') jt;
-    </copy>
-    ```
-    ![direct access to array](./images/direct-access.png " ")
-
-10.  On this we can do here by slightly modifying the query is to count the number of movies by actor. All we do is group the results by actor name and count the group's size. The 'order by' clause orders the results based on the second column (the count).
-
-    ```
-    <copy>
-    select jt.actor, count(1)
-    from products p nested data.starring[*] columns (actor path '$') jt
-    group by actor
-    order by 2 DESC;
-    </copy>
-    ```
-    ![count number of movies by actor](./images/movies-by-actor.png " ")
+	
+You may now **proceed to the next lab**.
 
 
 ## Learn More
@@ -443,5 +367,5 @@ So far, we've focused mostly on the document store API where we dealt with JSON 
 ## Acknowledgements
 
 - **Author** - Beda Hammerschmidt, Architect
-- **Contributors** - Anoosha Pilli, Product Manager, Oracle Database
-- **Last Updated By/Date** - Killian Lynch August 2022
+- **Contributors** - Killian Lynch, Product Manager, Oracle Database
+- **Last Updated By/Date** - Killian Lynch February 2023

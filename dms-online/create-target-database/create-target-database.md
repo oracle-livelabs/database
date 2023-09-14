@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab walks you through the steps of creating an Autonomous Transaction Processing Shared instance for your target database.
+This lab walks you through the steps of creating an Autonomous Transaction Processing Serverless instance for your target database.
 
   [](youtube:c-DUIePFKco)
 
@@ -31,11 +31,11 @@ The following tasks are *optional* if a target autonomous database is already pr
 
 3. Press **Create Network Security Group**.
 
-  ![](images/create-network-security-group.png)
+  ![create network security group](images/create-network-security-group.png)
 
 4. Enter Name such as **DMS\_NSG** and press **Next**.
 
-  ![](images/naming-nsg.png)
+  ![enter NSG name](images/naming-nsg.png)
 
 5. In the **Rule** box please enter the following entries, otherwise leave defaults:
     - Source Type: **CIDR**
@@ -43,13 +43,13 @@ The following tasks are *optional* if a target autonomous database is already pr
 
 6. Press **Create**.
 
-  ![](images/add-security-rules-nsg.png)
+  ![enter security rules and press create](images/add-security-rules-nsg.png)
 
 ## Task 2: Create Target Autonomous Database
 
 1. Now you can create the ADB instance. In the OCI Console Menu, go to **Oracle Database > Autonomous Transaction Processing**.
 
-  ![](images/odb-to-atp.png)
+  ![Oracle autnomous database navigation menu](images/odb-to-atp.png)
 
 2. Pick a compartment on the left-hand side **Compartment** list.
 
@@ -59,14 +59,17 @@ The following tasks are *optional* if a target autonomous database is already pr
     - Display Name: **TargetATP**
     - Database Name: **TargetATP**
     - Create administrator credentials – Password: *password of your choice*
-    - Access Type: **Secure Access from Everywhere**
-    - Choose a license type: **License Included**
+    - Access Type: **Private endpoint access only**
+    - Virtual cloud network: **Select your VCN**
+    - Subnet: **Select your public subnet**
+    - Choose a license type: **Bring your own license (BYOL)**
 
-  ![](images/atp-name.png)
+  ![ATP name](images/atp-name.png)
 
-  ![](images/atp-password.png)
+  ![define a password for your ATP](images/atp-password.png)
+  ![choose network access](images/network-access.png)
 
-  ![](images/adb-lt.png)
+  ![choose your license](images/license.png)
 
 5. Close the dialog by pressing **Create Autonomous Database**.
 

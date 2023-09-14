@@ -42,7 +42,7 @@ The following task is *optional* if a suitable VCN is already present.
 
   ![screenshot of start VCN wizzard ](images/vcn-with-internet-wizard.png =50%x50%)
 
-4. Enter a **VCN Name**, such as VCN\_DMS\_LA. Leave CIDR block defaults, unless you need non-overlapping addresses for peering later. Press **Next**.
+4. Enter a **VCN Name**, such as VCN\_DMS. Leave CIDR block defaults, unless you need non-overlapping addresses for peering later. Press **Next**.
 
   ![screenshot of where to enter VCN name](images/vcn-configuration.png)
 

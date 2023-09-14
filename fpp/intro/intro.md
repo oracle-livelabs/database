@@ -14,10 +14,10 @@ FPP commands can be ran simultaneously on hundreds of targets, making possible t
 A single command line, or a single RESTful API call, replaces dozens or hundreds of manual tasks.
 Forget about boring and time-consuming patching campaigns: Fleet Patching and Provisioning gives you the automation, standardization and protection level that your auditors are looking for.
 
-Estimated Workshop Time:  4 hours
+Estimated Workshop Time:  2-3 hours
 
 Watch the video below for an overview on Oracle Fleet Patching and Provisioning.
-[](youtube:jFAOPGNpcoY)
+[Shows video giving an overview of FPP](youtube:jFAOPGNpcoY)
 
 ### About this Workshop
 
@@ -46,11 +46,13 @@ FPP is part of the Oracle Grid Infrastructure stack: the FPP Server requires the
 
 * [FPP documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/fppad/fleet-patching-provisioning.html)
 * [FPP website](https://www.oracle.com/database/technologies/rac/fpp.html)
+* [FPP by example blog series](https://blogs.oracle.com/maa/post/fleet-patching-provisioning-by-example-intro)
 
 ## Acknowledgements
 
 - **Author** - Ludovico Caldara
-- **Contributors** - Kamryn Vinson
-- **Last Updated By/Date** -  Ludovico Caldara, April 2021
+- **Contributors** - Kamryn Vinson - Philippe Fierens
+- **Last Updated By/Date** -  Philippe Fierens, March 2023
+
 
 
