@@ -30,21 +30,14 @@ In this lab, you will:
     </copy>
     ```
 
-3. Set the environment variables to point to the Oracle binaries. When prompted for the SID (Oracle Database System Identifier) respond to the prompt with ORCL.
-    ```
-    <copy>
-    . oraenv
-    </copy>
-    ```
-
-4. Log into SQL as system database administrator (dba).
+3. Log into SQL as system database administrator (dba).
     ```
     <copy>
     sqlplus / as sysdba
     </copy>
     ```
 
-5. Set streams pool size parameter that will be needed for running the migration.
+4. Set streams pool size parameter that will be needed for running the migration.
 
     Check the current status:
     ```
@@ -120,7 +113,74 @@ In this lab, you will:
     </copy>
     ```
 
-## Task 2: Creating Users for Your Database Migration
+## Task 2: Prepare SSL Certificates and Grant ACL Privileges
+
+For your non-ADB source connectivity, you must perform the following steps:
+
+1.  Create a new directory: 
+```
+    <copy>    
+    mkdir /u01/app/oracle/dumpdir/wallet
+
+    </copy>
+```
+2. Download a pre created SSL wallet using the following command:
+```
+    <copy>    
+    curl -o walletSSL.zip https://objectstorage.us-ashburn-1.oraclecloud.com/p/jrzh3heRr9SzuC7HtQ5Tno5Qs-Yvj0ZX22WNnoZ9FhTpgn9I9-iQQE7-L1JuIFJZ/n/idgd2rlycmdl/b/SSL_Wallet/o/walletSSL.zip
+
+    </copy>
+```
+3. Unzip the files:
+```
+    <copy>    
+    unzip walletSSL.zip
+    </copy>
+```
+4. Make sure these files are present in your desired directory path:
+
+    1. 2022 ewallet.p12.lck
+    2. cwallet.sso.lck
+    3. ewallet.p12
+    4. cwallet.sso
+    5. addedCertificates.txt
+
+
+5. Save this path location, you will need it during the migration creation, once there populate the SSL Wallet Path with it:
+
+    i.e: /u01/app/oracle/dumpdir/wallet/opt/oracle/dcs/commonstore/wallets/newssl
+
+6. The user performing the export or import requires the necessary network ACL to be granted to access the network from the source and target database host. For this guide, run the following commands as SYS if the export or import user is SYSTEM. Since your database is multitenant, the following actions need to be performed in CDB$ROOT. Replace clouduser and sslwalletdir accordingly:
+
+```
+    <copy>    
+    define clouduser='system';/*user performing export at source or import at target*/
+define sslwalletdir='/u01/app/oracle/dumpdir/wallet/opt/oracle/dcs/commonstore/wallets/newssl';/* OCI wallet path*/
+BEGIN
+    dbms_network_acl_admin.append_host_ace(host => '*', lower_port => 443, upper_port => 443, ace => xs$ace_type(privilege_list => xs$name_list(
+    'http', 'http_proxy'), principal_name => upper('&clouduser'), principal_type => xs_acl.ptype_db));
+
+    dbms_network_acl_admin.append_wallet_ace(wallet_path => 'file:&sslwalletdir', ace => xs$ace_type(privilege_list => xs$name_list('use_client_certificates',
+    'use_passwords'), principal_name => upper('&clouduser'), principal_type => xs_acl.ptype_db));
+
+END;
+    </copy>
+```
+7. Once the connect privilege is granted, connect as the relevant user such as, SYSTEM, and verify if the privilege is granted using the following query:
+```
+    <copy>    
+    SELECT host, lower_port, upper_port, privilege, status 
+    FROM user_network_acl_privileges;
+
+    </copy>
+```
+
+You should see a similar output to the following:
+
+
+![grants output](./images/grants-output.png)  
+
+## Task 3: Creating Users for Your Database Migration
 
 1.  Create a GoldenGate administration user, c##ggadmin, in CDB$ROOT, granting all of the permissions listed in the example. Please bear in mind that you may need to press enter twice after copying the following statement for it to fully create the users, grant the privileges and execute the required PL/SQL procedure.
 
@@ -215,7 +275,7 @@ In this lab, you will:
     </copy>
     ```
 
-## Task 3: Load Sample Table
+## Task 4: Load Sample Table
 1. Connect to your database user. Enter <password> at the prompt that you set for your user.
     ```
     <copy>
@@ -281,8 +341,15 @@ In this lab, you will:
     </copy>
     ```
     Your source DB now has a user HR01 with a table EMPL that has 1000 rows.
+    
+5. This table is to demonstrate the Cloud Pre Migration advisor (CPAT) functionality during Validation on Lab 8.
+    ```
+    <copy>
+    CREATE TABLE image_table2 ( id NUMBER, image ORDImage ) LOB(image.source.localData) STORE AS SECUREFILE;
+    </copy>
+    ```
 
-5. Exit SQL.
+6. Exit SQL.
 
     ```
     <copy>
@@ -290,7 +357,7 @@ In this lab, you will:
     </copy>
     ```
 
-## Task 4: Change the Source Database System Password
+## Task 5: Change the Source Database System Password
 
 To perform the migration, DMS will require several passwords, for simplicity, let's change the Oracle Source Database System Password. This will help expedite the migration process when prompted for the different components passwords.
 
@@ -317,28 +384,50 @@ To perform the migration, DMS will require several passwords, for simplicity, le
     </copy>
     ```
 
-## Task 5: Enable ggadmin user on target database
+## Task 6: Enable ggadmin user on target database
 
 The next steps will connect to the target ADB instance and enable the standard ggadmin user. You can skip these steps if the user is already enabled. 
+The connection will be thru the Oracle GoldenGate instance using sqlplus.
+
+Make sure the Autonomous Database regional wallet has been placed in /u02/deployments/Marketplace/etc/adb. If not, you can download the zip file from OCI Console and unzip it there.
+Modify sqlnet.ora so it correctly has the wallet location (needed if connecting with sqlplus):
 
 1. Enter the following commands:
 
     ```
     <copy>
-    export TNS_ADMIN=/u02/deployments/Target/etc 
-
+    cat sqlnet.ora
+    WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="/u02/deployments/Marketplace/etc/adb"))) SSL_SERVER_DN_MATCH=yes
 
     </copy>
-
     ```
-
+2. You need to set the following Export variables:    
     ```
     <copy>
-    $ORACLE_HOME/bin/sqlplus admin/ATP password@targetatp_high
-
+    EXPORT ORACLE_HOME="/U01/APP/OGG/LIB/INSTANTCLIENT"
     </copy>
     ```
-
+    ```
+    <copy>
+    EXPORT LD_LIBRARY_PATH="$ORACLE_HOME"
+    </copy>
+    ```
+     ```
+    <copy>
+    EXPORT PATH="$ORACLE_HOME:$PATH"
+    </copy>
+    ```
+      ```
+    <copy>
+    EXPORT TNS_ADMIN="/U02/DEPLOYMENTS/MARKETPLACE/ETC/ADB"
+    </copy>
+    ```
+      ```
+    <copy>
+    $ORACLE_HOME/SQLPLUS ADMIN/ <DB PASSWORD>@ ADW_name
+    </copy>
+    ```
+    
 2. In SQL Plus enter the following commands:
 
     ```
