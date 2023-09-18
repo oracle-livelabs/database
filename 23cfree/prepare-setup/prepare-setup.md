@@ -38,7 +38,9 @@ This lab assumes you have:
 <if type="unify-ocw23">
     - [unify-ocw23](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/23c/unify-ocw23.zip)
 </if>
-
+<if type="23c-install">
+    - [unify-ocw23](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/23c/23c-install.zip)
+</if>
 
 2.  Save in your downloads folder.
 
