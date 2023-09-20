@@ -140,6 +140,16 @@ NOTE: *While the installation is ongoing, please switch to the 19.18 tab and con
 
 1. Option - Shell Script. For simplicity, you can run the following shell script which does the installation. Otherwise, in option 2 you can run the command yourself.
 
+    First, examine the script.
+
+    ```
+    <copy>
+    cat /home/oracle/patch/install_patch.sh
+    </copy>
+    ```
+
+    Then execute the script.
+
     ```
     <copy>
     sh /home/oracle/patch/install_patch.sh
@@ -150,8 +160,6 @@ NOTE: *While the installation is ongoing, please switch to the 19.18 tab and con
  <summary>*Click to see the output*</summary>
 
   ``` text
-
-    ![runInstaller shell script output ](./images/run-installer-shell-output.png " ")
 
 The installation will take approximately 10 minutes. 
 
