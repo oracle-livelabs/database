@@ -395,7 +395,7 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     ```
     ```
     <copy>
-    sqlplus / as sys admin
+    sqlplus / as sysdba
     </copy>
     ```
 2. Now create the domain `yearbirth` and the table `person`.
