@@ -23,7 +23,8 @@
             "title": "Lab 2: Power Up with 23c SQL Features",
             "description": "Power up with new features in Oracle Database 23c",
             "type": "livelabs",
-            "filename": "../../sql-23c-features/sql-23c-features.md"
+            "filename": "../../sql-23c-features/sql-23c-features.md",
+            "type": "sql-features"
         },
         {
             "title": "Lab 3: Leverage SQL Domains",

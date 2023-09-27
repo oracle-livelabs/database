@@ -33,6 +33,7 @@ This lab assumes you have:
 To dive into these features, we'll be using SQL*Plus - an interactive and batch query tool that is installed with every Oracle Database installation. It has a command-line user interface.
 
 1. Your terminal should still be open since ORDS needs to be running. If the terminal has been closed, please return to the previous lab to restart ORDS. From the same terminal, enter this line:
+    <if type="sql-features">
 
     ```
     sqlplus hol23c/[your_password_here]@localhost:1521/freepdb1
@@ -43,6 +44,19 @@ To dive into these features, we'll be using SQL*Plus - an interactive and batch 
     sqlplus hol23c/Welcome123@localhost:1521/freepdb1
     </copy>
     ```
+    </if>
+    <if type="23c-install">
+
+    ```
+    sqlplus hol23c/[your_password_here]@localhost:1521/freepdb1
+    ```
+    We used the password Welcome123#, but change [your\_password\_here] to match yours.
+    ```
+    <copy>
+    sqlplus hol23c/Welcome123#@localhost:1521/freepdb1
+    </copy>
+    ```
+    </if>
 
 ## Task 2: FROM clause - now optional
 An interesting feature introduced in Oracle Database 23c is optionality of FROM clause in SELECT statements. Up to this version the FROM clause was obligatory.
@@ -84,14 +98,16 @@ Oracle Database 23c introduces the new BOOLEAN datatype. This leverages the use 
 
 2. Let's fill our new table with data. The value `IS_SLEEPING` will be `NOT NULL` set to `FALSE` as default.
     ```
-    <copy>ALTER TABLE TEST_BOOLEAN modify (IS_SLEEPING boolean NOT NULL);
+    <copy>
+    ALTER TABLE TEST_BOOLEAN modify (IS_SLEEPING boolean NOT NULL);
     </copy>
     Table altered.
     ```
     ```
-    <copy>ALTER TABLE TEST_BOOLEAN modify (IS_SLEEPING default FALSE);
-    Table altered.
+    <copy>
+    ALTER TABLE TEST_BOOLEAN modify (IS_SLEEPING default FALSE);
     </copy>
+    Table altered.
     ```
     Here, you can see the different types of Boolean input for Mick, Keith, and Ron. All are valid.
     This one uses the default "FALSE" value - Mick is not sleeping.
@@ -381,18 +397,19 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     ```
     ```
     <copy>
-    sqlplus / as sys admin
+    sqlplus / as sysdba
     </copy>
     ```
 2. Now create the domain `yearbirth` and the table `person`.
     ```
-    <copy>CREATE DOMAIN yearbirth as number(4)
+    <copy>
+    CREATE DOMAIN yearbirth as number(4)
         constraint check ((trunc(yearbirth) = yearbirth) and (yearbirth >= 1900))
         display (case when yearbirth < 2000 then '19-' ELSE '20-' end)||mod(yearbirth, 100)
         order (yearbirth -1900)
         annotations (title 'yearformat');
-    Table created.
     </copy>
+    Table created.
     ```
     ```
     <copy>
@@ -419,12 +436,12 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     PERSON_BIRTH                                                                        NUMBER(4) SYS.YEARBIRTH
     ```
 
-2. Now let's add data to our table.
+3. Now let's add data to our table.
     ```
     <copy>INSERT INTO person values (1,'MARTIN',3000, 1988);</copy>
     ```
 
-3. With the new function `DOMAIN_DISPLAY` you can display the property.
+4. With the new function `DOMAIN_DISPLAY` you can display the property.
     ```
     <copy>SELECT DOMAIN_DISPLAY(person_birth) FROM person;</copy>
     ```
@@ -435,7 +452,7 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     19-88
     ```
 
-4. Domain usage and Annotations can be monitored with data dictionary views.
+5. Domain usage and Annotations can be monitored with data dictionary views.
     ```
     <copy>SELECT * FROM user_annotations_usage;</copy>
     ```
@@ -452,6 +469,29 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     EMP_ANNOTATED   TABLE      SALARY                                COL_HIDDEN
     YEARBIRTH       DOMAIN                                           TITLE                yearformat
     PERSON          TABLE      PERSON_BIRTH    YEARBIRTH  SCOTT      TITLE                yearformat
+    ```
+
+6. Let's see what that output looks like using SQLcl, the new Oracle command line tool. Notice instead of sqlplus we use sql.
+    ```
+    <copy>
+    exit;
+    </copy>
+    ```
+    ```
+    <copy>
+    sql / as sysdba
+    </copy>
+    ```
+    ```
+    <copy>
+    SELECT * FROM user_annotations_usage;
+    </copy>
+    OBJECT_NAME    OBJECT_TYPE    COLUMN_NAME     DOMAIN_NAME    DOMAIN_OWNER    ANNOTATION_NAME    ANNOTATION_VALUE    
+    ______________ ______________ _______________ ______________ _______________ __________________ ___________________
+    PERSON         TABLE                                                         DISPLAY            person_table        
+    YEARBIRTH      DOMAIN         YEARBIRTH                                      TITLE              yearformat          
+    PERSON         TABLE          PERSON_BIRTH    YEARBIRTH      SYS             TITLE              yearformat          
+
     ```
 
 You may now **proceed to the next lab**.
