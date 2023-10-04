@@ -11,12 +11,15 @@ The actions that the **OraOperator** support for the AutonomousDatabase resource
 * Create an Autonomous Database
 * Manage ADMIN database user password
 * Download instance credentials (wallets)
-* Scale the OCPU core count or storage
+* Scale the CPU or storage
 * Rename an Autonomous Database
 * Stop/Start/Terminate an Autonomous Database
 * Delete the resource from the Kubernetes cluster
 
 *Estimated Time:* 15 minutes
+
+[Lab 9](videohub:1_2me0ogqv)
+
 
 ### Objectives
 
@@ -40,7 +43,7 @@ In the [Bind to an ADB](?lab=bind-adb) Lab, you redefined the `adb-existing` res
     <copy>
     export ORACLE_HOME=$(pwd)
     export TNS_ADMIN=$ORACLE_HOME/network/admin
-    mkdir -p $ORACLE_HOME/network/adminrr
+    mkdir -p $ORACLE_HOME/network/admin
 
     # Extract the tnsnames.ora secret
     kubectl get secret/adb-tns-admin \
@@ -92,9 +95,9 @@ In the [Bind to an ADB](?lab=bind-adb) Lab, you redefined the `adb-existing` res
 
 Everything you needed to make a connection to the ADB could be obtained from Kubernetes.  Applications in Kubernetes using the ADB as a backend data store will be able to do the same.
 
-## Task 2: Scale the OCPU and Storage - Up
+## Task 2: Scale the CPU and Storage - Up
 
-1. **Redefine** the ADB resource to adjust its OCPU and Storage.  
+1. **Redefine** the ADB resource to adjust its CPU and Storage.
 
     While you could modify the *manifest file* used to bind to the ADB and apply it, try a different approach and use the `kubectl patch` functionality to update the **AutonomousDatabase** resource in place.
 
@@ -110,11 +113,11 @@ Everything you needed to make a connection to the ADB could be obtained from Kub
 
     ![ADB Patched](images/adb_patched.png "ADB Patched")
 
-2. In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB in a "Scaling In Progress" state, increasing the OCPU and Storage.
+2. In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB in a "Scaling In Progress" state, increasing the CPU and Storage.
 
     ![ADB Scaling](images/adb_scaling.png "ADB Scaling")
 
-3. You can also watch the ADB Resource scale from Kubernetes.  
+3. You can also watch the ADB Resource scale from Kubernetes.
 
     You'll already be familiar with the `kubectl get` command; by appending a `-w` you can put `kubectl` into a "Watch" loop:
 
@@ -126,9 +129,9 @@ Everything you needed to make a connection to the ADB could be obtained from Kub
 
     Press `Ctrl-C` to break the loop
 
-## Task 3: Scale the OCPU and Storage - Down
+## Task 3: Scale the CPU and Storage - Down
 
-You've now have seen how to apply a *manifest file* and use `kubectl patch` to redefine a Kubernetes resource, but you can also edit the resource directly:
+You have now seen how to apply a *manifest file* and use `kubectl patch` to redefine a Kubernetes resource, but you can also edit the resource directly:
 
 1. Edit the resource:
 
@@ -149,7 +152,7 @@ You've now have seen how to apply a *manifest file* and use `kubectl patch` to r
 
     ![Edit ADB](images/adb_edit.png "Edit ADB")
 
-2. In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB back in a "Scaling In Progress" state, decreasing the OCPU and Storage.
+2. In the OCI Console, Navigate to Oracle Databases -> Autonomous Database and you should see your ADB in the "Scaling In Progress" state, decreasing the CPU and Storage.
 
 3. Of course you can also watch it from Kubernetes:
 
@@ -256,9 +259,9 @@ However, in the next Tasks, you will be using an in-built *Service Account* call
 
 ## Task 5: Scheduled Stop and Start
 
-You can execute any of the methods you used to scale the ADB to also change the ADBs `lifecycleState` (AVAILABLE or STOPPED) manually.  However, you can also take advantage of another built-in Kubernetes resource, the *CronJob*, to schedule a change to the `lifecycleState`.  
+You can execute any of the methods you used to scale the ADB to also change the ADBs `lifecycleState` (AVAILABLE or STOPPED) manually.  However, you can also take advantage of another built-in Kubernetes resource, the *CronJob*, to schedule a change to the `lifecycleState`.
 
-This is especially useful for Autonomous Databases as when the database is STOPPED you are not charged for the OCPUs.  With the *Role* and *RoleBindings* in-place for the `default Service Account`, create a *CronJob*:
+This is especially useful for Autonomous Databases as when the database is STOPPED you are not charged for the CPUs.  With the *Role* and *RoleBindings* in-place for the `default Service Account`, create a *CronJob*:
 
 ### Schedule a CronJob
 
@@ -325,7 +328,7 @@ This is especially useful for Autonomous Databases as when the database is STOPP
     </copy>
     ```
 
-    The *CronJob* is using the same `patch` method you used to scale the OCPU and Storage up.
+    The *CronJob* is using the same `patch` method you used to scale the CPU and Storage up.
 
 2. Apply the manifest:
 

@@ -6,6 +6,9 @@ This lab guides you through the setup steps to create the JSON duality views req
 
 Estimated Time: 10 minutes
 
+[Lab 2](videohub:1_yy26p93n)
+
+
 ### Objectives
 
 In this lab, you will:

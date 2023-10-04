@@ -14,7 +14,7 @@ This Lab provides an overview of the *Microservices Architecture* and does not i
 
 ## Task 1: What are Microservices?
 
-To explore the concepts of the *Microservice Architecture*, including its benefits and drawbacks, imagine that you are supporting an Oracle Database at a new Micro-Brewery, "Query Brews".  It is a small-scale operation featuring a single standout beer known as the "Drop Cascade IPA".  You'll be working with an application developer, who has limited knowledge of databases, to establish an online store.  
+To explore the concepts of the *Microservice Architecture*, including its benefits and drawbacks, imagine that you are supporting an Oracle Database at a new Micro-Brewery, "Query Brews".  It is a small-scale operation featuring a single standout beer known as the "Drop Cascade IPA".  You'll be working with an application developer, who has limited knowledge of databases, to establish an online store.
 
 Let's get DBA'ing...
 
@@ -32,7 +32,7 @@ This architectural change ensured **greater organisation** while **minimising po
 
 ![Container Schema](images/container_schema.png "Container Schema")
 
-In a sense, you can say that you *Containerised* the schemas based on their operational functionality.  It took a bit of work to get there though, you had to:
+In a sense, you can say that you *Containerised* the application schemas based on their operational functionality.  It took a bit of work to get there though, you had to:
 
 * Identify all object inter-dependencies required for each function to operate correctly.
 * Establish new Roles and Privileges for cross-schema access.
@@ -59,7 +59,7 @@ Each brewery function is allocated its own database, ensuring:
 * **Team Autonomy** each brewery unit can make independent decisions without impacting the entire system.
 * **Ease of Maintenance** by breaking the system down into smaller parts, the brewery's IT implementation is easier to understand, develop, test, and maintain.
 
-With this infrastructure re-organisation, you've naturally embraced the [*Microservices Architecture*](https://developer.oracle.com/technologies/microservices.html).  
+With this infrastructure re-organisation, you've naturally embraced the [*Microservices Architecture*](https://developer.oracle.com/technologies/microservices.html).
 
 There have been challenges you had to overcome, including:
 
@@ -76,7 +76,7 @@ This appears to be a significant short-coming in the *Microservices Architecture
 
 ![Containerised Database](./images/pdb_schema.png "Containerised Database")
 
-Maintaining of all the benefits of the *Microservices Architecture* such as **Isolation**, **Portability**, and **Autonomy**, Pluggable Databases also allows for **Consolidation**, better **Resource Management**, and easier **Maintenance**.  
+Maintaining of all the benefits of the *Microservices Architecture* such as **Isolation**, **Portability**, and **Autonomy**, Pluggable Databases also allows for **Consolidation**, better **Resource Management**, and easier **Maintenance**.
 
 Using Pluggable Databases is an infrastructure change to complement the *Microservices Architecture*... which leads you into the Hands-On portion of this Workshop where we explore *Kubernetes Infrastructure*.
 

@@ -2,11 +2,14 @@
 
 ## Introduction
 
-In this lab, you will provision and configure the Oracle Cloud resources required for the Workshop using *Oracle Resource Manager (ORM)*.  ORM will stand-up the Infrastructure using *Terraform* and perform some basic Configuration using *Ansible*.  
+In this lab, you will provision and configure the Oracle Cloud resources required for the Workshop using *Oracle Resource Manager (ORM)*.  ORM will stand-up the Infrastructure using *Terraform* and perform some basic Configuration using *Ansible*.
 
-Don't panic, how this works will be explored... while it is working.  
+Don't panic, how this works will be explored... while it is working.
 
 *Estimated Time:* 10 minutes
+
+[Lab 2](videohub:1_m7hbhi0v)
+
 
 ### Objectives
 
@@ -89,25 +92,25 @@ The Infrastructure deployment and configuration will take approximately **15 min
 
 ### Troubleshooting
 
-When using OCI Free Tier, it is possible that the Stack deployment will fail due to a lack of compute resources in your chosen region.  Fear not and realise the power of Infrastructure as Code!  
+When using OCI Free Tier, it is possible that the Stack deployment will fail due to a lack of compute resources in your chosen region.  Fear not and realise the power of Infrastructure as Code!
 
-Should the Stack Deployment fail due to **"Out of host capacity."**, please follow the [Out of Capacity](?lab=troubleshooting#Task1:OutofCapacity) guide.
+Should the Stack Deployment fail due to **"Out of host capacity."**, please follow the [Out of Capacity](?lab=troubleshooting#Task2:OutofCapacity) guide.
 
 ## Task 5: Learn about Infrastructure as Code (IaC) using Terraform
 
-Terraform is a tool for managing infrastructure as code (IaC) that can be version-controlled.  Take a look at the IaC that creates the Autonomous Oracle Database (ADB) for this Workshop.  
+Terraform is a tool for managing infrastructure as code (IaC) that can be version-controlled.  Take a look at the IaC that creates the Autonomous Oracle Database (ADB) for this Workshop.
 
-The ADB is defined, in 16 lines, using the `oci_database_autonomous_database` resource from the [Oracle provided Terraform OCI provider](https://registry.terraform.io/providers/oracle/oci/latest/docs).  Most the arguments are set by variables, allowing you to customise the ADB without having to rewrite the code which describes it.  
+The ADB is defined, in 16 lines, using the `oci_database_autonomous_database` resource from the [Oracle provided Terraform OCI provider](https://registry.terraform.io/providers/oracle/oci/latest/docs).  Most the arguments are set by variables, allowing you to customise the ADB without having to rewrite the code which describes it.
 
 When you **Apply** the IaC, it calls underlying APIs to provision the resource as it is defined, and records it in a "State" file.
 
 ![ADB Terraform](images/adb_terraform.png "ADB Terraform")
 
-For the DBA this is invaluable as it means you can define the ADB once, use variables where permitted and constants where mandated for your organisations standards.  Those 16 lines of IaC can then be used over and over to provision, and tear-down, hundreds of ADBs.  
+For the DBA this is invaluable as it means you can define the ADB once, use variables where permitted and constants where mandated for your organisations standards.  Those 16 lines of IaC can then be used over and over to provision, and tear-down, hundreds of ADBs.
 
 > use variables where permitted and constants where mandated
 
-As Terraform is declarative, that IaC can also be used to modify existing ADBs that were created by by it, by comparing the configuration in the "State" file with the real-world resources.
+As Terraform is declarative, that IaC can also be used to modify existing ADBs that were created by it, by comparing the configuration in the "State" file with the real-world resources.
 
 During the ORM interview phase, when you ticked the "Show Database Options?" the `Autonomous Database CPU Core Count` was set to `1`.  That value was assigned to `var.adb_cpu_core_count` during provisioning.
 
@@ -138,7 +141,7 @@ All of what you do manually in this Workshop can be automated by Ansible as part
 
 > All of what you do manually in this Workshop can be automated by Ansible
 
-In the Workshop Stack, Terraform will write a number of variable and inventory files **(2)** describing the Infrastructure that it has provisioned.  It will then call Ansible **(3)** to run Playbooks (a series of tasks that include conditionals, loops, and error handling) against the infrastructure definition **(4)** to configure it **(5)**.  
+In the Workshop Stack, Terraform will write a number of variable and inventory files **(2)** describing the Infrastructure that it has provisioned.  It will then call Ansible **(3)** to run Playbooks (a series of tasks that include conditionals, loops, and error handling) against the infrastructure definition **(4)** to configure it **(5)**.
 
 ![Terraform and Ansible](images/terraform_ansible.png "Terraform and Ansible")
 
@@ -150,7 +153,7 @@ Scrolling through the actions section of the log, you will see Ansible kick into
 
 ![Ansible Log](images/ansible_log.png "Ansible Log")
 
-It is important to note, Ansible has a robust community and ecosystem, with many third-party modules available for common tasks like interacting with cloud providers, databases, and other services.  
+It is important to note, Ansible has a robust community and ecosystem, with many third-party modules available for common tasks like interacting with cloud providers, databases, and other services.
 
 Oracle has released an [OCI Ansible Collection](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansible.htm) to support the automation of cloud configurations and the orchestration of complex operational processes.
 
@@ -158,7 +161,7 @@ You may now **proceed to the next lab**
 
 ## Common Issues
 
-* [Out of Capacity](?lab=troubleshooting#OutofCapacity)
+* [Out of Capacity](?lab=troubleshooting#Task2:OutofCapacity)
 
 ## Learn More
 

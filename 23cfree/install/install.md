@@ -23,83 +23,95 @@ This lab assumes you have:
 * All previous labs successfully completed
 * Access to the internet to download the software
 
+Watch the video below for a quick walk-through of the lab.
+[Lab Walkthrough](videohub:1_3l6mzbfq)
+
 ## Task 1: Operating System Setup
 
 1. Open a terminal if you don't currently have one open. To open one Click on Activities and then Terminal.
 
     ![Open Terminal](images/install-1-1.png " ")
 
-2. Create the directories needed for this workshop.
+2. Switch to root for the next set of commands including the install
 
     ```
     <copy>
-    sudo mkdir /u01
-    sudo chown oracle:oinstall /u01
-    mkdir /u01/downloads
-    mkdir /u01/app
-    mkdir /u01/app/oracle
-    mkdir /u01/app/oracle/ords
+    sudo -s
     </copy>
     ```
-    ![Make Directories](images/install-1-2.png " ")
+    ![Make Directories](images/install-1-2new.png " ")
 
-3. Before installing you should check to see if anything is running on port 1521. This is what the database configure command will use when creating the listener. If it cannot it will try and use another port. If a service is running on that port you can try and restart it to see if it will restart on another port. If you choose to run with a different port then just make sure to adjust the commands as you go with the correct port.
+3. Before installing you should check to see if anything is running on port 1521. **If nothing is running on port 1521 you can skip to the next step.** This port is what the database configure command will use when creating the listener. If it cannot use the port it will try and use another port. You can either reboot the server and see if the service using 1521 moves to another port or restart the service. If you choose to not to move the service and just let the database run on a port other than 1521 just make sure to adjust the commands later in the workshop to use the new port.
 
     ````
     <copy>
-    sudo netstat -anp|grep 1521
+    netstat -anp|grep 1521
     </copy>
     ````
     ![Check Port](images/install-1-3.png " ")
-    If any services are returned you can try and restart them and see if they move to another port. If nothing was returned continue to the next step. Restart the service using the "sudo systemctl restart" command. Make sure to replace the text below the the service from the previous command
-    ````
-    <copy>
-    sudo systemctl restart <replace with service>
-    </copy>
-    ````
-    ![Restart Services](images/install-1-3a.png " ")
-    Verify port 1521 is available
-    ````
-    <copy>
-    sudo netstat -anp|grep 1521
-    </copy>
-    ````
-    ![Verify Port](images/install-1-3b.png " ")
 
-4. Enable the developer repo to be able to run the prerequisites check as a part of the install
+    **Option 1:** If any services are returned you could try and reboot the server and see if they move to a different port. If you reboot you will need to wait for the server to restart and then reconnect to it and then relogin as root.
+
+    ````
+    <copy>
+    reboot
+    </copy>
+    ````
+    ![Reboot](images/install-1-3anew.png " ")
+
+    **Option 2:** The other option is to try and restart the services see if they move to another port. For a majority of the services you can restart the service using the "sudo systemctl restart" command. Make sure to replace the text below the the service from the previous command. For some of the services you might have to look up how to restart them.
+
+    ````
+    <copy>
+    systemctl restart <replace with service>
+    </copy>
+    ````
+    ![Restart Services](images/install-1-3bnew.png " ")
+
+4. Verify port 1521 is available
+
+    ````
+    <copy>
+    netstat -anp|grep 1521
+    </copy>
+    ````
+    ![Verify Port](images/install-1-3cnew.png " ")
+
+5. Enable the developer repo to be able to run the prerequisites check as a part of the install
     ```
     <copy>
-    sudo dnf config-manager --set-enabled ol8_developer
+    dnf config-manager --set-enabled ol8_developer
     </copy>
     ```
-    ![Enable Repository](images/install-1-4.png " ")
+    ![Enable Repository](images/install-1-5new.png " ")
 
 ## Task 2: Database Setup
 
 1. Get the download for 23c Free
     ```
     <copy>
-    cd /u01/downloads
-    wget -q --show-progress https://download.oracle.com/otn-pub/otn_software/db-free/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
+    cd /tmp
+
+    wget  -q --show-progress https://download.oracle.com/otn-pub/otn_software/db-free/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
     </copy>
     ```
-    ![Download Software](images/install-2-1.png " ")
+    ![Download Software](images/install-2-1new.png " ")
 
 2. Install the database software using the dnf command. This will take about 5-10 minutes.
     ```
     <copy>
-    sudo dnf -y localinstall /u01/downloads/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
+    dnf -y localinstall /tmp/oracle-database-free-23c-*.el8.x86_64.rpm
     </copy>
     ```
-    ![Install Software](images/install-2-2.png " ")   
+    ![Install Software](images/install-2-2new.png " ")   
 
 3. Create the database. You will be prompted for a password to be used for the database accounts. You can use any password here but you will need it later so note it down. For my examples I will use Welcome123# This should take about 5-10 minutes.
     ```
     <copy>
-    sudo /etc/init.d/oracle-free-23c configure
+    /etc/init.d/oracle-free-23c configure
     </copy>
     ```
-    ![Create Database](images/install-2-3.png " ")
+    ![Create Database](images/install-2-3new.png " ")
 
 4. When the create finishes it will give you the two connection strings for your pluggable and container databases. If you used a different port it will be in the connection string.
     ```
@@ -111,14 +123,22 @@ This lab assumes you have:
 5. To see if your database is up and running you can use the following command
     ```
     <copy>
-    sudo /etc/init.d/oracle-free-23c status
+    /etc/init.d/oracle-free-23c status
     </copy>
     ```
     ![Database Status](images/install-2-5.png " ")
 
+6. Exit out of root and back to oracle
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+    ![Switch back to Oracle](images/install-2-6.png " ")
+
 ## Task 3: Environment and User Setup
 
-1. To set your environment each time Oracle logs in add these lines to your profile. This will specifically set it for the FREE database. Also this adds SQLcl and ORDS to your path.
+1. To set your environment each time Oracle logs in add these lines to your profile. This will specifically set it for the FREE database.
     ```
     <copy>
     echo "export ORAENV_ASK=NO" >> /home/oracle/.bashrc
@@ -126,12 +146,12 @@ This lab assumes you have:
     echo ". /usr/local/bin/oraenv" >> /home/oracle/.bashrc
     echo "unset ORAENV_ASK" >> /home/oracle/.bashrc
     echo "export JAVA_HOME=/usr/bin/java" >> /home/oracle/.bashrc
-    echo "export PATH=\$PATH:\$ORACLE_HOME/bin:/u01/app/oracle/ords/bin:/u01/app/oracle/sqlcl/bin" >> /home/oracle/.bashrc
+    echo "export PATH=\$PATH:\$ORACLE_HOME/bin" >> /home/oracle/.bashrc
 
     . /home/oracle/.bashrc
     </copy>
     ```
-    ![Set Environment](images/install-3-1.png " ")
+    ![Set Environment](images/install-3-1new.png " ")
 
 2. If your listener was configured on a different port or you wanted to see your listener configuration you can use the lsnrctl command. You can use this port in the later commands if you are not running on port 1521.
     ````
@@ -196,6 +216,7 @@ This lab assumes you have:
 * [Oracle Database 23c Free](https://www.oracle.com/database/free/)
 * [Oracle Database 23c Free VirtualBox](https://www.oracle.com/database/technologies/databaseappdev-vm.html)
 * [Oracle Database Container Registry (Search for 23c Free)] (https://container-registry.oracle.com/ords/f?p=113:4)
+* [Oracle Database 23c Free Installation](https://docs.oracle.com/en/database/oracle/oracle-database/23/xeinl/index.html#Oracle%C2%AE-Database-Free)
 
 ## Acknowledgements
 * **Author** - David Start, Database Product Management

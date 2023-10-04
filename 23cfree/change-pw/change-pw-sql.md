@@ -94,7 +94,7 @@ Version 23.2.0.0.0
 [FREE:oracle@hol23cfdr:~]$
 		```
 
-    **NOTE:** You must leave this terminal open and the process running. Closing either will stop ORDS from running, and you will not be able to access other applications that are used in this lab.
+    >**NOTE:** You must leave this terminal open and the process running. Closing either will stop ORDS from running, and you will not be able to access other applications that are used in this lab.
 
     ![Start ORDS](images/ords1.png " ")
 
