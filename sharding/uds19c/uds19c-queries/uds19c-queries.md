@@ -36,7 +36,7 @@ This lab assumes you have:
     </copy>
     ```
 
-     ![<List Docker Containers>](./images/uds19c-init-env-docker-containers-status.png " ")
+     ![<List Docker Containers>](images/uds19c-init-env-docker-containers-status.png " ")
 
 
 2. The user-defined sharded database schema and tables are created, and data is inserted for this lab. Connect to the Shard1, Shard2, and Catalog Databases and compare query results from sharded table Accounts on each database.
@@ -59,7 +59,7 @@ This lab assumes you have:
     sudo docker exec -it shard1 /bin/bash
     </copy>
     ```
-     ![<Connect Shard1 Docker Image shard1>](./images/uds19c-connect-shard1-docker-image.png " ")
+     ![<Connect Shard1 Docker Image shard1>](images/uds19c-connect-shard1-docker-image.png " ")
 
 
     ```
@@ -70,7 +70,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<Shard1 sharded table queries>](./images/uds19c-connect-shard1-sharded-table-queries.png " ")
+    ![<Shard1 sharded table queries>](images/uds19c-connect-shard1-sharded-table-queries.png " ")
 
 
 4. Connect to Shard2 and run queries on the sharded table Accounts. A total of 7 accounts and 6 Countries are in Shard2.
@@ -81,7 +81,7 @@ This lab assumes you have:
     sudo docker exec -it shard2 /bin/bash
     </copy>
     ```
-     ![<Connect Shard2 Docker Image shard1>](./images/uds19c-connect-shard2-docker-image.png " ")
+     ![<Connect Shard2 Docker Image shard1>](images/uds19c-connect-shard2-docker-image.png " ")
 
 
     ```
@@ -92,7 +92,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<Shard2 sharded table queries>](./images/uds19c-connect-shard2-sharded-table-queries.png " ")
+    ![<Shard2 sharded table queries>](images/uds19c-connect-shard2-sharded-table-queries.png " ")
 
 
 
@@ -103,7 +103,7 @@ This lab assumes you have:
     sudo docker exec -it pcatalog /bin/bash
     </copy>
     ```
-     ![<Connect Catalog Docker Image pcatalog>](./images/uds19c-connect-catalog-docker-image.png " ")
+     ![<Connect Catalog Docker Image pcatalog>](images/uds19c-connect-catalog-docker-image.png " ")
 
 
     ```
@@ -114,7 +114,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<Catalog sharded table queries>](./images/uds19c-connect-catalog-sharded-table-queries.png " ")
+    ![<Catalog sharded table queries>](images/uds19c-connect-catalog-sharded-table-queries.png " ")
 
 
 ## Task 3: Validate a duplicated table query on each shard and on the catalog database.
@@ -130,19 +130,19 @@ This lab assumes you have:
 2. Connect Shard1 and run a query on duplicated table to select rows.
 
 
-    ![<Shard1 duplicated table row count>](./images/uds19c-connect-shard1-duplicated-table-count.png " ")
+    ![<Shard1 duplicated table row count>](images/uds19c-connect-shard1-duplicated-table-count.png " ")
 
 
 3. Connect Shard2 and run a query on duplicated table to select rows.
 
 
-    ![<Shard2 duplicated table row count>](./images/uds19c-connect-shard2-duplicated-table-count.png " ")
+    ![<Shard2 duplicated table row count>](images/uds19c-connect-shard2-duplicated-table-count.png " ")
 
 
 4. Connect Catalog and run a query on duplicated table to select rows.
 
 
-    ![<Catalog duplicated table row count>](./images/uds19c-connect-catalog-duplicated-table-count.png " ")
+    ![<Catalog duplicated table row count>](images/uds19c-connect-catalog-duplicated-table-count.png " ")
 
 
 ## Task 4: Connect Catalog DB using GSM local service : GDS$CATALOG.
@@ -154,7 +154,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<Connect via GSM Local Service to the Catalog Database>](./images/uds19c-query-gds-catalog-local-service.png " ")
+    ![<Connect via GSM Local Service to the Catalog Database>](images/uds19c-query-gds-catalog-local-service.png " ")
 
 
 ## Task 5: Connect and query using global services which were created by gdsctl add service command.
@@ -168,7 +168,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<Connect GSM Global Service to a random shard database>](./images/uds19c-connect-gsm-service-directRoutingApp.png " ")
+    ![<Connect GSM Global Service to a random shard database>](images/uds19c-connect-gsm-service-directRoutingApp.png " ")
 
 
 ## Task 6: Connect Shard1 using gsm service for direct routing and run a query.
@@ -181,7 +181,7 @@ This lab assumes you have:
     sqlplus transactions/****************@'(DESCRIPTION=(ADDRESS=(HOST=oshard-gsm1.example.com)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=oltp_rw_svc.shardcatalog1.oradbcloud)(SHARDING_KEY=USA)))'
     </copy>
     ```
-![<Connect GSM Global Service to shard1 database>](./images/uds19c-connect-gsm-service-shard-1.png " ")
+![<Connect GSM Global Service to shard1 database>](images/uds19c-connect-gsm-service-shard-1.png " ")
 
 
 ## Task 7: Connect Shard2 using gsm service for direct routing and run a query.
@@ -194,7 +194,7 @@ This lab assumes you have:
     sqlplus transactions/****************@'(DESCRIPTION=(ADDRESS=(HOST=oshard-gsm1.example.com)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=oltp_rw_svc.shardcatalog1.oradbcloud)(SHARDING_KEY=IND)))'
     </copy>
     ```
-![<Connect GSM Global Service to shard2 database>](./images/uds19c-connect-gsm-service-shard-2.png " ")
+![<Connect GSM Global Service to shard2 database>](images/uds19c-connect-gsm-service-shard-2.png " ")
 
 
 ## Acknowledgements

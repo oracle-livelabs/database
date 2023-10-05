@@ -34,7 +34,7 @@ This lab assumes you have:
     </copy>
     ```
 
-     ![<List Docker Containers>](./images/uds19c-init-env-docker-containers-status.png " ")
+     ![<List Docker Containers>](images/uds19c-init-env-docker-containers-status.png " ")
 
 2. Connect catalog image (pcatalog)
 
@@ -44,7 +44,7 @@ This lab assumes you have:
     </copy>
     ```
 
-     ![<Connect Catalog Docker Image pcatalog>](./images/uds19c-connect-catalog-docker-image.png " ")
+     ![<Connect Catalog Docker Image pcatalog>](images/uds19c-connect-catalog-docker-image.png " ")
 
 ## Task 2: Connect as SYSDBA user to create a sharded database schema user
 

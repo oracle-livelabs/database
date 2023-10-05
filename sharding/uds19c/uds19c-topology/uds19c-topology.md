@@ -41,7 +41,7 @@ This lab assumes you have:
     </copy>
     ```
 
-     ![<Docker containers>](./images/uds19c-init-env-docker-containers-status.png " ")
+     ![<Docker containers>](images/uds19c-init-env-docker-containers-status.png " ")
 
 2. The user-defined sharding method provides a means to achieve regulatory compliance by enabling user-defined data placement It allows you to use a range or list of countries to partition data among the shards by letting you explicitly specify the mapping of data to individual shards.
     User-Defined Sharding Definitions
@@ -60,7 +60,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<connect to GSM1>](./images/uds19c-docker-gsm1.png " ")
+    ![<connect to GSM1>](images/uds19c-docker-gsm1.png " ")
 
 4. Verify sharding topology using the  **CONFIG** command.
 
@@ -70,7 +70,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<config shard>](./images/uds19c-gdsctl-config-shard.png " ")
+    ![<config shard>](images/uds19c-gdsctl-config-shard.png " ")
 
 5. Display the sharding topology configuration.
 
@@ -80,7 +80,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<User-defined-sharding-topology-config>](./images/uds19c-gdsctl-config.png " ")
+    ![<User-defined-sharding-topology-config>](images/uds19c-gdsctl-config.png " ")
 
 6. Display the GSM status.
 
@@ -90,7 +90,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<gsm-status>](./images/uds19c-gdsctl-status-gsm.png " ")
+    ![<gsm-status>](images/uds19c-gdsctl-status-gsm.png " ")
 
 7. Display the global services configured.
 
@@ -100,7 +100,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<config-service>](./images/uds19c-gdsctl-config-service.png " ")
+    ![<config-service>](images/uds19c-gdsctl-config-service.png " ")
 
 8. Display the recent 10 DDLs.
 
@@ -110,7 +110,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<show ddl>](./images/uds19c-gdsctl-show-ddl.png " ")
+    ![<show ddl>](images/uds19c-gdsctl-show-ddl.png " ")
 
 9. Display the DDLs by count.
 
@@ -120,7 +120,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<show ddl by count>](./images/uds19c-gdsctl-show-ddl-by-count.png " ")
+    ![<show ddl by count>](images/uds19c-gdsctl-show-ddl-by-count.png " ")
 
 10. Display the failed DDLs only.
 
@@ -130,7 +130,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<show ddl failed only>](./images/uds19c-gdsctl-show-ddl-failed_only.png " ")
+    ![<show ddl failed only>](images/uds19c-gdsctl-show-ddl-failed_only.png " ")
 
 11. Lists all of the database shards and the chunks that they contain.
 
@@ -140,7 +140,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<configuration_of_chunks>](./images/uds19c-gdsctl-config-chunks.png " ")
+    ![<configuration_of_chunks>](images/uds19c-gdsctl-config-chunks.png " ")
 
 12. Display the sharded database stored in the GDS catalog.
 
@@ -150,7 +150,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<replication_type>](./images/uds19c_gdsctl-config_sdb_replication_type_dg.png " ")
+    ![<replication_type>](images/uds19c_gdsctl-config_sdb_replication_type_dg.png " ")
 
 
 13. Display the user defined sharding table family's root table. All sharded tables are children of this root table. Child tables can also be in hierarchical order from its child tables.
@@ -161,7 +161,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<validate>](./images/uds19c-gdsctl-config-table-family.png " ")
+    ![<validate>](images/uds19c-gdsctl-config-table-family.png " ")
 
 14. Display the sharding configuration validation result.
 
@@ -171,7 +171,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<validate>](./images/uds19c-gdsctl-validate.png " ")
+    ![<validate>](images/uds19c-gdsctl-validate.png " ")
 
 15. Exit from gsm1.
 

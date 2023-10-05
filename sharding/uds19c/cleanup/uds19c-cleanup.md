@@ -19,16 +19,16 @@ Estimated Time - 5 minutes
 - You should have provisioned the **Achieving Data Sovereignty with Oracle Sharding** workshop using a Docker container
 - To provision this workshop, there are detailed instructions in Lab 1 of [Achieving Data Sovereignty with Oracle Sharding](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=866) workshop.
 
-## Task 1: Terminate a provisioned Oracle Autonomous Database instance
+## Task 1: Terminate a provisioned Oracle Autonomous Database instance.
 
 1. Login to Oracle Cloud
 
 2. Open the navigation menu and click **Developer Services**. Under **Resource Manager**, click **Stacks**.
-  ![stack](./images/stack.png " ")
+  ![stack](images/stack.png " ")
 
 3. Choose the compartment that you chose in Lab 1 to install your stack (on the left side of the page).
 
-4. Click the name of the stack that you created in Lab 1.The Stack details page opens.
+4. Click the name of the stack that you created in Lab 1. The Stack details page opens.
 
 5. Click **Destroy**.
 
@@ -40,7 +40,7 @@ Estimated Time - 5 minutes
 
 9. After a few minutes, once the instance is terminated, the Lifecycle state will change from Terminating to Terminated.
 
-  You have successfully cleaned up your  instance.
+  You have successfully cleaned up your instance.
 
 ## Learn More
 
