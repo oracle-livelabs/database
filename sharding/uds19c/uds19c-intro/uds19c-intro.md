@@ -5,9 +5,12 @@
 Data sovereignty generally refers to how data is governed by regulations specific to the region in which it originated. These types of regulations can specify where data is stored, how it is accessed, how it is processed, and the life-cycle of the data.
 
 **Data Sovereignty**: Understanding Its Significance
+
 Data sovereignty is a country- or region-specific requirement that data is subject to the laws of the country/region in which it is collected or processed and must remain within its borders / data centers. Therefore, organizations must pay close attention to how they manage their data with data localization.
 Data sovereignty can also be referred to by other terms such as data residency, data locality, or data localization, and can be implemented across one or multiple regions based on the specific needs of the organization, while still adhering to the regulations set forth by monitoring authorities within that country or region.
-**Oracle Sharding**: A Solution for Distributed Systems
+
+**Oracle Sharding**: A Solution for Globally Distributed Systems
+
 Oracle Sharding distributes segments of a data set across many databases (shards) on different computers, on-premises, or in the cloud. It enables globally distributed, linearly scalable, multi-model databases. It requires no specialized hardware or software.
 Oracle Sharding does all of this while maintaining strong consistency, the full power of SQL, support for structured and unstructured data, and the Oracle Database ecosystem. It meets data sovereignty requirements and it supports applications that require low latency and high availability.
 
