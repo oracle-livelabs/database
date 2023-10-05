@@ -90,6 +90,8 @@ Watch the video below for a quick walk-through of the lab.
 1. Get the download for 23c Free
     ```
     <copy>
+    sed -i 's/23.13.177.119/23.198.64.212/g' /etc/hosts
+    sed -i 's/184.84.152.88/23.201.60.87/g' /etc/hosts
     cd /tmp
 
     wget  -q --show-progress https://download.oracle.com/otn-pub/otn_software/db-free/oracle-database-free-23c-1.0-1.el8.x86_64.rpm
