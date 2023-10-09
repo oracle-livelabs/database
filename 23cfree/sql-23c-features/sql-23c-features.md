@@ -327,7 +327,12 @@ This clause has been implemented long ago as a part of `EXECUTE IMMEDIATE` state
 ## Task 9: Joins in UPDATE and DELETE
 
 You may update table data via joins - based on foreign table conditions. There is no need for sub selects or `IN` clause.
-1. For example, instead of using this statement prior to 23c:
+1. Let's take a look at the employee salary information from the research department.
+    ```
+    <copy>select e.sal, e.empno from emp e, dept d where e.deptno=d.deptno and d.dname='RESEARCH';</copy>
+    ```
+
+2. Now to update the salary information, prior to 23c we would need to use a nested statement:
     ```
     UPDATE emp e set e.sal=e.sal*2
     WHERE e.deptno in
@@ -342,6 +347,11 @@ You may update table data via joins - based on foreign table conditions. There i
     WHERE e.deptno=d.deptno
     and d.dname='RESEARCH';</copy>
     5 rows updated.
+    ```
+
+3. You can see the salary has been successfully updated.
+    ```
+    <copy>select e.sal, e.empno from emp e, dept d where e.deptno=d.deptno and d.dname='RESEARCH';</copy>
     ```
 
 ## Task 10: Annotations, new metadata for database objects
@@ -360,10 +370,25 @@ With annotations you may store and retrieve metadata about a database objects. Y
     annotations (display 'employee_table');
     </copy>
     ```
-    Data Dictionary views such as `USER_ANNOTATIONS` and `USER_ANNOTATIONS_USAGE` can help to monitor the usage.
+
+    These will help to format the output.
     ```
     <copy>
-    SELECT * FROM user_annotations_usage;
+    set lines 200;
+    set pages 200;
+    col object_name format a25;
+    col object_type format a15;
+    col annotation_name format a15;
+    col annotation_value format a15;
+    col column_name format a20;
+    </copy>
+    ```
+
+2. Data Dictionary views such as `USER_ANNOTATIONS` and `USER_ANNOTATIONS_USAGE` can help to monitor the usage.
+    ```
+    <copy>
+    SELECT object_name, object_type, column_name, annotation_name, annotation_value
+    FROM user_annotations_usage;
     </copy>
     ```
 
@@ -376,7 +401,7 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     Domain creation is for admin level users. First, exit from sql*plus, then log in as sysdba.
     ```
     <copy>
-    exit
+    exit;
     </copy>
     ```
     ```
@@ -384,7 +409,21 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     sqlplus / as sys admin
     </copy>
     ```
-2. Now create the domain `yearbirth` and the table `person`.
+    Set the correct container.
+    ```
+    <copy>alter session set container=FREEPDB1;</copy>
+    ```
+
+2. Grant privileges to our main user `hol23c` to create domains.
+    ```
+    <copy>grant db_developer_role to hol23c;</copy>
+    ```
+    Connect to hol23c. Replace `Welcome123' with the password you created in Lab 1.
+    ```
+    <copy>connect hol23c/Welcome123@localhost:1521/freepdb1</copy>
+    ```
+
+3. Now create the domain `yearbirth` and the table `person`.
     ```
     <copy>CREATE DOMAIN yearbirth as number(4)
         constraint check ((trunc(yearbirth) = yearbirth) and (yearbirth >= 1900))
@@ -419,12 +458,12 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     PERSON_BIRTH                                                                        NUMBER(4) SYS.YEARBIRTH
     ```
 
-2. Now let's add data to our table.
+4. Now let's add data to our table.
     ```
     <copy>INSERT INTO person values (1,'MARTIN',3000, 1988);</copy>
     ```
 
-3. With the new function `DOMAIN_DISPLAY` you can display the property.
+5. With the new function `DOMAIN_DISPLAY` you can display the property.
     ```
     <copy>SELECT DOMAIN_DISPLAY(person_birth) FROM person;</copy>
     ```
@@ -435,7 +474,20 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     19-88
     ```
 
-4. Domain usage and Annotations can be monitored with data dictionary views.
+6. Domain usage and Annotations can be monitored with data dictionary views. First we'll set some formatting, then view `user_annotations_usage`.
+    ```
+    <copy>
+    set lines 200;
+    set pages 200;
+    col object_name format a10;
+    col object_type format a15;
+    col annotation_name format a15;
+    col annotation_value format a15;
+    col column_name format a20;
+    col domain_name format a15;
+    col domain_owner format a10;
+    </copy>
+    ```
     ```
     <copy>SELECT * FROM user_annotations_usage;</copy>
     ```
@@ -453,8 +505,6 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     YEARBIRTH       DOMAIN                                           TITLE                yearformat
     PERSON          TABLE      PERSON_BIRTH    YEARBIRTH  SCOTT      TITLE                yearformat
     ```
-
-You may now **proceed to the next lab**.
 
 ## Learn More
 
