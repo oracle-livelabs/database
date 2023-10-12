@@ -27,7 +27,7 @@ In this lab, you will:
 
 ## Task 1: Create Collection
 
-1. Open a browser window to SQL Developer Web.
+1. Open a browser window to Database Actions.
 
 	```
     <copy>http://localhost:8080/ords/hol23c/_sdw</copy>
@@ -44,25 +44,33 @@ In this lab, you will:
 
 	![User Sign In](./images/ords-sign-in.png)
 
-4. On the homepage, click the JSON tile under Development. You can ignore the guided tours when they pop up. 
+4. Experience the homepage of Database Actions. Database Actions was formerly known as 'SQL Developer Web' and was focusing meinly on the SQL worksheet functionality, a subset of functionality that is available in SQL Developer Desktop
+
+	![Homepage Database Actions](./images/homepage-dbactions.png)
+
+	Let's have a quick look into the SQL Worksheet and some of its capabilities to compare and contrast with SQL Developer Desktop. You can walk through the guided tour or return to the main screen of Database Actions.
+
+	![Homepage SQL Developer Web](./images/homepage-intro-sdw.png)
+
+5. On the homepage, click the JSON tile under Development. You can ignore the guided tours when they pop up. 
 
 	![Homepage Development JSON](./images/homepage-json.png)
 
-5. To create a collection, click **Create Collection**.
+6. To create a collection, click **Create Collection**.
 	A tour of this section may automatically begin when the page loads. You can click `next` to continue through the tour and return to this page.
 
 	![JSON Create Collection](./images/json-create-collection.png)
 
-6. In the field **Collection Name**, provide the name **movies**. MAKE SURE you check the **MongoDB Compatible** box then click **Create**.
+7. In the field **Collection Name**, provide the name **movies**. MAKE SURE you check the **MongoDB Compatible** box then click **Create**.
 	Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use MOVIES or Movies.
 
 	![New Collection: movies](./images/collection-name.png)
 
-7. A notification pops up that displays **movies** collections has been created.
+8. A notification pops up that displays **movies** collections has been created.
 
 	![New collection notification](./images/popup.png)
 
-8. Click the refresh button to verify the **movies** collection has been created.
+9. Click the refresh button to verify the **movies** collection has been created.
 
 	![Refresh button](./images/refresh-collection.png)
 

@@ -75,7 +75,7 @@ In any migration using transportable tablespaces, including FTEX, you must creat
     ```
     </details>
 
-4. Create a directory object that Data Pump can use. Also, create a database link that can be used by Data Pump to import directly from the source database. The database link connects to the source database.
+4. Create a directory object that Data Pump can use.
     ```
     <copy>
     alter session set container=PDB2;
@@ -101,10 +101,6 @@ In any migration using transportable tablespaces, including FTEX, you must creat
     SQL> grant read, write on directory mydir to system;
 
     Grant succeeded.
-    
-    SQL> create public database link SOURCEDB connect to system identified by oracle using 'FTEX';
-
-    Database link created.
 
     SQL> exit
 

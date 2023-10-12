@@ -138,12 +138,17 @@ You can either copy & paste the entire command (first option) or call a script (
 
 NOTE: *While the installation is ongoing, please switch to the 19.18 tab and continue with the next lab. You will execute the "root.sh" script in one of the next labs.*
 
-1. Option - Shell Script
+1. Option - Shell Script. For simplicity, you can run the following shell script which does the installation. Otherwise, in option 2 you can run the command yourself.
 
-<details>
- <summary>*run a shell script (and _only_ run this shell script if you do not want to copy/paste the complete runInstaller command)*</summary>
+    First, examine the script.
 
-  ``` text
+    ```
+    <copy>
+    cat /home/oracle/patch/install_patch.sh
+    </copy>
+    ```
+
+    Then execute the script.
 
     ```
     <copy>
@@ -151,9 +156,10 @@ NOTE: *While the installation is ongoing, please switch to the 19.18 tab and con
     </copy>
     ```
 
-    ![runInstaller shell script output ](./images/run-installer-shell-output.png " ")
+<details>
+ <summary>*Click to see the output*</summary>
 
-
+  ``` text
 
 The installation will take approximately 10 minutes. 
 

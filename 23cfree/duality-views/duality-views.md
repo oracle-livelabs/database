@@ -6,6 +6,8 @@ This lab demonstrates the extreme flexibility of JSON Duality Views in the Oracl
 
 Estimated Time: 20 minutes
 
+[Lab 4](videohub:1_w820xz7v)
+
 ### Objectives
 
 In this lab, you will:

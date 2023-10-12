@@ -8,6 +8,8 @@ In this lab, you will create the Oracle Cloud Infrastructure (OCI) *Policies* re
 
 *Estimated Time:* 2 minutes
 
+[Lab 1](videohub:1_8j59uclu)
+
 ### Objectives
 
 * Create an OCI Compartment
@@ -19,6 +21,7 @@ This lab assumes you have:
 
 * An Oracle Cloud Paid or Free-Tier Account
 * You are logged into OCI as illustrated in [Get Started](https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md "Get Started")
+* Your tenancy uses IAM Identity Domains and your account is not Federated
 
 ## Task 1: Open the Cloud Shell
 
@@ -63,55 +66,7 @@ A *Group* is a collection of cloud users who all need the same type of access to
 
 A *Group* is very similar to a database role.  Privileges, or in the case of OCI, *Policies* will be granted to the *Group* and cloud users can then be assigned to the cloud *Group* to inherit those *Policies*.
 
-## Task 4: Assign User to Group
-
-Assign the cloud *User* who will be carrying out the remaining Labs to the *Group* created in Task 3.  This could be yourself!
-
-1. Find the users OCID (**Optional**):
-
-    **Skip this Step if you are setting this up for yourself, if you are an Administrator setting this up for another user:**
-
-    Replace `<username>` with the OCI username:
-
-    ```text
-    USER_OCID=$(oci iam user list --name <username> | jq -r '.data[].id')
-    ```
-
-    For example:
-
-    ```text
-    USER_OCID=$(oci iam user list --name first.last@url.com | jq -r '.data[].id')
-    ```
-
-    If you don't know the username, you can get a list by running:
-
-    ```bash
-    <copy>
-    oci iam user list --all --query 'data[].name'
-    </copy>
-    ```
-
-2. Get the *Group* OCID:
-
-    ```bash
-    <copy>
-    GROUP_OCID=$(oci iam group list --name [](var:oci_group) | jq -r .data[].id)
-
-    echo "Group OCID: $GROUP_OCID"
-    </copy>
-    ```
-
-3. Assign the *User* to the *Group*:
-
-    ```bash
-    <copy>
-    echo "User OCID:  ${USER_OCID:-$OCI_CS_USER_OCID}"
-
-    oci iam group add-user --group-id $GROUP_OCID --user-id ${USER_OCID:-$OCI_CS_USER_OCID}
-    </copy>
-    ```
-
-## Task 5: Apply Policies to the Group
+## Task 4: Apply Policies to the Group
 
 A *Policy* specifies who can access which OCI resources, and how.  A *Policy* simply allows a *Group* to work in certain ways with specific types of resources in a particular compartment.  In database terms, this is the process of granting privileges (*Policy*) to a role (*Group*) against a specific schema (*Compartment*).
 
@@ -162,7 +117,65 @@ In the *Cloud Shell*, run the following commands to create a *Policy* statement 
 
     When you create a *Policy*, make changes to an existing *Policy*, or delete a *Policy*, your changes go into effect typically within 10 seconds.
 
+## Task 5: Assign User to Group
+
+Assign the cloud *User* who will be carrying out the remaining Labs to the *Group* created in Task 3.  This could be yourself!
+
+1. Find the users OCID (**Optional**):
+
+    **If you are setting this up for yourself, Skip to Step 2 (Get the Group OCID)**
+
+    If you are an Administrator setting this up for another user:
+
+    Replace `<username>` with the OCI username:
+
+    ```text
+    USER_OCID=$(oci iam user list --name <username> | jq -r '.data[].id')
+    ```
+
+    For example:
+
+    ```text
+    USER_OCID=$(oci iam user list --name first.last@url.com | jq -r '.data[].id')
+    ```
+
+    If you don't know the username, you can get a list by running:
+
+    ```bash
+    <copy>
+    oci iam user list --all --query 'data[].name'
+    </copy>
+    ```
+
+2. Get the *Group* OCID:
+
+    ```bash
+    <copy>
+    GROUP_OCID=$(oci iam group list --name [](var:oci_group) | jq -r .data[].id)
+
+    echo "Group OCID: $GROUP_OCID"
+    </copy>
+    ```
+
+3. Assign the *User* to the *Group*:
+
+    ```bash
+    <copy>
+    echo "User OCID:  ${USER_OCID:-$OCI_CS_USER_OCID}"
+
+    oci iam group add-user --group-id $GROUP_OCID --user-id ${USER_OCID:-$OCI_CS_USER_OCID}
+    </copy>
+    ```
+
+### Troubleshooting
+
+Your user account maybe in an IDCS Federated identity domain, in which case you will not be able to assign your user account to the IAM Group.  The `oci iam group add-user`command will fail with a `ServiceError` message.  If this is the case, please follow the [IAM User Error](?lab=troubleshooting#Task1:IAMUserError) guide.
+
 You may now **proceed to the next lab**
+
+## Common Issues
+
+* [IAM User Error](?lab=troubleshooting#Task1:IAMUserError)
 
 ## Learn More
 
