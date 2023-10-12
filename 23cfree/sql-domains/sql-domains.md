@@ -51,7 +51,7 @@ This lab assumes you have:
     You may consult the [documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/index.html) to get a detailed description of the different parts of SQL domain syntax.
 
 2. To get an idea how to use it, let's create a simple example - an email domain - and use it in a person table.
-    If you closed to your terminal, connect again as hol23c again. Remember we're using Welcome123 as the password, but change the values to match your own here. 
+    If you closed to your terminal, connect again as hol23c again. Remember we're using Welcome123 as the password, but change the values to match your own here.
     ```
     <copy>
     sqlplus hol23c/Welcome123@localhost:1521/freepdb1
@@ -59,6 +59,7 @@ This lab assumes you have:
     ```
     Now let's create that domain.
     >Note: As a reminder, and trailing numbers when pasting into terminal will not effect command output.
+
     ```
     <copy>
     CREATE DOMAIN IF NOT EXISTS myemail_domain AS VARCHAR2(100)
@@ -68,7 +69,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    We now have a domain called `myemail_domain`. The check constraint `EMAIL\_C` examines if the column stores a valid email, `DISPLAY` specifies how to convert the domain column for display purposes. You may use the SQL function `DOMAIN_DISPLAY` on the given column to display it.
+    We now have a domain called `myemail_domain`. The check constraint `EMAIL_C` examines if the column stores a valid email, `DISPLAY` specifies how to convert the domain column for display purposes. You may use the SQL function `DOMAIN_DISPLAY` on the given column to display it.
 
 3. Now let's use it in the table person.
     ```
@@ -105,8 +106,8 @@ This lab assumes you have:
     ```
     <copy>
     commit;
-    Commit complete.
     </copy>
+    Commit complete.
     ```
 
 5. Here's an insert example with invalid data.
@@ -119,7 +120,7 @@ This lab assumes you have:
     ORA-11534: check constraint (SYS.SYS_C008254) due to domain constraint
     SYS.EMAIL_C of domain SYS.MYEMAIL_DOMAIN violated
     ```
-    The number of your constraint may vary slightly from the `SYS_C008254` shown here, but the error is the same. This is our domain constarints at work.
+    The number of your constraint may vary slightly from the `SYS_C008254` shown here, but the error is the same. This is our domain constraint at work.
 
 6. Now let's query the table PERSON.
     ```
@@ -149,14 +150,12 @@ This lab assumes you have:
     P_ID                                         NUMBER(5)
     P_NAME                                       VARCHAR2(50)
     P_SAL                                        NUMBER
-    P_EMAIL                                      NOT NULL VARCHAR2(100) SYS.MYEMAIL_DOMAIN
+    P_EMAIL                             NOT NULL VARCHAR2(100) HOL23C.MYEMAIL_DOMAIN
     ```
 2. As previously mentioned, there are new domain functions you may use in conjunction with the table columns to get more information about the domain properties. `DOMAIN_NAME` for example returns the qualified domain name of the domain that the argument is associated with, `DOMAIN_DISPLAY` returns the domain display expression for the domain that the argument is associated with. More information can be found in the [documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/index.html).
     ```
-    <copy>col p_name format a25;</copy>
-    ```
-    ```
-    <copy>col DISPLAY format a25;</copy>
+    <copy>col p_name format a30;
+    col DISPLAY format a25;</copy>
     ```
     ```
     <copy>SELECT p_name, domain_display(p_email) "Display" FROM person;</copy>
@@ -177,6 +176,7 @@ This lab assumes you have:
     ```
     <copy>
     col owner format a15;
+    col name format a30;
     set pagesize 100;
     </copy>
     ```
@@ -189,8 +189,8 @@ This lab assumes you have:
     --------------- ------------------------------
     DATA_DISPLAY
     ------------------------------------------------------
-    SYS           MYEMAIL_DOMAIN
-    SUBSTR(myemail_domain, INSTR(myemail_domain, '@') + 1)
+    HOL23C           MYEMAIL_DOMAIN
+    SUBSTR(myemail_domain, instr(myemail_domain, '@') + 1)
     ```
 
     ```
@@ -236,12 +236,18 @@ This lab assumes you have:
 
 In addition, to make it easier for you to start with Oracle provides built-in domains you can use directly on table columns - for example, email, ssn, and credit_card. You find a list of them with names, allowed values and description in the documentation.
 
-1. First, we'll connect as the sysdba. 
+1. First, we'll connect as the sysdba.
     ```
     <copy>
-    connect as / sysdba;
+    connect / as sysdba;
+    </copy>
+    Connected.
+    ```
+    ```
+    <copy>
     alter session set container=FREEPDB1;
     </copy>
+    Session altered.
     ```
 
 1. Another way to get this information is to query `ALL_DOMAINS` and filter on owner `SYS`. Then you will receive the built-in domains.
@@ -282,12 +288,14 @@ In addition, to make it easier for you to start with Oracle provides built-in do
     <copy>
     connect hol23c/Welcome123@localhost:1521/freepdb1
     </copy>
+    Connected.
     ```
 
     ```
     <copy>
     DROP TABLE IF EXISTS person;
     </copy>
+    Table dropped.
     ```
     ```
     <copy>
@@ -299,9 +307,10 @@ In addition, to make it easier for you to start with Oracle provides built-in do
         )
     annotations (display 'person_table');
     </copy>
+    Table created.
     ```
 
-    Keep in mind that we need to adjust the length of the column `P_EMAIL` to **4000** - otherwise you will receive the following error:
+    > Keep in mind that we need to adjust the length of the column `P_EMAIL` to **4000** - otherwise you will receive the following error:
     ```
     CREATE TABLE person
         ( p_id number(5),
@@ -311,7 +320,6 @@ In addition, to make it easier for you to start with Oracle provides built-in do
         )
     annotations (display 'person_table');
     ```
-
     ```
     CREATE TABLE person
     *
@@ -330,7 +338,7 @@ In addition, to make it easier for you to start with Oracle provides built-in do
     1 row created.
     ```
 
-    We'll need to format our entries to avoid error.
+    We'll need to format our entries to avoid error. Here's an example of such an error:
     ```
     INSERT INTO person values (1,'Walter',1000,'user-walter@t_online.de')
     *
@@ -338,7 +346,7 @@ In addition, to make it easier for you to start with Oracle provides built-in do
     ORA-11534: check constraint (SCOTT.SYS_C008255) due to domain constraint SYS.SYS_DOMAIN_C002 of domain SYS.EMAIL_D
     violated
     ```
-    The email with the sign '_'  is not a valid entry, so we need to change it to '-'.
+    The email with the underscore sign '_'  is not a valid entry, so we need to change it to a hyphen '-'.
     ```
     <copy>INSERT INTO person values (1,'Walter',1000,'user-walter@t-online.de');</copy>
     1 row created.
@@ -378,17 +386,20 @@ The 23c Oracle database supports not only the JSON datatype but also **JSON sche
                 }
     }' ;
     </copy>
+    Domain created.
     ```
     ```
     <copy>
     DROP TABLE IF EXISTS person;
     </copy>
+    Table dropped.
     ```
     ```
     <copy>
     CREATE TABLE IF NOT EXISTS person (id NUMBER,
                 p_record JSON DOMAIN p_recorddomain);
     </copy>
+    Table created.
     ```
 
 3. Now we insert valid data.
@@ -406,6 +417,7 @@ The 23c Oracle database supports not only the JSON datatype but also **JSON sche
             }
     }');
     </copy>
+    1 row created.
     ```
 
 4. The next record is not a valid entry.
@@ -427,10 +439,8 @@ The 23c Oracle database supports not only the JSON datatype but also **JSON sche
 
     Automatically a check constraint to validate the schema is created. Query `USER_DOMAIN_CONSTRAINTS` to verify this.
     ```
-    <copy>set long 1000;</copy>
-    ```
-    ```
-    <copy>col name format a20;</copy>
+    <copy>set long 1000;
+    col name format a30;</copy>
     ```
     ```
     <copy>SELECT name, generated, constraint_type, search_condition
@@ -469,4 +479,4 @@ You have now **completed this workshop**.
 
 ## Acknowledgements
 * **Author** - Ulrike Schwinn, Distinguished Data Management Expert; Hope Fisher, Program Manager
-* **Last Updated By/Date** - Hope Fisher, Aug 2023
+* **Last Updated By/Date** - Hope Fisher, Oct 2023

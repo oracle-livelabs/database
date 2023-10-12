@@ -90,8 +90,8 @@ Oracle Database 23c introduces the new BOOLEAN datatype. This leverages the use 
     ```
     ```
     <copy>ALTER TABLE TEST_BOOLEAN modify (IS_SLEEPING default FALSE);
-    Table altered.
     </copy>
+    Table altered.
     ```
     Here, you can see the different types of Boolean input for Mick, Keith, and Ron. All are valid.
     This one uses the default "FALSE" value - Mick is not sleeping.
@@ -122,9 +122,10 @@ Oracle Database 23c introduces the new BOOLEAN datatype. This leverages the use 
     ```
     <copy>set linesize window
     SELECT * FROM test_boolean;</copy>
-
+    ```
+    ```
     NAME                                                                                                 IS_SLEEPING
-    ---------------------------------------------------------------------------------------------------- -----------
+    ------------------------------------------------------------------------------------------------ -----------
     Mick                                                                                                 FALSE
     Keith                                                                                                FALSE
     Ron                                                                                                  TRUE
@@ -152,7 +153,7 @@ Oracle Database 23c introduces the new BOOLEAN datatype. This leverages the use 
     ```
 
 3. Similarly, we can use this feature to create tables, if they do not already exist. Let's go ahead and create that DEPT table.
-    >NOTE: Any trailing numbers when pasting these into the terminal will not effect the command.select
+    >NOTE: Any trailing numbers when pasting these into the terminal will not effect the command.
 
     ```
     <copy>
@@ -401,26 +402,29 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     Domain creation is for admin level users. First, exit from sql*plus, then log in as sysdba.
     ```
     <copy>
-    exit;
+    exit
     </copy>
     ```
     ```
     <copy>
-    sqlplus / as sys admin
+    sqlplus / as sysdba
     </copy>
     ```
     Set the correct container.
     ```
     <copy>alter session set container=FREEPDB1;</copy>
+    Session altered.
     ```
 
 2. Grant privileges to our main user `hol23c` to create domains.
     ```
     <copy>grant db_developer_role to hol23c;</copy>
+    Grant succeeded.
     ```
-    Connect to hol23c. Replace `Welcome123' with the password you created in Lab 1.
+    Connect to hol23c. Replace _`Welcome123`_ with the password you created in Lab 1.
     ```
     <copy>connect hol23c/Welcome123@localhost:1521/freepdb1</copy>
+    Connected.
     ```
 
 3. Now create the domain `yearbirth` and the table `person`.
@@ -430,8 +434,8 @@ SQL Domains allow users to declare the intended usage for columns. They are data
         display (case when yearbirth < 2000 then '19-' ELSE '20-' end)||mod(yearbirth, 100)
         order (yearbirth -1900)
         annotations (title 'yearformat');
-    Table created.
-    </copy>
+        </copy>
+    Domain created.
     ```
     ```
     <copy>
@@ -450,12 +454,12 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     ```
 
     ```
-    Name                                                                      Null?    Type
-    -------------------------------------------------------------------------- -------- ----------------------------
-    ID                                                                                  NUMBER(5)
-    NAME                                                                                VARCHAR2(50)
-    SALARY                                                                              NUMBER
-    PERSON_BIRTH                                                                        NUMBER(4) SYS.YEARBIRTH
+    Name					                   Null?    Type
+    ----------------------------------------- -------- ----------------------------
+    ID                                                  NUMBER(5)
+    NAME						                        VARCHAR2(50)
+    SALARY                                              NUMBER
+    PERSON_BIRTH					                    NUMBER(4) HOL23C.YEARBIRTH
     ```
 
 4. Now let's add data to our table.
@@ -479,31 +483,37 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     <copy>
     set lines 200;
     set pages 200;
-    col object_name format a10;
-    col object_type format a15;
+    col object_name format a15;
+    col object_type format a12;
     col annotation_name format a15;
-    col annotation_value format a15;
-    col column_name format a20;
-    col domain_name format a15;
-    col domain_owner format a10;
+    col annotation_value format a20;
+    col column_name format a15;
+    col domain_name format a12;
+    col domain_owner format a12;
     </copy>
     ```
     ```
     <copy>SELECT * FROM user_annotations_usage;</copy>
     ```
-
     ```
-    OBJECT_NAME     OBJECT_TYP COLUMN_NAME     DOMAIN_NAM DOMAIN_OWN ANNOTATION_NAME      ANNOTATION_VALUE
-    --------------- ---------- --------------- ---------- ---------- -------------------- ----------------
-    EMP_ANNOTATED   TABLE                                            DISPLAY              employee_table
-    PERSON          TABLE                                            DISPLAY              person_table
-    EMP_ANNOTATED   TABLE      EMPNO                                 IDENTITY
-    EMP_ANNOTATED   TABLE      EMPNO                                 DISPLAY              person_identity
-    EMP_ANNOTATED   TABLE      EMPNO                                 DETAILS              person_info
-    EMP_ANNOTATED   TABLE      SALARY                                DISPLAY              person_salary
-    EMP_ANNOTATED   TABLE      SALARY                                COL_HIDDEN
-    YEARBIRTH       DOMAIN                                           TITLE                yearformat
-    PERSON          TABLE      PERSON_BIRTH    YEARBIRTH  SCOTT      TITLE                yearformat
+    OBJECT_NAME	OBJECT_TYPE  COLUMN_NAME     DOMAIN_NAME  DOMAIN_OWNER ANNOTATION_NAME	ANNOTATION_VALUE
+    --------------- ------------ --------------- ------------ ------------ --------------- --------------------
+    EMP_ANNOTATED   TABLE                                                   DISPLAY
+    employee_table
+    PERSON          TABLE                                                   DISPLAY
+    person_table
+    EMP_ANNOTATED   TABLE	     EMPNO                                     IDENTITY
+    EMP_ANNOTATED   TABLE	     EMPNO                                     DISPLAY
+    person_identity
+    EMP_ANNOTATED   TABLE	     EMPNO                                     DETAILS
+    person_info
+    EMP_ANNOTATED   TABLE	     SALARY                                    DISPLAY
+    person_salary
+    EMP_ANNOTATED   TABLE	     SALARY                                    COL_HIDDEN
+    YEARBIRTH       DOMAIN                                                  TITLE
+    yearformat
+    PERSON          TABLE	     PERSON_BIRTH    YEARBIRTH	  HOL23C     TITLE
+    yearformat
     ```
 
 ## Learn More
@@ -520,4 +530,4 @@ SQL Domains allow users to declare the intended usage for columns. They are data
 ## Acknowledgements
 * **Author** - Ulrike Schwinn, Distinguished Data Management Expert; Hope Fisher, Program Manager
 * **Contributors** - Witold Swierzy, Data Management Expert; Stephane Duprat, Technical End Specialist
-* **Last Updated By/Date** - Hope Fisher, Aug 2023
+* **Last Updated By/Date** - Hope Fisher, Oct 2023

@@ -32,9 +32,6 @@ This lab assumes you have:
     [FREE:oracle@hol23cfdr:~]$
 		```
 
-    <!-- ![Set environment](images/set-envt-free1.png " ") -->
-
-
 3. Next connect to your database.
     ```
 		[FREE:oracle@hol23cfdr:~]$ <copy>sqlplus / as sysdba</copy>
@@ -76,10 +73,10 @@ This lab assumes you have:
     ```
     ![Change password](images/change-password1.png " ")
 
-6. Once the password has been changed you can exit SQL Plus. However, we will be using SQL Plus in the labs to follow, so feel free to leave it open for now.
+6. Once the password has been changed you can exit SQL Plus as sysdba.
 
     ```
-		SQL> exit;
+		SQL> <copy>exit</copy>
 Disconnected from Oracle Database 23c Free, Release 23.0.0.0.0 - Developer-Release
 Version 23.2.0.0.0
 [FREE:oracle@hol23cfdr:~]$
@@ -96,4 +93,4 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 * **Author** - Kaylien Phan, William Masdon
 * **Contributors** - David Start
-* **Last Updated By/Date** - Hope Fisher, Program Manager, June 2023
+* **Last Updated By/Date** - Hope Fisher, Program Manager, Oct 2023
