@@ -52,7 +52,7 @@ drwxr-xr-x. 2 oracle oinstall 4096 May 26 13:10 scripts
 
 ## Task 2: Create a TimesTen instance
 
-A TimesTen _installation_ is comprised of the TimesTen software components. An installation is created by unzipping the TimesTen software distribution media into a suitable location. For this workshop, the TimesTen software distribution media has already been unzipped into the directory **/shared/sw** to create a TimesTen installation named **tt22.1.1.7.0**.
+A TimesTen _installation_ is comprised of the TimesTen software components. An installation is created by unzipping the TimesTen software distribution media into a suitable location. For this workshop, the TimesTen software distribution media has already been unzipped into the directory **/shared/sw** to create a TimesTen installation named **tt22.1.1.18.0**.
 
 1. List the top level software directory.
 
