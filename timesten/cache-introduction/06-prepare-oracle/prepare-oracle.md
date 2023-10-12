@@ -118,10 +118,10 @@ sqlplus sys/RedMan99@orclpdb1 as sysdba
 
 ```
 
-SQL*Plus: Release 19.0.0.0.0 - Production on Tue Jun 21 10:04:41 2022
-Version 19.14.0.0.0
+SQL*Plus: Release 19.0.0.0.0 - Production on Wed Oct 11 18:24:46 2023
+Version 19.19.0.0.0
 
-Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+Copyright (c) 1982, 2022, Oracle.  All rights reserved.
 
 
 Connected to:
@@ -269,5 +269,5 @@ Keep your terminal session to tthost1 open for use in the next lab.
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Last Updated By/Date** - Jenny Bloom, October 2023
 
