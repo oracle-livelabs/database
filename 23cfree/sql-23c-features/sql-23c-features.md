@@ -32,8 +32,8 @@ This lab assumes you have:
 ## Task 1: Start SQL*Plus
 To dive into these features, we'll be using SQL*Plus - an interactive and batch query tool that is installed with every Oracle Database installation. It has a command-line user interface.
 
-1. Your terminal should still be open since ORDS needs to be running. If the terminal has been closed, please return to the previous lab to restart ORDS. From the same terminal, enter this line:
-
+1. From the terminal, enter this line:
+    <if type="sql-features">
     ```
     sqlplus hol23c/[your_password_here]@localhost:1521/freepdb1
     ```
@@ -43,7 +43,18 @@ To dive into these features, we'll be using SQL*Plus - an interactive and batch 
     sqlplus hol23c/Welcome123@localhost:1521/freepdb1
     </copy>
     ```
-
+    </if>
+    <if type="23c-install">
+    ```
+    sqlplus hol23c/[your_password_here]@localhost:1521/freepdb1
+    ```
+    We used the password Welcome123#, but change [your\_password\_here] to match yours.
+    ```
+    <copy>
+    sqlplus hol23c/Welcome123#@localhost:1521/freepdb1
+    </copy>
+    ```
+    </if>
 ## Task 2: FROM clause - now optional
 An interesting feature introduced in Oracle Database 23c is optionality of FROM clause in SELECT statements. Up to this version the FROM clause was obligatory.
 
