@@ -269,7 +269,7 @@ Now run the queries against the TimesTen cache:
 ```
 
 ```
-info: connected to 'sampledb' (Oracle TimesTen IMDB version 22.1.1.7.0)
+info: connected to 'sampledb' (Oracle TimesTen IMDB version 22.1.1.18.0)
 info: running queries from file 'queries/query_all.sql'
 info: ========================================
 info: executing query #1
@@ -355,5 +355,5 @@ Keep your primary session open for use in the next lab.
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Last Updated By/Date** - Jenny Bloom, October 2023
 
