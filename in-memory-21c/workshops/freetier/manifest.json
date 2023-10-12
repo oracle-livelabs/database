@@ -16,7 +16,8 @@
       "title": "Lab 1: Prepare Setup",
       "description": "How to download your ORM stack and update security rules for an existing VCN",
       "publisheddate": "09/28/2020",
-      "filename": "../../prepare-setup/prepare-setup.md"
+      "filename": "../../prepare-setup/prepare-setup.md",
+      "type": "basics"
     },
     {
       "title": "Lab 2: Environment Setup",

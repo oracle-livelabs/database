@@ -3,14 +3,17 @@
 ## Introduction
 
 Now that you have enabled IAM as the identity provider of your ADB, in this lab you will
-create IAM credentails for your user and use them to connect to the database. First we connect with our IAM username and password, then with a token. Using a token lets you connect to the database without a password, and is possible for you because of the OCI_TOKEN parameter you added to the tnsnames.ora file in the previous lab. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming.
+create IAM database credentials for your user and use them to connect to the database. First we connect with our IAM database username and password, then with a token. Using a token lets you connect to the database without a password, and is possible for you because of the OCI_TOKEN parameter you added to the tnsnames.ora file in the previous lab. Using a token instead of a password is more secure since the password verifier isn’t used and sent across the network.
 
 *Estimated Lab Time*: 15 minutes
 
+Watch the video below for a quick walk-through of the lab.
+[Create IAM Credentials and log into the database](videohub:1_tth3qivl)
+
 ### Objectives
-- Create IAM credentials for users of your ADB
-- Use IAM credentials to log into and query the database
-- Use a IAM Token to connect to and query the database
+- Create IAM database credentials for users of your ADB
+- Use IAM database credentials to log into and query the database
+- Use an IAM Token to connect to and query the database
 
 ### Prerequisites
 This lab assumes that you have completed the introduction lab.
@@ -18,15 +21,17 @@ This lab assumes that you have completed the introduction lab.
 ### Prerequisites
 This lab assumes that you have completed the previous labs and successfully enabled IAM as your database identity provider.
 
+>**Note:** An IAM database password is not the same as your IAM console password. The IAM database password is created separately in your IAM user profile.
+
 ## Task 1: Connect to the database as your OCI user.
 
-1. Create IAM credentials for your OCI user
+1. Create an IAM database credential for your OCI user
 
     ```
     <copy>oci iam user create-db-credential --user-id $OCI_CS_USER_OCID --password Oracle123+Oracle123+ --description "DB password for your OCI account"</copy>
     ```
 
-2. Connect to database with IAM credentials as your OCI user. All values you see should match the output below except for **AUTHENTICATED\_IDENTITY** and **ENTERPIRSE\_IDENTITY**. These are unique to your user.
+2. Connect to the database with the IAM database credentials as your OCI user. All values you see should match the output below except for **AUTHENTICATED\_IDENTITY** and **ENTERPRISE\_IDENTITY**. These are unique to your user.
 
     ```
     <copy>sql /nolog <<EOF
@@ -42,7 +47,7 @@ This lab assumes that you have completed the previous labs and successfully enab
     ```
 
     ```
-    <copy>SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
+    SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
     _________________________________________________
     FALSE                                             
 
@@ -74,7 +79,7 @@ This lab assumes that you have completed the previous labs and successfully enab
 
     SYS_CONTEXT('USERENV','NETWORK_PROTOCOL')    
     ____________________________________________
-    tcps</copy>
+    tcps
     ```
 
 3. Add your OCI user to the **DB_ADMIN** group.
@@ -83,7 +88,7 @@ This lab assumes that you have completed the previous labs and successfully enab
     <copy>oci iam group add-user --user-id $OCI_CS_USER_OCID --group-id $DB_ADMIN_OCID</copy>
     ```
 
-4. Connect to the database with IAM credentials again. Because the **DB\_ADMIN** IAM group is mapped to the **SR\_DBA\_ROLE** ADB group you will see the first query of this script now return TRUE. Again, all all values you see should match the output below except for **AUTHENTICATED\_IDENTITY** and **ENTERPIRSE\_IDENTITY**. These are unique to your user.
+4. Connect to the database with IAM credentials again. Because the **DB\_ADMIN** IAM group is mapped to the **SR\_DBA\_ROLE** ADB group you will see the first query of this script now return TRUE. Again, all all values you see should match the output below except for **AUTHENTICATED\_IDENTITY** and **ENTERPRISE\_IDENTITY**. These are unique to your user.
 
     ```
     <copy>sql /nolog <<EOF
@@ -99,7 +104,7 @@ This lab assumes that you have completed the previous labs and successfully enab
     ```
 
     ```
-    <copy>SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
+    SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
     _________________________________________________
     TRUE                                              
 
@@ -131,18 +136,19 @@ This lab assumes that you have completed the previous labs and successfully enab
 
     SYS_CONTEXT('USERENV','NETWORK_PROTOCOL')    
     ____________________________________________
-    tcps</copy>
+    tcps
     ```
 
 ## Task 2: Connect to the database with a token.
 
-1. Generate a token used for database access. It is possible to generate this token because of the OCI_TOKEN parameter we added to the tnsnames.ora file in the previous lab. Not needing a password is useful if you have hundreds of databases in your environment, as managing passwords for each DB can be time consuming.
+1. Generate a token used for database access. It is possible to use a token when using a ‘/’ (slash) login because of the OCI_TOKEN parameter we added to the connect string in the tnsnames.ora file in the previous lab. Using a token instead of a password is more secure since you’re not using and sending a password verifier to the database.
+>**Note:** The IAM token is stored in a default location which is also known by the database client. A directory location can also be specified when retrieving and using the token.
 
     ```
     <copy>oci iam db-token get</copy>
     ```
 
-2. Connect to the database using your token. Notice that the **AUTHENTICATION\_METHOD** is now listed as **TOKEN\_GLOBAL**, rather than **PASSWORD\_GLOBAL**, which it is when you access the database with an IAM username and password.
+2. Connect to the database using your token. Notice that the **AUTHENTICATION\_METHOD** is now listed as **TOKEN\_GLOBAL**, rather than **PASSWORD\_GLOBAL**, which it is when you access the database with an IAM username and IAM database password.
 
     ```
     <copy>sql /@lltest_high <<EOF
@@ -157,7 +163,7 @@ This lab assumes that you have completed the previous labs and successfully enab
     ```
 
     ```
-    <copy>SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
+    SYS_CONTEXT('SYS_SESSION_ROLES','SR_DBA_ROLE')    
     _________________________________________________
     TRUE                                              
 
@@ -189,7 +195,7 @@ This lab assumes that you have completed the previous labs and successfully enab
 
     SYS_CONTEXT('USERENV','NETWORK_PROTOCOL')    
     ____________________________________________
-    tcps</copy>
+    tcps
     ```
 
 You may now **proceed to the next lab.**
@@ -204,4 +210,4 @@ You may now **proceed to the next lab.**
   * Richard Evans, Database Security Product Management
   * Miles Novotny, Solution Engineer, North America Specialist Hub
   * Noah Galloso, Solution Engineer, North America Specialist Hub
-* **Last Updated By/Date** - Miles Novotny, December 2022
+* **Last Updated By/Date** - Miles Novotny, April 2023

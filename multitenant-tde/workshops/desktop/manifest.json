@@ -1,0 +1,31 @@
+{
+  "workshoptitle": "Pluggables, Clones and Containers: Securing Oracle Multitenant with Transparent Database Encryption (TDE)",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Using noVNC Remote Desktop",
+      "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+    },
+    {
+      "title": "Lab 1: Initialize Environment",
+      "description": "Initialize Environment",
+      "filename": "../../initialize-environment/initialize-environment.md"
+    },
+    {
+      "title": "Lab 2: MT Key Management",
+      "description": "Managing Keys in a Wallet with Multitenant",
+      "filename": "../../mt-key-mgmt/mt-key-mgmt.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}
