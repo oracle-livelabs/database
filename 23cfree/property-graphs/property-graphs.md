@@ -35,10 +35,10 @@ This lab assumes:
 | AMOUNT |  | NUMBER |
 {: title="BANK_TRANSFERS"}
 
-
+<if type="livelabs">
 Watch the video below for a quick walk-through of the lab. 
-[Walkthrough](videohub:1_ovgflc5c)
-
+[Change password](videohub:1_ovgflc5c)
+</if>
 
 ## Task 1 : Define a graph view on these tables
 1. In your SQL Developer window, click on the tab named hol23c_freepdb1, not the CreateKeys.sql tab that you are currently in.

@@ -4,7 +4,7 @@
 
 In this lab we will go through the steps to add a wallet and keys to CDB's and PDB's, unplug a PDB, plug it into a different CDB and then move the key.
 
-*Estimated Workshop Time* :60 Minutes
+*Estimated Time* :60 Minutes
 
 ### Objectives
 
@@ -103,7 +103,8 @@ We start off with an unencrypted database and will be validating that state in t
 - You can see the default location of the wallet file.
 - The wallet status will be given.
 - You can see there is no wallet that has been created yet.
-- At this point CBD1 does not know about a wallet or encryption
+    
+    At this point CBD1 does not know about a wallet or encryption
 
 
 6. Look at the wallet for CDB2
@@ -116,11 +117,7 @@ We start off with an unencrypted database and will be validating that state in t
 
     ![Screen Capture of Wallet Check](./images/wallet-check-cdb2.png " ")
 
->>**Notes:**
-- You can see the default location of the wallet file.
-- The wallet status will be given.
-- You can see there is no wallet that has been created yet.
-- At this point CBD2 does not know about a wallet or encryption
+    At this point CBD2 does not know about a wallet or encryption
 
 At this point neither database knows about encryption and there is no wallet set so let's check the encryption status of CDB1
 
