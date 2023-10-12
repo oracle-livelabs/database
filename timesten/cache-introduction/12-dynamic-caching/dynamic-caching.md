@@ -31,20 +31,20 @@ This lab assumes that you:
 
 ## Task 1: Create a DYNAMIC READONLY cache group
 
-1. Use ttIsql to connect to the cache as the APPUSER user:
+1. Use ttIsql to connect to the cache as the TTCACHEADM user:
 
 ```
 <copy>
-ttIsql "DSN=sampledb;UID=appuser;PWD=appuser;OraclePWD=appuser"
+ttIsql "dsn=sampledb;uid=ttcacheadm;pwd=ttcacheadm;OraclePWD=ttcacheadm"
 </copy>
 ```
 
 ```
-Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 1996, 2023, Oracle and/or its affiliates. All rights reserved.
 Type ? or "help" for help, type "exit" to quit ttIsql.
 
-connect "DSN=sampledb;UID=appuser;PWD=********;OraclePWD=********";
-Connection successful: DSN=sampledb;UID=appuser;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
+connect "dsn=sampledb;uid=ttcacheadm;pwd=********;OraclePWD=********";
+Connection successful: DSN=sampledb;UID=ttcacheadm;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
 (Default setting AutoCommit=1)
 Command> 
 ```
@@ -52,16 +52,16 @@ Command>
 
 ```
 <copy>
-CREATE DYNAMIC READONLY CACHE GROUP appuser.cg_parent_child 
+CREATE DYNAMIC READONLY CACHE GROUP ttcacheadm.cg_parent_child 
 AUTOREFRESH MODE INCREMENTAL INTERVAL 2 SECONDS 
 STATE ON 
 FROM 
-parent 
+appuser.parent 
 ( parent_id          NUMBER(8) NOT NULL
 , parent_c1          VARCHAR2(20 BYTE)
 , PRIMARY KEY (parent_id)
 ),
-child 
+appuser.child 
 ( child_id           NUMBER(8) NOT NULL
 , parent_id          NUMBER(8) NOT NULL
 , child_c1           VARCHAR2(20 BYTE)
@@ -82,7 +82,7 @@ cachegroups cg_parent_child;
 ```
 
 ```
-Cache Group APPUSER.CG_PARENT_CHILD:
+Cache Group TTCACHEADM.CG_PARENT_CHILD:
 
   Cache Group Type: Read Only (Dynamic)
   Autorefresh: Yes
@@ -108,11 +108,43 @@ Autorefresh State: On
 
 This is because you do not need to perform an initial load for a dynamic cache group (though it is possible to do so).
 
-4. Check the state of the tables:
+4. Disconnect from the cache as TTCACHEADM user.
 
 ```
 <copy>
-select count(*) from appuser.parent;
+quit
+</copy>
+```
+
+```
+Disconnecting...
+Done.
+```
+
+
+## Task 2: Run some queries and observe the behavior
+
+1. Use ttIsql to connect to the cache as the TTCACHEADM user:
+```
+<copy>
+ttIsql "dsn=sampledb;uid=appuser;pwd=appuser;OraclePwd=appuser"
+</copy>
+```
+```
+Copyright (c) 1996, 2023, Oracle and/or its affiliates. All rights reserved.
+Type ? or "help" for help, type "exit" to quit ttIsql.
+
+connect "dsn=sampledb;uid=appuser;pwd=********;OraclePwd=********";
+Connection successful: DSN=sampledb;UID=appuser;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
+(Default setting AutoCommit=1)
+Command> 
+```
+
+2. Check the state of the tables:
+
+```
+<copy>
+select count(*) from parent;
 </copy>
 ```
 
@@ -123,7 +155,7 @@ select count(*) from appuser.parent;
 
 ```
 <copy>
-select count(*) from appuser.child;
+select count(*) from child;
 </copy>
 ```
 
@@ -134,9 +166,7 @@ select count(*) from appuser.child;
 
 There is no data in the cached tables.
 
-## Task 2: Run some queries and observe the behavior
-
-1. Run a query that references the root table's (PARENT table) primary key:
+3. Run a query that references the root table's (PARENT table) primary key:
 
 ```
 <copy>
@@ -151,7 +181,7 @@ select * from parent where parent_id = 4;
 
 Even though the table was empty, the query returns a result!
 
-2. Next, examine the contents of both tables again:
+4. Next, examine the contents of both tables again:
 
 ```
 <copy>
@@ -183,7 +213,7 @@ Now that these rows exist in the cache, they will satisfy future read requests. 
 
 Let’s try something a little more sophisticated. 
 
-3. Query a row in the CHILD table with a join back to the PARENT table:
+5. Query a row in the CHILD table with a join back to the PARENT table:
 
 ```
 <copy>
@@ -248,5 +278,5 @@ Keep your primary session open for use in the next lab.
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Last Updated By/Date** - Jenny Bloom, October 2023
 
