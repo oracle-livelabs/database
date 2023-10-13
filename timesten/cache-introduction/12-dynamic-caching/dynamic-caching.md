@@ -124,7 +124,7 @@ Done.
 
 ## Task 2: Run some queries and observe the behavior
 
-1. Use ttIsql to connect to the cache as the TTCACHEADM user:
+1. Use ttIsql to connect to the cache as the APPUSER user:
 ```
 <copy>
 ttIsql "dsn=sampledb;uid=appuser;pwd=appuser;OraclePwd=appuser"

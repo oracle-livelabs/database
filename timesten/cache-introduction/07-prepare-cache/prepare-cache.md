@@ -67,15 +67,7 @@ CREATE USER ttcacheadm IDENTIFIED BY ttcacheadm;
 ```
 ```
 <copy>
-GRANT CREATE SESSION, CACHE_MANAGER, CREATE ANY TABLE, CREATE ANY INDEX, ALTER ANY TABLE TO ttcacheadm;
-GRANT SELECT ON oe.promotions TO ttcacheadm;
-GRANT SELECT ON oe.product_information TO ttcacheadm;
-GRANT SELECT ON oe.customers TO ttcacheadm;
-GRANT SELECT ON oe.orders TO ttcacheadm;
-GRANT SELECT ON oe.order_items TO ttcacheadm;
-GRANT SELECT ON oe.inventories TO ttcacheadm;
-GRANT SELECT ON oe.product_descriptions TO ttcacheadm;
-GRANT SELECT ON appuser.vpn_users TO ttcacheadm;
+GRANT CREATE SESSION, CACHE_MANAGER, CREATE ANY TABLE, CREATE ANY INDEX, ALTER ANY TABLE, SELECT ANY TABLE TO ttcacheadm;
 </copy>
 ```
 The password for the cache admin user for TimesTen can be different than the one in Oracle. For simplicity, the same password is used for this user in TimesTen and Oracle.
@@ -311,7 +303,14 @@ Cache Group TTCACHEADM.CG_VPN_USERS:
 
 1 cache group found.
 ```
-5. Disconnect from ttIsql as TTCACHEADM user and reconnect as OE user to see the tables created. These are the tables that make up the cache groups:
+The TimesTen mechanism that captures data changes that occur in the Oracle database and uses those changes to refresh the cached data is called **AUTOREFRESH**. Note that, in the output above, the state of this mechanism is currently **Paused** for all of the cache groups that you just created.
+
+```
+Autorefresh State: Paused
+```
+In order to pre-populate the cache tables and activate the AUTOREFRESH mechanism you must load the cache groups.
+
+5. Disconnect from ttIsql as TTCACHEADM user and reconnect as OE user to see the empty tables created. These are the tables make up the cache groups:
 ```
 <copy>
 quit
@@ -386,7 +385,7 @@ select count(*) from promotions;
 1 row found.
 ```
 
-6. Spawn a new connect as user, APPUSR, to check out the table created as part of the cache group for this user:
+6. Spawn a new connection as user, APPUSR, to check out the empty table created as part of the cache group for this user:
 
 ```
 <copy>
@@ -421,7 +420,7 @@ select count(*) from vpn_users;
 1 row found.
 ```
 
-9. Exit from ttIsql for both connections as OE and APPUSER users:
+7. Exit from ttIsql for both connections.
 
 ```
 <copy>
@@ -435,12 +434,6 @@ Disconnecting from newconn...
 Done.
 ```
 
-The TimesTen mechanism that captures data changes that occur in the Oracle database and uses those changes to refresh the cached data is called **AUTOREFRESH**. Note that, in the output above, the state of this mechanism is currently **Paused** for all of the cache groups that you just created.
-
-```
-Autorefresh State: Paused
-```
-In order to pre-populate the cache tables and activate the AUTOREFRESH mechanism  you must load the cache groups.
 
 You can now **proceed to the next lab**. 
 
