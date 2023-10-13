@@ -105,8 +105,6 @@ User created.
 GRANT CREATE SESSION TO appuser;
 </copy>
 ```
-4. Exit from ttIsql as TimesTen Instance Admin and reconnect as user, ttcacheadm, to start up cache agent.
-
 ```
 <copy>
 quit
@@ -117,6 +115,9 @@ quit
 Disconnecting...
 Done.
 ```
+4. Connect as user, ttcacheadm, to start up cache agent.
+
+
 ```
 <copy>
 ttIsql "dsn=sampledb;uid=ttcacheadm;pwd=ttcacheadm;OraclePWD=ttcacheadm"
