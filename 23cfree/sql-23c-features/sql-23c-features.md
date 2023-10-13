@@ -403,7 +403,6 @@ With annotations you may store and retrieve metadata about a database objects. Y
     FROM user_annotations_usage;
     </copy>
     ```
-    ```
 
 ## Task 11: "Light weight object types" with SQL Domains
 
