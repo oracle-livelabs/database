@@ -310,7 +310,8 @@ Autorefresh State: Paused
 ```
 In order to pre-populate the cache tables and activate the AUTOREFRESH mechanism you must load the cache groups.
 
-5. Disconnect from ttIsql as TTCACHEADM user and reconnect as OE user to see the empty tables created. These are the tables make up the cache groups:
+Exit from ttIsql:
+
 ```
 <copy>
 quit
@@ -321,6 +322,9 @@ quit
 Disconnecting...
 Done.
 ```
+
+5. Connect as OE user to see the empty tables created. These are the tables make up the cache groups:
+
 ```
 <copy>
 ttIsql "dsn=sampledb;uid=oe;pwd=oe;OraclePWD=oe"
