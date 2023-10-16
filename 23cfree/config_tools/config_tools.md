@@ -262,6 +262,7 @@ This lab assumes you have:
 1. Restart ORDS. Wait about 30 seconds for it to finish starting before proceeding.
     ```
     <copy>
+    sudo systemctl stop ords
     sudo systemctl start ords
     </copy>
     ```
