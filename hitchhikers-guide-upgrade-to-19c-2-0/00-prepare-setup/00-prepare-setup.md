@@ -1,4 +1,4 @@
-# Prepare Setup Daniel Was Here
+# Prepare Setup
 
 ## Introduction
 
