@@ -92,6 +92,8 @@ CREATE TABLE order_items
 
 CREATE UNIQUE INDEX order_items_uk
  ON order_items (order_id, product_id) ;
+
+ ...
 ```
 Press the space bar to scroll through the entire **tables\_oe.sql** file.
 
