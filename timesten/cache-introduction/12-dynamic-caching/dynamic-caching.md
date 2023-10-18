@@ -53,8 +53,7 @@ Command>
 ```
 <copy>
 CREATE DYNAMIC READONLY CACHE GROUP ttcacheadm.cg_parent_child 
-AUTOREFRESH MODE INCREMENTAL INTERVAL 2 SECONDS 
-STATE ON 
+AUTOREFRESH MODE INCREMENTAL INTERVAL 2 SECONDS  
 FROM 
 appuser.parent 
 ( parent_id          NUMBER(8) NOT NULL
@@ -87,7 +86,7 @@ Cache Group TTCACHEADM.CG_PARENT_CHILD:
   Cache Group Type: Read Only (Dynamic)
   Autorefresh: Yes
   Autorefresh Mode: Incremental
-  Autorefresh State: On
+  Autorefresh State: Paused
   Autorefresh Interval: 2 Seconds
   Autorefresh Status: ok
   Aging: LRU on
@@ -100,13 +99,13 @@ Cache Group TTCACHEADM.CG_PARENT_CHILD:
   Table Type: Read Only
 ```
 
-Note that in this case the Autorefresh state is immediately set to _on_.
+Note the Autorefresh state is _Paused_. 
 
 ```
-Autorefresh State: On
+Autorefresh State: Paused
 ```
 
-This is because you do not need to perform an initial load for a dynamic cache group (though it is possible to do so).
+Unlike static cache group, you do not need to perform an initial load for a dynamic cache group (though it is possible to do so).  The Autofresh state is changed immediately from _Paused_ to _On_ after the first on-demand dynamic load operation.
 
 4. Disconnect from the cache as TTCACHEADM user.
 
@@ -180,6 +179,34 @@ select * from parent where parent_id = 4;
 ```
 
 Even though the table was empty, the query returns a result!
+
+```
+<copy>
+cachegroups ttcacheadm.cg_parent_child;
+</copy>
+```
+```
+Cache Group TTCACHEADM.CG_PARENT_CHILD:
+
+  Cache Group Type: Read Only (Dynamic)
+  Autorefresh: Yes
+  Autorefresh Mode: Incremental
+  Autorefresh State: On
+  Autorefresh Interval: 2 Seconds
+  Autorefresh Status: ok
+  Aging: LRU on
+
+  Root Table: APPUSER.PARENT
+  Table Type: Read Only
+
+
+  Child Table: APPUSER.CHILD
+  Table Type: Read Only
+
+1 cache group found.
+
+```
+Note that the Autorefresh State is now set to _On_ because a background dynamic load operation happened on execution of the above select statement.
 
 4. Next, examine the contents of both tables again:
 

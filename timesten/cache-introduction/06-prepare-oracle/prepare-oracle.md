@@ -93,6 +93,7 @@ CREATE TABLE order_items
 CREATE UNIQUE INDEX order_items_uk
  ON order_items (order_id, product_id) ;
 ```
+Press the space bar to scroll through the entire **tables\_oe.sql** file.
 
 Just for information, here are the entity-relationship diagrams showing the relationships between the tables.
 
@@ -157,17 +158,6 @@ CREATE USER ttcacheadm IDENTIFIED BY ttcacheadm DEFAULT TABLESPACE cachetblsp QU
 User created.
 ```
 
-4. Grant CREATE SESSION privilege to the user:
-
-```
-<copy>
-GRANT CREATE SESSION TO ttcacheadm;
-</copy>
-```
-
-```
-Grant succeeded.
-```
 
 ## Task 3: Grant required roles and privileges to the cache admin user
 
@@ -177,7 +167,7 @@ Run that script in your SQL\*Plus session, passing it the cache admin username (
 
 ```
 <copy>
-@/tt/inst/ttinst/install/oraclescripts/grantCacheAdminPrivileges.sql ttcacheadm
+@$TIMESTEN_HOME/install/oraclescripts/grantCacheAdminPrivileges.sql ttcacheadm
 </copy>
 ```
 

@@ -29,7 +29,7 @@ This lab assumes that you:
 
 - Cache operations act on cache groups not on individual tables, or on cache instances as opposed to individual rows.
 
-- Normal SQL operations, such as SELECT, INSERT, UPDATE and DELETE, operate directly on the cache tables and the rows therein. 
+- Normal SQL operations, such as SELECT, INSERT, UPDATE and DELETE, operate directly on the cache tables and the rows therein. For this lab where READONLY cache groups are deployed, only SELECT operations are applicable to read from the cache tables.
 
 
 ## Task 1: Create the TimesTen database and prepare it for caching
@@ -259,9 +259,60 @@ Cache Group TTCACHEADM.CG_PROMOTIONS:
 ```
 There are 3 cache groups for tables owned by OE user.
 
+3. Display the tables owned by the OE user. These are the tables that make up the cache groups:
+```
+<copy>
+alltables oe.%;
+</copy>
+```
+
+```
+  OE.CUSTOMERS
+  OE.INVENTORIES
+  OE.ORDERS
+  OE.ORDER_ITEMS
+  OE.PRODUCT_DESCRIPTIONS
+  OE.PRODUCT_INFORMATION
+  OE.PROMOTIONS
+7 tables found.
+```
+```
+<copy>
+select count(*) from oe.customers;
+</copy>
+```
+
+```
+< 0 >
+1 row found.
+```
+
+```
+<copy>
+select count(*) from oe.product_information;
+</copy>
+```
+
+```
+< 0 >
+1 row found.
+```
+
+```
+<copy>
+select count(*) from oe.promotions;
+</copy>
+```
+
+```
+< 0 >
+1 row found.
+```
+Currently, all the tables are empty.
+
 Create the cache group for the **APPUSER.VPN\_USERS** table. This time you will type, or copy/paste, the individual commands.
 
-3. Create the cache group with table owned by APPUSER.
+4. Create the cache group with table owned by APPUSER.
 
 ```
 <copy>
@@ -280,7 +331,7 @@ appuser.vpn_users
 </copy>
 ```
 
-4. Display the cachegroup:
+5. Display the cachegroup and table:
 
 ```
 <copy>
@@ -304,108 +355,9 @@ Cache Group TTCACHEADM.CG_VPN_USERS:
 
 1 cache group found.
 ```
-The TimesTen mechanism that captures data changes that occur in the Oracle database and uses those changes to refresh the cached data is called **AUTOREFRESH**. Note that, in the output above, the state of this mechanism is currently **Paused** for all of the cache groups that you just created.
-
-```
-Autorefresh State: Paused
-```
-In order to pre-populate the cache tables and activate the AUTOREFRESH mechanism you must load the cache groups.
-
-Exit from ttIsql:
-
 ```
 <copy>
-quit
-</copy>
-```
-
-```
-Disconnecting...
-Done.
-```
-
-5. Connect as OE user to see the empty tables created. These are the tables make up the cache groups:
-
-```
-<copy>
-ttIsql "dsn=sampledb;uid=oe;pwd=oe;OraclePWD=oe"
-</copy>
-```
-```
-Copyright (c) 1996, 2023, Oracle and/or its affiliates. All rights reserved.
-Type ? or "help" for help, type "exit" to quit ttIsql.
-
-connect "dsn=sampledb;uid=oe;pwd=********;OraclePWD=********";
-Connection successful: DSN=sampledb;UID=oe;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
-(Default setting AutoCommit=1)
-```
-
-```
-<copy>
-tables;
-</copy>
-```
-
-```
-  OE.CUSTOMERS
-  OE.INVENTORIES
-  OE.ORDERS
-  OE.ORDER_ITEMS
-  OE.PRODUCT_DESCRIPTIONS
-  OE.PRODUCT_INFORMATION
-  OE.PROMOTIONS
-7 tables found.
-```
-
-```
-<copy>
-select count(*) from customers;
-</copy>
-```
-
-```
-< 0 >
-1 row found.
-```
-
-```
-<copy>
-select count(*) from product_information;
-</copy>
-```
-
-```
-< 0 >
-1 row found.
-```
-
-```
-<copy>
-select count(*) from promotions;
-</copy>
-```
-
-```
-< 0 >
-1 row found.
-```
-
-6. Spawn a new connection as user, APPUSR, to check out the empty table created as part of the cache group for this user:
-
-```
-<copy>
-connect "dsn=sampledb;uid=appuser;pwd=appuser" as newconn;
-</copy>
-```
-
-```
-Connection successful: DSN=sampledb;UID=appuser;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
-(Default setting AutoCommit=1)
-Done.
-```
-```
-<copy>
-tables;
+alltables appuser.%;
 </copy>
 ```
 
@@ -416,7 +368,7 @@ tables;
 
 ```
 <copy>
-select count(*) from vpn_users;
+select count(*) from appuser.vpn_users;
 </copy>
 ```
 
@@ -424,27 +376,30 @@ select count(*) from vpn_users;
 < 0 >
 1 row found.
 ```
-
-7. Exit from ttIsql for both connections.
+6. Exit from ttIsql:
 
 ```
 <copy>
 quit
 </copy>
 ```
-
 ```
-Disconnecting from sampledb...
-Disconnecting from newconn...
+Disconnecting...
 Done.
 ```
 
+The TimesTen mechanism that captures data changes that occur in the Oracle database and uses those changes to refresh the cached data is called **AUTOREFRESH**. Note that, in the output above, the state of this mechanism is currently **Paused** for all of the cache groups that you just created.
+
+```
+Autorefresh State: Paused
+```
+In order to pre-populate the cache tables and activate the AUTOREFRESH mechanism you must load the cache groups.
 
 You can now **proceed to the next lab**. 
 
 Keep your terminal session to tthost1 open for use in the next lab.
 
-## Acknowledgements
+## AcknowledgeEments
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
