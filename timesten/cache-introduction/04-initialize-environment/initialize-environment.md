@@ -17,7 +17,7 @@ The workshop uses an Oracle database which runs in its own container (**dbhost**
 This lab assumes that you:
 
 - Have completed all the previous labs in this workshop, in sequence.
-- Have an open terminal session in the workshop compute instance, either via NoVNC or SSH.
+- Have an open terminal session (using **oracle** user) in the workshop compute instance, either via NoVNC or SSH.
 
 ### Start over from the beginning
 
@@ -58,5 +58,5 @@ Keep your terminal session open ready for the next lab.
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Last Updated By/Date** - Jenny Bloom, October 2023
 
