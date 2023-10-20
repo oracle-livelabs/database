@@ -6,7 +6,7 @@ In this lab, you run queries against the TimesTen cache and against the Oracle d
 
 **Estimated Lab Time:** 10 minutes
 
-**IMPORTANT:** As noted in the previous lab, there are many factors that can affect performance. As a result, the performance numbers shown in this lab are indicative only. The numbers that _you_ measure will differ and may be slightly better or slightly worse.
+**IMPORTANT:** As noted in the previous lab, there are many factors that can affect performance. As a result, the performance numbers shown in this lab are indicative only. The numbers that _you_ measure will differ and may be slightly better or slightly worse. The following information is presented for you to understand the different pieces around the benchmark for this lab. You don't need to run any commands listed below. The commands to run are from Task 1. 
 
 When timing database query execution, it is important to understand what you are timing. Otherwise, you may get misleading results.
 
