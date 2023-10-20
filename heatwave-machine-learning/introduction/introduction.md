@@ -33,6 +33,10 @@ The sepal is the part that encases and protects the flower when it is in the bud
 
 _Estimated Time:_ 2 hours
 
+Watch the video below for a quick walk-through of the lab.
+
+[Automate ML Apps with MySQL HeatWave](videohub:1_mgj1acg7)
+
 ### About Product/Technology
 
 HeatWave ML makes it easy to use machine learning, whether you are a novice user or an experienced ML practitioner. You provide the data, and HeatWave AutoML analyzes the characteristics of the data and creates an optimized machine learning model that you can use to generate predictions and explanations. An ML model makes predictions by identifying patterns in your data and applying those patterns to unseen data. HeatWave ML explanations help you understand how predictions are made, such as which features of a dataset contribute most to a prediction.

@@ -12,6 +12,8 @@ In this lab you will learn about an alternative way of working with JSON, based 
 
 Estimated Lab Time: 10 minutes
 
+[](videohub:1_hr7cf8kj)
+
 ### Objectives
 
 In this lab, you will:

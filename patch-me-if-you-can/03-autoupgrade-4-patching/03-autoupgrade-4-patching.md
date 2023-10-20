@@ -7,6 +7,8 @@ In this lab, you will patch the CDB2 database from 19.18.0 to 19.19.0 with just 
 
 Estimated Time: 5 minutes (runs unattended for 20 minutes)
 
+[](videohub:1_r5m6z19y)
+
 ### Objectives
 
 Autoupgrade for patching

@@ -6,6 +6,8 @@ In this lab, you will execute common XTTS pre-checks in SQL*Plus. Each task will
 
 Estimated Time: 15 minutes
 
+[](videohub:1_1q1ejrfc)
+
 ### Objectives
 
 - Recommended checks for XTTS.
@@ -167,7 +169,7 @@ Both character sets in the lab match, and no further action is needed.
 
 ## Task 5: XTTS Tablespace Violations (SOURCE) 
 For transportable tablespaces, another requirement is that all tablespaces you're going to transport are self-contained.
-In this lab, you will transport the tablespaces "TPCCTAB" and "USERS". So let's check if they are self-contained:
+In this lab, you will transport the tablespaces "TPCCTAB" and "USERS". So let's check if they are self-contained. In the source database:
 
   ```
     <copy>

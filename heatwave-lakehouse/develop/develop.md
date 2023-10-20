@@ -1,8 +1,8 @@
-# Use MySQL HeatWave For Development  
+# Develop MySQL HeatWave App with LAMP
 
 ## Introduction
 
-MySQL HeatWave can easily be used for development tasks with existing Oracle services, such as Oracle Cloud Analytics. New applications can also be created with the LAMP or other software stacks.
+MySQL HeatWave can easily be used for development tasks with existing Oracle services, such as Oracle Analytics Cloud. New applications can also be created with the LAMP or other software stacks.
 
 **Note:** This application code is intended for educational purposes only. It is designed to help developers learn and practice application development skills with MySQL HeatWave on OCI. The code is not designed to be used in a production environment
 
@@ -118,7 +118,7 @@ In this lab, you will be guided through the following tasks:
 
    Example: http://129.213.167.../info.php
 
-## Task 3: Create MySQl HeatWave / PHP connect app
+## Task 3: Create MySQL HeatWave / PHP connect app
 
 1. Security update"   set SELinux to allow Apache to connect to MySQL
 

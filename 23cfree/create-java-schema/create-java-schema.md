@@ -20,6 +20,11 @@ This lab assumes you have:
 * Eclipse or a compatible IDE for executing Java code
 * All previous labs successfully completed
 
+<if type="livelabs">
+Watch the video below for a quick walk-through of the lab. 
+[Change password](videohub:1_lkkdkfj3)
+</if>
+
 ## Task 1: Opening your project in Eclipse
 
 1. In the open terminal on the right, paste in this command to navigate to the Java code directory.

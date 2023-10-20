@@ -8,6 +8,8 @@ In this lab, we will be installing Swingbench, a powerful performance testing to
 
 Estimated Time: 15 minutes
 
+[Lab 1](videohub:1_3rgp8l51)
+
 ### Objectives
 
 In this lab, you will:
@@ -40,13 +42,13 @@ This lab assumes you have:
     ![Set environment](images/oraenv.png " ")
 
 
-3. Next click [here](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRg[…]/livelabsfiles/o/data-management-library-files/swingbench02262023_jdk11.zip) to download the latest version of Swingbench.
+3. Next click [here](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/23c/swingbench15082023_jdk11.zip) to download the latest version of Swingbench.
 
 4. Once the download is complete, open a terminal or command prompt on your computer and navigate to the location where the file was saved.
 
     ```
     <copy>
-    unzip ~/Downloads/swingbench02262023_jdk11.zip -d ~/Downloads
+    unzip ~/Downloads/swingbench15082023_jdk11.zip -d ~/Downloads
     </copy>
 	```
     ![unzip swingbench](images/downloadswing.png " ")
@@ -120,6 +122,14 @@ This lab assumes you have:
 
     ![Showing the swingbench UI](images/completing.png " ")
 
+17. To make this workshop as realistic as possible, let's introduce the business scenario you will be working with - **Oracle MovieStream**.
+
+    ![Logo graphic of Oracle MovieStream](images/moviestream-logo.jpeg)
+
+    * Oracle MovieStream is a fictitious online movie streaming company. Customers log into Oracle MovieStream using their computers, tablets, and phones, where they are presented with a personalized list of movies based on their viewing history. The company is now looking for better, smarter ways to track performance, identify customers for targeted campaigns promoting new services and movies, and improve the streaming platform. The scenarios in this workshop are based on challenges that companies face in their businesses. We hope that the labs and workshops will provide you with insights into how Oracle can help you solve these common everyday business and technical challenges.
+
+    * During this workshop, we will primarily focus on three key tables: `genres`, `movie_details`, and `movies_genre_map`. As we progress through the upcoming labs, we will explore the creation of duality views spanning across these tables. Additionally, we will explore techniques for efficiently adding, updating, and manipulating the underlying data within these tables using the duality views.
+
 ## Task 2: Start ORDS
 
 1. Open a new tab in the terminal by selecting **File** and **New Tab** 
@@ -165,10 +175,13 @@ This lab assumes you have:
     </copy>
 	```
     ![Showing the terminal](images/ords-serve.png " ")
+    ![Showing the terminal](images/ords-serve-message.png " ")
 
-6. IIf you are running this in a Sandbox, go to Activities and then click on New Window at the top. If Chrome is not running, click on Chrome.
+6. If Google Chrome isnt running, go to **Activities** and then click on the Google Chrome symbol. If a new window doesn't appear, click **Google Chrome** and **New Window** at the top. 
 
-    ![opening a new chrome window](images/new_chrome_window.png " ")
+    ![opening a new chrome window](images/google.png " ")
+    ![opening a new chrome window](images/new-chrome-window.png " ")
+
 
 7. Copy and paste the following address into the browser. This is the address for SQL Developer Web on your machine. Note: If you did not start ORDs, ORDs stopped working or you closed that terminal in the previous lab, go back and complete the steps in that lab to start ORDs otherwise it will not be running to login here.
 
@@ -180,7 +193,7 @@ This lab assumes you have:
 
 8. Sign in to SQL Developer Web using the movie schema with the username movie and password movie.
 
-    ![Ords login](images/ords_url.png " ")
+    ![Ords login](images/ords-url.png " ")
 
 Congratulations! You have finished the setup for this workshop. You may now **proceed to the next lab** 
 

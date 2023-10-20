@@ -6,6 +6,8 @@ After creating JavaScript modules and environments in the previous lab you will 
 
 Estimated Lab Time: 10 minutes
 
+[](videohub:1_ffqhyknx)
+
 ### Objectives
 
 In this lab, you will:

@@ -6,6 +6,7 @@ This lab is finished. We will delete all resources created.
 
 _Estimated Time:_ 5 minutes
 
+[Walkthrough Lab 07: Clean Up](videohub:1_g02p3ug6)
 
 ## Task 1: Delete resources created using Cloud Shell
 
