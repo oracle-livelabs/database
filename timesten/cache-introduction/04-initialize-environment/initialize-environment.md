@@ -17,7 +17,7 @@ The workshop uses an Oracle database which runs in its own container (**dbhost**
 This lab assumes that you:
 
 - Have completed all the previous labs in this workshop, in sequence.
-- Have an open terminal session (using **oracle** user) in the workshop compute instance, either via NoVNC or SSH.
+- Have an open terminal session in the workshop compute instance, either via NoVNC or SSH. Use **oracle** (in lowercase) as the user.
 
 ### Start over from the beginning
 

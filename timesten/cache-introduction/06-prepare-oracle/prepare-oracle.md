@@ -163,7 +163,7 @@ User created.
 
 ## Task 3: Grant required roles and privileges to the cache admin user
 
-The cache admin user needs various privileges in the Oracle database. In order to simplify granting these, TimesTen includes a SQL script (**\$TIMESTEN_HOME/install/oraclescripts/grantCacheAdminPrivileges.sql**) that can be run to grant them.
+The cache admin user needs various privileges in the Oracle database. In order to simplify granting these, TimesTen includes a SQL script (**$TIMESTEN_HOME/install/oraclescripts/grantCacheAdminPrivileges.sql**) that can be run to grant them.
 
 Run that script in your SQL\*Plus session, passing it the cache admin username (ttcacheadm):
 

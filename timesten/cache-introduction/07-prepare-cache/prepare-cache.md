@@ -66,6 +66,9 @@ CREATE USER ttcacheadm IDENTIFIED BY ttcacheadm;
 </copy>
 ```
 ```
+User created.
+```
+```
 <copy>
 GRANT CREATE SESSION, CACHE_MANAGER, CREATE ANY TABLE, CREATE ANY INDEX, ALTER ANY TABLE, SELECT ANY TABLE TO ttcacheadm;
 </copy>
