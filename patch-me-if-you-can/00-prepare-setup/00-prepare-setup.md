@@ -1,4 +1,4 @@
-# Prepare Setup 
+# Prepare Setup Daniel Was Here
 
 ## Introduction
 
@@ -19,7 +19,7 @@ This lab assumes you have:
 
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
 
-1.  Click on the link below to download the Resource Manager zip file you need to build your environment: [upgr19c-23c.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/upgrade-and-patching/upgr19c-23c.zip)
+1.  Click on the link below to download the Resource Manager zip file you need to build your environment: [patch-me-if-you-can.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/upgrade-and-patching/patch-me-if-you-can.zip)
 
 2.  Save in your downloads folder.
 
@@ -29,10 +29,10 @@ We strongly recommend using this stack to create a self-contained/dedicated VCN 
 
 This workshop requires a certain number of ports to be available, a requirement that can be met by using the default ORM stack execution that creates a dedicated VCN. In order to use an existing VCN the following ports should be added to Egress rules
 
-| Port | Description             |
-| :--- | :---------------------- |
-| 22   | SSH                     |
-| 6080 | Remote Desktop noVNC () |
+| Port           |Description                            |
+| :------------- | :------------------------------------ |
+| 22             | SSH                                   |
+| 6080           | Remote Desktop noVNC ()               |
 
 1.  Go to *Networking >> Virtual Cloud Networks*
 
