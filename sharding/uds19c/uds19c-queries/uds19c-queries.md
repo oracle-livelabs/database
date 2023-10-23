@@ -73,7 +73,7 @@ This lab assumes you have:
     ![<Shard1 sharded table queries>](images/uds19c-connect-shard1-sharded-table-queries.png " ")
 
 
-4. Connect to Shard2 and run queries on the sharded table Accounts. A total of 7 accounts and 6 Countries are in Shard2.
+4. Connect to Shard2 and run queries on the sharded table Accounts. A total of 10 accounts and 7 Countries are in Shard2.
 
 
     ```
@@ -96,7 +96,7 @@ This lab assumes you have:
 
 
 
-5. Connect to the Catalog and run cross shard queries on sharded table accounts. A total of 12 accounts and 10 countries are in the Catalog, which matches the sums for accounts (7+5=12) and countries (4+6=10) from both shards. This exercise confirms that Oracle Sharding with user-defined sharding allows you to implement Data Sovereignty use cases.
+5. Connect to the Catalog and run cross shard queries on sharded table accounts. A total of 15 accounts and 11 countries are in the Catalog, which matches the sums for accounts (5+10=15) and countries (4+7=11) from both shards. This exercise confirms that Oracle Sharding with user-defined sharding allows you to implement Data Sovereignty use cases.
 
     ```
     <copy>

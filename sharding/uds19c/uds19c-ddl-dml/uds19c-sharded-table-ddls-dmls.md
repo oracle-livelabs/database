@@ -110,7 +110,7 @@ This lab assumes you have:
     PARTITION p_shard1 VALUES
     ('USA','CAN','BRA','MEX') TABLESPACE tbs_shardspace1
     ,PARTITION p_shard2 VALUES
-    ('IND','DEU','FRA','CHN','AUS','ZAF') TABLESPACE tbs_shardspace2
+    ('IND','DEU','FRA','CHN','AUS','ZAF','JPN') TABLESPACE tbs_shardspace2
     );
     ```
 
@@ -140,7 +140,7 @@ This lab assumes you have:
     PARTITION p_shard1 VALUES
     ('USA','CAN','BRA','MEX') TABLESPACE tbs_shardspace1
     ,PARTITION p_shard2 VALUES
-    ('IND','DEU','FRA','CHN','AUS','ZAF') TABLESPACE tbs_shardspace2
+    ('IND','DEU','FRA','CHN','AUS','ZAF','JPN') TABLESPACE tbs_shardspace2
     );
     ```
 
@@ -173,6 +173,9 @@ This lab assumes you have:
     insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('ZAF',10,10,10000,sysdate);
     insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('USA',11,11,10000,sysdate);
     insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('IND',12,12,10000,sysdate);
+    insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('JPN',13,13,10000,sysdate);
+    insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('JPN',14,14,10000,sysdate);
+    insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('JPN',15,15,10000,sysdate);
     commit;
     ```
 
