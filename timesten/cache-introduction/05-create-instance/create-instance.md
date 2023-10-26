@@ -43,11 +43,12 @@ ls -l
 
 ```
 total 16
-drwxr-xr-x. 2 oracle oinstall   22 May 26 13:10 bin
-drwxr-xr-x. 2 oracle oinstall 4096 May 26 13:10 queries
-drwxr-xr-x. 2 oracle oinstall 4096 May 26 13:10 scripts
--rw-r--r--. 1 oracle oinstall  316 May 10 12:55 tables_appuser.sql
--rw-r--r--. 1 oracle oinstall 3879 May 10 14:31 tables_oe.sql
+drwxr-xr-x. 2 oracle oinstall   97 Oct 18 15:33 bin
+drwxr-xr-x. 2 oracle oinstall 4096 Oct 18 15:33 extras
+drwxr-xr-x. 2 oracle oinstall  102 Oct 18 15:33 queries
+drwxr-xr-x. 2 oracle oinstall 4096 Oct 18 15:33 scripts
+-rw-r--r--. 1 oracle oinstall  741 Jun  7  2022 tables_appuser.sql
+-rw-r--r--. 1 oracle oinstall 3879 May 10  2022 tables_oe.sql
 ```
 
 ## Task 2: Create a TimesTen instance
