@@ -32,7 +32,7 @@ This lab assumes you have:
 
     ```bash
     <copy>
-    kubectl run your-pod --image=nginx --restart=Never
+    kubectl run your-pod --image=docker.io/nginx --restart=Never
     </copy>
     ```
 
@@ -167,7 +167,7 @@ The *kube-apiserver* then stored the information in *etcd* that "`your-pod` shou
     spec:
       containers:
       - name: nginx
-        image: nginx:latest
+        image: docker.io/nginx:latest
     EOF
     </copy>
     ```
@@ -205,7 +205,7 @@ The *kube-apiserver* then stored the information in *etcd* that "`your-pod` shou
     spec:
       containers:
         - name: nginx
-          image: nginx:latest
+          image: docker.io/nginx:latest
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -276,7 +276,7 @@ In *Task 1* when you caused an unrecoverable failure of `your-pod` the applicati
         spec:
           containers:
           - name: nginx
-            image: nginx:latest
+            image: docker.io/nginx:latest
     EOF
     </copy>
     ```
@@ -394,7 +394,7 @@ While running *Pods* is at the heart of Kubernetes, it is uncommon to run them d
         spec:
           containers:
           - name: nginx
-            image: nginx:1.14.2
+            image: docker.io/nginx:1.14.2
     EOF
     </copy>
     ```

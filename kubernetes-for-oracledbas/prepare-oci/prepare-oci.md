@@ -169,7 +169,7 @@ Assign the cloud *User* who will be carrying out the remaining Labs to the *Grou
 
 ### Troubleshooting
 
-Your user account maybe in an IDCS Federated identity domain, in which case you will not be able to assign your user account to the IAM Group.  The `oci iam group add-user`command will fail with a `ServiceError` message.  If this is the case, please follow the [IAM User Error](?lab=troubleshooting#Task1:IAMUserError) guide.
+Your user account maybe in an IDCS Federated identity domain, in which case you will not be able to assign your user account to the IAM Group.  The `oci iam group add-user` (Step 3) command will fail with a `ServiceError` message.  If this is the case, please follow the [IAM User Error](?lab=troubleshooting#Task1:IAMUserError) guide.
 
 You may now **proceed to the next lab**
 
