@@ -8,6 +8,8 @@ In this lab, we will be installing Swingbench, a powerful performance testing to
 
 Estimated Time: 15 minutes
 
+[Lab 1](videohub:1_3rgp8l51)
+
 ### Objectives
 
 In this lab, you will:
@@ -40,13 +42,13 @@ This lab assumes you have:
     ![Set environment](images/oraenv.png " ")
 
 
-3. Next click [here](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/swingbench02262023_jdk11.zip) to download the latest version of Swingbench.
+3. Next click [here](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/23c/swingbench15082023_jdk11.zip) to download the latest version of Swingbench.
 
 4. Once the download is complete, open a terminal or command prompt on your computer and navigate to the location where the file was saved.
 
     ```
     <copy>
-    unzip ~/Downloads/swingbench02262023_jdk11.zip -d ~/Downloads
+    unzip ~/Downloads/swingbench15082023_jdk11.zip -d ~/Downloads
     </copy>
 	```
     ![unzip swingbench](images/downloadswing.png " ")

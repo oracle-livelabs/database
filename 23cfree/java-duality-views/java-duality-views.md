@@ -20,7 +20,10 @@ This lab assumes you have:
 * All previous labs successfully completed
 * Eclipse or a compatible IDE for executing Java code
 
-
+<if type="livelabs">
+Watch the video below for a quick walk-through of the lab. 
+[Change password](videohub:1_rle2cqce)
+</if>
 
 ## Task 1: Find documents matching a filter (aka predicate)
 

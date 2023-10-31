@@ -1,0 +1,58 @@
+{
+  "workshoptitle": "Learn how to achieve Data Sovereignty with Oracle Globally distributed database 19c",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction",
+      "filename": "../../uds19c-intro/uds19c-intro.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Login to Oracle Cloud",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+    },
+    {
+      "title": "Lab 1: Prepare Setup",
+      "description": "How to download your ORM stack and update security rules for an existing VCN",
+      "publisheddate": "09/28/2020",
+      "filename": "../../prepare-setup/uds19c-prepare-setup.md"
+    },
+    {
+      "title": "Lab 2: Environment Setup",
+      "description": "How to provision the workshop environment and connect to it",
+      "publisheddate": "06/30/2020",
+      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc.md"
+    },
+    {
+      "title": "Lab 3: Initialize Environment",
+      "description": "Initialize Environment",
+      "filename": "../../initialize-environment/uds19c-initialize-environment.md"
+    },
+    {
+      "title": "Lab 4: Explore User-Defined Sharding Topology",
+      "description": "Explore User-Defined Sharding Topology",
+      "filename": "../../uds19c-topology/uds19c-topology.md"
+    },
+    {
+      "title": "Lab 5: Sample User-Defined Sharding Schema and Data insertion",
+      "description": "Sample User-Defined Sharding Schema and Data insertion",
+      "filename": "../../uds19c-ddl-dml/uds19c-sharded-table-ddls-dmls.md"
+    },
+    {
+      "title": "Lab 6: Sample Queries to validate User-Defined Sharding Schema",
+      "description": "Sample Queries to validate User-Defined Sharding Schema",
+      "filename": "../../uds19c-queries/uds19c-queries.md"
+    },
+    {
+      "title": "Lab 7: Clean up Stack and Instances",
+      "description": "Clean up ORM Stack and instances",
+      "filename": "../../cleanup/uds19c-cleanup.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}

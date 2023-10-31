@@ -6,6 +6,9 @@ This lab guides you through the setup steps to create the JSON duality views req
 
 Estimated Time: 10 minutes
 
+[Lab 2](videohub:1_yy26p93n)
+
+
 ### Objectives
 
 In this lab, you will:
@@ -58,9 +61,9 @@ This lab assumes you have:
 
     ```
     <copy>
-    desc GENERES;
+    desc GENRES;
     desc MOVIE_DETAILS;
-    desc MOVIES_GENERE_MAP;
+    desc MOVIES_GENRE_MAP;
     </copy>
     ```
     ![looking at the data](images/desc-tables.png " ")
