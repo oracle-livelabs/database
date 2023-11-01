@@ -80,4 +80,4 @@ For more information on the SH schema, see the documentation on [Sample Schemas]
 ## Acknowledgements
 
 - **Author** - Richard Green, Principal Developer, Database User Assistance
-- **Last Updated By/Date** - Shilpa Sharma, March 2023
+- **Last Updated By/Date** - Katherine Wardhana, November 2023
