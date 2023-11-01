@@ -104,7 +104,7 @@ Estimated Lab Time: 10 minutes
 
     ![Choose the network access type.](./images/choose-network-access.png " ")
 
-9. Choose a license type. For this lab, choose __License Included__. The two license types are:
+9. Choose a license type. For this lab, keep the license type as __License Included__. The two license types are:
 
     - __Bring Your Own License (BYOL)__ - Select this type when your organization has existing database licenses.
     - __License Included__ - Select this type when you want to subscribe to new database software licenses and the database cloud service.
