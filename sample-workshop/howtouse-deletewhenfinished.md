@@ -54,7 +54,7 @@ Look at the product-name-workshop/freetier folder and look at the manifest.json 
 
 > **Note:** The use of "Lab n:" in the titles is optional
 
-The Prerequisite "lab" is the first lab in a common folder on the oracle/learning-library repo. Because this lab already exists, we can use a RAW/absolute URL instead:
+The Prerequisite "lab" is the first lab in a common folder on the oracle-livelabs/common repo. Because this lab already exists, we can use a RAW/absolute URL instead:
 
   ```
   "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"        },
