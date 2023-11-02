@@ -125,4 +125,4 @@ Click [here](https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt
 - **Author** - Rick Green, Principal Developer, Database User Assistance
 - **Contributor** - Supriya Ananth
 - **Adapted for Cloud by** - Rick Green
-- **Last Updated By/Date** - Shilpa Sharma, March 2023
+- **Last Updated By/Date** - Katherine Wardhana, November 2023
