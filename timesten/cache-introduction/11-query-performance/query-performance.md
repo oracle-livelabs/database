@@ -6,7 +6,7 @@ In this lab, you run queries against the TimesTen cache and against the Oracle d
 
 **Estimated Lab Time:** 10 minutes
 
-**IMPORTANT:** As noted in the previous lab, there are many factors that can affect performance. As a result, the performance numbers shown in this lab are indicative only. The numbers that _you_ measure will differ and may be slightly better or slightly worse.
+**IMPORTANT:** As noted in the previous lab, there are many factors that can affect performance. As a result, the performance numbers shown in this lab are indicative only. The numbers that _you_ measure will differ and may be slightly better or slightly worse. The following information is presented for you to understand the different pieces around the benchmark for this lab. You don't need to run any commands listed below. The commands to run are from Task 1. 
 
 When timing database query execution, it is important to understand what you are timing. Otherwise, you may get misleading results.
 
@@ -269,7 +269,7 @@ Now run the queries against the TimesTen cache:
 ```
 
 ```
-info: connected to 'sampledb' (Oracle TimesTen IMDB version 22.1.1.7.0)
+info: connected to 'sampledb' (Oracle TimesTen IMDB version 22.1.1.18.0)
 info: running queries from file 'queries/query_all.sql'
 info: ========================================
 info: executing query #1
@@ -355,5 +355,5 @@ Keep your primary session open for use in the next lab.
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Last Updated By/Date** - Jenny Bloom, October 2023
 
