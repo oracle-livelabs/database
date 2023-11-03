@@ -23,7 +23,11 @@ In this lab, you will be guided through the following tasks:
 - Some Experience with MySQL Shell
 - Must Complete Lab 7
 
-## Task 1: Upload Images to the OCI Object Store:
+## Task 1: Download sample display images from a Bucket in OCI Object Store:
+
+1. Click on this link to Download the images [MovieHub Sample Images](https://objectstorage.us-phoenix-1.oraclecloud.com/p/Uim7lrT2O4eMuGunwu608ejFy-nlvNTtfEBNbElXaaAwTafZn2QveR6kgWJE5atV/n/idazzjlcjqzj/b/bucket-images/o/moviehub_imgs.zip) from the Demo to your local machine
+
+## Task 2: Upload Images to the OCI Object Store:
 
 1. Open the OCI Console
 
@@ -41,7 +45,7 @@ In this lab, you will be guided through the following tasks:
 
 ![Upload Images Bucket ](./images/upload-images-bucket.png "upload-images-bucket ")
 
-## Task 2: Create Pre-Authenticated Requests for each image
+## Task 3: Create Pre-Authenticated Requests for each image
 
 1. Click on the three dots in the far right of an object.
 
@@ -60,7 +64,7 @@ In this lab, you will be guided through the following tasks:
     ![Pre-Authenticated Request URL ](./images/pre-authenticated-request-url.png "pre-authenticated-request-url ")
 
 
-## Task 3: Connect with MySQL Shell:
+## Task 4: Connect with MySQL Shell:
 
 1. Go to Cloud shell to SSH into the new Compute Instance
 
@@ -86,7 +90,7 @@ In this lab, you will be guided through the following tasks:
     <copy>USE movies;</copy>
     ```
 
-## Task 4: Update the media columns with the generated Pre-Authenticated Requests for your images
+## Task 5: Update the media columns with the generated Pre-Authenticated Requests for your images
 
 1. Update the profiles images for users
 
@@ -148,7 +152,7 @@ In this lab, you will be guided through the following tasks:
 
     ![Update url images items ](./images/update-url-images-items.png "update-url-images-items ")
 
-## Task 5: See the changes in the MovieHub App
+## Task 6: See the changes in the MovieHub App
 
 1. Login into to your Oracle APEX workspace
 
@@ -185,6 +189,6 @@ In this lab, you will be guided through the following tasks:
 
 ## Acknowledgements
 
-- **Author** - Perside Foster, MySQL Principal Solution Engineering
-- **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, August 2023
+- **Author** - Cristian Aguilar, MySQL Solution Engineering
+- **Contributors** - Perside Foster, MySQL Principal Solution Engineering
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2023
