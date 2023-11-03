@@ -1,6 +1,6 @@
 # Introduction
 
-The labs in this workshop will walk you through all the steps to get started using Oracle Cloud Infrastructure (OCI) Database Migration (DMS). You will provision a Virtual Cloud Network (VCN), an Oracle Database 19c instance, and an Oracle Autonomous Database (ADB) instance and deploy a GoldenGate instance from marketplace to perform a database migration using DMS.
+The labs in this workshop will walk you through all the steps to get started using Oracle Cloud Infrastructure (OCI) Database Migration (DMS). You will provision a Virtual Cloud Network (VCN), an Oracle Database 19c instance, and an Oracle Autonomous Database (ADB) instance to perform a database migration using DMS.
 
 With DMS we make it quick and easy for you to migrate databases from on-premises, Oracle or third-party cloud into Oracle databases on OCI.
 
@@ -17,7 +17,7 @@ DMS provides high performance, fully managed approach to migrating databases fro
 * **Offline**: The Migration makes a point-in-time copy of the source to the target database. Any changes to the source database during migration are not copied, requiring any applications to stay offline for the duration of the migration.
 * **Online**: The Migration makes a point-in-time copy and replicates all subsequent changes from the source to the target database. This allows applications to stay online during the migration and then be switched over from source to target database.
 
-In the current release of DMS we support Oracle databases located on-premises, in third-party clouds, or on OCI as the source and Oracle Autonomous Database serverless or dedicated as the target database. Below is a table of supported configurations;
+In the current release of DMS we support Oracle databases located on-premises, in third-party clouds, or on OCI as the source. The supported targets are in OCI, below is a table of supported configurations;
 
 |                  |  |     
 |--------------------------|-------------------------|
