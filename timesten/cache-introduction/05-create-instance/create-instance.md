@@ -43,16 +43,17 @@ ls -l
 
 ```
 total 16
-drwxr-xr-x. 2 oracle oinstall   22 May 26 13:10 bin
-drwxr-xr-x. 2 oracle oinstall 4096 May 26 13:10 queries
-drwxr-xr-x. 2 oracle oinstall 4096 May 26 13:10 scripts
--rw-r--r--. 1 oracle oinstall  316 May 10 12:55 tables_appuser.sql
--rw-r--r--. 1 oracle oinstall 3879 May 10 14:31 tables_oe.sql
+drwxr-xr-x. 2 oracle oinstall   97 Oct 18 15:33 bin
+drwxr-xr-x. 2 oracle oinstall 4096 Oct 18 15:33 extras
+drwxr-xr-x. 2 oracle oinstall  102 Oct 18 15:33 queries
+drwxr-xr-x. 2 oracle oinstall 4096 Oct 18 15:33 scripts
+-rw-r--r--. 1 oracle oinstall  741 Jun  7  2022 tables_appuser.sql
+-rw-r--r--. 1 oracle oinstall 3879 May 10  2022 tables_oe.sql
 ```
 
 ## Task 2: Create a TimesTen instance
 
-A TimesTen _installation_ is comprised of the TimesTen software components. An installation is created by unzipping the TimesTen software distribution media into a suitable location. For this workshop, the TimesTen software distribution media has already been unzipped into the directory **/shared/sw** to create a TimesTen installation named **tt22.1.1.7.0**.
+A TimesTen _installation_ is comprised of the TimesTen software components. An installation is created by unzipping the TimesTen software distribution media into a suitable location. For this workshop, the TimesTen software distribution media has already been unzipped into the directory **/shared/sw** to create a TimesTen installation named **tt22.1.1.18.0**.
 
 1. List the top level software directory.
 
@@ -64,35 +65,35 @@ ls -l /shared/sw
 
 ```
 total 0
-dr-xr-x---. 17 oracle oinstall 277 May  5 22:20 tt22.1.1.7.0
+dr-xr-x---. 17 oracle oinstall 277 May  5 22:20 tt22.1.1.18.0
 ```
 
 2. List the contents of the TimesTen installation top level directory.
 
 ```
 <copy>
-ls -l /shared/sw/tt22.1.1.7.0
+ls -l /shared/sw/tt22.1.1.18.0
 </copy>
 ```
 
 ```
-total 108
-dr-xr-x---. 3 oracle oinstall    89 May  5 22:20 3rdparty
-dr-xr-x---. 2 oracle oinstall  4096 May  5 22:19 bin
-dr-xr-x---. 4 oracle oinstall    31 May  5 22:19 grid
-dr-xr-x---. 3 oracle oinstall   240 May  5 22:19 include
-dr-xr-x---. 2 oracle oinstall   167 May  5 22:19 info
-dr-xr-x---. 2 oracle oinstall    26 May  5 22:19 kubernetes
-dr-xr-x---. 3 oracle oinstall  4096 May  5 22:19 lib
-dr-xr-x---. 3 oracle oinstall    19 May  5 22:19 network
-dr-xr-x---. 3 oracle oinstall    18 May  5 22:19 nls
-dr-xr-x---. 2 oracle oinstall   242 May  5 22:19 oraclescripts
-dr-xr-x---. 4 oracle oinstall    40 May  5 22:20 PERL
-dr-xr-x---. 7 oracle oinstall    68 May  5 22:19 plsql
--r--r-----. 1 oracle oinstall 99660 May  5 22:19 README.html
-dr-xr-x---. 2 oracle oinstall    54 May  5 22:19 startup
-dr-xr-x---. 2 oracle oinstall    90 May  5 22:19 support
-dr-xr-x---. 3 oracle oinstall    54 May  5 22:20 ttoracle_home
+total 244
+dr-xr-x---. 3 oracle oinstall     89 Sep  7 17:47 3rdparty
+dr-xr-x---. 2 oracle oinstall   4096 Sep  7 17:47 bin
+dr-xr-x---. 4 oracle oinstall     31 Sep  7 17:47 grid
+dr-xr-x---. 3 oracle oinstall    240 Sep  7 17:47 include
+dr-xr-x---. 2 oracle oinstall    167 Sep  7 17:47 info
+dr-xr-x---. 2 oracle oinstall     26 Sep  7 17:47 kubernetes
+dr-xr-x---. 3 oracle oinstall   4096 Sep  7 17:47 lib
+dr-xr-x---. 3 oracle oinstall     19 Sep  7 17:47 network
+dr-xr-x---. 3 oracle oinstall     18 Sep  7 17:47 nls
+dr-xr-x---. 2 oracle oinstall    274 Sep  7 17:47 oraclescripts
+dr-xr-x---. 4 oracle oinstall     40 Sep  7 17:47 PERL
+dr-xr-x---. 7 oracle oinstall     68 Sep  7 17:47 plsql
+-r--r-----. 1 oracle oinstall 241352 Sep  7 17:47 README.html
+dr-xr-x---. 2 oracle oinstall     54 Sep  7 17:47 startup
+dr-xr-x---. 2 oracle oinstall    103 Sep  7 17:47 support
+dr-xr-x---. 3 oracle oinstall     54 Sep  7 17:47 ttoracle_home
 
 ```
 
@@ -104,7 +105,7 @@ When it is operational, a TimesTen instance also includes a set of associated pr
 
 ```
 <copy>
-/shared/sw/tt22.1.1.7.0/bin/ttInstanceCreate -location /tt/inst -name ttinst -tnsadmin /shared/tnsadmin
+/shared/sw/tt22.1.1.18.0/bin/ttInstanceCreate -location /tt/inst -name ttinst -tnsadmin /shared/tnsadmin
 </copy>
 ```
 
@@ -121,7 +122,7 @@ Run the 'setuproot' script :
 This will move the TimesTen startup script into its appropriate location.
 
 The 22.1 Release Notes are located here :
-  '/shared/sw/tt22.1.1.7.0/README.html'
+  '/shared/sw/tt22.1.1.18.0/README.html'
 
 Instance created successfully.
 
@@ -223,7 +224,7 @@ ttVersion
 ```
 
 ```
-TimesTen Release 22.1.1.7.0 (64 bit Linux/x86_64) (ttinst:6624) 2022-05-05T19:45:28Z
+TimesTen Release 22.1.1.18.0 (64 bit Linux/x86_64) (ttinst:6624) 2023-09-07T15:13:39Z
   Instance admin: oracle
   Instance home directory: /tt/inst/ttinst
   Group owner: oinstall
@@ -260,5 +261,5 @@ Keep your terminal session to tthost1 open ready for the next lab.
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Jenny Bloom, June 2023
+* **Last Updated By/Date** - Jenny Bloom, October 2023
 

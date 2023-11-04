@@ -59,7 +59,7 @@ This lab assumes you have:
 
     -- If sharded user (transactions) already exists drop that before re-create user
     -- drop user transactions cascade;
-    CREATE USER transactions IDENTIFIED BY ****************;
+    CREATE USER transactions IDENTIFIED BY WElcomeHome123##;
     ```
 
 2. Grant roles to the user.
@@ -84,7 +84,7 @@ This lab assumes you have:
 4. Connect as the schema user to create sharded table(s), a duplicated table and populated them with data.
 
     ```
-    connect transactions/****************@PCAT1PDB;
+    sqlplus transactions/WElcomeHome123##@PCAT1PDB;
     ```
 
 5. If sharded tables (payments and accounts) already exists, drop those before you re-create the tables.
