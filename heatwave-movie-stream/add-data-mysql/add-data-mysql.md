@@ -69,7 +69,7 @@ In this lab, you will be guided through the following tasks:
 
 6. Define the External Tables to access the movielens data.
 
-    Enter the following command at the prompt. **Click on Reveal code block**
+    a. Enter the following command at the prompt. **Click on Reveal code block**
 
     <details>
         <summary>**_Reveal code block_**</summary>
@@ -117,10 +117,13 @@ In this lab, you will be guided through the following tasks:
             `user_id` varchar(5) DEFAULT NULL,
             `item_id` varchar(7) DEFAULT NULL,
             `rating` int DEFAULT NULL
-            );
+            );  
+
         </copy>
         ```
     </details>
+
+    b. Hit **ENTER** to execute the last command
 
     ![primary tables create](./images/primary-tables-create.png "primary-tables-create ")
 7. Source the SQL files into your tables with MySQL Shell
@@ -145,12 +148,15 @@ In this lab, you will be guided through the following tasks:
     SOURCE /home/opc/ml-100k/data.sql
     </copy>
     ```
+    c. Hit **ENTER** to execute the last command
 
     **This operation might take a couple of minutes**
-
-8. You will see the the following result
+    
+    You will see the the following result
 
     ![source sql files output](./images/source-sql-data-output.png "source-sql-files-output ")
+
+8. Check the number of rows for every created table
 
     a. Enter the following command to ensure the data was inserted correctly
 
@@ -163,11 +169,16 @@ In this lab, you will be guided through the following tasks:
     SELECT COUNT(*) FROM data0;
     </copy>
     ```
-    b. You should see the following resulting counts
+
+    b. Hit **ENTER** to execute the last command
+
+    c. You should see the following resulting counts
 
     ![row counts primary tables](./images/row-counts-primary-tables.png "row-counts-primary-tables ")
 
 9. Create two more data tables to be used by HeatWave AutoML
+
+    a.
 
     ```bash
     <copy>CREATE TABLE movies.data1 as select * from movies.data0;
@@ -210,6 +221,8 @@ In this lab, you will be guided through the following tasks:
     </copy>
     ```
 
+    b. Hit **ENTER** to execute the last command
+
 10. Compare the number of rows in the data tables.
 
     a. Enter the following command to compare the number of rows
@@ -223,7 +236,10 @@ In this lab, you will be guided through the following tasks:
     SELECT COUNT(*) FROM data2;
     </copy>
     ```
-    b. You should see the following resulting counts
+
+    b. Hit **ENTER** to execute the last command
+
+    c. You should see the following resulting counts
 
     ![row counts data tables](./images/row-counts-data-tables.png "row-counts-data-tables ")
 

@@ -136,7 +136,9 @@ In this lab, you will be guided through the following tasks:
         ```
     </details>
 
-    c. Notice the difference in the number of created records for the tables
+    c. Hit **ENTER** to execute the last command
+
+    d. Notice the difference in the number of created records for the tables
 
     The number of records for every user table will vary between each other. This is because we are only getting the items from the user that the models WERE NOT trained with.
 
@@ -144,7 +146,7 @@ In this lab, you will be guided through the following tasks:
 
     ![user supporting tables row counts](./images/user-supporting-tables-row-counts.png "user-supporting-tables-row-counts ")
 
-    d. Show the tables generated up until now
+    e. Show the tables generated up until now
 
     ```bash
     <copy>USE movies;
@@ -203,8 +205,10 @@ In this lab, you will be guided through the following tasks:
     SET @movies_model_3=(SELECT model_handle FROM ML_SCHEMA_admin.MODEL_CATALOG ORDER BY model_id DESC LIMIT 1 OFFSET 0);
     </copy>
     ```
+    
+    b. Hit **ENTER** to execute the last command
 
-    b. Load every model in memory before using them
+    c. Load every model in memory before using them
 
     ```bash
     <copy>
@@ -213,10 +217,12 @@ In this lab, you will be guided through the following tasks:
     CALL sys.ML_MODEL_LOAD(@movies_model_3, NULL);</copy>
     ```
 
+    d. Hit **ENTER** to execute the last command
 
 2. Generate the USER-ITEM table predictions with the trained models:
 
-    a. Use the function ML\_PREDICT\_TABLE to generate the USER-ITEM tables
+    a. Use the function ML\_PREDICT\_TABLE to generate the USER-ITEM tables.
+
 
     ```bash
     <copy>
@@ -227,6 +233,8 @@ In this lab, you will be guided through the following tasks:
     call sys.ML_PREDICT_TABLE('movies.user_20_30r',@movies_model_3,'movies.pred_user_20_30r',NULL);</copy>
     ```
 
+    Hit **ENTER** to execute the last command
+
     ```bash
     <copy>
     call sys.ML_PREDICT_TABLE('movies.user_21_0r',@movies_model_1,'movies.pred_user_21_0r',NULL);
@@ -236,6 +244,8 @@ In this lab, you will be guided through the following tasks:
     call sys.ML_PREDICT_TABLE('movies.user_21_30r',@movies_model_3,'movies.pred_user_21_30r',NULL);</copy>
     ```
 
+    Hit **ENTER** to execute the last command
+
     ```bash
     <copy>
     call sys.ML_PREDICT_TABLE('movies.user_new_0r',@movies_model_1,'movies.pred_user_new_0r',NULL);
@@ -244,6 +254,8 @@ In this lab, you will be guided through the following tasks:
 
     call sys.ML_PREDICT_TABLE('movies.user_new_30r',@movies_model_3,'movies.pred_user_new_30r',NULL);</copy>
     ```
+
+    Hit **ENTER** to execute the last command
 
     b. Show the tables generated up until now
 
@@ -257,12 +269,16 @@ In this lab, you will be guided through the following tasks:
 
 3. Generate the ITEM-USER table predictions with the trained models:
 
+    a.
+
     ```bash
     <copy>
     call sys.ML_PREDICT_TABLE('movies.item_200',@movies_model_1,'movies.pred_item_200',NULL);
 
     call sys.ML_PREDICT_TABLE('movies.item_453',@movies_model_1,'movies.pred_item_453',NULL);</copy>
     ```
+
+    b. Hit **ENTER** to execute the last command
 
 ## Task 5: Create the supporting media tables
 

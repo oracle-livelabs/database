@@ -94,11 +94,13 @@ In this lab, you will be guided through the following task:
     ```bash
     <copy>CALL sys.ML_TRAIN('movies.data0','rating',JSON_OBJECT('task','recommendation','items','item_id','users','user_id'), @movies_model_1);</copy>
     ```
+
     b. When the training operation finishes, the model handle is assigned to the @movies\_model\_1 session variable, and the model is stored in your model catalog. You can view the entry in your model catalog using the following query, where '**admin**' in ML\_SCHEMA\_admin.MODEL\_CATALOG is your MySQL account name:
 
     ```bash
     <copy>SELECT model_id, model_handle, train_table_name FROM ML_SCHEMA_admin.MODEL_CATALOG;</copy>
     ```
+
     c. The output should look like this, containing the list with your trained models
 
     ![model trained 1, model catalog](./images/model-trained-model-catalog-1.png "model-1-trained-model-catalog ")
@@ -124,10 +126,12 @@ In this lab, you will be guided through the following task:
 3. Test the model to predict the TOP 3 items recommended for a given user.
 
     a. Predict a ROW with the movies\_model\_1 . Top 3 recommended items for the user '600'
+
     ```bash
     <copy>
     SELECT sys.ML_PREDICT_ROW('{"user_id":"600"}',@movies_model_1,JSON_OBJECT('recommend','items','topk',3));</copy>
     ```
+
     b. The trained models will NOT be identical. So the resulting predictions are expected to differ from this example. Output should look like this
 
     ![ml model 1 predict row for user 600](./images/ml-model1-predict-row-user600.png "ml-model1-predict-row-user 600 ")
@@ -136,7 +140,7 @@ In this lab, you will be guided through the following task:
 
 1. Train the ML models:
 
-    a. Train the two remaining models
+    a. Train the two remaining models. Hit **ENTER** to execute the last command
 
     ```bash
     <copy>
@@ -145,7 +149,7 @@ In this lab, you will be guided through the following task:
     CALL sys.ML_TRAIN('movies.data2','rating',JSON_OBJECT('task','recommendation','items','item_id','users','user_id'), @movies_model_3);</copy>
     ```
 
-    b. Make Sure the model handle variables are set correctly for every model
+    b. Make Sure the model handle variables are set correctly for every model. Hit **ENTER** to execute the last command
 
     ```bash
     <copy>
@@ -176,7 +180,9 @@ In this lab, you will be guided through the following task:
     SELECT @movies_model_3;</copy>
     ```
 
-    e. Load every model in memory before using them
+    e. Hit **ENTER** to execute the last command
+
+    f. Load every model in memory before using them
 
     ```bash
     <copy>
@@ -184,6 +190,8 @@ In this lab, you will be guided through the following task:
     CALL sys.ML_MODEL_LOAD(@movies_model_2, NULL);
     CALL sys.ML_MODEL_LOAD(@movies_model_3, NULL);</copy>
     ```
+
+    g. Hit **ENTER** to execute the last command
 
 ## Task 6: Predict a ROWS with different trained models
 
@@ -198,7 +206,9 @@ In this lab, you will be guided through the following task:
     SELECT sys.ML_PREDICT_ROW('{"user_id":"600"}',@movies_model_3,JSON_OBJECT('recommend','items','topk',3));</copy>
     ```
 
-    b. The trained models will NOT be identical. So the resulting predictions are expected to differ from this example. Output should look like this
+    b. Hit **ENTER** to execute the last command
+
+    c. The trained models will NOT be identical. So the resulting predictions are expected to differ from this example. Output should look like this
 
     ![ml models 3 predict row for user 600](./images/ml-models3-predict-row-user600.png "ml-models3-predict-row-user 600 ")
 
@@ -213,7 +223,9 @@ In this lab, you will be guided through the following task:
     SELECT sys.ML_PREDICT_ROW('{"item_id":"300"}',@movies_model_1,JSON_OBJECT('recommend','users','topk',8));</copy>
     ```
 
-    b. The trained models will NOT be identical. So the resulting predictions are expected to differ from this example. Output should look like this
+    b. Hit **ENTER** to execute the last command
+
+    c. The trained models will NOT be identical. So the resulting predictions are expected to differ from this example. Output should look like this
 
     ![ml model predict rows for different items](./images/ml-model-predict-row-items-users.png "ml-model-predict-row-items-users ")
 

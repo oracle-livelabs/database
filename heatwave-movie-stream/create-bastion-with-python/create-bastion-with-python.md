@@ -224,7 +224,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
     <copy>python3</copy>
     ```
 
-    d. Exit Python with 'Ctrl + Z'
+    d. Exit Python with **Ctrl + Z**
 
 
 You may now **proceed to the next lab**

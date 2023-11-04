@@ -112,6 +112,8 @@ In this lab, you will be guided through the following tasks:
 
 2. Now, select the top 10 movie predictions from the user 21 with the different models
 
+    a.
+
     ```bash
     <copy>
     SELECT user_id, item_id, ml_results FROM movies.pred_user_21_0r ORDER BY ml_results DESC LIMIT 10;
@@ -119,6 +121,8 @@ In this lab, you will be guided through the following tasks:
     SELECT user_id, item_id, ml_results FROM movies.pred_user_21_30r ORDER BY ml_results DESC LIMIT 10;
     </copy>
     ```
+
+    b. Hit **ENTER** to execute the last command
 
     ![Query from User 21 prediction tables](./images/query-from-user21-predictions.png "query-from-user21-predictions ")
 

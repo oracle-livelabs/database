@@ -129,7 +129,7 @@ In this lab, you will be guided through the following tasks:
 
     ![inspect item file](./images/inspect-item-file.png "inspect-item-file ")
 
-3. Exit nano without saving any changes with Ctrl + X
+3. Exit nano without saving any changes with **Ctrl + X**
 
 ## Task 4: Run the scripts
 
@@ -177,7 +177,7 @@ In this lab, you will be guided through the following tasks:
 
     ![result item sql file](./images/result-item-sql-file.png "result-item-sql-file")
 
-    b. Exit nano without saving any changes with Ctrl + X
+    b. Exit nano without saving any changes with **Ctrl + X**
 
 You may now **proceed to the next lab**
 
