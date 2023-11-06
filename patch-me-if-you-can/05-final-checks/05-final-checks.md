@@ -62,7 +62,61 @@ Execute in 19.18 and 19.19 tab:
 
     COMMENT: Even though the upgraded 19.18 database isn't a CDB/PDB, you can use the same statement in both environments.
 
-## Task 2: Check Time Zone Version
+## Task 2: Check Database Directories
+Check the Database Directory setting in the 19.18 and 19.19 database
+
+```
+      <copy>
+      set line 200
+      set pages 999
+      col owner format a10
+      col directory_name format a25
+      col directory_path format a50
+      select owner, directory_name , directory_path from dba_directories;
+      </copy>
+
+      Hit ENTER/RETURN to execute ALL commands.
+```
+
+| 19.18.0 Home | 19.19.0 Home |
+| :------------: | :------------: |
+|  ![check db directories in 18](./images/db-directories-18.png " ") |  ![check db directories in 19](./images/db-directories-19.png " ") |
+{: title="19.18 and 19.19 Database Directories "}
+    
+A few directories (for example **SDO_DIR_ADMIN, DBMS_OPTIM_LOGDIR...**) in the 19.19 database home do not match; they still refer to the old ORACLE_HOME directory "/u01/app/oracle/product/19/". This can be fixed calling "**utlfixdirs.sql**":
+
+```
+      <copy>
+      @$ORACLE_HOME/rdbms/admin/utlfixdirs.sql;
+      </copy>
+
+      Hit ENTER/RETURN to execute ALL commands.
+```
+
+| 19.18.0 Home | 19.19.0 Home |
+| :------------: | :------------: |
+|  n/a |  ![run utlfixdirs.sql](./images/utlfixdirs-19.png " ") |
+{: title="Fixing Database Directories in 19.19"}
+
+```
+      <copy>
+      set line 200
+      set pages 999
+      col owner format a10
+      col directory_name format a25
+      col directory_path format a50
+      select owner, directory_name , directory_path from dba_directories;
+      </copy>
+
+      Hit ENTER/RETURN to execute ALL commands.
+```
+
+| 19.18.0 Home | 19.19.0 Home |
+| :------------: | :------------: |
+|  ![check db directories](./images/db-directories-18.png " ") |  ![check for invalid objects](./images/db-directories-fixed-19.png " ") |
+{: title="19.18 and 19.19 Database Directories "}    
+
+## Task 3: Check Time Zone Version
 
 1. Latest available Time Zone Version
     ```
@@ -110,7 +164,7 @@ Execute in 19.18 and 19.19 tab:
 
 
 
-## Task 3: Check JDK version
+## Task 4: Check JDK version
 Please check whether the Release Update also included an update for JDK.
 
   ```
@@ -131,7 +185,7 @@ This is intended. You will always get the n-1 version of JDK, i.e., the version 
 
 
 
-## Task 4: Check PERL version
+## Task 5: Check PERL version
 Please check whether the Release Update also included an update for PERL. The version before patching was v5.36.0.
 
   ```
@@ -150,7 +204,7 @@ Please check whether the Release Update also included an update for PERL. The ve
 Now you see no difference. But PERL updates get delivered with Release Updates since January 2023. Hence, in this case, there was no update for 19.19.0.
 
 
-## Task 5: Opatch Checks
+## Task 6: Opatch Checks
 1. lspatches
     ```
     <copy>
@@ -183,7 +237,7 @@ Now you see no difference. But PERL updates get delivered with Release Updates s
 
 
 
-## Task 6: You are done!
+## Task 7: You are done!
 
 Congratulations from the entire Oracle Database Upgrade, Migration and Patching team. You completed the Hands-On Lab "Patch me if you can" successfully. Next time, we'll approach the Grid Infrastructure patching together. 
 
