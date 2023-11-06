@@ -145,7 +145,7 @@ NOTE: *While the installation is ongoing, please switch to the 19.18 tab and con
 
 The installation will take approximately 10 minutes. 
 
-![output runInstaller shell script](./images/run-installer-shell-output.png " ")
+![output runInstaller shell script](images/run-installer-shell-output.png " ")
 
 
 ```
