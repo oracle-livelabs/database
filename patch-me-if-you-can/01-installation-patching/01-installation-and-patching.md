@@ -206,27 +206,27 @@ Here the output:
 
 
 2. Option - use runInstaller (only execute runInstaller if you didn't execute the shell script)
-    ```
-    <copy>
-    ./runInstaller -applyRU /home/oracle/stage/ru/35042068  \
-    -applyOneOffs /home/oracle/stage/ojvm/35050341,/home/oracle/stage/dpbp/35261302,/home/oracle/stage/mrp/35333937/34340632,/home/oracle/stage/mrp/35333937/35012562,/home/oracle/stage/mrp/35333937/35037877,/home/oracle/stage/mrp/35333937/35116995,/home/oracle/stage/mrp/35333937/35225526 \
-      -silent -ignorePrereqFailure -waitforcompletion \
-        oracle.install.option=INSTALL_DB_SWONLY \
-        UNIX_GROUP_NAME=oinstall \
-        INVENTORY_LOCATION=/u01/app/oraInventory \
-        ORACLE_HOME=/u01/app/oracle/product/1919 \
-        ORACLE_BASE=/u01/app/oracle \
-        oracle.install.db.InstallEdition=EE \
-        oracle.install.db.OSDBA_GROUP=dba \
-        oracle.install.db.OSOPER_GROUP=dba \
-        oracle.install.db.OSBACKUPDBA_GROUP=dba \
-        oracle.install.db.OSDGDBA_GROUP=dba \
-        oracle.install.db.OSKMDBA_GROUP=dba \
-        oracle.install.db.OSRACDBA_GROUP=dba \
-        SECURITY_UPDATES_VIA_MYORACLESUPPORT=false \
-        DECLINE_SECURITY_UPDATES=true
-    </copy>
-    ```
+```
+<copy>
+./runInstaller -applyRU /home/oracle/stage/ru/35042068  \
+-applyOneOffs /home/oracle/stage/ojvm/35050341,/home/oracle/stage/dpbp/35261302,/home/oracle/stage/mrp/35333937/34340632,/home/oracle/stage/mrp/35333937/35012562,/home/oracle/stage/mrp/35333937/35037877,/home/oracle/stage/mrp/35333937/35116995,/home/oracle/stage/mrp/35333937/35225526 \
+  -silent -ignorePrereqFailure -waitforcompletion \
+   oracle.install.option=INSTALL_DB_SWONLY \
+   UNIX_GROUP_NAME=oinstall \
+   INVENTORY_LOCATION=/u01/app/oraInventory \
+   ORACLE_HOME=/u01/app/oracle/product/1919 \
+   ORACLE_BASE=/u01/app/oracle \
+   oracle.install.db.InstallEdition=EE \
+   oracle.install.db.OSDBA_GROUP=dba \
+   oracle.install.db.OSOPER_GROUP=dba \
+   oracle.install.db.OSBACKUPDBA_GROUP=dba \
+   oracle.install.db.OSDGDBA_GROUP=dba \
+   oracle.install.db.OSKMDBA_GROUP=dba \
+   oracle.install.db.OSRACDBA_GROUP=dba \
+   SECURITY_UPDATES_VIA_MYORACLESUPPORT=false \
+   DECLINE_SECURITY_UPDATES=true
+</copy>
+```
     ![runInstaller output ](./images/run-installer-output.png " ")
 
 Installing the patches takes about ten minutes. While the patch install is ongoing *proceed to the next lab*. You get back to this session at the end of the following lab. 
