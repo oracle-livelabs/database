@@ -146,7 +146,7 @@ NOTE: *While the installation is ongoing, please switch to the 19.18 tab and con
 The installation will take approximately 10 minutes. 
 
 Here the output:
- ![autoupgrade analyze output](./images/source-19-19-env.png " ")
+
   [CDB2] oracle@hol:/u01/app/oracle/product/1919
   $ ./runInstaller -applyRU /home/oracle/stage/ru/35042068  \
   >  -applyOneOffs /home/oracle/stage/ojvm/35050341,/home/oracle/stage/dpbp/35261302,/home/oracle/stage/mrp/35333937/34340632,/home/oracle/stage/mrp/35333937/35012562,/home/oracle/stage/mrp/35333937/35037877,/home/oracle/stage/mrp/35333937/35116995,/home/oracle/stage/mrp/35333937/35225526 \
