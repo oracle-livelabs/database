@@ -14,6 +14,9 @@ In short, human operators become extensions of the SMEs, and in this case, the O
 
 *Estimated Time:* 5 minutes
 
+[Lab 6](videohub:1_in973skw)
+
+
 ### Objectives
 
 * Have a Running and Healthy OraOperator

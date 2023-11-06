@@ -2,13 +2,14 @@
 
 ## Introduction
 
-In this lab, you will provision a new Oracle Autonomous Database (ADB) and bind to an existing one using the **OraOperator**.
+In this lab, you will bind to an existing Oracle Autonomous Database (ADB) using the **OraOperator**.
 
 *Estimated Time:* 10 minutes
 
+[Lab 7](videohub:1_wdee00m6)
+
 ### Objectives
 
-* Provision a new Oracle Autonomous Database (ADB) using the **OraOperator**
 * Bind to an existing ADB using the **OraOperator**
 
 ### Prerequisites
@@ -220,7 +221,7 @@ Now that you've defined two *Secrets* in Kubernetes, redefine the `adb-existing`
 
     Take a quick look at the syntax:
 
-    You are appending to the `adb_existing.yaml` manifest to **redefine** the `adb-existing` resource, setting the `spec.details.adminPassword` and `spec.details.wallet` keys.  Under the wallet section, you are specifying the name of a *Secret*, `adb-tns-admin`, that the OraOperator will define to to store the wallet.
+    You are appending to the `adb_existing.yaml` manifest to **redefine** the `adb-existing` resource, setting the `spec.details.adminPassword` and `spec.details.wallet` keys.  Under the wallet section, you are specifying the name of a *Secret*, `adb-tns-admin`, that the OraOperator will define to store the wallet.
 
 2. Apply the manifest:
 
@@ -230,7 +231,7 @@ Now that you've defined two *Secrets* in Kubernetes, redefine the `adb-existing`
     </copy>
     ```
 
-    ![ADB Modify](images/adb_secrets.png "ADB Modify")
+    ![ADB Modify](images/adb_modify.png "ADB Modify")
 
 ## Task 8: Review ADB Wallet Secrets
 

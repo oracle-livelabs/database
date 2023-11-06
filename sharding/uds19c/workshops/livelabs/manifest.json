@@ -1,0 +1,36 @@
+{
+  "workshoptitle": "Learn how to achieve Data Sovereignty with Oracle Globally distributed database 19c",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction",
+      "filename": "../../uds19c-intro/uds19c-intro.md"
+    },
+    {
+      "title": "Lab 1: Verify Environment",
+      "description": "Verify Environment",
+      "filename": "../../initialize-environment/uds19c-initialize-environment-green-box.md"
+    },
+    {
+      "title": "Lab 2: Explore User-Defined Sharding Topology",
+      "description": "Explore User-Defined Sharding Topology",
+      "filename": "../../uds19c-topology/uds19c-topology.md"
+    },
+    {
+      "title": "Lab 3: Sample User-Defined Sharding Schema and Data insertion",
+      "description": "Sample User-Defined Sharding Schema and Data insertion",
+      "filename": "../../uds19c-ddl-dml/uds19c-sharded-table-ddls-dmls.md"
+    },
+    {
+      "title": "Lab 4: Sample Queries to validate User-Defined Sharding Schema",
+      "description": "Sample Queries to validate User-Defined Sharding Schema",
+      "filename": "../../uds19c-queries/uds19c-queries.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}
