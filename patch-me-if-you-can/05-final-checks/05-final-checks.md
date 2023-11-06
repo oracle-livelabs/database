@@ -83,7 +83,7 @@ Check the Database Directory setting in the 19.18 and 19.19 database
 |  ![check db directories in 18](./images/db-directories-18.png " ") |  ![check db directories in 19](./images/db-directories-19.png " ") |
 {: title="19.18 and 19.19 Database Directories "}
     
-A few directories (for example **SDO_DIR_ADMIN, DBMS_OPTIM_LOGDIR...**) in the 19.19 database home do not match; they still refer to the old ORACLE_HOME directory "/u01/app/oracle/product/19/". This can be fixed calling "**utlfixdirs.sql**":
+A few directories (for example **SDO\_DIR\_ADMIN, DBMS\_OPTIM\_LOGDIR...**) in the 19.19 database home do not match; they still refer to the old ORACLE_HOME directory "/u01/app/oracle/product/19/". This can be fixed calling "**utlfixdirs.sql**":
 
 ```
       <copy>
@@ -115,6 +115,8 @@ A few directories (for example **SDO_DIR_ADMIN, DBMS_OPTIM_LOGDIR...**) in the 1
 | :------------: | :------------: |
 |  ![check db directories](./images/db-directories-18.png " ") |  ![check for invalid objects](./images/db-directories-fixed-19.png " ") |
 {: title="19.18 and 19.19 Database Directories "}    
+
+Now they match.
 
 ## Task 3: Check Time Zone Version
 

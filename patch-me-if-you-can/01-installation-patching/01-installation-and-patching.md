@@ -142,67 +142,68 @@ NOTE: *While the installation is ongoing, please switch to the 19.18 tab and con
   <summary>*run a shell script (and _only_ run this shell script if you do not want to copy/paste the complete runInstaller command)*</summary>
 ```text
 <copy>sh /home/oracle/patch/install_patch.sh</copy> 
-![runInstaller shell script output ](./images/run-installer-shell-output.png " ")
+![runInstaller shell script output](./images/run-installer-shell-output.png " ")
 
 The installation will take approximately 10 minutes. 
 
-    [CDB2] oracle@hol:/u01/app/oracle/product/1919
-    $ ./runInstaller -applyRU /home/oracle/stage/ru/35042068  \
-    >  -applyOneOffs /home/oracle/stage/ojvm/35050341,/home/oracle/stage/dpbp/35261302,/home/oracle/stage/mrp/35333937/34340632,/home/oracle/stage/mrp/35333937/35012562,/home/oracle/stage/mrp/35333937/35037877,/home/oracle/stage/mrp/35333937/35116995,/home/oracle/stage/mrp/35333937/35225526 \
-    >    -silent -ignorePrereqFailure -waitforcompletion \
-    >     oracle.install.option=INSTALL_DB_SWONLY \
-    >     UNIX_GROUP_NAME=oinstall \
-    >     INVENTORY_LOCATION=/u01/app/oraInventory \
-    >     ORACLE_HOME=/u01/app/oracle/product/1919 \
-    >     ORACLE_BASE=/u01/app/oracle \
-    >     oracle.install.db.InstallEdition=EE \
-    >     oracle.install.db.OSDBA_GROUP=dba \
-    >     oracle.install.db.OSOPER_GROUP=dba \
-    >     oracle.install.db.OSBACKUPDBA_GROUP=dba \
-    >     oracle.install.db.OSDGDBA_GROUP=dba \
-    >     oracle.install.db.OSKMDBA_GROUP=dba \
-    >     oracle.install.db.OSRACDBA_GROUP=dba \
-    >     SECURITY_UPDATES_VIA_MYORACLESUPPORT=false \
-    >     DECLINE_SECURITY_UPDATES=true
+  [CDB2] oracle@hol:/u01/app/oracle/product/1919
+  $ ./runInstaller -applyRU /home/oracle/stage/ru/35042068  \
+  >  -applyOneOffs /home/oracle/stage/ojvm/35050341,/home/oracle/stage/dpbp/35261302,/home/oracle/stage/mrp/35333937/34340632,/home/oracle/stage/mrp/35333937/35012562,/home/oracle/stage/mrp/35333937/35037877,/home/oracle/stage/mrp/35333937/35116995,/home/oracle/stage/mrp/35333937/35225526 \
+  >    -silent -ignorePrereqFailure -waitforcompletion \
+  >     oracle.install.option=INSTALL_DB_SWONLY \
+  >     UNIX_GROUP_NAME=oinstall \
+  >     INVENTORY_LOCATION=/u01/app/oraInventory \
+  >     ORACLE_HOME=/u01/app/oracle/product/1919 \
+  >     ORACLE_BASE=/u01/app/oracle \
+  >     oracle.install.db.InstallEdition=EE \
+  >     oracle.install.db.OSDBA_GROUP=dba \
+  >     oracle.install.db.OSOPER_GROUP=dba \
+  >     oracle.install.db.OSBACKUPDBA_GROUP=dba \
+  >     oracle.install.db.OSDGDBA_GROUP=dba \
+  >     oracle.install.db.OSKMDBA_GROUP=dba \
+  >     oracle.install.db.OSRACDBA_GROUP=dba \
+  >     SECURITY_UPDATES_VIA_MYORACLESUPPORT=false \
+  >     DECLINE_SECURITY_UPDATES=true
   
-    Preparing the home to patch...
-    Applying the patch /home/oracle/stage/ru/35042068...
-    Successfully applied the patch.
-    Applying the patch /home/oracle/stage/ojvm/35050341...
-    Successfully applied the patch.
-    Applying the patch /home/oracle/stage/dpbp/35261302...
-    Successfully applied the patch.
-    Applying the patch /home/oracle/stage/mrp/35333937/34340632...
-    Successfully applied the patch.
-    Applying the patch /home/oracle/stage/mrp/35333937/35012562...
-    Successfully applied the patch.
-    Applying the patch /home/oracle/stage/mrp/35333937/35037877...
-    Successfully applied the patch.
-    Applying the patch /home/oracle/stage/mrp/35333937/35116995...
-    Successfully applied the patch.
-    Applying the patch /home/oracle/stage/mrp/35333937/35225526...
-    Successfully applied the patch.
-    The log can be found at: /u01/app/oraInventory/logs/InstallActions2023-06-29_12-40-26PM/installerPatchActions_2023-06-29_12-40-26PM.log
-    Launching Oracle Database Setup Wizard...
+  Preparing the home to patch...
+  Applying the patch /home/oracle/stage/ru/35042068...
+  Successfully applied the patch.
+  Applying the patch /home/oracle/stage/ojvm/35050341...
+  Successfully applied the patch.
+  Applying the patch /home/oracle/stage/dpbp/35261302...
+  Successfully applied the patch.
+  Applying the patch /home/oracle/stage/mrp/35333937/34340632...
+  Successfully applied the patch.
+  Applying the patch /home/oracle/stage/mrp/35333937/35012562...
+  Successfully applied the patch.
+  Applying the patch /home/oracle/stage/mrp/35333937/35037877...
+  Successfully applied the patch.
+  Applying the patch /home/oracle/stage/mrp/35333937/35116995...
+  Successfully applied the patch.
+  Applying the patch /home/oracle/stage/mrp/35333937/35225526...
+  Successfully applied the patch.
+  The log can be found at: /u01/app/oraInventory/logs/InstallActions2023-06-29_12-40-26PM/installerPatchActions_2023-06-29_12-40-26PM.log
+  Launching Oracle Database Setup Wizard...
   
-    The response file for this session can be found at:
-    /u01/app/oracle/product/1919/install/response/db_2023-06-29_12-40-26PM.rsp
+  The response file for this session can be found at:
+  /u01/app/oracle/product/1919/install/response/db_2023-06-29_12-40-26PM.rsp
   
-    You can find the log of this install session at:
-     /u01/app/oraInventory/logs/InstallActions2023-06-29_12-40-26PM/installActions2023-06-29_12-40-26PM.log
+  You can find the log of this install session at:
+   /u01/app/oraInventory/logs/InstallActions2023-06-29_12-40-26PM/installActions2023-06-29_12-40-26PM.log
   
-    As a root user, execute the following script(s):
-     1. /u01/app/oracle/product/1919/root.sh
+  As a root user, execute the following script(s):
+   1. /u01/app/oracle/product/1919/root.sh
   
-    Execute /u01/app/oracle/product/1919/root.sh on the following nodes:
-     [hol]
+  Execute /u01/app/oracle/product/1919/root.sh on the following nodes:
+   [hol]
   
   
-    Successfully Setup Software.
-    [CDB2] oracle@hol:/u01/app/oracle/product/1919
-    $
+  Successfully Setup Software.
+  [CDB2] oracle@hol:/u01/app/oracle/product/1919
+  $
 ```
 </details>
+
 
 2. Option - use runInstaller (only execute runInstaller if you didn't execute the shell script)
     ```
