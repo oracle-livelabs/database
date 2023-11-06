@@ -139,7 +139,7 @@ NOTE: *While the installation is ongoing, please switch to the 19.18 tab and con
 1. Option - Shell Script
 
 <details>
-  <summary>*run a shell script (and _only_ run this shell script if you do not want to copy/paste the complete runInstaller command)*</summary>
+  <summary>*1. Option - run a shell script (and _only_ run this shell script if you do not want to copy/paste the complete runInstaller command)*</summary>
 ```text
 <copy>sh /home/oracle/patch/install_patch.sh</copy>
 
