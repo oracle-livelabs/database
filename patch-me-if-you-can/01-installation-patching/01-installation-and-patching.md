@@ -139,18 +139,17 @@ NOTE: *While the installation is ongoing, please switch to the 19.18 tab and con
 1. Option - Shell Script
 
 <details>
- <summary>*run a shell script (and _only_ run this shell script if you do not want to copy/paste the complete runInstaller command)*</summary>
+  <summary>*run a shell script (and _only_ run this shell script if you do not want to copy/paste the complete runInstaller command)*</summary>
 
   ``` text
       <copy>
       sh /home/oracle/patch/install_patch.sh
       </copy> 
- 
+
 
     ![runInstaller shell script output ](./images/run-installer-shell-output.png " ")
-  
+
     The installation will take approximately 10 minutes. 
-     
 
     [CDB2] oracle@hol:/u01/app/oracle/product/1919
     $ ./runInstaller -applyRU /home/oracle/stage/ru/35042068  \
@@ -198,7 +197,7 @@ NOTE: *While the installation is ongoing, please switch to the 19.18 tab and con
      /u01/app/oraInventory/logs/InstallActions2023-06-29_12-40-26PM/installActions2023-06-29_12-40-26PM.log
   
     As a root user, execute the following script(s):
-	   1. /u01/app/oracle/product/1919/root.sh
+     1. /u01/app/oracle/product/1919/root.sh
   
     Execute /u01/app/oracle/product/1919/root.sh on the following nodes:
      [hol]
