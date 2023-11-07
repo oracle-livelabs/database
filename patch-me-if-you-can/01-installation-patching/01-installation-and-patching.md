@@ -146,13 +146,14 @@ NOTE: *While the installation is ongoing, please switch to the 19.18 tab and con
     <copy>
     cat /home/oracle/patch/install_patch.sh
     </copy>
-
+```
     Then execute the script.
 
 ```
     <copy>
     sh /home/oracle/patch/install_patch.sh
     </copy>
+```
 
 <details>
  <summary>*Click to see the output*</summary>
