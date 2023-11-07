@@ -140,22 +140,27 @@ NOTE: *While the installation is ongoing, please switch to the 19.18 tab and con
 
 <details>
   <summary>*run a shell script (and _only_ run this shell script if you do not want to copy/paste the complete runInstaller command)*</summary>
-``` text
+```text
+    First, examine the script.
 
-First, examine the script.
+    ```
+    <copy>
+    cat /home/oracle/patch/install_patch.sh
+    </copy>
+    ```
 
-<copy>cat /home/oracle/patch/install_patch.sh</copy>
+    Then execute the script.
 
-Then execute the script.
-
-<copy>sh /home/oracle/patch/install_patch.sh</copy>
-
-The installation will take approximately 10 minutes. 
+    ```
+    <copy>
+    sh /home/oracle/patch/install_patch.sh
+    </copy>
+    ```
 
 <details>
  <summary>*Click to see the output*</summary>
 
-``` text
+  ``` text
 
   [CDB2] oracle@hol:/u01/app/oracle/product/1919
   $ ./runInstaller -applyRU /home/oracle/stage/ru/35042068  \
