@@ -228,7 +228,7 @@ Here the output:
    DECLINE_SECURITY_UPDATES=true
 </copy>
 ```
-    ![runInstaller output ](./images/run-installer-output.png " ")
+![runInstaller output ](./images/run-installer-output.png " ")
 
 Installing the patches takes about ten minutes. While the patch install is ongoing *proceed to the next lab*. You get back to this session at the end of the following lab. 
 
