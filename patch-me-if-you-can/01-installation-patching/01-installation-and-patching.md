@@ -143,11 +143,9 @@ NOTE: *While the installation is ongoing, please switch to the 19.18 tab and con
 ```text
     First, examine the script.
 
-    ```
     <copy>
     cat /home/oracle/patch/install_patch.sh
     </copy>
-    ```
 
     Then execute the script.
 
