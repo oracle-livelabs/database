@@ -59,7 +59,7 @@ This lab assumes you have:
 
     -- If sharded user (transactions) already exists drop that before re-create user
     -- drop user transactions cascade;
-    CREATE USER transactions IDENTIFIED BY ****************;
+    CREATE USER transactions IDENTIFIED BY WElcomeHome123##;
     ```
 
 2. Grant roles to the user.
@@ -84,7 +84,7 @@ This lab assumes you have:
 4. Connect as the schema user to create sharded table(s), a duplicated table and populated them with data.
 
     ```
-    connect transactions/****************@PCAT1PDB;
+    sqlplus transactions/WElcomeHome123##@PCAT1PDB;
     ```
 
 5. If sharded tables (payments and accounts) already exists, drop those before you re-create the tables.
@@ -110,7 +110,7 @@ This lab assumes you have:
     PARTITION p_shard1 VALUES
     ('USA','CAN','BRA','MEX') TABLESPACE tbs_shardspace1
     ,PARTITION p_shard2 VALUES
-    ('IND','DEU','FRA','CHN','AUS','ZAF') TABLESPACE tbs_shardspace2
+    ('IND','DEU','FRA','CHN','AUS','ZAF','JPN') TABLESPACE tbs_shardspace2
     );
     ```
 
@@ -140,7 +140,7 @@ This lab assumes you have:
     PARTITION p_shard1 VALUES
     ('USA','CAN','BRA','MEX') TABLESPACE tbs_shardspace1
     ,PARTITION p_shard2 VALUES
-    ('IND','DEU','FRA','CHN','AUS','ZAF') TABLESPACE tbs_shardspace2
+    ('IND','DEU','FRA','CHN','AUS','ZAF','JPN') TABLESPACE tbs_shardspace2
     );
     ```
 
@@ -173,6 +173,9 @@ This lab assumes you have:
     insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('ZAF',10,10,10000,sysdate);
     insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('USA',11,11,10000,sysdate);
     insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('IND',12,12,10000,sysdate);
+    insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('JPN',13,13,10000,sysdate);
+    insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('JPN',14,14,10000,sysdate);
+    insert into accounts(COUNTRY_CD, ACCOUNT_ID, USER_ID, BALANCE, LAST_MODIFIED_UTC) values ('JPN',15,15,10000,sysdate);
     commit;
     ```
 

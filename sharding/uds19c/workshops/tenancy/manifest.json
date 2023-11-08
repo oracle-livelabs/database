@@ -5,7 +5,7 @@
     {
       "title": "Introduction",
       "description": "Introduction",
-      "filename": "../../intro/uds19c-intro.md"
+      "filename": "../../uds19c-intro/uds19c-intro.md"
     },
     {
       "title": "Get Started",
@@ -32,7 +32,7 @@
     {
       "title": "Lab 4: Explore User-Defined Sharding Topology",
       "description": "Explore User-Defined Sharding Topology",
-      "filename": "../../topology/uds19c-topology.md"
+      "filename": "../../uds19c-topology/uds19c-topology.md"
     },
     {
       "title": "Lab 5: Sample User-Defined Sharding Schema and Data insertion",

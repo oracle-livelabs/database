@@ -257,5 +257,5 @@ If you selected the **Green Button** for this workshop and still have an active 
 
 ## Acknowledgements
 * **Authors** - Shailesh Dwivedi, Database Sharding PM , Vice President
-* **Contributors** - Balasubramanian Ramamoorthy , Alex Kovuru, Nishant Kaushik, Ashish Kumar, Priya Dhuriya, Richard Delval, Param Saini,Jyoti Verma, Virginia Beecher, Rodrigo Fuentes
+* **Contributors** - Balasubramanian Ramamoorthy , Alex Kovuru, Nishant Kaushik, Ashish Kumar, Priya Dhuriya, Richard Delval, Param Saini,Jyoti Verma, Virginia Beecher, Rodrigo Fuentes,  Divit Gupta
 * **Last Updated By/Date** - Priya Dhuriya, Staff Solution Engineer - July 2021

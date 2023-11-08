@@ -64,7 +64,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    connect transactions/****************@PORCL1PDB;
+    sqlplus transactions/WElcomeHome123##@PORCL1PDB;
     select count(account_id) from accounts;
     select COUNTRY_CD, count(account_id) from accounts group by COUNTRY_CD order by COUNTRY_CD;
     </copy>
@@ -73,7 +73,7 @@ This lab assumes you have:
     ![<Shard1 sharded table queries>](images/uds19c-connect-shard1-sharded-table-queries.png " ")
 
 
-4. Connect to Shard2 and run queries on the sharded table Accounts. A total of 7 accounts and 6 Countries are in Shard2.
+4. Connect to Shard2 and run queries on the sharded table Accounts. A total of 10 accounts and 7 Countries are in Shard2.
 
 
     ```
@@ -86,7 +86,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    connect transactions/****************@PORCL2PDB;
+    sqlplus transactions/WElcomeHome123##@PORCL2PDB;
     select count(account_id) from accounts;
     select COUNTRY_CD, count(account_id) from accounts group by COUNTRY_CD order by COUNTRY_CD;
     </copy>
@@ -96,7 +96,7 @@ This lab assumes you have:
 
 
 
-5. Connect to the Catalog and run cross shard queries on sharded table accounts. A total of 12 accounts and 10 countries are in the Catalog, which matches the sums for accounts (7+5=12) and countries (4+6=10) from both shards. This exercise confirms that Oracle Sharding with user-defined sharding allows you to implement Data Sovereignty use cases.
+5. Connect to the Catalog and run cross shard queries on sharded table accounts. A total of 15 accounts and 11 countries are in the Catalog, which matches the sums for accounts (5+10=15) and countries (4+7=11) from both shards. This exercise confirms that Oracle Sharding with user-defined sharding allows you to implement Data Sovereignty use cases.
 
     ```
     <copy>
@@ -108,7 +108,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    connect transactions/****************@PCAT1PDB;
+    sqlplus transactions/WElcomeHome123##@PCAT1PDB;
     select count(account_id) from accounts;
     select COUNTRY_CD, count(account_id) from accounts group by COUNTRY_CD order by COUNTRY_CD;
     </copy>
@@ -150,7 +150,7 @@ This lab assumes you have:
 1. Connect the Catalog using gsm service for proxy routing and run a cross shard query
     ```
     <copy>
-    sqlplus transactions/****************@oshard-gsm1.example.com:1522/GDS\$CATALOG.oradbcloud
+    sqlplus transactions/WElcomeHome123##@oshard-gsm1.example.com:1522/GDS\$CATALOG.oradbcloud
     </copy>
     ```
 
@@ -164,7 +164,7 @@ This lab assumes you have:
     ```
     <copy>
     -- Connect oltp_rw_svc service used with direct-routing by applications: randomly connect to a shard
-    sqlplus transactions/****************@'(DESCRIPTION=(ADDRESS=(HOST=oshard-gsm1.example.com)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=oltp_rw_svc.shardcatalog1.oradbcloud)))'
+    sqlplus transactions/WElcomeHome123##@'(DESCRIPTION=(ADDRESS=(HOST=oshard-gsm1.example.com)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=oltp_rw_svc.shardcatalog1.oradbcloud)))'
     </copy>
     ```
 
@@ -178,7 +178,7 @@ This lab assumes you have:
     ```
     <copy>
     connect oltp_rw_svc service used with direct-routing by applications: connects to shard1 using sharding_key=USA
-    sqlplus transactions/****************@'(DESCRIPTION=(ADDRESS=(HOST=oshard-gsm1.example.com)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=oltp_rw_svc.shardcatalog1.oradbcloud)(SHARDING_KEY=USA)))'
+    sqlplus transactions/WElcomeHome123##@'(DESCRIPTION=(ADDRESS=(HOST=oshard-gsm1.example.com)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=oltp_rw_svc.shardcatalog1.oradbcloud)(SHARDING_KEY=USA)))'
     </copy>
     ```
 ![<Connect GSM Global Service to shard1 database>](images/uds19c-connect-gsm-service-shard-1.png " ")
@@ -191,7 +191,7 @@ This lab assumes you have:
     ```
     <copy>
     connect oltp_rw_svc service used with direct-routing by applications: connects to shard2 using sharding_key=IND
-    sqlplus transactions/****************@'(DESCRIPTION=(ADDRESS=(HOST=oshard-gsm1.example.com)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=oltp_rw_svc.shardcatalog1.oradbcloud)(SHARDING_KEY=IND)))'
+    sqlplus transactions/WElcomeHome123##@'(DESCRIPTION=(ADDRESS=(HOST=oshard-gsm1.example.com)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=oltp_rw_svc.shardcatalog1.oradbcloud)(SHARDING_KEY=IND)))'
     </copy>
     ```
 ![<Connect GSM Global Service to shard2 database>](images/uds19c-connect-gsm-service-shard-2.png " ")
