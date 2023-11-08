@@ -1,5 +1,3 @@
-# Build a Movie Recommendation App using MySQL HeatWave Machine Learning
-
 # Introduction
 
 ![mysql heatwave](./images/mysql-heatwave-logo.jpg "mysql heatwave")
@@ -47,7 +45,7 @@ You may now **proceed to the next lab**
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering,  20November23
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2023
 
 - **Dataset** - F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets:
 History and Context. ACM Transactions on Interactive Intelligent

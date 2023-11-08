@@ -232,5 +232,5 @@ You may now **proceed to the next lab**
 ## Acknowledgements
 
 - **Author** - Perside Foster, MySQL Principal Solution Engineering
-- **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, October 2023
+- **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Nick Mader, MySQL Global Channel Enablement & Strategy Manager, Cristian Aguilar, MySQL Solution Engineering
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2023
