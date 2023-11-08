@@ -8,6 +8,8 @@ Credits: You will use scripts written by Carlos Sierra.
 
 Estimated Time: 15 minutes
 
+[](videohub:1_s7vzto6m)
+
 ### Objectives
 
 In this lab, you will:

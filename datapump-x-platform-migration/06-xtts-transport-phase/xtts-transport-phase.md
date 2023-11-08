@@ -7,6 +7,8 @@ __ATTENTION__: Make sure no active sessions/open transactions use objects in the
 
 Estimated Time: 15 minutes
 
+[](videohub:1_o5m63gr6)
+
 ### Objectives
 
 - Execute final incremental backup and restore.

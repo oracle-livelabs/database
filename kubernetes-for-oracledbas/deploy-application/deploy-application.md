@@ -8,6 +8,9 @@ The application will be the SQL Web Developer from Oracle Rest Data Services (OR
 
 *Estimated Time:* 20 minutes
 
+[Lab 8](videohub:1_7f7gm9v2)
+
+
 ### Objectives
 
 * Have a running Microservice Application connected to the Oracle Database
@@ -152,7 +155,7 @@ The ORDS configuration does not store any sensitive data, so build a *manifest f
 
 ### Liquibase ChangeLog
 
-In an ADB, the `ORDS_PUBLIC_USER` already exists for providing Rest Data Services out-of-the-box, you'll want to avoid messing with that database user.  Instead, you'll want to create a new, similar user for your application.  You can do this as part of the deployment using **SQLcl + Liquibase** inside what is known as an *initContainer*.
+In an ADB, the `ORDS_PUBLIC_USER` already exists for providing Rest Data Services out-of-the-box.  You'll want to avoid messing with that database user and instead create a new, similar user for your application.  You can do this as part of the deployment using **SQLcl + Liquibase** inside what is known as an *initContainer*.
 
 An *initContainer* is just like an regular application container, except it will run to completion and stop.  They are perfect for ensuring the database has the correct users, permissions, and objects present for the application container to use.
 
@@ -226,7 +229,7 @@ The below *ConfigMap* will create two new users in the ADB: `ORDS_PUBLIC_USER_K8
     </copy>
     ```
 
-By using a variable for the passwords, you are not exposing any sensitive information in your code.  The value for the variable will be set using environment variables in the Applications *Deployment* specification.
+By using a variable for the passwords, you are not exposing any sensitive information in your code.  The value for the variable will be set using environment variables in the Applications *Deployment* specification, which will pull the values from the *Secret* you createdenv.
 
 ## Task 5: Create the Application
 
@@ -422,7 +425,7 @@ spec:
 
 Only one *replica* was created, which translates to the single *Pod* `sqldev-web-0` in the *Namespace*.  If you think of *replica's* as an instance in a RAC database, when you only have one it is easy to route traffic to it.  However, if you have multiple instances and they can go up and down independently, ensuring High Availability, then you need something to keep track of those "Endpoints" for routing traffic.  In a RAC, this is the SCAN Listener, in a K8s cluster, this is a *Service*.
 
-1. Define the *Service* for your application, routing all traffic from port 443 to 8080 (the port the application is listening on).
+1. Define the *Service* for your application, routing all traffic from port 80 to 8080 (the port the application is listening on).
 
     The `selector` from your deployment will need to match the `selector` in the service, this is how it knows which *Pods* are valid endpoints:
 
@@ -540,6 +543,8 @@ While you could delete the individual resources manually, or by using the *manif
 
     ![Application Down](images/FourOhFour.png "Application Down")
 
+    **Note:** instead of the 404, you may experience spinning with an eventual timeout.  This is because the deleted *Ingress* resource will eventually cause the *cloud-controller-manager* to reconcile away the public IP exposing the application.
+
 You may now **proceed to the next lab**
 
 ## Learn More
@@ -553,4 +558,4 @@ You may now **proceed to the next lab**
 
 * **Authors** - [](var:authors)
 * **Contributors** - [](var:contributors)
-* **Last Updated By/Date** - John Lathouwers, July 2023
+* **Last Updated By/Date** - John Lathouwers, September 2023

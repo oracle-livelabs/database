@@ -7,6 +7,8 @@ A good practice is to start the migration some time before the cutover. Run an i
 
 Estimated Time: 15 minutes
 
+[](videohub:1_ci5d8y73)
+
 ### Objectives
 
 - Execute incremental backup and restore.

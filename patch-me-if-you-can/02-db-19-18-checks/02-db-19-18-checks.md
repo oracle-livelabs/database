@@ -8,6 +8,8 @@ You will use this lab to check several things in the 19.18 environment while the
 
 Estimated Time: 15 minutes
 
+[](videohub:1_frv1zqq6)
+
 ### Objectives
 
 Generic Checks

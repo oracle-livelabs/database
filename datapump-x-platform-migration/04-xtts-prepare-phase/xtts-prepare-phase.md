@@ -3,8 +3,9 @@
 ## Introduction
 This is the first phase in the process. You will back up the data files belonging to the listed tablespaces in the source database. Then, you can restore the data files in the target database.
 
-
 Estimated Time: 15 minutes
+
+[](videohub:1_amd4iiu7)
 
 ### Objectives
 

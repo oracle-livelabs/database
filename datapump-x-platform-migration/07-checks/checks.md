@@ -6,6 +6,8 @@ This final lab lists some checks you might perform after a migration. It also gi
 
 Estimated Time: 15 minutes
 
+[](videohub:1_zxp94b4k)
+
 ### Objectives
 
 - Export metadata using Data Pump
