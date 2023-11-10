@@ -73,7 +73,7 @@ During the execution of this workshop you will need to copy text from the worksh
 
     ![Paste text into the clipboard text box](./images/novnc-clipboard-2.png " ")
 
-*Note:* Please make sure you initialize your clipboard with step [1] shown in the screenshot above before opening the target application in which you intend to paste the text. Otherwise will find the *paste* function in the context menu grayed out when attempting to paste for the first time.
+*Note:* Please make sure you initialize your clipboard with step [1] shown in the screenshot above before opening the target application in which you intend to paste the text. Otherwise you will find the *paste* function in the context menu grayed out when attempting to paste for the first time.
     
 **IMPORTANT:** Due to the slightly cumbersome nature of copying between your host system and the NoVNC session, we recommend that you perform all of the copy/paste actions within the NoVNC session itself, as this avoids the use of the NoVNC clipboard. Alternatively, access the workshop's compute instance using SSH and copy/paste between the lab instructions displayed in your local browser and your SSH session.
 
@@ -134,7 +134,7 @@ This assumes that you already have an RSA type SSH key-pair available on the loc
     </copy>
     ```
 
-    If copy/pasting the above _example_, substitue the appropriate values for the SSH key private key file and the compute instance IP address.
+    If copy/pasting the above _example_, substitute the appropriate values for the SSH key private key file and the compute instance IP address.
     
     If you are using Putty, please refer to the guide [Generate SSH Keys](https://oracle-livelabs.github.io/common/labs/generate-ssh-key) on how to establish the connection using the *.ppk* private key.
 
@@ -146,4 +146,4 @@ You can now **proceed to the next lab**.
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
 * **Contributors** - LiveLabs Team
-* **Last Updated By/Date** - Jenny Bloom, February 2023
+* **Last Updated By/Date** - Jenny Bloom, June 2023

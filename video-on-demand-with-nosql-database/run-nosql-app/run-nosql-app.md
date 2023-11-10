@@ -7,6 +7,8 @@ the tables we created, load data, and execute queries using a GraphQL applicatio
 
 _Estimated Time:_ 16 minutes
 
+[Walkthrough Lab 04: Run the Activity Tracking application](videohub:1_0firnbxx)
+
 ### Objectives
 
 * Understand the different tables
@@ -274,4 +276,4 @@ Exit out of the Cloud Shell.  You may now **proceed to the next lab.**
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Development, April 2023
+* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Development, July 2023

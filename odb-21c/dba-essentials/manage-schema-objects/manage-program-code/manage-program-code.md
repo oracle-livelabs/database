@@ -2,15 +2,14 @@
 
 ## Introduction
 
-In this lab you will use Database Actions to validate invalid Schema objects. You will create a new PL/SQL procedure and also change the table that is referenced in the procedure.   
-Estimated Time: 30 minutes
-
-**Background**
-As a database administrator (DBA), you may be asked to revalidate schema objects that have become invalid. Schema objects (such as triggers, procedures, or views) can be invalidated when changes are made to objects on which they depend. For example, if a PL/SQL procedure contains a query on a table and you modify table columns that are referenced in the query, then the PL/SQL procedure becomes invalid. You revalidate schema objects by compiling them.
+In this lab you will use Database Actions to validate invalid Schema objects. You will create a new PL/SQL procedure and also change the table that is referenced in the procedure. As a database administrator (DBA), you may be asked to revalidate schema objects that have become invalid. Schema objects (such as triggers, procedures, or views) can be invalidated when changes are made to objects on which they depend. For example, if a PL/SQL procedure contains a query on a table and you modify table columns that are referenced in the query, then the PL/SQL procedure becomes invalid. You revalidate schema objects by compiling them.
 
 ### Objectives  
 
-Create an invalid PL/SQL procedure and validate the invalid schema objects in the procedure.
+-   Create an invalid PL/SQL procedure 
+-   Validate invalid schema objects in the procedure
+
+Estimated Time: 30 minutes
 
 ### Prerequisites
 
@@ -103,31 +102,40 @@ You can create a new procedure in your Oracle Database using Database Actions. 
 
     ![Invalid Objects](./images/invalid-objects.png " ")  
 
-    The status of the procedure is shown as INVALID.  
 
-12. Click the Selector icon and select **SQL** under Development.  
+    The status of the procedure is shown as INVALID.
 
-13. From the **Navigator** tab, select **HR** schema from the drop-down and select Procedures from the Object type drop-down list.  
+## Task 2: Validate invalid schema objects in the procedure
+
+You can validate an invalid procedure in your Oracle Database using Database Actions.
+
+1. Click the Selector icon and select **SQL** under Development.  
+
+
+2. From the **Navigator** tab, select **HR** schema from the drop-down and select Procedures from the Object type drop-down list.  
 
     You can view a list of procedures associated with the HR schema.  
 
-14. Click on the *`ADD_PO_HISTORY`* procedure.   
+3. Click on the *`ADD_PO_HISTORY`* procedure.   
+
 
     ![ADD_PO_HISTORY procedure](./images/red-cross-procedure.png " ")  
 
     You can view a red cross mark on the procedure. This indicates that the SQL statements did not compile due to an error.  
 
-15. Right click on the procedure and select Open.   
+4. Right click on the procedure and select Open.   
+
 
     ![Open procedure](./images/open-procedure.png " ")  
 
     You can view the SQL statements of the procedure in SQL editor.  
 
-16. Click the **Compile** icon in the SQL toolbar to compile the procedure.  
+5. Click the **Compile** icon in the SQL toolbar to compile the procedure.  
 
     ![Compile invalid procedure](./images/compile-invalid-procedure.png " ")  
 
-17. The Script Output of the output pane displays the following result.  
+6. The Script Output of the output pane displays the following result.  
+
 
     ![Script output](./images/script-output.png " ")  
 
@@ -137,17 +145,21 @@ You can create a new procedure in your Oracle Database using Database Actions. 
 
     The result clearly means that you need to add the column *`PO_DESCRIPTION`* back to the *`PURCHASE_ORDERS`* table to validate the *`ADD_PO_HISTORY`* procedure.  
 
-18. From the Navigator tab of the HR schema, select Tables from the Object type drop-down list.  
 
-19. Select *`PURCHASE_ORDERS`* table and right-click to select **Edit**.
+7. From the Navigator tab of the HR schema, select Tables from the Object type drop-down list.  
+
+8. Select *`PURCHASE_ORDERS`* table and right-click to select **Edit**.
+
 
     ![Edit table](./images/edit-table-again.png " ")  
 
     This opens the Table properties dialog box of the *`PURCHASE_ORDERS`* table.  
 
-20. Click the Columns pane of the dialog.  
 
-21. After you add the column back, the procedure is not displayed in the Invalid Objects widget.  
+9. Click the Columns pane of the dialog.  
+
+10. After you add the column back, the procedure is not displayed in the Invalid Objects widget.  
+
 
     > **Note:** It is not always possible to make an object valid by recompiling it. You may have to take remedial actions first. For example, if a view becomes invalid because a table that it references is deleted, then compiling the view produces an error message that indicates that the table does not exist. You cannot validate the view until you re-create the table.  
 

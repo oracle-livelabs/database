@@ -1,4 +1,4 @@
-# Working with JSON and the Duality Views
+# Create a DBMS_SEARCH index
 
 ## Introduction
 
@@ -20,7 +20,7 @@ This lab assumes you have:
 * All previous labs successfully completed
 * SQL Developer Web 23.1 or a compatible tool for running SQL statements
 
-## Task 1: Connecting to your database user
+## Task 1: Connect your database user HR using Database Actions
 
 1. Your browser should still be open, if not just open a new one. If running in a Sandbox go to Activities and then at the top click on "New Window". If Chrome is not running then click on Chrome.
 
@@ -48,7 +48,7 @@ You should then be at a screen that looks like this.
 
     ![Image alt text](images/sql-login.png " ")    
 
-## Task 2: Creating your DBMS_SEARCH index
+## Task 2: Create your DBMS_SEARCH index
 1. As you go through this workshop, we will specify click the Run button or Run Script button. The Run button runs just one SQL Statement and formats the output into a data grid. The Run Script button runs many SQL statements and spools their output. We will highlight which to use.
 
     ![Image alt text](images/run-buttons.png " ")
@@ -71,7 +71,7 @@ You should then be at a screen that looks like this.
 
 1. On the Navigator pane on the left, refresh the list of tables by clicking the circular button. You will see a number of new tables. The table called DEMO_IDX (same as our index name) is the one we are interested in. Click on the triangle next to it to open it and view its columns.
 
-    This table will contain information about every row of every table or view we add to the index. For now, it is empty (you can run "SELECT * FROM DEMO_IDX" if you wish to check).
+    This table will contain information about **every** row of **every** table or view we add to the index. For now, it is empty (you can run "SELECT * FROM DEMO_IDX" if you wish to check).
 
     Note there are a number of other tables starting with DR$DEMO_IDX. These are the underlying tables which hold the text index itself. We don't need to know the layout or contents of any of these tables.
 
@@ -96,7 +96,7 @@ Let's say we want to be able to search for info in the EMPLOYEES and JOBS tables
 
 ## Task 4: Check what data was indexed
 
-Data added from source tables is not stored in our DEMO_IDX table. Only metadata is stored there. The metadata is stored in a binary JSON column. We can look at it, but we'll need to use the json_serialize function to get the data in human-readable format.
+Data added from source tables is not stored in our DEMO\_IDX table. Only metadata is stored there. The metadata is stored in a binary JSON column. We can look at it, but we'll need to use the json_serialize function to get the data in human-readable format.
 
 1. Copy the following SQL into the worksheet and click the "Run" button.
 
@@ -110,7 +110,7 @@ Data added from source tables is not stored in our DEMO_IDX table. Only metadata
 
     ![displaying metadata](images/display-metadata.png " ")
 
-    The column is called METADATA, so it's not surprising that it doesn't contain the actual data that was indexed, but just metadata about what was indexed. The rows on view here are for the HR.EMPLOYEES table. We could, if we chose, get the metadata for the JOBS table by using JSON "dot.notation" in the where clause:
+    The column is called METADATA, so it's not surprising that it doesn't contain the actual data that was indexed, but just metadata about what was indexed. The rows on view here are for the HR.EMPLOYEES table. The metadata for an individual row is basically the "logical pointer" to identify an individual row, based on the primary key constraint of a row. We could, if we chose, get the metadata for the JOBS table by using JSON "dot.notation" in the where clause:
 
     ```
     <copy>
@@ -132,7 +132,7 @@ Data added from source tables is not stored in our DEMO_IDX table. Only metadata
     SELECT json_serialize(DBMS_SEARCH.GET_DOCUMENT('DEMO_IDX',metadata)) FROM demo_idx;
     </copy>
     ```
-    We can see the indexed data takes the form of a JSON document, where the outer element is the owner name, the next inner element is the table (or view) name, and the actual table data is nested inside that in the form "\<COLUMN NAME\>": "\<COLUMN VALUE\>"
+    We can see the indexed data takes the form of a JSON document, where the outer element is the owner name, the next inner element is the table (or view) name, and the actual table data is nested inside that in the form "COLUMN NAME": "COLUMN VALUE"
 
     ![get_document displays indexed JSON](images/get-document.png " ")
 
@@ -178,6 +178,7 @@ Views are a little more complicated to deal with - we can't just add any view. I
     create or replace view employee_jobs 
          (employee_id, 
           full_name, 
+          job_id,
           job_title,
           constraint ej_pk primary key (employee_id)
                      rely disable novalidate,
@@ -185,7 +186,7 @@ Views are a little more complicated to deal with - we can't just add any view. I
                      disable novalidate) 
     as
       select employee_id, first_name ||' '|| last_name,
-         job_title
+         e.job_id, job_title
       from employees e, jobs j
       where e.job_id = j.job_id;
     </copy>
@@ -203,10 +204,10 @@ Views are a little more complicated to deal with - we can't just add any view. I
 
 In this lab, we did the following:
 
-    * Created a DBMS_SEARCH index
-    * Added tables from our own schema
-    * Added tables from a different schema
-    * Added a view
+* Created a DBMS_SEARCH index
+* Added tables from our own schema
+* Added tables from a different schema
+* Added a view
 
 In the next lab we'll look at queries against our index.
 

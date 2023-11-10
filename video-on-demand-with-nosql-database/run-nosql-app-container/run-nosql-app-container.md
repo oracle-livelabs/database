@@ -17,6 +17,8 @@ or cloud operations, data/media processing jobs, development or test environment
 
 _Estimated Time:_ 20 minutes
 
+[Walkthrough Lab 05: Deploy the Activity Tracking application using Container Instances](videohub:1_mwp455k5)
+
 ### Objectives
 
 * Deploy the application using Container Instance
@@ -71,7 +73,7 @@ become disconnected and/or timed out. In that case, restart it.
     ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
 2. Execute the following environment setup shell script in the Cloud Shell to
-set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_COMPID`
+set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_COMPID.`
 
     ```shell
     <copy>
@@ -98,12 +100,11 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
 
     Enter **demo-vod-example-app** as the name.  Click on **select image**, and
     a new screen appears.  Choose **external registry**, and
-    enter **ghcr.io/oracle/demo-vod-example-app:latest** as image and Click **Select Image**
-    at bottom of screen.
+    enter **ghcr.io** as Registry hostname, **oracle/demo-vod-example-app** as Repository and Click **Select Image** at bottom of screen.
 
        ![Create Container Instance](images/create-container-instance-2.png)
 
-    Scroll down and add the following environment variables
+    Scroll down and add the following environment variables:
      - `NOSQL_ServiceType` as a key and `useResourcePrincipal` as a value
      - `NOSQL_REGION` as a key and the value copied in Task 2 as a value
      - `NOSQL_COMPID` as a key and the value copied in Task 2 as a value
@@ -112,21 +113,20 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
 
    Click **Next.**
 
- 3. Review and Click on create
+ 3. Review and Click on create.
 
      ![Create Deployment](images/create-container-instance-4.png)
 
- 4. Wait few second until the deployment is created - Status will change from **Creating** to **Active**
+ 4. Wait few second until the deployment is created - Status will change from **Creating** to **Active.**
 
      ![Create Deployment](images/create-container-instance-5.png)
 
-   Please copy the Public IP address
+   Please copy the Public IP address.
 
 
 ## Task 4: Read Data and Examine It
 
-1. Execute the following environment setup shell script in the Cloud Shell to
-set up your environment.
+1. Execute the following environment setup shell script in the Cloud Shell to set up your environment.
 
     ```shell
     <copy>
@@ -154,7 +154,7 @@ Execute in the Cloud Shell.
 
     This will display all the rows in the table currently without details about shows.
 
-3. Read data for a specific user using the GraphQL query `Stream($streamId: Int)`
+3. Read data for a specific user using the GraphQL query `Stream($streamId: Int).`
 
     ```shell
     <copy>
@@ -166,17 +166,18 @@ Execute in the Cloud Shell.
     </copy>
     ```
 
-5. Execute one of the reports using the GraphQL queries - For every show aired
-by the application, fetch the total watch time by all users
+5. Execute one of the reports using the GraphQL queries.
+      - For every show aired by the application, fetch the total watch time by all users
 
-    ```shell
-    <copy>
-    curl --request POST \
-    --header 'content-type: application/json' \
-    --url $IP_CI:3000 \
-    --data '{"query":"query WatchTime { watchTime { showName seasonNum length } } "}'|jq
-    </copy>
-    ```
+        ```shell
+        <copy>
+        curl --request POST \
+        --header 'content-type: application/json' \
+        --url $IP_CI:3000 \
+        --data '{"query":"query WatchTime { watchTime { showName seasonNum length } } "}'|jq
+        </copy>
+        ```
+
 Exit out of the Cloud Shell. You may now **proceed to the next lab.**
 
 ## Learn More
@@ -189,4 +190,4 @@ Exit out of the Cloud Shell. You may now **proceed to the next lab.**
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Development, April 2023
+* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Development, July 2023

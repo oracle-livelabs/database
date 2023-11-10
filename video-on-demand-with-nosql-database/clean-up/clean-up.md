@@ -6,6 +6,7 @@ This lab is finished. We will delete all resources created.
 
 _Estimated Time:_ 5 minutes
 
+[Walkthrough Lab 07: Clean Up](videohub:1_g02p3ug6)
 
 ## Task 1: Delete resources created using Cloud Shell
 
@@ -33,7 +34,7 @@ to get the Cloud Shell started.
     </copy>
     ```
 
-3. Exit from Cloud Shell
+3. Exit from Cloud Shell.
 
 ## Task 2: Delete resources created using Console
 
@@ -54,7 +55,7 @@ Click on the Test table, which will bring up the table details screen.  Hit Dele
 
    ![Delete Container Instance](./images/delete-ci.png)
 
-   Wait until the status changed from Deleting to Deleted
+   Wait until the status changed from 'Deleting' to 'Deleted'.
 
    ![Delete Container Instance](./images/delete-ci-2.png)
 
@@ -75,10 +76,10 @@ Click on the Test table, which will bring up the table details screen.  Hit Dele
 
 4.  When the destroy task will show Succeeded, return to the stack page.
 
-5. Click on more actions and delete stack  
+5. Click on more actions and delete stack.  
 
     ![Delete Stack](./images/destroy-stack-2.png)
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management and Michael Brey, Director, NoSQL Product Development
-* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, April 2023
+* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, July 2023

@@ -76,7 +76,7 @@ In this lab, you will:
 <if type="livelabs">
     - __Choose a compartment__ - Use the default compartment that includes your user id.
 </if>
-    - __Display Name__ - Enter a memorable name for the database for display purposes. For this lab, use __TEXTDB__.
+    - __Display Name__ - Enter a memorable name for the database for display purposes. For this lab, use __XMLDB__.
 <if type="freetier">
     - __Database Name__ - Use letters and numbers only, starting with a letter. Maximum length is 14 characters. (Underscores not initially supported.) For this lab, use __TEXTDB__.
 
@@ -96,7 +96,7 @@ In this lab, you will:
 
 5. Choose a deployment type: Select the deployment type for your database from the choices:
 
-    - __Shared Infrastructure__ - For this lab, choose __Shared Infrastructure__ as the deployment type.
+    - __Serverless__ - For this lab, choose __Serverless__ as the deployment type.
     - __Dedicated Infrastructure__ - Alternatively, you could have chosen Dedicated Infrastructure as the deployment type.
 
     ![Choose a deployment type.](./images/deployment-type.png " ")

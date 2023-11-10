@@ -37,10 +37,10 @@ The following figure shows a sample IM column store. The database stores the sh.
 ## Learn More
 
 Database In-Memory Channel
-<a href="https://www.youtube.com/channel/UCSYHgTG68nrHa5aTGfFH4pA">![query image](./images/inmem.png " ") </a>
+[YouTube video](youtube:UCSYHgTG68nrHa5aTGfFH4pA)
 
 Oracle Database Product Management Videos on In-Memory
-<a href="https://www.youtube.com/channel/UCr6mzwq_gcdsefQWBI72wIQ/search?query=in-memory">![query image](./images/youtube.png " ") </a>
+[YouTube video](youtube:UCr6mzwq_gcdsefQWBI72wIQ) 
 
 You may now **proceed to the next lab**.
 

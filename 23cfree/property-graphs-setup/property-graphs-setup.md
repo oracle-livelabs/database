@@ -7,6 +7,11 @@ In this lab, we'll be downloading materials and setting up the necessary tools r
 Estimated Time: 5 minutes
 
 
+<if type="livelabs">
+Watch the video below for a quick walk-through of the lab. 
+[Change password](videohub:1_lvc3vcko)
+</if>
+
 ### Objectives
 
 In this lab, you will:
@@ -29,14 +34,15 @@ This lab assumes you have:
 
     ![Access Terminal through activities](images/activities-terminal.png)
 
-2. Go into the right directory.
+2. Go into this directory.
+
+    **NOTE:** You must ensure to run this command, otherwise you will be downloading/unzipping files to the wrong location.
+
 
     ```
     $ <copy>cd ~/examples</copy>
     ```
-
-    ![Open directory](images/directory.png)
-
+    
 3. Pull down the materials for setup.
 
     ```
@@ -55,7 +61,7 @@ This lab assumes you have:
 
     ![Unzip the file](images/unzip2.png)
 
-4. Remove the remaining zip file after you've unzpped it.
+4. Remove the remaining zip file after you've unzipped it.
 
     ```
     $ <copy>rm -rf 23cfree-property-graph.zip</copy>
@@ -67,56 +73,49 @@ This lab assumes you have:
 
 ## Task 2: Open SQL Developer
 
-1. Get into the correct directory to open SQL Developer.
+1. Run the command to start up SQL Developer.
 
     ```
-    $ <copy>cd /opt/sqldeveloper/</copy>
+    $ <copy>sqldeveloper</copy>
     ```
-
-    ![Open SQL developer](images/sql-directory.png)
-
-2. Run the command to start up SQL Developer.
-
-    ```
-    $ <copy>./sqldeveloper.sh</copy>
-    ```
+    ![Command to start SQL](images/sql-open.png)
 
     ![Command to start SQL](images/startup-sql.png)
 
-3. On the left side menu, you'll see hol23c_freepdb1 underneath Oracle Connections. Double click it to open the connection.
+2. On the left side menu, you'll see hol23c_freepdb1 underneath Oracle Connections. Double click it to open the connection.
 
 
     ![Open the connection](images/hol23c-connection.png)
 
-4. Fill out the connection information with your password. The default password we will be using throughout this lab is Welcome123. If you have changed yours, please use that one. After you click okay, you should be connected to your user.
+3. Fill out the connection information with your password. The default password we will be using throughout this lab is Welcome123. If you have changed yours, please use that one. After you click okay, you should be connected to your user.
 
     ![Login information](images/login-connection.png)
 
-5. Click File -> Open
+4. Click File -> Open
 
     ![Opening file](images/file-open.png)
 
-6. Click Home -> examples -> graph
+5. Click Home -> examples -> graph
 
     ![Open graph](images/home-examples-graph.png)
 
-7. Open the CreateKeys.sql.
+6. Open the CreateKeys.sql.
 
     ![Open the sql file](images/open-createkeys.png)
 
-8. Click the button that shows a document with the small green play button on it to run the whole script. If it asks you to select a connection in a popup window, choose hol23c_freepdb1 from the drop down and then click OK.
+7. Click the button that shows a document with the small green play button on it to run the whole script. If it asks you to select a connection in a popup window, choose hol23c_freepdb1 from the drop down and then click OK.
 
     ![Run script with play button](images/play-button.png)
 
-9. Scroll through the output to see that the data has been loaded. Disclaimer: If you see error, property graph does not exist, disregard it and move forward. 
+8. Scroll through the output to see that the data has been loaded. Disclaimer: If you see error, property graph does not exist, disregard it and move forward. 
 
     ![Data output and disregard error](images/error-disregard.png)
 
-10. There should be about 5000 rows loaded into BANK\_TRANSFERS and 1000 rows loaded in BANK\_ACCOUNTS.
+9. There should be about 5000 rows loaded into BANK\_TRANSFERS and 1000 rows loaded in BANK\_ACCOUNTS.
 
     ![Shows the 5000 and 1000 rows](images/data-loaded.png)
 
-11. Your schema setup is now complete.
+10. Your schema setup is now complete.
 
 
 

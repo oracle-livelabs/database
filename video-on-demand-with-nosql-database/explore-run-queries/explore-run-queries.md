@@ -9,6 +9,8 @@ the tables you created, and execute queries using OCI Console.
 
 _Estimated Time:_ 20 minutes
 
+[Walkthrough Lab 06:  Explore Data, Run Queries](videohub:1_tx19uuiy)
+
 ### Objectives
 
 * Writing and optimizing queries over nested array
@@ -30,7 +32,7 @@ Click the **stream_acct** table. Under **Resources**, click **Indexes**.
 The list of indexes already created in the table is listed.
 ![list-indexes](./images/list-indexes.png)
 
-2. Click on `Add Index` Button
+2. Click on `Add Index` button.
 
 3. Create the index `idx_country_showid_date` using the following information.
 
@@ -41,7 +43,7 @@ The list of indexes already created in the table is listed.
   info|shows[].seriesInfo[].episodes[].date|String
   {: title="Index parameters"}
 
-  See the animated gif below with details on how to create the index
+  See the animated gif below with details on how to create the index.
 
   ![crtind-country-showid-date](./images/crtind-country-showid-date.gif)
 
@@ -55,7 +57,7 @@ The list of indexes already created in the table is listed.
   info|shows[].genres[]|String
   {: title="Index parameters"}
 
-  See the animated gif below with details on how to create the index
+  See the animated gif below with details on how to create the index.
 
   ![crtind-country-genre](./images/crtind-country-genre.gif)
 
@@ -131,8 +133,7 @@ Although Oracle NoSQL supports unnesting (but not subqueries), it also includes 
   **Indexes used:**
 
     Both the above queries uses the `idx_country_showid_date` index. Both the query conditions are pushed to the index. In fact, the index is “covering” each query, i.e., it contains all the info needed by the query, and as a
-    result, no table rows are scanned during execution. Click [Query Optimization ](https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/query-optimization.html) for more examples and details about
-    how indexes are used by queries.
+    result, no table rows are scanned during execution. Click [Query Optimization ](https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/query-optimization.html) for more examples and details about how indexes are used by queries.
 
   **Query Plan:**
 
@@ -262,7 +263,7 @@ Although Oracle NoSQL supports unnesting (but not subqueries), it also includes 
 
   ![query4a-plan](./images/query4a-plan.png)
 
-  Two more things are worth mentioning here.
+  Two more things are worth mentioning here:
 
     * The query could have benefited by an index on all three fields: country, genre, and episode date. If such an index existed, all the query conditions could be pushed to the index. However, you cannot create such an index as all the arrays indexed must be nested into each other. Here the genres arrays and the episodes arrays do not satisfy this constraint.
     * The expression `exists $element.genres[$element in ("french", "danish")]` can been rewritten in one of the following ways:
