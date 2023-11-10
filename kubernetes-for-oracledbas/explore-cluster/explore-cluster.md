@@ -6,6 +6,9 @@ In this lab you will explore the the Kubernetes Cluster.  You've already seen th
 
 *Estimated Time:* 10 minutes
 
+[Lab 5](videohub:1_p9cufsw2)
+
+
 ### Objectives
 
 * Understand the Core Components of Kubernetes

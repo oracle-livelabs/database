@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Analyze data at scale in object storage with MySQL HeatWave Lakehouse",
+  "workshoptitle": "Analyze Data at Web Scale in Object Store with MySQL HeatWave Lakehouse",
     "help": "livelabs-help-oci_us@oracle.com",
     "tutorials": [
         {
@@ -11,11 +11,11 @@
         {
           "title": "Get Started",
           "description": "This is the prerequisites for customers using Free Trial and Paid tenancies. The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
-          "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/cloud-login/event-register-free-tier-account.md"
+          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
         },
 
         {
-          "title": "Lab 1: Create Compartment, VCN and MySQL HeatWave DB System while loading DB Data",
+          "title": "Lab 1: Create Compartment, VCN and MySQL HeatWave DB ",
           "filename": "../../create-heatwave-vcn-db/create-heatwave-vcn-db.md"
         },
 
@@ -62,7 +62,11 @@
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-            "filename":"https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/need-help/need-help-freetier.md"
+            "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+        },
+
+        {   "title": "Oracle CloudWorld 2023 - Support", 
+            "filename": "https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md" 
         }
     ]
 }

@@ -1,7 +1,7 @@
 # Update XML content
 
 ## Introduction
-This lab will use the SQL Workshop in Database Actions from the Autonomous Transaction Processing page. In this lab, we will explore XQuery to update XML content in Oracle XML DB. XQuery is one of the main ways that you interact with XML data in Oracle XML DB. It is the W3C language designed for querying and updating XML data. 
+This lab will use the SQL Workshop in Database Actions from the Autonomous Transaction Processing page. In this lab, we will explore XQuery to update and manipulate XML content in Oracle XML DB. XQuery is one of the main ways that you interact with XML data in Oracle XML DB. It is the W3C language designed for querying and updating XML data. 
 
 The support for the XQuery Language is provided through a native implementation of SQL/XML functions: XMLQuery, XMLTable, XMLExists, and XMLCast. These SQL/XML functions are defined by the SQL/XML standard as a general interface between the SQL and XQuery languages.
 
@@ -45,13 +45,13 @@ The W3C XQuery link: [W3C Xquery] (https://www.w3.org/TR/xquery-31/)
 SQL/XML functions, XMLQuery, XMLTable, XMLExists, and XMLCast, are defined by the SQL/XML standard as a general interface between SQL and XQuery languages. Using these functions, you can construct XML data using relational data, query relational data as if it were XML data, and construct relational data from XML data.
 
 Here is a short overview of these SQL/XML functions:
--	XMLQuery - Use this function to construct or query XML data. It takes an XQuery expression as an argument and returns the result of evaluating the XQuery expression, as an XMLType instance. 
+-	XMLQuery - Use this function to construct or query XML data. It takes an XQuery expression as an argument and returns the result of evaluating the XQuery expression, as an XMLType instance. (Example in Task 4.2)
 
 -	XMLTable - Use this function XMLTable to decompose the result of an XQuery-expression evaluation into the relational rows and columns of a new, virtual table. You can insert this data into a pre-existing database table, or you can query it using SQL — in a join expression, for example. 
 
--	XMLExists - Use this function to check whether a given XQuery expression returns a non-empty XQuery sequence. If so, the function returns TRUE. Otherwise, it returns FALSE. 
+-	XMLExists - Use this function to check whether a given XQuery expression returns a non-empty XQuery sequence. If so, the function returns TRUE. Otherwise, it returns FALSE. (Example in Task 4.2)
 
--	XMLCast - Use this function to cast an XQuery value to a SQL data type. 
+-	XMLCast - Use this function to cast an XQuery value to a SQL data type. (Example in Task 4.5)
 
 Here is the link for more information: [XQL/XML functions] (https://docs.oracle.com/en/database/oracle/oracle-database/21/adxdb/xquery-and-XML-DB.html#GUID-4805CF1C-A00D-4B88-AF2E-00A9DB6F3392)
 
