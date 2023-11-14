@@ -30,7 +30,7 @@ In this lab, you will be guided through the following tasks:
 
 1. Download the MovieHub application template:
 
-    Click on this link to **Download file** [MovieHub.zip](https://objectstorage.us-phoenix-1.oraclecloud.com/p/M8ATklaS9Mi7ajFniEOXfjkZkrlYh8z1arC3VQJzTzkrPYeVpTG-LrCbtkO_8Al4/n/idazzjlcjqzj/b/bucket-images/o/MovieHub.zip) to your local machine
+    Click on this link to **Download file** [MovieHub.zip](https://objectstorage.us-phoenix-1.oraclecloud.com/p/p_59Wj-TSoegriKLewLSQEC3T7IBIkCllrs5ztNZ5TDvtbLGSu2RR4pH6u8oQ8J6/n/idazzjlcjqzj/b/bucket-images/o/MovieHub_V2.zip) to your local machine
 
 ## Task 2: Import the sample application - MovieHub
 
