@@ -17,12 +17,7 @@
       "filename": "../../run-lra-app/run-lra-app.md"
     },
     {
-      "title": "Lab 3: Provision Autonomous Databases for Use as resource manager",
-      "type": "sandbox",
-      "filename": "../../adb-provision/adb-provision.md"
-    },
-    {
-      "title": "Lab 4: Run an XA sample application",
+      "title": "Lab 3: Run an XA sample application",
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {
