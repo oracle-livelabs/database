@@ -1,23 +1,23 @@
-# Run an LRA Sample Application
+# Run Travel Agent App which Uses LRA
 
 ## Introduction
 
-Run a sample application that uses the Long Running Action (LRA) transaction protocol to book a trip and understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate the transactions. Using samples is the fastest way for you to get familiar with MicroTx.
-The sample application code is available in the MicroTx distribution. The MicroTx library files are already integrated with the sample application code.
+Run a Travel Agent application that uses the Long Running Action (LRA) transaction protocol to book a trip and understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate the transactions. Using samples is the fastest way for you to get familiar with MicroTx.
+Code for the Travel Agent application is available in the MicroTx distribution. The MicroTx library files are already integrated with the application code.
 
 Estimated Time: *10 minutes*
 
 Watch the video below for a quick walk-through of the lab.
-[Run an LRA Sample Application](videohub:1_0g2khxyc)
+[Run the Travel Agent App Using LRA](videohub:1_0g2khxyc)
 
-### About LRA Sample Application
+### About the Travel Agent Application
 
-The sample application demonstrates how you can develop microservices that participate in LRA transactions while using MicroTx to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and a flight ticket. Only when you provide approval to confirm the provisional booking, the booking of the hotel room and flight ticket is confirmed. If you cancel the provisional booking, the hotel room and flight ticket that was blocked is released and the booking is canceled. The flight service in this example allows only two confirmed bookings by default. To test the failure scenario, the flight service sample app rejects any additional booking requests after two confirmed bookings. This leads to the cancellation (compensation) of a provisionally booked hotel within the trip and the trip is not booked.
+The Travel Agent  application demonstrates how you can develop microservices that participate in LRA transactions while using MicroTx to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and a flight ticket. Only when you provide approval to confirm the provisional booking, the booking of the hotel room and flight ticket is confirmed. If you cancel the provisional booking, the hotel room and flight ticket that was blocked is released and the booking is canceled. The flight service in this example allows only two confirmed bookings by default. To test the failure scenario, the flight service sample app rejects any additional booking requests after two confirmed bookings. This leads to the cancellation (compensation) of a provisionally booked hotel within the trip and the trip is not booked.
 
 The following figure shows a sample LRA application, which contains several microservices, to demonstrate how you can develop microservices that participate in LRA transactions.
 ![Microservices in sample LRA application](./images/lra-sample-app.png)
 
-For more details, see [About the Sample LRA Application](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/set-sample-applications.html#GUID-C5332159-BD13-4210-A02E-475107919FD9) in the *Transaction Manager for Microservices Developer Guide*.
+For more details, see [About the Sample LRA Application](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmdg/set-sample-applications.html#GUID-C5332159-BD13-4210-A02E-475107919FD9) in the *Transaction Manager for Microservices Developer Guide*.
 
 ### Objectives
 
@@ -26,9 +26,9 @@ In this lab, you will:
 * Configure Minikube
 * Start a tunnel between Minikube and MicroTx
 * Deploy Kiali and Jaeger in your minikube cluster (Optional)
-* Run the LRA sample application
+* Run the Travel Agent application
 * View service graph of the mesh and distributed traces to track requests (Optional)
-* View source code of the sample application (Optional)
+* View source code of the Travel Agent application (Optional)
 
 ### Prerequisites
 
@@ -49,7 +49,7 @@ This lab assumes you have:
 
 ## Task 1: Configure Minikube
 
-Follow the instructions in this section to configure Minikube, and then run a sample application.
+Follow the instructions in this section to configure Minikube, and then run the Travel Agent application.
 
 1. Click **Activities** in the remote desktop window to open a new terminal.
 
@@ -136,7 +136,7 @@ Before you start a transaction, you must start a tunnel between Minikube and Mic
 ## Task 3: Deploy Kiali and Jaeger in the cluster (Optional)
 This optional task lets you deploy Kiali and Jaeger in the minikube cluster to view the service mesh graph and enable distributed tracing.
 Distributed tracing enables tracking a request through service mesh that is distributed across multiple services. This allows a deeper understanding about request latency, serialization and parallelism via visualization.
-You will be able to visualize the service mesh and the distributed traces after you have run the sample application in the following task.
+You will be able to visualize the service mesh and the distributed traces after you have run the Travel Agent application in the following task.
 The following commands can be executed to deploy Kiali and Jaeger. Kiali requires prometheus which should also be deployed in the cluster.
 
 1. Deploy Kiali.
@@ -180,23 +180,23 @@ The following commands can be executed to deploy Kiali and Jaeger. Kiali require
    An output will show a URL on which you can access the jaeger dashboard in a browser tab:
    http://localhost:16686
 
-## Task 4: Run the LRA sample application
+## Task 4: Run the Travel Agent application
 
-Run the sample LRA application to book a hotel room and flight ticket.
+Run the Travel Agent application to book a hotel room and flight ticket.
 
 1. Run the Trip Client application.
 
     ```text
     <copy>
-    cd /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/trip-client
+    cd /home/oracle/OTMM/otmm-23.4.1/samples/lra/lrademo/trip-client
     java -jar target/trip-client.jar
     </copy>
     ```
 
     The Trip Booking Service console is displayed.
 
-2. Type **y** to confirm that you want to run the LRA sample application, and then press Enter.
-The sample application provisionally books a hotel room and a flight ticket and displays the details of the provisional booking.
+2. Type **y** to confirm that you want to run the Travel Agent application, and then press Enter.
+The Travel Agent application provisionally books a hotel room and a flight ticket and displays the details of the provisional booking.
 
 3. Type **y** to confirm the provisional booking, and then press Enter.
 
@@ -247,12 +247,12 @@ To visualize what happens behind the scenes and how a trip booking request is pr
 5. Select one of the traces to view.
 ![Jaeger Trace for Confirmation Step](images/jaeger-trace-confirm-cancel.png)
 
-## Task 6: View source code of the sample application (Optional)
-The source code of the sample application is present in folder: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo
-- Trip Service Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/trip-manager
-- Hotel Service Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/hotel
-- Flight Service Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/flight
-- Trip Client Source code: /home/oracle/OTMM/otmm-22.3/samples/lra/lrademo/trip-client 
+## Task 6: View source code of the Travel Agent application (Optional)
+The source code of the Travel Agent application is present in folder: /home/oracle/OTMM/otmm-23.4.1/samples/lra/lrademo
+- Trip Service Source code: /home/oracle/OTMM/otmm-23.4.1/samples/lra/lrademo/trip-manager
+- Hotel Service Source code: /home/oracle/OTMM/otmm-23.4.1/samples/lra/lrademo/hotel
+- Flight Service Source code: /home/oracle/OTMM/otmm-23.4.1/samples/lra/lrademo/flight
+- Trip Client Source code: /home/oracle/OTMM/otmm-23.4.1/samples/lra/lrademo/trip-client
 
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files. To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
 
@@ -261,7 +261,7 @@ You may now **proceed to the next lab** to run a sample XA application. If you d
 
 ## Learn More
 
-* [Develop Applications with LRA](https://doc.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/develop-lra-applications.html#GUID-63827BB6-7993-40B5-A753-AC42DE97F6F4)
+* [Develop Applications with LRA](https://doc.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmdg/develop-lra-applications.html#GUID-63827BB6-7993-40B5-A753-AC42DE97F6F4)
 
 ## Acknowledgements
 
