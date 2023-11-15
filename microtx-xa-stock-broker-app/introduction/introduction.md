@@ -25,13 +25,12 @@ The following figure shows the various microservices in the Bank and Stock-Tradi
 
 The service must meet ACID requirements, so withdraw amount, transfer amount, deposit stocks, sell stocks, debit amount, or credit amount are called in the context of an XA transaction.
 
-Estimated Workshop Time: 1 hours 30 minutes
+Estimated Workshop Time: 62 minutes
 
 ### Objectives
 
 In this workshop, you will learn how to:
 
-* Provision Oracle Autonomous Database instances and use them as resource managers for microservices.
 * Configure the required properties so that MicroTx can connect to the resource manager and microservices.
 * Include the MicroTx client libraries in your application to configure your Java application as a transaction initiator service. A transaction initiator service starts and ends a transaction.
 * Include the MicroTx client libraries in your application to configure your Java application as a transaction participant. A transaction participant service only joins the transaction. They do not initiate a transaction.
@@ -42,6 +41,7 @@ In this workshop, you will learn how to:
 
 This lab assumes you have:
 - An Oracle Cloud account
+- 4 OCPU and 24 GB memory available in your Oracle Cloud account to run the Bank and Stock-Trading application.
 
 Let's begin! If you need to create an Oracle Cloud account, click **Get Started** in the **Contents** menu on the left. Otherwise, if you have an existing account, click **Lab 1**.
 
@@ -52,6 +52,6 @@ Let's begin! If you need to create an Oracle Cloud account, click **Get Started*
 
 ## Acknowledgements
 
-* **Author** - Sylaja Kannan, Principal User Assistance Developer
-* **Contributors** - Brijesh Kumar Deo
-* **Last Updated By/Date** - Sylaja Kannan, July 2023
+* **Author** - Sylaja Kannan, Consulting User Assistance Developer
+* **Contributors** - Brijesh Kumar Deo and Bharath MC
+* **Last Updated By/Date** - Sylaja Kannan, November 2023

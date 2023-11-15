@@ -13,11 +13,11 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
     },
     {
-      "title": "Lab 1: Run an LRA sample application",
+      "title": "Lab 1: Run Travel agent app which uses LRA",
       "filename": "../../run-lra-app/run-lra-app.md"
     },
     {
-      "title": "Lab 2: Run an XA sample application",
+      "title": "Lab 2: Run Transfer app which uses XA",
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {

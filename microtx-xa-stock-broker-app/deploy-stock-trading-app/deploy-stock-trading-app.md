@@ -6,7 +6,7 @@ The Bank and Stock-Trading application contains several microservices that inter
 
 To deploy the application, you must build each microservice as a container image and provide the deployment details in a YAML file.
 
-Estimated Time: 20 minutes
+Estimated Time: 12 minutes
 
 ### Objectives
 
@@ -14,7 +14,7 @@ In this lab, you will:
 
 * Configure Minikube and start a Minikube tunnel
 * Configure Keycloak
-* Build container images for each microservice in the Bank and Stock-Trading application. After building the container images, the images are available in your Minikube container registry.
+* Build container images for the Stock Broker microservice.
 * Update the `values.yaml` file, which contains the deployment configuration details for the Bank and Stock-Trading application.
 * Install the Bank and Stock-Trading application. While installing the application, Helm uses the configuration details you provide in the `values.yaml` file.
 * (Optional) Deploy Kiali and Jaeger in your Minikube cluster
@@ -29,7 +29,6 @@ This lab assumes you have:
     * Lab 1: Prepare setup
     * Lab 2: Set Up the Environment
     * Lab 3: Integrate MicroTx Client Libraries with the Stock Broker Microservice
-    * Lab 4: Provision Autonomous Databases for Use as Resource Manager
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
   ```
@@ -42,15 +41,7 @@ This lab assumes you have:
 
 Before you start a transaction, you must start a Minikube tunnel.
 
-1. Ensure that the minimum required memory and CPUs are available for Minikube.
-
-    ```
-    <copy>
-    minikube config set memory 32768
-    </copy>
-    ```
-
-2. Start Minikube.
+1. Start Minikube.
 
     ```
     <copy>
@@ -76,7 +67,7 @@ Before you start a transaction, you must start a Minikube tunnel.
     </copy>
     ```
 
-    From the output note down the value of `EXTERNAL-IP`, which is the external IP address of the Istio ingress gateway. You will provide this value in the next step.
+    From the output note down the value of `EXTERNAL-IP`, which is the external IP address of the Istio ingress gateway. You will provide this value in the next step. If the `EXTERNAL-IP` is in the `pending` state, ensure that the minikube tunnel is running before proceeding with the next steps.
 
     **Example output**
 
@@ -114,15 +105,24 @@ The Bank and Stock-Trading Application console uses Keycloak to authenticate use
 
     Let's consider that the external IP in the above example is 198.51.100.1 and the IP address is 8080.
 
-2. Sign in to Keycloak. In a browser, enter the IP address and port number that you have copied in the previous step. The following example provides sample values. Provide the values based on your environment.
+2. Run the following command to run the `reconfigure-keycloak.sh` script from the `$HOME` directory
+
+    ```
+    <copy>
+    cd $HOME
+    sh reconfigure-keycloak.sh
+    </copy>
+    ```
+
+3. Sign in to Keycloak. In a browser, enter the IP address and port number that you have copied in the previous step. The following example provides sample values. Provide the values based on your environment.
 
     ```
     http://198.51.100.1:8080
     ```
 
-3. Click **Administration Console**.
+4. Click **Administration Console**.
 
-4. Sign in to Keycloak with the initial administrator username `admin` and password `admin`. After logging in, reset the password for the `admin` user. For information about resetting the password, see the Keycloak documentation.
+5. Sign in to Keycloak with the initial administrator username `admin` and password `admin`. After logging in, reset the password for the `admin` user. For information about resetting the password, see the Keycloak documentation.
 
 6. Select the **MicroTx-BankApp** realm, and then click **Users** to view the list of users in the `MicroTx-BankApp` realm. The `MicroTx-BankApp` realm is preconfigured with these default user names.
    ![Dialog box to view the list of Users](./images/keycloak-users.png)
@@ -134,22 +134,18 @@ The Bank and Stock-Trading Application console uses Keycloak to authenticate use
 
     Details of the `microtx-bankapp` client are displayed.
 
-9. In the **Settings** tab, under **Access settings**, enter the external IP address of Istio ingress gateway for the **Root URL**, **Valid redirect URIs**, **Valid post logout redirect URIs**, and **Admin URL** fields. Provide the IP address of Istio ingress gateway that you have copied earlier.
-    ![Access Settings group in the Settings tab](./images/keycloak-client-ip.png)
+9. In the **Settings** tab, under **Access settings**, verify that the external IP address of Istio ingress gateway is available in the **Root URL**, **Valid redirect URIs**, **Valid post logout redirect URIs**, and **Admin URL** fields.
 
-10. Click **Save**.
-
-11. Click the **Credentials** tab, and then note down the value of the **Client-secret**. You'll need to provide this value later.
+10. Click the **Credentials** tab, and then note down the value of the **Client-secret**. You'll need to provide this value later.
     ![Access Settings group in the Settings tab](./images/keycloak-client-secret.png)
 
-12. Click **Realm settings**, and then in the **Frontend URL** field of the **General** tab, enter the external IP address and port of the Keycloak server which you have copied in a previous step. For example, `http://198.51.100.1:8080`.
-    ![General Realm Settings](./images/keycloak-url.png)
+11. Click **Realm settings**, and then in the **Frontend URL** field of the **General** tab, verify that the values provided match the external IP address and port of the Keycloak server which you have copied in a previous step. For example, `http://198.51.100.1:8080`.
 
-13. In the **Endpoints** field, click the **OpenID Endpoint Configuration** link. Configuration details are displayed in a new tab.
+12. In the **Endpoints** field, click the **OpenID Endpoint Configuration** link. Configuration details are displayed in a new tab.
 
-14. Note down the value of the **issuer** URL. It is in the format, `http://<keycloak-ip-address>:<port>/realms/<name-of-realm-you-have-created>`. For example, `http://198.51.100.1:8080/realms/MicroTx-Bankapp`. You'll need to provide this value later.
+13. Note down the value of the **issuer** URL. It is in the format, `http://<keycloak-ip-address>:<port>/realms/<name-of-realm-you-have-created>`. For example, `http://198.51.100.1:8080/realms/MicroTx-Bankapp`. You'll need to provide this value later.
 
-15. Click **Save**.
+14. Click **Save**.
 
 ## Task 3: Provide Access Details in the values.yaml File
 
@@ -157,7 +153,7 @@ The folder that contains the Bank and Stock-Trading application code also contai
 
 To provide the configuration and environment details in the `values.yaml` file:
 
-1. Open the `values.yaml` file, which is in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts` folder.
+1. Open the `values.yaml` file, which is in the `/home/oracle/microtx/otmm-23.4.1/samples/xa/java/bankapp/Helmcharts` folder.
 
 2. Enter values that you have noted down for the following fields under `security` in `UserBanking`.
 
@@ -171,50 +167,15 @@ To provide the configuration and environment details in the `values.yaml` file:
 
 ## Task 4: Build Container Images for Each Microservice
 
-The code for the Bank and Stock-Trading application is available in the installation bundle in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp` folder. The container image for the User Banking service is pre-built and available for your use. Build container images for all the other microservices in the Bank and Stock-Trading application.
+The code for the Bank and Stock-Trading application is available in the installation bundle in the `/home/oracle/microtx/otmm-23.4.1/samples/xa/java/bankapp` folder. The container image for the User Banking, Branch Banking, Core Banking services are pre-built and available for your use. Build the container image only for the Stock Broker service.
 
-To build container images for each microservice in the sample:
+To build container image for the Stock Broker service:
 
-1. Run the following commands to build the container image for the Branch Banking service.
-
-    ```
-    <copy>
-    cd /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/BranchBanking
-    </copy>
-    ```
+1. Run the following commands to build the Docker image for the Stock Broker service.
 
     ```
     <copy>
-    minikube image build -t branch-banking:1.0 .</copy>
-    ```
-
-   When the image is successfully built, the following message is displayed.
-
-   **Successfully tagged branch-banking:1.0**
-
-2. Run the following commands to build the container image for the Core Banking service.
-
-    ```
-    <copy>
-    cd /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/CoreBanking
-    </copy>
-    ```
-
-    ```
-    <copy>
-    minikube image build -t core-banking:1.0 .
-    </copy>
-    ```
-
-   When the image is successfully built, the following message is displayed.
-
-   **Successfully tagged core-banking:1.0**
-
-3. Run the following commands to build the Docker image for the Stock Broker service.
-
-    ```
-    <copy>
-    cd /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker
+    cd /home/oracle/microtx/otmm-23.4.1/samples/xa/java/bankapp/StockBroker
     </copy>
     ```
 
@@ -228,7 +189,7 @@ To build container images for each microservice in the sample:
 
    **Successfully tagged stockbroker:1.0**
 
-The container images that you have created are available in your Minikube container registry.
+The container image that you have built is available in your Minikube container registry.
 
 ## Task 5: Install the Bank and Stock-Trading application
 
@@ -238,7 +199,7 @@ Install the Bank and Stock-Trading application in the `otmm` namespace, where yo
 
     ```
     <copy>
-    cd /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts
+    cd /home/oracle/microtx/otmm-23.4.1/samples/xa/java/bankapp/Helmcharts
     </copy>
     ```
 
@@ -256,7 +217,7 @@ Install the Bank and Stock-Trading application in the `otmm` namespace, where yo
 
     ```
     NAME: bankapp
-    LAST DEPLOYED: TUe May 23 10:52:14 2023
+    LAST DEPLOYED: Tue May 23 10:52:14 2023
     NAMESPACE: otmm
     STATUS: deployed
     REVISION: 1
@@ -338,10 +299,10 @@ You may now **proceed to the next lab**.
 
 ## Learn More
 
-* [Develop Applications with XA](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
+* [Develop Applications with XA](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
 
 ## Acknowledgements
 
 * **Author** - Sylaja Kannan
 * **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja, June 2023
+* **Last Updated By/Date** - Sylaja, November 2023

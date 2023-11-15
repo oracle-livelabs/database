@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Run a Travel Agent application that uses the Long Running Action (LRA) transaction protocol to book a trip and understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate the transactions. Using samples is the fastest way for you to get familiar with MicroTx.
+Run a Travel Agent application that uses the Long Running Action (LRA) transaction protocol to book a trip and understand how you can use Oracle Transaction Manager for Microservices (MicroTx) to coordinate the transactions. Using samples is the fastest way for you to get familiar with MicroTx.
 Code for the Travel Agent application is available in the MicroTx distribution. The MicroTx library files are already integrated with the application code.
 
 Estimated Time: *10 minutes*
