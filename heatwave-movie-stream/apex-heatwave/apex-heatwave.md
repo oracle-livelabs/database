@@ -212,17 +212,17 @@ Using APEX, developers can quickly develop and deploy compelling apps that solve
 1. Create and Launch APEX
 
     a.
-    ![MDS](./images/start-apex-deploy.png "start apex deploy")
-    ![MDS](./images/continue-apex-deploy.png "continue apex deploy")
+    ![start apex deploy](./images/start-apex-deploy.png "start apex deploy ")
+    ![continue apex deploy](./images/continue-apex-deploy.png "continue apex deploy ")
     b. Choose movies compartment and set APEX password
-    ![MDS](./images/set-password-apex-deploy.png "set apex password")
-    ![MDS](./images/completed-apex-deploy.png "completed apex deploy")
+    ![set apex password](./images/set-password-apex-deploy.png "set apex password")
+    ![completed apex deploy](./images/completed-apex-deploy.png "completed apex deploy")
 
 2. Create Workspace
 
     a.
-    ![MDS](./images/login-apexd.png "login apexd")
-    ![MDS](./images/create-apex-workspace.png "create apex workspace")
+    ![login apexd](./images/login-apexd.png "login apexd ")
+    ![create apex workspace](./images/create-apex-workspace.png "create apex workspace )
     b. Name the APEX workspace
 
     ```bash
@@ -230,9 +230,9 @@ Using APEX, developers can quickly develop and deploy compelling apps that solve
     ```
 
     c. Set an Admin user and password for the workspace
-    ![MDS](./images/name-apex-workspace.png "name apex workspace")
+    ![name apex workspace](./images/name-apex-workspace.png "name apex workspace")
     d. Log out from APEX
-    ![MDS](./images/apex-logout.png "apex logout")
+    ![apex logout](./images/apex-logout.png "apex logout")
 
 
 ## Task 6 Create APEX Credentials

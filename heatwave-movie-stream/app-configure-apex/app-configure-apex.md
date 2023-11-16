@@ -50,19 +50,31 @@ In this lab, you will be guided through the following tasks:
 
     ![APEX Import](./images/apex-import-moviehub.png "apex-import-moviehub ")
 
-    b. Select the downloaded file **MovieHub.zip** . Click Next and Install Application
+    b. Select the downloaded file **MovieHub.zip** . Click on **Next** two times
 
-    c. Click on Edit Application after the application ends installing
+    c. Click **Install Application**
+
+    ![APEX Import Install](./images/apex-import-install-moviehub.png "apex-import-install-moviehub ")
+
+    d. Click on Edit Application after the application ends installing
 
     ![MovieHub App Installed](./images/apex-app-installed.png "apex-app-installed ")
 
-## Task 3: Modify the RESTful Service Endpoint for the App
+## Task 3: Modify the REST Enabled SQL Endpoint for the App
 
-The imported app will import a broken RESTful Endpoint from the export source
+The imported app will import a broken REST Enabled SQL Endpoint from the export source
 
-1. Navigate to RESTful Services
+1. Navigate to **REST Enabled SQL**
 
-    Select the Endpoint that was imported "hw-endpoint-rest"
+    a. Navigate to the Workspace Utilities from the App Builder Menu
+
+    ![Workspace Utilities](./images/apex-menu-workspace-utilities.png "apex-menu-workspace-utilities ")
+
+    b. Click on **REST Enabled SQL Services**
+
+    ![workspace utilities rest services](./images/workspace-utilities-rest-services.png "workspace-utilities-rest-services ")
+
+    c. Select the Endpoint that was imported "hw-endpoint-rest"
 
     ![RESTful services endpoints](./images/restful-services-endpoints-menu.png "restful-services-endpoints-menu ")
 
@@ -86,7 +98,7 @@ As this is an imported app, your current workspace user will not have administra
 
     b. Go to Application Access Control
 
-    c. Click on Add User Role Assignment. Assign your APEX user, **administrator role**. This administrator account would be referred as '**admin account**'
+    c. Click on Add User Role Assignment. Create a user 'ADMIN' and assign **administrator role** to it. This administrator account would be referred as '**admin account**'
 
     ![Add User Role Assignment for APEX user](./images/apex-add-role-assignment.png "apex-add-role-assignment ")
 
