@@ -193,11 +193,11 @@ In this lab, you will be guided through the following task:
 
     g. Hit **ENTER** to execute the last command
 
-## Task 6: Predict a ROWS with different trained models
+## Task 6: Predict individual ROWS with the different trained models
 
 1. Test the model to predict the TOP 3 items recommended for a given user.
 
-    a. Predict a ROW with the 3 models. Top 3 recommended items for the user '600'
+    a. Predict a ROW with each of the 3 models. Top 3 recommended items for the user '600'
 
     ```bash
     <copy>

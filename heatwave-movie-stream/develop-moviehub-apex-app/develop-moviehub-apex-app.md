@@ -62,7 +62,7 @@ In this lab, you will be guided through the following task:
 
     a. The **My Profiles** page will open, with the current account profiles in the app
 
-    ![MovieHub Profiles page](./images/moviehub-profiles-page.png =50%x* "moviehub-profiles-page ")
+    ![MovieHub Profiles page](./images/moviehub-profiles-page.png "moviehub-profiles-page ")
 
     b. At any time, You can log out. This action will return you to the home page
 
@@ -74,9 +74,11 @@ In this lab, you will be guided through the following task:
 
     a. Go to the profiles page
 
-    ![James profile button](./images/moviehub-user1-button.png =30%x* "moviehub-user1-button ")
+    ![MovieHub Profiles page](./images/moviehub-profiles-page2.png "moviehub-profiles-page ")
 
     b. Click the button below James profile
+
+    ![James profile button](./images/moviehub-user1-button.png =30%x* "moviehub-user1-button ")
 
     c. The James movies recommendation page will appear
 
@@ -84,15 +86,15 @@ In this lab, you will be guided through the following task:
 
     The page will have the top 5 recommended movies, according to the "**pred\_user\_21\_0r**" MySQL table. This page is loaded with the **Restore** button as well
 
-3. Explore the movie recommendations when "adding" 15 movie records. **This simulates the action of watching 15 movies from the movie catalog**
+3. Explore the movie recommendations when you add more movie records to the data with "Watch movies" buttons. **This simulates the action of watching 15 and 30 movies from the movie catalog compared with the original data**
 
-    a. Click on **Add 15**
+    a. Click on **Watch 15 movies**
 
     ![James recommendation page plus 15](./images/recommendations-user1-plus15.png "recommendations-user1-plus15 ")
 
     Notice the movie recommendation change. This action will show the top 5 recommended movies, according to the "**pred\_user\_21\_15r**" MySQL table
 
-    b. Click on **Add 30**
+    b. Click on **Watch 30 movies**
 
     ![James recommendation page plus 30](./images/recommendations-user1-plus30.png "recommendations-user1-plus30 ")
 
