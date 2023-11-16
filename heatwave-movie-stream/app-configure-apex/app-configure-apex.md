@@ -149,7 +149,7 @@ You may want to increase this limit if it is being reached
 
 2. Click on the dropdown menu Database Actions
 
-3. Select SQL
+3. Select SQL .
 
     ![Autonomous actions menu](./images/autonomous-actions-menu-sql.png "autonomous-actions-menu-sql ")
 
