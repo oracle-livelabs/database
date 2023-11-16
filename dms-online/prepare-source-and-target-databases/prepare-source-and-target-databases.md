@@ -23,10 +23,12 @@ In this lab, you will:
 
 1. Verify that you are user 'opc' in your instance.
 
-2. Switch from 'opc' user to user 'oracle'.
+2. Switch from 'opc' user to user 'oracle' and create a new directory in the user volume, this directory will be used to temporary storage of database export
+files:
     ```
     <copy>
     sudo su - oracle
+    mkdir /u01/app/oracle/dumpdir 
     </copy>
     ```
 
@@ -115,7 +117,7 @@ In this lab, you will:
 
 ## Task 2: Prepare SSL Certificates and Grant ACL Privileges
 
-For your non-ADB source connectivity, you must perform the following steps:
+For your source database connectivity, you must perform the following steps:
 
 1.  Create a new directory: 
 ```
@@ -127,7 +129,7 @@ For your non-ADB source connectivity, you must perform the following steps:
 2. Download a pre created SSL wallet using the following command:
 ```
     <copy>    
-    curl -o walletSSL.zip https://objectstorage.us-ashburn-1.oraclecloud.com/p/jrzh3heRr9SzuC7HtQ5Tno5Qs-Yvj0ZX22WNnoZ9FhTpgn9I9-iQQE7-L1JuIFJZ/n/idgd2rlycmdl/b/SSL_Wallet/o/walletSSL.zip
+    curl -o walletSSL.zip https://objectstorage.us-phoenix-1.oraclecloud.com/p/FSBC_LRRpLxcSuSM6yRjO9u1TDuDy8wuiawEIl8Q_xPYFmvap_tPFdtm_c6TskV_/n/axsdric7bk0y/b/SSL-Wallet-For-No-SSH-Migrations-Setup/o/walletSSL.zip
 
     </copy>
 ```
@@ -148,14 +150,14 @@ For your non-ADB source connectivity, you must perform the following steps:
 
 5. Save this path location, you will need it during the migration creation, once there populate the SSL Wallet Path with it:
 
-    i.e: /u01/app/oracle/dumpdir/wallet/opt/oracle/dcs/commonstore/wallets/newssl
+    i.e: /u01/app/oracle/dumpdir/wallet
 
 6. The user performing the export or import requires the necessary network ACL to be granted to access the network from the source and target database host. For this guide, run the following commands as SYS if the export or import user is SYSTEM. Since your database is multitenant, the following actions need to be performed in CDB$ROOT. Replace clouduser and sslwalletdir accordingly:
 
 ```
     <copy>    
     define clouduser='system';/*user performing export at source or import at target*/
-define sslwalletdir='/u01/app/oracle/dumpdir/wallet/opt/oracle/dcs/commonstore/wallets/newssl';/* OCI wallet path*/
+define sslwalletdir='/u01/app/oracle/dumpdir/wallet'; /* OCI wallet path*/
 BEGIN
     dbms_network_acl_admin.append_host_ace(host => '*', lower_port => 443, upper_port => 443, ace => xs$ace_type(privilege_list => xs$name_list(
     'http', 'http_proxy'), principal_name => upper('&clouduser'), principal_type => xs_acl.ptype_db));
@@ -256,7 +258,7 @@ You should see a similar output to the following:
     ```
 
 
-4. After connecting to your container database create the user 'HR01'. Write down or save the password as you will need it later.
+4. After connecting to your pluggable database create the user 'HR01'. Write down or save the password as you will need it later.
     ```
     <copy>
     CREATE USER HR01 IDENTIFIED BY <password>;
@@ -342,7 +344,7 @@ You should see a similar output to the following:
     ```
     Your source DB now has a user HR01 with a table EMPL that has 1000 rows.
     
-5. This table is to demonstrate the Cloud Pre Migration advisor (CPAT) functionality during Validation on Lab 8.
+5. This table is to demonstrate the Cloud Pre Migration advisor (CPAT) functionality during **Validate and Run Migration** Lab.
     ```
     <copy>
     CREATE TABLE image_table2 ( id NUMBER, image ORDImage ) LOB(image.source.localData) STORE AS SECUREFILE;
@@ -386,55 +388,31 @@ To perform the migration, DMS will require several passwords, for simplicity, le
 
 ## Task 6: Enable ggadmin user on target database
 
-The next steps will connect to the target ADB instance and enable the standard ggadmin user. You can skip these steps if the user is already enabled. 
-The connection will be thru the Oracle GoldenGate instance using sqlplus.
+At this point it is assumed that you are connected to your source database. The next steps will connect to the target ADB instance and enable the standard ggadmin user. You can skip these steps if the user is already enabled. 
 
-Make sure the Autonomous Database regional wallet has been placed in /u02/deployments/Marketplace/etc/adb. If not, you can download the zip file from OCI Console and unzip it there.
-Modify sqlnet.ora so it correctly has the wallet location (needed if connecting with sqlplus):
+Make sure that your Autonomous Database mTLS authentication option is marked as ‘Not required’, you can check this by going to Autonomous Database details.
+
+Go to Database connection/ Connection settings section and select TLS from the TLS authentication list of values, then copy the connection string for one of the TNS names. 
+
+Connect to sqlplus:
 
 1. Enter the following commands:
 
-    ```
+   ```
     <copy>
-    cat sqlnet.ora
-    WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="/u02/deployments/Marketplace/etc/adb"))) SSL_SERVER_DN_MATCH=yes
-
-    </copy>
-    ```
-2. You need to set the following Export variables:    
-    ```
-    <copy>
-    EXPORT ORACLE_HOME="/U01/APP/OGG/LIB/INSTANTCLIENT"
-    </copy>
-    ```
-    ```
-    <copy>
-    EXPORT LD_LIBRARY_PATH="$ORACLE_HOME"
-    </copy>
-    ```
-     ```
-    <copy>
-    EXPORT PATH="$ORACLE_HOME:$PATH"
-    </copy>
-    ```
-      ```
-    <copy>
-    EXPORT TNS_ADMIN="/U02/DEPLOYMENTS/MARKETPLACE/ETC/ADB"
-    </copy>
-    ```
-      ```
-    <copy>
-    $ORACLE_HOME/SQLPLUS ADMIN/ <DB PASSWORD>@ ADW_name
+    sqlplus admin/ <ATP password>@ ATP connection string
     </copy>
     ```
     
+    
 2. In SQL Plus enter the following commands:
 
-    ```
+     ```
     <copy>
     alter user ggadmin identified by <new password> account unlock;
     </copy>
     ```
+
 3. Exit SQL. 
 
     ```
