@@ -49,7 +49,7 @@ In this lab, you will be guided through the following tasks:
     <copy>show databases;</copy>
     ```
 
-    ![Databse Schemas](./images/list-schemas-first.png "list schemas first")
+    ![List Databse Schemas](./images/list-schemas-first.png "list schemas first")
 
 4. Create the movie database
 
@@ -125,7 +125,7 @@ In this lab, you will be guided through the following tasks:
 
     b. Hit **ENTER** to execute the last command
 
-    ![primary tables create](./images/primary-tables-create.png "primary-tables-create ")
+    ![create primary tables ](./images/primary-tables-create.png "primary-tables-create ")
 7. Source the SQL files into your tables with MySQL Shell
 
     a. Make sure you are in the movie database
@@ -151,7 +151,7 @@ In this lab, you will be guided through the following tasks:
     c. Hit **ENTER** to execute the last command
 
     **This operation might take a couple of minutes**
-    
+
     You will see the the following result
 
     ![source sql files output](./images/source-sql-data-output.png "source-sql-files-output ")

@@ -14,12 +14,11 @@ _Lab Setup
 
 ## About Product/Technology
 
-MySQL HeatWave is the only cloud service that combines transactions, realtime analytics across data warehouses and data lakes, and machine learning in one MySQL Database—without the complexity, latency, risks, and cost of ETL duplication. It delivers unmatched price-performance. HeatWave AutoML enables native, in-database machine learning, allowing users to
-build, train, deploy, and explain machine learning models inside MySQL,without machine learning expertise. MySQL Autopilot provides machine learning-powered automation that improves the performance, scalability,and ease of use of HeatWave, saving developers and DBAs significant time. The service can be deployed in OCI, AWS, Azure, in a hybrid environment,and in customers’ data center with OCI Dedicated Region.
+MySQL HeatWave is the only cloud service that combines transactions, real-time analytics across data warehouses and data lakes, and machine learning in one MySQL Database—without the complexity, latency, risks, and cost of ETL duplication. It delivers unmatched performance and price-performance. HeatWave AutoML enables in-database machine learning, allowing you to build, train, deploy, and explain machine learning models within MySQL HeatWave. You do not need to move the data to a separate ML cloud service, or be an ML expert. MySQL Autopilot provides machine learning-powered automation that improves the performance, scalability, and ease of use of HeatWave, saving developers and DBAs significant time. The service can be deployed in OCI, AWS, Azure, in a hybrid environment, and in customers’ data centers with OCI Dedicated Region.
 
 ## Objectives
 
-In this lab, you will use OCI and HeatWave Services to create a movie recommendation system and build the MovieHub App to start getting movie recommendations to users and user recommendation for specific movies.
+In this workshop, you will use OCI, MySQL HeatWave, and Oracle APEX to build the MovieHub application and generate personalized recommendations.
 
 1. Create MySQL HeatWave Database System
 2. Setup a HeatWave Cluster for OLAP/AutoML
