@@ -22,17 +22,17 @@ In this lab, you will:
 
 1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
-    ![create migration navigation](images/migration-create.png =90%x*)
+    ![create migration navigation](images/migration-create.png =50%x*)
 
 2. Select **TestMigration**
 
-  ![Screenshot of select testmigration](images/select-testmigration.png =90%x*)
+  ![Screenshot of select testmigration](images/select-testmigration.png =50%x*)
 
 3. If Migration is still being created, wait until Lifecycle State is Active
 
 4. Press **Validate** button
 
-  ![Screenshot of press validate](images/press-validate.png =90%x*)
+  ![Screenshot of press validate](images/press-validate.png =50%x*)
 
 5. Click on **Jobs** in left-hand **Resources** list
 
@@ -42,7 +42,7 @@ In this lab, you will:
 
 7. Click on **Phases** in the left-hand **Resources** list
 
-  ![Screnshot of click on phases](images/click-phases.png =20%x*)
+  ![Screnshot of click on phases](images/click-phases.png =17%x*)
 
 8. Phases will be shown, and status will be updated as phases are completed. It can take 2 minutes before the first phase is shown.
     
@@ -66,15 +66,15 @@ In this lab, you will:
 
  1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
-    ![create migration navigation](images/migration-create.png =90%x*)
+    ![create migration navigation](images/migration-create.png =50%x*)
 
   2. Select **TestMigration**
 
-    ![Screenshot of select testmigration](images/select-testmigration.png =90%x*)
+    ![Screenshot of select testmigration](images/select-testmigration.png =50%x*)
 
   3. Press **Start** to begin the Migration. The Start Migration dialog is shown. Select the default phase: **Monitor replication lag**.This will cause the replication to run continuously until the Migration is resumed. 
 
-    ![Screenshot of start migration](images/monitor-replication-lag.png =90%x*)
+    ![Screenshot of start migration](images/monitor-replication-lag.png =50%x*)
 
   4. Click on **Jobs** in the left-hand **Resources** list
 
@@ -86,9 +86,10 @@ In this lab, you will:
 
   8. Wait till **Monitor replication lag** phase completes.
 
-  ![Screenshot of completed phases](images/monitor-lag-waiting.png =90%x*)
+  ![Screenshot of completed phases](images/monitor-lag-waiting.png =50%x*)
 
   9. Now data replication is in progress. **If you want test the replication please continue, otherwise you can jump to step 15**.
+
   Go back to your source database and execute the following script:
 
       ```
@@ -124,29 +125,16 @@ In this lab, you will:
     ``` 
     This will insert 1007 records into the source database simulating new transactions which GoldenGate will identify and replicate to the target database.
 
-  10. Lets review how this is identified in GoldenGate. Log in to the Oracle GoldenGate Service Manager homepage using the GoldenGate Hub Public ip : **https://__ogg\_public\_ip__** (replace the __ogg\_public\_ip__ value with the value saved from previous steps). The browser will show warnings that the page is insecure because it uses a self-signed certificate. Ignore those warnings and proceed. Oracle GoldenGate Service Manager opens. Click on port 9011 to log in to the Source – Administration Server. Use the same credential as Service Manager.
+  10. Connect to your target ADB and look for the new records in the EMPL table
 
-    ![Screenshot of Oracle GoldenGate Services Manager Login Menu](./images/gg-migration-manager.png " ")
-  
-  11. Use the same credentials as in Service Manager. Click on the available extract and navigate to **Statistics** tab:
-
-  ![Screenshot of Oracle GoldenGate Services Manager Extracts](./images/extracts.png " ")
-
-  12. Observe the 1007 inserts we performed on the source database in the previous step:
-  ![Screenshot of Oracle GoldenGate table statistics Extract](./images/table-statistics.png " ")
-
-  13. Navigate back to Overview Tab and click on the existing replicat and navigate to **Statistics** tab:
-  ![Screenshot of Oracle GoldenGate click on replicat](./images/click-on-target-replicats.png " ")
- 14. Observe the 1007 inserts we performed on the source database in the previous step, and how they were replicated to the target:
-  ![Screenshot of Oracle GoldenGate table statistics Extract](./images/target-statistics.png " ")
- 15. This is the point where a migration user would stop the source application so that no more transactions are applied to the source DB. You can now press **Resume** on the job to complete replication. In the Resume Job dialog, chose the **Switchover App** phase and press **Resume**. The Switchover App phase will gracefully stop replication and signal the target application to initiate transactions to the target DB.
+ 11. This is the point where a migration user would stop the source application so that no more transactions are applied to the source DB. You can now press **Resume** on the job to complete replication. In the Resume Job dialog, chose the **Switchover** phase and press **Resume**. The Switchover phase will gracefully stop replication and signal the target application to initiate transactions to the target DB.
 ![Screenshot of resume job switchover](./images/resume-job-switchover.png " ")
 
-16. After Job resumes and waits after Switchover App phase, press Resume. Select the last phase Cleanup and press Resume:
-![Screenshot of resume job cleanup](./images/resume-job-cleanup.png " ")
+12. After Job resumes and waits after Switchover phase, press Resume. Select the last phase Cleanup and press Resume:
+![Screenshot of resume job cleanup](./images/resume-job-cleanup.png =50%x*)
 
-17. The migration runs the final cleanup phases and shows as Succeeded when finished:
-![Screenshot of resume job cleanup completed](./images/cleanup-completed.png " ")
+13. The migration runs the final cleanup phases and shows as Succeeded when finished:
+![Screenshot of resume job cleanup completed](./images/cleanup-completed.png =50%x*)
 ![Screenshot of succeeded Migration](./images/succeeded.png " ")
 
 ## Learn More
