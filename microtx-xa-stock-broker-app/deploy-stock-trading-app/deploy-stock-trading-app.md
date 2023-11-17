@@ -86,17 +86,16 @@ Before you start a transaction, you must start a Minikube tunnel.
 ## Task 2: Know About the Created PDBs
 
 When you start Minikube, an instance of the Oracle Database 23c Free Release is deployed on Minikube. See [Oracle Database Free](https://www.oracle.com/database/free/get-started). The following three PDBs are already available in the Database instance.
-    - The Core Banking service uses `COREBNKPDB` as resource manager.
-    - The Branch Banking service uses `AZBRPDB1` as resource manager.
-    - The Stock Broker service uses `STOCKBROKERPDB` as resource manager.
 
-The required tables are already created in each PDB and have been populated with sample values.
+    * The Core Banking service uses `COREBNKPDB` as resource manager.
+    * The Branch Banking service uses `AZBRPDB1` as resource manager.
+    * The Stock Broker service uses `STOCKBROKERPDB` as resource manager.
+
+The required tables are already created in each PDB and are populated with sample values. This section provides details about the sample data in each table.
 
 ### About the Resource Manager for the Core Banking Service
 
-The Core Banking service uses `COREBNKPDB` as resource manager. This PDB contains three tables: Branch, Account, and History.
-
-The following table lists the sample data populated in the Branch table.
+The Core Banking service uses `COREBNKPDB` as resource manager. This PDB contains three tables: Branch, Account, and History. The following table lists the available fields and sample data, if any.
 
 | Fields      | Values                                                  |
 | ----------- | --------------------------------------------------------|
@@ -108,13 +107,11 @@ The following table lists the sample data populated in the Branch table.
 | LAST_ACCT   | 10002                                                   |
 {: title="Sample data values in the Branch table"}
 
-The following table lists the sample data populated in the Account table.
-
 | Fields    | Value 1                        | Value 2                        | Value 3                        |
 | ----------| -------------------------------|--------------------------------|--------------------------------|
 | ACCOUNT_ID| 10001                          | 10002                          | 10003                          |
 | BRANCH_ID | 1111                           | 1111                           | 1111                           |
-| SSN       | 873-61-1457                    | 883-71-8538                    | 883-71-8538                    |
+| SSN       | 873-61-1457                    | 883-71-8538                    | 993-71-8500                    |
 | FIRST_NAME| Adams                          | Smith                          | Thomas                         |
 | LAST_NAME | Lopez                          | Mason                          | Dave                           |
 | MID_NAME  | D                              | N                              | C                              |
@@ -122,34 +119,83 @@ The following table lists the sample data populated in the Account table.
 | ADDRESS   | 15311 Grove Ct. Arizona  95101 | 15322 Grove Ct. Arizona  95101 | 15333 Grove Ct. Arizona 95101  |
 {: title="Sample data values in the Account table"}
 
-The following table lists the fields in the History table.
+| Fields              | Values            |
+| ------------------- | ------------------|
+| TRANSACTION_CREATED |                   |
+| ACCOUNT_ID          |                   |
+| BRANCH_ID           |                   |
+| TRANSACTION_TYPE    |                   |
+| DESCRIPTION         |                   |
+| AMOUNT              |                   |
+| BALANCE             |                   |
+{: title="Fields in the History table"}
 
-| Fields              | Values        |
-| ------------------- | --------------|
-| TRANSACTION_CREATED |               |
-| ACCOUNT_ID          |               |
-| BRANCH_ID           |               |
-| TRANSACTION_TYPE    |               |
-| DESCRIPTION         |               |
-| AMOUNT              |               |
-| BALANCE             |               |
-{: title="Sample data values in the Branch table"}
+### About the Resource Manager for the Branch Banking Service
 
-    - The Branch Banking service uses `AZBRPDB1` as resource manager.
-    - The Stock Broker service uses `STOCKBROKERPDB` as resource manager.
+The Branch Banking service uses `AZBRPDB1` as resource manager. This PDB contains the `SAVINGS_ACCOUNT` table. The following table lists the available fields and sample data populated in `SAVINGS_ACCOUNT`.
 
- Each PDB contains an `accounts` table with `account_id` as the primary key. The `accounts` table is populated with the following sample data. The `values.yaml` file also contains the details to access the resource managers.
+| Fields    | Value 1  | Value 2 | Value 3   |
+| ----------| ---------|---------|-----------|
+| ACCOUNT_ID| 10001    | 10002   | 10003     |
+| BRANCH_ID | 1111     | 1111    | 1111      |
+| BALANCE   | 50000    | 50000   | 50000     |
+{: title="Sample data values in the SAVINGS_ACCOUNT table"}
 
-| Account_ID  | Amount    |
-| ----------- | --------- |
-| account5    | 5000      |
-| account4    | 4000      |
-| account3    | 3000      |
-| account2    | 2000      |
-| account1    | 1000      |
-{: title="Amount in the various accounts"}
+### About the Resource Manager for the Stock Broker Service
 
-When you start Minikube, the Transfer application is deployed and the database instances are created and populated with sample data.
+The Stock Broker service uses `STOCKBROKERPDB` as resource manager. This PDB contains six tables: CASH_ACCOUNT, STOCKS, USER_ACCOUNT, STOCK_BROKER_STOCKS, USER_STOCKS, and HISTORY. The following table lists the available fields and sample data, if any.
+
+| Fields       | Value 1   |
+| ------------ | --------- |
+| ACCOUNT_ID   | 9999999   |
+| BALANCE      | 10000000  |
+| STOCK_BROKER | PENNYPACK |
+{: title="Sample data values in the CASH_ACCOUNT table"}
+
+| Fields       | Value 1                | Value 2             | Value 3              | Value 4            | Value 5            |
+| -------------| -----------------------|---------------------|----------------------|--------------------|--------------------|
+| STOCK_SYMBOL | BLUSC                  | SPRFD               | SVNCRP               | TALLMF             | VSNSYS             |
+| COMPANY_NAME | Blue Semiconductor     | Spruce Street Foods | Seven Corporation    | Tall Manufacturers | Vision Systems     |
+| INDUSTRY     | Semiconductor Industry | Food Products       | Software consultants | Tall Manufacturing | Medical Equipments |
+| STOCK_PRICE  | 87.28                  | 152.55              | 97.20                | 142.24             | 94.35              |
+{: title="Sample data values in the STOCKS table"}
+
+| Fields       | Value 1 | Value 2 | Value 3 | Value 4 | Value 5 |
+| -------------| --------|---------|---------|---------|---------|
+| ACCOUNT_ID   | 9999999 | 9999999 | 9999999 | 9999999 | 9999999 |
+| STOCK_SYMBOL | BLUSC   | SPRFD   | SVNCRP  | TALLMF  | VSNSYS  |
+| STOCK_UNITS  | 100000  | 50000   | 90000   | 80000   | 100000  |
+{: title="Sample data values in the STOCK_BROKER_STOCKS table"}
+
+| Fields    | Value 1                        | Value 2                        | Value 3                        |
+| ----------| -------------------------------|--------------------------------|--------------------------------|
+| ACCOUNT_ID| 10001                          | 10002                          | 10003                          |
+| SSN       | 873-61-1457                    | 883-71-8538                    | 993-71-8500                    |
+| FIRST_NAME| Adams                          | Smith                          | Thomas                         |
+| LAST_NAME | Lopez                          | Mason                          | Dave                           |
+| MID_NAME  | D                              | N                              | C                              |
+| PHONE     | 506-100-5886                   | 403-200-5890                   | 603-700-5899                   |
+| ADDRESS   | 15311 Grove Ct. New York 95101 | 15311 Grove Ct. New York 95101 | 15333 Grove Ct. Arizona 95101  |
+{: title="Sample data values in the USER_ACCOUNT table"}
+
+| Fields       | Value 1 | Value 2 | Value 3 | Value 4 | Value 5 |
+| -------------| --------|---------|---------|---------|---------|
+| ACCOUNT_ID   | 10001   | 10001   | 10001   | 10001   | 10001   |
+| STOCK_SYMBOL | BLUSC   | SPRFD   | SVNCRP  | TALLMF  | VSNSYS  |
+| STOCK_UNITS  | 10      | 15      | 20      | 30      | 40      |
+{: title="Sample data values in the USER_STOCKS table"}
+
+| Fields           | Values            |
+| -----------------| ------------------|
+| TRANSACTION_TIME |                   |
+| ACCOUNT_ID       |                   |
+| STOCK_OPERATION  |                   |
+| STOCK_UNITS      |                   |
+| STOCK_SYMBOL     |                   |
+| DESCRIPTION      |                   |
+{: title="Fields in the History table"}
+
+When you start Minikube, the PDBs are created and populated with sample data.
 
 ## Task 3: Verify that All the Resources are Ready
 
