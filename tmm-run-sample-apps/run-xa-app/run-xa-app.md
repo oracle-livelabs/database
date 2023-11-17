@@ -49,7 +49,7 @@ This lab assumes you have:
 
 Code for the Transfer application is available in the MicroTx distribution. The MicroTx library files are already integrated with the application code. Container images, for each microservice in the application, are already built and available in your Minikube container registry. The `values.yaml` file is available in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/helmcharts/transfer` folder. This is the manifest file, which contains the deployment configuration details for the application.
 
-When you start Minikube, an instance of the Oracle Database 23c Free Release, with two PDBs, is deployed on Minikube. See [Oracle Database Free](https://www.oracle.com/database/free/get-started). Department 1 microservice, which is developed using the Helidon framework, uses PDB (FREEPDB1) as resource manager. Department 2 microservice, which is developed using the Spring Boot framework, uses another PDB (FREEPDB2) as resource manager. Each PDB contains an `accounts` table with `account_id` as the primary key. The `accounts` table is populated with the following sample data. The `values.yaml` file also contains the details to access the resource managers.
+When you start Minikube, an instance of the Oracle Database 23c Free Release, with two PDBs, is deployed on Minikube. See [Oracle Database Free](https://www.oracle.com/database/free/get-started). Department 1 microservice, which is developed using the Helidon framework, uses PDB (`FREEPDB1`) as resource manager. Department 2 microservice, which is developed using the Spring Boot framework, uses another PDB (`FREEPDB2`) as resource manager. Each PDB contains an `accounts` table with `account_id` as the primary key. The `accounts` table is populated with the following sample data. The `values.yaml` file also contains the details to access the resource managers.
 
 | Account_ID  | Amount    |
 | ----------- | --------- |
@@ -86,11 +86,11 @@ Follow the instructions in this section to start Minikube, and then verify that 
     </copy>
     ```
 
-   In the output, verify that the `STATUS` of the `bankapp` is `deployed.
+   In the output, verify that the `STATUS` of the `sample-xa-app` is `deployed``.
 
    **Example output**
 
-   ![Helm install success](./images/app-deployed.png)
+   ![Helm install success](./images/list-pods.png)
 
 4. Verify that all resources, such as pods and services, are ready. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
 
@@ -99,9 +99,10 @@ Follow the instructions in this section to start Minikube, and then verify that 
     kubectl get pods -n otmm
     </copy>
     ```
+
    **Example output**
 
-   ![Status of pods in the otmm namespace](./images/get-pods-status.png)
+   ![Status of pods in the otmm namespace](./images/pod-status.png)
 
 5. Verify that the database instance is running. The database instance is available in the `oracledb` namespace.  Run the following command to retrieve the list of resources in the namespace `oracledb` and their status.
 
@@ -115,7 +116,7 @@ Follow the instructions in this section to start Minikube, and then verify that 
 
    ![Database instance details](./images/database-service.png)
 
-It usually takes some time for the Database services to start running in the Minikube environment. Proceed with the remaining tasks only after ensuring that all the resources, including the database service, are ready and in the 'RUNNING` status.
+It usually takes some time for the Database services to start running in the Minikube environment. Proceed with the remaining tasks only after ensuring that all the resources, including the database service, are ready and in the `RUNNING` status and the value of the **READY** field is `1/1`.
 
 ## Task 2: Start a Minikube Tunnel
 

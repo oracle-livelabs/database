@@ -151,7 +151,49 @@ The following table lists the fields in the History table.
 
 When you start Minikube, the Transfer application is deployed and the database instances are created and populated with sample data.
 
-## Task 2: Configure Keycloak
+## Task 3: Verify that All the Resources are Ready
+
+1. Verify that the application has been deployed successfully.
+
+    ```text
+    <copy>
+    helm list -n otmm
+    </copy>
+    ```
+
+   In the output, verify that the `STATUS` of the `bankapp` is `deployed`.
+
+   **Example output**
+
+   ![Helm install success](./images/app-deployed.png)
+
+2. Verify that all resources, such as pods and services, are ready. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
+
+    ```text
+    <copy>
+    kubectl get pods -n otmm
+    </copy>
+    ```
+
+   **Example output**
+
+   ![Status of pods in the otmm namespace](./images/get-pods-status.png)
+
+3. Verify that the database instance is running. The database instance is available in the `oracledb` namespace.  Run the following command to retrieve the list of resources in the namespace `oracledb` and their status.
+
+    ```text
+    <copy>
+    kubectl get pods -n oracledb
+    </copy>
+    ```
+
+   **Example output**
+
+   ![Database instance details](./images/database-service.png)
+
+It usually takes some time for the Database services to start running in the Minikube environment. Proceed with the remaining tasks only after ensuring that all the resources, including the database service, are ready and in the `RUNNING` status and the value of the **READY** field is `1/1` .
+
+## Task 4: Configure Keycloak
 
 The Bank and Stock-Trading Application console uses Keycloak to authenticate users.
 
