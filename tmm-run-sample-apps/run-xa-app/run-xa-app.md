@@ -22,7 +22,7 @@ For more details, see [About the Transfer Application](https://docs.oracle.com/e
 
 In this lab, you will:
 
-* Install the Transfer Application. While installing the application, Helm uses the configuration details you provide in the `values.yaml` file.
+* Start Minikube. When you start Minikube, the Transfer application is deployed and the database instances are created and populated with sample data.
 * Deploy Kiali and Jaeger in your minikube cluster (Optional and if not already deployed)
 * Run the Transfer application to start an XA transaction to withdraw an amount from Department A and deposit it in Department B.
 * View service graph of the mesh and distributed traces to track requests (Optional)
@@ -37,7 +37,6 @@ This lab assumes you have:
   * Get Started
   * Lab 1: Prepare setup
   * Lab 2: Environment setup
-  * Lab 4: Provision an Oracle Autonomous Database for use as resource manager
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
  ```text
@@ -46,11 +45,11 @@ This lab assumes you have:
   </copy>
   ```
 
-## Task 1: Configure Minikube
+## Task 1: Start Minikube
 
-Code for the Transfer application is available in the MicroTx distribution. The MicroTx library files are already integrated with the application code. The `values.yaml` file is available in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/helmcharts/transfer` folder. This is the manifest file, which contains the deployment configuration details for the application. Container images, for each microservice in the application, are already built and available in your Minikube container registry.
+Code for the Transfer application is available in the MicroTx distribution. The MicroTx library files are already integrated with the application code. Container images, for each microservice in the application, are already built and available in your Minikube container registry. The `values.yaml` file is available in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/helmcharts/transfer` folder. This is the manifest file, which contains the deployment configuration details for the application.
 
-When you start Minikube, an instance of the Oracle Database 23c Free Release, with two PDBs, is deployed on Minikube. See [Oracle Database Free](https://www.oracle.com/database/free/get-started). Use one PDB as the resource manage for Department 1 and the other PDB as the resource manager for Department 2. PDB1 has a database with the name `department_helidon`. PDB 2 has a database with the name `department_spring`. Each database contains an `accounts` table with `account_id` as the primary key. The `accounts` table is populated with the following sample data.
+When you start Minikube, an instance of the Oracle Database 23c Free Release, with two PDBs, is deployed on Minikube. See [Oracle Database Free](https://www.oracle.com/database/free/get-started). Department 1 microservice, which is developed using the Helidon framework, uses PDB (`FREEPDB1`) as resource manager. Department 2 microservice, which is developed using the Spring Boot framework, uses another PDB (`FREEPDB2`) as resource manager. Each PDB contains an `accounts` table with `account_id` as the primary key. The `accounts` table is populated with the following sample data. The `values.yaml` file also contains the details to access the resource managers.
 
 | Account_ID  | Amount    |
 | ----------- | --------- |
@@ -87,11 +86,11 @@ Follow the instructions in this section to start Minikube, and then verify that 
     </copy>
     ```
 
-   In the output, verify that the `STATUS` of the `bankapp` is `deployed.
+   In the output, verify that the `STATUS` of the `sample-xa-app` is `deployed``.
 
    **Example output**
 
-   ![Helm install success](./images/app-deployed.png)
+   ![Helm install success](./images/list-pods.png)
 
 4. Verify that all resources, such as pods and services, are ready. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
 
@@ -100,9 +99,10 @@ Follow the instructions in this section to start Minikube, and then verify that 
     kubectl get pods -n otmm
     </copy>
     ```
+
    **Example output**
 
-   ![Status of pods in the otmm namespace](./images/get-pods-status.png)
+   ![Status of pods in the otmm namespace](./images/pod-status.png)
 
 5. Verify that the database instance is running. The database instance is available in the `oracledb` namespace.  Run the following command to retrieve the list of resources in the namespace `oracledb` and their status.
 
@@ -116,7 +116,7 @@ Follow the instructions in this section to start Minikube, and then verify that 
 
    ![Database instance details](./images/database-service.png)
 
-It usually takes some time for the Database services to start running in the Minikube environment. Proceed with the remaining tasks only after ensuring that all the resources, including the database service, are ready and in the 'RUNNING` status.
+It usually takes some time for the Database services to start running in the Minikube environment. Proceed with the remaining tasks only after ensuring that all the resources, including the database service, are ready and in the `RUNNING` status and the value of the **READY** field is `1/1`.
 
 ## Task 2: Start a Minikube Tunnel
 
@@ -158,12 +158,13 @@ Before you start a transaction, you must start a Minikube tunnel.
 
     Note that, if you don't do this, then you must explicitly specify the IP address in the commands when required.
 
-## Task 4: Deploy Kiali and Jaeger in the cluster (Optional)
-**You can skip this task if you have already deployed Kiali and Jaeger in your cluster while performing Lab 3. However, ensure you have started Kiali and Jaeger dashboards as shown in steps 4 and 5.**
-This optional task lets you deploy Kiali and Jaeger in the minikube cluster to view the service mesh graph and enable distributed tracing.
-Distributed tracing enables tracking a request through service mesh that is distributed across multiple services. This allows a deeper understanding about request latency, serialization and parallelism via visualization.
-You will be able to visualize the service mesh and the distributed traces after you have run the application in the following task.
-The following commands can be executed to deploy Kiali and Jaeger. Kiali requires prometheus which should also be deployed in the cluster.
+## Task 3: Deploy Kiali and Jaeger in the cluster (Optional)
+
+**Skip this task if you have already deployed Kiali and Jaeger in your cluster while performing Lab 3. However, ensure you have started Kiali and Jaeger dashboards as shown in steps 4 and 5.**
+
+Use distributed tracing to understand how requests flow between MicroTx and the microservices. Use tools, such as Kiali and Jaeger, to track and trace distributed transactions in MicroTx. Kiali requires Prometheus, so deploy Prometheus in the same cluster.
+
+Run the following commands to deploy Kiali and Jaeger.
 
 1. Deploy Kiali.
 
@@ -189,7 +190,7 @@ The following commands can be executed to deploy Kiali and Jaeger. Kiali require
     </copy>
     ```
 
-4. Start Kiali Dashboard. Open a new tab in the terminal window and execute the following command. Leave the terminal running. A browser window may pop up as well. Close the browser window.
+4. Start the Kiali dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
 
     ```text
     <copy>
@@ -197,9 +198,9 @@ The following commands can be executed to deploy Kiali and Jaeger. Kiali require
     </copy>
     ```
 
-   A URL is displayed. You can access the kiali dashboard in a browser tab: `http://localhost:20001/kiali`.
+   A URL is displayed. Open the URL in a new tab in your browser to access the Kiali dashboard. For example, `http://localhost:20001/kiali`.
 
-5. Start Jaeger Dashboard. Open a new tab in the terminal window and execute the following command. Leave the terminal running. A browser window may pop up as well. Close the browser window.
+5. Start the Jaeger dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
 
     ```text
     <copy>
@@ -207,13 +208,13 @@ The following commands can be executed to deploy Kiali and Jaeger. Kiali require
     </copy>
     ```
 
-   A URL is displayed. You can access the jaeger dashboard in a browser tab using this URL: `http://localhost:16686`.
+   A URL is displayed. Open the URL in a new tab in your browser to access the Jaeger dashboard. For example, `http://localhost:16686`.
 
-## Task 5: Run the Transfer Application
+## Task 4: Run the Transfer Application
 
 When you run the Transfer application, it starts an XA transaction. The Teller application is the transaction initiator service, it initiates the transaction. When the Teller application runs, it withdraws money from Department A and deposits it to Department B by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
-1. Before you start the transaction, run the following commands to check the balance in Department 1 and Department 2 accounts.
+1. Before you start the transaction, run the following commands to check the balance in the Department 1 and Department 2 accounts.
 
     **Example command to check balance in Department 1**
 
@@ -291,16 +292,21 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
     --request GET http://$CLUSTER_IPADDR/dept1/account1 | jq
     </copy>
     ```
-## Task 6: View Service Mesh graph and Distributed Traces (Optional)
-You can perform this task only if you have performed Task 5 or have Kiali and Jaeger deployed in your cluster.
-To visualize what happens behind the scenes and how a trip booking request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you started in Task 3.
-1. Open a new browser tab and navigate to the Kiali dashboard URL - http://localhost:20001/kiali
-2. Select Graph for the otmm namespace.
-3. Open a new browser tab and navigate to the Jaeger dashboard URL - http://localhost:16686
-4. Select istio-ingressgateway.istio-system from the Service list. You can see the list of traces with each trace representing a request.
-5. Select one of the traces to view.
 
-## Task 7: View source code of the Transfer application (Optional)
+## Task 5: View the Service Mesh Graph and Distributed Traces (Optional)
+
+You can perform this task only if you have performed Task 3 or if Kiali and Jaeger is deployed in your cluster.
+To visualize what happens behind the scenes and how the amount transfer request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you had started in Task 3.
+
+1. Open a new browser tab and navigate to the Kiali dashboard URL. For example, `http://localhost:20001/kiali`.
+2. Select Graph for the `otmm` namespace.
+3. Open a new browser tab and navigate to the Jaeger dashboard URL. For example, `http://localhost:16686`.
+4. From the **Service** drop-down list, select **istio-ingressgateway.istio-system**.
+5. Click **Find Traces**. You can see the list of traces with each trace representing a request.
+6. Select one of the traces to view.
+
+## Task 6: View Source Code of the Transfer Application (Optional)
+
 The source code of the application is present in folder: /home/oracle/OTMM/otmm-23.4.1/samples/xa/java
 - Teller Service Source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/teller
 - Department 1 Service Source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/department-helidon
@@ -309,13 +315,12 @@ The source code of the application is present in folder: /home/oracle/OTMM/otmm-
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
 To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
 
-
 ## Learn More
 
 * [Develop Applications with XA](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
 
 ## Acknowledgements
 
-* **Author** - Sylaja Kannan, Principal User Assistance Developer
-* **Contributors** - Brijesh Kumar Deo, Bharath MC
-* **Last Updated By/Date** - Sylaja, November 2023
+* **Author** - Sylaja Kannan, Consulting User Assistance Developer
+* **Contributors** - Brijesh Kumar Deo and Bharath MC
+* **Last Updated By/Date** - Sylaja Kannan, November 2023

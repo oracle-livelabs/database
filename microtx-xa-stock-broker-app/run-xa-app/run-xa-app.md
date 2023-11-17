@@ -25,8 +25,7 @@ This lab assumes you have:
     * Lab 1: Prepare setup
     * Lab 2: Set Up the Environment
     * Lab 3: Integrate MicroTx Client Libraries with the Stock Broker Microservice
-    * Lab 4: Provision Autonomous Databases for Use as Resource Manager
-    * Lab 5: Deploy the Bank and Stock-Trading Application
+    * Lab 4: Deploy the Bank and Stock-Trading Application
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
     ```

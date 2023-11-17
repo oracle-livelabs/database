@@ -4,8 +4,6 @@
 
 The Bank and Stock-Trading application contains several microservices that interact with each other to complete a transaction. The Stock Broker microservice initiates the transactions to purchase and sell shares, so it is called a transaction initiator service. The Core Banking, Branch Banking, and User Banking services participate in the transactions related to the trade in stocks, so they are called participant services.
 
-To deploy the application, you must build each microservice as a container image and provide the deployment details in a YAML file.
-
 Estimated Time: 12 minutes
 
 ### Objectives
@@ -14,7 +12,7 @@ In this lab, you will:
 
 * Configure Minikube and start a Minikube tunnel
 * Configure Keycloak
-* Build container images for the Stock Broker microservice.
+* Build container image for the Stock Broker microservice.
 * Update the `values.yaml` file, which contains the deployment configuration details for the Bank and Stock-Trading application.
 * Install the Bank and Stock-Trading application. While installing the application, Helm uses the configuration details you provide in the `values.yaml` file.
 * (Optional) Deploy Kiali and Jaeger in your Minikube cluster
@@ -85,7 +83,117 @@ Before you start a transaction, you must start a Minikube tunnel.
 
     Note that, if you don't do this, then you must explicitly specify the IP address in the commands when required.
 
-## Task 2: Configure Keycloak
+## Task 2: Know About the Created PDBs
+
+When you start Minikube, an instance of the Oracle Database 23c Free Release is deployed on Minikube. See [Oracle Database Free](https://www.oracle.com/database/free/get-started). The following three PDBs are already available in the Database instance.
+    - The Core Banking service uses `COREBNKPDB` as resource manager.
+    - The Branch Banking service uses `AZBRPDB1` as resource manager.
+    - The Stock Broker service uses `STOCKBROKERPDB` as resource manager.
+
+The required tables are already created in each PDB and have been populated with sample values.
+
+### About the Resource Manager for the Core Banking Service
+
+The Core Banking service uses `COREBNKPDB` as resource manager. This PDB contains three tables: Branch, Account, and History.
+
+The following table lists the sample data populated in the Branch table.
+
+| Fields      | Values                                                  |
+| ----------- | --------------------------------------------------------|
+| BRANCH_ID   | 1111                                                    |
+| BRANCH_NAME | Arizona                                                 |
+| PHONE       | 123-456-7891                                            |
+| ADDRESS     | 6001 N 24th St, Phoenix, Arizona 85016, United States   |
+| SERVICE_URL | http://arizona-branch-bank:9095                         |
+| LAST_ACCT   | 10002                                                   |
+{: title="Sample data values in the Branch table"}
+
+The following table lists the sample data populated in the Account table.
+
+| Fields    | Value 1                        | Value 2                        | Value 3                        |
+| ----------| -------------------------------|--------------------------------|--------------------------------|
+| ACCOUNT_ID| 10001                          | 10002                          | 10003                          |
+| BRANCH_ID | 1111                           | 1111                           | 1111                           |
+| SSN       | 873-61-1457                    | 883-71-8538                    | 883-71-8538                    |
+| FIRST_NAME| Adams                          | Smith                          | Thomas                         |
+| LAST_NAME | Lopez                          | Mason                          | Dave                           |
+| MID_NAME  | D                              | N                              | C                              |
+| PHONE     | 506-100-5886                   | 403-200-5890                   | 603-700-5899                   |
+| ADDRESS   | 15311 Grove Ct. Arizona  95101 | 15322 Grove Ct. Arizona  95101 | 15333 Grove Ct. Arizona 95101  |
+{: title="Sample data values in the Account table"}
+
+The following table lists the fields in the History table.
+
+| Fields              | Values        |
+| ------------------- | --------------|
+| TRANSACTION_CREATED |               |
+| ACCOUNT_ID          |               |
+| BRANCH_ID           |               |
+| TRANSACTION_TYPE    |               |
+| DESCRIPTION         |               |
+| AMOUNT              |               |
+| BALANCE             |               |
+{: title="Sample data values in the Branch table"}
+
+    - The Branch Banking service uses `AZBRPDB1` as resource manager.
+    - The Stock Broker service uses `STOCKBROKERPDB` as resource manager.
+
+ Each PDB contains an `accounts` table with `account_id` as the primary key. The `accounts` table is populated with the following sample data. The `values.yaml` file also contains the details to access the resource managers.
+
+| Account_ID  | Amount    |
+| ----------- | --------- |
+| account5    | 5000      |
+| account4    | 4000      |
+| account3    | 3000      |
+| account2    | 2000      |
+| account1    | 1000      |
+{: title="Amount in the various accounts"}
+
+When you start Minikube, the Transfer application is deployed and the database instances are created and populated with sample data.
+
+## Task 3: Verify that All the Resources are Ready
+
+1. Verify that the application has been deployed successfully.
+
+    ```text
+    <copy>
+    helm list -n otmm
+    </copy>
+    ```
+
+   In the output, verify that the `STATUS` of the `bankapp` is `deployed`.
+
+   **Example output**
+
+   ![Helm install success](./images/app-deployed.png)
+
+2. Verify that all resources, such as pods and services, are ready. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
+
+    ```text
+    <copy>
+    kubectl get pods -n otmm
+    </copy>
+    ```
+
+   **Example output**
+
+   ![Status of pods in the otmm namespace](./images/get-pods-status.png)
+
+3. Verify that the database instance is running. The database instance is available in the `oracledb` namespace.  Run the following command to retrieve the list of resources in the namespace `oracledb` and their status.
+
+    ```text
+    <copy>
+    kubectl get pods -n oracledb
+    </copy>
+    ```
+
+   **Example output**
+
+   ![Database instance details](./images/database-service.png)
+
+It usually takes some time for the Database services to start running in the Minikube environment. Proceed with the remaining tasks only after ensuring that all the resources, including the database service, are ready and in the `RUNNING` status and the value of the **READY** field is `1/1` .
+
+## Task 4: Configure Keycloak
 
 The Bank and Stock-Trading Application console uses Keycloak to authenticate users.
 
@@ -165,13 +273,13 @@ To provide the configuration and environment details in the `values.yaml` file:
 
 4. Save the changes you have made to the `values.yaml` file.
 
-## Task 4: Build Container Images for Each Microservice
+## Task 4: Build Container Image for the Stock Broker service
 
 The code for the Bank and Stock-Trading application is available in the installation bundle in the `/home/oracle/microtx/otmm-23.4.1/samples/xa/java/bankapp` folder. The container image for the User Banking, Branch Banking, Core Banking services are pre-built and available for your use. Build the container image only for the Stock Broker service.
 
 To build container image for the Stock Broker service:
 
-1. Run the following commands to build the Docker image for the Stock Broker service.
+1. Run the following commands.
 
     ```
     <copy>
