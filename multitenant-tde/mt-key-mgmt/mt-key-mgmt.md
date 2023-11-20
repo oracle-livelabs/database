@@ -103,7 +103,7 @@ We start off with an unencrypted database and will be validating that state in t
 - You can see the default location of the wallet file.
 - The wallet status will be given.
 - You can see there is no wallet that has been created yet.
-    
+
     At this point CBD1 does not know about a wallet or encryption
 
 
@@ -727,5 +727,5 @@ At this point neither database knows about encryption and there is no wallet set
 
 ## Acknowledgements
 - **Authors** - Sean Provost, Enterprise Architect
-- **Contributors** - Mike Sweeney, Bryan Grenn, Bill Pritchett, Rene Fontcha
+- **Contributors** - Mike Sweeney, Bryan Grenn, Bill Pritchett, Divit Gupta, Rene Fontcha
 - **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, August 2023

@@ -21,7 +21,7 @@ This lab assumes you have:
 
 1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
 
- [ll-timesten-cache-intro.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/zXF3WR--V6CG3ZmB1vgQcEcYYidDhuejeplM9oBUwiYGs-7BnN4YI2_TLVY82_-b/n/natdsecurity/b/stack/o/ll-timesten-cache-intro.zip)
+ [ll-timesten-cache-intro.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/ll-timesten-cache-intro.zip)
 
 2.  Save in your downloads folder.
 
@@ -84,4 +84,4 @@ This workshop requires a certain number of ports to be available, a requirement 
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Jenny Bloom, March 2023
+* **Last Updated By/Date** - Jenny Bloom, November 2023
