@@ -83,7 +83,7 @@ Before you start a transaction, you must start a Minikube tunnel.
 
     Note that, if you don't do this, then you must explicitly specify the IP address in the commands when required.
 
-## Task 2: Know About the Created PDBs
+## Task 2: Know Details About the Resource Managers
 
 When you start Minikube, an instance of the Oracle Database 23c Free Release is deployed on Minikube. See [Oracle Database Free](https://www.oracle.com/database/free/get-started). The following three PDBs are already available in the Database instance.
 
@@ -95,105 +95,203 @@ The required tables are already created in each PDB and are populated with sampl
 
 ### About the Resource Manager for the Core Banking Service
 
-The Core Banking service uses `COREBNKPDB` as resource manager. This PDB contains three tables: Branch, Account, and History. The following table lists the available fields and sample data, if any.
+The Core Banking service uses `COREBNKPDB` as resource manager. This PDB contains three tables: Branch, Account, and History. The following code snippet provides details about the tables. The sample code is provided only for your reference. The tables are already available in the PDB and populated with sample values.
 
-| Fields      | Values                                                  |
-| ----------- | --------------------------------------------------------|
-| BRANCH_ID   | 1111                                                    |
-| BRANCH_NAME | Arizona                                                 |
-| PHONE       | 123-456-7891                                            |
-| ADDRESS     | 6001 N 24th St, Phoenix, Arizona 85016, United States   |
-| SERVICE_URL | http://arizona-branch-bank:9095                         |
-| LAST_ACCT   | 10002                                                   |
-{: title="Sample data values in the Branch table"}
+    ```SQL
+    CREATE TABLE BRANCH
+    (
+      BRANCH_ID   NUMBER NOT NULL,
+      BRANCH_NAME VARCHAR2(20),
+      PHONE       VARCHAR2(14),
+      ADDRESS     VARCHAR2(60),
+      SERVICE_URL VARCHAR2(255),
+      LAST_ACCT   INTEGER,
+      PRIMARY KEY (BRANCH_ID)
+    );
 
-| Fields    | Value 1                        | Value 2                        | Value 3                        |
-| ----------| -------------------------------|--------------------------------|--------------------------------|
-| ACCOUNT_ID| 10001                          | 10002                          | 10003                          |
-| BRANCH_ID | 1111                           | 1111                           | 1111                           |
-| SSN       | 873-61-1457                    | 883-71-8538                    | 993-71-8500                    |
-| FIRST_NAME| Adams                          | Smith                          | Thomas                         |
-| LAST_NAME | Lopez                          | Mason                          | Dave                           |
-| MID_NAME  | D                              | N                              | C                              |
-| PHONE     | 506-100-5886                   | 403-200-5890                   | 603-700-5899                   |
-| ADDRESS   | 15311 Grove Ct. Arizona  95101 | 15322 Grove Ct. Arizona  95101 | 15333 Grove Ct. Arizona 95101  |
-{: title="Sample data values in the Account table"}
+    CREATE TABLE ACCOUNT
+    (
+      ACCOUNT_ID NUMBER   NOT NULL,
+      BRANCH_ID  NUMBER   NOT NULL,
+      SSN        CHAR(12) NOT NULL,
+      FIRST_NAME VARCHAR2(20),
+      LAST_NAME  VARCHAR2(20),
+      MID_NAME   VARCHAR2(10),
+      PHONE      VARCHAR2(14),
+      ADDRESS    VARCHAR2(60),
+      PRIMARY KEY (ACCOUNT_ID)
+    );
 
-| Fields              | Values            |
-| ------------------- | ------------------|
-| TRANSACTION_CREATED |                   |
-| ACCOUNT_ID          |                   |
-| BRANCH_ID           |                   |
-| TRANSACTION_TYPE    |                   |
-| DESCRIPTION         |                   |
-| AMOUNT              |                   |
-| BALANCE             |                   |
-{: title="Fields in the History table"}
+    CREATE TABLE HISTORY
+    (
+      TRANSACTION_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      ACCOUNT_ID          NUMBER       NOT NULL,
+      BRANCH_ID           NUMBER       NOT NULL,
+      TRANSACTION_TYPE    VARCHAR2(15) NOT NULL,
+      DESCRIPTION         VARCHAR2(1024),
+      AMOUNT              DECIMAL(20, 2) NOT NULL,
+      BALANCE             DECIMAL(20, 2) NOT NULL
+    );
+    ```
+The following sample code provides details about the sample code that is available in the BRANCH and ACCOUNTS tables.
+
+    ```SQL
+    -- Sample values in the BRANCH table
+    INSERT INTO BRANCH (BRANCH_ID, BRANCH_NAME, PHONE, ADDRESS, SERVICE_URL, LAST_ACCT)
+    VALUES (1111, 'Arizona', '123-456-7891', '6001 N 24th St, Phoenix, Arizona 85016, United States', 'http://arizona-branch-bank:9095', 10002);
+
+    -- Sample values in the ACCOUNTS table
+    INSERT INTO ACCOUNT (ACCOUNT_ID, BRANCH_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+    VALUES (10001, 1111, '873-61-1457', 'Adams', 'Lopez', 'D', '506-100-5886', '15311 Grove Ct. Arizona  95101');
+    INSERT INTO ACCOUNT (ACCOUNT_ID, BRANCH_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+    VALUES (10002, 1111, '883-71-8538', 'Smith', 'Mason', 'N', '403-200-5890', '15322 Grove Ct. Arizona  95101');
+    INSERT INTO ACCOUNT (ACCOUNT_ID, BRANCH_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+    VALUES (10003, 1111, '883-71-8538', 'Thomas', 'Dave', 'C', '603-700-5899', '15333 Grove Ct. Arizona  95101');
+    ```
 
 ### About the Resource Manager for the Branch Banking Service
 
-The Branch Banking service uses `AZBRPDB1` as resource manager. This PDB contains the `SAVINGS_ACCOUNT` table. The following table lists the available fields and sample data populated in `SAVINGS_ACCOUNT`.
+The Branch Banking service uses `AZBRPDB1` as resource manager. This PDB contains the `SAVINGS_ACCOUNT` table. The following code snippet provides details about the `SAVINGS_ACCOUNT` table. The sample code is provided only for your reference. The tables are already available in the PDB and populated with sample values.
 
-| Fields    | Value 1  | Value 2 | Value 3   |
-| ----------| ---------|---------|-----------|
-| ACCOUNT_ID| 10001    | 10002   | 10003     |
-| BRANCH_ID | 1111     | 1111    | 1111      |
-| BALANCE   | 50000    | 50000   | 50000     |
-{: title="Sample data values in the SAVINGS_ACCOUNT table"}
+    ```SQL
+    CREATE TABLE SAVINGS_ACCOUNT
+    (
+      ACCOUNT_ID NUMBER NOT NULL,
+      BRANCH_ID  NUMBER NOT NULL,
+      BALANCE    DECIMAL(20, 2) NOT NULL,
+      PRIMARY KEY (ACCOUNT_ID)
+    );
+    ```
+
+The following sample code provides details about the sample code that is available in the SAVINGS_ACCOUNT table.
+
+    ```SQL
+    -- Branch - Arizona
+    INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
+    VALUES (10001, 1111, 50000.0);
+    INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
+    VALUES (10002, 1111, 50000.0);
+    INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
+    VALUES (10003, 1111, 50000.0);
+    ```
 
 ### About the Resource Manager for the Stock Broker Service
 
-The Stock Broker service uses `STOCKBROKERPDB` as resource manager. This PDB contains six tables: CASH_ACCOUNT, STOCKS, USER_ACCOUNT, STOCK_BROKER_STOCKS, USER_STOCKS, and HISTORY. The following table lists the available fields and sample data, if any.
+The Stock Broker service uses `STOCKBROKERPDB` as resource manager. This PDB contains six tables: CASH_ACCOUNT, STOCKS, USER_ACCOUNT, STOCK_BROKER_STOCKS, USER_STOCKS, and HISTORY. The following code snippet provides details about the tables. The sample code is provided only for your reference. The tables are already available in the PDB and populated with sample values.
 
-| Fields       | Value 1   |
-| ------------ | --------- |
-| ACCOUNT_ID   | 9999999   |
-| BALANCE      | 10000000  |
-| STOCK_BROKER | PENNYPACK |
-{: title="Sample data values in the CASH_ACCOUNT table"}
+    ```SQL
+    -- Tables to be created
+    -- Display stock units
+    CREATE TABLE CASH_ACCOUNT
+    (
+        ACCOUNT_ID   NUMBER       NOT NULL,
+        BALANCE      DECIMAL,
+        STOCK_BROKER VARCHAR2(20) NOT NULL,
+        PRIMARY KEY (ACCOUNT_ID)
+    );
+    -- Common account for Stock Broker. This is inserted during the initialization of the application.
+    CREATE TABLE STOCKS
+    (
+        STOCK_SYMBOL VARCHAR2(6)  NOT NULL,
+        COMPANY_NAME VARCHAR2(35) NOT NULL,
+        INDUSTRY     VARCHAR2(35) NOT NULL,
+        STOCK_PRICE  DECIMAL      NOT NULL,
+        PRIMARY KEY (STOCK_SYMBOL)
+    );
+    CREATE TABLE USER_ACCOUNT
+    (
+        ACCOUNT_ID NUMBER   NOT NULL,
+        SSN        CHAR(12) NOT NULL,
+        FIRST_NAME VARCHAR2(20),
+        LAST_NAME  VARCHAR2(20),
+        MID_NAME   VARCHAR2(10),
+        PHONE      VARCHAR2(14),
+        ADDRESS    VARCHAR2(60),
+        PRIMARY KEY (ACCOUNT_ID)
+    );
+    CREATE TABLE STOCK_BROKER_STOCKS
+    (
+        ACCOUNT_ID   NUMBER NOT NULL,
+        STOCK_SYMBOL VARCHAR2(6)  NOT NULL,
+        STOCK_UNITS  NUMBER NOT NULL,
+        PRIMARY KEY (ACCOUNT_ID, STOCK_SYMBOL),
+        CONSTRAINT FK_StockBroker_CashAccount
+            FOREIGN KEY (ACCOUNT_ID) REFERENCES CASH_ACCOUNT (ACCOUNT_ID) ON DELETE CASCADE,
+        CONSTRAINT FK_StockBrokerStocks_Stocks
+            FOREIGN KEY (STOCK_SYMBOL) REFERENCES STOCKS (STOCK_SYMBOL) ON DELETE CASCADE
+    );
+    CREATE TABLE USER_STOCKS
+    (
+        ACCOUNT_ID   NUMBER NOT NULL,
+        STOCK_SYMBOL VARCHAR2(6)  NOT NULL,
+        STOCK_UNITS  NUMBER NOT NULL,
+        PRIMARY KEY (ACCOUNT_ID, STOCK_SYMBOL),
+        CONSTRAINT FK_UserStocks_UserAccount
+            FOREIGN KEY (ACCOUNT_ID) REFERENCES USER_ACCOUNT (ACCOUNT_ID) ON DELETE CASCADE,
+        CONSTRAINT FK_UserStocks_Stocks
+            FOREIGN KEY (STOCK_SYMBOL) REFERENCES STOCKS (STOCK_SYMBOL) ON DELETE CASCADE
+    );
+    CREATE TABLE HISTORY
+    (
+        TRANSACTION_TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        ACCOUNT_ID       NUMBER       NOT NULL,
+        STOCK_OPERATION  VARCHAR2(15) NOT NULL,
+        STOCK_UNITS      NUMBER       NOT NULL,
+        STOCK_SYMBOL     VARCHAR2(6)  NOT NULL,
+        DESCRIPTION      VARCHAR2(1024)
+    );
+    ```
+The following sample code provides details about the sample code that is available in the CASH_ACCOUNT, STOCKS, USER_ACCOUNT, STOCK_BROKER_STOCKS, and USER_STOCKS table.
 
-| Fields       | Value 1                | Value 2             | Value 3              | Value 4            | Value 5            |
-| -------------| -----------------------|---------------------|----------------------|--------------------|--------------------|
-| STOCK_SYMBOL | BLUSC                  | SPRFD               | SVNCRP               | TALLMF             | VSNSYS             |
-| COMPANY_NAME | Blue Semiconductor     | Spruce Street Foods | Seven Corporation    | Tall Manufacturers | Vision Systems     |
-| INDUSTRY     | Semiconductor Industry | Food Products       | Software consultants | Tall Manufacturing | Medical Equipments |
-| STOCK_PRICE  | 87.28                  | 152.55              | 97.20                | 142.24             | 94.35              |
-{: title="Sample data values in the STOCKS table"}
+    ```SQL
+    -- Sample value in the STOCKS table
+    INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+    VALUES ('BLUSC', 'Blue Semiconductor', 'Semiconductor Industry', 87.28);
+    INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+    VALUES ('SPRFD', 'Spruce Street Foods', 'Food Products', 152.55);
+    INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+    VALUES ('SVNCRP', 'Seven Corporation', 'Software consultants', 97.20);
+    INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+    VALUES ('TALLMF', 'Tall Manufacturers', 'Tall Manufacturing', 142.24);
+    INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+    VALUES ('VSNSYS', 'Vision Systems', 'Medical Equipments', 94.35);
 
-| Fields       | Value 1 | Value 2 | Value 3 | Value 4 | Value 5 |
-| -------------| --------|---------|---------|---------|---------|
-| ACCOUNT_ID   | 9999999 | 9999999 | 9999999 | 9999999 | 9999999 |
-| STOCK_SYMBOL | BLUSC   | SPRFD   | SVNCRP  | TALLMF  | VSNSYS  |
-| STOCK_UNITS  | 100000  | 50000   | 90000   | 80000   | 100000  |
-{: title="Sample data values in the STOCK_BROKER_STOCKS table"}
+    -- Sample value in the CASH_ACCOUNT table
+    INSERT INTO CASH_ACCOUNT(ACCOUNT_ID, BALANCE, STOCK_BROKER)
+    VALUES (9999999, 10000000, 'PENNYPACK');
 
-| Fields    | Value 1                        | Value 2                        | Value 3                        |
-| ----------| -------------------------------|--------------------------------|--------------------------------|
-| ACCOUNT_ID| 10001                          | 10002                          | 10003                          |
-| SSN       | 873-61-1457                    | 883-71-8538                    | 993-71-8500                    |
-| FIRST_NAME| Adams                          | Smith                          | Thomas                         |
-| LAST_NAME | Lopez                          | Mason                          | Dave                           |
-| MID_NAME  | D                              | N                              | C                              |
-| PHONE     | 506-100-5886                   | 403-200-5890                   | 603-700-5899                   |
-| ADDRESS   | 15311 Grove Ct. New York 95101 | 15311 Grove Ct. New York 95101 | 15333 Grove Ct. Arizona 95101  |
-{: title="Sample data values in the USER_ACCOUNT table"}
+    -- Sample value in the STOCK_BROKER_STOCKS table
+    INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (9999999, 'BLUSC', 100000);
+    INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (9999999, 'SPRFD', 50000);
+    INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (9999999, 'SVNCRP', 90000);
+    INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (9999999, 'TALLMF', 80000);
+    INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (9999999, 'VSNSYS', 100000);
 
-| Fields       | Value 1 | Value 2 | Value 3 | Value 4 | Value 5 |
-| -------------| --------|---------|---------|---------|---------|
-| ACCOUNT_ID   | 10001   | 10001   | 10001   | 10001   | 10001   |
-| STOCK_SYMBOL | BLUSC   | SPRFD   | SVNCRP  | TALLMF  | VSNSYS  |
-| STOCK_UNITS  | 10      | 15      | 20      | 30      | 40      |
-{: title="Sample data values in the USER_STOCKS table"}
+    -- Sample value in the USER_ACCOUNT table
+    INSERT INTO USER_ACCOUNT (ACCOUNT_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+    VALUES (10001, '873-61-1457', 'Adams', 'Lopez', 'D', '506-100-5886', '15311 Grove Ct. New York  95101');
+    INSERT INTO USER_ACCOUNT (ACCOUNT_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+    VALUES (10002, '883-71-8538', 'Smith', 'Mason', 'N', '403-200-5890', '15311 Grove Ct. New York  95101');
+    INSERT INTO USER_ACCOUNT (ACCOUNT_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+    VALUES (10003, '993-71-8500', 'Thomas', 'Dave', 'C', '603-700-5899', '15333 Grove Ct. Arizona  95101');
 
-| Fields           | Values            |
-| -----------------| ------------------|
-| TRANSACTION_TIME |                   |
-| ACCOUNT_ID       |                   |
-| STOCK_OPERATION  |                   |
-| STOCK_UNITS      |                   |
-| STOCK_SYMBOL     |                   |
-| DESCRIPTION      |                   |
-{: title="Fields in the History table"}
+    -- Sample value in the USER_STOCKS table
+    INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (10001, 'BLUSC', 10);
+    INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (10001, 'SPRFD', 15);
+    INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (10001, 'SVNCRP', 20);
+    INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (10001, 'TALLMF', 30);
+    INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (10001, 'VSNSYS', 40);
+    ```
 
 When you start Minikube, the PDBs are created and populated with sample data.
 
@@ -257,9 +355,9 @@ The Bank and Stock-Trading Application console uses Keycloak to authenticate use
 
     ![Public IP address of Keycloak](./images/keycloak-ip-address.png)
 
-    Let's consider that the external IP in the above example is 198.51.100.1 and the IP address is 8080.
+    Let's consider that the external IP in the above example is 198.51.100.1 and the port is 8080.
 
-2. Run the following command to run the `reconfigure-keycloak.sh` script from the `$HOME` directory
+2. Run the following command to run the `reconfigure-keycloak.sh` script from the `$HOME` directory.
 
     ```
     <copy>

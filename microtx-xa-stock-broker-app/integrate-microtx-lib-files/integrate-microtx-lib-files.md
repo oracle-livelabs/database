@@ -139,7 +139,7 @@ Since the Stock broker application participates in the transaction in addition t
 When you integrate the MicroTx client library for Java with the Stock broker application, the library performs the following functions:
 
 * Enlists the participant service with the transaction coordinator.
-* Injects an `XADataSource` object for the participant application code to use through dependency injection. The MicroTx libraries automatically inject the configured data source into the participant services, so you must add the `@Inject` or `@Context` annotation to the application code. The application code runs the DML using this connection.
+* Injects an `XADataSource` object for the participant application code to use through dependency injection. The MicroTx libraries automatically inject the configured data source into the participant services, so you must autowire the connection object with `microTxSqlConnection` bean qualifier. The application code runs the DML using this connection.
 * Calls the resource manager to perform operations.
 
 Uncomment all the lines of code in the following files:
@@ -186,7 +186,7 @@ To configure the Stock Broker application as a transaction participant:
 
 10. Open the `AccountServiceImpl.java` file in any code editor. This file is in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
-12. Uncomment the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application injects the `connection` object that is created by the MicroTx client library.
+12. Uncomment the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application autowires the connection object bean `microTxSqlConnection` that is managed by the MicroTx client library.
 
     ```java
     <copy>
@@ -201,7 +201,7 @@ To configure the Stock Broker application as a transaction participant:
 
 15. Open the `StockBrokerTransactionServiceImpl.java` file in any code editor. This file is in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
-17. Uncomment the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application injects the `connection` object that is created by the MicroTx client library.
+17. Uncomment the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application autowires the connection object bean `microTxSqlConnection` that is managed by the MicroTx client library.
 
     ```java
     <copy>
