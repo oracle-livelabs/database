@@ -174,6 +174,8 @@ The *kube-apiserver* then stored the information in *etcd* that "`your-pod` shou
 
     The *manifest file* states that you are using the "core" API `v1` to define a *Pod* named `your-pod`.  The *Pod* will have one *container* called `nginx` running the `nginx:latest` image.
 
+    The `nginx:latest` image is being pulled directly from a Container Registry.  In this case, the registry is [docker.io](https://www.docker.com/) but there are other public Registries available.  Often your organisation will have its own Registry with their own custom images.
+
 2. Create `your-pod` using the *manifest file*:
 
     ```bash
@@ -428,7 +430,7 @@ While running *Pods* is at the heart of Kubernetes, it is uncommon to run them d
     ```
 
     ```bash
-    <copy>    
+    <copy>
     kubectl apply -f your-pod-deployment.yaml && watch -n 1 -d kubectl get pod -l "tier=frontend"
     </copy>
     ```

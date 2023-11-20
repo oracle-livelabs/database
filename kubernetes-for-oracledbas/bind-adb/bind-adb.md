@@ -101,7 +101,11 @@ If it were set to `true` then deleting the resource from Kubernetes *WOULD* dele
 
     ![kubectl get AutonomousDatabase adb-existing](images/kubectl_get_adb.png "kubectl get AutonomousDatabase adb-existing")
 
-2. Describe the `adb-existing` resource (`kubectl describe <resource_type> <resource_name> [-n <namespace>]`) to get more details.  Use the resource_type alias `adb` for `AutonomousDatabase` to save some typing.  You can view all the resource_type alias short names by running: `kubectl api-resources`
+2. Describe the `adb-existing` resource (`kubectl describe <resource_type> <resource_name> [-n <namespace>]`) to get more details.
+
+    Use the resource_type alias `adb` for `AutonomousDatabase` to save some typing.
+
+    You can view all the resource_type alias short names by running: `kubectl api-resources`
 
     ```bash
     <copy>
@@ -257,7 +261,7 @@ Now that you've defined two *Secrets* in Kubernetes, redefine the `adb-existing`
 
     ![kubectl describe secrets adb-tns-admin](images/adb_tns_admin.png "kubectl describe secrets adb-tns-admin")
 
-    You'll see what equates to a `TNS_ADMIN` directory, and in fact, this *Secret* will be used by applications for just that purpose.
+    You'll see what equates to a `TNS_ADMIN` directory, and in fact, this *Secret* can be used by Microservice applications for just that purpose.
 
 You may now **proceed to the next lab**
 

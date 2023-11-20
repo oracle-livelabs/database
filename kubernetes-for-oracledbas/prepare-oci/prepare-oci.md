@@ -50,6 +50,10 @@ In the *Cloud Shell*, run the following commands to create a sub-*Compartment* t
 
 You can think of a *Compartment* much like a database schema: a collection of tables, indexes, and other objects isolated from other schemas.  By default, a root *Compartment* (think SYSTEM schema) was created for you when your tenancy was established.  It is possible to create everything in the root *Compartment*, but Oracle recommends that you create sub-*Compartments* to help manage your resources more efficiently.
 
+### Fun Fact?
+
+Kubernetes is often shortened to `K8s` (kay eights) with the 8 standing for the number of letters between the “K” and the “s”.
+
 ## Task 3: Create a Group
 
 A *Group* is a collection of cloud users who all need the same type of access to a particular set of resources or compartment.

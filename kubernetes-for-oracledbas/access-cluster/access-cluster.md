@@ -113,28 +113,28 @@ In an Oracle Database, schema's provide a mechanism for isolating database objec
     </copy>
     ```
 
-3. Create a new *Namespace* called `sqldev-web`:
+3. Create a new *Namespace* called `ords`:
 
     ```bash
     <copy>
-    kubectl create namespace sqldev-web
+    kubectl create namespace ords
     </copy>
     ```
 
-4. Create a new context that points to the `sqldev-web` *namespace*:
+4. Create a new context that points to the `ords` *namespace*:
 
     ```bash
     <copy>
-    kubectl config set-context sqldev-web \
-    --namespace=sqldev-web \
+    kubectl config set-context ords \
+    --namespace=ords \
     --cluster=$(kubectl config get-clusters | tail -1) \
     --user=$(kubectl config get-users | tail -1)
     </copy>
     ```
 
-    You'll use the `sqldev-web` *namespace* later in the Workshop to deploy your Microservice Application.
+    You'll use the `ords` *namespace* later in the Workshop to deploy your Microservice Application.
 
-5. You should now have two contexts, one named `demo` and one named `sqldev-web`:
+5. You should now have two contexts, one named `demo` and one named `ords`:
 
     ```bash
     <copy>
@@ -156,6 +156,18 @@ In an Oracle Database, schema's provide a mechanism for isolating database objec
     ![Context](images/contexts.png "Contexts")
 
 For Production clusters, you may consider storing its context in an entirely different kubeconfig file to limit access and prevent mistakes.  Using the `production` context would be a matter of setting the `KUBECONFIG` environment variable to its location.
+
+### Fun Fact?
+
+You'll often see example commands online where `kubectl` is shortened to just `k`: `k get contexts; k create namespace ords`, etc.
+
+This is a heavily used practice implemented by creating an alias:
+
+```bash
+<copy>
+alias k="kubectl"
+</copy>
+```
 
 You may now **proceed to the next lab**
 
