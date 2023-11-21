@@ -230,16 +230,16 @@ The below *ConfigMap* will create two new users in the ADB: `ORDS_PUBLIC_USER_K8
             ,p_plsql_gateway_user => 'ORDS_PLSQL_GATEWAY_K8S'
           );
 
-        BEGIN
-          SELECT images_version INTO L_CDN
-            FROM APEX_PATCHES
-          where is_bundle_patch = 'Yes'
-          order by patch_version desc
-          fetch first 1 rows only;
-        EXCEPTION WHEN NO_DATA_FOUND THEN
-          select version_no INTO L_CDN
-            from APEX_RELEASE;
-        END;
+          BEGIN
+            SELECT images_version INTO L_CDN
+              FROM APEX_PATCHES
+            where is_bundle_patch = 'Yes'
+            order by patch_version desc
+            fetch first 1 rows only;
+          EXCEPTION WHEN NO_DATA_FOUND THEN
+            select version_no INTO L_CDN
+              from APEX_RELEASE;
+          END;
           apex_instance_admin.set_parameter(
               p_parameter => 'IMAGE_PREFIX',
               p_value     => 'https://static.oracle.com/cdn/apex/'||L_CDN||'/'
