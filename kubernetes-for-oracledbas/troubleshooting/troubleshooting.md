@@ -31,7 +31,7 @@ When [preparing the OCI Tenancy](?lab=prepare-oci#Task4:AssignUsertoGroup "Prepa
 
 6. Log out of OCI and re-login as the new user to continue the rest of the Workshop
 
-The user can be delete after the workshop has been cleaned up.
+The user can be deleted after the workshop has been cleaned up.
 
 ## Task 2: Out of Capacity
 
