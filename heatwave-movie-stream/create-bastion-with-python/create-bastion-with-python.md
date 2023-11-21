@@ -8,7 +8,7 @@ When working in the cloud, there are often times when your servers and services 
 
 You will also install Python and Pandas Module; and MySQL Shell on this Bastion Compute Instance. It will be used as a Development Server to Download, Transform and Import data into  MySQL HeatWave. New applications can also be created with other software stacks and connect to your MySQL HeatWave system in this bastion.
 
-_Estimated Lab Time:_ 20 minutes
+_Estimated Lab Time:_ 15 minutes
 
 ### Objectives
 

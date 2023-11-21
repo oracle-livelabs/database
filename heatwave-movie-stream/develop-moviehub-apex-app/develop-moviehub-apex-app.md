@@ -8,7 +8,7 @@ The MovieHub App is a demo application created to showcase the potential of MySQ
 
 In this lab, you will be guided to create high performance apps powered by the MySQL HeatWave Database Service; developing a movie stream like web application using Oracle APEX, a leading low-code development tool that allows you to create complex web apps in minutes. You will also learn how you can leverage the automation of machine learning processes, thanks to MySQL AutoML that allows you to build, train, deploy, and explain machine learning models within MySQL HeatWave.
 
-_Estimated Time:_ 45 minutes
+_Estimated Time:_ 15 minutes
 
 ### Objectives
 
