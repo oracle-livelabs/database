@@ -138,14 +138,15 @@ The ORDS configuration does not store any sensitive data, so build a *manifest f
         <?xml version="1.0" encoding="UTF-8"?>
         <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
         <properties>
-          <entry key="database.api.enabled">false</entry>
+          <entry key="database.api.enabled">true</entry>
           <entry key="feature.sdw">true</entry>
           <entry key="jdbc.InitialLimit">10</entry>
-          <entry key="jdbc.MaxLimit">50</entry>
+          <entry key="jdbc.MaxLimit">100</entry>
           <entry key="restEnabledSql.active">true</entry>
           <entry key="security.httpsHeaderCheck">X-Forwarded-Proto: https</entry>
-          <entry key="standalone.context.path">/ords</entry>
+          <entry key="standalone.context.path">/</entry>
           <entry key="standalone.http.port">8080</entry>
+          <entry key="standalone.static.context.path">/i</entry>
         </properties>
     ---
     apiVersion: v1
@@ -196,7 +197,7 @@ The below *ConfigMap* will create two new users in the ADB: `ORDS_PUBLIC_USER_K8
       changelog.sql: |-
         -- liquibase formatted sql
 
-        -- changeset gotsysdba:1 endDelimiter:/
+        -- changeset gotsysdba:create_users endDelimiter:/ runAlways:true
         DECLARE
           l_user VARCHAR2(255);
           l_cdn  VARCHAR2(255);
@@ -221,20 +222,24 @@ The below *ConfigMap* will create two new users in the ADB: `ORDS_PUBLIC_USER_K8
           EXECUTE IMMEDIATE 'GRANT CONNECT TO "ORDS_PLSQL_GATEWAY_K8S"';
           EXECUTE IMMEDIATE 'ALTER USER "ORDS_PLSQL_GATEWAY_K8S" GRANT CONNECT THROUGH "ORDS_PUBLIC_USER_K8S"';
           ORDS_ADMIN.PROVISION_RUNTIME_ROLE (
-             p_user => 'ORDS_PUBLIC_USER_K8S'
+              p_user => 'ORDS_PUBLIC_USER_K8S'
             ,p_proxy_enabled_schemas => TRUE
           );
           ORDS_ADMIN.CONFIG_PLSQL_GATEWAY (
-             p_runtime_user => 'ORDS_PUBLIC_USER_K8S'
+              p_runtime_user => 'ORDS_PUBLIC_USER_K8S'
             ,p_plsql_gateway_user => 'ORDS_PLSQL_GATEWAY_K8S'
           );
 
+        BEGIN
           SELECT images_version INTO L_CDN
             FROM APEX_PATCHES
           where is_bundle_patch = 'Yes'
           order by patch_version desc
           fetch first 1 rows only;
-
+        EXCEPTION WHEN NO_DATA_FOUND THEN
+          select version_no INTO L_CDN
+            from APEX_RELEASE;
+        END;
           apex_instance_admin.set_parameter(
               p_parameter => 'IMAGE_PREFIX',
               p_value     => 'https://static.oracle.com/cdn/apex/'||L_CDN||'/'
@@ -302,40 +307,40 @@ Finally, define the Application *Deployment* manifest itself.  It looks like a l
     <copy>
     cat >> ords.yaml << EOF
           initContainers:
-          - name: liquibase
-            image: container-registry.oracle.com/database/sqlcl:[](var:sqlcl_version)
-            imagePullPolicy: IfNotPresent
-            args: ["-L", "-nohistory", "\$(LB_COMMAND_USERNAME)/\$(LB_COMMAND_PASSWORD)@\$(LB_COMMAND_URL)", "@liquibase.sql"]
-            env:
-              - name: ORDS_PWD
-                valueFrom:
-                  secretKeyRef:
-                    name: db-secrets
-                    key: ords.password
-              - name: LB_COMMAND_SERVICE
-                valueFrom:
-                  secretKeyRef:
-                    name: db-secrets
-                    key: db.service_name
-              - name: LB_COMMAND_URL
-                value: jdbc:oracle:thin:@\$(LB_COMMAND_SERVICE)?TNS_ADMIN=/opt/oracle/network/admin
-              - name: LB_COMMAND_USERNAME
-                valueFrom:
-                  secretKeyRef:
-                    name: db-secrets
-                    key: db.username
-              - name: LB_COMMAND_PASSWORD
-                valueFrom:
-                  secretKeyRef:
-                    name: db-secrets
-                    key: db.password
-            volumeMounts:
-            - mountPath: /opt/oracle/network/admin
-              name: tns-admin
-              readOnly: true
-            - mountPath: /opt/oracle/sql_scripts
-              name: liquibase
-              readOnly: true
+            - name: liquibase
+              image: container-registry.oracle.com/database/sqlcl:latest
+              imagePullPolicy: IfNotPresent
+              args: ["-L", "-nohistory", "\$(LB_COMMAND_USERNAME)/\$(LB_COMMAND_PASSWORD)@\$(LB_COMMAND_URL)", "@liquibase.sql"]
+              env:
+                - name: LB_COMMAND_USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: "db-secrets"
+                      key: db.username
+                - name: LB_COMMAND_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: "db-secrets"
+                      key: db.password
+                - name: DB_SERVICE
+                  valueFrom:
+                    secretKeyRef:
+                      name: "db-secrets"
+                      key: db.service_name
+                - name: LB_COMMAND_URL
+                  value: jdbc:oracle:thin:@\$(DB_SERVICE)?TNS_ADMIN=/opt/oracle/network/admin
+                - name: ORDS_PWD
+                  valueFrom:
+                    secretKeyRef:
+                      name: "db-secrets"
+                      key: db.password
+              volumeMounts:
+              - mountPath: /opt/oracle/network/admin
+                name: tns-admin
+                readOnly: true
+              - mountPath: /opt/oracle/sql_scripts
+                name: liquibase
+                readOnly: true
     EOF
     </copy>
     ```
@@ -352,7 +357,7 @@ Finally, define the Application *Deployment* manifest itself.  It looks like a l
     <copy>
     cat >> ords.yaml << EOF
           containers:
-            - image: "container-registry.oracle.com/database/ords:23.1.3"
+            - image: "container-registry.oracle.com/database/ords:23.3.0"
               imagePullPolicy: IfNotPresent
               name: ords
               command:
@@ -368,16 +373,16 @@ Finally, define the Application *Deployment* manifest itself.  It looks like a l
                   value: /opt/oracle
                 - name: TNS_ADMIN
                   value: /opt/oracle/network/admin
+                - name: DB_SERVICE
+                  valueFrom:
+                    secretKeyRef:
+                      name: "db-secrets"
+                      key: db.service_name
                 - name: ORDS_PWD
                   valueFrom:
                     secretKeyRef:
-                      name: db-secrets
-                      key: ords.password
-                - name: SERVICE_NAME
-                  valueFrom:
-                    secretKeyRef:
-                      name: db-secrets
-                      key: db.service_name
+                      name: "db-secrets"
+                      key: db.password
               volumeMounts:
                 - name: ords-default-config
                   mountPath: "/opt/oracle/standalone/config/global/"
@@ -412,7 +417,6 @@ Finally, define the Application *Deployment* manifest itself.  It looks like a l
                 runAsUser: 54321
                 readOnlyRootFilesystem: false
                 allowPrivilegeEscalation: false
-
     EOF
     </copy>
     ```
@@ -503,9 +507,14 @@ Only one *replica* was created, which translates to the single *Pod* `ords-0` in
 
     ```bash
     <copy>
-    kubectl describe service |grep Endpoints
+    kubectl get pods -o wide
+    kubectl describe service
     </copy>
     ```
+
+    ![Application Service](images/service_endpoint.png "Application Service")
+
+**Bonus**: Scale up your *statefulset*.  What happens to the Endpoint of the service?
 
 
 ## Task 8: Create the Ingress
@@ -530,7 +539,7 @@ The *Service* exposed the application to the Kubernetes Cluster, for you to acce
       rules:
         - http:
             paths:
-              - path: /ords
+              - path: /
                 pathType: ImplementationSpecific
                 backend:
                   service:
@@ -563,11 +572,20 @@ The *Service* exposed the application to the Kubernetes Cluster, for you to acce
 
 ## Task 9: Access the Microservice Application
 
-In the output from the Ingress, copy the IP and visit: `http://<IP>/ords/sql-developer`:
+In the output from the Ingress, copy the IP and visit: `http://<IP>`.  You will see a warning page about a self-signed TLS Certificate, accept the risk to view the ORDS landing page:
 
 ![Application Login](images/app_login.png "Application Login")
 
-Log into your Application and Explore!
+From here you can log into SQL Developer Web to explore your database, or log into your APEX and start designing a Low-Code application!
+
+Use the username `ADMIN` and the password retreived from the Kubernetes secret:
+
+```bash
+<copy>
+kubectl get secrets/adb-admin-password -n default --template="{{index .data \"adb-admin-password\" | base64decode}}"
+</copy>
+```
+
 
 ## Task 10: Delete the Microservice Application
 
