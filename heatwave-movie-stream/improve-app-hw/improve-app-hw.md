@@ -7,7 +7,7 @@
 In this lab you will be guided into adding your  own images into the OCI Object Store and display them in your APEX **MovieHub App**
 
 
-_Estimated Lab Time:_ 10 minutes
+_Estimated Lab Time:_ 15 minutes
 
 ### Objectives
 
