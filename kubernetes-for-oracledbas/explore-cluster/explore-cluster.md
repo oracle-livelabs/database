@@ -151,7 +151,7 @@ When you interacted with the *kube-apiserver* to create `your-pod`, the *kube-sc
 
 ![kube-scheduler](images/kube-scheduler.png "kube-scheduler")
 
-The *kube-apiserver* then stored the information in *etcd* that "`your-pod` should run on nodeX," following that decision made by the *kube-scheduler*.  The *kube-apiserver* then instructs the *kubelet* on `nodeX` to execute the actions against the `nodeX` *container runtime* to ensure `your-pod` is running, as it was defined, with the containers described in that *Pod*Spec.
+The *kube-apiserver* then stored the information in *etcd* that "`your-pod` should run on nodeX," following that decision made by the *kube-scheduler*.  The *kube-apiserver* then instructs the *kubelet* on `nodeX` to execute the actions against the `nodeX` *container runtime* to ensure `your-pod` is running, as it was defined, with the containers described in that *Pod* "Spec".
 
 1. Create a *manifest file* for `your-pod`:
 
@@ -437,7 +437,9 @@ While running *Pods* is at the heart of Kubernetes, it is uncommon to run them d
 
     If the `watch` was quick enough, you would have seen that the *Deployment* caused the upgrade to be rolled out.  It ensured that the specified number of `replica` were always available, replacing *Pods* with the older `nginx` with *Pods* running the newer version in a graceful manner.
 
-5. Delete your *Deployment*
+5. Use `Ctrl-C` to exit the watch loop
+
+6. Delete your *Deployment*
 
     ```bash
     <copy>

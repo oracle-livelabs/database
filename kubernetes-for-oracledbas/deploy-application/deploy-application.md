@@ -63,7 +63,7 @@ For the Database (Names) Resolution, copy the wallet *Secret* from the `default`
     </copy>
     ```
 
-    The above command will export the `adb-tns-admin` *Secret* from the `default` *namespace* to JSON, exclude some metadata fields, and load the *Secret* back into the Kubernetes `ords` *namespace*.
+    The above command will export the `adb-tns-admin` *Secret* from the `default` *namespace* to JSON, exclude some metadata fields, and load the *Secret* back into the Kubernetes `ords` *namespace*... a sort of `CREATE TABLE.. AS SELECT...` operation.
 
 2. Query the new *Secret*:
 
@@ -119,7 +119,7 @@ A *ConfigMap* is like a *Secret* but to store non-confidential data. *Pods* can 
 
 ### ORDS Configuration
 
-The ORDS configuration does not store any sensitive data, so build a *manifest file* to create two *ConfigMap*s of its configuration.  The *ConfigMap*s will be mounted as files into the Container and used by the ORDS process to start the application and make a connection to the database.
+The ORDS configuration does not store any sensitive data, so append to the *manifest file* two *ConfigMap*s of its configuration.  The *ConfigMap*s will be mounted as files into the Container and used by the ORDS process to start the application and make a connection to the database.
 
 1. Append the `ords-config` *ConfigMap* to the Application Deployment *manifest file*:
 
@@ -180,7 +180,7 @@ An *initContainer* is just like an regular application container, except it will
 
 ![initContainer](images/initContainer.png "initContainer")
 
-The below *ConfigMap* will create two new users in the ADB: `ORDS_PUBLIC_USER_K8S` and `ORDS_PLSQL_GATEWAY_K8S`.  It will also grant the required permissions for them to run the SQL Developer Web application.
+The below *ConfigMap* will create two new users in the ADB: `ORDS_PUBLIC_USER_K8S` and `ORDS_PLSQL_GATEWAY_K8S`.  It will also grant the required permissions for them to run the ORDS Microservice application.
 
 1. Append the *ConfigMap* to your application manifest:
 
@@ -252,7 +252,7 @@ The below *ConfigMap* will create two new users in the ADB: `ORDS_PUBLIC_USER_K8
     </copy>
     ```
 
-By using a variable for the passwords, you are not exposing any sensitive information in your code.  The value for the variable will be set using environment variables in the Applications *Deployment* specification, which will pull the values from the *Secret* you createdenv.
+By using a variable for the passwords, you are not exposing any sensitive information in your code.  The value for the variable will be set using environment variables in the Applications *Deployment* specification, which will pull the values from the *Secret* you created.
 
 ## Task 5: Create the Application
 
@@ -347,7 +347,7 @@ Finally, define the Application *Deployment* manifest itself.  It looks like a l
 
 3. Add the `container`, the application you are deploying.
 
-    In addition to mounting the `adb-tns-admin` *Secret* to the `/opt/oracle/network/admin` directory for Names Resolution, it will also mount the `ords-config` *ConfigMap* to the `/home/oracle/ords/config` directory.
+    In addition to mounting the `adb-tns-admin` *Secret* to the `/opt/oracle/network/admin` directory for Names Resolution, it will also mount the *ConfigMap*s `ords-default-config` to the `/opt/oracle/standalone/config/global` and `ords-pool-config` to the `/opt/oracle/standalone/config/databases/default/` directories.
 
     The *Pod* will download the `ORDS` image from Oracle's Container Registry, generate a wallet for the database password and startup the ORDS server in standalone mode.
 
@@ -423,7 +423,7 @@ Finally, define the Application *Deployment* manifest itself.  It looks like a l
 
 ## Task 6: Deploy the Application
 
-You now have a single *manifest file* that will deploy everything you need for your application.
+You now have a single *manifest file* that will deploy everything you need for your application.  You could take that file and deploy it into any Kubernetes cluster (such as UAT or PRD).  Simply change the contents of the *Secrets* and *ConfigMaps* to make it enviroment specific.
 
 1. Apply the *manifest file*:
 
@@ -514,12 +514,12 @@ Only one *replica* was created, which translates to the single *Pod* `ords-0` in
 
     ![Application Service](images/service_endpoint.png "Application Service")
 
-**Bonus**: Scale up your *statefulset*.  What happens to the Endpoint of the service?
+**Bonus**: Scale up your *statefulset*.  What happens to the Endpoints of the *Service*?
 
 
 ## Task 8: Create the Ingress
 
-The *Service* exposed the application to the Kubernetes Cluster, for you to access it from a Web Browser, it needs to be exposed outside the cluster.  During the provisioning of the Stack, the **Ansible** portion deployed a Microservice Application called `ingress-nginx`.  That service interacted with Oracle Cloud Infrastructure, via the *cloud-controller-manager* and spun up a LoadBalancer.  To expose the application to the LoadBalancer, create an `Ingress` resource that will interact with the `ingress-nginx` Microservice to allow your application to be accessed from outside the cluster:
+The *Service* exposed the application to the Kubernetes Cluster, for you to access it from a Web Browser, it needs to be exposed outside the cluster.  During the provisioning of the Stack, the **Ansible** portion deployed a Microservice Application called `ingress-nginx`.  That Microservice interacted with Oracle Cloud Infrastructure, via the *cloud-controller-manager* and spun up a LoadBalancer.  To expose the application to the LoadBalancer, create an `Ingress` resource that will interact with the `ingress-nginx` Microservice to allow your application to be accessed from outside the cluster:
 
 1. Create the Ingress *manifest file*:
 
@@ -589,7 +589,7 @@ kubectl get secrets/adb-admin-password -n default --template="{{index .data \"ad
 
 ## Task 10: Delete the Microservice Application
 
-While you could delete the individual resources manually, or by using the *manifest file*, another way to delete this Microservice Application is to delete the *namespace* it is deployed in.
+While you could delete the individual resources manually, or by using the *manifest file*, another way to delete this Microservice Application is to delete the *namespace* it is deployed in.  This is the equivalent of dropping a schema from the database.
 
 1. Delete the `ords` *Namespace*:
 
