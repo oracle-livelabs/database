@@ -73,7 +73,7 @@ For example, the IaC in this particular stack is used in two different OCI Marke
 
 but it has been slimmed down, via variables, specifically for this workshop.  This demonstrates how easy it is to modify infrastructure configurations, as needed, without requiring any changes to the underlying code.
 
-1. Tick the "Show Database Options?" to see what can be customised, but **please do not change any values**.
+1. Scroll down to "Database Options" and see what can be customised, but **please do not change any values**.
 
     ![Configuration Variables](./images/configuration_variables.png "Configuration Variables")
 
@@ -112,9 +112,9 @@ For the DBA this is invaluable as it means you can define the ADB once, use vari
 
 As Terraform is declarative, that IaC can also be used to modify existing ADBs that were created by it, by comparing the configuration in the "State" file with the real-world resources.
 
-During the ORM interview phase, when you ticked the "Show Database Options?" the `Autonomous Database CPU Core Count` was set to `1`.  That value was assigned to `var.adb_cpu_core_count` during provisioning.
+During the ORM interview phase, when you viewed the "Database Options", the `Autonomous Database ECPU Core Count` was set to `2`.  That value was assigned to `var.adb_cpu_core_count` during provisioning.
 
-After the Stack has provisioned, you could "Edit" the Stack, change the database's CPU Core Count to `2`, Apply, and your ADB will be modified accordingly.  Alternatively, if the ADB was modified outside of the IaC (someone has increased the CPU to `3`), it has "drifted" from the configuration stored in the "State".  Running an **Apply** will reconcile that drift and modify the ADB back to desired state as defined in the IaC.
+After the Stack has provisioned, you could "Edit" the Stack, change the database's CPU Core Count to `3`, Apply, and your ADB will be modified accordingly.  Alternatively, if the ADB was modified outside of the IaC (someone has increased the CPU to `4`), it has "drifted" from the configuration stored in the "State".  Running an **Apply** will reconcile that drift and modify the ADB back to desired state as defined in the IaC.
 
 ### Other benefits of IaC
 
