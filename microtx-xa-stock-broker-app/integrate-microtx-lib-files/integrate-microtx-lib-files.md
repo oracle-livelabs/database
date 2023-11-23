@@ -39,12 +39,12 @@ This lab assumes you have:
 
 Uncomment all the lines of code in the following files to integrate the functionality provided by the MicroTx client libraries with the Stock Broker application.
 
-* `pom.xml` file located in the `/home/oracle/microtx/otmm-23.4.1/samples/xa/java/bankapp/StockBroker/` folder
+* `pom.xml` file located in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/StockBroker/` folder
 * `UserStockTransactionServiceImpl.java` file located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application
 
 The following section provides reference information about each line of code that you must uncomment and its purpose. You can skip this reading this section if you only want to quickly uncomment the code and run the application. You can return to this section later to understand the purpose of each line of code that you uncomment.
 
-1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is in the `/home/oracle/microtx/otmm-23.4.1/samples/xa/java/bankapp/StockBroker/` folder in any code editor, and then uncomment the following lines of code. The following sample code is for the 23.4.1 release. Provide the correct version, based on the release that you want to use.
+1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/StockBroker/` folder in any code editor, and then uncomment the following lines of code. The following sample code is for the 23.4.1 release. Provide the correct version, based on the release that you want to use.
 
     ```
     <copy>
@@ -68,7 +68,7 @@ The following section provides reference information about each line of code tha
     </copy>
     ```
 
-4. Uncomment the following line of code to initialize an object of the `MicroTxUserTransactionService` class in the application code for every new transaction. This object demarcates the transaction boundaries, which are begin, commit, or roll back. Autowire the `MicroTxUserTransactionService` class before your application logic initiates or begins a transaction.
+4. Uncomment the following lines of code to initialize an object of the `MicroTxUserTransactionService` class in the application code for every new transaction. This object demarcates the transaction boundaries, which are begin, commit, or roll back. Autowire the `MicroTxUserTransactionService` class before your application logic initiates or begins a transaction.
 
     **Sample command**
 
@@ -132,6 +132,18 @@ The following section provides reference information about each line of code tha
    </copy>
     ```
 
+10. Uncomment the following lines of code in the `BankUtility.java` file, located in the `/com/oracle/tmm/stockbroker/utils/` package of the `StockBroker` application, to inject the Spring Boot REST template provided by MicroTx.
+
+    **Sample command**
+
+    ```java
+    <copy>
+    @Autowired
+    @Qualifier("MicroTxXaRestTemplate")
+    RestTemplate restTemplate;
+    </copy>
+    ```
+
 ## Task 2: Configure the Stock Broker Application as a Transaction Participant
 
 Since the Stock broker application participates in the transaction in addition to initiating the transaction, you must make additional configurations for the application to participate in the transaction and communicate with its resource manager.
@@ -153,6 +165,14 @@ The following section provides reference information about each line of code tha
 To configure the Stock Broker application as a transaction participant:
 
 1. Open the `DatasourceConfigurations.java` file in any code editor. This file is in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
+
+2. Uncomment the following line of code to import the `com.oracle.microtx.common.MicroTxConfig` package.
+
+    ```java
+    <copy>
+    import com.oracle.microtx.common.MicroTxConfig;
+    </copy>
+    ```
 
 2. Uncomment the following lines of code in the transaction participant function or block to create a `PoolXADataSource` object and provide credentials and other details to connect to the resource manager. This object is used by the MicroTx client library.
 
@@ -223,10 +243,11 @@ The `TransactionEventsUtility.java` class registers the events and you can use t
 
 4. Update the `UserStockTransactionServiceImpl.java` class, located in the `/com/oracle/tmm/stockbroker/service/impl` package of the `StockBroker` application. Add the following lines of code to register the transaction events within the transaction boundary. Note that you must register the transaction event after the transaction begins.
 
-    1. Add the following line of code to import the `TransactionEventsUtility` package.
+    1. Add the following lines of code to import the required packages.
 
         ```java
         <copy>
+        import jakarta.transaction.*;
         import com.oracle.tmm.stockbroker.utils.TransactionEventsUtility;
         </copy>
         ```

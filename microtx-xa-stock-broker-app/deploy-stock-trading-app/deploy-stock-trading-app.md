@@ -65,7 +65,7 @@ Before you start a transaction, you must start a Minikube tunnel.
     </copy>
     ```
 
-    From the output note down the value of `EXTERNAL-IP`, which is the external IP address of the Istio ingress gateway. You will provide this value in the next step. If the `EXTERNAL-IP` is in the `pending` state, ensure that the minikube tunnel is running before proceeding with the next steps.
+    From the output note down the value of `EXTERNAL-IP`, which is the external IP address of the Istio ingress gateway. You will provide this value in the next step. If the `EXTERNAL-IP` is in the `pending` state, ensure that the Minikube tunnel is running before proceeding with the next steps.
 
     **Example output**
 
@@ -323,7 +323,7 @@ When you start Minikube, the PDBs are created and populated with sample data.
 
    ![Status of pods in the otmm namespace](./images/get-pods-status.png)
 
-3. Verify that the database instance is running. The database instance is available in the `oracledb` namespace.  Run the following command to retrieve the list of resources in the namespace `oracledb` and their status.
+3. Verify that the database instance is running. The database instance is available in the `oracledb` namespace.  Run the following command to retrieve the list of resources in the `oracledb` namespace and their status.
 
     ```text
     <copy>
@@ -335,7 +335,7 @@ When you start Minikube, the PDBs are created and populated with sample data.
 
    ![Database instance details](./images/database-service.png)
 
-It usually takes some time for the Database services to start running in the Minikube environment. Proceed with the remaining tasks only after ensuring that all the resources, including the database service, are ready and in the `RUNNING` status and the value of the **READY** field is `1/1` .
+It usually takes some time for the Database services to start running in the Minikube environment. Proceed with the remaining tasks only after ensuring that all the resources, including the database service, are ready and in the `RUNNING` status and the value of the **READY** field is `1/1`.
 
 ## Task 4: Configure Keycloak
 
@@ -349,7 +349,7 @@ The Bank and Stock-Trading Application console uses Keycloak to authenticate use
     </copy>
     ```
 
-    From the output note down the value of `EXTERNAL-IP` and `PORT(S)`, which is the external IP address and port of Keycloak. You will provide this value in the next step.
+    From the output note down the value of `EXTERNAL-IP` and `PORT(S)`, which is the external IP address and port of Keycloak. You will provide this value later.
 
     **Example output**
 
@@ -357,7 +357,7 @@ The Bank and Stock-Trading Application console uses Keycloak to authenticate use
 
     Let's consider that the external IP in the above example is 198.51.100.1 and the port is 8080.
 
-2. Run the following command to run the `reconfigure-keycloak.sh` script from the `$HOME` directory.
+2. Run the following command to run the `reconfigure-keycloak.sh` script from the `$HOME` directory. This command configures Keycloak and updates the settings to suit the requirements of the application.
 
     ```
     <copy>
@@ -405,7 +405,7 @@ The folder that contains the Bank and Stock-Trading application code also contai
 
 To provide the configuration and environment details in the `values.yaml` file:
 
-1. Open the `values.yaml` file, which is in the `/home/oracle/microtx/otmm-23.4.1/samples/xa/java/bankapp/Helmcharts` folder.
+1. Open the `values.yaml` file, which is in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/Helmcharts` folder.
 
 2. Enter values that you have noted down for the following fields under `security` in `UserBanking`.
 
@@ -419,7 +419,7 @@ To provide the configuration and environment details in the `values.yaml` file:
 
 ## Task 4: Build Container Image for the Stock Broker service
 
-The code for the Bank and Stock-Trading application is available in the installation bundle in the `/home/oracle/microtx/otmm-23.4.1/samples/xa/java/bankapp` folder. The container image for the User Banking, Branch Banking, Core Banking services are pre-built and available for your use. Build the container image only for the Stock Broker service.
+The code for the Bank and Stock-Trading application is available in the installation bundle in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp` folder. The container image for the User Banking, Branch Banking, Core Banking services are pre-built and available for your use. Build the container image only for the Stock Broker service.
 
 To build container image for the Stock Broker service:
 
@@ -427,7 +427,7 @@ To build container image for the Stock Broker service:
 
     ```
     <copy>
-    cd /home/oracle/microtx/otmm-23.4.1/samples/xa/java/bankapp/StockBroker
+    cd /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/StockBroker
     </copy>
     ```
 
@@ -451,7 +451,7 @@ Install the Bank and Stock-Trading application in the `otmm` namespace, where yo
 
     ```
     <copy>
-    cd /home/oracle/microtx/otmm-23.4.1/samples/xa/java/bankapp/Helmcharts
+    cd /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/Helmcharts
     </copy>
     ```
 
