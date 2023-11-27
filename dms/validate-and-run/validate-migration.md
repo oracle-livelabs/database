@@ -27,13 +27,13 @@ In this lab, you will:
 
 2. Select **TestMigration**
 
-  ![click on testMigration](images/2.png =90%x*)
+  ![click on testMigration](images/select-testmigration.png)
 
 3. If Migration is still being created, wait until Lifecycle State is Active
 
 4. Press **Validate** button
 
-  ![press validate](images/3.png =90%x*)
+  ![press validate](images/press-validate.png)
 
 5. Click on **Jobs** in left-hand **Resources** list
 
@@ -43,7 +43,7 @@ In this lab, you will:
 
 7. Click on **Phases** in left-hand **Resources** list
 
-  ![click phases menu](images/5.png =20%x*)
+  ![click phases menu](images/click-phases.png =17%x*)
 
 8. Phases will be shown and status will be updated as phases are completed. It can take 2 minutes before the first phase is shown.
     ![phases are displayed](images/Pump.png =90%x*)
@@ -58,11 +58,11 @@ In this lab, you will:
 
   1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
-  ![migrations navigation](images/migration-create.png =90%x*)
+    ![create migration navigation](images/migration-create.png =50%x*)
 
   2. Select **TestMigration**
 
-    ![click on testmigration](images/2.png =90%x*)
+    ![Screenshot of select testmigration](images/select-testmigration.png =50%x*)
 
   3. Press **Start** to begin the Migration. Please note, if a dialog box appears, press **Start** in the dialog box  to begin the migration.
 
@@ -70,7 +70,7 @@ In this lab, you will:
 
   4. Click on **Jobs** in left-hand **Resources** list
 
-  5. Click on most recent Evaluation Job
+  5. Click on most recent Migration Job
 
   6. Click on **Phases** in left-hand **Resources** list
 
