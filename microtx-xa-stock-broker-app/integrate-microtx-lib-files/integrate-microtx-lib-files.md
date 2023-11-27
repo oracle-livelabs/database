@@ -132,7 +132,9 @@ The following section provides reference information about each line of code tha
    </copy>
     ```
 
-10. Uncomment the following lines of code in the `BankUtility.java` file, located in the `/com/oracle/tmm/stockbroker/utils/` package of the `StockBroker` application, to inject the Spring Boot REST template provided by MicroTx.
+10. Uncomment the catch blocks in the `buy()` and `sell()` methods.
+
+11. Uncomment the following lines of code in the `BankUtility.java` file, located in the `/com/oracle/tmm/stockbroker/utils/` package of the `StockBroker` application, to inject the Spring Boot REST template provided by MicroTx.
 
     **Sample command**
 
