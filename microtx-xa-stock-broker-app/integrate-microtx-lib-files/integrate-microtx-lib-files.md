@@ -58,12 +58,13 @@ The following section provides reference information about each line of code tha
 
 2. Open the `UserStockTransactionServiceImpl.java` file in any code editor. This file is in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
-3. Uncomment the following line of code to import the `com.oracle.microtx.xa.rm.MicroTxUserTransactionService` package.
+3. Uncomment the following lines of code to import the required packages.
 
     **Sample command**
 
     ```java
     <copy>
+    import jakarta.transaction.*;
     import com.oracle.microtx.xa.rm.MicroTxUserTransactionService;
     </copy>
     ```
@@ -243,13 +244,12 @@ You can register your initiator and participant services to receive notification
 1. Uncomment the `TransactionEventsUtility.java` class, located in the `/com/oracle/tmm/stockbroker/utils/` package of the `StockBroker` application.
 The `TransactionEventsUtility.java` class registers the events and you can use the `BuyStockEventListenerResource.java` and `SellStockEventListenerResource.java` classes to listen to the transaction events.
 
-4. Update the `UserStockTransactionServiceImpl.java` class, located in the `/com/oracle/tmm/stockbroker/service/impl` package of the `StockBroker` application. Add the following lines of code to register the transaction events within the transaction boundary. Note that you must register the transaction event after the transaction begins.
+2. Update the `UserStockTransactionServiceImpl.java` class, located in the `/com/oracle/tmm/stockbroker/service/impl` package of the `StockBroker` application. Add the following lines of code to register the transaction events within the transaction boundary. Note that you must register the transaction event after the transaction begins.
 
     1. Add the following lines of code to import the required packages.
 
         ```java
         <copy>
-        import jakarta.transaction.*;
         import com.oracle.tmm.stockbroker.utils.TransactionEventsUtility;
         </copy>
         ```
