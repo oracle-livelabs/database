@@ -25,8 +25,7 @@ This lab assumes you have:
     * Lab 1: Prepare setup
     * Lab 2: Set Up the Environment
     * Lab 3: Integrate MicroTx Client Libraries with the Stock Broker Microservice
-    * Lab 4: Provision Autonomous Databases for Use as Resource Manager
-    * Lab 5: Deploy the Bank and Stock-Trading Application
+    * Lab 4: Deploy the Bank and Stock-Trading Application
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
     ```
@@ -122,11 +121,11 @@ When you send a request to sell stocks, the Stock Broker service sells the stock
 ## Task 4: View Service Mesh graph and Distributed Traces (Optional)
 
 Perform this task only if you have deployed Kiali and Jaeger in your cluster.
-To visualize what happens behind the scenes and how a trip booking request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you started in Lab 5.
+To visualize what happens behind the scenes and how a request to purchase or sell stocks is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you started in the previous lab.
 
-1. Open a new browser tab and navigate to the Kiali dashboard URL - <http://localhost:20001/kiali>
+1. Open a new browser tab and navigate to the Kiali dashboard URL. For example, `http://localhost:20001/kiali`.
 2. Select Graph for the otmm namespace.
-3. Open a new browser tab and navigate to the Jaeger dashboard URL - <http://localhost:16686>
+3. Open a new browser tab and navigate to the Jaeger dashboard URL. For example, `http://localhost:16686`.
 4. In the **Service** drop-down list, select **istio-ingressgateway**. A list of traces is displayed where each trace represents a request.
 5. Select a trace to view it.
 
