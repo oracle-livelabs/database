@@ -76,7 +76,7 @@ In this lab, you will:
 <if type="livelabs">
     - __Choose a compartment__ - Use the default compartment that includes your user id.
 </if>
-    - __Display Name__ - Enter a memorable name for the database for display purposes. For this lab, use __TEXTDB__.
+    - __Display Name__ - Enter a memorable name for the database for display purposes. For this lab, use __XMLDB__.
 <if type="freetier">
     - __Database Name__ - Use letters and numbers only, starting with a letter. Maximum length is 14 characters. (Underscores not initially supported.) For this lab, use __TEXTDB__.
 

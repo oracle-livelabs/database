@@ -8,7 +8,7 @@ In addition to PL/SQL and Java it is now possible to leverage the Smart DB parad
 
 This workshop introduces JavaScript in Oracle Database 23c on Linux x86-64 and walks you through all the steps necessary to be productive with the new language. It complements [Oracle Database JavaScript Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/mlejs/index.html). You will use both command-line tools as well as a graphical user interface when creating code.
 
-> **Note:** There is a strong focus on command line tools for a reason: many software projects rely on automation (keywords Continuous Integration/Continuous Delivery). Graphical user interfaces don't work in this workflow, however anything you can control on the command line does. This workshop aims at preparing you for working with Continuous Integration (CI) pipelines as much as possible. Note though that a wealth of IDEs exists for writing JavaScript code. Database Actions has strong support for JavaScript in Oracle Database 23c Free-Developer Release and you will see it used a lot.
+> **Note:** There is a strong focus on command line tools for a reason: many software projects rely on automation (keywords Continuous Integration/Continuous Delivery). Graphical user interfaces don't work in this workflow, however anything you can control on the command line does. This workshop aims at preparing you for working with Continuous Integration (CI) pipelines as much as possible. Note though that a wealth of Integrated Development Environments (IDEs) exists for writing JavaScript code. Database Actions has strong support for JavaScript in Oracle Database 23c Free Release and you will see it used a lot.
 
 Estimated Workshop Time: 1 hours 30 minutes
 
@@ -34,4 +34,4 @@ You may now proceed to the next lab.
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 09-MAY-2023
+- **Last Updated By/Date** - Martin Bach 17-NOV-2023

@@ -33,20 +33,17 @@
             "title": "Lab 4: Create Target Database",
             "filename": "../../create-target-database/create-target-database.md"
         },
+        
         {
-            "title": "Lab 5: Configure GoldenGate hub ",
-            "filename": "../../goldengate-hub/goldengate-hub.md"
-        },
-        {
-            "title": "Lab 6: Prepare source and target databases ",
+            "title": "Lab 5: Prepare source and target databases ",
             "filename": "../../prepare-source-and-target-databases/prepare-source-and-target-databases.md"
         },
         {
-            "title": "Lab 7: Database Connection and Setup Migration",
+            "title": "Lab 6: Database Connection and Setup Migration",
             "filename": "../../register-and-migrate/create-registered-databases.md"
         },
         {
-            "title": "Lab 8: Validate and Run Migration",
+            "title": "Lab 7: Validate and Run Migration",
             "filename": "../../validate-and-run/validate-migration.md"
         },
         {
