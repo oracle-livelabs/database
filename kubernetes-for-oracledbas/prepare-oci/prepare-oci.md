@@ -50,6 +50,10 @@ In the *Cloud Shell*, run the following commands to create a sub-*Compartment* t
 
 You can think of a *Compartment* much like a database schema: a collection of tables, indexes, and other objects isolated from other schemas.  By default, a root *Compartment* (think SYSTEM schema) was created for you when your tenancy was established.  It is possible to create everything in the root *Compartment*, but Oracle recommends that you create sub-*Compartments* to help manage your resources more efficiently.
 
+### Fun Fact?
+
+Kubernetes is often shortened to `K8s` (kay eights) with the 8 standing for the number of letters between the “K” and the “s”.
+
 ## Task 3: Create a Group
 
 A *Group* is a collection of cloud users who all need the same type of access to a particular set of resources or compartment.
@@ -169,7 +173,7 @@ Assign the cloud *User* who will be carrying out the remaining Labs to the *Grou
 
 ### Troubleshooting
 
-Your user account maybe in an IDCS Federated identity domain, in which case you will not be able to assign your user account to the IAM Group.  The `oci iam group add-user`command will fail with a `ServiceError` message.  If this is the case, please follow the [IAM User Error](?lab=troubleshooting#Task1:IAMUserError) guide.
+Your user account maybe in an IDCS Federated identity domain, in which case you will not be able to assign your user account to the IAM Group.  The `oci iam group add-user` (Step 3) command will fail with a `ServiceError` message.  If this is the case, please follow the [IAM User Error](?lab=troubleshooting#Task1:IAMUserError) guide.
 
 You may now **proceed to the next lab**
 

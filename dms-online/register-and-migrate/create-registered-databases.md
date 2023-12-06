@@ -12,7 +12,7 @@ In this lab, you will:
 * Create a database connection for Source CDB
 * Create a database connection for Source PDB
 * Create a database connection for Target ADB
-* Create a Migration
+* Create an online Migration
 
 ### Prerequisites
 
@@ -34,11 +34,11 @@ For this task you need the following info from previous steps:
 
 1. In the OCI Console Menu ![menu hamburger](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-  ![registered database navigation](images/db-connection.png =90%x*)
+  ![registered database navigation](images/db-connection.png =50%x*)
 
 2. Press **Create Connection**
 
-  ![Screenshot of click register db](images/click-create-db.png =90%x*)
+  ![Screenshot of click register db](images/click-create-db.png =50%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **SourceCDB**
@@ -58,10 +58,13 @@ For this task you need the following info from previous steps:
 5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
     - Initial load database username: **system**
     - Initial load database password: <*Admin password*>
+    - Check **Use different credentials for replication**
+    - Replication database username: **c##ggadmin**
+    - Replication database password: <*Admin password*>
     
 6. Press **Create**
 
-  ![Screenshot of  confirm register DB](images/create-db-confirm.png =50%x*)
+  ![Screenshot of  confirm register DB](images/create-db-confirm.png =40%x*)
 
 ## Task 2: Create Database Connection for Source PDB
 
@@ -72,11 +75,11 @@ For this task you need the following info from previous steps:
 
 1. In the OCI Console Menu ![menu hamburger](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-  ![registered database navigation](images/db-connection.png =90%x*)
+  ![registered database navigation](images/db-connection.png =50%x*)
 
 2. Press **Create connection**
 
-  ![Screenshot of click register db](images/click-create-db.png =90%x*)
+  ![Screenshot of click register db](images/click-create-db.png =50%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **SourcePDB**
@@ -96,11 +99,14 @@ For this task you need the following info from previous steps:
 5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
     - Initial load database username: **system**
     - Initial load database password: <*Admin password*>
+    - Check **Use different credentials for replication**
+    - Replication database username: **ggadmin**
+    - Replication database password: <*Admin password*>
     
 
 6. Press **Create**
 
-   ![Screenshot of  confirm register DB](images/create-db-confirm.png =50%x*)
+   ![Screenshot of  confirm register DB](images/create-db-confirm-pdb.png =40%x*)
 
 ## Task 3: Create Database Connection for Target ADB
 
@@ -109,11 +115,11 @@ For this task you need the following info from previous steps:
 
 1. In the OCI Console Menu ![menu hamburger](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-  ![registered database navigation](images/db-connection.png =90%x*)
+  ![registered database navigation](images/db-connection.png =50%x*)
 
 2. Press **Create connection**
 
-   ![Screenshot of click register db](images/click-create-db.png =90%x*)
+   ![Screenshot of click register db](images/click-create-db.png =50%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **TargetATP**
@@ -129,6 +135,9 @@ For this task you need the following info from previous steps:
 5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
     - Initial load database username: **admin**
     - Initial load database password: <*Admin password*>
+    - Check the **Use different credentials for replication**
+    - Replication database username: **ggadmin**
+    - Replication database password: <*Admin password*>
 
 6. Press **Create**
 
@@ -139,18 +148,18 @@ For this task you need the following info from previous steps:
 
   1. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
-    ![create migration navigation](images/migration-create.png =90%x*)
+    ![create migration navigation](images/migration-create.png =50%x*)
 
   2. Press **Create Migration**
 
-    ![Screenshot of press create migration](images/press-create-migration.png =90%x*)
+    ![Screenshot of press create migration](images/press-create-migration.png =50%x*)
 
   3. On the page **Add Details**, fill in the following entries, otherwise leave defaults:
       - Name: **TestMigration**
       - Vault: **DMS_Vault**
       - Encryption Key: **DMS_Key**
 
-      ![Screenshot to add vault details](images/add-details.png =40%x*)
+    ![Screenshot to add vault details](images/add-details.png =50%x*)
 
   4. Press **Next**
 
@@ -160,7 +169,7 @@ For this task you need the following info from previous steps:
       - Container Database connection: **SourceCDB**
       - Target Database: **TargetATP**
 
-      ![Screenshot of source db selection](images/select-databases.png =40%x*)
+    ![Screenshot of source db selection](images/select-databases.png =50%x*)
 
   6. On the page **Migration Options**, fill in the following entries, otherwise leave defaults:
       - In **Initial Load**, select **Datapump via Object Storage**
@@ -168,40 +177,15 @@ For this task you need the following info from previous steps:
       - Export Directory Object:
           - Name: **dumpdir**
           - Path: **/u01/app/oracle/dumpdir**
-      - Source Database file system SSL wallet path:
-          - **/u01/app/oracle/dumpdir/wallet/opt/oracle/dcs/commonstore/wallets/newssl**
+      - Source Database file system SSL wallet path, we manually downloaded the required certificates in a previous lab:
+          - **/u01/app/oracle/dumpdir/wallet**
+      
+      - Check **Use Online Replication**    
+
+      - Press Create to initiate the Migration creation    
      
-          ![Screenshot for migration options](images/test-migration-1.png =60%x*)
+    ![Screenshot for migration options](images/test-migration-1.png =50%x*)
 
-
-  7. Check **Use Online Replication**
-     - GoldenGate Hub URL: **https://(goldengate public IP)**
-     - GoldenGate Administrator Username: **oggadmin**
-     - GoldenGate Administrator Password: **(As previously selected)**
-
-     ![Online replication check](images/online-goldengate.png =50%x*)
-
-     - Source database:
-          - GoldenGate deployment name: **Marketplace**
-          - Database Username: **ggadmin**
-          - Database Password: **(As previously selected)**
-          - Container Database Username: **c##ggadmin**
-          - Container Database Password: **(As previously selected)**
-
-      ![Source database details](images/online-source-database.png =50%x*)    
-     
-     - Target database:
-          - GoldenGate Deployment Name: **Marketplace**
-          - Database Username: **ggadmin**
-          - Database Password: **(As previously selected)**
-          - Press Show Advanced Options
-          - Press Replication tab
-          - GoldenGate Instance OCID: **(OCID as copied from GoldenGate compute instance)** (This field is optional; if OCID is given, validation will check for GoldenGate space requirements) 
-          
-
-    ![Target database details](images/online-target-database-ggocid.png =50%x*) 
-
-      - Press Create to initiate the Migration creation
 
 You may now [proceed to the next lab](#next).
 
