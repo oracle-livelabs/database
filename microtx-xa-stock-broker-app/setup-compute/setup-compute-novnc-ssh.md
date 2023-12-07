@@ -149,13 +149,6 @@ If you just completed Task 1A, please proceed to Task 2.  If you have an existin
     - **Instance Shape:** Select VM.Standard.E4.Flex. 
     - **Instance OCPUS:** Enter 4 to provision an instance with 4 OCPUs. This provisions a VM with 4 OCPUs and 24GB memory.
 
-    If don't have the required quota for Flex Shapes or you prefer to use fixed shapes, follow the instructions below.  Otherwise, skip to the next step.
-
-    - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Unchecked
-    - **Instance Shape:** Accept the default shown or select from the dropdown. e.g. VM.StandardE2.2
-
-  ![Use fixed shapes](./images/fixed-shape.png " ")
-
 7. For this section we will an existing VNC.  Please make sure it has all of the correct ingress and egress rules otherwise go back to *Task 1A* and deploy with a self-contained VCN.
     - **Use Existing VCN?:** Check to select.
     - **Select Existing VCN:** Select existing VCN with the regional public subnet and required security list.
