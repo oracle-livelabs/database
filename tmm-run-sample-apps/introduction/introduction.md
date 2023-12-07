@@ -17,6 +17,7 @@ In this workshop, you will learn how to:
 
 This lab assumes you have:
 - An Oracle Cloud account
+- At least 4 OCPUs, 24 GB memory, and 128 GB of bootable storage volume is available in your Oracle Cloud Infrastructure tenancy.
 
 Let's begin! If you need to create an Oracle Cloud account, click **Get Started** in the **Contents** menu on the left. Otherwise, if you have an existing account, click **Lab 1**.
 
