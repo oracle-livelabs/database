@@ -6,8 +6,6 @@ All previous labs have carefully avoided accessing the data layer to ease the tr
 
 Estimated Lab Time: 10 minutes
 
-[](videohub:1_2si62dv6)
-
 ### Objectives
 
 In this lab, you will:
@@ -20,7 +18,7 @@ In this lab, you will:
 
 This lab assumes you have:
 
-- An Oracle Database 23c Free - Developer Release environment available to use
+- An Oracle Database 23c Free environment available to use
 - Created the `emily` account as per Lab 1
 
 ## Task 1: Get familiar with the SQL Driver
@@ -76,7 +74,7 @@ By completing this task, you will learn more about selecting information from th
     </copy>
     ```
 
-    > **Note**: Unlike `node-oracledb` the default `outFormat` for the MLE JavaScript SQL Driver in 23c Free-Developer Release is `oracledb.OUT_FORMAT_OBJECT`.
+    > **Note**: Unlike `node-oracledb` the default `outFormat` for the MLE JavaScript SQL Driver in 23c Free is `oracledb.OUT_FORMAT_OBJECT`.
 
 3. Query the database using global constants
 
@@ -512,4 +510,4 @@ You many now proceed to the next lab.
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 09-MAY-2023
+- **Last Updated By/Date** - Martin Bach 28-NOV-2023
