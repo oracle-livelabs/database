@@ -19,6 +19,7 @@ For more information about Terraform and Resource Manager, please see the append
 This lab assumes you have:
 - An Oracle Cloud account
 - SSH Keys (optional)
+- At least 4 OCPUs, 24 GB memory, and 128 GB of bootable storage volume is available in your Oracle Cloud Infrastructure tenancy to run the Bank and Stock-Trading application.
 - You have completed:
     - Lab: Prepare Setup
 
@@ -32,7 +33,7 @@ Your options are:
 ## Task 1A: Create Stack:  Compute + Networking
 1. Identify the ORM stack zip file downloaded in *Lab: Prepare Setup*
 2. Log in to Oracle Cloud
-3.  Open up the hamburger menu in the top left corner.  Click **Developer Services**, and choose **Resource Manager > Stacks**. Choose the compartment in which you would like to install the stack. Click **Create Stack**.
+3. Open up the hamburger menu in the top left corner.  Click **Developer Services**, and choose **Resource Manager > Stacks**. Choose the compartment in which you would like to install the stack. Click **Create Stack**.
 
   ![Select Stacks](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
 
@@ -72,16 +73,9 @@ Your options are:
 
     Depending on the quota you have in your tenancy you can choose from standard Compute shapes or Flex shapes. Please visit the Appendix: Troubleshooting Tips for instructions on checking your quota
 
-    - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Keep the default as checked (unless you plan on using a fixed shape)
-    - **Instance Shape:** Keep the default or select from the list of Flex shapes in the dropdown menu (e.g *VM.Standard.E4.Flex*).
-    - **Instance OCPUS:** Enter 3 to provision an instance with 3 OCPUs.
-
-      If don't have the required quota for Flex Shapes or you prefer to use fixed shapes, follow the instructions below.  Otherwise, skip to the next step.
-
-    - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Unchecked
-    - **Instance Shape:** Accept the default shown or select from the dropdown. e.g. VM.Standard2.2
-
-  ![Use fixed shapes](./images/fixed-shape.png " ")
+    - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Keep the default as checked.
+    - **Instance Shape:** Select VM.Standard.E4.Flex. 
+    - **Instance OCPUS:** Enter 4 to provision an instance with 4 OCPUs. This provisions a VM with 4 OCPUs and 24GB memory.
 
 7. For this section we will provision a new VCN with all the appropriate ingress and egress rules needed to run this workshop.  If you already have a VCN, make sure it has all of the correct ingress and egress rules and skip to the next section.
     - **Use Existing VCN?:** Accept the default by leaving this unchecked. This will create a **new VCN**.
@@ -151,16 +145,9 @@ If you just completed Task 1A, please proceed to Task 2.  If you have an existin
 
     Depending on the quota you have in your tenancy you can choose from standard Compute shapes or Flex shapes. Please visit the Appendix: Troubleshooting Tips for instructions on checking your quota
 
-    - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Keep the default as checked (unless you plan on using a fixed shape)
-    - **Instance Shape:** Keep the default or select from the list of Flex shapes in the dropdown menu (e.g *VM.Standard.E4.Flex*).
-    - **Instance OCPUS:** Accept the default shown. e.g. (**4**) will provision 4 OCPUs and 64GB of memory. You may also elect to reduce or increase the count by selecting from the dropdown. e.g. `[2-24]`. Please ensure you have the capacity available before increasing.
-
-    If don't have the required quota for Flex Shapes or you prefer to use fixed shapes, follow the instructions below.  Otherwise, skip to the next step.
-
-    - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Unchecked
-    - **Instance Shape:** Accept the default shown or select from the dropdown. e.g. VM.StandardE2.2
-
-  ![Use fixed shapes](./images/fixed-shape.png " ")
+    - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Keep the default as checked.
+    - **Instance Shape:** Select VM.Standard.E4.Flex. 
+    - **Instance OCPUS:** Enter 4 to provision an instance with 4 OCPUs. This provisions a VM with 4 OCPUs and 24GB memory.
 
 7. For this section we will an existing VNC.  Please make sure it has all of the correct ingress and egress rules otherwise go back to *Task 1A* and deploy with a self-contained VCN.
     - **Use Existing VCN?:** Check to select.

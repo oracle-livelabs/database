@@ -32,7 +32,7 @@ This lab assumes you have:
 
     ```bash
     <copy>
-    kubectl run your-pod --image=nginx --restart=Never
+    kubectl run your-pod --image=docker.io/nginx --restart=Never
     </copy>
     ```
 
@@ -151,7 +151,7 @@ When you interacted with the *kube-apiserver* to create `your-pod`, the *kube-sc
 
 ![kube-scheduler](images/kube-scheduler.png "kube-scheduler")
 
-The *kube-apiserver* then stored the information in *etcd* that "`your-pod` should run on nodeX," following that decision made by the *kube-scheduler*.  The *kube-apiserver* then instructs the *kubelet* on `nodeX` to execute the actions against the `nodeX` *container runtime* to ensure `your-pod` is running, as it was defined, with the containers described in that *Pod*Spec.
+The *kube-apiserver* then stored the information in *etcd* that "`your-pod` should run on nodeX," following that decision made by the *kube-scheduler*.  The *kube-apiserver* then instructs the *kubelet* on `nodeX` to execute the actions against the `nodeX` *container runtime* to ensure `your-pod` is running, as it was defined, with the containers described in that *Pod* "Spec".
 
 1. Create a *manifest file* for `your-pod`:
 
@@ -167,12 +167,14 @@ The *kube-apiserver* then stored the information in *etcd* that "`your-pod` shou
     spec:
       containers:
       - name: nginx
-        image: nginx:latest
+        image: docker.io/nginx:latest
     EOF
     </copy>
     ```
 
     The *manifest file* states that you are using the "core" API `v1` to define a *Pod* named `your-pod`.  The *Pod* will have one *container* called `nginx` running the `nginx:latest` image.
+
+    The `nginx:latest` image is being pulled directly from a Container Registry.  In this case, the registry is [docker.io](https://www.docker.com/) but there are other public Registries available.  Often your organisation will have its own Registry with their own custom images.
 
 2. Create `your-pod` using the *manifest file*:
 
@@ -205,7 +207,7 @@ The *kube-apiserver* then stored the information in *etcd* that "`your-pod` shou
     spec:
       containers:
         - name: nginx
-          image: nginx:latest
+          image: docker.io/nginx:latest
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -276,7 +278,7 @@ In *Task 1* when you caused an unrecoverable failure of `your-pod` the applicati
         spec:
           containers:
           - name: nginx
-            image: nginx:latest
+            image: docker.io/nginx:latest
     EOF
     </copy>
     ```
@@ -394,7 +396,7 @@ While running *Pods* is at the heart of Kubernetes, it is uncommon to run them d
         spec:
           containers:
           - name: nginx
-            image: nginx:1.14.2
+            image: docker.io/nginx:1.14.2
     EOF
     </copy>
     ```
@@ -428,14 +430,16 @@ While running *Pods* is at the heart of Kubernetes, it is uncommon to run them d
     ```
 
     ```bash
-    <copy>    
+    <copy>
     kubectl apply -f your-pod-deployment.yaml && watch -n 1 -d kubectl get pod -l "tier=frontend"
     </copy>
     ```
 
     If the `watch` was quick enough, you would have seen that the *Deployment* caused the upgrade to be rolled out.  It ensured that the specified number of `replica` were always available, replacing *Pods* with the older `nginx` with *Pods* running the newer version in a graceful manner.
 
-5. Delete your *Deployment*
+5. Use `Ctrl-C` to exit the watch loop
+
+6. Delete your *Deployment*
 
     ```bash
     <copy>

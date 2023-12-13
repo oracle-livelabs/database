@@ -386,7 +386,15 @@ This is especially useful for Autonomous Databases as when the database is STOPP
 
     `kubectl logs job/<job_name>`
 
-6. Start your ADB for future Labs:
+6. Delete the CronJob
+
+    ```bash
+    <copy>
+    kubectl delete -f adb_cron.yaml
+    </copy>
+    ```
+
+7. Start your ADB for future Labs:
 
     ```bash
     <copy>

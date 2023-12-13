@@ -8,8 +8,6 @@ Before jumping into the description of JavaScript features and all their details
 
 Estimated Time: 10 minutes
 
-[](videohub:1_d307bfag)
-
 ### Objectives
 
 In this lab, you will:
@@ -24,8 +22,8 @@ In this lab, you will:
 
 This lab assumes you have:
 
-- Oracle Database 23c Free - Developer Release
-- You have a working noVNC environment or comparable setup
+- Access to an Oracle Database 23c Free instance
+- Sufficient privileges to create a database user
 
 ## Task 1: Create a schema to store the JavaScript module
 
@@ -79,7 +77,7 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
 
     In this step you prepare the creation of the developer account. The instructions in the following snippet create a new account, named `emily`. It will be used to store JavaScript modules in the database.
 
-    Save the snippet in a file, for example `${HOME}/setup.sql` and execute it in `sqlcl` or `sqlplus`. You can use graphical text editors installed on the system via the Activities button or the command line.
+    Save the snippet in a file, for example `${HOME}/hol23c/setup.sql` and execute it in `sqlcl` or `sqlplus`. You can use graphical text editors installed on the system via the Activities button or the command line.
 
     ```sql
     <copy>set echo on
@@ -104,7 +102,7 @@ All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The i
     You should still be connected to `freebdb1` as `SYS` as per the previous step. If not, connect to `freepdb1` as `SYS` before executing the following command:
 
     ```sql
-    <copy>start ${HOME}/setup.sql</copy>
+    <copy>start ${HOME}/hol23c/setup.sql</copy>
     ```
 
     Here is some sample output of an execution:
@@ -201,7 +199,7 @@ curl -Lo /home/oracle/hol23c/validator.min.js 'https://objectstorage.us-ashburn-
 
 ## Task 3: Create the JavaScript module in the database
 
-JavaScript in Oracle Database 23c Free - Developer Release allows you to load JavaScript modules using the `BFILE` clause, specifying a directory object and file name. You prepared for the `create mle module` command in the previous step, now it's time to execute it:
+JavaScript in Oracle Database 23c Free allows you to load JavaScript modules using the `BFILE` clause, specifying a directory object and file name. You prepared for the `create mle module` command in the previous step, now it's time to execute it:
 
 1. Connect to the database as the `emily` user:
 
@@ -244,7 +242,7 @@ JavaScript in Oracle Database 23c Free - Developer Release allows you to load Ja
     VALIDATOR                      JAVASCRIPT
     ```
 
-You can read more about creating JavaScript modules in Oracle Database 23c Free - Developer release in chapter 2 of the JavaScript Developer's Guide.
+You can read more about creating JavaScript modules in Oracle Database 23c Free in chapter 2 of the JavaScript Developer's Guide.
 
 ## Task 4: Expose the module's functionality to PL/SQL and SQL
 
@@ -313,4 +311,4 @@ You many now proceed to the next lab.
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 09-MAY-2023
+- **Last Updated By/Date** - Martin Bach 17-NOV-2023
