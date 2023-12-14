@@ -34,6 +34,8 @@ This lab has you download software from the YUM repo at repo.mongodb.org. This s
     Run the following commands to download and install Mongo Shell and Mongo Database Tools.
 
     ```
+    $ <copy>echo '65.8.161.52 downloads.mongodb.com' | sudo tee -a /etc/hosts</copy>
+    $ <copy>echo '18.65.185.55 repo.mongodb.org' | sudo tee -a /etc/hosts</copy> 
     $ <copy>sudo dnf install -y https://repo.mongodb.org/yum/redhat/8/mongodb-org/6.0/x86_64/RPMS/mongodb-mongosh-1.8.0.x86_64.rpm</copy>
     $ <copy>sudo dnf install -y https://repo.mongodb.org/yum/redhat/8/mongodb-org/6.0/x86_64/RPMS/mongodb-database-tools-100.7.0.x86_64.rpm</copy>
     ```
