@@ -39,7 +39,7 @@ This workshop contains different language implementation in the form of differen
     <dependency>
       <groupId>com.oracle.nosql.sdk</groupId>
       <artifactId>nosqldriver</artifactId>
-      <version>5.2.27</version>
+      <version><NOSQL_JAVASDK_VERSION></version>
     </dependency>
   </dependencies>
 
@@ -63,7 +63,7 @@ This workshop contains different language implementation in the form of differen
 </project>
 </copy>
 ```
-**Note:** The latest SDK can be found here [Oracle NoSQL Database SDK For Java](https://mvnrepository.com/artifact/com.oracle.nosql.sdk/nosqldriver). You can update the `pom.xml` file with this latest SDK version number.
+**Note:** The latest SDK can be found here [Oracle NoSQL Database SDK For Java](https://mvnrepository.com/artifact/com.oracle.nosql.sdk/nosqldriver). Please make sure to replace the placeholder for the version of the Oracle NoSQL Java SDK in the `pom.xml` file with the exact SDK version number.
 </if>
 
 <if type="Python">
@@ -72,6 +72,10 @@ This workshop contains different language implementation in the form of differen
 2. You can install the Python SDK through the Python Package Index with the command given below.
 ```
  <copy> pip3 install borneo </copy>
+```
+3. If you are using the Oracle NoSQL Database cloud service you will also need to install the oci package:
+```
+ <copy> pip3 install oci </copy>
 ```
 </if>
 
@@ -120,16 +124,15 @@ This workshop contains different language implementation in the form of differen
   <if type="C-sharp">
 
 You can add the SDK NuGet Package as a reference to your project by using .Net CLI:
-1. Go to your project directory
+1. Make sure you have [.NET](https://dotnet.microsoft.com/en-us/download) installed in your system. You can add the SDK NuGet Package as a reference to your project by using .Net CLI:
+2. Run the following command to create your project directory.
 
 ```
 <copy>
-cd <your-project-directory>
-//This will create a project called HelloWorld
- dotnet new console -o HelloWorld
+dotnet new console -o HelloWorld
 </copy>
 ```
-2. Add the SDK package to your project.
+2. Go to your project directory. Add the SDK package to your project.
   ```
  <copy>
   dotnet add package Oracle.NoSQL.SDK
@@ -144,7 +147,7 @@ cd <your-project-directory>
 
 2. Review the sample application. You can access the [JavaAPI Reference Guide](https://docs.oracle.com/en/cloud/paas/nosql-cloud/csnjv/index.html) to reference Java classes, methods, and interfaces included in this sample application.
 
-  Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.java](https://objectstorage.us-ashburn-1.oraclecloud.com/p/qCpBRv5juyWwIF4dv9h98YWCDD50574Y6OwsIHhEMgI/n/c4u03/b/data-management-library-files/o/HelloWorld.java), replace the placeholder of the compartment  in the function ```setDefaultCompartment``` with the OCID of your compartment. Save the file and close it.
+  Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.java](https://objectstorage.us-ashburn-1.oraclecloud.com/p/qCpBRv5juyWwIF4dv9h98YWCDD50574Y6OwsIHhEMgI/n/c4u03/b/data-management-library-files/o/HelloWorld.java), replace the placeholder of the compartment  in the function ```setDefaultCompartment``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
 3. From your home directory, navigate to ".oci" directory.
 
@@ -187,7 +190,7 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
 
 2. Review the sample application. You can access the [Python API Reference Guide](https://nosql-python-sdk.readthedocs.io/en/latest/api.html) to reference Python classes and methods included in this sample application.
 
-   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.py](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.py), replace the placeholder of the compartment in the function ```set_default_compartment``` with the OCID of your compartment. Save the file and close it.
+   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.py](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.py), replace the placeholder of the compartment in the function ```set_default_compartment``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
 3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Add OCID, tenancy ID, fingerprint & key credentials in the `config` file.
 
@@ -209,7 +212,7 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
 
     ```
     <copy>
-    python HelloWorld.py
+    python3 HelloWorld.py
     </copy>
     ```
     You get the following output:
@@ -233,7 +236,7 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
 
 2. Review the sample application. You can access the [Go API docs](https://pkg.go.dev/github.com/oracle/nosql-go-sdk/nosqldb?utm_source=godoc) to reference Go classes and methods included in this sample application.
 
-   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.go](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.go) , replace the placeholder of the compartment in the constructor of ```NewSignatureProviderFromFile``` with the OCID of your compartment. Save the file and close it.
+   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.go](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.go) , replace the placeholder of the compartment in the constructor of ```NewSignatureProviderFromFile``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
 3.From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Add OCID, tenancy ID, fingerprint & key credentials in the `config` file.
 
@@ -257,6 +260,26 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
       go mod init example.com/HelloWorld
       </copy>
       ```
+    You see the following output:
+      ```
+      <copy>
+      go: creating new go.mod: module example.com/HelloWorld
+      go: to add module requirements and sums:
+      go mod tidy
+      </copy>
+      ```
+    Run go mod tidy and the various modules are added to the project
+      ```
+      <copy>
+      go mod tidy
+      go: finding module for package github.com/oracle/nosql-go-sdk/nosqldb/auth/iam
+      go: finding module for package github.com/oracle/nosql-go-sdk/nosqldb
+      go: finding module for package github.com/oracle/nosql-go-sdk/nosqldb/common
+      go: found github.com/oracle/nosql-go-sdk/nosqldb in github.com/oracle/nosql-go-sdk v1.4.0
+      go: found github.com/oracle/nosql-go-sdk/nosqldb/auth/iam in github.com/oracle/nosql-go-sdk v1.4.0
+      go: found github.com/oracle/nosql-go-sdk/nosqldb/common in github.com/oracle/nosql-go-sdk v1.4.0
+      </copy>
+      ```      
   Build the HelloWorld application.
 
        ```
@@ -280,7 +303,7 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
 
 2. Review the sample application. You can access the [Node.js API  Reference Guide](https://oracle.github.io/nosql-node-sdk/index.html) to reference Node.js classes and methods included in this sample application.
 
-   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.js](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.js), replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Save the file and close it.
+   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.js](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.js), replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
 3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Add OCID, tenancy ID, fingerprint & key credentials in the `config` file.
 
@@ -311,7 +334,7 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
 1. Download the provided [HelloWorld.cs](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.cs) file and move it to your home directory.
 2. Review the sample application. You can access the [.NET API  Reference Guide](https://oracle.github.io/nosql-dotnet-sdk/index.html) to reference .NET classes and methods included in this sample application.
 
-   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.cs](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.cs), replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Also modify the region parameter to your home region in the code ( For example if your home region is Ashburn set the region parameter as ```Region = Region.US_ASHBURN_1```). Save the file and close it.
+   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.cs](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.cs), replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
 3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Add OCID, tenancy ID, fingerprint & key credentials in the `config` file.
 
@@ -326,14 +349,19 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
       ```
       Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
       ![View config file](images/config-file.png)
-        
-4. Go to your project directory. Under this directory, you will see the example source code ```Program.cs```. Overwrite the content of this file with the content of ```HelloWorld.cs```.
+
+4. Go to your project directory. you will see the example source code ```Program.cs```. Remove this file .
+```
+<copy>
+ rm Program.cs
+</copy>
+```
 Build and run your project as shown below.
-*Note: You have multiple dotnet target frameworks which are supported. Currently the supported frameworks are .NET Core 3.1 and .NET 5.0, so you must specify the target framework to use. The command below will automatically download and install Oracle NoSQL Database SDK package as a dependency of your project.*
+*Note: You have multiple dotnet target frameworks which are supported. Currently the supported frameworks are .NET .NET 7.0 and higher.*
 
 ```
 <copy>
- dotnet run -f net5.0
+dotnet run
 </copy>
 ```
    *Note: In the RunBasicExample method of `HelloWorld.cs`, the section to drop table is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*    
