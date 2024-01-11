@@ -238,19 +238,18 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
 
    Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.go](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.go) , replace the placeholder of the compartment in the constructor of ```NewSignatureProviderFromFile``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
-3.From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Add OCID, tenancy ID, fingerprint & key credentials in the `config` file.
-
-      ```
-      <copy>
-      [DEFAULT]
-      user=USER-OCID
-      fingerprint=FINGERPRINT-VALUE
-      tenancy=TENANCY-OCID
-      key_file=<Location of the private key oci_api_key_private.pem>
-      </copy>
-      ```
-      Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
-      ![View config file](images/config-file.png)
+3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Add OCID, tenancy ID, fingerprint & key credentials in the `config` file.
+```
+<copy>
+[DEFAULT]
+user=USER-OCID
+fingerprint=FINGERPRINT-VALUE
+tenancy=TENANCY-OCID
+key_file=<Location of the private key oci_api_key_private.pem>
+</copy>
+```
+Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
+![View config file](images/config-file.png)
 
 4.  Execute the sample application:
     Initialize a new module for the example program.
@@ -269,17 +268,18 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
       </copy>
       ```
     Run go mod tidy and the various modules are added to the project
-      ```
-      <copy>
-      go mod tidy
-      go: finding module for package github.com/oracle/nosql-go-sdk/nosqldb/auth/iam
-      go: finding module for package github.com/oracle/nosql-go-sdk/nosqldb
-      go: finding module for package github.com/oracle/nosql-go-sdk/nosqldb/common
-      go: found github.com/oracle/nosql-go-sdk/nosqldb in github.com/oracle/nosql-go-sdk v1.4.0
-      go: found github.com/oracle/nosql-go-sdk/nosqldb/auth/iam in github.com/oracle/nosql-go-sdk v1.4.0
-      go: found github.com/oracle/nosql-go-sdk/nosqldb/common in github.com/oracle/nosql-go-sdk v1.4.0
-      </copy>
-      ```      
+    ```
+    <copy>
+    go mod tidy
+    go: finding module for package github.com/oracle/nosql-go-sdk/nosqldb/auth/iam
+    go: finding module for package github.com/oracle/nosql-go-sdk/nosqldb
+    go: finding module for package github.com/oracle/nosql-go-sdk/nosqldb/common
+    go: found github.com/oracle/nosql-go-sdk/nosqldb in github.com/oracle/nosql-go-sdk v1.4.0
+    go: found github.com/oracle/nosql-go-sdk/nosqldb/auth/iam in github.com/oracle/nosql-go-sdk v1.4.0
+    go: found github.com/oracle/nosql-go-sdk/nosqldb/common in github.com/oracle/nosql-go-sdk v1.4.0
+    </copy>
+    ```
+
   Build the HelloWorld application.
 
        ```
@@ -357,6 +357,7 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
 </copy>
 ```
 Build and run your project as shown below.
+
 *Note: You have multiple dotnet target frameworks which are supported. Currently the supported frameworks are .NET .NET 7.0 and higher.*
 
 ```
