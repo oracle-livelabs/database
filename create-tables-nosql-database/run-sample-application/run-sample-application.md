@@ -105,21 +105,22 @@ This workshop contains different language implementation in the form of differen
   1. Open the [Node.js Download](https://nodejs.org/en/) and download Node.js for your operating system. Ensure that Node Package Manager (npm) is installed along with Node.js.
   2. Install the node SDK for Oracle NoSQL Database.
 
-      ```
-      <copy>
-      npm install oracle-nosqldb
-      </copy>
-      ```
-      With the above command, npm will create node_modules directory in the current directory and install it there.
+  ```
+  <copy>
+  npm install oracle-nosqldb
+  </copy>
+  ```
 
-      Another option is to install the SDK globally:
+   With the above command, npm will create node_modules directory in the current directory and install it there.
 
-      ```
-      <copy>
-      npm install -g oracle-nosqldb
-      </copy>
-      ```
-      You can do one of the above options depending on the permissions you have.
+   Another option is to install the SDK globally:
+
+  ```
+  <copy>
+  npm install -g oracle-nosqldb
+  </copy>
+  ```
+You can do one of the above options depending on the permissions you have.
 </if>
   <if type="C-sharp">
 
@@ -151,23 +152,24 @@ dotnet new console -o HelloWorld
 
 3. From your home directory, navigate to ".oci" directory.
 
-       ```
-       <copy>
-       cd ~
-       cd .oci
-       </copy>
-       ```
+```
+<copy>
+cd ~
+cd .oci
+</copy>
+```
+
 Use `vi` or `nano` or any text editor to create a file named `config` in the `.oci` directory.
 
-      ```
-      <copy>
-      [DEFAULT]
-      user=USER-OCID
-      fingerprint=FINGERPRINT-VALUE
-      tenancy=TENANCY-OCID
-      key_file=<Location of the private key oci_api_key_private.pem>
-      </copy>
-      ```
+```
+<copy>
+[DEFAULT]
+user=USER-OCID
+fingerprint=FINGERPRINT-VALUE
+tenancy=TENANCY-OCID
+key_file=<Location of the private key oci_api_key_private.pem>
+</copy>
+```
 Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
 ![View config file](images/config-file.png)
 When `SignatureProvider` is constructed without any parameters, the default [Configuration File](https://docs.cloud.oracle.com/iaas/Content/API/Concepts/sdkconfig.htm) is located in the `~/.oci/config` directory.
@@ -194,17 +196,17 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
 
 3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Add OCID, tenancy ID, fingerprint & key credentials in the `config` file.
 
-      ```
-      <copy>
-      [DEFAULT]
-      user=USER-OCID
-      fingerprint=FINGERPRINT-VALUE
-      tenancy=TENANCY-OCID
-      key_file=<Location of the private key oci_api_key_private.pem>
-      </copy>
-      ```
-    Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
-      ![View config file](images/config-file.png)
+```
+<copy>
+[DEFAULT]
+user=USER-OCID
+fingerprint=FINGERPRINT-VALUE
+tenancy=TENANCY-OCID
+key_file=<Location of the private key oci_api_key_private.pem>
+</copy>
+```   
+Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
+![View config file](images/config-file.png)
 
 4. Execute the sample application:
    Open the Command Prompt, and navigate to the directory where you saved the `HelloWorld.py` program.
@@ -307,27 +309,27 @@ Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/api
 
 3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Add OCID, tenancy ID, fingerprint & key credentials in the `config` file.
 
-      ```
-      <copy>
-      [DEFAULT]
-      user=USER-OCID
-      fingerprint=FINGERPRINT-VALUE
-      tenancy=TENANCY-OCID
-      key_file=<Location of the private key oci_api_key_private.pem>
-      </copy>
-      ```
-      Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
-      ![View config file](images/config-file.png)
+```
+<copy>
+[DEFAULT]
+user=USER-OCID
+fingerprint=FINGERPRINT-VALUE
+tenancy=TENANCY-OCID
+key_file=<Location of the private key oci_api_key_private.pem>
+</copy>
+```
+Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
+![View config file](images/config-file.png)
 
 4. Execute the Sample Application
    Open the Command Prompt, and navigate to the directory where you saved the `HelloWorld.js` program.
    Execute the HelloWorld program.
 
-      ```
-      <copy>
-      node HelloWorld.js
-      </copy>
-      ```
+   ```
+   <copy>
+   node HelloWorld.js
+   </copy>
+   ```
    *Note: In the main method of `HelloWorld.js`, the `dropTable(handle)` is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*    
 </if>
 <if type="C-sharp">
@@ -338,17 +340,17 @@ Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/api
 
 3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Add OCID, tenancy ID, fingerprint & key credentials in the `config` file.
 
-      ```
-      <copy>
-      [DEFAULT]
-      user=USER-OCID
-      fingerprint=FINGERPRINT-VALUE
-      tenancy=TENANCY-OCID
-      key_file=<Location of the private key oci_api_key_private.pem>
-      </copy>
-      ```
-      Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
-      ![View config file](images/config-file.png)
+```
+<copy>
+[DEFAULT]
+user=USER-OCID
+fingerprint=FINGERPRINT-VALUE
+tenancy=TENANCY-OCID
+key_file=<Location of the private key oci_api_key_private.pem>
+</copy>
+```
+Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
+![View config file](images/config-file.png)
 
 4. Go to your project directory. you will see the example source code ```Program.cs```. Remove this file .
 ```
@@ -358,7 +360,7 @@ Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/api
 ```
 Build and run your project as shown below.
 
-*Note: You have multiple dotnet target frameworks which are supported. Currently the supported frameworks are .NET .NET 7.0 and higher.*
+*Note: You have multiple dotnet target frameworks which are supported. Currently the supported frameworks are .NET 7.0 and higher.*
 
 ```
 <copy>
