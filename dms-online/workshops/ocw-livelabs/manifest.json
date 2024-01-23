@@ -9,7 +9,7 @@
     "tutorials": [
         {
             "title": "Introduction",
-            "filename": "../../introduction/introduction.md"
+            "filename": "../../introduction-terraform/introduction.md"
         },
         {
             "title": "Lab 1: Register and Setup Migration",

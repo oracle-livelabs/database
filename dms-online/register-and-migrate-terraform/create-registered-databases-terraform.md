@@ -1,8 +1,9 @@
-# Create Registered Databases
+# Create Database Connections
 
 ## Introduction
 
-This lab walks you through the steps to create a database connection to use with DMS. Database connection resources enable networking and connectivity for the source and target databases.
+This lab walks you through the steps to create a database connections to use with DMS. Database connection resources enable networking and connectivity for the source and target databases.
+You will also create and Online Migration leveraging the integrated GoldenGate feature available in DMS.
 
 Estimated Lab Time: 20 minutes
 
@@ -15,7 +16,7 @@ In this lab, you will:
 * Create a Database Connection for Source CDB
 * Create a Database Connection for Source PDB
 * Create a Database Connection for Target ADB
-* Create a Migration
+* Create an Online Migration
 
 ### Prerequisites
 
