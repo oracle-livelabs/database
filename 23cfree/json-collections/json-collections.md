@@ -61,7 +61,8 @@ In this lab, you will:
 
 	![JSON Create Collection](./images/json-create-collection.png)
 
-7. In the field **Collection Name**, provide the name **movies**. MAKE SURE you check the **MongoDB Compatible** box then click **Create**.
+7. In the field **Collection Name**, provide the name **movies**. Then click **Create**.
+
 	Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use MOVIES or Movies.
 
 	![New Collection: movies](./images/collection-name.png)

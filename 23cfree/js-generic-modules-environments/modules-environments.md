@@ -2,11 +2,9 @@
 
 ## Introduction
 
-After the previous lab introduced JavaScript in Oracle Database 23c Free - Developer Release you will now learn more about Multilingual Engine (MLE) modules and environments. Modules are similar in concept to PL/SQL packages as they allow you to logically group code in a single namespace. Just as with PL/SQL you can create public and private functions. MLE modules contain JavaScript code expressed in terms of ECMAScript modules.
+After the previous lab introduced JavaScript in Oracle Database 23c Free you will now learn more about Multilingual Engine (MLE) modules and environments. Modules are similar in concept to PL/SQL packages as they allow you to logically group code in a single namespace. Just as with PL/SQL you can create public and private functions. MLE modules contain JavaScript code expressed in terms of ECMAScript modules.
 
 Estimated Lab Time: 10 minutes
-
-[](videohub:1_n99vou1t)
 
 ### Objectives
 
@@ -21,7 +19,7 @@ In this lab, you will:
 
 This lab assumes you have:
 
-- An Oracle Database 23c Free - Developer Release environment available to use
+- An Oracle Database 23c Free environment available to use
 - Created the `emily` account as per Lab 1
 
 ## Task 1: Create a database session
@@ -34,7 +32,7 @@ Connect to the pre-created Pluggable Database (PDB) `freepdb1` using the same cr
 
 ## Task 2: Create JavaScript modules
 
-A JavaScript module is a unit of MLE's language code stored in the database as a schema object. Storing code within the database is one of the main benefits of using JavaScript in Oracle Database 23c Free-Developer Release: rather than having to manage a fleet of application servers each with their own copy of the application, the database takes care of this for you.
+A JavaScript module is a unit of MLE's language code stored in the database as a schema object. Storing code within the database is one of the main benefits of using JavaScript in Oracle Database 23c: rather than having to manage a fleet of application servers each with their own copy of the application, the database takes care of this for you.
 
 In addition, Data Guard replication ensures that the exact same code is present in both production and all physical standby databases. This way configuration drift, a common problem bound to occur when invoking the disaster recovery location, can be mitigated.
 
@@ -185,7 +183,52 @@ Database Actions is a web-based interface that uses Oracle REST Data Services (O
 
     ![Database Actions main screen](images/sdw-main-page.jpg)
 
-    With the editor (not Snippet) pane open, paste the JavaScript portion of the code you used for `helper_module_inline` into the editor pane, assign a name to the module (`HELPER_MODULE_ORDS`) and use the disk icon to persist the module in the database.
+    With the editor (not Snippet) pane open, paste the following JavaScript code into the editor pane, assign a name to the module (`HELPER_MODULE_ORDS`) and use the disk icon to persist the module in the database.
+
+    ```javascript
+    /**
+     * convert a delimited string into key-value pairs and return JSON
+     * @param {string} inputString - the input string to be converted
+     * @returns {JSON}
+     */
+    function string2obj(inputString) {
+        if ( inputString === undefined ) {
+            throw `must provide a string in the form of key1=value1;...;keyN=valueN`;
+        }
+        let myObject = {};
+        if ( inputString.length === 0 ) {
+            return myObject;
+        }
+        const kvPairs = inputString.split(";");
+        kvPairs.forEach( pair => {
+            const tuple = pair.split("=");
+            if ( tuple.length === 1 ) {
+                tuple[1] = false;
+            } else if ( tuple.length != 2 ) {
+                throw "parse error: you need to use exactly one '=' " + 
+                    " between key and value and not use '=' in either key or value";
+            }
+            myObject[tuple[0]] = tuple[1];
+        });
+        return myObject;
+    }
+
+    /**
+     * convert a JavaScript object to a string
+     * @param {object} inputObject - the object to transform to a string
+     * @returns {string}
+     */
+    function obj2String(inputObject) {
+        if ( typeof inputObject != 'object' ) {
+            throw "inputObject isn't an object";
+        }
+        return JSON.stringify(inputObject);
+    }
+
+    export { string2obj, obj2String }
+    ```
+
+    This is what it should look like:
 
     ![Database Actions module editor](images/sdw-mle-module-editor.jpg)
 
@@ -195,7 +238,7 @@ Database Actions is a web-based interface that uses Oracle REST Data Services (O
 
 1. Reference existing modules
 
-    The more modular your code, the more reusable it is. JavaScript modules in Oracle Database 23c Free-Developer Release can reference other modules easily, allowing developers to follow a divide and conquer approach designing applications. The code shown in the following snippet makes use of the module `helper_module_inline` created earlier to convert a string representing an order before inserting it into a table.
+    The more modular your code, the more reusable it is. JavaScript modules in Oracle Database 23c can reference other modules easily, allowing developers to follow a divide and conquer approach designing applications. The code shown later in this lab makes use of the module `helper_module_inline` created earlier to convert a string representing an order before inserting it into a table.
 
     > **Note**: Lab 4 will explain the use of the JavaScript SQL Driver in more detail.
 
@@ -224,7 +267,12 @@ Database Actions is a web-based interface that uses Oracle REST Data Services (O
     create mle module business_logic language javascript as
 
     import { string2obj } from 'helpers';
-
+    /**
+     * A simple function accepting a set of key-value pairs, translates it to JSON before
+     * inserting the order in the database.
+     * @param {string} orderData a semi-colon separated string containing the order details 
+     * @returns {boolean} true if the order could be processed successfully, false otherwise
+     */
     export function processOrder(orderData) {
         
         const orderDataJSON = string2obj(orderData);
@@ -274,7 +322,7 @@ Database Actions is a web-based interface that uses Oracle REST Data Services (O
 
     The `business_logic` module introduces a new concept: an (ECMAScript) `import` statement. `string2JSON()`, defined in the helpers module is imported into the module's namespace.
 
-3. Create an environment
+3. Create and edit an environment
 
     The following snippet creates an environment mapping the import name `helpers` as seen in the `business_logic` module to `helper_module_inline`
 
@@ -290,6 +338,8 @@ Database Actions is a web-based interface that uses Oracle REST Data Services (O
     Database Actions supports working with environments as well. From the drop down on the left navigation pane select "Environments" to obtain a list of environments. You should see the `BUSINESS_MODULE_ENV` listed. Right-click the environment's name and choose `Edit` to review the environment definition.
 
     ![Database Actions MLE Environment editor](images/sdw-mle-env-editor.jpg)
+
+    You can see that list of imported modules on the right-hand side of the wizard displays an import name `helpers`, mapping to `helper_module_inline`. Add the `business_logic` module to the list of imported modules by selecting it in the list of available modules, followed by a click on the `>` symbol. Finally click on the apply button to persist the change. 
 
     The environment will play a crucial role when exposing JavaScript code to SQL and PL/SQL, a topic that will be covered in the next lab (Lab 3).
 
@@ -456,4 +506,4 @@ You many now proceed to the next lab.
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 09-MAY-2023
+- **Last Updated By/Date** - Martin Bach 28-NOV-2023
