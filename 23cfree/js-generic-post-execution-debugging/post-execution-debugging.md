@@ -4,7 +4,7 @@
 
 Oracle's JavaScript Engine allows developers to debug their code by conveniently and efficiently collecting runtime state during program execution. After the code has finished executing, the collected data can be used to analyze program behavior and discover and fix bugs. This form of debugging is known as _post-execution debugging_.
 
-The post-execution debug option enables developers to instrument their code by specifying debugpoints in the code. Debugpoints allow you to log program state conditionally or unconditionally, including values of individual variables as well as execution snapshots. Debugpoints are specified as JSON documents separate from the application code. No change to the application is necessary for debug points to fire.
+The post-execution debug option enables developers to instrument their code by specifying so-called debug points in the code. Debug points allow you to log program state conditionally or unconditionally, including values of individual variables as well as execution snapshots. Debug points are specified as JSON documents separate from the application code. No change to the application is necessary for debug points to fire.
 
 When activated, debug information is collected according to the debug specification and can be fetched for later analysis by a wide range of tools thanks to its standard Java Profiler Heap Dump version 1.0.1 as defined in JDK6 format.
 
@@ -24,7 +24,7 @@ In this lab, you will:
 
 This lab assumes you have:
 
-- An Oracle Database 23c Free - Developer Release environment available to use
+- An Oracle Database 23c Free environment available to use
 - Created the `emily` account as per Lab 1
 - Completed Lab 2 where you created a number of JavaScript modules in the database
 
@@ -55,60 +55,64 @@ Actions include printing the value of a single variable (`watch` point) or takin
     ```
     SQL> select line, text from user_source where name = 'BUSINESS_LOGIC';
 
-    LINE TEXT
-    ---- ----------------------------------------------------------------------------
-       1 import { string2obj } from 'helpers';
-       2
-       3 export function processOrder(orderData) {
-       4
-       5   const orderDataJSON = string2obj(orderData);
-       6   const result = session.execute(`
-       7      insert into orders (
-       8          order_id,
-       9          order_date,
-      10          order_mode,
-      11          customer_id,
-      12          order_status,
-      13          order_total,
-      14          sales_rep_id,
-      15          promotion_id
-      16      )
-      17      select
-      18          jt.*
-      19      from
-      20          json_table(:orderDataJSON, '$' columns
-      21              order_id             path '$.order_id',
-      22              order_date timestamp path '$.order_date',
-      23              order_mode           path '$.order_mode',
-      24              customer_id          path '$.customer_id',
-      25              order_status         path '$.order_status',
-      26              order_total          path '$.order_total',
-      27              sales_rep_id         path '$.sales_rep_id',
-      28              promotion_id         path '$.promotion_id'
-      29      ) jt`,
-      30      {
-      31          orderDataJSON: {
-      32              val: orderDataJSON,
-      33              type: oracledb.DB_TYPE_JSON
-      34          }
-      35      }
-      36  );
-      37
-      38  if ( result.rowsAffected === 1 ) {
-      39      return true;
-      40  } else {
-      41      return false;
-      42  }
-      43 }
-  
-    43 rows selected.
+     LINE TEXT
+    ----- ------------------------------------------------------------------------------------------
+        1 import { string2obj } from 'helpers';
+        2 /**
+        3  * A simple function accepting a set of key-value pairs, translates it to JSON bef
+        4  * inserting the order in the database.
+        5  * @param {string} orderData a semi-colon separated string containing the order de
+        6  * @returns {boolean} true if the order could be processed successfully, false oth
+        7  */
+        8 export function processOrder(orderData) {
+        9
+       10     const orderDataJSON = string2obj(orderData);
+       11     const result = session.execute(`
+       12         insert into orders (
+       13             order_id,
+       14             order_date,
+       15             order_mode,
+       16             customer_id,
+       17             order_status,
+       18             order_total,
+       19             sales_rep_id,
+       20             promotion_id
+       21         )
+       22         select
+       23             jt.*
+       24         from
+       25             json_table(:orderDataJSON, '$' columns
+       26                 order_id             path '$.order_id',
+       27                 order_date timestamp path '$.order_date',
+       28                 order_mode           path '$.order_mode',
+       29                 customer_id          path '$.customer_id',
+       30                 order_status         path '$.order_status',
+       31                 order_total          path '$.order_total',
+       32                 sales_rep_id         path '$.sales_rep_id',
+       33                 promotion_id         path '$.promotion_id'
+       34         ) jt`,
+       35         {
+       36             orderDataJSON: {
+       37                 val: orderDataJSON,
+       38                 type: oracledb.DB_TYPE_JSON
+       39             }
+       40         }
+       41     );
+       42     if ( result.rowsAffected === 1 ) {
+       43         return true;
+       44     } else {
+       45         return false;
+       46     }
+       47 }
+    
+    47 rows selected.
     ```
 
 2. Define the debug specification
 
     In this step you create a debug specification with the following contents:
-    - A watchpoint to print the contents of `orderDataJSON` in line 6
-    - A snapshot of the entire stack in line 38
+    - A watchpoint to print the contents of `orderDataJSON` in line 11
+    - A snapshot of the entire stack in line 42
 
     The debug specification consists primarily of an array of JavaScript objects defining which action to take at a given code location.
 
@@ -119,7 +123,7 @@ Actions include printing the value of a single variable (`watch` point) or takin
             {
                 "at": {
                     "name": "BUSINESS_LOGIC",
-                    "line": 6
+                    "line": 11
                 },
                 "actions": [
                     {
@@ -131,7 +135,7 @@ Actions include printing the value of a single variable (`watch` point) or takin
             {
                 "at": {
                     "name": "BUSINESS_LOGIC",
-                    "line": 38
+                    "line": 42
                 },
                 "actions": [
                     {
@@ -168,7 +172,7 @@ begin
                 {
                     "at": {
                         "name": "BUSINESS_LOGIC",
-                        "line": 6
+                        "line": 11
                     },
                     "actions": [
                         {
@@ -180,7 +184,7 @@ begin
                 {
                     "at": {
                         "name": "BUSINESS_LOGIC",
-                        "line": 38
+                        "line": 42
                     },
                     "actions": [
                         {
@@ -230,13 +234,13 @@ When executing the above code snippet the following information is printed on sc
     {
       "at": {
         "name": "EMILY.BUSINESS_LOGIC",
-        "line": 6
+        "line": 11
       },
       "values": {
         "orderDataJSON": {
           "customer_id": "1",
           "order_date": "2023-04-24T10:27:52",
-          "order_id": "1",
+          "order_id": "10",
           "order_mode": "theMode",
           "order_status": "2",
           "order_total": "42",
@@ -250,18 +254,18 @@ When executing the above code snippet the following information is printed on sc
     {
       "at": {
         "name": "EMILY.BUSINESS_LOGIC",
-        "line": 38
+        "line": 42
       },
       "values": {
         "result": {
           "rowsAffected": 1
         },
         "this": {},
-        "orderData": "order_id=10;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1",
+        "orderData": "order_id=10;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;romotion_id=1",
         "orderDataJSON": {
           "customer_id": "1",
           "order_date": "2023-04-24T10:27:52",
-          "order_id": "1",
+          "order_id": "10",
           "order_mode": "theMode",
           "order_status": "2",
           "order_total": "42",
@@ -286,11 +290,11 @@ You can see that both probes fired:
 
 ## Task 5: Use Database Actions to perform post-execution debugging
 
-Database Actions supports debugging with a nice, graphical user interface. Start by logging into Database Actions using the EMILY account. Once logged in, navigate to "MLE JS". Rather than using the Editor panel, this time you need to switch to Snippets.
+Database Actions supports debugging with a nice, graphical user interface. Start by logging into Database Actions using the EMILY account. Once logged in, navigate to "MLE JS". Rather than using the Editor panel, this time you need to switch to **Snippets**.
 
 1. Create a JavaScript environment
 
-    On the left-hand side of the screen select "Environments" from the drop down list. Next, click on the "..." icon and select "Create Environment" to open the "Create MLE Environment" Wizard.
+    On the left-hand side of the screen select "Environments" from the drop down list. Next, click on the "..." icon and select "Create Object" to open the "Create MLE Environment" Wizard.
 
     ![Prepare to create a new MLE Environment](images/sdw-create-mle-env.jpg)
 
@@ -341,7 +345,7 @@ Database Actions supports debugging with a nice, graphical user interface. Start
             {
                 "at": {
                     "name": "BUSINESS_LOGIC",
-                    "line": 6
+                    "line": 11
                 },
                 "actions": [
                     {
@@ -353,7 +357,7 @@ Database Actions supports debugging with a nice, graphical user interface. Start
             {
                 "at": {
                     "name": "BUSINESS_LOGIC",
-                    "line": 38
+                    "line": 42
                 },
                 "actions": [
                     {
@@ -375,9 +379,12 @@ Database Actions supports debugging with a nice, graphical user interface. Start
 
 4. Run the code with debugging enabled
 
-    Back in the Snippets editor click on the "Debug Snippet" button highlighted in red in the following screenshot to run the JavaScript snippet with debugging enabled. Focus will automatically switch to the Debug Console where you can see the results of the debug run:
+    Back in the Snippets editor make sure the newly created `business_logic_env` is selected. You may have to hit the circle icon first in case the
+    environment doesn't appear in the drop-down list.
 
-    - The watchpoint fired in line 6 showing the value of `orderDataJSON`
+    Click on the "Debug Snippet" button highlighted in red in the following screenshot to run the JavaScript snippet with debugging enabled. Focus will automatically switch to the Debug Console where you can see the results of the debug run:
+
+    - The watchpoint fired in line 11 showing the value of `orderDataJSON`
     - The second watchpoint fired as well, showing that exactly 1 row was affected by the insert statement
 
     Clicking on little triangles expands the information provided, you can even click on the variable to see where in the code it is located.
@@ -415,7 +422,7 @@ In an ideal world post-execution debugging should be simple to enable without ha
                 {
                     "at": {
                         "name": "BUSINESS_LOGIC",
-                        "line": 6
+                        "line": 11
                     },
                     "actions": [
                         {
@@ -427,7 +434,7 @@ In an ideal world post-execution debugging should be simple to enable without ha
                 {
                     "at": {
                         "name": "BUSINESS_LOGIC",
-                        "line": 38
+                        "line": 42
                     },
                     "actions": [
                         {
@@ -595,7 +602,7 @@ In an ideal world post-execution debugging should be simple to enable without ha
     declare
         l_order_as_string varchar2(512);
     begin
-        l_order_as_string := 'order_id=13;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
+        l_order_as_string := 'order_id=20;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;promotion_id=1';
         business_logic_pkg.process_order(l_order_as_string, null);
     exception
         when others then
@@ -649,9 +656,7 @@ In an ideal world post-execution debugging should be simple to enable without ha
     ```sql
     <copy>
     select
-        json_serialize(md.debug_spec pretty) debug_spec,
-        json_serialize(dbms_mle.parse_debug_output(debug_info) pretty) debug_info,
-        (r.run_end - r.run_start) duration
+        json_serialize(dbms_mle.parse_debug_output(debug_info) pretty) debug_info
     from
         debug_metadata md
         join debug_runs r
@@ -663,7 +668,66 @@ In an ideal world post-execution debugging should be simple to enable without ha
 
     The query produces the following output:
 
-    ![Output gathered by dynamic debugging](images/dynamic-debugging-output.jpg)
+    ```
+    DEBUG_INFO
+    ----------------------------------------------------------------------------------------
+    [
+      [
+        {
+          "at" :
+          {
+            "name" : "EMILY.BUSINESS_LOGIC",
+            "line" : 11
+          },
+          "values" :
+          {
+            "orderDataJSON" :
+            {
+              "customer_id" : "1",
+              "order_date" : "2023-04-24T10:27:52",
+              "order_id" : "21",
+              "order_mode" : "theMode",
+              "order_status" : "2",
+              "order_total" : "42",
+              "promotion_id" : "1",
+              "sales_rep_id" : "1"
+            }
+          }
+        }
+      ],
+      [
+        {
+          "at" :
+          {
+            "name" : "EMILY.BUSINESS_LOGIC",
+            "line" : 42
+          },
+          "values" :
+          {
+            "result" :
+            {
+              "rowsAffected" : 1
+            },
+            "this" :
+            {
+            },
+            "orderData" : "order_id=21;order_date=2023-04-24T10:27:52;order_mode=theMode;customer_id=1;order_status=2;order_total=42;sales_rep_id=1;    promotion_id=1",
+            "orderDataJSON" :
+            {
+              "customer_id" : "1",
+              "order_date" : "2023-04-24T10:27:52",
+              "order_id" : "21",
+              "order_mode" : "theMode",
+              "order_status" : "2",
+              "order_total" : "42",
+              "promotion_id" : "1",
+              "sales_rep_id" : "1"
+            }
+          }
+        }
+      ]
+    ]
+    ```
 
     Rather than displaying the JSON output on screen you can import it into any tool supporting its format and analyse it offline.
 
@@ -677,4 +741,4 @@ You many now proceed to the next lab.
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 09-MAY-2023
+- **Last Updated By/Date** - Martin Bach 28-NOV-2023

@@ -2,13 +2,13 @@
 
 ## Introduction
 
-JSON, short for JavaScript Object Notation, has become the de-facto standard data interchange format and is a very popular for storing data. Oracle's Converged Database has supported JSON for many years, adding functionality with each release on top of an already impressive base. Oracle Database 23c Free - Developer Release is no exception.
+JSON, short for JavaScript Object Notation, has become the de-facto standard data interchange format and is a very popular for storing data. Oracle's Converged Database has supported JSON for many years, adding functionality with each release on top of an already impressive base. Oracle Database 23c Free is no exception.
 
-You already got a glimpse of JSON in `processOrder()`, part of the `business_logic` module. This function is called with a string argument. The string is made up of a series of key-value pairs, each separated by a semi-colon each. The input parameter was subsequently translated to a JSON object and used in an insert statement showcasing the `json_table` function.
+You already got a glimpse of JSON in `processOrder()`, part of the `business_logic` module. This function is called with a string argument. The string is made up of a series of key-value pairs, each separated by a semi-colon each. The input parameter is subsequently translated to a JSON object and used in an insert statement showcasing the `json_table` function.
 
 > **Note:** You could have stored the JSON document in a JSON column in the table directly, but then you wouldn't have seen how easy it is to convert JSON to a relational format
 
-In this lab you will learn about an alternative way of working with JSON, based on the document object model.
+In this lab you will learn about an alternative way of working with JSON, based on the Simple Document Access Model (SODA).
 
 Estimated Lab Time: 10 minutes
 
@@ -16,7 +16,7 @@ Estimated Lab Time: 10 minutes
 
 In this lab, you will:
 
-- Understand how to work with JSON using the document model (Simple Oracle Document Access (SODA))
+- Understand how to work with JSON using the document model (SODA)
 - Create SODA collections
 - Add documents to a collection
 - Search for a specific document in a collection
@@ -28,7 +28,7 @@ In this lab, you will:
 
 This lab assumes you have:
 
-- An Oracle Database 23c Free - Developer Release environment available to use
+- An Oracle Database 23c Free environment available to use
 - Created the `emily` account as per Lab 1
 
 ## Task 1: Create a database session
@@ -343,7 +343,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
     </copy>
     ```
 
-    The procedure should complete successfully. After the prompt is returned a new SODA collection will have been created. Under the covers Oracle will create a table named `myCollection` containing the JSON document and some metadata.
+    The procedure should complete successfully. After the prompt is returned a new SODA collection will have been created. Under the covers Oracle will create a table named `myCollection`, eventually containing the JSON document and some metadata.
 
 2. Add documents to a collection
 
@@ -484,7 +484,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
 
     ```sql
     <copy>
-    col result for a30
+    col result for a90
     select
         json_serialize(
             soda_demo_pkg.find_emp_by_ename('myCollection', 'JONES')
@@ -501,18 +501,19 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
       4          pretty) as result;
 
     RESULT
-    ------------------------------
+    ----------------------------------------------
     [
-        {
-            "empno" : 7566,
-            "ename" : "JONES",
-            "job" : "MANAGER",
-            "mgr" : 7839,
-            "hiredate" : "1981-04-02",
-            "sal" : 2975,
-            "comm" : 0,
-            "deptno" : 20
-        }
+      {
+        "_id" : "6565FB0BAC2A5D0167125F2D",
+        "comm" : 0,
+        "deptno" : 20,
+        "empno" : 7566,
+        "ename" : "JONES",
+        "hiredate" : "1981-04-02",
+        "job" : "MANAGER",
+        "mgr" : 7839,
+        "sal" : 2975
+      }
     ]
     ```
 
@@ -670,7 +671,7 @@ The previous lab (concerning the JavaScript SQL driver) introduced a major diffe
 
     NUMBER_OF_EMPLOYEES_BEFORE
     --------------------------
-                            2
+                             2
 
     SQL> begin
       2      soda_demo_pkg.delete_document('myCollection', 7566);
@@ -740,4 +741,4 @@ You many now proceed to the next lab.
 
 - **Author** - Martin Bach, Senior Principal Product Manager, ST & Database Development
 - **Contributors** -  Lucas Braun, Sarah Hirschfeld
-- **Last Updated By/Date** - Martin Bach 02-MAY-2023
+- **Last Updated By/Date** - Martin Bach 28-NOV-2023

@@ -39,7 +39,7 @@ Estimated Lab Time: 10 minutes
 
 5. This console shows the existing databases. If there is a long list of databases, you can filter the list by the state of the databases (available, stopped, terminated, and so on). You can also sort by __Workload Type__. Here, the __Data Warehouse__ workload type is selected.
 
-    ![You can filter the list of databases](./images/compartment.png " ")
+    ![You can filter the list of databases](./images/Compartment.png " ")
 
 ## Task 2: Create the Autonomous Database Instance
 
@@ -75,14 +75,14 @@ Estimated Lab Time: 10 minutes
 
     - __Always Free__ - Select always free Autonomous Database configuration options.
     - __Choose database version__ - Select a database version from the available versions.
-    - __OCPU count__ - Number of CPUs for your service. For this lab, specify __1 CPU__.
+    - __ECPU count__ - Number of CPUs for your service. For this lab, specify __2 CPU__.
     - __Storage (TB)__ - Select your storage capacity in terabytes. For this lab, specify __1 TB__ of storage.
-    - __OCPU Auto Scaling__ - For this lab, keep auto scaling enabled, to allow the system to automatically use up to three times more CPU and IO resources to meet workload demand.
+    - __ECPU Auto Scaling__ - For this lab, keep auto scaling enabled, to allow the system to automatically use up to three times more CPU and IO resources to meet workload demand.
     - __New Database Preview__ - If a checkbox is available to preview a new database version, do __not__ select it.
 
     **Note**: If you opt for the always free Autonomous Database option, you can only choose the database version, all other configuration options are greyed out.
 
-    ![Configure the database](./images/configure-db.png " ")
+    ![Configure the database](./images/configure-db-ecpu.png " ")
 
 7. Create administrator credentials:
 
@@ -104,7 +104,7 @@ Estimated Lab Time: 10 minutes
 
     ![Choose the network access type.](./images/choose-network-access.png " ")
 
-9. Choose a license type. For this lab, choose __License Included__. The two license types are:
+9. Choose a license type. For this lab, keep the license type as __License Included__. The two license types are:
 
     - __Bring Your Own License (BYOL)__ - Select this type when your organization has existing database licenses.
     - __License Included__ - Select this type when you want to subscribe to new database software licenses and the database cloud service.
@@ -132,4 +132,4 @@ Click [here](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-clo
 ## Acknowledgements
 
 - **Author** - Richard Green, Principal Developer, Database User Assistance
-- **Last Updated By/Date** - Shilpa Sharma, March 2023
+- **Last Updated By/Date** - Katherine Wardhana, November 2023

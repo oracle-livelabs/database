@@ -8,6 +8,10 @@ By following the instructions provided, you will complete the setup process and 
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+
+[Setup Tutorial](videohub:1_rkprm8hq)
+
 ### Objectives
 
 * Create two users, User 1 and User 2, for the Oracle database environment.
@@ -40,6 +44,15 @@ Task 1 involves creating the users. By executing the provided SQL statements, we
     ```
     ![Access Terminal](images/connect-db-sysdba1.png "Terminal")
 
+    * Change system user password
+
+    ```
+    <copy>
+    alter user system identified by Welcome123;
+    </copy>
+    ```
+    ![Access Terminal](images/alter-user.png "Terminal")
+
     * Switch session from container database to pluggable database 1
     ```
     <copy>
@@ -50,38 +63,11 @@ Task 1 involves creating the users. By executing the provided SQL statements, we
     ![Access Terminal](images/alter-session1.png "Terminal")
 
 
-    * Change system user password
-
-    ```
-    <copy>
-    alter user system identified by Welcome123;
-    </copy>
-    ```
-    ![Access Terminal](images/alter-user.png "Terminal")
-
-
-    * Exit the session
-    ```
-    <copy>
-    exit
-    </copy>
-    ```
-
     * Login to system user in pdb1
 
     ```
     <copy>
-    sqlplus system/Weclome123@FREEPDB1
-    </copy>
-    ```
-
-3. Create two users
-
-    * Login to system user in pdb1
-
-    ```
-    <copy>
-    sqlplus system/Welcome123@FREEPDB1
+    CONNECT system/Welcome123@FREEPDB1
     </copy>
     ```
 
@@ -105,11 +91,16 @@ Task 1 involves creating the users. By executing the provided SQL statements, we
     </copy>
     ```
 
-    * Provide the roles and privileges to user 1 and 2 for this lab setup like so:
+    * Provide the following roles so the users can connect to the database, execute queries, and access database objects like so:
 
     ```
     <copy>
     GRANT CONNECT to u1;
+    </copy>
+    ```
+
+    ```
+    <copy>
     GRANT CREATE SESSION TO u1;
     </copy>
     ```
@@ -117,14 +108,6 @@ Task 1 involves creating the users. By executing the provided SQL statements, we
     ```
     <copy>
     GRANT CONNECT to u2;
-    </copy>
-    ```
-
-    * You can test connection to users as shown below. Make sure to exit or reconnect to system user shown in step 2 above for the next task.
-
-    ```
-    <copy>
-    CONNECT u1/Welcome123@FREEPDB1;
     </copy>
     ```
 
@@ -166,23 +149,26 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
 
 1. Insert data into the first table:
 
+    * Create unlimited quota on the tablespace
+    ```
+    <copy>
+    ALTER USER s1 QUOTA UNLIMITED ON users;
+    commit;
+    </copy>
+    ```
+
     * Inserting rows into inventory\_no\_reservations table
 
     ```
     <copy>
-    INSERT INTO s1.inventory_no_reservations (id, product_name, quantity, budget)
-    VALUES (1, 'Product A', 10, 700);
+    INSERT INTO s1.inventory_no_reservations
+    VALUES
+    (1, 'Product A', 10, 700), 
+    (2, 'Product B', 5, 200);
     commit;
     </copy>
     ```
 
-    ```
-    <copy>
-    INSERT INTO s1.inventory_no_reservations (id, product_name, quantity, budget)
-    VALUES (2, 'Product B', 5, 200);
-    commit;
-    </copy>
-    ```
 
 2. Insert data into the second table:
 
@@ -190,16 +176,10 @@ Task 3 focuses on inserting a few rows into each of the tables we created. We wi
 
     ```
     <copy>
-    INSERT INTO s1.inventory_reservations (id, product_name, quantity, budget)
-    VALUES (1, 'Product C', 8, 1000);
-    commit;
-    </copy>
-    ```
-
-    ```
-    <copy>
-    INSERT INTO s1.inventory_reservations (id, product_name, quantity, budget)
-    VALUES (2, 'Product D', 3, 500);
+    INSERT INTO s1.inventory_reservations
+    VALUES
+    (1, 'Product C', 8, 1000), 
+    (2, 'Product D', 3, 500);
     commit;
     </copy>
     ```

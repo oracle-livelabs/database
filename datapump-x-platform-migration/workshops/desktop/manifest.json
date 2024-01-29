@@ -9,6 +9,11 @@
       "filename": "../../00-introduction/introduction.md"
     },
     {
+      "title": "Get Started with noVNC Remote Desktop",
+      "description": "Using noVNC Remote Desktop",
+      "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+    },
+    {
       "title": "Lab 1: Prepare the Target",
       "description": "Adding a PDB to the Target CDB",
       "filename": "../../01-preparationtarget/preparationtarget.md"
@@ -47,6 +52,11 @@
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    },
+    {
+      "title": "Other LiveLabs you might like",
+      "description": "Other LiveLabs you might like",
+      "filename": "../../other-livelabs/other-livelabs.md"
     }
   ]
 }

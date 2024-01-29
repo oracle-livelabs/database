@@ -6,6 +6,8 @@ In this lab, you will migrate a non-CDB database (FTEX) running on Oracle Databa
 
 Estimated Time: 15 minutes
 
+[](videohub:1_fs5oba05)
+
 ### Objectives
 
 In this lab, you will:
@@ -73,7 +75,7 @@ In any migration using transportable tablespaces, including FTEX, you must creat
     ```
     </details>
 
-4. Create a directory object that Data Pump can use. Also, create a database link that can be used by Data Pump to import directly from the source database. The database link connects to the source database.
+4. Create a directory object that Data Pump can use.
     ```
     <copy>
     alter session set container=PDB2;
@@ -99,10 +101,6 @@ In any migration using transportable tablespaces, including FTEX, you must creat
     SQL> grant read, write on directory mydir to system;
 
     Grant succeeded.
-    
-    SQL> create public database link SOURCEDB connect to system identified by oracle using 'FTEX';
-
-    Database link created.
 
     SQL> exit
 
@@ -705,15 +703,24 @@ You can now move the data files to the target system and start the Data Pump imp
     SYS.DBMS_UTILITY.EXEC_DDL_STATEMENT('GRANT EXECUTE ON DBMS_DEFER_SYS TO "DBA"');COMMIT; END;
     ```
 
-5. Users should now connect to the migrated database. Shut down the old source database.
+5. Users should now connect to the migrated database. Set the environment to the old source database.
 
     ```
     <copy>
     . ftex
-    sqlplus / as sysdba<<EOF
-       shutdown immediate
-    EOF
+    sqlplus / as sysdba
     </copy>
+    ```
+    
+5. Shut down the old source database.
+
+    ```
+    <copy>
+    shutdown immediate
+    exit
+    </copy>
+
+    Be sure to hit RETURN
     ```
 
 6. You can now connect to the migrated PDB.
@@ -725,12 +732,13 @@ You can now move the data files to the target system and start the Data Pump imp
     </copy>
     ```
 
-7. Check the PDB.
+7. Check the PDB and exit.
 
     ```
     <copy>
     show con_id
-    show con_name
+    show con_name 
+    exit
     </copy>
     ```
 
@@ -775,4 +783,4 @@ You can combine FTEX with incremental backups to shorten the downtime during mig
 
 * **Author** - Mike Dietrich, Database Product Management
 * **Contributors** - Daniel Overby Hansen, Roy Swonger, Sanjay Rupprel, Cristian Speranta, Kay Malcolm
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2023
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2023

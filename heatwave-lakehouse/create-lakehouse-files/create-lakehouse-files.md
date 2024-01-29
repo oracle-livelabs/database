@@ -1,8 +1,8 @@
-# Create and store data for Lakehouse
+# Upload data to Object Storage for HeatWave Lakehouse
 
 ## Introduction
 
-A set of files have been created for you to use in this workshop. You will use the files to create your own lakehouse cloud storage bucket.
+A set of files have been created for you to use in this workshop. You will create an object storage bucket and upload the files to it.
 
 ### Objectives
 
@@ -14,7 +14,7 @@ A set of files have been created for you to use in this workshop. You will use t
 
 - An Oracle Trial or Paid Cloud Account
 - Some Experience with MySQL Shell
-- Completed Lab 3
+- Completed Lab 5
 
 ## Task 1: Download and unzip  Sample files
 
@@ -41,19 +41,19 @@ A set of files have been created for you to use in this workshop. You will use t
 3. Download sample files
 
     ```bash
-    <copy>wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/nnsIBVX1qztFmyAuwYIsZT2p7Z-tWBcuP9xqPCdND5LzRDIyBHYqv_8a26Z38Kqq/n/mysqlpm/b/plf_mysql_customer_orders/o/lakehouse/lakehouse-order.zip</copy>
+    <copy>wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/11vOOD1Z73v4baInYk3QlKOOZWb1BMo4gIcogWrO0jS4GQ29yFaQxwW9Jl6ufOFm/n/mysqlpm/b/mysql_customer_orders/o/lakehouse/lakehouse-orders-v3.zip</copy>
      ```
 
-4. Unzip lakehouse-order.zip file which will generate folder datafiles with 4 files
+4. Unzip lakehouse-order.zip file which will generate folder data with 4 files
 
     ```bash
-    <copy>unzip lakehouse-order.zip</copy>
+    <copy>unzip lakehouse-orders-v3.zip</copy>
      ```
 
-5. Go into the lakehouse/datafiles folder and list all of the files
+5. Go into the lakehouse/data folder and list all of the files
 
     ```bash
-    <copy>cd ~/lakehouse/datafiles</copy>
+    <copy>cd ~/lakehouse/data</copy>
     ```
 
     ```bash
@@ -68,7 +68,7 @@ A set of files have been created for you to use in this workshop. You will use t
 2. Under Object Storage, click Buckets
     ![bucket menu](./images/cloud-storage-menu.png "cloud storage menu")
 
-    **NOTE:** Ensure the correct Compartment is selected : Select **root**
+    **NOTE:** Ensure the correct Compartment is selected : Select **lakehouse**
 
 3. Click Create Bucket. The Create Bucket pane is displayed.
 
@@ -93,10 +93,10 @@ A set of files have been created for you to use in this workshop. You will use t
 
 ## Task 3: Add files into  the Bucket using the saved PAR URL
 
-1. Go into the lakehouse/datafiles folder and list all of the files
+1. Go into the lakehouse/data folder and list all of the files
 
     ```bash
-    <copy>cd ~/lakehouse/datafiles</copy>
+    <copy>cd ~/lakehouse/data</copy>
     ```
 
     ```bash

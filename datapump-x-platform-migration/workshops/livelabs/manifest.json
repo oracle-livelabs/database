@@ -4,6 +4,11 @@
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
+      "title": "Get Started with noVNC Remote Desktop",
+      "description": "Using noVNC Remote Desktop",
+      "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+    },
+    {
       "title": "Introduction",
       "description": "Introduction to Transportable Tablespaces Cross Platform Upgrade to 21c Workshop.",
       "filename": "../../00-introduction/introduction.md"
@@ -47,6 +52,11 @@
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    },
+    {
+      "title": "Other LiveLabs you might like",
+      "description": "Other LiveLabs you might like",
+      "filename": "../../other-livelabs/other-livelabs.md"
     }
   ]
 }

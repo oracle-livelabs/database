@@ -6,6 +6,8 @@ In this lab, you will use the SQL Performance Analyzer (SPA) that is a part of t
 
 Estimated Time: 10 minutes
 
+[](videohub:1_141rt83h)
+
 ### Objectives
 
 In this lab, you will:
@@ -19,7 +21,7 @@ This lab assumes:
 
 ## Task 1: Check statements
 
-1. Use the yelloe terminal. Set the environment and connect to the upgraded UPGR database.
+1. Use the yellow terminal. Set the environment and connect to the upgraded UPGR database.
 
     ```
     <copy>

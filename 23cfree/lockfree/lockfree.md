@@ -10,6 +10,10 @@ In this lab, we will explore the concept of lock-free reservations and their imp
 
 Estimated Time: 10 minutes
 
+Watch the video below for a quick walk-through of the lab.
+
+[Lock Free Video](videohub:1_u652vn55)
+
 ### Objectives
 
 * Understand the concept of lock-free reservations and their benefits.
@@ -92,10 +96,6 @@ Once connected proceed to step 2.
 
     ```
     <copy>
-    UPDATE s1.inventory_no_reservations
-    SET budget = budget - 100
-    WHERE ID = 1;
-
     COMMIT;
     </copy>
     ```
@@ -111,7 +111,7 @@ This innovation fosters a more streamlined and responsive data processing enviro
 
 Task 2 introduces the concept of lock-free reservations. Using the same three windows, we will now perform updates on the inventory\_reservations table. In Window 1, we will decrease the budget of a record by 200 without committing. In Window 2, we will decrease the same record by 200, and unlike before, the session will not hang. In Window 3, we will attempt to decrease the record by 200, going below the "threshold," which will result in a session error. We will then commit the changes in Window 1 and rollback the changes in Window 2. Finally, we will run the transaction again in Window 3, which should succeed because we have restored the reserved amount in the budget column.
 
-Note: Using the same 3 windows please `Ctrl+C` to get out of session hangs.
+Note: Using the same 3 windows.
 
 1. Window 1 update table 2 (inventory\_reservations) table decrease the record by 200. Do not commit.
 
@@ -123,7 +123,7 @@ Note: Using the same 3 windows please `Ctrl+C` to get out of session hangs.
     </copy>
     ```
 
-2. Window 2 update table 2 and decrease the same record by 200. Make sure you press `Ctrl+C` to revitalize your session.
+2. Window 2 update table 2 and decrease the same record by 200.
 
     ```
     <copy>
@@ -137,7 +137,7 @@ Note: Using the same 3 windows please `Ctrl+C` to get out of session hangs.
 
     * Note: Notice how the session does not hang like it did using old normal updates in the last task. This is due to the concurrency Lock-Free enables for dba user experience.
 
-* Commit Window 1
+    * Commit Window 1
 
     ```
     <copy>

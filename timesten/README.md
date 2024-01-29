@@ -13,13 +13,13 @@ _TimesTen Classic_
 
 A single node database for applications that require the lowest and most consistent response time. High availability is provided via active-standby pair replication to another node, and also supports multiple read-only subscribers for scaling read heavy workloads.
 
-TimesTen Classic can also be deployed as a cache for Oracle Database. By caching a subset of your Oracle Database data in a TimesTen cache, you can dramatically improve the performance of data access. TimesTen provides a declarative caching mechanism which suports both readonly caching and read-write caching. Data change synchronistion, a standard feature of TimesTen cache, ensures that the cache and the backend database are always in sync.
+TimesTen Classic can also be deployed as a cache for Oracle Database. By caching a subset of your Oracle Database data in a TimesTen cache, you can dramatically improve the performance of data access. TimesTen provides a declarative caching mechanism which suports both readonly caching and read-write caching. Data change synchronization, a standard feature of TimesTen cache, ensures that the cache and the backend database are always in sync.
 
 _TimesTen Scaleout_
 
 A shared nothing distributed database based on the existing TimesTen in-memory technology. TimesTen Scaleout allows databases to transparently scale across dozens of hosts, reach hundreds of terabytes in size and support hundreds of millions of transactions per second without the need for manual database sharding or workload partitioning. Scaleout features include concurrent parallel cross-node processing, transparent data distribution (with single database image) and elastic scaleout and scalein. High availability and fault tolerance are automatically provided through use of Scaleout's K-safety feature. TimesTen Scaleout supports most of the same features and APIs as TimesTen Classic.
 
-TimesTen Scaleout can also be deployed as a cache for Oracle Database, supporting a subset of the cache features of Timesten Classic.
+TimesTen Scaleout can also be deployed as a cache for Oracle Database, supporting a subset of the cache features of TimesTen Classic.
 
 
 ## How do I get started with TimesTen LiveLabs?
@@ -44,7 +44,7 @@ The TimesTen workshops have the following pre-requisites:
 - [Accelerate your Applications: Achieve Blazing Fast SQL With an Oracle TimesTen Cache](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3282)
 
 ## TimesTen Related Pages
-- [TimesTen Product Home](https://www.oracle.com/au/application-development/)
+- [TimesTen Product Home](https://www.oracle.com/database/technologies/related/timesten.html)
 - [TimesTen Samples on GitHub](https://github.com/oracle-samples/oracle-timesten-samples)
 - [TimesTen Blogs](https://blogs.oracle.com/timesten/)
 
