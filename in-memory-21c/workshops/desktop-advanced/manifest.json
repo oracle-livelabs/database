@@ -1,6 +1,6 @@
 {
   "workshoptitle": "Learn How Database In-Memory Enables Real-Time Analytics",
-  "help": "livelabs-help-db_us@oracle.com",
+  "help": "andy.rivenes@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
@@ -18,7 +18,7 @@
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 2: Setting up the In-Memory Column Store",
+      "title": "Lab 2: Set up the In-Memory Column Store",
       "description": "Populating and administering the In-Memory column store",
       "filename": "../../setup/setup.md"
     },
