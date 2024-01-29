@@ -25,16 +25,15 @@ When you run the Bank Transfer application, the Teller microservice calls the ex
 
 During a transaction, the microservices also update the associated resource manager to track the change in the amount. When you run the Bank Transfer application, you will see how MicroTx ensures consistency of transactions across the distributed microservices and their resource managers.
 
-Participant microservices must use the MicroTx client libraries which registers callbacks and provides implementation of the callbacks for the resource manager. As shown in the following image, MicroTx communicates with the resource managers to commit or roll back the transaction. MicroTx connects with each resource manager involved in the transaction to prepare, commit, or rollback the transaction. The participant service provides the credentials to the coordinator to access the resource manager.
+Participant microservices must use the MicroTx client libraries which registers callbacks and provides implementation of the callbacks for the resource manager. As shown in the image, MicroTx communicates with the resource managers to commit or roll back the transaction. MicroTx connects with each resource manager involved in the transaction to prepare, commit, or rollback the transaction. The participant service provides the credentials to the coordinator to access the resource manager.
 
-Estimated Workshop Time: 62 minutes
+Estimated Workshop Time: 50 minutes
 
 ### Objectives
 
 In this workshop, you will learn how to:
 
-* Configure the required properties so that MicroTx can connect to the resource manager and microservices.
-* 
+* Set up various microservices. A Java service, Teller, is the transaction initiator application. The ORDS instances, Department 1 and Department 2 participate in the service. MicroTx is connected to all the resource managers and microservices so that it can coordinate the transaction.
 * Run the Bank Transfer application to transfer an amount from one account to another.
 * Use tools, such as Kiali and Jaeger, to visualize the flow of requests between MicroTx and the microservices.
 

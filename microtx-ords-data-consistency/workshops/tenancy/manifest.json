@@ -23,17 +23,17 @@
       "filename": "../../setup-compute/setup-compute-novnc-ssh.md"
     },
     {
-      "title": "Lab 3: Configure the Database Instances",
+      "title": "Lab 3: Set Up the ORDS Instances",
       "filename": "../../ords-provision/ords-provision.md"
     },
     {
       "title": "Lab 4: Transfer Funds",
-      "filename": "../../run-xa-app/run-xa-app.md"
+      "filename": "../../transfer-funds/transfer-funds.md"
     },
     {
       "description": "Cleanly dispose all OCI resources created by ORM for the workshop, and delete the stack",
       "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md",
-      "title": "Lab 6: Clean Up"
+      "title": "Lab 5: Clean Up"
     },
     {
       "title": "Need help?",

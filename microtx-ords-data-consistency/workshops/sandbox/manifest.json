@@ -18,12 +18,12 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
     },
     {
-      "title": "Lab 2: Configure the Database Instances",
+      "title": "Lab 2: Set Up the ORDS Instances",
       "filename": "../../ords-provision/ords-provision.md"
     },
     {
       "title": "Lab 3: Transfer Funds",
-      "filename": "../../run-xa-app/run-xa-app.md"
+      "filename": "../../transfer-funds/transfer-funds.md"
     },
     {
       "title": "Need help?",

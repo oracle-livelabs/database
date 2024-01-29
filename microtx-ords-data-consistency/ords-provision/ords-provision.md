@@ -1,10 +1,12 @@
-# Configure Database Instances
+# Set Up the ORDS Instances
 
 ## Introduction
 
-This lab walks you through the steps to configure two database instances. You will use this database in the subsequent labs of this workshop.
+This lab walks you through the steps to set up two Oracle REST Data Services (ORDS) applications, Department 1 and Department 2. These applications are created in PL/SQL and deployed using ORDS in Oracle Database. These applications participate in the XA transaction, so they are called transaction participant services.
 
-Estimated Time: 20 minutes
+Two PDBs, FREEPDB1 and FREEPDB2, are created in a standalone instance of Oracle Database 23c Free to simulate the distributed transaction. The standalone ORDS APEX service instance, runs on port 8080, and it is configured with two database pools that connect to FREEPDB1 and FREEPDB2. The ORDS service creates database pool for each PDB and exposes the REST endpoint. A single ORDS standalone service has two database connection pools connecting to different PDBs: FREEPDB1 and FREEPDB2. Department 1 and Department 2 connect to individual PDBs and the ORDS participant services expose three REST APIs, namely withdraw, deposit and get balance. The MicroTx library includes headers that enable the participant services to automatically enlist in the transaction. These microservices expose REST APIs to get the account balance and to withdraw or deposit money from a specified account. They also use resources from resource manager.
+
+Estimated Time: 15 minutes
 
 ### Objectives
 
@@ -12,7 +14,8 @@ In this lab, you will:
 
 * Start the Database service and ORDS service instances
 * Grant privileges to the database schema
-* Set Up Department 1 and Department 2 microservices
+* Set Up Department 1 and Department 2 applications
+* Test access to the applications
 
 ### Prerequisites
 
@@ -43,9 +46,13 @@ This lab assumes you have:
 
    **Example output**
 
-   ![Database instance details](./images/database-service.png)
-
-   If the Oracle Database 23c Free service instance is not in the `RUNNING`` state, then run the following command to restart the service.
+    ```text
+    Status of the Oracle FREE 23c service:
+    LISTENER status: RUNNING
+    FREE Database status: RUNNING
+    ```
+ 
+   If the Oracle Database 23c Free service instance is not in the `RUNNING` state, then run the following command to restart the service.
 
     ```text
     <copy>
@@ -73,6 +80,8 @@ This lab assumes you have:
     SQL> exit;
     </copy>
     ```
+
+    Where, `[new-user-password]` is the new password that you specify.
 
 ## Task 2: Grant Privileges to the Database Schema
 
@@ -116,7 +125,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    Where, <SCHEMA_USER_NAME> is the user name that can access the schema. Provide this value based on your environment.
+    Where, `<SCHEMA_USER_NAME>` is the user name that can access the schema. Provide this value based on your environment.
 
 3. Commit the changes and exit from SQL prompt.
 
@@ -167,7 +176,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    Where, <SCHEMA_USER_NAME> is the user name that can access the schema. Provide this value based on your environment. Remember the user name as you will have to provide this to log in to the database.
+    Where, `<SCHEMA_USER_NAME>` is the user name that can access the schema. Provide this value based on your environment. Remember the user name as you will have to provide this to log in to the database.
 
 6. Commit the changes and exit from SQL prompt.
 
@@ -216,7 +225,7 @@ This lab assumes you have:
 7. Log out from SQL Developer.
 
 
-## Task 3: Set Up Department 2
+## Task 4: Set Up Department 2
 
 1. Enter the SQL Developer web URL, `http://localhost:8080/ords/pool2/sql-developer`, to access Department 2 database.
     A sign-in page for Database Actions is displayed.
@@ -237,13 +246,13 @@ This lab assumes you have:
 
     ```text
     <copy>
-    resManagerId VARCHAR2(256):= ''60720954-8842-9f7c-a383-8d24e14554b6''; 
+    resManagerId VARCHAR2(256):= ''DEPT2-RM-Deposit''; 
     </copy>
     ```
 
     ```text
     <copy>
-    resManagerId VARCHAR2(256):= ''DEPT1-RM'';
+    resManagerId VARCHAR2(256):= ''DEPT2-RM- Withdraw'';
     </copy>
     ```
 
@@ -253,10 +262,9 @@ This lab assumes you have:
 
 7. Log out from SQL Developer.
 
+## Task 5: Test Access to Department 1 and Department 2
 
-## Task 4: Test Access to Department 1 and Department 2 
-
-Run the following commands to verfify that the REST API calls to Department 1 and Department 2 are executed successfully.
+Run the following commands to test access and verify that REST API calls to Department 1 and Department 2 are executed successfully.
 
 1. Run the following command to retrieve the balance in account 1 of Department 1.
 

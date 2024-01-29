@@ -1,8 +1,8 @@
-# Transfer an Amount
+# Transfer Funds
 
 ## Introduction
 
-Run the Bank Transfer application, which uses the XA transaction protocol, to transfer an amount from one department to another. Run this application to understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate XA transactions.
+Run the Bank Transfer application, which uses the XA transaction protocol, to transfer an amount from one department to another. Run this application to understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate XA transactions across ORDS applications.
 
 Estimated Lab Time: *10 minutes*
 
@@ -10,11 +10,11 @@ Estimated Lab Time: *10 minutes*
 
 In this lab, you will:
 
-* Start Minikube. When you start Minikube, the Bank Transfer application is deployed and the database instances are created and populated with sample data.
-* Deploy Kiali and Jaeger in your minikube cluster (Optional and if not already deployed)
+* Start Minikube, and then start a Minikube tunnel.
+* Deploy Kiali and Jaeger in your minikube cluster (optional)
 * Run the Bank Transfer application to start an XA transaction to withdraw an amount from Department A and deposit it in Department B.
-* View service graph of the mesh and distributed traces to track requests (Optional)
-* View source code of the Transfer application (Optional)
+* View service graph of the mesh and distributed traces to track requests (optional)
+* View source code of the Bank Transfer application (optional)
 
 ### Prerequisites
 
@@ -25,6 +25,7 @@ This lab assumes you have:
   * Get Started
   * Lab 1: Prepare setup
   * Lab 2: Environment setup
+  * Lab 3: Set up the ORDS instances
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
  ```text
@@ -34,21 +35,6 @@ This lab assumes you have:
   ```
 
 ## Task 1: Start Minikube
-
-Code for the Transfer application is available in the MicroTx distribution. The MicroTx library files are already integrated with the application code. Container images, for each microservice in the application, are already built and available in your Minikube container registry. The `values.yaml` file is available in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/helmcharts/transfer` folder. This is the manifest file, which contains the deployment configuration details for the application.
-
-When you start Minikube, an instance of the Oracle Database 23c Free Release, with two PDBs, is deployed on Minikube. See [Oracle Database Free](https://www.oracle.com/database/free/get-started). Department 1 microservice, which is developed using the Helidon framework, uses PDB (`FREEPDB1`) as resource manager. Department 2 microservice, which is developed using the Spring Boot framework, uses another PDB (`FREEPDB2`) as resource manager. Each PDB contains an `accounts` table with `account_id` as the primary key. The `accounts` table is populated with the following sample data. The `values.yaml` file also contains the details to access the resource managers.
-
-| Account_ID  | Amount    |
-| ----------- | --------- |
-| account5    | 5000      |
-| account4    | 4000      |
-| account3    | 3000      |
-| account2    | 2000      |
-| account1    | 1000      |
-{: title="Amount in the various accounts"}
-
-When you start Minikube, the Transfer application is deployed and the database instances are created and populated with sample data.
 
 Follow the instructions in this section to start Minikube, and then verify that all the resources are ready.
 
@@ -62,11 +48,15 @@ Follow the instructions in this section to start Minikube, and then verify that 
     </copy>
     ```
 
-   In rare situations, you may the error message shown below. This message indicates that the stack resources have not been successfully provisioned. In such cases, complete **Lab 6: Environment Clean Up** to delete the stack and clean up the resources. Then perform the steps in Lab 2 to recreate the stack.
+   In rare situations, you may the error message shown below. This message indicates that the stack resources have not been successfully provisioned. In such cases, complete **Lab 5: Environment Clean Up** to delete the stack and clean up the resources. Then perform the steps in Lab 2 to recreate the stack.
 
    ![minikube start error](./images/minikube-start-error.png)
 
-3. Build the Teller application, which is the transaction initiator service.
+## Task 2: Deploy the Teller Application
+
+Build and deploy the Teller application, which is the transaction initiator service.
+
+1. Run the following command to build the container image of the Teller application.
 
     ```text
     <copy>
@@ -75,9 +65,9 @@ Follow the instructions in this section to start Minikube, and then verify that 
     </copy>
     ```
 
-4. Open the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/helmcharts/ords-teller/values.yaml` file in any code editor. This is the manifest file, which contains the deployment configuration details of the Teller application.
+2. Open the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/helmcharts/ords-teller/values.yaml` file in any code editor. This is the manifest file, which contains the deployment configuration details of the Teller application.
 
-5. Enter the details, including the schema name, to access the Oracle REST Data Services (ORDS) endpoints. In the following sample code, the name of the schema is `mySchema`. Replace this with the name of the schema in your environment.
+3. Enter the details, including the schema name, to access the Oracle REST Data Services (ORDS) endpoints. In the following sample code, the name of the schema is `mySchema`. Replace this with the name of the schema in your environment.
 
     ```text
     <copy>
@@ -86,7 +76,7 @@ Follow the instructions in this section to start Minikube, and then verify that 
     </copy>
     ```
 
-6. Run the following commands to install Teller, the transaction initiator service, on Minikube.
+4. Run the following commands to install the Teller application on Minikube.
 
     ```text
     <copy>
@@ -95,21 +85,7 @@ Follow the instructions in this section to start Minikube, and then verify that 
     </copy>
     ```
 
-7. Verify that the application has been deployed successfully.
-
-    ```text
-    <copy>
-    helm list -n otmm
-    </copy>
-    ```
-
-   In the output, verify that the `STATUS` of the `sample-xa-app` is `deployed``.
-
-   **Example output**
-
-   ![Helm install success](./images/list-pods.png)
-
-8. Verify that all resources, such as pods and services, are ready. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
+5. Verify that the application is in the `running` state. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
 
     ```text
     <copy>
@@ -119,23 +95,13 @@ Follow the instructions in this section to start Minikube, and then verify that 
 
    **Example output**
 
-   ![Status of pods in the otmm namespace](./images/pod-status.png)
-
-9. Verify that the database instance is running. The database instance is available in the `oracledb` namespace.  Run the following command to retrieve the list of resources in the namespace `oracledb` and their status.
-
     ```text
-    <copy>
-    kubectl get pods -n oracledb
-    </copy>
+    NAME                      READY   STATUS    RESTARTS   AGE
+    otmm-tcs-0                1/1     Running   0          79m
+    teller-6df47b5b46-zp2d9   1/1     Running   0          0h31m
     ```
 
-   **Example output**
-
-   ![Database instance details](./images/database-service.png)
-
-It usually takes some time for the Database services to start running in the Minikube environment. Proceed with the remaining tasks only after ensuring that all the resources, including the database service, are ready and in the `RUNNING` status and the value of the **READY** field is `1/1`.
-
-## Task 2: Start a Minikube Tunnel
+## Task 3: Start a Minikube Tunnel
 
 Before you start a transaction, you must start a Minikube tunnel.
 
@@ -194,11 +160,15 @@ Before you start a transaction, you must start a Minikube tunnel.
 
    **Example output**
 
-   ![Status of pods in the otmm namespace](./images/pod-status.png)
+    ```text
+    NAME                      READY   STATUS    RESTARTS   AGE
+    otmm-tcs-0                2/2     Running   0          89m
+    teller-6df47b5b46-zp2d9   2/2     Running   0          0h51m
+    ```
 
-## Task 3: Deploy Kiali and Jaeger in the cluster (Optional)
+## Task 4: Deploy Kiali and Jaeger (Optional)
 
-Use distributed tracing to understand how requests flow between MicroTx and the microservices. Use tools, such as Kiali and Jaeger, to track and trace distributed transactions in MicroTx. Kiali requires Prometheus, so deploy Prometheus in the same cluster.
+Use distributed tracing to understand how requests flow between MicroTx and the microservices. Use tools, such as Kiali and Jaeger, to track and trace distributed transactions in MicroTx. Kiali requires Prometheus, so deploy Prometheus and Kiali in the same Kubernetes cluster.
 
 Run the following commands to deploy Kiali and Jaeger.
 
@@ -246,7 +216,7 @@ Run the following commands to deploy Kiali and Jaeger.
 
    A URL is displayed. Open the URL in a new tab in your browser to access the Jaeger dashboard. For example, `http://localhost:16686`.
 
-## Task 4: Run the Transfer Application
+## Task 5: Run the Transfer Application
 
 When you run the Transfer application, it starts an XA transaction. The Teller application is the transaction initiator service, it initiates the transaction. When the Teller application runs, it withdraws money from Department A and deposits it to Department B by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
@@ -257,7 +227,7 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
     ```text
     <copy>
     curl --location \
-    --request GET http://$CLUSTER_IPADDR/ords/otmm/accounts/account1 | jq
+    --request GET http://localhost:8080/ords/otmm/accounts/account1 | jq
     </copy>
     ```
 
@@ -266,7 +236,7 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
     ```text
     <copy>
     curl --location \
-    --request GET http://$CLUSTER_IPADDR/ords/pool2/otmm/accounts/account2 | jq
+    --request GET http://localhost:8080/ords/pool2/otmm/accounts/account2 | jq
     </copy>
     ```
 
@@ -292,7 +262,7 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
     ```text
     <copy>
     curl --location \
-    --request GET http://$CLUSTER_IPADDR/ords/otmm/accounts/account1 | jq
+    --request GET http://localhost:8080/ords/otmm/accounts/account1 | jq
     </copy>
     ```
 
@@ -301,7 +271,7 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
     ```text
     <copy>
     curl --location \
-    --request GET http://$CLUSTER_IPADDR/ords/pool2/otmm/accounts/account2 | jq
+    --request GET http://localhost:8080/ords/pool2/otmm/accounts/account2 | jq
     </copy>
     ```
 
@@ -325,14 +295,14 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
     ```text
     <copy>
     curl --location \
-    --request GET http://$CLUSTER_IPADDR/dept1/account1 | jq
+    --request GET http://localhost:8080/dept1/account1 | jq
     </copy>
     ```
 
-## Task 5: View the Service Mesh Graph and Distributed Traces (Optional)
+## Task 6: View the Service Mesh Graph and Distributed Traces (Optional)
 
-You can perform this task only if you have performed Task 3 or if Kiali and Jaeger is deployed in your cluster.
-To visualize what happens behind the scenes and how the amount transfer request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you had started in Task 3.
+You can perform this task only if you have performed Task 4 or if Kiali and Jaeger is deployed in your cluster.
+To visualize what happens behind the scenes and how the amount transfer request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you had started in Task 4.
 
 1. Open a new browser tab and navigate to the Kiali dashboard URL. For example, `http://localhost:20001/kiali`.
 2. Select Graph for the `otmm` namespace.
@@ -343,13 +313,12 @@ To visualize what happens behind the scenes and how the amount transfer request 
 
 ## Task 6: View Source Code of the Transfer Application (Optional)
 
-The source code of the application is present in folder: /home/oracle/OTMM/otmm-23.4.1/samples/xa/java
-- Teller Service Source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/teller
-- Department 1 Service Source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/department-helidon
-- Department 2 Service Source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/department-spring
-
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
 To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
+
+The application source code is present in following location.
+- Teller application source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/teller
+- Department 1 and Department 2 application source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/databaseapp/ordsapp.sql
 
 ## Learn More
 
