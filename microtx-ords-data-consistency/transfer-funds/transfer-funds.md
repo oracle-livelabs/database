@@ -301,7 +301,7 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
 
 ## Task 6: View the Service Mesh Graph and Distributed Traces (Optional)
 
-You can perform this task only if you have performed Task 4 or if Kiali and Jaeger is deployed in your cluster.
+You can perform this task only if you have performed Task 4 or if Kiali and Jaeger are deployed in your cluster.
 To visualize what happens behind the scenes and how the amount transfer request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you had started in Task 4.
 
 1. Open a new browser tab and navigate to the Kiali dashboard URL. For example, `http://localhost:20001/kiali`.
@@ -311,14 +311,17 @@ To visualize what happens behind the scenes and how the amount transfer request 
 5. Click **Find Traces**. You can see the list of traces with each trace representing a request.
 6. Select one of the traces to view.
 
-## Task 6: View Source Code of the Transfer Application (Optional)
+## Task 7: View Source Code of the Transfer Application (Optional)
 
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
 To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
 
 The application source code is present in following location.
-- Teller application source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/teller
-- Department 1 and Department 2 application source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/databaseapp/ordsapp.sql
+
+* Teller application source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/teller
+* Department 1 and Department 2 application source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/databaseapp/ordsapp.sql
+
+You may now **proceed to the next lab.**
 
 ## Learn More
 

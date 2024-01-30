@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Ensure data consistency in distributed transactions across ORDS applications using MicroTx",
+  "workshoptitle": "Ensure data consistency in distributed transactions across ORDS applications using Oracle MicroTx",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {

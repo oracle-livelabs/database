@@ -4,7 +4,13 @@
 
 This lab walks you through the steps to set up two Oracle REST Data Services (ORDS) applications, Department 1 and Department 2. These applications are created in PL/SQL and deployed using ORDS in Oracle Database. These applications participate in the XA transaction, so they are called transaction participant services.
 
-Two PDBs, FREEPDB1 and FREEPDB2, are created in a standalone instance of Oracle Database 23c Free to simulate the distributed transaction. The standalone ORDS APEX service instance, runs on port 8080, and it is configured with two database pools that connect to FREEPDB1 and FREEPDB2. The ORDS service creates database pool for each PDB and exposes the REST endpoint. A single ORDS standalone service has two database connection pools connecting to different PDBs: FREEPDB1 and FREEPDB2. Department 1 and Department 2 connect to individual PDBs and the ORDS participant services expose three REST APIs, namely withdraw, deposit and get balance. The MicroTx library includes headers that enable the participant services to automatically enlist in the transaction. These microservices expose REST APIs to get the account balance and to withdraw or deposit money from a specified account. They also use resources from resource manager.
+There are 2 PDBs (pluggable database) and a catalog database running in a standalone instance of Oracle Database 23c Free to simulate the distributed transaction. Here are the details about the PDBs:
+
+* FREE: A catalog database that the `sysdba` user can access.
+* FREEPDB1: A pluggable database that contains the OTMM schema. This is connected to Department 1, an ORDS service.
+* FREEPDB2 : A pluggable database that contains the OTMM schema. This is connected to Department 2, an ORDS service.
+
+The standalone ORDS APEX service instance, runs on port 8080, and it is configured with two database pools that connect to FREEPDB1 and FREEPDB2. The ORDS service creates database pool for each PDB and exposes the REST endpoint. A single ORDS standalone service has two database connection pools connecting to different PDBs: FREEPDB1 and FREEPDB2. Department 1 and Department 2 connect to individual PDBs and the ORDS participant services expose three REST APIs, namely withdraw, deposit and get balance. The MicroTx library includes headers that enable the participant services to automatically enlist in the transaction. These microservices expose REST APIs to get the account balance and to withdraw or deposit money from a specified account. They also use resources from resource manager.
 
 Estimated Time: 15 minutes
 
@@ -51,7 +57,7 @@ This lab assumes you have:
     LISTENER status: RUNNING
     FREE Database status: RUNNING
     ```
- 
+
    If the Oracle Database 23c Free service instance is not in the `RUNNING` state, then run the following command to restart the service.
 
     ```text
@@ -81,26 +87,36 @@ This lab assumes you have:
     </copy>
     ```
 
-    Where, `[new-user-password]` is the new password that you specify.
+    Where, `[new-user-password]` is the new password that you specify for FREE, a catalog database.
 
-## Task 2: Grant Privileges to the Database Schema
+## Task 2: Grant Privileges to the Schema in FREEPDB1
 
-1. Login to FREEPDB1 instance in Oracle Database 23c Free.
+1. Login to FREEPDB1 using the default username and password.
 
-    ```text
+    ```SQL
     <copy>
-    sql sys/<new-user-password>@FREEPDB1 as sysdba
+    sql sys/Passw0rd@FREEPDB1 as sysdba
     </copy>
     ```
 
-    Where, `<new-user-password>` is the password that you have set in the previous task.
+2. Change the default password.
 
-2. Run the following commands to grant privileges to the schema.
+    ```SQL
+    <copy>
+    ALTER USER OTMM IDENTIFIED BY [<new-freepdb1-password>]; 
+    commit;
+    exit;
+    </copy>
+    ```
+
+    Where, `<new-freepdb1-password>` is the new password that you want to set.
+
+3. Run the following commands to grant privileges to the schema.
 
     ```SQL
     <copy>
     DECLARE
-        l_principal VARCHAR2(20) := '<SCHEMA_USER_NAME>';
+        l_principal VARCHAR2(20) := 'OTMM';
     begin
         DBMS_NETWORK_ACL_ADMIN.append_host_ace (
             host => '*',
@@ -113,7 +129,7 @@ This lab assumes you have:
     /
  
     DECLARE
-        l_principal VARCHAR2(20) := '<SCHEMA_USER_NAME>';
+        l_principal VARCHAR2(20) := 'OTMM';
     begin
         DBMS_NETWORK_ACL_ADMIN.APPEND_HOST_ACE(
             host => '*',
@@ -125,9 +141,9 @@ This lab assumes you have:
     </copy>
     ```
 
-    Where, `<SCHEMA_USER_NAME>` is the user name that can access the schema. Provide this value based on your environment.
+    Where, `OTMM` is the username that can access the schema.
 
-3. Commit the changes and exit from SQL prompt.
+4. Commit the changes and exit from SQL prompt.
 
     ```SQL
     <copy>
@@ -136,22 +152,34 @@ This lab assumes you have:
     </copy>
     ```
 
-4. Login to FREEPDB2 instance in Oracle Database 23c Free.
+## Task 3: Grant Privileges to the Schema in FREEPDB2
 
-    ```text
+1. Login to FREEPDB2 using the default username and password.
+
+    ```SQL
     <copy>
-    sql sys/<new-user-password>@FREEPDB2 as sysdba
+    sql sys/Passw0rd@FREEPDB2 as sysdba
     </copy>
     ```
 
-    Where, `<new-user-password>` is the password that you have set in the previous task.
+2. Change the default password.
 
-5. Run the following commands to grant privileges to the schema.
+    ```SQL
+    <copy>
+    ALTER USER OTMM IDENTIFIED BY [<new-freepdb2-password>]; 
+    commit;
+    exit;
+    </copy>
+    ```
+
+    Where, `<new-freepdb2-password>` is the new password that you want to set.
+
+3. Run the following commands to grant privileges to the schema.
 
     ```SQL
     <copy>
     DECLARE
-        l_principal VARCHAR2(20) := '<SCHEMA_USER_NAME>';
+        l_principal VARCHAR2(20) := 'OTMM';
     begin
         DBMS_NETWORK_ACL_ADMIN.append_host_ace (
             host => '*',
@@ -164,7 +192,7 @@ This lab assumes you have:
     /
  
     DECLARE
-        l_principal VARCHAR2(20) := '<SCHEMA_USER_NAME>';
+        l_principal VARCHAR2(20) := 'OTMM';
     begin
         DBMS_NETWORK_ACL_ADMIN.APPEND_HOST_ACE(
             host => '*',
@@ -176,9 +204,9 @@ This lab assumes you have:
     </copy>
     ```
 
-    Where, `<SCHEMA_USER_NAME>` is the user name that can access the schema. Provide this value based on your environment. Remember the user name as you will have to provide this to log in to the database.
+    Where, `OTMM` is the username that can access the schema.
 
-6. Commit the changes and exit from SQL prompt.
+4. Commit the changes and exit from SQL prompt.
 
     ```SQL
     <copy>
@@ -187,12 +215,12 @@ This lab assumes you have:
     </copy>
     ```
 
-## Task 3: Set Up Department 1
+## Task 4: Set Up Department 1
 
 1. Enter the SQL Developer web URL, `http://localhost:8080/ords/sql-developer`, to access Department 1 database.
     A sign-in page for Database Actions is displayed.
 
-2. Enter the schema user name and password that you have specified in the previous tasks.
+2. Enter the new password to access the FREE database as `sysdba` user.
 
     The Database Actions page is displayed.
 
@@ -202,13 +230,19 @@ This lab assumes you have:
 
 4. Open the `tmmxa.sql` SQL script file which is located at `/home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/lib`.
 
-5. In the script, search for `resManagerId` and enter a unique resource manager ID to identify the database in both the deposit and withdraw handlers.
+5. Click **Run as SQL script** to run the `tmmxa.sql` SQL script file.
+
+    ![Click Run as SQL script](./images/run-sql-script.png)
+
+6. Open the `ordsapp.sql` SQL script file which is located at `/home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/databaseapp`.
+
+7. In the script, search for `resManagerId` and enter a unique resource manager ID to identify the database in both the `deposit` and `withdraw` handlers.
 
     **Example Code**
 
     ```text
     <copy>
-    resManagerId VARCHAR2(256):= ''60720954-8842-9f7c-a383-8d24e14554b6''; 
+    resManagerId VARCHAR2(256):= ''DEPT1-RM''; 
     </copy>
     ```
 
@@ -218,19 +252,18 @@ This lab assumes you have:
     </copy>
     ```
 
-6. Click **Run as SQL script** to run the script file.
+7. Click **Run as SQL script** to run the `ordsapp.sql` SQL script file.
 
-    ![Click on SQL](./images/click-sql.png)
+    ![Click Run as SQL script](./images/run-sql-script.png)
 
-7. Log out from SQL Developer.
+8. Log out from SQL Developer.
 
-
-## Task 4: Set Up Department 2
+## Task 5: Set Up Department 2
 
 1. Enter the SQL Developer web URL, `http://localhost:8080/ords/pool2/sql-developer`, to access Department 2 database.
     A sign-in page for Database Actions is displayed.
 
-2. Enter the schema user name and password that you have specified in the previous tasks.
+2. Enter the schema username and password that you have specified in the previous tasks.
 
     The Database Actions page is displayed.
 
@@ -238,31 +271,37 @@ This lab assumes you have:
 
     ![Click on SQL](./images/click-sql.png)
 
-4. Open the `ordsapp.sql` SQL script file which is located at `/home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/databaseapp`.
+4. Open the `tmmxa.sql` SQL script file which is located at `/home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/lib`.
 
-5. In the script, search for `resManagerId` and enter a unique resource manager ID to identify the database in both the `deposit` and `withdraw` handlers.
+5. Click **Run as SQL script** to run the script file.
+
+    ![Click Run as SQL script](./images/run-sql-script.png)
+
+6. Open the `ordsapp.sql` SQL script file which is located at `/home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/databaseapp`.
+
+7. In the script, search for `resManagerId` and enter a unique resource manager ID to identify the database in both the `deposit` and `withdraw` handlers.
 
     **Example Code**
 
     ```text
     <copy>
-    resManagerId VARCHAR2(256):= ''DEPT2-RM-Deposit''; 
+    resManagerId VARCHAR2(256):= ''DEPT2-RM''; 
     </copy>
     ```
 
     ```text
     <copy>
-    resManagerId VARCHAR2(256):= ''DEPT2-RM- Withdraw'';
+    resManagerId VARCHAR2(256):= ''DEPT2-RM'';
     </copy>
     ```
 
-6. Click **Run as SQL script** to run the script file.
+8. Click **Run as SQL script** to run the script file.
 
-    ![Click on SQL](./images/click-sql.png)
+    ![Click Run as SQL script](./images/run-sql-script.png)
 
-7. Log out from SQL Developer.
+9. Log out from SQL Developer.
 
-## Task 5: Test Access to Department 1 and Department 2
+## Task 6: Test Access to Department 1 and Department 2
 
 Run the following commands to test access and verify that REST API calls to Department 1 and Department 2 are executed successfully.
 

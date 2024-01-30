@@ -19,13 +19,13 @@ The following figure shows the various microservices in the Bank Transfer applic
 
 * Department One and Department Two are ORDS applications. They participate in the transactions, so they are called as XA participant services. Two PDBs, FREEPDB1 and FREEPDB2, are created in a standalone instance of Oracle Database 23c Free to simulate the distributed transaction.  The standalone ORDS APEX service instance, runs on port 8080, and it is configured with two database pools that connect to FREEPDB1 and FREEPDB2. The ORDS service creates database pool for each PDB and exposes the REST endpoint. A single ORDS standalone service has two database connection pools connecting to different PDBs: FREEPDB1 and FREEPDB2. Department One and Department 2 connect to individual PDBs and the ORDS participant services expose three REST APIs, namely withdraw, deposit and get balance. The MicroTx library includes headers that enable the participant services to automatically enlist in the transaction. These microservices expose REST APIs to get the account balance and to withdraw or deposit money from a specified account. They also use resources from resource manager.
 
-The service must meet ACID requirements, so an XA transaction is initiated and both withdraw and deposit are called in the context of this transaction.
+The service must meet ACID requirements, so an XA transaction is initiated, and both withdraw and deposit are called in the context of this transaction.
 
 When you run the Bank Transfer application, the Teller microservice calls the exposed `transfer` REST API call to initiate the transaction to withdraw an amount from Department 1, an ORDS service, which is connected to FREEPDB1. After the amount is successfully withdrawn, the Teller service receives HTTP 200. Then the Teller calls the `deposit` REST API from Department 2, an ORDS service, which is connected to FREEPDB2. After the amount is successfully deposited, the Teller service receives HTTP 200, and then the Teller commits the transaction. MicroTx coordinates this distributed transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
 During a transaction, the microservices also update the associated resource manager to track the change in the amount. When you run the Bank Transfer application, you will see how MicroTx ensures consistency of transactions across the distributed microservices and their resource managers.
 
-Participant microservices must use the MicroTx client libraries which registers callbacks and provides implementation of the callbacks for the resource manager. As shown in the image, MicroTx communicates with the resource managers to commit or roll back the transaction. MicroTx connects with each resource manager involved in the transaction to prepare, commit, or rollback the transaction. The participant service provides the credentials to the coordinator to access the resource manager.
+Participant microservices must use the MicroTx client libraries which registers callback and provides implementation of the callback for the resource manager. As shown in the image, MicroTx communicates with the resource managers to commit or roll back the transaction. MicroTx connects with each resource manager involved in the transaction to prepare, commit, or rollback the transaction. The participant service provides the credentials to the coordinator to access the resource manager.
 
 Estimated Workshop Time: 50 minutes
 
@@ -40,8 +40,10 @@ In this workshop, you will learn how to:
 ### Prerequisites
 
 This lab assumes you have:
-- An Oracle Cloud account
-- At least 4 OCPUs, 24 GB memory, and 128 GB of bootable storage volume is available in your Oracle Cloud Infrastructure tenancy to run the Bank Transfer application.
+
+* An Oracle Cloud account
+
+* At least 4 OCPUs, 24 GB memory, and 128 GB of bootable storage volume is available in your Oracle Cloud Infrastructure tenancy to run the Bank Transfer application.
 
 Let's begin! If you need to create an Oracle Cloud account, click **Get Started** in the **Contents** menu on the left. Otherwise, if you have an existing account, click **Lab 1**.
 
