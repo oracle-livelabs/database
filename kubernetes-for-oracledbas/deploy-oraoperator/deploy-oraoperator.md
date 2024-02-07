@@ -62,7 +62,7 @@ To see a *Controller* in action, you will delete pods resulting in a *Deployment
 
 1. Your cluster comes with a built-in DNS server, **coredns**.  The **coredns** pods are tied to a *Deployment* that stipulates there should be two **coredns** pods running (i.e. two *Replicas*) at all times.  
 
-    *Note*: The number of *Pods* may vary depending on the number of *Worker Nodes* in your cluster.
+    **Note**: The number of *Pods* may vary depending on the number of *Worker Nodes* in your cluster.
 
     Take a look at the **coredns** deployment, it should show **2/2** Pods are in the desired **READY** state:
 
@@ -82,7 +82,7 @@ To see a *Controller* in action, you will delete pods resulting in a *Deployment
     </copy>
     ```
 
-    Note their names, specifically the suffixed hash and their AGE.  
+    Note their names, specifically the suffixed hash and their AGE.
 
 3. Delete the *Pods* and re-query them:
 
@@ -146,7 +146,7 @@ To install the OraOperator, you will first need to install a dependency, **cert-
 
     ![kubectl get all -n oracle-database-operator-system](images/kubectl_oraoper.png "kubectl get all -n oracle-database-operator-system")
 
-    The output shows a *Deployment* named `oracle-database-operator-controller-manager`. This is the **Operator's Custom Controller** manager which will watch your cluster to ensure any Oracle Database *CRDs* are in their desired state.
+    The output shows a *Deployment* named `oracle-database-operator-controller-manager`. This is the **Operator's Custom Controller** manager which will watch your Kubernetes cluster for any Oracle Database *CRDs* and ensure that they are always running in their desired state.
 
 ## Task 5: OraOperator CRDs
 

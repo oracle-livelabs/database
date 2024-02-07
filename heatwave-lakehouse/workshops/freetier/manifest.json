@@ -15,7 +15,7 @@
         },
 
         {
-          "title": "Lab 1: Create Compartment, VCN and MySQL HeatWave DB System while loading DB Data",
+          "title": "Lab 1: Create Compartment, VCN and MySQL HeatWave DB System",
           "filename": "../../create-heatwave-vcn-db/create-heatwave-vcn-db.md"
         },
 

@@ -76,12 +76,12 @@ sqlplus oe/oe@orclpdb1
 ```
 
 ```
-SQL*Plus: Release 19.0.0.0.0 - Production on Wed Jun 15 14:39:50 2022
-Version 19.14.0.0.0
+SQL*Plus: Release 19.0.0.0.0 - Production on Wed Oct 11 21:56:56 2023
+Version 19.19.0.0.0
 
-Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+Copyright (c) 1982, 2022, Oracle.  All rights reserved.
 
-Last Successful login time: Tue May 10 2022 14:18:58 +00:00
+Last Successful login time: Mon Jan 09 2023 11:30:47 +00:00
 
 Connected to:
 Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
@@ -310,5 +310,5 @@ Keep your primary session open for use in the next lab.
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Last Updated By/Date** - Jenny Bloom, October 2023
 
