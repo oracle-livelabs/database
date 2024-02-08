@@ -109,7 +109,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    Where, `<new-freepdb1-password>` is the new password that you want to set.
+    Where, `<new-freepdb1-password>` is the new password that you want to set for the `OTMM` user.
 
 3. Run the following commands to grant privileges to the schema.
 
@@ -172,7 +172,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    Where, `<new-freepdb2-password>` is the new password that you want to set.
+    Where, `<new-freepdb2-password>` is the new password that you want to set for the `OTMM` user.
 
 3. Run the following commands to grant privileges to the schema.
 
@@ -220,7 +220,7 @@ This lab assumes you have:
 1. Enter the SQL Developer web URL, `http://localhost:8080/ords/sql-developer`, to access Department 1 database.
     A sign-in page for Database Actions is displayed.
 
-2. Enter the new password to access the FREE database as `sysdba` user.
+2. Enter the new password that you have specified, <new-freepdb1-password>, to access the FREEPDB1 database as `OTMM` user.
 
     The Database Actions page is displayed.
 
@@ -261,9 +261,10 @@ This lab assumes you have:
 ## Task 5: Set Up Department 2
 
 1. Enter the SQL Developer web URL, `http://localhost:8080/ords/pool2/sql-developer`, to access Department 2 database.
+
     A sign-in page for Database Actions is displayed.
 
-2. Enter the schema username and password that you have specified in the previous tasks.
+2. Enter the new password that you have specified, <new-freepdb2-password>, to access the FREEPDB2 database as `OTMM` user.
 
     The Database Actions page is displayed.
 
