@@ -111,7 +111,7 @@ Estimated Lab Time: 10 minutes
 
     ![Choose a license type.](images/choose-license-type.png)
 
-10. For this lab, do not provide a contact email address. The "Contact Email" field allows you to list contacts to receive operational notices and announcements as well as unplanned maintenance notifications.
+10. For this lab, do not provide a contact email address. The **Contact Email** field allows you to list contacts to receive operational notices and announcements as well as unplanned maintenance notifications.
 
     ![Do not provide a contact email address.](images/contact-email-field.png)
 
@@ -132,4 +132,4 @@ Click [here](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-clo
 ## Acknowledgements
 
 - **Author** - Richard Green, Principal Developer, Database User Assistance
-- **Last Updated By/Date** - Katherine Wardhana, November 2023
+- **Last Updated By/Date** - Katherine Wardhana, User Assistance Developer, February 2024
