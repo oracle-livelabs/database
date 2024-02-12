@@ -22,10 +22,10 @@ This lab assumes you have:
 
 * An Oracle Cloud account.
 * Successfully completed the previous labs:
-  * Get Started
-  * Lab 1: Prepare setup
-  * Lab 2: Environment setup
-  * Lab 3: Set up the ORDS instances
+    * Get Started
+    * Lab 1: Prepare setup
+    * Lab 2: Environment setup
+    * Lab 3: Set up the ORDS instances
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
  ```text
