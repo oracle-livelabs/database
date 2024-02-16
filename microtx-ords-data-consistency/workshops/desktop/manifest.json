@@ -18,15 +18,11 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
     },
     {
-      "title": "Lab 1: Integrate MicroTx Client Libraries with the Stock Broker Microservice",
-      "filename": "../../integrate-microtx-lib-files/integrate-microtx-lib-files.md"
-    },
-    {
-      "title": "Lab 2: Set Up the ORDS Instances",
+      "title": "Lab 1: Set Up the ORDS Instances",
       "filename": "../../ords-provision/ords-provision.md"
     },
     {
-      "title": "Lab 3: Transfer Funds",
+      "title": "Lab 2: Transfer Funds",
       "filename": "../../transfer-funds/transfer-funds.md"
     },
     {
