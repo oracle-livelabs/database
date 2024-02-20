@@ -12,7 +12,7 @@
             "filename": "../../introduction-terraform/introduction.md"
         },
         {
-            "title": "Lab 1: Register and Setup Migration",
+            "title": "Lab 1: Create Database Connections and Setup Migration",
             "filename": "../../register-and-migrate-terraform/create-registered-databases-terraform.md"
         },
         {
