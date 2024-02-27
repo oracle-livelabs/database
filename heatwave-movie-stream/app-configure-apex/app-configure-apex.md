@@ -96,6 +96,10 @@ As this is an imported app, your current workspace user will not have administra
 
     a. Navigate to Shared Components
 
+    ![App Builder Menu](./images/apex-app-builder-2.png "app-builder-menu ")
+
+    ![Shared Components Menu](./images/apex-shared-components.png "shared-components-menu ")
+
     b. Go to Application Access Control
 
     c. Click on Add User Role Assignment. Create a user 'ADMIN' and assign **administrator role** to it. This administrator account would be referred as '**admin account**'
@@ -176,4 +180,4 @@ You may now **proceed to the next lab**
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2023
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, February 2024
