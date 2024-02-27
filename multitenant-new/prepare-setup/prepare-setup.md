@@ -14,7 +14,7 @@ This lab assumes you have:
 - An Oracle Free Tier or Paid Cloud account
 
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
-1.  Click on the link below to download the Resource Manager zip file you need to build your environment: [db-multitenant-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/zOklddXqUH2KtiUd-rXGefCiOb_KVh1Lp-7f99Y8fbgqo9tCM0m0gMnwyUW6f1by/n/natdsecurity/b/stack/o/db-multitenant-mkplc-freetier.zip)
+1.  Click on the link below to download the Resource Manager zip file you need to build your environment: [db-multitenant-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/BVCkg18Uw0oBZASTQJCBEErlxTPVPDPQXQUbW00XpvSRFJJNh7tlJpbeIQc8p97z/n/c4u02/b/hosted_workshops/o/stacks/db-multitenant-mkplc-freetier.zip)
 
 2.  Save in your downloads folder.
 
