@@ -1247,8 +1247,6 @@ SQL>
 
 This lab demonstrated how Database In-Memory can optimize the access of external data, and support both external and hybrid partitioned tables.
 
-You may now **proceed to the next lab**.
-
 ## Acknowledgements
 
 - **Author** - Andy Rivenes, Product Manager,  Database In-Memory

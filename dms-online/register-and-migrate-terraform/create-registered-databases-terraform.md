@@ -1,8 +1,9 @@
-# Create Registered Databases
+# Create Database Connections
 
 ## Introduction
 
-This lab walks you through the steps to create a database connection to use with DMS. Database connection resources enable networking and connectivity for the source and target databases.
+This lab walks you through the steps to create a database connections to use with DMS. Database connection resources enable networking and connectivity for the source and target databases.
+You will also create and Online Migration leveraging the integrated GoldenGate feature available in DMS.
 
 Estimated Lab Time: 20 minutes
 
@@ -15,7 +16,7 @@ In this lab, you will:
 * Create a Database Connection for Source CDB
 * Create a Database Connection for Source PDB
 * Create a Database Connection for Target ADB
-* Create a Migration
+* Create an Online Migration
 
 ### Prerequisites
 
@@ -68,6 +69,13 @@ For this task you need the following info from previous steps:
 
   ![Screenshot of  confirm create connection](images/connection-details-cdb.png =50%x*)
 
+7. Press **Test connection** to confirm that your Database Connection details are correct
+
+  ![Screenshot of CDB connection test](images/test-cdb.png =50%x*)
+    - If the test is not successful, correct your connection details and try again.
+
+  ![Screenshot of close connection test](images/close-test.png =50%x*)  
+
 ## Task 2: Create Database Connection for Source PDB
 
 For this task you need the following info from previous steps:
@@ -111,6 +119,13 @@ For this task you need the following info from previous steps:
 
   ![Screenshot of  confirm create connection](images/connection-details-pdb.png =50%x*)
 
+7. Press **Test connection** to confirm that your Database Connection details are correct
+
+  ![Screenshot of PDB connection test](images/test-pdb.png =50%x*)
+    - If the test is not successful, correct your connection details and try again.
+
+  ![Screenshot of close connection test](images/close-test.png =50%x*)  
+
 ## Task 3: Create Database Connection for Target ADB
 
 For this task you need the following info from previous steps:
@@ -148,6 +163,13 @@ For this task you need the following info from previous steps:
 
   Please wait for all Database Connection resources to display as **Active** before proceeding to the next task.
 
+7. Press **Test connection** to confirm that your Database Connection details are correct
+
+  ![Screenshot of CDB connection test](images/test-adb.png =50%x*)
+    - If the test is not successful, correct your connection details and try again.
+
+  ![Screenshot of close connection test](images/close-test.png =50%x*)    
+
 
 ## Task 4: Create Migration
 
@@ -168,7 +190,7 @@ For this task you need the following info from previous steps:
 
   4. Press **Next**
 
-  5. On the page **Select Databases**, fill in the following entries, otherwise leave defaults:
+  5. On the page **Select Databases**, fill in the following entries with the Database Connections created in tasks 1 to 3, otherwise leave defaults:
       - Source Database: **SourcePDB**
       - *Check* Database is pluggable database (PDB)
       - Registered Container Database: **SourceCDB**
