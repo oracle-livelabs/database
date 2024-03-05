@@ -47,9 +47,6 @@ In this lab, you will be guided through the following steps:
 
 ## Acknowledgements
 
-* **Author** - Perside Foster, MySQL Solution Engineering
-* **Contributors** - Airton Lastori, Principal Product Manager, Priscila Galvao, MySQL Solution Engineering,
-Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-* **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, March 2023
-
-
+- **Author** -  Perside Foster, MySQL Solution Engineering
+- **Contributors** -  Sriram Vrinda, MySQL Product Manager
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, March 2024
