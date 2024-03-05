@@ -223,8 +223,10 @@ def index():
 
      ```
     <copy><!-- index.html -->
+<!-- {% raw %} -->
 {% extends "base.html" %}
 {% block content %}
+<!-- {% endraw %} -->
 <h2>Search for Taxi Trips</h2>
 <form action="/search" method="post" class="mt-4">
     <div class="form-group">
@@ -239,22 +241,31 @@ def index():
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
-{% endblock %}</copy>
+<!-- {% raw %} -->
+{% endblock %}
+<!-- {% endraw %} --></copy>
     ```
+
+**Note:** Please remove <!-- {% raw %} --> and <!-- {% endraw %} --> from above code to make html work
 
 7. Copy `index.html` code and paste under the desired directory structure above
 
      ```
     <copy><!-- results.html -->
+<!-- {% raw %} -->
 {% extends "base.html" %}
 {% block content %}
+<!-- {% endraw %} -->
 <h2>Search Results</h2>
 <div class="table-responsive mt-4">
     {{ trip_data|safe }}
 </div>
 <a href="/" class="btn btn-secondary mt-3">New Search</a>
-{% endblock %}</copy>
+<!-- {% raw %} -->
+{% endblock %}
+<!-- {% endraw %} --></copy>
     ```
+**Note:** Please remove <!-- {% raw %} --> and <!-- {% endraw %} --> from above code to make html work
 
 8. Copy `style.css` code and paste under the desired directory structure above
 
