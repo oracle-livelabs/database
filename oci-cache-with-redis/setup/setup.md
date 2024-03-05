@@ -210,11 +210,14 @@ def index():
     <a class="navbar-brand" href="/">NYC Taxi Trips</a>
 </nav>
 <div class="container mt-4">
+<!-- {% raw %} -->
     {% block content %}{% endblock %}
+<!-- {% endraw %} -->
 </div>
 </body>
 </html></copy>
     ```
+**Note:** Please remove <!-- {% raw %} --> and <!-- {% endraw %} --> from above code to make html work
 
 6. Copy `index.html` code and paste under the desired directory structure above
 
