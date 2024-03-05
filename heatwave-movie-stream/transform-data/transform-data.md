@@ -138,7 +138,7 @@ In this lab, you will be guided through the following tasks:
     Enter the following command at the prompt
 
     ```bash
-    <copy>python3 movies_transform_csv_l.py</copy>
+    <copy>python movies_transform_csv_l.py</copy>
     ```
 
      ```bash
@@ -154,7 +154,7 @@ In this lab, you will be guided through the following tasks:
     Enter the following command at the prompt
 
     ```bash
-    <copy>python3 movies_transform_sql_l.py</copy>
+    <copy>python movies_transform_sql_l.py</copy>
     ```
 
      ```bash
@@ -185,7 +185,7 @@ You may now **proceed to the next lab**
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2023
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, February 2024
 
 - **Dataset** - F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets:
 History and Context. ACM Transactions on Interactive Intelligent

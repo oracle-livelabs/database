@@ -27,8 +27,6 @@ MySQL Database Service is a fully managed service, running on Oracle Cloud (Gen 
 * Free up time of developers, Database Administrators (DBA), and DevOps to focus on value-added tasks that are core to your business.
 
 
-  [](youtube:S7xQOZaUzJM)
-
 ### Objectives
 
 In this lab, you will be guided through the following steps:

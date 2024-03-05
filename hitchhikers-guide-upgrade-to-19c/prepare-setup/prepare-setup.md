@@ -19,7 +19,7 @@ This lab assumes you have:
 
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
 
-1.  Click on the link below to download the Resource Manager zip file you need to build your environment: [upgr2db19c-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/7x622_b5P2kJ5NnOo6fEg2u1Ez-UsH1KdO7u-974LcaydzFh6X2TjDv86lEafzGT/n/natdsecurity/b/stack/o/upgr2db19c-mkplc-freetier.zip)
+1.  Click on the link below to download the Resource Manager zip file you need to build your environment: [upgr2db19c-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/D9jupVQNW-nXcxguHMTfiIr-9227qSjVZ8xk2hDjyJgOAdH3CLy4d7yYNtkWXPR4/n/c4u02/b/hosted_workshops/o/stacks/upgr2db19c-mkplc-freetier.zip)
 
 2.  Save in your downloads folder.
 
