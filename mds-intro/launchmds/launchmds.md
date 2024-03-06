@@ -176,11 +176,13 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
     - Configure backups
     - Show advanced options
 
+
 5. In **Provide basic information for the DB System**, select the **HeatWave\_Sandbox** Compartment, in the **Name** field and **Description** field, enter **HeatWave_DB**.
 
     ![Create MySQL Database Basic](./images/mysql-basic.png "Create MySQL Database Basic")
 
 6. In **Create Administrator credentials**, enter **admin** for the user name, enter **Welcome1!** for the password, and then enter **Welcome1!** to confirm the password.
+
 
     ![HeatWave](./images/mysql-admin.png "MySQL Admin ")
 
@@ -423,6 +425,7 @@ If you are a Linux, Mac, or  Windows 10 Powershell user, skip the first step.
 
 7. On MySQL Shell, switch to SQL mode to try some SQL commands. Type the following command at the prompt:
 
+
     ```bash
      <copy>\SQL</copy>
      ```
@@ -443,11 +446,13 @@ If you are a Linux, Mac, or  Windows 10 Powershell user, skip the first step.
 
 10. To display MysQL user and host from user table type the following command at the prompt:
 
+
     ```bash
      <copy>SELECT USER, HOST FROM mysql.user;</copy>
      ```
 
      > **Note:** Optionally, you can use MySQL Workbench from your local machine to connect to the MySQL endpoint using your new compute instance as a jump box.
+
 
 11. If required, in your pre-installed **MySQL Workbench**, configure a connection using the **Standard TCP/IP over SSH** method and use the credentials of the compute instance for SSH.
 
@@ -481,6 +486,7 @@ Do the following to view the metrics for your DB system:
    ![Select DB Systems](https://oracle-livelabs.github.io/common/images/console/database-dbsys.png "Select DB Systems")
 
 2. List Database Systems.
+
 
    ![List Database Systems](./images/mysql-list.png "List Database Systems")
 
@@ -519,9 +525,11 @@ Deleting a database system is permanent. Any manual backups associated with the 
 
     ![List Database Systems](./images/mysql-list.png "List Database Systems")
 
+
 3. Choose the **HeatWave_Sandbox** Compartment.
 
 4. Click **HeatWave_DB** to open the MySQL DB System Details page.
+
 
     ![DB System Details page](./images/mysql-details.png "DB System Details page")
 
@@ -536,6 +544,7 @@ Deleting a database system is permanent. Any manual backups associated with the 
 When the delete process is done, **HeatWave_DB** will be set to the **Delete** status.
 
 ## Learn More
+
 
 - [MySQL Heatwave Documentation](https://docs.oracle.com/en-us/iaas/mysql-database/)
 
