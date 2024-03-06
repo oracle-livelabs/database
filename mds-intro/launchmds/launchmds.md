@@ -151,13 +151,13 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
 
     ![Private Subnet-HeatWave_VCN page](./images/vcn-private-subnet-ingress-rules-page.png "Private Subnet-HeatWave_VCN page")
 
-## Task 5: Create a MySQL Database System
+## Task 5: Create a MySQL HeatWave Database System
 
 1. Click the **Navigation Menu** in the upper-left corner, navigate to **Databases**, and select **Database Systems**.
 
    ![Database Systems](https://oracle-livelabs.github.io/common/images/console/database-dbsys.png "Database Systems")
 
-2. Click **Create MySQL Database System**.
+2. Click **Create MySQL HeatWave Database System**.
 
     ![Create Database System](./images/mysql-create-menu.png "MySQL Create Database System")
 
@@ -165,7 +165,7 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
 
     ![Development](./images/mysql-development.png "Select Development")
 
-4. On the Create MySQL Database System dialog box, complete the fields in each section:
+4. On the Create MySQL HeatWave Database System dialog box, complete the fields in each section:
 
     - Provide basic information for the database system
     - Set up your required database system
@@ -179,7 +179,7 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
 
 5. In **Provide basic information for the DB System**, select the **HeatWave\_Sandbox** Compartment, in the **Name** field and **Description** field, enter **HeatWave_DB**.
 
-    ![Create MySQL Database Basic](./images/mysql-basic.png "Create MySQL Database Basic")
+    ![Create MySQL HeatWave Database Basic](./images/mysql-basic.png "Create MySQL HeatWave Database Basic")
 
 6. In **Create Administrator credentials**, enter **admin** for the user name, enter **Welcome1!** for the password, and then enter **Welcome1!** to confirm the password.
 
@@ -215,7 +215,7 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
 
     ![Create DB](./images/mysq-create-db.png "MySQL Create DB")
 
-    > **Note:** The New MySQL Database System will be ready to use after a few minutes. The state will be shown as **Creating** during the creation.
+    > **Note:** The New MySQL HeatWave Database System will be ready to use after a few minutes. The state will be shown as **Creating** during the creation.
 
     ![Creating DB](./images/mysql_creating.png "Creating DB")
 
@@ -284,7 +284,7 @@ The installation procedure involves downloading the airportdb database to cloud 
     <copy>unzip airportdb_ysqlsh_331.zip</copy>
     ```
 
-   **Connect to MySQL Database Service**
+   **Connect to MySQL HeatWave Database Service**
 
 2. From your cloud shell, connect to HEATWAVE-DB  using the MySQL Shell client tool.
 
@@ -464,7 +464,7 @@ If you are a Linux, Mac, or  Windows 10 Powershell user, skip the first step.
 
      ![MySQL Workbench launched for MySQL HeatWave](./images/workbench-launch.png "MySQL Workbench launched for MySQL HeatWave")
 
-## Task 11: View MySQLHeatWave Metrics
+## Task 11: View MySQL HeatWave Metrics
 
 Do the following to view the metrics for your DB system:
 
@@ -503,7 +503,7 @@ Do the following to view the metrics for your DB system:
      > **Note:**  Stopping a database system stops billing for all OCPUs associated with it.
        - Billing continues for storage.
        - Billing for OCPUs resumes if you restart the database system.
-       - If you selected **Stop** or **Restart**, the Stop/Restart MySQL Database System dialog box is displayed.
+       - If you selected **Stop** or **Restart**, the Stop/Restart MySQL HeatWave Database System dialog box is displayed.
 
 5. Select a shutdown type:
 
@@ -513,7 +513,7 @@ Do the following to view the metrics for your DB system:
 
 6. Select the required shutdown type and click **Stop** or **Restart**, depending on the action chosen.
 
-## Task 13: Delete the MySQL Database System
+## Task 13: Delete the MySQL HeatWave DatabaseSystem
 
 Deleting a database system is permanent. Any manual backups associated with the deleted database system are retained for their retention periods. Automatic backups are deleted with the database system.
 
@@ -548,7 +548,7 @@ When the delete process is done, **HeatWave_DB** will be set to the **Delete** s
 
 - [MySQL Heatwave Documentation](https://docs.oracle.com/en-us/iaas/mysql-database/)
 
-- [MySQL Database Documentation](https://www.mysql.com)
+- [MySQL HeatWave Database Documentation](https://www.mysql.com)
 
 ## Acknowledgements
 
