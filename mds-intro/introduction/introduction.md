@@ -35,7 +35,8 @@ In this lab, you will be guided through the following steps:
 * Create a MySQL HeatWave Database Service.
 * Configure a client Linux virtual machine.
 * Connect to and use MySQL HeatWave Database Service.
-* Clean up used resources.
+* Manage MySQL HeatWave Database Service.
+
 
 ## Prerequisites
 
