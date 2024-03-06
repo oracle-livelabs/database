@@ -8,7 +8,7 @@ EstimatedTime: 60 minutes
 ### About this Product
 The NEW MySQL HeatWave Database Service is the only database service that is 100% developed, managed, and supported by the MySQL team. 
 
-MySQL HeatWave Database Service is a fully managed service, running on Oracle Cloud (Gen 2) Cloud Infrastructure. It enables you to:
+MySQL HeatWave Database Service is a fully managed service, running on Oracle Cloud Infrastructure. It enables you to:
 
 * Instantly provision MySQL instances and connect to a production ready, pre-configured MySQL database.
 
