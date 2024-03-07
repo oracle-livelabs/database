@@ -1,14 +1,14 @@
 # Introduction
 
 ## About this Workshop
-This lab will introduce you to a powerful union between MySQL Enterprise Edition and Oracle Cloud Infrastructure (OCI). You will learn how to create your first MySQL Database Service System in a secure OCI environment. You will also learn how to connect and use your MySQL Database Service System with the MySQL Shell tool.
+This lab will introduce you to a powerful union between MySQL Enterprise Edition and Oracle Cloud Infrastructure (OCI). You will learn how to create your first MySQL HeatWave Database Service in a secure OCI environment. You will also learn how to connect and use your MySQL HeatWave Database Service  with the MySQL Shell tool.
 
 EstimatedTime: 60 minutes 
 
 ### About this Product
-The NEW MySQL Database Service (MDS) is the only database service that is 100% developed, managed, and supported by the MySQL team. 
+The NEW MySQL HeatWave Database Service is the only database service that is 100% developed, managed, and supported by the MySQL team. 
 
-MySQL Database Service is a fully managed service, running on Oracle Cloud (Gen 2) Cloud Infrastructure. It enables you to:
+MySQL HeatWave Database Service is a fully managed service, running on Oracle Cloud Infrastructure. It enables you to:
 
 * Instantly provision MySQL instances and connect to a production ready, pre-configured MySQL database.
 
@@ -32,10 +32,11 @@ MySQL Database Service is a fully managed service, running on Oracle Cloud (Gen 
 In this lab, you will be guided through the following steps:
 
 * Set the correct user "policies" and create an isolated VCN.
-* Create a MySQL Database System.
+* Create a MySQL HeatWave Database Service.
 * Configure a client Linux virtual machine.
-* Connect to and use MySQL.
-* Clean up used resources.
+* Connect to and use MySQL HeatWave Database Service.
+* Manage MySQL HeatWave Database Service.
+
 
 ## Prerequisites
 
@@ -47,9 +48,6 @@ In this lab, you will be guided through the following steps:
 
 ## Acknowledgements
 
-* **Author** - Perside Foster, MySQL Solution Engineering
-* **Contributors** - Airton Lastori, Principal Product Manager, Priscila Galvao, MySQL Solution Engineering,
-Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-* **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, March 2023
-
-
+- **Author** -  Perside Foster, MySQL Solution Engineering
+- **Contributors** -  Sriram Vrinda, MySQL Product Manager
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, March 2024
