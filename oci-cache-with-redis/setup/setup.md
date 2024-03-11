@@ -93,7 +93,7 @@ In this lab, you will:
     ```
   
 
-2. Copy `__init__.py` code and paste under the desired directory structure above
+2. Copy `__init__.py` code and paste under the desired directory structure above. Use vi editor to create/edit the file, and use *Esc + :wq + enter* to save the file.
 
      ```
     <copy>from flask import Flask
@@ -103,7 +103,11 @@ In this lab, you will:
     from app import routes</copy>
     ```
 
-3. Copy `routes.py` code and paste under the desired directory structure above
+    Once the file is created, use *cat &ltfilename&gt* to make sure the content is there as expected above.
+
+    ![verify init file](images/verify_init.png)    
+
+3. Copy `routes.py` code and paste under the desired directory structure above.Use vi editor to create/edit the file, and use *Esc + :wq + enter* to save the file.
 
      ```
     <copy>from flask import render_template, request
@@ -120,7 +124,12 @@ def index():
 
     return render_template('index.html')</copy>
     ```
-4. Copy `models.py` code and paste under the desired directory structure above
+
+    Once the file is created, use *cat &ltfilename&gt* to make sure the content is there as expected above.
+
+    ![verify routes file](images/verify_routes.png)
+
+4. Copy `models.py` code and paste under the desired directory structure above. Use vi editor to create/edit the file, and use *Esc + :wq + enter* to save the file.
 
     ```
     <copy>import cx_Oracle
@@ -188,6 +197,9 @@ def index():
             oracle_conn.close()
             return df</copy>
     ```
+    Once the file is created, use *cat &ltfilename&gt* to make sure the content is there as expected above.
+
+    ![verify models file](images/verify_models.png)
 
 5. Copy `base.html` code and paste under the desired directory structure above
 
@@ -217,7 +229,7 @@ def index():
 </body>
 </html></copy>
     ```
-**Note:** Please remove <!-- {% raw %} --> and <!-- {% endraw %} --> from above code to make html work
+**Note:** Please remove *&lt !-- {% raw %} -- &gt* and *&lt !-- {% endraw %} -- &gt* from above code to make html work
 
 6. Copy `index.html` code and paste under the desired directory structure above
 
@@ -246,7 +258,7 @@ def index():
 <!-- {% endraw %} --></copy>
     ```
 
-**Note:** Please remove <!-- {% raw %} --> and <!-- {% endraw %} --> from above code to make html work
+**Note:** Please remove *&lt !-- {% raw %} -- &gt* and *&lt !-- {% endraw %} -- &gt* from above code to make html work
 
 7. Copy `index.html` code and paste under the desired directory structure above
 
@@ -265,7 +277,7 @@ def index():
 {% endblock %}
 <!-- {% endraw %} --></copy>
     ```
-**Note:** Please remove <!-- {% raw %} --> and <!-- {% endraw %} --> from above code to make html work
+**Note:** Please remove *&lt !-- {% raw %} -- &gt* and *&lt !-- {% endraw %} -- &gt* from above code to make html work
 
 8. Copy `style.css` code and paste under the desired directory structure above
 
@@ -285,7 +297,7 @@ h2 {
  margin-top: 20px;
 }</copy>
     ```
-9. Copy `config.py` code and paste under the desired directory structure above
+9. Copy `config.py` code and paste under the desired directory structure above. Use vi editor to create/edit the file, and use *Esc + :wq + enter* to save the file.
 
      ```
     <copy>class Config:
@@ -296,13 +308,21 @@ h2 {
     REDIS_PRIMARY_ENDPOINT = 'put the redis cluster primary end point'
     REDIS_PORT = '6379'</copy>
     ```
-10. Copy `run.py` code and paste under the desired directory structure above
+
+    Once the file is created, use *cat &ltfilename&gt* to make sure the content is there as expected above.
+
+    ![verify config file](images/verify_config.png)
+
+10. Copy `run.py` code and paste under the desired directory structure above. Use vi editor to create/edit the file, and use *Esc + :wq + enter* to save the file.
 
      ```
     <copy>from app import app
 if __name__ == "__main__":
     app.run(host='0.0.0.0' , debug=True)</copy>
     ```
+Once the file is created, use *cat &ltfilename&gt* to make sure the content is there as expected above.
+
+    ![verify run file](images/verify_run.png)
 
 ## Task 4: Open port for application in VCN
 

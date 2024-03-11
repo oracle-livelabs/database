@@ -70,7 +70,7 @@ This lab assumes you have:
 
   ![database connection](images/atp_5.png)
 
-6. Click on **Download Wallet** and keep this wallet zip file for lab-3.
+6. Click on **Download Wallet** . After downloading the wallet, unzip it, collect the endpoint from the tnsnames.ora, and set it aside for lab 3.
 
   ![download wallet](images/atp_6.png)
 
