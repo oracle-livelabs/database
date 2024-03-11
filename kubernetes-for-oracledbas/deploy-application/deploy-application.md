@@ -312,6 +312,8 @@ Finally, define the Application *Deployment* manifest itself.  It looks like a l
               imagePullPolicy: IfNotPresent
               args: ["-L", "-nohistory", "\$(LB_COMMAND_USERNAME)/\$(LB_COMMAND_PASSWORD)@\$(LB_COMMAND_URL)", "@liquibase.sql"]
               env:
+                - name: LIQUIBASE_DUPLICATE_FILE_MODE
+                  value: WARN
                 - name: LB_COMMAND_USERNAME
                   valueFrom:
                     secretKeyRef:
