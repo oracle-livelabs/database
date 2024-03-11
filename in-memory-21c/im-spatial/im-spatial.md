@@ -14,8 +14,7 @@ Watch the video below for a walk through of the In-Memory Spatial lab:
 
 ### Objectives
 
--   Learn how to enable In-Memory on the Oracle Database
--   Perform various queries on the In-Memory Column Store
+-   Learn how to enable In-Memory Spatial and see how it can increase Spatial query performance.
 
 ### Prerequisites
 
@@ -28,15 +27,11 @@ This lab assumes you have:
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
-### Background
+## Task 1: In-Memory Spatial
 
 Oracle Database 21c introduced a new feature called In-Memory Spatial. Database In-Memory now supports a spatial summary column for each spatial column in a table. Spatial summaries are stored in In-Memory formats and filter values can use SIMD vector scans and replace R-Tree Indexes for searches. This means that by using operators such as SDO_FILTER to query a table a spatial index in not required. More information is available in the Spatial Developer's Guide.
 
 In this lab you will see how In-Memory Spatial can be enabled and how to make use of it to further increase Spatial performance.
-
-## Task 1: Verify Directory Definitions
-
-In this Lab we will be populating external data from a local directory and we will need to define a database directory to use in our external table definitions to point the database to our external data.
 
 Let's switch to the spatial folder and log back in to the PDB:
 
@@ -993,4 +988,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Andy Rivenes, Product Manager,  Database In-Memory
 - **Contributors** -
-- **Last Updated By/Date** - Andy Rivenes, August 2022
+- **Last Updated By/Date** - Andy Rivenes, March 2024
