@@ -31,8 +31,8 @@ In this lab, you will:
 
 We have two simple binary files, a PDF file of pangrams, and a zip file containing four text files. Download these to a location on your local machine.
 
-* [pangrams.pdf](https://objectstorage.us-ashburn-1.oraclecloud.com/p/1ggC2PFheJunfA30X-MYL-3Rm8vS_9zyoqOahli8yXV_fD3cM5dP2QlKiizCGvsX/n/c4u04/b/livelabsfiles/o/data-management-library-files/pangrams.pdf "pangrams.pdf download")
-* [files.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/files.zip "files.zip download")
+* [pangrams.pdf](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/pangrams.pdf "pangrams.pdf download")
+* [files.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/files.zip "files.zip download")
 
 I suggest you take a look at those files before we continue. You will find that the PDF file contains the usual list of pangrams, and the zip file consists of three files, with the following text in them:
 
