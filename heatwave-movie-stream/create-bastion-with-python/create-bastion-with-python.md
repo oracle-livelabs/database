@@ -134,7 +134,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
       ![compute create change shape](./images/compute-create-change-shape.png "compute create change shape")  
 
-13. Select Instance Shape: VM.Standard.E2.2
+13. Select Instance Shape: VM.Standard.E4.Flex
 
       ![compute create select shape](./images/compute-create-select-shape.png "compute create select shape")  
 
@@ -202,29 +202,23 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 ## Task 4: Install Python and Pandas
 
-1. Install Python and Pandas
+1. Verify Pandas and Python works
 
-    a. Install Python
-
-    ```bash
-    <copy>sudo yum install python3 </copy>
-    ```
-
-    ![python3 install](./images/python3-install.png "python3 install ")
-    b. Install Pandas
+    a. Install Pandas
 
     ```bash
     <copy>sudo pip3 install pandas</copy>
     ```
 
     ![python3 pandas install](./images/pandas-python-install.png "python3 pandas install ")
-    c. Test Python is working
+
+    b. Test Python is working
 
     ```bash
-    <copy>python3</copy>
+    <copy>python</copy>
     ```
 
-    d. Exit Python with **Ctrl + Z**
+    c. Exit Python with **Ctrl + Z**
 
 
 You may now **proceed to the next lab**
@@ -233,4 +227,4 @@ You may now **proceed to the next lab**
 
 - **Author** - Perside Foster, MySQL Principal Solution Engineering
 - **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Nick Mader, MySQL Global Channel Enablement & Strategy Manager, Cristian Aguilar, MySQL Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2023
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, February 2024

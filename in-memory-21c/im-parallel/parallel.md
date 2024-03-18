@@ -28,17 +28,13 @@ This lab assumes you have:
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
-### Background
+## Task 1: In-Memory Parallel Execution
 
 Database In-Memory has always supported parallel execution, or parallel query. In fact, parallel query is needed when distributing data in a RAC system across different RAC instances. This is how you can use Database In-Memory to scale out the IM column store. In addition to Parallel Query, a feature called In-Memory Dynamic Scans (IMDS) was introduced in Oracle Database Release 12.2 to enable in-memory scans to be dynamically parallelized at the IMCU level based on the Resource Manager. When there is additional CPU capacity special IMDS scan processors can be used to further improve in-memory scan performance.
 
 Why, you might ask, do I need parallelization if I am using Database In-Memory? Even though Database In-Memory makes queries fast, ultimately an in-memory query is limited by CPU and memory speed since no I/O is occurring. The only way to make the query faster is to use less CPU (i.e. execute fewer instructions) or parallelize (i.e. do more things at once). Other than for RAC scale-out mentioned above, parallel query and IMDS can make queries run faster by doing multiple things at once.
 
 In this lab you will see how these two parallelization features can be used to improve Database In-Memory performance.
-
-## Task 1: Verify Directory Definitions
-
-In this Lab we will be populating external data from a local directory and we will need to define a database directory to use in our external table definitions to point the database to our external data.
 
 Let's switch to the parallel folder and log back in to the PDB:
 
@@ -732,7 +728,7 @@ SQL>
     SQL>
     ```
 
-    Now we see quite a bit more complicated execution plan, but the bottom line is that even with parallel query enabled we still see all of the in-memory optimizations used. Specifically the use of three Bloom filters to optimize the hash joins allowing them to be effectively turned in to scan and filter operations. Except no it can be done in parallel!
+    Now we see quite a bit more complicated execution plan, but the bottom line is that even with parallel query enabled we still see all of the in-memory optimizations used. Specifically the use of three Bloom filters to optimize the hash joins allowing them to be effectively turned into scan and filter operations. Except now it can be done in parallel!
 
 8. The same applies to In-Memory Aggregation, or Vector Group By. First we will run a serial vector group by query.
 
@@ -1241,14 +1237,16 @@ SQL>
     SQL>
     ```
 
-    In the statistics section at the bottom you will see two statistics that start with "IM scan (dynamic)". This tells you that IMDS was used. The nice thing with IMDS is that is does not preclude the use of other features, including parallel query.
+    In the statistics section above you will see two statistics that start with "IM scan (dynamic)". This tells you that IMDS was used. The nice thing with IMDS is that is does not preclude the use of other features, including parallel query.
 
 ## Conclusion
 
-This lab demonstrated how Database In-Memory can optimize the access of external data, and support both external and hybrid partitioned tables.
+This lab demonstrated how Database In-Memory can use both Parallel Query and In-Memory Dynamic Scans to parallelize access to in-memory data. This can provide a substantial performance increase for in-memory queries by enabling multiple parallel processes to process the in-memory data.
+
+You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
 - **Author** - Andy Rivenes, Product Manager,  Database In-Memory
 - **Contributors** -
-- **Last Updated By/Date** - Andy Rivenes, August 2022
+- **Last Updated By/Date** - Andy Rivenes, March 2024
