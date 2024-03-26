@@ -14,8 +14,7 @@ Watch the video below for a walk through of the Automatic Data Optimization lab:
 
 ### Objectives
 
--   Learn how to enable In-Memory on the Oracle Database
--   Perform various queries on the In-Memory Column Store
+-   Learn how to enable Automatic Data Optimization with Database In-Memory and how to create policies to manage IM column store objects.
 
 ### Prerequisites
 
@@ -28,15 +27,11 @@ This lab assumes you have:
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
-### Background
+## Task 1: Automatic Data Optimization
 
 In Oracle Database 12.1 Automatic Data Optimization (ADO) was introduced. ADO was part of the Advanced Compression Option and provided a Heat Map feature that could be used in conjunction with policies to manage the compression and data movement based on usage and time. ADO provided an automated way to implement Information Lifecycle Management within Oracle Database. In Oracle Database 12.2 Database In-Memory support was added to ADO. New policies were added to allow enabling and disabling objects for in-memory.
 
 This lab will show you how ADO works with Database In-Memory.
-
-## Task 1: Verify Directory Definitions
-
-In this Lab we will be populating external data from a local directory and we will need to define a database directory to use in our external table definitions to point the database to our external data.
 
 Let's switch to the ado folder and log back in to the PDB:
 
@@ -1193,4 +1188,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Andy Rivenes, Product Manager,  Database In-Memory
 - **Contributors** -
-- **Last Updated By/Date** - Andy Rivenes, August 2022
+- **Last Updated By/Date** - Andy Rivenes, March 2024

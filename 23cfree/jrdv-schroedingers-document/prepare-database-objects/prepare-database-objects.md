@@ -39,7 +39,7 @@ Watch the video below for a quick walk through of the lab.
 3. Pull down the materials for setup.
 
     ```
-    $ <copy>wget https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/-uNLyukKajWT_ik79EXzPs3bWyhaZzSEoaclosdmQhYjZMlKoRDDMcQgmxfSbY4P/n/c4u04/b/livelabsfiles/o/partner-solutions/json-relational-duality-views-in-23c/jsonrdv.zip</copy>
+    $ <copy>wget https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/partner-solutions/json-relational-duality-views-in-23c/jsonrdv.zip</copy>
     ```
 
     <!--![Wget to pull materials](images/material-pulldown-setup.png)-->

@@ -6,7 +6,7 @@ As organizations rush to adopt microservices architecture, they often run into p
 
 In this workshop, you will learn how to use MicroTx to maintain data consistency across several microservices by deploying and running a Bank and Stock-Trading application. This application contains several microservices and it uses distributed, two-phase commit transaction (XA). It is very simple to use MicroTx. After installing MicroTx, you only need to integrate the MicroTx libraries with your application code to manage transactions. In this workshop, you will learn how you can integrate the MicroTx client libraries with the Bank and Stock-Trading application. During the transaction, each microservice also makes updates to a resource manager to track the change in the amount and stocks. When you run the Bank and Stock-Trading application, you will be able to see how MicroTx ensures consistency of transactions across the distributed microservices and their resource managers. You will also integrate MicroTx with the Kubernetes ecosystem by using tools, such as Kiali and Jaeger, to visualize the flow of requests between MicroTx and the microservices.
 
-### About the Bank and Stock-Trading application
+### About the Bank and Stock-Trading Application
 
 The Bank and Stock-Trading application demonstrates how you can develop microservices that participate in a distributed transaction while using MicroTx to coordinate the requests. You can use the application to withdraw or deposit an amount, as well as buy and sell stocks. Since financial applications that move funds require strong global consistency, the application uses XA transaction protocol.
 
@@ -41,7 +41,7 @@ In this workshop, you will learn how to:
 
 This lab assumes you have:
 - An Oracle Cloud account
-- 4 OCPU and 24 GB memory available in your Oracle Cloud account to run the Bank and Stock-Trading application.
+- At least 4 OCPUs, 24 GB memory, and 128 GB of bootable storage volume is available in your Oracle Cloud Infrastructure tenancy to run the Bank and Stock-Trading application.
 
 Let's begin! If you need to create an Oracle Cloud account, click **Get Started** in the **Contents** menu on the left. Otherwise, if you have an existing account, click **Lab 1**.
 
