@@ -154,7 +154,8 @@ Note: The script uses the new 23c syntax of if exists and if not exists. This pr
     ```
     <copy>
     CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW race_dv AS
-    SELECT JSON {'raceId' IS r.race_id,
+    SELECT JSON {
+                '_id' IS r.race_id,
                 'name'   IS r.name,
                 'laps'   IS r.laps WITH NOUPDATE,
                 'date'   IS r.race_date,
@@ -179,7 +180,7 @@ Note: The script uses the new 23c syntax of if exists and if not exists. This pr
 	```
 	<copy>
     CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW driver_dv AS
-    SELECT JSON {'driverId' IS d.driver_id,
+    SELECT JSON {'_id' IS d.driver_id,
             'name'     IS d.name,
             'points'   IS d.points,
             UNNEST
@@ -207,7 +208,7 @@ Note: The script uses the new 23c syntax of if exists and if not exists. This pr
 	```
 	<copy>  
     CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW team_dv AS
-    SELECT JSON {'teamId'  IS t.team_id,
+    SELECT JSON {'_id'  IS t.team_id,
                 'name'    IS t.name,
                 'points'  IS t.points,
                 'driver'  IS
@@ -227,17 +228,17 @@ Note: The script uses the new 23c syntax of if exists and if not exists. This pr
 
     ```
     <copy>
-    INSERT INTO team_dv VALUES ('{"teamId" : 301,
-                              "name"   : "Red Bull",
-                              "points" : 0,
-                              "driver" : [ {"driverId" : 101,
+    INSERT INTO team_dv VALUES ('{"_id" : 301,
+                            "name"   : "Red Bull",
+                            "points" : 0,
+                            "driver" : [ {"driverId" : 101,
                                             "name"     : "Max Verstappen",
                                             "points"   : 0},
-                                           {"driverId" : 102,
+                                        {"driverId" : 102,
                                             "name"     : "Sergio Perez",
                                             "points"   : 0} ]}');
 
-    INSERT INTO team_dv VALUES ('{"teamId" : 302,
+    INSERT INTO team_dv VALUES ('{"_id" : 302,
                                 "name"   : "Ferrari",
                                 "points" : 0,
                                 "driver" : [ {"driverId" : 103,
@@ -247,7 +248,7 @@ Note: The script uses the new 23c syntax of if exists and if not exists. This pr
                                                 "name"     : "Carlos Sainz Jr",
                                                 "points"   : 0} ]}');
 
-    INSERT INTO team_dv VALUES ('{"teamId" : 2,
+    INSERT INTO team_dv VALUES ('{"_id" : 2,
                                 "name"   : "Mercedes",
                                 "points" : 0,
                                 "driver" : [ {"driverId" : 105,
@@ -265,19 +266,19 @@ Note: The script uses the new 23c syntax of if exists and if not exists. This pr
 
 	```
     <copy>
-    INSERT INTO race_dv VALUES ('{"raceId" : 201,
+    INSERT INTO race_dv VALUES ('{"_id" : 201,
                                 "name"   : "Bahrain Grand Prix",
                                 "laps"   : 57,
                                 "date"   : "2022-03-20T00:00:00",
                                 "podium" : {}}');
 
-    INSERT INTO race_dv VALUES ('{"raceId" : 202,
+    INSERT INTO race_dv VALUES ('{"_id" : 202,
                                 "name"   : "Saudi Arabian Grand Prix",
                                 "laps"   : 50,
                                 "date"   : "2022-03-27T00:00:00",
                                 "podium" : {}}');
 
-    INSERT INTO race_dv VALUES ('{"raceId" : 203,
+    INSERT INTO race_dv VALUES ('{"_id" : 203,
                                 "name"   : "Australian Grand Prix",
                                 "laps"   : 58,
                                 "date"   : "2022-04-09T00:00:00",
