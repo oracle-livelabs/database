@@ -3,35 +3,22 @@
 ## Introduction
 Indexing XML data will give you quick access to the data and significantly improve the query performance. The use of indexes is particularly recommended for online transaction processing (OLTP) environments involving few updates.
 
-Generally, when your XML data contains an island of structured, predictable data and your queries are known, we recommend using XMLIndex with a structured component. When you need to support ad-hoc XML queries, range, or text search queries, we recommend using the XML Search index. In this lab, we will explore both XMLIndex and XML Search Index.
+Generally, when your XML data contains structured, predictable part of data and your queries are known, we recommend using XMLIndex with a structured component. When you need to support ad-hoc XML queries, range, or text search queries, we recommend using the XML Search index. In this lab, we will explore both XMLIndex and XML Search Index.
 
 Estimated Time: 45 minutes
 
 ### Objectives
 In this lab, you will learn:
--	Using XMLIndex,
+-	Using Structured XMLIndex,
 -	Using XML Search Index.
 
 ### Prerequisites
 - Be logged into your Oracle Cloud Account.
+- Go to the SQL worksheet in Database Actions.
 
-## Task 1: Open Database Actions
-1. Log in to the Oracle Cloud.
-2. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources,  you need to be in a region where Always Free Resources are available. You can see your current default Region in the top, right-hand corner of the page.
-3. Click the navigation menu in the upper left to show top-level navigation choices.
-4. Click on Oracle Database and choose Autonomous Transaction Processing.
-5. If using FreeTier, your compartment should be the root compartment for your tenancy.
-Note: Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
-6. You should see your database XMLDB listed in the center. Click on the database name "XMLDB".
-7. On the database page, choose Database Actions.
-8. You are now in Database Actions.
-Database Actions allows you to connect to your Autonomous Database through various browser-based tools. We will just be using the SQL workshop tool.
-9. You should be in the Database Actions panel. Click on the SQL card
+## Task 2: Index Structured XML Data
 
-
-## Task 2: Index XML Data
-
-1. Create XMLIndex
+1. Create Structured XMLIndex
   
     Often times users know the structure or pattern of the queries. For example, consider the following few examples: 
 
@@ -40,87 +27,58 @@ Database Actions allows you to connect to your Autonomous Database through vario
     SELECT
         XMLQUERY('/PurchaseOrder/LineItems/LineItem/@ItemNumber'
             PASSING P.DOC
-        RETURNING CONTENT).GETCLOBVAL()
+        RETURNING CONTENT).GETCLOBVAL() as ItemNumber
     FROM
         PURCHASEORDER P
     WHERE
-        XMLEXISTS ( '/PurchaseOrder[Reference="ROY-1PDT"]'
+        XMLEXISTS ('/PurchaseOrder[Reference="CJONES-2022PST"]'
             PASSING P.DOC
         );
     </copy>
     ```
-
 
     ```
     <copy>
-    SELECT
-        XMLQUERY('/PurchaseOrder/LineItems/LineItem/Part/text()'
-            PASSING P.DOC
-        RETURNING CONTENT).GETCLOBVAL()
-    FROM
-        PURCHASEORDER P
-    WHERE
-        XMLEXISTS ( '/PurchaseOrder[Reference="ROY-1PDT"]'
-            PASSING P.DOC
-        );
+    CREATE OR REPLACE VIEW V_ORDERITEM AS 
+        SELECT M.REFERENCE, L.*
+        FROM PURCHASEORDER P,
+            XMLTABLE ('/PurchaseOrder' PASSING P.DOC
+                COLUMNS
+                    REFERENCE VARCHAR2(30) PATH 'Reference/text()',
+                    LINEITEMS XMLTYPE PATH 'LineItems/LineItem') M,
+            XMLTABLE ('/LineItem' PASSING M.LINEITEMS
+                COLUMNS
+                    ITEMNO NUMBER(38) PATH '@ItemNumber',
+                    PARTNO VARCHAR2(14) PATH 'Part/text()',
+                    DESCRIPTION VARCHAR2(30) PATH 'Part/@Description',
+                    QUANTITY NUMBER(5) PATH '/Quantity') L;
     </copy>
     ```
 
+    The queries use a similar XPath to access /PurchaserOrder/Reference or /PurchaseOrder/LineItems/LineItem elements. We can create a structured XML index on these structured parts of the data. An XML index will also help the query performance significantly. 
 
-    All the queries use a similar pattern, and we can leverage that. Users can create an index focusing on those cases only. By doing that they will significantly reduce the index size and at the same time, we will get a significant performance improvement.
+    The following XML index creates two internal index tables PO_INDEX_MASTER and PO_INDEX_LINEITEM. PO_INDEX_MASTER has columns reference and lineitem. Column lineitem is of type XMLTYPE which is virtual. It represents a collection and is passed to the second XMLTable construct to form the second-level relational index table, PO_INDEX_LINEITEM, which has columns itemno, partno, description, and quantity. Queries are optimized through Structured XML Index directly from the underneath relational index tables
 
     ```
     <copy>
     DROP INDEX PURCHASEORDER_IDX;
 
-    BEGIN
-        DBMS_XMLINDEX.DROPPARAMETER('PO_SXI_PARAMETERS');
-    END;
-    /
-    </copy>
-    ```
-
-    Copy the above statement into the worksheet area and press "Run Statement".
-
-    ![Drop index and parameters](./images/img-1.png)
-
-    
-
-    ```
-    <copy>
-    BEGIN
-        DBMS_XMLINDEX.REGISTERPARAMETER('PO_SXI_PARAMETERS', 'GROUP   PO_LINEITEM
-            XMLTABLE PO_INDEX_MASTER ''/PurchaseOrder''
+    CREATE INDEX PURCHASEORDER_IDX
+        ON purchaseorder(doc) INDEXTYPE IS XDB.XMLIndex
+        PARAMETERS ('
+            XMLTABLE PO_INDEX_MASTER
+                    ''/PurchaseOrder''
             COLUMNS
-            REFERENCE        varchar2(30)   PATH ''Reference/text()'',
-                LINEITEM            xmlType     PATH ''LineItems/LineItem''
-        VIRTUAL XMLTABLE PO_INDEX_LINEITEM ''/LineItem''
-        PASSING lineitem
+                reference VARCHAR2(30) PATH ''Reference/text()'',
+                lineitem  XMLTYPE PATH ''LineItems/LineItem'' VIRTUAL
+            XMLTable PO_INDEX_LINEITEM
+                    ''/LineItem'' PASSING lineitem
             COLUMNS
-                ITEMNO         number(38)    PATH ''@ItemNumber'',
-                UPC            varchar2(14)   PATH ''Part/text()'',     
-                DESCRIPTION    varchar2(256)  PATH ''Part/@Description''
-                        ');
-    END;
-    /
-    </copy>
-    ```
-
-    Copy the above statement into the worksheet area and press "Run Statement".
-
-    ![Register parameters](./images/img-2.png)
-
-    
-
-    Please grant the required privileges if needed.
-
-    ```
-    <copy>
-    CREATE INDEX PURCHASEORDER_IDX ON
-        PURCHASEORDER (
-            DOC
-        )
-    INDEXTYPE IS XDB.XMLINDEX PARAMETERS ( 'PARAM PO_SXI_PARAMETERS' );
+                ITEMNO number(38)   PATH ''@ItemNumber'',
+                PARTNO varchar2(14)  PATH ''Part/text()'',
+                DESCRIPTION varchar2(30) PATH ''Part/@Description'',
+                QUANTITY NUMBER(5) PATH ''/Quantity''
+        ');
     </copy>
     ```
 
@@ -128,11 +86,9 @@ Database Actions allows you to connect to your Autonomous Database through vario
 
     ![Create index](./images/img-3.png)
 
-    
-
     ```
     <copy>
-    -- we can even create a secondary index on primary index columns.
+    -- we can even create a secondary index on columns of the internal index tables. This will further improve the query performance
     -- creating a secondary index on the REFERENCE column
     CREATE UNIQUE INDEX REFERENCE_IDX ON
         PO_INDEX_MASTER (
@@ -142,7 +98,7 @@ Database Actions allows you to connect to your Autonomous Database through vario
     -- creating a secondary index on the UPC column
     CREATE INDEX UPC_IDX ON
         PO_INDEX_LINEITEM (
-            UPC
+            PARTNO
         );
     </copy>
     ```
@@ -150,9 +106,6 @@ Database Actions allows you to connect to your Autonomous Database through vario
     Copy the above statement into the worksheet area and press "Run Statement".
 
     ![Secondary indexes](./images/img-4.png)
-
-    
-
 
     ```
     <copy>
@@ -163,7 +116,7 @@ Database Actions allows you to connect to your Autonomous Database through vario
     FROM
         PURCHASEORDER P
     WHERE
-        XMLEXISTS ( '/PurchaseOrder[Reference="ROY-1PDT"]'
+        XMLEXISTS ( '/PurchaseOrder[Reference="CJONES-2022PST"]'
             PASSING P.DOC
         );
     </copy>
@@ -173,29 +126,29 @@ Database Actions allows you to connect to your Autonomous Database through vario
 
     ![Explain plan 1](./images/img-5.png)
 
-    
-
-
     ```
     <copy>
-    SELECT
-        XMLQUERY('/PurchaseOrder/LineItems/LineItem/Part/text()'
-            PASSING P.DOC
-        RETURNING CONTENT).GETCLOBVAL()
-    FROM
-        PURCHASEORDER P
-    WHERE
-        XMLEXISTS ( '/PurchaseOrder[Reference="ROY-1PDT"]'
-            PASSING P.DOC
-        );
+    CREATE OR REPLACE VIEW V_ORDERITEM AS  
+        SELECT M.REFERENCE, L.*
+        FROM PURCHASEORDER P,
+            XMLTABLE ('/PurchaseOrder' PASSING P.DOC
+                COLUMNS
+                    REFERENCE VARCHAR2(30) PATH 'Reference/text()',
+                    LINEITEMS XMLTYPE PATH 'LineItems/LineItem') M,
+            XMLTABLE ('/LineItem' PASSING M.LINEITEMS
+                COLUMNS
+                    ITEMNO NUMBER(38) PATH '@ItemNumber',
+                    PARTNO VARCHAR2(14) PATH 'Part/@Id',
+                    DESCRIPTION VARCHAR2(30) PATH 'Description',
+                    QUANTITY NUMBER(5) PATH 'Quantity') L;
+
+    SELECT * FROM V_ORDERITEM;
     </copy>
     ```
 
     Copy the above statement into the worksheet area and press "Explain Plan".
 
     ![Explain plan 2](./images/img-6.png)
-
-    
 
 2. Create XML Search Index
     
@@ -225,8 +178,6 @@ Database Actions allows you to connect to your Autonomous Database through vario
     Copy the above statement into the worksheet area and press "Run Statement".
 
     ![Set preferences](./images/img-7.png)
-
-    
 
     ```
     <copy>
@@ -263,7 +214,6 @@ Database Actions allows you to connect to your Autonomous Database through vario
         );
     </copy>
     ```
-
 
     Copy the above statement into the worksheet area and press "Explain Plan".
 
@@ -400,15 +350,12 @@ Database Actions allows you to connect to your Autonomous Database through vario
 You may now **proceed to the next lab**.
 
 ## Learn More
-- [Database 19c - JSON] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=638)
-- [Developing with JSON and SODA in Oracle Database] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=831)
-- [JSON without Limits] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=836)
-- [Using the Database API for MongoDB] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3152)
-- [Database API for MongoDB - The Basics] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3221)
-- [Full-Text Search in Oracle Database] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3286)
-- [Autonomous Database Dedicated](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=677)
+
 - [Manage and Monitor Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=553)
-- [Scaling and Performance in the Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=608)
+- [Scale and Performance in the Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=608)
+- [Oracle XML DB](https://www.oracle.com/database/technologies/appdev/xmldb.html)
+- [Oracle Autonomous Database](https://www.oracle.com/database/autonomous-database.html)
+- [XML DB Developer Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/adxdb/index.html)
 
 
 ## Acknowledgements
