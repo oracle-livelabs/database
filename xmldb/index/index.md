@@ -49,9 +49,9 @@ In this lab, you will learn:
             XMLTABLE ('/LineItem' PASSING M.LINEITEMS
                 COLUMNS
                     ITEMNO NUMBER(38) PATH '@ItemNumber',
-                    PARTNO VARCHAR2(14) PATH 'Part/text()',
-                    DESCRIPTION VARCHAR2(30) PATH 'Part/@Description',
-                    QUANTITY NUMBER(5) PATH '/Quantity') L;
+                    PARTNO VARCHAR2(14) PATH 'Part/@Id',
+                    DESCRIPTION VARCHAR2(30) PATH 'Description',
+                    QUANTITY NUMBER(5) PATH 'Quantity') L;
     </copy>
     ```
 
@@ -75,9 +75,9 @@ In this lab, you will learn:
                     ''/LineItem'' PASSING lineitem
             COLUMNS
                 ITEMNO number(38)   PATH ''@ItemNumber'',
-                PARTNO varchar2(14)  PATH ''Part/text()'',
-                DESCRIPTION varchar2(30) PATH ''Part/@Description'',
-                QUANTITY NUMBER(5) PATH ''/Quantity''
+                PARTNO varchar2(14)  PATH ''Part/@Id'',
+                DESCRIPTION varchar2(30) PATH ''Description'',
+                QUANTITY NUMBER(5) PATH ''Quantity''
         ');
     </copy>
     ```
@@ -152,88 +152,82 @@ In this lab, you will learn:
 
 2. Create XML Search Index
     
-    In the case of ad-hoc XML queries or queries requiring text search or range search, we recommend creating an XML Search index to get a performance boost.
+    In case of ad-hoc or free-form XML queries, that don’t follow a well-defined structure as appropriate for the Structured XMLIndex discussed in the previous section, we recommend creating an XML Search Index instead. The search index can be used to get a performance boost on both full-text as well as range search queries.
 
-    ```
-    <copy>
-    BEGIN
-        CTX_DDL.DROP_PREFERENCE('STORAGE_PREFS');
-    END;
-    /
+    2.a. The first step is to create a section group and set the search preferences:
+        ```
+        <copy>
+        BEGIN
+            CTX_DDL.DROP_PREFERENCE('STORAGE_PREFS');
+        END;
+        /
 
-    BEGIN
-        CTX_DDL.DROP_SECTION_GROUP('XQFT');
-    END;
-    /
+        BEGIN
+            CTX_DDL.DROP_SECTION_GROUP('XQFT');
+        END;
+        /
 
-    BEGIN
-        CTX_DDL.CREATE_SECTION_GROUP('XQFT', 'PATH_SECTION_GROUP');
-        CTX_DDL.SET_SEC_GRP_ATTR('XQFT', 'XML_ENABLE', 'T');
-        CTX_DDL.CREATE_PREFERENCE('STORAGE_PREFS', 'BASIC_STORAGE');
-    END;
-    /
-    </copy>
-    ```
+        BEGIN
+            CTX_DDL.CREATE_SECTION_GROUP('XQFT', 'PATH_SECTION_GROUP');
+            CTX_DDL.SET_SEC_GRP_ATTR('XQFT', 'XML_ENABLE', 'T');
+            CTX_DDL.CREATE_PREFERENCE('STORAGE_PREFS', 'BASIC_STORAGE');
+        END;
+        /
+        </copy>
+        ```
 
-    Copy the above statement into the worksheet area and press "Run Statement".
+        Copy the above statement into the worksheet area and press "Run Statement".
 
-    ![Set preferences](./images/img-7.png)
+        ![Set preferences](./images/img-7.png)
 
-    ```
-    <copy>
-    CREATE INDEX PURCHASEORDER_XQFT_IDX ON
-        PURCHASEORDER (
-            DOC
-        )
-    INDEXTYPE IS CTXSYS.CONTEXT PARAMETERS ( 'storage STORAGE_PREFS 
-                section group XQFT' );
-    </copy>
-    ```
+    2.b. The second step is to actually create the search index on the base table using the preferences created in the previous step: 
+        ```
+        <copy>
+        CREATE INDEX PURCHASEORDER_XQFT_IDX ON
+            PURCHASEORDER (
+                DOC
+            )
+        INDEXTYPE IS CTXSYS.CONTEXT PARAMETERS ( 'storage STORAGE_PREFS 
+                    section group XQFT' );
+        </copy>
+        ```
 
-    Copy the above statement into the worksheet area and press "Run Statement".
+        Copy the above statement into the worksheet area and press "Run Statement".
 
-    ![Create XML search index](./images/img-8.png)
-
-    
+        ![Create XML search index](./images/img-8.png)
 
 3. Run queries and check explain plan
-    
-    3.1. Finding addresses given a zipCode. After creating the search index, a query like this will significantly improve the query performance.
+    Now that the search index has been set up, try running a variety of different queries and verify if the index is picked for each one of them by clicking on explain plan.
 
+    First, let’s look at a few text-search queries:
+
+    3.1. Find all “Overnight” orders
     ```
     <copy>
     SELECT
-        COUNT(*)
+        id
     FROM
-        PURCHASEORDER PO
+        PURCHASEORDER
     WHERE
-        XMLEXISTS ( '(#ora:use_xmltext_idx #)
-    {$P/PurchaseOrder/LineItems/LineItem[@ItemNumber > $num]}'
-            PASSING PO.DOC AS "P",
-            '0' AS "num"
-        );
+        XMLEXISTS ('/PurchaseOrder/SpecialInstructions[. contains text "Overnight"]'
+            PASSING doc);
     </copy>
     ```
 
     Copy the above statement into the worksheet area and press "Explain Plan".
 
     ![Explain plan SIQ1](./images/img-9.png)
-        
 
-
-    3.2. Search for a contains match on a phrase. The contains match is case sensitive. 
-
+    3.2. Orders where the description contains “Harry” and “Potter”
     ```
     <copy>
     SELECT
-        COUNT(*)
+        id
     FROM
-        PURCHASEORDER PO
+        PURCHASEORDER 
     WHERE
-        XMLEXISTS ( ' (#ora:use_xmltext_idx #)
-    {$P/PurchaseOrder/ShippingInstructions/Address/street[contains(.,$PHRASE)]}'
-            PASSING PO.DOC AS "P",
-            'Building' AS "PHRASE"
+        XMLEXISTS ( '/PurchaseOrder/LineItems/LineItem/Description[. contains text "Harry" ftand "Potter"]'
+            PASSING doc
         );
     </copy>
     ```
@@ -242,20 +236,17 @@ In this lab, you will learn:
 
     ![Explain plan SIQ2](./images/img-10.png)
 
-    
-
-    3.3. An XQuery Full-Text "contains text" search on a phrase. The index is used since "contains text" comparisons are case insensitive. 
+    3.3. Orders where the description contains the words “C++” or “Java”
 
     ```
     <copy>
     SELECT
-        COUNT(*)
+        id
     FROM
-        PURCHASEORDER PO
+        PURCHASEORDER
     WHERE
-        XMLEXISTS ( '(#ora:use_xmltext_idx #) {$P/PurchaseOrder/ShippingInstructions/Address/street[. contains text {$PHRASE}]}'
-            PASSING PO.DOC AS "P",
-            'building' AS "PHRASE"
+        XMLEXISTS ( '/PurchaseOrder/LineItems/LineItem/Description[. contains text "Java" ftor "C++"]'
+            PASSING doc
         );
     </copy>
     ```
@@ -265,18 +256,17 @@ In this lab, you will learn:
     ![Explain plan SIQ3](./images/img-11.png)
     
 
-    3.4. An XQuery Full-Text "contains text" search on a phrase with stemming.
-
+    3.4. Orders with price > 50
     ```
     <copy>
     SELECT
-        COUNT(*)
+        id
     FROM
-        PURCHASEORDER PO
+        PURCHASEORDER
     WHERE
-        XMLEXISTS ( '$P/PurchaseOrder/ShippingInstructions/Address/street[. contains text {$PHRASE} using stemming]'
-            PASSING PO.DOC AS "P",
-            'build' AS "PHRASE"
+        XMLEXISTS ( '(# ora:use_xmltext_idx #) 
+            {/PurchaseOrder/LineItems/LineItem/Part[@UnitPrice > 50]}' 
+            PASSING doc
         );
     </copy>
     ```
@@ -286,19 +276,18 @@ In this lab, you will learn:
     ![Explain plan SIQ4](./images/img-12.png)
     
 
-    3.5. An XQuery Full-Text "contains text" search on a fragment using the ftand operator. 
+    3.5. Orders where the Requestor name is lexicographically > “Jake”
 
     ```
     <copy>
     SELECT
-        COUNT(*)
+        id
     FROM
-        PURCHASEORDER PO
+        PURCHASEORDER
     WHERE
-        XMLEXISTS ( '$P/PurchaseOrder/ShippingInstructions/Address[. contains text {$PHRASE1} ftand {$PHRASE2} using stemming]'
-            PASSING PO.DOC AS "P",
-            'nil' AS "PHRASE1",
-            'build' AS "PHRASE2"
+        XMLEXISTS ( '(# ora:use_xmltext_idx #) 
+            {/PurchaseOrder[Requestor > "Jake"]}'
+            PASSING doc
         );
     </copy>
     ```
@@ -306,46 +295,6 @@ In this lab, you will learn:
     Copy the above statement into the worksheet area and press "Explain Plan".
 
     ![Explain plan SIQ5 with stemming](./images/img-13.png)
-    
-
-    ```
-    <copy>
-    SELECT
-        COUNT(*)
-    FROM
-        PURCHASEORDER PO
-    WHERE
-        XMLEXISTS ( '$P/PurchaseOrder/ShippingInstructions/Address[. contains text {$PHRASE1} ftand {$PHRASE2} using stemming window 2 words]'
-            PASSING PO.DOC AS "P",
-            'nil' AS "PHRASE1",
-            'build' AS "PHRASE2"
-        );
-    </copy>
-    ```
-
-    Copy the above statement into the worksheet area and press "Explain Plan".
-
-    ![Explain plan SIQ5 with stemming window 2](./images/img-14.png)
-    
-
-    ```
-    <copy>
-    SELECT
-        COUNT(*)
-    FROM
-        PURCHASEORDER PO
-    WHERE
-        XMLEXISTS ( '$P/PurchaseOrder/ShippingInstructions/Address[. contains text {$PHRASE1} ftand {$PHRASE2} using stemming window 5 words]'
-            PASSING PO.DOC AS "P",
-            'nil' AS "PHRASE1",
-            'build' AS "PHRASE2"
-        );
-    </copy>
-    ```
-
-    Copy the above statement into the worksheet area and press "Explain Plan".
-
-    ![Explain plan SIQ5 stemming window 5](./images/img-15.png)
  
 You may now **proceed to the next lab**.
 

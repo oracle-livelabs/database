@@ -11,44 +11,48 @@ Estimated Workshop Time: 3 hours, 30 minutes
 XML is a human-readable, machine-readable, and self-describing format to represent data in a hierarchical format. Here is an example of an XML document containing information on a purchase order. 
 
 ```
+<copy>
 <PurchaseOrder>
-	<Reference>ROY-1PDT</Reference>
-	<Actions>
-		<Action>
-			<User>ROY-1</User>
-		</Action>
-	</Actions>
-	<Rejection/>
-	<Requestor>H. Roy 1</Requestor>
-	<User>ROY-1</User>
-	<CostCenter>H1</CostCenter>
-	<ShippingInstructions>
-		<name>H. Roy 1</name>
-		<Address>
-			<street>1 Nil Rd, Building 1</street>
-			<city>SFO-1</city>
-			<state>CA</state>
-			<zipCode>99236</zipCode>
-			<country>USA</country>
-		</Address>
-		<telephone>269-1-4036</telephone>
-	</ShippingInstructions>
-	<SpecialInstructions>Overnight</SpecialInstructions>
-	<LineItems>
-		<LineItem ItemNumber="1">
-			<Part Description="Monitor" UnitPrice="350">1</Part>
-			<Quantity>1</Quantity>
-		</LineItem>
-		<LineItem ItemNumber="2">
-			<Part Description="Headphone" UnitPrice="550">1</Part>
-			<Quantity>1</Quantity>
-		</LineItem>
-		<LineItem ItemNumber="3">
-			<Part Description="Speaker" UnitPrice="750">1</Part>
-			<Quantity>1</Quantity>
-		</LineItem>
-	</LineItems>
+    <Reference>CJONES-2022PST</Reference>
+    <Actions>
+        <Action>
+            <User>DJOHN</User>
+        </Action>
+    </Actions>
+    <Requestor>Cindy Jones</Requestor>
+    <User>CJONES</User>
+    <CostCenter>D30</CostCenter>
+    <ShippingInstructions>
+        <name>Cindy Jones</name>
+        <Address>
+            <street>200 Oracle Parkway</street>
+            <city>Redwood Shores</city>
+            <state>CA</state>
+            <zipCode>94065</zipCode>
+            <country>USA</country>
+        </Address>
+        <telephone>650-506-7400</telephone>
+    </ShippingInstructions>
+    <SpecialInstructions>Overnight</SpecialInstructions>
+     <LineItems> 
+         <LineItem ItemNumber="10"> 
+             <Description>Harry Potter and the Goblet of Fire</Description>
+             <Part Id="2748329235" UnitPrice="48.5"/> 
+             <Quantity>2</Quantity>
+         </LineItem> 
+         <LineItem ItemNumber="15"> 
+             <Description>Lord of the Rings</Description>
+             <Part Id="86471875562" UnitPrice="54"/>
+             <Quantity>1</Quantity>
+         </LineItem> 
+         <LineItem ItemNumber="115"> 
+             <Description>Harry Potter and the Prisoner of Azkaban</Description>
+             <Part Id="27895674912" UnitPrice="50.95"/> 
+             <Quantity>5</Quantity>
+        </LineItem> 
+    </LineItems>
 </PurchaseOrder>
+</copy>
 ```
 
 ## Why Do We Need To Manage XML Documents?

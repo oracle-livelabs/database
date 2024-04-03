@@ -37,18 +37,22 @@ Database Actions allows you to connect to your Autonomous Database through vario
     Copy the following into the 'Worksheet' area and press the "Run Statement" button:
 
     ```
+    <copy>
     -- By default, the storage type is Binary XML
     CREATE TABLE purchaseorder
     (
         id  NUMBER PRIMARY KEY,
         doc XMLTYPE
     );
+    </copy>
     ```
 
     ```
+    <copy>
     SELECT column_name, storage_type 
         FROM user_xml_tab_cols 
         WHERE table_name ='PURCHASEORDER'
+    </copy>
     ```
     You should see the message "Table PURCHASEORDER created". 
 
@@ -103,6 +107,7 @@ Database Actions allows you to connect to your Autonomous Database through vario
     You can also use the external table approach to load the XML documents into your table. Here is the link for more info: [External table approach to load the data](https://blogs.oracle.com/datawarehousing/post/loading-xml-data-from-your-object-store-into-autonomous-database)
 
     ```
+    <copy>
     BEGIN
         DBMS_CLOUD.CREATE_EXTERNAL_TABLE (
             table_name =>'STAGING_TABLE',  credential_name =>null,  
@@ -115,6 +120,7 @@ Database Actions allows you to connect to your Autonomous Database through vario
     /
 
     INSERT INTO PURCHASEORDER SELECT 2, XMLTYPE(xml_document) FROM staging_table;
+    </copy>
     ```
 
     ![External table](./images/img-6.png)

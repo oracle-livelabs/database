@@ -319,11 +319,13 @@ In this lab, you will learn:
     Now consider you have an application or product that does not support XMLType data. In that case, you can serialize the XML data as CLOB or BLOB and view or process it in your application or product. Oracle XML DB provides an XMLSerialize function to achieve this goal. XMLSerialize also allows control over the layout of the serialized XML:
 
     ```
+    <copy>
     SELECT XMLSERIALIZE(DOCUMENT doc as CLOB)  XMLCONTENT
     FROM purchaseorder p
     WHERE XMLEXISTS ('$p/PurchaseOrder[Reference="MAllen-2024PST"]'
             PASSING P.DOC AS "p"
         );
+    </copy>
     ```
 
     ![Customized XML fragment](./images/img-19.png)![Alt text](image.png)
