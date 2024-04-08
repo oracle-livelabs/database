@@ -22,6 +22,10 @@
             "filename": "../../launchmds/launchmds.md"
         },
         {
+            "title": "Lab 3: Enable and explore Database Management for MySQL Heatwave",
+            "filename": "../../enabledbm/enabledbm.md"
+        },
+        {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
             "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
