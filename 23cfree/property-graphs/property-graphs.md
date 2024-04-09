@@ -41,7 +41,7 @@ Watch the video below for a quick walk-through of the lab.
 </if>
 
 ## Task 1 : Define a graph view on these tables
-1. In your SQL Developer window, click on the tab named hol23c_freepdb1, not the CreateKeys.sql tab that you are currently in.
+1. In your SQL Developer window, click on the tab named hol23c_freepdb1 or hol23c, not the CreateKeys.sql tab that you are currently in.
 
     ![Open hol23c tab](images/sql-hol23-tab.png)
 ​
@@ -244,7 +244,9 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 ​
     Now, let's insert some more data into BANK\_TRANSFERS. We will see that when rows are inserted in to the BANK\_TRANSFERS table, the BANK\_GRAPH is updated with corresponding edges.
 
-    Run this 
+    Run this by clicking the button to run the entire script, instead of the green play button.
+
+    ![Run script icon](images/run-script-icon.png)
    
     ```
     <copy>
@@ -295,6 +297,8 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 12.  So let’s insert more transfers which create some circular payment chains.
 
     We will be adding transfers from accounts **599**, **982**, and **407** into account **39**.
+
+    Run this by clicking the button to run the entire script, instead of the green play button.
    
     ```
     <copy>

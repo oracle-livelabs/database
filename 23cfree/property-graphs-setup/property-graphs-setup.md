@@ -82,10 +82,12 @@ This lab assumes you have:
 
     ![Command to start SQL](images/startup-sql.png)
 
-2. On the left side menu, you'll see hol23c_freepdb1 underneath Oracle Connections. Double click it to open the connection.
+2. On the left side menu, you'll see hol23c_freepdb1 underneath Oracle Connections. Double click it to open the connection. 
 
+    >**Note:** If you do **not** see the hol23c_freepdb1 connection available on the menu, please complete Task 3: Add the user connection and then go to step 4.
 
     ![Open the connection](images/hol23c-connection.png)
+
 
 3. Fill out the connection information with your password. The default password we will be using throughout this lab is Welcome123. If you have changed yours, please use that one. After you click okay, you should be connected to your user.
 
@@ -117,8 +119,19 @@ This lab assumes you have:
 
 10. Your schema setup is now complete.
 
+## (Optional) Task 3: Add the user connection
 
+1. If you do not already have the hol23c_freepdb1 connection, then click the box that says 'Create a Connection Manually'. 
 
+    ![Create a connection manually](images/create-connection.png)
+
+2. Fill out the fields inside of the box to match this image exactly. Make sure that the password you fill out is what you set it to for the user in Lab 1. To ensure it works, click the 'Test' button and ensure it says 'Status: Success' in the bottom left corner.
+
+    ![Test connection](images/new-db-connection.png)
+
+3. Click 'Connect'.
+
+    ![Connect](images/connect.png)
 
 ## Learn More
 * [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
