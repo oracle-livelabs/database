@@ -152,7 +152,7 @@ In this lab, you will:
 
 11.  Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous database is ready to use! Have a look at your instance's details here including the Database Name, Database Version, OCPU Count, and Storage.
 
-    ![Database instance homepage.](./images/last.png)
+    ![Database instance homepage.](./images/last.jpg)
 
 You may now **proceed to the next lab**.
 
