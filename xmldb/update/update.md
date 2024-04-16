@@ -18,6 +18,7 @@ In this lab, you will learn:
 - Be logged into your Oracle Cloud Account.
 - Go to the SQL worksheet in Database Actions.
 
+
 ## Task 1: Update XML Content
 
 1. Update an entire XML document

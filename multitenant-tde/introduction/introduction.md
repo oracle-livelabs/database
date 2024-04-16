@@ -29,5 +29,5 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 - **Authors** - Sean Provost, Enterprise Architect
-- **Contributors** - Mike Sweeney, Bryan Grenn, Bill Pritchett, Rene Fontcha
+- **Contributors** - Mike Sweeney, Bryan Grenn, Bill Pritchett, Divit Gupta, Rene Fontcha
 - **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, August 2023

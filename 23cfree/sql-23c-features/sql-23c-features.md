@@ -32,9 +32,8 @@ This lab assumes you have:
 ## Task 1: Start SQL*Plus
 To dive into these features, we'll be using SQL*Plus - an interactive and batch query tool that is installed with every Oracle Database installation. It has a command-line user interface.
 
-1. Your terminal should still be open since ORDS needs to be running. If the terminal has been closed, please return to the previous lab to restart ORDS. From the same terminal, enter this line:
+1. From the terminal, enter this line:
     <if type="sql-features">
-
     ```
     sqlplus hol23c/[your_password_here]@localhost:1521/freepdb1
     ```
@@ -46,7 +45,6 @@ To dive into these features, we'll be using SQL*Plus - an interactive and batch 
     ```
     </if>
     <if type="23c-install">
-
     ```
     sqlplus hol23c/[your_password_here]@localhost:1521/freepdb1
     ```
@@ -57,7 +55,6 @@ To dive into these features, we'll be using SQL*Plus - an interactive and batch 
     </copy>
     ```
     </if>
-
 ## Task 2: FROM clause - now optional
 An interesting feature introduced in Oracle Database 23c is optionality of FROM clause in SELECT statements. Up to this version the FROM clause was obligatory.
 
@@ -104,8 +101,8 @@ Oracle Database 23c introduces the new BOOLEAN datatype. This leverages the use 
     ```
     ```
     <copy>ALTER TABLE TEST_BOOLEAN modify (IS_SLEEPING default FALSE);
-    Table altered.
     </copy>
+    Table altered.
     ```
     Here, you can see the different types of Boolean input for Mick, Keith, and Ron. All are valid.
     This one uses the default "FALSE" value - Mick is not sleeping.
@@ -136,9 +133,10 @@ Oracle Database 23c introduces the new BOOLEAN datatype. This leverages the use 
     ```
     <copy>set linesize window
     SELECT * FROM test_boolean;</copy>
-
+    ```
+    ```
     NAME                                                                                                 IS_SLEEPING
-    ---------------------------------------------------------------------------------------------------- -----------
+    ------------------------------------------------------------------------------------------------ -----------
     Mick                                                                                                 FALSE
     Keith                                                                                                FALSE
     Ron                                                                                                  TRUE
@@ -166,7 +164,7 @@ Oracle Database 23c introduces the new BOOLEAN datatype. This leverages the use 
     ```
 
 3. Similarly, we can use this feature to create tables, if they do not already exist. Let's go ahead and create that DEPT table.
-    >NOTE: Any trailing numbers when pasting these into the terminal will not effect the command.select
+    >NOTE: Any trailing numbers when pasting these into the terminal will not effect the command.
 
     ```
     <copy>
@@ -341,7 +339,12 @@ This clause has been implemented long ago as a part of `EXECUTE IMMEDIATE` state
 ## Task 9: Joins in UPDATE and DELETE
 
 You may update table data via joins - based on foreign table conditions. There is no need for sub selects or `IN` clause.
-1. For example, instead of using this statement prior to 23c:
+1. Let's take a look at the employee salary information from the research department.
+    ```
+    <copy>select e.sal, e.empno from emp e, dept d where e.deptno=d.deptno and d.dname='RESEARCH';</copy>
+    ```
+
+2. Now to update the salary information, prior to 23c we would need to use a nested statement:
     ```
     UPDATE emp e set e.sal=e.sal*2
     WHERE e.deptno in
@@ -356,6 +359,11 @@ You may update table data via joins - based on foreign table conditions. There i
     WHERE e.deptno=d.deptno
     and d.dname='RESEARCH';</copy>
     5 rows updated.
+    ```
+
+3. You can see the salary has been successfully updated.
+    ```
+    <copy>select e.sal, e.empno from emp e, dept d where e.deptno=d.deptno and d.dname='RESEARCH';</copy>
     ```
 
 ## Task 10: Annotations, new metadata for database objects
@@ -374,10 +382,25 @@ With annotations you may store and retrieve metadata about a database objects. Y
     annotations (display 'employee_table');
     </copy>
     ```
-    Data Dictionary views such as `USER_ANNOTATIONS` and `USER_ANNOTATIONS_USAGE` can help to monitor the usage.
+
+    These will help to format the output.
     ```
     <copy>
-    SELECT * FROM user_annotations_usage;
+    set lines 200;
+    set pages 200;
+    col object_name format a25;
+    col object_type format a15;
+    col annotation_name format a15;
+    col annotation_value format a15;
+    col column_name format a20;
+    </copy>
+    ```
+
+2. Data Dictionary views such as `USER_ANNOTATIONS` and `USER_ANNOTATIONS_USAGE` can help to monitor the usage.
+    ```
+    <copy>
+    SELECT object_name, object_type, column_name, annotation_name, annotation_value
+    FROM user_annotations_usage;
     </copy>
     ```
 
@@ -398,15 +421,32 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     sqlplus / as sysdba
     </copy>
     ```
-2. Now create the domain `yearbirth` and the table `person`.
+    Set the correct container.
+    ```
+    <copy>alter session set container=FREEPDB1;</copy>
+    Session altered.
+    ```
+
+2. Grant privileges to our main user `hol23c` to create domains.
+    ```
+    <copy>grant db_developer_role to hol23c;</copy>
+    Grant succeeded.
+    ```
+    Connect to hol23c. Replace _`Welcome123`_ with the password you created in Lab 1.
+    ```
+    <copy>connect hol23c/Welcome123@localhost:1521/freepdb1</copy>
+    Connected.
+    ```
+
+3. Now create the domain `yearbirth` and the table `person`.
     ```
     <copy>CREATE DOMAIN yearbirth as number(4)
         constraint check ((trunc(yearbirth) = yearbirth) and (yearbirth >= 1900))
         display (case when yearbirth < 2000 then '19-' ELSE '20-' end)||mod(yearbirth, 100)
         order (yearbirth -1900)
         annotations (title 'yearformat');
-    Table created.
-    </copy>
+        </copy>
+    Domain created.
     ```
     ```
     <copy>
@@ -425,20 +465,20 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     ```
 
     ```
-    Name                                                                      Null?    Type
-    -------------------------------------------------------------------------- -------- ----------------------------
-    ID                                                                                  NUMBER(5)
-    NAME                                                                                VARCHAR2(50)
-    SALARY                                                                              NUMBER
-    PERSON_BIRTH                                                                        NUMBER(4) SYS.YEARBIRTH
+    Name					                   Null?    Type
+    ----------------------------------------- -------- ----------------------------
+    ID                                                  NUMBER(5)
+    NAME						                        VARCHAR2(50)
+    SALARY                                              NUMBER
+    PERSON_BIRTH					                    NUMBER(4) HOL23C.YEARBIRTH
     ```
 
-2. Now let's add data to our table.
+4. Now let's add data to our table.
     ```
     <copy>INSERT INTO person values (1,'MARTIN',3000, 1988);</copy>
     ```
 
-3. With the new function `DOMAIN_DISPLAY` you can display the property.
+5. With the new function `DOMAIN_DISPLAY` you can display the property.
     ```
     <copy>SELECT DOMAIN_DISPLAY(person_birth) FROM person;</copy>
     ```
@@ -449,26 +489,43 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     19-88
     ```
 
-4. Domain usage and Annotations can be monitored with data dictionary views.
+6. Domain usage and Annotations can be monitored with data dictionary views. First we'll set some formatting, then view `user_annotations_usage`.
+    ```
+    <copy>
+    set lines 200;
+    set pages 200;
+    col object_name format a15;
+    col object_type format a12;
+    col annotation_name format a15;
+    col annotation_value format a20;
+    col column_name format a15;
+    col domain_name format a12;
+    col domain_owner format a12;
+    </copy>
+    ```
     ```
     <copy>SELECT * FROM user_annotations_usage;</copy>
     ```
-
     ```
-    OBJECT_NAME     OBJECT_TYP COLUMN_NAME     DOMAIN_NAM DOMAIN_OWN ANNOTATION_NAME      ANNOTATION_VALUE
-    --------------- ---------- --------------- ---------- ---------- -------------------- ----------------
-    EMP_ANNOTATED   TABLE                                            DISPLAY              employee_table
-    PERSON          TABLE                                            DISPLAY              person_table
-    EMP_ANNOTATED   TABLE      EMPNO                                 IDENTITY
-    EMP_ANNOTATED   TABLE      EMPNO                                 DISPLAY              person_identity
-    EMP_ANNOTATED   TABLE      EMPNO                                 DETAILS              person_info
-    EMP_ANNOTATED   TABLE      SALARY                                DISPLAY              person_salary
-    EMP_ANNOTATED   TABLE      SALARY                                COL_HIDDEN
-    YEARBIRTH       DOMAIN                                           TITLE                yearformat
-    PERSON          TABLE      PERSON_BIRTH    YEARBIRTH  SCOTT      TITLE                yearformat
+    OBJECT_NAME	OBJECT_TYPE  COLUMN_NAME     DOMAIN_NAME  DOMAIN_OWNER ANNOTATION_NAME	ANNOTATION_VALUE
+    --------------- ------------ --------------- ------------ ------------ --------------- --------------------
+    EMP_ANNOTATED   TABLE                                                   DISPLAY
+    employee_table
+    PERSON          TABLE                                                   DISPLAY
+    person_table
+    EMP_ANNOTATED   TABLE	     EMPNO                                     IDENTITY
+    EMP_ANNOTATED   TABLE	     EMPNO                                     DISPLAY
+    person_identity
+    EMP_ANNOTATED   TABLE	     EMPNO                                     DETAILS
+    person_info
+    EMP_ANNOTATED   TABLE	     SALARY                                    DISPLAY
+    person_salary
+    EMP_ANNOTATED   TABLE	     SALARY                                    COL_HIDDEN
+    YEARBIRTH       DOMAIN                                                  TITLE
+    yearformat
+    PERSON          TABLE	     PERSON_BIRTH    YEARBIRTH	  HOL23C     TITLE
+    yearformat
     ```
-
-You may now **proceed to the next lab**.
 
 ## Learn More
 
@@ -484,4 +541,4 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 * **Author** - Ulrike Schwinn, Distinguished Data Management Expert; Hope Fisher, Program Manager
 * **Contributors** - Witold Swierzy, Data Management Expert; Stephane Duprat, Technical End Specialist
-* **Last Updated By/Date** - Hope Fisher, Aug 2023
+* **Last Updated By/Date** - Hope Fisher, Oct 2023

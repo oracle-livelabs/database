@@ -28,11 +28,13 @@ This lab assumes you have:
     <copy>
     SELECT name FROM race where race_id = 204;
 
-    INSERT INTO race_dv VALUES ('{"raceId" : 204,
-                                "name"   : "Miami Grand Prix",
-                                "laps"   : 57,
-                                "date"   : "2022-05-08T00:00:00",
-                                "podium" : {}}');
+    
+    INSERT INTO race_dv VALUES ('{"_id" : 204,
+                            "name"   : "Miami Grand Prix",
+                            "laps"   : 57,
+                            "date"   : "2022-05-08T00:00:00",
+                            "podium" : {}}');
+
 
     SELECT name FROM race where race_id = 204;
     </copy>
@@ -43,13 +45,13 @@ This lab assumes you have:
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
-    FROM race_dv WHERE json_value(data, '$.raceId') = 205;
+    FROM race_dv WHERE json_value(data, '$._id') = 205;
 
     INSERT INTO race
     VALUES(205, 'Japanese Grand Prix', 53, TO_DATE('2022-10-08','YYYY-MM-DD'), '{}');
 
     SELECT json_serialize(data PRETTY)
-    FROM race_dv WHERE json_value(data, '$.raceId') = 205;
+    FROM race_dv WHERE json_value(data, '$._id') = 205;
     </copy>
     ```
     ![Image alt text](images/task_1_2.png " ")
@@ -62,7 +64,7 @@ This lab assumes you have:
     <copy>
 
     SELECT json_serialize(data PRETTY)
-    FROM race_dv WHERE json_value(data, '$.raceId') = 204;
+    FROM race_dv WHERE json_value(data, '$._id') = 204;
 
     UPDATE race
     SET name = 'Miami Grand Prix',
@@ -73,14 +75,14 @@ This lab assumes you have:
 
     INSERT INTO driver_race_map
     VALUES(3, 204, 103, 1),
-    VALUES(4, 204, 104, 2),
-    VALUES(9, 204, 106, 3),
-    VALUES(10, 204, 105, 4);
+    (4, 204, 104, 2),
+    (9, 204, 106, 3),
+    (10, 204, 105, 4);
 
     COMMIT;
 
     SELECT json_serialize(data PRETTY)
-    FROM race_dv WHERE json_value(data, '$.raceId') = 204;
+    FROM race_dv WHERE json_value(data, '$._id') = 204;
 
     </copy>
     ```
@@ -91,7 +93,7 @@ This lab assumes you have:
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
-    FROM race_dv WHERE json_value(data, '$.raceId') = 205;
+    FROM race_dv WHERE json_value(data, '$._id') = 205;
     </copy>
     ```
     ![Image alt text](images/task_2_2.png " ")
@@ -104,7 +106,7 @@ This lab assumes you have:
 
     UPDATE race_dv
     SET data = ('{"_metadata": {"etag" : "BECAB2B6E186FEFB59EBD977418BA26F"},
-                    "raceId" : 205,
+                    "_id" : 205,
                     "name"   : "Japanese Grand Prix",
                     "laps"   : 53,
                     "date"   : "2022-03-20T00:00:00",
@@ -127,13 +129,9 @@ This lab assumes you have:
                                 "position"        : 3,
                                 "driverId"        : 104,
                                 "name"            : "Carlos Sainz Jr"}]}')
-    WHERE json_value(data, '$.raceId') = 205;
-
+    WHERE json_value(data, '$._id') = 205;
 
     COMMIT;
-
-    SELECT name, race_date FROM race where race_id = 205;
-    SELECT race_id, driver_id, position from driver_race_map where race_id = 205;
     </copy>
     ```
     ![Image alt text](images/task_2_3.png " ")
@@ -143,7 +141,10 @@ This lab assumes you have:
 1. We're going to delete a couple entries, but we want to see the current state of these tables first. Copy the code below and click **Run Script**.
     ```
     <copy>
-    SELECT json_serialize(data PRETTY) FROM race_dv WHERE json_value(data, '$.raceId') = 204;
+    SELECT name, race_date FROM race where race_id = 205;
+    SELECT race_id, driver_id, position from driver_race_map where race_id = 205;
+
+    SELECT json_serialize(data PRETTY) FROM race_dv WHERE json_value(data, '$._id') = 204;
     SELECT json_serialize(data PRETTY) FROM driver_dv WHERE json_value(data, '$.race.raceId') = 204;
 
     SELECT * FROM race where race_id = 204;
@@ -171,7 +172,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    SELECT json_serialize(data PRETTY) FROM race_dv WHERE json_value(data, '$.raceId') = 204;
+    SELECT json_serialize(data PRETTY) FROM race_dv WHERE json_value(data, '$._id') = 204;
     SELECT json_serialize(data PRETTY) FROM driver_dv WHERE json_value(data, '$.race.raceId') = 204;
 
     SELECT * FROM race where race_id = 204;
@@ -184,13 +185,14 @@ This lab assumes you have:
 
     ```
     <copy>
-    SELECT json_serialize(data PRETTY) FROM race_dv WHERE json_value(data, '$.raceId') = 205;
+
+    SELECT json_serialize(data PRETTY) FROM race_dv WHERE json_value(data, '$._id') = 205;
     SELECT json_serialize(data PRETTY) FROM driver_dv WHERE json_value(data, '$.race.raceId') = 205;
     SELECT * FROM race where race_id = 205;
 
-    DELETE FROM race_dv dv WHERE dv.data.raceId = 205;
+    DELETE FROM race_dv dv WHERE dv.data."_id" = 205;
 
-    SELECT json_serialize(data PRETTY) FROM race_dv WHERE json_value(data, '$.raceId') = 205;
+    SELECT json_serialize(data PRETTY) FROM race_dv WHERE json_value(data, '$._id') = 205;
     SELECT json_serialize(data PRETTY) FROM driver_dv WHERE json_value(data, '$.race.raceId') = 205;
     SELECT * FROM race where race_id = 205;
 

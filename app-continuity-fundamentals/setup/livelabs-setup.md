@@ -12,7 +12,7 @@ You will be using Terraform to create your database environment.
 
 **Needs to be modified to real link in LiveLabs env**
 
-- [db_system_rac_tf.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/db_system_rac_tf.zip) - Packaged terraform DB system creation script
+- [db_system_rac_tf.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/db_system_rac_tf.zip) - Packaged terraform DB system creation script
 
 2.  Save in your local downloads folder.
 

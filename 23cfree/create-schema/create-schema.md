@@ -42,7 +42,7 @@ This lab assumes you have:
     ![Set environment](images/oraenv.png " ")
 
 
-3. Next click [here](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/23c/swingbench15082023_jdk11.zip) to download the latest version of Swingbench.
+3. Next click [here](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/23c/swingbench15082023_jdk11.zip) to download the latest version of Swingbench.
 
 4. Once the download is complete, open a terminal or command prompt on your computer and navigate to the location where the file was saved.
 
