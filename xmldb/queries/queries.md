@@ -64,7 +64,7 @@ WHERE
 Copy the above statement into the worksheet area and press "Run Statement". All non-null documents are returned since all of them have the same XPath node.
 
 ![Documents satisfying the XPath](./images/img-2.png)
-    
+
 The next query is even more specific, and it will return the XML documents where XPath /PurchaseOrder/Reference has 'CJONES-2022PST' as the value.
 
 ```
