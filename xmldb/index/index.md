@@ -1,160 +1,166 @@
-# Index XML data
+# Index your XML documents
 
 ## Introduction
 Indexing XML data will give you quick access to the data and significantly improve the query performance. The use of indexes is particularly recommended for online transaction processing (OLTP) environments involving few updates.
 
-Generally, when your XML data contains structured, predictable part of data and your queries are known, we recommend using XMLIndex with a structured component. When you need to support ad-hoc XML queries, range, or text search queries, we recommend using the XML Search index. In this lab, we will explore both XMLIndex and XML Search Index.
+Generally, when your XML data contains structured, predictable fragments of data and your queries are known, we recommend using XMLIndex with a structured component. When you need to support ad-hoc XML queries, range, or text search queries, we recommend using the XML Search index. In this lab, we will explore both XMLIndex and XML Search Index.
 
-Estimated Time: 45 minutes
+Estimated Time: 20 minutes
 
 ### Objectives
 In this lab, you will learn:
--	Using Structured XMLIndex,
--	Using XML Search Index.
+-	How to use Structured XMLIndex,
+-	How to use XML Search Index.
 
 ### Prerequisites
-- Be logged into your Oracle Cloud Account.
-- Go to the SQL worksheet in Database Actions.
+- Be logged into your Oracle Cloud Account and have access to the SQL Worksheet in Database Actions.
 
-## Task 2: Index Structured XML Data
 
-1. Create Structured XMLIndex
+## Task 1: Create and use structured XMLIndexes
   
-    Often times users know the structure or pattern of the queries. For example, consider the following few examples: 
+Often times users know the structure or pattern of the queries and consequently the fragments of their XML documents that are used for selective access. For example, consider the following few examples: 
 
-    ```
-    <copy>
-    SELECT
-        XMLQUERY('/PurchaseOrder/LineItems/LineItem/@ItemNumber'
-            PASSING P.DOC
-        RETURNING CONTENT).GETCLOBVAL() as ItemNumber
-    FROM
-        PURCHASEORDER P
-    WHERE
-        XMLEXISTS ('/PurchaseOrder[Reference="CJONES-2022PST"]'
-            PASSING P.DOC
-        );
-    </copy>
-    ```
+```
+<copy>
+SELECT
+    XMLQUERY('/PurchaseOrder/LineItems/LineItem/@ItemNumber'
+        PASSING P.DOC
+    RETURNING CONTENT).GETCLOBVAL() as ItemNumber
+FROM
+    PURCHASEORDER P
+WHERE
+    XMLEXISTS ('/PurchaseOrder[Reference="CJONES-2022PST"]'
+        PASSING P.DOC
+    );
+</copy>
+```
 
-    ```
-    <copy>
-    CREATE OR REPLACE VIEW V_ORDERITEM AS 
-        SELECT M.REFERENCE, L.*
-        FROM PURCHASEORDER P,
-            XMLTABLE ('/PurchaseOrder' PASSING P.DOC
-                COLUMNS
-                    REFERENCE VARCHAR2(30) PATH 'Reference/text()',
-                    LINEITEMS XMLTYPE PATH 'LineItems/LineItem') M,
-            XMLTABLE ('/LineItem' PASSING M.LINEITEMS
-                COLUMNS
-                    ITEMNO NUMBER(38) PATH '@ItemNumber',
-                    PARTNO VARCHAR2(14) PATH 'Part/@Id',
-                    DESCRIPTION VARCHAR2(30) PATH 'Description',
-                    QUANTITY NUMBER(5) PATH 'Quantity') L;
-    </copy>
-    ```
-
-    The queries use a similar XPath to access /PurchaserOrder/Reference or /PurchaseOrder/LineItems/LineItem elements. We can create a structured XML index on these structured parts of the data. An XML index will also help the query performance significantly. 
-
-    The following XML index creates two internal index tables PO_INDEX_MASTER and PO_INDEX_LINEITEM. PO_INDEX_MASTER has columns reference and lineitem. Column lineitem is of type XMLTYPE which is virtual. It represents a collection and is passed to the second XMLTable construct to form the second-level relational index table, PO_INDEX_LINEITEM, which has columns itemno, partno, description, and quantity. Queries are optimized through Structured XML Index directly from the underneath relational index tables
-
-    ```
-    <copy>
-    DROP INDEX PURCHASEORDER_IDX;
-
-    CREATE INDEX PURCHASEORDER_IDX
-        ON purchaseorder(doc) INDEXTYPE IS XDB.XMLIndex
-        PARAMETERS ('
-            XMLTABLE PO_INDEX_MASTER
-                    ''/PurchaseOrder''
+```
+<copy>
+CREATE OR REPLACE VIEW V_ORDERITEM AS 
+    SELECT M.REFERENCE, L.*
+    FROM PURCHASEORDER P,
+        XMLTABLE ('/PurchaseOrder' PASSING P.DOC
             COLUMNS
-                reference VARCHAR2(30) PATH ''Reference/text()'',
-                lineitem  XMLTYPE PATH ''LineItems/LineItem'' VIRTUAL
-            XMLTable PO_INDEX_LINEITEM
-                    ''/LineItem'' PASSING lineitem
+                REFERENCE VARCHAR2(30) PATH 'Reference/text()',
+                LINEITEMS XMLTYPE PATH 'LineItems/LineItem') M,
+        XMLTABLE ('/LineItem' PASSING M.LINEITEMS
             COLUMNS
-                ITEMNO number(38)   PATH ''@ItemNumber'',
-                PARTNO varchar2(14)  PATH ''Part/@Id'',
-                DESCRIPTION varchar2(30) PATH ''Description'',
-                QUANTITY NUMBER(5) PATH ''Quantity''
-        ');
-    </copy>
-    ```
+                ITEMNO NUMBER(38) PATH '@ItemNumber',
+            PARTNO VARCHAR2(14) PATH 'Part/@Id',
+                DESCRIPTION VARCHAR2(100) PATH 'Description',
+                QUANTITY NUMBER(5) PATH 'Quantity') L;
+</copy>
+```
 
-    Copy the above statement into the worksheet area and press "Run Statement".
+The queries use a similar XPath to access /PurchaserOrder/Reference or /PurchaseOrder/LineItems/LineItem elements. We can create a structured XML index on these structured parts of the data. An XML index will also help the query performance significantly.
 
-    ![Create index](./images/img-3.png)
+Let us create a structured XML index for our sample table:
+```
+<copy>
+DROP INDEX PURCHASEORDER_IDX;
 
-    ```
-    <copy>
-    -- we can even create a secondary index on columns of the internal index tables. This will further improve the query performance
-    -- creating a secondary index on the REFERENCE column
-    CREATE UNIQUE INDEX REFERENCE_IDX ON
-        PO_INDEX_MASTER (
-            REFERENCE
-        );
+CREATE INDEX PURCHASEORDER_IDX
+    ON purchaseorder(doc) INDEXTYPE IS XDB.XMLIndex
+    PARAMETERS ('
+        XMLTABLE PO_INDEX_MASTER
+                ''/PurchaseOrder''
+        COLUMNS
+            reference VARCHAR2(30) PATH ''Reference/text()'',
+            lineitem  XMLTYPE PATH ''LineItems/LineItem'' VIRTUAL
+        XMLTable PO_INDEX_LINEITEM
+                ''/LineItem'' PASSING lineitem
+        COLUMNS
+            ITEMNO number(38)   PATH ''@ItemNumber'',
+            PARTNO varchar2(14)  PATH ''Part/@Id'',
+            DESCRIPTION varchar2(30) PATH ''Description'',
+            QUANTITY NUMBER(5) PATH ''Quantity''
+    ');
+</copy>
+```
+![Create index](./images/img-3.png)
 
-    -- creating a secondary index on the UPC column
-    CREATE INDEX UPC_IDX ON
-        PO_INDEX_LINEITEM (
-            PARTNO
-        );
-    </copy>
-    ```
+After you created the index, you will see an index PURCHASEORDER_IDX in your data dictionary, but you will also see two additional (structured) tables being created; those are so-called "path tables" that provide the structure for your XML index. You can describe them, however.
 
-    Copy the above statement into the worksheet area and press "Run Statement".
+The two internal XML index path tables PO\_INDEX\_MASTER and PO\_INDEX\_LINEITEM are named after the XMLTABLE parameters of your index creation statement. 
+- PO\_INDEX\_MASTER has columns reference and lineitem. Column lineitem is of type XMLTYPE which is virtual. It represents a collection and is passed to the second XMLTable construct to form the second-level relational index table, PO\_INDEX\_LINEITEM.
+- PO\_INDEX\_LiNEITEM has columns itemno, partno, description, and quantity. 
 
-    ![Secondary indexes](./images/img-4.png)
+Your queries are optimized through Structured XML Index directly from the underneath relational index tables. We will see this later in this lab.
 
-    ```
-    <copy>
-    SELECT
-        XMLQUERY('/PurchaseOrder/LineItems/LineItem/@ItemNumber'
-            PASSING P.DOC
-        RETURNING CONTENT).GETCLOBVAL()
-    FROM
-        PURCHASEORDER P
-    WHERE
-        XMLEXISTS ( '/PurchaseOrder[Reference="CJONES-2022PST"]'
-            PASSING P.DOC
-        );
-    </copy>
-    ```
+You can even create secondary indexes on the columns of these internal XML index tables, which will further improve the query performance. Let's do this now:
+```
+<copy>
+CREATE UNIQUE INDEX REFERENCE_IDX ON
+    PO_INDEX_MASTER (
+        REFERENCE
+    );
 
-    Copy the above statement into the worksheet area and press "Explain Plan".
+-- creating a secondary index on the UPC column
+CREATE INDEX UPC_IDX ON
+    PO_INDEX_LINEITEM (
+        PARTNO
+    );
+</copy>
+```
 
-    ![Explain plan 1](./images/img-5.png)
+Copy the above statement into the worksheet area and press "Run Statement".
 
-    ```
-    <copy>
-    CREATE OR REPLACE VIEW V_ORDERITEM AS  
-        SELECT M.REFERENCE, L.*
-        FROM PURCHASEORDER P,
-            XMLTABLE ('/PurchaseOrder' PASSING P.DOC
-                COLUMNS
-                    REFERENCE VARCHAR2(30) PATH 'Reference/text()',
-                    LINEITEMS XMLTYPE PATH 'LineItems/LineItem') M,
-            XMLTABLE ('/LineItem' PASSING M.LINEITEMS
-                COLUMNS
-                    ITEMNO NUMBER(38) PATH '@ItemNumber',
-                    PARTNO VARCHAR2(14) PATH 'Part/@Id',
-                    DESCRIPTION VARCHAR2(30) PATH 'Description',
-                    QUANTITY NUMBER(5) PATH 'Quantity') L;
+![Secondary indexes](./images/img-4.png)
 
-    SELECT * FROM V_ORDERITEM;
-    </copy>
-    ```
+Now let's see our indexes at work, using some sample queries.
 
-    Copy the above statement into the worksheet area and press "Explain Plan".
+```
+<copy>
+SELECT
+    XMLQUERY('/PurchaseOrder/LineItems/LineItem/@ItemNumber'
+        PASSING P.DOC
+    RETURNING CONTENT).GETCLOBVAL()
+FROM
+    PURCHASEORDER P
+WHERE
+    XMLEXISTS ( '/PurchaseOrder[Reference="CJONES-2022PST"]'
+        PASSING P.DOC
+    );
+</copy>
+```
 
-    ![Explain plan 2](./images/img-6.png)
+Copy the above statement into the worksheet area and press "Explain Plan".
 
-2. Create XML Search Index
+![Explain plan 1](./images/img-5.png)
+
+You will see that the access path is driven by our secondary index on /PurchaseOrder/Reference (index REFERENCE\_IDX on our path table PO\_INDEX\_MASTER) since we have a very selective predicate "REFERENCE"='CJONES-2022PST'.
+
+Now let's create a view and see what happens when I am just selecting from my view:
+```
+<copy>
+CREATE OR REPLACE VIEW V_ORDERITEM AS  
+    SELECT M.REFERENCE, L.*
+    FROM PURCHASEORDER P,
+        XMLTABLE ('/PurchaseOrder' PASSING P.DOC
+            COLUMNS
+                REFERENCE VARCHAR2(30) PATH 'Reference/text()',
+                LINEITEMS XMLTYPE PATH 'LineItems/LineItem') M,
+        XMLTABLE ('/LineItem' PASSING M.LINEITEMS
+            COLUMNS
+                ITEMNO NUMBER(38) PATH '@ItemNumber',
+                PARTNO VARCHAR2(14) PATH 'Part/@Id',
+                DESCRIPTION VARCHAR2(30) PATH 'Description',
+                QUANTITY NUMBER(5) PATH 'Quantity') L;
+
+SELECT * FROM V_ORDERITEM;
+</copy>
+```
+
+Copy the above statement into the worksheet area and press "Explain Plan". You see how the structures built for our structured XML index work together to optimize the master-detail access of our XML documents.
+
+![Explain plan 2](./images/img-6.png)
+
+## Task 2: Create and use XML Search Indexes
     
-    In case of ad-hoc or free-form XML queries, that don’t follow a well-defined structure as appropriate for the Structured XMLIndex discussed in the previous section, we recommend creating an XML Search Index instead. The search index can be used to get a performance boost on both full-text as well as range search queries.
+In case of ad-hoc or free-form XML queries, that don’t follow a well-defined structure as appropriate for the Structured XMLIndex discussed in the previous section, we recommend creating an XML Search Index instead. The search index can be used to get a performance boost on both full-text as well as range search queries.
 
-    2.a. The first step is to create a section group and set the search preferences:
+1. The first step is to create a section group and set the search preferences:
         ```
         <copy>
         BEGIN
@@ -176,11 +182,11 @@ In this lab, you will learn:
         </copy>
         ```
 
-        Copy the above statement into the worksheet area and press "Run Statement".
+    Copy the above statement into the worksheet area and press "Run Statement". You can ignore the errors from the first two drop operations if you run this lab for the first time. The lab is built in a way that you can re-run individual sections.
 
-        ![Set preferences](./images/img-7.png)
+    ![Set preferences](./images/img-7.png)
 
-    2.b. The second step is to actually create the search index on the base table using the preferences created in the previous step: 
+2. The second step is to actually create the search index on the base table using the preferences created in the previous step: 
         ```
         <copy>
         CREATE INDEX PURCHASEORDER_XQFT_IDX ON
@@ -192,16 +198,15 @@ In this lab, you will learn:
         </copy>
         ```
 
-        Copy the above statement into the worksheet area and press "Run Statement".
+    Copy the above statement into the worksheet area and press "Run Statement".
 
-        ![Create XML search index](./images/img-8.png)
+    ![Create XML search index](./images/img-8.png)
 
-3. Run queries and check explain plan
-    Now that the search index has been set up, try running a variety of different queries and verify if the index is picked for each one of them by clicking on explain plan.
+Now that the search index has been set up, try running a variety of different queries and verify if the index is picked for each one of them by clicking on explain plan.
 
-    First, let’s look at a few text-search queries:
+Let’s look at a few text-search queries:
 
-    3.1. Find all “Overnight” orders
+1. Find all “Overnight” orders
     ```
     <copy>
     SELECT
@@ -218,7 +223,7 @@ In this lab, you will learn:
 
     ![Explain plan SIQ1](./images/img-9.png)
 
-    3.2. Orders where the description contains “Harry” and “Potter”
+2. Orders where the description contains “Harry” and “Potter”
     ```
     <copy>
     SELECT
@@ -236,7 +241,7 @@ In this lab, you will learn:
 
     ![Explain plan SIQ2](./images/img-10.png)
 
-    3.3. Orders where the description contains the words “C++” or “Java”
+3. Orders where the description contains the words “C++” or “Java”
 
     ```
     <copy>
@@ -256,7 +261,7 @@ In this lab, you will learn:
     ![Explain plan SIQ3](./images/img-11.png)
     
 
-    3.4. Orders with price > 50
+4. Orders with price > 50
     ```
     <copy>
     SELECT
@@ -276,7 +281,7 @@ In this lab, you will learn:
     ![Explain plan SIQ4](./images/img-12.png)
     
 
-    3.5. Orders where the Requestor name is lexicographically > “Jake”
+5. Orders where the Requestor name is lexicographically > “Jake”
 
     ```
     <copy>
@@ -296,18 +301,11 @@ In this lab, you will learn:
 
     ![Explain plan SIQ5 with stemming](./images/img-13.png)
  
+You have now experienced both structured XML indexes and search XML indexes in action to optimize various predicates and search condition. Feel free to experience more with other variants of queries if you like. 
+
 You may now **proceed to the next lab**.
-
-## Learn More
-
-- [Manage and Monitor Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=553)
-- [Scale and Performance in the Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=608)
-- [Oracle XML DB](https://www.oracle.com/database/technologies/appdev/xmldb.html)
-- [Oracle Autonomous Database](https://www.oracle.com/database/autonomous-database.html)
-- [XML DB Developer Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/adxdb/index.html)
-
 
 ## Acknowledgements
 * **Author** - Harichandan Roy, Principal Member of Technical Staff, Oracle Document DB
 * **Contributors** -  XDB Team
-* **Last Updated By/Date** - Harichandan Roy, February 2023
+- **Last Updated By/Date** - Ernesto Alvarez, April 2024
