@@ -26,11 +26,11 @@
       "filename": "../../queries/queries.md"
     },
     {
-      "title": "Lab 4: Generate relational data from XML data",
+      "title": "Lab 4: Exposing XML transparently as relational data",
       "filename": "../../xml2relational/xml2relational.md"
     },
     {
-      "title": "Lab 5: Convert relational data to XML data",
+      "title": "Lab 5: Generate XML data from relational tables",
       "filename": "../../relational2xml/relational2xml.md"
     },
     {

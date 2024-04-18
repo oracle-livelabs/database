@@ -41,7 +41,7 @@ Database Actions allows you to connect to your Autonomous Database through vario
     -- By default, the storage type is Binary XML
     CREATE TABLE purchaseorder
     (
-        id  NUMBER,
+        id  NUMBER PRIMARY KEY,
         doc XMLTYPE
     );
     </copy>
@@ -49,11 +49,9 @@ Database Actions allows you to connect to your Autonomous Database through vario
 
     ```
     <copy>
-    -- You can also specify the storage type
-    CREATE TABLE PURCHASEORDER (
-        ID  NUMBER,
-        DOC XMLTYPE
-    ) XMLTYPE DOC STORE AS BINARY XML;
+    SELECT column_name, storage_type 
+        FROM user_xml_tab_cols 
+        WHERE table_name ='PURCHASEORDER'
     </copy>
     ```
     You should see the message "Table PURCHASEORDER created". 
@@ -68,11 +66,7 @@ Database Actions allows you to connect to your Autonomous Database through vario
 
     Use the 'trashcan' icon to delete the previous statement from the Worksheet area. Copy the following SQL into the worksheet area. Make sure you highlight the whole statement with your mouse and press the "Run Statement" button:
 
-    Here we are assuming that the XML files are stored in the Object store. So, we will now load the XML data to our table from the Object store. If you are very new to the Object Store, then please consider finishing the Lab 5 from here [Full-Text workshop] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3286&p210_wec=&session=123567123391417).
-
-    **Note:** The value of OBJECT_URI has been modified here. ```url/livelab-xmldoc-1.xml``` is not the actual value.
-    The actual link is the authenticated link retrieved from the object store. Please refer to object store how to get it.
-    If you find it difficult to load the data into the tables, please use other approaches you find appropriate. The most easy to follow approach is ```insert into [TABLE] (...)```. 
+    Here we are using XML files stored in the Object store. So, we will now load the XML data to our table from the Object store.
 
     ```
     <copy>
@@ -96,8 +90,8 @@ Database Actions allows you to connect to your Autonomous Database through vario
         BLOB_IN   BLOB;
         X         XMLTYPE;
     BEGIN
-        BLOB_IN := DBMS_CLOUD.GET_OBJECT(CREDENTIAL_NAME => 'OBJ_STORE_CRED', 
-                                        OBJECT_URI => 'url/livelab-xmldoc-1.xml'
+        BLOB_IN := DBMS_CLOUD.GET_OBJECT(CREDENTIAL_NAME => null, 
+                                    OBJECT_URI => 'https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/livelab-xmldoc-1.xml'
         );
         X := XMLTYPE(BLOB_IN, nls_charset_id('AL32UTF8'));
         INSERT INTO PURCHASEORDER VALUES (
@@ -110,59 +104,26 @@ Database Actions allows you to connect to your Autonomous Database through vario
 
     ![Insert from the object store](./images/img-3.png)
 
-    Similarly, we can insert other sample documents.
+    You can also use the external table approach to load the XML documents into your table. Here is the link for more info: [External table approach to load the data](https://blogs.oracle.com/datawarehousing/post/loading-xml-data-from-your-object-store-into-autonomous-database)
 
     ```
     <copy>
-    -- Inserting xmldoc-2
-    DECLARE
-        BLOB_IN   BLOB;
-        X         XMLTYPE;
     BEGIN
-        BLOB_IN := DBMS_CLOUD.GET_OBJECT(CREDENTIAL_NAME => 'OBJ_STORE_CRED', 
-                                        OBJECT_URI => 'url/livelab-xmldoc-2.xml'
-        );
-        X := XMLTYPE(BLOB_IN, nls_charset_id('AL32UTF8'));
-        INSERT INTO PURCHASEORDER VALUES (
-            2,
-            X
+        DBMS_CLOUD.CREATE_EXTERNAL_TABLE (
+            table_name =>'STAGING_TABLE',  credential_name =>null,  
+            format => json_object('delimiter' value '%$#^@%$', 'recorddelimiter' value '0x''02'''),
+            file_uri_list =>'https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/livelab-xmldoc-2.xml',
+            column_list => 'xml_document clob',
+            field_list => 'xml_document CHAR(1000000)'
         );
     END;
+    /
+
+    INSERT INTO PURCHASEORDER SELECT 2, XMLTYPE(xml_document) FROM staging_table;
     </copy>
     ```
 
-    ```
-    <copy>
-    -- Inserting xmldoc-3
-    DECLARE
-        BLOB_IN   BLOB;
-        X         XMLTYPE;
-    BEGIN
-        BLOB_IN := DBMS_CLOUD.GET_OBJECT(CREDENTIAL_NAME => 'OBJ_STORE_CRED', 
-                                        OBJECT_URI => 'url/livelab-xmldoc-3.xml'
-        );
-        X := XMLTYPE(BLOB_IN, nls_charset_id('AL32UTF8'));
-        INSERT INTO PURCHASEORDER VALUES (
-            3,
-            X
-        );
-    END;
-
-    COMMIT;
-    </copy>
-    ```
-
-    ```
-    <copy>
-    -- Check if all docs are inserted correctly
-    SELECT
-        t.DOC.GETCLOBVAL()
-    FROM
-        PURCHASEORDER t;
-    </copy>
-    ```
-
-    You can also use the external table approach to load the XML documents into your table. Here is the link for more info: [External table approach to load the data] (https://blogs.oracle.com/datawarehousing/post/loading-xml-data-from-your-object-store-into-autonomous-database)
+    ![External table](./images/img-6.png)
 
     If your XML documents are smaller, you can even use the ‘insert into’ statements to insert the docs into your table.
 
@@ -171,39 +132,50 @@ Database Actions allows you to connect to your Autonomous Database through vario
     INSERT INTO PURCHASEORDER VALUES (
         3,
         '<PurchaseOrder>
-                        <Reference>ROY-1PDT</Reference>
-                        <Requestor>H. Roy 1</Requestor>
-                        <User>ROY-1</User>
-                        <CostCenter>H1</CostCenter>
-                        <ShippingInstructions>
-                            <name>H. Roy 1</name>
-                            <Address>
-                                <street>1 Nil Rd, Building 1</street>
-                                <city>SFO-1</city>
-                                <state>CA</state>
-                                <zipCode>99236</zipCode>
-                                <country>USA</country>
-                            </Address>
-                        </ShippingInstructions>
-                        <SpecialInstructions>Overnight</SpecialInstructions>
-                        <LineItems>
-                            <LineItem ItemNumber="1">
-                                <Part Description="Monitor" UnitPrice="350">1</Part>
-                                <Quantity>1</Quantity>
-                            </LineItem>
-                            <LineItem ItemNumber="2">
-                                <Part Description="Headphone" UnitPrice="550">1</Part>
-                                <Quantity>1</Quantity>
-                            </LineItem>
-                            <LineItem ItemNumber="3">
-                                <Part Description="Speaker" UnitPrice="750">1</Part>
-                                <Quantity>1</Quantity>
-                            </LineItem>
-                        </LineItems>
-                    </PurchaseOrder>'
+            <Reference>MAllen-2024PST</Reference>
+            <Actions>
+                <Action>
+                    <User>BLAKE</User>
+                </Action>
+            </Actions>
+            <Requestor>Michael Allen</Requestor>
+            <User>MALLEN</User>
+            <CostCenter>T10</CostCenter>
+            <ShippingInstructions>
+                <name>Michael Allen</name>
+                <Address>
+                    <street>300 Oracle Parkway</street>
+                    <city>Redwood Shores</city>
+                    <state>CA</state>
+                    <zipCode>94065</zipCode>
+                    <country>USA</country>
+                </Address>
+                <telephone>650-506-7300</telephone>
+            </ShippingInstructions>
+            <SpecialInstructions>Overnight</SpecialInstructions>
+            <LineItems> 
+                <LineItem ItemNumber="10"> 
+                    <Description>Java complete reference</Description>
+                    <Part Id="2748329425" UnitPrice="10"/>
+                    <Quantity>5</Quantity>
+                </LineItem> 
+                <LineItem ItemNumber="20"> 
+                    <Description>Julius Caesar</Description>
+                    <Part Id="86471878626" UnitPrice="36.5"/>
+                    <Quantity>10</Quantity>
+                </LineItem> 
+                <LineItem ItemNumber="30"> 
+                    <Description>anthology of short stories</Description>
+                    <Part Id="86471878637" UnitPrice="49"/>
+                    <Quantity>5</Quantity>
+                </LineItem> 
+            </LineItems>
+        </PurchaseOrder>'
     );
     </copy>
     ```
+
+    ![External table](./images/img-7.png)
 
     You can choose any of the above approaches to insert the XML documents into the table. 
 
@@ -225,9 +197,9 @@ Database Actions allows you to connect to your Autonomous Database through vario
     <copy>
     -- Check if all docs are inserted correctly
     SELECT
-        t.DOC.GETCLOBVAL()
+        COUNT(*)
     FROM
-        PURCHASEORDER t;
+        PURCHASEORDER;
     </copy>
     ```
 
@@ -245,7 +217,8 @@ Database Actions allows you to connect to your Autonomous Database through vario
         t.id,
         t.doc.getclobval()
     FROM
-        PURCHASEORDER t;
+        PURCHASEORDER t
+    ORDER BY t.id;
     </copy>
     ```
 
@@ -259,15 +232,12 @@ Database Actions allows you to connect to your Autonomous Database through vario
 You may now **proceed to the next lab**.
 
 ## Learn More
-- [Database 19c - JSON] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=638)
-- [Developing with JSON and SODA in Oracle Database] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=831)
-- [JSON without Limits] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=836)
-- [Using the Database API for MongoDB] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3152)
-- [Database API for MongoDB - The Basics] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3221)
-- [Full-Text Search in Oracle Database] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3286)
-- [Autonomous Database Dedicated](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=677)
+
 - [Manage and Monitor Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=553)
-- [Scaling and Performance in the Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=608)
+- [Scale and Performance in the Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=608)
+- [Oracle XML DB](https://www.oracle.com/database/technologies/appdev/xmldb.html)
+- [Oracle Autonomous Database](https://www.oracle.com/database/autonomous-database.html)
+- [XML DB Developer Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/adxdb/index.html)
 
 
 ## Acknowledgements
