@@ -1,7 +1,7 @@
-# Create tables and populate data
+# Create your first XML table and insert some XML documents
 
 ## Introduction
-This lab will use the SQL Workshop in Database Actions from the Autonomous Transaction Processing page. We will create a simple table with an XMLType column in it and populate the table with some XML documents.
+You will use the SQL Worksheet in Database Actions from your Autonomous Database. We will create a sample table with an XMLType column and populate the table with some XML documents.
 
 Estimated Time: 15 minutes
 
@@ -10,29 +10,23 @@ In this lab, you will learn:
 1.	How to create and populate a table with an XMLType column
 
 ### Prerequisites
-- Be logged into your Oracle Cloud Account
+- Access to an Oracle Autonomous Database, Database Actions web interface.
 
 ## Task 1: Open Database Actions
 1.	Log in to the Oracle Cloud.
-2.	If you are using a Free Trial or Always Free account, and you want to use Always Free Resources, you need to be in a region where Always Free Resources are available. You can see your current default Region in the top, right-hand corner of the page.
-3.	Click the navigation menu in the upper left to show top-level navigation choices.
-4.	Click on Oracle Database and choose Autonomous Transaction Processing.
-5.	If using FreeTier, your compartment should be the root compartment for your tenancy.
-Note: Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
-6.	You should see your database XMLDB listed in the center. Click on the database name "XMLDB".
-7.	On the database page, choose Database Actions.
-8.	You are now in Database Actions.
-Database Actions allows you to connect to your Autonomous Database through various browser-based tools. We will just be using the SQL workshop tool.
-9.	You should be in the Database Actions panel. Click on the SQL card.
+6.	Navigate to your previously created Autonomous Database "XMLDB" (or the name you have chosen).
+7.	On the database detail page, choose Database Actions. You can navigate to the Database Actions overview page or go directly to the SQL Worksheet
+
+![Database Actions](./images/database_actions.png)
 
 ## Task 2: Create and Populate a Table with an XMLType Column
-1.	Go to Database Actions panel
+1.	Enter the SQL Worksheet
 
-    Click on the SQL card. When you first enter SQL, you will get a tour of the features. We recommend you step through it, but you can skip the tour by clicking on the "X". The tour is available at any time by clicking the tour button. You can dismiss the warning that you are logged in as an ADMIN user.
+    When you first enter SQL, you will get a tour of the features. We recommend you step through it, but you can skip the tour by clicking on the "X" The tour is available at any time by clicking the tour button. You can dismiss the warning that you are logged in as an ADMIN user.
 
 2.	Create a table with XMLType column
 
-    We will create a simple table to record the sample purchase orders. It contains a numeric column for purchase ID and an XMLType column for purchase details. 
+    We will create a simple table to record the sample purchase orders. It contains a numeric column for purchase ID and an XMLType column for our purchase details.
 
     Copy the following into the 'Worksheet' area and press the "Run Statement" button:
 
@@ -47,13 +41,6 @@ Database Actions allows you to connect to your Autonomous Database through vario
     </copy>
     ```
 
-    ```
-    <copy>
-    SELECT column_name, storage_type 
-        FROM user_xml_tab_cols 
-        WHERE table_name ='PURCHASEORDER'
-    </copy>
-    ```
     You should see the message "Table PURCHASEORDER created". 
 
     ![Create table](./images/img-1.png)
@@ -62,25 +49,22 @@ Database Actions allows you to connect to your Autonomous Database through vario
 
     ![Table list](./images/img-2.png)
 
+    You can check the storage type 'BINARY' of your XMLtype column in the data dictionary
+    ```
+    <copy>
+    SELECT column_name, storage_type 
+        FROM user_xml_tab_cols 
+        WHERE table_name ='PURCHASEORDER'
+    </copy>
+    ```
+
+
 3.	Populate the table with a few rows
 
     Use the 'trashcan' icon to delete the previous statement from the Worksheet area. Copy the following SQL into the worksheet area. Make sure you highlight the whole statement with your mouse and press the "Run Statement" button:
 
-    Here we are using XML files stored in the Object store. So, we will now load the XML data to our table from the Object store.
+    Here we are using XML files stored in the Object store. The files are created with pre-authentication, so you do not need to provide a credential for authentication and authorization.
 
-    ```
-    <copy>
-    -- Create the credentials
-    begin
-    DBMS_CLOUD.create_credential(
-        credential_name => 'OBJ_STORE_CRED',
-        username => 'your_email_address',
-        password => 'your_password'
-    );
-    end;
-    / 
-    </copy>
-    ```
     Now let’s insert the documents from the object store.
 
     ```
@@ -125,7 +109,7 @@ Database Actions allows you to connect to your Autonomous Database through vario
 
     ![External table](./images/img-6.png)
 
-    If your XML documents are smaller, you can even use the ‘insert into’ statements to insert the docs into your table.
+    If your XML documents are smaller, you can even use the INSERT INTO’ statements to insert the XML documents into your table.
 
     ```
     <copy>
@@ -193,6 +177,8 @@ Database Actions allows you to connect to your Autonomous Database through vario
     </copy>
     ```
 
+    Now the table PURCHASEORDER table should have 5 rows.
+ 
     ```
     <copy>
     -- Check if all docs are inserted correctly
@@ -203,7 +189,7 @@ Database Actions allows you to connect to your Autonomous Database through vario
     </copy>
     ```
 
-    Now the table PURCHASEORDER table should have 5 rows.
+    
 
     ![Number of rows](./images/img-4.png)
 
@@ -233,14 +219,12 @@ You may now **proceed to the next lab**.
 
 ## Learn More
 
-- [Manage and Monitor Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=553)
-- [Scale and Performance in the Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=608)
+* [Get started with Oracle Autonomous Database Serverless ](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/videos.html)
+- [XML DB Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/adxdb/index.html)
 - [Oracle XML DB](https://www.oracle.com/database/technologies/appdev/xmldb.html)
-- [Oracle Autonomous Database](https://www.oracle.com/database/autonomous-database.html)
-- [XML DB Developer Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/adxdb/index.html)
 
 
 ## Acknowledgements
 * **Author** - Harichandan Roy, Principal Member of Technical Staff, Oracle Document DB
 * **Contributors** -  XDB Team
-* **Last Updated By/Date** - Harichandan Roy, February 2023
+- **Last Updated By/Date** - Ernesto Alvarez, April 2024

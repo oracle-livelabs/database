@@ -2,19 +2,18 @@
 
 ## Introduction
 
-Estimated Time: 20 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 In this lab, you will learn:
--	Generating XML data from relational data
+-	How to generate XML data from relational data
 
 ### Prerequisites
-- Be logged into your Oracle Cloud Account.
-- Go to the SQL worksheet in Database Actions.
+- Be logged into your Oracle Cloud Account and have access to the SQL Worksheet in Database Actions.
 
 ## Task 1: Generate XML data from relational tables
 
-We have learned how to generate relational data from XML content in Lab 4. In this lab, we will generate XML content from relational data. In many ways, it will be useful. Just for example, you can send data from relational tables as a response to an application’s request in XML format. Let’s see how to achieve that.
+We have learned how to generate relational data from XML content in Lab 4. Now we will do the reverse and generate XML content from relational data. In many ways, it will be useful. Just for example, you can send data from relational tables as a response to an application’s request in XML format. Let’s see how to achieve that.
 
 First, we will create two relational tables and then populate them with some sample data.
 
@@ -110,18 +109,18 @@ Copy the above statement into the worksheet area and press "Run Statement".
 
 ![XML data from relational data](./images/img-4.png)
 
+You have just experienced in just a couple of minutes how easy it is to generate XML documents from relational data. It's equally easy to wrap such statements in a view and expose our XML documents transparently for any application, hiding the XML generation statement within a view definition.
+
 You may now **proceed to the next lab**.
 
 ## Learn More
 
-- [Manage and Monitor Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=553)
-- [Scale and Performance in the Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=608)
+* [Get started with Oracle Autonomous Database Serverless ](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/videos.html)
+- [XML DB Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/adxdb/index.html)
 - [Oracle XML DB](https://www.oracle.com/database/technologies/appdev/xmldb.html)
-- [Oracle Autonomous Database](https://www.oracle.com/database/autonomous-database.html)
-- [XML DB Developer Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/adxdb/index.html)
 
 
 ## Acknowledgements
 * **Author** - Harichandan Roy, Principal Member of Technical Staff, Oracle Document DB
 * **Contributors** -  XDB Team
-* **Last Updated By/Date** - Harichandan Roy, February 2023
+- **Last Updated By/Date** - Ernesto Alvarez, April 2024
