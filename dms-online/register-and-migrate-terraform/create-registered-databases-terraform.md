@@ -69,6 +69,13 @@ For this task you need the following info from previous steps:
 
   ![Screenshot of  confirm create connection](images/connection-details-cdb.png =50%x*)
 
+7. Press **Test connection** to confirm that your Database Connection details are correct
+
+  ![Screenshot of CDB connection test](images/test-cdb.png =50%x*)
+    - If the test is not successful, correct your connection details and try again.
+
+  ![Screenshot of close connection test](images/close-test.png =50%x*)  
+
 ## Task 2: Create Database Connection for Source PDB
 
 For this task you need the following info from previous steps:
@@ -112,6 +119,13 @@ For this task you need the following info from previous steps:
 
   ![Screenshot of  confirm create connection](images/connection-details-pdb.png =50%x*)
 
+7. Press **Test connection** to confirm that your Database Connection details are correct
+
+  ![Screenshot of PDB connection test](images/test-pdb.png =50%x*)
+    - If the test is not successful, correct your connection details and try again.
+
+  ![Screenshot of close connection test](images/close-test.png =50%x*)  
+
 ## Task 3: Create Database Connection for Target ADB
 
 For this task you need the following info from previous steps:
@@ -149,6 +163,13 @@ For this task you need the following info from previous steps:
 
   Please wait for all Database Connection resources to display as **Active** before proceeding to the next task.
 
+7. Press **Test connection** to confirm that your Database Connection details are correct
+
+  ![Screenshot of CDB connection test](images/test-adb.png =50%x*)
+    - If the test is not successful, correct your connection details and try again.
+
+  ![Screenshot of close connection test](images/close-test.png =50%x*)    
+
 
 ## Task 4: Create Migration
 
@@ -169,7 +190,7 @@ For this task you need the following info from previous steps:
 
   4. Press **Next**
 
-  5. On the page **Select Databases**, fill in the following entries, otherwise leave defaults:
+  5. On the page **Select Databases**, fill in the following entries with the Database Connections created in tasks 1 to 3, otherwise leave defaults:
       - Source Database: **SourcePDB**
       - *Check* Database is pluggable database (PDB)
       - Registered Container Database: **SourceCDB**

@@ -191,4 +191,4 @@ In this lab, you will be guided through the following tasks:
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2023
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, February 2024

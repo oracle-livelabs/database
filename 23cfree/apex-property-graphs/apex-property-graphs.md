@@ -99,29 +99,33 @@ This lab assumes:
 
     ![Install the application](images/install-application.png)
 
-8.  Click Run Application.
+
+8.  Click Install Supporting Objects.
+
+    ![Install supporting objects](images/install-supporting-objects.png)
+
+9.  Click Run Application.
 
     ![Run the application](images/run-application.png)
 
-
-9.  Login.
+10.  Login.
     **NOTE:** admin is case-sensitive.
 
     ![Log back in](images/login-final.png)
 
 
-10. Click Property Graph queries with SQL box.
+11. Click Property Graph queries with SQL box.
     ![Property graph queries selection](images/property-graph-queries.png)
     
-11. Scroll through output to see the queries that you had ran in the prior lab visualized.
+12. Scroll through output to see the queries that you had ran in the prior lab visualized.
     ![Final scroll through the output](images/final-output.png)
 
-12. Click the hamburger menu in the upper left corner of the application and click "Using the Graph Visualization Plugin".
+13. Click the hamburger menu in the upper left corner of the application and click "Using the Graph Visualization Plugin".
 
-13. Scroll through the output to see the Graph Viz plugin utilized.
+14. Scroll through the output to see the Graph Viz plugin utilized.
     ![Graph viz](images/graph-viz.png)
 
-14. You have now completed this lab.
+15. You have now completed this lab.
 
 ## Learn More
 * [Oracle Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/index.html)
