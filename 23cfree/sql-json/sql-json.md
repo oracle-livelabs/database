@@ -30,7 +30,7 @@ This lab assumes you have:
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
-    FROM race_dv WHERE json_value(data, '$.raceId') = 201;
+    FROM race_dv WHERE json_value(data, '$._id') = 201;
     </copy>
     ```
 
@@ -50,7 +50,7 @@ This lab assumes you have:
     <copy>
     UPDATE race_dv
     SET data = ('{"_metadata": {"etag" : "2E8DC09543DD25DC7D588FB9734D962B"},
-                    "raceId" : 201,
+                    "_id" : 201,
                     "name"   : "Bahrain Grand Prix",
                     "laps"   : 57,
                     "date"   : "2022-03-20T00:00:00",
@@ -77,8 +77,8 @@ This lab assumes you have:
                                 "position"        : 4,
                                 "driverId"        : 105,
                                 "name"            : "George Russell"} ]}')
-    WHERE json_value(data, '$.raceId') = 201;
-    
+    WHERE json_value(data, '$._id') = 201;
+
     COMMIT;
     </copy>
     ```
@@ -88,7 +88,7 @@ This lab assumes you have:
     ```
     <copy>
     SELECT json_serialize(data PRETTY)
-    FROM race_dv WHERE json_value(data, '$.raceId') = 201;
+    FROM race_dv WHERE json_value(data, '$._id') = 201;
     </copy>
     ```
     ![Image alt text](images/task_2_3.png " ")
@@ -143,7 +143,7 @@ Switch Charles Leclerc's and George Russell's teams. This can be done by updatin
     <copy>
     UPDATE team_dv dv
     SET data = ('{_metadata : {"etag" : "855840B905C8CAFA99FB9CBF813992E5"},
-                    "teamId" : 2,
+                    "_id" : 2,
                     "name"   : "Mercedes",
                     "points" : 40,
                     "driver" : [ {"driverId" : 106,
@@ -156,7 +156,7 @@ Switch Charles Leclerc's and George Russell's teams. This can be done by updatin
 
     UPDATE team_dv dv
     SET data = ('{_metadata : {"etag" : "DA69DD103E8BAE95A0C09811B7EC9628"},
-                    "teamId" : 302,
+                    "_id" : 302,
                     "name"   : "Ferrari",
                     "points" : 30,
                     "driver" : [ {"driverId" : 105,
@@ -207,7 +207,7 @@ Switch Charles Leclerc's and George Russell's teams. This can be done by updatin
     <copy>
     UPDATE driver_dv dv
     SET DATA = ('{_metadata : {"etag" : "FCD4CEC63897F60DEA1EC2F64D3CE53A"},
-                    "driverId" : 103,
+                    "_id" : 103,
                     "name" : "Charles Leclerc",
                     "points" : 25,
                     "teamId" : 2,
@@ -222,7 +222,7 @@ Switch Charles Leclerc's and George Russell's teams. This can be done by updatin
                     }
                     ]
                 }')
-    WHERE dv.data.driverId = 103;
+    WHERE dv.data."_id" = 103;
     </copy>
     ```
     ![Image alt text](images/task_5_1.png " ")
@@ -235,7 +235,7 @@ Switch Charles Leclerc's and George Russell's teams. This can be done by updatin
 
     ```
     <copy>
-    DELETE FROM race_dv dv WHERE dv.data.raceId = 201;
+    DELETE FROM race_dv dv WHERE dv.data."_id" = 201;
 
     SELECT json_serialize(data PRETTY) FROM race_dv;
     SELECT json_serialize(data PRETTY) FROM driver_dv;
