@@ -5,7 +5,7 @@ In this lab you will assume the role of a development team member, and you will 
 
 - Creating your pluggable database (PDB) in a matter of seconds.
 - Unplug your database into a portable archive, and plug it in to a different container database.
-- Plug in a database from a PDB.
+- Plug in a database from a PDB archive.
 - Create copies of your database using PDB cloning.
 - Clone your "production" PDB to a "test" environment to use as a master copy for testing teams.
 - Create thin copies of the test master for use by development and testing teams.
