@@ -1,4 +1,4 @@
-        # Pluggable Database for Development Agility
+# Pluggable Database for Development Agility
 
 ## Introduction
 In this lab you will assume the role of a development team member, and you will leverage the Oracle Database Multitenant architecture to perform tasks that you might perform in a development and testing role.  The tasks in this lab include:
