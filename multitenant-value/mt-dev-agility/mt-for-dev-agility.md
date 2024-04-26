@@ -1,15 +1,14 @@
 # Pluggable Database for Development Agility
 
 ## Introduction
-In this lab you will assume the role of a development team member, and you will leverage the Oracle Database Multitenant architecture to perform tasks that you might perform in a development and testing role.  The tasks in this lab include:
+In this lab you will assume the role of a development team member, and you will leverage Oracle Database Multitenant to perform tasks similar to what might be performed in a development and testing role.  The tasks in this lab include:
 
 - Creating your pluggable database (PDB) in a matter of seconds.
-- Unplug your database into a portable archive, and plug it in to a different container database.
-- Plug in a database from a PDB archive.
-- Create copies of your database using PDB cloning.
-- Clone your "production" PDB to a "test" environment to use as a master copy for testing teams.
-- Create thin copies of the test master for use by development and testing teams.
-
+- Unplugging your database into a portable archive, and plugging it in to a different container database.
+- Plugging in a database from a shared PDB archive.
+- Creating copies of your database using PDB cloning.
+- Cloning your "production" PDB to a "test" environment to use as a master copy for testing teams.
+- Creating thin "snapshot" copies of the test master for use by development and testing teams.
 
 
 Estimated Time to Complete This Workshop: 90 minutes
@@ -21,25 +20,25 @@ Watch the video below for a quick walk-through of the lab.
 ### Prerequisites
 
 This lab assumes you have:
-- A Free Tier, Paid or LiveLabs Oracle Cloud account
-- You have completed:
+- A Free Tier or paid OCI account, or that you are running this lab in a LiveLabs OCI sandbox
+- Completed the following labs:
     - Lab: Prepare Setup (*Free Tier* and *Paid Tenancies* only)
     - Lab: Environment Setup
 
+In the following labs, instead of SQL\*Plus you will use **Oracle SQL Developer Command Line (SQLcl)**.  Oracle **SQLcl** is the modern, command line interface to the Database. **SQLcl** has many key features that add to the value of the utility, including command history, in-line editing, auto-complete using the TAB key and more. You can learn more about **SQLcl** [at the Oracle SQLcl website](https://www.oracle.com/database/technologies/appdev/sqlcl.html).
+
+If you accidentally exit the SQLcl client during a lab exercise, the client can be launched using the command **sql /nolog** .
+
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER**!
 
-In the following labs, instead of SQL\*Plus you will use **Oracle SQL Developer Command Line (SQLcl)**.  Oracle **SQLcl** is the modern, command line interface to the Database. **SQLcl** has many key features that add to the value of the utility, including command history, in-line editing, auto-complete using the TAB key and more. You can learn more about **SQLcl** [at the Oracle SQLcl website](https://www.oracle.com/database/technologies/appdev/sqlcl.html).
+**Please run all workshop tasks in the order in which they appear in this guide.**
 
 ## Task 1: Log in and create the application database
 
-In this first task, you will create and explore a new pluggable database **MYAPPDB** in the container database **CDBTEST**.  Typically, the database administrators would provide the developers with the appropriate privileges to allow self-service database provisioning, cloning, de-provisioning and other tasks the development team requires.  For the sake of simplicity, you will use the database superuser privilege SYSDBA to perform many of these tasks throughout this workshop. 
+In this first task, you will create and explore a new pluggable database **MYAPPDB** in the container database **CDBTEST**.  Typically, the database administrators would provide the developers with the appropriate privileges to allow self-service database provisioning, cloning, de-provisioning and other tasks that DevOps requires.  For the sake of simplicity, you will use the database superuser privilege SYSDBA to perform many of these tasks throughout this workshop. 
 
 
-1.  Set your oracle environment and connect to **CDBTEST** using SQLcl. The database **CDBTEST** is a container database, or CDB.  The CDB contains the root of the database, and is also associated with the database memory (SGA, PGA, etc.) and background processes on the system that are part of the Oracle Database instance.
-
-    ```
-    <copy>. ~/.set-env-db.sh CDBTEST</copy>
-    ```
+1.  Connect to **CDBTEST** using SQLcl. The database **CDBTEST** is a container database, or CDB.  The CDB contains the root of the database, and is also associated with the database memory (SGA, PGA, etc.) and background processes on the system that are part of the Oracle Database instance.
 
     ```
     <copy>
@@ -48,9 +47,9 @@ In this first task, you will create and explore a new pluggable database **MYAPP
     ```
 
     
-    ![Output shows LiveLabs banner, confirmation of database environment set to CDBTEST and SQLcl connection to CDBTEST container database. ](./images/task1.1-connectcdbtest.png " ")
+    ![Output shows the SQLcl connection to CDBTEST container database. ](./images/task1.1-connectcdbtest.png " ")
 
-2. Create a script that will allow you to easily see what database you're connected to, in addition to viewing the database user that is currently connected. At any point in the lab you can run this script if you wish. You will save this script for future use and call it "whoami.sql".
+2. Create a script that will allow you to easily see what database you're connected to, in addition to viewing the database user that is currently connected. At any point in the lab you can run this script if you wish. You will save this script for future use and call it "whichdb.sql".
 
     ```
     <copy>
@@ -67,7 +66,7 @@ In this first task, you will create and explore a new pluggable database **MYAPP
       from Dual
       .
 
-      save whoami.sql
+      save whichdb.sql
       
     </copy>
     ```
@@ -76,14 +75,14 @@ In this first task, you will create and explore a new pluggable database **MYAPP
 
     ```
     <copy>
-     @whoami.sql
+     @whichdb.sql
     </copy>
     ```
 
-   ![Script created and saved in SQLcl.  Output of script run shows DB name, container and user name.](./images/task1.2-whoami.png " ")
+   ![Script created and saved in SQLcl.  Output of script run shows DB name, container and user name.](./images/task1.2-whichdb.png " ")
 
 
-3. It is common for application development teams to have to wait for a new database when they need one.  The process might be to submit a formal request for a new database, wait for approval, and then wait some more while an environment and database are provisioned.  Depending on the organization, that's a process that could take hours, days, or maybe even longer!  However, in a modern, data-driven environment, developers need the ability to quickly create and manage data stores in order to keep pace with rapidly evolving business needs.  Oracle Database Multitenant architecture makes it easy to enable a "self-service" database environment for the development team.  Not only is database creation self-service and easy, it is also incredibly fast to stand up a new Oracle Database. 
+3. It is common for application development teams to have to wait for a new database when they need one.  The process might be to submit a formal request for a new database, wait for approval, and then wait some more while an environment and database are provisioned.  Depending on the organization and the available infrastructure, that's a process that could take hours, days, or maybe even longer!  However, in a modern, data-driven environment, developers need the ability to quickly create and manage data stores in order to keep pace with rapidly evolving business needs.  Oracle Database Multitenant makes it easy to enable a "self-service" database environment for the development team.  Not only is database creation self-service and easy, it is also incredibly fast to stand up a new Oracle Database. 
 
     In this task, you'll examine the container database **CDBTEST** by listing the pluggable databases already in the container; since this is a new CDB the only database plugged into it is the SEED database.  You will create the pluggable database **MYAPPDB**.  Note that the database is created and ready for use in a matter of seconds.
 
@@ -181,27 +180,22 @@ the example database table used in this set of task steps.
     ![Datafiles for MYAPPDB are located under the CDB datafiles, in a sub-folder named with the PDBs UUID.](./images/task1.6-viewdbfiles.png " ")
 
 ## Task 2: Unplug a PDB from the Container Database
-A capability of Oracle Database Multitenant architecture that adds to development agility is the ability to unplug a database from a CDB, and then plug it in elsewhere.  Unplugging a database into a PDB Archive creates a portable collection of everything the makes up the database; it's easy to share that PDB archive with others, and then they can plug the database in to other Oracle container databases (CDBs).  
+A capability of Oracle Database Multitenant that adds to development agility is the ability to unplug a database from a CDB, and then plug it in elsewhere.  Unplugging a database into a PDB Archive creates a portable collection of everything the makes up the database; it's easy to share that PDB archive with others, and then they can plug the database in to other Oracle container databases (CDBs).  
 
-Let's assume that you have completed your initial development work on the database **MYAPPDB** and now you want to send it to other teams.  These teams want to perform testing and make additional changes to the database, and do so in their own database environments.   To accomplish this, you will unplug the PDB into an archive, and then make that archive available to others.
+Let's assume that you have completed your initial development work on the database **MYAPPDB** and now you want to share it with other teams.  These teams want to perform testing and make additional changes to the database, and do so in their own database environments.   To accomplish this, you will unplug the PDB into an archive, and then make that archive available to others.
+
+You should still be connected to the SQLcl client and see a "SQL>" prompt.  If not, enter the command **sql /nolog** to start the SQLcl client.
 
 First, you'll unplug **MYAPPDB** from **CDBTEST** into a ".pdb" compressed archive.
 
-    Note, you should already still be running SQLcl, but if you're not then launch SQLcl and set the local directory using the following commands:
 
-    ```
-    <copy>
-    sql /nolog
-    </copy>
-    ```
-
-1. Connect to the container **CDBTEST** as the superuser SYSDBA.
+1. While still in the SQLcl client, connect to the container **CDBTEST** as the superuser SYSDBA.
 
     ```
     <copy>connect sys/Oracle_4U@localhost:1523/cdbtest as sysdba</copy>
     ```
 
-2. Unplug **MYAPPDB** from **CDBTEST**.  A PDB must first be closed before it can be unplugged.  Connect as SYSDBA and close the pluggable database **MYAPPDB**.
+2. A PDB must first be closed before it can be unplugged.  Connect as SYSDBA and close the pluggable database **MYAPPDB**.  Then, unplug **MYAPPDB** from **CDBTEST**.  
 
     ```
     <copy>show pdbs
@@ -220,7 +214,7 @@ First, you'll unplug **MYAPPDB** from **CDBTEST** into a ".pdb" compressed archi
 
    ![The PDB MYAPPDB is closed and unlpugged into a ".pdb" archive file.](./images/task2.1-unplugmyappdb.png " ")
 
-3. After unplugging the database, you will cleanup the container database by dropping references to the unplugged PDB.  
+3. After unplugging the database, you will cleanup the container database by dropping all references to the unplugged PDB.  
 
     ```
     <copy>show pdbs
@@ -231,7 +225,7 @@ First, you'll unplug **MYAPPDB** from **CDBTEST** into a ".pdb" compressed archi
 
    ![The unplugged PDB shows as still in MOUNTED status until it is dropped.](./images/task2.3-dropmyappdb.png " ")
 
-4. Show the datafiles that are part of **CDBTEST**.  You can see that the datafiles for **MYAPPDB** are no longer part of the container database.
+4. Now, query the datafiles that are part of **CDBTEST**.  You can see in the results that the datafiles for **MYAPPDB** are no longer part of the container database.
     
     ```
     <copy>
@@ -259,31 +253,25 @@ First, you'll unplug **MYAPPDB** from **CDBTEST** into a ".pdb" compressed archi
 
     ![The datafiles associated with MYAPPDB are no longer present in the CDB](./images/task2.4-cdbtestdbfiles.png " ")
 
-5. The unplugged PDB archive is stored on the local filesystem.  It contains the entire pluggable database in a compressed format. This makes it easy to share the unplugged PDB with other teams, partners, and/or customers.  This file can be used by others and plugged into their Oracle container databases.  When plugging a PDB into a container database, there are some restrictions regarding the CDB where the PDB will be plugged in: 
+5. The unplugged PDB archive has been stored on the local filesystem.  It contains the entire pluggable database in a compressed format. This makes it easy to share the unplugged PDB with other teams, partners, and/or customers.  This file can be used by others and plugged into their Oracle container databases.  When plugging a PDB into a container database, there are some restrictions regarding the CDB into which the PDB will be plugged in: 
+
     - The CDB must be at least at the same release and patch level as the source.
-    - The CDB can be on a different OS, but the OS has to be the same endian format.
+    - The CDB can be on an OS that is different from that of the source CDB, but the OS has to be the same endian format.
 
   
 
 ## Task 3: Plug the unplugged database MYAPPDB into a different CDB
 In this task, you will connect to container database, **CDBPROD**, and plug the archived PDB **MYAPPDB** into this CDB.  
 
+   You should still be connected to the SQLcl client and see a "SQL>" prompt.  If not, enter the command **sql /nolog** to start the SQLcl client.
 
-Note, you should still be running SQLcl, but if you're not then launch SQLcl, set the local directory using the following commands:
-
-    ```
-    <copy>
-    sql /nolog
-    </copy>
-    ```
-
-1. Connect to the container **CDBPROD** and run the "whoami.sql" script that you saved during Task 1.
+1. In the SQLcl client, connect to the container **CDBPROD** and run the "whichdb.sql" script that you saved during Task 1.
     ```
     <copy>connect sys/Oracle_4U@localhost:1522/cdbprod as sysdba</copy>
     ```
 
     ```
-    <copy>@whoami.sql  </copy>
+    <copy>@whichdb.sql  </copy>
     ```
 
     ```
@@ -345,24 +333,17 @@ Note, you should still be running SQLcl, but if you're not then launch SQLcl, se
 
 
 ## Task 4: Create the HRAPP database from a PDB archive
-During this task, you will plug in a PDB from an archive from an HR application database that was shared with you by another development team.  The PDB contains the schema and objects supporting the "HR" application, and you will plug this PDB into your "production" environment.  
+During this task, you will plug in a PDB from an archive of an HR application PDB that was shared with you by another development team.  The PDB contains the schema and objects supporting the "HR" application, and you will plug this PDB into your "production" environment.  
 
+You should still be connected to the SQLcl client and see a "SQL>" prompt.  If not, enter the command **sql /nolog** to start the SQLcl client.
 
-Note, you should still be running SQLcl, but if you're not then launch SQLcl, set the local directory and set formatting to make the on-screen output easier to read using the following commands:
-
-    ```
-    <copy>
-    sql /nolog
-    </copy>
-    ```
-
-1. Connect to the container **CDBPROD** and run the "whoami.sql" script that you saved during Task 1.
+1. Connect to the container **CDBPROD** and run the "whichdb.sql" script that you saved during Task 1.
     ```
     <copy>connect sys/Oracle_4U@localhost:1522/cdbprod as sysdba</copy>
     ```
 
     ```
-    <copy>@whoami.sql  </copy>
+    <copy>@whichdb.sql  </copy>
     ```
 
     ```
@@ -371,7 +352,7 @@ Note, you should still be running SQLcl, but if you're not then launch SQLcl, se
 
     ![Container database CDBPROD contains the PDB APPDB1 and the seed PDB. ](./images/task4.1-connectcdbprod.png " ")
 
-2. Check the compatibility of the unplugged PDB archive file with the container databaase.  If there are no major errors then the PDB is compatible with the CDB, so you should be able to plug-in the PDB with no issues.  
+2. Check the compatibility of the unplugged PDB archive file with the container databaase.  If there are no errors then the PDB is compatible with the CDB, so you should be able to plug-in the PDB with no issues.  
 
     ```
     <copy>
@@ -422,20 +403,15 @@ Note, you should still be running SQLcl, but if you're not then launch SQLcl, se
 
 
 ## Task 5: PDB Cloning
-The ability to unplug, move, and plug in a database makes it easy to move databases around as needed.  However, Oracle Database Multitenant architecture also provides an easy way to create copies, or clones, of your databases while they are running and servicing applications and users.  As long as you have the appropriate database privileges, PDB cloning is accomplished using a single SQL statement.  The cloning operation can be performed when the source database is open or closed, so there is complete freedom to create PDB clones as you need them.  The PDB clones can be created in the same CDB, or you can clone to a different CDB on the same host, to a CDB on a different host, and you can even clone to a CDB in the cloud - each time just using a single SQL statement to perform the cloning operation.   
+The ability to unplug, move, and plug in a database makes it easy to move databases around as needed.  However, Oracle Database Multitenant also provides an easy way to create copies, or clones, of your databases while they are running and servicing applications and users.  As long as you have the appropriate database privileges, PDB cloning is accomplished using a single SQL statement.  The cloning operation can be performed when the source database is open or closed, so there is complete freedom to create PDB clones as you need them.  The PDB clones can be created in the same CDB, or you can clone to a different CDB on the same host, to a CDB on a different host, and you can even clone to a CDB in the cloud - each time just using a single SQL statement to perform the cloning operation.   
 
-In this task, you will clone your running pluggable database to a new PDB located in the same container database, CDB1.  
+In this task, you will clone your running pluggable database to a new PDB located in the same container database, CDBPROD.  
 
-- Clone the pluggable database **HRAPP** to a new PDB named **HRAPP2**
+You should still be connected to the SQLcl client and see a "SQL>" prompt.  If not, enter the command **sql /nolog** to start the SQLcl client.
 
-    Note, you should already still be running SQLcl, but if you're not then launch SQLcl, set the local directory and set formatting to make the on-screen output easier to read.
 
-    ```
-    <copy>
-    sql /nolog
-    </copy>
-    ```
-
+Clone the pluggable database **HRAPP** to a new PDB named **HRAPP2**.
+    
 1. Connect to the container **CDBPROD**.
 
     ```
@@ -472,20 +448,12 @@ In this task, you will clone your running pluggable database to a new PDB locate
 
 
 ## Task 6: Clone the HRAPP database to the TEST database instance for use there.
-In the previous task, you cloned your HRAPP database to another database in the same container database.  What if you wanted to clone the database into a different CDB?  This alternate CDB could be on a different host, abd maybe located in a different data center or in the cloud.  Oracle Database Multitenant architecture makes it easy to clone the database between different environments with just a single SQL statement.
+In the previous task, you cloned your HRAPP database to another database in the same container database.  What if you wanted to clone the database into a different CDB?  This alternate CDB could be on a different host, abd maybe located in a different data center or in the cloud.  Oracle Database Multitenant makes it easy to clone the database between different environments with just a single SQL statement.
 
 PDB cloning between container databases is accomplished using a database link.  The required database link has already been set up for you.
 
 
-
- Note, you should still be running SQLcl, but if you're not then launch SQLcl, set the local directory and set formatting to make the on-screen output easier to read using the following commands:
-
-    ```
-    <copy>
-    sql /nolog
-    </copy>
-    ```
-
+You should still be connected to the SQLcl client and see a "SQL>" prompt.  If not, enter the command **sql /nolog** to start the SQLcl client.
 
 1. Make sure you are connected to the container **CDBTEST**.
 
@@ -493,7 +461,7 @@ PDB cloning between container databases is accomplished using a database link.  
     <copy>connect sys/Oracle_4U@localhost:1523/cdbtest as sysdba</copy>
     ```
 
-2. Create a new database **HRAPPTEST** in the CDBTEST container by cloning the **HRAPP** database that is running in the CDBSTG container.
+2. Create a new database **HRAPPTEST** in the CDBTEST container by cloning the **HRAPP** database that is running in the CDBPROD container.
 
     ```
     <copy>show pdbs
@@ -516,19 +484,14 @@ PDB cloning between container databases is accomplished using a database link.  
     ![User HR in the HRTEST database has the same tables and row counts as the HRAPP source database.](./images/task6.3-hrtesttables.png " ")   
 
 ## Task 7: Create a refreshable clone of the production HRAPP database, making it easy to update the test database with the latest data from production
-In the previous task, you cloned a database from the TEST to the DEV environment.  Since our example database is small, this copy created quickly.  What if the source database was much larger, maybe a terabyte or more?  What if the requirement was to have a fresh clone weekly?  When dealing with larger databases, those requirements result in a large amount of data having to flow across the network, and a longer time needed for the refreshes to complete.  
-
-    Oracle Database Multitenant solves these challenges with refreshable PDBs.  Refreshable PDB clones allow the copy to be updated with only the database changes that have taken place since the previous copy was done.  Typically, this would mean only a fraction of the source database needs to be copied during each refresh. 
+In the previous task, you cloned a database from the TEST to the DEV environment.  Since our example database is small, this copy created quickly.  What if the source database was much larger, maybe a terabyte or more?  What if the requirement was to have a fresh clone weekly?  When dealing with larger databases, those requirements result in a large amount of data having to flow across the network, and a longer time needed for the refreshes to complete.  Oracle Database Multitenant solves these challenges with refreshable PDBs.  Refreshable PDB clones allow the copy to be updated with only the database changes that have taken place since the previous copy was done.  Typically, this would mean only a fraction of the source data needs to be copied during each refresh. 
     
 In this task, you will create a refreshable "test master" database, which will be used to support test and development team activity.
 
-If you are not already running SQLcl, then launch SQLcl and set the formatting to make the on-screen output easier to read.
+You should still be connected to the SQLcl client and see a "SQL>" prompt.  If not, enter the command **sql /nolog** to start the SQLcl client.
 
-    ```
-    <copy>sql /nolog </copy>
-    ```
 
-1. As you did in the previous lab task, you'll create a clone of the product HRAPP database, this time making that clone refreshable on-demand.  Connect to **CDBTEST** in SQLcl as supersuser SYSDBA.
+1. As you did in the previous lab task, you'll create a clone of the product HRAPP database, this time making that clone refreshable on-demand.  Connect to **CDBTEST** in SQLcl as superuser SYSDBA.
     
     
     ```
@@ -588,17 +551,13 @@ If you are not already running SQLcl, then launch SQLcl and set the formatting t
     ```
     Note that the additional rows in the JOBS table are now in the HRTESTMASTER database.
     
-    ![The HRTESTMASTER PDB is refreshed and opend in READ ONLY mode.  A row count from HR.JOBS now shows 21 rows.](./images/task7.5-refreshedtestmaster.png " ")
+    ![The HRTESTMASTER PDB is refreshed and opened in READ ONLY mode.  A row count from HR.JOBS now shows 21 rows.](./images/task7.5-refreshedtestmaster.png " ")
 
 ## Task 8: Create multiple, thin copies of the **HRTESTMASTER** database to support each development team
 In the previous task, you created a refreshable copy of the production HRAPP database.  By rule, a refreshable PDB can only be opened read-only.  So, how is this read-only database useful to testing and development teams that want to work with that latest data from production?  As you've seen in earlier tasks, it is easy to create PDB copies using the "CREATE PLUGGABLE DATABASE..." SQL statement.  In this lab, the example databases are small so making full copies takes little time, and little disk space.  So you could easily create full clones of the **HRTESTMASTER** PDB for any development or testing team that needed their own copy.  However, if the **HRTESTMASTER** database was a very large database, terabytes in size or more, making full copies could take a long time and consume a large amount disk space - so it's not very practical to do so.   Oracle Multitenant offers a solution here, also: "thin", copy-on-write clones known as PDB Snapshot Copies.
 In this task, you will create thin copies of **HRTESTMASTER** for the development and testing teams.
 
-If you are not already running SQLcl, then launch SQLcl and set the formatting to make the on-screen output easier to read.
-
-    ```
-    <copy>sql /nolog </copy>
-    ```
+You should still be connected to the SQLcl client and see a "SQL>" prompt.  If not, enter the command **sql /nolog** to start the SQLcl client.
 
 1. Connect to **CDBTEST** in SQLcl as supersuser SYSDBA.
     
@@ -644,14 +603,21 @@ If you are not already running SQLcl, then launch SQLcl and set the formatting t
     ![The disk usage command output shows the snapshot copy PDBS are a fraction of the size of HRTESTMASTER.](./images/task8.4-execducommands.png " ")
 
 
-Note: when a PDB Snapshot Copy is created, the datafiles of the source database are changed to read-only at the operating system level.  When this change is made, any attempt to execute the PDB refresh on the source will fail with an error.  In order to execute the PDB refresh, the following would have to be performed in order:
+Note: when a PDB Snapshot Copy is created, the permissions for the datafiles of the source database are changed to read-only at the operating system level.  When this change is made, any attempt to execute the PDB refresh on the source will fail with an error.  In order to execute the PDB refresh, the following would have to be performed in this order:
 
     1. All snapshot copy PDBs based on the refreshable PDB must be dropped
-    2. The datafile permissions for the refreshable PDB would need to be correcting by running the procedure DBMS_DNFS.RESTORE_DATAFILE_PERMISSIONS('HRTESTMASTER')
+    2. The datafile permissions for the refreshable PDB would need to be changed to read/write by running the procedure DBMS_DNFS.RESTORE_DATAFILE_PERMISSIONS('HRTESTMASTER')
     3. Executing the PDB refresh of HRTESTMASTER
 
-Now you've had a chance to try out the Oracle Database Multitenant architecture. Multitenant made it easy for you to quickly create a new database.  You were able to unplug your database for sharing with others, and plug in a database that was shared with your team.  The workshop tasks also showed how Database Multitenant makes it easy to clone databases, to create refreshable clones,and to create thin database copies - allowing each test team to have their own copies of the database while minimizing the cost of storage space used.  Thank you for participting in this Oracle LiveLabs workshop!
-
+Now you've had a chance to try out Oracle Database Multitenant. Hopefully you've realized the value that Database Multitenant can bring to your organization:
+- Database Multitenant made it easy for you to create a new database in just seconds.  
+- You were able to unplug your database for sharing with others, and plug in a database that was shared with your team.
+- The workshop tasks also showed how Database Multitenant makes it easy to:
+    - clone databases 
+    - create refreshable clones
+    - create thin database copies - allowing each test team to have their own copies of the database while minimizing the cost of storage space used.  
+    
+Thank you for participting in this Oracle LiveLabs workshop!
 
 
 ## Acknowledgements
