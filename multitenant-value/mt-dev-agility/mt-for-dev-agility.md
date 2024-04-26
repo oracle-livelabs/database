@@ -62,7 +62,7 @@ In this first task, you will create and explore a new pluggable database **MYAPP
       ' / Auth-ID: '   ||Sys_Context('Userenv', 'Authenticated_Identity')||
       ' / Sessn-User: '||Sys_Context('Userenv', 'Session_User')||
       ' / Container: ' ||Nvl(Sys_Context('Userenv', 'Con_Name'), 'n/a')
-      "Who am I?"
+      "WhichDB?"
       from Dual
       .
 
@@ -448,7 +448,7 @@ Clone the pluggable database **HRAPP** to a new PDB named **HRAPP2**.
 
 
 ## Task 6: Clone the HRAPP database to the TEST database instance for use there.
-In the previous task, you cloned your HRAPP database to another database in the same container database.  What if you wanted to clone the database into a different CDB?  This alternate CDB could be on a different host, abd maybe located in a different data center or in the cloud.  Oracle Database Multitenant makes it easy to clone the database between different environments with just a single SQL statement.
+In the previous task, you cloned your HRAPP database to another database in the same container database.  What if you wanted to clone the database into a different CDB?  This alternate CDB could be on a different host, and maybe located in a different data center or in the cloud.  Oracle Database Multitenant makes it easy to clone the database between different environments with just a single SQL statement.
 
 PDB cloning between container databases is accomplished using a database link.  The required database link has already been set up for you.
 
@@ -461,7 +461,7 @@ You should still be connected to the SQLcl client and see a "SQL>" prompt.  If n
     <copy>connect sys/Oracle_4U@localhost:1523/cdbtest as sysdba</copy>
     ```
 
-2. Create a new database **HRAPPTEST** in the CDBTEST container by cloning the **HRAPP** database that is running in the CDBPROD container.
+2. Create a new database **HRTEST** in the CDBTEST container by cloning the **HRAPP** database that is running in the CDBPROD container.
 
     ```
     <copy>show pdbs
@@ -484,7 +484,7 @@ You should still be connected to the SQLcl client and see a "SQL>" prompt.  If n
     ![User HR in the HRTEST database has the same tables and row counts as the HRAPP source database.](./images/task6.3-hrtesttables.png " ")   
 
 ## Task 7: Create a refreshable clone of the production HRAPP database, making it easy to update the test database with the latest data from production
-In the previous task, you cloned a database from the TEST to the DEV environment.  Since our example database is small, this copy created quickly.  What if the source database was much larger, maybe a terabyte or more?  What if the requirement was to have a fresh clone weekly?  When dealing with larger databases, those requirements result in a large amount of data having to flow across the network, and a longer time needed for the refreshes to complete.  Oracle Database Multitenant solves these challenges with refreshable PDBs.  Refreshable PDB clones allow the copy to be updated with only the database changes that have taken place since the previous copy was done.  Typically, this would mean only a fraction of the source data needs to be copied during each refresh. 
+In the previous task, you cloned a database from the PROD to the TEST environment.  Since our example database is small, this copy created quickly.  What if the source database was much larger, maybe a terabyte or more?  What if the requirement was to have a fresh clone weekly?  When dealing with larger databases, those requirements result in a large amount of data having to flow across the network, and a longer time needed for the refreshes to complete.  Oracle Database Multitenant solves these challenges with refreshable PDBs.  Refreshable PDB clones allow the copy to be updated with only the database changes that have taken place since the previous copy was done.  Typically, this would mean only a fraction of the source data needs to be copied during each refresh. 
     
 In this task, you will create a refreshable "test master" database, which will be used to support test and development team activity.
 
