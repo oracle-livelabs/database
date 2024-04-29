@@ -235,7 +235,7 @@ This lab assumes you have:
 
     The Database Actions page is displayed.
 
-3. In the **Development** box, click **SQL**.
+3. In the **Development** tab, click **SQL**, and then click **Open**.
 
     ![Click on SQL](./images/click-sql.png)
 
@@ -279,7 +279,7 @@ This lab assumes you have:
 
     The Database Actions page is displayed.
 
-3. In the **Development** box, click **SQL**.
+3. In the **Development** tab, click **SQL**, and then click **Open**.
 
     ![Click on SQL](./images/click-sql.png)
 
