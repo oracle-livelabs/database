@@ -11,7 +11,7 @@ The following figure shows the various microservices in the Bank Transfer applic
 
 * Teller, a Java microservice, is called a transaction initiator service. A user interacts with this microservice to transfer money from Department One to Department Two. It exposes a REST API method to transfer funds. This method defines the transaction boundary and initiates the distributed transaction. When a new request is created, MicroTx starts an XA transaction at the Teller microservice. This microservice also contains the business logic to issue the XA commit and roll back calls.
 
-* Department One and Department Two are ORDS applications. They participate in the transactions, so they are called participant services. The applications expose three REST APIs to withdraw or deposit money from a specified account and to get the account balance. They also use resources from resource managers. Resource managers manage stateful resources such as databases, queuing or messaging systems, and caches. Two PDBs (pluggable database) and a catalog database run in a standalone instance of Oracle Database 23c Free to simulate the distributed transaction. A standalone ORDS APEX service instance, runs on port 8080, and it is configured with two database pools. Each database pool connects to a different PDB, FREEPDB1 and FREEPDB2. Here are the details about the PDBs:
+* Department One and Department Two are ORDS applications. They participate in the transactions, so they are called participant services. The applications expose three REST APIs to withdraw or deposit money from a specified account and to get the account balance. They also use resources from resource managers. Resource managers manage stateful resources such as databases, queuing or messaging systems, and caches. Two PDBs (pluggable database) and a catalog database run in a standalone instance of Oracle Database 23ai Free to simulate the distributed transaction. A standalone ORDS APEX service instance, runs on port 8080, and it is configured with two database pools. Each database pool connects to a different PDB, FREEPDB1 and FREEPDB2. Here are the details about the PDBs:
 
 * FREE: A catalog database that the `sysdba` user can access.
 * FREEPDB1: A pluggable database that contains the OTMM schema. This connects to Department 1, an ORDS service.
@@ -55,7 +55,7 @@ This lab assumes you have:
 
 ## Task 1: Start the Database Service and ORDS Service Instances
 
-1. Run the following command to verify that the Oracle Database 23c Free service instance is running.
+1. Run the following command to verify that the Oracle Database 23ai Free service instance is running.
 
     ```text
     <copy>
@@ -66,12 +66,12 @@ This lab assumes you have:
    **Example output**
 
     ```text
-    Status of the Oracle FREE 23c service:
+    Status of the Oracle FREE 23ai service:
     LISTENER status: RUNNING
     FREE Database status: RUNNING
     ```
 
-   If the Oracle Database 23c Free service instance is not in the `RUNNING` state, then run the following command to restart the service.
+   If the Oracle Database 23ai Free service instance is not in the `RUNNING` state, then run the following command to restart the service.
 
     ```text
     <copy>
