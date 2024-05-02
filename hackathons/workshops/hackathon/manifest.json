@@ -1,0 +1,120 @@
+{
+    "workshoptitle": "Oracle Major League Hacking Hackathon Challenges",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "This is an introduction to Oracle Database 23c.",
+            "type": "livelabs",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Get Started with NoVNC",
+            "description": "Verify Setup of compute instance",
+            "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+        },
+        {
+            "title": "Lab 1: Choose Your Own Adventure: SQL Intro, JSON Duality, or Property Graphs",
+            "filename": "../../chosechallenge/chosechallenge.md"
+        },
+
+
+
+
+        {
+            "title": "SQL Intro: Lab 1: Provision an Oracle Autonomous Database",
+            "description": "Provision an Autonomous Database",
+            "type": "freetier",
+            "filename": "https://oracle-livelabs.github.io/adb/shared/adb-provision/adb-provision-conditional.md"
+        },
+        {
+            "title": "SQL Intro: Lab 2: Connect to Oracle Autonomous Database with SQL Worksheet and Run your First Query",
+            "description": "Connect to an Autonomous Database",
+            "filename": "https://oracle-livelabs.github.io/adb/shared/adb-sqldevweb/adb-sqldevweb.md"
+        },
+        {
+            "title": "SQL Intro: Lab 3: Run Basic Oracle SQL Commands",
+            "description": "Introduction to Oracle SQL",
+            "filename": "../../../intro-to-sql/intro-to-sql.md"
+        },
+
+
+
+        {
+            "title": "JSON Duality and Graph Setup: Lab 1: Prepare Setup",
+            "description": "How to download your ORM stack and update security rules for an existing VCN",
+            "filename": "../../../23cfree/prepare-setup/prepare-setup.md",
+            "type": "property-graphs"
+        },
+        {
+            "title": "JSON Duality and Graph Setup: Lab 2: Environment Setup",
+            "description": "How to provision the workshop environment and connect to it",
+            "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc-ssh.md"
+        },
+        {
+            "title": "JSON Duality and Graph Setup: Lab 3: Use noVNC remote desktop",
+            "description": "Using noVNC Remote Desktop",
+            "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+        },
+        {
+            "title": "JSON Duality and Graph Setup: Lab 4: Setup User",
+            "description": "Creating the schema including JSON Duality Views",
+            "type": "livelabs",
+            "filename": "../../../23cfree/change-pw/change-pw.md"
+        },
+
+
+
+        {
+            "title": "JSON Duality: Lab 1: Create the schema",
+            "description": "Creating the schema including JSON Duality Views",
+            "type": "livelabs",
+            "filename": "../../../23cfree/sql-schema/sql-schema.md"
+        },
+        {
+            "title": "JSON Duality: Lab 2: JSON and the Duality Views",
+            "description": "Working with JSON and the Duality Views",
+            "type": "livelabs",
+            "filename": "../../../23cfree/sql-json/sql-json.md"
+        },
+        {
+            "title": "JSON Duality: Lab 3: The Extreme Flexibility of JSON Duality Views",
+            "description": "Working with SQL and the Duality Views",
+            "type": "livelabs",
+            "filename": "../../../23cfree/sql-extended/sql-extended.md"
+        },
+
+
+        {
+            "title": "Property Graphs: Lab 1: Configure setup materials and tools",
+            "description": "Creating the schema including JSON Duality Views",
+            "type": "livelabs",
+            "filename": "../../../23cfree/property-graphs-setup/property-graphs-setup.md"
+        },
+        {
+            "title": "Property Graphs: Lab 2: Operational Property Graphs Example with SQL/PGQ in 23c",
+            "description": "Using Property Graphs in 23c",
+            "type": "livelabs",
+            "filename": "../../../23cfree/property-graphs/property-graphs.md"
+        },
+
+
+
+
+
+
+
+
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+        }
+
+
+    ]
+}
+
+
+
+
