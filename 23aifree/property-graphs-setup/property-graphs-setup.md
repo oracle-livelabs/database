@@ -54,7 +54,7 @@ This lab assumes you have:
 3. Unzip the file. Inside this zip file are the files to setup your schema and APEX application.
 
     ```
-    $ <copy>unzip -o 23cfree-property-graph.zip</copy>
+    $ <copy>unzip -o 23aifree-property-graph.zip</copy>
     ```
 
     <!-- ![Unzip file](images/unzip-file.png) -->
@@ -64,12 +64,10 @@ This lab assumes you have:
 4. Remove the remaining zip file after you've unzipped it.
 
     ```
-    $ <copy>rm -rf 23cfree-property-graph.zip</copy>
+    $ <copy>rm -rf 23aifree-property-graph.zip</copy>
     ```
-
-    <!-- ![Remaining zip file removed](images/remove-zip.png) -->
-
-
+    
+    ![Remaining zip file removed](images/remove-zip.png) 
 
 ## Task 2: Open SQL Developer
 

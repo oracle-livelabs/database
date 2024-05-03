@@ -50,7 +50,7 @@ Watch the video below for a quick walk-through of the lab. The lab instructions 
 
 
     Connected to:
-    Oracle Database 23ai Free, Release 23.0.0.0.0 - Developer-Release
+    Oracle Database 23c Free, Release 23.0.0.0.0 - Developer-Release
     Version 23.2.0.0.0
 
     SQL>
@@ -84,7 +84,7 @@ Watch the video below for a quick walk-through of the lab. The lab instructions 
 
     ```
 		SQL> <copy>exit</copy>
-Disconnected from Oracle Database 23ai Free, Release 23.0.0.0.0 - Developer-Release
+Disconnected from Oracle Database 23c Free, Release 23.0.0.0.0 - Developer-Release
 Version 23.2.0.0.0
 [FREE:oracle@hol23cfdr:~]$
 		```
