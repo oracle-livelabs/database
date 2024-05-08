@@ -29,39 +29,39 @@ ttStatus
 ```
 
 ```
-TimesTen status report as of Mon Jun 13 13:33:24 2022
+TimesTen status report as of Wed Oct 11 23:36:38 2023
 
-Daemon pid 256 port 6624 instance ttinst
-TimesTen server pid 263 started on port 6625
+Daemon pid 407 port 6624 instance ttinst
+TimesTen server pid 414 started on port 6625
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 Data store /tt/db/sampledb
-Daemon pid 256 port 6624 instance ttinst
-TimesTen server pid 263 started on port 6625
+Daemon pid 407 port 6624 instance ttinst
+TimesTen server pid 414 started on port 6625
 There are 20 connections to the data store
-Shared Memory Key 0x03009db0 ID 2
-PL/SQL Memory Key 0x02009db0 ID 1 Address 0x5000000000
+Shared Memory Key 0x0f00307d ID 8
+PL/SQL Memory Key 0x0e00307d ID 7 Address 0x5000000000
 Type            PID     Context             Connection Name              ConnID
-Cache Agent     388     0x0000000001a1f040  Marker(139835503965952)           5
-Cache Agent     388     0x00007f2de8020bf0  LogSpaceMon(139835506071296)      4
-Cache Agent     388     0x00007f2df41497a0  Garbage Collector(139835502913    6
-Cache Agent     388     0x00007f2df801f400  Timer                             3
-Cache Agent     388     0x00007f2df8237990  Refresher(D,2000)                10
-Cache Agent     388     0x00007f2df8378090  Refresher(S,2000)                 9
-Cache Agent     388     0x00007f2e7401fbe0  BMReporter(139835497711360)       8
-Cache Agent     388     0x00007f2e7807cec0  Handler                           2
-Subdaemon       261     0x0000000002229fb0  Manager                        2047
-Subdaemon       261     0x00000000022aaf30  Rollback                       2046
-Subdaemon       261     0x0000000002329da0  Aging                          2041
-Subdaemon       261     0x00007f8f58000b60  Checkpoint                     2042
-Subdaemon       261     0x00007f8f5807ffb0  HistGC                         2039
-Subdaemon       261     0x00007f8f60000b60  Monitor                        2044
-Subdaemon       261     0x00007f8f6007ffb0  IndexGC                        2038
-Subdaemon       261     0x00007f8f64000b60  Deadlock Detector              2043
-Subdaemon       261     0x00007f8f6407ffb0  Log Marker                     2040
-Subdaemon       261     0x00007f8f68000b60  Flusher                        2045
-Subdaemon       261     0x00007f8f680a1bb0  XactId Rollback                2037
-Subdaemon       261     0x00007f8fd40b6080  Garbage Collector              2036
+Cache Agent     1146    0x00007f9314021020  Marker(140272157079296)           5
+Cache Agent     1146    0x00007f9314254300  LogSpaceMon(140272159184640)      6
+Cache Agent     1146    0x00007f9320149ae0  Garbage Collector(140270040340    4
+Cache Agent     1146    0x00007f932401f740  Timer                             3
+Cache Agent     1146    0x00007f93242ac230  Refresher(D,2000)                10
+Cache Agent     1146    0x00007f932799e6a0  Refresher(S,2000)                 9
+Cache Agent     1146    0x00007f93a001ff20  BMReporter(140270035138304)       8
+Cache Agent     1146    0x00007f93a407d5c0  Handler                           2
+Subdaemon       411     0x0000000002666fc0  Manager                        2047
+Subdaemon       411     0x0000000002708200  Rollback                       2046
+Subdaemon       411     0x00000000027a7330  XactId Rollback                2037
+Subdaemon       411     0x00007f5bd4000b60  Monitor                        2043
+Subdaemon       411     0x00007f5bd40a0400  Garbage Collector              2036
+Subdaemon       411     0x00007f5bdc000b60  Checkpoint                     2042
+Subdaemon       411     0x00007f5be0000b60  Deadlock Detector              2044
+Subdaemon       411     0x00007f5be4000b60  Flusher                        2045
+Subdaemon       411     0x00007f5be40c2410  Aging                          2041
+Subdaemon       411     0x00007f5c50000df0  HistGC                         2040
+Subdaemon       411     0x00007f5c541e54a0  Log Marker                     2039
+Subdaemon       411     0x00007f5c58048860  IndexGC                        2038
 Open for user connections
 Replication policy  : Manual
 Cache Agent policy  : Manual
@@ -69,7 +69,8 @@ Cache agent is running.
 PL/SQL enabled.
 ------------------------------------------------------------------------
 Accessible by group oinstall
-End of report 
+End of report
+
 ```
 
 The database is active and is loaded in memory because the cache agent is connected to it.
@@ -100,15 +101,15 @@ ttStatus
 ```
 
 ```
-TimesTen status report as of Mon Jun 13 13:35:38 2022
+TimesTen status report as of Wed Oct 11 23:37:45 2023
 
-Daemon pid 256 port 6624 instance ttinst
-TimesTen server pid 263 started on port 6625
+Daemon pid 407 port 6624 instance ttinst
+TimesTen server pid 414 started on port 6625
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 Data store /tt/db/sampledb
-Daemon pid 256 port 6624 instance ttinst
-TimesTen server pid 263 started on port 6625
+Daemon pid 407 port 6624 instance ttinst
+TimesTen server pid 414 started on port 6625
 There are no connections to the data store
 Open for user connections
 Replication policy  : Manual
@@ -132,7 +133,7 @@ ttDaemonAdmin -stop
 ```
 
 ```
-TimesTen Daemon (PID: 190, port: 6624) stopped.
+TimesTen Daemon (PID: 407, port: 6624) stopped.
 ```
 
 ## Task 3: Log out of the TimesTen host
@@ -156,5 +157,5 @@ You can now **proceed to the Wrap Up**.
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Jenny Bloom, March 2023
+* **Last Updated By/Date** - Jenny Bloom, October 2023
 

@@ -19,7 +19,7 @@
         },
         {
             "title": "Lab 2: Create a DBCS VM Database",
-            "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/data-management-library/database/oci-vm-database/create-oci-vm-db/create-oci-vm-db/create-oci-vm-db-vcn.md"
+            "filename": "https://raw.githubusercontent.com/oracle-livelabs/database/main/db-21c-fundamentals/create-oci-vm-db/create-oci-vm-db/create-oci-vm-db-vcn.md"
         },
         {
             "title": "Lab 3: Set up 21C",

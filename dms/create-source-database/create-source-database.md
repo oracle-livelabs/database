@@ -100,7 +100,81 @@ The following task is *optional* if a source database is already present.
 
   ![Note the Public IP Address and Private IP Address ](images/source-db-ip-addresses.png)
 
-## Task 3: Adding Data to the Database
+## Task 3: Prepare SSL Certificates and Grant ACL Privileges
+
+For your source database connectivity, you must perform the following steps:
+
+1. Open a SSH terminal to the database instance. The instructions are for Unix-style ssh command:
+
+```
+    <copy> ssh -i <private_key_file> opc@<dbnode_public_ip> </copy>
+```
+
+2.  Switch from 'opc' user to user 'oracle' and create a new directory in the user volume, this directory will be used to store the SSL certificates: 
+```
+    <copy>
+    sudo su - oracle    
+    mkdir /u01/app/oracle/dumpdir/wallet
+
+    </copy>
+```
+3. Download a pre created SSL wallet using the following command:
+```
+    <copy>    
+    curl -o walletSSL.zip https://objectstorage.us-phoenix-1.oraclecloud.com/p/FSBC_LRRpLxcSuSM6yRjO9u1TDuDy8wuiawEIl8Q_xPYFmvap_tPFdtm_c6TskV_/n/axsdric7bk0y/b/SSL-Wallet-For-No-SSH-Migrations-Setup/o/walletSSL.zip
+
+    </copy>
+```
+4. Unzip the files:
+```
+    <copy>    
+    unzip walletSSL.zip
+    </copy>
+```
+5. Make sure these files are present in your desired directory path:
+
+    1. 2022 ewallet.p12.lck
+    2. cwallet.sso.lck
+    3. ewallet.p12
+    4. cwallet.sso
+    5. addedCertificates.txt
+
+
+6. Save this path location, you will need it during the migration creation, once there populate the SSL Wallet Path with it:
+
+    i.e: /u01/app/oracle/dumpdir/wallet
+
+7. The user performing the export or import requires the necessary network ACL to be granted to access the network from the source and target database host. For this guide, run the following commands as SYS if the export or import user is SYSTEM. Since your database is multitenant, the following actions need to be performed in CDB$ROOT. Replace clouduser and sslwalletdir accordingly:
+
+```
+    <copy>    
+    define clouduser='system';/*user performing export at source or import at target*/
+define sslwalletdir='/u01/app/oracle/dumpdir/wallet'; /* OCI wallet path*/
+BEGIN
+    dbms_network_acl_admin.append_host_ace(host => '*', lower_port => 443, upper_port => 443, ace => xs$ace_type(privilege_list => xs$name_list(
+    'http', 'http_proxy'), principal_name => upper('&clouduser'), principal_type => xs_acl.ptype_db));
+
+    dbms_network_acl_admin.append_wallet_ace(wallet_path => 'file:&sslwalletdir', ace => xs$ace_type(privilege_list => xs$name_list('use_client_certificates',
+    'use_passwords'), principal_name => upper('&clouduser'), principal_type => xs_acl.ptype_db));
+
+END;
+    </copy>
+```
+8. Once the connect privilege is granted, connect as the relevant user such as, SYSTEM, and verify if the privilege is granted using the following query:
+```
+    <copy>    
+    SELECT host, lower_port, upper_port, privilege, status 
+    FROM user_network_acl_privileges;
+
+    </copy>
+```
+
+You should see a similar output to the following:
+
+
+![grants output](./images/grants-output.png)  
+
+## Task 4: Adding Data to the Database
 
 1. Open a SSH terminal to the database instance. The instructions are for Unix-style ssh command:
 

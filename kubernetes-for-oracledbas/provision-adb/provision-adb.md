@@ -6,6 +6,9 @@ In this lab, you use the **OraOperator** to Provision and Terminate an Oracle Au
 
 *Estimated Time:* 5 minutes
 
+[Lab 10](videohub:1_kxpskcle)
+
+
 ### Objectives
 
 * Provision an ADB

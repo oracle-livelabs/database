@@ -4,9 +4,7 @@
 
 The Bank and Stock-Trading application contains several microservices that interact with each other to complete a transaction. The Stock Broker microservice initiates the transactions to purchase and sell shares, so it is called a transaction initiator service. The Core Banking, Branch Banking, and User Banking services participate in the transactions related to the trade in stocks, so they are called participant services.
 
-To deploy the application, you must build each microservice as a container image and provide the deployment details in a YAML file.
-
-Estimated Time: 20 minutes
+Estimated Time: 12 minutes
 
 ### Objectives
 
@@ -14,7 +12,7 @@ In this lab, you will:
 
 * Configure Minikube and start a Minikube tunnel
 * Configure Keycloak
-* Build container images for each microservice in the Bank and Stock-Trading application. After building the container images, the images are available in your Minikube container registry.
+* Build container image for the Stock Broker microservice.
 * Update the `values.yaml` file, which contains the deployment configuration details for the Bank and Stock-Trading application.
 * Install the Bank and Stock-Trading application. While installing the application, Helm uses the configuration details you provide in the `values.yaml` file.
 * (Optional) Deploy Kiali and Jaeger in your Minikube cluster
@@ -29,7 +27,6 @@ This lab assumes you have:
     * Lab 1: Prepare setup
     * Lab 2: Set Up the Environment
     * Lab 3: Integrate MicroTx Client Libraries with the Stock Broker Microservice
-    * Lab 4: Provision Autonomous Databases for Use as Resource Manager
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
   ```
@@ -42,15 +39,7 @@ This lab assumes you have:
 
 Before you start a transaction, you must start a Minikube tunnel.
 
-1. Ensure that the minimum required memory and CPUs are available for Minikube.
-
-    ```
-    <copy>
-    minikube config set memory 32768
-    </copy>
-    ```
-
-2. Start Minikube.
+1. Start Minikube.
 
     ```
     <copy>
@@ -76,7 +65,7 @@ Before you start a transaction, you must start a Minikube tunnel.
     </copy>
     ```
 
-    From the output note down the value of `EXTERNAL-IP`, which is the external IP address of the Istio ingress gateway. You will provide this value in the next step.
+    From the output note down the value of `EXTERNAL-IP`, which is the external IP address of the Istio ingress gateway. You will provide this value in the next step. If the `EXTERNAL-IP` is in the `pending` state, ensure that the Minikube tunnel is running before proceeding with the next steps.
 
     **Example output**
 
@@ -94,7 +83,261 @@ Before you start a transaction, you must start a Minikube tunnel.
 
     Note that, if you don't do this, then you must explicitly specify the IP address in the commands when required.
 
-## Task 2: Configure Keycloak
+## Task 2: Know Details About the Resource Managers
+
+When you start Minikube, an instance of the Oracle Database 23ai Free Release is deployed on Minikube. See [Oracle Database Free](https://www.oracle.com/database/free/get-started). The following three PDBs are already available in the Database instance.
+
+    * The Core Banking service uses `COREBNKPDB` as resource manager.
+    * The Branch Banking service uses `AZBRPDB1` as resource manager.
+    * The Stock Broker service uses `STOCKBROKERPDB` as resource manager.
+
+The required tables are already created in each PDB and are populated with sample values. This section provides details about the sample data in each table.
+
+### About the Resource Manager for the Core Banking Service
+
+The Core Banking service uses `COREBNKPDB` as resource manager. This PDB contains three tables: Branch, Account, and History. The following code snippet provides details about the tables. The sample code is provided only for your reference. The tables are already available in the PDB and populated with sample values.
+
+    ```SQL
+    CREATE TABLE BRANCH
+    (
+      BRANCH_ID   NUMBER NOT NULL,
+      BRANCH_NAME VARCHAR2(20),
+      PHONE       VARCHAR2(14),
+      ADDRESS     VARCHAR2(60),
+      SERVICE_URL VARCHAR2(255),
+      LAST_ACCT   INTEGER,
+      PRIMARY KEY (BRANCH_ID)
+    );
+
+    CREATE TABLE ACCOUNT
+    (
+      ACCOUNT_ID NUMBER   NOT NULL,
+      BRANCH_ID  NUMBER   NOT NULL,
+      SSN        CHAR(12) NOT NULL,
+      FIRST_NAME VARCHAR2(20),
+      LAST_NAME  VARCHAR2(20),
+      MID_NAME   VARCHAR2(10),
+      PHONE      VARCHAR2(14),
+      ADDRESS    VARCHAR2(60),
+      PRIMARY KEY (ACCOUNT_ID)
+    );
+
+    CREATE TABLE HISTORY
+    (
+      TRANSACTION_CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      ACCOUNT_ID          NUMBER       NOT NULL,
+      BRANCH_ID           NUMBER       NOT NULL,
+      TRANSACTION_TYPE    VARCHAR2(15) NOT NULL,
+      DESCRIPTION         VARCHAR2(1024),
+      AMOUNT              DECIMAL(20, 2) NOT NULL,
+      BALANCE             DECIMAL(20, 2) NOT NULL
+    );
+    ```
+The following sample code provides details about the sample code that is available in the BRANCH and ACCOUNTS tables.
+
+    ```SQL
+    -- Sample values in the BRANCH table
+    INSERT INTO BRANCH (BRANCH_ID, BRANCH_NAME, PHONE, ADDRESS, SERVICE_URL, LAST_ACCT)
+    VALUES (1111, 'Arizona', '123-456-7891', '6001 N 24th St, Phoenix, Arizona 85016, United States', 'http://arizona-branch-bank:9095', 10002);
+
+    -- Sample values in the ACCOUNTS table
+    INSERT INTO ACCOUNT (ACCOUNT_ID, BRANCH_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+    VALUES (10001, 1111, '873-61-1457', 'Adams', 'Lopez', 'D', '506-100-5886', '15311 Grove Ct. Arizona  95101');
+    INSERT INTO ACCOUNT (ACCOUNT_ID, BRANCH_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+    VALUES (10002, 1111, '883-71-8538', 'Smith', 'Mason', 'N', '403-200-5890', '15322 Grove Ct. Arizona  95101');
+    INSERT INTO ACCOUNT (ACCOUNT_ID, BRANCH_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+    VALUES (10003, 1111, '883-71-8538', 'Thomas', 'Dave', 'C', '603-700-5899', '15333 Grove Ct. Arizona  95101');
+    ```
+
+### About the Resource Manager for the Branch Banking Service
+
+The Branch Banking service uses `AZBRPDB1` as resource manager. This PDB contains the `SAVINGS_ACCOUNT` table. The following code snippet provides details about the `SAVINGS_ACCOUNT` table. The sample code is provided only for your reference. The tables are already available in the PDB and populated with sample values.
+
+    ```SQL
+    CREATE TABLE SAVINGS_ACCOUNT
+    (
+      ACCOUNT_ID NUMBER NOT NULL,
+      BRANCH_ID  NUMBER NOT NULL,
+      BALANCE    DECIMAL(20, 2) NOT NULL,
+      PRIMARY KEY (ACCOUNT_ID)
+    );
+    ```
+
+The following sample code provides details about the sample code that is available in the SAVINGS_ACCOUNT table.
+
+    ```SQL
+    -- Branch - Arizona
+    INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
+    VALUES (10001, 1111, 50000.0);
+    INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
+    VALUES (10002, 1111, 50000.0);
+    INSERT INTO SAVINGS_ACCOUNT (ACCOUNT_ID, BRANCH_ID, BALANCE)
+    VALUES (10003, 1111, 50000.0);
+    ```
+
+### About the Resource Manager for the Stock Broker Service
+
+The Stock Broker service uses `STOCKBROKERPDB` as resource manager. This PDB contains six tables: CASH_ACCOUNT, STOCKS, USER_ACCOUNT, STOCK_BROKER_STOCKS, USER_STOCKS, and HISTORY. The following code snippet provides details about the tables. The sample code is provided only for your reference. The tables are already available in the PDB and populated with sample values.
+
+    ```SQL
+    -- Tables to be created
+    -- Display stock units
+    CREATE TABLE CASH_ACCOUNT
+    (
+        ACCOUNT_ID   NUMBER       NOT NULL,
+        BALANCE      DECIMAL,
+        STOCK_BROKER VARCHAR2(20) NOT NULL,
+        PRIMARY KEY (ACCOUNT_ID)
+    );
+    -- Common account for Stock Broker. This is inserted during the initialization of the application.
+    CREATE TABLE STOCKS
+    (
+        STOCK_SYMBOL VARCHAR2(6)  NOT NULL,
+        COMPANY_NAME VARCHAR2(35) NOT NULL,
+        INDUSTRY     VARCHAR2(35) NOT NULL,
+        STOCK_PRICE  DECIMAL      NOT NULL,
+        PRIMARY KEY (STOCK_SYMBOL)
+    );
+    CREATE TABLE USER_ACCOUNT
+    (
+        ACCOUNT_ID NUMBER   NOT NULL,
+        SSN        CHAR(12) NOT NULL,
+        FIRST_NAME VARCHAR2(20),
+        LAST_NAME  VARCHAR2(20),
+        MID_NAME   VARCHAR2(10),
+        PHONE      VARCHAR2(14),
+        ADDRESS    VARCHAR2(60),
+        PRIMARY KEY (ACCOUNT_ID)
+    );
+    CREATE TABLE STOCK_BROKER_STOCKS
+    (
+        ACCOUNT_ID   NUMBER NOT NULL,
+        STOCK_SYMBOL VARCHAR2(6)  NOT NULL,
+        STOCK_UNITS  NUMBER NOT NULL,
+        PRIMARY KEY (ACCOUNT_ID, STOCK_SYMBOL),
+        CONSTRAINT FK_StockBroker_CashAccount
+            FOREIGN KEY (ACCOUNT_ID) REFERENCES CASH_ACCOUNT (ACCOUNT_ID) ON DELETE CASCADE,
+        CONSTRAINT FK_StockBrokerStocks_Stocks
+            FOREIGN KEY (STOCK_SYMBOL) REFERENCES STOCKS (STOCK_SYMBOL) ON DELETE CASCADE
+    );
+    CREATE TABLE USER_STOCKS
+    (
+        ACCOUNT_ID   NUMBER NOT NULL,
+        STOCK_SYMBOL VARCHAR2(6)  NOT NULL,
+        STOCK_UNITS  NUMBER NOT NULL,
+        PRIMARY KEY (ACCOUNT_ID, STOCK_SYMBOL),
+        CONSTRAINT FK_UserStocks_UserAccount
+            FOREIGN KEY (ACCOUNT_ID) REFERENCES USER_ACCOUNT (ACCOUNT_ID) ON DELETE CASCADE,
+        CONSTRAINT FK_UserStocks_Stocks
+            FOREIGN KEY (STOCK_SYMBOL) REFERENCES STOCKS (STOCK_SYMBOL) ON DELETE CASCADE
+    );
+    CREATE TABLE HISTORY
+    (
+        TRANSACTION_TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        ACCOUNT_ID       NUMBER       NOT NULL,
+        STOCK_OPERATION  VARCHAR2(15) NOT NULL,
+        STOCK_UNITS      NUMBER       NOT NULL,
+        STOCK_SYMBOL     VARCHAR2(6)  NOT NULL,
+        DESCRIPTION      VARCHAR2(1024)
+    );
+    ```
+The following sample code provides details about the sample code that is available in the CASH_ACCOUNT, STOCKS, USER_ACCOUNT, STOCK_BROKER_STOCKS, and USER_STOCKS table.
+
+    ```SQL
+    -- Sample value in the STOCKS table
+    INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+    VALUES ('BLUSC', 'Blue Semiconductor', 'Semiconductor Industry', 87.28);
+    INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+    VALUES ('SPRFD', 'Spruce Street Foods', 'Food Products', 152.55);
+    INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+    VALUES ('SVNCRP', 'Seven Corporation', 'Software consultants', 97.20);
+    INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+    VALUES ('TALLMF', 'Tall Manufacturers', 'Tall Manufacturing', 142.24);
+    INSERT INTO STOCKS(STOCK_SYMBOL, COMPANY_NAME, INDUSTRY, STOCK_PRICE)
+    VALUES ('VSNSYS', 'Vision Systems', 'Medical Equipments', 94.35);
+
+    -- Sample value in the CASH_ACCOUNT table
+    INSERT INTO CASH_ACCOUNT(ACCOUNT_ID, BALANCE, STOCK_BROKER)
+    VALUES (9999999, 10000000, 'PENNYPACK');
+
+    -- Sample value in the STOCK_BROKER_STOCKS table
+    INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (9999999, 'BLUSC', 100000);
+    INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (9999999, 'SPRFD', 50000);
+    INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (9999999, 'SVNCRP', 90000);
+    INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (9999999, 'TALLMF', 80000);
+    INSERT INTO STOCK_BROKER_STOCKS (ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (9999999, 'VSNSYS', 100000);
+
+    -- Sample value in the USER_ACCOUNT table
+    INSERT INTO USER_ACCOUNT (ACCOUNT_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+    VALUES (10001, '873-61-1457', 'Adams', 'Lopez', 'D', '506-100-5886', '15311 Grove Ct. New York  95101');
+    INSERT INTO USER_ACCOUNT (ACCOUNT_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+    VALUES (10002, '883-71-8538', 'Smith', 'Mason', 'N', '403-200-5890', '15311 Grove Ct. New York  95101');
+    INSERT INTO USER_ACCOUNT (ACCOUNT_ID, SSN, FIRST_NAME, LAST_NAME, MID_NAME, PHONE, ADDRESS)
+    VALUES (10003, '993-71-8500', 'Thomas', 'Dave', 'C', '603-700-5899', '15333 Grove Ct. Arizona  95101');
+
+    -- Sample value in the USER_STOCKS table
+    INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (10001, 'BLUSC', 10);
+    INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (10001, 'SPRFD', 15);
+    INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (10001, 'SVNCRP', 20);
+    INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (10001, 'TALLMF', 30);
+    INSERT INTO USER_STOCKS(ACCOUNT_ID, STOCK_SYMBOL, STOCK_UNITS)
+    VALUES (10001, 'VSNSYS', 40);
+    ```
+
+When you start Minikube, the PDBs are created and populated with sample data.
+
+## Task 3: Verify that All the Resources are Ready
+
+1. Verify that the application has been deployed successfully.
+
+    ```text
+    <copy>
+    helm list -n otmm
+    </copy>
+    ```
+
+   In the output, verify that the `STATUS` of the `bankapp` is `deployed`.
+
+   **Example output**
+
+   ![Helm install success](./images/app-deployed.png)
+
+2. Verify that all resources, such as pods and services, are ready. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
+
+    ```text
+    <copy>
+    kubectl get pods -n otmm
+    </copy>
+    ```
+
+   **Example output**
+
+   ![Status of pods in the otmm namespace](./images/get-pods-status.png)
+
+3. Verify that the database instance is running. The database instance is available in the `oracledb` namespace.  Run the following command to retrieve the list of resources in the `oracledb` namespace and their status.
+
+    ```text
+    <copy>
+    kubectl get pods -n oracledb
+    </copy>
+    ```
+
+   **Example output**
+
+   ![Database instance details](./images/database-service.png)
+
+It usually takes some time for the Database services to start running in the Minikube environment. Proceed with the remaining tasks only after ensuring that all the resources, including the database service, are ready and in the `RUNNING` status and the value of the **READY** field is `1/1`.
+
+## Task 4: Configure Keycloak
 
 The Bank and Stock-Trading Application console uses Keycloak to authenticate users.
 
@@ -106,23 +349,32 @@ The Bank and Stock-Trading Application console uses Keycloak to authenticate use
     </copy>
     ```
 
-    From the output note down the value of `EXTERNAL-IP` and `PORT(S)`, which is the external IP address and port of Keycloak. You will provide this value in the next step.
+    From the output note down the value of `EXTERNAL-IP` and `PORT(S)`, which is the external IP address and port of Keycloak. You will provide this value later.
 
     **Example output**
 
     ![Public IP address of Keycloak](./images/keycloak-ip-address.png)
 
-    Let's consider that the external IP in the above example is 198.51.100.1 and the IP address is 8080.
+    Let's consider that the external IP in the above example is 198.51.100.1 and the port is 8080.
 
-2. Sign in to Keycloak. In a browser, enter the IP address and port number that you have copied in the previous step. The following example provides sample values. Provide the values based on your environment.
+2. Run the following command to run the `reconfigure-keycloak.sh` script from the `$HOME` directory. This command configures Keycloak and updates the settings to suit the requirements of the application.
+
+    ```
+    <copy>
+    cd $HOME
+    sh reconfigure-keycloak.sh
+    </copy>
+    ```
+
+3. Sign in to Keycloak. In a browser, enter the IP address and port number that you have copied in the previous step. The following example provides sample values. Provide the values based on your environment.
 
     ```
     http://198.51.100.1:8080
     ```
 
-3. Click **Administration Console**.
+4. Click **Administration Console**.
 
-4. Sign in to Keycloak with the initial administrator username `admin` and password `admin`. After logging in, reset the password for the `admin` user. For information about resetting the password, see the Keycloak documentation.
+5. Sign in to Keycloak with the initial administrator username `admin` and password `admin`. After logging in, reset the password for the `admin` user. For information about resetting the password, see the Keycloak documentation.
 
 6. Select the **MicroTx-BankApp** realm, and then click **Users** to view the list of users in the `MicroTx-BankApp` realm. The `MicroTx-BankApp` realm is preconfigured with these default user names.
    ![Dialog box to view the list of Users](./images/keycloak-users.png)
@@ -134,22 +386,18 @@ The Bank and Stock-Trading Application console uses Keycloak to authenticate use
 
     Details of the `microtx-bankapp` client are displayed.
 
-9. In the **Settings** tab, under **Access settings**, enter the external IP address of Istio ingress gateway for the **Root URL**, **Valid redirect URIs**, **Valid post logout redirect URIs**, and **Admin URL** fields. Provide the IP address of Istio ingress gateway that you have copied earlier.
-    ![Access Settings group in the Settings tab](./images/keycloak-client-ip.png)
+9. In the **Settings** tab, under **Access settings**, verify that the external IP address of Istio ingress gateway is available in the **Root URL**, **Valid redirect URIs**, **Valid post logout redirect URIs**, and **Admin URL** fields.
 
-10. Click **Save**.
-
-11. Click the **Credentials** tab, and then note down the value of the **Client-secret**. You'll need to provide this value later.
+10. Click the **Credentials** tab, and then note down the value of the **Client-secret**. You'll need to provide this value later.
     ![Access Settings group in the Settings tab](./images/keycloak-client-secret.png)
 
-12. Click **Realm settings**, and then in the **Frontend URL** field of the **General** tab, enter the external IP address and port of the Keycloak server which you have copied in a previous step. For example, `http://198.51.100.1:8080`.
-    ![General Realm Settings](./images/keycloak-url.png)
+11. Click **Realm settings**, and then in the **Frontend URL** field of the **General** tab, verify that the values provided match the external IP address and port of the Keycloak server which you have copied in a previous step. For example, `http://198.51.100.1:8080`.
 
-13. In the **Endpoints** field, click the **OpenID Endpoint Configuration** link. Configuration details are displayed in a new tab.
+12. In the **Endpoints** field, click the **OpenID Endpoint Configuration** link. Configuration details are displayed in a new tab.
 
-14. Note down the value of the **issuer** URL. It is in the format, `http://<keycloak-ip-address>:<port>/realms/<name-of-realm-you-have-created>`. For example, `http://198.51.100.1:8080/realms/MicroTx-Bankapp`. You'll need to provide this value later.
+13. Note down the value of the **issuer** URL. It is in the format, `http://<keycloak-ip-address>:<port>/realms/<name-of-realm-you-have-created>`. For example, `http://198.51.100.1:8080/realms/MicroTx-Bankapp`. You'll need to provide this value later.
 
-15. Click **Save**.
+14. Click **Save**.
 
 ## Task 3: Provide Access Details in the values.yaml File
 
@@ -157,7 +405,7 @@ The folder that contains the Bank and Stock-Trading application code also contai
 
 To provide the configuration and environment details in the `values.yaml` file:
 
-1. Open the `values.yaml` file, which is in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts` folder.
+1. Open the `values.yaml` file, which is in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/Helmcharts` folder.
 
 2. Enter values that you have noted down for the following fields under `security` in `UserBanking`.
 
@@ -169,52 +417,17 @@ To provide the configuration and environment details in the `values.yaml` file:
 
 4. Save the changes you have made to the `values.yaml` file.
 
-## Task 4: Build Container Images for Each Microservice
+## Task 4: Build Container Image for the Stock Broker service
 
-The code for the Bank and Stock-Trading application is available in the installation bundle in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp` folder. The container image for the User Banking service is pre-built and available for your use. Build container images for all the other microservices in the Bank and Stock-Trading application.
+The code for the Bank and Stock-Trading application is available in the installation bundle in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp` folder. The container image for the User Banking, Branch Banking, Core Banking services are pre-built and available for your use. Build the container image only for the Stock Broker service.
 
-To build container images for each microservice in the sample:
+To build container image for the Stock Broker service:
 
-1. Run the following commands to build the container image for the Branch Banking service.
-
-    ```
-    <copy>
-    cd /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/BranchBanking
-    </copy>
-    ```
+1. Run the following commands.
 
     ```
     <copy>
-    minikube image build -t branch-banking:1.0 .</copy>
-    ```
-
-   When the image is successfully built, the following message is displayed.
-
-   **Successfully tagged branch-banking:1.0**
-
-2. Run the following commands to build the container image for the Core Banking service.
-
-    ```
-    <copy>
-    cd /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/CoreBanking
-    </copy>
-    ```
-
-    ```
-    <copy>
-    minikube image build -t core-banking:1.0 .
-    </copy>
-    ```
-
-   When the image is successfully built, the following message is displayed.
-
-   **Successfully tagged core-banking:1.0**
-
-3. Run the following commands to build the Docker image for the Stock Broker service.
-
-    ```
-    <copy>
-    cd /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker
+    cd /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/StockBroker
     </copy>
     ```
 
@@ -228,7 +441,7 @@ To build container images for each microservice in the sample:
 
    **Successfully tagged stockbroker:1.0**
 
-The container images that you have created are available in your Minikube container registry.
+The container image that you have built is available in your Minikube container registry.
 
 ## Task 5: Install the Bank and Stock-Trading application
 
@@ -238,7 +451,7 @@ Install the Bank and Stock-Trading application in the `otmm` namespace, where yo
 
     ```
     <copy>
-    cd /home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/Helmcharts
+    cd /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/Helmcharts
     </copy>
     ```
 
@@ -256,7 +469,7 @@ Install the Bank and Stock-Trading application in the `otmm` namespace, where yo
 
     ```
     NAME: bankapp
-    LAST DEPLOYED: TUe May 23 10:52:14 2023
+    LAST DEPLOYED: Tue May 23 10:52:14 2023
     NAMESPACE: otmm
     STATUS: deployed
     REVISION: 1
@@ -338,10 +551,10 @@ You may now **proceed to the next lab**.
 
 ## Learn More
 
-* [Develop Applications with XA](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
+* [Develop Applications with XA](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
 
 ## Acknowledgements
 
 * **Author** - Sylaja Kannan
 * **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja, June 2023
+* **Last Updated By/Date** - Sylaja, November 2023

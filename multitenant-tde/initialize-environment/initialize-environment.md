@@ -4,7 +4,7 @@
 
 In this lab we will review and startup all components required to successfully run this workshop.
 
-*Estimated Lab Time:* 30 Minutes.
+*Estimated Time:* 30 Minutes.
 
 Watch the video below for a quick walk-through of the lab.
 [Initialize Environment](videohub:1_o155nu8l)
@@ -32,9 +32,7 @@ This lab assumes you have:
         - CDB1
         - CDB2
 
-    You may test database connectivity clicking on the *+* sign next to the Database(s) as shown below in the *SQL Developer Oracle Connections* panel.
-
-    ![](./images/ADD_IMAGE_HERE " ")
+    ![Landing page](./images/remote-desktop-landing.png " ")
 
 2. Click the *Terminal* icon on the desktop to launch a session, then run the following to validate that expected processes are up.
 
@@ -46,13 +44,21 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![](./images/ADD_IMAGE_HEREcheck-pmon-up.png " ")
-    ![](./images/ADD_IMAGE_HEREcheck-db-service-up.png " ")
-    ![](./images/ADD_IMAGE_HEREcheck-dblistner-service-up.png " ")
+    ![Check PMON Database process status](./images/check-pmon-up.png "check PMON Database process status")
+    ![Check database service status](./images/check-db-service-up.png "Check database service status")
+    ![Check DB listener service status](./images/check-dblistner-service-up.png "Check DB listener service status")
 
     If all expected processes are shown in your output as seen above, then your environment is ready for the next task.  
 
 3. If you see questionable output(s), failure or down component(s), refer to the appendix section to restart the service accordingly
+
+4. Follow the (3) steps shown below to launch *SQL Developer*:
+
+    ![Launch SQL Developer](./images/launch-sqldeveloper.png "Launch SQL Developer")
+
+5. Test database connectivity by clicking on the *+* sign next to each CDB or PDB listed as shown below
+
+    ![Test Database Connections](./images/test-database-connections.png "Test Database Connections")
 
 ## Task 2: Initialize Database for Multitenant Use Cases
 
@@ -63,7 +69,7 @@ This lab assumes you have:
     clear
     cd ~oracle/labs
     rm -rf ~oracle/labs/*
-    wget -O novnc-multitenant.zip https://objectstorage.us-ashburn-1.oraclecloud.com/p/OsVZaMBsS-TArKa1EQNkZSB0SGptkNZwSd21lloGfE27nsRinQNvRm0G9ekds4zB/n/c4u04/b/livelabsfiles/o/labfiles/novnc-multitenant.zip
+    wget -O novnc-multitenant.zip https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/novnc-multitenant.zip
     unzip -qo novnc-multitenant.zip
     rm -f novnc-multitenant.zip
     cd multitenant
@@ -74,7 +80,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![](./images/ADD_IMAGE_HEREinit-multitenant.png " ")
+    ![](./images/init-multitenant-tde.png " ")
 
 <!-- for 21c image only. -->
 2. Create Database Links. During this workshop you will use database links *`cdb1_dblink`* and *`cdb2_dblink`* to perform tasks across between the two CDBs

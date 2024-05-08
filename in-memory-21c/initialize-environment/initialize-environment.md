@@ -76,7 +76,7 @@ This lab assumes you have:
     clear
     cd ~oracle/labs
     rm -rf ~oracle/labs/*
-    wget -O novnc-inmemory-21c.zip https://objectstorage.us-ashburn-1.oraclecloud.com/p/7lzqJmKirEWwAc-e4XbZhV0A9ZYzqv7jU6HRhADWpR5zbhHb3x3rKjZV3m5ktDD0/n/c4u04/b/livelabsfiles/o/labfiles/novnc-inmemory-21c.zip
+    wget -O novnc-inmemory-21c.zip https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/novnc-inmemory-21c.zip
     unzip -qo novnc-inmemory-21c.zip
     rm -f novnc-inmemory-21c.zip
     cd inmemory

@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "Oracle CloudWorld 2022 - HOL4096",
+    "workshoptitle": "OCI Database Migration service - Online migration",
     "include": {
         "starter-file.sql": "../../files/starter-file.sql",
         "sample.json": "../../files/sample.json",
@@ -9,20 +9,17 @@
     "tutorials": [
         {
             "title": "Introduction",
-            "filename": "../../introduction/introduction.md"
+            "filename": "../../introduction-terraform/introduction.md"
         },
         {
-            "title": "Lab 1: Register and Setup Migration",
+            "title": "Lab 1: Create Database Connections and Setup Migration",
             "filename": "../../register-and-migrate-terraform/create-registered-databases-terraform.md"
         },
         {
             "title": "Lab 2: Validate and Run Migration",
             "filename": "../../validate-and-run-terraform/validate-and-run-terraform.md"
         },
-        {
-            "title": "CloudWorld Support Lab",
-            "filename": "https://oracle-livelabs.github.io/common/support/ocwsupportlab/ocwsupportlab.md"
-        },
+        
         {
             "title": "Need Help?",
             "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
