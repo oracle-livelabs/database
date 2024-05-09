@@ -588,30 +588,6 @@ Now you've had a chance to try out Oracle Multitenant. Hopefully you've realized
     
 Thank you for participting in this Oracle LiveLabs workshop!
 
-## Appendix: Troubleshooting the Lab Environment
-The Oracle Database environment for this workshop should start up completely upon the provisioning of the workshop environment.  If you are having difficulty connecting to the databases using the lab commands, please verify that the lab database environment is completely up.  The following Processes should be running:
-
-    - Database Listeners
-        - LISTENER (1521)
-    - Database Server Instances
-        - CDBPROD
-        - CDBTEST
-
-You should be able to validate the running processes by the running the following from the desktop terminal window:
-
-    ```
-    <copy>
-    ps -ef|grep ora_|grep pmon|grep -v grep
-    ps -ef|grep LIST|grep -v grep
-    </copy>
-    ```
-
-   ![Check PMON Database process status](./images/check-pmon-up.png "check PMON Database process status")
-   ![Check Database Listener process status](./images/check-dblistner-service-up.png "Check database listener process status")
-
-If all expected processes are shown in your output as seen above, then your environment is ready for running the workshop tasks. If any of the processes are not running, then please refer to the following manage the Database and Listener processes:
-
-[Managing the Workshop Database Processes](../initialize-environment/initialize-environment.md)
 
 ## Acknowledgements
 

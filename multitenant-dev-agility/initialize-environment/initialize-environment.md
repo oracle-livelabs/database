@@ -17,7 +17,30 @@ This lab assumes you have:
     
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
-## Task 1: Managing Startup Services
+## Task 1: Lab Environment - Oracle Database Details 
+
+The Oracle Database environment for this workshop should start up completely upon the provisioning of the workshop environment.  If you are having difficulty connecting to the databases using the lab commands, please verify that the lab database environment is completely up.  The following Processes should be running:
+
+   - Database Listeners
+       - LISTENER (1521)
+   - Database Server Instances
+       - CDBPROD
+       - CDBTEST
+
+You should be able to validate the running processes by entering the following commands in the desktop terminal window:
+
+   ```
+   <copy>
+   ps -ef|grep ora_|grep pmon|grep -v grep
+   ps -ef|grep LIST|grep -v grep
+   </copy>
+   ```
+
+   ![There should be a tnslsnr process, plus ora_pmon processes for both CDBPROD and CDBTEST](./images/check-processes.png "check PMON Database process status")
+
+If all expected processes are shown in your output as seen above, then your environment is ready for running the workshop tasks. If any of the processes are not running, then please refer to the instructions in the next task.
+
+## Task 2: Managing Startup Services
 
 1. Database service (All databases and Standard Listener).
 
