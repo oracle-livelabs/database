@@ -85,7 +85,7 @@ Before you start a transaction, you must start a Minikube tunnel.
 
 ## Task 2: Know Details About the Resource Managers
 
-When you start Minikube, an instance of the Oracle Database 23c Free Release is deployed on Minikube. See [Oracle Database Free](https://www.oracle.com/database/free/get-started). The following three PDBs are already available in the Database instance.
+When you start Minikube, an instance of the Oracle Database 23ai Free Release is deployed on Minikube. See [Oracle Database Free](https://www.oracle.com/database/free/get-started). The following three PDBs are already available in the Database instance.
 
     * The Core Banking service uses `COREBNKPDB` as resource manager.
     * The Branch Banking service uses `AZBRPDB1` as resource manager.
