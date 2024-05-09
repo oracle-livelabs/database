@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Oracle Database Multitenant for Developers",
+  "workshoptitle": "Oracle Multitenant for Development Agility",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -19,7 +19,7 @@
     },
     {
       "title": "Lab 2: Multitenant for Development Agility",
-      "description": "Rapid provisioning, unplugging, and cloning of Oracle Databases",
+      "description": "Rapid provisioning, unplugging, plugging in, and cloning of Oracle Databases",
       "filename": "../../mt-dev-agility/mt-for-dev-agility.md"
     },
     {

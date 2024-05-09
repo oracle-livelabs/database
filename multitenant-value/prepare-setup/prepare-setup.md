@@ -60,4 +60,4 @@ You may now proceed to the next lab.
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
 * **Contributors** - Meghana Banka
-* **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, August 2023
+* **Last Updated By/Date** - Joseph Bernens, Principal Solution Engineer, May 2024

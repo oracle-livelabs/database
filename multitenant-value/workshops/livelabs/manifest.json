@@ -5,7 +5,7 @@
     {
       "title": "Introduction",
       "description": "Introduction.",
-      "filename": "../../introduction/introduction.md"
+      "filename": "../../introduction/intro.md"
     },
     {
       "title": "Get Started",
@@ -23,14 +23,9 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc-ssh.md"
     },
     {
-      "title": "Lab 3: Initialize Environment",
-      "description": "Initialize Environment",
-      "filename": "../../initialize-environment/initialize-environment.md"
-    },
-    {
-      "title": "Lab 4: MT Key Management",
-      "description": "Managing Keys in a Wallet with Multitenant",
-      "filename": "../../mt-key-mgmt/mt-key-mgmt.md"
+      "title": "Lab 3: Multitenant for Developerment Agility",
+      "description": "Rapid provisioning, unplugging, plugging in, and cloning of Oracle Databases",
+      "filename": "../../mt-dev-agility/mt-dev-agility.md"
     },
     {
       "title": "Environment Cleanup",

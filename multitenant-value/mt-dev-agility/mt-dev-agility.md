@@ -518,7 +518,7 @@ You should still be connected to the SQLcl client and see a "SQL>" prompt.  If n
     
     ![The HRTESTMASTER PDB is refreshed and opened in READ ONLY mode.  A row count from HR.JOBS now shows 21 rows.](./images/task7.5-refreshedtestmaster.png " ")
 
-## Task 8: Create multiple, thin copies of the **HRTESTMASTER** database to support each development team
+## Task 8: Create multiple, thin copies of the Test Master refreshable pdb to support test and development teams
 In the previous task, you created a refreshable copy of the production HRAPP database.  By rule, a refreshable PDB can only be opened read-only.  So, how is this read-only database useful to testing and development teams that want to work with that latest data from production?  As you've seen in earlier tasks, it is easy to create PDB copies using the "CREATE PLUGGABLE DATABASE..." SQL statement.  In this lab, the example databases are small so making full copies takes little time, and little disk space.  So you could easily create full clones of the **HRTESTMASTER** PDB for any development or testing team that needed their own copy.  However, if the **HRTESTMASTER** database was a very large database, terabytes in size or more, making full copies could take a long time and consume a large amount disk space - so it's not very practical to do so.   Oracle Multitenant offers a solution here, also: "thin", copy-on-write clones known as PDB Snapshot Copies.
 In this task, you will create thin copies of **HRTESTMASTER** for the development and testing teams.
 
@@ -588,7 +588,7 @@ Now you've had a chance to try out Oracle Multitenant. Hopefully you've realized
     
 Thank you for participting in this Oracle LiveLabs workshop!
 
-## Appendix: Troubleshotting the Lab Environment
+## Appendix: Troubleshooting the Lab Environment
 The Oracle Database environment for this workshop should start up completely upon the provisioning of the workshop environment.  If you are having difficulty connecting to the databases using the lab commands, please verify that the lab database environment is completely up.  The following Processes should be running:
 
     - Database Listeners
@@ -609,7 +609,7 @@ You should be able to validate the running processes by the running the followin
    ![Check PMON Database process status](./images/check-pmon-up.png "check PMON Database process status")
    ![Check Database Listener process status](./images/check-dblistner-service-up.png "Check database listener process status")
 
-If all expected processes are shown in your output as seen above, then your environment is ready for the next task. If any of the processes are not running, then please the followinyou may use the following commands to manage the Database and Listener processes.
+If all expected processes are shown in your output as seen above, then your environment is ready for running the workshop tasks. If any of the processes are not running, then please refer to the following manage the Database and Listener processes:
 
 [Managing the Workshop Database Processes](../initialize-environment/initialize-environment.md)
 

@@ -1,11 +1,11 @@
 {
-  "workshoptitle": "Pluggables, Clones and Containers: Securing Oracle Multitenant with Transparent Database Encryption (TDE)",
+  "workshoptitle": "Multitenant for Development Agility",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
       "description": "Introduction.",
-      "filename": "../../introduction/introduction.md"
+      "filename": "../../introduction/intro.md"
     },
     {
       "title": "Lab 1: Environment Setup",
@@ -13,13 +13,8 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
     },
     {
-      "title": "Lab 2: Initialize Environment",
-      "description": "Initialize Environment",
-      "filename": "../../initialize-environment/initialize-environment.md"
-    },
-    {
-      "title": "Lab 3: MT Key Management",
-      "description": "Managing Keys in a Wallet with Multitenant",
+      "title": "Lab 2: Mutltitenant for Development Agility",
+      "description": "Rapid provisioning, unplugging, plugging in, and cloning of Oracle Databases",
       "filename": "../../mt-key-mgmt/mt-key-mgmt.md"
     },
     {
