@@ -1,10 +1,10 @@
 {
-    "workshoptitle": "Oracle Database 23c New Features",
+    "workshoptitle": "Oracle Database 23ai New Features",
       "help": "livelabs-help-db_us@oracle.com",
       "tutorials": [
         {
             "title": "Introduction",
-            "description": "This is an introduction to Oracle Database 23c.",
+            "description": "This is an introduction to Oracle Database 23ai.",
             "type": "livelabs",
             "filename": "../../introduction/introduction.md"
         },
