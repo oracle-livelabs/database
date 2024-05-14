@@ -11,7 +11,7 @@ Enormous gains in technical efficiency are enabled by a shared technical infrast
 
 Watch the video below for an overview of Oracle Multitenant.
 
-[Overview video on Oracle Multitenant](youtube:4mUwjBfztfU)
+[Overview video on Oracle Multitenant](youtube:4mUwjBfztfU:large)
 
 ### Containers and pluggable databases
 
@@ -28,7 +28,7 @@ Every CDB has the following containers:
 
 The following figure shows a CDB with four containers: the root, seed, and two PDBs. Each PDB has its own dedicated application. A different PDB administrator manages each PDB. A common user exists across a CDB with a single identity. In this example, common user SYS can manage the root and every PDB. At the physical level, this CDB has a database instance and database files, just as a non-CDB does.
 
-![Diagram of CDBs and PDBs](./images/arch.png " ")
+![Diagram of Users and Schemas in a CDB with two user-created PDBs](./images/arch.png " ")
 
 Please *proceed to the next lab*.
 
