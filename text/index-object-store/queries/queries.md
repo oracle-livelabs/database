@@ -153,4 +153,4 @@ You also might be interested in our other Oracle Text Livelab, [Full Text Indexi
 ## Acknowledgements
 
 - **Author** - Roger Ford, Principal Product Manager
-- **Last Updated By/Date** - Roger Ford, November 2022
+- **Last Updated By/Date** - Hermann Baer, May 2024
