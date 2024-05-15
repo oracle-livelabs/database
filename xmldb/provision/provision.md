@@ -73,9 +73,9 @@ In this lab, you will:
 <if type="livelabs">
     - __Choose a compartment__ - Use the default compartment that includes your user id.
 </if>
-    - __Display Name__ - Enter a memorable name for the database for display purposes. For this lab, use __XMLDB__.
+    - __Display Name__ - Enter a memorable name for the database for display purposes. You can name the database as you like, e.g. __MYADB__.
 <if type="freetier">
-    - __Database Name__ - Use letters and numbers only, starting with a letter. Maximum length is 14 characters. (Underscores not initially supported.) For this lab, use __TEXTDB__.
+    - __Database Name__ - Use letters and numbers only, starting with a letter. Maximum length is 14 characters. (Underscores not initially supported.) You can name the database as you like, e.g. __MYADB__.
 
     ![Enter the required details.](./images/adb-info.png " ")
 </if>
@@ -142,7 +142,7 @@ In this lab, you will:
 
     ![Click Create Autonomous Database.](./images/create-adb-final.png)
 
-11.  Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous Database is ready to use! Have a look at your instance's details here including the Database Name, Database Version, OCPU Count, and Storage.
+11.  Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous Database is ready to use! Have a look at your instance's details here including the Database Name, Database Version, CPU Count, and Storage.
 
     ![Database instance homepage.](./images/last.png)
 

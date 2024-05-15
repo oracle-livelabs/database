@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Files in the object store are protected by a system of 'credentials'. It's possible for a bucket to be public, meaning that the files within it are readable by anyone who knows (or can guess) the URI. If the bucket is not public, then the owner of the bucket must create a cloud credential, and provide that credential to anyone (or any program) that needs to access the file.
+Files in the object store are protected by a system of 'credentials'. It's possible for a bucket to be public, meaning that the files within it are readable by anyone who knows (or can guess) the URI. If the bucket is not public, then the owner of the bucket or any other privileged user must create a cloud credential, and provide that credential to anyone (or any program) that needs to access the file.
 
 There are various ways of creating a credential, but the simplest method is by creating an 'auth token' through the OCI control panel, and creating a credential from that.
 
@@ -23,11 +23,9 @@ In this lab, you will:
 
 1. Find your full OCI username
     
-    From the main OCI Control Panel menu, choose **Identity &amp; Security**, then **Users**. From the list choose your username. It will most likely be prefixed &quot;oracleidentitycloudservice/&quot; followed by your login email, with &quot;Yes&quot; in the federated column. You may see a non-federated ID, which is likely just your email - do not use that. Save the username to a text file for use in Task 2.
+    Assuming you are going to use the OCI user you are currently logged in with, choose the **User Icon** in the upper right corner, then select **My Profile**. You will get straight into the user management page.
 
     ![choose users from the main menu](./images/menu-users.png " ")
-
-    ![list of users](./images/user-list.png " ")
 
 2. Create an Auth Token
 
@@ -61,19 +59,6 @@ In this lab, you will:
 
     We need to run the next part from within the SQL part of Database Actions.
 
-<if type="alwaysfree">
-2. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources, you need to be in a region where Always Free Resources are available. You can see your current default **Region** in the top, right-hand corner of the page.
-
-    ![Select region on the far upper-right corner of the page.](./images/region.png " ")
-
-</if>
-<if type="livelabs">
-2. If you are using a LiveLabs account, you need to be in the region your account was provisioned in. You can see your current default **Region** in the top, right-hand corner of the page. Make sure that it matches the region on the LiveLabs Launch page.
-
-    ![Select region on the far upper-right corner of the page.](./images/region.png " ")
-
-</if>
-
 3. Click the navigation menu in the upper left to show top-level navigation choices.
 
 4. Click on **Oracle Database** and choose **Autonomous Transaction Processing**.
@@ -86,18 +71,9 @@ In this lab, you will:
     ![select your compartment.](./images/livelabs-compartment.png " ")
 
 </if>
-<if type="freetier">
-5. If using FreeTier, your compartment should be the root compartment for your tenancy.
-
-    ![Check the compartment](./images/compartments.png " ")
-</if>
 
 <if type="freetier">
-   **Note:** Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
-</if>
-
-<if type="freetier">
-6. You should see your database **TEXTDB** listed in the center. Click on the database name "TEXTDB".
+6. You should see your database listed in the center. Click on the database name you created. For example, if your database was named TEXTDB, select this database.
 </if>
 
 <if type="livelabs">
@@ -114,7 +90,7 @@ In this lab, you will:
 
     Database Actions allows you to connect to your Autonomous Database through various browser-based tools. We will just be using the SQL workshop tool.
 
-9. You should be in the Database Actions panel. Click on the **SQL** card
+9. You should be in the Database Actions panel. Click on the **SQL** option under the **Development** category.
 
     ![dbactions menu sql](./images/dbactions-menu-sql.png " ")
 
@@ -143,4 +119,4 @@ That's it, you've now created a credential called "mycredential". In the next la
 ## Acknowledgements
 
 - **Author** - Roger Ford, Principal Product Manager
-- **Last Updated By/Date** - Roger Ford, November 2022
+- **Last Updated By/Date** - Hermann Baer, May 2024
