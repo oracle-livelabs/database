@@ -2,7 +2,7 @@
 
 ## About This Workshop
 
-Run this hands-on workshop to learn how to use True Cache to improve scalability by offloading queries and reducing the number of requests and connections to the primary database. This workshop is based on a compute instance (a online transaction processing application) connected to a Primary database configured with True Cache. The demo application is a Java program using the 23c JDBC driver. Its simulates a high number of transactions for the primary database and how off loading the read only queries to true cache helps in application performance.
+Run this hands-on workshop to learn how to use True Cache to improve scalability by offloading queries and reducing the number of requests and connections to the primary database. This workshop is based on a compute instance (a online transaction processing application) connected to a Primary database configured with True Cache. The demo application is a Java program using the 23ai JDBC driver. Its simulates a high number of transactions for the primary database and how off loading the read only queries to true cache helps in application performance.
 
 ### About Oracle True Cache
 

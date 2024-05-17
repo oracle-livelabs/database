@@ -1,10 +1,10 @@
 {
-  "workshoptitle": "Oracle XML DB: store and process XML documents",
+  "workshoptitle": "Oracle XML DB: Store, Manage, and Process XML documents in the Oracle Database",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
-      "description": "The introduction of Oracle XML DB basic capabilities.",
+      "description": "Introduction of Oracle XML DB capabilities",
       "filename": "../../introduction/introduction.md"
     },
     {
@@ -13,32 +13,32 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
     },
     {
-      "title": "Lab 1: Provision an autonomous database",
+      "title": "Lab 1: Provision an Autonomous Database",
       "description": "Labs that follow the introduction are numbered, starting with Lab 1",
       "filename": "../../provision/provision.md"
     },
     {
-      "title": "Lab 2: Create tables and populate data",
+      "title": "Lab 2: Create XML tables and populate XML documents",
       "filename": "../../populate/populate.md"
     },
     {
-      "title": "Lab 3: Run queries",
+      "title": "Lab 3: Run queries against your XML documents",
       "filename": "../../queries/queries.md"
     },
     {
-      "title": "Lab 4: Generate relational data from XML data",
+      "title": "Lab 4: Generate relational data from your XML documents",
       "filename": "../../xml2relational/xml2relational.md"
     },
     {
-      "title": "Lab 5: Convert relational data to XML data",
+      "title": "Lab 5: Convert relational data to XML documents",
       "filename": "../../relational2xml/relational2xml.md"
     },
     {
-      "title": "Lab 6: Index XML data",
+      "title": "Lab 6: Index XML documents",
       "filename": "../../index/index.md"
     },
     {
-      "title": "Lab 7: Update XML content",
+      "title": "Lab 7: Update XML documents",
       "filename": "../../update/update.md"
     },
     {

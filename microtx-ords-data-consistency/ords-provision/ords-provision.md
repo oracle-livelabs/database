@@ -2,15 +2,28 @@
 
 ## Introduction
 
-This lab walks you through the steps to set up two Oracle REST Data Services (ORDS) applications, Department 1 and Department 2. These applications are created in PL/SQL and deployed using ORDS in Oracle Database. These applications participate in the XA transaction, so they are called transaction participant services.
+This lab walks you through the steps to set up two Oracle REST Data Services (ORDS) applications, Department 1 and Department 2. The Bank Transfer application is created in PL/SQL and deployed using ORDS in Oracle Database. It demonstrates how you can develop ORDS applications that participate in a distributed transaction while using MicroTx to coordinate the transaction. You can use the Bank Transfer application to withdraw or deposit an amount. Since financial applications that move funds require strong global consistency, the application uses the XA transaction protocol.
 
-There are 2 PDBs (pluggable database) and a catalog database running in a standalone instance of Oracle Database 23c Free to simulate the distributed transaction. Here are the details about the PDBs:
+The following figure shows the various microservices in the Bank Transfer application.
+![Microservices in Bank Transfer application](./images/ords-microtx-bank-transfer-app.png)
+
+* The MicroTx coordinator manages transactions amongst the participant services.
+
+* Teller, a Java microservice, is called a transaction initiator service. A user interacts with this microservice to transfer money from Department One to Department Two. It exposes a REST API method to transfer funds. This method defines the transaction boundary and initiates the distributed transaction. When a new request is created, MicroTx starts an XA transaction at the Teller microservice. This microservice also contains the business logic to issue the XA commit and roll back calls.
+
+* Department One and Department Two are ORDS applications. They participate in the transactions, so they are called participant services. The applications expose three REST APIs to withdraw or deposit money from a specified account and to get the account balance. They also use resources from resource managers. Resource managers manage stateful resources such as databases, queuing or messaging systems, and caches. Two PDBs (pluggable database) and a catalog database run in a standalone instance of Oracle Database 23ai Free to simulate the distributed transaction. A standalone ORDS APEX service instance, runs on port 8080, and it is configured with two database pools. Each database pool connects to a different PDB, FREEPDB1 and FREEPDB2. Here are the details about the PDBs:
 
 * FREE: A catalog database that the `sysdba` user can access.
-* FREEPDB1: A pluggable database that contains the OTMM schema. This is connected to Department 1, an ORDS service.
-* FREEPDB2 : A pluggable database that contains the OTMM schema. This is connected to Department 2, an ORDS service.
+* FREEPDB1: A pluggable database that contains the OTMM schema. This connects to Department 1, an ORDS service.
+* FREEPDB2 : A pluggable database that contains the OTMM schema. This connects to Department 2, an ORDS service.
 
-The standalone ORDS APEX service instance, runs on port 8080, and it is configured with two database pools that connect to FREEPDB1 and FREEPDB2. The ORDS service creates database pool for each PDB and exposes the REST endpoint. A single ORDS standalone service has two database connection pools connecting to different PDBs: FREEPDB1 and FREEPDB2. Department 1 and Department 2 connect to individual PDBs and the ORDS participant services expose three REST APIs, namely withdraw, deposit and get balance. The MicroTx library includes headers that enable the participant services to automatically enlist in the transaction. These microservices expose REST APIs to get the account balance and to withdraw or deposit money from a specified account. They also use resources from resource manager.
+The service must meet ACID requirements, so an XA transaction is initiated, and both withdraw and deposit are called in the context of this transaction.
+
+When you run the Bank Transfer application, the Teller microservice calls the exposed `transfer` REST API call to initiate the transaction to withdraw an amount from Department 1, an ORDS service, which is connected to FREEPDB1. After the amount is successfully withdrawn, the Teller service receives HTTP 200. Then the Teller calls the `deposit` REST API from Department 2, an ORDS service, which is connected to FREEPDB2. After the amount is successfully deposited, the Teller service receives HTTP 200, and then the Teller commits the transaction. MicroTx coordinates this distributed transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
+
+During a transaction, the microservices also update the associated resource manager to track the change in the amount. When you run the Bank Transfer application, you will see how MicroTx ensures consistency of transactions across the distributed microservices and their resource managers.
+
+Participant microservices use the MicroTx client libraries which registers callback and provides implementation of the callback for the resource manager. The MicroTx library also includes headers that enable the participant services to automatically enlist in the transaction. As shown in the image, MicroTx communicates with each resource manager to prepare, commit, or rollback the transaction. The participant service provides the credentials to the coordinator to access the resource manager.
 
 Estimated Time: 15 minutes
 
@@ -21,7 +34,7 @@ In this lab, you will:
 * Start the Database service and ORDS service instances
 * Grant privileges to the database schema
 * Set Up Department 1 and Department 2 applications
-* Test access to the applications
+* Verify access to the applications
 
 ### Prerequisites
 
@@ -29,9 +42,9 @@ This lab assumes you have:
 
 * An Oracle Cloud account.
 * Successfully completed the previous labs:
-  * Get Started
-  * Lab 1: Prepare setup
-  * Lab 2: Environment setup
+    * Get Started
+    * Lab 1: Prepare setup
+    * Lab 2: Environment setup
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
  ```text
@@ -42,7 +55,7 @@ This lab assumes you have:
 
 ## Task 1: Start the Database Service and ORDS Service Instances
 
-1. Run the following command to verify that the Oracle Database 23c Free service instance is running.
+1. Run the following command to verify that the Oracle Database 23ai Free service instance is running.
 
     ```text
     <copy>
@@ -53,12 +66,12 @@ This lab assumes you have:
    **Example output**
 
     ```text
-    Status of the Oracle FREE 23c service:
+    Status of the Oracle FREE 23ai service:
     LISTENER status: RUNNING
     FREE Database status: RUNNING
     ```
 
-   If the Oracle Database 23c Free service instance is not in the `RUNNING` state, then run the following command to restart the service.
+   If the Oracle Database 23ai Free service instance is not in the `RUNNING` state, then run the following command to restart the service.
 
     ```text
     <copy>
@@ -222,7 +235,7 @@ This lab assumes you have:
 
     The Database Actions page is displayed.
 
-3. In the **Development** box, click **SQL**.
+3. In the **Development** tab, click **SQL**, and then click **Open**.
 
     ![Click on SQL](./images/click-sql.png)
 
@@ -262,11 +275,11 @@ This lab assumes you have:
 
     A sign-in page for Database Actions is displayed.
 
-2. Enter the new password that you have specified earlier, `<new-freepdb2-password>`, to access the FREEPDB1 database as `OTMM` schema user.
+2. Enter the new password that you have specified earlier, `<new-freepdb2-password>`, to access the FREEPDB2 database as `OTMM` schema user.
 
     The Database Actions page is displayed.
 
-3. In the **Development** box, click **SQL**.
+3. In the **Development** tab, click **SQL**, and then click **Open**.
 
     ![Click on SQL](./images/click-sql.png)
 
@@ -300,9 +313,9 @@ This lab assumes you have:
 
 9. Log out from SQL Developer.
 
-## Task 6: Test Access to Department 1 and Department 2
+## Task 6: Verify Access to Department 1 and Department 2
 
-Run the following commands to test access and verify that REST API calls to Department 1 and Department 2 are executed successfully.
+Run the following commands to ensure that the REST API calls to Department 1 and Department 2 are executed successfully.
 
 1. Run the following command to retrieve the balance in account 1 of Department 1.
 

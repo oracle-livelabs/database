@@ -288,7 +288,7 @@ This is especially useful for Autonomous Databases as when the database is STOPP
               restartPolicy: Never
               containers:
                 - name: kubectl
-                  image: bitnami/kubectl
+                  image: docker.io/bitnami/kubectl
                   command:
                     - 'kubectl'
                     - 'patch'
@@ -315,7 +315,7 @@ This is especially useful for Autonomous Databases as when the database is STOPP
               restartPolicy: Never
               containers:
                 - name: kubectl
-                  image: bitnami/kubectl
+                  image: docker.io/bitnami/kubectl
                   command:
                     - 'kubectl'
                     - 'patch'

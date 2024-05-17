@@ -1,0 +1,42 @@
+{
+    "workshoptitle": "AutoREST with JSON Relational Duality Views in 23ai Free",
+    "help": "livelabs-help-db_us@oracle.com",
+
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Introduction",
+            "filename": "../../introduction/intro-json-autorest.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "Using noVNC Remote Desktop",
+            "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+        },
+        {
+            "title": "Lab 1: Setup Environment",
+            "description": "Setup Environment",
+            "filename": "./../../setup-environment/setup-environment.md"
+        },
+       {
+            "title": "Lab 2: Populate Duality Views with REST",
+            "description": "Populate Duality Views with REST",
+            "filename": "./../../populate-dv/populate-dv.md"
+        },
+        {
+            "title": "Lab 3: Query Duality Views with REST",
+            "description": "Query Duality Views with REST",
+            "filename": "./../../query-dv/query-dv.md"
+        },
+        {
+            "title": "Lab 4: Update Duality Views with REST",
+            "description": "Update Duality Views with REST",
+            "filename": "./../../update-dv/update-dv.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

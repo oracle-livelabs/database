@@ -22,10 +22,10 @@ This lab assumes you have:
 
 * An Oracle Cloud account.
 * Successfully completed the previous labs:
-  * Get Started
-  * Lab 1: Prepare setup
-  * Lab 2: Environment setup
-  * Lab 3: Set up the ORDS instances
+    * Get Started
+    * Lab 1: Prepare setup
+    * Lab 2: Environment setup
+    * Lab 3: Set up the ORDS instances
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
  ```text
@@ -67,12 +67,12 @@ Build and deploy the Teller application, which is the transaction initiator serv
 
 2. Open the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/helmcharts/ords-teller/values.yaml` file in any code editor. This is the manifest file, which contains the deployment configuration details of the Teller application.
 
-3. Enter the details, including the schema name, to access the Oracle REST Data Services (ORDS) endpoints. In the following sample code, the name of the schema is `mySchema`. Replace this with the name of the schema in your environment.
+3. Enter the details, including the schema name, to access the Oracle REST Data Services (ORDS) endpoints. In the following sample code, the name of the schema is `otmm`.
 
     ```text
     <copy>
-    departmentOneEndPoint: http://host.minikube.internal:8080/ords/mySchema
-    departmentTwoEndPoint: http://host.minikube.internal:8080/ords/pool2/mySchema
+    departmentOneEndPoint: http://host.minikube.internal:8080/ords/otmm
+    departmentTwoEndPoint: http://host.minikube.internal:8080/ords/pool2/otmm
     </copy>
     ```
 
@@ -220,9 +220,9 @@ Run the following commands to deploy Kiali and Jaeger.
 
 When you run the Transfer application, it starts an XA transaction. The Teller application is the transaction initiator service, it initiates the transaction. When the Teller application runs, it withdraws money from Department A and deposits it to Department B by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
-1. Before you start the transaction, run the following commands to check the initial balance in the Department 1 and Department 2 accounts. Note down the initial balance.
+1. Before you start the transaction, run the following commands to check the initial balance in account 1 of Department 1 and account 2 of Department 2. Note down the initial balance.
 
-    **Example command to check the initial balance in Department 1**
+    **Example command to check the initial balance in account 1 of Department 1**
 
     ```text
     <copy>
@@ -231,7 +231,7 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
     </copy>
     ```
 
-   **Example command to check the initial balance in Department 2**
+   **Example command to check the initial balance in account 2 of Department 2**
 
     ```text
     <copy>
@@ -301,8 +301,8 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
 
 ## Task 6: View the Service Mesh Graph and Distributed Traces (Optional)
 
-You can perform this task only if you have performed Task 4 or if Kiali and Jaeger are deployed in your cluster.
-To visualize what happens behind the scenes and how the amount transfer request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you had started in Task 4.
+You can perform this task only if you have performed Task 4 to deploy Kiali and Jaeger in your cluster.
+To visualize what happens behind the scenes, how the amount transfer request is processed by the distributed services, and how MicroTx manages the transaction requests you can use the Kiali and Jaeger Dashboards that you had started in Task 4.
 
 1. Open a new browser tab and navigate to the Kiali dashboard URL. For example, `http://localhost:20001/kiali`.
 2. Select Graph for the `otmm` namespace.
