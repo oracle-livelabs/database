@@ -15,7 +15,7 @@
         {
             "title": "Lab 1: Provision an Autonomous Database",
             "description": "Labs that follow the introduction are numbered, starting with Lab 1",
-            "filename": "../../provision/provision.md",
+            "filename": "../../../../xmldb/provision/provision.md",
             "type": "freetier"
         },
         {

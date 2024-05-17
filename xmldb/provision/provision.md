@@ -23,13 +23,10 @@ In this lab, you will:
 
 1. Log in to the Oracle Cloud.
 
-<if type="freetier">
-
-2. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources, you need to be in a region where Always Free Resources are available. You can see your current default **Region** in the top, right-hand corner of the page.
+2. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources, you need to be in your Home region where Always Free Resources are available. You can see your current default **Region** in the top, right-hand corner of the page.
 
     ![Select region on the far upper-right corner of the page.](./images/region.png " ")
 
-</if>
 <if type="livelabs">
 
 2. If you are using a LiveLabs account, you need to be in the region your account was provisioned in. You can see your current default **Region** in the top, right-hand corner of the page. Make sure that it matches the region on the LiveLabs Launch page.
@@ -76,9 +73,9 @@ In this lab, you will:
 <if type="livelabs">
     - __Choose a compartment__ - Use the default compartment that includes your user id.
 </if>
-    - __Display Name__ - Enter a memorable name for the database for display purposes. For this lab, use __XMLDB__.
+    - __Display Name__ - Enter a memorable name for the database for display purposes. You can name the database as you like, e.g. __MYADB__.
 <if type="freetier">
-    - __Database Name__ - Use letters and numbers only, starting with a letter. Maximum length is 14 characters. (Underscores not initially supported.) For this lab, use __TEXTDB__.
+    - __Database Name__ - Use letters and numbers only, starting with a letter. Maximum length is 14 characters. (Underscores not initially supported.) You can name the database as you like, e.g. __MYADB__.
 
     ![Enter the required details.](./images/adb-info.png " ")
 </if>
@@ -103,16 +100,11 @@ In this lab, you will:
 
 6. Configure the database:
 
-    <if type="freetier">
-    - __Always Free__ - If your Cloud Account is an Always Free account, you can select this option to create an always free autonomous database. An always free database comes with 1 CPU and 20 GB of storage. For this lab, we recommend you leave Always Free checked if you have that as an option.
-    </if>
-    <if type="livelabs">
     - __Always Free__ - For this lab, we recommend you leave Always Free checked if it is available to you.
-    </if>
-    - __Choose database version__ - Select 19c from the database version. Note: This lab should work on a 21c AJD database as well.
-    - __OCPU count__ - Number of OCPUs for your service. For this lab, leave the default __1 OCPU__. If you choose an Always Free database, it comes with 1 OCPU.
-    - __Storage (TB)__ - Select your storage capacity in terabytes. For this lab, leave the default __1 TB__ of storage. If you choose an Always Free database, it comes with 20 GB of storage.
-    - __Auto Scaling__ - For this lab, keep auto scaling enabled, to allow the system to automatically use up to three times more CPU and IO resources to meet workload demand.
+    - __Choose database version__ - Select 19c from the database version. Note: This workshop will also run Autonomous Database 21c.
+    - ECPU count__ - Number of ECPUs for your service. For this lab, leave the default __2 ECPU__. If you choose an Always Free database, you won't be able to set an ECPU count.
+    - __Storage (TB)__ - Select your storage capacity in terabytes. For this lab, you can reduce the storage down to the minimum of __20 GB__ of storage. If you choose an Always Free database, it comes with 20 GB of storage.
+    - __Auto Scaling__ - For this lab, keep auto scaling enabled, to allow the system to automatically use up to three times more CPU and IO resources to meet workload demand. This option is not available for Always Free.
 
     *Note: You cannot scale up/down an Always Free autonomous database.*
 
@@ -148,21 +140,20 @@ In this lab, you will:
 
 10. Click __Create Autonomous Database__.
 
-    ![Click Create Autonomous Database.](./images/create-adb-final.png " ")
+    ![Click Create Autonomous Database.](./images/create-adb-final.png)
 
-11.  Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous database is ready to use! Have a look at your instance's details here including the Database Name, Database Version, OCPU Count, and Storage.
+11.  Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous Database is ready to use! Have a look at your instance's details here including the Database Name, Database Version, CPU Count, and Storage.
 
-    ![Database instance homepage.](./images/provisioning.png " ")
-
+    ![Database instance homepage.](./images/last.png)
 
 You may now **proceed to the next lab**.
 
 ## Learn More
 
-* [Provision Autonomous JSON Database](https://docs.oracle.com/en/cloud/paas/autonomous-json-database/ajdug/autonomous-provision.html#GUID-0B230036-0A05-4CA3-AF9D-97A255AE0C08)
+* [Get started with Oracle Autonomous Database Serverless ](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/videos.html)
 
 ## Acknowledgements
 
 - **Author** - Roger Ford, Principal Product Manager, Oracle Database
 - **Contributors** - Kamryn Vinson, Andres Quintana, James Zheng
-- **Last Updated By/Date** - Roger Ford, March 2022
+- **Last Updated By/Date** - Ernesto Alvarez, April 2024
