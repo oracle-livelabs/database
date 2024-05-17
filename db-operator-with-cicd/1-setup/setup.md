@@ -32,7 +32,11 @@ If you are not the tenancy administrator, there may be additional policies you m
 
 If your group already has the permissions listed in part 6 of this task you may skip to Task 2.
 
-1. Navigate to Identity & Security
+1. Navigate to Identity & Security then Domains
+
+    ![Navigate To Domains](./images/navigate-to-domains.png)
+
+    Under the root compartment, select your domain. In your domain, navigate to Groups to list and view the groups under the domain you selected.
 
     ![Navigate To Groups](./images/navigate-to-groups.png)
 
@@ -347,4 +351,4 @@ You may now **proceed to the next lab.**
 ## Acknowledgements
 
 * **Authors** - Norman Aberin, Developer Advocate; Irina Granat, Consulting Member of Technical Staff, Oracle MAA and Exadata; Paul Parkinson, Developer Evangelist; Richard Exley, Consulting Member of Technical Staff, Oracle MAA and Exadata
-* **Last Updated By/Date** - Norman Aberin, September 2022
+* **Last Updated By/Date** - Norman Aberin, May 2024

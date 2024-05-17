@@ -1,4 +1,3 @@
-# Deploy the Microservices App
 
 ## Introduction
 This lab will show you how to build and deploy the application used by the lab to your Oracle Kubernetes Engine (OKE) cluster. The application uses maven for build automation, react for front-end and spring-boot to connect to the database and serve requests and serve the frontend. More notably, the Spring Boot application leverages the Advanced Queueing capabilities of the database.
@@ -39,7 +38,7 @@ Watch the video below for a quick walk-through of the lab.
     Login Succeeded
     ```
 
-  ## How to get the region key
+    ## How to get the region key
      
     The region key is a shortened form of your region. For example, the region us-phoenix-1 will have a region key of PHX; the region us-ashburn-1 will have a region key of IAD. You can view the list of regions and their keys [here](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm#About:~:text=and%20Availability%20Domains-,About%20Regions%20and%20Availability%20Domains,-Fault%20Domains). 
 
