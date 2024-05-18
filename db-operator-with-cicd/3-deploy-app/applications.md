@@ -87,7 +87,7 @@ Watch the video below for a quick walk-through of the lab.
 
     ```bash
     <copy>
-    csruntimectl java set openjdk-11.0.16.1
+    csruntimectl java set oraclejdk-11
     </copy>
     ```
 
@@ -96,7 +96,7 @@ Watch the video below for a quick walk-through of the lab.
     ## Troubleshooting
 
     ```bash
-    Invalid java version alias: openjdk-11.0.16.1. Run 'csruntimectl java list' for the available version aliases.
+    Invalid java version alias: oraclejdk-11. Run 'csruntimectl java list' for the available version aliases.
     ```
     If you encounter the following error above when setting the runtime version of Java using `csruntimectl`, run the following command below as advised by the error to view the available versions supported.
     
@@ -108,22 +108,31 @@ Watch the video below for a quick walk-through of the lab.
 
     ```bash
     labuserexa@cloudshell:~ (us-phoenix-1)$ csruntimectl java list
-    graalvmeejdk-17.0.4.1                                         /usr/lib64/graalvm/graalvm22-ee-java17
-    openjdk-11.0.16.1                        /usr/lib/jvm/java-11-openjdk-11.0.16.1.1-1.0.1.el7_9.x86_64
-    * openjdk-1.8.0.345                       /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.345.b01-1.el7_9.x86_64
+    graalvmjdk-17                                                      /usr/lib64/graalvm/graalvm-java17
+    oraclejdk-1.8                                                    /usr/lib/jvm/jdk-1.8-oracle-aarch64
+    * oraclejdk-11                                                      /usr/lib/jvm/jdk-11-oracle-aarch64
     ```
 
     Finally, copy the proper version for `JDK 11` and run the command again with the proper version.
     
     ```bash
     <copy>
-    csruntimectl java set openjdk-11.<version>
+    csruntimectl java set oraclejdk-11
     </copy>
     ```
 
+## Task 2: Set Cloud Shell Architecture
+
+1. Before building your docker images, make sure you have selected the right architecture for running the application in a cluster with nodes that use Oracle Linux.
+
+    ![Navigate to Architecture](./images/navigate-to-arch.png)
+
+2. When prompted, select the architecture `x86_64` and press Confirm. Your cloud shell may close and re-open.
+
+    ![Select x86_64](./images/select_x86_64.png)
 
 
-## Task 2: Build and Deploy the applications
+## Task 3: Build and Deploy the applications
 
 1. Build the front-end and back-end application by running the following command:
 
@@ -158,7 +167,7 @@ Watch the video below for a quick walk-through of the lab.
 
     ![Kubectl Get Deploy](./images/kubectl-get-deploy.png)
 
-## Task 3: Navigate through the CloudBank Application
+## Task 4: Navigate through the CloudBank Application
 
 1. Retrieve the `EXTERNAL IP` by running the below command. This will show a table of values for the frontend-service of type LoadBalancer. Copy the value under `EXTERNAL-IP`.
 
