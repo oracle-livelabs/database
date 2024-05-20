@@ -518,11 +518,11 @@ Copy a replication unit from one shard database to another using COPY RU. This a
     
 Connect to GSM1, run in the terminal as **oracle** user and connect to the shard director server.
    
-    ```
-    <copy>
-    sudo podman exec -i -t gsm1 /bin/bash
-    </copy>
-    ```
+ ```
+ <copy>
+ sudo podman exec -i -t gsm1 /bin/bash
+ </copy>
+ ```
 
 2. Connect with GSM1 and run the below command to check the status.
     
@@ -601,33 +601,33 @@ Suppose we want to relocate chunk 3 from RU 1 to RU 7, RU 1 and 7 leaders must o
 Check the status of RU's from which you are trying to relocate:
 
 
-    ```
-    <copy>
-    gdsctl status ru -ru 1
-    </copy>
-    ```
+ ```
+ <copy>
+ gdsctl status ru -ru 1
+ </copy>
+ ```
 
   ![<copy_RU>](./images/t9-2-ru_status.png " ")
 
   
 Change the RU leader using below command, if required.
 
-    ```
-    <copy>
-    gdsctl switchover ru -ru 1 -shard orcl2cdb_orcl2pdb
-    </copy>
-    ```
+ ```
+ <copy>
+ gdsctl switchover ru -ru 1 -shard orcl2cdb_orcl2pdb
+ </copy>
+ ```
 
   ![<copy_RU>](./images/t9-2-switchover_ru.png " ")
 
 
 Move the RU follower using below command, if required
 
-    ```
-    <copy>
-    gdsctl move ru -ru 7 -source orcl3cdb_orcl3pdb -target orcl2cdb_orcl2pdb 
-    </copy>
-    ```
+ ```
+ <copy>
+ gdsctl move ru -ru 7 -source orcl3cdb_orcl3pdb -target orcl2cdb_orcl2pdb 
+ </copy>
+ ```
 
   ![<copy_RU>](./images/t9-2-move-ru.png " ")
 
@@ -738,7 +738,7 @@ Target database should not already contain another replica of the replication un
     </copy>
     ```
 
-   ![<move_all_chunks_n_verify_ddl_failed](./images/t10-4-move-all-chunks.png " ")
+   ![<move_all_chunks_n_verify_ddl_failed>](./images/t10-4-move-all-chunks.png " ")
 
 5. Check the status for the chunks across all the RU's again and and make sure no DDL error is seen.
     ```
@@ -753,7 +753,7 @@ Target database should not already contain another replica of the replication un
     </copy>
     ```
    
-    ![<move_all_chunks_n_verify_ddl_failed](./images/t10-5-show-ddl-failed-after-move-all.png " ")
+    ![<move_all_chunks_n_verify_ddl_failed>](./images/t10-5-show-ddl-failed-after-move-all.png " ")
 
 6. Complete the SHARD4 delete operation.
 
@@ -762,7 +762,7 @@ Target database should not already contain another replica of the replication un
     python3 /opt/oracle/scripts/sharding/scripts/main.py --deleteshard="shard_host=oshard4-0;shard_db=ORCL4CDB;shard_pdb=ORCL4PDB;shard_port=1521;shard_group=shardgroup1"
     </copy>
     ```
-    ![<move_all_chunks_n_verify_ddl_failed](./images/t10-6-delete-shard4.png " ")
+    ![<move_all_chunks_n_verify_ddl_failed>](./images/t10-6-delete-shard4.png " ")
 
 7. Check the status after scale down operation is completed.
 
@@ -784,7 +784,7 @@ Target database should not already contain another replica of the replication un
     </copy>
     ```
 
-    ![<status_after_Scale_down](./images/t10-7-status-after-scale-down.png " ")
+    ![<status_after_Scale_down>](./images/t10-7-status-after-scale-down.png " ")
     
 8. Stop and remove the shard4 container 
 
@@ -800,7 +800,7 @@ Target database should not already contain another replica of the replication un
     </copy>
     ```
 
-   ![<rm_shard4](./images/t10-8-stop-rm-shard4-container.png " ")
+   ![<rm_shard4>](./images/t10-8-stop-rm-shard4-container.png " ")
 
 9. Check if the shard4 has been removed.
 
@@ -810,7 +810,7 @@ Target database should not already contain another replica of the replication un
     </copy>
     ```
 
-     ![<podman containers>](./images/t10-9-after-shard4-scale down-podman-container.png " ")
+     ![<podman_containers_stop>](./images/t10-9-after-shard4-scale down-podman-container.png " ")
 
 
 This is the end of the Oracle Sharding RAFT Replication Workshop.
