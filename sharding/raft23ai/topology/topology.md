@@ -60,7 +60,7 @@ For more details check [Raft Replication Configuration and Management] (https://
     </copy>
     ```
 
-    ![<connect to GSM1>](./images/t2-podman-GSM1.png " ")
+    ![<connect to GSM1>](./images/t2-1-podman-gsm1.png " ")
 
 2. Verify sharding topology using the  **CONFIG** command.
 
@@ -70,7 +70,7 @@ For more details check [Raft Replication Configuration and Management] (https://
     </copy>
     ```
 
-    ![<config shard>](./images/t2-config-shard-1.png " ")
+    ![<config shard>](./images/t2-2-config-shard-1.png " ")
 
 3. Lists all of the database shards and the chunks that they contain.
 
@@ -80,7 +80,7 @@ For more details check [Raft Replication Configuration and Management] (https://
     </copy>
     ```
 
-    ![<configuration_of_chunks>](./images/t2-config-chunks-1.png " ")
+    ![<configuration_of_chunks>](./images/t2-3-config-chunks-1.png " ")
 
 4. Display run time for replication units, specifically to view chunk distribution across all RUs.
 
@@ -90,7 +90,7 @@ For more details check [Raft Replication Configuration and Management] (https://
     </copy>
     ```
 
-    ![<status_RU_chunks>](./images/t2-status-ru-chunks.png " ")
+    ![<status_RU_chunks>](./images/t2-4-status-ru-chunks.png " ")
 
 5. Display the replication type.
 
@@ -100,7 +100,7 @@ For more details check [Raft Replication Configuration and Management] (https://
     </copy>
     ```
 
-    ![<replication_type>](./images/t2-replication-type.png " ")
+    ![<replication_type>](./images/t2-5-replication-type.png " ")
 
  6.   Exit from GSM1.
 
@@ -116,7 +116,7 @@ Using SWITCHOVER RU, you can change which replica is the leader for the specifie
     </copy>
     ```
 
-    ![<leader_status_before_change>](./images/t3-status-before-rebalance.png " ")
+    ![<leader_status_before_change>](./images/t3-1-status-before-rebalance.png " ")
 
 2. You can auto rebalance the leaders, if required:
 
@@ -125,7 +125,7 @@ Using SWITCHOVER RU, you can change which replica is the leader for the specifie
     gdsctl switchover ru -rebalance
     </copy>
     ```
-    ![<change_the_ru_leader>](./images/t3-auto-rebalance-i.png " ")
+    ![<change_the_ru_leader>](./images/t3-2-auto-rebalance.png " ")
 
 3. Run the below command on GSM1 to view the status of all the leaders again after switchover
     
@@ -134,7 +134,7 @@ Using SWITCHOVER RU, you can change which replica is the leader for the specifie
     gdsctl status ru -leaders
     </copy>
     ```
-    ![<leader_status_before_change>](./images/t3-status-after-relabalnce.png " ")
+    ![<leader_status_before_change>](./images/t3-3-status-after-relabalnce.png " ")
 
 4. Change the leader of the RU 1 to Shard2:
 
@@ -143,7 +143,7 @@ Using SWITCHOVER RU, you can change which replica is the leader for the specifie
     gdsctl switchover ru -ru 1 -shard orcl2cdb_orcl2pdb
     </copy>
     ```
-    ![<change_the_ru_leader>](./images/t3-leader-change.png " ")
+    ![<change_the_ru_leader>](./images/t3-4-leader-change.png " ")
 
 5. Check the status after the change:
 
@@ -152,7 +152,7 @@ Using SWITCHOVER RU, you can change which replica is the leader for the specifie
     gdsctl status ru -leaders
     </copy>
     ``` 
-    ![<leader_status_after_change>](./images/t3-status-after-leader-change.png " ")
+    ![<leader_status_after_change>](./images/t3-5-status-after-leader-change.png " ")
 
 ## Task 4: Run the workload
 
@@ -165,7 +165,7 @@ Please use the below steps to run the workload using the "app_schema" account wi
     sudo podman exec -it appclient /bin/bash
     </copy>
     ```
-   ![<appclient_container>](./images/t4-appclient-container.png " ")
+   ![<appclient_container>](./images/t4-1-appclient-container.png " ")
 
 2. Switch to the "oracle" user
 
@@ -186,7 +186,7 @@ Please use the below steps to run the workload using the "app_schema" account wi
     </copy>
     ```
 
-    ![<appclient_container>](./images/t4-appclient-container.png " ")
+    ![<appclient_container>](./images/t4-3-appclient-container.png " ")
 
 4. Run the workload using the below command
 
@@ -197,7 +197,7 @@ Please use the below steps to run the workload using the "app_schema" account wi
     ```
     
 
-    ![<run_workload>](./images/t4-run-workload.png " ")
+    ![<run_workload>](./images/t4-4-run-workload.png " ")
 
 5. During this time, you can continue to check the RU details from another session on the "gsm1" container from "gdsctl" prompt.
 Notice that the log index is increasing as there are read and write operations are going on.
@@ -208,7 +208,7 @@ Notice that the log index is increasing as there are read and write operations a
     </copy>
     ```
 
-    ![<workload_RU_log_index>](./images/t4-workload-log-index.png " ")
+![<workload_RU_log_index>](./images/t4-5-workload-log-index.png " ")
 
 6. You can keep running the workload while you perform the next task.
 
@@ -227,7 +227,7 @@ Failover test by stopping shard1 to create shard1 down situation.
     </copy>
     ```
 
-    ![<podman_containers_status>](./images/t5-podman-containers.png " ")  
+    ![<podman_containers_status>](./images/t5-1-podman-containers.png " ")  
 
 
 2.  Run the below command as **oracle** to stop shard1.
@@ -238,7 +238,7 @@ Failover test by stopping shard1 to create shard1 down situation.
     </copy>
     ```
 
-    ![<stop_shard_1>](./images/t5-ha-shut-down-shard1.png " ")  
+    ![<stop_shard_1>](./images/t5-2-stop-shard1.png " ")  
 
 
 
@@ -262,11 +262,11 @@ Failover test by stopping shard1 to create shard1 down situation.
     </copy>
     ```
 
-    ![<chunk_status_after_shard1_down>](./images/t5-ha-status-chunks-after-shard1-down.png " ")  
+    ![<chunk_status_after_shard1_down>](./images/t5-3-status-chunks-after-shard1-down.png " ")  
 
 You will see that shard1 down situation has no impact on the running workload.
 
-5. Start the shard1 using the podman start command, to reflect that shard1 is joining back.
+4. Start the shard1 using the podman start command, to reflect that shard1 is joining back.
 
     ```
     <copy>
@@ -274,10 +274,10 @@ You will see that shard1 down situation has no impact on the running workload.
     </copy>
     ```
 
-    ![<start_shard1>](./images/t5-ha-startup-shard1.png " ")
+    ![<start_shard1>](./images/t5-4-startup-shard1.png " ")
 
 
-6. On a parallel session switch to GSM1, check the status of shard, RU's and see that shard1 has joined back.
+5. On a parallel session switch to GSM1, check the status of shard, RU's and see that shard1 has joined back.
 
     ```
     <copy>
@@ -297,7 +297,7 @@ You will see that shard1 down situation has no impact on the running workload.
     </copy>
     ```
 
-    ![<chunk_status_after_startup_shard1>](./images/t5-ha-status-chunks-after-startup-shard1.png " ")  
+    ![<chunk_status_after_startup_shard1>](./images/t5-5-status-chunks-after-startup-shard1.png " ")  
     
 You can stop the workload that ran in the previous task using Ctrl+C.
 
@@ -320,7 +320,7 @@ Run in the terminal as **oracle** user to Create SHARD4 database container
     </copy>
     ```
 
-    ![<add_shard4_command>](./images/t6-add-shard4.png " ")
+![<add_shard4_command>](./images/t6-1-add-shard4.png " ")
     
 
 2. Open another terminal session to check if the Shard4 database container creation is completed. Run the below command as **oracle** user.
@@ -331,12 +331,12 @@ Run in the terminal as **oracle** user to Create SHARD4 database container
     </copy>
     ```
 
-    ![<add_shard4_logs>](./images/t6-add-shard4-logs-1.png " ")
+    ![<add_shard4_logs>](./images/t6-2-add-shard4-logs-1.png " ")
 
 
 You have to wait until GSM shard set up is completed. Please refer the below screenshot:
 
-![<GSM_shard_setup_completed>](./images/t6-add-shard4-logs-gsm-shard-setup-completed.png " ")
+![<GSM_shard_setup_completed>](./images/t6-2-add-shard4-logs-gsm-shard-setup-completed.png " ")
 
 
 3. Once the DB is up and running, complete the below commands to   complete the GSM configuration to deploy the new SHARD4:
@@ -346,14 +346,14 @@ You have to wait until GSM shard set up is completed. Please refer the below scr
     sudo podman exec -it gsm1 python3 /opt/oracle/scripts/sharding/scripts/main.py --addshard="shard_host=oshard4-0;shard_db=ORCL4CDB;shard_pdb=ORCL4PDB;shard_port=1521;shard_group=shardgroup1"
     </copy>
     ```
-    ![<add_shard4_shardgroup>](./images/t6-add-shard4-shardgroup.png " ")
+    ![<add_shard4_shardgroup>](./images/t6-3-add-shard4-shardgroup.png " ")
 
      ```
     <copy>
     sudo podman exec -it gsm1 python3 /opt/oracle/scripts/sharding/scripts/main.py --deployshard=true
     </copy>
     ```
-     ![<shard4_deploy>](./images/t6-shard4-deploy.png " ")
+     ![<shard4_deploy>](./images/t6-4-shard4-deploy.png " ")
 
 4. Connect to GSM1, run in the terminal as **oracle** user and connect to the shard director server and run the below command to view the ongoing rebalancing tasks. You have to wait until the rebalancing task completes.
 
@@ -363,7 +363,7 @@ You have to wait until GSM shard set up is completed. Please refer the below scr
     </copy>
     ```
 
-    ![<connect to shard director>](./images/t6-connect-gsm1.png " ")
+    ![<connect to shard director>](./images/t6-4-connect-gsm1.png " ")
 
      ```
     <copy>
@@ -371,9 +371,9 @@ You have to wait until GSM shard set up is completed. Please refer the below scr
     </copy>
     ```
 
-    ![<connect to shard director>](./images/t6-add-shard4-config-task.png " ")
+    ![<connect to shard director>](./images/t6-4-add-shard4-config-task.png " ")
 
-    ![<connect to shard director>](./images/t6-config-task-not-pending.png " ")
+    ![<connect to shard director>](./images/t6-4-config-task-not-pending.png " ")
 
 5. Exit from GSM1 and Run the below command as **oracle** user to validate the database shard4 container is healthy.
 
@@ -383,7 +383,7 @@ You have to wait until GSM shard set up is completed. Please refer the below scr
     </copy>
     ```
 
-     ![<add_shard4_container_validation>](./images/t6-add-shard4-container-validation.png " ")
+     ![<add_shard4_container_validation>](./images/t6-5-add-shard4-container-validation.png " ")
 
 6. Connect to GSM1, run in the terminal as **oracle** user and connect to the shard director server.
 
@@ -402,7 +402,7 @@ You have to wait until GSM shard set up is completed. Please refer the below scr
     </copy>
     ```
 
-    ![<add_shard4_validation>](./images/t6-add-shard4-validation.png " ")
+    ![<add_shard4_validation>](./images/t6-7-shard4-config shard.png " ")
 
 8. Run below command to check the configuration of chunks.
 
@@ -412,7 +412,7 @@ You have to wait until GSM shard set up is completed. Please refer the below scr
     </copy>
     ```
 
-    ![<add_shard4_config_chunk>](./images/t6-add-shard4-config-chunk.png " ")
+    ![<add_shard4_config_chunk>](./images/t6-8-shard4-config-chunk.png " ")
 
 9. Run below the check the status of chunks and RUs after scale up
 
@@ -422,7 +422,7 @@ You have to wait until GSM shard set up is completed. Please refer the below scr
     </copy>
     ```
 
-    ![<chunk_redistribution>](./images/t6-chunk-redistribution.png " ")
+    ![<chunk_redistribution>](./images/t6-9-chunk-redistribution.png " ")
 
 10. Run below command to view all of the leaders
 
@@ -432,7 +432,7 @@ You have to wait until GSM shard set up is completed. Please refer the below scr
     </copy>
     ```
 
-    ![<status_leaders>](./images/t6-status-leaders.png " ")
+    ![<status_leaders>](./images/t6-10-status-leaders.png " ")
 
 11. Run below command to auto rebalance the leaders.
 
@@ -442,7 +442,7 @@ You have to wait until GSM shard set up is completed. Please refer the below scr
     </copy>
     ```
 
-    ![<status_leaders>](./images/t6-status-leaders.png " ")
+    ![<status_leaders>](./images/t6-11-switchover-rebalance.png " ")
 
 12. Run below command to view again all of the leaders
 
@@ -452,7 +452,7 @@ You have to wait until GSM shard set up is completed. Please refer the below scr
     </copy>
     ```
 
-    ![<status_leaders>](./images/t6-status-leaders.png " ")
+    ![<status_leaders>](./images/t6-12-status-leaders.png " ")
 
 ## Task 7: Move Replication Unit Replicas
 
@@ -466,7 +466,7 @@ Use MOVE RU to move a follower replica of a replication unit from one shard data
     </copy>
     ```
 
-    ![<chunk_status_before_move_ru>](./images/t7-chunk-status-before-move-ru.png " ")
+    ![<chunk_status_before_move_ru>](./images/t7-1-chunk-status-before-move-ru.png " ")
 
 2. Please check the status of the RU that you want to move.
 
@@ -476,19 +476,18 @@ Use MOVE RU to move a follower replica of a replication unit from one shard data
     </copy>
     ```
 
-    ![<chunk_status_before_move_ru>](./images/t7-chunk-status-before-move-ru.png " ")
+    ![<chunk_status_before_move_ru>](./images/t7-2-ru-status-before-move-ru.png " ")
 
-2. Choose the RU with the role follower  associated with the respective shard and move to a shard which is NOT having that RU Replica. 
+3. Choose the RU with the role follower  associated with the respective shard and move to a shard which is NOT having that RU Replica. 
 
     ```
     <copy>
     gdsctl move ru -ru 1 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
     </copy>
     ```
-    ![<MOVE_RU>](./images/t7-move-ru.png " ")
+    ![<MOVE_RU>](./images/t7-3-move-ru.png " ")
 
-
-3.  Please check the status of the RU that you just moved.
+4.  Please check the status of the RU that you just moved.
 
     ```
     <copy>
@@ -496,7 +495,7 @@ Use MOVE RU to move a follower replica of a replication unit from one shard data
     </copy>
     ```
 
-    ![<chunk_status_before_move_ru>](./images/t7-chunk-status-before-move-ru.png " ")
+    ![<chunk_status_before_move_ru>](./images/t7-4-ru-status-after-move-ru.png " ")
 
 4. Check Status after the move:
 
@@ -505,7 +504,7 @@ Use MOVE RU to move a follower replica of a replication unit from one shard data
    gdsctl status ru -show_chunks
     </copy>
     ```
-    ![<Chunk_status_after_MOVE_RU>](./images/t7-chunk-status-after-move-ru.png " ")
+    ![<Chunk_status_after_MOVE_RU>](./images/t7-4-chunk-status-after-move-ru.png " ")
 
 ## Task 8: Copy Replication Units
 
@@ -532,7 +531,7 @@ Connect to GSM1, run in the terminal as **oracle** user and connect to the shard
     gdsctl status ru -show_chunks
     </copy>
     ```
-![<chunk_status_before_copy_RU>](./images/t8-chunk-status-before-copy-ru.png " ")
+![<chunk_status_before_copy_RU>](./images/t8-2-chunk-status-before-copy-ru.png " ")
     
 
 
@@ -544,7 +543,7 @@ Connect to GSM1, run in the terminal as **oracle** user and connect to the shard
     </copy>
     ```
    
-    ![<chunk_status_after_copy_RU>](./images/t8-chunk-status-before-copy-ru.png " ")
+    ![<chunk_status_after_copy_RU>](./images/t8-3-ru-status-before-copy-ru.png " ")
 
 
 4. Run the below command to copy the RU. Choose the RU (follower) in the source shard and copy it to one of the shard where that RU doesn't exist. Use replace option with the shard from where you would like to remove that RU.
@@ -557,7 +556,7 @@ Connect to GSM1, run in the terminal as **oracle** user and connect to the shard
     </copy>
     ```
 
-    ![<copy_RU>](./images/t8-copy-ru.png " ")
+    ![<copy_RU>](./images/t8-4-copy-ru.png " ")
 
 
 5. Please check the status of the RU that you just copied
@@ -568,7 +567,7 @@ Connect to GSM1, run in the terminal as **oracle** user and connect to the shard
     </copy>
     ```
    
-    ![<chunk_status_after_copy_RU>](./images/t8-chunk-status-after-copy-ru.png " ")
+    ![<chunk_status_after_copy_RU>](./images/t8-5-ru-status-after-copy-ru.png " ")
 
 6. You can check the status of the replication unit after the copy command is completed
     ```
@@ -577,7 +576,7 @@ Connect to GSM1, run in the terminal as **oracle** user and connect to the shard
     </copy>
     ```
    
-    ![<chunk_status_after_copy_RU>](./images/t8-chunk-status-after-copy-ru.png " ")
+    ![<chunk_status_after_copy_RU>](./images/t8-6-chunk-status-after-copy-ru.png " ")
 
 ## Task 9: Moving A Chunk to Another Replication Unit
 
@@ -589,7 +588,7 @@ Connect to GSM1, run in the terminal as **oracle** user and connect to the shard
     </copy>
     ```
 
-  ![<copy_RU>](./images/t8-copy-ru.png " ")
+  ![<copy_RU>](./images/t9-1-chunk_status.png " ")
 
 2. To move a chunk from one Raft replication unit to another replication unit, use the GDSCTL RELOCATE CHUNK command.
 
@@ -597,7 +596,7 @@ To use RELOCATE CHUNK, the source and target replication unit leaders must be lo
 
 When moving chunks, specify the chunk ID numbers, the source RU ID from which to move them, and the target RU ID to move them to
  
-Suppose we want to relocate chunk 3 from RU 1 to RU 7, RU 1 and 7 leaders must on same shards and RU 1 and 7 foloowers must be on same shards, if required; use SWITCHOVER RU to move the leader and MOVE RU to move the followers to co-located shards.
+Suppose we want to relocate chunk 3 from RU 1 to RU 7, RU 1 and 7 leaders must on same shards and RU 1 and 7 followers must be on same shards, if required; use SWITCHOVER RU to move the leader and MOVE RU to move the followers to co-located shards.
 
 Check the status of RU's from which you are trying to relocate:
 
@@ -608,23 +607,10 @@ Check the status of RU's from which you are trying to relocate:
     </copy>
     ```
 
-  ![<copy_RU>](./images/t8-copy-ru.png " ")
-
-
-
-Check the status of RU's to which you are trying to relocate:
-
-    ```
-    <copy>
-    gdsctl status ru -ru 1
-    </copy>
-    ```
-
-  ![<copy_RU>](./images/t8-copy-ru.png " ")
-
+  ![<copy_RU>](./images/t9-2-ru_status.png " ")
 
   
-Change the RU leader using below command, if required
+Change the RU leader using below command, if required.
 
     ```
     <copy>
@@ -632,7 +618,7 @@ Change the RU leader using below command, if required
     </copy>
     ```
 
-  ![<copy_RU>](./images/t8-copy-ru.png " ")
+  ![<copy_RU>](./images/t9-2-switchover_ru.png " ")
 
 
 Move the RU follower using below command, if required
@@ -643,7 +629,7 @@ Move the RU follower using below command, if required
     </copy>
     ```
 
-  ![<copy_RU>](./images/t8-copy-ru.png " ")
+  ![<copy_RU>](./images/t9-2-move-ru.png " ")
 
 
 2. Run the below command to relocate the chunk from GSM1:
@@ -654,7 +640,7 @@ Move the RU follower using below command, if required
     </copy>
     ```
 
-  ![<copy_RU>](./images/t8-copy-ru.png " ")
+  ![<copy_RU>](./images/t9-2-relocate_chunk.png " ")
 
 
 3. Please check the status of the chunks and RU, after relocate completes.
@@ -665,7 +651,7 @@ Move the RU follower using below command, if required
     </copy>
     ```
 
-  ![<copy_RU>](./images/t8-copy-ru.png " ")
+  ![<copy_RU>](./images/t9-3-status_chunks.png " ")
 
 ## Task 10: Scale Down with Raft Replication
 
@@ -679,7 +665,7 @@ Scaling down can be done using REMOVE SHARD and load balancing using MOVE RU.
     </copy>
     ```
 
-    ![<chunk_status_before_scale_down>](./images/t9-chunk-status-before.png " ")
+    ![<chunk_status_before_scale_down>](./images/t10-1-chunk-status-before.png " ")
 
 2. We want to Scale Down by removing the SHARD4.
 We will first change the replication unit leaders from shard4 to other shards and move the RUs from the SHARD4 to other shards
@@ -695,18 +681,18 @@ We will first change the replication unit leaders from shard4 to other shards an
     </copy>
     ```
 
-  ![<change_leader>](./images/t9-switchover-ru-leader.png " ")   
+  ![<change_leader>](./images/t10-2-switchover-ru-leader.png " ")   
 
 
 
-  check the status of chunks after switchover
+  Check the status of chunks after switchover.
     
     ```
     <copy>
     gdsctl status ru -show_chunks
     </copy>
     ```
- ![<status_after_switchover>](./images/t9-after-switchover.png " ")
+ ![<status_after_switchover>](./images/t10-2-after-switchover.png " ")
 
 
 We perform move ru until all the RU followers are moved from shard4 to other shards.
@@ -714,18 +700,17 @@ Source database shouldn't contain the replica leader
 Target database should not already contain another replica of the replication unit
 
 
-    ```
-    <copy>
-    gdsctl move ru -ru 7 -source orcl4cdb_orcl4pdb -target orcl2cdb_orcl2pdb
-    </copy>
-    ```
+ ```
+ <copy>
+ gdsctl move ru -ru 7 -source orcl4cdb_orcl4pdb -target orcl2cdb_orcl2pdb
+ </copy>
+ ```
 
-    ```
-    <copy>
-    gdsctl move ru -ru 8 -source orcl4cdb_orcl4pdb -target orcl2cdb_orcl2pdb
-    </copy>
-    ```
-  ![<move_ru_before_scale_down>](./images/t9-move-ru.png " ")
+ ```
+ <copy>
+ gdsctl move ru -ru 8 -source orcl4cdb_orcl4pdb -target orcl2cdb_orcl2pdb
+ </copy>
+ ```
 
    ```
   <copy>
@@ -733,7 +718,7 @@ Target database should not already contain another replica of the replication un
   </copy>
   ```
 
-![<move_ru_before_scale_down>](./images/t9-move-ru.png " ")
+![<move_ru_before_scale_down>](./images/t10-2-move-ru.png " ")
 
 3. Check the status after the move.
 
@@ -743,7 +728,7 @@ Target database should not already contain another replica of the replication un
     </copy>
     ```
 
-    ![<chunk_status_after_move_ru>](./images/t9-chunk-status-after-move-ru.png " ")   
+    ![<chunk_status_after_move_ru>](./images/t10-3-chunk-status-after-move-ru.png " ")   
 
 4. Move the chunks out of the SHARD4 before we can delete this SHARD:
   Run this command from GSM1.
@@ -752,6 +737,8 @@ Target database should not already contain another replica of the replication un
     python3 /opt/oracle/scripts/sharding/scripts/main.py --movechunks="shard_db=ORCL4CDB;shard_pdb=ORCL4PDB"
     </copy>
     ```
+
+   ![<move_all_chunks_n_verify_ddl_failed](./images/t10-4-move-all-chunks.png " ")
 
 5. Check the status for the chunks across all the RU's again and and make sure no DDL error is seen.
     ```
@@ -766,7 +753,7 @@ Target database should not already contain another replica of the replication un
     </copy>
     ```
    
-    ![<move_all_chunks_n_verify_ddl_failed](./images/t9-show-ddl-failed-after-move-all.png " ")
+    ![<move_all_chunks_n_verify_ddl_failed](./images/t10-5-show-ddl-failed-after-move-all.png " ")
 
 6. Complete the SHARD4 delete operation.
 
@@ -775,8 +762,15 @@ Target database should not already contain another replica of the replication un
     python3 /opt/oracle/scripts/sharding/scripts/main.py --deleteshard="shard_host=oshard4-0;shard_db=ORCL4CDB;shard_pdb=ORCL4PDB;shard_port=1521;shard_group=shardgroup1"
     </copy>
     ```
+    ![<move_all_chunks_n_verify_ddl_failed](./images/t10-6-delete-shard4.png " ")
 
 7. Check the status after scale down operation is completed.
+
+    ```
+    <copy>
+    gdsctl config shard
+    </copy>
+    ```
 
     ```
     <copy>
@@ -789,7 +783,8 @@ Target database should not already contain another replica of the replication un
     gdsctl status ru -show_chunks
     </copy>
     ```
-    ![<status_after_Scale_down](./images/t9-status-after-scale-down.png " ")
+
+    ![<status_after_Scale_down](./images/t10-7-status-after-scale-down.png " ")
     
 8. Stop and remove the shard4 container 
 
@@ -805,8 +800,17 @@ Target database should not already contain another replica of the replication un
     </copy>
     ```
 
-   ![<rm_shard4](./images/t9-rm-shard4-container.png " ")
+   ![<rm_shard4](./images/t10-8-stop-rm-shard4-container.png " ")
 
+9. Check if the shard4 has been removed.
+
+   ```
+    <copy>
+    sudo podman ps -a
+    </copy>
+    ```
+
+     ![<podman containers>](./images/t10-9-after-shard4-scale down-podman-container.png " ")
 
 
 This is the end of the Oracle Sharding RAFT Replication Workshop.
