@@ -3,10 +3,14 @@
     "help": "livelabs-help-sg_us@oracle.com",
     "tutorials": [
       {
+        "title": "Introduction",
+        "description": "",
+        "filename": "../../introduction/intro-adb-free-container.md"
+      },
+      {
         "title": "Lab 1: Prepare Setup",
         "description": "",
-        "filename": "../../adb-free-container-setup/adb-free-container-setup.md",
-        "type": "property-graphs"
+        "filename": "../../adb-free-container-setup/adb-free-container-setup.md"
       },
       {
         "title": "Need Help?",
