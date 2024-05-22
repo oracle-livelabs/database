@@ -44,20 +44,6 @@ I suggest you take a look at those files before we continue. You will find that 
 
 1. Log in to the Oracle Cloud.
 
-<if type="freetier">
-
-2. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources, you need to be in a region where Always Free Resources are available. You can see your current default **Region** in the top, right-hand corner of the page.
-
-    ![Select region on the far upper-right corner of the page.](./images/region.png " ")
-
-</if>
-<if type="livelabs">
-
-2. If you are using a LiveLabs account, you need to be in the region your account was provisioned in. You can see your current default **Region** in the top, right-hand corner of the page. Make sure that it matches the region on the LiveLabs Launch page.
-
-    ![Select region on the far upper-right corner of the page.](./images/region.png " ")
-
-</if>
 
 3. Click the navigation menu in the upper left to show top-level navigation choices.
 
@@ -186,4 +172,4 @@ If we don't specify **binary_files: true** then the indexing process will simply
 ## Acknowledgements
 
 - **Author** - Roger Ford, Principal Product Manager, Oracle Database
-- **Last Updated By/Date** - Roger Ford, November 2022
+- **Last Updated By/Date** - Hermann Baer, May 2024
