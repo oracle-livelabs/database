@@ -1,15 +1,22 @@
 # Prepare Setup
 
 ## Introduction
-This lab will show you how to pull, run, and start an Oracle Autonomous Database 23ai Docker image.
+In this lab, you will quickly configure the Oracle Autonomous Database Free 23ai Docker Container in your remote desktop environment.
 
-*Estimated Lab Time:* 10 minutes
+*Estimated Time:* 10 minutes
+
+### Objectives
+
+In this lab, you will:
+
+* Pull, run, and start an Oracle Autonomous Database 23ai Docker image with Podman.
+* Gain access to Database Actions, APEX, and more via your container.
 
 ### Prerequisites
 This lab assumes you have:
 - An Oracle account
 
-## Task 1: Pull and start Docker image
+## Task 1: Pull and Start Docker Image
 1.  The terminal should be open, if not go to Activities and click Terminal.
 
     ![Open the terminal](images/open-terminal.png)
