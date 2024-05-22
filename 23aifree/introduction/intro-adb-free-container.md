@@ -2,7 +2,7 @@
 
 ## About This Workshop
 
-In this workshop, you'll quickly set up the Oracle Autonomous Database Free Container Image 23ai in our visual remote desktop environment. You'll start the container and execute a few scripts to make APEX and ORDS available, ensuring a seamless integration. Utilizing Podman Compose, you'll achieve a consistent configuration, and gain access to adb-cli, ORDS, APEX, Database Actions, and more through an automated setup process. This approach allows you to easily harness the full potential of the Oracle  Autonomous Database Free 23ai.
+In this workshop, you'll quickly set up the Oracle Autonomous Database Free Container Image 23ai in our virtual remote desktop environment. You'll start the container and execute a few scripts to make APEX and ORDS available, ensuring a seamless integration. Utilizing Podman Compose, you'll achieve a consistent configuration, and gain access to adb-cli, ORDS, APEX, Database Actions, and more through an automated setup process. This approach allows you to easily harness the full potential of the Oracle  Autonomous Database Free 23ai.
 
 Estimated Time: 15 minutes
 
