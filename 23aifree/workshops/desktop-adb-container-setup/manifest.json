@@ -1,6 +1,6 @@
 {
   "workshoptitle": "Get Started with Oracle Autonomous Database 23ai Free Container Image",
-    "help": "livelabs-help-db_us@oracle.com",
+    "help": "livelabs-help-sg_us@oracle.com",
     "tutorials": [
       {
         "title": "Introduction",
@@ -9,8 +9,8 @@
       },
       {
         "title": "Get Started",
-        "description": "Using sandbox",
-        "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs.md"
+        "description": "Using noVNC Remote Desktop",
+        "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
       },
       {
         "title": "Lab 1: Prepare Setup",
