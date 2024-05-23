@@ -17,11 +17,12 @@ This lab assumes you have:
 - An Oracle account
 
 ## Task 1: Pull and Start Docker Image
-1.  The terminal should be open, if not go to Activities and click Terminal.
+1.  If the terminal is not displayed as shown below, select Activities and click Terminal.
 
-    ![Open the terminal](images/open-terminal.png)
+    ![Open the terminal](images/novnc-terminal.png)
  
-2.  Pull the zip file with our podman-compose files and scripts that we'll be running to create and configure the ADB container. We'll also be unzipping the files, then giving them the permissions to be executable within the container.
+2.  Copy the commands below and paste them into the terminal. This will pull the zip file with our podman-compose files and scripts that we'll be running to create and configure the ADB container. This series of commands will also unzip the files, and give them the permissions to be executable within the container.
+
 
     ```
     <copy>
