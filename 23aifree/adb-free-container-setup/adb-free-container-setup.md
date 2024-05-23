@@ -25,7 +25,7 @@ This lab assumes you have:
 
     ```
     <copy>
-    wget https://objectstorage.ca-toronto-1.oraclecloud.com/n/c4u04/b/apex-images/o/compose.zip
+    wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/WC7293Pwf4UNmrM44Mequmek_fjzKDkU-zBUrA8lAzcJMAiR19Jecjt1x1U4gBne/n/c4u04/b/apex-images/o/compose.zip
     unzip compose.zip
     chmod +x scripts start-container.sh
     chmod ugo+x -R scripts start-container.sh
@@ -46,15 +46,15 @@ This lab assumes you have:
 
     ![Information underneath login details](images/auth-token-copy.png)
 
-3. Input your tenancy name, username, and auth token as found under "View Login Details" in your LiveLabs reservation.
+4. Input your tenancy name, username, and auth token as found under "View Login Details" in your LiveLabs reservation.
     
     ![Input user variables](images/input-user-vars.png)
 
-4. Input your workload type, admin password, and wallet password as preferred while following the password restrictions listed in the script.
+5. Input your workload type, admin password, and wallet password as preferred while following the password restrictions listed in the script.
 
     ![Input ADB configuration variables](images/adb-config-vars.png)
 
-5. The container is now initializing. A podman-compose.yml script is running in the background to pull the image, start the container, mount necessary scripts onto the database.
+6. The container is now initializing. A podman-compose.yml script is running in the background to pull the image, start the container, mount necessary scripts onto the database.
 
     ![Podman Compose is running to start the container](images/podman-compose.png)
 
@@ -66,11 +66,11 @@ This lab assumes you have:
 
     ![Login succeeded](images/3-login-succeeded.png) -->
 
-6. Now, we're waiting until the container is healthy so we can run the remainder of our scripts.
+7. Now, we're waiting until the container is healthy so we can run the remainder of our scripts.
 
     ![Waiting until container is healthy](images/container-status.png)
 
-7. Once it reaches SQLPlus, paste this in to run this script within the container. This is going to reset where the APEX images are sourced from so APEX will function within our LiveLabs environment.
+8. Once it reaches SQLPlus, paste this in to run this script within the container. This is going to reset where the APEX images are sourced from so APEX will function within our LiveLabs environment.
 
     ```
     <copy>
@@ -80,11 +80,11 @@ This lab assumes you have:
     
     ![Reset image prefix script in SQL](images/sql-apex-reset-images.png)
 
-7. As the script completes, make sure you copy and run the command printed out at the end so you can easily run ADB-CLI commands.
+9. As the script completes, make sure you copy and run the command printed out at the end so you can easily run ADB-CLI commands.
 
     ![ADB CLI](images/adb-cli.png)
 
-8. Now, the ADB container is live and you can run commands against it. You can view the list of available commands using the following command.
+10. Now, the ADB container is live and you can run commands against it. You can view the list of available commands using the following command.
 
     ```
     <copy>
@@ -169,6 +169,41 @@ hostname fqdn -->
 <!-- 11. This is how you connect to ORDS.
 
 12. Finally, this is how you would connect to APEX. -->
+
+## Appendix 1: Restart Docker Container
+1. If you wanted to stop the ADB Docker container at any time and start with a fresh one, feel free to. If you are in the middle of running the start-container.sh script, type ctrl+C to stop it.
+
+2. Run this command to stop the container.
+
+    ```
+    <copy>
+    podman-compose down
+    </copy>
+    ```
+
+    ![Stopping the container](images/stop-container.png)
+
+2. Return to the home directory and restart the start-container.sh script.
+
+    ```
+    <copy>
+    cd ~
+    ./start-container.sh
+    </copy>
+    ```
+
+    ![Input user variables](images/input-user-vars.png)
+
+4. Run through the same steps onward of Task 1, step 4.
+
+## Appendix 2: Explore the Podman Compose script
+1. If you want to take a closer look at how we configure the container, run this command.
+
+    ```
+    <copy>
+    cat ~/podman-compose.yml
+    </copy>
+    ```
 
 ## Acknowledgements
 - **Author** - Kaylien Phan, Senior Product Manager, May 2024
