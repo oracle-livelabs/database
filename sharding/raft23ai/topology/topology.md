@@ -323,7 +323,7 @@ Run in the terminal as **oracle** user to Create SHARD4 database container
     </copy>
     ```
 
-![<add_shard4_command>](./images/t6-1-add-shard4.png " ")
+   ![<add_shard4_command>](./images/t6-1-add-shard4.png " ")
     
 
 2. Open another terminal session to check if the Shard4 database container creation is completed. Run the below command as **oracle** user.
@@ -337,9 +337,9 @@ Run in the terminal as **oracle** user to Create SHARD4 database container
     ![<add_shard4_logs>](./images/t6-2-add-shard4-logs-1.png " ")
 
 
-You have to wait until GSM shard set up is completed. Please refer the below screenshot:
+   You have to wait until GSM shard set up is completed. Please refer the below screenshot:
 
-![<GSM_shard_setup_completed>](./images/t6-2-add-shard4-logs-gsm-shard-setup-completed.png " ")
+   ![<GSM_shard_setup_completed>](./images/t6-2-add-shard4-logs-gsm-shard-setup-completed.png " ")
 
 
 3. Once the DB is up and running, complete the below commands to   complete the GSM configuration to deploy the new SHARD4:
@@ -407,7 +407,7 @@ You have to wait until GSM shard set up is completed. Please refer the below scr
     </copy>
     ```
 
-    ![<add_shard4_validation>](./images/t6-7-shard4-config-shard.png " ")
+   ![<add_shard4_validation>](./images/t6-7-shard4-config-shard.png " ")
 
 8. Run below command to check the configuration of chunks.
 
