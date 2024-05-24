@@ -1,0 +1,54 @@
+{
+  "workshoptitle": "Hitchhiker's Guide for Upgrading to Oracle Database 19c",
+  "support": "https://community.oracle.com/tech/developers/categories/database-19c",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The Introduction to Upgrade to 23ai Workshop.",
+      "filename": "../../00-introduction/introduction.md"
+    },
+    {
+      "title": "Lab 1: Initialize Environment",
+      "description": "Initialize Environment",
+      "filename": "../../01-initialize-environment/initialize-environment.md"
+    },
+    {
+      "title": "Lab 2: Explore Multitenant Architecture",
+      "filename": "../../02-explore-multitenant/explore-multitenant.md"
+    },
+    {
+      "title": "Lab 3: Generate AWR Snapshot",
+      "filename": "../../03-awr-snapshot/awr-snapshot.md"
+    },
+    {
+      "title": "Lab 4: Capture and Preserve SQL",
+      "filename": "../../04-capture-sql/capture-sql.md"
+    },
+    {
+      "title": "Lab 5: AutoUpgrade",
+      "filename": "../../05-autoupgrade/autoupgrade.md"
+    },
+    {
+      "title": "Lab 6: AWR Compare Periods",
+      "filename": "../../06-awr-compare/awr-compare.md"
+    },
+    {
+      "title": "Lab 7: SQL Performance Analyzer",
+      "filename": "../../07-spa/spa.md"
+    },
+    {
+      "title": "Lab 8: SQL Plan Management",
+      "filename": "../../08-spm/spm.md"
+    },
+    {
+      "title": "Lab 9: SQL Tuning Advisor",
+      "filename": "../../09-sqltune/sqltune.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}
