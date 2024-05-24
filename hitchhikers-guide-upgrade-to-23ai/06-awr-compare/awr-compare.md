@@ -177,6 +177,6 @@ An AWR Compare Periods report, shows the difference between two periods in time 
 
 
 ## Acknowledgements
-* **Author** - Mike Dietrich, Database Product Management
-* **Contributors** - Daniel Overby Hansen, Roy Swonger, Sanjay Rupprel, Cristian Speranta, Kay Malcolm
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2023
+* **Author** - Daniel Overby Hansen
+* **Contributors** - Klaus Gronau
+* **Last Updated By/Date** - Daniel Overby Hansen, June 2024

@@ -400,6 +400,6 @@ In this context, a plan includes all plan-related information (for example, SQL 
 - Webinar, [Performance Stability Perscription #5: SQL Plan Management](https://www.youtube.com/watch?v=qCt1_Fc3JRs&t=5489s)
 
 ## Acknowledgements
-* **Author** - Mike Dietrich - Scripts provided by: Carlos Sierra
-* **Contributors** - Daniel Overby Hansen, Roy Swonger, Sanjay Rupprel, Cristian Speranta, Kay Malcolm
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2023
+* **Author** - Daniel Overby Hansen - Scripts provided by: Carlos Sierra
+* **Contributors** - Klaus Gronau
+* **Last Updated By/Date** - Daniel Overby Hansen, June 2024

@@ -576,6 +576,6 @@ Snapshots are sets of historical data for specific periods that are used for per
 * Webinar, [Performance Stability Perscription #1: Collect SQL Tuning Sets](https://www.youtube.com/watch?v=qCt1_Fc3JRs&t=3969s)
 
 ## Acknowledgements
-* **Author** - Mike Dietrich, Database Product Management
-* **Contributors** - Daniel Overby Hansen, Roy Swonger, Kay Malcolm, Rene Fontcha
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2023
+* **Author** - Daniel Overby Hansen
+* **Contributors** - Klaus Gronau
+* **Last Updated By/Date** - Daniel Overby Hansen, June 2024

@@ -557,6 +557,6 @@ It is the only recommended way to upgrade Oracle Database.
 * Blog post, [AutoUpgrade and Plug In to a CDB – with a single command (and video)](https://mikedietrichde.com/2020/05/20/autoupgrade-and-plug-in-to-a-cdb-with-a-single-command/)
 
 ## Acknowledgements
-* **Author** - Mike Dietrich, Database Product Management
-* **Contributors** - Roy Swonger, Kay Malcolm, Database Product Management
-* **Last Updated By/Date** - Daniel Overby Hansen, August 2023
+* **Author** - Daniel Overby Hansen
+* **Contributors** - Klaus Gronau
+* **Last Updated By/Date** - Daniel Overby Hansen, June 2024

@@ -41,6 +41,6 @@ You may now *proceed to the next lab*.
 * My Oracle Support, [Oracle Databases Release and Support Coverage](https://support.oracle.com/epmos/faces/DocumentDisplay?id=742060.1&displayIndex=1)
 
 ## Acknowledgements
-* **Author** - Mike Dietrich, Database Product Management
-* **Contributors** - Daniel Overby Hansen, Roy Swonger, Sanjay Rupprel, Cristian Speranta, Kay Malcom
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2023
+* **Author** - Daniel Overby Hansen
+* **Contributors** - Klaus Gronau
+* **Last Updated By/Date** - Daniel Overby Hansen, June 2024

@@ -214,6 +214,6 @@ You can submit one or more SQL statements as input to the advisor and receive ad
 * Webinar, [Performance Stability Perscription #4: SQL Tuning Advisor, SQL profiles and SQL patches](https://www.youtube.com/watch?v=qCt1_Fc3JRs&t=4923s)
 
 ## Acknowledgements
-* **Author** - Mike Dietrich
-* **Contributors** - Daniel Overby Hansen, Roy Swonger, Sanjay Rupprel, Cristian Speranta, Kay Malcolm
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2023
+* **Author** - Daniel Overby Hansen
+* **Contributors** - Klaus Gronau
+* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
