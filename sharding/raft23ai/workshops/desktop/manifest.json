@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Learn how to use RAFT Replication to build resilient distributed databases",
+  "workshoptitle": "Use Raft Replication with Distributed Database for Resilient Never Down Apps",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {

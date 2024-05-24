@@ -38,7 +38,7 @@ This lab assumes you have:
         sudo podman ps -a
         </copy>
         ```
-        ![sharding docker](images/sharding-podman.png " ")
+        ![sharding docker](images/podman-containers.png " ")
 
     - If a container is stopped and not in running state then try to restart it by using below docker command.
 

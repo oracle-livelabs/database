@@ -153,7 +153,6 @@ Using SWITCHOVER RU, you can change which replica is the leader for the specifie
     ``` 
     ![<leader_status_after_change>](./images/t3-5-status-after-leader-change.png " ")
 
-run.sh
 
 6. Exit from GSM1.
 
@@ -376,9 +375,7 @@ Run in the terminal as **oracle** user to Create SHARD4 database container
 
     ![<config_task_a_status>](./images/t6-4-add-shard4-config-taska.png " ")
 
-    ![<config_task_b_status>](./images/t6-4-add-shard4-config-taskb.png " ")
-
-    ![<config_task_c_status>](./images/t6-4-config-task-not-pending.png " ")
+    ![<config_task_not pending_status>](./images/t6-4-config-task-not-pending.png " ")
 
 5. Exit from GSM1 and Run the below command as **oracle** user to validate the database shard4 container is healthy.
 
@@ -595,7 +592,7 @@ Connect to GSM1, run in the terminal as **oracle** user and connect to the shard
 
   ![<chunk_status_before_relocate_chunk>](./images/t9-1-chunk_status.png " ")
 
-2. To move a chunk from one Raft replication unit to another replication unit, use the GDSCTL RELOCATE CHUNK command.
+2. To move a chunk from one Raft replication unit to another  replication unit, use the GDSCTL RELOCATE CHUNK command.
 
 To use RELOCATE CHUNK, the source and target replication unit leaders must be located on the same shard, and their followers must also be on the same shards. If they are not on the same shard, use SWITCHOVER RU to move the leader and MOVE RU to move the followers to co-located shards.
 
@@ -603,10 +600,10 @@ When moving chunks, specify the chunk ID numbers, the source RU ID from which to
  
 Suppose we want to relocate chunk 3 from RU 8 to RU 2, RU 8 and 2 leaders must on same shards and RU 8 and 2 followers must be on same shards, if required; use SWITCHOVER RU to move the leader and MOVE RU to move the followers to co-located shards.
 
-Check the status of RU's from which you are trying to relocate:
+  Check the status of RU's from which you are trying to relocate:
 
 
- ```
+  ```
  <copy>
  gdsctl status ru -ru 8
  </copy>
@@ -717,29 +714,32 @@ We will first change the replication unit leaders from shard4 to other shards an
     gdsctl switchover ru -ru 7 -shard orcl1cdb_orcl1pdb
     </copy>
     ```
+
+    ![<change_leader_a>](./images/t10-2a-switchover-ru-leader.png " ")   
+
     ```
     <copy>
-    gdsctl switchover ru -ru 8 -shard orcl1cdb_orcl1pdb
+    gdsctl switchover ru -ru 4 -shard orcl2cdb_orcl2pdb
     </copy>
     ```
 
-  ![<change_leader>](./images/t10-2-switchover-ru-leader.png " ")   
+    ![<change_leader_b>](./images/t10-2b-switchover-ru-leader.png " ")   
 
 
 
-  Check the status of chunks after switchover.
+   Check the status of chunks after switchover.
     
     ```
     <copy>
     gdsctl status ru -show_chunks
     </copy>
     ```
- ![<status_after_switchover>](./images/t10-2-after-switchover.png " ")
+   ![<status_after_switchover>](./images/t10-2-after-switchover.png " ")
 
 
 We perform move ru until all the RU followers are moved from shard4 to other shards.
 Source database shouldn't contain the replica leader
-Target database should not already contain another replica of the replication unit
+Target database should not already contain another replica of the replication unit.
 
 
  ```
@@ -767,14 +767,13 @@ Target database should not already contain another replica of the replication un
   </copy>
   ```
 
+![<move_ru_before_scale_down>](./images/t10-2a-move-ru.png " ")
 
    ```
   <copy>
   gdsctl move ru -ru 1 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
   </copy>
   ```
-
-
 
    ```
   <copy>
@@ -789,18 +788,15 @@ Target database should not already contain another replica of the replication un
   </copy>
   ```
 
-    ```
+```
   <copy>
   gdsctl move ru -ru 6 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
   </copy>
   ```
 
 
-![<move_ru_before_scale_down>](./images/t10-2a-move-ru.png " ")
-
 ![<move_ru_before_scale_down>](./images/t10-2b-move-ru.png " ")
 
-![<move_ru_before_scale_down>](./images/t10-2c-move-ru.png " ")
 
 3. Check the status after the move.
 
@@ -846,6 +842,7 @@ Target database should not already contain another replica of the replication un
     ```
     ![<move_all_chunks_n_verify_ddl_failed>](./images/t10-6-delete-shard4.png " ")
 
+
 7. Check the status after scale down operation is completed.
 
     ```
@@ -859,14 +856,13 @@ Target database should not already contain another replica of the replication un
     gdsctl config chunks
     </copy>
     ```
+    ![<status_after_Scale_down>](./images/t10-7a-status-after-scale-down.png " ")
 
     ```
     <copy>
     gdsctl status ru -show_chunks
     </copy>
-    ```
-
-    ![<status_after_Scale_down>](./images/t10-7a-status-after-scale-down.png " ")
+    ```  
 
     ![<status_after_Scale_down>](./images/t10-7b-status-after-scale-down.png " ")
     
@@ -894,7 +890,7 @@ Target database should not already contain another replica of the replication un
     </copy>
     ```
 
-![<podman_stop>](./images/t10-9-after-scale-down-podman.png " ")
+   ![<podman_stop>](./images/t10-9-after-scale-down-podman.png " ")
 
 
 This is the end of the Oracle Sharding RAFT Replication Workshop.
