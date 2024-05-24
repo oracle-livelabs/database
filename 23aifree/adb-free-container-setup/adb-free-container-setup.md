@@ -115,11 +115,11 @@ This lab assumes you have:
 
     ![Sign into DB Actions](images/sign-in-ords.png)
 
-3. You now have access to Database Actions.
+3. You now have access to Database Actions! Let's first click SQL Developer Web to test it out.
 
-    ![Database Actions](images/db-actions.png)
+    ![Database Actions](images/launch-sql-developer.png)
 
-4. Go back to the landing page and click Go to Oracle APEX.
+4. Next, let's go to Oracle APEX. Go back to the landing page and click Go to Oracle APEX.
 
     ```
     <copy>
@@ -127,7 +127,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![ORDS landing page](images/ords-landing.png)
+    ![ORDS landing page](images/launch-apex.png)
 
 5. Sign in with your admin password you had set for the ADB in Task 1, Step 4.
 
