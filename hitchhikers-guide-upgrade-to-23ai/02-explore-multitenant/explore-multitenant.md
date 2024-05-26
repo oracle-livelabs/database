@@ -31,6 +31,8 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     export PATH=$ORACLE_HOME/bin:$PATH
     sql / as sysdba
     </copy>
+            
+    Be sure to hit RETURN
     ```
 
 2. Get a list of PDBs.
@@ -128,6 +130,8 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     alter pluggable database BLUE save state;
     select state from dba_pdb_saved_states where con_name='BLUE';
     </copy>
+            
+    Be sure to hit RETURN
     ```
 
     <details>
@@ -158,6 +162,8 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     alter pluggable database GREEN open;    
     alter pluggable database GREEN save state;
     </copy>
+            
+    Be sure to hit RETURN
     ```
 
     <details>
@@ -261,6 +267,8 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     alter session set container=green;
     show con_name
     </copy>
+            
+    Be sure to hit RETURN
     ```
 
     <details>
@@ -321,6 +329,8 @@ You check initialization parameters, set somee to the CDB, find a list of PDBs a
     alter session set container=RED;
     alter system set sga_target=500M scope=both;
     </copy>
+            
+    Be sure to hit RETURN
     ```
     
     <details>
@@ -371,6 +381,8 @@ You check DBA and CDB views.
     alter session set container=CDB$ROOT;
     select tablespace_name from dba_tablespaces;
     </copy>
+            
+    Be sure to hit RETURN
     ```
 
     * Notice you are using a DBA view.
@@ -441,6 +453,8 @@ You check DBA and CDB views.
     where t.con_id=c.con_id
     order by 1, 3;
     </copy>
+            
+    Be sure to hit RETURN
     ```
   
     * Records from PDB$SEED is now included (`con_id=2`).
@@ -486,6 +500,8 @@ You check DBA and CDB views.
     where t.con_id=c.con_id
     order by 1, 3;
     </copy>
+            
+    Be sure to hit RETURN
     ```
   
     * Notice how the same query now returns fewer rows. Only the rows from the PDB.
