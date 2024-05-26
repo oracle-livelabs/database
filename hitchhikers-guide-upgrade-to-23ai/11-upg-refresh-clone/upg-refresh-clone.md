@@ -1,8 +1,10 @@
-# Upgrade CDB and Roll Back Using Flashback Database
+# Upgrade Non-CDB Using Refreshable Clone PDB
 
 ## Introduction
 
-In this lab, you will upgrade an entire CDB including PDBs from Oracle Database 19c to 23ai. Then, you will practice a rollback and the restoration option in AutoUpgrade. This uses Flashback Database to get to our starting point.
+In this lab, you will upgrade a non-CDB to Oracle Database 23ai and convert it into a pluggable database. You will use refreshable clone PDB. This feature creates a copy of the database and keeps it up-to-date with redo. This minimizes the downtime needed and still keeps the source database untouched for rollback.
+
+Refreshable clone PDB works also for databases that are already a PDB. This is called an unplug-plug upgrade. 
 
 Estimated Time: 35 minutes
 
@@ -10,18 +12,18 @@ Estimated Time: 35 minutes
 
 In this lab, you will:
 
-* Upgrade entire CDB
-* Restore CDB
+* Prepare databases for refreshable clone PDB
+* Upgrade and convert a non-CDB
 
 ## Task 1: Prepare your environment
 
-You start by checking the *CDB19* database.
+You will upgrade the *FTEX* database and plug it into the *CDB23* database.
 
-1. Set the environment to the *CDB19* database and connect.
+1. Set the environment to the source non-CDB database (*FTEX*) and connect.
 
     ```
     <copy>
-    export ORACLE_SID=CDB19
+    export ORACLE_SID=FTEX
     export ORACLE_HOME=/u01/app/oracle/product/19
     export PATH=$ORACLE_HOME/bin:$PATH
     sqlplus / as sysdba
@@ -30,25 +32,46 @@ You start by checking the *CDB19* database.
     Be sure to hit RETURN
     ```
 
-2. Get a list of PDBs.
+2. Create a user and grant the necessary privileges
 
     ```
     <copy>
-    show pdbs
+    create user dblinkuser identified by dblinkuser;
+    grant create session to dblinkuser;
+    grant select_catalog_role to dblinkuser;
+    grant create pluggable database to dblinkuser;
+    grant read on sys.enc$ to dblinkuser;
     </copy>
+            
+    Be sure to hit RETURN
     ```
 
-    * There are two user-created PDBs in the CDB, *YELLOW* and *ORANGE*.
+    * You use the user to connect from the target CDB via a database link.
+    * You can delete the user after the migration.
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    CON_ID     CON_NAME           OPEN MODE  RESTRICTED
-    ---------- ------------------ ---------- ----------
-             2 PDB$SEED           READ ONLY  NO
-             3 YELLOW             READ WRITE NO
-             4 ORANGE             READ WRITE NO    
-     ```
+    SQL> create user dblinkuser identified by dblinkuser;
+        
+    User created.
+    
+    SQL> grant create session to dblinkuser;
+
+    Grant succeeded.
+
+    SQL> grant select_catalog_role to dblinkuser;
+
+    Grant succeeded.
+
+    SQL> grant create pluggable database dblinkuser;
+
+    Grant succeeded.
+    
+    SQL> grant read on sys.enc$ to dblinkuser;
+    
+    Grant succeeded.
+    ```
     </details>
 
 3. Exit SQL*Plus.
@@ -58,6 +81,73 @@ You start by checking the *CDB19* database.
     exit
     </copy>
     ```
+
+4. Set the environment to the target CDB (*CDB23*) and connect.
+
+    ```
+    <copy>
+    export ORACLE_SID=CDB23
+    export ORACLE_HOME=/u01/app/oracle/product/23
+    export PATH=$ORACLE_HOME/bin:$PATH
+    sqlplus / as sysdba
+    </copy>
+            
+    Be sure to hit RETURN
+    ```
+
+5. Create a database link pointing to the *FTEX* database.
+
+    ```
+    <copy>
+    create database link clonepdb 
+    connect to dblinkuser 
+    identified by dblinkuser
+    using 'localhost/ftex';
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> create database link clonepdb
+    connect to dblinkuser
+    identified by dblinkuser
+    using 'localhost/ftex';  2    3    4
+    
+    Database link created.
+    ```
+    </details>
+
+6. Ensure that the database link works.
+
+    ```
+    <copy>
+    select * from dual@clonepdb;
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> select * from dual@clonepdb;
+    
+    D
+    -
+    X
+    ```
+    </details>
+
+7. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
+## Task 2: Prepare for upgrade
+
+## Task 3: Start the upgrade and migration
 
 4. For this lab, you will use a pre-created config file. Examine the pre-created config file.
 
@@ -263,15 +353,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     ```
     </details>
 
-3. Exit SQL*Plus.
-
-    ```
-    <copy>
-    exit
-    </copy>
-    ```
-
-4. Get the database back to the starting point; the guaranteed restore point that AutoUpgrade automatically created before the upgrade. 
+3. Get the database back to the starting point; the guaranteed restore point that AutoUpgrade automatically created before the upgrade. 
 
     ```
     <copy>
@@ -294,7 +376,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     ```
     </details>
 
-5. After a short while the restoration completes. It usually takes only a few minutes. AutoUpgrade uses Flashback Database which is a very effective mean of restoring the database. Then, it needs to open the database with `RESETLOGS` which can take a short while if the redo log members are big. 
+4. After a short while the restoration completes. It usually takes only a few minutes. AutoUpgrade uses Flashback Database which is a very effective mean of restoring the database. Then, it needs to open the database with `RESETLOGS` which can take a short while if the redo log members are big. 
 
     <details>
     <summary>*click to see the output*</summary>
@@ -315,7 +397,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     ```
     </details>
 
-6. Set the environment to the original Oracle home and connect.
+5. Set the environment to the original Oracle home and connect.
 
     ```
     <copy>
@@ -328,7 +410,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     Be sure to hit RETURN
     ```
 
-7. Verify that the database is running on Oracle Database 19c. 
+6. Verify that the database is running on Oracle Database 19c. 
 
     ```
     <copy>
@@ -345,15 +427,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     ```
     </details>
 
-8. Exit SQL*Plus.
-
-    ```
-    <copy>
-    exit
-    </copy>
-    ```
-
-9. AutoUpgrade also updated the *oratab* registration. 
+7. AutoUpgrade also updated the *oratab* registration. 
 
     ```
     <copy>
@@ -371,7 +445,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     ```
     </details>
 
-10. AutoUpgrade also moved database configuration files back into the original Oracle home.
+8. AutoUpgrade also moved database configuration files back into the original Oracle home.
 
     ```
     <copy>
@@ -392,7 +466,10 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     ```
     </details>
 
-**You have now restored the *CDB19* database.**
+Remove DB link and DB link user
+Shut down FTEX database
+
+**You have now upgrade the *FTEX* database and renamed it to MAGENTA.**
 
 You may now *proceed to the next lab*.
 

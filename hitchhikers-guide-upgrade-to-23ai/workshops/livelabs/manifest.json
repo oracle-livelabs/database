@@ -48,6 +48,10 @@
     {
       "title": "Lab 10: Upgrade CDB and Roll Back Using Flashback Database",
       "filename": "../../10-upg-cdb-flashback/upg-cdb-flashback.md"
+    },
+    {
+      "title": "Lab 11: Upgrade Non-CDB Using Refreshable Clone PDB",
+      "filename": "../../11-upg-refresh-clone/upg-refresh-clone.md"
     },    
     {
       "title": "Need Help?",
