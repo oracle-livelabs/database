@@ -528,6 +528,52 @@ When the *REFRESHPDB* phase is over, AutoUpgrade executes a final refresh to bri
     </copy>
     ```
 
+## Task 5: Restart FTEX source database
+
+AutoUpgrade stops the source non-CDB immediately after the final refresh. This ensures no one enters data into the wrong database during the migration. The *FTEX* database is used in other labs, so you need to restart it. You would not do this in a real migration.
+
+1. Set the environment to the *FTEX* database and connect.
+
+    ```
+    <copy>
+    export ORACLE_SID=FTEX
+    export ORACLE_HOME=/u01/app/oracle/product/19
+    export PATH=$ORACLE_HOME/bin:$PATH
+    sqlplus / as sysdba
+    </copy>
+    ```
+
+2. Start the database.
+
+    ```
+    <copy>
+    startup
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    ORACLE instance started.
+    
+    Total System Global Area 1157627144 bytes
+    Fixed Size		    8924424 bytes
+    Variable Size		  369098752 bytes
+    Database Buffers	  771751936 bytes
+    Redo Buffers		    7852032 bytes
+    Database mounted.
+    Database opened.
+    ```
+    </details>  
+
+3. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
 **Congratulations!** You have now:
 * Upgraded the *FTEX* database
 * Converted it to a PDB
