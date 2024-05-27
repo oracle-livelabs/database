@@ -2,9 +2,7 @@
 
 ## Introduction
 
-In this lab, you will upgrade a non-CDB to Oracle Database 23ai and convert it into a pluggable database (PDB). You will use refreshable clone PDB. This feature creates a copy of the database and keeps it up-to-date with redo. This minimizes the downtime needed and still keeps the source database untouched for rollback.
-
-Refreshable clone PDB works also for databases that are already a PDB. This is called an unplug-plug upgrade. 
+In this lab, you will upgrade a non-CDB to Oracle Database 23ai and convert it io a pluggable database (PDB). You will use refreshable clone PDB. This feature creates a copy of the database and keeps it up-to-date with redo. This minimizes the downtime needed and still keeps the source database untouched for rollback.
 
 You will upgrade the *FTEX* database and plug it into the *CDB23* database.
 
@@ -19,7 +17,7 @@ In this lab, you will:
 
 ## Task 1: Prepare your environment
 
-Refreshable clone PDB works via a database link. You must create a user, grant privileges and create a database link. 
+Refreshable clone PDB works via a database link. You must create a user and grant privileges in the source non-CDB. Also, you must create a database link in the target CDB connecting to the source non-CDB.
 
 1. Set the environment to the source non-CDB database (*FTEX*) and connect.
 
@@ -159,9 +157,9 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
     ```
 
     * `sid` specifies the source non-CDB.
-    * `target_cdb` is where you want to migrate the database.
-    * `source_db_link` is the name of the database link in the target CDB, plus the refresh rate. It's set to 60 seconds here which is too low for a realistic scenario, but suitable for demo purposes. 
-    * `target_pdb_name` renames the database to *TEAL*. 
+    * `target_cdb` is the CDB where you want to plug in.
+    * `source_db_link` is the name of the database link in the target CDB, plus the refresh rate. Here, it's set to 60 seconds which is too low for a realistic scenario, but suitable for demo purposes. 
+    * `target_pdb_name` renames the database from *FTEX* to *TEAL*. 
     * `target_pdb_copy_option` instructs the CDB to use Oracle Managed Files (OMF).
     * `start_time` is set to 15 minutes from starting AutoUpgrade. In a realistic scneario you would probably use an absolute time. 
 
@@ -276,7 +274,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
 
 ## Task 3: Build refreshable clone
 
-You build the refrshable clone with AutoUpgrade. It creates the PDB and starts the periodic refresh.
+You build the refreshable clone with AutoUpgrade. It creates the PDB and starts the periodic refresh.
 
 1. Start AutoUpgrade in *deploy* mode. 
 
@@ -385,7 +383,7 @@ AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you wi
     ```
 
     * Notice how AutoUpgrade used the `CREATE PLUGGABLE DATABASE` statement. 
-    * The `@CLONEPDB` specifies the use of remote cloning via the database link *CLONEPDB*.
+    * The `@CLONEPDB` keyword specifies the use of remote cloning via the database link *CLONEPDB*.
     * The `REFRESH` keyword specifies the use of refreshable clone PDB.
 
     <details>
@@ -412,6 +410,7 @@ AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you wi
     ```
 
     * The `ALTER PLUGGABLE DATABASE ... REFRESH` command instructs the CDB to bring the latest redo from the source database and roll forward.
+    * Notice how the refresh happens every 60 seconds. The refresh rate specified in the config file.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -449,7 +448,7 @@ AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you wi
 
 ## Task 4: Upgrade and convert to PDB
 
-When the *REFRESHPDB* is over, AutoUpgrade executes a final refresh to bring over the latest changes. Then, it disconnects the PDB from the non-CDB and starts the upgrade and conversion to PDB.
+When the *REFRESHPDB* phase is over, AutoUpgrade executes a final refresh to bring over the latest changes. Then, it disconnects the PDB from the non-CDB and starts the upgrade and conversion to PDB.
 
 1. At this time, AutoUpgrade should have moved past the *REFRESHPDB* stage. In the first terminal, check the output of the `lsj` command running in the AutoUpgrade console. 
 
@@ -495,8 +494,6 @@ When the *REFRESHPDB* is over, AutoUpgrade executes a final refresh to bring ove
 
 5. Switch to the *TEAL* PDB and ensure that the *SALES.ORDERS* table exist.
 
-    * If the query completes without errors, it means the table is present. This proves that changes made after the initial copy of data files are still in the PDB after the migration.
-
     ```
     <copy>
     alter session set container=TEAL;
@@ -505,6 +502,8 @@ When the *REFRESHPDB* is over, AutoUpgrade executes a final refresh to bring ove
             
     Be sure to hit RETURN
     ```
+    
+    * If the query completes without errors, it means the table is present. This proves that changes made after the initial copy of data files are still in the PDB after the migration.
 
     <details>
     <summary>*click to see the output*</summary>
