@@ -398,7 +398,7 @@ You may now *proceed to the next lab*.
 
 ## Learn More
 
-AutoUpgrade completely automates restoration of a database. By default, AutoUpgrade creates a guaranteed restore point before making any changes to the database. If a critical error occurs during upgrade or if you post-upgrade test reveals an issue preventing go-live, you can use AutoUpgrade to bring the database back into the *before-upgrade* state.
+AutoUpgrade completely automates restoration of a database. By default, AutoUpgrade creates a guaranteed restore point before making any changes to the database. If a critical error occurs during upgrade or if your post-upgrade test reveals an issue preventing go-live, you can use AutoUpgrade to bring the database back into the *before-upgrade* state.
 
 * My Oracle Support, [AutoUpgrade Tool (Doc ID 2485457.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1)
 * Documentation, [AutoUpgrade Command-Line Syntax](hhttps://docs.oracle.com/en/database/oracle/oracle-database/23/upgrd/autoupgrade-command-line-parameters.html#GUID-B969F325-EB44-42B3-AD93-43E47493E271)

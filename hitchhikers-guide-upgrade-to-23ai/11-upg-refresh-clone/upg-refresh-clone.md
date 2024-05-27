@@ -2,9 +2,11 @@
 
 ## Introduction
 
-In this lab, you will upgrade a non-CDB to Oracle Database 23ai and convert it into a pluggable database. You will use refreshable clone PDB. This feature creates a copy of the database and keeps it up-to-date with redo. This minimizes the downtime needed and still keeps the source database untouched for rollback.
+In this lab, you will upgrade a non-CDB to Oracle Database 23ai and convert it into a pluggable database (PDB). You will use refreshable clone PDB. This feature creates a copy of the database and keeps it up-to-date with redo. This minimizes the downtime needed and still keeps the source database untouched for rollback.
 
 Refreshable clone PDB works also for databases that are already a PDB. This is called an unplug-plug upgrade. 
+
+You will upgrade the *FTEX* database and plug it into the *CDB23* database.
 
 Estimated Time: 35 minutes
 
@@ -12,12 +14,12 @@ Estimated Time: 35 minutes
 
 In this lab, you will:
 
-* Prepare databases for refreshable clone PDB
-* Upgrade and convert a non-CDB
+* Prepare database for refreshable clone PDB
+* Upgrade a non-CDB and convert to PDB
 
 ## Task 1: Prepare your environment
 
-You will upgrade the *FTEX* database and plug it into the *CDB23* database.
+Refreshable clone PDB works via a database link. You must create a user, grant privileges and create a database link. 
 
 1. Set the environment to the source non-CDB database (*FTEX*) and connect.
 
@@ -130,7 +132,6 @@ You will upgrade the *FTEX* database and plug it into the *CDB23* database.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> select * from dual@clonepdb;
-    
     D
     -
     X
@@ -147,71 +148,55 @@ You will upgrade the *FTEX* database and plug it into the *CDB23* database.
 
 ## Task 2: Prepare for upgrade
 
-## Task 3: Start the upgrade and migration
+You check the source database for upgrade readiness and execute pre-upgrade fixups. 
 
-4. For this lab, you will use a pre-created config file. Examine the pre-created config file.
+1. For this lab, you will use a pre-created config file. Examine the pre-created config file.
 
     ```
     <copy>
-    cat /home/oracle/scripts/cdb19.cfg
+    cat /home/oracle/scripts/ftex-refresh.cfg
     </copy>
     ```
- 
-    * `restoration=yes` ensures that AutoUpgrade creates a guaranteed restore point that you can use later on to roll back to. The default value is *yes* but it is shown here for clarity. 
+
+    * `sid` specifies the source non-CDB.
+    * `target_cdb` is where you want to migrate the database.
+    * `source_db_link` is the name of the database link in the target CDB, plus the refresh rate. It's set to 60 seconds here which is too low for a realistic scenario, but suitable for demo purposes. 
+    * `target_pdb_name` renames the database to *TEAL*. 
+    * `target_pdb_copy_option` instructs the CDB to use Oracle Managed Files (OMF).
+    * `start_time` is set to 15 minutes from starting AutoUpgrade. In a realistic scneario you would probably use an absolute time. 
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    global.autoupg_log_dir=/home/oracle/logs/upg-cdb-flashback
+    global.autoupg_log_dir=/home/oracle/logs/ftex-refresh
     upg1.source_home=/u01/app/oracle/product/19
     upg1.target_home=/u01/app/oracle/product/23
-    upg1.sid=CDB19
-    upg1.restoration=yes
+    upg1.sid=FTEX
+    upg1.target_cdb=CDB23
+    upg1.source_dblink.FTEX=CLONEPDB 60
+    upg1.target_pdb_name.FTEX=TEAL
+    upg1.target_pdb_copy_option.FTEX=file_name_convert=none
+    upg1.start_time=+15m
     ```
     </details>
 
-## Task 2: Analyze your database
-
-It is best practice to first analyze your database for upgrade readiness. It is a lightweight, non-intrusive check that you can run on a live database.
-
-1. Start AutoUpgrade in *analyze* mode. The check usually completes very fast. Wait for it to complete.
+2. Start AutoUpgrade in *analyze* mode. The check usually completes very fast. Wait for it to complete.
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/cdb19.cfg -mode analyze
+    java -jar autoupgrade.jar -config /home/oracle/scripts/ftex-refresh.cfg -mode analyze
     </copy>
     ```
 
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    AutoUpgrade 24.3.240419 launched with default internal options
-    Processing config file ...
-    +--------------------------------+
-    | Starting AutoUpgrade execution |
-    +--------------------------------+
-    1 CDB(s) plus 3 PDB(s) will be analyzed
-    Type 'help' to list console commands
-    upg> Job 100 completed
-    ------------------- Final Summary --------------------
-    Number of databases            [ 1 ]
-    
-    Jobs finished                  [1]
-    Jobs failed                    [0]
-    
-    Please check the summary report at:
-    /home/oracle/logs/upg-cdb-flashback/cfgtoollogs/upgrade/auto/status/status.html
-    /home/oracle/logs/upg-cdb-flashback/cfgtoollogs/upgrade/auto/status/status.log
-    ```
-    </details>
-
-3. AutoUpgrade prints the path to the summary report. Check it.
+3. When AutoUpgrade completes, it prints the path to the summary report. Check the summary report.
 
     ```
     <copy>
-    cat /home/oracle/logs/upg-cdb-flashback/cfgtoollogs/upgrade/auto/status/status.log
+    cat /home/oracle/logs/ftex-refresh/cfgtoollogs/upgrade/auto/status/status.log
     </copy>
     ```
+
+    * The report states *Check passed and no manual intervention needed*. 
 
     <details>
     <summary>*click to see the output*</summary>
@@ -219,88 +204,268 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     ==========================================
               Autoupgrade Summary Report
     ==========================================
-    [Date]           Fri May 24 12:47:36 GMT 2024
+    [Date]           Mon May 27 06:55:59 GMT 2024
     [Number of Jobs] 1
     ==========================================
     [Job ID] 100
     ==========================================
-    [DB Name]                CDB19
+    [DB Name]                FTEX
     [Version Before Upgrade] 19.21.0.0.0
     [Version After Upgrade]  23.4.0.24.05
     ------------------------------------------
     [Stage Name]    PRECHECKS
     [Status]        SUCCESS
-    [Start Time]    2024-05-24 12:47:20
+    [Start Time]    2024-05-27 06:55:52
     [Duration]
-    [Log Directory] /home/oracle/logs/upg-cdb-flashback/CDB19/100/prechecks
-    [Detail]        /home/oracle/logs/upg-cdb-flashback/CDB19/100/prechecks/cdb19_preupgrade.log
+    [Log Directory] /home/oracle/logs/ftex-refresh/FTEX/100/prechecks
+    [Detail]        /home/oracle/logs/ftex-refresh/FTEX/100/prechecks/ftex_preupgrade.log
                     Check passed and no manual intervention needed
     ------------------------------------------
     ```
     </details>
-    
-    * The report states: *Check passed and no manual intervention needed*. AutoUpgrade found no severe issues that it couldn't fix automatically. 
 
-## Task 3: Upgrade your database
-
-You determined that the database is ready to upgrade. Start AutoUpgrade in *deploy* mode. One command is all it takes to perform the upgrade - including all pre- and post-upgrade tasks. 
-
-1. Start AutoUpgrade in *deploy* mode to perform the upgrade. Notice you are re-using the same command, but this time `-mode` is set to `deploy`.
+4. Proceed with the pre-upgrade fixups. Normally, you would do this close to the final refresh (as dictated by `start_time` config file parameter). But in this lab we do it now. 
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/cdb19.cfg -mode deploy
+    java -jar autoupgrade.jar -config /home/oracle/scripts/ftex-refresh.cfg -mode fixups
+    </copy>
+    ```
+
+5. Monitor the fixups.    
+
+    ```
+    <copy>
+    lsj -a 10
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    AutoUpgrade 24.3.240419 launched with default internal options
-    Processing config file ...
-    +--------------------------------+
-    | Starting AutoUpgrade execution |
-    +--------------------------------+
-    1 CDB(s) plus 3 PDB(s) will be processed
-    Type 'help' to list console commands
-    upg>
-    ```
-    </details>
-
-2. You are now in the AutoUpgrade console. The upgrade job is running in the background. Show a list of running jobs and set it to refresh automatically
-
-    ```
-    <copy>
-    lsj -a 30
-    </copy>
-    ```
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    +----+-------+-----+---------+-------+----------+-------+----------------------+
-    |Job#|DB_NAME|STAGE|OPERATION| STATUS|START_TIME|UPDATED|               MESSAGE|
-    +----+-------+-----+---------+-------+----------+-------+----------------------+
-    | 101|  CDB19|DRAIN|EXECUTING|RUNNING|  12:51:56|38s ago|Shutting down database|
-    +----+-------+-----+---------+-------+----------+-------+----------------------+
+    upg> lsj -a 10
+    upg> 
+    +----+-------+---------+---------+-------+----------+-------+----------------------------+
+    |Job#|DB_NAME|    STAGE|OPERATION| STATUS|START_TIME|UPDATED|                     MESSAGE|
+    +----+-------+---------+---------+-------+----------+-------+----------------------------+
+    | 101|   FTEX|PRECHECKS|EXECUTING|RUNNING|  07:53:37| 3s ago|Loading database information|
+    +----+-------+---------+---------+-------+----------+-------+----------------------------+
     Total jobs 1
     
-    The command lsj is running every 30 seconds. PRESS ENTER TO EXIT
-
-    (output varies)
+    The command lsj is running every 10 seconds. PRESS ENTER TO EXIT
     ```
     </details>
-      
-3. Wait until the upgrade completes. Depending on the hardware, the upgrade will take about 25-35 minutes. Don't exit from the AutoUpgrade console. Leave it running.
 
-4. Optionally, you do another lab while the upgrade completes.
-
-5. When the upgrade completes, AutoUpgrade prints a message saying *Job 101 completed* and exits from the AutoUpgrade console.
+6. Wait for the fixups to complete. AutoUpgrade prints *Job 101 completed* when done.
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     Job 101 completed
+    ------------------- Final Summary --------------------
+    Number of databases            [ 1 ]
+    
+    Jobs finished                  [1]
+    Jobs failed                    [0]
+    
+    Please check the summary report at:
+    /home/oracle/logs/ftex-refresh/cfgtoollogs/upgrade/auto/status/status.html
+    /home/oracle/logs/ftex-refresh/cfgtoollogs/upgrade/auto/status/status.log
+    ```
+    </details>
+
+## Task 3: Build refreshable clone
+
+You build the refrshable clone with AutoUpgrade. It creates the PDB and starts the periodic refresh.
+
+1. Start AutoUpgrade in *deploy* mode. 
+
+    ```
+    <copy>
+    java -jar autoupgrade.jar -config /home/oracle/scripts/ftex-refresh.cfg -mode deploy
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    AutoUpgrade 24.2.240411 launched with default internal options
+    Processing config file ...
+    +--------------------------------+
+    | Starting AutoUpgrade execution |
+    +--------------------------------+
+    1 Non-CDB(s) will be processed
+    Type 'help' to list console commands
+    upg> Copying remote database 'FTEX' as 'TEAL' for job 102
+    ```
+    </details>
+
+2. Monitor the creation. AutoUpgrade creates the PDB and copies the data files in the phase *CLONEPDB*. The database is small so it completes fairly quick. Hit *RETURN* to bring the console forward and use the `lsj` command. 
+
+    ```
+    <copy>
+     
+    lsj -a 10
+    </copy>
+    ```
+
+AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you will enter some data to the *FTEX* database. This allows you to verify that changes made after the initial copy of data files still exist in the PDB after the migration. 
+
+3. Do not exit AutoUpgrade. Use a second terminal and set the environment to the *FTEX* database.
+
+    ```
+    <copy>
+    export ORACLE_SID=FTEX
+    export ORACLE_HOME=/u01/app/oracle/product/19
+    export PATH=$ORACLE_HOME/bin:$PATH
+    sqlplus / as sysdba
+    </copy>
+    ```
+
+4. Create test data.
+
+    ```
+    <copy>
+    create user sales identified by oracle default tablespace users;
+    grant dba to sales;
+    create table sales.orders as select * from all_objects;
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> create user sales identified by oracle default tablespace users;
+    
+    User created.
+    
+    SQL> grant dba to sales;
+    
+    Grant succeeded.
+    
+    SQL> create table sales.orders as select * from all_objects;
+    
+    Table created.    
+    ```
+    </details>    
+
+5. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
+7. Back in the first terminal check the progress of the *REFRESHPDB* phase. The *MESSAGE* field tells you how far it is.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    +----+-------+----------+---------+-------+----------+-------+-------------------+
+    |Job#|DB_NAME|     STAGE|OPERATION| STATUS|START_TIME|UPDATED|            MESSAGE|
+    +----+-------+----------+---------+-------+----------+-------+-------------------+
+    | 102|   FTEX|REFRESHPDB|EXECUTING|RUNNING|  07:57:29| 2s ago|Starts in 2 minutes|
+    +----+-------+----------+---------+-------+----------+-------+-------------------+
+    Total jobs 1
+    
+    The command lsj is running every 10 seconds. PRESS ENTER TO EXIT 
+    ```
+    </details>  
+            
+8. Switch to the second terminal. Examine the alert log of *CDB23*, the target CDB, and see the creation of the refreshable clone PDB.
+
+    ```
+    <copy>
+    cd /u01/app/oracle/diag/rdbms/cdb23/CDB23/trace
+    grep -i -B2 "create pluggable database \"TEAL\"" alert_CDB23.log
+    </copy>
+            
+    Be sure to hit RETURN
+    ```
+
+    * Notice how AutoUpgrade used the `CREATE PLUGGABLE DATABASE` statement. 
+    * The `@CLONEPDB` specifies the use of remote cloning via the database link *CLONEPDB*.
+    * The `REFRESH` keyword specifies the use of refreshable clone PDB.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    Opatch validation is skipped for PDB TEAL (con_id=0)
+    2024-05-27T07:42:30.747705+00:00
+    create pluggable database "TEAL"  FROM FTEX@CLONEPDB   file_name_convert=none  tempfile reuse  REFRESH MODE MANUAL
+    --
+    2024-05-27T07:42:47.488916+00:00
+    TEAL(5):.... (PID:561068): Media Recovery Complete [dbsdrv.c:15613]
+    Completed: create pluggable database "TEAL"  FROM FTEX@CLONEPDB   file_name_convert=none  tempfile reuse  REFRESH MODE MANUAL
+        
+    (output varies)
+    ```
+    </details>  
+
+9. Further, let's see the period refresh.
+
+    ```
+    <copy>
+    grep -i -B2 "refresh" alert_CDB23.log
+    </copy>
+    ```
+
+    * The `ALTER PLUGGABLE DATABASE ... REFRESH` command instructs the CDB to bring the latest redo from the source database and roll forward.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    2024-05-27T07:55:50.870470+00:00
+    TEAL(5):.... (PID:562640): Media Recovery Complete [dbsdrv.c:15613]
+    Completed: ALTER PLUGGABLE DATABASE TEAL REFRESH
+    2024-05-27T07:56:47.653445+00:00
+    ALTER PLUGGABLE DATABASE TEAL REFRESH
+    --
+    2024-05-27T07:56:50.911562+00:00
+    TEAL(5):.... (PID:562736): Media Recovery Complete [dbsdrv.c:15613]
+    Completed: ALTER PLUGGABLE DATABASE TEAL REFRESH
+    2024-05-27T07:57:33.012205+00:00
+    ALTER PLUGGABLE DATABASE TEAL REFRESH
+    --
+    2024-05-27T07:57:35.934217+00:00
+    TEAL(5):.... (PID:562789): Media Recovery Complete [dbsdrv.c:15613]
+    Completed: ALTER PLUGGABLE DATABASE TEAL REFRESH
+    2024-05-27T07:57:35.993221+00:00
+    ALTER PLUGGABLE DATABASE TEAL REFRESH MODE NONE
+    Completed: ALTER PLUGGABLE DATABASE TEAL REFRESH MODE NONE
+        
+    (output varies)
+    ```
+    </details>  
+
+10. Close the second terminal and return to the first terminal. Do not close the terminal in which AutoUpgrade is running.   
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
+## Task 4: Upgrade and convert to PDB
+
+When the *REFRESHPDB* is over, AutoUpgrade executes a final refresh to bring over the latest changes. Then, it disconnects the PDB from the non-CDB and starts the upgrade and conversion to PDB.
+
+1. At this time, AutoUpgrade should have moved past the *REFRESHPDB* stage. In the first terminal, check the output of the `lsj` command running in the AutoUpgrade console. 
+
+    * AutoUpgrade moves through the next phases. The two main ones are *DBUPGRADE* which performs the upgrade to Oracle Database 23ai. The other one is *NONCDBTOPDB* which transforms the database into a proper PDB.
+
+2. Optionally, while waiting for the job to complete, use some of the other commands in the console. 
+
+    * `status -jobid 102 -a 10`: Gives you even more details about the current job.
+    * `help`: Show other commands available in the AutoUpgrade console.
+
+3. Wait for AutoUpgrade to complete the migration. When the job completes, AutoUpgrade prints *Job 102 completed*. 
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    Job 102 completed
     ------------------- Final Summary --------------------
     Number of databases            [ 1 ]
     
@@ -309,177 +474,79 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     Jobs restored                  [0]
     Jobs pending                   [0]
     
-    ---- Drop GRP at your convenience once you consider it is no longer needed ----
-    Drop GRP from CDB19: drop restore point AUTOUPGRADE_9212_CDB191921000
     
     
     Please check the summary report at:
-    /home/oracle/logs/upg-cdb-flashback/cfgtoollogs/upgrade/auto/status/status.html
-    /home/oracle/logs/upg-cdb-flashback/cfgtoollogs/upgrade/auto/status/status.log
+    /home/oracle/logs/ftex-refresh/cfgtoollogs/upgrade/auto/status/status.html
+    /home/oracle/logs/ftex-refresh/cfgtoollogs/upgrade/auto/status/status.log
     ```
-    </details>
+    </details>  
 
-## Task 4: Restore database using AutoUpgrade
-
-The database is now running on Oracle Database 23ai. Suppose your tests find a critical error and you would like to go back to Oracle Database 19c. AutoUpgrade automatically created a guaranteed restore point, and you can use Flashback Database to go back to the starting point.
-
-1. Set the environment to the new Oracle home and connect to the upgraded *CDB19* database.
+4. Set the environment to the *CDB23* database and connect.
 
     ```
     <copy>
-    export ORACLE_SID=CDB19
+    export ORACLE_SID=CDB23
     export ORACLE_HOME=/u01/app/oracle/product/23
     export PATH=$ORACLE_HOME/bin:$PATH
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
     ```
 
-2. Verify that the database is on Oracle Database 23ai. 
+5. Switch to the *TEAL* PDB and ensure that the *SALES.ORDERS* table exist.
 
-    ```
-    <copy>
-    select version from v$instance;
-    </copy>
-    ```
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    VERSION
-    _____________
-    23.0.0.0.0    
-    ```
-    </details>
-
-3. Get the database back to the starting point; the guaranteed restore point that AutoUpgrade automatically created before the upgrade. 
+    * If the query completes without errors, it means the table is present. This proves that changes made after the initial copy of data files are still in the PDB after the migration.
 
     ```
     <copy>
-    java -jar autoupgrade.jar -config /home/oracle/scripts/cdb19.cfg -restore -jobs 101
-    </copy>
-    ```
-
-    * You start the restoration based on the *job ID*. 
-    * Job *101* was the job that upgraded the database. 
-    * If you had multiple jobs to restore, you can supply a comma-separated list.
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    Previous execution found loading latest data
-    Total jobs being restored: 1
-    +--------------------------------+
-    | Starting AutoUpgrade execution |
-    +--------------------------------+
-    ```
-    </details>
-
-4. After a short while the restoration completes. It usually takes only a few minutes. AutoUpgrade uses Flashback Database which is a very effective mean of restoring the database. Then, it needs to open the database with `RESETLOGS` which can take a short while if the redo log members are big. 
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    Job 101 completed
-    ------------------- Final Summary --------------------
-    Number of databases            [ 1 ]
-    
-    Jobs restored                  [1]
-    Jobs failed                    [0]
-    -------------------- JOBS PENDING --------------------
-    Job 101 for CDB19
-    
-    Please check the summary report at:
-    /home/oracle/logs/upg-cdb-flashback/cfgtoollogs/upgrade/auto/status/status.html
-    /home/oracle/logs/upg-cdb-flashback/cfgtoollogs/upgrade/auto/status/status.log
-    Exiting
-    ```
-    </details>
-
-5. Set the environment to the original Oracle home and connect.
-
-    ```
-    <copy>
-    export ORACLE_SID=CDB19
-    export ORACLE_HOME=/u01/app/oracle/product/19
-    export PATH=$ORACLE_HOME/bin:$PATH
-    sqlplus / as sysdba
+    alter session set container=TEAL;
+    select count(*) from sales.orders;
     </copy>
             
     Be sure to hit RETURN
     ```
 
-6. Verify that the database is running on Oracle Database 19c. 
-
-    ```
-    <copy>
-    select version from v$instance;
-    </copy>
-    ```
-
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    VERSION
-    -----------------
-    19.0.0.0.0
+    SQL> alter session set container=TEAL;
+    
+    Session altered.
+    
+    SQL> select count(*) from sales.orders;
+    
+      COUNT(*)
+    ----------
+         22757
     ```
-    </details>
+    </details>      
 
-7. AutoUpgrade also updated the *oratab* registration. 
-
-    ```
-    <copy>
-    cat /etc/oratab | grep CDB19
-    </copy>
-    ```
-
-    * Notice how the Oracle home is set to the original, 19c Oracle home.
-    * If Grid Infrastructure would manage the database, AutoUpgrade would modify the clusterware registration as well.
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    CDB19:/u01/app/oracle/product/19:N
-    ```
-    </details>
-
-8. AutoUpgrade also moved database configuration files back into the original Oracle home.
+6. Exit SQL*Plus.
 
     ```
     <copy>
-    ll $ORACLE_HOME/dbs/*CDB19*
+    exit
     </copy>
     ```
 
-    * AutoUpgrade also moves other configuration files like network files (`sqlnet.ora`, `tnsnames.ora`). 
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    -rw-r-----. 1 oracle oinstall       24 May 23 11:52 /u01/app/oracle/product/19/dbs/lkCDB19
-    -rw-r-----. 1 oracle oinstall     2048 May 23 12:20 /u01/app/oracle/product/19/dbs/orapwCDB19
-    -rw-r-----. 1 oracle oinstall 19120128 May 26 05:23 /u01/app/oracle/product/19/dbs/snapcf_CDB19.f
-    -rw-r-----. 1 oracle oinstall     3584 May 26 05:24 /u01/app/oracle/product/19/dbs/spfileCDB19.ora
-    -rw-rw----. 1 oracle oinstall     1544 May 26 05:24 /u01/app/oracle/product/19/dbs/hc_CDB19.dat
-    ```
-    </details>
-
-Remove DB link and DB link user
-Shut down FTEX database
-
-**You have now upgrade the *FTEX* database and renamed it to MAGENTA.**
+**Congratulations!** You have now:
+* Upgraded the *FTEX* database
+* Converted it to a PDB
+* Renamed it to TEAL
+* Left the source database intact for rollback
 
 You may now *proceed to the next lab*.
 
 ## Learn More
 
-AutoUpgrade completely automates restoration of a database. By default, AutoUpgrade creates a guaranteed restore point before making any changes to the database. If a critical error occurs during upgrade or if you post-upgrade test reveals an issue preventing go-live, you can use AutoUpgrade to bring the database back into the *before-upgrade* state.
+Refreshable clone PDB is a good technique for multitenant migration. It leaves the source non-CDB intact for rollback. It also builds a copy of the non-CDB in advance which minimizes the downtime window. But you need additional disk space to hold a copy of the data files. 
 
-* My Oracle Support, [AutoUpgrade Tool (Doc ID 2485457.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1)
-* Documentation, [AutoUpgrade Command-Line Syntax](hhttps://docs.oracle.com/en/database/oracle/oracle-database/23/upgrd/autoupgrade-command-line-parameters.html#GUID-B969F325-EB44-42B3-AD93-43E47493E271)
-* Webinar, [Secure Your Job – Fallback Is Your Insurance](https://www.youtube.com/watch?v=P12UqVRzarw)
+You can even use refreshable clone PDB for databases that are already a PDB. Very useful for unplug-plug upgrades.
+
+* Documentation, [Local Parameters for the AutoUpgrade Configuration File](https://docs.oracle.com/en/database/oracle/oracle-database/23/upgrd/local-parameters-autoupgrade-config-file.html#GUID-005B5435-1CA6-4577-B265-F60D44168DE7)
+* Webinar, [Move to Oracle Database 23ai – Everything you need to know about Oracle Multitenant – Part 1](https://www.youtube.com/watch?v=k0wCWbp-htU&t=3960s)
+* Slides, [Move to Oracle Database 23ai – Everything you need to know about Oracle Multitenant – Part 1](https://dohdatabase.com/wp-content/uploads/2024/05/vc19_multitenant_part1.pdf)
+* Blog post, [Upgrade Oracle Base Database Service to Oracle Database 23ai](https://dohdatabase.com/2024/05/21/upgrade-oracle-base-database-service-to-oracle-database-23ai/)
 
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
