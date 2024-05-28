@@ -6,8 +6,6 @@ In this lab, we will review and startup all components required to successfully 
 
 Estimated Time: 5 Minutes.
 
-[](videohub:1_5k8l6a9k)
-
 ### Objectives
 
 In this lab, you will:
@@ -37,8 +35,8 @@ In this lab, you will:
         - LISTENER
     - Database Server Instances
         - FTEX
-        - DB12
-        - CDB2
+        - UPGR
+        - CDB23
 
 3. Ensure the listener is started.
 
@@ -68,9 +66,9 @@ In this lab, you will:
     <summary>*click to see the output*</summary>
     ``` text
     $ ps -ef|grep ora_|grep pmon|grep -v grep
-    oracle    2481     1  0 11:40 ?        00:00:00 ora_pmon_FTEX
-    oracle    2929     1  0 11:40 ?        00:00:00 ora_pmon_DB12
-    oracle    3893     1  0 11:40 ?        00:00:00 ora_pmon_CDB2
+    oracle      3851       1  0 20:19 ?        00:00:00 ora_pmon_UPGR
+    oracle      5110       1  0 20:19 ?        00:00:00 ora_pmon_FTEX
+    oracle      5345       1  0 20:19 ?        00:00:00 ora_pmon_CDB23
     ```
     </details>
 

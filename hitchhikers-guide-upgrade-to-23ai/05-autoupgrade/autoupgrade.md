@@ -6,8 +6,6 @@ In this lab, you will upgrade the UPGR database from Oracle Database 11.2.0.4 to
 
 Estimated Time: 45 minutes
 
-[](videohub:1_fbj8umwn)
-
 ### Objectives
 
 In this lab, you will:

@@ -6,8 +6,6 @@ In this lab, you will familiarize yourself with the multitenant architecture.
 
 Estimated Time: 10 minutes
 
-[](videohub:1_uchy3yhs)
-
 ### Objectives
 
 In this lab, you will:
