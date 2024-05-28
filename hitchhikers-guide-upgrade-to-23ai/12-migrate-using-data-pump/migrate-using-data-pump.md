@@ -972,6 +972,7 @@ You need a few more changes to the new PDB before you can start the import.
 
 10. Perform a more extensive check. Verify the actual data. Find the best race of the Danish driver, *Kevin Magnussen*.
 
+    ```
     <copy>
     select ra.name || ' ' || ra.year as race
     from f1.f1_races ra, 
