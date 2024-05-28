@@ -13,6 +13,12 @@ In this lab, you will:
 * Upgrade entire CDB
 * Restore CDB
 
+### Prerequisites
+
+None.
+
+This lab is independent and self-contained. You can execute it at any time and in any order.
+
 ## Task 1: Prepare your environment
 
 You start by checking the *CDB19* database.

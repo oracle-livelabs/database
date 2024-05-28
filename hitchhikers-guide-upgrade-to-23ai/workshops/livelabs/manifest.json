@@ -52,6 +52,10 @@
     {
       "title": "Lab 11: Upgrade Non-CDB Using Refreshable Clone PDB",
       "filename": "../../11-upg-refresh-clone/upg-refresh-clone.md"
+    },
+    {
+      "title": "Lab 12: Migrate using Data Pump",
+      "filename": "../../12-migrate-using-data-pump/migrate-using-data-pump.md"
     },    
     {
       "title": "Need Help?",

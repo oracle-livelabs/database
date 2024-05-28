@@ -15,6 +15,12 @@ In this lab, you will:
 * Prepare database for refreshable clone PDB
 * Upgrade a non-CDB and convert to PDB
 
+### Prerequisites
+
+None.
+
+This lab is independent and self-contained. You can execute it at any time and in any order.
+
 ## Task 1: Prepare your environment
 
 Refreshable clone PDB works via a database link. You must create a user and grant privileges in the source non-CDB. Also, you must create a database link in the target CDB connecting to the source non-CDB.

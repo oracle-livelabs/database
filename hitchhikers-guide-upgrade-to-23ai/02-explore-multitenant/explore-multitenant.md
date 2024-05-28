@@ -4,8 +4,6 @@
 
 In this lab, you will familiarize yourself with the multitenant architecture.
 
-This is an optional lab. You can skip it if you are already familiar with multitenant architecture.
-
 Estimated Time: 10 minutes
 
 [](videohub:1_uchy3yhs)
@@ -17,6 +15,12 @@ In this lab, you will:
 * Understand the concept of containers
 * Connect to a CDB and PDBs
 * See how multitenant database works
+
+### Prerequisites
+
+None.
+
+This is an optional lab. You can skip it if you are already familiar with multitenant architecture.
 
 ## Task 1: Connect to a CDB and a PDB
 
