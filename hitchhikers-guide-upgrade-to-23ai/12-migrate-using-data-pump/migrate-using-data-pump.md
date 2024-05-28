@@ -65,6 +65,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
 4. Create a database directory object. It must point to the directory in the operating system that you just created.   
 
+    ```
     <copy>
     create directory dmpdir as '/home/oracle/logs/migrate-using-data-pump';    
     </copy>
@@ -81,6 +82,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
 5. Create a dedicated user that you can use for the Data Pump export job. 
 
+    ```
     <copy>
     create user expuser identified by expuser default tablespace users;
     grant exp_full_database to expuser;
