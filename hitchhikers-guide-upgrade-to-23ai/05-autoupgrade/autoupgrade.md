@@ -27,38 +27,42 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
 1. Use the yellow terminal. 
    ![Use the yellow terminal for the following commands](./images/yellow-term.png " ")
 
-2. Set the environment to the UPGR database and check the AutoUpgrade version.
+2. Set the environment to the *UPGR* database and check the AutoUpgrade version.
 
     ```
     <copy>
     . upgr
-    java -jar $OH19/rdbms/admin/autoupgrade.jar -version
+    cd
+    java -jar autoupgrade.jar -version
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ java -jar $OH19/rdbms/admin/autoupgrade.jar -version
-    build.version 23.2.230626
-    build.date 2023/06/26 17:18:24 -0400
-    build.hash 1ed12c06
-    build.hash_date 2023/06/26 11:55:17 -0400
-    build.supported_target_versions 12.2,18,19,21
+    $ java -jar 
+    autoupgrade.jar -version
+    build.version 24.3.240419
+    build.date 2024/04/19 15:45:58 -0400
+    build.hash a1ea950cc
+    build.hash_date 2024/04/19 15:05:29 -0400
+    build.supported_target_versions 12.2,18,19,21,23
     build.type production
-    build.label (HEAD, tag: v23.2, origin/stable_devel, stable_devel)
+    build.label (HEAD, tag: v24.3, origin/stable_devel, stable_devel)
+    build.MOS_NOTE 2485457.1
+    build.MOS_LINK https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1
     ```
     </details>
 
-    You use AutoUpgrade from an Oracle Database 19c home (`$OH`). You can use AutoUpgrade from any location. It does not matter.
+    You use AutoUpgrade from the home directory. You can use AutoUpgrade from any location. It does not matter.
 
-    The current version is *23.2.230626*. If a newer version is available, you can download it from My Oracle Support ([AutoUpgrade Tool (Doc ID 2485457.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1)). Don't do this now.
+    Check the version. If a newer version is available, you can download it from My Oracle Support ([AutoUpgrade Tool (Doc ID 2485457.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1)). Don't do this now.
 
 2. To show the many capabilities of AutoUpgrade, create a sample config file. Examine the file to get an idea of the many options in AutoUpgrade. In this lab, you will not use the samle config file.
 
     ```
     <copy>
-    java -jar $OH19/rdbms/admin/autoupgrade.jar -create_sample_file config
+    java -jar autoupgrade.jar -create_sample_file config
     cat sample_config.cfg
     </copy>
     ```
@@ -66,15 +70,11 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ java -jar $OH19/rdbms/admin/autoupgrade.jar -create_sample_file config
-    Created sample configuration file /home/oracle/sample_config.cfg
-    [UPGR] oracle@hol:~
-    $ cat sample_config.cfg
     #
     # Sample config file for AutoUpgrade
     #
-    # build version 23.2.230626
-    # build date    2023/06/26 17:18:24 -0400
+    # build version 24.3.240419
+    # build date    2024/04/19 15:45:58 -0400
     #
     #
     # Global configurations
@@ -85,20 +85,20 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     #   (3) Config files
     #   (4) progress.json and status.json
     global.autoupg_log_dir=/u01/app/oracle/cfgtoollogs/autoupgrade
-
+    
     #
     # Database number 1 - Full DB/CDB upgrade
     #
     upg1.log_dir=/u01/app/oracle/cfgtoollogs/autoupgrade/employee             # Path of the log directory for the upgrade job
     upg1.sid=emp                                              # ORACLE_SID of the source DB/CDB
     upg1.source_home=/u01/app/oracle/product/12.2.0/dbhome_1  # Path of the source ORACLE_HOME
-    upg1.target_home=/u01/app/oracle/product/21.1.0/dbhome_1  # Path of the target ORACLE_HOME
+    upg1.target_home=/u01/app/oracle/product/23.1.0/dbhome_1  # Path of the target ORACLE_HOME
     upg1.start_time=NOW                                       # Optional. [NOW | +XhYm (X hours, Y minutes after launch) | dd/mm/yyyy hh:mm:ss]
-    upg1.upgrade_node=hol                                # Optional. To find out the name of your node, run the hostname utility. Default is ''localhost''
+    upg1.upgrade_node=holserv1.livelabs.oraclevcn.com                                # Optional. To find out the name of your node, run the hostname utility. Default is ''localhost''
     #upg1.run_utlrp=[yes|no]                                  # Optional. Whether or not to run utlrp after upgrade
     #upg1.timezone_upg=[yes|no]                               # Optional. Whether or not to run the timezone upgrade
-    #upg1.target_version=[12.2|18|19|21]                      # Oracle version of the target ORACLE_HOME.  Only required when the target Oracle database version is 12.2
-
+    #upg1.target_version=[12.2|18|19|21|23]                      # Oracle version of the target ORACLE_HOME.  Only required when the target Oracle database version is 12.2
+    
     #
     # Database number 2 - Unplug/Plug upgrade
     #
@@ -106,24 +106,24 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     #upg2.sid=cdb12
     #upg2.source_home=/u01/app/oracle/product/12.2.0/dbhome_1
     #upg2.target_cdb=cdb19
-    #upg2.target_home=/u01/app/oracle/product/21/dbhome_1
+    #upg2.target_home=/u01/app/oracle/product/23/dbhome_1
     #upg2.pdbs=mypdb1,mypdb2                    # Comma delimited list of pdb names that will be upgraded and moved to the target CDB
     #upg2.target_pdb_name.mypdb1=altpdb1        # Optional. Name of the PDB to be created on the target CDB
     #upg2.target_pdb_copy_option.mypdb1=file_name_convert=('mypdb1', 'altpdb1')  # Optional. file_name_convert option used when creating the PDB on the target CDB
     #upg2.target_pdb_name.mypdb2=altpdb2
-    #upg2.start_time=06/07/2023 16:57:00        # Optional. [NOW | +XhYm (X hours, Y minutes after launch) | dd/mm/yyyy hh:mm:ss]
+    #upg2.start_time=29/05/2024 17:25:38        # Optional. [NOW | +XhYm (X hours, Y minutes after launch) | dd/mm/yyyy hh:mm:ss]
     #upg2.upgrade_node=localhost                # Optional. To find out the name of your node, run the hostname utility. Default is ''localhost''
     #upg2.run_utlrp=[yes|no]                   # Optional. Whether or not to run utlrp after upgrade
     #upg2.timezone_upg=[yes|no]                # Optional. Whether or not to run the timezone upgrade
-    #upg2.target_version=[12.2|18|19|21]       # Oracle version of the target ORACLE_HOME.  Only required when the target Oracle database version is 12.2
-
+    #upg2.target_version=[12.2|18|19|21|23]       # Oracle version of the target ORACLE_HOME.  Only required when the target Oracle database version is 12.2
+    
     #
     # Database number 3 - Noncdb to PDB upgrade
     #
     #upg3.log_dir=/u01/app/oracle/cfgtoollogs/autoupgrade/employee
     #upg3.sid=emp
     #upg3.source_home=/u01/app/oracle/product/11.2.0/dbhome_1
-    #upg3.target_cdb=cdb21
+    #upg3.target_cdb=cdb23
     #upg3.target_home=/u01/app/oracle/product/19.8.0/dbhome_1
     #upg3.target_pdb_name=pdb12
     #upg3.target_pdb_copy_option=file_name_convert=('emp', 'emppdb')
@@ -131,8 +131,8 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     #upg3.upgrade_node=localhost           # Optional. To find out the name of your node, run the hostname utility. Default is ''localhost''
     #upg3.run_utlrp=[yes|no]              # Optional. Whether or not to run utlrp after upgrade
     #upg3.timezone_upg=[yes|no]           # Optional. Whether or not to run the timezone upgrade
-    #upg3.target_version=[12.2|18|19|21]  # Oracle version of the target ORACLE_HOME.  Only required when the target Oracle database version is 12.2
-
+    #upg3.target_version=[12.2|18|19|21|23]  # Oracle version of the target ORACLE_HOME.  Only required when the target Oracle database version is 12.2
+    
     #
     # You can have as many databases as desired
     #
@@ -150,7 +150,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     #
     # When neither of these options are used, a full upgrade of the source DB/CDB is performed.
     #
-
+    
     #upgN.log_dir=<Path of the log directory for the upgrade job>
     #upgN.sid=<ORACLE_SID of the source DB/CDB>
     #upgN.source_home=<Path of the source ORACLE_HOME>
@@ -160,17 +160,17 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     #upgN.upgrade_node=<Optional. To find out the name of your node, run the hostname utility. Default is ''localhost''>
     #upgN.run_utlrp=[yes|no]    # Optional. Whether or not to run utlrp after upgrade
     #upgN.timezone_upg=[yes|no] # Optional. Whether or not to run the timezone upgrade
-
+    
     ### Unplug/Plug parameters ###
     #upgN.target_cdb=<ORACLE_SID of the target CDB>
     #upgN.pdbs=<Comma delimited list of pdb names that will be upgraded and moved to the target CDB>
     #upgN.<pdb_name>.target_pdb_name=<Optional. Name of the PDB to be created on the target CDB>
     #upgN.<pdb_name>.target_pdb_copy_option=<Optional. file_name_convert option used when creating the PDB on the target CDB>
-
+    
     ### NonCDB to PDB parameters ###
     #upgN.target_cdb=<ORACLE_SID of the target CDB>
     #upgN.target_pdb_name=<Optional. Name of the PDB to be created on the target CDB>
-    #upgN.target_pdb_copy_option=<Optional. file_name_convert option used when creating the PDB on the target CDB>
+    #upgN.target_pdb_copy_option=<Optional. file_name_convert option used when creating the PDB on the target CDB>    
     ```
     </details>
 
@@ -178,18 +178,18 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
 
     ```
     <copy>
-    cat /home/oracle/scripts/UPGR.cfg
+    cat /home/oracle/scripts/autoupgrade-UPGR.cfg
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cat /home/oracle/scripts/UPGR.cfg
-    global.autoupg_log_dir=/home/oracle/logs/lab4
-    upg1.source_home=/u01/app/oracle/product/11.2.0.4
-    upg1.target_home=/u01/app/oracle/product/19
+    global.autoupg_log_dir=/home/oracle/logs/autoupgrade-UPGR
+    upg1.source_home=/u01/app/oracle/product/19
+    upg1.target_home=/u01/app/oracle/product/23
     upg1.sid=UPGR
+    upg1.target_cdb=CDB23
     upg1.restoration=no
     ```
     </details>
@@ -202,15 +202,14 @@ It is best practice to first analyze your database for upgrade readiness. It is 
 
     ```
     <copy>
-    java -jar $OH19/rdbms/admin/autoupgrade.jar -config /home/oracle/scripts/UPGR.cfg -mode analyze
+    java -jar autoupgrade.jar -config /home/oracle/scripts/autoupgrade-UPGR.cfg -mode analyze
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ java -jar $OH19/rdbms/admin/autoupgrade.jar -config /home/oracle/scripts/UPGR.cfg -mode analyze
-    AutoUpgrade 23.2.230626 launched with default internal options
+    AutoUpgrade 24.3.240419 launched with default internal options
     Processing config file ...
     +--------------------------------+
     | Starting AutoUpgrade execution |
@@ -220,13 +219,13 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     upg> Job 100 completed
     ------------------- Final Summary --------------------
     Number of databases            [ 1 ]
-
+    
     Jobs finished                  [1]
     Jobs failed                    [0]
-
+    
     Please check the summary report at:
-    /home/oracle/logs/lab4/cfgtoollogs/upgrade/auto/status/status.html
-    /home/oracle/logs/lab4/cfgtoollogs/upgrade/auto/status/status.log
+    /home/oracle/logs/autoupgrade-UPGR/cfgtoollogs/upgrade/auto/status/status.html
+    /home/oracle/logs/autoupgrade-UPGR/cfgtoollogs/upgrade/auto/status/status.log
     ```
     </details>
 
@@ -234,32 +233,31 @@ It is best practice to first analyze your database for upgrade readiness. It is 
 
     ```
     <copy>
-    cat /home/oracle/logs/lab4/cfgtoollogs/upgrade/auto/status/status.log
+    cat /home/oracle/logs/autoupgrade-UPGR/cfgtoollogs/upgrade/auto/status/status.log
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cat /home/oracle/logs/lab4/cfgtoollogs/upgrade/auto/status/status.log
     ==========================================
-            Autoupgrade Summary Report
+              Autoupgrade Summary Report
     ==========================================
-    [Date]           Thu Jul 06 16:03:21 CEST 2023
+    [Date]           Wed May 29 16:33:23 GMT 2024
     [Number of Jobs] 1
     ==========================================
     [Job ID] 100
     ==========================================
     [DB Name]                UPGR
-    [Version Before Upgrade] 11.2.0.4.0
-    [Version After Upgrade]  19.18.0.0.0
+    [Version Before Upgrade] 19.21.0.0.0
+    [Version After Upgrade]  23.4.0.24.05
     ------------------------------------------
     [Stage Name]    PRECHECKS
     [Status]        SUCCESS
-    [Start Time]    2023-07-06 16:03:12
-    [Duration]       
-    [Log Directory] /home/oracle/logs/lab4/UPGR/100/prechecks
-    [Detail]        /home/oracle/logs/lab4/UPGR/100/prechecks/upgr_preupgrade.log
+    [Start Time]    2024-05-29 16:33:16
+    [Duration]
+    [Log Directory] /home/oracle/logs/autoupgrade-UPGR/UPGR/100/prechecks
+    [Detail]        /home/oracle/logs/autoupgrade-UPGR/UPGR/100/prechecks/upgr_preupgrade.log
                     Check passed and no manual intervention needed
     ------------------------------------------
     ```
@@ -267,7 +265,7 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     
     * The report states: *Check passed and no manual intervention needed*. AutoUpgrade found no severe issues that it couldn't fix automatically. 
 
-4. Check the summary report in HTML format. Also, click on *Checks Report* for even more details. Firefox might print warnings to the console. You can safely ignore those.
+4. ***UPDATE***Check the summary report in HTML format. Also, click on *Checks Report* for even more details. Firefox might print warnings to the console. You can safely ignore those.
 
     ```
     <copy>
@@ -289,21 +287,20 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
     ```
     <copy>
-    java -jar $OH19/rdbms/admin/autoupgrade.jar -config /home/oracle/scripts/UPGR.cfg -mode deploy
+    java -jar autoupgrade.jar -config /home/oracle/scripts/autoupgrade-UPGR.cfg -mode deploy
     </copy>
     ```
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ java -jar $OH19/rdbms/admin/autoupgrade.jar -config /home/oracle/scripts/UPGR.cfg -mode deploy
-    AutoUpgrade 23.2.230626 launched with default internal options
+    AutoUpgrade 24.3.240419 launched with default internal options
     Processing config file ...
     +--------------------------------+
     | Starting AutoUpgrade execution |
     +--------------------------------+
     1 Non-CDB(s) will be processed
     Type 'help' to list console commands
-    upg> 
+    upg>
     ```
     </details>
 
@@ -318,26 +315,25 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    upg> help
     exit                            // To close and exit
     help                            // Displays help
     lsj [<option>] [-a <number>]    // list jobs by status up to n elements.
-        -f                Filter by finished jobs.
-        -r                Filter by running jobs.
-        -e                Filter by jobs with errors.
-        -p                Filter by jobs being prepared.
-        -n <number>       Display up to n jobs.
-        -a <number>       Repeats the command (in <number> seconds).
+    	-f                Filter by finished jobs.
+    	-r                Filter by running jobs.
+    	-e                Filter by jobs with errors.
+    	-p                Filter by jobs being prepared.
+    	-n <number>       Display up to n jobs.
+    	-a <number>       Repeats the command (in <number> seconds).
     lsr                             // Displays the restoration queue
     lsa                             // Displays the stop queue
     tasks                           // Displays the tasks running
     clear                           // Clears the terminal
     resume -job <number> [-ignore_errors=<ORA-#####,ORA-#####>] // Restarts a job with option to ignore errors
     status [<option>] [-a <number>] // Summary of current execution
-        -config                     Show Config Information
-        -job <number>               Summary of a given job
-        -job <number> -c <dbname>   Show details of container
-        -a [<number>]               Repeats the command (in <number> seconds).
+    	-config                     Show Config Information
+    	-job <number>               Summary of a given job
+    	-job <number> -c <dbname>   Show details of container
+    	-a [<number>]               Repeats the command (in <number> seconds).
     restore -job <number>           // Restores the database to its state prior to the upgrade
     restore all_failed              // Restores all failed jobs to their previous states prior to the upgrade
     logs                            // Displays all the log locations
@@ -347,8 +343,8 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     meta                            // Displays Internal latch count
     hwinfo                          // Displays additional information
     fxlist -job <number> [<option>]                // FixUps summary
-        -c <dbname>                                  Container specific FixUps
-        -c <dbname> alter <check> run <yes|no|skip>  Update Run Configuration
+    	-c <dbname>                                  Container specific FixUps
+    	-c <dbname> alter <check> run <yes|no|skip>  Update Run Configuration
     ```
     </details>
     
@@ -363,12 +359,11 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    upg> lsj
-    +----+-------+-----+---------+-------+----------+-------+----------------------+
-    |Job#|DB_NAME|STAGE|OPERATION| STATUS|START_TIME|UPDATED|               MESSAGE|
-    +----+-------+-----+---------+-------+----------+-------+----------------------+
-    | 101|   UPGR|DRAIN|EXECUTING|RUNNING|  16:18:37| 6s ago|Shutting down database|
-    +----+-------+-----+---------+-------+----------+-------+----------------------+
+    +----+-------+---------+---------+-------+----------+-------+-------+
+    |Job#|DB_NAME|    STAGE|OPERATION| STATUS|START_TIME|UPDATED|MESSAGE|
+    +----+-------+---------+---------+-------+----------+-------+-------+
+    | 101|   UPGR|PREFIXUPS|EXECUTING|RUNNING|  20:25:15|71s ago|       |
+    +----+-------+---------+---------+-------+----------+-------+-------+
     Total jobs 1
     ```
     </details>
@@ -386,42 +381,44 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    upg> status -job 101
     Details
-
-        Job No           101
-        Oracle SID       UPGR
-        Start Time       23/07/06 16:18:37
-        Elapsed (min):   2
-        End time:        N/A
-
+    
+    	Job No           101
+    	Oracle SID       UPGR
+    	Start Time       24/05/29 20:25:15
+    	Elapsed (min):   2
+    	End time:        N/A
+    
     Logfiles
-
-        Logs Base:    /home/oracle/logs/lab4/UPGR
-        Job logs:     /home/oracle/logs/lab4/UPGR/101
-        Stage logs:   /home/oracle/logs/lab4/UPGR/101/dbupgrade
-        TimeZone:     /home/oracle/logs/lab4/UPGR/temp
-        Remote Dirs:  
-
+    
+    	Logs Base:    /home/oracle/logs/autoupgrade-UPGR/UPGR
+    	Job logs:     /home/oracle/logs/autoupgrade-UPGR/UPGR/101
+    	Stage logs:   /home/oracle/logs/autoupgrade-UPGR/UPGR/101/dbupgrade
+    	TimeZone:     /home/oracle/logs/autoupgrade-UPGR/UPGR/temp
+    	Remote Dirs:
+    
     Stages
-        SETUP            <1 min
-        PREUPGRADE       <1 min
-        PRECHECKS        <1 min
-        PREFIXUPS        1 min
-        DRAIN            <1 min
-        DBUPGRADE        ~0 min (RUNNING)
-        POSTCHECKS      
-        POSTFIXUPS      
-        POSTUPGRADE     
-        SYSUPDATES      
-
+    	SETUP            <1 min
+    	PREUPGRADE       <1 min
+    	PRECHECKS        <1 min
+    	PREFIXUPS        1 min
+    	DRAIN            <1 min
+    	DBUPGRADE        ~0 min (RUNNING)
+    	NONCDBTOPDB
+    	POSTCHECKS
+    	POSTFIXUPS
+    	POSTUPGRADE
+    	SYSUPDATES
+    
     Stage-Progress Per Container
-
-        +--------+---------+
-        |Database|DBUPGRADE|
-        +--------+---------+
-        |    UPGR|    0  % |
-        +--------+---------+
+    
+    	+--------+---------+
+    	|Database|DBUPGRADE|
+    	+--------+---------+
+    	|    UPGR|    0  % |
+    	+--------+---------+
+    
+    upg>
     ```
     </details>
 
@@ -434,7 +431,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
     ```
     <copy>
-    cd /home/oracle/logs/lab4/UPGR
+    cd /home/oracle/logs/autoupgrade-UPGR/UPGR
     </copy>
     ```
 
@@ -445,7 +442,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
     ```
     <copy>
-    cd /home/oracle/logs/lab4/UPGR/101
+    cd /home/oracle/logs/autoupgrade-UPGR/UPGR/101
     ls -l
     </copy>
     ```
@@ -453,20 +450,18 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cd /home/oracle/logs/lab4/UPGR/101
-    $ ls -l
-    total 720
-    -rw-------. 1 oracle dba 501646 Jul  6 16:32 autoupgrade_20230706.log
-    -rw-------. 1 oracle dba      0 Jul  6 16:18 autoupgrade_20230706.log.lck
-    -rw-------. 1 oracle dba   1673 Jul  6 16:32 autoupgrade_20230706_user.log
-    -rw-------. 1 oracle dba      0 Jul  6 16:18 autoupgrade_20230706_user.log.lck
-    -rw-------. 1 oracle dba      0 Jul  6 16:18 autoupgrade_err.log
-    -rw-------. 1 oracle dba      0 Jul  6 16:18 autoupgrade_err.log.lck
-    drwx------. 2 oracle dba   4096 Jul  6 16:33 dbupgrade
-    drwx------. 2 oracle dba     49 Jul  6 16:20 drain
-    drwx------. 2 oracle dba   4096 Jul  6 16:18 prechecks
-    drwx------. 2 oracle dba   4096 Jul  6 16:19 prefixups
-    drwx------. 2 oracle dba     28 Jul  6 16:18 preupgrade
+    total 904
+    -rw-r-----. 1 oracle oinstall 519348 May 29 20:29 autoupgrade_20240529.log
+    -rw-r-----. 1 oracle oinstall      0 May 29 20:25 autoupgrade_20240529.log.lck
+    -rw-r-----. 1 oracle oinstall   1904 May 29 20:29 autoupgrade_20240529_user.log
+    -rw-r-----. 1 oracle oinstall      0 May 29 20:25 autoupgrade_20240529_user.log.lck
+    -rw-r-----. 1 oracle oinstall      0 May 29 20:25 autoupgrade_err.log
+    -rw-r-----. 1 oracle oinstall      0 May 29 20:25 autoupgrade_err.log.lck
+    drwxr-x---. 2 oracle oinstall   4096 May 29 20:29 dbupgrade
+    drwxr-x---. 2 oracle oinstall     80 May 29 20:27 drain
+    drwxr-x---. 2 oracle oinstall    185 May 29 20:26 prechecks
+    drwxr-x---. 2 oracle oinstall    180 May 29 20:26 prefixups
+    drwxr-x---. 2 oracle oinstall     28 May 29 20:25 preupgrade
     ```
     </details>
 
@@ -486,58 +481,54 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    upg> status -job 101 -a 30
-    upg> Details
-
-        Job No           101
-        Oracle SID       UPGR
-        Start Time       23/07/06 16:18:37
-        Elapsed (min):   5
-        End time:        N/A
-
+    Details
+    
+    	Job No           101
+    	Oracle SID       UPGR
+    	Start Time       24/05/29 20:25:15
+    	Elapsed (min):   5
+    	End time:        N/A
+    
     Logfiles
-
-        Logs Base:    /home/oracle/logs/lab4/UPGR
-        Job logs:     /home/oracle/logs/lab4/UPGR/101
-        Stage logs:   /home/oracle/logs/lab4/UPGR/101/dbupgrade
-        TimeZone:     /home/oracle/logs/lab4/UPGR/temp
-        Remote Dirs:  
-
+    
+    	Logs Base:    /home/oracle/logs/autoupgrade-UPGR/UPGR
+    	Job logs:     /home/oracle/logs/autoupgrade-UPGR/UPGR/101
+    	Stage logs:   /home/oracle/logs/autoupgrade-UPGR/UPGR/101/dbupgrade
+    	TimeZone:     /home/oracle/logs/autoupgrade-UPGR/UPGR/temp
+    	Remote Dirs:
+    
     Stages
-        SETUP            <1 min
-        PREUPGRADE       <1 min
-        PRECHECKS        <1 min
-        PREFIXUPS        1 min
-        DRAIN            <1 min
-        DBUPGRADE        ~4 min (RUNNING)
-        POSTCHECKS      
-        POSTFIXUPS      
-        POSTUPGRADE     
-        SYSUPDATES      
-
+    	SETUP            <1 min
+    	PREUPGRADE       <1 min
+    	PRECHECKS        <1 min
+    	PREFIXUPS        1 min
+    	DRAIN            <1 min
+    	DBUPGRADE        ~2 min (RUNNING)
+    	NONCDBTOPDB
+    	POSTCHECKS
+    	POSTFIXUPS
+    	POSTUPGRADE
+    	SYSUPDATES
+    
     Stage-Progress Per Container
-
-        +--------+---------+
-        |Database|DBUPGRADE|
-        +--------+---------+
-        |    UPGR|    1  % |
-        +--------+---------+
-
+    
+    	+--------+---------+
+    	|Database|DBUPGRADE|
+    	+--------+---------+
+    	|    UPGR|    10 % |
+    	+--------+---------+
+    
     The command status is running every 30 seconds. PRESS ENTER TO EXIT
     ```
     </details>
     
-9. Wait until the upgrade completes. Depending on the hardware, the upgrade will take about 25-35 minutes. Don't exit from the AutoUpgrade console. Leave it running.
+9. Wait until the upgrade completes. Depending on the hardware, the upgrade will take about 15-25 minutes. Don't exit from the AutoUpgrade console. Leave it running.
 
-10. The following video shows an upgrade to Oracle Database 23ai including conversion to the mulitenant architecture.
-
-   [23aipreview](videohub:1_n5cyl2xg:large)
-
-11. Optionally, you can move to lab 10 *Full Transportable Export/Import* and do it while the upgrade completes.
+11. Optionally, you can complete some of the other self-contained labs. 
 
 10. When the upgrade completes, AutoUpgrade prints a message saying *Job 101 completed* and exits from the AutoUpgrade console.
 
-    **Congratulations! You upgraded the UPGR database successfully from Oracle Database 11.2.0.4 to Oracle Database 19c.**
+    **Congratulations! You upgraded the UPGR database successfully from Oracle Database 19c to 23ai and converted your database to a PDB.**
 
 You may now *proceed to the next lab*.
 
@@ -545,14 +536,10 @@ You may now *proceed to the next lab*.
 
 AutoUpgrade completely automates upgrades and incorporates our best practices. AutoUpgrade run all prechecks against multiple databases, fix potential issues, set a restore point in case something goes wrong, before it finally upgrade your databases. And of course, do the postupgrade checks, recompilation and time zone adjustment. The only thing you need to provide is a config file in text format.
 
-It is the only recommended way to upgrade Oracle Database. 
-
 * My Oracle Support, [AutoUpgrade Tool (Doc ID 2485457.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1)
-* Documentation, [Using AutoUpgrade for Oracle Database Upgrades](https://docs.oracle.com/en/database/oracle/oracle-database/19/upgrd/using-autoupgrade-oracle-database-upgrades.html#GUID-71883C8C-7A34-4E93-8955-040CB04F2109)
-* Webinar, [AutoUpgrade to Oracle Database 19c](https://youtu.be/ok2xOYXeH1Q)
-* Webinar, [AutoUpgrade 2.0 – New Features and Best Practices](https://youtu.be/69Hx1WoJ_HE)
-* Blog post series, [The new AutoUpgrade utility in Oracle 19c](https://mikedietrichde.com/2019/04/29/the-new-autoupgrade-utility-in-oracle-19c/)
-* Blog post, [AutoUpgrade and Plug In to a CDB – with a single command (and video)](https://mikedietrichde.com/2020/05/20/autoupgrade-and-plug-in-to-a-cdb-with-a-single-command/)
+* Documentation, [Using AutoUpgrade for Oracle Database Upgrades](https://docs.oracle.com/en/database/oracle/oracle-database/23/upgrd/using-autoupgrade-oracle-database-upgrades.html#GUID-71883C8C-7A34-4E93-8955-040CB04F2109)
+* Webinar, [Move to Oracle Database 23ai – Everything you need to know about Oracle Multitenant – Part 1](https://youtu.be/k0wCWbp-htU)
+* Blog post, [Upgrade to Oracle Database 23ai](https://dohdatabase.com/upgrade23)
 
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen

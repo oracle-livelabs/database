@@ -34,42 +34,18 @@ You must start the UPGR database and create the first AWR snapshot.
     </copy>
     ```
 
-2. Start the database.
-
-    ```
-    <copy>
-    startup
-    </copy>
-    ```
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    SQL> startup
-    ORACLE instance started.
-
-    Total System Global Area  810053632 bytes
-    Fixed Size                  2257600 bytes
-    Variable Size             260050240 bytes
-    Database Buffers          541065216 bytes
-    Redo Buffers                6680576 bytes
-    Database mounted.
-    Database opened.
-    ```
-    </details>
-
 2. Execute `snap.sql` that generates an AWR snapshot. Take note of the snapshot ID (e.g.: 113). You need it later on.
 
     ```
     <copy>
-    @/home/oracle/scripts/snap-lab-02-before.sql
+    @/home/oracle/scripts/awr-snapshot-snap-before.sql
     </copy>
     ```
     
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/snap-lab-02-before.sql
+    SQL> @/home/oracle/scripts/awr-snapshot-snap-before.sql
     -------------------------------------------
     - AWR Snapshot with Snap-ID: 113 created. -
     -------------------------------------------
@@ -174,14 +150,14 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
     ```
     <copy>
-    @/home/oracle/scripts/snap-lab-02-after.sql
+    @/home/oracle/scripts/awr-snapshot-snap-after.sql
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/snap-lab-02-after.sql
+    SQL> @/home/oracle/scripts/awr-snapshot-snap-after.sql
     -------------------------------------------
     - AWR Snapshot with Snap-ID: 117 created. -
     -------------------------------------------

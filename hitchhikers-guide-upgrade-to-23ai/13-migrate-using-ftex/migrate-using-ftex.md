@@ -98,7 +98,7 @@ You need to prepare a few things before you can start FTEX.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> create user ftexuser identified by ftexuser default tablespace users;
+    SQL> create user ftexuser identified by ftexuser default tablespace system;
     
     User created.
     
@@ -110,13 +110,13 @@ You need to prepare a few things before you can start FTEX.
     
     Grant succeeded.
     
-    SQL> alter user ftexuser quota unlimited on users;
+    SQL> alter user ftexuser quota unlimited on system;
     
     User altered.
     ```
     </details>
 
-6. Generate a list of tablespaces to set *read-only.
+6. Generate a list of tablespaces to set read-only.
 
     ```
     <copy>
@@ -201,7 +201,7 @@ You need to prepare a few things before you can start FTEX.
     ```
     </details>
 
-8. Start the Data Pump export. Connect as the dedicated export user, *expuser*, that you just created. 
+8. Start the Data Pump export. Connect as the dedicated export user, *ftexuser*, that you just created. 
 
     ```
     <copy>
@@ -397,7 +397,7 @@ You create a new, empty PDB in Oracle Database 23ai and import directly into it.
 
 You need a few more changes to the new PDB before you can start the import.
 
-1. Create a database directory object that points to the same operating system directory that you created in the previous task.
+1. Create a database directory object that points to the same operating system directory that you created in the previous task. In this lab, the export and import share the same directory. This enables Data Pump to find the dump files. If you import on a remote system, you must copy the dump files.
 
     ```
     <copy>
@@ -411,7 +411,7 @@ You need a few more changes to the new PDB before you can start the import.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> create directory ftex as '/home/oracle/logs/migrate-using-ftex';
+    SQL> create directory ftexdir as '/home/oracle/logs/migrate-using-ftex';
 
     Directory created.
     ```
@@ -937,7 +937,7 @@ You need a few more changes to the new PDB before you can start the import.
     ```
     </details>
 
-5. Examine the Data Pump log file for any critical issues. A full import usually produces a few errors or warnings, especially when going to a higher release and into a different architecture.
+5. Examine the Data Pump log file for any critical issues. A FTEX import usually produces a few errors or warnings, especially when going to a higher release and into a different architecture.
 
     * The roles `EM_EXPRESS_ALL`, `EM_EXPRESS_BASIC` and `DATAPATCH_ROLE` do not exist in Oracle Database 23ai causing the grants to fail.
     * The same applies to the `ORACLE_OCM` user.
