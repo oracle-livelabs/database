@@ -1,15 +1,15 @@
-# Explore RAFT Replication Topology
+# Explore Raft Replication Topology
 
 ## Introduction   
 Oracle Globally Distributed Database is a scalability and availability feature for custom-designed OLTP applications that enables the distribution and replication of data across a pool of Oracle databases that do not share hardware or software. The pool of databases is presented to the application as a single logical database.
 
-Raft Replication is a built-in Oracle Sharding capability that integrates data replication with transaction execution in a sharded database. Raft replication enables fast automatic failover with zero data loss.
+Oracle Globally Distributed Database provides built-in fault tolerance with Raft replication, a capability that integrates data replication with transaction execution in a sharded database. Raft replication enables fast automatic failover with zero data loss.
 
-The Raft replication feature in Oracle Globally Distributed Database creates smaller replication units and distributes them automatically among the shards to handle chunk assignment, chunk movement, workload distribution, and balancing upon scaling (addition or removal of shards), including planned or unplanned shard availability changes.
+The Raft replication feature creates smaller replication units and distributes them automatically among the shards to handle chunk assignment, chunk movement, workload distribution, and balancing upon scaling (addition or removal of shards), including planned or unplanned shard availability changes.
 
-Raft replication is built into Oracle Globally Distributed Database to provide a consensus-based, high-performance, low-overhead availability solution, with distributed replicas and fast failover with zero data loss, while automatically maintaining the replication factor if shards fail. With Raft replication management overhead does not increase with the number of shards.
+Raft replication provides a consensus-based, high-performance, low-overhead availability solution, with distributed replicas and fast failover with zero data loss, while automatically maintaining the replication factor if shards fail. With Raft replication management overhead does not increase with the number of shards.
 
-This workshop is configured with a custom image having all the required podman containers for Sharding using 23ai GSM and 23ai SIDB Beta Images.
+This workshop is configured with a custom image having all the required podman containers for Oracle Globally Distributed Database using 23ai RDBMS and GSM Images.
 
 In this workshop, we attempt to use minimal resources to show the demonstration, and in the process we chose a single compute instance to install all of the Oracle Globally Distributed Database components and appclient.
 
@@ -19,7 +19,7 @@ In this workshop, we attempt to use minimal resources to show the demonstration,
 
 ### Objectives
 In this lab, you will:
-* Explore RAFT Replication environment.
+* Explore Raft Replication environment.
 * Testing the use-cases
 
 ### Prerequisites
@@ -43,7 +43,7 @@ This lab assumes you have:
 
      ![<podman containers>](./images/t1-podman-containers-1.png " ")
 
-## Task 2: Explore the RAFT configuration
+## Task 2: Explore the Raft configuration
 
 When Raft replication is enabled, a sharded database contains multiple replication units. A replication unit (RU) is a set of chunks that have the same replication topology. Each RU has three replicas placed on different shards. The Raft consensus protocol is used to maintain consistency between the replicas in case of failures, network partitioning, message loss, or delay.
 
@@ -893,17 +893,17 @@ Target database should not already contain another replica of the replication un
    ![<podman_stop>](./images/t10-9-after-scale-down-podman.png " ")
 
 
-This is the end of the Oracle Sharding RAFT Replication Workshop.
+This is the end of the Raft Replication Workshop.
 
 
 
 
 
-## **Appendix 1**: RAFT Replication Overview
+## **Appendix 1**: Raft Replication Overview
 
-**RAFT Replication** 
+**Raft Replication** 
 
- - [RAFT Replication documentation] (https://docs.oracle.com/en/database/oracle/oracle-database/23/shard/raft-replication.html#GUID-AF14C34B-4F55-4528-8B28-5073A3BFD2BE)
+ - [Raft Replication documentation] (https://docs.oracle.com/en/database/oracle/oracle-database/23/shard/raft-replication.html#GUID-AF14C34B-4F55-4528-8B28-5073A3BFD2BE)
 
 
 ## Rate this Workshop
@@ -922,5 +922,5 @@ If you selected the **Green Button** for this workshop and still have an active 
 
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Oracle Globally Distributed Database Database, Product Management, Senior Product Manager
-* **Contributors** - Pankaj Chandiramani, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Deeksha Sehgal, Oracle Globally Distributed Database Database, Product Management, Senior Product Manager - May 2024
+* **Contributors** - Pankaj Chandiramani, Jyoti Verma
+* **Last Updated By/Date** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager - May 2024

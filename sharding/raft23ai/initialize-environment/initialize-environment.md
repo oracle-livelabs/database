@@ -64,7 +64,7 @@ This lab assumes you have:
 You may now proceed to the next lab.
 
 ## Acknowledgements
-* **Authors** - Deeksha Sehgal, Oracle Database Sharding Product Management, Senior Product Manager
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Deeksha Sehgal, Oracle Database Sharding Product Management, Senior Product Manager, July 2023
+* **Authors** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava,  Jyoti Verma
+* **Last Updated By/Date** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager, May 2024
 

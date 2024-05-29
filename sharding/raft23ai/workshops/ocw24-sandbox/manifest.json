@@ -31,7 +31,7 @@
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 4: Explore RAFT Replication Topology",
+      "title": "Lab 4: Explore Raft Replication Topology",
       "description": "Exploring Sharding Topology",
       "filename": "../../topology/topology.md"
     },

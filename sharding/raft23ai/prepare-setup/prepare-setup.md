@@ -47,7 +47,7 @@ Using the details from the two steps above, proceed to the lab *Environment Setu
 -  Create Stack:  *Compute + Networking*
 -  Create Stack:  *Compute only* with an existing VCN where security lists have been updated as per *Step 2* above
 
-Please note for RAFT Replication Lab:
+Please note for Raft Replication Lab:
 - Recommended memory: 48G
 - Recommended CPU: 6 OCPU
 
@@ -68,6 +68,6 @@ When you are finished don't forget to rate this workshop!  We rely on this feedb
 If you selected the **Green Button** for this workshop and still have an active reservation, you can also rate by going to My Reservations -> Launch Workshop.
 
 ## Acknowledgements
-* **Author** - Deeksha Sehgal, Oracle Database Sharding Product Management, Senior Product Manager
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Deeksha Sehgal, Oracle Database Sharding Product Management, Senior Product Manager, July 2023
+* **Author** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma
+* **Last Updated By/Date** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager, May 2024

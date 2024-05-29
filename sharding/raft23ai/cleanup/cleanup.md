@@ -16,8 +16,8 @@ Estimated Time - 5 minutes
 
 ### Prerequisites
 
-- You should have provisioned the **Learn how to use RAFT Replication to build resilient distributed databases** workshop using a terraform stack
-- To provision this workshop, there are detailed instructions in Lab 1 of [Learn how to use RAFT Replication to build resilient distributed databases](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=866) workshop.
+- You should have provisioned the **Use Raft Replication with Distributed Database for Resilient Never-Down Apps** workshop using a terraform stack
+- To provision this workshop, there are detailed instructions in Lab 1 of [Use Raft Replication with Distributed Database for Resilient Never-Down Apps](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=866) workshop.
 
 ## Task 1: Terminate a Provisioned Oracle Autonomous Database Instance
 
@@ -44,11 +44,11 @@ Estimated Time - 5 minutes
 
 ## Learn More
 
--  **RAFT Replication** 
-[RAFT Replication documentation for internal purposes] (https://docs-uat.us.oracle.com/en/database/oracle/oracle-database/23/shard/oracle-sharding-raft-replication.html#GUID-AB5D3A4B-51BD-456C-B03E-4C6B3EDB4C2B)
+-  **Raft Replication** 
+[Raft Replication Documentation] (https://docs.oracle.com/en/database/oracle/oracle-database/23/shard/raft-replication.html#GUID-AF14C34B-4F55-4528-8B28-5073A3BFD2BE)
 
 ## Acknowledgements
 
 * **Author** - Deeksha Sehgal, Oracle Database Sharding Product Management, Senior Product Manager
-* **Contributor** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Deeksha Sehgal, Oracle Database Sharding Product Management, Senior Product Manager, July 2023
+* **Contributor** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma
+* **Last Updated By/Date** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager, May 2024
