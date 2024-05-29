@@ -56,6 +56,10 @@
     {
       "title": "Lab 12: Migrate using Data Pump",
       "filename": "../../12-migrate-using-data-pump/migrate-using-data-pump.md"
+    }, 
+    {
+      "title": "Lab 13: Migrate using Full Transportable Export/Import",
+      "filename": "../../13-migrate-using-ftex/migrate-using-ftex.md"
     },    
     {
       "title": "Need Help?",

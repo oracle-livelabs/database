@@ -126,14 +126,14 @@ You need to prepare a few things before you can start a Data Pump export.
 
     ```
     <copy>
-    cat /home/oracle/ftex-exp.par
+    cat /home/oracle/scripts/migrate-using-data-pump-exp.par
     </copy>
     ```
 
     * `dumpfile` uses the `%L` wildcard that enables Data Pump to create many dump files.
     * `filesize` splits the files into 5 GB chunks which is handy if you need to transfer the dump files to a remote system.
     * `parallel` specifies the number of parallel processes.
-    * `metric` and `logtime` print additional diagnostic information in the log file.
+    * `metrics` and `logtime` print additional diagnostic information in the log file.
     * `exclude` specifies to skip database statistics.
     * `full` tells Data Pump to perform a full export containing more or less the entire database.
 
@@ -156,7 +156,7 @@ You need to prepare a few things before you can start a Data Pump export.
 
     ```
     <copy>
-    expdp expuser/expuser parfile=/home/oracle/ftex-exp.par
+    expdp expuser/expuser parfile=/home/oracle/scripts/migrate-using-data-pump-exp.par
     </copy>
     ```
 
@@ -169,7 +169,7 @@ You need to prepare a few things before you can start a Data Pump export.
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
     
     Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    28-MAY-24 03:23:48.178: Starting "EXPUSER"."SYS_EXPORT_FULL_01":  expuser/******** parfile=/home/oracle/ftex-exp.par
+    28-MAY-24 03:23:48.178: Starting "EXPUSER"."SYS_EXPORT_FULL_01":  expuser/******** parfile=/home/oracle/scripts/migrate-using-data-pump-exp.par
     28-MAY-24 03:23:48.554: W-1 Startup took 0 seconds
     28-MAY-24 03:23:49.875: W-2 Startup took 0 seconds
     28-MAY-24 03:23:50.769: W-2 Processing object type DATABASE_EXPORT/EARLY_OPTIONS/VIEWS_AS_TABLES/TABLE_DATA
@@ -425,11 +425,19 @@ You need a few more changes to the new PDB before you can start the import.
     ```
     </details>
 
+6. Exit SQL*Plus.
+    
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
 3. Examine the precreated Data Pump import parameter file.
 
     ```
     <copy>
-    cat /home/oracle/ftex-imp.par
+    cat /home/oracle/scripts/migrate-using-data-pump-imp.par
     </copy>
     ```
 
@@ -456,7 +464,7 @@ You need a few more changes to the new PDB before you can start the import.
 
     ```
     <copy>
-    impdp impuser/impuser@localhost/purple parfile=/home/oracle/ftex-imp.par
+    impdp impuser/impuser@localhost/purple parfile=/home/oracle/scripts/migrate-using-data-pump-imp.par
     </copy>
     ```
 
@@ -471,7 +479,7 @@ You need a few more changes to the new PDB before you can start the import.
     Connected to: Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
     28-MAY-24 03:26:47.767: W-1 Startup on instance 1 took 0 seconds
     28-MAY-24 03:26:48.982: W-1 Master table "IMPUSER"."SYS_IMPORT_FULL_01" successfully loaded/unloaded
-    28-MAY-24 03:26:49.306: Starting "IMPUSER"."SYS_IMPORT_FULL_01":  impuser/********@localhost/purple parfile=/home/oracle/ftex-imp.par
+    28-MAY-24 03:26:49.306: Starting "IMPUSER"."SYS_IMPORT_FULL_01":  impuser/********@localhost/purple parfile=/home/oracle/scripts/migrate-using-data-pump-imp.par
     28-MAY-24 03:26:49.377: W-1 Processing object type DATABASE_EXPORT/PRE_SYSTEM_IMPCALLOUT/MARKER/SCHEDULER
     28-MAY-24 03:26:49.400: W-1      Completed 1 SCHEDULER objects in 0 seconds
     28-MAY-24 03:26:49.402: W-1 Processing object type DATABASE_EXPORT/PRE_SYSTEM_IMPCALLOUT/MARKER/WMSYS
@@ -916,6 +924,7 @@ You need a few more changes to the new PDB before you can start the import.
 
     ```
     <copy>
+    alter session set container=purple;
     exec dbms_stats.gather_dictionary_stats;
     </copy>
     ```
@@ -923,6 +932,10 @@ You need a few more changes to the new PDB before you can start the import.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> alter session set container=maroon;
+
+    Session altered.
+    
     SQL> exec dbms_stats.gather_dictionary_stats;
     
     PL/SQL procedure successfully completed.
