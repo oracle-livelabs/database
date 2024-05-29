@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will upgrade the UPGR database from Oracle Database 11.2.0.4 to Oracle Database 19c. You will use AutoUpgrade. 
+In this lab, you will upgrade the *UPGR* database from Oracle Database 19c to 23ai. You will use AutoUpgrade. 
 
 Estimated Time: 45 minutes
 
