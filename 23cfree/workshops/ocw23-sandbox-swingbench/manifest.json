@@ -26,10 +26,10 @@
             "filename": "../../run-swingbench/run-swingbench.md"
         },
         {
-            "title": "Lab 3: Analyze the Swingbench stress test",
-            "description": "Looking at the Swingbench stress test",
+            "title": "Lab 3: Run Charbench",
+            "description": "Looking at the Charbench stress test",
             "type": "livelabs",
-            "filename": "../../analyze-swingbench/analyze-swingbench.md"
+            "filename": "../../run-charbench/run-charbench.md"
         },
         {
             "title": "Need Help?",

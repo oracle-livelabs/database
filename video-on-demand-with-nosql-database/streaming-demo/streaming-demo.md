@@ -8,6 +8,8 @@ This lab walks you through a Video on Demand streaming application demo created 
 
 _Estimated Time:_ 12 minutes
 
+[Walkthrough Lab 01: Video on Demand streaming - Activity Tracking Demo](videohub:1_91x8kepr)
+
 ### Activity Tracking service
 
 Consider a Video on Demand streaming application. It streams various shows that customers across the globe watch. Shows can have a number of seasons and a season can have multiple episodes. You need a modern, persistent meta-data store to keep track of customer activity.
@@ -35,10 +37,9 @@ with the rapidly changing requirements of the clients that access them, such as,
 
 For those applications, we looked for a solution that minimized the data transferred over the network and allowed users to query data easily using an API directly.
 
-GraphQL is an open-source data query and manipulation language for APIs, and a runtime for fulfilling those queries
-with existing data. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools.
-
-GraphQL is often confused with being a database technology. GraphQL isn't tied to any specific database or storage engine and is instead backed by your existing data. You can code with GraphQL engines available in many languages.
+GraphQL is an open-source data query and manipulation language for APIs you can code in many different languages.
+GraphQL provides a complete and easy to understand description of the data in your API, while providing runtime capabilities to fulfill queries with existing data. 
+Although GraphQL is often confused with being a database technology, GraphQL isn't tied to any specific database or storage engine, but instead is backed by your existing data.
 
 In this demo, we will learn how easy it is develop the Activity Tracking service using Node.Js, ApolloServer and Oracle NoSQL Database.
 
@@ -188,6 +189,8 @@ Geo-Steering to steer network requests to closest Oracle Cloud Infrastructure re
     You may now **proceed to the next lab.**
 
 ## Learn More
+* [About GraphQL](https://graphql.org/)
+* [What is the GraphQL Foundation?](https://graphql.org/foundation/)
 * [About Architecting Microservices-based applications](https://docs.oracle.com/en/solutions/learn-architect-microservice/index.html)
 * [Speed Matters! Why Choosing the Right Database is Critical for Best Customer Experience?](https://blogs.oracle.com/nosql/post/speed-matters-why-choosing-the-right-database-is-critical-for-best-customer-experience)
 * [About Security, Identity, and Compliance](https://www.oracle.com/security/)
