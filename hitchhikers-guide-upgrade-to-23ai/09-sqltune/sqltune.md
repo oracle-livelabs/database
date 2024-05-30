@@ -18,7 +18,7 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 7: SQL Plan Management
+- You have completed Lab 8: SQL Plan Management
 
 ## Task 1: Create a tuning task
 
@@ -26,12 +26,15 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
 
 1. Use the yellow terminal. Connect to the upgraded UPGR database.
 
-    ```
-    <copy>
-    . upgr19
-    sqlplus / as sysdba
-    </copy>
-    ```
+      ```
+      <copy>
+      . cdb23
+      sqlplus / as sysdba
+      alter session set container=UPGR;
+      </copy>
+       
+      Be sure to hit RETURN
+      ```
 
 2. Create a STA task.
 

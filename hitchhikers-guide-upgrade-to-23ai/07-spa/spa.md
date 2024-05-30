@@ -15,18 +15,21 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 5: AWR Compare Periods
+- You have completed Lab 6: AWR Compare Periods
 
 ## Task 1: Check statements
 
-1. Use the yellow terminal. Set the environment and connect to the upgraded UPGR database.
+1. Use the yellow terminal. Set the environment and connect to the *CDB23* database, then switch to *UPGR* PDB.
 
-    ```
-    <copy>
-    . upgr19
-    sqlplus / as sysdba
-    </copy>
-    ```
+      ```
+      <copy>
+      . cdb23
+      sqlplus / as sysdba
+      alter session set container=UPGR;
+      </copy>
+       
+      Be sure to hit RETURN
+      ```
 
 2. Check the SQL Tuning Sets and the number of statements in them:
 
@@ -143,12 +146,15 @@ This lab assumes:
 
 14. Reconnect to the database.
     
-    ```
-    <copy>
-    . upgr19
-    sqlplus / as sysdba
-    </copy>
-    ```
+      ```
+      <copy>
+      . cdb23
+      sqlplus / as sysdba
+      alter session set container=UPGR;
+      </copy>
+       
+      Be sure to hit RETURN
+      ```
 
 15. Implement a change. This could be any change that you want to test the effect of. Here you are changing an initialization parameter, but you could also change statistics, optimizer settings (`DBMS_OPTIM_BUNDLE`), or many other things.
 

@@ -16,7 +16,9 @@ In this lab, you will:
 
 ### Prerequisites
 
-None.
+This lab assumes:
+
+- You have completed Lab 1: Initialize Environment
 
 This is an optional lab. You can skip it if you are already familiar with multitenant architecture.
 

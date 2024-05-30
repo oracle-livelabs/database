@@ -18,19 +18,24 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 6: SQL Performance Analyzer
+- You have completed Lab 7: SQL Performance Analyzer
 
 ## Task 1: Create SQL Plan Baseline for one statement
 
 In the previous lab, you found a statement that changed plan after upgrade (SQL ID *7m5h0wf6stq0q*). You saw in the SQL Performance Analyzer report that the optimizer used a different access method. You determined that the new plan works better. Now, you want to create a SQL Plan Baseline for that SQL, so the optimizer will only consider the new, better plan.
 
 1. Use the yellow terminal. Connect to the upgraded UPGR database.
+
       ```
       <copy>
-      . upgr19
+      . cdb23
       sqlplus / as sysdba
+      alter session set container=UPGR;
       </copy>
+       
+      Be sure to hit RETURN
       ```
+
 2. Create a SQL Plan Baseline. You will use a script created by Carlos Sierra. When prompted for:
       - *SQL_ID* (*1*), enter *7m5h0wf6stq0q*.
       - *1st Plan Hash Value*, enter *3642382161*.

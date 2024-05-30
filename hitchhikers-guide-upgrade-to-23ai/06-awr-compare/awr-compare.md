@@ -19,51 +19,36 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 4: AutoUpgrade
+- You have completed Lab 5: AutoUpgrade
 
 ## Task 1: Generate load
 
 Use HammerDB to create a workload. 
 
-1. Use the yellow terminal. Set the environment to the upgraded UPGR database. Now, since you upgraded the database, the environment needs to be set to an Oracle Database 19c home.
+1. Use the yellow terminal. Set the environment to the *CDB23* database. Now, since you upgraded the database and plugged in the database, the environment needs to be set to the CDB.
 
-	```
-	<copy>
-    . upgr19
-    sqlplus / as sysdba
-	</copy>
-	```
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    $ sqlplus / as sysdba
-
-    SQL*Plus: Release 19.0.0.0.0 - Production on Thu Jul 6 21:09:27 2023
-    Version 19.18.0.0.0
-
-    Copyright (c) 1982, 2022, Oracle.  All rights reserved.
-
-    Connected to:
-    Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.18.0.0.0
-
-    SQL> 
-    ```
-    </details>
+      ```
+      <copy>
+      . cdb23
+      sqlplus / as sysdba
+      alter session set container=UPGR;
+      </copy>
+       
+      Be sure to hit RETURN
+      ```
 
 2. Create an AWR snapshot. Take note of the snapshot ID (e.g., 130). You need it later on. 
 
 	```
     <copy>
-    @/home/oracle/scripts/snap-lab-05-before.sql
+    @/home/oracle/scripts/awr-compare-snap-before.sql
     </copy>
 	```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/snap-lab-05-before.sql
+    SQL> @/home/oracle/scripts/awr-compare-snap-before.sql
     -------------------------------------------
     - AWR Snapshot with Snap-ID: 130 created. -
     -------------------------------------------
@@ -105,14 +90,14 @@ Use HammerDB to create a workload.
 
     ```
     <copy>
-    @/home/oracle/scripts/snap-lab-05-after.sql
+    @/home/oracle/scripts/awr-compare-snap-after.sql
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/snap-lab-05-after.sql
+    SQL> @/home/oracle/scripts/awr-compare-snap-after.sql
     ------------------------------------------
     - AWR Snapshot with Snap-ID: 131 created. -
     ------------------------------------------
@@ -132,6 +117,7 @@ In the AWR Diff Report, you will compare a snapshot period **before** upgrade to
 	```
    When prompted for:
     * *report_type*, hit RETURN.
+    * *awr_location*, type *AWR_PDB*, hit RETURN.
     * *num_days*, type *2*, hit RETURN.
     * *begin_snap* (first pair), type the first *Snap Id* from lab 2, hit RETURN. If you can't remember, check the file `/home/oracle/scripts/snap-lab-02-before.log`.
     * *end_snap* (first pair), type the last *Snap Id* from lab 2, hit RETURN. If you can't remember, check the file `/home/oracle/scripts/snap-lab-02-after.log`.

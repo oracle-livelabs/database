@@ -18,7 +18,7 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 3: Capture and Preserve SQL
+- You have completed Lab 4: Capture and Preserve SQL
 
 ## Task 1: Prepare your environment
 
@@ -265,18 +265,18 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     
     * The report states: *Check passed and no manual intervention needed*. AutoUpgrade found no severe issues that it couldn't fix automatically. 
 
-4. ***UPDATE***Check the summary report in HTML format. Also, click on *Checks Report* for even more details. Firefox might print warnings to the console. You can safely ignore those.
+4. Check the summary report in HTML format. Also, click on *Checks Report* for even more details. Firefox might print warnings to the console. You can safely ignore those.
 
     ```
     <copy>
-    firefox /home/oracle/logs/lab4/cfgtoollogs/upgrade/auto/status/status.html &
+    firefox /home/oracle/logs/autoupgrade-UPGR/cfgtoollogs/upgrade/auto/status/status.html &
     </copy>
     ```
     ![The summary report shows the outcome of the preupgrade analysis](./images/autoupgrade-summary-report.png " ")
     ![The Checks Report shows many details about the database](./images/autoupgrade-checks-report.png " ")
 
     * Examine the Checks Report.
-    * Notice how a specific check has severity *ERROR*, but AutoUpgrade has a fixup available. 
+    * Notice how a specific check has severity *RECOMMENDED*, but AutoUpgrade has a fixup available. 
     * Then close Firefox.
 
 ## Task 3: Upgrade your database

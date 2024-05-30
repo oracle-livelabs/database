@@ -17,7 +17,7 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 2: Generate AWR Snapshot
+- You have completed Lab 3: Generate AWR Snapshot
 
 ## Task 1: Collect statements from AWR
 
