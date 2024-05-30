@@ -105,9 +105,9 @@ Please make note of the **Region** you are assigned. If you are assigned Phoenix
     <copy>
       cd $HOME
       rm -rf serverless-with-nosql-database BaggageData serverless-with-nosql-database.zip demo-lab-nosql-main
-      curl https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/demo-lab-nosql-main.zip -o serverless-with-nosql-database.zip
+      curl https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/demo-lab-nosql.zip -o serverless-with-nosql-database.zip
       unzip serverless-with-nosql-database.zip
-      mv demo-lab-nosql-main serverless-with-nosql-database
+      mv demo-lab-nosql serverless-with-nosql-database
       cp ~/NoSQLLabPrivateKey.pem  ~/serverless-with-nosql-database/express-nosql
       cp ~/serverless-with-nosql-database/env-livelab.sh ~/serverless-with-nosql-database/env.sh
       cd serverless-with-nosql-database
