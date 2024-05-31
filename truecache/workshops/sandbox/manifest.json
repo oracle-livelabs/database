@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Application performance improvement with True Cache ",
+  "workshoptitle": "Improve application performance with True Cache",
   "help": "livelabs-help-**enterarea**_us@oracle.com",
   "variables": ["../../variables/variables.json",
     "../../variables/variables-in-another-file.json"],
@@ -8,11 +8,6 @@
       "title": "Introduction",
       "description": "The Introduction is always second for LiveLabs. The title and contents menu title match for the Introduction.",
       "filename": "../../introduction/introduction.md"
-    },
-    {
-      "title": "Get Started",
-      "description": "Login to Oracle Cloud",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
     },
     {
       "title": "Lab 1: Prepare Setup",
