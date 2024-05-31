@@ -47,7 +47,7 @@ Using the details from the two steps above, proceed to the lab *Environment Setu
 -  Create Stack:  *Compute + Networking*
 -  Create Stack:  *Compute only* with an existing VCN where security lists have been updated as per *Step 2* above
 
-Please note for RAFT Replication Lab:
+Please note for True Cache Replication Lab:
 - Recommended memory: 48G
 - Recommended CPU: 6 OCPU
 
