@@ -53,7 +53,48 @@ This lab assumes:
     ```
     </details>
 
-3. Analyze performance in the upgraded database. Using the workload captured in SQL Tuning Sets before the upgrade as a baseline, the database now test executes the workload stored in the SQL Tuning Sets, but this time in an upgraded database. Now you can see the effect of the new 19c optimizer. First, you compare *CPU\_TIME*.
+3. Check the if the performance regression was forcely introduced via *optimizer_index_cost_adj*:
+
+    ```
+    <copy>
+    show parameter optimizer_index_cost_adj
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> show parameter optimizer_index_cost_adj
+
+    NAME                                 TYPE        VALUE
+    ------------------------------------ ----------- ------------------------------
+    optimizer_index_cost_adj             integer     10000
+    ```
+    </details>
+
+    If you see any **a value different from 10000** for the *optimizer_index_cost_adj*, adjust it:
+
+    ```
+    <copy>
+    alter system set optimizer_index_cost_adj=10000;
+    show parameter optimizer_index_cost_adj
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> alter system set optimizer_index_cost_adj=10000;
+
+    System altered.
+
+    NAME                                 TYPE        VALUE
+    ------------------------------------ ----------- ------------------------------
+    optimizer_index_cost_adj             integer     10000
+    ```
+    </details>
+
+4. Analyze performance in the upgraded database. Using the workload captured in SQL Tuning Sets before the upgrade as a baseline, the database now test executes the workload stored in the SQL Tuning Sets, but this time in an upgraded database. Now you can see the effect of the new 19c optimizer. First, you compare *CPU\_TIME*.
 
     ```
     <copy>
@@ -78,14 +119,14 @@ This lab assumes:
     - Compare before/after.
     - Report on the results based on *CPU\_TIME*.
 
-4. Generate the HTML Report containing the results below.
+5. Generate the HTML Report containing the results below.
 
     ```
     <copy>
     @/home/oracle/scripts/spa_report_cpu.sql
     </copy>
     ```
-5. Then repeat this for *ELAPSED\_TIME*. First, analyze performance.
+6. Then repeat this for *ELAPSED\_TIME*. First, analyze performance.
 
     ```
     <copy>
@@ -93,7 +134,7 @@ This lab assumes:
     </copy>
     ```
 
-5. Next, generate a report.
+7. Next, generate a report.
 
     ```
     <copy>
@@ -101,7 +142,7 @@ This lab assumes:
     </copy>
     ```
 
-6. Exit SQL*Plus.
+8. Exit SQL*Plus.
 
     ```
     <copy>
@@ -109,7 +150,7 @@ This lab assumes:
     </copy>
     ```
 
-7. Open the two SPA reports. Put them side-by-side.
+9. Open the two SPA reports. Put them side-by-side.
 
     ```
     <copy>
@@ -136,9 +177,9 @@ This lab assumes:
 
     ![See details on individual SQLs](./images/spa-plan-compare.png " ")
 
-    * Notice how the plan changes. After upgrade, the optimizer used a better access method (TABLE ACCESS BY INDEX ROWID BATCHED) on object CUSTOMER.
-    * TABLE ACCESS BY INDEX ROWID BATCHED access method allows the database to retrieve a few row ids from the index, and then attempts to access rows in block order to improve the clustering and reduce the number of times that the database must access a block. This makes it run faster.
-    * This demonstrates that a new optimizer out-of-the-box brings a lot of performance improvements. It is not always a good idea to deny plan changes as part of an upgrade.
+    * Notice how the plan changes. After upgrade, the optimizer used a worse access method (TABLE ACCESS FULL) on object CUSTOMER. This happened because we used the parameter *optimizer_index_cost_adj* to disfavor index usage.
+    * TABLE ACCESS FULL access method will perform a full table scan on the table, which is much slower given we are returning just a few rows and we could use an index.
+    * This demonstrates that even though a new optimizer out-of-the-box brings a lot of performance improvements, if you change important parameters you may end up with worse plans.
 
 12. Examine the rest of the SPA reports.
 
@@ -160,11 +201,11 @@ This lab assumes:
 
     ```
     <copy>
-    alter session set optimizer_features_enable='11.2.0.4';
+    alter session reset optimizer_index_cost_adj;
     </copy>
     ```
 
-15. Re-analyze the workload based on *ELAPSED\_TIME*. This allows you to see the impact of the change on the database.
+16. Re-analyze the workload based on *ELAPSED\_TIME*. This allows you to see the impact of the change on the database.
 
     ```
     <copy>
@@ -172,7 +213,7 @@ This lab assumes:
     </copy>
     ```
 
-15. Generate a new report.
+17. Generate a new report.
 
     ```
     <copy>
@@ -180,7 +221,7 @@ This lab assumes:
     </copy>
     ```
 
-16. Exit SQL*Plus.
+18. Exit SQL*Plus.
 
     ```
     <copy>
@@ -188,7 +229,7 @@ This lab assumes:
     </copy>
     ```
 
-17. Open it with Firefox.
+19. Open it with Firefox.
 
     ```
     <copy>
@@ -196,7 +237,7 @@ This lab assumes:
     </copy>
     ```
 
-18. Find the details on SQL ID *7m5h0wf6stq0q* again.
+20. Find the details on SQL ID *7m5h0wf6stq0q* again.
 
     ![No change of plans](./images/spa-change-plan-compare.png " ")
 
