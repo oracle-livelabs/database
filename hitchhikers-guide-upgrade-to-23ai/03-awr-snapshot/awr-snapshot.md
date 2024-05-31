@@ -38,14 +38,14 @@ You must start the UPGR database and create the first AWR snapshot.
 
     ```
     <copy>
-    @/home/oracle/scripts/awr-snapshot-snap-before.sql
+    @/home/oracle/scripts/awr-compare-snap-before.sql
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/awr-snapshot-snap-before.sql
+    SQL> @/home/oracle/scripts/awr-compare-snap-before.sql
     -------------------------------------------
     - AWR Snapshot with Snap-ID: 113 created. -
     -------------------------------------------
@@ -56,8 +56,13 @@ You must start the UPGR database and create the first AWR snapshot.
 
 3. Don’t exit the terminal. Keep SQL*Plus open.
 
-4. Start HammerDB. On the desktop, double-click on the *HammerDB*.
-    ![Double-click on the HammerDB icon](./images/awr-snapshot-hammerdb-icon.png " ")
+4. Start HammerDB. On the terminal, run:
+
+    ```
+    . upgr
+    cd /home/oracle/HammerDB-4.10/
+    ./hammerdb &
+    ```
 
 ## Task 2: Prepare workload
 
@@ -150,14 +155,14 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
     ```
     <copy>
-    @/home/oracle/scripts/awr-snapshot-snap-after.sql
+    @/home/oracle/scripts/awr-compare-snap-after.sql
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/awr-snapshot-snap-after.sql
+    SQL> @/home/oracle/scripts/awr-compare-snap-after.sql
     -------------------------------------------
     - AWR Snapshot with Snap-ID: 117 created. -
     -------------------------------------------

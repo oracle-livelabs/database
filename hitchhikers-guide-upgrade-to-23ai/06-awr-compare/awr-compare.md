@@ -33,7 +33,7 @@ Use HammerDB to create a workload.
       sqlplus / as sysdba
       alter session set container=UPGR;
       </copy>
-
+       
       -- Be sure to hit RETURN
       ```
 
@@ -57,8 +57,13 @@ Use HammerDB to create a workload.
 
 3. Don't exit the terminal. Keep SQL*Plus open.
 
-4. Start HammerDB. On the desktop, double-click on the *HammerDB*.
-    ![Double-click on the HammerDB icon](./images/awr-compare-hammerdb-icon.png " ")
+4. Start HammerDB. On the terminal, run:
+
+    ```
+    . cdb23
+    cd /home/oracle/HammerDB-4.10/
+    ./hammerdb &
+    ```
 
 5. In the benchmark list, expand *Oracle* / *TPROC-C*
 

@@ -65,6 +65,8 @@ You now have two SQL Tuning Sets:
 
     ```
     <copy>
+    col name for a30
+    col owner for a10
     select name, owner, statement_count from dba_sqlset;
     </copy>
     ```
@@ -74,10 +76,10 @@ You now have two SQL Tuning Sets:
     ``` text
     SQL> select name, owner, statement_count from dba_sqlset;
 
-    NAME                     OWNER STATEMENT_COUNT
-    ---------------------- ------- ---------------
-    STS_CaptureAWR             SYS              31
-    STS_CaptureCursorCache     SYS              38
+    NAME                           OWNER      STATEMENT_COUNT
+    ------------------------------ ---------- ---------------
+    STS_CaptureCursorCache         SYS                     41
+    STS_CaptureAWR                 SYS                     31
     ```
     </details>
 
