@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "Launch Your First MySQL Database Service System",
+    "workshoptitle": "Launch Your First MySQL HeatWave Database System - Administrators",
     "help": "livelabs-help-db_us@oracle.com",
 	"tutorials": [
         {
@@ -13,13 +13,17 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
         },
         {
-            "title": "Lab 1: Create Local SSH Key",
+            "title": "Lab 1: Create SSH keys using Oracle Cloud Shell",
             "description": "The Introduction is always second. The title and contents menu title match for the Introduction.",
-            "filename": "https://oracle-livelabs.github.io/common/labs/generate-ssh-key-local/generate-ssh-keys-local.md"
+            "filename": "https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/generate-ssh-keys-cloud-shell.md"
         },
         {
-            "title": "Lab 2: Create and connect to a MySQL DB System",
+            "title": "Lab 2: Create and connect to a MySQL Heatwave DB System",
             "filename": "../../launchmds/launchmds.md"
+        },
+        {
+            "title": "Lab 3: Enable and explore Database Management for MySQL Heatwave",
+            "filename": "../../enabledbm/enabledbm.md"
         },
         {
             "title": "Need Help?",

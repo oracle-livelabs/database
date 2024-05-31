@@ -14,8 +14,7 @@ Watch the video below for a walk through of the In-Memory Full Text Columns lab:
 
 ### Objectives
 
-- Learn how to enable In-Memory on the Oracle Database
-- Perform various queries on the In-Memory Column Store
+- Learn how In-Memory Full Text Columns are set up and how to make use of them.
 
 ### Prerequisites
 
@@ -29,7 +28,7 @@ This lab assumes you have:
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
-### Background
+## Task 1: In-Memory Spatial
 
 Oracle Database 21c introduced a new feature called In-Memory Full Text Columns. Prior to 21c Database In-Memory didn't support predicates for non-scalar documents. In other words, if you were using domain indexes for an Oracle full text index, XML Search Index, or JSON Search Index then we didn't populate those in the IM column store. This limited the speed with which you could search on non-scalar type data. Now in Oracle Database 21c Database In-Memory supports the ability to store, or populate, these types of domain-specific indexes. The In-Memory Full Text feature supports the following data types:
 
@@ -42,10 +41,6 @@ Oracle Database 21c introduced a new feature called In-Memory Full Text Columns.
 This means that for queries that use CONTAINS() and JSON_TEXTCONTAINS(), Database In-Memory can now push those operators into the scan of the in-memory columnar data as SQL predicates just as we push other predicates and aggregations into the in-memory scan.
 
 In this lab you will see how In-Memory Full Text Columns are setup and how to make use of them.
-
-## Task 1: Verify Directory Definitions
-
-In this Lab we will be populating external data from a local directory and we will need to define a database directory to use in our external table definitions to point the database to our external data.
 
 Let's switch to the text folder and log back in to the PDB:
 
@@ -791,7 +786,7 @@ SQL>
 
 ## Conclusion
 
-This lab demonstrated how Database In-Memory can optimize the access of external data, and support both external and hybrid partitioned tables.
+This lab demonstrated how In-Memory Full Text Columns are setup and how to make use of them.
 
 You may now **proceed to the next lab**.
 
@@ -799,4 +794,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Andy Rivenes, Product Manager,  Database In-Memory
 - **Contributors** -
-- **Last Updated By/Date** - Andy Rivenes, August 2022
+- **Last Updated By/Date** - Andy Rivenes, March 2024

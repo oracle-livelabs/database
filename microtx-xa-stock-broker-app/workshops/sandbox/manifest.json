@@ -22,16 +22,11 @@
       "filename": "../../integrate-microtx-lib-files/integrate-microtx-lib-files.md"
     },
     {
-      "title": "Lab 3: Provision Autonomous Databases for Use as Resource Manager",
-      "type": "sandbox",
-      "filename": "../../adb-provision/adb-provision.md"
-    },
-    {
-      "title": "Lab 4: Deploy the Bank and Stock-Trading Application",
+      "title": "Lab 3: Deploy the Bank and Stock-Trading Application",
       "filename": "../../deploy-stock-trading-app/deploy-stock-trading-app.md"
     },
     {
-      "title": "Lab 5: Trade Stocks with the Bank and Stock-Trading Application",
+      "title": "Lab 4: Trade Stocks with the Bank and Stock-Trading Application",
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {

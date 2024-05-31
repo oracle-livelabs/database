@@ -17,10 +17,10 @@ This lab assumes you have:
 1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
 
 <if type="basics">
-    - [db-inmemory-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/rqWEYKMxHiewzXChyF-aEOPZR_KMP-XKwzIJPgakxXfRpNn3DLXKArp_07ujM0O2/n/natdsecurity/b/stack/o/db-inmemory-mkplc-freetier.zip)
+    - [db-inmemory-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/YXh0XbJGk0fvsZ2GFKSGPyDUzJ2ywCp6NBF56_UnDj6mZtjvidxULIXwI2JXFE1x/n/c4u02/b/hosted_workshops/o/stacks/db-inmemory-mkplc-freetier.zip)
 </if>
 <if type="advanced">
-    - [db-inmemory-advanced-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4oOnb02ndDJodtDxY8-c0bB_yjZ4geW4BnFAK9eNBEWnYLAPbkX__nH1UNHRjR2G/n/natdsecurity/b/stack/o/db-inmemory-advanced-mkplc-freetier.zip)
+    - [db-inmemory-advanced-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/ywqTs1seIu1gYTENJDUXG63N3-UWXJChyTZAPtF5XVE3InHBPHmwzM1mkm0RUFjE/n/c4u02/b/hosted_workshops/o/stacks/db-inmemory-advanced-mkplc-freetier.zip)
 </if>
 
 2.  Save in your downloads folder.

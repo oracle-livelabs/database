@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Maintain transaction consistency with Oracle Transaction Manager for Microservices",
+  "workshoptitle": "Maintain data consistency across microservices using Oracle MicroTx",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -20,25 +20,20 @@
     {
       "title": "Lab 2: Environment setup",
       "description": "How to provision the workshop environment and connect to it",
-      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc-ssh.md"
+      "filename": "../../env-setup/setup-compute-novnc-ssh.md"
     },
     {
-      "title": "Lab 3: Run an LRA sample application",
+      "title": "Lab 3: Run Travel agent app which uses LRA",
       "filename": "../../run-lra-app/run-lra-app.md"
     },
     {
-      "title": "Lab 4: Provision Autonomous Databases for use as resource manager",
-      "type": "tenancy",
-      "filename": "../../adb-provision/adb-provision.md"
-    },
-    {
-      "title": "Lab 5: Run an XA sample application",
+      "title": "Lab 4: Run Transfer app which uses XA",
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {
       "description": "Cleanly dispose of all OCI resources created by ORM for the workshop, and delete the stack",
       "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md",
-      "title": "Lab 6: Environment Cleanup"
+      "title": "Lab 5: Environment Cleanup"
     },
     {
       "title": "Need help?",

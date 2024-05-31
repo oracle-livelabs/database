@@ -304,7 +304,9 @@ $
   Normally you're now executing the root.sh script. In the lab environment switching to root is forbidden. So you'not going to execute the next steps, instead we post the output you would get:
 
     ```
-    su root
+    <copy>
+     su root
+     </copy>
     ```
 
     ![su root](./images/sudo-root.png " ")
@@ -321,8 +323,10 @@ $
     
 
     ```
+    <copy>
      /u01/app/oracle/product/1919/root.sh
-    ```
+    </copy>
+     ```
 
     ![executing root.sh](./images/root-sh.png " ")
 
@@ -334,7 +338,9 @@ $
 
 
     ```
+    <copy>
     exit
+    </copy>
      ```
 
     ![exiting root](./images/exit-root.png " ")
@@ -345,7 +351,9 @@ $
 Confirm that you are `oracle` again:
 
     ```
+    <copy>
     whoami
+    </copy>
     ```
 
     ![after logon](./images/whoami-oracle.png " ")
