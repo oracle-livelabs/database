@@ -33,7 +33,7 @@ Use HammerDB to create a workload.
       sqlplus / as sysdba
       alter session set container=UPGR;
       </copy>
-       
+
       -- Be sure to hit RETURN
       ```
 
