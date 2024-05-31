@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Application performance improvement with True Cache ",
+  "workshoptitle": "Improve application performance with True Cache",
   "help": "livelabs-help-**enterarea**_us@oracle.com",
   "variables": ["../../variables/variables.json",
     "../../variables/variables-in-another-file.json"],
