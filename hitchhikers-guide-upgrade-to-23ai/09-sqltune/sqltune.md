@@ -32,8 +32,8 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
       sqlplus / as sysdba
       alter session set container=UPGR;
       </copy>
-       
-      Be sure to hit RETURN
+
+      -- Be sure to hit RETURN
       ```
 
 2. Create a STA task.
@@ -66,7 +66,7 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
     Completed at                    : 07/08/2023 08:43:36
     SQL Tuning Set (STS) Name       : STS_CaptureCursorCache
     SQL Tuning Set Owner            : SYS
-    Number of Statements in the STS : 37        
+    Number of Statements in the STS : 37
     ```
     </details>
 
@@ -103,7 +103,7 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
     Schema Name: TPCC
     SQL ID	   : 89k9fqaq5b5sy
     SQL Text   : SELECT C_BALANCE, C_FIRST, C_MIDDLE, C_ID FROM CUSTOMER WHERE
-                 C_LAST = :B3 AND C_D_ID = :B2 AND C_W_ID = :B1 ORDER BY C_FIRST   
+                 C_LAST = :B3 AND C_D_ID = :B2 AND C_W_ID = :B1 ORDER BY C_FIRST
     ```
     </details>
 
@@ -122,13 +122,13 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
     create index TPCC.IDX$$_00E80001 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
     create index TPCC.IDX$$_00E80002 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
     create index TPCC.IDX$$_00E80003 on TPCC.ORDERS("O_C_ID","O_D_ID","O_W_ID");
-    create index TPCC.IDX$$_00E80004 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");    
+    create index TPCC.IDX$$_00E80004 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
     ```
     </details>
 
 ## Task 2: Implement recommendations
 
-You can implement the recommendations and then use SPA to validate the effect on your workload. 
+You can implement the recommendations and then use SPA to validate the effect on your workload.
 
 1. Implement the changes. Be sure to remove duplicate recommendations. Your recommendations may vary from the sample output. Copy/paste the recommendations from your own report.
 
@@ -137,8 +137,8 @@ You can implement the recommendations and then use SPA to validate the effect on
     create index TPCC.IDX$$_00E80002 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
     create index TPCC.IDX$$_00E80003 on TPCC.ORDERS("O_C_ID","O_D_ID","O_W_ID");
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -160,7 +160,7 @@ You can implement the recommendations and then use SPA to validate the effect on
 ## Task 3: Validate recommendations using SQL Performance Analyzer
 
 1. Evaluate the effect on your workload. Use SPA to test based on *CPU\_TIME* and *ELAPSED\_TIME* and generate reports.
-    
+
     ```
     <copy>
     @/home/oracle/scripts/spa_cpu.sql
@@ -168,10 +168,10 @@ You can implement the recommendations and then use SPA to validate the effect on
     @/home/oracle/scripts/spa_elapsed.sql
     @/home/oracle/scripts/spa_report_elapsed.sql
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
- 
+
 2. Exit SQL*Plus
 
     ```
@@ -192,9 +192,9 @@ You can implement the recommendations and then use SPA to validate the effect on
 
     ![Creating indexes give a better performance](./images/sqltune-spa1.png " ")
 
-    * Overall there is a 15 % improvement from creating indexes. 
+    * Overall there is a 15 % improvement from creating indexes.
     * This is based on the workload from the SQL Tuning Set. It does not tell anything about the effect on other workloads, like DMLs.
-    
+
 4. Examine the other SQL Performance Analyzer report based on *ELAPSED\_TIME*.
 
     ```

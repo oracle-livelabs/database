@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will upgrade the *UPGR* database from Oracle Database 19c to 23ai. You will use AutoUpgrade. 
+In this lab, you will upgrade the *UPGR* database from Oracle Database 19c to 23ai. You will use AutoUpgrade.
 
 Estimated Time: 45 minutes
 
@@ -24,7 +24,7 @@ This lab assumes:
 
 It is strongly recommended to always use the latest version of AutoUpgrade. To use AutoUpgrade, you must create a config file.
 
-1. Use the yellow terminal. 
+1. Use the yellow terminal.
    ![Use the yellow terminal for the following commands](./images/yellow-term.png " ")
 
 2. Set the environment to the *UPGR* database and check the AutoUpgrade version.
@@ -40,7 +40,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ java -jar 
+    $ java -jar
     autoupgrade.jar -version
     build.version 24.3.240419
     build.date 2024/04/19 15:45:58 -0400
@@ -85,7 +85,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     #   (3) Config files
     #   (4) progress.json and status.json
     global.autoupg_log_dir=/u01/app/oracle/cfgtoollogs/autoupgrade
-    
+
     #
     # Database number 1 - Full DB/CDB upgrade
     #
@@ -98,7 +98,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     #upg1.run_utlrp=[yes|no]                                  # Optional. Whether or not to run utlrp after upgrade
     #upg1.timezone_upg=[yes|no]                               # Optional. Whether or not to run the timezone upgrade
     #upg1.target_version=[12.2|18|19|21|23]                      # Oracle version of the target ORACLE_HOME.  Only required when the target Oracle database version is 12.2
-    
+
     #
     # Database number 2 - Unplug/Plug upgrade
     #
@@ -116,7 +116,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     #upg2.run_utlrp=[yes|no]                   # Optional. Whether or not to run utlrp after upgrade
     #upg2.timezone_upg=[yes|no]                # Optional. Whether or not to run the timezone upgrade
     #upg2.target_version=[12.2|18|19|21|23]       # Oracle version of the target ORACLE_HOME.  Only required when the target Oracle database version is 12.2
-    
+
     #
     # Database number 3 - Noncdb to PDB upgrade
     #
@@ -132,7 +132,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     #upg3.run_utlrp=[yes|no]              # Optional. Whether or not to run utlrp after upgrade
     #upg3.timezone_upg=[yes|no]           # Optional. Whether or not to run the timezone upgrade
     #upg3.target_version=[12.2|18|19|21|23]  # Oracle version of the target ORACLE_HOME.  Only required when the target Oracle database version is 12.2
-    
+
     #
     # You can have as many databases as desired
     #
@@ -150,7 +150,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     #
     # When neither of these options are used, a full upgrade of the source DB/CDB is performed.
     #
-    
+
     #upgN.log_dir=<Path of the log directory for the upgrade job>
     #upgN.sid=<ORACLE_SID of the source DB/CDB>
     #upgN.source_home=<Path of the source ORACLE_HOME>
@@ -160,17 +160,17 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     #upgN.upgrade_node=<Optional. To find out the name of your node, run the hostname utility. Default is ''localhost''>
     #upgN.run_utlrp=[yes|no]    # Optional. Whether or not to run utlrp after upgrade
     #upgN.timezone_upg=[yes|no] # Optional. Whether or not to run the timezone upgrade
-    
+
     ### Unplug/Plug parameters ###
     #upgN.target_cdb=<ORACLE_SID of the target CDB>
     #upgN.pdbs=<Comma delimited list of pdb names that will be upgraded and moved to the target CDB>
     #upgN.<pdb_name>.target_pdb_name=<Optional. Name of the PDB to be created on the target CDB>
     #upgN.<pdb_name>.target_pdb_copy_option=<Optional. file_name_convert option used when creating the PDB on the target CDB>
-    
+
     ### NonCDB to PDB parameters ###
     #upgN.target_cdb=<ORACLE_SID of the target CDB>
     #upgN.target_pdb_name=<Optional. Name of the PDB to be created on the target CDB>
-    #upgN.target_pdb_copy_option=<Optional. file_name_convert option used when creating the PDB on the target CDB>    
+    #upgN.target_pdb_copy_option=<Optional. file_name_convert option used when creating the PDB on the target CDB>
     ```
     </details>
 
@@ -219,10 +219,10 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     upg> Job 100 completed
     ------------------- Final Summary --------------------
     Number of databases            [ 1 ]
-    
+
     Jobs finished                  [1]
     Jobs failed                    [0]
-    
+
     Please check the summary report at:
     /home/oracle/logs/autoupgrade-UPGR/cfgtoollogs/upgrade/auto/status/status.html
     /home/oracle/logs/autoupgrade-UPGR/cfgtoollogs/upgrade/auto/status/status.log
@@ -262,8 +262,8 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     ------------------------------------------
     ```
     </details>
-    
-    * The report states: *Check passed and no manual intervention needed*. AutoUpgrade found no severe issues that it couldn't fix automatically. 
+
+    * The report states: *Check passed and no manual intervention needed*. AutoUpgrade found no severe issues that it couldn't fix automatically.
 
 4. Check the summary report in HTML format. Also, click on *Checks Report* for even more details. Firefox might print warnings to the console. You can safely ignore those.
 
@@ -276,12 +276,12 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     ![The Checks Report shows many details about the database](./images/autoupgrade-checks-report.png " ")
 
     * Examine the Checks Report.
-    * Notice how a specific check has severity *RECOMMENDED*, but AutoUpgrade has a fixup available. 
+    * Notice how a specific check has severity *RECOMMENDED*, but AutoUpgrade has a fixup available.
     * Then close Firefox.
 
 ## Task 3: Upgrade your database
 
-You determined that the database is ready to upgrade. Start AutoUpgrade in *deploy* mode. One command is all it takes to perform the upgrade - including all pre- and post-upgrade tasks. 
+You determined that the database is ready to upgrade. Start AutoUpgrade in *deploy* mode. One command is all it takes to perform the upgrade - including all pre- and post-upgrade tasks.
 
 1. Start AutoUpgrade in *deploy* mode to perform the upgrade. Notice you are re-using the same command, but this time `-mode` is set to `deploy`.
 
@@ -347,7 +347,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     	-c <dbname> alter <check> run <yes|no|skip>  Update Run Configuration
     ```
     </details>
-    
+
 3. Get an overview of the current jobs.
 
     ```
@@ -368,7 +368,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     ```
     </details>
 
-    * Notice the job number (`Job#`).  
+    * Notice the job number (`Job#`).
 
 4. Get details about your upgrade job. Use the `status` command. Your job number should be 101. If that's not the case, replace it with your value.
 
@@ -382,21 +382,21 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     <summary>*click to see the output*</summary>
     ``` text
     Details
-    
+
     	Job No           101
     	Oracle SID       UPGR
     	Start Time       24/05/29 20:25:15
     	Elapsed (min):   2
     	End time:        N/A
-    
+
     Logfiles
-    
+
     	Logs Base:    /home/oracle/logs/autoupgrade-UPGR/UPGR
     	Job logs:     /home/oracle/logs/autoupgrade-UPGR/UPGR/101
     	Stage logs:   /home/oracle/logs/autoupgrade-UPGR/UPGR/101/dbupgrade
     	TimeZone:     /home/oracle/logs/autoupgrade-UPGR/UPGR/temp
     	Remote Dirs:
-    
+
     Stages
     	SETUP            <1 min
     	PREUPGRADE       <1 min
@@ -409,22 +409,22 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     	POSTFIXUPS
     	POSTUPGRADE
     	SYSUPDATES
-    
+
     Stage-Progress Per Container
-    
+
     	+--------+---------+
     	|Database|DBUPGRADE|
     	+--------+---------+
     	|    UPGR|    0  % |
     	+--------+---------+
-    
+
     upg>
     ```
     </details>
 
     Notice the *Logfiles* section. This is the location of the relevant log files. Note the *Logs Base* location.
 
-5. Switch to the blue terminal. 
+5. Switch to the blue terminal.
    ![Use the blue terminal for the following commands](./images/blue-term.png " ")
 
 6. Go to the *Logs Base* location.
@@ -476,27 +476,27 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     <copy>
     status -job 101 -a 30
     </copy>
-    ```    
+    ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     Details
-    
+
     	Job No           101
     	Oracle SID       UPGR
     	Start Time       24/05/29 20:25:15
     	Elapsed (min):   5
     	End time:        N/A
-    
+
     Logfiles
-    
+
     	Logs Base:    /home/oracle/logs/autoupgrade-UPGR/UPGR
     	Job logs:     /home/oracle/logs/autoupgrade-UPGR/UPGR/101
     	Stage logs:   /home/oracle/logs/autoupgrade-UPGR/UPGR/101/dbupgrade
     	TimeZone:     /home/oracle/logs/autoupgrade-UPGR/UPGR/temp
     	Remote Dirs:
-    
+
     Stages
     	SETUP            <1 min
     	PREUPGRADE       <1 min
@@ -509,22 +509,22 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     	POSTFIXUPS
     	POSTUPGRADE
     	SYSUPDATES
-    
+
     Stage-Progress Per Container
-    
+
     	+--------+---------+
     	|Database|DBUPGRADE|
     	+--------+---------+
     	|    UPGR|    10 % |
     	+--------+---------+
-    
+
     The command status is running every 30 seconds. PRESS ENTER TO EXIT
     ```
     </details>
-    
+
 9. Wait until the upgrade completes. Depending on the hardware, the upgrade will take about 15-25 minutes. Don't exit from the AutoUpgrade console. Leave it running.
 
-11. Optionally, you can complete some of the other self-contained labs. 
+11. Optionally, you can complete some of the other self-contained labs.
 
 10. When the upgrade completes, AutoUpgrade prints a message saying *Job 101 completed* and exits from the AutoUpgrade console.
 

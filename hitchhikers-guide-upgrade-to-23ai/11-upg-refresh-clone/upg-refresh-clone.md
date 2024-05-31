@@ -34,8 +34,8 @@ Refreshable clone PDB works via a database link. You must create a user and gran
     export PATH=$ORACLE_HOME/bin:$PATH
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
 2. Create a user and grant the necessary privileges
@@ -48,8 +48,8 @@ Refreshable clone PDB works via a database link. You must create a user and gran
     grant create pluggable database to dblinkuser;
     grant read on sys.enc$ to dblinkuser;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     * You use the user to connect from the target CDB via a database link.
@@ -59,9 +59,9 @@ Refreshable clone PDB works via a database link. You must create a user and gran
     <summary>*click to see the output*</summary>
     ``` text
     SQL> create user dblinkuser identified by dblinkuser;
-        
+
     User created.
-    
+
     SQL> grant create session to dblinkuser;
 
     Grant succeeded.
@@ -73,9 +73,9 @@ Refreshable clone PDB works via a database link. You must create a user and gran
     SQL> grant create pluggable database dblinkuser;
 
     Grant succeeded.
-    
+
     SQL> grant read on sys.enc$ to dblinkuser;
-    
+
     Grant succeeded.
     ```
     </details>
@@ -97,16 +97,16 @@ Refreshable clone PDB works via a database link. You must create a user and gran
     export PATH=$ORACLE_HOME/bin:$PATH
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
 5. Create a database link pointing to the *FTEX* database.
 
     ```
     <copy>
-    create database link clonepdb 
-    connect to dblinkuser 
+    create database link clonepdb
+    connect to dblinkuser
     identified by dblinkuser
     using 'localhost/ftex';
     </copy>
@@ -119,7 +119,7 @@ Refreshable clone PDB works via a database link. You must create a user and gran
     connect to dblinkuser
     identified by dblinkuser
     using 'localhost/ftex';  2    3    4
-    
+
     Database link created.
     ```
     </details>
@@ -152,7 +152,7 @@ Refreshable clone PDB works via a database link. You must create a user and gran
 
 ## Task 2: Prepare for upgrade
 
-You check the source database for upgrade readiness and execute pre-upgrade fixups. 
+You check the source database for upgrade readiness and execute pre-upgrade fixups.
 
 1. For this lab, you will use a pre-created config file. Examine the pre-created config file.
 
@@ -164,10 +164,10 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
 
     * `sid` specifies the source non-CDB.
     * `target_cdb` is the CDB where you want to plug in.
-    * `source_db_link` is the name of the database link in the target CDB, plus the refresh rate. Here, it's set to 60 seconds which is too low for a realistic scenario, but suitable for demo purposes. 
-    * `target_pdb_name` renames the database from *FTEX* to *TEAL*. 
+    * `source_db_link` is the name of the database link in the target CDB, plus the refresh rate. Here, it's set to 60 seconds which is too low for a realistic scenario, but suitable for demo purposes.
+    * `target_pdb_name` renames the database from *FTEX* to *TEAL*.
     * `target_pdb_copy_option` instructs the CDB to use Oracle Managed Files (OMF).
-    * `start_time` is set to 15 minutes from starting AutoUpgrade. In a realistic scneario you would probably use an absolute time. 
+    * `start_time` is set to 15 minutes from starting AutoUpgrade. In a realistic scneario you would probably use an absolute time.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -200,7 +200,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
     </copy>
     ```
 
-    * The report states *Check passed and no manual intervention needed*. 
+    * The report states *Check passed and no manual intervention needed*.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -228,7 +228,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
     ```
     </details>
 
-4. Proceed with the pre-upgrade fixups. Normally, you would do this close to the final refresh (as dictated by `start_time` config file parameter). But in this lab we do it now. 
+4. Proceed with the pre-upgrade fixups. Normally, you would do this close to the final refresh (as dictated by `start_time` config file parameter). But in this lab we do it now.
 
     ```
     <copy>
@@ -236,7 +236,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
     </copy>
     ```
 
-5. Monitor the fixups.    
+5. Monitor the fixups.
 
     ```
     <copy>
@@ -248,14 +248,14 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
     <summary>*click to see the output*</summary>
     ``` text
     upg> lsj -a 10
-    upg> 
+    upg>
     +----+-------+---------+---------+-------+----------+-------+----------------------------+
     |Job#|DB_NAME|    STAGE|OPERATION| STATUS|START_TIME|UPDATED|                     MESSAGE|
     +----+-------+---------+---------+-------+----------+-------+----------------------------+
     | 101|   FTEX|PRECHECKS|EXECUTING|RUNNING|  07:53:37| 3s ago|Loading database information|
     +----+-------+---------+---------+-------+----------+-------+----------------------------+
     Total jobs 1
-    
+
     The command lsj is running every 10 seconds. PRESS ENTER TO EXIT
     ```
     </details>
@@ -268,10 +268,10 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
     Job 101 completed
     ------------------- Final Summary --------------------
     Number of databases            [ 1 ]
-    
+
     Jobs finished                  [1]
     Jobs failed                    [0]
-    
+
     Please check the summary report at:
     /home/oracle/logs/ftex-refresh/cfgtoollogs/upgrade/auto/status/status.html
     /home/oracle/logs/ftex-refresh/cfgtoollogs/upgrade/auto/status/status.log
@@ -282,7 +282,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
 
 You build the refreshable clone with AutoUpgrade. It creates the PDB and starts the periodic refresh.
 
-1. Start AutoUpgrade in *deploy* mode. 
+1. Start AutoUpgrade in *deploy* mode.
 
     ```
     <copy>
@@ -304,16 +304,16 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
     ```
     </details>
 
-2. Monitor the creation. AutoUpgrade creates the PDB and copies the data files in the phase *CLONEPDB*. The database is small so it completes fairly quick. Hit *RETURN* to bring the console forward and use the `lsj` command. 
+2. Monitor the creation. AutoUpgrade creates the PDB and copies the data files in the phase *CLONEPDB*. The database is small so it completes fairly quick. Hit *RETURN* to bring the console forward and use the `lsj` command.
 
     ```
     <copy>
-     
+
     lsj -a 10
     </copy>
     ```
 
-AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you will enter some data to the *FTEX* database. This allows you to verify that changes made after the initial copy of data files still exist in the PDB after the migration. 
+AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you will enter some data to the *FTEX* database. This allows you to verify that changes made after the initial copy of data files still exist in the PDB after the migration.
 
 3. Do not exit AutoUpgrade. Use a second terminal and set the environment to the *FTEX* database.
 
@@ -340,18 +340,18 @@ AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you wi
     <summary>*click to see the output*</summary>
     ``` text
     SQL> create user sales identified by oracle default tablespace users;
-    
+
     User created.
-    
+
     SQL> grant dba to sales;
-    
+
     Grant succeeded.
-    
+
     SQL> create table sales.orders as select * from all_objects;
-    
-    Table created.    
+
+    Table created.
     ```
-    </details>    
+    </details>
 
 5. Exit SQL*Plus.
 
@@ -372,11 +372,11 @@ AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you wi
     | 102|   FTEX|REFRESHPDB|EXECUTING|RUNNING|  07:57:29| 2s ago|Starts in 2 minutes|
     +----+-------+----------+---------+-------+----------+-------+-------------------+
     Total jobs 1
-    
-    The command lsj is running every 10 seconds. PRESS ENTER TO EXIT 
+
+    The command lsj is running every 10 seconds. PRESS ENTER TO EXIT
     ```
-    </details>  
-            
+    </details>
+
 8. Switch to the second terminal. Examine the alert log of *CDB23*, the target CDB, and see the creation of the refreshable clone PDB.
 
     ```
@@ -384,11 +384,11 @@ AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you wi
     cd /u01/app/oracle/diag/rdbms/cdb23/CDB23/trace
     grep -i -B2 "create pluggable database \"TEAL\"" alert_CDB23.log
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
-    * Notice how AutoUpgrade used the `CREATE PLUGGABLE DATABASE` statement. 
+    * Notice how AutoUpgrade used the `CREATE PLUGGABLE DATABASE` statement.
     * The `@CLONEPDB` keyword specifies the use of remote cloning via the database link *CLONEPDB*.
     * The `REFRESH` keyword specifies the use of refreshable clone PDB.
 
@@ -402,10 +402,10 @@ AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you wi
     2024-05-27T07:42:47.488916+00:00
     TEAL(5):.... (PID:561068): Media Recovery Complete [dbsdrv.c:15613]
     Completed: create pluggable database "TEAL"  FROM FTEX@CLONEPDB   file_name_convert=none  tempfile reuse  REFRESH MODE MANUAL
-        
+
     (output varies)
     ```
-    </details>  
+    </details>
 
 9. Further, let's see the period refresh.
 
@@ -439,12 +439,12 @@ AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you wi
     2024-05-27T07:57:35.993221+00:00
     ALTER PLUGGABLE DATABASE TEAL REFRESH MODE NONE
     Completed: ALTER PLUGGABLE DATABASE TEAL REFRESH MODE NONE
-        
+
     (output varies)
     ```
-    </details>  
+    </details>
 
-10. Close the second terminal and return to the first terminal. Do not close the terminal in which AutoUpgrade is running.   
+10. Close the second terminal and return to the first terminal. Do not close the terminal in which AutoUpgrade is running.
 
     ```
     <copy>
@@ -456,16 +456,16 @@ AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you wi
 
 When the *REFRESHPDB* phase is over, AutoUpgrade executes a final refresh to bring over the latest changes. Then, it disconnects the PDB from the non-CDB and starts the upgrade and conversion to PDB.
 
-1. At this time, AutoUpgrade should have moved past the *REFRESHPDB* stage. In the first terminal, check the output of the `lsj` command running in the AutoUpgrade console. 
+1. At this time, AutoUpgrade should have moved past the *REFRESHPDB* stage. In the first terminal, check the output of the `lsj` command running in the AutoUpgrade console.
 
     * AutoUpgrade moves through the next phases. The two main ones are *DBUPGRADE* which performs the upgrade to Oracle Database 23ai. The other one is *NONCDBTOPDB* which transforms the database into a proper PDB.
 
-2. Optionally, while waiting for the job to complete, use some of the other commands in the console. 
+2. Optionally, while waiting for the job to complete, use some of the other commands in the console.
 
     * `status -jobid 102 -a 10`: Gives you even more details about the current job.
     * `help`: Show other commands available in the AutoUpgrade console.
 
-3. Wait for AutoUpgrade to complete the migration. When the job completes, AutoUpgrade prints *Job 102 completed*. 
+3. Wait for AutoUpgrade to complete the migration. When the job completes, AutoUpgrade prints *Job 102 completed*.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -473,19 +473,19 @@ When the *REFRESHPDB* phase is over, AutoUpgrade executes a final refresh to bri
     Job 102 completed
     ------------------- Final Summary --------------------
     Number of databases            [ 1 ]
-    
+
     Jobs finished                  [1]
     Jobs failed                    [0]
     Jobs restored                  [0]
     Jobs pending                   [0]
-    
-    
-    
+
+
+
     Please check the summary report at:
     /home/oracle/logs/ftex-refresh/cfgtoollogs/upgrade/auto/status/status.html
     /home/oracle/logs/ftex-refresh/cfgtoollogs/upgrade/auto/status/status.log
     ```
-    </details>  
+    </details>
 
 4. Set the environment to the *CDB23* database and connect.
 
@@ -505,26 +505,26 @@ When the *REFRESHPDB* phase is over, AutoUpgrade executes a final refresh to bri
     alter session set container=TEAL;
     select count(*) from sales.orders;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
-    
+
     * If the query completes without errors, it means the table is present. This proves that changes made after the initial copy of data files are still in the PDB after the migration.
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     SQL> alter session set container=TEAL;
-    
+
     Session altered.
-    
+
     SQL> select count(*) from sales.orders;
-    
+
       COUNT(*)
     ----------
          22757
     ```
-    </details>      
+    </details>
 
 6. Exit SQL*Plus.
 
@@ -561,7 +561,7 @@ AutoUpgrade stops the source non-CDB immediately after the final refresh. This e
     <summary>*click to see the output*</summary>
     ``` text
     ORACLE instance started.
-    
+
     Total System Global Area 1157627144 bytes
     Fixed Size		    8924424 bytes
     Variable Size		  369098752 bytes
@@ -570,7 +570,7 @@ AutoUpgrade stops the source non-CDB immediately after the final refresh. This e
     Database mounted.
     Database opened.
     ```
-    </details>  
+    </details>
 
 3. Exit SQL*Plus.
 
@@ -590,7 +590,7 @@ You may now *proceed to the next lab*.
 
 ## Learn More
 
-Refreshable clone PDB is a good technique for multitenant migration. It leaves the source non-CDB intact for rollback. It also builds a copy of the non-CDB in advance which minimizes the downtime window. But you need additional disk space to hold a copy of the data files. 
+Refreshable clone PDB is a good technique for multitenant migration. It leaves the source non-CDB intact for rollback. It also builds a copy of the non-CDB in advance which minimizes the downtime window. But you need additional disk space to hold a copy of the data files.
 
 You can even use refreshable clone PDB for databases that are already a PDB. Very useful for unplug-plug upgrades.
 

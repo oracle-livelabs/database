@@ -23,7 +23,7 @@ None.
 
 This lab is independent and self-contained. You can execute it at any time and in any order.
 
-## Task 1: Data Pump export 
+## Task 1: Data Pump export
 
 You need to prepare a few things before you can start a Data Pump export.
 
@@ -42,8 +42,8 @@ You need to prepare a few things before you can start a Data Pump export.
     . ftex
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
 3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary stats before starting a Data Pump export job.
@@ -58,16 +58,16 @@ You need to prepare a few things before you can start a Data Pump export.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> exec dbms_stats.gather_dictionary_stats;
-    
+
     PL/SQL procedure successfully completed.
     ```
     </details>
 
-4. Create a database directory object. It must point to the directory in the operating system that you just created.   
+4. Create a database directory object. It must point to the directory in the operating system that you just created.
 
     ```
     <copy>
-    create directory dmpdir as '/home/oracle/logs/migrate-using-data-pump';    
+    create directory dmpdir as '/home/oracle/logs/migrate-using-data-pump';
     </copy>
     ```
 
@@ -75,12 +75,12 @@ You need to prepare a few things before you can start a Data Pump export.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> create directory dmpdir as '/home/oracle/logs/migrate-using-data-pump';
-    
+
     Directory created.
     ```
     </details>
 
-5. Create a dedicated user that you can use for the Data Pump export job. 
+5. Create a dedicated user that you can use for the Data Pump export job.
 
     ```
     <copy>
@@ -89,40 +89,40 @@ You need to prepare a few things before you can start a Data Pump export.
     grant read, write on directory dmpdir to expuser;
     alter user expuser quota unlimited on users;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     SQL> create user expuser identified by expuser default tablespace users;
-    
+
     User created.
-    
+
     SQL> grant exp_full_database to expuser;
-    
+
     Grant succeeded.
-    
+
     SQL> grant read, write on directory dmpdir to expuser;
-    
+
     Grant succeeded.
-    
+
     SQL> alter user expuser quota unlimited on users;
-    
+
     User altered.
     ```
     </details>
 
 6. Exit SQL*Plus.
-    
+
     ```
     <copy>
     exit
     </copy>
     ```
 
-7. Examine the precreated Data Pump parameter file. 
+7. Examine the precreated Data Pump parameter file.
 
     ```
     <copy>
@@ -152,7 +152,7 @@ You need to prepare a few things before you can start a Data Pump export.
     ```
     </details>
 
-8. Start the Data Pump export. Connect as the dedicated export user, *expuser*, that you just created. 
+8. Start the Data Pump export. Connect as the dedicated export user, *expuser*, that you just created.
 
     ```
     <copy>
@@ -165,9 +165,9 @@ You need to prepare a few things before you can start a Data Pump export.
     ``` text
     Export: Release 19.0.0.0.0 - Production on Tue May 28 03:23:45 2024
     Version 19.21.0.0.0
-    
+
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
-    
+
     Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
     28-MAY-24 03:23:48.178: Starting "EXPUSER"."SYS_EXPORT_FULL_01":  expuser/******** parfile=/home/oracle/scripts/migrate-using-data-pump-exp.par
     28-MAY-24 03:23:48.554: W-1 Startup took 0 seconds
@@ -313,8 +313,8 @@ You create a new, empty PDB in Oracle Database 23ai and import directly into it.
     . cdb23
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
 3. Create a new PDB called *PURPLE* and open it.
@@ -325,8 +325,8 @@ You create a new, empty PDB in Oracle Database 23ai and import directly into it.
     alter pluggable database purple open;
     alter pluggable database purple save state;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -339,10 +339,10 @@ You create a new, empty PDB in Oracle Database 23ai and import directly into it.
     SQL> alter pluggable database purple open;
 
     Pluggable database altered.
-    
+
     SQL>alter pluggable database purple save state;
 
-    Pluggable database altered.    
+    Pluggable database altered.
     ```
     </details>
 
@@ -353,8 +353,8 @@ You create a new, empty PDB in Oracle Database 23ai and import directly into it.
     alter session set container=purple;
     create tablespace users datafile size 100m autoextend on next 100m maxsize 32767m;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -363,7 +363,7 @@ You create a new, empty PDB in Oracle Database 23ai and import directly into it.
     SQL> alter session set container=purple;
 
     Session altered.
-    
+
     SQL> create tablespace users datafile size 100m autoextend on next 100m maxsize 32767m;
 
     Tablespace created.
@@ -390,7 +390,7 @@ You need a few more changes to the new PDB before you can start the import.
     Directory created.
     ```
     </details>
-    
+
 2. Create a dedicated user for the Data Pump import.
 
     ```
@@ -400,8 +400,8 @@ You need a few more changes to the new PDB before you can start the import.
     grant read, write on directory dmpdir to impuser;
     alter user impuser quota unlimited on users;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -410,15 +410,15 @@ You need a few more changes to the new PDB before you can start the import.
     SQL> create user impuser identified by impuser default tablespace users;
 
     User created.
-    
+
     SQL> grant imp_full_database to impuser;
 
     Grant succeeded.
-    
+
     SQL> grant read, write on directory dmpdir to impuser;
 
     Grant succeeded.
-    
+
     SQL> alter user impuser quota unlimited on users;
 
     User altered.
@@ -426,7 +426,7 @@ You need a few more changes to the new PDB before you can start the import.
     </details>
 
 6. Exit SQL*Plus.
-    
+
     ```
     <copy>
     exit
@@ -444,7 +444,7 @@ You need a few more changes to the new PDB before you can start the import.
     * `parallel` is higher in the import. Export and import parallel settings are independent of each other. Typically, the target system is more powerful than the source system. In such a case, you can use more parallel processes to complete the import faster.
     * `metrics` and `logtime` puts additional diagnostic information into the Data Pump log file.
     * `exclude=tablespace` skips creation of tablespaces during import. We already have all tablespaces in the target PDB. Normally, pay attention when importing tablespace defintions. The data file use the same definition, including file path, as on the source database. This may lead to undesired situations.
-    * `transform=lob_storage:securefile` ensures that Data Pump converts any old BasicFile LOBs to modern SecureFile LOBs during import. 
+    * `transform=lob_storage:securefile` ensures that Data Pump converts any old BasicFile LOBs to modern SecureFile LOBs during import.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -473,9 +473,9 @@ You need a few more changes to the new PDB before you can start the import.
     ``` text
     Import: Release 23.0.0.0.0 - Production on Tue May 28 03:26:43 2024
     Version 23.4.0.24.05
-    
+
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
-    
+
     Connected to: Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
     28-MAY-24 03:26:47.767: W-1 Startup on instance 1 took 0 seconds
     28-MAY-24 03:26:48.982: W-1 Master table "IMPUSER"."SYS_IMPORT_FULL_01" successfully loaded/unloaded
@@ -525,7 +525,7 @@ You need a few more changes to the new PDB before you can start the import.
     28-MAY-24 03:26:50.338: W-1 Processing object type DATABASE_EXPORT/GRANT/SYSTEM_GRANT/PROC_SYSTEM_GRANT/RMGR
     28-MAY-24 03:26:50.353: ORA-39083: Object type RMGR:PROC_SYSTEM_GRANT failed to create with error:
     ORA-29393: user EM_EXPRESS_ALL does not exist or is not logged on
-    
+
     28-MAY-24 03:26:50.358: W-1      Completed 1 RMGR objects in 0 seconds
     28-MAY-24 03:26:50.360: W-1 Processing object type DATABASE_EXPORT/GRANT/SYSTEM_GRANT/PROC_SYSTEM_GRANT/SQL
     28-MAY-24 03:26:50.374: W-1      Completed 1 SQL objects in 0 seconds
@@ -534,181 +534,181 @@ You need a few more changes to the new PDB before you can start the import.
     28-MAY-24 03:26:50.387: W-1 Processing object type DATABASE_EXPORT/SCHEMA/GRANT/SYSTEM_GRANT
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'DATAPATCH_ROLE' does not exist
-    
+
     Failing sql is:
     GRANT ALTER SESSION TO "DATAPATCH_ROLE"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_BASIC' does not exist
-    
+
     Failing sql is:
     GRANT CREATE SESSION TO "EM_EXPRESS_BASIC"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-00990: missing or invalid privilege
-    
+
     Failing sql is:
     GRANT EM EXPRESS CONNECT TO "EM_EXPRESS_BASIC"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ADVISOR TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT CREATE JOB TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ADMINISTER SQL TUNING SET TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ADMINISTER ANY SQL TUNING SET TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ADMINISTER SQL MANAGEMENT OBJECT TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ALTER SYSTEM TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT CREATE TABLESPACE TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT DROP TABLESPACE TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ALTER TABLESPACE TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT GRANT ANY OBJECT PRIVILEGE TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT GRANT ANY PRIVILEGE TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT GRANT ANY ROLE TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT CREATE ROLE TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT DROP ANY ROLE TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ALTER ANY ROLE TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT CREATE USER TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT DROP USER TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ALTER USER TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT CREATE PROFILE TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ALTER PROFILE TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT DROP PROFILE TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT SET CONTAINER TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.505: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT CREATE CREDENTIAL TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.514: W-1      Completed 74 SYSTEM_GRANT objects in 0 seconds
     28-MAY-24 03:26:50.514: W-1      Completed by worker 1 74 SYSTEM_GRANT objects in 0 seconds
     28-MAY-24 03:26:50.522: W-1 Processing object type DATABASE_EXPORT/SCHEMA/ROLE_GRANT
     28-MAY-24 03:26:50.625: ORA-39083: Object type ROLE_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_BASIC' does not exist
-    
+
     Failing sql is:
      GRANT "SELECT_CATALOG_ROLE" TO "EM_EXPRESS_BASIC"
-    
+
     28-MAY-24 03:26:50.625: ORA-39083: Object type ROLE_GRANT failed to create with error:
     ORA-01919: Role 'EM_EXPRESS_ALL' does not exist.
-    
+
     Failing sql is:
      GRANT "EM_EXPRESS_ALL" TO "DBA"
-    
+
     28-MAY-24 03:26:50.625: ORA-39083: Object type ROLE_GRANT failed to create with error:
     ORA-01919: Role 'EM_EXPRESS_BASIC' does not exist.
-    
+
     Failing sql is:
      GRANT "EM_EXPRESS_BASIC" TO "EM_EXPRESS_ALL"
-    
+
     28-MAY-24 03:26:50.632: W-1      Completed 41 ROLE_GRANT objects in 0 seconds
     28-MAY-24 03:26:50.632: W-1      Completed by worker 1 41 ROLE_GRANT objects in 0 seconds
     28-MAY-24 03:26:50.634: W-1 Processing object type DATABASE_EXPORT/SCHEMA/DEFAULT_ROLE
@@ -718,17 +718,17 @@ You need a few more changes to the new PDB before you can start the import.
     28-MAY-24 03:26:50.716: ORA-39083: Object type ON_USER_GRANT failed to create with error:
     ORA-31625: Schema AUDSYS is needed to import this object, but is unaccessible
     ORA-01031: insufficient privileges
-    
+
     Failing sql is:
      GRANT INHERIT PRIVILEGES ON USER "AUDSYS" TO "PUBLIC"
-    
+
     28-MAY-24 03:26:50.716: ORA-39083: Object type ON_USER_GRANT failed to create with error:
     ORA-31625: Schema ORACLE_OCM is needed to import this object, but is unaccessible
     ORA-01435: user does not exist
-    
+
     Failing sql is:
      GRANT INHERIT PRIVILEGES ON USER "ORACLE_OCM" TO "PUBLIC"
-    
+
     28-MAY-24 03:26:50.723: W-1      Completed 18 ON_USER_GRANT objects in 0 seconds
     28-MAY-24 03:26:50.723: W-1      Completed by worker 1 18 ON_USER_GRANT objects in 0 seconds
     28-MAY-24 03:26:50.725: W-1 Processing object type DATABASE_EXPORT/SCHEMA/TABLESPACE_QUOTA
@@ -742,7 +742,7 @@ You need a few more changes to the new PDB before you can start the import.
     28-MAY-24 03:26:50.833: W-1      Completed by worker 1 1 TRUSTED_DB_LINK objects in 0 seconds
     28-MAY-24 03:26:50.835: W-1 Processing object type DATABASE_EXPORT/DIRECTORY/DIRECTORY
     28-MAY-24 03:26:50.862: ORA-31684: Object type DIRECTORY:"DMPDIR" already exists
-    
+
     28-MAY-24 03:26:50.868: W-1      Completed 2 DIRECTORY objects in 0 seconds
     28-MAY-24 03:26:50.868: W-1      Completed by worker 1 2 DIRECTORY objects in 0 seconds
     28-MAY-24 03:26:50.870: W-1 Processing object type DATABASE_EXPORT/DIRECTORY/GRANT/OWNER_GRANT/OBJECT_GRANT
@@ -916,11 +916,11 @@ You need a few more changes to the new PDB before you can start the import.
     . cdb23
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
-7. Switch to the *PURPLE* PDB and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import. 
+7. Switch to the *PURPLE* PDB and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import.
 
     ```
     <copy>
@@ -935,9 +935,9 @@ You need a few more changes to the new PDB before you can start the import.
     SQL> alter session set container=maroon;
 
     Session altered.
-    
+
     SQL> exec dbms_stats.gather_dictionary_stats;
-    
+
     PL/SQL procedure successfully completed.
     ```
     </details>
@@ -950,13 +950,13 @@ You need a few more changes to the new PDB before you can start the import.
     </copy>
     ```
 
-    * You could also transfer the old statistics from the source database using `DBMS_STATS`. 
+    * You could also transfer the old statistics from the source database using `DBMS_STATS`.
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     SQL> exec dbms_stats.gather_database_stats;
-    
+
     PL/SQL procedure successfully completed.
     ```
     </details>
@@ -975,7 +975,7 @@ You need a few more changes to the new PDB before you can start the import.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> select object_type, count(*) from all_objects where owner='F1' group by object_type;
-    
+
     OBJECT_TYPE               COUNT(*)
     ----------------------- ----------
     TABLE                           14
@@ -988,18 +988,18 @@ You need a few more changes to the new PDB before you can start the import.
     ```
     <copy>
     select ra.name || ' ' || ra.year as race
-    from f1.f1_races ra, 
-         f1.f1_results re, 
-         f1.f1_drivers d 
-    where d.forename='Kevin' 
+    from f1.f1_races ra,
+         f1.f1_results re,
+         f1.f1_drivers d
+    where d.forename='Kevin'
         and d.surname='Magnussen'
-        and re.position=2 
-        and d.driverid=re.driverid 
+        and re.position=2
+        and d.driverid=re.driverid
         and ra.raceid=re.raceid;
     </copy>
     ```
 
-    * *Kevin Magnussen* got on podium as runner-up in Australia 2014 - his first F1 appearance. 
+    * *Kevin Magnussen* got on podium as runner-up in Australia 2014 - his first F1 appearance.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -1013,7 +1013,7 @@ You need a few more changes to the new PDB before you can start the import.
         and re.position=2
         and d.driverid=re.driverid
         and ra.raceid=re.raceid;  2    3    4    5    6    7    8    9
-    
+
     RACE
     --------------------------------------------------------------------------------
     Australian Grand Prix 2014
@@ -1026,9 +1026,9 @@ You may now *proceed to the next lab*.
 
 ## Learn More
 
-Data Pump is a very versatile utility. It allows you to import data into a higher release database and even from a non-CDB into a PDB. While doing so, you can use the powerful transformation options to customize the target database to fit your exact needs. 
+Data Pump is a very versatile utility. It allows you to import data into a higher release database and even from a non-CDB into a PDB. While doing so, you can use the powerful transformation options to customize the target database to fit your exact needs.
 
-You can avoid an in-place upgrade and PDB conversion by using Data Pump. The source database is left untouched in case a rollback is needed. 
+You can avoid an in-place upgrade and PDB conversion by using Data Pump. The source database is left untouched in case a rollback is needed.
 
 * Documentation, [Oracle Data Pump Export Modes](https://docs.oracle.com/en/database/oracle/oracle-database/23/sutil/oracle-data-pump-export-utility.html#GUID-8E497131-6B9B-4CC8-AA50-35F480CAC2C4)
 * Webinar, [Data Pump Best Practices and Real World Scenarios](https://www.youtube.com/watch?v=960ToLE-ZE8)

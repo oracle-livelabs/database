@@ -32,8 +32,8 @@ You start by checking the *CDB19* database.
     export PATH=$ORACLE_HOME/bin:$PATH
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
 2. Get a list of PDBs.
@@ -52,7 +52,7 @@ You start by checking the *CDB19* database.
     CON_ID     CON_NAME           OPEN MODE  RESTRICTED
     ---------- ------------------ ---------- ----------
              2 PDB$SEED           READ ONLY  NO
-             4 ORANGE             READ WRITE NO    
+             4 ORANGE             READ WRITE NO
      ```
     </details>
 
@@ -71,8 +71,8 @@ You start by checking the *CDB19* database.
     cat /home/oracle/scripts/cdb19.cfg
     </copy>
     ```
- 
-    * `restoration=yes` ensures that AutoUpgrade creates a guaranteed restore point that you can use later on to roll back to. The default value is *yes* but it is shown here for clarity. 
+
+    * `restoration=yes` ensures that AutoUpgrade creates a guaranteed restore point that you can use later on to roll back to. The default value is *yes* but it is shown here for clarity.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -110,10 +110,10 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     upg> Job 100 completed
     ------------------- Final Summary --------------------
     Number of databases            [ 1 ]
-    
+
     Jobs finished                  [1]
     Jobs failed                    [0]
-    
+
     Please check the summary report at:
     /home/oracle/logs/upg-cdb-flashback/cfgtoollogs/upgrade/auto/status/status.html
     /home/oracle/logs/upg-cdb-flashback/cfgtoollogs/upgrade/auto/status/status.log
@@ -153,12 +153,12 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     ------------------------------------------
     ```
     </details>
-    
-    * The report states: *Check passed and no manual intervention needed*. AutoUpgrade found no severe issues that it couldn't fix automatically. 
+
+    * The report states: *Check passed and no manual intervention needed*. AutoUpgrade found no severe issues that it couldn't fix automatically.
 
 ## Task 3: Upgrade your database
 
-You determined that the database is ready to upgrade. Start AutoUpgrade in *deploy* mode. One command is all it takes to perform the upgrade - including all pre- and post-upgrade tasks. 
+You determined that the database is ready to upgrade. Start AutoUpgrade in *deploy* mode. One command is all it takes to perform the upgrade - including all pre- and post-upgrade tasks.
 
 1. Start AutoUpgrade in *deploy* mode to perform the upgrade. Notice you are re-using the same command, but this time `-mode` is set to `deploy`.
 
@@ -199,13 +199,13 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     | 101|  CDB19|DRAIN|EXECUTING|RUNNING|  12:51:56|38s ago|Shutting down database|
     +----+-------+-----+---------+-------+----------+-------+----------------------+
     Total jobs 1
-    
+
     The command lsj is running every 30 seconds. PRESS ENTER TO EXIT
 
     (output varies)
     ```
     </details>
-      
+
 3. Wait until the upgrade completes. Depending on the hardware, the upgrade will take about 25-35 minutes. Don't exit from the AutoUpgrade console. Leave it running.
 
 4. Optionally, you do another lab while the upgrade completes.
@@ -218,16 +218,16 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     Job 101 completed
     ------------------- Final Summary --------------------
     Number of databases            [ 1 ]
-    
+
     Jobs finished                  [1]
     Jobs failed                    [0]
     Jobs restored                  [0]
     Jobs pending                   [0]
-    
+
     ---- Drop GRP at your convenience once you consider it is no longer needed ----
     Drop GRP from CDB19: drop restore point AUTOUPGRADE_9212_CDB191921000
-    
-    
+
+
     Please check the summary report at:
     /home/oracle/logs/upg-cdb-flashback/cfgtoollogs/upgrade/auto/status/status.html
     /home/oracle/logs/upg-cdb-flashback/cfgtoollogs/upgrade/auto/status/status.log
@@ -247,11 +247,11 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     export PATH=$ORACLE_HOME/bin:$PATH
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
-2. Verify that the database is on Oracle Database 23ai. 
+2. Verify that the database is on Oracle Database 23ai.
 
     ```
     <copy>
@@ -264,7 +264,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     ``` text
     VERSION
     _____________
-    23.0.0.0.0    
+    23.0.0.0.0
     ```
     </details>
 
@@ -276,7 +276,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     </copy>
     ```
 
-4. Get the database back to the starting point; the guaranteed restore point that AutoUpgrade automatically created before the upgrade. 
+4. Get the database back to the starting point; the guaranteed restore point that AutoUpgrade automatically created before the upgrade.
 
     ```
     <copy>
@@ -284,8 +284,8 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     </copy>
     ```
 
-    * You start the restoration based on the *job ID*. 
-    * Job *101* was the job that upgraded the database. 
+    * You start the restoration based on the *job ID*.
+    * Job *101* was the job that upgraded the database.
     * If you had multiple jobs to restore, you can supply a comma-separated list.
 
     <details>
@@ -299,7 +299,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     ```
     </details>
 
-5. After a short while the restoration completes. It usually takes only a few minutes. AutoUpgrade uses Flashback Database which is a very effective mean of restoring the database. Then, it needs to open the database with `RESETLOGS` which can take a short while if the redo log members are big. 
+5. After a short while the restoration completes. It usually takes only a few minutes. AutoUpgrade uses Flashback Database which is a very effective mean of restoring the database. Then, it needs to open the database with `RESETLOGS` which can take a short while if the redo log members are big.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -307,12 +307,12 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     Job 101 completed
     ------------------- Final Summary --------------------
     Number of databases            [ 1 ]
-    
+
     Jobs restored                  [1]
     Jobs failed                    [0]
     -------------------- JOBS PENDING --------------------
     Job 101 for CDB19
-    
+
     Please check the summary report at:
     /home/oracle/logs/upg-cdb-flashback/cfgtoollogs/upgrade/auto/status/status.html
     /home/oracle/logs/upg-cdb-flashback/cfgtoollogs/upgrade/auto/status/status.log
@@ -329,11 +329,11 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     export PATH=$ORACLE_HOME/bin:$PATH
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
-7. Verify that the database is running on Oracle Database 19c. 
+7. Verify that the database is running on Oracle Database 19c.
 
     ```
     <copy>
@@ -358,7 +358,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     </copy>
     ```
 
-9. AutoUpgrade also updated the *oratab* registration. 
+9. AutoUpgrade also updated the *oratab* registration.
 
     ```
     <copy>
@@ -384,7 +384,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     </copy>
     ```
 
-    * AutoUpgrade also moves other configuration files like network files (`sqlnet.ora`, `tnsnames.ora`). 
+    * AutoUpgrade also moves other configuration files like network files (`sqlnet.ora`, `tnsnames.ora`).
 
     <details>
     <summary>*click to see the output*</summary>

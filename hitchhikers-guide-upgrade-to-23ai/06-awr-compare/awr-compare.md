@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will run the same workload that you ran before the upgrade. Then you can compare the performance of the database - before and after upgrade - by creating AWR diff reports. 
+In this lab, you will run the same workload that you ran before the upgrade. Then you can compare the performance of the database - before and after upgrade - by creating AWR diff reports.
 
 Those reports give you a first indication of issues you may see (or performance improvements). It is important to compare periods that have roughly the same load and duration.
 
@@ -23,7 +23,7 @@ This lab assumes:
 
 ## Task 1: Generate load
 
-Use HammerDB to create a workload. 
+Use HammerDB to create a workload.
 
 1. Use the yellow terminal. Set the environment to the *CDB23* database. Now, since you upgraded the database and plugged in the database, the environment needs to be set to the CDB.
 
@@ -33,11 +33,11 @@ Use HammerDB to create a workload.
       sqlplus / as sysdba
       alter session set container=UPGR;
       </copy>
-       
-      Be sure to hit RETURN
+
+      -- Be sure to hit RETURN
       ```
 
-2. Create an AWR snapshot. Take note of the snapshot ID (e.g., 130). You need it later on. 
+2. Create an AWR snapshot. Take note of the snapshot ID (e.g., 130). You need it later on.
 
 	```
     <copy>
@@ -62,7 +62,7 @@ Use HammerDB to create a workload.
 
 5. In the benchmark list, expand *Oracle* / *TPROC-C*
 
-    ![Open the Driver Script setup with a Click](./images/awr-compare-expand-list.png " ")   
+    ![Open the Driver Script setup with a Click](./images/awr-compare-expand-list.png " ")
 
 6. Expand *Driver Script*.
 
@@ -75,10 +75,10 @@ Use HammerDB to create a workload.
 8. This populates the *Script Editor* tab with the driver script. Ignore any error messages.
 
 9. Click *Run* in the list. Start the load by clicking on the Run icon.
-    
+
     ![Start the TPC-C Load by clicking on the Run icon](./images/awr-compare-run.png " ")
 
-10. Click on the Graph / Transaction Counter icon in the top menu icon bar. 
+10. Click on the Graph / Transaction Counter icon in the top menu icon bar.
     ![Click on the Graph Transaction Counter icon](./images/awr-compare-transact-counter.png " ")
 
 11. It will take a few seconds; then you will see the performance charts and the transactions-per-minute (tpm). The load run usually takes 2-3 minutes to complete.
@@ -86,7 +86,7 @@ Use HammerDB to create a workload.
 
 12. Exit HammerDB.
 
-13. Create another AWR snapshot. Take note of the snapshot ID (e.g., 131). You need it later on. 
+13. Create another AWR snapshot. Take note of the snapshot ID (e.g., 131). You need it later on.
 
     ```
     <copy>
@@ -143,9 +143,9 @@ In the AWR Diff Report, you will compare a snapshot period **before** upgrade to
 	```
 	![AWR Diff Report](./images/awr-compare-diff-report.png " ")
 
-10. Examine the AWR diff report. 
-   * Compare items such as Wait Events etc. Watch out for significant divergence between the two runs, for instance, the different redo sizes per run. 
-   * Browse through the SQL statistics and see if you find remarkable differences between the two runs. 
+10. Examine the AWR diff report.
+   * Compare items such as Wait Events etc. Watch out for significant divergence between the two runs, for instance, the different redo sizes per run.
+   * Browse through the SQL statistics and see if you find remarkable differences between the two runs.
    * Overall, you will not see any significant differences. The purpose of this lab exercise is to recognize and remember how easily AWR Diff Reports can be generated when you have comparable workloads.
 
 You may now *proceed to the next lab*.

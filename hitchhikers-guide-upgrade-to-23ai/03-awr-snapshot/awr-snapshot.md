@@ -41,7 +41,7 @@ You must start the UPGR database and create the first AWR snapshot.
     @/home/oracle/scripts/awr-snapshot-snap-before.sql
     </copy>
     ```
-    
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -63,7 +63,7 @@ You must start the UPGR database and create the first AWR snapshot.
 
 1. In the benchmark list, expand *Oracle* / *TPROC-C*
 
-    ![Open the Driver Script setup with a Click](./images/awr-snapshot-expand-list.png " ")   
+    ![Open the Driver Script setup with a Click](./images/awr-snapshot-expand-list.png " ")
 
 2. Expand *Driver Script*.
 
@@ -104,15 +104,15 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
     Now polling the cursor cache for 180 seconds every 10 seconds ...
     You get control back in 180 seconds.
-    Do not press CTRL+C    
+    Do not press CTRL+C
     ```
     </details>
 
 2. Click *Run* in the list. Start the load by clicking on the Run icon.
-    
+
     ![Start the TPC-C Load by clicking on the Run icon](./images/awr-snapshot-start-load.png " ")
 
-3. Click on the Graph / Transaction Counter icon in the top menu icon bar. 
+3. Click on the Graph / Transaction Counter icon in the top menu icon bar.
     ![Click on the Graph Transaction Counter icon](./images/awr-snapshot-transact-counter.png " ")
 
 4. It will take a few seconds; then you will see the performance charts and the transactions-per-minute (tpm). The load run usually takes 2-3 minutes to complete.
@@ -146,7 +146,7 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
 ## Task 4: Generate another AWR snapshot
 
-1. Back in the terminal, create another AWR snapshot. Take note of the snapshot ID (e.g.: 117). You need it later on. 
+1. Back in the terminal, create another AWR snapshot. Take note of the snapshot ID (e.g.: 117). You need it later on.
 
     ```
     <copy>
@@ -233,7 +233,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     The default database id is the local one: '  72245725'.  To use this
     database id, press <return> to continue, otherwise enter an alternative.
 
-    Enter value for dbid: 
+    Enter value for dbid:
 
     Using	72245725 for Database ID
 
@@ -279,7 +279,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     --------------------- --------------------------------------------
     DATA1                                            /home/oracle/data
     DATA_PUMP_DIR                   /u01/app/oracle/admin/UPGR/dpdump/
-    
+
     Choose a Directory Name from the above list (case-sensitive).
 
     Enter value for directory_name: DATA_PUMP_DIR
@@ -292,7 +292,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     To use this name, press <return> to continue, otherwise enter
     an alternative.
 
-    Enter value for file_name: 
+    Enter value for file_name:
 
     Using the dump file prefix: awrdat_111_120
     |
@@ -354,7 +354,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     <summary>*click to see the output*</summary>
     ``` text
     $     cat /u01/app/oracle/admin/UPGR/dpdump/awrdat*.log
-    Starting "SYS"."SYS_EXPORT_TABLE_01":  
+    Starting "SYS"."SYS_EXPORT_TABLE_01":
     Startup took 1 seconds
     Estimate in progress using BLOCKS method...
     Processing object type TABLE_EXPORT/TABLE/TABLE_DATA
