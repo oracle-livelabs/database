@@ -2,7 +2,9 @@
 
 ## Introduction
 
+This lab focuses on databases encrypted using Transparent Data Encryption (TDE). You will upgrade an encrypted non-CDB to Oracle Database 23ai and convert it to a PDB. This requires the database keystore passwords for the non-CDB and CDB. 
 
+For this purpose, AutoUpgrade has its own keystore which you will use.
 
 Estimated Time: 25 minutes
 
@@ -10,8 +12,9 @@ Estimated Time: 25 minutes
 
 In this lab, you will:
 
-* Downgrade a PDB
-* Unplug from Oracle Database 23ai back to 19c
+* Use the AutoUpgrade keystore
+* Use the summary report to check keystore password requirements
+* Upgrade and convert an encrypted database
 
 ### Prerequisites
 
@@ -21,153 +24,284 @@ This lab uses the *FTEX* and *CDB23* databases. It also encrypts both databases 
 
 ## Task 1: Encrypt source non-CDB
 
-You need to prepare a few things before you can start the downgrade.
+Currently, the *FTEX* database is not encrypted. You must start by preparing the database for encryption, and by encrypting an existing tablespace.
 
-mkdir -p /u01/app/oracle/admin/FTEX/wallet/tde
+1. Create a directory to hold the database keystore.
 
-. ftex
+    ```
+    <copy>
+    mkdir -p /u01/app/oracle/admin/FTEX/wallet/tde
+    </copy>
+    ```
 
-sqlplus / as sysdba
+2. Set the environment to the *FTEX* database and connect.
 
-alter system set wallet_root='/u01/app/oracle/admin/FTEX/wallet' scope=spfile;
+    ```
+    <copy>
+    . ftex
+    sqlplus / as sysdba
+    </copy>
+            
+    Be sure to hit RETURN
+    ```
 
-SQL> alter system set wallet_root='/u01/app/oracle/admin/FTEX/wallet' scope=spfile;
+3. Configure the database to store its keystore in the directory you just created. It's a static parameter requiring a restart of the database.
 
-System altered.
+    ```
+    <copy>
+    alter system set wallet_root='/u01/app/oracle/admin/FTEX/wallet' scope=spfile;
+    shutdown immediate
+    startup
+    </copy>
+            
+    Be sure to hit RETURN
+    ```
 
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> alter system set wallet_root='/u01/app/oracle/admin/FTEX/wallet' scope=spfile;
+    
+    System altered.
+    
+    SQL> shutdown immediate
+    
+    Database closed.
+    Database dismounted.
+    ORACLE instance shut down.
+    
+    SQL> startup
+    
+    ORACLE instance started.
+    
+    Total System Global Area 1157627144 bytes
+    Fixed Size                  8924424 bytes
+    Variable Size             419430400 bytes
+    Database Buffers          721420288 bytes
+    Redo Buffers                7852032 bytes
+    
+    Database mounted.
+    Database opened.
+    ```
+    </details>
 
-shutdown immediate
-startup
+4. Configure the database to use a software keystore (in the directory specified in `WALLET_ROOT`).
 
-SQL> shutdown immediate
-startup
+    ```
+    <copy>
+    alter system set tde_configuration='keystore_configuration=file' scope=both;
+    </copy>
+    ```
 
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> alter system set tde_configuration='keystore_configuration=file' scope=both;
+    
+    System altered.
+    ```
+    </details>
 
+5. Create the keystore, open it, set a TDE master key and configure an auto-login keystore.
 
-Database closed.
-Database dismounted.
-ORACLE instance shut down.
-SQL>
+    ```
+    <copy>
+    administer key management create keystore '/u01/app/oracle/admin/FTEX/wallet/tde' identified by "oracle_4U";
+    administer key management set keystore open force keystore identified by "oracle_4U";
+    administer key management set key identified by "oracle_4U" with backup;
+    administer key management create local auto_login keystore from keystore '/u01/app/oracle/admin/FTEX/wallet/tde' identified by "oracle_4U";
+    </copy>
+            
+    Be sure to hit RETURN
+    ```
 
-ORACLE instance started.
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> administer key management create keystore '/u01/app/oracle/admin/FTEX/wallet/tde' identified by "oracle_4U";
 
-Total System Global Area 1157627144 bytes
-Fixed Size		    8924424 bytes
-Variable Size		  419430400 bytes
-Database Buffers	  721420288 bytes
-Redo Buffers		    7852032 bytes
+    keystore altered.
 
+    SQL> administer key management set keystore open force keystore identified by "oracle_4U";
 
+    keystore altered.
 
+    SQL> administer key management set key identified by "oracle_4U" with backup;
 
+    keystore altered.
 
-Database mounted.
-Database opened.
+    SQL> administer key management create local auto_login keystore from keystore '/u01/app/oracle/admin/FTEX/wallet/tde' identified by "oracle_4U";
 
-alter system set tde_configuration='keystore_configuration=file' scope=both;
+    keystore altered.
+    ```
+    </details>
 
-SQL> alter system set tde_configuration='keystore_configuration=file' scope=both;
+5. Encrypt the *USERS* tablespace. It is an online operation.
 
-System altered.
+    ```
+    <copy>
+    alter tablespace users encryption encrypt;
+    </copy>
+    ```
 
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> alter tablespace users encryption encrypt;
+    
+    Tablespace altered.
+    ```
+    </details>
 
-administer key management create keystore '/u01/app/oracle/admin/FTEX/wallet/tde' identified by "oracle_4U";
-administer key management set keystore open force keystore identified by "oracle_4U";
-administer key management set key identified by "oracle_4U" with backup;
-administer key management create local auto_login keystore from keystore '/u01/app/oracle/admin/FTEX/wallet/tde' identified by "oracle_4U";
+6. Verify that the *USERS* tablespace is encrypted. 
 
+    ```
+    <copy>
+    select tablespace_name, encrypted from dba_tablespaces;
+    </copy>
+    ```
 
-SQL> alter tablespace users encryption encrypt;
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> select tablespace_name, encrypted from dba_tablespaces;
+    
+    TABLESPACE_NAME                ENC
+    ------------------------------ ---
+    SYSTEM                          NO
+    SYSAUX                          NO
+    TEMP                            NO
+    USERS                          YES
+    UNDOTBS100                      NO
+    ```
+    </details>
 
-Tablespace altered.
-
-SQL> select tablespace_name, encrypted from dba_tablespaces;
-
-TABLESPACE_NAME 	       ENC
------------------------------- ---
-SYSTEM			       NO
-SYSAUX			       NO
-TEMP			       NO
-USERS			       YES
-UNDOTBS100		       NO
-
-exit
-
-SQL> exit
-Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-Version 19.21.0.0.0
+7. Exit SQL*Plus.
+    
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
 
 ## Task 2: Encrypt target CDB
 
-You need to prepare a few things before you can start the downgrade.
+Currently, the *CDB23* database is not encrypted. You must start by preparing the database for encryption.
 
-mkdir -p /u01/app/oracle/admin/CDB23/wallet/tde
+1. Create a directory to hold the database keystore.
 
-. cdb23
+    ```
+    <copy>
+    mkdir -p /u01/app/oracle/admin/CDB23/wallet/tde
+    </copy>
+    ```
 
-sqlplus / as sysdba
+2. Set the environment to the *CDB23* database and connect.
 
-alter system set wallet_root='/u01/app/oracle/admin/CDB23/wallet' scope=spfile;
+    ```
+    <copy>
+    . cdb23
+    sqlplus / as sysdba
+    </copy>
+            
+    Be sure to hit RETURN
+    ```
 
-SQL> alter system set wallet_root='/u01/app/oracle/admin/CDB23/wallet' scope=spfile;
+3. Configure the database to store its keystore in the directory you just created. It's a static parameter requiring a restart of the database.
 
-System altered.
+    ```
+    <copy>
+    alter system set wallet_root='/u01/app/oracle/admin/CDB23/wallet' scope=spfile;
+    shutdown immediate
+    startup
+    </copy>
+            
+    Be sure to hit RETURN
+    ```
 
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> alter system set wallet_root='/u01/app/oracle/admin/CDB23/wallet' scope=spfile;
+    
+    System altered.
+    
+    SQL> shutdown immediate
+    
+    Database closed.
+    Database dismounted.
+    ORACLE instance shut down.
+    
+    SQL> startup
+    
+    ORACLE instance started.
+    
+    Total System Global Area 4292413984 bytes
+    Fixed Size                  5368352 bytes
+    Variable Size            1157627904 bytes
+    Database Buffers         3120562176 bytes
+    Redo Buffers                8855552 bytes
+    
+    Database mounted.
+    Database opened.
+    ```
+    </details>
 
-shutdown immediate
-startup
+4. Configure the database to use a software keystore (in the directory specified in `WALLET_ROOT`).
 
-SQL> shutdown immediate
-startup
+    ```
+    <copy>
+    alter system set tde_configuration='keystore_configuration=file' scope=both;
+    </copy>
+    ```
 
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> alter system set tde_configuration='keystore_configuration=file' scope=both;
+    
+    System altered.
+    ```
+    </details>
 
+5. Create the keystore, open it, set a TDE master key and configure an auto-login keystore.
 
+    ```
+    <copy>
+    administer key management create keystore '/u01/app/oracle/admin/CDB23/wallet/tde' identified by "oracle_4U";
+    administer key management set keystore open force keystore identified by "oracle_4U";
+    administer key management set key identified by "oracle_4U" with backup;
+    administer key management create local auto_login keystore from keystore '/u01/app/oracle/admin/CDB23/wallet/tde' identified by "oracle_4U";
+    </copy>
+            
+    Be sure to hit RETURN
+    ```
 
+    * You use the same keystore password in *CDB23* as well for simplicity. Realistically, you would choose different keystore passwords. 
 
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> administer key management create keystore '/u01/app/oracle/admin/CDB23/wallet/tde' identified by "oracle_4U";
 
-Database closed.
-Database dismounted.
-ORACLE instance shut down.
-SQL> ORACLE instance started.
+    keystore altered.
 
-Total System Global Area 4292413984 bytes
-Fixed Size		    5368352 bytes
-Variable Size		 1157627904 bytes
-Database Buffers	 3120562176 bytes
-Redo Buffers		    8855552 bytes
-Database mounted.
-Database opened.
+    SQL> administer key management set keystore open force keystore identified by "oracle_4U";
 
-alter system set tde_configuration='keystore_configuration=file' scope=both;
+    keystore altered.
 
-SQL> alter system set tde_configuration='keystore_configuration=file' scope=both;
+    SQL> administer key management set key identified by "oracle_4U" with backup;
 
-System altered.
+    keystore altered.
 
+    SQL> administer key management create local auto_login keystore from keystore '/u01/app/oracle/admin/CDB23/wallet/tde' identified by "oracle_4U";
 
-I'm using the same keystore password in the CDB as well for simplicity. Realistically, you would choose different keystore passwords. 
-administer key management create keystore '/u01/app/oracle/admin/CDB23/wallet/tde' identified by "oracle_4U";
-administer key management set keystore open force keystore identified by "oracle_4U";
-administer key management set key identified by "oracle_4U" with backup;
-administer key management create local auto_login keystore from keystore '/u01/app/oracle/admin/CDB23/wallet/tde' identified by "oracle_4U";
+    keystore altered.
+    ```
+    </details>
 
+## Task 3: Analyze the database
 
-
-SQL> select con_id, tablespace_name, encrypted from cdb_tablespaces order by 1;
-
-    CON_ID TABLESPACE_NAME		  ENC
----------- ------------------------------ ---
-	 1 SYSTEM			  NO
-	 1 SYSAUX			  NO
-	 1 USERS			  NO
-	 1 TEMP 			  NO
-	 1 UNDOTBS1			  NO
-	 3 SYSTEM			  NO
-	 3 TEMP 			  NO
-	 3 UNDOTBS1			  NO
-	 3 SYSAUX			  NO
-
-9 rows selected.
 
 
 mkdir -p /u01/app/oracle/keystore/autoupgrade
