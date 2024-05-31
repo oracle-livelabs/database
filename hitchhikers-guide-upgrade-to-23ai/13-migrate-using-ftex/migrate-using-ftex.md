@@ -349,6 +349,39 @@ You need to prepare a few things before you can start FTEX.
     ```
     </details>
 
+9. Set the tablespace to *READ WRITE* again. You might need the *FTEX* database in another lab. In a real migration, you don't need to do this.
+
+    ```
+    <copy>
+    sqlplus / as sysdba
+    </copy>
+    ```
+
+10. Set the tablespace *READ WRITE*. 
+
+    ```
+    <copy>
+    ALTER TABLESPACE USERS READ WRITE;
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> ALTER TABLESPACE USERS READ WRITE;
+     
+    Tablespace altered.
+    ```
+    </details>
+
+11. Exit SQL*Plus.
+    
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
 ## Task 2: Create new PDB
 
 You create a new, empty PDB in Oracle Database 23ai and import directly into it. This avoids the in-place upgrade and PDB conversion.

@@ -17,7 +17,7 @@ In this lab, you will:
 
 None.
 
-This lab is independent and self-contained. You can execute it at any time and in any order.
+This lab uses the *CDB19* databases. Don't do this lab at the same time as other labs using the same database.
 
 ## Task 1: Prepare your environment
 
@@ -44,7 +44,7 @@ You start by checking the *CDB19* database.
     </copy>
     ```
 
-    * There are two user-created PDBs in the CDB, *YELLOW* and *ORANGE*.
+    * There is one user-created PDBs in the CDB, *ORANGE*.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -52,7 +52,6 @@ You start by checking the *CDB19* database.
     CON_ID     CON_NAME           OPEN MODE  RESTRICTED
     ---------- ------------------ ---------- ----------
              2 PDB$SEED           READ ONLY  NO
-             3 YELLOW             READ WRITE NO
              4 ORANGE             READ WRITE NO    
      ```
     </details>
@@ -106,7 +105,7 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     +--------------------------------+
     | Starting AutoUpgrade execution |
     +--------------------------------+
-    1 CDB(s) plus 3 PDB(s) will be analyzed
+    1 CDB(s) plus 2 PDB(s) will be analyzed
     Type 'help' to list console commands
     upg> Job 100 completed
     ------------------- Final Summary --------------------
@@ -177,7 +176,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     +--------------------------------+
     | Starting AutoUpgrade execution |
     +--------------------------------+
-    1 CDB(s) plus 3 PDB(s) will be processed
+    1 CDB(s) plus 2 PDB(s) will be processed
     Type 'help' to list console commands
     upg>
     ```
