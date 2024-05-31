@@ -529,5 +529,5 @@ In order to downgrade, it is a requirement that you haven't changed the `COMPATI
 
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
-* **Contributors** - Klaus Gronau
+* **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
 * **Last Updated By/Date** - Daniel Overby Hansen, June 2024

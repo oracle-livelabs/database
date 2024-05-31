@@ -302,40 +302,73 @@ Currently, the *CDB23* database is not encrypted. You must start by preparing th
 
 ## Task 3: Analyze the database
 
+Analyze the *FTEX* database for upgrade readiness.
+
+1. To enable AutoUpgrade to work with encrypted databases, it must have access to a directory where it can store a special keystore just for AutoUpgrade. 
+
+    ```
+    <copy>
+    mkdir -p /u01/app/oracle/keystore/autoupgrade
+    </copy>
+    ```
+
+2. In this lab, you will use a pre-created AutoUpgrade config file. Examine the config file.
+
+    ```
+    <copy>
+    cat /home/oracle/scripts/encrypted-db-upg-conv.cfg
+    </copy>
+    ```
+
+    * The location for the AutoUpgrade keystore is defined by `global.keystore`.
+    * `target_cdb` specified the CDB where you want to plug in the non-CDB specified by `sid`.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    global.autoupg_log_dir=/home/oracle/logs/encrypted-db-upg-conv
+    global.keystore=/u01/app/oracle/keystore/autoupgrade
+    upg1.source_home=/u01/app/oracle/product/19
+    upg1.target_home=/u01/app/oracle/product/23
+    upg1.sid=FTEX
+    upg1.target_cdb=CDB23  
+    ```
+    </details>
+
+3. Start AutoUpgrade in analyze mode. Wait for it to complete.
+
+    ```
+    <copy>
+    java -jar autoupgrade.jar -config /home/oracle/scripts/encrypted-db-upg-conv.cfg -mode analyze
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    AutoUpgrade 24.3.240419 launched with default internal options
+    Processing config file ...
+    +--------------------------------+
+    | Starting AutoUpgrade execution |
+    +--------------------------------+
+    1 Non-CDB(s) will be analyzed
+    Type 'help' to list console commands
+    upg> Job 100 completed
+    ------------------- Final Summary --------------------
+    Number of databases            [ 1 ]
+    
+    Jobs finished                  [1]
+    Jobs failed                    [0]
+    
+    Please check the summary report at:
+    /home/oracle/logs/encrypted-db-upg-conv/cfgtoollogs/upgrade/auto/status/status.html
+    /home/oracle/logs/encrypted-db-upg-conv/cfgtoollogs/upgrade/auto/status/status.log
+    ```
+    </details>
 
 
-mkdir -p /u01/app/oracle/keystore/autoupgrade
 
 
-[oracle@holserv1:~]$ cat /home/oracle/scripts/encrypted-db-upg-conv.cfg
-global.autoupg_log_dir=/home/oracle/logs/encrypted-db-upg-conv
-global.keystore=/u01/app/oracle/keystore/autoupgrade
-upg1.source_home=/u01/app/oracle/product/19
-upg1.target_home=/u01/app/oracle/product/23
-upg1.sid=FTEX
-upg1.target_cdb=CDB23
-
-
-java -jar autoupgrade.jar -config /home/oracle/scripts/encrypted-db-upg-conv.cfg -mode analyze
-
-
-AutoUpgrade 24.3.240419 launched with default internal options
-Processing config file ...
-+--------------------------------+
-| Starting AutoUpgrade execution |
-+--------------------------------+
-1 Non-CDB(s) will be analyzed
-Type 'help' to list console commands
-upg> Job 100 completed
-------------------- Final Summary --------------------
-Number of databases            [ 1 ]
-
-Jobs finished                  [1]
-Jobs failed                    [0]
-
-Please check the summary report at:
-/home/oracle/logs/encrypted-db-upg-conv/cfgtoollogs/upgrade/auto/status/status.html
-/home/oracle/logs/encrypted-db-upg-conv/cfgtoollogs/upgrade/auto/status/status.log
 
 cat /home/oracle/logs/encrypted-db-upg-conv/cfgtoollogs/upgrade/auto/status/status.log
 ==========================================
@@ -655,5 +688,5 @@ For fully automated solutions, you should explore Secure External Password Store
 
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
-* **Contributors** - Klaus Gronau
+* **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
 * **Last Updated By/Date** - Daniel Overby Hansen, June 2024

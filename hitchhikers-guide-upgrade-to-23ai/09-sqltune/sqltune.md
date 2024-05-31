@@ -216,5 +216,5 @@ You can submit one or more SQL statements as input to the advisor and receive ad
 
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
-* **Contributors** - Klaus Gronau
+* **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
 * **Last Updated By/Date** - Daniel Overby Hansen, June 2024

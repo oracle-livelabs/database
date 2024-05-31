@@ -110,5 +110,5 @@ An STS allows you to transport SQL between databases. You can export SQL tuning 
 
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
-* **Contributors** - Klaus Gronau
+* **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
 * **Last Updated By/Date** - Daniel Overby Hansen, June 2024
