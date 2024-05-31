@@ -4,7 +4,7 @@
 
 In this lab, you will try a database downgrade. After an upgrade, if a serious problem arises in the new release, you can bring the database back to the previous release. This is called a database downgrade. 
 
-The PDB *YELLOW* has already been upgraded from Oracle Database 19c to 23ai. It's currently placed in the CDB *CDB23COM*. You will downgrade the PDB and plug it into the CDB *CDB19* running on Oracle Database 19c. 
+The PDB, *YELLOW*, has already been upgraded from Oracle Database 19c to 23ai. It's currently placed in the *CDB23COM*. You will downgrade the PDB and plug it into the *CDB19* running on Oracle Database 19c. 
 
 Estimated Time: 20 minutes
 
@@ -135,16 +135,14 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> alter session set container=CDB$ROOT;
-    alter pluggable database yellow close immediate;
-    alter pluggable database yellow open downgrade;
     
     Session altered.
-
-    SQL> 
+    
+    SQL> alter pluggable database yellow close immediate;
     
     Pluggable database altered.
     
-    SQL>
+    SQL> alter pluggable database yellow open downgrade;
     
     Pluggable database altered.
     ```
@@ -190,7 +188,7 @@ Now that the PDB is open in downgrade mode, you can start the process.
     ```
     </details>
 
-2. Connect to the *CDB23COM* CDB.
+2. Connect to the *CDB23COM*.
 
     ```
     <copy>
@@ -198,7 +196,7 @@ Now that the PDB is open in downgrade mode, you can start the process.
     </copy>
     ```
 
-3. Shut down the PDB and unplug it from the *CDB23COM* CDB. 
+3. Shut down the PDB and unplug it from the *CDB23COM*. 
 
     ```
     <copy>
@@ -234,7 +232,7 @@ Now that the PDB is open in downgrade mode, you can start the process.
 
 You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgrade process.
 
-1. Set the environment to the *CDB19* CDB and connect.
+1. Set the environment to the *CDB19* and connect.
 
     ```
     <copy>
@@ -393,9 +391,12 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     <summary>*click to see the output*</summary>
     ``` text
     SQL> shutdown immediate
-    startup
+
     Pluggable Database closed.
-    SQL> Pluggable Database opened.
+
+    SQL> startup
+    
+    Pluggable Database opened.
     ```
     </details>  
 
@@ -441,7 +442,7 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     ```
     </details>  
 
-9. Ensure all components have been downgraded and are *valid* or *option off*.
+9. Ensure all components have been downgraded and are *VALID* or *OPTION OFF*.
 
     ```
     <copy>
