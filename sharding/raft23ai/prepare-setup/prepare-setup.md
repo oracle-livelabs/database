@@ -18,6 +18,7 @@ This lab assumes you have:
 - An Oracle Free Tier or Paid Cloud account
 
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
+
 1.  Click on the link below to download the Resource Manager zip file you need to build your environment: [Raftreplication.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/Oracle%20Sharding/Raftreplication.zip)
 
 2.  Save in your downloads folder.

@@ -9,6 +9,7 @@
       "filename": "../../intro/intro.md"
     },
     {
+
       "title": "Lab 1: Environment Setup",
       "description": "Verify Setup of compute instance",
       "publisheddate": "06/30/2020",
@@ -24,7 +25,7 @@
       "description": "Exploring Sharding Topology",
       "filename": "../../topology/topology.md"
     },
-    {
+     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
