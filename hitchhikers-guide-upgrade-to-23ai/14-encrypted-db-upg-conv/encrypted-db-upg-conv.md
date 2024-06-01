@@ -728,7 +728,7 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
     sqlplus / as sysdba
     </copy>    
     
-    Be sure to hit RETURN
+    -- Be sure to hit RETURN
     ```
 
 5. Ensure that the *FTEX* database has been plugged in and is open *READ WRITE* and unrestricted.
@@ -764,7 +764,7 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
     select tablespace_name, encrypted from dba_tablespaces;
     </copy>    
     
-    Be sure to hit RETURN
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -794,7 +794,7 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
     select wrl_type, status, wallet_type, keystore_mode from v$encryption_wallet;
     </copy>    
     
-    Be sure to hit RETURN
+    -- Be sure to hit RETURN
     ```
 
     <details>
