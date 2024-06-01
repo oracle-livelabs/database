@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will upgrade an entire CDB including PDBs from Oracle Database 19c to 23ai. Then, you will practice a rollback and the restoration option in AutoUpgrade. This uses Flashback Database to get to our starting point.
+In this lab, you will upgrade an entire CDB including PDBs from Oracle Database 19c to 23ai. Then, you will practice a rollback and the restoration option in AutoUpgrade. This uses Flashback Database to get the database back to the starting point.
 
 Estimated Time: 35 minutes
 
@@ -27,9 +27,7 @@ You start by checking the *CDB19* database.
 
     ```
     <copy>
-    export ORACLE_SID=CDB19
-    export ORACLE_HOME=/u01/app/oracle/product/19
-    export PATH=$ORACLE_HOME/bin:$PATH
+    . cdb19
     sqlplus / as sysdba
     </copy>
 
@@ -206,7 +204,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     ```
     </details>
 
-3. Wait until the upgrade completes. Depending on the hardware, the upgrade will take about 25-35 minutes. Don't exit from the AutoUpgrade console. Leave it running.
+3. Wait until the upgrade completes. Depending on the hardware, the upgrade will take about 15-25 minutes. Don't exit from the AutoUpgrade console. Leave it running.
 
 4. Optionally, you do another lab while the upgrade completes.
 
@@ -242,7 +240,6 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
 
     ```
     <copy>
-    export ORACLE_SID=CDB19
     export ORACLE_HOME=/u01/app/oracle/product/23
     export PATH=$ORACLE_HOME/bin:$PATH
     sqlplus / as sysdba
@@ -324,9 +321,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
 
     ```
     <copy>
-    export ORACLE_SID=CDB19
-    export ORACLE_HOME=/u01/app/oracle/product/19
-    export PATH=$ORACLE_HOME/bin:$PATH
+    . cdb19
     sqlplus / as sysdba
     </copy>
 

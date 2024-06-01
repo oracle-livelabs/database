@@ -55,12 +55,12 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-       CON_ID CON_NAME    OPENMODE      RESTRICTED
-    _________ ___________ _____________ _____________
-            2 PDB$SEED    READ ONLY     NO
-            3 RED         READ WRITE    NO
-            4 BLUE        READ WRITE    NO
-            6 GREEN       MOUNTED
+    CON_ID CON_NAME OPENMODE   RESTRICTED
+    ______ ________ __________ __________
+    2      PDB$SEED READ ONLY  NO
+    3      RED      READ WRITE NO
+    4      BLUE     READ WRITE NO
+    6      GREEN    MOUNTED
     ```
     </details>
 
@@ -75,12 +75,12 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-       CON_ID CON_NAME    OPENMODE      RESTRICTED
-    _________ ___________ _____________ _____________
-            2 PDB$SEED    READ ONLY     NO
-            3 RED         READ WRITE    NO
-            4 BLUE        READ WRITE    NO
-            6 GREEN       MOUNTED
+    CON_ID CON_NAME OPENMODE   RESTRICTED
+    ______ ________ __________ __________
+    2      PDB$SEED READ ONLY  NO
+    3      RED      READ WRITE NO
+    4      BLUE     READ WRITE NO
+    6      GREEN    MOUNTED
     ```
     </details>
 
@@ -97,13 +97,13 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-       CON_ID NAME        OPEN_MODE     RESTRICTED
-    _________ ___________ _____________ _____________
-            1 CDB$ROOT    READ WRITE    NO
-            2 PDB$SEED    READ ONLY     NO
-            3 RED         READ WRITE    NO
-            4 BLUE        READ WRITE    NO
-            6 GREEN       MOUNTED
+    CON_ID CON_NAME OPENMODE   RESTRICTED
+    ______ ________ __________ __________
+    1      CDB$ROOT READ WRITE NO
+    2      PDB$SEED READ ONLY  NO
+    3      RED      READ WRITE NO
+    4      BLUE     READ WRITE NO
+    6      GREEN    MOUNTED
     ```
     </details>
 
@@ -247,7 +247,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     </copy>
     ```
 
-11. Verify you are connected to the PDB *RED*.
+11. Verify you are connected to the *RED*.
 
     ```
     <copy>
@@ -264,7 +264,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ```
     </details>
 
-12. Switch to *GREEN* PDB using the `ALTER SESSION` command and verify the outcome.
+12. Switch to *GREEN* using the `ALTER SESSION` command and verify the outcome.
 
     ```
     <copy>
@@ -292,7 +292,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
 
 ## Task 2: Check Parameters
 
-You check initialization parameters, set somee to the CDB, find a list of PDBs and connect to them using different means.
+You check initialization parameters and set some in the CDB. Also, find a list of PDBs and connect to them using different means.
 
 1. Get a list of non-default parameters in the pluggable databases.
 
@@ -326,7 +326,7 @@ You check initialization parameters, set somee to the CDB, find a list of PDBs a
     ```
     </details>
 
-2. Connect to the PDB *RED* and raise *sga_target* to 500M. This set a minimum allocation for *RED*.
+2. Connect to the *RED* and raise *sga_target* to 500M. This set a minimum allocation for *RED*.
 
     ```
     <copy>
@@ -490,7 +490,7 @@ You check DBA and CDB views.
             6 GREEN       TEMP
             6 GREEN       UNDOTBS1
 
-    17 rows selected.
+    21 rows selected.
     ```
     </details>
 
@@ -521,7 +521,7 @@ You check DBA and CDB views.
             6 GREEN       TEMP
             6 GREEN       UNDOTBS1
 
-    17 rows selected.
+    4 rows selected.
     ```
     </details>
 

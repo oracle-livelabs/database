@@ -13,7 +13,7 @@ Estimated Time: 10 minutes
 In this lab, you will:
 
 * Generate load
-* Create an AWR Diff report
+* Create an *AWR Diff* report
 
 ### Prerequisites
 
@@ -25,7 +25,7 @@ This lab assumes:
 
 Use HammerDB to create a workload.
 
-1. Use the yellow terminal. Set the environment to the *CDB23* database. Now, since you upgraded the database and plugged in the database, the environment needs to be set to the CDB.
+1. Use the yellow terminal. Set the environment to the *CDB23* database. Now, since you upgraded the *UPGR* database and plugged into *CDB23*, the environment needs to be set to the CDB.
 
       ```
       <copy>
@@ -57,7 +57,7 @@ Use HammerDB to create a workload.
 
 3. Don't exit the terminal. Keep SQL*Plus open.
 
-4. Start HammerDB. On the terminal, run:
+4. Open a new terminal. Start HammerDB in the new terminal.
 
     ```
     . cdb23
@@ -89,9 +89,9 @@ Use HammerDB to create a workload.
 11. It will take a few seconds; then you will see the performance charts and the transactions-per-minute (tpm). The load run usually takes 2-3 minutes to complete.
     ![see the performance charts and the transactions-per-minute](./images/awr-compare-transact-viewer.png " ")
 
-12. Exit HammerDB.
+12. Exit HammerDB. Close the second terminal.
 
-13. Create another AWR snapshot. Take note of the snapshot ID (e.g., 131). You need it later on.
+13. Switch back to the original terminal. SQL*Plus is still running. Create another AWR snapshot. Take note of the snapshot ID (e.g., 131). You need it later on.
 
     ```
     <copy>

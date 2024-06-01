@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you use SQL Plan Management to ensure that certain SQLs always use a specified plan. When you have identified plan regressions with SQL Performance Analyzer, one of the options you have, is to fix the previous, better plan. You can use SQL Plan Management for that.
+In this lab, you use SQL Plan Management to ensure that certain SQLs always use a specified plan. When you have identified plan regressions with SQL Performance Analyzer, one of the options you have, is to fix a previous, better plan. You can use SQL Plan Management for that.
 
 Credits: You will use scripts written by Carlos Sierra.
 

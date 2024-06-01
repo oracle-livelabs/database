@@ -54,18 +54,20 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     ```
     </details>
 
-    You use AutoUpgrade from the home directory. You can use AutoUpgrade from any location. It does not matter.
+    You use AutoUpgrade from the home directory. In fact, you can use AutoUpgrade from any location. It does not matter.
 
     Check the version. If a newer version is available, you can download it from My Oracle Support ([AutoUpgrade Tool (Doc ID 2485457.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1)). Don't do this now.
 
-2. To show the many capabilities of AutoUpgrade, create a sample config file. Examine the file to get an idea of the many options in AutoUpgrade. In this lab, you will not use the samle config file.
+2. To show the many capabilities of AutoUpgrade, create a sample config file. Examine the file to get an idea of the many options in AutoUpgrade. In this lab, you will not use the sample config file.
 
     ```
     <copy>
     java -jar autoupgrade.jar -create_sample_file config
-    cat sample_config.cfg
+    more sample_config.cfg
     </copy>
     ```
+
+    * Hit *SPACE* to scroll through the output.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -182,6 +184,13 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     </copy>
     ```
 
+    * `global.autoupg_log_dir` defines the base logging directory where AutoUpgrade stores all logs and other files.
+    * `source_home` and `target_home` specify the path to the source and target Oracle home.
+    * `sid` contains the SID of the database that you want to upgrade/convert.
+    * By specifying `target_cdb` you instruct AutoUpgrade to also perform a non-CDB to PDB conversion.
+    * `restoration` defines whether a guaranteed restore point is created before the upgrade.
+    * `add_after_upgrade_pfile` points to a file containing the initialization parameters you want to add after upgrade. 
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -195,7 +204,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     ```
     </details>
 
-    Please note that his upgrade process will change the parameter *optimizer_index_cost_adj* after this DB is upgraded, to forcely introduce some regressions. So later we can use SQL Performance Analyser to fix it.
+    To simulate regression SQLs and to prove our method, this lab changes optimizer behavior using `optimizer_index_cost_adj`. The parameter is added after the upgrade using `add_after_upgrade_pfile`. In a later lab, you will see the effect of this change, and what you can do about it.
 
 ## Task 2: Analyze your database
 
@@ -284,9 +293,9 @@ It is best practice to first analyze your database for upgrade readiness. It is 
 
 ## Task 3: Upgrade your database
 
-You determined that the database is ready to upgrade. Start AutoUpgrade in *deploy* mode. One command is all it takes to perform the upgrade - including all pre- and post-upgrade tasks.
+You determined that the database is ready to upgrade. Start AutoUpgrade in *deploy* mode. One command is all it takes to perform the upgrade and PDB conversion; including all pre- and post-upgrade tasks.
 
-1. Start AutoUpgrade in *deploy* mode to perform the upgrade. Notice you are re-using the same command, but this time `-mode` is set to `deploy`.
+1. Start AutoUpgrade in *deploy* mode to perform the upgrade and conversion. Notice you are re-using the same config file and command, but this time `-mode` is set to `deploy`.
 
     ```
     <copy>
@@ -373,7 +382,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
     * Notice the job number (`Job#`).
 
-4. Get details about your upgrade job. Use the `status` command. Your job number should be 101. If that's not the case, replace it with your value.
+4. Get details about your upgrade job. Use the `status` command. Your job number should be *101*. If that's not the case, replace it with your value.
 
     ```
     <copy>
@@ -525,7 +534,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     ```
     </details>
 
-9. Wait until the upgrade completes. Depending on the hardware, the upgrade will take about 15-25 minutes. Don't exit from the AutoUpgrade console. Leave it running.
+9. Wait until the upgrade completes. Depending on the lab platform, the upgrade will take about 15-25 minutes. Don't exit from the AutoUpgrade console. Leave it running.
 
 11. Optionally, you can complete some of the other self-contained labs.
 
@@ -537,7 +546,7 @@ You may now *proceed to the next lab*.
 
 ## Learn More
 
-AutoUpgrade completely automates upgrades and incorporates our best practices. AutoUpgrade run all prechecks against multiple databases, fix potential issues, set a restore point in case something goes wrong, before it finally upgrade your databases. And of course, do the postupgrade checks, recompilation and time zone adjustment. The only thing you need to provide is a config file in text format.
+AutoUpgrade completely automates upgrades and incorporates our best practices. AutoUpgrade run all prechecks against multiple databases, fix potential issues, set a restore point in case something goes wrong, before it finally upgrade and convert your databases. And of course, do the postupgrade checks, recompilation and time zone adjustment. The only thing you need to provide is a config file in text format.
 
 * My Oracle Support, [AutoUpgrade Tool (Doc ID 2485457.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1)
 * Documentation, [Using AutoUpgrade for Oracle Database Upgrades](https://docs.oracle.com/en/database/oracle/oracle-database/23/upgrd/using-autoupgrade-oracle-database-upgrades.html#GUID-71883C8C-7A34-4E93-8955-040CB04F2109)

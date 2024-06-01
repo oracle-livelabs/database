@@ -920,7 +920,7 @@ You need a few more changes to the new PDB before you can start the import.
     -- Be sure to hit RETURN
     ```
 
-7. Switch to the *PURPLE* PDB and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import.
+7. Switch to *PURPLE* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import.
 
     ```
     <copy>

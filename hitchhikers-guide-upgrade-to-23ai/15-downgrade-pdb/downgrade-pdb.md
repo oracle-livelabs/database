@@ -4,7 +4,7 @@
 
 In this lab, you will try a database downgrade. After an upgrade, if a serious problem arises in the new release, you can bring the database back to the previous release. This is called a database downgrade.
 
-The PDB, *YELLOW*, has already been upgraded from Oracle Database 19c to 23ai. It's currently placed in the *CDB23COM*. You will downgrade the PDB and plug it into the *CDB19* running on Oracle Database 19c.
+The PDB, *YELLOW*, has already been upgraded from Oracle Database 19c to 23ai. It's currently placed in *CDB23COM*. You will downgrade *YELLOW** and plug it into the *CDB19* running on Oracle Database 19c.
 
 Estimated Time: 20 minutes
 
@@ -60,7 +60,7 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
     ```
     </details>
 
-3. Switch to the *YELLOW* PDB.
+3. Switch to *YELLOW*.
 
     ```
     <copy>
@@ -96,7 +96,7 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
     ```
     </details>
 
-5. Ensure that the `COMPATIBLE` parameter is still set at the old release setting.
+5. Ensure that the `COMPATIBLE` parameter is still set at the old release setting, *19.0.0*.
 
     ```
     <copy>
@@ -117,7 +117,7 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
     ```
     </details>
 
-6. Switch back to the root container and open the *YELLOW* PDB in *downgrade* mode.
+6. Switch back to the root container and open the *YELLOW* in *downgrade* mode.
 
     ```
     <copy>
@@ -171,6 +171,7 @@ Now that the PDB is open in downgrade mode, you can start the process.
     -- Be sure to hit RETURN
     ```
 
+    * Use `-c` to downgrade just that one PDB, not the entire CDB.
     * Since you didn't specify a logging directory, it will use a default.
     * If you want to monitor the downgrade, you can open a second terminal, go to the logging directory (`/u01/app/oracle/product/23/cfgtoollogs/downgrade`) and tail the log files.
 
@@ -188,7 +189,7 @@ Now that the PDB is open in downgrade mode, you can start the process.
     ```
     </details>
 
-2. Connect to the *CDB23COM*.
+2. Connect to *CDB23COM*.
 
     ```
     <copy>
@@ -270,7 +271,7 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     ```
     </details>
 
-3. Plug in the *YELLOW* PDB and open it in *upgrade* mode.
+3. Plug in *YELLOW* and open it in *upgrade* mode.
 
     ```
     <copy>
@@ -294,7 +295,7 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     ```
     </details>
 
-4. Switch to the *YELLOW* PDB and complete the downgrade. The catrelod.sql script reloads the appropriate version for each of the database components in the downgraded database.
+4. Switch to *YELLOW* and complete the downgrade. The *catrelod.sql* script reloads the appropriate version for each of the database components in the downgraded database.
 
     ```
     <copy>
@@ -337,7 +338,7 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     ```
     </details>
 
-5. Recompile all invalid objects. The utlrp.sql script recompiles all existing PL/SQL modules that were previously in an INVALID state, such as packages, procedures, types, and so on.
+5. Recompile all invalid objects. The *utlrp.sql* script recompiles all existing PL/SQL modules that were previously in an *INVALID* state, such as packages, procedures, types, and so on.
 
     ```
     <copy>
@@ -385,7 +386,7 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     -- Be sure to hit RETURN
     ```
 
-    * Since our session is in the *YELLOW* PDB, we can use `shutdown` and `startup` to just restart the PDB, not the entire CDB.
+    * Since your session is connected to *YELLOW*, you can use `shutdown` and `startup` to just restart the PDB, not the entire CDB.
 
     <details>
     <summary>*click to see the output*</summary>

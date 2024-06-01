@@ -2,9 +2,7 @@
 
 ## Introduction
 
-This lab focuses on databases encrypted using Transparent Data Encryption (TDE). You will upgrade an encrypted non-CDB to Oracle Database 23ai and convert it to a PDB. This requires the database keystore passwords for the non-CDB and CDB.
-
-For this purpose, AutoUpgrade has its own keystore which you will use.
+This lab focuses on databases encrypted using Transparent Data Encryption (TDE). You will upgrade an encrypted non-CDB to Oracle Database 23ai and convert it to a PDB. This requires the database keystore passwords for the non-CDB and CDB. For this purpose, AutoUpgrade has its own keystore which you will use.
 
 Estimated Time: 25 minutes
 
@@ -379,7 +377,7 @@ Analyze the *FTEX* database for upgrade readiness.
     </copy>
     ```
 
-    * *PRECHECKS* has status *FAILURE*. The database is ready for upgrade. 
+    * *PRECHECKS* has status *FAILURE*. The database is **not** ready for upgrade. 
     * The check *TDE_PASSWORDS_REQUIRED* failed.
 
     <details>
@@ -478,7 +476,7 @@ Analyze the *FTEX* database for upgrade readiness.
           the target CDB.
     ```
 
-6. Load the database keystore passwords into the AutoUpgrade keystore. Start the password console.
+6. Load the database keystore passwords into the AutoUpgrade keystore. Start the password loader.
 
     ```
     <copy>
@@ -486,7 +484,7 @@ Analyze the *FTEX* database for upgrade readiness.
     </copy>
     ```
 
-    * Since it is the first time you start the password console, AutoUpgrade asks for a password to protect the AutoUpgrade keystore. This is not the database keystore password.
+    * Since it is the first time you start the password loader, AutoUpgrade asks for a password to protect the AutoUpgrade keystore. This is not the database keystore password.
     * Use the following AutoUpgrade keystore password: *autoupgrade_4U*
 
     <details>
@@ -560,7 +558,7 @@ Analyze the *FTEX* database for upgrade readiness.
     ```
     </details>
 
-10. Exit the AutoUpgrade password console.
+10. Exit the AutoUpgrade password loader.
 
     ```
     <copy>

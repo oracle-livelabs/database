@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will capture and preserve SQL statements and information from the AWR. We will use this collection later on, following a performance stability method guideline.
+In this lab, you will capture and preserve SQL statements and information from the AWR. You will use this information later on, following the performance stability prescription. This is a method developed by the experts in the Product Management team in the *Database Upgrade, Migration, Patching and Utilities* team.
 
 Estimated Time: 5 minutes
 
@@ -11,7 +11,7 @@ Estimated Time: 5 minutes
 In this lab, you will:
 
 * Collect statements from AWR
-* Compare SQL Tuning Sets
+* Compare SQL Tuning Sets (STS)
 
 ### Prerequisites
 
@@ -21,7 +21,7 @@ This lab assumes:
 
 ## Task 1: Collect statements from AWR
 
-Capture workload information from the workload you generated in lab 2. This time you will capture from AWR and into a different SQL Tuning Set.
+Capture workload information from the workload you generated in lab 3 - Generate AWR Snapshot. This time you will capture from AWR and into a different SQL Tuning Set.
 
 1. Use the yellow terminal. Set the environment to the *UPGR* database and connect.
 
@@ -32,7 +32,7 @@ Capture workload information from the workload you generated in lab 2. This time
     </copy>
     ```
 
-2.  Run the capture script:
+2.  Run the capture script.
 
     ```
     <copy>
@@ -55,7 +55,7 @@ Capture workload information from the workload you generated in lab 2. This time
 
 ## Task 2: Compare SQL Tuning Sets
 
-You can also collect statements directly from the Cursor Cache. This is more resource intense but helpful in the case of OLTP applications. Be careful when you poll the cursor cache too frequently.
+You can also collect statements directly from the cursor cache. This is more resource intense but helpful in the case of OLTP applications. Be careful when you poll the cursor cache too frequently.
 
 You now have two SQL Tuning Sets:
 - One from cursor cache (good for OLTP-like workload)
@@ -83,7 +83,7 @@ You now have two SQL Tuning Sets:
     ```
     </details>
 
-    It is very likely that you will get different statement counts. One of the reasons could be that often, the capture from the cursor cache will catch more statements compared to those written down from ASH (Active Session History) into AWR. And it does not play any role for the lab whether the number of statements matches the number in the screenshots or not.
+    It is very likely that you will get different statement counts. One of the reasons could be that often, the capture from the cursor cache will catch more statements compared to those written down from ASH (Active Session History) into AWR. And it does not play any role for the lab whether the number of statements matches.
 
 2. Exit from SQL*Plus.
 
@@ -97,15 +97,16 @@ You may now *proceed to the next lab*.
 
 ## Learn More
 
-A SQL tuning set (STS) is a database object that you can use as input to tuning tools.
-An STS includes:
+A SQL Tuning Set is a database object that you can use as input to tuning tools.
+
+An SQL Tuning Set includes:
 
 - A set of SQL statements
 - Associated execution context, such as a user schema, application module name and action, list of bind values, and the environment for SQL compilation of the cursor
 - Associated basic execution statistics, such as elapsed time, CPU time, buffer gets, disk reads, rows processed, cursor fetches, the number of executions, the number of complete executions, optimizer cost, and the command type
 - Associated execution plans and row source statistics for each SQL statement (optional)
 
-An STS allows you to transport SQL between databases. You can export SQL tuning sets from one database to another, enabling transfer of SQL workloads between databases for remote performance diagnostics and tuning.
+A SQL Tuning Set allows you to transport this information between databases. You can export SQL Tuning Sets from one database to another, enabling transfer of SQL workloads between databases for remote performance diagnostics and tuning.
 
 * Documentation, [SQL Tuning Sets](https://docs.oracle.com/en/database/oracle/oracle-database/19/tgsql/managing-sql-tuning-sets.html#GUID-DD136837-9921-4C73-ABB8-9F1DC22542C5)
 * Webinar, [Performance Stability Perscription #1: Collect SQL Tuning Sets](https://www.youtube.com/watch?v=qCt1_Fc3JRs&t=3969s)

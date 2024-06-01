@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, we will review and startup all components required to successfully run this workshop.
+In this lab, you will review and startup all components required to successfully run this workshop.
 
 Estimated Time: 5 Minutes.
 
@@ -54,7 +54,7 @@ In this lab, you will:
     ```
     </details>
 
-4. Ensure that the databases (FTEX, DB12 and CDB2) are started.
+4. Ensure that the databases (*FTEX*, *UPGR* and *CDB23*) are started.
 
     ```
     <copy>

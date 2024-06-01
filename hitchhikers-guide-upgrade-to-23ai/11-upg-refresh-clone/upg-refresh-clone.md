@@ -29,9 +29,7 @@ Refreshable clone PDB works via a database link. You must create a user and gran
 
     ```
     <copy>
-    export ORACLE_SID=FTEX
-    export ORACLE_HOME=/u01/app/oracle/product/19
-    export PATH=$ORACLE_HOME/bin:$PATH
+    . ftex
     sqlplus / as sysdba
     </copy>
 
@@ -92,9 +90,7 @@ Refreshable clone PDB works via a database link. You must create a user and gran
 
     ```
     <copy>
-    export ORACLE_SID=CDB23
-    export ORACLE_HOME=/u01/app/oracle/product/23
-    export PATH=$ORACLE_HOME/bin:$PATH
+    . cdb23
     sqlplus / as sysdba
     </copy>
 
@@ -319,9 +315,7 @@ AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you wi
 
     ```
     <copy>
-    export ORACLE_SID=FTEX
-    export ORACLE_HOME=/u01/app/oracle/product/19
-    export PATH=$ORACLE_HOME/bin:$PATH
+    . ftex
     sqlplus / as sysdba
     </copy>
     ```
@@ -491,14 +485,12 @@ When the *REFRESHPDB* phase is over, AutoUpgrade executes a final refresh to bri
 
     ```
     <copy>
-    export ORACLE_SID=CDB23
-    export ORACLE_HOME=/u01/app/oracle/product/23
-    export PATH=$ORACLE_HOME/bin:$PATH
+    . cdb23
     sqlplus / as sysdba
     </copy>
     ```
 
-5. Switch to the *TEAL* PDB and ensure that the *SALES.ORDERS* table exist.
+5. Switch to *TEAL* and ensure that the *SALES.ORDERS* table exist.
 
     ```
     <copy>
@@ -542,9 +534,7 @@ AutoUpgrade stops the source non-CDB immediately after the final refresh. This e
 
     ```
     <copy>
-    export ORACLE_SID=FTEX
-    export ORACLE_HOME=/u01/app/oracle/product/19
-    export PATH=$ORACLE_HOME/bin:$PATH
+    . ftex
     sqlplus / as sysdba
     </copy>
     ```

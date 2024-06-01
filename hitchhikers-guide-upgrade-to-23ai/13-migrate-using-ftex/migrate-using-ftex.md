@@ -492,7 +492,7 @@ You need a few more changes to the new PDB before you can start the import.
     </copy>
     ```
 
-4. Make a directory for the *MAROON* PDB. Copy the data files from the source database to the target PDB.
+4. Make a directory for *MAROON* data files. Copy the data files from the source database to this directory.
 
     ```
     <copy>
@@ -988,7 +988,7 @@ You need a few more changes to the new PDB before you can start the import.
     -- Be sure to hit RETURN
     ```
 
-7. Switch to the *PURPLE* PDB and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import.
+7. Switch to *MAROON* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import.
 
     ```
     <copy>

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will execute an application workload using HammerDB on the UPGR database. You will capture workload information that you can use later on to compare pre-upgrade performance to post-upgrade performance.
+In this lab, you will execute an application workload using HammerDB on the *UPGR* database. You will capture workload information that you can use later on to compare pre-upgrade performance to post-upgrade performance.
 
 Estimated Time: 15 Minutes.
 
@@ -23,7 +23,6 @@ This lab assumes:
 - You have completed Lab 1: Initialize Environment
 
 ## Task 1: Generate an AWR snapshot
-You must start the UPGR database and create the first AWR snapshot.
 
 1. Use the yellow terminal. Set the environment to the *UPGR* database and connect.
 
@@ -56,7 +55,7 @@ You must start the UPGR database and create the first AWR snapshot.
 
 3. Don’t exit the terminal. Keep SQL*Plus open.
 
-4. Start HammerDB. On the terminal, run:
+4. In a new terminal, start HammerDB.
 
     ```
     . upgr
@@ -87,7 +86,7 @@ You must start the UPGR database and create the first AWR snapshot.
 
 Use HammerDB to start a workload. At the same time, capture workload information from the cursor cache into a SQL tuning set.
 
-1. Run the capture script. The script polls the cursor cache every 10 seconds for two minutes. Leave the script running and immediately proceed to the next step. Do not press CTRL+C.
+1. Back in the first terminal, run the capture script. The script polls the cursor cache every 10 seconds for two minutes. Leave the script running and immediately proceed to the next step. Do not press CTRL+C.
 
     ```
     <copy>

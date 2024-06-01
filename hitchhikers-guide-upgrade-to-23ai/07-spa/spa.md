@@ -53,7 +53,7 @@ This lab assumes:
     ```
     </details>
 
-3. Check the if the performance regression was forcely introduced via *optimizer_index_cost_adj*:
+3. To simulate bad performance, this lab changes optimizer behavior. Verify *optimizer_index_cost_adj* is set to *10000*. This causes the optimizer to disregard index scans and perform full table scan. This causes bad performance.
 
     ```
     <copy>
@@ -72,7 +72,7 @@ This lab assumes:
     ```
     </details>
 
-    If you see any **a value different from 10000** for the *optimizer_index_cost_adj*, adjust it:
+    If you see any **a value different from 10000** for the *optimizer_index_cost_adj*, adjust it.
 
     ```
     <copy>
@@ -94,7 +94,7 @@ This lab assumes:
     ```
     </details>
 
-4. Analyze performance in the upgraded database. Using the workload captured in SQL Tuning Sets before the upgrade as a baseline, the database now test executes the workload stored in the SQL Tuning Sets, but this time in an upgraded database. Now you can see the effect of the new 19c optimizer. First, you compare *CPU\_TIME*.
+4. Analyze performance in the upgraded database. Using the workload captured in SQL Tuning Sets before the upgrade as a baseline, the database now *test executes* the workload stored in the SQL Tuning Sets, but this time in an upgraded database. Now you can see the effect of the new 19c optimizer. First, you compare *CPU\_TIME*.
 
     ```
     <copy>
@@ -181,7 +181,7 @@ This lab assumes:
     * TABLE ACCESS FULL access method will perform a full table scan on the table, which is much slower given we are returning just a few rows and we could use an index.
     * This demonstrates that even though a new optimizer out-of-the-box brings a lot of performance improvements, if you change important parameters you may end up with worse plans.
 
-12. Examine the rest of the SPA reports.
+12. Examine the other parts of the SPA reports.
 
 13. Close Firefox.
 
