@@ -32,8 +32,8 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
       sqlplus / as sysdba
       alter session set container=UPGR;
       </copy>
-       
-      Be sure to hit RETURN
+
+      -- Be sure to hit RETURN
       ```
 
 2. Create a SQL Plan Baseline. You will use a script created by Carlos Sierra. When prompted for:
@@ -112,10 +112,10 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
       Select up to 3 plans:
 
       1st Plan Hash Value (req): 3642382161
-      2nd Plan Hash Value (opt): 
-      3rd Plan Hash Value (opt): 
+      2nd Plan Hash Value (opt):
+      3rd Plan Hash Value (opt):
 
-      FIXED (opt): 
+      FIXED (opt):
 
       FIX
       ---
@@ -191,7 +191,7 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
       spb_create_upgr_hol_localdomain_upgr_7m5h0wf6stq0q_20230708_072334.txt
       ```
       </details>
-                     
+
       * The script might produce `ORA-01403` if the SQL is not in memory, don't worry about it. The script then takes from AWR instead.
       * In this lab, most of the times, there is only one available plan. In a realistic scenario, you will have multiple plans to choose from.
       * If you get an error saying *Error: neither SQL handle nor plan name specified*: Run the script again and ensure you input the plan hash values that are displayed.
@@ -226,13 +226,13 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
 
       SQL_HANDLE           PLAN_NAME                      ENABLED ACCEPTED
       -------------------- ------------------------------ ------- --------
-      SQL_59a879455619c567 SQL_PLAN_5ma3t8pb1mjb745221865 YES     YES  
+      SQL_59a879455619c567 SQL_PLAN_5ma3t8pb1mjb745221865 YES     YES
       ```
       </details>
-      
+
 ## Task 2: Fix all before-upgrade statements
 
-In this task, you will ensure that the optimizer can only use plans from before the upgrade. 
+In this task, you will ensure that the optimizer can only use plans from before the upgrade.
 
 In lab 2, you created a workload using HammerDB. At the same time, you were sampling from cursor cache and into a SQL Tuning Set. Now, you take all the plans from this SQL Tuning Set, load them into a SQL Plan Baseline and set the plans as *fixed* plans. Now, the optimizer may only choose from the *fixed* plans that you captured before the upgrade.
 
@@ -269,14 +269,14 @@ In lab 2, you created a workload using HammerDB. At the same time, you were samp
                                  );
                DBMS_OUTPUT.PUT_LINE('Plans loaded: ' || l_plans_loaded);
             END;
-      /SQL>   2    3    4    5    6    7    8    9   10   11  
+      /SQL>   2    3    4    5    6    7    8    9   10   11
       Plans loaded: 28
-      
+
       PL/SQL procedure successfully completed.
       ```
       </details>
 
-2. List all the SQL Plan Baselines. 
+2. List all the SQL Plan Baselines.
 
       ```
       <copy>
@@ -345,8 +345,8 @@ In lab 2, you created a workload using HammerDB. At the same time, you were samp
       @/home/oracle/scripts/spa_elapsed.sql
       @/home/oracle/scripts/spa_report_elapsed.sql
       </copy>
-       
-      Be sure to hit RETURN
+
+      -- Be sure to hit RETURN
       ```
 
 4. Exit SQL*Plus.
@@ -355,7 +355,7 @@ In lab 2, you created a workload using HammerDB. At the same time, you were samp
     <copy>
     exit
     </copy>
-    ```      
+    ```
 
 5. Compare the SQL Performance Analyzer reports. First, you compare the SPA run from lab 6 with the SPA run from this lab - based on *CPU\_TIME*.
 
@@ -369,7 +369,7 @@ In lab 2, you created a workload using HammerDB. At the same time, you were samp
 
       ![Notice that there will be two html files in scripts folder](./images/spm-spa1.png " ")
 
-      * Both reports compare *CPU\_TIME*. 
+      * Both reports compare *CPU\_TIME*.
       * The left report is when the optimizer was not restricted. The right report is when you restrict the optimizer to use only before-upgrade plans.
       * There are no plan changes in the right report because you fixed all the old plans.
       * Notice how the performance improvement is greater when the optimizer is not restricted (the left side).

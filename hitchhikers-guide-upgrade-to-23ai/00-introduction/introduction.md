@@ -17,7 +17,7 @@ In this workshop, you will:
 
 ## About the workshop contents
 
-This workshop comes with pre-installed Oracle homes and pre-created databases. 
+This workshop comes with pre-installed Oracle homes and pre-created databases.
 You can switch between environments with the shortcuts shown in the last column of the below diagram.
 
 ![Overview of the Oracle Homes and databases in the lab](./images/introduction-overview.png " ")

@@ -2,9 +2,9 @@
 
 ## Introduction
 
-In this lab, you will try a database downgrade. After an upgrade, if a serious problem arises in the new release, you can bring the database back to the previous release. This is called a database downgrade. 
+In this lab, you will try a database downgrade. After an upgrade, if a serious problem arises in the new release, you can bring the database back to the previous release. This is called a database downgrade.
 
-The PDB, *YELLOW*, has already been upgraded from Oracle Database 19c to 23ai. It's currently placed in the *CDB23COM*. You will downgrade the PDB and plug it into the *CDB19* running on Oracle Database 19c. 
+The PDB, *YELLOW*, has already been upgraded from Oracle Database 19c to 23ai. It's currently placed in the *CDB23COM*. You will downgrade the PDB and plug it into the *CDB19* running on Oracle Database 19c.
 
 Estimated Time: 20 minutes
 
@@ -23,7 +23,7 @@ This lab is independent and self-contained. You can execute it at any time and i
 
 ## Task 1: Prepare for downgrade
 
-You start the downgrade process while the PDB is still on Oracle Database 23ai. 
+You start the downgrade process while the PDB is still on Oracle Database 23ai.
 
 1. Connect to *CDB23COM*. This CDB currently holds the upgraded PDB.
 
@@ -32,8 +32,8 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
     . cdb23com
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
 2. Start the CDB.
@@ -49,7 +49,7 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
     ``` text
     SQL> startup
     ORACLE instance started.
-    
+
     Total System Global Area 4292413984 bytes
     Fixed Size                  5368352 bytes
     Variable Size             939524096 bytes
@@ -60,7 +60,7 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
     ```
     </details>
 
-3. Switch to the *YELLOW* PDB. 
+3. Switch to the *YELLOW* PDB.
 
     ```
     <copy>
@@ -72,7 +72,7 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> alter session set container=YELLOW;
-    
+
     Session altered.
     ```
     </details>
@@ -89,13 +89,13 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> select version_full from v$instance;
-    
+
     VERSION_FULL
     -----------------
     23.4.0.24.05
     ```
     </details>
-  
+
 5. Ensure that the `COMPATIBLE` parameter is still set at the old release setting.
 
     ```
@@ -110,14 +110,14 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> SELECT value FROM v$parameter WHERE name = 'compatible';
-    
+
     VALUE
     --------------------------------------------------------------------------------
     19.0.0
     ```
     </details>
 
-6. Switch back to the root container and open the *YELLOW* PDB in *downgrade* mode. 
+6. Switch back to the root container and open the *YELLOW* PDB in *downgrade* mode.
 
     ```
     <copy>
@@ -125,8 +125,8 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
     alter pluggable database yellow close immediate;
     alter pluggable database yellow open downgrade;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     * *Downgrade* mode is a special mode - similar to *upgrade* mode. It enables exclusive access to the database and disables a lot of features.
@@ -135,21 +135,21 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> alter session set container=CDB$ROOT;
-    
+
     Session altered.
-    
+
     SQL> alter pluggable database yellow close immediate;
-    
+
     Pluggable database altered.
-    
+
     SQL> alter pluggable database yellow open downgrade;
-    
+
     Pluggable database altered.
     ```
     </details>
 
 7. Exit SQL*Plus.
-    
+
     ```
     <copy>
     exit
@@ -164,26 +164,26 @@ Now that the PDB is open in downgrade mode, you can start the process.
 
     ```
     <copy>
-    cd $ORACLE_HOME/bin 
+    cd $ORACLE_HOME/bin
     ./dbdowngrade -c 'YELLOW'
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     * Since you didn't specify a logging directory, it will use a default.
-    * If you want to monitor the downgrade, you can open a second terminal, go to the logging directory (`/u01/app/oracle/product/23/cfgtoollogs/downgrade`) and tail the log files. 
+    * If you want to monitor the downgrade, you can open a second terminal, go to the logging directory (`/u01/app/oracle/product/23/cfgtoollogs/downgrade`) and tail the log files.
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     Downgrading containers
     catcon::set_log_file_base_path: ALL catcon-related output will be written to [/u01/app/oracle/product/23/cfgtoollogs/downgrade/catdwgrd_catcon_123067.lst]
-    
+
     catcon::set_log_file_base_path: catcon: See [/u01/app/oracle/product/23/cfgtoollogs/downgrade/catdwgrd*.log] files for output generated by scripts
-    
+
     catcon::set_log_file_base_path: catcon: See [/u01/app/oracle/product/23/cfgtoollogs/downgrade/catdwgrd_*.lst] files for spool files, if any
-    
+
     catcon.pl: completed successfully
     ```
     </details>
@@ -196,32 +196,32 @@ Now that the PDB is open in downgrade mode, you can start the process.
     </copy>
     ```
 
-3. Shut down the PDB and unplug it from the *CDB23COM*. 
+3. Shut down the PDB and unplug it from the *CDB23COM*.
 
     ```
     <copy>
     alter pluggable database YELLOW close;
     alter pluggable database YELLOW unplug into '/home/oracle/scripts/yellow.xml';
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     SQL> alter pluggable database YELLOW close;
-    
+
     Pluggable database altered.
-    
+
     SQL> alter pluggable database YELLOW unplug into '/home/oracle/scripts/yellow.xml';
-    
+
     Pluggable database altered.
     ```
     </details>
 
 4. Exit SQL*Plus.
-    
+
     ```
     <copy>
     exit
@@ -239,8 +239,8 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     . cdb19
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
 2. Start up *CDB19*.
@@ -258,7 +258,7 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     ``` text
     SQL> startup
     ORACLE instance started.
-    
+
     Total System Global Area 4294964616 bytes
     Fixed Size                  9172360 bytes
     Variable Size             855638016 bytes
@@ -277,32 +277,32 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     create pluggable database YELLOW using '/home/oracle/scripts/yellow.xml';
     alter pluggable database YELLOW open upgrade;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     SQL> create pluggable database YELLOW using '/home/oracle/scripts/yellow.xml';
-    
+
     Pluggable database created.
-    
+
     SQL> alter pluggable database YELLOW open upgrade;
-    
+
     Pluggable database altered.
     ```
     </details>
 
-4. Switch to the *YELLOW* PDB and complete the downgrade. The catrelod.sql script reloads the appropriate version for each of the database components in the downgraded database. 
+4. Switch to the *YELLOW* PDB and complete the downgrade. The catrelod.sql script reloads the appropriate version for each of the database components in the downgraded database.
 
     ```
     <copy>
     alter session set container=YELLOW;
     @$ORACLE_HOME/rdbms/admin/catrelod.sql
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     * The script takes 10-15 minutes to complete.
@@ -312,7 +312,7 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     <summary>*click to see the output*</summary>
     ``` text
     (output truncated)
-    
+
     SQL> Rem    SQL_PHASE: MISC
     SQL> Rem    SQL_STARTUP_MODE: NORMAL
     SQL> Rem    SQL_IGNORABLE_ERRORS: NONE
@@ -325,9 +325,9 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     SQL> Rem
     SQL>
     SQL> alter session set "_ORACLE_SCRIPT" = false;
-    
+
     Session altered.
-    
+
     SQL>
     SQL>
     SQL>
@@ -335,9 +335,9 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     SQL> Rem END catrelod.sql
     SQL> Rem *******************************************************************
     ```
-    </details>  
+    </details>
 
-5. Recompile all invalid objects. The utlrp.sql script recompiles all existing PL/SQL modules that were previously in an INVALID state, such as packages, procedures, types, and so on. 
+5. Recompile all invalid objects. The utlrp.sql script recompiles all existing PL/SQL modules that were previously in an INVALID state, such as packages, procedures, types, and so on.
 
     ```
     <copy>
@@ -345,14 +345,14 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     </copy>
     ```
 
-    * It takes a few minutes for the recompilation to complete. 
+    * It takes a few minutes for the recompilation to complete.
     * In the end, you will see a message saying *END utlrp.sql*.
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     (output truncated)
-        
+
     SQL> SET serveroutput off
     SQL>
     SQL>
@@ -362,9 +362,9 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     SQL>
     SQL> SET serveroutput on
     SQL> EXECUTE dbms_registry_sys.validate_components;
-    
+
     PL/SQL procedure successfully completed.
-    
+
     SQL> SET serveroutput off
     SQL>
     SQL>
@@ -372,7 +372,7 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     SQL> Rem END utlrp.sql
     SQL> Rem ===========================================================================
     ```
-    </details>  
+    </details>
 
 6. Restart the PDB.
 
@@ -381,8 +381,8 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     shutdown immediate
     startup
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     * Since our session is in the *YELLOW* PDB, we can use `shutdown` and `startup` to just restart the PDB, not the entire CDB.
@@ -395,10 +395,10 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     Pluggable Database closed.
 
     SQL> startup
-    
+
     Pluggable Database opened.
     ```
-    </details>  
+    </details>
 
 7. Ensure that the PDB is open in *READ WRITE* mode and unrestricted.
 
@@ -412,16 +412,16 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     <summary>*click to see the output*</summary>
     ``` text
     SQL> select open_mode, restricted from v$pdbs;
-    
+
     OPEN_MODE  RES
     ---------- ---
     READ WRITE NO
-    
+
     1 row selected.
     ```
-    </details>  
+    </details>
 
-8. Check the version of the PDB. 
+8. Check the version of the PDB.
 
     ```
     <copy>
@@ -433,14 +433,14 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     <summary>*click to see the output*</summary>
     ``` text
     SQL> select version_full from v$instance;
-    
+
     VERSION_FULL
     ---------------
     19.21.0.0.0
-    
+
     1 row selected.
     ```
-    </details>  
+    </details>
 
 9. Ensure all components have been downgraded and are *VALID* or *OPTION OFF*.
 
@@ -454,30 +454,30 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     <summary>*click to see the output*</summary>
     ``` text
     SQL> select comp_id, version, status from dba_registry;
-    
+
     COMP_ID                        VERSION
     ------------------------------ ------------------------------
     STATUS
     --------------------------------------------
     CATALOG                        19.0.0.0.0
     VALID
-    
+
     CATPROC                        19.0.0.0.0
     VALID
-    
+
     RAC                            19.0.0.0.0
     OPTION OFF
-    
+
     XDB                            19.0.0.0.0
     VALID
-    
+
     OWM                            19.0.0.0.0
     VALID
-    
-    
+
+
     5 rows selected.
     ```
-    </details>  
+    </details>
 
 10. Gather dictionary and fixed objects statistics.
 
@@ -486,8 +486,8 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     exec dbms_stats.gather_dictionary_stats;
     exec dbms_stats.gather_fixed_objects_stats;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     * In this lab, you gather fixed objects statistics immediately after the downgrade. In a realistic scenario, you would wait some time until the database is warmed up and in use.
@@ -496,17 +496,17 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
     <summary>*click to see the output*</summary>
     ``` text
     SQL> exec dbms_stats.gather_dictionary_stats;
-    
+
     PL/SQL procedure successfully completed.
-    
+
     SQL> exec dbms_stats.gather_fixed_objects_stats;
-    
+
     PL/SQL procedure successfully completed.
     ```
     </details>
 
 11. Exit SQL*Plus.
-    
+
     ```
     <copy>
     exit
@@ -519,8 +519,8 @@ You may now *proceed to the next lab*.
 
 ## Learn More
 
-A downgrade is a very useful fallback option. You can use it even after go-live and move back to the previous release without data loss. However, you can only downgrade to the release from which you originally upgraded. 
-A downgrade doesn't bring back the old data dictionary, but rather brings the data dictionary into a compatible state that can be used with the old release. 
+A downgrade is a very useful fallback option. You can use it even after go-live and move back to the previous release without data loss. However, you can only downgrade to the release from which you originally upgraded.
+A downgrade doesn't bring back the old data dictionary, but rather brings the data dictionary into a compatible state that can be used with the old release.
 In order to downgrade, it is a requirement that you haven't changed the `COMPATIBLE` parameter since the upgrade. The parameter must have the same value as on the previous release.
 
 * Documentation, [Downgrading a Single Pluggable Oracle Database (PDB)](https://docs.oracle.com/en/database/oracle/oracle-database/23/upgrd/downgrading-oracle-db-after-upgrade.html#GUID-66560D5D-A5C8-4ACC-82C0-46315465E77F)

@@ -27,8 +27,8 @@ This lab assumes:
       sqlplus / as sysdba
       alter session set container=UPGR;
       </copy>
-       
-      Be sure to hit RETURN
+
+      -- Be sure to hit RETURN
       ```
 
 2. Check the SQL Tuning Sets and the number of statements in them:
@@ -39,7 +39,7 @@ This lab assumes:
     select count(*), sqlset_name from dba_sqlset_statements group by sqlset_name order by 2;
     </copy>
     ```
-    
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -49,11 +49,52 @@ This lab assumes:
       COUNT(*) SQLSET_NAME
     ---------- ----------------------------------------
             31 STS_CaptureAWR
-            38 STS_CaptureCursorCache  
+            38 STS_CaptureCursorCache
     ```
     </details>
 
-3. Analyze performance in the upgraded database. Using the workload captured in SQL Tuning Sets before the upgrade as a baseline, the database now test executes the workload stored in the SQL Tuning Sets, but this time in an upgraded database. Now you can see the effect of the new 19c optimizer. First, you compare *CPU\_TIME*.
+3. Check the if the performance regression was forcely introduced via *optimizer_index_cost_adj*:
+
+    ```
+    <copy>
+    show parameter optimizer_index_cost_adj
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> show parameter optimizer_index_cost_adj
+
+    NAME                                 TYPE        VALUE
+    ------------------------------------ ----------- ------------------------------
+    optimizer_index_cost_adj             integer     10000
+    ```
+    </details>
+
+    If you see any **a value different from 10000** for the *optimizer_index_cost_adj*, adjust it:
+
+    ```
+    <copy>
+    alter system set optimizer_index_cost_adj=10000;
+    show parameter optimizer_index_cost_adj
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> alter system set optimizer_index_cost_adj=10000;
+
+    System altered.
+
+    NAME                                 TYPE        VALUE
+    ------------------------------------ ----------- ------------------------------
+    optimizer_index_cost_adj             integer     10000
+    ```
+    </details>
+
+4. Analyze performance in the upgraded database. Using the workload captured in SQL Tuning Sets before the upgrade as a baseline, the database now test executes the workload stored in the SQL Tuning Sets, but this time in an upgraded database. Now you can see the effect of the new 19c optimizer. First, you compare *CPU\_TIME*.
 
     ```
     <copy>
@@ -68,7 +109,7 @@ This lab assumes:
     SQL Tuning Set does exist - will run SPA now ...
     SQL Performance Analyzer Task does not exist - will be created ...
 
-    PL/SQL procedure successfully completed.    
+    PL/SQL procedure successfully completed.
     ```
     </details>
 
@@ -78,14 +119,14 @@ This lab assumes:
     - Compare before/after.
     - Report on the results based on *CPU\_TIME*.
 
-4. Generate the HTML Report containing the results below.
+5. Generate the HTML Report containing the results below.
 
     ```
     <copy>
     @/home/oracle/scripts/spa_report_cpu.sql
     </copy>
     ```
-5. Then repeat this for *ELAPSED\_TIME*. First, analyze performance.
+6. Then repeat this for *ELAPSED\_TIME*. First, analyze performance.
 
     ```
     <copy>
@@ -93,15 +134,15 @@ This lab assumes:
     </copy>
     ```
 
-5. Next, generate a report.
+7. Next, generate a report.
 
     ```
     <copy>
     @/home/oracle/scripts/spa_report_elapsed.sql
     </copy>
-    ```    
+    ```
 
-6. Exit SQL*Plus.
+8. Exit SQL*Plus.
 
     ```
     <copy>
@@ -109,8 +150,8 @@ This lab assumes:
     </copy>
     ```
 
-7. Open the two SPA reports. Put them side-by-side.
-    
+9. Open the two SPA reports. Put them side-by-side.
+
     ```
     <copy>
     firefox compare_spa_* &
@@ -118,53 +159,53 @@ This lab assumes:
     ```
     ![Notice that there will be two html files in scripts folder](./images/spa-compare-two-reports.png " ")
 
-    Notice: 
+    Notice:
     * The comparison method used in the two reports - CPU usage and elapsed time.
     * Regardless of how you measure it, the workload overall runs faster in the upgraded database.
         - For *CPU\_TIME* there is around 7 % performance improvement.
         - For *ELAPSED\_TIME* there is around 20 % performance improvement.
     * The workload runs faster in the upgraded database.
 
-10. Scroll down to *Top nn SQL ...*. The list shows the SQLs sorted by impact. 
+10. Scroll down to *Top nn SQL ...*. The list shows the SQLs sorted by impact.
 
     ![recognize regressed statements and statements with plan change](./images/spa-report-top-sql.png " ")
 
-    * Only impact larger than 2 % are marked in green. If the workload is between 0 and 2 %, it is still an improvement. But in the SPA script the threshold is set to 2 %. 
+    * Only impact larger than 2 % are marked in green. If the workload is between 0 and 2 %, it is still an improvement. But in the SPA script the threshold is set to 2 %.
     * Optionally, examine the SPA script (`/home/oracle/scripts/spa_elapsed.sql`), change the threshold and repeat the report to see the difference.
 
-11. Find the details on SQL ID *7m5h0wf6stq0q* and see the difference in execution plans. 
+11. Find the details on SQL ID *7m5h0wf6stq0q* and see the difference in execution plans.
 
     ![See details on individual SQLs](./images/spa-plan-compare.png " ")
 
-    * Notice how the plan changes. After upgrade, the optimizer used a better access method (TABLE ACCESS BY INDEX ROWID BATCHED) on object CUSTOMER.
-    * TABLE ACCESS BY INDEX ROWID BATCHED access method allows the database to retrieve a few row ids from the index, and then attempts to access rows in block order to improve the clustering and reduce the number of times that the database must access a block. This makes it run faster.
-    * This demonstrates that a new optimizer out-of-the-box brings a lot of performance improvements. It is not always a good idea to deny plan changes as part of an upgrade. 
-    
+    * Notice how the plan changes. After upgrade, the optimizer used a worse access method (TABLE ACCESS FULL) on object CUSTOMER. This happened because we used the parameter *optimizer_index_cost_adj* to disfavor index usage.
+    * TABLE ACCESS FULL access method will perform a full table scan on the table, which is much slower given we are returning just a few rows and we could use an index.
+    * This demonstrates that even though a new optimizer out-of-the-box brings a lot of performance improvements, if you change important parameters you may end up with worse plans.
+
 12. Examine the rest of the SPA reports.
 
 13. Close Firefox.
 
 14. Reconnect to the database.
-    
+
       ```
       <copy>
       . cdb23
       sqlplus / as sysdba
       alter session set container=UPGR;
       </copy>
-       
-      Be sure to hit RETURN
+
+      -- Be sure to hit RETURN
       ```
 
 15. Implement a change. This could be any change that you want to test the effect of. Here you are changing an initialization parameter, but you could also change statistics, optimizer settings (`DBMS_OPTIM_BUNDLE`), or many other things.
 
     ```
     <copy>
-    alter session set optimizer_features_enable='11.2.0.4';
+    alter session reset optimizer_index_cost_adj;
     </copy>
     ```
 
-15. Re-analyze the workload based on *ELAPSED\_TIME*. This allows you to see the impact of the change on the database.
+16. Re-analyze the workload based on *ELAPSED\_TIME*. This allows you to see the impact of the change on the database.
 
     ```
     <copy>
@@ -172,35 +213,35 @@ This lab assumes:
     </copy>
     ```
 
-15. Generate a new report.
+17. Generate a new report.
 
     ```
     <copy>
     @/home/oracle/scripts/spa_report_elapsed.sql
     </copy>
-    ```    
+    ```
 
-16. Exit SQL*Plus.
+18. Exit SQL*Plus.
 
     ```
     <copy>
     exit
     </copy>
-    ```    
-    
-17. Open it with Firefox.
+    ```
+
+19. Open it with Firefox.
 
     ```
     <copy>
-    firefox $(ls -t compare_spa_runs*html | head -1) & 
+    firefox $(ls -t compare_spa_runs*html | head -1) &
     </copy>
     ```
 
-18. Find the details on SQL ID *7m5h0wf6stq0q* again.
+20. Find the details on SQL ID *7m5h0wf6stq0q* again.
 
     ![No change of plans](./images/spa-change-plan-compare.png " ")
 
-    * Notice that the plan no longer changes. By changing *optimizer\_features\_enable* you prevented the optimizer from using new access methods. 
+    * Notice that the plan no longer changes. By changing *optimizer\_features\_enable* you prevented the optimizer from using new access methods.
     * There is still a performance improvement. The new optimizer code still works better, even without the improved access method.
     * This also shows that *optimizer\_features\_enable* does not bring back the old optimizer. The database still runs on the new code, but certain new things are disabled.
 

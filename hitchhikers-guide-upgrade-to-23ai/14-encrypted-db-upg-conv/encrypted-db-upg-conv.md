@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab focuses on databases encrypted using Transparent Data Encryption (TDE). You will upgrade an encrypted non-CDB to Oracle Database 23ai and convert it to a PDB. This requires the database keystore passwords for the non-CDB and CDB. 
+This lab focuses on databases encrypted using Transparent Data Encryption (TDE). You will upgrade an encrypted non-CDB to Oracle Database 23ai and convert it to a PDB. This requires the database keystore passwords for the non-CDB and CDB.
 
 For this purpose, AutoUpgrade has its own keystore which you will use.
 
@@ -41,8 +41,8 @@ Currently, the *FTEX* database is not encrypted. You must start by preparing the
     . ftex
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
 3. Configure the database to store its keystore in the directory you just created. It's a static parameter requiring a restart of the database.
@@ -53,33 +53,33 @@ Currently, the *FTEX* database is not encrypted. You must start by preparing the
     shutdown immediate
     startup
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     SQL> alter system set wallet_root='/u01/app/oracle/admin/FTEX/wallet' scope=spfile;
-    
+
     System altered.
-    
+
     SQL> shutdown immediate
-    
+
     Database closed.
     Database dismounted.
     ORACLE instance shut down.
-    
+
     SQL> startup
-    
+
     ORACLE instance started.
-    
+
     Total System Global Area 1157627144 bytes
     Fixed Size                  8924424 bytes
     Variable Size             419430400 bytes
     Database Buffers          721420288 bytes
     Redo Buffers                7852032 bytes
-    
+
     Database mounted.
     Database opened.
     ```
@@ -97,7 +97,7 @@ Currently, the *FTEX* database is not encrypted. You must start by preparing the
     <summary>*click to see the output*</summary>
     ``` text
     SQL> alter system set tde_configuration='keystore_configuration=file' scope=both;
-    
+
     System altered.
     ```
     </details>
@@ -111,8 +111,8 @@ Currently, the *FTEX* database is not encrypted. You must start by preparing the
     administer key management set key identified by "oracle_4U" with backup;
     administer key management create local auto_login keystore from keystore '/u01/app/oracle/admin/FTEX/wallet/tde' identified by "oracle_4U";
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -148,12 +148,12 @@ Currently, the *FTEX* database is not encrypted. You must start by preparing the
     <summary>*click to see the output*</summary>
     ``` text
     SQL> alter tablespace users encryption encrypt;
-    
+
     Tablespace altered.
     ```
     </details>
 
-6. Verify that the *USERS* tablespace is encrypted. 
+6. Verify that the *USERS* tablespace is encrypted.
 
     ```
     <copy>
@@ -165,7 +165,7 @@ Currently, the *FTEX* database is not encrypted. You must start by preparing the
     <summary>*click to see the output*</summary>
     ``` text
     SQL> select tablespace_name, encrypted from dba_tablespaces;
-    
+
     TABLESPACE_NAME                ENC
     ------------------------------ ---
     SYSTEM                          NO
@@ -177,7 +177,7 @@ Currently, the *FTEX* database is not encrypted. You must start by preparing the
     </details>
 
 7. Exit SQL*Plus.
-    
+
     ```
     <copy>
     exit
@@ -203,8 +203,8 @@ Currently, the *CDB23* database is not encrypted. You must start by preparing th
     . cdb23
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
 3. Configure the database to store its keystore in the directory you just created. It's a static parameter requiring a restart of the database.
@@ -215,33 +215,33 @@ Currently, the *CDB23* database is not encrypted. You must start by preparing th
     shutdown immediate
     startup
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     SQL> alter system set wallet_root='/u01/app/oracle/admin/CDB23/wallet' scope=spfile;
-    
+
     System altered.
-    
+
     SQL> shutdown immediate
-    
+
     Database closed.
     Database dismounted.
     ORACLE instance shut down.
-    
+
     SQL> startup
-    
+
     ORACLE instance started.
-    
+
     Total System Global Area 4292413984 bytes
     Fixed Size                  5368352 bytes
     Variable Size            1157627904 bytes
     Database Buffers         3120562176 bytes
     Redo Buffers                8855552 bytes
-    
+
     Database mounted.
     Database opened.
     ```
@@ -259,7 +259,7 @@ Currently, the *CDB23* database is not encrypted. You must start by preparing th
     <summary>*click to see the output*</summary>
     ``` text
     SQL> alter system set tde_configuration='keystore_configuration=file' scope=both;
-    
+
     System altered.
     ```
     </details>
@@ -273,11 +273,11 @@ Currently, the *CDB23* database is not encrypted. You must start by preparing th
     administer key management set key identified by "oracle_4U" with backup;
     administer key management create local auto_login keystore from keystore '/u01/app/oracle/admin/CDB23/wallet/tde' identified by "oracle_4U";
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
-    * You use the same keystore password in *CDB23* as well for simplicity. Realistically, you would choose different keystore passwords. 
+    * You use the same keystore password in *CDB23* as well for simplicity. Realistically, you would choose different keystore passwords.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -304,7 +304,7 @@ Currently, the *CDB23* database is not encrypted. You must start by preparing th
 
 Analyze the *FTEX* database for upgrade readiness.
 
-1. To enable AutoUpgrade to work with encrypted databases, it must have access to a directory where it can store a special keystore just for AutoUpgrade. 
+1. To enable AutoUpgrade to work with encrypted databases, it must have access to a directory where it can store a special keystore just for AutoUpgrade.
 
     ```
     <copy>
@@ -331,7 +331,7 @@ Analyze the *FTEX* database for upgrade readiness.
     upg1.source_home=/u01/app/oracle/product/19
     upg1.target_home=/u01/app/oracle/product/23
     upg1.sid=FTEX
-    upg1.target_cdb=CDB23  
+    upg1.target_cdb=CDB23
     ```
     </details>
 
@@ -361,10 +361,10 @@ Analyze the *FTEX* database for upgrade readiness.
     upg> Job 100 completed
     ------------------- Final Summary --------------------
     Number of databases            [ 1 ]
-    
+
     Jobs finished                  [1]
     Jobs failed                    [0]
-    
+
     Please check the summary report at:
     /home/oracle/logs/encrypted-db-upg-conv/cfgtoollogs/upgrade/auto/status/status.html
     /home/oracle/logs/encrypted-db-upg-conv/cfgtoollogs/upgrade/auto/status/status.log

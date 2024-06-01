@@ -23,7 +23,7 @@ In this lab, you will:
 
     ![Start a terminal](./images/initialize-environment-start-terminal.png " ")
 
-4. The upgrade terminal has two tabs (a yellow one and a blue one). Each tab is a terminal. Throughout the labs you will be instructed which terminal to use. The terminals are referred to as the *yellow terminal* and the *blue terminal*. 
+4. The upgrade terminal has two tabs (a yellow one and a blue one). Each tab is a terminal. Throughout the labs you will be instructed which terminal to use. The terminals are referred to as the *yellow terminal* and the *blue terminal*.
 
     ![The upgrade terminal with two tabs](./images/initialize-environment-upgrade-terminal.png " ")
 

@@ -35,8 +35,8 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     export PATH=$ORACLE_HOME/bin:$PATH
     sql / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
 2. Get a list of PDBs.
@@ -46,9 +46,9 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     show pdbs
     </copy>
     ```
-    
+
     * There are three user-created PDBs, *RED*, *BLUE*, *GREEN*.
-    * *RED* and *BLUE* are open in *unrestricted* mode. 
+    * *RED* and *BLUE* are open in *unrestricted* mode.
     * *GREEN* is closed.
     * *PDB$SEED* is an special container used to create new PDBs.
 
@@ -60,7 +60,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
             2 PDB$SEED    READ ONLY     NO
             3 RED         READ WRITE    NO
             4 BLUE        READ WRITE    NO
-            6 GREEN       MOUNTED  
+            6 GREEN       MOUNTED
     ```
     </details>
 
@@ -80,12 +80,12 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
             2 PDB$SEED    READ ONLY     NO
             3 RED         READ WRITE    NO
             4 BLUE        READ WRITE    NO
-            6 GREEN       MOUNTED  
+            6 GREEN       MOUNTED
     ```
-    </details>    
+    </details>
 
 4. Get a list of containers.
-    
+
     ```
     <copy>
     select con_id, name, open_mode, restricted from v$containers;
@@ -105,7 +105,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
             4 BLUE        READ WRITE    NO
             6 GREEN       MOUNTED
     ```
-    </details>      
+    </details>
 
 5. See which PDBs open automatically when the CDB starts.
 
@@ -124,7 +124,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ___________ ________
     RED         OPEN
     ```
-    </details>   
+    </details>
 
 6. Set *BLUE* to auto-start. Ensure the current state is as desired and save state.
 
@@ -134,56 +134,56 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     alter pluggable database BLUE save state;
     select state from dba_pdb_saved_states where con_name='BLUE';
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     SQL> select open_mode from v$pdbs where name='BLUE';
-    
+
     OPEN_MODE
     _____________
     READ WRITE
-    
+
     SQL> alter pluggable database BLUE save state;
-    
+
     Pluggable database BLUE altered.
-    
+
     SQL> select state from dba_pdb_saved_states where con_name='BLUE';
-    
+
     STATE
     ________
     OPEN
     ```
-    </details>  
+    </details>
 
 7. *GREEN* is currently closed. Open it and save state.
 
     ```
     <copy>
-    alter pluggable database GREEN open;    
+    alter pluggable database GREEN open;
     alter pluggable database GREEN save state;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     SQL> alter pluggable database GREEN open;
-    
+
     Pluggable database GREEN altered.
-    
+
     SQL> alter pluggable database GREEN save state;
-    
+
     Pluggable database GREEN altered.
     ```
-    </details>  
+    </details>
 
-8. Exit SQLcl.    
+8. Exit SQLcl.
 
     ```
     <copy>
@@ -205,9 +205,9 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     <summary>*click to see the output (output may vary)*</summary>
     ``` text
     LSNRCTL for Linux: Version 23.0.0.0.0 - Production on 23-MAY-2024 13:11:02
-    
+
     Copyright (c) 1991, 2024, Oracle.  All rights reserved.
-    
+
     Connecting to (ADDRESS=(PROTOCOL=tcp)(HOST=)(PORT=1521))
     STATUS of the LISTENER
     ------------------------
@@ -237,7 +237,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
       Instance "CDB23", status READY, has 1 handler(s) for this service...
     The command completed successfully
     ```
-    </details> 
+    </details>
 
 10. Connect to a PDB via a service.
 
@@ -262,33 +262,33 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ____________________________________
     RED
     ```
-    </details>  
+    </details>
 
 12. Switch to *GREEN* PDB using the `ALTER SESSION` command and verify the outcome.
-    
+
     ```
     <copy>
     alter session set container=green;
     show con_name
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     SQL> alter session set container=green;
-    
+
     Session altered.
-    
+
     SQL> show con_name
 
     CON_NAME
     ------------------------------
     GREEN
     ```
-    </details>  
+    </details>
 
 ## Task 2: Check Parameters
 
@@ -298,16 +298,16 @@ You check initialization parameters, set somee to the CDB, find a list of PDBs a
 
     ```
     <copy>
-    select con_id, name, value 
-    from v$system_parameter 
-    where isdefault='FALSE' and con_id != 0 
+    select con_id, name, value
+    from v$system_parameter
+    where isdefault='FALSE' and con_id != 0
     order by 1, 2;
     </copy>
     ```
-    
-    * Notice only a few parameters are set in the PDBs. 
+
+    * Notice only a few parameters are set in the PDBs.
     * All others rely on the value from *CDB$ROOT* (`con_id=0`).
-    
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -321,7 +321,7 @@ You check initialization parameters, set somee to the CDB, find a list of PDBs a
             4 undo_tablespace    UNDOTBS1
             6 sga_target         0
             6 undo_tablespace    UNDOTBS1
-    
+
     8 rows selected.
     ```
     </details>
@@ -333,19 +333,19 @@ You check initialization parameters, set somee to the CDB, find a list of PDBs a
     alter session set container=RED;
     alter system set sga_target=500M scope=both;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
-    
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     SQL> alter session set container=RED;
-    
+
     Session altered.
-    
+
     SQL> alter system set sga_target=500M scope=both;
-    
+
     System altered.
     ```
     </details>
@@ -354,16 +354,16 @@ You check initialization parameters, set somee to the CDB, find a list of PDBs a
 
     ```
     <copy>
-    select con_id, name, value 
-    from v$system_parameter 
-    where isdefault='FALSE' and con_id != 0 
+    select con_id, name, value
+    from v$system_parameter
+    where isdefault='FALSE' and con_id != 0
     order by 1, 2;
     </copy>
     ```
-    
+
     * Notice how only *con_id* shows up in the list. Inside a PDB, you can't see information from the CDB or other PDBs.
-    * *sga_target* now has a minimum value of 500M. 
-    
+    * *sga_target* now has a minimum value of 500M.
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -385,12 +385,12 @@ You check DBA and CDB views.
     alter session set container=CDB$ROOT;
     select tablespace_name from dba_tablespaces;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     * Notice you are using a DBA view.
-        
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -408,18 +408,18 @@ You check DBA and CDB views.
 
     ```
     <copy>
-    select t.con_id, c.name, t.tablespace_name 
-    from cdb_tablespaces t, v$containers c 
+    select t.con_id, c.name, t.tablespace_name
+    from cdb_tablespaces t, v$containers c
     where t.con_id=c.con_id
     order by 1, 3;
     </copy>
     ```
-  
+
     * You have to join on `v$containers` to translate the container ID to its name.
     * Notice you are using a CDB view.
     * CDB views are similar to DBA views, but they show the result from the entire CDB.
     * For each DBA view there is a similar CDB view.
-        
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -442,7 +442,7 @@ You check DBA and CDB views.
             6 GREEN       SYSTEM
             6 GREEN       TEMP
             6 GREEN       UNDOTBS1
-    
+
     17 rows selected.
     ```
     </details>
@@ -452,17 +452,17 @@ You check DBA and CDB views.
     ```
     <copy>
     alter system set "_exclude_seed_cdb_view"=false;
-    select t.con_id, c.name, t.tablespace_name 
-    from cdb_tablespaces t, v$containers c 
+    select t.con_id, c.name, t.tablespace_name
+    from cdb_tablespaces t, v$containers c
     where t.con_id=c.con_id
     order by 1, 3;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
-  
+
     * Records from PDB$SEED is now included (`con_id=2`).
-    
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -476,7 +476,7 @@ You check DBA and CDB views.
             2 PDB$SEED    SYSAUX
             2 PDB$SEED    SYSTEM
             2 PDB$SEED    TEMP
-            2 PDB$SEED    UNDOTBS1            
+            2 PDB$SEED    UNDOTBS1
             3 RED         SYSAUX
             3 RED         SYSTEM
             3 RED         TEMP
@@ -489,7 +489,7 @@ You check DBA and CDB views.
             6 GREEN       SYSTEM
             6 GREEN       TEMP
             6 GREEN       UNDOTBS1
-    
+
     17 rows selected.
     ```
     </details>
@@ -499,18 +499,18 @@ You check DBA and CDB views.
     ```
     <copy>
     alter session set container=GREEN;
-    select t.con_id, c.name, t.tablespace_name 
-    from cdb_tablespaces t, v$containers c 
+    select t.con_id, c.name, t.tablespace_name
+    from cdb_tablespaces t, v$containers c
     where t.con_id=c.con_id
     order by 1, 3;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
-  
+
     * Notice how the same query now returns fewer rows. Only the rows from the PDB.
     * Only container ID 6 is shown. All other containers are hidden.
-    
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -520,7 +520,7 @@ You check DBA and CDB views.
             6 GREEN       SYSTEM
             6 GREEN       TEMP
             6 GREEN       UNDOTBS1
-    
+
     17 rows selected.
     ```
     </details>
@@ -535,7 +535,7 @@ You check DBA and CDB views.
 
 ## Task 4: Run Scripts
 
-You want to run a script in a CDB including all PDBs. 
+You want to run a script in a CDB including all PDBs.
 
 1. The Oracle home contains a program that can execute scripts in a CDB. Explore the options of *catcon.pl*.
 
@@ -586,11 +586,11 @@ You want to run a script in a CDB including all PDBs.
                    --
                    { sqlplus-script [arguments] | --x<SQL-statement> } ...
 
-    (output truncated)                   
+    (output truncated)
     ```
     </details>
 
-2. Recompile invalid objects in all containers using *utlrp.sql*. 
+2. Recompile invalid objects in all containers using *utlrp.sql*.
 
     ```
     <copy>
@@ -601,7 +601,7 @@ You want to run a script in a CDB including all PDBs.
        -n 2 \
        utlrp.sql
     </copy>
-    ``` 
+    ```
 
     * `-d` specifies the location of the script to execute
     * `-l` specifies the logging directory
@@ -613,11 +613,11 @@ You want to run a script in a CDB including all PDBs.
     <summary>*click to see the output*</summary>
     ``` text
     catcon::set_log_file_base_path: ALL catcon-related output will be written to [/tmp/utlrp_result_catcon_203841.lst]
-    
+
     catcon::set_log_file_base_path: catcon: See [/tmp/utlrp_result*.log] files for output generated by scripts
-    
+
     catcon::set_log_file_base_path: catcon: See [/tmp/utlrp_result_*.lst] files for spool files, if any
-    
+
     catcon.pl: completed successfully
     ```
     </details>

@@ -4,7 +4,7 @@
 
 Instead of upgrading and migrating an entire database, you will try a different approach in this lab. A migration of your data using transportable tablespaces into a brand new, empty database on Oracle Database 23ai. Using this approach, you can skip the usual upgrade and PDB conversion. Transportable tablespaces enables you to move your data directly into a higher release database. Further, you can export from a non-CDB and directly into a pluggable database.
 
-Transportable tablespaces works fine even on bigger databases compared to a regular export/import. However, with transportable tablespaces you don't have the same customization options. 
+Transportable tablespaces works fine even on bigger databases compared to a regular export/import. However, with transportable tablespaces you don't have the same customization options.
 
 You will use the easiest method for transportable tablespaces, Full Transportable Export/Import (FTEX), to move data from the *FTEX* database and into a new PDB in the *CDB23* database.
 
@@ -23,7 +23,7 @@ None.
 
 This lab is independent and self-contained. You can execute it at any time and in any order.
 
-## Task 1: Data Pump export 
+## Task 1: Data Pump export
 
 You need to prepare a few things before you can start FTEX.
 
@@ -42,8 +42,8 @@ You need to prepare a few things before you can start FTEX.
     . ftex
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
 3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary stats before starting a Data Pump export job.
@@ -58,16 +58,16 @@ You need to prepare a few things before you can start FTEX.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> exec dbms_stats.gather_dictionary_stats;
-    
+
     PL/SQL procedure successfully completed.
     ```
     </details>
 
-4. Create a database directory object. It must point to the directory in the operating system that you just created.   
+4. Create a database directory object. It must point to the directory in the operating system that you just created.
 
     ```
     <copy>
-    create directory ftexdir as '/home/oracle/logs/migrate-using-ftex';    
+    create directory ftexdir as '/home/oracle/logs/migrate-using-ftex';
     </copy>
     ```
 
@@ -75,12 +75,12 @@ You need to prepare a few things before you can start FTEX.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> create directory ftexdir as '/home/oracle/logs/migrate-using-ftex';
-    
+
     Directory created.
     ```
     </details>
 
-5. Create a dedicated user that you can use for the Data Pump export job. 
+5. Create a dedicated user that you can use for the Data Pump export job.
 
     ```
     <copy>
@@ -89,8 +89,8 @@ You need to prepare a few things before you can start FTEX.
     grant read, write on directory ftexdir to ftexuser;
     alter user ftexuser quota unlimited on system;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     * The default user tablespace must be *SYSTEM* or *SYSAUX* because all other tablespaces will be set read-only later on. During export, Data Pump must be able to create a table in the default tablespace.
@@ -99,19 +99,19 @@ You need to prepare a few things before you can start FTEX.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> create user ftexuser identified by ftexuser default tablespace system;
-    
+
     User created.
-    
+
     SQL> grant exp_full_database to ftexuser;
-    
+
     Grant succeeded.
-    
+
     SQL> grant read, write on directory ftexdir to ftexuser;
-    
+
     Grant succeeded.
-    
+
     SQL> alter user ftexuser quota unlimited on system;
-    
+
     User altered.
     ```
     </details>
@@ -120,12 +120,12 @@ You need to prepare a few things before you can start FTEX.
 
     ```
     <copy>
-    select 
+    select
        tablespace_name
-    from 
-       dba_tablespaces 
-    where 
-       contents='PERMANENT' 
+    from
+       dba_tablespaces
+    where
+       contents='PERMANENT'
        and tablespace_name not in ('SYSTEM','SYSAUX');
     </copy>
     ```
@@ -140,14 +140,14 @@ You need to prepare a few things before you can start FTEX.
         where
            contents='PERMANENT'
            and tablespace_name not in ('SYSTEM','SYSAUX');
-    
+
     TABLESPACE_NAME
     ------------------------------
     USERS
     ```
     </details>
 
-7. Set the tablespace read-only. 
+7. Set the tablespace read-only.
 
     ```
     <copy>
@@ -159,20 +159,20 @@ You need to prepare a few things before you can start FTEX.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> ALTER TABLESPACE USERS READ ONLY;
-     
+
     Tablespace altered.
     ```
     </details>
 
 6. Exit SQL*Plus.
-    
+
     ```
     <copy>
     exit
     </copy>
     ```
 
-7. Examine the precreated Data Pump parameter file. 
+7. Examine the precreated Data Pump parameter file.
 
     ```
     <copy>
@@ -180,7 +180,7 @@ You need to prepare a few things before you can start FTEX.
     </copy>
     ```
 
-    * `dumpfile` uses the `%L` wildcard that enables Data Pump to create many dump files. 
+    * `dumpfile` uses the `%L` wildcard that enables Data Pump to create many dump files.
     * `filesize` splits the files into 5 GB chunks which is handy if you need to transfer the dump files to a remote system.
     * `metrics` and `logtime` print additional diagnostic information in the log file.
     * `exclude` specifies to skip database statistics. You will re-gather statistics on target.
@@ -201,7 +201,7 @@ You need to prepare a few things before you can start FTEX.
     ```
     </details>
 
-8. Start the Data Pump export. Connect as the dedicated export user, *ftexuser*, that you just created. 
+8. Start the Data Pump export. Connect as the dedicated export user, *ftexuser*, that you just created.
 
     ```
     <copy>
@@ -216,9 +216,9 @@ You need to prepare a few things before you can start FTEX.
     ``` text
     Export: Release 19.0.0.0.0 - Production on Wed May 29 13:31:09 2024
     Version 19.21.0.0.0
-    
+
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
-    
+
     Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
     29-MAY-24 13:31:12.853: Starting "FTEXUSER"."SYS_EXPORT_FULL_01":  ftexuser/******** parfile=/home/oracle/scripts/migrate-using-ftex-exp.par
     29-MAY-24 13:31:13.540: W-1 Startup took 1 seconds
@@ -357,7 +357,7 @@ You need to prepare a few things before you can start FTEX.
     </copy>
     ```
 
-10. Set the tablespace *READ WRITE*. 
+10. Set the tablespace *READ WRITE*.
 
     ```
     <copy>
@@ -369,13 +369,13 @@ You need to prepare a few things before you can start FTEX.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> ALTER TABLESPACE USERS READ WRITE;
-     
+
     Tablespace altered.
     ```
     </details>
 
 11. Exit SQL*Plus.
-    
+
     ```
     <copy>
     exit
@@ -392,8 +392,8 @@ You create a new, empty PDB in Oracle Database 23ai and import directly into it.
     . cdb23
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
 3. Create a new PDB called *MAROON* and open it.
@@ -404,8 +404,8 @@ You create a new, empty PDB in Oracle Database 23ai and import directly into it.
     alter pluggable database maroon open;
     alter pluggable database maroon save state;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -418,10 +418,10 @@ You create a new, empty PDB in Oracle Database 23ai and import directly into it.
     SQL> alter pluggable database maroon open;
 
     Pluggable database altered.
-    
+
     SQL>alter pluggable database maroon save state;
 
-    Pluggable database altered.    
+    Pluggable database altered.
     ```
     </details>
 
@@ -437,8 +437,8 @@ You need a few more changes to the new PDB before you can start the import.
     alter session set container=maroon;
     create directory ftexdir as '/home/oracle/logs/migrate-using-ftex';
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -449,7 +449,7 @@ You need a few more changes to the new PDB before you can start the import.
     Directory created.
     ```
     </details>
-    
+
 2. Create a dedicated user for the Data Pump import.
 
     ```
@@ -459,8 +459,8 @@ You need a few more changes to the new PDB before you can start the import.
     grant read, write on directory ftexdir to ftexuser;
     alter user ftexuser quota unlimited on system;
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -469,15 +469,15 @@ You need a few more changes to the new PDB before you can start the import.
     SQL> create user ftexuser identified by ftexuser default tablespace system;
 
     User created.
-    
+
     SQL> grant imp_full_database to ftexuser;
 
     Grant succeeded.
-    
+
     SQL> grant read, write on directory ftexdir to ftexuser;
 
     Grant succeeded.
-    
+
     SQL> alter user ftexuser quota unlimited on system;
 
     User altered.
@@ -485,7 +485,7 @@ You need a few more changes to the new PDB before you can start the import.
     </details>
 
 3. Exit SQL*Plus.
-    
+
     ```
     <copy>
     exit
@@ -499,8 +499,8 @@ You need a few more changes to the new PDB before you can start the import.
     mkdir -p /u01/app/oracle/oradata/CDB23/MAROON
     cp /u02/oradata/FTEX/users01.dbf /u01/app/oracle/oradata/CDB23/MAROON
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
 3. Examine the precreated Data Pump import parameter file.
@@ -545,9 +545,9 @@ You need a few more changes to the new PDB before you can start the import.
     ``` text
     Import: Release 23.0.0.0.0 - Production on Wed May 29 14:01:10 2024
     Version 23.4.0.24.05
-    
+
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
-    
+
     Connected to: Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
     29-MAY-24 14:01:13.959: W-1 Startup on instance 1 took 0 seconds
     29-MAY-24 14:01:15.408: W-1 Master table "FTEXUSER"."SYS_IMPORT_TRANSPORTABLE_01" successfully loaded/unloaded
@@ -601,7 +601,7 @@ You need a few more changes to the new PDB before you can start the import.
     29-MAY-24 14:01:17.325: W-1 Processing object type DATABASE_EXPORT/GRANT/SYSTEM_GRANT/PROC_SYSTEM_GRANT/RMGR
     29-MAY-24 14:01:17.347: ORA-39083: Object type RMGR:PROC_SYSTEM_GRANT failed to create with error:
     ORA-29393: user EM_EXPRESS_ALL does not exist or is not logged on
-    
+
     29-MAY-24 14:01:17.352: W-1      Completed 1 RMGR objects in 0 seconds
     29-MAY-24 14:01:17.354: W-1 Processing object type DATABASE_EXPORT/GRANT/SYSTEM_GRANT/PROC_SYSTEM_GRANT/SQL
     29-MAY-24 14:01:17.375: W-1      Completed 1 SQL objects in 0 seconds
@@ -610,181 +610,181 @@ You need a few more changes to the new PDB before you can start the import.
     29-MAY-24 14:01:17.392: W-1 Processing object type DATABASE_EXPORT/SCHEMA/GRANT/SYSTEM_GRANT
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'DATAPATCH_ROLE' does not exist
-    
+
     Failing sql is:
     GRANT ALTER SESSION TO "DATAPATCH_ROLE"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_BASIC' does not exist
-    
+
     Failing sql is:
     GRANT CREATE SESSION TO "EM_EXPRESS_BASIC"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-00990: missing or invalid privilege
-    
+
     Failing sql is:
     GRANT EM EXPRESS CONNECT TO "EM_EXPRESS_BASIC"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ADVISOR TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT CREATE JOB TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ADMINISTER SQL TUNING SET TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ADMINISTER ANY SQL TUNING SET TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ADMINISTER SQL MANAGEMENT OBJECT TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ALTER SYSTEM TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT CREATE TABLESPACE TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT DROP TABLESPACE TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ALTER TABLESPACE TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT GRANT ANY OBJECT PRIVILEGE TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT GRANT ANY PRIVILEGE TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT GRANT ANY ROLE TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT CREATE ROLE TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT DROP ANY ROLE TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ALTER ANY ROLE TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT CREATE USER TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT DROP USER TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ALTER USER TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT CREATE PROFILE TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT ALTER PROFILE TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT DROP PROFILE TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT SET CONTAINER TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.545: ORA-39083: Object type SYSTEM_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_ALL' does not exist
-    
+
     Failing sql is:
     GRANT CREATE CREDENTIAL TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.555: W-1      Completed 74 SYSTEM_GRANT objects in 0 seconds
     29-MAY-24 14:01:17.555: W-1      Completed by worker 1 74 SYSTEM_GRANT objects in 0 seconds
     29-MAY-24 14:01:17.566: W-1 Processing object type DATABASE_EXPORT/SCHEMA/ROLE_GRANT
     29-MAY-24 14:01:17.701: ORA-39083: Object type ROLE_GRANT failed to create with error:
     ORA-01917: user or role 'EM_EXPRESS_BASIC' does not exist
-    
+
     Failing sql is:
      GRANT "SELECT_CATALOG_ROLE" TO "EM_EXPRESS_BASIC"
-    
+
     29-MAY-24 14:01:17.701: ORA-39083: Object type ROLE_GRANT failed to create with error:
     ORA-01919: Role 'EM_EXPRESS_ALL' does not exist.
-    
+
     Failing sql is:
      GRANT "EM_EXPRESS_ALL" TO "DBA"
-    
+
     29-MAY-24 14:01:17.701: ORA-39083: Object type ROLE_GRANT failed to create with error:
     ORA-01919: Role 'EM_EXPRESS_BASIC' does not exist.
-    
+
     Failing sql is:
      GRANT "EM_EXPRESS_BASIC" TO "EM_EXPRESS_ALL"
-    
+
     29-MAY-24 14:01:17.710: W-1      Completed 41 ROLE_GRANT objects in 0 seconds
     29-MAY-24 14:01:17.710: W-1      Completed by worker 1 41 ROLE_GRANT objects in 0 seconds
     29-MAY-24 14:01:17.713: W-1 Processing object type DATABASE_EXPORT/SCHEMA/DEFAULT_ROLE
@@ -794,17 +794,17 @@ You need a few more changes to the new PDB before you can start the import.
     29-MAY-24 14:01:17.820: ORA-39083: Object type ON_USER_GRANT failed to create with error:
     ORA-31625: Schema AUDSYS is needed to import this object, but is unaccessible
     ORA-01031: insufficient privileges
-    
+
     Failing sql is:
      GRANT INHERIT PRIVILEGES ON USER "AUDSYS" TO "PUBLIC"
-    
+
     29-MAY-24 14:01:17.820: ORA-39083: Object type ON_USER_GRANT failed to create with error:
     ORA-31625: Schema ORACLE_OCM is needed to import this object, but is unaccessible
     ORA-01435: user does not exist
-    
+
     Failing sql is:
      GRANT INHERIT PRIVILEGES ON USER "ORACLE_OCM" TO "PUBLIC"
-    
+
     29-MAY-24 14:01:17.829: W-1      Completed 18 ON_USER_GRANT objects in 0 seconds
     29-MAY-24 14:01:17.829: W-1      Completed by worker 1 18 ON_USER_GRANT objects in 0 seconds
     29-MAY-24 14:01:17.832: W-1 Processing object type DATABASE_EXPORT/SCHEMA/TABLESPACE_QUOTA
@@ -818,7 +818,7 @@ You need a few more changes to the new PDB before you can start the import.
     29-MAY-24 14:01:17.966: W-1      Completed by worker 1 1 TRUSTED_DB_LINK objects in 0 seconds
     29-MAY-24 14:01:17.969: W-1 Processing object type DATABASE_EXPORT/DIRECTORY/DIRECTORY
     29-MAY-24 14:01:18.010: ORA-31684: Object type DIRECTORY:"FTEXDIR" already exists
-    
+
     29-MAY-24 14:01:18.020: W-1      Completed 2 DIRECTORY objects in 1 seconds
     29-MAY-24 14:01:18.020: W-1      Completed by worker 1 2 DIRECTORY objects in 1 seconds
     29-MAY-24 14:01:18.023: W-1 Processing object type DATABASE_EXPORT/DIRECTORY/GRANT/OWNER_GRANT/OBJECT_GRANT
@@ -966,7 +966,7 @@ You need a few more changes to the new PDB before you can start the import.
     29-MAY-24 14:01:27.582: W-3      Completed 17 DATABASE_EXPORT/NORMAL_OPTIONS/TABLE_DATA objects in 1 seconds
     29-MAY-24 14:01:27.585: W-3      Completed 15 DATABASE_EXPORT/NORMAL_OPTIONS/VIEWS_AS_TABLES/TABLE_DATA objects in 1799 seconds
     29-MAY-24 14:01:27.587: W-3      Completed 1 DATABASE_EXPORT/SCHEMA/TABLE/TABLE_DATA objects in 0 seconds
-    29-MAY-24 14:01:27.605: Job "FTEXUSER"."SYS_IMPORT_TRANSPORTABLE_01" completed with 33 error(s) at Wed May 29 14:01:27 2024 elapsed 0 00:00:15    
+    29-MAY-24 14:01:27.605: Job "FTEXUSER"."SYS_IMPORT_TRANSPORTABLE_01" completed with 33 error(s) at Wed May 29 14:01:27 2024 elapsed 0 00:00:15
     ```
     </details>
 
@@ -984,11 +984,11 @@ You need a few more changes to the new PDB before you can start the import.
     . cdb23
     sqlplus / as sysdba
     </copy>
-            
-    Be sure to hit RETURN
+
+    -- Be sure to hit RETURN
     ```
 
-7. Switch to the *PURPLE* PDB and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import. 
+7. Switch to the *PURPLE* PDB and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import.
 
     ```
     <copy>
@@ -1003,9 +1003,9 @@ You need a few more changes to the new PDB before you can start the import.
     SQL> alter session set container=maroon;
 
     Session altered.
-    
+
     SQL> exec dbms_stats.gather_dictionary_stats;
-    
+
     PL/SQL procedure successfully completed.
     ```
     </details>
@@ -1018,13 +1018,13 @@ You need a few more changes to the new PDB before you can start the import.
     </copy>
     ```
 
-    * You could also transfer the old statistics from the source database using `DBMS_STATS`. 
+    * You could also transfer the old statistics from the source database using `DBMS_STATS`.
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     SQL> exec dbms_stats.gather_database_stats;
-    
+
     PL/SQL procedure successfully completed.
     ```
     </details>
@@ -1043,7 +1043,7 @@ You need a few more changes to the new PDB before you can start the import.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> select object_type, count(*) from all_objects where owner='F1' group by object_type;
-    
+
     OBJECT_TYPE               COUNT(*)
     ----------------------- ----------
     TABLE                           14
@@ -1056,18 +1056,18 @@ You need a few more changes to the new PDB before you can start the import.
     ```
     <copy>
     select ra.name || ' ' || ra.year as race
-    from f1.f1_races ra, 
-         f1.f1_results re, 
-         f1.f1_drivers d 
-    where d.forename='Kevin' 
+    from f1.f1_races ra,
+         f1.f1_results re,
+         f1.f1_drivers d
+    where d.forename='Kevin'
         and d.surname='Magnussen'
-        and re.position=2 
-        and d.driverid=re.driverid 
+        and re.position=2
+        and d.driverid=re.driverid
         and ra.raceid=re.raceid;
     </copy>
     ```
 
-    * *Kevin Magnussen* got on podium as runner-up in Australia 2014 - his first F1 appearance. 
+    * *Kevin Magnussen* got on podium as runner-up in Australia 2014 - his first F1 appearance.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -1081,7 +1081,7 @@ You need a few more changes to the new PDB before you can start the import.
         and re.position=2
         and d.driverid=re.driverid
         and ra.raceid=re.raceid;  2    3    4    5    6    7    8    9
-    
+
     RACE
     --------------------------------------------------------------------------------
     Australian Grand Prix 2014
@@ -1094,9 +1094,9 @@ You may now *proceed to the next lab*.
 
 ## Learn More
 
-Full Transportable Export/Import (FTEX) is a good way of moving your data. You can combine transportable tablespaces with RMAN incremental backups and move even huge databases. Further, it allows you to import data into a higher release database and even from a non-CDB into a PDB. You can even use it for cross-endian migrations by converting the data files. 
+Full Transportable Export/Import (FTEX) is a good way of moving your data. You can combine transportable tablespaces with RMAN incremental backups and move even huge databases. Further, it allows you to import data into a higher release database and even from a non-CDB into a PDB. You can even use it for cross-endian migrations by converting the data files.
 
-You can avoid an in-place upgrade and PDB conversion by using FTEX. The source database is left untouched in case a rollback is needed. 
+You can avoid an in-place upgrade and PDB conversion by using FTEX. The source database is left untouched in case a rollback is needed.
 
 * Documentation, [Oracle Data Pump Export Modes](https://docs.oracle.com/en/database/oracle/oracle-database/23/sutil/oracle-data-pump-export-utility.html#GUID-8E497131-6B9B-4CC8-AA50-35F480CAC2C4)
 * Webinar, [Cross Platform Migration – Transportable Tablespaces to the Extreme](https://youtu.be/DwUBvjQrPxs)
