@@ -56,7 +56,9 @@ This lab assumes:
     ```
     </details>
 
-3. To simulate bad performance, this lab changes optimizer behavior. Verify *optimizer_index_cost_adj* is set to *10000*. This causes the optimizer to disregard index scans and perform full table scan. This causes bad performance.
+3. The idea of the *Performance Stability Prescription* is to identify bad performance after upgrade. However, the workload in this lab runs faster in Oracle Database 23ai. To get the best benefit out of the lab, you simulate bad performance. This lab changes optimizer behavior (*optimizer_index_cost_adj*) which has a negative impact on the workload.
+You should imagine that this workload performs bad without any changes after upgrade to Oracle Database 23ai. 
+Verify *optimizer_index_cost_adj* is set to *10000*. This causes the optimizer to disregard index scans and perform full table scan. This causes bad performance.
 
     ```
     <copy>
@@ -160,29 +162,28 @@ This lab assumes:
     firefox compare_spa_* &
     </copy>
     ```
-    ![Notice that there will be two html files in scripts folder](./images/spa-compare-two-reports.png " ")
+    ![Notice that there will be two html files in scripts folder](./images/spa-compare-two-reports-23ai.png " ")
 
     Notice:
-    * The comparison method used in the two reports - CPU usage and elapsed time.
-    * Regardless of how you measure it, the workload overall runs faster in the upgraded database.
-        - For *CPU\_TIME* there is around 7 % performance improvement.
-        - For *ELAPSED\_TIME* there is around 20 % performance improvement.
-    * The workload runs faster in the upgraded database.
+    * The comparison method used in the two reports - *CPU_TIME* and *ELAPSED_TIME*.
+    * After upgrade, the test execution shows that the database - after upgrade - performs much worse than before upgrade. 
+        - For *CPU\_TIME* there is almost 300% regression in performance.
+        - For *ELAPSED\_TIME* there is around 150% regression in performance.
+    * The workload runs much slower in the upgraded database.
 
 10. Scroll down to *Top nn SQL ...*. The list shows the SQLs sorted by impact.
 
-    ![recognize regressed statements and statements with plan change](./images/spa-report-top-sql.png " ")
+    ![recognize regressed statements and statements with plan change](./images/spa-report-top-sql-23ai.png " ")
 
-    * Only impact larger than 2 % are marked in green. If the workload is between 0 and 2 %, it is still an improvement. But in the SPA script the threshold is set to 2 %.
-    * Optionally, examine the SPA script (`/home/oracle/scripts/spa_elapsed.sql`), change the threshold and repeat the report to see the difference.
+    * The first table on the left shows the SQLs that are using more CPU time after upgrade. The threshold in the SPA comparison is set to 2 %. Only SQLs regression more than that is highlighted. All, except one, SQLs have a plan change.
+    * The second table on the right shows the SQLs that are using more elapsed time after upgrade. A few are even performing better (the green rows) which is good. 
 
-11. Find the details on SQL ID *7m5h0wf6stq0q* and see the difference in execution plans.
+11. Find the details on SQL ID *4wg725nwpxb1z* and see the difference in execution plans.
 
-    ![See details on individual SQLs](./images/spa-plan-compare.png " ")
+    ![See details on individual SQLs](./images/spa-plan-compare-23ai.png " ")
 
-    * Notice how the plan changes. After upgrade, the optimizer used a worse access method (TABLE ACCESS FULL) on object CUSTOMER. This happened because we used the parameter *optimizer_index_cost_adj* to disfavor index usage.
-    * TABLE ACCESS FULL access method will perform a full table scan on the table, which is much slower given we are returning just a few rows and we could use an index.
-    * This demonstrates that even though a new optimizer out-of-the-box brings a lot of performance improvements, if you change important parameters you may end up with worse plans.
+    * Notice how the plan changes. Before upgrade, the optimizer used an index to find the rows. After upgrade, the optimizer chooses a full table scan. This is a consequence of the change to *optimizer_index_cost_adj*.
+    * Since only a few rows are needed, an index lookup is much faster than the full table scan
 
 12. Examine the other parts of the SPA reports.
 
@@ -200,7 +201,7 @@ This lab assumes:
       -- Be sure to hit RETURN
       ```
 
-15. Implement a change. This could be any change that you want to test the effect of. Here you are changing an initialization parameter, but you could also change statistics, optimizer settings (`DBMS_OPTIM_BUNDLE`), or many other things.
+15. Implement a change and re-test workload. Imagine you have found the root cause of the bad performance. In this case, you know it is *optimizer_index_cost_adj*. Now, you change the parameter back to the default value and repeat the test.
 
     ```
     <copy>
@@ -208,6 +209,8 @@ This lab assumes:
     alter system set optimizer_index_cost_adj=100;
     </copy>
     ```
+
+    * In a real situation, you could make many other changes. Change statistics preferences, gather new statistics, toggle optimizer fixes with `DBMS_OPTIM_BUNDLE`, or many other things.
 
 16. Re-analyze the workload based on *ELAPSED\_TIME*. This allows you to see the impact of the change on the database.
 
@@ -241,13 +244,12 @@ This lab assumes:
     </copy>
     ```
 
-20. Find the details on SQL ID *7m5h0wf6stq0q* again.
+20. Find the details on SQL ID *4wg725nwpxb1z* again.
 
-    ![No change of plans](./images/spa-change-plan-compare.png " ")
+    ![No change of plans](./images/spa-change-plan-compare-23ai.png " ")
 
-    * Notice that the plan no longer changes. By changing *optimizer\_features\_enable* you prevented the optimizer from using new access methods.
-    * There is still a performance improvement. The new optimizer code still works better, even without the improved access method.
-    * This also shows that *optimizer\_features\_enable* does not bring back the old optimizer. The database still runs on the new code, but certain new things are disabled.
+    * Notice that the plan no longer changes. Without *optimizer_index_cost_adj* the optimizer chooses the same plan after upgrade. 
+    * The new SPA report focuses on CPU time. There is a slight improvement, but below the 2% SPA threshold so the row is not marked in green. 
 
 Normally, you would focus on the SQLs with a negative impact on your workload. The idea of such SPA runs is to accept the better plans and identify and cure the ones which are regressing.
 

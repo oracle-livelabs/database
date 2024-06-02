@@ -146,7 +146,7 @@ In the AWR Diff Report, you will compare a snapshot period **before** upgrade to
 	firefox awrdiff*.html &
 	</copy>
 	```
-	![AWR Diff Report](./images/awr-compare-diff-report.png " ")
+	![AWR Diff Report](./images/awr-compare-diff-report-23ai.png " ")
 
 10. Examine the AWR diff report.
    * Compare items such as Wait Events etc. Watch out for significant divergence between the two runs, for instance, the different redo sizes per run.

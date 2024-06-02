@@ -34,6 +34,33 @@ You start by checking the *CDB19* database.
     -- Be sure to hit RETURN
     ```
 
+2. Start up *CDB19*.
+
+    ```
+    <copy>
+    startup
+    </copy>
+    ```
+
+    * The *CDB19* database might be running already. If so, you will get `ORA-01081: cannot start already-running ORACLE - shut it down first`. You can safely ignore the error.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> startup
+    ORACLE instance started.
+
+    Total System Global Area 4294964616 bytes
+    Fixed Size                  9172360 bytes
+    Variable Size             855638016 bytes
+    Database Buffers         3422552064 bytes
+    Redo Buffers                7602176 bytes
+
+    Database mounted.
+    Database opened.
+    ```
+    </details>
+
 2. Get a list of PDBs.
 
     ```
