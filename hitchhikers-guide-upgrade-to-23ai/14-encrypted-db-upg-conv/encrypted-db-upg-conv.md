@@ -817,6 +817,14 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
     ```
     </details>
 
+8. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
 **Congratulations!** You have now upgraded your encrypted database to Oracle Database 23ai.
 
 You may now *proceed to the next lab*.
