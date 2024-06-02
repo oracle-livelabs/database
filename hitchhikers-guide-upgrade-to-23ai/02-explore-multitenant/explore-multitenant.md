@@ -30,9 +30,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
 
     ```
     <copy>
-    export ORACLE_SID=CDB23
-    export ORACLE_HOME=/u01/app/oracle/product/23
-    export PATH=$ORACLE_HOME/bin:$PATH
+    . cdb23
     sql / as sysdba
     </copy>
 
@@ -59,8 +57,25 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ______ ________ __________ __________
     2      PDB$SEED READ ONLY  NO
     3      RED      READ WRITE NO
-    4      BLUE     READ WRITE NO
+    4      BLUE     MOUNTED    NO
     6      GREEN    MOUNTED
+    ```
+    </details>
+
+3. Start the PDB called *BLUE*.
+
+    ```
+    <copy>
+    alter pluggable database blue open;
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> alter pluggable database blue open;
+
+    Pluggable database BLUE altered.
     ```
     </details>
 
@@ -247,7 +262,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     </copy>
     ```
 
-11. Verify you are connected to the *RED*.
+11. Verify you are connected to *RED*.
 
     ```
     <copy>
@@ -293,6 +308,15 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
 ## Task 2: Check Parameters
 
 You check initialization parameters and set some in the CDB. Also, find a list of PDBs and connect to them using different means.
+
+1. Switch back to the root container.
+
+    ```
+    <copy>
+    alter session set container=cdb$root;
+    </copy>
+    ```
+
 
 1. Get a list of non-default parameters in the pluggable databases.
 
