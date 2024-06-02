@@ -43,6 +43,7 @@ You start by checking the *CDB19* database.
     ```
 
     * There is one user-created PDBs in the CDB, *ORANGE*.
+    * If you have already made lab 15 Downgrade a PDB, you will also see *YELLOW*.
 
     <details>
     <summary>*click to see the output*</summary>

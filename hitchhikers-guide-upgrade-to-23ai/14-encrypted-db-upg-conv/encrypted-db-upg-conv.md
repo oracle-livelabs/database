@@ -298,6 +298,14 @@ Currently, the *CDB23* database is not encrypted. You must start by preparing th
     ```
     </details>
 
+6. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
 ## Task 3: Analyze the database
 
 Analyze the *FTEX* database for upgrade readiness.
@@ -320,6 +328,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
     * The location for the AutoUpgrade keystore is defined by `global.keystore`.
     * `target_cdb` specified the CDB where you want to plug in the non-CDB specified by `sid`.
+    * `target_pdb_name` renames the *FTEX* database on plug-in to *CYAN*.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -330,6 +339,7 @@ Analyze the *FTEX* database for upgrade readiness.
     upg1.target_home=/u01/app/oracle/product/23
     upg1.sid=FTEX
     upg1.target_cdb=CDB23
+    upg1.target_pdb_name.FTEX=CYAN
     ```
     </details>
 

@@ -67,14 +67,14 @@ You need to prepare a few things before you can start FTEX.
 
     ```
     <copy>
-    create directory ftexdir as '/home/oracle/logs/migrate-using-ftex';
+    create or replace directory ftexdir as '/home/oracle/logs/migrate-using-ftex';
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> create directory ftexdir as '/home/oracle/logs/migrate-using-ftex';
+    SQL> create or replace directory ftexdir as '/home/oracle/logs/migrate-using-ftex';
 
     Directory created.
     ```
@@ -348,39 +348,6 @@ You need to prepare a few things before you can start FTEX.
     29-MAY-24 13:32:29.389: Job "FTEXUSER"."SYS_EXPORT_FULL_01" successfully completed at Wed May 29 13:32:29 2024 elapsed 0 00:01:18
     ```
     </details>
-
-9. Set the tablespace to *READ WRITE* again. You might need the *FTEX* database in another lab. In a real migration, you don't need to do this.
-
-    ```
-    <copy>
-    sqlplus / as sysdba
-    </copy>
-    ```
-
-10. Set the tablespace *READ WRITE*.
-
-    ```
-    <copy>
-    ALTER TABLESPACE USERS READ WRITE;
-    </copy>
-    ```
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    SQL> ALTER TABLESPACE USERS READ WRITE;
-
-    Tablespace altered.
-    ```
-    </details>
-
-11. Exit SQL*Plus.
-
-    ```
-    <copy>
-    exit
-    </copy>
-    ```
 
 ## Task 2: Create new PDB
 
@@ -1087,6 +1054,52 @@ You need a few more changes to the new PDB before you can start the import.
     Australian Grand Prix 2014
     ```
     </details>
+
+11. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
+## Task 4: Set tablespace read-write
+
+You might need the *FTEX* database in another lab. In a real migration, you don't need to do this.
+
+1. Set the tablespace to *READ WRITE* again. 
+
+    ```
+    <copy>
+    . ftex
+    sqlplus / as sysdba
+    </copy>
+    ```
+
+2. Set the tablespace *READ WRITE*.
+
+    ```
+    <copy>
+    ALTER TABLESPACE USERS READ WRITE;
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> ALTER TABLESPACE USERS READ WRITE;
+
+    Tablespace altered.
+    ```
+    </details>
+
+11. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
 
 **Congratulations!** You have now moved your data into a PDB on Oracle Database 23ai
 

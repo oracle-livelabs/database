@@ -163,7 +163,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
     * `source_db_link` is the name of the database link in the target CDB, plus the refresh rate. Here, it's set to 60 seconds which is too low for a realistic scenario, but suitable for demo purposes.
     * `target_pdb_name` renames the database from *FTEX* to *TEAL*.
     * `target_pdb_copy_option` instructs the CDB to use Oracle Managed Files (OMF).
-    * `start_time` is set to 15 minutes from starting AutoUpgrade. In a realistic scneario you would probably use an absolute time.
+    * `start_time` is set to 10 minutes from starting AutoUpgrade. In a realistic scneario you would probably use an absolute time.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -176,7 +176,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
     upg1.source_dblink.FTEX=CLONEPDB 60
     upg1.target_pdb_name.FTEX=TEAL
     upg1.target_pdb_copy_option.FTEX=file_name_convert=none
-    upg1.start_time=+15m
+    upg1.start_time=+10m
     ```
     </details>
 
