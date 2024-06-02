@@ -22,7 +22,7 @@ This lab assumes:
 
 ## Task 1: Create SQL Plan Baseline for one statement
 
-In the previous lab, you found a statement that changed plan after upgrade (SQL ID *7m5h0wf6stq0q*). You saw in the SQL Performance Analyzer report that the optimizer used a different access method. You determined that the new plan works better. Now, you want to create a SQL Plan Baseline for that SQL, so the optimizer will only consider the new, better plan.
+In the previous lab, you found a statement that changed plan after upgrade (SQL ID *4wg725nwpxb1z*). You saw in the SQL Performance Analyzer report that the optimizer used a different access method. You determined that the new plan works better. Now, you want to create a SQL Plan Baseline for that SQL, so the optimizer will only consider the new, better plan.
 
 1. Use the yellow terminal. Connect to the upgraded UPGR database.
 
@@ -37,9 +37,9 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
       ```
 
 2. Create a SQL Plan Baseline. You will use a script created by Carlos Sierra. When prompted for:
-      - *SQL_ID* (*1*), enter *7m5h0wf6stq0q*.
-      - *1st Plan Hash Value*, enter *3642382161*.
-      - *2nd Plan Hash Value*, if *1075826057* is listed as a known plan, enter *1075826057*, else hit RETURN.
+      - *SQL_ID* (*1*), enter *4wg725nwpxb1z*.
+      - *1st Plan Hash Value*, enter *612465046*.
+      - *2nd Plan Hash Value*, hit RETURN.
       - *3rd Plan Hash Value*, hit RETURN.
       - *FIXED*, hit RETURN.
 
@@ -48,149 +48,129 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
       @/home/oracle/scripts/spb_create.sql
       </copy>
       ```
-      <details>
-      <summary>*click to see the output*</summary>
-      ``` text
-      SQL> @/home/oracle/scripts/spb_create.sql
-
-      PL/SQL procedure successfully completed.
-
-      PL/SQL procedure successfully completed.
-
-      1. Enter SQL_ID (required)
-      Enter value for 1: 7m5h0wf6stq0q
-
-      BEGIN
-      *
-      ERROR at line 1:
-      ORA-01403: no data found
-      ORA-06512: at line 2
-
-      SIGNATURE
-      ----------------------------------------
-      6460547004167210343
-
-      X_HOST_NAME
-      ----------------------------------------------------------------
-      hol.localdomain
-
-      X_DB_NAME
-      ---------
-      UPGR
-
-      X_CO
-      ----
-      NONE
-
-      X_CONTAINER
-      ----------------------------------------------------------------------------
-      UPGR
-
-      SQL> @spm/spb_create.sql 7m5h0wf6stq0q
-
-      spb_create_upgr_hol_localdomain_upgr_7m5h0wf6stq0q_20230708_072334.txt
-
-      HOST      : hol.localdomain
-      DATABASE  : UPGR
-      CONTAINER : UPGR
-      SQL_ID    : 7m5h0wf6stq0q
-      SQL_HANDLE:
-      SIGNATURE : 6460547004167210343
-
-
-      EXISTING BASELINES
-      ##################
-
-      PLANS PERFORMANCE
-      #################
-
-            Plan ET Avg      ET Avg      CPU Avg     CPU Avg           BG Avg       BG Avg     Rows Avg     Rows Avg       Executions       Executions                                   ET 100th    ET 99th     ET 97th     ET 95th     CPU 100th   CPU 99th    CPU 97th    CPU 95th
-      Hash Value AWR (ms)    MEM (ms)    AWR (ms)    MEM (ms)             AWR          MEM          AWR          MEM              AWR              MEM   MIN Cost   MAX Cost  NL  HJ  MJ Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)
-      ----------- ----------- ----------- ----------- ----------- ------------ ------------ ------------ ------------ ---------------- ---------------- ---------- ---------- --- --- --- ----------- ----------- ----------- ----------- ----------- ----------- ----------- -----------
-      3642382161       2.028                   1.237                      254                     1.000                        15,156                         263        263   0   0   0       2.079       2.079       2.079       2.079       1.254       1.254       1.254       1.254
-
-      Select up to 3 plans:
-
-      1st Plan Hash Value (req): 3642382161
-      2nd Plan Hash Value (opt):
-      3rd Plan Hash Value (opt):
-
-      FIXED (opt):
-
-      FIX
-      ---
-      NO
-      Plans created from memory for PHV 3642382161
-
-      PLANS
-      ----------
-            0
-
-      Plans created from memory for PHV
-
-      PLANS
-      ----------
-            0
-
-      Plans created from memory for PHV
-
-      PLANS
-      ----------
-            0
-
-      SQLSET_NAME
-      --------------------------------
-      S_7M5H0WF6STQ0Q
-
-      dropping sqlset: S_7M5H0WF6STQ0Q
-      ORA-13754: "SQL Tuning Set" "S_7M5H0WF6STQ0Q" does not exist for user "SYS". while trying to drop STS: S_7M5H0WF6STQ0Q (safe to ignore)
-      created sqlset: S_7M5H0WF6STQ0Q
-      loaded sqlset: S_7M5H0WF6STQ0Q
-      Plans created from AWR for PHVs 3642382161
-
-      PLANS
-      ----------
-            1
-
-      PLANS:0
-
-      RESULTING BASELINES
-      ###################
-
-      CREATED             PLAN_NAME                      ENA ACC FIX REP ADA ORIGIN                        LAST_EXECUTED       LAST_MODIFIED       DESCRIPTION
-      ------------------- ------------------------------ --- --- --- --- --- ----------------------------- ------------------- ------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------
-      2023-07-08T07:24:45 SQL_PLAN_5ma3t8pb1mjb745221865 YES YES NO  YES NO  MANUAL-LOAD-FROM-STS                              2023-07-08T07:24:45
-
-      CREATED             PLAN_NAME                      ENA ACC FIX REP ADA ORIGIN                          ET_PER_EXEC_MS  CPU_PER_EXEC_MS BUFFERS_PER_EXEC   READS_PER_EXEC    ROWS_PER_EXEC   EXECUTIONS     ELAPSED_TIME         CPU_TIME      BUFFER_GETS       DISK_READS   ROWS_PROCESSED
-      ------------------- ------------------------------ --- --- --- --- --- ----------------------------- ---------------- ---------------- ---------------- ---------------- ---------------- ------------ ---------------- ---------------- ---------------- ---------------- ----------------
-      2023-07-08T07:24:45 SQL_PLAN_5ma3t8pb1mjb745221865 YES YES NO  YES NO  MANUAL-LOAD-FROM-STS                     1.643            1.106              254                0                1        1,753        2,879,566        1,939,022          444,702               12            1,753
-
-      CREATED             PLAN_NAME                      ENA ACC FIX REP ADA    PLAN_ID PLAN_HASH_2  PLAN_HASH PLAN_HASH_FULL DESCRIPTION
-      ------------------- ------------------------------ --- --- --- --- --- ---------- ----------- ---------- -------------- ------------------------------------------------------------------------------------------------------------------------------------------------------
-      2023-07-08T07:24:45 SQL_PLAN_5ma3t8pb1mjb745221865 YES YES NO  YES NO  1159862373  1159862373 3642382161
-
-      SQL PLAN BASELINES
-      ##################
-      Error: neither SQL handle nor plan name specified
-
-      RESULTING BASELINES
-      ###################
-
-      CREATED             PLAN_NAME                      ENA ACC FIX REP ADA ORIGIN                        LAST_EXECUTED       LAST_MODIFIED       DESCRIPTION
-      ------------------- ------------------------------ --- --- --- --- --- ----------------------------- ------------------- ------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------
-      2023-07-08T07:24:45 SQL_PLAN_5ma3t8pb1mjb745221865 YES YES NO  YES NO  MANUAL-LOAD-FROM-STS                              2023-07-08T07:24:45
-
-      CREATED             PLAN_NAME                      ENA ACC FIX REP ADA ORIGIN                          ET_PER_EXEC_MS  CPU_PER_EXEC_MS BUFFERS_PER_EXEC   READS_PER_EXEC    ROWS_PER_EXEC   EXECUTIONS     ELAPSED_TIME         CPU_TIME      BUFFER_GETS       DISK_READS   ROWS_PROCESSED
-      ------------------- ------------------------------ --- --- --- --- --- ----------------------------- ---------------- ---------------- ---------------- ---------------- ---------------- ------------ ---------------- ---------------- ---------------- ---------------- ----------------
-      2023-07-08T07:24:45 SQL_PLAN_5ma3t8pb1mjb745221865 YES YES NO  YES NO  MANUAL-LOAD-FROM-STS                     1.643            1.106              254                0                1        1,753        2,879,566        1,939,022          444,702               12            1,753
-
-      CREATED             PLAN_NAME                      ENA ACC FIX REP ADA    PLAN_ID PLAN_HASH_2  PLAN_HASH PLAN_HASH_FULL DESCRIPTION
-      ------------------- ------------------------------ --- --- --- --- --- ---------- ----------- ---------- -------------- ------------------------------------------------------------------------------------------------------------------------------------------------------
-      2023-07-08T07:24:45 SQL_PLAN_5ma3t8pb1mjb745221865 YES YES NO  YES NO  1159862373  1159862373 3642382161
-
-      spb_create_upgr_hol_localdomain_upgr_7m5h0wf6stq0q_20230708_072334.txt
-      ```
-      </details>
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> @/home/oracle/scripts/spb_create.sql
+    
+    PL/SQL procedure successfully completed. 
+    
+    PL/SQL procedure successfully completed.
+    
+    1. Enter SQL_ID (required)
+    Enter value for 1: 4wg725nwpxb1z
+    
+    BEGIN
+    *
+    ERROR at line 1:
+    ORA-01403: no data found
+    ORA-06512: at line 2
+    Help: https://docs.oracle.com/error-help/db/ora-01403/
+    
+    SIGNATURE
+    ----------------------------------------
+    9146269246847507225
+    
+    X_HOST_NAME
+    ----------------------------------------------------------------
+    holserv1.livelabs.oraclevcn.com
+    
+    X_DB_NAME
+    ---------
+    CDB23
+    
+    X_CO
+    ----
+    NONE
+    
+    X_CONTAINER
+    -----------
+    UPGR  
+    
+    SQL> @spm/spb_create.sql 4wg725nwpxb1z
+    
+    spb_create_cdb23_oraclevcn_com_upgr_4wg725nwpxb1z_20240602_172425.txt
+    
+    HOST      : holserv1.livelabs.oraclevcn.com
+    DATABASE  : CDB23
+    CONTAINER : UPGR
+    SQL_ID    : 4wg725nwpxb1z
+    SQL_HANDLE:
+    SIGNATURE : 9146269246847507225
+    
+    EXISTING BASELINES
+    ~~~~~~~~~~~~~~~~~~
+    
+    PLANS PERFORMANCE
+    ~~~~~~~~~~~~~~~~~
+    
+           Plan ET Avg      ET Avg      CPU Avg     CPU Avg           BG Avg       BG Avg     Rows     Avg     Rows Avg       Executions       Executions                                   ET     100th    ET 99th     ET 97th     ET 95th     CPU 100th   CPU 99th    CPU 97th    CPU 95th
+     Hash Value AWR (ms)    MEM (ms)    AWR (ms)    MEM (ms)             AWR          MEM              AWR          MEM              AWR              MEM   MIN Cost   MAX Cost  NL  HJ  MJ Pctl (ms)       Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)
+    ----------- ----------- ----------- ----------- ----------- ------------ ------------     ------------ ------------ ---------------- ---------------- ---------- ---------- --- --- ---     ----------- ----------- ----------- ----------- ----------- ----------- ----------- -----------
+      612465046       0.796                   0.763                      254                     7.    370                        98,313                         245        267   0   0   0       1.    078       1.078       1.078       1.078       1.078       1.078       1.078       1.078
+    
+    Select up to 3 plans:
+    
+    1st Plan Hash Value (req): 612465046
+    2nd Plan Hash Value (opt):
+    3rd Plan Hash Value (opt):
+    
+    FIXED (opt):
+    
+    FIX
+    ---
+    NO
+    Plans created from memory for PHV 612465046
+    
+         PLANS
+    ----------
+             0
+    
+    Plans created from memory for PHV
+    
+         PLANS
+    ----------
+             0
+    
+    Plans created from memory for PHV
+    
+         PLANS
+    ----------
+             0
+     
+    SQLSET_NAME
+    --------------------------------
+    S_4WG725NWPXB1Z
+    
+          FROM TABLE(DBMS_SQLTUNE.select_workload_repository (          ,           ,
+                                                                        *
+    ERROR at line 30:
+    ORA-06550: line 30, column 69:
+    PL/SQL: ORA-00936: missing expression
+    ORA-06550: line 29, column 5:
+    PL/SQL: SQL Statement ignored
+    Help: https://docs.oracle.com/error-help/db/ora-06550/
+    
+    Plans created from AWR for PHVs 612465046
+    
+         PLANS
+    ---------- 
+    
+    PLANS:0
+    
+    RESULTING BASELINES
+    ~~~~~~~~~~~~~~~~~~~
+    
+    SQL PLAN BASELINES
+    ~~~~~~~~~~~~~~~~~~
+    Error: neither SQL handle nor plan name specified
+    
+    RESULTING BASELINES
+    ~~~~~~~~~~~~~~~~~~~
+    
+    spb_create_cdb23_oraclevcn_com_upgr_4wg725nwpxb1z_20240602_172425.txt
+    ```
+    </details>
 
       * The script might produce `ORA-01403` if the SQL is not in memory, don't worry about it. The script then takes from AWR instead.
       * In this lab, most of the times, there is only one available plan. In a realistic scenario, you will have multiple plans to choose from.

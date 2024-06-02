@@ -759,16 +759,16 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
 	 4 BLUE                               MOUNTED
 	 5 GREEN                              MOUNTED
 	 6 UPGR                               MOUNTED
-	 7 FTEX                               READ WRITE NO
+	 7 CYAN                               READ WRITE NO
     ```
     </details>
 
-6. Switch to the *FTEX* PDB and ensure the *USERS* tablespace is still encrypted.
+6. Switch to the *CYAN* PDB and ensure the *USERS* tablespace is still encrypted.
 
 
     ```
     <copy>
-    alter session set container=FTEX;
+    alter session set container=CYAN;
     select tablespace_name, encrypted from dba_tablespaces;
     </copy>    
     
@@ -778,7 +778,7 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> alter session set container=FTEX;
+    SQL> alter session set container=CYAN;
     
     Session altered.
     
