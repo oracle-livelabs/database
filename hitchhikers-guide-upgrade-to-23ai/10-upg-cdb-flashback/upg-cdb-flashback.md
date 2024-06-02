@@ -241,8 +241,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
 
     ```
     <copy>
-    export ORACLE_HOME=/u01/app/oracle/product/23
-    export PATH=$ORACLE_HOME/bin:$PATH
+    . cdb23
     sqlplus / as sysdba
     </copy>
 
