@@ -81,18 +81,18 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
 
     ```
     <copy>
-    select version_full from v$instance;
+    select version from v$instance;
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> select version_full from v$instance;
+    SQL> select version from v$instance;
 
     VERSION_FULL
     -----------------
-    23.4.0.24.05
+    23.0.0.0.0
     ```
     </details>
 
@@ -426,14 +426,14 @@ You need to plug the PDB into a CDB on Oracle Database 19c and finish the downgr
 
     ```
     <copy>
-    select version_full from v$instance;
+    select version from v$instance;
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> select version_full from v$instance;
+    SQL> select version from v$instance;
 
     VERSION_FULL
     ---------------

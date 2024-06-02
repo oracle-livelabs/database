@@ -122,13 +122,13 @@ In the AWR Diff Report, you will compare a snapshot period **before** upgrade to
 	```
    When prompted for:
     * *report_type*, hit RETURN.
-    * *awr_location*, type *AWR_PDB*, hit RETURN.
+    * *awr_location*, type *AWR\_PDB*, hit RETURN.
     * *num_days*, type *2*, hit RETURN.
     * *begin_snap* (first pair), type the first *Snap Id* from lab 2, hit RETURN. If you can't remember, check the file `/home/oracle/scripts/snap-lab-02-before.log`.
     * *end_snap* (first pair), type the last *Snap Id* from lab 2, hit RETURN. If you can't remember, check the file `/home/oracle/scripts/snap-lab-02-after.log`.
     * *num_days*, type *2*, hit RETURN.
-    * *begin_snap* (second pair), type the first *Snap Id* from this lab, hit RETURN. If you can't remember, check the file `/home/oracle/scripts/snap-lab-05-before.log`.
-    * *end_snap* (second pair), type the last *Snap Id* from this lab, hit RETURN. If you can't remember, check the file `/home/oracle/scripts/snap-lab-05-after.log`.
+    * *begin_snap* (second pair), type the first *Snap Id* from this lab, hit RETURN. If you can't remember, check the file `/home/oracle/scripts/awr-compare-snap-before.log`.
+    * *end_snap* (second pair), type the last *Snap Id* from this lab, hit RETURN. If you can't remember, check the file `/home/oracle/scripts/awr-compare-snap-after.log`.
     * *report_name*, hit RETURN.
 
 2. Wait until the HTML output has been generated, then exit SQL*Plus.

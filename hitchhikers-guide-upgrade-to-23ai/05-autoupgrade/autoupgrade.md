@@ -40,15 +40,13 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ java -jar
-    autoupgrade.jar -version
-    build.version 24.3.240419
-    build.date 2024/04/19 15:45:58 -0400
-    build.hash a1ea950cc
-    build.hash_date 2024/04/19 15:05:29 -0400
+    build.version 24.4.240426
+    build.date 2024/04/26 12:55:56 -0400
+    build.hash 5845ff020
+    build.hash_date 2024/04/26 12:49:16 -0400
     build.supported_target_versions 12.2,18,19,21,23
     build.type production
-    build.label (HEAD, tag: v24.3, origin/stable_devel, stable_devel)
+    build.label (HEAD, tag: v24.4, origin/stable_devel, stable_devel)
     build.MOS_NOTE 2485457.1
     build.MOS_LINK https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1
     ```
@@ -75,7 +73,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     #
     # Sample config file for AutoUpgrade
     #
-    # build version 24.3.240419
+    # build version 24.4.240426
     # build date    2024/04/19 15:45:58 -0400
     #
     #
@@ -221,7 +219,7 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    AutoUpgrade 24.3.240419 launched with default internal options
+    AutoUpgrade 24.4.240426 launched with default internal options
     Processing config file ...
     +--------------------------------+
     | Starting AutoUpgrade execution |
@@ -305,7 +303,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    AutoUpgrade 24.3.240419 launched with default internal options
+    AutoUpgrade 24.4.240426 launched with default internal options
     Processing config file ...
     +--------------------------------+
     | Starting AutoUpgrade execution |
@@ -444,11 +442,22 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     ```
     <copy>
     cd /home/oracle/logs/autoupgrade-UPGR/UPGR
+    ls -l
     </copy>
     ```
 
     * Explore the subdirectories.
     * Notice how each job number has its own dedicated directory.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    total 8
+    drwxr-x---. 3 oracle oinstall  119 Jun  2 06:06 100
+    drwxr-x---. 6 oracle oinstall 4096 Jun  2 06:09 101
+    drwxr-x---. 2 oracle oinstall 4096 Jun  2 06:09 temp
+    ```
+    </details>
 
 6. Explore the directory of your current upgrade job. If your job number is different, you must change it (from `101`).
 

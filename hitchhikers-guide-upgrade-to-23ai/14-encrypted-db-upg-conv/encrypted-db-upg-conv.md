@@ -347,7 +347,7 @@ Analyze the *FTEX* database for upgrade readiness.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    AutoUpgrade 24.3.240419 launched with default internal options
+    AutoUpgrade 24.4.240426 launched with default internal options
     Processing config file ...
     Loading AutoUpgrade keystore
     AutoUpgrade keystore was successfully loaded
@@ -586,7 +586,7 @@ Analyze the *FTEX* database for upgrade readiness.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    AutoUpgrade 24.3.240419 launched with default internal options
+    AutoUpgrade 24.4.240426 launched with default internal options
     Processing config file ...
     Loading AutoUpgrade keystore
     AutoUpgrade keystore was successfully loaded
@@ -660,7 +660,7 @@ All prerequisites have been meet. You can now start the upgrade and conversion.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    AutoUpgrade 24.3.240419 launched with default internal options
+    AutoUpgrade 24.4.240426 launched with default internal options
     Processing config file ...
     Loading AutoUpgrade keystore
     AutoUpgrade keystore was successfully loaded

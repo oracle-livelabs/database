@@ -67,15 +67,15 @@ You now have two SQL Tuning Sets:
     <copy>
     col name for a30
     col owner for a10
-    select name, owner, statement_count from dba_sqlset;
+    select name, owner, statement_count 
+    from dba_sqlset 
+    where name like 'STS_Capture%';
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> select name, owner, statement_count from dba_sqlset;
-
     NAME                           OWNER      STATEMENT_COUNT
     ------------------------------ ---------- ---------------
     STS_CaptureCursorCache         SYS                     41

@@ -36,7 +36,10 @@ This lab assumes:
     ```
     <copy>
     col sqlset_name format a40
-    select count(*), sqlset_name from dba_sqlset_statements group by sqlset_name order by 2;
+    select count(*), sqlset_name 
+    from dba_sqlset_statements 
+    where sqlset_name like 'STS_Capture%'
+    group by sqlset_name order by 2;
     </copy>
     ```
 
@@ -49,7 +52,7 @@ This lab assumes:
       COUNT(*) SQLSET_NAME
     ---------- ----------------------------------------
             31 STS_CaptureAWR
-            38 STS_CaptureCursorCache
+            41 STS_CaptureCursorCache
     ```
     </details>
 
@@ -201,7 +204,8 @@ This lab assumes:
 
     ```
     <copy>
-    alter session reset optimizer_index_cost_adj;
+    alter system reset optimizer_index_cost_adj scope=spfile;
+    alter system set optimizer_index_cost_adj=100;
     </copy>
     ```
 

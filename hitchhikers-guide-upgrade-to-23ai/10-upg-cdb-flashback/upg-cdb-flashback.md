@@ -98,7 +98,7 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    AutoUpgrade 24.3.240419 launched with default internal options
+    AutoUpgrade 24.4.240426 launched with default internal options
     Processing config file ...
     +--------------------------------+
     | Starting AutoUpgrade execution |
@@ -169,7 +169,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    AutoUpgrade 24.3.240419 launched with default internal options
+    AutoUpgrade 24.4.240426 launched with default internal options
     Processing config file ...
     +--------------------------------+
     | Starting AutoUpgrade execution |

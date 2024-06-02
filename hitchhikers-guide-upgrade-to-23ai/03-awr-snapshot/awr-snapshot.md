@@ -37,14 +37,14 @@ This lab assumes:
 
     ```
     <copy>
-    @/home/oracle/scripts/awr-compare-snap-before.sql
+    @/home/oracle/scripts/awr-snapshot-snap-before.sql
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/awr-compare-snap-before.sql
+    SQL> @/home/oracle/scripts/awr-snapshot-snap-before.sql
     -------------------------------------------
     - AWR Snapshot with Snap-ID: 113 created. -
     -------------------------------------------
@@ -86,7 +86,7 @@ This lab assumes:
 
 Use HammerDB to start a workload. At the same time, capture workload information from the cursor cache into a SQL tuning set.
 
-1. Back in the first terminal, run the capture script. The script polls the cursor cache every 10 seconds for two minutes. Leave the script running and immediately proceed to the next step. Do not press CTRL+C.
+1. Back in the first terminal, run the capture script. The script polls the cursor cache every 10 seconds for three minutes. Leave the script running and immediately proceed to the next step. Do not press CTRL+C.
 
     ```
     <copy>
@@ -154,14 +154,14 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
     ```
     <copy>
-    @/home/oracle/scripts/awr-compare-snap-after.sql
+    @/home/oracle/scripts/awr-snapshot-snap-after.sql
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> @/home/oracle/scripts/awr-compare-snap-after.sql
+    SQL> @/home/oracle/scripts/awr-snapshot-snap-after.sql
     -------------------------------------------
     - AWR Snapshot with Snap-ID: 117 created. -
     -------------------------------------------
@@ -538,10 +538,6 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     </details>
 
 You may now *proceed to the next lab*.
-
-## Appendix 1: Additional information on HammerDB
-
-1. You can modify the standard parameters in either the GUI tool or as defaults in the XML files located in `/home/oracle/HammerDB-4.3/config`
 
 ## Learn More
 
