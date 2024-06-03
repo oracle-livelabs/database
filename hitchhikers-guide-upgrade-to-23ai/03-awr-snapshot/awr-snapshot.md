@@ -58,9 +58,11 @@ This lab assumes:
 4. In a new terminal, start HammerDB.
 
     ```
+    <copy>
     . upgr
     cd /home/oracle/HammerDB-4.10/
     ./hammerdb &
+    </copy>
     ```
 
 ## Task 2: Prepare workload
