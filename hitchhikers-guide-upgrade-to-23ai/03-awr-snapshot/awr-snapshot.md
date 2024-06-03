@@ -182,7 +182,7 @@ You may now *proceed to the next lab* or complete the next optional task.
 
 ## Task 5: Export AWR (optional)
 
-When you migrate databases, preserving the AWR is important. When you upgrade, the AWR remains in the database. This exercise is done for protection but it is not necessary for the flow of the lab. **You will specify a START and an END snapshot number** to export the AWR data between these two snapshots.
+When you migrate databases, preserving the AWR is important. When you upgrade, the AWR remains in the database. This exercise is done for protection but it is not necessary for the flow of the lab. You will specify a START and an END snapshot number to export the AWR data between these two snapshots.
 
 1. Set the environment to the *UPGR* database and connect.
 
