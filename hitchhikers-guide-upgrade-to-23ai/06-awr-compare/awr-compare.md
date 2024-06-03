@@ -60,9 +60,11 @@ Use HammerDB to create a workload.
 4. Open a new terminal. Start HammerDB in the new terminal.
 
     ```
+    <copy>
     . cdb23
     cd /home/oracle/HammerDB-4.10/
     ./hammerdb &
+    </copy>
     ```
 
 5. In the benchmark list, expand *Oracle* / *TPROC-C*

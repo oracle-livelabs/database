@@ -82,18 +82,21 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
     ```
     </details>
 
-2. Create a SQL Plan Baseline. You will use a script created by Carlos Sierra. When prompted for:
-      - *SQL_ID* (*1*), enter *4wg725nwpxb1z*.
-      - *1st Plan Hash Value*, enter *612465046*.
-      - *2nd Plan Hash Value*, hit RETURN.
-      - *3rd Plan Hash Value*, hit RETURN.
-      - *FIXED*, hit RETURN.
+2. Create a SQL Plan Baseline. You will use a script created by Carlos Sierra.
 
       ```
       <copy>
       @/home/oracle/scripts/spb_create.sql
       </copy>
       ```
+
+When prompted for:
+      - *SQL_ID* (*1*), enter *4wg725nwpxb1z*.
+      - *1st Plan Hash Value*, enter *612465046*.
+      - *2nd Plan Hash Value*, hit RETURN.
+      - *3rd Plan Hash Value*, hit RETURN.
+      - *FIXED*, hit RETURN.
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -286,19 +289,20 @@ In lab 2, you created a workload using HammerDB. At the same time, you were samp
       ``` text
       SQL> SET SERVEROUT ON
       SQL> DECLARE
-              l_plans_loaded  PLS_INTEGER;
-            BEGIN
-               l_plans_loaded := DBMS_SPM.load_plans_from_sqlset(
-                                    sqlset_name  => 'STS_CaptureCursorCache',
-                                    fixed        => 'YES',
-                                    enabled      => 'YES'
-                                 );
-               DBMS_OUTPUT.PUT_LINE('Plans loaded: ' || l_plans_loaded);
-            END;
-      /SQL>   2    3    4    5    6    7    8    9   10   11
+        2     l_plans_loaded  PLS_INTEGER;
+        3  BEGIN
+        4     l_plans_loaded := DBMS_SPM.load_plans_from_sqlset(
+        5                          sqlset_name  => 'STS_CaptureCursorCache',
+        6                          fixed        => 'YES',
+        7                          enabled      => 'YES'
+        8                       );
+        9     DBMS_OUTPUT.PUT_LINE('Plans loaded: ' || l_plans_loaded);
+        10 END;
+        11 /
       Plans loaded: 28
 
       PL/SQL procedure successfully completed.
+      SQL>
       ```
       </details>
 
@@ -441,12 +445,12 @@ In lab 2, you created a workload using HammerDB. At the same time, you were samp
       * Again, the right side is much better because the optimizer uses the before-upgrade plans.
       * Performance after upgrade with before-plan plans (the right side) is better than before the upgrade. Most likely, the database is using new functionality which out-of-the-box brings better performance.
 
-6. Reset the optimizer hack.
+6. Reset the optimizer hack, changing the parameter back to the default value (100).
 
     ```
     <copy>
-    alter system reset optimizer_index_cost_adj scope=spfile;
-    alter system set optimizer_index_cost_adj=100;
+    alter system reset optimizer_index_cost_adj scope=both;
+    show parameter optimizer_index_cost_adj
     </copy>
     ```
 

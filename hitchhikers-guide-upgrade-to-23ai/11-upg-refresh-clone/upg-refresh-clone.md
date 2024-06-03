@@ -112,9 +112,9 @@ Refreshable clone PDB works via a database link. You must create a user and gran
     <summary>*click to see the output*</summary>
     ``` text
     SQL> create database link clonepdb
-    connect to dblinkuser
-    identified by dblinkuser
-    using 'localhost/ftex';  2    3    4
+      2  connect to dblinkuser
+      3  identified by dblinkuser
+      4  using 'localhost/ftex';
 
     Database link created.
     ```
@@ -132,6 +132,7 @@ Refreshable clone PDB works via a database link. You must create a user and gran
     <summary>*click to see the output*</summary>
     ``` text
     SQL> select * from dual@clonepdb;
+
     D
     -
     X
