@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will use SQL Tuning Advisor (STA) to find suggestions for improving SQLs.
+In this lab, you will use SQL Tuning Advisor (SQL Tuning Advisor) to find suggestions for improving SQLs.
 
 Estimated Time: 10 minutes
 
@@ -22,7 +22,7 @@ This lab assumes:
 
 ## Task 1: Create a tuning task
 
-You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The SQL Tuning Set contains the workload you generated with HammerDB. STA will look at each of the statements and come up with tuning suggestions.
+You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The SQL Tuning Set contains the workload you generated with HammerDB. SQL Tuning Advisor will look at each of the statements and come up with tuning suggestions.
 
 1. Use the yellow terminal. Connect to the upgraded UPGR database.
 
@@ -36,7 +36,7 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
       -- Be sure to hit RETURN
       ```
 
-2. Create a STA task.
+2. Create a SQL Tuning Advisor task.
 
     ```
     <copy>
@@ -46,64 +46,98 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
 
 3. Optionally, you can look at the script to understand how you use the SQL Tuning Advisor API.
 
-4. Examine the output of STA. Scroll to the top of the output. Your output may vary from the sample output below. Read and interpret your own report.
+4. Examine the output of SQL Tuning Advisor. Scroll to the top of the output. Your output may vary from the sample output below. Read and interpret your own report.
 
-    * General information contains basic information on the STA task. You can see it was created based on a SQL Tuning Set.
+    * General information contains basic information on the SQL Tuning Advisor task. You can see it was created based on a SQL Tuning Set.
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    -------------------------------------------------------------------------------
+    ------------------------------------------------------
     GENERAL INFORMATION SECTION
-    -------------------------------------------------------------------------------
-    Tuning Task Name                : STA_UPGRADE_TO_19C_CC
+    ------------------------------------------------------
+    Tuning Task Name                : STA_UPGRADE_TO_23AI_CC
     Tuning Task Owner               : SYS
     Workload Type                   : SQL Tuning Set
     Scope                           : COMPREHENSIVE
     Time Limit(seconds)             : 360
     Completion Status               : COMPLETED
-    Started at                      : 07/08/2023 08:43:29
-    Completed at                    : 07/08/2023 08:43:36
+    Started at                      : 06/03/2024 08:56:45
+    Completed at                    : 06/03/2024 08:57:06
     SQL Tuning Set (STS) Name       : STS_CaptureCursorCache
     SQL Tuning Set Owner            : SYS
     Number of Statements in the STS : 37
     ```
     </details>
 
-    * The Details section contains the findings made by the advisor.
+    * The Details section contains the findings made by the advisor. Below you can find two of the findings.
 
     <details>
     <summary>*click see to an example of a finding*</summary>
     ``` text
     -------------------------------------------------------------------------------
-    FINDINGS SECTION (1 finding)
+    FINDINGS SECTION (2 findings)
     -------------------------------------------------------------------------------
-
+    
     1- Index Finding (see explain plans section below)
     --------------------------------------------------
-    The execution plan of this statement can be improved by creating one or more
-    indices.
-
-    Recommendation (estimated benefit: 97.64%)
-    ------------------------------------------
-    - Consider running the Access Advisor to improve the physical schema design
+      The execution plan of this statement can be improved by creating one or more
+      indices.
+    
+      Recommendation (estimated benefit: 97.77%)
+      ------------------------------------------
+      - Consider running the Access Advisor to improve the physical schema design
         or creating the recommended index.
-        create index TPCC.IDX$$_00E80002 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
-
-    Rationale
-    ---------
+        create index TPCC.IDX$$_02ED0001 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID
+        ");
+    
+      Rationale
+      ---------
         Creating the recommended indices significantly improves the execution plan
         of this statement. However, it might be preferable to run "Access Advisor"
         using a representative SQL workload as opposed to a single statement. This
         will allow to get comprehensive index recommendations which takes into
         account index maintenance overhead and additional space consumption.
-
+    
+    2- Alternative Plan Finding
+    ---------------------------
+      Some alternative execution plans for this statement were found by searching
+      the system's real-time and historical performance data.
+    
+      The following table lists these plans ranked by their average elapsed time.
+      See section "ALTERNATIVE PLANS SECTION" for detailed information on each
+      plan.
+    
+      id plan hash	last seen	     elapsed (s)  origin	  note
+      -- ---------- -------------------- ------------ --------------- ----------------
+       1  612465046  2024-06-03/07:02:38	    0.001 AWR		  original plan
+       2 4040750106  2024-06-03/07:02:38	    0.041 AWR
+    
+      Information
+      -----------
+      - The Original Plan appears to have the best performance, based on the
+        elapsed time per execution.  However, if you know that one alternative
+        plan is better than the Original Plan, you can create a SQL plan baseline
+        for it. This will instruct the Oracle optimizer to pick it over any other
+        choices in the future.
+        BEGIN
+         dbms_sqltune.create_sql_plan_baseline(
+          task_name => 'STA_UPGRADE_TO_23AI_CC',
+          object_id => 5,
+          owner_name => 'SYS',
+          plan_hash_value => xxxxxxxx);
+        END;
+        /
+    
     -------------------------------------------------------------------------------
-    Object ID  : 13
-    Schema Name: TPCC
-    SQL ID	   : 89k9fqaq5b5sy
-    SQL Text   : SELECT C_BALANCE, C_FIRST, C_MIDDLE, C_ID FROM CUSTOMER WHERE
-                 C_LAST = :B3 AND C_D_ID = :B2 AND C_W_ID = :B1 ORDER BY C_FIRST
+    Object ID     : 7
+    Schema Name   : TPCC
+    Container Name: UPGR
+    SQL ID	      : csv0xdm9c394t
+    SQL Text      : SELECT O_ID, O_CARRIER_ID, O_ENTRY_D FROM (SELECT O_ID,
+                    O_CARRIER_ID, O_ENTRY_D FROM ORDERS WHERE O_D_ID = :B3 AND
+                    O_W_ID = :B2 AND O_C_ID=:B1 ORDER BY O_ID DESC) WHERE ROWNUM
+                    = 1  
     ```
     </details>
 
@@ -119,10 +153,13 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
     -- NOTE: this script may need to be edited for your system     --
     --	 (index names, privileges, etc) before it is executed. --
     -----------------------------------------------------------------
-    create index TPCC.IDX$$_00E80001 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
-    create index TPCC.IDX$$_00E80002 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
-    create index TPCC.IDX$$_00E80003 on TPCC.ORDERS("O_C_ID","O_D_ID","O_W_ID");
-    create index TPCC.IDX$$_00E80004 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
+    .
+    (output truncated)
+    .
+    create index TPCC.IDX$$_02ED0001 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
+    create index TPCC.IDX$$_02ED0002 on TPCC.ORDERS("O_C_ID","O_D_ID","O_W_ID");
+    create index TPCC.IDX$$_02ED0003 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
+    create index TPCC.IDX$$_02ED0003 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
     ```
     </details>
 
@@ -134,8 +171,8 @@ You can implement the recommendations and then use SPA to validate the effect on
 
     ```
     <copy>
-    create index TPCC.IDX$$_00E80002 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
-    create index TPCC.IDX$$_00E80003 on TPCC.ORDERS("O_C_ID","O_D_ID","O_W_ID");
+    create index TPCC.IDX$$_02ED0001 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
+    create index TPCC.IDX$$_02ED0002 on TPCC.ORDERS("O_C_ID","O_D_ID","O_W_ID");
     </copy>
 
     -- Be sure to hit RETURN
@@ -144,11 +181,11 @@ You can implement the recommendations and then use SPA to validate the effect on
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> create index TPCC.IDX$$_00E80002 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
+    SQL> create index TPCC.IDX$$_02ED0001 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
 
     Index created.
 
-    SQL> create index TPCC.IDX$$_00E80003 on TPCC.ORDERS("O_C_ID","O_D_ID","O_W_ID");
+    SQL> create index TPCC.IDX$$_02ED0002 on TPCC.ORDERS("O_C_ID","O_D_ID","O_W_ID");
 
     Index created.
     ```
@@ -159,12 +196,10 @@ You can implement the recommendations and then use SPA to validate the effect on
 
 ## Task 3: Validate recommendations using SQL Performance Analyzer
 
-1. Evaluate the effect on your workload. Use SPA to test based on *CPU\_TIME* and *ELAPSED\_TIME* and generate reports.
+1. Evaluate the effect on your workload. Use SPA to test based on *ELAPSED\_TIME* and generate reports.
 
     ```
     <copy>
-    @/home/oracle/scripts/spa_cpu.sql
-    @/home/oracle/scripts/spa_report_cpu.sql
     @/home/oracle/scripts/spa_elapsed.sql
     @/home/oracle/scripts/spa_report_elapsed.sql
     </copy>
@@ -180,11 +215,11 @@ You can implement the recommendations and then use SPA to validate the effect on
     </copy>
     ```
 
-3. Examine the SQL Performance Analyzer report based on *CPU\_TIME*.
+3. Examine the SQL Performance Analyzer report based on *ELAPSED\_TIME*.
 
     ```
     <copy>
-    firefox $(ls -t compare_spa_runs*html | head -2 | tail -1 ) &
+    firefox $(ls -t compare_spa_runs*html | head -1) &
     </copy>
     ```
 
@@ -192,18 +227,10 @@ You can implement the recommendations and then use SPA to validate the effect on
 
     ![Creating indexes give a better performance](./images/sqltune-spa1.png " ")
 
-    * Overall there is a 15 % improvement from creating indexes.
+    * Overall there is almost a 3 % improvement from creating indexes.
     * This is based on the workload from the SQL Tuning Set. It does not tell anything about the effect on other workloads, like DMLs.
 
-4. Examine the other SQL Performance Analyzer report based on *ELAPSED\_TIME*.
-
-    ```
-    <copy>
-    firefox $(ls -t compare_spa_runs*html | head -1 ) &
-    </copy>
-    ```
-
-You may now *proceed to the next lab*.
+€You may now *proceed to the next lab*.
 
 ## Learn More
 
