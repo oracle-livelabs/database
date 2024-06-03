@@ -15,7 +15,7 @@ In this lab, you will:
 
 ## Task 1: Familiarize yourself with the workshop environment
 
-1. The easiest way to complete the lab is to copy/paste the lab instructions directly into a terminal. Be sure to execute all commands in a code block. After pasting you must hit RETURN.
+1. The easiest way to complete the lab is to copy/paste the lab instructions directly into a terminal. Be sure to execute all commands in a code block. After pasting you must hit *RETURN*.
 
 2. Before copy/pasting take notice of the commands that you execute. It is important to understand what the commands will do.
 
