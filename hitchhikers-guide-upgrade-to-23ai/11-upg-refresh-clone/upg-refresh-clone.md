@@ -19,7 +19,7 @@ In this lab, you will:
 
 None.
 
-This lab is independent and self-contained. You can execute it at any time and in any order.
+This lab uses the *FTEX* and *CDB23* databases. Don't do this lab at the same time as lab 12 and 13.
 
 ## Task 1: Prepare your environment
 

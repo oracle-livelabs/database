@@ -17,7 +17,7 @@ In this lab, you will:
 
 None.
 
-This lab uses the *CDB19* databases. Don't do this lab at the same time as other labs using the same database.
+This lab uses the *CDB19* databases. Don't do this lab at the same time as lab 15.
 
 ## Task 1: Prepare your environment
 
