@@ -56,9 +56,9 @@ This lab assumes:
     ```
     </details>
 
-3. The idea of the *Performance Stability Prescription* is to identify bad performance after upgrade. However, the workload in this lab runs faster in Oracle Database 23ai. To get the best benefit out of the lab, you simulate bad performance. This lab changes optimizer behavior (*optimizer_index_cost_adj*) which has a negative impact on the workload.
+3. The idea of the *Performance Stability Prescription* is to identify bad performance after upgrade. However, the workload in this lab runs faster in Oracle Database 23ai. To get the best benefit out of the lab, you simulate bad performance. This lab changes optimizer behavior (*optimizer\_index\_cost\_adj*) which has a negative impact on the workload.
 You should imagine that this workload performs bad without any changes after upgrade to Oracle Database 23ai. 
-Verify *optimizer_index_cost_adj* is set to *10000*. This causes the optimizer to disregard index scans and perform full table scan. This causes bad performance.
+Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimizer to disregard index scans and perform full table scan. This causes bad performance.
 
     ```
     <copy>
@@ -77,7 +77,7 @@ Verify *optimizer_index_cost_adj* is set to *10000*. This causes the optimizer t
     ```
     </details>
 
-    If you see any **a value different from 10000** for the *optimizer_index_cost_adj*, adjust it.
+    If you see any **a value different from 10000** for the *optimizer\_index\_cost\_adj*, adjust it.
 
     ```
     <copy>
@@ -182,7 +182,7 @@ Verify *optimizer_index_cost_adj* is set to *10000*. This causes the optimizer t
 
     ![See details on individual SQLs](./images/spa-plan-compare-23ai.png " ")
 
-    * Notice how the plan changes. Before upgrade, the optimizer used an index to find the rows. After upgrade, the optimizer chooses a full table scan. This is a consequence of the change to *optimizer_index_cost_adj*.
+    * Notice how the plan changes. Before upgrade, the optimizer used an index to find the rows. After upgrade, the optimizer chooses a full table scan. This is a consequence of the change to *optimizer\_index\_cost\_adj*.
     * Since only a few rows are needed, an index lookup is much faster than the full table scan
 
 12. Examine the other parts of the SPA reports.
@@ -201,7 +201,7 @@ Verify *optimizer_index_cost_adj* is set to *10000*. This causes the optimizer t
       -- Be sure to hit RETURN
       ```
 
-15. Implement a change and re-test workload. Imagine you have found the root cause of the bad performance. In this case, you know it is *optimizer_index_cost_adj*. Now, you change the parameter back to the default value and repeat the test.
+15. Implement a change and re-test workload. Imagine you have found the root cause of the bad performance. In this case, you know it is *optimizer\_index\_cost\_adj*. Now, you change the parameter back to the default value and repeat the test.
 
     ```
     <copy>
@@ -248,7 +248,7 @@ Verify *optimizer_index_cost_adj* is set to *10000*. This causes the optimizer t
 
     ![No change of plans](./images/spa-change-plan-compare-23ai.png " ")
 
-    * Notice that the plan no longer changes. Without *optimizer_index_cost_adj* the optimizer chooses the same plan after upgrade. 
+    * Notice that the plan no longer changes. Without *optimizer\_index\_cost\_adj* the optimizer chooses the same plan after upgrade. 
     * The new SPA report focuses on CPU time. There is a slight improvement, but below the 2% SPA threshold so the row is not marked in green. 
 
 Normally, you would focus on the SQLs with a negative impact on your workload. The idea of such SPA runs is to accept the better plans and identify and cure the ones which are regressing.
