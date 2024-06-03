@@ -57,7 +57,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ______ ________ __________ __________
     2      PDB$SEED READ ONLY  NO
     3      RED      READ WRITE NO
-    4      BLUE     MOUNTED    NO
+    4      BLUE     MOUNTED    
     6      GREEN    MOUNTED
     ```
     </details>
