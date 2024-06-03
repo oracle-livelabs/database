@@ -208,6 +208,7 @@ Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimize
 
 15. Implement a change and re-test workload. Imagine you have found the root cause of the bad performance. In this case, you know it is *optimizer\_index\_cost\_adj*. Now, you change the parameter back to the default value and repeat the test.
 
+
     ```
     <copy>
     alter system reset optimizer_index_cost_adj scope=spfile;
