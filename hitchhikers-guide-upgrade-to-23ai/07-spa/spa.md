@@ -87,6 +87,8 @@ Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimize
     alter system set optimizer_index_cost_adj=10000;
     show parameter optimizer_index_cost_adj
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
