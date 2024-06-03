@@ -19,7 +19,7 @@ This lab assumes:
 
 ## Task 1: Check statements
 
-1. Use the yellow terminal. Set the environment and connect to the *CDB23* database, then switch to *UPGR* PDB.
+1. Use the yellow terminal. Set the environment and connect to *CDB23*, then switch to *UPGR*.
 
       ```
       <copy>
@@ -47,7 +47,10 @@ This lab assumes:
     <summary>*click to see the output*</summary>
     ``` text
     SQL> col sqlset_name format a40
-    SQL> select count(*), sqlset_name from dba_sqlset_statements group by sqlset_name order by 2;
+    SQL> select count(*), sqlset_name 
+         from dba_sqlset_statements 
+         where sqlset_name like 'STS_Capture%'
+         group by sqlset_name order by 2;
 
       COUNT(*) SQLSET_NAME
     ---------- ----------------------------------------
@@ -99,7 +102,7 @@ Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimize
     ```
     </details>
 
-4. Analyze performance in the upgraded database. Using the workload captured in SQL Tuning Sets before the upgrade as a baseline, the database now *test executes* the workload stored in the SQL Tuning Sets, but this time in an upgraded database. Now you can see the effect of the new 19c optimizer. First, you compare *CPU\_TIME*.
+4. Analyze performance in the upgraded database. Using the workload captured in SQL Tuning Sets before the upgrade as a baseline, the database now *test executes* the workload stored in the SQL Tuning Sets, but this time in an upgraded database. Now you can see the effect of the new 23ai optimizer. First, you compare *CPU\_TIME*.
 
     ```
     <copy>
@@ -165,7 +168,7 @@ Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimize
     ![Notice that there will be two html files in scripts folder](./images/spa-compare-two-reports-23ai.png " ")
 
     Notice:
-    * The comparison method used in the two reports - *CPU_TIME* and *ELAPSED_TIME*.
+    * The comparison method used in the two reports - *CPU\_TIME* and *ELAPSED\_TIME*.
     * After upgrade, the test execution shows that the database - after upgrade - performs much worse than before upgrade. 
         - For *CPU\_TIME* there is almost 300% regression in performance.
         - For *ELAPSED\_TIME* there is around 150% regression in performance.
@@ -250,6 +253,7 @@ Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimize
 
     * Notice that the plan no longer changes. Without *optimizer\_index\_cost\_adj* the optimizer chooses the same plan after upgrade. 
     * The new SPA report focuses on CPU time. There is a slight improvement, but below the 2% SPA threshold so the row is not marked in green. 
+    * There are several SQLs that - out-of-the-box - performs better in Oracle Database 23ai. Each new release of Oracle Database brings new and improved optimizer features.
 
 Normally, you would focus on the SQLs with a negative impact on your workload. The idea of such SPA runs is to accept the better plans and identify and cure the ones which are regressing.
 
