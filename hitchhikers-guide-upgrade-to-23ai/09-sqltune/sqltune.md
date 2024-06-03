@@ -24,7 +24,7 @@ This lab assumes:
 
 You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The SQL Tuning Set contains the workload you generated with HammerDB. SQL Tuning Advisor will look at each of the statements and come up with tuning suggestions.
 
-1. Use the yellow terminal. Connect to the upgraded UPGR database.
+1. Connect to the upgraded UPGR database.
 
       ```
       <copy>

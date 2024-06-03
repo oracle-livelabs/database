@@ -19,7 +19,7 @@ This lab assumes:
 
 ## Task 1: Check statements
 
-1. Use the yellow terminal. Set the environment and connect to *CDB23*, then switch to *UPGR*.
+1. Set the environment and connect to *CDB23*, then switch to *UPGR*.
 
       ```
       <copy>

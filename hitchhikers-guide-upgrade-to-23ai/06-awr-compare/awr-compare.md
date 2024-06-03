@@ -25,7 +25,7 @@ This lab assumes:
 
 Use HammerDB to create a workload.
 
-1. Use the yellow terminal. Set the environment to the *CDB23* database. Now, since you upgraded the *UPGR* database and plugged into *CDB23*, the environment needs to be set to the CDB.
+1. Set the environment to the *CDB23* database. Now, since you upgraded the *UPGR* database and plugged into *CDB23*, the environment needs to be set to the CDB.
 
       ```
       <copy>

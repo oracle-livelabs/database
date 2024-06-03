@@ -19,17 +19,23 @@ In this lab, you will:
 
 2. Before copy/pasting take notice of the commands that you execute. It is important to understand what the commands will do.
 
-3. Start a terminal by using the *upgrade* shortcut.
+3. You can use any terminal to run the lab. The lab sets the environment when appropriate.
 
-    ![Start a terminal](./images/initialize-environment-start-terminal.png " ")
+4. In the upper-left corner, click *Activities*. 
 
-4. The upgrade terminal has two tabs (a yellow one and a blue one). Each tab is a terminal. Throughout the labs you will be instructed which terminal to use. The terminals are referred to as the *yellow terminal* and the *blue terminal*.
+    ![Click Activities to start a terminal](./images/initialize-environment-click-activities.png " ")
 
-    ![The upgrade terminal with two tabs](./images/initialize-environment-upgrade-terminal.png " ")
+5. Then click on the *terminal* icon.
+
+    ![Click the terminal icon to start a new terminal](./images/initialize-environment-click-terminal.jpeg)    
+
+6. If you need another terminal, either start a brand new one, or open a new tab in the existing terminal.    
+
+    ![Open a new tab in the existing terminal](images/initialize-environment-new-tab.png)
 
 ## Task 2: Initialize the workshop environment
 
-1. Use the yellow terminal. When you start the lab, the following components should be started.
+1. Open a terminal or use an existing one. When you start the lab, the following components should be started.
 
     - Database Listener
         - LISTENER

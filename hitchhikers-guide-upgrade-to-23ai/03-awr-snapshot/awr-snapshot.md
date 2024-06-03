@@ -24,7 +24,7 @@ This lab assumes:
 
 ## Task 1: Generate an AWR snapshot
 
-1. Use the yellow terminal. Set the environment to the *UPGR* database and connect.
+1. Set the environment to the *UPGR* database and connect.
 
     ```
     <copy>
