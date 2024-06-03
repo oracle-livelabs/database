@@ -27,7 +27,7 @@ The lab contains 15 labs.
 ![Overview of the labs](./images/lab-overview.png " ")
 
 * You start by completing labs 1 and 2.
-* Track 1 is the primary track. You should focus on these labs
+* Track 1 is the primary track. You should focus on labs 3 to 9.
 * When time allows, you can work on tracks 2 and 3.
 * In tracks 2 and 3, the order of the individual labs don't matter. You can perform the labs in any order, but only one lab from one track at a time.
 * As the last lab, you can perform 14. 
