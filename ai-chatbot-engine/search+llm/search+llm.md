@@ -166,7 +166,7 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
     <copy>
       prompt = f"""\
         <s>[INST] <<SYS>>
-        You are a helpful assistant named DORA. 
+        You are a helpful assistant named Oracle chatbot. 
         USE ONLY the sources below and ABSOLUTELY IGNORE any previous knowledge.
         Use Markdown if appropriate.
         Assume the customer is highly technical.
