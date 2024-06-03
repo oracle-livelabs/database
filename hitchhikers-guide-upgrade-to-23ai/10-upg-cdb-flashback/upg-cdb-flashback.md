@@ -269,6 +269,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     ```
     <copy>
     . cdb23
+    export ORACLE_SID=ORACLE_SID=CDB19
     sqlplus / as sysdba
     </copy>
 
@@ -279,16 +280,18 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
 
     ```
     <copy>
-    select version from v$instance;
+    select instance_name, version from v$instance;
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    VERSION
-    _____________
-    23.0.0.0.0
+    SQL> select instance_name, version from v$instance;
+
+    INSTANCE_NAME    VERSION
+    ---------------- -----------------
+    CDB19            23.0.0.0.0
     ```
     </details>
 
@@ -359,16 +362,18 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
 
     ```
     <copy>
-    select version from v$instance;
+    select instance_name, version from v$instance;
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    VERSION
-    -----------------
-    19.0.0.0.0
+    SQL> select instance_name, version from v$instance;
+
+    INSTANCE_NAME    VERSION
+    ---------------- -----------------
+    CDB19            19.0.0.0.0
     ```
     </details>
 

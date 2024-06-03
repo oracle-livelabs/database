@@ -30,13 +30,13 @@ The lab contains 15 labs.
 * Track 1 is the primary track. You should focus on labs 3 to 9.
 * When time allows, you can work on tracks 2 and 3.
 * In tracks 2 and 3, the order of the individual labs don't matter. You can perform the labs in any order, but only one lab from one track at a time.
-* As the last lab, you can perform 14. 
+* As the last lab, you can perform 14.
 
 ## Upgrade and data migration methods and processes
 
 ### AutoUpgrade
 
-- AutoUpgrade is the only recommended tool to upgrade Oracle databases. Whether you want to upgrade only one or thousands of databases, AutoUpgrade performs not only the upgrade but also all the pre- and post-upgrade tasks. It can upgrade many databases in parallel and allows all sorts of customizations needed in today's complex environments. Furthermore, AutoUpgrade can also plugin your database into a precreated CDB and does the conversion of a non-CDB into a PDB fully unattended. AutoUpgrade works on all supported platforms, for non-CDB and CDBs, for all or only selected pluggable databases.
+- AutoUpgrade is the only recommended tool to upgrade Oracle databases. Whether you want to upgrade only one or thousands of databases, AutoUpgrade performs not only the upgrade but also all the pre and post-upgrade tasks. It can upgrade many databases in parallel and allows all sorts of customizations needed in today's complex environments. Furthermore, AutoUpgrade can also plugin your database into a precreated CDB and does the conversion of a non-CDB into a PDB fully unattended. AutoUpgrade works on all supported platforms, for non-CDB and CDBs, for all or only selected pluggable databases.
 
 ### Migrating data using Oracle Data Pump
 

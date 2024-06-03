@@ -46,8 +46,8 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ```
 
     * There are three user-created PDBs, *RED*, *BLUE*, *GREEN*.
-    * *RED* and *BLUE* are open in *unrestricted* mode.
-    * *GREEN* is closed.
+    * *RED* is open in *unrestricted* mode.
+    * *BLUE* and *GREEN* are closed.
     * *PDB$SEED* is an special container used to create new PDBs.
 
     <details>
@@ -79,7 +79,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ```
     </details>
 
-3. Get a list of PDBs in a different way.
+4. Get a list of PDBs in a different way.
 
     ```
     <copy>
@@ -99,7 +99,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ```
     </details>
 
-4. Get a list of containers.
+5. Get a list of containers.
 
     ```
     <copy>
@@ -122,7 +122,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ```
     </details>
 
-5. See which PDBs open automatically when the CDB starts.
+6. See which PDBs open automatically when the CDB starts.
 
     ```
     <copy>
@@ -141,7 +141,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ```
     </details>
 
-6. Set *BLUE* to auto-start. Ensure the current state is as desired and save state.
+7. Set *BLUE* to auto-start. Ensure the current state is as desired and save state.
 
     ```
     <copy>
@@ -174,7 +174,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ```
     </details>
 
-7. *GREEN* is currently closed. Open it and save state.
+8. *GREEN* is currently closed. Open it and save state.
 
     ```
     <copy>
@@ -198,7 +198,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ```
     </details>
 
-8. Exit SQLcl.
+9. Exit SQLcl.
 
     ```
     <copy>
@@ -206,7 +206,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     </copy>
     ```
 
-9. The CDB automatically creates services for each PDB. Get a list of services.
+10. The CDB automatically creates services for each PDB. Get a list of services.
 
     ```
     <copy>
@@ -254,7 +254,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ```
     </details>
 
-10. Connect to a PDB via a service.
+11. Connect to a PDB via a service.
 
     ```
     <copy>
@@ -262,7 +262,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     </copy>
     ```
 
-11. Verify you are connected to *RED*.
+12. Verify you are connected to *RED*.
 
     ```
     <copy>
@@ -279,7 +279,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ```
     </details>
 
-12. Switch to *GREEN* using the `ALTER SESSION` command and verify the outcome.
+13. Switch to *GREEN* using the `ALTER SESSION` command and verify the outcome.
 
     ```
     <copy>
@@ -324,7 +324,7 @@ You check initialization parameters and set some in the CDB. Also, find a list o
     <copy>
     select con_id, name, value
     from v$system_parameter
-    where isdefault='FALSE' and con_id != 0
+    where isdefault = 'FALSE' and con_id != 0
     order by 1, 2;
     </copy>
     ```

@@ -1005,14 +1005,14 @@ You need a few more changes to the new PDB before you can start the import.
     <summary>*click to see the output*</summary>
     ``` text
     SQL> select ra.name || ' ' || ra.year as race
-    from f1.f1_races ra,
-         f1.f1_results re,
-         f1.f1_drivers d
-    where d.forename='Kevin'
-        and d.surname='Magnussen'
-        and re.position=2
-        and d.driverid=re.driverid
-        and ra.raceid=re.raceid;  2    3    4    5    6    7    8    9
+      2  from f1.f1_races ra,
+      3       f1.f1_results re,
+      4       f1.f1_drivers d
+      5  where d.forename='Kevin'
+      6      and d.surname='Magnussen'
+      7      and re.position=2
+      8      and d.driverid=re.driverid
+      9      and ra.raceid=re.raceid;
 
     RACE
     --------------------------------------------------------------------------------
