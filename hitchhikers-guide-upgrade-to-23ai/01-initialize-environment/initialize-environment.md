@@ -23,15 +23,15 @@ In this lab, you will:
 
 4. In the upper-left corner, click *Activities*. 
 
-    ![Click Activities to start a terminal](./images/initialize-environment-click-activities.png " ")
+![Click Activities to start a terminal](./images/initialize-environment-click-activities.png " ")
 
 5. Then click on the *terminal* icon.
 
-    ![Click the terminal icon to start a new terminal](./images/initialize-environment-click-terminal.jpeg)    
+![Click the terminal icon to start a new terminal](./images/initialize-environment-click-terminal.jpeg)    
 
 6. If you need another terminal, either start a brand new one, or open a new tab in the existing terminal.    
 
-    ![Open a new tab in the existing terminal](images/initialize-environment-new-tab.png)
+![Open a new tab in the existing terminal](images/initialize-environment-new-tab.png)
 
 ## Task 2: Initialize the workshop environment
 

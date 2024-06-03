@@ -81,7 +81,7 @@ This lab assumes:
 
 4. This populates the *Script Editor* tab with the driver script. Ignore any error messages.
 
-5. Expand *Virtual Users* and double-click on *Create*. This creates virtual users.
+5. Expand *Virtual Users* and double-click on *Create*. This creates three virtual users (users 2-4) for the workload. HammerDB creates an additional user for monitoring.
     ![view the 3 Virtual Users being started](./images/awr-snapshot-create-virtual-users.png " ")
 
 ## Task 3: Start workload
