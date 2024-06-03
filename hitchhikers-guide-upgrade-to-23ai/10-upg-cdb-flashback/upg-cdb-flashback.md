@@ -269,7 +269,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     ```
     <copy>
     . cdb23
-    export ORACLE_SID=ORACLE_SID=CDB19
+    export ORACLE_SID=CDB19
     sqlplus / as sysdba
     </copy>
 
