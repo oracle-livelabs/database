@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab walks you through a Movie Stream application demo created by the Oracle NoSQL development team.
+This lab walks you through a Movie Stream application demo created by the Oracle NoSQL development team Mike Brey.
 This application is composed of several micro-services using different Oracle Cloud Infrastructure services.
 During this demo, the focus will be on the Catalog micro-service. This service will be deployed in multiple regions.
 The data will be stored in Global Active Tables. Oracle NoSQL Global Active Tables provide multi-active replication of
