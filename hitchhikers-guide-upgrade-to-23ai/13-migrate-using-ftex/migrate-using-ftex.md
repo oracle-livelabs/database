@@ -463,8 +463,8 @@ You need a few more changes to the new PDB before you can start the import.
 
     ```
     <copy>
-    mkdir -p /u01/app/oracle/oradata/CDB23/MAROON/
-    cp /u02/oradata/FTEX/users01.dbf /u01/app/oracle/oradata/CDB23/MAROON
+    mkdir -p /u01/app/oracle/oradata/CDB23/MAROON
+    cp /u02/oradata/FTEX/users01.dbf /u01/app/oracle/oradata/CDB23/MAROON/
     </copy>
 
     -- Be sure to hit RETURN

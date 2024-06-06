@@ -303,7 +303,25 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     </copy>
     ```
 
-4. Get the database back to the starting point; the guaranteed restore point that AutoUpgrade automatically created before the upgrade.
+4. AutoUpgrade also updated the *oratab* registration.
+
+    ```
+    <copy>
+    cat /etc/oratab | grep CDB19
+    </copy>
+    ```
+
+    * Notice how the Oracle home is set to the new, 23ai Oracle home.
+    * If Grid Infrastructure would manage the database, AutoUpgrade would modify the clusterware registration as well.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    CDB19:/u01/app/oracle/product/23:N
+    ```
+    </details>
+
+5. Get the database back to the starting point; the guaranteed restore point that AutoUpgrade automatically created before the upgrade.
 
     ```
     <copy>
@@ -326,7 +344,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     ```
     </details>
 
-5. After a short while the restoration completes. It usually takes only a few minutes. AutoUpgrade uses Flashback Database which is a very effective mean of restoring the database. Then, it needs to open the database with `RESETLOGS` which can take a short while if the redo log members are big.
+6. After a short while the restoration completes. It usually takes only a few minutes. AutoUpgrade uses Flashback Database which is a very effective mean of restoring the database. Then, it needs to open the database with `RESETLOGS` which can take a short while if the redo log members are big.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -347,7 +365,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     ```
     </details>
 
-6. Set the environment to the original Oracle home and connect.
+7. Set the environment to the original Oracle home and connect.
 
     ```
     <copy>
@@ -358,7 +376,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     -- Be sure to hit RETURN
     ```
 
-7. Verify that the database is running on Oracle Database 19c.
+8. Verify that the database is running on Oracle Database 19c.
 
     ```
     <copy>
@@ -377,7 +395,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     ```
     </details>
 
-8. Exit SQL*Plus.
+9. Exit SQL*Plus.
 
     ```
     <copy>
@@ -385,7 +403,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     </copy>
     ```
 
-9. AutoUpgrade also updated the *oratab* registration.
+10. AutoUpgrade also reverted the *oratab* registration.
 
     ```
     <copy>
@@ -403,7 +421,7 @@ The database is now running on Oracle Database 23ai. Suppose your tests find a c
     ```
     </details>
 
-10. AutoUpgrade also moved database configuration files back into the original Oracle home.
+11. AutoUpgrade also moved database configuration files back into the original Oracle home.
 
     ```
     <copy>
