@@ -230,7 +230,7 @@ You can implement the recommendations and then use SPA to validate the effect on
     * Overall there is almost a 3 % improvement from creating indexes.
     * This is based on the workload from the SQL Tuning Set. It does not tell anything about the effect on other workloads, like DMLs.
 
-€You may now *proceed to the next lab*.
+You may now *proceed to the next lab*.
 
 ## Learn More
 

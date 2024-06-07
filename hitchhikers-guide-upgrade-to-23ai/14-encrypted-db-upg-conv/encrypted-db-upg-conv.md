@@ -389,6 +389,7 @@ Analyze the *FTEX* database for upgrade readiness.
 
     * *PRECHECKS* has status *FAILURE*. The database is **not** ready for upgrade. 
     * The check *TDE_PASSWORDS_REQUIRED* failed.
+    * The check *TARGET_CDB_COMPATIBILITY* might fail as well, but you disregard that for now.
 
     <details>
     <summary>*click to see the output*</summary>

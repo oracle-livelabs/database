@@ -487,7 +487,18 @@ In lab 2, you created a workload using HammerDB. At the same time, you were samp
       * Again, the right side is much better because the optimizer uses the before-upgrade plans.
       * Performance after upgrade with before-plan plans (the right side) is better than before the upgrade. Most likely, the database is using new functionality which out-of-the-box brings better performance.
 
-6. Reset the optimizer hack, changing the parameter back to the default value (100).
+6. Connect to *UPGR*.
+
+    ```
+    <copy>
+    . cdb23
+    sqlplus / as sysdba
+    alter session set container=UPGR;
+    </copy>
+    -- Be sure to hit RETURN
+    ```
+
+7. Reset the optimizer hack, changing the parameter back to the default value (100).
 
     ```
     <copy>
@@ -495,6 +506,14 @@ In lab 2, you created a workload using HammerDB. At the same time, you were samp
     show parameter optimizer_index_cost_adj
     </copy>
     ```
+
+8. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```    
 
 You may now *proceed to the next lab*.
 
