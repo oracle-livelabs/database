@@ -2,7 +2,7 @@
 
 ## About this Workshop
 
-Oracle Database 23ai is a *Long Term Support Release*. It is available or will be available on all popular on-prem platforms, Oracle Exadata Database Machine, Oracle Database Appliance, and in Oracle Cloud Infrastructure. As the latest Long Term Support Release, it offers customers the highest levels of stability and the longest error correction support. And, by upgrading to Oracle Database 23ai, customers will have Premier Support until the end of April 2031 and Extended Support until end of April 2034.  There is a direct upgrade path to Oracle Database 23ai from Oracle Database 19c and 21c, regardless of the Release Update applied.
+Oracle Database 23ai is a *Long Term Support Release*. It is available or will be available on all popular on-prem platforms, Oracle Exadata Database Machine, Oracle Database Appliance, and in Oracle Cloud Infrastructure. As the latest Long Term Support Release, it offers customers the highest levels of stability and the longest error correction support. And, by upgrading to Oracle Database 23ai, customers will have Premier Support until the end of April 2029 and Extended Support until end of April 2032.  There is a direct upgrade path to Oracle Database 23ai from Oracle Database 19c and 21c, regardless of the Release Update applied.
 
 Estimated Workshop Time: 120 minutes
 
@@ -30,7 +30,7 @@ The lab contains 15 labs.
 * Track 1 is the primary track. You should focus on labs 3 to 9.
 * When time allows, you can work on tracks 2 and 3.
 * In tracks 2 and 3, the order of the individual labs don't matter. You can perform the labs in any order, but only one lab from one track at a time.
-* As the last lab, you can perform 14.
+* As the last lab, you can perform lab 14.
 
 ## Upgrade and data migration methods and processes
 

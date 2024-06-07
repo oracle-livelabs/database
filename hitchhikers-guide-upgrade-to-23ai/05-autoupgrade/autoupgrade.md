@@ -49,7 +49,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     ```
     </details>
 
-    You use AutoUpgrade from the home directory. In fact, you can use AutoUpgrade from any location. It does not matter.
+    You use AutoUpgrade from the user's home directory. In fact, you can use AutoUpgrade from any location. It does not matter.
 
     Check the version. If a newer version is available, you can download it from My Oracle Support ([AutoUpgrade Tool (Doc ID 2485457.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1)). Don't do this now.
 
@@ -541,7 +541,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
 9. Wait until the upgrade completes. Depending on the lab platform, the upgrade will take about 15-25 minutes. Don't exit from the AutoUpgrade console. Leave it running.
 
-11. Optionally, you can complete some of the other self-contained labs.
+11. Optionally, you can complete some of the labs from tracks 2 and 3. Check *Introduction* for details
 
 10. When the upgrade completes, AutoUpgrade prints a message saying *Job 101 completed* and exits from the AutoUpgrade console.
 

@@ -30,19 +30,61 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
     <copy>
     . cdb23
     sqlplus -L tpcc/tpcc@localhost/upgr @/home/oracle/scripts/spm_load_4wg725nwpxb1z_into_cc.sql
-    </copy>```
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    PL/SQL procedure successfully completed.
+     
+     
+    PL/SQL procedure successfully completed.
+     
+     
+    PL/SQL procedure successfully completed.
+     
+     
+    Session altered.
+     
+     
+    C_FIRST              C_           C_ID C_STREET_1         C_STREET_2
+    ---------------- -- ---------- -------------------- --------------------
+    C_CITY                                    C_ C_ZIP        C_PHONE         C_ C_CREDIT_LIM C_DISCOUNT
+    -------------------- -- --------- ---------------- -- ------------ ----------
+    C_BALANCE C_SINCE
+    ---------- ------------------
+    qTujbaBqnXjkN1          OE           614 TdTYLVWKa8AudrlUG8I7 4V0bb47mhJn
+    fAepMpnyI2lYwSvyx    r2 416911111 4819450350207820 GC            50000              .33
+      10896.43 16-JUN-18
+     
+     
+     
+    Session altered.
+     
+     
+    C_FIRST              C_           C_ID C_STREET_1         C_STREET_2
+    ---------------- -- ---------- -------------------- --------------------
+    C_CITY                                    C_ C_ZIP        C_PHONE         C_ C_CREDIT_LIM C_DISCOUNT
+    -------------------- -- --------- ---------------- -- ------------ ----------
+    C_BALANCE C_SINCE
+    ---------- ------------------
+    qTujbaBqnXjkN1          OE           614 TdTYLVWKa8AudrlUG8I7 4V0bb47mhJn
+    fAepMpnyI2lYwSvyx    r2 416911111 4819450350207820 GC            50000              .33
+      10896.43 16-JUN-18
+    ```
+    </details>
 
 2. Connect to the upgraded UPGR database.
 
-      ```
-      <copy>
-      . cdb23
-      sqlplus / as sysdba
-      alter session set container=UPGR;
-      </copy>
-
-      -- Be sure to hit RETURN
-      ```
+    ```
+    <copy>
+    . cdb23
+    sqlplus / as sysdba
+    alter session set container=UPGR;
+    </copy>
+    -- Be sure to hit RETURN
+    ```
 
 3. Get a list of plans for the SQL (*4wg725nwpxb1z*).
 
@@ -84,18 +126,18 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
 
 2. Create a SQL Plan Baseline. You will use a script created by Carlos Sierra.
 
-      ```
-      <copy>
-      @/home/oracle/scripts/spb_create.sql
-      </copy>
-      ```
+    ```
+    <copy>
+    @/home/oracle/scripts/spb_create.sql
+    </copy>
+    ```
 
-When prompted for:
-      - *SQL_ID* (*1*), enter *4wg725nwpxb1z*.
-      - *1st Plan Hash Value*, enter *612465046*.
-      - *2nd Plan Hash Value*, hit RETURN.
-      - *3rd Plan Hash Value*, hit RETURN.
-      - *FIXED*, hit RETURN.
+    * When prompted for:
+        - *SQL_ID* (*1*), enter *4wg725nwpxb1z*.
+        - *1st Plan Hash Value*, enter *612465046*.
+        - *2nd Plan Hash Value*, hit RETURN.
+        - *3rd Plan Hash Value*, hit RETURN.
+        - *FIXED*, hit RETURN.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -112,10 +154,10 @@ When prompted for:
     SIGNATURE : 9146269246847507225
     
     EXISTING BASELINES
-    ~~~~~~~~~~~~~~~~~~
+    ------------------
     
     PLANS PERFORMANCE
-    ~~~~~~~~~~~~~~~~~
+    -----------------
     
            Plan ET Avg      ET Avg      CPU Avg     CPU Avg           BG Avg       BG Avg     Rows Avg     Rows Avg       Executions       Executions                                   ET 100th    ET 99th     ET 97th         ET 95th     CPU 100th   CPU 99th    CPU 97th    CPU 95th
      Hash Value AWR (ms)    MEM (ms)    AWR (ms)    MEM (ms)             AWR          MEM          AWR          MEM              AWR              MEM   MIN Cost   MAX Cost  NL  HJ  MJ Pctl (ms)   Pctl (ms)   Pctl (ms)       Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)   Pctl (ms)
@@ -187,7 +229,7 @@ When prompted for:
     PLANS:0
     
     RESULTING BASELINES
-    ~~~~~~~~~~~~~~~~~~~
+    -------------------
     
     CREATED             PLAN_NAME                      ENA ACC FIX REP ADA ORIGIN                        LAST_EXECUTED       LAST_MODIFIED       DESCRIPTION
     ------------------- ------------------------------ --- --- --- --- --- ----------------------------- ------------------- -------------------     ------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -202,11 +244,11 @@ When prompted for:
     2024-06-03T08:09:15 SQL_PLAN_7xvhmdg36tqst9b7dfa5f YES YES NO  YES NO  2608724575  2608724575  612465046     2608724575
     
     SQL PLAN BASELINES
-    ~~~~~~~~~~~~~~~~~~
+    ------------------
     Error: neither SQL handle nor plan name specified
     
     RESULTING BASELINES
-    ~~~~~~~~~~~~~~~~~~~
+    -------------------
     
     CREATED             PLAN_NAME                      ENA ACC FIX REP ADA ORIGIN                        LAST_EXECUTED       LAST_MODIFIED       DESCRIPTION
     ------------------- ------------------------------ --- --- --- --- --- ----------------------------- ------------------- -------------------     ------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -31,7 +31,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ```
     <copy>
     . cdb23
-    sql / as sysdba
+    sqlplus / as sysdba
     </copy>
 
     -- Be sure to hit RETURN
@@ -45,10 +45,12 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     </copy>
     ```
 
-    * There are three user-created PDBs, *RED*, *BLUE*, *GREEN*.
-    * *RED* is open in *unrestricted* mode.
-    * *BLUE* and *GREEN* are closed.
+    * There are three user-created PDBs, *RED*, *BLUE*, *GREEN*. 
     * *PDB$SEED* is an special container used to create new PDBs.
+    * *RED* is open in *READ WRITE* mode and *unrestricted*. This is an open PDB that users can connect to.
+    * *BLUE* and *GREEN* are in *MOUNTED* mode. These are closed PDBs that users can't connect to.
+    * Sometimes you see a PDB open in *READ WRITE* mode but *restricted*. This means that the PDB is open, but only someone with *SYSDBA* privilege can connect. Often, there is a problem with the PDB that you must fix before normal users can connect.
+    * Rarely, you see a PDB in *UPGRADE* or *DOWNGRADE* mode. These are special modes used for upgrades and downgrades and very special maintenance operations.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -258,7 +260,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
 
     ```
     <copy>
-    sql system/oracle@localhost/red
+    sqlplus system/oracle@localhost/red
     </copy>
     ```
 
@@ -331,6 +333,7 @@ You check initialization parameters and set some in the CDB. Also, find a list o
 
     * Notice only a few parameters are set in the PDBs.
     * All others rely on the value from *CDB$ROOT* (`con_id=0`).
+    * Notice how each PDB has an undo tablespaces. This is a consequence of using *local undo* which is the default and strongly recommended. Local undo enables many key features in Multitenant, like hot cloning.
 
     <details>
     <summary>*click to see the output*</summary>

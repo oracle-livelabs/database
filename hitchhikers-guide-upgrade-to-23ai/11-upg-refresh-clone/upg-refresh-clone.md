@@ -329,6 +329,8 @@ AutoUpgrade is now refreshing the PDB periodically. In a second terminal, you wi
     grant dba to sales;
     create table sales.orders as select * from all_objects;
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     <details>

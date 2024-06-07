@@ -234,7 +234,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
 3. Wait until the upgrade completes. Depending on the hardware, the upgrade will take about 15-25 minutes. Don't exit from the AutoUpgrade console. Leave it running.
 
-4. Optionally, you do another lab while the upgrade completes.
+4. Optionally, you can complete some of the labs from tracks 1 and 3. Check *Introduction* for details
 
 5. When the upgrade completes, AutoUpgrade prints a message saying *Job 101 completed* and exits from the AutoUpgrade console.
 
