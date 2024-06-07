@@ -60,7 +60,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     2      PDB$SEED READ ONLY  NO
     3      RED      READ WRITE NO
     4      BLUE     MOUNTED    
-    6      GREEN    MOUNTED
+    5      GREEN    MOUNTED
     ```
     </details>
 
@@ -97,7 +97,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     2      PDB$SEED READ ONLY  NO
     3      RED      READ WRITE NO
     4      BLUE     READ WRITE NO
-    6      GREEN    MOUNTED
+    5      GREEN    MOUNTED
     ```
     </details>
 
@@ -120,7 +120,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     2      PDB$SEED READ ONLY  NO
     3      RED      READ WRITE NO
     4      BLUE     READ WRITE NO
-    6      GREEN    MOUNTED
+    5      GREEN    MOUNTED
     ```
     </details>
 
@@ -346,8 +346,8 @@ You check initialization parameters and set some in the CDB. Also, find a list o
             3 undo_tablespace    UNDOTBS1
             4 sga_target         0
             4 undo_tablespace    UNDOTBS1
-            6 sga_target         0
-            6 undo_tablespace    UNDOTBS1
+            5 sga_target         0
+            5 undo_tablespace    UNDOTBS1
 
     8 rows selected.
     ```
@@ -410,6 +410,7 @@ You check DBA and CDB views.
     ```
     <copy>
     alter session set container=CDB$ROOT;
+
     select tablespace_name from dba_tablespaces;
     </copy>
 
@@ -465,10 +466,10 @@ You check DBA and CDB views.
             4 BLUE        SYSTEM
             4 BLUE        TEMP
             4 BLUE        UNDOTBS1
-            6 GREEN       SYSAUX
-            6 GREEN       SYSTEM
-            6 GREEN       TEMP
-            6 GREEN       UNDOTBS1
+            5 GREEN       SYSAUX
+            5 GREEN       SYSTEM
+            5 GREEN       TEMP
+            5 GREEN       UNDOTBS1
 
     17 rows selected.
     ```
@@ -479,6 +480,7 @@ You check DBA and CDB views.
     ```
     <copy>
     alter system set "_exclude_seed_cdb_view"=false;
+
     select t.con_id, c.name, t.tablespace_name
     from cdb_tablespaces t, v$containers c
     where t.con_id=c.con_id
@@ -512,10 +514,10 @@ You check DBA and CDB views.
             4 BLUE        SYSTEM
             4 BLUE        TEMP
             4 BLUE        UNDOTBS1
-            6 GREEN       SYSAUX
-            6 GREEN       SYSTEM
-            6 GREEN       TEMP
-            6 GREEN       UNDOTBS1
+            5 GREEN       SYSAUX
+            5 GREEN       SYSTEM
+            5 GREEN       TEMP
+            5 GREEN       UNDOTBS1
 
     21 rows selected.
     ```
@@ -526,6 +528,7 @@ You check DBA and CDB views.
     ```
     <copy>
     alter session set container=GREEN;
+
     select t.con_id, c.name, t.tablespace_name
     from cdb_tablespaces t, v$containers c
     where t.con_id=c.con_id
@@ -536,17 +539,17 @@ You check DBA and CDB views.
     ```
 
     * Notice how the same query now returns fewer rows. Only the rows from the PDB.
-    * Only container ID 6 is shown. All other containers are hidden.
+    * Only container ID 5 is shown. All other containers are hidden.
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
        CON_ID NAME        TABLESPACE_NAME
     _________ ___________ __________________
-            6 GREEN       SYSAUX
-            6 GREEN       SYSTEM
-            6 GREEN       TEMP
-            6 GREEN       UNDOTBS1
+            5 GREEN       SYSAUX
+            5 GREEN       SYSTEM
+            5 GREEN       TEMP
+            5 GREEN       UNDOTBS1
 
     4 rows selected.
     ```
