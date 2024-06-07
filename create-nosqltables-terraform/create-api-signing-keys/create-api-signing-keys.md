@@ -123,5 +123,4 @@ You may proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Dave Rubin, Senior Director, NoSQL and Embedded Database Development and Michael Brey, Director, NoSQL Product Development
-* **Contributors** - Jaden McElvey, Technical Lead - Oracle LiveLabs Intern
-* **Last Updated By/Date** - Vandana Rajamani, Database User Assistance, February 2023
+* **Last Updated By/Date** - Vandana Rajamani, Database User Assistance, June 2023

@@ -4,7 +4,7 @@
 
 This lab walks you through the steps to create a Global Active table (GAT) using Terraform.
 
-Estimated Lab Time: 20 Minutes
+Estimated Lab Time: 15 Minutes
 
 ### About Global Active tables
 
@@ -14,114 +14,21 @@ Oracle NoSQL Database Cloud Service supports a global active table architecture 
 
 *  An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
 *  Successful completion of [Lab 1 : Create an API Signing Key ](?lab=create-api-signing-keys)
+* Successful completion of [Lab 2 : Create singleton tables using Terraform](?lab=create-singleton-tables)
 
-To create resources in OCI, you need to configure terraform. You need to create the basic terraform configuration files for terraform provider definition, NoSQL resource definitions, authentication, and input variables.
+It is easy to deploy a Global Active table on OCI using Terraform. In [Lab 2 : Create singleton tables using Terraform](?lab=create-singleton-tables), you have created a singleton table called **nosql_demo**. In this lab, you will create a regional replica of this table and make it a Global Active table.
 
-## **Step 1:**  Create OCI Terraform provider configuration
-You will create a file named **provider.tf** that contains the OCI Terraform provider definition, and also associated variable definitions. The OCI Terraform provider requires ONLY the region argument. However, you might have to configure additional arguments with authentication credentials for an OCI account based on the authentication method.
+## **Step 1:**  Create NoSQL Terraform configuration file
+Resources are the most important element in the Terraform language. Terraform creates a NoSQL table and a table replica as a resource. The NoSQL Terraform configuration file will define the resources to be created. In this lab the resources created are a NoSQL table and a table replica.
 
-The OCI Terraform provider supports the following authentication methods:
-* API Key Authentication
-* Instance Principal Authorization
-* Resource Principal Authorization
-* Security Token Authentication
-
-**Option 1: API Key Authentication**
-
-Here you use an OCI user and an API key for authentication. The credentials that are used for connecting your application are associated with a specific user.
-For API Key authentication, you need the following arguments
-* tenancy_ocid
-* user_ocid
-* private_key\_path
-* fingerprint
-```
-<copy>
-variable "tenancy_ocid" {
-}
-variable "user_ocid" {
-}
-variable "fingerprint" {
-}
-variable "private_key_path" {
-}
-variable "region" {
-}
-
-provider "oci" {
-   region = var.region
-   tenancy_ocid = var.tenancy_ocid
-   user_ocid = var.user_ocid
-   fingerprint = var.fingerprint
-   private_key_path = var.private_key_path
-}
-</copy>
-```
-**Option 2: Instance Principal Authorization**
-
-Instance Principals is a capability in Oracle Cloud Infrastructure Identity and Access Management (IAM) that lets you make service calls from an instance. With instance principals, you don’t need to configure user credentials for the services running on your compute instances or rotate the credentials.
-
-Using instance principals authentication, you can authorize an instance to make API calls on Oracle Cloud Infrastructure services. After you set up the required resources and policies, an application running on an instance can call Oracle Cloud Infrastructure public services, removing the need to configure user credentials or a configuration file. Instance principal authentication can be used from an instance where you don't want to store a configuration file.
-
-In the example below, an region argument is required for the OCI Terraform provider, and an auth argument is required for Instance Principal Authorization.
-```
-<copy>
-variable "region" {
-}
-provider "oci" {
-   auth = "InstancePrincipal"
-   region = var.region
-}
-</copy>
-```
-**Option 3: Resource Principal Authorization**
-
-You can use a resource principal to authenticate and access Oracle Cloud Infrastructure resources. The resource principal consists of a temporary session token and secure credentials that enable other Oracle Cloud services to authenticate themselves to Oracle NoSQL Database. Resource principal authentication is very similar to instance principal authentication, but is intended to be used for resources that are not instances, such as server-less functions.
-
-A resource principal enables resources to be authorized to perform actions on Oracle Cloud Infrastructure services. Each resource has its own identity, and the resource authenticates using the certificates that are added to it. These certificates are automatically created, assigned to resources, and rotated, avoiding the need for you to create and manage your own credentials to access the resource. When you authenticate using a resource principal, you do not need to create and manage credentials to access Oracle Cloud Infrastructure resources.
-
-In the example below, a region argument is required for the OCI Terraform providerand an auth argument is required for Resource Principal Authorization.
-```
-<copy>
-variable "region" {
-}
-
-provider "oci" {
-  auth = "ResourcePrincipal"
-  region = var.region
-}
-</copy>
-```
-**Option 4: Security Token Authentication**
-
-Security Token authentication allows you to run Terraform using a token generated with [Token-based Authentication for the CLI](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/clitoken.htm#Tokenbased_Authentication_for_the_CLI).
-
-*Note: This token expires after one hour. Avoid using this authentication method when provisioning of resources takes longer than one hour.*  
-In the example below, region an argument is required for the OCI Terraform provider. The auth and config\_file_profile arguments are required for Security Token authentication.
-```
-<copy>
-variable "region" {
-}
-variable "config_file_profile" {
-}
-provider "oci" {
-auth = "SecurityToken"
-config_file_profile = var.config_file_profile
-region = var.region
-}
-</copy>
-```
-
-## **Step 2:**  Create NoSQL Terraform configuration file
-Resources are the most important element in the Terraform language. Terraform creates a singleton table, an index, and a table replica as a resource. In this file, you provide the definition of NoSQL terraform configuration resources for creating a Global Active table.
-
-When you want to create a Global Active table:
+When you create a Global Active table:
 * The table should contain at least one JSON column.
-* The table DDL definition must include **with schema frozen** on the singleton table.
-* The table limits of the sender table (read unit, write unit, and storage capacity) must be provided.
-* When you add a regional table replica, you can either specify the name of the table or the OCID of the table. If you specify the name of the table, then you need to specify the OCID of your compartment and the depends\_on clause while defining the regional replica as shown below. If you are specifying the OCID of the table, then depends_on clause, and compartment OCID is optional.
+* The table DDL definition must include **with schema frozen** clause.
+
+When you add a regional table replica, you can either specify the name of the table or the OCID of the table. If you specify the name of the table, then you need to specify the OCID of your compartment and the **depends\_on** clause while defining the regional replica as shown below. If you are specifying the OCID of the table, then **depends_on** clause, and compartment OCID is optional.
 
 You create a new file named **nosql.tf** that contains the NoSQL terraform configuration resources for creating NoSQL Database Cloud Service tables.
-In the example below, you are creating a table **mr_test** with a json column and schema frozen. You then add a regional replica to the table and make it a Global Active table.
+In the example below, you are creating a table **nosql_demo** with a json column and schema frozen. You then add a regional replica to the table and make it a Global Active table.
 
 ```
 <copy>
@@ -129,16 +36,16 @@ variable "compartment_ocid" {
 }
 
 variable "table_ddl_statement" {
-  default = "CREATE TABLE IF NOT EXISTS mr_test(id INTEGER,
+  default = "CREATE TABLE IF NOT EXISTS nosql_dem0(id INTEGER,
                             name STRING, info JSON,PRIMARY KEY(id))
                             using TTL 10 days with schema frozen"
 }
 
-resource "oci_nosql_table" "mr_test" {
+resource "oci_nosql_table" "nosql_demo" {
   #Required
   compartment_id = var.compartment_ocid
   ddl_statement  = var.table_ddl_statement
-  name           = "mr_test"
+  name           = "nosql_demo"
 
   table_limits {
     #Required
@@ -149,7 +56,7 @@ resource "oci_nosql_table" "mr_test" {
 }
 #add a regional replica
 resource "oci_nosql_table_replica" "replica_montreal" {
-  table_name_or_id = oci_nosql_table.mr_test.id
+  table_name_or_id = oci_nosql_table.nosql_demo.id
   region = "ca-montreal-1"
   #Optional
   max_read_units     = "60"
@@ -157,61 +64,11 @@ resource "oci_nosql_table_replica" "replica_montreal" {
 }
 </copy>
 ```
-*Note: The definition of the singleton table (CREATE TABLE IF NOT EXISTS mr_test...) must always be included in the terraform script even if the source table already exists. Removing the CREATE TABLE definition from the terraform script drops the table from the region.*
+*Note: The definition of the singleton table (CREATE TABLE IF NOT EXISTS nosql\_demo...) must always be included in the terraform script even if the table (nosql\_demo) already exists. If the table already exists, Terraform compares the existing definition of the table to the new definition in the script. If there are no changes, the CREATE TABLE definition is ignored. If there are any changes to the definition, the terraform script overwrites the existing definition of the table with the new script (This is equivalent to an ALTER TABLE statement).If you do not include the CREATE TABLE definition in the script and terraform sees the table existing, then terraform drops the table from the  existing region.*
 
-## **Step 3:**  Loading Terraform Configuration Variables
+## **Step 2:**  Use terraform to run the scripts
 
-The next step is to create a file named **terraform.tfvars** and provide values for the required OCI Terraform provider arguments based on the authentication method.
-
-**Option 1: API Key Authentication**
-
-Provide values for your tenancy\_ocid, user\_ocid, private_key\_path, and fingerprint, region, and compartment\_ocid arguments. You should already have an OCI IAM user with access keys having sufficient permissions on NoSQL Database Cloud Service. Use the values recorded from [Lab 1 : Create an API Signing Key ](?lab=create-api-signing-keys).
-```
-<copy>
-tenancy_ocid = <TENANCY_OCID>
-user_ocid = <USER_OCID>
-fingerprint = <FINGERPRINT_VALUE>
-private_key_path = <PATH_PRIVATE_KEY_FILE>
-compartment_ocid = <COMPARTMENT_OCID>
-region = <YOUR_REGION>
-</copy>
-```
-**Option 2: Instance Principal Authorization**
-
-Provide values for region and compartment_ocid arguments.
-
-```
-<copy>
-region = <YOUR_REGION>
-compartment_ocid = <COMPARTMENT_OCID>
-</copy>
-```
-**Option 3: Resource Principal Authorization**
-
-Provide values for region and compartment_ocid arguments.
-
-```
-<copy>
-region = <YOUR_REGION>
-compartment_ocid = <COMPARTMENT_OCID>
-</copy>
-```
-**Option 4: Security Token Authentication**
-
-Provide values for the region, compartment\_ocid, and config\_file_profile arguments.
-
-In the example below, region an argument is required for the OCI Terraform provider. The auth and config\_file_profile arguments are required for Security Token authentication.
-```
-<copy>
-region = <YOUR_REGION>
-compartment_ocid = <COMPARTMENT_OCID>
-config_file_profile = <PROFILE_NAME>
-</copy>
-```
-
-## **Step 4:**  Use terraform to run the scripts
-
-Save the config files created above in the same folder where Terraform is installed.
+Save the config file created above in the same folder where Terraform is installed.
 Invoke terraform and initialize the setup.
 ```
 <copy>
@@ -226,20 +83,61 @@ terraform apply
 ```
 Terraform shows the plan to be applied and prompts for confirmation as shown below.
 ```
-<copy>
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols: + create
+
+Terraform will perform the following actions:
+# oci_nosql_table.nosql_demo will be created
+ + resource "oci_nosql_table" "nosql_demo" {
+     + compartment_id                          = "<COMPARTMENT_ID>"
+     + ddl_statement                           = "CREATE TABLE IF NOT EXISTS nosql_demo(id INTEGER, name STRING, info JSON, PRIMARY KEY(id)) with schema frozen"
+     + defined_tags                            = (known after apply)
+     + freeform_tags                           = (known after apply)
+     + id                                      = (known after apply)
+     + is_auto_reclaimable                     = (known after apply)
+     + is_multi_region                         = (known after apply)
+     + lifecycle_details                       = (known after apply)
+     + local_replica_initialization_in_percent = (known after apply)
+     + name                                    = "nosql_demo"
+     + replicas                                = (known after apply)
+     + schema                                  = (known after apply)
+     + schema_state                            = (known after apply)
+     + state                                   = (known after apply)
+     + system_tags                             = (known after apply)
+     + time_created                            = (known after apply)
+     + time_of_expiration                      = (known after apply)
+     + time_updated                            = (known after apply)
+
+     + table_limits {
+         + capacity_mode      = (known after apply)
+         + max_read_units     = 60
+         + max_storage_in_gbs = 1
+         + max_write_units    = 60
+      }
+   }
+
+ # oci_nosql_table_replica.replica_yul will be created
+ + resource "oci_nosql_table_replica" "replica_yul" {
+     + compartment_id   = (known after apply)
+     + id               = (known after apply)
+     + max_read_units   = (known after apply)
+     + max_write_units  = (known after apply)
+     + region           = "ca-montreal-1"
+     + table_name_or_id = (known after apply)
+   }
+
 Do you want to perform these actions?
 Terraform will perform the actions described above.
 Only 'yes' will be accepted to approve.
-</copy>
 ```
-On confirmation, the singleton table is created. A regional replica of the table is then created, converting the singleton table to a GAT.
+On confirmation, a regional replica of the *nosql_demo* table is created, converting the singleton table to a GAT.
 
 ## Learn More
 
-* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/dtddt/index.html)
 * [Oracle NoSQL Database Cloud Service page](https://cloud.oracle.com/en_US/nosql)
-* [Learn more on Terraform](https://www.terraform.io/)
+* [Global Active Tables in NDCS](https://docs.oracle.com/en/cloud/paas/nosql-cloud/gasnd/)
+* [Table Replica Resource in Terraform](https://registry.terraform.io/providers/oracle/oci/latest/docs/resources/nosql_table_replica)
 
 ## Acknowledgements
 * **Author** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance
-* **Last Updated By/Date** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance, May 2024
+* **Last Updated By/Date** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance, June 2024

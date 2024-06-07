@@ -35,8 +35,9 @@ In this workshop you will:
 The Oracle NoSQL Database Cloud Service is a server-less, fully managed data store that delivers predictable single digit response times and allows application to scale on demand via provisioning API calls. There are simple steps to provision or manage singleton and Global Active tables in the Oracle NoSQL Database Cloud Service using Terraform.
 
 1. Create OCI Terraform provider configuration
-2. Connect to the Oracle NoSQL Database Cloud Service
-3. Invoke terraform and run the scripts
+2. Create NoSQL Terraform configuration file
+3. Connect to the Oracle NoSQL Database Cloud Service
+4. Invoke terraform and run the scripts
 
 You may proceed to the next lab.
 
@@ -48,4 +49,4 @@ You may proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance
-* **Last Updated By/Date** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance, May 2024
+* **Last Updated By/Date** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance, June 2024
