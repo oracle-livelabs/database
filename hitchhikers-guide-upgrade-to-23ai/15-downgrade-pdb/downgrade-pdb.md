@@ -160,7 +160,7 @@ You start the downgrade process while the PDB is still on Oracle Database 23ai.
 
 Now that the PDB is open in downgrade mode, you can start the process.
 
-1. Use the `dbdowngrade` script to start the downgrade process. It typically takes a few minutes.
+1. Use the `dbdowngrade` script to start the downgrade process. It will complete in only a few minutes.
 
     ```
     <copy>

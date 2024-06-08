@@ -85,8 +85,12 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
 
     ```
     <copy>
+    col name format a8
+    col restricted format a10
     select con_id, name, open_mode, restricted from v$pdbs;
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -128,8 +132,11 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
 
     ```
     <copy>
+    col con_name format a10
     select con_name, state from dba_pdb_saved_states;
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     * Only *RED* opens together with the CDB.
@@ -200,7 +207,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     ```
     </details>
 
-9. Exit SQLcl.
+9. Exit SQL*Plus.
 
     ```
     <copy>
@@ -266,9 +273,11 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
 
 12. Verify you are connected to *RED*.
 
+    * Notice how the `select` statement has no `from` clause. This is a new feature in Oracle Database 23ai.
+
     ```
     <copy>
-    select sys_context('USERENV', 'CON_NAME') from dual;
+    select sys_context('USERENV', 'CON_NAME');
     </copy>
     ```
 
@@ -324,11 +333,16 @@ You check initialization parameters and set some in the CDB. Also, find a list o
 
     ```
     <copy>
+    set pagesize 100
+    col name format a20
+    col value format a10    
     select con_id, name, value
     from v$system_parameter
     where isdefault = 'FALSE' and con_id != 0
     order by 1, 2;
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     * Notice only a few parameters are set in the PDBs.
@@ -436,11 +450,15 @@ You check DBA and CDB views.
 
     ```
     <copy>
+    col name format a10
+    col tablespace_name format a15
     select t.con_id, c.name, t.tablespace_name
     from cdb_tablespaces t, v$containers c
     where t.con_id=c.con_id
     order by 1, 3;
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     * You have to join on `v$containers` to translate the container ID to its name.
@@ -475,7 +493,7 @@ You check DBA and CDB views.
     ```
     </details>
 
-2. By default, the CDB does not show information about *PDB$SEED*. Generate the same list but include information about the seed container.
+3. By default, the CDB does not show information about *PDB$SEED*. Generate the same list but include information about the seed container.
 
     ```
     <copy>
@@ -523,7 +541,49 @@ You check DBA and CDB views.
     ```
     </details>
 
-3. Multitenant architecture isolates each PDB. One PDB knows nothing about the CDB or other PDBs. Connect to a PDB and verify it.
+4. You can use the `CONTAINERS` function to run the same query in all containers.
+
+    * Notice how the query on `dba_tablespaces` now return rows from all containers.
+    * The database runs the query in all containers and aggregates the result.
+
+    ```
+    <copy>
+    select con_id, tablespace_name from containers(dba_tablespaces);
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    CON_ID     TABLESPACE_NAME
+    ---------- ---------------
+    1          SYSTEM
+    1          SYSAUX
+    1          UNDOTBS1
+    1          TEMP
+    1          USERS
+    3          SYSTEM
+    3          SYSAUX
+    3          UNDOTBS1
+    3          TEMP
+    5          SYSTEM
+    5          SYSAUX
+    5          UNDOTBS1
+    5          TEMP
+    4          SYSTEM
+    4          SYSAUX
+    4          UNDOTBS1
+    4          TEMP
+    2          SYSTEM
+    2          SYSAUX
+    2          UNDOTBS1
+    2          TEMP
+    
+    21 rows selected.
+    ```
+    </details>
+
+5. Multitenant architecture isolates each PDB. One PDB knows nothing about the CDB or other PDBs. Connect to a PDB and verify it.
 
     ```
     <copy>
@@ -555,7 +615,7 @@ You check DBA and CDB views.
     ```
     </details>
 
-3. Exit SQLcl.
+6. Exit SQL*Plus.
 
     ```
     <copy>
@@ -651,6 +711,78 @@ You want to run a script in a CDB including all PDBs.
     catcon.pl: completed successfully
     ```
     </details>
+
+3. *catcon.pl* stores the output from each container in a separate script. List the files.
+
+    ```
+    <copy>
+    ll /tmp/utlrp_result*.log
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    -rw-------. 1 oracle oinstall 14468 Jun  8 06:20 /tmp/utlrp_result0.log
+    -rw-------. 1 oracle oinstall  9803 Jun  8 06:20 /tmp/utlrp_result1.log
+    ```
+    </details>
+
+4. Optionally, you can examine one of the files.
+
+    ```
+    <copy>
+    cat /tmp/utlrp_result0.log
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL*Plus: Release 23.0.0.0.0 - Production on Sat Jun 8 06:20:21 2024
+    Version 23.4.0.24.05
+    
+    Copyright (c) 1982, 2024, Oracle.  All rights reserved.
+    
+    SQL> Connected.
+    SQL>   2
+    Session altered.
+    
+    SQL>   2
+    Session altered.
+    
+    SQL> SQL>   2
+    Session altered.
+    
+    SQL> SQL>   2
+    Session altered.
+    
+    SQL> SQL>
+    
+    ... (output truncated)
+    
+    SQL>
+    END_RUNNING
+    --------------------------------------------------------------------------------
+    ==== @/u01/app/oracle/product/23/rdbms/admin/utlrp.sql Container:GREEN Id:5 24-0
+    6-08 06:20:38 Proc:0 ====
+    
+    
+    SQL> SQL>
+    SQL> SQL>   2
+    Session altered.
+    
+    SQL>   2
+    Session altered.
+    
+    SQL> SQL> ========== PROCESS ENDED ==========
+    SQL> ========== Process Terminated by catcon ==========
+    SQL> Disconnected from Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
+    Version 23.4.0.24.05
+    ```
+    </details>
+
+**Congratulations! You now know some of the basics of the multitenant architecture.**
 
 You may now *proceed to the next lab*.
 

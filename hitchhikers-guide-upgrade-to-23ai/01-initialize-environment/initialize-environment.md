@@ -29,9 +29,23 @@ In this lab, you will:
 
 ![Click the terminal icon to start a new terminal](./images/initialize-environment-click-terminal.jpeg)    
 
-6. If you need another terminal, either start a brand new one, or open a new tab in the existing terminal.    
+6. When the terminal opens, it says *Database ENV is not set*. You can disregard that message. All labs starts by setting the appropriate environment.
+
+7. In the terminal, you can zoom in to make the text larger. Press *CTRL* and *+* or select *Zoom In*.
+
+![Zoom in to make the text larger in the terminal](./images/initialize-environment-zoom-in.png)    
+
+8. If you need another terminal, either start a brand new one, or open a new tab in the existing terminal.    
 
 ![Open a new tab in the existing terminal](images/initialize-environment-new-tab.png)
+
+9. As explained in the introduction, you can run some of the labs in parallel. When doing so, it might be useful to use multiple *desktops*. Then, you can run each lab on its own desktop. To switch between desktops click *Activities* and select the desktop in the right side. 
+
+![Switch between desktops to run each lab on a separate desktop](images/initialize-environment-new-desktop.jpeg)
+
+10. Throughout the labs you will open HTML documents in Firefox browser. If the text in the documents is too small, you can zoom in.
+
+![Zoom in in Firefox to make text bigger](images/initialize-environment-firefox-zoom.png)
 
 ## Task 2: Initialize the workshop environment
 

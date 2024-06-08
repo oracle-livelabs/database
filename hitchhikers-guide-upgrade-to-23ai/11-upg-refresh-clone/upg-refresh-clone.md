@@ -183,6 +183,8 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
 
 2. Start AutoUpgrade in *analyze* mode. The check usually completes very fast. Wait for it to complete.
 
+    * The analysis must run on the source system. Since source and target is the same in this lab, you don't need to worry about it.
+
     ```
     <copy>
     java -jar autoupgrade.jar -config /home/oracle/scripts/ftex-refresh.cfg -mode analyze
@@ -226,6 +228,8 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
     </details>
 
 4. Proceed with the pre-upgrade fixups. Normally, you would do this close to the final refresh (as dictated by `start_time` config file parameter). But in this lab we do it now.
+
+    * The fixups must run on the source system. Since source and target is the same in this lab, you don't need to worry about it.
 
     ```
     <copy>
@@ -281,6 +285,8 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 
 1. Start AutoUpgrade in *deploy* mode.
 
+    * The deploy must run on the target system. Since source and target is the same in this lab, you don't need to worry about it.
+
     ```
     <copy>
     java -jar autoupgrade.jar -config /home/oracle/scripts/ftex-refresh.cfg -mode deploy
@@ -305,7 +311,7 @@ You build the refreshable clone with AutoUpgrade. It creates the PDB and starts 
 
     ```
     <copy>
-
+    
     lsj -a 10
     </copy>
     ```
