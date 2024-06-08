@@ -50,14 +50,19 @@ You need to prepare a few things before you can start a Data Pump export.
 
     ```
     <copy>
-    exec dbms_stats.gather_dictionary_stats;
+    exec dbms_stats.gather_schema_stats('SYS');
+    exec dbms_stats.gather_schema_stats('SYSTEM');
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> exec dbms_stats.gather_dictionary_stats;
+    SQL> exec dbms_stats.gather_schema_stats('SYS');
+
+    PL/SQL procedure successfully completed.
+
+    SQL> exec dbms_stats.gather_schema_stats('SYSTEM');
 
     PL/SQL procedure successfully completed.
     ```
@@ -920,23 +925,30 @@ You need a few more changes to the new PDB before you can start the import.
     -- Be sure to hit RETURN
     ```
 
-7. Switch to *PURPLE* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import.
+7. Switch to *PURPLE* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import. 
 
     ```
     <copy>
     alter session set container=purple;
-    exec dbms_stats.gather_dictionary_stats;
+    exec dbms_stats.gather_schema_stats('SYS');
+    exec dbms_stats.gather_schema_stats('SYSTEM');
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> alter session set container=maroon;
+    SQL> alter session set container=purple;
 
     Session altered.
 
-    SQL> exec dbms_stats.gather_dictionary_stats;
+    SQL> exec dbms_stats.gather_schema_stats('SYS');
+
+    PL/SQL procedure successfully completed.
+
+    SQL> exec dbms_stats.gather_schema_stats('SYSTEM');
 
     PL/SQL procedure successfully completed.
     ```
@@ -1019,6 +1031,14 @@ You need a few more changes to the new PDB before you can start the import.
     Australian Grand Prix 2014
     ```
     </details>
+
+11. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
 
 **Congratulations!** You have now moved your data into a PDB on Oracle Database 23ai
 

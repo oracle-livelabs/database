@@ -50,14 +50,19 @@ You need to prepare a few things before you can start FTEX.
 
     ```
     <copy>
-    exec dbms_stats.gather_dictionary_stats;
+    exec dbms_stats.gather_schema_stats('SYS');
+    exec dbms_stats.gather_schema_stats('SYSTEM');
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> exec dbms_stats.gather_dictionary_stats;
+    SQL> exec dbms_stats.gather_schema_stats('SYS');
+
+    PL/SQL procedure successfully completed.
+
+    SQL> exec dbms_stats.gather_schema_stats('SYSTEM');
 
     PL/SQL procedure successfully completed.
     ```
@@ -470,7 +475,7 @@ You need a few more changes to the new PDB before you can start the import.
     -- Be sure to hit RETURN
     ```
 
-3. Examine the precreated Data Pump import parameter file.
+5. Examine the precreated Data Pump import parameter file.
 
     ```
     <copy>
@@ -499,7 +504,7 @@ You need a few more changes to the new PDB before you can start the import.
     ```
     </details>
 
-4. Start the Data Pump import.
+6. Start the Data Pump import.
 
     ```
     <copy>
@@ -937,14 +942,14 @@ You need a few more changes to the new PDB before you can start the import.
     ```
     </details>
 
-5. Examine the Data Pump log file for any critical issues. A FTEX import usually produces a few errors or warnings, especially when going to a higher release and into a different architecture.
+7. Examine the Data Pump log file for any critical issues. A FTEX import usually produces a few errors or warnings, especially when going to a higher release and into a different architecture.
 
     * The roles `EM_EXPRESS_ALL`, `EM_EXPRESS_BASIC` and `DATAPATCH_ROLE` do not exist in Oracle Database 23ai causing the grants to fail.
     * The same applies to the `ORACLE_OCM` user.
     * An error related to traditional auditing that is desupported in Oracle Database 23ai.
     * This log file doesn't contain any critical issues.
 
-6. Set the environment to the target database, *CDB23*, and connect.
+8. Set the environment to the target database, *CDB23*, and connect.
 
     ```
     <copy>
@@ -955,12 +960,13 @@ You need a few more changes to the new PDB before you can start the import.
     -- Be sure to hit RETURN
     ```
 
-7. Switch to *MAROON* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import.
+9. Switch to *MAROON* and gather dictionary statistics. Oracle recommends gathering dictionary statistics immediately after an import.
 
     ```
     <copy>
     alter session set container=maroon;
-    exec dbms_stats.gather_dictionary_stats;
+    exec dbms_stats.gather_schema_stats('SYS');
+    exec dbms_stats.gather_schema_stats('SYSTEM');
     </copy>
     ```
 
@@ -971,13 +977,17 @@ You need a few more changes to the new PDB before you can start the import.
 
     Session altered.
 
-    SQL> exec dbms_stats.gather_dictionary_stats;
+    SQL> exec dbms_stats.gather_schema_stats('SYS');
+
+    PL/SQL procedure successfully completed.
+
+    SQL> exec dbms_stats.gather_schema_stats('SYSTEM');
 
     PL/SQL procedure successfully completed.
     ```
     </details>
 
-8. Gather database statistics. In the export, you excluded statistics, so, you need to re-gather statistics.
+10. Gather database statistics. In the export, you excluded statistics, so, you need to re-gather statistics.
 
     ```
     <copy>
@@ -996,7 +1006,7 @@ You need a few more changes to the new PDB before you can start the import.
     ```
     </details>
 
-9. Verify your database has been imported. Check the number of objects in the *F1* schema.
+11. Verify your database has been imported. Check the number of objects in the *F1* schema.
 
     ```
     <copy>
@@ -1018,44 +1028,92 @@ You need a few more changes to the new PDB before you can start the import.
     ```
     </details>
 
-10. Perform a more extensive check. Verify the actual data. Find the best race of the Danish driver, *Kevin Magnussen*.
+12. Perform a more extensive check. Verify the actual data. Find all the races won by the legend, *Ayrton Senna*.
 
     ```
     <copy>
+    set pagesize 100
     select ra.name || ' ' || ra.year as race
     from f1.f1_races ra,
          f1.f1_results re,
          f1.f1_drivers d
-    where d.forename='Kevin'
-      and d.surname='Magnussen'
-      and re.position=2
+    where d.forename='Ayrton'
+      and d.surname='Senna'
+      and re.position=1
       and d.driverid=re.driverid
-      and ra.raceid=re.raceid;
+      and ra.raceid=re.raceid
+    order by ra.year, ra.name;      
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
-    * *Kevin Magnussen* got on podium as runner-up in Australia 2014 - his first F1 appearance.
+    * *Ayrton Senna* won 41 races from 1985 to 1993.
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> set pagesize 100
     SQL> select ra.name || ' ' || ra.year as race
       2  from f1.f1_races ra,
       3       f1.f1_results re,
       4       f1.f1_drivers d
-      5  where d.forename='Kevin'
-      6    and d.surname='Magnussen'
-      7    and re.position=2
+      5  where d.forename='Ayrton'
+      6    and d.surname='Senna'
+      7    and re.position=1
       8    and d.driverid=re.driverid
-      9    and ra.raceid=re.raceid;
+      9    and ra.raceid=re.raceid
+      10 order by ra.year, ra.name;
 
     RACE
     --------------------------------------------------------------------------------
-    Australian Grand Prix 2014
+    Belgian Grand Prix 1985
+    Portuguese Grand Prix 1985
+    Detroit Grand Prix 1986
+    Spanish Grand Prix 1986
+    Detroit Grand Prix 1987
+    Monaco Grand Prix 1987
+    Belgian Grand Prix 1988
+    British Grand Prix 1988
+    Canadian Grand Prix 1988
+    Detroit Grand Prix 1988
+    German Grand Prix 1988
+    Hungarian Grand Prix 1988
+    Japanese Grand Prix 1988
+    San Marino Grand Prix 1988
+    Belgian Grand Prix 1989
+    German Grand Prix 1989
+    Mexican Grand Prix 1989
+    Monaco Grand Prix 1989
+    San Marino Grand Prix 1989
+    Spanish Grand Prix 1989
+    Belgian Grand Prix 1990
+    Canadian Grand Prix 1990
+    German Grand Prix 1990
+    Italian Grand Prix 1990
+    Monaco Grand Prix 1990
+    United States Grand Prix 1990
+    Australian Grand Prix 1991
+    Belgian Grand Prix 1991
+    Brazilian Grand Prix 1991
+    Hungarian Grand Prix 1991
+    Monaco Grand Prix 1991
+    San Marino Grand Prix 1991
+    United States Grand Prix 1991
+    Hungarian Grand Prix 1992
+    Italian Grand Prix 1992
+    Monaco Grand Prix 1992
+    Australian Grand Prix 1993
+    Brazilian Grand Prix 1993
+    European Grand Prix 1993
+    Japanese Grand Prix 1993
+    Monaco Grand Prix 1993
+    
+    41 rows selected.
     ```
     </details>
 
-11. Exit SQL*Plus.
+13. Exit SQL*Plus.
 
     ```
     <copy>

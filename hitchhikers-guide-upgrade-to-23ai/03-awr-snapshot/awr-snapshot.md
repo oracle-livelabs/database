@@ -55,7 +55,9 @@ This lab assumes:
 
 3. Don’t exit the terminal. Keep SQL*Plus open.
 
-4. In a new terminal, start HammerDB.
+4. Start a **new terminal**.
+
+5. In the **new terminal**, start HammerDB.
 
     ```
     <copy>
@@ -88,7 +90,7 @@ This lab assumes:
 
 Use HammerDB to start a workload. At the same time, capture workload information from the cursor cache into a SQL tuning set.
 
-1. Back in the first terminal, run the capture script. The script polls the cursor cache every 10 seconds for three minutes. Leave the script running and immediately proceed to the next step. Do not press CTRL+C.
+1. Back in the first terminal, run the capture script. The script polls the cursor cache every 10 seconds for three minutes. **Leave the script running and immediately proceed to the next step.** Do not press CTRL+C.
 
     ```
     <copy>
@@ -195,7 +197,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     </copy>
     ```
 
-2. In `rdbms/admin` in your Oracle Home, you find a script to export AWR. Use the script to start the export.
+2. In `rdbms/admin` in your Oracle Home, you find a script to export AWR. Use the script to start the export. It runs for around two minutes.
 
     ```
     <copy>
