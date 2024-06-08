@@ -31,7 +31,7 @@ In this lab, you will:
 
 6. When the terminal opens, it says *Database ENV is not set*. You can disregard that message. All labs starts by setting the appropriate environment.
 
-7. In the terminal, you can zoom in to make the text larger. Press *CTRL* and *+* or select 
+7. In the terminal, you can zoom in to make the text larger. Press *CTRL* and *+* or select *Zoom In*.
 
 ![Zoom in to make the text larger in the terminal](./images/initialize-environment-zoom-in.png)    
 
