@@ -45,7 +45,12 @@ The operator uses webhooks for validating user input before persisting it in Etc
 
     ![View Cert Manager Deployments](./images/kubectl-get-cert-manager.png)
 
-2. To install the operator in the cluster quickly, run the following command:
+2. To install the operator in the cluster quickly, run the following commands:
+
+    ```bash
+    <copy>kubectl apply -f https://raw.githubusercontent.com/oracle/oracle-database-operator/main/rbac/cluster-role-binding.yaml</copy>
+    ```
+    The command above will install the operator with a cluster-scoped binding. The operator also allows a namespaced-scope deployment. You can find out more from the GitHub [documentation](https://github.com/oracle/oracle-database-operator?tab=readme-ov-file#create-role-bindings-for-access-management).
 
     ```bash
     <copy>kubectl apply -f https://raw.githubusercontent.com/oracle/oracle-database-operator/main/oracle-database-operator.yaml</copy>

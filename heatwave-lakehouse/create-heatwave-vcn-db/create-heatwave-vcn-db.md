@@ -261,14 +261,17 @@ In this lab, you will be guided through the following tasks:
     ```
 
     ![HeatWave add host](./images/mysql-host.png "mysql host ")
+14. Go to the Configuration tab. Click on Select a MySQL version: Select the latest MySQL version of the DB system.
 
-14. Select the Data Import tab.
+    ![Select mysql version](./images/mysql-configuration-version.png "Select mysql version")
 
-15. Use the Image below to identify your OCI Region.
+15. Select the Data Import tab.
+
+16. Use the Image below to identify your OCI Region.
 
     ![HeatWave Find Region](./images/regionSelector.png "region Selector")
 
-16. Click on your localized geographic area
+17. Click on your localized geographic area
 
     ## North America (NA)
 
@@ -309,27 +312,27 @@ In this lab, you will be guided through the following tasks:
      ```
     </details>
 
-17. If your OCI Region is not listed in step 16, don't worry, You will be able to load the DB Data in Lab 4 Task 1. Please skip to step 19.
+18. If your OCI Region is not listed in step 16, don't worry, You will be able to load the DB Data in Lab 4 Task 1. Please skip to step 19.
 
-18. The Data Import Link entry should look like this:
+19. The Data Import Link entry should look like this:
 
     ![HeatWave PAR Import](./images/mysql-data-import.png "mysql data import ")
 
-19. Review **Create MySQL DB System**  Screen
+20. Review **Create MySQL DB System**  Screen
 
     ![HeatWave create button](./images/mysql-create-button.png "mysql create dbbutton")
 
     Click the '**Create**' button
 
-20. The New MySQL DB System will be ready to use after a few minutes
+21. The New MySQL DB System will be ready to use after a few minutes
 
     The state will be shown as 'Creating' during the creation
     ![HeatWave create state](./images/mysql-heatwave-creating.png "mysql heatwave creating ")
 
-21. The state 'Active' indicates that the DB System is ready for use
+22. The state 'Active' indicates that the DB System is ready for use
     ![HeatWave create complete](./images/mysql-heatwave-active.png"mysql heatwave active ")
 
-22. On **heatwave-db** Page,select the **Connections** tab, check and save the Endpoint (Private IP Address). Later, you will need this value to connect to the Heatwave DB using the MySQL Shell client tool.
+23. On **heatwave-db** Page,select the **Connections** tab, check and save the Endpoint (Private IP Address). Later, you will need this value to connect to the Heatwave DB using the MySQL Shell client tool.
     ![HeatWave create complete connection](./images/mysql-heatwave-connection-tab.png"mysql heatwave connection ")
 You may now **proceed to the next lab**
 

@@ -7,7 +7,7 @@
 In this lab you will be guided into adding your  own images into the OCI Object Store and display them in your APEX **MovieHub App**
 
 
-_Estimated Lab Time:_ 10 minutes
+_Estimated Lab Time:_ 15 minutes
 
 ### Objectives
 
@@ -191,4 +191,4 @@ In this lab, you will be guided through the following tasks:
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2023
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, February 2024

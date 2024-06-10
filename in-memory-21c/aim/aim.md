@@ -27,16 +27,11 @@ This lab assumes you have:
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
-### Background
+## Task 1: Verify Directory Definitions
 
 In Oracle Database 18c a feature called Automatic In-Memory (AIM) was added. The goal of AIM is to manage the contents of the IM column store based on usage. AIM initially had two levels, LOW and MEDIUM, that enabled automatic management of IM column store contents once the IM column store became full. In Oracle Database 21c a third level was added that automatically manages all non-system segments without having to first enable the objects for INMEMORY.
 
 This Lab will explore AIM level LOW MEDIUM and they work. A new schema will be used, the AIM schema with small, medium and large tables. This will make it easier to show how AIM works as the column store experiences "memory pressure" (i.e. gets full). The LINEORDER table in the SSB schema will be used to help "fill up" the IM column store and then the AIM tables will be used to show how AIM can manage the total number of objects for maximum benefit.
-
-
-## Task 1: Verify Directory Definitions
-
-In this Lab we will be populating external data from a local directory and we will need to define a database directory to use in our external table definitions to point the database to our external data.
 
 Let's switch to the aim folder and log back in to the PDB:
 
@@ -1423,4 +1418,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Andy Rivenes, Product Manager,  Database In-Memory
 - **Contributors** -
-- **Last Updated By/Date** - Andy Rivenes, August 2022
+- **Last Updated By/Date** - Andy Rivenes, March 2024

@@ -20,7 +20,7 @@ After this step the data is stored in the MySQL HeatWave database in the followi
 
 The three tables differ in the number of rows to simulate the behavior of the model trained when users "watch 15 and 30 more movies"
 
-_Estimated Time:_ 10 minutes
+_Estimated Time:_ 20 minutes
 
 ### Objectives
 
@@ -243,4 +243,4 @@ You may now **proceed to the next lab**
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2023
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, February 2024

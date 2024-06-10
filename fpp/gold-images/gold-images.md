@@ -44,7 +44,7 @@ The image type `ORACLEDBSOFTWARE` is the default, so you do not need to specify 
 1. First, download the zip file from this location into a filesystem with enough space (e.g. /u01) (Est.: 3 minutes):
         ```
         cd /u01/app/grid/
-        wget --no-proxy https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/fpp/db1917000.zip
+        wget --no-proxy https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/fpp/db1917000.zip
         ```
 ![Output of wget command above](./images/wget.png)
 

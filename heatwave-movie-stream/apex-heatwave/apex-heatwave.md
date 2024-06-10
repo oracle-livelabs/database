@@ -13,6 +13,24 @@ Using APEX, developers can quickly develop and deploy compelling apps that solve
 - [https://peterobrien.blog/2022/06/15/](https://peterobrien.blog/2022/06/15/)
 - [https://peterobrien.blog/2022/06/15/how-to-use-the-oracle-database-tools-service-to-provide-data-to-apex/](https://peterobrien.blog/2022/06/15/how-to-use-the-oracle-database-tools-service-to-provide-data-to-apex/)
 
+_Estimated Time:_ 30 minutes
+
+### Objectives
+
+In this lab, you will be guided through the following task:
+
+- Setup Identity and Security tools and services
+- Configure a Private Connection
+- Create and configure an APEX Instance
+- Configure APEX Rest Service
+
+### Prerequisites
+
+- An Oracle Trial or Paid Cloud Account
+- Some Experience with OCI Console
+- Some Experience with Oracle Autonomous and Oracle APEX
+- Completed Lab 8
+
 ## Task 1 Setup Identity & Security tools in OCI to Create a Secret
 
 1. From the OCI Menu, navigate to **Identity & Security** and click **Vault**
@@ -207,7 +225,7 @@ Using APEX, developers can quickly develop and deploy compelling apps that solve
 
     **Notice the Values for your Username, Tenancy, Region, Fingerprint**
 
-## Task 5 Create and Configure APEX
+## Task 5 Create and Configure an APEX Instance
 
 1. Create and Launch APEX
 
@@ -222,7 +240,8 @@ Using APEX, developers can quickly develop and deploy compelling apps that solve
 
     a.
     ![login apexd](./images/login-apexd.png "login apexd ")
-    ![create apex workspace](./images/create-apex-workspace.png "create apex workspace )
+
+    ![create apex workspace](./images/create-apex-workspace.png "create apex workspace" )
     b. Name the APEX workspace
 
     ```bash
@@ -309,4 +328,4 @@ You may now **proceed to the next lab**
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2023
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, February 2024

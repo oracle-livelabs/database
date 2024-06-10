@@ -6,7 +6,7 @@
 
 In this lab, you will create the additional tables needed to train the MySQL HeatWave AutoML models and the tables needed to generate predictions with **ML\_PREDICT\_TABLE AutoMl function** using these Machine Learning models. These tables will also allow Oracle APEX to consume the data easily with RESTful Services for MySQL HeatWave Database Service.
 
-_Estimated Time:_ 15 minutes
+_Estimated Time:_ 20 minutes
 
 ### Objectives
 
@@ -329,4 +329,4 @@ You may now **proceed to the next lab**
 
 - **Author** - Perside Foster, MySQL Principal Solution Engineering
 - **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, August 2023
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, February 2024
