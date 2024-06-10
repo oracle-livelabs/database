@@ -55,7 +55,7 @@ the dynamic group access to a resource.
 We did it for you in **Lab 2 - Task 3: Deploy Infrastructure using Terraform**.
 Take a look at the `policy.tf` file in the following directory `global-microservices-springdata-nosql`.
     * In this Lab, We will use a container image that we deployed in GitHub Container Registry.
-Take a look to the `Dockerfile` in the following directory `global-microservices-springdata-nosql/code-nosql-spring-sdk`, and [check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/build-and-push-demo-vod-image.yml)
+Take a look to the `Dockerfile` in the following directory `global-microservices-springdata-nosql/code-nosql-spring-sdk`, and [check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/build-and-push-demo-movie-image.yml)
 
     * Note: When deploying using OKE - see Lab 1, you will do the connection using **Instance Principals**. It is not the topic of this workshop but if you
 want to learn more read the `oracle-app-ndcs-deployment.yaml` file in the following directory `global-microservices-springdata-nosql`. [Check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-vod.yml) to learn how to deploy using GitHub Actions.
@@ -162,5 +162,4 @@ Exit out of the Cloud Shell. You may now **proceed to the next lab.**
 
 
 ## Acknowledgements
-* **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Development, July 2023
+* **Author** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director, NoSQL Product Development, July 2023

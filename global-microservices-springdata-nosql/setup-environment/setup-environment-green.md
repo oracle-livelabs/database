@@ -141,42 +141,25 @@ as shown below in the Node.js example instead of specifying the credentials.
 Once they are set up, they are simple to use because all you need to do is call
 the appropriate authorization constructor.
 
-    **NoSQL Database Node.js SDK**
+**Oracle NoSQL SDK for Java**
 
-    ```node
+    ```java
     <copy>
-    function createClientResource() {
-      return new NoSQLClient({
-        region: process.env.NOSQL_REGION ,
-        compartment:process.env.NOSQL_COMPID,
-          auth: {
-            iam: {
-              useInstancePrincipal: true
-          }
-        }
-      });
-    }
+    SignatureProvider provider = SignatureProvider.createWithInstancePrincipal();
+    NoSQLHandleConfig config = new NoSQLHandleConfig(OCI_REGION, provider);
+    config.setDefaultCompartment(OCI_COMPID);
+    return new NosqlDbConfig(config);
     </copy>
     ```
 
-   Also in one of our next labs we are going to be running application code and we need an
-instance to run that from. We will run that application using Cloud Shell
-with a delegation token.
+    Also in one of our next labs we are going to be running application code and we need an instance to run that from. We will run that application using Cloud Shell with a delegation token.
 
-    ```node
+    ```java
     <copy>
-    function createClientResource() {
-      return new NoSQLClient({
-        region: process.env.NOSQL_REGION ,
-        compartment:process.env.NOSQL_COMPID,
-        auth: {
-          iam: {
-              useInstancePrincipal: true,
-              delegationTokenProvider: process.env.OCI_DELEGATION_TOKEN_FILE
-          }
-        }
-      });
-    }
+    SignatureProvider provider = SignatureProvider.createWithInstancePrincipalForDelegation(System.getenv("OCI_obo_token"));
+    NoSQLHandleConfig config = new NoSQLHandleConfig(OCI_REGION, provider);
+    config.setDefaultCompartment(OCI_COMPID);
+    return new NosqlDbConfig(config);
     </copy>
     ```
 
@@ -189,5 +172,4 @@ with a delegation token.
 
 
 ## Acknowledgements
-* **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Development, July 2023
+* **Author** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director NoSQL Development

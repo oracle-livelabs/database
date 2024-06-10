@@ -3,7 +3,7 @@
 ## Introduction
 
 This lab picks up where lab 3 left off. We are going to explore in more detail
-the tables we created, load data, and execute queries using a REST based application.
+the tables we created, load data, and execute queries using a Spring Data REST based application.
 
 _Estimated Time:_ 16 minutes
 
@@ -288,10 +288,9 @@ Exit out of the Cloud Shell.  You may now **proceed to the next lab.**
 
 * [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
 * [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/index.html)
-* [Spring Data SDK Developers Guide](https://docs.oracle.com/en/database/other-databases/nosql-database/23.3/springsdk/persistence-model.html)
+* [Spring Data SDK Developers Guide](https://docs.oracle.com/en/database/other-databases/nosql-database/24.1/springsdk/persistence-model.html)
 * [About Cloud Shell](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm)
 
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, Mai 2024

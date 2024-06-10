@@ -1,5 +1,5 @@
 {
-	"workshoptitle": "Creating Scalable, Global Microservices with OCI, Spring Data, and NoSQL",
+	"workshoptitle": "Create Scalable, Global Microservices with OCI, Spring Data, and NoSQL",
 	"help": "livelabs-help-nosql_us@oracle.com",
 	"tutorials": [
 		{
@@ -38,7 +38,7 @@
 			"filename": "../../run-nosql-app/run-nosql-app.md"
 		},
 		{
-			"title": "Lab 5: Deploy the Movie Stream Catalog Microservice using Container Instances",
+			"title": "Lab 5: Deploy the Movie Stream Catalog Microservice with Container Instances",
 			"description": "This is the content devops",
 			"type": "livelabs",
 			"filename": "../../run-nosql-app-container/run-nosql-app-container.md"

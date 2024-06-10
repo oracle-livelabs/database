@@ -1,13 +1,10 @@
-# Explore Data and Run Queries
+# Setup Global Active Tables
 
 ## Introduction
 
 This lab picks up where Lab 5 left off. You are going to setup a GAT configuration,
 and deploy your application in multiple regions. Oracle NoSQL Global Active Tables
 provide multi-active replication of table data between geographically separated regions.
-
-
-**And now, for the fun part, let’s look at some queries over the streaming data.**
 
 _Estimated Time:_ 20 minutes
 
@@ -65,4 +62,3 @@ You may now **proceed to the next lab.**
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, May 2023

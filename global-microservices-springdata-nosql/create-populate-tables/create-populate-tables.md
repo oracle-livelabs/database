@@ -247,5 +247,4 @@ You may now **proceed to the next lab.**
 
 
 ## Acknowledgements
-* **Author** - Dario Vega, Product Manager, NoSQL Product Management
-* **Last Updated By/Date** - Michael Brey, Director, NoSQL Product Management, July 2023
+* **Author** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director NoSQL Development

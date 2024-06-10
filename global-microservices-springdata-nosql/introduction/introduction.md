@@ -13,9 +13,20 @@ Oracle’s own developers make use of this new development paradigm.
 
 Learn how Oracle NoSQL Database can provide a delightful developer experience with features
 such as predictable single-digit millisecond latencies, Global Active Tables, and deep integration
-with VS Code, IntelliJ, and Eclipse. One can simply use the Oracle Cloud Infrastructure (OCI) Code Editor.
+with VS Code and IntelliJ. One can simply use the Oracle Cloud Infrastructure (OCI) Code Editor.
 
-This lab is based on data Catalog used by a Movie Stream application. This lab walks you through the steps ....
+This lab is based on data Catalog used by a Movie Stream application. This lab walks you through the steps to
+create tables in Oracle NoSQL Database Cloud Service (NDCS), load data into the database, and perform basic queries.
+In addition, you learn how to create an application using Oracle NoSQL Database SDK for Spring Data and Spring Data REST.
+
+Spring Data REST is part of the umbrella Spring Data project and makes it easy to build hypermedia-driven REST web services on top of Spring Data repositories.
+Spring Data REST builds on top of Spring Data repositories, analyzes your application’s domain model and exposes hypermedia-driven
+HTTP resources for aggregates contained in the model.
+
+Finally, boost your applications with Oracle NoSQL Global Active Tables - *Simplicity Hides Complexity*.
+Oracle NoSQL Database Cloud service offers a Global Active Tables feature, an active/active set of table replicas across a choice of cloud regions,
+for local read and write performance of globally distributed applications. Global Active Tables provide businesses with data synchronization
+and built-in conflict resolution of business application data even when data is written simultaneously to any participating regional table replica.
 
 _Estimated Workshop Time:_ 90 Minutes
 
@@ -52,7 +63,10 @@ As a developer, you can connect to NDCS and work with NoSQL tables using the NoS
 In this workshop you will:
   * Work with a live demo application
   * Set up your environment
-  * etc
+  * Create a table with provisioned reads/sec, writes/sec, and GB storage and write data to the table and read data from the table
+  * Develop a NoSQL Application using Oracle NoSQL Database SDK for Spring Data
+  * Deploy this application as a *containerized application* using OCI service
+  * Set up Global Active Table for your application
 
 ### Prerequisites
 
