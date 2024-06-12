@@ -17,11 +17,11 @@ This lab assumes you have:
 - An Oracle account
 
 ## Task 1: Pull and Start Docker Image
-1.  The terminal should be open, if not go to Activities and click Terminal.
+1.  If the terminal is not displayed as shown below, select Activities and click Terminal.
 
-    ![Open the terminal](images/open-terminal.png)
+    ![Open the terminal](images/novnc-terminal.png)
  
-2.  Pull the zip file with our podman-compose files and scripts that we'll be running to create and configure the ADB container. We'll also be unzipping the files, then giving them the permissions to be executable within the container.
+2.  Copy the commands below and paste them into the terminal. This will pull the zip file with our podman-compose files and scripts that we'll be running to create and configure the ADB container. This series of commands will also unzip the files, and give them the permissions to be executable within the container.
 
     ```
     <copy>
@@ -50,7 +50,7 @@ This lab assumes you have:
     
     ![Input user variables](images/input-user-vars.png)
 
-5. Input your workload type, admin password, and wallet password as preferred while following the password restrictions listed in the script.
+5. Input the desired workload type for your ADB.
 
     ![Input ADB configuration variables](images/adb-config-vars.png)
 
@@ -70,21 +70,24 @@ This lab assumes you have:
 
     ![Waiting until container is healthy](images/container-status.png)
 
-8. Once it reaches SQLPlus, paste this in to run this script within the container. This is going to reset where the APEX images are sourced from so APEX will function within our LiveLabs environment.
-
-    ```
-    <copy>
-    @/u01/scripts/reset-image-prefix.sql
-    </copy>
-    ```
+8. Once the container is healthy, another script will automatically run to reset where the APEX images are sourced from. This allows APEX to function within our LiveLabs environment.
     
-    ![Reset image prefix script in SQL](images/sql-apex-reset-images.png)
+    ![Successful execution of reset image prefix script in SQL](images/successful-sql-script.png)
 
-9. As the script completes, make sure you copy and run the command printed out at the end so you can easily run ADB-CLI commands.
+    
+9. Note that your wallet and admin password will be printed as shown below.
+
+    ![Screenshot of script output producing the admin and wallet password](images/password-output.png)
+
+10. As the script completes, make sure you copy and run the command printed out at the end so you can easily run ADB-CLI commands.
 
     ![ADB CLI](images/adb-cli.png)
 
-10. Now, the ADB container is live and you can run commands against it. You can view the list of available commands using the following command.
+11. (Optional) If you want to reset your admin password, use the command printed out by the script and fill in your desired password. Make sure the following passwords you select are between 12-30 characters, with at least 1 uppercase letter, 1 lowercase letter, and 1 number. 
+
+    ![Reset password command](images/reset-password-command.png)
+
+12. Now, the ADB container is live and you can run commands against it. You can view the list of available commands using the following command.
 
     ```
     <copy>
@@ -112,11 +115,11 @@ This lab assumes you have:
 
     ![Sign into DB Actions](images/sign-in-ords.png)
 
-3. You now have access to Database Actions.
+3. You now have access to Database Actions! Let's first click SQL Developer Web to test it out.
 
-    ![Database Actions](images/db-actions.png)
+    ![Database Actions](images/launch-sql-developer.png)
 
-4. Go back to the landing page and click Go to Oracle APEX.
+4. Next, let's go to Oracle APEX. Go back to the landing page and click Go to Oracle APEX.
 
     ```
     <copy>
@@ -124,13 +127,13 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![ORDS landing page](images/ords-landing.png)
+    ![ORDS landing page](images/launch-apex.png)
 
 2. Sign in with your admin password as mentioned in the script output. If you had chosen to reset your admin password, then use your new one.
 
     ![Sign into APEX](images/sign-in-apex.png)
 
-3. Now you have access to Database Actions and APEX within your ADB 23ai Container Image! Feel free to explore what's possible within your environment.
+6. Now you have access to Database Actions and APEX within your ADB 23ai Container Image! Feel free to explore what's possible within your environment.
 
 <!-- 11. 
 9. You can add a database.
