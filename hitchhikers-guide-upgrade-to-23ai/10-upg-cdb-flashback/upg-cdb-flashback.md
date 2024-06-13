@@ -4,7 +4,7 @@
 
 In this lab, you will upgrade an entire CDB including PDBs from Oracle Database 19c to 23ai. Then, you will practice a rollback and the restoration option in AutoUpgrade. This uses Flashback Database to get the database back to the starting point.
 
-Estimated Time: 35 minutes
+Estimated Time: 60 minutes
 
 ### Objectives
 
@@ -232,7 +232,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     ```
     </details>
 
-3. Wait until the upgrade completes. Depending on the hardware, the upgrade will take about 15-25 minutes. Don't exit from the AutoUpgrade console. Leave it running.
+3. Wait until the upgrade completes. Depending on the hardware, the upgrade will take about 35-45 minutes. Don't exit from the AutoUpgrade console. Leave it running.
 
 4. Optionally, you can complete some of the labs from tracks 1 and 3. Check *Introduction* for details
 

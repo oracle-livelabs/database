@@ -41,6 +41,8 @@ In this lab, you will:
 
 9. As explained in the introduction, you can run some of the labs in parallel. When doing so, it might be useful to use multiple *desktops*. Then, you can run each lab on its own desktop. To switch between desktops click *Activities* and select the desktop in the right side. 
 
+    * When opening a new terminal on the second desktop, you must right-click on the icon and select *New window*
+
 ![Switch between desktops to run each lab on a separate desktop](images/initialize-environment-new-desktop.jpeg)
 
 10. Throughout the labs you will open HTML documents in Firefox browser. If the text in the documents is too small, you can zoom in.
