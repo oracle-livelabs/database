@@ -58,7 +58,7 @@ In this lab, you will:
         - UPGR
         - CDB23
 
-3. Ensure the listener is started.
+2. Ensure the listener is started.
 
     ```
     <copy>
@@ -74,7 +74,7 @@ In this lab, you will:
     ```
     </details>
 
-4. Ensure that the databases (*FTEX*, *UPGR* and *CDB23*) are started.
+3. Ensure that the databases (*FTEX*, *UPGR* and *CDB23*) are started.
 
     ```
     <copy>
@@ -91,6 +91,33 @@ In this lab, you will:
     oracle      5345       1  0 20:19 ?        00:00:00 ora_pmon_CDB23
     ```
     </details>
+
+4. Occasionally, the *UPGR* database fails to register with the listener. Set the environment and connect to *UPGR*.
+
+    ```
+    <copy>
+    . upgr
+    sqlplus / as sysdba
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+5. Restart *UPGR*.
+
+    ```
+    <copy>
+    startup force
+    </copy>
+    ```
+
+6. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
 
 You may now *proceed to the next lab*.
 
