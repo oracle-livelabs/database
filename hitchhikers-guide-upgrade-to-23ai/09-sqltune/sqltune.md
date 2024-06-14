@@ -238,6 +238,8 @@ In this lab, you will implement some of the recommendations. Namely, those about
 
 **Congratulations! You have completed the Performance Stability Prescription.**
 
+This is the end of track 1. You can proceed with any lab from tracks 2 or 3. 
+
 You may now *proceed to the next lab*.
 
 ## Learn More

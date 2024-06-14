@@ -195,6 +195,8 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     . upgr
     sqlplus / as sysdba
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
 2. In `rdbms/admin` in your Oracle Home, you find a script to export AWR. Use the script to start the export. It runs for around two minutes.
