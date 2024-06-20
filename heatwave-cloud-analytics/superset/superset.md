@@ -72,9 +72,17 @@ This lab assumes you have:
 
     ```text
     <copy>
+    cat > my-config.py <<- EOM
+    SECRET_KEY = $(openssl rand -base64 42)
+    EOM
+    </copy>
+    ```
+
+    ```text
+    <copy>
     helm show values superset/superset  > superset-custom-values.yaml
     kubectl create ns superset
-    helm upgrade --install --values superset-custom-values.yaml superset superset/superset -n superset
+    helm upgrade --install --values superset-custom-values.yaml --set-file configOverrides.my-override=my-config.py superset superset/superset -n superset
     </copy>
     ```
 
