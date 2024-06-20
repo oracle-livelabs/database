@@ -712,7 +712,7 @@ You want to run a script in a CDB including all PDBs.
     ```
     </details>
 
-3. *catcon.pl* stores the output from each container in a separate script. List the files.
+3. *catcon.pl* stores the output from each container in a separate log file. List the files.
 
     ```
     <copy>
