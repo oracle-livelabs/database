@@ -14,49 +14,19 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
     },
     {
-      "title": "Lab 1: Prepare the Target",
-      "description": "Adding a PDB to the Target CDB",
-      "filename": "../../01-preparationtarget/preparationtarget.md"
+      "title": "Lab 1: Initialize Environment",
+      "description": "Initialize Environment",
+      "filename": "../../01-initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 2: Prepare the Source",
-      "description": "Preparing the source database for XTTS usage",
-      "filename": "../../02-preparationsource/preparationsource.md"
-    },
-    {
-      "title": "Lab 3: Perform XTTS PreChecks on Source database",
-      "description": "Summary of some pre checks to execute on Source database",
-      "filename": "../../03-xtts-prechecks/xtts-prechecks.md"
-    },
-    {
-      "title": "Lab 4: XTTS Prepare Phase",
-      "description": "The prepare phase ",
-      "filename": "../../04-xtts-prepare-phase/xtts-prepare-phase.md"
-    },
-    {
-      "title": "Lab 5: XTTS Roll Forward Phase",
-      "description": "The roll forward phase ",
-      "filename": "../../05-xtts-rollforward-phase/xtts-rollforward-phase.md"
-    },
-    {
-      "title": "Lab 6: XTTS Transport Phase",
-      "description": "The transport phase ",
-      "filename": "../../06-xtts-transport-phase/xtts-transport-phase.md"
-    },
-    {
-      "title": "Lab 7: Hint and Check",
-      "description": "To keep in mind",
-      "filename": "../../07-checks/checks.md"
+      "title": "Lab 2: Check source database",
+      "description": "Ensure the source database meets the requirements",
+      "filename": "../../02-check-source/check-source.md"
     },
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
-    },
-    {
-      "title": "Other LiveLabs you might like",
-      "description": "Other LiveLabs you might like",
-      "filename": "../../other-livelabs/other-livelabs.md"
     }
   ]
 }

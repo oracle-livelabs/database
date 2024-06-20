@@ -1,71 +1,23 @@
-# Prepare the Target
+# Prepare the target database
 
 ## Introduction
 
-In this lab, you will create the target PDB and a few additional objects.
+In this lab, you will create the target PDB and make the necessary preparations.
 
 Estimated Time: 15 minutes
 
-[](videohub:1_ibb76ov8)
-
 ### Objectives
 
-- Initialize a new target PDB.
+- Create new PDB
+- 
 
 ### Prerequisites
 
-This lab assumes you have:
+This lab assumes:
 
-- Connected to the lab
+- You have completed Lab 1: Initialize Environment
 
-## Task 1: Open Terminal Window, Create OS Target Directory and Unzip XTTS ZIP File (TARGET)
-
-### Open Terminal Window 
-__Double-click__ the "xtts" icon 
-
-![Screenshot of the Linux Hands On Lab Terminal icon](./images/xtts-source-target-terminal.png " ")
-
-which will open a terminal session with two tabs; you can use the __light green__ tab to execute all the __target__ related commands 
-![Screenshot of the HOL target terminal session](./images/target-terminal-tab.png " ")
-and the __light blue__ one for all the __source__ related activities:
-![Screenshot of the HOL source terminal session](./images/source-terminal-tab.png " ")
-
-The screenshots in this lab will use the same coloring.
-
-
-1. Create OS Directory (TARGET)
-Activate the terminal target tab window and create a directory for the XTTS target files.
-
-    ```
-    <copy>
-    mkdir -p /home/oracle/xtts/target/tmp
-    </copy>
-    ```
-
-    ![Create target OS directory ](./images/create-target-os-dir.png " ")
-
-2. Change into XTTS Working Directory (TARGET)
-
-    ```
-    <copy>
-    cd /home/oracle/xtts/target/
-    </copy>
-    ```
-
-    ![change into XTTS target OS working directory ](./images/change-target-working-dir.png " ")
-
-3. Unzip XTTS ZIP file (TARGET)
-
-    ```
-    <copy>
-    unzip /home/oracle/xtts/rman_xttconvert_VER4.3.zip
-    </copy>
-    ```
-
-    ![Unzipping the XTTS Perl V4 ZIP file on target](./images/unzip-xtts-target.png " ")
-
-
-## Task 2: Set Target Environment and Start SQL*Plus (TARGET)
+## Task 1: Set Target Environment and Start SQL*Plus (TARGET)
 
 1. Set Environment
 
