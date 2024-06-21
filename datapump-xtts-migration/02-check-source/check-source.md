@@ -240,6 +240,7 @@ Oracle recommends certain changes to the source database. These changes help ens
     create user ftexuser identified by ftexuser default tablespace system;
     grant exp_full_database to ftexuser;
     grant read, write on directory m5dir to ftexuser;
+    grant alter tablespace to ftexuser;
     alter user ftexuser quota unlimited on system;
     </copy>
 
@@ -260,6 +261,10 @@ Oracle recommends certain changes to the source database. These changes help ens
     Grant succeeded.
 
     SQL> grant read, write on directory ftexdir to ftexuser;
+
+    Grant succeeded.
+    
+    SQL> grant alter tablespace to ftexuser;
 
     Grant succeeded.
 

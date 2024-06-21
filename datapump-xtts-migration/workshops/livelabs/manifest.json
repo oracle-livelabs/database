@@ -34,6 +34,21 @@
       "filename": "../../04-prepare-m5/prepare-m5.md"
     },
     {
+      "title": "Lab 5: Initial backup/restore",
+      "description": "Start the migration by performing an initial level 0 backup/restore.",
+      "filename": "../../05-initial-backup-restore/initial-backup-restore.md"
+    },
+    {
+      "title": "Lab 6: Incremental backup/restore",
+      "description": "Perform incremental backup/restore cycles to minimize downtime.",
+      "filename": "../../06-incremental-backup-restore/incremental-backup-restore.md"
+    },
+    {
+      "title": "Lab 7: Test migration",
+      "description": "Test the migration.",
+      "filename": "../../07-test-migration/test-migration.md"
+    },
+    {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"

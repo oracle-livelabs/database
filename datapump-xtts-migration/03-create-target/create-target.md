@@ -17,7 +17,7 @@ In this lab, you will:
 
 ## Task 1: Check CDB
 
-In contract to the source database, the target CDB is on Oracle Database 23ai. This means there are no minimum requirements to the Release Update. Nor, is there a requirement for the Data Pump Bundle Patch. However, Oracle recommends that you install the latest Release Update in the target database prior to the migration.
+In contrast to the source database, the target CDB is on Oracle Database 23ai. This means there are no minimum requirements to the Release Update. Nor, is there a requirement for the Data Pump Bundle Patch. However, Oracle recommends that you install the latest Release Update in the target database prior to the migration.
 
 1. Set the environment to the target CDB, *CDB23*, and connect.
 
@@ -59,6 +59,8 @@ In contract to the source database, the target CDB is on Oracle Database 23ai. T
     ```
 
     * Source database `compatible` setting is *19.0.0*.
+    * Target database is *23.0.0* which means the database raises `compatible` setting of the tablespaces on plug-in.
+    * Raising `compatible` as part of a migration is typically not a problem.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -123,8 +125,6 @@ In contract to the source database, the target CDB is on Oracle Database 23ai. T
     <copy>
     alter session set container=violet;
     </copy>
-    
-    --Be sure to hit RETURN
     ```
 
 3. Ensure the PDB uses Oracle Managed Files (OMF). This is a requirement of the M5 script. 
@@ -181,8 +181,10 @@ In contract to the source database, the target CDB is on Oracle Database 23ai. T
     ```
 
     * The source database uses timezone file version *42*.
+    * The target PDB uses timezone file version *43*. 
     * In this lab, you migrate using full transportable export/import (FTEX). Technically speaking, FTEX has the capability of migrating to a higher timezone file version. But Data Pump needs to convert all relevant timezone data (columns of type *TIMESTAMP WITH TIMEZONE*) to the new timezone file version. Depending on the amount of data, this can take many hours.
-    * Oracle recommend that you use the same timezone file version as in the source database.
+    * In this lab, you continue despite the different and accept the overhead of converting the data.
+    * For a real migration, Oracle recommend that you use the same timezone file version as in the source database.
     * If your data doesn't use the data type *TIMESTAMP WITH TIMEZONE* you can completely disregard this check.
 
     <details>
@@ -190,7 +192,7 @@ In contract to the source database, the target CDB is on Oracle Database 23ai. T
     ``` text
     VERSION
     ----------
-    42
+    43
     ```
     </details>      
 
