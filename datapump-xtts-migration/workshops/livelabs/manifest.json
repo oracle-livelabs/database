@@ -19,9 +19,14 @@
       "filename": "../../01-initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 2: Check source database",
-      "description": "Ensure the source database meets the requirements",
+      "title": "Lab 2: Check and prepare source database",
+      "description": "Ensure the source database meets the requirements and make necessary preparations",
       "filename": "../../02-check-source/check-source.md"
+    },
+    {
+      "title": "Lab 3: Create target database",
+      "description": "Ensure the source database meets the requirements and make necessary preparations",
+      "filename": "../../03-create-target/create-target.md"
     },
     {
       "title": "Need Help?",

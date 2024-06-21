@@ -1,4 +1,4 @@
-# Check Source Database
+# Check and Prepare Source Database
 
 ## Introduction
 
@@ -34,7 +34,11 @@ The M5 script has a set of minimum requirements.
     </copy>
 
     -- Be sure to hit RETURN
-    ```    
+    ```
+
+    * You find the release update installed in the patch named *Database Release Update*.
+    * You can idenfity the Data Pump Bundle Patch from the patch name as well.
+    * Although this database meets the minimum requirements, Oracle still recommends that you migrate from a source database on the recent-most Release Update.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -92,6 +96,8 @@ To determine whether the target database is fit for the migration, you must gath
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    VALUE
+    --------------------    
     19.0.0
     ```
     </details>  
@@ -145,7 +151,7 @@ To determine whether the target database is fit for the migration, you must gath
     ------
     +00:00
     ```
-    </details>    
+    </details>
 
 ## Task 3: Prepare for migration
 
@@ -201,6 +207,68 @@ Oracle recommends certain changes to the source database. These changes help ens
     Database altered.
     ```
     </details>     
+
+4. Create a directory in the file system that you can use for Data Pump exports.    
+
+    ```
+    <copy>
+    host mkdir -p /home/oracle/m5/m5dir
+    </copy>
+    ```
+
+5. Create a directory object that points to the file system directory you just created.
+
+    ```
+    <copy>
+    create directory m5dir as '/home/oracle/m5/m5dir';
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> create directory m5dir as '/home/oracle/m5/m5dir';
+    
+    Directory created.
+    ```
+    </details>
+
+6. Create a dedicated user for the Data Pump jobs and grant the necessary privileges. 
+
+    ```
+    <copy>
+    create user ftexuser identified by ftexuser default tablespace system;
+    grant exp_full_database to ftexuser;
+    grant read, write on directory m5dir to ftexuser;
+    alter user ftexuser quota unlimited on system;
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    * The default user tablespace must be *SYSTEM* or *SYSAUX* because all other tablespaces will be set read-only later on. During export, Data Pump must be able to create a table in the default tablespace.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> create user ftexuser identified by ftexuser default tablespace system;
+
+    User created.
+
+    SQL> grant exp_full_database to ftexuser;
+
+    Grant succeeded.
+
+    SQL> grant read, write on directory ftexdir to ftexuser;
+
+    Grant succeeded.
+
+    SQL> alter user ftexuser quota unlimited on system;
+
+    User altered.
+    ```
+    </details>
+
 
 You may now *proceed to the next lab*.
 
