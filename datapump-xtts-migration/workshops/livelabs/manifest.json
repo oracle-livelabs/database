@@ -25,8 +25,13 @@
     },
     {
       "title": "Lab 3: Create target database",
-      "description": "Ensure the source database meets the requirements and make necessary preparations",
+      "description": "Create a new PDB and ensure it meets the requirements and make necessary preparations",
       "filename": "../../03-create-target/create-target.md"
+    },
+    {
+      "title": "Lab 4: Prepare M5 script",
+      "description": "Extract, examine and configure the M5 script.",
+      "filename": "../../04-prepare-m5/prepare-m5.md"
     },
     {
       "title": "Need Help?",
