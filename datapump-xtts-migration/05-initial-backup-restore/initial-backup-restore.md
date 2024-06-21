@@ -16,6 +16,7 @@ In this lab, you will:
 ## Task 1: Start initial backup
 
 cd /home/oracle/m5
+. ftex
 ./dbmig_driver_m5.sh L0
 
     $ ./dbmig_driver_m5.sh L0
@@ -113,10 +114,34 @@ ll restore*
 
 export L0SCRIPT=$(ls -tr restore_L0* | tail -1)
 cd /home/oracle/m5
+. cdb23
 rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L0SCRIPT
     
 
-## Get the output from L0 backup!!!
+    $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L0SCRIPT
+    
+    Recovery Manager: Release 23.0.0.0.0 - Production on Fri Jun 21 11:13:42 2024
+    Version 23.4.0.24.05
+    
+    Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
+    
+    connected to target database: CDB23:VIOLET (DBID=372283666)
+    
+    RMAN> SPOOL LOG TO log/restore_L0_FTEX_240621111320.log;
+    2> SPOOL TRACE TO log/restore_L0_FTEX_240621111320.trc;
+    3> SET EVENT FOR catalog_foreign_datafile_restore TO 1;
+    4> SET ECHO ON;
+    5> SHOW ALL;
+    6> DEBUG ON;
+    7> RUN
+    8> {
+    9> ALLOCATE CHANNEL DISK1 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L0_%d_%N_%t_%s_%p';
+    10> ALLOCATE CHANNEL DISK2 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L0_%d_%N_%t_%s_%p';
+    11> ALLOCATE CHANNEL DISK3 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L0_%d_%N_%t_%s_%p';
+    12> ALLOCATE CHANNEL DISK4 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L0_%d_%N_%t_%s_%p';
+    13> RESTORE ALL FOREIGN DATAFILES TO NEW FROM BACKUPSET
+    14> '/home/oracle/m5/rman/L0_FTEX_USERS_1172229202_5_1';}
+    15>
 
 
 cd /home/oracle/m5/log

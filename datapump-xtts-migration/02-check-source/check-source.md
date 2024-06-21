@@ -274,6 +274,14 @@ Oracle recommends certain changes to the source database. These changes help ens
     ```
     </details>
 
+7. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
 
 You may now *proceed to the next lab*.
 

@@ -17,7 +17,6 @@ In this lab, you will:
 
 OUTAGE START
 
-rm /home/oracle/m5/log/rman_mig_bkp.lck
 . ftex
 cd /home/oracle/m5
 ./dbmig_driver_m5.sh L1F
@@ -189,12 +188,34 @@ export L1FSCRIPT=$(ls -tr restore_L1F* | tail -1)
 cd /home/oracle/m5
 rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1FSCRIPT
 
+    $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1FSCRIPT
+    
+    Recovery Manager: Release 23.0.0.0.0 - Production on Fri Jun 21 11:16:56 2024
+    Version 23.4.0.24.05
+    
+    Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
+    
+    connected to target database: CDB23:VIOLET (DBID=372283666)
+    
+    RMAN> SPOOL LOG TO log/restore_L1F_FTEX_240621111454.log;
+    2> SPOOL TRACE TO log/restore_L1F_FTEX_240621111454.trc;
+    3> SET EVENT FOR catalog_foreign_datafile_restore TO 1;
+    4> SET ECHO ON;
+    5> SHOW ALL;
+    6> DEBUG ON;
+    7> RUN
+    8> {
+    9> ALLOCATE CHANNEL DISK1 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L1F_%d_%N_%t_%s_%p';
+    10> ALLOCATE CHANNEL DISK2 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L1F_%d_%N_%t_%s_%p';
+    11> ALLOCATE CHANNEL DISK3 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L1F_%d_%N_%t_%s_%p';
+    12> ALLOCATE CHANNEL DISK4 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L1F_%d_%N_%t_%s_%p';
+    13> RESTORE ALL FOREIGN DATAFILES TO NEW FROM BACKUPSET
+    14> '/home/oracle/m5/rman/L1F_FTEX_USERS_1172229301_7_1';}
+    15>
 
 Use pre-created impdp file
 cd /home/oracle/m5
-cp /home/oracle/scripts/DBMIG-impdp-sh.txt impdp.sh
-
-cat impdp.sh
+cp /home/oracle/scripts/xtts-impdp-sh impdp.sh
 
 $ head -22 impdp.sh
 #!/bin/bash
@@ -229,9 +250,8 @@ cd m5dir/
 total 2776
 -rw-r-----. 1 oracle oinstall 2826240 Jun 21 10:09 exp_FTEX_240621100752.dmp
 -rw-r--r--. 1 oracle oinstall   13839 Jun 21 10:09 exp_FTEX.log
-[CDB23:oracle@holserv1:~/m5/m5dir]$ export DMPFILE=$(ls -tr exp_FTEX*dmp)
-[CDB23:oracle@holserv1:~/m5/m5dir]$ echo $DMPFILE
-exp_FTEX_240621100752.dmp
+export DMPFILE=$(ls -tr exp_FTEX*dmp)
+
 
 cd ../log
 ll restore_L1F*log

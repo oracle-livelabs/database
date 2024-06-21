@@ -159,7 +159,7 @@ DATAFILE FULL		  20.3671875	   20.3515625 COMPLETED 	      06/21/2024:09:12:39 0
     * Also, notice how *OUTPUT_BYTES* increases. From below 1 MB to around 20 MB. You entered new data, so the size of the backup increases.
 
 cd cmd
-export L1FSCRIPT=$(ls -tr restore_L1F* | tail -1) 
+export L1SCRIPT=$(ls -tr restore_L1_* | tail -1) 
 
 cd ..
 cd rman
@@ -168,7 +168,6 @@ $ ll L1*
 
 
 . cdb23
-
 cd /home/oracle/m5
 rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1SCRIPT
 

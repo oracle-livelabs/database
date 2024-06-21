@@ -4,16 +4,16 @@
 
 In this lab, you take a first look at the M5 script. For migrations, Oracle recommends that the source and target hosts shared an NFS drive. In this exercise, we simulate that by using the script from the same directory. 
 
-Estimated Time: 10 Minutes.
+Estimated Time: 5 Minutes.
 
 ### Objectives
 
 In this lab, you will:
 
-* Examine M5 script
+* Extract M5 script
 * Configure M5 script
 
-## Task 1: Extract and examine M5 script
+## Task 1: Extract and configure M5 script
 
 In this lab, the source and target database is on the same host. You store the M5 script in the same directory. For a real migration, you should set up a shared NFS drive, so both source and target have access to the same directory. Alternatively, you must copy the directory from source to target after each backup.
 
@@ -46,6 +46,9 @@ drwxr-xr-x. 2 oracle oinstall     6 Jun 20 12:28 m5dir
 total 8
 -rw-rw-r--. 1 oracle oinstall 5273 Apr 26 10:17 dbmig_driver.properties
 
+Use pre-created properties file
+cp /home/oracle/scripts/xtts-m5-properties dbmig_driver.properties
+
 
 Use MORE!
 
@@ -72,10 +75,10 @@ Use MORE!
     #                      or if Data Guard is not in use.
     #                      Choose 1 to back up from standby database.
     ############################################################
-    export ORACLE_HOME=/u01/app/oracle/product/19.0.0.0/dbhome_1
+    export ORACLE_HOME=/u01/app/oracle/product/19
     export PATH=$PATH:$ORACLE_HOME/bin
-    export ORACLE_SID=soldb1918
-    export SRC_SCAN='@scan1/soldb1918'
+    export ORACLE_SID=FTEX
+    export SRC_SCAN='@localhost/ftex'
     export MIG_PDB=0
     export PDB_NAME=
     export BKP_FROM_STDBY=0
@@ -95,9 +98,9 @@ Use MORE!
     #                   Accepted values: 1 to 999
     #                      Example: 16
     ############################################################
-    export SOURCE_DPDMP=/u01/app/admin/soldb1918/dpdump
-    export SOURCE_DPDIR=DATA_PUMP_DIR
-    export SYSTEM_USR=SYSTEM
+    export SOURCE_DPDMP=/home/oracle/m5/m5dir
+    export SOURCE_DPDIR=M5DIR
+    export SYSTEM_USR=FTEXUSER
     export DP_TRACE=0
     export DP_PARALLEL=1
     export DP_ENC_PROMPT=N
@@ -116,10 +119,10 @@ Use MORE!
     # - CHN             Number of RMAN channels allocated
     ############################################################
     export BKP_DEST_TYPE=DISK
-    export BKP_DEST_PARM=/SHAREDY/DBMIGBKP/SOLDB1918
+    export BKP_DEST_PARM=/home/oracle/m5/rman
     export CAT_CRED=
     export SECTION_SIZE=64G
-    export CHN=8
+    export CHN=4
     ############################################################
     #Destination host settings
     #If specified, the script transfers the RMAN backups and
@@ -136,10 +139,10 @@ Use MORE!
     #                   in destination database
     #                      Example: /u01/app/oracle/m5/data_pump_dir
     ############################################################
-    export DEST_SERVER=srvadm01
-    export DEST_USER=oracle
-    export DEST_WORKDIR=/SHAREDY/STAGE/CROSSPLATMIG/PRIMARY
-    export DEST_DPDMP=/u01/app/oracle/product/19.0.0.0/dbhome_13/rdbms/log
+    export DEST_SERVER=
+    export DEST_USER=
+    export DEST_WORKDIR=
+    export DEST_DPDMP=
     
     ############################################################
     #Advanced settings
@@ -173,9 +176,7 @@ Use MORE!
     fi
     export my_M5_prop_version=2
 
-Use pre-created properties file
-cd /home/oracle/m5/cmd
-cp /home/oracle/scripts/xtts-m5-properties dbmig_driver.properties
+
 
 . ftex
 sqlplus / as sysdba
@@ -214,14 +215,6 @@ sqlplus / as sysdba
 exit
 
 echo "USERS" > /home/oracle/m5/cmd/dbmig_ts_list.txt
-
-cd /home/oracle/m5
-./dbmig_driver_m5.sh L0
-
-
-## Task 2: Configure M5 script
-
-
 
 You may now *proceed to the next lab*.
 

@@ -236,42 +236,6 @@ A few more changes are needed on the target database. Plus, Oracle has a few rec
     ```
     </details>
 
-2. Create a dedicated user for the Data Pump jobs and grant the necessary privileges. 
-
-    ```
-    <copy>
-    create user ftexuser identified by ftexuser default tablespace system;
-    grant imp_full_database to ftexuser;
-    grant read, write on directory m5dir to ftexuser;
-    alter user ftexuser quota unlimited on system;
-    </copy>
-
-    -- Be sure to hit RETURN
-    ```
-
-    * The default user tablespace must be *SYSTEM* or *SYSAUX* because it is an empty database. Later on, you will import the user tablespaces.
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    SQL> create user ftexuser identified by ftexuser default tablespace system;
-
-    User created.
-
-    SQL> grant imp_full_database to ftexuser;
-
-    Grant succeeded.
-
-    SQL> grant read, write on directory ftexdir to ftexuser;
-
-    Grant succeeded.
-
-    SQL> alter user ftexuser quota unlimited on system;
-
-    User altered.
-    ```
-    </details>
-
 3. Gather dictionary statistics before starting Data Pump. Oracle recommends gathering dictionary stats before starting a Data Pump export job.
 
     ```
@@ -293,6 +257,14 @@ A few more changes are needed on the target database. Plus, Oracle has a few rec
     PL/SQL procedure successfully completed.
     ```
     </details>
+
+4. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
 
 You may now *proceed to the next lab*.
 
