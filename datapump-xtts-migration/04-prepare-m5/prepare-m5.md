@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you take a first look at the M5 script. For migrations, Oracle recommends that the source and target hosts shared an NFS drive. In this exercise, we simulate that by using the script from the same directory. 
+In this lab, you take a first look at the M5 script. The script is available for download from My Oracle Support. It combines existing functionality in Oracle Database to deliver the best migration experience.
 
 Estimated Time: 5 Minutes.
 
@@ -17,42 +17,79 @@ In this lab, you will:
 
 In this lab, the source and target database is on the same host. You store the M5 script in the same directory. For a real migration, you should set up a shared NFS drive, so both source and target have access to the same directory. Alternatively, you must copy the directory from source to target after each backup.
 
+1. Go to *M5* directory and get the M5 migration script. The directory acts as your script base. You have created the directory already in a previous exercise when you created the database directory. Instead of downloading from My Oracle Support, you copy the script to the script base.
 
+    ```
+    <copy>
+    cd /home/oracle/m5
+    cp /home/oracle/scripts/DBMIG.zip .
+    </copy>
+    
+    --Be sure to hit RETURN
+    ```
 
-cd /home/oracle/m5
-cp /home/oracle/scripts/DBMIG.zip .
+2. Extract the zip file, set permissions, and examine the contents.
 
-unzip DBMIG.zip
+    ```
+    <copy>
+    unzip DBMIG.zip
+    chmod 755 * 
+    ll
+    </copy>
+    
+    --Be sure to hit RETURN
+    ```
 
-Archive:  DBMIG.zip
-  inflating: cmd/dbmig_driver.properties
-  inflating: dbmig_driver_m5.sh
-  inflating: impdp.sh
- extracting: log/rman_mig_bkp.log
+    * *cmd* contains configuration files and generated scripts.
+    * *log* contains log and trace files. 
+    * *dbmig_driver_m5.sh* is the migration driver script.
+    * *impdp.sh* is a driver script for the final part, the Data Pump transportable import.
 
-chmod 755 *
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ unzip DBMIG.zip
+    Archive:  DBMIG.zip
+      inflating: cmd/dbmig_driver.properties
+      inflating: dbmig_driver_m5.sh
+      inflating: impdp.sh
+     extracting: log/rman_mig_bkp.log
+    
+    $ chmod 755 *
+    
+    $ ll
+    total 56
+    drwxr-xr-x. 2 oracle oinstall    37 Jun 21 07:55 cmd
+    -rw-r--r--. 1 oracle oinstall 35267 Apr 26 10:40 dbmig_driver_m5.sh
+    -rw-r--r--. 1 oracle oinstall  9263 Jun 21 07:55 DBMIG.zip
+    -rw-rw-r--. 1 oracle oinstall  4394 Apr 16 17:54 impdp.sh
+    drwxr-xr-x. 2 oracle oinstall    30 Jun 21 07:55 log
+    drwxr-xr-x. 2 oracle oinstall     6 Jun 20 12:28 m5dir
+    $
+    ```
+    </details>
 
- ll
-total 56
-drwxr-xr-x. 2 oracle oinstall    37 Jun 21 07:55 cmd
--rw-r--r--. 1 oracle oinstall 35267 Apr 26 10:40 dbmig_driver_m5.sh
--rw-r--r--. 1 oracle oinstall  9263 Jun 21 07:55 DBMIG.zip
--rw-rw-r--. 1 oracle oinstall  4394 Apr 16 17:54 impdp.sh
-drwxr-xr-x. 2 oracle oinstall    30 Jun 21 07:55 log
-drwxr-xr-x. 2 oracle oinstall     6 Jun 20 12:28 m5dir
+3. Examine the properties file which contains the details of your migration. It's stored in the *cmd* directory. In this lab, you use a pre-created properties file.
 
-[CDB23:oracle@holserv1:~/m5]$ cd cmd
-[CDB23:oracle@holserv1:~/m5/cmd]$ ll
-total 8
--rw-rw-r--. 1 oracle oinstall 5273 Apr 26 10:17 dbmig_driver.properties
+    ```
+    <copy>
+    cd cmd
+    cp /home/oracle/scripts/xtts-m5-properties dbmig_driver.properties
+    more dbmig_driver.properties
+    </copy>
 
-Use pre-created properties file
-cp /home/oracle/scripts/xtts-m5-properties dbmig_driver.properties
+    -- Be sure to hit RETURN
+    ```
 
+    * Scroll between the pages with *RETURN*. 
 
-Use MORE!
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ cd cmd
+    $ cp /home/oracle/scripts/xtts-m5-properties dbmig_driver.properties
+    $ more dbmig_driver.properties
 
-    [CDB23:oracle@holserv1:~/m5/cmd]$ cat dbmig_driver.properties
     ############################################################
     #Source database properties
     #my_M5_prop_version=2
@@ -175,13 +212,22 @@ Use MORE!
         fi
     fi
     export my_M5_prop_version=2
+    $
+    ```
+    </details>
 
+4. Set the environment to the source database and connect. 
 
+    ```
+    <copy>
+    . ftex
+    sqlplus / as sysdba
+    </copy>
 
-. ftex
-sqlplus / as sysdba
+    -- Be sure to hit RETURN
+    ```
 
-6. Generate a list of tablespaces to set read-only.
+5. Generate a list of tablespaces to migrate. The M5 script uses full transportable export/import, so you must migrate all tablespaces. 
 
     ```
     <copy>
@@ -194,6 +240,9 @@ sqlplus / as sysdba
        and tablespace_name not in ('SYSTEM','SYSAUX');
     </copy>
     ```
+
+    * Full transportable export/import moves all tablespaces except for the system tablspaces.
+    * UNDO and TEMP tablespaces are never migrated. New UNDO and TEMP tablespaces are created in the target database.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -212,9 +261,21 @@ sqlplus / as sysdba
     ```
     </details>
 
-exit
+6. Exit SQL*Plus. 
 
-echo "USERS" > /home/oracle/m5/cmd/dbmig_ts_list.txt
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
+7. Create a comma-separated list of tablespaces and save it in a file. The M5 script uses the list.
+
+    ```
+    <copy>
+    echo "USERS" > /home/oracle/m5/cmd/dbmig_ts_list.txt
+    </copy>
+    ```
 
 You may now *proceed to the next lab*.
 

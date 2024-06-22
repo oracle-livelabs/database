@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you take a first look at the M5 script. For migrations, Oracle recommends that the source and target hosts shared an NFS drive. In this exercise, we simulate that by using the script from the same directory. 
+Now it's time to start the migration. First, you take a level 0 backup that you restore in the target database. Although the migration starts, there is no downtime yet. The initial level 0 backup is taken without downtime.
 
 Estimated Time: 10 Minutes.
 
@@ -10,15 +10,38 @@ Estimated Time: 10 Minutes.
 
 In this lab, you will:
 
-* Examine M5 script
-* Configure M5 script
+* Perform initial level 0 backup
+* Restore backup
+* Examine scripts and logs
 
 ## Task 1: Start initial backup
 
-cd /home/oracle/m5
-. ftex
-./dbmig_driver_m5.sh L0
+1. Set the environmen to the source database and switch to the script base.
 
+    ```
+    <copy>
+    . ftex
+    cd /home/oracle/m5
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+2. Start the level 0 backup. 
+
+    ```
+    <copy>
+    ./dbmig_driver_m5.sh L0
+    </copy>
+    ```
+
+    * The details of the migration is stored in the properties file that you examined in the previous lab. Hence, you don't need to specify any details to start the backup.
+    * The L0 backup needs to scan the entire database. Notice how *INPUT_BYTES* corresponds to the size of database.
+    * Since you don't use RMAN compression in this exercise, the size of the backup is roughly the size of the database. It will be smaller since RMAN always uses unused block compression which excludes empty blocks from the backup. 
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
     $ ./dbmig_driver_m5.sh L0
     Properties file found, sourcing.
     Next SCN file not found, creating it.
@@ -32,12 +55,29 @@ cd /home/oracle/m5
     2024-06-21 08:16:15 - 1718957775309:  => /home/oracle/m5/cmd/restore_L0_FTEX_240621081610.cmd
     2024-06-21 08:16:15 - 1718957775318: Saving SCN for next backup for pid 464006
     
-    BACKUP_TYPE	     INPUT_BYTES(MB) OUTPUT_BYTES(MB) STATUS		      START_TIME	  END_TIME	      ELAPSED_TIME(Min)
-    -------------------- --------------- ---------------- ----------------------- ------------------- ------------------- -----------------
-    DATAFILE FULL		    62.21875	   60.6796875 COMPLETED 	      06/21/2024:08:16:12 06/21/2024:08:16:14		    .03
+    BACKUP_TYPE   INPUT_BYTES(MB) OUTPUT_BYTES(MB) STATUS    START_TIME          END_TIME            ELAPSED_TIME(Min)
+    ----------------------------------------------------------------------------------------------------------------------
+    DATAFILE FULL 62.21875        60.6796875       COMPLETED 06/21/2024:08:16:12 06/21/2024:08:16:14 .03
+    ```
+    </details>
 
-cd cmd
-ll 
+3. Switch to the *cmd* directory and examine the files. 
+
+    ```
+    <copy>
+    cd cmd
+    ll
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    * The M5 script generated some scripts during the initial L0 backup. 
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ cd cmd
     $ ll
     total 32
     -rw-r--r--. 1 oracle oinstall  641 Jun 21 08:16 bkp_L0_240621081610.cmd
@@ -45,9 +85,24 @@ ll
     -rw-rw-r--. 1 oracle oinstall 5122 Jun 21 08:12 dbmig_driver.properties
     -rw-r--r--. 1 oracle oinstall    6 Jun 21 08:15 dbmig_ts_list.txt
     -rw-r--r--. 1 oracle oinstall  658 Jun 21 08:16 restore_L0_FTEX_240621081610.cmd
+    ```
+    </details>
 
+4. Examine the backup script used for the initial backup. 
 
-    $ cat bkp_L0_240621081610.cmd
+    ```
+    <copy>
+    cat $(ls -tr bkp_L0_*.cmd | tail -1)
+    </copy>
+    ```
+
+    * The name of the scripts change, so the command automatically fetches the script with the name in your environment. 
+    * Notice how the backup is *just* an RMAN `BACKUP ... TABLESPACE` command.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ cat $(ls -tr bkp_L0_*.cmd | tail -1)
     SET ECHO ON;
     SHOW ALL;
     ALTER SYSTEM CHECKPOINT GLOBAL;
@@ -65,35 +120,101 @@ ll
            TAG FTEX_L0_240621081610
            TABLESPACE USERS;
     }
+    ```
+    </details>
 
+5. Examine the log directory.
 
+    ```
+    <copy>
+    cd ../log
+    ll
+    </copy>
 
-cd ..
-cd log
+    -- Be sure to hit RETURN
+    ```
+
+    * The backup created a log file named `bkp_L0_4CH_64G_FTEX_240621081610.log`.
+    * Tracing is enabled by default and written to `bkp_L0_4CH_64G_FTEX_240621081610.trc`.
+    * Additional log files are written as well.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ cd ../log
     $ ll
-    total 952
     -rw-r--r--. 1 oracle oinstall   3836 Jun 21 08:16 bkp_L0_4CH_64G_FTEX_240621081610.log
     -rw-r--r--. 1 oracle oinstall 496165 Jun 21 08:16 bkp_L0_4CH_64G_FTEX_240621081610.trc
     -rw-r--r--. 1 oracle oinstall    198 Jun 21 08:16 chk_backup.log
     -rw-r--r--. 1 oracle oinstall   4978 Jun 21 08:16 rman_mig_bkp.log
+    ```
+    </details>
 
-cd .. 
-cd rman    
+5. Examine the RMAN backup sets. 
+
+    ```
+    <copy>
+    cd ../rman
+    ll
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    * In this lab there is only one small tablespace in the database. Hence, there is only one backup set.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ cd ../rman
     $ ll
     total 51624
     -rw-r-----. 1 oracle oinstall 52805632 Jun 21 08:16 L0_FTEX_USERS_1172218572_3_1
-
+    ```
+    </details>
 
 ## Task 2: Perform initial restore
 
-examine restore script
-cd /home/oracle/m5/cmd
+In this lab, you simulate a shared NFS drive, so you don't need to move scripts and backups to the target server. A shared NFS drive is the recommended solution. 
 
-ll restore*
--rw-r--r--. 1 oracle oinstall 658 Jun 21 08:16 restore_L0_FTEX_240621081610.cmd
+1. The backup also generated a restore script that you can use on the target database. Find the restore script. 
 
+    ```
+    <copy>
+    cd /home/oracle/m5/cmd
+    ll restore*
+    </copy>
 
+    -- Be sure to hit RETURN
+    ```
 
+    * The name of the restore script in your environment is different. 
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ cd /home/oracle/m5/cmd
+    $ ll restore*
+    total 51624
+    -rw-r--r--. 1 oracle oinstall 658 Jun 21 08:16 restore_L0_FTEX_240621081610.cmd
+    ```
+    </details>
+
+2. Examine the restore script. 
+
+    ```
+    <copy>
+    cat $(ls -tr restore_L0*.cmd | tail -1)
+    </copy>
+    ```
+
+    * Notice how the restore uses `RESTORE ALL FOREIGN DATAFILES` command.
+    * This command was introduced in Oracle Database 18c and greatly enhanced in Oracle Database 19c. 
+    * It is a packaged command which looks at the specified backup set and determines what to restore and what to recover. There is no specific `RECOVER` command.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
     $ cat restore_L0_FTEX_240621081610.cmd
     SPOOL LOG TO log/restore_L0_FTEX_240621081610.log;
     SPOOL TRACE TO log/restore_L0_FTEX_240621081610.trc;
@@ -109,15 +230,32 @@ ll restore*
     ALLOCATE CHANNEL DISK4 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L0_%d_%N_%t_%s_%p';
     RESTORE ALL FOREIGN DATAFILES TO NEW FROM BACKUPSET
     '/home/oracle/m5/rman/L0_FTEX_USERS_1172218572_3_1';}
+    ```
+    </details>
 
-. cdb23
+3. Set environment to the target database and start restore.
 
-export L0SCRIPT=$(ls -tr restore_L0* | tail -1)
-cd /home/oracle/m5
-. cdb23
-rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L0SCRIPT
-    
+    ```
+    <copy>
+    export L0SCRIPT=$(ls -tr /home/oracle/m5/cmd/restore_L0* | tail -1)
+    cd /home/oracle/m5
+    . cdb23
+    rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L0SCRIPT
+    </copy>
 
+    -- Be sure to hit RETURN
+    ```
+
+    * The script auto-generates a file name for the restore script. It's different in each lab, so you find and store the restore script file name in a variable. 
+    * Connect with RMAN directly into the target PDB, *violet*. 
+    * Run the restore script using the `cmdfile` command line option.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ export L0SCRIPT=$(ls -tr /home/oracle/m5/cmd/restore_L0* | tail -1)
+    $ cd /home/oracle/m5
+    $ . cdb23
     $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L0SCRIPT
     
     Recovery Manager: Release 23.0.0.0.0 - Production on Fri Jun 21 11:13:42 2024
@@ -142,15 +280,27 @@ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L0SCRIP
     13> RESTORE ALL FOREIGN DATAFILES TO NEW FROM BACKUPSET
     14> '/home/oracle/m5/rman/L0_FTEX_USERS_1172229202_5_1';}
     15>
+    ```
+    </details>
 
+4. Search the log file for any warnings or errors. 
 
-cd /home/oracle/m5/log
-egrep "WARN-|ORA-" $(ls -tr restore* | tail -1)
+    ```
+    <copy>
+    cd /home/oracle/m5/log
+    egrep "WARN-|ORA-" $(ls -tr restore*log | tail -1)
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
     * The command produces no output because the search string was not found. This means there were no warnings or errors in the log file.
 
-
-
 You may now *proceed to the next lab*.
+
+## Additional information
+
+In a real migration, if you are worried about the load on the source database, and if you use Data Guard, you can perform the backups from a standby database. Such configuraiton is out of scope for this exercise. 
 
 ## Acknowledgements
 

@@ -243,6 +243,8 @@ A few more changes are needed on the target database. Plus, Oracle has a few rec
     exec dbms_stats.gather_schema_stats('SYS');
     exec dbms_stats.gather_schema_stats('SYSTEM');
     </copy>
+    
+    --Be sure to hit RETURN
     ```
 
     <details>
