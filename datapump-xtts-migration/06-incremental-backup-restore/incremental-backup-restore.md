@@ -31,7 +31,7 @@ In this lab, you will:
     * Notice how *INPUT_BYTES* is very small. This is a consequence of block change tracking. The database knows which blocks were changed since the last backup. On incremental backups, the database just scans the changed blocks.
     * Also notice how *OUTPUT_BYTES* is very small. You didn't change anything in the database since the last backup, so there are very little changes to back up.
     * The more often you perform incremental backups, the faster they run and the smaller the backup is.
-    * In a real migration, you would run incremental backups as often as practicically possible, the limit the amount of changes that goes into the final incremental backup. Only the final incremental backup affects the downtime duration. All other backups are performed before the outage.
+    * In a real migration, you would run incremental backups as often as practicically possible. This limits the amount of changes that goes into the final incremental backup. Only the final incremental backup affects the downtime duration. All other backups are performed before the outage.
     
     <details>
     <summary>*click to see the output*</summary>

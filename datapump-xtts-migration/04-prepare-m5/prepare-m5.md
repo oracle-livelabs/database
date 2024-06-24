@@ -42,7 +42,7 @@ In this lab, the source and target database is on the same host. You store the M
 
     * *cmd* contains configuration files and generated scripts.
     * *log* contains log and trace files. 
-    * *dbmig_driver_m5.sh* is the migration driver script.
+    * *dbmig\_driver\_m5.sh* is the migration driver script.
     * *impdp.sh* is a driver script for the final part, the Data Pump transportable import.
 
     <details>
@@ -247,14 +247,6 @@ In this lab, the source and target database is on the same host. You store the M
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> select
-           tablespace_name
-        from
-           dba_tablespaces
-        where
-           contents='PERMANENT'
-           and tablespace_name not in ('SYSTEM','SYSAUX');
-
     TABLESPACE_NAME
     ------------------------------
     USERS
