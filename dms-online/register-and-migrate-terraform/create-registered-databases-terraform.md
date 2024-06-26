@@ -50,7 +50,7 @@ For this task you need the following info from previous steps:
     - Database Type: **Oracle**
     - Host: Select **DBCS Public IP** value from Terraform output
     - Port: **1521**
-    - Connect String: Select **DBCS CDB Service** value from Terraform output
+    - Service Name: Select **DBCS CDB Service** value from Terraform output
 
     The checkbox **Create private endpoint to access this database** needs to stay unchecked.
 
@@ -89,7 +89,7 @@ For this task you need the following info from previous steps:
 
 2. Press **Create connection**
 
-  ![Screenshot of click create connection](images/create-connection.png =90%x*)
+  ![Screenshot of click create connection](images/create-connection-pdb.png =90%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **SourcePDB**
@@ -99,7 +99,7 @@ For this task you need the following info from previous steps:
     - Database Type: **Oracle**
     - Host: Select **DBCS Public IP** value from Terraform output
     - Port: **1521**
-    - Connect String: Select **DBCS PDB Service** value from Terraform output
+    - Service Name: Select **DBCS PDB Service** value from Terraform output
 
     The checkbox **Create private endpoint to access this database** needs to stay unchecked.
 
@@ -137,7 +137,7 @@ For this task you need the following info from previous steps:
 
 2. Press **Create connection**
 
-  ![Screenshot of click create connection](images/create-connection.png =90%x*)
+  ![Screenshot of click create connection](images/create-connection-adb.png =90%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **TargetADB**
@@ -226,4 +226,4 @@ You may now [proceed to the next lab](#next).
 ## Acknowledgments
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian Lynch, Solution Engineers, Austin Specialist Hub
-* **Last Updated By/Date** - Jorge Martinez, Product Manager, October 2023
+* **Last Updated By/Date** - Jorge Martinez, Product Manager, June 2024
