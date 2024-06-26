@@ -14,7 +14,7 @@ HeatWave Lakehouse. The deployment goals are:
 2. Show how MySQL HeatWave Lakehouse enables you to perform analytics on top of your object storage data without having to move data into the MySQL database.
 3. Show how to run queries on data coming from MySQL InnoDB storage loaded into HeatWave and data loaded from object storage into HeatWave all using standard MySQL syntax and familiar querying commands.
 
-_Estimated Time:_ 2 hours
+_Estimated Time:_ 1.5 hours
 
 Watch the video below for a quick walk-through of the lab.
 [Analyze Data at Web Scale in Object Store with MySQL HeatWave Lakehouse](videohub:1_sokyn79m)
