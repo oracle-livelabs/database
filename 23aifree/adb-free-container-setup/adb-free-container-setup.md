@@ -111,7 +111,7 @@ This lab assumes you have:
 
     ![ORDS landing page](images/ords-landing.png)
 
-2. Sign in with your admin password you had set for the ADB in Task 1, Step 4.
+2. Sign in with your admin password as mentioned in the script output. If you had chosen to reset your admin password, then use your new one.
 
     ![Sign into DB Actions](images/sign-in-ords.png)
 
@@ -129,7 +129,7 @@ This lab assumes you have:
 
     ![ORDS landing page](images/launch-apex.png)
 
-5. Sign in with your admin password you had set for the ADB in Task 1, Step 4.
+2. Sign in with your admin password as mentioned in the script output. If you had chosen to reset your admin password, then use your new one.
 
     ![Sign into APEX](images/sign-in-apex.png)
 
