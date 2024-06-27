@@ -2,12 +2,7 @@
 
 ## Introduction
 
-This lab walks you through a Movie Stream application demo created by the Oracle NoSQL development team Mike Brey.
-This application is composed of several micro-services using different Oracle Cloud Infrastructure services.
-During this demo, the focus will be on the Catalog micro-service. This service will be deployed in multiple regions.
-The data will be stored in Global Active Tables. Oracle NoSQL Global Active Tables provide multi-active replication of
-table data between geographically separated regions.
-The Geo Distributed Catalog offers low-latency local access to data irrespective of where the data originated.
+This lab walks you through a Movie Stream demo application created by the Oracle NoSQL Product Management team. This application is composed of several micro-services using different Oracle Cloud Infrastructure services. During this demo, the focus will be on the Catalog micro-service, which is pictured below. This demo application will be deployed in multiple regions. The data will be stored in Global Active Tables. Oracle NoSQL Global Active Tables provide active-active replication of table data between geographically separated regions. The "Geo Distributed Catalog" offers low-latency local access to data irrespective of where the data originated.
 
 ![component-arch](images/component-arch-todo.png)
 
