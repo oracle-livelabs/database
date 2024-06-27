@@ -2,25 +2,58 @@
 
 ## Introduction
 
-Welcome to the "Exploring SQL Firewall in Oracle Database 23ai" workshop. In this workshop, you will learn about the SQL Firewall feature introduced in Oracle Database 23ai, which provides real-time protection against common database attacks by monitoring and blocking unauthorized SQL and SQL injection attempts. By the end of this workshop, you will be able to configure and use the SQL Firewall to enhance the security of your database applications. **This lab is a very high level overview of SQL Firewall and does not show all of SQL Firewalls capabilities. For a comprehensive SQL Firewall workshop please try the following lab:**
-
-[SQL Firewall LiveLab](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3875)
+Welcome to the "Exploring SQL Firewall in Oracle Database 23ai" workshop. In this workshop, you will learn about the SQL Firewall feature introduced in Oracle Database 23ai, which provides real-time protection against common database attacks by monitoring and blocking unauthorized SQL and SQL injection attempts. By the end of this workshop, you will be able to configure and use the SQL Firewall to enhance the security of your database applications.
 
 Estimated Lab Time: 20 minutes
 
 ### Objective:
-The objective of this workshop is to familiarize you with the SQL Firewall feature in Oracle Database 23ai. You will learn how to enable the firewall, capture and allow authorized SQL statements, enforce security policies based on SQL and environmental contexts, and monitor for violations. Please note, this lab is meant to teach you how SQL Firewall works at a very high level. If you would like to see a full SQL Firewall workshop, please check the lab above.
+
+The objective of this workshop is to familiarize you with the SQL Firewall feature in Oracle Database 23ai. You will learn how to enable the firewall, capture and allow authorized SQL statements, enforce security policies based on SQL and environmental contexts, and monitor for violations. Please note, this lab provides a high-level overview of SQL Firewall capabilities. For a comprehensive SQL Firewall workshop, please visit the [SQL Firewall LiveLab](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3875).
 
 ### Prerequisites:
+
 - Access to Oracle Database 23ai environment.
 - Basic understanding of SQL.
 
 ## Task 1: Enabling SQL Firewall
 
-1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png " ")
+1. For this lab, let's create sample tables and insert data as part of our demo.
 
-2. For this lab, we'll create two new users, 'TEST', and grant necessary roles including SQL\_FIREWALL\_ADMIN, and DB23AI with developer role.
+    ```
+    <copy>
+    DROP TABLE IF EXISTS EMPLOYEES CASCADE CONSTRAINTS;
+    DROP TABLE IF EXISTS DEPARTMENTS CASCADE CONSTRAINTS;
+
+    -- Create employees table
+    CREATE TABLE employees (
+        employee_id INT,
+        first_name VARCHAR(50),
+        last_name VARCHAR(50),
+        department_id INT
+    );
+
+    -- Create departments table
+    CREATE TABLE departments (
+        department_id INT,
+        department_name VARCHAR(50)
+    );
+
+    -- Insert data into departments table
+    INSERT INTO departments (department_id, department_name)
+    VALUES
+        (1, 'HR'),
+        (2, 'IT'),
+        (3, 'Finance');
+    </copy>
+    ```
+    ![create tables](images/im8.png " ")
+
+
+2. We'll need to sign in as a user with more privileges than the user DB23AI. For demo purposes, we'll use the ADMIN user. 
+
+    Log out of the user and log in as ADMIN.
+
+2. For this lab, we'll create a new user, 'TEST', and grant necessary roles including SQL\_FIREWALL\_ADMIN.
 
     ```
     <copy>
@@ -53,47 +86,9 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
 
     -- Set quota
     ALTER USER TEST QUOTA 100M ON DATA;
-
     </copy>
     ```
-    Don't forget the second user!
-
-    ```
-    <copy>
-    -- USER SQL
-    CREATE USER DB23AI IDENTIFIED BY Oracledb_4U#;
-
-    -- ADD ROLES
-    GRANT CONNECT TO DB23AI;
-    GRANT DB_DEVELOPER_ROLE TO DB23AI;
-    GRANT RESOURCE TO DB23AI;
-
-    -- REST ENABLE
-    BEGIN
-        ORDS_ADMIN.ENABLE_SCHEMA(
-            p_enabled => TRUE,
-            p_schema => 'DB23AI',
-            p_url_mapping_type => 'BASE_PATH',
-            p_url_mapping_pattern => 'db23ai',
-            p_auto_rest_auth=> TRUE
-        );
-        -- ENABLE DATA SHARING
-        C##ADP$SERVICE.DBMS_SHARE.ENABLE_SCHEMA(
-                SCHEMA_NAME => 'DB23AI',
-                ENABLED => TRUE
-        );
-        commit;
-    END;
-    /
-
-    -- QUOTA
-    ALTER USER DB23AI QUOTA UNLIMITED ON DATA;
-
-
-    </copy>
-    ```
-    ![create the uses](images/im2.png " ")
-
+    ![create the user](images/im2.png " ")
 
 3. Sign out of the admin user and sign in as the test user
 
@@ -144,32 +139,12 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
 
     ```
     <copy>
-    DROP TABLE IF EXISTS EMPLOYEES CASCADE CONSTRAINTS;
-    DROP TABLE IF EXISTS DEPARTMENTS CASCADE CONSTRAINTS;
-
-    -- Create employees table
-    CREATE TABLE employees (
-        employee_id INT,
-        first_name VARCHAR(50),
-        last_name VARCHAR(50),
-        department_id INT
-    );
-
-    -- Create departments table
-    CREATE TABLE departments (
-        department_id INT,
-        department_name VARCHAR(50)
-    );
-
-    -- Insert data into departments table
-    INSERT INTO departments (department_id, department_name)
-    VALUES
-        (1, 'HR'),
-        (2, 'IT'),
-        (3, 'Finance');
+    INSERT INTO employees (employee_id, first_name, last_name, department_id)
+    VALUES (101, 'Alice', 'Brown', 2);
+    COMMIT;
     </copy>
     ```
-    ![perform SQL operations](images/im8.png " ")
+    ![perform SQL operations](images/im10.png " ")
 
 11. Log back in as the TEST user
 
@@ -187,7 +162,6 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     </copy>
     ```
     ![stop capture](images/im11.png " ")
-
 
 ## Task 2: Reviewing Captured Data
 
@@ -237,7 +211,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ![start capture](images/im22.png " ")
     ![start capture](images/im23.png " ")
 
-6. Click the SQL tile again and attempt to execute a statement not in the allow list to verify SQL Firewall enforcement. Notice we get a SQL Firewall Violation error.
+6. Attempt to execute a statement not in the allow list to verify SQL Firewall enforcement. Notice we get a SQL Firewall Violation error.
 
     ```
     <copy>
@@ -245,44 +219,6 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     </copy>
     ```
     ![SQL Firewall violation](images/im16.png " ")
-
-## Task 3: Clean up
-
-1. Sign back in with the **admin** user. 
-
-    This is the password you used to create autonomous database. If you've forgotten your password navigate to the Autonomous Database home page, **click** Database actions and then **click** SQL.
-
-    ![click SQL](images/im1.png " ")
-
-2. Terminate any active sessions created by the TEST user and drop the user.
-
-    ```
-    <copy>
-    BEGIN
-    FOR session IN (SELECT SID, SERIAL# FROM V$SESSION WHERE USERNAME = 'TEST') LOOP
-        EXECUTE IMMEDIATE 'ALTER SYSTEM KILL SESSION ''' || session.SID || ',' || session.SERIAL# || ''' IMMEDIATE';
-    END LOOP;
-    END;
-    /
-
-    BEGIN
-    FOR session IN (SELECT SID, SERIAL# FROM V$SESSION WHERE USERNAME = 'DB23AI') LOOP
-        EXECUTE IMMEDIATE 'ALTER SYSTEM KILL SESSION ''' || session.SID || ',' || session.SERIAL# || ''' IMMEDIATE';
-    END LOOP;
-    END;
-
-    </copy>
-    ```
-    ![terminate sessions](images/im17.png " ")
-
-3. Now drop both users
-
-    ```
-    <copy>
-    DROP USER TEST CASCADE;
-    DROP USER DB23AI CASCADE;
-    </copy>
-    ```
 
 You may now **proceed to the next lab** 
 

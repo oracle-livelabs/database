@@ -4,7 +4,7 @@ Welcome to the Performance and Database Lifecycle Management focus area of the w
 
 As businesses evolve and new requirements arise, database performance optimization and efficient lifecycle management are key. Oracle Database 23ai brings tons of advancements in these areas, giving developers and administrators new features and functionality to improve database performance, management and efficiency throughout its lifecycle. This section of the LiveLab only shows a small number of the new features in these focus areas. 
 
-This section will be updated over time. If you'd like to see a specific feature added, tag me on twitter with you suggestion! [@Killianlynchh](https://twitter.com/Killianlynchh)
+This section will be updated over time. If you'd like to see a specific feature added, tag me on X (twitter) with your suggestion! [@Killianlynchh](https://twitter.com/Killianlynchh)
 
 ## About Oracle Database 23ai
 

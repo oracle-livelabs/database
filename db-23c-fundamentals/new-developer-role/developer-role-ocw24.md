@@ -11,6 +11,7 @@ The objective of this lab is to familiarize you with the Developer Role role in 
 
 ### Prerequisites:
 - Access to Oracle Database 23ai.
+- Completion of the Get Started with LiveLabs lab
 - Basic understanding of SQL is helpful.
 
 ## Task 1: Lab setup and understanding the developer role
@@ -28,7 +29,6 @@ The objective of this lab is to familiarize you with the Developer Role role in 
     ![click SQL](images/im1.png " ")
 
 2. To check all of the system privileges, object privileges, and roles granted by the Developer Role, run the following PL/SQL script:
-
 
     ```
     <copy>
@@ -102,67 +102,81 @@ The objective of this lab is to familiarize you with the Developer Role role in 
     ```
     ![run the PL/SQL](images/im2.png " ")
 
+3. Here we can go ahead and create our user for this workshop. We'll call our user `DB23AI` and grant the user the new developer role.
+
+    ```
+    <copy>
+  -- USER SQL
+  CREATE USER DB23AI IDENTIFIED BY Oracledb_4U#;
+
+  -- ADD ROLES
+  GRANT CONNECT TO DB23AI;
+  GRANT DB_DEVELOPER_ROLE TO DB23AI;
+  GRANT RESOURCE TO DB23AI;
+
+  -- REST ENABLE
+  BEGIN
+      ORDS_ADMIN.ENABLE_SCHEMA(
+          p_enabled => TRUE,
+          p_schema => 'DB23AI',
+          p_url_mapping_type => 'BASE_PATH',
+          p_url_mapping_pattern => 'db23ai',
+          p_auto_rest_auth=> TRUE
+      );
+      -- ENABLE DATA SHARING
+      C##ADP$SERVICE.DBMS_SHARE.ENABLE_SCHEMA(
+              SCHEMA_NAME => 'DB23AI',
+              ENABLED => TRUE
+      );
+      commit;
+  END;
+  /
+
+  -- QUOTA
+  ALTER USER DB23AI QUOTA UNLIMITED ON DATA;
+
+    </copy>
+    ```
+
 ## Task 3: Performing grants and revokes
 
-1. To grant the Developer Role to another user, use the GRANT statement. We'll create a user and check the granted roles to start.
+1. Just like with other roles in the database, we can revoke and grant privileges. Since we granted the role above, we'll check the user and remove the role. Run the following as a script and take a look at the output 
 
     ```
     <copy>
-    DROP USER IF EXISTS KILLIAN CASCADE;
-    CREATE USER KILLIAN IDENTIFIED BY Oracle123_long;
-    SELECT GRANTED_ROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE='KILLIAN';    
+    SELECT GRANTED_ROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE='DB23AI';
+    REVOKE DB_DEVELOPER_ROLE FROM DB23AI;
+    SELECT GRANTED_ROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE='DB23AI';
     </copy>
     ```
-    this will show 'no data found' as expected because we haven't granted anything yet.
+    We can see that the user `DB23AI` we created above doesn't have the Developer Role anymore.
     
-    ![grant roles](images/im3.png " ")
+    ![grant roles](images/ocw-user.png " ")
 
-2. Now grant the roles to `killian`
+2. Now we can re-grant the role to `DB23AI`. Again, run this as a script.
    
     ```
     <copy>
-    GRANT DB_DEVELOPER_ROLE TO killian;
+    GRANT DB_DEVELOPER_ROLE TO DB23AI;
+    SELECT GRANTED_ROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE='DB23AI';
     </copy>
     ```
-    ![grant our new user roles](images/im4.png " ")
+    ![grant our new user roles](images/ocw-dbrole.png " ")
 
-3. After granting the role, we can verify the grant by executing the following SQL query:
-   
-    ```
-    <copy>
-    SELECT GRANTED_ROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE='KILLIAN';
-    </copy>
-    ```
-    ![verify the roles](images/im5.png " ")
+3. Let's sign in as our new user. Click on the admin profile in the top right hand of Database Actions and sign out.
 
-4. To revoke the Developer Role from a user, use the REVOKE statement:
-   
-    ```
-    <copy>
-    REVOKE DB_DEVELOPER_ROLE FROM KILLIAN;
-    </copy>
-    ```
-    ![revoke the user roles](images/im6.png " ")
+  ![log out of our admin user](images/im12.png " ")
 
-5. Again, we can check that the role was removed
+4. Sign in with the username **DB23AI** and password **Oracledb_4U#**
 
-    ```
-    <copy>
-    SELECT GRANTED_ROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE='KILLIAN';
-    </copy>
-    ```
-    ![check the revoke worked](images/im7.png " ")
+  ![sign in with db23ai](images/im11.png " ")
 
-6. To clean up from the lab we can drop the user
+5. Click SQL to open the SQL editor.
 
-    ```
-    <copy>
-    drop user IF EXISTS killian CASCADE;    
-    </copy>
-    ```
-    ![drop the role](images/im8.png " ")
+  ![Open SQL with db23ai](images/im9.png " ")
 
-7. In this lab, we explored the Developer Role in Oracle Database 23ai for application development. By granting the Developer Role, it can help simplify privilege management and improve your database security during the development process of applications.
+
+3. In this lab, we explored the Developer Role in Oracle Database 23ai for application development. By granting the Developer Role, it can help simplify privilege management and improve your database security during the development process of applications.
 
 You may now **proceed to the next lab** 
 
