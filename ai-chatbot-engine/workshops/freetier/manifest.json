@@ -1,0 +1,46 @@
+{
+    "workshoptitle": "AI Chatbot engine with Oracle Database 23ai and OCI Generative AI Services",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Introduction to the workshop and the labs that follow",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+        },
+        {
+            "title": "Lab 1: Setup the vector database (Oracle Database 23ai)",
+            "description": "Setting up the vector database (Oracle Database 23ai)",
+            "filename": "../../setup-23ai/setup-23ai.md"
+        },
+        {
+            "title": "Lab 2: Setup the Python Environment",
+            "description": "Setting up the Python Environment",
+            "filename": "../../setup-python/setup-python.md"
+        },
+        {
+            "title": "Lab 3: Generate vector embeddings",
+            "description": "Vectorize a text FAQ file",
+            "filename": "../../vectorization/vectorization.md"
+        },
+        {
+            "title": "Lab 4: Vector retrieval and Large Language Model generation",
+            "description": "Vector rerieval and LLM generation",
+            "filename": "../../search+llm/search+llm.md"
+        },
+        {
+            "title": "Lab 5: Next steps",
+            "description": "Next steps",
+            "filename": "../../next-steps/next-steps.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}
