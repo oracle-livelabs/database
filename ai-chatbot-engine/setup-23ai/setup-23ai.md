@@ -13,12 +13,14 @@ Estimated Time: 15 minutes
 
 ### Prerequisites
 
-* Basic knowledge of Oracle Cloud Infrastructure (OCI) concepts and consoles
+* Basic knowledge of Oracle Cloud Infrastructure (OCI) concepts and console
 * Basic Linux knowledge
 
 > Note: Any kind of Linux-based system is okay, but you will need to modify the following instructions to suit your specific setup.
 
 ## Task 1: Create a compute instance to run the lab
+
+> Note: If you don't know how to create a virtual machine and connect to it via SSH, please [see this lab first](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=648&clear=RR,180&session=108750023091545). The following section will only give you a brief overview.
 
 Open your Oracle Cloud Infrastructure Cloud Console and make sure you are in the "US Midwest (Chicago)" region, which is necessary to access the OCI Generative AI services endpoint.
 
@@ -32,18 +34,20 @@ Open your Oracle Cloud Infrastructure Cloud Console and make sure you are in the
 
 4. Choose the "Oracle Linux 8" image.
 
-5. Choose the instance shape based on your requirements.
+5. Choose a `VM.Standard.E4.Flex` shape.
 
-6. Configure the networking options and ensure that you have proper security lists that allow SSH (port 22) and Jupyter Lab (port 8888).
+6. In the Networking section, most of the defaults are perfect for our purposes. However, you will need to scroll down and select the Assign a public IPv4 address option.
 
-7. Connect to your remote instance using SSH.
+6. Configure the security list to allow SSH (port 22) and Jupyter Lab (port 8888). [See here](https://docs.oracle.com/en-us/iaas/Content/Network/Concepts/securitylists.htm) how to do it.
+
+7. Create your instance by clicking on the `Create` button.
+
+8. Connect to your remote instance using SSH.
    ```
    <copy>
-   ssh opc@[remote IP]
+   ssh -i <private_ssh_key> opc@<public_ip_address>
    </copy>
    ```
-
-   > Note: The exact connection details depend on how you configured remote access when creating the instance.
 
 ## Task 2: Install and configure the database (Oracle Database 23ai Free)
 For simplicity, we will install our database in a container using Podman, a popular container management tool similar to Docker.

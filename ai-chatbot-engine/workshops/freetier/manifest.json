@@ -1,6 +1,6 @@
 {
-    "workshoptitle": "AI Chatbot engine with Oracle Database 23c and OCI Generative AI Services",
-    "help": "bogdan.farca@oracle.com",
+    "workshoptitle": "AI Chatbot engine with Oracle Database 23ai and OCI Generative AI Services",
+    "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
         {
             "title": "Introduction",
