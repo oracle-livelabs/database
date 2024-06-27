@@ -12,7 +12,6 @@ In this lab, you will:
 
 * Export statistics
 * Gather dictionary statistics
-* Close maintenance windows
 
 ## Task 1: Export statistics
 
@@ -153,74 +152,6 @@ While executing an export or import job, Data Pump is querying the data dictiona
 
     SQL> exec dbms_stats.gather_schema_stats('SYSTEM');
 
-    PL/SQL procedure successfully completed.
-    ```
-    </details>
-
-## Task 3: Close maintenance windows
-
-When performing the migration, you want exclusive access to the resources in the database. 
-
-1. Generate a list of all the maintenance windows. 
-
-    ```
-    <copy>
-    select window_name from dba_autotask_window_clients;
-    </copy>
-    ```
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    SQL> select window_name from dba_autotask_window_clients;
-    
-    WINDOW_NAME
-    --------------------------------------------------------------------------------
-    FRIDAY_WINDOW
-    SATURDAY_WINDOW
-    WEDNESDAY_WINDOW
-    MONDAY_WINDOW
-    THURSDAY_WINDOW
-    SUNDAY_WINDOW
-    TUESDAY_WINDOW
-    
-    7 rows selected.
-    ```
-    </details>
-
-2. Disable the maintenance windows. You don't want the database to start automatic maintenance while you are migrating the database.
-
-    ```
-    <copy>
-    begin
-       dbms_scheduler.disable(name  => 'SYS.MONDAY_WINDOW');
-       dbms_scheduler.disable(name  => 'SYS.TUESDAY_WINDOW');
-       dbms_scheduler.disable(name  => 'SYS.WEDNESDAY_WINDOW');
-       dbms_scheduler.disable(name  => 'SYS.THURSDAY_WINDOW');
-       dbms_scheduler.disable(name  => 'SYS.FRIDAY_WINDOW');
-       dbms_scheduler.disable(name  => 'SYS.SATURDAY_WINDOW');
-       dbms_scheduler.disable(name  => 'SYS.SUNDAY_WINDOW');
-    end;
-    /
-    </copy>
-
-    -- Be sure to hit RETURN
-
-    ```
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    SQL> begin
-           dbms_scheduler.disable(name  => 'SYS.MONDAY_WINDOW');
-           dbms_scheduler.disable(name  => 'SYS.TUESDAY_WINDOW');
-           dbms_scheduler.disable(name  => 'SYS.WEDNESDAY_WINDOW');
-           dbms_scheduler.disable(name  => 'SYS.THURSDAY_WINDOW');
-           dbms_scheduler.disable(name  => 'SYS.FRIDAY_WINDOW');
-           dbms_scheduler.disable(name  => 'SYS.SATURDAY_WINDOW');
-           dbms_scheduler.disable(name  => 'SYS.SUNDAY_WINDOW');
-        end;
-        /  2    3    4    5    6    7    8    9   10
-    
     PL/SQL procedure successfully completed.
     ```
     </details>

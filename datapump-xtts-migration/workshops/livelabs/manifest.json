@@ -54,6 +54,16 @@
       "filename": "../../08-final-preparations/final-preparations.md"
     },
     {
+      "title": "Lab 9: Complete migration",
+      "description": "Complete the migration.",
+      "filename": "../../09-final-backup-restore/final-backup-restore.md"
+    },
+    {
+      "title": "Lab 10: Post-migration tasks",
+      "description": "Things to check and perform after migration.",
+      "filename": "../../10-post-migration-tasks/post-migration-tasks.md"
+    },
+    {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"

@@ -166,7 +166,7 @@ In this lab, you will:
 
     ```
     <copy>
-    export L1SCRIPT=$(ls -tr restore_L1* | tail -1) 
+    export L1SCRIPT=$(ls -tr restore_L1_* | tail -1) 
     cd /home/oracle/m5
     . cdb23
     rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1SCRIPT
@@ -301,7 +301,7 @@ Let's simulate changes to the source database and see how it affects the backup 
 
     ```
     <copy>
-    export L1SCRIPT=$(ls -tr restore_L1* | tail -1) 
+    export L1SCRIPT=$(ls -tr restore_L1_* | tail -1) 
     cd /home/oracle/m5
     . cdb23
     rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1SCRIPT

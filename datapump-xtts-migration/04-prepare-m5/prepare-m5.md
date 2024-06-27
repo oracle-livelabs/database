@@ -69,12 +69,11 @@ In this lab, the source and target database is on the same host. You store the M
     ```
     </details>
 
-3. Examine the properties file which contains the details of your migration. It's stored in the *cmd* directory. In this lab, you use a pre-created properties file.
+3. Examine the properties file which contains the details of your migration. It's stored in the *cmd* directory. In this lab, the properties file has already be filled with the details of your database.
 
     ```
     <copy>
     cd cmd
-    cp /home/oracle/scripts/xtts-m5-properties dbmig_driver.properties
     more dbmig_driver.properties
     </copy>
 
@@ -87,7 +86,6 @@ In this lab, the source and target database is on the same host. You store the M
     <summary>*click to see the output*</summary>
     ``` text
     $ cd cmd
-    $ cp /home/oracle/scripts/xtts-m5-properties dbmig_driver.properties
     $ more dbmig_driver.properties
 
     ############################################################
