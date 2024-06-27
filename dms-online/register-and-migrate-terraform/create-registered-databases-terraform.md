@@ -38,11 +38,15 @@ For this task you need the following info from previous steps:
 
   ![Screenshot of Database Connections navigation](images/db-connection.png =90%x*)
 
-2. Press **Create connection**
+2. Select your assigned compartment. Identify the value assigned to you in the **Reservation Information** then in OCI go to the **Compartment** field and look for the value under Root / Livelabs, an example is displayed below:
+
+  ![Screenshot to select compartment](images/compartment-selection.png =90%x*)
+
+3. Press **Create connection**
 
   ![Screenshot of click create connection](images/create-connection.png =90%x*)
 
-3. On the page Database Details, fill in the following entries, otherwise leave defaults:
+4. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **SourceCDB**
     - Vault: **DMSVault**
     - Encryption Key: **DMSKey**
@@ -50,26 +54,26 @@ For this task you need the following info from previous steps:
     - Database Type: **Oracle**
     - Host: Select **DBCS Public IP** value from Terraform output
     - Port: **1521**
-    - Connect String: Select **DBCS CDB Service** value from Terraform output
+    - Service Name: Select **DBCS CDB Service** value from Terraform output
 
     The checkbox **Create private endpoint to access this database** needs to stay unchecked.
 
-4. Press **Next**
+5. Press **Next**
 
   ![Screenshot of database details and click next](images/database-details-cdb.png =50%x*)
 
-5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
+6. On the page Connection Details, fill in the following entries, otherwise leave defaults:
     - Initial load database username: **system**
     - Initial load database password: Select **Admin Password** value from Terraform output
     - Select **Use different credentials for replication**
     - Replication database username: **c##ggadmin**
     - Replication database password: Select **Admin Password** value from Terraform output
 
-6. Press **Create**
+7. Press **Create**
 
   ![Screenshot of  confirm create connection](images/connection-details-cdb.png =50%x*)
 
-7. Press **Test connection** to confirm that your Database Connection details are correct
+8. Press **Test connection** to confirm that your Database Connection details are correct
 
   ![Screenshot of CDB connection test](images/test-cdb.png =50%x*)
     - If the test is not successful, correct your connection details and try again.
@@ -89,7 +93,7 @@ For this task you need the following info from previous steps:
 
 2. Press **Create connection**
 
-  ![Screenshot of click create connection](images/create-connection.png =90%x*)
+  ![Screenshot of click create connection](images/create-connection-pdb.png =90%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **SourcePDB**
@@ -99,7 +103,7 @@ For this task you need the following info from previous steps:
     - Database Type: **Oracle**
     - Host: Select **DBCS Public IP** value from Terraform output
     - Port: **1521**
-    - Connect String: Select **DBCS PDB Service** value from Terraform output
+    - Service Name: Select **DBCS PDB Service** value from Terraform output
 
     The checkbox **Create private endpoint to access this database** needs to stay unchecked.
 
@@ -137,7 +141,7 @@ For this task you need the following info from previous steps:
 
 2. Press **Create connection**
 
-  ![Screenshot of click create connection](images/create-connection.png =90%x*)
+  ![Screenshot of click create connection](images/create-connection-adb.png =90%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **TargetADB**
@@ -226,4 +230,4 @@ You may now [proceed to the next lab](#next).
 ## Acknowledgments
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian Lynch, Solution Engineers, Austin Specialist Hub
-* **Last Updated By/Date** - Jorge Martinez, Product Manager, October 2023
+* **Last Updated By/Date** - Jorge Martinez, Product Manager, June 2024

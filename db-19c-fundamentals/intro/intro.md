@@ -1,6 +1,11 @@
 # Introduction
 
-This workshop contains several hands-on labs that showcase some of the latest enhancements in the long-term Oracle Database support release, 19c. This is not a complete list of new features. Our mission is not just to manage your data but to help you get value out of it. For the world’s most demanding enterprise applications and workloads, Oracle Database 19c is a converged database that delivers a high-performance, highly available, secure, and scalable data management platform for cloud as well as on-premises environments.
+> **Note: Oracle Database 23ai is the current long term support release. Check out the following lab for the newest features in the Oracle Database:**
+
+> [Oracle Database 23ai New Features](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3950&clear=RR,180&session=29237226541700)
+
+
+This workshop contains several hands-on labs that showcase some of the new enhancements in Oracle Database release, 19c. This is not a complete list of new features. Our mission is not just to manage your data but to help you get value out of it. For the world’s most demanding enterprise applications and workloads, Oracle Database 19c is a converged database that delivers a high-performance, highly available, secure, and scalable data management platform for cloud as well as on-premises environments.
 
 [](youtube:aF89i0m6zFU)
 
@@ -15,6 +20,10 @@ The converged database approach can be easily misunderstood as one large databas
 ## About the Oracle Database 19c New Features Workshop
 
 This workshop lets you try out new features in Oracle Database 19c. If needed, a lab starts with instructions on how to prepare your environment and ends with instructions on how to restore your environment back to its original state.
+
+> **Note: Oracle Database 23ai is the current long term support release. Check out the following lab for the newest features in the Oracle Database:**
+
+> [Oracle Database 23ai New Features](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3950&clear=RR,180&session=29237226541700)
 
 
 ## Learn More
