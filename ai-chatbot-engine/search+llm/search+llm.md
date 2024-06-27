@@ -88,6 +88,10 @@ with connection.cursor() as cursor:
 The SQL query is executed with the provided vector parameter, fetching relevant information from the database. For each result, the code retrieves the text content, stored in JSON format, and appends it to a list along with the calculated similarity score. This process iterates through all fetched results, accumulating them in the `results` list.
 
 If we print the results, we obtain something like the following. As requested, we have the "score" of each hit, which is essentially the distance in vector space between the question and the text chunk, as well as the metadata JSON embedded in each chunk.
+```python
+import pprint
+pprint.pp(results)
+```
 
 ```
 [(0.342059188035412,
@@ -206,17 +210,19 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
     </copy>
     ```
 
-    The user's OCID can be retrieved like this:
+    The **user's OCID** can be retrieved like this:
     -	Sign in to the Oracle Cloud Console.
     -	In the top-right corner, click on your user profile icon, then click on “User Settings”.
     -	In the User Settings page, you will find your User OCID.
 
-    The tenancy's OCID:
+    The **key file** is generated using the instructions [from this doc](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#apisigningkey_topic_How_to_Generate_an_API_Signing_Key_Console).
+
+    The **tenancy's OCID**:
     -	Open the Navigation Menu (the hamburger menu icon).
     -	Under Identity, click on Tenancy.
     -	The Tenancy OCID will be displayed on the Tenancy details page.
 
-    While you have the Console open, fetch also the comaprtment OCID (you will need it in the next step):
+    While you have the Console open, fetch also the **compartment OCID** (you will need it in the next step):
     -	Navigate to Identity: Open the main menu and select Identity & Security -> Compartments.
     -	List of Compartments: You will see a list of compartments. Click on the compartment you need the OCID for.
     -	Compartment Details: The details page of the compartment will display its OCID.
