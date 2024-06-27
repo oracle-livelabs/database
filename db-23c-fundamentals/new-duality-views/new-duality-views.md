@@ -1,38 +1,35 @@
-# Exploring JSON Relational Duality in SQL and Rest
+# Exploring JSON Relational Duality with SQL and Rest
 
 ## Introduction
 
-Welcome to the "Exploring JSON Relational Duality in SQL and REST" workshop. In this workshop, you will learn about the JSON Relational Duality feature, which allows developers to seamlessly integrate relational and JSON data models. This feature provides the strengths of both approaches, enabling efficient data manipulation and simplifying application development.
+Welcome to the "Exploring JSON Relational Duality with SQL and REST" workshop. In this workshop, you will learn about the JSON Relational Duality feature, which allows for the  seamless integration between the relational and JSON data models. This feature provides the strengths of both approaches, allowing you to easily manipulate data in either model. 
 
 This lab is only intended to give you a small taste of what duality views have to offer. For a full, in-depth free workshops, follow the link below
 
 [23ai JSON Duality View Workshops](https://apexapps.oracle.com/pls/apex/f?p=133:100:110578183178299::::SEARCH:duality%20views)
 
-Estimated Lab Time: 30 minutes
+Estimated Lab Time: 20 minutes
 
 **JSON Duality**
 
-JSON Relational Duality is a landmark capability in Oracle Database 23ai providing game-changing flexibility and simplicity for Oracle Database developers. This breakthrough innovation overcomes the historical challenges developers have faced when building applications, using relational or document models.
+JSON Relational Duality is a landmark capability in Oracle Database 23ai providing game-changing flexibility and simplicity for Oracle Database developers. This feature overcomes the historical challenges developers have faced when building applications, using the relational or document models.
 
-JSON Relational Duality helps to converge the benefits of both document and relational worlds. Developers now get the flexibility and data access benefits of the JSON document model, plus the storage efficiency and power of the relational model. The new feature enabling this convergence is JSON Relational Duality View (Will be referred below as Duality View).
+JSON Relational Duality helps to converge the benefits of both document and relational worlds. Developers now get the flexibility and data access benefits of the JSON document model, plus the storage efficiency and power of the relational model. The new feature enabling this functionality is JSON Relational Duality View (we'll refer to it as a Duality View below).
 
 Key benefits of JSON Relational Duality:
 
-* Experience extreme flexibility in building apps using Duality Views. Developers can access the same data relationally or as hierarchical documents based on their use case and are not forced into making compromises because of the limitations of the underlying database. Build document-centric apps on relational data or create SQL apps on documents.
+* Experience flexibility in building apps using Duality Views. You can access the same data relationally or as hierarchical documents based on your use case and you're not forced into making compromises because of the limitations of the underlying database. Build document-centric apps on relational data or create SQL apps on documents.
 
-* Experience simplicity by retrieving and storing all the data needed for an app in a single database operation. Duality Views provide fully updatable JSON views over data. Apps can read a document, make necessary changes, and write the document back without worrying about underlying data structure, mapping, consistency, or performance tuning.
+* Experience simplicity by retrieving and storing all the data needed for an app in a single database operation. Duality Views provide fully updatable JSON views over data. Apps can read a document, make necessary changes, and write the document back without worrying about underlying data structure, mapping, or consistency.
 
-* Enable flexibility and simplicity in building multiple apps on same data. Developers can use the power of Duality View to define multiple JSON Views across overlapping groups of tables. This flexible data modeling makes building multiple apps against the same data easy and efficient.
+* Enable flexibility and simplicity in building multiple apps on same set of data. You can use the power of Duality View to define multiple JSON Views across overlapping groups of tables. This flexible data modeling makes building multiple apps against the same data easy and efficient.
 
 * Duality Views eliminate the inherent problem of data duplication and data inconsistency in document databases. Duality Views are fully ACID (atomicity, consistency, isolation, durability) transactions across multiple documents and tables. It eliminates data duplication across documents data, whereas consistency is maintained automatically.
 
-* Build apps that support high concurrency access and updates. Traditional locks don’t work well for modern apps. A new lock-free concurrency control provided with Duality View supports high concurrency updates. The new-lock free concurrency control also works efficiently for interactive applications since the data is not locked during human thinking time.
-
-Estimated Time: 30 minutes
 
 ### Objectives
 
-This lab aims to provide hands-on experience with JSON-relational duality views, demonstrating how to leverage the strengths of both JSON and relational databases. You will learn how to create, query, and update JSON-relational duality views using SQL or REST. 
+This lab aims to provide hands-on experience with JSON-relational duality views, demonstrating how to get the strengths of both JSON and relational data models. You will learn how to create, query, and update JSON-relational duality views using SQL and REST. 
 
 ### Prerequisites
 
@@ -89,9 +86,11 @@ This lab assumes you have:
 
 ## Task 2: JSON Relational Duality View
 
-1. Oracle Database 23ai JSON Relational Duality unifies the benefits of the Relational and Document worlds within a single database. The new feature in Oracle Database 23ai that enables this capability is referred to as a JSON Relational Duality View. JSON-relational duality views allow you to represent relational data as JSON documents. 
+1. Oracle Database 23ai JSON Relational Duality unifies the benefits of the Relational and Document worlds within a single database. JSON-relational duality views allow you to represent relational data as JSON documents. 
     
-    Using Duality Views, data is still stored in relational tables in a highly efficient normalized format but is accessed by apps in the form of JSON documents. Developers can think in terms of JSON documents for data access while using the highly efficient relational model for data storage, without having to compromise simplicity or efficiency. In addition to this, Duality Views hide all the complexities of database level concurrency control from the user, providing document level serializability. Duality views can be created in either SQL or GraphQL. We will create the view in GraphQL below but you could choose to create in in SQL if you prefer.
+    Using Duality Views, data is still stored in relational tables in a highly efficient normalized format but is accessed by your apps in the form of JSON documents (or with standard relational, whichever you pick). Developers can think in terms of JSON documents for data access while using the highly efficient relational model for data storage, without having to compromise simplicity or efficiency. In addition to this, Duality Views hide all the complexities of database level concurrency control from the you, providing document level serializability. 
+    
+    Duality views can be created in either SQL or GraphQL. We will create the view in GraphQL below but you could choose to create in in SQL if you prefer.
     
     Create a JSON Relational Duality View on top of the new\_customers and new\_orders tables. Copy the sql below and click **Run Script**
 
@@ -151,7 +150,7 @@ This lab assumes you have:
 
     ![Updating the our customers view](images/im4.png " ")
 
-4. Query the JSON Relational Duality view from the customer we just added another order to using a simple SQL select statement with dot notation:
+4. Query the JSON Relational Duality view from the customer above using a simple SQL select statement with dot notation:
 
 	```
 	<copy>
@@ -161,17 +160,17 @@ This lab assumes you have:
     ![selecting from our customers table](images/im5.png " ")
 
 
-    To reiterate, populating a duality view automatically updates the data shown in related duality views by updating their underlying tables. For example, inserting documents into the `customers_dv` duality view updated the underlying orders table.   
+    To reiterate, populating a duality view automatically updates the data shown in related duality views by updating their underlying tables. For example, inserting documents into the `customers_dv` duality view updated the underlying orders table!   
 
 4. Note that the "etag" value supplied in the content is used for "out-of-the-box" optimistic locking, to prevent the well-known "lost update" problem that can occur with concurrent operations. During a replace operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target duality view document.
 
-    If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. In case of such an error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value.
+    If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. If you get the error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value.
 
 ## Task 3: Create JSON Relational Duality Views with REST
 
 1. We can also use Oracle's SODA (Simple Object Data API) or even the Mongo API to work against the Duality View.
 
-    Here I will use the AutoREST functionality of Database actions.
+    Here I will use the AutoREST functionality that's part of Database Actions.
 
 2. Click on SQL under the Development section. The first thing we want to do is enable REST on our Duality Views. Use the Oracle Database Actions Navigator on the left side of the screen, click the drop-down arrow for the box showing the Table objects, and select Views. Refer to the picture below.
 
@@ -233,9 +232,9 @@ This lab assumes you have:
 
     [23ai JSON Duality View Workshops](https://apexapps.oracle.com/pls/apex/f?p=133:100:110578183178299::::SEARCH:duality%20views)
 
-    In summary, this lab demonstrated the power of JSON Relational Duality Views, allowing you to work with data in either JSON Document format or SQL Relational format. Changes made through views are reflected in the corresponding documents and tables. This flexibility enables efficient and convenient create, read, update or delete across multiple documents and tables with ease.
+    In summary, this lab checks out the power of JSON Relational Duality Views, allowing you to work with data in either JSON Document format or SQL Relational format. Changes made through views are reflected in the corresponding documents and tables. This flexibility enables convenient create, read, update or delete across multiple documents and tables with ease.
 
-5. We can clean up from the lab by dropping our tables. Navigate back to the SQL editor or go back to task one step one if you need a reminder where it is.
+5. We can clean up from the lab by dropping our tables. Navigate back to the SQL editor or go back to task one, step one if you need a reminder where it is.
 
     ```
     <copy>
@@ -255,4 +254,4 @@ You may now **proceed to the next lab**
 ## Acknowledgements
 * **Author** - Killian Lynch, Oracle Database Product Management, Product Manager
 * **Contributors** - Dominic Giles, Oracle Database Product Management, Distinguished Product Manager
-* **Last Updated By/Date** - Killian Lynch, Oracle Database Product Management, Product Manager, May 2023
+* **Last Updated By/Date** - Killian Lynch, Oracle Database Product Management, Product Manager, May 2024
