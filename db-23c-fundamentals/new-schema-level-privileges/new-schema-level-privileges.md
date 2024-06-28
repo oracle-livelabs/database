@@ -4,7 +4,7 @@
 
 Welcome to the Working with Schema-Level Privileges lab. In this lab, you will learn how to work with the new schema-level privilege management feature introduced in Oracle Database 23ai. 
 
-Estimated Lab Time: 15 minutes
+Estimated Lab Time: 10 minutes
 
 ### Objective:
 The objective of this workshop is to learn how to work with the schema-level privilege grant in Oracle Database 23ai and demonstrate its practical applications for managing access to application schemas in an easy way. 
@@ -28,7 +28,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
 1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
     ![click SQL](images/im1.png " ")
 
-2. Let's now look at the syntax and usage of schema-level privileges in Oracle Database 23ai. First we'll add a couple test users.
+2. Let's now look at the syntax and usage of schema-level privileges in Oracle Database 23ai. First, we'll add a couple of test users.
 
     ```
     <copy>
@@ -40,21 +40,29 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ```
     ![drop and create the needed users for the lab](images/im2.png " ")
 
-    Now we can grant our bob user to sally's schema to 
+    Now we can grant our bob user various privileges to other users or roles. 
 
     ```
     <copy>
-    GRANT SELECT ANY TABLE ON SCHEMA sally TO BOB;
+    -- tables, views, and materialized views
+    grant select any table on schema sally to bob;
+    grant insert any table on schema sally to bob;
+    grant update any table on schema sally to bob;
+    grant delete any table on schema sally to bob;
+
+    -- procedures, functions, packages, and sequences
+    grant execute any procedure on schema sally to bob;
+    grant select any sequence on schema sally to bob;
     </copy>
     ```
+
     ![grant the schema level privileges](images/im3.png " ")
 
-
-    This single grant provides user BOB with SELECT privileges on all tables and views within the schema sally uses, ensuring access without compromising security.
+    These grants provides user bob with select, insert, update, delete, execute any procedures, functions, packages, and select sequence privileges on all tables and views within the schema sally. 
 
 3. Schema-level privileges dynamically adapt to schema changes. If new tables or views are added to the HR schema, users granted schema-level privileges instantly gain access without additional management.
 
-4. Oracle Database 23ai simplifies privilege management with dedicated views. We can use views like `DBA_SCHEMA_PRIVS` to check the schema-level privileges granted to users.
+4. Oracle Database 23ai simplifies privilege management with dedicated views. We can use views like `DBA_SCHEMA_PRIVS` to check the schema-level privileges granted to users. Others include ROLE\_SCHEMA\_PRIVS, USER\_SCHEMA\_PRIVS, and SESSION\_SCHEMA\_PRIVS.
 
     ```
     <copy>
@@ -63,12 +71,27 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ```
     ![check the grantees](images/im4.png " ")
 
+5. Just as expected, we can revoke the privileges too. Let's revoke bobs privileges on sally's schema
 
-## Task 3: Leveraging Advanced Privilege Management
+    ```
+    <copy>
+    -- tables, views, and materialized views
+    revoke select any table on schema sally from bob;
+    revoke insert any table on schema sally from bob;
+    revoke update any table on schema sally from bob;
+    revoke delete any table on schema sally from bob;
+
+    -- procedures, functions, packages, and sequences
+    revoke execute any procedure on schema sally from bob;
+    revoke select any sequence on schema sally from bob;
+    </copy>
+    ```
+    ![check the grantees](images/im5.png " ")
+
+
+## Task 3: Understanding Advanced Privilege Management
 
 1. You can also grant schema-level privileges on schemas without special privileges. However, granting privileges on other schemas requires additional privileges like GRANT ANY SCHEMA PRIVILEGE.
-
-2. Oracle Database 23ai provides simple access into schema-level privileges through views like ROLE\_SCHEMA\_PRIVS, USER\_SCHEMA\_PRIVS, and SESSION\_SCHEMA\_PRIVS.
 
 3. In this lab, you've explored the schema-level privilege management in Oracle Database 23ai. By using schema-level privileges, you can drastically reduce the management and administration needed to grant schema privileges prior to 23ai and improve security through their use.
 

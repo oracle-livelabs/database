@@ -7,7 +7,7 @@ Welcome to the "Granting the Developer Role" lab. In this lab, you will learn ho
 Estimated Lab Time: 10 minutes
 
 ### Objective:
-The objective of this lab is to familiarize you with the Developer Role role in Oracle Database 23ai and show you how to enable it. By the end of this lab, you will understand how to use the Developer Role effectively for granting privileges to application users.
+The objective of this lab is to familiarize you with the Developer Role in Oracle Database 23ai and show you how to enable it. By the end of this lab, you will understand how to use the Developer Role effectively for granting privileges to application users.
 
 ### Prerequisites:
 - Access to Oracle Database 23ai.
@@ -169,7 +169,7 @@ You may now **proceed to the next lab**
 
 ## Learn More
 
-* [Use of the DB\_DEVELOPER\_ROLE Role for Application Developers Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/dbseg/managing-security-for-application-developers.html#DBSEG-GUID-DCEEC563-4F6C-4B0A-9EB2-9F88CDF351D7)
+* [Use of the DB\_DEVELOPER\_ROLE for Application Developers Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/dbseg/managing-security-for-application-developers.html#DBSEG-GUID-DCEEC563-4F6C-4B0A-9EB2-9F88CDF351D7)
 
 ## Acknowledgements
 * **Author** - Killian Lynch, Database Product Management

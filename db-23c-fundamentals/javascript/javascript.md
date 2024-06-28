@@ -2,12 +2,12 @@
 
 ## Introduction
 
-In this workshop, you will learn about the advanced programming capabilities of the Oracle Database, including server-side programming using PL/SQL and JavaScript. Oracle Database's support for various programming languages enables developers to implement complex business logic directly within the database, ensuring efficient and scalable applications.
+In this workshop, you will learn server-side programming using PL/SQL and JavaScript in Oracle Database 23ai. Oracle Database's support for various programming languages enables developers to build complex business logic directly within the database, helping you create efficient and scalable applications.
 
 Estimated Lab Time: 25 minutes
 
 ### Objective:
-The objective of this workshop is to familiarize you with the server-side programming features of the Oracle Database, focusing on PL/SQL and JavaScript. By the end of this workshop, you will be able to create and execute stored procedures using PL/SQL and JavaScript, leveraging the power of the Oracle Database for efficient data processing.
+The objective of this workshop is to familiarize you with the server-side programming features of the Oracle Database, focusing on PL/SQL and JavaScript. By the end of this workshop, you will be able to create and execute stored procedures using PL/SQL and JavaScript.
 
 ### Prerequisites:
 - Access to Oracle Database 23ai.

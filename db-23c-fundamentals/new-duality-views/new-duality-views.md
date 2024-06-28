@@ -170,7 +170,7 @@ This lab assumes you have:
 
 1. We can also use Oracle's SODA (Simple Object Data API) or even the Mongo API to work against the Duality View.
 
-    Here I will use the AutoREST functionality that's part of Database Actions.
+    Here let's use the AutoREST functionality that's part of Database Actions.
 
 2. Click on SQL under the Development section. The first thing we want to do is enable REST on our Duality Views. Use the Oracle Database Actions Navigator on the left side of the screen, click the drop-down arrow for the box showing the Table objects, and select Views. Refer to the picture below.
 
