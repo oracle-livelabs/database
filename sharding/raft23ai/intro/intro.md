@@ -8,7 +8,7 @@ Raft replication is active/active; each shard can process reads and writes for a
 
 Raft replication is integrated with transaction execution and is completely transparent to users. There is no need to configure and manage Oracle Data Guard or Oracle GoldenGate to achieve high availability. Raft replication automatically reconfigures replication in case of shard host failures or when shards are added or removed from the sharded database. 
 
-*Estimated Workshop Time:*  2 hours
+*Estimated Workshop Time:*  1 hour and 30 minutes
 
 ![Raft introduction](images/raft-intro.png " ")
 

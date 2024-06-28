@@ -24,17 +24,18 @@ In this lab, you will:
 
 ## Task 1: Use SQL Macros as scalar expressions
 
-1. If you're not already looking at the SQL Developer Web interface, locate your Autonomous Database by clicking the hamburger menu in the top left of the screen, selecting Oracle Databases and choose Autonomous Database. **If you already have SQL Developer Web up and are logged in as the NF19C user, skip to step 4.**
+1. **If you already have SQL Developer Web up and are logged in as the NF19C user, skip to step 4.** If you're not already looking at the SQL Developer Web interface, locate your Autonomous Database by clicking the hamburger menu in the top left of the screen, selecting Oracle Databases and choose Autonomous Database. 
  
-  ![locate adb](./images/locate-adb.png " ")
+  ![locate adb](/json-in-the-db/images/oci-navigation-adw.png " ")
  
 2. Select the name of your database and click on the Database Actions button located at the top of the screen.
 
-   ![db actions](./images/database-actions.png " ")
+   ![db actions](/json-in-the-db/images/database-actions.png " ")
    
-3. Log into Database Actions as the NF19C user.
-	![JSON Database Actions](./images/db-actions-logout.png)
-	![JSON Database Actions](./images/db-actions-login-lab.png)
+3. Log into Database Actions as the NF19C user. Use the picture below to navigate to the SQL editor
+	![JSON Database Actions](/json-in-the-db/images/db-actions-logout.png)
+	![JSON Database Actions](/json-in-the-db/images/login-db.png)
+	![JSON Database Actions](/json-in-the-db/images/new-sql.png)
 
 4. First, we will focus on developing a function without employing SQL macros. Suppose we intend to offer a holiday discount to our customers. In that case, we can create a function named holiday\_discount.
 
@@ -145,4 +146,4 @@ You may now proceed to the next lab.
 
 * **Author** - Killian Lynch, Database Product Management
 * **Contributors** - Dominic Giles
-* **Last Updated By/Date** - Killian Lynch Feb 2023
+* **Last Updated By/Date** - Killian Lynch June 2024
