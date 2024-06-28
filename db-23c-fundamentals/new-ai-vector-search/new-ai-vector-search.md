@@ -20,7 +20,10 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
 - Basic understanding of SQL and PL/SQL.
 
 ## Task 1: Creating a vector table
-1. The first thing we'll do is create a table with the new vector data type.
+1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
+    ![click SQL](images/im1.png " ")
+
+2. The first thing we'll do is create a table with the new vector data type.
 
     ```
     <copy>
@@ -268,7 +271,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
     ```
     ![show distance of table](images/vec10.png " ")
 
-9. What if we moved this? Find the closest to the vector (1, -3). 
+9. What if we moved this? Find which three are closest to the vector (1, -3). 
 
     ![show graph of table](images/image3.png " ")
 

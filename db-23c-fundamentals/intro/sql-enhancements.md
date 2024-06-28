@@ -33,6 +33,7 @@ For further exploration of Oracle Database features and enhancements, visit:
 
 - [Oracle Database Blog](http://blogs.oracle.com/database)
 - [Oracle Database Features and Licensing](https://apex.oracle.com/database-features/)
+- [Free sandbox to practice upgrading to 23ai!](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3943)
 
 ## Acknowledgements
 * **Author** - Killian Lynch, Database Product Management
