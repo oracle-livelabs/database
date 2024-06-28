@@ -4,9 +4,7 @@
 
 Welcome to the "Exploring JSON Relational Duality with SQL and REST" workshop. In this workshop, you will learn about the JSON Relational Duality feature, which allows for the seamless integration between the relational and JSON data models. This feature provides the strengths of both approaches, allowing you to easily manipulate data in either model.
 
-This lab is only intended to give you a small taste of what duality views have to offer. For full, in-depth free workshops, follow the link below:
-
-[23ai JSON Duality View Workshops](https://apexapps.oracle.com/pls/apex/f?p=133:100:110578183178299::::SEARCH:duality%20views)
+This lab is only intended to give you a small taste of what duality views have to offer.
 
 Estimated Lab Time: 20 minutes
 
@@ -170,7 +168,7 @@ This lab assumes you have:
 
 1. We can also use Oracle's SODA (Simple Object Data API) or even the Mongo API to work against the Duality View.
 
-    Here I will use the AutoREST functionality that's part of Database Actions.
+    Here let's use the AutoREST functionality that's part of Database Actions.
 
 2. Click on SQL under the Development section. The first thing we want to do is enable REST on our Duality Views. Use the Oracle Database Actions Navigator on the left side of the screen, click the drop-down arrow for the box showing the Table objects, and select Views. Refer to the picture below.
 
@@ -277,13 +275,9 @@ This lab assumes you have:
     
     ![view the output](images/rest11.png " ")
 
-17. This lab is only intended to give you a small taste of what duality views have to offer. For full, in-depth free workshops, follow the link below:
+17. This lab is only intended to give you a small taste of what duality views have to offer.
 
-    [23ai JSON Duality View Workshops](https://apexapps.oracle.com/pls/apex/f?p=133:100:110578183178299::::SEARCH:duality%20views)
-
-    In summary, this lab checks out the power of JSON Relational Duality Views, allowing you to work with data in either JSON Document format or SQL Relational format. Changes made through views are reflected in the corresponding documents and tables. This flexibility enables convenient create, read, update, or delete operations across multiple documents and tables with ease.
-
-18. We can clean up from the lab by dropping our tables. Navigate back to the SQL editor or go back to task one, step one if you need a reminder where it is.
+    We can clean up from the lab by dropping our tables. Navigate back to the SQL editor or go back to task one, step one if you need a reminder where it is.
 
     ```
     <copy>

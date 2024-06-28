@@ -1,6 +1,6 @@
 # Introduction
 
-Welcome to the Oracle Database Security Lab for Oracle Database 23ai! In this lab, we will explore some of the new security features introduced in Oracle Database 23ai, focusing on Security Firewall, Schema Level Privileges, and the Developer Role. By the end of this lab, you will have a deeper understanding of how these features can help improve the security of your database environment. This section will be updated over time. If you'd like to see a specific feature added, tag me on twitter with you suggestion! [@Killianlynchh](https://twitter.com/Killianlynchh)
+Welcome to the Oracle Database Security Lab for Oracle Database 23ai! In this lab, we will explore some of the new security features introduced in Oracle Database 23ai, focusing on Security Firewall, Schema Level Privileges, and the Developer Role. By the end of this lab, you will have a deeper understanding of how these features can help improve the security of your database environment. This section will be updated over time. If you'd like to see a specific feature added, tag me on X (twitter) with your suggestion! [@Killianlynchh](https://twitter.com/Killianlynchh)
 
 ## About Oracle Database 23ai
 
