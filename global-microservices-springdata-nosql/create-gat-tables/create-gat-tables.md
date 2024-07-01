@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab picks up where Lab 5 left off. You are going to setup a GAT configuration,
+This lab picks up where Lab 4 left off. You are going to setup a GAT configuration,
 and deploy your application in multiple regions. Oracle NoSQL Global Active Tables
 provide multi-active replication of table data between geographically separated regions.
 
@@ -49,7 +49,7 @@ The list of replicas already created in the table is listed. In our case, the li
 
 ## Task 2: Run the Movie Stream Catalog Microservice in the New Region
 
-Execute the same instructions provided in **Lab 4 - Run the Movie Stream Catalog Microservice** but from the new Region.
+Execute the same instructions provided in **Lab 3 - Run the Movie Stream Catalog Microservice** but from the new Region.
 
 You may now **proceed to the next lab.**
 

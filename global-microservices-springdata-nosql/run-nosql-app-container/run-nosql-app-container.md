@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab picks up where lab 4 left off. We are going to explore in more detail
+This lab picks up where lab 3 left off. We are going to explore in more detail
 another possibility to deploy the application - use Container Instances.
 
 Oracle Cloud Infrastructure (OCI) Container Instances is a serverless compute service

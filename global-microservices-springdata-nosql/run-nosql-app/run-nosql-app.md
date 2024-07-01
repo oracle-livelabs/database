@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab picks up where lab 3 left off. We are going to explore in more detail
+This lab picks up where lab 2 left off. We are going to explore in more detail
 the tables we created, load data, and execute queries using a Spring Data REST based application.
 
 _Estimated Time:_ 16 minutes
