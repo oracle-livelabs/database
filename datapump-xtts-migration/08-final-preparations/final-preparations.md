@@ -17,7 +17,7 @@ In this lab, you will:
 
 Although Data Pump can transfer statistics as part of a full transportable export/import, it is not the recommended approach. It is faster to transport statistics in advance using `DBMS_STAT`. 
 
-You can export statistics before the maintenance window begin. Most likely, the statistics will not change from now on, and even if they do, such changes shouldn't make a huge difference for the optimizer.
+You can export statistics before the maintenance window begins. Most likely, the statistics will not change from now on, and even if they do, such changes shouldn't make a huge difference for the optimizer.
 
 1. Set the environment to the source database and connect.
 
@@ -155,6 +155,14 @@ While executing an export or import job, Data Pump is querying the data dictiona
     PL/SQL procedure successfully completed.
     ```
     </details>
+
+2. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
 
 You may now *proceed to the next lab*.
 

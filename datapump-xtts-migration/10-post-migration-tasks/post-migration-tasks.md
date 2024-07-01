@@ -19,7 +19,7 @@ In this lab, you will:
 
     ```
     <copy>
-    . ftex
+    . cdb23
     sqlplus / as sysdba
     </copy>
 
@@ -73,7 +73,53 @@ In this lab, you will:
     ```
     </details>
 
-4. Import the statistics from the staging table into the data dictionary. 
+4. Verify there are no statistics on the tables in the *F1* schema.
+
+    ```
+    <copy>
+    set pagesize 100
+    col table_name format a25
+    select table_name, num_rows, last_analyzed 
+    from   dba_tab_statistics 
+    where  owner='F1';
+    </copy>
+    ```
+
+    * *NUM\_ROWS* is null and there is no record of when the statistics were gathered.
+    * This proves that there are no statistics on the tables.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> set pagesize 100
+    SQL> col table_name format a25
+    SQL> select table_name, num_rows, last_analyzed 
+         from   dba_tab_statistics 
+         where  owner='F1';
+
+    TABLE_NAME                NUM_ROWS   LAST_ANALYZED
+    ------------------------- ---------- ------------------
+    F1_RACES
+    F1_CONSTRUCTORRESULTS
+    F1_CIRCUITS
+    F1_DRIVERS
+    F1_STATUS
+    F1_PITSTOPS
+    F1_CONSTRUCTORS
+    F1_DRIVERSTANDINGS
+    F1_CONSTRUCTORSTANDINGS
+    F1_SPRINTRESULTS
+    F1_LAPTIMES
+    F1_RESULTS
+    F1_LAPTIMES_BACKUP
+    F1_QUALIFYING
+    F1_SEASONS
+    
+    15 rows selected.         
+    ```
+    </details>
+
+5. Import the statistics from the staging table into the data dictionary. 
 
     ```
     <copy>
@@ -86,14 +132,69 @@ In this lab, you will:
     /
     </copy>
     ```
-       
-5. Drop the schema used for the transport of statistics. After importing the statistics, there is no use for the schema and the statistics in the transportable format. 
+
+6. Ensure there are statistics on the tables in the *F1* schema.
+
+    ```
+    <copy>
+    set pagesize 100
+    col table_name format a25
+    select table_name, num_rows, last_analyzed 
+    from   dba_tab_statistics 
+    where  owner='F1';
+    </copy>
+    ```
+
+    * Now, you see *NUM\_ROWS* and *LAST\_ANALYZED* for each table.
+    * This proves that there are statistics on the tables.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> set pagesize 100
+    SQL> col table_name format a25
+    SQL> select table_name, num_rows, last_analyzed 
+         from   dba_tab_statistics 
+         where  owner='F1';
+
+    TABLE_NAME                NUM_ROWS   LAST_ANALYZED
+    ------------------------- ---------- ------------------
+    F1_RACES                  1125       26-JUN-24
+    F1_CONSTRUCTORRESULTS     12465      26-JUN-24
+    F1_CIRCUITS               77         26-JUN-24
+    F1_DRIVERS                859        26-JUN-24
+    F1_STATUS                 139        26-JUN-24
+    F1_PITSTOPS               10793      26-JUN-24
+    F1_CONSTRUCTORS           212        26-JUN-24
+    F1_DRIVERSTANDINGS        34511      26-JUN-24
+    F1_CONSTRUCTORSTANDINGS   13231      26-JUN-24
+    F1_SPRINTRESULTS          280        26-JUN-24
+    F1_LAPTIMES               571047     26-JUN-24
+    F1_RESULTS                26439      26-JUN-24
+    F1_LAPTIMES_BACKUP        571047     01-JUL-24
+    F1_QUALIFYING             10174      26-JUN-24
+    F1_SEASONS                75         26-JUN-24
+    
+    15 rows selected.         
+    ```
+    </details>
+
+7. Drop the schema used for the transport of statistics. After importing the statistics, there is no use for the schema and the statistics in the transportable format. 
 
     ```
     <copy>
     drop user opt_stat_transport cascade;
     </copy>
     ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> drop user opt_stat_transport cascade;
+    
+    User dropped.
+    ```
+    </details>
 
 ## Task 2: Check migration
 
@@ -108,6 +209,17 @@ In this step, you would normally perform extensive testing of the new database, 
     ```
 
     * In a real migration, you would perform much more extensive testing. 
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> select count(*) from f1.f1_laptimes_backup;
+    
+      COUNT(*)
+    ----------
+        571047
+    ```
+    </details>
 
 ## Task 3: Additional post migration tasks
 
@@ -150,7 +262,7 @@ Once the tests complete, you shut down the source database. This ensures noone b
 
 5. There are other important post migration tasks, that you won't perform in this lab. For instance:
     * Start a new level 0 backup.
-    * Delete the backups created by RMAN during the migration. You can do that once the new level 0 completes. 
+    * Delete the backups created by RMAN during the migration. 
     * Drop the guaranteed restore points created in the target database by the migration driver script. 
     * Gather fixed objects statistics once the target database has been *warmed up*. 
 
