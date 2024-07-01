@@ -15,11 +15,11 @@ In this lab, you will:
 
 ## Task 1: Final backup / restore
 
-**The outage starts now!**
-
 In a real migration, you would shut down the applications using the database. Although, there is an outage, you can still query the source database. The tablespaces are read-only, so you can't add or change data, but you can query it. 
 
-1. Start the final backup. When you start the driver script with *L1F*, it performs not only the final backup, but it also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. 
+1. The outage starts now.
+
+2. Start the final backup. When you start the driver script with *L1F*, it performs not only the final backup, but it also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. 
 
     ```
     <copy>
@@ -220,7 +220,7 @@ In a real migration, you would shut down the applications using the database. Al
     ```
     </details>
 
-2. Restore the backup.
+3. Restore the backup.
 
     ```
     <copy>
