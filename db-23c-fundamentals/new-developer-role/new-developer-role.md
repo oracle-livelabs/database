@@ -1,13 +1,13 @@
-# Leveraging the Power of the Developer Role
+# Granting the Developer Role
 
 ## Introduction
 
-Welcome to the "Leveraging the Power of the Developer Role" lab. In this lab, you will learn how to grant and revoke the new Developer Role along with the benefits of using it in the Oracle Database for application development purposes. The Developer Role role offers a full set of privileges for designing, developing, and deploying applications without having to constantly grant and manage additional privileges as the application gets created.
+Welcome to the "Granting the Developer Role" lab. In this lab, you will learn how to grant and revoke the new Developer Role along with the benefits of using it in the Oracle Database for application development purposes. The Developer Role offers a full set of privileges for designing, developing, and deploying applications without having to constantly grant and manage additional privileges as the application gets created.
 
 Estimated Lab Time: 10 minutes
 
 ### Objective:
-The objective of this lab is to familiarize you with the Developer Role role in Oracle Database and show you how to enable it. By the end of this lab, you will understand how to use the Developer Role effectively for granting necessary privileges to application users.
+The objective of this lab is to familiarize you with the Developer Role in Oracle Database 23ai and show you how to enable it. By the end of this lab, you will understand how to use the Developer Role effectively for granting privileges to application users.
 
 ### Prerequisites:
 - Access to Oracle Database 23ai.
@@ -15,12 +15,12 @@ The objective of this lab is to familiarize you with the Developer Role role in 
 
 ## Task 1: Lab setup and understanding the developer role
 
-1. The Developer Role role gives us a full set of system privileges, object privileges, predefined roles, PL/SQL package privileges, and tracing privileges required by application developers. It simplifies privilege management and it helps to keep the database as secure as possible for the development environment.
+1. The Developer Role gives us a full set of system privileges, object privileges, predefined roles, PL/SQL package privileges, and tracing privileges required by application developers. It simplifies privilege management and helps keep the database as secure as possible for the development environment. As always, please review the privileges granted and compare with your organizations security protocol.
 
 2. Benefits of Developer Role:
-   - **Least-Privilege Principle**: Granting the Developer Role role follows the least-privilege principle. This means that application developers (and all other database users) only have access to the necessary privileges.
-   - **Enhanced Security**: Using the Developer Role improves database security by reducing the risk of granting unneeded privileges to application users, which ties into the least-privilege principle from above. 
-   - **Simplified Management**: Granting the Developer Role role simplifies the management of role grants and revokes for application users. 
+   - **Least-Privilege Principle**: Granting the Developer Role follows the least-privilege principle. This means that application developers (and all other database users) only have access to the necessary privileges. 
+   - **Enhanced Security**: Using the Developer Role improves database security by reducing the risk of granting unneeded privileges to application users, which ties into the least-privilege principle from above.
+   - **Simplified Management**: Granting the Developer Role simplifies the management of role grants and revokes for application users.
 
 ## Task 2: Generating a list of granted privileges and roles
 
@@ -104,7 +104,7 @@ The objective of this lab is to familiarize you with the Developer Role role in 
 
 ## Task 3: Performing grants and revokes
 
-1. To grant the Developer Role to another user or role, use the GRANT statement. We'll create a user and check the granted roles to start.
+1. To grant the Developer Role to another user, use the GRANT statement. We'll create a user and check the granted roles to start.
 
     ```
     <copy>
@@ -126,7 +126,7 @@ The objective of this lab is to familiarize you with the Developer Role role in 
     ```
     ![grant our new user roles](images/im4.png " ")
 
-3. After granting the role, you can verify the grant by executing the following SQL query:
+3. After granting the role, we can verify the grant by executing the following SQL query:
    
     ```
     <copy>
@@ -135,7 +135,7 @@ The objective of this lab is to familiarize you with the Developer Role role in 
     ```
     ![verify the roles](images/im5.png " ")
 
-4. To revoke the Developer Role from a user or role, use the REVOKE statement:
+4. To revoke the Developer Role from a user, use the REVOKE statement:
    
     ```
     <copy>
@@ -144,7 +144,7 @@ The objective of this lab is to familiarize you with the Developer Role role in 
     ```
     ![revoke the user roles](images/im6.png " ")
 
-5. Again we can check that the role was removed
+5. Again, we can check that the role was removed
 
     ```
     <copy>
@@ -162,14 +162,14 @@ The objective of this lab is to familiarize you with the Developer Role role in 
     ```
     ![drop the role](images/im8.png " ")
 
-7. In this lab, we explored the Developer Role role in Oracle Database 23ai for application development. By granting the Developer Role, you can drastically simplify privilege management and improve your database security during the development process of applications.
+7. In this lab, we explored the Developer Role in Oracle Database 23ai for application development. By granting the Developer Role, it can help simplify privilege management and improve your database security during the development process of applications.
 
 You may now **proceed to the next lab** 
 
 
 ## Learn More
 
-* [Use of the DB\_DEVELOPER\_ROLE Role for Application Developers Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/dbseg/managing-security-for-application-developers.html#DBSEG-GUID-DCEEC563-4F6C-4B0A-9EB2-9F88CDF351D7)
+* [Use of the DB\_DEVELOPER\_ROLE for Application Developers Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/dbseg/managing-security-for-application-developers.html#DBSEG-GUID-DCEEC563-4F6C-4B0A-9EB2-9F88CDF351D7)
 
 ## Acknowledgements
 * **Author** - Killian Lynch, Database Product Management
