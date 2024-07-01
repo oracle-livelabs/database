@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Welcome to the "Exploring the Power of Table Value Constructors in SQL" lab. In this lab, you will learn about the table value constructor feature in SQL, which allows you to define multiple rows using a single constructor for use in SQL statements. Table value constructors provide a convenient and efficient way to insert, select, and merge multiple rows of data in SQL databases.
+Welcome to the "Exploring the Power of Table Value Constructors in SQL" lab. In this lab, you will learn about the table value constructor feature in SQL, which allows you to define multiple rows using a single constructor for use in SQL statements. Table value constructors provide an easy way to insert, select, and merge multiple rows of data in SQL databases.
 
 Estimated Lab Time: 10 minutes
 
@@ -56,7 +56,7 @@ The objective of this lab is to familiarize you with the table value constructor
     ```
     Each value\_list represents a set of values for a single row, enclosed within parentheses. Multiple value\_lists can be specified, separated by commas.
 
-2. Lets first take a look at how we insert into tables prior to Table Value Constructors
+2. Let's first take a look at how we inserted into tables prior to Table Value Constructors
 
     ```
     <copy>
@@ -89,7 +89,7 @@ The objective of this lab is to familiarize you with the table value constructor
     ```
     ![insert some employees](images/table-value-2.png " ")
 
-3. Suppose we want to insert multiple rows into the employees table. With Table Value Constructors we can insert rows into the tables using a single INSERT statement with table value constructors.
+3. Above each insert has its own statement. Suppose we want to insert multiple rows into the employees table. With Table Value Constructors we can insert rows into the tables using a single INSERT statement with table value constructors.
 
     ```
     <copy>
@@ -103,7 +103,7 @@ The objective of this lab is to familiarize you with the table value constructor
     ```
     ![insert more employees](images/table-value-3.png " ")
 
-    Table value constructors are particularly useful for inserting large amounts of data efficiently. Instead of executing multiple INSERT statements, you can insert multiple rows in a single statement, reducing overhead and improving performance.
+    Table value constructors are particularly useful for inserting large amounts of data efficiently. Instead of executing multiple INSERT statements, you can insert multiple rows in a single statement. This can help in reducing overhead and improving performance.
 
 ## Task 3: Data Manipulation
 1. You can use table value constructors in SELECT, UPDATE, and DELETE statements to manipulate data more efficiently. For example, you can update multiple rows based on specific criteria or delete multiple rows that meet certain conditions.

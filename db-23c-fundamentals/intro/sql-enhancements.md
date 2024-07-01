@@ -6,7 +6,7 @@ Oracle Database has been committed to prioritizing SQL functionality, and strivi
 
 In Oracle Database 23ai, significant enhancements have been made to the SQL layer, further solidifying its position as a leading database solution.
 
-This section will be updated over time. If you'd like to see a specific feature added, tag me on twitter with you suggestion! [@Killianlynchh](https://twitter.com/Killianlynchh)
+This section will be updated over time. If you'd like to see a specific feature added, tag me on X (twitter) with your suggestion! [@Killianlynchh](https://twitter.com/Killianlynchh)
 
 ## About Oracle Database 23ai SQL Enhancements
 
@@ -33,6 +33,7 @@ For further exploration of Oracle Database features and enhancements, visit:
 
 - [Oracle Database Blog](http://blogs.oracle.com/database)
 - [Oracle Database Features and Licensing](https://apex.oracle.com/database-features/)
+- [Free sandbox to practice upgrading to 23ai!](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3943)
 
 ## Acknowledgements
 * **Author** - Killian Lynch, Database Product Management
