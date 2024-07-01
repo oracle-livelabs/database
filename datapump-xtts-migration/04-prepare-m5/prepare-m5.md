@@ -15,7 +15,7 @@ In this lab, you will:
 
 ## Task 1: Extract and configure M5 script
 
-In this lab, the source and target database is on the same host. You store the M5 script in the same directory. For a real migration, you should set up a shared NFS drive, so both source and target have access to the same directory. Alternatively, you must copy the directory from source to target after each backup.
+In this lab, the source and target database is on the same host. Both hosts access the same directory with the M5 script via a shared NFS drive. In this lab, the source and target database is on the same host, so, you have just one directory. 
 
 1. Go to *M5* directory and get the M5 migration script. The directory acts as your script base. You have created the directory already in a previous exercise when you created the database directory. Instead of downloading from My Oracle Support, you copy the script to the script base.
 
@@ -268,6 +268,12 @@ In this lab, the source and target database is on the same host. You store the M
     ```
 
 You may now *proceed to the next lab*.
+
+## Further reading 
+
+* My Oracle Support, [M5 Cross Endian Platform Migration using Full Transportable Data Pump Export/Import and RMAN Incremental Backups (Doc ID 2999157.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2999157.1)
+
+* Oracle recommend using a shared NFS drive to share the M5 script and corresponding files, logs and backups between the source and target hosts. If a shared NFS drive is not possible, you must copy the directory from source to target after each backup.
 
 ## Acknowledgements
 

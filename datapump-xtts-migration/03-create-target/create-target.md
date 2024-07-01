@@ -129,7 +129,6 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
 
 3. Ensure the PDB uses Oracle Managed Files (OMF). This is a requirement of the M5 script. 
 
-
     ```
     <copy>
     col value format a30
@@ -138,6 +137,8 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     
     --Be sure to hit RETURN
     ```
+
+    * The parameter is set to a path in the file system. The database uses OMF.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -181,10 +182,8 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     ```
 
     * The source database uses timezone file version *42*.
-    * The target PDB uses timezone file version *43*. 
-    * In this lab, you migrate using full transportable export/import (FTEX). Technically speaking, FTEX has the capability of migrating to a higher timezone file version. But Data Pump needs to convert all relevant timezone data (columns of type *TIMESTAMP WITH TIMEZONE*) to the new timezone file version. Depending on the amount of data, this can take many hours.
-    * In this lab, you continue despite the different and accept the overhead of converting the data.
-    * For a real migration, Oracle recommend that you use the same timezone file version as in the source database.
+    * You migrate using full transportable export/import (FTEX). Technically speaking, FTEX has the capability of migrating to a higher timezone file version. But Data Pump needs to convert all relevant timezone data (columns of type *TIMESTAMP WITH TIMEZONE*) to the new timezone file version. Depending on the amount of data, this can take many hours.
+    * Oracle recommend that you use the same timezone file version as in the source database.   
     * If your data doesn't use the data type *TIMESTAMP WITH TIMEZONE* you can completely disregard this check.
 
     <details>
@@ -192,7 +191,7 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     ``` text
     VERSION
     ----------
-    43
+    42
     ```
     </details>      
 

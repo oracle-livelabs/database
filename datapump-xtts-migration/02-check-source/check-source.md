@@ -36,7 +36,7 @@ The M5 script has a set of minimum requirements.
     -- Be sure to hit RETURN
     ```
 
-    * You find the release update installed in the patch named *Database Release Update*.
+    * You find the Release Update installed in the patch named *Database Release Update*.
     * You can idenfity the Data Pump Bundle Patch from the patch name as well.
     * Although this database meets the minimum requirements, Oracle still recommends that you migrate from a source database on the recent-most Release Update.
 

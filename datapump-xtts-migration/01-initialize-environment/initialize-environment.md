@@ -61,7 +61,7 @@ In this lab, you will:
     <summary>*click to see the output*</summary>
     ``` text
     $ ps -ef | grep LISTENER | grep -v grep
-    oracle    2333     1  0 11:40 ?        00:00:00 /u01/app/oracle/product/19/bin/tnslsnr LISTENER -inherit
+    oracle     11158       1  0 04:57 ?        00:00:00 /u01/app/oracle/product/23/bin/tnslsnr LISTENER -inherit
     ```
     </details>
 

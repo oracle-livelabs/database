@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The next part of the migration is the incremental backups. They built on top of the initial level 0 backup, but backs up only the changes since the last backup. Each incremental backup reduces the time and size of the final incremental backup. 
+The next part of the migration is the incremental backups. They built on top of the initial level 0 backup, but backs up only the changes since the last backup. Each incremental backup reduces the time and size of the final incremental backup. Like the previous lab, there is still no downtime yet.
 
 Estimated Time: 10 Minutes.
 
@@ -86,8 +86,8 @@ In this lab, you will:
     </copy>
     ```
 
-    * The backup is again a normal RMAN `BACKUP ... TABLESPACE` command.
-    * However, this time an incremental backup from the SCN of the last backup. 
+    * The backup is again a regular RMAN `BACKUP ... TABLESPACE` command.
+    * However, this time it is an incremental backup from the SCN of the last backup. 
 
     <details>
     <summary>*click to see the output*</summary>
@@ -209,7 +209,7 @@ In this lab, you will:
 
     ```
     <copy>
-    cd /home/oracle/m5/log
+    cd log
     egrep "WARN-|ORA-" $(ls -tr restore*log | tail -1)
     </copy>
 
@@ -301,6 +301,7 @@ Let's simulate changes to the source database and see how it affects the backup 
 
     ```
     <copy>
+    cd cmd
     export L1SCRIPT=$(ls -tr restore_L1_* | tail -1) 
     cd /home/oracle/m5
     . cdb23
@@ -344,7 +345,7 @@ Let's simulate changes to the source database and see how it affects the backup 
 
     ```
     <copy>
-    cd /home/oracle/m5/log
+    cd log
     egrep "WARN-|ORA-" $(ls -tr restore*log | tail -1)
     </copy>
 

@@ -36,8 +36,8 @@ In this lab, you will:
     ```
 
     * The details of the migration is stored in the properties file that you examined in the previous lab. Hence, you don't need to specify any details to start the backup.
-    * The L0 backup needs to scan the entire database. Notice how *INPUT_BYTES* corresponds to the size of database.
-    * Since you don't use RMAN compression in this exercise, the size of the backup is roughly the size of the database. It will be smaller since RMAN always uses unused block compression which excludes empty blocks from the backup. 
+    * The L0 backup needs to scan the entire database. Notice how *INPUT_BYTES* corresponds to the size of database (around 62 MB).
+    * Since you don't use RMAN compression in this exercise, the size of the backup is roughly the size of the database (around 60 MB). It will be smaller since RMAN always uses unused block compression which excludes empty blocks from the backup. 
 
     <details>
     <summary>*click to see the output*</summary>
@@ -134,6 +134,7 @@ In this lab, you will:
     -- Be sure to hit RETURN
     ```
 
+    * The file names are different in your environment.
     * The backup created a log file named `bkp_L0_4CH_64G_FTEX_240621081610.log`.
     * Tracing is enabled by default and written to `bkp_L0_4CH_64G_FTEX_240621081610.trc`.
     * Additional log files are written as well.
@@ -161,7 +162,7 @@ In this lab, you will:
     -- Be sure to hit RETURN
     ```
 
-    * In this lab there is only one small tablespace in the database. Hence, there is only one backup set.
+    * In this lab, there is only one small tablespace in the database. Hence, there is only one backup set.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -174,8 +175,6 @@ In this lab, you will:
     </details>
 
 ## Task 2: Perform initial restore
-
-In this lab, you simulate a shared NFS drive, so you don't need to move scripts and backups to the target server. A shared NFS drive is the recommended solution. 
 
 1. The backup also generated a restore script that you can use on the target database. Find the restore script. 
 
@@ -237,7 +236,8 @@ In this lab, you simulate a shared NFS drive, so you don't need to move scripts 
 
     ```
     <copy>
-    export L0SCRIPT=$(ls -tr /home/oracle/m5/cmd/restore_L0* | tail -1)
+    cd /home/oracle/m5/cmd
+    export L0SCRIPT=$(ls -tr restore_L0* | tail -1)
     cd /home/oracle/m5
     . cdb23
     rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L0SCRIPT
@@ -253,7 +253,8 @@ In this lab, you simulate a shared NFS drive, so you don't need to move scripts 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ export L0SCRIPT=$(ls -tr /home/oracle/m5/cmd/restore_L0* | tail -1)
+    $ cd /home/oracle/m5/cmd
+    $ export L0SCRIPT=$(ls -tr restore_L0* | tail -1)
     $ cd /home/oracle/m5
     $ . cdb23
     $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L0SCRIPT
@@ -287,7 +288,7 @@ In this lab, you simulate a shared NFS drive, so you don't need to move scripts 
 
     ```
     <copy>
-    cd /home/oracle/m5/log
+    cd log
     egrep "WARN-|ORA-" $(ls -tr restore*log | tail -1)
     </copy>
 

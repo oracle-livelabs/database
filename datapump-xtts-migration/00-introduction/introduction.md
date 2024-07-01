@@ -4,7 +4,7 @@
 
 In this lab, you will migrate a non-CDB database on Oracle Database 19c directly into a PDB on Oracle Database 23ai. You will use a combination of transportable tablespaces, full transportable export/import, and RMAN backups. For this purpose, Oracle delivers the M5 script; it makes such migrations easier by automating the steps. You will use the M5 script for the migration.
 
-Typically, the procedure is used for cross-platform migrations from big endian platforms, like AIX and SPARC/Solaris, to little endian platforms like the Exadata Database Machine. It requires that the source and target databases are on Oracle Database 19c (Release Update 18) or later and uses the [Data Pump Bundle Patch](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2819284.1).
+Typically, the procedure is used for cross-platform migrations from big endian platforms, like AIX and SPARC/Solaris, to little endian platforms, like the Exadata Database Machine. It requires that the source and target databases are on Oracle Database 19c (Release Update 18) or later and uses the [Data Pump Bundle Patch](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2819284.1).
 
 For simplicity, this lab teaches you to migrate a database from Linux to Linux, but the script and procedures are identical to a cross-platform migration.
 
