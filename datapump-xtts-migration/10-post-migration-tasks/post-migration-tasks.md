@@ -85,8 +85,8 @@ In this lab, you will:
     </copy>
     ```
 
-    * *NUM\_ROWS* is null and there is no record of when the statistics were gathered.
-    * This proves that there are no statistics on the tables.
+    * Number of rows (*NUM\_ROWS*) is missing and so is information on when statistics were gathered (*LAST\_ANALYZED*).
+    * This proves that there are *no statistics* on the tables.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -133,6 +133,24 @@ In this lab, you will:
     </copy>
     ```
 
+    * The statistics staging table is already present in the target database.
+    * You created the staging table in the *USERS* tablespaces that was migrated to the target database.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> begin
+        dbms_stats.import_schema_stats (
+            ownname => 'F1',
+            statown => 'OPT_STAT_TRANSPORT',
+            stattab => 'OPT_STATS_STG');
+    end;
+    /  2    3    4    5    6    7
+    
+    PL/SQL procedure successfully completed.    
+    ```
+    </details>    
+
 6. Ensure there are statistics on the tables in the *F1* schema.
 
     ```
@@ -146,7 +164,7 @@ In this lab, you will:
     ```
 
     * Now, you see *NUM\_ROWS* and *LAST\_ANALYZED* for each table.
-    * This proves that there are statistics on the tables.
+    * This proves that there are *statistics* on the tables.
 
     <details>
     <summary>*click to see the output*</summary>
