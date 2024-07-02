@@ -15,6 +15,11 @@ Estimated Time: 15 minutes
 * Access to the NoVNC image specific to this lab
 * Basic Linux knowledge
 
+## Task 0: Start the Linux terminal
+To access the Linux terminal in the VM, click `Activities` in the top-left corner and then click the Terminal icon in the left drawer.
+![alt text](images/image2.png)
+![alt text](images/image1.png)
+
 ## Task 1: Setup the 23ai database
 > Note: Before we do anything, it would be better to open this lab in a Chrome window on the remote noVNC machine. Copying and pasting is way easier to perform this way.
 
@@ -26,9 +31,6 @@ Estimated Time: 15 minutes
 
 2. Paste the following command inside the SQL*Plus session.
 
-   ```sql
-   <copy>startup</copy>
-   ```
    ```sql
    <copy>alter session set container = freepdb1;</copy>
    ```
@@ -188,4 +190,5 @@ You may now **proceed to the next lab**
 * **Contributors** 
    - Liana Lixandru, Senior Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
    - Kevin Lazarz, Senior Manager, Product Management, Database
-* **Last Updated By/Date** -  Bogdan Farca, May 2024
+   - Wojciech Pluta, Director, Technical Product Marketing
+* **Last Updated By/Date** -  Bogdan Farca, Jul 2024
