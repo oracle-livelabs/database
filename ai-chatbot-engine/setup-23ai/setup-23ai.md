@@ -22,7 +22,7 @@ Estimated Time: 15 minutes
 
 > Note: If you don't know how to create a virtual machine and connect to it via SSH, please [see this lab first](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=648&clear=RR,180&session=108750023091545). The following section will only give you a brief overview.
 
-Open your Oracle Cloud Infrastructure Cloud Console and make sure you are in the "US Midwest (Chicago)" region, which is necessary to access the OCI Generative AI services endpoint.
+Open your Oracle Cloud Infrastructure Cloud Console and make sure you are in the "US Midwest (Chicago)" or "Frankfurt" region, which is necessary to access the OCI Generative AI services endpoint.
 
    ![console](images/image1.png)
 
