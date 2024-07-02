@@ -41,6 +41,8 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> select banner from v$version;
+
     BANNER
     --------------------------------------------------------------------------------
     Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
@@ -65,6 +67,9 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> col value format a20
+    SQL> select value from v$parameter where name='compatible';
+
     VALUE
     --------------------    
     23.0.0
@@ -148,7 +153,7 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     
     VALUE
     ------------------------------
-    /u01/app/oracle/oradata
+    /u02/oradata
     ```
     </details>      
 
@@ -167,6 +172,8 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> select value from nls_database_parameters where parameter='NLS_CHARACTERSET';
+
     VALUE
     --------------------
     AL32UTF8
@@ -189,6 +196,8 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> select version from v$timezone_file;
+
     VERSION
     ----------
     42
@@ -208,6 +217,8 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> select dbtimezone from v$instance;
+
     DBTIME
     ------
     +00:00

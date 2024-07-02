@@ -41,17 +41,17 @@ In this lab, you will:
     $ ./dbmig_driver_m5.sh L1
     Properties file found, sourcing.
     LOG and CMD directories found
-    2024-06-21 08:21:00 - 1718958060528: Requested L1 backup for pid 464450.  Using DISK destination, 4 channels and 64G section size.
-    2024-06-21 08:21:00 - 1718958060533: Performing L1 backup for pid 464450
+    2024-07-02 19:03:36 - 1719947016775: Requested L1 backup for pid 14106.  Using DISK destination, 4 channels and 64G section size.
+    2024-07-02 19:03:36 - 1719947016783: Performing L1 backup for pid 14106
     RMAN> 2> 3> 4> RMAN> RMAN> 2> 3> 4> 5> 6> 7> 8> 9> 10> 11> 12> 13> RMAN>
-    2024-06-21 08:21:03 - 1718958063471: No errors or warnings found in backup log file for pid 464450
-    2024-06-21 08:21:03 - 1718958063481: Manually copy restore script to destination
-    2024-06-21 08:21:03 - 1718958063482:  => /home/oracle/m5/cmd/restore_L1_FTEX_240621082100.cmd
-    2024-06-21 08:21:03 - 1718958063491: Saving SCN for next backup for pid 464450
+    2024-07-02 19:03:40 - 1719947020732: No errors or warnings found in backup log file for pid 14106
+    2024-07-02 19:03:40 - 1719947020748: Manually copy restore script to destination
+    2024-07-02 19:03:40 - 1719947020750:  => /home/oracle/m5/cmd/restore_L1_FTEX_240702190336.cmd
+    2024-07-02 19:03:40 - 1719947020762: Saving SCN for next backup for pid 14106
     
     BACKUP_TYPE   INPUT_BYTES(MB) OUTPUT_BYTES(MB) STATUS    START_TIME          END_TIME            ELAPSED_TIME(Min)
-    ----------------------------------------------------------------------------------------------------------------------
-    DATAFILE FULL .0078125        .046875          COMPLETED 06/21/2024:08:21:02 06/21/2024:08:21:03 .01
+    ------------- --------------- ---------------- --------- ------------------- ------------------- -----------------
+    DATAFILE FULL .0078125        .046875          COMPLETED 07/02/2024:19:03:39 07/02/2024:19:03:40 .01
     ```
     </details>
 
@@ -73,8 +73,8 @@ In this lab, you will:
     ``` text
     $ cd cmd
     $ ll bkp*cmd
-    -rw-r--r--. 1 oracle oinstall 641 Jun 21 08:16 bkp_L0_240621081610.cmd
-    -rw-r--r--. 1 oracle oinstall 677 Jun 21 08:21 bkp_L1_240621082100.cmd
+    -rw-r--r--. 1 oracle oinstall 641 Jul  2 18:52 bkp_L0_240702185218.cmd
+    -rw-r--r--. 1 oracle oinstall 676 Jul  2 19:03 bkp_L1_240702190336.cmd
     ```
     </details>
 
@@ -106,11 +106,11 @@ In this lab, you will:
     ALLOCATE CHANNEL d4 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L1_%d_%N_%t_%s_%p';
     BACKUP
            FILESPERSET 1
-           INCREMENTAL FROM SCN 2417184
+           INCREMENTAL FROM SCN 558989
            SECTION SIZE 64G
-           TAG FTEX_L1_240621082100
+           TAG FTEX_L1_240702190336
            TABLESPACE USERS;
-    } 
+    }
     ```
     </details>
 
@@ -125,7 +125,7 @@ In this lab, you will:
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    -rw-r--r--. 1 oracle oinstall 658 Jun 21 08:21 restore_L1_FTEX_240621082100.cmd
+    -rw-r--r--. 1 oracle oinstall 658 Jul  2 19:03 restore_L1_FTEX_240702190336.cmd
     ```
     </details>
 
@@ -145,8 +145,8 @@ In this lab, you will:
     <summary>*click to see the output*</summary>
     ``` text
     $ cat $(ls -tr restore_L1_*.cmd | tail -1)
-    SPOOL LOG TO log/restore_L1_FTEX_240621082100.log;
-    SPOOL TRACE TO log/restore_L1_FTEX_240621082100.trc;
+    SPOOL LOG TO log/restore_L1_FTEX_240702190336.log;
+    SPOOL TRACE TO log/restore_L1_FTEX_240702190336.trc;
     SET EVENT FOR catalog_foreign_datafile_restore TO 1;
     SET ECHO ON;
     SHOW ALL;
@@ -158,7 +158,7 @@ In this lab, you will:
     ALLOCATE CHANNEL DISK3 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L1_%d_%N_%t_%s_%p';
     ALLOCATE CHANNEL DISK4 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L1_%d_%N_%t_%s_%p';
     RESTORE ALL FOREIGN DATAFILES TO NEW FROM BACKUPSET
-    '/home/oracle/m5/rman/L1_FTEX_USERS_1172218862_5_1';}
+    '/home/oracle/m5/rman/L1_FTEX_USERS_1173294219_3_1';}
     ```
     </details>
 
@@ -180,15 +180,15 @@ In this lab, you will:
     ``` text
     $ rman target "sys@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1SCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - Production on Fri Jun 21 09:01:03 2024
+    Recovery Manager: Release 23.0.0.0.0 - Production on Tue Jul 2 19:09:01 2024
     Version 23.4.0.24.05
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
-    connected to target database: CDB23:VIOLET (DBID=932816428)
+    connected to target database: CDB23:VIOLET (DBID=1874382390)
     
-    RMAN> SPOOL LOG TO log/restore_L1_FTEX_240621082100.log;
-    2> SPOOL TRACE TO log/restore_L1_FTEX_240621082100.trc;
+    RMAN> SPOOL LOG TO log/restore_L1_FTEX_240702190336.log;
+    2> SPOOL TRACE TO log/restore_L1_FTEX_240702190336.trc;
     3> SET EVENT FOR catalog_foreign_datafile_restore TO 1;
     4> SET ECHO ON;
     5> SHOW ALL;
@@ -200,7 +200,7 @@ In this lab, you will:
     11> ALLOCATE CHANNEL DISK3 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L1_%d_%N_%t_%s_%p';
     12> ALLOCATE CHANNEL DISK4 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L1_%d_%N_%t_%s_%p';
     13> RESTORE ALL FOREIGN DATAFILES TO NEW FROM BACKUPSET
-    14> '/home/oracle/m5/rman/L1_FTEX_USERS_1172218862_5_1';}
+    14> '/home/oracle/m5/rman/L1_FTEX_USERS_1173294219_3_1';}
     15>
     ```
     </details>
@@ -283,17 +283,17 @@ Let's simulate changes to the source database and see how it affects the backup 
     $ ./dbmig_driver_m5.sh L1
     Properties file found, sourcing.
     LOG and CMD directories found
-    2024-06-21 09:12:37 - 1718961157875: Requested L1 backup for pid 468294.  Using DISK destination, 4     channels and 64G section size.
-    2024-06-21 09:12:37 - 1718961157880: Performing L1 backup for pid 468294
+    2024-07-02 19:09:49 - 1719947389848: Requested L1 backup for pid 14507.  Using DISK destination, 4 channels and 64G section size.
+    2024-07-02 19:09:49 - 1719947389856: Performing L1 backup for pid 14507
     RMAN> 2> 3> 4> RMAN> RMAN> 2> 3> 4> 5> 6> 7> 8> 9> 10> 11> 12> 13> RMAN>
-    2024-06-21 09:12:40 - 1718961160912: No errors or warnings found in backup log file for pid 468294
-    2024-06-21 09:12:40 - 1718961160922: Manually copy restore script to destination
-    2024-06-21 09:12:40 - 1718961160924:  => /home/oracle/m5/cmd/restore_L1_FTEX_240621091237.cmd
-    2024-06-21 09:12:40 - 1718961160933: Saving SCN for next backup for pid 468294
+    2024-07-02 19:09:53 - 1719947393764: No errors or warnings found in backup log file for pid 14507
+    2024-07-02 19:09:53 - 1719947393778: Manually copy restore script to destination
+    2024-07-02 19:09:53 - 1719947393780:  => /home/oracle/m5/cmd/restore_L1_FTEX_240702190949.cmd
+    2024-07-02 19:09:53 - 1719947393792: Saving SCN for next backup for pid 14507
     
     BACKUP_TYPE   INPUT_BYTES(MB) OUTPUT_BYTES(MB) STATUS    START_TIME          END_TIME            ELAPSED_TIME(Min)
-    ----------------------------------------------------------------------------------------------------------------------
-    DATAFILE FULL 20.3671875      20.3515625       COMPLETED 06/21/2024:09:12:39 06/21/2024:09:12:40 .01
+    ------------- --------------- ---------------- --------- ------------------- ------------------- -----------------
+    DATAFILE FULL 20.304687       20.3359375       COMPLETED 07/02/2024:19:09:52 07/02/2024:19:09:53 .01
     ```
     </details>
 
@@ -316,15 +316,15 @@ Let's simulate changes to the source database and see how it affects the backup 
     ``` text
     $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1SCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - Production on Fri Jun 21 09:15:21 2024
+    Recovery Manager: Release 23.0.0.0.0 - Production on Tue Jul 2 19:10:56 2024
     Version 23.4.0.24.05
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
-    connected to target database: CDB23:VIOLET (DBID=932816428)
+    connected to target database: CDB23:VIOLET (DBID=1874382390)
     
-    RMAN> SPOOL LOG TO log/restore_L1_FTEX_240621091237.log;
-    2> SPOOL TRACE TO log/restore_L1_FTEX_240621091237.trc;
+    RMAN> SPOOL LOG TO log/restore_L1_FTEX_240702190949.log;
+    2> SPOOL TRACE TO log/restore_L1_FTEX_240702190949.trc;
     3> SET EVENT FOR catalog_foreign_datafile_restore TO 1;
     4> SET ECHO ON;
     5> SHOW ALL;
@@ -336,7 +336,7 @@ Let's simulate changes to the source database and see how it affects the backup 
     11> ALLOCATE CHANNEL DISK3 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L1_%d_%N_%t_%s_%p';
     12> ALLOCATE CHANNEL DISK4 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L1_%d_%N_%t_%s_%p';
     13> RESTORE ALL FOREIGN DATAFILES TO NEW FROM BACKUPSET
-    14> '/home/oracle/m5/rman/L1_FTEX_USERS_1172221959_6_1';}
+    14> '/home/oracle/m5/rman/L1_FTEX_USERS_1173294592_4_1';}
     15>
     ```
     </details>

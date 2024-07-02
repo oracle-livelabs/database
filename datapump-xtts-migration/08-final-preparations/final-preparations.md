@@ -86,7 +86,6 @@ You can export statistics before the maintenance window begins. Most likely, the
     end;
     /
     
-    SQL>   2    3    4    5    6
     PL/SQL procedure successfully completed.
     ```
     </details>
@@ -121,7 +120,6 @@ You can export statistics before the maintenance window begins. Most likely, the
     end;
     /
     
-    SQL>   2    3    4    5    6
     PL/SQL procedure successfully completed.
     ```
     </details>

@@ -47,17 +47,17 @@ In this lab, you will:
     Next SCN file not found, creating it.
     LOG and CMD directories found
     Backup to disk, creating /home/oracle/m5/rman
-    2024-06-21 08:16:10 - 1718957770693: Requested L0 backup for pid 464006.  Using DISK destination, 4 channels and 64G section size.
-    2024-06-21 08:16:10 - 1718957770698: Performing L0 backup for pid 464006
+    2024-07-02 18:52:18 - 1719946338839: Requested L0 backup for pid 13055.  Using DISK destination, 4 channels and 64G section size.
+    2024-07-02 18:52:18 - 1719946338847: Performing L0 backup for pid 13055
     RMAN> 2> 3> 4> RMAN> RMAN> 2> 3> 4> 5> 6> 7> 8> 9> 10> 11> 12> RMAN>
-    2024-06-21 08:16:15 - 1718957775298: No errors or warnings found in backup log file for pid 464006
-    2024-06-21 08:16:15 - 1718957775308: Manually copy restore script to destination
-    2024-06-21 08:16:15 - 1718957775309:  => /home/oracle/m5/cmd/restore_L0_FTEX_240621081610.cmd
-    2024-06-21 08:16:15 - 1718957775318: Saving SCN for next backup for pid 464006
+    2024-07-02 18:52:24 - 1719946344671: No errors or warnings found in backup log file for pid 13055
+    2024-07-02 18:52:24 - 1719946344691: Manually copy restore script to destination
+    2024-07-02 18:52:24 - 1719946344693:  => /home/oracle/m5/cmd/restore_L0_FTEX_240702185218.cmd
+    2024-07-02 18:52:24 - 1719946344705: Saving SCN for next backup for pid 13055
     
     BACKUP_TYPE   INPUT_BYTES(MB) OUTPUT_BYTES(MB) STATUS    START_TIME          END_TIME            ELAPSED_TIME(Min)
-    ----------------------------------------------------------------------------------------------------------------------
-    DATAFILE FULL 62.21875        60.6796875       COMPLETED 06/21/2024:08:16:12 06/21/2024:08:16:14 .03
+    ------------- --------------- ---------------- --------- ------------------- ------------------- -----------------
+    DATAFILE FULL 62.09375        60.3203125       COMPLETED 07/02/2024:18:52:21 07/02/2024:18:52:24 .05
     ```
     </details>
 
@@ -79,12 +79,12 @@ In this lab, you will:
     ``` text
     $ cd cmd
     $ ll
-    total 32
-    -rw-r--r--. 1 oracle oinstall  641 Jun 21 08:16 bkp_L0_240621081610.cmd
-    -rw-r--r--. 1 oracle oinstall 1003 Jun 21 08:21 bkp_report.lst
-    -rw-rw-r--. 1 oracle oinstall 5122 Jun 21 08:12 dbmig_driver.properties
-    -rw-r--r--. 1 oracle oinstall    6 Jun 21 08:15 dbmig_ts_list.txt
-    -rw-r--r--. 1 oracle oinstall  658 Jun 21 08:16 restore_L0_FTEX_240621081610.cmd
+    total 24
+    -rw-r--r--. 1 oracle oinstall  641 Jul  2 18:52 bkp_L0_240702185218.cmd
+    -rw-r--r--. 1 oracle oinstall 1003 Jul  2 18:52 bkp_report.lst
+    -rw-r--r--. 1 oracle oinstall 5121 Jun 26 14:06 dbmig_driver.properties
+    -rw-r--r--. 1 oracle oinstall    6 Jul  2 18:51 dbmig_ts_list.txt
+    -rw-r--r--. 1 oracle oinstall  658 Jul  2 18:52 restore_L0_FTEX_240702185218.cmd
     ```
     </details>
 
@@ -117,7 +117,7 @@ In this lab, you will:
     BACKUP
            FILESPERSET 1
            SECTION SIZE 64G
-           TAG FTEX_L0_240621081610
+           TAG FTEX_L0_240702185218
            TABLESPACE USERS;
     }
     ```
@@ -135,8 +135,8 @@ In this lab, you will:
     ```
 
     * The file names are different in your environment.
-    * The backup created a log file named `bkp_L0_4CH_64G_FTEX_240621081610.log`.
-    * Tracing is enabled by default and written to `bkp_L0_4CH_64G_FTEX_240621081610.trc`.
+    * The backup created a log file named `bkp_L0_4CH_64G_FTEX_240702185218.log`.
+    * Tracing is enabled by default and written to `bkp_L0_4CH_64G_FTEX_240702185218.trc`.
     * Additional log files are written as well.
 
     <details>
@@ -144,10 +144,11 @@ In this lab, you will:
     ``` text
     $ cd ../log
     $ ll
-    -rw-r--r--. 1 oracle oinstall   3836 Jun 21 08:16 bkp_L0_4CH_64G_FTEX_240621081610.log
-    -rw-r--r--. 1 oracle oinstall 496165 Jun 21 08:16 bkp_L0_4CH_64G_FTEX_240621081610.trc
-    -rw-r--r--. 1 oracle oinstall    198 Jun 21 08:16 chk_backup.log
-    -rw-r--r--. 1 oracle oinstall   4978 Jun 21 08:16 rman_mig_bkp.log
+    total 500
+    -rw-r--r--. 1 oracle oinstall   3857 Jul  2 18:52 bkp_L0_4CH_64G_FTEX_240702185218.log
+    -rw-r--r--. 1 oracle oinstall 496430 Jul  2 18:52 bkp_L0_4CH_64G_FTEX_240702185218.trc
+    -rw-r--r--. 1 oracle oinstall     98 Jul  2 18:52 chk_backup.log
+    -rw-r--r--. 1 oracle oinstall   2478 Jul  2 18:52 rman_mig_bkp.log
     ```
     </details>
 
@@ -169,8 +170,8 @@ In this lab, you will:
     ``` text
     $ cd ../rman
     $ ll
-    total 51624
-    -rw-r-----. 1 oracle oinstall 52805632 Jun 21 08:16 L0_FTEX_USERS_1172218572_3_1
+    total 51328
+    -rw-r-----. 1 oracle oinstall 52559872 Jul  2 18:52 L0_FTEX_USERS_1173293541_1_1
     ```
     </details>
 
@@ -195,7 +196,7 @@ In this lab, you will:
     $ cd /home/oracle/m5/cmd
     $ ll restore*
     total 51624
-    -rw-r--r--. 1 oracle oinstall 658 Jun 21 08:16 restore_L0_FTEX_240621081610.cmd
+    -rw-r--r--. 1 oracle oinstall 658 Jul  2 18:52 restore_L0_FTEX_240702185218.cmd
     ```
     </details>
 
@@ -215,8 +216,8 @@ In this lab, you will:
     <summary>*click to see the output*</summary>
     ``` text
     $ cat restore_L0_FTEX_240621081610.cmd
-    SPOOL LOG TO log/restore_L0_FTEX_240621081610.log;
-    SPOOL TRACE TO log/restore_L0_FTEX_240621081610.trc;
+    SPOOL LOG TO log/restore_L0_FTEX_240702185218.log;
+    SPOOL TRACE TO log/restore_L0_FTEX_240702185218.trc;
     SET EVENT FOR catalog_foreign_datafile_restore TO 1;
     SET ECHO ON;
     SHOW ALL;
@@ -228,7 +229,7 @@ In this lab, you will:
     ALLOCATE CHANNEL DISK3 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L0_%d_%N_%t_%s_%p';
     ALLOCATE CHANNEL DISK4 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L0_%d_%N_%t_%s_%p';
     RESTORE ALL FOREIGN DATAFILES TO NEW FROM BACKUPSET
-    '/home/oracle/m5/rman/L0_FTEX_USERS_1172218572_3_1';}
+    '/home/oracle/m5/rman/L0_FTEX_USERS_1173293541_1_1';}
     ```
     </details>
 
@@ -259,15 +260,15 @@ In this lab, you will:
     $ . cdb23
     $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L0SCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - Production on Fri Jun 21 11:13:42 2024
+    Recovery Manager: Release 23.0.0.0.0 - Production on Tue Jul 2 18:58:07 2024
     Version 23.4.0.24.05
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
-    connected to target database: CDB23:VIOLET (DBID=372283666)
+    connected to target database: CDB23:VIOLET (DBID=1874382390)
     
-    RMAN> SPOOL LOG TO log/restore_L0_FTEX_240621111320.log;
-    2> SPOOL TRACE TO log/restore_L0_FTEX_240621111320.trc;
+    RMAN> SPOOL LOG TO log/restore_L0_FTEX_240702185218.log;
+    2> SPOOL TRACE TO log/restore_L0_FTEX_240702185218.trc;
     3> SET EVENT FOR catalog_foreign_datafile_restore TO 1;
     4> SET ECHO ON;
     5> SHOW ALL;
@@ -279,7 +280,7 @@ In this lab, you will:
     11> ALLOCATE CHANNEL DISK3 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L0_%d_%N_%t_%s_%p';
     12> ALLOCATE CHANNEL DISK4 DEVICE TYPE DISK FORMAT '/home/oracle/m5/rman/L0_%d_%N_%t_%s_%p';
     13> RESTORE ALL FOREIGN DATAFILES TO NEW FROM BACKUPSET
-    14> '/home/oracle/m5/rman/L0_FTEX_USERS_1172229202_5_1';}
+    14> '/home/oracle/m5/rman/L0_FTEX_USERS_1173293541_1_1';}
     15>
     ```
     </details>

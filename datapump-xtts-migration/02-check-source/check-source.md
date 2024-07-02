@@ -4,7 +4,7 @@
 
 In this lab, you will perform a number of checks on the source database to ensure it meets the minimum requirements. Also, you will collect information that you use later on to determine if the target database is suitable for the migration.
 
-Estimated Time: 5 Minutes.
+Estimated Time: 10 Minutes.
 
 ### Objectives
 
@@ -43,6 +43,8 @@ The M5 script has a set of minimum requirements.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    $ cd $ORACLE_HOME
+    $ OPatch/opatch lspatches
     35648110;OJVM RELEASE UPDATE: 19.21.0.0.231017 (35648110)
     35787077;DATAPUMP BUNDLE PATCH 19.21.0.0.0
     35643107;Database Release Update : 19.21.0.0.231017 (35643107)
@@ -71,6 +73,8 @@ The M5 script has a set of minimum requirements.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> select banner from v$version;
+
     BANNER
     --------------------------------------------------------------------------------
     Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
@@ -96,6 +100,9 @@ To determine whether the target database is fit for the migration, you must gath
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> col value format a20
+    SQL> select value from v$parameter where name='compatible';
+
     VALUE
     --------------------    
     19.0.0
@@ -113,6 +120,8 @@ To determine whether the target database is fit for the migration, you must gath
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> select value from nls_database_parameters where parameter='NLS_CHARACTERSET';
+
     VALUE
     --------------------
     AL32UTF8
@@ -130,6 +139,8 @@ To determine whether the target database is fit for the migration, you must gath
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> select version from v$timezone_file;
+
     VERSION
     ----------
     42
@@ -147,6 +158,8 @@ To determine whether the target database is fit for the migration, you must gath
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> select dbtimezone from v$instance;
+
     DBTIME
     ------
     +00:00
@@ -168,6 +181,8 @@ Oracle recommends certain changes to the source database. These changes help ens
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> select value from v$parameter where name='streams_pool_size';
+    
     VALUE
     --------------------
     0

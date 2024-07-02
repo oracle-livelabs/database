@@ -80,7 +80,7 @@ In this lab, the source and target database is on the same host. Both hosts acce
     -- Be sure to hit RETURN
     ```
 
-    * Scroll between the pages with *RETURN*. 
+    * Scroll between the pages with *SPACE*. 
 
     <details>
     <summary>*click to see the output*</summary>
@@ -245,6 +245,14 @@ In this lab, the source and target database is on the same host. Both hosts acce
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> select
+       tablespace_name
+    from
+       dba_tablespaces
+    where
+       contents='PERMANENT'
+       and tablespace_name not in ('SYSTEM','SYSAUX');
+       
     TABLESPACE_NAME
     ------------------------------
     USERS

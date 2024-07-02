@@ -145,7 +145,7 @@ In this lab, you will:
             statown => 'OPT_STAT_TRANSPORT',
             stattab => 'OPT_STATS_STG');
     end;
-    /  2    3    4    5    6    7
+    /  
     
     PL/SQL procedure successfully completed.    
     ```
@@ -177,21 +177,21 @@ In this lab, you will:
 
     TABLE_NAME                NUM_ROWS   LAST_ANALYZED
     ------------------------- ---------- ------------------
-    F1_RACES                  1125       26-JUN-24
-    F1_CONSTRUCTORRESULTS     12465      26-JUN-24
-    F1_CIRCUITS               77         26-JUN-24
-    F1_DRIVERS                859        26-JUN-24
-    F1_STATUS                 139        26-JUN-24
-    F1_PITSTOPS               10793      26-JUN-24
-    F1_CONSTRUCTORS           212        26-JUN-24
-    F1_DRIVERSTANDINGS        34511      26-JUN-24
-    F1_CONSTRUCTORSTANDINGS   13231      26-JUN-24
-    F1_SPRINTRESULTS          280        26-JUN-24
-    F1_LAPTIMES               571047     26-JUN-24
-    F1_RESULTS                26439      26-JUN-24
-    F1_LAPTIMES_BACKUP        571047     01-JUL-24
-    F1_QUALIFYING             10174      26-JUN-24
-    F1_SEASONS                75         26-JUN-24
+    F1_RACES                  1125       02-JUL-24
+    F1_CONSTRUCTORRESULTS     12465      02-JUL-24
+    F1_CIRCUITS               77         02-JUL-24
+    F1_DRIVERS                859        02-JUL-24
+    F1_STATUS                 139        02-JUL-24
+    F1_PITSTOPS               10793      02-JUL-24
+    F1_CONSTRUCTORS           212        02-JUL-24
+    F1_DRIVERSTANDINGS        34511      02-JUL-24
+    F1_CONSTRUCTORSTANDINGS   13231      02-JUL-24
+    F1_SPRINTRESULTS          280        02-JUL-24
+    F1_LAPTIMES               571047     02-JUL-24
+    F1_RESULTS                26439      02-JUL-24
+    F1_LAPTIMES_BACKUP        571047     02-JUL-24
+    F1_QUALIFYING             10174      02-JUL-24
+    F1_SEASONS                75         02-JUL-24
     
     15 rows selected.         
     ```
@@ -238,6 +238,7 @@ In this step, you would normally perform extensive testing of the new database, 
       COUNT(*)
     ----------
         571047
+            
     SQL> select count(*) from f1.f1_laptimes_backup2;
     
       COUNT(*)
