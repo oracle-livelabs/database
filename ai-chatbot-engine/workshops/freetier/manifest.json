@@ -25,6 +25,7 @@
         {
             "title": "Lab 3: Generate vector embeddings",
             "description": "Vectorize a text FAQ file",
+            "type": "freetier",
             "filename": "../../vectorization/vectorization.md"
         },
         {

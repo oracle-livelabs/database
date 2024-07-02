@@ -1,8 +1,8 @@
-# Comprehensive Data Usecase Domains Exploration in Oracle Database 23ai
+# Data Usecase Domains Exploration
 
 ## Introduction
 
-Welcome to the "Comprehensive Data Usecase Domains Exploration in Oracle Database 23ai" lab! Data Usecase Domains play a crucial role in ensuring data integrity and consistency within database applications. In this lab, we will explore Data Usecase Domains in Oracle Database 23ai, covering single column Data Usecase Domains, multi-column Data Usecase Domains, and flexible Data Usecase Domains. Through these examples, you will gain an understanding of how Data Usecase Domains can be defined, applied, and used to maintain data quality.
+Welcome to the "Data Usecase Domains Exploration" lab! Data Usecase Domains play a crucial role in data integrity and consistency within database applications. In this lab, we will explore Data Usecase Domains in Oracle Database 23ai, covering single column Data Usecase Domains, multi-column Data Usecase Domains, and flexible Data Usecase Domains. Through these examples, you will gain an understanding of how Data Usecase Domains can be defined, applied, and used to maintain data quality.
 
 Estimated Lab Time: 20 minutes
 
@@ -29,7 +29,7 @@ The objective of this lab is to provide comprehensive hands-on experience with D
 
 ## Task 2: Creating and Implementing Data Usecase Domains
 
-1. Single Column Domain Example: From the explanation above lets see what each of the tree types of Data Usecase Domains look like. We'll start by creating a single column domain for storing product prices. We will enforce a constraint to ensure that prices are positive numbers.
+1. Single Column Domain Example: From the explanation above, let's see what each of the three types of Data Usecase Domains looks like. We'll start by creating a single column domain for storing product prices. We will enforce a constraint to ensure that prices are positive numbers.
 
     ```
     <copy>
@@ -112,7 +112,7 @@ The objective of this lab is to provide comprehensive hands-on experience with D
 
     </copy>
     ```
-4. Oracle Database 23ai also has some pre-created Data Usecase Domains that we can use with many more on the way. Lets see what those are.
+4. Oracle Database 23ai also has some pre-created Data Usecase Domains that we can use with many more on the way. Let's see what those are.
 
     ```
     <copy>
@@ -166,7 +166,7 @@ The objective of this lab is to provide comprehensive hands-on experience with D
 
     </copy>
     ```
-2. We can now insert sample data into the created tables to test domain constraints. The Widget will get inserted into our table and the Gadget will fail because the it fails our constraint of only positive numbers in the price domain.
+2. We can now insert sample data into the created tables to test domain constraints. The Widget will get inserted into our table and the Gadget will fail because it fails our constraint of only positive numbers in the price domain.
 
     ```
     <copy>
@@ -176,7 +176,7 @@ The objective of this lab is to provide comprehensive hands-on experience with D
 
     </copy>
     ```
-3. Now we can insert into our multi-column domain table and our flexible domain table. Again our fist insert into the locations table will fail because our latitude is greater than 90 but our second insert statement will pass because the constraints are correct. 
+3. Now we can insert into our multi-column domain table and our flexible domain table. Again our first insert into the locations table will fail because our latitude is greater than 90 but our second insert statement will pass because the constraints are correct. 
     ```
     <copy>
     -- Inserting data into locations table with multi-column domain
@@ -198,7 +198,7 @@ The objective of this lab is to provide comprehensive hands-on experience with D
 1. We can view our Data Usecase Domains to see their information. The dictionary views: [USER|DBA|ALL]\_DOMAINS and [USER|DBA|ALL]\_DOMAIN_COLS represent Data Usecase Domains and provide the following information about the domain columns. For flexible Data Usecase Domains, the views also include the domain selector expression. 
 
 
-2. Lets take a look at the Data Usecase Domains we've created and the associated information.
+2. Let's take a look at the Data Usecase Domains we've created and the associated information.
 
     ```
     <copy>
@@ -210,13 +210,16 @@ The objective of this lab is to provide comprehensive hands-on experience with D
 
     If you have any questions or want to delve deeper into specific topics, refer to the Oracle documentation or continue experimenting on your own.
 
-4. We can clean up from the lab by dropping our tables.
+4. We can clean up from the lab by dropping our table and domains.
 
     ```
     <copy>
-    DROP TABLE products PURGE;
-    DROP TABLE locations PURGE;
-    DROP TABLE contacts PURGE;
+    drop table products purge;
+    drop table locations purge;
+    drop table contacts purge;
+    drop domain if exists personal_contact_dom force;
+    drop domain if exists business_contact_dom force;
+    drop domain if exists default_contact_dom force;
 
     </copy>
     ```

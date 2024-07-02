@@ -28,7 +28,7 @@ In this lab, you will learn how to use the "IF EXISTS" and "IF NOT EXISTS" state
     </copy>
     ```
 
-2. Lets create a small customer table with an id, first name and last name. We want to use the IF NOT EXISTS clause to so that the table is only created if it doesn't already exist in the database.
+2. Lets create a small customer table with an id, first name and last name. We'll use the IF NOT EXISTS clause meaning the table only gets created if it doesn't already exist in the database.
 
     ```
     <copy>
@@ -41,7 +41,7 @@ In this lab, you will learn how to use the "IF EXISTS" and "IF NOT EXISTS" state
     ```
     ![create a table](images/im2.png " ")
 
-3. Lets now drop objects using the IF EXISTS clause. This means that we can drop non-existent and existing objects without receiving an error. Notice, we don't have a customer_view. However, with IF EXISTS statement we wont get an error.
+3. Let's now drop objects using the IF EXISTS clause. This means that we can drop non-existent and existing objects without receiving an error. Notice, we don't have a customer_view. However, with IF EXISTS statement we wont get an error.
 
     ```
     <copy>
@@ -54,7 +54,7 @@ In this lab, you will learn how to use the "IF EXISTS" and "IF NOT EXISTS" state
     ```
     ![drop table](images/im3.png " ")
 
-4. We can also alter objects using the IF EXISTS clause. First lets re-add the `customer` table since we dropped it above, and then alter the table so we add a new email row. simultaneously we can add a first_name column to a table that doesn't exist. 
+4. We can also alter objects using the IF EXISTS clause. First, lets re-add the `customer` table since we dropped it above, and then alter the table and add a new email column. Simultaneously we can add a first_name column to a table that doesn't exist. 
 
     Again notice we wont receive an error. 
 
@@ -77,7 +77,7 @@ In this lab, you will learn how to use the "IF EXISTS" and "IF NOT EXISTS" state
     ![alter table](images/im4.png " ")
  
 
-5. You've now completed this lab worked with the IF [NOT] EXISTS clause in Oracle Database 23ai. This new functionality is great for enhancing scripts and minimizing errors in database. Feel try to continue trying out the IF [NOT] EXISTS clause or check out another lab.
+5. This new functionality is great for enhancing scripts and minimizing errors in database. Feel try to continue trying out the IF [NOT] EXISTS clause or check out another lab. You've now completed this lab worked with the IF [NOT] EXISTS clause in Oracle Database 23ai. 
 
 6. We can clean up from the lab by dropping our tables.
 

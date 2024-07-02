@@ -31,16 +31,15 @@ This lab is just a short overview of the functionality brought forth by Property
     GRANT CREATE PROPERTY GRAPH, CREATE ANY PROPERTY GRAPH, ALTER ANY PROPERTY GRAPH, DROP ANY PROPERTY GRAPH, READ ANY PROPERTY GRAPH TO <graphuser>;
     ```
 
+    Always check the Security Best Practices when creating new users. Best security practices for graph users can be found [here](https://docs.oracle.com/en/database/oracle/property-graph/20.4/spgdg/property-graph-overview-spgdg.html#GUID-98F3A3D7-9B97-40AD-8944-B261D8B60F08).
 
-    Always check the Security Best Practices when creating new users.  Best security practices for graph users can be found [here](https://docs.oracle.com/en/database/oracle/property-graph/20.4/spgdg/property-graph-overview-spgdg.html#GUID-98F3A3D7-9B97-40AD-8944-B261D8B60F08).
+3. Lets create some tables for our demo. We'll create a people and relationship table which will be our vertices (people) and edges (relationship) of the graph. 
 
-3. Lets create some tables for our demo. We'll create a people and relationship table which will be our vertices (people) and edges(relationship) of the graph. 
-
-     ```
+    ```
     <copy>
 
-    drop table people cascade CONSTRAINTS;
-    drop table relationship cascade CONSTRAINTS;
+    drop table if exists people cascade CONSTRAINTS;
+    drop table if exists relationship cascade CONSTRAINTS;
 
     CREATE TABLE people (
         p_id NUMBER PRIMARY KEY,
@@ -55,12 +54,12 @@ This lab is just a short overview of the functionality brought forth by Property
         (5, 'Eve');
 
     CREATE TABLE relationship (
-    r_id NUMBER PRIMARY KEY,
-    source_id NUMBER,
-    target_id NUMBER,
-    relationship varchar2(50),
-    CONSTRAINT connections_people_1_fk FOREIGN KEY (source_id) REFERENCES people (p_id),
-    CONSTRAINT connections_people_2_fk FOREIGN KEY (target_id) REFERENCES people (p_id)
+        r_id NUMBER PRIMARY KEY,
+        source_id NUMBER,
+        target_id NUMBER,
+        relationship VARCHAR2(50),
+        CONSTRAINT connections_people_1_fk FOREIGN KEY (source_id) REFERENCES people (p_id),
+        CONSTRAINT connections_people_2_fk FOREIGN KEY (target_id) REFERENCES people (p_id)
     );
 
     INSERT INTO relationship (r_id, source_id, target_id, relationship) 
@@ -93,7 +92,7 @@ This lab is just a short overview of the functionality brought forth by Property
     ```
     <copy>
         
-    drop property graph relationships_pg;
+    drop property graph if exists relationships_pg;
 
     CREATE PROPERTY GRAPH relationships_pg
         VERTEX TABLES (
@@ -117,7 +116,7 @@ This lab is just a short overview of the functionality brought forth by Property
     A couple things to point out here:
     * Vertex represent our people table
     * Edges represent how they are connected (relationship table)
-    * Our edges table has a source key and destination key, representing the connectiontion between the two people
+    * Our edges table has a source key and destination key, representing the connection between the two people
 
     ![create the property graph](images/im3.png " ")
 
@@ -193,7 +192,7 @@ This lab is just a short overview of the functionality brought forth by Property
     ```
 
 You may now **proceed to the next lab** 
-    
+
 ## Learn More
 
 * [Graph Developer's Guide for Property Graph](https://docs.oracle.com/en/database/oracle/property-graph/24.2/spgdg/index.html)

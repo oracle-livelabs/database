@@ -41,7 +41,8 @@ The objective of this lab is to familiarize you with the improvements being made
 
     </copy>
     ```
-3. This is an example of an old error we would be for the following group by statement. A little vague.
+
+3. This is an example of an old error we would see for the following group by statement. A little vague.
 
     ![old error message](images/im2.png)
 
@@ -52,11 +53,12 @@ The objective of this lab is to familiarize you with the improvements being made
     group by EMPLOYEE_ID;
     </copy>
     ```
+
     Now when we execute the same statement we get the following. 
 
     ![new error message](images/im3.png)
 
-    This tells us that the first name must appear in the group by claus or be used in an aggregate function. This makes it drastically easier to fix. 
+    This tells us that the first name must appear in the group by clause or be used in an aggregate function. This makes it drastically easier to fix. 
 
     This is just a tiny sample of the error message improvement. The Oracle Database team took the top 90% most reoccurring messages and improved them.
 
