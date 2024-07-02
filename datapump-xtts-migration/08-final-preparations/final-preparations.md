@@ -176,5 +176,5 @@ There are other means of dealing with the statistics than using `DBMS_STATS`. Al
 ## Acknowledgements
 
 * **Author** - Daniel Overby Hansen
-* **Contributors** - Klaus Gronau, Rodrigo Jorge, Mike Dietrich
+* **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
 * **Last Updated By/Date** - Daniel Overby Hansen, July 2024
