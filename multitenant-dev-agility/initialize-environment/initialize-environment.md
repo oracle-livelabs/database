@@ -63,7 +63,7 @@ If all expected processes are shown in your output as seen above, then your envi
 
     ```
     <copy>
-    systemctl status oracle-database
+    sudo systemctl status oracle-database
     </copy>
     ```
 
@@ -96,7 +96,7 @@ If all expected processes are shown in your output as seen above, then your envi
 
     ```
     <copy>
-    systemctl status oracle-db-listener
+    sudo systemctl status oracle-db-listener
     </copy>
     ```
 
@@ -111,4 +111,4 @@ If all expected processes are shown in your output as seen above, then your envi
 ## Acknowledgements
 * **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
 - **Contributors** - Sean Provost, Mike Sweeney, Bryan Grenn, Bill Pritchett, Joseph Bernens
-- **Last Updated By/Date** - Joseph Bernens, Principal Solution Engineer, Oracle NACI Engineering, April 2024
+- **Last Updated By/Date** - Joseph Bernens, Principal Solution Engineer, Oracle NACI Engineering, July 2024
