@@ -1098,6 +1098,10 @@ When the test completes and you flashed back the changes, you can resume the bac
 
     -- Be sure to hit RETURN
     ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
     $ cd cmd
     $ export L1SCRIPT=$(ls -tr restore_L1_* | tail -1)
     $ cd /home/oracle/m5
@@ -1126,9 +1130,6 @@ When the test completes and you flashed back the changes, you can resume the bac
     13> RESTORE ALL FOREIGN DATAFILES TO NEW FROM BACKUPSET
     14> '/home/oracle/m5/rman/L1_FTEX_USERS_1173296001_7_1';}
     15>
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
     ```
     </details>
 
