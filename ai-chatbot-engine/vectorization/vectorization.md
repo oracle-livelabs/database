@@ -61,7 +61,7 @@ To provide free Oracle Cloud accounts to our valued customers, we need to ensure
 
 So, we have the question, an empty line, the answer, and then a separator denoted by `=====`. For this simple example, we load the whole thing into memory. For a small FAQ file, there is no need for a proper vector database; however, if your knowledge base grows, you will want one.
 
-### Step 1: Uploading the sample FAQ file to the remote instance.
+### Step 1: Dowload the sample FAQ file
 
 Download the sample file from [this link](files/faq.txt?download=1).
    
