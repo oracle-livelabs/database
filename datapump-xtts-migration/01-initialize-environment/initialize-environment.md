@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will review and start up all components required to successfully run this workshop.
+In this lab, you will review and start-up all components required to run this workshop successfully.
 
 Estimated Time: 5 Minutes.
 
@@ -15,9 +15,9 @@ In this lab, you will:
 
 ## Task 1: Familiarize yourself with the workshop environment
 
-1. The easiest way to complete the lab is to copy/paste the lab instructions directly into a terminal. Be sure to execute all commands in a code block. After pasting you must hit *RETURN*.
+1. The easiest way to complete the lab is to copy/paste the lab instructions directly into a terminal. Be sure to execute all commands in a code block. After pasting, you must hit *RETURN*.
 
-2. Before copy/pasting take notice of the commands that you execute. It is important to understand what the commands will do.
+2. Before copy/pasting, take notice of the commands that you execute; it is important to understand what the commands will do.
 
 3. You can use any terminal to run the lab. The lab sets the environment when appropriate.
 
@@ -29,13 +29,13 @@ In this lab, you will:
 
 ![Click the terminal icon to start a new terminal](./images/initialize-environment-click-terminal.jpeg)    
 
-6. When the terminal opens, it says *Database ENV is not set*. You can disregard that message. All labs starts by setting the appropriate environment.
+6. When the terminal opens, it says *Database ENV is not set*. You can disregard that message. All labs start by setting the appropriate environment.
 
 7. In the terminal, you can zoom in to make the text larger. Press *CTRL* and *+* or select *Zoom In*.
 
 ![Zoom in to make the text larger in the terminal](./images/initialize-environment-zoom-in.png)    
 
-8. If you need another terminal, either start a brand new one, or open a new tab in the existing terminal.    
+8. If you need another terminal, either start a brand new one or open a new tab in the existing terminal.
 
 ![Open a new tab in the existing terminal](images/initialize-environment-new-tab.png)
 

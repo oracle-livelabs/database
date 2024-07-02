@@ -2,11 +2,11 @@
 
 ## About this Workshop
 
-In this lab, you will migrate a non-CDB database on Oracle Database 19c directly into a PDB on Oracle Database 23ai. You will use a combination of transportable tablespaces, full transportable export/import, and RMAN backups. For this purpose, Oracle delivers the M5 script; it makes such migrations easier by automating the steps. You will use the M5 script for the migration.
+In this lab, you will migrate a non-CDB database on Oracle Database 19c  directly into a PDB on Oracle Database 23ai using a combination of transportable tablespaces, full transportable export/import, and RMAN backups. For this purpose, Oracle delivers the M5 script, which automates the steps and makes such migrations easier. You will use the M5 script for the migration.
 
-Typically, the procedure is used for cross-platform migrations from big endian platforms, like AIX and SPARC/Solaris, to little endian platforms, like the Exadata Database Machine. It requires that the source and target databases are on Oracle Database 19c (Release Update 18) or later and uses the [Data Pump Bundle Patch](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2819284.1).
+Typically, the procedure is used for cross-platform migrations from big-endian platforms, like AIX and SPARC/Solaris, to little-endian platforms, like the Exadata Database Machine. It requires that the source and target databases are on Oracle Database 19c (Release Update 18) or later and uses the [Data Pump Bundle Patch](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2819284.1).
 
-For simplicity, this lab teaches you to migrate a database from Linux to Linux, but the script and procedures are identical to a cross-platform migration.
+For simplicity, this lab teaches you to migrate a database from Linux to Linux, but the script and procedures are identical to those of a cross-platform migration.
 
 Estimated Workshop Time: 60 minutes
 
@@ -23,7 +23,7 @@ In this workshop, you will:
 ## About the workshop contents
 
 This workshop comes with pre-installed Oracle homes and pre-created databases.
-You can switch between environments with the shortcuts shown in the last column of the below diagram.
+You can switch between environments using the shortcuts shown in the last column of the diagram below.
 
 ![Overview of the Oracle Homes and databases in the lab](./images/introduction-overview.png " ")
 
@@ -56,7 +56,7 @@ You can use RMAN to transport tablespaces across platforms with different endian
 
 ### M5
 
-M5 is a script from Oracle that combines different existing methods to migrate a database. The outcome is a simple, reliable, and fast migration solution with minimal downtime. 
+M5 is an Oracle script that combines different existing methods to migrate a database. The result is a simple, reliable, and fast migration solution with minimal downtime.
 
 M5 procedure supports:
 * Encrypted tablespaces
