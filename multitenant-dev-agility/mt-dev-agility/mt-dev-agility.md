@@ -43,7 +43,7 @@ In this first task, you will create and explore a new pluggable database **HRAPP
     ```
 
     
-    ![Output shows the SQLcl connection to CDBTEST container database. ](./images/task1.1-connectCDBTEST.png " ")
+    ![Output shows the SQLcl connection to CDBTEST container database. ](./images/task1.1-connectcdbtest.png " ")
 
 2. It is common for application development teams to have to wait for a new database when they need one.  The process might be to submit a formal request for a new database, wait for approval, and then wait some more while an environment and database are provisioned.  Depending on the organization and the available infrastructure, that's a process that could take hours, days, or maybe even longer!  However, in a modern, data-driven environment, developers need the ability to quickly create and manage data stores in order to keep pace with rapidly evolving business needs.  Oracle Multitenant makes it easy to enable a "self-service" database environment for the development team.  Not only is database creation self-service and easy, it is also incredibly fast to stand up a new Oracle Database. 
 
@@ -67,7 +67,7 @@ In this first task, you will create and explore a new pluggable database **HRAPP
     </copy>
     ```
 
-    ![New pluggable database HRAPPDB is created in around 10 seconds!](./images/task1.2-createHRAPPDB.png " ")
+    ![New pluggable database HRAPPDB is created in around 10 seconds!](./images/task1.2-createhrappdb.png " ")
 
 
 2. Change your SQLcl session to point to the database you just created, **HRAPPDB**.  Then you will grant privileges to the database user **PDB\_ADMIN**. You will leverage user PDB_ADMIN's privileges later on in this workshop.
@@ -101,7 +101,7 @@ In this first task, you will create and explore a new pluggable database **HRAPP
     
     </copy>
     ```
-    ![Database sample schemas are downloaded and unzipped.](./images/task1.3-downloadsampleschemaHR.png " ")
+    ![Database sample schemas are downloaded and unzipped.](./images/task1.3-downloadsampleschemahr.png " ")
     
     ```
     <copy>
@@ -114,7 +114,7 @@ In this first task, you will create and explore a new pluggable database **HRAPP
     </copy>
     ```
 
-     ![Database sample schemas are downloaded and the HR demo schema is loaded.](./images/task1.3-installsampleschemaHR.png " ")
+     ![Database sample schemas are downloaded and the HR demo schema is loaded.](./images/task1.3-installsampleschemahr.png " ")
 
 
 4. Launch SQLcl and connect as the database user **HR** to **HRAPPDB**, and verify that the sample schema objects have been created.
@@ -200,7 +200,7 @@ First, you'll unplug **HRAPPDB** from **CDBTEST** into a ".pdb" compressed archi
     ```
 
 
-   ![The PDB HRAPPDB is closed and unlpugged into a ".pdb" archive file.](./images/task2.2-unplugHRAPPDB.png " ")
+   ![The PDB HRAPPDB is closed and unlpugged into a ".pdb" archive file.](./images/task2.2-unplughrappdb.png " ")
 
 3. After unplugging the database, you will cleanup the container database by dropping all references to the unplugged PDB.  
 
@@ -212,7 +212,7 @@ First, you'll unplug **HRAPPDB** from **CDBTEST** into a ".pdb" compressed archi
     </copy>
     ```
 
-   ![The unplugged PDB shows as still in MOUNTED status until it is dropped.](./images/task2.3-dropHRAPPDB.png " ")
+   ![The unplugged PDB shows as still in MOUNTED status until it is dropped.](./images/task2.3-drophrappdb.png " ")
 
 4. Now, query the datafiles that are part of **CDBTEST**.  You can see in the results that the datafiles for **HRAPPDB** are no longer part of the container database.
     
@@ -240,7 +240,7 @@ First, you'll unplug **HRAPPDB** from **CDBTEST** into a ".pdb" compressed archi
     </copy>
     ```
 
-    ![The datafiles associated with HRAPPDB are no longer present in the CDB](./images/task2.4-CDBTESTdbfiles.png " ")
+    ![The datafiles associated with HRAPPDB are no longer present in the CDB](./images/task2.4-cdbtestdbfiles.png " ")
 
 5. The unplugged PDB archive has been stored on the local filesystem.  It contains the entire pluggable database in a compressed format. This makes it easy to share the unplugged PDB with other teams, partners, and/or customers.  This file can be used by others and plugged into their Oracle container databases.  When plugging a PDB into a container database, there are some restrictions regarding the CDB into which the PDB will be plugged in, including: 
 
@@ -267,7 +267,7 @@ In this task, you will connect to container database, **CDBPROD**, and plug the 
     </copy>
     ```
 
-    ![Container CDBPROD only contains the $SEED database and no other PDBs.](./images/task3.1-connectCDBPROD.png " ")
+    ![Container CDBPROD only contains the $SEED database and no other PDBs.](./images/task3.1-connectcdbprod.png " ")
 
 2. Check the compatibility of the unplugged **HRAPPDB** with **CDBPROD**.  If there are no errors output from the PL/SQL block then the PDB is compatible with the CDB, so you should be able to plug-in the PDB without issue.
 
