@@ -1,13 +1,13 @@
-# Exploring the SQL Analysis Report Feature in Oracle Database 23ai
+# Exploring the SQL Analysis Report
 
 ## Introduction
 
-Welcome to the "Exploring the SQL Analysis Report Feature in Oracle Database 23ai" lab. In this lab, you will learn about the new SQL Analysis Report feature in the optimizer introduced in Oracle Database 23ai. SQL Analysis Report is there to help improve your SQL queries by giving insights and suggestions inside your execution plans. The SQL Analysis Report is available in DBMS\_XPLAN and SQL Monitor. We are going to take a look at the DBMS\_XPLAN functionality.
+Welcome to the "Exploring the SQL Analysis Report" lab. In this lab, you will learn about the new SQL Analysis Report feature in the optimizer introduced in Oracle Database 23ai. SQL Analysis Report is there to help improve your SQL queries by giving insights and suggestions inside your execution plans. The SQL Analysis Report is available in DBMS\_XPLAN and SQL Monitor. We are going to take a look at the DBMS\_XPLAN functionality.
 
 Estimated Lab Time: 15 minutes
 
 ### Objective:
-The objective of this lab is to show you with the SQL Analysis Report feature in Oracle Database 23ai. By the end of this lab, you will be able to interpret SQL Analysis Reports and use the insights to improve query performance.
+The objective of this lab is to show you the SQL Analysis Report feature in Oracle Database 23ai. By the end of this lab, you will be able to interpret SQL Analysis Reports and use the insights to improve query performance.
 
 ### Prerequisites:
 - Access to Oracle Database 23ai.
@@ -69,11 +69,11 @@ The objective of this lab is to show you with the SQL Analysis Report feature in
     * DISPLAY\_SQL_PLAN\_BASELINE
     * DISPLAY\_SQLSET
     
-    We can also choose how to format the report. The SQL analysis report has two format options: TYPICAL and BASIC. The default value is 'TYPICAL'.
+    We can also choose how to format the report. The SQL Analysis Report has two format options: TYPICAL and BASIC. The default value is 'TYPICAL'.
 
 ## Task 2: Understanding the SQL Analysis Report
 
-1. Let's explore some examples of SQL analysis reports to understand common performance issues and optimization recommendations.
+1. Let's explore some examples of SQL Analysis Reports to understand common performance issues and optimization recommendations.
 
     ```
     <copy>
@@ -89,9 +89,9 @@ The objective of this lab is to show you with the SQL Analysis Report feature in
     ```
     ![check the explain plan](images/im3.png " ")
 
-    The report comes back and lets us know that we can improve the way we wrote the query. specifically it says "The query block has 1 cartesian product which may be expensive. Consider adding join conditions or removing the disconnected tables or views."
+    The report comes back and lets us know that we can improve the way we wrote the query. Specifically, it says "The query block has 1 Cartesian product which may be expensive. Consider adding join conditions or removing the disconnected tables or views."
 
-2. Now with that information we can rewrite the query. 
+2. Now with that information, we can rewrite the query. 
 
     ```
     <copy>
@@ -117,8 +117,7 @@ The objective of this lab is to show you with the SQL Analysis Report feature in
     ```
     ![rewrite the query](images/im4.png " ")
 
-
-3. Lets take a look at another small example.
+3. Let's take a look at another small example.
 
     ```
     <copy>
@@ -136,7 +135,7 @@ The objective of this lab is to show you with the SQL Analysis Report feature in
     ```
     ![check another table](images/im5.png " ")
 
-4. The SQL Analysis Report suggests that we consider a union all instead of the union. Lets implement those changes.
+4. The SQL Analysis Report suggests that we consider a UNION ALL instead of the UNION. Let's implement those changes.
 
     ```
     <copy>
@@ -157,10 +156,9 @@ The objective of this lab is to show you with the SQL Analysis Report feature in
 
     Again we're able to improve our query using the report.
 
+5. In this workshop, we've explored SQL analysis techniques for optimizing SQL performance. By understanding SQL execution plans and interpreting SQL Analysis Reports, you can identify performance bottlenecks and apply optimization strategies to enhance database performance. Feel free to continue trying out other queries or check out another lab.
 
-5. In this workshop, we've explored SQL analysis techniques for optimizing SQL performance. By understanding SQL execution plans and interpreting SQL analysis reports, you can identify performance bottlenecks and apply optimization strategies to enhance database performance. Feel try to continue trying out other queries or check out another lab.
-
-5. We can clean up from the lab by dropping our tables.
+6. We can clean up from the lab by dropping our tables.
 
     ```
     <copy>
