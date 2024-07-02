@@ -216,7 +216,7 @@ In this lab, you will:
 
 ## Task 2: Check migration
 
-In this step, you would normally perform extensive testing of the new database, before deciding whether to go-live. In this lab, you do just a very simple test.
+In this step, you would normally perform extensive testing of the new database, before deciding whether to go live. In this lab, you do just a very simple test.
 
 1. Ensure all data has been brought over to the target database. You check whether the tables `F1.F1_LAPTIMES_BACKUP` and `F1.F1_LAPTIMES_BACKUP2` exist. These are the tables you created earlier in the labs.
 
@@ -227,7 +227,7 @@ In this step, you would normally perform extensive testing of the new database, 
     </copy>
     ```
 
-    * If you didn't complete lab 8, you won't find `F1.F1_LAPTIMES_BACKUP2`.
+    * If you didn't complete lab 8, you won't find `F1.F1_LAPTIMES_BACKUP2` and the last query will fail with `ORA-00942`.
     * In a real migration, you would perform much more extensive testing. 
 
     <details>
