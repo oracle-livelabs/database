@@ -25,7 +25,7 @@ In the following labs, instead of SQL\*Plus you will use **Oracle SQL Developer 
 
 If you accidentally exit the SQLcl client during a lab exercise, the client can be launched using the command **sql /nolog** .
 
-**NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER**!
+**NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer, so be sure to press* **ENTER** *after the copy and paste!*
 
 **Please run all workshop tasks in the order in which they appear in this guide.**
 
