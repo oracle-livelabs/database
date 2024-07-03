@@ -47,7 +47,7 @@ In this first task, you will create and explore a new pluggable database **HRAPP
 
 2. It is common for application development teams to have to wait for a new database when they need one.  The process might be to submit a formal request for a new database, wait for approval, and then wait some more while an environment and database are provisioned.  Depending on the organization and the available infrastructure, that's a process that could take hours, days, or maybe even longer!  However, in a modern, data-driven environment, developers need the ability to quickly create and manage data stores in order to keep pace with rapidly evolving business needs.  Oracle Multitenant makes it easy to enable a "self-service" database environment for the development team.  Not only is database creation self-service and easy, it is also incredibly fast to stand up a new Oracle Database. 
 
-    In this task, you'll examine the container database **CDBTEST** by listing the pluggable databases already in the container; since this is a new CDB the only database plugged into it is the SEED database.  You will create the pluggable database **HRAPPDB**.  Note that the database is created and ready for use in a matter of seconds.
+    In this task, you'll examine the container database **CDBTEST** by listing the pluggable databases already in the CDB; since this is a new CDB the only database plugged into it is the SEED database.  You will create the pluggable database **HRAPPDB**.  Note that the database is created and ready for use in a matter of seconds.
 
     ```
     <copy>
@@ -137,7 +137,7 @@ In this first task, you will create and explore a new pluggable database **HRAPP
 
    ![The output shows a summary of schema HR's objects.](./images/task1.4-hrobjectcounts.png " ")
 
-5. Connect again in SQLcl as **SYS** to the container database **CDBTEST** and view the tablespaces and datafiles created, plus the container (PDB or CDB) to which each datafile belongs.
+5. Connect again in SQLcl as **SYS** to the container database **CDBTEST** and view the tablespaces and datafiles created, plus the database (PDB or CDB) to which each datafile belongs.
 
     ```
     <copy>
@@ -177,7 +177,7 @@ You should still be connected to the SQLcl client and see a "SQL>" prompt.  If n
 First, you'll unplug **HRAPPDB** from **CDBTEST** into a ".pdb" compressed archive.
 
 
-1. While still in the SQLcl client, connect to the container **CDBTEST** as the superuser SYSDBA.
+1. While still in the SQLcl client, connect to the container database **CDBTEST** as the superuser SYSDBA.
 
     ```
     <copy>connect sys/Oracle_4U@localhost:1521/CDBTEST as sysdba</copy>
@@ -340,7 +340,7 @@ Clone the pluggable database **HRAPP** to a new PDB named **HRAPP2**.
 
     ![User HR owns 7 database tables, each containing multiple rows of data.](./images/task4.1-hrapptablerows.png " ")
 
-2. Connect to the container **CDBPROD**.
+2. Connect to the container database **CDBPROD**.
 
     ```
     <copy>
@@ -410,7 +410,7 @@ You should still be connected to the SQLcl client and see a "SQL>" prompt.  If n
     ```
     ![PDB HRTEST is successfully cloned from PDB HRAPP at CDBPROD and opened.](./images/task5.3-hrtest.png " ")
 
-4. Connect to the newly-created HRTEST PDB and verify that database schema HR's exist - of course they do because this PDB is an exact clone of the source **HRAPP** database.
+4. Connect to the newly-created HRTEST PDB and verify that database schema HR's tables and rows exist - of course they do because this PDB is an exact clone of the source **HRAPP** database.
 
     ```
     <copy>
@@ -554,7 +554,7 @@ Note: when a PDB Snapshot Copy is created, the permissions for the datafiles of 
     3. Execute the PDB refresh of HRTESTMASTER.
     4. Create new PDB Snapshot Copies if desired.
 
-Now you've had a chance to try out Oracle Multitenant. Hopefully you've realized the value that Oracle Multitenant can bring to your organization:
+Now you've had a chance to try out Oracle Multitenant. Hopefully you've realized the value and agility that Oracle Multitenant can bring to your organization:
 - Oracle Multitenant made it easy for you to create a new database in just seconds.  
 - You were able to unplug your database for sharing with others, and plug in a database that was shared with your team.
 - The workshop tasks also showed how Oracle Multitenant makes it easy to:
