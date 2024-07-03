@@ -15,7 +15,7 @@ In this lab, you will:
 
 ## Task 1: Extract and configure M5 script
 
-In this lab, the source and target database is on the same host. Both hosts access the same directory with the M5 script via a shared NFS drive. In this lab, the source and target database is on the same host, so, you have just one directory. 
+In this lab, the source and target database are on the same host. Both hosts access the same directory with the M5 script via a shared NFS drive. In this lab, the source and target database is on the same host, so you have just one directory. 
 
 1. Go to *M5* directory and get the M5 migration script. The directory acts as your script base. You have created the directory already in a previous exercise when you created the database directory. Instead of downloading from My Oracle Support, you copy the script to the script base.
 
@@ -69,7 +69,7 @@ In this lab, the source and target database is on the same host. Both hosts acce
     ```
     </details>
 
-3. Examine the properties file which contains the details of your migration. It's stored in the *cmd* directory. In this lab, the properties file has already be filled with the details of your database.
+3. Examine the properties file, which contains the details of your migration. It's stored in the *cmd* directory. In this lab, the properties file has already been filled with the details of your database.
 
     ```
     <copy>
@@ -239,7 +239,7 @@ In this lab, the source and target database is on the same host. Both hosts acce
     </copy>
     ```
 
-    * Full transportable export/import moves all tablespaces except for the system tablspaces.
+    * Full transportable export/import moves all tablespaces except for the system tablespaces.
     * UNDO and TEMP tablespaces are never migrated. New UNDO and TEMP tablespaces are created in the target database.
 
     <details>
@@ -281,7 +281,7 @@ You may now *proceed to the next lab*.
 
 * My Oracle Support, [M5 Cross Endian Platform Migration using Full Transportable Data Pump Export/Import and RMAN Incremental Backups (Doc ID 2999157.1)](https://support.oracle.com/epmos/faces/DocumentDisplay?id=2999157.1)
 
-* Oracle recommend using a shared NFS drive to share the M5 script and corresponding files, logs and backups between the source and target hosts. If a shared NFS drive is not possible, you must copy the directory from source to target after each backup.
+* Oracle recommends using a shared NFS drive to share the M5 script and corresponding files, logs, and backups between the source and target hosts. If a shared NFS drive is not possible, you must copy the directory from source to target after each backup.
 
 ## Acknowledgements
 

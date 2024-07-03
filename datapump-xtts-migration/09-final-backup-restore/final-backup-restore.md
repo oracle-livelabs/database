@@ -2,7 +2,7 @@
 
 ## Introduction
 
-It's time to complete the migration. You've done all the preparations, but now it's time for an outage while you migrate the database. When the maintenance window begins you perform a final backup and restore, plus, use Data Pump to do a full transportable export/import.
+It's time to complete the migration. You've done all the preparations, but now it's time for an outage while you migrate the database. When the maintenance window begins, you perform a final backup and restore, plus, use Data Pump to do a full transportable export/import.
 
 Estimated Time: 20 Minutes.
 
@@ -15,7 +15,7 @@ In this lab, you will:
 
 ## Task 1: Final backup / restore
 
-In a real migration, you would shut down the applications using the database. Although, there is an outage, you can still query the source database. The tablespaces are read-only, so you can't add or change data, but you can query it. 
+In a real migration, you would shut down the applications using the database. Although there is an outage, you can still query the source database. The tablespaces are read-only, so you can't add or change data, but you can query it. 
 
 1. The outage starts now.
 
@@ -36,7 +36,7 @@ In a real migration, you would shut down the applications using the database. Al
     * Before starting the backup, the script sets the tablespaces read-only. 
     * After the backup, the script starts Data Pump to perform a full transportable export. 
     * The export runs for a few minutes.
-    * Notice how Data Pump lists at names of the data files needed for the migration in the end of the output. 
+    * Notice how Data Pump lists the names of the data files needed for the migration at the end of the output. 
     * In addition, it lists the names of the Data Pump dump files. 
 
     <details>
@@ -238,7 +238,7 @@ In a real migration, you would shut down the applications using the database. Al
     ```
 
     * Restoring the final backup is just like the other restore operations. 
-    * The only difference is that the tablespaces are set read-only so the SCN of the data files matches the SCN at which you run the Data Pump transportable export.
+    * The only difference is that the tablespaces are set read-only, so the SCN of the data files matches the SCN at which you run the Data Pump transportable export.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -276,7 +276,7 @@ In a real migration, you would shut down the applications using the database. Al
 
 ## Task 2: Data Pump import
 
-1. Examine the import driver script. For the Data Pump transportable import you use the import driver script `impdp.sh`. It's located in the script base folder. Normally, you need to fill in information about your target database, but in this lab it is done for you.
+1. Examine the import driver script. For the Data Pump transportable import, you use the import driver script `impdp.sh`. It's located in the script base folder. Normally, you need to fill in information about your target database, but in this lab it is done for you.
 
     ```
     <copy>
@@ -404,7 +404,7 @@ In a real migration, you would shut down the applications using the database. Al
     ```
 
     * If you need to make any changes to the Data Pump parameter file, you must edit the import driver script, *impdp.sh*, and make the changes there. 
-    * The script generates a new parameter file each time you execute it. Any changes made to the parameter file is lost.
+    * The script generates a new parameter file each time you execute it. Any changes made to the parameter file are lost.
 
     <details>
     <summary>*click to see the output*</summary>

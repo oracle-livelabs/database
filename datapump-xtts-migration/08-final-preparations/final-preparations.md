@@ -74,7 +74,7 @@ You can export statistics before the maintenance window begins. Most likely, the
     
     * `ownname` is the name of the schema that holds the exported statistics.
     * `stattab` is the name of the table with the exported statistics. 
-    * `tblspace` is the located of the table. Be sure to choose a tablespace that you migrate. Otherwise, you must export the table manually with Data Pump.
+    * `tblspace` is the location of the table. Be sure to choose a tablespace that you migrate. Otherwise, you must export the table manually using Data Pump.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -105,8 +105,8 @@ You can export statistics before the maintenance window begins. Most likely, the
     -- Be sure to hit RETURN
     ```
     
-    * In the data dictionary the database stores the statistics in a binary format.
-    * To transport the statistics, the database converts them to a common, transportable format, that can be read by any database on import.
+    * In the data dictionary, the database stores the statistics in a binary format.
+    * To transport the statistics, the database converts them to a common, transportable format that can be read by any database on import.
     * `ownname` is the schema for which you want to export statistics. 
     * In the lab, there is only one schema, *F1*. In a real migration, you probably have many schemas to export. 
 
@@ -128,7 +128,7 @@ You can export statistics before the maintenance window begins. Most likely, the
 
 ## Task 2: Gather dictionary statistics
 
-While executing an export or import job, Data Pump is querying the data dictionary heavily. To avoid any performance issues caused by inaccurate statistics, Oracle recommend gather dictionary statistics close to the maintenance window.
+While executing an export or import job, Data Pump is querying the data dictionary heavily. To avoid any performance issues caused by inaccurate statistics, Oracle recommends gathering dictionary statistics close to the maintenance window.
 
 1. Gather dictionary statistics.
 

@@ -9,7 +9,7 @@ In other words, you are using the production system and the production data for 
 A few words about the test migration. 
 * It requires a short outage on the source database.
 * You will perform a final backup and restore. *Final* just means that you take the backup with the tablespaces in read-only mode and at the same time perform a Data Pump full transportable export.
-* During testing, the tablespaces in the target database remain in *read-only* mode. Thsi prevents any changes to the underlying data files. Thus, you can still use them for the real migration - even after testing.
+* During testing, the tablespaces in the target database remain in *read-only* mode. This prevents any changes to the underlying data files. Thus, you can still use them for the real migration - even after testing.
 * After the test, you perform additional backup/restore cycles. You re-use the restored data files on the target database.
 
 This is an optional lab. You can skip it and move directly to lab 8. 
@@ -21,7 +21,7 @@ Estimated Time: 20 Minutes.
 In this optional lab, you will:
 
 * Test the last part of the migration
-* Flash back database
+* Flashback database
 * Resume the backup/restore cycle
 
 ## Task 1: Perform test migration
@@ -30,7 +30,7 @@ You will test the migration by performing the final steps of the migration. Howe
 
 1. Outage starts on the source database.
 
-2. Set the environment to the source database and start a level 1 final backup. When you start the driver script with `L1F`, it performs not only the final backup, but it also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. 
+2. Set the environment to the source database and start a level 1 final backup. When you start the driver script with `L1F`, it performs not only the final backup but also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. 
 
     ```
     <copy>
@@ -313,7 +313,7 @@ You will test the migration by performing the final steps of the migration. Howe
     ```
     </details>
 
-7. Perform the Data Pump transportable import. In the next lab, the instructions will describe in detail what happens. However, for now just start the import directly.
+7. Perform the Data Pump transportable import. In the next lab, the instructions will describe in detail what happens. However, for now, just start the import directly.
 
     ```
     <copy>
@@ -875,7 +875,7 @@ You just finished the test migration. You can connect to the target database and
     ```
     </details>
 
-## Task 3: Flash back
+## Task 3: Flashback
 
 Now that you are done testing, you use `FLASHBACK DATABASE` to undo the test import.
 
@@ -917,7 +917,7 @@ Now that you are done testing, you use `FLASHBACK DATABASE` to undo the test imp
     ```
     </details>
 
-2. Flash back to the restore point created by the import driver script.
+2. Flashback to the restore point created by the import driver script.
 
     ```
     <copy>
@@ -1010,7 +1010,7 @@ Now that you are done testing, you use `FLASHBACK DATABASE` to undo the test imp
 
 ## Task 4: Proceed with backup/restore
 
-When the test completes and you flashed back the changes, you can resume the backup/restore cycle.
+When the test completes and you reverted the changes, you can resume the backup/restore cycle.
 
 1. Set the environment to the source database and connect.
 
@@ -1061,7 +1061,7 @@ When the test completes and you flashed back the changes, you can resume the bac
     ```
 
     * Although the last backup was a *final* backup, the script just continues.
-    * The backup/restore cycle is not interupted. 
+    * The backup/restore cycle is not interrupted. 
 
     <details>
     <summary>*click to see the output*</summary>
@@ -1151,7 +1151,7 @@ You may now *proceed to the next lab*.
 
 ## Further information
 
-During the test, you introduced a short outage on the source database. You changed the tablespaces to read-only mode on the source database while you performed the final backup, including the Data Pump transportable export. If such an outage is unacceptable, you can perform the test backup on a standby database. Thus, you avoid outage on the primary database.
+During the test, you introduced a short outage on the source database. You changed the tablespaces to read-only mode on the source database while you performed the final backup, including the Data Pump transportable export. If such an outage is unacceptable, you can perform the test backup on a standby database. Thus, you avoid an outage on the primary database.
 
 ## Acknowledgements
 

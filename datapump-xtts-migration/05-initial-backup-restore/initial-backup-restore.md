@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Now it's time to start the migration. First, you take a level 0 backup that you restore in the target database. Although the migration starts, there is no downtime yet. The initial level 0 backup is taken without downtime.
+Now, it's time to start the migration. First, you take a level 0 backup that you restore in the target database. Although the migration har started, there is no downtime yet. The initial level 0 backup is taken without downtime.
 
 Estimated Time: 10 Minutes.
 
@@ -16,7 +16,7 @@ In this lab, you will:
 
 ## Task 1: Start initial backup
 
-1. Set the environmen to the source database and switch to the script base.
+1. Set the environment to the source database and switch to the script base.
 
     ```
     <copy>
@@ -35,8 +35,8 @@ In this lab, you will:
     </copy>
     ```
 
-    * The details of the migration is stored in the properties file that you examined in the previous lab. Hence, you don't need to specify any details to start the backup.
-    * The L0 backup needs to scan the entire database. Notice how *INPUT_BYTES* corresponds to the size of database (around 62 MB).
+    * The details of the migration are stored in the properties file that you examined in the previous lab. Hence, you don't need to specify any details to start the backup.
+    * The L0 backup needs to scan the entire database. Notice how *INPUT_BYTES* corresponds to the size of the database (around 62 MB).
     * Since you don't use RMAN compression in this exercise, the size of the backup is roughly the size of the database (around 60 MB). It will be smaller since RMAN always uses unused block compression which excludes empty blocks from the backup. 
 
     <details>
@@ -96,7 +96,7 @@ In this lab, you will:
     </copy>
     ```
 
-    * The name of the scripts change, so the command automatically fetches the script with the name in your environment. 
+    * The names of the scripts change, so the command automatically fetches the script with the name in your environment. 
     * Notice how the backup is *just* an RMAN `BACKUP ... TABLESPACE` command.
 
     <details>
@@ -233,7 +233,7 @@ In this lab, you will:
     ```
     </details>
 
-3. Set environment to the target database and start restore.
+3. Set the environment to the target database and start the restore.
 
     ```
     <copy>

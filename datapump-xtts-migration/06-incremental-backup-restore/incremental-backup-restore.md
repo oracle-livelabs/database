@@ -29,7 +29,7 @@ In this lab, you will:
     ```
 
     * Notice how *INPUT_BYTES* is very small. This is a consequence of block change tracking. The database knows which blocks were changed since the last backup. On incremental backups, the database just scans the changed blocks.
-    * Also notice how *OUTPUT_BYTES* is very small. You didn't change anything in the database since the last backup, so there are very little changes to back up.
+    * Also, notice how *OUTPUT_BYTES* is very small. You didn't change anything in the database since the last backup, so there are very little changes to back up.
     * The more often you perform incremental backups, the faster they run and the smaller the backup is.
     * In a real migration, you would run incremental backups as often as practicically possible. This limits the amount of changes that goes into the final incremental backup. Only the final incremental backup affects the downtime duration. All other backups are performed before the outage.
     
@@ -87,7 +87,7 @@ In this lab, you will:
     ```
 
     * The backup is again a regular RMAN `BACKUP ... TABLESPACE` command.
-    * However, this time it is an incremental backup from the SCN of the last backup. 
+    * However, this time, it is an incremental backup from the SCN of the last backup. 
 
     <details>
     <summary>*click to see the output*</summary>
@@ -220,7 +220,7 @@ In this lab, you will:
 
 ## Task 2: Make changes in source database
 
-Let's simulate changes to the source database and see how it affects the backup and restore phase.
+Let's simulate changes to the source database and see how they affect the backup and restore phase.
 
 1. Set the environment to the source database and connect.
 
@@ -358,7 +358,7 @@ You may now *proceed to the next lab*.
 
 ## Additional information
 
-In a real migration, you would run incremental backup/restore cycles at regular intervals. In the days before the migration, you perhaps do one every day, whereas on the final day, you run them more often. Ideally, you would complete an incremental backup/restore cycle very close to the start of the downtime window.
+In a real migration, you would run incremental backup/restore cycles at regular intervals. In the days before the migration, you perhaps do one every day, whereas, on the final day, you run them more often. Ideally, you would complete an incremental backup/restore cycle very close to the start of the downtime window.
 
 ## Acknowledgements
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Now, you have migrated the database. Before going live there are a few important tasks to carry out, plus you want to perform testing on the new database. 
+Now, you have migrated the database. Before going live, there are a few important tasks to carry out, plus you shold test the new database. 
 
 Estimated Time: 10 Minutes.
 
@@ -53,7 +53,7 @@ In this lab, you will:
     ```
     </details>
 
-3. Gather statistics on the optimizer statistics staging table. You created this staging table in a previous lab. The migration brought it into the target database, however, before starting an import of the statistics you should gather statistics on the staging table. 
+3. Gather statistics on the optimizer statistics staging table. You created this staging table in a previous lab. The migration brought it into the target database; however, before starting an import of the statistics, you should gather statistics on the staging table. 
 
     ```
     <copy>
@@ -85,7 +85,7 @@ In this lab, you will:
     </copy>
     ```
 
-    * Number of rows (*NUM\_ROWS*) is missing and so is information on when statistics were gathered (*LAST\_ANALYZED*).
+    * The number of rows (*NUM\_ROWS*) is missing, and so is information on when statistics were gathered (*LAST\_ANALYZED*).
     * This proves that there are *no statistics* on the tables.
 
     <details>
@@ -134,7 +134,7 @@ In this lab, you will:
     ```
 
     * The statistics staging table is already present in the target database.
-    * You created the staging table in the *USERS* tablespaces that was migrated to the target database.
+    * You created the staging table in the *USERS* tablespace that was migrated to the target database.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -216,7 +216,7 @@ In this lab, you will:
 
 ## Task 2: Check migration
 
-In this step, you would normally perform extensive testing of the new database, before deciding whether to go live. In this lab, you do just a very simple test.
+In this step, you would normally perform extensive testing of the new database before deciding whether to go live. In this lab, you do just a very simple test.
 
 1. Ensure all data has been brought over to the target database. You check whether the tables `F1.F1_LAPTIMES_BACKUP` and `F1.F1_LAPTIMES_BACKUP2` exist. These are the tables you created earlier in the labs.
 
@@ -227,7 +227,7 @@ In this step, you would normally perform extensive testing of the new database, 
     </copy>
     ```
 
-    * If you didn't complete lab 8, you won't find `F1.F1_LAPTIMES_BACKUP2` and the last query will fail with `ORA-00942`.
+    * If you didn't complete lab 8, you won't find `F1.F1_LAPTIMES_BACKUP2`, and the last query will fail with `ORA-00942`.
     * In a real migration, you would perform much more extensive testing. 
 
     <details>
@@ -247,7 +247,7 @@ In this step, you would normally perform extensive testing of the new database, 
     ```
     </details>
 
-## Task 3: Additional post migration tasks
+## Task 3: Additional post-migration tasks
 
 Once the tests complete, you shut down the source database. This ensures noone by mistake connects to the wrong database.
 
@@ -286,7 +286,7 @@ Once the tests complete, you shut down the source database. This ensures noone b
     </copy>
     ```
 
-5. There are other important post migration tasks, that you won't perform in this lab. For instance:
+5. There are other important post-migration tasks that you won't do in this lab. For instance:
     * Start a new level 0 backup.
     * Delete the backups created by RMAN during the migration. 
     * Drop the guaranteed restore points created in the target database by the migration driver script. 

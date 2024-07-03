@@ -11,13 +11,13 @@ Estimated Time: 10 Minutes.
 In this lab, you will:
 
 * Execute a number of checks
-* Create new, empty PDB
+* Create a new, empty PDB
 * Determine whether PDB is fit for migration
 * Make required and recommended preparations
 
 ## Task 1: Check CDB
 
-In contrast to the source database, the target CDB is on Oracle Database 23ai. This means there are no minimum requirements to the Release Update. Nor, is there a requirement for the Data Pump Bundle Patch. However, Oracle recommends that you install the latest Release Update in the target database prior to the migration.
+In contrast to the source database, the target CDB is on Oracle Database 23ai. This means there are no minimum requirements for the Release Update. Nor is there a requirement for the Data Pump Bundle Patch. However, Oracle recommends that you install the latest Release Update in the target database prior to the migration.
 
 1. Set the environment to the target CDB, *CDB23*, and connect.
 
@@ -30,7 +30,7 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     -- Be sure to hit RETURN
     ```
 
-2. Ensure that the database is *Enterprise Edition*. Transportable tablespaces is only supported on this edition.
+2. Ensure that the database is *Enterprise Edition*. Transportable tablespaces is only supported in this edition.
 
     ```
     <copy>
@@ -49,7 +49,7 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     ```
     </details>    
 
-3. Ensure `compatible` setting in target CDB is same or higher than the source database.
+3. Ensure the `compatible` setting in the target CDB is same or higher than the source database.
 
     ```
     <copy>
@@ -60,8 +60,8 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     -- Be sure to hit RETURN
     ```
 
-    * Source database `compatible` setting is *19.0.0*.
-    * Target database is *23.0.0* which means the database raises `compatible` setting of the tablespaces on plug-in.
+    * The source database `compatible` setting is *19.0.0*.
+    * The target database is *23.0.0*, which means the database raises `compatible` setting of the tablespaces on plug-in.
     * Raising `compatible` as part of a migration is typically not a problem.
 
     <details>
@@ -164,10 +164,10 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     select value from nls_database_parameters where parameter='NLS_CHARACTERSET';
     </copy>
     ```
-    * The source database uses character set *AL32UTF8*. 
-    * Transportable tablespaces require the target database uses the same or compatible character set. 
-    * However, Oracle recommend that you use the same character set. That is the safer and easier approach.
-    * In some situations, it is possible to migrate to a different character set, if it is a strict binary superset of the source database. In such situation, additional considerations come into play.
+    * The source database uses the character set *AL32UTF8*. 
+    * Transportable tablespaces require the target database to use the same or compatible character set. 
+    * However, Oracle recommends that you use the same character set. That is the safer and easier approach.
+    * In some situations, it is possible to migrate to a different character set, if it is a strict binary superset of the source database. In such a situation, additional considerations come into play.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -190,7 +190,7 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
 
     * The source database uses timezone file version *42*.
     * You migrate using full transportable export/import (FTEX). Technically speaking, FTEX has the capability of migrating to a higher timezone file version. But Data Pump needs to convert all relevant timezone data (columns of type *TIMESTAMP WITH TIMEZONE*) to the new timezone file version. Depending on the amount of data, this can take many hours.
-    * Oracle recommend that you use the same timezone file version as in the source database.   
+    * Oracle recommends that you use the same timezone file version as in the source database.   
     * If your data doesn't use the data type *TIMESTAMP WITH TIMEZONE* you can completely disregard this check.
 
     <details>
