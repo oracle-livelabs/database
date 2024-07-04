@@ -1,11 +1,11 @@
 {
-  "workshoptitle": "Hitchhiker's Guide for Upgrading to Oracle Database 23ai",
-  "support": "https://community.oracle.com/tech/developers/categories/database-23ai",
+  "workshoptitle": "Data Pump Cross-Platform Migration (M5)",
+  "support": "https://community.oracle.com/mosc/categories/oracle_database",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
-      "description": "The Introduction to Upgrade to 23ai Workshop.",
+      "description": "Introduction to migration using cross-platform transportable tablespaces with RMAN incremental backupus and M5 script.",
       "filename": "../../00-introduction/introduction.md"
     },
     {
@@ -19,61 +19,50 @@
       "filename": "../../01-initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 2: Explore Multitenant Architecture",
-      "filename": "../../02-explore-multitenant/explore-multitenant.md"
+      "title": "Lab 2: Check and prepare source database",
+      "description": "Ensure the source database meets the requirements and make necessary preparations",
+      "filename": "../../02-check-source/check-source.md"
     },
     {
-      "title": "Lab 3: Generate AWR Snapshot",
-      "filename": "../../03-awr-snapshot/awr-snapshot.md"
+      "title": "Lab 3: Create target database",
+      "description": "Create a new PDB and ensure it meets the requirements and make necessary preparations",
+      "filename": "../../03-create-target/create-target.md"
     },
     {
-      "title": "Lab 4: Capture and Preserve SQL",
-      "filename": "../../04-capture-sql/capture-sql.md"
+      "title": "Lab 4: Prepare M5 script",
+      "description": "Extract, examine and configure the M5 script.",
+      "filename": "../../04-prepare-m5/prepare-m5.md"
     },
     {
-      "title": "Lab 5: AutoUpgrade",
-      "filename": "../../05-autoupgrade/autoupgrade.md"
+      "title": "Lab 5: Initial backup/restore",
+      "description": "Start the migration by performing an initial level 0 backup/restore.",
+      "filename": "../../05-initial-backup-restore/initial-backup-restore.md"
     },
     {
-      "title": "Lab 6: AWR Compare Periods",
-      "filename": "../../06-awr-compare/awr-compare.md"
+      "title": "Lab 6: Incremental backup/restore",
+      "description": "Perform incremental backup/restore cycles to minimize downtime.",
+      "filename": "../../06-incremental-backup-restore/incremental-backup-restore.md"
     },
     {
-      "title": "Lab 7: SQL Performance Analyzer",
-      "filename": "../../07-spa/spa.md"
+      "title": "Lab 7: Test migration",
+      "description": "Test the migration.",
+      "filename": "../../07-test-migration/test-migration.md"
     },
     {
-      "title": "Lab 8: SQL Plan Management",
-      "filename": "../../08-spm/spm.md"
+      "title": "Lab 8: Final preparations",
+      "description": "Test the migration.",
+      "filename": "../../08-final-preparations/final-preparations.md"
     },
     {
-      "title": "Lab 9: SQL Tuning Advisor",
-      "filename": "../../09-sqltune/sqltune.md"
+      "title": "Lab 9: Complete migration",
+      "description": "Complete the migration.",
+      "filename": "../../09-final-backup-restore/final-backup-restore.md"
     },
     {
-      "title": "Lab 10: Upgrade CDB and Roll Back Using Flashback Database",
-      "filename": "../../10-upg-cdb-flashback/upg-cdb-flashback.md"
+      "title": "Lab 10: Post-migration tasks",
+      "description": "Things to check and perform after migration.",
+      "filename": "../../10-post-migration-tasks/post-migration-tasks.md"
     },
-    {
-      "title": "Lab 11: Upgrade Non-CDB Using Refreshable Clone PDB",
-      "filename": "../../11-upg-refresh-clone/upg-refresh-clone.md"
-    },
-    {
-      "title": "Lab 12: Migrate Using Data Pump",
-      "filename": "../../12-migrate-using-data-pump/migrate-using-data-pump.md"
-    }, 
-    {
-      "title": "Lab 13: Migrate Using Full Transportable Export/Import",
-      "filename": "../../13-migrate-using-ftex/migrate-using-ftex.md"
-    }, 
-    {
-      "title": "Lab 14: Upgrade Encrypted Non-CDB and Convert",
-      "filename": "../../14-encrypted-db-upg-conv/encrypted-db-upg-conv.md"
-    },    
-    {
-      "title": "Lab 15: Downgrade a PDB",
-      "filename": "../../15-downgrade-pdb/downgrade-pdb.md"
-    },    
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",

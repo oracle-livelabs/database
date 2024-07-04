@@ -4,14 +4,14 @@
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
+      "title": "Get Started",
+      "description": "Prerequisites for LiveLabs (Oracle-owned tenancies). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
+    },
+    {
       "title": "Introduction",
       "description": "Introduction to migration using cross-platform transportable tablespaces with RMAN incremental backupus and M5 script.",
       "filename": "../../00-introduction/introduction.md"
-    },
-    {
-      "title": "Get Started with noVNC Remote Desktop",
-      "description": "Using noVNC Remote Desktop",
-      "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
     },
     {
       "title": "Lab 1: Initialize Environment",
