@@ -26,9 +26,9 @@ This lab assumes you have:
 1. Log into the Oracle Cloud Console using your tenancy. Please make note of
 what region you are at.
 
-    ![Oracle Cloud Console](https://oracle-livelabs.github.io/common/images/console/home-page.png)
+    ![Oracle Cloud Console](images/home-page.png)
 
-2. On left side drop down (left of Oracle Cloud banner), go to **Identity & Security**
+2. On left side drop down (under Oracle Cloud banner), go to **Identity & Security**
 and then **Compartments.**
 
     ![Identity & Security](https://oracle-livelabs.github.io/common/images/console/id-compartment.png)
@@ -104,7 +104,7 @@ to get the Cloud Shell started.
 
 ## Task 4: Understand Credentials, and Policies
 
-  1. Read the following information.
+  1. Pleae read the following information.
 
     Oracle NoSQL Database Cloud Service uses Oracle Cloud Infrastructure Identity and Access Management which enables you to create user accounts and control access to cloud resources.  With respect to Oracle NoSQL, you can give users permission to inspect, read, use, or manage NoSQL tables.  There are 4 authentication methods available: API key-based, Session token-based (delegation tokens), Instance Principal and Resource Principal. The Oracle NoSQL Database SDKs allow you to provide the credentials for an application using any of these authentication methods. Credentials are typically associated with a specific user.
 

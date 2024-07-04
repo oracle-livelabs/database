@@ -10,8 +10,7 @@ _Estimated Time:_ 5 minutes
 
 In this task we will deleted the resource created using the Cloud Shell.
 
-1. Open the **Cloud Shell** in the top right menu.
-to get the Cloud Shell started.
+1. Open the **Cloud Shell** in the top right menu to get the Cloud Shell started.
 
   ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
@@ -80,4 +79,4 @@ Click on the Test table, which will bring up the table details screen.  Hit Dele
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management and Michael Brey, Director, NoSQL Product Development
-* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, July 2023
+* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, Michael Brey, Director, NoSQL Product Development July 2024

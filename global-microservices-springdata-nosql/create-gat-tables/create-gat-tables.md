@@ -30,26 +30,89 @@ The list of replicas already created in the table is listed. In our case, the li
 
 2. Click on `Add replica` button.
 
-3. Choose a Replication region from the list. Other information does not need to be changed for this LiveLab. Click **Add Replica**.
+3. Choose a Replication region from the list. It does not matter which one is selected. Other information does not need to be changed for this LiveLab. Click **Add Replica**.
 
   ![add-replica](./images/add-replica.png)
 
-4. Wait few second until the deployment is created - Status will change from Updating to Active.
+4. Wait few second until the deployment is created - Status will change from Updating to Active.  Any data that was in the originating table (the table created in Lab 2) will be immediately pushed to the newly created replica.  
 
   ![list-replicas](./images/list-replicas-with-new.png)
 
   Click on the link for the `replica` added. It will open a new Tab with the information for the region selected.
 
-5. You can query the table created as we Learned in lab 3. You will have exactly the same data in both region.
+5. You can query the table created as we learned in lab 3. You will have exactly the same data in both regions.
 
-   ![list-replicas](./images/list-replicas-with-new.png)
+   ![ashburn-replica](./images/ashburn-replica-table.png)
 
-6. Modify a row in a region and query in the other region.
+6. Modify a row in a region and query in the other region to verify that the changes got pushed to the other region.
 
 
-## Task 2: Run the Movie Stream Catalog Microservice in the New Region
+## Task 2: Set up the Movie Stream Catalog Microservice in the New Region
 
-Execute the same instructions provided in **Lab 3 - Run the Movie Stream Catalog Microservice** but from the new Region.
+We are going to set up the Movie Stream Microservice in the new region and follow similar steps to what  we used in **Lab 3 - Run the Movie Stream Catalog Microservice.**
+
+1. Let's get back into the Cloud Shell. From the earlier lab, you may have
+minimized it in which case you need to enlarge it. It is possible it may have
+become disconnected and/or timed out. In that case, restart it.
+
+   ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
+
+2. Execute the following environment setup shell script in the Cloud Shell to
+set up your environment. If you close/open the Cloud Shell Console, please re-execute it.
+
+    ```shell
+    <copy>
+    export OCI_obo_token=$(cat $OCI_obo_token_path)
+    source ~/global-microservices-springdata-nosql/env.sh
+    </copy>
+    ```
+    ![Cloud Shell](./images/cloud-shell-result.png)
+
+3. List the installed JDKs using the `csruntimectl java list` command. Select GraalVM for JDK 17 as the current JDK.   
+
+   ```shell
+    <copy>
+    csruntimectl java list
+    </copy>
+    ```
+
+    ```shell
+     <copy>
+     csruntimectl java set graalvmjdk-17
+     </copy>
+     ```
+## Task 3: Start the Movie Stream Catalog Microservice and look at data
+
+1. Use the following maven wrapper command to start the Spring application. Execute in the Cloud Shell.
+
+    ```shell
+    <copy>
+    cd ~/global-microservices-springdata-nosql/code-nosql-spring-sdk/
+    nohup ./mvnw spring-boot:run &
+    </copy>
+    ```
+    **Note:** This will start the "movie" application in the background.
+
+2. After you complete step 1, you can use the command tail to see the startup for the application
+
+    ![appl-running](./images/appl-running.png)
+
+    ```shell
+    <copy>
+    tail nohup.out
+    </copy>
+    ```
+    The `mvnw` command will compile and start the application, please wait for the message *Started DemoApplication in xx seconds*
+
+3. Lets review the data created in the prior Labs. Execute in the Cloud Shell.
+
+    ```shell
+    <copy>
+    curl  http://localhost:8080/api/movie | jq
+    </copy>
+    ```
+
+Adding a new region and standing up the application in that region is a straight forward process.  You could use the same process to extend to even more regions.   You can also use the application to insert new data into your replicated region and look to see that it got properly transmitted to the other region.   
 
 You may now **proceed to the next lab.**
 
@@ -61,4 +124,4 @@ You may now **proceed to the next lab.**
 
 
 ## Acknowledgements
-* **Author** - Dario Vega, Product Manager, NoSQL Product Management
+* **Author** - Dario Vega, Product Manager, NoSQL Product Management, Michael Brey, Director, NoSQL Product Development
