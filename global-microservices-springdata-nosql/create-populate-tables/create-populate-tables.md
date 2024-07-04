@@ -166,7 +166,7 @@ screen. Click **Tables** on top right.
   this JSON document is complex, it is easiest to copy/paste into the field.
   However, you could have typed it all in. You will notice at the end of our INSERT statement
   we have a RETURNING clause.   This clause acts the same way as a SELECT clause and
-  in this case it returns the full row.  Click on **Execute**
+  in this case it returns the full row.  Click on **Execute.**
 
   ![table-row-insert](./images/table-row-insert.png)
 
@@ -206,7 +206,7 @@ screen. Click **Tables** on top right.
 
     ![uplaod-data](./images/upload-data.png)
 
-10. Upload the file `movie-file-kvjson.json` that you download in the step 8 and wait for the download of 50 records. And click in **close** when finished
+10. Upload the file `movie-file-kvjson.json` that you download in the step 8 and wait for the download of 50 records. Click on **close** when finished with the upload.
     ![uplaod-data-screen](./images/upload-data-screen.png)
 
     To summarize, in this Lab you have seen two different ways to insert data into a table.
@@ -214,7 +214,7 @@ screen. Click **Tables** on top right.
 ## Task 4:  Show Data From the Console
 
 Starting with the `Movie` demo table, we can go and look at the data we
-inserted for each of the tables.
+inserted for that table.
 
 1. On the left click **Explore data**
 
@@ -226,8 +226,8 @@ select all the rows from our table. Click **Execute**
 
     ![run-query](./images/run-query.png)
 
-  You will see in the bottom of the screen the row that we inserted.  You will see
-  little arrows pointing either down or to the right.   You can arrows pointing to the
+  You will see in the bottom of the screen the rows that we inserted.  You will see
+  little arrows pointing either down or to the right.   You can click on arrows pointing to the
   right to expand the contents OR click on the ones pointing down to compress the
   contents.
 

@@ -5,15 +5,14 @@
 This lab picks up where lab 3 left off. We are going to explore in more detail
 another possibility to deploy the application - use Container Instances.
 
-Oracle Cloud Infrastructure (OCI) Container Instances is a serverless compute service
+Oracle Cloud Infrastructure (OCI) Container Instances is a server-less compute service
 that enables you to quickly and easily run containers without managing any servers.
-Container Instances runs your containers on serverless compute optimized for container
+Container Instances runs your containers on server-less compute optimized for container
 workloads that provides the same isolation as virtual machines.
 
 Container instances are suitable for containerized workloads that do not require a
 container orchestration platform like Kubernetes. These use cases include: APIs,
-web applications, build and deployment jobs in CI/CD pipelines, automation tasks f
-or cloud operations, data/media processing jobs, development or test environments, and more.
+web applications, build and deployment jobs in CI/CD pipelines, automation tasks for cloud operations, data/media processing jobs, development or test environments, and more.
 
 _Estimated Time:_ 20 minutes
 
@@ -54,11 +53,11 @@ To use them you have to set up a dynamic group and create a policy that grants
 the dynamic group access to a resource.
 We did it for you in **Lab 2 - Task 3: Deploy Infrastructure using Terraform**.
 Take a look at the `policy.tf` file in the following directory `global-microservices-springdata-nosql`.
-    * In this Lab, We will use a container image that we deployed in GitHub Container Registry.
-Take a look to the `Dockerfile` in the following directory `global-microservices-springdata-nosql/code-nosql-spring-sdk`, and [check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/build-and-push-demo-movie-image.yml)
+    * In this Lab, we will use a container image that we deployed in GitHub Container Registry.
+Take a look at the `Dockerfile` in the following directory `global-microservices-springdata-nosql/code-nosql-spring-sdk`, and [check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/build-and-push-demo-movie-image.yml) to review the yml script used to build the container image.
 
     * Note: When deploying using OKE - see Lab 1, you will do the connection using **Instance Principals**. It is not the topic of this workshop but if you
-want to learn more read the `oracle-app-ndcs-deployment.yaml` file in the following directory `global-microservices-springdata-nosql`. [Check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-vod.yml) to learn how to deploy using GitHub Actions.
+want to learn more, then read the `oracle-app-ndcs-deployment.yaml` file in the following directory `global-microservices-springdata-nosql`. [Check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-vod.yml) to learn how to deploy using GitHub Actions.
 
 When you are done looking at code, go ahead and exit from the Code Editor.
 
@@ -85,14 +84,14 @@ set up your environment. Please copy the values for `OCI_REGION` and `OCI_NOSQL_
 ## Task 3: Deploy a Container Instance
 
 
- 1. On left side drop down (left of Oracle Cloud banner), go to Developer Services and then Containers & Artifacts - Container Instances.
+ 1. On left side drop down (under the Oracle Cloud banner), go to Developer Services and then Containers & Artifacts - Container Instances.
 
      ![Open Containers & Artifacts](images/menu-container-instance.png)
 
  2. Click on Create Container Instance. This opens up a new window.
 
    Enter **Creating Scalable, Global Microservices with OCI, Spring Data, and NoSQL** as the name.
-   Other information does not need to be changed for this LiveLab. Click **Next.**
+   Other information does not need to be changed for this LiveLab. Please ensure the compartment is `demonosql.` Click **Next.**
 
      ![Create Container Instance](images/create-container-instance-1.png)
 
@@ -131,7 +130,7 @@ set up your environment. Please copy the values for `OCI_REGION` and `OCI_NOSQL_
     source ~/global-microservices-springdata-nosql/env.sh
     </copy>
     ```
-Set the variable IP_CI with the value copied in the previous section. Execute in the Cloud Shell.
+Set the variable IP_CI with the value copied in Task 3. Execute in the Cloud Shell.
 
     ```shell
     <copy>
@@ -149,7 +148,7 @@ Execute in the Cloud Shell.
     </copy>
     ```
 
-    This will display all the rows in the table currently. You can execute the same queries that we ran in the Lab 4.
+    This will display all the rows in the table currently. You can execute the same queries that we ran in the Lab 3.
 
 Exit out of the Cloud Shell. You may now **proceed to the next lab.**
 
@@ -162,4 +161,4 @@ Exit out of the Cloud Shell. You may now **proceed to the next lab.**
 
 
 ## Acknowledgements
-* **Author** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director, NoSQL Product Development, July 2023
+* **Author** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director, NoSQL Product Development, July 2024
