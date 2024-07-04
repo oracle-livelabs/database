@@ -10,7 +10,7 @@ Building on the strengths of its predecessor, Oracle Database 23ai represents th
 Users of Oracle Database 19c and 21c can directly upgrade to Oracle Database 23ai.
 
 Check out this guide for free access and a hands-on guide to get some experience:
-[Hitchhiker's Guide for Upgrading to Oracle Database 19c & Oracle Database 23ai](https://apexapps.oracle.com/pls/apex/f?p=133:180:110377980096946::::wid:606)
+[Hitchhiker's Guide for Upgrading to Oracle Database 19c & Oracle Database 23ai](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3943)
 
 ## About High Availability New Features
 
@@ -37,6 +37,7 @@ The features listed above are just some of the highlighted MAA features that tie
 * [Maximum Availability Architecture](https://blogs.oracle.com/maa/post/exploring-the-maa-gold-maa-tier-with-oracle-db-23ai#)
 * [Oracle Database Features and Licensing](https://apex.oracle.com/database-features/)
 * [Oracle Database 23ai: Where to Find Information](https://blogs.oracle.com/database/post/oracle-database-23ai-where-to-find-more-information)
+* [Free sandbox to practice upgrading to 23ai!](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3943)
 
 ## Acknowledgements
 * **Author** - Glen Hawkins, Sr. Director of Product Management

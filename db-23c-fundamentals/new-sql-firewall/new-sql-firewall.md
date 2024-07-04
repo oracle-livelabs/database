@@ -20,27 +20,19 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
 1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
     ![click SQL](images/im1.png " ")
 
-2. For this lab we'll need another user - lets create it now. 
-    
-    Notice that I'm giving this user the admin privies on the SQL Firewall role. This is so that we can create an allow lists and enable SQL firewall on the test user without having to switch between users constantly. **This is for demo purposes only.** This is just an example to teach you some high level aspects of SQL Firewall.
+2. For this lab, we'll create two new users, 'TEST', and grant necessary roles including SQL\_FIREWALL\_ADMIN, and DB23AI with developer role.
 
     ```
     <copy>
-    -- USER SQL
-    CREATE USER TEST IDENTIFIED BY Oracle123long;
+    -- Create USER SQL
+    CREATE USER TEST IDENTIFIED BY Oracledb_4U#;
 
-    -- ADD ROLES
+    -- Grant roles
     GRANT CONNECT TO TEST;
-    GRANT DB_DEVELOPER_ROLE TO TEST;
     GRANT RESOURCE TO TEST;
-    GRANT SQL_FIREWALL_ADMIN TO TEST;
-    GRANT SQL_FIREWALL_VIEWER TO TEST;
-    GRANT DB_DEVELOPER_ROLE TO TEST WITH ADMIN OPTION;
     GRANT SQL_FIREWALL_ADMIN TO TEST WITH ADMIN OPTION;
-    GRANT SQL_FIREWALL_VIEWER TO TEST WITH ADMIN OPTION;
 
-
-    -- REST ENABLE
+    -- Enable REST
     BEGIN
         ORDS_ADMIN.ENABLE_SCHEMA(
             p_enabled => TRUE,
@@ -49,7 +41,8 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
             p_url_mapping_pattern => 'TEST',
             p_auto_rest_auth=> TRUE
         );
-        -- ENABLE DATA SHARING
+
+        -- Enable data sharing
         C##ADP$SERVICE.DBMS_SHARE.ENABLE_SCHEMA(
                 SCHEMA_NAME => 'TEST',
                 ENABLED => TRUE
@@ -58,81 +51,79 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     END;
     /
 
-    -- QUOTA
+    -- Set quota
     ALTER USER TEST QUOTA 100M ON DATA;
+
     </copy>
     ```
-    ![create the user](images/im2.png " ")
+    Don't forget the second user!
+
+    ```
+    <copy>
+    -- USER SQL
+    CREATE USER DB23AI IDENTIFIED BY Oracledb_4U#;
+
+    -- ADD ROLES
+    GRANT CONNECT TO DB23AI;
+    GRANT DB_DEVELOPER_ROLE TO DB23AI;
+    GRANT RESOURCE TO DB23AI;
+
+    -- REST ENABLE
+    BEGIN
+        ORDS_ADMIN.ENABLE_SCHEMA(
+            p_enabled => TRUE,
+            p_schema => 'DB23AI',
+            p_url_mapping_type => 'BASE_PATH',
+            p_url_mapping_pattern => 'db23ai',
+            p_auto_rest_auth=> TRUE
+        );
+        -- ENABLE DATA SHARING
+        C##ADP$SERVICE.DBMS_SHARE.ENABLE_SCHEMA(
+                SCHEMA_NAME => 'DB23AI',
+                ENABLED => TRUE
+        );
+        commit;
+    END;
+    /
+
+    -- QUOTA
+    ALTER USER DB23AI QUOTA UNLIMITED ON DATA;
 
 
-3. Now click the hamburger menu on Database actions and select Database Users.
-    ![look for database actions](images/im3.png " ")
-
-4. Scroll down to find the test user and launch the Database Actions page by clicking the the **Open URL in a new tab** button as shown below.
-
-    ![create table](images/im4.png " ")
-
-5. Sign in to the test user we created. 
-    * Username is Test 
-    * Password is Oracle123long
-
-    ![create table](images/im5.png " ")
-
-6. Click the Hamburger menu and select SQL. See the picture below. 
-
-    ![create table](images/im6.png " ")
+    </copy>
+    ```
+    ![create the uses](images/im2.png " ")
 
 
-7. Typically you would not enable SQL Firewall roles for yourself as the same user. This is just for demo purposes to avoid switching back and forth between users. 
-    
-    Enable the SQL Firewall using the following PL/SQL command:
+3. Sign out of the admin user and sign in as the test user
 
+    ![database actions](images/im21.png " ")
+
+4. Sign in to the TEST user using credentials:
+    - Username: Test
+    - Password: Oracledb_4U#
+
+    ![sign in](images/im5.png " ")
+
+5. Click the Hamburger menu, select SQL.
+
+    ![select SQL](images/im6.png " ")
+
+6. Enable SQL Firewall for the TEST user using the PL/SQL command:
     ```
     <copy>
     EXEC DBMS_SQL_FIREWALL.ENABLE;
     </copy>
     ```
-    ![create table](images/im7.png " ")
+    ![enable SQL Firewall](images/im7.png " ")
 
-8. Lets create some users and data first. Run the SQL as a **Script**
-
-    ```
-    <copy>
-    DROP TABLE IF EXISTS EMPLOYEES CASCADE CONSTRAINTS;
-    DROP TABLE IF EXISTS DEPARTMENTS CASCADE CONSTRAINTS;
-
-    -- Create a table to store employee data
-    CREATE TABLE employees (
-        employee_id INT,
-        first_name VARCHAR(50),
-        last_name VARCHAR(50),
-        department_id INT
-    );
-
-    -- Create a table to store department data
-    CREATE TABLE departments (
-        department_id INT,
-        department_name VARCHAR(50)
-    );
-
-    -- Insert sample data into the departments table
-    INSERT INTO departments (department_id, department_name)
-    VALUES
-        (1, 'HR'),
-        (2, 'IT'),
-        (3, 'Finance');
-    </copy>
-    ```
-    ![drop table](images/im8.png " ")
-
-9. Enable SQL Firewall to learn and capture the normal SQL traffic of the database users. This involves running SQL commands as the users you wish to protect.
-
+8. Start capturing SQL traffic for the DB23AI user to learn normal activities.
 
     ```
     <copy>
     BEGIN
         DBMS_SQL_FIREWALL.CREATE_CAPTURE(
-            username => 'TEST',
+            username => 'DB23AI',
             top_level_only => FALSE,
             start_capture => TRUE
         );
@@ -140,27 +131,63 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     /
     </copy>
     ```
-    ![alter table](images/im9.png " ")
- 
+    ![start capture](images/im9.png " ")
 
-10. Perform typical SQL operations as the 'HR' user to capture the normal activities. Run the SQL as a **Script**
+9. Now sign out of the test user and back in as the DB23AI user. 
+
+    * the password is Oracledb_4U#
+
+    ![start capture](images/im22.png " ")
+    ![start capture](images/im23.png " ")
+
+10. Select the SQL time and perform typical SQL operations to capture normal activities (e.g., select and insert statements).
+
     ```
     <copy>
-    SELECT * FROM DEPARTMENTS;
-    INSERT INTO employees (employee_id, first_name, last_name, department_id)
-    VALUES (101, 'Alice', 'Brown', 2);
-    COMMIT;
+    DROP TABLE IF EXISTS EMPLOYEES CASCADE CONSTRAINTS;
+    DROP TABLE IF EXISTS DEPARTMENTS CASCADE CONSTRAINTS;
+
+    -- Create employees table
+    CREATE TABLE employees (
+        employee_id INT,
+        first_name VARCHAR(50),
+        last_name VARCHAR(50),
+        department_id INT
+    );
+
+    -- Create departments table
+    CREATE TABLE departments (
+        department_id INT,
+        department_name VARCHAR(50)
+    );
+
+    -- Insert data into departments table
+    INSERT INTO departments (department_id, department_name)
+    VALUES
+        (1, 'HR'),
+        (2, 'IT'),
+        (3, 'Finance');
     </copy>
     ```
-    ![alter table](images/im10.png " ")
+    ![perform SQL operations](images/im8.png " ")
 
-11. We'll go ahead and stop the capture now. Normally you would stop capturing once all activities are recorded.
+11. Log back in as the TEST user
+
+    * the password is Oracledb_4U#
+
+    ![perform SQL operations](images/im24.png " ")
+    ![perform SQL operations](images/im5.png " ")
+
+
+10. Click the SQL tile and stop the capture once all relevant activities are recorded.
+
     ```
     <copy>
-    exec DBMS_SQL_FIREWALL.STOP_CAPTURE('TEST');
+    EXEC DBMS_SQL_FIREWALL.STOP_CAPTURE('DB23AI');
     </copy>
     ```
-    ![alter table](images/im11.png " ")
+    ![stop capture](images/im11.png " ")
+
 
 ## Task 2: Reviewing Captured Data
 
@@ -170,64 +197,64 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     <copy>
     SELECT sql_text
     FROM DBA_SQL_FIREWALL_CAPTURE_LOGS
-    WHERE username = 'TEST';
+    WHERE username = 'DB23AI';
     </copy>
     ```
-    ![create table](images/im12.png " ")
+    ![review capture logs](images/im12.png " ")
 
-2. First lets check the allow list. It will be empty.
+2. Check the allow list, which will initially be empty.
 
     ```
     <copy>
     SELECT sql_text
     FROM DBA_SQL_FIREWALL_ALLOWED_SQL
-    WHERE username = 'TEST';
+    WHERE username = 'DB23AI';
     </copy>
     ```
-    ![create table](images/im13.png " ")
+    ![check allow list](images/im13.png " ")
 
 3. For this small demo, we'll turn our capture logs into our allow list. This is where you'd want to customize it yourself in a production system.
+    ```
+    <copy>
+    EXEC DBMS_SQL_FIREWALL.GENERATE_ALLOW_LIST('DB23AI');
+    </copy>
+    ```
+    ![generate allow list](images/im14.png " ")
+
+4.  Now we can enable SQL firewall so only SQL from our allow list can hit the database. 
 
     ```
     <copy>
-    exec DBMS_SQL_FIREWALL.GENERATE_ALLOW_LIST('TEST');
+    EXEC DBMS_SQL_FIREWALL.ENABLE_ALLOW_LIST(username=>'DB23AI', enforce=>DBMS_SQL_FIREWALL.ENFORCE_SQL, block=>TRUE);
     </copy>
     ```
-    ![create table](images/im14.png " ")
+    ![enable allow list](images/im15.png " ")
 
-4. Again, typically you would not enable SQL Firewall for yourself as that user. This is just for demo purposes to keep from switching back and forth between users constantly. 
-    
-    Now we can enable SQL firewall so only SQL from our allow list can hit the database. 
+5. Now sign out of the test user and back in as the DB23AI user. 
+
+    * the password is Oracledb_4U#
+
+    ![start capture](images/im22.png " ")
+    ![start capture](images/im23.png " ")
+
+6. Click the SQL tile again and attempt to execute a statement not in the allow list to verify SQL Firewall enforcement. Notice we get a SQL Firewall Violation error.
 
     ```
     <copy>
-    exec DBMS_SQL_FIREWALL.ENABLE_ALLOW_LIST(username=>'TEST', enforce=>DBMS_SQL_FIREWALL.ENFORCE_SQL, block=>TRUE);
+    SELECT * FROM DEPARTMENTS;
     </copy>
     ```
-    ![create table](images/im15.png " ")
-
-5. Now we can try and select a statement not in our allow list. We will get **SQL Firewall violation**
-
-    ```
-    <copy>
-    select * from departments;
-    </copy>
-    ```
-    ![create table](images/im16.png " ")
+    ![SQL Firewall violation](images/im16.png " ")
 
 ## Task 3: Clean up
 
 1. Sign back in with the **admin** user. 
 
-    This is the password you used to create autonomous database. If you cant remember your password navigate to the Autonomous Database home page, **click** Database action and then **click** SQL.
-
-    ![click SQL](images/im20.png " ")
-
-    If you cant remember your password navigate to the Autonomous Database home page, **click** Database action and then **click** SQL.
+    This is the password you used to create autonomous database. If you've forgotten your password navigate to the Autonomous Database home page, **click** Database actions and then **click** SQL.
 
     ![click SQL](images/im1.png " ")
 
-2. We'll kill any active session created by our TEST user and then drop the user.
+2. Terminate any active sessions created by the TEST user and drop the user.
 
     ```
     <copy>
@@ -236,33 +263,36 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
         EXECUTE IMMEDIATE 'ALTER SYSTEM KILL SESSION ''' || session.SID || ',' || session.SERIAL# || ''' IMMEDIATE';
     END LOOP;
     END;
+    /
+
+    BEGIN
+    FOR session IN (SELECT SID, SERIAL# FROM V$SESSION WHERE USERNAME = 'DB23AI') LOOP
+        EXECUTE IMMEDIATE 'ALTER SYSTEM KILL SESSION ''' || session.SID || ',' || session.SERIAL# || ''' IMMEDIATE';
+    END LOOP;
+    END;
+
     </copy>
     ```
-    ![create table](images/im17.png " ")
+    ![terminate sessions](images/im17.png " ")
 
-3. Now click the hamburger menu on Database actions and select Database Users.
-    ![look for database actions](images/im3.png " ")
+3. Now drop both users
 
-4. We can do this with the Database Actions user management page. 
-    
-    Click on the hamburger menu in the top left of the screen, scroll down and click the three dots by the `TEST` user and select **delete**. See the picture below.
-
-    ![create table](images/im18.png " ")
-
-
-5. Enable both sliders and drop the user.
-
-    ![create table](images/im19.png " ")
+    ```
+    <copy>
+    DROP USER TEST CASCADE;
+    DROP USER DB23AI CASCADE;
+    </copy>
+    ```
 
 You may now **proceed to the next lab** 
 
-
 ## Learn More
 
-* [SQL Firewall documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/dbseg/using-oracle-sql-firewall.html#GUID-AFC076FE-7E96-464D-B634-593902CB4179)
+* [SQL Firewall Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/dbseg/using-oracle-sql-firewall.html#GUID-AFC076FE-7E96-464D-B634-593902CB4179)
 * [SQL Firewall LiveLab](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3875)
 
 ## Acknowledgements
+
 * **Author** - Killian Lynch, Database Product Management
 * **Contributors** - Dom Giles, Distinguished Database Product Manager
 * **Last Updated By/Date** - Killian Lynch, April 2024
