@@ -2,18 +2,18 @@
 
 ## Introduction
 
-Welcome to the Reclaiming Unused Space in Oracle Database 23ai with `shrink_tablespace` lab. In this lab, you will learn about the new `shrink_tablespace` procedure introduced in Oracle Database 23ai. This procedure offers a simple way to reclaim unused or free space in your tablespace, optimizing database performance and resource utilization.
+Welcome to the Reclaiming Unused Space in Oracle Database 23ai with `shrink_tablespace` lab. In this lab, you will learn about the new `shrink_tablespace` procedure introduced in Oracle Database 23ai. This procedure offers a simple way to reclaim unused or free space in your tablespace, optimizing database performance and resource use.
 
 Estimated Lab Time: 15 minutes
 
 ### Objective:
-The objective of this lab is to familiarize you with the `shrink_tablespace` procedure in Oracle Database 23ai and show its practical application for reclaiming unused space in tablespaces. By the end of this lab, you will be able to resize data files and organize objects in tablespaces using the `shrink_tablespace` procedure.
+The objective of this lab is to show you the `shrink_tablespace` procedure in Oracle Database 23ai and show its practical application for reclaiming unused space in tablespaces. By the end of this lab, you will be able to resize data files and organize objects in tablespaces using the `shrink_tablespace` procedure.
 
 ### Prerequisites:
 - Access to Oracle Database 23ai.
 - Basic understanding of Oracle SQL and database management concepts.
 
-## Task 1: Understanding the need for tablespaces shrinkage
+## Task 1: Understanding the need for tablespace shrinkage
 
 1. Before we jump into the process of using the `shrink_tablespace` procedure, let's understand why reclaiming unused space in tablespaces is important.
 
@@ -25,12 +25,12 @@ The objective of this lab is to familiarize you with the `shrink_tablespace` pro
 
 2. Now, let's explore how to use the `shrink_tablespace` procedure to reclaim unused space in a tablespace.
 
-    To begin, lets first check our current tablespace size.
+    To begin, let's first check our current tablespace size.
 
-    > Your tablespace size may be different depending on what prior labs you've done, thats okay.
+    > Your tablespace size may be different depending on what prior labs you've done, that's okay.
 
     ```
-    <copy>
+    <copy>    
     SELECT tablespace_name,
         ROUND(SUM(bytes) / 1024 / 1024 / 1024, 2) AS "Size_GB"
     FROM dba_data_files
@@ -40,10 +40,14 @@ The objective of this lab is to familiarize you with the `shrink_tablespace` pro
     ```
     ![calculate your tablespace size](images/im1.png " ")
 
-2. We can create a new tablespace and populate it with data. You can use the following SQL statement as an example:
+2. We can create a new table and populate it with data. You can use the following SQL statement as an example:
 
     ```
     <copy>
+
+    drop table if exists my_table purge;
+
+
     CREATE TABLE my_table (
         id NUMBER,
         name VARCHAR2(100),
@@ -82,7 +86,8 @@ The objective of this lab is to familiarize you with the `shrink_tablespace` pro
     ![create some data](images/im4.png " ")
 
 ## Task 2: Delete data to create unused space
-1. Lets check the current size of our tablespace after adding a bunch of data from above.
+
+1. Let's check the current size of our tablespace after adding a bunch of data from above.
 
     ```
     <copy>
@@ -95,7 +100,7 @@ The objective of this lab is to familiarize you with the `shrink_tablespace` pro
     ```
     ![check the tablespace size after adding data](images/im5.png " ")
 
-    We've got about 2 gigs worth of data in our tablespace now. Yours may be different, thats okay.
+    We've got about 2 gigs worth of data in our tablespace now. Yours may be different, that's okay.
 
 2. Delete some data from the tablespace to create unused or free space. This can be achieved by deleting tables or indexes, creating 'holes' in the tablespace. Here we'll drop the whole table.
     ```

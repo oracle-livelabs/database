@@ -1,0 +1,43 @@
+{
+    "workshoptitle": "AI Chatbot engine with Oracle Database 23ai and OCI Generative AI Services",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Introduction to the workshop and the labs that follow",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Get Started with NoVNC",
+            "description": "Verify Setup of compute instance",
+            "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+        },
+        {
+            "title": "Lab 1: Setup the development environment",
+            "description": "Setup the dev environment",
+            "type": "livelabs",
+            "filename": "../../setup-livelabs/setup-livelabs.md"
+        },
+        {
+            "title": "Lab 1: Generate vector embeddings",
+            "description": "Vectorize a text FAQ file",
+            "type": "livelabs",
+            "filename": "../../vectorization/vectorization.md"
+        },
+        {
+            "title": "Lab 2: Vector retrieval and Large Language Model generation",
+            "description": "Vector rerieval and LLM generation",
+            "filename": "../../search+llm/search+llm.md"
+        },
+        {
+            "title": "Lab 3: Next steps",
+            "description": "Next steps",
+            "filename": "../../next-steps/next-steps.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

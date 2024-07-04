@@ -13,14 +13,17 @@ This lab will focus on AI Vector search at a very high level. If you're looking 
 Estimated Lab Time: 20 minutes
 
 ### Objective:
-n this lab, you will explore the new vector data type introduced in Oracle Database 23ai. You will create a vector table and perform basic DDL operations on the vectors. You will also learn about similarity search and how it relates to vectors, as well as use some of the new AI focused SQL functions in the database.
+In this lab, you will explore the new vector data type introduced in Oracle Database 23ai. You will create a vector table and perform basic DDL operations on the vectors. You will also learn about similarity search and how it relates to vectors, as well as use some of the new AI focused SQL functions in the database.
 
 ### Prerequisites:
 - Access to Oracle Database 23ai environment.
 - Basic understanding of SQL and PL/SQL.
 
 ## Task 1: Creating a vector table
-1. The first thing we'll do is create a table with the new vector data type.
+1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
+    ![click SQL](images/im1.png " ")
+
+2. The first thing we'll do is create a table with the new vector data type.
 
     ```
     <copy>
@@ -141,7 +144,7 @@ n this lab, you will explore the new vector data type introduced in Oracle Datab
     insert into vector_table_2 values (4, '[1, 0, 1, 0]');
     </copy>
     ```
-    ![insert into the table](images/vec5.png " ")
+    ![insert into the table](images/vec6.png " ")
 
     By defining the number of dimensions, we are effetely creating a check constraint.
 
@@ -237,7 +240,7 @@ n this lab, you will explore the new vector data type introduced in Oracle Datab
     </copy>
     ```
 
-7. let's insert our simple example vectors.
+7. Let's insert our simple example vectors.
 
     ```
     <copy>
@@ -268,7 +271,7 @@ n this lab, you will explore the new vector data type introduced in Oracle Datab
     ```
     ![show distance of table](images/vec10.png " ")
 
-9. What if we moved this? Find the closest to the vector (1, -3). 
+9. What if we moved this? Find which three are closest to the vector (1, -3). 
 
     ![show graph of table](images/image3.png " ")
 
@@ -354,6 +357,9 @@ You may now **proceed to the next lab**
 
 * [AI Vector Search User Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/oracle-ai-vector-search-users-guide.pdf)
 * [23ai Release notes](https://docs.oracle.com/en/database/oracle/oracle-database/23/rnrdm/index.html)
+* [7 Easy Steps to Building a RAG Application using LangChain](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3927&clear=RR,180&session=1859311324732)
+* [Using Vector Embedding Models with Python](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3928&clear=RR,180&session=1859311324732)
+* [Using Vector Embedding Models with Nodejs](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3926&clear=RR,180&session=1859311324732)
 
 ## Acknowledgements
 * **Author** - Killian Lynch, Database Product Management
