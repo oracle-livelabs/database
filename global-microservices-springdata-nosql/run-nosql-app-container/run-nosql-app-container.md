@@ -1,4 +1,4 @@
-# Deploy the Movie Stream Catalog Microservice using Container Instances
+# Deploy the Movie Stream Catalog Microservice with Container Instances
 
 ## Introduction
 
@@ -57,7 +57,7 @@ Take a look at the `policy.tf` file in the following directory `global-microserv
 Take a look at the `Dockerfile` in the following directory `global-microservices-springdata-nosql/code-nosql-spring-sdk`, and [check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/build-and-push-demo-movie-image.yml) to review the yml script used to build the container image.
 
     * Note: When deploying using OKE - see Lab 1, you will do the connection using **Instance Principals**. It is not the topic of this workshop but if you
-want to learn more, then read the `oracle-app-ndcs-deployment.yaml` file in the following directory `global-microservices-springdata-nosql`. [Check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-vod.yml) to learn how to deploy using GitHub Actions.
+want to learn more, then read the `oracle-app-ndcs-deployment.yaml` file in the following directory `global-microservices-springdata-nosql`. [Check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-movie.yml) to learn how to deploy using GitHub Actions.
 
 When you are done looking at code, go ahead and exit from the Code Editor.
 

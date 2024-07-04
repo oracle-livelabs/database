@@ -51,9 +51,7 @@ The list of replicas already created in the table is listed. In our case, the li
 
 We are going to set up the Movie Stream Microservice in the new region and follow similar steps to what  we used in **Lab 3 - Run the Movie Stream Catalog Microservice.**
 
-1. Let's get back into the Cloud Shell. From the earlier lab, you may have
-minimized it in which case you need to enlarge it. It is possible it may have
-become disconnected and/or timed out. In that case, restart it.
+1. Let's get back into the Cloud Shell. We will execute in the tab on the remote region.
 
    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
@@ -70,17 +68,18 @@ set up your environment. If you close/open the Cloud Shell Console, please re-ex
 
 3. List the installed JDKs using the `csruntimectl java list` command. Select GraalVM for JDK 17 as the current JDK.   
 
-   ```shell
-    <copy>
-    csruntimectl java list
-    </copy>
-    ```
+     ```shell
+      <copy>
+      csruntimectl java list
+      </copy>
+      ```
 
     ```shell
      <copy>
      csruntimectl java set graalvmjdk-17
      </copy>
      ```
+
 ## Task 3: Start the Movie Stream Catalog Microservice and look at data
 
 1. Use the following maven wrapper command to start the Spring application. Execute in the Cloud Shell.
@@ -112,7 +111,41 @@ set up your environment. If you close/open the Cloud Shell Console, please re-ex
     </copy>
     ```
 
+4. Stop the application and delete temporary files
+
+    execute the linux command `fg` followed by CTRL-C and enter to stop the application.
+    ```shell
+    <copy>
+    fg
+    </copy>
+    ```
+    NB: you can rexecute the command `fg` to validate that there are not jobs running in background.
+
+    Delete the temporary files created.
+    ```shell
+    <copy>
+    rm nohup.out result-test.txt
+    </copy>
+    ```
+
+5. Close the tab for the remote region.
+
+
 Adding a new region and standing up the application in that region is a straight forward process.  You could use the same process to extend to even more regions.   You can also use the application to insert new data into your replicated region and look to see that it got properly transmitted to the other region.   
+
+## Task 4: Delete a remote region
+
+
+This task deletes the resources that got created.
+
+1. From the hamburger menu, click Databases. Under Oracle NoSQL Databases, click Tables. Click the Movie table. Under Resources, click Replicas.
+The list of replicas already created in the table is listed. Click on delete
+
+  ![Delete Region](./images/delete-region-table.png)
+
+  Deleting tables is an async operation, the status will get changed to deleting. Wait for the end of this operation.
+
+
 
 You may now **proceed to the next lab.**
 

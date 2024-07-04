@@ -3,7 +3,7 @@
 ## About this Workshop
 
 Welcome to the server-less world where provisioning instances is a thing of the past.
-Oracle NoSQL Database Cloud Cervice enables modern application development in mere minutes.
+Oracle NoSQL Database Cloud Service enables modern application development in mere minutes.
 
 **Simply connect and go.**
 
@@ -38,11 +38,10 @@ As a developer, you can connect to NDCS and work with NoSQL tables using the NoS
 ### Objectives
 
 In this workshop you will:
-  * Work with a live demo application
   * Set up your environment
   * Create a table with provisioned reads/sec, writes/sec, and GB storage and write data to the table and read data from the table
   * Develop a NoSQL Application using Oracle NoSQL Database SDK for Spring Data
-  * Deploy this application as a *containerized application* using OCI service
+  * Deploy this application as a *containerized application* using OCI services
   * Set up Global Active Table for your application
 
 ### Prerequisites
@@ -79,7 +78,7 @@ This workshop assumes you have:
 
     * Oracle Cloud Infrastructure Container Engine for Kubernetes is a fully-managed, scalable, and highly available service that you can use to deploy your containerized applications to the cloud. Use Container Engine for Kubernetes (sometimes abbreviated to just OKE) when your development team wants to reliably build, deploy, and manage cloud-native applications. You specify whether to run applications on virtual nodes or managed nodes, and Container Engine for Kubernetes provisions them on Oracle Cloud Infrastructure in an existing OCI tenancy. The live running application was deployed using OKE.
 
-        * In this Live Lab, we will use Oracle Cloud Infrastructure (OCI) Container Instances because we do not need the full orchestration platform and the Kubernetes platform takes 10 minutes to setup. OCI Container Instances is a server-less compute service that enables you to quickly and easily run containers without managing any servers. Container Instances runs your containers on server-less compute optimized for container workloads that provides the same isolation as virtual machines. Container instances are suitable for containerized workloads that do not require a container orchestration platform like Kubernetes. These use cases include: APIs, web applications, build and deployment jobs in CI/CD pipelines, automation tasks f or cloud operations, data/media processing jobs, development or test environments, and more.
+        * In this Live Lab, we will use Oracle Cloud Infrastructure (OCI) Container Instances because we do not need the full orchestration platform and the Kubernetes platform takes 10 minutes to setup. OCI Container Instances is a server-less compute service that enables you to quickly and easily run containers without managing any servers. Container Instances runs your containers on server-less compute optimized for container workloads that provides the same isolation as virtual machines. Container instances are suitable for containerized workloads that do not require a container orchestration platform like Kubernetes. These use cases include: APIs, web applications, build and deployment jobs in CI/CD pipelines, automation tasks for cloud operations, data/media processing jobs, development or test environments, and more.
 
 
     * Oracle NoSQL Database Cloud Service is a sever-less database cloud service that is designed for database operations that require predictable, single-digit millisecond latency responses to simple queries. NoSQL Database Cloud Service allows developers to focus on application development rather than setting up cluster servers, or performing system monitoring, tuning, diagnosing, and scaling.
