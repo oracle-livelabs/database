@@ -283,7 +283,7 @@ You may now *proceed to the next lab*.
 
 * Oracle recommends using a shared NFS drive to share the M5 script and corresponding files, logs, and backups between the source and target hosts. If a shared NFS drive is not possible, you must copy the directory from source to target after each backup.
 
-## Acknowledgements
+## Acknowledgments
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa

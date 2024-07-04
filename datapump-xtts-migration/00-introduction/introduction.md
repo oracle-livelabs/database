@@ -27,7 +27,7 @@ You can switch between environments using the shortcuts shown in the last column
 
 ![Overview of the Oracle Homes and databases in the lab](./images/introduction-overview.png " ")
 
-This lab uses only the *FTEX* and *CDB23* databases.
+This lab uses only the *FTEX* and *CDB23* databases. You will create a new PDB, *VIOLET*, in *CDB23*. 
 
 The diagram shows the different phases of the migration.
 

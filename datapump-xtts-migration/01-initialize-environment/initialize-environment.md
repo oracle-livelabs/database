@@ -87,7 +87,7 @@ In this lab, you will:
 
 You may now *proceed to the next lab*.
 
-## Acknowledgements
+## Acknowledgments
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa

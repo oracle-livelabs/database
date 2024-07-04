@@ -905,7 +905,7 @@ In a real migration, you would shut down the applications using the database. Al
 
 You may now *proceed to the next lab*.
 
-## Acknowledgements
+## Acknowledgments
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa

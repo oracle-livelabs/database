@@ -360,7 +360,7 @@ You may now *proceed to the next lab*.
 
 In a real migration, you would run incremental backup/restore cycles at regular intervals. In the days before the migration, you perhaps do one every day, whereas, on the final day, you run them more often. Ideally, you would complete an incremental backup/restore cycle very close to the start of the downtime window.
 
-## Acknowledgements
+## Acknowledgments
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa

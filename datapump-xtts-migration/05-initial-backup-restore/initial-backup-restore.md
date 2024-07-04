@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Now, it's time to start the migration. First, you take a level 0 backup that you restore in the target database. Although the migration har started, there is no downtime yet. The initial level 0 backup is taken without downtime.
+Now, it's time to start the migration. First, you take a level 0 backup that you restore in the target database. Although the migration has started, there is no downtime yet. The initial level 0 backup is taken without downtime.
 
 Estimated Time: 10 Minutes.
 
@@ -300,11 +300,11 @@ In this lab, you will:
 
 You may now *proceed to the next lab*.
 
-## Additional information
+## Further information
 
-In a real migration, if you are worried about the load on the source database, and if you use Data Guard, you can perform the backups from a standby database. Such configuraiton is out of scope for this exercise. 
+In a real migration, if you are worried about the load on the source database, and if you use Data Guard, you can perform the backups from a standby database. Such configuration is out of scope for this exercise. 
 
-## Acknowledgements
+## Acknowledgments
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa

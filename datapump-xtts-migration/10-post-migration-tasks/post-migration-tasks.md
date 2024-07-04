@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Now, you have migrated the database. Before going live, there are a few important tasks to carry out, plus you shold test the new database. 
+Now, you have migrated the database. Before going live, there are a few important tasks to carry out, plus you should test the new database. 
 
 Estimated Time: 10 Minutes.
 
@@ -31,8 +31,8 @@ In this lab, you will:
     ```
     <copy>
     alter session set container=violet;
-    exec dbms_stats.gather_schema_stats('SYS');
-    exec dbms_stats.gather_schema_stats('SYSTEM');
+    exec dbms_stats.gather_schema_stats(ownname=>'SYS', degree=>DBMS_STATS.AUTO_DEGREE);
+    exec dbms_stats.gather_schema_stats(ownname=>'SYSTEM', degree=>DBMS_STATS.AUTO_DEGREE);
     </copy>
     ```
 
@@ -43,11 +43,11 @@ In this lab, you will:
 
     Session altered.
 
-    SQL> exec dbms_stats.gather_schema_stats('SYS');
+    SQL> exec dbms_stats.gather_schema_stats(ownname=>'SYS', degree=>DBMS_STATS.AUTO_DEGREE);
 
     PL/SQL procedure successfully completed.
 
-    SQL> exec dbms_stats.gather_schema_stats('SYSTEM');
+    SQL> exec dbms_stats.gather_schema_stats(ownname=>'SYSTEM', degree=>DBMS_STATS.AUTO_DEGREE);
 
     PL/SQL procedure successfully completed.
     ```
@@ -57,7 +57,13 @@ In this lab, you will:
 
     ```
     <copy>
-    exec dbms_stats.gather_table_stats('OPT_STAT_TRANSPORT', 'OPT_STATS_STG');
+    begin
+       dbms_stats.gather_table_stats(
+          ownname => 'OPT_STAT_TRANSPORT', 
+          tabname => 'OPT_STATS_STG', 
+          degree  => DBMS_STATS.AUTO_DEGREE);
+    end;
+    /
     </copy>
     ```
 
@@ -67,8 +73,15 @@ In this lab, you will:
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> exec dbms_stats.gather_table_stats('OPT_STAT_TRANSPORT', 'OPT_STATS_STG');
-
+    SQL> begin
+        dbms_stats.gather_table_stats(
+            ownname => 'SYS',
+            tabname => 'TAB$',
+            degree  => DBMS_STATS.AUTO_DEGREE);
+    end;
+    /
+      2    3    4    5    6    7
+    
     PL/SQL procedure successfully completed.
     ```
     </details>
@@ -249,7 +262,7 @@ In this step, you would normally perform extensive testing of the new database b
 
 ## Task 3: Additional post-migration tasks
 
-Once the tests complete, you shut down the source database. This ensures noone by mistake connects to the wrong database.
+Once the tests complete, you shut down the source database. This ensures no one by mistake connects to the wrong database.
 
 1. Exit SQL*Plus.
 
@@ -294,7 +307,7 @@ Once the tests complete, you shut down the source database. This ensures noone b
 
 **Congratulations! You have now migrated your Oracle Database to a new platform!**
 
-## Acknowledgements
+## Acknowledgments
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa

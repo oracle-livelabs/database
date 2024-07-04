@@ -134,12 +134,14 @@ While executing an export or import job, Data Pump is querying the data dictiona
 
     ```
     <copy>
-    exec dbms_stats.gather_schema_stats('SYS');
-    exec dbms_stats.gather_schema_stats('SYSTEM');
+    exec dbms_stats.gather_schema_stats(ownname=>'SYS');
+    exec dbms_stats.gather_schema_stats(ownname=>'SYSTEM');
     </copy>
     
     --Be sure to hit RETURN
     ```
+
+    * Optionally, you can add `degree=>DBMS_STATS.AUTO_DEGREE` to gather statistics in parallel. Since the outage hasn't started yet, be careful about putting much load on the source database.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -173,7 +175,7 @@ There are other means of dealing with the statistics than using `DBMS_STATS`. Al
 * YouTube playlist, [Transporting statistics using DBMS_STATS ](https://www.youtube.com/playlist?list=PLIUJ4jBaPQxwrXcRIdc8m8omg1L5ZVX0U)
 * Blog post, [How to Export and Import Statistics Faster Using DBMS_STATS in Parallel](https://dohdatabase.com/2023/12/18/how-to-export-and-import-statistics-faster-using-dbms_stats-in-parallel/)
 
-## Acknowledgements
+## Acknowledgments
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa

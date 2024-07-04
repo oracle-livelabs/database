@@ -300,7 +300,7 @@ Oracle recommends certain changes to the source database. These changes help ens
 
 You may now *proceed to the next lab*.
 
-## Acknowledgements
+## Acknowledgments
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa

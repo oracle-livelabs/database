@@ -62,7 +62,7 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
 
     * The source database `compatible` setting is *19.0.0*.
     * The target database is *23.0.0*, which means the database raises `compatible` setting of the tablespaces on plug-in.
-    * Raising `compatible` as part of a migration is typically not a problem.
+    * Raising `compatible` as part of a migration is typically not a problem, because transportable tablespaces does not allow you to go back to a previous release of Oracle Database.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -76,7 +76,26 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     ```
     </details>  
 
-4. Allocate memory for the streams pool. Just like in the source database, Oracle recommends pre-allocating memory and setting a minimum size of the streams pool. It is used by Advanced Queueing during Data Pump jobs.
+4. Check the size of the streams pool. 
+
+    ```
+    <copy>
+    select value from v$parameter where name='streams_pool_size';
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> select value from v$parameter where name='streams_pool_size';
+    
+    VALUE
+    --------------------
+    0
+    ```
+    </details> 
+
+5. It's currently set to *0* which means there is no minimum size for the streams pool. Just like in the source database, allocate 128 MB of shared memory to the pool. It can still grow beyond that if needed.
 
     ```
     <copy>
@@ -91,7 +110,7 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     
     System altered.
     ```
-    </details>     
+    </details> 
 
 ## Task 2: Create PDB
 
@@ -167,7 +186,6 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     * The source database uses the character set *AL32UTF8*. 
     * Transportable tablespaces require the target database to use the same or compatible character set. 
     * However, Oracle recommends that you use the same character set. That is the safer and easier approach.
-    * In some situations, it is possible to migrate to a different character set, if it is a strict binary superset of the source database. In such a situation, additional considerations come into play.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -250,8 +268,8 @@ A few more changes are needed on the target database. Plus, Oracle has a few rec
 
     ```
     <copy>
-    exec dbms_stats.gather_schema_stats('SYS');
-    exec dbms_stats.gather_schema_stats('SYSTEM');
+    exec dbms_stats.gather_schema_stats(ownname=>'SYS', degree=>DBMS_STATS.AUTO_DEGREE);
+    exec dbms_stats.gather_schema_stats(ownname=>'SYSTEM', degree=>DBMS_STATS.AUTO_DEGREE);
     </copy>
     
     --Be sure to hit RETURN
@@ -260,11 +278,11 @@ A few more changes are needed on the target database. Plus, Oracle has a few rec
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> exec dbms_stats.gather_schema_stats('SYS');
+    SQL> exec dbms_stats.gather_schema_stats(ownname=>'SYS', degree=>DBMS_STATS.AUTO_DEGREE);
 
     PL/SQL procedure successfully completed.
 
-    SQL> exec dbms_stats.gather_schema_stats('SYSTEM');
+    SQL> exec dbms_stats.gather_schema_stats(ownname=>'SYSTEM', degree=>DBMS_STATS.AUTO_DEGREE);
 
     PL/SQL procedure successfully completed.
     ```
@@ -280,7 +298,11 @@ A few more changes are needed on the target database. Plus, Oracle has a few rec
 
 You may now *proceed to the next lab*.
 
-## Acknowledgements
+## Further information
+
+Oracle recommends migrating to the same database character set. In some situations, it is possible to migrate to a different character set, if it is a strict binary superset of the source database. In such a situation, additional considerations come into play. You can review the [documentation](https://docs.oracle.com/en//database/oracle/oracle-database/19/spmds/general-limitations-on-transporting-data.html#GUID-28800719-6CB9-4A71-95DD-4B61AA603173) for details. 
+
+## Acknowledgments
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa

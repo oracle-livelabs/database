@@ -1153,7 +1153,7 @@ You may now *proceed to the next lab*.
 
 During the test, you introduced a short outage on the source database. You changed the tablespaces to read-only mode on the source database while you performed the final backup, including the Data Pump transportable export. If such an outage is unacceptable, you can perform the test backup on a standby database. Thus, you avoid an outage on the primary database.
 
-## Acknowledgements
+## Acknowledgments
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
