@@ -45,7 +45,7 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
 
     BANNER
     --------------------------------------------------------------------------------
-    Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
+    Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - for Oracle Cloud
     ```
     </details>    
 

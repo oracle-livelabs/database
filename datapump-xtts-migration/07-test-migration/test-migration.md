@@ -288,8 +288,8 @@ You will test the migration by performing the final steps of the migration. Howe
     $ cd /home/oracle/m5
     $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1FSCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - Production on Tue Jul 2 19:19:00 2024
-    Version 23.4.0.24.05
+    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud on Tue Jul 2 19:19:00 2024
+    Version 23.4.1.24.06
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
@@ -356,13 +356,13 @@ You will test the migration by performing the final steps of the migration. Howe
     BEFORE_IMP_240702192231      748325 02-JUL-24 07.22.31.000000000 PM		     YES    209715200
     
     
-    Import: Release 23.0.0.0.0 - Production on Tue Jul 2 19:22:32 2024
-    Version 23.4.0.24.05
+    Import: Release 23.0.0.0.0 - for Oracle Cloud on Tue Jul 2 19:22:32 2024
+    Version 23.4.1.24.06
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     Password:
     
-    Connected to: Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
+    Connected to: Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - for Oracle Cloud
     02-JUL-24 19:22:47.147: W-1 Startup on instance 1 took 1 seconds
     02-JUL-24 19:22:49.117: W-1 Master table "SYSTEM"."SYS_IMPORT_TRANSPORTABLE_01" successfully loaded/unloaded
     02-JUL-24 19:22:49.503: Starting "SYSTEM"."SYS_IMPORT_TRANSPORTABLE_01":  system/********@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)    (HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=VIOLET))) parfile=imp_CDB23_240702192231_xtts.par
@@ -1108,8 +1108,8 @@ When the test completes and you reverted the changes, you can resume the backup/
     $ . cdb23
     $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1SCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - Production on Tue Jul 2 19:34:44 2024
-    Version 23.4.0.24.05
+    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud on Tue Jul 2 19:34:44 2024
+    Version 23.4.1.24.06
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     

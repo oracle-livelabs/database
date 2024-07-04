@@ -180,8 +180,8 @@ In this lab, you will:
     ``` text
     $ rman target "sys@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1SCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - Production on Tue Jul 2 19:09:01 2024
-    Version 23.4.0.24.05
+    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud on Tue Jul 2 19:09:01 2024
+    Version 23.4.1.24.06
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
@@ -316,8 +316,8 @@ Let's simulate changes to the source database and see how they affect the backup
     ``` text
     $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1SCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - Production on Tue Jul 2 19:10:56 2024
-    Version 23.4.0.24.05
+    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud on Tue Jul 2 19:10:56 2024
+    Version 23.4.1.24.06
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
