@@ -6,6 +6,8 @@ It's time to complete the migration. You've done all the preparations, but now i
 
 Estimated Time: 20 Minutes.
 
+![Complete the migration](./images/final-backup-restore-overview.png " ")
+
 ### Objectives
 
 In this lab, you will:
@@ -19,7 +21,7 @@ In a real migration, you would shut down the applications using the database. Al
 
 1. The outage starts now.
 
-2. Start the final backup. When you start the driver script with *L1F*, it performs not only the final backup, but it also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. 
+2. Start the final backup. When you start the driver script with *L1F*, it performs not only the final backup, but it also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. When prompted for *system password*, enter *ftexuser*.
 
     ```
     <copy>
@@ -32,7 +34,7 @@ In a real migration, you would shut down the applications using the database. Al
     ```
 
     * You start the driver script with the argument *L1F*.
-    * When prompted for *system password*, enter *ftexuser*. The password of the user you created in a previous lab. 
+    * The *system password* is for the user *ftexuser*. This user is specified in the M5 properties file.
     * Before starting the backup, the script sets the tablespaces read-only. 
     * After the backup, the script starts Data Pump to perform a full transportable export. 
     * The export runs for a few minutes.
@@ -249,8 +251,8 @@ In a real migration, you would shut down the applications using the database. Al
     $ . cdb23
     $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1FSCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - Production on Tue Jul 2 19:44:30 2024
-    Version 23.4.0.24.05
+    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud on Tue Jul 2 19:44:30 2024
+    Version 23.4.1.24.06
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
@@ -276,7 +278,7 @@ In a real migration, you would shut down the applications using the database. Al
 
 ## Task 2: Data Pump import
 
-1. Examine the import driver script. For the Data Pump transportable import, you use the import driver script `impdp.sh`. It's located in the script base folder. Normally, you need to fill in information about your target database, but in this lab it is done for you.
+1. Examine the import driver script. For the Data Pump transportable import, you use the import driver script `impdp.sh`. It's located in the script base folder. *Normally, you need to fill in information about your target database, but in this lab it is done for you*.
 
     ```
     <copy>
@@ -316,7 +318,7 @@ In a real migration, you would shut down the applications using the database. Al
     ```
     </details>
     
-2. Start the import driver script.
+2. Start the import driver script. It *fails*, but informs you to add additional information.
 
     ```
     <copy>
@@ -424,7 +426,7 @@ In a real migration, you would shut down the applications using the database. Al
     ```
     </details>
 
-6. Since you verified the contents of the Data Pump parameter file, you can now start the real import. Re-use the `impdp.sh` command line but switch to *run* mode. 
+6. Since you verified the contents of the Data Pump parameter file, you can now start the real import. Re-use the `impdp.sh` command line but switch to *run* mode. When prompted for a password, enter *oracle*.
 
     ```
     <copy>
@@ -432,7 +434,6 @@ In a real migration, you would shut down the applications using the database. Al
     </copy>
     ```
 
-    * When prompted for a password, enter *oracle*.
     * You connect as *SYSTEM* for the import.
     * The import runs for a minute or so.
 
@@ -451,13 +452,13 @@ In a real migration, you would shut down the applications using the database. Al
     BEFORE_IMP_240702194726      753907 02-JUL-24 07.47.26.000000000 PM		     YES    209715200
     
     
-    Import: Release 23.0.0.0.0 - Production on Tue Jul 2 19:47:26 2024
-    Version 23.4.0.24.05
-    
+    Import: Release 23.0.0.0.0 - for Oracle Cloud on Tue Jul 2 19:47:26 2024
+    Version 23.4.1.24.06
+
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     Password:
     
-    Connected to: Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
+    Connected to: Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - for Oracle Cloud
     02-JUL-24 19:47:32.528: W-1 Startup on instance 1 took 1 seconds
     02-JUL-24 19:47:33.906: W-1 Master table "SYSTEM"."SYS_IMPORT_TRANSPORTABLE_01" successfully loaded/unloaded
     02-JUL-24 19:47:34.307: Starting "SYSTEM"."SYS_IMPORT_TRANSPORTABLE_01":  system/********@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)    (HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=VIOLET))) parfile=imp_CDB23_240702194726_xtts.par

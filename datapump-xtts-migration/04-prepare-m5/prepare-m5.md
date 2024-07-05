@@ -6,6 +6,8 @@ In this lab, you take a first look at the M5 script. The script is available for
 
 Estimated Time: 5 Minutes.
 
+![Configure M5 script](./images/prepare-m5-overview.png " ")
+
 ### Objectives
 
 In this lab, you will:
@@ -15,7 +17,7 @@ In this lab, you will:
 
 ## Task 1: Extract and configure M5 script
 
-In this lab, the source and target database are on the same host. Both hosts access the same directory with the M5 script via a shared NFS drive. In this lab, the source and target database is on the same host, so you have just one directory. 
+In this lab, the source and target database are on the same host. Both hosts access the same directory with the M5 script via a shared NFS drive.
 
 1. Go to *M5* directory and get the M5 migration script. The directory acts as your script base. You have created the directory already in a previous exercise when you created the database directory. Instead of downloading from My Oracle Support, you copy the script to the script base.
 
