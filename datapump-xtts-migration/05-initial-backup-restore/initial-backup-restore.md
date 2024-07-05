@@ -6,6 +6,8 @@ Now, it's time to start the migration. First, you take a level 0 backup that you
 
 Estimated Time: 10 Minutes.
 
+![Start the initial level 0 backup/restore](./images/initial-backup-restore-overview.png " ")
+
 ### Objectives
 
 In this lab, you will:
@@ -233,7 +235,7 @@ In this lab, you will:
     ```
     </details>
 
-3. Set the environment to the target database and start the restore.
+3. Set the environment to the target database and *start the restore*.
 
     ```
     <copy>

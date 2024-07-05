@@ -30,16 +30,23 @@ You will test the migration by performing the final steps of the migration. Howe
 
 1. Outage starts on the source database.
 
-2. Set the environment to the source database and start a level 1 final backup. When you start the driver script with `L1F`, it performs not only the final backup but also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. When prompted for *system password*, enter *ftexuser*.
+2. Set the environment to the source database.
 
     ```
     <copy>
     . ftex
     cd /home/oracle/m5
-    ./dbmig_driver_m5.sh L1F
     </copy>
 
     -- Be sure to hit RETURN
+    ```
+
+3. Start a level 1 final backup. When you start the driver script with `L1F`, it performs not only the final backup but also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. When prompted for *system password*, enter *ftexuser*.
+
+    ```
+    <copy>
+    ./dbmig_driver_m5.sh L1F
+    </copy>
     ```
 
     * You start the driver script with the argument *L1F*.
@@ -50,8 +57,6 @@ You will test the migration by performing the final steps of the migration. Howe
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ . ftex
-    $ cd /home/oracle/m5
     $ ./dbmig_driver_m5.sh L1F
     Properties file found, sourcing.
     LOG and CMD directories found

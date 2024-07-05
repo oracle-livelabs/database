@@ -6,6 +6,8 @@ The next part of the migration is the incremental backups. They built on top of 
 
 Estimated Time: 10 Minutes.
 
+![Start the incremental level 1 backup/restore](./images/incremental-backup-restore-overview.png " ")
+
 ### Objectives
 
 In this lab, you will:
@@ -162,7 +164,7 @@ In this lab, you will:
     ```
     </details>
 
-6. Restore the backup. 
+6. *Restore* the level 1 backup. 
 
     ```
     <copy>

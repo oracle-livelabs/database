@@ -6,6 +6,8 @@ It's time to complete the migration. You've done all the preparations, but now i
 
 Estimated Time: 20 Minutes.
 
+![Complete the migration](./images/final-backup-restore-overview.png " ")
+
 ### Objectives
 
 In this lab, you will:
@@ -276,7 +278,7 @@ In a real migration, you would shut down the applications using the database. Al
 
 ## Task 2: Data Pump import
 
-1. Examine the import driver script. For the Data Pump transportable import, you use the import driver script `impdp.sh`. It's located in the script base folder. Normally, you need to fill in information about your target database, but in this lab it is done for you.
+1. Examine the import driver script. For the Data Pump transportable import, you use the import driver script `impdp.sh`. It's located in the script base folder. *Normally, you need to fill in information about your target database, but in this lab it is done for you*.
 
     ```
     <copy>
@@ -316,7 +318,7 @@ In a real migration, you would shut down the applications using the database. Al
     ```
     </details>
     
-2. Start the import driver script.
+2. Start the import driver script. It *fails*, but informs you to add additional information.
 
     ```
     <copy>
