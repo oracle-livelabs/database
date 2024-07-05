@@ -43,8 +43,8 @@ You will test the migration by performing the final steps of the migration. Howe
     ```
 
     * You start the driver script with the argument *L1F*.
-    * When prompted for *system password*, enter *ftexuser*. The password of the user you created earlier in the lab. The user is specified in the M5 properties file.
-    * Before starting the backup, the script sets the tablespaces read-only. 
+    * The *system password* is for the user *ftexuser*. This user is specified in the M5 properties file.
+    * Before starting the backup, the script sets the tablespaces read-only. This is causing the outage.
     * After the backup, the script starts Data Pump to perform a full transportable export. 
 
     <details>
@@ -313,7 +313,7 @@ You will test the migration by performing the final steps of the migration. Howe
     ```
     </details>
 
-7. Perform the Data Pump transportable import. In the next lab, the instructions will describe in detail what happens. However, for now, just start the import directly.
+7. Perform the Data Pump transportable import. In the next lab, the instructions will describe in detail what happens. However, for now, just start the import directly. When prompted for a password, enter *oracle*.
 
     ```
     <copy>
@@ -328,8 +328,7 @@ You will test the migration by performing the final steps of the migration. Howe
 
     -- Be sure to hit RETURN
     ```
-    
-    * When prompted for a password, enter *oracle*.
+  
     * The import runs as *SYSTEM*.
     * The script starts the import with the Data Pump parameter `TRANSPORTABLE=KEEP_READ_ONLY`. This performs the import but keeps the tablespaces in *read-only* mode. 
     * By keeping the tablespaces in *read-only* mode, your test won't make any changes to the data files.

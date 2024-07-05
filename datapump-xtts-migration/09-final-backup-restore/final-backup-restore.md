@@ -19,7 +19,7 @@ In a real migration, you would shut down the applications using the database. Al
 
 1. The outage starts now.
 
-2. Start the final backup. When you start the driver script with *L1F*, it performs not only the final backup, but it also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. 
+2. Start the final backup. When you start the driver script with *L1F*, it performs not only the final backup, but it also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. When prompted for *system password*, enter *ftexuser*.
 
     ```
     <copy>
@@ -32,7 +32,7 @@ In a real migration, you would shut down the applications using the database. Al
     ```
 
     * You start the driver script with the argument *L1F*.
-    * When prompted for *system password*, enter *ftexuser*. The password of the user you created in a previous lab. 
+    * The *system password* is for the user *ftexuser*. This user is specified in the M5 properties file.
     * Before starting the backup, the script sets the tablespaces read-only. 
     * After the backup, the script starts Data Pump to perform a full transportable export. 
     * The export runs for a few minutes.
@@ -424,7 +424,7 @@ In a real migration, you would shut down the applications using the database. Al
     ```
     </details>
 
-6. Since you verified the contents of the Data Pump parameter file, you can now start the real import. Re-use the `impdp.sh` command line but switch to *run* mode. 
+6. Since you verified the contents of the Data Pump parameter file, you can now start the real import. Re-use the `impdp.sh` command line but switch to *run* mode. When prompted for a password, enter *oracle*.
 
     ```
     <copy>
@@ -432,7 +432,6 @@ In a real migration, you would shut down the applications using the database. Al
     </copy>
     ```
 
-    * When prompted for a password, enter *oracle*.
     * You connect as *SYSTEM* for the import.
     * The import runs for a minute or so.
 
