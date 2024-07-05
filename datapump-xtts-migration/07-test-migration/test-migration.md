@@ -30,7 +30,7 @@ You will test the migration by performing the final steps of the migration. Howe
 
 1. Outage starts on the source database.
 
-2. Set the environment to the source database and start a level 1 final backup. When you start the driver script with `L1F`, it performs not only the final backup but also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. 
+2. Set the environment to the source database and start a level 1 final backup. When you start the driver script with `L1F`, it performs not only the final backup but also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. When prompted for *system password*, enter *ftexuser*.
 
     ```
     <copy>
@@ -43,7 +43,7 @@ You will test the migration by performing the final steps of the migration. Howe
     ```
 
     * You start the driver script with the argument *L1F*.
-    * When prompted for *system password*, enter *ftexuser*. The password of the user you created earlier in the lab. 
+    * When prompted for *system password*, enter *ftexuser*. The password of the user you created earlier in the lab. The user is specified in the M5 properties file.
     * Before starting the backup, the script sets the tablespaces read-only. 
     * After the backup, the script starts Data Pump to perform a full transportable export. 
 
