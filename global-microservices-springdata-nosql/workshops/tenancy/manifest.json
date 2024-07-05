@@ -1,6 +1,6 @@
 {
 	"workshoptitle": "Create Scalable, Global Microservices with OCI, Spring Data, and NoSQL",
-	"help": "livelabs-help-nosql_us@oracle.com",
+	"help": "livelabs-help-db_us@oracle.com",
 	"tutorials": [
 		{
 			"title": "Introduction",

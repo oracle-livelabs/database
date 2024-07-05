@@ -28,8 +28,11 @@ In this task we will review the code using OCI Code Editor.
 
     ![Cloud Editor](./images/cloud-code-editor.png)
 
+2. Click on the Explorer button of OCI Code Editor.
 
-2. Go to the Code Editor, and open the file `AppConfig.java` in the following directory
+    ![Expand Cloud Editor](./images/cloud-code-editor-expand.png)
+
+3. Go to the Code Editor, and open the file `AppConfig.java` in the following directory
 `global-microservices-springdata-nosql/code-nosql-spring-sdk/src/main/java/com/oracle/nosql/springdatarestnosql` as shown in the screen-shot:
 
     ![Code createNoSQLClient](./images/appl-code-connection.png)
@@ -66,7 +69,7 @@ want to learn more [check here.](https://github.com/oracle/nosql-examples/blob/m
 
     ![Code createTable](./images/appl-properties.png)
 
-3. When you create a table, you can choose between **Provisioned Capacity** and
+4. When you create a table, you can choose between **Provisioned Capacity** and
 **On-Demand Capacity**. With the availability of both models, businesses have total flexibility when
 choosing the most cost-effective deployment to meet their business and application
 workload requirements. Such flexibility empowers businesses to solely focus on application
@@ -101,7 +104,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
   Finally, the table name is the entity class name but you can overwrite using the attribute `tableName` in the `NosqlTable` Annotation.
 
 
-4. The entity class that is used for persistence is discoverable by the Spring Data Framework either via annotation or inheritance.
+5. The entity class that is used for persistence is discoverable by the Spring Data Framework either via annotation or inheritance.
   The *NosqlRepository* interface allows you to inherit and create an interface for each entity that will use the Oracle NoSQL Database for persistence.
   The *NosqlRepository* interface extends Spring's PagingAndSortingRepository interface that provides many methods that define queries.
   In addition to those methods that are provided by the *NosqlRepository* interface, you can add methods to your repository interface

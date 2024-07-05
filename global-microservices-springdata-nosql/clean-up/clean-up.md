@@ -77,6 +77,21 @@ Click on the Test table, which will bring up the table details screen.  Hit Dele
 
     ![Delete Stack](./images/destroy-stack-2.png)
 
+## Task 4: Delete the compartment created
+
+1. Remove the 'demonosql' compartment. From upper left hand menu, go to **Identity and Security** then **Compartments** under 'Identity.'
+
+    ![Delete Compartment](https://oracle-livelabs.github.io/common/images/console/id-compartment.png)
+
+2. The 'Compartments' screen appears and click **demonosql**
+
+    ![Select demo NoSQL table](./images/select-demonosql.png)
+
+3. Press the **Delete** button. This will fire off a job that runs asynchronously. It takes a while.
+
+    ![Delete NoSQL Table](./images/delete-demonosql.png)
+
+
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management and Michael Brey, Director, NoSQL Product Development
 * **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, Michael Brey, Director, NoSQL Product Development July 2024
