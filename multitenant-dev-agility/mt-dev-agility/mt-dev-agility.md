@@ -93,10 +93,9 @@ In this first task, you will create and explore a new pluggable database **HRAPP
     ```
     <copy>
     cd /home/oracle
-    wget -O db-sample-schemas.zip    https://github.com/oracle-samples/db-sample-schemas/archive/refs/tags/v21.1.zip
+    wget -O db-sample-schemas.zip    https://github.com/oracle-samples/db-sample-schemas/archive/refs/tags/v23.3.zip
     unzip -o db-sample-schemas.zip
-    cd db-sample-schemas-21.1
-    perl -p -i.bak -e 's#__SUB__CWD__#'$(pwd)'#g' *.sql */*.sql */*.dat
+    cd db-sample-schemas-23.3
     ls
     
     </copy>
@@ -105,16 +104,28 @@ In this first task, you will create and explore a new pluggable database **HRAPP
     
     ```
     <copy>
+
     cd human_resources
 
-    sqlplus sys/Oracle_4U@localhost:1521/hrappdb as sysdba
+    sql system/Oracle_4U@localhost:1521/hrappdb
 
-    @hr_main Oracle_4U USERS TEMP Oracle_4U /home/oracle/logs/ localhost:1521/hrappdb
-    
     </copy>
     ```
 
-     ![Database sample schemas are downloaded and the HR demo schema is loaded.](./images/task1.3-installsampleschemahr.png " ")
+    ```
+    <copy>
+
+    @hr_install 
+    
+    </copy>
+    ```
+    * At the prompts, enter the following...
+
+        - **password** Oracle_4U
+        - **tablespace** Press ENTER to accept the default value
+        - **overwrite?** Press ENTER to accept the default value
+
+     ![Database sample schemas HR demo schema is loaded.](./images/task1.3-installsampleschemahr.png " ")
 
 
 4. Launch SQLcl and connect as the database user **HR** to **HRAPPDB**, and verify that the sample schema objects have been created.
@@ -122,7 +133,6 @@ In this first task, you will create and explore a new pluggable database **HRAPP
 
     ```
     <copy>
-    exit
     cd /home/oracle 
     sql hr/Oracle_4U@localhost:1521/HRAPPDB
     </copy>
@@ -214,7 +224,7 @@ First, you'll unplug **HRAPPDB** from **CDBTEST** into a ".pdb" compressed archi
 
    ![The unplugged PDB shows as still in MOUNTED status until it is dropped.](./images/task2.3-drophrappdb.png " ")
 
-4. Now, query the datafiles that are part of **CDBTEST**.  You can see in the results that the datafiles for **HRAPPDB** are no longer part of the container database.
+4. Now, query the datafiles that are part of **CDBTEST**.  You can see in the results that the datafiles for **HRAPPDB** are no longer part of the container database. To run the query, either copy and paste the code below, or use the up arrow on your keyboard to recall that statement in SQLcl.
     
     ```
     <copy>
@@ -259,10 +269,6 @@ In this task, you will connect to container database, **CDBPROD**, and plug the 
     ```
     <copy>
     connect sys/Oracle_4U@localhost:1521/CDBPROD as sysdba
-    </copy>
-    ```
-    ```
-    <copy>
     show pdbs
     </copy>
     ```
@@ -334,6 +340,7 @@ Clone the pluggable database **HRAPP** to a new PDB named **HRAPP2**.
     ```
     <copy>
     connect hr/Oracle_4U@localhost:1521/hrapp 
+    exec dbms_stats.gather_schema_stats('HR')
     select table_name, num_rows from user_tables order by 1;
     </copy>
     ```
@@ -392,7 +399,7 @@ You should still be connected to the SQLcl client and see a "SQL>" prompt.  If n
 
     ```
     <copy>
-    drop database link hr_prod;
+    drop database link IF EXISTS hr_prod;
     create database link hr_prod connect to pdb_admin identified by Oracle_4U using 'localhost:1521/hrapp';
     </copy>
     ```
@@ -458,8 +465,8 @@ You should still be connected to the SQLcl client and see a "SQL>" prompt.  If n
     
     select count(*) from jobs;
 
-    insert into jobs values ('MK_ANALYST', 'Marketing Analyst',7000,11000);
-    insert into jobs values ('IT_DATASCI','Data Scientist',8000,15000);
+    insert into jobs values ('MK_ANALYST', 'Marketing Analyst',7000,11000), 
+    ('IT_DATASCI','Data Scientist',8000,15000);
     commit;
 
     select count(*) from jobs;
