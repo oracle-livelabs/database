@@ -42,15 +42,15 @@ its customers. Whether deploying on an "On-Premises" cluster or utilizing the
 Oracle NoSQL Database Cloud Service, developers and end-users get the latest in
 NoSQL technology. Oracle offers a complete range of deployment options to
 support your NoSQL database, from on-premises to private cloud to public cloud.  Depending
-on which deployment opiton you choose, you may need different authentication strategies.
+on which deployment option you choose, you may need different authentication strategies.
 
   The class `AppConfig.java` illustrates the different authentication options in the case
 statement. We covered the authentication basics in Lab 2. If the function is not visible in your
 screen, go ahead and scroll to it:
     * You can use **Instance Principals** to do the connection to NoSQL Cloud Service as
 shown in this code. Once Instance Principals are set up, you can make API calls to
-different Oracle Cloud Infrastructure services.  The benefit it applications running
-on those instances does not have to configure user credentials or a configuration file.
+different Oracle Cloud Infrastructure services.  The benefit is applications running
+on those instances do not have to configure user credentials or a configuration file.
 
     * You can use **Delegation Tokens** to do the connection to NoSQL Cloud Service
     and in this lab we will use them.
@@ -203,7 +203,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
     </copy>
     ```
 
-    We will create a variable with the link self provided by the command above
+    We will create a variable with the self link provided by the command above
 
     ```shell
     <copy>
@@ -212,7 +212,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
     </copy>
     ```
 
-5. Use the link self from the result of the call above to read again the information about the film.
+5. Use the self link from the result of the call above to read again the information about the film.
 
     ```shell
     <copy>
@@ -255,7 +255,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
     fg
     </copy>
     ```
-    NB: you can rexecute the command `fg` to validate that there are not jobs running in background.
+    Note: you can rexecute the command `fg` to validate that there are not jobs running in background.
 
     Delete the temporary files created.
     ```shell

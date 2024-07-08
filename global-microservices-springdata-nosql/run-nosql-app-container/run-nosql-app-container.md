@@ -70,7 +70,7 @@ become disconnected and/or timed out. In that case, restart it.
     ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
 2. Execute the following environment setup shell script in the Cloud Shell to
-set up your environment. Please copy the values for `OCI_REGION` and `OCI_NOSQL_COMPID.`
+set up your environment. Please copy the values for `OCI_REGION(labeled: NOSQL_REGION)` and `OCI_NOSQL_COMPID.`
 
     ```shell
     <copy>
@@ -130,7 +130,7 @@ set up your environment. Please copy the values for `OCI_REGION` and `OCI_NOSQL_
     source ~/global-microservices-springdata-nosql/env.sh
     </copy>
     ```
-Set the variable IP_CI with the value copied in Task 3. Execute in the Cloud Shell.
+Set the variable IP_CI with the Public IP address value copied in Task 3. Execute in the Cloud Shell.
 
     ```shell
     <copy>

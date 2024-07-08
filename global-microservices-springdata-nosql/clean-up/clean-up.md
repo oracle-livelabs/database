@@ -14,7 +14,7 @@ In this task we will deleted the resource created using the Cloud Shell.
 
   ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
-2. Execute the following in your Cloud Shell.
+2. Execute the following in your Cloud Shell.  This is issuing a **table delete** command to delete the Movie table.
 
     ```
     <copy>
@@ -38,13 +38,12 @@ In this task we will deleted the resource created using the Cloud Shell.
 
 This task deletes the resources that got created.
 
-1. On the top left, go to menu, then Databases, then under Oracle NoSQL Database, hit 'Tables'
-Set your compartment to 'demonosql'
-Click on the Test table, which will bring up the table details screen.  Hit Delete.
+1. On the top left, go to menu, then Databases, then under Oracle NoSQL Database, hit 'Tables',
+set your compartment to 'demonosql', click on the Test table, which will bring up the table details screen.  Hit Delete.
 
   ![Table](./images/delete-test-table.png)
 
-  Deleting tables is an async operation, so you will not immediately see the results on the OCI console.  Eventually the status of the tables will get changed to deleted.  
+  Deleting tables is an async operation, so you will not immediately see the results on the OCI console.  Eventually the status of the table will get changed to deleted.  
 
 2. On the top left, go to menu, then Developer Services and then Containers & Artifacts - Container Instances.
 

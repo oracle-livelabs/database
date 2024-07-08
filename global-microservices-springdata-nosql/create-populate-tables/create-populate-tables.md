@@ -199,7 +199,7 @@ screen. Click **Tables** on top right.
     ```
 8. Let's insert rows using the upload data feature. Upload the file `movie-file-kvjson.json` in your computer.
 
-   Right click button on this link [uplaod-file](./files/movie-file-kvjson.json), then click on **Save link as**.
+   Right click button on this link [upload-file](./files/movie-file-kvjson.json), then click on **Save link as**.
 
 
 9. Click **Upload Data**, and the 'Upload Data' screen appears.
