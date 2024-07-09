@@ -3,5 +3,9 @@
     "var2": "Variable 2 value",
     "random_name": "LiveLabs rocks!",
     "number_of_ocpu_paid": "24",
-    "number_of_ocpu_always_free": "2"
+    "number_of_ocpu_always_free": "2",
+    "author_names": "Tim Pirog",
+    "contributors_names": "N/A",
+    "group_name": "Product Strategy and Business Development",
+    "last_updated": "July 2024"
  }
