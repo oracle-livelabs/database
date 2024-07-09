@@ -14,7 +14,7 @@ In this task we will deleted the resource created using the Cloud Shell.
 
   ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
-2. Execute the following in your Cloud Shell.
+2. Execute the following in your Cloud Shell.  This is issuing a **table delete** command to delete the Movie table.
 
     ```
     <copy>
@@ -38,13 +38,12 @@ In this task we will deleted the resource created using the Cloud Shell.
 
 This task deletes the resources that got created.
 
-1. On the top left, go to menu, then Databases, then under Oracle NoSQL Database, hit 'Tables'
-Set your compartment to 'demonosql'
-Click on the Test table, which will bring up the table details screen.  Hit Delete.
+1. On the top left, go to menu, then Databases, then under Oracle NoSQL Database, hit 'Tables',
+set your compartment to 'demonosql', click on the Test table, which will bring up the table details screen.  Hit Delete.
 
   ![Table](./images/delete-test-table.png)
 
-  Deleting tables is an async operation, so you will not immediately see the results on the OCI console.  Eventually the status of the tables will get changed to deleted.  
+  Deleting tables is an async operation, so you will not immediately see the results on the OCI console.  Eventually the status of the table will get changed to deleted.  
 
 2. On the top left, go to menu, then Developer Services and then Containers & Artifacts - Container Instances.
 
@@ -76,6 +75,21 @@ Click on the Test table, which will bring up the table details screen.  Hit Dele
 5. Click on more actions and delete stack.  
 
     ![Delete Stack](./images/destroy-stack-2.png)
+
+## Task 4: Delete the compartment created
+
+1. Remove the 'demonosql' compartment. From upper left hand menu, go to **Identity and Security** then **Compartments** under 'Identity.'
+
+    ![Delete Compartment](https://oracle-livelabs.github.io/common/images/console/id-compartment.png)
+
+2. The 'Compartments' screen appears and click **demonosql**
+
+    ![Select demo NoSQL table](./images/select-demonosql.png)
+
+3. Press the **Delete** button. This will fire off a job that runs asynchronously. It takes a while.
+
+    ![Delete NoSQL Table](./images/delete-demonosql.png)
+
 
 ## Acknowledgements
 * **Author** - Dario Vega, Product Manager, NoSQL Product Management and Michael Brey, Director, NoSQL Product Development

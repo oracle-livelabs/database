@@ -26,7 +26,7 @@ _Estimated Workshop Time:_ 90 Minutes
 
 
 ### About Oracle NoSQL database
-Modern application developers have many choices when faced with deciding when and how to persist a piece of data.  In recent years, NoSQL databases have become tremendously popular and are now seen as one of the necessary tools every application developer must have at their disposal. While *'tried and true'* relational databases are great at solving classic application problems like data normalization, strict consistency, and arbitrarily complex queries to access that data, NoSQL databases take a different approach.
+Modern application developers have many choices when faced with deciding when and how to persist a piece of data.  In recent years, NoSQL databases have become tremendously popular and are now seen as one of the necessary tools every application developer must have at their disposal. While 'tried and true' relational databases are great at solving classic application problems like data normalization, strict consistency, and arbitrarily complex queries to access that data, NoSQL databases take a different approach.
 
 Most modern applications targeted at end users have been designed to personalize the user experience to the individual, ingest huge volumes of machine generated data, deliver blazingly fast and crisp user interface experiences, and deliver these experiences to large populations of concurrent users **distributed around the globe**. In addition, these applications must always be operational, with zero down-time, and with zero tolerance for failure. The approach taken by Oracle NoSQL Database is to offer extreme availability and exceptionally predictable, single digit millisecond response times to simple queries at scale. The Oracle NoSQL Database Cloud Service is designed from the ground up for high availability, predictably fast responses, resiliency to failure, all while operating at extreme scale. Largely, this is because of Oracle NoSQL Database’s shared nothing, replicated, horizontal scale-out architecture. Also, when using the Oracle NoSQL Database Cloud Service, Oracle manages the scale out, monitoring, tuning, and hardware/software maintenance: basically everything.
 
@@ -41,7 +41,7 @@ In this workshop you will:
   * Set up your environment
   * Create a table with provisioned reads/sec, writes/sec, and GB storage and write data to the table and read data from the table
   * Develop a NoSQL Application using Oracle NoSQL Database SDK for Spring Data
-  * Deploy this application as a *containerized application* using OCI services
+  * Deploy this application as a **containerized application** using OCI services
   * Set up Global Active Table for your application
 
 ### Prerequisites
@@ -51,7 +51,7 @@ This workshop assumes you have:
   * Programming knowledge in Java and Spring framework
   * Understanding of query languages
 
-*Note: If you have a **Free Tier**  account, when your Free Trial credits expire your account will be converted to an **Always Free** account. You will not be able to conduct this workshop after your account has been converted to an Always Free environment. The Oracle NoSQL Database Cloud Service **Always Free** tenancies are only available in the Phoenix region.*
+*Note: If you have a **Free Tier  account,*** when your Free Trial credits expire your account will be converted to an **Always Free** account. You will not be able to conduct this workshop after your account has been converted to an Always Free environment. The Oracle NoSQL Database Cloud Service **Always Free** tenancies are only available in the Phoenix region.
 **[Free Tier FAQ](https://www.oracle.com/cloud/free/faq.html)**
 
 ## Task 1: Architecture of the Application
@@ -62,7 +62,7 @@ This workshop assumes you have:
 
     Recently, REST has become the standard for designing web APIs. The REST architectural style allows for running on stateless servers and offers structured access to resources. It reduces the complexity of the application and things become easier for developers.
 
-    In this Live Lab, we will learn how easy it is develop the data catalog used by Oracle's MovieStream application using Spring and Oracle NoSQL Database.
+    In this Live Lab, we will learn how easy it is to develop the data catalog used by Oracle's MovieStream application using Spring and Oracle NoSQL Database.
 
     In addition, by using managed services you gain the following benefits:
     *	No operating systems to choose, secure, patch, or manage.

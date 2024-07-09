@@ -1,6 +1,6 @@
 {
 	"workshoptitle": "Create Scalable, Global Microservices with OCI, Spring Data, and NoSQL",
-	"help": "livelabs-help-nosql_us@oracle.com",
+	"help": "livelabs-help-db_us@oracle.com",
 	"tutorials": [
 		{
 			"title": "Introduction",
@@ -36,13 +36,7 @@
 			"description": "This is the content devops",
 			"type": "livelabs",
 			"filename": "../../run-nosql-app-container/run-nosql-app-container.md"
-		},
-		{
-			"title": "Lab 5: Setup Global Active Tables",
-			"description": "Using GAT to create a geo-Distributed microservice",
-			"type": "livelabs",
-			"filename": "../../create-gat-tables/create-gat-tables.md"
-		},
+		}
 		{
 			"title": "Need Help?",
 			"description": "Solutions to Common Problems and Directions for Receiving Live Help",
