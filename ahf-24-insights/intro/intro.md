@@ -18,6 +18,8 @@ For more about Virtual DB systems, click [here](https://docs.cloud.oracle.com/en
 
 Estimated Workshop Time:  1.5 hours
 
+
+
 Watch the video below for walkthrough of this workshop. TODO - Decide if we want a Video like this one for the RAC Lab
 
 [Complete Walkthrough](videohub:1_o8hyf6k0)
@@ -34,11 +36,12 @@ Insights brings all that collected data into a dynamic web page that can be view
 ![AHF Deployment](./images/ahfflow.png " ")
 
 ### About Oracle Autonomous Health Framework Command Line Interface 
-As the AHF product evolved various tools that already had their own command line interface were pulled in the AHF.  There is an ongoing project to pull all of these tools under the single 'ahf' command line interface but as this is not complete you will find throughout this lab that you are asked to use tool specific command line interfaces in a number of cases.
-
-Watch the video below for an overview of Oracle RAC.
-
-[Full Overview Video of RAC](youtube:CbIGJs_eNtI)
+As the AHF product evolved various tools that already had their own command line interface were pulled in the AHF.  
+There is an ongoing project to pull all of these tools under the single 'ahf' command line interface but as this is not complete you will find throughout this lab that you are asked to use tool specific command line interfaces in a number of cases:-
+* tfactl - for the Trace File analyzer Collector tool
+* orachk - for the Orachk tool (best practice compliance)
+* ahfctl - for some AHF level configuration
+* ahf    - Where commands are new or have migrated from the above.
 
 ### Objectives
 - Connect to a DB System
