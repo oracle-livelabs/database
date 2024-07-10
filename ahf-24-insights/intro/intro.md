@@ -4,11 +4,11 @@
 Oracle Autonomous Health Framework (AHF) is deployed automatically across various Systems, and all new versions can be Downloaded from My Oracle Support.
 AHF is avilable for all Major Platforms supported by Oracle Database 19c and above. It is deployed as part of Grid Infrastructure and Oracle Database.
 
-![AHF Deployment](./images/ahfdistro-cloud.png " ")
+![AHF Deployment](./images/ahfdistro-op.png " ")
 
 AHF is also deployed on all Database Cloud Systems automatically
 
-![AHF Deployment](./images/ahfdistro-op.png " ")
+![AHF Deployment](./images/ahfdistro-cloud.png " ")
 
 In this workshop you will work on a sandbox  2-node Oracle Real Application Clusters database in the Oracle Cloud.  Oracle Cloud Infrastructure offers 2-node RAC DB systems on virtual machines.
 
