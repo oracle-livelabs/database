@@ -17,15 +17,6 @@ In this lab, you will:
 This lab assumes you have:
 - An Oracle account
 
-<!-- ## Task 1: Obtain the PODMAN Container information 
-1.   Copy the command below to obtain the PODMAN Container ID.
-
-```
-<copy>
-podman container ls -a 
-</copy>
-``` -->
-
 ## Task 1: Pull and Start Docker Image
 1.  If the terminal is not displayed as shown below, select Activities and click Terminal.
 
