@@ -128,7 +128,7 @@ In this first task, you will create and explore a new pluggable database **HRAPP
      ![Database sample schemas HR demo schema is loaded.](./images/task1.3-installsampleschemahr.png " ")
 
 
-4. Launch SQLcl and connect as the database user **HR** to **HRAPPDB**, and verify that the sample schema objects have been created.
+4. Launch SQLcl and connect as the database user **HR** to **HRAPPDB**, and verify that the sample schema objects have been created.  If you encounter an error with an "ORA-01017" in it when running this step, re-run the previous step to install the HR sample schemas and be sure to enter **Oracle_4U** as the password!
 
 
     ```
@@ -574,7 +574,7 @@ Thank you for participting in this Oracle LiveLabs workshop!
 ## APPENDIX: Lab Cleanup and Reset
 If you'd like to run through this lab again on this same image, execute the following in order to clean up the environment before starting again.
 
-**NOTE** exit from SQLcl before running the following code.
+**NOTE exit from SQLcl before running the following code!**
     
    ```
    <copy>
