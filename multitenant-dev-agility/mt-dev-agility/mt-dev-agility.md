@@ -10,7 +10,7 @@ In this lab you will assume the role of a development team member, and you will 
 - Cloning your "production" PDB to a "test" PDB to use as a master copy for the test/development teams.
 - Creating thin "snapshot" copies of the test master for use by the test/development teams.
 
-Estimated Time to Complete This Workshop: 90 minutes
+Estimated Time to Complete This Workshop: 60 minutes
 
 
 ### Prerequisites
@@ -67,7 +67,7 @@ In this first task, you will create and explore a new pluggable database **HRAPP
     </copy>
     ```
 
-    ![New pluggable database HRAPPDB is created in around 10 seconds!](./images/task1.2-createhrappdb.png " ")
+    ![New pluggable database HRAPPDB is created in a matter of seconds!](./images/task1.2-createhrappdb.png " ")
 
 
 2. Change your SQLcl session to point to the database you just created, **HRAPPDB**.  Then you will grant privileges to the database user **PDB\_ADMIN**. You will leverage user PDB_ADMIN's privileges later on in this workshop.
