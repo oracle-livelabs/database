@@ -1,5 +1,7 @@
 # Introduction
 
+GC Test
+
 ## About this Workshop
 Oracle Autonomous Health Framework (AHF) is deployed automatically across various Systems, and all new versions can be downloaded from My Oracle Support(MOS).  
 AHF is avilable for all major platforms supported by Oracle Database 19c and above. It is deployed as part of Grid Infrastructure and Oracle Database.
