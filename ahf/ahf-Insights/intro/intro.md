@@ -58,7 +58,6 @@ Maybe put some links to Fix Flows here ?
 
 ## Learn more
 
-* [Visit the AHF site on OTN](https://www.oracle.com/database/technologies/rac.html) TODO
 * [Visit the Blog] (https://blogs.oracle.com/database/post/ahf-24-3)
 ## Acknowledgements
 

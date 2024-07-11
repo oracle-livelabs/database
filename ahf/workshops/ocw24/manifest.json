@@ -9,7 +9,7 @@
          {
             "title": "Introduction",
             "description": "This lab walks you through the steps to understand how Oracle Autonomous Framework (AHF) helps with oracle Database Troubleshooting",
-            "filename": "../../intro/intro.md"
+            "filename": "../../ahf-Insights/intro/intro.md"
         },
         {
             "title": "Lab 1: Connect to your DB System",
@@ -19,37 +19,42 @@
         {
             "title": "Lab 2: Check the version, location and Health of AHF installed on your system",
             "description": "This lab walks you through checking that AHF is installed and healthy.",
-            "filename": "../../clusterware/test_gi.md"
+            "filename": "../../ahf-Insights/ahf-upgrade/check-ahf.md"
         },
         {
             "title": "Lab 3: Upgrade your AHF to the Latest version",
-            "description": "This lab shows you how to upgrade AHF having first downloaded it from Object storage.",
-            "filename": "../../ahf-ugrade/ahf-upgrade.md"
+            "description": "This lab shows you how to upgrade AHF having first downloaded it from OCI Object storage.",
+            "filename": "../../ahf-Insights/ahf-upgrade/ahf-upgrade.md"
         },
         {
             "title": "Lab 4: Set up Oracle Autonomous Health Framework (AHF) Auto Upgrade",
             "description": "Learn how to upgrade AHF on the fly without manually downloading ahf_setup.",
-            "filename": "../../ahf-upgrade/ahf-autoupgrade-upgrade.md"
+            "filename": "../../ahf-Insights/ahf-upgrade/ahf-autoupgrade-upgrade.md"
         },
         {
             "title": "Lab 5: Generate some Incidents in RAC Database",
             "description": "This lab walks you through generating various incidents in your RAC datase for AHF to detect.",
-            "filename": "../../incidents/generate-incidents.md"
+            "filename": "../../ahf-Insights/incidents/generate-incidents.md"
         },
         {
             "title": "Lab 6: See how AHF reacted to RAC Database Incidents ",
             "description": "This lab walks you through the use of sequences in a RAC database.",
-            "filename": "../../ahf-commands/diagcollect.md"
+            "filename": "../../ahf-Insights/ahf-commands/diagcollect.md"
         },
         {
             "title": "Lab 7: Try out some commonly used AHF commands ",
             "description": "This lab walks you through using the most commonly used AHF commands ",
-            "filename": "../../ahf-commands/common.md"
+            "filename": "../../ahf-Insights/ahf-commands/common.md"
         },
         {
             "title": "Lab 8: Generate AHF Insights reports on Demand ",
             "description": "This lab walks you through generating an Insights Report on Demand.",
-            "filename": "../../ahf-commands/insights.md"
+            "filename": "../../ahf-Insights/ahf-commands/insights.md"
+        },
+        {
+            "title": "Lab 9: Review Insights Reports for Various Incident Scenarios ",
+            "description": "This lab walks you through a number of Insights Reports for various incidents captured from other systems ",
+            "filename": "../../ahf-Insights/ahf-reports/insightsreports.md"
         },
         {
             "title": "Need Help?",
