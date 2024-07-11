@@ -48,6 +48,6 @@ or
 
 
 ## Acknowledgements
-* **Author** - Brianna Ambler, Database Product Management
-* **Contributors** - Brianna Ambler & Dan Williams, Database Product Management
+* **Authors** - Brianna Ambler, Dan Williams Database Product Management
+* **Contributors** - Brianna Ambler, Dan Williams, Database Product Management
 * **Last Updated By/Date** - Dan Williams, Database Product Management, July 2024

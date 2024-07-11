@@ -11,10 +11,20 @@ In this lab, you will:
 
 * Pull, run, and start an Oracle Autonomous Database 23ai Docker image with Podman.
 * Gain access to Database Actions, APEX, and more via your container.
+* Explore Oracle’s AI Vector Search. 
 
 ### Prerequisites
 This lab assumes you have:
 - An Oracle account
+
+<!-- ## Task 1: Obtain the PODMAN Container information 
+1.   Copy the command below to obtain the PODMAN Container ID.
+
+```
+<copy>
+podman container ls -a 
+</copy>
+``` -->
 
 ## Task 1: Pull and Start Docker Image
 1.  If the terminal is not displayed as shown below, select Activities and click Terminal.
@@ -25,10 +35,10 @@ This lab assumes you have:
 
     ```
     <copy>
-    wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/WC7293Pwf4UNmrM44Mequmek_fjzKDkU-zBUrA8lAzcJMAiR19Jecjt1x1U4gBne/n/c4u04/b/apex-images/o/compose.zip
-    unzip compose.zip
+    wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/AZAlcycOLHY5iAWwYZ6KTwJcrnJy7k1LcpHJh0ELmGdZj5ptc6rEteLmnUKnn4Gl/n/c4u04/b/apex-images/o/BERT-TINY.onnx
+    wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/WC7293Pwf4UNmrM44Mequmek_fjzKDkU-zBUrA8lAzcJMAiR19Jecjt1x1U4gBne/n/c4u04/b/apex-images/o/compose3.zip
+    unzip compose3.zip
     chmod +x scripts start-container.sh
-    chmod ugo+x -R scripts start-container.sh
     </copy>
     ```
 
@@ -83,7 +93,7 @@ This lab assumes you have:
 
     ![ADB CLI](images/adb-cli.png)
 
-11. (Optional) If you want to reset your admin password, use the command printed out by the script and fill in your desired password. Make sure the following passwords you select are between 12-30 characters, with at least 1 uppercase letter, 1 lowercase letter, and 1 number. 
+11. (Optional) If you want to reset your admin password, use the command printed out by the script and fill in your desired password. Make sure the following passwords you select are between 12-30 characters, with at least 1 uppercase letter, 1 lowercase letter, and 1 number.
 
     ![Reset password command](images/reset-password-command.png)
 
@@ -209,6 +219,6 @@ hostname fqdn -->
     ```
 
 ## Acknowledgements
-- **Author** - Kaylien Phan, Senior Product Manager, May 2024
-- **Contributors** - Brianna Ambler, Kevin Lazarz
-- **Last Updated By/Date** - Kaylien Phan, May 2024
+- **Authors** - Brianna Ambler, Dan Williams Database Product Management, July 2024
+- **Contributors** - Brianna Ambler, Dan Williams,  Database Product Management
+- **Last Updated By/Date** - Brianna Ambler, Dan Williams July 2024
