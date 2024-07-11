@@ -62,7 +62,6 @@ To provide free Oracle Cloud accounts to our valued customers, we need to ensure
 So, we have the question, an empty line, the answer, and then a separator denoted by `=====`. For this simple example, we load the whole thing into memory. For a small FAQ file, there is no need for a proper vector database; however, if your knowledge base grows, you will want one.
 
 ### Step 1: Dowload the sample FAQ file
-
 Download the sample file from [this link](files/faq.txt?download=1).
    
 Now, drag and drop the downloaded file into the Jupyter window to upload it to your remote instance.
@@ -206,6 +205,7 @@ with connection.cursor() as cursor:
    encoder = SentenceTransformer('all-MiniLM-L12-v2')
    </copy>
    ```
+   Ignore the warning saying `IProgress not found.`, among others.
 
 2. We go through all our chunks (stored in the `docs` dictionary) and encode the text content.
    ```python
@@ -299,5 +299,6 @@ You may now **proceed to the next lab**
 * **Author** - Bogdan Farca, Customer Strategy Programs Leader, Digital Customer Experience (DCX), EMEA
 * **Contributors** 
    - Liana Lixandru, Senior Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
+   - Wojciech Pluta, Director, Technical Product Marketing
    - Kevin Lazarz, Senior Manager, Product Management, Database
 * **Last Updated By/Date** -  Bogdan Farca, May 2024

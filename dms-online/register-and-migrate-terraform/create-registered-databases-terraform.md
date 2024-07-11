@@ -46,28 +46,26 @@ For this task you need the following info from previous steps:
 
   ![Screenshot of click create connection](images/create-connection.png =90%x*)
 
-4. On the page Database Details, fill in the following entries, otherwise leave defaults:
+4. On the page General information, fill in the following entries, otherwise leave defaults:
     - Name: **SourceCDB**
+    - Type: **Oracle Database**
     - Vault: **DMSVault**
     - Encryption Key: **DMSKey**
-    - Choose **Manually configure database**
-    - Database Type: **Oracle**
-    - Host: Select **DBCS Public IP** value from Terraform output
-    - Port: **1521**
-    - Service Name: Select **DBCS CDB Service** value from Terraform output
-
-    The checkbox **Create private endpoint to access this database** needs to stay unchecked.
-
+    
 5. Press **Next**
 
   ![Screenshot of database details and click next](images/database-details-cdb.png =50%x*)
 
-6. On the page Connection Details, fill in the following entries, otherwise leave defaults:
+6. On the page Connection details, fill in the following entries, otherwise leave defaults:
+    - Database details, select **Enter database information**
+    - Database connection string (use this format host:port/db service name): **DBCS Public IP**:**1521**/**DBCS CDB Service** get this values from the terraform output
     - Initial load database username: **system**
     - Initial load database password: Select **Admin Password** value from Terraform output
     - Select **Use different credentials for replication**
     - Replication database username: **c##ggadmin**
     - Replication database password: Select **Admin Password** value from Terraform output
+
+    The checkbox **Create private endpoint to access this database** needs to stay unchecked.
 
 7. Press **Create**
 
@@ -95,29 +93,26 @@ For this task you need the following info from previous steps:
 
   ![Screenshot of click create connection](images/create-connection-pdb.png =90%x*)
 
-3. On the page Database Details, fill in the following entries, otherwise leave defaults:
+3. On the page General information, fill in the following entries, otherwise leave defaults:
     - Name: **SourcePDB**
+    - Type: **Oracle Database**
     - Vault: **DMSVault**
     - Encryption Key: **DMSKey**
-    - Choose **Manually configure database**
-    - Database Type: **Oracle**
-    - Host: Select **DBCS Public IP** value from Terraform output
-    - Port: **1521**
-    - Service Name: Select **DBCS PDB Service** value from Terraform output
-
-    The checkbox **Create private endpoint to access this database** needs to stay unchecked.
-
-
+    
 4. Press **Next**
 
   ![Screenshot of database details and click next](images/database-details-pdb.png =50%x*)
 
-5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
+5. On the page Connection details, fill in the following entries, otherwise leave defaults:
+    - Database details, select **Enter database information**
+    - Database connection string (use this format host:port/db service name): **DBCS Public IP**:**1521**/**DBCS PDB Service** get this values from the terraform output
     - Initial load database username: **system**
     - Initial load database password: Select **Admin Password** value from Terraform output
     - Select **Use different credentials for replication**
     - Replication database username: **ggadmin**
     - Replication database password: Select **Admin Password** value from Terraform output
+
+    The checkbox **Create private endpoint to access this database** needs to stay unchecked.
 
 6. Press **Create**
 
@@ -143,23 +138,25 @@ For this task you need the following info from previous steps:
 
   ![Screenshot of click create connection](images/create-connection-adb.png =90%x*)
 
-3. On the page Database Details, fill in the following entries, otherwise leave defaults:
+3. On the page General information, fill in the following entries, otherwise leave defaults:
     - Name: **TargetADB**
+    - Type: **Oracle Autonomous Database**
     - Vault: **DMSVault**
     - Encryption Key: **DMSKey**
-    - Database Type: **Autonomous Database**
-    - Database: **TargetADB#####**
 
 4. Press **Next**
 
   ![Screenshot of press next after entering details](images/db-connection-adb.png =50%x*)
 
-5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
+5. On the page Connection details, fill in the following entries, otherwise leave defaults:
+    - Database: **TargetADB#####**
     - Initial load database username: **admin**
     - Initial load database password: Select **Admin Password** value from Terraform output
     - Select **Use different credentials for replication**
     - Replication database username: **ggadmin**
     - Replication database password: Select **Admin Password** value from Terraform output
+
+    The checkbox **Create private endpoint to access this database** needs to stay unchecked.
 
 6. Press **Create**
 
@@ -185,25 +182,23 @@ For this task you need the following info from previous steps:
 
     ![Screenshot of press create migration](images/press-create-migration.png =90%x*)
 
-  3. On the page **Add Details**, fill in the following entries, otherwise leave defaults:
+  3. On the page **General information**, fill in the following entries, otherwise leave defaults:
       - Name: **TestMigration**
-      - Vault: **DMSVault**
-      - Encryption Key: **DMSKey**
 
       ![Screenshot to add vault details](images/add-details.png =40%x*)
 
   4. Press **Next**
 
   5. On the page **Select Databases**, fill in the following entries with the Database Connections created in tasks 1 to 3, otherwise leave defaults:
-      - Source Database: **SourcePDB**
+      - Source Database connection: **SourcePDB**
       - *Check* Database is pluggable database (PDB)
-      - Registered Container Database: **SourceCDB**
-      - Target Database: **TargetADB**
+      - Container database connection: **SourceCDB**
+      - Target Database connection: **TargetADB**
 
       ![Screenshot of source db selection](images/select-databases.png =50%x*)
 
   6. On the page **Migration Options**, fill in the following entries, otherwise leave defaults:
-      - In **Initial Load**, select **Datapump via Object Storage**
+      - Transfer medium for initial load:  **Datapump via Object Storage**
       - Export Directory Object:
           - Name: **dumpdir**
           - Path: **/u01/app/oracle/dumpdir**
