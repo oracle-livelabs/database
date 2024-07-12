@@ -43,7 +43,7 @@ In this lab, you will:
 	# cat /u01/app/oracle.ahf/install.properties 
 	AHF_HOME=/u01/app/oracle.ahf
 	BUILD_VERSION=2402000
-	BUILD_DATE=202402092108
+	BUILD_DATE=20240228181054
 	PREV_BUILD_VR=2401000
 	INSTALL_TYPE=TYPICAL
 	CRS_HOME=/u01/app/19.0.0.0/grid
@@ -51,14 +51,14 @@ In this lab, you will:
 	ORACHK_HOME=/u01/app/oracle.ahf/orachk
 	DATA_DIR=/u01/app/oracle.ahf/data
 	AHF_DIR=/u01/app/oracle.ahf/ahf
-	TFA_DATA_DIR=/u01/app/oracle.ahf/data/ahfdbcs61/tfa
+	TFA_DATA_DIR=/u01/app/oracle.ahf/data/lldbcs61/tfa
 	ORACHK_DATA_DIR=/u01/app/oracle.ahf/data/ahfdbcs61/orachk
 	REPOSITORY=/u01/app/oracle.ahf/data/repository
 	WORK_DIR=/u01/app/oracle.ahf/data/work
-	DIAG_DIR=/u01/app/oracle.ahf/data/ahfdbcs61/diag
-	TFA_DIAG_DIR=/u01/app/oracle.ahf/data/ahfdbcs61/diag/tfa
-	ORACHK_DIAG_DIR=/u01/app/oracle.ahf/data/ahfdbcs61/diag/orachk
-	COMMON_DATA_DIR=/u01/app/oracle.ahf/data/ahfdbcs61/common
+	DIAG_DIR=/u01/app/oracle.ahf/data/lldbcs61/diag
+	TFA_DIAG_DIR=/u01/app/oracle.ahf/data/lldbcs61/diag/tfa
+	ORACHK_DIAG_DIR=/u01/app/oracle.ahf/data/lldbcs61/diag/orachk
+	COMMON_DATA_DIR=/u01/app/oracle.ahf/data/lldbcs61/common
 	COMMON_DIR=/u01/app/oracle.ahf/common
 	JLIB_DIR=/u01/app/oracle.ahf/common/jlib
 	ACR_DIR=/u01/app/oracle.ahf/common/acr
@@ -165,8 +165,8 @@ The AHF Command Line Interfaces `ahfctl`, `tfactl`, `orachk`, `ahf` are all link
 	.--------------------------------------------------------------------------------------------------.
 	| Host      | Status of TFA | PID   | Port | Version    | Build ID              | Inventory Status |
 	+-----------+---------------+-------+------+------------+-----------------------+------------------+
-	| ahfdbcs61 | RUNNING       | 86200 | 5000 | 24.2.0.0.0 | FixMe                 | COMPLETE         |
-	| ahfdbcs62 | RUNNING       | 91603 | 5000 | 24.2.0.0.0 | FixMe                 | COMPLETE         |
+	| lldbcs61  | RUNNING       | 86200 | 5000 | 24.2.0.0.0 | 240200020240228181054 | COMPLETE         |
+	| lldbcs62  | RUNNING       | 91603 | 5000 | 24.2.0.0.0 | 240200020240228181054 | COMPLETE         |
 	'-----------+---------------+-------+------+------------+-----------------------+------------------'
 	```
 	You should see a line for each node in your cluster.  If that is the case then the TFAMain process is running and able to communicate.  
