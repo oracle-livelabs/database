@@ -1,6 +1,6 @@
 {
-  "workshoptitle": "Oracle Multitenant for Development Agility",
-  "help": "livelabs-help-db_us@oracle.com",
+  "workshoptitle": "Oracle Multitenant: Pluggable Database for Development Agility",
+  "help": "joe.bernens@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
@@ -18,7 +18,7 @@
       "filename": "../../initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 2: Multitenant for Development Agility",
+      "title": "Lab 2: Oracle Multitenant: Pluggable Databases for Development Agility",
       "description": "Rapid provisioning, unplugging, plugging in, and cloning of Oracle Databases",
       "filename": "../../mt-dev-agility/mt-dev-agility.md"
     },
