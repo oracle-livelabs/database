@@ -46,11 +46,11 @@ You are connected to each of the DB System Nodes as described in **Lab 1: Connec
 	Command output:
 
 	```
-	Archive:  /tmp/AHF-LINUX_v21.4.3.zip
-	inflating: /tmp/ahf21.4.3/ahf_setup  
-	extracting: /tmp/ahf21.4.3/ahf_setup.dat  
-	inflating: /tmp/ahf21.4.3/README.txt  
-	inflating: /tmp/ahf21.4.3/oracle-tfa.pub
+	Archive:  /tmp/AHF-LINUX_v24.6.0.zip
+	inflating: /tmp/ahf24.6.0/ahf_setup  
+	extracting: /tmp/ahf24.6.0/ahf_setup.dat  
+	inflating: /tmp/ahf24.6.0/README.txt  
+	inflating: /tmp/ahf24.6.0/oracle-tfa.pub
 	```
 2. Repeat on the second node
 
@@ -80,16 +80,16 @@ You are connected to each of the DB System Nodes as described in **Lab 1: Connec
 	Starting AHF Services
 	No new directories were added to TFA
 	Directory /u01/app/grid/crsdata/lvracdb-s01-2024-07-10-2347061/trace/chad was already added to TFA Directories.
-	.---------------------------------------------------------------------------------------.
-	| Host                           | TFA Version | TFA Build ID          | Upgrade Status |
-	+--------------------------------+-------------+-----------------------+----------------+
-	| lvracdb-s01-2024-07-10-2347061 |  24.6.0.0.0 | 240600020240702131841 | UPGRADED       |
-	'--------------------------------+-------------+-----------------------+----------------'
-	| lvracdb-s01-2024-07-10-2347062 |  24.2.0.0.0 | Fix Me                | Not Upgraded   |
-	'--------------------------------+-------------+-----------------------+----------------'
+	.----------------------------------------------------------------------------.
+	| Host                | TFA Version | TFA Build ID          | Upgrade Status |
+	+---------------------+-------------+-----------------------+----------------+
+	| lldbcs61            |  24.6.0.0.0 | 240600020240702131841 | UPGRADED       |
+	'---------------------+-------------+-----------------------+----------------'
+	| lldbcs62            |  24.2.0.0.0 | 240200020240228181054 | Not Upgraded   |
+	'---------------------+-------------+-----------------------+----------------'
 	Setting up AHF CLI and SDK
 	AHF is successfully upgraded to latest version
-	Moving /tmp/ahf_install_246000_53236_2024_07_11-03_45_55.log to /u01/app/oracle.ahf/data/lvracdb-s01-2024-07-10-2347061/diag/ahf/
+	Moving /tmp/ahf_install_246000_53236_2024_07_11-03_45_55.log to /u01/app/oracle.ahf/data/lldbcs61/diag/ahf/
 	</pre>
 
 7.	Repeat on the second node
@@ -107,9 +107,9 @@ You are connected to each of the DB System Nodes as described in **Lab 1: Connec
 	.-----------------------------------------------------------------------------------------------------------------------.
 	| Host                           | Status of TFA | PID   | Port | Version    | Build ID              | Inventory Status |
 	+--------------------------------+---------------+-------+------+------------+-----------------------+------------------+
-	| lvracdb-s01-2024-07-10-2347061 | RUNNING       | 59190 | 5000 | 24.6.0.0.0 | 240600020240702131841 | COMPLETE         |
+	| lldbcs61                       | RUNNING       | 59190 | 5000 | 24.6.0.0.0 | 240600020240702131841 | COMPLETE         |
 	'--------------------------------+---------------+-------+------+------------+-----------------------+------------------'
-	| lvracdb-s01-2024-07-10-2347062 | RUNNING       | 63152 | 5000 | 24.6.0.0.0 | 240600020240702131841 | COMPLETE         |
+	| lldbcs62                       | RUNNING       | 63152 | 5000 | 24.6.0.0.0 | 240600020240702131841 | COMPLETE         |
 	'--------------------------------+---------------+-------+------+------------+-----------------------+------------------'
 	</pre>
 
