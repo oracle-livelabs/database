@@ -40,7 +40,6 @@ Let's work with our source files, which contain the knowledge we want to use as 
 ### Source files format
 FAQs are loaded from a file, encoded, and stored. For this example, we will use a properly formatted plain text FAQ, following the pattern:
 ```
-<copy>
 What is Oracle Cloud Free Tier?
 
 Oracle Cloud Free Tier allows you to sign up for an Oracle Cloud account which provides a number of Always Free services and a Free Trial with US$300 of free credit to use on all eligible Oracle Cloud Infrastructure services for up to 30 days. The Always Free services are available for an unlimited period of time. The Free Trial services may be used until your US$300 of free credits are consumed or the 30 days has expired, whichever comes first.
@@ -58,20 +57,18 @@ Why do I need to provide credit or debit card information when I sign up for Ora
 To provide free Oracle Cloud accounts to our valued customers, we need to ensure that you are who you say you are. We use your contact information and credit/debit card information for account setup and identity verification. Oracle may periodically check the validity of your card, resulting in a temporary “authorization” hold. These holds are removed by your bank, typically within three to five days, and do not result in actual charges to your account.
 
 =====
-</copy>
 ```
 
 So, we have the question, an empty line, the answer, and then a separator denoted by `=====`. For this simple example, we load the whole thing into memory. For a small FAQ file, there is no need for a proper vector database; however, if your knowledge base grows, you will want one.
 
-### Step 1: Uploading the sample FAQ file to the remote instance.
-
+### Step 1: Dowload the sample FAQ file
 Download the sample file from [this link](files/faq.txt?download=1).
    
 Now, drag and drop the downloaded file into the Jupyter window to upload it to your remote instance.
 ![Jupyter drag&drop](images/image8.png)
 
 ### Step 2: Create a new notebook to host our code.
-Right-click into the left navigation pane in the Jupyter window and select "New file".
+Right-click into the left navigation pane in the Jupyter window and select "New notebook".
 
 ![new file](images/image9.png)
 
@@ -99,7 +96,7 @@ Finally, let's start to code.
             file_path = os.path.join(directory_path, filename)
             
             with open(file_path) as f:
-            raw_faq = f.read()
+               raw_faq = f.read()
             
             filename_without_ext = os.path.splitext(filename)[0]  # remove .txt extension
             faqs[filename_without_ext] = [text.strip() for text in raw_faq.split('=====')]
@@ -130,7 +127,7 @@ Finally, let's start to code.
       ![load txt files](images/image12.png)
 
 
-3. The final step in preparing the source data is to arrange the above dictionary in a way that is easy to ingest in the vector database.
+3. The final step in preparing the source data is to arrange the above dictionary in a way that is easy to ingest in the vector database. Enter this code into a new cell.
 
    ```python
    <copy>
@@ -208,6 +205,7 @@ with connection.cursor() as cursor:
    encoder = SentenceTransformer('all-MiniLM-L12-v2')
    </copy>
    ```
+   Ignore the warning saying `IProgress not found.`, among others.
 
 2. We go through all our chunks (stored in the `docs` dictionary) and encode the text content.
    ```python
@@ -301,5 +299,6 @@ You may now **proceed to the next lab**
 * **Author** - Bogdan Farca, Customer Strategy Programs Leader, Digital Customer Experience (DCX), EMEA
 * **Contributors** 
    - Liana Lixandru, Senior Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
+   - Wojciech Pluta, Director, Technical Product Marketing
    - Kevin Lazarz, Senior Manager, Product Management, Database
 * **Last Updated By/Date** -  Bogdan Farca, May 2024

@@ -19,6 +19,8 @@ Estimated Time: 15 minutes
 
 ## Task 1: Install Python
 
+> Note: First, log in to your remote instance via SSH, as described in the previous lab.
+
 ### Step 1: Prerequisites.
 
    ```bash
@@ -54,6 +56,14 @@ Estimated Time: 15 minutes
 
    Close and save with `control-x`, `y`, and `Enter`
 
+   Make sure the new lines in our `bashrc` are run before going further: 
+
+   ```bash
+   <copy>
+   source ~/.bashrc
+   </copy>
+   ```
+
 ### Step 3: Once we have `pyenv` up and running, let's install Python 3.12.
 ```
 <copy>pyenv install 3.12</copy>
@@ -61,6 +71,9 @@ Estimated Time: 15 minutes
 Creating the working folder:
 ```
 <copy>mkdir vectors</copy>
+```
+```
+<copy>cd vectors</copy>
 ```
 
 ### Step 4: Assign the Python version we just downloaded to our working directory:
@@ -72,8 +85,17 @@ Now check if it succeeded :
 ```
 <copy>python --version</copy>
 ```
+## Task 2: Install the required frameworks
 
-## Task 2: Install and configure Jupyter Lab
+```bash
+<copy>
+pip install oracledb
+pip install sentence-transformers
+pip install oci
+</copy>
+```
+
+## Task 3: Install and configure Jupyter Lab
 
 ### Step 1: Install the Jupyter server
 ```
@@ -87,7 +109,7 @@ If you see an output like this one, it worked.
 
 ![Jupyter ourput](images/image4.png)
 
-Leave it running.
+Leave it running, but write down the `token` listed in the command output.  
 
 ### Step 2: Open an SSH tunnel to allow access to the Jupyter Lab server.
 
@@ -98,23 +120,13 @@ Instead of exposing Jupyter Lab directly to the internet, you can use SSH tunnel
 In your local terminal, not within the SSH session with your remote instance, run this:
 
 ```bash
-<copy>ssh -L 8888:localhost:8888 opc@<remote IP></copy>
+<copy>ssh -L 8888:localhost:8888 -i <private_ssh_key> opc@<public_ip_address></copy>
 ```
 > Note: The exact connection details depend on how you configured remote access when creating the instance.
 
-Now, open the Jupyter URL (http://127.0.0.1:8888/lab) in a browser on your local machine.
+Now, open the Jupyter URL http://127.0.0.1:8888/lab?token=[`the token listed by your jupyter command output`] in a browser on your local machine.
 
 ![jupyter lab](images/image7.png)
-
-## Task 3: Install the required frameworks
-
-```bash
-<copy>
-pip install oracledb
-pip install sentence-transformers
-pip install oci
-</copy>
-```
 
 You may now **proceed to the next lab**
 
@@ -127,5 +139,6 @@ You may now **proceed to the next lab**
 * **Author** - Bogdan Farca, Customer Strategy Programs Leader, Digital Customer Experience (DCX), EMEA
 * **Contributors** 
    - Liana Lixandru, Senior Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
+   - Wojciech Pluta, Director, Technical Product Marketing
    - Kevin Lazarz, Senior Manager, Product Management, Database
 * **Last Updated By/Date** -  Bogdan Farca, May 2024
