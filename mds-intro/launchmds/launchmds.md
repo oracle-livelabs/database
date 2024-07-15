@@ -275,13 +275,13 @@ The installation procedure involves downloading the airportdb database to cloud 
     a. Get sample file
 
     ```bash
-    <copy>wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/MdFkX2s2_x9Miktl08UoorNTIyE-bIULjDXcbYuU1ukSfw1g48AEUkmH0-UcN5bQ/n/idazzjlcjqzj/b/irportdb-bucket-20230123-2124/o/airportdb_ysqlsh_331.zip</copy>
+    <copy>wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/BTZjuYQp93Qoc6aHC-GbhsXte8vT0S0k7XDiEJ1Zlo9DKMApHNfT3ZRyBFo6wyVe/n/mysqlpm/b/mysql_airport/o/airport-db.zip</copy>
     ```
   
     b. Unzip sample file
 
     ```bash
-    <copy>unzip airportdb_ysqlsh_331.zip</copy>
+    <copy>unzip airport-db.zip </copy>
     ```
 
    **Connect to MySQL HeatWave Database Service**

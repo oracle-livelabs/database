@@ -1,0 +1,72 @@
+{
+  "workshoptitle": "Data Pump Cross-Platform Migration (M5)",
+  "support": "https://community.oracle.com/mosc/categories/oracle_database",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction to migration using cross-platform transportable tablespaces with RMAN incremental backupus and M5 script.",
+      "filename": "../../00-introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs-novnc.md"
+    },
+    {
+      "title": "Lab 1: Initialize Environment",
+      "description": "Initialize Environment",
+      "filename": "../../01-initialize-environment/initialize-environment.md"
+    },
+    {
+      "title": "Lab 2: Check and prepare source database",
+      "description": "Ensure the source database meets the requirements and make necessary preparations",
+      "filename": "../../02-check-source/check-source.md"
+    },
+    {
+      "title": "Lab 3: Create target database",
+      "description": "Create a new PDB and ensure it meets the requirements and make necessary preparations",
+      "filename": "../../03-create-target/create-target.md"
+    },
+    {
+      "title": "Lab 4: Prepare M5 script",
+      "description": "Extract, examine and configure the M5 script.",
+      "filename": "../../04-prepare-m5/prepare-m5.md"
+    },
+    {
+      "title": "Lab 5: Initial backup/restore",
+      "description": "Start the migration by performing an initial level 0 backup/restore.",
+      "filename": "../../05-initial-backup-restore/initial-backup-restore.md"
+    },
+    {
+      "title": "Lab 6: Incremental backup/restore",
+      "description": "Perform incremental backup/restore cycles to minimize downtime.",
+      "filename": "../../06-incremental-backup-restore/incremental-backup-restore.md"
+    },
+    {
+      "title": "Lab 7: Test migration",
+      "description": "Test the migration.",
+      "filename": "../../07-test-migration/test-migration.md"
+    },
+    {
+      "title": "Lab 8: Final preparations",
+      "description": "Test the migration.",
+      "filename": "../../08-final-preparations/final-preparations.md"
+    },
+    {
+      "title": "Lab 9: Complete migration",
+      "description": "Complete the migration.",
+      "filename": "../../09-final-backup-restore/final-backup-restore.md"
+    },
+    {
+      "title": "Lab 10: Post-migration tasks",
+      "description": "Things to check and perform after migration.",
+      "filename": "../../10-post-migration-tasks/post-migration-tasks.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}

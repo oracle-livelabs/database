@@ -1,0 +1,45 @@
+{
+    "workshoptitle": "Introduction to Oracle SQL",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "This is an introduction to Oracle Database 23ai.",
+            "type": "livelabs",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Get Started with NoVNC",
+            "description": "Verify Setup of compute instance",
+            "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+        },
+        {
+            "title": "Lab 1: Provision an Oracle Autonomous Database",
+            "description": "Provision an Autonomous Database",
+            "type": "freetier",
+            "filename": "https://oracle-livelabs.github.io/adb/shared/adb-provision/adb-provision-conditional.md"
+        },
+        {
+            "title": "Lab 2: Connect to Oracle Autonomous Database with SQL Worksheet and Run your First Query",
+            "description": "Connect to an Autonomous Database",
+            "filename": "https://oracle-livelabs.github.io/adb/shared/adb-sqldevweb/adb-sqldevweb.md"
+        },
+        {
+            "title": "Lab 3: Run Basic Oracle SQL Commands",
+            "description": "Introduction to Oracle SQL",
+            "filename": "../../../intro-to-sql/intro-to-sql/intro-to-sql.md"
+        },
+
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+        }
+
+
+    ]
+}
+
+
+
+

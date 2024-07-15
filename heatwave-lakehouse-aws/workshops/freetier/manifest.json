@@ -1,0 +1,41 @@
+{
+  "workshoptitle": "Get started with HeatWave Lakehouse on AWS",
+    "help": "livelabs-help-oci_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "The Introduction is always second. The title and contents menu title match for the Introduction.",
+            "filename": "../../introduction/introduction.md"
+        },
+
+        {
+            "title": "Lab 1: Launch a Starter DB System",
+            "filename": "../../launch-starter-dbs/launch-starter-dbs.md"
+        },
+
+        {
+          "title": "Lab 2: Run Queries on HeatWave",
+          "filename": "../../run-queries/run-queries.md"
+        },
+
+        {
+          "title": "Lab 3: Create Lakehouse Mapping",
+          "filename": "../../create-lakehouse-mapping/create-lakehouse-mapping.md"
+        },
+
+        {
+          "title": "Lab 4: Run Queries with HeatWave Lakehouse",
+          "filename": "../../run-queries-lakehouse/run-queries-lakehouse.md"
+        },
+
+        {
+          "title": "Lab 5: Monitor Performance",
+          "filename": "../../monitor-heatwave/monitor-heatwave.md"
+        },
+
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename":"https://oracle-livelabs.github.io/common//labs/need-help/need-help-freetier.md"          }
+    ]
+}

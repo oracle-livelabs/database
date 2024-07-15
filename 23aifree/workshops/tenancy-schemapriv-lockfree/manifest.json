@@ -1,0 +1,52 @@
+{
+  "workshoptitle": "Explore the Power of Oracle 23ai Database: Schema Privileges and Lock-Free Reservations", 
+  "help": ["blake.hendricks@oracle.com", "vasudha.krishnaswamy@oracle.com"],
+  "tutorials": [
+      { 
+        "title": "Introduction",
+        "description": "Introduction to Schema Priveleges and Lock-Free Reservations",
+        "filename": "../../introduction/intro-schema-priv.md"
+      },
+      {
+        "title": "Getting Started",
+        "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+        "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+      },
+      {
+        "title": "Lab 1: Prepare Setup",
+        "description": "How to download your ORM stack and update security rules for an existing VCN",
+        "filename": "../../prepare-setup/prepare-setup.md",
+        "type": "schemapriv-lockfree"
+      },
+      {
+        "title": "Lab 2: Environment Setup",
+        "description": "How to provision the workshop environment and connect to it",
+        "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc-ssh.md"
+      },
+      {
+          "title": "Lab 3: Use noVNC remote desktop",
+          "description": "Using noVNC Remote Desktop",
+          "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+      },
+      { 
+          "title": "Lab 4: User Creation and Table Initialization",
+          "description": "This lab setup guide covers the creation of users, creation of tables, and insertion of initial data for a database environment. Follow these steps to set up the required users and tables before starting the lab exercises.",
+          "filename": "../../schema-priv-setup/setup.md"
+      },
+      {
+          "title": "Lab 5: Schema Privilege Management",
+          "description": "Learn how to grant specific privileges to users for accessing tables and examine the differences in accessing tables with and without schema privileges.",
+          "filename": "../../schema-priv/schema-priv.md"
+      },
+      {
+          "title": "Lab 6: Lock-Free Reservations",
+          "description": "This lab explores the concept of lock-free reservations and their impact on database transactions.",
+          "filename": "../../lockfree/lockfree.md"
+      },
+      {
+          "title": "Need Help?",
+          "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+          "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+      }
+  ]
+}
