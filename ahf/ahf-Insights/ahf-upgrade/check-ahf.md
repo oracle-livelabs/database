@@ -3,7 +3,7 @@
 ## Introduction
 
 Welcome to the "AHF Installation and Health Check" lab.  In this lab you will learn how to check the location of AHF executables, data, and diagnostics.  
-You will be guided to detemine these locations and review their contents. 
+You will be guided to determine these locations and review their contents. 
 Once you know the geography of AHF you will check for running processes and Health.
 
 Estimated Time: 5 minutes
