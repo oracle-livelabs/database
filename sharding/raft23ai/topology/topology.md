@@ -922,5 +922,5 @@ If you selected the **Green Button** for this workshop and still have an active 
 
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Oracle Globally Distributed Database Database, Product Management, Senior Product Manager
-* **Contributors** - Pankaj Chandiramani, Jyoti Verma
-* **Last Updated By/Date** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager - May 2024
+* **Contributors** - Pankaj Chandiramani, Ajay Joshi, Jyoti Verma
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, Consulting Member of Technical Staff, July 2024
