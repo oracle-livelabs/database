@@ -341,7 +341,7 @@ Run in the terminal as **oracle** user to Create SHARD4 database container
    ![<GSM_shard_setup_completed>](./images/t6-2-add-shard4-logs-gsm-shard-setup-completed.png " ")
 
 
-3. Once the DB is up and running, complete the below commands to   complete the GSM configuration to deploy the new SHARD4:
+3. Once the DB is up and running, run the below commands to complete the GSM configuration to deploy the new SHARD4:
 
     ```
     <copy>
