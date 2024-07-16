@@ -67,7 +67,7 @@ This lab assumes you have:
 
     ![<start_raft_ui_app>](./images/start_raft_ui_app.png " ")
 
-5. For some reasons if you would like to restart the RAFT Demo UI, it can be performed like below:
+5. For some reasons if you want to restart the RAFT Demo UI, it can be performed by steps as below:
     ```
     <copy>
     ps -ef | grep raft
