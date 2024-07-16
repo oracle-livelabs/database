@@ -155,23 +155,41 @@ Command Output:
     There is a zip collection from each node and files that describe the collection is **txt** and **json** format. 
     > Note: The **txt** and **json** files are also in the collection zip files that you supply to Oracle Support and help in Support Request automation.
 
+4. Check the contents of the Automatic Diagnostic Collection.
+    You can quickly review all the files collected/generated in the node using the `unzip -l` command
+    ```
+    unzip -l lldbcs61.tfa_srdc_autosrdc_Mon_Jul_15_17_32_46_UTC_2024.zip
+    ```
+    > Note: You would be uploading the *.zip* files to Oracle Support when you have to raise a Support Request for the Incidents  
 
 
-
-## Manual Diagnostic Collections 
+## Task 4: Understand Manual Diagnostic Collections for a specific incident type
 ![Manual Diagnostic Collections](./images/manual_collect.png =40%x*)
+AHF has manual collections for :-
+* When customers do not want Automatic Collections enabled.
+* Incidents AHF does not detect automatically such as install or some performance issues.
+Manual collections are more configurable (through CLI opstions) allowing addition of certain components and uploads to remove endpoints such as My Oracle Support.
+Manual collections still work cross nodes and bring back all collected data to the originating node.
+They also in most cases gather an AHF Insights report but we will talk about those in a later Lab.
 
-## Manual Diagnostic Collections for a specific incident Type
 ![SRDC Diagnostic Collections](./images/srdc_collect.png =40%x*)
+Previously when raising a Support request with Oracle Support you would have been guided to a set of instructions to gather diagnostics  
+for you specific problem.  The list of actions could be long and complicated which meant that often required data was missed. The list of  
+actions were known as Support Request Driven Collections.  AHF has taken the list of actions and integrated in to a single command for  
+the incident type. 
+> These Support Request Driven Collections are generated using the `tfactl diagcollect -srdc` command as shown.
 
-## Task 1:  TODO
-1.  TODO
-2.  TODO
+![SRDC Diagnostic Collections](./images/srdc_dbperf.png =40%x*)
+In the slide above you can see the comparison of collecting performance diagnostics through a command list and running the `tfactl diagcollect -srdc dbperf` command.
 
 
-
-## Manual Diagnostic Collections with the problem chooser
+## Task 5: Manual Diagnostic Collections with the problem chooser
 ![Problem Choose Diiagnostic Collections](./images/problem_choose.png =40%x*)
+
+Before the problem chooser, running a default AHF diagnostic Collection would mean that default collection collection would be taken.  
+This would mean gathering diagnostics from every diagnostic location that AHF had detected on a system for many possible Oracle products.
+Collections could be very large and take a long time to gather unless you knew exactly how to filter what was collected but providing specific components
+
 
 
 ## Task 1:  TODO
