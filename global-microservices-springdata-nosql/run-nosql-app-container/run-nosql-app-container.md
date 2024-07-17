@@ -91,7 +91,7 @@ set up your environment. Please copy the values for `OCI_REGION(labeled: NOSQL_R
  2. Click on Create Container Instance. This opens up a new window.
 
    Enter **Creating Scalable, Global Microservices with OCI, Spring Data, and NoSQL** as the name.
-   Other information does not need to be changed for this LiveLab. Please ensure the compartment is `demonosql.` Click **Next.**
+   Other information does not need to be changed for this LiveLab. Please ensure the compartment is `demonosql.` Verify the 'Networking' section looks similar to the image below.  If not, make the necessary adjustments by opening the 'Networking' section, checking and then collapsing it. Click **Next.**
 
      ![Create Container Instance](images/create-container-instance-1.png)
 

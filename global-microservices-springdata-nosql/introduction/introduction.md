@@ -23,6 +23,8 @@ Finally, boost your applications with Oracle NoSQL Global Active Tables where th
 
 _Estimated Workshop Time:_ 90 Minutes
 
+_Estimated Time:_ 4 minutes
+
 
 
 ### About Oracle NoSQL database

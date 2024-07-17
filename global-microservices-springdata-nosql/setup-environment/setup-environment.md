@@ -4,7 +4,7 @@
 
 This lab walks you through the steps necessary to create a proper operating environment.
 
-_Estimated Time:_ 7 minutes
+_Estimated Time:_ 9 minutes
 
 ### Objectives
 
