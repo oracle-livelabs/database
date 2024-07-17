@@ -180,6 +180,31 @@ Run the following commands to deploy Kiali and Jaeger.
     </copy>
     ```
 
+    If Kiali is not deployed, run the following commands to pull the Kiali image and deploy it.
+
+    1. Retrieve the Kiali image.
+
+        ```text
+        <copy>
+        wget https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/kiali.yaml
+        </copy>
+        ```
+
+    2. Specify the image pull policy.
+
+        ```text
+        <copy>
+        sed -i 's/imagePullPolicy: Always/imagePullPolicy: IfNotPresent/g' kiali.yaml
+        </copy>
+        ```
+
+    3. Deploy Kiali.
+        ```text
+        <copy>
+        kubectl apply -f kiali.yaml
+        </copy>
+        ```
+
 2. Deploy Prometheus.
 
     ```text
@@ -325,10 +350,10 @@ You may now **proceed to the next lab.**
 
 ## Learn More
 
-* [Develop Applications with XA](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
+* [Develop Applications with XA](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG-GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
 
 ## Acknowledgements
 
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
 * **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja Kannan, February 2024
+* **Last Updated By/Date** - Sylaja Kannan, July 2024
