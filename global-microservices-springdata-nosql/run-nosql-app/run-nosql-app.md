@@ -176,7 +176,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
     ```
     **Note:** This will start the "movie" application in the background.
 
-2. After you complete step 1, you can use the command tail to see the startup for the application
+2. After you complete step 1, you can use the command tail to see the startup for the application.
 
     ![appl-running](./images/appl-running.png)
 
@@ -187,7 +187,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
     ```
     The `mvnw` command will compile and start the application, please wait for the message *Started DemoApplication in xx seconds*
 
-3. Lets review the data created in the Lab 2.Execute in the Cloud Shell.
+3. Lets review the data created in the Lab 2.  Execute in the Cloud Shell.
 
     ```shell
     <copy>
