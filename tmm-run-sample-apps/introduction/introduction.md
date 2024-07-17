@@ -10,7 +10,7 @@ Estimated Workshop Time: *50 minutes*
 
 In this workshop, you will learn how to:
 
-* Run a Travel Agent application, which uses the LRA transaction protocol, to book a hotel and flight ticket. Learn how MicroTx manages LRA transactions.
+* Run a Travel Agent application, which uses the Saga transaction protocol, to book a hotel and flight ticket. Learn how MicroTx manages Saga transactions.
 * Run a Transfer application, which uses the XA transaction protocol, to transfer an amount from one department to another. Learn how MicroTx manages XA transactions.
 
 ### Prerequisites
@@ -23,8 +23,8 @@ Let's begin! If you need to create an Oracle Cloud account, click **Get Started*
 
 ## Task: Learn More
 
-* [Oracle® Transaction Manager for Microservices Developer Guide](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmdg/index.html)
-* [Oracle® Transaction Manager for Microservices Quick Start Guide](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmqs/index.html)
+* [Oracle® Transaction Manager for Microservices Developer Guide](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG)
+* [Oracle® Transaction Manager for Microservices Quick Start Guide](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMQS)
 
 ## Acknowledgements
 
