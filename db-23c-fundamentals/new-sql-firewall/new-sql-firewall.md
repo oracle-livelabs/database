@@ -20,7 +20,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
 1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
     ![click SQL](images/im1.png " ")
 
-2. For this lab, we'll create two new users, 'TEST', and grant necessary roles including SQL\_FIREWALL\_ADMIN, and DB23AI with developer role.
+2. For this lab, we'll create two new users, 'TEST' and 'DB23AI' and grant necessary roles including SQL\_FIREWALL\_ADMIN and the developer role respectively.
 
     ```
     <copy>
@@ -95,12 +95,12 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ![create the uses](images/im2.png " ")
 
 
-3. Sign out of the admin user and sign in as the test user
+3. Sign out of the admin user and sign in as the TEST user
 
     ![database actions](images/im21.png " ")
 
 4. Sign in to the TEST user using credentials:
-    - Username: Test
+    - Username: TEST
     - Password: Oracledb_4U#
 
     ![sign in](images/im5.png " ")
@@ -133,7 +133,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ```
     ![start capture](images/im9.png " ")
 
-9. Now sign out of the test user and back in as the DB23AI user. 
+9. Now sign out of the TEST user and back in as the DB23AI user. 
 
     * the password is Oracledb_4U#
 
@@ -230,7 +230,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ```
     ![enable allow list](images/im15.png " ")
 
-5. Now sign out of the test user and back in as the DB23AI user. 
+5. Now sign out of the TEST user and back in as the DB23AI user. 
 
     * the password is Oracledb_4U#
 
@@ -250,11 +250,16 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
 
 1. Sign back in with the **admin** user. 
 
-    This is the password you used to create autonomous database. If you've forgotten your password navigate to the Autonomous Database home page, **click** Database actions and then **click** SQL.
+    If you've forgotten your password, it can be found by clicking the **View login info** button in the top left of these instruction. Alternatively, you can watch the gif below to find the password.  
 
-    ![click SQL](images/im1.png " ")
+    ![reset the password](images/pswrd1.gif " ")
 
-2. Terminate any active sessions created by the TEST user and drop the user.
+2. Now using the password we found above, sign in as the admin user. 
+
+    ![sign into the admin user](images/im25.png " ")
+
+
+3. Terminate any active sessions created by the TEST user and drop the user.
 
     ```
     <copy>
@@ -275,7 +280,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ```
     ![terminate sessions](images/im17.png " ")
 
-3. Now drop both users
+4. Now drop both users
 
     ```
     <copy>
