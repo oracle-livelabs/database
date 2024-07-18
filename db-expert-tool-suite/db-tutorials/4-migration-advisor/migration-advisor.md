@@ -1,10 +1,10 @@
-# Lab 1: View and Compare Services Tool
+# Lab 4: Migration Method Advisor
 
 ## Introduction
 
-This lab walks you through how to use DBExpert's [View and Compare Services Tool](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/compare-solutions). 
+This lab walks you through how to use DBExpert's [Migration Methods Advisor](https://apexadb.oracle.com/ords/r/dbexpert/migration-methods/home).
 
-Our tool guides customers through Oracle’s Database service offerings and highlights key service information in a digestible way.
+Identify your options to migrate an on-premises Oracle Database to Oracle Cloud or Oracle Database@Azure.
 
 **Estimated Time: 5 minutes**
 

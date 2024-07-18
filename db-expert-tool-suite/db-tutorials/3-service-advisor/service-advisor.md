@@ -1,10 +1,9 @@
-# Lab 1: View and Compare Services Tool
-
+# Lab 3: Service Advisor
 ## Introduction
 
-This lab walks you through how to use DBExpert's [View and Compare Services Tool](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/compare-solutions). 
+This lab walks you through how to use DBExpert's [Service Advisor](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/service-advisor).
 
-Our tool guides customers through Oracle’s Database service offerings and highlights key service information in a digestible way.
+Enter requirements for your cloud database and see which services meet them, including price and total cost of ownership (TCO).
 
 **Estimated Time: 5 minutes**
 

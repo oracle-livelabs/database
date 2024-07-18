@@ -11,6 +11,8 @@ Oracle Cloud is the industry's broadest and most integrated cloud provider, with
 ### **Objectives**
 
 - Learn how to navigate DBExpert website
+- Overview of DBExpert
+- Walkthrough the homepage
 - Learn how to login via Oracle SSO for more features (optional) 
 
 ### **Prerequisites**
@@ -25,15 +27,48 @@ Oracle Cloud is the industry's broadest and most integrated cloud provider, with
 
     ![DBExpert Homepage](./images/homepage.png " ")
 
-## Task 2: Login for more features (optional)
 
-1. On the homepage, click on the login button in the top right
+## Task 2: Overview of DB Expert
+
+### Oracle DBExpert – an AI-powered expert resource web application ###
+
+Oracle offers a comprehensive portfolio of database services, available to deploy in Oracle Cloud Infrastructure, in your location with Cloud@Customer, and in multi-cloud environments such as Oracle Database@Azure.   Choosing the best solution for your new deployment or migration project may involve many business and technical considerations, and collecting and evaluating all the information you need is not always a simple task.
+
+As with many undertakings, the first step is often the hardest.  Where to start?  To assist you in taking the first step with a structured and guided discovery and evaluation process, our team created https://www.oracle.com/dbexpert, providing up-to-date, curated information covering Oracle's Database Management cloud services offerings.
+
+The site’s main tools include:
+- Information Viewers - quickly explore Oracle cloud service and database capabilities
+- Advisors - enter your requirements and instantly see recommendations and estimated pricing
+- Downloadable tools - analyze and report on your current Oracle estate
+- REST API endpoints - information retrieval and exercise the advisors
+
+The information viewers facilitate browsing and searching, while the advisors are user-driven interfaces that take inputs in pre-defined formats, such as select lists, radio buttons, and checkboxes, and provide appropriate guidance. These user experiences greatly simplify the process of selecting a service and deployment model.
+
+## Task 3: Homepage Walkthrough
+
+1. TBD - New UI
+
+## Task 4: Login for more features (optional)
+
+1. List of features 
+
+    | Non-Employee      | Oracle Employee |
+    | -------- | --------- |
+    | Save Service Advisor projects  | Save Service Advisor projects  |
+    |  | Share Service Advisor projects       |
+    |  | Compliance information enabled on Advisors |
+    |  | ISV apps enabled in Service Advisor |
+    |  | Oracle Internal Links enabled |
+    
+
+2. On the homepage, click on the login button in the top right
 
     ![DBExpert Homepage Login](./images/homepage_login.png " ")
 
-2. Sign in with Oracle email and password
+3. Sign in with Oracle email and password (or create an account if you don't have one!)
 
     ![Oracle Login](./images/login.png " ")
+
 
 You may now **proceed to the next lab**.
 

@@ -2,9 +2,7 @@
 
 ## Introduction
 
-This lab walks you through how to use DBExpert's [View and Compare Services Tool](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/compare-solutions). 
-
-Our tool guides customers through Oracle’s Database service offerings and highlights key service information in a digestible way.
+This lab walks you through how to use DBExpert's [View and Compare Services Tool](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/compare-solutions). Our tool guides customers through Oracle’s Database service offerings and highlights key service information in a digestible way.
 
 **Estimated Time: 5 minutes**
 
