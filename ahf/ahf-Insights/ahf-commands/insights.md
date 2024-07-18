@@ -3,7 +3,18 @@
 ## Introduction
 Welcome to the "AHF Insights Commands" lab.
 
-In this lab you will be guided through running commands to generate AHF Insights reports.
+The AHF Insights report pulls togther data from all of the AHF tools to build a free standing dynamic html report  
+that provides a 'Birds Eye' view of the system configuration and detected problems.
+Insights reports are included in many Automatic and Diagnostic Collections but can also be run on demand at any time.
+With Insights you can view:-
+- Detected Incidents
+- High utilization/Waits for O/S and database resources 
+- Your most recent compliance report data.
+- Disk and Diagnostic destination Usage
+- Much more as we can see in Lab 9
+
+
+In this lab you will be guided through gathering an on-demand AHF Insights reports.
 
 Estimated Lab Time: 5 Minutes
 
@@ -32,6 +43,6 @@ Report is generated at : <location>
 You may now *proceed to the next lab*.  
 
 ## Acknowledgements
-* **Authors** - Troy Anthony, Bill Burton
-* **Contributors** - 
+* **Authors** - Gareth Chapman
+* **Contributors** - Troy Anthony, Bill Burton
 * **Last Updated By/Date** - Bill Burton, July  2024
