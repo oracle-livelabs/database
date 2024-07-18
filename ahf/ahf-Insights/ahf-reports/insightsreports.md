@@ -38,7 +38,7 @@ Diagnostic dimensions include :
 1.  Download AHF Insights report zip file
 
     ```
-    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/sO6Bn1uNTY_zfuv7a8D_ydrmTxKueUkifDPiua2w0S1N0hr9K1ALNEshbcK3rp16/n/idhbogog2wy7/b/ocw24-livelabs/o/2_node_database_anomalies.zip
+    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/1fl26UQZiAjg7vCEP9K0kMJ3bhpdc-cQTWKYl9g08VJMCXZr0pi46xQgUxfe2VBx/n/idhbogog2wy7/b/ocw24-livelabs/o/node1_insights_2024_07_10_23_30_54_system_topology.zip
     ```
 
 2.  Extract AHF Insights report zip file - IMAGE
@@ -136,7 +136,7 @@ Diagnostic dimensions include :
 1.  Download AHF Insights report zip file
 
     ```
-    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/sO6Bn1uNTY_zfuv7a8D_ydrmTxKueUkifDPiua2w0S1N0hr9K1ALNEshbcK3rp16/n/idhbogog2wy7/b/ocw24-livelabs/o/2_node_database_anomalies.zip
+    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/JHSkKXru-WkrhAJj668oXGDLHGncTtuK1_EF40kilttwxMPHg6pDuGXe1CPujYDe/n/idhbogog2wy7/b/ocw24-livelabs/o/node1_insights_2024_05_02_20_44_11_insights.zip
     ```
 
 2.  Extract AHF Insights report zip file - IMAGE
@@ -146,6 +146,9 @@ Diagnostic dimensions include :
 
 1.  Click on Home tab (*highlighted*) and open timeline section (*highlighted*). - IMAGE
     - Note : Provides you distribution of events that happened across the nodes at different levels of the stack. Moreover these events are also categorized by event type, host and databases.
+
+![](./images/Task-9-point-1.png " ")
+
 2.  Click and drag a section on the chart to zoom into the selected timeframe. - IMAGE
 3.  Double click on the chart to reset the zoom to default period. - IMAGE
 4.  Click on the legend *ERROR* item to disable / enable the events beloning to *ERROR* category. - IMAGE
@@ -186,74 +189,79 @@ Diagnostic dimensions include :
 3.  Select the change categories of interest by select values in System Change Type dropdown (*highlighted*). - IMAGE
 4.  Observe : Every change entry gives information regarding targets on which the change was observed. - IMAGE
 
-## Task 9:  Review *Recommended Software Section* in Insights
+## Task 13:  Review *Recommended Software Section* in Insights
 
-1.  TODO
-2.  TODO
+1.  Click on Home tab (*highlighted*) and open Recommended Software section (*highlighted*). - IMAGE
+    - Note : Provides you details regarding oracle software found on the system and whether there is a recommendation to move to a higher version.
+2.  Found Versions marked in RED color indicate there is a need to move to higher version as suggested in the Recommended Version column. - IMAGE
+3.  Observe : Exadata Database Machine and Exadata Storage Server Supported Versions (Doc ID 888828.1) link provides details on the benifits of moving to the higher versions and the fixes that are available in them. - IMAGE
 
-## Task 9:  Review *Database Server Section* in Insights
+## Task 14:  Review *Database Server Section* in Insights
 
-1.  TODO
-2.  TODO
+1.  Click on Home tab (*highlighted*) and open Database Server section (*highlighted*). - IMAGE
+    - Note : Provides you metrics and alerts coming from Management Server, which includes Hardware , Software and ADR alerts.
+2.  Observe : By default you land on the metrics sub tab. - IMAGE
+3.  Select the node of choice from the drop down (*highlighted*) to view relevant metrics. - IMAGE
+4.  Click on the Alerts sub tab to view various stateless alerts coming from management server and their corresponding action. - IMAGE
+5.  Click on the the graph tab (*highlighted*) to view those alerts in graphical fashion. - IMAGE
+6.  Disable switch for show open alerts (*highlighted*) to view cleared alerts as well. - IMAGE
 
-## Task 9:  Review *RPM List Section* in Insights
+## Task 15:  Review *RPM List Section* in Insights
 
-1.  TODO
-2.  TODO
+1.  Click on Home tab (*highlighted*) and open RPM List section (*highlighted*). - IMAGE
+    - Note : Provides you list of RPMs present on nodes of the cluster along with their version release and arch details.
+2.  Search box at the top (*highlighted*) allows you to filter the table deatils based on your input. - IMAGE
+3.  Enable switch Show RPM differences (*highlighted*) to quickly fiure out which rpms are inconsistent across nodes. - IMAGE
 
-## Task 9:  Review *Database Parameters Section* in Insights
+## Task 16:  Review *Database Parameters Section* in Insights
 
-1.  TODO
-2.  TODO
+1.  Click on Home tab (*highlighted*) and open Database Parameters section (*highlighted*). - IMAGE
+    - Note : Provides you list of database parameters along with their values.
+2.  By default you will land into Normal sub tab which provides details regarding regular database parameters. - IMAGE
+3.  Search box at the top (*highlighted*) allows you to filter the table deatils based on your input. - IMAGE
+4.  Click on Hidden sub tab (*highlighted*) to view list of hidden / underscore database parameters. - IMAGE
 
-## Task 9:  Review *Kernel Parameters Section* in Insights
+## Task 17:  Review *Kernel Parameters Section* in Insights
 
-1.  TODO
-2.  TODO
+1.  Click on Home tab (*highlighted*) and open Kernel Parameters section (*highlighted*). - IMAGE
+    - Note : Provides you list of kernel parameters along with their values.
+2.  Search box at the top (*highlighted*) allows you to filter the table deatils based on your input. - IMAGE
 
-## Task 9:  Review *Patch Information Section* in Insights
+## Task 18:  Review *Patch Information Section* in Insights
 
-1.  TODO
-2.  TODO
+1.  Click on Home tab (*highlighted*) and open Patch Information section (*highlighted*). - IMAGE
+    - Note : Provides you details of patches applied on each node for a given home along with their constituent contents.
+2.  Observe: Home dropdown (*highlighted*) will allow you to select a given home for exploring patch information. - IMAGE
+3.  Observe: Host dropdown (*highlighted*) will allow you to select a given host for exploring patch information. - IMAGE
+4.  By default Patches sub tab (*highlighted*) is selected which allows you to view the patch timeline in graphical and tabular format. - IMAGE
+    - Note : Hovering on the graph data points shows you what patch was applied at a given time.
+5.  Exapnd patch row by clicking arrow (*highlighted*) infornt of the applied date to view the constituent of the patch. - IMAGE
+6.  Search box at the top (*highlighted*) allows you to filter the table deatils based on your input once clicked outside the search box. - IMAGE
+    - Note : Helps you to search whether a given patch is applied on the system or not.
+7.  Click on Components sub tab to view all the components and their respective version details. - IMAGE
+8.  Search box at the top (*highlighted*) allows you to filter the table deatils based on your input once clicked outside the search box. - IMAGE
 
-## Task 9:  Review *Space Analysis Section* in Insights
+## Task 19:  Review *Space Analysis Section* in Insights
 
-1.  TODO
-2.  TODO
+1.  Click on Home tab (*highlighted*) and open Space Analysis section (*highlighted*). - IMAGE
+    - Note : Provides you details of disk space utilization and diagnostic space utilization on the system.
+2.  By default Disk Utilization sub tab (*highlighted*) is selected which allows you to view the file system utilization across all nodes of the cluster for an easy comparitive view. - IMAGE
+3.  Observe: Table at the bottom (*highlighted*) provides additional information regarding which mount has Grid Home or Database Homes. - IMAGE
+4.  Observe: The usage column is color coded, green indicating normal usage, orange cautioning warning level usage and red cautioning danger level usage. - IMAGE
+5.  Click on Diagnostic Space Usage sub tab to view space usage under the diagnostic destination on each node. - IMAGE
+    - Note : Helps in identifying which directory is consuming lot of space under diag destination.
+6.  By hovering over the graph you would be able to observe space usage over a given directory. - IMAGE
+7.  Table at the bottom allows you to explore the directories in a hierarchial fashion. - IMAGE
+8.  Enable switch for Expand All (*highlighted*) to view the expanded form of the hierarchial directory structure. - IMAGE
 
-## Task 9:  Review *Database Anomalies Advisor Section* in Insights
+## Task 20:  Review *Database Anomalies Advisor Section* in Insights
 
-1.  TODO
-2.  TODO
-
-## Task 9:  Review *Patch Information Section* in Insights
-
-1.  TODO
-2.  TODO
-
-```
-wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/sO6Bn1uNTY_zfuv7a8D_ydrmTxKueUkifDPiua2w0S1N0hr9K1ALNEshbcK3rp16/n/idhbogog2wy7/b/ocw24-livelabs/o/2_node_database_anomalies.zip
-```
-
-```
-wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/prOzBTYBnuuqgzr8Vtimkok6gdruMRbAJcGbwULurrL5VqeUB_GSEAwv3UyFIP_x/n/idhbogog2wy7/b/ocw24-livelabs/o/2_node_space_usage.zip
-```
-```
-wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/163cLvTyGHDkr3WuHhw9eAYfAKDYSRaXLELFfbht6syQO_5bfniYYfYIY3-qo42e/n/idhbogog2wy7/b/ocw24-livelabs/o/2_node_with_event_timeline.zip
-```
-```
-wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/-1Rev5YesCjolSIva291SB6r9HDl6LDPHiQHAIclsQ99-Ebc9KeTK-Jm0JOwFP3n/n/idhbogog2wy7/b/ocw24-livelabs/o/2_node_with_node_eviction.zip
-```
-
-```
-wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/IpJkXiZtW35Od2ECPpKgjzCd_mUEwhYKpfw-8dNH2Y2WlCnBC4K3Z5ZhCwI4oXIH/n/idhbogog2wy7/b/ocw24-livelabs/o/8_node_configuration_and_best_practice.zip
-```
-
-```
-wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/qd-ZOeKs0EMpBCWK5MMmx41NOyH7bxOyx1vBGOZGnlIL_7u66blEMwNOzQvk8g_U/n/idhbogog2wy7/b/ocw24-livelabs/o/insights_with_os_issues.zip
-```
-
-You may now *proceed to the next lab*.  
+1.  Click on Home tab (*highlighted*) and open Database Anomalies Advisor section (*highlighted*). - IMAGE
+    - Note : Provides you details of database & clusterware performance anomalies identified by Cluster Health Advisor.
+2.  Observe : Left hand side navigation allows you view summary of performance issues observed during the period of Insights collection. Moreover it also provides you a mechanism to slice and dice performance anomaly information by hosts, databases, instances and individual performance problems. - IMAGE
+3.  Observe : The graph provides you a view of events hapenning across the nodes of the cluster, along with a gantt chart of performance issues observed. There are different targets for which anomalies are observed that are showcased o the legend. - IMAGE
+4.  Double clicking on range issue over gantt chart allows you to drill down into the specific problem and provides you details regarding corresponding metrics that were oberved with anomalous readings. - IMAGE
+5. The table at the bottom indicates the description of the problem, it's cause and corresponding action to be taken. - IMAGE
 
 ## Acknowledgements
 * **Authors** - Troy Anthony, Bill Burton
