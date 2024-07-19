@@ -1,4 +1,4 @@
-# Deploy the Movie Stream Catalog Microservice with Container Instances
+# Deploy the MovieStream Catalog Microservice with Container Instances
 
 ## Introduction
 
