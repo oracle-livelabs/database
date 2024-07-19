@@ -1,6 +1,6 @@
 {
-  "workshoptitle": "Pluggables, Clones and Containers: Securing Oracle Multitenant with Transparent Database Encryption (TDE)",
-  "help": "livelabs-help-db_us@oracle.com",
+  "workshoptitle": "Oracle Multitenant: Pluggable Database for Development Agility",
+  "help": "joe.bernens@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",

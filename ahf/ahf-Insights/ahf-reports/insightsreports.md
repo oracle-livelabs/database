@@ -1,3 +1,4 @@
+
 # AHF Insights Review
 
 ## Introduction
@@ -262,6 +263,7 @@ Diagnostic dimensions include :
 3.  Observe : The graph provides you a view of events hapenning across the nodes of the cluster, along with a gantt chart of performance issues observed. There are different targets for which anomalies are observed that are showcased o the legend. - IMAGE
 4.  Double clicking on range issue over gantt chart allows you to drill down into the specific problem and provides you details regarding corresponding metrics that were oberved with anomalous readings. - IMAGE
 5. The table at the bottom indicates the description of the problem, it's cause and corresponding action to be taken. - IMAGE
+
 
 ## Acknowledgements
 * **Authors** - Troy Anthony, Bill Burton

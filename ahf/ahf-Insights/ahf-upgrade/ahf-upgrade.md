@@ -34,13 +34,17 @@ You are connected to each of the DB System Nodes as described in **Lab 1: Connec
 	```
 2.	Repeat on the second node
 
+
 ## Task 2: Unzip the AHF 24.6.1 distribution
+
 
 1. Unzip the **ahf\_setup** installer script in the **/tmp** directory.
 
 	```
 	<copy>
+
 	unzip /tmp/AHF-LINUX_v24.1.0.zip -d /tmp/ahf24.1.0
+
 	</copy>
 	```
 	Command output:
@@ -60,7 +64,9 @@ You are connected to each of the DB System Nodes as described in **Lab 1: Connec
 
 	```
 	<copy>
+
 	/tmp/ahf24.6.1/ahf_setup -local -silent
+
 	</copy>
 	```
 
@@ -70,6 +76,7 @@ You are connected to each of the DB System Nodes as described in **Lab 1: Connec
 	AHF Installer for Platform Linux Architecture x86_64
 	AHF Installation Log : /tmp/ahf_install_246000_53236_2024_07_11-03_45_55.log
 	Starting Autonomous Health Framework (AHF) Installation
+
 	AHF Version: 24.6.1 Build Date: change
 	AHF is already installed at /u01/app/oracle.ahf
 	Installed AHF Version: 24.2.0 Build Date: 202402281810
@@ -79,6 +86,7 @@ You are connected to each of the DB System Nodes as described in **Lab 1: Connec
 	Started retype of index schema
 	Starting AHF Services
 	No new directories were added to TFA
+
 	Directory /u01/app/grid/crsdata/lldbcs61/trace/chad was already added to TFA Directories.
 	.----------------------------------------------------------------------------.
 	| Host                | TFA Version | TFA Build ID          | Upgrade Status |
@@ -89,12 +97,15 @@ You are connected to each of the DB System Nodes as described in **Lab 1: Connec
 	'---------------------+-------------+-----------------------+----------------'
 	Setting up AHF CLI and SDK
 	AHF is successfully upgraded to latest version
-	Moving /tmp/ahf_install_246100_53236_2024_07_11-03_45_55.log to /u01/app/oracle.ahf/data/lldbcs61/diag/ahf/
+
+	Moving /tmp/ahf_install_246100_53236_2024_07_11-03_45_55.log to /u01/app/oracle.ahf/data/lldbcs61/diag/ahf
 	</pre>
 
 7.	Repeat on the second node
 
+
 ## Task 4: Confirm AHF 24.6.1 is now running on both nodes 
+
 1. 	Run the **tfactl print status** command on either node to check the run status of AHF Oracle Trace File Analyzer processes.
 
 	```

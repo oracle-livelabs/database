@@ -17,7 +17,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
 
 ## Task 1: Enabling SQL Firewall
 
-1. For this lab, let's create sample tables and insert data as part of our demo.
+1. For this lab, let's create some sample tables and add some data.
 
     ```
     <copy>
@@ -49,15 +49,21 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ![create tables](images/im8.png " ")
 
 
-2. We'll need to sign in as a user with more privileges than the user DB23AI. For demo purposes, we'll use the ADMIN user. 
+2. To set up SQL Firewall, we'll need to sign in as a user with more privileges than the current user (DB23AI).
 
-    Log out of the user and log in as ADMIN.
+    If you've forgotten your password, it can be found by clicking the **View login info** button in the top left of these instruction. Alternatively, you can watch the gif below to find the password.  
 
-2. For this lab, we'll create a new user, 'TEST', and grant necessary roles including SQL\_FIREWALL\_ADMIN.
+    ![reset the password](images/pswrd1.gif " ")
+
+3. Now using the password we found above, sign in as the admin user. 
+
+    ![sign into the admin user](images/im25.png " ")
+
+4. For this lab, we'll create a new user, 'TEST', who will be the admin for our SQL Firewall. We'll use ADMIN and grant necessary roles including SQL\_FIREWALL\_ADMIN.
 
     ```
     <copy>
-    -- Create USER SQL
+    -- Create USER
     CREATE USER TEST IDENTIFIED BY Oracledb_4U#;
 
     -- Grant roles
@@ -90,21 +96,21 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ```
     ![create the user](images/im2.png " ")
 
-3. Sign out of the admin user and sign in as the test user
+5. Sign out of the admin user and sign in as the TEST user
 
     ![database actions](images/im21.png " ")
 
-4. Sign in to the TEST user using credentials:
-    - Username: Test
+6. Sign in to the TEST user using credentials:
+    - Username: TEST
     - Password: Oracledb_4U#
 
     ![sign in](images/im5.png " ")
 
-5. Click the Hamburger menu, select SQL.
+7. Click the Hamburger menu, select SQL.
 
     ![select SQL](images/im6.png " ")
 
-6. Enable SQL Firewall for the TEST user using the PL/SQL command:
+8. Enable SQL Firewall for the TEST user using the PL/SQL command:
     ```
     <copy>
     EXEC DBMS_SQL_FIREWALL.ENABLE;
@@ -112,7 +118,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ```
     ![enable SQL Firewall](images/im7.png " ")
 
-8. Start capturing SQL traffic for the DB23AI user to learn normal activities.
+9. Start capturing SQL traffic for the DB23AI user to learn normal activities.
 
     ```
     <copy>
@@ -128,14 +134,14 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ```
     ![start capture](images/im9.png " ")
 
-9. Now sign out of the test user and back in as the DB23AI user. 
+10. Now sign out of the TEST user and back in as the DB23AI user. 
 
     * the password is Oracledb_4U#
 
     ![start capture](images/im22.png " ")
     ![start capture](images/im23.png " ")
 
-10. Select the SQL time and perform typical SQL operations to capture normal activities (e.g., select and insert statements).
+11. Select the SQL time and perform typical SQL operations to capture normal activities (e.g., select and insert statements).
 
     ```
     <copy>
@@ -146,7 +152,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ```
     ![perform SQL operations](images/im10.png " ")
 
-11. Log back in as the TEST user
+12. Log back in as the TEST user
 
     * the password is Oracledb_4U#
 
@@ -154,7 +160,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ![perform SQL operations](images/im5.png " ")
 
 
-10. Click the SQL tile and stop the capture once all relevant activities are recorded.
+13. Click the SQL tile and stop the capture once all relevant activities are recorded.
 
     ```
     <copy>
@@ -204,7 +210,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ```
     ![enable allow list](images/im15.png " ")
 
-5. Now sign out of the test user and back in as the DB23AI user. 
+5. Now sign out of the TEST user and back in as the DB23AI user. 
 
     * the password is Oracledb_4U#
 

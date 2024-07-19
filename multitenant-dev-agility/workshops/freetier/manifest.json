@@ -1,6 +1,6 @@
 {
-  "workshoptitle": "Multitenant for Development Agility",
-  "help": "livelabs-help-db_us@oracle.com",
+  "workshoptitle": "Oracle Multitenant: Pluggable Database for Development Agility",
+  "help": "joe.bernens@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",

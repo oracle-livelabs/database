@@ -1,6 +1,7 @@
 # AHF Insights Commands 
 
 ## Introduction
+
 Welcome to the "AHF Insights Commands" lab.
 
 The AHF Insights report pulls togther data from all of the AHF tools to build a free standing dynamic html report  
@@ -43,6 +44,8 @@ Report is generated at : <location>
 You may now *proceed to the next lab*.  
 
 ## Acknowledgements
+
 * **Authors** - Gareth Chapman
 * **Contributors** - Troy Anthony, Bill Burton
+
 * **Last Updated By/Date** - Bill Burton, July  2024

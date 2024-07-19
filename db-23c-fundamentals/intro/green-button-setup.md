@@ -18,19 +18,13 @@ Estimated Time: 5 minutes
 
 * Requested a Green Button environment
 
-## Task 1: Launch the Workshop and Log in to the Oracle Cloud Console
+## Task 1: Log in to the Oracle Cloud Console
 
-_If you already launched the workshop and logged in to the Console, you can skip this task and proceed to **Lab 2**; otherwise, start with **step 1** below._
-
-1. On the LiveLabs Home page, click the **My Reservations** tab to display your reserved workshop on the **My Reservations** page. To start the workshop, click the **Launch Workshop** link.
-
-    ![The My Reservations tab and the Launch Workshop link for a sample workshop are highlighted.](./images/my-reservations.png " ")
-
-    The workshop is displayed in a new tab named **Run Workshop - Build a Data Lake with Autonomous Database**. Click the **View Login Info** link in the banner.
+1. Click the **View Login Info** link in the banner.
 
     ![Click View Login Info.](./images/ll-view-login-info.png " ")
 
-     The **Reservation Information** panel is displayed. This displays important information that you will need throughout this workshop.
+     This panel displays important information that you will need throughout this workshop.
 
     ![The Workshop is displayed.](./images/ll-reservation-information.png " ")
 

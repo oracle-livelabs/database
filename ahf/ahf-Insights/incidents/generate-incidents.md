@@ -45,6 +45,7 @@ This is done as often multiple errors are reported together and we want to ensur
 	```
 
 ## Task 2: Log in to the oracle user (if you are not already oracle) and confirm you environment is set up to connect to the database with `sqlplus`
+
 1.	If you are not already the oracle user then you can `sudo su` from both "ops" and "root users"
 
 	```
@@ -81,6 +82,7 @@ This is done as often multiple errors are reported together and we want to ensur
 ## Task 3: Connect to the database with `sqlplus` and generate some errors
 
 
+
 1. Ensure your environment is set to connect to the database instance
 
 	```
@@ -94,7 +96,9 @@ This is done as often multiple errors are reported together and we want to ensur
 	ORACLE_SID=racUXBVI1
 	ORACLE_HOME=/u01/app/oracle/product/19.0.0.0/dbhome_1	
 	```
+
 	You should see that the instance name running on this node from Task 2, Step 3 is the one set to **ORACLE_SID**
+
 
 2. Connect to the datase instance with **sqlplus** with sysdba role
 	```
@@ -162,6 +166,7 @@ This is done as often multiple errors are reported together and we want to ensur
 	[Jul/12/2024 03:40:19.000 UTC]: [db.racuxbvi_ngt_lhr.racUXBVI1]: Incident details in: /u01/app/oracle/diag/rdbms/racuxbvi_ngt_lhr/racUXBVI1/incident/incdir_19778/racUXBVI1_ora_6798_i19778.trc
 	[Jul/12/2024 03:40:19.000 UTC]: [db.racuxbvi_ngt_lhr.racUXBVI1]: ORA-04031: unable to allocate  bytes of shared memory (,,,)
 ```
+
 	>Note that AHF Also reports the Incident trace location for the Error that follows
 	
 You may now *proceed to the next lab*.

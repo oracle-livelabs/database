@@ -1,6 +1,7 @@
 # AHF Common Commands 
 
 ## Introduction
+
 Welcome to the "Try out some commonly used AHF commands" lab.
 
 In this lab you will be guided through various common AHF tasks.
@@ -80,7 +81,6 @@ Estimated Lab Time: 5 Minutes
     ahfctl compliance -profile dba
     </copy>
     ```
-
 
 You may now *proceed to the next lab*.  
 
