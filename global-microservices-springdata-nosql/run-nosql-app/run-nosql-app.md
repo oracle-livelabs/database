@@ -1,4 +1,4 @@
-# Run the Movie Stream Catalog Microservice
+# Run the MovieStream Catalog Microservice
 
 ## Introduction
 
@@ -41,7 +41,7 @@ In this task we will review the code using OCI Code Editor.
 its customers. Whether deploying on an "On-Premises" cluster or utilizing the
 Oracle NoSQL Database Cloud Service, developers and end-users get the latest in
 NoSQL technology. Oracle offers a complete range of deployment options to
-support your NoSQL database, from on-premises to private cloud to public cloud.  Depending
+support your Oracle NoSQL database, from on-premises to private cloud to public cloud.  Depending
 on which deployment option you choose, you may need different authentication strategies.
 
   The class `AppConfig.java` illustrates the different authentication options in the case
