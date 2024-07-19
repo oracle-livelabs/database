@@ -13,7 +13,6 @@ This workshop is configured with a custom image having all the required podman c
 
 In this workshop, we attempt to use minimal resources to show the demonstration, and in the process we chose a single compute instance to install all of the Oracle Globally Distributed Database components and appclient.
 
-You may visually verify the result of this lab's tasks e.g., Replication Unit's movement from one shard to another shard from the Demo UI Application about which there is a next Lab.
 
 *Estimated Time*:  1 hour
 
@@ -875,7 +874,9 @@ gdsctl status ru -show_chunks
 
 ![<status_after_Scale_down>](./images/t10-7b-status-after-scale-down.png " ")
     
-8. Stop and remove the shard4 container 
+8. Stop and remove the shard4 container. Shard4 container is up before stop and remove.
+
+![<rm_shard4>](./images/t10-8-stop-rm-shard4-container.png " ")
 
 ```
 <copy>
@@ -888,8 +889,6 @@ sudo podman stop shard4
 sudo podman rm shard4
 </copy>
 ```
-
-![<rm_shard4>](./images/t10-8-stop-rm-shard4-container.png " ")
 
 9. Check if the shard4 has been removed.
 
