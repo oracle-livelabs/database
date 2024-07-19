@@ -622,7 +622,6 @@ gdsctl status ru -ru 2
 
 ![<status_ru_source_target>](./images/t9-2-ru-status.png " ")
 
-  
 Change the RU leader using below command, if required.
 
 ```
@@ -659,7 +658,7 @@ gdsctl move ru -ru 8 -source orcl1cdb_orcl1pdb -target orcl2cdb_orcl2pdb
 
 ![<move_ru_a>](./images/t9-2-move-ru.png " ")
 
-  Check the status for RU's again, after move completes, to verify:
+Check the status for RU's again, after move completes, to verify:
 
 ```
 <copy>
@@ -688,7 +687,7 @@ gdsctl relocate chunk -chunk 3 -sourceru 8 -targetru 2
 
 
 3. Please check the status of the chunks and RU, after relocate completes.
-    
+
 ```
 <copy>
 gdsctl status ru -show_chunks
@@ -701,7 +700,7 @@ gdsctl status ru -show_chunks
 
 Scaling down can be done using REMOVE SHARD and load balancing using MOVE RU.
 
-1.  Run below command to the check the status of chunks and RUs 
+1. Run below command to the check the status of chunks and RUs 
 
 ```
 <copy>
@@ -720,7 +719,7 @@ gdsctl switchover ru -ru 7 -shard orcl1cdb_orcl1pdb
 </copy>
 ```
 
-![<change_leader_a>](./images/t10-2a-switchover-ru-leader.png " ")   
+![<change_leader_a>](./images/t10-2a-switchover-ru-leader.png " ")
 
 ```
 <copy>
@@ -728,7 +727,7 @@ gdsctl switchover ru -ru 4 -shard orcl2cdb_orcl2pdb
 </copy>
 ```
 
-![<change_leader_b>](./images/t10-2b-switchover-ru-leader.png " ")   
+![<change_leader_b>](./images/t10-2b-switchover-ru-leader.png " ")
 
 
 
@@ -739,13 +738,12 @@ Check the status of chunks after switchover.
 gdsctl status ru -show_chunks
 </copy>
 ```
-![<status_after_switchover>](./images/t10-2-after-switchover.png " ")
 
+![<status_after_switchover>](./images/t10-2-after-switchover.png " ")
 
 We perform move ru until all the RU followers are moved from shard4 to other shards.
 Source database shouldn't contain the replica leader
 Target database should not already contain another replica of the replication unit.
-
 
 ```
 <copy>
@@ -764,7 +762,6 @@ gdsctl move ru -ru 8 -source orcl4cdb_orcl4pdb -target orcl1cdb_orcl1pdb
 gdsctl move ru -ru 2 -source orcl4cdb_orcl4pdb -target orcl1cdb_orcl1pdb
 </copy>
 ```
-
 
 ```
 <copy>
@@ -786,7 +783,6 @@ gdsctl move ru -ru 3 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
 </copy>
 ```
 
-
 ```
 <copy>
 gdsctl move ru -ru 4 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
@@ -798,7 +794,6 @@ gdsctl move ru -ru 4 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
 gdsctl move ru -ru 6 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
 </copy>
 ```
-
 
 ![<move_ru_before_scale_down>](./images/t10-2b-move-ru.png " ")
 
@@ -847,6 +842,7 @@ gdsctl show ddl -failed_only
 python3 /opt/oracle/scripts/sharding/scripts/main.py --deleteshard="shard_host=oshard4-0;shard_db=ORCL4CDB;shard_pdb=ORCL4PDB;shard_port=1521;shard_group=shardgroup1"
 </copy>
 ```
+
 ![<move_all_chunks_n_verify_ddl_failed>](./images/t10-6-delete-shard4.png " ")
 
 
@@ -870,7 +866,7 @@ gdsctl config chunks
 <copy>
 gdsctl status ru -show_chunks
 </copy>
-```  
+```
 
 ![<status_after_Scale_down>](./images/t10-7b-status-after-scale-down.png " ")
     
@@ -893,21 +889,22 @@ sudo podman rm shard4
 9. Check if the shard4 has been removed.
 
 ```
-    <copy>
-    sudo podman ps -a
-    </copy>
-    ```
+<copy>
+sudo podman ps -a
+</copy>
+```
 
 ![<podman_stop>](./images/t10-9-after-scale-down-podman.png " ")
 
 
 You may now proceed to the next lab.
 
+
 ## **Appendix 1**: Raft Replication Overview
 
 **Raft Replication** 
 
- - [Raft Replication documentation] (https://docs.oracle.com/en/database/oracle/oracle-database/23/shard/raft-replication.html#GUID-AF14C34B-4F55-4528-8B28-5073A3BFD2BE)
+- [Raft Replication documentation] (https://docs.oracle.com/en/database/oracle/oracle-database/23/shard/raft-replication.html#GUID-AF14C34B-4F55-4528-8B28-5073A3BFD2BE)
 
 
 ## Rate this Workshop
