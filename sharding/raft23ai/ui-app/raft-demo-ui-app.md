@@ -35,45 +35,28 @@ This lab assumes you have:
   - Lab: Initialize Environment
   - Lab: Topology
 
-## Task 1: Start/stop/restart RAFT Demo UI application
+## Task 1: Verify RAFT Demo UI application is running
 
 1. How to check if RAFT Demo UI is running?
 
     ```
     <copy>
-    ps -ef | grep raft
-    </copy>
-    ```
-   
- 2.  When RAFT Demo UI needs start?
-   
-   ![<start-raft-ui-app_is_needed>](./images/start-raft-ui-app_is_needed.png " ")
-
- 3.  When RAFT Demo UI is already running?
-
-    ![<raft-ui-app_is_running>](./images/raft-ui-app_is_running.png " ")
-
-
-4. How to start RAFT Demo UI?
-
-    ```
-    <copy>
-    sudo podman exec -it --user oracle appclient /bin/bash
-    cd $DEMO_MASTER
-    ./start-raft-ui-app.sh
-    Enter return to come back to [oracle@appclient demo-master]$
+    ps -ef | grep raft-ui
     </copy>
     ```
 
-    ![<start_raft_ui_app>](./images/start_raft_ui_app.png " ")
+   ![<check-raft-ui-process>](./images/raft-ui-app_is_running.png " ")
 
-5. For some reasons if you want to restart the RAFT Demo UI, it can be performed by steps as below:
+
+2. For some reasons if you want to restart the RAFT Demo UI, it can be stopped then started:
     ```
     <copy>
-    ps -ef | grep raft
+    sudo podman exec -it appclient /bin/bash
+    ps -ef | grep raft-ui
     kill -9 <pid of process resulting from above command>
+    ps -ef | grep raft-ui
     ./start-raft-ui-app.sh
-    Enter return to come back to [oracle@appclient demo-master]$
+    ps -ef | grep raft-ui
     </copy>
     ```
 
@@ -246,7 +229,9 @@ You will see that shard1 stop situation has no impact on the running UI applicat
     
 You can stop the workload that ran in the previous task using Ctrl+C.
 
-In summary, Lab "Explore Raft Replication Topology" actions e.g., for Raft Replication failovers, Scale UP or Scale Down, Move Replication Unit Replicas etc. can be verified from Raft Demo UI.
+In addition to above tasks, the results from Lab "Explore Raft Replication Topology" tasks e.g., for Raft Replication failovers, Scale UP or Scale Down, Move or Copy Replication Unit Replicas etc. all can be verified from Raft Demo UI.
+
+This is the end of the Raft Replication Workshop.
 
 ## Rate this Workshop
 When you are finished, don't forget to rate this workshop!  We rely on this feedback to help us improve and refine our LiveLabs catalog.  Follow the steps to submit your rating.
