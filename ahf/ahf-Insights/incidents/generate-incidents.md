@@ -21,7 +21,31 @@ In this lab, you will:
 ### Prerequisites
 - You are connected to one of the DB System Nodes as described in **Lab 1: Connect to your DB System**
 
-## Task 1: Log in to the oracle user (if you are not already oracle) and confirm you environment is set up to connect to the database with `sqlplus`
+## Task 1: Reduce the time AHF waits to start an automatic collection after incident detection
+AHF normally waits 5 minutes from the time an incident is detected to the time it starts the collection.  
+This is done as often multiple errors are reported together and we want to ensure the collection gathers all the relevant information
+
+1. Set the wait time for an auto collection to start to 60 seconds to reduce wait time in the lab.
+
+	```
+	<copy>
+	tfactl set minTimeForAutoDiagCollection=60 -c
+	</copy>
+	```
+	Command Output:
+	```
+	Successfully set minTimeForAutoDiagCollection=60
+	.--------------------------------------.
+	|    lvracdb-s01-2024-07-15-1248401    |
+	+------------------------------+-------+
+	| Configuration Parameter      | Value |
+	+------------------------------+-------+
+	| minTimeForAutoDiagCollection | 60    |
+	'------------------------------+-------'
+	```
+
+## Task 2: Log in to the oracle user (if you are not already oracle) and confirm you environment is set up to connect to the database with `sqlplus`
+
 1.	If you are not already the oracle user then you can `sudo su` from both "ops" and "root users"
 
 	```
@@ -55,7 +79,8 @@ In this lab, you will:
 	Instance racUXBVI2 is running on node lldbcs62
 	```
 
-## Task 2: Connect to the database with `sqlplus` and generate some errors
+## Task 3: Connect to the database with `sqlplus` and generate some errors
+
 
 
 1. Ensure your environment is set to connect to the database instance
@@ -71,7 +96,9 @@ In this lab, you will:
 	ORACLE_SID=racUXBVI1
 	ORACLE_HOME=/u01/app/oracle/product/19.0.0.0/dbhome_1	
 	```
-	You should see that the instance name running on this node from Task 1, Step 3 is the one set to **ORACLE_SID**
+
+	You should see that the instance name running on this node from Task 2, Step 3 is the one set to **ORACLE_SID**
+
 
 2. Connect to the datase instance with **sqlplus** with sysdba role
 	```
@@ -139,18 +166,10 @@ In this lab, you will:
 	[Jul/12/2024 03:40:19.000 UTC]: [db.racuxbvi_ngt_lhr.racUXBVI1]: Incident details in: /u01/app/oracle/diag/rdbms/racuxbvi_ngt_lhr/racUXBVI1/incident/incdir_19778/racUXBVI1_ora_6798_i19778.trc
 	[Jul/12/2024 03:40:19.000 UTC]: [db.racuxbvi_ngt_lhr.racUXBVI1]: ORA-04031: unable to allocate  bytes of shared memory (,,,)
 ```
-	Note that AHF Also reports the Incident trace location for the Error that follows
+
+	>Note that AHF Also reports the Incident trace location for the Error that follows
 	
-
-## Task 3: Hang the RAC Database LMS0 process to cause an Instance Eviction (Work In Progress)
-
-1. Determine the process ID for the lms0 process
-
-
-2. Use the `gdb` command to connect to the lms0 process
-
-	
-3. Monitor the Database alert log to see the Eviction
+You may now *proceed to the next lab*.
 
 ## Acknowledgements
 * **Authors** - Bill Burton, Troy Anthony

@@ -1,3 +1,4 @@
+
 # AHF Insights Review
 
 ## Introduction
@@ -556,6 +557,7 @@ Diagnostic dimensions include :
 
 ![](./images/Task-20-point-5.png " ")
 
+
 ## Task 21:  Review *Detected Problem Section* in Insights
 
 1.  Click on Home tab (*highlighted*) and open Detected Problem section (*highlighted*).
@@ -582,6 +584,7 @@ Diagnostic dimensions include :
 6. Observe : the resolution steps area, you will get guided steps to resolve the issue.
 
 ![](./images/Task-21-point-6.png " ")
+
 
 ## Acknowledgements
 * **Authors** - Troy Anthony, Bill Burton, Arjun Upadhyay
