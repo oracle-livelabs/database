@@ -2,9 +2,9 @@
 
 ## Introduction
 
-This lab walks you through the steps to create a API signing key for an Oracle Cloud user account. Perform this lab if you want to use API Keys for authentication.
+This lab walks you through the steps to create a API signing key for an Oracle Cloud user account.
 
-*Note: You can skip this lab (and proceed to Lab 2) if you plan to use any other form of authentication like Instance Principal Authentication, Resource PrincipalAuthentication or Security Token Authentication.*
+Complete this lab if you want to use API Keys for authentication. You can skip this lab (and proceed to [Lab 2](?lab=create-singleton-tables)) if you plan to use any other form of authentication like Instance Principal Authentication, Resource Principal Authentication or Security Token Authentication.
 
 Estimated Lab Time: 10 minutes
 
