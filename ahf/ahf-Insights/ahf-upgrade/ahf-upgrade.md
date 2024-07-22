@@ -29,38 +29,44 @@ You are connected to each of the DB System Nodes as described in **Lab 1: Connec
 	```
 	<copy>
 	cd /tmp
-	wget  https://objectstorage.us-ashburn-1.oraclecloud.com/p/fgCIYTsWmF0BzTqLMs36l3FEjaH2WuAKWL64TS_S0Hzqs90DhcAkzS4D1tp3zoxJ/n/idhbogog2wy7/b/ocw24-livelabs/o/AHF-LINUX_v24.6.0.zip
+	wget  https://objectstorage.us-ashburn-1.oraclecloud.com/p/djRqaAzUijQEgNQgTRk05DY9DI-DgHGfDJXbOdWgO2TCWCPx9AtHjBd1tx-5lUpQ/n/idhbogog2wy7/b/ocw24-livelabs/o/AHF-LINUX_v24.6.1.zip
 	</copy>
 	```
 2.	Repeat on the second node
 
-## Task 2: Unzip the AHF 24.6.0 distribution
+
+## Task 2: Unzip the AHF 24.6.1 distribution
+
 
 1. Unzip the **ahf\_setup** installer script in the **/tmp** directory.
 
 	```
 	<copy>
-	unzip /tmp/AHF-LINUX_v24.6.0.zip -d /tmp/ahf24.6.0
+
+	unzip /tmp/AHF-LINUX_v24.1.0.zip -d /tmp/ahf24.1.0
+
 	</copy>
 	```
 	Command output:
 
 	```
-	Archive:  /tmp/AHF-LINUX_v24.6.0.zip
-	inflating: /tmp/ahf24.6.0/ahf_setup  
-	extracting: /tmp/ahf24.6.0/ahf_setup.dat  
-	inflating: /tmp/ahf24.6.0/README.txt  
-	inflating: /tmp/ahf24.6.0/oracle-tfa.pub
+	Archive:  /tmp/AHF-LINUX_v24.1.0.zip
+	inflating: /tmp/ahf24.6.1/ahf_setup  
+	extracting: /tmp/ahf24.6.1/ahf_setup.dat  
+	inflating: /tmp/ahf24.6.1/README.txt  
+	inflating: /tmp/ahf24.6.1/oracle-tfa.pub
 	```
 2. Repeat on the second node
 
-## Task 3: Upgrade to AHF 24.6.0 distribution
+## Task 3: Upgrade to AHF 24.6.1 distribution
 
 1.	Execute the **ahf_setup** self extracting installer
 
 	```
 	<copy>
-	/tmp/ahf24.6.0/ahf_setup -local -silent
+
+	/tmp/ahf24.6.1/ahf_setup -local -silent
+
 	</copy>
 	```
 
@@ -70,7 +76,8 @@ You are connected to each of the DB System Nodes as described in **Lab 1: Connec
 	AHF Installer for Platform Linux Architecture x86_64
 	AHF Installation Log : /tmp/ahf_install_246000_53236_2024_07_11-03_45_55.log
 	Starting Autonomous Health Framework (AHF) Installation
-	AHF Version: 24.6.0 Build Date: 202407021318
+
+	AHF Version: 24.6.1 Build Date: change
 	AHF is already installed at /u01/app/oracle.ahf
 	Installed AHF Version: 24.2.0 Build Date: 202402281810
 	Upgrading /u01/app/oracle.ahf
@@ -79,22 +86,26 @@ You are connected to each of the DB System Nodes as described in **Lab 1: Connec
 	Started retype of index schema
 	Starting AHF Services
 	No new directories were added to TFA
-	Directory /u01/app/grid/crsdata/lvracdb-s01-2024-07-10-2347061/trace/chad was already added to TFA Directories.
+
+	Directory /u01/app/grid/crsdata/lldbcs61/trace/chad was already added to TFA Directories.
 	.----------------------------------------------------------------------------.
 	| Host                | TFA Version | TFA Build ID          | Upgrade Status |
 	+---------------------+-------------+-----------------------+----------------+
-	| lldbcs61            |  24.6.0.0.0 | 240600020240702131841 | UPGRADED       |
+	| lldbcs61            |  24.6.1.0.0 | change | UPGRADED       |
 	'---------------------+-------------+-----------------------+----------------'
 	| lldbcs62            |  24.2.0.0.0 | 240200020240228181054 | Not Upgraded   |
 	'---------------------+-------------+-----------------------+----------------'
 	Setting up AHF CLI and SDK
 	AHF is successfully upgraded to latest version
-	Moving /tmp/ahf_install_246000_53236_2024_07_11-03_45_55.log to /u01/app/oracle.ahf/data/lldbcs61/diag/ahf/
+
+	Moving /tmp/ahf_install_246100_53236_2024_07_11-03_45_55.log to /u01/app/oracle.ahf/data/lldbcs61/diag/ahf
 	</pre>
 
 7.	Repeat on the second node
 
-## Task 4: Confirm AHF 24.6.0 is now running on both nodes 
+
+## Task 4: Confirm AHF 24.6.1 is now running on both nodes 
+
 1. 	Run the **tfactl print status** command on either node to check the run status of AHF Oracle Trace File Analyzer processes.
 
 	```
@@ -107,9 +118,9 @@ You are connected to each of the DB System Nodes as described in **Lab 1: Connec
 	.-----------------------------------------------------------------------------------------------------------------------.
 	| Host                           | Status of TFA | PID   | Port | Version    | Build ID              | Inventory Status |
 	+--------------------------------+---------------+-------+------+------------+-----------------------+------------------+
-	| lldbcs61                       | RUNNING       | 59190 | 5000 | 24.6.0.0.0 | 240600020240702131841 | COMPLETE         |
+	| lldbcs61                       | RUNNING       | 59190 | 5000 | 24.6.1.0.0 | change | COMPLETE         |
 	'--------------------------------+---------------+-------+------+------------+-----------------------+------------------'
-	| lldbcs62                       | RUNNING       | 63152 | 5000 | 24.6.0.0.0 | 240600020240702131841 | COMPLETE         |
+	| lldbcs62                       | RUNNING       | 63152 | 5000 | 24.6.1.0.0 | change | COMPLETE         |
 	'--------------------------------+---------------+-------+------+------------+-----------------------+------------------'
 	</pre>
 

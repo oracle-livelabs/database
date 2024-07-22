@@ -65,6 +65,9 @@ There is an ongoing project to pull all of these tools under the single 'ahf' co
 - [ORA-07445](https://blogs.oracle.com/database/post/ora-07445)
 - [Oracle Database Performance Tuning](https://blogs.oracle.com/database/post/database-performance-tuning)  
 
+You may now *proceed to the first lab*.
+
+
 ## Acknowledgements
 
 - **Authors/Contributors** - Troy Anthony, Bill Burton, Gareth Chapman
