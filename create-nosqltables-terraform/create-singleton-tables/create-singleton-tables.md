@@ -28,6 +28,7 @@ provider "oci" {
 region = "us-phoenix-1"
 alias = "phx"
 }
+
 provider "oci" {
 region = "us-ashburn-1"
 alias = "iad"
@@ -57,12 +58,16 @@ A sample **provider.tf** is shown below:
 <copy>
 variable "tenancy_ocid" {
 }
+
 variable "user_ocid" {
 }
+
 variable "fingerprint" {
 }
+
 variable "private_key_path" {
 }
+
 variable "region" {
 }
 
@@ -198,9 +203,11 @@ You will use input variables in the NoSQL configuration file while creating a ta
 variable "table_table_limits_max_read_units" {
 default = 10
 }
+
 variable "table_table_limits_max_write_units" {
 default = 10
 }
+
 variable "table_table_limits_max_storage_in_gbs" {
 default = 1
 }
@@ -232,7 +239,8 @@ resource "oci_nosql_table" "nosql_demoKeyVal" {
     ddl_statement = "CREATE TABLE if not exists demoKeyVal (key INTEGER GENERATED ALWAYS AS
                                                             IDENTITY (START WITH 1
                                                             INCREMENT BY 1 NO CYCLE),
-                                                            value JSON, name STRING, PRIMARY KEY (key))"
+                                                            value JSON, name STRING,
+                                                            PRIMARY KEY (key))"
     name = "nosql_demoKeyVal"
     table_limits {
        max_read_units = var.table_table_limits_max_read_units
@@ -267,6 +275,7 @@ Resource actions are indicated with the following symbols: + create
 
 Terraform will perform the following actions:
 # oci_nosql_table.nosql_demo will be created
+
   + resource "oci_nosql_table" "nosql_demo" {
       + compartment_id                          = "<COMPARTMENT_OCID>"
       + ddl_statement                           = "CREATE TABLE IF NOT EXISTS nosql_demo (id INTEGER,
@@ -291,6 +300,7 @@ Terraform will perform the following actions:
           + max_write_units    = 50
         }
     }
+
 Do you want to perform these actions?
 Terraform will perform the actions described above.
 Only 'yes' will be accepted to approve.

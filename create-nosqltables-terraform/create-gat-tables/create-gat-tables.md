@@ -88,6 +88,7 @@ Resource actions are indicated with the following symbols: + create
 
 Terraform will perform the following actions:
 # oci_nosql_table.nosql_demo will be created
+
  + resource "oci_nosql_table" "nosql_demo" {
      + compartment_id                          = "<COMPARTMENT_ID>"
      + ddl_statement                           = "CREATE TABLE IF NOT EXISTS nosql_demo(id INTEGER, name STRING, info JSON, PRIMARY KEY(id)) with schema frozen"

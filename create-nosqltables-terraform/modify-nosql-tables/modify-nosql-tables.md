@@ -30,12 +30,14 @@ variable "compartment_ocid" {
 resource "oci_nosql_table" "nosql_demoKeyVal" {
 
     compartment_id = var.compartment_ocid
+
     ddl_statement = "CREATE TABLE if not exists nosql_demoKeyVal (key INTEGER GENERATED ALWAYS AS
                                                             IDENTITY (START WITH 1
                                                             INCREMENT BY 1 NO CYCLE),
                                                             value JSON,
                                                             fullName STRING, PRIMARY KEY (key))"
     name = "nosql_demoKeyVal"
+
     table_limits {
        max_read_units = var.table_table_limits_max_read_units
        max_storage_in_gbs = var.table_table_limits_max_storage_in_gbs
@@ -66,6 +68,7 @@ variable "table_ddl_statement" {
              name STRING, info JSON,PRIMARY KEY(id))
              using TTL 10 days with schema frozen"
 }
+
 resource "oci_nosql_table" "nosql_demo" {
   #Required
   compartment_id = var.compartment_ocid
@@ -78,6 +81,7 @@ resource "oci_nosql_table" "nosql_demo" {
     max_storage_in_gbs = 2     
   }
 }
+
 resource "oci_nosql_table_replica" "replica_montreal" {
   table_name_or_id = oci_nosql_table.nosql_demo.id
   region = "ca-montreal-1"
@@ -85,6 +89,7 @@ resource "oci_nosql_table_replica" "replica_montreal" {
   max_read_units     = "60"
   max_write_units    = "60"
 }
+
 #add a regional replica
 resource "oci_nosql_table_replica" "replica_toronto" {
   compartment_id = var.compartment_ocid
