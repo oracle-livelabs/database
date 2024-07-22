@@ -156,7 +156,7 @@ Diagnostic dimensions include :
 
 ![](./images/Task-9-point-1.png " ")
 
-2.  Click and drag a section on the chart to zoom into the selected timeframe.
+2.  Click and drag a section on the chart to zoom into the selected time-frame.
 
 ![](./images/Task-9-point-2.png " ")
 
@@ -164,7 +164,7 @@ Diagnostic dimensions include :
 
 ![](./images/Task-9-point-3.png " ")
 
-4.  Click on the legend *ERROR* item to disable / enable the events beloning to *ERROR* category.
+4.  Click on the legend *ERROR* item to disable / enable the events belonging to *ERROR* category.
 
 ![](./images/Task-9-point-4.png " ")
 
@@ -172,7 +172,7 @@ Diagnostic dimensions include :
 
 ![](./images/Task-9-point-5.png " ")
 
-6.  Scroll down to view the events hapenning in the cluster in a chronological fashion.
+6.  Scroll down to view the events happening in the cluster in a chronological fashion.
 
 ![](./images/Task-9-point-6.png " ")
 
@@ -195,8 +195,115 @@ Diagnostic dimensions include :
 
 ## Task 10:  Review *Operating System Issues Section* in Insights
 
-1.  TODO
-2.  TODO
+1.  Click on Home tab (*highlighted*) and open Operating System Issues section (*highlighted*).
+    - Note : Provides you information regarding operating system issues observed on your system during the period of Insights report.
+
+![](./images/Task-10-point-1.png " ")
+
+2.  By default you will land into Report sub tab (*highlighted*), if there are OS issues observed.
+    - Note : Report sub tab shows you an overall OS issue summary on the first accordion and all the constituent issues observed as individual accordions.
+
+![](./images/Task-10-point-2.png " ")
+
+3.  Click on Summary accordion to open it.
+
+![](./images/Task-10-point-3.png " ")
+
+4.  Observe : High level timeline, with OS findings and event detected on the system at the bottom. The graph allows you to zoom into specific areas of interest.
+
+![](./images/Task-10-point-4-1.png " ")
+
+![](./images/Task-10-point-4-2.png " ")
+
+5.  Scroll down and click on High Swap Activity (*highlighted*) accordion, to observe the swap activity issue observed on the system.
+
+![](./images/Task-10-point-5.png " ")
+
+6.  Scroll down and you would be able to view high level contextual statistics regarding the issue as well as a tabular format of OS snapshots during the time of issue.
+
+![](./images/Task-10-point-6.png " ")
+
+7.  Click on the arrow before Timestamp (*highlighted*) to view further metrics during a given snapshot.
+
+![](./images/Task-10-point-7.png " ")
+
+8.  Scroll to top, Click on Configuration sub tab.
+    - Note : Provides you high level configuration details for CPU, Memory, Network and IO.
+
+![](./images/Task-10-point-8.png " ")
+
+9.  Click on Metric sub tab to view raw, issue annotated operating system metrics.
+    - Note : Metrics are categorized into following sections, System Overview - Showcases major metrics one would always want to know about from operating system for issue triage, next category of metrics are based on areas which as CPU, Memory, Local IO, Process, Network, Process Aggregation.
+    - Note : Red / Green color markings near the sub tab indicates whether a given area has any anomalies or not. Red - Anomalies, Green - No Anomalies.
+
+![](./images/Task-10-point-9.png " ")
+
+10. Observe : By default Node selection would be set to Cluster-wide (*highlighted*), which showcases metrics from all nodes together on the chart with different colors.
+
+![](./images/Task-10-point-10.png " ")
+
+11. Observe : Click and drag an area of interest on any chart, all charts would synchronize to that selection which provides easy mechanism to compare same time frames. 
+
+![](./images/Task-10-point-11-1.png " ")
+
+![](./images/Task-10-point-11-2.png " ")
+
+12. Use legend to select / de-select node metrics.
+    - Note : X mark on the legend indicates that there are metrics which have anomalies on the given charts.
+
+![](./images/Task-10-point-12.png " ")
+
+13. Observe : Once you drag the area around the spike in Blocked Process Count chart (*highlighted*), you will observe shaded region on it as well as other charts which have anomalies in the same period like Available Memory Low, Huge Page Utilization and Swap In Rate.
+
+![](./images/Task-10-point-13-1.png " ")
+
+![](./images/Task-10-point-13-2.png " ")
+
+14. Click on CPU sub tab (*highlighted*) to view CPU Metrics.
+
+![](./images/Task-10-point-14.png " ")
+
+15. Click on Memory sub tab (*highlighted*) to view Memory Metrics.
+
+![](./images/Task-10-point-15.png " ")
+
+16. Click on Local IO sub tab (*highlighted*) to view Local IO Metrics.
+    - Note : Local IO has two sub tabs, System IO which provide high level IO Read, IO Write and IO Rate, whereas Disk sub tab allows you to select a given node and view all disk related metrics on that given node.
+
+![](./images/Task-10-point-16.png " ")
+
+17. Click on Disk sub tab (*highlighted*), select a node to view all disk metrics.
+
+![](./images/Task-10-point-17-1.png " ")
+
+![](./images/Task-10-point-17-2.png " ")
+
+18. To view a specific disk double click on the disk name on the legend.
+
+![](./images/Task-10-point-18.png " ")
+
+19. Click on Process sub tab (*highlighted*) to view Process metrics.
+
+![](./images/Task-10-point-19.png " ")
+
+20. Click on Network sub tab (*highlighted*) to view Network metrics.
+
+![](./images/Task-10-point-20.png " ")
+
+21. Network metrics are categorized under Aggregated NICS metrics, NICS - Provides Host Level NIC metrics, IP, UDP and TCP.
+
+![](./images/Task-10-point-21.png " ")
+
+22. Click on Process Aggregation sub tab (*highlighted*) and select node (*highlighted*) to view how a group of processes, belonging to a given category are behaving.
+
+![](./images/Task-10-point-22-1.png " ")
+
+![](./images/Task-10-point-22-2.png " ")
+
+23. Observe : The column name indicates the metric name and the categories of chart underneath indicates group of processes. i.e. Clusterware, ASM, Apex, Database SIDs, Others.
+    - Note : Same charting features for zooming in, panning etc would apply.
+
+![](./images/Task-10-point-23.png " ")
 
 ## Task 11:  Review *Best Practice Issues Section* in Insights
 
@@ -217,7 +324,7 @@ Diagnostic dimensions include :
 
 ![](./images/Task-11-point-4.png " ")
 
-5.  Click on the legend *PASS* item to disable / enable the checks beloning to *PASS* category.
+5.  Click on the legend *PASS* item to disable / enable the checks belonging to *PASS* category.
     - Note : You will observe the difference in the chart and at the bottom you will see PASS checks will appear when the PASS legend is enabled and will disappear when the PASS legend is disabled.
 
 ![](./images/Task-11-point-5-passDisabled.png " ")
@@ -230,11 +337,11 @@ Diagnostic dimensions include :
 
 ![](./images/Task-11-point-6-2.png " ")
 
-7.  Click on Jump To Section (*highlighted*) to move to a specific cateogry.
+7.  Click on Jump To Section (*highlighted*) to move to a specific category.
 
 ![](./images/Task-11-point-7.png " ")
 
-8.  Expand the check row by clicking on the arrow (*highlighted*) before the check status, to view additional what are the benifit / impact of the check on your system and details regarding the target and their corresponding status.
+8.  Expand the check row by clicking on the arrow (*highlighted*) before the check status, to view additional what are the benefit / impact of the check on your system and details regarding the target and their corresponding status.
 
 ![](./images/Task-11-point-8.png " ")
 
@@ -274,7 +381,7 @@ Diagnostic dimensions include :
 
 ![](./images/Task-13-point-2.png " ")
 
-3.  Observe : Exadata Database Machine and Exadata Storage Server Supported Versions (Doc ID 888828.1) link provides details on the benifits of moving to the higher versions and the fixes that are available in them.
+3.  Observe : Exadata Database Machine and Exadata Storage Server Supported Versions (Doc ID 888828.1) link provides details on the benefits of moving to the higher versions and the fixes that are available in them.
 
 ## Task 14:  Review *Database Server Section* in Insights
 
@@ -310,11 +417,13 @@ Diagnostic dimensions include :
 
 ![](./images/Task-15-point-1.png " ")
 
-2.  Search box at the top (*highlighted*) allows you to filter the table deatils based on your input.
+2.  Search box at the top (*highlighted*) allows you to filter the table details based on your input.
 
 ![](./images/Task-15-point-2.png " ")
 
-3.  Enable switch Show RPM differences (*highlighted*) to quickly fiure out which rpms are inconsistent across nodes.
+3.  Enable switch Show RPM differences (*highlighted*) to quickly figure out which rpms are inconsistent across nodes.
+
+![](./images/Task-15-point-3.png " ")
 
 ## Task 16:  Review *Database Parameters Section* in Insights
 
@@ -327,7 +436,7 @@ Diagnostic dimensions include :
 
 ![](./images/Task-16-point-2.png " ")
 
-3.  Search box at the top (*highlighted*) allows you to filter the table deatils based on your input.
+3.  Search box at the top (*highlighted*) allows you to filter the table details based on your input.
 
 ![](./images/Task-16-point-3.png " ")
 
@@ -342,7 +451,7 @@ Diagnostic dimensions include :
 
 ![](./images/Task-17-point-1.png " ")
 
-2.  Search box at the top (*highlighted*) allows you to filter the table deatils based on your input.
+2.  Search box at the top (*highlighted*) allows you to filter the table details based on your input.
 
 ![](./images/Task-17-point-2.png " ")
 
@@ -366,11 +475,11 @@ Diagnostic dimensions include :
 
 ![](./images/Task-18-point-4.png " ")
 
-5.  Exapnd patch row by clicking arrow (*highlighted*) infornt of the applied date to view the constituent of the patch.
+5.  Expand patch row by clicking arrow (*highlighted*) in front of the applied date to view the constituent of the patch.
 
 ![](./images/Task-18-point-5.png " ")
 
-6.  Search box at the top (*highlighted*) allows you to filter the table deatils based on your input once clicked outside the search box.
+6.  Search box at the top (*highlighted*) allows you to filter the table details based on your input once clicked outside the search box.
     - Note : Helps you to search whether a given patch is applied on the system or not.
 
 ![](./images/Task-18-point-6.png " ")
@@ -379,7 +488,7 @@ Diagnostic dimensions include :
 
 ![](./images/Task-18-point-7.png " ")
 
-8.  Search box at the top (*highlighted*) allows you to filter the table deatils based on your input once clicked outside the search box.
+8.  Search box at the top (*highlighted*) allows you to filter the table details based on your input once clicked outside the search box.
 
 ![](./images/Task-18-point-8.png " ")
 
@@ -390,7 +499,7 @@ Diagnostic dimensions include :
 
 ![](./images/Task-19-point-1.png " ")
 
-2.  By default Disk Utilization sub tab (*highlighted*) is selected which allows you to view the file system utilization across all nodes of the cluster for an easy comparitive view.
+2.  By default Disk Utilization sub tab (*highlighted*) is selected which allows you to view the file system utilization across all nodes of the cluster for an easy comparative view.
 
 ![](./images/Task-19-point-2.png " ")
 
@@ -426,15 +535,19 @@ Diagnostic dimensions include :
 
 ![](./images/Task-20-point-1.png " ")
 
-2.  Observe : Left hand side navigation allows you view summary of performance issues observed during the period of Insights collection. Moreover it also provides you a mechanism to slice and dice performance anomaly information by hosts, databases, instances and individual performance problems.
+2.  Observe : Left hand side navigation (*highlighted*) allows you view summary of performance issues observed during the period of Insights collection. Moreover it also provides you a mechanism to slice and dice performance anomaly information by hosts, databases, instances and individual performance problems.
 
 ![](./images/Task-20-point-2.png " ")
 
-3.  Observe : The graph provides you a view of events hapenning across the nodes of the cluster, along with a gantt chart of performance issues observed. There are different targets for which anomalies are observed that are showcased o the legend.
+3.  Observe : The graph provides you a view of events happening across the nodes of the cluster, along with a gantt chart of performance issues observed. There are different targets for which anomalies are observed that are showcased on the legend. At the bottom you will find a table summarizing Host and Instance problem summary with details of the problem and targets they are affecting.
 
-![](./images/Task-20-point-3.png " ")
+![](./images/Task-20-point-3-1.png " ")
 
-4.  Double clicking on range issue over gantt chart allows you to drill down into the specific problem and provides you details regarding corresponding metrics that were oberved with anomalous readings.
+![](./images/Task-20-point-3-2.png " ")
+
+![](./images/Task-20-point-3-3.png " ")
+
+4.  Double clicking on range issue over gantt chart allows you to drill down into the specific problem and provides you details regarding corresponding metrics that were observed with anomalous readings.
 
 ![](./images/Task-20-point-4-1.png " ")
 
@@ -445,7 +558,35 @@ Diagnostic dimensions include :
 ![](./images/Task-20-point-5.png " ")
 
 
+## Task 21:  Review *Detected Problem Section* in Insights
+
+1.  Click on Home tab (*highlighted*) and open Detected Problem section (*highlighted*).
+    - Note : Provides you details of problems that have been observed on the system with it's reason, cause and evidences. Moreover it would also provide problem resolution steps.
+
+![](./images/Task-21-point-1.png " ")
+
+2.  Observe : Detected Problems panel indicate the list of problems observed in chronological order.
+
+![](./images/Task-21-point-2.png " ")
+
+3.  Click on show button (*highlighted*) to view further details for this problem and steps to resolve it.
+
+![](./images/Task-21-point-3.png " ")
+
+4.  New tab with the problem name would open up, which would contain all the problem details.
+
+![](./images/Task-21-point-4.png " ")
+
+5. Observe : the evidence area, you can get all supporting details of an evidence by clicking the arrow (*highlighted*).
+
+![](./images/Task-21-point-5.png " ")
+
+6. Observe : the resolution steps area, you will get guided steps to resolve the issue.
+
+![](./images/Task-21-point-6.png " ")
+
+
 ## Acknowledgements
-* **Authors** - Troy Anthony, Bill Burton
-* **Contributors** - 
+* **Authors** - Troy Anthony, Bill Burton, Arjun Upadhyay
+* **Contributors** - Arlet Diaz
 * **Last Updated By/Date** - Bill Burton, July  2024
