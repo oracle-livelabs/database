@@ -357,8 +357,12 @@ In lab 2, you created a workload using HammerDB. At the same time, you were samp
       col enabled format a3
       col accepted format a3
       col fixed format a3
-      SELECT sql_handle, plan_name, enabled, accepted, fixed FROM dba_sql_plan_baselines;
+      
+      select sql_handle, plan_name, enabled, accepted, fixed 
+      from   dba_sql_plan_baselines;
       </copy>
+
+      -- Be sure to hit RETURN
       ```
 
       <details>
@@ -369,7 +373,9 @@ In lab 2, you created a workload using HammerDB. At the same time, you were samp
       SQL> col enabled format a3
       SQL> col accepted format a3
       SQL> col fixed format a3
-      SQL> SELECT sql_handle, plan_name, enabled, accepted FROM dba_sql_plan_baselines;
+      SQL> 
+      SQL> select sql_handle, plan_name, enabled, accepted 
+           from   dba_sql_plan_baselines;
 
       SQL_HANDLE           PLAN_NAME                      ENA ACC FIX
       -------------------- ------------------------------ --- --- ---

@@ -46,7 +46,13 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
 
 3. Optionally, you can look at the script to understand how you use the SQL Tuning Advisor API.
 
-4. Examine the output of SQL Tuning Advisor. Scroll to the top of the output. Your output may vary from the sample output below. Read and interpret your own report.
+4. First, a few words about the SQL Tuning Advicor. 
+
+    * The SQL Tuning Advisor provides many recommendations. Some are more useful than others. 
+    * Generally, you need to use your knowledge of the application using the database to determine which recommendations to apply.
+    * Do not blindly accept all recommendations made by the SQL Tuning Advisor.
+
+5. Examine the output of SQL Tuning Advisor. Scroll to the top of the output. Your output may vary from the sample output below. Read and interpret your own report.
 
     * General information contains basic information on the SQL Tuning Advisor task. You can see it was created based on a SQL Tuning Set.
 
@@ -165,9 +171,9 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
 
 ## Task 2: Implement recommendations
 
-You can implement the recommendations and then use SPA to validate the effect on your workload.
+In this lab, you will implement some of the recommendations. Namely, those about creating indexes. Then, you can use SQL Performance Analyzer to determine the impact.
 
-1. Implement the changes. Be sure to remove duplicate recommendations. Your recommendations may vary from the sample output. Copy/paste the recommendations from your own report.
+1. Implement the index recommendation. Be sure to remove duplicate recommendations. Your recommendations may vary from the sample output. Copy/paste the recommendations from your own report.
 
     ```
     <copy>
@@ -229,6 +235,10 @@ You can implement the recommendations and then use SPA to validate the effect on
 
     * Overall there is almost a 3 % improvement from creating indexes.
     * This is based on the workload from the SQL Tuning Set. It does not tell anything about the effect on other workloads, like DMLs.
+
+**Congratulations! You have completed the Performance Stability Prescription.**
+
+This is the end of track 1. You can proceed with any lab from tracks 2 or 3. 
 
 You may now *proceed to the next lab*.
 

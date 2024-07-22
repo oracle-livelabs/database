@@ -545,7 +545,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
 10. When the upgrade completes, AutoUpgrade prints a message saying *Job 101 completed* and exits from the AutoUpgrade console.
 
-    **Congratulations! You upgraded the UPGR database successfully from Oracle Database 19c to 23ai and converted your database to a PDB.**
+**Congratulations! You upgraded the UPGR database successfully from Oracle Database 19c to 23ai and converted your database to a PDB.**
 
 You may now *proceed to the next lab*.
 

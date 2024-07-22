@@ -183,7 +183,7 @@ Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimize
     * The first table on the left shows the SQLs that are using more CPU time after upgrade. The threshold in the SPA comparison is set to 2 %. Only SQLs regression more than that is highlighted. All, except one, SQLs have a plan change.
     * The second table on the right shows the SQLs that are using more elapsed time after upgrade. A few are even performing better (the green rows) which is good. 
 
-11. Find the details on SQL ID *4wg725nwpxb1z* and see the difference in execution plans.
+11. In the first report, find the details on SQL ID *4wg725nwpxb1z* and see the difference in execution plans.
 
     ![See details on individual SQLs](./images/spa-plan-compare-23ai.png " ")
 
