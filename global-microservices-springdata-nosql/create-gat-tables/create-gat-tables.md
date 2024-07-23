@@ -1,4 +1,4 @@
-# Setup Global Active Tables
+# Set Up Global Active Tables
 
 ## Introduction
 
