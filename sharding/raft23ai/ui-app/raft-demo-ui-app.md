@@ -63,32 +63,68 @@ This lab assumes you have:
     ![<restart_raft_ui_app>](./images/restart_raft_ui_app.png " ")
 
 
-## Task 2: Access the Demo UI application to verify the switchover from More Details page
+## Task 2: Demo UI application page flow
 
-1. View All Customers List from the Catalog Database from the browser with http://localhost:/8080
-   This will open a home page as shown in introduction section of Raft Replication Demo UI Application. It retrieves All Customers List from the Catalog Database using GDS$CATALOG service. Home Page shows 25 Customer's data with pagination, count of All customers, More Details, Add new customer, Update customer and Delete customer links. To view the customers listed on a specific page number, click the link for the page number.
+1. On right side of browser window by default page "RAFT 23ai LiveLabs Demo: All Customers List" is shown by http://localhost:/8080.
+   It retrieves All Customers List from the Catalog Database using GDS$CATALOG service. Home Page shows 25 Customer's data with pagination, count of All customers, More Details, Add new customer, Update customer and Delete customer links. To view the customers listed on a specific page number, you can click the page number displayed below the All Customers List.
 
-2. More Details Page: When you click on More Details link shown of the Home Page, it will show shard database name and Replication Unit(RU#) to which this particular customerId belongs to as of now. This page also shows Refresh List which can be useful to view More details after any event which moves the record for this customerId to some other shard database name and RU. There are multiple events e.g., rebalance data manually by performing switchover/copy manually, shutdown shard, failover, scale up /scale-down etc which can allow shard db and RU# changed automatically by RAFT topology. Home Page link is shown in the bottom of the page.
+2. More Details Page: When you click on "More Details" link shown on the Home Page, it will show shard database name and Replication Unit(RU#) to which this particular customerId belongs to as of now. This page also shows Refresh link which can be useful to view "More details" after any event which moves the record for this customerId to some other RU on a different shard database.
 
-3. Below are switchover steps performed via gsm1 container at GDSCTL and after each step, output is verified from the UI:
-
-    ![<gdsctl_switchover_ru_shard1_shard2_and_back_to_shard1>](./images/gdsctl_switchover_ru_shard1_shard2_and_back_to_shard1.png " ")
-
-
-4. On More Details page verify that before switchover of RU#1 from shard1 to shard2, leader is shard1 for this RU#1:
+## Task 3: Perform swithover and verify results from "More Details" page and Terminal window
+ 
+1. On "More Details" page, for a customer record, it's Shard database name is shown as orcl1cdb_orcl1pdb (which is shard1) for RU#1. Its because Leader is shard1 for this RU#1:
 
     ![<before_switchover_of_ru1_from_shard1_to_shard2leader_shard1>](./images/before_switchover_of_ru1_from_shard1_to_shard2_leader_is_shard1.png " ")
 
+   This can also be verified from the terminal:
 
-5. After switchover of RU#1 from shard1 to shard2, shard2 becomes the leader of RU#1:
+    ```
+    <copy>
+    sudo podman exec -it gsm1 /bin/bash
+    gdsctl ru -sort
+    </copy>
+    ```
 
-    ![<aafter_switchover_of_ru1_from_shard1_to_shard2_leader_is_shard2>](./images/after_switchover_of_ru1_from_shard1_to_shard2_leader_is_shard2.png " ")
+    ![<before_switchover_ru_sort_shows_shard1_is_leader_for_ru1>](./images/before_switchover_ru_sort_shows_shard1_is_leader_for_ru1.png " ")
 
 
-6. After switchover of RU#1 from shard2 back to shard1, new leader of RU#1 is shard1 as it was originally:
+2. Switchover RU#1 from shard1 to shard2 from the terminal:
+
+    ```
+    <copy>
+    gdsctl switchover ru -ru 1 -shard orcl2cdb_orcl2pdb
+    </copy>
+    ```
+
+    After switchover of RU#1 from shard1 to shard2, once you refresh the "More Details" page for same customer record, its Shard Database Name changes to orcl2cdb_orcl2pdb (which is shard2) because the new Leader of RU#1 is shard2:
+
+    ![<after_switchover_of_ru1_from_shard1_to_shard2_leader_is_shard2>](./images/after_switchover_of_ru1_from_shard1_to_shard2_leader_is_shard2.png " ")
+
+
+    Switchover verification from the Terminal:
+
+    ![<switchover_ru1_from_shard1_to_shard2_terminal2>](./images/switchover_ru1_from_shard1_to_shard2_terminal.png " ")
+    
+
+3. Switchover RU#1 back to orcl1cdb_orcl1pdb ( which is shard1) as it was originally:
+
+    ```
+    <copy>
+    gdsctl switchover ru -ru 1 -shard orcl1cdb_orcl1pdb
+    </copy>
+    ```
+
+    It shows Shard Database Name orcl1cdb_orcl1pdb which is the new leader of RU#1:
 
     ![<after_switchover_of_ru1_from_shard2_to_shard1_leader_is_shard1_as_originial>](./images/after_switchover_of_ru1_from_shard2_to_shard1_leader_is_shard1_as_originial.png " ")
 
+    Switchover verification from the Terminal:
+
+    ![<switchover_ru1_from_shard2_to_shard1_terminal>](./images/switchover_ru1_from_shard2_to_shard1_terminal.png " ")
+
+
+Similalry, there are other multiple RU movement commands, rebalance data manually, perform failover test, scale up /scale-down by stop/start shard(s) etc as detailed in Lab "Explore Raft Replication Topology" tasks can be performed and verified from "More Details" page.
+In the bottom of the "More Details" page a link to Home Page is shown to retun back to view "RAFT 23ai LiveLabs Demo: All Customers List".
 
 ## Task 3: Access the Demo UI application to view pre-loaded Customers List and perform CRUD operations
 
@@ -126,7 +162,7 @@ This lab assumes you have:
 
     ![<run_workload>](./images/additional_workload.png " ")
 
-2. Monitor the load from UI app: After additional demo data load, count will increase and all customers including recently will be shown like below
+2. Monitor the load from UI app: After additional demo data load, count will increase and all customers including recently added will be shown like below:
 
     ![<After additional demo data loaded>](./images/all_customer_after_additonal_workload.png " ")
 
@@ -135,18 +171,18 @@ This lab assumes you have:
 
     ```
     <copy>
-    gdsctl status ru -show_chunks
+    gdsctl ru -sort
     </copy>
     ```
 
 4. You can keep running the workload while you perform the next task or exit workload using Ctrl+C. Keep observing All customers page via http://localhost:8080 to view the Total count is increasing accordingly after refreshing the Home Page.
 
 
-## Task 4: Verify data from UI during Failover Test
+## Task 5: Verify data from UI during Failover Test
 
 What's effect on Application UI when one of the available shard databases goes down or is taken down for maintenance? Since RU leadership will changes from shard1 to any competing shards, UI will keep showing data from the catalog without any this UI application downtime.
 
-Run the similar steps from Lab 3 Explore Raft Replication Topology - Task 5: Perform Failover Test.
+Run the similar steps from Lab "Explore Raft Replication Topology - Task 5: Perform Failover Test" like below:
 
 1.  Run the below command as **oracle** user to check the status for all the containers.
 
