@@ -70,7 +70,7 @@ set your compartment to 'demonosql', click on the Test table, which will bring u
 
   ![Destroy Stack](./images/destroy-stack.png)
 
-4.  When the destroy task will show Succeeded, return to the stack page.
+4.  When the "destroy-job" task shows Succeeded, return to the stack page.
 
 5. Click on more actions and delete stack.  
 

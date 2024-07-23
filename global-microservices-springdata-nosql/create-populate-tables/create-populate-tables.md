@@ -9,7 +9,7 @@ walk you through a couple of different approaches. Oracle NoSQL Database Cloud
 Service supports both schema-based and schema-less (JSON) modeling so we will
 create examples of both tables.
 
-_Estimated Time:_ 7 minutes
+_Estimated Time:_ 11 minutes
 
 ### Objectives
 

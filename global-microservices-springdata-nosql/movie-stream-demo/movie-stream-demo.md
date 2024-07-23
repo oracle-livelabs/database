@@ -48,7 +48,7 @@ when your development team wants to reliably build, deploy, and manage cloud-nat
 on virtual nodes or managed nodes, and Container Engine for Kubernetes provisions them on Oracle Cloud Infrastructure in an existing OCI tenancy.
 The live running application was deployed using OKE.
 
-    * In this Live Lab, we will use Container Instances because we do not need the orchestration platform and the kubernetes platform takes 10 minutes to setup.
+    * In this LiveLab, we will use Container Instances because we do not need the orchestration platform and the kubernetes platform takes 10 minutes to setup.
     Oracle Cloud Infrastructure (OCI) Container Instances is a serverless compute service that enables you to quickly and easily
     run containers without managing any servers. Container Instances runs your containers on serverless compute optimized
     for container workloads that provides the same isolation as virtual machines. Container instances are suitable for containerized workloads
@@ -56,7 +56,7 @@ The live running application was deployed using OKE.
     jobs in CI/CD pipelines, automation tasks f or cloud operations, data/media processing jobs, development or test environments, and more.
 
 
-* Oracle NoSQL Database Cloud Service is a severless database cloud service that is designed for database operations that require predictable, single-digit millisecond latency responses to simple queries. NoSQL Database Cloud Service allows developers to focus on application development rather than setting up cluster servers, or performing system monitoring, tuning, diagnosing, and scaling.
+* Oracle NoSQL Database Cloud Service is a severless database cloud service that is designed for database operations that require predictable, single-digit millisecond latency responses to simple queries. Oracle NoSQL Database Cloud Service allows developers to focus on application development rather than setting up cluster servers, or performing system monitoring, tuning, diagnosing, and scaling.
 
 The features of these services enable you to build a serverless production application that is highly available, scalable, and secure. Your application can use thousands of servers, however, by leveraging this pattern you do not have to manage a single one.
 
