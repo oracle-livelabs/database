@@ -193,25 +193,20 @@ The AHF Command Line Interfaces `ahfctl`, `tfactl`, `orachk`, `ahf` are all link
 	The full run will happen every Sunday and 14 reports will be retained.
 
 ## Task 4: Upgrade Oracle Autonomous Health Framework (AHF)
+You will now learn how to upgrade AHF after downloading *ahf_setup*  
+You must complete on both nodes of the RAC Database Cluster.
+>Note: To save time you can do all the steps in parallel on each node.
 
-	You will now learn how to upgrade AHF after downloading **ahf_setup** which you need to complete on both nodes of the RAC Database Cluster.
-	To save time you can do all of the Task 4a to 4d steps in parallel on the 2 nodes.
-
-## Task 4a: Download the new AHF installer from OCI Object Storage to each of the 2 nodes
-1.	As the root user download the new AHF Installer using **wget**
+1.	Download the new AHF installer from OCI Object Storage to each of the 2 nodes
+	As the root user download the new AHF Installer using **wget**
 	```
 	<copy>
 	cd /tmp
 	wget  https://objectstorage.us-ashburn-1.oraclecloud.com/p/djRqaAzUijQEgNQgTRk05DY9DI-DgHGfDJXbOdWgO2TCWCPx9AtHjBd1tx-5lUpQ/n/idhbogog2wy7/b/ocw24-livelabs/o/AHF-LINUX_v24.6.1.zip
 	</copy>
 	```
-2.	Repeat on the second node
 
-
-## Task 4b: Unzip the AHF 24.6.1 distribution
-
-
-1. Unzip the **ahf\_setup** installer script in the **/tmp** directory.
+2. Unzip the AHF 24.6.1 installer in to the **/tmp** directory.
 
 	```
 	<copy>
@@ -226,17 +221,12 @@ The AHF Command Line Interfaces `ahfctl`, `tfactl`, `orachk`, `ahf` are all link
 	inflating: /tmp/ahf24.6.1/README.txt  
 	inflating: /tmp/ahf24.6.1/oracle-tfa.pub
 	</pre>
-2. Repeat on the second node
 
-## Task 4c: Upgrade to AHF 24.6.1 distribution
-
-1.	Execute the **ahf_setup** self extracting installer
+3.	Upgrade to AHF 24.6.1 distribution using the **ahf_setup** self extracting installer
 
 	```
 	<copy>
-
 	/tmp/ahf24.6.1/ahf_setup -local -silent
-
 	</copy>
 	```
 
@@ -270,12 +260,11 @@ The AHF Command Line Interfaces `ahfctl`, `tfactl`, `orachk`, `ahf` are all link
 	Moving /tmp/ahf_install_246100_53236_2024_07_11-03_45_55.log to /u01/app/oracle.ahf/data/lldbcs61/diag/ahf
 	</pre>
 
-7.	Repeat on the second node
 
 
-## Task 4d: Confirm AHF 24.6.1 is now running on both nodes 
+4.	Confirm AHF 24.6.1 is now running on both nodes.
 
-1. 	Run the **tfactl print status** command on either node to check the run status of AHF Oracle Trace File Analyzer processes.
+	Run the **tfactl print status** command on either node to check the run status of AHF Oracle Trace File Analyzer processes.
 
 	```
 	<copy>
