@@ -110,7 +110,6 @@ All collections are copied back to the initiating node ready for analysis or upl
                     "checksum_algo": "sha256",
                     "UploadStatus": "FAILED"
                 }
-
             ]
         }
     ]
@@ -162,7 +161,7 @@ All collections are copied back to the initiating node ready for analysis or upl
 4. Check the contents of the Automatic Diagnostic Collection.
 
     You can quickly review all the files collected/generated in the node using the `unzip -l` command
-    <pre>>
+    <pre>
     unzip -l lldbcs61.tfa_srdc_autosrdc_Mon_Jul_15_17_32_46_UTC_2024.zip
     </pre>
     > Note: You would be uploading the *.zip* files to Oracle Support when you have to raise a Support Request for the Incidents  
@@ -174,7 +173,7 @@ AHF has manual collections for :-
 - When customers do not want Automatic Collections enabled.
 - Incidents AHF does not detect automatically such as install or some performance issues.
 
-Manual collections are more configurable (through CLI opstions) allowing addition of certain components and uploads to remove endpoints such as My Oracle Support.  
+Manual collections are more configurable (through CLI options) allowing addition of certain components and uploads to remove endpoints such as My Oracle Support.  
 Manual collections still work cross nodes and bring back all collected data to the originating node. 
 They also in most cases gather an AHF Insights report but we will talk about those in a later Lab.  
 
@@ -214,21 +213,89 @@ You will be prompted to choose:-
 <copy>
 tfactl diagcollect
 </copy>
-
+```
 Command Output:
+<pre>
+AHF has detected following events from 2024-07-22 17:29:38.000 to 2024-07-22 21:29:38.000
+All events are displayed in UTC time zone
 
+Choose an event to perform a diagnostic collection:
+1  . 2024-07-22 20:47:24.000 [RDBMS.raclzhlm_dhh_bom.racLZHLM1] ORA-00600: internal error code, arguments: [kgb], [livelabs1], [17], [...
+2  . 2024-07-22 20:47:34.000 [RDBMS.raclzhlm_dhh_bom.racLZHLM1] ORA-04031: unable to allocate  bytes of shared memory (,,,)
+3  . Display Problem Categories
+4  . Enter a different event time
+X  . Exit
+Choose the option [1-4]:
+</pre>
 
-2.  Generate Incidents 
+You can at this point choose one of the detected events to generate a collection for or choose a 'problem category' if we did not detect the event or issue you want  
+to do a collection for by selecting '3  . Display Problem Categories'
 
-## Task 2:  TODO 
+<pre>
+Problem Categories:
+1  . ACFS
+2  . ASM Configuration
+3  . ASM Errors/Other
+4  . ASM Instance Crash
+5  . CRS Client
+6  . CRS Errors/Other
+7  . Clusterware Installation
+8  . Clusterware Patching
+9  . Clusterware Startup
+10 . Clusterware Upgrade
+11 . Database Corruption
+12 . Database Errors/Other
+13 . Database Install
+14 . Database Instance Eviction/Crash
+15 . Database Internal Error
+16 . Database Memory
+17 . Database Patching
+18 . Database Performance
+19 . Database RMAN
+20 . Database Recovery
+21 . Database Storage (ASM)
+22 . Database Streams/AQ
+23 . Database Upgrade
+24 . Dataguard
+25 . Exadata Cell Issues
+26 . GoldenGate
+27 . Node Eviction/Reboot
+28 . Problem not listed, provide problem description
+X  . Exit
+Select the category of your problem [1-28]:
+</pre>
 
-1.  TODO
+When you choose one of these categories we may request further details and then will run the specific Support Request Driven Collection for that category.
+> Note: Below is for example only. 
+> Do not proceed with this during a limited time lab as some collections can take minutes to complete . Choose 'X' to Exit at this time
 
+<pre>
+Select the category of your problem [1-28]:18
+1 . DB Hang/Performance
+2 . Problem not listed, provide problem description
+X . Exit
+Choose the option [1-2]:1
+Enter the time of the problem [YYYY-MM-DD HH24:MI:SS.sss]:2024-07-22 20:47:34.000                
+Enter the Database Name:
+Database Name raclzhlm_dhh_bom was specified however this database has a Database Unique Name of racLZHLM_dhh_bom.
+ Database Unique Name racLZHLM_dhh_bom set for raclzhlm_dhh_bom.
 
-2.  TODO
+Is the issue related a specific Plugable Database? [Y|N]  [Required for this SRDC]: N
+Start time when the performance was bad:   
+Stop time when the performance was bad:   2024-07-22 21:17:34 
+If any particular SQL causes the database to be slow?[Y|N]  [Required for this SRDC]: N
+Do you wish to generate a System State Dump? [Y|y|N|n] [Required for this SRDC]: N
 
+Components included in this collection: DATABASE CHMOS CHA OS INSIGHT
 
-
+Preparing to execute support diagnostic scripts.
+ Executing DB Script srdc_db_lfsdiag.sql on racLZHLM_dhh_bom with timeout of 120 seconds...
+ Executing DB Script srdc_real_time_addm.sql on racLZHLM_dhh_bom with timeout of 120 seconds...
+ Executing DB Script srdc_statsadvisor_report.sql on racLZHLM_dhh_bom with timeout of 300 seconds...
+ Executing DB Script collect_logon_logoff_triggers.sql on racLZHLM_dhh_bom with timeout of 300 seconds...
+ Executing OS Script get_perfhub_report with timeout of 600 seconds...
+....
+</pre>
 
 You may now *proceed to the next lab*.  
 
