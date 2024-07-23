@@ -104,7 +104,7 @@ authentication methods. Credentials are typically associated with a specific use
     Oracle NoSQL has SDKs in the following languages:  Java, Node.js, Python, Go, Spring and C#.
 The SDKs support a configuration file as well as API interfaces that allow direct
 specification of the credential information. You can use the
-SignatureProvider API to supply your API key-based credentials to NoSQL Database. The
+SignatureProvider API to supply your API key-based credentials to Oracle NoSQL Database. The
 usual things provided include user OCID, tenancy OCID, private key, and fingerprint.
 The Session token-based approach is similar but it adds a temporary session token which
 usually expires in an hour.   This is useful when a temporary authentication is
@@ -112,7 +112,7 @@ required.
 
     Another way to handle authentication is with Instance and Resource Principals.
 
-    Resource principals allow you to authenticate and access Oracle Cloud Infrastructure
+    Resource Principals allow you to authenticate and access Oracle Cloud Infrastructure
 resources.  A resource principal consists of a temporary session token (which
 typically is cached for 15 minutes) and secure
 credentials that enables the owner/user to authenticate to Oracle Cloud Infrastructure services.
@@ -122,7 +122,7 @@ into the NoSQL Cloud Service from functions (NoSQL Cloud Service would be the re
 
     Instance Principals is a capability in Oracle Cloud Infrastructure Identity
 and Access Management (IAM) that lets you make service calls from an instance.
-With instance principals, you don’t need to configure user credentials or
+With Instance Principals, you don’t need to configure user credentials or
 rotate the credentials. Instances themselves are a principal type in IAM and
 are set up in IAM. You can think of them as an IAM service feature that enables
 instances to be authorized actors (or principals) to perform actions on service resources.
