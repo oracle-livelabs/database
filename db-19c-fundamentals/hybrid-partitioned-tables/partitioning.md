@@ -84,17 +84,18 @@ First, we're going to navigate back to the Autonomous Database and open SQL Deve
 
   ![Navigating back to the Autonomous DB](./images/auto-db.png " ")
 
-2. Select the Database you created in the earlier labs and select **Database Actions**.
+2. Select the Database you created in the earlier labs and select **Database Users**.
   
-  ![Open SQL Developer Web](./images/db-actions.png) 
+  ![Open SQL Developer Web](./images/db-actions-users.png) 
+
 
 3. Log into Database Actions as the NF19C user.
-	![JSON Database Actions](./images/db-actions-logout.png)
-	![JSON Database Actions](./images/db-actions-login-lab.png)
+	![JSON Database Actions](./images/db-actions-logout-new.png)
+	![JSON Database Actions](./images/db-actions-login-lab-new.png)
   
-3. Wait for the new tab to open and select the SQL card under the Development section to open the SQL worksheet editor.
+3. Wait for the new tab to open and select the SQL tile.
 
-  ![Open SQL editor](./images/sql.png)
+  ![Open SQL editor](./images/sql1.png)
 
 
 4. The first thing we will need to do is create our credentials in order to access our Object Storage bucket from our Autonomous Database. Using the SQL Developer Web, copy and run the following statements. Note, the DBMS_CLOUD command, you will need the username and token that we copied in the lab above. The credential and token **need to be in single quotes** ''.
@@ -113,7 +114,7 @@ First, we're going to navigate back to the Autonomous Database and open SQL Deve
     username => 'your full database username that you took note of earlier',
     password => 'the token you took note of earlier'
   );
-END;
+  END;
     </copy>
     ```
     ```

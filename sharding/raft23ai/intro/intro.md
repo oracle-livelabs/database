@@ -8,7 +8,7 @@ Raft replication is active/active; each shard can process reads and writes for a
 
 Raft replication is integrated with transaction execution and is completely transparent to users. There is no need to configure and manage Oracle Data Guard or Oracle GoldenGate to achieve high availability. Raft replication automatically reconfigures replication in case of shard host failures or when shards are added or removed from the sharded database. 
 
-*Estimated Workshop Time:*  1 hour and 30 minutes
+*Estimated Workshop Time:*  2 hours
 
 ![Raft introduction](images/raft-intro.png " ")
 
@@ -22,7 +22,7 @@ Once you complete your setup, the next lab will cover:
 
 
 
-We will use Podman containers and demonstrate multiple use cases.
+We will use Podman containers, RAFT UI App and demonstrate multiple use cases.
 
 ### Prerequisites
 - An Oracle Cloud Account - Please view this workshop's LiveLabs landing page to see which environments are supported
@@ -35,6 +35,6 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager, May 2024
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Ajay Joshi, Param Saini, Jyoti Verma
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, Consulting Member of Technical Staff, July 2024
 

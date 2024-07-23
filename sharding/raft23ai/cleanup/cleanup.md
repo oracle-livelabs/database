@@ -20,7 +20,7 @@ Estimated Time - 5 minutes
 
 - To provision this workshop, there are detailed instructions in Lab 1 of [Use Raft Replication with Distributed Database for Resilient Never-Down Apps](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3772&clear=RR,180&session=107115107642748) workshop.
 
-## Task 1: Terminate a Provisioned Oracle Autonomous Database Instance
+## Task 1: Terminate a Provisioned Oracle Instance
 
 1. Login to Oracle cloud
 
@@ -51,5 +51,5 @@ Estimated Time - 5 minutes
 ## Acknowledgements
 
 * **Author** - Deeksha Sehgal, Oracle Database Sharding Product Management, Senior Product Manager
-* **Contributor** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma
-* **Last Updated By/Date** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager, May 2024
+* **Contributor** - Pankaj Chandiramani, Shefali Bhargava, Ajay Joshi, Jyoti Verma
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, Consulting Member of Technical Staff, July 2024

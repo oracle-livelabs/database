@@ -41,6 +41,8 @@ In this lab, you will:
 
 9. As explained in the introduction, you can run some of the labs in parallel. When doing so, it might be useful to use multiple *desktops*. Then, you can run each lab on its own desktop. To switch between desktops click *Activities* and select the desktop in the right side. 
 
+    * When opening a new terminal on the second desktop, you must right-click on the icon and select *New window*
+
 ![Switch between desktops to run each lab on a separate desktop](images/initialize-environment-new-desktop.jpeg)
 
 10. Throughout the labs you will open HTML documents in Firefox browser. If the text in the documents is too small, you can zoom in.
@@ -58,7 +60,7 @@ In this lab, you will:
         - UPGR
         - CDB23
 
-3. Ensure the listener is started.
+2. Ensure the listener is started.
 
     ```
     <copy>
@@ -74,7 +76,7 @@ In this lab, you will:
     ```
     </details>
 
-4. Ensure that the databases (*FTEX*, *UPGR* and *CDB23*) are started.
+3. Ensure that the databases (*FTEX*, *UPGR* and *CDB23*) are started.
 
     ```
     <copy>
@@ -91,6 +93,33 @@ In this lab, you will:
     oracle      5345       1  0 20:19 ?        00:00:00 ora_pmon_CDB23
     ```
     </details>
+
+4. Occasionally, the *UPGR* database fails to register with the listener. Set the environment and connect to *UPGR*.
+
+    ```
+    <copy>
+    . upgr
+    sqlplus / as sysdba
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+5. Restart *UPGR*.
+
+    ```
+    <copy>
+    startup force
+    </copy>
+    ```
+
+6. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
 
 You may now *proceed to the next lab*.
 
