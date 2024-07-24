@@ -45,7 +45,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
 
     ![Vector diagram](images/vectors-diagram-2.png " ")
     
-    We aren't going to cover RAG in this lab. If you're interested in that, checkout this free sandbox environment and build a [RAG Application](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3934&clear=RR,180&session=1859311324732).
+    We aren't going to cover RAG in this lab. If you're interested in that, checkout this free sandbox environment and build a [RAG Application](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3934&clear=RR,180&session=1859311324732).
 
 3. In this task we're going to focus on the vector datatype. Let's add some data to our vector table.
 
@@ -338,9 +338,9 @@ You may now **proceed to the next lab**
 
 * [AI Vector Search User Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/oracle-ai-vector-search-users-guide.pdf)
 * [23ai Release notes](https://docs.oracle.com/en/database/oracle/oracle-database/23/rnrdm/index.html)
-* [7 Easy Steps to Building a RAG Application using LangChain](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3927&clear=RR,180&session=1859311324732)
-* [Using Vector Embedding Models with Python](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3928&clear=RR,180&session=1859311324732)
-* [Using Vector Embedding Models with Nodejs](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3926&clear=RR,180&session=1859311324732)
+* [7 Easy Steps to Building a RAG Application using LangChain](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3927&clear=RR,180&session=1859311324732)
+* [Using Vector Embedding Models with Python](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3928&clear=RR,180&session=1859311324732)
+* [Using Vector Embedding Models with Nodejs](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3926&clear=RR,180&session=1859311324732)
 
 ## Acknowledgements
 * **Author** - Killian Lynch, Database Product Management
