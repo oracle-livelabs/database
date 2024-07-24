@@ -166,7 +166,7 @@ The objective of this workshop is to familiarize you with some of the new featur
         name VARCHAR2(100) ANNOTATIONS (Description 'Name of the author'),
         article CLOB,
         published_date DATE,
-        tags VECTOR(10) ANNOTATIONS (Description 'The article stored as a vector for GenAI functionality'),
+        tags VECTOR ANNOTATIONS (Description 'The article stored as a vector for GenAI functionality'),
         article_info JSON 
             CONSTRAINT article_schema CHECK (
                 article_info IS JSON VALIDATE USING '{
@@ -179,7 +179,7 @@ The objective of this workshop is to familiarize you with some of the new featur
                 }'
             ) ANNOTATIONS (Description 'Additional metadata about the article like category, views, read_time'),
         is_published BOOLEAN ANNOTATIONS (Description 'Publication status of the article')
-    ) ANNOTATIONS (Description 'Table containing news articles and their information');
+    ) ANNOTATIONS (Version 'V1.0');
     </copy>
     ```
 
@@ -188,7 +188,7 @@ The objective of this workshop is to familiarize you with some of the new featur
 
     Let's take a closer look at the new features:
 
-    * **Schema Annotations** are a great tool for documenting and classifying database objects, along with providing insights into their purpose and usage. Schema annotations in Oracle Database 23ai are like labels or notes added to objects to provide extra information. 
+    * **Schema Annotations** are a great tool for adding additional metadata to your schema objects, along with providing insights into their purpose and usage. Schema annotations in Oracle Database 23ai are like labels or notes added to objects to provide extra information. 
 
         Annotations clause typically follows this format: 
             ```
@@ -223,10 +223,9 @@ The objective of this workshop is to familiarize you with some of the new featur
 
         ![grant roles](images/vectors-diagram-2.png " ")
 
-        If you take a look at our vector column, you'll notice we set the dimensionality at 1536.
-            ```
-            tags VECTOR(1536)            
-            ```
+        If you take a look at our vector column, you'll notice we didn't set a dimensionality. You can optionally define the number of dimensions when creating a table. You can also define the number format of the vector.
+
+        For example, `vector(1536, float32)` would mean this vector has 1536 dimensions and is of type float32.
 
         What is dimensionality?
 
@@ -279,7 +278,9 @@ The objective of this workshop is to familiarize you with some of the new featur
 
 2. Let's now add the **NEW** data use case domains to our table.
 
-    **Overview of Data Usecase Domains**: Data Usecase Domains serve as a way for defining properties and constraints associated with columns. They ensure consistency in data representation and validation throughout the application.
+    **Overview of Data Usecase Domains**: 
+    
+    A use case domain is a high-level dictionary object that belongs to a schema and encapsulates a set of optional properties and constraints. Data Use Case Domains provide consistent metadata for development, analytics, and ETL applications and tools helping to ensure data consistency and validation throughout the schema. With Data Usecase Domain, you define how you intend to use data the centrally and they serve as a way for defining properties and constraints associated with columns. 
 
     **Types of Data Usecase Domains:**
 
