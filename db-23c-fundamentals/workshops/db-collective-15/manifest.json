@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "Oracle Database 23ai New Features",
+    "workshoptitle": "Oracle Database 23ai Quick Start",
       "help": "livelabs-help-db_us@oracle.com",
       "tutorials": [
         {
@@ -13,10 +13,10 @@
         "filename": "../../intro/green-button-setup.md"
     },
       {
-        "title": "Lab: AI Vector Search",
-        "description": "Try out AI Vector search in 23ai",
+        "title": "Lab: Oracle Database 23ai New Features",
+        "description": "Try out new features in 23ai",
         "type": "livelabs",
-        "filename": "../../new-ai-vector-search/new-ai-vector-search-ocw24.md"
+        "filename": "../../quickstart-features/quickstart-features.md"
     },
         {
           "title": "Need Help?",

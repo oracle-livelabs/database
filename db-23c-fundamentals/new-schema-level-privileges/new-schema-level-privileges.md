@@ -60,7 +60,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
 
     These grants provides user bob with select, insert, update, delete, execute any procedures, functions, packages, and select sequence privileges on all tables and views within the schema sally. 
 
-3. Schema-level privileges dynamically adapt to schema changes. If new tables or views are added to the HR schema, users granted schema-level privileges instantly gain access without additional management.
+3. Schema-level privileges dynamically adapt to schema changes. If new tables or views are added to the schema, users granted schema-level privileges instantly gain access without additional management.
 
 4. Oracle Database 23ai simplifies privilege management with dedicated views. We can use views like `DBA_SCHEMA_PRIVS` to check the schema-level privileges granted to users. Others include ROLE\_SCHEMA\_PRIVS, USER\_SCHEMA\_PRIVS, and SESSION\_SCHEMA\_PRIVS.
 
