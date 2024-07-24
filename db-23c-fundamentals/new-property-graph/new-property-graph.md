@@ -12,7 +12,7 @@ The objective of this workshop is to show you SQL property graphs and demo their
 
 This lab is just a short overview of the functionality brought forth by Property Graphs in Oracle Database 23ai and is meant to give you a small example of what is possible. For more in depth Property Graphs explanations and workshops check out the following labs
 
-* [Graphs in the Oracle Database](https://apexapps.oracle.com/pls/apex/f?p=133:100:105582422382278::::SEARCH:graph)
+* [Graphs in the Oracle Database](https://livelabs.oracle.com/pls/apex/f?p=133:100:105582422382278::::SEARCH:graph)
 
 ### Prerequisites:
 - Access to Oracle Database 23ai.
@@ -180,7 +180,7 @@ This lab is just a short overview of the functionality brought forth by Property
 4. In this short lab we've looked at SQL property graphs and SQL/PGQ in Oracle Database 23ai. We've learned how to create property graphs from existing tables, query these graphs to discover relationships, and prepare data for visualization. 
 
     This is just a small sample of what you can do with Property Graphs and SQL/PQG in Oracle Database 23ai. For more in depth labs and other graph functionality, brows through the following link
-    * [Graphs in 23ai](https://apexapps.oracle.com/pls/apex/f?p=133:100:105582422382278::::SEARCH:graph)
+    * [Graphs in 23ai](https://livelabs.oracle.com/pls/apex/f?p=133:100:105582422382278::::SEARCH:graph)
 
 5. We can clean our environment.
     ```

@@ -9,9 +9,16 @@
           "filename": "../../intro/23ai-intro.md"
       },
       {
-        "title": "Get Started with LiveLabs",
-        "filename": "../../intro/green-button-setup.md"
-    },
+        "title": "Get Started",
+        "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+        "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+      },
+      {
+        "title": "Database Setup",
+        "description": "23ai ADB Free database",
+        "type": "livelabs",
+        "filename": "../../database-setup/database-setup.md"
+      },
       {
         "title": "Lab: Oracle Database 23ai New Features",
         "description": "Try out new features in 23ai",

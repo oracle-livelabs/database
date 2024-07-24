@@ -17,10 +17,11 @@ In this lab, you will:
 This lab assumes you have:
 - An Oracle account
 
+
 ## Task 1: Pull and Start Docker Image
 1.  If the terminal is not displayed as shown below, select Activities and click Terminal.
 
-    ![Open the terminal](images/novnc-terminal.png)
+    ![Open the terminal](images/welcome_pg1.png)
  
 2.  Copy the commands below and paste them into the terminal. This will pull the zip file with our podman-compose files and scripts that we'll be running to create and configure the ADB container. This series of commands will also unzip the files, and give them the permissions to be executable within the container.
 
@@ -33,7 +34,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![Wget the zip file with the scripts and give them permissions](images/wget.png)
+    ![Wget the zip file with the scripts and give them permissions](images/podman_image_pull1.png)
 
 3. Run this command to begin the process of starting up the container. Go to your LiveLabs reservation under View Login Details in order to get your information needed to login to the container registry.
 
@@ -43,19 +44,19 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![Run start container script](images/run-start-container.png)
+    ![Run start container script](images/start_container.png)
 
-    ![Information underneath login details](images/auth-token-copy.png)
+    <!-- ![Information underneath login details](images/auth-token-copy.png) -->
 
-4. Input your tenancy name, username, and auth token as found under "View Login Details" in your LiveLabs reservation.
+<!-- 4. Input your tenancy name, username, and auth token as found under "View Login Details" in your LiveLabs reservation.
     
-    ![Input user variables](images/input-user-vars.png)
+    ![Input user variables](images/input-user-vars.png) -->
 
-5. Input the desired workload type for your ADB.
+4. Input the desired workload type for your ADB.
 
     ![Input ADB configuration variables](images/adb-config-vars.png)
 
-6. The container is now initializing. A podman-compose.yml script is running in the background to pull the image, start the container, mount necessary scripts onto the database.
+5. The container is now initializing. A podman-compose.yml script is running in the background to pull the image, start the container, mount necessary scripts onto the database.
 
     ![Podman Compose is running to start the container](images/podman-compose.png)
 
@@ -67,28 +68,28 @@ This lab assumes you have:
 
     ![Login succeeded](images/3-login-succeeded.png) -->
 
-7. Now, we're waiting until the container is healthy so we can run the remainder of our scripts.
+6. Now, we're waiting until the container is healthy so we can run the remainder of our scripts.
 
     ![Waiting until container is healthy](images/container-status.png)
 
-8. Once the container is healthy, another script will automatically run to reset where the APEX images are sourced from. This allows APEX to function within our LiveLabs environment.
+7. Once the container is healthy, another script will automatically run to reset where the APEX images are sourced from. This allows APEX to function within our LiveLabs environment.
     
     ![Successful execution of reset image prefix script in SQL](images/successful-sql-script.png)
 
     
-9. Note that your wallet and admin password will be printed as shown below.
+8. Note that your wallet and admin password will be printed as shown below.
 
     ![Screenshot of script output producing the admin and wallet password](images/password-output.png)
 
-10. As the script completes, make sure you copy and run the command printed out at the end so you can easily run ADB-CLI commands.
+9. As the script completes, make sure you copy and run the command printed out at the end so you can easily run ADB-CLI commands.
 
     ![ADB CLI](images/adb-cli.png)
 
-11. (Optional) If you want to reset your admin password, use the command printed out by the script and fill in your desired password. Make sure the following passwords you select are between 12-30 characters, with at least 1 uppercase letter, 1 lowercase letter, and 1 number.
+10. (Optional) If you want to reset your admin password, use the command printed out by the script and fill in your desired password. Make sure the following passwords you select are between 12-30 characters, with at least 1 uppercase letter, 1 lowercase letter, and 1 number.
 
-    ![Reset password command](images/reset-password-command.png)
+    ![Reset password command](images/reset_pwd.png)
 
-12. Now, the ADB container is live and you can run commands against it. You can view the list of available commands using the following command.
+11. Now, the ADB container is live and you can run commands against it. You can view the list of available commands using the following command.
 
     ```
     <copy>
