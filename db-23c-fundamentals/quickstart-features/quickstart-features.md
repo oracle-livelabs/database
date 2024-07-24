@@ -16,6 +16,7 @@ The objective of this workshop is to familiarize you with some of the new featur
 *	Create and use Data Use Case Domains
 *	Grant schema-level privileges
 *	Assign the new Developer Role
+*   Enforce a JSON Schema
 *	Employ the IF [NOT] EXISTS statement for conditional SQL execution
 *	Utilize Table Value Constructors for simplified multi-row operations
 *	Use the new AI Vector Search `vector_distance` functions and operators to perform similarity search
