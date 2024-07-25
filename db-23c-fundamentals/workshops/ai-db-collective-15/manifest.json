@@ -1,22 +1,22 @@
 {
-    "workshoptitle": "Oracle Database 23ai Quick Start",
+    "workshoptitle": "AI Vector Search Quick Start",
       "help": "livelabs-help-db_us@oracle.com",
       "tutorials": [
         {
           "title": "Introduction",
           "description": "This is an introduction to installing and exploring the Oracle Database 23ai Free",
           "type": "livelabs",
-          "filename": "../../intro/23ai-intro.md"
+          "filename": "../../intro/ai-vector-search-intro.md"
       },
       {
         "title": "Get Started with LiveLabs",
         "filename": "../../intro/green-button-setup.md"
     },
       {
-        "title": "Lab: Oracle Database 23ai New Features",
-        "description": "Try out new features in 23ai",
+        "title": "Lab: AI Vector Search",
+        "description": "Try out AI Vector search in 23ai",
         "type": "livelabs",
-        "filename": "../../quickstart-features/quickstart-features.md"
+        "filename": "../../new-ai-vector-search/new-ai-vector-search-ocw24.md"
     },
         {
           "title": "Need Help?",

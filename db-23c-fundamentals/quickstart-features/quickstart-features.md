@@ -21,7 +21,7 @@ The objective of this workshop is to familiarize you with some of the new featur
 *	Utilize Table Value Constructors for simplified multi-row operations
 *	Use the new AI Vector Search `vector_distance` functions and operators to perform similarity search
     
-    Please note, this lab provides a high-level overview of some of Oracle Database 23ai’s new features. This is a small set of the 300+ new features in the database.  For a comprehensive workshop, please visit the [23ai New Features](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3950&clear=RR,180&session=106510486911799).
+    Please note, this lab provides a high-level overview of some of Oracle Database 23ai’s new features. This is a small set of the 300+ new features in the database.  For a comprehensive workshop, please visit the [23ai New Features](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3950).
 
 ### Prerequisites:
 
