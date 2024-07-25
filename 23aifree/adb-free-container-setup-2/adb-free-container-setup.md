@@ -17,26 +17,54 @@ In this lab, you will:
 This lab assumes you have:
 - An Oracle account
 
+## Task 1: Install Podman and OCI-CLI
 
-## Task 1: Pull and Start Docker Image
 1.  If the terminal is not displayed as shown below, select Activities and click Terminal.
 
-    ![Open the terminal](images/welcome_pg1.png)
+    ![Open the terminal](images/welcome_terminal.png)
+
+2.  Copy the commands below and paste them into the terminal. This will install podman-compose, that will get us up and running with podman.
+    ```
+    <copy>
+    sudo yum install podman-compose
+    </copy>
+    ```
+
+    ![Installation of podman-compose](images/podman_install.png)
+
+3.  Copy the command below and past it into the terminal. This will install OCI-CLI, this task to done in order to make calls to OCI.
+    ```
+    <copy>
+    sudo yum install python36-oci-cli
+    </copy>
+    ```
+
+    ![Installation of OCI-CLI](images/oci-cli-install.png)
+
+## Task 2: Pull and Start Docker Image
  
-2.  Copy the commands below and paste them into the terminal. This will pull the zip file with our podman-compose files and scripts that we'll be running to create and configure the ADB container. This series of commands will also unzip the files, and give them the permissions to be executable within the container.
+1.  Copy the commands below and paste them into the terminal. This will pull the zip file with our podman-compose files and scripts that we'll be running to create and configure the ADB container. This series of commands will also unzip the files, and give them the permissions to be executable within the container.
 
     ```
     <copy>
     wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/AZAlcycOLHY5iAWwYZ6KTwJcrnJy7k1LcpHJh0ELmGdZj5ptc6rEteLmnUKnn4Gl/n/c4u04/b/apex-images/o/BERT-TINY.onnx
-    wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/WC7293Pwf4UNmrM44Mequmek_fjzKDkU-zBUrA8lAzcJMAiR19Jecjt1x1U4gBne/n/c4u04/b/apex-images/o/compose8.zip
-    unzip compose8.zip
+    wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/WC7293Pwf4UNmrM44Mequmek_fjzKDkU-zBUrA8lAzcJMAiR19Jecjt1x1U4gBne/n/c4u04/b/apex-images/o/compose11.zip
+    unzip compose11.zip
     chmod +x scripts start-container.sh
+    </copy>
+    ```
+    Note: If you would like to download a container image for your own use please use the following command below, for the steps of completing this workshop we will not be using the command below to install the image on your personal laptop you would use.
+
+    Note: For the use of this workshop we will not be using the command below, our container image is obtained through our wget command above.  
+    ```
+    <copy>
+    podman run --rm --name oracle -p 1521:1521 -e ORACLE_PASSWORD=free gvenzl/oracle-free:23-slim
     </copy>
     ```
 
     ![Wget the zip file with the scripts and give them permissions](images/podman_image_pull1.png)
 
-3. Run this command to begin the process of starting up the container. Go to your LiveLabs reservation under View Login Details in order to get your information needed to login to the container registry.
+2. Run this command to begin the process of starting up the container. Go to your LiveLabs reservation under View Login Details in order to get your information needed to login to the container registry.
 
     ```
     <copy>
@@ -52,11 +80,11 @@ This lab assumes you have:
     
     ![Input user variables](images/input-user-vars.png) -->
 
-4. Input the desired workload type for your ADB.
+3. Input the desired workload type for your ADB.
 
     ![Input ADB configuration variables](images/adb-config-vars.png)
 
-5. The container is now initializing. A podman-compose.yml script is running in the background to pull the image, start the container, mount necessary scripts onto the database.
+4. The container is now initializing. A podman-compose.yml script is running in the background to pull the image, start the container, mount necessary scripts onto the database.
 
     ![Podman Compose is running to start the container](images/podman-compose.png)
 
@@ -68,28 +96,28 @@ This lab assumes you have:
 
     ![Login succeeded](images/3-login-succeeded.png) -->
 
-6. Now, we're waiting until the container is healthy so we can run the remainder of our scripts.
+5. Now, we're waiting until the container is healthy so we can run the remainder of our scripts.
 
     ![Waiting until container is healthy](images/container-status.png)
 
-7. Once the container is healthy, another script will automatically run to reset where the APEX images are sourced from. This allows APEX to function within our LiveLabs environment.
+6. Once the container is healthy, another script will automatically run to reset where the APEX images are sourced from. This allows APEX to function within our LiveLabs environment.
     
     ![Successful execution of reset image prefix script in SQL](images/successful-sql-script.png)
 
     
-8. Note that your wallet and admin password will be printed as shown below.
+7. Note that your wallet and admin password will be printed as shown below.
 
     ![Screenshot of script output producing the admin and wallet password](images/password-output.png)
 
-9. As the script completes, make sure you copy and run the command printed out at the end so you can easily run ADB-CLI commands.
+8. As the script completes, make sure you copy and run the command printed out at the end so you can easily run ADB-CLI commands.
 
-    ![ADB CLI](images/adb-cli.png)
+    ![ADB CLI](images/adb_cli.png)
 
-10. (Optional) If you want to reset your admin password, use the command printed out by the script and fill in your desired password. Make sure the following passwords you select are between 12-30 characters, with at least 1 uppercase letter, 1 lowercase letter, and 1 number.
+9. (Optional) If you want to reset your admin password, use the command printed out by the script and fill in your desired password. Make sure the following passwords you select are between 12-30 characters, with at least 1 uppercase letter, 1 lowercase letter, and 1 number.
 
     ![Reset password command](images/reset_pwd.png)
 
-11. Now, the ADB container is live and you can run commands against it. You can view the list of available commands using the following command.
+10. Now, the ADB container is live and you can run commands against it. You can view the list of available commands using the following command.
 
     ```
     <copy>
@@ -97,9 +125,9 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![Run adb-cli command help](images/adb-cli-help.png)
+    ![Run adb-cli command help](images/adb_cli_help.png)
 
-## Task 2: Access Database Actions and APEX
+## Task 3: Access Database Actions and APEX
 
 1. To access Database Actions/ORDS, open a new window in your Chrome browser and go to this website:
 
@@ -111,7 +139,7 @@ This lab assumes you have:
 
     It must include the "https://" to work.
 
-    ![ORDS landing page](images/ords-landing.png)
+    ![ORDS landing page](images/ords_landing.png)
 
 2. Sign in with your admin password you had set for the ADB in Task 1, Step 4.
 
@@ -119,7 +147,7 @@ This lab assumes you have:
 
 3. You now have access to Database Actions! Let's first click SQL Developer Web to test it out.
 
-    ![Database Actions](images/launch-sql-developer.png)
+    ![Database Actions](images/ords_sql_developer.png)
 
 4. Next, let's go to Oracle APEX. Go back to the landing page and click Go to Oracle APEX.
 
@@ -129,7 +157,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![ORDS landing page](images/launch-apex.png)
+    ![ORDS landing page](images/launch_apex.png)
 
 5. Sign in with your admin password you had set for the ADB in Task 1, Step 4.
 
