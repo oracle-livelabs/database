@@ -7,6 +7,9 @@ Welcome to the Oracle Database 23ai Quick Start workshop. In this lab, you will 
 
 Estimated Lab Time: 15 minutes
 
+Watch the video below for a walkthrough of the lab.
+[Lab walkthrough video](videohub:1_sdhlzrak)
+
 ### Objective:
 
 The objective of this workshop is to familiarize you with some of the new features in Oracle Database 23ai. You will learn how to:
@@ -30,7 +33,20 @@ The objective of this workshop is to familiarize you with some of the new featur
 
 ## Task 1: Granting Developer Role and Schema Level Privileges
 
-1. Let's first sign into Database Actions. Database Actions gives you development tools, data tools, administration, and monitoring features for Autonomous Database. Using Database Actions you can run SQL statements, queries, and scripts in a worksheet. 
+1. Open the **Navigation** menu.
+    ![click Navigation menu](images/open-navigation-menu.png " ")
+
+
+2. Under **Oracle Database**, click **Autonomous Database**.
+    ![click ADB](images/click-adb.png " ")
+
+3. Select your Autonomous Database. 
+    >**Hint**: If you do not see your Autonomous Database, make sure you are in the correct compartment.
+     
+     ![click your ADB](images/click-your-adb.png " ")   
+
+
+4. Let's sign into Database Actions. Database Actions gives you development tools, data tools, administration, and monitoring features for Autonomous Database. Using Database Actions you can run SQL statements, queries, and scripts in a worksheet. 
     
     From the Autonomous Database home page, **click** Database action and then **click** SQL.
 
@@ -39,7 +55,7 @@ The objective of this workshop is to familiarize you with some of the new featur
     ![click SQL](images/im1.png " ")
 
 
-2. Throughout this lab, you'll need a user. Let’s create a user and REST-enable the schema so that we can connect as the user.
+5. Throughout this lab, you'll need a user. Let’s create a user and REST-enable the schema so that we can connect as the user.
 
     ```
     <copy>
@@ -76,13 +92,13 @@ The objective of this workshop is to familiarize you with some of the new featur
     </copy>
     ```
 
-3. Now you can grant them the **NEW** Developer Role.
+6. Now you can grant them the **NEW** Developer Role.
 
     Typically, you may want to grant all resources and roles at once. However, to highlight this new role in this demo, it’s been separated from the SQL statements above.
 
     The Developer Role gives you a full set of system privileges, object privileges, predefined roles, PL/SQL package privileges, and tracing privileges required by application developers. It simplifies privilege management and helps keep the database as secure as possible for the development environment. As always, please review the privileges granted in this role and compare them with your organization’s security protocols.
 
-4. To grant the Developer Role to another user, use the GRANT statement.
+7. To grant the Developer Role to another user, use the GRANT statement.
 
     ```
     <copy>
@@ -96,7 +112,7 @@ The objective of this workshop is to familiarize you with some of the new featur
 
 
 
-5. Now let's check out the **NEW** Schema Level Privileges. Before looking at the code, let's briefly talk about the traditional methods of privilege management in Oracle databases.
+8. Now let's check out the **NEW** Schema Level Privileges. Before looking at the code, let's briefly talk about the traditional methods of privilege management in Oracle databases.
 
     Individual Privilege Grants: This involves granting individual privileges on each table or view in the application schema. While granular, it's cumbersome and could cause user errors, especially with schema changes.
 
@@ -106,7 +122,7 @@ The objective of this workshop is to familiarize you with some of the new featur
     
     Schema-level privileges dynamically adapt to schema changes. If new tables or views are added to the schema, users granted schema-level privileges instantly gain access without additional management.
 
-6. Now create a user named `sally` and grant them access to killian's schema.
+9. Now create a user named `sally` and grant them access to killian's schema.
 
     ```
     <copy>
@@ -127,7 +143,7 @@ The objective of this workshop is to familiarize you with some of the new featur
 
     ![grant roles](images/im3.png " ")
 
-7. Now let's sign in as our user Killian. You can sign out of the admin user by clicking on the admin profile located in the top right hand of the screen and then click Sign Out. 
+10. Now let's sign in as our user Killian. You can sign out of the admin user by clicking on the admin profile located in the top right hand of the screen and then click Sign Out. 
 
     **Username:** Killian 
     
@@ -136,11 +152,11 @@ The objective of this workshop is to familiarize you with some of the new featur
     ![grant roles](images/im4.png " ")
     ![grant roles](images/im5.png " ")
 
-8. From the launch pad of SQL Developer Web, we can open the SQL editor by clicking open.
+11. From the launch pad of SQL Developer Web, we can open the SQL editor by clicking open.
 
     ![grant roles](images/im6.png " ")
 
-9. Oracle has introduced **NEW** functionality that eliminates the need for the `FROM DUAL' clause, making queries more intuitive and more compatible with other database offerings. You can still use from dual without any impact.
+12. Oracle has introduced **NEW** functionality that eliminates the need for the `FROM DUAL' clause, making queries more intuitive and more compatible with other database offerings. You can still use from dual without any impact.
 
     We can check our user has the developer role without having to specify `FROM DUAL`.
 
