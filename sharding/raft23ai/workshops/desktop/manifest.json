@@ -35,7 +35,12 @@
       "filename": "../../topology/topology.md"
     },
     {
-       "title": "Lab 5: Clean up Stack and Instances",
+      "title": "Lab 5: Demo UI Application for Raft Replication",
+      "description": "Demo UI Application for Raft Replication",
+      "filename": "../../ui-app/raft-demo-ui-app.md"
+    },
+    {
+       "title": "Lab 6: Clean up Stack and Instances",
        "description": "Clean up ORM Stack and instances",
        "filename": "../../cleanup/cleanup.md"
      },

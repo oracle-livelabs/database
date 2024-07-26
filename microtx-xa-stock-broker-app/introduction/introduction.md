@@ -47,8 +47,8 @@ Let's begin! If you need to create an Oracle Cloud account, click **Get Started*
 
 ## Learn More
 
-* [Oracle® Transaction Manager for Microservices Developer Guide](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmdg/index.html)
-* [Oracle® Transaction Manager for Microservices Quick Start Guide](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmqs/index.html)
+* [Oracle® Transaction Manager for Microservices Developer Guide](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG)
+* [Oracle® Transaction Manager for Microservices Quick Start Guide](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMQS)
 
 ## Acknowledgements
 

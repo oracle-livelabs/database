@@ -145,3 +145,5 @@ You may now **proceed to the next lab**
    - Kevin Lazarz, Senior Manager, Product Management, Database
    - Wojciech Pluta, Director, Technical Product Marketing
 * **Last Updated By/Date** -  Bogdan Farca, Jul 2024
+   - Wojciech Pluta, Director, Technical Product Marketing
+* **Last Updated By/Date** -  Bogdan Farca, Jul 2024

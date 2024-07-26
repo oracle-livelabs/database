@@ -6,7 +6,7 @@ Welcome to the "Exploring JSON Relational Duality with SQL and REST" workshop. I
 
 This lab is only intended to give you a small taste of what duality views have to offer. For full, in-depth free workshops, follow the link below:
 
-[23ai JSON Duality View Workshops](https://apexapps.oracle.com/pls/apex/f?p=133:100:110578183178299::::SEARCH:duality%20views)
+[23ai JSON Duality View Workshops](https://livelabs.oracle.com/pls/apex/f?p=133:100:110578183178299::::SEARCH:duality%20views)
 
 Estimated Lab Time: 20 minutes
 
@@ -279,7 +279,7 @@ This lab assumes you have:
 
 17. This lab is only intended to give you a small taste of what duality views have to offer. For full, in-depth free workshops, follow the link below:
 
-    [23ai JSON Duality View Workshops](https://apexapps.oracle.com/pls/apex/f?p=133:100:110578183178299::::SEARCH:duality%20views)
+    [23ai JSON Duality View Workshops](https://livelabs.oracle.com/pls/apex/f?p=133:100:110578183178299::::SEARCH:duality%20views)
 
     In summary, this lab checks out the power of JSON Relational Duality Views, allowing you to work with data in either JSON Document format or SQL Relational format. Changes made through views are reflected in the corresponding documents and tables. This flexibility enables convenient create, read, update, or delete operations across multiple documents and tables with ease.
 

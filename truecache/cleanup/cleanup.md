@@ -2,21 +2,21 @@
 
 ## Introduction
 
-You can permanently delete (terminate) instances that you no longer need. This can be achieved by using the Destroy job on the Stack in Resource Manager, that you created in the Environment Setup Lab. This job  will tear down the resources/instances and clean up your tenancy.
+You can permanently delete (terminate) instances that you no longer need. To do this, use the destroy job on the stack in Resource Manager, which you created in the Environment Setup Lab. This job  tears down the resources/instances and clean up your tenancy.
 We recommend running a destroy job before deleting a stack to release associated resources first. When you delete a stack, its associated state file is also deleted; therefore, you lose track of the state of its associated resources. Cleaning up resources associated with a deleted stack can be difficult without the state file, especially when those resources are spread across multiple compartments. To avoid difficult cleanup later, we recommend that you release associated resources first by running a destroy job.
 Data cannot be recovered from destroyed resources.
 
-This lab walks you through the steps to running a Destroy Job
+This lab walks you through the steps to running a destroy job
 
 *Estimated Time:* 5 minutes
 
 ### Objectives
 
-- Terminate and tear down all resources/instances used in the Oracle True Cache Lab.
+- Terminate and tear down all resources/instances used in the Oracle True Cache lab.
 
 ### Prerequisites
 
-- You should have provisioned the **Application performance improvement with True Cache** workshop using a terraform stack
+- You should have provisioned the **Application performance improvement with True Cache** workshop using a terraform stack.
 - To provision this workshop, there are detailed instructions in Lab 1 of [Application performance improvement with True Cache](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=11454) workshop.
 
 ## Task 1: Terminate a Provisioned Oracle Database Instance
@@ -28,17 +28,17 @@ This lab walks you through the steps to running a Destroy Job
 
 3. Choose the compartment that you chose in Lab 1 to install your stack (on the left side of the page).
 
-4.  Click the name of the stack that you created in Lab 1.The Stack details page opens.
+4. Click the name of the stack that you created in Lab 1.The Stack details page opens.
 
 5. Click **Destroy**.
 
-6. In the Destroy panel that is presented, fill in the Name field with Name of the destroy job.
+6. In the Destroy panel , enter the name of the destroy job.
 
 7. Click **Destroy**.
 
-8. The destroy job is created. The new job is listed under **Jobs**. Your instance and all resources used by it will begin to terminate
+8. The destroy job is created. The new job appears under **Jobs**. Your instance and all resources used by it begin to terminate.
 
-9. After a few minutes, once the instance is terminated, the Lifecycle state will change from Terminating to Terminated.
+9. After a few minutes, after the instance is terminated, the lifecycle state changes from Terminating to Terminated.
 
   You have successfully cleaned up your  instance.
 
