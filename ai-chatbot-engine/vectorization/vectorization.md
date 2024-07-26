@@ -154,7 +154,7 @@ It is now time to insert the prepared chunks into the vector database.
    <copy>
    un = "vector"
    pw = "vector"
-   cs = "localhost/FREEPDB1"
+   <if type="freetier">cs = "localhost/FREEPDB1"</if><if type="livelabs">cs = "host.containers.internal/FREEPDB1"</if>
    </copy>
    ```
    > Note: Use the exact username and password you set up for the database in the previous lab.
