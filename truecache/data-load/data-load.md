@@ -46,7 +46,7 @@ This lab assumes you have:
 3. Alter the session to log in to the PDB
     ```
     <copy>
-    alter session set container=PRODPDB;
+    alter session set container=ORCLPDB1;
     </copy>
     ```
 
@@ -60,10 +60,10 @@ This lab assumes you have:
 
 ![dataload step1](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep1.png " ")
 
-5. Log on to SALES service as the transactions user using the password specified in step1 and run the step2 and step3.
+5. Log on to SALES1 service as the transactions user using the password specified in step1 and run the step2 and step3.
     ```
     <copy>
-    sqlplus transactions/******@PRODPDB:1521/SALES
+    sqlplus transactions/******@ORCLPDB1:1521/SALES1
     </copy>
     ```
 
