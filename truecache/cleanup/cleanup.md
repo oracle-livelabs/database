@@ -28,7 +28,7 @@ This lab walks you through the steps to running a destroy job
 
 3. Choose the compartment that you chose in Lab 1 to install your stack (on the left side of the page).
 
-4.  Click the name of the stack that you created in Lab 1.The Stack details page opens.
+4. Click the name of the stack that you created in Lab 1.The Stack details page opens.
 
 5. Click **Destroy**.
 
