@@ -26,7 +26,7 @@ This is an optional lab. You can skip it if you are already familiar with multit
 
 You connect to the CDB, find a list of PDBs and connect to them using different means.
 
-1. Set the environment to *CDB23* and connect.
+1. Use the *yellow* terminal. Set the environment to *CDB23* and connect.
 
     ```
     <copy>
@@ -402,7 +402,7 @@ You check initialization parameters and set some in the CDB. Also, find a list o
     </copy>
     ```
 
-    * Notice how only *con_id* shows up in the list. Inside a PDB, you can't see information from the CDB or other PDBs.
+    * Notice how only *con_id* shows up in the list. Inside a PDB, you can't see information from other PDBs.
     * *sga_target* now has a minimum value of 500M.
 
     <details>

@@ -24,7 +24,7 @@ This lab assumes:
 
 ## Task 1: Generate an AWR snapshot
 
-1. Set the environment to the *UPGR* database and connect.
+1. Use the *yellow* terminal. Set the environment to the *UPGR* database and connect.
 
     ```
     <copy>
@@ -33,7 +33,7 @@ This lab assumes:
     </copy>
     ```
 
-2. Execute `snap.sql` that generates an AWR snapshot. Take note of the snapshot ID (e.g.: 113). You need it later on.
+2. Use the script to generate an AWR snapshot. Take note of the snapshot ID (e.g.: 113). You need it later on.
 
     ```
     <copy>
@@ -55,17 +55,9 @@ This lab assumes:
 
 3. Don’t exit the terminal. Keep SQL*Plus open.
 
-4. Start a **new terminal**.
+4. Start HammerDB using the desktop shortcut. 
 
-5. In the **new terminal**, start HammerDB.
-
-    ```
-    <copy>
-    . upgr
-    cd /home/oracle/HammerDB-4.10/
-    ./hammerdb &
-    </copy>
-    ```
+    ![Start HammerDB using desktop icon](./images/awr-snapshot-hammerdb-icon.png " ")
 
 ## Task 2: Prepare workload
 
@@ -90,7 +82,7 @@ This lab assumes:
 
 Use HammerDB to start a workload. At the same time, capture workload information from the cursor cache into a SQL tuning set.
 
-1. Back in the first terminal, run the capture script. The script polls the cursor cache every 10 seconds for three minutes. **Leave the script running and immediately proceed to the next step.** Do not press CTRL+C.
+1. Back in the *yellow* terminal, run the capture script. The script polls the cursor cache every 10 seconds for three minutes. **Leave the script running and immediately proceed to the next step.** Do not press CTRL+C.
 
     ```
     <copy>
@@ -128,7 +120,7 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
 5. Exit HammerDB.
 
-6. The script `capture_cc.sql` should be done by now. Examine the output. It lists how many statements it captured from the cursor cache and into the SQL Tuning Set.
+6. Back in the *yellow* terminal, the script `capture_cc.sql` should be done by now. Examine the output. It lists how many statements it captured from the cursor cache and into the SQL Tuning Set.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -154,7 +146,7 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
 ## Task 4: Generate another AWR snapshot
 
-1. Back in the terminal, create another AWR snapshot. Take note of the snapshot ID (e.g.: 117). You need it later on.
+1. Still in the *yellow* terminal, create another AWR snapshot. Take note of the snapshot ID (e.g.: 117). You need it later on.
 
     ```
     <copy>
