@@ -16,7 +16,7 @@ The objective of this lab is to familiarize you with JSON Schema validation in O
 ## Task 1: Understanding JSON Schema Validation
 
 1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png " ")
+    ![click SQL](images/im1.png =50%x*)
 
 2. We will define a JSON schema that specifies the structure and constraints for vehicle information. The schema will enforce that the JSON object has three mandatory properties: "make" (a string), "model" (a string), and "year" (an integer between 1886 and the current year).
 
@@ -39,7 +39,7 @@ The objective of this lab is to familiarize you with JSON Schema validation in O
     );
     </copy>
     ```
-    ![use json validate in a document](images/im2.png " ")
+    ![use json validate in a document](images/im2.png =50%x*)
 
 3. Insert some valid JSON data into the table making sure it passes the schema constraints.
 
@@ -52,7 +52,7 @@ The objective of this lab is to familiarize you with JSON Schema validation in O
     </copy>
     ```
 
-    ![insert more vehicles](images/im3.png " ")
+    ![insert more vehicles](images/im3.png =50%x*)
 
 4. Now we can insert JSON data that violates the schema constraints to see the error handling.
 
@@ -92,7 +92,7 @@ The objective of this lab is to familiarize you with JSON Schema validation in O
     </copy>
     ```
 
-    ![create a vehicle table](images/im5.png " ")
+    ![create a vehicle table](images/im5.png =50%x*)
 
 6. Now let's insert JSON data that's got additional properties to check the new constraint.
 
@@ -103,7 +103,7 @@ The objective of this lab is to familiarize you with JSON Schema validation in O
     ```
 
 
-    ![inserting into the vehicles](images/im6.png " ")
+    ![inserting into the vehicles](images/im6.png =50%x*)
 
 ## Task 2: Querying JSON Data with Schema Validation
 
@@ -128,7 +128,7 @@ The objective of this lab is to familiarize you with JSON Schema validation in O
     </copy>
     ```
         
-    ![create a vehicles table](images/im7.png " ")
+    ![create a vehicles table](images/im7.png =50%x*)
 
 
 2. Query the table using the IS JSON VALIDATE condition to retrieve only the valid JSON documents.
@@ -150,7 +150,7 @@ The objective of this lab is to familiarize you with JSON Schema validation in O
 
     This will return only the two rows with JSON data that meets the IS JSON VALIDATE condition.
 
-    ![insert more employees](images/im8.png " ")
+    ![insert more employees](images/im8.png =50%x*)
 
 
 3. In this lab, we explored the practical applications of JSON schema constraints in Oracle SQL. We learned how to define JSON schema constraints during table creation, validate JSON data upon insertion, and query JSON data using these constraints. By using JSON schema validation, you can make sure that your JSON data keeps to a predefined format, which can improve data integrity and reliability in your Oracle Database.
