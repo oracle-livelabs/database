@@ -1,4 +1,4 @@
-# Run the Movie Stream Catalog Microservice
+# Run the MovieStream Catalog Microservice
 
 ## Introduction
 
@@ -28,8 +28,11 @@ In this task we will review the code using OCI Code Editor.
 
     ![Cloud Editor](./images/cloud-code-editor.png)
 
+2. Click on the Explorer button of OCI Code Editor.
 
-2. Go to the Code Editor, and open the file `AppConfig.java` in the following directory
+    ![Expand Cloud Editor](./images/cloud-code-editor-expand.png)
+
+3. Go to the Code Editor, and open the file `AppConfig.java` in the following directory
 `global-microservices-springdata-nosql/code-nosql-spring-sdk/src/main/java/com/oracle/nosql/springdatarestnosql` as shown in the screen-shot:
 
     ![Code createNoSQLClient](./images/appl-code-connection.png)
@@ -38,16 +41,16 @@ In this task we will review the code using OCI Code Editor.
 its customers. Whether deploying on an "On-Premises" cluster or utilizing the
 Oracle NoSQL Database Cloud Service, developers and end-users get the latest in
 NoSQL technology. Oracle offers a complete range of deployment options to
-support your NoSQL database, from on-premises to private cloud to public cloud.  Depending
-on which deployment opiton you choose, you may need different authentication strategies.
+support your Oracle NoSQL database, from on-premises to private cloud to public cloud.  Depending
+on which deployment option you choose, you may need different authentication strategies.
 
   The class `AppConfig.java` illustrates the different authentication options in the case
 statement. We covered the authentication basics in Lab 2. If the function is not visible in your
 screen, go ahead and scroll to it:
     * You can use **Instance Principals** to do the connection to NoSQL Cloud Service as
 shown in this code. Once Instance Principals are set up, you can make API calls to
-different Oracle Cloud Infrastructure services.  The benefit it applications running
-on those instances does not have to configure user credentials or a configuration file.
+different Oracle Cloud Infrastructure services.  The benefit is applications running
+on those instances do not have to configure user credentials or a configuration file.
 
     * You can use **Delegation Tokens** to do the connection to NoSQL Cloud Service
     and in this lab we will use them.
@@ -66,7 +69,7 @@ want to learn more [check here.](https://github.com/oracle/nosql-examples/blob/m
 
     ![Code createTable](./images/appl-properties.png)
 
-3. When you create a table, you can choose between **Provisioned Capacity** and
+4. When you create a table, you can choose between **Provisioned Capacity** and
 **On-Demand Capacity**. With the availability of both models, businesses have total flexibility when
 choosing the most cost-effective deployment to meet their business and application
 workload requirements. Such flexibility empowers businesses to solely focus on application
@@ -101,7 +104,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
   Finally, the table name is the entity class name but you can overwrite using the attribute `tableName` in the `NosqlTable` Annotation.
 
 
-4. The entity class that is used for persistence is discoverable by the Spring Data Framework either via annotation or inheritance.
+5. The entity class that is used for persistence is discoverable by the Spring Data Framework either via annotation or inheritance.
   The *NosqlRepository* interface allows you to inherit and create an interface for each entity that will use the Oracle NoSQL Database for persistence.
   The *NosqlRepository* interface extends Spring's PagingAndSortingRepository interface that provides many methods that define queries.
   In addition to those methods that are provided by the *NosqlRepository* interface, you can add methods to your repository interface
@@ -173,7 +176,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
     ```
     **Note:** This will start the "movie" application in the background.
 
-2. After you complete step 1, you can use the command tail to see the startup for the application
+2. After you complete step 1, you can use the command tail to see the startup for the application.
 
     ![appl-running](./images/appl-running.png)
 
@@ -184,7 +187,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
     ```
     The `mvnw` command will compile and start the application, please wait for the message *Started DemoApplication in xx seconds*
 
-3. Lets review the data created in the Lab 2.Execute in the Cloud Shell.
+3. Lets review the data created in the Lab 2.  Execute in the Cloud Shell.
 
     ```shell
     <copy>
@@ -200,7 +203,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
     </copy>
     ```
 
-    We will create a variable with the link self provided by the command above
+    We will create a variable with the self link provided by the command above
 
     ```shell
     <copy>
@@ -209,7 +212,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
     </copy>
     ```
 
-5. Use the link self from the result of the call above to read again the information about the film.
+5. Use the self link from the result of the call above to read again the information about the film.
 
     ```shell
     <copy>
@@ -252,7 +255,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
     fg
     </copy>
     ```
-    NB: you can rexecute the command `fg` to validate that there are not jobs running in background.
+    Note: you can rexecute the command `fg` to validate that there are not jobs running in background.
 
     Delete the temporary files created.
     ```shell

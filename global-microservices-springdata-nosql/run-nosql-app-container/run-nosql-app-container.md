@@ -1,16 +1,16 @@
-# Deploy the Movie Stream Catalog Microservice with Container Instances
+# Deploy the MovieStream Catalog Microservice with Container Instances
 
 ## Introduction
 
 This lab picks up where lab 3 left off. We are going to explore in more detail
 another possibility to deploy the application - use Container Instances.
 
-Oracle Cloud Infrastructure (OCI) Container Instances is a server-less compute service
+Oracle Cloud Infrastructure (OCI) Container Instances is a serverless compute service
 that enables you to quickly and easily run containers without managing any servers.
-Container Instances runs your containers on server-less compute optimized for container
+Container Instances runs your containers on serverless compute optimized for container
 workloads that provides the same isolation as virtual machines.
 
-Container instances are suitable for containerized workloads that do not require a
+Container Instances are suitable for containerized workloads that do not require a
 container orchestration platform like Kubernetes. These use cases include: APIs,
 web applications, build and deployment jobs in CI/CD pipelines, automation tasks for cloud operations, data/media processing jobs, development or test environments, and more.
 
@@ -18,8 +18,8 @@ _Estimated Time:_ 20 minutes
 
 ### Objectives
 
-* Deploy the application using Container Instance
-* Read data with REST API deployed in the new Container Instance
+* Deploy the application using Container Instances
+* Read data with REST API deployed in the new Container Instances
 
 ### Prerequisites
 
@@ -70,7 +70,7 @@ become disconnected and/or timed out. In that case, restart it.
     ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
 2. Execute the following environment setup shell script in the Cloud Shell to
-set up your environment. Please copy the values for `OCI_REGION` and `OCI_NOSQL_COMPID.`
+set up your environment. Please copy the values for `OCI_REGION(labeled: NOSQL_REGION)` and `OCI_NOSQL_COMPID.`
 
     ```shell
     <copy>
@@ -81,32 +81,32 @@ set up your environment. Please copy the values for `OCI_REGION` and `OCI_NOSQL_
 
     Minimize the Cloud Shell.
 
-## Task 3: Deploy a Container Instance
+## Task 3: Deploy Container Instances
 
 
  1. On left side drop down (under the Oracle Cloud banner), go to Developer Services and then Containers & Artifacts - Container Instances.
 
      ![Open Containers & Artifacts](images/menu-container-instance.png)
 
- 2. Click on Create Container Instance. This opens up a new window.
+ 2. Click on Create Container Instances. This opens up a new window.
 
    Enter **Creating Scalable, Global Microservices with OCI, Spring Data, and NoSQL** as the name.
-   Other information does not need to be changed for this LiveLab. Please ensure the compartment is `demonosql.` Click **Next.**
+   Other information does not need to be changed for this LiveLab. Please ensure the compartment is `demonosql.` Verify the 'Networking' section looks similar to the image below.  If not, make the necessary adjustments by opening the 'Networking' section, checking and then collapsing it. Click **Next.**
 
-     ![Create Container Instance](images/create-container-instance-1.png)
+     ![Create Container Instances](images/create-container-instance-1.png)
 
     Enter **demo-nosql-movie-example-app** as the name.  Click on **select image**, and
     a new screen appears.  Choose **external registry**, and
     enter **ghcr.io** as Registry hostname, **oracle/demo-nosql-movie-example-app** as Repository and Click **Select Image** at bottom of screen.
 
-       ![Create Container Instance](images/create-container-instance-2.png)
+       ![Create Container Instances](images/create-container-instance-2.png)
 
     Scroll down and add the following environment variables:
      - `NOSQL_SERVICETYPE` as a key and `useResourcePrincipal` as a value
      - `OCI_REGION` as a key and the value copied in Task 2 as a value
      - `OCI_NOSQL_COMPID` as a key and the value copied in Task 2 as a value
 
-     ![Create Container Instance](images/create-container-instance-3.png)
+     ![Create Container Instances](images/create-container-instance-3.png)
 
    Click **Next.**
 
@@ -130,7 +130,7 @@ set up your environment. Please copy the values for `OCI_REGION` and `OCI_NOSQL_
     source ~/global-microservices-springdata-nosql/env.sh
     </copy>
     ```
-Set the variable IP_CI with the value copied in Task 3. Execute in the Cloud Shell.
+Set the variable IP_CI with the Public IP address value copied in Task 3. Execute in the Cloud Shell.
 
     ```shell
     <copy>
@@ -157,7 +157,7 @@ Exit out of the Cloud Shell. You may now **proceed to the next lab.**
 
 * [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
 * [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/index.html)
-* [About Container Instance](https://docs.oracle.com/en-us/iaas/Content/container-instances/home.htm)
+* [About Container Instances](https://docs.oracle.com/en-us/iaas/Content/container-instances/home.htm)
 
 
 ## Acknowledgements

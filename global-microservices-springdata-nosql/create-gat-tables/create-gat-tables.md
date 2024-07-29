@@ -1,10 +1,10 @@
-# Setup Global Active Tables
+# Set Up Global Active Tables
 
 ## Introduction
 
 This lab picks up where Lab 4 left off. You are going to setup a GAT configuration,
 and deploy your application in multiple regions. Oracle NoSQL Global Active Tables
-provide multi-active replication of table data between geographically separated regions.
+provide active-active replication of table data between geographically separated regions.
 
 _Estimated Time:_ 20 minutes
 
@@ -21,7 +21,7 @@ _Estimated Time:_ 20 minutes
 
 ## Task 1: Create a GAT
 
-Before deploying the application in multiple regions, we will create replicas for `movie` table.
+Before deploying the application in multiple regions, we will create replicas for the `movie` table.
 
 1. From the hamburger menu, click **Databases**. Under Oracle NoSQL Databases, click **Tables**.
 Click the **Movie** table. Under **Resources**, click **Replicas**.
@@ -34,7 +34,7 @@ The list of replicas already created in the table is listed. In our case, the li
 
   ![add-replica](./images/add-replica.png)
 
-4. Wait few second until the deployment is created - Status will change from Updating to Active.  Any data that was in the originating table (the table created in Lab 2) will be immediately pushed to the newly created replica.  
+4. Wait few seconds until the deployment is created - Status will change from Updating to Active.  Any data that was in the originating table (the table created in Lab 2) will be immediately pushed to the newly created replica.  
 
   ![list-replicas](./images/list-replicas-with-new.png)
 
@@ -51,7 +51,7 @@ The list of replicas already created in the table is listed. In our case, the li
 
 We are going to set up the Movie Stream Microservice in the new region and follow similar steps to what  we used in **Lab 3 - Run the Movie Stream Catalog Microservice.**
 
-1. Let's get back into the Cloud Shell. We will execute in the tab on the remote region.
+1. Make sure you are in the region where you added your replica.  Let's get into the Cloud Shell from that region.
 
    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
@@ -64,7 +64,7 @@ set up your environment. If you close/open the Cloud Shell Console, please re-ex
     source ~/global-microservices-springdata-nosql/env.sh
     </copy>
     ```
-    ![Cloud Shell](./images/cloud-shell-result.png)
+    ![Cloud Shell Result](./images/cloud-shell-result.png)
 
 3. List the installed JDKs using the `csruntimectl java list` command. Select GraalVM for JDK 17 as the current JDK.   
 
@@ -119,7 +119,7 @@ set up your environment. If you close/open the Cloud Shell Console, please re-ex
     fg
     </copy>
     ```
-    NB: you can rexecute the command `fg` to validate that there are not jobs running in background.
+    Note: you can rexecute the command `fg` to validate that there are not jobs running in background.
 
     Delete the temporary files created.
     ```shell
@@ -136,7 +136,7 @@ Adding a new region and standing up the application in that region is a straight
 ## Task 4: Delete a remote region
 
 
-This task deletes the resources that got created.
+This task deletes the resources that got created.  Ensure you are back in your original region.
 
 1. From the hamburger menu, click Databases. Under Oracle NoSQL Databases, click Tables. Click the Movie table. Under Resources, click Replicas.
 The list of replicas already created in the table is listed. Click on delete

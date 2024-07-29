@@ -235,7 +235,7 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
     <copy>
     import oci
 
-    compartment_id = <compartment ocid>
+    compartment_id = "<compartment ocid>"
     CONFIG_PROFILE = "DEFAULT"
     config = oci.config.from_file('config', CONFIG_PROFILE)
 
@@ -256,24 +256,24 @@ Finally, the configured text generation request is sent to *OCI’s Generative A
 
 ```python
 <copy>
-generate_text_request = oci.generative_ai_inference.models.LlamaLlmInferenceRequest()
+chat_detail = oci.generative_ai_inference.models.ChatDetails()
 
-generate_text_request.prompt = prompt
-generate_text_request.is_stream = False # SDK doesn't support streaming responses, feature is under development
-generate_text_request.max_tokens = 1000
-generate_text_request.temperature = 0.3
-generate_text_request.top_p = 0.7
-generate_text_request.frequency_penalty = 0.0
+chat_request = oci.generative_ai_inference.models.CohereChatRequest()
+chat_request.message = prompt
+chat_request.max_tokens = 1000
+chat_request.temperature = 0.0
+chat_request.frequency_penalty = 0
+chat_request.top_p = 0.75
+chat_request.top_k = 0
 
-generate_text_detail = oci.generative_ai_inference.models.GenerateTextDetails()
-generate_text_detail.serving_mode = oci.generative_ai_inference.models.OnDemandServingMode(model_id="meta.llama-2-70b-chat")
-generate_text_detail.compartment_id = compartment_id
-generate_text_detail.inference_request = generate_text_request
+chat_detail.serving_mode = oci.generative_ai_inference.models.OnDemandServingMode(model_id="cohere.command-r-plus")
+chat_detail.chat_request = chat_request
+chat_detail.compartment_id = compartment_id
+chat_response = generative_ai_inference_client.chat(chat_detail)
 
-generate_text_response = generative_ai_inference_client.generate_text(generate_text_detail)
-response = generate_text_response.data.inference_response.choices[0].text
-
-print(response.strip())
+pprint.pp(
+    chat_response.data.chat_response.chat_history[1].message
+)
 </copy>
 ```
 
