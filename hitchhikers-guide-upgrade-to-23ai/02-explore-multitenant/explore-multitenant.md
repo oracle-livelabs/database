@@ -228,7 +228,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     <details>
     <summary>*click to see the output (output may vary)*</summary>
     ``` text
-    LSNRCTL for Linux: Version 23.0.0.0.0 - Production on 23-MAY-2024 13:11:02
+    LSNRCTL for Linux: Version 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on 23-MAY-2024 13:11:02
 
     Copyright (c) 1991, 2024, Oracle.  All rights reserved.
 
@@ -236,7 +236,7 @@ You connect to the CDB, find a list of PDBs and connect to them using different 
     STATUS of the LISTENER
     ------------------------
     Alias                     LISTENER
-    Version                   TNSLSNR for Linux: Version 23.0.0.0.0 - Production
+    Version                   TNSLSNR for Linux: Version 23.0.0.0.0 - for Oracle Cloud and Engineered Systems
     Start Date                23-MAY-2024 13:09:53
     Uptime                    0 days 0 hr. 1 min. 8 sec
     Trace Level               off
@@ -739,8 +739,8 @@ You want to run a script in a CDB including all PDBs.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL*Plus: Release 23.0.0.0.0 - Production on Sat Jun 8 06:20:21 2024
-    Version 23.4.0.24.05
+    SQL*Plus: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Sat Jun 8 06:20:21 2024
+    Version 23.5.0.24.07
     
     Copyright (c) 1982, 2024, Oracle.  All rights reserved.
     
@@ -777,8 +777,8 @@ You want to run a script in a CDB including all PDBs.
     
     SQL> SQL> ========== PROCESS ENDED ==========
     SQL> ========== Process Terminated by catcon ==========
-    SQL> Disconnected from Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
-    Version 23.4.0.24.05
+    SQL> Disconnected from Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems
+    Version 23.5.0.24.07
     ```
     </details>
 
@@ -794,4 +794,4 @@ You may now *proceed to the next lab*.
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, July 2024

@@ -235,17 +235,18 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     Databases in this Workload Repository schema
     ############################################
 
-    DB Id             DB Name            Host
-    ------------ ------------ ---------------
-    * 72245725           UPGR hol.localdomain
+    DB Id        DB Name      Host
+    ------------ ------------ ------------
+    * 310800000  UPGR         holserv1.liv
+                              elabs.oracle
+                              vn.com
 
-
-    The default database id is the local one: '  72245725'.  To use this
+    The default database id is the local one: '310800000'.  To use this
     database id, press <return> to continue, otherwise enter an alternative.
 
     Enter value for dbid:
 
-    Using	72245725 for Database ID
+    Using	310800000 for Database ID
 
 
     Specify the number of days of snapshots to choose from
@@ -285,10 +286,11 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     Specify the Directory Name
     ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Directory Name                                      Directory Path
+    Directory Name        Directory Path
     --------------------- --------------------------------------------
-    DATA1                                            /home/oracle/data
-    DATA_PUMP_DIR                   /u01/app/oracle/admin/UPGR/dpdump/
+    DATA_PUMP_DIR         /u01/app/oracle/product/19/rdbms/log/
+    ...
+    (outout truncated)
 
     Choose a Directory Name from the above list (case-sensitive).
 
@@ -309,8 +311,8 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     | #############################################
     |  The AWR extract dump file will be located
     |  in the following directory/file:
-    |   /u01/app/oracle/admin/UPGR/dpdump/
-    |   awrdat_111_120.dmp
+    |   /u01/app/oracle/product/19/rdbms/log/
+    |   awrdat_111_120.log
     | #############################################
     |
     |  *** AWR Extract Started ...
@@ -318,7 +320,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     |  This operation will take a few moments. The
     |  progress of the AWR extract operation can be
     |  monitored in the following directory/file:
-    |   /u01/app/oracle/admin/UPGR/dpdump/
+    |   /u01/app/oracle/product/19/rdbms/log/
     |   awrdat_111_120.log
     |
 
@@ -338,14 +340,14 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
 
     ```
     <copy>
-    ls -l /u01/app/oracle/admin/UPGR/dpdump/
+    ls -l /u01/app/oracle/product/19/rdbms/log/awr*
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ ls -l /u01/app/oracle/admin/UPGR/dpdump/
+    $ ls -l /u01/app/oracle/product/19/rdbms/log/awr*
     total 8940
     -rw-r-----. 1 oracle dba 9138176 Jul  6 12:28 awrdat_111_120.dmp
     -rw-r--r--. 1 oracle dba   14009 Jul  6 12:28 awrdat_111_120.log
@@ -356,14 +358,14 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
 
     ```
     <copy>
-    cat /u01/app/oracle/admin/UPGR/dpdump/awrdat*.log
+    cat /u01/app/oracle/product/19/rdbms/log/awrdat*.log
     </copy>
     ```
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $     cat /u01/app/oracle/admin/UPGR/dpdump/awrdat*.log
+    $ cat /u01/app/oracle/product/19/rdbms/log/awrdat*.log
     Starting "SYS"."SYS_EXPORT_TABLE_01":
     Startup took 1 seconds
     Estimate in progress using BLOCKS method...
@@ -538,7 +540,7 @@ When you migrate databases, preserving the AWR is important. When you upgrade, t
     Master table "SYS"."SYS_EXPORT_TABLE_01" successfully loaded/unloaded
     ******************************************************************************
     Dump file set for SYS.SYS_EXPORT_TABLE_01 is:
-    /u01/app/oracle/admin/UPGR/dpdump/awrdat_111_120.dmp
+    /u01/app/oracle/product/19/rdbms/log/awrdat_111_120.dmp
     Job "SYS"."SYS_EXPORT_TABLE_01" successfully completed at Thu Jul 6 12:28:31 2023 elapsed 0 00:00:22
     ```
     </details>
@@ -558,4 +560,4 @@ Snapshots are sets of historical data for specific periods that are used for per
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, July 2024

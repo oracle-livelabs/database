@@ -340,6 +340,7 @@ Analyze the *FTEX* database for upgrade readiness.
     upg1.sid=FTEX
     upg1.target_cdb=CDB23
     upg1.target_pdb_name.FTEX=CYAN
+    upg1.timezone_upg=NO
     ```
     </details>
 
@@ -404,7 +405,7 @@ Analyze the *FTEX* database for upgrade readiness.
     ==========================================
     [DB Name]                FTEX
     [Version Before Upgrade] 19.21.0.0.0
-    [Version After Upgrade]  23.4.0.24.05
+    [Version After Upgrade]  23.5.0.24.07
     ------------------------------------------
     [Stage Name]    PRECHECKS
     [Status]        FAILURE
@@ -643,7 +644,7 @@ Analyze the *FTEX* database for upgrade readiness.
     ==========================================
     [DB Name]                FTEX
     [Version Before Upgrade] 19.21.0.0.0
-    [Version After Upgrade]  23.4.0.24.05
+    [Version After Upgrade]  23.5.0.24.07
     ------------------------------------------
     [Stage Name]    PRECHECKS
     [Status]        SUCCESS
@@ -845,4 +846,4 @@ For fully automated solutions, you should explore Secure External Password Store
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, July 2024

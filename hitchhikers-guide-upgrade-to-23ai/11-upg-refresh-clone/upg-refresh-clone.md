@@ -178,6 +178,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
     upg1.target_pdb_name.FTEX=TEAL
     upg1.target_pdb_copy_option.FTEX=file_name_convert=none
     upg1.start_time=+10m
+    upg1.timezone_upg=NO
     ```
     </details>
 
@@ -214,7 +215,7 @@ You check the source database for upgrade readiness and execute pre-upgrade fixu
     ==========================================
     [DB Name]                FTEX
     [Version Before Upgrade] 19.21.0.0.0
-    [Version After Upgrade]  23.4.0.24.05
+    [Version After Upgrade]  23.5.0.24.07
     ------------------------------------------
     [Stage Name]    PRECHECKS
     [Status]        SUCCESS
@@ -601,4 +602,4 @@ You can even use refreshable clone PDB for databases that are already a PDB. Ver
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, July 2024

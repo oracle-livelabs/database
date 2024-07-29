@@ -168,12 +168,12 @@ You need to prepare a few things before you can start a Data Pump export.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    Export: Release 19.0.0.0.0 - Production on Tue May 28 03:23:45 2024
+    Export: Release 19.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue May 28 03:23:45 2024
     Version 19.21.0.0.0
 
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
 
-    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - for Oracle Cloud and Engineered Systems
     28-MAY-24 03:23:48.178: Starting "EXPUSER"."SYS_EXPORT_FULL_01":  expuser/******** parfile=/home/oracle/scripts/migrate-using-data-pump-exp.par
     28-MAY-24 03:23:48.554: W-1 Startup took 0 seconds
     28-MAY-24 03:23:49.875: W-2 Startup took 0 seconds
@@ -476,12 +476,12 @@ You need a few more changes to the new PDB before you can start the import.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    Import: Release 23.0.0.0.0 - Production on Tue May 28 03:26:43 2024
-    Version 23.4.0.24.05
+    Import: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue May 28 03:26:43 2024
+    Version 23.5.0.24.07
 
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
 
-    Connected to: Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
+    Connected to: Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems
     28-MAY-24 03:26:47.767: W-1 Startup on instance 1 took 0 seconds
     28-MAY-24 03:26:48.982: W-1 Master table "IMPUSER"."SYS_IMPORT_FULL_01" successfully loaded/unloaded
     28-MAY-24 03:26:49.306: Starting "IMPUSER"."SYS_IMPORT_FULL_01":  impuser/********@localhost/purple parfile=/home/oracle/scripts/migrate-using-data-pump-imp.par
@@ -1057,4 +1057,4 @@ You can avoid an in-place upgrade and PDB conversion by using Data Pump. The sou
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, July 2024

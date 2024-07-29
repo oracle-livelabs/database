@@ -185,6 +185,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     * By specifying `target_cdb` you instruct AutoUpgrade to also perform a non-CDB to PDB conversion.
     * `restoration` defines whether a guaranteed restore point is created before the upgrade.
     * `add_after_upgrade_pfile` points to a file containing the initialization parameters you want to add after upgrade. 
+    * `timezone_upg` skips the timezone file upgrade. 
 
     <details>
     <summary>*click to see the output*</summary>
@@ -196,6 +197,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     upg1.target_cdb=CDB23
     upg1.restoration=no
     upg1.add_after_upgrade_pfile=/home/oracle/scripts/upgr_after_addinit.ora
+    upg1.timezone_upg=NO
     ```
     </details>
 
@@ -257,7 +259,7 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     ==========================================
     [DB Name]                UPGR
     [Version Before Upgrade] 19.21.0.0.0
-    [Version After Upgrade]  23.4.0.24.05
+    [Version After Upgrade]  23.5.0.24.07
     ------------------------------------------
     [Stage Name]    PRECHECKS
     [Status]        SUCCESS
@@ -561,4 +563,4 @@ AutoUpgrade completely automates upgrades and incorporates our best practices. A
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, July 2024

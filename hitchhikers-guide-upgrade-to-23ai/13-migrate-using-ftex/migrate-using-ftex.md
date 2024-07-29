@@ -219,12 +219,12 @@ You need to prepare a few things before you can start FTEX.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    Export: Release 19.0.0.0.0 - Production on Wed May 29 13:31:09 2024
+    Export: Release 19.0.0.0.0 - for Oracle Cloud and Engineered Systems on Wed May 29 13:31:09 2024
     Version 19.21.0.0.0
 
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
 
-    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - for Oracle Cloud and Engineered Systems
     29-MAY-24 13:31:12.853: Starting "FTEXUSER"."SYS_EXPORT_FULL_01":  ftexuser/******** parfile=/home/oracle/scripts/migrate-using-ftex-exp.par
     29-MAY-24 13:31:13.540: W-1 Startup took 1 seconds
     29-MAY-24 13:31:15.094: W-2 Startup took 1 seconds
@@ -469,7 +469,7 @@ You need a few more changes to the new PDB before you can start the import.
     ```
     <copy>
     mkdir -p /u01/app/oracle/oradata/CDB23/MAROON
-    cp /u02/oradata/FTEX/users01.dbf /u01/app/oracle/oradata/CDB23/MAROON/
+    cp /u02/oradata/FTEX/datafile/o1_mf_users_*.dbf /u01/app/oracle/oradata/CDB23/MAROON/users01.dbf
     </copy>
 
     -- Be sure to hit RETURN
@@ -515,12 +515,12 @@ You need a few more changes to the new PDB before you can start the import.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    Import: Release 23.0.0.0.0 - Production on Wed May 29 14:01:10 2024
-    Version 23.4.0.24.05
+    Import: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Wed May 29 14:01:10 2024
+    Version 23.5.0.24.07
 
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
 
-    Connected to: Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
+    Connected to: Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems
     29-MAY-24 14:01:13.959: W-1 Startup on instance 1 took 0 seconds
     29-MAY-24 14:01:15.408: W-1 Master table "FTEXUSER"."SYS_IMPORT_TRANSPORTABLE_01" successfully loaded/unloaded
     29-MAY-24 14:01:15.943: W-1 Source time zone is +02:00 and target time zone is +00:00.
@@ -1176,4 +1176,4 @@ You can avoid an in-place upgrade and PDB conversion by using FTEX. The source d
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
