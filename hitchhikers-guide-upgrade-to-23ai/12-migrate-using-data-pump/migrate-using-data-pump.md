@@ -168,12 +168,12 @@ You need to prepare a few things before you can start a Data Pump export.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    Export: Release 19.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue May 28 03:23:45 2024
+    Export: Release 19.0.0.0.0 - Production on Tue May 28 03:23:45 2024
     Version 19.21.0.0.0
 
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
 
-    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - for Oracle Cloud and Engineered Systems
+    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
     28-MAY-24 03:23:48.178: Starting "EXPUSER"."SYS_EXPORT_FULL_01":  expuser/******** parfile=/home/oracle/scripts/migrate-using-data-pump-exp.par
     28-MAY-24 03:23:48.554: W-1 Startup took 0 seconds
     28-MAY-24 03:23:49.875: W-2 Startup took 0 seconds

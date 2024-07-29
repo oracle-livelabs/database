@@ -219,12 +219,12 @@ You need to prepare a few things before you can start FTEX.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    Export: Release 19.0.0.0.0 - for Oracle Cloud and Engineered Systems on Wed May 29 13:31:09 2024
+    Export: Release 19.0.0.0.0 - Production on Wed May 29 13:31:09 2024
     Version 19.21.0.0.0
 
     Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
 
-    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - for Oracle Cloud and Engineered Systems
+    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
     29-MAY-24 13:31:12.853: Starting "FTEXUSER"."SYS_EXPORT_FULL_01":  ftexuser/******** parfile=/home/oracle/scripts/migrate-using-ftex-exp.par
     29-MAY-24 13:31:13.540: W-1 Startup took 1 seconds
     29-MAY-24 13:31:15.094: W-2 Startup took 1 seconds
