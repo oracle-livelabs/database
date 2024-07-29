@@ -21,7 +21,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
 
 ## Task 1: Creating a vector table
 1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png " ")
+    ![click SQL](images/im1.png =50%x*)
 
 2. The first thing we'll do is create a table with the new vector data type.
 
@@ -32,7 +32,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
     desc vector_table
     </copy>
     ```
-    ![Create a table](images/vec1.png " ")
+    ![Create a table](images/vec1.png =50%x*)
 
     Nothing crazy here. Just the new vector data type in the Oracle Database!
 
@@ -71,7 +71,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
     select * from vector_table;
     </copy>
     ```
-    ![select from the table](images/vec2.png " ")
+    ![select from the table](images/vec2.png =50%x*)
 
 5. We can use regular DDL against our vectors just as we'd expect. For example, run the following to update one of our vectors.
 
@@ -84,7 +84,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
     select * from vector_table;
     </copy>
     ```
-    ![update the table](images/vec3.png " ")
+    ![update the table](images/vec3.png =50%x*)
 
 6. We can also delete rows with vectors. Run the following to remove a vector.
     ```
@@ -95,7 +95,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
     select * from vector_table;
     </copy>
     ```
-    ![delete the table](images/vec4.png " ")
+    ![delete the table](images/vec4.png =50%x*)
 
 ## Task 2. Vector dimensionality and formats
 1. In this task, we're going to take a look at what vector dimensionality is, how we format it, and why we care.
@@ -135,7 +135,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
     select * from vector_table_2;
     </copy>
     ```
-    ![insert into table](images/vec5.png " ")
+    ![insert into table](images/vec5.png =50%x*)
 
 4. Now let's take a look what happens if we try and add a vector that has more or less than 3 dimension. Hint, we'll see an error.
 
@@ -144,7 +144,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
     insert into vector_table_2 values (4, '[1, 0, 1, 0]');
     </copy>
     ```
-    ![insert into the table](images/vec6.png " ")
+    ![insert into the table](images/vec6.png =50%x*)
 
     By defining the number of dimensions, we are effetely creating a check constraint.
 
@@ -201,7 +201,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
     SELECT VECTOR('[3, -5]');
     </copy>
     ```
-    ![select vectors](images/image.png " ")
+    ![select vectors](images/image.png =50%x*)
 
     This is what the vectors would look like if we graphed them.
 
@@ -215,7 +215,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
         EUCLIDEAN)) AS DISTANCE;
     </copy>
     ```
-    ![select vectors again](images/vec7.png " ")
+    ![select vectors again](images/vec7.png =50%x*)
 
 4. How about from (1,1) and (3, -5)?
     ```
@@ -226,7 +226,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
         EUCLIDEAN)) AS DISTANCE;
     </copy>
     ```
-    ![find the distance](images/vec8.png " ")
+    ![find the distance](images/vec8.png =50%x*)
 
 5. Now let's take a look at performing similarity search between multiple different vectors. With Similarity Search, we don't focus on the actual distance between two vectors. Instead, we care about the result set, which is a list of vectors ordered by their distance from a given input/query vector. The exact distances aren't important. **What matters is how close each vector is relative to the others in the list.**
 
@@ -255,7 +255,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
     ORDER BY id;
     </copy>
     ```
-    ![insert data](images/vec9.png " ")
+    ![insert data](images/vec9.png =50%x*)
 
 8. Now imagine we add a point at (1,0), like the image below. Let's find the closest vectors to that given vector. Remember, we're not interested in the distances. We care about the ids of the rows that're closest to our point.
 
@@ -269,7 +269,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
     FETCH FIRST 3 ROWS ONLY;
     </copy>
     ```
-    ![show distance of table](images/vec10.png " ")
+    ![show distance of table](images/vec10.png =50%x*)
 
 9. What if we moved this? Find which three are closest to the vector (1, -3). 
 
@@ -283,7 +283,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
     FETCH FIRST 3 ROWS ONLY;
     </copy>
     ```
-    ![select from table](images/vec11.png " ")
+    ![select from table](images/vec11.png =50%x*)
 
 
 10. These are very basic use cases as this lab is meant to be a small introduction to the topic.

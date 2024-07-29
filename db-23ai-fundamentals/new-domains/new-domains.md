@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Welcome to the "Data Usecase Domains Exploration" lab! Data Usecase Domains play a crucial role in data integrity and consistency within database applications. In this lab, we will explore Data Usecase Domains in Oracle Database 23ai, covering single column Data Usecase Domains, multi-column Data Usecase Domains, and flexible Data Usecase Domains. Through these examples, you will gain an understanding of how Data Usecase Domains can be defined, applied, and used to maintain data quality.
+Welcome to the "Data Usecase Domains Exploration" lab! Data Usecase Domains play a crucial role in data integrity and consistency within database applications. Data Use Case Domains provide consistent metadata for development, analytics, and ETL applications and tools helping to ensure data consistency and validation throughout the schema. In this lab, we will explore Data Usecase Domains in Oracle Database 23ai, covering single column Data Usecase Domains, multi-column Data Usecase Domains, and flexible Data Usecase Domains. Through these examples, you will gain an understanding of how Data Usecase Domains can be defined, applied, and used to maintain data quality.
 
 Estimated Lab Time: 20 minutes
 
@@ -17,10 +17,10 @@ The objective of this lab is to provide comprehensive hands-on experience with D
 ## Task 1: Understanding Data Usecase Domains
 
 1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png " ")
+    ![click SQL](images/im1.png =50%x*)
 
 2. **Overview of Data Usecase Domains:**
-   Data Usecase Domains serve as a way for defining properties and constraints associated with columns. They ensure consistency in data representation and validation throughout the application.
+   Data Usecase Domains serve as a way for defining properties and constraints associated with columns. They ensure consistency in data representation and validation throughout the application. Data Use Case Domains also provide consistent metadata for development, analytics, and ETL applications and tools helping to ensure data consistency and validation throughout the schema.
 
 3. **Types of Data Usecase Domains:**
    - Single Column Domain: Applies constraints to a single column.

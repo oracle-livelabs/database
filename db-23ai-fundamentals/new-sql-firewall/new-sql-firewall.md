@@ -38,7 +38,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
             p_enabled => TRUE,
             p_schema => 'TEST',
             p_url_mapping_type => 'BASE_PATH',
-            p_url_mapping_pattern => 'TEST',
+            p_url_mapping_pattern => 'test',
             p_auto_rest_auth=> TRUE
         );
 

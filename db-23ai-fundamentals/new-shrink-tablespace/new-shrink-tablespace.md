@@ -20,7 +20,7 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
     Unused or free space within tablespaces can grow over time, reducing database efficiency and performance. Shrinking tablespaces helps optimize database resource utilization by reclaiming unused space. The `shrink_tablespace` procedure provides a convenient solution for resizing data files and organizing objects.
 
     If you haven't already, open up SQL Developer Web (Database Actions)
-        ![open sql](images/im2.png " ")
+        ![open sql](images/im2.png =50%x*)
 
 
 2. Now, let's explore how to use the `shrink_tablespace` procedure to reclaim unused space in a tablespace.
@@ -38,7 +38,7 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
     GROUP BY tablespace_name;
     </copy>
     ```
-    ![calculate your tablespace size](images/im1.png " ")
+    ![calculate your tablespace size](images/im1.png =50%x*)
 
 2. We can create a new table and populate it with data. You can use the following SQL statement as an example:
 
@@ -55,7 +55,7 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
     );
     </copy>
     ```
-    ![create a table](images/im3.png " ")
+    ![create a table](images/im3.png =50%x*)
 
 3. We'll now add 2 million rows to the table (feel free to skip this and read the rest if you don't want to add the data to your table).
 
@@ -98,7 +98,7 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
     GROUP BY tablespace_name;
     </copy>
     ```
-    ![check the tablespace size after adding data](images/im5.png " ")
+    ![check the tablespace size after adding data](images/im5.png =50%x*)
 
     We've got about 2 gigs worth of data in our tablespace now. Yours may be different, that's okay.
 
@@ -108,7 +108,7 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
     drop table my_table cascade constraints;
     </copy>
     ```
-    ![create a table](images/im6.png " ")
+    ![create a table](images/im6.png =50%x*)
 
 3. Now verify the current size of the tablespace to confirm the presence of unused space. Although data has been deleted, the tablespace size remains unchanged.
     
@@ -121,7 +121,7 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
     GROUP BY tablespace_name;
     </copy>
     ```
-    ![check the tablespace size](images/im5.png " ")
+    ![check the tablespace size](images/im5.png =50%x*)
 
 ## Task 3: Understanding the `shrink_tablespace` Procedure
 
@@ -140,7 +140,7 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
     execute dbms_space.SHRINK_TABLESPACE('DATA', SHRINK_MODE=>DBMS_SPACE.TS_MODE_ANALYZE);
     </copy>
     ```
-    ![analyze the tablespace](images/im7.png " ")
+    ![analyze the tablespace](images/im7.png =50%x*)
 
 3. Analyze gives us a bunch of useful information. Let's take the default parameter's (meaning 'TS\_TARGET\_MAX\_SHRINK') and shrink the tablespace: (See below for the API description)
 
@@ -149,7 +149,7 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
     execute dbms_space.SHRINK_TABLESPACE('DATA');
     </copy>
     ```
-    ![execute the shrink](images/im8.png " ")
+    ![execute the shrink](images/im8.png =50%x*)
 
 4. The API Description:
     Input Parameters:

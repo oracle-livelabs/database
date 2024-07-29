@@ -26,7 +26,7 @@ This lab is just a short overview of the functionality brought forth by Property
 
 1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
 
-    ![click SQL](images/im1.png " ")
+    ![click SQL](images/im1.png =50%x*)
 
 2. For demo purposes we will be using the ADMIN user so we don't need to grant any additional roles. The database schema that contains the graph tables (either Property Graph schema objects or relational tables that will be directly loaded as a graph in memory) requires certain privileges found [here](https://docs.oracle.com/en/database/oracle/property-graph/24.2/spgdg/graph-developers-guide-property-graph.pdf). Here is an example of granting SQL property graph related privileges
 
@@ -75,7 +75,7 @@ This lab is just a short overview of the functionality brought forth by Property
 
     </copy>
     ```
-    ![create the data](images/im2.png " ")
+    ![create the data](images/im2.png =50%x*)
 
 
 ## Task 2: Creating Property Graphs  
@@ -121,7 +121,7 @@ This lab is just a short overview of the functionality brought forth by Property
     * Edges represent how they are connected (relationship table)
     * Our edges table has a source key and destination key, representing the connection between the two people
 
-    ![create the property graph](images/im3.png " ")
+    ![create the property graph](images/im3.png =50%x*)
 
 ## Task 3: Querying Property Graphs with SQL/PGQ
 
@@ -140,7 +140,7 @@ This lab is just a short overview of the functionality brought forth by Property
     </copy>
     ```
 
-    ![use sql/pgq to query the graph](images/im4.png " ")
+    ![use sql/pgq to query the graph](images/im4.png =50%x*)
 
 2. We can filter our results like we can in SQL.
 

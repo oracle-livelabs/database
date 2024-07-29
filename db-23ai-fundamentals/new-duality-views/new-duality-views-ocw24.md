@@ -40,7 +40,7 @@ This lab assumes you have:
 ## Task 1: Getting Started
 
 1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png " ")
+    ![click SQL](images/im1.png =50%x*)
 
 2.  Let's create some tables to use in the lab. Copy and run the following SQL script:
     ```
@@ -117,7 +117,7 @@ This lab assumes you have:
         };
 	</copy>
     ```
-	![Creating the duality view](images/im2.png " ")
+	![Creating the duality view](images/im2.png =50%x*)
 
 2. Let's insert a new customer with an order using a simple relational insert statement:
 
@@ -176,7 +176,7 @@ This lab assumes you have:
 
 3. Right-click on the CUSTOMERS_DV, hover the mouse over REST, and click Enable if it isn't already enabled. See the picture below. NOTE: If it is enabled already, it will say Disable… instead. If you see Disable… you don't have to do anything. Skip to number 5.
 
-    ![locating rest](images/rest2.png " ")
+    ![locating rest](images/rest2.png =50%x*)
 
 4. The REST Enable Object side panel will appear. Select Enable to continue.
 
@@ -186,12 +186,12 @@ This lab assumes you have:
 
 5. Click on the hamburger menu in the upper left-hand corner of the Database Actions page and click on REST.
 
-    ![sql navigation ](images/rest4.png " ")
+    ![sql navigation ](images/rest4.png =50%x*)
 
 
 6. Then click on AutoREST.
 
-    ![pick autorest](images/rest5.png " ")
+    ![pick autorest](images/rest5.png =50%x*)
 
 7. Now click the three dots on the right of the CUSTOMERS_DV and select OpenAPI View.
 
