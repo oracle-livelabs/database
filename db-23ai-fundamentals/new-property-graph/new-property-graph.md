@@ -6,6 +6,9 @@ Welcome to the "Exploring SQL Property Graphs and SQL/PGQ in Oracle Database 23a
 
 Estimated Lab Time: 20 minutes
 
+Watch the video below for a walkthrough of the lab.
+[Lab walkthrough video](videohub:1_nyvxwdwz)
+
 ### Objective:
 
 The objective of this workshop is to show you SQL property graphs and demo their practical use. By the end of this workshop, you will be able to create property graphs, query them using SQL/PGQ, and visualize the relationships within your data.

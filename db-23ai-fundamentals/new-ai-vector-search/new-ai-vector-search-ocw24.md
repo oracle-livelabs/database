@@ -8,6 +8,9 @@ This lab will focus on AI Vector search at a very high level.
 
 Estimated Lab Time: 20 minutes
 
+Watch the video below for a walkthrough of the lab.
+[Lab walkthrough video](videohub:1_0wuh9kch)
+
 ### Objective:
 In this lab, you will explore the new vector data type introduced in Oracle Database 23ai. You will create a vector table and perform basic DDL operations on the vectors. You will also learn about similarity search and how it relates to vectors, as well as use some of the new AI focused SQL functions in the database.
 

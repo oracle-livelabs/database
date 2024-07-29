@@ -6,6 +6,9 @@ Welcome to the "Granting the Developer Role" lab. In this lab, you will learn ho
 
 Estimated Lab Time: 10 minutes
 
+Watch the video below for a walkthrough of the lab.
+[Lab walkthrough video](videohub:1_78gqg1b2)
+
 ### Objective:
 The objective of this lab is to familiarize you with the Developer Role in Oracle Database 23ai and show you how to enable it. By the end of this lab, you will understand how to use the Developer Role effectively for granting privileges to application users.
 
