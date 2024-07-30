@@ -352,16 +352,11 @@ Analyze the *FTEX* database for upgrade readiness.
     </copy>
     ```
 
-    * Notice how AutoUpgrade starts by loading its keystore.
-    * The keystore is found in the location defined by `global.keystore`.
-
     <details>
     <summary>*click to see the output*</summary>
     ``` text
     AutoUpgrade 24.4.240426 launched with default internal options
     Processing config file ...
-    Loading AutoUpgrade keystore
-    AutoUpgrade keystore was successfully loaded
     +--------------------------------+
     | Starting AutoUpgrade execution |
     +--------------------------------+

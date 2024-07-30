@@ -498,6 +498,8 @@ When the *REFRESHPDB* phase is over, AutoUpgrade executes a final refresh to bri
     . cdb23
     sqlplus / as sysdba
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
 5. Switch to *TEAL* and ensure that the *SALES.ORDERS* table exist.
@@ -583,7 +585,7 @@ AutoUpgrade stops the source non-CDB immediately after the final refresh. This e
 **Congratulations!** You have now:
 * Upgraded the *FTEX* database
 * Converted it to a PDB
-* Renamed it to TEAL
+* Renamed it to *TEAL*
 * Left the source database intact for rollback
 
 You may now *proceed to the next lab*.

@@ -627,7 +627,9 @@ You check DBA and CDB views.
 
 You want to run a script in a CDB including all PDBs.
 
-1. The Oracle home contains a program that can execute scripts in a CDB. Explore the options of *catcon.pl*.
+1. Remain in the *yellow* terminal. 
+
+2. The Oracle home contains a program that can execute scripts in a CDB. Explore the options of *catcon.pl*.
 
     ```
     <copy>
@@ -680,7 +682,7 @@ You want to run a script in a CDB including all PDBs.
     ```
     </details>
 
-2. Recompile invalid objects in all containers using *utlrp.sql*.
+3. Recompile invalid objects in all containers using *utlrp.sql*.
 
     ```
     <copy>
@@ -712,7 +714,7 @@ You want to run a script in a CDB including all PDBs.
     ```
     </details>
 
-3. *catcon.pl* stores the output from each container in a separate log file. List the files.
+4. *catcon.pl* stores the output from each container in a separate log file. List the files.
 
     ```
     <copy>
@@ -728,7 +730,7 @@ You want to run a script in a CDB including all PDBs.
     ```
     </details>
 
-4. Optionally, you can examine one of the files.
+5. Optionally, you can examine one of the files.
 
     ```
     <copy>
