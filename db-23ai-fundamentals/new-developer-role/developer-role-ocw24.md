@@ -6,6 +6,9 @@ Welcome to the "Granting the Developer Role" lab. In this lab, you will learn ho
 
 Estimated Lab Time: 10 minutes
 
+Watch the video below for a walkthrough of the lab.
+[Lab walkthrough video](videohub:1_78gqg1b2)
+
 ### Objective:
 The objective of this lab is to familiarize you with the Developer Role in Oracle Database 23ai and show you how to enable it. By the end of this lab, you will understand how to use the Developer Role effectively for granting privileges to application users.
 
@@ -26,7 +29,7 @@ The objective of this lab is to familiarize you with the Developer Role in Oracl
 ## Task 2: Generating a list of granted privileges and roles
 
 1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png " ")
+    ![click SQL](images/im1.png =50%x*)
 
 2. To check all of the system privileges, object privileges, and roles granted by the Developer Role, run the following PL/SQL script:
 
@@ -100,7 +103,7 @@ The objective of this lab is to familiarize you with the Developer Role in Oracl
     /
     </copy>
     ```
-    ![run the PL/SQL](images/im2.png " ")
+    ![run the PL/SQL](images/im2.png =50%x*)
 
 3. Here we can go ahead and create our user for this workshop. We'll call our user `DB23AI` and grant the user the new developer role.
 
@@ -151,7 +154,7 @@ The objective of this lab is to familiarize you with the Developer Role in Oracl
     ```
     We can see that the user `DB23AI` we created above doesn't have the Developer Role anymore.
     
-    ![grant roles](images/ocw-user.png " ")
+    ![grant roles](images/ocw-user.png =50%x*)
 
 2. Now we can re-grant the role to `DB23AI`. Again, run this as a script.
    
@@ -161,7 +164,7 @@ The objective of this lab is to familiarize you with the Developer Role in Oracl
     SELECT GRANTED_ROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE='DB23AI';
     </copy>
     ```
-    ![grant our new user roles](images/ocw-dbrole.png " ")
+    ![grant our new user roles](images/ocw-dbrole.png =50%x*)
 
 3. Let's sign in as our new user. Click on the admin profile in the top right hand of Database Actions and sign out.
 
@@ -169,7 +172,7 @@ The objective of this lab is to familiarize you with the Developer Role in Oracl
 
 4. Sign in with the username **DB23AI** and password **Oracledb_4U#**
 
-  ![sign in with db23ai](images/im11.png " ")
+  ![sign in with db23ai](images/im11.png =50%x*)
 
 5. Click SQL to open the SQL editor.
 
