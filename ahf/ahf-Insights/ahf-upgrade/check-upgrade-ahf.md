@@ -202,7 +202,7 @@ You must complete on both nodes of the RAC Database Cluster.
 	```
 	<copy>
 	cd /tmp
-	wget  https://objectstorage.us-ashburn-1.oraclecloud.com/p/djRqaAzUijQEgNQgTRk05DY9DI-DgHGfDJXbOdWgO2TCWCPx9AtHjBd1tx-5lUpQ/n/idhbogog2wy7/b/ocw24-livelabs/o/AHF-LINUX_v24.6.1.zip
+	wget  https://idhbogog2wy7.objectstorage.us-ashburn-1.oci.customer-oci.com/p/5jfe6rB_g_6MNkhfEW87-2IelklkLAJ6jyBTIJqo525D9GEGzDXXTbkvPy0ujbZ9/n/idhbogog2wy7/b/ocw24-livelabs/o/AHF-LINUX_v24.6.1.zip
 	</copy>
 	```
 
