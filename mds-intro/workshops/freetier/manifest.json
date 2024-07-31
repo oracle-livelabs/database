@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "Getting started with MySQL HeatWave for Administrators",
+    "workshoptitle": "Launch Your First MySQL HeatWave Database System - Administrators",
     "help": "livelabs-help-db_us@oracle.com",
 	"tutorials": [
         {
@@ -20,6 +20,10 @@
         {
             "title": "Lab 2: Create and connect to a MySQL Heatwave DB System",
             "filename": "../../launchmds/launchmds.md"
+        },
+        {
+            "title": "Lab 3: Enable and explore Database Management for MySQL Heatwave",
+            "filename": "../../enabledbm/enabledbm.md"
         },
         {
             "title": "Need Help?",

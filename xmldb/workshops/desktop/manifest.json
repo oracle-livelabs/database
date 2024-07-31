@@ -18,27 +18,27 @@
       "filename": "../../provision/provision.md"
     },
     {
-      "title": "Lab 2: Create tables and populate data",
+      "title": "Lab 2: Create your first XML table and insert some XML documents",
       "filename": "../../populate/populate.md"
     },
     {
-      "title": "Lab 3: Run queries",
+      "title": "Lab 3: Analyze your data using SQL and XQuery",
       "filename": "../../queries/queries.md"
     },
     {
-      "title": "Lab 4: Generate relational data from XML data",
+      "title": "Lab 4: Expose your XML documents transparently as relational data",
       "filename": "../../xml2relational/xml2relational.md"
     },
     {
-      "title": "Lab 5: Convert relational data to XML data",
+      "title": "Lab 5: Generate XML documents from relational tables",
       "filename": "../../relational2xml/relational2xml.md"
     },
     {
-      "title": "Lab 6: Index XML data",
+      "title": "Lab 6: Index your XML documents",
       "filename": "../../index/index.md"
     },
     {
-      "title": "Lab 7: Update XML content",
+      "title": "Lab 7: Update your XML documents",
       "filename": "../../update/update.md"
     },
     {

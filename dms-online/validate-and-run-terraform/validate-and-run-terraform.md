@@ -82,7 +82,10 @@ In this lab, you will:
 
  Data replication is in progress and is capturing all transactions since start of the migration. 
   
-  9. Open the Cloud Shell by pressing the icon ![](images/cloudshell.png =22x22) and enter the following command to run SQL*Plus:
+  9. Open the Cloud Shell located under the developer tools icon on the top ribbon:
+  ![Screenshot of completed phases](images/cloudshell.png =40%x*)
+
+   Enter the following command to run SQL*Plus:
     ```
     <copy>
     sqlplus system/<admin_password>@<dbcs_public_ip>:1521/<dbcs_pdb_service>
@@ -121,41 +124,43 @@ In this lab, you will:
 
     ![Screenshot of ADB list](images/adb-list.png =90%x*) 
 
- 12. Click on the **Database Actions** button. If your browser blocks the popup, change it to allow popups from Oracle cloud. 
+ 12. Click on the **Database Actions** list of values button and SQL. If your browser blocks the popup, change it to allow popups from Oracle cloud. 
 
-    ![Screenshot of ADB list](images/db-actions.png =90%x*) 
+    ![Screenshot of ADB list](images/db-actions.png =50%x*) 
 
- 13. In **Database Actions**, click on the **SQL** tile. Close any popup dialogs.
-
-    ![Screenshot of ADB list](images/db-actions-sql.png =50%x*) 
  
- 14. On the left side, change the user to **EMPL01** and right-click on the table **EMPL** to select **Open**.
+ 13. Run the following query to locate the previously inserted record on the source database that was replicated to our ADB insance:
 
-    ![Screenshot of ADB list](images/db-actions-empl.png =40%x*)
+      ```
+    <copy>
+    select * from hr01.empl where col1='99999';
+    </copy>
+      ``` 
 
- 15. On the right side, select the tab **Data**. All entries of the test data table EMPL will show. Click on the filter icon and fill in a search condition for col1 equals 99999. The entry for Joe Smith should appear, which got replicated in real-time by GoldenGate.
+    Click on the Run Statemet button, you should see the record in the bottom:
 
-    ![Screenshot of ADB list](images/db-actions-data.png =90%x*) 
+    ![Screenshot of sql statement](images/run-statement.png =50%x*) 
 
- 16. You can close the Database Actions window and go back to OCI.
+ 14. You can close the Database Actions window and go back to OCI.
 
- 17. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
+ 15. In the OCI Console Menu ![hamburger icon](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
     ![create migration navigation](images/migration-create.png =50%x*)
 
- 18. Select **TestMigration**
+ 16. Select **TestMigration**
 
     ![Screenshot of select testmigration](images/select-testmigration.png =90%x*)
 
- 19. Select the most recent Migration job.  
+ 17. Select the most recent Migration job.  
 
- 20. This is the point where a migration user would stop the source application so that no more transactions are applied to the source DB. You can now press **Resume** on the job to complete replication. In the Resume Job dialog, chose the **Switchover App** phase and press **Resume**. The Switchover App phase will gracefully stop replication and signal the target application to initiate transactions to the target DB.
+ 18. This is the point where a migration user would stop the source application so that no more transactions are applied to the source DB. You can now press **Resume** on the job to complete replication. In the Resume Job dialog, chose the **Switchover App** phase and press **Resume**. The Switchover App phase will gracefully stop replication and allow the user to activate the target application.
+ 
     ![Screenshot of resume job switchover](./images/resume-job-switchover.png " ")
 
- 21. After Job resumes and changes the status to WAITING after Switchover App phase, press Resume. Select the last phase Cleanup and press Resume:
+ 19. After Job resumes and changes the status to WAITING after Switchover App phase, press Resume. Select the last phase Cleanup and press Resume:
     ![Screenshot of resume job cleanup](./images/resume-job-cleanup.png =60%x*)
 
- 22. The migration runs the final cleanup phases and shows as Succeeded when finished:
+ 20. The migration runs the final cleanup phases and shows as Succeeded when finished:
 ![Screenshot of resume job cleanup completed](./images/cleanup-completed.png =90%x*)
 ![Screenshot of succeeded Migration](./images/succeeded.png " ")
 
@@ -166,4 +171,4 @@ In this lab, you will:
 ## Acknowledgments
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian, Lynch, Solution Engineers, Austin Specialist Hub
-* **Last Updated By/Date** - Killian Lynch, Kiana McDaniel, Hanna Rakhsha, Solution Engineers, July 2021
+* **Last Updated By/Date** - Jorge Martinez, Product Manager, June 2024
