@@ -1,10 +1,12 @@
-# Prepare M5 Script
+# Initial Backup and Restore
 
 ## Introduction
 
 Now, it's time to start the migration. First, you take a level 0 backup that you restore in the target database. Although the migration has started, there is no downtime yet. The initial level 0 backup is taken without downtime.
 
 Estimated Time: 10 Minutes.
+
+![Start the initial level 0 backup/restore](./images/initial-backup-restore-overview.png " ")
 
 ### Objectives
 
@@ -233,7 +235,7 @@ In this lab, you will:
     ```
     </details>
 
-3. Set the environment to the target database and start the restore.
+3. Set the environment to the target database and *start the restore*.
 
     ```
     <copy>
@@ -260,8 +262,8 @@ In this lab, you will:
     $ . cdb23
     $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L0SCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - Production on Tue Jul 2 18:58:07 2024
-    Version 23.4.0.24.05
+    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue Jul 2 18:58:07 2024
+    Version 23.5.0.24.07
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will use SQL Tuning Advisor (SQL Tuning Advisor) to find suggestions for improving SQLs.
+In this lab, you will use SQL Tuning Advisor (STA) to find suggestions for improving SQLs.
 
 Estimated Time: 10 minutes
 
@@ -24,7 +24,7 @@ This lab assumes:
 
 You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The SQL Tuning Set contains the workload you generated with HammerDB. SQL Tuning Advisor will look at each of the statements and come up with tuning suggestions.
 
-1. Connect to the upgraded UPGR database.
+1. Use the *yellow* terminal. Connect to the upgraded UPGR database.
 
       ```
       <copy>
@@ -46,7 +46,7 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
 
 3. Optionally, you can look at the script to understand how you use the SQL Tuning Advisor API.
 
-4. First, a few words about the SQL Tuning Advicor. 
+4. First, a few words about the SQL Tuning Advisor. 
 
     * The SQL Tuning Advisor provides many recommendations. Some are more useful than others. 
     * Generally, you need to use your knowledge of the application using the database to determine which recommendations to apply.
@@ -254,4 +254,4 @@ You can submit one or more SQL statements as input to the advisor and receive ad
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, July 2024

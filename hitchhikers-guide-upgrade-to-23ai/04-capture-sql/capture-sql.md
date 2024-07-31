@@ -23,7 +23,7 @@ This lab assumes:
 
 Capture workload information from the workload you generated in lab 3 - Generate AWR Snapshot. This time you will capture from AWR and into a different SQL Tuning Set.
 
-1. Set the environment to the *UPGR* database and connect.
+1. Use the *yellow* terminal. Set the environment to the *UPGR* database and connect.
 
     ```
     <copy>

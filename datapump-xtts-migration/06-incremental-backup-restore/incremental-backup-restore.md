@@ -1,10 +1,12 @@
-# Prepare M5 Script
+# Incremental Backup and Restore
 
 ## Introduction
 
 The next part of the migration is the incremental backups. They built on top of the initial level 0 backup, but backs up only the changes since the last backup. Each incremental backup reduces the time and size of the final incremental backup. Like the previous lab, there is still no downtime yet.
 
 Estimated Time: 10 Minutes.
+
+![Start the incremental level 1 backup/restore](./images/incremental-backup-restore-overview.png " ")
 
 ### Objectives
 
@@ -162,7 +164,7 @@ In this lab, you will:
     ```
     </details>
 
-6. Restore the backup. 
+6. *Restore* the level 1 backup. 
 
     ```
     <copy>
@@ -180,8 +182,8 @@ In this lab, you will:
     ``` text
     $ rman target "sys@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1SCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - Production on Tue Jul 2 19:09:01 2024
-    Version 23.4.0.24.05
+    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue Jul 2 19:09:01 2024
+    Version 23.5.0.24.07
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
@@ -316,8 +318,8 @@ Let's simulate changes to the source database and see how they affect the backup
     ``` text
     $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1SCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - Production on Tue Jul 2 19:10:56 2024
-    Version 23.4.0.24.05
+    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue Jul 2 19:10:56 2024
+    Version 23.5.0.24.07
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     

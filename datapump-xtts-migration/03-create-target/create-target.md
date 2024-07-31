@@ -34,6 +34,8 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
 
     ```
     <copy>
+    set line 100
+    col banner format a100
     select banner from v$version;
     </copy>
     ```
@@ -41,11 +43,13 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
     <details>
     <summary>*click to see the output*</summary>
     ``` text
+    SQL> set line 100
+    SQL> col banner format a100
     SQL> select banner from v$version;
 
     BANNER
-    --------------------------------------------------------------------------------
-    Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
+    ----------------------------------------------------------------------------------------------------
+    Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems
     ```
     </details>    
 

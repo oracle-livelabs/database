@@ -30,28 +30,33 @@ You will test the migration by performing the final steps of the migration. Howe
 
 1. Outage starts on the source database.
 
-2. Set the environment to the source database and start a level 1 final backup. When you start the driver script with `L1F`, it performs not only the final backup but also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. 
+2. Set the environment to the source database.
 
     ```
     <copy>
     . ftex
     cd /home/oracle/m5
-    ./dbmig_driver_m5.sh L1F
     </copy>
 
     -- Be sure to hit RETURN
     ```
 
+3. Start a level 1 final backup. When you start the driver script with `L1F`, it performs not only the final backup but also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. When prompted for *system password*, enter *ftexuser*.
+
+    ```
+    <copy>
+    ./dbmig_driver_m5.sh L1F
+    </copy>
+    ```
+
     * You start the driver script with the argument *L1F*.
-    * When prompted for *system password*, enter *ftexuser*. The password of the user you created earlier in the lab. 
-    * Before starting the backup, the script sets the tablespaces read-only. 
+    * The *system password* is for the user *ftexuser*. This user is specified in the M5 properties file.
+    * Before starting the backup, the script sets the tablespaces read-only. This is causing the outage.
     * After the backup, the script starts Data Pump to perform a full transportable export. 
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ . ftex
-    $ cd /home/oracle/m5
     $ ./dbmig_driver_m5.sh L1F
     Properties file found, sourcing.
     LOG and CMD directories found
@@ -288,8 +293,8 @@ You will test the migration by performing the final steps of the migration. Howe
     $ cd /home/oracle/m5
     $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1FSCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - Production on Tue Jul 2 19:19:00 2024
-    Version 23.4.0.24.05
+    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue Jul 2 19:19:00 2024
+    Version 23.5.0.24.07
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
@@ -313,7 +318,7 @@ You will test the migration by performing the final steps of the migration. Howe
     ```
     </details>
 
-7. Perform the Data Pump transportable import. In the next lab, the instructions will describe in detail what happens. However, for now, just start the import directly.
+7. Perform the Data Pump transportable import. In the next lab, the instructions will describe in detail what happens. However, for now, just start the import directly. When prompted for a password, enter *oracle*.
 
     ```
     <copy>
@@ -328,8 +333,7 @@ You will test the migration by performing the final steps of the migration. Howe
 
     -- Be sure to hit RETURN
     ```
-    
-    * When prompted for a password, enter *oracle*.
+  
     * The import runs as *SYSTEM*.
     * The script starts the import with the Data Pump parameter `TRANSPORTABLE=KEEP_READ_ONLY`. This performs the import but keeps the tablespaces in *read-only* mode. 
     * By keeping the tablespaces in *read-only* mode, your test won't make any changes to the data files.
@@ -356,13 +360,13 @@ You will test the migration by performing the final steps of the migration. Howe
     BEFORE_IMP_240702192231      748325 02-JUL-24 07.22.31.000000000 PM		     YES    209715200
     
     
-    Import: Release 23.0.0.0.0 - Production on Tue Jul 2 19:22:32 2024
-    Version 23.4.0.24.05
+    Import: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue Jul 2 19:22:32 2024
+    Version 23.5.0.24.07
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     Password:
     
-    Connected to: Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
+    Connected to: Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems
     02-JUL-24 19:22:47.147: W-1 Startup on instance 1 took 1 seconds
     02-JUL-24 19:22:49.117: W-1 Master table "SYSTEM"."SYS_IMPORT_TRANSPORTABLE_01" successfully loaded/unloaded
     02-JUL-24 19:22:49.503: Starting "SYSTEM"."SYS_IMPORT_TRANSPORTABLE_01":  system/********@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)    (HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=VIOLET))) parfile=imp_CDB23_240702192231_xtts.par
@@ -1108,8 +1112,8 @@ When the test completes and you reverted the changes, you can resume the backup/
     $ . cdb23
     $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1SCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - Production on Tue Jul 2 19:34:44 2024
-    Version 23.4.0.24.05
+    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue Jul 2 19:34:44 2024
+    Version 23.5.0.24.07
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     

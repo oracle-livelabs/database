@@ -21,23 +21,15 @@ In this lab, you will:
 
 3. You can use any terminal to run the lab. The lab sets the environment when appropriate.
 
-4. In the upper-left corner, click *Activities*. 
+4. Double-click on the *Terminal* shortcut on the desktop. 
 
-![Click Activities to start a terminal](./images/initialize-environment-click-activities.png " ")
+![Click shortcut to start a terminal](./images/initialize-environment-desktop-click-terminal.jpeg " ")
 
-5. Then click on the *terminal* icon.
+5. The terminal has two tabs, *Yellow* and *Blue*. You can use any of them to perform the labs. All labs start by setting the appropriate environment.
 
-![Click the terminal icon to start a new terminal](./images/initialize-environment-click-terminal.jpeg)    
+6. Optionally, in the terminal, you can zoom in to make the text larger. 
 
-6. When the terminal opens, it says *Database ENV is not set*. You can disregard that message. All labs start by setting the appropriate environment.
-
-7. In the terminal, you can zoom in to make the text larger. Press *CTRL* and *+* or select *Zoom In*.
-
-![Zoom in to make the text larger in the terminal](./images/initialize-environment-zoom-in.png)    
-
-8. If you need another terminal, either start a brand new one or open a new tab in the existing terminal.
-
-![Open a new tab in the existing terminal](images/initialize-environment-new-tab.png)
+![Zoom in to make the text larger in the terminal](./images/initialize-environment-terminal-zoom-in.png)    
 
 ## Task 2: Initialize the workshop environment
 
