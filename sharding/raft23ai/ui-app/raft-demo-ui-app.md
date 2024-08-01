@@ -9,7 +9,7 @@ Data can be populated by two different ways in Customers and its child tables:
         a) Run the workload (Same as in the previous Lab: Explore Raft Replication Topology's Task 4: Run the workload).         
         b) Add Customers from Demo UI.
 
-"More details" link on the Home page opens a new page which shows the shard database name and Replication Unit(RU#) of the particular customer with matching customerId (which is the sharding key). There are optional links to "Update" (or just want to view ) or  "Delete" a record.
+"More details" link on the Home page opens a new page which shows the shard database name and Replication Unit (RU#) of the customer with matching customerId (which is the sharding key). There are optional links to "Update" (or just want to view) or "Delete" a record.
 
 Here is the Home page of the Raft Replication Demo UI Application after running initial workload to view some sample customers data:
 
@@ -21,7 +21,7 @@ _Estimated Time_: 30 minutes
 
 In this lab, you will:
 
-- Explore Raft Replication Demo UI Application for CRUD(Create, Update, Delete) operations and getting More Details.
+- Explore Raft Replication Demo UI Application for CRUD (Create, Update, Delete) operations and getting More Details.
 - Testing the UI App use-cases.
 
 ### Prerequisites
@@ -47,7 +47,6 @@ This lab assumes you have:
 
    ![<check-raft-ui-process>](./images/raft-ui-app_is_running.png " ")
 
-
 2. For some reasons if you want to restart the RAFT Demo UI, it can be stopped then started:
     ```
     <copy>
@@ -55,6 +54,7 @@ This lab assumes you have:
     ps -ef | grep raft-ui
     kill -9 <pid of process resulting from above command>
     ps -ef | grep raft-ui
+    cd $DEMO_MASTER
     ./start-raft-ui-app.sh
     ps -ef | grep raft-ui
     </copy>
@@ -62,17 +62,16 @@ This lab assumes you have:
 
     ![<restart_raft_ui_app>](./images/restart_raft_ui_app.png " ")
 
-
 ## Task 2: Demo UI application page flow
 
 1. On right side of browser window by default page "RAFT 23ai LiveLabs Demo: All Customers List" is shown by http://localhost:/8080.
-   It retrieves All Customers List from the Catalog Database using GDS$CATALOG service. Home Page shows 25 Customer's data with pagination, count of All customers, More Details, Add new customer, Update customer and Delete customer links. To view the customers listed on a specific page number, you can click the page number displayed below the All Customers List.
+   It retrieves All Customers List from the Catalog Database using GDS$CATALOG service. Home Page shows 25 Customer's data with pagination, count of All customers, More Details, add new customer, update customer and Delete customer links. To view the customers listed on a specific page number, you can click the page number displayed below the All-Customers List.
 
-2. More Details Page: When you click on "More Details" link shown on the Home Page, it will show shard database name and Replication Unit(RU#) to which this particular customerId belongs to as of now. This page also shows Refresh link which can be useful to view "More details" after any event which moves the record for this customerId to some other RU on a different shard database.
+2. More Details Page: When you click on "More Details" link shown on the Home Page, it will show shard database name and Replication Unit (RU#) to which this particular customerId belongs to as of now. This page also shows Refresh link which can be useful to view "More details" after any event which moves the record for this customerId to some other RU on a different shard database.
 
-## Task 3: Perform swithover and verify results from "More Details" page and Terminal window
+## Task 3: Perform switchover and verify results from "More Details" page and Terminal window
  
-1. On "More Details" page, for a customer record, it's Shard database name is shown as orcl1cdb_orcl1pdb (which is shard1) for RU#1. Its because Leader is shard1 for this RU#1:
+1. On "More Details" page, for a customer record, its Shard database name is shown as orcl1cdb_orcl1pdb (which is shard1) for RU#1. It’s because Leader is shard1 for this RU#1:
 
     ![<before_switchover_of_ru1_from_shard1_to_shard2leader_shard1>](./images/before_switchover_of_ru1_from_shard1_to_shard2_leader_is_shard1.png " ")
 
@@ -87,7 +86,6 @@ This lab assumes you have:
 
     ![<before_switchover_ru_sort_shows_shard1_is_leader_for_ru1>](./images/before_switchover_ru_sort_shows_shard1_is_leader_for_ru1.png " ")
 
-
 2. Switchover RU#1 from shard1 to shard2 from the terminal:
 
     ```
@@ -100,13 +98,12 @@ This lab assumes you have:
 
     ![<after_switchover_of_ru1_from_shard1_to_shard2_leader_is_shard2>](./images/after_switchover_of_ru1_from_shard1_to_shard2_leader_is_shard2.png " ")
 
-
     Switchover verification from the Terminal:
 
     ![<switchover_ru1_from_shard1_to_shard2_terminal2>](./images/switchover_ru1_from_shard1_to_shard2_terminal.png " ")
     
 
-3. Switchover RU#1 back to orcl1cdb_orcl1pdb ( which is shard1) as it was originally:
+3. Switchover RU#1 back to orcl1cdb_orcl1pdb (which is shard1) as it was originally:
 
     ```
     <copy>
@@ -122,9 +119,8 @@ This lab assumes you have:
 
     ![<switchover_ru1_from_shard2_to_shard1_terminal>](./images/switchover_ru1_from_shard2_to_shard1_terminal.png " ")
 
-
-Similalry, there are other multiple RU movement commands, rebalance data manually, perform failover test, scale up /scale-down by stop/start shard(s) etc as detailed in Lab "Explore Raft Replication Topology" tasks can be performed and verified from "More Details" page.
-In the bottom of the "More Details" page a link to Home Page is shown to retun back to view "RAFT 23ai LiveLabs Demo: All Customers List".
+Similarly, there are other multiple RU movement commands, rebalance data manually, perform failover test, scale up /scale-down by stop/start shard(s) etc. as detailed in Lab "Explore Raft Replication Topology" tasks can be performed and verified from "More Details" page.
+In the bottom of the "More Details" page a link to Home Page is shown to return back to view "RAFT 23ai LiveLabs Demo: All Customers List".
 
 ## Task 3: Access the Demo UI application to view pre-loaded Customers List and perform CRUD operations
 
@@ -140,13 +136,12 @@ In the bottom of the "More Details" page a link to Home Page is shown to retun b
 
    After updating customer, it brings back to the All-Customers List page. You can verify the updated customer details shown in UI or manually using Api call format http://localhost:/8080/updateCustomer/<customerId>
 
-3. Delete Customer: A customer can delete either using link "Delete" or manually using api call from the browser in the format http://localhost:8080/deleteCustomer/<customerId>.
+3. Delete Customer: A customer can delete either using link "Delete" or manually using Api call from the browser in the format http://localhost:8080/deleteCustomer/<customerId>.
    After deleting customer, it brings back to the All-Customers List page. Total count on the All-Customers List page is reduce by 1.
 
-4. To Refresh the data on the "Home Page", you can use the Refresh link from the bottom section of the Home Page. Alternatively, reload the page either from the browser's default refresh icon.
+4. To Refresh the data on the "Home Page", you can use the Refresh link from the bottom section of the Home Page. Alternatively, reload the page from the browser's default refresh icon.
 
 5. "Home" Page link at the bottom the page brings to the first page and useful when you are at any higher page# and want to return to the first page of RAFT UI application.
-
 
 ## Task 4: Run the workload to view newly added customers from UI App
 
@@ -166,8 +161,7 @@ In the bottom of the "More Details" page a link to Home Page is shown to retun b
 
     ![<After additional demo data loaded>](./images/all_customer_after_additonal_workload.png " ")
 
-
-3. You can check the RU details from another session on the "gsm1" container from "gdsctl" prompt. Notice that the log index is increasing as there are read and write operations are going on similar to you have verified in Lab4's task 5.
+3. You can check the RU details from another session on the "gsm1" container from "gdsctl" prompt. Notice that the log index is increasing as there are read and write operations are going on like you have verified in Lab4's task 5.
 
     ```
     <copy>
@@ -176,7 +170,6 @@ In the bottom of the "More Details" page a link to Home Page is shown to retun b
     ```
 
 4. You can keep running the workload while you perform the next task or exit workload using Ctrl+C. Keep observing All customers page via http://localhost:8080 to view the Total count is increasing accordingly after refreshing the Home Page.
-
 
 ## Task 5: Verify data from UI during Failover Test
 
@@ -194,7 +187,6 @@ Run the similar steps from Lab "Explore Raft Replication Topology - Task 5: Perf
 
     ![<podman_containers_status>](./images/podman-containers.png " ")  
 
-
 2.  Run the below command as **oracle** to stop shard1.
 
     ```
@@ -204,7 +196,6 @@ Run the similar steps from Lab "Explore Raft Replication Topology - Task 5: Perf
     ```
 
     ![<stop_shard_1>](./images/stop-shard1.png " ")  
-
 
 3. Switch to GSM1 on another terminal session and check the status for RU's and you will see that database orcl1cdb_orcl1pdb is not present.
 
@@ -228,7 +219,7 @@ Run the similar steps from Lab "Explore Raft Replication Topology - Task 5: Perf
 
     ![<chunk_status_after_shard1_down>](./images/status-chunks-after-shard1-down.png " ")  
 
-You will see that shard1 stop situation has no impact on the running UI application and workload if it’s still keep on running. UI can show the newly added records and counts also increase when we refresh the page by click the Refresh link or browser's refresh icon. Records and counts can be verified from sqlplus client as well after connecting to the catalog DB from the catalog container.
+You will see that shard1 stop situation has no impact on the running UI application and even if workload is kept on running. UI can show the newly added records and counts also increase when we refresh the page by click the Refresh link or browser's refresh icon. Records and counts can be verified from SQL*plus client as well after connecting to the catalog DB from the catalog container.
 
 4. Start the shard1 using the podman start command, to reflect that shard1 is joining back.
 
@@ -239,7 +230,6 @@ You will see that shard1 stop situation has no impact on the running UI applicat
     ```
 
     ![<start_shard1>](./images/startup-shard1.png " ")
-
 
 5. On a parallel session switch to GSM1, check the status of shard, RU's and see that shard1 has joined back.
 
