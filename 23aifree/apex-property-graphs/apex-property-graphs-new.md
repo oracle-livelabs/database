@@ -43,8 +43,11 @@ This lab assumes:
 5. Fill out the following information for the workspace. 
 
     Database User: Click on the menu icon and select HOL23AI.
+
     Workspace: HOL23AI (filled out automatically).
+
     Workspace Username: graph
+
     Username Password: User Password (HOL23AI) that's underneath your Terraform variables.
 
     Click Create Workspace.
@@ -90,7 +93,8 @@ This lab assumes:
 
     ![Run the application](images/14-supporting-obj.png)
 
-10.  Login.
+10.  Login with your graph user and the password.
+
     **NOTE:** graph is case-sensitive.
 
     ![Log back in](images/15-login-app.png)

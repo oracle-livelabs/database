@@ -190,7 +190,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 
     Note that though we are looking for longer chains we reuse the same MATCH pattern with a modified parameter for the desired number of hops. This compactness and expressiveness is a primary benefit of the new SQL/PGQ functionality.
     
-    ![5 hop transfers](images/13-num-3to5hop-chains.png)
+    ![5 hop transfers](images/13-num-5hop-chains.png)
 
 7.  Now that we know there are 3, 4, and 5-hop cycles, let's list some (any 10) accounts that had these circular payment chains. 
    
