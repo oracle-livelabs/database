@@ -77,7 +77,7 @@ Watch the video below for a quick walk-through of the lab.
 ​
     ![Retrieving the properties associated with the graph](images/7-graph-properties.png)
 ​
-## Task 2 : Query the bank_graph
+## Task 2 : Query bank_graph
 ​
 In this task we will run queries using SQL/PGQ's GRAPH_TABLE operator, MATCH clause, and COLUMNS clause. The GRAPH\_TABLE operator enables you to query the property graph by specifying a graph pattern to look for and return the results as a set of columns. The MATCH clause lets you specify the graph patterns, and the COLUMN clause lists the query output columns. Everything else is existing SQL syntax.
 

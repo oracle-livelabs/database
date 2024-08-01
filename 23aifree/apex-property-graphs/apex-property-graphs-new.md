@@ -28,7 +28,7 @@ This lab assumes:
     ![Retrieving APEX URL from login details](images/1-apex-url.png)
 
 
-2. Fill out your password with your Admin Password that's underneath your Terraform variables in your Login Details. 
+2. Fill out your password with your ATP Admin Password that's underneath your Terraform variables in your Login Details. 
 
     ![URL login screen](images/2-login.png)
 
@@ -48,7 +48,7 @@ This lab assumes:
 
     Workspace Username: graph
 
-    Username Password: User Password (HOL23AI) that's underneath your Terraform variables.
+    Username Password: User Password (hol23ai) that's underneath your Terraform variables.
 
     Click Create Workspace.
 
@@ -106,6 +106,8 @@ This lab assumes:
     ![Final scroll through the output](images/17-query-page.png)
 
 13. Click the hamburger menu in the upper left corner of the application and click "Using the Graph Visualization Plugin".
+
+    ![Hamburger menu options](images/17-menu.png)
 
 14. Scroll through the output to see the Graph Viz plugin utilized.
     ![Graph viz](images/18-graph-viz-page.png)

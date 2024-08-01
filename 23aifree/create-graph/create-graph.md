@@ -105,7 +105,7 @@ Watch the video below for a quick walk-through of the lab. The lab instructions 
 
 1. Click the notebook icon on the left hand menu.
 
-    ![Click notebook icon](images/8-create-notebook.png)
+    ![Click notebook icon](images/8-nav-notebook.png)
 
 2. Click Create.
 
