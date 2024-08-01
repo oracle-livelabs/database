@@ -26,7 +26,7 @@
             "filename": "../../config_tools/config_tools.md"
         },
         {
-            "title": "Lab 3: Get Started with AI Vector Search",  
+            "title": "Lab 3: Explore AI Vector Search",
             "description": "Hands-on introduction to AI Vector Search in ADB.",
             "type": "livelabs",
             "filename": "../../sql-schema/sql-schema.md"
