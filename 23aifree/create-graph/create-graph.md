@@ -16,6 +16,7 @@ In this lab, you will:
 
 This lab assumes you have:
 * Access to an Oracle Always Free Autonomous Database 23ai
+- The bank\_accounts and bank\_transfers tables exist. 
 
 <!-- <if type="livelabs">
 Watch the video below for a quick walk-through of the lab. The lab instructions on the left might not match the workshop you are currently in, but the steps in the terminal on the right remain the same.
@@ -26,7 +27,27 @@ Watch the video below for a quick walk-through of the lab. The lab instructions 
 
 1. Click [this link] (https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/23aifree-property-graph.zip) to download the zip file with our property graph setup materials.
 
-2. Unzip the files.
+2. Unzip the files. You should see these files available. Most of these files we will not be using throughout the lab, but are available if you would like to see what commands we chose to create the schema with (CreateKeys.sql) or the data that populates the tables that we've created (BANK\_ACCOUNTS.csv and BANK\_TRANSFERS.csv).
+
+    ![Content of the zip file](images/1-unzip.png)
+
+3. Here is a diagram representing the tables that will underlying the Operational Property Graph that we will be creating.
+
+    | Name | Null? | Type |
+    | ------- |:--------:| --------------:|
+    | ID | NOT NULL | NUMBER|
+    | NAME |  | VARCHAR2(4000) |
+    | BALANCE |  | NUMBER |
+    {: title="BANK_ACCOUNTS"}
+
+    | Name | Null? | Type |
+    | ------- |:--------:| --------------:|
+    | TXN_ID | NOT NULL | NUMBER|
+    | SRC\_ACCT\_ID |  | NUMBER |
+    | DST\_ACCT\_ID |  | NUMBER |
+    | DESCRIPTION |  | VARCHAR2(4000) |
+    | AMOUNT |  | NUMBER |
+    {: title="BANK_TRANSFERS"}
 
 ## Task 2: Create the Property Graph
 

@@ -14,25 +14,6 @@ Learn how to:
 ### Prerequisites
 This lab assumes:  
 - The database user exists and has the right roles and privileges.
-- The bank\_accounts and bank\_transfers tables exist. 
-​
-### Tables are:  
-
-| Name | Null? | Type |
-| ------- |:--------:| --------------:|
-| ID | NOT NULL | NUMBER|
-| NAME |  | VARCHAR2(4000) |
-| BALANCE |  | NUMBER |
-{: title="BANK_ACCOUNTS"}
-
-| Name | Null? | Type |
-| ------- |:--------:| --------------:|
-| TXN_ID | NOT NULL | NUMBER|
-| SRC\_ACCT\_ID |  | NUMBER |
-| DST\_ACCT\_ID |  | NUMBER |
-| DESCRIPTION |  | VARCHAR2(4000) |
-| AMOUNT |  | NUMBER |
-{: title="BANK_TRANSFERS"}
 
 <!-- <if type="livelabs">
 Watch the video below for a quick walk-through of the lab. 
@@ -279,8 +260,6 @@ A common query in analyzing money flows is to see if there is a sequence of tran
 12.  So let’s insert more transfers which create some circular payment chains.
 
     We will be adding transfers from accounts **599**, **982**, and **407** into account **39**.
-
-    Run this by clicking the button to run the entire script, instead of the green play button.
    
     ```
     <copy>
