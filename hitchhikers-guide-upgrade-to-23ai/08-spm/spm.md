@@ -24,11 +24,18 @@ This lab assumes:
 
 In the previous lab, you found a statement that changed plan after upgrade (SQL ID *4wg725nwpxb1z*). You saw that the index path was better than a full table scan. Now, you want to create a SQL Plan Baseline for that SQL, so the optimizer will only consider the index plan.
 
-1. Ensure that the SQL (*4wg725nwpxb1z*) and both plans are in the cursor cache. Due to transient nature of the shared pool, the two plans might have aged out. The script runs the same SQL with and without the *optimizer\_index\_cost\_adj* hack. This ensures both plans are in the cursor cache.
+1. Use the *yellow* terminal and set the environment. 
 
     ```
     <copy>
     . cdb23
+    </copy>
+    ```
+
+1. Ensure that the SQL (*4wg725nwpxb1z*) and both plans are in the cursor cache. Due to transient nature of the shared pool, the two plans might have aged out. The script runs the same SQL with and without the *optimizer\_index\_cost\_adj* hack. This ensures both plans are in the cursor cache.
+
+    ```
+    <copy>
     sqlplus -L tpcc/tpcc@localhost/upgr @/home/oracle/scripts/spm_load_4wg725nwpxb1z_into_cc.sql
     </copy>
     ```
@@ -79,7 +86,6 @@ In the previous lab, you found a statement that changed plan after upgrade (SQL 
 
     ```
     <copy>
-    . cdb23
     sqlplus / as sysdba
     alter session set container=UPGR;
     </copy>
@@ -542,4 +548,4 @@ In this context, a plan includes all plan-related information (for example, SQL 
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen - Scripts provided by: Carlos Sierra
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
