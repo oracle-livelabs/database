@@ -81,7 +81,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     </copy>
     ```
 
-## Task 3: Explore the Database Tools: APEX & ORDS
+## Task 2: Explore the Database Tools: APEX & ORDS
 
 Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) preinstalled. Let's see how you can get started!
 
