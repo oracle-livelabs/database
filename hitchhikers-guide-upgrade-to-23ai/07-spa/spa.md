@@ -19,7 +19,7 @@ This lab assumes:
 
 ## Task 1: Check statements
 
-1. Set the environment and connect to *CDB23*, then switch to *UPGR*.
+1. Use the *ywllow* terminal. Set the environment and connect to *CDB23*, then switch to *UPGR*.
 
       ```
       <copy>
@@ -214,6 +214,8 @@ Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimize
     alter system reset optimizer_index_cost_adj scope=both;
     show parameter optimizer_index_cost_adj
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     * In a real situation, you could make many other changes. Change statistics preferences, gather new statistics, toggle optimizer fixes with `DBMS_OPTIM_BUNDLE`, or many other things.
@@ -272,4 +274,4 @@ You can run SQL Performance Analyzer on a production system or a test system tha
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
