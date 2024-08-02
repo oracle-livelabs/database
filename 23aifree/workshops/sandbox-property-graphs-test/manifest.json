@@ -1,0 +1,40 @@
+{
+  "workshoptitle": "Exploring Operational Property Graphs in 23ai Free",
+    "help": "livelabs-help-sg_us@oracle.com",
+    "tutorials": [
+      {
+          "title": "Introduction",
+          "description": "This is an introduction to Oracle Database 23ai.",
+          "type": "livelabs",
+          "filename": "../../introduction/intro-property-graphs.md"
+      },
+      {
+          "title": "Get Started",
+          "description": "Verify Setup of compute instance",
+          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs.md"
+      },
+      {
+          "title": "Lab 1: Setup Property Graph",
+          "description": "Create the Operational Property Graph",
+          "type": "livelabs",
+          "filename": "../../create-graph/create-graph.md"
+      },
+      {
+          "title": "Lab 2: Operational Property Graphs Queries with SQL/PGQ",
+          "description": "Using Property Graphs in 23ai",
+          "type": "livelabs",
+          "filename": "../../property-graphs/property-graphs-new.md"
+      },
+      {
+          "title": "Bonus Lab: Integration with APEX",
+          "description": "Using Property Graphs in 23ai",
+          "type": "livelabs",
+          "filename": "../../apex-property-graphs/apex-property-graphs-new.md"
+      },
+      {
+        "title": "Need Help?",
+        "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
+        "filename":"https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
+      }
+  ]
+}
