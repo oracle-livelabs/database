@@ -25,7 +25,7 @@ In this lab, you will:
 
 ![Click shortcut to start a terminal](./images/initialize-environment-desktop-click-terminal.jpeg " ")
 
-5. The terminal has two tabs, *yellow* and *blue*. You can use any of them to perform the labs. All labs start by setting the appropriate environment.
+5. The terminal has two tabs, *Yellow* and *Blue*. You can use any of them to perform the labs. All labs start by setting the appropriate environment.
 
 6. Optionally, in the terminal, you can zoom in to make the text larger. 
 
