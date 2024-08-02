@@ -134,10 +134,14 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
 
     ```python
     <copy>
-    from transformers import LlamaTokenizerFast
+    <if type="freetier">from transformers import LlamaTokenizerFast
     import sys
 
-    tokenizer = LlamaTokenizerFast.from_pretrained("hf-internal-testing/llama-tokenizer")
+    tokenizer = LlamaTokenizerFast.from_pretrained("hf-internal-testing/llama-tokenizer")</if>
+    <if type="livelabs">from transformers import AutoTokenizer
+    import sys
+
+    tokenizer = AutoTokenizer.from_pretrained("./transformers/all-MiniLM-L12-v2", local_files_only=True)</if>
     tokenizer.model_max_length = sys.maxsize
 
     def truncate_string(string, max_tokens):

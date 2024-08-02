@@ -202,7 +202,12 @@ with connection.cursor() as cursor:
    <copy>
    from sentence_transformers import SentenceTransformer
 
+   <if type="freetier">
    encoder = SentenceTransformer('all-MiniLM-L12-v2')
+   </if>
+   <if type="livelabs">
+   encoder = SentenceTransformer('./transformers/all-MiniLM-L12-v2', local_files_only=True)
+   </if>
    </copy>
    ```
    Ignore the warning saying `IProgress not found.`, among others.
