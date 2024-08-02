@@ -240,7 +240,7 @@ In this step, you would normally perform extensive testing of the new database b
     </copy>
     ```
 
-    * If you didn't complete lab 8, you won't find `F1.F1_LAPTIMES_BACKUP2`, and the last query will fail with `ORA-00942`.
+    * If you didn't complete lab 7 (Test migration), you won't find `F1.F1_LAPTIMES_BACKUP2`, and the last query will fail with `ORA-00942`.
     * In a real migration, you would perform much more extensive testing. 
 
     <details>

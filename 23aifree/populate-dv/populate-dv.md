@@ -47,7 +47,7 @@ This lab assumes you have:
 
     ```
     {
-        "teamId": 2,
+        "_id": 2,
         "name": "Mercedes",
         "points": 0,
         "driver": [
@@ -86,7 +86,7 @@ This lab assumes you have:
     ```
     [
         {
-        "teamId": 301,
+        "_id": 301,
         "name": "Red Bull",
         "points": 0,
         "driver": [
@@ -103,7 +103,7 @@ This lab assumes you have:
         ]
         },
         {
-        "teamId": 302,
+        "_id": 302,
         "name": "Ferrari",
         "points": 0,
         "driver": [
@@ -157,4 +157,4 @@ You may **proceed to the next lab.**
 
 * **Author** - William Masdon, Kaylien Phan, Jeff Smith
 * **Contributors** -  David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - William Masdon, Database Product Manager, April 2023
+* **Last Updated By/Date** - Hermann Baer, Database Product Management, July 2024

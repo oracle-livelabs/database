@@ -25,7 +25,7 @@ This lab assumes:
 
 Use HammerDB to create a workload.
 
-1. Set the environment to the *CDB23* database. Now, since you upgraded the *UPGR* database and plugged into *CDB23*, the environment needs to be set to the CDB.
+1. Use the *yellow* terminal. Set the environment to the *CDB23* database. Now, since you upgraded the *UPGR* database and plugged into *CDB23*, the environment needs to be set to the CDB.
 
       ```
       <copy>
@@ -55,17 +55,11 @@ Use HammerDB to create a workload.
     ```
     </details>
 
-3. Don't exit the terminal. Keep SQL*Plus open.
+3. Don’t exit the terminal. Keep SQL*Plus open.
 
-4. Open a new terminal. Start HammerDB in the new terminal.
+4. Start HammerDB using the desktop shortcut. 
 
-    ```
-    <copy>
-    . cdb23
-    cd /home/oracle/HammerDB-4.10/
-    ./hammerdb &
-    </copy>
-    ```
+    ![Start HammerDB using desktop icon](./images/awr-compare-hammerdb-icon.png " ")
 
 5. In the benchmark list, expand *Oracle* / *TPROC-C*
 
@@ -91,9 +85,9 @@ Use HammerDB to create a workload.
 11. It will take a few seconds; then you will see the performance charts and the transactions-per-minute (tpm). The load run usually takes 2-3 minutes to complete.
     ![see the performance charts and the transactions-per-minute](./images/awr-compare-transact-viewer.png " ")
 
-12. Exit HammerDB. Close the second terminal.
+12. Exit HammerDB. 
 
-13. Switch back to the original terminal. SQL*Plus is still running. Create another AWR snapshot. Take note of the snapshot ID (e.g., 131). You need it later on.
+13. Switch back to the *yellow* terminal. SQL*Plus is still running. Create another AWR snapshot. Take note of the snapshot ID (e.g., 131). You need it later on.
 
     ```
     <copy>
@@ -150,10 +144,13 @@ In the AWR Diff Report, you will compare a snapshot period **before** upgrade to
 	```
 	![AWR Diff Report](./images/awr-compare-diff-report-23ai.png " ")
 
-10. Examine the AWR diff report.
-   * Compare items such as Wait Events etc. Watch out for significant divergence between the two runs, for instance, the different redo sizes per run.
-   * Browse through the SQL statistics and see if you find remarkable differences between the two runs.
+10. Examine the AWR Diff Report.
+   * The first table shows that the two AWR periods are from difference database releases, 19c and 23ai.
+   * Next, look at *Top Timed Events* to see what the database spent time on during the two runs.
+   * Then, look at *Wait Events* and look for big differences. A negative value in the column *Diff* means the database spent less time on that wait event in the second run, i.e., after the upgrade.
    * Overall, you will not see any significant differences. The purpose of this lab exercise is to recognize and remember how easily AWR Diff Reports can be generated when you have comparable workloads.
+
+11. Close Firefox.
 
 You may now *proceed to the next lab*.
 
@@ -170,4 +167,4 @@ An AWR Compare Periods report, shows the difference between two periods in time 
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
