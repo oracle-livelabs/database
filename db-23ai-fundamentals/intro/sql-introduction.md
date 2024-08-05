@@ -23,14 +23,14 @@ Estimated Time: 20 minutes
 
 ### **Objectives**
 
-This lab aims to provide hands-on experience with JSON-relational duality views, demonstrating how to get the strengths of both JSON and relational data models. You will learn how to create, query, and update JSON-relational duality views using SQL and REST.
+This workshop aims to provide hands-on experience with JSON-relational duality views, demonstrating how to get the strengths of both JSON and relational data models. You will learn how to create, query, and update JSON-relational duality views using SQL and REST.
 
 ### **Prerequisites**
 
-This lab assumes you have:
+This workhop assumes you have:
 
 * Oracle Database 23ai
-* Completed the get started Lab
+
 
 
 ## **Learn More**
