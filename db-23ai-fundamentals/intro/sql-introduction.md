@@ -19,19 +19,19 @@ Key benefits of JSON Relational Duality:
 - Duality Views eliminate the inherent problem of data duplication and data inconsistency in document databases. Duality Views are fully ACID (atomicity, consistency, isolation, durability) transactions across multiple documents and tables. It eliminates data duplication across documents data, whereas consistency is maintained automatically. 
 - Build apps that support high concurrency access and updates. Traditional locks don’t work well for modern apps. A new lock-free concurrency control provided with Duality View supports high concurrency updates. The new-lock free concurrency control also works efficiently for interactive applications since the data is not locked during human thinking time.
 
-Estimated Time: 30 minutes
+Estimated Time: 20 minutes
 
 ### **Objectives**
 
-In this lab, you will:
-* Create JSON Duality Views
-* Perform insert, update, and delete operations against JSON Duality Views
-* Perform both JSON and SQL operations against JSON Duality Views
+This workshop aims to provide hands-on experience with JSON-relational duality views, demonstrating how to get the strengths of both JSON and relational data models. You will learn how to create, query, and update JSON-relational duality views using SQL and REST.
 
 ### **Prerequisites**
 
-In order to do this workshop you need
-* An Oracle 23ai Free Developer Release Database or one running in a LiveLabs environment
+This workhop assumes you have:
+
+* Oracle Database 23ai
+
+
 
 ## **Learn More**
 
