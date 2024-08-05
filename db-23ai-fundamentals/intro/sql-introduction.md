@@ -21,11 +21,11 @@ Key benefits of JSON Relational Duality:
 
 Estimated Time: 20 minutes
 
-### Objectives
+### **Objectives**
 
 This lab aims to provide hands-on experience with JSON-relational duality views, demonstrating how to get the strengths of both JSON and relational data models. You will learn how to create, query, and update JSON-relational duality views using SQL and REST.
 
-### Prerequisites
+### **Prerequisites**
 
 This lab assumes you have:
 
@@ -33,7 +33,7 @@ This lab assumes you have:
 * Completed the get started Lab
 
 
-## Learn More
+## **Learn More**
 
 * [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
 * [JSON Duality View documentation](http://docs.oracle.com)
