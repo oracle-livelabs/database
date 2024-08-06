@@ -23,8 +23,7 @@ In this lab, you will:
 
 * Basic knowledge of Oracle Cloud Infrastructure (OCI) concepts and the console
 * Working knowledge of Python and Jupyter Lab
-* A working OCI virtual machine running Oracle Enterprise Linux 8, located in the US Midwest (Chicago) region
-* SSH access to the above VM
+* A working OCI tenancy for the GenerativeAI service calls
 * Completion of all previous labs
 
 ## Task 1: Vectorize the "question"
