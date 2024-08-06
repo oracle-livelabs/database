@@ -285,7 +285,7 @@ SQL>
 
     ```
     <copy>
-    @04_aim\_actions.sql
+    @04_aim_actions.sql
     </copy>    
     ```
 
