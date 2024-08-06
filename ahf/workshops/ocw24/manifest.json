@@ -29,7 +29,7 @@
         {
 
             "title": "Lab 4: Review/Generate AHF Incident Diagnostic Collections ",
-            "description": "This lab reviews cutomatic collections and helps you generate manual diagnostic collections.",
+            "description": "This lab reviews automatic collections and helps you generate manual diagnostic collections.",
             "filename": "../../ahf-Insights/ahf-commands/diagcollect.md"
         },
         {
