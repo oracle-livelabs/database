@@ -78,37 +78,10 @@ In this lab, you will:
     ```
     </details>
 
-4. Occasionally, the *UPGR* database fails to register with the listener. Set the environment and connect to *UPGR*.
-
-    ```
-    <copy>
-    . upgr
-    sqlplus / as sysdba
-    </copy>
-
-    -- Be sure to hit RETURN
-    ```
-
-5. Restart *UPGR*.
-
-    ```
-    <copy>
-    startup force
-    </copy>
-    ```
-
-6. Exit SQL*Plus.
-
-    ```
-    <copy>
-    exit
-    </copy>
-    ```
-
 You may now *proceed to the next lab*.
 
 ## Acknowledgements
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024
