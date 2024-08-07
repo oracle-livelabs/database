@@ -54,36 +54,25 @@ This is done as often multiple errors are reported together and we want to ensur
 	</copy>
 	```
 	
-
-2.	Find the name of your database using `srvctl config database`
-	The `srvctl` CLI should already be in your environments PATH, you will use this command to determine your RAC Databse name.
+2.	Find the local database instance name running on this node using the **srvctl** cli. 
 
 	```
 	<copy>
-	srvctl config database
+	srvctl status database -d `srvctl config database`
 	</copy>
-	```
-	Command Output:
-	<pre>
-	racUXBVI_ngt_lhr
-	</pre>
-3.	Find the local instance name using `srvctl status database` 
-	Use the database name from step 2. as the -database parameter to `srvctl status database`, this will show the running database instances.
-
-	```
-	srvctl status database -d racUXBVI_ngt_lhr
 	```
 	Command Output:
 	<pre>
 	Instance racUXBVI1 is running on node lldbcs61
 	Instance racUXBVI2 is running on node lldbcs62
 	</pre>
+	> Note: The instance name will be different on this system.
+	>       We can use the `srvctl config database` command in line here as there will only be one database on the system.
+=======
+	racUXBVI_ngt_lhr
+	</pre>
 
-## Task 3: Connect to the database with `sqlplus` and generate some errors
-
-
-
-1. Ensure your environment is set to connect to the database instance
+3.	Ensure your environment is set to connect to the database instance from Step 2
 
 	```
 	<copy>
@@ -97,10 +86,11 @@ This is done as often multiple errors are reported together and we want to ensur
 	ORACLE_HOME=/u01/app/oracle/product/19.0.0.0/dbhome_1	
 	</pre>
 
-	You should see that the instance name running on this node from Task 2, Step 3 is the one set to **ORACLE_SID**
+	You should see that the instance name running on this node from Step 2 is the one set to **ORACLE_SID**
 
+## Task 3: Connect to the database with `sqlplus` and generate some errors
 
-2. Connect to the datase instance with **sqlplus** with sysdba role
+1. Connect to the datase instance with **sqlplus** with sysdba role
 	```
 	<copy>
 	sqlplus / as sysdba
@@ -121,7 +111,9 @@ This is done as often multiple errors are reported together and we want to ensur
 
 	SQL>
 	</pre>
-3. Generate a dummy ORA-00600 Error
+
+2. Generate a dummy ORA-00600 Error
+
 	At the SQL> prompt type
 	```
 	<copy>
@@ -132,7 +124,9 @@ This is done as often multiple errors are reported together and we want to ensur
 	<pre>
 	Statement processed.
 	</pre>
-4. Generate a Dummy ORA-04031 Error
+
+3. Generate a Dummy ORA-04031 Error
+
 	At the SQL> prompt type
 	```
 	<copy>
@@ -143,13 +137,15 @@ This is done as often multiple errors are reported together and we want to ensur
 	<pre>
 	Statement processed.
 	</pre>
-5. Change a database init parameter
+
+4. Change a database init parameter
 	At the SQL> prompt type
 	```
 	<copy>
 	alter system set parallel_threads_per_cpu=4;
 	</copy>
 	```
+
 	Command output:  
 	<pre>
 	Statement processed.

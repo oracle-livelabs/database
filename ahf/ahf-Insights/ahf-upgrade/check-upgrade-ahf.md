@@ -135,24 +135,8 @@ The AHF Command Line Interfaces `ahfctl`, `tfactl`, `orachk`, `ahf` are all link
 
 ## Task 3: Check the Version, Status and Health of AHF
 
-1.	Use the **ahf** CLI to check the software version
 
-	```
-	<copy>
-	ahf software get-version --component all
-	</copy>
-	```
-
-	Command output:
-	<pre>
-	AHF version: 24.2.0
-	Build Timestamp: 20240228181054
-	TFA version: 24.2.0
-	Compliance version: 24.2.0
-	Compliance metadata version: 20240228
-	</pre>
-
-2.	Use the **tfactl** CLI to check whether the TFA Daemon processes are running on all nodes.
+1.	Use the **tfactl** CLI to check whether the TFA Daemon processes are running on all nodes, and view the current version.
 
 	The process TFAMAin runs on each node of the cluster and these processes communicate to synchroinize monitoring and  
 	diagnostic collection operations.  The Process also has a scheduler to run other tools such as **orachk**.  
@@ -166,8 +150,8 @@ The AHF Command Line Interfaces `ahfctl`, `tfactl`, `orachk`, `ahf` are all link
 	.--------------------------------------------------------------------------------------------------.
 	| Host      | Status of TFA | PID   | Port | Version    | Build ID              | Inventory Status |
 	+-----------+---------------+-------+------+------------+-----------------------+------------------+
-	| lldbcs61  | RUNNING       | 86200 | 5000 | 24.2.0.0.0 | 240200020240228181054 | COMPLETE         |
-	| lldbcs62  | RUNNING       | 91603 | 5000 | 24.2.0.0.0 | 240200020240228181054 | COMPLETE         |
+	| lldbcs61  | RUNNING       | 86200 | 5000 | 24.4.1.0.0 | 240410020240513161331 | COMPLETE         |
+	| lldbcs62  | RUNNING       | 91603 | 5000 | 24.4.1.0.0 | 240410020240513161331 | COMPLETE         |
 	'-----------+---------------+-------+------+------------+-----------------------+------------------'
 	</pre>
 	You should see a line for each node in your cluster.  If that is the case then the TFAMain process is running and able to communicate.  
@@ -202,7 +186,7 @@ You must complete on both nodes of the RAC Database Cluster.
 	```
 	<copy>
 	cd /tmp
-	wget  https://objectstorage.us-ashburn-1.oraclecloud.com/p/djRqaAzUijQEgNQgTRk05DY9DI-DgHGfDJXbOdWgO2TCWCPx9AtHjBd1tx-5lUpQ/n/idhbogog2wy7/b/ocw24-livelabs/o/AHF-LINUX_v24.6.1.zip
+	wget  https://idhbogog2wy7.objectstorage.us-ashburn-1.oci.customer-oci.com/p/5jfe6rB_g_6MNkhfEW87-2IelklkLAJ6jyBTIJqo525D9GEGzDXXTbkvPy0ujbZ9/n/idhbogog2wy7/b/ocw24-livelabs/o/AHF-LINUX_v24.6.1.zip
 	</copy>
 	```
 
@@ -238,7 +222,9 @@ You must complete on both nodes of the RAC Database Cluster.
 
 	AHF Version: 24.6.1 Build Date: 2406100202407161727
 	AHF is already installed at /u01/app/oracle.ahf
-	Installed AHF Version: 24.2.0 Build Date: 202402281810
+
+	Installed AHF Version: 24.4.1 Build Date: 202402281810 202405131613
+
 	Upgrading /u01/app/oracle.ahf
 	Shutting down AHF Services
 	Upgrading AHF Services
@@ -252,7 +238,7 @@ You must complete on both nodes of the RAC Database Cluster.
 	+---------------------+-------------+-----------------------+----------------+
 	| lldbcs61            |  24.6.1.0.0 | 240610020240716172701 | UPGRADED       |
 	'---------------------+-------------+-----------------------+----------------'
-	| lldbcs62            |  24.2.0.0.0 | 240200020240228181054 | Not Upgraded   |
+	| lldbcs62            |  24.4.1.0.0 | 240410020240513161331 | Not Upgraded   |
 	'---------------------+-------------+-----------------------+----------------'
 	Setting up AHF CLI and SDK
 	AHF is successfully upgraded to latest version

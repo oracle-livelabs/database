@@ -10,7 +10,7 @@ Estimated Lab Time: 5 Minutes
 
 ### Prerequisites
 - You are connected to one of the DB System Nodes as described in Lab 1: Connect to your DB System
-- You have performed the tasks to generate some incidents as described in Lab 5: Generate Database and Clusterware Incidents for AHF to Detect and take Action on
+- You have performed the tasks to generate some incidents as described in Lab 3: Generate Database and Clusterware Incidents for AHF to Detect and take Action on
 
 
 ## Task 1: Common post installation configuration tasks
@@ -41,7 +41,8 @@ Estimated Lab Time: 5 Minutes
     ahfctl setupgrade –swstage /mysharedlocation/ahf_upgrade –autoupgrade on –frequency 30 –upgradetime 00:15
     ```
 
-4. Configure storage cells for diagnostic collections and compliance checks
+4. Configure storage cells for diagnostic collections and compliance checks. 
+> Note: This will only work on Exadata Systems which is not available in this Live Labs set up.
     ```
     tfactl cell configure
     ```
@@ -73,6 +74,9 @@ Estimated Lab Time: 5 Minutes
 
 2. Run compliance checks on-demand for only the Database Administrator (DBA) Checks.
     Compliance can also be run on demand with `ahfctl compliance`
+
+> Note: This command can take a number of minutes to run so you might want to come back to these given time at the end.
+
     ```
     <copy>
     ahfctl compliance -profile dba
@@ -80,6 +84,11 @@ Estimated Lab Time: 5 Minutes
     ```
 
 ## Task 4: Check out some of the AHF DBA tools
+
+When a problem occurs in one of your normally stable database systems the first question you ask is 'What has changed ?'.
+AHF keeps track of changes and Events on the system and provides a simple command line interface to view those.
+The Insights report will bring all this information in to a dynamic html report which can easily be viewed to help with problem diagnosis.
+
 
 1. See what has changed in the system in the last hour
     ```
@@ -94,14 +103,17 @@ Estimated Lab Time: 5 Minutes
     Snapshot Timestamp for Changes:2024-07-22 22:09:52.000000
     Duration for Changes: 1 Hours
 
-    Change Records for host: lvracdb-s01-2024-07-22-1532331  
-    ===========================================
+
+    Change Records for host: lldbcs61 
+    =================================
+
     [2024-07-22 21:12:50.000000]: [ raclzhlm_dhh_bom: racLZHLM1]: Database Parameter optimizer_use_sql_plan_baselines Changed From FALSE To TRUE
     [2024-07-22 21:15:01.000000]: [ raclzhlm_dhh_bom: racLZHLM1]: Database Parameter optimizer_use_sql_plan_baselines Changed From TRUE To FALSE
     [2024-07-22 21:19:10.000000]: [ raclzhlm_dhh_bom: racLZHLM1]: Database Parameter parallel_threads_per_cpu Changed From 2 To 4
 
-    Change Records for host: lvracdb-s01-2024-07-22-1532332  
-    ===========================================
+
+    Change Records for host: lldbcs62 
+    =================================
     No Changes Found
     </pre>
 
