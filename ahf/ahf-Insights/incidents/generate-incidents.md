@@ -68,6 +68,9 @@ This is done as often multiple errors are reported together and we want to ensur
 	</pre>
 	> Note: The instance name will be different on this system.
 	>       We can use the `srvctl config database` command in line here as there will only be one database on the system.
+=======
+	racUXBVI_ngt_lhr
+	</pre>
 
 3.	Ensure your environment is set to connect to the database instance from Step 2
 
@@ -108,7 +111,9 @@ This is done as often multiple errors are reported together and we want to ensur
 
 	SQL>
 	</pre>
+
 2. Generate a dummy ORA-00600 Error
+
 	At the SQL> prompt type
 	```
 	<copy>
@@ -119,7 +124,9 @@ This is done as often multiple errors are reported together and we want to ensur
 	<pre>
 	Statement processed.
 	</pre>
+
 3. Generate a Dummy ORA-04031 Error
+
 	At the SQL> prompt type
 	```
 	<copy>
@@ -130,6 +137,7 @@ This is done as often multiple errors are reported together and we want to ensur
 	<pre>
 	Statement processed.
 	</pre>
+
 4. Change a database init parameter
 	At the SQL> prompt type
 	```
@@ -137,6 +145,7 @@ This is done as often multiple errors are reported together and we want to ensur
 	alter system set parallel_threads_per_cpu=4;
 	</copy>
 	```
+
 	Command output:  
 	<pre>
 	Statement processed.

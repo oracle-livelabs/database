@@ -135,6 +135,7 @@ The AHF Command Line Interfaces `ahfctl`, `tfactl`, `orachk`, `ahf` are all link
 
 ## Task 3: Check the Version, Status and Health of AHF
 
+
 1.	Use the **tfactl** CLI to check whether the TFA Daemon processes are running on all nodes, and view the current version.
 
 	The process TFAMAin runs on each node of the cluster and these processes communicate to synchroinize monitoring and  
@@ -221,7 +222,9 @@ You must complete on both nodes of the RAC Database Cluster.
 
 	AHF Version: 24.6.1 Build Date: 2406100202407161727
 	AHF is already installed at /u01/app/oracle.ahf
+
 	Installed AHF Version: 24.4.1 Build Date: 202402281810 202405131613
+
 	Upgrading /u01/app/oracle.ahf
 	Shutting down AHF Services
 	Upgrading AHF Services

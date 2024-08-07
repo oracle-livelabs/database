@@ -61,6 +61,8 @@ Estimated Lab Time: 5 Minutes
 
 ## Task 3: Proactively run health checks
 
+> Note: These commands can take a number of minutes to run so you might want to come back to these given time at the end.
+
 1. Change critical checks to run at 8am every Monday and Thursday:
     As previously noted AHF sets up some default compliance run schedules.
     You can change these with `ahfctl compliance`
@@ -87,6 +89,7 @@ When a problem occurs in one of your normally stable database systems the first 
 AHF keeps track of changes and Events on the system and provides a simple command line interface to view those.
 The Insights report will bring all this information in to a dynamic html report which can easily be viewed to help with problem diagnosis.
 
+
 1. See what has changed in the system in the last hour
     ```
     <copy>
@@ -100,11 +103,14 @@ The Insights report will bring all this information in to a dynamic html report 
     Snapshot Timestamp for Changes:2024-07-22 22:09:52.000000
     Duration for Changes: 1 Hours
 
+
     Change Records for host: lldbcs61 
     =================================
+
     [2024-07-22 21:12:50.000000]: [ raclzhlm_dhh_bom: racLZHLM1]: Database Parameter optimizer_use_sql_plan_baselines Changed From FALSE To TRUE
     [2024-07-22 21:15:01.000000]: [ raclzhlm_dhh_bom: racLZHLM1]: Database Parameter optimizer_use_sql_plan_baselines Changed From TRUE To FALSE
     [2024-07-22 21:19:10.000000]: [ raclzhlm_dhh_bom: racLZHLM1]: Database Parameter parallel_threads_per_cpu Changed From 2 To 4
+
 
     Change Records for host: lldbcs62 
     =================================

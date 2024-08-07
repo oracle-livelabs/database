@@ -17,90 +17,77 @@ In this lab, you will:
 This lab assumes you have:
 - An Oracle account
 
-## Task 1: Pull and Start Docker Image
-1.  If the terminal is not displayed as shown below, select Activities and click Terminal.
 
-    ![Open the terminal](images/novnc-terminal.png)
- 
-2.  Copy the commands below and paste them into the terminal. This will pull the zip file with our podman-compose files and scripts that we'll be running to create and configure the ADB container. This series of commands will also unzip the files, and give them the permissions to be executable within the container.
+## Task 1: Install and Configure the ADB Free 23ai Container Image
+
+In the LiveLabs Sandbox, we will download the image from an OCI bucket. However, when using your own environment you will download the image directly from the Oracle Container Registry. That process is detailed in the free tier instructions.
+
+**_Note:_** _All of the following commands are to be run in the remote desktop's terminal._
+
+1.  **Set the OCI CLI environment variables.** Our image is stored in the Toronto region and we're using the instance principal authorization method. Run the following commands in the terminal to configure the OCI CLI accordingly.
+
+    ```
+    <copy>
+    export OCI_CLI_REGION=ca-toronto-1
+    export OCI_CLI_AUTH=instance_principal
+    </copy>
+    ```
+2. **Download the image from Object Storage.** 
+
+    ```
+    <copy>
+    oci os object get -bn image_bucket -ns c4u04 --name adb-free-23ai.tar.gz --file /tmp/adb-free-23ai.tar.gz
+    </copy>
+    ```
+
+3. **Download the installation and configuration files.** These commands pull two resources from object storage: the vector embedding model (for Lab 3) and the installation zip file. The zip file contains the YAML file and two scripts required to help re-configure APEX (explained in step 6).
 
     ```
     <copy>
     wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/AZAlcycOLHY5iAWwYZ6KTwJcrnJy7k1LcpHJh0ELmGdZj5ptc6rEteLmnUKnn4Gl/n/c4u04/b/apex-images/o/BERT-TINY.onnx
-    wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/WC7293Pwf4UNmrM44Mequmek_fjzKDkU-zBUrA8lAzcJMAiR19Jecjt1x1U4gBne/n/c4u04/b/apex-images/o/compose8.zip
-    unzip compose8.zip
-    chmod +x scripts start-container.sh
+    wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/WC7293Pwf4UNmrM44Mequmek_fjzKDkU-zBUrA8lAzcJMAiR19Jecjt1x1U4gBne/n/c4u04/b/apex-images/o/compose12.zip
+    unzip compose12.zip
     </copy>
     ```
 
-    ![Wget the zip file with the scripts and give them permissions](images/wget.png)
-
-3. Run this command to begin the process of starting up the container. Go to your LiveLabs reservation under View Login Details in order to get your information needed to login to the container registry.
+4. **Load the image into the podman catalog. (~5 mins)** Our image has been downloaded locally. Podman-load copies the image from the local docker archive into the podman container storage. 
 
     ```
     <copy>
-    ./start-container.sh
+    podman load -i /tmp/adb-free-23ai.tar.gz
     </copy>
     ```
 
-    ![Run start container script](images/run-start-container.png)
-
-    ![Information underneath login details](images/auth-token-copy.png)
-
-4. Input your tenancy name, username, and auth token as found under "View Login Details" in your LiveLabs reservation.
-    
-    ![Input user variables](images/input-user-vars.png)
-
-5. Input the desired workload type for your ADB.
-
-    ![Input ADB configuration variables](images/adb-config-vars.png)
-
-6. The container is now initializing. A podman-compose.yml script is running in the background to pull the image, start the container, mount necessary scripts onto the database.
-
-    ![Podman Compose is running to start the container](images/podman-compose.png)
-
-<!-- 3. Now that you are prompted to login, type the username in the format of ***tenancy-name***/***username***. The password will be your ***auth-token***. You will find all the necessary information in the Login Details of your LiveLabs reservation. 
-
-    ![Copy auth token](images/4-auth-token-copy.png)
-
-4. Hit enter, and it should say "Login Succeeded".
-
-    ![Login succeeded](images/3-login-succeeded.png) -->
-
-7. Now, we're waiting until the container is healthy so we can run the remainder of our scripts.
-
-    ![Waiting until container is healthy](images/container-status.png)
-
-8. Once the container is healthy, another script will automatically run to reset where the APEX images are sourced from. This allows APEX to function within our LiveLabs environment.
-    
-    ![Successful execution of reset image prefix script in SQL](images/successful-sql-script.png)
-
-    
-9. Note that your wallet and admin password will be printed as shown below.
-
-    ![Screenshot of script output producing the admin and wallet password](images/password-output.png)
-
-10. As the script completes, make sure you copy and run the command printed out at the end so you can easily run ADB-CLI commands.
-
-    ![ADB CLI](images/adb-cli.png)
-
-11. (Optional) If you want to reset your admin password, use the command printed out by the script and fill in your desired password. Make sure the following passwords you select are between 12-30 characters, with at least 1 uppercase letter, 1 lowercase letter, and 1 number.
-
-    ![Reset password command](images/reset-password-command.png)
-
-12. Now, the ADB container is live and you can run commands against it. You can view the list of available commands using the following command.
+4. **Launch the image.** The podman-compose command will configure and run the container image based on your YAML file. You can configure the ADB to be suited for any workload type. However, we've preset the workload type to ATP.
 
     ```
     <copy>
-    adb-cli --help 
+    podman-compose up
+    </copy>
+    ```
+5. **Open a new terminal tab and confirm the ADB is connected.** In another tab of the terminal, run this command. 
+
+      ```
+    <copy>
+    podman exec -it /etc/init.d/oracle_adb-free_1 status
     </copy>
     ```
 
-    ![Run adb-cli command help](images/adb-cli-help.png)
+6. **Re-configure the APEX image.** We'll need to redirect APEX to use the images behind our firewall. Run this command to do so.
 
-## Task 2: Access Database Actions and APEX
+    ```
+    <copy>
+    podman exec -it oracle_adb-free_1 /bin/sh -c "/u01/scripts/db-config.sh"
+    </copy>
+    ```
 
-1. To access Database Actions/ORDS, open a new window in your Chrome browser and go to this website:
+## Task 2: Explore the Database Tools (APEX & ORDS)
+
+Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) preinstalled. Let's see how you can get started!
+
+1. **Open Google Chrome.** Click Activities >> Google Chrome icon, to open a new Chrome window.
+
+2. **Launch ORDS.** Paste the following URL into your Chrome browser to Launch ORDS.
 
     ```
     <copy>
@@ -108,19 +95,20 @@ This lab assumes you have:
     </copy>
     ```
 
-    It must include the "https://" to work.
+    ![ORDS landing page](images/ords_landing.png)
 
-    ![ORDS landing page](images/ords-landing.png)
-
-2. Sign in with your admin password you had set for the ADB in Task 1, Step 4.
+3. **Sign into ORDS.** 
+    
+    **Username -** admin
+    **Password -** Welcome_12345 (or the custom password you specified in Task 1, Step 5.)
 
     ![Sign into DB Actions](images/sign-in-ords.png)
 
-3. You now have access to Database Actions! Let's first click SQL Developer Web to test it out.
+4. **Launch SQL Developer Web.** You now have access to Database Actions! Let's first click SQL Developer Web to test it out.
 
-    ![Database Actions](images/launch-sql-developer.png)
+    ![Database Actions](images/ords_sql_developer.png)
 
-4. Next, let's go to Oracle APEX. Go back to the landing page and click Go to Oracle APEX.
+5. **Launch APEX.** Go back to the landing page and click Go to Oracle APEX.
 
     ```
     <copy>
@@ -128,51 +116,16 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![ORDS landing page](images/launch-apex.png)
+    ![ORDS landing page](images/launch_apex.png)
 
-5. Sign in with your admin password you had set for the ADB in Task 1, Step 4.
+6. **Sign-in to APEX.** 
+
+    **Username -** admin
+    **Password -** Welcome_12345 (or the custom password you specified in Task 1, Step 5.)
 
     ![Sign into APEX](images/sign-in-apex.png)
 
-6. Now you have access to Database Actions and APEX within your ADB 23ai Container Image! Feel free to explore what's possible within your environment.
-
-<!-- 11. 
-9. You can add a database.
-
-    ```
-    <copy>
-    adb-cli add-database --workload-type "ADW" --admin-password "Welcome_1234"
-    </copy>
-    ```
-
-10. You can change the admin password.
-
-    ```
-    <copy>
-    adb-cli change-password --database-name "MYADW" --old-password "Welcome_1234" --new-password "Welcome_12345"
-    </copy>
-    ```
-
-11. **Note:** At anytime, you can check if your container is still running with this command. The list returned should not be empty.
-
-    ```
-    <copy>
-    podman ps -a
-    </copy>
-    ```
-
- 11. 
-mkdir /scratch/
-podman cp adb-free:/u01/app/oracle/wallets/tls_wallet /scratch/tls_wallet
-
-12. 
-
-hostname fqdn -->
-
-
-<!-- 11. This is how you connect to ORDS.
-
-12. Finally, this is how you would connect to APEX. -->
+Now you have access to Database Actions and APEX within your ADB 23ai Container Image! Feel free to explore what's possible within your environment.
 
 ## Appendix 1: Restart Docker Container
 1. If you wanted to stop the ADB Docker container at any time and start with a fresh one, feel free to. If you are in the middle of running the start-container.sh script, type ctrl+C to stop it.
@@ -208,6 +161,8 @@ hostname fqdn -->
     cat ~/podman-compose.yml
     </copy>
     ```
+
+    
 
 ## Acknowledgements
 - **Authors** - Brianna Ambler, Dan Williams Database Product Management, July 2024
