@@ -1,18 +1,18 @@
-# Install Autonomous Database 23ai Free Docker Image
+# Install Oracle Autonomous Database 23ai Free Docker Image
 
 ## Introduction
-In this lab, you will quickly configure an Oracle Autonomous Database using the Oracle Database 23ai Free Container Image. 
+In this lab, you will experience just how easy it is to get started with the Oracle Autonomous Database 23ai Free Container Image. One launched, we will show you how to take advantage of the developer tools available to you, as we show you how to access SQL Developer Web & APEX--without any additional installations!
 
-*Estimated Time:* 30 minutes
+**_Estimated Time: 30 minutes_**
 
-### Objectives
+### **Objectives**
 In this lab, you will:
 
 * Launch the Docker container image.
 * Connect to your Autonomous Database.
 * Access SQL Developer Web & APEX.
 
-### Prerequisites
+### **Prerequisites**
 This lab assumes you have:
 - An Oracle account
 
