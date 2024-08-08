@@ -1,4 +1,4 @@
-# Prepare Setup
+# Query Your Vectors with Similarity Search 
 
 ## Introduction
 In this lab, you will quickly configure the Oracle Autonomous Database Free 23ai Docker Container in your remote desktop environment.
