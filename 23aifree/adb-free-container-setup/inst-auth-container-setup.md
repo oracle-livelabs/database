@@ -1,17 +1,16 @@
 # Install Autonomous Database 23ai Free Docker Image
 
 ## Introduction
-In this lab, you will quickly configure the Oracle Autonomous Database Free 23ai Docker Container in your remote desktop environment.
+In this lab, you will quickly configure an Oracle Autonomous Database using the Oracle Database 23ai Free Container Image. 
 
-*Estimated Time:* 10 minutes
+*Estimated Time:* 30 minutes
 
 ### Objectives
-
 In this lab, you will:
 
-* Pull, run, and start an Oracle Autonomous Database 23ai Docker image with Podman.
-* Gain access to Database Actions, APEX, and more via your container.
-* Explore Oracle’s AI Vector Search. 
+* Launch the Docker container image.
+* Connect to your Autonomous Database.
+* Access SQL Developer Web & APEX.
 
 ### Prerequisites
 This lab assumes you have:
@@ -101,7 +100,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
 
 
 
-## Task 2: Access APEX & ORDS
+## Task 2: Access APEX & SQL Developer Web
 
 Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) preinstalled. Let's see how you can get started!
 
@@ -115,17 +114,16 @@ Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) prein
 
 2. **Open Google Chrome.** Click Activities >> Google Chrome icon, to open a new Chrome window.
 
-2. **Launch ORDS.** Paste the following URL into your Chrome browser to Launch ORDS.
+3. **Launch ORDS.** Paste the following URL into your Chrome browser to Launch ORDS.
 
     ```
     <copy>
     https://localhost:8443/ords
     </copy>
     ```
+    ![ORDS landing page](images/ords-landing.png)
 
-    ![ORDS landing page](images/ords_landing.png)
-
-3. **Sign into ORDS.** 
+4. **Sign into ORDS.** 
     
     **Username -** admin
     **Password -** Welcome_12345 (or the custom password you specified in Task 1, Step 5.)
@@ -133,12 +131,12 @@ Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) prein
     ![Sign into DB Actions](images/sign-in-ords.png)
 
 
-4. **Launch APEX.** You now have access to Database Actions! Let's first click APEX to test it out.
+5. **Launch APEX.** You now have access to Database Actions! Let's first click APEX to test it out.
 Click "Go to Oracle APEX".
 
     ![ORDS landing page](images/launch_apex.png)
 
-5. **Sign-in to APEX.** 
+6. **Sign-in to APEX.** 
 
     **Username -** admin
     **Password -** Welcome_12345 (or the custom password you specified in Task 1, Step 5.)
@@ -156,12 +154,12 @@ Click "Go to Oracle APEX".
 
     ![Database Actions](images/ords_sql_developer.png)
 
-6. **Sign-in to SQL Developer Web.** 
+8. **Sign-in to SQL Developer Web.** 
 
     **Username -** admin
     **Password -** Welcome_12345 (or the custom password you specified in Task 1, Step 5.)
 
-7. **Lauch the SQL worksheet.** Select the 'SQL' tab, as shown below.
+9. **Lauch the SQL worksheet.** Select the 'SQL' tab, as shown below.
 
 You may proceed to the next lab.
 

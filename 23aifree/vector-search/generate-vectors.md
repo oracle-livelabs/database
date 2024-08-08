@@ -1,4 +1,4 @@
-# Perform Vector Search Yourself
+# Learn the Vector Search Process on Oracle Database 23ai
 
 ## Introduction
 In this lab, you will quickly configure the Oracle Autonomous Database Free 23ai Docker Container in your remote desktop environment.
@@ -18,7 +18,7 @@ This lab assumes you have:
 - An Oracle account
 
 
-## Task 1: Load Your Vector Embedding Model
+## Task 1: Prepare the Workspace
 
 1. **Return to the terminal.** Select Activities >> Terminal.
 
@@ -55,27 +55,72 @@ This lab assumes you have:
     <copy>
     CREATE OR REPLACE DIRECTORY DM_DUMP as 'models';
     </copy>
+    ```    
+6. **Grant READ permissions on the DM_DUMP directory to dmuser.**
+    ```
+    <copy>
+    GRANT READ ON DIRECTORY DM_DUMP TO dmuser;
+    </copy>
     ```
 
-7. **Copy the absolute file path of the PDB's working directory.** Copy the file path returned by the following command.
+7. **Grant WRITE permissions on the DM_DUMP directory to dmuser.**
+    ```
+    <copy>
+    GRANT WRITE ON DIRECTORY DM_DUMP TO dmuser;
+    </copy>
+    ```
+
+8. **Add quota to tablespace DATA for dmuser.**
+    ```
+    <copy>
+    alter user SALES quota 50m on users;
+    </copy>
+    ```
+
+9. **Copy the absolute file path of the PDB's working directory.** Copy the file path returned by the following command.
     ```
     <copy>
     select directory_path from all_directories where directory_name = 'DM_DUMP';
     </copy>
     ```
 
-8. **Move the vector model into the PDB's working directory.**
+10. **Return to the container shell. Move the vector model into the PDB's working directory.**
     ```
     <copy>
     cp u01/BERT-TINY.onnx <working-directory>
     </copy>
     ```
 
-9. 
+11. **Return to SQL Developer Web.**
 
+12. **Confirm the model appears in the database directory.**
+    ```
+    <copy>
+    SELECT * FROM DBMS_CLOUD.LIST_FILES('DM_DUMP');
+    </copy>
+    ```
 
+You may proceed to the next lab.
 
-## Task 2: Generate Vectors From the Data
+## Task 2: Import the ONNX Model
+
+1. **Return to the container shell.**
+
+2. **Connect to the ADB as dmuser.**
+    ```
+    <copy>
+    sqlplus dmuser/Welcome_123456@myatp_low
+    </copy>
+    ```
+3. **Load the ONNX model into the database.**
+    ```
+    <copy>
+    EXECUTE DBMS_VECTOR.LOAD_ONNX_MODEL('DM_DUMP','BERT-TINY.onnx','doc_model');
+    </copy>
+    ```
+You may now proceed to the next lab.
+
+## Task 3: Generate Vectors From the Data
 
 1. **Extract the product descriptions.**
     ```

@@ -26,7 +26,7 @@
             "filename": "../../vector-search/intro-vector-search-hol.md"
         },
         {
-            "title": "Lab 3: Perform Vector Search Yourself",
+            "title": "Lab 3: Learn the Vector Search Process on Oracle Database 23ai",
             "description": "Explains how to vectorize your data.",
             "type": "livelabs",
             "filename": "../../vector-search/generate-vectors.md"
