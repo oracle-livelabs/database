@@ -32,7 +32,7 @@ This is done as often multiple errors are reported together and we want to ensur
 	tfactl set minTimeForAutoDiagCollection=60 -c
 	</copy>
 	```
-	Command Output:
+	Example Command Output:
 	<pre>
 	Successfully set minTimeForAutoDiagCollection=60
 	.--------------------------------------.
@@ -53,38 +53,22 @@ This is done as often multiple errors are reported together and we want to ensur
 	sudo su - oracle
 	</copy>
 	```
-	
-2.	Find the local database instance name running on this node using the **srvctl** cli. 
 
-	```
-	<copy>
-	srvctl status database -d `srvctl config database`
-	</copy>
-	```
-	Command Output:
-	<pre>
-	Instance racUXBVI1 is running on node lldbcs61
-	Instance racUXBVI2 is running on node lldbcs62
-	</pre>
-	> Note: The instance name will be different on this system.
-	>       We can use the `srvctl config database` command in line here as there will only be one database on the system.
-	</pre>
-
-3.	Ensure your environment is set to connect to the database instance from Step 2
+3.	Check the oracle user environment is set up to access your database using **sqlplus**
 
 	```
 	<copy>
 	env | grep ORA
 	</copy>
 	```
-	Command output:  
+	Example Command Output:  
 	<pre>
 	ORACLE_UNQNAME=racUXBVI_ngt_lhr
 	ORACLE_SID=racUXBVI1
 	ORACLE_HOME=/u01/app/oracle/product/19.0.0.0/dbhome_1	
 	</pre>
 
-	You should see that the instance name running on this node from Step 2 is the one set to **ORACLE_SID**
+	You should see that the **ORACLE\_SID** and **ORACLE\_HOME** environment variables are set 
 
 ## Task 3: Connect to the database with `sqlplus` and generate some errors
 
@@ -95,7 +79,7 @@ This is done as often multiple errors are reported together and we want to ensur
 	</copy>
 	```
 	
-	Command output:  
+	Example Command Output:  
 	<pre>
 	SQL*Plus: Release 19.0.0.0.0 - Production on Fri Jul 12 03:37:16 2024
 	Version 19.23.0.0.0
@@ -112,26 +96,26 @@ This is done as often multiple errors are reported together and we want to ensur
 
 2. Generate a dummy ORA-00600 Error
 
-	At the SQL> prompt type
+	At the SQL> prompt type ( Use the Copy )
 	```
 	<copy>
-	oradebug unit_test dbke_test dde_flow_kge_ora kgb livelabs1 17
+	exec dbms_system.ksdwrt(dbms_system.alert_file,'ORA-00600: internal error code, arguments: [kgb], [livelabs1], [17], [], [], [], [], [], [], [], [], []');
 	</copy>
 	```
-	Command output:  
+	Example Command Output:  
 	<pre>
 	Statement processed.
 	</pre>
 
 3. Generate a Dummy ORA-04031 Error
 
-	At the SQL> prompt type
+	At the SQL> prompt type ( Use the Copy )
 	```
 	<copy>
-	oradebug unit_test dbke_test dde_flow_kge_fac ORA 4031
+	exec dbms_system.ksdwrt(dbms_system.alert_file,'ORA-04031: unable to allocate 90342 bytes of shared memory ("","","","")');
 	</copy>
 	```
-	Command output:  
+	Example Command Output:  
 	<pre>
 	Statement processed.
 	</pre>
@@ -144,38 +128,48 @@ This is done as often multiple errors are reported together and we want to ensur
 	</copy>
 	```
 
-	Command output:  
+	Example Command Output:  
 	<pre>
 	Statement processed.
 	</pre>
 
-5. Check that AHF detected the incidents using `tfactl events`  
+5. Exit from sqlplus
+	At the SQL> prompt type
+	```
+	<copy>
+	exit
+	</copy>
+	```
+
+	Example Command Output:  
+	<pre>
+	Disconnected from Oracle Database 19c EE Extreme Perf Release 19.0.0.0.0 - Production
+	Version 19.24.0.0.0
+	</pre>
+
+6. Check that AHF detected the incidents using `tfactl events`  
 	
 	```
 	<copy>
 	tfactl events -last 1h -node local
 	</copy>
 	```
-	Command output:  
-	<pre>
-	Output from host : lldbcs61
-	------------------------------
+	Example Command Output:  
 
+	<pre>
+	<u>Output from host : lldbcs61</u>
 	Event Summary:
 	INFO    :2
 	ERROR   :2
 	WARNING :0
 
 	Event Timeline:
-	[Jul/12/2024 03:39:31.000 UTC]: [db.racuxbvi_ngt_lhr.racUXBVI1]: Incident details in: /u01/app/oracle/diag/rdbms/racuxbvi_ngt_lhr/racUXBVI1/incident/incdir_19777/racUXBVI1_ora_6798_i19777.trc
 	[Jul/12/2024 03:39:31.000 UTC]: [db.racuxbvi_ngt_lhr.racUXBVI1]: ORA-00600: internal error code, arguments: [kgb], [livelabs1], [17], [], [], [], [], [], [], [], [], []
-	[Jul/12/2024 03:40:19.000 UTC]: [db.racuxbvi_ngt_lhr.racUXBVI1]: Incident details in: /u01/app/oracle/diag/rdbms/racuxbvi_ngt_lhr/racUXBVI1/incident/incdir_19778/racUXBVI1_ora_6798_i19778.trc
 	[Jul/12/2024 03:40:19.000 UTC]: [db.racuxbvi_ngt_lhr.racUXBVI1]: ORA-04031: unable to allocate  bytes of shared memory (,,,)
 	</pre>
 
-	>Note that AHF Also reports the Incident trace location for the Error that follows
 	
-You may now *proceed to the next lab*.
+You may now [proceed to the next lab](#next).
 
 ## Acknowledgements
 * **Authors** - Bill Burton, Troy Anthony
