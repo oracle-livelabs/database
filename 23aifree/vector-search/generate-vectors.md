@@ -3,17 +3,18 @@
 ## Introduction
 In this lab, you will quickly configure the Oracle Autonomous Database Free 23ai Docker Container in your remote desktop environment.
 
-*Estimated Time:* 10 minutes
+**_Estimated Time: 45 minutes_**
 
-### Objectives
+### **Objectives**
 
 In this lab, you will:
 
-* Pull, run, and start an Oracle Autonomous Database 23ai Docker image with Podman.
-* Gain access to Database Actions, APEX, and more via your container.
-* Explore Oracle’s AI Vector Search. 
+* Configure your workspace to use Oracle AI Vector Search.
+* Load a vector embedding model.
+* Vectorize the sample data.
+* Leverage your business data with vector search. 
 
-### Prerequisites
+### **Prerequisites**
 This lab assumes you have:
 - An Oracle account
 

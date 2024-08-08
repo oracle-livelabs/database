@@ -6,9 +6,10 @@ With Oracle Autonomous Database Free, you get to explore the newest features of 
 
 After installation, you'll learn how to further extend the capabilities of the Autonomous Database by installing ORDS, APEX, and SQLcl. Once your environment is set for development, you'll (introduce the vector search activity) and see just how easy it is to leverage AI Vector Search. 
 
-### **Oracle Database 23ai Free**
+### **About the Oracle Autonomous Database 23ai Free Container Image**
+Oracle Autonomous Database provides an easy-to-use, fully autonomous database that scales elastically and delivers fast query performance. As a service, Autonomous Database does not require database administration. Autonomous Database provides a fully managed Oracle Database that is available on Oracle Cloud Infrastructure.
 
-
+The Oracle Autonomous Database Free Container Image provides an alternative to run Autonomous Database in a container in your own environment, without requiring access to Oracle Cloud Infrastructure Console or to the internet. When you run Autonomous Database in a container, the container provides a local, isolated environment with additional options for development, testing, and exploration of Oracle Autonomous Database features.
  
 
 <!-- ### **Tools - SQLcl**
@@ -21,16 +22,19 @@ Formerly known as SQL Developer Web, Database Actions brings you your favorite O
 ### **Tools - APEX**
 Oracle APEX is the world's most popular enterprise low-code application platform that enables you to build scalable, secure web and mobile apps, with world-class features, that can be deployed anywhere – cloud or on premises. Using APEX, developers can quickly develop and deploy compelling apps that solve real problems and provide immediate value. You don't need to be an expert in a vast array of technologies to deliver sophisticated solutions. Focus on solving the problem and let APEX take care of the rest. -->
 
-Estimated Time: 75 minutes
+**_Estimated Time: 90 minutes_**
 
-### Objectives
+### **Objectives**
 
-In this lab, you will:
-* Install Oracle ADB 23ai Free Docker Image. 
-* Install the ORDS, SQLcl, and APEX.
-* Get started with Semantic Data Search using AI Vector Search.
+In this workshop, you will:
+* Launch the Oracle ADB 23ai Free Docker Container. 
+* Connect to your Autonomous Database.
+* Access SQL Developer Web & APEX.
+* Learn the Oracle AI Vector Search process on ADB.
 
-### Prerequisites
+
+
+###**Prerequisites**
 
 In order to do this workshop you need
 * A LiveLabs Sandbox environment

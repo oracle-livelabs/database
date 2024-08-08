@@ -14,7 +14,7 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
         },
         {
-            "title": "Lab 1: Install Autonomous Database 23ai Free Docker Image",
+            "title": "Lab 1: Launch the Oracle Autonomous Database 23ai Free Container",
             "description": "Installing and configuring the database",
             "type": "livelabs",
             "filename": "../../adb-free-container-setup/inst-auth-container-setup.md"
