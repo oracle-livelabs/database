@@ -201,8 +201,8 @@ with connection.cursor() as cursor:
    ```python
    <copy>
    from sentence_transformers import SentenceTransformer
-
-   encoder = SentenceTransformer('all-MiniLM-L12-v2')
+   <if type="freetier">encoder = SentenceTransformer('all-MiniLM-L12-v2')</if>
+   <if type="livelabs">encoder = SentenceTransformer('./transformers/all-MiniLM-L12-v2', local_files_only=True)</if>
    </copy>
    ```
    Ignore the warning saying `IProgress not found.`, among others.

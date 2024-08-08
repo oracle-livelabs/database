@@ -50,7 +50,7 @@ Diagnostic dimensions include :
 
 ## Task 2:  Review parts of AHF Insights report
 
-![](./images/Task-1-Point-1.png " ")
+![](./images/Task-1-point-1.png " ")
 
 1.  Top right corner (*highlighted above*) indicates AHF Version, System Type and Time Range of AHF Insights report collection.
 2.  First row (*highlighted above*) shows topology of the system from where AHF Insights report was generated.
@@ -60,25 +60,25 @@ Diagnostic dimensions include :
 
 1.  On Home tab click on the *Cluster Section*
 
-![](./images/Task-3-Point-1.png " ")
+![](./images/Task-3-point-1.png " ")
 
 2.  *Cluster Summary* sub tab gives you high level details regarding the cluster.
 
-![](./images/Task-3-Point-2.png " ")
+![](./images/Task-3-point-2.png " ")
 
 3.  Click copy icon (*highlighted above*) to copy the panel data in text format to your clipboard.
 4.  You can post it in your notepad / any other application.
 
-![](./images/Task-3-Point-4.png " ")
+![](./images/Task-3-point-4.png " ")
 
 5.  *Cluster Resources* sub tab gives you details of clusterware managed resources and their state.
     - Note : You can *Expand* each resource to check details and can also make use of *Expand All* switch to view/hide them all
 
-![](./images/Task-3-Point-5.png " ")
+![](./images/Task-3-point-5.png " ")
 
 6.  *ASM Details* sub tab gives you ASM Instance and Disk group details.
 
-![](./images/Task-3-Point-6.png " ")
+![](./images/Task-3-point-6.png " ")
 
     
 
