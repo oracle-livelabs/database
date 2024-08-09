@@ -14,22 +14,22 @@
             "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
         },
         {
-            "title": "Lab 1: Install Autonomous Database 23ai Free Docker Image",
+            "title": "Lab 1: Launch the Oracle Autonomous Database 23ai Free Container",
             "description": "Installing and configuring the database",
             "type": "livelabs",
-            "filename": "../../adb-free-container-setup-2/adb-free-container-setup.md"
+            "filename": "../../adb-free-container-setup/inst-auth-container-setup.md"
         },
         {
-            "title": "Lab 2: Configure ORDS, APEX, & SQLcl",
-            "description": "Setting up the various database tools",
+            "title": "Lab 2: Explore the Power of Oracle AI Vector Search",
+            "description": "Understanding the value of Oracle AI Vector Search.",
             "type": "livelabs",
-            "filename": "../../config_tools/config_tools.md"
+            "filename": "../../vector-search/intro-vector-search-hol.md"
         },
         {
-            "title": "Lab 3: Get Started with AI Vector Search",  
-            "description": "Hands-on introduction to AI Vector Search in ADB.",
+            "title": "Lab 3: Learn the Vector Search Process on Oracle Database 23ai",
+            "description": "Explains how to vectorize your data.",
             "type": "livelabs",
-            "filename": "../../sql-schema/sql-schema.md"
+            "filename": "../../vector-search/generate-vectors.md"
         },
         {
           "title": "Need Help?",

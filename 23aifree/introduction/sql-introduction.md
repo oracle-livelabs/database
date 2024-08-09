@@ -21,19 +21,19 @@ Key benefits of JSON Relational Duality:
 
 Estimated Time: 30 minutes
 
-### Objectives
+### **Objectives**
 
 In this lab, you will:
 * Create JSON Duality Views
 * Perform insert, update, and delete operations against JSON Duality Views
 * Perform both JSON and SQL operations against JSON Duality Views
 
-### Prerequisites
+### **Prerequisites**
 
 In order to do this workshop you need
 * An Oracle 23ai Free Developer Release Database or one running in a LiveLabs environment
 
-## Learn More
+## **Learn More**
 
 * [JSON Relational Duality: The Revolutionary Convergence of Document, Object, and Relational Models](https://blogs.oracle.com/database/post/json-relational-duality-app-dev)
 * [JSON Duality View documentation](http://docs.oracle.com)
