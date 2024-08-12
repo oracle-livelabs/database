@@ -25,6 +25,11 @@
       "description": "Exploring Sharding Topology",
       "filename": "../../topology/topology.md"
     },
+    {
+      "title": "Lab 4: Demo UI Application for Raft Replication",
+      "description": "Demo UI Application for Raft Replication",
+      "filename": "../../ui-app/raft-demo-ui-app.md"
+    },
      {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",

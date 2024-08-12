@@ -1,0 +1,57 @@
+{
+    "workshoptitle": "Navigating Oracle Troubleshooting: AHF Insights Enhanced by AI and LLMs",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "This is an introduction to help you understand how Oracle Autonomous Framework (AHF) helps with Oracle Database Troubleshooting",
+            "filename": "../../ahf-Insights/intro/intro.md"
+        },  
+        {
+            "title": "Get Started with LiveLabs",
+            "description": "Getting you connected with your LiveLabs Sandbox Environment",
+            "filename": "../../setup/setup-compute-livelabs-ocw.md"
+        },
+        {
+            "title": "Lab 1: Check AHF Installation on your System",
+            "description": "This lab walks you through checking that AHF is installed and healthy on your system.",
+            "filename": "../../ahf-Insights/ahf-upgrade/check-ahf.md"
+        },
+        {
+            "title": "Lab 2: Generate some Incidents in RAC Database",
+            "description": "This lab walks you through generating various incidents in your RAC database for AHF to detect.",
+            "filename": "../../ahf-Insights/incidents/generate-incidents-ocw.md"
+        },
+        
+        {
+            "title": "Lab 3: learn the most Commonly used AHF Commands ",
+            "description": "This lab walks you through using the most commonly used AHF commands ",
+            "filename": "../../ahf-Insights/ahf-commands/common-ocw.md"
+        },
+        {
+            "title": "Lab 4: Review/Generate AHF Incident Diagnostic Collections ",
+            "description": "This lab reviews automatic collections and helps you generate manual diagnostic collections.",
+            "filename": "../../ahf-Insights/ahf-commands/diagcollect.md"
+        },
+        {
+            "title": "Lab 5: Review Insights Reports for Various Incident Scenarios ",
+            "description": "This lab walks you through a number of Insights Reports for various incidents captured from other systems ",
+            "filename": "../../ahf-Insights/ahf-reports/insightsreports.md"
+        },
+        {
+            "title": "Lab 6: Generate AHF Insights reports on Demand ",
+            "description": "This lab walks you through generating an Insights Report on Demand.",
+            "filename": "../../ahf-Insights/ahf-commands/insights.md"
+        },
+        {
+            "title": "Lab 7: Upgrade AHF on your System (Optional)",
+            "description": "This lab walks you through Upgrading to the latest AHF version.",
+            "filename": "../../ahf-Insights/ahf-upgrade/upgrade-ahf.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+        }
+    ]
+}

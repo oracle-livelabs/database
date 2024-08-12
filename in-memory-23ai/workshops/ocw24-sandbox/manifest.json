@@ -1,0 +1,46 @@
+{
+  "workshoptitle": "Speed up your analytic queries with Database In-Memory",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "About the In-Memory Workshop",
+      "filename": "../../intro/intro.md"
+    },
+    {
+      "title": "Lab 1: Environment Setup",
+      "description": "Verify Setup of compute instance",
+      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+    },
+    {
+      "title": "Lab 2: Initialize Environment",
+      "description": "Initialize Environment",
+      "filename": "../../initialize-environment/initialize-environment.md"
+    },
+    {
+      "title": "Lab 3: Setting up the In-Memory Column Store",
+      "description": "Populating and administering the In-Memory column store",
+      "filename": "../../setup/setup.md"
+    },
+    {
+      "title": "Lab 4: Querying the In-Memory Column Store",
+      "description": "Queries on In-Memory Column Store",
+      "filename": "../../queries/queries.md"
+    },
+    {
+      "title": "Lab 5: Joins and Aggregation",
+      "description": "In-Memory Joins and Aggregation",
+      "filename": "../../joins-aggregations/joins-aggregations.md"
+    },
+    {
+      "title": "Lab 6: Automatic In-Memory in 23ai",
+      "description": "Using AIM in 23ai",
+      "filename": "../../aim-23ai/aim-high.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}
