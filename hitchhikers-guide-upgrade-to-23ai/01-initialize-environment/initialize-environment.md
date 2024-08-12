@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will review and startup all components required to successfully run this workshop.
+In this lab, you will check all components required to successfully run this workshop.
 
 Estimated Time: 5 Minutes.
 
