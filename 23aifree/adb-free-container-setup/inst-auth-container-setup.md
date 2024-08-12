@@ -86,15 +86,15 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
 9. **Confirm the files were pre-loaded into the container.**
     ```
     <copy>
-    podman exec -it ls /u01
-    podman exec -it ls /u01/scripts
-    podman exec -it ls /u01/customer-orders
+    podman exec -it oracle_adb-free_1 ls /u01
+    podman exec -it oracle_adb-free_1 ls /u01/scripts
+    podman exec -it oracle_adb-free_1 ls /u01/customer-orders
     </copy>
     ```
 10. **Relocate tnsnames.ora in the container.** 'tnsnames.ora' is a configuration file, storing the database details necessary for connection. We're moving the file into a directory that's meant for our database for easy connection.
     ```
     <copy>
-    podman exec -it cp /u01/app/oracle/wallets/tls_wallet/tnsnames.ora /u01/app/oracle/product/23.0.0.0/dbhome_1/network/admin/tnsnames.ora
+    podman exec -it oracle_adb-free_1 cp /u01/app/oracle/wallets/tls_wallet/tnsnames.ora /u01/app/oracle/product/23.0.0.0/dbhome_1/network/admin/tnsnames.ora
     </copy>
     ```
 
