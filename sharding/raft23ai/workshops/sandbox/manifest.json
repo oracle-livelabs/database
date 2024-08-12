@@ -26,7 +26,12 @@
       "filename": "../../topology/topology.md"
     },
     {
-      "title": "Lab 4: Demo UI Application for Raft Replication",
+      "title": "Lab 4: Explore Raft Replication Advanced Use-Cases",
+      "description": "Exploring Raft Replication Advanced Use-Cases",
+      "filename": "../../advanced-use-cases/advanced-use-cases.md"
+    },
+    {
+      "title": "Lab 5: Demo UI Application for Raft Replication",
       "description": "Demo UI Application for Raft Replication",
       "filename": "../../ui-app/raft-demo-ui-app.md"
     },
