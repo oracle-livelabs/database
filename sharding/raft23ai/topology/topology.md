@@ -317,9 +317,6 @@ You can stop the workload that ran in the previous task using Ctrl+C.
 
 2. In the list, please open the "More Details" tab for User No. 1.
 
-Open two additional tabs by clicking on "Update" for User No. 1
-
-
 ![<demo_ui_app_more_details_2>](./images/demo-ui-app-click-more-det-2.png " ")  
 
 Similarly, Open two additional tabs by clicking on "Update" for User No. 1
@@ -336,13 +333,25 @@ Verify where the leadership is for User No. 1's shard in the Demo UI.
 
     ```
     <copy>
-    sudo podman start shard3
+    sudo podman stop shard3
+    </copy>
+    ```
+
+    ```
+    <copy>
+    sudo podman exec -i -t gsm1 /bin/bash
+    </copy>
+    ```
+
+    ```
+    <copy>
+    gdsctl config shard
     </copy>
     ```
 
 ![<demo_ui_app_stop_shard>](./images/demo-ui-app-stop-shard-4.png " ")  
 
-5. Return to the Demo UI App browser window on "More Details" tab and click on refresh to observe that the leadership has automatically moved to another shard, indicating re-routing of the request.
+5. Return to the Demo UI App browser window on "More Details" tab and click on "Refresh" button to observe that the leadership has automatically moved to another shard, indicating re-routing of the request.
 
 ![<demo_ui_app_refresh_more_details>](./images/demo-ui-app-refresh-more-det-5.png " ")  
 
@@ -366,37 +375,37 @@ Note that while the shard is stopped, you can still run the workload.
 
 Switch to the "appclient" container
 
-    ```
-    <copy>
-    sudo podman exec -it appclient /bin/bash
-    </copy>
-    ```
+```
+<copy>
+sudo podman exec -it appclient /bin/bash
+</copy>
+```
 
 Switch to the "oracle" user
 
-    ```
-    <copy>
-    su - oracle
-    </copy>
-    ```
+```
+<copy>
+su - oracle
+</copy>
+```
 
 Change the path to $DEMO_MASTER location
 
-    ```
-    <copy>
-    cd $DEMO_MASTER
-    pwd
-    ls -rlt
-    </copy>
-    ```
+```
+<copy>
+cd $DEMO_MASTER
+pwd
+ls -rlt
+</copy>
+```
 
 Run the workload using the below command
 
-    ```
-    <copy>
-    sh run.sh demo
-    </copy>
-    ```
+```
+<copy>
+sh run.sh demo
+</copy>
+```
 
 ![<demo_ui_app_run_workload_a>](./images/demo-ui-app-run-workload-7a.png " ")  
 
@@ -404,7 +413,7 @@ Run the workload using the below command
 ![<demo_ui_app_run_workload>](./images/demo-ui-app-run-workload-7b.png " ")  
 
 
-Click on refresh button in the browser window for Demo UI application and you will observe that the count is increasing in the Demo UI even though the shard is stopped.
+Refresh the browser window for Demo UI application and you will observe that the count is increasing in the Demo UI even though the shard is stopped.
 
 
 ![<demo_ui_app_inc_after_workload>](./images/demo-ui-app-count-inc-after-workload-7c.png " ")  
@@ -421,11 +430,17 @@ Take a look at the count before clicking on delete button.
 ![<demo_ui_app_count_before_del>](./images/demo-ui-app-count-before-delete-9.png " ")  
 
 Click on Delete button in the browser window and delete few users. You will notice that the count is decreasing.
-
+s
 ![<demo_ui_app_after_del_count>](./images/demo-ui-app-after-del-count-9a.png " ")  
 
 
-11. Start the shard and see that it is available now.
+11. Start the shard and see that the shard1 is joining back.
+
+    ```
+    <copy>
+    sudo podman start shard3
+    </copy>
+    ```
 
 ![<demo_ui_app_start_shard>](./images/demo-ui-app-start-shard-11.png " ")  
 
