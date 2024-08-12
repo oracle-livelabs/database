@@ -35,12 +35,17 @@
       "filename": "../../topology/topology.md"
     },
     {
-      "title": "Lab 5: Demo UI Application for Raft Replication",
+      "title": "Lab 5: Explore Raft Replication Advanced Use-Cases",
+      "description": "Exploring Raft Replication Advanced Use-Cases",
+      "filename": "../../advanced-use-cases/advanced-use-cases.md"
+    },
+    {
+      "title": "Lab 6: Demo UI Application for Raft Replication",
       "description": "Demo UI Application for Raft Replication",
       "filename": "../../ui-app/raft-demo-ui-app.md"
     },
     {
-       "title": "Lab 6: Clean up Stack and Instances",
+       "title": "Lab 7: Clean up Stack and Instances",
        "description": "Clean up ORM Stack and instances",
        "filename": "../../cleanup/cleanup.md"
      },
