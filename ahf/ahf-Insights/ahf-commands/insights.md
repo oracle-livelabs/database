@@ -25,10 +25,10 @@ Estimated Lab Time: 5 Minutes
 
 
 ## Task 1:  Generate an AHF Insights report
-1.  Generate an Insights report for the past four hours
+1.  Generate an Insights report for the last hour
 ```
 <copy>
-ahf analysis create --type insights --last 4h
+ahf analysis create --type insights --last 1h
 </copy>
 ```
 Command Output:

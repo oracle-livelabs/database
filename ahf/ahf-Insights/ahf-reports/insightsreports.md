@@ -585,7 +585,7 @@ Diagnostic dimensions include :
 
 ![](./images/Task-21-point-6.png " ")
 
-
+You may now [proceed to the next lab](#next).
 ## Acknowledgements
 * **Authors** - Troy Anthony, Bill Burton, Arjun Upadhyay
 * **Contributors** - Arlet Diaz
