@@ -24,7 +24,7 @@ This lab assumes:
 
 ## Task 1: Generate an AWR snapshot
 
-1. Use the *yellow* terminal. Set the environment to the *UPGR* database and connect.
+1. Use the *yellow* terminal 🟨. Set the environment to the *UPGR* database and connect.
 
     ```
     <copy>
@@ -82,7 +82,7 @@ This lab assumes:
 
 Use HammerDB to start a workload. At the same time, capture workload information from the cursor cache into a SQL tuning set.
 
-1. Back in the *yellow* terminal, run the capture script. The script polls the cursor cache every 10 seconds for three minutes. **Leave the script running and immediately proceed to the next step.** Do not press CTRL+C.
+1. Back in the *yellow* terminal 🟨, run the capture script. The script polls the cursor cache every 10 seconds for three minutes. **Leave the script running and immediately proceed to the next step.** Do not press CTRL+C.
 
     ```
     <copy>
@@ -120,7 +120,7 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
 5. Exit HammerDB.
 
-6. Back in the *yellow* terminal, the script `capture_cc.sql` should be done by now. Examine the output. It lists how many statements it captured from the cursor cache and into the SQL Tuning Set.
+6. Back in the *yellow* terminal 🟨, the script `capture_cc.sql` should be done by now. Examine the output. It lists how many statements it captured from the cursor cache and into the SQL Tuning Set.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -146,7 +146,7 @@ Use HammerDB to start a workload. At the same time, capture workload information
 
 ## Task 4: Generate another AWR snapshot
 
-1. Still in the *yellow* terminal, create another AWR snapshot. Take note of the snapshot ID (e.g.: 117). You need it later on.
+1. Still in the *yellow* terminal 🟨, create another AWR snapshot. Take note of the snapshot ID (e.g.: 117). You need it later on.
 
     ```
     <copy>
@@ -552,4 +552,4 @@ Snapshots are sets of historical data for specific periods that are used for per
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024

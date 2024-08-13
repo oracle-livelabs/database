@@ -19,7 +19,7 @@ Although Data Pump can transfer statistics as part of a full transportable expor
 
 You can export statistics before the maintenance window begins. Most likely, the statistics will not change from now on, and even if they do, such changes shouldn't make a huge difference for the optimizer.
 
-1. Set the environment to the source database and connect.
+1. Use the *yellow* terminal 🟨. Set the environment to the source database and connect.
 
     ```
     <copy>
@@ -130,7 +130,7 @@ You can export statistics before the maintenance window begins. Most likely, the
 
 While executing an export or import job, Data Pump is querying the data dictionary heavily. To avoid any performance issues caused by inaccurate statistics, Oracle recommends gathering dictionary statistics close to the maintenance window.
 
-1. Gather dictionary statistics.
+1. Still in the *yellow* terminal 🟨. Gather dictionary statistics.
 
     ```
     <copy>
@@ -179,4 +179,4 @@ There are other means of dealing with the statistics than using `DBMS_STATS`. Al
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024
