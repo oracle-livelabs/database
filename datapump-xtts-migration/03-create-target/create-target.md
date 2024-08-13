@@ -19,7 +19,7 @@ In this lab, you will:
 
 In contrast to the source database, the target CDB is on Oracle Database 23ai. This means there are no minimum requirements for the Release Update. Nor is there a requirement for the Data Pump Bundle Patch. However, Oracle recommends that you install the latest Release Update in the target database prior to the migration.
 
-1. Set the environment to the target CDB, *CDB23*, and connect.
+1. Use the *blue* terminal 🟦. Set the environment to the target CDB, *CDB23*, and connect.
 
     ```
     <copy>
@@ -251,7 +251,26 @@ In contrast to the source database, the target CDB is on Oracle Database 23ai. T
 
 A few more changes are needed on the target database. Plus, Oracle has a few recommendations that help ensuring a smooth migration.
 
-1. Create a directory object that points to the file system directory you created in a previous lab. Data Pump needs this directory for the import.
+1. Ensure you are still in *VIOLET*.
+
+    ```
+    <copy>
+    show con_name
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> show con_name
+
+    CON_NAME
+    ------------------------------
+    VIOLET
+    ```
+    </details>
+
+2. Create a directory object that points to the file system directory you created in a previous lab. Data Pump needs this directory for the import.
 
     ```
     <copy>
@@ -310,4 +329,4 @@ Oracle recommends migrating to the same database character set. In some situatio
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024
