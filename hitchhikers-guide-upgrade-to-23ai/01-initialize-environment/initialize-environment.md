@@ -23,7 +23,7 @@ In this lab, you will:
 
 ![Click shortcut to start a terminal](./images/initialize-environment-desktop-click-terminal.jpeg " ")
 
-4. The terminal has two tabs, *Yellow* and *Blue*. The instructions might tell you which tab to use. If not, you can use any of them. All labs start by setting the appropriate environment.
+4. The terminal has two tabs, *yellow* 🟨 and *blue* 🟦. The instructions might tell you which tab to use. If not, you can use any of them. All labs start by setting the appropriate environment.
 
 5. Optionally, in the terminal, you can zoom in to make the text larger. 
 
@@ -44,7 +44,7 @@ In this lab, you will:
         - UPGR
         - CDB23
 
-2. Ensure the listener is started. Use the *yellow* tab.
+2. Ensure the listener is started. Use the *yellow* terminal 🟨.
 
     ```
     <copy>
