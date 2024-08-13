@@ -18,9 +18,8 @@ Watch the video below for a walk through of the In-Memory Queries lab:
 ### Prerequisites
 
 This lab assumes you have:
-- A Free Tier, Paid or LiveLabs Oracle Cloud account
+- LiveLabs Oracle Cloud account
 - You have completed:
-    - Get Started with noVNC Remote Desktop
     - Lab: Initialize Environment
     - Lab: Setting up the In-Memory Column Store
 
@@ -30,18 +29,12 @@ This lab assumes you have:
 
 Now that you’ve gotten familiar with the IM column store let’s look at the benefits of using it. You will execute a series of queries against the large fact table LINEORDER, in both the buffer cache and the IM column store, to demonstrate the different ways the IM column store can improve query performance above and beyond the basic performance benefits of accessing data in memory only.
 
-Reload the environment variables for **CDB1** if you exited the terminal after the previous lab
-
-```
-<copy>. ~/.set-env-db.sh CDB1</copy>
-```
-
 Let's switch to the queries folder and log back in to the PDB.
 
 ```
 <copy>
-cd /home/oracle/labs/inmemory/queries
-sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
+cd /home/oracle/workshops/inmemory/queries
+sqlplus /nolog
 </copy>
 ```
 
@@ -57,19 +50,13 @@ set lines 150
 Query result:
 
 ```
-[CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/queries
-[CDB1:oracle@dbhol:~/labs/inmemory/queries]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
+[oracle@livelabs aim23]$ cd /home/oracle/workshops/inmemory/queries
+[oracle@livelabs aim23]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
 
-SQL*Plus: Release 23.0.0.0.0 - Production on Fri May 31 17:21:31 2024
-Version 23.4.0.24.05
+SQL*Plus: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Mon Aug 12 16:50:16 2024
+Version 23.5.0.24.07
 
 Copyright (c) 1982, 2024, Oracle.  All rights reserved.
-
-Last Successful login time: Fri May 31 2024 17:19:47 -07:00
-
-Connected to:
-Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
-Version 23.4.0.24.05
 
 SQL> set pages 9999
 SQL> set lines 150
