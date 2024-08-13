@@ -360,6 +360,9 @@ In a real migration, you would shut down the applications using the database. Al
     -- Be sure to hit RETURN
     ```
 
+    * The driver script needs the name of the Data Pump dump file and the last RMAN restore log file.
+    * You could find the names manually, however, for simplicity the command finds them for you and assign them to environment variables, *DMPFILE* and *L1FLOGFILE*. 
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -375,7 +378,6 @@ In a real migration, you would shut down the applications using the database. Al
     ```
     </details>
 
-
 4. Start the import driver script in *test* mode. 
 
     ```
@@ -388,6 +390,7 @@ In a real migration, you would shut down the applications using the database. Al
     ```
 
     * This step simply generates the Data Pump import parameter file. 
+    * The last *N* indicates that the database is not encrypted.
 
     <details>
     <summary>*click to see the output*</summary>

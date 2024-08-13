@@ -171,6 +171,7 @@ In this lab, you will:
 
     ```
     <copy>
+    cd /home/oracle/m5/cmd
     export L1SCRIPT=$(ls -tr restore_L1_* | tail -1) 
     cd /home/oracle/m5
     . cdb23
