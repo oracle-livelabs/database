@@ -37,7 +37,7 @@ This lab assumes you have:
     </copy>
     ```
 
-4. **Grant the DB_DEVELOPER_ROLE to dmuser.**
+4. **Grant the DB\_DEVELOPER\_ROLE to dmuser.**
     ```
     <copy>
     GRANT DB_DEVELOPER_ROLE TO dmuser identified by Welcome_123456;
@@ -143,4 +143,4 @@ You may proceed to the next lab.
 ## Acknowledgements
 - **Authors** - Brianna Ambler, Database Product Management
 - **Contributors** - Brianna Ambler, Database Product Management
-- **Last Updated By/Date** - Brianna Ambler, August 2024
+- **Last Updated By/Date** - Dan Williams, August 2024
