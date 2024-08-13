@@ -21,7 +21,7 @@ In a real migration, you would shut down the applications using the database. Al
 
 1. The outage starts now.
 
-2. Start the final backup. When you start the driver script with *L1F*, it performs not only the final backup, but it also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. When prompted for *system password*, enter *ftexuser*.
+2. Use the *yellow* terminal 🟨. Start the final backup. When you start the driver script with *L1F*, it performs not only the final backup, but it also sets the tablespaces in *read-only* mode and starts a Data Pump full transportable export. When prompted for *system password*, enter *ftexuser*.
 
     ```
     <copy>
@@ -225,11 +225,11 @@ In a real migration, you would shut down the applications using the database. Al
     ```
     </details>
 
-3. Restore the backup.
+3. Switch to the *blue* terminal 🟦. Restore the backup.
 
     ```
     <copy>
-    cd cmd
+    cd /home/oracle/m5/cmd
     export L1FSCRIPT=$(ls -tr restore_L1F* | tail -1) 
     cd /home/oracle/m5
     . cdb23
@@ -245,7 +245,7 @@ In a real migration, you would shut down the applications using the database. Al
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cd cmd
+    $ cd /home/oracle/m5/cmd
     $ export L1FSCRIPT=$(ls -tr restore_L1F* | tail -1)
     $ cd /home/oracle/m5
     $ . cdb23
@@ -278,7 +278,7 @@ In a real migration, you would shut down the applications using the database. Al
 
 ## Task 2: Data Pump import
 
-1. Examine the import driver script. For the Data Pump transportable import, you use the import driver script `impdp.sh`. It's located in the script base folder. *Normally, you need to fill in information about your target database, but in this lab it is done for you*.
+1. Still in the *blue* terminal 🟦. Examine the import driver script. For the Data Pump transportable import, you use the import driver script `impdp.sh`. It's located in the script base folder. *Normally, you need to fill in information about your target database, but in this lab it is done for you*.
 
     ```
     <copy>
@@ -910,4 +910,4 @@ You may now *proceed to the next lab*.
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024
