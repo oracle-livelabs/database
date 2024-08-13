@@ -31,6 +31,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     export OCI_CLI_AUTH=instance_principal
     </copy>
     ```
+     ![OCI_CLI_AUTH](images/aivs_lab1_task1_step1.png)
 2. **Download the image from Object Storage.** 
 
     ```
@@ -38,6 +39,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     oci os object get -bn image_bucket -ns c4u04 --name adb-free-23ai.tar.gz --file /tmp/adb-free-23ai.tar.gz
     </copy>
     ```
+    ![IMAGE_DOWNLOAD](images/aivs_lab1_task1_step2.png)
 
 3. **Download the container installation files.** We'll be using three files to launch and configure the container. Read their descriptions below and proceed to downloading them with provided command.
 
@@ -50,6 +52,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     unzip -q /tmp/compose.zip
     </copy>
     ```
+    ![WGET_COMMAND](images/aivs_lab1_task1_step3.png)
 
 4. **Download the container resource files.** The following command downloads the vector embedding model and the sample schema (for the vector search labs) and copies it into the container. Refer to Appendix 1: Understanding the YAML File for more details.
 
@@ -59,7 +62,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     unzip -q /tmp/container-files.zip
     </copy>
     ```
-
+    ![WGET_COMMAND](images/aivs_lab1_task1_step4.png)
 5. **Load the image into the podman catalog. (~5 mins)** Our image has been downloaded locally. Podman-load copies the image from the local docker archive into the podman container storage. 
 
     ```
@@ -67,6 +70,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     podman load -i /tmp/adb-free-23ai.tar.gz
     </copy>
     ```
+    ![PODMAN_IMAGE_LOAD](images/aivs_lab1_task1_step5.png)
 
 6. **Launch the image.** The podman-compose command will configure and run the container image based on your YAML file. You can configure the ADB to be suited for any workload type. However, we've preset the workload type to ATP.
 
@@ -75,6 +79,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     podman-compose up
     </copy>
     ```
+    ![WGET_COMMAND](images/aivs_lab1_task1_step6.png)
 7. **Confirm the container is up and running in a new terminal tab.** In another tab of the terminal, run this command. 
 
       ```
@@ -82,6 +87,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     podman ps
     </copy>
     ```
+    ![PODMAN_PS](images/aivs_lab1_task1_step7.png)
 
 9. **Confirm the files were pre-loaded into the container.**
     ```
@@ -91,12 +97,14 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     podman exec -it oracle_adb-free_1 ls /u01/customer-orders
     </copy>
     ```
+    ![PODMAN_CONFIRM_PRELOADS](images/aivs_lab1_task1_step8.png)
 10. **Relocate tnsnames.ora in the container.** 'tnsnames.ora' is a configuration file, storing the database details necessary for connection. We're moving the file into a directory that's meant for our database for easy connection.
     ```
     <copy>
     podman exec -it oracle_adb-free_1 cp /u01/app/oracle/wallets/tls_wallet/tnsnames.ora /u01/app/oracle/product/23.0.0.0/dbhome_1/network/admin/tnsnames.ora
     </copy>
     ```
+    ![PODMAN_EXEC](images/aivs_lab1_task1_step9.png)
 
 
 
@@ -113,7 +121,8 @@ Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) prein
     ```  
 
 2. **Open Google Chrome.** Click Activities >> Google Chrome icon, to open a new Chrome window.
-
+    ![ACTIVITY_WINDOW](images/aivs_lab1_task2_step2.png)
+    
 3. **Launch ORDS.** Paste the following URL into your Chrome browser to Launch ORDS.
 
     ```
@@ -134,7 +143,7 @@ Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) prein
 5. **Launch APEX.** You now have access to Database Actions! Let's first click APEX to test it out.
 Click "Go to Oracle APEX".
 
-    ![ORDS landing page](images/launch_apex.png)
+    ![PODMAN_PS](images/aivs_lab1_task2_step7.png)
 
 6. **Sign-in to APEX.** 
 
@@ -151,8 +160,7 @@ Click "Go to Oracle APEX".
     https://localhost:8443/ords
     </copy>
     ```
-
-    ![Database Actions](images/ords_sql_developer.png)
+    ![PODMAN_PS](images/aivs_lab1_task2_step5.png)
 
 8. **Sign-in to SQL Developer Web.** 
 
@@ -204,4 +212,4 @@ You may proceed to the next lab.
 ## Acknowledgements
 - **Authors** - Brianna Ambler, Dan Williams Database Product Management, July 2024
 - **Contributors** - Brianna Ambler, Dan Williams,  Database Product Management
-- **Last Updated By/Date** - Brianna Ambler, August 2024
+- **Last Updated By/Date** - Dan Williams, August 2024
