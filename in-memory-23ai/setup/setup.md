@@ -22,9 +22,8 @@ Quick walk through on how to enable In-Memory.
 ### Prerequisites
 
 This lab assumes you have:
-- A Free Tier, Paid or LiveLabs Oracle Cloud account
+- LiveLabs Oracle Cloud account
 - You have completed:
-    - Get Started with noVNC Remote Desktop
     - Lab: Initialize Environment
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
@@ -35,18 +34,10 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
 
 1. Let's switch to the setup folder and log back in to the PDB:
 
-    Reload the environment variables for **CDB1** if you exited the terminal after the previous lab
-    
-    ```
-    <copy>. ~/.set-env-db.sh CDB1</copy>
-    ```
-
-    Connect to **PDB1**
-    
     ```
     <copy>
-    cd /home/oracle/labs/inmemory/setup
-    sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
+    cd /home/oracle/workshops/inmemory/setup
+    sqlplus /nolog
     </copy>
     ```
 
@@ -62,19 +53,13 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     Query result:
 
     ```
-    [CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/setup
-    [CDB1:oracle@dbhol:~/labs/inmemory/setup]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
+    [oracle@livelabs aim23]$ cd /home/oracle/workshops/inmemory/setup
+    [oracle@livelabs aim23]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
 
-    SQL*Plus: Release 23.0.0.0.0 - Production on Mon May 20 14:02:47 2024
-    Version 23.4.0.24.05
+    SQL*Plus: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Mon Aug 12 16:50:16 2024
+    Version 23.5.0.24.07
 
     Copyright (c) 1982, 2024, Oracle.  All rights reserved.
-
-    Last Successful login time: Mon May 20 2024 13:50:04 -07:00
-
-    Connected to:
-    Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
-    Version 23.4.0.24.05
 
     SQL> set pages 9999
     SQL> set lines 150
@@ -138,7 +123,7 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
 
     NAME                                 TYPE        VALUE
     ------------------------------------ ----------- ------------------------------
-    inmemory_size                        big integer 3312M
+    inmemory_size                        big integer 2800M
     SQL>
     SQL> show parameter inmemory_automatic_level
 
@@ -179,12 +164,12 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     SQL>
     SQL> show sga
 
-    Total System Global Area 8587393600 bytes
-    Fixed Size                  5380672 bytes
-    Variable Size             469762048 bytes
-    Database Buffers         4630511616 bytes
-    Redo Buffers                8855552 bytes
-    In-Memory Area           3472883712 bytes
+    Total System Global Area           8587393888 bytes
+    Fixed Size                            5380960 bytes
+    Variable Size                       989855744 bytes
+    Database Buffers                   4647288832 bytes
+    Redo Buffers                          8855552 bytes
+    In-Memory Area                     2936012800 bytes
     SQL>
     ```
 
@@ -229,7 +214,7 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
 
     POOL                      ALLOC_BYTES           USED_BYTES POPULATE_STATUS                CON_ID
     ---------------- -------------------- -------------------- -------------------------- ----------
-    1MB POOL                3,288,334,336                    0 DONE                                3
+    1MB POOL                2,785,017,856                    0 DONE                                3
     64KB POOL                 167,772,160                    0 DONE                                3
     IM POOL METADATA           16,777,216           16,777,216 DONE                                3
 
@@ -480,14 +465,67 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
 
     SQL>
     ```
+9.  Next we will run a Swingbench workload in order to generate enough workload to trigger the creation of AIM performance features. We will do this now to give the database time to analyze the workload and create any beneficial features. We will take a look at the results in the AIM lab.
 
-9. Lets also take a look at the current Heat Map statistics. Automatic In-Memory does not require that Heat Map be enabled, but under the covers it uses the same basic information. We will list that starting heat map statistics in this step and then we will take a look at the statistics in the last lab and compare that with how it affected AIM.  
+    Run the script *08\run\workload.sql
+```
+    <copy>
+    @08_run_workload.sql
+    </copy>    
+    ```
 
-    Run the script *08\_hm\_stats.sql*
+    or run the query below:  
 
     ```
     <copy>
-    @08_hm_stats.sql
+    set escape ^
+    host /usr/bin/nohup /home/oracle/swingbench/bin/charbench -c /home/oracle/inmemory/swingbench/SSB_Workload.xml ^&
+    prompt To view status of the Swingbench process exit sqlplus and type: tail -f nohup.out
+    prompt Use ctrl-C to exit
+    </copy>
+   ```
+
+    Query result:
+
+    ```
+    SQL> @08_run_workload.sql
+    Connected.
+
+    To view status of the Swingbench process exit sqlplus and type: tail -f nohup.out
+    Use ctrl-C to exit
+    SQL> /usr/bin/nohup: appending output to 'nohup.out'
+
+    SQL> exit
+    Disconnected from Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems
+    Version 23.5.0.24.07
+    [oracle@livelabs setup]$ tail -f nohup.out
+    Swingbench 
+    Author  :        Dominic Giles 
+    Version :        2.7.0.1470  
+
+    Results will be written to results.xml 
+    Hit Return to Terminate Run... 
+
+    Time            Users   TPM     TPS
+
+    ^C05:42 PM      1       87      4                                                         
+    [oracle@livelabs setup]$  sqlplus /nolog
+
+    SQL*Plus: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Thu Aug 8 18:05:53 2024
+    Version 23.5.0.24.07
+
+    Copyright (c) 1982, 2024, Oracle.  All rights reserved.
+
+    SQL>
+    ```
+
+10. Lets also take a look at the current Heat Map statistics. Automatic In-Memory does not require that Heat Map be enabled, but under the covers it uses the same basic information. We will list that starting heat map statistics in this step and then we will take a look at the statistics in the last lab and compare that with how it affected AIM.  
+
+    Run the script *09\_hm\_stats.sql*
+
+    ```
+    <copy>
+    @09_hm_stats.sql
     </copy>    
     ```
 

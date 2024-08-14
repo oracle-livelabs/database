@@ -30,7 +30,7 @@ You will test the migration by performing the final steps of the migration. Howe
 
 1. Outage starts on the source database.
 
-2. Set the environment to the source database.
+2. Use the *yellow* terminal 🟨. Set the environment to the source database.
 
     ```
     <copy>
@@ -270,11 +270,11 @@ You will test the migration by performing the final steps of the migration. Howe
     </copy>
     ```
 
-6. Restore the test backup.
+6. Switch to the *blue* terminal 🟦. Restore the test backup.
 
     ```
     <copy>
-    cd cmd
+    cd /home/oracle/m5/cmd
     export L1FSCRIPT=$(ls -tr restore_L1F* | tail -1) 
     . cdb23
     cd /home/oracle/m5
@@ -287,7 +287,7 @@ You will test the migration by performing the final steps of the migration. Howe
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cd cmd
+    $ cd /home/oracle/m5/cmd
     $ export L1FSCRIPT=$(ls -tr restore_L1F* | tail -1)
     $ . cdb23
     $ cd /home/oracle/m5
@@ -326,7 +326,7 @@ You will test the migration by performing the final steps of the migration. Howe
     export L1FLOGFILE=$(ls -tr restore_L1F*log | tail -1)
     cd /home/oracle/m5/m5dir
     export DMPFILE=$(ls -tr exp_FTEX*dmp | tail -1)
-    cd ..
+    cd /home/oracle/m5
     . cdb23
     ./impdp.sh $DMPFILE log/$L1FLOGFILE run-readonly N
     </copy>
@@ -805,7 +805,7 @@ You will test the migration by performing the final steps of the migration. Howe
 
 You just finished the test migration. You can connect to the target database and see the data.
 
-1. Connect to the target database, *CDB23*. 
+1. Still in the *blue* terminal 🟦. Connect to the target database, *CDB23*. 
 
     ```
     <copy>
@@ -883,7 +883,7 @@ You just finished the test migration. You can connect to the target database and
 
 Now that you are done testing, you use `FLASHBACK DATABASE` to undo the test import.
 
-1. Switch to the root container and restart the database in mount mode.
+1. Still in the *blue* terminal 🟦. Switch to the root container and restart the database in mount mode.
 
     ```
     <copy>
@@ -1016,7 +1016,7 @@ Now that you are done testing, you use `FLASHBACK DATABASE` to undo the test imp
 
 When the test completes and you reverted the changes, you can resume the backup/restore cycle.
 
-1. Set the environment to the source database and connect.
+1. Use the *yellow* terminal 🟨. Set the environment to the source database and connect.
 
     ```
     <copy>
@@ -1089,11 +1089,11 @@ When the test completes and you reverted the changes, you can resume the backup/
     ```
     </details>
 
-5. Restore the backup.
+5. Switch to the *blue* terminal 🟦. Restore the backup.
 
     ```
     <copy>
-    cd cmd
+    cd /home/oracle/m5/cmd
     export L1SCRIPT=$(ls -tr restore_L1_* | tail -1) 
     cd /home/oracle/m5
     . cdb23
@@ -1106,7 +1106,7 @@ When the test completes and you reverted the changes, you can resume the backup/
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cd cmd
+    $ cd /home/oracle/m5/cmd
     $ export L1SCRIPT=$(ls -tr restore_L1_* | tail -1)
     $ cd /home/oracle/m5
     $ . cdb23
@@ -1161,4 +1161,4 @@ During the test, you introduced a short outage on the source database. You chang
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024
