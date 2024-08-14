@@ -32,7 +32,7 @@ The same is true for scaling down using REMOVE SHARD and load balancing using MO
 
 
 1. We will add another shard named SHARD4 to this setup and see the redistribution happens for the RUs.
-Run in the terminal as **oracle** user to Create SHARD4 database container
+Run in the terminal window logged in as **oracle** user to Create SHARD4 database container
 
     ```
     <copy>
@@ -60,6 +60,7 @@ Run in the terminal as **oracle** user to Create SHARD4 database container
 
 
 3. Once the DB is up and running, run the below commands to complete the GSM configuration to deploy the new SHARD4:
+Run the below commands in a terminal window logged in as **oracle**.
 
     ```
     <copy>
@@ -77,7 +78,7 @@ Run in the terminal as **oracle** user to Create SHARD4 database container
     ![<shard4_deploy>](./images/t6-4-shard4-deploy.png " ")
 
 
-4. Connect to GSM1, run in the terminal as **oracle** user and connect to the shard director server and run the below command to view the ongoing rebalancing tasks. You have to wait until the rebalancing task completes.
+4. You can run below command as **oracle** to switch to **GSM**, if you are using a new terminal window.
 
     ```
     <copy>
@@ -86,6 +87,8 @@ Run in the terminal as **oracle** user to Create SHARD4 database container
     ```
 
     ![<connect to shard director>](./images/t6-4-connect-gsm1.png " ")
+
+    Run in ther terminal window switched to **GSM** to view the ongoing rebalancing tasks. You have to wait until the rebalancing task completes.
 
      ```
     <copy>
@@ -97,7 +100,7 @@ Run in the terminal as **oracle** user to Create SHARD4 database container
 
     ![<config_task_not pending_status>](./images/t6-4-config-task-not-pending.png " ")
 
-5. Exit from GSM1 and Run the below command as **oracle** user to validate the database shard4 container is healthy.
+5. Run the below command in terminal window logged in as **oracle** user to validate the database shard4 container is healthy.
 
     ```
     <copy>
@@ -107,8 +110,7 @@ Run in the terminal as **oracle** user to Create SHARD4 database container
 
     ![<add_shard4_container_validation>](./images/t6-5-add-shard4-container-validation.png " ")
 
-6. Connect to GSM1, run in the terminal as **oracle** user and connect to the shard director server.
-
+6. Run the below command as **oracle** to switch to **GSM**, if you are using a new terminal window.
     ```
     <copy>
     sudo podman exec -i -t gsm1 /bin/bash
@@ -116,7 +118,7 @@ Run in the terminal as **oracle** user to Create SHARD4 database container
     ```
 
 
- 7. Run below command to verify that, shard4 has been deployed.
+ 7. Run the below command in a terminal window that is switched to **GSM** to verify that, shard4 has been deployed.
 
     ```
     <copy>
@@ -124,7 +126,7 @@ Run in the terminal as **oracle** user to Create SHARD4 database container
     </copy>
     ```
 
-   ![<add_shard4_validation>](./images/t6-7-shard4-config-shard.png " ")
+    ![<add_shard4_validation>](./images/t6-7-shard4-config-shard.png " ")
 
 8. Run below command to check the configuration of chunks.
 
@@ -200,13 +202,14 @@ Use MOVE RU to move a follower replica of a replication unit from one shard data
 
     ![<ru_status_before_move_ru>](./images/t7-2-ru-status-before-move-ru.png " ")
 
-3. Choose the RU with the role follower  associated with the respective shard and move to a shard which is NOT having that RU Replica. 
+3. Choose the RU with the role follower associated with the respective shard and move to a shard which is NOT having that RU Replica. 
+Following is the example used in the live labs environment.
+User has to substitute values as per their environment.
 
     ```
-    <copy>
     gdsctl move ru -ru 1 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
-    </copy>
     ```
+
     ![<MOVE_RU>](./images/t7-3-move-ru.png " ")
 
 4.  Please check the status of the RU that you just moved.
@@ -239,7 +242,7 @@ Copy a replication unit from one shard database to another using COPY RU. This a
  
     When we use the replace option, the copy is done and also the replica is removed from the shard which is specified with the replace option thus keeping the replica count to be 3.
 
-    Connect to GSM1, run in the terminal as **oracle** user and connect to the shard director server.
+    Connect to GSM1, run in the terminal as **oracle** user and connect to the **GSM**, if you a are using a new terminal.
    
     ```
     <copy>
@@ -247,7 +250,7 @@ Copy a replication unit from one shard database to another using COPY RU. This a
     </copy>
     ```
 
-2. Connect with GSM1 and run the below command to check the status.
+2.  Run the below command to check the status.
     
     ```
     <copy>
@@ -361,12 +364,12 @@ gdsctl status ru -ru 2
 
 ![<status_ru_after_switchover>](./images/t9-2a-status-ru-after-switchover.png " ")
 
-Move the RU follower using below command, if required
+Move the RU follower using below command, if required.
+This is an example command based on the current environment.
+User has to substitute values basis their environment.
 
 ```
-<copy>
 gdsctl move ru -ru 8 -source orcl1cdb_orcl1pdb -target orcl2cdb_orcl2pdb 
-</copy>
 ```
 
 ![<move_ru_a>](./images/t9-2-move-ru.png " ")
@@ -389,25 +392,25 @@ gdsctl status ru -ru 2
 
 
 2. Run the below command to relocate the chunk from GSM1:
+This is an example command based on the current live labs environment.
+  User has to substitute values basis their environment.
 
-```
-<copy>
-gdsctl relocate chunk -chunk 3 -sourceru 8 -targetru 2 
-</copy>
-```
+   ```
+   gdsctl relocate chunk -chunk 3 -sourceru 8 -targetru 2 
+   ```
 
-![<relocate_chunk>](./images/t9-2-relocate_chunk.png " ")
+   ![<relocate_chunk>](./images/t9-2-relocate_chunk.png " ")
 
 
 3. Please check the status of the chunks and RU, after relocate completes.
 
-```
-<copy>
-gdsctl status ru -show_chunks
-</copy>
-```
+   ```
+   <copy>
+   gdsctl status ru -show_chunks
+   </copy>
+   ```
 
-![<staus_chunks_ru_after_relocate>](./images/t9-3-status_chunks.png " ")
+   ![<staus_chunks_ru_after_relocate>](./images/t9-3-status_chunks.png " ")
 
 ## Task 5: Scale Down with Raft Replication
 
@@ -425,6 +428,8 @@ gdsctl status ru -show_chunks
 
 2. We want to Scale Down by removing the SHARD4.
 We will first change the replication unit leaders from shard4 to other shards and move the RUs from the SHARD4 to other shards
+These are commands based on the current environment.
+User has to substitute values basis their environment.
 
 ```
 <copy>
@@ -522,7 +527,7 @@ gdsctl status ru -show_chunks
 ![<chunk_status_after_move_ru>](./images/t10-3-chunk-status-after-move-ru.png " ")   
 
 4. Move the chunks out of the SHARD4 before we can delete this SHARD:
-  Run this command from GSM1.
+  Run this command from **GSM**.
 
 ```
 <copy>
@@ -583,7 +588,7 @@ gdsctl status ru -show_chunks
 
 ![<status_after_Scale_down>](./images/t10-7b-status-after-scale-down.png " ")
     
-8. Stop and remove the shard4 container. Shard4 container is up before stop and remove.
+8. Run the below command in a terminal window logged in as **oracle** to stop and remove the shard4 container. Shard4 container is up before stop and remove.
 
 ![<rm_shard4>](./images/t10-8-stop-rm-shard4-container.png " ")
 
@@ -609,8 +614,16 @@ sudo podman ps -a
 
 ![<podman_stop>](./images/t10-9-after-scale-down-podman.png " ")
 
+10. Run the below command in terminal that is switched to **GSM**,to  auto rebalance the leaders.
 
-You may now proceed to the next lab.
+    ```
+    <copy>
+    gdsctl switchover ru -rebalance
+    </copy>
+    ```
+    ![<change_the_ru_leader>](./images/t3-2-auto-rebalance.png " ")
+
+This is the end of the Raft Replication Workshop.
 
 
 ## **Appendix 1**: Raft Replication Overview

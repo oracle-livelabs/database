@@ -40,15 +40,15 @@
       "filename": "../../advanced-use-cases/advanced-use-cases.md"
     },
     {
-      "title": "Lab 6: Demo UI Application for Raft Replication",
-      "description": "Demo UI Application for Raft Replication",
-      "filename": "../../ui-app/raft-demo-ui-app.md"
-    },
-    {
-       "title": "Lab 7: Clean up Stack and Instances",
+       "title": "Lab 6: Clean up Stack and Instances",
        "description": "Clean up ORM Stack and instances",
        "filename": "../../cleanup/cleanup.md"
      },
+    {
+      "title": "Appendix: Demo UI Application for Raft Replication",
+      "description": "Demo UI Application for Raft Replication",
+      "filename": "../../ui-app/raft-demo-ui-app.md"
+    },
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",

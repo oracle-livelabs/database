@@ -33,7 +33,33 @@ This lab assumes you have:
 
 ## Task 1: Check for containers in your VM
 
-1. Open a terminal window and execute below as **opc** user.
+1. Please open three terminal windows.
+
+   First terminal logged in as **oracle** user.
+
+    ![<terminal_oracle>](./images/terminal-1-oracle.png " ")
+
+    Second Terminal switched to **GSM** level.
+
+   ```
+    <copy>
+    sudo podman exec -i -t gsm1 /bin/bash
+    </copy>
+    ```
+
+    ![<terminal_gsm>](./images/terminal-2-gsm.png " ")
+
+    Third Terminal switched to **appclient** container.
+
+     ```
+     <copy>
+     sudo podman exec -it appclient /bin/bash
+     </copy>
+     ```
+
+   ![<terminal_appclient>](./images/terminal-3-appclient.png " ")
+
+2. On a terminal window, execute below as **oracle** user.
 
     ```
     <copy>
@@ -53,7 +79,8 @@ Changes to data made by a DML are recorded in the Raft log. A commit record is a
 
 For more details check [Raft Replication Configuration and Management] (https://docs.oracle.com/en/database/oracle/oracle-database/23/shard/raft-replication.html#GUID-AF14C34B-4F55-4528-8B28-5073A3BFD2BE)
 
-1. Run in the terminal as **oracle** user and connect to the shard director server.
+1. Run the below command to switch to **GSM**, if you are using a new terminal.
+
     ```
     <copy>
     sudo podman exec -i -t gsm1 /bin/bash
@@ -62,7 +89,7 @@ For more details check [Raft Replication Configuration and Management] (https://
 
     ![<connect to GSM1>](./images/t2-1-podman-gsm1.png " ")
 
-2. Verify sharding topology using the  **CONFIG** command.
+2. Use the terminal window that is switched to **GSM**. Verify sharding topology using the  **CONFIG** command.
 
     ```
     <copy>
@@ -105,9 +132,11 @@ For more details check [Raft Replication Configuration and Management] (https://
 
 ## Task 3: Changing the Replication Unit Leader
 
-Using SWITCHOVER RU, you can change which replica is the leader for the specified replication unit. The -db option makes the specified database the new leader of the given RU. 
+   Using SWITCHOVER RU, you can change which replica is the leader for the specified replication unit.
 
-1. Run the below command on GSM1 to view the status of all the leaders
+   The -shard option makes the replication unit member on the specified shard database the new leader of the given RU. 
+
+1. Run the below command on **GSM** terminal window to view the status of all the leaders
 
     ```
     <copy>
@@ -154,29 +183,22 @@ Using SWITCHOVER RU, you can change which replica is the leader for the specifie
     ![<leader_status_after_change>](./images/t3-5-status-after-leader-change.png " ")
 
 
-6. Exit from GSM1.
-   
-    ```
-    <copy>
-    exit
-    </copy>
-    ``` 
-    ![<t3-6-exit-gsm1>](./images/t3-6-exit-gsm1.png " ")
 
 ## Task 4: Run the workload
 
 Please use the below steps to run the workload using the "app_schema" account with the available configuration files on the "appclient" container:
 
-1.  Switch to the "appclient" container
+1.  You can use the below command if you need to switch to appclient container in a new terminal window.
 
     ```
     <copy>
     sudo podman exec -it appclient /bin/bash
     </copy>
     ```
+
    ![<appclient_container>](./images/t4-1-appclient-container.png " ")
 
-2. Switch to the "oracle" user
+2. Use the terminal window that is switched to the "appclient" container. Switch to the "oracle" user.
 
     ```
     <copy>
@@ -208,8 +230,8 @@ Please use the below steps to run the workload using the "app_schema" account wi
 
     ![<run_workload>](./images/t4-4-run-workload.png " ")
 
-5. During this time, you can continue to check the RU details from another session on the "gsm1" container from "gdsctl" prompt.
-Notice that the log index is increasing as there are read and write operations are going on.
+5. During this time, you can continue to check the RU details from another terminal window switched to  **gsm** .
+Notice that the log index is increasing as read and write operations are going on.
 
     ```
     <copy>
@@ -227,7 +249,7 @@ Notice that the log index is increasing as there are read and write operations a
 What happens when one of the available shard databases goes down or is taken down for maintenance? 
 Failover test by stopping shard1 to create shard1 down situation. 
 
-1.  Run the below command as **oracle** user to check the status for all the containers.
+1.  You can run the below command in a terminal window logged in as **oracle** user to check the status for all the containers.
 
     ```
     <copy>
@@ -249,13 +271,15 @@ Failover test by stopping shard1 to create shard1 down situation.
     ![<stop_shard_1>](./images/t5-2-stop-shard1.png " ")  
 
 
-3. Switch to GSM1 on another terminal session and check the status for RU's and you will see that database orcl1cdb_orcl1pdb is not present.
+3. Below command can be used to switch to **GSM**, if you are using a new terminal.
 
     ```
     <copy>
     sudo podman exec -i -t gsm1 /bin/bash
     </copy>
     ```
+
+   Run below in the terminal window that is switched to **GSM** and check the status of shards, RU's and you will see that database orcl1cdb_orcl1pdb is not present.
 
     ```
     <copy>
@@ -273,7 +297,8 @@ Failover test by stopping shard1 to create shard1 down situation.
 
 You will see that shard1 down situation has no impact on the running workload.
 
-4. Start the shard1 using the podman start command, to reflect that shard1 is joining back.
+4. On a terminal window logged in as **oracle**.
+Start the shard1 using the podman start command, to reflect that shard1 is joining back.
 
     ```
     <copy>
@@ -284,13 +309,15 @@ You will see that shard1 down situation has no impact on the running workload.
     ![<start_shard1>](./images/t5-4-startup-shard1.png " ")
 
 
-5. On a parallel session switch to GSM1, check the status of shard, RU's and see that shard1 has joined back.
+5. You can use the below command as **oracle** to switch to **GSM**.
 
     ```
     <copy>
     sudo podman exec -i -t gsm1 /bin/bash
     </copy>
     ```
+
+    On a terminal window switched to **GSM**, check the status of shard, RU's and see that shard1 has joined back.
 
     ```
     <copy>
@@ -307,6 +334,16 @@ You will see that shard1 down situation has no impact on the running workload.
     ![<chunk_status_after_startup_shard1>](./images/t5-5-status-chunks-after-startup-shard1.png " ")  
     
 You can stop the workload that ran in the previous task using Ctrl+C.
+
+6. Run the below command in terminal that is switched to **GSM** to  auto rebalance the leaders.
+
+    ```
+    <copy>
+    gdsctl switchover ru -rebalance
+    </copy>
+    ```
+    ![<change_the_ru_leader>](./images/t3-2-auto-rebalance.png " ")
+
 
 
 ## Task 6: Raft Replication Demo with UI Application 
@@ -329,7 +366,7 @@ Verify where the leadership is for User No. 1's shard in the Demo UI.
 
 ![<demo_ui_app_more_details>](./images/demo-ui-app-more-det-3.png " ")  
 
-4. Go to the terminal and stop that shard.
+4. Go to the terminal window logged in as **oracle** and stop that shard.
 
     ```
     <copy>
@@ -337,11 +374,15 @@ Verify where the leadership is for User No. 1's shard in the Demo UI.
     </copy>
     ```
 
+    You can use below command to switch to **GSM**.
+    
     ```
     <copy>
     sudo podman exec -i -t gsm1 /bin/bash
     </copy>
     ```
+
+   Run the below command in terminal window that is switched to **GSM**, to see the status of the shard.
 
     ```
     <copy>
@@ -349,7 +390,7 @@ Verify where the leadership is for User No. 1's shard in the Demo UI.
     </copy>
     ```
 
-![<demo_ui_app_stop_shard>](./images/demo-ui-app-stop-shard-4.png " ")  
+    ![<demo_ui_app_stop_shard>](./images/demo-ui-app-stop-shard-4.png " ")  
 
 5. Return to the Demo UI App browser window on "More Details" tab and click on "Refresh" button to observe that the leadership has automatically moved to another shard, indicating re-routing of the request.
 
@@ -373,7 +414,7 @@ Check the count in browser window before running the workload.
 
 Note that while the shard is stopped, you can still run the workload.
 
-Switch to the "appclient" container
+If you are using a new terminal, you can use below command as **oracle** to switch to **appclient** container and the switch to the "oracle" user and then change the path to $DEMO_MASTER location.
 
 ```
 <copy>
@@ -381,15 +422,11 @@ sudo podman exec -it appclient /bin/bash
 </copy>
 ```
 
-Switch to the "oracle" user
-
 ```
 <copy>
 su - oracle
 </copy>
 ```
-
-Change the path to $DEMO_MASTER location
 
 ```
 <copy>
@@ -399,7 +436,7 @@ ls -rlt
 </copy>
 ```
 
-Run the workload using the below command
+Run the workload using the below command in a terminal window that is switched to **appclient** container.
 
 ```
 <copy>
@@ -413,28 +450,37 @@ sh run.sh demo
 ![<demo_ui_app_run_workload>](./images/demo-ui-app-run-workload-7b.png " ")  
 
 
-Refresh the browser window for Demo UI application and you will observe that the count is increasing in the Demo UI even though the shard is stopped.
+ Refresh the browser window for Demo UI application and you will observe that the count is increasing in the Demo UI even though the shard is stopped.
 
 
-![<demo_ui_app_inc_after_workload>](./images/demo-ui-app-count-inc-after-workload-7c.png " ")  
+   ![<demo_ui_app_inc_after_workload>](./images/demo-ui-app-count-inc-after-workload-7c.png " ")  
 
 
 8. Stop the Workload.
 
-You can stop the workload that ran in the previous task using Ctrl+C.
+    You can stop the workload that ran in the previous task using Ctrl+C.
 
-9. Now, we are going to perform delete operation through Demo UI Application.
+9. Run the below command in terminal that is switched to **GSM** to  auto rebalance the leaders.
 
-Take a look at the count before clicking on delete button.
+    ```
+    <copy>
+    gdsctl switchover ru -rebalance
+    </copy>
+    ```
+    ![<change_the_ru_leader>](./images/t3-2-auto-rebalance.png " ")
 
-![<demo_ui_app_count_before_del>](./images/demo-ui-app-count-before-delete-9.png " ")  
+10. Now, we are going to perform delete operation through Demo UI Application.
 
-Click on Delete button in the browser window and delete few users. You will notice that the count is decreasing.
-s
-![<demo_ui_app_after_del_count>](./images/demo-ui-app-after-del-count-9a.png " ")  
+   Take a look at the count before clicking on delete button.
+
+   ![<demo_ui_app_count_before_del>](./images/demo-ui-app-count-before-delete-9.png " ")  
+
+   Click on Delete button in the browser window and delete few users. You will notice that the count is decreasing.
+
+   ![<demo_ui_app_after_del_count>](./images/demo-ui-app-after-del-count-9a.png " ")  
 
 
-11. Start the shard and see that the shard1 is joining back.
+11. Run the below command in terminal window logged in as **oracle**. Start the shard and see that the shard1 is joining back.
 
     ```
     <copy>
@@ -442,7 +488,24 @@ s
     </copy>
     ```
 
-![<demo_ui_app_start_shard>](./images/demo-ui-app-start-shard-11.png " ")  
+    Run the below command in terminal that is switched to **GSM** to check the status of the shard.
+
+    ```
+    <copy>
+    gdsctl config shard
+    </copy>
+    ```
+
+    ![<demo_ui_app_start_shard>](./images/demo-ui-app-start-shard-11.png " ")  
+
+12. Run the below command in terminal that is switched to **GSM** to  auto rebalance the leaders.
+
+    ```
+    <copy>
+    gdsctl switchover ru -rebalance
+    </copy>
+    ```
+    ![<change_the_ru_leader>](./images/t3-2-auto-rebalance.png " ")
 
 
 You may now proceed to the next lab.
