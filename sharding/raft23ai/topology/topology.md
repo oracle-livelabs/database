@@ -41,25 +41,25 @@ This lab assumes you have:
 
     Second Terminal switched to **GSM** level.
 
-   ```
+    ```
     <copy>
     sudo podman exec -i -t gsm1 /bin/bash
     </copy>
     ```
-
+    
     ![<terminal_gsm>](./images/terminal-2-gsm.png " ")
 
     Third Terminal switched to **appclient** container.
 
-     ```
-     <copy>
-     sudo podman exec -it appclient /bin/bash
-     </copy>
-     ```
+    ```
+    <copy>
+    sudo podman exec -it appclient /bin/bash
+    </copy>
+    ```
 
-   ![<terminal_appclient>](./images/terminal-3-appclient.png " ")
+    ![<terminal_appclient>](./images/terminal-3-appclient.png " ")
 
-2. On a terminal window, execute below as **oracle** user.
+2. Run the below command on terminal window that is logged in as  as **oracle** user.
 
     ```
     <copy>
@@ -394,63 +394,63 @@ Verify where the leadership is for User No. 1's shard in the Demo UI.
 
 5. Return to the Demo UI App browser window on "More Details" tab and click on "Refresh" button to observe that the leadership has automatically moved to another shard, indicating re-routing of the request.
 
-![<demo_ui_app_refresh_more_details>](./images/demo-ui-app-refresh-more-det-5.png " ")  
+    ![<demo_ui_app_refresh_more_details>](./images/demo-ui-app-refresh-more-det-5.png " ")  
 
 6. Go to the first update tab in Demo UI Application and change the class.
 
-![<demo_ui_app_update_class>](./images/demo-ui-app-update-class-6.png " ")  
+    ![<demo_ui_app_update_class>](./images/demo-ui-app-update-class-6.png " ")  
 
-Go to the next update tab and refresh it to see that change in class.
+    Click on the next update tab and refresh it to see that change in class.
 
-![<demo_ui_app_class_updated>](./images/demo-ui-app-class-updated-6.png " ")  
+    ![<demo_ui_app_class_updated>](./images/demo-ui-app-class-updated-6.png " ")  
 
 
 7. Run the Workload and check the count of customers in Demo UI App.
 
-Check the count in browser window before running the workload.
+   Check the count in browser window before running the workload.
 
-![<demo_ui_check_count_before_workload>](./images/demo-ui-app-checkcount-before-workload-7.png " ")  
-
-
-Note that while the shard is stopped, you can still run the workload.
-
-If you are using a new terminal, you can use below command as **oracle** to switch to **appclient** container and the switch to the "oracle" user and then change the path to $DEMO_MASTER location.
-
-```
-<copy>
-sudo podman exec -it appclient /bin/bash
-</copy>
-```
-
-```
-<copy>
-su - oracle
-</copy>
-```
-
-```
-<copy>
-cd $DEMO_MASTER
-pwd
-ls -rlt
-</copy>
-```
-
-Run the workload using the below command in a terminal window that is switched to **appclient** container.
-
-```
-<copy>
-sh run.sh demo
-</copy>
-```
-
-![<demo_ui_app_run_workload_a>](./images/demo-ui-app-run-workload-7a.png " ")  
+   ![<demo_ui_check_count_before_workload>](./images/demo-ui-app-checkcount-before-workload-7.png " ")  
 
 
-![<demo_ui_app_run_workload>](./images/demo-ui-app-run-workload-7b.png " ")  
+   Note that while the shard is stopped, you can still run the workload.
+
+   If you are using a new terminal, you can use below command as **oracle** to switch to **appclient** container and the switch to the "oracle" user and then change the path to $DEMO_MASTER location.
+
+   ```
+   <copy>
+   sudo podman exec -it appclient /bin/bash
+   </copy>
+   ```
+
+   ```
+   <copy>
+   su - oracle
+   </copy>
+   ```
+
+   ```
+   <copy>
+   cd $DEMO_MASTER
+   pwd
+   ls -rlt
+   </copy>
+   ```
+
+   Run the workload using the below command in a terminal window that is switched to **appclient** container.
+
+   ```
+   <copy>
+   sh run.sh demo
+   </copy>
+   ```
+
+   ![<demo_ui_app_run_workload_a>](./images/demo-ui-app-run-workload-7a.png " ")  
 
 
- Refresh the browser window for Demo UI application and you will observe that the count is increasing in the Demo UI even though the shard is stopped.
+   ![<demo_ui_app_run_workload>](./images/demo-ui-app-run-workload-7b.png " ")  
+
+
+   Refresh the browser window for Demo UI application and you will observe that the count is increasing in the Demo UI even though the shard is stopped.
 
 
    ![<demo_ui_app_inc_after_workload>](./images/demo-ui-app-count-inc-after-workload-7c.png " ")  
