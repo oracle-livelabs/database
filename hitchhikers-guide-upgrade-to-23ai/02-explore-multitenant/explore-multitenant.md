@@ -26,7 +26,7 @@ This is an optional lab. You can skip it if you are already familiar with multit
 
 You connect to the CDB, find a list of PDBs and connect to them using different means.
 
-1. Use the *yellow* terminal. Set the environment to *CDB23* and connect.
+1. Use the *yellow* terminal 🟨. Set the environment to *CDB23* and connect.
 
     ```
     <copy>
@@ -627,7 +627,7 @@ You check DBA and CDB views.
 
 You want to run a script in a CDB including all PDBs.
 
-1. Remain in the *yellow* terminal. 
+1. Remain in the *yellow* terminal 🟨. 
 
 2. The Oracle home contains a program that can execute scripts in a CDB. Explore the options of *catcon.pl*.
 
@@ -796,4 +796,4 @@ You may now *proceed to the next lab*.
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024

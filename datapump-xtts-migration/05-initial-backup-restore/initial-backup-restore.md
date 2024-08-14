@@ -18,7 +18,7 @@ In this lab, you will:
 
 ## Task 1: Start initial backup
 
-1. Set the environment to the source database and switch to the script base.
+1. Use the *yellow* terminal 🟨. Set the environment to the source database and change to the script base.
 
     ```
     <copy>
@@ -179,7 +179,7 @@ In this lab, you will:
 
 ## Task 2: Perform initial restore
 
-1. The backup also generated a restore script that you can use on the target database. Find the restore script. 
+1. Switch to the *blue* terminal 🟦. The backup also generated a restore script that you can use on the target database. Find the restore script. 
 
     ```
     <copy>
@@ -310,4 +310,4 @@ In a real migration, if you are worried about the load on the source database, a
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024
