@@ -46,7 +46,7 @@ This lab assumes you have:
     sudo podman exec -i -t gsm1 /bin/bash
     </copy>
     ```
-    
+
     ![<terminal_gsm>](./images/terminal-2-gsm.png " ")
 
     Third Terminal switched to **appclient** container.
