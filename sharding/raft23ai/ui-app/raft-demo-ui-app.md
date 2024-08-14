@@ -146,10 +146,6 @@ In the bottom of the "More Details" page a link to Home Page is shown to return 
 
 In addition to above information, the results from Lab "Explore Raft Replication Advanced Use-Cases" tasks e.g., for Raft Replication failovers, Scale UP or Scale Down, Move or Copy Replication Unit Replicas etc. all can be verified from Raft Demo UI.
 
-This is the end of the Raft Replication Workshop.
-
-## Rate this Workshop
-When you are finished, don't forget to rate this workshop!  We rely on this feedback to help us improve and refine our LiveLabs catalog.  Follow the steps to submit your rating.
 
 ## Acknowledgements
 * **Authors** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, Consulting Member of Technical Staff
