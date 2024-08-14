@@ -39,25 +39,25 @@ This lab assumes you have:
 
     ![<terminal_oracle>](./images/terminal-1-oracle.png " ")
 
-    Second Terminal switched to **GSM** level.
+   Second Terminal switched to **GSM** level.
 
-    ```
-    <copy>
-    sudo podman exec -i -t gsm1 /bin/bash
-    </copy>
-    ```
+   ```
+   <copy>
+   sudo podman exec -i -t gsm1 /bin/bash
+   </copy>
+   ```
 
-    ![<terminal_gsm>](./images/terminal-2-gsm.png " ")
+   ![<terminal_gsm>](./images/terminal-2-gsm.png " ")
 
-    Third Terminal switched to **appclient** container.
+   Third Terminal switched to **appclient** container.
 
-    ```
-    <copy>
-    sudo podman exec -it appclient /bin/bash
-    </copy>
-    ```
-
-    ![<terminal_appclient>](./images/terminal-3-appclient.png " ")
+   ```
+   <copy>
+   sudo podman exec -it appclient /bin/bash
+   </copy>
+   ```
+   
+   ![<terminal_appclient>](./images/terminal-3-appclient.png " ")
 
 2. Run the below command on terminal window that is logged in as  as **oracle** user.
 
