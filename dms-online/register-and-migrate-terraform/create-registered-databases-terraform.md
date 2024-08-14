@@ -1,8 +1,9 @@
-# Create Registered Databases
+# Create Database Connections
 
 ## Introduction
 
-This lab walks you through the steps to register a database for use with DMS. Registered database resources enable networking and connectivity for the source and target databases
+This lab walks you through the steps to create a database connections to use with DMS. Database connection resources enable networking and connectivity for the source and target databases.
+You will also create and Online Migration leveraging the integrated GoldenGate feature available in DMS.
 
 Estimated Lab Time: 20 minutes
 
@@ -12,10 +13,10 @@ Watch the video below for a quick walk-through of the lab.
 ### Objectives
 
 In this lab, you will:
-* Create Registered Database for Source CDB
-* Create Registered Database for Source PDB
-* Create Registered Database for Target ADB
-* Create a Migration
+* Create a Database Connection for Source CDB
+* Create a Database Connection for Source PDB
+* Create a Database Connection for Target ADB
+* Create an Online Migration
 
 ### Prerequisites
 
@@ -26,207 +27,190 @@ In this lab, you will:
 * Source DB PDB Service Name available in Terraform output
 * Database Administrator Password available in Terraform output
 
-## Task 1: Download generated private key from Object Storage
-
-In this task you need to download a private key file to your local machine to be used to register databases in this lab. Please be advised that this private key is different from any keys you have provided to LiveLabs, it has been generated specifically for you to access the database and GoldenGate environments provided by the lab.
-
-1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Storage > Object Storage & Archive Storage > Buckets**
-
-![Screenshot of Object Storage navigation](images/buckets-navigation.png =90%x*)
-
-2. If you see an error message or are not yet in the compartment assigned to you by LiveLabs, please change to the correct compartment in the left hand compartment menu. The compartment will be **(root) > Livelabs > LL#####-COMPARTMENT**, with ##### being your user number
-
-3. Select the bucket named **DMSStorage-#####** with ##### being the number of your user.
-![Screenshot of buckets list](images/buckets-list.png =90%x*)
-
-4. In the Objects list of bucket **DMSStorage-#####**, there is a file named **privatekey.txt**. Click on the right-hand context menu on the row and select **Download**. You can locate the file in the download folder of your browser.
-![Screenshot of private key file download](images/buckets-download.png =90%x*)
-
-## Task 2: Create Registered Database for Source CDB
+## Task 1: Create Database Connection for Source CDB
 
 For this task you need the following info from previous steps:
 * Source DB Public IP
 * Source DB CDB Service Name
 * Database Administrator Password
-* Private Key File
 
-1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Registered Databases**
+1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-  ![Screenshot of Registered Databases navigation](images/registered-db.png =90%x*)
+  ![Screenshot of Database Connections navigation](images/db-connection.png =90%x*)
 
-2. Press **Register Database**
+2. Select your assigned compartment. Identify the value assigned to you in the **Reservation Information** then in OCI go to the **Compartment** field and look for the value under Root / Livelabs, an example is displayed below:
 
-  ![Screenshot of click register db](images/click-register-db.png =90%x*)
+  ![Screenshot to select compartment](images/compartment-selection.png =90%x*)
 
-3. On the page Database Details, fill in the following entries, otherwise leave defaults:
+3. Press **Create connection**
+
+  ![Screenshot of click create connection](images/create-connection.png =90%x*)
+
+4. On the page General information, fill in the following entries, otherwise leave defaults:
     - Name: **SourceCDB**
+    - Type: **Oracle Database**
     - Vault: **DMSVault**
     - Encryption Key: **DMSKey**
-    - Choose **Manually configure database**
-    - Database Type: **Oracle**
-    - Host: Select **DBCS Public IP** value from Terraform output
-    - Port: **1521**
-    - Connect String: Select **DBCS CDB Service** value from Terraform output
+    
+5. Press **Next**
+
+  ![Screenshot of database details and click next](images/database-details-cdb.png =50%x*)
+
+6. On the page Connection details, fill in the following entries, otherwise leave defaults:
+    - Database details, select **Enter database information**
+    - Database connection string (use this format host:port/db service name): **DBCS Public IP**:**1521**/**DBCS CDB Service** get this values from the terraform output
+    - Initial load database username: **system**
+    - Initial load database password: Select **Admin Password** value from Terraform output
+    - Select **Use different credentials for replication**
+    - Replication database username: **c##ggadmin**
+    - Replication database password: Select **Admin Password** value from Terraform output
 
     The checkbox **Create private endpoint to access this database** needs to stay unchecked.
 
-4. Press **Next**
+7. Press **Create**
 
-  ![Screenshot of register DB details and click next](images/register-db-next.png =50%x*)
+  ![Screenshot of  confirm create connection](images/connection-details-cdb.png =50%x*)
 
-5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
-    - Database Administrator Username: **system**
-    - Database Administrator Password: Select **Admin Password** value from Terraform output
-    - SSH Database Server Hostname: Select **DBCS Public IP** value from Terraform output
-    - SSH Private Key: Select private key file saved earlier
-    - SSH Username: **opc**
-    - SSH Sudo Location: **/usr/bin/sudo**
+8. Press **Test connection** to confirm that your Database Connection details are correct
 
-6. Press **Register**
+  ![Screenshot of CDB connection test](images/test-cdb.png =50%x*)
+    - If the test is not successful, correct your connection details and try again.
 
-  ![Screenshot of  confirm register DB](images/register-db-confirm.png =50%x*)
+  ![Screenshot of close connection test](images/close-test.png =50%x*)  
 
-## Task 3: Create Registered Database for Source PDB
+## Task 2: Create Database Connection for Source PDB
 
 For this task you need the following info from previous steps:
 * Source DB Public IP
 * Source DB PDB Service Name
 * Database Administrator Password
-* Private Key File
 
-1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Registered Databases**
+1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-  ![Screenshot of Registered Databases](images/registered-db.png =90%x*)
+  ![Screenshot of Database Connections navigation](images/db-connection.png =90%x*)
 
-2. Press **Register Database**
+2. Press **Create connection**
 
-  ![Screenshot of click register db](images/click-register-db.png =90%x*)
+  ![Screenshot of click create connection](images/create-connection-pdb.png =90%x*)
 
-3. On the page Database Details, fill in the following entries, otherwise leave defaults:
+3. On the page General information, fill in the following entries, otherwise leave defaults:
     - Name: **SourcePDB**
+    - Type: **Oracle Database**
     - Vault: **DMSVault**
     - Encryption Key: **DMSKey**
-    - Choose **Manually configure database**
-    - Database Type: **Oracle**
-    - Host: Select **DBCS Public IP** value from Terraform output
-    - Port: **1521**
-    - Connect String: Select **DBCS PDB Service** value from Terraform output
+    
+4. Press **Next**
+
+  ![Screenshot of database details and click next](images/database-details-pdb.png =50%x*)
+
+5. On the page Connection details, fill in the following entries, otherwise leave defaults:
+    - Database details, select **Enter database information**
+    - Database connection string (use this format host:port/db service name): **DBCS Public IP**:**1521**/**DBCS PDB Service** get this values from the terraform output
+    - Initial load database username: **system**
+    - Initial load database password: Select **Admin Password** value from Terraform output
+    - Select **Use different credentials for replication**
+    - Replication database username: **ggadmin**
+    - Replication database password: Select **Admin Password** value from Terraform output
 
     The checkbox **Create private endpoint to access this database** needs to stay unchecked.
 
+6. Press **Create**
 
-4. Press **Next**
+  ![Screenshot of  confirm create connection](images/connection-details-pdb.png =50%x*)
 
-  ![Screenshot of register db](images/register-db-next-second.png =50%x*)
+7. Press **Test connection** to confirm that your Database Connection details are correct
 
-5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
-    - Database Administrator Username: **system**
-    - Database Administrator Password: Select **Admin Password** value from Terraform output
-    - SSH Database Server Hostname: Select **DBCS Public IP** value from Terraform output
-    - SSH Private Key: Select private key file saved earlier
-    - SSH Username: **opc**
-    - SSH Sudo Location: **/usr/bin/sudo**
+  ![Screenshot of PDB connection test](images/test-pdb.png =50%x*)
+    - If the test is not successful, correct your connection details and try again.
 
-6. Press **Register**
+  ![Screenshot of close connection test](images/close-test.png =50%x*)  
 
-   ![Screenshot of  confirm register DB](images/register-db-confirm.png =50%x*)
-
-## Task 4: Create Registered Database for Target ADB
+## Task 3: Create Database Connection for Target ADB
 
 For this task you need the following info from previous steps:
 * Administrator Password
 
-1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Registered Databases**
+1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-  ![Screenshot of Registered Databases](images/registered-db.png =90%x*)
+  ![Screenshot of Database Connections navigation](images/db-connection.png =90%x*)
 
-2. Press **Register Database**
+2. Press **Create connection**
 
-   ![Screenshot of click register db](images/click-register-db.png =90%x*)
+  ![Screenshot of click create connection](images/create-connection-adb.png =90%x*)
 
-3. On the page Database Details, fill in the following entries, otherwise leave defaults:
+3. On the page General information, fill in the following entries, otherwise leave defaults:
     - Name: **TargetADB**
+    - Type: **Oracle Autonomous Database**
     - Vault: **DMSVault**
     - Encryption Key: **DMSKey**
-    - Database Type: **Autonomous Database**
-    - Database: **TargetADB#####**
 
 4. Press **Next**
 
-  ![Screenshot of press next after entering details](images/register-adb-1.png =50%x*)
+  ![Screenshot of press next after entering details](images/db-connection-adb.png =50%x*)
 
-5. On the page Connection Details, fill in the following entries, otherwise leave defaults:
-    - Database Administrator Username: **admin**
-    - Database Administrator Password: Select **Admin Password** value from Terraform output
+5. On the page Connection details, fill in the following entries, otherwise leave defaults:
+    - Database: **TargetADB#####**
+    - Initial load database username: **admin**
+    - Initial load database password: Select **Admin Password** value from Terraform output
+    - Select **Use different credentials for replication**
+    - Replication database username: **ggadmin**
+    - Replication database password: Select **Admin Password** value from Terraform output
 
-6. Press **Register**
+    The checkbox **Create private endpoint to access this database** needs to stay unchecked.
 
-  ![Screenshot of confirm db registration](images/confirm-db-registration.png =50%x*)
+6. Press **Create**
 
-  Please wait for all Database Registration resources to display as **Active** before proceeding to the next task.
+  ![Screenshot of confirm db connection](images/confirm-db-connection-adb.png =50%x*)
+
+  Please wait for all Database Connection resources to display as **Active** before proceeding to the next task.
+
+7. Press **Test connection** to confirm that your Database Connection details are correct
+
+  ![Screenshot of CDB connection test](images/test-adb.png =50%x*)
+    - If the test is not successful, correct your connection details and try again.
+
+  ![Screenshot of close connection test](images/close-test.png =50%x*)    
 
 
-## Task 5: Create Migration
+## Task 4: Create Migration
 
-  1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration > Database Migration > Migrations**
+  1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
-    ![Screenshot of migration navigation](images/migrations-navigation.png =90%x*)
+  ![Screenshot of Migrations navigation](images/migration-nav.png =90%x*)
 
   2. Press **Create Migration**
 
     ![Screenshot of press create migration](images/press-create-migration.png =90%x*)
 
-  3. On the page **Add Details**, fill in the following entries, otherwise leave defaults:
+  3. On the page **General information**, fill in the following entries, otherwise leave defaults:
       - Name: **TestMigration**
-      - Vault: **DMSVault**
-      - Encryption Key: **DMSKey**
 
       ![Screenshot to add vault details](images/add-details.png =40%x*)
 
   4. Press **Next**
 
-  5. On the page **Select Databases**, fill in the following entries, otherwise leave defaults:
-      - Source Database: **SourcePDB**
+  5. On the page **Select Databases**, fill in the following entries with the Database Connections created in tasks 1 to 3, otherwise leave defaults:
+      - Source Database connection: **SourcePDB**
       - *Check* Database is pluggable database (PDB)
-      - Registered Container Database: **SourceCDB**
-      - Target Database: **TargetADB**
+      - Container database connection: **SourceCDB**
+      - Target Database connection: **TargetADB**
 
       ![Screenshot of source db selection](images/select-databases.png =50%x*)
 
   6. On the page **Migration Options**, fill in the following entries, otherwise leave defaults:
-      - In **Initial Load**, select **Datapump via Object Storage**
-      - Object Storage Bucket: **DMSStorage-#####**
+      - Transfer medium for initial load:  **Datapump via Object Storage**
       - Export Directory Object:
           - Name: **dumpdir**
           - Path: **/u01/app/oracle/dumpdir**
-     
+      - Source Database file system SSL wallet path: **/u01/app/oracle/myserverwallet**
+      - Object Storage Bucket: **DMSStorage-#####**
+      - Select **Use online replication**
+
+         
           ![Screenshot for migration options](images/test-migration.png =50%x*)
 
 
-  7. Check **Use Online Replication**
-     - GoldenGate Hub URL: **OGG Hub URL IP** value from Terraform output
-     - GoldenGate Administrator Username: **oggadmin**
-     - GoldenGate Administrator Password: **Admin Password** value from Terraform output
-
-     ![Online replication check](images/online-goldengate.png =50%x*)
-
-     - Source database:
-          - GoldenGate deployment name: **Marketplace**
-          - Database Username: **ggadmin**
-          - Database Password: **Admin Password** value from Terraform output
-          - Container Database Username: **c##ggadmin**
-          - Container Database Password: **Admin Password** value from Terraform output
-
-      ![Source database details](images/online-source-database.png =50%x*)    
-     
-     - Target database:
-          - GoldenGate Deployment Name: **Marketplace**
-          - Database Username: **ggadmin**
-          - Database Password: **Admin Password** value from Terraform output
-
-                    
-
-    ![Target database details](images/online-target-database-ggocid.png =50%x*) 
+  
 
       - Press Create to initiate the Migration creation
 
@@ -241,4 +225,4 @@ You may now [proceed to the next lab](#next).
 ## Acknowledgments
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian Lynch, Solution Engineers, Austin Specialist Hub
-* **Last Updated By/Date** - Jorge Martinez, Product Manager, July 2022
+* **Last Updated By/Date** - Jorge Martinez, Product Manager, June 2024

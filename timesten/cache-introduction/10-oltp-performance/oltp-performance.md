@@ -8,6 +8,8 @@ You will use a standard TimesTen benchmark program, tptbmOCI, that connects to t
 
 **Estimated Lab Time:** 6 minutes
 
+**IMPORTANT:** The following information is presented for you to understand the different pieces around the benchmark for this lab. You don't need to run any commands listed below. The commands to run are from Task 1. 
+
 There is a single table used for this benchmark, APPUSER.VPN_USERS. Here is the definition of the table as it exists in the Oracle database:
 
 ```
@@ -199,5 +201,5 @@ Keep your primary session open for use in the next lab.
 
 * **Author** - Chris Jenkins, Senior Director, TimesTen Product Management
 * **Contributors** -  Doug Hood & Jenny Bloom, TimesTen Product Management
-* **Last Updated By/Date** - Chris Jenkins, July 2022
+* **Last Updated By/Date** - Jenny Bloom, October 2023
 

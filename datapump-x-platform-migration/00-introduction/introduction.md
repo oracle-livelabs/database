@@ -57,7 +57,7 @@ The workshop also contains six databases for running various upgrade and migrati
 
 ## Transportable Tablespaces using XTTS Scripts Workshop
 
-You can use the transportable tablespace method to upgrade a database from an Oracle Database 11g Release 2 (11.2.0.3) or later to Oracle Database 23c.
+You can use the transportable tablespace method to upgrade a database from an Oracle Database 11g Release 2 (11.2.0.3) or later to Oracle Database 23ai.
 Although the XTTS scripts can migrate __cross-platform and cross-endianness__ this lab will use a single Linux machine as source and target platform. You will migrate the source database (11.2.0.4) directly into a 21c PDB.
 
 You may now *proceed to the next lab*.

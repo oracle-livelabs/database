@@ -1,0 +1,40 @@
+{
+    "workshoptitle": "Get Started with AI Vector Search on Oracle Autonomous Database 23ai Free",
+      "help": "livelabs-help-db_us@oracle.com",
+      "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "This is an introduction to installing Oracle Autonomous Database 23ai Free and getting started with AI Vector Search",
+            "type": "livelabs",
+            "filename": "../../introduction/intro-aivs-adb.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "Using noVNC Remote Desktop",
+            "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+        },
+        {
+            "title": "Lab 1: Launch the Oracle Autonomous Database 23ai Free Container",
+            "description": "Installing and configuring the database",
+            "type": "livelabs",
+            "filename": "../../adb-free-container-setup/inst-auth-container-setup.md"
+        },
+        {
+            "title": "Lab 2: Explore the Power of Oracle AI Vector Search",
+            "description": "Understanding the value of Oracle AI Vector Search.",
+            "type": "livelabs",
+            "filename": "../../vector-search/intro-vector-search-hol.md"
+        },
+        {
+            "title": "Lab 3: Learn the Vector Search Process on Oracle Database 23ai",
+            "description": "Explains how to vectorize your data.",
+            "type": "livelabs",
+            "filename": "../../vector-search/generate-vectors.md"
+        },
+        {
+          "title": "Need Help?",
+          "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
+          "filename":"https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-livelabs.md"
+        }
+    ]
+}

@@ -21,7 +21,7 @@ This lab assumes you have:
 
 1. RDP to the Bastion host server using the username .\opc and password. From the Bastion host, opens the Remote Desktop and connect to the Microsoft SSRS server using the private IP Address.
 
-2. Download the Microsoft SSRS Sample DB Backups using the [link](https://objectstorage.us-ashburn-1.oraclecloud.com/p/VEKec7t0mGwBkJX92Jn0nMptuXIlEpJ5XJA-A6C9PymRgY2LhKbjWqHeB5rVBbaV/n/c4u04/b/livelabsfiles/o/data-management-library-files/ssrsbackupfiles.zip) from the browser. 
+2. Download the Microsoft SSRS Sample DB Backups using the [link](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/ssrsbackupfiles.zip) from the browser. 
 
   ![SSRS Backup file zip](./images/ssrsbackupzipfile.png "SSRS Backup file zip")
 
