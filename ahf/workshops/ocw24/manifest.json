@@ -13,6 +13,11 @@
             "filename": "../../setup/setup-compute-livelabs-ocw.md"
         },
         {
+            "title": "Your LiveLabs SSH Key",
+            "description": "How to use LiveLabs' SSH Keys",
+            "filename": "https://oracle-livelabs.github.io/common/labs/livelabs-ssh/livelabs-ssh.md"
+        } ,
+        {
             "title": "Lab 1: Check AHF Installation on your System",
             "description": "This lab walks you through checking that AHF is installed and healthy on your system.",
             "filename": "../../ahf-Insights/ahf-upgrade/check-ahf.md"
