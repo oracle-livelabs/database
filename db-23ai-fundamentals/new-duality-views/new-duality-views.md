@@ -42,7 +42,8 @@ This lab assumes you have:
 ## Task 1: Getting Started
 
 1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png =50%x*)
+
+   ![click SQL](images/im1.png =50%x*)
 
 2.  Let's create some tables to use in the lab. Copy and run the following SQL script:
     ```
@@ -151,7 +152,7 @@ This lab assumes you have:
 
 	![Creating the Duality View](images/im2.png =50%x*)
 
-3. Now that the Duality Views have bee created, we have two options, we can insert directly into the tables,
+3. Now that the Duality Views have been created, we have two options, we can insert directly into the tables,
 
 
 	```
@@ -159,8 +160,10 @@ This lab assumes you have:
     INSERT INTO customers (id, first_name, last_name, dob, email, address, zip, phone_number, credit_card)
     VALUES (1, 'Alice', 'Brown', DATE '1990-01-01', 'alice.brown@example.com', '123 Maple Street', '12345', '555-1234', '4111 1111 1111 1111');
 
+
     INSERT INTO orders (id, customer_id, product_id, order_date, total_value)
     VALUES (100, 1, 101, SYSTIMESTAMP, 300.00);
+
 	</copy>
     ```
     ![inserting into our new_customers table](images/im3.png " ")
@@ -209,7 +212,7 @@ This lab assumes you have:
     UPDATE customer_orders_dv c
     SET c.data = json_transform(
         data,
-        APPEND '$.orders' = JSON {'OrderID':101, 'ProductID' : 202, 'OrderDate' : SYSTIMESTAMP, 'TotalValue' : 150.00}
+        APPEND '$.orders' = JSON {'OrderID':123, 'ProductID' : 202, 'OrderDate' : SYSTIMESTAMP, 'TotalValue' : 150.00}
     )
     WHERE c.data."_id" =1;
     commit;
@@ -253,25 +256,36 @@ This lab assumes you have:
     update customer_orders_dv o set data = json_mergepatch(data,'{"orders" : 
     [
         {
-        "OrderID": 102,
-        "ProductID": 202,
+        "OrderID": 100,
+        "ProductID": 10100,
         "OrderDate": "2024-06-27T11:55:20.174683",
-        "TotalValue": 150.00,
+        "TotalValue": 300,
         "OrderShipped": null
         },
         {
-        "OrderID": 103,
+        "OrderID": 200,
         "ProductID": 20002,
         "OrderDate": "2024-06-27T11:55:50.424141",
-        "TotalValue": 500.00,
+        "TotalValue": 150,
         "OrderShipped": null
         }
     ]}')
-    where o.data."_id" = 2;
+    where o.data."_id" = 100;
 
     commit;
     </copy>
     ```
+
+    The new order array, with multi record insert
+    
+    ```
+    <copy>
+    select * from orders where customer_id = 100;
+    </copy>
+    ```
+
+    ------- From here below  it's been removed ---- </br>
+    </br>
 
     Let's imagine we need to change one of the Product IDs. 
 
@@ -306,6 +320,8 @@ This lab assumes you have:
 10. Note that the "etag" value supplied in the content is used for "out-of-the-box" optimistic locking to prevent the well-known "lost update" problem that can occur with concurrent operations. During a replace operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target Duality View document.
 
     If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. If you get the error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value.
+
+----- this portion here ----- </br>
 
 ## Task 3: (Optional) JSON Relational Duality Views with REST
 
