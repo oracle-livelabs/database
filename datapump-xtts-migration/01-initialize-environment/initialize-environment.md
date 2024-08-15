@@ -19,13 +19,13 @@ In this lab, you will:
 
 2. Before copy/pasting, take notice of the commands that you execute; it is important to understand what the commands will do.
 
-3. You can use any terminal to run the lab. The lab sets the environment when appropriate.
-
-4. Double-click on the *Terminal* shortcut on the desktop. 
+3. Double-click on the *Terminal* shortcut on the desktop. 
 
 ![Click shortcut to start a terminal](./images/initialize-environment-desktop-click-terminal.jpeg " ")
 
-5. The terminal has two tabs, *Yellow* and *Blue*. You can use any of them to perform the labs. All labs start by setting the appropriate environment.
+4. The terminal has two tabs, *yellow* and *blue*. *Yellow* 🟨 is for the source database. *Blue* 🟦 is for the target database.
+
+5. The instructions will tell you which terminal to use.
 
 6. Optionally, in the terminal, you can zoom in to make the text larger. 
 
@@ -33,7 +33,7 @@ In this lab, you will:
 
 ## Task 2: Initialize the workshop environment
 
-1. Open a terminal or use an existing one. When you start the lab, the following components should be started.
+1. When you start the lab, the following components should be started.
 
     - Database Listener
         - LISTENER
@@ -41,7 +41,7 @@ In this lab, you will:
         - FTEX
         - CDB23
 
-2. Ensure the listener is started.
+2. Use the *yellow* terminal 🟨. Ensure the listener is started.
 
     ```
     <copy>
@@ -83,4 +83,4 @@ You may now *proceed to the next lab*.
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024

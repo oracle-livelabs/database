@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will review and startup all components required to successfully run this workshop.
+In this lab, you will check all components required to successfully run this workshop.
 
 Estimated Time: 5 Minutes.
 
@@ -23,7 +23,7 @@ In this lab, you will:
 
 ![Click shortcut to start a terminal](./images/initialize-environment-desktop-click-terminal.jpeg " ")
 
-4. The terminal has two tabs, *Yellow* and *Blue*. The instructions might tell you which tab to use. If not, you can use any of them. All labs start by setting the appropriate environment.
+4. The terminal has two tabs, *yellow* 🟨 and *blue* 🟦. The instructions might tell you which tab to use. If not, you can use any of them. All labs start by setting the appropriate environment.
 
 5. Optionally, in the terminal, you can zoom in to make the text larger. 
 
@@ -44,7 +44,7 @@ In this lab, you will:
         - UPGR
         - CDB23
 
-2. Ensure the listener is started. Use the *yellow* tab.
+2. Ensure the listener is started. Use the *yellow* terminal 🟨.
 
     ```
     <copy>
@@ -78,37 +78,10 @@ In this lab, you will:
     ```
     </details>
 
-4. Occasionally, the *UPGR* database fails to register with the listener. Set the environment and connect to *UPGR*.
-
-    ```
-    <copy>
-    . upgr
-    sqlplus / as sysdba
-    </copy>
-
-    -- Be sure to hit RETURN
-    ```
-
-5. Restart *UPGR*.
-
-    ```
-    <copy>
-    startup force
-    </copy>
-    ```
-
-6. Exit SQL*Plus.
-
-    ```
-    <copy>
-    exit
-    </copy>
-    ```
-
 You may now *proceed to the next lab*.
 
 ## Acknowledgements
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024

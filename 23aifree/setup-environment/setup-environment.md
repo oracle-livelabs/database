@@ -209,7 +209,7 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
 
     ```
     SQL> <copy>CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW race_dv AS
-    SELECT JSON {'raceId' IS r.race_id,
+    SELECT JSON {'_id' IS r.race_id,
                'name'   IS r.name,
                'laps'   IS r.laps WITH NOUPDATE,
                'date'   IS r.race_date,
@@ -235,7 +235,7 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
 
     ```
     SQL> <copy>CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW driver_dv AS
-    SELECT JSON {'driverId' IS d.driver_id,
+    SELECT JSON {'_id' IS d.driver_id,
                'name'     IS d.name,
                'points'   IS d.points,
                UNNEST
@@ -264,7 +264,7 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
 
     ```
     SQL> <copy>CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW team_dv AS
-    SELECT JSON {'teamId'  IS t.team_id,
+    SELECT JSON {'_id'  IS t.team_id,
                'name'    IS t.name,
                'points'  IS t.points,
                'driver'  IS
@@ -288,10 +288,13 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
 
     ```
     SQL> <copy>
+    declare
+        whoAmI  varchar2(128) default null;
     begin
+    select sys_context('userenv','current_schema') into whoAmI from dual;
     ORDS.ENABLE_OBJECT(
         P_ENABLED        => TRUE,
-        P_SCHEMA         => 'HOL23C',
+        P_SCHEMA         => whoAmI,
         P_OBJECT         =>  'DRIVER_DV',
         P_OBJECT_TYPE    => 'VIEW',
         P_OBJECT_ALIAS   => 'driver_dv',
@@ -300,7 +303,7 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
     COMMIT;
     ORDS.ENABLE_OBJECT(
         P_ENABLED        => TRUE,
-        P_SCHEMA         => 'HOL23C',
+        P_SCHEMA         => whoAmI,
         P_OBJECT         =>  'RACE_DV',
         P_OBJECT_TYPE    => 'VIEW',
         P_OBJECT_ALIAS   => 'race_dv',
@@ -309,7 +312,7 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
     COMMIT;
     ORDS.ENABLE_OBJECT(
         P_ENABLED        => TRUE,
-        P_SCHEMA         => 'HOL23C',
+        P_SCHEMA         => whoAmI,
         P_OBJECT         =>  'TEAM_DV',
         P_OBJECT_TYPE    => 'VIEW',
         P_OBJECT_ALIAS   => 'team_dv',
@@ -348,4 +351,4 @@ You may **proceed to the next lab.**
 
 * **Author** - William Masdon, Kaylien Phan, Jeff Smith
 * **Contributors** -  David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - William Masdon, Database Product Manager, April 2023
+* **Last Updated By/Date** - Hermann Baer, Database Product Management, July 2024
