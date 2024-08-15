@@ -11,6 +11,7 @@ Estimated Time: 5 minutes
 ### Objectives
 
 In this lab, you will:
+
 * Connect to one RAC instance with IP address from 'Get Started with LiveLabs' Lab
 * Determine the location of the AHF install.properties file
 * Use this file to review the various code and data locations
@@ -22,7 +23,6 @@ In this lab, you will:
 - You are logged in as the **root user**
 
 ## Task 1: Connect to a Database system node and determine the location of the AHF Installation
-
 
 1. 	If you are not already connected to one of you Database Sytem nodes. 
 	Using one of your Public IP addresses, enter the command below to login as the *opc* user and verify connection to your nodes.
@@ -61,6 +61,7 @@ In this lab, you will:
 	</pre> 
 
 4.	Use this location to check the contents of the AHF install.properties file
+
 	```
 	<copy>
 	cat /u01/app/oracle.ahf/install.properties

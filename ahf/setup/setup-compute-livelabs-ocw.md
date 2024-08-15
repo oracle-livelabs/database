@@ -74,6 +74,7 @@ You should already be logged in to the OCI console from Task 1.
    Follow the instructions in Task 1.  **'Oracle Cloud Shell'** in [Your LiveLabs SSH Key Lab](#next)
 
 
+
 ## Acknowledgements
 
 * **Author** - Rene Fontcha, Master Principal Platform Specialist, NA Technology

@@ -25,7 +25,9 @@ You will now learn how to upgrade AHF after downloading *ahf_setup*
 You must complete on both nodes of the RAC Database Cluster.
 >Note: To save time you can do all the steps in parallel on each node.
 
+
 1.	Download the new AHF installer from OCI Object Storage on one node.
+
 	As the root user download the new AHF Installer using **wget**
 	```
 	<copy>
@@ -91,7 +93,6 @@ You must complete on both nodes of the RAC Database Cluster.
 	</pre>
 
 Repeat Step 1 to 3 on the second node, if you were not doing these steps in parallel.
-
 
 4.	Confirm AHF 24.6.1 is now running on both nodes.
 
