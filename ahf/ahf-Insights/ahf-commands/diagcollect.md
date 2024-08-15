@@ -121,7 +121,7 @@ All collections are copied back to the initiating node ready for analysis or upl
     > Note: You would be uploading the *.zip* files to Oracle Support when you have to raise a Support Request for the Incidents  
 
 
-## Task 4: Understand Manual Diagnostic Collections for a specific incident type
+## Task 3: Understand Manual Diagnostic Collections for a specific incident type
 ![Manual Diagnostic Collections](./images/manual_collect.png =40%x*)
 AHF has manual collections for :-
 - When customers do not want Automatic Collections enabled.
@@ -142,7 +142,7 @@ the incident type.
 In the slide above you can see the comparison of collecting performance diagnostics through a command list and running the `tfactl diagcollect -srdc dbperf` command.
 
 
-## Task 5: Understand Manual Diagnostic Collections with the problem chooser
+## Task 4: Understand Manual Diagnostic Collections with the problem chooser
 ![Problem Choose Diagnostic Collections](./images/problem_choose.png =40%x*)
 
 Before the problem chooser, running a default AHF diagnostic Collection would mean that default collection collection would be taken.  
@@ -161,7 +161,7 @@ You will be prompted to choose:-
 > If you choose the last option we have to collect everything in the hope we get what you want.
 
 
-## Task 6:  Generate a manual collection using problem chooser
+## Task 5:  Generate a manual collection using problem chooser
 1.  Simply run the `tfactl diagcollect` command and let the problem chhoser guide you.
 ```
 <copy>
