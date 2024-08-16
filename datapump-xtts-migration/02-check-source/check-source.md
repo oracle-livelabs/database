@@ -17,7 +17,7 @@ In this lab, you will:
 
 The M5 script has a set of minimum requirements.
 
-1. Set the environment to the source database, *FTEX*.
+1. Use the *yellow* terminal 🟨 and set the environment to the source database, *FTEX*.
 
     ```
     <copy>
@@ -304,4 +304,4 @@ You may now *proceed to the next lab*.
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024

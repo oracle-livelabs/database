@@ -18,7 +18,7 @@ In this lab, you will:
 
 ## Task 1: Perform incremental backup and restore it
 
-1. Set the environment to the source database and start a level 1 backup.
+1. Use the *yellow* terminal 🟨. Set the environment to the source database and start a level 1 backup.
 
     ```
     <copy>
@@ -116,10 +116,13 @@ In this lab, you will:
     ```
     </details>
 
-4. Examine the corresponding restore script. The backup also produced a restore script you can use on the target database.
+4. Switch to the *blue* terminal 🟦. 
+
+5. Examine the corresponding restore script. The backup also produced a restore script you can use on the target database.
 
     ```
     <copy>
+    cd /home/oracle/m5/cmd
     ll restore_L1*cmd
     </copy>
     ```
@@ -131,7 +134,7 @@ In this lab, you will:
     ```
     </details>
 
-5. Examine the restore script. 
+6. Examine the restore script. 
 
     ```
     <copy>
@@ -164,10 +167,11 @@ In this lab, you will:
     ```
     </details>
 
-6. *Restore* the level 1 backup. 
+7. *Restore* the level 1 backup. 
 
     ```
     <copy>
+    cd /home/oracle/m5/cmd
     export L1SCRIPT=$(ls -tr restore_L1_* | tail -1) 
     cd /home/oracle/m5
     . cdb23
@@ -182,8 +186,8 @@ In this lab, you will:
     ``` text
     $ rman target "sys@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1SCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud on Tue Jul 2 19:09:01 2024
-    Version 23.4.1.24.06
+    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue Jul 2 19:09:01 2024
+    Version 23.5.0.24.07
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
@@ -207,7 +211,7 @@ In this lab, you will:
     ```
     </details>
 
-7. Search the log file for any warnings or errors. 
+8. Search the log file for any warnings or errors. 
 
     ```
     <copy>
@@ -224,7 +228,7 @@ In this lab, you will:
 
 Let's simulate changes to the source database and see how they affect the backup and restore phase.
 
-1. Set the environment to the source database and connect.
+1. Use the *yellow* terminal 🟨. Set the environment to the source database and connect.
 
     ```
     <copy>
@@ -299,11 +303,11 @@ Let's simulate changes to the source database and see how they affect the backup
     ```
     </details>
 
-2. Restore the backup.
+2. Switch to the *blue* terminal 🟦. Restore the backup.
 
     ```
     <copy>
-    cd cmd
+    cd /home/oracle/m5/cmd
     export L1SCRIPT=$(ls -tr restore_L1_* | tail -1) 
     cd /home/oracle/m5
     . cdb23
@@ -318,8 +322,8 @@ Let's simulate changes to the source database and see how they affect the backup
     ``` text
     $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1SCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud on Tue Jul 2 19:10:56 2024
-    Version 23.4.1.24.06
+    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue Jul 2 19:10:56 2024
+    Version 23.5.0.24.07
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
@@ -366,4 +370,4 @@ In a real migration, you would run incremental backup/restore cycles at regular 
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024

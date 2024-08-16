@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will use SQL Tuning Advisor (SQL Tuning Advisor) to find suggestions for improving SQLs.
+In this lab, you will use SQL Tuning Advisor (STA) to find suggestions for improving SQLs.
 
 Estimated Time: 10 minutes
 
@@ -24,7 +24,7 @@ This lab assumes:
 
 You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The SQL Tuning Set contains the workload you generated with HammerDB. SQL Tuning Advisor will look at each of the statements and come up with tuning suggestions.
 
-1. Connect to the upgraded UPGR database.
+1. Use the *yellow* terminal 🟨. Connect to the upgraded UPGR database.
 
       ```
       <copy>
@@ -46,7 +46,7 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
 
 3. Optionally, you can look at the script to understand how you use the SQL Tuning Advisor API.
 
-4. First, a few words about the SQL Tuning Advicor. 
+4. First, a few words about the SQL Tuning Advisor. 
 
     * The SQL Tuning Advisor provides many recommendations. Some are more useful than others. 
     * Generally, you need to use your knowledge of the application using the database to determine which recommendations to apply.
@@ -82,20 +82,56 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
     <summary>*click see to an example of a finding*</summary>
     ``` text
     -------------------------------------------------------------------------------
-    FINDINGS SECTION (2 findings)
+    DETAILS SECTION
+    -------------------------------------------------------------------------------
+     Statements with Results Ordered by Maximum (Profile/Index) Benefit, Object ID
+    -------------------------------------------------------------------------------
+    Object ID     : 5
+    Schema Name   : TPCC
+    Container Name: UPGR
+    SQL ID	      : f90zn75aphu4w
+    SQL Text      : SELECT COUNT(DISTINCT (S_I_ID)) FROM ORDER_LINE, STOCK,
+    		DISTRICT WHERE D_ID=:B3 AND D_W_ID=:B2 AND D_ID = OL_D_ID AND
+    		D_W_ID = OL_W_ID AND OL_I_ID = S_I_ID AND OL_W_ID = S_W_ID
+    		AND S_QUANTITY < :B1 AND OL_O_ID BETWEEN (D_NEXT_O_ID - 20)
+    		AND (D_NEXT_O_ID - 1)
+    
+    -------------------------------------------------------------------------------
+    FINDINGS SECTION (3 findings)
     -------------------------------------------------------------------------------
     
-    1- Index Finding (see explain plans section below)
+    1- Statistics Finding
+    ---------------------
+      Optimizer statistics for table "TPCC"."ORDER_LINE" are stale.
+    
+      Recommendation
+      --------------
+      - Consider collecting optimizer statistics for this table.
+        BEGIN
+         dbms_stats.gather_table_stats(
+          ownname => 'TPCC',
+          tabname => 'ORDER_LINE',
+          estimate_percent => DBMS_STATS.AUTO_SAMPLE_SIZE,
+          method_opt => 'FOR ALL COLUMNS SIZE AUTO');
+        END;
+        /
+    
+      Rationale
+      ---------
+        The optimizer requires up-to-date statistics for the table in order to
+        select a good execution plan.
+    
+    2- Index Finding (see explain plans section below)
     --------------------------------------------------
       The execution plan of this statement can be improved by creating one or more
       indices.
     
-      Recommendation (estimated benefit: 97.77%)
-      ------------------------------------------
+      Recommendation (estimated benefit: 99.7%)
+      -----------------------------------------
       - Consider running the Access Advisor to improve the physical schema design
         or creating the recommended index.
-        create index TPCC.IDX$$_02ED0001 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID
-        ");
+        create index TPCC.IDX$$_00650001 on TPCC.STOCK("S_W_ID","S_QUANTITY","S_I_I
+        D");
     
       Rationale
       ---------
@@ -105,7 +141,7 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
         will allow to get comprehensive index recommendations which takes into
         account index maintenance overhead and additional space consumption.
     
-    2- Alternative Plan Finding
+    3- Alternative Plan Finding
     ---------------------------
       Some alternative execution plans for this statement were found by searching
       the system's real-time and historical performance data.
@@ -116,34 +152,21 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
     
       id plan hash	last seen	     elapsed (s)  origin	  note
       -- ---------- -------------------- ------------ --------------- ----------------
-       1  612465046  2024-06-03/07:02:38	    0.001 AWR		  original plan
-       2 4040750106  2024-06-03/07:02:38	    0.041 AWR
+       1 3526939835  2024-08-13/08:38:17	    0.001 Cursor Cache
+       2  395199281  2024-08-12/20:52:07	    0.001 AWR		  original plan
     
-      Information
-      -----------
-      - The Original Plan appears to have the best performance, based on the
-        elapsed time per execution.  However, if you know that one alternative
-        plan is better than the Original Plan, you can create a SQL plan baseline
-        for it. This will instruct the Oracle optimizer to pick it over any other
-        choices in the future.
+      Recommendation
+      --------------
+      - Consider creating a SQL plan baseline for the plan with the best average
+        elapsed time.
         BEGIN
          dbms_sqltune.create_sql_plan_baseline(
           task_name => 'STA_UPGRADE_TO_23AI_CC',
           object_id => 5,
           owner_name => 'SYS',
-          plan_hash_value => xxxxxxxx);
+          plan_hash_value => 3526939835);
         END;
         /
-    
-    -------------------------------------------------------------------------------
-    Object ID     : 7
-    Schema Name   : TPCC
-    Container Name: UPGR
-    SQL ID	      : csv0xdm9c394t
-    SQL Text      : SELECT O_ID, O_CARRIER_ID, O_ENTRY_D FROM (SELECT O_ID,
-                    O_CARRIER_ID, O_ENTRY_D FROM ORDERS WHERE O_D_ID = :B3 AND
-                    O_W_ID = :B2 AND O_C_ID=:B1 ORDER BY O_ID DESC) WHERE ROWNUM
-                    = 1  
     ```
     </details>
 
@@ -162,10 +185,23 @@ You use the SQL Tuning Set *STS_CaptureCursorCache* as input to the advisor. The
     .
     (output truncated)
     .
-    create index TPCC.IDX$$_02ED0001 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
-    create index TPCC.IDX$$_02ED0002 on TPCC.ORDERS("O_C_ID","O_D_ID","O_W_ID");
-    create index TPCC.IDX$$_02ED0003 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
-    create index TPCC.IDX$$_02ED0003 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
+    create index TPCC.IDX$$_00650001 on TPCC.STOCK("S_W_ID","S_QUANTITY","S_I_ID");
+    BEGIN
+    dbms_sqltune.create_sql_plan_baseline(
+     task_name => 'STA_UPGRADE_TO_23AI_CC',
+     object_id => 5,
+     owner_name => 'SYS',
+     plan_hash_value => 3526939835);
+    END;
+    /
+    BEGIN
+    dbms_sqltune.create_sql_plan_baseline(
+     task_name => 'STA_UPGRADE_TO_23AI_CC',
+     object_id => 5,
+     owner_name => 'SYS',
+     plan_hash_value => 3526939835);
+    END;
+    /
     ```
     </details>
 
@@ -177,17 +213,18 @@ In this lab, you will implement some of the recommendations. Namely, those about
 
     ```
     <copy>
-    create index TPCC.IDX$$_02ED0001 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
-    create index TPCC.IDX$$_02ED0002 on TPCC.ORDERS("O_C_ID","O_D_ID","O_W_ID");
+    create index TPCC.IDX$$_00650001 on TPCC.STOCK("S_W_ID","S_QUANTITY","S_I_ID");
     </copy>
 
     -- Be sure to hit RETURN
     ```
 
+    * Do not implement any of the other recommendations.
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> create index TPCC.IDX$$_02ED0001 on TPCC.CUSTOMER("C_LAST","C_D_ID","C_W_ID");
+    SQL> create index TPCC.IDX$$_00650001 on TPCC.STOCK("S_W_ID","S_QUANTITY","S_I_ID");
 
     Index created.
 
@@ -233,8 +270,17 @@ In this lab, you will implement some of the recommendations. Namely, those about
 
     ![Creating indexes give a better performance](./images/sqltune-spa1.png " ")
 
-    * Overall there is almost a 3 % improvement from creating indexes.
-    * This is based on the workload from the SQL Tuning Set. It does not tell anything about the effect on other workloads, like DMLs.
+    * After creating the index, SPA shows there is almost a 14 % improvement. The number might vary in your environment.
+    * This is based on the entire workload from the SQL Tuning Set. It doesn't tell whether the improvement came from the index.    
+    
+4. Scroll down to the Top SQLs. If the new index is used, you will see SQLs with a plan change.
+
+    ![Identifying SQLs with a plan change](./images/sqltune-top-sql-after-index.png " ")
+
+    * One of SQLs use a new plan. Here there is almost a 2% improvement from creating the index.
+    * Because the improvement is so small and depending on underlying hardware in the lab environment, you might see a different improvement or even a minor regression. The point is that the index creation leads to a change of execution plan.
+    * Remember that adding an index most likely have a negative effect on DMLs. 
+    * Generally, exercise caution when implementing recommendations from SQL Tuning Advisor. One change might have a positive effect on one SQL, but a negative elsewhere. This is where SQL Performance Analyzer can help. 
 
 **Congratulations! You have completed the Performance Stability Prescription.**
 
@@ -254,4 +300,4 @@ You can submit one or more SQL statements as input to the advisor and receive ad
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024

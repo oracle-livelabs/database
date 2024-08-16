@@ -18,7 +18,7 @@ The objective of this lab is to provide hands-on experience with Schema Annotati
 ## Task 1: Adding Schema Annotations 
 
 1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png " ")
+    ![click SQL](images/im1.png =50%x*)
 
 2. Why Use Schema Annotations? Schema Annotations provide a way to add additional property metadata for database objects, such as tables, columns, views, materialized views, and even domains. 
 

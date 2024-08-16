@@ -10,7 +10,7 @@ Estimated Lab Time: 10 Minutes
 
 ### Prerequisites
 - You are connected to one of the DB System Nodes as described in Lab 1: Connect to your DB System
-- You have performed the tasks to generate some incidents as described in Lab 5: Generate Database and Clusterware Incidents for AHF to detect and take action on.
+- You have performed the tasks to generate some incidents as described in Lab 2: Generate Database and Clusterware Incidents for AHF to detect and take action on.
 
 ### Objectives
 
@@ -39,7 +39,7 @@ If one of the monitored errors is seen then it will prepare to start an automati
 AHF determines what needs to be collected for the specific Incident and gather that data for all nodes if required.  
 All collections are copied back to the initiating node ready for analysis or upload to Oracle Support.
 
-## Task 2: Review Automatic Diagnostic Collection for Lab 5 Incidents
+## Task 2: Review Automatic Diagnostic Collection for Lab 2 Incidents
 
 1.  Use the `tfactl get` command to check auto collection was enabled (ON).
     ```
@@ -47,7 +47,7 @@ All collections are copied back to the initiating node ready for analysis or upl
     tfactl get autodiagcollect
     </copy>
     ```
-    Command Output:
+    Example Command Output:
     <pre>
     .-------------------------------------------------.
     |                 lldbcs61                        |
@@ -57,81 +57,35 @@ All collections are copied back to the initiating node ready for analysis or upl
     | Auto Diagcollection ( autodiagcollect ) | ON    |
     '-----------------------------------------+-------'
     </pre>
-2. Use the `tfactl print collections` command to confirm that AHF completed an auto collection for the 2 Incidents you generated in Lab 5.
+2. Use the `tfactl print collections` command to confirm that AHF completed an auto collection for the 2 Incidents you generated in Lab 2.
     ```
     <copy>
-    tfactl print collections -json -pretty -status completed
+    tfactl print collections -status completed
     </copy>
     ```
-    Command Output:
-    <pre>
-    [
-        {
-            "CollectionId": "20240715172659lldbcs61",
-            "InitiatedNode": "lldbcs61",
-            "CollectionType": "Auto Collection",
-            "RequestUser": "oracle",
-            "NodeList": "[lldbcs61, lldbcs62]",
-            "StartTime": "2024-07-15T16:57:14.000+0000",
-            "EndTime": "2024-07-15T17:32:41.000+0000",
-            "ComponentList": "[rdbms, cvu, os, compliance, tns, chmos, asm, asmproxy, asmio, cha, afd]",
-            "UploadStatus": "FAILED",
-            "CollectionStatus": "COMPLETED",
-            "Events": [
-                {
-                    "Name": ".*ORA-0403(0|1).*",
-                    "Time": "2024-07-15T17:27:14.000+0000",
-                    "SourceFile": "/u01/app/oracle/diag/rdbms/raccvxfe_d3w_lhr/racCVXFE1/trace/alert_racCVXFE1.log"
-                },
-                {
-                    "Name": ".*ORA-00600.*",
-                    "Time": "2024-07-15T17:26:53.000+0000",
-                    "SourceFile": "/u01/app/oracle/diag/rdbms/raccvxfe_d3w_lhr/racCVXFE1/trace/alert_racCVXFE1.log"
-                }
-            ],
-            "NodeCollection": [
-                {
-                    "Host": "lldbcs61",
-                    "Tag": "/u01/app/oracle.ahf/data/repository/auto_srdcCompositeMon_Jul_15_17_27_14_UTC_2024_node_lldbcs61/",
-                    "ZipFileName": "/u01/app/oracle.ahf/data/repository/auto_srdcCompositeMon_Jul_15_17_27_14_UTC_2024_node_lldbcs61/lldbcs61.tfa_srdc_autosrdc_Mon_Jul_15_17_32_46_UTC_2024.zip",
-                    "ZipFileSize": "20320",
-                    "CollectionTime": "410",
-                    "CheckSum": "bbfc92de15cf04c19875cf4bb1eda025c9749cdb1118d05c8f30c330b87e2189",
-                    "checksum_algo": "sha256",
-                    "UploadStatus": "FAILED"
-                },
-                {
-                    "Host": "lldbcs62",
-                    "Tag": "/u01/app/oracle.ahf/data/repository/auto_srdcCompositeMon_Jul_15_17_27_14_UTC_2024_node_lldbcs61/",
-                    "ZipFileName": "/u01/app/oracle.ahf/data/repository/auto_srdcCompositeMon_Jul_15_17_27_14_UTC_2024_node_lldbcs61/lldbcs62.tfa_srdc_autosrdc_Mon_Jul_15_17_32_46_UTC_2024.zip",
-                    "ZipFileSize": "21200",
-                    "CollectionTime": "420",
-                    "CheckSum": "bbfc92de15cf04c19875cf4bb1eda025bbfc92de15cf04c219875cf4bb1eda02",
-                    "checksum_algo": "sha256",
-                    "UploadStatus": "FAILED"
-                }
-            ]
-        }
-    ]
-    </pre>
-    You can see from the above that this Collection is an *Auto Collection* generated for the *oracle user* as the errors were found in the alert log for a database  
-    owned by the *oracle user*. 
-    The collection was due to 2 Events in the alert log for the database instance **racCVXFE1** one ORA-00600 and one ORA-04031.  
-    Within the collection itself you can see the exact events.
-    This collection was a clusterwide collection as we have files from both nodes that are copied back to a common directory on the initiating node.
-    >Note: Please ignore the "UploadStatus": "FAILED" as this is only valid when the collection is to be uploaded after completion.
+    Example Command Output: 
+
+    ![TFA Print Collections](./images/tfa-print-collections-1.png =130%x*)
+
+    You can see from the above that this Collection is an *Auto Collection* generated due to error found in the alert log for a database. 
+    The collection was due to 2 Events in the alert log for the database instance **racQYFVZ1** one ORA-00600 and one ORA-04031.  
+    This collection was a clusterwide collection (you can see both nodes in the node list) with files from both nodes that are copied back to a common directory on the initiating node.
+
 
 3.  Review the Contents of the Automatic Diagnostic Collection.  
 
     All of the collection files and logs are copied back to the Inititating node in a directory under that directory.
     We can now go to that directory and see what files were collected.  
-    Use the "Tag" in your print collections to determine the correct location. 
+    Use the "Tag" location (*highlighted*) from your print collections to determine the correct location. 
     
-    >"Tag": "/u01/app/oracle.ahf/data/repository/auto_srdcCompositeMon_Jul_15_17_27_14_UTC_2024_node_lldbcs61/"
+    ![TFA Print Collections Showing TAG ](./images/tfa-print-collections-2.png =130%x*)
+    > Save time and use the copy below then simply hit tab for directory name completion
 
-    <pre>
-    cd /u01/app/oracle.ahf/data/repository/auto_srdcCompositeMon_Jul_15_17_27_14_UTC_2024_node_lldbcs61
-    </pre>
+    ```
+    <copy>
+    cd /u01/app/oracle.ahf/data/repository/auto_srdcComposite
+    </copy>
+    ```
     
     Now use the `ls` command to see the files.
     ```
@@ -139,7 +93,7 @@ All collections are copied back to the initiating node ready for analysis or upl
     ls -al
     </copy>
     ```
-    Command Output:
+    Example Command Output:
     <pre>
     drwx------ 2 oracle oinstall     4096 Jul 15 17:33 .
     drwxr-xr-t 4 root   root         4096 Jul 15 17:39 ..
@@ -154,7 +108,7 @@ All collections are copied back to the initiating node ready for analysis or upl
     -rw-r--r-- 1 oracle oinstall     2240 Jul 15 17:33 lldbcs62.tfa_srdc_autosrdc_Mon_Jul_15_17_32_46_UTC_2024.zip.txt
     </pre>
     The diagcollect log is the top level log for the collection from each node.
-    The digcollect_console is the reduced log that is equivalent to what you would see on the console had this been a manual collection.
+    The digcollect_console is the reduced log that is equivalent to what you would see on the console had this been a manual collection.  
     There is a zip collection from each node and files that describe the collection is **txt** and **json** format. 
     > Note: The **txt** and **json** files are also in the collection zip files that you supply to Oracle Support and help in Support Request automation.
 
@@ -167,7 +121,7 @@ All collections are copied back to the initiating node ready for analysis or upl
     > Note: You would be uploading the *.zip* files to Oracle Support when you have to raise a Support Request for the Incidents  
 
 
-## Task 4: Understand Manual Diagnostic Collections for a specific incident type
+## Task 3: Understand Manual Diagnostic Collections for a specific incident type
 ![Manual Diagnostic Collections](./images/manual_collect.png =40%x*)
 AHF has manual collections for :-
 - When customers do not want Automatic Collections enabled.
@@ -188,7 +142,7 @@ the incident type.
 In the slide above you can see the comparison of collecting performance diagnostics through a command list and running the `tfactl diagcollect -srdc dbperf` command.
 
 
-## Task 5: Understand Manual Diagnostic Collections with the problem chooser
+## Task 4: Understand Manual Diagnostic Collections with the problem chooser
 ![Problem Choose Diagnostic Collections](./images/problem_choose.png =40%x*)
 
 Before the problem chooser, running a default AHF diagnostic Collection would mean that default collection collection would be taken.  
@@ -207,29 +161,88 @@ You will be prompted to choose:-
 > If you choose the last option we have to collect everything in the hope we get what you want.
 
 
-## Task 6:  Generate a manual collection using problem chooser
+## Task 5:  Generate a manual collection using problem chooser
 1.  Simply run the `tfactl diagcollect` command and let the problem chhoser guide you.
 ```
 <copy>
 tfactl diagcollect
 </copy>
 ```
-Command Output:
+Example Command Output:
 <pre>
-AHF has detected following events from 2024-07-22 17:29:38.000 to 2024-07-22 21:29:38.000
+AHF has detected following events from 2024-08-08 16:23:07.000 to 2024-08-08 20:23:07.000
 All events are displayed in UTC time zone
 
 Choose an event to perform a diagnostic collection:
-1  . 2024-07-22 20:47:24.000 [RDBMS.raclzhlm_dhh_bom.racLZHLM1] ORA-00600: internal error code, arguments: [kgb], [livelabs1], [17], [...
-2  . 2024-07-22 20:47:34.000 [RDBMS.raclzhlm_dhh_bom.racLZHLM1] ORA-04031: unable to allocate  bytes of shared memory (,,,)
-3  . Display Problem Categories
-4  . Enter a different event time
+1  . 2024-08-08 16:27:56.000 [RDBMS.racximwm_8wz_bom.racXIMWM1] Reconfiguration started (old inc 0, new inc 4)
+2  . 2024-08-08 18:23:20.000 [RDBMS.racximwm_8wz_bom.racXIMWM1] ORA-00600: internal error code, arguments: [kgb], [livelabs1], [17], [...
+3  . 2024-08-08 18:23:31.000 [RDBMS.racximwm_8wz_bom.racXIMWM1] ORA-04031: unable to allocate 90342 bytes of shared memory (,,,)
+4  . Display Problem Categories
+5  . Enter a different event time
 X  . Exit
-Choose the option [1-4]:
+Choose the option [1-5]:2
 </pre>
 
-You can at this point choose one of the detected events to generate a collection for or choose a 'problem category' if we did not detect the event or issue you want  
-to do a collection for by selecting '3  . Display Problem Categories'
+You can at this point choose one of the detected events to generate a collection for or you can choose a 'problem category' if we did not detect the event or issue you want.
+
+You will select **ORA-00600** which will do a manual collection for the ORA-00600 
+> Note: This is equivalent to running the ORA-00600 SRDC collection directly.
+
+Example Command Output:
+
+<pre>
+Database Name racximwm_8wz_bom was specified however this database has a Database Unique Name of racXIMWM_8wz_bom.
+ Database Unique Name racXIMWM_8wz_bom set for racximwm_8wz_bom.
+
+
+Components included in this collection: OS DATABASE ASM
+
+Preparing to execute support diagnostic scripts.
+
+Collecting data for local node(s).
+
+TFA is using system timezone for collection, All times shown in UTC.
+Scanning files from 2024-08-08 17:53:20 UTC to 2024-08-08 18:53:20 UTC
+
+Collection Id : 20240808202440lvracdb-s01-2024-08-08-1452081
+
+Detailed Logging at : /u01/app/oracle.ahf/data/repository/srdc_internalerror_collection_Thu_Aug_08_20_24_43_UTC_2024_node_local/diagcollect_20240808202440_lvracdb-s01-2024-08-08-1452081.log
+
+Waiting up to 120 seconds for collection to start
+2024/08/08 20:24:52 UTC : NOTE : Any file or directory name containing the string .com will be renamed to replace .com with dotcom
+2024/08/08 20:24:52 UTC : Collection Name : tfa_srdc_internalerror_Thu_Aug_08_20_24_42_UTC_2024.zip
+2024/08/08 20:24:53 UTC : Scanning of files for Collection in progress...
+2024/08/08 20:24:53 UTC : Collecting Additional Diagnostic Information...
+2024/08/08 20:25:28 UTC : Getting list of files satisfying time range [08/08/2024 17:53:20, 08/08/2024 18:53:20]
+2024/08/08 20:25:36 UTC : Executing TFA rdahcve with timeout of 600 seconds...
+2024/08/08 20:25:55 UTC : Collecting ADR incident files...
+2024/08/08 20:33:16 UTC : Executing IPS Incident Package Collection(s)...
+2024/08/08 20:33:23 UTC : No ADR Incidents for racximwm_8wz_bom covering period "2024-08-08 17:53:20" to "2024-08-08 18:53:20" were generated, IPS Pack will not be collected.
+2024/08/08 20:33:23 UTC : Executing SQL Script db_feature_usage.sql on racximwm_8wz_bom with timeout of 600 seconds...
+2024/08/08 20:33:23 UTC : Executing Collection for ASM with timeout of 1800 seconds...
+2024/08/08 20:34:05 UTC : Executing Collection for AFD with timeout of 1860 seconds...
+2024/08/08 20:34:09 UTC : Executing Collection for OS with timeout of 1920 seconds...
+2024/08/08 20:34:18 UTC : Completed Collection of Additional Diagnostic Information...
+2024/08/08 20:34:24 UTC : Completed Local Collection
+2024/08/08 20:34:24 UTC : Not Redacting this Collection ...
+2024/08/08 20:34:24 UTC : Collection completed on host: lvracdb-s01-2024-08-08-1452081 
+2024/08/08 20:34:24 UTC : Completed collection of zip files.
+
+.----------------------------------------------------------.
+|                    Collection Summary                    |
++--------------------------------+-----------+------+------+
+| Host                           | Status    | Size | Time |
++--------------------------------+-----------+------+------+
+| lvracdb-s01-2024-08-08-1452081 | Completed | 13MB | 572s |
+'--------------------------------+-----------+------+------'
+
+Logs are being collected to: /u01/app/oracle.ahf/data/repository/srdc_internalerror_collection_Thu_Aug_08_20_24_43_UTC_2024_node_local
+/u01/app/oracle.ahf/data/repository/srdc_internalerror_collection_Thu_Aug_08_20_24_43_UTC_2024_node_local/lvracdb-s01-2024-08-08-1452081.tfa_srdc_internalerror_Thu_Aug_08_20_24_42_UTC_2024.zip
+</pre>
+
+It can take a few minutes to complete the collection so now might be a good time to read on and then move on to the Next Lab.
+
+If you had selected 'Display Problem Categories' You would have been able to choose from one of the below categories to make your collection
 
 <pre>
 Problem Categories:
@@ -266,38 +279,8 @@ Select the category of your problem [1-28]:
 </pre>
 
 When you choose one of these categories we may request further details and then will run the specific Support Request Driven Collection for that category.
-> Note: Below is for example only. 
-> Do not proceed with this during a limited time lab as some collections can take minutes to complete . Choose 'X' to Exit at this time
 
-<pre>
-Select the category of your problem [1-28]:18
-1 . DB Hang/Performance
-2 . Problem not listed, provide problem description
-X . Exit
-Choose the option [1-2]:1
-Enter the time of the problem [YYYY-MM-DD HH24:MI:SS.sss]:2024-07-22 20:47:34.000                
-Enter the Database Name:
-Database Name raclzhlm_dhh_bom was specified however this database has a Database Unique Name of racLZHLM_dhh_bom.
- Database Unique Name racLZHLM_dhh_bom set for raclzhlm_dhh_bom.
-
-Is the issue related a specific Plugable Database? [Y|N]  [Required for this SRDC]: N
-Start time when the performance was bad:   
-Stop time when the performance was bad:   2024-07-22 21:17:34 
-If any particular SQL causes the database to be slow?[Y|N]  [Required for this SRDC]: N
-Do you wish to generate a System State Dump? [Y|y|N|n] [Required for this SRDC]: N
-
-Components included in this collection: DATABASE CHMOS CHA OS INSIGHT
-
-Preparing to execute support diagnostic scripts.
- Executing DB Script srdc_db_lfsdiag.sql on racLZHLM_dhh_bom with timeout of 120 seconds...
- Executing DB Script srdc_real_time_addm.sql on racLZHLM_dhh_bom with timeout of 120 seconds...
- Executing DB Script srdc_statsadvisor_report.sql on racLZHLM_dhh_bom with timeout of 300 seconds...
- Executing DB Script collect_logon_logoff_triggers.sql on racLZHLM_dhh_bom with timeout of 300 seconds...
- Executing OS Script get_perfhub_report with timeout of 600 seconds...
-....
-</pre>
-
-You may now *proceed to the next lab*.  
+You may now [proceed to the next lab](#next).  
 
 ## Acknowledgements
 * **Authors** -  Bill Burton

@@ -23,8 +23,7 @@ In this lab, you will:
 
 * Basic knowledge of Oracle Cloud Infrastructure (OCI) concepts and the console
 * Working knowledge of Python and Jupyter Lab
-* A working OCI virtual machine running Oracle Enterprise Linux 8, located in the US Midwest (Chicago) region
-* SSH access to the above VM
+* A working OCI tenancy for the GenerativeAI service calls
 * Completion of all previous labs
 
 ## Task 1: Vectorize the "question"
@@ -134,10 +133,14 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
 
     ```python
     <copy>
-    from transformers import LlamaTokenizerFast
+    <if type="freetier">from transformers import LlamaTokenizerFast
     import sys
 
-    tokenizer = LlamaTokenizerFast.from_pretrained("hf-internal-testing/llama-tokenizer")
+    tokenizer = LlamaTokenizerFast.from_pretrained("hf-internal-testing/llama-tokenizer")</if>
+    <if type="livelabs">from transformers import AutoTokenizer
+    import sys
+
+    tokenizer = AutoTokenizer.from_pretrained("./transformers/all-MiniLM-L12-v2", local_files_only=True)</if>
     tokenizer.model_max_length = sys.maxsize
 
     def truncate_string(string, max_tokens):
