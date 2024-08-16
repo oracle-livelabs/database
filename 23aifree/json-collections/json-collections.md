@@ -22,7 +22,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-- Oracle Database 23ai Free Developer Release
+- Oracle Database 23ai, version 23.4 or above
 - All previous labs successfully completed
 
 ## Task 1: Create Collection
@@ -247,7 +247,7 @@ More generally, constraints can be used to check the data being entered for vari
     Now copy and paste the query below in the worksheet and click the *Run query* button to run the SQL query to alter the **movie** table and add constraints.
 
     ```
-    <copy>alter table movies add constraint movies_json_schema
+    <copy>alter table "movies" add constraint movies_json_schema
     check (data is json validate '{   "type": "object",
         "properties": {
             "_id": { "type": "number" },
@@ -272,7 +272,7 @@ More generally, constraints can be used to check the data being entered for vari
 
 	```
 	<copy>
-	alter table movies add constraint no_negative_price
+	alter table "movies" add constraint no_negative_price
     check (
             JSON_EXISTS(data, '$?(@.price.number() >= 0)')
           );
@@ -282,7 +282,7 @@ More generally, constraints can be used to check the data being entered for vari
 
 	JSON_Exists is a SQL/JSON function that checks that a SQL/JSON path expression selects at least one value in the JSON data. The selected value(s) are not extracted – only their existence is checked. Here, *$?(@.price.number() >= 0)* is a standard, SQL/JSON path expressions. You'll learn more about SQJ/JSON functions later in this lab.
 
-4. Once the **movie** table is altered, navigate back to JSON workshop. Click the navigation menu on the top left and select **JSON** under Development.
+4. Once the **movies** table is altered, navigate back to JSON workshop. Click the navigation menu on the top left and select **JSON** under Development.
 
 	![JSON navigation](./images/development-json.png)
 
@@ -340,7 +340,7 @@ More generally, constraints can be used to check the data being entered for vari
                 "genre": "Romance",
                 "starring" :"tbd" }'), json_schema  )
     AS REPORT
-    from user_JSON_SCHEMA_COLUMNS where table_name = 'MOVIES')
+    from user_JSON_SCHEMA_COLUMNS where table_name = 'movies')
     select json_serialize(report pretty) from x
     /
     </copy>
@@ -354,7 +354,7 @@ In the SQL tool, run:
 
     ```
     <copy>
-    select constraint_name, json_serialize(json_schema) from user_JSON_SCHEMA_COLUMNS where table_name = 'MOVIES';
+    select constraint_name, json_serialize(json_schema) from user_JSON_SCHEMA_COLUMNS where table_name = 'movies';
     </copy>
     ```
 	![SQL for data dictionary](./images/sql-data-dict.png)
@@ -372,4 +372,4 @@ You may now proceed to the next lab.
 
 * **Author** - William Masdon, Kaylien Phan, Hermann Baer
 * **Contributors** -  David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - William Masdon, Database Product Manager, April 2023
+* **Last Updated By/Date** - Hermann Baer, Database Product Management, August 2024
