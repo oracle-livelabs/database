@@ -12,28 +12,27 @@ Estimated Time: 10 minutes
 In this lab, you will:
 
 - Create a native JSON collection
-- Import the data from the JSON files extracted from another database into Oracle Database 23.4
+- Import data from JSON files  
 - Run the JSON-To-Duality Migrator (both converter and importer)
 - Validate the newly created objects (tables and duality views)
 
 
 ### Prerequisites
 
-- Oracle Database 23.4
-- All previous labs successfully completed
+- Oracle Database 23ai, version 23.4 or above
 
 
 
 ## Task 1: Clean up the environment:
 
-1. Follow these steps to clean up your environment:
+1. Follow these steps to clean up your environment. These steps are only needed in case you're running the workshop more than once. If this is the first time you are using this workshop, you can skip the cleanup.
 
     ```
     <copy>
-    DROP VIEW if exists ADMIN.CONF_SCHEDULE_DUALITY;
-    DROP TABLE if exists ADMIN.CONF_SCHEDULE PURGE;
-    DROP TABLE if exists ADMIN.CONF_SCHEDULE_SCHEDULE PURGE;
-    DROP TABLE if exists ADMIN.CONF_SCHEDULE_ROOT PURGE;
+    DROP VIEW if exists CONF_SCHEDULE_DUALITY;
+    DROP TABLE if exists CONF_SCHEDULE PURGE;
+    DROP TABLE if exists CONF_SCHEDULE_SCHEDULE PURGE;
+    DROP TABLE if exists CONF_SCHEDULE_ROOT PURGE;
     </copy>
     ```
 
@@ -42,10 +41,10 @@ In this lab, you will:
 1. Option 1: In SQL Developer run:
 
     ```
-    <copy>CREATE JSON COLLECTION TABLE ADMIN.CONF_SCHEDULE;</copy>
+    <copy>CREATE JSON COLLECTION TABLE CONF_SCHEDULE;</copy>
     ```
 
-2. Option 2: Create in MongoDB Compass the collection _CONF\_SCHEDULE_
+2. Option 2: Create in MongoDB Compass the collection **CONF\_SCHEDULE**
 
 ![Create Collection](images/create_collection.png)
 
@@ -69,25 +68,28 @@ In this lab, you will:
 
     ```
     <copy>
-        SET SERVEROUTPUT ON
+    SET SERVEROUTPUT ON
     SET LINESIZE 10000
     DECLARE
-    schema_sql clob;
+        DBschema_sql clob;
+        myCurrentSchema varchar2(128) default null;
     BEGIN
-    schema_sql :=
-    dbms_json_duality.infer_and_generate_schema(
-    json('{"tableNames"    : [ "CONF_SCHEDULE" ],
-            "useFlexFields" : false,
-            "updatability"  : false,
-            "sourceSchema"  : "ADMIN"}'));
-    dbms_output.put_line('DDL Script: ');
-    dbms_output.put_line(schema_sql);
-    execute immediate schema_sql;
-    dbms_json_duality.import(table_name => 'CONF_SCHEDULE', view_name => 'CONF_SCHEDULE_DUALITY');
+        SELECT SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') into myCurrentSchema;
+
+        DBschema_sql :=
+        dbms_json_duality.infer_and_generate_schema(
+            json('{"tableNames"    : [ "CONF_SCHEDULE" ],
+                "useFlexFields" : false,
+                "updatability"  : false,
+                "sourceSchema"  : '''|| myCurrentSchema|| '''}'));
+        dbms_output.put_line('DDL Script: ');
+        dbms_output.put_line(DBschema_sql);
+
+        execute immediate DBschema_sql;
+
+        dbms_json_duality.import(table_name => 'CONF_SCHEDULE', view_name => 'CONF_SCHEDULE_DUALITY');
     END;
-
-    /
-
+    /    
     </copy>
     ```
 ## Task 5: Validate the newly created objects
@@ -96,21 +98,21 @@ In this lab, you will:
 
     ```
     <copy>
-    select json_serialize(data pretty) from "ADMIN"."CONF_SCHEDULE_DUALITY";
-    select * from dba_objects where owner='ADMIN' and object_name like '%SCHEDULE%'; -- note also the newly created FK
-    select * from ADMIN.CONF_SCHEDULE_SCHEDULE;
-    select * from ADMIN.CONF_SCHEDULE_ROOT;
+    select json_serialize(data pretty) from "CONF_SCHEDULE_DUALITY";
+    select * from user_objects where object_name like '%SCHEDULE%';
+    select * from CONF_SCHEDULE_SCHEDULE;
+    select * from CONF_SCHEDULE_ROOT;
     </copy>
     ```
 
-2. In MongoDB Compass after refreshing the databases, click on the _CONF\_SCHEDULE\_DUALITY_ collection under the ADMIN database
+2. In MongoDB Compass after refreshing the databases, click on the **CONF\_SCHEDULE\_DUALITY** collection under the ADMIN database
 
 ![Conf Schedule Duality](images/conf_schedule_duality%20collection.png)
 
-3. In mongosh, verify the number of documents in the _CONF\_SCHEDULE\_DUALITY_ collection:
+3. In mongosh, verify the number of documents in the **CONF\_SCHEDULE\_DUALITY** collection:
 
     ```
-    admin> <copy>db.CONF_SCHEDULE_DUALITY.countDocuments({});
+    hol23> <copy>db.CONF_SCHEDULE_DUALITY.countDocuments({});
     </copy>
     ```
 ## Learn More
