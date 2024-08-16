@@ -43,14 +43,19 @@ This lab assumes you have:
     </copy>
     ```
 
-3. Alter the session to log in to the PDB
+3. Show the existing pdbs in the database by using show pdbs.
     ```
     <copy>
+    show pdbs;
+    </copy>
+
+4. Alter the session to log in to the PDB
+   <copy>
     alter session set container=ORCLPDB1;
     </copy>
     ```
 
-4. Execute step1 as the sysdba user. This creates the transactions user and provides the necessary permission to the transactions user.
+5. Execute step1 as the sysdba user. This creates the transactions user and provides the necessary permission to the transactions user.
 
     ```
     <copy>
@@ -60,10 +65,37 @@ This lab assumes you have:
 
 ![dataload step1](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep1.png " ")
 
-5. Log on to SALES1 service as the transactions user using the password specified in step1 and run the step2 and step3.
+6. Exit from the sysdba session by pressing exit 
     ```
     <copy>
-    sqlplus transactions/******@ORCLPDB1:1521/SALES1
+    exit
+    </copy>
+    ```
+7.  Check the hostname of the linux box , by entering hostname command
+     ```
+    <copy>
+    hostname
+    </copy>
+    ```
+8. Logon to SALES1 service as the transaction user using the password specified in step1 in the format hostname:1521/SALES1
+    ```
+    <copy>
+    cat step1.sql
+    </copy>
+    ```
+    sqlplus transactions/<***PASSWORDFROMSTEP1****>@prod:1521/SALES1
+
+9. Execute step2 and step3 sequentially.
+
+     ```
+    <copy>
+    @step2.sql
+    </copy>
+    ```
+
+    ```
+    <copy>
+    @step3.sql
     </copy>
     ```
 
@@ -77,9 +109,16 @@ This lab assumes you have:
 2. After completing step4, you should see a commit complete message.
 ![dataload commit](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadcommit.png " ")
 
+3. Exit from the sqlplus session by entering exit 
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
 ## Task 3: Verify True Cache 
 
-1. Open a terminal window and connect to the podman container for true cache.
+1. Open a new terminal window and connect to the podman container for true cache.
     ```
     <copy>
     sudo podman exec -i -t truedb /bin/bash
@@ -87,12 +126,26 @@ This lab assumes you have:
     ```
 ![dataload truecache](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecache.png " ")
 
-2. Login to the database using the transaction user.
+2. Login to the truecache using the transaction user using the format <truecache_hostname>:1521/SALES1_TC
+
+sqlplus transactions/<***PASSWORDFROMSTEP1****>@truedb:1521/SALES1_TC
 ![dataload truecache login](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecachelogin.png " ")
 
 
 3. Verify the True Cache role.
+    ```
+    <copy>
+    SELECT DATABASE_ROLE FROM V$DATABASE;
+    </copy>
+    ```
 ![dataload truecache verify](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecacheverify.png " ")
+
+4. Exit from the sqlplus session by entering exit 
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
 
 You may now proceed to the next lab.
 
