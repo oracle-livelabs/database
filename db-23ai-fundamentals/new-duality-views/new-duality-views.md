@@ -275,17 +275,14 @@ This lab assumes you have:
     commit;
     </copy>
     ```
-
-    The new order array, with multi record insert
     
+    Let's see the customers orders now. 
+
     ```
     <copy>
     select * from orders where customer_id = 100;
     </copy>
     ```
-
-    ------- From here below  it's been removed ---- </br>
-    </br>
 
     Let's imagine we need to change one of the Product IDs. 
 
@@ -296,6 +293,7 @@ This lab assumes you have:
     SELECT json_serialize(data PRETTY) FROM customer_orders_dv;
     </copy>
     ```
+
 
 8. We can easily update the orders table and this will update all documents with nested orders of number 202.
 
@@ -321,7 +319,6 @@ This lab assumes you have:
 
     If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. If you get the error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value.
 
------ this portion here ----- </br>
 
 ## Task 3: (Optional) JSON Relational Duality Views with REST
 
@@ -351,13 +348,13 @@ This lab assumes you have:
 
     ![find the URL](images/r2.png " ")
 
-    for example,  mine looks like this 
+    For example,  mine looks like this: 
 
     ```
     ADB_LL_URL=https://ajs6esm7pafcr84-atp97134.adb.us-ashburn-1.oraclecloudapps.com
     ```
 
-6. Now, create a variable in your terminal (It shouldn't have / in the end.)
+6. Now, create a variable in your terminal (It shouldn't have / at the end.)
 
 	```
 	<copy>
@@ -372,7 +369,7 @@ This lab assumes you have:
     echo $ADB_LL_URL
     </copy>
     ```
-> NOTE: This base url will be unique for each user, verify that you are using the correct URL.
+    > NOTE: This base url will be unique for each user, verify that you are using the correct URL.
 
 8. Make a GET request from your laptop terminal command line.
 
