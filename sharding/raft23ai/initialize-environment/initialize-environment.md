@@ -6,10 +6,6 @@ In this lab we will review and startup all components required to successfully r
 
 *Estimated Lab Time:* 10 Minutes.
 
-Watch the video for a quick walk through of the Initialize Environment lab.
-
-[Initialize Environment lab](youtube:e3EXx3BMhec)
-
 ### Objectives
 - Initialize the workshop environment.
 
@@ -65,6 +61,6 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava,  Jyoti Verma
-* **Last Updated By/Date** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager, May 2024
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Ajay Joshi, Param Saini, Jyoti Verma
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, Consulting Member of Technical Staff, July 2024
 

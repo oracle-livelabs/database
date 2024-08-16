@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will review and startup all components required to successfully run this workshop.
+In this lab, you will check all components required to successfully run this workshop.
 
 Estimated Time: 5 Minutes.
 
@@ -15,43 +15,27 @@ In this lab, you will:
 
 ## Task 1: Familiarize yourself with the workshop environment
 
-1. The easiest way to complete the lab is to copy/paste the lab instructions directly into a terminal. Be sure to execute all commands in a code block. After pasting you must hit *RETURN*.
+1. The easiest way to complete the lab is to copy/paste the lab instructions directly into a terminal. Be sure to execute all commands in a code block. After pasting, you must hit *RETURN*.
 
-2. Before copy/pasting take notice of the commands that you execute. It is important to understand what the commands will do.
+2. Before copy/pasting, take notice of the commands that you execute; it is important to understand what the commands will do.
 
-3. You can use any terminal to run the lab. The lab sets the environment when appropriate.
+3. Double-click on the *Terminal* shortcut on the desktop. 
 
-4. In the upper-left corner, click *Activities*. 
+![Click shortcut to start a terminal](./images/initialize-environment-desktop-click-terminal.jpeg " ")
 
-![Click Activities to start a terminal](./images/initialize-environment-click-activities.png " ")
+4. The terminal has two tabs, *yellow* 🟨 and *blue* 🟦. The instructions might tell you which tab to use. If not, you can use any of them. All labs start by setting the appropriate environment.
 
-5. Then click on the *terminal* icon.
+5. Optionally, in the terminal, you can zoom in to make the text larger. 
 
-![Click the terminal icon to start a new terminal](./images/initialize-environment-click-terminal.jpeg)    
+![Zoom in to make the text larger in the terminal](./images/initialize-environment-terminal-zoom-in.png)    
 
-6. When the terminal opens, it says *Database ENV is not set*. You can disregard that message. All labs starts by setting the appropriate environment.
-
-7. In the terminal, you can zoom in to make the text larger. Press *CTRL* and *+* or select *Zoom In*.
-
-![Zoom in to make the text larger in the terminal](./images/initialize-environment-zoom-in.png)    
-
-8. If you need another terminal, either start a brand new one, or open a new tab in the existing terminal.    
-
-![Open a new tab in the existing terminal](images/initialize-environment-new-tab.png)
-
-9. As explained in the introduction, you can run some of the labs in parallel. When doing so, it might be useful to use multiple *desktops*. Then, you can run each lab on its own desktop. To switch between desktops click *Activities* and select the desktop in the right side. 
-
-    * When opening a new terminal on the second desktop, you must right-click on the icon and select *New window*
-
-![Switch between desktops to run each lab on a separate desktop](images/initialize-environment-new-desktop.jpeg)
-
-10. Throughout the labs you will open HTML documents in Firefox browser. If the text in the documents is too small, you can zoom in.
+6. Throughout the labs you will open HTML documents in Firefox browser. If the text in the documents is too small, you can zoom in.
 
 ![Zoom in in Firefox to make text bigger](images/initialize-environment-firefox-zoom.png)
 
 ## Task 2: Initialize the workshop environment
 
-1. Open a terminal or use an existing one. When you start the lab, the following components should be started.
+1. When you start the lab, the following components should be started.
 
     - Database Listener
         - LISTENER
@@ -60,7 +44,7 @@ In this lab, you will:
         - UPGR
         - CDB23
 
-2. Ensure the listener is started.
+2. Ensure the listener is started. Use the *yellow* terminal 🟨.
 
     ```
     <copy>
@@ -94,37 +78,10 @@ In this lab, you will:
     ```
     </details>
 
-4. Occasionally, the *UPGR* database fails to register with the listener. Set the environment and connect to *UPGR*.
-
-    ```
-    <copy>
-    . upgr
-    sqlplus / as sysdba
-    </copy>
-
-    -- Be sure to hit RETURN
-    ```
-
-5. Restart *UPGR*.
-
-    ```
-    <copy>
-    startup force
-    </copy>
-    ```
-
-6. Exit SQL*Plus.
-
-    ```
-    <copy>
-    exit
-    </copy>
-    ```
-
 You may now *proceed to the next lab*.
 
 ## Acknowledgements
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024

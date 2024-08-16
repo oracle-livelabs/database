@@ -9,7 +9,7 @@ walk you through a couple of different approaches. Oracle NoSQL Database Cloud
 Service supports both schema-based and schema-less (JSON) modeling so we will
 create examples of both tables.
 
-_Estimated Time:_ 7 minutes
+_Estimated Time:_ 11 minutes
 
 ### Objectives
 
@@ -199,7 +199,7 @@ screen. Click **Tables** on top right.
     ```
 8. Let's insert rows using the upload data feature. Upload the file `movie-file-kvjson.json` in your computer.
 
-   Right click button on this link [uplaod-file](./files/movie-file-kvjson.json), then click on **Save link as**.
+   Right click button on this link [upload-file](./files/movie-file-kvjson.json), then click on **Save link as**.
 
 
 9. Click **Upload Data**, and the 'Upload Data' screen appears.

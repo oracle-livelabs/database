@@ -1,4 +1,4 @@
-# Pluggable Database for Development Agility
+# Pluggable Databases for Development Agility
 
 ## Introduction
 In this lab you will assume the role of a development team member, and you will leverage Oracle Multitenant to perform tasks similar to what might be performed in a development and testing role.  The tasks in this lab include:
@@ -10,7 +10,7 @@ In this lab you will assume the role of a development team member, and you will 
 - Cloning your "production" PDB to a "test" PDB to use as a master copy for the test/development teams.
 - Creating thin "snapshot" copies of the test master for use by the test/development teams.
 
-Estimated Time to Complete This Workshop: 90 minutes
+Estimated Time to Complete This Workshop: 60 minutes
 
 
 ### Prerequisites
@@ -25,7 +25,7 @@ In the following labs, instead of SQL\*Plus you will use **Oracle SQL Developer 
 
 If you accidentally exit the SQLcl client during a lab exercise, the client can be launched using the command **sql /nolog** .
 
-**NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER**!
+**NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer, so be sure to press* **ENTER** *after the copy and paste!*
 
 **Please run all workshop tasks in the order in which they appear in this guide.**
 
@@ -47,7 +47,7 @@ In this first task, you will create and explore a new pluggable database **HRAPP
 
 2. It is common for application development teams to have to wait for a new database when they need one.  The process might be to submit a formal request for a new database, wait for approval, and then wait some more while an environment and database are provisioned.  Depending on the organization and the available infrastructure, that's a process that could take hours, days, or maybe even longer!  However, in a modern, data-driven environment, developers need the ability to quickly create and manage data stores in order to keep pace with rapidly evolving business needs.  Oracle Multitenant makes it easy to enable a "self-service" database environment for the development team.  Not only is database creation self-service and easy, it is also incredibly fast to stand up a new Oracle Database. 
 
-    In this task, you'll examine the container database **CDBTEST** by listing the pluggable databases already in the container; since this is a new CDB the only database plugged into it is the SEED database.  You will create the pluggable database **HRAPPDB**.  Note that the database is created and ready for use in a matter of seconds.
+    In this task, you'll examine the container database **CDBTEST** by listing the pluggable databases already in the CDB; since this is a new CDB the only database plugged into it is the SEED database.  You will create the pluggable database **HRAPPDB**.  Note that the database is created and ready for use in a matter of seconds.
 
     ```
     <copy>
@@ -67,7 +67,7 @@ In this first task, you will create and explore a new pluggable database **HRAPP
     </copy>
     ```
 
-    ![New pluggable database HRAPPDB is created in around 10 seconds!](./images/task1.2-createhrappdb.png " ")
+    ![New pluggable database HRAPPDB is created in a matter of seconds!](./images/task1.2-createhrappdb.png " ")
 
 
 2. Change your SQLcl session to point to the database you just created, **HRAPPDB**.  Then you will grant privileges to the database user **PDB\_ADMIN**. You will leverage user PDB_ADMIN's privileges later on in this workshop.
@@ -93,10 +93,9 @@ In this first task, you will create and explore a new pluggable database **HRAPP
     ```
     <copy>
     cd /home/oracle
-    wget -O db-sample-schemas.zip    https://github.com/oracle-samples/db-sample-schemas/archive/refs/tags/v21.1.zip
+    wget -O db-sample-schemas.zip    https://github.com/oracle-samples/db-sample-schemas/archive/refs/tags/v23.3.zip
     unzip -o db-sample-schemas.zip
-    cd db-sample-schemas-21.1
-    perl -p -i.bak -e 's#__SUB__CWD__#'$(pwd)'#g' *.sql */*.sql */*.dat
+    cd db-sample-schemas-23.3
     ls
     
     </copy>
@@ -105,24 +104,35 @@ In this first task, you will create and explore a new pluggable database **HRAPP
     
     ```
     <copy>
+
     cd human_resources
 
-    sqlplus sys/Oracle_4U@localhost:1521/hrappdb as sysdba
+    sql system/Oracle_4U@localhost:1521/hrappdb
 
-    @hr_main Oracle_4U USERS TEMP Oracle_4U /home/oracle/logs/ localhost:1521/hrappdb
-    
     </copy>
     ```
 
-     ![Database sample schemas are downloaded and the HR demo schema is loaded.](./images/task1.3-installsampleschemahr.png " ")
+    ```
+    <copy>
+
+    @hr_install 
+    
+    </copy>
+    ```
+    * At the prompts, enter the following...
+
+        - **password** Oracle_4U
+        - **tablespace** Press ENTER to accept the default value
+        - **overwrite?** Press ENTER to accept the default value
+
+     ![Database sample schemas HR demo schema is loaded.](./images/task1.3-installsampleschemahr.png " ")
 
 
-4. Launch SQLcl and connect as the database user **HR** to **HRAPPDB**, and verify that the sample schema objects have been created.
+4. Launch SQLcl and connect as the database user **HR** to **HRAPPDB**, and verify that the sample schema objects have been created.  If you encounter an error with an "ORA-01017" in it when running this step, re-run the previous step to install the HR sample schemas and be sure to enter **Oracle_4U** as the password!
 
 
     ```
     <copy>
-    exit
     cd /home/oracle 
     sql hr/Oracle_4U@localhost:1521/HRAPPDB
     </copy>
@@ -137,7 +147,7 @@ In this first task, you will create and explore a new pluggable database **HRAPP
 
    ![The output shows a summary of schema HR's objects.](./images/task1.4-hrobjectcounts.png " ")
 
-5. Connect again in SQLcl as **SYS** to the container database **CDBTEST** and view the tablespaces and datafiles created, plus the container (PDB or CDB) to which each datafile belongs.
+5. Connect again in SQLcl as **SYS** to the container database **CDBTEST** and view the tablespaces and datafiles created, plus the database (PDB or CDB) to which each datafile belongs.
 
     ```
     <copy>
@@ -177,7 +187,7 @@ You should still be connected to the SQLcl client and see a "SQL>" prompt.  If n
 First, you'll unplug **HRAPPDB** from **CDBTEST** into a ".pdb" compressed archive.
 
 
-1. While still in the SQLcl client, connect to the container **CDBTEST** as the superuser SYSDBA.
+1. While still in the SQLcl client, connect to the container database **CDBTEST** as the superuser SYSDBA.
 
     ```
     <copy>connect sys/Oracle_4U@localhost:1521/CDBTEST as sysdba</copy>
@@ -214,7 +224,7 @@ First, you'll unplug **HRAPPDB** from **CDBTEST** into a ".pdb" compressed archi
 
    ![The unplugged PDB shows as still in MOUNTED status until it is dropped.](./images/task2.3-drophrappdb.png " ")
 
-4. Now, query the datafiles that are part of **CDBTEST**.  You can see in the results that the datafiles for **HRAPPDB** are no longer part of the container database.
+4. Now, query the datafiles that are part of **CDBTEST**.  You can see in the results that the datafiles for **HRAPPDB** are no longer part of the container database. To run the query, either copy and paste the code below, or use the up arrow on your keyboard to recall that statement in SQLcl.
     
     ```
     <copy>
@@ -259,10 +269,6 @@ In this task, you will connect to container database, **CDBPROD**, and plug the 
     ```
     <copy>
     connect sys/Oracle_4U@localhost:1521/CDBPROD as sysdba
-    </copy>
-    ```
-    ```
-    <copy>
     show pdbs
     </copy>
     ```
@@ -334,13 +340,14 @@ Clone the pluggable database **HRAPP** to a new PDB named **HRAPP2**.
     ```
     <copy>
     connect hr/Oracle_4U@localhost:1521/hrapp 
+    exec dbms_stats.gather_schema_stats('HR')
     select table_name, num_rows from user_tables order by 1;
     </copy>
     ```
 
     ![User HR owns 7 database tables, each containing multiple rows of data.](./images/task4.1-hrapptablerows.png " ")
 
-2. Connect to the container **CDBPROD**.
+2. Connect to the container database **CDBPROD**.
 
     ```
     <copy>
@@ -392,7 +399,7 @@ You should still be connected to the SQLcl client and see a "SQL>" prompt.  If n
 
     ```
     <copy>
-    drop database link hr_prod;
+    drop database link IF EXISTS hr_prod;
     create database link hr_prod connect to pdb_admin identified by Oracle_4U using 'localhost:1521/hrapp';
     </copy>
     ```
@@ -410,7 +417,7 @@ You should still be connected to the SQLcl client and see a "SQL>" prompt.  If n
     ```
     ![PDB HRTEST is successfully cloned from PDB HRAPP at CDBPROD and opened.](./images/task5.3-hrtest.png " ")
 
-4. Connect to the newly-created HRTEST PDB and verify that database schema HR's exist - of course they do because this PDB is an exact clone of the source **HRAPP** database.
+4. Connect to the newly-created HRTEST PDB and verify that database schema HR's tables and rows exist - of course they do because this PDB is an exact clone of the source **HRAPP** database.
 
     ```
     <copy>
@@ -458,8 +465,8 @@ You should still be connected to the SQLcl client and see a "SQL>" prompt.  If n
     
     select count(*) from jobs;
 
-    insert into jobs values ('MK_ANALYST', 'Marketing Analyst',7000,11000);
-    insert into jobs values ('IT_DATASCI','Data Scientist',8000,15000);
+    insert into jobs values ('MK_ANALYST', 'Marketing Analyst',7000,11000), 
+    ('IT_DATASCI','Data Scientist',8000,15000);
     commit;
 
     select count(*) from jobs;
@@ -554,7 +561,7 @@ Note: when a PDB Snapshot Copy is created, the permissions for the datafiles of 
     3. Execute the PDB refresh of HRTESTMASTER.
     4. Create new PDB Snapshot Copies if desired.
 
-Now you've had a chance to try out Oracle Multitenant. Hopefully you've realized the value that Oracle Multitenant can bring to your organization:
+Now you've had a chance to try out Oracle Multitenant. Hopefully you've realized the value and agility that Oracle Multitenant can bring to your organization:
 - Oracle Multitenant made it easy for you to create a new database in just seconds.  
 - You were able to unplug your database for sharing with others, and plug in a database that was shared with your team.
 - The workshop tasks also showed how Oracle Multitenant makes it easy to:
@@ -567,7 +574,7 @@ Thank you for participting in this Oracle LiveLabs workshop!
 ## APPENDIX: Lab Cleanup and Reset
 If you'd like to run through this lab again on this same image, execute the following in order to clean up the environment before starting again.
 
-**NOTE** exit from SQLcl before running the following code.
+**NOTE exit from SQLcl before running the following code!**
     
    ```
    <copy>

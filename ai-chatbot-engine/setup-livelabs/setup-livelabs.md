@@ -12,24 +12,38 @@ Estimated Time: 15 minutes
 
 ### Prerequisites
 
-* Access to the NoVNC image specific to this lab
+* Access to the virtual environment generated for this lab
 * Basic Linux knowledge
 
-## Task 0: Start the Linux terminal
-To access the Linux terminal in the VM, click `Activities` in the top-left corner and then click the Terminal icon in the left drawer.
-![alt text](images/image2.png)
-![alt text](images/image1.png)
+## Task 1: Open the remote Jupyter Lab environment
+Click the `View Login Info` link in the uper left side of your lab window:
+
+![alt text](<images/image3.png>)
+
+To access the Jupyter Lab environment we will use to write and test our code, click the JupyterLab link in the resulting popup. 
+The password is listed in the same popup as well.
+
+The Jupyter Lab launcher should open.
+![Jupyter launcher](images/image1.png)
 
 ## Task 1: Setup the 23ai database
-> Note: Before we do anything, it would be better to open this lab in a Chrome window on the remote noVNC machine. Copying and pasting is way easier to perform this way.
 
-1. The latest Oracle Database 23ai is already installed in the Lab image, but we need to do a few things first.
+1. Open a terminal from the Jupyter Launcher by clicking on the `Terminal` button.
+   ![Jupyter terminal](images/image2.png)
+
+   Now enter the DB environment with :
+
+   ```bash
+   <copy>./dba.sh</copy> 
+   ```
+
+2. The latest Oracle Database 23ai is already installed in the Lab image, but we need to do a few things first.
 
 ```bash
 <copy>sqlplus sys/freepdb1 as sysdba</copy>
 ```
 
-2. Paste the following command inside the SQL*Plus session.
+3. Paste the following command inside the SQL*Plus session.
 
    ```sql
    <copy>alter session set container = freepdb1;</copy>
@@ -69,14 +83,14 @@ To access the Linux terminal in the VM, click `Activities` in the top-left corne
    </copy>
    ```
 
-3. Exiting the sqlplus session:
+4. Exiting the sqlplus session:
    ```sql
    <copy>
    exit
    </copy>
    ```
 
-4. We have now to allocate memory for the in-memory vector index.
+5. We have now to allocate memory for the in-memory vector index.
    ```bash
    <copy>
    sqlplus / as sysdba
@@ -94,7 +108,7 @@ To access the Linux terminal in the VM, click `Activities` in the top-left corne
    ```
    ```sql
    <copy>
-   shutdown
+   SHUTDOWN IMMEDIATE
    </copy>
    ```
    ```sql
@@ -112,72 +126,12 @@ To access the Linux terminal in the VM, click `Activities` in the top-left corne
    It should show `512M`.
 
 
-5. We now exit the sqlplus session:
+6. We now exit the sqlplus session:
    ```
    <copy>
    exit
    </copy>
    ```
-6. We need a listener to connect to our database from Python.
-
-   ```bash
-   <copy>nano $ORACLE_HOME/network/admin/tnsnames.ora</copy>
-   ```
-
-   Now copy the existing entry that already exists in there and looks similar to:
-
-   ```sql
-   FREE =
-   (DESCRIPTION =
-    (ADDRESS = (PROTOCOL = TCP)(HOST = holserv1.livelabs.oraclevcn.com)(PORT = 1521))
-    (CONNECT_DATA =
-      (SERVER = DEDICATED)
-      (SERVICE_NAME = FREE)
-    )
-  )
-   ```
-
-   And paste it just below, while renaming `FREE` to `FREEPDB1` to look like:
-   ```sql
-      FREEPDB1 =
-      (DESCRIPTION =
-         (ADDRESS = (PROTOCOL = TCP)(HOST = holserv1.livelabs.oraclevcn.com)(PORT = 1521))
-         (CONNECT_DATA =
-            (SERVER = DEDICATED)
-            (SERVICE_NAME = FREEPDB1)
-         )
-      )
-   ```
-   The final step is to re-start the listener:
-   ```bash
-   <copy>lsnrctl start</copy>
-   ```
-
-## Task 2: Prepare your Python environment
-We need to ensure that we are using the desired Python version. Python 3.12 is preinstalled in our lab image, but we need to set up a bit to make sure Jupyter is using it. To do that, we will create a virtual environment named `vectorsenv`.
-
-In the terminal window already open on your NoVNC window in the browser, type:
-
-   ```bash
-   <copy>python3.12 -m venv vectorsenv</copy>
-   ```
-   ```bash
-   <copy>source vectorsenv/bin/activate</copy>
-   ```
-
-## Task 2: Start Jupyter Lab
-Now, type:
-
-```bash
-jupyter-lab
-```
-
-A Chrome window will open, showing our jupyter launcher.
-
-![jupyter lab](images/image7.png)
-
-
-
 You may now **proceed to the next lab**
 
 ## Learn More
@@ -190,5 +144,7 @@ You may now **proceed to the next lab**
 * **Contributors** 
    - Liana Lixandru, Senior Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
    - Kevin Lazarz, Senior Manager, Product Management, Database
+   - Wojciech Pluta, Director, Technical Product Marketing
+* **Last Updated By/Date** -  Bogdan Farca, Jul 2024
    - Wojciech Pluta, Director, Technical Product Marketing
 * **Last Updated By/Date** -  Bogdan Farca, Jul 2024
