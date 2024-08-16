@@ -48,9 +48,11 @@ This lab assumes you have:
     <copy>
     show pdbs;
     </copy>
+    ```
 
 4. Alter the session to log in to the PDB
-   <copy>
+    ```
+    <copy>
     alter session set container=ORCLPDB1;
     </copy>
     ```
@@ -77,7 +79,7 @@ This lab assumes you have:
     hostname
     </copy>
     ```
-8. Logon to SALES1 service as the transaction user using the password specified in step1 in the format hostname:1521/SALES1
+8. Logon to SALES1 service as the transaction user using the password specified in step1 in the format hostname:1521/SALES1. To view the password open the file using cat command.
     ```
     <copy>
     cat step1.sql
@@ -104,6 +106,12 @@ This lab assumes you have:
 ## Task 2: Load Data into the Tables
 
 1. Run step4 as the transactions user.
+
+    ```
+    <copy>
+    @step4.sql
+    </copy>
+    ```
 ![dataload step4](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep4.png " ")
 
 2. After completing step4, you should see a commit complete message.
