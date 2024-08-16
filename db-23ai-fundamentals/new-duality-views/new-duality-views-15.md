@@ -19,10 +19,9 @@ This lab assumes you have:
 * Oracle Database 23ai
 * Completed the Get Started Lab
 
+## Task 1: Getting Started
 
-## Task 1: Create a Basic JSON Relational Duality View
-
-1.  **Create relational tables for customer data and order records.** The following code block creates two tables for customer and order data. Copy and run the following SQL script:
+1. Create relational tables for customer data and order records. The following code block creates two tables for customer and order data. Copy and run the following SQL script:
     ```
     <copy>
     DROP TABLE if exists orders CASCADE CONSTRAINTS;
@@ -55,13 +54,16 @@ This lab assumes you have:
         CONSTRAINT new_customers_pk PRIMARY KEY (id)
     );
 
-    -- Add foreign key constraint to orders table
+    -- Add foreign key constraint to new_orders table
     ALTER TABLE orders ADD (CONSTRAINT orders_pk PRIMARY KEY (id));
     ALTER TABLE orders ADD (CONSTRAINT orders_fk FOREIGN KEY (customer_id) REFERENCES customers (id));
     </copy>
     ```
 
-2. **Add JSON benefits by creating a duality view.** In addition to the list of JSON Relational Duality Views benefits from above, Duality Views also have a security benefit. 
+
+## Task 2: JSON Relational Duality View
+
+1. In addition to the list of JSON Relational Duality Views benefits from above, Duality Views also have a security benefit. 
 
     First, the documents you create (the Duality Views), **are not directly tied to the storage of the data**. 
 
@@ -91,46 +93,8 @@ This lab assumes you have:
 ;
 	</copy>
     ```
-3. **Insert new relational data.** Now that the duality view has been created, we can insert data to the relational table or the duality view. Let's start with adding data directly to the relational table.
 
-	```
-	<copy>
-    INSERT INTO customers (id, first_name, last_name, dob, email, address, zip, phone_number, credit_card)
-    VALUES (1, 'Alice', 'Brown', DATE '1990-01-01', 'alice.brown@example.com', '123 Maple Street', '12345', '555-1234', '4111 1111 1111 1111');
-<!-- 
-    INSERT INTO orders (id, customer_id, product_id, order_date, total_value)
-    VALUES (100, 1, 101, SYSTIMESTAMP, 300.00);
-	</copy>
-    ``` -->
-    ![inserting into our customers table](images/im3.png " ")
-
-4. **Insert new JSON data.** Let's insert data to the duality view of our customer data.
-
-	```
-	<copy>
-    INSERT INTO customers_DV values ('{"_id": 2, "FirstName": "Jim", "LastName":"Brown", "Email": "jim.brown@example.com", "Address": "456 Maple Street", "Zip": 12345}');
-
-    commit;
-	</copy>
-    ```
-5. **Review the current state of the customer relational table.** Let's see how the relational tables have changed after our inserts.
-    ```
-	<copy>
-    select * from customers;
-	</copy>
-    ```
-
-6. **Review the current state of the customer duality view.** Let's see how the relational tables have changed after our inserts.
-
-    ```
-	<copy>
-    select * from customers_dv;
-	</copy>
-    ```
-
-## Task 2: Create a JSON Relational Duality View w/ Limited Privileges
-
-1. **Create a duality view with order data and non-sensitive customer data.** The second security benefit comes from the fact we can **HIDE** data. We can create these views however we like. 
+2. The second security benefit comes from the fact we can **HIDE** data. We can create these views however we like. 
 
     For example, say we want to exclude sensitive personally identifiable information like customers credit card or phone numbers. 
     
@@ -164,15 +128,33 @@ This lab assumes you have:
 
 	![Creating the Duality View](images/im2.png =50%x*)
 
-2. **Insert new relational order data.**
-    ```
-    <copy>
+3. Now that the duality view has been created, we can insert data to the relational table or into the duality view. Let's start with adding data directly to the relational tables.
+
+
+	```
+	<copy>
+    INSERT INTO customers (id, first_name, last_name, dob, email, address, zip, phone_number, credit_card)
+    VALUES (1, 'Alice', 'Brown', DATE '1990-01-01', 'alice.brown@example.com', '123 Maple Street', '12345', '555-1234', '4111 1111 1111 1111');
+
+
     INSERT INTO orders (id, customer_id, product_id, order_date, total_value)
     VALUES (100, 1, 101, SYSTIMESTAMP, 300.00);
+
+	</copy>
+    ```
+    ![inserting into our new_customers table](images/im3.png " ")
+
+4. Let's now insert data into the duality view of our customer data.
+
+	```
+	<copy>
+    INSERT INTO customers_DV values ('{"_id": 2, "FirstName": "Jim", "LastName":"Brown", "Email": "jim.brown@example.com", "Address": "456 Maple Street", "Zip": 12345}');
+
+    commit;
 	</copy>
     ```
 
-3. **Review the current state of the data.** Let’s take a look at what we have. To enter an order, we simply link the customer information to the order. There is no data duplication.
+5. Let’s take a look at what we have. To enter an order, we simply link the customer information to the order. There is no data duplication.
 
     This Duality View will show us two customers.
 
@@ -198,16 +180,15 @@ This lab assumes you have:
 	</copy>
     ```
 
-## Task 3: Update Data via JSON Relational Duality Views
+6. Now, when we created the `customer_orders_dv` Duality View, we specified @insert, @update, @delete operations were allowed for our orders. Let's update an order through our Duality View.
 
-1. **Update order data in 'customer_orders_dv'.** When we created the `customer_orders_dv` Duality View, we specified @insert, @update, @delete operations were allowed for our orders. Let's update an order through our Duality View.
 
 	```
 	<copy>
     UPDATE customer_orders_dv c
     SET c.data = json_transform(
         data,
-        APPEND '$.orders' = JSON {'OrderID':101, 'ProductID' : 202, 'OrderDate' : SYSTIMESTAMP, 'TotalValue' : 150.00}
+        APPEND '$.orders' = JSON {'OrderID':123, 'ProductID' : 202, 'OrderDate' : SYSTIMESTAMP, 'TotalValue' : 150.00}
     )
     WHERE c.data."_id" =1;
     commit;
@@ -219,7 +200,7 @@ This lab assumes you have:
 
     ![Updating the our customers view](images/im4.png " ")
 
- 2. **Update sensitive customer data in 'customer_orders_dv'.** We talked about the security benefit of the Duality Views earlier. If you'll remember, we didn't allow for updates to our customers through the `customer_orders_dv` Duality View (or allow for sensitive customer information in the document). 
+ 7. We talked about the security benefit of the Duality Views earlier. If you'll remember, we didn't allow for updates to our customers through the `customer_orders_dv` Duality View (or allow for sensitive customer information in the document). 
  
     Lets take a look at how an update will fail if we try and update customer information through the `customer_orders_dv` document. 
 
@@ -238,13 +219,11 @@ This lab assumes you have:
     ```
     ![selecting from our customers table](images/im5.png " ")
 
-## Task 4: Update Data via Relational Tables
-
-1. **Add additional orders for customer Jim Brown.** Another benefit of the Duality Views is that, because the data is stored as tables, if we need to update any of our embedded documents, we only need to update the corresponding table, and all of the documents will reflect those changes. Doing that in pure JSON would be a challenge.
+8. Another benefit of the Duality Views is that, because the data is stored as tables, if we need to update any of our embedded documents, we only need to update the corresponding table, and all of the documents will reflect those changes. Doing that in pure JSON would be a challenge.
 
     Let's see an example.
 
-    First, we can insert some orders into our Jim Brown customer. Here, we can use `mergepatch`.
+    First, we can insert some orders into our Jim Brown customer. Here, we can use `mergepath`.
 
 
 	```
@@ -252,29 +231,37 @@ This lab assumes you have:
     update customer_orders_dv o set data = json_mergepatch(data,'{"orders" : 
     [
         {
-        "OrderID": 102,
-        "ProductID": 202,
+        "OrderID": 100,
+        "ProductID": 10100,
         "OrderDate": "2024-06-27T11:55:20.174683",
-        "TotalValue": 150.00,
+        "TotalValue": 300,
         "OrderShipped": null
         },
         {
-        "OrderID": 103,
+        "OrderID": 200,
         "ProductID": 20002,
         "OrderDate": "2024-06-27T11:55:50.424141",
-        "TotalValue": 500.00,
+        "TotalValue": 150,
         "OrderShipped": null
         }
     ]}')
-    where o.data."_id" = 2;
+    where o.data."_id" = 100;
 
     commit;
     </copy>
     ```
+    
+    Let's see the customers orders now. 
 
-2. **Display the current customer orders duality view.** Let's imagine we need to change one of the Product IDs. 
+    ```
+    <copy>
+    select * from orders where customer_id = 100;
+    </copy>
+    ```
 
-    Since both of our customers have ordered Product 202, we will update this product.
+    Let's imagine we need to change one of the Product IDs. 
+
+    Since both our customers have ordered Product 202, we will use this as our example.
 
 	```
 	<copy>
@@ -282,7 +269,8 @@ This lab assumes you have:
     </copy>
     ```
 
-3. **Update the customer orders duality view.** We can easily update the orders table and this will update all documents with nested orders of number 202.
+
+8. We can easily update the orders table and this will update all documents with nested orders of number 202.
 
 	```
 	<copy>
@@ -292,7 +280,7 @@ This lab assumes you have:
     </copy>
     ```
 
-4. **Display the updated customer orders duality view.** This one change updates every document where a nested order has `product_id = 202`.
+9. This one change updates every document where a nested order has `product_id = 202`.
 
     We can take a look at all the customer orders through the Duality View.
 
@@ -302,11 +290,12 @@ This lab assumes you have:
     </copy>
     ```
 
-5. Note that the "etag" value supplied in the content is used for "out-of-the-box" optimistic locking to prevent the well-known "lost update" problem that can occur with concurrent operations. During a replace operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target Duality View document.
+10. Note that the "etag" value supplied in the content is used for "out-of-the-box" optimistic locking to prevent the well-known "lost update" problem that can occur with concurrent operations. During a replace operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target Duality View document.
 
     If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. If you get the error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value.
 
-## Task 5: (Optional) Explore JSON Relational Duality Views with REST
+
+## Task 3: (Optional) JSON Relational Duality Views with REST
 
 1. We can also use Oracle's SODA (Simple Object Data API) or even the Mongo API to work against the Duality View.
 
@@ -334,13 +323,13 @@ This lab assumes you have:
 
     ![find the URL](images/r2.png " ")
 
-    for example,  mine looks like this 
+    For example,  mine looks like this: 
 
     ```
     ADB_LL_URL=https://ajs6esm7pafcr84-atp97134.adb.us-ashburn-1.oraclecloudapps.com
     ```
 
-6. Now, create a variable in your terminal (It shouldn't have / in the end.)
+6. Now, create a variable in your terminal (It shouldn't have / at the end.)
 
 	```
 	<copy>
@@ -355,7 +344,7 @@ This lab assumes you have:
     echo $ADB_LL_URL
     </copy>
     ```
-> NOTE: This base url will be unique for each user, verify that you are using the correct URL.
+    > NOTE: This base url will be unique for each user, verify that you are using the correct URL.
 
 8. Make a GET request from your laptop terminal command line.
 
@@ -396,4 +385,4 @@ You may now **proceed to the next lab**
 ## Acknowledgements
 * **Author** - Killian Lynch, Oracle Database Product Management, Product Manager
 * **Contributors** - Dominic Giles, Oracle Database Product Management, Distinguished Product Manager
-* **Last Updated By/Date** - Killian Lynch, Oracle Database Product Management, Product Manager, August 2024
+* **Last Updated By/Date** - Briana Ambler, Oracle Database Product Management, Product Manager, August 2024
