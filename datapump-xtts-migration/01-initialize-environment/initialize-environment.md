@@ -4,7 +4,9 @@
 
 In this lab, you will review and start-up all components required to run this workshop successfully.
 
-Estimated Time: 5 Minutes.
+Estimated Time: 5 Minutes
+
+[Next Level Platform](videohub:1_kfvfupd4)
 
 ### Objectives
 

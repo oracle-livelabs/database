@@ -4,7 +4,9 @@
 
 Now, it's time to start the migration. First, you take a level 0 backup that you restore in the target database. Although the migration has started, there is no downtime yet. The initial level 0 backup is taken without downtime.
 
-Estimated Time: 10 Minutes.
+Estimated Time: 10 Minutes
+
+[Next Level Platform](videohub:1_x11nn7nr)
 
 ![Start the initial level 0 backup/restore](./images/initial-backup-restore-overview.png " ")
 
