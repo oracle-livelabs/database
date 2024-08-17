@@ -6,7 +6,7 @@
             "title": "Introduction",
             "description": "This is an introduction to Oracle Database 23ai.",
             "type": "livelabs",
-            "filename": "../../introduction/ocw-introduction.md"
+            "filename": "../../0-intro/introduction.md"
         },
         {
             "title": "Lab 1: Create the schema and user",
@@ -24,7 +24,7 @@
             "title": "Lab 3: Build JSON Relational Duality Views",
             "description": "Creating the Duality Views",
             "type": "livelabs",
-            "filename": "../../3-json-duality/json-duality-views.md"
+            "filename": "../../3-json-duality-views/json-duality-views.md"
         },
         {
             "title": "Lab 4: Tools for working with JSON Duality Views",
