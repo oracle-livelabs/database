@@ -6,7 +6,7 @@ Welcome to the "Exploring JSON Relational Duality with SQL" lab. In this lab, yo
 
 This lab is only intended to give you a small taste of what Duality Views have to offer. For full, in-depth free workshops, follow this [link](https://livelabs.oracle.com/pls/apex/f?p=133:100:110578183178299::::SEARCH:duality%20views).
 
-**_Estimated Lab Time: 20 minutes_**
+**_Estimated Lab Time: 15 minutes_**
 
 ### **Objectives**
 
@@ -21,7 +21,7 @@ This lab assumes you have:
 
 ## Task 1: Create Relational Tables
 
-1. Create relational tables for customer data and order records. The following code block creates two tables for customer and order data. Copy and run the following SQL script:
+1. Create the 'customers' and 'orders' relational tables. The following code block creates two tables for customer and order data. Copy and run the following SQL script:
     ```
     <copy>
     DROP TABLE if exists orders CASCADE CONSTRAINTS;
@@ -59,7 +59,6 @@ This lab assumes you have:
     ALTER TABLE orders ADD (CONSTRAINT orders_fk FOREIGN KEY (customer_id) REFERENCES customers (id));
     </copy>
     ```
-
 
 ## Task 2: Create JSON Relational Duality Views
 
@@ -192,7 +191,7 @@ This lab assumes you have:
 
     ![Updating the our customers view](images/im4.png " ")
 
-6. Let's now try and update Alice's last name. You'll see that this is not allowed!
+2. Let's now try and update Alice's last name. You'll see that this is not allowed!
 
 	```
 	<copy>
@@ -207,7 +206,7 @@ This lab assumes you have:
     ```
     ![selecting from our customers table](images/im5.png " ")
 
-7. Let's insert some orders for our customer Jim Brown using `mergepatch`.
+3. Let's insert some orders for our customer Jim Brown using `mergepatch`.
 
 	```
 	<copy>
@@ -234,8 +233,7 @@ This lab assumes you have:
     </copy>
     ```
 
-
-8. Imagine we needed to change one of the Product IDs, for example product_id = 202 shown below. 
+4. Imagine we needed to change one of the Product IDs, for example product_id = 202 shown below. 
 
     ```
     <copy>
@@ -243,7 +241,7 @@ This lab assumes you have:
     </copy>
     ```
 
-9. Using a single update statement, we can easily update product_id 202 to 999 in every JSON duality view.
+5. Using a single update statement, we can easily update product_id 202 to 999 in every JSON duality view.
 
 	```
 	<copy>
@@ -256,6 +254,10 @@ This lab assumes you have:
     SELECT json_serialize(data PRETTY) FROM customer_orders_dv;
     </copy>
     ```
+
+    You can now see that the update made to the orders table has propogated to the customer orders duality view, and the same occurs for all other representations of the customers table!
+
+**You've completed the workshop!**
 
 Note that the "etag" value supplied in the content is used for "out-of-the-box" optimistic locking to prevent the well-known "lost update" problem that can occur with concurrent operations. During a replace operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target Duality View document.
 
