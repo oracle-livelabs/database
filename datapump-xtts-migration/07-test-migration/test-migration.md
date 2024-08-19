@@ -14,7 +14,9 @@ A few words about the test migration.
 
 This is an optional lab. You can skip it and move directly to lab 8. 
 
-Estimated Time: 20 Minutes.
+Estimated Time: 20 Minutes
+
+[Next Level Platform](videohub:1_qyy2rxav)
 
 ### Objectives
 
