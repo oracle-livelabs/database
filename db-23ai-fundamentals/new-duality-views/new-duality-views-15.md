@@ -19,7 +19,7 @@ This lab assumes you have:
 * Oracle Database 23ai
 * Completed the Get Started Lab
 
-## Task 1: Load Sample Data
+## Task 1: Create Relational Tables
 
 1. Create relational tables for customer data and order records. The following code block creates two tables for customer and order data. Copy and run the following SQL script:
     ```
@@ -61,17 +61,11 @@ This lab assumes you have:
     ```
 
 
-## Task 2: JSON Relational Duality View
+## Task 2: Create JSON Relational Duality Views
 
-1. In addition to the list of JSON Relational Duality Views benefits from above, Duality Views also have a security benefit. 
-
-    First, the documents you create (the Duality Views), **are not directly tied to the storage of the data**. 
-
-    What does that mean? 
+1. Create a duality view of the customers table. We'll use this one to manage our customer information.
 
     Using Duality Views, you can define how the data is accessed and used. Duality Views allow you to specify @insert, @update, and @delete privileges, meaning you define exactly how the applications and/or the developers work with data. 
-
-    Here, let's create a Duality View on the customers table. We'll use this Duality View to manage our customer information.
 
     ```
     <copy>
@@ -94,11 +88,7 @@ This lab assumes you have:
 	</copy>
     ```
 
-2. The second security benefit comes from the fact we can **HIDE** data. We can create these views however we like. 
-
-    For example, say we want to exclude sensitive personally identifiable information like customers credit card or phone numbers. 
-    
-    Let's create a view without those identifiers. 
+2. Say we want to exclude sensitive personally identifiable information like customers credit card or phone numbers. Let's create another view without those identifiers. 
 
     ```
     <copy>
@@ -128,7 +118,9 @@ This lab assumes you have:
 
 	![Creating the Duality View](images/im2.png =50%x*)
 
-3. Now that the duality view has been created, we can insert data to the relational table or into the duality view. Let's start with adding data directly to the relational tables.
+## Task 3: Add and Update Data
+
+1. Now that the duality view has been created, we can insert data to the relational table or into the duality view. Let's start with adding data directly to the relational tables.
 
 
 	```
@@ -144,7 +136,7 @@ This lab assumes you have:
     ```
     ![inserting into our new_customers table](images/im3.png " ")
 
-4. Let's now insert data into the duality view of our customer data.
+2. Let's now insert data into the duality view of our customer data.
 
 	```
 	<copy>
@@ -154,7 +146,7 @@ This lab assumes you have:
 	</copy>
     ```
 
-5. Let's see how the duality views have changed.
+3. Let's see how the duality views have changed.
 
     This Duality View will show us two customers.
 
@@ -170,7 +162,7 @@ This lab assumes you have:
     SELECT json_serialize(data PRETTY) FROM customer_orders_dv;
 	</copy>
     ```
-6. Let's see how the relational tables have changed.
+4. Let's see how the relational tables have changed.
 
 	```
 	<copy>
@@ -183,7 +175,7 @@ This lab assumes you have:
 	</copy>
     ```
 
-7. Now, when we created the `customer_orders_dv` Duality View, we specified @insert, @update, @delete operations were allowed for our orders. Let's update an order through our Duality View.
+5. Now, when we created the `customer_orders_dv` Duality View, we specified @insert, @update, @delete operations were allowed for our orders. Let's update an order through our Duality View.
 
 
 	```
@@ -203,7 +195,7 @@ This lab assumes you have:
 
     ![Updating the our customers view](images/im4.png " ")
 
-8. We talked about the security benefit of the Duality Views earlier. We didn't allow for updates to our customers through the `customer_orders_dv` Duality View (or allow for sensitive customer information in the document). 
+6. We talked about the security benefit of the Duality Views earlier. We didn't allow for updates to our customers through the `customer_orders_dv` Duality View (or allow for sensitive customer information in the document). 
  
     Lets take a look at how an update will fail if we try and update customer information through the `customer_orders_dv` document. 
 
@@ -222,8 +214,7 @@ This lab assumes you have:
     ```
     ![selecting from our customers table](images/im5.png " ")
 
-9. Another benefit of the Duality Views is that since the data is stored as tables, updating any embedded documents is easy since you only need to update the table. All the documents will automatically reflect the changes. This would be much harder to achieve with pure JSON. 
-
+7. Another benefit of the Duality Views is that since the data is stored as tables, updating any embedded documents is easy since you only need to update the table. All the documents will automatically reflect the changes. This would be much harder to achieve with pure JSON. 
 
     We can insert some orders into our Jim Brown customer using `mergepath`.
 
@@ -261,8 +252,7 @@ This lab assumes you have:
     </copy>
     ```
 
-
-10. Imagine we needed to change one of the Product IDs, for example product_id = 202 shown below. 
+8. Imagine we needed to change one of the Product IDs, for example product_id = 202 shown below. 
 
     ```
     <copy>
@@ -270,7 +260,7 @@ This lab assumes you have:
     </copy>
     ```
 
-11. Using a single update statement, we can easily update product_id 202 to 999 in every JSON duality view.
+9. Using a single update statement, we can easily update product_id 202 to 999 in every JSON duality view.
 
 	```
 	<copy>
@@ -284,9 +274,9 @@ This lab assumes you have:
     </copy>
     ```
 
-12. Note that the "etag" value supplied in the content is used for "out-of-the-box" optimistic locking to prevent the well-known "lost update" problem that can occur with concurrent operations. During a replace operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target Duality View document.
+Note that the "etag" value supplied in the content is used for "out-of-the-box" optimistic locking to prevent the well-known "lost update" problem that can occur with concurrent operations. During a replace operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target Duality View document.
 
-    If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. If you get the error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value.
+If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. If you get the error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value.
 
 
 ## Learn More
