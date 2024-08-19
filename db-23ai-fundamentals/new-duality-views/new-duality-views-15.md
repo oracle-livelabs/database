@@ -154,7 +154,7 @@ This lab assumes you have:
 	</copy>
     ```
 
-5. Let’s take a look at what we have. To enter an order, we simply link the customer information to the order. There is no data duplication.
+5. To enter an order, we simply link the customer information to the order. There is no data duplication.
 
     This Duality View will show us two customers.
 
@@ -163,7 +163,7 @@ This lab assumes you have:
     select * from customers_dv;
 	</copy>
     ```
-    And this Duality View will show us the same two customers - one with an order and one without.
+    This Duality View will show us the same two customers - one with an order and one without.
 
 	```
 	<copy>
@@ -171,7 +171,7 @@ This lab assumes you have:
 	</copy>
     ```
  
-    And we can see the same in relational.
+    We can see the same in relational.
 
 	```
 	<copy>
@@ -200,7 +200,7 @@ This lab assumes you have:
 
     ![Updating the our customers view](images/im4.png " ")
 
- 7. We talked about the security benefit of the Duality Views earlier. If you'll remember, we didn't allow for updates to our customers through the `customer_orders_dv` Duality View (or allow for sensitive customer information in the document). 
+ 7. We talked about the security benefit of the Duality Views earlier. We didn't allow for updates to our customers through the `customer_orders_dv` Duality View (or allow for sensitive customer information in the document). 
  
     Lets take a look at how an update will fail if we try and update customer information through the `customer_orders_dv` document. 
 
@@ -219,11 +219,10 @@ This lab assumes you have:
     ```
     ![selecting from our customers table](images/im5.png " ")
 
-8. Another benefit of the Duality Views is that, because the data is stored as tables, if we need to update any of our embedded documents, we only need to update the corresponding table, and all of the documents will reflect those changes. Doing that in pure JSON would be a challenge.
+8. Another benefit of the Duality Views is that since the data is stored as tables, updating any embedded documents is easy since you only need to update the table. All the documents will automatically reflect the changes. This would be much harder to achieve with pure JSON. 
 
-    Let's see an example.
 
-    First, we can insert some orders into our Jim Brown customer. Here, we can use `mergepath`.
+    We can insert some orders into our Jim Brown customer using `mergepath`.
 
 
 	```
