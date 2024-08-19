@@ -170,7 +170,7 @@ This lab assumes you have:
 	</copy>
     ```
 
-## Task 3: Update Data
+## Task 4: Update Data
 
 1. Remember, the `customer_orders_dv` duality view only allows us to modify the order data. Let's update Alice's orders.
 
