@@ -1,8 +1,8 @@
-# Exploring JSON Relational Duality with SQL and Rest
+# Exploring JSON Relational Duality with SQL
 
 ## Introduction
 
-Welcome to the "Exploring JSON Relational Duality with SQL and REST" lab. In this lab, you will learn about the JSON Relational Duality feature, which allows for the seamless integration between the relational and JSON data models. This feature provides the strengths of both approaches, allowing you to easily manipulate data in either model.
+Welcome to the "Exploring JSON Relational Duality with SQL" lab. In this lab, you will learn about the JSON Relational Duality feature, which allows for the seamless integration between the relational and JSON data models. This feature provides the strengths of both approaches, allowing you to easily manipulate data in either model.
 
 This lab is only intended to give you a small taste of what Duality Views have to offer. For full, in-depth free workshops, follow this [link](https://livelabs.oracle.com/pls/apex/f?p=133:100:110578183178299::::SEARCH:duality%20views).
 
@@ -10,7 +10,7 @@ This lab is only intended to give you a small taste of what Duality Views have t
 
 ### **Objectives**
 
-This lab aims to provide hands-on experience with JSON-relational Duality Views, demonstrating how to get the strengths of both JSON and relational data models. You will learn how to create, query, and update JSON-relational Duality Views using SQL and REST.
+This lab aims to provide hands-on experience with JSON-relational Duality Views, demonstrating how to get the strengths of both JSON and relational data models. You will learn how to create, query, and update JSON-relational Duality Views using SQL.
 
 ### **Prerequisites**
 
@@ -19,7 +19,7 @@ This lab assumes you have:
 * Oracle Database 23ai
 * Completed the Get Started Lab
 
-## Task 1: Getting Started
+## Task 1: Load Sample Data
 
 1. Create relational tables for customer data and order records. The following code block creates two tables for customer and order data. Copy and run the following SQL script:
     ```
@@ -154,33 +154,36 @@ This lab assumes you have:
 	</copy>
     ```
 
-5. To enter an order, we simply link the customer information to the order. There is no data duplication.
+5. Let's see how the duality views have changed.
 
     This Duality View will show us two customers.
 
 	```
 	<copy>
-    select * from customers_dv;
+    SELECT json_serialize(data PRETTY) FROM customer_dv;
 	</copy>
     ```
     This Duality View will show us the same two customers - one with an order and one without.
 
 	```
 	<copy>
-    select * from customer_orders_dv;
+    SELECT json_serialize(data PRETTY) FROM customer_orders_dv;
 	</copy>
     ```
- 
-    We can see the same in relational.
+6. Let's see how the relational tables have changed.
 
 	```
 	<copy>
     select * from customers;
+	</copy>
+    ```
+    	```
+	<copy>
     select * from orders;
 	</copy>
     ```
 
-6. Now, when we created the `customer_orders_dv` Duality View, we specified @insert, @update, @delete operations were allowed for our orders. Let's update an order through our Duality View.
+7. Now, when we created the `customer_orders_dv` Duality View, we specified @insert, @update, @delete operations were allowed for our orders. Let's update an order through our Duality View.
 
 
 	```
@@ -193,18 +196,18 @@ This lab assumes you have:
     WHERE c.data."_id" =1;
     commit;
 
-    select * from customer_orders_dv o where o.data."_id" = 1;
+    select json_serialize(data PRETTY) from customer_orders_dv o where o.data."_id" = 1;
     </copy>
     ```
 
 
     ![Updating the our customers view](images/im4.png " ")
 
- 7. We talked about the security benefit of the Duality Views earlier. We didn't allow for updates to our customers through the `customer_orders_dv` Duality View (or allow for sensitive customer information in the document). 
+8. We talked about the security benefit of the Duality Views earlier. We didn't allow for updates to our customers through the `customer_orders_dv` Duality View (or allow for sensitive customer information in the document). 
  
     Lets take a look at how an update will fail if we try and update customer information through the `customer_orders_dv` document. 
 
-    Try and change the name of Jim's last name from Brown to Browne.
+    Try and change the name of Alice's last name from Brown to Browne.
 
 	```
 	<copy>
@@ -219,7 +222,7 @@ This lab assumes you have:
     ```
     ![selecting from our customers table](images/im5.png " ")
 
-8. Another benefit of the Duality Views is that since the data is stored as tables, updating any embedded documents is easy since you only need to update the table. All the documents will automatically reflect the changes. This would be much harder to achieve with pure JSON. 
+9. Another benefit of the Duality Views is that since the data is stored as tables, updating any embedded documents is easy since you only need to update the table. All the documents will automatically reflect the changes. This would be much harder to achieve with pure JSON. 
 
 
     We can insert some orders into our Jim Brown customer using `mergepath`.
@@ -244,7 +247,7 @@ This lab assumes you have:
         "OrderShipped": null
         }
     ]}')
-    where o.data."_id" = 100;
+    where o.data."_id" = 2;
 
     commit;
     </copy>
@@ -254,127 +257,37 @@ This lab assumes you have:
 
     ```
     <copy>
-    select * from orders where customer_id = 100;
+    select * from orders where customer_id = 2;
     </copy>
     ```
 
-    Let's imagine we need to change one of the Product IDs. 
 
-    Since both our customers have ordered Product 202, we will use this as our example.
+10. Imagine we needed to change one of the Product IDs, for example product_id = 202 shown below. 
 
-	```
-	<copy>
+    ```
+    <copy>
     SELECT json_serialize(data PRETTY) FROM customer_orders_dv;
     </copy>
     ```
 
-
-8. We can easily update the orders table and this will update all documents with nested orders of number 202.
+11. Using a single update statement, we can easily update product_id 202 to 999 in every JSON duality view.
 
 	```
 	<copy>
     UPDATE orders
     SET product_id = 999
     WHERE product_id = 202;
-    </copy>
-    ```
+    
+    commit;
 
-9. This one change updates every document where a nested order has `product_id = 202`.
-
-    We can take a look at all the customer orders through the Duality View.
-
-	```
-	<copy>
     SELECT json_serialize(data PRETTY) FROM customer_orders_dv;
     </copy>
     ```
 
-10. Note that the "etag" value supplied in the content is used for "out-of-the-box" optimistic locking to prevent the well-known "lost update" problem that can occur with concurrent operations. During a replace operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target Duality View document.
+12. Note that the "etag" value supplied in the content is used for "out-of-the-box" optimistic locking to prevent the well-known "lost update" problem that can occur with concurrent operations. During a replace operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target Duality View document.
 
     If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. If you get the error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value.
 
-
-## Task 3: (Optional) JSON Relational Duality Views with REST
-
-1. We can also use Oracle's SODA (Simple Object Data API) or even the Mongo API to work against the Duality View.
-
-    For a small example, I will show this using a macOS native terminal and execute a basic GET request.
-
-2. Click on SQL under the Development section. The first thing we want to do is enable REST on our Duality Views. Use the Oracle Database Actions Navigator on the left side of the screen, click the drop-down arrow for the box showing the Table objects, and select Views. Refer to the picture below.
-
-    ![load rest](images/rest1.png " ")
-
-3. Right-click on the CUSTOMERS_DV, hover the mouse over REST, and click Enable if it isn't already enabled. See the picture below. NOTE: If it is enabled already, it will say Disable… instead. If you see Disable… you don't have to do anything. Skip to number 5.
-
-    ![locating rest](images/rest2.png =50%x*)
-
-4. The REST Enable Object side panel will appear. Select Enable to continue.
-
-    ![pick the rest panel](images/rest3.png " ")
-
-    Alternatively we could have done this in PL/SQL.
-
-5. Here we will use the SQL Developer Web URL to obtain your ADB instance base URL:
-
-	```
-    ADB_LL_URL = https://xxxxxxxxxx.adb.<region>.oraclecloudapps.com
-    ```
-
-    ![find the URL](images/r2.png " ")
-
-    For example,  mine looks like this: 
-
-    ```
-    ADB_LL_URL=https://ajs6esm7pafcr84-atp97134.adb.us-ashburn-1.oraclecloudapps.com
-    ```
-
-6. Now, create a variable in your terminal (It shouldn't have / at the end.)
-
-	```
-	<copy>
-    export ADB_LL_URL=https://ajs6esm7pafcr84-atp97134.adb.us-ashburn-1.oraclecloudapps.com
-    </copy>
-    ```
-
-7. Check it was set.
-
-	```
-	<copy>
-    echo $ADB_LL_URL
-    </copy>
-    ```
-    > NOTE: This base url will be unique for each user, verify that you are using the correct URL.
-
-8. Make a GET request from your laptop terminal command line.
-
-	```
-	<copy>
-    curl -X GET $ADB_LL_URL/ords/admin/customers_dv/ | json_pp
-
-    </copy>
-    ```
-    ![pull one doc](images/r1.png " ")
-
-
-9. This lab is only intended to give you a small taste of what Duality Views have to offer. For full, in-depth free workshops, follow the link below:
-
-    [23ai JSON Duality View Workshops](https://livelabs.oracle.com/pls/apex/f?p=133:100:110578183178299::::SEARCH:duality%20views)
-
-    In summary, this lab checks out the power of JSON Relational Duality Views, allowing you to work with data in either JSON Document format or SQL Relational format. Changes made through views are reflected in the corresponding documents and tables. This flexibility enables convenient create, read, update, or delete operations across multiple documents and tables with ease.
-
-10. We can clean up from the lab by dropping our tables. Navigate back to the SQL editor or go back to task one - step one if you need a reminder where it is.
-
-    ```
-    <copy>
-    DROP TABLE orders CASCADE CONSTRAINTS;
-    DROP TABLE customers CASCADE CONSTRAINTS;
-    DROP VIEW customer_orders_dv;
-    DROP VIEW customers_dv;
-
-    </copy>
-    ```
-
-You may now **proceed to the next lab** 
 
 ## Learn More
 
