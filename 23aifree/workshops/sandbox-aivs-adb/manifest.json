@@ -9,9 +9,9 @@
             "filename": "../../introduction/intro-aivs-adb.md"
         },
         {
-            "title": "Get Started",
+            "title": "Get Started with NoVNC Remote Desktop",
             "description": "Using noVNC Remote Desktop",
-            "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+            "filename": "../../introduction/using-novnc-remote-desktop.md"
         },
         {
             "title": "Lab 1: Launch the Oracle ADB Free Container Image",
