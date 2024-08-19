@@ -4,7 +4,9 @@
 
 Now, you have migrated the database. Before going live, there are a few important tasks to carry out, plus you should test the new database. 
 
-Estimated Time: 10 Minutes.
+Estimated Time: 10 Minutes
+
+[Next Level Platform](videohub:1_qxg5tjfj)
 
 ### Objectives
 
@@ -15,7 +17,7 @@ In this lab, you will:
 
 ## Task 1: Final migration tasks
 
-1. Set the environment to *CDB23* and connect.
+1. Use the *blue* terminal 🟦. Set the environment to *CDB23* and connect.
 
     ```
     <copy>
@@ -231,7 +233,7 @@ In this lab, you will:
 
 In this step, you would normally perform extensive testing of the new database before deciding whether to go live. In this lab, you do just a very simple test.
 
-1. Ensure all data has been brought over to the target database. You check whether the tables `F1.F1_LAPTIMES_BACKUP` and `F1.F1_LAPTIMES_BACKUP2` exist. These are the tables you created earlier in the labs.
+1. Still in the *blue* terminal 🟦. Ensure all data has been brought over to the target database. You check whether the tables `F1.F1_LAPTIMES_BACKUP` and `F1.F1_LAPTIMES_BACKUP2` exist. These are the tables you created earlier in the labs.
 
     ```
     <copy>
@@ -240,7 +242,7 @@ In this step, you would normally perform extensive testing of the new database b
     </copy>
     ```
 
-    * If you didn't complete lab 8, you won't find `F1.F1_LAPTIMES_BACKUP2`, and the last query will fail with `ORA-00942`.
+    * If you didn't complete lab 7 (Test migration), you won't find `F1.F1_LAPTIMES_BACKUP2`, and the last query will fail with `ORA-00942`.
     * In a real migration, you would perform much more extensive testing. 
 
     <details>
@@ -260,19 +262,19 @@ In this step, you would normally perform extensive testing of the new database b
     ```
     </details>
 
-## Task 3: Additional post-migration tasks
-
-Once the tests complete, you shut down the source database. This ensures no one by mistake connects to the wrong database.
-
-1. Exit SQL*Plus.
+2. Exit SQL*Plus.
 
     ```
     <copy>
     exit
     </copy>
-    ```
+    ```    
 
-2. Set the environment to the source database and connect.
+## Task 3: Additional post-migration tasks
+
+Once the tests complete, you shut down the source database. This ensures no one by mistake connects to the wrong database.
+
+1. Use the *yellow* terminal 🟨. Set the environment to the source database and connect.
 
     ```
     <copy>
@@ -311,4 +313,4 @@ Once the tests complete, you shut down the source database. This ensures no one 
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024

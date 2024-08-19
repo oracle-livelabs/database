@@ -6,6 +6,8 @@ In this lab, you will upgrade the *UPGR* database from Oracle Database 19c to 23
 
 Estimated Time: 45 minutes
 
+[Hitchhiker's Guide LAB5](videohub:1_k95lbxlz)
+
 ### Objectives
 
 In this lab, you will:
@@ -24,7 +26,7 @@ This lab assumes:
 
 It is strongly recommended to always use the latest version of AutoUpgrade. To use AutoUpgrade, you must create a config file.
 
-2. Set the environment to the *UPGR* database and check the AutoUpgrade version.
+1. Use the *yellow* terminal 🟨. Set the environment to the *UPGR* database and check the AutoUpgrade version.
 
     ```
     <copy>
@@ -185,6 +187,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     * By specifying `target_cdb` you instruct AutoUpgrade to also perform a non-CDB to PDB conversion.
     * `restoration` defines whether a guaranteed restore point is created before the upgrade.
     * `add_after_upgrade_pfile` points to a file containing the initialization parameters you want to add after upgrade. 
+    * `timezone_upg` skips the timezone file upgrade. 
 
     <details>
     <summary>*click to see the output*</summary>
@@ -196,6 +199,7 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     upg1.target_cdb=CDB23
     upg1.restoration=no
     upg1.add_after_upgrade_pfile=/home/oracle/scripts/upgr_after_addinit.ora
+    upg1.timezone_upg=NO
     ```
     </details>
 
@@ -257,7 +261,7 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     ==========================================
     [DB Name]                UPGR
     [Version Before Upgrade] 19.21.0.0.0
-    [Version After Upgrade]  23.4.0.24.05
+    [Version After Upgrade]  23.5.0.24.07
     ------------------------------------------
     [Stage Name]    PRECHECKS
     [Status]        SUCCESS
@@ -431,7 +435,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
     Notice the *Logfiles* section. This is the location of the relevant log files. Note the *Logs Base* location.
 
-5. Open a second terminal.
+5. Switch to the *blue* terminal 🟦. Do not exit AutoUpgrade.
 
 6. Go to the *Logs Base* location.
 
@@ -484,8 +488,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
     * Notice that each phase (*preupgrade*, *prefixups*, *drain*, *dbupgrade*, etc.) has its own subdirectory. Explore the subdirectories and log files.
 
-7. Switch back to the first terminal.
-   
+7. Switch back to the *yellow* terminal 🟨. Do not close the *blue* terminal 🟦.    
 
 8. You are still connected to the AutoUpgrade console. Monitor the upgrade using the `status` command. The `-a` parameter instructs AutoUpgrade upgrade to refresh the information at a given interval.
 
@@ -561,4 +564,4 @@ AutoUpgrade completely automates upgrades and incorporates our best practices. A
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024

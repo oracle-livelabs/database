@@ -154,7 +154,7 @@ It is now time to insert the prepared chunks into the vector database.
    <copy>
    un = "vector"
    pw = "vector"
-   cs = "localhost/FREEPDB1"
+   <if type="freetier">cs = "localhost/FREEPDB1"</if><if type="livelabs">cs = "host.containers.internal/FREEPDB1"</if>
    </copy>
    ```
    > Note: Use the exact username and password you set up for the database in the previous lab.
@@ -201,8 +201,8 @@ with connection.cursor() as cursor:
    ```python
    <copy>
    from sentence_transformers import SentenceTransformer
-
-   encoder = SentenceTransformer('all-MiniLM-L12-v2')
+   <if type="freetier">encoder = SentenceTransformer('all-MiniLM-L12-v2')</if>
+   <if type="livelabs">encoder = SentenceTransformer('./transformers/all-MiniLM-L12-v2', local_files_only=True)</if>
    </copy>
    ```
    Ignore the warning saying `IProgress not found.`, among others.

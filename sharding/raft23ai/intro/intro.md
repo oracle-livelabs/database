@@ -22,7 +22,7 @@ Once you complete your setup, the next lab will cover:
 
 
 
-We will use Podman containers and demonstrate multiple use cases.
+We will use Podman containers, RAFT UI App and demonstrate multiple use cases.
 
 ### Prerequisites
 - An Oracle Cloud Account - Please view this workshop's LiveLabs landing page to see which environments are supported
@@ -35,6 +35,6 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager, May 2024
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Ajay Joshi, Param Saini, Jyoti Verma
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, Consulting Member of Technical Staff, July 2024
 
