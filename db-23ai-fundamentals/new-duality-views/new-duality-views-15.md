@@ -118,7 +118,7 @@ This lab assumes you have:
 
 	![Creating the Duality View](images/im2.png =50%x*)
 
-## Task 3: Add and Update Data
+## Task 3: Add Data
 
 1. Now that the duality view has been created, we can insert data to the relational table or into the duality view. Let's start with adding data directly to the relational tables.
 
@@ -169,13 +169,10 @@ This lab assumes you have:
     select * from customers;
 	</copy>
     ```
-    	```
-	<copy>
-    select * from orders;
-	</copy>
-    ```
 
-5. Now, when we created the `customer_orders_dv` Duality View, we specified @insert, @update, @delete operations were allowed for our orders. Let's update an order through our Duality View.
+## Task 3: Update Data
+
+1. Remember, the `customer_orders_dv` duality view only allows us to modify the order data. Let's update Alice's orders.
 
 
 	```
@@ -195,11 +192,7 @@ This lab assumes you have:
 
     ![Updating the our customers view](images/im4.png " ")
 
-6. We talked about the security benefit of the Duality Views earlier. We didn't allow for updates to our customers through the `customer_orders_dv` Duality View (or allow for sensitive customer information in the document). 
- 
-    Lets take a look at how an update will fail if we try and update customer information through the `customer_orders_dv` document. 
-
-    Try and change the name of Alice's last name from Brown to Browne.
+6. Let's now try and update Alice's last name. You'll see that this is not allowed!
 
 	```
 	<copy>
@@ -214,10 +207,7 @@ This lab assumes you have:
     ```
     ![selecting from our customers table](images/im5.png " ")
 
-7. Another benefit of the Duality Views is that since the data is stored as tables, updating any embedded documents is easy since you only need to update the table. All the documents will automatically reflect the changes. This would be much harder to achieve with pure JSON. 
-
-    We can insert some orders into our Jim Brown customer using `mergepath`.
-
+7. Let's insert some orders for our customer Jim Brown using `mergepatch`.
 
 	```
 	<copy>
@@ -243,14 +233,7 @@ This lab assumes you have:
     commit;
     </copy>
     ```
-    
-    Let's see the customers orders now. 
 
-    ```
-    <copy>
-    select * from orders where customer_id = 2;
-    </copy>
-    ```
 
 8. Imagine we needed to change one of the Product IDs, for example product_id = 202 shown below. 
 
