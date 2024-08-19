@@ -6,6 +6,8 @@ In this lab, you will use the SQL Performance Analyzer (SPA) that is a part of t
 
 Estimated Time: 10 minutes
 
+[Hitchhiker's Guide LAB7](videohub:1_khvx83yu)
+
 ### Objectives
 
 In this lab, you will:
@@ -171,19 +173,23 @@ Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimize
 
     Notice:
     * The comparison method used in the two reports - *CPU\_TIME* and *ELAPSED\_TIME*.
-    * After upgrade, the test execution shows that the database - after upgrade - performs much worse than before upgrade. 
-        - For *CPU\_TIME* there is almost 300% regression in performance.
-        - For *ELAPSED\_TIME* there is around 150% regression in performance.
-    * The workload runs much slower in the upgraded database.
+    * Check the *Overall Impact* metric in the two reports. The test executions show that after upgrade the database performs much worse than before upgrade. 
+        - For *CPU\_TIME* there is more than 350% regression in performance.
+        - For *ELAPSED\_TIME* there is around 250% regression in performance.
+        - Numbers might vary in your database.
+    * *Conclusion:* The workload runs much slower in the upgraded database.
 
 10. Scroll down to *Top nn SQL ...*. The list shows the SQLs sorted by impact.
 
     ![recognize regressed statements and statements with plan change](./images/spa-report-top-sql-23ai.png " ")
 
-    * The first table on the left shows the SQLs that are using more CPU time after upgrade. The threshold in the SPA comparison is set to 2 %. Only SQLs regression more than that is highlighted. All, except one, SQLs have a plan change.
-    * The second table on the right shows the SQLs that are using more elapsed time after upgrade. A few are even performing better (the green rows) which is good. 
+    * The first table, on the left, shows the SQLs that are using more CPU time after upgrade. These are the red rows. 
+    * The green row is a SQL using less CPU time after upgrade. 
+    * The rows without a color are using the same CPU time after upgrade. The threshold in the SPA comparison is set to 2 %. Only SQLs changing more than that are highlighted.
+    * All regressing SQLs (the red rows) have a plan change.
+    * The second table, on the right, uses elapsed time as metric instead of CPU time.
 
-11. In the first report, find the details on SQL ID *4wg725nwpxb1z* and see the difference in execution plans.
+11. In the first report, find the details on SQL ID *0cwuxyv314wcg* and see the difference in execution plans.
 
     ![See details on individual SQLs](./images/spa-plan-compare-23ai.png " ")
 
@@ -252,13 +258,14 @@ Verify *optimizer\_index\_cost\_adj* is set to *10000*. This causes the optimize
     </copy>
     ```
 
-20. Find the details on SQL ID *4wg725nwpxb1z* again.
+20. Find the details on SQL ID *0cwuxyv314wcg* again.
 
     ![No change of plans](./images/spa-change-plan-compare-23ai.png " ")
 
     * Notice that the plan no longer changes. Without *optimizer\_index\_cost\_adj* the optimizer chooses the same plan after upgrade. 
-    * The new SPA report focuses on CPU time. There is a slight improvement, but below the 2% SPA threshold so the row is not marked in green. 
-    * There are several SQLs that - out-of-the-box - performs better in Oracle Database 23ai. Each new release of Oracle Database brings new and improved optimizer features.
+    * The new SPA report focuses on elapsed time. In this case, there is an improvement in the test execution (it is a green row). 
+
+21. Close Firefox.
 
 Normally, you would focus on the SQLs with a negative impact on your workload. The idea of such SPA runs is to accept the better plans and identify and cure the ones which are regressing.
 
@@ -274,4 +281,4 @@ You can run SQL Performance Analyzer on a production system or a test system tha
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024

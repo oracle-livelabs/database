@@ -6,6 +6,8 @@ In this lab, you will upgrade the *UPGR* database from Oracle Database 19c to 23
 
 Estimated Time: 45 minutes
 
+[Hitchhiker's Guide LAB5](videohub:1_k95lbxlz)
+
 ### Objectives
 
 In this lab, you will:
@@ -24,7 +26,7 @@ This lab assumes:
 
 It is strongly recommended to always use the latest version of AutoUpgrade. To use AutoUpgrade, you must create a config file.
 
-1. Use the *yellow* terminal. Set the environment to the *UPGR* database and check the AutoUpgrade version.
+1. Use the *yellow* terminal 🟨. Set the environment to the *UPGR* database and check the AutoUpgrade version.
 
     ```
     <copy>
@@ -433,7 +435,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
     Notice the *Logfiles* section. This is the location of the relevant log files. Note the *Logs Base* location.
 
-5. Switch to the *blue* terminal. Do not exit AutoUpgrade.
+5. Switch to the *blue* terminal 🟦. Do not exit AutoUpgrade.
 
 6. Go to the *Logs Base* location.
 
@@ -486,7 +488,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
     * Notice that each phase (*preupgrade*, *prefixups*, *drain*, *dbupgrade*, etc.) has its own subdirectory. Explore the subdirectories and log files.
 
-7. Switch back to the *yellow* terminal. Do not close the *blue* terminal.    
+7. Switch back to the *yellow* terminal 🟨. Do not close the *blue* terminal 🟦.    
 
 8. You are still connected to the AutoUpgrade console. Monitor the upgrade using the `status` command. The `-a` parameter instructs AutoUpgrade upgrade to refresh the information at a given interval.
 
@@ -562,4 +564,4 @@ AutoUpgrade completely automates upgrades and incorporates our best practices. A
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024

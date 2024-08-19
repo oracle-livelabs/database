@@ -6,6 +6,8 @@ In this lab, you will capture and preserve SQL statements and information from t
 
 Estimated Time: 5 minutes
 
+[Hitchhiker's Guide LAB4](videohub:1_lomvncan)
+
 ### Objectives
 
 In this lab, you will:
@@ -23,7 +25,7 @@ This lab assumes:
 
 Capture workload information from the workload you generated in lab 3 - Generate AWR Snapshot. This time you will capture from AWR and into a different SQL Tuning Set.
 
-1. Use the *yellow* terminal. Set the environment to the *UPGR* database and connect.
+1. Use the *yellow* terminal 🟨. Set the environment to the *UPGR* database and connect.
 
     ```
     <copy>
@@ -114,4 +116,4 @@ A SQL Tuning Set allows you to transport this information between databases. You
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024
