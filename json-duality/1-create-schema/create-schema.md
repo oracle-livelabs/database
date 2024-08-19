@@ -144,7 +144,6 @@ You can also verify the contents of the table you just created by running the fo
     ```
     <copy>
     SELECT * FROM teacher ;
-    /
     </copy>
     ```
 

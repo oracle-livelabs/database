@@ -53,7 +53,7 @@ The `ALL_JSON_DUALITY_VIEWS` view displays:
 - JSON Schema information for the Duality View 
 - the status or validity of the Duality View
 
-[More information on ALL_JSON_DUALITY_VIEWS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEWS.html)
+[More information on ALL\_JSON\_DUALITY\_VIEWS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEWS.html)
 
 
 2. For our next query, we will drill one step deeper and see a listing of all Duality Views and the underlying tables that the Duality View maps to. Run the following query-
@@ -77,7 +77,7 @@ The `ALL_JSON_DUALITY_VIEW_TABS` view displays:
 - the relationship of the table to the parent table - in this case *singleton* means the child table is the target of an inner join 
 
 
-[More information on ALL_JSON_DUALITY_VIEW_TABS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEW_TABS.html)
+[More information on ALL\_JSON\_DUALITY\_VIEW\_TABS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEW_TABS.html)
 
 
 3. We can also see a listing of all Duality Views and the underlying tables and columns that the Duality View maps to. Run the following query-
@@ -104,7 +104,7 @@ The `ALL_JSON_DUALITY_VIEW_TAB_COLS` view displays:
 - position of the column in an ETAG, if it is part of an ETAG
 
 
-[More information on ALL_JSON_DUALITY_VIEW_TAB_COLS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEW_TAB_COLS.html)
+[More information on ALL\_JSON\_DUALITY\_VIEW\_TAB\_COLS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEW_TAB_COLS.html)
 
 
 4. The final dictionary view we'll look at in this lab provides information about the links associated with the base tables for the specified Duality Views. Run the following query-
@@ -131,7 +131,7 @@ The `ALL_JSON_DUALITY_VIEW_TAB_LINKS` view displays:
 - whether the column is part of a primary-key
 - position of the column in an ETAG, if it is part of an ETAG
 
-[More information on ALL_JSON_DUALITY_VIEW_TAB_LINKS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEW_LINKS.html)
+[More information on ALL\_JSON\_DUALITY\_VIEW\_TAB\_LINKS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEW_LINKS.html)
 
 Feel free to run some additional queries of your own. 
 
@@ -146,13 +146,13 @@ The migrator automates the task of creating duality views. The resulting views a
 
 More information on the JSON-To-Duality Migrator is available in the: [Oracle Database 23ai Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/json-duality.html)
 
-The migrator provides the following three PL/SQL functions in the SQL package DBMS_JSON_DUALITY:
+The migrator provides the following three PL/SQL functions in the SQL package DBMS\_JSON\_DUALITY:
 
  - **infer_schema** infers the JSON schema that represents all of the input document sets.
  - **generate_schema** produces the code to create the required database objects for each duality view.
- - **infer_and_generate_schema** performs both operations.
+ - **infer\_and\_generate\_schema** performs both operations.
 
-To keep things simple, we are going to perform the whole process using the *infer_and_generate_schema* package.
+To keep things simple, we are going to perform the whole process using the *infer\_and\_generate\_schema* package.
 
 1. For our first step, run the following script-
 
@@ -223,7 +223,7 @@ You should see the following-
 You should see the following-
    ![Showing contents of teacher_duality view](images/lab040202c.png " ")
 
-**NOTE:** You should notice a couple of things about the Duality Views that were created, first of all the views only contain the JSON document from each of the tables: `course_info`, `student_info` and `teacher\_info`. Also, the key or **\_ID** column of the JSON Duality View is the first field of the Document.
+**NOTE:** You should notice a couple of things about the Duality Views that were created, first of all the views only contain the JSON document from each of the tables: `course_info`, `student_info` and `teacher_info`. Also, the key or **\_ID** column of the JSON Duality View is the first field of the Document.
 
 3. We can also describe the Duality Views- 
 

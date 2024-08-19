@@ -21,7 +21,7 @@ Estimated Lab Time: 5 Minutes
 
 ### Prerequisites
 - You are connected to one of the DB System Nodes as described in Lab 1: Connect to your DB System
-- You have performed the tasks to generate some incidents as described in Lab 5: Generate Database and Clusterware Incidents for AHF to Detect and take Action on
+- You have performed the tasks to generate some incidents as described in Lab 2: Generate some Incidents in RAC Database
 
 
 ## Task 1:  Generate an AHF Insights report

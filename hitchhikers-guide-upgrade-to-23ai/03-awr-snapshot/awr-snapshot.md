@@ -4,7 +4,9 @@
 
 In this lab, you will execute an application workload using HammerDB on the *UPGR* database. You will capture workload information that you can use later on to compare pre-upgrade performance to post-upgrade performance.
 
-Estimated Time: 15 Minutes.
+Estimated Time: 15 Minutes
+
+[Hitchhiker's Guide LAB3](videohub:1_533ui7ij)
 
 ### Objectives
 
