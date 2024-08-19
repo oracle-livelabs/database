@@ -270,7 +270,6 @@ This lab assumes you have:
     </copy>
     ```
 
-
 11. Using a single update statement, we can easily update product_id 202 to 999 in every JSON duality view.
 
 	```
