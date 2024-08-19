@@ -152,7 +152,7 @@ This lab assumes you have:
 
 	```
 	<copy>
-    SELECT json_serialize(data PRETTY) FROM customer_dv;
+    SELECT json_serialize(data PRETTY) FROM customers_dv;
 	</copy>
     ```
     This Duality View will show us the same two customers - one with an order and one without.
