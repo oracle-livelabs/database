@@ -10,6 +10,8 @@ For simplicity, this lab teaches you to migrate a database from Linux to Linux, 
 
 Estimated Workshop Time: 1 hour
 
+[Next Level Platform](videohub:1_wcdk0nws)
+
 ### Objectives
 
 In this workshop, you will:

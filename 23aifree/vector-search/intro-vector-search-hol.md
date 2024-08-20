@@ -78,9 +78,9 @@ As a retailer, you want customers to easily search your catalog for the clothing
 
 This doesn't mean that our catalog has nothing we could wear to a conference or in a professional setting. Our results are simply limited by traditional search methods. Only searching for a specific word means that we might overlook similar results because they aren't an exact match. Even when we find that exact match, it's still not a guarantee that it'll align with what you meant. 
 
-This because we're only looking at the literal value of of our search query and not considering the actual meaning of it. Vector search allows us to query our data based on its actual meaning. Let’s see how it simple it is to vector search the product descriptions instead.
+This because we're only looking at the literal value of of our search query and not considering the actual meaning of it. Vector search allows us to query our data based on its actual meaning. In the next lab, we'll embed these terms and perform vector search on them instead.
 
-## Task 3: Perform a Vector Search for Professional Attire
+<!-- ## Task 3: Perform a Vector Search for Professional Attire
 
 1. **Click Data Load, in the upper-right.**
     ![](images/task3.1.png)
@@ -118,7 +118,7 @@ This because we're only looking at the literal value of of our search query and 
     ORDER BY VECTOR_DISTANCE(to_vector(embedding), to_vector('[-9.68606323E-002,7.5337708E-002,-1.0658735E-001,-1.38738364E-001,-2.28260402E-002,3.5230644E-002,2.68885796E-003,1.36218229E-002,1.15028154E-002,4.23902161E-002,8.37896764E-002,2.90349014E-002,-1.51465312E-001,1.49059035E-002,1.46184951E-001,-1.77720428E-001,5.30827865E-002,-5.13745425E-003,-7.5569436E-002,1.34732634E-001,5.25507284E-003,3.61185595E-002,2.11690515E-001,5.85873537E-002,-3.19165476E-002,-7.93770403E-002,1.45305004E-002,4.49487194E-002,1.37902955E-002,-1.09221734E-001,-5.7302203E-002,-1.12185463E-001,-6.40390366E-002,6.2864095E-002,4.25061174E-002,-1.19959101E-001,5.48176914E-002,-1.05015293E-001,-1.09484673E-001,-1.26435086E-001,8.88467953E-002,-6.78603202E-002,7.37638995E-002,-5.0049141E-002,6.07395545E-002,-1.30454943E-001,-5.51283062E-002,-1.21642545E-001,-3.97110172E-002,1.46834096E-002,-9.3602553E-002,2.41991818E-001,3.517735E-002,-7.62047153E-003,1.30953774E-001,-1.40298694E-001,9.79949087E-002,-6.78110123E-002,-1.04402095E-001,9.76447538E-002,8.0076322E-002,-1.31879494E-001,-8.34248215E-002,-8.54361951E-002,-1.22926809E-001,-8.59939158E-002,8.22370127E-002,5.52646583E-003,9.4893679E-002,-9.64170173E-002,-3.16511393E-002,-9.48159024E-003,-7.33673051E-002,-3.52119654E-002,-2.69408673E-002,9.13547445E-003,1.26846209E-001,3.09299417E-002,1.38598114E-001,4.07091081E-002,3.46698835E-002,2.05623899E-002,3.31137851E-002,-8.18310399E-003,-6.5582931E-002,-7.39831626E-002,-7.24066142E-003,-6.11410327E-002,1.57419547E-001,-1.34564966E-001,8.96778107E-002,-4.31015593E-004,-1.22770734E-001,7.80297145E-002,5.69474846E-002,8.80813822E-002,3.1488277E-002,-1.51161058E-002,7.1529232E-002,8.24968889E-002,-1.08482465E-001,1.52552053E-002,4.57050614E-002,-1.20126978E-001,9.49510187E-002,-7.69320577E-002,-1.02195516E-001,1.10023908E-001,5.00271246E-002,-1.07030541E-001,7.50863254E-002,5.98394163E-002,5.17932661E-002,5.67459613E-002,6.10302612E-002,8.13639611E-002,-6.97210804E-002,-1.61270708E-001,6.98513016E-002,7.82461837E-002,-1.56437326E-002,1.21171348E-001,6.85361698E-002,-1.86466992E-001,-1.40970141E-001,-1.14370458E-001,-3.85081656E-002,6.8552658E-002]'), EUCLIDEAN ) 
     FETCH EXACT FIRST 10 ROWS ONLY;
     </copy>
-    ```
+    ``` -->
 
 ## Acknowledgements
 - **Authors** - Brianna Ambler, Database Product Management, August 2024

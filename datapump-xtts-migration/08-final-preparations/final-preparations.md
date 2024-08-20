@@ -4,7 +4,9 @@
 
 Right before the outage starts, there are a few final preparations.
 
-Estimated Time: 5 Minutes.
+Estimated Time: 5 Minutes
+
+[Next Level Platform](videohub:1_dmmf02vy)
 
 ### Objectives
 
