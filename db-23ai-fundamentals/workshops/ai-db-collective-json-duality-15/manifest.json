@@ -6,17 +6,17 @@
           "title": "Introduction",
           "description": "This is an introduction to JSON Duality Views",
           "type": "livelabs",
-          "filename": "../../intro/sql-introduction.md"
+          "filename": "../../intro/json-dv-intro-15.md"
       },
       {
         "title": "Get Started with LiveLabs",
-        "filename": "../../intro/green-button-setup.md"
+        "filename": "../../intro/green-button-setup-15.md"
     },
       {
         "title": "Lab 1: JSON Duality Views",
         "description": "Try out JSON Duality Views in 23ai",
         "type": "livelabs",
-        "filename": "../../new-duality-views/new-duality-views.md"
+        "filename": "../../new-duality-views/new-duality-views-15.md"
     },
         {
           "title": "Need Help?",
