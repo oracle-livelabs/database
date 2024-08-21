@@ -8,7 +8,9 @@ Typically, the procedure is used for cross-platform migrations from big-endian p
 
 For simplicity, this lab teaches you to migrate a database from Linux to Linux, but the script and procedures are identical to those of a cross-platform migration.
 
-Estimated Workshop Time: 1 hour 30 minutes
+Estimated Workshop Time: 1 hour
+
+[Next Level Platform](videohub:1_wcdk0nws)
 
 ### Objectives
 

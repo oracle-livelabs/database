@@ -16,7 +16,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-- Oracle Database 23ai Free Developer Release
+- Oracle Database 23ai, version 23.4 or above
 - All previous labs successfully completed
 
 
@@ -32,7 +32,7 @@ This lab expects you to be in SQL Developer Web (Database Tools -> SQL) where yo
     <copy>
     select m.data.title, m.data.gross.number() from movies m
     where m.data.gross.number() > 1000000000
-    order by m.data.gross.number() desc
+    order by m.data.gross.number() desc;
     </copy>
     ```
 
@@ -52,7 +52,7 @@ This lab expects you to be in SQL Developer Web (Database Tools -> SQL) where yo
 
     ![Toggle for advanced view](images/explain-plan-advanced.png)
     
-    We can see that the query used a JSONTABLE evaluation.
+    We can see that the query used a full table scan.
 
     ![Explain plan in shows jsontable](images/explain-plan-2.png)
 
@@ -79,7 +79,7 @@ In this task we'll create a Search Index. Search Indexes are created over the wh
     <copy>
     select m.data.title, m.data.gross.number() from movies m
     where m.data.gross.number() > 1000000000
-    order by m.data.gross.number() desc
+    order by m.data.gross.number() desc;
     </copy>
     ```
 
@@ -149,6 +149,8 @@ Note: Unlike CONTAINS, JSON_TextContains does not return a value - it is effecti
 
     Looking at the results, there is only one movie where Stellan Skarsgård and Shia LeBeouf are both in the cast.
 
+    You can proceed to the next lab.
+
 ## Learn More
 
 * [How to Store, Query and Create JSON Documents in Oracle Database](https://blogs.oracle.com/sql/post/how-to-store-query-and-create-json-documents-in-oracle-databaseå))
@@ -157,4 +159,4 @@ Note: Unlike CONTAINS, JSON_TextContains does not return a value - it is effecti
 
 * **Author** - Roger Ford, Hermann Baer
 * **Contributors** -  David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - Roger Ford, Database Product Manager, November 2023
+* **Last Updated By/Date** - Hermann Baer, Database Product Management, August 2024

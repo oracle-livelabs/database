@@ -58,7 +58,7 @@ For this task you need the following info from previous steps:
 
 6. On the page Connection details, fill in the following entries, otherwise leave defaults:
     - Database details, select **Enter database information**
-    - Database connection string (use this format host:port/db service name): **DBCS Public IP**:**1521**/**DBCS CDB Service** get this values from the terraform output
+    - Database connection string : **CDB Connection String** value from the terraform output
     - Initial load database username: **system**
     - Initial load database password: Select **Admin Password** value from Terraform output
     - Select **Use different credentials for replication**
@@ -105,7 +105,7 @@ For this task you need the following info from previous steps:
 
 5. On the page Connection details, fill in the following entries, otherwise leave defaults:
     - Database details, select **Enter database information**
-    - Database connection string (use this format host:port/db service name): **DBCS Public IP**:**1521**/**DBCS PDB Service** get this values from the terraform output
+    - Database connection string: **PDB Connection String** value from the terraform output
     - Initial load database username: **system**
     - Initial load database password: Select **Admin Password** value from Terraform output
     - Select **Use different credentials for replication**

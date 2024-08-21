@@ -1,6 +1,22 @@
 # Introduction
 
 ## About this Workshop
+
+Welcome to the Navigating Oracle Database Troubleshooting with Oracle Autonomous Health Framework(AHF) and AHF Insights Workshop!  
+This workshop covers the basics of AHF with a guide to where AHF is on your database system, and a taster of the tools it contains. Keep in mind that this is not the complete list of tools, but is just a sample of what AHF can do.
+
+In this workshop you will work on a livelabs sandbox 2-node Oracle Real Application Clusters database in the Oracle Cloud.  
+Oracle Cloud Infrastructure offers 2-node RAC DB systems on virtual machines.
+
+For more about Virtual DB systems, click [here](https://docs.cloud.oracle.com/en-us/iaas/Content/Database/Concepts/overview.htm).
+
+You will then download AHF Insights reports to your local system and take a tour on how Insights can help determine your database systems issues.
+
+Estimated Workshop Time:  85 minutes
+
+
+## About Oracle Autonomous Health Framework (AHF)
+
 Oracle Autonomous Health Framework (AHF) is deployed automatically across various Systems, and all new versions can be downloaded from My Oracle Support(MOS).  
 AHF is avilable for all major platforms supported by Oracle Database 19c and above. It is deployed as part of Grid Infrastructure and Oracle Database.
 
@@ -10,19 +26,6 @@ AHF is also deployed on all Database Cloud Systems automatically
 
 ![AHF Deployment](./images/ahfdistro-cloud.png =40%x*)
 
-In this workshop you will work on a sandbox  2-node Oracle Real Application Clusters database in the Oracle Cloud.  
-Oracle Cloud Infrastructure offers 2-node RAC DB systems on virtual machines.
-
-You will be using the VM.Standard2.2 shape with 4 OCPUs and 60GB of memory.
-
-For more about Virtual DB systems, click [here](https://docs.cloud.oracle.com/en-us/iaas/Content/Database/Concepts/overview.htm).
-
-Estimated Workshop Time:  1.5 hours
-
-
-
-
-## About Oracle Autonomous Health Framework (AHF)
 The Oracle Autonomous Health Framework product contains a number of integrated proactive and reactive tools that try to help maintain 24x7 availability of cloud and on-premise systems by ensuring compliance to best practice,  monitoring, notifying customers of issues seen and generating diagnostic collections when problems do occur.  AHF goes from telling you how to avoid issues with best practice checking to speeding up logging Support Requests after detecting an issue and gathering the required diagnostics.
 
 ![AHF Deployment](./images/ahftools.png =40%x*)
@@ -40,7 +43,7 @@ There is an ongoing project to pull all of these tools under the single 'ahf' co
 - `ahfctl` - for some AHF level configuration
 - `ahf`    - Where commands are new or have migrated from the above.
 
-## Objectives
+## Workshop Objectives
 - Connect to a DB System
 - Understand how to identify and Check AHF
 - Upgrade AHF to the latest version
@@ -64,6 +67,9 @@ There is an ongoing project to pull all of these tools under the single 'ahf' co
 - [ORA-04030](https://blogs.oracle.com/database/post/ora-04030)
 - [ORA-07445](https://blogs.oracle.com/database/post/ora-07445)
 - [Oracle Database Performance Tuning](https://blogs.oracle.com/database/post/database-performance-tuning)  
+
+You may now *proceed to the first lab*.
+
 
 ## Acknowledgements
 
