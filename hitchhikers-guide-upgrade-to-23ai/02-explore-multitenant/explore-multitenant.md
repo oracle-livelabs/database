@@ -6,6 +6,8 @@ In this lab, you will familiarize yourself with the multitenant architecture.
 
 Estimated Time: 10 minutes
 
+[Hitchhiker's Guide LAB2](videohub:1_0ingf3gr)
+
 ### Objectives
 
 In this lab, you will:

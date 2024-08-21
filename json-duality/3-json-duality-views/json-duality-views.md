@@ -259,7 +259,7 @@ You should see the following-
 You should see the following-
    ![Showing describe duality view](images/lab030204.png " ")
 
-This time we are able to see the teacher information without the need to prefix the the `teacherName` with the `teacher`.
+This time we are able to see the teacher information without the need to prefix the `teacherName` with the `teacher`.
 
 Feel free to try some other queries.
 

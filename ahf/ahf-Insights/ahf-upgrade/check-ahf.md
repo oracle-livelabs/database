@@ -11,7 +11,9 @@ Estimated Time: 5 minutes
 ### Objectives
 
 In this lab, you will:
-* Determine the location of the AHF install.proerties file
+
+* Connect to one RAC instance with IP address from 'Get Started with LiveLabs' Lab
+* Determine the location of the AHF install.properties file
 * Use this file to review the various code and data locations
 * Check that the AHF processes are running
 * Confirm the health of AHF on the System 
@@ -20,10 +22,34 @@ In this lab, you will:
 - You are connected to one of the DB System Nodes as described in **Get Started with LiveLabs**
 - You are logged in as the **root user**
 
-## Task 1: Determine the location of the AHF Installation
-AHF writes it's Software base location to */etc/oracle.ahf.loc* on Linux and Unix systems.
+## Task 1: Connect to a Database system node and determine the location of the AHF Installation
 
-1.	Check the contents of the `/etc/oracle.ahf.loc` file 
+1. 	If you are not already connected to one of you Database Sytem nodes. 
+	Using one of your Public IP addresses, enter the command below to login as the *opc* user and verify connection to your nodes.
+
+    ```
+    <copy>
+    ssh -i id_rsa_livelabs opc@<Your Node IP Address>
+    </copy>
+    ```
+
+   When prompted, answer **yes** to continue connecting.
+
+>Note: You only need to connect to one Node for Labs 1 to 5 in this workshop
+
+2.  If you are not the **root** user then change to the **root** user from the **opc** user
+     
+     ```
+     <copy>
+      sudo su - 
+      </copy>
+     ```
+
+3.	Determine the location of AHF software.
+
+	AHF writes it's Software base location to */etc/oracle.ahf.loc* on Linux and Unix systems.
+
+	Check the contents of the `/etc/oracle.ahf.loc` file 
 	```
 	<copy>
 	cat /etc/oracle.ahf.loc
@@ -34,7 +60,8 @@ AHF writes it's Software base location to */etc/oracle.ahf.loc* on Linux and Uni
 	/u01/app/oracle.ahf
 	</pre> 
 
-2.	Use this location to check the contents of the AHF install.properties file
+4.	Use this location to check the contents of the AHF install.properties file
+
 	```
 	<copy>
 	cat /u01/app/oracle.ahf/install.properties

@@ -206,11 +206,22 @@ The Insights report will bring all this information in to a dynamic html report 
 6.  Run the Real time Database top consumer monitor 'oratop'  
     oratop gathers wait and usage metrics from the database and displays them by top session similar to the 'O/S' top command.
     > Note: hit the 'h' key to get help on the various options  
-    >       hit q to either exit the help or monitor itself when not in help.
+
+    >       hit 'q' to either exit the help or monitor itself when not in help.
+
 
     ```
     tfactl oratop -database <your database name>>
     ```
+    
+    You can use the **srvctl** command to get your database name if you do not have it handy as there is only one database configured.
+
+    ```
+    <copy>
+    tfactl oratop -database `srvctl config database`
+    </copy>
+    ```
+
     Example Command Output:
     ![Oratop Screenshot](./images/oratop-1.png =50%x*)
         
