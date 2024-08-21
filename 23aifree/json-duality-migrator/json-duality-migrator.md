@@ -2,7 +2,17 @@
 
 ## Introduction
 
-The JSON-To-Duality Migrator can migrate one or more existing sets of JSON documents to JSON-relational duality views. Its PL/SQL subprograms generate the views based on implicit document-content relations (shared content). By default, document parts that can be shared are shared, and the views are defined for maximum updatability. In this lab, we will migrate a JSON collection called CONF_SCHEDULE into Oracle Database 23ai and will test the end-result from both SQL Developer and MongoDB Compass.
+The **JSON-To-Duality Migrator** is a new tool in Oracle Database 23ai that can migrate one or more existing sets of JSON documents to JSON-relational duality views. The migrator can be used for database migration from any document database using JSON documents or build a new application using JSON documents as the migrator will automatically create the necessary duality views.
+The JSON-To-Duality Migrator is PL/SQL based. Its PL/SQL subprograms generate the views based on implicit document-content relations (shared content). By default, document parts that can be shared are shared, and the views are defined for maximum updatability. In this lab, we will migrate a JSON collection called CONF_SCHEDULE into Oracle Database 23ai and will test the end-result from both SQL Developer and MongoDB Compass.
+The new migrator which has two components:
+- **Converter**: Create the database objects needed to support the original JSON documents: duality views and their underlying tables and indexes.
+- **Importer**: Import Oracle Database JSON-type document sets that correspond to the original external documents into the duality views created by the converter.
+
+The **converter** is composed of these PL/SQL functions in package **DBMS\_JSON\_DUALITY**:
+- **infer\_schema** infers the JSON schema that represents all of the input document sets.
+- **generate\_schema** produces the code to create the required database objects for each duality view.
+- **infer\_and\_generate\_schema** performs both operations.
+
 
 Estimated Time: 10 minutes
 
@@ -11,8 +21,8 @@ Estimated Time: 10 minutes
 
 In this lab, you will:
 
-- Create a native JSON collection
-- Import data from JSON files  
+- Create a native JSON collection using the new syntax
+- Import data from JSON files
 - Run the JSON-To-Duality Migrator (both converter and importer)
 - Validate the newly created objects (tables and duality views)
 
@@ -20,6 +30,7 @@ In this lab, you will:
 ### Prerequisites
 
 - Oracle Database 23ai, version 23.4 or above
+- MongoDB Compass [can be downloaded for free from here:](https://www.mongodb.com/docs/compass/current/install/)
 
 
 
@@ -64,7 +75,7 @@ In this lab, you will:
 
 ## Task 4: Run the JSON-To-Duality Migrator
 
-1. Follow this code to run the JSON-To-Duality Migrator:
+1. Follow this code to run the JSON-To-Duality Migrator: we will do infer\_schema and generate\_schema together.
 
     ```
     <copy>
@@ -89,10 +100,10 @@ In this lab, you will:
 
         dbms_json_duality.import(table_name => 'CONF_SCHEDULE', view_name => 'CONF_SCHEDULE_DUALITY');
     END;
-    /    
+    /
     </copy>
     ```
-## Task 5: Validate the newly created objects
+## Task 5: Validate the newly created objects and check the output from the select statement below
 
 1. In SQL Developer run:
 
