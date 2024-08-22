@@ -25,7 +25,7 @@ Oracle Cloud is the industry's broadest and most integrated cloud provider, with
 
 2. Navigate to [https://www.oracle.com/dbexpert](https://www.oracle.com/dbexpert)
 
-    ![DBExpert Homepage](./images/homepage.png " ")
+    ![DBExpert Homepage](./images/homepage_sm.png "Image of DB Expert Homepage")
 
 
 ## Task 2: Overview of DB Expert
@@ -37,10 +37,10 @@ Oracle offers a comprehensive portfolio of database services, available to deplo
 As with many undertakings, the first step is often the hardest.  Where to start?  To assist you in taking the first step with a structured and guided discovery and evaluation process, our team created https://www.oracle.com/dbexpert, providing up-to-date, curated information covering Oracle's Database Management cloud services offerings.
 
 The site’s main tools include:
-- Information Viewers - quickly explore Oracle cloud service and database capabilities
-- Advisors - enter your requirements and instantly see recommendations and estimated pricing
-- Downloadable tools - analyze and report on your current Oracle estate
-- REST API endpoints - information retrieval and exercise the advisors
+- **Information Viewers** - quickly explore Oracle cloud service and database capabilities
+- **Advisors** - enter your requirements and instantly see recommendations and estimated pricing
+- **Downloadable tools** - analyze and report on your current Oracle estate
+- **REST API endpoints** - information retrieval and exercise the advisors
 
 The information viewers facilitate browsing and searching, while the advisors are user-driven interfaces that take inputs in pre-defined formats, such as select lists, radio buttons, and checkboxes, and provide appropriate guidance. These user experiences greatly simplify the process of selecting a service and deployment model.
 
@@ -52,22 +52,24 @@ The information viewers facilitate browsing and searching, while the advisors ar
 
 1. List of features 
 
-    | Non-Employee      | Oracle Employee |
-    | -------- | --------- |
-    | Save Service Advisor projects  | Save Service Advisor projects  |
-    |  | Share Service Advisor projects       |
-    |  | Compliance information enabled on Advisors |
-    |  | ISV apps enabled in Service Advisor |
-    |  | Oracle Internal Links enabled |
+    | Anonymous (no login) | General User Login | Oracle Employee Login |
+    | -------- | --------- |  --------- |
+    | Can use any tool                        | Can use any tool                  | Can use any tool  |
+    | Access to most information              | Access to all information         | Access to all information  |
+    | Session-based project (transient)       | Save projects (permanent)         | Save projects (permanent)  |
+    |                                         | Share projects                    | Share projects |
+    |                                         | Access to compliance data (email) | Compliance information enabled in Advisors |
+    |                                         |                                   | 3rd party ISV certifications in Advisors |
+    |                                         |                                   | Oracle Internal Links enabled |
     
 
 2. On the homepage, click on the login button in the top right
 
-    ![DBExpert Homepage Login](./images/homepage_login.png " ")
+    ![DBExpert Homepage Login](./images/homepage_login_sm.png "Image of DB Expert Homepage with sign in button highlighted")
 
 3. Sign in with Oracle email and password (or create an account if you don't have one!)
 
-    ![Oracle Login](./images/login.png " ")
+    ![Oracle Login](./images/login_sm.png "Generic Oracle login page")
 
 
 You may now **proceed to the next lab**.

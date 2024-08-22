@@ -17,9 +17,9 @@ In this workshop, you will learn how to:
 
 ## Learn More
 
-* [View & Compare OCI Data Management Services Overview (Video)](https://videohub.oracle.com/media/1_5a9man1g)
-* [Service Advisor Overview (Video)](https://videohub.oracle.com/media/1_0klpfez6)
-* [Migration Methods Advisor Overview (Video)](https://videohub.oracle.com/media/1_xko1jfib)
+* [View & Compare OCI Data Management Services Overview (Video)](https://videohub.oracle.com/media/1_5a9man1g "View & Compare OCI Data Management Services Overview (Video)")
+* [Service Advisor Overview (Video)](https://videohub.oracle.com/media/1_0klpfez6 "Service Advisor Overview (Video)")
+* [Migration Methods Advisor Overview (Video)](https://videohub.oracle.com/media/1_xko1jfib "Migration Methods Advisor Overview (Video)")
 
 ## Acknowledgements
 * **Author** - [](var:author_names), [](var:group_name)
