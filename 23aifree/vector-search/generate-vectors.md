@@ -37,110 +37,91 @@ This lab assumes you have:
     </copy>
     ```
 
-4. **Grant the DB\_DEVELOPER\_ROLE to dmuser.**
-    ```
-    <copy>
-    GRANT DB_DEVELOPER_ROLE TO dmuser identified by Welcome_123456;
-    </copy>
-    ```
-
-5. **Grant CREATE MINING MODEL privilege to dmuser.**
-    ```
-    <copy>
-    GRANT create mining model TO dmuser;
-    </copy>
-    ```
-
-6. **Create a folder for our vector embedding model in the PDB.**
+4. **Create a folder for our vector embedding model in the PDB.**
     ```
     <copy>
     CREATE OR REPLACE DIRECTORY DM_DUMP as 'models';
     </copy>
     ```    
-6. **Grant READ permissions on the DM_DUMP directory to dmuser.**
-    ```
-    <copy>
-    GRANT READ ON DIRECTORY DM_DUMP TO dmuser;
-    </copy>
-    ```
 
-7. **Grant WRITE permissions on the DM_DUMP directory to dmuser.**
-    ```
-    <copy>
-    GRANT WRITE ON DIRECTORY DM_DUMP TO dmuser;
-    </copy>
-    ```
-
-8. **Add quota to tablespace DATA for dmuser.**
-    ```
-    <copy>
-    alter user SALES quota 50m on users;
-    </copy>
-    ```
-
-9. **Copy the absolute file path of the PDB's working directory.** Copy the file path returned by the following command.
+5. **Copy the absolute file path of the PDB's working directory.** Copy the file path returned by the following command.
     ```
     <copy>
     select directory_path from all_directories where directory_name = 'DM_DUMP';
     </copy>
     ```
 
-10. **Return to the container shell. Move the vector model into the PDB's working directory.**
+6. **Return to the container shell. Move the vector model into the PDB's working directory.**
     ```
     <copy>
-    cp u01/BERT-TINY.onnx <working-directory>
+    exit
     </copy>
     ```
+    ```
+    <copy>
+    cp u01/all-MiniLM-L12-v2.onnx </copy> replace-with-working-directory
+    ```
 
-11. **Return to SQL Developer Web.**
+7. **Return to SQL Developer Web.**
 
-12. **Confirm the model appears in the database directory.**
+8. **Confirm the model appears in the database directory.**
     ```
     <copy>
     SELECT * FROM DBMS_CLOUD.LIST_FILES('DM_DUMP');
     </copy>
     ```
-
-You may proceed to the next lab.
-
-## Task 2: Import the ONNX Model
-
-1. **Return to the container shell.**
-
-2. **Connect to the ADB as dmuser.**
+9. **Load the ONNX model into the database.**
     ```
     <copy>
-    sqlplus dmuser/Welcome_123456@myatp_low
-    </copy>
-    ```
-3. **Load the ONNX model into the database.**
-    ```
-    <copy>
-    EXECUTE DBMS_VECTOR.LOAD_ONNX_MODEL('DM_DUMP','BERT-TINY.onnx','doc_model');
+    EXECUTE DBMS_VECTOR.LOAD_ONNX_MODEL('DM_DUMP','all-MiniLM-L12-v2.onnx','doc_model');
     </copy>
     ```
 You may now proceed to the next lab.
 
-## Task 3: Generate Vectors From the Data
+## Task 2: Generate, Store, & Query Vector Data
 
-1. **Extract the product descriptions.**
+1. **Transform the product descriptions into vectors.**
     ```
     <copy>
-    create or replace view co.product_descriptions as select product_id, JSON_VALUE(product_details, '$.description') as product_description from co.products;
+    create table product_vectors as 
+    select product_id, product_name, 
+    JSON_VALUE(product_details, '$.description') 
+    as product_description, TO_VECTOR(VECTOR_EMBEDDING(doc_model USING JSON_VALUE(product_details, '$.description') as data)) as embedding from co.products;
+
+    select * from product_vectors;
     </copy>
     ```
 
-2. **Transform the product descriptions into vectors.**
+2. Search for product description vectors based on their similarity to the word "professional".
     ```
     <copy>
-    create view product_vectors as 
-        select product_id, TO_VECTOR(VECTOR_EMBEDDING(doc_model USING product_description as data)) as embedding from co.product_descriptions;
+    select product_name, product_description, vector_distance(embedding, to_vector(vector_embedding(doc_model using 'professional' as data))) as vector_distance
+    FROM PRODUCT_VECTORS
+    ORDER BY distance
+    FETCH EXACT FIRST 10 ROWS ONLY;
     </copy>
     ```
 
-You may proceed to the next lab.
+    This is a vast improvement from the empty result set we got from our traditional search! We can see that the similarity search has returned clothing items described with words contextually similar to "professional". 
+    
+
+3. Search for product description vectors based on their similarity to the word "slacks".
+    ```
+    <copy>
+    select product_name, PRODUCT_DESCRIPTION, vector_distance(embedding, to_vector(vector_embedding(doc_model using 'slacks' as data))) as vector_distance
+    FROM PRODUCT_VECTORS
+    ORDER BY distance
+    FETCH EXACT FIRST 10 ROWS ONLY;
+    </copy>
+    ```
+
+    Once again--big improvements! Notice that the model was able to relate slacks to other bottoms, and use the term's professional context to find other formal wear. So, despite there not being a product description containing the word "slacks", viable results are still returned due to their similarity to the query. 
+
+## Task 3: Combine Business Data with Similarity Search
+
+    You may now proceed to the next lab.
 
 ## Acknowledgements
 - **Authors** - Brianna Ambler, Database Product Management
 - **Contributors** - Brianna Ambler, Database Product Management
-- **Last Updated By/Date** - Dan Williams, August 2024
+- **Last Updated By/Date** - Brianna Ambler, August 2024
