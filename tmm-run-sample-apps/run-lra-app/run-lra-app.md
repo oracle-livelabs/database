@@ -27,9 +27,8 @@ In this lab, you will:
 
 * Configure Minikube
 * Start a tunnel between Minikube and MicroTx
-* Visualize the flow of requests (optional)
 * Run the Travel Agent application
-* View service graph of the mesh and distributed traces to track requests (optional)
+* Visualize the flow of requests (optional)
 * View source code of the Travel Agent application (optional)
 
 ### Prerequisites
@@ -51,7 +50,7 @@ This lab assumes you have:
 
 ## Task 1: Configure Minikube
 
-Follow the instructions in this section to configure Minikube, and then run the Travel Agent application.
+Follow the instructions in this section to configure Minikube. When you start Minikube, the Travel Agent application is deployed.
 
 1. Click **Activities** in the remote desktop window to open a new terminal.
 
@@ -135,44 +134,7 @@ Before you start a transaction, you must start a tunnel between Minikube and Mic
     </copy>
     ```
 
-## Task 3: Visualize the Flow of Requests (Optional)
-
-Use distributed tracing to understand how requests flow between MicroTx and the microservices. Use tools, such as Kiali and Jaeger, to track and trace distributed transactions in MicroTx.
-
-When you started Minikube while performing Task 1, Kiali, Jaeger, and Prometheus are deployed and configured. The YAML files that contain the configuration information for Kiali, Jaeger, and Prometheus are available in the `$HOME/visualizations` folder.
-
-1. Run the following command to ensure that Kiali, Prometheus, and Jaeger are in the `Running` status.
-
-    ```text
-    <copy>
-    kubectl get pods -n istio-system
-    </copy>
-    ```
-    
-    **Example output**
-    ![Kiali, Prometheus, and Jaeger in Running status](./images/visualization-tools-status.png)
-
-2. Start the Kiali Dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
-
-    ```text
-    <copy>
-    istioctl dashboard kiali
-    </copy>
-    ```
-
-   A URL is displayed. Open the URL in a new tab in your browser to access the Kiali dashboard. For example, `http://localhost:20001/kiali.`
-
-5. Start Jaeger Dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
-
-    ```text
-    <copy>
-    istioctl dashboard jaeger
-    </copy>
-    ```
-
-   A URL is displayed. Open the URL in a new tab in your browser to access the Jaeger dashboard. For example, `http://localhost:16686`.
-
-## Task 4: Run the Travel Agent Application
+## Task 3: Run the Travel Agent Application
 
 Run the Travel Agent application to book a hotel room and flight ticket.
 
@@ -225,23 +187,53 @@ The Travel Agent application provisionally books a hotel room and a flight ticke
     </copy>
     ```
 
-## Task 5: View Service Mesh Graph and Distributed Traces (Optional)
+## Task 4: Visualize the Flow of Requests (Optional)
 
-You can perform this task only if you have performed Task 3. To visualize what happens behind the scenes and how a trip booking request is processed by the distributed services, you can use the Kiali and Jaeger dashboards that you started in Task 3.
+To visualize the flow of requests between MicroTx and the distributed microservices to book a trip, use Kiali and Jaeger dashboards.
 
-1. Open a new browser tab and navigate to the Kiali dashboard URL. For example, `http://localhost:20001/kiali`.
+When you started Minikube while performing Task 1, Kiali, Jaeger, and Prometheus are deployed and configured. The YAML files that contain the configuration information for Kiali, Jaeger, and Prometheus are available in the `$HOME/visualizations` folder.
 
-2. Select Graph for the `otmm` namespace.
+1. Run the following command to ensure that Kiali, Prometheus, and Jaeger are in the `Running` status.
+
+    ```text
+    <copy>
+    kubectl get pods -n istio-system
+    </copy>
+    ```
+    
+    **Example output**
+    ![Kiali, Prometheus, and Jaeger in Running status](./images/visualization-tools-status.png)
+
+2. Start the Kiali Dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
+
+    ```text
+    <copy>
+    istioctl dashboard kiali
+    </copy>
+    ```
+
+   A URL is displayed. Open the URL in a new tab in your browser to access the Kiali dashboard. For example, `http://localhost:20001/kiali.`
+
+3. Select Graph for the `otmm` namespace.
 ![Kiali Dashboard](images/kiali-dashboard-lra.png)
 
-3. Open a new browser tab and navigate to the Jaeger dashboard URL. For example, `http://localhost:16686.`
-4. From the **Service** drop-down list, select **istio-ingressgateway.istio-system**.
-5. Click **Find Traces**. You can see the list of traces with each trace representing a request.
+4. Start the Jaeger Dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
+
+    ```text
+    <copy>
+    istioctl dashboard jaeger
+    </copy>
+    ```
+
+   A URL is displayed. Open the URL in a new tab in your browser to access the Jaeger dashboard. For example, `http://localhost:16686`.
+
+5. From the **Service** drop-down list, select **istio-ingressgateway.istio-system**.
+6. Click **Find Traces**. You can see the list of traces with each trace representing a request.
 ![Jaeger Traces List](images/jaeger-traces-list.png)
-6. Select one of the traces to view.
+7. Select one of the traces to view.
 ![Jaeger Trace for Confirmation Step](images/jaeger-trace-confirm-cancel.png)
 
-## Task 6: View Source Code of the Travel Agent Application (Optional)
+## Task 5: View Source Code of the Travel Agent Application (Optional)
 
 The source code of the Travel Agent application is present in folder: /home/oracle/OTMM/otmm-24.2.1/samples/lra/lrademo
 - Trip Service Source code: /home/oracle/OTMM/otmm-24.2.1/samples/lra/lrademo/trip-manager
