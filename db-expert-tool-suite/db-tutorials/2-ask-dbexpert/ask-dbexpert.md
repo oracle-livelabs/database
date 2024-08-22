@@ -4,7 +4,7 @@
 
 This lab walks you through how to use DBExpert's [Ask DBExpert - AI-Powered Digital Assistant](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/home). 
 
-Learn how users can ask complex questions about the Oracle Cloud Services using a natural language interface.
+Learn how users can ask complex questions about Oracle Cloud Database Services using a natural language interface.
 
 **Estimated Time: 5 minutes**
 
@@ -14,7 +14,7 @@ In this lab, you will:
 * View a demonstration of Ask DBExpert
 * Ask DBExpert questions
 
-## Task 1: Navigate the Homepage
+## Task 1: Navigate to the homepage
 
 1. Navigate to [https://www.oracle.com/dbexpert](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/home) and click on the red button on the bottom right 
 
@@ -24,7 +24,7 @@ In this lab, you will:
 
     ![DBExpert Homepage](./images/homepage_ai_ex_sm.png "The DBExpert homepage with the digital assistant expanded for use.")
 
-## Task 2: Demonstration of DBExpert
+## Task 2: Demonstration of Ask DBExpert
 
 - ![DBExpert VC](./images/askdbexpert.gif "A GIF of using 'Ask DBExpert' prompts.")
 
@@ -55,8 +55,8 @@ In this lab, you will:
   ![DBExpert VC](./images/ai_silly_sm.png "You can ask DBExpert anything! Give it a try!")
 
 ## Learn More
-
-* [View & Compare OCI Data Management Services Overview (Video)](https://videohub.oracle.com/media/1_5a9man1g)
+### Blogs
+* [How DBExpert Quickly Learned to Talk using AI (and your app can too)](https://blogs.oracle.com/datawarehousing/post/how-dbexpert-quickly-learned-to-talk-using-ai-and-your-app-can-too)
 
 ## Acknowledgements
 * **Author** - [](var:author_names), [](var:group_name)

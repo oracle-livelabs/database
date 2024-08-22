@@ -26,7 +26,7 @@ In this lab, you will:
     
 ## Learn More
 
-* [View & Compare OCI Data Management Services Overview (Video)](https://videohub.oracle.com/media/1_5a9man1g)
+* [Migration Methods Advisor Overview (Video)](https://videohub.oracle.com/media/1_xko1jfib "Migration Methods Advisor Overview (Video)")
 
 ## Acknowledgements
 * **Author** - [](var:author_names), [](var:group_name)

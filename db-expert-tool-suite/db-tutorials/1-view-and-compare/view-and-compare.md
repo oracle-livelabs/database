@@ -11,7 +11,7 @@ Our tool guides customers through Oracle’s Database service offerings and high
 ### **Objectives**
 
 In this lab, you will:
-* Test drive how easy it is to compare Oracle database products to one another.
+* Easily compare Oracle Cloud database products to one another.
 * Experience how the tool focuses on providing deep contextual information.
 * Dive deep into feature comparisons (Workloads, Applications, and Capacity).
 
@@ -25,9 +25,9 @@ In this lab, you will:
 ## Task 2: Take the tool for a Test drive
 
   1. Determine the deployment type
-    * **Individual Database:** database hosted in single server or cluster
+    * **Single Database:** database hosted in single server or cluster
     * **Globally Distributed:** database distributed across regions, with each region hosting either a shard of the database or fully active (multi-write) instantiation
-    * **Database Pool:** multiple databases participate in a shared pool
+    * **Resource Pool:** multiple databases participate in a shared pool
   2. Select a deployment type by using the tabs on the top-left of the page (default: Individual Services)
 
       ![DBExpert VC](./images/view_and_compare_deploy_sm.png "The View and Compare webpage with the deployment type highlighted")
