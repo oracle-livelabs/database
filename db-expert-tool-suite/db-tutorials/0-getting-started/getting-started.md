@@ -103,7 +103,7 @@ Use your Oracle email and password, or create an account if you don't have one y
 - **About:** Visit our homepage to explore Oracle Cloud Database Services across various cloud environments.
 ![About Image](./images/explore_about.png)
 
-- **Compare DB Services:** Compare the key features of up to three services. Learn more in [Lab 1: View and Compare Services Tool](https://oracle-dbexpert.github.io/database/db-expert-tool-suite/workshops/tenancy/index.html?lab=view-and-compare).
+- **Compare DB Services:** Compare the key features of up to three services. Learn more in [Lab 1: View and Compare Services Tool](../../workshops/tenancy/index.html?lab=view-and-compare).
 ![Compare DB Services Image](./images/explore_compare.png)
 
 - **DB Features, Packs, and Options:** Get details on versioning and cloud service support.
@@ -116,7 +116,7 @@ Use your Oracle email and password, or create an account if you don't have one y
 ![REST APIs Image](./images/explore_apis.png)
 
 **Migration**
-- **Migration Methods Advisor:** Find the best migration methods for your needs and scale to the cloud. Discover more in [Lab 4: Migration Method Advisor](https://oracle-dbexpert.github.io/database/db-expert-tool-suite/workshops/tenancy/index.html?lab=migration-advisor).
+- **Migration Methods Advisor:** Find the best migration methods for your needs and scale to the cloud. Discover more in [Lab 4: Migration Method Advisor](../../workshops/tenancy/index.html?lab=migration-advisor).
 ![Migration Methods Image](./images/migration_methods.png)
 
 - **Migrate Data and Databases to OCI:** Everything you need for migrating Oracle Databases to OCI — from strategies to planning guides.
@@ -172,19 +172,19 @@ Discover tools for a tailored hybrid multi-cloud migration and modernization pla
 ---
 
 ### **Service Advisor Banner**
-Use the banner to enter your basic requirements and click “See Recommendations” to access the Service Advisor tool. Learn how to use it in [Lab 3: Service Advisor](https://oracle-dbexpert.github.io/database/db-expert-tool-suite/workshops/tenancy/index.html?lab=service-advisor).
+Use the banner to enter your basic requirements and click “See Recommendations” to access the Service Advisor tool. Learn how to use it in [Lab 3: Service Advisor](../../workshops/tenancy/index.html?lab=service-advisor).
 ![Service Advisor GIF](./images/serviceadvisor_banner.gif)
 
 ---
 
 ### **Explore**
-- **View and Compare:** Select and compare services to find the best fit for you. Learn more in [Lab 1: View and Compare Services Tool](https://oracle-dbexpert.github.io/database/db-expert-tool-suite/workshops/tenancy/index.html?lab=view-and-compare).
+- **View and Compare:** Select and compare services to find the best fit for you. Learn more in [Lab 1: View and Compare Services Tool](../../workshops/tenancy/index.html?lab=view-and-compare).
 ![View and Compare GIF](./images/exploreb_viewcompare.gif)
 
 - **Ask DBExpert:** Ask anything about Oracle Database Cloud services using natural language.
 ![ASK DBExpert GIF](./images/exploreb_askdb.gif)
 
-- **Service Advisor:** Map your needs to the right service for your business. Learn more in [Lab 3: Service Advisor](https://oracle-dbexpert.github.io/database/db-expert-tool-suite/workshops/tenancy/index.html?lab=service-advisor).
+- **Service Advisor:** Map your needs to the right service for your business. Learn more in [Lab 3: Service Advisor](../../workshops/tenancy/index.html?lab=service-advisor).
 ![Service Advisor GIF](./images/exploreb_serviceadvisor.gif)
 
 - **Manage Projects:** Sign in to save, edit, and share your projects with Oracle credentials.
@@ -199,16 +199,16 @@ Enter your requirements, compare TCO across services, and download a summary. Si
 ---
 
 ### **Oracle Estate Explorer**
-Get to know more about the OEE tool, build a business case, and optimize your Cloud Migration. Download slides and master it with [Lab 5: Oracle Estate Explorer](https://oracle-dbexpert.github.io/database/db-expert-tool-suite/workshops/tenancy/index.html?lab=oracle-estate-explorer).
+Get to know more about the OEE tool, build a business case, and optimize your Cloud Migration. Download slides and master it with [Lab 5: Oracle Estate Explorer](../../workshops/tenancy/index.html?lab=oracle-estate-explorer).
 ![Oracle Estate Explorer Image](./images/oee.png)
 
 ---
 
 ### **Migrate and Modernize**
-- **Oracle Estate Explorer:** Access the OEE main page and get additional information. Learn more [Lab 5: Oracle Estate Explorer](https://oracle-dbexpert.github.io/database/db-expert-tool-suite/workshops/tenancy/index.html?lab=oracle-estate-explorer).
+- **Oracle Estate Explorer:** Access the OEE main page and get additional information. Learn more [Lab 5: Oracle Estate Explorer](../../workshops/tenancy/index.html?lab=oracle-estate-explorer).
 ![Oracle Estate Explorer GIF](./images/migration_oee.gif)
 
-- **Migration Methods Advisor:** Enter basic details about your source and destination databases to find the best cloud migration methods. Learn more in [Lab 4: Migration Method Advisor](https://oracle-dbexpert.github.io/database/db-expert-tool-suite/workshops/tenancy/index.html?lab=migration-advisor).
+- **Migration Methods Advisor:** Enter basic details about your source and destination databases to find the best cloud migration methods. Learn more in [Lab 4: Migration Method Advisor](../../workshops/tenancy/index.html?lab=migration-advisor).
 ![Migration Methods GIF](./images/migration_to_banner.gif)
 
 
