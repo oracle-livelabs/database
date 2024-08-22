@@ -65,13 +65,13 @@ For this task you need the following info from previous steps:
     - Replication database username: **c##ggadmin**
     - Replication database password: Select **Admin Password** value from Terraform output
 
-    The checkbox **Create private endpoint to access this database** needs to stay unchecked.
+    Please uncheck the checkbox **Create private endpoint to access this database**.
 
 7. Press **Create**
 
   ![Screenshot of  confirm create connection](images/connection-details-cdb.png =50%x*)
 
-8. Press **Test connection** to confirm that your Database Connection details are correct
+8. Wait for connection to get created and press **Test connection** to confirm that your Database Connection details are correct
 
   ![Screenshot of CDB connection test](images/test-cdb.png =50%x*)
     - If the test is not successful, correct your connection details and try again.
@@ -112,13 +112,13 @@ For this task you need the following info from previous steps:
     - Replication database username: **ggadmin**
     - Replication database password: Select **Admin Password** value from Terraform output
 
-    The checkbox **Create private endpoint to access this database** needs to stay unchecked.
+    Please uncheck the checkbox **Create private endpoint to access this database**.
 
 6. Press **Create**
 
   ![Screenshot of  confirm create connection](images/connection-details-pdb.png =50%x*)
 
-7. Press **Test connection** to confirm that your Database Connection details are correct
+7. Wait for connection to get created and press **Test connection** to confirm that your Database Connection details are correct
 
   ![Screenshot of PDB connection test](images/test-pdb.png =50%x*)
     - If the test is not successful, correct your connection details and try again.
@@ -156,7 +156,7 @@ For this task you need the following info from previous steps:
     - Replication database username: **ggadmin**
     - Replication database password: Select **Admin Password** value from Terraform output
 
-    The checkbox **Create private endpoint to access this database** needs to stay unchecked.
+    Please uncheck the checkbox **Create private endpoint to access this database** needs to stay unchecked.
 
 6. Press **Create**
 
