@@ -127,7 +127,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
 
       ```
     <copy>
-    podman ps
+    podman ps --format "{{.Names}} {{.Status}}"
     </copy>
     ```
     ![PODMAN_PS](images/aivs_lab1_task1_step7.png)
@@ -135,8 +135,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
 9. **Confirm ORDS is running.**
     ```
     <copy>
-    podman exec -it ps -ef | grep ords.war
-    podman exec -it jps -mlv | grep ords
+    podman exec -it oracle_adb-free_1 jps -l | grep ords
     </copy>
     ```
     
@@ -182,9 +181,9 @@ Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) prein
     ```
     ![ORDS landing page](images/ords-landing.png)
 
-4. **Sign into ORDS.** 
+4. **Sign into ORDS.** <br/> <br/>
     
-    **Username -** admin
+    **Username -** admin<br/>
     **Password -** Welcome_12345 (or the custom password you specified in Task 1, Step 5.)
 
     ![Sign into DB Actions](images/sign-in-ords.png)
@@ -200,6 +199,8 @@ Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) prein
     ![Sign into DB Actions](images/sign-in-ords.png)
 
 9. **Lauch the SQL worksheet.** Select the 'SQL' tab, as shown below.
+
+    ![Launch the SQL Tab](images/sql-worksheet.png)
 
 You may proceed to the next lab.
 
