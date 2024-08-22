@@ -11,6 +11,8 @@ create examples of both tables.
 
 _Estimated Time:_ 11 minutes
 
+[Lab 2 Walkthrough](videohub:1_t9uq2w8p)
+
 ### Objectives
 
 * Create 2 tables with provisioned reads/sec, writes/sec, and GB storage
