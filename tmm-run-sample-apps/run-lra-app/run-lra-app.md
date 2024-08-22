@@ -30,6 +30,7 @@ In this lab, you will:
 * Run the Travel Agent application
 * Visualize the flow of requests (optional)
 * View source code of the Travel Agent application (optional)
+* Access the Oracle Database instances (optional)
 
 ### Prerequisites
 
@@ -243,7 +244,35 @@ The source code of the Travel Agent application is present in folder: /home/orac
 
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files. To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
 
-You may now **proceed to the next lab** to run a sample XA application. If you do not want to proceed further and would like to finish the LiveLabs and clean up the resources, then complete **Lab 5: Clean Up**.
+## Task 6: Access the Oracle Database Instances (Optional)
+
+Use tools, such as Oracle Database SQL*Plus, to access the Oracle Database 23ai instances to view the tables and data.
+
+1. Navigate to the folder that contains the scripts.
+
+    ```text
+    <copy>
+    cd $HOME/db_access
+    </copy>
+    ```
+
+2. Run the following command to access `FLIGHTPDB` PDB, which contains details for the Flight Booking application.
+
+    ```text
+    <copy>
+    ./loginFlightPDB.sh
+    </copy>
+    ```
+
+2. Run the following command to access `HOTELPDB` PDB, which contains details for the Hotel Booking application.
+
+    ```text
+    <copy>
+    ./loginHotelPDB.sh
+    </copy>
+    ```
+
+You may now **proceed to the next lab**. If you do not want to proceed further and would like to finish the LiveLabs and clean up the resources, then complete **Lab 6: Clean Up**.
 
 ## Learn More
 

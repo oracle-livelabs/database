@@ -23,10 +23,10 @@ For more details, see [About the Transfer Application](https://docs.oracle.com/p
 In this lab, you will:
 
 * Start Minikube. When you start Minikube, the Transfer application is deployed and the database instances are created and populated with sample data.
-* Deploy Kiali and Jaeger in your minikube cluster (Optional and if not already deployed)
 * Run the Transfer application to start an XA transaction to withdraw an amount from Department A and deposit it in Department B.
-* View service graph of the mesh and distributed traces to track requests (Optional)
-* View source code of the Transfer application (Optional)
+* Visualize the flow of requests (optional).
+* View source code of the Transfer application (optional).
+* Access the Oracle Database instances (optional).
 
 ### Prerequisites
 
@@ -158,59 +158,7 @@ Before you start a transaction, you must start a Minikube tunnel. You can skip t
 
     Note that, if you don't do this, then you must explicitly specify the IP address in the commands when required.
 
-## Task 3: Deploy Kiali and Jaeger in the cluster (Optional)
-
-**Skip this task if you have already deployed Kiali and Jaeger in your cluster while performing Lab 3. However, ensure you have started Kiali and Jaeger dashboards as shown in steps 4 and 5.**
-
-Use distributed tracing to understand how requests flow between MicroTx and the microservices. Use tools, such as Kiali and Jaeger, to track and trace distributed transactions in MicroTx. Kiali requires Prometheus, so deploy Prometheus in the same cluster.
-
-Run the following commands to deploy Kiali and Jaeger.
-
-1. Deploy Kiali.
-
-    ```text
-    <copy>
-    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/kiali.yaml
-    </copy>
-    ```
-
-2. Deploy Prometheus.
-
-    ```text
-    <copy>
-    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/prometheus.yaml
-    </copy>
-    ```
-
-3. Deploy Jaeger.
-
-    ```text
-    <copy>
-    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.17/samples/addons/jaeger.yaml
-    </copy>
-    ```
-
-4. Start the Kiali dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
-
-    ```text
-    <copy>
-    istioctl dashboard kiali
-    </copy>
-    ```
-
-   A URL is displayed. Open the URL in a new tab in your browser to access the Kiali dashboard. For example, `http://localhost:20001/kiali`.
-
-5. Start the Jaeger dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
-
-    ```text
-    <copy>
-    istioctl dashboard jaeger
-    </copy>
-    ```
-
-   A URL is displayed. Open the URL in a new tab in your browser to access the Jaeger dashboard. For example, `http://localhost:16686`.
-
-## Task 4: Run the Transfer Application
+## Task 3: Run the Transfer Application
 
 When you run the Transfer application, it starts an XA transaction. The Teller application is the transaction initiator service, it initiates the transaction. When the Teller application runs, it withdraws money from Department A and deposits it to Department B by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
@@ -293,19 +241,54 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
     </copy>
     ```
 
-## Task 5: View the Service Mesh Graph and Distributed Traces (Optional)
+## Task 4: Visualize the Flow of Requests (Optional)
 
-You can perform this task only if you have performed Task 3 or if Kiali and Jaeger is deployed in your cluster.
-To visualize what happens behind the scenes and how the amount transfer request is processed by the distributed services, you can use the Kiali and Jaeger Dashboards that you had started in Task 3.
+To visualize the flow of requests between MicroTx and the distributed microservices to book a trip, use Kiali and Jaeger dashboards.
 
-1. Open a new browser tab and navigate to the Kiali dashboard URL. For example, `http://localhost:20001/kiali`.
-2. Select Graph for the `otmm` namespace.
-3. Open a new browser tab and navigate to the Jaeger dashboard URL. For example, `http://localhost:16686`.
-4. From the **Service** drop-down list, select **istio-ingressgateway.istio-system**.
-5. Click **Find Traces**. You can see the list of traces with each trace representing a request.
-6. Select one of the traces to view.
+When you started Minikube while performing Task 1, Kiali, Jaeger, and Prometheus are deployed and configured. The YAML files that contain the configuration information for Kiali, Jaeger, and Prometheus are available in the `$HOME/visualizations` folder.
 
-## Task 6: View Source Code of the Transfer Application (Optional)
+1. Run the following command to ensure that Kiali, Prometheus, and Jaeger are in the `Running` status.
+
+    ```text
+    <copy>
+    kubectl get pods -n istio-system
+    </copy>
+    ```
+
+    **Example output**
+    ![Kiali, Prometheus, and Jaeger in Running status](./images/visualization-tools-status.png)
+
+2. Start the Kiali Dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
+
+    ```text
+    <copy>
+    istioctl dashboard kiali
+    </copy>
+    ```
+
+   A URL is displayed.
+
+3. Open the URL in a new tab in your browser to access the Kiali dashboard. For example, `http://localhost:20001/kiali.`
+
+4. Select Graph for the `otmm` namespace.
+![Kiali Dashboard](images/kiali-dashboard-lra.png)
+
+5. Start the Jaeger Dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
+
+    ```text
+    <copy>
+    istioctl dashboard jaeger
+    </copy>
+    ```
+
+   A URL is displayed.
+   
+6. Open the URL in a new tab in your browser to access the Jaeger dashboard. For example, `http://localhost:16686`.
+7. From the **Service** drop-down list, select **istio-ingressgateway.istio-system**.
+8. Click **Find Traces**. You can see the list of traces with each trace representing a request.
+9. Select one of the traces to view.
+
+## Task 5: View Source Code of the Transfer Application (Optional)
 
 The source code of the application is present in folder: /home/oracle/OTMM/otmm-24.2.1/samples/xa/java
 - Teller Service Source code: /home/oracle/OTMM/otmm-24.2.1/samples/xa/java/teller
@@ -315,6 +298,36 @@ The source code of the application is present in folder: /home/oracle/OTMM/otmm-
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
 To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
 
+## Task 6: Access the Oracle Database Instances (Optional)
+
+Use tools, such as Oracle Database SQL*Plus, to access the Oracle Database 23ai instances to view the tables and data.
+
+1. Navigate to the folder that contains the scripts.
+
+    ```text
+    <copy>
+    cd $HOME/db_access
+    </copy>
+    ```
+
+2. Run the following command to access `DEPT1PDB` PDB.
+
+    ```text
+    <copy>
+    ./loginDept1PDB.sh 
+    </copy>
+    ```
+
+2. Run the following command to access `DEPT2PDB` PDB.
+
+    ```text
+    <copy>
+    ./loginDept2PDB.sh
+    </copy>
+    ```
+
+If you would like to finish the LiveLabs and clean up the resources, then complete **Lab 6: Clean Up**.
+
 ## Learn More
 
 * [Develop Applications with XA](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/24.2.1/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
@@ -323,4 +336,4 @@ To bring up the Text Editor, click on Activities (top left) -> Show Applications
 
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
 * **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja Kannan, November 2023
+* **Last Updated By/Date** - Sylaja Kannan, August 2024
