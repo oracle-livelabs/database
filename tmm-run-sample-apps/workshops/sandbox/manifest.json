@@ -18,7 +18,7 @@
     },
     {
       "title": "Lab 3: Run Travel agent app which uses Saga and Lock-Free Reservation",
-      "filename": "../../run-lra-app/run-lra-app-lockfree.md"
+      "filename": "../../run-lra-app-lockfree/run-lra-app-lockfree.md"
     },
     {
       "title": "Lab 4: Run Transfer app which uses XA",
