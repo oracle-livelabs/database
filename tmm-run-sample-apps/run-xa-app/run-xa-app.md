@@ -16,7 +16,7 @@ The following figure shows the various microservices that are available in the T
 
 The Transfer application demonstrates how you can develop microservices that participate in XA transactions while using MicroTx to coordinate the transactions. When you run the Teller application, it withdraws money from one department and deposits it to another department by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
-For more details, see [About the Transfer Application](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmdg/set-sample-applications.html#GUID-A181E2F7-00B4-421F-9EF9-DB8BF76DD53F) in the *Transaction Manager for Microservices Developer Guide*.
+For more details, see [About the Transfer Application](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG-GUID-A181E2F7-00B4-421F-9EF9-DB8BF76DD53F) in the *Transaction Manager for Microservices Developer Guide*.
 
 ### Objectives
 
@@ -47,7 +47,7 @@ This lab assumes you have:
 
 ## Task 1: Start Minikube
 
-Code for the Transfer application is available in the MicroTx distribution. The MicroTx library files are already integrated with the application code. Container images, for each microservice in the application, are already built and available in your Minikube container registry. The `values.yaml` file is available in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/helmcharts/transfer` folder. This is the manifest file, which contains the deployment configuration details for the application.
+Code for the Transfer application is available in the MicroTx distribution. The MicroTx library files are already integrated with the application code. Container images, for each microservice in the application, are already built and available in your Minikube container registry. The `values.yaml` file is available in the `/home/oracle/OTMM/otmm-24.2.1/samples/xa/java/helmcharts/transfer` folder. This is the manifest file, which contains the deployment configuration details for the application.
 
 When you start Minikube, an instance of the Oracle Database 23ai Free Release, with two PDBs, is deployed on Minikube. See [Oracle Database Free](https://www.oracle.com/database/free/get-started). Department 1 microservice, which is developed using the Helidon framework, uses PDB (`FREEPDB1`) as resource manager. Department 2 microservice, which is developed using the Spring Boot framework, uses another PDB (`FREEPDB2`) as resource manager. Each PDB contains an `accounts` table with `account_id` as the primary key. The `accounts` table is populated with the following sample data. The `values.yaml` file also contains the details to access the resource managers.
 
@@ -120,7 +120,7 @@ It usually takes some time for the Database services to start running in the Min
 
 ## Task 2: Start a Minikube Tunnel
 
-Before you start a transaction, you must start a Minikube tunnel.
+Before you start a transaction, you must start a Minikube tunnel. You can skip this task if you had started a tunnel earlier while running a lab.
 
 1. Run the following command in a new terminal to start a tunnel. Keep this terminal window open.
 
@@ -307,17 +307,17 @@ To visualize what happens behind the scenes and how the amount transfer request 
 
 ## Task 6: View Source Code of the Transfer Application (Optional)
 
-The source code of the application is present in folder: /home/oracle/OTMM/otmm-23.4.1/samples/xa/java
-- Teller Service Source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/teller
-- Department 1 Service Source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/department-helidon
-- Department 2 Service Source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/department-spring
+The source code of the application is present in folder: /home/oracle/OTMM/otmm-24.2.1/samples/xa/java
+- Teller Service Source code: /home/oracle/OTMM/otmm-24.2.1/samples/xa/java/teller
+- Department 1 Service Source code: /home/oracle/OTMM/otmm-24.2.1/samples/xa/java/department-helidon
+- Department 2 Service Source code: /home/oracle/OTMM/otmm-24.2.1/samples/xa/java/department-spring
 
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
 To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
 
 ## Learn More
 
-* [Develop Applications with XA](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
+* [Develop Applications with XA](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/24.2.1/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
 
 ## Acknowledgements
 

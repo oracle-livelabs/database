@@ -1,4 +1,4 @@
-# Run Travel Agent App which Uses Saga
+# Run Travel Agent App which Uses Saga and Lock-Free Reservation
 
 ## Introduction
 
@@ -11,15 +11,15 @@ Watch the video below for a quick walk-through of the lab.
 
 ### About the Travel Agent Application
 
-The following figure shows a Travel Agent application, which contains several microservices, to demonstrate how you can develop microservices that participate in Saga transactions while using MicroTx to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and a flight ticket. The Flight Booking and Hotel Booking applications store the booking or reservation information in memory.
+The following figure shows a Travel Agent application, which contains several microservices, to demonstrate how you can develop microservices that participate in Saga transactions while using MicroTx to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and a flight ticket. The Flight Booking and Hotel Booking applications store the booking or reservation information in Oracle Database 23ai.
 
 ![Microservices in sample Saga application](./images/lra-sample-app.png)
 
 Only when you provide approval to confirm the provisional booking, the booking of the hotel room and flight ticket is confirmed. If you cancel the provisional booking, the hotel room and flight ticket that was blocked is released and the booking is canceled. The Flight Booking application in this example allows only two confirmed bookings by default. To test the failure scenario, the Flight Booking applications rejects any additional booking requests after two confirmed bookings. This leads to the cancellation (compensation) of a provisionally booked hotel within the trip and the trip is not booked.
 
-Code for the Travel Agent application is available in the MicroTx distribution package. The MicroTx library files are already integrated with the application code.
+When microservices use only Oracle Database 23ai as resource manager, you can use Sagas provided by Oracle Database to manage transactions. If one microservice uses Oracle Database 23ai as resource manager and other microservices use other databases, then you can use MicroTx to leverage the lock-free reservation feature introduced in Oracle Database 23ai. See [Using Lock-Free Reservation](https://docs.oracle.com/en/database/oracle/oracle-database/23/adfns/using-lock-free-reservation.html#GUID-299FDC3E-2169-4D5F-80A9-E9F704B1CEAF) in Database Development Guide.
 
-For more details, see [About the Sample Saga Application](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG-GUID-C5332159-BD13-4210-A02E-475107919FD9) in the *Transaction Manager for Microservices Developer Guide*.
+Code for the Travel Agent application is available in the MicroTx distribution package. The MicroTx library files are already integrated with the application code. For more details, see [About the Sample Saga Application](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG-GUID-C5332159-BD13-4210-A02E-475107919FD9) in the *Transaction Manager for Microservices Developer Guide*.
 
 ### Objectives
 
@@ -81,7 +81,7 @@ Follow the instructions in this section to configure Minikube, and then run the 
 
 ## Task 2: Start a tunnel
 
-Before you start a transaction, you must start a tunnel between Minikube and MicroTx.
+Before you start a transaction, you must start a tunnel between Minikube and MicroTx. You can skip this task if you had started a tunnel earlier while running a lab.
 
 1. Run the following command in a new terminal to start a tunnel. Keep this terminal window open.
 
@@ -123,7 +123,7 @@ Before you start a transaction, you must start a tunnel between Minikube and Mic
 
     ```text
    <copy>
-    export TRIP_SERVICE_URL=http://<copied-external-IP-address>/trip-service/api/trip
+    export TRIP_SERVICE_URL=http://<copied-external-IP-address>/trip-service/api/sync/trip
    </copy>
     ```
 
@@ -131,7 +131,7 @@ Before you start a transaction, you must start a tunnel between Minikube and Mic
 
     ```text
     <copy>
-    export TRIP_SERVICE_URL=http://192.0.2.117/trip-service/api/trip
+    export TRIP_SERVICE_URL=http://192.0.2.117/trip-service/api/sync/trip
     </copy>
     ```
 
@@ -202,7 +202,7 @@ The Travel Agent application provisionally books a hotel room and a flight ticke
 
     ```text
     <copy>
-    curl --location --request GET http://$CLUSTER_IPADDR/trip-service/api/trip | jq
+    curl --location --request GET http://$CLUSTER_IPADDR/trip-service/api/sync/trip | jq
     </copy>
     ```
 
@@ -261,4 +261,4 @@ You may now **proceed to the next lab** to run a sample XA application. If you d
 
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
 * **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja, November 2023
+* **Last Updated By/Date** - Sylaja, August 2024
