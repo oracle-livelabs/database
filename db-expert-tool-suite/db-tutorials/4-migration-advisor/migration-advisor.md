@@ -22,7 +22,7 @@ In this lab, you will:
 3. With some basic information, the Migration Methods Advisor was able to provide 3 Automated Methods and 2 Manual Methods.
     ![DBExpert Migration Methods Advisor](./images/migration_method_intro.gif "Filling out basic migration information and navigating to DBExpert's Migration Methods Advisor.")
 4. To refine your search add more information to the side bar!
-    <img src='/db-tutorials/4-migration-advisor/images/migration_method_options.gif' alt='To refine your search add more information to the side bar.' title='To refine your search add more information to the side bar.' width='20%'/>
+    <img src='../../db-tutorials/4-migration-advisor/images/migration_method_options.gif' alt='To refine your search add more information to the side bar.' title='To refine your search add more information to the side bar.' width='20%'/>
     
 ## Learn More
 

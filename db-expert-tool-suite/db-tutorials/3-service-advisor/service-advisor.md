@@ -37,7 +37,7 @@ In this lab, you will:
     1. In <span style='color:#2e9d33;'>**green**</span>, the header sections presents the user with the most commonly changed requirements and capacity options. In addition, each selected requirement will be appear on top.
     2. In <span style='color:#f0ff00;-webkit-text-stroke: 1px #1a1816;'>**yellow**</span>, the side bar contains an additional 52+ requirements to choose from split into 3 different sections. To navigate them all, click the **Expand All** button.
     <!--![DBExpert Service Advisor - side bar](./images/service_advisor_expand_all.gif "Expanding the side bar of the Service Advisor and scrolling through all the requirements")-->
-    <img src='/db-tutorials/3-service-advisor/images/service_advisor_expand_all.gif' alt='Expanding the side bar of the Service Advisor and scrolling through all the requirements.' title='Expanding the side bar of the Service Advisor and scrolling through all the requirements.' width='20%'/>
+    <img src='../../db-tutorials/3-service-advisor/images/service_advisor_expand_all.gif' alt='Expanding the side bar of the Service Advisor and scrolling through all the requirements.' title='Expanding the side bar of the Service Advisor and scrolling through all the requirements.' width='20%'/>
     3. In <span style='color:#317cc2;'>**blue**</span>, is the section where all the magic happens.
         * The first table displays rows of recommended matches based on the requirements that were selected, it looks like we have 10! 
         * Each column is clickable and provides in-depth information about the service when selected (we will dive deeper into this later).
