@@ -21,7 +21,7 @@ This lab assumes you have:
 
 ## Scenarios: Guide for Raft Replication Test Cases
 
-1. If you encounter "Not Recovered" for any of the shard.
+1. If you encounter a 'Not Recovered' status for any of the shards.
 
     ![<not_recovered_shard>](./images/1-not-recovered-shard.png " ")
 
