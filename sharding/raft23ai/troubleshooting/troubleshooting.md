@@ -50,10 +50,7 @@ This lab assumes you have:
    ![<restart_shard_not_recovered_after>](./images/1-restart-shard-not-recovered-after.png " ")
 
 
-2. If you get the error that the background tasks are pending. 
-
-   You need to check which tasks are pending.
-To view the ongoing rebalancing tasks.
+2. If you receive an error indicating that background tasks are pending, you need to check which tasks are still pending. To do this, view the ongoing rebalancing tasks."
 
    ```
    <copy>
@@ -64,20 +61,21 @@ To view the ongoing rebalancing tasks.
    To cancel a particular task:
 
     ```
-   gdsctl alter task -task <task id> -cancel
-   ```
+    gdsctl alter task -task <task id> -cancel
+    ```
 
    ![<background_task_pending>](./images/2-troubleshooting-bckground-task-pending.png " ")
 
 
-3. If you get the error during switchover RU
+3. If you get the error mentioned in below screenshot during switchover RU:
 
 
     ![<swicthover_ru_shard_leader>](./images/3-ru-status.png " ")
 
     ![<swicthover_ru_shard_leader>](./images/3-switchover-ru-shard-is-leader.png " ")
 
-    Switch leadership for the given replication unit to the specified database.
+    The specified shard was the leader for the given replication unit.
+    Please validate parameter values and retry command.
 
     ![<after_specified_correct_shard>](./images/3-after-specified-correct-shard.png " ")
     
@@ -88,8 +86,9 @@ To view the ongoing rebalancing tasks.
    
    Notes:
 
-   -Source database shouldn't contain the replica leader
-   -Target database should not already contain another replica of the replication unit
+   - Source database shouldn't contain the replica leader
+
+   - Target database should not already contain another replica of the replication unit
 
 
     ![<move_ru_error>](./images/4-move-ru-error.png " ")
@@ -127,12 +126,12 @@ To view the ongoing rebalancing tasks.
 
    If the delete operation is slow and you click the button multiple times, you may encounter the following error in the browser:
 
-   ```
-   Whitelabel Error Page
-   This application has no explicit mapping for /error, so you are seeing this as a fallback.
+    ```
+    Whitelabel Error Page
+    This application has no explicit mapping for /error, so you are seeing this as a fallback.
 
-   Mon Aug 12 21:13:04 UTC 2024
-   ```
+    Mon Aug 12 21:13:04 UTC 2024
+    ```
 
    Please wait and go slow with the delete process. Rapid clicks can cause errors, so allow the operation to complete before clicking again.
 
