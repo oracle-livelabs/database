@@ -45,11 +45,10 @@ There is an ongoing project to pull all of these tools under the single 'ahf' co
 
 ## Workshop Objectives
 - Connect to a DB System
-- Understand how to identify and Check AHF
-- Upgrade AHF to the latest version
-- Know how to set up Auto Update of AHF for larger fleets
+- Find your way around AHF and check out the AHF DBA Command Line Tools
 - Use AHF to detect and triage Incidents
-- Gather and View AHF Insights reports
+- Gather and Use AHF Insights reports to help determine root cause and resolution for Issues
+- Optionally Upgrade AHF to the latest version
 
 ## Learn more
 

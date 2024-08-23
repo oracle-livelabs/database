@@ -24,7 +24,7 @@ In this lab, you will:
 
 ## Task 1: Connect to a Database system node and determine the location of the AHF Installation
 
-1. 	If you are not already connected to one of you Database Sytem nodes. 
+1. 	If you are not already connected to one of you Database System nodes. 
 	Using one of your Public IP addresses, enter the command below to login as the *opc* user and verify connection to your nodes.
 
     ```
@@ -55,7 +55,7 @@ In this lab, you will:
 	cat /etc/oracle.ahf.loc
 	</copy>
 	```
-	Command Output:
+	Example Command Output:
 	<pre>
 	/u01/app/oracle.ahf
 	</pre> 
@@ -67,7 +67,7 @@ In this lab, you will:
 	cat /u01/app/oracle.ahf/install.properties
 	</copy>
 	```
-	Command Output:
+	Example Command Output:
 	<pre> 
 	AHF_HOME=/u01/app/oracle.ahf
 	BUILD_VERSION=2402000
@@ -122,7 +122,7 @@ In this lab, you will:
 	tfactl print status
 	</copy>
 	```
-	Command output:
+	Example Command output:
 	<pre>
 	.--------------------------------------------------------------------------------------------------.
 	| Host      | Status of TFA | PID   | Port | Version    | Build ID              | Inventory Status |
@@ -142,7 +142,7 @@ In this lab, you will:
 	tfactl print scanfiles
 	</copy>
 	```
-	Command output:
+	Example Command output:
 	<pre>
 	/var/log/messages
 	/u01/app/oracle/diag/rdbms/racximwm_8wz_bom/racXIMWM1/trace/alert_racXIMWM1.log
@@ -164,7 +164,7 @@ In this lab, you will:
 	ahfctl statusahf -compliance
 	</copy>
 	```
-	Command output:
+	Example Command output:
 
 	![](../ahf-upgrade/images/orachk_sched.png =60%x*)
 	

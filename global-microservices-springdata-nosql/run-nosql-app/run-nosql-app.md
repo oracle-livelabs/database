@@ -7,6 +7,8 @@ the tables we created, load data, and execute queries using a Spring Data REST b
 
 _Estimated Time:_ 16 minutes
 
+[Lab 3 Walkthrough](videohub:1_m5ilj0z4)
+
 ### Objectives
 
 * Understand the different Java Classes in this Spring Data SDK project.

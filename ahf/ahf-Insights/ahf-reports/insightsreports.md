@@ -5,7 +5,7 @@
 
 This lab will show you how to use AHF Insights reports to help diagnose problems.
 
-Estimated Lab Time: 20 Minutes
+Estimated Lab Time: 40 Minutes
 
 ### Objectives
 - Get a bird's eye view of your database system from diagnostic perspective
@@ -13,7 +13,7 @@ Estimated Lab Time: 20 Minutes
 - Leverage AHF Insights to resolve identified problems
 
 ### Prerequisites
-- System which allows downloading file using *wget* command
+- System which allows downloading files using *wget* command
 - Browser which can render html and javascript
 
 

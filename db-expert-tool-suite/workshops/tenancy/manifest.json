@@ -5,16 +5,16 @@
                 "step2.md":"../../data-load/files/step2.md"},
     "variables": ["../../variables/variables.json",
                  "../../variables/variables-in-another-file.json"],
-    "help": "livelabs-help-**enterarea**_us@oracle.com",
+    "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
         {
             "title": "Introduction",
-            "description": "DBExpert provides users with comprehensive information on all of the Oracle Database Cloud Services across all supported cloud environments.",
+            "description": "DBExpert provides users with comprehensive information on all of the Oracle Cloud Database Services across all supported cloud environments.",
             "filename": "../../db-tutorials/0-0-intro/introduction.md"
         },
         {
-            "title": "Get Started",
-            "description": "DBExpert is an evergreen online tool suite to accelerate migrations and new Oracle Database Cloud Services deployments.",
+            "title": "Getting Started",
+            "description": "DBExpert is an evergreen online tool suite to accelerate migrations and new Oracle Cloud Database Services deployments.",
             "filename": "../../db-tutorials/0-getting-started/getting-started.md"
         },
         {
@@ -40,16 +40,6 @@
         {
             "title": "Lab 6: Additional Resources",
             "filename": "../../db-tutorials/6-additional-resources/additional-resources.md"
-        },
-        {
-            "title": "Need Help?",
-            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-            "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
-        },
-        {
-            "title": "Other LiveLabs you might like",
-            "description": "Other LiveLabs you might like",
-            "filename": "../../other-livelabs/other-livelabs.md"
         }
     ]
 }

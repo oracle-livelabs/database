@@ -23,13 +23,13 @@
             "title": "Lab 2: Perform a Traditional Data Search",
             "description": "Understanding the value of Oracle AI Vector Search.",
             "type": "livelabs",
-            "filename": "../../vector-search/intro-vector-search-hol.md"
+            "filename": "../../vector-search/traditional-search.md"
         },
         {
             "title": "Lab 3: Perform a Similarity Search with Oracle AI Vector Search",
             "description": "Explains how to vectorize your data.",
             "type": "livelabs",
-            "filename": "../../vector-search/generate-vectors.md"
+            "filename": "../../vector-search/similarity-search.md"
         },
         {
           "title": "Need Help?",

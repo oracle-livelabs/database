@@ -3,7 +3,7 @@
 ## Introduction
 This lab will show you how to get started with your workshop with a remote desktop session.
 
-Estimated Time: 10 minutes
+Estimated Time: 5 minutes
 
 ### Objectives
 In this lab, you will:
@@ -20,7 +20,11 @@ This lab assumes you have:
 
 1. In your reservation tab, select "View Login Info".
 
+    ![View login info.](./images/view-login-info.png)
+
 2. Select "Launch Remote Desktop".
+
+    ![View login info.](./images/launch-remote-desktop.png)
 
 ## Task 2: Enable Full-screen Display
 For seamless desktop integration and to make the best use of your display, perform the following tasks to render your remote desktop session in fullscreen mode.
@@ -57,6 +61,11 @@ During the execution of your labs, you may need to copy text from your *local PC
 
     ![Workshop guide and sample webapp](./images/novnc-launch-get-started-2.png " ")
     ![Workshop guide and Oracle SQL Developer](./images/novnc-launch-get-started-3.png " ")
+
+## (Optional) Task 5: Open the Terminal
+
+    If you need the terminal and it's not already up, open it as shown below._
+    ![Open terminal](images/open-terminal.gif)
 
 You may now **proceed to the next lab**.
 
