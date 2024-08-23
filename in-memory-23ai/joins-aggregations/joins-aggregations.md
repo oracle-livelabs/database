@@ -4,7 +4,7 @@
 
 Watch the video below for a quick walk-through of the In-memory Joins and Aggregations lab:
 
-[In-Memory Joins and Aggregations](videohub:1_gx8ajh93)
+[In-Memory Joins and Aggregations](https://videohub.oracle.com/media/Joins+and+Aggregation/1_8p32c858)
 
 *Estimated Lab Time:* 15 Minutes.
 
@@ -12,6 +12,8 @@ Watch the video below for a quick walk-through of the In-memory Joins and Aggreg
 
 -   Learn how to joins and aggregations work with Database In-Memory.
 -   Perform joins and aggergations on the In-Memory Column Store.
+
+Note: The results of queries in the lab may not exactly match the output shown in this Lab Guide. This is due to differences in environments and the randomness of the queries that are run. The basic output should be close and the Lab Guide will explain the important areas to focus on.
 
 ### Prerequisites
 
@@ -48,7 +50,7 @@ set lines 150
 Query result:
 
 ```
-[oracle@livelabs aim23]$ cd /home/oracle/labs/inmemory/joins-aggr
+[oracle@livelabs aim23]$ cd /home/oracle/workshops/inmemory/joins-aggr
 [oracle@livelabs aim23]$ sqlplus /nolog
 
 SQL*Plus: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Mon Aug 12 16:50:16 2024
@@ -1478,4 +1480,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Andy Rivenes, Product Manager, Database In-Memory
 - **Contributors** - Maria Colgan, Distinguished Product Manager
-- **Last Updated By/Date** - Andy Rivenes, June 2024
+- **Last Updated By/Date** - Andy Rivenes, Product Manager, Database In-Memory, August 2024

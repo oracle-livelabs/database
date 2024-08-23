@@ -19,13 +19,15 @@ In this lab, you will:
 
 ### Prerequisites
 
-- Oracle Database 23ai Free Developer Release
+- Oracle Database 23ai, version 23.4 or above
 - All previous labs successfully completed
 
 
 ## Task 1: Download Mongo Shell and Mongo Database Tools
 
 This lab has you download software from the YUM repo at repo.mongodb.org. This software is free. If you agree to their terms of use please continue on with this portion of the lab.
+
+**Note**: you can choose to download a newer version of mongosh and the mongo database tools, if you like. This won't affect the workshop.
 
 1. Open your terminal window.
 
@@ -137,26 +139,40 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
     ```
     ![New result for after 2020](images/mongo-2020-new.png " ")
 
-3. Return to the browser window that contains SQL Developer Web. We will query for the same movies using the JSON tool. Navigate to the JSON tool using the menu in the top left corner of the webpage if you are not there already.
-	![Homepage Development JSON](./images/development-json.png)
+3. Oops. We made a mistake with SuperAction Mars, it has the wrong year. Let's quickly update what we just entered. 
 
-4. Let's edit the entries in SQL Developer Web and see the changes in Mongo Shell. First, double click on the document referencing the movie "SuperAction Mars," or click the "Edit Document" icon next to it. In the dialog page, change the year to 2025 and then save the document. Seems Tom Cruise is busy and won't have enough time to finish the movie before then.
+    In mongosh, look at the movie again. This also helps us to ensure that we can use the filter to update exactly one document.
+
+    ```
+    <copy>db.movies.find({ "title": "SuperAction Mars" })
+    </copy>
+    ```
+
+    ![Find SuperAction Mars in Mongo](images/mongo-find-superaction-mars.png " ")
+
+    Ok, we are ready to update the single movie. (In real applications you would probably use "_id", the unique identifier of the document)
+
+    ```
+    <copy>db.movies.updateOne({ "title": "SuperAction Mars" },{$set: {"year": 2025}})
+    </copy>
+    ```
+    Done. You can see that we had one matched document that we updated.
+
+    ![Update SuperAction Mars in Mongo](images/mongo-update-superaction-mars.png " ")
+
+
+5. Let's go back to the JSON IDE in Database Actions and see that we really updated the document in the Oracle database. When you have selected the collection **movies**, which is most likely the only one you are having, use the following filter to look at SuperAction Mars 
 
     ```
     <copy>{ "title": "SuperAction Mars" }
     </copy>
     ```
 
-	![Find SuperAction Mars](./images/find-superaction-mars.png)
-	![Edit SuperAction Mars](./images/edit-superaction-mars.png)
+    Indeed, the record was properly updated. 
 
-5. Finally, return the to Terminal window and using the Mongo Shell instance running, query for movies released after 2020 again. You will see the updated information for the "SuperAction Mars" movie.
+	![New result for after 2020 edit](./images/json-ide-find-superaction-mars-after-update.png)
 
-    ```
-    hol23c> <copy>db.movies.find ( { "year": {"$gt": 2020} } )
-    </copy>
-    ```
-	![New result for after 2020 edit](./images/mongo-2020-edited.png)
+You can proceed to the next module.
 
 ## Learn More
 
@@ -166,4 +182,4 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
 
 * **Author** - William Masdon, Kaylien Phan, Hermann Baer
 * **Contributors** -  David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - William Masdon, Database Product Manager, April 2023
+* **Last Updated By/Date** - Hermann Baer, Database Product Management, August 2024

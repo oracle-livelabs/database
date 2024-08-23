@@ -16,6 +16,8 @@ web applications, build and deployment jobs in CI/CD pipelines, automation tasks
 
 _Estimated Time:_ 20 minutes
 
+[Lab 4 Walkthrough](videohub:1_7yxajmgz)
+
 ### Objectives
 
 * Deploy the application using Container Instances
