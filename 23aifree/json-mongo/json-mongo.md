@@ -5,15 +5,12 @@
 With our JSON Collection created in the Oracle Database, we can use Mongo APIs to interact with the collection as if we were interacting with a Mongo Database. In this lab, we will download Mongo tools and then use a Mongo connection string -- which was configured as a part of the Oracle REST Data Service (ORDS) configuration -- to connect to the Oracle Database using Mongo Shell. From there, we can interact with Mongo tools or SQL Developer Web interchangeably to access our data.
 
 Estimated Time: 10 minutes
- 
-Watch the video below for a quick walk through of the lab.
-[Watch the video](videohub:1_pypv5ivy)
+
 
 ### Objectives
 
 In this lab, you will:
 
-- Install Mongo Shell and Mongo Database Tools
 - Load more data through the Database API for MongoDB
 - Use Mongo Shell to interact with Oracle Database
 
@@ -21,30 +18,10 @@ In this lab, you will:
 
 - Oracle Database 23ai, version 23.4 or above
 - All previous labs successfully completed
+- Mongo Shell installed on your machine
 
 
-## Task 1: Download Mongo Shell and Mongo Database Tools
-
-This lab has you download software from the YUM repo at repo.mongodb.org. This software is free. If you agree to their terms of use please continue on with this portion of the lab.
-
-**Note**: you can choose to download a newer version of mongosh and the mongo database tools, if you like. This won't affect the workshop.
-
-1. Open your terminal window.
-
-    _If you closed your terminal window from the previous labs, please see steps in Lab 1 to reconnect to the host._
-
-    Run the following commands to download and install Mongo Shell and Mongo Database Tools.
-
-    ```
-    $ <copy>echo '65.8.161.52 downloads.mongodb.com' | sudo tee -a /etc/hosts</copy>
-    $ <copy>echo '18.65.185.55 repo.mongodb.org' | sudo tee -a /etc/hosts</copy> 
-    $ <copy>sudo dnf install -y https://repo.mongodb.org/yum/redhat/8/mongodb-org/6.0/x86_64/RPMS/mongodb-mongosh-1.8.0.x86_64.rpm</copy>
-    $ <copy>sudo dnf install -y https://repo.mongodb.org/yum/redhat/8/mongodb-org/6.0/x86_64/RPMS/mongodb-database-tools-100.7.0.x86_64.rpm</copy>
-    ```
-    Your screen will look similar to this after running the commands.
- 	![End of mongo install](./images/mongo-install.png)
-
-## Task 2: Interact with Oracle Database using Mongo API
+## Task 1: Interact with Oracle Database using Mongo API
 
 1. First, you must set the URI to the Mongo API running in ORDS on your machine. Copy and paste in the username, password, and host for your database and schema user. If you are using the green button, those values will be as follows: hol23c, Welcome123, and localhost.
 
@@ -90,7 +67,7 @@ This lab has you download software from the YUM repo at repo.mongodb.org. This s
     ```
     ![Query result for Zootopia](images/mongo-zootopia.png " ")
 
-5. Now query for all movies made after 2020.
+6. Now query for all movies made after 2020.
 
     ```
     hol23c> <copy>db.movies.find ( { "year": {"$gt": 2020} } )
@@ -100,7 +77,7 @@ This lab has you download software from the YUM repo at repo.mongodb.org. This s
 
     There's only one movie in our library that was released after 2020.
 
-## Task 3: Interact interchangeably with Mongo API and SQL Developer Web
+## Task 2: Interact interchangeably with Mongo API and SQL Developer Web
 
 Let's take some time to demonstrate the interactivity between the Oracle and Mongo tools we have installed on our machine to see the different APIs working against the same data set.
 
@@ -161,7 +138,7 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
     ![Update SuperAction Mars in Mongo](images/mongo-update-superaction-mars.png " ")
 
 
-5. Let's go back to the JSON IDE in Database Actions and see that we really updated the document in the Oracle database. When you have selected the collection **movies**, which is most likely the only one you are having, use the following filter to look at SuperAction Mars 
+4. Let's go back to the JSON IDE in Database Actions and see that we really updated the document in the Oracle database. When you have selected the collection **movies**, which is most likely the only one you are having, use the following filter to look at SuperAction Mars 
 
     ```
     <copy>{ "title": "SuperAction Mars" }
@@ -182,4 +159,4 @@ You can proceed to the next module.
 
 * **Author** - William Masdon, Kaylien Phan, Hermann Baer
 * **Contributors** -  David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - Hermann Baer, Database Product Management, August 2024
+* **Last Updated By/Date** - Carmen Berdant, Technical Program Manager, August 2024

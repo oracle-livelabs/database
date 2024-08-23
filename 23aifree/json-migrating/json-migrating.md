@@ -26,7 +26,7 @@ In this lab, you will:
 
 - Oracle Database 23.5 with direct OS access as oracle user
 - WinSCP or similar (for transferring the file)
-- MongoDB Compass
+- MongoDB Compass installed on your machine
 - All previous labs successfully completed
 
 
@@ -49,8 +49,8 @@ In this lab, you will:
     <copy>cd /home/oracle/
     mkdir json_files</copy>
     ```
-![Upload JSON file](images/upload_json_file.png)
-![Upload JSON file](images/upload_json_file2.png)
+    ![Upload JSON file](images/upload_json_file.png)
+    ![Upload JSON file](images/upload_json_file2.png)
 
 ## Task 3: Create the Database Directory Object
 
@@ -91,19 +91,26 @@ In this lab, you will:
     </copy>
     ```
 
-## Task 6: Insert the data from the external table into the JSON collection table
+## Task 6: Insert the data into the table granted
 
 1. Follow this code to run:
 
     ```
     <copy>
-    INSERT INTO movies_content
-        SELECT jt.data
-        FROM json_file_content,
-             json_table(data, '$[*]' columns (data JSON path '$')) jt;
-    commit work;
+    insert into movies_content
+    select * from external (
+        (data json)
+        TYPE ORACLE_BIGDATA
+        ACCESS PARAMETERS (
+        com.oracle.bigdata.fileformat=jsondoc
+        com.oracle.bigdata.json.unpackarrays=true
+        )
+        location ('https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/movies.json')
+    );
+    commit;
     </copy>
     ```
+
 ## Task 7: Test the newly create JSON collection table in the Oracle database. List all movies having a name like %father%
 
 
@@ -122,26 +129,7 @@ In this lab, you will:
     {title: /father/}
     </copy>
     ```
-![Filter by name](images/filter_by_name.png)
-
-*Note: If we switch to autonomous, we do not even have to stage data, but can do a simple IAS, that is you can directly insert the data into the table granted the movies.json file is already on object storage:*
-
-    ```
-    <copy>
-    insert into movies_content
-    select * from external (
-        (data json)
-        TYPE ORACLE_BIGDATA
-        ACCESS PARAMETERS (
-        com.oracle.bigdata.fileformat=jsondoc
-        com.oracle.bigdata.json.unpackarrays=true
-        )
-        location ('https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/movies.json')
-    );
-    commit;
-    </copy>
-    ```
-
+    ![Filter by name](images/filter_by_name.png)
 
 ## Learn More
 
@@ -151,4 +139,4 @@ In this lab, you will:
 
 * **Author** - Julian Dontcheff, Hermann Baer
 * **Contributors** -  David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - Carmen Berdant, Technical Program Manager, July 2024
+* **Last Updated By/Date** - Carmen Berdant, Technical Program Manager, August 2024
