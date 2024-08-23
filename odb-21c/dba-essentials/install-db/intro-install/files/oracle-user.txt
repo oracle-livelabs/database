@@ -1,0 +1,1 @@
+You are logged in to your host as the *oracle* user. This user is authorized to install the Oracle Database software and create Oracle Database.
