@@ -27,44 +27,48 @@ This lab assumes you have:
 
    You need to restart that shard.
 
-   ```
-   <copy>
-   sudo podman stop shard2
-   </copy>
-   ```
-
-   ```
-   <copy>
-   sudo podman start shard2
-   </copy>
-   ```
-
-   Use the terminal window that is switched to **GSM**. You can now check the status again and it will show as ok.
-
-   ```
-   <copy>
-   gdsctl status ru -show_chunks
-   </copy>
-   ```
-
-   ![<restart_shard_not_recovered_after>](./images/1-restart-shard-not-recovered-after.png " ")
-
-
-2. If you receive an error indicating that background tasks are pending, you need to check which tasks are still pending. To do this, view the ongoing rebalancing tasks."
-
-   ```
-   <copy>
-   gdsctl config task
-   </copy>
-   ```
-
-   To cancel a particular task:
+    ```
+    <copy>
+    sudo podman stop shard2
+    </copy>
+    ```
 
     ```
+    <copy>
+    sudo podman start shard2
+    </copy>
+    ```
+
+    Use the terminal window that is switched to **GSM**. You can now check the status again and it will show as ok.
+
+    ```
+    <copy>
+    gdsctl status ru -show_chunks
+    </copy>
+    ```
+
+    ![<restart_shard_not_recovered_after>](./images/1-restart-shard-not-recovered-after.png " ")
+
+
+2. If you receive an error indicating that background tasks are pending, you need to check which tasks are still pending. To do this, view the ongoing rebalancing tasks.
+
+    ```
+    <copy>
+    gdsctl config task
+    </copy>
+    ```
+
+    To cancel a particular task:
+
+    ```
+    <copy>
     gdsctl alter task -task <task id> -cancel
+    </copy>
     ```
 
-   ![<background_task_pending>](./images/2-troubleshooting-bckground-task-pending.png " ")
+    Please put the task id as per the current environment.
+
+    ![<background_task_pending>](./images/2-troubleshooting-bckground-task-pending.png " ")
 
 
 3. If you get the error mentioned in below screenshot during switchover RU:
