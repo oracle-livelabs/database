@@ -8,6 +8,8 @@ provide active-active replication of table data between geographically separated
 
 _Estimated Time:_ 20 minutes
 
+[Lab 5 Walkthrough](videohub:1_jymc6ms2)
+
 ### Objectives
 
 * GAT Offers low-latency local access to data irrespective of where the data originated.

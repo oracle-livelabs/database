@@ -19,7 +19,7 @@ Key benefits of JSON Relational Duality:
 - Duality Views eliminate the inherent problem of data duplication and data inconsistency in document databases. Duality Views are fully ACID (atomicity, consistency, isolation, durability) transactions across multiple documents and tables. It eliminates data duplication across documents data, whereas consistency is maintained automatically. 
 - Build apps that support high concurrency access and updates. Traditional locks don’t work well for modern apps. A new lock-free concurrency control provided with Duality View supports high concurrency updates. The new-lock free concurrency control also works efficiently for interactive applications since the data is not locked during human thinking time.
 
-Estimated Time: 20 minutes
+**_Estimated Time: 20 minutes_**
 
 ### **Objectives**
 

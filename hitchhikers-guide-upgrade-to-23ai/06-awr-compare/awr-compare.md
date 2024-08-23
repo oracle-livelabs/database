@@ -8,6 +8,8 @@ Those reports give you a first indication of issues you may see (or performance 
 
 Estimated Time: 10 minutes
 
+[Hitchhiker's Guide LAB6](videohub:1_rid0tt2a)
+
 ### Objectives
 
 In this lab, you will:

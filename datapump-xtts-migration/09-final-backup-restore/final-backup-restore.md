@@ -4,7 +4,9 @@
 
 It's time to complete the migration. You've done all the preparations, but now it's time for an outage while you migrate the database. When the maintenance window begins, you perform a final backup and restore, plus, use Data Pump to do a full transportable export/import.
 
-Estimated Time: 20 Minutes.
+Estimated Time: 20 Minutes
+
+[Next Level Platform](videohub:1_3r3ijska)
 
 ![Complete the migration](./images/final-backup-restore-overview.png " ")
 
