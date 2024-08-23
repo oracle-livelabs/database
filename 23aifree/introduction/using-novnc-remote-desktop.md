@@ -62,6 +62,11 @@ During the execution of your labs, you may need to copy text from your *local PC
     ![Workshop guide and sample webapp](./images/novnc-launch-get-started-2.png " ")
     ![Workshop guide and Oracle SQL Developer](./images/novnc-launch-get-started-3.png " ")
 
+## (Optional) Task 5: Open the Terminal
+
+    If you need the terminal and it's not already up, open it as shown below._
+    ![Open terminal](images/open-terminal.gif)
+
 You may now **proceed to the next lab**.
 
 ## Appendix: Connect Remotely Using SSH
