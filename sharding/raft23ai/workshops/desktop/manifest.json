@@ -50,6 +50,11 @@
       "filename": "../../ui-app/raft-demo-ui-app.md"
     },
     {
+      "title": "Troubleshooting: Guide for Raft Replication Test Cases",
+      "description": "Troubleshooting Guide for Raft Replication Test Cases",
+      "filename": "../../troubleshooting/troubleshooting.md"
+    },
+    {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
