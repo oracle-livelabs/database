@@ -4,7 +4,7 @@
 
 With Oracle Autonomous Database Free, you get to explore the newest features of Oracle Database 23ai at no-cost! This workshop guides you through the container image installation to get started in your own environment, without requiring access to Oracle Cloud Infrastructure Console or to the internet.
 
-After installation, you'll learn how to further extend the capabilities of the Autonomous Database by installing ORDS, APEX, and SQLcl. Once your environment is set for development, you'll (introduce the vector search activity) and see just how easy it is to leverage AI Vector Search. 
+After installation, you'll learn how to further extend the capabilities of the Autonomous Database by accessing APEX, and SQL Developer Web. Once your environment is set for development, you'll (introduce the vector search activity) and see just how easy it is to leverage AI Vector Search. 
 
 ### **About the Oracle Autonomous Database 23ai Free Container Image**
 Oracle Autonomous Database provides an easy-to-use, fully autonomous database that scales elastically and delivers fast query performance. As a service, Autonomous Database does not require database administration. Autonomous Database provides a fully managed Oracle Database that is available on Oracle Cloud Infrastructure.
