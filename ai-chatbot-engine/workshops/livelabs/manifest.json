@@ -22,16 +22,19 @@
         {
             "title": "Lab 3: Vector retrieval and Large Language Model generation",
             "description": "Vector rerieval and LLM generation",
+            "type": "livelabs",
             "filename": "../../search+llm/search+llm.md"
         },
         {
             "title": "Lab 4: Next steps",
             "description": "Next steps",
+            "type": "livelabs",
             "filename": "../../next-steps/next-steps.md"
         },
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "type": "livelabs",
             "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
         }
     ]

@@ -4,7 +4,9 @@
 
 In this lab, you will perform a number of checks on the source database to ensure it meets the minimum requirements. Also, you will collect information that you use later on to determine if the target database is suitable for the migration.
 
-Estimated Time: 10 Minutes.
+Estimated Time: 10 Minutes
+
+[Next Level Platform](videohub:1_sxoqy9pd)
 
 ### Objectives
 

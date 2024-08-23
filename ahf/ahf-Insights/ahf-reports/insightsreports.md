@@ -38,15 +38,20 @@ Diagnostic dimensions include :
 ## Task 1:  Download AHF Insights report to review System Topology
 1.  Download AHF Insights report zip file.
 
-    ```
-    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/1fl26UQZiAjg7vCEP9K0kMJ3bhpdc-cQTWKYl9g08VJMCXZr0pi46xQgUxfe2VBx/n/idhbogog2wy7/b/ocw24-livelabs/o/node1_insights_2024_07_10_23_30_54_system_topology.zip
-    ```
+    Paste the following URL in to your browser of choice to download to you local system
 
-2.  Extract AHF Insights report zip file.
+    ```
+    <copy>
+    https://objectstorage.us-ashburn-1.oraclecloud.com/p/1fl26UQZiAjg7vCEP9K0kMJ3bhpdc-cQTWKYl9g08VJMCXZr0pi46xQgUxfe2VBx/n/idhbogog2wy7/b/ocw24-livelabs/o/node1_insights_2024_07_10_23_30_54_system_topology.zip
+    </copy>
+    ```
+2. Navigate to the Download location for you browser
+
+3.  Extract AHF Insights report zip file.
 
 ![](./images/Task-1-point-2.png " ")
 
-3.  Open index.html file on a browser.
+4.  Open index.html file on a browser.
 
 ## Task 2:  Review parts of AHF Insights report
 
@@ -139,15 +144,20 @@ Diagnostic dimensions include :
 
 1.  Download AHF Insights report zip file.
 
-    ```
-    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/JHSkKXru-WkrhAJj668oXGDLHGncTtuK1_EF40kilttwxMPHg6pDuGXe1CPujYDe/n/idhbogog2wy7/b/ocw24-livelabs/o/node1_insights_2024_05_02_20_44_11_insights.zip
-    ```
+    Paste the following URL in to your browser of choice to download to you local system
 
-2.  Extract AHF Insights report zip file.
+    ```
+    <copy>
+    https://objectstorage.us-ashburn-1.oraclecloud.com/p/JHSkKXru-WkrhAJj668oXGDLHGncTtuK1_EF40kilttwxMPHg6pDuGXe1CPujYDe/n/idhbogog2wy7/b/ocw24-livelabs/o/node1_insights_2024_05_02_20_44_11_insights.zip
+    </copy>
+    ```
+2.  Navigate to the Download location for you browser
+
+3.  Extract AHF Insights report zip file.
 
 ![](./images/Task-8-point-2.png " ")
 
-3.  Open index.html file on a browser.
+4.  Open index.html file on a browser.
 
 ## Task 9:  Review *Timeline Section* in Insights
 
