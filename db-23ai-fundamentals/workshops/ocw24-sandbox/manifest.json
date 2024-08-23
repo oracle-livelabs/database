@@ -55,7 +55,7 @@
       "filename": "../../new-domains/new-domains.md"
   },
   {
-    "title": "Lab 8: (Bonus) Data Use Case Domains",
+    "title": "Lab 8: (Bonus) SQL Analysis Report",
     "description": "Fortify your database security with SQL Firewall, protecting against unauthorized access and potential threats.",
     "type": "livelabs",
     "filename": "../../new-sql-analysis-report/new-sql-analysis-report.md"
