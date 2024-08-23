@@ -17,17 +17,17 @@ In this lab, you will:
 
 ## Task 1: Learn about Oracle Estate Explorer's via presentation
 
-<a href="../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert.pdf">Download PDF version</a> 
+<a href="../../db-tutorials/5-oracle-estate-explorer/images/oee_pres.pdf">Download PDF version</a> 
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_01.png' alt='Oracle Estate ExplorerExplore Your Database Estate, build a Business Case and optimize your Cloud Migration Overview Copyright © 2024, Oracle and/or its affiliates' title='Slide: 1' border='1'  width='85%'/>
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_01.png' alt='Oracle Estate ExplorerExplore Your Database Estate, build a Business Case and optimize your Cloud Migration Overview Copyright © 2024, Oracle and/or its affiliates' title='Slide: 1' border='1'  width='85%'/>
 </section>
 
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_02.png' alt=' Copyright © 2023, Oracle and/or its affiliates Oracle Estate Explorer enables you to
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_02.png' alt=' Copyright © 2023, Oracle and/or its affiliates Oracle Estate Explorer enables you to
 Understand their current Database Estate
 Build a complete database inventory
 Visualize any size database estate
@@ -42,7 +42,7 @@ Any source -  Any target' title='Slide: 1' border='1'  width='85%%'/>
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_03.png' alt=' Copyright © 2023, Oracle and/or its affiliates
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_03.png' alt=' Copyright © 2023, Oracle and/or its affiliates
 
 
 
@@ -62,7 +62,7 @@ Analyze 1000’s of databases in just a few hours
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_04.png' alt=' Copyright © 2023, Oracle and/or its affiliates
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_04.png' alt=' Copyright © 2023, Oracle and/or its affiliates
 
 Key Features
 Oracle Estate Explorer
@@ -77,7 +77,7 @@ Oracle Estate Explorer
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_05.png' alt='Engage with us in different ways …
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_05.png' alt='Engage with us in different ways …
         Copyright © 2024, Oracle and/or its affiliates
 
 Independent
@@ -101,7 +101,7 @@ Oracle delivers back a full report and provides detailed guidance
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_06.png' alt='        Copyright © 2024, Oracle and/or its affiliates
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_06.png' alt='        Copyright © 2024, Oracle and/or its affiliates
 
 Oracle Estate Explorer
 Features, Functions and Process
@@ -116,7 +116,7 @@ Features, Functions and Process
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_07.png' alt='Oracle Estate Explorer – Key Steps
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_07.png' alt='Oracle Estate Explorer – Key Steps
 
         Copyright © 2024, Oracle and/or its affiliates
 Explore an Estate Catalog
@@ -145,7 +145,7 @@ Build Elastic Pools
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_08.png' alt='Estate Summary View
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_08.png' alt='Estate Summary View
 View your databases by your technical and business criteria
 Define criteria based on your naming standards
 By geography, business unit, platform, etc
@@ -165,7 +165,7 @@ Define new subsets of databases for analysis
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_09.png' alt='Estate Cluster View
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_09.png' alt='Estate Cluster View
 View a group of databases by their connections
 Based on database links between databases
 Identify groups of linked databases
@@ -185,7 +185,7 @@ Create linked groups for further analysis
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_10.png' alt='TCO Analyzer – Compare current with future
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_10.png' alt='TCO Analyzer – Compare current with future
  Copyright © 2024, Oracle and/or its affiliates
 
 Run-time TCO
@@ -209,7 +209,7 @@ Flexibly split workloads between Exa and ADB
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_11.png' alt='Migration preparation &amp; effort
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_11.png' alt='Migration preparation &amp; effort
 Aggregate view
 Drill down to individual databases
 Detailed actions at an object level
@@ -231,7 +231,7 @@ Database Estate Assessment for Autonomous Database
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_12.png' alt='ADB Elastic Pools Simulator
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_12.png' alt='ADB Elastic Pools Simulator
         Copyright © 2024, Oracle and/or its affiliates
 
 Migration preparation &amp; effort
@@ -255,7 +255,7 @@ Zoom into any time period for fine tuning
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_13.png' alt='Auto-generate PDF Reports
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_13.png' alt='Auto-generate PDF Reports
         Copyright © 2024, Oracle and/or its affiliates
 
 A complete view of your database estate
@@ -280,7 +280,7 @@ share easily across your organization in PDF
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_14.png' alt='        Copyright © 2024, Oracle and/or its affiliates
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_14.png' alt='        Copyright © 2024, Oracle and/or its affiliates
 
 Demo
 ' title='Slide: 13' border='1'  width='85%%'/>
@@ -294,7 +294,7 @@ Demo
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_15.png' alt='Where can I deploy the OEE Application ?
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_15.png' alt='Where can I deploy the OEE Application ?
         Copyright © 2024, Oracle and/or its affiliates
 
 On-Premises
@@ -326,7 +326,7 @@ Deploy the APEX application wherever you need it – full installation scripts a
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_16.png' alt=' Copyright © 2023, Oracle and/or its affiliates
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_16.png' alt=' Copyright © 2023, Oracle and/or its affiliates
 
 Where to find out more
 Oracle Estate Explorer
@@ -342,7 +342,7 @@ Internal
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
-<img src='../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert_Page_17.png' alt='        Copyright © 2024, Oracle and/or its affiliates
+<img src='../../db-tutorials/5-oracle-estate-explorer/images/oee_pres_17.png' alt='        Copyright © 2024, Oracle and/or its affiliates
 
 Any Questions ?
 ' title='Slide: 16' border='1'  width='85%%'/>
