@@ -1,7 +1,7 @@
 # Troubleshooting Guide
 
 ## Introduction   
-This section is designed to guide you in troubleshooting any issues that may arise while performing the Raft Replication test cases in this Live Labs environment. It provides step-by-step assistance to help you resolve common challenges effectively.
+This section is designed to guide you in troubleshooting any issues that may arise while performing the Raft Replication test cases in this Live Labs environment. It provides assistance to help you resolve common challenges effectively.
 
 *Estimated Time*:  30 minutes
 
