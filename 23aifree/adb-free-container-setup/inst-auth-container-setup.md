@@ -21,58 +21,35 @@ This lab assumes you have:
 
 In the LiveLabs Sandbox, we will download the image from an OCI bucket. However, when using your own environment you will download the image directly from the Oracle Container Registry. That process is detailed in the free tier instructions.
 
-**_Note:_** _All of the following commands are to be run in the remote desktop's terminal._
+**_Reminder:_** _All of the following commands are to be run in the remote desktop's terminal._
 
-1.  **Set the OCI CLI environment variables.** Our image is stored in the Toronto region and we're using the instance principal authorization method. Run the following commands in the terminal to configure the OCI CLI accordingly.
-
-    ```
-    <copy>
-    export OCI_CLI_REGION=ca-toronto-1
-    export OCI_CLI_AUTH=instance_principal
-    </copy>
-    ```
-     ![OCI_CLI_AUTH](images/aivs_lab1_task1_step1.png)
-2. **Download the image from Object Storage.** 
+1. **Download the container image and workshop resources.** The following commands download all of the resources we'll use in the workshop. The most important file is the YAML file, which provides the configuration details of the container. We'll take a closer look at how this file works shortly.
 
     ```
     <copy>
-    oci os object get -bn image_bucket -ns c4u04 --name adb-free-23ai.tar.gz --file /tmp/adb-free-23ai.tar.gz
+    ## Downloading the container image.
+    oci os object get -bn image_bucket -ns c4u04 --name adb-free-23ai.tar.gz --file adb-free-23ai.tar.gz
+
+    ## Downloading both the container and workshop resources. 
+    wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/GDCjmPfuRMx-juvDGT0Mn7ZsaI_O5y_PsGg41xcLVVl8vewGOm6Ns4zeLsTPAr3p/n/c4u04/b/apex-images/o/configuration-files.zip -P /tmp
+
+    # Opening the zip file.
+    unzip -q /tmp/installation-files.zip
     </copy>
     ```
-    ![IMAGE_DOWNLOAD](images/aivs_lab1_task1_step2.png)
+    ![Download container image](images/download-image.png)
 
-3. **Download the container installation files.** We'll be using three files to launch and configure the container. Read their descriptions below and proceed to downloading them with provided command.
 
-    **podman-compose.yaml -** The YAML file provides the configuration details of the container. These details prepare the container to deploy ADB 23ai Free.<br />
-    **db-config.sh + reset-image-prefix.sql -** Together, these scripts redirect APEX to images behind our firewall rather than their default location. This allows APEX to run properly on LiveLabs without any compliance breaches. 
+2. **Load the image into the podman catalog. (~5 mins)** Podman-load copies the image from the local docker archive into the podman container storage. This will take about 5 minutes--let's review the YAML file in the meantime.
 
     ```
     <copy>
-    wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/HjeUhzJMB3rlrIy076kDM69y3eTh788gv1GmjIK5pknxl22Di9HnNai3k7LsskFX/n/c4u04/b/apex-images/o/compose.zip -P /tmp
-    unzip -q /tmp/compose.zip
+    podman load -i adb-free-23ai.tar.gz
     </copy>
     ```
-    ![WGET_COMMAND](images/aivs_lab1_task1_step3.png)
+    ![Load image into podman catalog](images/podman-load-image.png)
 
-4. **Download the container resource files.** The following command downloads the vector embedding model and the sample schema (for the vector search labs) and copies it into the container. Refer to Appendix 1: Understanding the YAML File for more details.
-
-    ```
-    <copy>
-    wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/ECpUzU1rO90NPtySY1_evufBPmmOZAOFriZgPpmHo4mZy2ARpZmZ_lVtfVmY3zD3/n/c4u04/b/apex-images/o/container-files.zip -P /tmp
-    unzip -q /tmp/container-files.zip
-    </copy>
-    ```
-    ![WGET_COMMAND](images/aivs_lab1_task1_step4.png)
-5. **Load the image into the podman catalog. (~5 mins)** Our image has been downloaded locally. Podman-load copies the image from the local docker archive into the podman container storage. This will take about 5 minutes, let's review the YAML file in the meantime.
-
-    ```
-    <copy>
-    podman load -i /tmp/adb-free-23ai.tar.gz
-    </copy>
-    ```
-    ![PODMAN_IMAGE_LOAD](images/aivs_lab1_task1_step5.png)
-
-6. **Review the YAML file.** Run the following command to learn more about how the YAML file helps launch the container image.
+3. **Review the YAML file.** Run the following command to learn more about how the YAML file helps launch the container image.
     ```
     <copy>
     cat podman-compose.yml
@@ -82,9 +59,8 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     ```
     version: "3.9"
     services:
-    adb-free:  # Name of the service/container.
-    image: container-registry.oracle.com/database/adb-free:latest-23ai
-    # The container image to use. In this case, it's an Oracle Autonomous Database Free image.
+        adb-free:  # Name of the service/container.
+            image: container-registry.oracle.com/database/adb-free:latest-23ai # The container image to use. In this case, it's an Oracle Autonomous Database Free image.
 
     environment:  # Environment variables passed to the container.
       - WORKLOAD_TYPE=ATP  # Specify the workload type (ATP stands for Autonomous Transaction Processing).
@@ -98,10 +74,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
       - "27017:27017"  # Map host port 27017 to container port 27017 (MongoDB port).
 
     volumes:  # Mount host directories/files into the container.
-      - "/home/oracle/scripts/db-config.sh:/u01/scripts/db-config.sh:Z"
-      - "/home/oracle/scripts/reset-image-prefix.sql:/u01/scripts/reset-image-prefix.sql:Z" 
-      - "/home/oracle/BERT-TINY.onnx:/u01/BERT-TINY.onnx:Z" 
-      - "/home/oracle/customer-orders/:/u01/customer-orders:Z" 
+      - "/home/oracle/mount-files/:/u01/mount-files:Z"
 
     devices:  # Allow the container to access specific devices on the host.
       - /dev/fuse  # /dev/fuse is required for file system operations like mounting.
@@ -114,42 +87,33 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     userns_mode: "keep-id"  # Keep the user namespace mapping, meaning the container runs with the same user ID as on the host.
     ```
 
-7. **Launch the image.** The podman-compose command will configure and run the container image based on your YAML file. You can configure the ADB to be suited for any workload type. However, we've preset the workload type to ATP.
+4. **Launch the image.** The podman-compose command will configure and run the container image based on your YAML file. The terminal will output "exit code: 0" when the container successfully launches.
 
     ```
-    <copy>
-    podman-compose up
+    <copy>  
+    podman-compose up -d
     </copy>
     ```
-    ![WGET_COMMAND](images/aivs_lab1_task1_step6.png)
+    ![Stand up container image](images/podman-compose-up.png)
 
-8. **In a new terminal tab, confirm the container is up and running.** In another tab of the terminal, run this command. 
+5. **Confirm the container is up and running.** This command generates the name and current status for all of your running containers.
 
       ```
     <copy>
     podman ps --format "{{.Names}} {{.Status}}"
     </copy>
     ```
-    ![PODMAN_PS](images/aivs_lab1_task1_step7.png)
+    ![Check container status](images/check-container-status)
 
-9. **Confirm ORDS is running.**
+6. **Confirm the files were pre-loaded into the container.**
     ```
     <copy>
-    podman exec -it oracle_adb-free_1 jps -l | grep ords
-    </copy>
-    ```
-    
-10. **Confirm the files were pre-loaded into the container.**
-    ```
-    <copy>
-    podman exec -it oracle_adb-free_1 ls /u01
-    podman exec -it oracle_adb-free_1 ls /u01/scripts
-    podman exec -it oracle_adb-free_1 ls /u01/customer-orders
+    podman exec -it oracle_adb-free_1 ls /u01/mount-files
     </copy>
     ```
     ![PODMAN_CONFIRM_PRELOADS](images/aivs_lab1_task1_step8.png)
-
-11. **Relocate tnsnames.ora in the container.** 'tnsnames.ora' is a configuration file, storing the database details necessary for connection. We're moving the file into a directory that's meant for our database for easy connection.
+   
+7. **Relocate tnsnames.ora in the container.** 'tnsnames.ora' is a configuration file, storing the database details necessary for connection. We're moving the file into a directory that's meant for our database for easy connection.
     ```
     <copy>
     podman exec -it oracle_adb-free_1 cp /u01/app/oracle/wallets/tls_wallet/tnsnames.ora /u01/app/oracle/product/23.0.0.0/dbhome_1/network/admin/tnsnames.ora
@@ -157,11 +121,14 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     ```
     ![PODMAN_EXEC](images/aivs_lab1_task1_step9.png)
 
-## Task 2: Access APEX & SQL Developer Web
+8. **Confirm ORDS is running.**
+    ```
+    <copy>
+    podman exec -it oracle_adb-free_1 jps -l | grep ords
+    </copy>
+    ```
 
-Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) preinstalled. Let's see how you can get started!
-
-1. **Re-configure the APEX image.** We'll first need to redirect APEX to use the images behind our firewall. Run this command in the terminal to do so.
+9. **Configure the APEX image.** We'll first need to redirect APEX to use the images behind our firewall. Run this command in the terminal to do so. This is only required for APEX use in Livelabs.
 
     ```
     <copy>
@@ -169,10 +136,14 @@ Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) prein
     </copy>
     ```  
 
-2. **Open Google Chrome.** Click Activities >> Google Chrome icon, to open a new Chrome window.
-    ![ACTIVITY_WINDOW](images/aivs_lab1_task2_step2.png)
+## Task 2: Access APEX & SQL Developer Web
+
+Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) preinstalled. Let's see how you can get started!
+
+1. **Open Google Chrome.** Click Activities >> Google Chrome icon, to open a new Chrome window.
+    [Insert gif]
     
-3. **Launch ORDS.** Paste the following URL into your Chrome browser to Launch ORDS.
+2. **Launch ORDS.** Paste the following URL into your Chrome browser to Launch ORDS.
 
     ```
     <copy>
@@ -181,28 +152,28 @@ Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) prein
     ```
     ![ORDS landing page](images/ords-landing.png)
 
-4. **Sign into ORDS.** <br/> <br/>
+3. **Sign into ORDS.** <br/> <br/>
     
     **Username -** admin<br/>
     **Password -** Welcome_12345 (or the custom password you specified in Task 1, Step 5.)
 
     ![Sign into DB Actions](images/sign-in-ords.png)
 
-5. **Launch SQL Developer Web.** You now have access to Database Actions! This is where you'll find both APEX and SQL Developer Web. For now, we'll only launch SQL Developer Web.
+4. **Launch SQL Developer Web.** You now have access to Database Actions! This is where you'll find both APEX and SQL Developer Web. For now, we'll only launch SQL Developer Web.
 
     ![PODMAN_PS](images/aivs_lab1_task2_step5.png)
 
-8. **Sign-in to SQL Developer Web.** <br/>
+5. **Sign-in to SQL Developer Web.** <br/>
     **Username -** admin <br/>
     **Password -** Welcome_12345 (or the custom password you specified in Task 1, Step 5.)
 
     ![Sign into DB Actions](images/sign-in-ords.png)
 
-9. **Lauch the SQL worksheet.** Select the 'SQL' tab, as shown below.
-
+6. **Lauch the SQL worksheet.** Select the 'SQL' tab, as shown below.
     ![Launch the SQL Tab](images/sql-worksheet.png)
 
-You may proceed to the next lab.
+
+**You may proceed to the next lab.**
 
 
 ## Appendix 1: Restart Docker Container
