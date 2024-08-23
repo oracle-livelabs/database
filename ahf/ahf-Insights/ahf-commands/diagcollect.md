@@ -161,7 +161,7 @@ You will be prompted to choose:-
 
 
 ## Task 5:  Generate a manual collection using problem chooser
-1.  Simply run the `tfactl diagcollect` command and let the problem chhoser guide you.
+1.  Simply run the `tfactl diagcollect` command and let the problem chooser guide you.
 ```
 <copy>
 tfactl diagcollect
@@ -187,7 +187,7 @@ You can at this point choose one of the detected events to generate a collection
 You will select **ORA-00600** which will do a manual collection for the ORA-00600 
 > Note: This is equivalent to running the ORA-00600 SRDC collection directly.
 
-> Note: It can take a few minutes to complete the collection so now might be a good time to read on and then come back to this at thend if you have time. 
+> Note: It can take a few minutes to complete the collection so now might be a good time to read on and then come back to this at the end if you have time. 
 
 Example Command Output:
 
