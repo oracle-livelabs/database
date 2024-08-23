@@ -9,9 +9,9 @@
 ### **Objectives**
 
 In this workshop, you will learn how to:
-* Use the AI-enabled suite of tools to accelerate migrations to and new deployments of Oracle Cloud Database Services.
-* Provide requirements to instantly identify matching services from Oracle Databases (Autonomous, BaseDB, Exadata), NoSQL Database Cloud Service, HeatWave MySQL Database Service, and Database with PostgreSQL deployed on OCI, Oracle Cloud@Customer, or multi-cloud environments.
-* View & compare service capabilities and estimated pricing & TCO.
+* Use the AI-enabled suite of tools to accelerate migrations to and new deployments of Oracle Cloud Database Services
+* Provide requirements to instantly identify matching services from Oracle Databases (Autonomous, BaseDB, Exadata), NoSQL Database Cloud Service, HeatWave MySQL Database Service, and Database with PostgreSQL deployed on OCI, Oracle Cloud@Customer, or multi-cloud environments
+* View & compare service capabilities and estimated pricing & TCO
 
 ### Acknowledgements
 * **Author** - [](var:author_names), [](var:group_name)

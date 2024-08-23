@@ -23,7 +23,7 @@
 
 2. Navigate to [https://www.oracle.com/dbexpert](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/home)
 
-    ![DBExpert Homepage](./images/homepage_sm.png "Image of DB Expert Homepage")
+    ![DBExpert Homepage](./images/homepage_sm.png "Image of DBExpert Homepage")
 
 
 ## Task 2: Overview of DBExpert
@@ -32,7 +32,7 @@
 
 Oracle offers a comprehensive portfolio of database services, available to deploy in Oracle Cloud Infrastructure, in your location with Cloud@Customer, and in multi-cloud environments such as Oracle Database@Azure.   Choosing the best solution for your new deployment or migration project may involve many business and technical considerations, and collecting and evaluating all the information you need is not always a simple task.
 
-As with many undertakings, the first step is often the hardest.  Where to start?  To assist you in taking the first step with a structured and guided discovery and evaluation process, our team created https://www.oracle.com/dbexpert, providing up-to-date, curated information covering Oracle's Database Management cloud services offerings.
+As with many undertakings, the first step is often the hardest.  Where to start?  To assist you in taking the first step with a structured and guided discovery and evaluation process, our team created [DBExpert](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/home), providing up-to-date, curated information covering Oracle's Database Management cloud services offerings.
 
 The site’s main tools include:
 - **Information Viewers** - quickly explore Oracle cloud service and database capabilities
@@ -59,7 +59,7 @@ The information viewers facilitate browsing and searching, while the advisors ar
 
 2. On the homepage, click on the login button in the top right
 
-    ![DBExpert Homepage Login](./images/homepage_login_sm.png "Image of DB Expert Homepage with sign in button highlighted")
+    ![DBExpert Homepage Login](./images/homepage_login_sm.png "Image of DBExpert Homepage with sign in button highlighted")
 
 3. Sign in with your Oracle account (or create an account if you don't have one!)
 
@@ -74,7 +74,7 @@ Take our [homepage](https://www.oracle.com/dbexpert) for a spin or see below for
 
 ### **Webpage Header**
 **Updates:** 
-See what’s new with the DB Expert Toolsuite. Check out the Announcements Log or browse the Directory if you're looking for something specific.
+See what’s new with the DBExpert Toolsuite. Check out the Announcements Log or browse the Directory if you're looking for something specific.
 ![Updates Image](./images/updates.png)
 
 **Feedback:** 
@@ -105,7 +105,7 @@ Use your Oracle email and password, or create an account if you don't have one y
 - **Services Taxonomy:** Understand service groupings and SKU(s) for easy identification.
 ![Services Taxonomy Image](./images/explore_servicetaxonomy.png)
 
-- **REST APIs for Service Details and Advisor:** Developers and PMs can access a single source of truth with these APIs. Keep up with changes via DB Expert Announcements.
+- **REST APIs for Service Details and Advisor:** Developers and PMs can access a single source of truth with these APIs. Keep up with changes via DBExpert Announcements.
 ![REST APIs Image](./images/explore_apis.png)
 
 **Migration**

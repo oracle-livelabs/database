@@ -13,9 +13,9 @@ Find the right Oracle Cloud Database Service for Your Needs!
 ### **Objectives**
 
 In this lab, you will:
-* Test drive how quick and easily it is to match requirements to database services.
-* Learn the anatomy of the Service Advisor, review recommendations, and explore what-if scenario.
-* Dive deep into TCO and download your TCO Summary.
+* Test drive how quick and easily it is to match requirements to database services
+* Learn the anatomy of the Service Advisor, review recommendations, and explore what-if scenario
+* Dive deep into TCO and download your TCO Summary
 
 ## Task 1: Provide the Service Advisor with basic requirements 
 
