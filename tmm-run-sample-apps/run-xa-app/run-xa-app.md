@@ -271,7 +271,6 @@ When you started Minikube while performing Task 1, Kiali, Jaeger, and Prometheus
 3. Open the URL in a new tab in your browser to access the Kiali dashboard. For example, `http://localhost:20001/kiali.`
 
 4. Select Graph for the `otmm` namespace.
-![Kiali Dashboard](images/kiali-dashboard-lra.png)
 
 5. Start the Jaeger Dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
 
