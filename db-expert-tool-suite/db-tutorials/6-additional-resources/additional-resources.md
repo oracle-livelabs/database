@@ -3,10 +3,10 @@
 
 DBExpert offers two key areas where you can dive deeper into resources to ensure you're making the best decisions for your needs.
 The first area is available in the header, alongside the Explore and Migration tabs.
-![Additional Resources Section 1 Image](./images/additional_resources1.png)
+<img src='../../db-tutorials/6-additional-resources/images/additional_resources1.png' alt='Additional Resources Section 1' title='Additional Resources Section 1' width='30%'/>
 
 You'll also find a second set of resources at the bottom of the page, right below the Migration Methods banner.
-![Additional Resources Section 2 Image](./images/additional_resources2.png)
+<img src='../../db-tutorials/6-additional-resources/images/additional_resources2.png' alt='Additional Resources Section 2' title='Additional Resources Section 2' width='30%'/>
 
 **Estimated Time: 1 minutes**
 
@@ -63,7 +63,3 @@ Browse through Oracle Database features and licensing options to see what's avai
 With ORADiff, you can easily compare two different Oracle database releases, with or without any additional patches, to see what has changed.
 ![ORADiff GIF](./images/oradiff.gif)
 
-## Acknowledgements
-* **Author** - [](var:author_names), [](var:group_name)
-* **Contributors** -  [](var:contributors_names)
-* **Last Updated By/Date** - [](var:author_names), [](var:last_updated)

@@ -66,11 +66,8 @@ In this lab, you will:
     * The **Est. TCO - SS Annualized (Beta)** column provides an estimated TCO value per year based on 7 categories and when clicked opens a modal where the user can compare TCO between 3 services, edit 10 assumptions, and download a **TCO Summary**. Be sure check out the value of [Oracle Support Rewards](https://www.oracle.com/cloud/rewards/)!
     ![DBExpert Service Advisor - TCO modal](./images/service_advisor_tco_modal.gif "TCO modal.") 
 
+You may now **proceed to the next lab**.
+
 ## Learn More
 
 * [Service Advisor Overview (Video)](https://videohub.oracle.com/media/1_0klpfez6 "Service Advisor Overview (Video)")
-
-## Acknowledgements
-* **Author** - [](var:author_names), [](var:group_name)
-* **Contributors** -  [](var:contributors_names)
-* **Last Updated By/Date** - [](var:author_names), [](var:last_updated)

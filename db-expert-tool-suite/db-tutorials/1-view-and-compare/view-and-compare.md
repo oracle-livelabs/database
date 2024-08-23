@@ -60,12 +60,8 @@ In this lab, you will:
 
     ![DBExpert VC](./images/view_and_compare_cats_sm.png "The View and Compare webpage with 3 selected services features highlighted")
 
+You may now **proceed to the next lab**.
     
 ## Learn More
 
 * [View & Compare OCI Data Management Services Overview (Video)](https://videohub.oracle.com/media/1_5a9man1g "View & Compare OCI Data Management Services Overview (Video)")
-
-## Acknowledgements
-* **Author** - [](var:author_names), [](var:group_name)
-* **Contributors** -  [](var:contributors_names)
-* **Last Updated By/Date** - [](var:author_names), [](var:last_updated)

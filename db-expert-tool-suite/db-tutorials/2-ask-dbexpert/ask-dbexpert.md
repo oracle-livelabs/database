@@ -54,11 +54,8 @@ In this lab, you will:
 
   ![DBExpert VC](./images/ai_silly_sm.png "You can ask DBExpert anything! Give it a try!")
 
+You may now **proceed to the next lab**.
+
 ## Learn More
 ### Blogs
 * [How DBExpert Quickly Learned to Talk using AI (and your app can too)](https://blogs.oracle.com/datawarehousing/post/how-dbexpert-quickly-learned-to-talk-using-ai-and-your-app-can-too)
-
-## Acknowledgements
-* **Author** - [](var:author_names), [](var:group_name)
-* **Contributors** -  [](var:contributors_names)
-* **Last Updated By/Date** - [](var:author_names), [](var:last_updated)

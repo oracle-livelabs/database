@@ -1,10 +1,8 @@
-# Get started
+# Getting Started
 
 ## Introduction
 
-[DBExpert](www.oracle.com/dbexpert) is an evergreen online tool suite to accelerate migrations and new Oracle Cloud Database Services deployments. 
-
-Oracle Cloud is the industry's broadest and most integrated cloud provider, with deployment options ranging from the public cloud to your data center.
+[DBExpert](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/home) is a suite of tools to accelerate migrations and new Oracle Cloud Database Services deployments.
 
 **Estimated Time: 2 minutes**
 
@@ -17,18 +15,18 @@ Oracle Cloud is the industry's broadest and most integrated cloud provider, with
 
 ### **Prerequisites**
 - Web Browser
-- Oracle email & password (optional)
+- Oracle account (optional)
 
 ## Task 1: Navigate to DBExpert website
 
 1. Open a web browser (e.g. [Chrome](https://www.google.com/chrome/browser-tools/) and/or [Firefox](https://www.mozilla.org/en-US/firefox/all/))
 
-2. Navigate to [https://www.oracle.com/dbexpert](https://www.oracle.com/dbexpert)
+2. Navigate to [https://www.oracle.com/dbexpert](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/home)
 
     ![DBExpert Homepage](./images/homepage_sm.png "Image of DB Expert Homepage")
 
 
-## Task 2: Overview of DB Expert
+## Task 2: Overview of DBExpert
 
 ### Oracle DBExpert – an AI-powered expert resource web application ###
 
@@ -63,17 +61,12 @@ The information viewers facilitate browsing and searching, while the advisors ar
 
     ![DBExpert Homepage Login](./images/homepage_login_sm.png "Image of DB Expert Homepage with sign in button highlighted")
 
-3. Sign in with Oracle email and password (or create an account if you don't have one!)
+3. Sign in with your Oracle account (or create an account if you don't have one!)
 
     ![Oracle Login](./images/login_sm.png "Generic Oracle login page")
 
 
 You may now **proceed to the next lab**.
-
-## Acknowledgements
-* **Author** - [](var:author_names), [](var:group_name)
-* **Contributors** -  [](var:contributors_names)
-* **Last Updated By/Date** - [](var:author_names), [](var:last_updated)
 
 ## Appendix 1: DBExpert homepage walkthrough
 

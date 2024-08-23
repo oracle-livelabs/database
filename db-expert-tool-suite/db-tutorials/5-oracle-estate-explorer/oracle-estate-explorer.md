@@ -1,4 +1,4 @@
-# Lab 5: Oracle Estate Explorer (Download)
+# Lab 5: Oracle Estate Explorer
 
 ## Introduction
 
@@ -17,7 +17,7 @@ In this lab, you will:
 
 ## Task 1: Learn about Oracle Estate Explorer's via presentation
 
-<a href="../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert.pdf">Download PDF version</a> | <a href="../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert.pptx">Download Powerpoint Version</a>
+<a href="../../db-tutorials/5-oracle-estate-explorer/images/OEEforDBExpert.pdf">Download PDF version</a> 
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>
@@ -357,13 +357,12 @@ Any Questions ?
 * [How a Financial Institution Moved Mission-Critical Systems to Autonomous (LRN3311) - Tuesday, Sep 10, 2:45 PM - 3:30 PM PDT ](https://reg.rf.oracle.com/flow/oracle/ocw24/catalog/page/catalog/session/1718035290111001wzBU)
 * [Database Cloud Migration Best Practice to Oracle Autonomous Database (LRN3339) - Thursday, Sep 12, 9:00 AM - 9:45 AM PDT](https://reg.rf.oracle.com/flow/oracle/ocw24/catalog/page/catalog/session/1718035324669001wrdf)
 
+You may now **proceed to the next lab**.
 
 ### Links
-
+* [Oracle Estate Explorer - Overview & Demonstration (55:39)](https://youtu.be/vXX1kFz1fDY?si=bgdz3jmx5Ho0vpc-)
 * [Oracle Estate Explorer - Main website](https://www.oracle.com/database/cloud-migration/estate-explorer/)
 * [Oracle Estate Explorer - FAQ](https://www.oracle.com/database/cloud-migration/estate-explorer/faq/)
 
 ## Acknowledgements
-* **Author** - [](var:author_names), [](var:group_name)
-* **Contributors** -  [](var:contributors_names)
-* **Last Updated By/Date** - [](var:author_names), [](var:last_updated)
+* **Special Thanks** - The Oracle Estate Explorer Team

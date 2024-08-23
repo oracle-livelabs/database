@@ -23,12 +23,10 @@ In this lab, you will:
     ![DBExpert Migration Methods Advisor](./images/migration_method_intro.gif "Filling out basic migration information and navigating to DBExpert's Migration Methods Advisor.")
 4. To refine your search add more information to the side bar!
     <img src='../../db-tutorials/4-migration-advisor/images/migration_method_options.gif' alt='To refine your search add more information to the side bar.' title='To refine your search add more information to the side bar.' width='20%'/>
+
+You may now **proceed to the next lab**.
     
 ## Learn More
 
 * [Migration Methods Advisor Overview (Video)](https://videohub.oracle.com/media/1_xko1jfib "Migration Methods Advisor Overview (Video)")
 
-## Acknowledgements
-* **Author** - [](var:author_names), [](var:group_name)
-* **Contributors** -  [](var:contributors_names)
-* **Last Updated By/Date** - [](var:author_names), [](var:last_updated)

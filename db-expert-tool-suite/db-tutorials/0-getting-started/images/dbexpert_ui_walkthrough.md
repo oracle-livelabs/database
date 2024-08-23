@@ -1,6 +1,6 @@
 ## Header
 ### **Updates:** 
-See what’s new with the DB Expert Toolsuite. Check out the Announcements Log or browse the Directory if you're looking for something specific.
+See what’s new with the DBExpert Toolsuite. Check out the Announcements Log or browse the Directory if you're looking for something specific.
 ![Updates Image](./updates.png)
 
 ### **Feedback:** 
@@ -31,7 +31,7 @@ Use your Oracle email and password, or create an account if you don't have one y
 - **Services Taxonomy:** Understand service groupings and SKU(s) for easy identification.
 ![Services Taxonomy Image](./explore_servicetaxonomy.png)
 
-- **REST APIs for Service Details and Advisor:** Developers and PMs can access a single source of truth with these APIs. Keep up with changes via DB Expert Announcements.
+- **REST APIs for Service Details and Advisor:** Developers and PMs can access a single source of truth with these APIs. Keep up with changes via DBExpert Announcements.
 ![REST APIs Image](./explore_apis.png)
 
 ### **Migration**
