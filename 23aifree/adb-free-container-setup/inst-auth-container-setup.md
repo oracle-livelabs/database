@@ -31,7 +31,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     oci os object get -bn image_bucket -ns c4u04 --name adb-free-23ai.tar.gz --file adb-free-23ai.tar.gz
 
     ## Downloading both the container and workshop resources. 
-    wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/b1kvfaoejn_hRgJoX00mOq1xGWGBh4UgpJeukPJ5zFwZ8s3d7iBa3igyZaOv2DcF/n/c4u04/b/apex-images/o/installation-files.zip -P /tmp
+    wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/GDCjmPfuRMx-juvDGT0Mn7ZsaI_O5y_PsGg41xcLVVl8vewGOm6Ns4zeLsTPAr3p/n/c4u04/b/apex-images/o/configuration-files.zip -P /tmp
 
     # Opening the zip file.
     unzip -q /tmp/installation-files.zip
