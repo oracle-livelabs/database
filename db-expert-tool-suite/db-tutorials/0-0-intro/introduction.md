@@ -2,7 +2,9 @@
 
 ## About this Workshop
 
-[DBExpert](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/home) provides users with comprehensive information on the Oracle Cloud Database Services across all supported cloud environments. This workshop will provide a step-by-step walkthrough and practical use cases for DBExpert’s capabilities and tools.
+[DBExpert](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/home) provides users with comprehensive information on the Oracle Cloud Database Services across all supported cloud environments. 
+
+This workshop will provide a step-by-step walkthrough and practical use cases for DBExpert’s capabilities and tools.
 
 **Estimated Workshop Time:  40 minutes** 
 
