@@ -189,6 +189,7 @@ You will select **ORA-00600** which will do a manual collection for the ORA-0060
 
 > Note: It can take a few minutes to complete the collection so now might be a good time to read on and then come back to this at the end if you have time. 
 
+
 Example Command Output:
 
 <pre>
