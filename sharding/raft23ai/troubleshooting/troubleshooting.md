@@ -1,4 +1,4 @@
-# Troubleshooting section
+# Troubleshooting Guide
 
 ## Introduction   
 This section is designed to guide you in troubleshooting any issues that may arise while performing the Raft Replication test cases in this Live Labs environment. It provides step-by-step assistance to help you resolve common challenges effectively.
@@ -19,11 +19,11 @@ This lab assumes you have:
     - Lab: Environment Setup
     - Lab: Initialize Environment
 
-## Scenario 1: Check for containers in your VM
+## Scenarios: Guide for Raft Replication Test Cases
 
-1. IF you encounter "Not Recovered" for any of the shard
+1. If you encounter "Not Recovered" for any of the shard.
 
-    ![<not_recovered_shard>](./images/not-recovered-shard.png " ")
+    ![<not_recovered_shard>](./images/1-not-recovered-shard.png " ")
 
    You need to restart that shard.
 
@@ -39,7 +39,7 @@ This lab assumes you have:
    </copy>
    ```
 
- Use the terminal window that is switched to **GSM**. You can now check the status again and it will show as ok.
+   Use the terminal window that is switched to **GSM**. You can now check the status again and it will show as ok.
 
    ```
    <copy>
@@ -47,7 +47,7 @@ This lab assumes you have:
    </copy>
    ```
 
-   ![<restart_shard_not_recovered_after>](./images/restart-shard-not-recovered-after.png " ")
+   ![<restart_shard_not_recovered_after>](./images/1-restart-shard-not-recovered-after.png " ")
 
 
 2. If you get the error that the background tasks are pending. 
@@ -67,7 +67,7 @@ To view the ongoing rebalancing tasks.
    gdsctl alter task -task <task id> -cancel
    ```
 
-   ![<background_task_pending>](./images/troubleshooting-bckground-task-pending.png " ")
+   ![<background_task_pending>](./images/2-troubleshooting-bckground-task-pending.png " ")
 
 
 3. If you get the error during switchover RU
