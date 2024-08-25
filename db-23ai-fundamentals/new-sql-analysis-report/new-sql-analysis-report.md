@@ -24,8 +24,8 @@ The objective of this lab is to show you the SQL Analysis Report feature in Orac
 
     ```
     <copy>
-    DROP TABLE sales cascade constraints;
-    DROP TABLE products cascade constraints;
+    DROP TABLE IF EXISTS sales cascade constraints;
+    DROP TABLE IF EXISTS products cascade constraints;
 
     CREATE TABLE sales (
         sale_id INT,
