@@ -48,7 +48,7 @@ Simplify your cloud migration by comparing Oracle Cloud Infrastructure (OCI) wit
 
 ### **Database Security Assessment Tool**
 The Database Security Assessment Tool (DBSAT) from Oracle provides prioritized advice to mitigate security risks or gaps in your Oracle Databases. It evaluates your database’s current security and compliance status, covering configuration, sensitive data discovery, and more.
-Get more info at [DBSAT LiveLab](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=699)
+Get more info at [DBSAT LiveLab](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=699)
 ![Database Security Assessment Tool GIF](./images/dbsat.gif)
 
 ### **Cloud Cost Estimator**
