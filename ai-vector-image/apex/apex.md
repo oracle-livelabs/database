@@ -45,9 +45,10 @@ This task you will log into APEX with the ADMIN user and create a workspace for 
 
 7. For "Re-Use existing schema?" set this to Yes
 
-8. For Schema Name type in "ADMIN" and click Next. By doing this you have linked your application with your database schema where your tables reside.
+8. For Schema Name type in "ADMIN" and click Next.
+    **Note:** By doing this you have linked your application with your database schema where your tables reside.
 
-9. For the Identify Administrator section fill in:
+9.  For the Identify Administrator section fill in:
     - Administrator Username: vectoruser (This will be the user we will log into APEX with)
     - Administrator Password: Welcome_1 (or any password you want just make sure to remember it as we will use this to log into APEX with)
     - Email: test@test.com (Any email address will work.)
@@ -58,7 +59,7 @@ This task you will log into APEX with the ADMIN user and create a workspace for 
 
 12. Click Done
 
-13. Click on admin in the corner and click sign out
+13. Click on admin in the upper right corner and click sign out
 
 14. Click on Return to Sign In Page
 
@@ -74,7 +75,7 @@ This task you will log into APEX with the ADMIN user and create a workspace for 
 ## Task 2: Create Application
 In this task you will create the application so you can start building pages.
 
-1. Click on App Builder
+1. Click on App Builder Icon
 
 2. Click on Create a New App
 
@@ -92,23 +93,24 @@ In this task you will create the Image Gallery page. This page will display the 
     - Table/View Name: VECTOR_IMAGE
     - Click Next
 
-4. Choose Float
+4. On this page:
+    - Choose Float
+    - For Title Column select the URL field from the table
+    - Click on Create Page
 
-5. For Title Column select the URL field from the table and click on Create Page
-
-6. On the left panel where you see the section called Body, right click on the word Body and choose "Create Page Item" We will use this as a text entry box for searching.
+5. On the left panel where you see the section called Body, right click on the word Body and choose "Create Page Item" We will use this as a text entry box for searching.
     
-7.  If you click on the newly created Item on the left side of the page then on the right side of the page you will see the Page Item panel for that item. Make the following changes in the Page Item Panel:
-    - Change the name of the item you just created to P4_SEARCH_ITEM.
+6.  If you click on the newly created Item on the left side of the page then on the right side of the page you will see the Page Item panel for that item. Make the following changes in the Page Item Panel:
+    - Change the name of the item you just created to P4\_SEARCH\_ITEM.
     - Change Submit when Enter pressed to On
  
-8.  In the panel on the left, Drag the P4_SEARCH_ITEM up above the Image Gallery page item
+7.  In the panel on the left, Drag the P4\_SEARCH\_ITEM up above the Image Gallery page item. This will make it so your search box will be at the top of the page.
 
-9.   Click on the Image Gallery page item and make the following changes in the Region panel on the right:
+8.   Click on the Image Gallery page item and make the following changes in the Region panel on the right:
     
     - Under source change the Type to SQL Query
-      - For the Query paste the following:
-    '''
+    - For the SQL Query paste the following:
+    ```
     <copy>
     select URL,
        IMG,
@@ -120,7 +122,7 @@ In this task you will create the Image Gallery page. This page will display the 
     ORDER BY VECTOR_DISTANCE( uform_vector, vector_embedding(minilm12v2 using :P4_SEARCH_ITEM as data), EUCLIDEAN ) 
     FETCH EXACT FIRST 2 ROWS ONLY
     </copy>
-    '''
+    ```
     - In the Page Items to Submit section click on the menu button on the right and click on P4_SEARCH_ITEM
  
  
@@ -132,74 +134,76 @@ In this task you will create the Image Gallery page. This page will display the 
     - Media
       - Source: Blob Column
       - Blob Column: IMG
+    - Click on Save at the top of the page
 
 15. Right click on P4_ORDER_BY in the left panel and select delete
-16. Click on Save and then click run if you want to see your page
-17. You will need to login to your application
+16. Click on Save
+17. If you want to see how your page looks click on the run button
+18. You will need to login to your application
     - Username: vectoruser
     - Password: Welcome_1 (Or whatever password you set it to)
-18. Try typing in Fruit in the search bar
-
+19. Try typing in Fruit or Climbing in the search bar
+20. You can close your application page but leave your Application Designer/Builder page open
 
 ## Task 4: Create Image Detail Page
 In this task you will create the Image Detail Page that will display information like the descriptions and vectors for the image selected. You will also create a link back to the Image Gallery Page.
 
-19. If you are not at the application builder home page click on the Application Breadcrumb at the top of the page
-20. You should be on a page that looks like the image below
-21. Click on Create Page
+1. If you are not at the application builder home page click on the Application Breadcrumb at the top corner of the page
+2.  You should be on a page that looks like the image below
+3.  Click on Create Page
 
-22. Choose Interactive Report
+4.  Choose Interactive Report
 
-23. On this page:
+5.  On this page:
     - Name: Image Detail
     - Table/View Name: VECTOR_IMAGE
     - Click Create Page
 
-1. On the left panel where you see the section called Body, right click on the word Body and choose "Create Page Item"
+6. On the left panel where you see the section called Body, right click on the word Body and choose "Create Page Item". This will be a variable so that you can pass which image you want to see the detail from the Image Gallery page.
 
-2. If you click on the newly created Item then on the right side of the page you will see the Page Item panel for that item. Make the following changes in the Page Item Panel:
+7. If you click on the newly created Item then on the right side of the page you will see the Page Item panel for that item. Make the following changes in the Page Item Panel:
     - Name: P2_URL
     - In the Default section change:
       - Type "SQL Query (return single value)
-      - SQL Query: "select min(url) from vector_image"
+      - SQL Query: "select min(url) from vector_image" (without the double quotes)
 
-1.  In the panel on the left, Drag the P2_URL up above the Image Detail page item
+8.  In the panel on the left, Drag the P2_URL up above the Image Detail page item
 
-2.  Click on the Image Detail in the left panel to pull up its details
+9.  Click on the Image Detail in the left panel to pull up its details
 
-3.  In the Where Clause section paste "URL = :P2_URL"
+10. In the Where Clause section paste "URL = :P2_URL" (without the double quotes)
 
-4.  In the Page Items to Submit section click on the menu button on the right and click on P2_URL
+11. In the Page Items to Submit section click on the menu button on the right and click on P2_URL
 
-5.  Back on the left side panel right click on image detail and click on duplicate
+12. Back on the left side panel right click on image detail and click on duplicate
 
-6.  Expand the column list of the top image detail page item and do the following:
+13. Expand the column list of the top image detail page item and do the following:
     - Right click on url and choose comment out
     - Right click on img and choose comment out
     - Right click on uform_vector and choose comment out
     - Right click on nlp_vector and choose comment out
 
-1.  Expand the columns list of the bottom image detail page item and do the following:
+14. Expand the columns list of the bottom image detail page item and do the following:
     - Right click on url and choose comment out
     - Right click on img and choose comment out
     - Right click on uform_desc and choose comment out
     - Right click on nlp_desc and choose comment out
 
-1. Right click on Body in the left panel and click on Create Button
+15. Right click on Body in the left panel and click on Create Button
 
-2. In the Button panel on the right change the following:
-    - Button Name: Back_to_Images
+16. Click on the button on the left and in the Button panel on the right change the following:
+    - Button Name: Back\_to\_Images
     - The label should automatically change to Back To Images
-    - Under Behavior:
+    - Under Behavior make the following changes: 
     - Action: Redirect to to Page in this Application
     - Target: Click on Link to bring up the dialog
       - Click on the menu on the page box
       - Click on the number next to the Image Gallery. In my case I would click on 2
       - Click on Ok
 
-1. Click on Save on the Page
+17. Click on Save on the Page
 
-2. Click on Application 100
+18. Click on the application breadcrumb at the top left corner of the page
 
 ## Task 5: Linking Image Gallery to the Image Details
 In this task you will link the Image Gallery page to the Image Detail Pages so when you click on an image you will get the details for it.
@@ -211,7 +215,7 @@ In this task you will link the Image Gallery page to the Image Detail Pages so w
 4.  In the left panel Under Image Gallery right click on Actions and Choose create action
 
 5.  In the Action Panel on the right make the following changes
-    - Identification Type: Media
+    - Identification -> Type: Media
     - Under link Change
       - Type: Redirect to Page in this Application
       - Click on Target 
@@ -226,18 +230,20 @@ In this task you will link the Image Gallery page to the Image Detail Pages so w
 
 
 ## Task 6: Running the Application
-1. **Figure out navigation to a page**
+1. To run your application do one of the following:
+   1. If you are still on the Image Gallery page you can click on the run button to start your application. 
+   2. If you are on the Application Builder home page then click on the Image Gallery page and then click the run button.
+   3. If you are on the Image Detail page you can click the application breadcrumb at the top of the page to get to the Application Builder home page the follow the instructions above.
    
 2.  If you need to login use:
     - Username: vectorimage
     - Password: Welcome_1 (or whatever password you set for vectorimage)
 
-3. Click on the Menu and select Image Gallery
+3. If you want you can click on the Menu and select Image Gallery to get to the Image Gallery page as well.
 
 4. In your search bar type in Fruit or Surfing or whatever you want to search on
 5. Click on an image to go to your detail page
 6. On the detail page you can see both descriptions and what the vectors for the descriptions are. At the bottom is the button to go back to the Image Gallery page.
-7. You can also use the menu in the top left and click on Image Gallery to get back to the Image Gallery
 
 Congradulations, you have built a AI Vector Search enabled application using images!
 
