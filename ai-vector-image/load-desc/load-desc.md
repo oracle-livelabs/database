@@ -32,11 +32,11 @@ This task will have you login to the Jupyter Notebook environment and run the sp
 
 3. Paste the Jupyter Notebook Password you copied in the previous step into the Notebook
 4. You should now be on the Jupyter Notebook landing screen
-5. In the left File Explorer panel open the vector_lab folder and open the **2_load_lab.ipynb** notebook
+5. In the left File Explorer panel open the vector\_lab folder and open the **2\_load\_lab.ipynb** notebook
 6. Follow the steps in the notebook. A few things to remember:
     - There are markdown blocks and code blocks mixed together
     - The run button can be used on both code and markdown blocks (markdown just advances you to the next block)
-    - When you run a code block there are [ ] next to the code block. If it changes to a [\*] that means it running. If it has a number like [\1] then its done running.
+    - When you run a code block there are [ ] next to the code block. If it changes to a [\*] that means it running. If it has a number like [1] then its done running.
     - Passwords and additional information you may need will be found in the "View Login Info" where the Jupyter Notebook link was
 
 Once you have completed the steps in the notebook please return to the workshop so you can continue to the next lab.
