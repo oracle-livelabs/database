@@ -257,7 +257,7 @@ In this lab, you will explore the new vector data type introduced in Oracle Data
     ```
     ![insert data](images/vec9.png =50%x*)
 
-8. Now imagine we add a point at (1,0), like the image below. Let's find the closest vectors to that given vector. Remember, we're not interested in the distances. We care about the ids of the rows that're closest to our point.
+8. Now imagine we add a point at (2,0), like the image below. Let's find the closest vectors to that given vector. Remember, we're not interested in the distances. We care about the ids of the rows that're closest to our point.
 
     ![show table](images/image2.png " ")
 

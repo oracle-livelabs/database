@@ -2,7 +2,7 @@
 
 > **Note: Oracle Database 23ai is the current long term support release. Check out the following lab for the newest features in the Oracle Database:**
 
-> [Oracle Database 23ai New Features](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3950&clear=RR,180&session=29237226541700)
+> [Oracle Database 23ai New Features](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3950&clear=RR,180&session=29237226541700)
 
 
 This workshop contains several hands-on labs that showcase some of the new enhancements in Oracle Database release, 19c. This is not a complete list of new features. Our mission is not just to manage your data but to help you get value out of it. For the world’s most demanding enterprise applications and workloads, Oracle Database 19c is a converged database that delivers a high-performance, highly available, secure, and scalable data management platform for cloud as well as on-premises environments.
@@ -23,7 +23,7 @@ This workshop lets you try out new features in Oracle Database 19c. If needed, a
 
 > **Note: Oracle Database 23ai is the current long term support release. Check out the following lab for the newest features in the Oracle Database:**
 
-> [Oracle Database 23ai New Features](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3950&clear=RR,180&session=29237226541700)
+> [Oracle Database 23ai New Features](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3950&clear=RR,180&session=29237226541700)
 
 
 ## Learn More
