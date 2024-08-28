@@ -128,7 +128,7 @@ In this lab, you will:
     ![Screenshot of ADB list](images/db-actions.png =50%x*) 
 
  
- 13. Run the following query to locate the previously inserted record on the source database that was replicated to our ADB insance:
+ 13. Run the following query to locate the previously inserted record on the source database that was replicated to our ADB instance:
 
       ```
     <copy>
@@ -136,7 +136,7 @@ In this lab, you will:
     </copy>
       ``` 
 
-    Click on the Run Statemet button, you should see the record in the bottom:
+    Click on the Run Statement button, you should see the record in the bottom:
 
     ![Screenshot of sql statement](images/run-statement.png =50%x*) 
 
@@ -156,7 +156,7 @@ In this lab, you will:
  
     ![Screenshot of resume job switchover](./images/resume-job-switchover.png " ")
 
- 19. Once the Job status is WAITING and Switchover phase is Comleted , press Resume gaain:
+ 19. Once the Job status is WAITING and Switchover phase is Completed , press Resume again:
     ![Screenshot of resume job cleanup](./images/resume-job-cleanup.png =60%x*)
 
  20. The migration runs the final cleanup phases and shows as Succeeded when finished:

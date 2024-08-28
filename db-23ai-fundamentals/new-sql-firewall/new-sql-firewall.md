@@ -124,7 +124,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     BEGIN
         DBMS_SQL_FIREWALL.CREATE_CAPTURE(
             username => 'DB23AI',
-            top_level_only => FALSE,
+            top_level_only => TRUE,
             start_capture => TRUE
         );
     END;
@@ -245,6 +245,30 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     </copy>
     ```
     ![SQL Firewall violation](images/im16.png " ")
+
+7. Log back in as the TEST user
+
+    * the password is Oracledb_4U#
+
+    ![perform SQL operations](images/im24.png " ")
+    ![perform SQL operations](images/im5.png =50%x*)
+
+8. We can review the violation log for abnormal SQL.
+    ```
+    <copy>
+    SELECT SQL_TEXT, FIREWALL_ACTION, IP_ADDRESS, CAUSE, OCCURRED_AT
+    FROM DBA_SQL_FIREWALL_VIOLATIONS WHERE USERNAME = 'DB23AI';
+    </copy>
+    ```
+
+9. We can also disable the allow list.
+
+    ```
+    <copy>
+    EXEC DBMS_SQL_FIREWALL.DISABLE_ALLOW_LIST(username=>'DB23AI');
+    </copy>
+    ```
+
 
 ## Task 3: Clean up
 
