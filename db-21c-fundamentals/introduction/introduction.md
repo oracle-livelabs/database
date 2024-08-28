@@ -46,7 +46,7 @@ You may now [proceed to the next lab](#next).
 * [Oracle Database Features and Licensing](https://apex.oracle.com/database-features/)
 * [Introducing Oracle Database 21c](https://blogs.oracle.com/database/introducing-oracle-database-21c)
 <if type="atp">
-* [LiveLabs - Autonomous Database Quick Start](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=582)
+* [LiveLabs - Autonomous Database Quick Start](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=582)
 * [Oracle Autonomous Database Documentation](https://docs.oracle.com/en-us/iaas/Content/Database/Concepts/adboverview.htm)
 </if>
 

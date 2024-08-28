@@ -34,13 +34,13 @@
           "title": "Lab 4: Property Graphs",
           "description": "Building Property Graphs",
           "type": "livelabs",
-          "filename": "../../new-property-graph/new-property-graph.md"
+          "filename": "../../new-property-graph/new-property-graph-ocw24.md"
       },
       {
         "title": "Lab 5: Shrink Tablespace",
         "description": "Optimize your database storage by mastering the technique of shrinking tablespaces efficiently.",
         "type": "livelabs",
-        "filename": "../../new-shrink-tablespace/new-shrink-tablespace.md"
+        "filename": "../../new-shrink-tablespace/new-shrink-tablespace-ocw24.md"
     },
       {
         "title": "Lab 6: SQL Firewall",
@@ -48,6 +48,18 @@
         "type": "livelabs",
         "filename": "../../new-sql-firewall/new-sql-firewall-ocw24.md"
     },
+    {
+      "title": "Lab 7: (Bonus) Data Use Case Domains",
+      "description": "Fortify your database security with SQL Firewall, protecting against unauthorized access and potential threats.",
+      "type": "livelabs",
+      "filename": "../../new-domains/new-domains.md"
+  },
+  {
+    "title": "Lab 8: (Bonus) SQL Analysis Report",
+    "description": "Fortify your database security with SQL Firewall, protecting against unauthorized access and potential threats.",
+    "type": "livelabs",
+    "filename": "../../new-sql-analysis-report/new-sql-analysis-report.md"
+},
 
         {
           "title": "Need Help?",

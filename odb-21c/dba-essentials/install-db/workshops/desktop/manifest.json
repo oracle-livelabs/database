@@ -1,31 +1,46 @@
 {
   "workshoptitle": "Install Oracle Database 21c on OCI Compute",
   "help": "livelabs-help-db_us@oracle.com",
+  "include": {
+        "adm-users": "./../../intro-install/files/adm-users.txt", 
+        "char-set": "./../../intro-install/files/char-set.txt", 
+        "example-values": "./../../intro-install/files/example-values.txt",
+        "global-dbname": "./../../intro-install/files/global-dbname.txt",
+        "oracle-sid": "./../../intro-install/files/oracle-sid.txt", 
+        "oracle-user": "./../../intro-install/files/oracle-user.txt", 
+        "prereq-check": "./../../intro-install/files/prereq-check.txt", 
+        "register-em": "./../../intro-install/files/register-em.txt"
+    },
   "tutorials": [
     {
       "title": "Introduction",
       "description": "The workshop on Oracle Database 21c Installation.",
-      "filename": "../../intro-install/intro-install.md",
+      "publisheddate": "08/22/2024",
+      "filename": "./../../intro-install/intro-install.md",
       "type": "install-db"
     },
     {
-      "title": "Using noVNC Remote Desktop",
+      "title": "Using noVNC remote desktop",
       "description": "Using noVNC Remote Desktop",
+      "publisheddate": "03/22/2024",
       "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
     },
     {
       "title": "Lab 1: Install Oracle Database",
-      "description": "How to install Oracle Database 21c for Desktop class (minimal configuration) and Server class (advanced configuration).",
-      "filename": "../../install-desktop-server/install-desktop-server.md"
+      "description": "How to install the Oracle Database software and create a database with Desktop class (minimal configuration) and Server class (advanced configuration).",
+      "publisheddate": "08/22/2024",
+      "filename": "./../../install-desktop-server/install-desktop-server.md"
     },
     {
       "title": "Lab 2: Create Container Database",
-      "description": "How to create a single instance container database with both typical and advanced configuration. It does not install the Oracle Database software.",
-      "filename": "../../dbca/dbca-typical-advanced.md"
+      "description": "How to create databases using Oracle DBCA with typical configuration and advanced configuration. It does not install the Oracle Database software.",
+      "publisheddate": "08/22/2024",
+      "filename": "./../../dbca/dbca-typical-advanced.md"
     },
     {
-      "title": "Need Help?",
+      "title": "Need help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "publisheddate": "05/24/2024",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
     }
   ]

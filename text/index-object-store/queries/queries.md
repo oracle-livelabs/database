@@ -148,7 +148,7 @@ This is as far as well go in exploring queries in this lab, but feel free to exp
 
 You can find a list of query operators here: [Contains Query Operators](https://docs.oracle.com/en/database/oracle/oracle-database/19/ccref/oracle-text-CONTAINS-query-operators.html).
 
-You also might be interested in our other Oracle Text Livelab, [Full Text Indexing in Oracle Database](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3286) which has ßmore detail about searching using the CONTAINS operator.
+You also might be interested in our other Oracle Text Livelab, [Full Text Indexing in Oracle Database](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3286) which has ßmore detail about searching using the CONTAINS operator.
 
 ## Acknowledgements
 

@@ -82,17 +82,17 @@ This lab assumes you have:
     Please validate parameter values and retry command.
 
     ![<after_specified_correct_shard>](./images/3-after-specified-correct-shard.png " ")
-    
+
 
 4. If you get error shown in below screenshot during MOVE RU.
    You need to substitute the values according to the current environment. 
    Use MOVE RU to move a follower replica of a replication unit from one shard database to another. 
-   
-   Notes:
 
-   - Source database shouldn't contain the replica leader
+    Notes:
 
-   - Target database should not already contain another replica of the replication unit
+    - Source database shouldn't contain the replica leader
+
+    - Target database should not already contain another replica of the replication unit
 
 
     ![<move_ru_error>](./images/4-move-ru-error.png " ")
@@ -100,9 +100,7 @@ This lab assumes you have:
 
 5. If you get errors shown in below two screenshots during relocate chunk
 
-
     ![<relocate_chunk_error_not_exist_source>](./images/5-relocate-chunk-error-not-exist-source.png " ")
-
 
 
     ![<relocate_chunk_error_not_colocated>](./images/5-relocate-chunk-ru-not-colocated.png " ")
@@ -133,8 +131,6 @@ This lab assumes you have:
     ```
     Whitelabel Error Page
     This application has no explicit mapping for /error, so you are seeing this as a fallback.
-
-    Mon Aug 12 21:13:04 UTC 2024
     ```
 
    Please wait and go slow with the delete process. Rapid clicks can cause errors, so allow the operation to complete before clicking again.
@@ -143,4 +139,4 @@ This lab assumes you have:
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Oracle Globally Distributed Database Database, Product Management, Senior Product Manager
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Ajay Joshi, Jyoti Verma
-* **Last Updated By/Date** - Deeksha Sehgal, Oracle Globally Distributed Database, Product Management, Senior Product Manager, Aug 2024
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, Consulting Member of Technical Staff, August 2024

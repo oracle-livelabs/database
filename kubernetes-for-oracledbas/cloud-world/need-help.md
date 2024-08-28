@@ -85,7 +85,7 @@ Here you can find a quick guide explaining how to access the LiveLabs Sandbox en
 
 *Please note*: Some hands-on labs provide access to preconfigured environments using noVNC (see Step 2b). Your session host will inform you about the applicable access method.
 
-1. Using your *Oracle Account Login* go to [LiveLabs](https://developer.oracle.com/livelabs). Open a workshop, click **Start**, and then **Run on LiveLabs** to request a reservation for this workshop.
+1. Using your *Oracle Account Login* go to [LiveLabs](https://livelabs.oracle.com). Open a workshop, click **Start**, and then **Run on LiveLabs** to request a reservation for this workshop.
   ![Run on LiveLabs](images/run-on-livelabs.png =20%x* " ")
 
 2. Fill out information on the *Reserve Workshop* page. Check **I consent to receive emails from LiveLabs for my reservation**. Click **Submit Reservation**.

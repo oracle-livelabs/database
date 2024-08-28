@@ -18,7 +18,7 @@ Estimated Time - 5 minutes
 
 - You should have provisioned the **Use Raft Replication with Distributed Database for Resilient Never-Down Apps** workshop using a terraform stack
 
-- To provision this workshop, there are detailed instructions in Lab 1 of [Use Raft Replication with Distributed Database for Resilient Never-Down Apps](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3772&clear=RR,180&session=107115107642748) workshop.
+- To provision this workshop, there are detailed instructions in Lab 1 of [Use Raft Replication with Distributed Database for Resilient Never-Down Apps](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3772&clear=RR,180&session=107115107642748) workshop.
 
 ## Task 1: Terminate a Provisioned Oracle Instance
 
