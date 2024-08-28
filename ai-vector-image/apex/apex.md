@@ -123,7 +123,7 @@ In this task you will create the Image Gallery page. This page will display the 
     FETCH EXACT FIRST 2 ROWS ONLY
     </copy>
     ```
-    - In the Page Items to Submit section click on the menu button on the right and click on P4_SEARCH_ITEM
+    - In the Page Items to Submit section click on the menu button on the right and click on P4\_SEARCH\_ITEM
  
  
 13. Click on the Attributes Tab
@@ -136,7 +136,7 @@ In this task you will create the Image Gallery page. This page will display the 
       - Blob Column: IMG
     - Click on Save at the top of the page
 
-15. Right click on P4_ORDER_BY in the left panel and select delete
+15. Right click on P4\_ORDER\_BY in the left panel and select delete
 16. Click on Save
 17. If you want to see how your page looks click on the run button
 18. You will need to login to your application
@@ -164,7 +164,7 @@ In this task you will create the Image Detail Page that will display information
 7. If you click on the newly created Item then on the right side of the page you will see the Page Item panel for that item. Make the following changes in the Page Item Panel:
     - Name: P2_URL
     - In the Default section change:
-      - Type "SQL Query (return single value)
+      - Type: SQL Query (return single value)
       - SQL Query: "select min(url) from vector_image" (without the double quotes)
 
 8.  In the panel on the left, Drag the P2_URL up above the Image Detail page item
