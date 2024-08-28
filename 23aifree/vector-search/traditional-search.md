@@ -10,7 +10,8 @@ In this lab, you will quickly configure the Oracle Autonomous Database Free 23ai
 In this lab, you will:
 
 * Configure a clothing retail schema.
-* Compare the performance of traditional search vs. vector search.
+* Introduce the traditional search dilemma.
+
 
 ### **Prerequisites**
 This lab assumes you have:
@@ -47,7 +48,7 @@ As a retailer, you want customers to easily search your catalog for the clothing
 
 1. **Return to SQL Developer Web.** Open Google Chrome (Activities >> Chrome Icon) to return to SQL Developer Web. 
     [insert gif]
-    
+
 2. **Review the products table.** 
     ```
     <copy>
