@@ -17,7 +17,7 @@ This lab walks you through the steps to running a destroy job
 ### Prerequisites
 
 - You should have provisioned the **Application performance improvement with True Cache** workshop using a terraform stack.
-- To provision this workshop, there are detailed instructions in Lab 1 of [Application performance improvement with True Cache](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=11454) workshop.
+- To provision this workshop, there are detailed instructions in Lab 1 of [Application performance improvement with True Cache](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=11454) workshop.
 
 ## Task 1: Terminate a Provisioned Oracle Database Instance
 

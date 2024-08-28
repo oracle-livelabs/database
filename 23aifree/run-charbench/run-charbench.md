@@ -68,7 +68,7 @@ Stress testing with charbench can be a good idea for several reasons:
     [![Video Title](https://img.youtube.com/vi/PzQpMFqO7KA/0.jpg)](https://www.youtube.com/watch?v=PzQpMFqO7KA)
 
 
-In closing, this lab has to remain short for this session, but in the near future a more comprehensive LiveLab over all things Swingbench will be created and hosted online for free at https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/home
+In closing, this lab has to remain short for this session, but in the near future a more comprehensive LiveLab over all things Swingbench will be created and hosted online for free at https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/home
 
 
 ## Learn More
