@@ -102,6 +102,8 @@ This workshop contains different language implementation in the form of differen
   Confirm that the command prints the installed version of Go.
   </if>
  <if type="Node.js">
+ The Node.js supports both JavaScript and TypeScript applications.
+
   1. Open the [Node.js Download](https://nodejs.org/en/) and download Node.js for your operating system. Ensure that Node Package Manager (npm) is installed along with Node.js.
   2. Install the node SDK for Oracle NoSQL Database.
 
@@ -121,6 +123,14 @@ This workshop contains different language implementation in the form of differen
   </copy>
   ```
 You can do one of the above options depending on the permissions you have.
+
+If you are using TypeScript, use npm to install a supported version. Use the following command to install a specific version of the Typescript:
+
+  ```
+  <copy>
+  npm install typescript
+  </copy>
+  ```
 </if>
   <if type="C-sharp">
 
@@ -300,12 +310,13 @@ Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/api
    *Note: In the main method of `HelloWorld.go`, the code for dropping the table is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*    
 </if>
 <if type="Node.js">
+The given code sample in JavaScript and TypeScript use the [ES6 modules](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/other-databases/nosql-database/24.1/nsdev&id=node_ecma_mod).
 
-1. Download the provided [HelloWorld.js](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.js) file and move it to your home directory.
+1. Download the provided [HelloWorld.js](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.js) file and move it to your home directory. For TypeScript applications, download the provided [HelloWorld.ts] file and move it to your home directory.
 
 2. Review the sample application. You can access the [Node.js API  Reference Guide](https://oracle.github.io/nosql-node-sdk/index.html) to reference Node.js classes and methods included in this sample application.
 
-   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.js](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.js), replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
+   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Depending on your application, edit either the JavaScript code  [HelloWorld.js](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.js) or the TypeScript code [HelloWorld.ts], replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it. 
 
 3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Add OCID, tenancy ID, fingerprint & key credentials in the `config` file.
 
@@ -322,6 +333,8 @@ Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/api
 ![View config file](images/config-file.png)
 
 4. Execute the Sample Application
+
+  For JavaScript Application:
    Open the Command Prompt, and navigate to the directory where you saved the `HelloWorld.js` program.
    Execute the HelloWorld program.
 
@@ -330,7 +343,16 @@ Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/api
    node HelloWorld.js
    </copy>
    ```
-   *Note: In the main method of `HelloWorld.js`, the `dropTable(handle)` is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*    
+  For TypeScript Application:
+   Open the Command Prompt, and navigate to the directory where you saved the `HelloWorld.ts` program.
+   Execute the HelloWorld program.
+
+   ```
+   <copy>
+   npx tsx HelloWorld.js
+   </copy>
+   ``` 
+*Note: In the main method of `HelloWorld.js` and `HelloWorld.ts`, the `dropTable(handle)` is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*    
 </if>
 <if type="C-sharp">
 1. Download the provided [HelloWorld.cs](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.cs) file and move it to your home directory.
@@ -413,4 +435,4 @@ This application accesses Oracle NoSQL Database Cloud Service, but most likely y
 ## Acknowledgements
 * **Author** - Dave Rubin, Senior Director, NoSQL and Embedded Database Development and Michael Brey, Director, NoSQL Product Development
 * **Contributors** - Jaden McElvey, Technical Lead - Oracle LiveLabs Intern
-* **Last Updated By/Date** -Vandana Rajamani, Database User Assistance, January 2024
+* **Last Updated By/Date** -Ramya Umesh, Database User Assistance, January 2024
