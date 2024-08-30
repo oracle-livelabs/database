@@ -1,10 +1,17 @@
-# Install Mongo Shell
+# Install MongoDB Shell and MongoDB Command Line Database Tools
 
 ## Introduction
 
-This lab walks you through the installation of the Mongo Shell tool on your own machine. Instructions are provided for Mac OS/X and Windows machines. Installation on a Linux machine will be similar to the Mac instructions, but obviously will require a different download file.
+This lab walks you through the installation of the MongoDB Shell tool and MongoDB Command Line Database Tools on your own machine. Instructions are provided for Mac OS/X and Windows machines. Installation on a Linux machine will be similar to the Mac instructions, but obviously will require a different download file.
 
-**NOTE**: Mongo Shell is a tool provided by MongoDB Inc. Oracle is not associated with MongoDB Inc, and has no control over the software. These instructions are provided simply to help you learn about Mongo Shell. Links may change without notice.
+**NOTE**: MongoDB Shell tool and MongoDB Command Line Database Tools are tools provided by MongoDB Inc. Oracle is not associated with MongoDB Inc, and has no control over the software. These instructions are provided simply to help you learn about MongoDB Shell and MongoDB Command Line Database Tools. Links may change without notice.
+
+Check the official MongoDB Shell and MongoDB Command Line Database Tools website for latest versions and instructions:
+
+https://www.mongodb.com/try/download/shell
+
+https://www.mongodb.com/try/download/database-tools
+
 
 Estimated Time: 10 minutes
 
@@ -13,8 +20,8 @@ Estimated Time: 10 minutes
 
 In this lab, you will:
 
-* Install Mongo Shell on your local machine
-* Set up your PATH to point to the Mongo Shell executable
+* Install MongoDB Shell and MongoDB Command Line Database Tools on your local machine
+* Set up your PATH to point to the MongoDB Shell and MongoDB Command Line Database Tools executable
 
 ### Prerequisites
 
@@ -56,45 +63,81 @@ In this lab, you will:
     </copy>
     ```
 
-## Task 3: Download and expand the MongoDB installer file
+## Task 3: Download and expand the installer files
 
 On both Mac and Windows, you can use the built-in 'curl' command to access a URL and download a file from it. The URL to use will vary according to the machine involved.
 
-**Note:** If you encounter any issues with the download or the version listed here, then please visit https://www.mongodb.com/try/download/shell to download the most recent shell for your operating system.
+**Note:** If you encounter any issues with the download or the version listed here, then please visit https://www.mongodb.com/try/download/shell or https://www.mongodb.com/try/download/database-tools to download the most recent shell for your operating system.
 
 Copy **ONE** of the following *curl* commands and paste it to the command or terminal window:
 
 1. For **Mac with Intel processor**:
 
-    ```
+    Download MongoDB Shell:
+
+    ```bash
     <copy>
     curl https://downloads.mongodb.com/compass/mongosh-2.3.0-darwin-x64.zip -o mongosh.zip
     </copy>
     ```
 
+    Download Command Line Database Tools:
+
+    ```bash
+    <copy>
+    curl https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-x86_64-100.10.0.zip -o mongodbtools.zip
+    </copy>
+    ```
+
 2. For **Mac with Apple chip**:
 
-    ```
+    Download MongoDB Shell:
+
+    ```bash
     <copy>
     curl https://downloads.mongodb.com/compass/mongosh-2.3.0-darwin-arm64.zip -o mongosh.zip
     </copy>
     ```
 
+    Download Command Line Database Tools:
+
+    ```bash
+    <copy>
+    curl https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-arm64-100.10.0.zip -o mongodbtools.zip
+    </copy>
+    ```
+
 3. For **Windows**:
 
-    ```
+    Download MongoDB Shell:
+
+    ```bash
     <copy>
     curl https://downloads.mongodb.com/compass/mongosh-2.3.0-win32-x64.zip -o mongosh.zip
     </copy>
     ```
 
-4. The previous step will have downloaded a zip file called mongosh.zip, which we need to expand.
+    Download Command Line Database Tools:
+
+    ```bash
+    <copy>
+    curl https://fastdl.mongodb.org/tools/db/mongodb-database-tools-windows-x86_64-100.10.0.zip -o mongodbtools.zip
+    </copy>
+    ```
+
+4. The previous step will have downloaded a zip file called mongosh.zip and mongodbtools.zip, which we need to expand.
 
     On **Mac or Windows**, run the following command:
 
-    ```
+    ```bash
     <copy>
-    tar -xvf mongosh.zip
+    mkdir -p mongosh | tar -xvf mongosh.zip -C mongosh --strip-components=1
+    </copy>
+    ```
+
+    ```bash
+    <copy>
+    mkdir -p mongodbtools | tar -xvf mongodbtools.zip -C mongosh --strip-components=1
     </copy>
     ```
 
@@ -102,11 +145,11 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
 
 ## Task 4: Set the PATH to include the mongosh executable
 
-1. On **Mac** (Intel or Apple silicon) run the following command to set your path variable to include the location of the **mongosh** executable.
+1. On **Mac** (Intel or Apple silicon) run the following command to set your path variable to include the location of the **mongosh** executable. Y
 
-    ```
+    ```bash
     <copy>
-    export PATH=$(dirname `find \`pwd\` -name mongosh -type f`):$PATH
+    export PATH=[path to]/mongosh/bin:[path to]/mongodbtools/bin:$PATH
     </copy>
     ```
 
@@ -116,7 +159,7 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
 
     ```
     <copy>
-    set path=%cd%\mongosh-1.5.0-win32-x64\bin\;%PATH%
+    set path=%cd%\[path to]\mongosh\bin\:%cd%\[path to]\mongodbtools\bin\:%PATH%
     </copy>
     ```
 

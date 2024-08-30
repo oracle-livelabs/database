@@ -23,17 +23,33 @@ In this lab, you will:
 
 ## Task 1: Interact with Oracle Database using Mongo API
 
-1. First, you must set the URI to the Mongo API running in ORDS on your machine. Copy and paste in the username, password, and host for your database and schema user. If you are using the green button, those values will be as follows: hol23c, Welcome123, and localhost.
+1. First, you must set the URI to the Mongo API running in ORDS on your machine. You can find the URI in the Autonomous Database console in the *`Tool Configuration`* tab.
+
+    ![Copy Mongo URI](images/copy-mongo-uri.png " ")
+
+    The MongoDB API URI looks like this:
+
+    ```bash
+    <copy>
+    mongodb://[user:password@][ADB Instance name].adb.[region].oraclecloudapps.com:27017/[user]?authMechanism=PLAIN&authSource=$external&ssl=true&retryWrites=false&loadBalanced=true
+    </copy>
+    ```
+
+    Let's create an environment variabale called `URI` which contains the MongoDB URI including the user and password information.
+
+    ```bash
+    $ <copy>
+    export URI='[user:password@][ADB Instance name].adb.[region].oraclecloudapps.com:27017/[user]?authMechanism=PLAIN&authSource=$external&ssl=true&retryWrites=false&loadBalanced=true'
+    </copy>
+    ```
+
+    Example:
 
     ```
-    $ <copy>export URI='mongodb://<user>:<password>@<host>:27017/<user>?authMechanism=PLAIN&authSource=$external&tls=true&retryWrites=false&loadBalanced=true'</copy>
+    export URI='mongodb://admin:*redacted*@ATP3834*redacted*.adb.us-ashburn-1.oraclecloudapps.com:27017/admin?authMechanism=PLAIN&authSource=$external&tls=true&retryWrites=false&loadBalanced=true'</copy>
     ```
 
-    ```
-    Example: <copy>export URI='mongodb://hol23c:Welcome123@localhost:27017/hol23c?authMechanism=PLAIN&authSource=$external&tls=true&retryWrites=false&loadBalanced=true'</copy>
-    ```
-
-    If you aren't using the green button environment and you have different values for those fields, you may need to escape some characters. Please click [this link](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/mongo-using-oracle-database-api-mongodb.html#ADBSA-GUID-44088366-81BF-4090-A5CF-09E56BB2ACAB) to learn how to escape characters in the URL. 
+    **Please note: ** You may need to escape characters. Please click [this link](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/mongo-using-oracle-database-api-mongodb.html#ADBSA-GUID-44088366-81BF-4090-A5CF-09E56BB2ACAB) to learn how to escape characters in the URL. 
 
 2. Before we connect to the Mongo Shell, let's populate our database using the Mongo Tools. You will use a document from Object Storage to seed the data in your **movie** collection.
 
@@ -53,8 +69,8 @@ In this lab, you will:
 4. Within the Mongo Shell, you can begin running commands to interact with the data in your database as if you were using a Mongo Database. To show the **movie** collection we created and the count of documents we imported, run the following commands.
 
     ```
-    hol23c> <copy>show collections</copy>
-    hol23c> <copy>db.movies.countDocuments()
+    admin> <copy>show collections</copy>
+    admin> <copy>db.movies.countDocuments()
     </copy>
     ```
     ![Query result for count](images/mongo-count.png " ")
@@ -62,7 +78,7 @@ In this lab, you will:
 5. You can also query for specific documents. Run this query to find the document with title "Zootopia."
 
     ```
-    hol23c> <copy>db.movies.find( {"title": "Zootopia"} )
+    admin> <copy>db.movies.find( {"title": "Zootopia"} )
     </copy>
     ```
     ![Query result for Zootopia](images/mongo-zootopia.png " ")
@@ -70,7 +86,7 @@ In this lab, you will:
 6. Now query for all movies made after 2020.
 
     ```
-    hol23c> <copy>db.movies.find ( { "year": {"$gt": 2020} } )
+    admin> <copy>db.movies.find ( { "year": {"$gt": 2020} } )
     </copy>
     ```
     ![Query result for after 2020](images/mongo-2020.png " ")
@@ -84,7 +100,7 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
 1. Use the Mongo Shell to insert 2 documents to our movie collection.
 
     ```
-    hol23c> <copy>db.movies.insertMany( [{
+    admin> <copy>db.movies.insertMany( [{
     "title": "Love Everywhere",
     "summary": "Plucky Brit falls in love with American actress",
     "year": 2023,
@@ -111,7 +127,7 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
 2. Now check for movies again that were released after 2020 and you will see these two movies popping up as well:
 
     ```
-    hol23c> <copy>db.movies.find ( { "year": {"$gt": 2020} } )
+    admin> <copy>db.movies.find ( { "year": {"$gt": 2020} } )
     </copy>
     ```
     ![New result for after 2020](images/mongo-2020-new.png " ")
