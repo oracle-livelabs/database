@@ -33,7 +33,7 @@ In this lab, you will:
 
 1. Follow these steps to clean up your environment:
 
-    ```
+    ```sql
     <copy>
     drop TABLE if exists json_file_content purge;
     drop TABLE if exists movies_content purge;
@@ -44,7 +44,7 @@ In this lab, you will:
 
 1. Follow this code to run:
 
-    ```
+    ```sql
     <copy>
     CREATE JSON COLLECTION TABLE movies_content;
     </copy>
@@ -54,9 +54,21 @@ In this lab, you will:
 
 1. Follow this code to run:
 
-    ```
+    ```sql
     <copy>
-    insert into movies_content
+    CREATE OR REPLACE DIRECTORY json_files_dir AS 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/c4u04/b/moviestream_gold/o/movie';
+    
+    CREATE TABLE admin.json_file_content (data JSON)
+    ORGANIZATION EXTERNAL
+        (TYPE ORACLE_BIGDATA
+        ACCESS PARAMETERS (
+        com.oracle.bigdata.fileformat=jsondoc
+        com.oracle.bigdata.json.unpackarrays=true
+        )
+    LOCATION (json_files_dir:'movies.json'))
+    PARALLEL
+    REJECT LIMIT UNLIMITED;
+        insert into movies_content
     select * from external (
         (data json)
         TYPE ORACLE_BIGDATA
@@ -64,7 +76,7 @@ In this lab, you will:
         com.oracle.bigdata.fileformat=jsondoc
         com.oracle.bigdata.json.unpackarrays=true
         )
-        location ('https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/movies.json')
+        location ('https://objectstorage.us-ashburn-1.oraclecloud.com/n/c4u04/b/moviestream_gold/o/movie/movies.json')
     );
     commit;
     </copy>
@@ -73,8 +85,8 @@ In this lab, you will:
 ## Task 4: Test the newly create JSON collection table in the Oracle database. List all movies having a name like %father%
 
 
-1. In SQL Developer run:
-    ```
+1. In SQL Developer Web run:
+    ```sql
     <copy>
     select m.data.title from movies_content m where m.data.title like '%father%';
     </copy>
@@ -83,7 +95,7 @@ In this lab, you will:
 
 2. In MongoDB Compass, for _MOVIES\_CONTENT_ filter on the name for father:
 
-    ```
+    ```sql
     <copy>
     {title: /father/}
     </copy>
