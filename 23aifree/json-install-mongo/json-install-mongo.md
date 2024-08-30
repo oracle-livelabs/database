@@ -68,7 +68,7 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
 
     ```
     <copy>
-    curl https://downloads.mongodb.com/compass/mongosh-2.2.4-darwin-x64.zip -o mongosh.zip
+    curl https://downloads.mongodb.com/compass/mongosh-2.3.0-darwin-x64.zip -o mongosh.zip
     </copy>
     ```
 
@@ -76,7 +76,7 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
 
     ```
     <copy>
-    curl https://downloads.mongodb.com/compass/mongosh-2.2.4-darwin-arm64.zip -o mongosh.zip
+    curl https://downloads.mongodb.com/compass/mongosh-2.3.0-darwin-arm64.zip -o mongosh.zip
     </copy>
     ```
 
@@ -84,7 +84,7 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
 
     ```
     <copy>
-    curl https://downloads.mongodb.com/compass/mongosh-2.2.4-win32-x64.zip -o mongosh.zip
+    curl https://downloads.mongodb.com/compass/mongosh-2.3.0-win32-x64.zip -o mongosh.zip
     </copy>
     ```
 
@@ -130,4 +130,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Roger Ford, Principal Product Manager, Oracle Database
 - **Contributors** - Kamryn Vinson, Andres Quintana
-- **Last Updated By/Date** - Hermann Baer, April 2024
+- **Last Updated By/Date** - Carmen Berdant, August 2024
