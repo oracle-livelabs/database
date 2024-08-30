@@ -13,7 +13,7 @@ In this lab, you will:
 * Create vectors for the description fields
 * Perform an AI Vector Search
 
-### Prerequisites (Optional)
+### Prerequisites
 
 This lab assumes you have:
 * All previous labs successfully completed

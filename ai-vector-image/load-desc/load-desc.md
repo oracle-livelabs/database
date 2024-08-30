@@ -12,7 +12,7 @@ In this lab, you will:
 * Use two models to generate descriptions for each image
 * Load the descriptions and images into a databse
 
-### Prerequisites (Optional)
+### Prerequisites
 
 This lab assumes you have:
 * All previous labs successfully completed

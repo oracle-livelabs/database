@@ -13,7 +13,7 @@ In this lab, you will:
 * Load various preprocessors and models
 * Run the steps to convert an image to text
 
-### Prerequisites (Optional)
+### Prerequisites
 
 This lab assumes you have:
 * All previous labs successfully completed

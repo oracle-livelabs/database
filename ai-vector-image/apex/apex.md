@@ -14,7 +14,7 @@ In this lab, you will:
 * Create a page to display the details of an image
 * Link the two pages together
 
-### Prerequisites (Optional)
+### Prerequisites
 
 This lab assumes you have:
 * All previous labs successfully completed
