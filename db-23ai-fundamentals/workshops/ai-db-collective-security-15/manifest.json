@@ -1,10 +1,10 @@
 {
-    "workshoptitle": "Security Quick Start",
+    "workshoptitle": "Oracle 23ai Quick Start: Schema Level Privileges",
       "help": "livelabs-help-db_us@oracle.com",
       "tutorials": [
       {
         "title": "Introduction",
-        "description": "This is an introduction to security in 23ai",
+        "description": "This is an introduction to Schema Level Privileges",
         "type": "livelabs",
         "filename": "../../intro/security-intro-15.md"
       },
@@ -12,23 +12,11 @@
         "title": "Get Started with LiveLabs",
         "filename": "../../intro/green-button-setup.md"
       },
-      {
-        "title": "Lab 1: SQL Firewall",
-        "description": "Fortify your database security with SQL Firewall, protecting against unauthorized access and potential threats.",
-        "type": "livelabs",
-        "filename": "../../new-sql-firewall/new-sql-firewall.md"
-    },
     {
-        "title": "Lab 2: Schema Level Privileges",
+        "title": "Lab 1: Schema Level Privileges",
         "description": "Gain insights into schema-level privileges management, enhancing control and security at a granular level.",
         "type": "livelabs",
-        "filename": "../../new-schema-level-privileges/new-schema-level-privileges.md"
-    },
-    {
-        "title": "Lab 3: Developer Role",
-        "description": "Establish and configure a dedicated developer role, streamlining development activities within the database.",
-        "type": "livelabs",
-        "filename": "../../new-developer-role/new-developer-role.md"
+        "filename": "../../new-schema-level-privileges/new-schema-level-privileges-15.md"
     },
 
       {
