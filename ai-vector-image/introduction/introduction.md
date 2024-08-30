@@ -2,9 +2,11 @@
 
 ## About this Workshop
 
-This introduction covers the complete "parent" workshop. Use this text to set up the story for the workshop. Be engaging - what will the learner get from spending their time on this workshop?
+Large Language Models (LLMs) have transformed artificial intelligence by enabling computers to understand and generate human-like text. These models rely on vectors—mathematical representations of words, phrases, and sentences—to process and create language. Vectors allow LLMs to capture the meaning of words and the relationships between them, making it possible for the models to perform tasks like text generation, translation, and question-answering with impressive accuracy. However, as we push LLMs to handle more complex tasks, such as integrating text with other types of data like images, new challenges arise. Combining these different kinds of vectors—those representing text and those representing images—requires advanced techniques to ensure the model can effectively understand and generate multimodal information.
 
-Estimated Workshop Time: -- hours -- minutes (This estimate is for the entire workshop - it is the sum of the estimates provided for each of the labs included in the workshop.)
+In this workshop, we explore how LLMs use vectors to process and combine different types of data, specifically text and images. We will discuss the challenges of merging these vectors, such as ensuring that the model can accurately capture the meaning of both text and visual information. Additionally, we will examine innovative approaches researchers are developing to overcome these challenges, enabling LLMs to work more effectively with multimodal data. By understanding the role of vectors in these processes, we can better appreciate the potential of LLMs in creating more advanced and versatile AI systems.
+
+Estimated Workshop Time: 70 Minutes
 
 *You may add an option video, using this format: [](youtube:YouTube video id)*
 
@@ -20,17 +22,10 @@ In this workshop, you will learn how to:
 * Load
 * Query
 
-### Prerequisites (Optional)
-
-*List the prerequisites for this lab using the format below. Fill in whatever knowledge, accounts, etc. is needed to complete the lab. **Do NOT list** each previous lab as a prerequisite.*
+### Prerequisites
 
 This lab assumes you have:
 * An Oracle account
-* All previous labs successfully completed
-
-*This is the "fold" - below items are collapsed by default*
-
-In general, the Introduction does not have Steps.
 
 ## Learn More
 
