@@ -33,13 +33,13 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     ## Downloading both the container and workshop resources. 
     wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/GDCjmPfuRMx-juvDGT0Mn7ZsaI_O5y_PsGg41xcLVVl8vewGOm6Ns4zeLsTPAr3p/n/c4u04/b/apex-images/o/configuration-files.zip -P /tmp
 
-    # Opening the zip file.
+    ## Opening the zip file.
     unzip -q /tmp/configuration-files.zip
+    chmod -R 777 mount-files
 
     </copy>
     ```
     ![Download container image](images/download-configuration-files.png)
-
 
 
 2. **Load the image into the podman catalog. (~5 mins)** Podman-load copies the image from the local docker archive into the podman container storage. This will take about 5 minutes--let's review the YAML file in the meantime.
@@ -137,7 +137,6 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
 9. **Configure the APEX image.** We'll first need to redirect APEX to use the images behind our firewall. Run this command in the terminal to do so. This is only required for APEX use in Livelabs.
     ```
     <copy>
-    podman exec -it oracle_adb-free_1 chmod 777 /u01/scripts/db-config.sh
     podman exec -it oracle_adb-free_1 /bin/sh -c "/u01/scripts/db-config.sh"
     </copy>
     ```  
@@ -145,7 +144,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
 
 ## Task 2: Access APEX & SQL Developer Web
 
-Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) preinstalled. Let's see how you can get started!
+Oracle Autonomous Database Free has ORDS preinstalled. Let's see how you can get started!
 
 1. **Open new Chrome window.** 
     ![Open new Chrome window.](images/new-chrome-window.png)
@@ -165,7 +164,7 @@ Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) prein
 4. **Sign into SQL Developer Web.** Use the database admin login credentials below.<br/> 
     
     **Username -** admin<br/>
-    **Password -** Welcome_12345 (or the custom password you specified in Task 1, Step 5.)
+    **Password -** Welcome_12345
 
     ![Sign into DB Actions](images/sign-in-ords.png)
 
