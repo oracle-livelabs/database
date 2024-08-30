@@ -25,15 +25,23 @@ This task will have you login to the Jupyter Notebook environment and run the sp
 
 1. **If you are already logged into the Jupyter Notebook environment skip to step 5 otherwise** open the "View Login Info" section of your workshop.
 
-	![Image alt text](images/sample1.png)
+    ![Image alt text](images/lab4_1ba.png)
 
 2. Copy the Jupyter Notebook Password and Click the Jupyter Notebook URL
 
-  ![Image alt text](images/sample1.png)
+    ![Image alt text](images/lab4_1a.png)
 
 3. Paste the Jupyter Notebook Password you copied in the previous step into the Notebook
-4. You should now be on the Jupyter Notebook landing screen
+  ![Image alt text](images/lab1_3.png)
+
+4. You should now be on the Jupyter Notebook landing screen. Open the folder named `vector lab` on the left hand side of the screen located in the file explorer
+    ![Image alt text](images/lab1_4.png)
+
+
 5. In the left File Explorer panel open the vector\_lab folder and open the **1\_generate\_lab.ipynb** notebook
+    ![Image alt text](images/lab1_5.png)
+    ![Image alt text](images/lab1_6.png)
+
 6. Follow the steps in the notebook. A few things to remember:
     - There are markdown blocks and code blocks mixed together
     - The run button can be used on both code and markdown blocks (markdown just advances you to the next block)
@@ -44,10 +52,8 @@ Once you have completed the steps in the notebook please return to the workshop 
 
 ## Learn More
 
-*(optional - include links to docs, white papers, blogs, etc)*
-
-* [URL text 1](http://docs.oracle.com)
-* [URL text 2](http://docs.oracle.com)
+* [Oracle AI Vector Search Users Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/whats-new-oracle-ai-vector-search.html)
+* [AI Vector Search Blog](https://blogs.oracle.com/database/post/oracle-announces-general-availability-of-ai-vector-search-in-oracle-database-23ai)
 
 ## Acknowledgements
 * **Author** - David Start, Product Management

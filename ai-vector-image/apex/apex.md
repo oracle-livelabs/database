@@ -26,11 +26,11 @@ This task you will log into APEX with the ADMIN user and create a workspace for 
 
 1. Open the "View Login Info" section of your workshop.
 
-	![Image alt text](images/sample1.png)
+	![Image alt text](images/lab4_1ba.png)
 
 2. You will use the APEX URL to open APEX
 
-    ![Image alt text](images/sample1.png)
+    ![Image alt text](images/lab4_1c.png)
 
 3. Login using:
     - APEX Workspace Name
@@ -413,10 +413,9 @@ Congradulations, you have built a AI Vector Search enabled application using ima
 
 ## Learn More
 
-*(optional - include links to docs, white papers, blogs, etc)*
-
-* [URL text 1](http://docs.oracle.com)
-* [URL text 2](http://docs.oracle.com)
+* [Oracle AI Vector Search Users Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/whats-new-oracle-ai-vector-search.html)
+* [AI Vector Search Blog](https://blogs.oracle.com/database/post/oracle-announces-general-availability-of-ai-vector-search-in-oracle-database-23ai)
+* [Oracle APEX](https://apex.oracle.com)
 
 ## Acknowledgements
 * **Author** - David Start, Product Management

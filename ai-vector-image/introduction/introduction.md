@@ -4,23 +4,22 @@
 
 Large Language Models (LLMs) have transformed artificial intelligence by enabling computers to understand and generate human-like text. These models rely on vectors—mathematical representations of words, phrases, and sentences—to process and create language. Vectors allow LLMs to capture the meaning of words and the relationships between them, making it possible for the models to perform tasks like text generation, translation, and question-answering with impressive accuracy. However, as we push LLMs to handle more complex tasks, such as integrating text with other types of data like images, new challenges arise. Combining these different kinds of vectors—those representing text and those representing images—requires advanced techniques to ensure the model can effectively understand and generate multimodal information.
 
-In this workshop, we explore how LLMs use vectors to process and combine different types of data, specifically text and images. We will discuss the challenges of merging these vectors, such as ensuring that the model can accurately capture the meaning of both text and visual information. Additionally, we will examine innovative approaches researchers are developing to overcome these challenges, enabling LLMs to work more effectively with multimodal data. By understanding the role of vectors in these processes, we can better appreciate the potential of LLMs in creating more advanced and versatile AI systems.
+In this workshop, we will look at one approach to solving this problem. We will leverage one model to generate descriptions for the image and then a second model for creating the vectors for the textual descriptions. This greatly simplifies the problem because having a single model that can both take images and text as inputs and generate compatible vectors is a challenge and very few models support this. By breaking the task up into two steps we get captions for the images which we can use in the application and we get access to many more LLMs as the tasks individually are much simplier. The diagram below shows the workflow that we will accomplish in this workshop.
+
+
+![Image alt text](images/diagram1.png)
+
 
 Estimated Workshop Time: 70 Minutes
 
-*You may add an option video, using this format: [](youtube:YouTube video id)*
-
-  [](youtube:zNKxJjkq0Pw)
+  [](youtube:pu79sny1AzY)
 
 ### Objectives
 
-*List objectives for the workshop*
-
 In this workshop, you will learn how to:
-* Provision
-* Setup
-* Load
-* Query
+* Work with Large Language Models (LLMs)
+* Create and Load Vectors
+* Create an APEX application using AI Vector Search
 
 ### Prerequisites
 
@@ -29,12 +28,10 @@ This lab assumes you have:
 
 ## Learn More
 
-*(optional - include links to docs, white papers, blogs, etc)*
-
-* [URL text 1](http://docs.oracle.com)
-* [URL text 2](http://docs.oracle.com)
+* [Oracle AI Vector Search Users Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/whats-new-oracle-ai-vector-search.html)
+* [AI Vector Search Blog](https://blogs.oracle.com/database/post/oracle-announces-general-availability-of-ai-vector-search-in-oracle-database-23ai)
 
 ## Acknowledgements
-* **Author** - <Name, Title, Group>
-* **Contributors** -  <Name, Group> -- optional
-* **Last Updated By/Date** - <Name, Month Year>
+* **Author** - David Start, Product Management
+* **Contributors** -  David Start, Product Management
+* **Last Updated By/Date** - David Start, Sept 2024
