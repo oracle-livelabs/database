@@ -97,5 +97,5 @@ In this lab, you will:
 ## Acknowledgements
 
 * **Author** - Julian Dontcheff, Hermann Baer
-* **Contributors** -  David Start, Ranjan Priyadarshi
+* **Contributors** -  David Start, Ranjan Priyadarshi, Kevin Lazarz
 * **Last Updated By/Date** - Carmen Berdant, Technical Program Manager, August 2024
