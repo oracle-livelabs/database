@@ -25,7 +25,6 @@ In this lab, you will:
 ### Prerequisites
 
 - Oracle Database 23.5 with direct OS access as oracle user
-- WinSCP or similar (for transferring the file)
 - MongoDB Compass installed on your machine
 - All previous labs successfully completed
 
@@ -36,52 +35,12 @@ In this lab, you will:
 
     ```
     <copy>
-    drop TABLE json_file_content purge;
-    drop TABLE movies_content purge;
+    drop TABLE if exists json_file_content purge;
+    drop TABLE if exists movies_content purge;
     </copy>
     ```
 
-## Task 2: Create the json_files directory and transfer the movies.json file on the DB server
-
-1. Create the _json\_files_ directory under **/home/oracle/** and then transfer the file _movies.json_ to **/home/oracle/json_files** on the DB server.
-
-    ```
-    <copy>cd /home/oracle/
-    mkdir json_files</copy>
-    ```
-    ![Upload JSON file](images/upload_json_file.png)
-    ![Upload JSON file](images/upload_json_file2.png)
-
-## Task 3: Create the Database Directory Object
-
-1. Follow this code to run:
-
-    ```
-    <copy>
-    CREATE OR REPLACE DIRECTORY json_files_dir AS '/home/oracle/json_files';
-    </copy>
-    ```
-
-## Task 4: Create the External Table
-
-1. Follow this code to run:
-
-    ```
-    <copy>
-    CREATE TABLE json_file_content (data JSON)
-        ORGANIZATION EXTERNAL
-            (TYPE ORACLE_BIGDATA
-            ACCESS PARAMETERS (
-            com.oracle.bigdata.fileformat=jsondoc
-            com.oracle.bigdata.json.unpackarrays=true
-            )
-        LOCATION (json_files_dir:'movies.json'))
-        PARALLEL
-        REJECT LIMIT UNLIMITED;
-    </copy>
-    ```
-
-## Task 5: Create the JSON collection table
+## Task 2: Create the JSON collection table
 
 1. Follow this code to run:
 
@@ -91,7 +50,7 @@ In this lab, you will:
     </copy>
     ```
 
-## Task 6: Insert the data into the table granted
+## Task 3: Insert the data into the table granted
 
 1. Follow this code to run:
 
@@ -111,7 +70,7 @@ In this lab, you will:
     </copy>
     ```
 
-## Task 7: Test the newly create JSON collection table in the Oracle database. List all movies having a name like %father%
+## Task 4: Test the newly create JSON collection table in the Oracle database. List all movies having a name like %father%
 
 
 1. In SQL Developer run:
