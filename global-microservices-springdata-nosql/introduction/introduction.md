@@ -49,12 +49,9 @@ In this workshop you will:
 ### Prerequisites
 
 This workshop assumes you have:
-  * An Oracle Free Tier or Paid Account
   * Programming knowledge in Java and Spring framework
   * Understanding of query languages
 
-*Note: If you have a **Free Tier  account,*** when your Free Trial credits expire your account will be converted to an **Always Free** account. You will not be able to conduct this workshop after your account has been converted to an Always Free environment. The Oracle NoSQL Database Cloud Service **Always Free** tenancies are only available in the Phoenix region.
-**[Free Tier FAQ](https://www.oracle.com/cloud/free/faq.html)**
 
 ## Task 1: Architecture of the Application
 

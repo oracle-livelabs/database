@@ -1,0 +1,2 @@
+If you register with Oracle Enterprise Manager, then you can manage your database in a web browser from the EM console. To register with EM, you require some details, such as OMS host name, port number, and the EM administrative credentials.
+However, instead of registering from this window, you can use the discovery process in EM and add your Oracle Database as a managed target.

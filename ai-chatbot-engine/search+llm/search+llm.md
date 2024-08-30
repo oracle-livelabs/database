@@ -23,8 +23,7 @@ In this lab, you will:
 
 * Basic knowledge of Oracle Cloud Infrastructure (OCI) concepts and the console
 * Working knowledge of Python and Jupyter Lab
-* A working OCI virtual machine running Oracle Enterprise Linux 8, located in the US Midwest (Chicago) region
-* SSH access to the above VM
+* A working OCI tenancy for the GenerativeAI service calls
 * Completion of all previous labs
 
 ## Task 1: Vectorize the "question"
@@ -134,10 +133,14 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
 
     ```python
     <copy>
-    from transformers import LlamaTokenizerFast
+    <if type="freetier">from transformers import LlamaTokenizerFast
     import sys
 
-    tokenizer = LlamaTokenizerFast.from_pretrained("hf-internal-testing/llama-tokenizer")
+    tokenizer = LlamaTokenizerFast.from_pretrained("hf-internal-testing/llama-tokenizer")</if>
+    <if type="livelabs">from transformers import AutoTokenizer
+    import sys
+
+    tokenizer = AutoTokenizer.from_pretrained("./transformers/all-MiniLM-L12-v2", local_files_only=True)</if>
     tokenizer.model_max_length = sys.maxsize
 
     def truncate_string(string, max_tokens):
@@ -189,9 +192,37 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
     </copy>
     ```
 
+### Step 1: Prepare the environment
 ## Task 3: Call the Generative AI Service LLM
 
-### Step 1: Prepare the environment
+<if type="ocw24">
+0. **If you're running this lab at CloudWorld 2024**
+
+In this case, the credentials needed to access the OCI GenAI Service are provided for you. Click on the link below and download the zip file.
+
+[Get Your OCI GenAI key](https://objectstorage.us-ashburn-1.oraclecloud.com/p/75QkYvgn8zNo7vSaI8M4k5GGvs62bRQzeHPQFCxoQQZD1nwD5sl8oDyWjkBvAScE/n/c4u04/b/OCW2024/o/api/tut3008.zip)
+
+Unzip the downloaded file and copy the text file and non-public pem file to your JupyterLab window.
+Rename the text file to `config` (no extension).
+
+Double-click to open it in Jupyter. It will look like this:
+```
+[DEFAULT]
+user=ocid1.user.oc1..zzzzzzzzzzzzz
+fingerprint=80:2a:84:00:29:2d:ec:04:8b:ee:xxxx
+tenancy=ocid1.tenancy.oc1..yyyyyyyyyyyy
+region=us-chicago-1
+key_file=<path to your private keyfile> # TODO
+
+Compartment ocid = ocid1.compartment.oc1..xxxxxxxx
+```
+Make note of your compartment ocid and delete that line (the last one in the file). You will need it in point 2 below.
+
+Enter the path and name of your private key at the end of the `key_file` line.
+
+
+> Note: The details in paragraph 1 below are provided for your information only. It is safe to skip to point 2.
+</if>
 
 1. In Jupyter, create a new file called `config`.
 
@@ -290,6 +321,6 @@ You may now **proceed to the next lab**
 ## Acknowledgements
 * **Author** - Bogdan Farca, Customer Strategy Programs Leader, Digital Customer Experience (DCX), EMEA
 * **Contributors** 
-   - Liana Lixandru, Senior Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
+   - Liana Lixandru, Principal Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
    - Kevin Lazarz, Senior Manager, Product Management, Database
 * **Last Updated By/Date** -  Bogdan Farca, May 2024

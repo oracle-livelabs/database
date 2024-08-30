@@ -55,15 +55,15 @@ When you sign up for an Oracle Cloud account, a user is created for you in Oracl
 You may now proceed to the next lab
 
 ## Learn More
-- [Database 19c - JSON] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=638)
-- [Developing with JSON and SODA in Oracle Database] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=831)
-- [JSON without Limits] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=836)
-- [Using the Database API for MongoDB] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3152)
-- [Database API for MongoDB - The Basics] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3221)
-- [Full-Text Search in Oracle Database] (https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3286)
-- [Autonomous Database Dedicated](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=677)
-- [Manage and Monitor Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=553)
-- [Scaling and Performance in the Autonomous Database](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=608)
+- [Database 19c - JSON] (https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=638)
+- [Developing with JSON and SODA in Oracle Database] (https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=831)
+- [JSON without Limits] (https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=836)
+- [Using the Database API for MongoDB] (https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3152)
+- [Database API for MongoDB - The Basics] (https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3221)
+- [Full-Text Search in Oracle Database] (https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3286)
+- [Autonomous Database Dedicated](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=677)
+- [Manage and Monitor Autonomous Database](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=553)
+- [Scaling and Performance in the Autonomous Database](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=608)
 
 
 ## Acknowledgements

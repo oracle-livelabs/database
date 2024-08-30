@@ -201,8 +201,8 @@ with connection.cursor() as cursor:
    ```python
    <copy>
    from sentence_transformers import SentenceTransformer
-
-   encoder = SentenceTransformer('all-MiniLM-L12-v2')
+   <if type="freetier">encoder = SentenceTransformer('all-MiniLM-L12-v2')</if>
+   <if type="livelabs">encoder = SentenceTransformer('./transformers/all-MiniLM-L12-v2', local_files_only=True)</if>
    </copy>
    ```
    Ignore the warning saying `IProgress not found.`, among others.
@@ -298,7 +298,7 @@ You may now **proceed to the next lab**
 ## Acknowledgements
 * **Author** - Bogdan Farca, Customer Strategy Programs Leader, Digital Customer Experience (DCX), EMEA
 * **Contributors** 
-   - Liana Lixandru, Senior Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
+   - Liana Lixandru, Principal Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
    - Wojciech Pluta, Director, Technical Product Marketing
    - Kevin Lazarz, Senior Manager, Product Management, Database
 * **Last Updated By/Date** -  Bogdan Farca, May 2024

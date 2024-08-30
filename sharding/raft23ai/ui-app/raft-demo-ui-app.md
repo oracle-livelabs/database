@@ -86,6 +86,7 @@ This lab assumes you have:
 
     ![<before_switchover_ru_sort_shows_shard1_is_leader_for_ru1>](./images/before_switchover_ru_sort_shows_shard1_is_leader_for_ru1.png " ")
 
+
 2. Switchover RU#1 from shard1 to shard2 from the terminal:
 
     ```
@@ -130,139 +131,28 @@ In the bottom of the "More Details" page a link to Home Page is shown to return 
 
    After adding customer, it brings back to the All-Customers List page. Total Customers count gets increased after adding a customer by 1. The customer details can be viewed with Api call format http://localhost:/8080/updateCustomer/<customerId> for given value of customerId.
 
+
 2. Update Customer: A customer can be edited either by using link "Update" link from the Home Page or directly using Api call format http://localhost:/8080/updateCustomer/<customerId>
 
    ![Edit Customer>](./images/edit_customer.png " ")
 
    After updating customer, it brings back to the All-Customers List page. You can verify the updated customer details shown in UI or manually using Api call format http://localhost:/8080/updateCustomer/<customerId>
 
+
 3. Delete Customer: A customer can delete either using link "Delete" or manually using Api call from the browser in the format http://localhost:8080/deleteCustomer/<customerId>.
    After deleting customer, it brings back to the All-Customers List page. Total count on the All-Customers List page is reduce by 1.
 
+
 4. To Refresh the data on the "Home Page", you can use the Refresh link from the bottom section of the Home Page. Alternatively, reload the page from the browser's default refresh icon.
+
 
 5. "Home" Page link at the bottom the page brings to the first page and useful when you are at any higher page# and want to return to the first page of RAFT UI application.
 
-## Task 4: Run the workload to view newly added customers from UI App
 
-1. You can use the below steps to run the additional workload and view those in UI after refreshing the page:
+In addition to above information, the results from previous Labs "Explore Raft Replication Topology and "Explore Raft Replication Advanced Use-Cases" tasks e.g., for Raft Replication failovers, Scale UP or Scale Down, Move or Copy Replication Unit Replicas etc. all can be verified from Raft Demo UI.
 
-    ```
-    <copy>
-    sudo podman exec -it --user oracle appclient /bin/bash
-    cd $DEMO_MASTER
-    sh run.sh demo
-    </copy>
-    ```
-
-    ![<run_workload>](./images/additional_workload.png " ")
-
-2. Monitor the load from UI app: After additional demo data load, count will increase and all customers including recently added will be shown like below:
-
-    ![<After additional demo data loaded>](./images/all_customer_after_additonal_workload.png " ")
-
-3. You can check the RU details from another session on the "gsm1" container from "gdsctl" prompt. Notice that the log index is increasing as there are read and write operations are going on like you have verified in Lab4's task 5.
-
-    ```
-    <copy>
-    gdsctl ru -sort
-    </copy>
-    ```
-
-4. You can keep running the workload while you perform the next task or exit workload using Ctrl+C. Keep observing All customers page via http://localhost:8080 to view the Total count is increasing accordingly after refreshing the Home Page.
-
-## Task 5: Verify data from UI during Failover Test
-
-What's effect on Application UI when one of the available shard databases goes down or is taken down for maintenance? Since RU leadership will changes from shard1 to any competing shards, UI will keep showing data from the catalog without any this UI application downtime.
-
-Run the similar steps from Lab "Explore Raft Replication Topology - Task 5: Perform Failover Test" like below:
-
-1.  Run the below command as **oracle** user to check the status for all the containers.
-
-    ```
-    <copy>
-    sudo podman ps -a
-    </copy>
-    ```
-
-    ![<podman_containers_status>](./images/podman-containers.png " ")  
-
-2.  Run the below command as **oracle** to stop shard1.
-
-    ```
-    <copy>
-    sudo podman stop shard1
-    </copy>
-    ```
-
-    ![<stop_shard_1>](./images/stop-shard1.png " ")  
-
-3. Switch to GSM1 on another terminal session and check the status for RU's and you will see that database orcl1cdb_orcl1pdb is not present.
-
-    ```
-    <copy>
-    sudo podman exec -i -t gsm1 /bin/bash
-    </copy>
-    ```
-
-    ```
-    <copy>
-    gdsctl config shard
-    </copy>
-    ```
-
-    ```
-    <copy>
-    gdsctl status ru -show_chunks
-    </copy>
-    ```
-
-    ![<chunk_status_after_shard1_down>](./images/status-chunks-after-shard1-down.png " ")  
-
-You will see that shard1 stop situation has no impact on the running UI application and even if workload is kept on running. UI can show the newly added records and counts also increase when we refresh the page by click the Refresh link or browser's refresh icon. Records and counts can be verified from SQL*plus client as well after connecting to the catalog DB from the catalog container.
-
-4. Start the shard1 using the podman start command, to reflect that shard1 is joining back.
-
-    ```
-    <copy>
-    sudo podman start shard1
-    </copy>
-    ```
-
-    ![<start_shard1>](./images/startup-shard1.png " ")
-
-5. On a parallel session switch to GSM1, check the status of shard, RU's and see that shard1 has joined back.
-
-    ```
-    <copy>
-    sudo podman exec -i -t gsm1 /bin/bash
-    </copy>
-    ```
-
-    ```
-    <copy>
-    gdsctl config shard
-    </copy>
-    ```
-
-    ```
-    <copy>
-    gdsctl status ru -show_chunks
-    </copy>
-    ```
-
-    ![<chunk_status_after_startup_shard1>](./images/status-chunks-after-startup-shard1.png " ")  
-    
-You can stop the workload that ran in the previous task using Ctrl+C.
-
-In addition to above tasks, the results from Lab "Explore Raft Replication Topology" tasks e.g., for Raft Replication failovers, Scale UP or Scale Down, Move or Copy Replication Unit Replicas etc. all can be verified from Raft Demo UI.
-
-This is the end of the Raft Replication Workshop.
-
-## Rate this Workshop
-When you are finished, don't forget to rate this workshop!  We rely on this feedback to help us improve and refine our LiveLabs catalog.  Follow the steps to submit your rating.
 
 ## Acknowledgements
 * **Authors** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, Consulting Member of Technical Staff
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Deeksha Sehgal, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, Consulting Member of Technical Staff, July 2024
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, Consulting Member of Technical Staff, August 2024

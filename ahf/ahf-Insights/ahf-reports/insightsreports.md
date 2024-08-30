@@ -5,7 +5,7 @@
 
 This lab will show you how to use AHF Insights reports to help diagnose problems.
 
-Estimated Lab Time: 20 Minutes
+Estimated Lab Time: 40 Minutes
 
 ### Objectives
 - Get a bird's eye view of your database system from diagnostic perspective
@@ -13,7 +13,7 @@ Estimated Lab Time: 20 Minutes
 - Leverage AHF Insights to resolve identified problems
 
 ### Prerequisites
-- System which allows downloading file using *wget* command
+- System which allows downloading files using *wget* command
 - Browser which can render html and javascript
 
 
@@ -38,19 +38,24 @@ Diagnostic dimensions include :
 ## Task 1:  Download AHF Insights report to review System Topology
 1.  Download AHF Insights report zip file.
 
-    ```
-    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/1fl26UQZiAjg7vCEP9K0kMJ3bhpdc-cQTWKYl9g08VJMCXZr0pi46xQgUxfe2VBx/n/idhbogog2wy7/b/ocw24-livelabs/o/node1_insights_2024_07_10_23_30_54_system_topology.zip
-    ```
+    Paste the following URL in to your browser of choice to download to you local system
 
-2.  Extract AHF Insights report zip file.
+    ```
+    <copy>
+    https://objectstorage.us-ashburn-1.oraclecloud.com/p/1fl26UQZiAjg7vCEP9K0kMJ3bhpdc-cQTWKYl9g08VJMCXZr0pi46xQgUxfe2VBx/n/idhbogog2wy7/b/ocw24-livelabs/o/node1_insights_2024_07_10_23_30_54_system_topology.zip
+    </copy>
+    ```
+2. Navigate to the Download location for you browser
+
+3.  Extract AHF Insights report zip file.
 
 ![](./images/Task-1-point-2.png " ")
 
-3.  Open index.html file on a browser.
+4.  Open index.html file on a browser.
 
 ## Task 2:  Review parts of AHF Insights report
 
-![](./images/Task-1-Point-1.png " ")
+![](./images/Task-1-point-1.png " ")
 
 1.  Top right corner (*highlighted above*) indicates AHF Version, System Type and Time Range of AHF Insights report collection.
 2.  First row (*highlighted above*) shows topology of the system from where AHF Insights report was generated.
@@ -60,25 +65,25 @@ Diagnostic dimensions include :
 
 1.  On Home tab click on the *Cluster Section*
 
-![](./images/Task-3-Point-1.png " ")
+![](./images/Task-3-point-1.png " ")
 
 2.  *Cluster Summary* sub tab gives you high level details regarding the cluster.
 
-![](./images/Task-3-Point-2.png " ")
+![](./images/Task-3-point-2.png " ")
 
 3.  Click copy icon (*highlighted above*) to copy the panel data in text format to your clipboard.
 4.  You can post it in your notepad / any other application.
 
-![](./images/Task-3-Point-4.png " ")
+![](./images/Task-3-point-4.png " ")
 
 5.  *Cluster Resources* sub tab gives you details of clusterware managed resources and their state.
     - Note : You can *Expand* each resource to check details and can also make use of *Expand All* switch to view/hide them all
 
-![](./images/Task-3-Point-5.png " ")
+![](./images/Task-3-point-5.png " ")
 
 6.  *ASM Details* sub tab gives you ASM Instance and Disk group details.
 
-![](./images/Task-3-Point-6.png " ")
+![](./images/Task-3-point-6.png " ")
 
     
 
@@ -139,15 +144,20 @@ Diagnostic dimensions include :
 
 1.  Download AHF Insights report zip file.
 
-    ```
-    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/JHSkKXru-WkrhAJj668oXGDLHGncTtuK1_EF40kilttwxMPHg6pDuGXe1CPujYDe/n/idhbogog2wy7/b/ocw24-livelabs/o/node1_insights_2024_05_02_20_44_11_insights.zip
-    ```
+    Paste the following URL in to your browser of choice to download to you local system
 
-2.  Extract AHF Insights report zip file.
+    ```
+    <copy>
+    https://objectstorage.us-ashburn-1.oraclecloud.com/p/JHSkKXru-WkrhAJj668oXGDLHGncTtuK1_EF40kilttwxMPHg6pDuGXe1CPujYDe/n/idhbogog2wy7/b/ocw24-livelabs/o/node1_insights_2024_05_02_20_44_11_insights.zip
+    </copy>
+    ```
+2.  Navigate to the Download location for you browser
+
+3.  Extract AHF Insights report zip file.
 
 ![](./images/Task-8-point-2.png " ")
 
-3.  Open index.html file on a browser.
+4.  Open index.html file on a browser.
 
 ## Task 9:  Review *Timeline Section* in Insights
 
@@ -585,7 +595,7 @@ Diagnostic dimensions include :
 
 ![](./images/Task-21-point-6.png " ")
 
-
+You may now [proceed to the next lab](#next).
 ## Acknowledgements
 * **Authors** - Troy Anthony, Bill Burton, Arjun Upadhyay
 * **Contributors** - Arlet Diaz

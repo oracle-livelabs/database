@@ -12,15 +12,16 @@ Estimated Time: 15 minutes
 
 ### Prerequisites
 
-* Access to the NoVNC image specific to this lab
+* Access to the virtual environment generated for this lab
 * Basic Linux knowledge
 
 ## Task 1: Open the remote Jupyter Lab environment
-To access the Jupyter Lab environment we will use to wirte and test our code, open the following UTL in a broswer on your local machine:
+Click the `View Login Info` link in the uper left side of your lab window:
 
-```
-http://[remote ip of your LiveLab instance]:8888/lab
-```
+![alt text](images/image3.png)
+
+To access the Jupyter Lab environment we will use to write and test our code, click the JupyterLab link in the resulting popup. 
+The password is listed in the same popup as well.
 
 The Jupyter Lab launcher should open.
 ![Jupyter launcher](images/image1.png)
@@ -141,7 +142,7 @@ You may now **proceed to the next lab**
 ## Acknowledgements
 * **Author** - Bogdan Farca, Customer Strategy Programs Leader, Digital Customer Experience (DCX), EMEA
 * **Contributors** 
-   - Liana Lixandru, Senior Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
+   - Liana Lixandru, Principal Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
    - Kevin Lazarz, Senior Manager, Product Management, Database
    - Wojciech Pluta, Director, Technical Product Marketing
 * **Last Updated By/Date** -  Bogdan Farca, Jul 2024

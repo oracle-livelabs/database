@@ -10,7 +10,7 @@ Watch the video below to get an explanation of enabling the In-Memory column sto
 
 Quick walk through on how to enable In-Memory.
 
-[Setting up the In-Memory column store](videohub:1_dg318frc)
+[Set up the In-Memory column store](https://videohub.oracle.com/media/Set+up+the+In-Memory+column+store/1_cssjzf0m)
 
 *Estimated Lab Time:* 15 Minutes.
 
@@ -19,12 +19,13 @@ Quick walk through on how to enable In-Memory.
 -   Learn how to enable Database In-Memory and populate objects in the IM column store
 -   Explore various views to monitor Database In-Memory
 
+Note: The results of queries in the lab may not exactly match the output shown in this Lab Guide. This is due to differences in environments and the randomness of the queries that are run. The basic output should be close and the Lab Guide will explain the important areas to focus on.
+
 ### Prerequisites
 
 This lab assumes you have:
-- A Free Tier, Paid or LiveLabs Oracle Cloud account
+- LiveLabs Oracle Cloud account
 - You have completed:
-    - Get Started with noVNC Remote Desktop
     - Lab: Initialize Environment
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
@@ -33,20 +34,18 @@ This lab assumes you have:
 
 In this Lab we will explore how the In-Memory column store is enabled in Oracle Database, and then how to enable and populate objects and verify the population of those objects in the In-Memory column store.
 
-1. Let's switch to the setup folder and log back in to the PDB:
+1. Let's switch to the setup folder and log into the PDB.
 
-    Reload the environment variables for **CDB1** if you exited the terminal after the previous lab
-    
-    ```
-    <copy>. ~/.set-env-db.sh CDB1</copy>
-    ```
+    Note: In the labs the SQL scripts will log in to the database each time. There is a SQL script called imlogin.sql in the /home/oracle/workshops/inmemory directory that is called by each script. If you want to log in directly to the database using sqlplus, the following is the command that can be used:
 
-    Connect to **PDB1**
-    
+    sqlplus ssb/ssb@23ai/pdb1
+
+    otherwise you can just invoke sqlplus with the command: sqlplus /nolog and then run the script by copying and pasting the script command.
+
     ```
     <copy>
-    cd /home/oracle/labs/inmemory/setup
-    sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
+    cd /home/oracle/workshops/inmemory/setup
+    sqlplus /nolog
     </copy>
     ```
 
@@ -62,19 +61,13 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     Query result:
 
     ```
-    [CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/setup
-    [CDB1:oracle@dbhol:~/labs/inmemory/setup]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
+    [oracle@livelabs aim23]$ cd /home/oracle/workshops/inmemory/setup
+    [oracle@livelabs aim23]$ sqlplus /nolog
 
-    SQL*Plus: Release 23.0.0.0.0 - Production on Mon May 20 14:02:47 2024
-    Version 23.4.0.24.05
+    SQL*Plus: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Mon Aug 12 16:50:16 2024
+    Version 23.5.0.24.07
 
     Copyright (c) 1982, 2024, Oracle.  All rights reserved.
-
-    Last Successful login time: Mon May 20 2024 13:50:04 -07:00
-
-    Connected to:
-    Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
-    Version 23.4.0.24.05
 
     SQL> set pages 9999
     SQL> set lines 150
@@ -138,7 +131,7 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
 
     NAME                                 TYPE        VALUE
     ------------------------------------ ----------- ------------------------------
-    inmemory_size                        big integer 3312M
+    inmemory_size                        big integer 2800M
     SQL>
     SQL> show parameter inmemory_automatic_level
 
@@ -148,7 +141,7 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     SQL>
     ```
 
-    Since the IM column store is not enabled by default (i.e. INMEMORY\_SIZE=0), we have set it to a size that will work for this Lab.  HEAT\_MAP defaults to OFF, but it has been enabled for one of the later labs. The KEEP pool (i.e. DB\_KEEP\_CACHE\_SIZE) is set to 0 by default. We have defined it for this Lab so that you can compare the performance of objects populated in the IM column store with the same objects fully cached in the buffer cache and compare the difference in performance for yourself. We have also set SGA\_TARGET, as opposed to defining individual SGA components or MEMORY\_TARGET, in order to enable Automatic Shared Memory Management (ASMM) to enable a new feature in Database In-Memory called Automatic In-Memory Sizing.
+    The IM column store is not enabled by default (i.e. INMEMORY\_SIZE=0), but we have already set it to a size that will work for this Lab.  HEAT\_MAP defaults to OFF, but it has been enabled for the In-Memory labs. The KEEP pool (i.e. DB\_KEEP\_CACHE\_SIZE) is set to 0 by default. We have defined it so that you can compare the performance of objects populated in the IM column store with the same objects fully cached in the buffer cache, a true memory to memory comparison, so that you can compare the difference in performance for yourself. We have also set SGA\_TARGET, as opposed to defining individual SGA components or MEMORY\_TARGET, in order to enable Automatic Shared Memory Management (ASMM). There is a new Database In-Memory feature in Oracle Database 23ai called Automatic In-Memory Sizing. This feature allows the database to grow or shrink the size of the IM column store based on database workload. We will explore the results of this in the AIM 23ai lab.
 
 3. Since Database In-Memory is fully integrated into Oracle Database the IM column store is allocated within the System Global Area (SGA) and can be easily displayed using normal database commands.
 
@@ -179,19 +172,19 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     SQL>
     SQL> show sga
 
-    Total System Global Area 8587393600 bytes
-    Fixed Size                  5380672 bytes
-    Variable Size             469762048 bytes
-    Database Buffers         4630511616 bytes
-    Redo Buffers                8855552 bytes
-    In-Memory Area           3472883712 bytes
+    Total System Global Area           8587393888 bytes
+    Fixed Size                            5380960 bytes
+    Variable Size                       989855744 bytes
+    Database Buffers                   4647288832 bytes
+    Redo Buffers                          8855552 bytes
+    In-Memory Area                     2936012800 bytes
     SQL>
     ```
 
-    Notice that the SGA is made up of Fixed Size, Variable Size, Database Buffers and Redo Buffers. And since we have set the INEMMORY\_SIZE parameter we also see the In-Memory Area allocated within the SGA.
+    Notice that the SGA is made up of Fixed Size, Variable Size, Database Buffers and Redo Buffers. And since we have set the INEMMORY\_SIZE parameter we also see the In-Memory Area allocated within the SGA. Note that initial allocations of the IM column store do require an instance restart.
 
 
-4. In 23ai the In-Memory area is sub-divided into three pools: a 1MB POOL used to store actual columnar formatted data populated in the IM column store, a 64KB POOL to store metadata about the objects populated in the IM column store and a IM POOL METADATA to manage objects populated in the IM column store.  The view V$INMEMORY\_AREA shows the total memory allocated and used in the IM column store.
+4. In Oracle Database 23ai the In-Memory area is sub-divided into three pools: a 1MB POOL used to store actual columnar formatted data populated in the IM column store, a 64KB POOL to store metadata about the objects populated in the IM column store and an IM POOL METADATA pool to manage objects populated in the IM column store.  The view V$INMEMORY\_AREA shows the total memory allocated and used in the IM column store in these three areas.
 
     Run the script *03\_im\_usage.sql*
 
@@ -218,20 +211,21 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     ```
     SQL> @03_im_usage.sql
     Connected.
-    SQL> column pool format a10;
+    SQL> column pool format a20;
     SQL> column alloc_bytes format 999,999,999,999,999
     SQL> column used_bytes format 999,999,999,999,999
+    SQL> column populate_status format a15;
     SQL>
     SQL> -- Show total column store usage
     SQL>
     SQL> SELECT pool, alloc_bytes, used_bytes, populate_status, con_id
       2  FROM   v$inmemory_area;
 
-    POOL                      ALLOC_BYTES           USED_BYTES POPULATE_STATUS                CON_ID
-    ---------------- -------------------- -------------------- -------------------------- ----------
-    1MB POOL                3,288,334,336                    0 DONE                                3
-    64KB POOL                 167,772,160                    0 DONE                                3
-    IM POOL METADATA           16,777,216           16,777,216 DONE                                3
+    POOL                          ALLOC_BYTES           USED_BYTES POPULATE_STATUS     CON_ID
+    -------------------- -------------------- -------------------- --------------- ----------
+    1MB POOL                    2,785,017,856                    0 DONE                     3
+    64KB POOL                     134,217,728                    0 DONE                     3
+    IM POOL METADATA               16,777,216           16,777,216 DONE                     3
 
     SQL>
     ```
@@ -306,9 +300,9 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     SQL>
     ```
 
-    Note that tables enabled for inmemory will have the inmemory attribute of ENABLED. The default priority level is NONE which means that the object is not populated until it is first accessed. If the priority is set to any value other than NONE then the object will not be eligible for eviction. However, note that both the inmemory distribute and inmemory compression fields are set to AUTO. Recall that back in step 2 the parameter INMEMORY\_AUTOMATIC\_LEVEL was set to HIGH. This means that Automatic In-Memory was set to HIGH which enables all non-system objects to be eligible to be populated in the IM column store. We will talk more about this in the last lab.
+    Note that tables enabled for inmemory will have an inmemory attribute of ENABLED. In this lab Automatic In-Memory (AIM) is being used and as we saw in step 1 the AIM level is set to HIGH. This means that all non-system segments that do not have a pre-existing INMEMORY setting are automatically enabled for in-memory and the in-memory compression level is set to AUTO (i.e., INMEMORY MEMCOMPRESS AUTO). You do not have to explicitly enable a table, partition, sub-partition or materialized view for inmemory with AIM level set to HIGH.
 
-6. Let's populate the IM column store by accessing the tables that are enabled for inmemory with the following queries:
+6. Let's populate the SSB schema tables into the IM column store by accessing them with the following queries:
 
     Run the script *05\_im\_start_pop.sql*
 
@@ -371,7 +365,7 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     SQL>
     ```
 
-  Note the FULL and NOPARALLEL hints. These have been added to ensure that the table data is also read into the KEEP pool that was defined. This is only done for this Lab so that we can show you a true memory based comparison of the performance of the Database In-Memory columnar format versus the traditional row format fully cached in the buffer cache. This is not required to initiate Database In-Memory population.
+  Note the FULL and NOPARALLEL hints. These have been added to ensure that the table data is also read into the KEEP pool that was defined. This is only done for this Lab so that we can show you a true memory based comparison of the performance of the Database In-Memory columnar format versus the traditional row format fully cached in the buffer cache.
 
 7. To identify which segments have been populated into the IM column store you can query the view V$IM\_SEGMENTS.  Once the data population is complete, the BYTES\_NOT\_POPULATED attribute should be 0 for each segment.  
 
@@ -462,7 +456,7 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     ```
     SQL> @07_im_usage.sql
     Connected.
-    SQL> column pool format a16;
+    SQL> column pool format a20;
     SQL> column alloc_bytes format 999,999,999,999,999
     SQL> column used_bytes format 999,999,999,999,999
     SQL> column populate_status format a15;
@@ -472,22 +466,94 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     SQL> SELECT pool, alloc_bytes, used_bytes, populate_status, con_id
       2  FROM   v$inmemory_area;
 
-    POOL                      ALLOC_BYTES           USED_BYTES POPULATE_STATUS     CON_ID
-    ---------------- -------------------- -------------------- --------------- ----------
-    1MB POOL                3,288,334,336        2,235,564,032 DONE                     3
-    64KB POOL                 167,772,160            6,029,312 DONE                     3
-    IM POOL METADATA           16,777,216           16,777,216 DONE                     3
+    POOL                          ALLOC_BYTES           USED_BYTES POPULATE_STATUS     CON_ID
+    -------------------- -------------------- -------------------- --------------- ----------
+    1MB POOL                    2,785,017,856        2,193,620,992 DONE                     3
+    64KB POOL                     134,217,728            5,177,344 DONE                     3
+    IM POOL METADATA               16,777,216           16,777,216 DONE                     3
+
 
     SQL>
     ```
 
-9. Lets also take a look at the current Heat Map statistics. Automatic In-Memory does not require that Heat Map be enabled, but under the covers it uses the same basic information. We will list that starting heat map statistics in this step and then we will take a look at the statistics in the last lab and compare that with how it affected AIM.  
+    Note that there is currently plenty of space available in the IM column store. One of the characteristics of AIM is that it does not take action until the IM column store becomes full. Once it is full, or under memory pressure, then AIM will take over all population and evictions of segments in the IM column store. However, once the column store is under memory pressure no IM performance features will be created. For now, we do not want the IM column store to be full so that we can let AIM create in-memory perfomance features if it decides that there will be benefit to the SQL statements being run.
 
-    Run the script *08\_hm\_stats.sql*
+9.  Next we will run a Swingbench workload in order to generate enough workload to trigger the creation of AIM performance features. We will do this now to give the database time to analyze the workload and create any beneficial features. We will take a look at the results in the AIM lab.
+
+    Run the script *08\run\workload.sql
+```
+    <copy>
+    @08_run_workload.sql
+    </copy>    
+    ```
+
+    or run the query below:  
 
     ```
     <copy>
-    @08_hm_stats.sql
+    set escape ^
+    prompt Ignore any error from the drop table statement
+    drop table supp_extra;
+    create table supp_extra as select * from supplier where rownum <= 100;
+    host /usr/bin/nohup /home/oracle/swingbench/bin/charbench -c /home/oracle/inmemory/swingbench/SSB_Workload.xml ^&
+    prompt To view status of the Swingbench process exit sqlplus and type: tail -f nohup.out
+    prompt Use ctrl-C to exit from the tail command
+    </copy>
+   ```
+
+    Query result:
+
+    ```
+    SQL> @08_run_workload.sql
+    Connected.
+    Ignore any error from the drop table statement
+    drop table supp_extra
+               *
+    ERROR at line 1:
+    ORA-00942: table or view "SSB"."SUPP_EXTRA" does not exist
+    Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+
+
+    Table created.
+    
+
+    Hit enter to get back to the sqlplus prompt
+    To view status of the Swingbench process exit sqlplus and type: tail -f nohup.out
+    Use ctrl-C to exit from the tail command
+    SQL> /usr/bin/nohup: appending output to 'nohup.out'
+
+    SQL> exit
+    Disconnected from Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems
+    Version 23.5.0.24.07
+    [oracle@livelabs setup]$ tail -f nohup.out
+    Swingbench 
+    Author  :        Dominic Giles 
+    Version :        2.7.0.1470  
+
+    Results will be written to results.xml 
+    Hit Return to Terminate Run... 
+
+    Time            Users   TPM     TPS
+
+    ^C05:42 PM      1       87      4                                                         
+    [oracle@livelabs setup]$  sqlplus /nolog
+
+    SQL*Plus: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Thu Aug 8 18:05:53 2024
+    Version 23.5.0.24.07
+
+    Copyright (c) 1982, 2024, Oracle.  All rights reserved.
+
+    SQL>
+    ```
+
+10. Lets also take a look at the current Heat Map statistics. Automatic In-Memory does not require that Heat Map be enabled, but under the covers it uses the same basic information. We will list that starting heat map statistics in this step and then we will take a look at the statistics in the last lab and compare that with how it affected AIM.  
+
+    Run the script *09\_hm\_stats.sql*
+
+    ```
+    <copy>
+    @09_hm_stats.sql
     </copy>    
     ```
 
@@ -541,22 +607,31 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
                                                                      SEG        SEG        FULL       LOOKUP      NUM FULL NUM LOOKUP   NUM SEG
     OWNER      OBJECT_NAME          SUBOBJECT_NAME  TRACK_TIME       WRITE      READ       SCAN       SCAN            SCAN       SCAN     WRITE
     ---------- -------------------- --------------- ---------------- ---------- ---------- ---------- ---------- --------- ---------- ---------
-    SSB        CUSTOMER                             06/12/2024 12:20 NO         YES        YES        NO                 1          0         0
-    SSB        DATE_DIM                             06/12/2024 12:20 NO         YES        YES        NO                 1          0         0
-    SSB        LINEORDER            PART_1994       06/12/2024 12:20 NO         YES        YES        NO                 1          0         0
-    SSB        LINEORDER            PART_1995       06/12/2024 12:20 NO         YES        YES        NO                 1          0         0
-    SSB        LINEORDER            PART_1996       06/12/2024 12:20 NO         YES        YES        NO                 1          0         0
-    SSB        LINEORDER            PART_1997       06/12/2024 12:20 NO         YES        YES        NO                 1          0         0
-    SSB        LINEORDER            PART_1998       06/12/2024 12:20 NO         YES        YES        NO                 1          0         0
-    SSB        PART                                 06/12/2024 12:20 NO         YES        YES        NO                 1          0         0
-    SSB        SUPPLIER                             06/12/2024 12:20 NO         YES        YES        NO                 1          0         0
+    SH         DR$SUP_TEXT_IDX$B                    08/21/2024 16:13 NO         YES        YES        NO                 1          0         0
+    SH         DR$SUP_TEXT_IDX$C                    08/21/2024 16:13 NO         YES        YES        NO                 1          0         0
+    SYS        WRM$_SNAPSHOT        WRM$_SNAPSHOT_8 08/21/2024 16:13 NO         YES        NO         YES                0          5         0
+                                    5324380_MXSN
 
-    9 rows selected.
+    SSB        CUSTOMER                             08/21/2024 17:00 NO         YES        YES        NO                68          0         0
+    SSB        DATE_DIM                             08/21/2024 17:00 NO         YES        YES        NO                85          0         0
+    SSB        LINEORDER            PART_1994       08/21/2024 17:00 NO         YES        YES        NO               153          0         0
+    SSB        LINEORDER            PART_1995       08/21/2024 17:00 NO         YES        YES        NO               157          0         0
+    SSB        LINEORDER            PART_1996       08/21/2024 17:00 NO         YES        YES        NO               155          0         0
+    SSB        LINEORDER            PART_1997       08/21/2024 17:00 NO         YES        YES        NO               160          0         0
+    SSB        LINEORDER            PART_1998       08/21/2024 17:00 NO         YES        YES        NO               138          0         0
+    SSB        PART                                 08/21/2024 17:00 NO         YES        YES        NO               119          0         0
+    SSB        SUPPLIER                             08/21/2024 17:00 NO         YES        YES        NO                53          0         0
+    SSB        SUPP_EXTRA                           08/21/2024 17:00 NO         YES        YES        NO                33          0         0
+    SYS        WRM$_SNAPSHOT        WRM$_SNAPSHOT_8 08/21/2024 17:00 NO         YES        NO         YES                0         44         0
+                                    5324380_MXSN
+
+
+    14 rows selected.
 
     SQL>
     ```
 
-    Note that there has been 1 full table scan on each of the tables and no other activity. In Step 6 we ran a query against each table and that has been the only access so far. In the last lab we will explore heat map in more detail and what affect it has on AIM processing.
+    Note that AIM bases its decisions on the number for full table scans, or the "NUM FULL SCANS" column above. In the last lab we will explore heat map in more detail and what affect it has on AIM processing.
 
 10. Exit lab
 
@@ -575,8 +650,7 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     SQL> exit
     Disconnected from Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
     Version 23.4.0.24.05
-    [CDB1:oracle@dbhol:~/labs/inmemory/setup]$ cd ..
-    [CDB1:oracle@dbhol:~/labs/inmemory]$
+    [oracle@livelabs aim23]$ 
     ```
 
 ## Conclusion
@@ -595,4 +669,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Andy Rivenes, Product Manager, Database In-Memory
 - **Contributors** - Maria Colgan, Rene Fontcha
-- **Last Updated By/Date** - Andy Rivenes, Product Manager, Database In-Memory, June 2024
+- **Last Updated By/Date** - Andy Rivenes, Product Manager, Database In-Memory, August 2024

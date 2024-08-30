@@ -7,7 +7,7 @@ Watch a preview video of querying the In-Memory Column Store
 
 Watch the video below for a walk through of the In-Memory Queries lab:
 
-[In-Memory Queries](videohub:1_ohs9hpw0)
+[In-Memory Queries](https://videohub.oracle.com/media/In-Memory+Queries/1_azouoezr)
 
 *Estimated Lab Time:* 15 Minutes.
 
@@ -15,33 +15,28 @@ Watch the video below for a walk through of the In-Memory Queries lab:
 
 -   Perform various queries on the In-Memory Column Store
 
+Note: The results of queries in the lab may not exactly match the output shown in this Lab Guide. This is due to differences in environments and the randomness of the queries that are run. The basic output should be close and the Lab Guide will explain the important areas to focus on.
+
 ### Prerequisites
 
 This lab assumes you have:
-- A Free Tier, Paid or LiveLabs Oracle Cloud account
+- LiveLabs Oracle Cloud account
 - You have completed:
-    - Get Started with noVNC Remote Desktop
     - Lab: Initialize Environment
     - Lab: Setting up the In-Memory Column Store
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
-## Task 1: Querying the In-Memory Column Store
+## Task 1: Query the In-Memory Column Store
 
 Now that you’ve gotten familiar with the IM column store let’s look at the benefits of using it. You will execute a series of queries against the large fact table LINEORDER, in both the buffer cache and the IM column store, to demonstrate the different ways the IM column store can improve query performance above and beyond the basic performance benefits of accessing data in memory only.
-
-Reload the environment variables for **CDB1** if you exited the terminal after the previous lab
-
-```
-<copy>. ~/.set-env-db.sh CDB1</copy>
-```
 
 Let's switch to the queries folder and log back in to the PDB.
 
 ```
 <copy>
-cd /home/oracle/labs/inmemory/queries
-sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
+cd /home/oracle/workshops/inmemory/queries
+sqlplus /nolog
 </copy>
 ```
 
@@ -57,19 +52,13 @@ set lines 150
 Query result:
 
 ```
-[CDB1:oracle@dbhol:~/labs/inmemory]$ cd /home/oracle/labs/inmemory/queries
-[CDB1:oracle@dbhol:~/labs/inmemory/queries]$ sqlplus ssb/Ora_DB4U@localhost:1521/pdb1
+[oracle@livelabs aim23]$ cd /home/oracle/workshops/inmemory/queries
+[oracle@livelabs aim23]$ sqlplus /nolog
 
-SQL*Plus: Release 23.0.0.0.0 - Production on Fri May 31 17:21:31 2024
-Version 23.4.0.24.05
+SQL*Plus: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Mon Aug 12 16:50:16 2024
+Version 23.5.0.24.07
 
 Copyright (c) 1982, 2024, Oracle.  All rights reserved.
-
-Last Successful login time: Fri May 31 2024 17:19:47 -07:00
-
-Connected to:
-Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - Production
-Version 23.4.0.24.05
 
 SQL> set pages 9999
 SQL> set lines 150
@@ -136,10 +125,10 @@ SQL>
     ----------------------------------------------------------------------------------------------------------
     | Id  | Operation                    | Name      | Rows  | Bytes | Cost (%CPU)| Time     | Pstart| Pstop |
     ----------------------------------------------------------------------------------------------------------
-    |   0 | SELECT STATEMENT             |           |       |       |  3613 (100)|          |       |       |
+    |   0 | SELECT STATEMENT             |           |       |       |  3559 (100)|          |       |       |
     |   1 |  SORT AGGREGATE              |           |     1 |     9 |            |          |       |       |
-    |   2 |   PARTITION RANGE ALL        |           |    41M|   358M|  3613  (12)| 00:00:01 |     1 |     5 |
-    |   3 |    TABLE ACCESS INMEMORY FULL| LINEORDER |    41M|   358M|  3613  (12)| 00:00:01 |     1 |     5 |
+    |   2 |   PARTITION RANGE ALL        |           |    41M|   358M|  3559   (9)| 00:00:01 |     1 |     5 |
+    |   3 |    TABLE ACCESS INMEMORY FULL| LINEORDER |    41M|   358M|  3559   (9)| 00:00:01 |     1 |     5 |
     ----------------------------------------------------------------------------------------------------------
 
 
@@ -150,25 +139,26 @@ SQL>
 
     NAME                                                              VALUE
     -------------------------------------------------- --------------------
-    CPU used by this session                                             16
-    IM scan CUs columns accessed                                        156
-    IM scan CUs pcode aggregation pushdown                              156
+    CPU used by this session                                              8
+    IM scan (dynamic) multi-threaded scans                                1
+    IM scan (dynamic) rows                                         41760941
+    IM scan CUs columns accessed                                        130
+    IM scan CUs pcode aggregation pushdown                              130
     IM scan rows                                                   41760941
     IM scan rows pcode aggregated                                  41760941
-    IM scan rows projected                                               78
+    IM scan rows projected                                               65
     IM scan rows valid                                             41760941
-    physical reads                                                       30
-    session logical reads                                            322465
-    session logical reads - IM                                       316512
-    session pga memory                                             19601592
+    session logical reads                                            320566
+    session logical reads - IM                                       320510
+    session pga memory                                             17635680
     table scans (IM)                                                      5
 
-    12 rows selected.
+    13 rows selected.
 
     SQL>
     ```
 
-    The execution plan shows that we performed a TABLE ACCESS INMEMORY FULL of the LINEORDER table.
+    The execution plan shows that we performed a TABLE ACCESS INMEMORY FULL of the LINEORDER table. Also note that in the statistics section there are a bunch of IM type statistics. This shows that not only was in-memory used but also some of the features used. 
 
 2. Now we will run the same query using the buffer cache. Remember that the LINEORDER table has been fully cached in the KEEP pool. You will notice that we have added a hint called *NO\_INMEMORY*. This will tell the optimizer not to access the data from the IM column store. Compare the query run time with the time from Step 1.
 
@@ -906,4 +896,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Andy Rivenes, Product Manager, Database In-Memory
 - **Contributors** - Maria Colgan, Distinguished Product Manager
-- **Last Updated By/Date** - Andy Rivenes, June 2024
+- **Last Updated By/Date** - Andy Rivenes, Product Manager, Database In-Memory, August 2024

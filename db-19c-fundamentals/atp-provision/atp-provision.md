@@ -4,7 +4,7 @@
 
 > **Note: Oracle Database 23ai is the current long term support release. Check out the following lab for the newest features in the Oracle Database:**
 
-> [Oracle Database 23ai New Features](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3950&clear=RR,180&session=29237226541700)
+> [Oracle Database 23ai New Features](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3950&clear=RR,180&session=29237226541700)
 
 This lab provides a step-by-step guide to help you get started using the Oracle Autonomous Database (Autonomous Data Warehouse [ADW] and Autonomous Transaction Processing [ATP]) on Oracle Cloud. In this lab, you will learn how to provision a new ATP instance.
 
@@ -66,12 +66,12 @@ In this lab, you will:
 
 3. Specify basic information for the autonomous database:
 
-    | **Field**  | **Value** | Note |
-    |---|---|---|
-    | Compartment | (Defaut) | |
-    | Display Name | `OCIDemo` | Enter a memorable name for the database for display purposes |
+    | **Field**     | **Value** | Note                                                                                   |
+    | ------------- | --------- | -------------------------------------------------------------------------------------- |
+    | Compartment   | (Defaut)  |                                                                                        |
+    | Display Name  | `OCIDemo` | Enter a memorable name for the database for display purposes                           |
     | Database Name | `OCIDEMO` | Use letters and numbers only, starting with a letter. Maximum length is 14 characters. |
-    |
+    |               |
 
 
 4. Choose a workload type. Select the workload type for your database from the choices:

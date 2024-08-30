@@ -6,6 +6,8 @@ This lab is finished. We will delete all resources created.
 
 _Estimated Time:_ 5 minutes
 
+[Lab 6 Walkthrough](videohub:1_elpp0ki2)
+
 ## Task 1: Delete resources created using Cloud Shell
 
 In this task we will deleted the resource created using the Cloud Shell.
