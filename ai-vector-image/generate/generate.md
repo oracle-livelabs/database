@@ -48,14 +48,17 @@ This task will have you login to the Jupyter Notebook environment and run the sp
     - When you run a code block there are [ ] next to the code block. If it changes to a [\*] that means it running. If it has a number like [1] then its done running.
     - Passwords and additional information you may need will be found in the "View Login Info" where the Jupyter Notebook link was
 
+**Note: The notebooks can be downloaded in the learn more section for your viewing**
+
 Once you have completed the steps in the notebook please return to the workshop so you can continue to the next lab.
 
 ## Learn More
 
 * [Oracle AI Vector Search Users Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/whats-new-oracle-ai-vector-search.html)
 * [AI Vector Search Blog](https://blogs.oracle.com/database/post/oracle-announces-general-availability-of-ai-vector-search-in-oracle-database-23ai)
+* [Workshop Notebook Download](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/ocw_image_vector_lab.zip)
 
 ## Acknowledgements
 * **Author** - David Start, Product Management
-* **Contributors** -  David Start, Product Management
+* **Contributors** -  David Start, Product Management, Francis Regalado, Product Management
 * **Last Updated By/Date** - David Start, Sept 2024

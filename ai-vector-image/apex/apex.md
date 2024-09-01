@@ -419,5 +419,5 @@ Congradulations, you have built a AI Vector Search enabled application using ima
 
 ## Acknowledgements
 * **Author** - David Start, Product Management
-* **Contributors** -  David Start, Product Management
+* **Contributors** -  David Start, Product Management,  Francis Regalado, Product Management
 * **Last Updated By/Date** - David Start, Sept 2024

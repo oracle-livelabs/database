@@ -44,5 +44,5 @@ This lab assumes you have:
 
 ## Acknowledgements
 * **Author** - David Start, Product Management
-* **Contributors** -  David Start, Product Management
+* **Contributors** -  David Start, Product Management, Francis Regalado, Product Management
 * **Last Updated By/Date** - David Start, Sept 2024
