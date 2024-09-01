@@ -6,7 +6,7 @@ Large Language Models (LLMs) have transformed artificial intelligence by enablin
 
 This workshop outlines a two-step approach to tackle a problem by leveraging two different models. The first model generates descriptions for images, while the second model creates vectors for these textual descriptions. The second model is loaded in the database allowing for both vector generation and AI Vector Search without leaving the database. By separating the tasks, the complexity is reduced, making it easier to use existing models, as very few can handle both images and text simultaneously. This approach not only simplifies the problem but also broadens the range of available large language models (LLMs) since each task is more straightforward on its own.
 
-The workflow diagram would illustrate the following steps:
+The workflow diagram illustrates the following steps:
 
 - Image Input: Start with an image that needs to be described.
 - Description Generation: Use a model to generate a textual description or caption for the image.
