@@ -10,7 +10,7 @@ The workflow diagram illustrates the following steps:
 
 - Image Input: Start with an image that needs to be described.
 - Description Generation: Use a model to generate a textual description or caption for the image.
-- Text Vectorization: Pass the generated description through a second model (embededd in the database) that creates vectors from the text.
+- Text Vectorization: Pass the generated description through a second model (embedded in the database) that creates vectors from the text.
 - APEX Application: Create a quick application leveraging an embedded text model and AI Vector Search
 
 This method makes the solution more versatile since the text embeddings and search occur within the database allowing any application to be developed.
