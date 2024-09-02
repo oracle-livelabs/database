@@ -38,7 +38,7 @@ This task will have you login to the Jupyter Notebook environment and run the sp
 
 5. In the left File Explorer panel open the vector\_lab folder and open the **2\_load\_lab.ipynb** notebook
     ![Image alt text](images/lab2_5.png)
-    ![Image alt text](images/lab2_6.png)
+    ![Image alt text](images/lab2_7.png)
 
 6. Follow the steps in the notebook. A few things to remember:
     - There are markdown blocks and code blocks mixed together
