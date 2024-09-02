@@ -30,11 +30,31 @@ In this lab, you will:
 ### Prerequisites
 
 - Oracle Database 23ai, version 23.4 or above
-- MongoDB Compass [can be downloaded for free from here:](https://www.mongodb.com/docs/compass/current/install/)
+- MongoDB Compass [can be downloaded for free from here](https://www.mongodb.com/docs/compass/current/install/)
 
 
+## Task 1: Connect to MongoDB Compass:
 
-## Task 1: Clean up the environment:
+1. Open the MongoDB Compass and start the new connection:
+
+    ![New Connection](images/new_connection_compass.png)
+
+    - If you install ORDS in non-autonomous database, then you get the connection string during the installation process. The Oracle API for MongoDB connection string is:
+
+        ```
+        <copy>
+        mongodb://[{user}:{password}@]localhost:27017/{user}?authMechanism=PLAIN&authSource=$external&ssl=true&retryWrites=false&loadBalanced=true
+        </copy>
+        ```
+    *Note: Replace the user, password and localhost with yours*
+
+    - For ADB, it is given when enabling the MongoDB API.
+
+2. Connect to the database:
+
+    ![Connect to the database](images/compass_connection.png)
+
+## Task 2: Clean up the environment:
 
 1. Follow these steps to clean up your environment. These steps are only needed in case you're running the workshop more than once. If this is the first time you are using this workshop, you can skip the cleanup.
 
@@ -47,7 +67,7 @@ In this lab, you will:
     </copy>
     ```
 
-## Task 2: Create a native JSON collection
+## Task 3: Create a native JSON collection
 
 1. Option 1: In SQL Developer run:
 
@@ -57,23 +77,23 @@ In this lab, you will:
 
 2. Option 2: Create in MongoDB Compass the collection **CONF\_SCHEDULE**
 
-![Create Collection](images/create_collection.png)
+    ![Create Collection](images/create_collection.png)
 
 
-## Task 3: Import the document(s) from MongoDB Compass into CONF_SCHEDULE
+## Task 4: Import the document(s) from MongoDB Compass into CONF_SCHEDULE
 
 1. Download the [BHRJ_Schedule.json](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/BHRJ_Schedule.json) document.
 
-![Add File](images/add_file.png)
-![Choose File](images/import_data.png)
+    ![Add File](images/add_file.png)
+    ![Choose File](images/import_data.png)
 
 2. Import the BHRJ_Schedule.json file
 
-![Import File](images/import_schedule.png)
-![Show import](images/imported_completed.png)
+    ![Import File](images/import_schedule.png)
+    ![Show import](images/imported_completed.png)
 
 
-## Task 4: Run the JSON-To-Duality Migrator
+## Task 5: Run the JSON-To-Duality Migrator
 
 1. Follow this code to run the JSON-To-Duality Migrator: we will do infer\_schema and generate\_schema together.
 
@@ -103,7 +123,7 @@ In this lab, you will:
     /
     </copy>
     ```
-## Task 5: Validate the newly created objects and check the output from the select statement below
+## Task 6: Validate the newly created objects and check the output from the select statement below
 
 1. In SQL Developer run:
 
@@ -118,7 +138,7 @@ In this lab, you will:
 
 2. In MongoDB Compass after refreshing the databases, click on the **CONF\_SCHEDULE\_DUALITY** collection under the ADMIN database
 
-![Conf Schedule Duality](images/conf_schedule_duality%20collection.png)
+    ![Conf Schedule Duality](images/conf_schedule_duality%20collection.png)
 
 3. In mongosh, verify the number of documents in the **CONF\_SCHEDULE\_DUALITY** collection:
 
