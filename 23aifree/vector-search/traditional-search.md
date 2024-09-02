@@ -25,7 +25,7 @@ This lab assumes you have:
 1.  **Return to the terminal.**
     ![Return to terminal.](images/return-to-terminal.png)
 
-2. **Connect to the database.**
+2. **Connect to the database.** You can connect to the database using any of the TNS aliases listed in 'tnsnames.ora", using the following format: 'user'/'password'@'tns_alias'.
     ```
     <copy>
     podman exec -it oracle_adb-free_1 sqlplus admin/Welcome_12345@myatp_low
@@ -33,7 +33,7 @@ This lab assumes you have:
     ```
     ![Connect to database.](images/connect-to-adb.png)
 
-3. **Install the sample schema.** You'll be installing Oracle's "Customer Orders" sample schema, which stores the data, objects, and relations necessary for a typical retail store. This schema mas been modified to include English product descriptions for us to vectorize later.
+3. **Install the sample schema.** You'll be installing Oracle's "Customer Orders" sample schema, which stores the data, objects, and relations necessary for a typical retail store. This schema mas been modified to include English product descriptions for us to vectorize later. Find out more about Oracle's sample schemas [here](https://docs.oracle.com/en/database/oracle/oracle-database/19/comsc/introduction-to-sample-schemas.html).
 
     ```
     <copy>
@@ -63,6 +63,12 @@ As a retailer, you want customers to easily search your catalog for the clothing
     ![View the products table.](images/view-products.png)
 
 3. **View the product details.** The product details are stored as a JSON document. Let's see what details are in here!
+    ```
+    <copy>
+    SELECT product_name, JSON_SERIALIZE(product_details PRETTY) as product_details
+    FROM co.products;
+    </copy>
+    ```
     ![View the product details.](images/view-product-details.png)
 
 4. **Traditionally search your catalog for the word "professional".** 
