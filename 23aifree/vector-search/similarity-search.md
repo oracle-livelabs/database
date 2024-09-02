@@ -21,93 +21,108 @@ This lab assumes you have:
 
 ## Task 1: Prepare the Workspace
 
-1. **Return to the terminal, and connect to the database.**
+1. **Return to the terminal and connect to the database.**
     ```
     <copy>
     podman exec -it oracle_adb-free_1 sqlplus admin/Welcome_12345@myatp_low
     </copy>
     ```
+    ![Connect to the database.](images/connect-to-adb.png)
 
 2. **Create a folder for our vector embedding model in the PDB.**
     ```
     <copy>
-    CREATE OR REPLACE DIRECTORY DM_DUMP as 'models';
+    CREATE OR REPLACE DIRECTORY DM_DUMP AS 'models';
     </copy>
     ```    
+    ![Create database directory.](images/create-database-directory.png)
 
 3. **Copy the absolute file path of the PDB's working directory.** Copy the file path returned by the following command.
     ```
     <copy>
-    select directory_path from all_directories where directory_name = 'DM_DUMP';
+    SELECT directory_path FROM all_directories WHERE directory_name = 'DM_DUMP';
     </copy>
     ```
+    ![Output the database directory path.](images/output-db-dir-path.png)
 
-4. **Disconnect from the database. Move the vector model into the PDB's working directory.**
+4. **Disconnect from the database.**
     ```
     <copy>
     exit
+    </copy>
+    ```
+    ![Disconnect from the database.](images/disconnect-from-adb.png)
+
+5. **Move the vector model into the PDB's working directory.** Paste the following command into the terminal, and then paste the path generated in step 3. This will not produce any output, if successful.
+    ```
+    <copy>
     podman exec -it oracle_adb-free_1 cp -r u01/all-MiniLM-L12-v2.onnx </copy> replace-with-working-directory
     </copy>
     ```
 
-5. **Return to SQL Developer Web.**
+6. **Return to SQL Developer Web.**
+    ![Return to SQL Developer.](images/return-to-sql-dev.png)
 
-6. **Confirm the model appears in the database directory.**
+
+7. **Confirm the model appears in the database directory.**
     ```
     <copy>
     SELECT * FROM DBMS_CLOUD.LIST_FILES('DM_DUMP');
     </copy>
     ```
-7. **Load the ONNX model into the database.**
+    ![Confirm model in database directory.](images/list-db-dir-files.png)
+
+8. **Load the ONNX model into the database.** Learn more on how to use this function and the model requirements [here](https://docs.oracle.com/en/database/oracle/oracle-database/23/arpls/dbms_vector1.html#GUID-7F1D7992-D8F7-4AD9-9BF6-6EFFC1B0617A).
     ```
     <copy>
     EXECUTE DBMS_VECTOR.LOAD_ONNX_MODEL('DM_DUMP','all-MiniLM-L12-v2.onnx','doc_model');
     </copy>
     ```
-You may now proceed to the next lab.
+    ![Load the embedding-model.](images/load-model.png)
+
+   
 
 ## Task 2: Generate, Store, & Query Vector Data
 
-1. **Transform the product descriptions into vectors.**
+1. **Generate and store the product description vectors.**
     ```
     <copy>
-    create table product_vectors as 
-    select product_id, product_name, 
-    JSON_VALUE(product_details, '$.description') 
-    as product_description, TO_VECTOR(VECTOR_EMBEDDING(doc_model USING JSON_VALUE(product_details, '$.description') as data)) as embedding from co.products;
-
-    select * from product_vectors;
+    CREATE TABLE product_vectors AS 
+        SELECT product_id, product_name, JSON_VALUE(product_details, '$.description') AS product_description, VECTOR_EMBEDDING(doc_model USING JSON_VALUE(product_details, '$.description') AS data) AS embedding 
+        FROM co.products;
     </copy>
     ```
+    ![Generate description vectors.](images/generate-vectors.png)
 
-2. Search for product description vectors based on their similarity to the word "professional".
+2. **Using vector search, retrieve the 5 products most similar to the word "professional".** By default, VECTOR_DISTANCE uses the cosine formula as it's distance metric, but you can change the metric as you see fit. We recommend using the metric suggested by the embedding model, in this case it was cosine. Learn more about distance metrics [here](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/vector-distance-metrics.html).
     ```
     <copy>
-    select product_name, product_description, vector_distance(embedding, to_vector(vector_embedding(doc_model using 'professional' as data))) as vector_distance
-    FROM PRODUCT_VECTORS
-    ORDER BY distance
-    FETCH EXACT FIRST 10 ROWS ONLY;
+    SELECT product_name, product_description, VECTOR_DISTANCE(embedding, VECTOR_EMBEDDING(doc_model USING 'professional' AS data)) AS vector_distance
+    FROM product_vectors
+    ORDER BY vector_distance
+    FETCH EXACT FIRST 5 ROWS ONLY;
     </copy>
     ```
 
     This is a vast improvement from the empty result set we got from our traditional search! We can see that the similarity search has returned clothing items described with words contextually similar to "professional". 
+    ![Similarity search on the word professional.](images/similarity-search-professional.png)
     
-
-3. Search for product description vectors based on their similarity to the word "slacks".
+3. **Using vector search, retrieve the 5 products most similar to the word "slacks".**
     ```
     <copy>
-    select product_name, PRODUCT_DESCRIPTION, vector_distance(embedding, to_vector(vector_embedding(doc_model using 'slacks' as data))) as vector_distance
-    FROM PRODUCT_VECTORS
-    ORDER BY distance
-    FETCH EXACT FIRST 10 ROWS ONLY;
+    SELECT product_name, product_description, VECTOR_DISTANCE(embedding, VECTOR_EMBEDDING(doc_model USING 'slacks' AS data)) AS vector_distance
+    FROM product_vectors
+    ORDER BY vector_distance
+    FETCH EXACT FIRST 5 ROWS ONLY;
     </copy>
     ```
 
     Once again--big improvements! Notice that the model was able to relate slacks to other bottoms, and use the term's professional context to find other formal wear. So, despite there not being a product description containing the word "slacks", viable results are still returned due to their similarity to the query. 
+    ![Similarity search on the word slacks.](images/similarity-search-slacks.png)
 
-## Task 3: Combine Business Data with Similarity Search
-
-    You may now proceed to the next lab.
+**You've completed the workshop!**
+<!-- ## Task 3: Combine Business Data with Similarity Search -->
+<!-- You may now proceed to the next lab. -->
 
 ## Acknowledgements
 - **Authors** - Brianna Ambler, Database Product Management
