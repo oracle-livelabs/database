@@ -25,7 +25,6 @@ In this lab, you will:
 ### Prerequisites
 
 - Oracle Database 23.5 with direct OS access as oracle user
-- WinSCP or similar (for transferring the file)
 - MongoDB Compass installed on your machine
 - All previous labs successfully completed
 
@@ -34,70 +33,42 @@ In this lab, you will:
 
 1. Follow these steps to clean up your environment:
 
-    ```
+    ```sql
     <copy>
-    drop TABLE json_file_content purge;
-    drop TABLE movies_content purge;
+    drop TABLE if exists json_file_content purge;
+    drop TABLE if exists movies_content purge;
     </copy>
     ```
 
-## Task 2: Create the json_files directory and transfer the movies.json file on the DB server
-
-1. Create the _json\_files_ directory under **/home/oracle/** and then transfer the file _movies.json_ to **/home/oracle/json_files** on the DB server.
-
-    ```
-    <copy>cd /home/oracle/
-    mkdir json_files</copy>
-    ```
-    ![Upload JSON file](images/upload_json_file.png)
-    ![Upload JSON file](images/upload_json_file2.png)
-
-## Task 3: Create the Database Directory Object
+## Task 2: Create the JSON collection table
 
 1. Follow this code to run:
 
-    ```
-    <copy>
-    CREATE OR REPLACE DIRECTORY json_files_dir AS '/home/oracle/json_files';
-    </copy>
-    ```
-
-## Task 4: Create the External Table
-
-1. Follow this code to run:
-
-    ```
-    <copy>
-    CREATE TABLE json_file_content (data JSON)
-        ORGANIZATION EXTERNAL
-            (TYPE ORACLE_BIGDATA
-            ACCESS PARAMETERS (
-            com.oracle.bigdata.fileformat=jsondoc
-            com.oracle.bigdata.json.unpackarrays=true
-            )
-        LOCATION (json_files_dir:'movies.json'))
-        PARALLEL
-        REJECT LIMIT UNLIMITED;
-    </copy>
-    ```
-
-## Task 5: Create the JSON collection table
-
-1. Follow this code to run:
-
-    ```
+    ```sql
     <copy>
     CREATE JSON COLLECTION TABLE movies_content;
     </copy>
     ```
 
-## Task 6: Insert the data into the table granted
+## Task 3: Insert the data into the table granted
 
 1. Follow this code to run:
 
-    ```
+    ```sql
     <copy>
-    insert into movies_content
+    CREATE OR REPLACE DIRECTORY json_files_dir AS 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/c4u04/b/moviestream_gold/o/movie';
+    
+    CREATE TABLE admin.json_file_content (data JSON)
+    ORGANIZATION EXTERNAL
+        (TYPE ORACLE_BIGDATA
+        ACCESS PARAMETERS (
+        com.oracle.bigdata.fileformat=jsondoc
+        com.oracle.bigdata.json.unpackarrays=true
+        )
+    LOCATION (json_files_dir:'movies.json'))
+    PARALLEL
+    REJECT LIMIT UNLIMITED;
+        insert into movies_content
     select * from external (
         (data json)
         TYPE ORACLE_BIGDATA
@@ -105,17 +76,17 @@ In this lab, you will:
         com.oracle.bigdata.fileformat=jsondoc
         com.oracle.bigdata.json.unpackarrays=true
         )
-        location ('https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/movies.json')
+        location ('https://objectstorage.us-ashburn-1.oraclecloud.com/n/c4u04/b/moviestream_gold/o/movie/movies.json')
     );
     commit;
     </copy>
     ```
 
-## Task 7: Test the newly create JSON collection table in the Oracle database. List all movies having a name like %father%
+## Task 4: Test the newly create JSON collection table in the Oracle database. List all movies having a name like %father%
 
 
-1. In SQL Developer run:
-    ```
+1. In SQL Developer Web run:
+    ```sql
     <copy>
     select m.data.title from movies_content m where m.data.title like '%father%';
     </copy>
@@ -124,7 +95,7 @@ In this lab, you will:
 
 2. In MongoDB Compass, for _MOVIES\_CONTENT_ filter on the name for father:
 
-    ```
+    ```sql
     <copy>
     {title: /father/}
     </copy>
@@ -138,5 +109,5 @@ In this lab, you will:
 ## Acknowledgements
 
 * **Author** - Julian Dontcheff, Hermann Baer
-* **Contributors** -  David Start, Ranjan Priyadarshi
+* **Contributors** -  David Start, Ranjan Priyadarshi, Kevin Lazarz
 * **Last Updated By/Date** - Carmen Berdant, Technical Program Manager, August 2024
