@@ -72,7 +72,7 @@ This lab assumes you have:
     ```
     ![Confirm model in database directory.](images/list-db-dir-files.png)
 
-8. **Load the ONNX model into the database.**
+8. **Load the ONNX model into the database.** Learn more on how to use this function and the model requirements [here](https://docs.oracle.com/en/database/oracle/oracle-database/23/arpls/dbms_vector1.html#GUID-7F1D7992-D8F7-4AD9-9BF6-6EFFC1B0617A).
     ```
     <copy>
     EXECUTE DBMS_VECTOR.LOAD_ONNX_MODEL('DM_DUMP','all-MiniLM-L12-v2.onnx','doc_model');
@@ -80,7 +80,7 @@ This lab assumes you have:
     ```
     ![Load the embedding-model.](images/load-model.png)
 
-You may now proceed to the next lab.
+   
 
 ## Task 2: Generate, Store, & Query Vector Data
 
@@ -88,16 +88,16 @@ You may now proceed to the next lab.
     ```
     <copy>
     CREATE TABLE product_vectors AS 
-        SELECT product_id, product_name, JSON_VALUE(product_details, '$.description') AS product_description, TO_VECTOR(VECTOR_EMBEDDING(doc_model USING JSON_VALUE(product_details, '$.description') AS data)) AS embedding 
+        SELECT product_id, product_name, JSON_VALUE(product_details, '$.description') AS product_description, VECTOR_EMBEDDING(doc_model USING JSON_VALUE(product_details, '$.description') AS data) AS embedding 
         FROM co.products;
     </copy>
     ```
     ![Generate description vectors.](images/generate-vectors.png)
 
-2. **Retrieve the 5 products most similar to the word professional using vector search."**
+2. **Using vector search, retrieve the 5 products most similar to the word "professional".** By default, VECTOR_DISTANCE uses the cosine formula as it's distance metric, but you can change the metric as you see fit. We recommend using the metric suggested by the embedding model, in this case it was cosine. Learn more about distance metrics [here](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/vector-distance-metrics.html).
     ```
     <copy>
-    SELECT product_name, product_description, VECTOR_DISTANCE(embedding, TO_VECTOR(VECTOR_EMBEDDING(doc_model USING 'professional' AS data))) AS vector_distance
+    SELECT product_name, product_description, VECTOR_DISTANCE(embedding, VECTOR_EMBEDDING(doc_model USING 'professional' AS data)) AS vector_distance
     FROM product_vectors
     ORDER BY vector_distance
     FETCH EXACT FIRST 5 ROWS ONLY;
@@ -107,10 +107,10 @@ You may now proceed to the next lab.
     This is a vast improvement from the empty result set we got from our traditional search! We can see that the similarity search has returned clothing items described with words contextually similar to "professional". 
     ![Similarity search on the word professional.](images/similarity-search-professional.png)
     
-3. **Search for product description vectors based on their similarity to the word "slacks".**
+3. **Using vector search, retrieve the 5 products most similar to the word "slacks".**
     ```
     <copy>
-    SELECT product_name, product_description, VECTOR_DISTANCE(embedding, TO_VECTOR(VECTOR_EMBEDDING(doc_model USING 'slacks' AS data))) AS vector_distance
+    SELECT product_name, product_description, VECTOR_DISTANCE(embedding, VECTOR_EMBEDDING(doc_model USING 'slacks' AS data)) AS vector_distance
     FROM product_vectors
     ORDER BY vector_distance
     FETCH EXACT FIRST 5 ROWS ONLY;
@@ -120,8 +120,9 @@ You may now proceed to the next lab.
     Once again--big improvements! Notice that the model was able to relate slacks to other bottoms, and use the term's professional context to find other formal wear. So, despite there not being a product description containing the word "slacks", viable results are still returned due to their similarity to the query. 
     ![Similarity search on the word slacks.](images/similarity-search-slacks.png)
 
+**You've completed the workshop!**
 <!-- ## Task 3: Combine Business Data with Similarity Search -->
-You may now proceed to the next lab.
+<!-- You may now proceed to the next lab. -->
 
 ## Acknowledgements
 - **Authors** - Brianna Ambler, Database Product Management
