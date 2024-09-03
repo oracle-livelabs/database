@@ -44,7 +44,6 @@ In this lab, you will:
     <copy>db.createCollection('SALES');
     </copy>
     ```
-*Note: you do not need to explicitly create a collection in Mongo, you can just insert data, and a collection will be created.*
 
 ## Task 3: Populate the SALES collections with data
 
