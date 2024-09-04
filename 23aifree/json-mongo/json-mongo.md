@@ -52,7 +52,7 @@ In this lab, you will:
 
     <if type="sandbox">
 
-    In your LiveLabs Sandbox enviorenment, the user is `admin`. You can find the password for the user on the **View Login Info** 
+    In your LiveLabs Sandbox environment, the user is `admin`. You can find the password for the user on the **View Login Info** 
 
     ![ADB Admin password in the LiveLabs Sandbox](images/adb-admin-password.png " ")
 

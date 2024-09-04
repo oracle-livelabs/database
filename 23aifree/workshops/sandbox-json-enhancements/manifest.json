@@ -13,11 +13,6 @@
             "filename": "../../introduction/intro-json-enhancements.md"
         },
         {
-            "title": "Get Started with LiveLabs",
-            "description": "Get Started with LiveLabs",
-            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
-        },
-        {
             "title": "Lab 1: Configure your ADB instance",
             "description": "Configure your ADB instance for this workshop",
             "filename": "../../json-enable-mongo-api/json-enable-mongo-api.md"
