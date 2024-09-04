@@ -23,7 +23,7 @@ In this lab, you will:
 
 ## Task 1: Interact with Oracle Database using Mongo API
 
-1. First, you must set the URI to the Mongo API running in ORDS on your machine. You can find the URI in the Autonomous Database console in the *`Tool Configuration`* tab.
+1. First, you must set the URI to the Mongo API running in ORDS on your machine. You can find the URI in the Autonomous Database console in the *Tool Configuration* tab.
 
     ![Copy Mongo URI](images/copy-mongo-uri.png " ")
 
@@ -35,7 +35,7 @@ In this lab, you will:
     </copy>
     ```
 
-    Let's create an environment variabale called `URI` which contains the MongoDB URI including the user and password information.
+    Let's create an environment variable called *URI* which contains the MongoDB URI including the user and password information.
 
     ```bash
     $ <copy>
@@ -46,10 +46,11 @@ In this lab, you will:
     Example:
 
     ```
-    export URI='mongodb://admin:*redacted*@ATP3834*redacted*.adb.us-ashburn-1.oraclecloudapps.com:27017/admin?authMechanism=PLAIN&authSource=$external&tls=true&retryWrites=false&loadBalanced=true'</copy>
+    export URI='mongodb://admin:*redacted*@ATP3834*redacted*.adb.us-ashburn-1.oraclecloudapps.com:27017/admin?authMechanism=PLAIN&authSource=$external&tls=true&retryWrites=false&loadBalanced=true'
     ```
 
-    **Please note: ** You may need to escape characters. Please click [this link](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/mongo-using-oracle-database-api-mongodb.html#ADBSA-GUID-44088366-81BF-4090-A5CF-09E56BB2ACAB) to learn how to escape characters in the URL. 
+    > **_NOTE:_** Please make sure you replace both the user and password with the one provided. Also, keep in mind that the **[user]** tag needs to be updated in two places.
+   You might need to escape some characters as well. Please check [this link](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/mongo-using-oracle-database-api-mongodb.html#GUID-44088366-81BF-4090-A5CF-09E56BB2ACAB) to learn how to escape special characters in the URL.
 
 2. Before we connect to the Mongo Shell, let's populate our database using the Mongo Tools. You will use a document from Object Storage to seed the data in your **movie** collection.
 

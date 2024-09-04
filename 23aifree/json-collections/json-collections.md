@@ -24,12 +24,12 @@ In this lab, you will:
 
 ## Task 1: Create Collection
 
-1. Now that the ATP instance is available, click in the *Database actions* dropdown list and select **View all database actions**
+1. Click in the *Database actions* dropdown list and select **View all database actions**
 
 	![DB Actions](images/dbaction1.png)
 
 
-2. Below you can find the Database Actions homepage. 
+2. Below you can find the Database Actions homepage.
 
 	![Homepage Database Actions](./images/homepage-dbactions.png)
 
