@@ -16,9 +16,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-- Oracle Database 23ai, version 23.4 or above
 - All previous labs successfully completed
-
 
 ## Task 1: Run a query without an index
 

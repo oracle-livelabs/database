@@ -12,19 +12,18 @@ Estimated Time: 20 minutes
 
 In this lab, you will:
 
-* Create Collection
-* Insert First Document
-* Find JSON documents in a collection
-* Learn about JSON and Constraints
+* Create Collection using Database Actions|JSON
+* Insert First Document using Database Actions|JSON
+* Find JSON documents in a collection using Database Actions|JSON
+* Learn about JSON and Constraints 
 
 ### Prerequisites
 
-- Oracle Database 23ai, version 23.4 or above
 - All previous labs successfully completed
 
 ## Task 1: Create Collection
 
-1. Click in the *Database actions* dropdown list and select **View all database actions**
+1. Click in the *Database Actions* dropdown list and select **View all database actions**
 
 	![DB Actions](images/dbaction1.png)
 
