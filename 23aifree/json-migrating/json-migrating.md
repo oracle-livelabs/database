@@ -6,9 +6,7 @@ Database migrations from MongoDB to Oracle can be done using external tables if 
 
 The ORACLE_BIGDATA adapter for external tables can now (in Oracle Database 23ai) stream external JSON sources into the database making it easy and efficient query and load JSON stored in text files. In this lab, we will migrate a JSON collection called MOVIES into Oracle Database 23.5 and will test the end-result from both SQL Developer and MongoDB Compass.
 
-
 Estimated Time: 10 minutes
-
 
 ### Objectives
 
@@ -21,13 +19,10 @@ In this lab, you will:
 - Insert the data from the external table to the JSON collection table
 - Validate the newly created collection table
 
-
 ### Prerequisites
 
-- Oracle Database 23.5 with direct OS access as oracle user
 - MongoDB Compass installed on your machine
 - All previous labs successfully completed
-
 
 ## Task 1: Clean up the environment:
 
