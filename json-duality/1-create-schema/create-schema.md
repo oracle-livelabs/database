@@ -28,31 +28,31 @@ This lab assumes you have:
 
 2. Login as the `CLASSMATE` user. To do this, Click on the drop-down arrow to the right of the `ADMIN` user and click *Sign Out* . 
 
-![showing the schema drop-down-menu](./images/lab010102a.png)
+   ![showing the schema drop-down-menu](./images/lab010102a.png)
 
-At the Sign-in screen enter:
+   At the Sign-in screen enter:
 
-  Username:  *CLASSMATE*
-  Password:  *College2024#*
+   Username:  *CLASSMATE*
+   Password:  *College2024#*
 
-and click the "Sign in" button.
+   and click the "Sign in" button.
 
-![showing the sign-in screen](./images/lab010102b.png)
+   ![showing the sign-in screen](./images/lab010102b.png)
 
-This will bring you to the "Database Actions Launchpad".
+   This will bring you to the "Database Actions Launchpad".
 
-(If it's the first time you are accessing the Launchpad, your default homepage will be the "Development" page.  If not, click the "Development" tab to display the development menu.) 
+   (If it's the first time you are accessing the Launchpad, your default homepage will be the "Development" page.  If not, click the "Development" tab to display the development menu.) 
 
-Click "SQL" in the menu on the left hand side of the screen. You will now be at the SQL Worksheet screen. 
+   Click "SQL" in the menu on the left hand side of the screen. You will now be at the SQL Worksheet screen. 
 
-![showing the SQL drop-down-menu](./images/lab010102c.png)
+   ![showing the SQL drop-down-menu](./images/lab010102c.png)
 
 
-We're now ready to start creating our tables.
+   We're now ready to start creating our tables.
 
 3. We will start by creating a table called: `student`.
 
-Copy and paste the following code in the SQL Worksheet pane. Click "Run Script" to execute the code.  
+   Copy and paste the following code in the SQL Worksheet pane. Click "Run Script" to execute the code.  
 
     ```
     <copy>
@@ -90,16 +90,16 @@ Copy and paste the following code in the SQL Worksheet pane. Click "Run Script" 
 
    ![Showing the terminal](images/lab010104a.png " ")
 
-You should see 12 rows created. 
+   You should see 12 rows created. 
 
-Verify the contents of the table you just created by clicking the "Run Script" button-
+   Verify the contents of the table you just created by clicking the "Run Script" button-
 
-    ```
-    <copy>
-    SELECT * FROM student ;
-    </copy>
-    ```
-You should see the following-
+      ```
+      <copy>
+      SELECT * FROM student ;
+      </copy>
+      ```
+   You should see the following:
 
    ![Showing the select student](images/lab010104b.png " ")
 
@@ -137,17 +137,17 @@ You should see the following-
 
    ![Showing the create teacher](images/lab010106a.png " ")
 
-You should see 8 rows inserted.
+   You should see 8 rows inserted.
 
-You can also verify the contents of the table you just created by running the following-
+   You can also verify the contents of the table you just created by running the following-
 
-    ```
-    <copy>
-    SELECT * FROM teacher ;
-    </copy>
-    ```
+      ```
+      <copy>
+      SELECT * FROM teacher ;
+      </copy>
+      ```
 
-You should see the following-
+   You should see the following:
 
    ![Showing the create teacher](images/lab010106b.png " ")
 
@@ -175,7 +175,7 @@ You should see the following-
    ![Showing the create course](images/lab010107.png " ")
 
 
-Once the `course` table is created, populate the `course` table with the following entries.
+   Once the `course` table is created, populate the `course` table with the following entries.
 
     ```
     <copy>
@@ -205,11 +205,11 @@ Once the `course` table is created, populate the `course` table with the followi
     </copy>
     ```
 
-You should see 11 rows inserted.
+   You should see 11 rows inserted.
 
    ![Showing the insert into course](images/lab010108a.png " ")
 
-You can also verify the contents of the table you just created-
+   You can also verify the contents of the table you just created-
 
     ```
     <copy>
@@ -217,7 +217,7 @@ You can also verify the contents of the table you just created-
     </copy>
     ```
 
-You should see the following-
+   You should see the following:
 
    ![Showing the select from course](images/lab010108b.png " ")
 
@@ -266,9 +266,9 @@ You should see the following-
     ```
    ![Showing the insert into student course](images/lab010110a.png " ")
 
-You should see 17 rows inserted.
+   You should see 17 rows inserted.
 
-You can also verify the contents of the table you just created issuing the following command-
+   You can also verify the contents of the table you just created issuing the following command-
 
     ```
     <copy>
@@ -276,7 +276,7 @@ You can also verify the contents of the table you just created issuing the follo
     </copy>
     ```
 
-You should see the following-
+   You should see the following:
 
    ![Showing the select student course](images/lab010110b.png " ")
 

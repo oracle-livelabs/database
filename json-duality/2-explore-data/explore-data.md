@@ -25,186 +25,199 @@ Oracle Database 23ai introduces a new JSON Schema package `dbms_json_schema` to 
 
 We're now ready to describe the JSON documents for the tables we just created-
 
-1. We can start by viewing the JSON Schema of the `student` table. Make sure to use "Run Script" to view the document pretty formated- 
+1. We can start by viewing the JSON Schema of the `student` table. Make sure to use "Run Script" to view the document pretty formatted:
 
-   ```
-   <copy>
-   SELECT json_serialize(dbms_json_schema.describe('STUDENT') PRETTY) "Student";
-   </copy>
-   ```
+      ```
+      <copy>
+      SELECT json_serialize(dbms_json_schema.describe('STUDENT') PRETTY) "Student";
+      </copy>
+      ```
 
-   You should see the following-
-   ![Showing the json-schema for student](images/lab020101.png " ")
+      You should see the following:
+
+      ![Showing the json-schema for student](images/lab020101.png " ")
  
-**NOTE:** You may have noticed we are able to use the *PRETTY* command to see the JSON document contents formatted in an easy to read format.
+      **NOTE:** You may have noticed we are able to use the *PRETTY* command to see the JSON document contents formatted in an easy to read format.
 
-2. Next we can view the JSON Schema of the `teacher` table- 
+2. Next we can view the JSON Schema of the `teacher` table:
 
-   ```
-   <copy>
-   SELECT json_serialize(dbms_json_schema.describe('TEACHER') PRETTY) "Teacher";
-   </copy>
-   ```
+      ```
+      <copy>
+      SELECT json_serialize(dbms_json_schema.describe('TEACHER') PRETTY) "Teacher";
+      </copy>
+      ```
 
-You should see the following-
-   ![Showing the json-schema for teacher](images/lab020102.png " ")
+      You should see the following:
+      
+      ![Showing the json-schema for teacher](images/lab020102.png " ")
 
- *NOTE:* Feel free to resize the window size of the "Script Output" pane to view more of the JSON document. 
+      *NOTE:* Feel free to resize the window size of the "Script Output" pane to view more of the JSON document. 
 
-3. View the JSON Schema of the `course` table- 
+3. View the JSON Schema of the `course` table:
 
-   ```
-   <copy>
-   SELECT json_serialize(dbms_json_schema.describe('COURSE') PRETTY) "Course";
-   </copy>
-   ```
+      ```
+      <copy>
+      SELECT json_serialize(dbms_json_schema.describe('COURSE') PRETTY) "Course";
+      </copy>
+      ```
 
-You should see the following-
-   ![Showing the json-schema for course](images/lab020103.png " ")
+      You should see the following:
 
- *NOTE:* Feel free to resize the window size of the "Script Output" pane to view more of the JSON document. 
+      ![Showing the json-schema for course](images/lab020103.png " ")
+
+      *NOTE:* Feel free to resize the window size of the "Script Output" pane to view more of the JSON document. 
 
 
-4. It is also possible to display the contents of just the JSON Document. We can try this with the `course` table. We can view the contents of the `course_info` document in the `course` table by issueing the following command - 
+4. It is also possible to display the contents of just the JSON Document. We can try this with the `course` table. We can view the contents of the `course_info` document in the `course` table by issueing the following command:
 
-   ```
-   <copy>
-   SELECT json_serialize(course_info pretty) FROM course;
-   </copy>
-   ```
+      ```
+      <copy>
+      SELECT json_serialize(course_info pretty) FROM course;
+      </copy>
+      ```
 
-You should see the following-
-   ![Showing the json-schema for course info](images/lab020104.png " ")
+      You should see the following:
+
+      ![Showing the json-schema for course info](images/lab020104.png " ")
 
 
 5. We can also look at the JSON document for a specific Course: **MATH_01**
 
-   ```
-   <copy>
-   SELECT json_serialize(course_info PRETTY) "courseInfo"
-   FROM   classmate.course c
-   WHERE  c.course_name = 'MATH_01' ;
-   </copy>
-   ```
+      ```
+      <copy>
+      SELECT json_serialize(course_info PRETTY) "courseInfo"
+      FROM   classmate.course c
+      WHERE  c.course_name = 'MATH_01' ;
+      </copy>
+      ```
 
-You should see the following-
-   ![Showing the json-schema for a single course](images/lab020105.png " ")
+      You should see the following:
+
+      ![Showing the json-schema for a single course](images/lab020105.png " ")
 
 
 6. We can also look at the JSON document for an individual Student: **Jerri**
 
-   ```
-   <copy>
-   SELECT student_name, json_serialize(student_info PRETTY) "studentInfo"
-   FROM   classmate.student s
-   WHERE  s.student_name = 'Jerri' ;
-   </copy>
-   ```
+      ```
+      <copy>
+      SELECT student_name, json_serialize(student_info PRETTY) "studentInfo"
+      FROM   classmate.student s
+      WHERE  s.student_name = 'Jerri' ;
+      </copy>
+      ```
 
-You should see the following-
-   ![Showing the json-schema for a specific student](images/lab020106.png " ")
+      You should see the following:
+
+      ![Showing the json-schema for a specific student](images/lab020106.png " ")
 
 
 7. It is also possible to view the contents of a relational table as a JSON document with Oracle SQL.  
 
-   ```
-   <copy>
-   SELECT JSON {*} FROM classmate.student ;
-   </copy>
-   ```
+      ```
+      <copy>
+      SELECT JSON {*} FROM classmate.student ;
+      </copy>
+      ```
 
-You should see the following-
-   ![Showing json output for a student](images/lab020107.png " ")
+      You should see the following:
+
+      ![Showing json output for a student](images/lab020107.png " ")
 
 
 8. We can also perform a *Query-By-Example* (QBE) operation on a JSON document in Oracle. 
 
-   In the next example we will see how to query the document to only view Students whose majors are in Biology or Chemistry. You can do this by running the following command-
+      In the next example we will see how to query the document to only view Students whose majors are in Biology or Chemistry. You can do this by running the following command-
 
-   ```
-   <copy>
-   SELECT JSON {*}
-   FROM   classmate.student 
-   WHERE  json_value(student_info, '$.Major') IN ('Biology', 'Chemistry');
-   </copy>
-   ```
+      ```
+      <copy>
+      SELECT JSON {*}
+      FROM   classmate.student 
+      WHERE  json_value(student_info, '$.Major') IN ('Biology', 'Chemistry');
+      </copy>
+      ```
 
-You should see the following-
-   ![Showing json output for all students in Biology and Chemistry](images/lab020108.png " ")
+      You should see the following:
 
-## TASK 2: Using Oracle `JSON_DATAGUIDE`
+      ![Showing json output for all students in Biology and Chemistry](images/lab020108.png " ")
+
+## Task 2: Using Oracle `JSON_DATAGUIDE`
 
 One of the benefits of using an Oracle database to store JSON collections is that it is possible to leverage other Oracle features including Oracle Machine Learning algorithms. But many of the Oracle tools require data to be in a relatinal format. To ease this requirement Oracle has a feature called `JSON_DATAGUIDE`. `JSON_DATAGUIDE` provides the ability to render the contents of a JSON document to appear as a database relational view that can then be queried using the SQL language.
 
 1. For our first step we will create a JSON_DATAGUIDE view for the `student` table. 
 
-   ```
-   <copy>
-   DECLARE     
-      dGuide CLOB ; 
-   BEGIN
-      SELECT JSON_DATAGUIDE(student_info, DBMS_JSON.FORMAT_HIERARCHICAL)     
-      INTO   dGuide from student ;
-       
-      dbms_json.create_view('DG_AutoView', 'STUDENT', 'student_info', dGuide ); 
-   END; 
-   </copy>
-   ```
+      ```
+      <copy>
+      DECLARE     
+         dGuide CLOB ; 
+      BEGIN
+         SELECT JSON_DATAGUIDE(student_info, DBMS_JSON.FORMAT_HIERARCHICAL)     
+         INTO   dGuide from student ;
+         
+         dbms_json.create_view('DG_AutoView', 'STUDENT', 'student_info', dGuide ); 
+      END; 
+      </copy>
+      ```
 
-You should see the following-
-   ![Showing compilation of JSON_DATAGUIDE](images/lab020201.png " ")
+      You should see the following:
+
+      ![Showing compilation of JSON_DATAGUIDE](images/lab020201.png " ")
 
 
 2. You can describe the view to see the JSON document keys listed as columns. 
 
-   ```
-   <copy>
-   DESC DG_AutoView  
-   </copy>
-   ```
+      ```
+      <copy>
+      DESC DG_AutoView  
+      </copy>
+      ```
 
-You should see the following-
-   ![Showing describe of student dataguide view](images/lab020202.png " ")
+      You should see the following:
 
-**NOTE:** The column names for the document keys are case-sensitive, so you will need to take that into account when querying the view. 
+      ![Showing describe of student dataguide view](images/lab020202.png " ")
 
-A regular SQL query can display the contents of the view for us. 
+      **NOTE:** The column names for the document keys are case-sensitive, so you will need to take that into account when querying the view. 
 
-   ```
-   <copy>
-   SELECT * FROM DG_AutoView ORDER BY 1 ;
-   </copy>
-   ```
+      A regular SQL query can display the contents of the view for us. 
 
-You should see the following-
-   ![Showing select from dataguide view](images/lab020203.png " ")
+      ```
+      <copy>
+      SELECT * FROM DG_AutoView ORDER BY 1 ;
+      </copy>
+      ```
 
-When querying the view, you will need to enclose the case-sensitive columns in double quotes.  
+      You should see the following:
 
-   ```
-   <copy>
-   SELECT student_id, "lastName", "Major"  
-   FROM  DG_AutoView ORDER BY 1 ;
-   </copy>
-   ```
+      ![Showing select from dataguide view](images/lab020203.png " ")
 
-You should see the following-
-   ![Showing select from dataguide view](images/lab020204.png " ")
+      When querying the view, you will need to enclose the case-sensitive columns in double quotes.  
 
-Let's see what happens if we try to update the document using the view.
- 
-   ```
-   <copy>
-   UPDATE DG_AutoView 
-   SET    "Major" = 'Law'
-   WHERE  student_id = 1015 ;
-   </copy>
-   ```
+      ```
+      <copy>
+      SELECT student_id, "lastName", "Major"  
+      FROM  DG_AutoView ORDER BY 1 ;
+      </copy>
+      ```
 
-You should see the following-
-   ![Showing DML on dataguide view](images/lab020205.png " ")
+      You should see the following:
 
-**NOTE** This operation is expected to FAIL, as `DG_AUTOVIEW` is a view and as such it's not updateable. This restriction will be addressed in the next lab where we will be using Oracle Database 23ai JSON-Relational Duality Views.   
+      ![Showing select from dataguide view](images/lab020204.png " ")
+
+      Let's see what happens if we try to update the document using the view.
+   
+      ```
+      <copy>
+      UPDATE DG_AutoView 
+      SET    "Major" = 'Law'
+      WHERE  student_id = 1015 ;
+      </copy>
+      ```
+
+      You should see the following
+
+      ![Showing DML on dataguide view](images/lab020205.png " ")
+
+      **NOTE** This operation is expected to FAIL, as `DG_AUTOVIEW` is a view and as such it's not updateable. This restriction will be addressed in the next lab where we will be using Oracle Database 23ai JSON-Relational Duality Views.   
 
 
 Congratulations! You have finished this lab. You may now **proceed to the next lab** 
