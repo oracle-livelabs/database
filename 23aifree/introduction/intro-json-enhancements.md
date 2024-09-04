@@ -2,19 +2,19 @@
 
 ## About this Workshop
 
-In this workshop, you will experience Oracle's JSON capabilities using both relational and document-store APIs. The workshop loosely follows the Moviestreams theme, a series of workshops that demonstrate Oracle converged database capabilities. You will work on our movies library throughout the workshop.
+In this workshop, you will experience Oracle's JSON capabilities using both relational and document-store APIs. The workshop loosely follows the Moviestream theme, a series of workshops that demonstrate Oracle converged database capabilities. You will work on our movies library throughout the workshop.
 
-This lab is organized into different topics, each topic consists of multiple steps. After completing this workshop a user has a very good understanding of what JSON features are available in Oracle Database and when to use them. You will work against the same data using both with SQL and using the Mongo DB API and will experience yourself why Oracle database is better suited for JSON Development than MongoDB, etc.
+This lab is organized into different topics, each topic consists of multiple steps. After completing this workshop a user has a very good understanding of what JSON features are available in Oracle Database and when to use them. You will work against the same data using both with SQL and using the MongoDB API and will experience yourself why Oracle database is better suited for JSON Development than Mongo database, etc.
 
 ### Workshop Scenario
 
-In this workshop, we work on one of the core components of our online MovieStream service: the movies catalog (maybe you will find your favorite movie?). We show how the movies catalog can be managed with JSON in a very schema-flexible way - allowing us to add and modify our offering on the fly, both using Mongo DB API or SQL. The main emphasis is to demonstrate the agility and flexibility of Oracle's converged database but to focus on the representation and manipulation of JSON data in the Oracle database.
+In this workshop, we work on one of the core components of our online MovieStream service: the movies catalog (maybe you will find your favorite movie?). We show how the movies catalog can be managed with JSON in a very schema-flexible way - allowing us to add and modify our offering on the fly, both using MongoDB API or SQL. The main emphasis is to demonstrate the agility and flexibility of Oracle's converged database but to focus on the representation and manipulation of JSON data in the Oracle database.
 
 This workshop is not a 'cookbook' or 'design guideline' on how to work with JSON data - the purpose is to illustrate various JSON features that the Oracle Database offers. That said, you likely find that many examples are applicable to your business needs!
 
-You can complete this entire workshop using your web browser. There is no need to install any extra software other than Mongo DB tools when you're prompted to do so. When writing a real application, you would call many of the functionalities from a programming language like Java, JavaScript(nodeJS) or Python.
+You can complete this entire workshop using your web browser. There is no need to install any extra software other than MongoDB Shell and MongoDB Command Line Database Tools when you're prompted to do so. When writing a real application, you would call many of the functionalities from a programming language like Java, JavaScript(nodeJS) or Python.
 
-Estimated Time:  1 hour 30 minutes
+Estimated Time:  2 hour 30 minutes
 
 Watch this quick video to know why JSON in Oracle Autonomous Database is awesome.
 
@@ -68,13 +68,15 @@ Now you know what JSON is and also why so many people love it. Enough theory for
 
 In this workshop, you will explore: 
 *	How to store, query and process JSON documents in collections using Database Actions
-*	How to use the Mongo API to query or manipulate date in the Oracle Database
+*	How to use the MongoDB API to query or manipulate date in the Oracle Database
 *	How to use SQL to query, generate and process JSON data
 *	How to use the newest SQL Enhancements to work with JSON data
 
 ### Prerequisites
 
-- An Oracle Database 23ai Free Developer Release and ORDS running (with MongoDB API enabled), or a LiveLabs sandbox environment
+- Autonomous Database 23ai Free
+
+**Please Note:**: While this workshop is using Autonomous Database, all commands and features related to JSON enhancement are also available on any other Oracle Database 23ai (Version 23.4 or higher) release. This includes the 23ai Free release as well as 23ai running on Oracle Database Base Service.
 
 You may now proceed to the next lab.
 
@@ -89,4 +91,4 @@ You may now proceed to the next lab.
 
 * **Author** - William Masdon, Kaylien Phan, Hermann Baer
 * **Contributors** -  David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - Hermann Baer, Database Product Manager, April 2023
+* **Last Updated By/Date** - Kevin Lazarz, September 2024
