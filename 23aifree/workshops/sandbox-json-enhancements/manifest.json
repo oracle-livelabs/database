@@ -59,8 +59,8 @@
             "filename": "./../../json-migrating/json-migrating.md"
         },
         {
-            "title": "Lab 9: Creating multi-value JSON indexes and aggregation pipelines using MongoDB Shell (mongosh) in Oracle Database 23ai",
-            "description": "Creating multi-value JSON indexes and aggregation pipelines using MongoDB Shell (mongosh) in Oracle Database 23ai",
+            "title": "Lab 9: Creating multi-value JSON indexes and aggregation pipelines using MongoDB Shell in Oracle Database 23ai",
+            "description": "Creating multi-value JSON indexes and aggregation pipelines using MongoDB Shellin Oracle Database 23ai",
             "filename": "./../../json-indexes/json-indexes.md"
         },
         {
