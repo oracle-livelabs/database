@@ -145,6 +145,4 @@ You may now **proceed to the next lab**
    - Liana Lixandru, Principal Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
    - Kevin Lazarz, Senior Manager, Product Management, Database
    - Wojciech Pluta, Director, Technical Product Marketing
-* **Last Updated By/Date** -  Bogdan Farca, Jul 2024
-   - Wojciech Pluta, Director, Technical Product Marketing
-* **Last Updated By/Date** -  Bogdan Farca, Jul 2024
+* **Last Updated By/Date** -  Bogdan Farca, Sep 2024
