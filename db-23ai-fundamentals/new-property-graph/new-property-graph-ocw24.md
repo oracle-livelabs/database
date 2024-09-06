@@ -44,7 +44,7 @@ This lab is just a short overview of the functionality introduced with Property 
         (7, 8, 'Married'),
         (7, 4, 'Brother'),
         (4, 7, 'Brother'),
-        (1, 2, '›'),
+        (1, 2, 'Friend'),
         (3, 5, 'Colleague'),
         (6, 4, 'Neighbor'),
         (7, 6, 'Friend'),
