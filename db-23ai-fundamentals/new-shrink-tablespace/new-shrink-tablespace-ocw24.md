@@ -6,6 +6,9 @@ Welcome to the Reclaiming Unused Space in Oracle Database 23ai with `shrink_tabl
 
 Estimated Lab Time: 15 minutes
 
+Watch the video below for a walkthrough of the lab.
+[Lab walkthrough video](videohub:1_oycqsmcg)
+
 ### Objective:
 The objective of this lab is to show you the `shrink_tablespace` procedure in Oracle Database 23ai and show its practical application for reclaiming unused space in tablespaces. By the end of this lab, you will be able to resize data files and organize objects in tablespaces using the `shrink_tablespace` procedure.
 
@@ -28,20 +31,8 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
 
 2. Now, let's explore how to use the `shrink_tablespace` procedure to reclaim unused space in a tablespace.
 
-    To begin, let's first check our current tablespace size.
-
     > Your tablespace size may be different depending on what prior labs you've done, that's okay.
 
-    ```
-    <copy>    
-    SELECT tablespace_name,
-        ROUND(SUM(bytes) / 1024 / 1024 / 1024, 2) AS "Size_GB"
-    FROM dba_data_files
-    where TABLESPACE_NAME = 'DATA'
-    GROUP BY tablespace_name;
-    </copy>
-    ```
-    ![calculate your tablespace size](images/im9.png =50%x*)
 
 2. We can create a new table and populate it with data. You can use the following SQL statement as an example:
 
@@ -60,9 +51,9 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
     ```
     ![create a table](images/im3.png =50%x*)
 
-3. We'll now add 2 million rows to the table (feel free to skip this and read the rest if you don't want to add the data to your table).
+3. We'll now add 3 million rows to the table (feel free to skip this and read the rest if you don't want to add the data to your table).
 
-    > **This creates about 2 gigs worth of data - use cautiously if you're on the free tier**
+    > **This creates about 1-2 gigs worth of data**
 
     ```
     <copy>
@@ -71,7 +62,7 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
         v_name VARCHAR2(100);
         v_description VARCHAR2(1000);
     BEGIN
-        FOR i IN 1..2000000 LOOP -- Inserting 2 million rows
+        FOR i IN 1..3000000 LOOP -- Inserting 3 million rows
             v_id := i;
             v_name := 'Name_' || i;
             v_description := 'Description for row ' || i;
