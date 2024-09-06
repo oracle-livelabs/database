@@ -47,7 +47,7 @@ In this workshop, you will learn how to:
 
 ### Prerequisites
 
-* You have an Oracle Cloud account
+* You have an Oracle Cloud account with access to the OCI Generative AI service
 * You have enough privileges to use OCI
 * You have basic knowledge of Python and Jupyter Labs
 * Basic Linux knowledge
