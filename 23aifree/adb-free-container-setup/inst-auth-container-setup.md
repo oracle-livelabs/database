@@ -1,14 +1,14 @@
-# Install Oracle Autonomous Database 23ai Free Docker Image
+# Install Oracle Autonomous Database 23ai Free Container Image
 
 ## Introduction
-In this lab, you will experience just how easy it is to get started with the Oracle Autonomous Database 23ai Free Container Image. One launched, we will show you how to take advantage of the developer tools available to you, as we show you how to access SQL Developer Web & APEX--without any additional installations!
+In this lab, you will experience just how easy it is to get started with the Oracle Autonomous Database 23ai Free container image. Once launched, we will show you how to take advantage of the developer tools available to you, as we show you how to access SQL Developer Web & APEX--without any additional installations!
 
 **_Estimated Time: 30 minutes_**
 
 ### **Objectives**
 In this lab, you will:
 
-* Launch the Docker container image.
+* Launch the container image.
 * Connect to your Autonomous Database.
 * Access SQL Developer Web & APEX.
 
@@ -33,11 +33,13 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     ## Downloading both the container and workshop resources. 
     wget https://objectstorage.ca-toronto-1.oraclecloud.com/p/GDCjmPfuRMx-juvDGT0Mn7ZsaI_O5y_PsGg41xcLVVl8vewGOm6Ns4zeLsTPAr3p/n/c4u04/b/apex-images/o/configuration-files.zip -P /tmp
 
-    # Opening the zip file.
-    unzip -q /tmp/installation-files.zip
+    ## Opening the zip file.
+    unzip -q /tmp/configuration-files.zip
+    chmod -R 777 mount-files
+
     </copy>
     ```
-    ![Download container image](images/download-image.png)
+    ![Download container image](images/download-configuration-files.png)
 
 
 2. **Load the image into the podman catalog. (~5 mins)** Podman-load copies the image from the local docker archive into the podman container storage. This will take about 5 minutes--let's review the YAML file in the meantime.
@@ -47,7 +49,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     podman load -i adb-free-23ai.tar.gz
     </copy>
     ```
-    ![Load image into podman catalog](images/podman-load-image.png)
+    ![Load image into podman catalog](images/podman-load.png)
 
 3. **Review the YAML file.** Run the following command to learn more about how the YAML file helps launch the container image.
     ```
@@ -59,8 +61,9 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     ```
     version: "3.9"
     services:
-        adb-free:  # Name of the service/container.
-            image: container-registry.oracle.com/database/adb-free:latest-23ai # The container image to use. In this case, it's an Oracle Autonomous Database Free image.
+    adb-free:  # Name of the service/container.
+    image: container-registry.oracle.com/database/adb-free:latest-23ai
+    # The container image to use. In this case, it's an Oracle Autonomous Database Free image.
 
     environment:  # Environment variables passed to the container.
       - WORKLOAD_TYPE=ATP  # Specify the workload type (ATP stands for Autonomous Transaction Processing).
@@ -74,7 +77,10 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
       - "27017:27017"  # Map host port 27017 to container port 27017 (MongoDB port).
 
     volumes:  # Mount host directories/files into the container.
-      - "/home/oracle/mount-files/:/u01/mount-files:Z"
+      - "/home/oracle/mount-files/scripts/reset-image-prefix.sql:/u01/scripts/reset-image-prefix.sql:Z"
+      - "/home/oracle/mount-files/scripts/db-config.sh:/u01/scripts/db-config.sh:Z"
+      - "/home/oracle/mount-files/all-MiniLM-L12-v2.onnx:/u01/all-MiniLM-L12-v2.onnx:Z"
+      - "/home/oracle/mount-files/customer-orders-schema/:/u01/customer-orders-schema:Z"
 
     devices:  # Allow the container to access specific devices on the host.
       - /dev/fuse  # /dev/fuse is required for file system operations like mounting.
@@ -94,7 +100,7 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     podman-compose up -d
     </copy>
     ```
-    ![Stand up container image](images/podman-compose-up.png)
+    ![Stand up container image.](images/podman-compose-up.png)
 
 5. **Confirm the container is up and running.** This command generates the name and current status for all of your running containers.
 
@@ -103,15 +109,15 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     podman ps --format "{{.Names}} {{.Status}}"
     </copy>
     ```
-    ![Check container status](images/check-container-status)
+    ![Check container status.](images/check-container-status.png)
 
-6. **Confirm the files were pre-loaded into the container.**
+6. **Confirm the files were pre-loaded into the container.** If you see the 'all-MiniLM-L12-v2.onnx', 'scripts', and 'customer-orders' listed in the output, you're good to go! 
     ```
     <copy>
-    podman exec -it oracle_adb-free_1 ls /u01/mount-files
+    podman exec -it oracle_adb-free_1 ls /u01/
     </copy>
     ```
-    ![PODMAN_CONFIRM_PRELOADS](images/aivs_lab1_task1_step8.png)
+    ![Confirm files mounted properly.](images/check-file-mounts.png)
    
 7. **Relocate tnsnames.ora in the container.** 'tnsnames.ora' is a configuration file, storing the database details necessary for connection. We're moving the file into a directory that's meant for our database for easy connection.
     ```
@@ -119,30 +125,30 @@ In the LiveLabs Sandbox, we will download the image from an OCI bucket. However,
     podman exec -it oracle_adb-free_1 cp /u01/app/oracle/wallets/tls_wallet/tnsnames.ora /u01/app/oracle/product/23.0.0.0/dbhome_1/network/admin/tnsnames.ora
     </copy>
     ```
-    ![PODMAN_EXEC](images/aivs_lab1_task1_step9.png)
 
-8. **Confirm ORDS is running.**
+8. **Confirm ORDS is running.** The 'jps' command lists out all of the java proceses running on the host. We're then filtering that list on the term 'ords'.
     ```
     <copy>
     podman exec -it oracle_adb-free_1 jps -l | grep ords
     </copy>
     ```
+    ![See if ORDS is running.](images/check-ords.png)
 
 9. **Configure the APEX image.** We'll first need to redirect APEX to use the images behind our firewall. Run this command in the terminal to do so. This is only required for APEX use in Livelabs.
-
     ```
     <copy>
     podman exec -it oracle_adb-free_1 /bin/sh -c "/u01/scripts/db-config.sh"
     </copy>
     ```  
+    ![Configure the APEX images.](images/apex-configuration.png)
 
 ## Task 2: Access APEX & SQL Developer Web
 
-Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) preinstalled. Let's see how you can get started!
+Oracle Autonomous Database Free has ORDS preinstalled. Let's see how you can get started!
 
-1. **Open Google Chrome.** Click Activities >> Google Chrome icon, to open a new Chrome window.
-    [Insert gif]
-    
+1. **Open new Chrome window.** 
+    ![Open new Chrome window.](images/new-chrome-window.png)
+
 2. **Launch ORDS.** Paste the following URL into your Chrome browser to Launch ORDS.
 
     ```
@@ -150,28 +156,23 @@ Oracle Autonomous Database Free has APEX and ORDS (a.k.a Database Actions) prein
     https://localhost:8443/ords
     </copy>
     ```
-    ![ORDS landing page](images/ords-landing.png)
 
-3. **Sign into ORDS.** <br/> <br/>
+3. **Launch SQL Developer Web.** You now have access to Database Actions! This is where you'll find both APEX and SQL Developer Web. For now, we'll only launch SQL Developer Web.
+
+    ![Launch SQL Developer Web.](images/launch-sql-developer.png)
+
+4. **Sign into SQL Developer Web.** Use the database admin login credentials below.<br/> 
     
     **Username -** admin<br/>
-    **Password -** Welcome_12345 (or the custom password you specified in Task 1, Step 5.)
+    **Password -** Welcome_12345
 
     ![Sign into DB Actions](images/sign-in-ords.png)
 
-4. **Launch SQL Developer Web.** You now have access to Database Actions! This is where you'll find both APEX and SQL Developer Web. For now, we'll only launch SQL Developer Web.
+5. **Lauch the SQL worksheet.** Select the 'SQL' tab, as shown below.
+    ![Launch the SQL Tab](images/launch-sql-worksheet.png)
 
-    ![PODMAN_PS](images/aivs_lab1_task2_step5.png)
-
-5. **Sign-in to SQL Developer Web.** <br/>
-    **Username -** admin <br/>
-    **Password -** Welcome_12345 (or the custom password you specified in Task 1, Step 5.)
-
-    ![Sign into DB Actions](images/sign-in-ords.png)
-
-6. **Lauch the SQL worksheet.** Select the 'SQL' tab, as shown below.
-    ![Launch the SQL Tab](images/sql-worksheet.png)
-
+6. **Follow the tour and explore a bit!**
+    ![Explore SQL Developer Web](images/sql-developer-web.png)
 
 **You may proceed to the next lab.**
 

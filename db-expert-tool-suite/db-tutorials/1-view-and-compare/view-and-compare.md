@@ -11,40 +11,40 @@ Our tool guides customers through Oracle’s Database service offerings and high
 ### **Objectives**
 
 In this lab, you will:
-* Test drive how easy it is to compare Oracle database products to one another.
+* Easily compare Oracle Cloud database products to one another.
 * Experience how the tool focuses on providing deep contextual information.
 * Dive deep into feature comparisons (Workloads, Applications, and Capacity).
 
 ## Task 1: Navigate the View and Compare Services Tool
 
-1. Navigate to [https://apexadb.oracle.com/ords/r/dbexpert/dbsn/compare-solutions](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/compare-solutions) or click on the **View and Compare Services** card 
+1. Navigate to [https://apexadb.oracle.com/ords/r/dbexpert/dbsn/compare-solutions](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/compare-solutions) or click **Explore** then **Compare DB Services** on the navigation bar. 
 
-    ![DBExpert Homepage](./images/homepage_vc.png " ")
+    ![DBExpert Homepage](./images/homepage_vc_sm.png "The DBExpert homepage with the route to navigate to the View and Compare webpage highlighted")
 
 
 ## Task 2: Take the tool for a Test drive
 
   1. Determine the deployment type
-    * **Individual Database:** database hosted in single server or cluster
+    * **Single Database:** database hosted in single server or cluster
     * **Globally Distributed:** database distributed across regions, with each region hosting either a shard of the database or fully active (multi-write) instantiation
-    * **Database Pool:** multiple databases participate in a shared pool
+    * **Resource Pool:** multiple databases participate in a shared pool
   2. Select a deployment type by using the tabs on the top-left of the page (default: Individual Services)
 
-      ![DBExpert VC](./images/view_and_compare_deploy.png " ")
+      ![DBExpert VC](./images/view_and_compare_deploy_sm.png "The View and Compare webpage with the deployment type highlighted")
 
   3. Choose 3 services to compare
 
     * At the top of the page, there are 3 Oracle services pre-selected: **ATP – Serverless**, **ATP-ExaC@C**, and **Oracle Database@Azure Exadata X9M** side-by-side, each with short descriptions of the service. 
     
-      ![DBExpert View and Compare - side-by-side](./images/view_and_compare_sbs.png " ")
+      ![DBExpert View and Compare - side-by-side](./images/view_and_compare_sbs_sm.png "The View and Compare webpage with the 3 selected services highlighted")
     
     * Utilizing the dropdowns, any Oracle database services can be selected and compared to one another.
     
-      ![DBExpert VC](./images/view_and_compare_dropdown.png " ")
+      ![DBExpert VC](./images/view_and_compare_dropdown_sm.png "The View and Compare webpage with a service dropdown activated")
     
     * For more information about a specific service, the user can click on the card for a detailed list of resources.
 
-      ![DBExpert VC](./images/view_and_compare_ref.png " ")
+      ![DBExpert VC](./images/view_and_compare_ref_sm.png "Reference Links model")
 
   4. Scroll down to compare 9 key categories between the 3 selected services
 
@@ -58,14 +58,10 @@ In this lab, you will:
     8. Available Added Capabilities
     9. Additional Features
 
-    ![DBExpert VC](./images/view_and_compare_cats.png " ")
+    ![DBExpert VC](./images/view_and_compare_cats_sm.png "The View and Compare webpage with 3 selected services features highlighted")
 
+You may now **proceed to the next lab**.
     
 ## Learn More
 
-* [View & Compare OCI Data Management Services Overview (Video)](https://videohub.oracle.com/media/1_5a9man1g)
-
-## Acknowledgements
-* **Author** - [](var:author_names), [](var:group_name)
-* **Contributors** -  [](var:contributors_names)
-* **Last Updated By/Date** - [](var:author_names), [](var:last_updated)
+* [View & Compare OCI Data Management Services Overview (Video)](https://videohub.oracle.com/media/1_5a9man1g "View & Compare OCI Data Management Services Overview (Video)")

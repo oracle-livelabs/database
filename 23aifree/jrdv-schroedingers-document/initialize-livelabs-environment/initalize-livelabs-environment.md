@@ -22,7 +22,7 @@ This lab assumes you have:
 For ease of execution of this workshop, your VM instance has been pre-configured with a remote graphical desktop, which is accessible using any modern browser on your laptop or workstation. Proceed as detailed below to log in.
 
 1. Now that your instance has been provisioned. If you are not already on the **My Reservations** page, then:
-    - Sign in to [LiveLabs](https://developer.oracle.com/livelabs)
+    - Sign in to [LiveLabs](https://livelabs.oracle.com)
     - Click the drop-down arrow next to your **Username**
     - Click **My Reservations**
 

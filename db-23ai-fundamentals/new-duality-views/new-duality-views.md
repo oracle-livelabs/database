@@ -270,23 +270,13 @@ This lab assumes you have:
         "OrderShipped": null
         }
     ]}')
-    where o.data."_id" = 100;
+    where o.data."_id" = 2;
 
     commit;
     </copy>
     ```
-    
-    Let's see the customers orders now. 
 
-    ```
-    <copy>
-    select * from orders where customer_id = 100;
-    </copy>
-    ```
-
-    Let's imagine we need to change one of the Product IDs. 
-
-    Since both our customers have ordered Product 202, we will use this as our example.
+8. Imagine we needed to change one of the Product IDs, for example product_id = 202 shown below. 
 
 	```
 	<copy>
@@ -294,8 +284,9 @@ This lab assumes you have:
     </copy>
     ```
 
+    From this result, we can see both the customers ordered the product_id 202.
 
-8. We can easily update the orders table and this will update all documents with nested orders of number 202.
+9. We can easily update the orders table and this will update all documents with nested orders of number 202.
 
 	```
 	<copy>
@@ -305,7 +296,7 @@ This lab assumes you have:
     </copy>
     ```
 
-9. This one change updates every document where a nested order has `product_id = 202`.
+10. This one change updates every document where a nested order has `product_id = 202`.
 
     We can take a look at all the customer orders through the Duality View.
 
@@ -315,7 +306,7 @@ This lab assumes you have:
     </copy>
     ```
 
-10. Note that the "etag" value supplied in the content is used for "out-of-the-box" optimistic locking to prevent the well-known "lost update" problem that can occur with concurrent operations. During a replace operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target Duality View document.
+11. Note that the "etag" value supplied in the content is used for "out-of-the-box" optimistic locking to prevent the well-known "lost update" problem that can occur with concurrent operations. During a replace operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target Duality View document.
 
     If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. If you get the error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value.
 

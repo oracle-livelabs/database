@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab guides you through the code required to load text files from a local folder, split them into segments, and then create embeddings and ingest them into the Oracle 23 AI vector database.
+This lab guides you through the code required to load text files from a local folder, split them into segments, and then create embeddings and ingest them into the Oracle 23ai vector database.
 
 We utilize a traditional RAG approach, loading and parsing a text FAQ from a file, segmenting it, generating embeddings, and calculating chunk-question similarities. We will subsequently feed the top segments to an LLM prompt with the user's question, crafting a response.
 
@@ -18,7 +18,7 @@ Estimated Time: 40 minutes
 
 * Basic knowledge of Oracle Cloud Infrastructure (OCI) concepts and consoles
 * Working knowledge of Python and Jupyter Lab
-* The virtual machine and Oracle Database 23AI setup from the previous lab.
+* The virtual machine and Oracle Database 23Aai setup from the previous lab.
 
 ### Concepts
 #### What is a Vector?
@@ -301,4 +301,4 @@ You may now **proceed to the next lab**
    - Liana Lixandru, Principal Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
    - Wojciech Pluta, Director, Technical Product Marketing
    - Kevin Lazarz, Senior Manager, Product Management, Database
-* **Last Updated By/Date** -  Bogdan Farca, May 2024
+* **Last Updated By/Date** -  Bogdan Farca, Sep 2024

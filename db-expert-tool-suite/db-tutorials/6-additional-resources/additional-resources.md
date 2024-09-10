@@ -1,69 +1,65 @@
-# Lab 1: View and Compare Services Tool
-
+# Lab 6: Additional Resources
 ## Introduction
 
-This lab walks you through how to use DBExpert's [View and Compare Services Tool](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/compare-solutions). Our tool guides customers through Oracle’s Database service offerings and highlights key service information in a digestible way.
+DBExpert offers two key areas where you can dive deeper into resources to ensure you're making the best decisions for your needs.
+The first area is available in the header, alongside the Explore and Migration tabs.
+<img src='../../db-tutorials/6-additional-resources/images/additional_resources1.png' alt='Additional Resources Section 1' title='Additional Resources Section 1' width='30%'/>
 
-**Estimated Time: 5 minutes**
+You'll also find a second set of resources at the bottom of the page, right below the Migration Methods banner.
+<img src='../../db-tutorials/6-additional-resources/images/additional_resources2.png' alt='Additional Resources Section 2' title='Additional Resources Section 2' width='30%'/>
 
-### **Objectives**
+**Estimated Time: 1 minutes**
 
-In this lab, you will:
-* Test drive how easy it is to compare Oracle database products to one another.
-* Experience how the tool focuses on providing deep contextual information.
-* Dive deep into feature comparisons (Workloads, Applications, and Capacity).
+---
 
-## Task 1: Navigate the View and Compare Services Tool
+## Additional Resources Tab
 
-1. Navigate to [https://apexadb.oracle.com/ords/r/dbexpert/dbsn/compare-solutions](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/compare-solutions) or click on the **View and Compare Services** card 
+### **LiveLabs**
+Experience Oracle Cloud without any cost and build your skills without the need for an account. Each LiveLabs session gives you a fully isolated environment to explore a workshop hands-on.
+![LiveLabs GIF](./images/livelabs.gif)
 
-    ![DBExpert Homepage](./images/homepage_vc.png " ")
+### **OCI Price List**
+Stay on top of your budget with Oracle Cloud Infrastructure's straightforward pricing. Our innovative tools help prevent unexpected costs, making your cloud journey as cost-efficient as possible.
+![OCI Price List GIF](./images/pricelist.gif)
 
+### **Cost Estimator**
+Use Oracle's Cost Estimator to predict your monthly spend on Oracle's Infrastructure and Platform Cloud services (IaaS/PaaS) before you commit.
+![Cost Estimator GIF](./images/costestimator.gif)
 
-## Task 2: Take the tool for a Test drive
+### **Customer Success Stories**
+Discover why businesses across various industries choose Oracle. Hear directly from our customers about their successes and why Oracle is the right partner for their growth.
+![Customer References GIF](./images/customer_references.gif)
 
-  1. Determine the deployment type
-    * **Individual Database:** database hosted in single server or cluster
-    * **Globally Distributed:** database distributed across regions, with each region hosting either a shard of the database or fully active (multi-write) instantiation
-    * **Database Pool:** multiple databases participate in a shared pool
-  2. Select a deployment type by using the tabs on the top-left of the page (default: Individual Services)
+### **EM Host Consolidation Planner**
+The Host Consolidation Planner helps you efficiently match source servers you wish to consolidate with ideal new or existing destinations. It supports consolidating onto generic physical machines, Oracle’s engineered systems, or Oracle VM servers, and even onto physical machines in Oracle Cloud.
+![EM Host Consolidation Planner Image](./images/em_host.png)
 
-      ![DBExpert VC](./images/view_and_compare_deploy.png " ")
+### **Oracle Cloud Compliance**
+Oracle is dedicated to helping you navigate global operations and rapidly evolving regulatory demands. We offer the tools you need to stay compliant in a complex world.
+![Oracle Cloud Compliance GIF](./images/oracle_compliance.gif)
 
-  3. Choose 3 services to compare
+### **Compare OCI with AWS, Azure, and Google Cloud**
+Simplify your cloud migration by comparing Oracle Cloud Infrastructure (OCI) with similar services from AWS, Azure, and Google Cloud. 
+![Compare Cloud Services GIF](./images/compare_cloud.gif)
 
-    * At the top of the page, there are 3 Oracle services pre-selected: **ATP – Serverless**, **ATP-ExaC@C**, and **Oracle Database@Azure Exadata X9M** side-by-side, each with short descriptions of the service. 
-    
-      ![DBExpert View and Compare - side-by-side](./images/view_and_compare_sbs.png " ")
-    
-    * Utilizing the dropdowns, any Oracle database services can be selected and compared to one another.
-    
-      ![DBExpert VC](./images/view_and_compare_dropdown.png " ")
-    
-    * For more information about a specific service, the user can click on the card for a detailed list of resources.
+---
 
-      ![DBExpert VC](./images/view_and_compare_ref.png " ")
+## Additional Resources Section
 
-  4. Scroll down to compare 9 key categories between the 3 selected services
+### **Database Security Assessment Tool**
+The Database Security Assessment Tool (DBSAT) from Oracle provides prioritized advice to mitigate security risks or gaps in your Oracle Databases. It evaluates your database’s current security and compliance status, covering configuration, sensitive data discovery, and more.
+Get more info at [DBSAT LiveLab](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=699)
+![Database Security Assessment Tool GIF](./images/dbsat.gif)
 
-    1. Service Type and Management
-    2. Recommended Workloads
-    3. Oracle Applications
-    4. Oracle Database Options
-    5. Database Versions
-    6. Database Availability
-    7. Capacity
-    8. Available Added Capabilities
-    9. Additional Features
+### **Cloud Cost Estimator**
+Access the Cost Estimator here too. It calculates costs based on the Oracle Cloud service you select, its configurations, and the expected usage.
+![Cloud Cost Estimator GIF](./images/cost_estimator.gif)
 
-    ![DBExpert VC](./images/view_and_compare_cats.png " ")
+### **Oracle Database Features and Licensing**
+Browse through Oracle Database features and licensing options to see what's available for different versions and services.
+![Oracle Database Features and Licensing GIF](./images/features_licensing.gif)
 
-    
-## Learn More
+### **ORADiff**
+With ORADiff, you can easily compare two different Oracle database releases, with or without any additional patches, to see what has changed.
+![ORADiff GIF](./images/oradiff.gif)
 
-* [View & Compare OCI Data Management Services Overview (Video)](https://videohub.oracle.com/media/1_5a9man1g)
-
-## Acknowledgements
-* **Author** - [](var:author_names), [](var:group_name)
-* **Contributors** -  [](var:contributors_names)
-* **Last Updated By/Date** - [](var:author_names), [](var:last_updated)

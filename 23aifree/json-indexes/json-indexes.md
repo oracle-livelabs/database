@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In previous versions of Oracle Database, JSON indexes had to be created from SQL and the type of the data (e.g. string, number, date, etc) had to be specified when the index was created. Multi-value any-type indexes do not require users to specify a data type upfront, and they can be created directly from MongoDB clients. And these indexes will be picked up by both MongoDB and SQL queries over the same data. In previous versions of Oracle Database, MongoDB aggregation pipelines were not supported, which sometimes created friction for users attempting to migrate MongoDB applications to Oracle Database. In 23ai, these aggregation pipelines are now supported; they are transparently converted into SQL and executed directly. In this lab, we will create a native JSON collection called SALES and we will create indexes and aggregation pipelines directly from mongosh.
+In previous versions of Oracle Database, JSON indexes had to be created from SQL and the type of the data (e.g. string, number, date, etc) had to be specified when the index was created. Multi-value any-type indexes do not require users to specify a data type upfront, and they can be created directly from MongoDB clients. And these indexes will be picked up by both MongoDB and SQL queries over the same data. In previous versions of Oracle Database, MongoDB aggregation pipelines were not supported, which sometimes created friction for users attempting to migrate MongoDB applications to Oracle Database. In 23ai, these aggregation pipelines are now supported; they are transparently converted into SQL and executed directly. In this lab, we will create a native JSON collection called SALES and we will create indexes and aggregation pipelines directly from MongoDB Shell.
 
 MongoDB added recently a new operator $sql to their aggregation pipeline framework not too long ago, so we at Oracle figured, hey, we have SQL, too. But unlike them, we've been doing SQL for quite some time, so why not support that operator and offer our customers the world of Oracle's powerful SQL within the realms of the MongoDB API? The examples below will also show how $sql can be used in Oracle Database 23ai.
 
@@ -22,13 +22,13 @@ In this lab, you will:
 
 ### Prerequisites
 
-- Oracle Database 23.5 with direct OS access as oracle user MongoDB shell (mongosh) installed
+- Connected to the Oracle Database using MondoDB Shell
 - All previous labs successfully completed
 
 
 ## Task 1: Clean up the environment:
 
-1. Follow these steps to clean up your environment:
+1.  Enter the following command while in MongoDB Shell:
 
     ```
     <copy>
@@ -38,17 +38,16 @@ In this lab, you will:
 
 ## Task 2: Create a native JSON collection called **SALES**
 
-1. Follow this code to run:
+1. Now run:
 
     ```
     <copy>db.createCollection('SALES');
     </copy>
     ```
-*Note: you do not need to explicitly create a collection in Mongo, you can just insert data, and a collection will be created.*
 
 ## Task 3: Populate the SALES collections with data
 
-1. Follow this code to run:
+1. Execute the following code in MongoDB Shell:
 
     ```
     <copy>db.SALES.insertMany([
