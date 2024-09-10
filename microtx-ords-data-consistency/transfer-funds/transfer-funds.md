@@ -247,7 +247,7 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
 
 1. Before you start the transaction, run the following commands to check the initial balance in account 1 of Department 1 and account 2 of Department 2. Note down the initial balance.
 
-    **Example command to check the initial balance in account 1 of Department 1**
+    **Command to check the initial balance in account 1 of Department 1**
 
     ```text
     <copy>
@@ -256,7 +256,7 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
     </copy>
     ```
 
-   **Example command to check the initial balance in account 2 of Department 2**
+   **Command to check the initial balance in account 2 of Department 2**
 
     ```text
     <copy>
@@ -267,7 +267,7 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
 
 2. Transfer an amount of 50 from Department 1, account1 to Department 2, account2.
 
-    **Example command**
+    **Command**
 
     ```text
     <copy>
@@ -282,7 +282,7 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
 
 3. Run the following commands to check the account balance of Department 1, account1 and Department 2, account2. Note down the account balance to verify that the amounts reflect correctly after the transfer.
 
-    **Example command to check balance in Department 1**
+    **Command to check balance in Department 1**
 
     ```text
     <copy>
@@ -291,7 +291,7 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
     </copy>
     ```
 
-    **Example command to check balance in Department 2**
+    **Command to check balance in Department 2**
 
     ```text
     <copy>
@@ -302,7 +302,7 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
 
 4. Transfer an amount of 50 from Department 1, account1 to an account that does not exist in Department 2, such as account7. Since account7 does not exist, the deposit fails and MicroTx rolls back the withdraw action.
 
-    **Example command**
+    **Command**
 
     ```text
     <copy>
@@ -315,12 +315,12 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
 
 5. Check the balance in Department 1, account 1 to verify that the account balance is correct, and no amount was withdrawn.
 
-   **Example command**
+   **Command**
 
     ```text
     <copy>
     curl --location \
-    --request GET http://localhost:8080/dept1/account1 | jq
+    --request GET http://localhost:8080/ords/otmm/accounts/account1 | jq
     </copy>
     ```
 
