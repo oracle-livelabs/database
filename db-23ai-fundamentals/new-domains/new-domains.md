@@ -6,6 +6,9 @@ Welcome to the "Data Usecase Domains Exploration" lab! Data Usecase Domains play
 
 Estimated Lab Time: 20 minutes
 
+Watch the video below for a walkthrough of the lab.
+[Lab walkthrough video](videohub:1_u7ik5hzz)
+
 ### Objective:
 The objective of this lab is to provide comprehensive hands-on experience with Data Usecase Domains in Oracle Database 23ai. By the end of this lab, you will be proficient in defining various types of Data Usecase Domains, applying them to tables, and leveraging domain functions for effective data management.
 

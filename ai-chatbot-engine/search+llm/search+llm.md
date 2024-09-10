@@ -323,4 +323,4 @@ You may now **proceed to the next lab**
 * **Contributors** 
    - Liana Lixandru, Principal Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
    - Kevin Lazarz, Senior Manager, Product Management, Database
-* **Last Updated By/Date** -  Bogdan Farca, May 2024
+* **Last Updated By/Date** -  Bogdan Farca, Sep 2024

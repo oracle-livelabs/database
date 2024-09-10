@@ -7,7 +7,7 @@ Welcome to the "Exploring SQL Firewall in Oracle Database 23ai" workshop. In thi
 Estimated Lab Time: 20 minutes
 
 Watch the video below for a walkthrough of the lab.
-[Lab walkthrough video](videohub:1_mt9o07oh)
+[Lab walkthrough video](videohub:1_gy4qzh0f)
 
 ### Objective:
 
@@ -243,9 +243,3 @@ You may now **proceed to the next lab**
 * **Author** - Killian Lynch, Database Product Management
 * **Contributors** - Dom Giles, Distinguished Database Product Manager
 * **Last Updated By/Date** - Killian Lynch, April 2024
-
-
-
-
-EXEC DBMS_SQL_FIREWALL.PURGE_LOG
-

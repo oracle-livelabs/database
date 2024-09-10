@@ -7,7 +7,8 @@ Welcome to the "Granting the Developer Role" lab. In this lab, you will learn ho
 Estimated Lab Time: 10 minutes
 
 Watch the video below for a walkthrough of the lab.
-[Lab walkthrough video](videohub:1_78gqg1b2)
+[Oracle Database 23ai](videohub:1_3x5r64gp)
+
 
 ### Objective:
 As Oracle MovieStreams scales, it needs to streamline its development process. In this lab, you’ll configure a dedicated developer role that aligns with Oracle MovieStreams’ growing needs. 
@@ -56,9 +57,13 @@ The objective of this lab is to familiarize you with the Developer Role in Oracl
   CREATE USER DB23AI IDENTIFIED BY Oracledb_4U#;
 
   -- ADD ROLES
-  --  GRANT CONNECT TO DB23AI;
   GRANT DB_DEVELOPER_ROLE TO DB23AI;
-  --  GRANT RESOURCE TO DB23AI;
+
+  GRANT CONNECT TO DB23AI;
+  GRANT RESOURCE TO DB23AI;
+  GRANT CONSOLE_DEVELOPER TO DB23AI;
+  GRANT GRAPH_DEVELOPER TO DB23AI;
+
 
   -- REST ENABLE
   BEGIN
@@ -78,6 +83,9 @@ The objective of this lab is to familiarize you with the Developer Role in Oracl
   END;
   /
 
+  ALTER USER DB23AI DEFAULT ROLE CONSOLE_DEVELOPER,DB_DEVELOPER_ROLE,GRAPH_DEVELOPER;
+  ALTER USER DB23AI GRANT CONNECT THROUGH GRAPH$PROXY_USER;
+
   -- QUOTA
   ALTER USER DB23AI QUOTA UNLIMITED ON DATA;
 
@@ -90,7 +98,7 @@ The objective of this lab is to familiarize you with the Developer Role in Oracl
     REVOKE <ROLE> FROM <USER>;
     ```
 
-3. To check the privileges of the developer role, we can look at some of the views available to us. For example, we can list the system privileges granted to us by the developer role.
+3. We can look at the system, role and object privileges associated with the DB\_DEVELOPER\_ROLE role. For example, we can list the system privileges granted to us by the developer role.
     ```
     <copy>
     SELECT privilege FROM role_sys_privs WHERE role='DB_DEVELOPER_ROLE';

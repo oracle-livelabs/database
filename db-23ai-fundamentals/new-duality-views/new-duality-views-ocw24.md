@@ -8,6 +8,10 @@ This lab is only intended to give you a small taste of what duality views have t
 
 Estimated Lab Time: 20 minutes
 
+Watch the video below for a walkthrough of the lab.
+[Lab walkthrough video](videohub:1_ws0k6cn3)
+
+
 **JSON Duality**
 
 JSON Relational Duality is a landmark capability in Oracle Database 23ai, providing game-changing flexibility and simplicity for Oracle Database developers. This feature overcomes the historical challenges developers have faced when building applications using the relational or document models.
