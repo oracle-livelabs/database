@@ -7,7 +7,7 @@ Welcome to the "Exploring SQL Firewall in Oracle Database 23ai" workshop. In thi
 Estimated Lab Time: 20 minutes
 
 Watch the video below for a walkthrough of the lab.
-[Lab walkthrough video](videohub:1_mt9o07oh)
+[Lab walkthrough video](videohub:1_gy4qzh0f)
 
 ### Objective:
 
@@ -20,49 +20,9 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
 
 ## Task 1: Enabling SQL Firewall
 
-1. For this lab, let's create some sample tables and add some data.
-
-    ```
-    <copy>
-    DROP TABLE IF EXISTS EMPLOYEES CASCADE CONSTRAINTS;
-    DROP TABLE IF EXISTS DEPARTMENTS CASCADE CONSTRAINTS;
-
-    -- Create employees table
-    CREATE TABLE employees (
-        employee_id INT,
-        first_name VARCHAR(50),
-        last_name VARCHAR(50),
-        department_id INT
-    );
-
-    -- Create departments table
-    CREATE TABLE departments (
-        department_id INT,
-        department_name VARCHAR(50)
-    );
-
-    -- Insert data into departments table
-    INSERT INTO departments (department_id, department_name)
-    VALUES
-        (1, 'HR'),
-        (2, 'IT'),
-        (3, 'Finance');
-    </copy>
-    ```
-    ![create tables](images/im8.png =50%x*)
 
 
-2. To set up SQL Firewall, we'll need to sign in as a user with more privileges than the current user (DB23AI).
-
-    If you've forgotten your password, it can be found by clicking the **View login info** button in the top left of these instruction. Alternatively, you can watch the gif below to find the password.  
-
-    ![reset the password](images/pswrd1.gif " ")
-
-3. Now using the password we found above, sign in as the admin user. 
-
-    ![sign into the admin user](images/im25.png =50%x*)
-
-4. For this lab, we'll create a new user, 'TEST', who will be the admin for our SQL Firewall. We'll use ADMIN and grant necessary roles including SQL\_FIREWALL\_ADMIN.
+1. For this lab, we'll create a new user, 'TEST', who will be the admin for our SQL Firewall. We'll use ADMIN and grant necessary roles including SQL\_FIREWALL\_ADMIN.
 
     ```
     <copy>
@@ -114,7 +74,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
 
     ![select SQL](images/im6.png =50%x*)
 
-8. Enable SQL Firewall for the TEST user using the PL/SQL command:
+8. Enable SQL Firewall using the PL/SQL command:
     ```
     <copy>
     EXEC DBMS_SQL_FIREWALL.ENABLE;
@@ -129,7 +89,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     BEGIN
         DBMS_SQL_FIREWALL.CREATE_CAPTURE(
             username => 'DB23AI',
-            top_level_only => FALSE,
+            top_level_only => TRUE,
             start_capture => TRUE
         );
     END;
@@ -138,6 +98,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ```
     ![start capture](images/im9.png =50%x*)
 
+
 10. Now sign out of the TEST user and back in as the DB23AI user. 
 
     * the password is Oracledb_4U#
@@ -145,13 +106,15 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ![start capture](images/im22.png =50%x*)
     ![start capture](images/im23.png =50%x*)
 
-11. Select the SQL time and perform typical SQL operations to capture normal activities (e.g., select and insert statements).
+11. Select the SQL tile and perform typical SQL operations to capture normal activities (e.g., select and insert statements).
 
     ```
     <copy>
-    INSERT INTO employees (employee_id, first_name, last_name, department_id)
-    VALUES (101, 'Alice', 'Brown', 2);
-    COMMIT;
+    INSERT INTO customers (customer_id, first_name, last_name, email, signup_date, has_sub, dob, address, zip, phone_number, credit_card)
+    VALUES
+    (10, 'Bobby', 'Burgers', 'bobby.burgers@example.com', SYSDATE, TRUE, TO_DATE('1985-08-15', 'YYYY-MM-DD'), '123 East Street', '90310', '535-1234', '4333331111111111');
+
+    Select count(*) from customers;
     </copy>
     ```
     ![perform SQL operations](images/im10.png =50%x*)
@@ -221,14 +184,52 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ![sign out](images/im22.png =50%x*)
     ![sign in](images/im23.png =50%x*)
 
+6. Verify the count statement.
+
+    ```
+    <copy>
+    SELECT count(*) from customers;
+    </copy>
+    ```
+
 6. Attempt to execute a statement not in the allow list to verify SQL Firewall enforcement. Notice we get a SQL Firewall Violation error.
 
     ```
     <copy>
-    SELECT * FROM DEPARTMENTS;
+    SELECT * from ratings;
     </copy>
     ```
-    ![SQL Firewall violation](images/im16.png =50%x*)
+    ![SQL Firewall violation](images/im26.png =50%x*)
+
+7. Log back in as the TEST user
+
+    * the password is Oracledb_4U#
+
+    ![perform SQL operations](images/im24.png " ")
+    ![perform SQL operations](images/im5.png =50%x*)
+
+8. We can review the violation log for abnormal SQL.
+    ```
+    <copy>
+    SELECT SQL_TEXT, FIREWALL_ACTION, IP_ADDRESS, CAUSE, OCCURRED_AT
+    FROM DBA_SQL_FIREWALL_VIOLATIONS WHERE USERNAME = 'DB23AI';
+    </copy>
+    ```
+
+9. We can also disable the allow list.
+
+    ```
+    <copy>
+    EXEC DBMS_SQL_FIREWALL.DISABLE_ALLOW_LIST(username=>'DB23AI');
+    </copy>
+    ```
+
+10. Now sign out of the TEST user and back in as the DB23AI user. 
+
+    * the password is Oracledb_4U#
+
+    ![start capture](images/im22.png =50%x*)
+    ![start capture](images/im23.png =50%x*)
 
 You may now **proceed to the next lab** 
 

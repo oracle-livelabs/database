@@ -40,20 +40,21 @@ Oracle Database 23ai provides a number of dictionary views to display the metada
     </copy>
     ```
 
-You should see the following-
+   You should see the following:
+
    ![Showing all_json_duality_views](images/lab040101.png " ")
 
-**NOTE:** If you scroll to the right of the Script Output pane you can see the JSON schema for the document. Also at the right end of the output is a column with the status of the view. 
+   **NOTE:** If you scroll to the right of the Script Output pane you can see the JSON schema for the document. Also at the right end of the output is a column with the status of the view. 
 
-The `ALL_JSON_DUALITY_VIEWS` view displays: 
-- the Owner and Name of the Duality View 
-- the Owner and Name of the underlying Root table 
-- information about the operations permitted on the Daulity View
-- whether the Duality View is Read Only 
-- JSON Schema information for the Duality View 
-- the status or validity of the Duality View
+      The `ALL_JSON_DUALITY_VIEWS` view displays: 
+      - the Owner and Name of the Duality View 
+      - the Owner and Name of the underlying Root table 
+      - information about the operations permitted on the Daulity View
+      - whether the Duality View is Read Only 
+      - JSON Schema information for the Duality View 
+      - the status or validity of the Duality View
 
-[More information on ALL\_JSON\_DUALITY\_VIEWS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEWS.html)
+   [More information on ALL\_JSON\_DUALITY\_VIEWS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEWS.html)
 
 
 2. For our next query, we will drill one step deeper and see a listing of all Duality Views and the underlying tables that the Duality View maps to. Run the following query-
@@ -64,20 +65,21 @@ The `ALL_JSON_DUALITY_VIEWS` view displays:
     </copy>
     ```
 
-You should see the following-
+   You should see the following:
+
    ![Showing all_duality_view_tabs view](images/lab040102.png " ")
 
-The `ALL_JSON_DUALITY_VIEW_TABS` view displays: 
-- the Owner and Name of the Duality View 
-- the Owner and Name of each of the underlying Base tables 
-- the SQL expression from the where clause applied to the Base tables to create the Duality View
-- information about the operations permitted on the Duality View
-- whether the Duality View is Read Only 
-- the parent of table, if the table is child table 
-- the relationship of the table to the parent table - in this case *singleton* means the child table is the target of an inner join 
+      The `ALL_JSON_DUALITY_VIEW_TABS` view displays: 
+      - the Owner and Name of the Duality View 
+      - the Owner and Name of each of the underlying Base tables 
+      - the SQL expression from the where clause applied to the Base tables to create the Duality View
+      - information about the operations permitted on the Duality View
+      - whether the Duality View is Read Only 
+      - the parent of table, if the table is child table 
+      - the relationship of the table to the parent table - in this case *singleton* means the child table is the target of an inner join 
 
 
-[More information on ALL\_JSON\_DUALITY\_VIEW\_TABS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEW_TABS.html)
+   [More information on ALL\_JSON\_DUALITY\_VIEW\_TABS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEW_TABS.html)
 
 
 3. We can also see a listing of all Duality Views and the underlying tables and columns that the Duality View maps to. Run the following query-
@@ -88,23 +90,24 @@ The `ALL_JSON_DUALITY_VIEW_TABS` view displays:
     </copy>
     ```
 
-You should see the following-
+   You should see the following:
+
    ![Showing all_duality_view_tab_cols view](images/lab040103.png " ")
 
-The `ALL_JSON_DUALITY_VIEW_TAB_COLS` view displays: 
-- the Owner and Name of the Duality View 
-- the Owner and Name of each of the underlying base tables 
-- whether the base table is the Root (or top-most ) table of the Duality View (binary value)
-- numeric value to identify the table in the Duality View
-- source column name, datatype and length
-- JSON key name being mapped to the column
-- information about the operations permitted on the Duality View
-- whether the column is read-only, generated or hidden
-- whether the column is part of a primary-key
-- position of the column in an ETAG, if it is part of an ETAG
+      The `ALL_JSON_DUALITY_VIEW_TAB_COLS` view displays: 
+      - the Owner and Name of the Duality View 
+      - the Owner and Name of each of the underlying base tables 
+      - whether the base table is the Root (or top-most ) table of the Duality View (binary value)
+      - numeric value to identify the table in the Duality View
+      - source column name, datatype and length
+      - JSON key name being mapped to the column
+      - information about the operations permitted on the Duality View
+      - whether the column is read-only, generated or hidden
+      - whether the column is part of a primary-key
+      - position of the column in an ETAG, if it is part of an ETAG
 
 
-[More information on ALL\_JSON\_DUALITY\_VIEW\_TAB\_COLS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEW_TAB_COLS.html)
+   [More information on ALL\_JSON\_DUALITY\_VIEW\_TAB\_COLS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEW_TAB_COLS.html)
 
 
 4. The final dictionary view we'll look at in this lab provides information about the links associated with the base tables for the specified Duality Views. Run the following query-
@@ -115,25 +118,26 @@ The `ALL_JSON_DUALITY_VIEW_TAB_COLS` view displays:
     </copy>
     ```
 
-You should see the following-
+   You should see the following:
+
    ![Showing all_duality_view_links view](images/lab040104.png " ")
 
-The `ALL_JSON_DUALITY_VIEW_TAB_LINKS` view displays: 
-- the Owner and Name of the Duality View 
-- the Owner and Name of each of the underlying "parent" base tables 
-- the Owner and Name of each of the underlying "child" base tables 
-- the column mappings between the parent and child tables
-- the type of join in use for the parent-child relationship
-- the name of the JSON key associated with the link
-- JSON key name being mapped to the column
-- information about the operations permitted on the Duality View
-- whether the column is read-only, generated or hidden
-- whether the column is part of a primary-key
-- position of the column in an ETAG, if it is part of an ETAG
+      The `ALL_JSON_DUALITY_VIEW_TAB_LINKS` view displays: 
+      - the Owner and Name of the Duality View 
+      - the Owner and Name of each of the underlying "parent" base tables 
+      - the Owner and Name of each of the underlying "child" base tables 
+      - the column mappings between the parent and child tables
+      - the type of join in use for the parent-child relationship
+      - the name of the JSON key associated with the link
+      - JSON key name being mapped to the column
+      - information about the operations permitted on the Duality View
+      - whether the column is read-only, generated or hidden
+      - whether the column is part of a primary-key
+      - position of the column in an ETAG, if it is part of an ETAG
 
-[More information on ALL\_JSON\_DUALITY\_VIEW\_TAB\_LINKS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEW_LINKS.html)
+   [More information on ALL\_JSON\_DUALITY\_VIEW\_TAB\_LINKS is available here.](https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/ALL_JSON_DUALITY_VIEW_LINKS.html)
 
-Feel free to run some additional queries of your own. 
+   Feel free to run some additional queries of your own. 
 
 ## Task 2: Create a JSON Duality View using the JSON-To-Duality Migrator.
 
@@ -182,7 +186,8 @@ To keep things simple, we are going to perform the whole process using the *infe
     </copy>
     ```
 
-You should see the following-
+   You should see the following:
+
    ![Showing create duality views](images/lab040201.png " ")
 
 
@@ -196,7 +201,8 @@ You should see the following-
     </copy>
     ```
 
-   You should see the following-
+   You should see the following:
+
    ![Showing data in course_duality view](images/lab040202a.png " ")
 
 
@@ -208,7 +214,8 @@ You should see the following-
     </copy>
     ```
 
-   You should see the following-
+   You should see the following:
+
    ![Showing data student_duality view](images/lab040202b.png " ")
 
 
@@ -220,10 +227,11 @@ You should see the following-
     </copy>
     ```
 
-You should see the following-
+   You should see the following:
+
    ![Showing contents of teacher_duality view](images/lab040202c.png " ")
 
-**NOTE:** You should notice a couple of things about the Duality Views that were created, first of all the views only contain the JSON document from each of the tables: `course_info`, `student_info` and `teacher_info`. Also, the key or **\_ID** column of the JSON Duality View is the first field of the Document.
+   **NOTE:** You should notice a couple of things about the Duality Views that were created, first of all the views only contain the JSON document from each of the tables: `course_info`, `student_info` and `teacher_info`. Also, the key or **\_ID** column of the JSON Duality View is the first field of the Document.
 
 3. We can also describe the Duality Views- 
 
@@ -233,7 +241,8 @@ You should see the following-
     </copy>
     ```
 
-You should see the following-
+   You should see the following:
+
    ![Showing student_duality view](images/lab040203.png " ")
 
 
@@ -245,7 +254,8 @@ You should see the following-
     </copy>
     ```
 
-You should see the following-
+   You should see the following:
+
    ![Showing teacher_duality view](images/lab040204.png " ")
 
 
@@ -258,7 +268,8 @@ You should see the following-
     </copy>
     ```
 
-You should see the following-
+   You should see the following:
+
    ![Showing teacher_duality view](images/lab040205.png " ")
 
 
@@ -272,10 +283,11 @@ You should see the following-
     </copy>
     ```
 
-You should see the following-
+   You should see the following:
+
    ![Showing all_json_duality_view_tab_cols view](images/lab040206.png " ")
 
-**Note:** Notice the columns that have been applied as the **_id** key for these Duality Views. Also notice the JSON documents contain Flexfields too. You can find out more about the Flex columns in chapter 7 of the JSON-Relational Duality Developers Guide linked in the *Learn More* section at the bottom of the lab.
+   **Note:** Notice the columns that have been applied as the **_id** key for these Duality Views. Also notice the JSON documents contain Flexfields too. You can find out more about the Flex columns in chapter 7 of the JSON-Relational Duality Developers Guide linked in the *Learn More* section at the bottom of the lab.
 
 
 7. Operations on the Duality Views created with the JSON Migrator tool are similar to other Duality Views in that we can even perform *Query-By-Example* (QBE) operations. For example, we can display just the details for a Teacher with a lastname of: "Ansell"-
@@ -288,13 +300,14 @@ You should see the following-
     </copy>
     ```
 
-You should see the following-
+   You should see the following:
+
    ![Showing teacher_duality view](images/lab040207.png " ")
 
 
-Feel free to try some other queries, including operations from the previous lab.
+   Feel free to try some other queries, including operations from the previous lab.
 
-Congratulations! You have finished this lab. You may now **proceed to the next lab** 
+   Congratulations! You have finished this lab. You may now **proceed to the next lab** 
 
 ## Learn More
 
