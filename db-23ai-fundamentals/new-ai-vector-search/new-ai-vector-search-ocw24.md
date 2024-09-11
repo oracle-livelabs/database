@@ -9,7 +9,8 @@ This lab will focus on AI Vector Search at a very high level and the embedding o
 Estimated Lab Time: 20 minutes
 
 Watch the video below for a walkthrough of the lab.
-[Lab walkthrough video](videohub:1_0wuh9kch)
+[Lab walkthrough video](videohub:1_gfoo1dz4)
+
 
 ### Objective:
 In this lab, you will learn how to integrate an Oracle Database with a Large Language Model (LLM) to ask questions and receive relevant answers based on your data. This process is called Retrieval Augmented Generation, or RAG. You will explore the new vector data type introduced in Oracle Database 23ai. You will create tables, work with vectors, and use some of the new AI Vector Search SQL functions. 
