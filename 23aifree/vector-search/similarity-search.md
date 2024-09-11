@@ -92,7 +92,7 @@ This lab assumes you have:
         FROM co.products;
     </copy>
     ```
-    ![Generate description vectors.](images/generate-vectors.png)
+    ![Generate description vectors.](images/create-product-vectors.png)
 
 2. **Using vector search, retrieve the 5 products most similar to the word "professional".** By default, VECTOR_DISTANCE uses the cosine formula as it's distance metric, but you can change the metric as you see fit. We recommend using the metric suggested by the embedding model, in this case it was cosine. Learn more about distance metrics [here](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/vector-distance-metrics.html).
     ```
@@ -120,9 +120,8 @@ This lab assumes you have:
     Once again--big improvements! Notice that the model was able to relate slacks to other bottoms, and use the term's professional context to find other formal wear. So, despite there not being a product description containing the word "slacks", viable results are still returned due to their similarity to the query. 
     ![Similarity search on the word slacks.](images/similarity-search-slacks.png)
 
-**You've completed the workshop!**
-<!-- ## Task 3: Combine Business Data with Similarity Search -->
-<!-- You may now proceed to the next lab. -->
+
+**Congratulations! You've completed the workshop.**
 
 ## Acknowledgements
 - **Authors** - Brianna Ambler, Database Product Management
