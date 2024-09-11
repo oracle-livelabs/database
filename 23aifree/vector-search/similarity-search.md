@@ -12,7 +12,7 @@ In this lab, you will:
 * Configure your workspace to use Oracle AI Vector Search.
 * Load a vector embedding model.
 * Vectorize the sample data.
-* Leverage your business data with vector search. 
+* Query the vector data with Oracle AI Vector Search.
 
 ### **Prerequisites**
 This lab assumes you have:
