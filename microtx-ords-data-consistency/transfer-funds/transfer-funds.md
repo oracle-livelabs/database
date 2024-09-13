@@ -4,7 +4,7 @@
 
 Run the Bank Transfer application, which uses the XA transaction protocol, to transfer an amount from one department to another. Run this application to understand how you can use Transaction Manager for Microservices (MicroTx) to coordinate XA transactions across ORDS applications.
 
-Estimated Lab Time: *10 minutes*
+Estimated Lab Time: *15 minutes*
 
 ### Objectives
 
@@ -56,16 +56,28 @@ Follow the instructions in this section to start Minikube, and then verify that 
 
 Build and deploy the Teller application, which is the transaction initiator service.
 
-1. Run the following command to build the container image of the Teller application.
+1. Run the following commands to build the container image of the Teller application.
 
     ```text
     <copy>
     cd /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/teller
+    </copy>
+    ```
+
+    ```text
+    <copy>
     minikube image build -t=xa-java-teller:1.0 .
     </copy>
     ```
 
 2. Open the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/helmcharts/ords-teller/values.yaml` file in any code editor. This is the manifest file, which contains the deployment configuration details of the Teller application.
+
+    **Example command**
+    ```text
+    <copy>
+    vim /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/helmcharts/ords-teller/values.yaml
+    </copy>
+    ```
 
 3. Enter the details, including the schema name, to access the Oracle REST Data Services (ORDS) endpoints. In the following sample code, the name of the schema is `otmm`.
 
@@ -81,6 +93,11 @@ Build and deploy the Teller application, which is the transaction initiator serv
     ```text
     <copy>
     cd /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/helmcharts
+    </copy>
+    ```
+
+    ```text
+    <copy>
     helm install ords-teller --namespace otmm ords-teller/ --values ords-teller/values.yaml
     </copy>
     ```
@@ -146,6 +163,11 @@ Before you start a transaction, you must start a Minikube tunnel.
     ```text
     <copy>
     cd $HOME
+    </copy>
+    ```
+
+    ```text
+    <copy>
     sh reconfigureCoordinator.sh
     </copy>
     ```
@@ -343,8 +365,8 @@ To bring up the Text Editor, click on Activities (top left) -> Show Applications
 
 The application source code is present in following location.
 
-* Teller application source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/teller
-* Department 1 and Department 2 application source code: /home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/databaseapp/ordsapp.sql
+* Teller application source code: `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/teller`.
+* Department 1 and Department 2 application source code: `/home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/databaseapp/ordsapp.sql`.
 
 You may now **proceed to the next lab.**
 
@@ -356,4 +378,4 @@ You may now **proceed to the next lab.**
 
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
 * **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja Kannan, July 2024
+* **Last Updated By/Date** - Sylaja Kannan, September 2024
