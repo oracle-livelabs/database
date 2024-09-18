@@ -124,23 +124,25 @@ This lab assumes you have:
 
 ## Task 2: Grant Privileges to the Schema in FREEPDB1
 
-1. Login to FREEPDB1 using the default username and password.
+1. Login to FREEPDB1 as SYS user.
 
     ```SQL
     <copy>
-    sys/Passw0rd@FREEPDB1 as sysdba
+    sys/[new-user-password]@FREEPDB1 as sysdba
     </copy>
     ```
 
-2. Change the default password.
+    Where, `[new-user-password]` is the new password that you specify for the `SYS` user in a previous task.
+
+2. Change the password for the OTMM user.
 
     ```SQL
     <copy>
-    ALTER USER OTMM IDENTIFIED BY [<new-freepdb1-password>];
+    ALTER USER OTMM IDENTIFIED BY [new-freepdb1-password];
     </copy>
     ```
 
-    Where, `<new-freepdb1-password>` is the new password that you want to set for the `OTMM` schema user.
+    Where, `[new-freepdb1-password]` is the new password that you want to set for the `OTMM` schema user.
 
     ```SQL
     <copy>
@@ -198,23 +200,25 @@ This lab assumes you have:
 
 ## Task 3: Grant Privileges to the Schema in FREEPDB2
 
-1. Login to FREEPDB2 using the default username and password.
+1. Login to FREEPDB1 as SYS user.
 
     ```SQL
     <copy>
-    sys/Passw0rd@FREEPDB2 as sysdba
+    sys/[new-user-password]@FREEPDB1 as sysdba
     </copy>
     ```
 
-2. Change the default password.
+    Where, `[new-user-password]` is the new password that you specify for the `SYS` user in a previous task.
+
+2. Change the password for the OTMM user.
 
     ```SQL
     <copy>
-    ALTER USER OTMM IDENTIFIED BY [<new-freepdb2-password>];
+    ALTER USER OTMM IDENTIFIED BY [new-freepdb2-password];
     </copy>
     ```
 
-    Where, `<new-freepdb2-password>` is the new password that you want to set for the `OTMM` schema user.
+    Where, `[new-freepdb2-password]` is the new password that you want to set for the `OTMM` schema user.
 
     ```SQL
     <copy>
