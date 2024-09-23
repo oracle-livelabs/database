@@ -141,6 +141,10 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
     import sys
 
     tokenizer = AutoTokenizer.from_pretrained("./transformers/all-MiniLM-L12-v2", local_files_only=True)</if>
+    <if type="ocw24">from transformers import AutoTokenizer
+    import sys
+
+    tokenizer = AutoTokenizer.from_pretrained("./transformers/all-MiniLM-L12-v2", local_files_only=True)</if>
     tokenizer.model_max_length = sys.maxsize
 
     def truncate_string(string, max_tokens):
@@ -279,7 +283,7 @@ Enter the path and name of your private key at the end of the `key_file` line.
     ```
 
 ### Step 2: Make the call
-This code leverages *Oracle Cloud Infrastructure (OCI)* to generate text using a language model, specifically the “*meta.llama-2-70b-chat*” model. The process starts by creating an inference request where various parameters are defined. These parameters include the input prompt, the maximum number of tokens to generate, and settings for controlling the randomness and creativity of the output, such as `temperature` and `top_p` values. The `is_stream` attribute is set to `False`, indicating that the SDK currently does not support streaming responses.
+This code leverages *Oracle Cloud Infrastructure (OCI)* to generate text using a language model, specifically the “*cohere.command-r-plus*” model. The process starts by creating an inference request where various parameters are defined. These parameters include the input prompt, the maximum number of tokens to generate, and settings for controlling the randomness and creativity of the output, such as `temperature` and `top_p` values. The `is_stream` attribute is set to `False`, indicating that the SDK currently does not support streaming responses.
 
 Next, the code sets up the details required for the text generation request. This involves specifying the serving mode and model ID, which identifies the language model to use, and the compartment ID where the request will be processed. The inference request, with all its configured parameters, is then attached to these details. This setup ensures that the OCI service knows exactly what model to use and how to handle the request.
 
