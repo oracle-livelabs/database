@@ -273,12 +273,91 @@ This lab assumes you have:
 
     You can now see that the update made to the orders table has propogated to the customer orders duality view, and the same occurs for all other representations of the customers table!
 
-**You've completed the workshop!**
-
 Note that the "etag" value supplied in the content is used for "out-of-the-box" optimistic locking to prevent the well-known "lost update" problem that can occur with concurrent operations. During a replace operation, the database checks that the eTag provided in the replacement document matches the latest eTag of the target Duality View document.
 
 If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. If you get the error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value.
 
+## Task 3: (Optional) JSON Relational Duality Views with REST
+
+1. We can also use Oracle's SODA (Simple Object Data API) or even the Mongo API to work against the Duality View.
+
+    For a small example, I will show this using a macOS native terminal and execute a basic GET request.
+
+2. Click on SQL under the Development section. The first thing we want to do is enable REST on our Duality Views. Use the Oracle Database Actions Navigator on the left side of the screen, click the drop-down arrow for the box showing the Table objects, and select Views. Refer to the picture below.
+
+    ![load rest](images/rest1.png " ")
+
+3. Right-click on the CUSTOMERS_DV, hover the mouse over REST, and click Enable if it isn't already enabled. See the picture below. NOTE: If it is enabled already, it will say Disable… instead. If you see Disable… you don't have to do anything. Skip to number 5.
+
+    ![locating rest](images/rest2.png =50%x*)
+
+4. The REST Enable Object side panel will appear. Select Enable to continue.
+
+    ![pick the rest panel](images/rest3.png " ")
+
+    Alternatively we could have done this in PL/SQL.
+
+5. Here we will use the SQL Developer Web URL to obtain your ADB instance base URL:
+
+	```
+    ADB_LL_URL = https://xxxxxxxxxx.adb.<region>.oraclecloudapps.com
+    ```
+
+    ![find the URL](images/r2.png " ")
+
+    For example,  mine looks like this: 
+
+    ```
+    ADB_LL_URL=https://ajs6esm7pafcr84-atp97134.adb.us-ashburn-1.oraclecloudapps.com
+    ```
+
+6. Now, create a variable in your terminal (It shouldn't have / at the end.)
+
+	```
+	<copy>
+    export ADB_LL_URL=https://ajs6esm7pafcr84-atp97134.adb.us-ashburn-1.oraclecloudapps.com
+    </copy>
+    ```
+
+7. Check it was set.
+
+	```
+	<copy>
+    echo $ADB_LL_URL
+    </copy>
+    ```
+    > NOTE: This base url will be unique for each user, verify that you are using the correct URL.
+
+8. Make a GET request from your laptop terminal command line.
+
+	```
+	<copy>
+    curl -X GET $ADB_LL_URL/ords/admin/customers_dv/ | json_pp
+
+    </copy>
+    ```
+    ![pull one doc](images/r1.png " ")
+
+
+9. This lab is only intended to give you a small taste of what Duality Views have to offer. For full, in-depth free workshops, follow the link below:
+
+    [23ai JSON Duality View Workshops](https://livelabs.oracle.com/pls/apex/f?p=133:100:110578183178299::::SEARCH:duality%20views)
+
+    In summary, this lab checks out the power of JSON Relational Duality Views, allowing you to work with data in either JSON Document format or SQL Relational format. Changes made through views are reflected in the corresponding documents and tables. This flexibility enables convenient create, read, update, or delete operations across multiple documents and tables with ease.
+
+10. We can clean up from the lab by dropping our tables. Navigate back to the SQL editor or go back to task one - step one if you need a reminder where it is.
+
+    ```
+    <copy>
+    DROP TABLE orders CASCADE CONSTRAINTS;
+    DROP TABLE customers CASCADE CONSTRAINTS;
+    DROP VIEW customer_orders_dv;
+    DROP VIEW customers_dv;
+
+    </copy>
+    ```
+    
+**You've completed the workshop!**
 
 ## Learn More
 
@@ -288,4 +367,4 @@ If the eTags do not match, which can occur if another concurrent operation updat
 ## Acknowledgements
 * **Author** - Killian Lynch, Oracle Database Product Management, Product Manager
 * **Contributors** - Dominic Giles, Oracle Database Product Management, Distinguished Product Manager
-* **Last Updated By/Date** - Briana Ambler, Oracle Database Product Management, Product Manager, August 2024
+* **Last Updated By/Date** - Brianna Ambler, Oracle Database Product Management, Product Manager, September 2024
