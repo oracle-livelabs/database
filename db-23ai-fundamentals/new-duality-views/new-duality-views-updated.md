@@ -278,7 +278,7 @@ Note that the "etag" value supplied in the content is used for "out-of-the-box" 
 If the eTags do not match, which can occur if another concurrent operation updated the same document, an error is thrown. If you get the error, you can reread the updated value (including the updated eTag), and retry the replace operation again, adjusting it (if desired) based on the updated value.
 
 
-## Task 3: (Optional) JSON Relational Duality Views with REST
+## Task 5: (Optional) JSON Relational Duality Views with REST
 
 1. We can also use Oracle's SODA (Simple Object Data API) or even the Mongo API to work against the Duality View.
 
@@ -357,7 +357,7 @@ If the eTags do not match, which can occur if another concurrent operation updat
 
     </copy>
     ```
-    
+
 **You've completed the workshop!**
 
 ## Learn More
