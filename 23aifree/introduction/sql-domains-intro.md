@@ -32,22 +32,21 @@ In this lab, you will:
 ### Prerequisites
 
 In order to do this workshop you need
-* An Oracle 23ai Free Developer Release Database or one running in a LiveLabs environment
+* An Oracle 23ai Database or one running in a LiveLabs environment
 
 ## Learn More
 
-* [SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/index.html)
-* [Database Development Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/adfns/registering-application-data-usage-database.html#GUID-6F630041-B7AE-4183-9F97-E54682CA6319)
-* [Oracle Database Free - Developer Release User Forum](https://forums.oracle.com/ords/apexds/domain/dev-community/category/oracle-database-free)
-* [Oracle Database 23ai Free—Developer Release Product Site](https://www.oracle.com/database/free/)
-* [Oracle Database New Features](https://docs.oracle.com/en/database/oracle/oracle-database/23/nfcoa/introduction.html#GUID-C852CD78-8F16-4449-8BE0-D85C80D38E3C)
-* [Permitted Database Offering](https://docs.oracle.com/en/database/oracle/oracle-database/23/dblic/Licensing-Information.html#GUID-0F9EB85D-4610-4EDF-89C2-4916A0E7AC87)
-
 * [Blog: Oracle Database 23ai Free Developer Release - 10 features you should know](https://blogs.oracle.com/coretec/post/oracle-database-23c-free-developer-sql)
+* [Oracle Database 23ai Free—Developer Release Product Site](https://www.oracle.com/database/free/)
+* [Oracle Database Free - Developer Release User Forum](https://forums.oracle.com/ords/apexds/domain/dev-community)
+* [Blog: Oracle Database Release 23ai is available now!](https://blogs.oracle.com/coretec/post/oracle-database-release-23ai)
 * [Blog: Less coding using new SQL Domains in 23ai](https://blogs.oracle.com/coretec/post/less-coding-with-sql-domains-in-23c)
-* [Blog: Introducing Oracle Database 23ai Free – Developer Release](https://blogs.oracle.com/database/post/oracle-database-23c-free)
 * [Blog: Annotations - The new metadata in 23ai](https://blogs.oracle.com/coretec/post/annotations-the-new-metadata-in-23c)
+* [Oracle Database New Features](https://docs.oracle.com/en/database/oracle/oracle-database/23/nfcoa/introduction.html#GUID-C852CD78-8F16-4449-8BE0-D85C80D38E3C)
+* [Database Development Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/adfns/registering-application-data-usage-database.html#GUID-6F630041-B7AE-4183-9F97-E54682CA6319)
+* [Permitted Database Offering](https://docs.oracle.com/en/database/oracle/oracle-database/23/dblic/Licensing-Information.html#GUID-0F9EB85D-4610-4EDF-89C2-4916A0E7AC87)
+* [SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/index.html)
 
 ## Acknowledgements
-* **Author** - Ulrike Schwinn, Distinguished Data Management Expert; Hope Fisher, Program Manager
-* **Last Updated By/Date** - Hope Fisher, June 2023
+* **Author** - Ulrike Schwinn, Distinguished Data Management Expert; Hope Fisher, Product Manager
+* **Last Updated By/Date** - Hope Fisher, Product Manager, Sept 2024

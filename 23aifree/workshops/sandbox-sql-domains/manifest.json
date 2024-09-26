@@ -27,7 +27,7 @@
         {
             "title": "Lab 3: Leverage SQL Domains",
             "description": "Leverage SQL Domains in Oracle Database 23ai",
-            "type": "livelabs",
+            "type": "sql-features",
             "filename": "../../sql-domains/sql-domains.md"
         },
         {

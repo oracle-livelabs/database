@@ -526,19 +526,20 @@ SQL Domains allow users to declare the intended usage for columns. They are data
     PERSON          TABLE	     PERSON_BIRTH    YEARBIRTH	  HOL23C     TITLE
     yearformat
     ```
+You may **proceed to the next lab.**
 
 ## Learn More
-
-* [SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/index.html)
-* [Database Development Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/adfns/registering-application-data-usage-database.html#GUID-6F630041-B7AE-4183-9F97-E54682CA6319)
+s
 * [Blog: Oracle Database 23ai Free Developer Release - 10 features you should know](https://blogs.oracle.com/coretec/post/oracle-database-23c-free-developer-sql)
-* [Blog: Introducing Oracle Database 23ai Free – Developer Release](https://blogs.oracle.com/database/post/oracle-database-23c-free)
-* [Oracle Database Free - Developer Release User Forum](https://forums.oracle.com/ords/apexds/domain/dev-community/category/oracle-database-free)
 * [Oracle Database 23ai Free—Developer Release Product Site](https://www.oracle.com/database/free/)
+* [Oracle Database Free - Developer Release User Forum](https://forums.oracle.com/ords/apexds/domain/dev-community)
+* [Blog: Oracle Database Release 23ai is available now!](https://blogs.oracle.com/coretec/post/oracle-database-release-23ai)
 * [Oracle Database New Features](https://docs.oracle.com/en/database/oracle/oracle-database/23/nfcoa/introduction.html#GUID-C852CD78-8F16-4449-8BE0-D85C80D38E3C)
+* [Database Development Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/adfns/registering-application-data-usage-database.html#GUID-6F630041-B7AE-4183-9F97-E54682CA6319)
 * [Permitted Database Offering](https://docs.oracle.com/en/database/oracle/oracle-database/23/dblic/Licensing-Information.html#GUID-0F9EB85D-4610-4EDF-89C2-4916A0E7AC87)
+* [SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/index.html)
 
 ## Acknowledgements
-* **Author** - Ulrike Schwinn, Distinguished Data Management Expert; Hope Fisher, Program Manager
+* **Author** - Ulrike Schwinn, Distinguished Data Management Expert; Hope Fisher, Product Manager
 * **Contributors** - Witold Swierzy, Data Management Expert; Stephane Duprat, Technical End Specialist
-* **Last Updated By/Date** - Hope Fisher, Oct 2023
+* **Last Updated By/Date** - Hope Fisher, Sept 2024

@@ -472,11 +472,11 @@ You have now **completed this workshop**.
 
 ## Learn More
 
-* [SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/index.html)
-* [Database Development Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/adfns/registering-application-data-usage-database.html#GUID-6F630041-B7AE-4183-9F97-E54682CA6319)
 * [Blog: Less coding using new SQL Domains in 23ai](https://blogs.oracle.com/coretec/post/less-coding-with-sql-domains-in-23c)
 * [Blog: Annotations - The new metadata in 23ai](https://blogs.oracle.com/coretec/post/annotations-the-new-metadata-in-23c)
+* [Database Development Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/adfns/registering-application-data-usage-database.html#GUID-6F630041-B7AE-4183-9F97-E54682CA6319)
+* [SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/index.html)
 
 ## Acknowledgements
-* **Author** - Ulrike Schwinn, Distinguished Data Management Expert; Hope Fisher, Program Manager
-* **Last Updated By/Date** - Hope Fisher, Oct 2023
+* **Author** - Ulrike Schwinn, Distinguished Data Management Expert; Hope Fisher, Product Manager
+* **Last Updated By/Date** - Hope Fisher, Sept 2024
