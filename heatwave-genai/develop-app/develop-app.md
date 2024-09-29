@@ -34,7 +34,7 @@ The following diagram provides details of how the different components of the He
 - The HeatWave RAG class interacts with the HeatWave instance.
 - The chat interface interacts with the PHP session for storing chat history.
 
-    ![Chat application architecture](./images/chat-app-architecture.png "Chat application architecture")
+    ![Chat application architecture](./images/chat-app-flow.png "Chat application architecture")
 
 #### Key Features
 
