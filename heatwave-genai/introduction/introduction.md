@@ -30,6 +30,7 @@ In this lab, you will be guided through the following steps:
 3. Connect to the HeatWave instance from Visual Studio Code
 4. Generate content
 5. Perform a vector search
+6. Build HeatWave RAG Chat Application
 
 ## Prerequisites
 
