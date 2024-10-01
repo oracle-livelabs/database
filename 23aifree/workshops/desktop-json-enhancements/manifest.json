@@ -34,11 +34,6 @@
             "filename": "./../../json-sql/json-sql.md"
         },
         {
-            "title": "Lab 5: Work with JSON Search Indexes",
-            "description": "Work with JSON Search Indexes",
-            "filename": "./../../json-search/json-search.md"
-        },
-        {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
             "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
