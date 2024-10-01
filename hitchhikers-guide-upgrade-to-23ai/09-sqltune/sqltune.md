@@ -6,6 +6,8 @@ In this lab, you will use SQL Tuning Advisor (STA) to find suggestions for impro
 
 Estimated Time: 10 minutes
 
+[Hitchhiker's Guide LAB9](videohub:1_prpaczgp)
+
 ### Objectives
 
 In this lab, you will:

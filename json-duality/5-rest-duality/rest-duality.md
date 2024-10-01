@@ -37,9 +37,13 @@ The Oracle Autonomous Database Actions | SQL tool makes it very easy to REST-ena
 
   ![showing the views drop-down](./images/lab050101b.png)
 
-2. Right click on the `STUDENT_SCHEDULE`, hover the mouse over **REST** and click **Enable** if it isn't already enabled. If it is already enabled, it will say Disable... instead. If you see Disable... you don't have to do anything and Skip to number 5.
+2. Right click on the `STUDENT_SCHEDULE`, hover the mouse over **REST** and click **Enable** if it isn't already enabled. 
+   
+   If it is already enabled, it will say Disable... instead.
+   
+   If you see Disable... you don't have to do anything and can Skip ahead to Step number 5.
 
-NOTE: If you are running macOS, you may need to press the *control-key* while clicking the name of the view for the side panel to appear. 
+    **NOTE**: If you are running macOS, you may need to press the *control-key* while clicking the name of the view for the side panel to appear. 
 
   ![showing the REST pop-up menu](./images/lab050102.png)
 
@@ -71,7 +75,7 @@ NOTE: If you are running macOS, you may need to press the *control-key* while cl
     ```
     ![showing the sql time to add the PL sql above](./images/lab050104a.png " ")
  
-After the script completes running, click the **refresh-ICON** and you should see the following icon appear alongside the `STUDENT_DUALITY` view.
+    After the script completes running, click the **refresh-ICON** and you should see the following icon appear alongside the `STUDENT_DUALITY` view.
 
    ![showing the refresh ICON to update the REST setting](./images/lab050104b.png " ")
 
@@ -182,7 +186,7 @@ After the script completes running, click the **refresh-ICON** and you should se
 
    **NOTE:** Feel free to try this query using the PRETTY format to see the entry in the JSON document format.
 
-7. We can also view the underlying `student_courses` table to see the newly inserted ro by running the following query-
+7. We can also view the underlying `student_courses` table to see the newly inserted row by running the following query-
 
    ```
    <copy>

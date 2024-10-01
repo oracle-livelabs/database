@@ -6,6 +6,9 @@ Welcome to the "Exploring the SQL Analysis Report" lab. In this lab, you will le
 
 Estimated Lab Time: 15 minutes
 
+Watch the video below for a walkthrough of the lab.
+[Lab walkthrough video](videohub:1_qn2333jb)
+
 ### Objective:
 The objective of this lab is to show you the SQL Analysis Report feature in Oracle Database 23ai. By the end of this lab, you will be able to interpret SQL Analysis Reports and use the insights to improve query performance.
 
@@ -24,8 +27,8 @@ The objective of this lab is to show you the SQL Analysis Report feature in Orac
 
     ```
     <copy>
-    DROP TABLE sales cascade constraints;
-    DROP TABLE products cascade constraints;
+    DROP TABLE IF EXISTS sales cascade constraints;
+    DROP TABLE IF EXISTS products cascade constraints;
 
     CREATE TABLE sales (
         sale_id INT,

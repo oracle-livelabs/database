@@ -4,7 +4,9 @@
 
 In this lab, you create a new, empty pluggable database in *CDB23*. The database will run on Oracle Database 23ai. You perform a series of checks and preparations to ensure the database is fit for the migration.
 
-Estimated Time: 10 Minutes.
+Estimated Time: 10 Minutes
+
+[Next Level Platform](videohub:1_04gmmrd8)
 
 ### Objectives
 

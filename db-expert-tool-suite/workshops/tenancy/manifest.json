@@ -1,0 +1,45 @@
+{
+    "workshoptitle": "Accelerate Oracle Database Deployments with AI-Enabled DBExpert Tool Suite: Identify, Compare, and Price Services",
+    "include": {"starter-file.sql":"../../data-load/files/starter-file.sql",
+                "sample.json":"../../data-load/files/sample.json",
+                "step2.md":"../../data-load/files/step2.md"},
+    "variables": ["../../variables/variables.json",
+                 "../../variables/variables-in-another-file.json"],
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "DBExpert provides users with comprehensive information on all of the Oracle Cloud Database Services across all supported cloud environments.",
+            "filename": "../../db-tutorials/0-0-intro/introduction.md"
+        },
+        {
+            "title": "Getting Started",
+            "description": "DBExpert is an evergreen online tool suite to accelerate migrations and new Oracle Cloud Database Services deployments.",
+            "filename": "../../db-tutorials/0-getting-started/getting-started.md"
+        },
+        {
+            "title": "Lab 1: View and Compare Services Tool",
+            "filename": "../../db-tutorials/1-view-and-compare/view-and-compare.md"
+        },
+        {
+            "title": "Lab 2: AskDBExpert (AI-powered Assistant)",
+            "filename": "../../db-tutorials/2-ask-dbexpert/ask-dbexpert.md"
+        },
+        {
+            "title": "Lab 3: Service Advisor",
+            "filename": "../../db-tutorials/3-service-advisor/service-advisor.md"
+        },
+        {
+            "title": "Lab 4: Migration Advisor",
+            "filename": "../../db-tutorials/4-migration-advisor/migration-advisor.md"
+        },
+        {
+            "title": "Lab 5: Oracle Estate Explorer (Honorable Mention)",
+            "filename": "../../db-tutorials/5-oracle-estate-explorer/oracle-estate-explorer.md"
+        },
+        {
+            "title": "Lab 6: Additional Resources",
+            "filename": "../../db-tutorials/6-additional-resources/additional-resources.md"
+        }
+    ]
+}

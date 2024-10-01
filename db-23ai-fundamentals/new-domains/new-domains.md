@@ -6,6 +6,9 @@ Welcome to the "Data Usecase Domains Exploration" lab! Data Usecase Domains play
 
 Estimated Lab Time: 20 minutes
 
+Watch the video below for a walkthrough of the lab.
+[Lab walkthrough video](videohub:1_u7ik5hzz)
+
 ### Objective:
 The objective of this lab is to provide comprehensive hands-on experience with Data Usecase Domains in Oracle Database 23ai. By the end of this lab, you will be proficient in defining various types of Data Usecase Domains, applying them to tables, and leveraging domain functions for effective data management.
 
@@ -26,10 +29,11 @@ The objective of this lab is to provide comprehensive hands-on experience with D
    - Single Column Domain: Applies constraints to a single column.
    - Multi-Column Domain: Applies constraints to multiple columns.
    - Flexible Domain: Allows dynamic selection of Data Usecase Domains based on specific conditions.
+   - Enumeration Use Case Domain: ontains a set of names, and optionally, a value corresponding to a name.
 
 ## Task 2: Creating and Implementing Data Usecase Domains
 
-1. Single Column Domain Example: From the explanation above, let's see what each of the three types of Data Usecase Domains looks like. We'll start by creating a single column domain for storing product prices. We will enforce a constraint to ensure that prices are positive numbers.
+1. Single Column Domain Example: From the explanation above, let's see what three of the four types of Data Usecase Domains looks like (Enumeration Use Case Domain will be added to the workshop soon). We'll start by creating a single column domain for storing product prices. We will enforce a constraint to ensure that prices are positive numbers.
 
     ```
     <copy>

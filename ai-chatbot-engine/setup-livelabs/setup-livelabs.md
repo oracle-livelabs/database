@@ -18,7 +18,7 @@ Estimated Time: 15 minutes
 ## Task 1: Open the remote Jupyter Lab environment
 Click the `View Login Info` link in the uper left side of your lab window:
 
-![alt text](<images/image3.png>)
+![alt text](images/image3.png)
 
 To access the Jupyter Lab environment we will use to write and test our code, click the JupyterLab link in the resulting popup. 
 The password is listed in the same popup as well.
@@ -142,9 +142,7 @@ You may now **proceed to the next lab**
 ## Acknowledgements
 * **Author** - Bogdan Farca, Customer Strategy Programs Leader, Digital Customer Experience (DCX), EMEA
 * **Contributors** 
-   - Liana Lixandru, Senior Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
+   - Liana Lixandru, Principal Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
    - Kevin Lazarz, Senior Manager, Product Management, Database
    - Wojciech Pluta, Director, Technical Product Marketing
-* **Last Updated By/Date** -  Bogdan Farca, Jul 2024
-   - Wojciech Pluta, Director, Technical Product Marketing
-* **Last Updated By/Date** -  Bogdan Farca, Jul 2024
+* **Last Updated By/Date** -  Bogdan Farca, Sep 2024

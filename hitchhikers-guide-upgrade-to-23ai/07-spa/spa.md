@@ -6,6 +6,8 @@ In this lab, you will use the SQL Performance Analyzer (SPA) that is a part of t
 
 Estimated Time: 10 minutes
 
+[Hitchhiker's Guide LAB7](videohub:1_khvx83yu)
+
 ### Objectives
 
 In this lab, you will:
@@ -19,7 +21,7 @@ This lab assumes:
 
 ## Task 1: Check statements
 
-1. Use the *ywllow* terminal. Set the environment and connect to *CDB23*, then switch to *UPGR*.
+1. Use the *yellow* terminal. Set the environment and connect to *CDB23*, then switch to *UPGR*.
 
       ```
       <copy>
