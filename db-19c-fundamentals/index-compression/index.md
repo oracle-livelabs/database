@@ -120,7 +120,7 @@ The Advanced Index Compression feature is a powerful tool for optimizing databas
 
 If your interested in learning more about Advanced Compression, check out the full Advanced Compression LiveLab below.
 
-* [Oracle Advanced Index Compression LiveLab](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=1017&clear=RR,180&session=115125103779999) 
+* [Oracle Advanced Index Compression LiveLab](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=1017&clear=RR,180&session=115125103779999) 
 
 You successfully made it to the end this lab. You may now **proceed to the next lab**.    
 
