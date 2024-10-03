@@ -6,7 +6,7 @@ Now, you have migrated the database. Before going live, there are a few importan
 
 Estimated Time: 10 Minutes
 
-[Next Level Platform](videohub:1_qxg5tjfj)
+[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 10](youtube:lwvdaM4v4tQ?start=2722)
 
 ### Objectives
 
