@@ -16,7 +16,7 @@ This is an optional lab. You can skip it and move directly to lab 8.
 
 Estimated Time: 20 Minutes
 
-[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 7](youtube:lwvdaM4v4tQ?start=1569)
+[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 7](youtube:fgyDy-QcV_o?start=1569)
 
 ### Objectives
 

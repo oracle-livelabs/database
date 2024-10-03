@@ -6,7 +6,7 @@ In this lab, you will perform a number of checks on the source database to ensur
 
 Estimated Time: 10 Minutes
 
-[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 2](youtube:lwvdaM4v4tQ?start=275)
+[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 2](youtube:fgyDy-QcV_o?start=275)
 
 ### Objectives
 
