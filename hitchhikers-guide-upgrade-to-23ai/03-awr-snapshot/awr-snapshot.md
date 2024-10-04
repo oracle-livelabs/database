@@ -6,7 +6,7 @@ In this lab, you will execute an application workload using HammerDB on the *UPG
 
 Estimated Time: 15 Minutes
 
-[Hitchhiker's Guide LAB3](videohub:1_533ui7ij)
+[Hitchhiker's Guide Lab 3](youtube:lwvdaM4v4tQ?start=1290)
 
 ### Objectives
 
