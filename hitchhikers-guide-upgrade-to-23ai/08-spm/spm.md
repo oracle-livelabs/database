@@ -8,7 +8,7 @@ Credits: You will use scripts written by Carlos Sierra.
 
 Estimated Time: 15 minutes
 
-[Hitchhiker's Guide LAB8](videohub:1_0m3rb2yz)
+[Hitchhiker's Guide Lab 8](youtube:lwvdaM4v4tQ?start=3855)
 
 ### Objectives
 
