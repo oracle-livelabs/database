@@ -17,8 +17,12 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
 
 ## Task 1: Enabling SQL Firewall
 
-1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png " ")
+1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
+    ![click SQL](images/im1.png =50%x*)
+
+2. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
+
+    ![click SQL](images/simple-db-actions.png =50%x*)
 
 2. For this lab, we'll create two new users, 'TEST' and 'DB23AI' and grant necessary roles including SQL\_FIREWALL\_ADMIN and the developer role respectively.
 
@@ -200,7 +204,10 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     WHERE username = 'DB23AI';
     </copy>
     ```
+
     ![review capture logs](images/im12.png " ")
+
+    Remember we are capturing everything. We are going to see the statements we ran as well as the things we clicked on inside of database actions, like signing in and out of our user.
 
 2. Check the allow list, which will initially be empty.
 
