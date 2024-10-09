@@ -27,30 +27,66 @@ The objective of this workshop is to learn how to work with the schema-level pri
 1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
     ![click SQL](images/im1.png " ")
 
-2. Let's create roles and users, and assign schema-level privilages using role based access control for efficient management. The roles will be assigned schema-level privileges rather than individual users.
+2. Let's first drop roles and users.
 
     ```
     <copy>
-    -- Drop users and roles if they already exist
+    -- Drop users if they already exist
     DROP USER IF EXISTS hr_user CASCADE;
     DROP USER IF EXISTS it_user CASCADE;
     DROP USER IF EXISTS it_manager CASCADE; 
-    DROP ROLE IF EXISTS hr_role;
-    DROP ROLE IF EXISTS it_role;
-    DROP ROLE IF EXISTS it_manager_role;
     </copy>
     ```
     ![drops users and roles](images/a.png " ")
 
-3. We will next be creating users, their respective roles and the quota for the tablespace.
+3. We will next create users. We will begin with a placeholder password. To change the password for the users use the "alter user identified by "new password" command. With the syntax below for distinct users, make sure to replace `new_password_here` to your new password(needs one uppercase letter and atleast one number). Throughout this workshop we will use the Oracle123long password.
 
     ```
     <copy>
     -- Create users
-    CREATE USER hr_user IDENTIFIED BY Oracle123long;
-    CREATE USER it_user IDENTIFIED BY Oracle123long;
-    CREATE USER it_manager IDENTIFIED BY Oracle123long;
+    CREATE USER hr_user IDENTIFIED BY Placeholder1;
+    CREATE USER it_user IDENTIFIED BY Placeholder2;
+    CREATE USER it_manager IDENTIFIED BY Placeholder3;
+    </copy>
+    ```
+    ![creates users](images/1a.png " ")
 
+    
+    This will change the password for hr_user
+    ```
+    <copy>
+    ALTER USER hr_user IDENTIFIED BY  </copy>new_password_here;
+    ```
+    ```
+    ALTER USER hr_user IDENTIFIED BY Oracle123long;
+    ```
+    ![changes password for hr user](images/1b.png " ")
+
+
+    This will change the password for it_user
+    ```
+    <copy>
+    ALTER USER it_user IDENTIFIED BY  </copy>new_password_here;
+    ```
+    ```
+    ALTER USER it_user IDENTIFIED BY Oracle123long;
+    ```
+    ![changes password for it user](images/1c.png " ")
+
+
+    This will change the password for it_manager
+    ```
+    <copy>
+    ALTER USER it_manager IDENTIFIED BY  </copy>new_password_here;
+    ```
+    ```
+    ALTER USER it_manager IDENTIFIED BY Oracle123long;
+    ```
+    ![changes password for it manager](images/1d.png " ")
+
+4. Now we will be granting the respective roles to the users as well as the quota for the tablespace.
+    ```
+    <copy>
     --Grant roles to user
     GRANT CONNECT, RESOURCE TO hr_user, it_user, it_manager;
     GRANT DWROLE TO hr_user, it_user, it_manager;
@@ -62,10 +98,10 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ALTER USER it_manager QUOTA UNLIMITED ON DATA;
     </copy>
     ```
-    ![creates and grants users and roles](images/b.png " ")
+    ![creates and grants users and roles](images/1e.png " ")
 
 
-4. Next, this will enable the users to have access to console.
+5. With this next code, we will enable web access to our 3 users.
 
     ```
     <copy>
@@ -126,7 +162,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ```
     ![grants users access to webconsole](images/c.png " ")
 
-5. Now we will create `employees`, `department` and `salary` tables. These tables will demonstarte how different levels of privilege can be applied.  
+6. Now we will create `employees`, `department` and `salary` tables. These tables will demonstarte how different levels of privilege can be applied.  
 
     ```
     <copy>
@@ -177,18 +213,22 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ```
     <copy>
     SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'HR_USER';
+    SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'IT_USER';
+    SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'IT_MANAGER';
     SELECT * FROM DBA_TAB_PRIVS WHERE GRANTEE = 'IT_USER';
     SELECT * FROM DBA_TAB_PRIVS WHERE GRANTEE = 'IT_MANAGER';
     </copy>
     ```
-    ![view privileges](images/f.png " ")
+    
+    Since only `hr_user` has schema-level privileges, when we run `DBA_SCHEMA_PRIVS`, we see that the privilege SELECT is set to ANY. Meanwhile, since both `it_user` and `it_manager` neither have schema-level privileges, when running the same command for both they return no data found as neither has the correct privileges. It is only with `DBA_TAB_PRIVS` that we can see their privileges.
+    ![view privileges](images/f1.png " ")
 
 ## Task 4: Demonstrating Schema-Level Privileges
-1. To explore the new schema-level privileges, `Sign out` of the `ADMIN` account and log in as the `hr_user` user. At the login screen, click on `Advanced` to drop down the Path settings. Now, enter the login credentials for the `hr_user` user:
+1. To explore the new schema-level privileges, `Sign out` of the `ADMIN` account and log in as the `hr_user` user. At the login screen, enter the login credentials for the `hr_user` user:
     - `USERNAME`: hr_user 
     - `PASSWORD`: Oracle123long
 
-    ![signout from admin](images/6.png " ")
+    ![signout from admin](images/16.png " ")
     ![login screen for hr_user](images/7.png " ")
     ![click on sql](images/8.png " ")
 
@@ -279,8 +319,28 @@ The objective of this workshop is to learn how to work with the schema-level pri
 
     ![it user viewing all the tables](images/J.png " ")
 
-9. Let's return to the `Admin` account by logging out of the `it_user` session. Navigate back to the  ADB screen on OCI ,click on SQL again to automatically return to the `ADMIN`.
-    ![signout hr_user](images/20.png " ")
+10. Sign out of the `it_user` session and log into `hr_user`. We will see how the privileges of this user is limited when compared to hr_user.
+    - `USERNAME`: hr_user 
+    - `PASSWORD`: Oracle123long
+
+    ![signout from admin](images/16.png " ")
+    ![login screen for hr_user](images/17.png " ")
+    ![click on sql](images/18.png " ")
+
+11. Now that we have returned to `hr_user` which was the original user with schema-level privileges, we will see how not only do we have access to the first 3 tables, we can also `SELECT` from `projects`.
+    ```
+    <copy>
+    SELECT * FROM hr_user.employees;
+    SELECT * FROM hr_user.departments;
+    SELECT * FROM hr_user.salaries;
+    SELECT * FROM hr_user.projects;
+    </copy>
+    ```
+    ![hr user viewing all the tables](images/J1.png " ")
+
+
+12. Let's return to the `Admin` account by logging out of the `hr_user` session. Navigate back to the  ADB screen on OCI ,click on SQL again to automatically return to the `ADMIN`.
+    ![signout from hr user](images/10.png " ")
     ![adb sql returning to admin](images/im1.png " ")
 
 ## Task 5: Revoking Schema-Level Privileges
@@ -294,7 +354,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ```
     ![revoking access from it user](images/M.png " ")
 
-2. Once the privileges have been revoked, we can verify the updated access by reviewing the remaining privileges granted to `it_user`. `DBA_SCHEMA_PRVIS` will return no data found, but `DBA_TAB_PRIVS` will show that our original privileges have returned.
+2. Once the privileges have been revoked, we can verify the updated access by reviewing the remaining privileges granted to `it_user`. `DBA_SCHEMA_PRVIS` will return no data found, but `DBA_TAB_PRIVS` will show that our original privileges are still there.
     ```
     <copy>
     SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'IT_USER';
@@ -309,15 +369,14 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ```
       ![showing table level priv is back to normal](images/O.png " ") 
 
-3. We will `Sign out` of ADMIN account and switch to it_user account. At the login screen, click `Advanced` to drop down the Path and enter the login credentials we previously set up for the it_user user.
-    - `Path` : it_user
+3. We will `Sign out` of ADMIN account and switch to it_user account. At the login screen, enter the login credentials we set up for the it_user user.
     - `USERNAME`: it_user
     - `PASSWORD`: Oracle123long
 
     ![signout admin](images/24.png " ")
     ![login to hr_user](images/25.png " ")
 
-4. Now we will see that our schema-level privileges have been revoked. `it_user` will not be able to `SELECT` from all the tables as before, only `employees` and `department` which originally granted.  
+4. Now we will see that our schema-level privileges have been revoked. `it_user` will not be able to `SELECT` from all the tables as before, only `employees` and `department` which were originally granted.  
 
     ```
     <copy>
@@ -333,7 +392,6 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ![signout hr_user](images/28.png " ")
     ![adb sql returning to admin](images/im1.png " ")
 
-
 ## Task 6: Cleanup
 1. Finally, let's clean up the environment by dropping the the users, roles, and objects created
 
@@ -343,9 +401,9 @@ The objective of this workshop is to learn how to work with the schema-level pri
     DROP USER IF EXISTS hr_user CASCADE;
     DROP USER IF EXISTS it_user CASCADE;
     DROP USER IF EXISTS it_manager CASCADE;
-    DROP ROLE IF EXISTS hr_role;
-    DROP ROLE IF EXISTS it_role;
-    DROP ROLE IF EXISTS it_manager_role;
+    DROP ROLE IF EXISTS hr_user;
+    DROP ROLE IF EXISTS it_user;
+    DROP ROLE IF EXISTS it_manager;
     </copy>
     ```
 
