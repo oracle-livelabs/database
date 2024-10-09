@@ -31,13 +31,10 @@ The objective of this workshop is to learn how to work with the schema-level pri
 
     ```
     <copy>
-    -- Drop users and roles if they already exist
+    -- Drop users if they already exist
     DROP USER IF EXISTS hr_user CASCADE;
     DROP USER IF EXISTS it_user CASCADE;
     DROP USER IF EXISTS it_manager CASCADE; 
-    DROP ROLE IF EXISTS hr_role;
-    DROP ROLE IF EXISTS it_role;
-    DROP ROLE IF EXISTS it_manager_role;
     </copy>
     ```
     ![drops users and roles](images/a.png " ")
@@ -404,9 +401,9 @@ The objective of this workshop is to learn how to work with the schema-level pri
     DROP USER IF EXISTS hr_user CASCADE;
     DROP USER IF EXISTS it_user CASCADE;
     DROP USER IF EXISTS it_manager CASCADE;
-    DROP ROLE IF EXISTS hr_role;
-    DROP ROLE IF EXISTS it_role;
-    DROP ROLE IF EXISTS it_manager_role;
+    DROP ROLE IF EXISTS hr_user;
+    DROP ROLE IF EXISTS it_user;
+    DROP ROLE IF EXISTS it_manager;
     </copy>
     ```
 
