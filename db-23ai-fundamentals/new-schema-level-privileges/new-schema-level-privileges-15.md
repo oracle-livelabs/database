@@ -34,25 +34,23 @@ The objective of this workshop is to learn how to work with the schema-level pri
     -- Drop users if they already exist
     DROP USER IF EXISTS hr_user CASCADE;
     DROP USER IF EXISTS it_user CASCADE;
-    DROP USER IF EXISTS it_manager CASCADE; 
     </copy>
     ```
     ![drops users and roles](images/a.png " ")
 
-3. We will next create users. We will begin with a placeholder password. To change the password for the users use the "alter user identified by "new password" command. With the syntax below for distinct users, make sure to replace `new_password_here` to your new password(needs one uppercase letter and atleast one number). Throughout this workshop we will use the Oracle123long password.
+3. We will next create users.  To change the password for the users use the "alter user identified by "new password" command. Throughout this workshop we will use Oracle123long for the password.
 
     ```
     <copy>
     -- Create users
-    CREATE USER hr_user IDENTIFIED BY Placeholder1;
-    CREATE USER it_user IDENTIFIED BY Placeholder2;
-    CREATE USER it_manager IDENTIFIED BY Placeholder3;
+    CREATE USER hr_user IDENTIFIED BY Oracle123long;
+    CREATE USER it_user IDENTIFIED BY Oracle123long;
     </copy>
     ```
     ![creates users](images/1a.png " ")
 
     
-    This will change the password for hr_user
+    If you'd like to change the password for the individual users, you'd run the following and make sure to replace `new_password_here` with your new password(needs one uppercase letter and atleast one number).
     ```
     <copy>
     ALTER USER hr_user IDENTIFIED BY  </copy>new_password_here;
@@ -73,39 +71,18 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ```
     ![changes password for it user](images/1c.png " ")
 
-
-    This will change the password for it_manager
+4. Now we will be granting the respective roles to the users to enable webconsole access as well as the quota for the tablespace.
+   
+    
     ```
     <copy>
-    ALTER USER it_manager IDENTIFIED BY  </copy>new_password_here;
-    ```
-    ```
-    ALTER USER it_manager IDENTIFIED BY Oracle123long;
-    ```
-    ![changes password for it manager](images/1d.png " ")
+        -- ADD HR_USER ROLES
+    GRANT CONNECT TO HR_USER;
+    GRANT DWROLE TO HR_USER;
+    GRANT RESOURCE TO HR_USER;
+    ALTER USER HR_USER DEFAULT ROLE CONNECT,DWROLE,RESOURCE;
 
-4. Now we will be granting the respective roles to the users as well as the quota for the tablespace.
-    ```
-    <copy>
-    --Grant roles to user
-    GRANT CONNECT, RESOURCE TO hr_user, it_user, it_manager;
-    GRANT DWROLE TO hr_user, it_user, it_manager;
-    GRANT CREATE SESSION TO hr_user, it_user, it_manager;
-
-    -- Grant quota for tablespace use
-    ALTER USER hr_user QUOTA UNLIMITED ON DATA;
-    ALTER USER it_user QUOTA UNLIMITED ON DATA;
-    ALTER USER it_manager QUOTA UNLIMITED ON DATA;
-    </copy>
-    ```
-    ![creates and grants users and roles](images/1e.png " ")
-
-
-5. With this next code, we will enable web access to our 3 users.
-
-    ```
-    <copy>
-    -- REST ENABLE FOR HR_USER
+    -- REST ENABLE
     BEGIN
         ORDS_ADMIN.ENABLE_SCHEMA(
             p_enabled => TRUE,
@@ -122,8 +99,13 @@ The objective of this workshop is to learn how to work with the schema-level pri
         commit;
     END;
     /
+    -- ADD IT_USER ROLES
+    GRANT CONNECT TO IT_USER;
+    GRANT DWROLE TO IT_USER;
+    GRANT RESOURCE TO IT_USER;
+    ALTER USER IT_USER DEFAULT ROLE CONNECT,DWROLE,RESOURCE;
 
-    -- REST ENABLE for IT_USER
+    -- REST ENABLE
     BEGIN
         ORDS_ADMIN.ENABLE_SCHEMA(
             p_enabled => TRUE,
@@ -140,26 +122,19 @@ The objective of this workshop is to learn how to work with the schema-level pri
         commit;
     END;
     /
-
-    -- REST ENABLE for IT_MANAGER
-    BEGIN
-        ORDS_ADMIN.ENABLE_SCHEMA(
-            p_enabled => TRUE,
-            p_schema => 'IT_MANAGER',
-            p_url_mapping_type => 'BASE_PATH',
-            p_url_mapping_pattern => 'it_manager',
-            p_auto_rest_auth=> FALSE
-        );
-        -- ENABLE DATA SHARING
-        C##ADP$SERVICE.DBMS_SHARE.ENABLE_SCHEMA(
-                SCHEMA_NAME => 'IT_MANAGER',
-                ENABLED => TRUE
-        );
-        commit;
-    END;
-    /
     </copy>
     ```
+
+    ```
+    <copy>
+
+    -- Grant quota for tablespace use
+    ALTER USER hr_user QUOTA UNLIMITED ON DATA;
+    ALTER USER it_user QUOTA UNLIMITED ON DATA;
+    </copy>
+    ```
+    ![creates and grants users and roles](images/1e.png " ")
+
     ![grants users access to webconsole](images/c.png " ")
 
 6. Now we will create `employees`, `department` and `salary` tables. These tables will demonstarte how different levels of privilege can be applied.  
@@ -170,7 +145,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
     CREATE TABLE hr_user.employees (id NUMBER PRIMARY KEY, name VARCHAR2(50), salary NUMBER);
     CREATE TABLE hr_user.departments (id NUMBER PRIMARY KEY, department_name VARCHAR2(100));
 
-    -- Create salary table which is sensitive and only accessible by hr_user and it_manager
+    -- Create salary table which is sensitive and only accessible by hr_user
     CREATE TABLE hr_user.salaries (employee_id NUMBER REFERENCES hr_user.employees(id), salary NUMBER);
 
     -- Insert some sample data into employees and departments
@@ -191,18 +166,16 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ![tables created](images/d.png " ")
 
 ## Task 3: Apply Schema-Level Privileges
-1. Now, we will grant schema-level privileges. Instead of granting access to individual tables, we will allow the `hr_user` to access all current and future tables within the `hr_user` schema. Both `it_manager` and  `it_user` will have access to the `employee` and `departments` tables, but no access to the `salaries` table. 
+1. Now, we will grant schema-level privileges. Instead of granting access to individual tables, we will allow the `hr_user` to access all current and future tables within the `hr_user` schema. `it_user` will have access to the `employee` and `departments` tables, but no access to the `salaries` table. 
 
     ```
     <copy>
-    -- Grant schema-level privileges to HR, IT, and IT Manager roles
+    -- Grant schema-level privileges to HR user
     GRANT SELECT ANY TABLE ON SCHEMA hr_user TO hr_user;
 
-    -- IT user and It manager can access to employees and departments but not salaries
+    -- IT user can access to employees and departments but not salaries
     GRANT SELECT ON hr_user.employees TO it_user;
     GRANT SELECT ON hr_user.departments TO it_user;
-    GRANT SELECT ON hr_user.employees TO it_manager;
-    GRANT SELECT ON hr_user.departments TO it_manager;
     </copy>
     ```
 
@@ -214,13 +187,11 @@ The objective of this workshop is to learn how to work with the schema-level pri
     <copy>
     SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'HR_USER';
     SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'IT_USER';
-    SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'IT_MANAGER';
     SELECT * FROM DBA_TAB_PRIVS WHERE GRANTEE = 'IT_USER';
-    SELECT * FROM DBA_TAB_PRIVS WHERE GRANTEE = 'IT_MANAGER';
     </copy>
     ```
     
-    Since only `hr_user` has schema-level privileges, when we run `DBA_SCHEMA_PRIVS`, we see that the privilege SELECT is set to ANY. Meanwhile, since both `it_user` and `it_manager` neither have schema-level privileges, when running the same command for both they return no data found as neither has the correct privileges. It is only with `DBA_TAB_PRIVS` that we can see their privileges.
+    Since only `hr_user` has schema-level privileges, when we run `DBA_SCHEMA_PRIVS`, we see that the privilege SELECT is set to ANY. Meanwhile, since `it_user` does not  have schema-level privileges, when running the same command it returns no data found as it does not have the correct privileges. It is only with `DBA_TAB_PRIVS` that we can see it's table privileges.
     ![view privileges](images/f1.png " ")
 
 ## Task 4: Demonstrating Schema-Level Privileges
@@ -271,7 +242,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
 6. We will be granting schema-level privileges to the it_user 
     ```
     <copy>
-    -- Grant schema-level privileges directly to hr_user and it_manager
+    -- Grant schema-level privileges directly to hr_user
     GRANT SELECT ANY TABLE ON SCHEMA hr_user TO it_user;
 
     SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'IT_USER';
@@ -369,7 +340,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ```
       ![showing table level priv is back to normal](images/o.png " ") 
 
-3. We will `Sign out` of ADMIN account and switch to it_user account. At the login screen, enter the login credentials we set up for the it_user user.
+3. We will `Sign out` of ADMIN account and switch to `it_user` account. At the login screen, enter the login credentials we set up for the it_user user.
     - `USERNAME`: it_user
     - `PASSWORD`: Oracle123long
 
@@ -398,12 +369,14 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ```
     <copy>
     -- Drop users, roles, and related objects
+    ALTER USER IT_USER DEFAULT ROLE NONE;
+    REVOKE CONNECT FROM IT_USER;
+    REVOKE DWROLE FROM IT_USER;
+    REVOKE RESOURCE FROM IT_USER;
     DROP USER IF EXISTS hr_user CASCADE;
     DROP USER IF EXISTS it_user CASCADE;
-    DROP USER IF EXISTS it_manager CASCADE;
     DROP ROLE IF EXISTS hr_user;
     DROP ROLE IF EXISTS it_user;
-    DROP ROLE IF EXISTS it_manager;
     </copy>
     ```
 
