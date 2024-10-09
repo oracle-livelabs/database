@@ -317,7 +317,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
     </copy>
     ```
 
-    ![it user viewing all the tables](images/J.png " ")
+    ![it user viewing all the tables](images/J1.png " ")
 
 10. Sign out of the `it_user` session and log into `hr_user`. We will see how the privileges of this user is limited when compared to hr_user.
     - `USERNAME`: hr_user 
@@ -367,7 +367,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
     SELECT * FROM DBA_TAB_PRIVS WHERE GRANTEE = 'IT_USER';   
     </copy>
     ```
-      ![showing table level priv is back to normal](images/O.png " ") 
+      ![showing table level priv is back to normal](images/o.png " ") 
 
 3. We will `Sign out` of ADMIN account and switch to it_user account. At the login screen, enter the login credentials we set up for the it_user user.
     - `USERNAME`: it_user
