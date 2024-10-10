@@ -76,7 +76,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
     
     ```
     <copy>
-        -- ADD HR_USER ROLES
+    -- ADD HR_USER ROLES
     GRANT CONNECT TO HR_USER;
     GRANT DWROLE TO HR_USER;
     GRANT RESOURCE TO HR_USER;
@@ -122,19 +122,12 @@ The objective of this workshop is to learn how to work with the schema-level pri
         commit;
     END;
     /
-    </copy>
-    ```
-
-    ```
-    <copy>
-
+    
     -- Grant quota for tablespace use
     ALTER USER hr_user QUOTA UNLIMITED ON DATA;
     ALTER USER it_user QUOTA UNLIMITED ON DATA;
     </copy>
     ```
-    ![creates and grants users and roles](images/1e.png " ")
-
     ![grants users access to webconsole](images/c.png " ")
 
 6. Now we will create `employees`, `department` and `salary` tables. These tables will demonstarte how different levels of privilege can be applied.  
@@ -223,7 +216,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ![login screen for hr_user](images/11.png " ")
     ![click on sql](images/12.png " ")
 
-4. Within the SQL developer, we shall now test the restricted access. Notice that `employees` and `departments` tables shall be successful but the `salaries` will return an error.  
+4. Within the SQL developer web, we shall now test the restricted access. Notice that `employees` and `departments` tables shall be successful but the `salaries` will return an error.  
 
     ```
     <copy>
@@ -232,12 +225,15 @@ The objective of this workshop is to learn how to work with the schema-level pri
     SELECT * FROM hr_user.salaries;
     </copy>
     ```
-
     ![it user viewing from tables](images/13.png " ")
 
-5. Now that this has been verified, let's return to the `Admin` account by logging out of the `it_user` session. Navigate back to the  ADB screen on OCI ,click on SQL again to automatically return to the `ADMIN`.
+5. Let's return to the `Admin` account by logging out of the `it_user` session. To grab the Admin password, return to our reservation information window found in our workshop notebook and copy the value next to `Admin Password`.
+    - `USERNAME`: ADMIN 
+    - `PASSWORD`: `paste_the_value_here`
+
     ![signout hr_user](images/14.png " ")
-    ![adb sql returning to admin](images/im1.png " ")
+    ![adb sql returning to admin](images/reservationinfo.png " ")
+    ![adb sql returning to admin](images/admin.png " ")
 
 6. We will be granting schema-level privileges to the it_user 
     ```
@@ -267,14 +263,13 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ```
     ![creating new projects table](images/I.png " ")
 
-
 8. Now, sign out of the `ADMIN` session and log into `it_user`. We will see how the privileges of this user is limited when compared to hr_user.
     - `Path` : it_user
     - `USERNAME`: it_user 
     - `PASSWORD`: Oracle123long
 
     ![signout from admin](images/16.png " ")
-    ![login screen for hr_user](images/17.png " ")
+    ![login screen for it_user](images/17.png " ")
     ![click on sql](images/18.png " ")
 
 9. Witin `it_user` now let's view our tables. You should be able to see the 3 original tables, as well as the newest, `projects` table we created after granting `it_user` schema-level privileges. 
@@ -310,9 +305,13 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ![hr user viewing all the tables](images/J1.png " ")
 
 
-12. Let's return to the `Admin` account by logging out of the `hr_user` session. Navigate back to the  ADB screen on OCI ,click on SQL again to automatically return to the `ADMIN`.
+12. Let's return to the `Admin` account by logging out of the `hr_user` session. To grab the Admin password, return to our reservation information window found in our workshop notebook and copy the value next to `Admin Password`.
+    - `USERNAME`: ADMIN 
+    - `PASSWORD`: `paste_the_value_here`
+
     ![signout from hr user](images/10.png " ")
-    ![adb sql returning to admin](images/im1.png " ")
+    ![adb sql returning to admin](images/reservationinfo.png " ")
+    ![adb sql returning to admin](images/admin.png " ")
 
 ## Task 5: Revoking Schema-Level Privileges
 1. As expected, we can also revoke schema-level privileges when they are no longer required. In the `ADMIN` profile, let's proceed by revoking the `SELECT` privilege that was granted to the `it_user` for the schema.
@@ -359,20 +358,20 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ```
     ![view output ](images/P.png " ")
 
-5. Let's return to the `Admin` account by logging out of the `it_user` session. Navigate back to the  ADB screen on OCI ,click on SQL again to automatically return to the `ADMIN`.
+5. Let's return to the `Admin` account by logging out of the `it_user` session. To grab the Admin password, return to our reservation information window found in our workshop notebook and copy the value next to `Admin Password`.
+    - `USERNAME`: ADMIN 
+    - `PASSWORD`: `paste_the_value_here`
+
     ![signout hr_user](images/28.png " ")
-    ![adb sql returning to admin](images/im1.png " ")
+    ![adb sql returning to admin](images/reservationinfo.png " ")
+    ![adb sql returning to admin](images/admin.png " ")
 
 ## Task 6: Cleanup
-1. Finally, let's clean up the environment by dropping the the users, roles, and objects created
+1. Finally, let's clean up the environment by dropping the the users, roles, and objects created. (Note: You may see an error stating that you can not drop a user who is currently connect. If this is the case, wait a minute and run the command again.)
 
     ```
     <copy>
     -- Drop users, roles, and related objects
-    ALTER USER IT_USER DEFAULT ROLE NONE;
-    REVOKE CONNECT FROM IT_USER;
-    REVOKE DWROLE FROM IT_USER;
-    REVOKE RESOURCE FROM IT_USER;
     DROP USER IF EXISTS hr_user CASCADE;
     DROP USER IF EXISTS it_user CASCADE;
     DROP ROLE IF EXISTS hr_user;
