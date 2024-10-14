@@ -235,18 +235,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ![adb sql returning to admin](images/reservationinfo.png " ")
     ![adb sql returning to admin](images/admin.png " ")
 
-6. We will be granting schema-level privileges to the it_user 
-    ```
-    <copy>
-    -- Grant schema-level privileges directly to hr_user
-    GRANT SELECT ANY TABLE ON SCHEMA hr_user TO it_user;
-
-    SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'IT_USER';
-    </copy>
-    ```
-    ![grants schemalevel privileges to ituser](images/h.png " ")
-
-7. To show the flexibility of schema-level privileges, we will also be creating a new table called projects
+6. To show the flexibility of schema-level privileges, we will also be creating a new table called projects
     
     ```
     <copy>
@@ -263,7 +252,19 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ```
     ![creating new projects table](images/I.png " ")
 
-8. Now, sign out of the `ADMIN` session and log into `it_user`. We will see how the privileges of this user is limited when compared to hr_user.
+7. Now, let's grant schema-level privileges to the it_user 
+    ```
+    <copy>
+    -- Grant schema-level privileges directly to hr_user
+    GRANT SELECT ANY TABLE ON SCHEMA hr_user TO it_user;
+
+    SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'IT_USER';
+    </copy>
+    ```
+    ![grants schemalevel privileges to ituser](images/h.png " ")
+
+
+8. Sign out of the `ADMIN` session and log into `it_user`. We will see how the privileges of this user is limited when compared to hr_user.
     - `Path` : it_user
     - `USERNAME`: it_user 
     - `PASSWORD`: Oracle123long
