@@ -104,8 +104,13 @@ This workshop contains different language implementation in the form of differen
  <if type="Node.js">
  The Node.js supports both JavaScript and TypeScript applications.
 
-  1. Open the [Node.js Download](https://nodejs.org/en/) and download Node.js for your operating system. Ensure that Node Package Manager (npm) is installed along with Node.js.
-  2. Install the node SDK for Oracle NoSQL Database.
+  1. This lab includes code samples for JavaScript and TypeScript applications. Decide the application that you want to use.  
+
+  2. Open the [Node.js Download](https://nodejs.org/en/) link and download Node.js. Follow the prompts to install the Node.js package. The Node Package Manager (npm) is automatically installed.
+
+   With this Node.js package, you can run both JavaScript and TypeScript applications.
+
+  3. Install the node SDK for Oracle NoSQL Database.
 
   ```
   <copy>
@@ -113,7 +118,7 @@ This workshop contains different language implementation in the form of differen
   </copy>
   ```
 
-   With the above command, npm will create node_modules directory in the current directory and install it there.
+   With the above command, npm will create node_modules directory in the current directory.
 
    Another option is to install the SDK globally:
 
@@ -122,15 +127,7 @@ This workshop contains different language implementation in the form of differen
   npm install -g oracle-nosqldb
   </copy>
   ```
-You can do one of the above options depending on the permissions you have.
-
-If you are using TypeScript, use npm to install a supported version. Use the following command to install a specific version of the Typescript:
-
-  ```
-  <copy>
-  npm install typescript
-  </copy>
-  ```
+You can choose one of the above options depending on the permissions you have.
 </if>
   <if type="C-sharp">
 
@@ -158,7 +155,7 @@ dotnet new console -o HelloWorld
 
 2. Review the sample application. You can access the [JavaAPI Reference Guide](https://docs.oracle.com/en/cloud/paas/nosql-cloud/csnjv/index.html) to reference Java classes, methods, and interfaces included in this sample application.
 
-  Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.java](https://objectstorage.us-ashburn-1.oraclecloud.com/p/qCpBRv5juyWwIF4dv9h98YWCDD50574Y6OwsIHhEMgI/n/c4u03/b/data-management-library-files/o/HelloWorld.java), replace the placeholder of the compartment  in the function ```setDefaultCompartment``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
+  Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.java](https://objectstorage.us-ashburn-1.oraclecloud.com/p/qCpBRv5juyWwIF4dv9h98YWCDD50574Y6OwsIHhEMgI/n/c4u03/b/data-management-library-files/o/HelloWorld.java), replace the placeholder of the compartment  in the function ```setDefaultCompartment``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
 3. From your home directory, navigate to ".oci" directory.
 
@@ -169,7 +166,7 @@ cd .oci
 </copy>
 ```
 
-Use `vi` or `nano` or any text editor to create a file named `config` in the `.oci` directory.
+Use `vi` or `nano` or any text editor to create a file named `config` in the `.oci` directory. Copy the following content to the `config` file.
 
 ```
 <copy>
@@ -202,9 +199,9 @@ $ mvn exec:java -Dexec.mainClass=HelloWorld
 
 2. Review the sample application. You can access the [Python API Reference Guide](https://nosql-python-sdk.readthedocs.io/en/latest/api.html) to reference Python classes and methods included in this sample application.
 
-   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.py](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.py), replace the placeholder of the compartment in the function ```set_default_compartment``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
+   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.py](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.py), replace the placeholder of the compartment in the function ```set_default_compartment``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
-3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Add OCID, tenancy ID, fingerprint & key credentials in the `config` file.
+3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the following content to the `config` file.
 
 ```
 <copy>
@@ -248,9 +245,9 @@ Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/api
 
 2. Review the sample application. You can access the [Go API docs](https://pkg.go.dev/github.com/oracle/nosql-go-sdk/nosqldb?utm_source=godoc) to reference Go classes and methods included in this sample application.
 
-   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.go](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.go) , replace the placeholder of the compartment in the constructor of ```NewSignatureProviderFromFile``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
+   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.go](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.go) , replace the placeholder of the compartment in the constructor of ```NewSignatureProviderFromFile``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
-3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Add OCID, tenancy ID, fingerprint & key credentials in the `config` file.
+3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the following content to the `config` file.
 ```
 <copy>
 [DEFAULT]
@@ -312,13 +309,13 @@ Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/api
 <if type="Node.js">
 The given code sample in JavaScript and TypeScript use the [ES6 modules](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/other-databases/nosql-database/24.1/nsdev&id=node_ecma_mod).
 
-1. Download the provided [HelloWorld.js](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.js) file and move it to your home directory. For TypeScript applications, download the provided [HelloWorld.ts] file and move it to your home directory.
+1. Download the provided JavaScript application [HelloWorld.js](https://objectstorage.us-ashburn-1.oraclecloud.com/p/hP3lO4cVou3C1XqL-oxJi4F3IC3fsqwO6jsoq4b4-j6uhJ3DjFffEJwf6O5M0ABf/n/c4u04/b/livelabsfiles/o/HelloWorld.js) file and move it to your home directory. For TypeScript applications, download the provided [HelloWorld.ts] (https://objectstorage.us-ashburn-1.oraclecloud.com/p/-_rOKBbY7zRRg6fyYdm3vvRIatks_zGuJ3ZX4QhRDm8UfgAqsotpcDo4phLRuQAL/n/c4u04/b/livelabsfiles/o/HelloWorld.ts) file and move it to your home directory.
 
 2. Review the sample application. You can access the [Node.js API  Reference Guide](https://oracle.github.io/nosql-node-sdk/index.html) to reference Node.js classes and methods included in this sample application.
 
-   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Depending on your application, edit either the JavaScript code  [HelloWorld.js](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.js) or the TypeScript code [HelloWorld.ts], replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it. 
+   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Depending on your application, edit either the JavaScript code  [HelloWorld.js](https://objectstorage.us-ashburn-1.oraclecloud.com/p/hP3lO4cVou3C1XqL-oxJi4F3IC3fsqwO6jsoq4b4-j6uhJ3DjFffEJwf6O5M0ABf/n/c4u04/b/livelabsfiles/o/HelloWorld.js) or the TypeScript code [HelloWorld.ts](https://objectstorage.us-ashburn-1.oraclecloud.com/p/-_rOKBbY7zRRg6fyYdm3vvRIatks_zGuJ3ZX4QhRDm8UfgAqsotpcDo4phLRuQAL/n/c4u04/b/livelabsfiles/o/HelloWorld.ts), replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it. 
 
-3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Add OCID, tenancy ID, fingerprint & key credentials in the `config` file.
+3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the following content to the `config` file. 
 
 ```
 <copy>
@@ -329,7 +326,7 @@ tenancy=TENANCY-OCID
 key_file=<Location of the private key oci_api_key_private.pem>
 </copy>
 ```
-Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
+Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your notepad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop. Use the values recorded from Lab 1.
 ![View config file](images/config-file.png)
 
 4. Execute the Sample Application
@@ -358,9 +355,9 @@ Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/api
 1. Download the provided [HelloWorld.cs](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.cs) file and move it to your home directory.
 2. Review the sample application. You can access the [.NET API  Reference Guide](https://oracle.github.io/nosql-dotnet-sdk/index.html) to reference .NET classes and methods included in this sample application.
 
-   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. When authenticated as a specific user, your tables are managed in the root compartment of your tenancy unless otherwise specified. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.cs](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.cs), replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
+   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code [HelloWorld.cs](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.cs), replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
-3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Add OCID, tenancy ID, fingerprint & key credentials in the `config` file.
+3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the following content to the `config` file.
 
 ```
 <copy>
@@ -393,7 +390,7 @@ dotnet run
 </if>
 ## **Step 3:** Explore tables using the Oracle Cloud Infrastructure Console
 
-1. On the left hand menu, click **NoSQL Database**.
+1. On the left hand menu, click **Databases**. In the **Databases** window, click **Tables** under **Oracle NoSQL Database**.
 
   ![Click NoSQL Database](images/nosql-cloud.png)
 
@@ -403,11 +400,11 @@ dotnet run
 
   ![Click HelloWorldTable](images/open-helloworldtable.png)
 
-3. Click **Table Rows** under Resources.
+3. Click **Columns** under Resources to view the table columns.
 
   ![Table Rows](images/helloworldtable.png)
 
-4. Click Run Query to execute the select statement and display the record inserted into the table.
+4. Click **Explore data** under Resources and click **Execute** to execute the select statement and display the record inserted into the table.
 
   ![Run Query](images/run-query.png)
 
