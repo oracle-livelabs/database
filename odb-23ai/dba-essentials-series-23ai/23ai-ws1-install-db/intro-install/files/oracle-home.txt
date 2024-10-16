@@ -1,0 +1,1 @@
+This workshop uses two Oracle homes for demonstration purpose. It is not a requirement for Oracle Database to have two homes. A single Oracle home is sufficient to install and manage a single instance multitenant Container Database (CDB).
