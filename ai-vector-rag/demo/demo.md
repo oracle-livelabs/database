@@ -27,7 +27,7 @@ This task will have you login to the Jupyter environment and run specific notebo
    ````
    <copy>
    cd /home/oracle
-   /home/oracle/test.sh
+   /home/oracle/run.sh
    </copy>
    ````
 
