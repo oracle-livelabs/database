@@ -4,7 +4,7 @@
 
 In this lab, you will go through the steps to enable Demo Mode for Oracle Cloud Infrastructure Ops Insights.
 
-Estimated time: 10 minutes
+Estimated time: 50 minutes
 
 ### Objectives
 
@@ -58,7 +58,7 @@ Estimated time: 10 minutes
     * Identify top-5 databases by CPU, Storage, and Memory growth over the period
     * See aggregated historical usage trends for CPU, Storage, and Memory over the period
 
-3.  On the **Database Capacity Planning** page, you will obtain a fleet-wide overview of your resource consumption and trends.  CPU insights, storage insights, and memory insights give a quick view into top resource consumers now and forecast potential resource bottlenecks over the selected period.
+3.  From **Database type** on the left pane select **HeatWave MySQL**.
 
       ![Left Pane](./images/database-capacity-planning-mysql.png " ")
 
@@ -100,20 +100,20 @@ Estimated time: 10 minutes
 
       ![Left Pane](./images/database-cpu2.png " ")
 
-3.  On the **Database CPU** page, under **Insights** tab, select **30 Day High Utilization Forecast** against **Databases**, to view database CPU utilization forecast for next 30 days.
+3.  On the **Database CPU** page, under **Insights** tab, select **30 Day Low Utilization Forecast** against **Databases**, to view database CPU utilization forecast for next 30 days.
 
       ![Left Pane](./images/utilization-forecast.png " ")
 
-4.  Under the **Database Display Name** column, select the row corresponding to the **CRM-ST** database.
+4.  Under the **Database Display Name** column, select the row corresponding to the **employeesdb** database.
 
-      ![Left Pane](./images/crm-st-database.png " ")
+      ![Left Pane](./images/employeesdb-database.png " ")
 
-5.  Check the **Utilization (%)** and **Usage Change (%)** for database **CRM-ST**.
+5.  Check the **Utilization (%)** and **Usage Change (%)** for database **employeesdb**.
     
     * Utilization (%) -  Utilization percentage for the 90th percentile value of the daily average storage usage over the selected time period
     * Usage Change (%): Percentage change in the linear trend of storage usage over the selected time
 
-6.  The **Trend and Forecast** chart displays historical time series plots related to CPU allocation and usage for the selected database **CRM-ST**.
+6.  The **Trend and Forecast** chart displays historical time series plots related to CPU allocation and usage for the selected database **employeesdb**.
 
       ![Left Pane](./images/trend-and-forecast.png " ")
 
@@ -121,9 +121,9 @@ Estimated time: 10 minutes
 
 8.  Avg Usage Forecast - forecast of Avg Usage data using linear forecast model (Dashed Green line) and the Max Allocation - maximum allocation of CPU for the database.
 
-9.  The value **57.51** AVG ACTIVE CPU USAGE is forecasted for after 15 days for Avg usage of CPU.
+9.  The value **0.17** AVG ACTIVE CPU USAGE is forecasted for after 15 days for Avg usage of CPU.
 
-10.  Select **Max Usage** from the legend on the right side. The red line is **Max Usage** - maximum value of daily (hourly) CPU usage data for database **CRM-ST**.
+10.  Select **Max Usage** from the legend on the right side. The red line is **Max Usage** - maximum value of daily (hourly) CPU usage data for database **employeesdb**.
 
       ![Left Pane](./images/max-usage-cpu.png " ")
 
@@ -131,7 +131,7 @@ Estimated time: 10 minutes
 
       ![Left Pane](./images/max-usage-forecast.png " ")
 
-12.  The value **77.66** AVG ACTIVE CPU USAGE is forecasted for after 15 days for Max usage of CPU.
+12.  The value **1.33** AVG ACTIVE CPU USAGE is forecasted for after 15 days for Max usage of CPU.
 
     You can see the difference in average forecasted value v/s Max forecasted value. If the workload is critical and cannot tolerate any performance issues then the database must be allocated the max forecasted value. If the workload is not so critical and can tolerate deviations in performance then it is ok to allocate CPU based on average forecasted value and save money.
 
@@ -142,7 +142,29 @@ Estimated time: 10 minutes
      * Compare maximum to average usage and trends to assess demand volatility
      * Forecast difference between the maximum and average daily CPU usage to estimate potential savings from workload smoothing
 
-14.  Click **Aggregate** on the top and from **Grouping** select **Database Type**.
+14.  The following models can be selected for display on the upper right of the Trend and Forecast chart:
+
+     * **Linear regression**: The linear regression model assumes a linear relationship across variables to predict the future resource usage.
+
+      ![Left Pane](./images/forecast-linear.png " ")
+
+     * **Seasonality aware**: The seasonal option combines a simple model that detects basic seasonality with dynamic, user-selectable data.
+
+      ![Left Pane](./images/forecast-seasonality.png " ")
+
+     * **AutoML forecasting**: The AutoML forecasting option selects the best fit from multiple machine learning models trained on fixed data window. AutoML (Machine Learning) forecasting leverages Oracle Data Science, employing metalearning to quickly identify the most relevant features, model and hyperparameters for a given training dataset. Forecast and model are precomputed and the forecasts are periodically retrained. The forecast uses up to 13 months of data, or the highest amount of data available for a resource if the resource has less than 13 months since onboarding.
+     
+     On the **Database CPU** page, under **Insights** tab, select **All** against **Databases** and choose database **departmentsdb**. Within the **Trend & Forecast** chart, click **AutoML forecasting**
+
+      ![Left Pane](./images/auto-ml.png " ")
+
+      A new pop up will appear with the AutoML forecasting charts loaded. It will state the training period and the selected forecast algorithms for maximum usage and average usage. The maximum and average confidence channels are also displayed within the chart. The confidence interval for these are 95%, meaning that 95% of future points are expected to fall within this radius from the forecast.
+
+      ![Left Pane](./images/automl-database.png " ")
+
+      Click **Close** to close the **AutoML forecasting** pop-up and return to **Database CPU** page.
+
+15.  Click **Aggregate** on the top and from **Grouping** select **Database Type**.
 
       ![Left Pane](./images/aggregate-database.png " ")
 
@@ -154,56 +176,49 @@ Estimated time: 10 minutes
 
       ![Left Pane](./images/storage-menu-ocw.png " ")
 
-2.  You get a complete view of storage usage across all Ops Insights enabled databases
+2.  You get a complete view of storage usage across all Ops Insights enabled databases.
 
       ![Left Pane](./images/database-storage.png " ")
 
     From here we can identify servers with underused or overused storage and also compare storage utilization between databases.
 
-3.  From the drop-down on the top select **30 Days High Utilization Forecast**.
+3.  From the drop-down on the top select **30 Days Low Utilization Forecast**.
 
-      ![Left Pane](./images/storage-utilization-forecast.png " ")
+      ![Left Pane](./images/utilization-forecast.png " ")
 
-4.  In the **Trend & Forecast** chart View the storage trend and usage forecast for the selected database.
+4.  In the **Trend & Forecast** chart view the storage trend and usage forecast for the selected database.
 
       ![Left Pane](./images/storage-trend-forecast.png " ")
 
-5.  In the **Trend & Forecast** chart View click on **Machine Learning** to project future resource consumption. Machine Learning is a more advanced model that considers seasonality.
+5.  Select **Max usage** and **Max usage forecast** from the right panel.
+
+      ![Left Pane](./images/storage-trend-max.png " ")
+
+      You can see the average forecasted value v/s Max forecasted value for storage. **Max Usage Forecast** for this database is 0.01 TB, whereas **Allocation** shows that total storage allocated to this database is 2 TB. Since, allocation is more but storage used or forecasted is less, it is ok release some storage for this database and save money on storage.
+
+6.  In the **Trend & Forecast** chart view, the **AutoML forecasting** option selects the best fit from multiple machine learning models trained on fixed data window. AutoML (Machine Learning) forecasting leverages Oracle Data Science, employing metalearning to quickly identify the most relevant features, model and hyperparameters for a given training dataset. Forecast and model are precomputed and the forecasts are periodically retrained. The forecast uses up to 13 months of data, or the highest amount of data available for a resource if the resource has less than 13 months since onboarding.
 
       ![Left Pane](./images/storage-trend-forecast-ml.png " ")
+      ![Left Pane](./images/storage-trend-forecast-auto-ml.png " ")
 
-6.  On the **Insights** tab select **30 Day High Utilization Forecast** for **Databases** and search the database **EAMERICA**.
-
-      ![Left Pane](./images/storage-eamerica.png " ")
-
-7.  In the **Trend & Forecast** chart view select **Tablespace Breakdown** to view details on a tablespace level.
-
-      ![Left Pane](./images/storage-eamerica-tablespace.png " ")
+7.  Click **Close** to go back to the **Database Storage** page.
 
 ## Task 5: SQL Insights
 
-1. On the **Ops Insights Overview** page, from the left pane click **SQL Insights**. On the **SQL Insights - Fleet analysis** page you can view insights and analysis over all SQL and all databases enabled in the compartment.
+1. On the **Ops Insights Overview** page, from the left pane click **SQL Insights**. On the **SQL Insights - Fleet analysis** page you can view insights and analysis for MySQL HeatWave databases enabled in the compartment.
 
       ![Left Pane](./images/sql-insights.png " ")
 
-2. Click **SQL activity loadmap** to view the tree map.
+3. Click the database **departmentsdb** to view **SQL Insights - Database: For database level insights**
 
-      ![Left Pane](./images/sql-insights-treemap.png " ")   
+      ![Left Pane](./images/sql-departments-db.png " ")
+      ![Left Pane](./images/departments-db-insights.png " ")
 
-3. Click the database **SALES-WT** to view **SQL Insights - Database: For database level insights**
+4. Click on **SQL activity by latency type**.
 
-      ![Left Pane](./images/sales-wt-db.png " ")
-      ![Left Pane](./images/sales-wt-db-insights.png " ")
+      ![Left Pane](./images/sql-latency-insights.png " ")
 
-      The Database analysis dashboard is designed to give a broad overview of the SQL workload executing in the database. This includes basic properties of the database and the SQL collected from it, including breakdowns of total time by command and module, and the ratio of time in SQL or PL/SQL. Insight tiles with counts of SQL with SQL having level insights quantify those issues at the database level. SQL activity is shown by day broken down by command type, exposing changes in workload over time. Execute to parse ratio and SQL count and invalidation charts expose important application properties over time.
-
-4. Click the SQL ID **4g97w9wwspvq0** to view **SQL Insights - SQL analysis: For SQL level insights**
-
-      ![Left Pane](./images/sql-id-sql-insights.png " ")
-
-      ![Left Pane](./images/sql-insights-sql-analysis.png " ")
-
-      This is the most granular level for SQL insights, at this level you can view a full picture of the performance properties of given SQL\_ID on a given database. This includes basic properties like the command type and text of the statement as well as average latency and execution frequency, and numerous other metrics from V$SQLSTATS. Insight tiles indicate whether the SQL level insights were true of the SQL_ID over the time period. Daily charts of total database time, average latency, and I/O enable deeper examination of the relationship of SQL plans to resource usage.
+      The Database analysis dashboard is designed to give a broad overview of the SQL workload executing in the database.
 
 ## Task 6: SQL Explorer
 
@@ -211,9 +226,9 @@ SQL Explorer provides an easy-to-use interface that lets you interactively explo
 
 With SQL Explorer, you can explore performance statistics via a SQL query to extract the data with which to create an intuitive visualization. This provides interactive data exploration and visualization for deep exploration of application SQL performance statistics. The user interface is designed to simplify and streamline query development.
 
-In this lab create visualuzations using pre-existing performance statistics via a SQL query.
+In this lab create visualizations using pre-existing performance statistics via a SQL query.
 
-1. In this example we will sum up all the CPU time per SQL ID for one specific DB and then sort them by descending order.
+1. In this example we will calculate the average latency per execution to analyze the performance of operations over time.
 
 2. On the **Ops Insights Overview** page, from the left pane click **SQL Insights** and then click **SQL Explorer**.
 
@@ -226,90 +241,37 @@ In this lab create visualuzations using pre-existing performance statistics via 
 4. Enter the following SQL in the SQL query section (copy & paste the statement line by line)
 
       ```
-      <copy>SELECT DISPLAY_NAME,SQL_ID,sum(CPU_TIME)
-            WHERE DISPLAY_NAME='SALES-WT'
-            GROUP BY DISPLAY_NAME,SQL_ID
+      <copy>
+            SELECT ROLLUP_TIME_UTC, AVG(TOTAL_LATENCY/EXEC_COUNT)/1000000000 as AVG_LATENCY_SEC
+            WHERE
+            GROUP BY ROLLUP_TIME_UTC
             HAVING
-            ORDER BY sum(CPU_TIME)desc</copy>
+            ORDER BY ROLLUP_TIME_UTC ASC</copy>
       ```
 
       ![SQL Query](./images/sql-query.png " ")
 
-5. Enter **20** for **LIMIT** to limit 20 records per page.
+5. Click **Run** to execute the query.
 
-6. Click **Run** to execute the query.
-
-7. This will display the query result in a tabular format.
+6. This will display the query result in a tabular format.
 
       ![SQL Output](./images/sql-query-table.png " ")
 
-8. Under the **Visualization** tab on the right pane, select the following -
+7. Under the **Visualization** tab on the right pane, select the following -
 
-      **Chart type** : **Bar Chart**
+      **Chart type** : **Area Chart**
 
-      **Y axis** : **SUM(CPU\_TIME)**
-      
-      **X axis** : **DISPLAY\_NAME**
-      
-      **Series** : **SQL\_ID**
-      
-      **Color by** : **SQL\_ID**
-      
-      **Y axis title** : **CPU time (s)**
-      
-      **Legend** : **None**
-      
-      Check mark **Stacked**
+      **Y axis** : **AVG\_LATENCY\_SEC**
+
+      **X axis** : **ROLLUP\_TIME\_UTC**
+
+      Check mark **Correlated tooltips**
 
       ![SQL Visualization](./images/sql-query-visual.png " ")
 
-9. This will display the visualization as a Stacked Bar Chart.
-
-10. In the second use case we will sum up all the Elapsed time per SQL ID across the fleet of Databases and then sort that in descending order.
-
-11. Click on **Clear** to clear the query section.
+10. Click on **Clear** to clear the query section.
 
       ![SQL Visualization](./images/sql-explorer-clear.png " ")
-
-12. Enter the following SQL in the SQL query section (copy & paste the statement line by line)
-
-      ```
-      <copy>SELECT DISPLAY_NAME,SQL_ID,sum(ELAPSED_TIME)
-            WHERE
-            GROUP BY DISPLAY_NAME,SQL_ID
-            HAVING sum(ELAPSED_TIME)>70000000
-            ORDER BY DISPLAY_NAME,sum(ELAPSED_TIME)desc</copy>
-      ```
-
-      ![SQL Query](./images/sql-query1.png " ")
-
-13. Enter **1000** for **LIMIT** to limit 1000 records per page.
-
-14. Click **Run** to execute the query.
-
-15. This will display the query result in a tabular format.
-
-      ![SQL Output](./images/sql-query-table1.png " ")
-
-16. Under the **Visualization** tab on the right pane, select the following -
-
-      **Chart type** : **Bar Chart**
-
-      **Y axis** : **SUM(ELAPSED\_TIME)**
-      
-      **X axis** : **DISPLAY\_NAME**
-      
-      **Series** : **SQL\_ID**
-      
-      **Color by** : **SQL\_ID**
-            
-      **Legend** : **None**
-      
-      Check mark **Stacked**
-
-      ![SQL Visualization](./images/sql-query-visual1.png " ")
-
-9. This will display the visualization as a Stacked Bar Chart.
 
 10. Click on **Advanced** Mode to view **SQL Explorer** in advanced mode. The advanced mode give you more control over the SQL queries that you are running against your database to view database performance.
 
@@ -318,19 +280,6 @@ In this lab create visualuzations using pre-existing performance statistics via 
 11. This will take you to the **SQL Explorer Advanced** Mode page. Advanced mode can be used to execute your own custom queries and obtain more information above the SQLs running in the database.
 
       ![SQL Visualization](./images/sql-explorer-advanced-main.png " ")
-
-12. Click **Views & columns and sample queries** to view available views and columns which can be used in the explorer.
-
-      ![SQL Visualization](./images/sql-explorer-view-queries.png " ")
-
-13. **View & columns and sample queries** shows **View and columns** and **Sample query** that can be used in the explorer.
-
-      ![SQL Visualization](./images/view-queries.png " ")
-
-13. Click on a View to see the underlying columns that can be used to fetch desired data.
-
-      ![SQL Visualization](./images/sql-column-details.png " ")
-
 
 ## Acknowledgements
 
