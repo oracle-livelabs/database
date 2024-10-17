@@ -12,18 +12,17 @@ Estimated Time: 10 minutes
 In this lab, you will:
 
 - Load more data through the Database API for MongoDB
-- Use Mongo Shell to interact with Oracle Database
+- Use MongoDB Shell to interact with Oracle Database
 
 ### Prerequisites
 
-- Oracle Database 23ai, version 23.4 or above
 - All previous labs successfully completed
-- Mongo Shell installed on your machine
+- MongoDB Shell installed on your machine
 
 
 ## Task 1: Interact with Oracle Database using Mongo API
 
-1. First, you must set the URI to the Mongo API running in ORDS on your machine. You can find the URI in the Autonomous Database console in the *`Tool Configuration`* tab.
+1. First, you must set the URI to the Mongo API running in ORDS on your machine. You can find the URI in the Autonomous Database console in the *Tool Configuration* tab.
 
     ![Copy Mongo URI](images/copy-mongo-uri.png " ")
 
@@ -35,7 +34,7 @@ In this lab, you will:
     </copy>
     ```
 
-    Let's create an environment variabale called `URI` which contains the MongoDB URI including the user and password information.
+    Let's create an environment variable called *URI* which contains the MongoDB URI including the user and password information.
 
     ```bash
     $ <copy>
@@ -46,12 +45,39 @@ In this lab, you will:
     Example:
 
     ```
-    export URI='mongodb://admin:*redacted*@ATP3834*redacted*.adb.us-ashburn-1.oraclecloudapps.com:27017/admin?authMechanism=PLAIN&authSource=$external&tls=true&retryWrites=false&loadBalanced=true'</copy>
+    export URI='mongodb://admin:*redacted*@ATP3834*redacted*.adb.us-ashburn-1.oraclecloudapps.com:27017/admin?authMechanism=PLAIN&authSource=$external&tls=true&retryWrites=false&loadBalanced=true'
     ```
 
-    **Please note: ** You may need to escape characters. Please click [this link](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/mongo-using-oracle-database-api-mongodb.html#ADBSA-GUID-44088366-81BF-4090-A5CF-09E56BB2ACAB) to learn how to escape characters in the URL. 
+    > **_NOTE:_** Please make sure you replace both the user and password. Also, keep in mind that the **[user]** tag needs to be updated in two places.
 
-2. Before we connect to the Mongo Shell, let's populate our database using the Mongo Tools. You will use a document from Object Storage to seed the data in your **movie** collection.
+    <if type="sandbox">
+
+    In your LiveLabs Sandbox environment, the user is `admin`. You can find the password for the user on the **View Login Info** 
+
+    ![ADB Admin password in the LiveLabs Sandbox](images/adb-admin-password.png " ")
+
+
+    </if>
+
+
+   You might need to escape some characters as well.
+
+
+
+    | Special Character |   !   |   #   |   $   |   %   |   &   |   '   |   (   |   )   |   *   |   +   |
+    | ----------------- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+    | Replace with      |  %21  |  %23  |  %24  |  %25  |  %26  |  %27  |  %28  |  %29  |  %2A  |  %2B  |
+    {: title="Special characters and their replacements 1"}
+
+    | Special Character |   ,   |   /   |   :   |   ;   |   =   |   ?   |   @   |   [   |   ]   |
+    | ----------------- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+    | Replace with      |  %2C  |  %2F  |  %3A  |  %3B  |  %3D  |  %3F  |  %40  |  %5B  |  %5D  |
+    {: title="Special characters and their replacements 2"}
+
+     Please check [this link](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/mongo-using-oracle-database-api-mongodb.html#GUID-44088366-81BF-4090-A5CF-09E56BB2ACAB) to learn more about Using MongoDB API in the Oracle Database.
+
+
+2. Before we connect to the MongoDB Shell, let's populate our database using the MongoDB Command Line Database Tools. You will use a document from Object Storage to seed the data in your **movie** collection.
 
     ```
     $ <copy>curl -s https://objectstorage.us-ashburn-1.oraclecloud.com/n/c4u04/b/moviestream_gold/o/movie/movies.json | mongoimport --collection movies --drop --tlsInsecure --uri $URI
@@ -59,14 +85,14 @@ In this lab, you will:
     ```
     ![Populate the database](images/populate-mongo-db.png " ")
 
-3. Now with the URI set and the Mongo tools installed and the data inserted, we can connect to Mongo Shell. Run the command below to connect.
+3. Now with the URI set, we can connect to MongoDB Shell. Run the command below to connect.
 
     ```
     $ <copy>mongosh  --tlsAllowInvalidCertificates $URI</copy>
     ```
     ![Connect to the Mongo Shell](images/mongo-shell.png " ")
 
-4. Within the Mongo Shell, you can begin running commands to interact with the data in your database as if you were using a Mongo Database. To show the **movie** collection we created and the count of documents we imported, run the following commands.
+4. Within the MongoDB Shell, you can begin running commands to interact with the data in your database as if you were using a Mongo Database. To show the **movie** collection we created and the count of documents we imported, run the following commands.
 
     ```
     admin> <copy>show collections</copy>
@@ -93,11 +119,11 @@ In this lab, you will:
 
     There's only one movie in our library that was released after 2020.
 
-## Task 2: Interact interchangeably with Mongo API and SQL Developer Web
+## Task 2: Interact interchangeably with MongoDB API and SQL Developer Web
 
-Let's take some time to demonstrate the interactivity between the Oracle and Mongo tools we have installed on our machine to see the different APIs working against the same data set.
+Let's take some time to demonstrate the interactivity between the Oracle and MongoDB tools we have installed on our machine to see the different APIs working against the same data set.
 
-1. Use the Mongo Shell to insert 2 documents to our movie collection.
+1. Use the MongoDB Shell to insert 2 documents to our movie collection.
 
     ```
     admin> <copy>db.movies.insertMany( [{

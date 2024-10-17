@@ -2,7 +2,7 @@
 
 Welcome to the Oracle Database 23ai New Features Quick Start Workshop! This workshop covers some of the new features and enhancements in Oracle's long-term support release, version 23ai. Please note, this lab provides a high-level overview of some of Oracle Database 23ai’s new features. This is a small set of the 300+ new features in the database. For a comprehensive workshop, please visit the [23ai New Features](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3950).
 
-[](youtube:HLQW1OkLuaw)
+[](youtube:MPOYjrGhvZk)
 
 ## About Oracle Database 23ai
 

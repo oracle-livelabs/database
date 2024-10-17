@@ -17,8 +17,14 @@ The objective of this lab is to provide hands-on experience with Schema Annotati
 
 ## Task 1: Adding Schema Annotations 
 
-1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
+1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
     ![click SQL](images/im1.png =50%x*)
+
+    Using the ADMIN user isn’t typically advised due to the high level of access and security concerns it poses. **However**, for this demo, we’ll use it to simplify the setup and ensure we can show the full range of features effectively. 
+
+2. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
+
+    ![click SQL](images/simple-db-actions.png =50%x*)
 
 2. Why Use Schema Annotations? Schema Annotations provide a way to add additional property metadata for database objects, such as tables, columns, views, materialized views, and even domains. 
 

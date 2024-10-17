@@ -7,13 +7,13 @@ Welcome to the "Exploring SQL Property Graphs and SQL/PGQ in Oracle Database 23a
 Estimated Lab Time: 20 minutes
 
 Watch the video below for a walkthrough of the lab.
-[Lab walkthrough video](videohub:1_nyvxwdwz)
+[Lab walkthrough video](videohub:1_hxipitm1)
 
 ### Objective:
 
 The objective of this workshop is to show you SQL property graphs and demo their practical use. By the end of this workshop, you will be able to create property graphs, query them using SQL/PGQ, and visualize the relationships within your data.
 
-This lab is just a short overview of the functionality brought forth by Property Graphs in Oracle Database 23ai and is meant to give you a small example of what is possible. For more in depth Property Graphs explanations and workshops check out the following labs
+This lab is just a short overview of the functionality introduced with Property Graphs in Oracle Database 23ai and is meant to give you a small example of what is possible. For more in depth Property Graphs explanations and workshops check out the following labs
 
 * [Graphs in the Oracle Database](https://livelabs.oracle.com/pls/apex/f?p=133:100:105582422382278::::SEARCH:graph)
 
@@ -24,19 +24,69 @@ This lab is just a short overview of the functionality brought forth by Property
 
 ## Task 1: Lab Setup
 
-1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
+1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
 
     ![click SQL](images/im1.png =50%x*)
 
-2. For demo purposes we will be using the ADMIN user so we don't need to grant any additional roles. The database schema that contains the graph tables (either Property Graph schema objects or relational tables that will be directly loaded as a graph in memory) requires certain privileges found [here](https://docs.oracle.com/en/database/oracle/property-graph/24.2/spgdg/graph-developers-guide-property-graph.pdf). Here is an example of granting SQL property graph related privileges
+2. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
+
+    ![click SQL](images/simple-db-actions.png =50%x*)
+
+3. Here we can go ahead and create our user for this lab. We'll call our user `DB23AI` and grant the user the new developer role and the graph developer role.
 
     ```
-    GRANT CREATE PROPERTY GRAPH, CREATE ANY PROPERTY GRAPH, ALTER ANY PROPERTY GRAPH, DROP ANY PROPERTY GRAPH, READ ANY PROPERTY GRAPH TO <graphuser>;
+    <copy>
+  -- USER SQL
+  CREATE USER DB23AI IDENTIFIED BY Oracledb_4U#;
+
+  -- ADD ROLES
+  GRANT DB_DEVELOPER_ROLE TO DB23AI;
+
+  GRANT CONNECT TO DB23AI;
+  GRANT RESOURCE TO DB23AI;
+  GRANT CONSOLE_DEVELOPER TO DB23AI;
+  GRANT GRAPH_DEVELOPER TO DB23AI;
+
+
+  -- REST ENABLE
+  BEGIN
+      ORDS_ADMIN.ENABLE_SCHEMA(
+          p_enabled => TRUE,
+          p_schema => 'DB23AI',
+          p_url_mapping_type => 'BASE_PATH',
+          p_url_mapping_pattern => 'db23ai',
+          p_auto_rest_auth=> TRUE
+      );
+      -- ENABLE DATA SHARING
+      C##ADP$SERVICE.DBMS_SHARE.ENABLE_SCHEMA(
+              SCHEMA_NAME => 'DB23AI',
+              ENABLED => TRUE
+      );
+      commit;
+  END;
+  /
+
+  ALTER USER DB23AI DEFAULT ROLE CONSOLE_DEVELOPER,DB_DEVELOPER_ROLE,GRAPH_DEVELOPER;
+  ALTER USER DB23AI GRANT CONNECT THROUGH GRAPH$PROXY_USER;
+
+  -- QUOTA
+  ALTER USER DB23AI QUOTA UNLIMITED ON DATA;
+
+    </copy>
     ```
+4. Let's sign in as our new user. Click on the admin profile in the top right hand of Database Actions and sign out.
 
-    Always check the Security Best Practices when creating new users. Best security practices for graph users can be found [here](https://docs.oracle.com/en/database/oracle/property-graph/20.4/spgdg/property-graph-overview-spgdg.html#GUID-98F3A3D7-9B97-40AD-8944-B261D8B60F08).
+  ![log out of our admin user](images/im12.png " ")
 
-3. Lets create some tables for our demo. We'll create a people and relationship table which will be our vertices (people) and edges (relationship) of the graph. 
+5. Sign in with the username **DB23AI** and password **Oracledb_4U#**
+
+    ![sign in with db23ai](images/im19.png =50%x*)
+
+6. Click SQL to open the SQL editor.
+
+  ![Open SQL with db23ai](images/im20.png " ")
+
+7. Lets create some tables for our demo. We'll create a people and relationship table which will be our vertices (people) and edges (relationship) of the graph. 
 
     ```
     <copy>
@@ -122,6 +172,119 @@ This lab is just a short overview of the functionality brought forth by Property
     * Our edges table has a source key and destination key, representing the connection between the two people
 
     ![create the property graph](images/im3.png =50%x*)
+
+
+## Task 3: Discovering Graph Studio
+
+1. Now we're going to take a look at Graph Studio. Click the hamburger menu and then select Graph Studio.
+
+    ![Updating the our customers view](images/im7.png " ")
+
+2. Login with our db23ai user credentials.
+
+    Username: db23ai
+    Password: Oracledb_4U#
+
+    ![Updating the our customers view](images/im8.png " ")
+
+3. Inside Graph Studio, click on Notebooks.
+
+    ![Updating the our customers view](images/im9.png " ")
+
+4. Select **Create** in the upper right hand corner.
+
+    ![Updating the our customers view](images/im10.png " ")
+
+5. Give your notebook a name. I'll go with **cust_graph**
+
+    ![Updating the our customers view](images/im11.png " ")
+
+6. If the compute environment pops up, click close in the bottom right corner. 
+    ![Updating the our customers view](images/im13.png " ")
+
+7. Since we haven't set up the compute server, and don't need it for this lab, you may get an error saying it wasn't able to create. Close these messages.
+    ![Updating the our customers view](images/im14.png " ")
+
+
+8. Hover over the middle of the textbox and click add SQL Paragraph. See the gif below for an example
+
+    ![Updating the our customers view](images/im12.gif " ")
+
+
+9. We can now query this graph using the new SQL/PGQ extension in Oracle Database 23ai. The following query looks for customers, starting at the vertices 'Jim Brown' and then his friends (directional) within 1 to 3 hops. The important step here is the match clause which allows us to define the nodes we are looking for in our graph. We indicate we are starting from V1. We then apply a filter to, select Jim Brown. We tell it to traverse the graph in a single direction with -> navigating all edges that are marked friends from 1 to 3 hops. We finally tell the query to return the paths for the hops that match the query.
+
+    Paste the following and click the run query button
+
+    **Keep the %sql at the top of each SQL paragraph in the notebook**
+
+    ```
+    <copy>
+    select distinct
+    full_names,
+    cust_id
+    from graph_table(moviestreams_pg
+                match
+                (v1 is customer) ( -[e is related where e.relationship = 'Friend']-> (v2 is customer where v2.first_name != 'Jim')) {1,3}
+                where v1.first_name = 'Jim' and v1.last_name = 'Brown'
+                columns (LISTAGG(v2.first_name ||' '|| v2.last_name, ', ') as full_names,
+                            LISTAGG(v2.customer_id, ', ') as cust_id,
+                        v1.first_name ||' '|| v1.last_name as source)
+        )
+    </copy>
+    ```
+
+    ![Updating the our customers view](images/im15.png " ")
+
+8. If we add new customers and relationships they are part of the graph and can be queried instantly. Add the insert statement into the a paragraph and run the query
+
+    ```
+    <copy>
+    INSERT INTO customers (customer_id, first_name, last_name, email, signup_date, has_sub)
+    VALUES
+        (9, 'Jwan', 'Brown', 'Jwan.brown@example.com', SYSDATE, TRUE)
+    </copy>
+    ```
+
+    ![Updating the our customers view](images/im16.png " ")
+
+9. Add the customer relationship into the next cell and run the query.
+
+    ```
+    <copy>
+    INSERT INTO customer_relationships (SOURCE_ID, TARGET_ID, RELATIONSHIP)
+    VALUES
+        (9, 7, 'Cousin'),
+        (7, 9, 'Cousin')
+    </copy>
+    ```
+    ![Updating the our customers view](images/im17.png " ")
+
+
+10. We can update the first cell and change Friend to Cousin
+
+    ```
+    <copy>
+    select distinct
+    full_names,
+    cust_id
+    from graph_table(moviestreams_pg
+                match
+                (v1 is customer) ( -[e is related where e.relationship = 'Cousin']-> (v2 is customer where v2.first_name != 'Jim')) {1}
+                where v1.first_name = 'Jim' and v1.last_name = 'Brown'
+                columns (LISTAGG(v2.first_name ||' '|| v2.last_name, ', ') as full_names,
+                            LISTAGG(v2.customer_id, ', ') as cust_id,
+                        v1.first_name ||' '|| v1.last_name as source)
+        )
+    </copy>
+    ```
+    ![Updating the our customers view](images/im18.png " ")
+
+
+11. Navigate back to SQL Developer Web by switching your browser tabs.
+
+
+12. In this short lab we've looked at SQL property graphs and SQL/PGQ in Oracle Database 23ai. We've learned how to create property graphs from existing tables, query these graphs to discover relationships, and prepare data for visualization. 
+
 
 ## Task 3: Querying Property Graphs with SQL/PGQ
 

@@ -2,9 +2,9 @@
 
 ## Introduction
 
-This lab walks you through the installation of the MongoDB Shell tool and MongoDB Command Line Database Tools on your own machine. Instructions are provided for Mac OS/X and Windows machines. Installation on a Linux machine will be similar to the Mac instructions, but obviously will require a different download file.
+This lab walks you through the installation of the MongoDB Shell and MongoDB Command Line Database Tools on your own machine. Instructions are provided for Mac OS X and Windows machines. Installation on a Linux machine will be similar to the Mac instructions, but obviously will require a different download file.
 
-**NOTE**: MongoDB Shell tool and MongoDB Command Line Database Tools are tools provided by MongoDB Inc. Oracle is not associated with MongoDB Inc, and has no control over the software. These instructions are provided simply to help you learn about MongoDB Shell and MongoDB Command Line Database Tools. Links may change without notice.
+**NOTE**: MongoDB Shell and MongoDB Command Line Database Tools are tools provided by MongoDB Inc. Oracle is not associated with MongoDB Inc, and has no control over the software. These instructions are provided simply to help you learn about MongoDB Shell and MongoDB Command Line Database Tools. Links may change without notice.
 
 Check the official MongoDB Shell and MongoDB Command Line Database Tools website for latest versions and instructions:
 
@@ -13,8 +13,7 @@ https://www.mongodb.com/try/download/shell
 https://www.mongodb.com/try/download/database-tools
 
 
-Estimated Time: 10 minutes
-
+Estimated Time: 15 minutes
 
 ### Objectives
 
@@ -25,8 +24,8 @@ In this lab, you will:
 
 ### Prerequisites
 
-* A Mac OS/X machine (Intel or Apple hardware) or a Windows PC.
-* Access to the command prompt / terminal
+- A Mac OS X machine (Intel or Apple hardware) or a Windows PC.
+- Access to the command prompt / terminal
 
 ## Task 1: (Mac only) Determine the type of hardware
 

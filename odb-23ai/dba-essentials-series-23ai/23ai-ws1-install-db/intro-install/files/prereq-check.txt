@@ -1,0 +1,4 @@
+The database installer performs prerequisite checks to verify the installation and configuration requirements on the target environment.
+
+    - If the verification result shows failures, then click **Fix & Check Again**. The installer generates a script that you can run and fix the issues automatically.
+    - If the issues are minor, then you can click **Ignore All** and proceed with the installation.

@@ -5,7 +5,7 @@
 Now that you have an Oracle Cloud account, you will learn how to create an Autonomous Database instance. This lab walks you through the necessary steps.
 
 
-Estimated Time: 5 minutes
+Estimated Time: 15 minutes
 
 
 ### Objectives

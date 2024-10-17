@@ -4,7 +4,7 @@
 
 This workshop briefly introduces you to the JSON Duality View feature.
 
-### **JSON Duality**
+### **JSON Relational Duality**
 
 JSON Relational Duality is a landmark capability in Oracle Database 23ai providing game-changing flexibility and simplicity for Oracle Database developers. This breakthrough innovation overcomes the historical challenges developers have faced when building applications, using relational or document models.
 
