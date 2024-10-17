@@ -1,0 +1,33 @@
+To connect to your Oracle Database from a terminal, set the environment variables if not already set. These variables remain in the terminal until you close the terminal window.
+
+> Note that environment variables set in one terminal do not apply automatically to other terminals you may have. If you open a new terminal or have a terminal window already open, then you must set these variables in that terminal to connect to Oracle Database.
+
+In this task, you will set the following environment variables for your Oracle Database.
+ - *`$ORACLE_SID`*
+ - *`$ORACLE_HOME`*
+ - *`$ORACLE_BASE`*
+
+1. Open a terminal window and go to the `bin` directory in Oracle home. For this lab, the location of the `bin` directory is as follows. 
+
+	```
+	$ <copy>cd /u01/app/oracle/product/23.4.0/dbhome_1/bin</copy>
+	```
+
+1. Set the environment variables with the script, *oraenv*.
+
+	```
+	$ <copy>./oraenv</copy>
+	```
+
+1. When prompted for `$ORACLE_SID`, enter *orcl*.
+
+	```
+	ORACLE_SID = [oracle] ? <copy>orcl</copy>
+	The Oracle base has been set to /u01/app/oracle
+	```
+
+	> **Note**: Oracle SID is case-sensitive.
+
+	This command sets the variables *`$ORACLE_SID`* and *`$ORACLE_BASE`*. It also sets the *`$ORACLE_HOME`* path, for example, *`/u01/app/oracle/product/23.4.0/dbhome_1`*.
+
+You have set the environment variables for your Oracle Database in the currently active terminal. You can now connect to Oracle Database and run the SQL commands.

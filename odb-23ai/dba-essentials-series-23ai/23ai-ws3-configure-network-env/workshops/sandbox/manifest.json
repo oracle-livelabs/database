@@ -1,0 +1,34 @@
+{
+  "workshoptitle": "DBA Essentials - Configure network environment for Oracle Database 23ai",
+  "help": "livelabs-help-db_us@oracle.com",
+  "include": {
+        "example-values": "./../../intro-configure-network/files/example-values.txt",
+        "set-env-var": "./../../intro-configure-network/files/set-env-var.txt"
+    },
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The workshop on network environment for Oracle Database which includes listener operation and administration.",
+      "publisheddate": "04/14/2023",
+      "filename": "./../../intro-configure-network/intro-configure-network.md"
+    },
+    {
+      "title": "Lab 1: Verify compute instance setup",
+      "description": "Verify Setup of compute instance",
+      "publisheddate": "05/06/2024",
+      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-novnc.md"
+    },
+    {
+      "title": "Lab 2: Administer listener operations",
+      "description": "How to perform listener operations, such as starting and stopping the listener, checking the listener status, and so on, using the listener control utility.",
+      "publisheddate": "04/14/2023",
+      "filename": "./../../administer-listener-ops/administer-listener-ops.md"
+    },
+    {
+      "title": "Need help?",
+      "description": "Solutions to common problems and directions for receiving live help",
+      "publisheddate": "05/24/2024",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}
