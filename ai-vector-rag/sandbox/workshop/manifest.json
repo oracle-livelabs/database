@@ -6,7 +6,7 @@
           "title": "Introduction",
           "description": "This is an introduction to RAG",
           "type": "livelabs",
-          "filename": "../../new-rag-workshop/introduction.md"
+          "filename": "../../introduction/introduction.md"
       },
       {
         "title": "Get Started",
@@ -14,16 +14,16 @@
         "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-23ai.md"
     },
       {
-        "title": "Lab 1: Running the User Interface RAG Application",
-        "description": "Run the UI for the RAG application",
+        "title": "Lab 1: Running a RAG Application",
+        "description": "Run a RAG application",
         "type": "livelabs",
-        "filename": "../../new-rag-workshop/lab1_demo.md"
+        "filename": "../../demo/demo.md"
     },
       {
-          "title": "Lab 2: Building and Run the RAG Application ",
-          "description": "Build and run the RAG application",
+          "title": "Lab 2: Exploring RAG ",
+          "description": "Exploring RAG",
           "type": "livelabs",
-          "filename": "../../new-rag-workshop/lab2_rag.md"
+          "filename": "../../rag/rag.md"
       },
         {
           "title": "Need Help?",
