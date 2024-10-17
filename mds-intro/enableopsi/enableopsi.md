@@ -1,8 +1,6 @@
-# Enable Demo Mode for Ops Insights
-
 ## Introduction
 
-In this lab, you will go through the steps to enable Demo Mode for Oracle Cloud Infrastructure Ops Insights.
+In this lab, you will go through the steps to enable and explore Ops Insights for MySQL HeatWave DB System.
 
 Estimated time: 50 minutes
 
@@ -33,7 +31,7 @@ Estimated time: 50 minutes
 
       ![Apply Policy](./images/opsi-apply-policy.png " ")
 
-5.  Once the mode is enabled the overview page will now show resource information for the OperationsInsights compartment, notice the upper-right hand corner will show Demo Mode is now ON for your session.  When you would like to exit demo mode you can either click the disable link in the corner or click the now present **Disable Demo Mode** button where you initially enabled it on the overview page.
+5.  Once the mode is enabled the overview page will now show resource information for the OperationsInsights compartment, notice the upper-right hand corner will show Demo Mode is now ON for your session.  When you would like to exit demo mode you can either click the disable link in the corner or click the **Disable Demo Mode** button where you initially enabled it on the overview page.
 
       ![Demo Mode ON](./images/opsi-demo-mode-on.png " ")
 
@@ -201,7 +199,7 @@ Estimated time: 50 minutes
       ![Left Pane](./images/storage-trend-forecast-ml.png " ")
       ![Left Pane](./images/storage-trend-forecast-auto-ml.png " ")
 
-7.  Click **Close** to go back to the **Database Storage** page.
+      Click **Close** to go back to the **Database Storage** page.
 
 ## Task 5: SQL Insights
 
@@ -268,6 +266,8 @@ In this lab create visualizations using pre-existing performance statistics via 
       Check mark **Correlated tooltips**
 
       ![SQL Visualization](./images/sql-query-visual.png " ")
+
+9. This will display the visualization as an **Area Chart**.
 
 10. Click on **Clear** to clear the query section.
 
