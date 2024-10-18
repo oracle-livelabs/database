@@ -6,6 +6,7 @@ Watch the following video for a brief walkthrough of the lab:
 
  [](videohub:1_ldgknjmv)
 </br>
+
 **_Estimated Time: 10 Minutes_**
 
 ### **Objectives**
