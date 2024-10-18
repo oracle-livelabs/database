@@ -31,7 +31,7 @@ This task will have you login to the Jupyter environment and run specific notebo
    </copy>
    ````
 
-7. Three URLs will appear. Click on the last URL labeled **External URL:**
+7. The above commands will start a streamlit application running your Chatbot. Three URLs will appear. The last URL is the one that will allow you to connect from your browser. Click on the last URL labeled **External URL:**
 
 ## Task 2: Run the application
 
