@@ -1,13 +1,10 @@
-# Lab 1: Running a RAG Application
+# Running a RAG Application
 
 ## Introduction 
 
 Watch the following video for a brief walkthrough of the lab:
 
-<video width="640" height="360" controls>
-  <source src="images/lab1-v2.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+ [](videohub:1_ldgknjmv)
 </br>
 **_Estimated Time: 10 Minutes_**
 
