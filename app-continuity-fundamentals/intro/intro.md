@@ -49,5 +49,5 @@ Application Continuity extends the MAA architecture to the application tier.
 
 ## Acknowledgements
 
-- **Authors/Contributors** - Troy Anthony, Ian Cookson
-- **Last Updated By/Date** - Troy Anthony, March 2021
+- **Authors/Contributors** - Troy Anthony, Anil Nair
+- **Last Updated By/Date** - Anil Nair, Oct 2024
