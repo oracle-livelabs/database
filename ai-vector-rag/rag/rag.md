@@ -39,9 +39,9 @@ This task will have you login to the Jupyter environment and run specific notebo
 
    ![Enter the password.](images/lab1-3-jupyter-login.png)
 
-4. You should be within the Jupyter Notebooks landing screen. Open the folder name (*******) on the left hand side of the screen located in the file explorer.
+4. You should be within the Jupyter Notebooks landing screen. 
 
-   ![The Jupyter Notebook landing screen.](images/lab2-4-landing-page.png)
+   ![The Jupyter Notebook landing screen.](images/lab1-4-landing-page.png)
 
 5. In the left File Explorer panel, open the (**workshop**) and open(**workshop.ipynb**) notebook.
 
