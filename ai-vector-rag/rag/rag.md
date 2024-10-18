@@ -29,19 +29,31 @@ This task will have you login to the Jupyter environment and run specific notebo
 
 1. **If you have already logged into the Jupyter environment skip to step 5, otherwise** open "**View Login Info**" section of your workshop.
 
+   ![View login info.](images/lab1-1-view-login-info.png)
+
 2. Copy the Jupyter Notebook Password and click the Jupyter Notebook URL.
 
-3. Paste the Jupyter Notebook Password you copied in the previous step into the Notebook.
+   ![Copy login details.](images/lab1-2-jupyter-notebook-info.png)
+
+3. Paste the Jupyter Notebook password you copied in the previous step into the password field.
+
+   ![Enter the password.](images/lab1-3-jupyter-login.png)
 
 4. You should be within the Jupyter Notebooks landing screen. Open the folder name (*******) on the left hand side of the screen located in the file explorer.
 
-5. In the left File Explorer panel open the (**workshop**) and open(**workshop.ipynb**) notebook.
+   ![The Jupyter Notebook landing screen.](images/lab2-4-landing-page.png)
+
+5. In the left File Explorer panel, open the (**workshop**) and open(**workshop.ipynb**) notebook.
+
+    ![Open the workshop's Jupyter Notebook.](images/lab2-5-open-notebook.png)
 
 6. Follow the steps in the notebook. A few things to remember: 
     - there are markdown blocks and code blocks mixed together
     - The run button can be used on both code and markdown blocks (markdown just advances you to the next block)
     - When you run a code block there are [ ] next to the code block. If it changes to a [*] that means it running. If it has a number like [1] then its done running.
     - Passwords and additional information you may need will be found in the "View Login Info" where the Jupyter Notebook link was
+
+    ![How to use the Jupyter Notebook.](images/lab2-6-run-notebook.png)
 
 ## Learn More
 
@@ -54,5 +66,5 @@ This task will have you login to the Jupyter environment and run specific notebo
 
 ## Acknowledgements
 * **Author** - Francis Regalado, Database Product Management; David Start, Database Product Management
-* **Contributors** -
-* **Last Updated By/Date** - Francis Regalado, Database Product Manager October 2024
+* **Contributors** - Brianna Ambler, Database Product Management
+* **Last Updated By/Date** - Brianna Ambler, October 2024
