@@ -1,13 +1,10 @@
-# Lab 2: Build your own RAG app!     
+# Build Your Own RAG App!   
 
 ## Introduction
 
 Watch the following video for a brief walkthrough of the lab:
 
-<video width="640" height="360" controls>
-  <source src="images/lab2-v2.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[](videohub:1_02twssdb)
 
 A typical RAG (Retrieval Augmented Generation) application follows 7 key steps and requires a vector store. In this lab, you will learn how to build a RAG application using Oracle AI Vector Search. By the end of the lab, you will have stored, chunked, and vectorized data from a PDF document. You will then use a Large Language Model (LLM) to generate an answer to a user’s query based on the relevant context stored in Oracle Database 23ai. We’ll be working with documents (PDF) as the source data, but the same process can be applied to other data types like audio and video.
 
