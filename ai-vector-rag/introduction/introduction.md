@@ -1,4 +1,4 @@
-# Ai Vector Search - Rag applications with Oracle AI Vector Search
+# AI Vector Search - Rag applications with Oracle AI Vector Search
 
 ### **About this Workshop**
 
@@ -18,7 +18,7 @@ This lab will guide you through the process of building a Retrieval Augmented Ge
 
 Estimated Time: 30 Minutes
 
-## About Oracle Ai Vector Search
+## About Oracle AI Vector Search
 
 Oracle AI Vector Search is a feature of Oracle Database 23ai that enables efficient searching of AI-generated vectors stored in the database. It supports fast search using various indexing strategies and can handle massive amounts of vector data. This makes it possible for Large Language Models (LLMs) to query private business data using a natural language interface, helping them provide more accurate and relevant results. Additionally, AI Vector Search allows developers to easily add semantic search capabilities to both new and existing applications.
 
