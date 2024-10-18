@@ -1,13 +1,21 @@
 # Lab 1: Running a RAG Application
 
 ## Introduction 
-Estimated Time: 10 Minutes
 
-### Objectives
+Watch the following video for a brief walkthrough of the lab:
+
+<video width="640" height="360" controls>
+  <source src="images/lab1-v2.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</br>
+**_Estimated Time: 10 Minutes_**
+
+### **Objectives**
 
 In this lab, you will run a RAG application interactively using a user-friendly interface. You’ll be able to choose and load several PDF documents and ask your own questions using a prompt. This setup will allow you to easily interact with the RAG system and observe how it processes and generates responses in real time.
 
-### Prerequisites
+### **Prerequisites**
 This lab assumes you have:
 - All previous labs successfully completed
 
