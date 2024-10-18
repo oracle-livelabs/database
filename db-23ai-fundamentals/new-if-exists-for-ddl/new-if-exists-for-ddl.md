@@ -17,8 +17,14 @@ In this lab, you will learn how to use the "IF EXISTS" and "IF NOT EXISTS" state
 
 ## Task 1: Exploring IF [NOT] EXISTS Clause
 
-1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png " ")
+1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
+    ![click SQL](images/im1.png =50%x*)
+
+    Using the ADMIN user isn’t typically advised due to the high level of access and security concerns it poses. **However**, for this demo, we’ll use it to simplify the setup and ensure we can show the full range of features effectively. 
+
+2. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
+
+    ![click SQL](images/simple-db-actions.png =50%x*)
 
 2. Let's reset our environment before we start.
     
