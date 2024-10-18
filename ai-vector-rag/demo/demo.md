@@ -16,30 +16,44 @@ This task will have you login to the Jupyter environment and run specific notebo
 
 1. **If you have already logged into the Jupyter environment skip to step 5, otherwise** open "**View Login Info**" section of your workshop.
 
+   ![View login info.](images/lab1-1-view-login-info.png)
+
 2. Copy the Jupyter Notebook Password and click the Jupyter Notebook URL.
 
-3. Paste the Jupyter Notebook Password you copied in the previous step into the Notebook.
+   ![Copy login details.](images/lab1-2-jupyter-notebook-info.png)
 
-4. You should be within the Jupyter Notebooks landing screen. 
+3. Paste the Jupyter Notebook password you copied in the previous step into the password field.
 
-5. In the menu at the top click on **File** then click on **New** Then click on **Terminal**
-6. In the terminal copy and paste the code below
-   ````
-   <copy>
-   cd /home/oracle
-   /home/oracle/run.sh
-   </copy>
-   ````
+   ![Enter the password.](images/lab1-3-jupyter-login.png)
 
-7. The above commands will start a streamlit application running your Chatbot. Three URLs will appear. The last URL is the one that will allow you to connect from your browser. Click on the last URL labeled **External URL:**
+4. You should now see the Jupyter Notebook's landing page. 
+   ![The Jupyter Notebook landing page.](images/lab1-4-landing-page.png)
 
-## Task 2: Run the application
+5. In the menu at the top click on **File** >> **New** >> **Terminal**.
+   ![Open the terminal.](images/lab1-5-open-terminal.png)
+
+6. In the terminal, copy and paste the code below.
+      ````
+      <copy>
+      cd /home/oracle
+      /home/oracle/run.sh
+      </copy>
+      ````
+      ![Run the code snippet in the terminal.](images/lab1-6-terminal-commands.png)
+
+7. The above commands will start a streamlit application running your Chatbot. Three URLs will appear. The last URL is the one that will allow you to connect from your browser. Click on the last URL labeled **External URL.**
+   ![Enter the password.](images/lab1-7-app-urls.png)
+
+## Task 2: Run the Application
 
 1. Once your application is running, simply follow the steps in the user interface.
 
-Feel free to explore the documents with your own questions and discover how the RAG application can retrieve and provide accurate responses based on the document’s content.
+   ![Enter the password.](images/lab1-8-app-landing-page.png)
 
-You may now **proceed to the next lab** 
+   Feel free to explore the documents with your own questions and discover how the RAG application can retrieve and provide accurate responses based on the document’s content.
+
+
+You may now **proceed to the next lab**.
 
 ## Learn More
 
