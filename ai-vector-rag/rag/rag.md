@@ -1,7 +1,7 @@
-# Lab 2: Build and Run the RAG Application     
+# Lab 2: Build your own RAG app!     
 
 ### **Introduction**
-A typical RAG (Retrieval Augmented Generation) application follows 7 key steps and requires a vector store. In this lab, you will learn how to build a RAG application using Oracle AI Vector Search. By the end of the lab, you will have stored, chunked, and vectorized data from a PDF document. You will then use a Large Language Model (LLM) to generate an answer to a user’s query based on the relevant context stored in Oracle Database 23AI. We’ll be working with documents (PDF) as the source data, but the same process can be applied to other data types like audio and video.
+A typical RAG (Retrieval Augmented Generation) application follows 7 key steps and requires a vector store. In this lab, you will learn how to build a RAG application using Oracle AI Vector Search. By the end of the lab, you will have stored, chunked, and vectorized data from a PDF document. You will then use a Large Language Model (LLM) to generate an answer to a user’s query based on the relevant context stored in Oracle Database 23ai. We’ll be working with documents (PDF) as the source data, but the same process can be applied to other data types like audio and video.
 
 Here are the steps we will cover:
 
@@ -10,7 +10,7 @@ Here are the steps we will cover:
 3. Break the text into smaller chunks.
 4. Use an embedding model to turn those chunks into vectors and store them in Oracle Database 23AI.
 5. Ask a question in the prompt, and use the same embedding model to vectorize the question.
-6. Perform a similarity search in Oracle Database 23AI using the question.
+6. Perform a similarity search in Oracle Database 23ai using the question.
 7. The search results and question are passed to the LLM to generate a final response.
 
 Each step will be explained in detail, guiding you through the process of interacting with models, embedding vectors, and using advanced search techniques. In the main workshop, additional information and documentation will be provided for further exploration and deeper understanding of the concepts covered.

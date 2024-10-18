@@ -1,11 +1,11 @@
-# Lab 1: Run the RAG application using a User Interface
+# Lab 1: Running a RAG Application
 
-### **Introduction** 
+### Introduction 
 Estimated Time: 10 Minutes
 
-### **Objectives**
+### Objectives
 
-In this lab, you will run a RAG application interactively using a user-friendly interface. You’ll be able to choose and load several PDF documents and ask your own questions using a prompt.This setup will allow you to easily interact with the RAG system and observe how it processes and generates responses in real time.
+In this lab, you will run a RAG application interactively using a user-friendly interface. You’ll be able to choose and load several PDF documents and ask your own questions using a prompt. This setup will allow you to easily interact with the RAG system and observe how it processes and generates responses in real time.
 
 ## Prerequisites
 This lab assumes you have:

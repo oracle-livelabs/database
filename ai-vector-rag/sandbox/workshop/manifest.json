@@ -20,7 +20,7 @@
         "filename": "../../demo/demo.md"
     },
       {
-          "title": "Lab 2: Exploring RAG ",
+          "title": "Lab 2: Build your own RAG app!",
           "description": "Exploring RAG",
           "type": "livelabs",
           "filename": "../../rag/rag.md"
