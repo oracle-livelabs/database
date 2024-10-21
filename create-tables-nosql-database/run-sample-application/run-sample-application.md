@@ -8,12 +8,12 @@ Estimated Lab Time: 10 Minutes
 
 ### About Oracle NoSQL Database Cloud Service
 
-Oracle NoSQL Database Cloud Service is a fully managed database cloud service that handles large amounts of data at high velocity. Developers can start using this service in minutes by following the simple steps outlined in this tutorial. To get started with the service, you create a table. Oracle NoSQL Database supports Java, Python, Node.js , Go and C#.
+Oracle NoSQL Database Cloud Service is a fully managed database cloud service that handles large amounts of data at high velocity. Developers can start using this service in minutes by following the simple steps outlined in this tutorial. To get started with the service, you create a table. Oracle NoSQL Database supports Java, Python, Node.js, Go, and C#.
 
 ### Prerequisites
 
 *  An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
-*  Successful completon of Lab 1 : Create an API Signing Key and SDK CLI Configuration File
+*  Successful completion of Lab 1 : Create an API Signing Key and SDK CLI Configuration File
 
 This workshop contains different language implementation in the form of different tabs. Click the tab corresponding to the language you are interested in.
 
@@ -102,15 +102,15 @@ This workshop contains different language implementation in the form of differen
   Confirm that the command prints the installed version of Go.
   </if>
  <if type="Node.js">
- The Node.js supports both JavaScript and TypeScript applications.
+ The Node SDK supports both JavaScript and TypeScript applications.
 
-  1. This lab includes code samples for JavaScript and TypeScript applications. Decide the application that you want to use.  
+  1. This lab includes code samples for JavaScript and TypeScript applications. Decide the language that you want to use.  
 
   2. Open the [Node.js Download](https://nodejs.org/en/) link and download Node.js. Follow the prompts to install the Node.js package. The Node Package Manager (npm) is automatically installed.
 
    With this Node.js package, you can run both JavaScript and TypeScript applications.
 
-  3. Install the node SDK for Oracle NoSQL Database.
+  3. Install the Node SDK for Oracle NoSQL Database.
 
   ```
   <copy>
@@ -118,7 +118,7 @@ This workshop contains different language implementation in the form of differen
   </copy>
   ```
 
-   With the above command, npm will create node_modules directory in the current directory.
+   With the above command, npm creates the `node_modules` directory in the current directory.
 
    Another option is to install the SDK globally:
 
@@ -177,7 +177,7 @@ tenancy=TENANCY-OCID
 key_file=<Location of the private key oci_api_key_private.pem>
 </copy>
 ```
-Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
+Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your notepad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
 ![View config file](images/config-file.png)
 When `SignatureProvider` is constructed without any parameters, the default [Configuration File](https://docs.cloud.oracle.com/iaas/Content/API/Concepts/sdkconfig.htm) is located in the `~/.oci/config` directory.
 
@@ -212,7 +212,7 @@ tenancy=TENANCY-OCID
 key_file=<Location of the private key oci_api_key_private.pem>
 </copy>
 ```   
-Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
+Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your notepad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
 ![View config file](images/config-file.png)
 
 4. Execute the sample application:
@@ -257,7 +257,7 @@ tenancy=TENANCY-OCID
 key_file=<Location of the private key oci_api_key_private.pem>
 </copy>
 ```
-Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
+Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your notepad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
 ![View config file](images/config-file.png)
 
 4.  Execute the sample application:
@@ -309,7 +309,7 @@ Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/api
 <if type="Node.js">
 The given code sample in JavaScript and TypeScript use the [ES6 modules](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/other-databases/nosql-database/24.1/nsdev&id=node_ecma_mod).
 
-1. Download the provided JavaScript application [HelloWorld.js](https://objectstorage.us-ashburn-1.oraclecloud.com/p/hP3lO4cVou3C1XqL-oxJi4F3IC3fsqwO6jsoq4b4-j6uhJ3DjFffEJwf6O5M0ABf/n/c4u04/b/livelabsfiles/o/HelloWorld.js) file and move it to your home directory. For TypeScript applications, download the provided [HelloWorld.ts] (https://objectstorage.us-ashburn-1.oraclecloud.com/p/-_rOKBbY7zRRg6fyYdm3vvRIatks_zGuJ3ZX4QhRDm8UfgAqsotpcDo4phLRuQAL/n/c4u04/b/livelabsfiles/o/HelloWorld.ts) file and move it to your home directory.
+1. For JavaScript applications, download the [HelloWorld.js](https://objectstorage.us-ashburn-1.oraclecloud.com/p/hP3lO4cVou3C1XqL-oxJi4F3IC3fsqwO6jsoq4b4-j6uhJ3DjFffEJwf6O5M0ABf/n/c4u04/b/livelabsfiles/o/HelloWorld.js) file and move it to your home directory. For TypeScript applications, download the [HelloWorld.ts] (https://objectstorage.us-ashburn-1.oraclecloud.com/p/-_rOKBbY7zRRg6fyYdm3vvRIatks_zGuJ3ZX4QhRDm8UfgAqsotpcDo4phLRuQAL/n/c4u04/b/livelabsfiles/o/HelloWorld.ts) file and move it to your home directory.
 
 2. Review the sample application. You can access the [Node.js API  Reference Guide](https://oracle.github.io/nosql-node-sdk/index.html) to reference Node.js classes and methods included in this sample application.
 
@@ -368,10 +368,10 @@ tenancy=TENANCY-OCID
 key_file=<Location of the private key oci_api_key_private.pem>
 </copy>
 ```
-Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your note pad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
+Replace [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five) with the value you copied on your notepad, FINGERPRINT-VALUE with your API key fingerprint, TENANCY-OCID with your [tenancy OCID](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five). The [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) is the private key that you generated. You should have noted these values in a text file as you've been working through this workshop.  Use the values recorded from Lab 1.
 ![View config file](images/config-file.png)
 
-4. Go to your project directory. you will see the example source code ```Program.cs```. Remove this file .
+4. Go to your project directory. You will see the example source code ```Program.cs```. Remove this file .
 ```
 <copy>
  rm Program.cs
@@ -392,7 +392,7 @@ dotnet run
 
 1. On the left hand menu, click **Databases**. In the **Databases** window, click **Tables** under **Oracle NoSQL Database**.
 
-  ![Click NoSQL Database](images/nosql-cloud.png)
+  ![Click NoSQL Database Tables](images/nosql-cloud.png)
 
 2. Click **HelloWorldTable** to open the details page.
 
@@ -402,11 +402,11 @@ dotnet run
 
 3. Click **Columns** under Resources to view the table columns.
 
-  ![Table Rows](images/helloworldtable.png)
+  ![Table Columns](images/helloworldtable.png)
 
 4. Click **Explore data** under Resources and click **Execute** to execute the select statement and display the record inserted into the table.
 
-  ![Run Query](images/run-query.png)
+  ![Execute](images/run-query.png)
 
 Congratulations! You have completed the workshop.
 
