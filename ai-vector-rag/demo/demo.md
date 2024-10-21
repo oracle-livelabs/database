@@ -17,28 +17,29 @@ In this lab, you will run a RAG application interactively using a user-friendly 
 This lab assumes you have:
 - All previous labs successfully completed
 
-## Task 1: Open the Notebook Environment
-This task will have you login to the Jupyter environment and run specific notebooks for this lab.
+## Task 1: Open the Jupyter Notebook Interface
 
-1. **If you have already logged into the Jupyter environment skip to step 5, otherwise** open "**View Login Info**" section of your workshop.
+1. In the upper-left corner, select **View Login Info**. 
 
    ![View login info.](images/lab1-1-view-login-info.png)
 
-2. Copy the Jupyter Notebook Password and click the Jupyter Notebook URL.
+2. You can now see all reservation details relevant to completing this workshop. Copy the Jupyter Notebook password and open the Jupyter Notebook URL.
 
-   ![Copy login details.](images/lab1-2-jupyter-notebook-info.png)
+   ![Copy the Jupyter Notebook pasword.](images/lab1-2-jupyter-notebook-info.png)
 
-3. Paste the Jupyter Notebook password you copied in the previous step into the password field.
+3. Paste the Jupyter Notebook password into the password field, as shown below.
 
    ![Enter the password.](images/lab1-3-jupyter-login.png)
 
-4. You should now see the Jupyter Notebook's landing page. 
+4. After a successfull login, you will see the Jupyter Notebook's landing page. 
    ![The Jupyter Notebook landing page.](images/lab1-4-landing-page.png)
 
-5. In the menu at the top click on **File** >> **New** >> **Terminal**.
+## Task 2: Run the RAG Application
+
+1. In the top navigation bar, open the terminal by clicking **File** >> **New** >> **Terminal**.
    ![Open the terminal.](images/lab1-5-open-terminal.png)
 
-6. In the terminal, copy and paste the code below.
+2. In the terminal, copy and paste the code below.
       ````
       <copy>
       cd /home/oracle
@@ -47,17 +48,14 @@ This task will have you login to the Jupyter environment and run specific notebo
       ````
       ![Run the code snippet in the terminal.](images/lab1-6-terminal-commands.png)
 
-7. The above commands will start a streamlit application running your Chatbot. Three URLs will appear. The last URL is the one that will allow you to connect from your browser. Click on the last URL labeled **External URL.**
-   ![Enter the password.](images/lab1-7-app-urls.png)
+3. The above commands will start a streamlit application running your Chatbot. Three URLs will appear. Click on the last URL to interact with the application from your browser. 
+   ![Launch the app in your browser.](images/lab1-7-app-urls.png)
 
-## Task 2: Run the Application
+4. You should now see the landing page of the application you'll be building shortly. Explore the application by following the instructions on the landing page. Feel free to explore the documents with your own questions and discover how the RAG application can retrieve and provide accurate responses based on the document’s content.
 
-1. Once your application is running, simply follow the steps in the user interface.
+   Once finished you can return to these instructions.
 
-   ![Enter the password.](images/lab1-8-app-landing-page.png)
-
-   Feel free to explore the documents with your own questions and discover how the RAG application can retrieve and provide accurate responses based on the document’s content.
-
+   ![View the application landing page.](images/lab1-8-app-landing-page.png)
 
 You may now **proceed to the next lab**.
 
@@ -72,5 +70,5 @@ You may now **proceed to the next lab**.
 
 ## Acknowledgements
 * **Author** - Francis Regalado, Database Product Management; David Start, Database Product Management
-* **Contributors** -
-* **Last Updated By/Date** - Francis Regalado, Database Product Manager October 2024
+* **Contributors** - Brianna Ambler, Kaylien Phan, Database Product Management
+* **Last Updated By/Date** - Brianna Ambler, October 2024
