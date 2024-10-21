@@ -36,7 +36,7 @@ In this lab, you will be guided through the following steps:
 * Configure a client Linux virtual machine.
 * Connect to and use MySQL HeatWave Database Service.
 * Manage MySQL HeatWave Database Service.
-* Explore Capacity Planning and SQL Insights for HeatWave MySQL.
+* Explore capacity planning and SQL Insights for HeatWave MySQL.
 
 ## Prerequisites
 
