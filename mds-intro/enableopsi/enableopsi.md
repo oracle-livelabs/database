@@ -1,13 +1,14 @@
 ## Introduction
 
-In this lab, you will go through the steps to enable and explore Ops Insights for MySQL HeatWave DB System.
+In this lab, you will go through the steps to enable and explore Ops Insights for HeatWave MySQL DB System which includes ML based resource usage trending, capacity planning, and SQL Insights.
 
-Estimated time: 50 minutes
+Estimated time: 20 minutes
 
 ### Objectives
 
 - Log into OCI Tenancy.
 - Enable Ops Insights Demo Mode.
+- Explore capacity planning and SQL Insights.
 
 ### Prerequisites
 
@@ -35,7 +36,7 @@ Estimated time: 50 minutes
 
       ![Demo Mode ON](./images/opsi-demo-mode-on.png " ")
 
-6.  On the left-hand pane you will find links to quickly navigate to OPSI offerings including Capacity Planning, Exadata Insights, Oracle SQL Warehouse, AWR Hub, and Dashboards.  
+6.  On the left-hand pane you will find links to quickly navigate to Ops Insights offerings for HeatWave MySQL which includes Capacity Planning, SQL Insights and Dashboards.
 
       ![Left Pane](./images/opsi-left-pane.png " ")
 
@@ -203,16 +204,19 @@ Estimated time: 50 minutes
 
 ## Task 5: SQL Insights
 
-1. On the **Ops Insights Overview** page, from the left pane click **SQL Insights**. On the **SQL Insights - Fleet analysis** page you can view insights and analysis for MySQL HeatWave databases enabled in the compartment.
+1. On the **Ops Insights Overview** page, from the left pane click **SQL Insights**. On the **SQL Insights - Fleet analysis** page and filter by database type as **MySQL**. Now you can view insights and analysis for HeatWave MySQL databases enabled in the compartment.
 
       ![Left Pane](./images/sql-insights.png " ")
 
 3. Click the database **departmentsdb** to view **SQL Insights - Database: For database level insights**
 
       ![Left Pane](./images/sql-departments-db.png " ")
+
+4. HeatWave MySQL DB system dashboard provides a broad overview of the SQL workload executing in the database. This includes basic properties of the database and the SQL collected from it. SQL activity is shown by day broken down by command type and database, exposing changes in the workload over time. Average Active Session (AAS) by database schemas, latency type and Top SQLs additionally provide workload characteristics over time.
+
       ![Left Pane](./images/departments-db-insights.png " ")
 
-4. Click on **SQL activity by latency type**.
+5. Click on **SQL activity by latency type**.
 
       ![Left Pane](./images/sql-latency-insights.png " ")
 
@@ -283,6 +287,6 @@ In this lab create visualizations using pre-existing performance statistics via 
 
 ## Acknowledgements
 
-- **Author** - Vivek Verma, Master Principal Cloud Architect, North America Cloud Engineering
-- **Contributors** - Vivek Verma, Sriram Vrinda, Derik Harlow, Murtaza Husain
-- **Last Updated By/Date** - Vivek Verma, Apr 2024
+- **Author** - Sindhuja Banka, HeatWave MySQL Product Manager
+- **Contributors** - Sindhuja Banka, Sriram Vrinda, Anand Prabhu, Murtaza Husain
+- **Last Updated By/Date** - Sindhuja Banka, Oct 2024

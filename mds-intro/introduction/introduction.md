@@ -3,7 +3,7 @@
 ## About this Workshop
 This lab will introduce you to a powerful union between MySQL Enterprise Edition and Oracle Cloud Infrastructure (OCI). You will learn how to create your first MySQL HeatWave Database Service in a secure OCI environment. You will also learn how to connect and use your MySQL HeatWave Database Service  with the MySQL Shell tool.
 
-EstimatedTime: 60 minutes 
+EstimatedTime: 80 minutes 
 
 ### About this Product
 The NEW MySQL HeatWave Database Service is the only database service that is 100% developed, managed, and supported by the MySQL team. 
@@ -36,7 +36,7 @@ In this lab, you will be guided through the following steps:
 * Configure a client Linux virtual machine.
 * Connect to and use MySQL HeatWave Database Service.
 * Manage MySQL HeatWave Database Service.
-
+* Explore Capacity Planning and SQL Insights for HeatWave MySQL.
 
 ## Prerequisites
 
