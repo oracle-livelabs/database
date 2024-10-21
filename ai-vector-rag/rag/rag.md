@@ -1,6 +1,11 @@
-# Lab 2: Build your own RAG app!     
+# Build Your Own RAG App!   
 
 ## Introduction
+
+Watch the following video for a brief walkthrough of the lab:
+
+[](videohub:1_02twssdb)
+
 A typical RAG (Retrieval Augmented Generation) application follows 7 key steps and requires a vector store. In this lab, you will learn how to build a RAG application using Oracle AI Vector Search. By the end of the lab, you will have stored, chunked, and vectorized data from a PDF document. You will then use a Large Language Model (LLM) to generate an answer to a user’s query based on the relevant context stored in Oracle Database 23ai. We’ll be working with documents (PDF) as the source data, but the same process can be applied to other data types like audio and video.
 
 Here are the steps we will cover:
@@ -20,7 +25,7 @@ Throughout this section we will be leveraging a Jupyter Notebook to explore vect
 - When running a code block it will switch from either a [ ] or a [1] (a number inside) to a [*]. When you see the one with a * that means its running. Wait till it switches to a number before moving on.
 - If you see any warnings, don't worry, they are probably just letting you know that things are changing, depreciating and you should look at updating to the latest standards. You don't need to do anything.
 
-### Prerequisites
+### **Prerequisites**
 This lab assumes you have:
 - All previous labs successfully completed
 
@@ -29,19 +34,31 @@ This task will have you login to the Jupyter environment and run specific notebo
 
 1. **If you have already logged into the Jupyter environment skip to step 5, otherwise** open "**View Login Info**" section of your workshop.
 
+   ![View login info.](images/lab1-1-view-login-info.png)
+
 2. Copy the Jupyter Notebook Password and click the Jupyter Notebook URL.
 
-3. Paste the Jupyter Notebook Password you copied in the previous step into the Notebook.
+   ![Copy login details.](images/lab1-2-jupyter-notebook-info.png)
 
-4. You should be within the Jupyter Notebooks landing screen. Open the folder name (*******) on the left hand side of the screen located in the file explorer.
+3. Paste the Jupyter Notebook password you copied in the previous step into the password field.
 
-5. In the left File Explorer panel open the (**workshop**) and open(**workshop.ipynb**) notebook.
+   ![Enter the password.](images/lab1-3-jupyter-login.png)
+
+4. You should be within the Jupyter Notebooks landing screen. 
+
+   ![The Jupyter Notebook landing screen.](images/lab1-4-landing-page.png)
+
+5. In the left File Explorer panel, open the (**workshop**) and open(**workshop.ipynb**) notebook.
+
+    ![Open the workshop's Jupyter Notebook.](images/lab2-5-open-notebook.png)
 
 6. Follow the steps in the notebook. A few things to remember: 
     - there are markdown blocks and code blocks mixed together
     - The run button can be used on both code and markdown blocks (markdown just advances you to the next block)
     - When you run a code block there are [ ] next to the code block. If it changes to a [*] that means it running. If it has a number like [1] then its done running.
     - Passwords and additional information you may need will be found in the "View Login Info" where the Jupyter Notebook link was
+
+    ![How to use the Jupyter Notebook.](images/lab2-6-run-notebook.png)
 
 ## Learn More
 
@@ -54,5 +71,5 @@ This task will have you login to the Jupyter environment and run specific notebo
 
 ## Acknowledgements
 * **Author** - Francis Regalado, Database Product Management; David Start, Database Product Management
-* **Contributors** -
-* **Last Updated By/Date** - Francis Regalado, Database Product Manager October 2024
+* **Contributors** - Brianna Ambler, Database Product Management
+* **Last Updated By/Date** - Brianna Ambler, October 2024
