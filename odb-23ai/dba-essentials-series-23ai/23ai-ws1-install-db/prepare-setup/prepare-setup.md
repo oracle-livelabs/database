@@ -58,5 +58,5 @@ You may now **proceed to the next lab**.
 ## Acknowledgments
 
  - **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
- - **Contributors** - Meghana Banka, Manish Garodia
+ - **Contributors** - Meghana Banka, Manish Garodia, Manisha Mati
  - **Last Updated By/Date** - Manish Garodia, October 2024

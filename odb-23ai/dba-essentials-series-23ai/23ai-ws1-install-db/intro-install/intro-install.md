@@ -8,6 +8,10 @@ This workshop provides detailed steps for installing a new *Oracle Database 23ai
 
 Estimated workshop time: 2 hours 45 minutes
 
+Watch this video to learn about the *highlights of Oracle Database 23ai*.
+
+[](youtube:TRDDsStoMxc)
+
 ### Objectives
 
 In this workshop, you will do the following.
@@ -117,5 +121,5 @@ Click the next lab to **Get Started**.
 ## Acknowledgments
 
  - **Author**: Manish Garodia, Database User Assistance Development
- - **Contributors**: Prakash Jashnani, Subhash Chandra, Subrahmanyam Kodavaluru
+ - **Contributors**: Prakash Jashnani, Subhash Chandra, Subrahmanyam Kodavaluru, Manisha Mati
  - **Last Updated By/Date**: Manish Garodia, October 2024
