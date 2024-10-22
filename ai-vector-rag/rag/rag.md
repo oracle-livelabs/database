@@ -43,10 +43,9 @@ This task will have you login to the Jupyter environment and run specific notebo
 3. Paste the Jupyter Notebook password you copied in the previous step into the password field.
 
    ![Enter the password.](images/lab1-3-jupyter-login.png)
-
-4. You should be within the Jupyter Notebooks landing screen. 
-
-   ![The Jupyter Notebook landing screen.](images/lab1-4-landing-page.png)
+   
+4. After a successfull login, you will see the Jupyter Notebook's landing page. 
+   ![The Jupyter Notebook landing page.](images/lab1-4-landing-page.png)
 
 5. In the left File Explorer panel, open the (**workshop**) and open(**workshop.ipynb**) notebook.
 
@@ -71,5 +70,5 @@ This task will have you login to the Jupyter environment and run specific notebo
 
 ## Acknowledgements
 * **Author** - Francis Regalado, Database Product Management; David Start, Database Product Management
-* **Contributors** - Brianna Ambler, Database Product Management
+* **Contributors** - Brianna Ambler, Kaylien Phan, Database Product Management
 * **Last Updated By/Date** - Brianna Ambler, October 2024
