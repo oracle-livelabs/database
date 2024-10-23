@@ -289,4 +289,4 @@ In this lab create visualizations using pre-existing performance statistics via 
 
 - **Author** - Sindhuja Banka, HeatWave MySQL Product Manager
 - **Contributors** - Sindhuja Banka, Sriram Vrinda, Anand Prabhu, Murtaza Husain
-- **Last Updated By/Date** - Sindhuja Banka, Oct 2024
+- **Last Updated By/Date** - Sindhuja Banka, October 2024
