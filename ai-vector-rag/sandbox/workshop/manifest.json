@@ -1,0 +1,34 @@
+{
+    "workshoptitle": "AI Vector Search - Complete RAG application with Oracle AI Vector Search",
+      "help": "livelabs-help-db_us@oracle.com",
+      "tutorials": [
+        {
+          "title": "Introduction",
+          "description": "This is an introduction to RAG",
+          "type": "livelabs",
+          "filename": "../../introduction/introduction.md"
+      },
+      {
+        "title": "Get Started",
+        "description": "Prerequisites for LiveLabs (Oracle-owned tenancies). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+        "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-23ai.md"
+    },
+      {
+        "title": "Lab 1: Running a RAG Application",
+        "description": "Run a RAG application",
+        "type": "livelabs",
+        "filename": "../../demo/demo.md"
+    },
+      {
+          "title": "Lab 2: Build Your Own RAG App",
+          "description": "Exploring RAG",
+          "type": "livelabs",
+          "filename": "../../rag/rag.md"
+      },
+        {
+          "title": "Need Help?",
+          "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
+          "filename":"https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

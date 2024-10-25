@@ -6,7 +6,7 @@ The next part of the migration is the incremental backups. They built on top of 
 
 Estimated Time: 10 Minutes
 
-[Next Level Platform](videohub:1_0l5swhst)
+[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 6](youtube:fgyDy-QcV_o?start=1232)
 
 ![Start the incremental level 1 backup/restore](./images/incremental-backup-restore-overview.png " ")
 

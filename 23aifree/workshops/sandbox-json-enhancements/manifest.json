@@ -1,47 +1,67 @@
 {
     "workshoptitle": "SQL, JSON, and MongoDB API: Unify worlds with Oracle Database 23ai Free",
     "help": "livelabs-help-db_us@oracle.com",
-
     "tutorials": [
+        {
+            "title": "Get Started with LiveLabs",
+            "description": "Get Started with LiveLabs",
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
+        },
         {
             "title": "Introduction",
             "description": "Introduction",
             "filename": "../../introduction/intro-json-enhancements.md"
         },
         {
-            "title": "Get Started with NoVNC",
-            "description": "Verify Setup of compute instance",
-            "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
-        },
-        {
-            "title": "Lab 1: Setup User",
-            "description": "Setup User",
-            "filename": "./../../change-pw/change-pw-json-enhancements.md"
+            "title": "Lab 1: Configure your ADB instance",
+            "description": "Configure your ADB instance for this workshop",
+            "filename": "../../json-enable-mongo-api/json-enable-mongo-api.md"
         },
         {
             "title": "Lab 2: Work with JSON Collections",
             "description": "Work with JSON Collections",
             "filename": "./../../json-collections/json-collections.md"
         },
-       {
-            "title": "Lab 3: Use Mongo API to interact with Oracle Database",
-            "description": "Use Mongo API to interact with Oracle Database",
-            "filename": "./../../json-mongo/json-mongo.md"
+        {
+            "title": "Lab 3: Install Mongo Shell",
+            "description": "Install Mongo Shell",
+            "filename": "./../../json-install-mongo/json-install-mongo.md"
         },
         {
-            "title": "Lab 4: Use SQL to work with JSON",
+            "title": "Lab 4: Use Mongo API to interact with Oracle Database",
+            "description": "Use Mongo API to interact with Oracle Database",
+            "filename": "./../../json-mongo/json-mongo.md",
+            "type": "sandbox"
+        },
+        {
+            "title": "Lab 5: Use SQL to work with JSON",
             "description": "Use SQL to work with JSON",
             "filename": "./../../json-sql/json-sql.md"
         },
         {
-            "title": "Lab 5: Work with JSON Search Indexes",
+            "title": "Lab 6: Work with JSON Search Indexes",
             "description": "Work with JSON Search Indexes",
             "filename": "./../../json-search/json-search.md"
         },
         {
+            "title": "Lab 7: JSON-To-Duality Migrator",
+            "description": "JSON-To-Duality Migrator",
+            "filename": "./../../json-duality-migrator/json-duality-migrator.md"
+        },
+        {
+            "title": "Lab 8: Migrating MongoDB collections to Oracle Database 23ai",
+            "description": "Migrating MongoDB collections to Oracle Database 23ai",
+            "filename": "./../../json-migrating/json-migrating.md"
+        },
+        {
+            "title": "Lab 9: Creating multi-value JSON indexes and aggregation pipelines using MongoDB Shell in Oracle Database 23ai",
+            "description": "Creating multi-value JSON indexes and aggregation pipelines using MongoDB Shellin Oracle Database 23ai",
+            "filename": "./../../json-indexes/json-indexes.md"
+        },
+        {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
         }
     ]
 }

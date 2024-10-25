@@ -11,6 +11,7 @@ Oracle Autonomous Database provides an easy-to-use, fully autonomous database th
 
 The Oracle Autonomous Database Free Container Image provides an alternative to run Autonomous Database in a container in your own environment, without requiring access to Oracle Cloud Infrastructure Console or to the internet. When you run Autonomous Database in a container, the container provides a local, isolated environment with additional options for development, testing, and exploration of Oracle Autonomous Database features.
 
+Learn more about the Oracle Autonomous Database Free container image [here](https://docs.oracle.com/en-us/iaas/autonomous-database-serverless/doc/autonomous-docker-container.html).
 
 **_Estimated Time: 90 minutes_**
 

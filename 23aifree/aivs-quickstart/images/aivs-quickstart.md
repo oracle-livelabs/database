@@ -242,11 +242,11 @@ With this new feature, you can now cross out text or words in a paragraph by add
 
 1. Old pattern of making URL clickable required markdown formatting. For example, you need to have this format in markdown to make the links clickable.
 
-  *`Please visit [https://oracle.com/livelabs](https://oracle.com/livelabs)`* or *`Please visit <https://oracle.com/livelabs>`* transforms to Please visit [https://oracle.com/livelabs](https://oracle.com/livelabs)
+  *`Please visit [https://livelabs.oracle.com](https://livelabs.oracle.com)`* or *`Please visit <https://livelabs.oracle.com>`* transforms to Please visit [https://livelabs.oracle.com](https://livelabs.oracle.com)
 
 2. With new pattern, type the URL (including https://) and the engine automatically creates a clickable URL.
 
-  *`Please visit https://oracle.com/livelabs`* transforms to Please visit https://oracle.com/livelabs
+  *`Please visit https://livelabs.oracle.com`* transforms to Please visit https://livelabs.oracle.com
 
 3.  The old formatting still works and is required to achieve the below formatting with alternative text in markdown format.
 

@@ -26,6 +26,11 @@
       "title": "Lab 3: Application Containers",
       "description": "Using Application Containers with Multitenant",
       "filename": "./../../app-containers/app-containers-2024.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
     }
   ]
 }
