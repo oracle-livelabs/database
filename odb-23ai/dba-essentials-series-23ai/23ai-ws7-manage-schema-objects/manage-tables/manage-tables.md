@@ -62,7 +62,7 @@ In this task, you will view the existing tables in the HR schema in your Autonom
     The values may differ depending on the system you are using.
 
 6. Select the **Data** tab from the properties window to view the data stored in COUNTRIES.
-  ![Data Tab](../23c-manage-tables/images/data-tab.png)
+  ![Data Tab](../manage-tables/images/data-tab.png)
   The values may differ depending on the system you are using.
 
 Click **Close** at the bottom-right to close the properties dialog box.
