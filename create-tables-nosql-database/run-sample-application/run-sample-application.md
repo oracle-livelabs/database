@@ -414,11 +414,11 @@ The given code sample in JavaScript and TypeScript use the [ES6 modules](https:/
 
 3. Click **Columns** under Resources to view the table columns.
 
-  ![Table Columns](images/helloworldtable.png)
+  ![View table columns](images/helloworldtable.png)
 
 4. Click **Explore data** under Resources and click **Execute** to execute the select statement and display the record inserted into the table.
 
-  ![Execute](images/run-query.png)
+  ![Click Execute](images/run-query.png)
 
 Congratulations! You have completed the workshop.
 
