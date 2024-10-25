@@ -2,37 +2,47 @@
 
 ## Introduction
 
-This lab shows how to create a single instance container database. It does not install the Oracle Database software. You can create container database in the following modes.
-- *Typical*  
-- *Advanced*  
+This lab shows how to create an Oracle Database using Oracle Database Configuration Assistant (Oracle DBCA).
 
-Estimated Time: 1 hour
+If your host has only the database software, then you run Oracle DBCA and create a database. Along the database software if you have created an Oracle Database and want to create additional databases, then you can use Oracle DBCA. Oracle DBCA helps you create databases, but it does not install the database software.
+
+With Oracle DBCA, you can create a database in the following modes.
+ - *Typical*
+ - *Advanced*
+
+Estimated time: 1 hour
 
 ### Objectives
 
-Create additional Oracle Databases with typical configuration and advanced configuration using Oracle Database Configuration Assistant (Oracle DBCA).
+ - Start Oracle DBCA
+ - Create an Oracle Database with *Typical configuration*
+ - Create and configure a Container Database with *Advanced configuration*
 
 ### Prerequisites
 
-- A Free Tier, Paid or LiveLabs Oracle Cloud account
-- You have completed:
-    - Lab: Prepare Setup (*Free-tier* and *Paid Tenants* only)
-    - Lab: Setup Compute Instance
-    - Lab: Install Oracle Database
+This lab assumes you have -
+ - An Oracle Cloud account
+ - Completed all previous labs successfully
+ - Installed the Oracle Database software, configured Oracle homes, and created databases on the host
+
+> **Note**: [](include:example-values)
 
 ## Task 1: Start Oracle DBCA
 
-You can run Oracle DBCA only after you install the Oracle Database software using the database installer. For this lab, a starter database already exists on the host.
+You can run Oracle DBCA only after you install the Oracle Database software using the database installer. 
 
-1. Log in to your host as *oracle*, the user who is authorized to install the Oracle Database software and create Oracle Database.  
+In this task, you will start Oracle DBCA from the Oracle home.
 
-2. Open a terminal window and change the current working directory to `$ORACLE_HOME/bin`. This is the directory where Oracle DBCA is located.
+1.  Open a terminal window and go to the `bin` directory in Oracle home 1.   
+    This is the directory where Oracle DBCA is located.
 
 	```
 	$ <copy>cd /u01/app/oracle/product/21.0.0/dbhome_1/bin</copy>
 	```
 
-3. From `$ORACLE_HOME/bin`, run this command to start Oracle DBCA.
+    > **Note**: [](include:oracle-user)
+
+1.  Run this command to start Oracle DBCA.
 
 	```
 	$ <copy>./dbca</copy>
@@ -40,253 +50,257 @@ You can run Oracle DBCA only after you install the Oracle Database software usin
 
 Now, perform the following tasks to create container databases.
 
-## Task 2: Create a Container Database (Typical Mode)
+## Task 2: Create a Container Database with Typical configuration
 
-Run Oracle DBCA from `$ORACLE_HOME/bin` as explained in *Task 1*. Oracle DBCA starts with the Database Operation window.
+With Typical configuration, you can create an Oracle Database in few steps with minimal options.
 
-At any point, you can go **Back** to the previous window or **Cancel** database creation. You can click **Help** to view more information on the current window.
+In this task, you will select *Typical configuration* to create an Oracle Database, *orcl1*, in the Oracle home.
 
-1. The Database Operation window opens with the default option **Create a database** selected. Click **Next**.
+At any point, you can go **Back** to the previous window or **Cancel** database creation. You can click **Help** to view more information about the current window.
 
-    ![Create Database](../common/images/dbca21c-common-001-createdb.png)
+1.  Oracle DBCA starts with the Database Operation window and displays with the default option **Create a database** selected. Click **Next**.
 
-	With Oracle DBCA, you can perform other administrative tasks, such as configure or delete an existing Oracle Database and manage PDBs and templates.
+    ![Create a database](./../common/images/dbca21c-common-001-createdb.png " ")
 
-2. Oracle DBCA displays the default creation mode, **Typical configuration**, selected with pre-filled configuration parameters. 
+    > **Tip**: With Oracle DBCA, you can perform other administrative tasks, such as configure or delete an existing database and manage PDBs and templates. These are not included in this workshop.
 
-	For this lab, enter the following.  
-	* **Global database name** - Specify a unique name, for example, *orcl1.us.oracle.com*  
-	* **Administrative password** - Set the password for admin user accounts  
-	* **Pluggable database name** - *orclpdb1*  
+1.  The window displays the default creation mode, **Typical configuration**, selected with prefilled basic configuration. 
 
-	The values may differ depending on the system you are using. For the remaining fields, leave the defaults and click **Next**.
+    For this task, specify the following.
 
-    ![Typical Configuration](images/dbca21c-typical-002-typmode.png)
+     - **Global database name** - Enter a unique name, for example *orcl1.us.oracle.com*
+     - **Administrative password** - Set the password for database administrators, for example *We!come1*   
+        The password must conform to the Oracle recommended standards.
+     -   **Pluggable database name** - Enter a name for the pdb, for example *orclpdb1*
 
-	You cannot create multiple Oracle Databases with the same Global database name. If an Oracle Database with the specified name already exists, enter a different name, for example, *orcl3.us.oracle.com*.  
+    For the remaining fields, leave the defaults and click **Next**.
 
-	The password created in this window is associated with admin user accounts, namely SYS, SYSTEM, and PDBADMIN. After you create Oracle Database, enter the admin username and use this password to connect to the database.
+    ![Select Typical configuration](./images/dbca21c-typical-002-typmode.png " ")
 
-	**Note:** The password must conform to the Oracle recommended standards.
+	[](include:global-dbname)
 
-	The default **Database Character set** for Oracle Database is *AL32UTF8 - Unicode UTF-8 Universal character set*.
+	[](include:adm-users)
 
-	*AL32UTF8* is Oracle's name for the standard Unicode encoding UTF-8, which enables universal support for virtually all languages of the world.
+    The default **Database Character set** for Oracle Database is *AL32UTF8 - Unicode UTF-8 Universal character set*.
 
-	Along with CDB, Oracle DBCA also creates a PDB as per the Pluggable database name.
+	> [](include:char-set)
 
-3. Review the summary and click **Finish** to create your Oracle Database.
+    Along with the Container Database (CDB), Oracle DBCA also creates a Pluggable Database (PDB) with the name you specify in this window.
 
-	![Summary](images/dbca21c-typical-003-summary.png)
+1.  Before creating the database, the Summary window displays the database configuration for final review. You can verify the details in this window.
 
-	The Progress Page window displays the status of Oracle Database creation process.
+	![Review Summary](./images/dbca21c-typical-003-summary.png " ")
 
-	![Finish Creation](images/dbca21c-typical-005-finish.png)
+    Click **Finish** to create your Oracle Database. The Progress Page window displays the status of database creation.
 
-	The confirmation message in the Finish window indicates that you created an Oracle Database successfully.
+    > **Note**: You require scripts to configure the Oracle Database software but for creating a database, you do not require any scripts.
 
-	**Password Management**
+    On completion, Oracle DBCA displays the Finish window. 
 
-	In the Finish window, click **Password Management** to view the status of Oracle Database user accounts. Except SYS and SYSTEM, all other users are initially in locked state.
+	![Finish database creation](./images/dbca21c-typical-005-finish.png " ")
 
-	![Password Management](../common/images/dbca21c-common-002-pwd-mgmt.png)
+    You have successfully created an Oracle Database, *orcl1*, using Oracle DBCA in the Oracle home.
 
-	To unlock a user, click the **Lock Account** column. You can also change the default password for the users in this window. However, you can do these tasks later.
+    **Password Management**
 
-	Click **OK** to save any changes you made and to close the Password Management window.
+    In the Finish window, click **Password Management** to view the preexisting user accounts in your database. Except SYS and SYSTEM, all users are initially in locked state.
 
-	Click **Close** to exit Oracle Database Configuration Assistant. You can start Oracle DBCA again to create another container database with advanced configuration.
+	![Password Management](./../common/images/dbca21c-common-002-pwd-mgmt.png " ")
 
-## Task 3: Create and Configure a Container Database (Advanced Mode)
+    You can administer user accounts in the Password Management window, such as unlock a user or set the password. However, you can do these tasks later.
 
-Run Oracle DBCA from `$ORACLE_HOME/bin` as explained in *Task 1*. Oracle DBCA starts with the Database Operation window.
+    Click **OK** if you want to save any changes and close the Password Management window.
 
-At any point, you can go **Back** to the previous window or **Cancel** database creation. You can click **Help** to view more information on the current window.
+Click **Close** in the Finish window to exit Oracle DBCA.
 
-1. The Database Operation window opens with the default option **Create a database** selected. Click **Next**.
+Next, you will create a database with Advanced configuration.
 
-   ![Create Database](../common/images/dbca21c-common-001-createdb.png)
+## Task 3: Create and configure a Container Database with Advanced configuration
 
-	With Oracle DBCA, you can perform other administrative tasks, such as configure or delete an existing Oracle Database and manage PDBs and templates.
+Using the Advanced configuration option, you can specify detailed configuration of your Oracle Database. 
 
-2. In the Creation Mode window, select **Advanced configuration** and click **Next**.  
-	This option allows you to customize Oracle Database configurations, such as storage locations, initialization parameters, management options, database options, passwords for administrator accounts, and so on.
+Run Oracle DBCA from `$ORACLE_HOME/bin` as explained in *Task 1*. Oracle DBCA starts with the Database Operation window. In this task, you will select *Advanced configuration* to create an Oracle Database, *orcl2*, in the Oracle home.
 
-   ![Advanced Configuration](images/dbca21c-adv-002-advmode.png)
+At any point, you can go **Back** to the previous window or **Cancel** database creation. You can click **Help** to view more information about the current window.
 
-3. You can select the database type and a template suitable for your Oracle Database in the Deployment Type window.  
-	For this lab, leave the default type *Oracle Single Instance database* and the template *General Purpose or Transaction Processing*. Click **Next**.
+1.  Oracle DBCA starts with the Database Operation window and displays with the default option **Create a database** selected. Click **Next**.
 
-   ![Deployment Type](images/dbca21c-adv-003-template.png)
+   ![Create a database](./../common/images/dbca21c-common-001-createdb.png " ")
+
+1.  In the Creation Mode window, select **Advanced configuration** and click **Next**.
+
+   ![Advanced Configuration](./images/dbca21c-adv-002-advmode.png " ")
+
+	In this mode, you can customize the configurations of your database, such as initialization parameters, network configurations, memory management, passwords for administrators, and so on.
+
+1.  You can select the database type and template suitable for your Oracle Database in the Deployment Type window.
+
+    For this lab, leave the defaults and click **Next**.
+     - **Database type**: *Oracle Single Instance database*
+	 - **Template name**: *General Purpose or Transaction Processing*
+
+    This template includes basic configuration for the database, such as database components, initialization parameters, data files, control files, and redo log groups.
+
+   ![Select database template](./images/dbca21c-adv-003-template.png " ")
 
 	<!-- Removed this section on RAC from the lab. Will use this information in other relevant documents.
 
 	If your database type is Real Application Cluster, you can select the Database Management Policy as:
-	- **Automatic** and allow Oracle clusterware to manage your database automatically, or
+	- **Automatic** and enable Oracle clusterware to manage your database automatically, or
 	- **Rank**, if you want to define ranks for your database.
 
-	Removed this note as per review comments from Malai Stalin
+	Removed this note to fix the comments from Malai Stalin
 
 	**Note:** The General Purpose or Transaction Processing template and the Data Warehouse template create an Oracle Database with the `COMPATIBLE` initialization parameter set to `12.2.0.0.0`. This ensures that the new features in Oracle Database 21c are compatible with older versions of the database up to version 12c Release 2.  
 	-->
 
-	For environments that are more complex, you can select the Custom Database option. This option does not use any templates and it usually increases the time taken to create an Oracle Database.
-	For this lab, do not select this option.
+    > **Tip**: For environments that are more complex, you can select the Custom Database option. This option does not use any templates and it usually increases the time taken to create an Oracle Database. For this lab, do not select this option.
 
-4. The Database Identification window displays pre-filled names and the System Identifier (SID) for Oracle Database.  
+1.  The Database Identification window displays prefilled names and Oracle System Identifier (SID) for your database.
 
-	For this lab, enter the following.  
-	* **Global database name** - Specify a unique name, for example, *orcl2.us.oracle.com*  
-	* **SID** - *orcl2*  
-	* **PDB name** - *orcl2pdb1*  
+	![Define Oracle SID](./images/dbca21c-adv-004-id.png " ")
 
-	The values may differ depending on the system you are using. For the remaining fields, leave the defaults and click **Next**.
+    For this task, specify the following.
+     - **Global database name** - Enter a unique name, for example *orcl2.us.oracle.com*
+     - **SID** - *orcl2*
+     - **PDB name** - *orcl2pdb1*
 
-	![Oracle SID](images/dbca21c-adv-004-id.png)
+    > [](include:oracle-sid)
 
-	_**Oracle SID**_ is a unique name given to an Oracle Database. It distinguishes this instance of Oracle Database from other instances on the host.
+    Along with the CDB, Oracle DBCA also creates a PDB with the name you specify in this window. Though you can create multiple PDBs together, for this task, create only a single PDB.   
+    For the remaining fields, leave the defaults and click **Next**.
 
-	You cannot create multiple Oracle Databases on a host with the same SID. If an Oracle Database with the specified SID already exists, enter a different SID, for example, *orcl3*. 
+1.  The Storage Option window displays the default option **Use template file for database storage attributes** selected.
 
-	Similarly, specify a *unique Global database name* for each Oracle Database on the same host.
+    In this option, the database uses the directory information specified in the *General Purpose or Transaction Processing* template.
 
-5. The Storage Option window displays the default option **Use template file for database storage attributes** selected. This option allows Oracle Database to use the directory information specified in the *General Purpose or Transaction Processing* template.
+    ![Select Storage file system](./images/dbca21c-adv-005-storage.png " ")
 
-	For this lab, leave the defaults and click **Next**.
+    For this task, leave the defaults and click **Next**.
 
-    ![Storage Option](images/dbca21c-adv-005-storage.png)
+    > **Tip**: You can specify another location to store the database files with the **Use following for the database storage attributes** option. With this option, you can select the storage type as File system or Oracle Automatic Storage Management (Oracle ASM). For this lab, do not select these options.
 
-	You can specify another location to store the database files with the **Use following for the database storage attributes** option. With this option, you can select the storage type as File system or Oracle Automatic Storage Management (Oracle ASM).  For this lab, do not select these options.
-
-	<!-- Removed this section on ASM and OMF from the lab as per review comments from Subhash Chandra. Content outside the scope of this workshop.
+	<!-- Removed this section on ASM and OMF from the lab to fix the comments from Subhash Chandra. Content outside the scope of this workshop.
 
 	- *File system* to manage the database files by the file system of your operating system, or
 	- *Automatic Storage Management (ASM)* to store your data files in the ASM disk groups.
 
-	The *Use Oracle-Managed Files (OMF)* option gives complete control of files to the database. It allows the database to create and delete files in the default location. The database directly manages the filenames, their size, and location.  
+	The *Use Oracle-Managed Files (OMF)* option gives complete control of files to the database. It enables the database to create and delete files in the default location. The database directly manages the file names, their size, and location.  
 	For this lab, do not select these options. -->
 
-6. Select **Specify Fast Recovery Area** to set up a backup and recovery area, its directory location, and size.  
-	For the remaining fields, leave the defaults and click **Next**.
+1.  Select **Specify Fast Recovery Area** to set up a backup and recovery area for your database. The recovery information will be stored as File System in the specified location. 
 
-    ![Fast Recovery](images/dbca21c-adv-006-recovery.png)
+    ![Enable Recovery](./images/dbca21c-adv-006-recovery.png " ")
 
-	The Fast Recovery Option window displays the default parameters pre-filled.  
-	 * **Recovery files storage type** - *File System*  
-	 * **Fast Recovery Area** the directory for recovery-related files  
-	 * **Fast Recovery Area size** the size of the recovery area  
-	 For this lab, leave the default values.
+    The Fast Recovery Option window displays the default parameters prefilled.
 
-	The **Enable archiving** checkbox allows archiving the online redo log files. These files are useful during Oracle Database recovery. For this lab, do not select this option.
+     - **Recovery files storage type** - *File System*
+     - **Fast Recovery Area** - the directory for recovery-related files
+     - **Fast Recovery Area size** - size of the recovery area
 
-7. Select the listener for your Oracle Database in the Network Configuration window.  
+    You can select the storage type or specify the directory location and size of the recovery area. For this task, leave the defaults and click **Next**.
 
-	For this lab, de-select the existing listener if already selected. Select the checkbox **Create a new listener** and enter the following values:  
-	 * **Listener name** - *LISTENER1*  
-	 * **Listener port** - *1526*
+    > **Tip**: The **Enable archiving** option is for archiving the online redo log files. These files are useful during Oracle Database recovery. For this task, do not select this option.
 
-	 The values may differ depending on the system you are using.
+1.  In the Network Configuration window, you can view the existing listener and select it for your database or create a new listener. For this task, deselect the existing listener if already selected.
 
-    ![Listener Selection](images/dbca21c-adv-007-listener.png)
+    Select the option **Create a new listener** and enter the following:
+     - **Listener name** - *LISTENER1*
+     - **Listener port** - *1526*
 
-	A _**Listener**_ is a network service that runs on Oracle Database server. It is responsible for receiving incoming connection requests to and from the database and for managing the network traffic.
+    ![Specify Listener configuration](./images/dbca21c-adv-007-listener.png " ")
 
-	If you created an Oracle Database earlier, a listener already exists. You can select the existing listener in this window. On the other hand, if you installed only the Oracle Database software and did not create a database, the listener does not exist. You need to create a new listener from this window. 
+    > A ***Listener*** is a network service that runs on the database server. It is responsible for receiving incoming connection requests to and from the database and for managing the network traffic.
+     - If you created an Oracle Database earlier, then a listener already exists on your host.
+	 - If you installed only the Oracle Database software and did not create a database, then your host does not have any listener.
 
-	You cannot use the same listener name to create multiple Oracle Databases. If an Oracle Database with the specified listener already exists, enter a different name for the listener, for example, *LISTENER2*.
+    You cannot create multiple listeners on a host with the same name. If a listener with the specified name already exists, then enter a different name, for example, *LISTENER2*. Similarly, specify a *unique port number* for each listener on the host. 
 
-	Similarly, specify a *unique port number* for each Oracle listener on the same host. 
+1.  With Oracle DBCA you can configure Oracle Database Vault and Oracle Label Security to control administrative access to your data and to individual table rows.
 
-8. You can configure Oracle Database Vault and Oracle Label Security to control administrative access to your data and to individual table rows.  
+    ![Oracle Data Vault Security](./images/dbca21c-adv-008-vault.png " ")
 
-	For this lab, do not select these checkboxes and click **Next**.
+    For this task, do not select these options and click **Next**.
 
-    ![Oracle Data Vault Security](images/dbca21c-adv-008-vault.png)
+1.  You can specify the following configuration options for Oracle Database. 
 
-9. You can specify the following configuration options for Oracle Database. For this lab, leave the defaults for each tab and continue.
+	 - **Memory** - The *Use Automatic Shared Memory Management* method enables you to allocate specific volume of memory to SGA and aggregate PGA. For optimum use of disk space, you can move the indicator to the left and decrease the size of the SGA and PGA values.
 
-	- **Memory** - The *Use Automatic Shared Memory Management* method enables you to allocate specific volume of memory to SGA and aggregate PGA. Oracle Database enables automatic shared memory for SGA, and distributes the remaining memory among individual PGAs as needed.  
-	For more information on memory management, see [About Automatic Shared Memory Management](https://docs.oracle.com/en/database/oracle/oracle-database/19/admin/managing-memory.html#GUID-B8B8923C-4213-42A9-8ED3-4ABE48C23914).
+		Oracle Database enables automatic shared memory for SGA and distributes the remaining memory among individual PGAs as required.  
+		For more information about memory management, see [About Automatic Shared Memory Management](https://docs.oracle.com/en/database/oracle/oracle-database/19/admin/managing-memory.html#GUID-B8B8923C-4213-42A9-8ED3-4ABE48C23914).
 
-		![Memory](images/dbca21c-adv-009a-memory.png)
+		![Specify memory](./images/dbca21c-adv-009a-memory.png " ")
 
-		- *Manual Shared Memory Management* allows you to enter specific values for each SGA component and the aggregate PGA. It is useful for advanced database administration.  
+		 - *Manual Shared Memory Management* - to enter specific values for each SGA component and the aggregate PGA. It is useful for advanced database administration.  
 
-		- *Automatic Memory Management* allows you to set the usable memory in the memory target. The system then dynamically configures the memory components of both SGA and PGA instances.
+		 - *Automatic Memory Management* - to set the usable memory in the memory target. The system then dynamically configures the memory components of both SGA and PGA instances.
 
-	    If the total physical memory of your Oracle Database instance is greater than 4 GB, you cannot select the 'Use Automatic Memory Management' option. Instead, *Use Automatic Shared Memory Management* to distribute the available memory among various components as required, thereby allowing the system to maximize the use of all available SGA memory.
+	    > **Tip**: If the total physical memory of your Oracle Database instance is greater than 4 GB, you cannot select the `Use Automatic Memory Management` option. Instead, *Use Automatic Shared Memory Management* to distribute the available memory among various components as required, thus the system can maximize the use of all available SGA memory.
 
-	- **Sizing** - Specify the maximum number of processes that can connect simultaneously to your Oracle Database, for example, *320*.   
+	 - **Sizing** - Specify the maximum number of processes that can connect simultaneously to your Oracle Database, for example, *320*.   
 
-		![Size](images/dbca21c-adv-009b-size.png)
+		![Block size and processes](./images/dbca21c-adv-009b-size.png " ")
 
-		While using predefined templates, the **Block size** option is not enabled. Oracle DBCA creates an Oracle Database with the default block size of *8 KB*.
+		> While using predefined templates, the **Block size** option is not enabled. Oracle DBCA creates an Oracle Database with the default block size of *8 KB*.
 
-	- **Character sets** - The *Use Unicode (AL32UTF8)* option is selected by default.
+	 - **Character sets** - The *Use Unicode (AL32UTF8)* option is selected by default.
 
-		![Character Sets](images/dbca21c-adv-009c-charset.png)
+		![Select Character set](./images/dbca21c-adv-009c-charset.png " ")
 
-		*AL32UTF8* is Oracle's name for the standard Unicode encoding UTF-8, which enables universal support for virtually all languages of the world.
+		> [](include:char-set)
 
-	- **Connection mode** - *Dedicated server mode* allows a dedicated server process for each user process.
+	- **Connection mode** - *Dedicated server mode* uses a dedicated server process for each user process.
 
-		![Connection Mode](images/dbca21c-adv-009d-connmode.png)
+		![Select Dedicated server mode](./images/dbca21c-adv-009d-connmode.png " ")
 
-10. The Management Options window allows you to configure EM Express and register your Oracle Database with Oracle EMCC. 
+    For this task, leave the defaults for each tab and continue.
 
-	For this lab, de-select the checkbox **Configure Enterprise Manager (EM) database express** and leave the checkbox **Register with Enterprise Manager (EM) Cloud Control** unselected. Click **Next**.
+1.  In the Management Options window, you can register your database with Oracle Enterprise Manager (EM). 
 
-    ![Register with EMCC](images/dbca21c-adv-010-emcc.png)
+	For this lab, leave this option unselected and click **Next**.
 
-	If you have Oracle EMCC details, such as OMS hostname, port number, and the admin credentials, you can specify in this window and register your Oracle Database.  
+    ![Register with EM](./images/dbca21c-adv-010-emcc.png " ")
 
-	However, instead of registering from this window, it is much easier to use the discovery process from Oracle EMCC and add your Oracle Database 21c as a managed target.
+	> **Note**: [](include:register-em)
 
 	<!-- Add a link to WS2 lab on how to add managed targets.
-	For more information on managed targets, see [Manage your targets in EMCC](?lab=lab-2-manage-your-targets).
+	For more information about managed targets, see [Manage your targets in EMCC](?lab=lab-2-manage-your-targets).
 	-->
 
-11. Set the password for admin user accounts, namely SYS, SYSTEM, and PDBADMIN, in the User Credentials window.   
+1.  Set the password for the database administrators. Though you can specify different passwords for each user, for this lab, select **Use the same administrative password for all accounts**.
 
-	Though you can specify different passwords for each admin user, for this lab, select **Use the same administrative password for all accounts**. Note the **Password** you entered in this window and click **Next**.
+    Enter the password, for example *We!come1*, and click **Next**.   
+    The password must conform to the Oracle recommended standards.
 
-	![Set Admin Password](images/dbca21c-adv-011-syspwd.png)
+	![Set administrative password](./images/dbca21c-adv-011-syspwd.png " ")
 
-	**Note:** The password must conform to the Oracle recommended standards.
+	[](include:adm-users)
 
-12. The Creation Option window displays the default option **Create database** selected.  
-	For the remaining fields, leave the defaults and click **Next**.
+1.  The Creation Option window displays the default option **Create database** selected.   
+    For the remaining fields, leave the defaults and click **Next**.
 
-    ![Create Options](images/dbca21c-adv-012-createoptions.png)
+    ![Select database create options](./images/dbca21c-adv-012-createoptions.png " ")
 
-13. Review the summary and click **Finish** to create your Oracle Database.
+1.  Before installing the database, the Summary window displays the database configuration for final review. You can verify the details in this window.
 
-	![Summary](images/dbca21c-adv-013-summary.png)
+	![Review Summary](./images/dbca21c-adv-013-summary.png " ")
 
-	The Progress Page window displays the status of Oracle Database creation process.
+    Click **Finish** to create your Oracle Database. The Progress Page window displays the status of database creation. 
 
-	![Finish Creation](images/dbca21c-adv-015-finish.png)
+    On completion, Oracle DBCA displays the Finish window.
 
-	The confirmation message in the Finish window indicates that you created an Oracle Database successfully
+	![Finish database creation](./images/dbca21c-adv-015-finish.png " ")
 
-	**Password Management**
+You have successfully created an Oracle Database using Oracle DBCA in the Oracle home. Click **Close** in the Finish window to exit Oracle DBCA.
 
-	In the Finish window, click **Password Management** to view the status of Oracle Database user accounts. Except SYS and SYSTEM, all other users are initially in locked state.
+> **Note**: The Password Management window functions the same as explained in the previous task. You can administer the user accounts in your database, such as unlock a user or set the passwords. However, you can do these tasks later.
 
-	![Password Management](../common/images/dbca21c-common-002-pwd-mgmt.png)
+Congratulations! You have reached the end of this workshop on *Oracle Database installation*.
 
-	To unlock a user, click the **Lock Account** column. You can also change the default password for the users in this window. However, you can do these tasks later.
+In this workshop, you learned how to install the Oracle Database software on your host using the database installer and configure a database with Desktop class and Server class. You also created additional databases using Oracle DBCA with both Typical configuration and Advanced configuration. You can now manage and administer your Oracle Database.
 
-	Click **OK** to save any changes you made and to close the Password Management window.
+## Acknowledgments
 
-	Click **Close** to exit Oracle Database Configuration Assistant.
-
-Congratulations! You have successfully completed this workshop on *Oracle Database 21c installation*.
-
-## Acknowledgements
-
-- **Author**: Manish Garodia, Principal User Assistance Developer, Database Technologies
-
-- **Contributors**: Suresh Rajan, Prakash Jashnani, Subhash Chandra, Subrahmanyam Kodavaluru, Dharma Sirnapalli, Malai Stalin
-
-- **Last Updated By/Date**: Manish Garodia, September 2021
+ - **Author**: Manish Garodia, Principal User Assistance Developer, Database Technologies
+ - **Contributors**: Suresh Rajan, Prakash Jashnani, Subhash Chandra, Subrahmanyam Kodavaluru, Dharma Sirnapalli, Malai Stalin
+ - **Last Updated By/Date**: Manish Garodia, August 2024

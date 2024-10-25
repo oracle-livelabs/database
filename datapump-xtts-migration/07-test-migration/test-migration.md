@@ -14,7 +14,9 @@ A few words about the test migration.
 
 This is an optional lab. You can skip it and move directly to lab 8. 
 
-Estimated Time: 20 Minutes.
+Estimated Time: 20 Minutes
+
+[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 7](youtube:fgyDy-QcV_o?start=1569)
 
 ### Objectives
 
@@ -30,7 +32,7 @@ You will test the migration by performing the final steps of the migration. Howe
 
 1. Outage starts on the source database.
 
-2. Set the environment to the source database.
+2. Use the *yellow* terminal 🟨. Set the environment to the source database.
 
     ```
     <copy>
@@ -270,11 +272,11 @@ You will test the migration by performing the final steps of the migration. Howe
     </copy>
     ```
 
-6. Restore the test backup.
+6. Switch to the *blue* terminal 🟦. Restore the test backup.
 
     ```
     <copy>
-    cd cmd
+    cd /home/oracle/m5/cmd
     export L1FSCRIPT=$(ls -tr restore_L1F* | tail -1) 
     . cdb23
     cd /home/oracle/m5
@@ -287,14 +289,14 @@ You will test the migration by performing the final steps of the migration. Howe
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cd cmd
+    $ cd /home/oracle/m5/cmd
     $ export L1FSCRIPT=$(ls -tr restore_L1F* | tail -1)
     $ . cdb23
     $ cd /home/oracle/m5
     $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1FSCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud on Tue Jul 2 19:19:00 2024
-    Version 23.4.1.24.06
+    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue Jul 2 19:19:00 2024
+    Version 23.5.0.24.07
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
@@ -326,7 +328,7 @@ You will test the migration by performing the final steps of the migration. Howe
     export L1FLOGFILE=$(ls -tr restore_L1F*log | tail -1)
     cd /home/oracle/m5/m5dir
     export DMPFILE=$(ls -tr exp_FTEX*dmp | tail -1)
-    cd ..
+    cd /home/oracle/m5
     . cdb23
     ./impdp.sh $DMPFILE log/$L1FLOGFILE run-readonly N
     </copy>
@@ -360,13 +362,13 @@ You will test the migration by performing the final steps of the migration. Howe
     BEFORE_IMP_240702192231      748325 02-JUL-24 07.22.31.000000000 PM		     YES    209715200
     
     
-    Import: Release 23.0.0.0.0 - for Oracle Cloud on Tue Jul 2 19:22:32 2024
-    Version 23.4.1.24.06
+    Import: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue Jul 2 19:22:32 2024
+    Version 23.5.0.24.07
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     Password:
     
-    Connected to: Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - for Oracle Cloud
+    Connected to: Oracle Database 23ai Enterprise Edition Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems
     02-JUL-24 19:22:47.147: W-1 Startup on instance 1 took 1 seconds
     02-JUL-24 19:22:49.117: W-1 Master table "SYSTEM"."SYS_IMPORT_TRANSPORTABLE_01" successfully loaded/unloaded
     02-JUL-24 19:22:49.503: Starting "SYSTEM"."SYS_IMPORT_TRANSPORTABLE_01":  system/********@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)    (HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=VIOLET))) parfile=imp_CDB23_240702192231_xtts.par
@@ -805,7 +807,7 @@ You will test the migration by performing the final steps of the migration. Howe
 
 You just finished the test migration. You can connect to the target database and see the data.
 
-1. Connect to the target database, *CDB23*. 
+1. Still in the *blue* terminal 🟦. Connect to the target database, *CDB23*. 
 
     ```
     <copy>
@@ -883,7 +885,7 @@ You just finished the test migration. You can connect to the target database and
 
 Now that you are done testing, you use `FLASHBACK DATABASE` to undo the test import.
 
-1. Switch to the root container and restart the database in mount mode.
+1. Still in the *blue* terminal 🟦. Switch to the root container and restart the database in mount mode.
 
     ```
     <copy>
@@ -1016,7 +1018,7 @@ Now that you are done testing, you use `FLASHBACK DATABASE` to undo the test imp
 
 When the test completes and you reverted the changes, you can resume the backup/restore cycle.
 
-1. Set the environment to the source database and connect.
+1. Use the *yellow* terminal 🟨. Set the environment to the source database and connect.
 
     ```
     <copy>
@@ -1089,11 +1091,11 @@ When the test completes and you reverted the changes, you can resume the backup/
     ```
     </details>
 
-5. Restore the backup.
+5. Switch to the *blue* terminal 🟦. Restore the backup.
 
     ```
     <copy>
-    cd cmd
+    cd /home/oracle/m5/cmd
     export L1SCRIPT=$(ls -tr restore_L1_* | tail -1) 
     cd /home/oracle/m5
     . cdb23
@@ -1106,14 +1108,14 @@ When the test completes and you reverted the changes, you can resume the backup/
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cd cmd
+    $ cd /home/oracle/m5/cmd
     $ export L1SCRIPT=$(ls -tr restore_L1_* | tail -1)
     $ cd /home/oracle/m5
     $ . cdb23
     $ rman target "sys/oracle@'localhost/violet'" cmdfile=/home/oracle/m5/cmd/$L1SCRIPT
     
-    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud on Tue Jul 2 19:34:44 2024
-    Version 23.4.1.24.06
+    Recovery Manager: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Tue Jul 2 19:34:44 2024
+    Version 23.5.0.24.07
     
     Copyright (c) 1982, 2024, Oracle and/or its affiliates.  All rights reserved.
     
@@ -1161,4 +1163,4 @@ During the test, you introduced a short outage on the source database. You chang
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024

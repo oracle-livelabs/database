@@ -108,6 +108,7 @@ You start by checking the *CDB19* database.
     upg1.target_home=/u01/app/oracle/product/23
     upg1.sid=CDB19
     upg1.restoration=yes
+    upg1.timezone_upg=NO
     ```
     </details>
 
@@ -167,7 +168,7 @@ It is best practice to first analyze your database for upgrade readiness. It is 
     ==========================================
     [DB Name]                CDB19
     [Version Before Upgrade] 19.21.0.0.0
-    [Version After Upgrade]  23.4.0.24.05
+    [Version After Upgrade]  23.5.0.24.07
     ------------------------------------------
     [Stage Name]    PRECHECKS
     [Status]        SUCCESS
@@ -457,4 +458,4 @@ AutoUpgrade completely automates restoration of a database. By default, AutoUpgr
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, June 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, July 2024

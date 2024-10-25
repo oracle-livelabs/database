@@ -21,22 +21,17 @@
         {
             "title": "Lab 2: Work with JSON Collections",
             "description": "Work with JSON Collections",
-            "filename": "./../../json-collections/json-collections.md"
+            "filename": "./../../json-collections/json-collections-desktop.md"
         },
        {
             "title": "Lab 3: Use Mongo API to interact with Oracle Database",
             "description": "Use Mongo API to interact with Oracle Database",
-            "filename": "./../../json-mongo/json-mongo.md"
+            "filename": "./../../json-mongo/json-mongo-desktop.md"
         },
         {
             "title": "Lab 4: Use SQL to work with JSON",
             "description": "Use SQL to work with JSON",
             "filename": "./../../json-sql/json-sql.md"
-        },
-        {
-            "title": "Lab 5: Work with JSON Search Indexes",
-            "description": "Work with JSON Search Indexes",
-            "filename": "./../../json-search/json-search.md"
         },
         {
             "title": "Need Help?",

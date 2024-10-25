@@ -1,0 +1,52 @@
+{
+    "workshoptitle": "Work with JSON Relational Duality Views in Oracle Database 23ai",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Get Started",
+            "description": "Prerequisites for LiveLabs (Oracle-owned tenancies). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
+        },
+        {
+            "title": "Introduction",
+            "description": "This is an introduction to Oracle Database 23ai.",
+            "type": "livelabs",
+            "filename": "../../0-intro/introduction.md"
+        },
+        {
+            "title": "Lab 1: Create the schema and user",
+            "description": "Creating the schema",
+            "type": "livelabs",
+            "filename": "../../1-create-schema/create-schema.md"
+        },
+        {
+            "title": "Lab 2: Explore the data",
+            "description": "Understanding the environment, schema, and data",
+            "type": "livelabs",
+            "filename": "../../2-explore-data/explore-data.md"
+        },
+        {
+            "title": "Lab 3: Build JSON Relational Duality Views",
+            "description": "Creating the Duality Views",
+            "type": "livelabs",
+            "filename": "../../3-json-duality-views/json-duality-views.md"
+        },
+        {
+            "title": "Lab 4: Tools for working with JSON Duality Views",
+            "description": "Working with SQL/JSON and the Duality Views",
+            "type": "livelabs",
+            "filename": "../../4-json-utilities/json-utilities.md"
+        },
+        {
+            "title": "Lab 5: Create JSON Relational Duality Views with REST",
+            "description": "Working with AutoREST and the Duality Views",
+            "type": "livelabs",
+            "filename": "../../5-rest-duality/rest-duality.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+        }
+    ]
+}

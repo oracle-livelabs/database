@@ -4,7 +4,9 @@
 
 In this lab, you will perform a number of checks on the source database to ensure it meets the minimum requirements. Also, you will collect information that you use later on to determine if the target database is suitable for the migration.
 
-Estimated Time: 10 Minutes.
+Estimated Time: 10 Minutes
+
+[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 2](youtube:fgyDy-QcV_o?start=275)
 
 ### Objectives
 
@@ -17,7 +19,7 @@ In this lab, you will:
 
 The M5 script has a set of minimum requirements.
 
-1. Set the environment to the source database, *FTEX*.
+1. Use the *yellow* terminal 🟨 and set the environment to the source database, *FTEX*.
 
     ```
     <copy>
@@ -304,4 +306,4 @@ You may now *proceed to the next lab*.
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024

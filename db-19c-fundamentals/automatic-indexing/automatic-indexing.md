@@ -259,7 +259,7 @@ In the report above, we can see:
 
 Automatic indexing enables Autonomous Database users to benefit from indexing without the risks inherent in making changes without analyzing the effect changes will make to the application workload. This Lab is intended to show a small sample of what the Automatic Indexing capabilities can do. For a complete in depth look at automatic indexing try the lab below.
 
-- [Automatic Indexing for Oracle Autonomous Database](https://apexapps.oracle.com/pls/apex/f?p=133:180:11731666531056::::wid:3328)
+- [Automatic Indexing for Oracle Autonomous Database](https://livelabs.oracle.com/pls/apex/f?p=133:180:11731666531056::::wid:3328)
 
 You may now proceed to the next lab.
 ## Acknowledgements
@@ -270,4 +270,4 @@ You may now proceed to the next lab.
 - **Last Updated By/Date** - Killian Lynch, June 2024
 
 ## See an issue or have feedback?  
-Please submit feedback [here](https://apexapps.oracle.com/pls/apex/f?p=133:1:::::P1_FEEDBACK:1).   Select 'Autonomous DB on Dedicated Exadata' as workshop name, include Lab name and issue / feedback details. Thank you!
+Please submit feedback [here](https://livelabs.oracle.com/pls/apex/f?p=133:1:::::P1_FEEDBACK:1).   Select 'Autonomous DB on Dedicated Exadata' as workshop name, include Lab name and issue / feedback details. Thank you!

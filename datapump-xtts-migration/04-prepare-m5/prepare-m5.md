@@ -4,7 +4,9 @@
 
 In this lab, you take a first look at the M5 script. The script is available for download from My Oracle Support. It combines existing functionality in Oracle Database to deliver the best migration experience.
 
-Estimated Time: 5 Minutes.
+Estimated Time: 5 Minutes
+
+[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 4](youtube:fgyDy-QcV_o?start=766)
 
 ![Configure M5 script](./images/prepare-m5-overview.png " ")
 
@@ -19,7 +21,7 @@ In this lab, you will:
 
 In this lab, the source and target database are on the same host. Both hosts access the same directory with the M5 script via a shared NFS drive.
 
-1. Go to *M5* directory and get the M5 migration script. The directory acts as your script base. You have created the directory already in a previous exercise when you created the database directory. Instead of downloading from My Oracle Support, you copy the script to the script base.
+1. Use the *yellow* terminal 🟨. Go to *M5* directory and get the M5 migration script. The directory acts as your script base. You have created the directory already in a previous exercise when you created the database directory. Instead of downloading from My Oracle Support, you copy the script to the script base.
 
     ```
     <copy>
@@ -289,4 +291,4 @@ You may now *proceed to the next lab*.
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, August 2024

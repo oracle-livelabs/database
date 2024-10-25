@@ -58,20 +58,20 @@ For this task you need the following info from previous steps:
 
 6. On the page Connection details, fill in the following entries, otherwise leave defaults:
     - Database details, select **Enter database information**
-    - Database connection string (use this format host:port/db service name): **DBCS Public IP**:**1521**/**DBCS CDB Service** get this values from the terraform output
+    - Database connection string : **CDB Connection String** value from the terraform output
     - Initial load database username: **system**
     - Initial load database password: Select **Admin Password** value from Terraform output
     - Select **Use different credentials for replication**
     - Replication database username: **c##ggadmin**
     - Replication database password: Select **Admin Password** value from Terraform output
 
-    The checkbox **Create private endpoint to access this database** needs to stay unchecked.
+    Please uncheck the checkbox **Create private endpoint to access this database**.
 
 7. Press **Create**
 
   ![Screenshot of  confirm create connection](images/connection-details-cdb.png =50%x*)
 
-8. Press **Test connection** to confirm that your Database Connection details are correct
+8. Wait for connection to get created and press **Test connection** to confirm that your Database Connection details are correct
 
   ![Screenshot of CDB connection test](images/test-cdb.png =50%x*)
     - If the test is not successful, correct your connection details and try again.
@@ -105,20 +105,20 @@ For this task you need the following info from previous steps:
 
 5. On the page Connection details, fill in the following entries, otherwise leave defaults:
     - Database details, select **Enter database information**
-    - Database connection string (use this format host:port/db service name): **DBCS Public IP**:**1521**/**DBCS PDB Service** get this values from the terraform output
+    - Database connection string: **PDB Connection String** value from the terraform output
     - Initial load database username: **system**
     - Initial load database password: Select **Admin Password** value from Terraform output
     - Select **Use different credentials for replication**
     - Replication database username: **ggadmin**
     - Replication database password: Select **Admin Password** value from Terraform output
 
-    The checkbox **Create private endpoint to access this database** needs to stay unchecked.
+    Please uncheck the checkbox **Create private endpoint to access this database**.
 
 6. Press **Create**
 
   ![Screenshot of  confirm create connection](images/connection-details-pdb.png =50%x*)
 
-7. Press **Test connection** to confirm that your Database Connection details are correct
+7. Wait for connection to get created and press **Test connection** to confirm that your Database Connection details are correct
 
   ![Screenshot of PDB connection test](images/test-pdb.png =50%x*)
     - If the test is not successful, correct your connection details and try again.
@@ -156,7 +156,7 @@ For this task you need the following info from previous steps:
     - Replication database username: **ggadmin**
     - Replication database password: Select **Admin Password** value from Terraform output
 
-    The checkbox **Create private endpoint to access this database** needs to stay unchecked.
+    Please uncheck the checkbox **Create private endpoint to access this database** needs to stay unchecked.
 
 6. Press **Create**
 

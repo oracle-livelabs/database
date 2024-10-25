@@ -5,7 +5,7 @@ Oracle Database In-Memory (Database In-Memory) is a product, first introduced in
 
 The In-Memory Column Store (IM column store) is a key feature of Database In-Memory. The In-Memory Column Store (IM column store) stores tables and partitions in memory using a columnar format optimized for rapid scans. Oracle Database uses a sophisticated architecture to manage data in columnar and row formats simultaneously. This lab will explore how Database In-Memory works and the newer features that have been added in Oracle Database 19c and 21c.
 
-[Run a workshop now!](http://developer.oracle.com/livelabs)
+[Run a workshop now!](http://livelabs.oracle.com)
 
 ## Get an Oracle Cloud Trial Account for Free!
 If you don't have an Oracle Cloud account then you can quickly and easily sign up for a free trial account that provides:

@@ -1,4 +1,4 @@
-# Generate Database and Clusterware Incidents for AHF to Detect and take Action on
+# Generate Incidents for AHF to Detect and gather diagnostic collections for
 
 ## Introduction
 
@@ -6,7 +6,7 @@ Welcome to the "Generate Database and Clusterware Incidents" lab.  In this lab y
 You will then in later labs use AHF to gather diagnostics and/or triage those incidents.
 
 
-Estimated Time: 10 minutes
+Estimated Time: 5 minutes
 
 ### Objectives
 
@@ -15,7 +15,7 @@ In this lab, you will:
 * Connect to the Database and :-
 	* Generate a dummy ORA-00600 Assert that will generate an ADR Incident.
 	* Generate a dummy ORA-04030 Error that will generate an ADR Incident.
-* Hang the RAC Database LMS0 process to cause an Instance Eviction
+	* Change a database init parameter for AHF to discover
 
 
 ### Prerequisites
@@ -33,16 +33,16 @@ This is done as often multiple errors are reported together and we want to ensur
 	</copy>
 	```
 	Command Output:
-	```
+	<pre>
 	Successfully set minTimeForAutoDiagCollection=60
 	.--------------------------------------.
-	|    lvracdb-s01-2024-07-15-1248401    |
+	|         lldbcs61                     |
 	+------------------------------+-------+
 	| Configuration Parameter      | Value |
 	+------------------------------+-------+
 	| minTimeForAutoDiagCollection | 60    |
 	'------------------------------+-------'
-	```
+	</pre>
 
 ## Task 2: Log in to the oracle user (if you are not already oracle) and confirm you environment is set up to connect to the database with `sqlplus`
 
@@ -54,36 +54,23 @@ This is done as often multiple errors are reported together and we want to ensur
 	</copy>
 	```
 	
-
-2.	Find the name of your database using `srvctl config database`
-	The `srvctl` CLI should already be in your environments PATH, you will use this command to determine your RAC Databse name.
+2.	Find the local database instance name running on this node using the **srvctl** cli. 
 
 	```
 	<copy>
-	srvctl config database
+	srvctl status database -d `srvctl config database`
 	</copy>
 	```
 	Command Output:
-	```
-	racUXBVI_ngt_lhr
-	```
-3.	Find the local instance name using `srvctl status database` 
-	Use the database name from step 2. as the -database parameter to `srvctl status database`, this will show the running database instances.
-
-	```
-	srvctl status database -d racUXBVI_ngt_lhr
-	```
-	Command Output:
-	```
+	<pre>
 	Instance racUXBVI1 is running on node lldbcs61
 	Instance racUXBVI2 is running on node lldbcs62
-	```
+	</pre>
+	> Note: The instance name will be different on this system.
+	>       We can use the `srvctl config database` command in line here as there will only be one database on the system.
+	</pre>
 
-## Task 3: Connect to the database with `sqlplus` and generate some errors
-
-
-
-1. Ensure your environment is set to connect to the database instance
+3.	Ensure your environment is set to connect to the database instance from Step 2
 
 	```
 	<copy>
@@ -91,16 +78,17 @@ This is done as often multiple errors are reported together and we want to ensur
 	</copy>
 	```
 	Command output:  
-	```
+	<pre>
 	ORACLE_UNQNAME=racUXBVI_ngt_lhr
 	ORACLE_SID=racUXBVI1
 	ORACLE_HOME=/u01/app/oracle/product/19.0.0.0/dbhome_1	
-	```
+	</pre>
 
-	You should see that the instance name running on this node from Task 2, Step 3 is the one set to **ORACLE_SID**
+	You should see that the instance name running on this node from Step 2 is the one set to **ORACLE_SID**
 
+## Task 3: Connect to the database with `sqlplus` and generate some errors
 
-2. Connect to the datase instance with **sqlplus** with sysdba role
+1. Connect to the datase instance with **sqlplus** with sysdba role
 	```
 	<copy>
 	sqlplus / as sysdba
@@ -108,7 +96,7 @@ This is done as often multiple errors are reported together and we want to ensur
 	```
 	
 	Command output:  
-	```
+	<pre>
 	SQL*Plus: Release 19.0.0.0.0 - Production on Fri Jul 12 03:37:16 2024
 	Version 19.23.0.0.0
 
@@ -120,8 +108,10 @@ This is done as often multiple errors are reported together and we want to ensur
 	Version 19.23.0.0.0
 
 	SQL>
-	```
-3. Generate a dummy ORA-00600 Error
+	</pre>
+
+2. Generate a dummy ORA-00600 Error
+
 	At the SQL> prompt type
 	```
 	<copy>
@@ -129,10 +119,12 @@ This is done as often multiple errors are reported together and we want to ensur
 	</copy>
 	```
 	Command output:  
-	```
+	<pre>
 	Statement processed.
-	```
-4. Generate a Dummy ORA-04031 Error
+	</pre>
+
+3. Generate a Dummy ORA-04031 Error
+
 	At the SQL> prompt type
 	```
 	<copy>
@@ -140,10 +132,24 @@ This is done as often multiple errors are reported together and we want to ensur
 	</copy>
 	```
 	Command output:  
-	```
+	<pre>
 	Statement processed.
+	</pre>
+
+4. Change a database init parameter
+	At the SQL> prompt type
 	```
-5. Check that AHF detected these errors using the `tfactl events` command 
+	<copy>
+	alter system set parallel_threads_per_cpu=4;
+	</copy>
+	```
+
+	Command output:  
+	<pre>
+	Statement processed.
+	</pre>
+
+5. Check that AHF detected the incidents using `tfactl events`  
 	
 	```
 	<copy>
@@ -151,7 +157,7 @@ This is done as often multiple errors are reported together and we want to ensur
 	</copy>
 	```
 	Command output:  
-	```
+	<pre>
 	Output from host : lldbcs61
 	------------------------------
 
@@ -165,7 +171,7 @@ This is done as often multiple errors are reported together and we want to ensur
 	[Jul/12/2024 03:39:31.000 UTC]: [db.racuxbvi_ngt_lhr.racUXBVI1]: ORA-00600: internal error code, arguments: [kgb], [livelabs1], [17], [], [], [], [], [], [], [], [], []
 	[Jul/12/2024 03:40:19.000 UTC]: [db.racuxbvi_ngt_lhr.racUXBVI1]: Incident details in: /u01/app/oracle/diag/rdbms/racuxbvi_ngt_lhr/racUXBVI1/incident/incdir_19778/racUXBVI1_ora_6798_i19778.trc
 	[Jul/12/2024 03:40:19.000 UTC]: [db.racuxbvi_ngt_lhr.racUXBVI1]: ORA-04031: unable to allocate  bytes of shared memory (,,,)
-```
+	</pre>
 
 	>Note that AHF Also reports the Incident trace location for the Error that follows
 	
