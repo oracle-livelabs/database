@@ -531,9 +531,9 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     
 9. Wait until the upgrade completes. Depending on the hardware, the upgrade will take about 25-35 minutes. Don't exit from the AutoUpgrade console. Leave it running.
 
-10. The following video shows an upgrade to Oracle Database 23c including conversion to the mulitenant architecture.
+10. The following video shows an upgrade to Oracle Database 23ai including conversion to the mulitenant architecture.
 
-   [23cpreview](videohub:1_n5cyl2xg:large)
+   [23aipreview](videohub:1_n5cyl2xg:large)
 
 11. Optionally, you can move to lab 10 *Full Transportable Export/Import* and do it while the upgrade completes.
 

@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Maintain transaction consistency with Oracle Transaction Manager for Microservices",
+  "workshoptitle": "Maintain data consistency across microservices using Oracle MicroTx",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -23,7 +23,7 @@
       "filename": "../../env-setup/setup-compute-novnc-ssh.md"
     },
     {
-      "title": "Lab 3: Run Travel agent app which uses LRA",
+      "title": "Lab 3: Run Travel agent app which uses Saga",
       "filename": "../../run-lra-app/run-lra-app.md"
     },
     {

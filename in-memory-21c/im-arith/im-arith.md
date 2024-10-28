@@ -14,7 +14,7 @@ Watch the video below for a walk through of the In-Memory Arithmetic lab:
 
 ### Objectives
 
--   Learn how to enable In-Memory Aritmetic
+-   Learn how to enable In-Memory Arithmetic
 
 ### Prerequisites
 This lab assumes you have:
@@ -530,7 +530,7 @@ SQL>
 
 ## Conclusion
 
-This lab demonstrated how In-Memory Optimized Arithmetic works. It showed you how to create them and how to determine their benefit.
+This lab demonstrated how In-Memory Optimized Arithmetic works. It showed you how to create enable the feature and how to determine it's benefit.
 
 You may now **proceed to the next lab**.
 
@@ -538,4 +538,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Andy Rivenes, Product Manager,  Database In-Memory
 - **Contributors** -
-- **Last Updated By/Date** - Andy Rivenes, August 2022
+- **Last Updated By/Date** - Andy Rivenes, March 2024

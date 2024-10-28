@@ -1,0 +1,2 @@
+***Oracle SID*** is a unique name given to an Oracle Database. It distinguishes Oracle Database instances installed on your host.   
+You cannot create multiple Oracle Databases on a host with the same SID. If an Oracle Database with the specified SID already exists, then enter a different SID, for example *orcl4*. Similarly, specify a *unique Global database name* for each Oracle Database on the host.

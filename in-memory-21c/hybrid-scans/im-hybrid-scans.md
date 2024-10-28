@@ -14,8 +14,7 @@ Watch the video below for a walk through of the In-Memory Spatial lab:
 
 ### Objectives
 
--   Learn how to enable In-Memory on the Oracle Database
--   Perform various queries on the In-Memory Column Store
+-   Learn how Database In-Memory can now enable in-memory scans even if not all columns of a table are populated in the IM column store.
 
 ### Prerequisites
 
@@ -28,17 +27,13 @@ This lab assumes you have:
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
-### Background
+## Task 1: In-Memory Hybrid Scans
 
 Oracle Database 21c introduced a new feature called In-Memory Hybrid Scans. Prior to 21c if a table was populated and certain columns were excluded (i.e. not Populated), and those excluded columns were accessed in a query then the whole query ran from the row store. You might be asking why anyone would exclude columns from being populated? The answer is to save space. By excluding columns that are not part of analytic queries, or reporting, it is possible to save a lot of memory in the IM column store, especially if those columns are large (i.e. consume a lot of space).
 
 With the In-Memory Hybrid Scans feature in 21c Oracle Database will run the query in-memory and then go get the projection columns, if they were excluded from being populated, from the row store. You get the best of both worlds and better performance in most cases than if you had to run the query accessing only the row store. The catch is the columns must be projection columns, that is ones that appear in the SELECT list. If the excluded columns appear in the WHERE clause then the query will have to access the row store.
 
 In this lab you will see how In-Memory Hybrid Scans work and how to tell if your queries are using them.
-
-## Task 1: Verify Directory Definitions
-
-In this Lab we will be populating external data from a local directory and we will need to define a database directory to use in our external table definitions to point the database to our external data.
 
 Let's switch to the hybrid-scans folder and log back in to the PDB:
 
@@ -602,4 +597,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Andy Rivenes, Product Manager,  Database In-Memory
 - **Contributors** -
-- **Last Updated By/Date** - Andy Rivenes, August 2022
+- **Last Updated By/Date** - Andy Rivenes, March 2024
