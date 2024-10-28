@@ -1,0 +1,1 @@
+Oracle Database contains schemas or users for management and administrative actions. The password you specify in this window is for the administrators, namely SYS, SYSTEM, and PDBADMIN. Note the password you enter in this window. After the installation, you require this password to connect to the database.
