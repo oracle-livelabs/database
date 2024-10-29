@@ -13,7 +13,7 @@ Oracle NoSQL Database Cloud Service is a fully managed database cloud service th
 ### Prerequisites
 
 *  An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
-*  Successful completion of [Lab 1 : Create an API Signing Key ](?lab=create-api-signing-keys)
+*  Successful completion of [Lab 1 : Create an API Sign-In Key ](?lab=create-api-signing-keys)
 
 To create resources in OCI, you need to configure terraform. You need to create the basic terraform configuration files for terraform provider definition, NoSQL resource definitions, authentication, and input variables.
 
@@ -80,7 +80,7 @@ provider "oci" {
 }
 </copy>
 ```
-Provide values for your tenancy\_ocid, user\_ocid, private_key\_path, and fingerprint, region, and compartment\_ocid arguments in the **terraform.tfvars** file. You should already have an OCI IAM user with access keys having sufficient permissions on NoSQL Database Cloud Service. Use the values recorded from [Lab 1 : Create an API Signing Key ](?lab=create-api-signing-keys).
+Provide values for your tenancy\_ocid, user\_ocid, private_key\_path, and fingerprint, region, and compartment\_ocid arguments in the **terraform.tfvars** file. You should already have an OCI IAM user with access keys having sufficient permissions on NoSQL Database Cloud Service. Use the values recorded from [Lab 1 : Create an API Sign-In Key ](?lab=create-api-signing-keys).
 
 A sample **terraform.tfvars** is shown below:
 ```
@@ -309,10 +309,9 @@ On confirmation, the singleton tables are created.
 
 ## Learn More
 
-* [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/dtddt/index.html)
 * [Deploying Oracle NoSQL Table Using Terraform and OCI Resource Manager](https://docs.oracle.com/en/cloud/paas/nosql-cloud/hknsq/)
 * [Table Resource in Terraform](https://registry.terraform.io/providers/oracle/oci/latest/docs/resources/nosql_table)
 
 ## Acknowledgements
 * **Author** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance
-* **Last Updated By/Date** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance, June 2024
+* **Last Updated By/Date** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance, November 2024

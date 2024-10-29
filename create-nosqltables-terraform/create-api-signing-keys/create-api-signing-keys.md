@@ -1,4 +1,4 @@
-# Create an API Signing Key (Optional)
+# Create an API Sign-In Key (Optional)
 
 ## Introduction
 
@@ -47,7 +47,7 @@ Any software client you use to connect to Oracle Cloud Infrastructure must be co
 
   ![Copy OCID](images/copy-user-ocid.png)
 
-## Task 2: Generate an API Signing Key
+## Task 2: Generate an API Sign-In Key
 
 To create a user API key, you will use `openssl` on your local system. If you are using Windows, we recommend the Git Bash Shell.
 
@@ -125,4 +125,4 @@ You may proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Dave Rubin, Senior Director, NoSQL and Embedded Database Development and Michael Brey, Director, NoSQL Product Development
-* **Last Updated By/Date** - Vandana Rajamani, Database User Assistance, June 2023
+* **Last Updated By/Date** - Vandana Rajamani, Database User Assistance, November 2024

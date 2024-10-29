@@ -13,7 +13,7 @@ Oracle NoSQL Database Cloud Service supports a global active table architecture 
 ### Prerequisites
 
 *  An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
-*  Successful completion of [Lab 1 : Create an API Signing Key ](?lab=create-api-signing-keys)
+*  Successful completion of [Lab 1 : Create an API Sign-In Key ](?lab=create-api-signing-keys)
 * Successful completion of [Lab 2 : Create singleton tables using Terraform](?lab=create-singleton-tables)
 
 It is easy to deploy a Global Active table on OCI using Terraform. In [Lab 2 : Create singleton tables using Terraform](?lab=create-singleton-tables), you have created a singleton table called **nosql_demo**. In this lab, you will create a regional replica of this table and make it a Global Active table.
@@ -135,10 +135,9 @@ On confirmation, a regional replica of the *nosql_demo* table is created, conver
 
 ## Learn More
 
-* [Oracle NoSQL Database Cloud Service page](https://cloud.oracle.com/en_US/nosql)
 * [Global Active Tables in NDCS](https://docs.oracle.com/en/cloud/paas/nosql-cloud/gasnd/)
 * [Table Replica Resource in Terraform](https://registry.terraform.io/providers/oracle/oci/latest/docs/resources/nosql_table_replica)
 
 ## Acknowledgements
 * **Author** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance
-* **Last Updated By/Date** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance, June 2024
+* **Last Updated By/Date** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance, November 2024
