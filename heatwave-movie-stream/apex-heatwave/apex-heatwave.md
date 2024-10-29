@@ -271,7 +271,7 @@ In this lab, you will be guided through the following task:
     | --------| -------:|
     | Name | mysqlheatwave |
     | Static ID | mysqlheatwave |
-    | Authentication Type | Oracle Cloud Infraestructure (OCI) |
+    | Authentication Type | OCI Native Authentication |
     | OCI User ID | **< YourUserOCID >** |
     | OCI Private Key | **< ContentOfYourSavedPrivateKey >** |
     | OCI Tenancy ID | **< YourTenancyOCID >** |
@@ -328,4 +328,4 @@ You may now **proceed to the next lab**
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, February 2024
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2024
