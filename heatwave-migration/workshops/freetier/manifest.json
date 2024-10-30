@@ -1,6 +1,6 @@
 {
   "workshoptitle": "Migrate from on-premises to MySQL HeatWave",
-    "help": "livelabs-help-oci_us@oracle.com",
+    "help": "livelabs-help-mysql_us@oracle.com",
     "tutorials": [
         {
             "title": "Introduction",
