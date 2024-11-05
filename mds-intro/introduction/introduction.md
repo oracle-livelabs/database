@@ -50,4 +50,4 @@ In this lab, you will be guided through the following steps:
 
 - **Author** -  Perside Foster, MySQL Solution Engineering
 - **Contributors** -  Sriram Vrinda, MySQL Product Manager
-- **Last Updated By/Date** - Sindhuja Banka, October 2024
+- **Last Updated By/Date** - Sindhuja Banka, November 2024
