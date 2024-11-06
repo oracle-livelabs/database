@@ -123,4 +123,4 @@ Go to [the documentation](https://docs.oracle.com/en/cloud/paas/autonomous-data-
 ## Acknowledgements
 
 - Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
-- Last Updated By/Date - Suraj Ramesh, Feb 2023
+- Last Updated By/Date -Suraj Ramesh, November 2024

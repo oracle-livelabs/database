@@ -93,5 +93,5 @@ You have successfully downloaded the ADB wallet and lab files. [Proceed to the n
 
 ## Acknowledgements
 
-- Author - Ludovico Caldara and Suraj Ramesh
+- Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
 - Last Updated By/Date -Suraj Ramesh, November 2024

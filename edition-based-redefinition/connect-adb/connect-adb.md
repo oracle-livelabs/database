@@ -18,7 +18,7 @@ In this lab, you will
 
 ### Prerequisites
 
-This lab assumes you have performed the previous lab on provisioning an Oracle Autonomous Database or you already have an existing Autonomous Database.The LiveLabs Sandbox environment comes with a pre-created Autonomous Database (ATP).
+This lab assumes you have performed the previous lab on provisioning an Oracle Autonomous Database or you already have an existing Autonomous Database.
 
 ## Task 1: Download the Autonomous Database wallet
 
@@ -95,5 +95,5 @@ You have successfully downloaded the ADB wallet and lab files. [Proceed to the n
 
 ## Acknowledgements
 
-- Author - Ludovico Caldara and Suraj Ramesh
+- Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
 - Last Updated By/Date -Suraj Ramesh, November 2024
