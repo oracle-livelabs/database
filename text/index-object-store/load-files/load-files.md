@@ -104,7 +104,7 @@ You may now continue to the next lab.
 ## Acknowledgements
 
 - **Author** - Roger Ford, Principal Product Manager
-- **Last Updated By/Date** - Roger Ford, November 2022
+- **Last Updated By/Date** - Hermann Baer, May 2024
 
 
 [def]: ./files/letter.txt?download=1

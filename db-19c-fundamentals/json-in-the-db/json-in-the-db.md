@@ -31,7 +31,7 @@ In this lab, you will:
 
 1. If you're not already looking at the SQL Developer Web interface, locate your Autonomous Database by clicking the hamburger menu in the top left of the screen, selecting Oracle Databases and choose Autonomous Database. **If you already have SQL Developer Web up and are logged in as the NF19C user, skip to step 4.**
  
-  ![locate adb](./images/locate-adb.png " ")
+  ![locate adb](./images/oci-navigation-adw.png " ")
  
 2. Select the name of your database and click on the Database Actions button located at the top of the screen.
 
@@ -39,12 +39,10 @@ In this lab, you will:
    
 3. Log into Database Actions as the NF19C user.
 	![JSON Database Actions](./images/db-actions-logout.png)
-	![JSON Database Actions](./images/db-actions-login-lab.png)
 
+4. From the launch pad Select the hamberger menu and the JSON tile on the left hand side of the screen.
 
-4. Select the JSON tile on the left hand side of the screen.
-
-	![JSON Database Actions](./images/db-actions-json.png)
+	![JSON Database Actions](./images/db-actions-json1.png)
 
 
 5. To create a collection, click **Create Collection**.
@@ -368,4 +366,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Beda Hammerschmidt, Architect
 - **Contributors** - Killian Lynch, Product Manager, Oracle Database
-- **Last Updated By/Date** - Killian Lynch February 2023
+- **Last Updated By/Date** - Killian Lynch June 2024
