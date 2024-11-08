@@ -20,11 +20,11 @@ This lab assumes you have -
 
 1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
 
-    - [ords-db21c-dbae-mkplc-freetier-terraform.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/6WIlnEK5CqZknuEIGWHNlWR31BfDhRhB-NHBHBvWDBUjA7-4VFMIrfm1OOxnolhI/n/c4u02/b/hosted_workshops/o/stacks/ords-db21c-dbae-mkplc-freetier-terraform.zip)
+	 - [ords-db21c-dbae-mkplc-freetier-terraform.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/6WIlnEK5CqZknuEIGWHNlWR31BfDhRhB-NHBHBvWDBUjA7-4VFMIrfm1OOxnolhI/n/c4u02/b/hosted_workshops/o/stacks/ords-db21c-dbae-mkplc-freetier-terraform.zip)
 
 1.  Save in your downloads folder.
 
-We recommend using this stack to create a self-contained/dedicated VCN with your instance(s). Skip to [Task 3](?lab=prepare-setup#Task3:Setupcompute) to follow our recommendations. If you would rather use an existing VCN, then proceed to the next task as indicated below to update your existing VCN with the required Egress rules.
+We recommend using this stack to create a self-contained/dedicated VCN with your instance(s). Skip to *Task 3* to follow our recommendations. If you would rather use an existing VCN, then proceed to the next task as indicated below to update your existing VCN with the required Egress rules.
 
 ## Task 2: Add security rules to an existing VCN
 
@@ -34,7 +34,7 @@ This workshop requires a certain number of ports to be available, a requirement 
 | :------------- | :------------------------------------ |
 | 22             | SSH                                   |
 | 6080           | noVNC Remote Desktop                  |
-{: title="Add ports to VCN"}
+{: title="Enable ports"}
 
 1.  Go to **Networking** &gt; **Virtual Cloud Networks**.
 1.  Choose your network.
@@ -46,9 +46,9 @@ This workshop requires a certain number of ports to be available, a requirement 
     - Destination Port Range: *Refer to the table*
 1.  Click the **Add Ingress Rules** button.
 
-## Task 3: Setup compute
+## Task 3: Set up compute
 
-Using the details from the previous two tasks, proceed to the lab **Setup compute instance** to setup your workshop environment using Oracle Resource Manager (ORM) and one of the following options:
+Using the details from the previous two tasks, proceed to the lab **Set up compute instance** to set up your workshop environment using Oracle Resource Manager (ORM) and one of the following options:
 
  -  Create Stack:  **Compute + Networking**
  -  Create Stack:  **Compute only** with an existing VCN where security lists have been updated as per *Task 2* of this lab
@@ -58,5 +58,5 @@ You may now **proceed to the next lab**.
 ## Acknowledgments
 
  - **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
- - **Contributors** - Manish Garodia
- - **Last Updated By/Date** - Rene Fontcha, LiveLabs Platform Lead, NA Technology, April 2022
+ - **Contributors** - Meghana Banka, Manish Garodia, Manisha Mati
+ - **Last Updated By/Date** - Manish Garodia, October 2024
