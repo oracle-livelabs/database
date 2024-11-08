@@ -84,5 +84,5 @@ You have successfully generated the changelog for the HR schema using Liquibase.
 
 ## Acknowledgements
 
-- Authors - Ludovico Caldara and Suraj Ramesh
-- Last Updated By/Date - Suraj Ramesh, August 2023
+- Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
+- Last Updated By/Date -Suraj Ramesh, November 2024
