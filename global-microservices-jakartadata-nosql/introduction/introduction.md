@@ -49,7 +49,7 @@ In this workshop you will:
 ### Prerequisites
 
 This workshop assumes you have:
-  * Programming knowledge in Java and Spring framework
+  * Programming knowledge in Java and Helidon with Jakarta EE
   * Understanding of query languages
 
 
@@ -118,4 +118,5 @@ Geo-Steering to steer network requests to closest Oracle Cloud Infrastructure re
 * [About Code Editor](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/code_editor_intro.htm)
 
 ## Acknowledgements
-* **Authors** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director NoSQL Development
+* **Authors** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director NoSQL Development; Otavio Santana, Award-winning Software Engineer and Architect
+
