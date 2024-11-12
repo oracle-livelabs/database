@@ -448,6 +448,6 @@ Download the FANWatcher utility
 You may now *proceed to the next lab*.  
 
 ## Acknowledgements
-* **Authors** - Troy Anthony
+* **Authors** - Troy Anthony Anil Nair
 * **Contributors** - Kay Malcolm, Kamryn Vinson
-* **Last Updated By/Date** - Kamryn Vinson, March 2021
+* **Last Updated By/Date** - Anil Nair, November 2024
