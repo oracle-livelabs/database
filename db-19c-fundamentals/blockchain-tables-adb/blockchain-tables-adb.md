@@ -250,7 +250,7 @@ In the lab, we focused on a subset of the capabilities of blockchain, primarily 
 
 If you're keen on exploring the fascinating world of blockchain technology and learning more about signing records and verifying ledgers, we highly recommend checking out the LiveLab below. This interactive and immersive learning experience will provide you with hands-on experience in creating and managing blockchain tables, signing specific records, and verifying the entire blockchain's integrity through a certificate directory.
 
-- [Blockchain in the Oracle Database](https://apexapps.oracle.com/pls/apex/f?p=133:180:114026617672312::::wid:746)
+- [Blockchain in the Oracle Database](https://livelabs.oracle.com/pls/apex/f?p=133:180:114026617672312::::wid:746)
 
 You may now proceed to the next lab.
 

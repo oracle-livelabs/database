@@ -34,7 +34,21 @@ This lab assumes you have:
     ```
 ![app container](https://oracle-livelabs.github.io/database/truecache/jdbc/images/appcontainer.png " ")
 
-2. Run the application by running /stage/clientapp/TransactionApp.sh , This first runs the application against the primary database for 2 minutes. Then it runs the application against True Cache for 2 minutes with 50 threads.
+2. Go to the directory /stage/clientapp 
+
+     ```
+    <copy>
+     cd /stage/clientapp
+    </copy>
+    ```
+
+2. Run the application by running TransactionApp.sh , This first runs the application against the primary database for 2 minutes. Then it runs the application against True Cache for 2 minutes with 50 threads.
+    
+    ```
+    <copy>
+     sh TransactionApp.sh
+    </copy>
+    ```
 ![transaction app](https://oracle-livelabs.github.io/database/truecache/jdbc/images/transactionapp.png " ")
 
 3. Observe the improve in performance while using True Cache.

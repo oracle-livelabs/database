@@ -4,7 +4,9 @@
 
 In this lab, you take a first look at the M5 script. The script is available for download from My Oracle Support. It combines existing functionality in Oracle Database to deliver the best migration experience.
 
-Estimated Time: 5 Minutes.
+Estimated Time: 5 Minutes
+
+[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 4](youtube:fgyDy-QcV_o?start=766)
 
 ![Configure M5 script](./images/prepare-m5-overview.png " ")
 

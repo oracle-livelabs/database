@@ -79,6 +79,6 @@ You have successfully reviewed the HR schema. [Proceed to the next lab](#next) t
 
 ## Acknowledgements
 
-- Authors - Ludovico Caldara and Suraj Ramesh
-- Last Updated By/Date - Suraj Ramesh, Feb 2023
+- Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
+- Last Updated By/Date -Suraj Ramesh, November 2024
 

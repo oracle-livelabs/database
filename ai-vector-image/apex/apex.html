@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Build an APEX app for AI Vector Search</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="build-an-apex-app-for-ai-vector-search">Build an APEX app for AI Vector Search</h1>
+<h2 id="introduction">Introduction</h2>
+<p>This lab will walk you through the steps to create an APEX application that will leverage all of the data you have loaded plus AI Vector Search</p>
+<p>Estimated Lab Time: 20 minutes</p>
+<h3 id="objectives">Objectives</h3>
+<p>In this lab, you will:</p>
+<ul>
+<li>Create a workspace for your application</li>
+<li>Create a page to search your images using AI Vector Search</li>
+<li>Create a page to display the details of an image</li>
+<li>Link the two pages together</li>
+</ul>
+<h3 id="prerequisites-optional">Prerequisites (Optional)</h3>
+<p>This lab assumes you have:</p>
+<ul>
+<li>All previous labs successfully completed</li>
+</ul>
+<h2 id="task-1-create-a-workspace-and-apex-user">Task 1: Create a Workspace and APEX User</h2>
+<p>This task you will log into APEX with the ADMIN user and create a workspace for your specific application. Take note of the workspace, user and password for this application as it will be different than your database user.</p>
+<ol>
+<li>
+<p>Open the &quot;View Login Info&quot; section of your workshop.</p>
+<p><img src="file:////Users/dstart/Documents/GitHub/database/ai-vector-image/apex/images/sample1.png" alt="Image alt text"></p>
+</li>
+<li>
+<p>You will use the APEX URL to open APEX</p>
+</li>
+</ol>
+<p><img src="file:////Users/dstart/Documents/GitHub/database/ai-vector-image/apex/images/sample1.png" alt="Image alt text"></p>
+<ol start="3">
+<li>
+<p>Login using:</p>
+<ul>
+<li>APEX Workspace Name</li>
+<li>APEX Workspace User</li>
+<li>APEX Workspace Password</li>
+</ul>
+</li>
+<li>
+<p>It will ask you to change the password. You can change the password or you can use the existing password</p>
+</li>
+<li>
+<p>Click on &quot;Create Workspace&quot;</p>
+</li>
+<li>
+<p>For Workspace Name type in &quot;Vector&quot; and click Next</p>
+</li>
+<li>
+<p>For &quot;Re-Use existing schema?&quot; set this to Yes</p>
+</li>
+<li>
+<p>For Schema Name type in &quot;ADMIN&quot; and click Next.
+<strong>Note:</strong> By doing this you have linked your application with your database schema where your tables reside.</p>
+</li>
+<li>
+<p>For the Identify Administrator section fill in:</p>
+<ul>
+<li>Administrator Username: vectoruser (This will be the user we will log into APEX with)</li>
+<li>Administrator Password: Welcome_1 (or any password you want just make sure to remember it as we will use this to log into APEX with)</li>
+<li>Email: <a href="mailto:test@test.com">test@test.com</a> (Any email address will work.)</li>
+</ul>
+</li>
+<li>
+<p>Click Next</p>
+</li>
+<li>
+<p>Click Create Workspace</p>
+</li>
+<li>
+<p>Click Done</p>
+</li>
+<li>
+<p>Click on admin in the upper right corner and click sign out</p>
+</li>
+<li>
+<p>Click on Return to Sign In Page</p>
+</li>
+<li>
+<p>On the page fill in the following values:</p>
+<ul>
+<li>Workspace: Vector</li>
+<li>Username: vectoruser</li>
+<li>Password: Welcome_1 (or the password you created)</li>
+</ul>
+</li>
+<li>
+<p>Again you will be asked to create a new password. You can use the same password or change it.</p>
+</li>
+<li>
+<p>You should now be on the main landing page of APEX</p>
+</li>
+</ol>
+<h2 id="task-2-create-application">Task 2: Create Application</h2>
+<p>In this task you will create the application so you can start building pages.</p>
+<ol>
+<li>
+<p>Click on App Builder Icon</p>
+</li>
+<li>
+<p>Click on Create a New App</p>
+</li>
+<li>
+<p>Name your application. I'm going to use &quot;Vector Image&quot; then click Create Application</p>
+</li>
+</ol>
+<h2 id="task-3-create-image-gallery-page">Task 3: Create Image Gallery Page</h2>
+<p>In this task you will create the Image Gallery page. This page will display the images that are brought back from your AI Vector Search based on input from the user.</p>
+<ol>
+<li>
+<p>Click on Create Page</p>
+</li>
+<li>
+<p>Choose Cards</p>
+</li>
+<li>
+<p>On this page:</p>
+<ul>
+<li>Name: Image Gallery</li>
+<li>Table/View Name: VECTOR_IMAGE</li>
+<li>Click Next</li>
+</ul>
+</li>
+<li>
+<p>On this page:</p>
+<ul>
+<li>Choose Float</li>
+<li>For Title Column select the URL field from the table</li>
+<li>Click on Create Page</li>
+</ul>
+</li>
+<li>
+<p>On the left panel where you see the section called Body, right click on the word Body and choose &quot;Create Page Item&quot; We will use this as a text entry box for searching.</p>
+</li>
+<li>
+<p>If you click on the newly created Item on the left side of the page then on the right side of the page you will see the Page Item panel for that item. Make the following changes in the Page Item Panel:</p>
+<ul>
+<li>Change the name of the item you just created to P4_SEARCH_ITEM.</li>
+<li>Change Submit when Enter pressed to On</li>
+</ul>
+</li>
+<li>
+<p>In the panel on the left, Drag the P4_SEARCH_ITEM up above the Image Gallery page item. This will make it so your search box will be at the top of the page.</p>
+</li>
+<li>
+<p>Click on the Image Gallery page item and make the following changes in the Region panel on the right:</p>
+</li>
+</ol>
+<pre><code>- Under source change the Type to SQL Query
+- For the SQL Query paste the following:
+```
+&lt;copy&gt;
+select URL,
+   IMG,
+   UFORM_DESC,
+   UFORM_VECTOR,
+   NLP_DESC,
+   NLP_VECTOR
+from VECTOR_IMAGE
+ORDER BY VECTOR_DISTANCE( uform_vector, vector_embedding(minilm12v2 using :P4_SEARCH_ITEM as data), EUCLIDEAN ) 
+FETCH EXACT FIRST 2 ROWS ONLY
+&lt;/copy&gt;
+```
+- In the Page Items to Submit section click on the menu button on the right and click on P4_SEARCH_ITEM
+</code></pre>
+<ol start="13">
+<li>
+<p>Click on the Attributes Tab</p>
+</li>
+<li>
+<p>Change the following:</p>
+<ul>
+<li>Card
+<ul>
+<li>Primary Key Column 1: URL</li>
+</ul>
+</li>
+<li>Media
+<ul>
+<li>Source: Blob Column</li>
+<li>Blob Column: IMG</li>
+</ul>
+</li>
+<li>Click on Save at the top of the page</li>
+</ul>
+</li>
+<li>
+<p>Right click on P4_ORDER_BY in the left panel and select delete</p>
+</li>
+<li>
+<p>Click on Save</p>
+</li>
+<li>
+<p>If you want to see how your page looks click on the run button</p>
+</li>
+<li>
+<p>You will need to login to your application</p>
+<ul>
+<li>Username: vectoruser</li>
+<li>Password: Welcome_1 (Or whatever password you set it to)</li>
+</ul>
+</li>
+<li>
+<p>Try typing in Fruit or Climbing in the search bar</p>
+</li>
+<li>
+<p>You can close your application page but leave your Application Designer/Builder page open</p>
+</li>
+</ol>
+<h2 id="task-4-create-image-detail-page">Task 4: Create Image Detail Page</h2>
+<p>In this task you will create the Image Detail Page that will display information like the descriptions and vectors for the image selected. You will also create a link back to the Image Gallery Page.</p>
+<ol>
+<li>
+<p>If you are not at the application builder home page click on the Application Breadcrumb at the top corner of the page</p>
+</li>
+<li>
+<p>You should be on a page that looks like the image below</p>
+</li>
+<li>
+<p>Click on Create Page</p>
+</li>
+<li>
+<p>Choose Interactive Report</p>
+</li>
+<li>
+<p>On this page:</p>
+<ul>
+<li>Name: Image Detail</li>
+<li>Table/View Name: VECTOR_IMAGE</li>
+<li>Click Create Page</li>
+</ul>
+</li>
+<li>
+<p>On the left panel where you see the section called Body, right click on the word Body and choose &quot;Create Page Item&quot;. This will be a variable so that you can pass which image you want to see the detail from the Image Gallery page.</p>
+</li>
+<li>
+<p>If you click on the newly created Item then on the right side of the page you will see the Page Item panel for that item. Make the following changes in the Page Item Panel:</p>
+<ul>
+<li>Name: P2_URL</li>
+<li>In the Default section change:
+<ul>
+<li>Type &quot;SQL Query (return single value)</li>
+<li>SQL Query: &quot;select min(url) from vector_image&quot; (without the double quotes)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>In the panel on the left, Drag the P2_URL up above the Image Detail page item</p>
+</li>
+<li>
+<p>Click on the Image Detail in the left panel to pull up its details</p>
+</li>
+<li>
+<p>In the Where Clause section paste &quot;URL = :P2_URL&quot; (without the double quotes)</p>
+</li>
+<li>
+<p>In the Page Items to Submit section click on the menu button on the right and click on P2_URL</p>
+</li>
+<li>
+<p>Back on the left side panel right click on image detail and click on duplicate</p>
+</li>
+<li>
+<p>Expand the column list of the top image detail page item and do the following:</p>
+<ul>
+<li>Right click on url and choose comment out</li>
+<li>Right click on img and choose comment out</li>
+<li>Right click on uform_vector and choose comment out</li>
+<li>Right click on nlp_vector and choose comment out</li>
+</ul>
+</li>
+<li>
+<p>Expand the columns list of the bottom image detail page item and do the following:</p>
+<ul>
+<li>Right click on url and choose comment out</li>
+<li>Right click on img and choose comment out</li>
+<li>Right click on uform_desc and choose comment out</li>
+<li>Right click on nlp_desc and choose comment out</li>
+</ul>
+</li>
+<li>
+<p>Right click on Body in the left panel and click on Create Button</p>
+</li>
+<li>
+<p>Click on the button on the left and in the Button panel on the right change the following:</p>
+<ul>
+<li>Button Name: Back_to_Images</li>
+<li>The label should automatically change to Back To Images</li>
+<li>Under Behavior make the following changes:</li>
+<li>Action: Redirect to to Page in this Application</li>
+<li>Target: Click on Link to bring up the dialog
+<ul>
+<li>Click on the menu on the page box</li>
+<li>Click on the number next to the Image Gallery. In my case I would click on 2</li>
+<li>Click on Ok</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Click on Save on the Page</p>
+</li>
+<li>
+<p>Click on the application breadcrumb at the top left corner of the page</p>
+</li>
+</ol>
+<h2 id="task-5-linking-image-gallery-to-the-image-details">Task 5: Linking Image Gallery to the Image Details</h2>
+<p>In this task you will link the Image Gallery page to the Image Detail Pages so when you click on an image you will get the details for it.</p>
+<ol>
+<li>
+<p>If you are not at the application builder home page click on the Application Breadcrumb at the top of the page</p>
+</li>
+<li>
+<p>You should be on a page that looks like the image below</p>
+</li>
+<li>
+<p>Click on your Image Gallery page</p>
+</li>
+<li>
+<p>In the left panel Under Image Gallery right click on Actions and Choose create action</p>
+</li>
+<li>
+<p>In the Action Panel on the right make the following changes</p>
+<ul>
+<li>Identification -&gt; Type: Media</li>
+<li>Under link Change
+<ul>
+<li>Type: Redirect to Page in this Application</li>
+<li>Click on Target
+<ul>
+<li>Click on the menu on the Page box which should pop up the list of pages in your application</li>
+<li>Click on the number of the page for the &quot;Image Detail&quot; page. In my case I would click on the 3</li>
+<li>In the Set Items section click on the menu button next to the box for Name. It should show P2_URL. Click on that to select it</li>
+<li>For the Value box, again click on the menu button and here select URL</li>
+<li>Click Ok to save the dialog</li>
+</ul>
+</li>
+<li>Click on the menu on the Link Attributes box and select URL</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Click Save on the page</p>
+</li>
+</ol>
+<h2 id="task-6-running-the-application">Task 6: Running the Application</h2>
+<ol>
+<li>
+<p>To run your application do one of the following:</p>
+<ol>
+<li>If you are still on the Image Gallery page you can click on the run button to start your application.</li>
+<li>If you are on the Application Builder home page then click on the Image Gallery page and then click the run button.</li>
+<li>If you are on the Image Detail page you can click the application breadcrumb at the top of the page to get to the Application Builder home page the follow the instructions above.</li>
+</ol>
+</li>
+<li>
+<p>If you need to login use:</p>
+<ul>
+<li>Username: vectorimage</li>
+<li>Password: Welcome_1 (or whatever password you set for vectorimage)</li>
+</ul>
+</li>
+<li>
+<p>If you want you can click on the Menu and select Image Gallery to get to the Image Gallery page as well.</p>
+</li>
+<li>
+<p>In your search bar type in Fruit or Surfing or whatever you want to search on</p>
+</li>
+<li>
+<p>Click on an image to go to your detail page</p>
+</li>
+<li>
+<p>On the detail page you can see both descriptions and what the vectors for the descriptions are. At the bottom is the button to go back to the Image Gallery page.</p>
+</li>
+</ol>
+<p>Congradulations, you have built a AI Vector Search enabled application using images!</p>
+<h2 id="learn-more">Learn More</h2>
+<p><em>(optional - include links to docs, white papers, blogs, etc)</em></p>
+<ul>
+<li><a href="http://docs.oracle.com">URL text 1</a></li>
+<li><a href="http://docs.oracle.com">URL text 2</a></li>
+</ul>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<ul>
+<li><strong>Author</strong> - David Start, Product Management</li>
+<li><strong>Contributors</strong> -  David Start, Product Management</li>
+<li><strong>Last Updated By/Date</strong> - David Start, Sept 2024</li>
+</ul>
+
+            
+            
+        </body>
+        </html>

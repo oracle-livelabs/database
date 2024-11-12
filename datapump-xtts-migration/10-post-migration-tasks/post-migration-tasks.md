@@ -4,7 +4,9 @@
 
 Now, you have migrated the database. Before going live, there are a few important tasks to carry out, plus you should test the new database. 
 
-Estimated Time: 10 Minutes.
+Estimated Time: 10 Minutes
+
+[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 10](youtube:fgyDy-QcV_o?start=2722)
 
 ### Objectives
 

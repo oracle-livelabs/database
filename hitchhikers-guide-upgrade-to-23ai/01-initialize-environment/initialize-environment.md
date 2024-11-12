@@ -4,7 +4,9 @@
 
 In this lab, you will check all components required to successfully run this workshop.
 
-Estimated Time: 5 Minutes.
+Estimated Time: 5 Minutes
+
+[Hitchhiker's Guide Lab 1](youtube:lwvdaM4v4tQ?start=268)
 
 ### Objectives
 

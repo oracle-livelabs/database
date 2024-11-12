@@ -16,15 +16,15 @@ In this lab, you will:
 
 ### Prerequisites
 
-- Oracle Database 23ai Free Developer Release
 - All previous labs successfully completed
-
 
 ## Task 1: Run a query without an index
 
-This lab expects you to be in SQL Developer Web (Database Tools -> SQL) where you finished the last lab. If necessary, reopen a browser page and follow the instructions at the start of the previous lab.
+1. Open Database Actions (if you don't already have it open). Choose **SQL** under Development from the launchpad.
 
-1. Run a query to find all movies which grossed over a billion dollars.
+    ![SQL development navigation](../json-sql/images/development-sql.png)
+
+2. Run a query to find all movies which grossed over a billion dollars.
 
     Enter the following SQL in the SQL Worksheet. The query fetches titles and gross takings (as a number) for all movies which grossed over 1 billion, ordered by gross takings:
 
@@ -32,7 +32,7 @@ This lab expects you to be in SQL Developer Web (Database Tools -> SQL) where yo
     <copy>
     select m.data.title, m.data.gross.number() from movies m
     where m.data.gross.number() > 1000000000
-    order by m.data.gross.number() desc
+    order by m.data.gross.number() desc;
     </copy>
     ```
 
@@ -40,7 +40,7 @@ This lab expects you to be in SQL Developer Web (Database Tools -> SQL) where yo
 
     ![Query for movies over one billion in gross takings](images/billion-gross.png " ")
 
-2.  Examine the query plan
+3.  Examine the query plan
 
     Above the worksheet, click on the "Explain Plan" button.
 
@@ -52,7 +52,7 @@ This lab expects you to be in SQL Developer Web (Database Tools -> SQL) where yo
 
     ![Toggle for advanced view](images/explain-plan-advanced.png)
     
-    We can see that the query used a JSONTABLE evaluation.
+    We can see that the query used a full table scan.
 
     ![Explain plan in shows jsontable](images/explain-plan-2.png)
 
@@ -79,7 +79,7 @@ In this task we'll create a Search Index. Search Indexes are created over the wh
     <copy>
     select m.data.title, m.data.gross.number() from movies m
     where m.data.gross.number() > 1000000000
-    order by m.data.gross.number() desc
+    order by m.data.gross.number() desc;
     </copy>
     ```
 
@@ -87,7 +87,7 @@ In this task we'll create a Search Index. Search Indexes are created over the wh
 
     ![Query plan with index](images/explain-with-index.png)
 
-    We can now see that the query is using the index we created (M_SEARCH_INDEX) which means for searches on a large table, the query should run much quicker.
+    We can now see that the query is using the index we created (M\_SEARCH\_INDEX) which means for searches on a large table, the query should run much quicker.
 
 ## Task 3: Perform basic full-text searches
 
@@ -149,12 +149,14 @@ Note: Unlike CONTAINS, JSON_TextContains does not return a value - it is effecti
 
     Looking at the results, there is only one movie where Stellan Skarsgård and Shia LeBeouf are both in the cast.
 
+    You can proceed to the next lab.
+
 ## Learn More
 
-* [How to Store, Query and Create JSON Documents in Oracle Database](https://blogs.oracle.com/sql/post/how-to-store-query-and-create-json-documents-in-oracle-databaseå))
+* [How to Store, Query and Create JSON Documents in Oracle Database](https://blogs.oracle.com/sql/post/how-to-store-query-and-create-json-documents-in-oracle-database)
 
 ## Acknowledgements
 
 * **Author** - Roger Ford, Hermann Baer
 * **Contributors** -  David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - Roger Ford, Database Product Manager, November 2023
+* **Last Updated By/Date** - Carmen Berdant, Database Product Management, August 2024

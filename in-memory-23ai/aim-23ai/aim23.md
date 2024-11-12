@@ -7,7 +7,8 @@ Watch the video below to get an overview of Automatic In-Memory:
 [YouTube video](youtube:pFWjl1G7uDI)
 
 Watch the video below for a quick walk-through of this lab.
-[Automatic In-Memory High](videohub:1_0rzwly4i)
+
+[Automatic In-Memory Level High](https://videohub.oracle.com/media/Automatic+In-Memory+Level+High/1_rs5bkjyz)
 
 *Estimated Lab Time:* 15 Minutes.
 
@@ -15,6 +16,8 @@ Watch the video below for a quick walk-through of this lab.
 
 -   Learn how Automatic In-Memory (AIM) level HIGH works
 -   Perform various queries invoking AIM with INMEMORY\_AUTOMATIC\_LEVEL set to HIGH
+
+Note: The results of queries in the lab may not exactly match the output shown in this Lab Guide. This is due to differences in environments and the randomness of the queries that are run. The basic output should be close and the Lab Guide will explain the important areas to focus on.
 
 ### Prerequisites
 
@@ -53,7 +56,7 @@ set lines 150
 Query result:
 
 ```
-[oracle@livelabs aim23]$ cd /home/oracle/labs/inmemory/aim23
+[oracle@livelabs aim23]$ cd /home/oracle/workshops/inmemory/aim23
 [oracle@livelabs aim23]$ sqlplus /nolog
 
 SQL*Plus: Release 23.0.0.0.0 - for Oracle Cloud and Engineered Systems on Mon Aug 12 16:50:16 2024
@@ -65,8 +68,11 @@ SQL> set pages 9999
 SQL> set lines 150
 SQL>
 ```
+### In-Memory Performance Features
 
-1. First let's see whether any Automatic In-Memory Performance features were created during the lab:
+This first section of the lab will show if any Automatic In-Memory Performance Features have been created. In the lab guide we show you what we hope will happen. However, the Automatic In-Memory Performance feature relies on two components, Auto STS to capture SQL statements and the Auto IM Task to evaluate whether it is beneficial to create In-Memory performance features. Both of these tasks run in the Auto Task framework and evaluate the SQL that has been run over time. SQL statements are captured by automatic SQL Tuning Set (STS) tasks and then an Auto IM Task is run multiple times to evaluate the possible benefit of the different features using SQL Performance Analyzer (SPA). Unfortunately this does not always result in the capturing and creating of IM performance features in the Lab environment.
+
+1. This first script will show whether any Automatic In-Memory Performance Features were created during the lab:
 
     Run the script *01\_auto\_im\_features.sql*
 
@@ -118,9 +124,11 @@ SQL>
     SQL>
     ```
 
-    Note that Bloom filter optimizations have been created. The Automatic In-Memory performance feature relies on two components, Auto STS to capture SQL statements and the Auto In-Memory Task to evaluate whether it is beneficial to create In-Memory performance features. Both of these tasks run in the Auto Task framework and evaluate the SQL that has been run over time. Note that if the IM column store is under memory pressure, that is it is full enought that there are population errors and objects need to be evicted, then AIM pauses the Auto In-Memory task.
+    Note that Bloom filter optimizations have been created. Hopefully you will see the same, or similar, result in your Lab environment.
+    
+    Also note that if the IM column store is under memory pressure, that is it is full enough that there are population errors and objects need to be evicted, then AIM pauses the Auto In-Memory task.
 
-2. Next we will run an IM Activity Report to see if we can determine why AIM created the performance features that we saw in step 1.
+2. Next we will run an IM Activity Report to see if we can determine why AIM created the performance features that we saw in step 1. If you did not see any features created then this step will not create a report.
 
     Run the script *02\_auto\_im\_activity.sql*
 
@@ -292,7 +300,11 @@ SQL>
 
     This report details the IM performance features that were evaluated, whether candidate features were accepted or not, and the SQL statements that were used to evaluate any benefit.
 
-3. Now lets look at the .
+### Automatic In-Memory Management of the IM column store
+
+This section of the lab will explore how AIM populates and evicts objects based on workload usage once the column store is full, or under memory pressure. We will take a look at the object attributes, populate more objects and then review the actions taken by Automatic In-Memory and why. We will conclude by taking a look at the new Automatic In-Memory Sizing feature and how Automatic Shared Memory Management can adjust the size of the IM column store in addition to the other SGA pools to accommodate changes in workload. 
+
+3. Now lets look at the attributes that have been set as a result of enabling INMEMORY\_AUTOMATIC\_LEVEL = HIGH.
 
     Run the script *03\_aim\_attributes.sql*
 
@@ -477,7 +489,7 @@ SQL>
 
     SQL> 
     ```
-5. Now we will AIM tables in order to fill the column store and show how AIM will manage the IM column store by populating the objects that will get the most benefit and evicting objects to make room for the new objects.    
+5. Now we will populate the AIM schema tables in order to fill the column store and show how AIM will manage the IM column store by populating the objects that will get the most benefit and evicting objects to make room for the new objects.
 
     Run the script *05\_pop\_aim\_tables.sql*
 
@@ -607,7 +619,7 @@ SQL>
     SQL> 
     ```
 
-6. In this step we will review the populated segments. You may want to run this step multiple times to observe the progress of the population.
+6. In this step we will review the populated segments. You may want to run this step multiple times to observe the progress of the population. Over time you may also see the populated objects change. This is due to AIM processing and we will explore this further in the next steps.
 
     Run the script *06\_im\_populated.sql*
 
@@ -783,7 +795,7 @@ SQL>
     SQL> 
     ```
 
-8. Now we will again look at the populated segments and see if anything has changed. You may want to run this step multiple times to observe the progress of the population.
+8. Now we will again look at the populated segments and see if anything has changed. You may want to run this step multiple times to observe the progress of the population. Note that this process is not instantaneous. Once the IM column store becomes full and AIM is enabled then AIM takes over the population of the objects in the IM column store. It bases its decisions on underlying Heat Map data in addition to other access information. That is why if you review the population status over time you may see different objects being populated.
 
     Run the script *08\_im\_populated.sql*
 
@@ -878,7 +890,7 @@ SQL>
     SQL> 
     ```
 
-9. Now let's see if we can figure out what has happened with the AIM processing. This script will first capture the maximum AIM task id and will then list the task details for the last 20 tasks. It will exclude the tasks that have an action of 'NO ACTION' to make the list a bit shorter and easier to read.
+9. Now let's see if we can figure out what has happened with the AIM processing by looking at the recent AIM task details. The following script will first capture the maximum AIM task id and will list the task details for the last 20 tasks. It will exclude the tasks that have an action of 'NO ACTION' to make the list a bit shorter and easier to read.
 
     Run the script *09\_aim\_actions.sql*
 
@@ -992,7 +1004,7 @@ SQL>
           2980 ORDS_METADATA   ORDS_SCHEMAS                                                  POPULATE         DONE
           2980 ORDS_METADATA   ORDS_URL_MAPPINGS                                             POPULATE         DONE
           2980 ORDS_METADATA   SEC_KEYS                                                      POPULATE         DONE
-              2980 SH              DR$SUP_TEXT_IDX$B                                             POPULATE         FAILED
+          2980 SH              DR$SUP_TEXT_IDX$B                                             POPULATE         FAILED
           2980 SH              DR$SUP_TEXT_IDX$C                                             POPULATE         FAILED
           2980 SSB             CUSTOMER                                                      POPULATE         DONE
           2980 SSB             DATE_DIM                                                      POPULATE         DONE
@@ -1031,9 +1043,9 @@ SQL>
     SQL>
     ```
 
-Note that the tasks are being run approximately every 2 minutes. AIM tasks will be scheduled during each IMCO cycle, which is approximately every 2 minutes, when the IM column store is under memory pressure. This means that it may take a couple of cycles, or task ids, before an object is populated by AIM in the IM column store.
+    Note that the tasks are being run approximately every 2 minutes. One or more AIM tasks will be scheduled during each IMCO cycle, which is approximately every 2 minutes, when the IM column store is under memory pressure. This means that it may take a couple of cycles, or task ids, before an object is populated by AIM in the IM column store because it may require the eviction of less frequently used objects.
 
-10. Let's take a look at the Heat Map statistics for the segments. Although Heat Map is not used directly by AIM, and does not have to be enabled for AIM to work, it does give us an easy way to look at the usage statistics that AIM does base its decisions on.
+10. Let's take a look at the Heat Map statistics for the segments. Although Heat Map is not used directly by AIM, and does not have to be enabled for AIM to work, it does give us an easy way to look at the basic usage statistics which AIM does base its decisions on in underlying data dictionary views.
 
     Run the script *10\_hm\_stats.sql*
 
@@ -1208,14 +1220,15 @@ Note that the tasks are being run approximately every 2 minutes. AIM tasks will 
     SQL> 
     ```
 
+    Notice that the buffer cache has been shrinking in order to allow the In-Memory Area to grow. Also note that this is not an instantaneous process. This happens over time to prevent large swings in allocations and try to prevent performance degradation from temporary spikes in workload.
+
+
 ## Conclusion
 
-This lab demonstrated how the new INMEMORY\_AUTOMATIC\_LEVEL = HIGH feature works and how AIM level high can enable the automatic management of the contents of IM column store. This means no more having to try and figure out which objects would get the most benefit from being populated. Now the database will do it for you. We also showed that AIM can now enable IM performance features automatically based on usasge and how the IM column store can be resized automatically based on workload requirements as part of Automatic Shared Memory Management.
-
-You may now **proceed to the next lab**.
+This lab demonstrated how the new INMEMORY\_AUTOMATIC\_LEVEL = HIGH feature works and how AIM level high can enable the automatic management of the contents of IM column store. This means no more having to try and figure out which objects would get the most benefit from being populated. Now the database will do it for you. We also tried to show that AIM can enable IM performance features automatically based on usage, and how the IM column store can be resized automatically based on workload requirements as part of Automatic Shared Memory Management.
 
 ## Acknowledgements
 
 - **Author** - Andy Rivenes, Product Manager,  Database In-Memory
 - **Contributors** -
-- **Last Updated By/Date** - Andy Rivenes, July 2024
+- **Last Updated By/Date** - Andy Rivenes, Product Manager, Database In-Memory, August 2024

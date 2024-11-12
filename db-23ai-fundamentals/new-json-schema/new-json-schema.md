@@ -15,8 +15,14 @@ The objective of this lab is to familiarize you with JSON Schema validation in O
 
 ## Task 1: Understanding JSON Schema Validation
 
-1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
+1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
     ![click SQL](images/im1.png =50%x*)
+
+    Using the ADMIN user isn’t typically advised due to the high level of access and security concerns it poses. **However**, for this demo, we’ll use it to simplify the setup and ensure we can show the full range of features effectively. 
+
+2. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
+
+    ![click SQL](images/simple-db-actions.png =50%x*)
 
 2. We will define a JSON schema that specifies the structure and constraints for vehicle information. The schema will enforce that the JSON object has three mandatory properties: "make" (a string), "model" (a string), and "year" (an integer between 1886 and the current year).
 

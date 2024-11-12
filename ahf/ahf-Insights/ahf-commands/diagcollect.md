@@ -2,9 +2,8 @@
 # AHF Incident Diagnostic Collections 
 
 ## Introduction
-Welcome to the "AHF Incident Diagnostic Collections" lab.  In this lab you will learn about AHF diagnostic collections and then be guided through  
-viewing and generating AHF Diagnostic Collections.  First we will check that AHF knows about the Incidents you generated in the previous labs   
-and then learn how to check diagnostic collections for those Incidents.
+Welcome to the "AHF Incident Diagnostic Collections" lab.  In this lab you will learn about AHF diagnostic collections and then be guided through viewing and generating AHF Diagnostic Collections.  
+First we will check that AHF knows about the Incidents you generated in the previous labs and then learn how to check diagnostic collections for those Incidents.
 
 Estimated Lab Time: 10 Minutes
 
@@ -25,7 +24,7 @@ In this lab, you will:
 AHF has 4 basic types of Incident Diagnostic Collections:-
 * Automatic, based on a limited set of detected Incidents.
     * Internal Errors, Node and Instance Evictions, hangs
-* Manual, based on a specific incident type Support Request Driven Collection (SRDC)
+* Manual, based on a specific incident type: Support Request Driven Collection (SRDC)
 * Manual, based on a looking for issues in a time range (Problem Chooser)
 * Manual, based on a time range and component (CRS, RDBMS,...) 
 > Note: Bypassing problem chooser and using long collection times for multiple components can lead to very large collections.
@@ -162,7 +161,7 @@ You will be prompted to choose:-
 
 
 ## Task 5:  Generate a manual collection using problem chooser
-1.  Simply run the `tfactl diagcollect` command and let the problem chhoser guide you.
+1.  Simply run the `tfactl diagcollect` command and let the problem chooser guide you.
 ```
 <copy>
 tfactl diagcollect
@@ -187,6 +186,9 @@ You can at this point choose one of the detected events to generate a collection
 
 You will select **ORA-00600** which will do a manual collection for the ORA-00600 
 > Note: This is equivalent to running the ORA-00600 SRDC collection directly.
+
+> Note: It can take a few minutes to complete the collection so now might be a good time to read on and then come back to this at the end if you have time. 
+
 
 Example Command Output:
 
@@ -239,8 +241,6 @@ Waiting up to 120 seconds for collection to start
 Logs are being collected to: /u01/app/oracle.ahf/data/repository/srdc_internalerror_collection_Thu_Aug_08_20_24_43_UTC_2024_node_local
 /u01/app/oracle.ahf/data/repository/srdc_internalerror_collection_Thu_Aug_08_20_24_43_UTC_2024_node_local/lvracdb-s01-2024-08-08-1452081.tfa_srdc_internalerror_Thu_Aug_08_20_24_42_UTC_2024.zip
 </pre>
-
-It can take a few minutes to complete the collection so now might be a good time to read on and then move on to the Next Lab.
 
 If you had selected 'Display Problem Categories' You would have been able to choose from one of the below categories to make your collection
 

@@ -6,6 +6,8 @@ In this lab, you will upgrade the *UPGR* database from Oracle Database 19c to 23
 
 Estimated Time: 45 minutes
 
+[Hitchhiker's Guide Lab 5](youtube:lwvdaM4v4tQ?start=1966)
+
 ### Objectives
 
 In this lab, you will:
