@@ -1,18 +1,12 @@
-# Deploy the MovieStream Catalog Microservice with Container Instances
+# Deploy the Book Management Catalog Microservice with Container Instances
 
 ## Introduction
 
-This lab picks up where lab 3 left off. We are going to explore in more detail
-another possibility to deploy the application - use Container Instances.
+This lab picks up where lab 3 left off. We will explore another deployment option using Container Instances.
 
-Oracle Cloud Infrastructure (OCI) Container Instances is a serverless compute service
-that enables you to quickly and easily run containers without managing any servers.
-Container Instances runs your containers on serverless compute optimized for container
-workloads that provides the same isolation as virtual machines.
+Oracle Cloud Infrastructure (OCI) Container Instances is a serverless compute service that enables you to quickly and easily run containers without managing any servers. Container Instances provide serverless compute optimized for container workloads with the same isolation as virtual machines.
 
-Container Instances are suitable for containerized workloads that do not require a
-container orchestration platform like Kubernetes. These use cases include: APIs,
-web applications, build and deployment jobs in CI/CD pipelines, automation tasks for cloud operations, data/media processing jobs, development or test environments, and more.
+Container Instances are suitable for containerized workloads that do not require a container orchestration platform like Kubernetes. These use cases include APIs, web applications, CI/CD jobs, cloud operations automation, data/media processing, development or test environments, and more.
 
 _Estimated Time:_ 20 minutes
 
@@ -25,142 +19,109 @@ _Estimated Time:_ 20 minutes
 
 ### Prerequisites
 
-* An Oracle Free Tier, Paid Account or Green Button
+* An Oracle Free Tier, Paid Account, or Green Button
 * Connection to the Oracle NoSQL Database Cloud Service
 * Working knowledge of bash shell
 * Working knowledge of SQL language
 
+## Task 1: Review the Code Using OCI Code Editor
 
-## Task 1: Review the code using OCI Code Editor
+In this task, we will review the code using the OCI Code Editor.
 
-In this task we will review the code using OCI Code Editor.
+1. Open the OCI Code Editor in the top-right menu.
 
-1. Open the OCI Code Editor in the top right menu.
+   ![Cloud Editor](./images/cloud-code-editor.png)
 
-    ![Cloud Editor](./images/cloud-code-editor.png)
+2. Open `application.properties` in the `global-microservices-nosql/src/main/resources` directory. This file configures the database connection and deployment settings, providing flexibility for different environments.
 
+   ![Code createTable](./images/appl-properties.png)
 
-2. Go to the Code Editor, and open the file `AppConfig.java` in the following directory
-`global-microservices-springdata-nosql/code-nosql-spring-sdk/src/main/java/com/oracle/nosql/springdatarestnosql` as shown in the screen-shot:
+3. Review the `Dockerfile` in the `global-microservices-nosql/code-nosql-jakarta-sdk` directory. This file defines the instructions for building the container image for the Book Management application.
 
-    ![Code](./images/appl-code-connection.png)
+4. Take a look at the GitHub Actions script used to build and push the container image to GitHub Container Registry. You can [review it here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/build-and-push-demo-book-image.yml) for details on container deployment.
 
-   Let's take a look at the class `AppConfig` again.  In the
-   previous lab, we ran the application code using Cloud Shell and used
-   **delegation tokens**.  In this lab, we are going to be running
-   application using **Resource Principals**.
-
-    * As discussed in the Lab 2 - Task 4: Understand Credentials, and Policies.
-To use them you have to set up a dynamic group and create a policy that grants
-the dynamic group access to a resource.
-We did it for you in **Lab 2 - Task 3: Deploy Infrastructure using Terraform**.
-Take a look at the `policy.tf` file in the following directory `global-microservices-springdata-nosql`.
-    * In this Lab, we will use a container image that we deployed in GitHub Container Registry.
-Take a look at the `Dockerfile` in the following directory `global-microservices-springdata-nosql/code-nosql-spring-sdk`, and [check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/build-and-push-demo-movie-image.yml) to review the yml script used to build the container image.
-
-    * Note: When deploying using OKE - see Lab 1, you will do the connection using **Instance Principals**. It is not the topic of this workshop but if you
-want to learn more, then read the `oracle-app-ndcs-deployment.yaml` file in the following directory `global-microservices-springdata-nosql`. [Check here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/deploy-oke-oci-cli-demo-movie.yml) to learn how to deploy using GitHub Actions.
-
-When you are done looking at code, go ahead and exit from the Code Editor.
+After reviewing the code, you can close the Code Editor.
 
 ## Task 2: Restart the Cloud Shell
 
-1. Let's get back into the Cloud Shell. From the earlier lab, you may have
-minimized it in which case you need to enlarge it. It is possible it may have
-become disconnected and/or timed out. In that case, restart it.
+1. Open the Cloud Shell. If you minimized it earlier, expand it. If it’s disconnected or timed out, restart it.
 
-    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
+   ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
-2. Execute the following environment setup shell script in the Cloud Shell to
-set up your environment. Please copy the values for `OCI_REGION(labeled: NOSQL_REGION)` and `OCI_NOSQL_COMPID.`
+2. Execute the following setup shell script in Cloud Shell to set up your environment. Please copy the values for `OCI_REGION` and `OCI_NOSQL_COMPID` (labeled `NOSQL_REGION` and `NOSQL_COMPID` in your environment):
 
     ```shell
-    <copy>
-    source ~/global-microservices-springdata-nosql/env.sh
-    </copy>
+    source ~/global-microservices-nosql/env.sh
     ```
-    ![Cloud Shell](./images/cloud-shell-result.png)
+   ![Cloud Shell](./images/cloud-shell-result.png)
 
-    Minimize the Cloud Shell.
+   Minimize the Cloud Shell.
 
 ## Task 3: Deploy Container Instances
 
+1. In the left side menu (under the Oracle Cloud banner), go to Developer Services and select **Containers & Artifacts** - **Container Instances**.
 
- 1. On left side drop down (under the Oracle Cloud banner), go to Developer Services and then Containers & Artifacts - Container Instances.
+   ![Open Containers & Artifacts](images/menu-container-instance.png)
 
-     ![Open Containers & Artifacts](images/menu-container-instance.png)
+2. Click on **Create Container Instance**. In the new window, enter **Book Management Catalog with OCI and NoSQL** as the name. Ensure the compartment is `demonosql`. Verify the 'Networking' section as shown below. Click **Next**.
 
- 2. Click on Create Container Instances. This opens up a new window.
+   ![Create Container Instances](images/create-container-instance-1.png)
 
-   Enter **Creating Scalable, Global Microservices with OCI, Spring Data, and NoSQL** as the name.
-   Other information does not need to be changed for this LiveLab. Please ensure the compartment is `demonosql.` Verify the 'Networking' section looks similar to the image below.  If not, make the necessary adjustments by opening the 'Networking' section, checking and then collapsing it. Click **Next.**
+3. Enter **demo-nosql-book-management-app** as the name. Click **Select Image**, choose **External Registry**, and enter:
+   - **Registry hostname**: `ghcr.io`
+   - **Repository**: `oracle/demo-nosql-book-management-app`
 
-     ![Create Container Instances](images/create-container-instance-1.png)
+   Then, click **Select Image** at the bottom of the screen.
 
-    Enter **demo-nosql-movie-example-app** as the name.  Click on **select image**, and
-    a new screen appears.  Choose **external registry**, and
-    enter **ghcr.io** as Registry hostname, **oracle/demo-nosql-movie-example-app** as Repository and Click **Select Image** at bottom of screen.
+   ![Create Container Instances](images/create-container-instance-2.png)
 
-       ![Create Container Instances](images/create-container-instance-2.png)
+4. Scroll down and add the following environment variables:
+   - `NOSQL_SERVICETYPE` as key and `useResourcePrincipal` as value
+   - `OCI_REGION` as key with the value copied in Task 2
+   - `OCI_NOSQL_COMPID` as key with the value copied in Task 2
 
-    Scroll down and add the following environment variables:
-     - `NOSQL_SERVICETYPE` as a key and `useResourcePrincipal` as a value
-     - `OCI_REGION` as a key and the value copied in Task 2 as a value
-     - `OCI_NOSQL_COMPID` as a key and the value copied in Task 2 as a value
+   ![Create Container Instances](images/create-container-instance-3.png)
 
-     ![Create Container Instances](images/create-container-instance-3.png)
+5. Click **Next**, review the setup, and then click **Create**.
 
-   Click **Next.**
+   ![Create Deployment](images/create-container-instance-4.png)
 
- 3. Review and Click on create.
+6. Wait a few seconds for the deployment to complete. The status will change from **Creating** to **Active**.
 
-     ![Create Deployment](images/create-container-instance-4.png)
+   ![Create Deployment](images/create-container-instance-5.png)
 
- 4. Wait few second until the deployment is created - Status will change from **Creating** to **Active.**
-
-     ![Create Deployment](images/create-container-instance-5.png)
-
-   Please copy the Public IP address.
-
+7. Copy the Public IP address of the container instance.
 
 ## Task 4: Read Data and Examine It
 
-1. Execute the following environment setup shell script in the Cloud Shell to set up your environment.
+1. Set up the Cloud Shell environment again.
 
     ```shell
-    <copy>
-    source ~/global-microservices-springdata-nosql/env.sh
-    </copy>
+    source ~/global-microservices-nosql/env.sh
     ```
-Set the variable IP_CI with the Public IP address value copied in Task 3. Execute in the Cloud Shell.
+
+2. Set the `IP_CI` environment variable to the Public IP address of the container instance.
 
     ```shell
-    <copy>
     export IP_CI=<copied Public IP address>
-    </copy>
     ```
-    **Note:** The "movie stream catalog" application is running in the container.
 
-2. Read back the data that we entered in the Lab 4 using the REST queries.
-Execute in the Cloud Shell.
+3. Use the REST API to read data from the Book Management application running in the container:
 
     ```shell
-    <copy>
-    curl  http://$IP_CI:8080/api/movie | jq
-    </copy>
+    curl http://$IP_CI:8080/api/books | jq
     ```
 
-    This will display all the rows in the table currently. You can execute the same queries that we ran in the Lab 3.
+   This will display all the rows in the table. You can execute additional queries as needed.
 
-Exit out of the Cloud Shell. You may now **proceed to the next lab.**
+Exit the Cloud Shell, and you may now **proceed to the next lab.**
 
 ## Learn More
 
-
-* [Oracle NoSQL Database Cloud Service page](https://www.oracle.com/database/nosql-cloud.html)
+* [Oracle NoSQL Database Cloud Service](https://www.oracle.com/database/nosql-cloud.html)
 * [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/index.html)
 * [About Container Instances](https://docs.oracle.com/en-us/iaas/Content/container-instances/home.htm)
 
-
 ## Acknowledgements
-* **Author** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director, NoSQL Product Development, July 2024
+
+* **Authors** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director NoSQL Development; Otavio Santana, Award-winning Software Engineer and Architect
