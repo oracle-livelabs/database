@@ -1,7 +1,3 @@
-Here’s the corrected documentation with your updates:
-
----
-
 # Video Stream - Geo Distributed Catalog Microservices Demo
 
 ## Introduction
