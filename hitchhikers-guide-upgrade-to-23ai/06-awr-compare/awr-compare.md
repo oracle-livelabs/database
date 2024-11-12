@@ -169,4 +169,4 @@ An AWR Compare Periods report, shows the difference between two periods in time 
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, August 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, November 2024
