@@ -18,7 +18,7 @@ Oracle NoSQL Database Cloud Service supports a global active table architecture 
 
 It is easy to deploy a Global Active table on OCI using Terraform. In [Lab 2 : Create singleton tables using Terraform](?lab=create-singleton-tables), you have created a singleton table called **nosql_demo**. In this lab, you will create a regional replica of this table and make it a Global Active table.
 
-## **Step 1:**  Create NoSQL Terraform configuration file
+## Task 1:  Create NoSQL Terraform configuration file
 Resources are the most important element in the Terraform language. Terraform creates a NoSQL table and a table replica as a resource. The NoSQL Terraform configuration file will define the resources to be created. In this lab the resources created are a NoSQL table and a table replica.
 
 When you create a Global Active table:
@@ -66,7 +66,7 @@ resource "oci_nosql_table_replica" "replica_montreal" {
 ```
 *Note: The definition of the singleton table (CREATE TABLE IF NOT EXISTS nosql\_demo...) must always be included in the terraform script even if the table (nosql\_demo) already exists. If the table already exists, Terraform compares the existing definition of the table to the new definition in the script. If there are no changes, the CREATE TABLE definition is ignored. If there are any changes to the definition, the terraform script overwrites the existing definition of the table with the new script (This is equivalent to an ALTER TABLE statement).If you do not include the CREATE TABLE definition in the script and terraform sees the table existing, then terraform drops the table from the  existing region.*
 
-## **Step 2:**  Use terraform to run the scripts
+## Task 2:  Use terraform to run the scripts
 
 Save the config file created above in the same folder where Terraform is installed.
 Invoke terraform and initialize the setup.
@@ -83,6 +83,7 @@ terraform apply
 ```
 Terraform shows the plan to be applied and prompts for confirmation as shown below.
 ```
+<copy>
 An execution plan has been generated and is shown below.
 Resource actions are indicated with the following symbols: + create
 
@@ -130,6 +131,7 @@ Terraform will perform the following actions:
 Do you want to perform these actions?
 Terraform will perform the actions described above.
 Only 'yes' will be accepted to approve.
+<copy>
 ```
 On confirmation, a regional replica of the *nosql_demo* table is created, converting the singleton table to a GAT.
 

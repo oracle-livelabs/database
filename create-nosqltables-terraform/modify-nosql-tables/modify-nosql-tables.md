@@ -14,7 +14,7 @@ Estimated Lab Time: 15 Minutes
 
 You can modify resources in OCI using terraform. To modify a NoSQL table, you need to create an override NOSQL Terraform configuration file with the necessary changes. You can use terraform to run the new configuration files.
 
-## **Step 1:**  Overwrite or update the NoSQL Terraform configuration file
+## Task 1:  Overwrite or update the NoSQL Terraform configuration file
 
 **Option 1: Modifying a singleton table:**
 
@@ -186,7 +186,7 @@ resource "oci_nosql_table_replica" "replica_toronto" {
 ```
 *Note: A Global Active table has a symmetrical table definition including schema, index, TTL, and storage size in all the regional replicas. If you make a change to an index, TTL or storage size in one regional replica, it is automatically applied to all other regional replicas. So it is recommended that you manage these table definitions from one region only.*
 
-## **Step 2:**  Use terraform to run the scripts
+## Task 2:  Use terraform to run the scripts
 
 Save the config files created above in the same folder where Terraform is installed.
 Invoke terraform and initialize the setup.

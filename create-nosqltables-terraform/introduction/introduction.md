@@ -32,6 +32,7 @@ In this workshop you will:
 * Basic understanding of Terraform. Read the brief introduction [here](https://developer.hashicorp.com/terraform/intro).
 * OCI Terraform provider [installed](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraforminstallation.htm).
 
+## Task 1: Getting started with using Terraform to provision and manage tables
 The Oracle NoSQL Database Cloud Service is a server-less, fully managed data store that delivers predictable single digit response times and allows application to scale on demand via provisioning API calls. There are simple steps to provision or manage singleton and Global Active tables in the Oracle NoSQL Database Cloud Service using Terraform.
 
 1. Create OCI Terraform provider configuration
@@ -49,4 +50,4 @@ You may proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance
-* **Last Updated By/Date** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance, June 2024
+* **Last Updated By/Date** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance, November 2024

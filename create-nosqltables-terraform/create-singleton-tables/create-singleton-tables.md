@@ -17,7 +17,7 @@ Oracle NoSQL Database Cloud Service is a fully managed database cloud service th
 
 To create resources in OCI, you need to configure terraform. You need to create the basic terraform configuration files for terraform provider definition, NoSQL resource definitions, authentication, and input variables.
 
-## **Step 1:**  Create OCI Terraform provider configuration
+## Task 1:  Create OCI Terraform provider configuration
 You will create a new file named **provider.tf** that contains the OCI Terraform provider definition, and also associated variable definitions. The OCI Terraform provider requires ONLY the region argument. However, you might have to configure additional arguments with authentication credentials for an OCI account based on the authentication method.
 
 The region argument specifies the geographical region in which your provider resources are created. To target multiple regions in a single configuration, you simply create a provider definition for each region and then differentiate by using a provider alias, as shown in the following example. Notice that only one provider, named **oci** is defined, and yet the oci provider definition is entered twice, once for the us-phoenix-1 region (with the alias "phx"), and once for the region us-ashburn-1 (with the alias "iad").
@@ -194,7 +194,7 @@ config_file_profile = <PROFILE_NAME>
 </copy>
 ```
 
-## **Step 2:**  Create NoSQL Terraform configuration file
+## Task 2:  Create NoSQL Terraform configuration file
 
 You will use input variables in the NoSQL configuration file while creating a table. These input variables are for the read units, write units and storage capacity of the table. You will create a file named **variables.tf** and assign values to the input variables. Click [here](https://registry.terraform.io/providers/oracle/oci/latest/docs/resources/nosql_table) to refer to Terraform documentation to check for the valid arguments or properties available for NoSQL Database. In the example, the default value of the read, write, and storage units for NoSQL table are set to 10, 10, and 1 respectively.
 
@@ -251,7 +251,7 @@ resource "oci_nosql_table" "nosql_demoKeyVal" {
 </copy>
 ```
 
-## **Step 3:**  Use terraform to run the scripts
+## Task 3:  Use terraform to run the scripts
 
 Save the config files created above in the same folder where Terraform is installed.
 Invoke terraform and initialize the setup.
@@ -270,6 +270,7 @@ terraform apply
 Terraform shows the plan to be applied and prompts for confirmation as shown below. The terraform output for the first table creation (**nosql_demo** table) is shown below.
 
 ```
+<copy>
 An execution plan has been generated and is shown below.
 Resource actions are indicated with the following symbols: + create
 
@@ -304,6 +305,7 @@ Terraform will perform the following actions:
 Do you want to perform these actions?
 Terraform will perform the actions described above.
 Only 'yes' will be accepted to approve.
+</copy>
 ```
 On confirmation, the singleton tables are created.
 
