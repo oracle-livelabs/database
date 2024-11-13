@@ -262,7 +262,7 @@ In this lab create visualizations using pre-existing performance statistics via 
       ```
 
       ```
-            WHERE
+            <copy>WHERE</copy>
       ```
 
       ```
@@ -271,7 +271,7 @@ In this lab create visualizations using pre-existing performance statistics via 
       ```
 
       ```
-            HAVING
+            <copy>HAVING</copy>
       ```
 
       ```
