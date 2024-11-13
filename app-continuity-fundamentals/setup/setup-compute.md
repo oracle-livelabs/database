@@ -21,7 +21,7 @@ For more information about Terraform and Resource Manager, please see the append
 If you already have a VCN setup, proceed to *Step 1B*.
 
 1.  Click on the link below to download the Resource Manager zip file you need to build your environment.  
-- [dbsystemrac.zip](https://objectstorage.uk-london-1.oraclecloud.com/p/Wg4n8mJxd9bwfANNP1cHyTT95-6R201K0Z2VwDRFKcURy0H9mQhIrjIf8UM5rljE/n/lrojildid9yx/b/labtest_bucket/o/dbsystemrac.zip)
+- [dbsystemrac.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/dbsystemrac.zip)
 
 2.  Save in your downloads folder.
 3.  Login to Oracle Cloud
@@ -89,7 +89,7 @@ If you just completed Step 1A, please proceed to [Step 2](#STEP2:TerraformPlan(O
 If you do not know how to add egress rules, skip to the Appendix to add rules to your VCN.  *Note:  We recommend using our stack for ease of deployment and to reduce the potential for error.*
 
 1. Click on the link below to download the Resource Manager zip file you need to build your environment.  
-     - [db_system_rac.zip](https://objectstorage.uk-london-1.oraclecloud.com/p/pPV7w50bgS2qV-lLA7KQFEN4PN_ulXyrrYz1HbixQZw/n/lrojildid9yx/b/labtest_bucket/o/db_system_rac.zip)
+-[db_system_rac.zip] (https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/dbsystemrac.zip)
 
 2. Save in your downloads folder.
 3. Open up the hamburger menu in the left hand corner.  Choose the compartment in which you would like to install.  Choose **Resource Manager > Stacks**.  
@@ -402,4 +402,4 @@ If you have other compute instances you are not using, you can go to those insta
 
 * **Author** - Rene Fontcha, Master Principal Platform Specialist, NA Technology
 * **Contributors** - Kay Malcolm, Product Manager, Database Product Management
-* **Last Updated By/Date** - Kay Malcolm, October 2020
+* **Last Updated By/Date** - Dan Williams, November 2024
