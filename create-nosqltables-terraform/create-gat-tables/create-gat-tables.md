@@ -135,6 +135,8 @@ Only 'yes' will be accepted to approve.
 ```
 On confirmation, a regional replica of the *nosql_demo* table is created, converting the singleton table to a GAT.
 
+You may proceed to the next lab.
+
 ## Learn More
 
 * [Global Active Tables in NDCS](https://docs.oracle.com/en/cloud/paas/nosql-cloud/gasnd/)

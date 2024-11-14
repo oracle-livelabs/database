@@ -309,6 +309,8 @@ Only 'yes' will be accepted to approve.
 ```
 On confirmation, the singleton tables are created.
 
+You may proceed to the next lab.
+
 ## Learn More
 
 * [Deploying Oracle NoSQL Table Using Terraform and OCI Resource Manager](https://docs.oracle.com/en/cloud/paas/nosql-cloud/hknsq/)
