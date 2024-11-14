@@ -56,7 +56,7 @@ If you already have a VCN setup, proceed to *Step 1B*.
     - **DB System Node Shape**: Choose VMStandardE2.4, VMStandard2.4, or VMStandard2.2 (Note that choosing VMStandard2.2 may take some time to create the system)
     - **DB edition**: Enterprise Edition Extreme Performance is required for a RAC database
     - **Database Admin Password**: Database Admin Password must contain two UPPER-case characters, and two special characters (\_, \#) and be 12-30 characters in length (remember this value)
-    - **Oracle Database Version**: Choose 19.7.0.0
+    - **Oracle Database Version**: Choose 19c
 
 
     *Note: If you used the Oracle Cloud Shell to create your key, make sure you paste the pub file in a notepad, remove any hard returns.  The file should be one line or you will not be able to login to your compute instance*
@@ -122,7 +122,7 @@ If you do not know how to add egress rules, skip to the Appendix to add rules to
     - **DB System Node Shape**: Choose VMStandard2.4 or VMStandard2.2 (Note that choosing VMStandard2.2 may take some time to create the system)
     - **DB edition**: Enterprise Edition Extreme Performance is required for a RAC database
     - **Database Admin Password**: Database Admin Password must contain two UPPER-case characters, and two special characters (\_, \#) and be 12-30 characters in length. For this workshop, we recommend setting your password to *W3lc0m3#W3lc0m3#*.  However you may choose the password of your preference (write the password down, you will need it for most labs.)
-    - **Oracle Database Version**: Choose 19.7.0.0
+    - **Oracle Database Version**: Choose 19c
 
     *Note: If you used the Oracle Cloud Shell to create your key, make sure you paste the pub file in a notepad, remove any hard returns.  The file should be one line or you will not be able to login to your compute instance*
 
