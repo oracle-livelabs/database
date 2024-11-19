@@ -2,7 +2,7 @@
 
 In this lab, you will go through the steps to enable and explore Ops Insights for HeatWave MySQL DB System which includes ML based resource usage trending, capacity planning, and SQL Insights.
 
-Estimated time: 20 minutes
+Estimated time: 30 minutes
 
 ### Objectives
 
@@ -23,6 +23,8 @@ Estimated time: 20 minutes
 2.  Click on **Enable Demo Mode** to enable Demo Mode.
 
       ![Enable Demo Mode](./images/opsi-enable-demo.png " ")
+
+      **Note:** Steps 3-4 is a one-time setup that ensures data access across the tenancy. If you are re-enabling **Demo Mode** and do not see these prompts, it means the policy has already been applied.
 
 3.  On the **Complete prerequisites** pop-up click on **Apply**. When enabling demo mode, a policy is created to allow read-only access to the demo tenancy's data. It may take up to 1 or 2 minutes for the policy to allow data access across the tenancies.  If you are receiving authorization errors you may need to refresh the page until they have cleared, or you will need to engage an administrator or user with elevated privileges to create the policy.
 
@@ -105,22 +107,30 @@ Estimated time: 20 minutes
 
 4.  Under the **Database Display Name** column, select the row corresponding to the **employeesdb** database.
 
-      ![Left Pane](./images/employeesdb-database.png " ")
+      ![Left Pane](./images/employees-database.png " ")
 
 5.  Check the **Utilization (%)** and **Usage Change (%)** for database **employeesdb**.
     
     * Utilization (%) -  Utilization percentage for the 90th percentile value of the daily average storage usage over the selected time period
     * Usage Change (%): Percentage change in the linear trend of storage usage over the selected time
 
+    ![Left Pane](./images/employeesdb-database.png " ")
+
 6.  The **Trend and Forecast** chart displays historical time series plots related to CPU allocation and usage for the selected database **employeesdb**.
 
       ![Left Pane](./images/trend-and-forecast.png " ")
 
-7.  Historical CPU Usage (dark solid green line) is the Avg Usage - average value of daily (hourly) CPU usage data
+7.  Historical CPU Usage (dark solid green line) is the Avg Usage - average value of daily (hourly) CPU usage data.
 
-8.  Avg Usage Forecast - forecast of Avg Usage data using linear forecast model (Dashed Green line) and the Max Allocation - maximum allocation of CPU for the database.
+      ![Left Pane](./images/trend-and-forecast-green-solid.png " ")
+
+8.  Avg Usage Forecast - forecast of Avg Usage data using linear forecast model (dashed green line) and the Max Allocation - maximum allocation of CPU for the database.
+
+      ![Left Pane](./images/trend-and-forecast-green-dashed.png " ")
 
 9.  The value **0.17** AVG ACTIVE CPU USAGE is forecasted for after 15 days for Avg usage of CPU.
+
+      ![Left Pane](./images/trend-and-forecast-value.png " ")
 
 10.  Select **Max Usage** from the legend on the right side. The red line is **Max Usage** - maximum value of daily (hourly) CPU usage data for database **employeesdb**.
 
@@ -185,11 +195,7 @@ Estimated time: 20 minutes
 
       ![Left Pane](./images/utilization-forecast.png " ")
 
-4.  In the **Trend & Forecast** chart view the storage trend and usage forecast for the selected database.
-
-      ![Left Pane](./images/storage-trend-forecast.png " ")
-
-5.  Select **Max usage** and **Max usage forecast** from the right panel.
+4.  In the **Trend & Forecast** chart view the storage trend and usage forecast for the selected database. View **Max usage** and **Max usage forecast** from the right panel.
 
       ![Left Pane](./images/storage-trend-max.png " ")
 
@@ -240,26 +246,47 @@ In this lab create visualizations using pre-existing performance statistics via 
 
       ![SQL Explorer](./images/sql-explorer-main.png " ")
 
-4. Enter the following SQL in the SQL query section (copy & paste the statement line by line)
+4. Select **Resource type** as **MySQL**.
+
+      ![SQL Explorer](./images/sql-explorer-database.png " ")
+
+5. Remove default **\*** from SELECT statement line.
+
+      ![SQL Explorer](./images/sql-explorer-remove-select.png " ")
+
+6. Enter the following SQL in the SQL query section (copy & paste the statement line by line)
 
       ```
-      <copy>
-            SELECT ROLLUP_TIME_UTC, AVG(TOTAL_LATENCY/EXEC_COUNT)/1000000000 as AVG_LATENCY_SEC
-            WHERE
-            GROUP BY ROLLUP_TIME_UTC
-            HAVING
-            ORDER BY ROLLUP_TIME_UTC ASC</copy>
+            SELECT <copy> ROLLUP_TIME_UTC, AVG(TOTAL_LATENCY/EXEC_COUNT)/1000000000 as AVG_LATENCY_SEC
+            </copy>
+      ```
+
+      ```
+            <copy>WHERE</copy>
+      ```
+
+      ```
+            GROUP BY <copy> ROLLUP_TIME_UTC
+            </copy>
+      ```
+
+      ```
+            <copy>HAVING</copy>
+      ```
+
+      ```
+            ORDER BY <copy>ROLLUP_TIME_UTC ASC</copy>
       ```
 
       ![SQL Query](./images/sql-query.png " ")
 
-5. Click **Run** to execute the query.
+7. Click **Run** to execute the query.
 
-6. This will display the query result in a tabular format.
+8. This will display the query result in a tabular format.
 
       ![SQL Output](./images/sql-query-table.png " ")
 
-7. Under the **Visualization** tab on the right pane, select the following -
+9. Under the **Visualization** tab on the right pane, select the following -
 
       **Chart type** : **Area Chart**
 
@@ -271,17 +298,17 @@ In this lab create visualizations using pre-existing performance statistics via 
 
       ![SQL Visualization](./images/sql-query-visual.png " ")
 
-9. This will display the visualization as an **Area Chart**.
+10. This will display the visualization as an **Area Chart**.
 
-10. Click on **Clear** to clear the query section.
+11. Click on **Clear** to clear the query section.
 
       ![SQL Visualization](./images/sql-explorer-clear.png " ")
 
-10. Click on **Advanced** Mode to view **SQL Explorer** in advanced mode. The advanced mode give you more control over the SQL queries that you are running against your database to view database performance.
+12. Click on **Advanced** Mode to view **SQL Explorer** in advanced mode. The advanced mode give you more control over the SQL queries that you are running against your database to view database performance.
 
       ![SQL Visualization](./images/sql-explorer-advanced.png " ")
 
-11. This will take you to the **SQL Explorer Advanced** Mode page. Advanced mode can be used to execute your own custom queries and obtain more information above the SQLs running in the database.
+13. This will take you to the **SQL Explorer Advanced** Mode page. Advanced mode can be used to execute your own custom queries and obtain more information above the SQLs running in the database.
 
       ![SQL Visualization](./images/sql-explorer-advanced-main.png " ")
 
@@ -289,4 +316,4 @@ In this lab create visualizations using pre-existing performance statistics via 
 
 - **Author** - Sindhuja Banka, HeatWave MySQL Product Manager
 - **Contributors** - Sindhuja Banka, Sriram Vrinda, Anand Prabhu, Murtaza Husain
-- **Last Updated By/Date** - Sindhuja Banka, October 2024
+- **Last Updated By/Date** - Sindhuja Banka, November 2024
