@@ -1,0 +1,37 @@
+{
+    "workshoptitle": "Use Terraform to Create and Modify Tables in Oracle NoSQL Database Cloud Service",
+    "help": "livelabs-help-db_us@oracle.com",
+	"tutorials": [
+        {
+          "title": "Introduction",
+          "description": "This is the inroduction to the lab",
+          "filename":"../../introduction/introduction.md"
+        },
+        {
+          "title": "Get Started",
+          "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable).",
+          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+        },
+        {
+          "title": "Lab 1: Create an API Sign-In Key",
+          "filename":"../../create-api-signing-keys/create-api-signing-keys.md"
+        },
+		  {
+          "title": "Lab 2: Use Terraform to Create Singleton Tables",
+          "filename": "../../create-singleton-tables/create-singleton-tables.md"
+        },
+        {
+          "title": "Lab 3: Use Terraform to Create a Global Active Table",
+          "filename": "../../create-gat-tables/create-gat-tables.md"
+        },
+        {
+          "title": "Lab 4: Use Terraform to Modify NoSQL Tables",
+          "filename": "../../modify-nosql-tables/modify-nosql-tables.md"
+        },
+        {
+          "title": "Need Help?",
+          "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+          "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

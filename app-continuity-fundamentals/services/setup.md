@@ -48,7 +48,7 @@ Copy the following commands into your terminal. These commands download the file
     whoami   
     cd /home/oracle/
 
-    wget https://objectstorage.uk-london-1.oraclecloud.com/p/vKlh5hZ1wX-YB4K-ou5zNrL4GCsfQmj1z1y8LhIsFdU/n/lrojildid9yx/b/labtest_bucket/o/setupDB.sh.gz
+    wget https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/setupDB.sh.gz
 
     gunzip setupDB.sh.gz;
 
