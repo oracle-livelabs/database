@@ -30,14 +30,14 @@ This lab assumes you have:
     mysqlsh --user=admin --password=<password> --host=<mysql_private_ip_address> --port=3306 --sql
     </copy>
     ```
-
+ .  ---
     ```text
     <copy>
     USE airportdb;
     SET SESSION use_secondary_engine=off;
     </copy>
-    ```
-
+    ````
+    ---
     ```text
     <copy>
     SELECT
@@ -67,7 +67,7 @@ This lab assumes you have:
     SET SESSION use_secondary_engine=on;
     </copy>
     ```
-
+    ---
     ```text
     <copy>
     SELECT
@@ -100,13 +100,13 @@ Query 2: Find top 10 airlines selling the most tickets for planes taking off fro
     mysqlsh --user=admin --password=<password> --host=<mysql_private_ip_address> --port=3306 --sql
     </copy>
     ```
-
+    ---
     ```text
     <copy>
     SET SESSION use_secondary_engine=off;
     </copy>
     ```
-
+    ---
     ```text
     SELECT
     airline.airlinename,
@@ -134,7 +134,7 @@ Query 2: Find top 10 airlines selling the most tickets for planes taking off fro
     SET SESSION use_secondary_engine=on;
     </copy>
     ```
-
+    ---
     ```text
     <copy>
     SELECT
@@ -167,14 +167,14 @@ Query 3: Find the number of bookings that Neil Armstrong and Buzz Aldrin made fo
     mysqlsh --user=admin --password=<password> --host=<mysql_private_ip_address> --port=3306 --sql
     </copy>
     ```
-
+    ---
     ```text
     <copy>
     USE airportdb;
     SET SESSION use_secondary_engine=off;
     </copy>
     ```
-
+    ---
     ```text
     <copy>
     SELECT
@@ -203,7 +203,7 @@ Query 3: Find the number of bookings that Neil Armstrong and Buzz Aldrin made fo
     SET SESSION use_secondary_engine=on;
     </copy>
     ```
-
+    ---
     ```text
     <copy>
     SELECT
