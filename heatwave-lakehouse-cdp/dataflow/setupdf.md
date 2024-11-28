@@ -1,6 +1,7 @@
 
-# Setting up Oracle Cloud Infrastructure Data Flow 
+## Setting up Oracle Cloud Infrastructure Data Flow 
 
+### Introduction
 The labs shows how we can set up the OCI Data Flow pyspark application and extract data from ***demo-events-raw-mysqlhw*** bucket ,consolidate the datasets and load the data to ***demo-events-silver-mysqlhw*** bucket .
 
 Setting up OCI Data Flow
@@ -53,7 +54,7 @@ We'll create a user, a group, and policies to understand the concept.
 
 1. **User Policies** : Data Flow requires policies to be set in IAM to access resources in order to manage and run applications. We categorize the Data Flow users into two groups for clear separation of authority administrator and users:
 
-    * From the OCI Services menu, click `Identity and Security` and in identity click `Group`
+    * From the OCI Services menu, click `Identity and Security` -> `Domains` -> `Default domain` and  `Groups`
 
         ![groups](images/df-groups001.png " ")
 
@@ -61,7 +62,7 @@ We'll create a user, a group, and policies to understand the concept.
 
         ![admin](images/dataflowadminuser.png " ")
 
-    * Click on your new group to display it. Your new group is displayed.Add users to the groups
+    * Click on your new group to display it. Your new group is displayed. Assign user to the groups
 
         ![admin user](images/addusertodfadmingroup.png " ")
 
@@ -211,5 +212,5 @@ You may now **proceed to the next lab**
 ## Acknowledgements
 * **Author** - Biswanath Nanda, Principal Cloud Architect, North America Cloud Infrastructure - Engineering
 * **Contributors** -  Biswanath Nanda, Principal Cloud Architect,Bhushan Arora ,Principal Cloud Architect,Sharmistha das ,Master Principal Cloud Architect,North America Cloud Infrastructure - Engineering
-* **Last Updated By/Date** - Biswanath Nanda, March 2024
+* **Last Updated By/Date** - Biswanath Nanda, November 2024
 

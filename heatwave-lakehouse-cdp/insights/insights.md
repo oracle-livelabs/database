@@ -2,13 +2,13 @@
 
 ![Data Science](images/ds-banner.jpg)
 
-## Introduction
+### Introduction
 
 In this task, we will be using already created compute instance and will be using the training data set 
 to build and Deploy a predictive ML model on OCI platform which will identify the probablity of failure of a sensor device . The ML API URL once generated will be used by the Fn function code to evaluate the probablity of device when exposed to Live sensor datasets from stereaming layer .
 
 
-Estimated Time: 30 Minutes
+_Estimated Lab Time_: 30 Minutes
 
 ### Objectives
 
@@ -100,7 +100,8 @@ In this section, you will:
       ```
       <copy> http://<compute-VM-IP>:5000/predict  </copy>
       ```
+You may now **proceed to the next lab**
 ## Acknowledgements
 * **Author** - Biswanath Nanda, Principal Cloud Architect, North America Cloud Infrastructure - Engineering
 * **Contributors** -  Biswanath Nanda, Principal Cloud Architect,Bhushan Arora ,Principal Cloud Architect,Sharmistha das ,Master Principal Cloud Architect,North America Cloud Infrastructure - Engineering
-* **Last Updated By/Date** - Biswanath Nanda, March 2024
+* **Last Updated By/Date** - Biswanath Nanda, November 2024

@@ -1,10 +1,14 @@
 
-# Load datasets from demo-events-silver-mysqlhw to MYSQL HW
+## Load datasets from demo-events-silver-mysqlhw to MySQL HW
+
+### Introduction
 
 The labs shows how to load the datasets from demo-events-silver-mysqlhw to MYSQL HW
 - Run Autoload to infer the schema and estimate capacity
 - Load complete T\_AGGR\_DEVICE\_PRED\_HOUR table from Object Store into MySQL HeatWave
-*Estimated Lab Time*: 30 mins
+
+
+_Estimated Lab Time_: 30 mins
 
 ### Objectives
 
@@ -20,12 +24,12 @@ In this lab you will learn about how to run Autoload to infer the data
 
 Before you Begin with Data Flow lab, you must have:
 
-* Previous Labs have been completed
-* We will use the PAR URL Created in previous lab for the bucket e2e-demo-events-silver-mysqlhw
+- Previous Labs have been completed
+- We will use the PAR URL Created in previous lab for the bucket e2e-demo-events-silver-mysqlhw
 
 ## Task 1: Run Autoload to infer the schema and estimate capacity required to upload the aggregate device data 
 
-1. Aggregated data information is the csv files in the object store for which we have created a PAR URL in the earlier task. Enter the following commands one by one and hit Enter.
+1. Aggregated data information is in the csv files in the object store for which we have created a PAR URL in the earlier task. Now run the following commands:
 
 2. This sets the schema, in which we will load table data into.  
 
@@ -50,7 +54,7 @@ Before you Begin with Data Flow lab, you must have:
     "file": [{"par": "PAR URL"}]
     }] }]';</copy>
     ```
-    Be sure to include the PAR URL inside the quotes " " and it should look like as in following:
+    Be sure to include the PAR URL inside the quotes " " and above should look like as in following:
 
     ![autopilot set table example](./images/set-load-table-examples.png "autopilot set table example")
 
@@ -89,7 +93,7 @@ Before you Begin with Data Flow lab, you must have:
     ![log table output](./images/log-create-table-output.png "log table output dryrun")
 
 
-8. The execution result contains the SQL statements needed to create the table. As there was no header in the csv file generated,  Now execute the following **CREATE TABLE** command by replacing your **PAR Value**. In following create table we have used the required column name for this lab.
+8. The execution result contains the SQL statements needed to create the table. As there was no header in the csv file generated, now execute the following **CREATE TABLE** command by replacing your **PAR Value**. In following create table we have mentioned the required column name for this lab.
  
  **NOTE: Ensure to Replace you PAR VALUE after copying the following command**
 
@@ -126,6 +130,6 @@ Before you Begin with Data Flow lab, you must have:
 You may now **proceed to the next lab**
 ## Acknowledgements
 * **Author** -  Bhushan Arora, Principal Cloud Architect, North America Cloud Infrastructure - Engineering
-* **Contributors** -  Biswanath Nanda, Principal Cloud Architect,Bhushan Arora ,Principal Cloud Architect,Sharmistha das ,Master Principal Cloud Architect,North America Cloud Infrastructure - Engineering
-* **Last Updated By/Date** - Bhushan Arora, March 2024
+* **Contributors** -  Biswanath Nanda, Principal Cloud Architect,Bhushan Arora ,Principal Cloud Architect
+* **Last Updated By/Date** - Bhushan Arora, November 2024
 

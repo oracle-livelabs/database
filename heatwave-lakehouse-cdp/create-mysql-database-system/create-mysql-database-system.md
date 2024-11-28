@@ -4,19 +4,19 @@
 
 This lab walks you through the steps to create **MySQL Database System** in Oracle Cloud Infrastructure.
 
-Estimated Time: 40 minutes
+_Estimated Lab Time_: 40 minutes
 
 ### Objectives
 
 In this lab, you will:
-* Be able to launch MySQL Heatwave Database System in Oracle Cloud.
+- Be able to launch MySQL Heatwave Database System in Oracle Cloud.
 
 ### Prerequisites
 
 This lab assumes you have:
-* An Oracle account
-* Privileges to use Oracle Cloud resources
-* Compartment and VCN has been created. 
+- An Oracle account
+- Privileges to use Oracle Cloud resources
+- Compartment and VCN has been created. 
 
 Note - This lab "**2c -Create MySQL Database HeatWave**" is independent of the previous lab **2b**.Once the above Prerequisites are met the below steps can be executed.
 
@@ -71,4 +71,4 @@ You may now proceed to the next lab.
 ## Acknowledgements
 * **Author** - Bhushan Arora, Principal Cloud Architect, North America Cloud Infrastructure - Engineering
 * **Contributors** - Bhushan Arora ,Principal Cloud Architect,Biswanath Nanda, Master Principal Cloud Architect,North America Cloud Infrastructure - Engineering
-* **Last Updated By/Date** - Bhushan Arora, March 2024
+* **Last Updated By/Date** - Bhushan Arora, November 2024

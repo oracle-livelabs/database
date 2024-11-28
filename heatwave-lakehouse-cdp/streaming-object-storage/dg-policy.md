@@ -1,6 +1,10 @@
-# Creating dynamic group to access streams/objects.
+# Creating dynamic group to access streams/objects
 
-Estimated Time: 5 minutes
+### Introduction
+
+In this lab we will create the dynamic group
+
+_Estimated Lab Time_: 5 minutes
 
 ### Objectives
 In this lab, you will:
@@ -43,26 +47,27 @@ In this lab, you will:
 
     In following copy & Replace the OCID of compartment **e2e-demo-specialist-eng** 
 
-  ```
-  <copy>
-  allow dynamic-group function-dynamic-group to manage stream-family in compartment id resource.compartment.id = ‘ocid1.compartment.oc1……xyz’
-  allow dynamic-group function-dynamic-group to manage stream-pull in compartment id resource.compartment.id = ‘ocid1.compartment.oc1……xyz’
-  allow dynamic-group function-dynamic-group to manage streams in compartment id resource.compartment.id = ‘ocid1.compartment.oc1……xyz’
-  allow dynamic-group function-dynamic-group to manage stream-pools in compartment id resource.compartment.id = ‘ocid1.compartment.oc1……xyz’
-  allow dynamic-group function-dynamic-group to manage objects in compartment id resource.compartment.id = ‘ocid1.compartment.oc1……xyz’
-  </copy>
-  ```
+    ```
+    <copy>
+    allow dynamic-group function-dynamic-group to manage stream-family in compartment id resource.compartment.id = ‘ocid1.compartment.oc1……xyz’
+    allow dynamic-group function-dynamic-group to manage stream-pull in compartment id resource.compartment.id = ‘ocid1.compartment.oc1……xyz’
+    allow dynamic-group function-dynamic-group to manage streams in compartment id resource.compartment.id = ‘ocid1.compartment.oc1……xyz’
+    allow dynamic-group function-dynamic-group to manage stream-pools in compartment id resource.compartment.id = ‘ocid1.compartment.oc1……xyz’
+    allow dynamic-group function-dynamic-group to manage objects in compartment id resource.compartment.id = ‘ocid1.compartment.oc1……xyz’
+    </copy>
+    ```
 
-It should like as in following screen shots:
+    Above Create Policy should like as in following screen shots:
 
-![create_policies_allow](./images/create_policy_builder.png)
+    ![create_policies_allow](./images/create_policy_builder.png)
 
 7. Now you should see **function-dynamic-group** has been created
 
     ![allow-dynamic-group](./images/allow_dg_to_manage.png)
 
+You may now **proceed to the next lab**
 
 ## Acknowledgements
 * **Author** - Bhushan Arora, Principal Cloud Architect, North America Cloud Infrastructure - Engineering
 * **Contributors** -  Biswanath Nanda, Master Principal Cloud Architect,Bhushan Arora ,Principal Cloud Architect, Lovelesh Saxena, Principal Cloud Architect
-* **Last Updated By/Date** - Bhushan Arora, Sep 2024
+* **Last Updated By/Date** - Bhushan Arora, November 2024

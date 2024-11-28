@@ -1,20 +1,25 @@
 # Configuring and using OCI Functions to consume streamming data from OCI Streaming Topic.
-# Connect to service connector Hub and trigger the Fn.
-## Introduction
+
+### Introduction
 
 This lab focus on creating the Function ,deploying the function script and getting it connected to OCI service connector hub to get automatically triggered once the streaming data falls on the OCI streaming topic.Here the function is used to perform the below tasks :
 
-a) Connect to OCI streaming topic to receive the data streams.
+- Connect to OCI streaming topic to receive the data streams.
 
-b) Pass the data stream to ML model API and write the streaming data along with prediction score to
+- Pass the data stream to ML model API and write the streaming data along with prediction score to
    Object Storage and MySQL table.
 
-Estimated Time: 75 minutes
+_Estimated Lab Time_: 75 minutes
+
+### Objectives
+- Create a Function Application
+- Configure and Invoke a Function
+- Create Service Connector
 
 ### Prerequisites
 
- Completetion of previous labs.
- The OCI Fn is being configured using the tenancy Admin.
+- Completetion of the previous labs.
+ 
 ## Task 1: Create a Function Application
 
 1. From the OCI services menu click **Policies** under **Identity** , Create "FunctionApplicationPolicies" into the name section and type "Allow functions to work" in the description section. Scroll down to the Policy statements section. Click the **+ Another Statement**.
@@ -61,7 +66,7 @@ Estimated Time: 75 minutes
 As a continuation of task 1 , folllow the steps shown in the OCI console to configure the Function.
 Here we will be performing the below steps to Launch Cloud Console ,Create, deploy, and invoke your python function.
 
-1. Follow steps No1 to No7 given on the OCI console to set up OCI cloud shell and listing the Applications.
+1. Follow steps No. 1 to No. 7 given on the OCI console to set up OCI cloud shell and listing the Applications.
    
     ![Getting Started ](images/func-cloudshell.png)
 
@@ -86,10 +91,9 @@ Here we will be performing the below steps to Launch Cloud Console ,Create, depl
 4.  Now change the content of <b>func.py</b> and <b>requirements.txt</b> file.
     Function Script for function :
     Scripts to be changed and moved to the OCI cloud console - func.py ,func.yaml,requirements.txt
-    Link to download the Function script and Dependencies : [`MYSQLLakehouse_labfiles.zip`](https://objectstorage.us-ashburn-1.oraclecloud.com/p/RPka_orWclfWJmKN3gTHfEiv-uPckBJTZ3FV0sESZ3mm3PDCQcVDCT-uM2dsJNGf/n/orasenatdctocloudcorp01/b/MYSQLLakehouse_labfiles/o/MYSQLLakehouse_labfiles.zip)
+    Link to download the Function script and Dependencies : [`MYSQLLakehouse_labfiles.zip`](https://objectstorage.us-ashburn-1.oraclecloud.com/p/RPka_orWclfWJmKN3gTHfEiv-uPckBJTZ3FV0sESZ3mm3PDCQcVDCT-uM2dsJNGf/n/orasenatdctocloudcorp01/b/MYSQLLakehouse\_labfiles/o/MYSQLLakehouse_labfiles.zip)
 
-    *** Download Referece 
-    Path     \MYSQLLakehouse_labfiles\Lab5\OCI Function\func.py
+    ### Download Referece Path:     MYSQLLakehouse_labfiles\Lab5\OCI Function\func.py
     [Refer to downloadbled MYSQLLakehouse_labfiles.zip]
     Changes in the func.py script is as below:
        ```
@@ -152,7 +156,8 @@ Here we will be performing the below steps to Launch Cloud Console ,Create, depl
     ```
 Congratulations! You've just created, deployed, and invoked your first function using Oracle Functions!
 
-### Connect to service connector Hub and trigger the Fn.
+### connect to service connector Hub and trigger the Fn.
+
 ## Task 3: Create Service Connector
 
 For simple archiving operations, we don’t need to write a single line of code. Instead, we just create a service connector and point it at the source (stream) and destination (bucket). Navigate to the Service Connector Hub via the burger menu (or by searching for it).
@@ -184,5 +189,5 @@ You may now **proceed to the next lab**
 ## Acknowledgements
 
 * **Author** -  Biswanath Nanda - Master Principal Cloud Architect
-* **Contributors** -  Lovelesh Saxena - Principal Cloud Architect, Biswanath Nanda -Master Principal Cloud Architect, Bhushan Arora - Principal Cloud Architect , Sharmistha das - Master Principal Cloud Architect (North America Cloud Infrastructure - Engineering)
-* **Last Updated By/Date** - Biswanath Nanda, Oct 2024
+* **Contributors** -  Lovelesh Saxena - Principal Cloud Architect, Biswanath Nanda -Master Principal Cloud Architect, Bhushan Arora - Principal Cloud Architect 
+* **Last Updated By/Date** - Biswanath Nanda, November 2024

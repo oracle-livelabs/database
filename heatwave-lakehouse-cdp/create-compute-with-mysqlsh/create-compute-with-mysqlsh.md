@@ -1,6 +1,6 @@
 # Create Compute and MySQL Shell
 
-## Introduction
+### Introduction
 
 In this lab we will be creating a compute intance which will solve the below purpose for the workshop :
 
@@ -19,9 +19,9 @@ _Estimated Lab Time:_ 45 minutes
 In this lab, you will be guided through the following tasks:
 
 - Create SSH Key on OCI Cloud
+- Copy public SSH key value to Notepad
 - Create Compute Instance
-- Setup Compute Instance with MySQL Shell Client
-
+- Connect to Compute and Install MySQl Shell
 
 ### Prerequisites
 

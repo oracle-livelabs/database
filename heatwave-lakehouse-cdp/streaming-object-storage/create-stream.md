@@ -1,15 +1,18 @@
 # Creating the OCI stream service and build the synthetic data generator.
-Here we will be creating the OCI stream service and will be deploying the Python Streaming Simulator code base to the Compute VM created in ***Lab2B***
 
-Estimated Time: 30 minutes
+### Introduction
+
+In this lab, you will be creating the OCI stream service and will be deploying the Python Streaming Simulator code base to the Compute VM created in ***Lab2B***
+
+_Estimated Lab Time_: 30 minutes
 
 ### Objectives
-In this lab, you will:
+
 - Create OCI stream service
 - Deploy the generator codebase to compute VM
 - Perform script refactoring and execute the code
 
-## Pre-Requisites
+### Pre-Requisites
 
 * Completed ***Lab 2B - Task 3: Create Compute instance*** .Once the copute instance has been created , the below tasks can be executed.
 
@@ -103,5 +106,5 @@ You may now **proceed to the next lab**
 
 ## Acknowledgements
 * **Author** - Biswanath Nanda, Principal Cloud Architect, North America Cloud Infrastructure - Engineering
-* **Contributors** -  Biswanath Nanda, Principal Cloud Architect,Bhushan Arora ,Principal Cloud Architect,Sharmistha das ,Master Principal Cloud Architect,North America Cloud Infrastructure - Engineering
-* **Last Updated By/Date** - Biswanath Nanda, Oct 2024
+* **Contributors** -  Biswanath Nanda, Principal Cloud Architect,Bhushan Arora ,Principal Cloud Architect North America Cloud Infrastructure - Engineering
+* **Last Updated By/Date** - Biswanath Nanda, November 2024

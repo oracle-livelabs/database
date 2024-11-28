@@ -1,19 +1,18 @@
 # Create Compartment, VCN, sbunet for workshop.
 
-## Introduction
+### Introduction
 
 In this lab, you will create a Compartment and  Virtual Cloud Network (VCN) to connect your OCI resources. 
 
-_Estimated Time:_ 15 minutes
+_Estimated Lab Time_: 15 minutes
 
 ### Objectives
 
 In this lab, you will be guided through the following tasks:
 
-- Create a Compartment
 - Create a Virtual Cloud Network
 - Configure a security list to allow MySQL incoming connections
-
+- Configure security list to allow HTTP incoming connections
 
 
 ### Prerequisites
@@ -159,5 +158,5 @@ You may now **proceed to the next lab**
 ## Acknowledgements
 
 - **Author** - Biswanath Nanda,Bhushan Arora Principal Cloud Architect, North America Cloud Infrastructure - Engineering
-- **Contributors** - Biswanath Nanda, Bhushan Arora ,Sharmistha das
-- **Last Updated By/Date** - Biswanath Nanda, August 2024
+- **Contributors** - Biswanath Nanda, Bhushan Arora 
+- **Last Updated By/Date** - Biswanath Nanda, November 2024

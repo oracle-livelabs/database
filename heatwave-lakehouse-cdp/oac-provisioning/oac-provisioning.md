@@ -2,11 +2,11 @@
 
 <!--![Banner](images/banner.png)-->
 
-## Introduction
+### Introduction
 
 During this lab you will deploy an Oracle Analytics Cloud instance on Oracle Cloud Infrastructure.
 
-Estimated Lab Time: 15 minutes (provisioning time may vary)
+_Estimated Lab Time_: 15 minutes (OAC provisioning time may vary)
 
 ### Objectives
 In this lab, you will:
@@ -49,28 +49,31 @@ In this lab, you will:
    (c) Fill the details and click on configure button:
 
       ![oacpac_2](images/oacpac2.png)
-   
+
 
 4.  Deploy the DVX file to OAC project
 
-- Collect the OAC dashbaord extract file (.DVA) file from this location.[MYSQLLakehouse_labfiles\Lab5\OAC]
-- Upload these files to OAC console and Visualize Dashbaords .
-- Predictive Streaming Analytics.dva
+   - Collect the OAC dashbaord extract file (.DVA) file from this location.[MYSQLLakehouse_labfiles\Lab5\OAC]
+   - Upload these files to OAC console and Visualize Dashbaords .
+   - Predictive Streaming Analytics.dva
   
    - **DVA password - Admin123
    ![DVA File Deployment](images/oac_dashbaord.png)
-   ![DVA File Deployment](images/oac_import.png)
+   ![DVA File Deployment](images/oac_import.png) 
 
-5. Changing the connection for MYSQL Heatwave for Live Dashbaord .
-- Navigate to `OAC Home page` and click on Navigate `option` -> `Data` as shown below.
+
+5. Changing the connection for MYSQL Heatwave for Live Dashbaord 
+
+   - Navigate to `OAC Home page` and click on Navigate `option` -> `Data` as shown below.
    ![Navigation](images/analytics-navigate.png)
-- Click on `Data`
+   - Click on `Data`
    ![Connection Navigation](images/analytics-navigate-data.png)
-- In the below window click on `Data` then on the existing LiveDs, click on vertical dots and then click on Inspect option to repoint the existing MYSQLHW connection to the MYSQL HW instance in your Demo environment.
+   - In the below window click on `Data` then on the existing LiveDs, click on vertical dots and then click on Inspect option to repoint the existing MYSQLHW connection to the MYSQL HW instance in your Demo environment.
    ![Connection Navigation](images/analytics-navigate-connection.png)
-- Click on `Inspect` and edit the MYSQL connections and click on Save.
+   - Click on `Inspect` and edit the MYSQL connections and click on Save.
    ![Connection Navigation](images/analytics_mysqlconnection.png)
-6.Navigate to the `Workbooks and Reports` and double click on the `Predictive Streaming Analytics` icon and reload all the demo Dashbaords .
+
+6. Navigate to the `Workbooks and Reports` and double click on the `Predictive Streaming Analytics` icon and reload all the demo   Dashbaords .
    Live Dashboard - Contains the live data being sourced from the SQL table to OAC.
    
    ![Live Dashbaord](images/analytics_realtime.png)
@@ -88,4 +91,4 @@ You may now **proceed to the next lab**
 ## Acknowledgements
 * **Author** - Biswanath Nanda, Principal Cloud Architect, North America Cloud Infrastructure - Engineering
 * **Contributors** -  Biswanath Nanda, Principal Cloud Architect,Bhushan Arora ,Principal Cloud Architect,Sharmistha das ,Master Principal Cloud Architect,North America Cloud Infrastructure - Engineering
-* **Last Updated By/Date** - Biswanath Nanda, March 2024
+* **Last Updated By/Date** - Biswanath Nanda, November 2024

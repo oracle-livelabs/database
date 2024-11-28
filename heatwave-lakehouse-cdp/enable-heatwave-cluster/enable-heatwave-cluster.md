@@ -1,10 +1,10 @@
 # Enable MySQL HeatWave Lakehouse in MySQL Database System
 
-## Introduction
+### Introduction
 
 This lab walks you through the steps to enable **MySQL HeatWave Lakehouse** Cluster in MySQL Database System that we have created in earlier lab
 
-Estimated Time: 20 minutes
+_Estimated Lab Time_: 20 minutes
 
 ### Objectives
 
@@ -14,9 +14,9 @@ In this lab, you will:
 ### Prerequisites
 
 This lab assumes you have:
-* An Oracle account
-* You have enough privileges to use Oracle Cloud resources
-* Previous lab has been successfully completed
+- An Oracle account
+- You have enough privileges to use Oracle Cloud resources
+- Previous lab has been successfully completed
 
 ## Task 1: Enable MySQL HeatWave Lakehouse in MySQL Database System
 
@@ -152,4 +152,4 @@ You may now proceed to the next lab.
 ## Acknowledgements
 * **Author** - Bhushan Arora, Principal Cloud Architect,North America Cloud Infrastructure - Engineering
 * **Contributors** - Bhushan Arora ,Principal Cloud Architect,Biswanath Nanda, Master Principal Cloud Architect,North America Cloud Infrastructure - Engineering
-* **Last Updated By/Date** - Bhushan Arora, March 2024
+* **Last Updated By/Date** - Bhushan Arora, November 2024
