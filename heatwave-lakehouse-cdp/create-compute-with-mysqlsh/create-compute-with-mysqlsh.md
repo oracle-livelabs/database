@@ -2,7 +2,7 @@
 
 ### Introduction
 
-In this lab we will be creating a compute intance which will solve the below purpose for the workshop :
+In this lab we will be creating a compute instance which will solve the below purpose for the workshop :
 
 1. Hosting IoT Simulator Code: The compute instance will serve as a virtual machine to host the custom Python generator codebase, which will be used to create IoT datasets for OCI streaming. This involves setting up the simulator code framework on the instance.
 
@@ -27,7 +27,7 @@ In this lab, you will be guided through the following tasks:
 
 - An Oracle Trial or Paid Cloud Account
 
-
+##  
 ## Task 1: Create SSH Key on OCI Cloud Shell
 
 The Cloud Shell machine is a small virtual machine running a Bash shell which you access through the Oracle Cloud Console (Homepage). You will start the Cloud Shell and generate a SSH Key to use  for the Bastion  session.
@@ -125,7 +125,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 6. Keep the selected Image, Oracle Linux 8
 
-    ![Use Linux OS](./images/compute-oracle-linux.png "compute oracle linux")  
+    ![Use Linux OS](./images/compute-oracle-linux.png "compute oracle linux")
 
 7. Change the Instance Shape:
     - Click **Change shape** button as in above screen shot
@@ -133,10 +133,10 @@ You will need a compute Instance to connect to your brand new MySQL database.
     - Click **Specialty and previous generation** box
 
 
-    ![New Shape](./images/compute-shape-select.png "compute shape select") 
+    ![New Shape](./images/compute-shape-select.png "compute shape select")
 
     - Click **VM.Standard.E2.2**
-    - Click the **Select Shape** button    
+    - Click the **Select Shape** button
 
     ![Final Shape](./images/final-compute-shape-select.png "final shape select") 
 
@@ -156,7 +156,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![Completed Compute](./images/compute-running-status.png "compute running")
 
-## Task 4: Connect to Compute and Install MySQl Shell
+## Task 4: Connect to Compute and Install MySQL Shell
 
 1. Copy the public IP address of the active Compute Instance to your notepad
 

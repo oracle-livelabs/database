@@ -15,17 +15,18 @@ _Estimated Lab Time_: 30 Minutes
 In this section, you will:
 
 
-- Build and Deploy a custom ML model on Compute VM to evaluate the device failure probablity.
+- Build and Deploy a custom ML model on Compute VM to evaluate the device failure probability.
 
 
 ### Prerequisites
 
 - All previous sections have been successfully completed.
 
+##  
 ## Task 1: Open the port
 
 1. Login to your same compute machine as opc, which we created earlier:
-      
+
       ```
       <copy> sudo firewall-cmd --zone=public --add-port=5000/tcp --permanent </copy>
       ```
@@ -80,7 +81,7 @@ In this section, you will:
       ```
       <copy> cd /home/opc/model </copy>
       ```
-6.  Download the Labfiles and scp the files(devices.csv & model_deployement.py) from Lab3 to /home/opc/model 
+6.  Download the Lab Files and scp the files(devices.csv & model_deployement.py) from Lab3 to /home/opc/model 
 
       ```
       <copy> ls </copy>
@@ -90,7 +91,7 @@ In this section, you will:
          
          devices.csv  model_deployement.py
 
-7.  Now run the ML code in virtual envrionment and keep this running in the terminal:
+7.  Now run the ML code in virtual environment and keep this running in the terminal:
 
       ```
       <copy> python3 model_deployement.py  </copy>

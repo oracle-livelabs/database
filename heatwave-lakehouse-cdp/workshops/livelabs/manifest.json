@@ -44,12 +44,12 @@
         {
             "title": "Lab 4a: Set up OCI Stream service & Execute Sensor Data Simulator",
             "description": "set up OCI stream service Execute Sensor Data Simulator",
-            "filename": "../../streaming-object-storage/create-stream.md"
+            "filename": "../../create-stream/create-stream.md"
         },
         {
             "title": "Lab 4b: Setup Dynamic Group for function to manage stream/objects",
             "description": "set up OCI stream service Execute Sensor Data Simulator",
-            "filename": "../../streaming-object-storage/dg-policy.md"
+            "filename": "../../dg-policy/dg-policy.md"
         },
         {
             "title": "Lab 5: Set up and Deploy OCI function and connect to service connector Hub ",
@@ -59,12 +59,12 @@
         {
             "title": "Lab 6a: Set up OCI Dataflow and deploy a Pyspark Application and load the datasets from demo-events-silver-mysqlhw to MYSQL HW",
             "description": "Set up OCI Dataflow and deploy a Pyspark Application",
-            "filename": "../../dataflow/setupdf.md"
+            "filename": "../../dataflow/dataflow.md"
         },
         {
             "title": "Lab 6b: Load the datasets from demo-events-silver-mysqlhw to MYSQL HW",
             "description": "Load the datasets from demo-events-silver-mysqlhw to MYSQL HW",
-            "filename": "../../load-into-lakehouse/loadlakehouse.md"
+            "filename": "../../load-into-lakehouse/load-into-lakehouse.md"
         },
         {
             "title": "Lab 7: Design and Develop OAC Dashboards ",

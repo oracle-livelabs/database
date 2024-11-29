@@ -1,4 +1,4 @@
-# Create Compartment, VCN, sbunet for workshop.
+# Create VCN, Subnet and Allow Incoming Connections for the Workshop.
 
 ### Introduction
 
@@ -14,7 +14,6 @@ In this lab, you will be guided through the following tasks:
 - Configure a security list to allow MySQL incoming connections
 - Configure security list to allow HTTP incoming connections
 
-
 ### Prerequisites
 
 - An Oracle Trial or Paid Cloud Account
@@ -23,7 +22,7 @@ In this lab, you will be guided through the following tasks:
 
 ![INTRO](./images/oci-dashboard.png "land on oci dashboard")
 
-
+##  
 ## Task 1: Create Virtual Cloud Network
 
 1. Click Navigation Menu
@@ -49,8 +48,8 @@ In this lab, you will be guided through the following tasks:
     <copy>vcn_phoenix</copy>
     ```
 
-    Compartment: Select - e2e-demo-specialist-eng 
-    
+    Compartment: Please Select - **e2e-demo-specialist-eng**
+
     The VCN name can be customized but ensure you use the same VCN through out the demo where ever required.
     Your screen should look similar to the following
         ![Configure VCN](./images/vcn-internet-connect-config.png "Configured VCN internet connection ")
@@ -69,11 +68,11 @@ In this lab, you will be guided through the following tasks:
 
 ## Task 2: Configure security list to allow MySQL incoming connections
 
-1. On pheonix-vcn page under 'Subnets in lakehouse Compartment', click  '**Crete subnet**'
+1. On phoenix-vcn page under 'Subnets in lakehouse Compartment', click  '**Crete subnet**'
 
 2. Create a subnet **subnetB**
      ![Subnet creations](./images/subnet-create-a.png "Subnet creation")
-     *** Assign the IPV4-CICR Block ip -10.0.2.0/24
+     *** Assign the IPV4-CIDR Block ip -10.0.2.0/24
      ![Subnet creation](./images/subnet-create-b.png "Subnet creation")
 
      ![Subnet creation](./images/subnetcreate-c.png "Subnet creation")
@@ -86,7 +85,7 @@ In this lab, you will be guided through the following tasks:
     ![VCN Security list](./images/vcn-security-list.png "Show Security Lists")
 
 6. On Security List for Private subnetB page under 'Ingress Rules', click '**Add Ingress Rules**'
-    ![VCN Ingress Rule](./images/vcn-mysql-ingress.png "Prepar for add Add Ingress Rules")
+    ![VCN Ingress Rule](./images/vcn-mysql-ingress.png "Prepare for add Add Ingress Rules")
 
 7. On Add Ingress Rules page under Ingress Rule
 
@@ -152,11 +151,10 @@ In this lab, you will be guided through the following tasks:
 
     ![View VCN HTTP](./images/vcn-ttp-ingress-completed.png"View VCN Completed HTTP Ingress rules")
 
-
 You may now **proceed to the next lab**
 
 ## Acknowledgements
 
 - **Author** - Biswanath Nanda,Bhushan Arora Principal Cloud Architect, North America Cloud Infrastructure - Engineering
-- **Contributors** - Biswanath Nanda, Bhushan Arora 
+- **Contributors** - Biswanath Nanda, Bhushan Arora
 - **Last Updated By/Date** - Biswanath Nanda, November 2024

@@ -1,4 +1,4 @@
-# Configuring and using OCI Functions to consume streamming data from OCI Streaming Topic.
+# Configuring and using OCI Functions to consume streamming data from OCI Streaming Topic
 
 ### Introduction
 
@@ -12,23 +12,23 @@ This lab focus on creating the Function ,deploying the function script and getti
 _Estimated Lab Time_: 75 minutes
 
 ### Objectives
+
 - Create a Function Application
 - Configure and Invoke a Function
 - Create Service Connector
 
 ### Prerequisites
 
-- Completetion of the previous labs.
- 
+- Completion of the previous labs.
+
+##  
 ## Task 1: Create a Function Application
 
 1. From the OCI services menu click **Policies** under **Identity** , Create "FunctionApplicationPolicies" into the name section and type "Allow functions to work" in the description section. Scroll down to the Policy statements section. Click the **+ Another Statement**.
 
     ![function policies](images/func-policy.png)
 
-    Copy and paste the following as policy statement.
-
-    ```
+    Copy and paste the following as policy statement. ```
     <copy>
     allow service FAAS to read repos in tenancy
     allow service datascience to use virtual-network-family in compartment id ocid1.compartment.oc1..xyz
@@ -39,9 +39,10 @@ _Estimated Lab Time_: 75 minutes
     Allow group Administrators to manage stream-pull in compartment id ocid1.compartment.oc1..xyz
     Allow group Administrators to manage streams in compartment id ocid1.compartment.oc1..xyz
     Allow group Administrators to manage objects in compartment id ocid1.compartment.oc1..xyz
-    </copy>
-    ```
+    </copy> ```
+
 2. From the OCI services menu click **Functions** under **Developer Services** to create the Fn.
+
     ![fuction developer check](images/func-navigate.png)
 
 3. Click **Create Application** and fill out the dialog box.
@@ -55,11 +56,10 @@ _Estimated Lab Time_: 75 minutes
     Click **Create**.
 
     ![create function](images/func-creating.png)
-5. Scroll down and click on **Getting Started** and follow the steps on the OCI console.
+
+4. Scroll down and click on **Getting Started** and follow the steps on the OCI console.
 
     ![create function](images/func-create.png)
-
-
 
 ## Task 2: Configure and Invoke a Function
 
@@ -67,41 +67,37 @@ As a continuation of task 1 , folllow the steps shown in the OCI console to conf
 Here we will be performing the below steps to Launch Cloud Console ,Create, deploy, and invoke your python function.
 
 1. Follow steps No. 1 to No. 7 given on the OCI console to set up OCI cloud shell and listing the Applications.
-   
+
     ![Getting Started ](images/func-cloudshell.png)
 
 2. Create, deploy, and invoke your function
-   Create the Function : (Step No 8 on OCI console)
-    
-    ```
+   Create the Function : (Step No 8 on OCI console) ```
     <copy>
     fn init --runtime python streamhwfunc
+    </copy> ```
 
-    </copy>
-    ```
-
-3. Switch into the generated directory (Step No 9 on OCI console)
-
-    ```
+3. Switch into the generated directory (Step No 9 on OCI console) ```
     <copy>
     cd streamhwfunc
-    </copy>
-    ```
+    </copy> ```
 
-4.  Now change the content of <b>func.py</b> and <b>requirements.txt</b> file.
+4. Now change the content of **func.py** and **requirements.txt** file.
+
     Function Script for function :
     Scripts to be changed and moved to the OCI cloud console - func.py ,func.yaml,requirements.txt
     Link to download the Function script and Dependencies : [`MYSQLLakehouse_labfiles.zip`](https://objectstorage.us-ashburn-1.oraclecloud.com/p/RPka_orWclfWJmKN3gTHfEiv-uPckBJTZ3FV0sESZ3mm3PDCQcVDCT-uM2dsJNGf/n/orasenatdctocloudcorp01/b/MYSQLLakehouse\_labfiles/o/MYSQLLakehouse_labfiles.zip)
 
-    ### Download Referece Path:     MYSQLLakehouse_labfiles\Lab5\OCI Function\func.py
+    ### Download Referece Path: MYSQLLakehouse_labfiles\Lab5\OCI Function\func.py
+
     [Refer to downloadbled MYSQLLakehouse_labfiles.zip]
     Changes in the func.py script is as below:
        ```
-    <copy>
+<copy>
     Line No -33 - In the endpoint replace the ML model deployment URL.
     endpoint = "http://IP:5000/predict" # change here for the lab with your compute ipfor Lab
     </copy>
     ```
+    
     ```
     <copy>
     Line No -51 & 52 - Replace these lines with the OCI Streaming Enpoint URL and stream OCID.
@@ -133,7 +129,6 @@ Here we will be performing the below steps to Launch Cloud Console ,Create, depl
     </copy>
     ```
      
- 
 5. Change the content of the <b>requirement.txt</b> file. The sample requirement.txt can be downloaded from the demo co-laterals as well.
 
     ```
@@ -169,7 +164,6 @@ For simple archiving operations, we don’t need to write a single line of code.
 3. Click ***Create Service Connector***. 
 
 4. Name the connector ***streaming-to-Fn*** .
-
 
 5. Provide the description ***Moving streaming data to object storage using Fn***.
 

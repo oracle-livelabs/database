@@ -34,24 +34,24 @@ Note - This lab "**2c -Create MySQL Database HeatWave**" is independent of the p
 
 	![create-db-01](images/compartment-user-b3.png)
 
-4. Select **Standalone** then select VCN/Subnet in the correspoding compartment:  
+4. Select **Standalone** then select VCN/Subnet in the corresponding compartment:  
 
    ![username](images/standalone-vcn-b4.png)
 
 5. (a) **Enable MySQL Heatwave** and Click on Change Shape as in following screen shot 
-	 
-	
+
+
 	![changeshape](images/shape-storage-b5-a-new.png)
 
-	
+
 	(b) Select OCPU , Choose the Shape (16 OCPU/512 GB Memory) then click on "Select a shape" button
 
 	![ocpu](images/select-ocpu-b5-b-new.png)
-	
+
 	(c) Following options you can keep as default, storage and backup:
 
 	![backup-default](images/backup-default-b5-c-new.png)
-	
+
 	(d) Then Click on “advanced options” –> Connections -> give hostname “eemysql” and click on “**Create**” to initiate creation process.
 
 	**Note : The host name must be unique within the subnet. If it is not unique, the DB system will fail to provision. It will be used later in the live lab.

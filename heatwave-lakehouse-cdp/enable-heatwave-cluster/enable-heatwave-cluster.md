@@ -18,6 +18,7 @@ This lab assumes you have:
 - You have enough privileges to use Oracle Cloud resources
 - Previous lab has been successfully completed
 
+## 
 ## Task 1: Enable MySQL HeatWave Lakehouse in MySQL Database System
 
 1. Go to Navigation Menu Databases MySQL
@@ -42,8 +43,7 @@ This lab assumes you have:
 
 5. Click on **Lakehouse: Enable Button** under HeatWave
 
-
-	![enable-lakehouse](images/enable-lakehouse.png)
+    ![enable-lakehouse](images/enable-lakehouse.png)
 
 6. There will be a popup, now click on enable button:
 
@@ -96,7 +96,7 @@ This lab assumes you have:
     ```bash
     <copy>USE MFG_SENSOR;</copy>
     ```
-    ![Use Schemas](./images/use-mfg.png "use shchema")
+    ![Use Schemas](./images/use-mfg.png "Use schemas")
 
 5. Create Table "T\_LIVE\_EVENT\_FEED\_DATA" for Real Time data:
 
