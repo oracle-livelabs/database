@@ -13,7 +13,7 @@ Estimated Time: 30 Minutes
 
 In this lab, you will:
 
-* Assert the patch readiness of a database
+* Assess the patch readiness of a database
 * Patch a database
 
 ### Prerequisites

@@ -390,8 +390,10 @@ Datapatch applies or rolls back SQL changes to the database.
     </copy>
     ```
 
+    * Datapatch works on one database only.
     * This check is non-instrusive. It examines your database and checks if Datapatch needs to install patches.
     * Datapatch reports that no patches need to be applied.
+    * If you need to work on two databases at the same time, you would need to start another terminal, set the environment accordingly, and execute Datapatch.
 
     <details>
     <summary>*click to see the output*</summary>
