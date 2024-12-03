@@ -92,7 +92,7 @@ If you find an issue after patching, you can safely roll back to the previous pa
     -- Be sure to hit RETURN
     ``` 
 
-7. Restart the database in the previous Oracle home. Connect to the database.
+7. Connect to the database.
 
     ```
     <copy>
@@ -100,7 +100,7 @@ If you find an issue after patching, you can safely roll back to the previous pa
     </copy>
     ```  
 
-8. Start the database intance and exit.
+8. Start the database instaance and exit.
 
     ```
     <copy>
@@ -438,7 +438,7 @@ In the Oracle home you find other software components, that is patched together 
     ```
     </details>   
 
-## Task 4: Enabled optimizer fixes
+## Task 4: Enable optimizer fixes
 
 Optimizer fixes are provided as part of the Release Update. However, those optimizer fixes which might cause plan changes are turned off. Meaning the fix is present in the database, but the old code is still activated. This allows you to maintain maximum plan stability in your database and only turn on those optimizer fixes that you need for a given problem.
 
