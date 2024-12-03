@@ -42,30 +42,16 @@
       "title": "Lab 6: Simple patching to existing Oracle home",
       "description": "Simple patching to existing Oracle home",
       "filename": "../../06-simple-patching-existing-home/simple-patching-existing-home.md"
-    },    
-    {
-      "title": "Lab 1002: Checks in the 19.18 Environment",
-      "description": "Common checks when patching",
-      "filename": "../../zzz-02-db-19-18-checks/02-db-19-18-checks.md"
     },
     {
-      "title": "Lab 1003: AutoUpgrade for patching",
-      "description": "Use AutoUpgrade for patching",
-      "filename": "../../zzz-03-autoupgrade-4-patching/03-autoupgrade-4-patching.md"
-    },
-    {
-      "title": "Lab 1005: Inventory Cleanup and Final Checks",
-      "filename": "../../zzz-05-final-checks/05-final-checks.md"
+      "title": "Lab 7: Advanced patching",
+      "description": "Advanced patching exercises",
+      "filename": "../../07-advanced-patching/advanced-patching.md"
     },
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
-    },
-    {
-      "title": "Other LiveLabs you might like",
-      "description": "Other LiveLabs you might like",
-      "filename": "../../other-livelabs/other-livelabs.md"
     }
   ]
 }

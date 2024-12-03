@@ -36,6 +36,7 @@ You will use AutoUpgrade just like in lab 3.
 
     * This config file is much simpler than the previous one from lab 3.
     * Since the Oracle home exists, the patch process becomes easier.
+    * The *UPGR* database is not running ARCHIVELOG mode, so you must disable restoration.
     
     <details>
     <summary>*click to see the output*</summary>
@@ -45,6 +46,7 @@ You will use AutoUpgrade just like in lab 3.
     patch1.source_home=/u01/app/oracle/product/19
     patch1.target_home=/u01/app/oracle/product/19_25
     patch1.sid=UPGR
+    patch1.restoration=no
     ```
     </details>    
 
@@ -62,7 +64,15 @@ You will use AutoUpgrade just like in lab 3.
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-UPDATEUPDATE
+    $ java -jar autoupgrade.jar -config scripts/simple-patching-existing-home.cfg -mode analyze
+    AutoUpgrade 24.8.241119 launched with default internal options
+    Processing config file ...
+    +--------------------------------+
+    | Starting AutoUpgrade execution |
+    +--------------------------------+
+    1 Non-CDB(s) will be analyzed
+    Type 'help' to list console commands
+    upg>
     ```
     </details>    
 
@@ -72,7 +82,7 @@ UPDATEUPDATE
 
     ```
     <copy>
-    cat /home/oracle/autoupgrade-patching/simple-patching-existing-home/log/cfgtoollogs/patch/auto/status/status.log
+    cat /home/oracle/autoupgrade-patching/simple-patching-existing-home/log/cfgtoollogs/upgrade/auto/status/status.log    
     </copy>
     ```
 
@@ -84,7 +94,26 @@ UPDATEUPDATE
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    UPDATEUPDATE    
+    ==========================================
+              Autoupgrade Summary Report
+    ==========================================
+    [Date]           Tue Dec 03 10:08:28 GMT 2024
+    [Number of Jobs] 1
+    ==========================================
+    [Job ID] 100
+    ==========================================
+    [DB Name]                upgr
+    [Version Before Upgrade] 19.21.0.0.0
+    [Version After Upgrade]  19.25.0.0.0
+    ------------------------------------------
+    [Stage Name]    PRECHECKS
+    [Status]        SUCCESS
+    [Start Time]    2024-12-03 10:08:07
+    [Duration]      0:00:21
+    [Log Directory] /home/oracle/autoupgrade-patching/simple-patching-existing-home/log/UPGR/100/prechecks
+    [Detail]        /home/oracle/autoupgrade-patching/simple-patching-existing-home/log/UPGR/100/prechecks/upgr_preupgrade.log
+                    Check passed and no manual intervention needed
+    ------------------------------------------ 
     ```
     </details>   
 
@@ -106,7 +135,15 @@ Patching a single instance Oracle Database require downtime. Downtime starts now
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-UPDATEUPDATE
+    $ java -jar autoupgrade.jar -config scripts/simple-patching-existing-home.cfg -mode deploy
+    AutoUpgrade 24.8.241119 launched with default internal options
+    Processing config file ...
+    +--------------------------------+
+    | Starting AutoUpgrade execution |
+    +--------------------------------+
+    1 Non-CDB(s) will be processed
+    Type 'help' to list console commands
+    upg>
     ```
     </details>    
 
@@ -124,11 +161,11 @@ UPDATEUPDATE
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    lsj -a 10
-    patch> +----+-------+---------+---------+-------+----------+-------+----------------+
+    upg> lsj -a 10
+    upg> +----+-------+---------+---------+-------+----------+-------+----------------+
     |Job#|DB_NAME|    STAGE|OPERATION| STATUS|START_TIME|UPDATED|         MESSAGE|
     +----+-------+---------+---------+-------+----------+-------+----------------+
-    | 101|   FTEX|PRECHECKS|EXECUTING|RUNNING|  10:10:12|12s ago|Executing Checks|
+    | 101|   UPGR|PREFIXUPS|EXECUTING|RUNNING|  10:09:45| 0s ago|Executing fixups|
     +----+-------+---------+---------+-------+----------+-------+----------------+
     Total jobs 1
     
@@ -142,6 +179,29 @@ UPDATEUPDATE
     * Or, you can use the `status -job 101 -a 10` command.
 
 4. When patching completes, AutoUpgrade exists.    
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    ....
+    (output truncated)
+    ....
+    Job 101 completed
+    ------------------- Final Summary --------------------
+    Number of databases            [ 1 ]
+    
+    Jobs finished                  [1]
+    Jobs failed                    [0]
+    Jobs restored                  [0]
+    Jobs pending                   [0]
+    
+    
+    
+    Please check the summary report at:
+    /home/oracle/autoupgrade-patching/simple-patching-existing-home/log/cfgtoollogs/upgrade/auto/status/status.html
+    /home/oracle/autoupgrade-patching/simple-patching-existing-home/log/cfgtoollogs/upgrade/auto/status/status.log
+    ```
+    </details>      
 
 5. Update the profile script. Since the database now runs out of a new Oracle home, you must update the profile script. This command replaces the `ORACLE_HOME` variable in the profile script.
 
