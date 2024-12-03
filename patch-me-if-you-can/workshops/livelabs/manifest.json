@@ -49,6 +49,11 @@
       "filename": "../../07-advanced-patching/advanced-patching.md"
     },
     {
+      "title": "Lab 8: Patching internals",
+      "description": "Patching internals",
+      "filename": "../../08-patching-internals/patching-internals.md"
+    },
+    {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
