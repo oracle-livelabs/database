@@ -56,6 +56,7 @@ You may *proceed to the next lab*.
 * Webinar, [One-Button Patching – makes life easier for every Oracle DBA](https://youtu.be/brnBavVLyM0)
 
 ## Acknowledgments
+
 * **Author** - Daniel Overby Hansen
-* **Contributors** Klaus Gronau, Daniel Overby Hansen  
-* **Last Updated By/Date** - Klaus Gronau, June 2023
+* **Contributors** - Rodrigo Jorge, Alex Zaballa, Mike Dietrich
+* **Last Updated By/Date** - Daniel Overby Hansen, December 2024

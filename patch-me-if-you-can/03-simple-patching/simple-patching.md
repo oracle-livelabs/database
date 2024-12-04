@@ -422,5 +422,5 @@ AutoUpgrade can also connect to My Oracle Support and find and download the nece
 ## Acknowledgements
 
 * **Author** - Daniel Overby Hansen
-* **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, November 2024
+* **Contributors** - Rodrigo Jorge, Alex Zaballa, Mike Dietrich
+* **Last Updated By/Date** - Daniel Overby Hansen, December 2024
