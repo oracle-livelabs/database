@@ -269,7 +269,7 @@ Datapatch also stores log files in the file system.
     ```
     </details>  
 
-3. Each invocation has it's own subdirectory named *sqlpatch_<number>_<timestamp>. Change to one of the directories and examine the files.
+3. Each invocation has it's own subdirectory named *sqlpatch\_<number>\_<timestamp>*. Change to one of the directories and examine the files.
 
 4. When Datapatch applies patches it might invalidate objects. Datapatch keeps track of this and will recompile the objects at the end of the patching process. Examine the log files for traces of recompilation.
 
