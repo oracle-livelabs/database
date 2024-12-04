@@ -3,11 +3,7 @@
 ## About this Workshop
 
 
-In this Database Patching lab, you will familiarize with the options of a completely unattended installation, including patches. Then you'll do out-of-place patching of a database with AutoUpgrade. To show the difference, the final step is an in-place patching operation causing more downtime.
-![Lab activities](./images/overview-patch-me-if-you-can.png " ")
-
-
-The patching does include not only a Release Update (RU) but also the Oracle Java Virtual Machine Bundle (OJVM), a Monthly Recommended Patch (MRP), and the Data Pump Bundle Patch (DPBP). You will clean up, and do a rollback as well.
+In this lab, you will familiarize with patching of Oracle Database. you will use AutoUpgrade to patch in the easiest way and explore the more advanced options. All exercises will guide you through out-of-place patching and show the best practices. 
 
 Estimated Workshop Time: 120 minutes
 
@@ -26,13 +22,12 @@ You can switch between environments with the shortcuts shown in the last column 
 
 ![Overview of the Oracle Homes and databases in the lab](./images/introduction-overview.png " ")
 
-The lab contains *nn* labs.
+The lab contains nine labs. You should perform the labs in order. 
 
----- INSERT LAB OVERVIEW ----
-
-* You start by blah blah
-* Then blah blah
-* As the last lab, blah blah
+* You start exploring patching concepts
+* Then you use simple methods to patch databases
+* Before moving to advanced topics
+* And patching internals
 
 ## Patching methods and processes
 

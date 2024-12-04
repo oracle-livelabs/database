@@ -106,7 +106,7 @@ Datapatch stores patching information inside the database. Understanding these t
     -- Be sure to hit RETURN
     ```
 
-    * This database was first patched from the base release (19.3) to 19.21, including the OJVM and Data Pump bundle patches.
+    * This database was first patched from the base release, 19.3, to 19.21, including the OJVM and Data Pump bundle patches.
     * In lab 3, you patched the database to 19.25.
     * In lab 8, you rolled back to 19.21.
 
@@ -269,7 +269,7 @@ Datapatch also stores log files in the file system.
     ```
     </details>  
 
-3. Each invocation has it's own subdirectory named *sqlpatch\_<number>\_<timestamp>*. Change to one of the directories and examine the files.
+3. Each invocation has it's own subdirectory named `sqlpatch_<number>_<timestamp>`. Change to one of the directories and examine the files.
 
 4. When Datapatch applies patches it might invalidate objects. Datapatch keeps track of this and will recompile the objects at the end of the patching process. Examine the log files for traces of recompilation.
 

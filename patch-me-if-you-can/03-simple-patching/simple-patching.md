@@ -69,7 +69,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
     <summary>*click to see the output*</summary>
     ``` text
     $ java -jar autoupgrade.jar -config scripts/simple-patching.cfg -patch -mode analyze
-    AutoUpgrade Patching 24.7.241021 launched with default internal options
+    AutoUpgrade Patching 24.8.241119 launched with default internal options
     Processing config file ...
     +-----------------------------------------+
     | Starting AutoUpgrade Patching execution |
@@ -116,7 +116,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
     </copy>
     ```
 
-    * You can see that you're patching the FTEX database. 
+    * You can see that you're patching the *FTEX* database. 
     * You can also see that you're patching from 19.21 to 19.25.
     * In the end, you can see that all checks passed and there's no manual intervention needed.
     * This database was found to be ready for patching. 
@@ -173,7 +173,7 @@ Patching a single instance Oracle Database require downtime. Downtime starts now
     <summary>*click to see the output*</summary>
     ``` text
     $ java -jar autoupgrade.jar -config scripts/simple-patching.cfg -patch -mode deploy
-    AutoUpgrade Patching 24.7.241021 launched with default internal options
+    AutoUpgrade Patching 24.8.241119 launched with default internal options
     Processing config file ...
     +-----------------------------------------+
     | Starting AutoUpgrade Patching execution |

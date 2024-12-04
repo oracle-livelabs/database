@@ -4,7 +4,7 @@
 
 In this lab, you will roll back after applying patches. AutoUpgrade protects your database during patching using a guaranteed restore point. If something happens in your maintenance window, you can use AutoUpgrade to roll back.
 
-**Caution:** AutoUpgrade rolls back by flashing the database back to a restore point created before patching. This means any data entered after patching with AutoUpgrade is lost. Use AutoUpgrade restore functionality only before go-live. If you need to rollback after go-live, please look at lab xx UPDATEUPDATE - Advanced rollback.
+**Caution:** AutoUpgrade rolls back by flashing the database back to a restore point created before patching. This means any data entered after patching with AutoUpgrade is lost. Use AutoUpgrade restore functionality only before go-live. If you need to rollback after go-live, please look at lab 8 - Advanced patching.
 
 Estimated Time: 10 Minutes
 
@@ -23,7 +23,7 @@ This lab assumes:
 
 ## Task 1: Check database
 
-1. Verify the FTEX database has been patched. Check `/etc/oratab`.
+1. Verify the *FTEX* database has been patched. Check `/etc/oratab`.
 
     ```
     <copy>
@@ -31,7 +31,7 @@ This lab assumes:
     </copy>
     ```
 
-    * The FTEX database is now running from *19.25* Oracle home.
+    * The *FTEX* database is now running from *19.25* Oracle home.
     * When you patched the database in the previous lab, AutoUpgrade updated `/etc/oratab` for you.
 
     <details>
@@ -64,7 +64,7 @@ This lab assumes:
     ```
     </details>    
 
-2. Set the environment and connect to the FTEX database.
+2. Set the environment and connect to the *FTEX* database.
 
     ```
     <copy>
@@ -142,7 +142,7 @@ This lab assumes:
 
 2. When AutoUpgrade exits, the rollback is complete. AutoUpgrade issues a `FLASHBACK DATABASE` command and opens the database with the `RESETLOGS` option in the old Oracle home. 
 
-3. Verify the FTEX database has been rolled back. Check `/etc/oratab`.
+3. Verify the *FTEX* database has been rolled back. Check `/etc/oratab`.
 
     ```
     <copy>
@@ -150,7 +150,7 @@ This lab assumes:
     </copy>
     ```
 
-    * The FTEX database is now running from *19.21* Oracle home, `/u01/app/oracle/product/19`.
+    * The *FTEX* database is now running from *19.21* Oracle home, `/u01/app/oracle/product/19`.
     * When you roll back, AutoUpgrade updates `/etc/oratab` for you.
 
     <details>
@@ -191,7 +191,7 @@ This lab assumes:
     </copy>
     ``` 
 
-5. Connect to the FTEX database.
+5. Connect to the *FTEX* database.
 
     ```
     <copy>

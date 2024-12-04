@@ -1,6 +1,6 @@
 # Install Oracle Home
 
-In this lab, you will install an Oracle home in two different ways. The easy, automated approach using AutoUpgrade and for comparison a manual installation. Later on, you will use the Oracle homes to manually patch an Oracle Database.
+In this lab, you will install an Oracle home in two different ways. The easy, automated approach using AutoUpgrade and, for comparison, a manual installation.
 
 
 ## Introduction
@@ -19,6 +19,8 @@ In this lab, you will:
 This lab assumes:
 
 - You have completed Lab 1: Initialize environment
+
+This is an optional lab. You can skip it if you are already familiar with installation of Oracle homes and use of gold images. 
 
 ## Task 1: Install using AutoUpgrade
 
@@ -66,7 +68,7 @@ First, you will install an Oracle home the easiest way using AutoUpgrade.
     <summary>*click to see the output*</summary>
     ``` text
     $ java -jar autoupgrade.jar -config scripts/install-oracle-home.cfg -patch -mode create_home
-    AutoUpgrade Patching 24.7.241021 launched with default internal options
+    AutoUpgrade Patching 24.8.241119 launched with default internal options
     Processing config file ...
     +-----------------------------------------+
     | Starting AutoUpgrade Patching execution |
@@ -662,7 +664,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
     ```
     </details> 
 
-3. In this lab, you can't run `root.sh` because of missing privileges. Normally, running `root.sh` is not needed for a new Oracle home. Only if your Oracle Database use *external jobs* do you need to run it. Else, it can be skipped.
+3. In this lab, you can't run `root.sh` because of missing privileges. 
 
 You may now *proceed to the next lab*.
 

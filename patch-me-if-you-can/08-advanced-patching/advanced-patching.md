@@ -64,8 +64,8 @@ If you find an issue after patching, you can safely roll back to the previous pa
     -- Be sure to hit RETURN
     ```
 
-    * In this lab, there is no PFile, so we don't need to move that one.
-    * Also, there are no network files, like `tnsnames.ora` and `sqlnet.ora` in `$ORACLE_HOME/network/admin` so we don't move those either.
+    * In this lab, there is no PFile, so you don't need to move that one.
+    * Also, there are no network files, like `tnsnames.ora` and `sqlnet.ora` in `$ORACLE_HOME/network/admin` so you don't move those either.
     * There might be many other files in the Oracle home. Check the blog post [Files to Move During Oracle Database Out-Of-Place Patching](https://dohdatabase.com/2023/05/30/files-to-move-during-oracle-database-out-of-place-patching/) for details.
 
 5. You need to set the environment to the previous Oracle home. Update the profile script and reset the environment.
