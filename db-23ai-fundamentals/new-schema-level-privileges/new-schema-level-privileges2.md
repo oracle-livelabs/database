@@ -39,20 +39,19 @@ The objective of this workshop is to learn how to work with the schema-level pri
     ```
     ![drops users and roles](images/a.png " ")
 
-3. We will next create users. We will begin with a placeholder password. To change the password for the users use the "alter user identified by "new password" command. With the syntax below for distinct users, make sure to replace `new_password_here` to your new password(needs one uppercase letter and atleast one number). Throughout this workshop we will use the Oracle123long password.
+3. We will next create users.  To change the password for the users use the "alter user identified by "new password" command. With the syntax below for distinct users,  Throughout this workshop we will use the Oracle123long password.
 
     ```
     <copy>
     -- Create users
-    CREATE USER hr_user IDENTIFIED BY Placeholder1;
-    CREATE USER it_user IDENTIFIED BY Placeholder2;
-    CREATE USER it_manager IDENTIFIED BY Placeholder3;
+    CREATE USER hr_user IDENTIFIED BY Oracle123long;
+    CREATE USER it_user IDENTIFIED BY Oracle123long;
     </copy>
     ```
     ![creates users](images/1a.png " ")
 
     
-    This will change the password for hr_user
+    If you'd like to change the password for the individual users, you'd run the following and make sure to replace `new_password_here` with your new password(needs one uppercase letter and atleast one number).
     ```
     <copy>
     ALTER USER hr_user IDENTIFIED BY  </copy>new_password_here;

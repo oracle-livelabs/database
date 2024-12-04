@@ -1,4 +1,4 @@
-# Create an API Signing Key and SDK CLI Configuration File
+# Create an API Sign-In Key and SDK CLI Configuration File
 
 ## Introduction
 
@@ -45,7 +45,7 @@ Any software client you use to connect to Oracle Cloud Infrastructure must be co
 
   ![Copy OCID](images/copy-user-ocid.png)
 
-## Task 2: Generate an API Signing Key
+## Task 2: Generate an API Sign-In Key
 
 To create a user API key, you will use `openssl` on your local system. If you are using Windows, we recommend the Git Bash Shell.
 
@@ -91,7 +91,7 @@ To create a user API key, you will use `openssl` on your local system. If you ar
     <copy>openssl rsa -pubout -in ~/.oci/oci_api_key_private.pem -out ~/.oci/oci_api_key_public.pem -passin stdin</copy>
     ```
 
-    ![](images/generate-public-key.png)
+    ![Generate a public key](images/generate-public-key.png)
 
 6. Confirm that the public key file has been created in the directory you specified.
 
@@ -105,7 +105,7 @@ To create a user API key, you will use `openssl` on your local system. If you ar
 
 8. On the API Keys page, click **Add Public Key**.
 
-  ![](images/add-public-key.png)
+  ![Add Public Key](images/add-public-key.png)
 
 9. Click **select one** and navigate to your `~/.oci` directory, and select the `oci_api_key_public.pem` file. Click **Add**.
 
@@ -124,4 +124,4 @@ You may proceed to the next lab.
 ## Acknowledgements
 * **Author** - Dave Rubin, Senior Director, NoSQL and Embedded Database Development and Michael Brey, Director, NoSQL Product Development
 * **Contributors** - Jaden McElvey, Technical Lead - Oracle LiveLabs Intern
-* **Last Updated By/Date** - Vandana Rajamani, Database User Assistance, February 2023
+* **Last Updated By/Date** - Ramya Umesh, Database User Assistance, October 2024

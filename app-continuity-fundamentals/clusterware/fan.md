@@ -290,7 +290,7 @@ Download the FANWatcher utility
 
     ````
     <copy>
-    wget https://objectstorage.uk-london-1.oraclecloud.com/p/gKfwKKgzqSfL4A48e6lSKZYqyFdDzvu57md4B1MegMU/n/lrojildid9yx/b/labtest_bucket/o/fanWatcher_19c.zip
+    wget https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/fanWatcher_19c.zip
     unzip fanWatcher_19c.zip
     </copy>
     ````   
@@ -448,6 +448,6 @@ Download the FANWatcher utility
 You may now *proceed to the next lab*.  
 
 ## Acknowledgements
-* **Authors** - Troy Anthony
+* **Authors** - Troy Anthony Anil Nair
 * **Contributors** - Kay Malcolm, Kamryn Vinson
-* **Last Updated By/Date** - Kamryn Vinson, March 2021
+* **Last Updated By/Date** - Anil Nair, November 2024
