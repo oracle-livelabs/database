@@ -108,7 +108,7 @@ Datapatch stores patching information inside the database. Understanding these t
 
     * This database was first patched from the base release (19.3) to 19.21, including the OJVM and Data Pump bundle patches.
     * In lab 3, you patched the database to 19.25.
-    * In lab 7, you rolled back to 19.21.
+    * In lab 8, you rolled back to 19.21.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -473,7 +473,7 @@ OPatch keeps track of all the patches that you apply over time to an Oracle home
     ```
     </details>   
 
-You may now *proceed to the next lab*.
+This is the end of *Patch Me If You Can*.
 
 ## Acknowledgements
 

@@ -100,7 +100,7 @@ If you find an issue after patching, you can safely roll back to the previous pa
     </copy>
     ```  
 
-8. Start the database instaance and exit.
+8. Start the database instance and exit.
 
     ```
     <copy>

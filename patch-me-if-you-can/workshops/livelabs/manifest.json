@@ -44,14 +44,19 @@
       "filename": "../../06-simple-patching-existing-home/simple-patching-existing-home.md"
     },
     {
-      "title": "Lab 7: Advanced patching",
-      "description": "Advanced patching exercises",
-      "filename": "../../07-advanced-patching/advanced-patching.md"
+      "title": "Lab 7: Patching a container database",
+      "description": "Patching a container database",
+      "filename": "../../07-patching-container-database/patching-container-database.md"
     },
     {
-      "title": "Lab 8: Patching internals",
+      "title": "Lab 8: Advanced patching",
+      "description": "Advanced patching exercises",
+      "filename": "../../08-advanced-patching/advanced-patching.md"
+    },
+    {
+      "title": "Lab 9: Patching internals",
       "description": "Patching internals",
-      "filename": "../../08-patching-internals/patching-internals.md"
+      "filename": "../../09-patching-internals/patching-internals.md"
     },
     {
       "title": "Need Help?",
