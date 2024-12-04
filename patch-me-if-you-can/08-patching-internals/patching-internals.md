@@ -347,11 +347,131 @@ Datapatch also stores log files in the file system.
     </details>      
 
 ## Task 3: Patch storage
-check .patch_storage
-./opatch util deleteinactivepatches
-## Task 4: Data Collection
-SRDC - Data Collection for Datapatch issues (Doc ID 1965956.1)
 
+OPatch keeps track of all the patches that you apply over time to an Oracle home. It stores a lot of patching metadata as well as the actual patches.
+
+1. Stay in the *yellow* terminal 🟨. Set the environment and use OPatch to generate a list of patch metadata.
+
+    ```
+    <copy>
+    . ftex
+    cd $ORACLE_HOME/OPatch
+    ./opatch util ListOrderedInactivePatches
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    * The output shows that the patching chain in this Oracle home is from 19.3 (base release) to 19.21.
+    * This means that it is a brand-new Oracle home where only 19.21 has been applied.
+    * The *active* RU is 19.21 - this is where the Oracle home currently is.
+    * The *inactive* RU is 19.3 - this is where the Oracle home came from.
+    * In this lab, you create new Oracle homes from the base release which matches Oracle's recommendations.
+    * If you use in-place patching or clone existing Oracle homes, you will see more inactive patches.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ . ftex
+    $ cd $ORACLE_HOME/OPatch
+    $ ./opatch util ListOrderedInactivePatches
+    Oracle Interim Patch Installer version 12.2.0.1.42
+    Copyright (c) 2024, Oracle Corporation.  All rights reserved.
+    
+    
+    Oracle Home       : /u01/app/oracle/product/19
+    Central Inventory : /u01/app/oraInventory
+       from           : /u01/app/oracle/product/19/oraInst.loc
+    OPatch version    : 12.2.0.1.42
+    OUI version       : 12.2.0.7.0
+    Log file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2024-12-04_12-24-27PM_1.log
+    
+    Invoking utility "listorderedinactivepatches"
+    List Inactive patches option provided
+    
+    The oracle home has the following inactive patch(es) and their respective overlay patches:
+    
+    The number of RU chains is  1
+    
+    ***** There are 1 inactive RU patches in chain 1
+    -Inactive RU/BP 29517242:Database Release Update : 19.3.0.0.190416 (29517242), installed on: Thu Apr 18 07:21:17 GMT 2019, with no overlays
+    -Active RU/BP 35643107:Database Release Update : 19.21.0.0.231017 (35643107), installed on: Wed Jul 10 14:53:39 GMT 2024, with no overlays
+    
+    OPatch succeeded.
+    ```
+    </details>       
+
+2. You can remove information about the *inactive* patches. This reduces the patching metadata which makes OPatch run faster. It also deletes patches from the `.patch_storage` directory inside the Oracle home and reduces the space used. Delete the inactive patches.
+
+    ```
+    <copy>
+    ./opatch util deleteinactivepatches
+    </copy>
+    ```
+
+    * The command does not delete anything, because OPatch wants to keep at least one inactive RU. This ensure you can always roll back to the previous patch.
+    * Since this lab uses out-of-place patching from the base release, there will never be more than 1 inactive patch.
+    * If you use in-place patching or patch out-of-place using a cloned Oracle home, you will see the list grows over time. This will require more disk space and prolong OPatch commands.
+    * If you find OPatch is running slow, try to clear our inactive patching metadata.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ . ftex
+    $ cd $ORACLE_HOME/OPatch
+    $ ./opatch util deleteinactivepatches
+    Oracle Interim Patch Installer version 12.2.0.1.42
+    Copyright (c) 2024, Oracle Corporation.  All rights reserved.
+    
+    
+    Oracle Home       : /u01/app/oracle/product/19
+    Central Inventory : /u01/app/oraInventory
+       from           : /u01/app/oracle/product/19/oraInst.loc
+    OPatch version    : 12.2.0.1.42
+    OUI version       : 12.2.0.7.0
+    Log file location : /u01/app/oracle/product/19/cfgtoollogs/opatch/opatch2024-12-04_12-23-58PM_1.log
+    
+    Invoking utility "deleteinactivepatches"
+    Inactive Patches Cleanup option provided
+    Delete Inactive Patches .......
+    Warning: No inactive RU is eligible for delete. See log file for more details
+    
+    OPatch succeeded.
+    ```
+    </details>     
+
+3. OPatch stores the patching information in the Oracle home. Examine the directory.
+
+    ```
+    <copy>
+    cd $ORACLE_HOME/.patch_storage
+    ll
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    * You should never delete files from this directory manually.
+    * Instead, use the `opatch util deleteinactivepatches` command.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ cd $ORACLE_HOME/.patch_storage
+    $ ll
+    total 268
+    drwxr-xr-x. 3 oracle oinstall     74 Apr 18  2019 29517242_Apr_17_2019_23_27_10
+    drwxr-xr-x. 3 oracle oinstall     74 Apr 18  2019 29585399_Apr_9_2019_19_12_47
+    drwxr-xr-x. 4 oracle oinstall     87 Jul 10 14:58 35643107_Oct_3_2023_13_34_29
+    drwxr-xr-x. 4 oracle oinstall     87 Jul 10 15:00 35648110_Aug_25_2023_10_22_03
+    drwxr-xr-x. 4 oracle oinstall     87 Jul 10 14:59 35787077_Oct_6_2023_06_58_49
+    -rw-r--r--. 1 oracle oinstall 100145 Jul 10 14:59 interim_inventory.txt
+    -rw-r--r--. 1 oracle oinstall     93 Jul 10 14:59 LatestOPatchSession.properties
+    drwxr-xr-x. 9 oracle oinstall   4096 Jul 10 14:59 NApply
+    -rw-r--r--. 1 oracle oinstall  57729 Jul 10 14:57 newdirs.txt
+    -rw-r--r--. 1 oracle oinstall  99508 Jul 10 14:59 record_inventory.txt
+    ```
+    </details>   
 
 You may now *proceed to the next lab*.
 
