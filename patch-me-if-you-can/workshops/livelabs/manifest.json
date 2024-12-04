@@ -44,7 +44,7 @@
       "filename": "../../06-simple-patching-existing-home/simple-patching-existing-home.md"
     },
     {
-      "title": "Lab 7: Patching a container database",
+      "title": "Lab 7: Manual patching of a container database",
       "description": "Patching a container database",
       "filename": "../../07-patching-container-database/patching-container-database.md"
     },
