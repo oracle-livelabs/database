@@ -369,7 +369,7 @@ Patching a single instance Oracle Database require downtime. Downtime starts now
 
 9. Optionally, you can perform lab 3, *Familiarize with patching*. 
 
-9. Return to the *yellow* terminal 🟨. It takes around 20 minutes to patch the database. AutoUpgrade prints a message to the console and exists when patching completes. 
+9. Still in the *yellow* terminal 🟨. It takes around 20 minutes to patch the database. AutoUpgrade prints a message to the console and exists when patching completes. 
 
     * AutoUpgrade informs that there is a guaranteed restore point which you must remove when it is no longer needed. Don't remove the restore point yet.
     * Optionally, you can instruct AutoUpgrade to remove the restore point automatically using `drop_grp_after_upgrade=yes` in the config file.

@@ -307,7 +307,7 @@ While AutoUpgrade installs a new Oracle home, you can inspect some of the patch 
 
 Install an Oracle manually. This allows you to compare the two methods.
 
-1. Switch to the *blue* 🟦 terminal. Create a directory for the new Oracle home.
+1. Still in the *blue* 🟦 terminal. Create a directory for the new Oracle home.
 
     ```
     <copy>

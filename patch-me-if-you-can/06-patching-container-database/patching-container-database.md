@@ -540,7 +540,7 @@ You will patch *CDB19* to 19.25 and use an existing Oracle home.
     ```
     </details>   
 
-You may now *proceed to the next lab*.
+You may now *proceed to the next lab*. Return to *lab 5* if you didn't finish it.
 
 ## Acknowledgements
 
