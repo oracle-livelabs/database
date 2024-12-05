@@ -609,6 +609,8 @@ Gold images are a convenient way of installing Oracle homes on many different se
     * `destinationLocation` determines where the gold image is placed.
     * `name` tells the installer the name of the zip file.
     * It takes a few minutes to create the gold image.
+    * While the installer creates a gold image, reflect on the differences between creating the new Oracle home using AutoUpgrade and manually?
+    * You can move on with the next lab while the installer completes.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -672,10 +674,8 @@ Gold images are a convenient way of installing Oracle homes on many different se
     * Notice that you don't use the `-applyRU` or `-applyOneOffs` parameters.
     * The Oracle home is already patched, so you can skip that part.
     * OPatch is also already updated.
-
-5. Did you notice any difference in creating the new Oracle home using AutoUpgrade and manually?
-
-    * AutoUpgrade automates the process and you need just one command to perform all tasks.
+    * By using a gold image in your environment, you know that the same set of patches are in all of your databases.
+    * You patch only once, then create a gold image, and use that to distribute to all systems.
 
 You may now *proceed to the next lab*.
 
