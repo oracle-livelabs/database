@@ -149,7 +149,7 @@ In this lab, you will explore the new vector data type and SQL Functions introdu
     ```
     ![insert into the table](images/vec6.png =50%x*)
 
-    By defining the number of dimensions, we are effetely creating a check constraint.
+    By defining the number of dimensions, we are effectively creating a check constraint.
 
 5. We could also create multiple vectors in one table and define them with different formats and dimensions.
     
