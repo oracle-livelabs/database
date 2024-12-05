@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab allows you to patch *backwards*. In other words, going to a previous Release Update. Only in the rare cases that you find a critical issue in a newer Release Update, would you go back to a previous one. After go-live you can no longer use Flashback Database, so you need to use the rollback capabilities in Datapatch. Also, you learn how to enable certain optimizer fixes.
+This lab allows you to patch *backwards*. In other words, going to a previous Release Update. Only in the rare cases that you find a critical issue in a newer Release Update, would you go back to a previous one. Also, you learn how to enable certain optimizer fixes.
 
 Estimated Time: 15 Minutes
 

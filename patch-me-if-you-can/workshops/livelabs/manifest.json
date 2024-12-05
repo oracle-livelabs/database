@@ -34,29 +34,24 @@
       "filename": "../../04-simple-patching-existing-home/simple-patching-existing-home.md"
     },
     {
-      "title": "Lab 5: Simple rollback",
-      "description": "Simple rollback",
-      "filename": "../../05-simple-rollback/simple-rollback.md"
-    },
-    {
-      "title": "Lab 6: Install Oracle home",
+      "title": "Lab 5: Install Oracle home",
       "description": "Install Oracle home",
-      "filename": "../../06-install-oracle-home/install-oracle-home.md"
+      "filename": "../../05-install-oracle-home/install-oracle-home.md"
     },
     {
-      "title": "Lab 7: Manual patching of a container database",
+      "title": "Lab 6: Manual patching of a container database",
       "description": "Patching a container database",
-      "filename": "../../07-patching-container-database/patching-container-database.md"
+      "filename": "../../06-patching-container-database/patching-container-database.md"
     },
     {
-      "title": "Lab 8: Advanced patching",
+      "title": "Lab 7: Advanced patching",
       "description": "Advanced patching exercises",
-      "filename": "../../08-advanced-patching/advanced-patching.md"
+      "filename": "../../07-advanced-patching/advanced-patching.md"
     },
     {
-      "title": "Lab 9: Patching internals",
+      "title": "Lab 8: Patching internals",
       "description": "Patching internals",
-      "filename": "../../09-patching-internals/patching-internals.md"
+      "filename": "../../08-patching-internals/patching-internals.md"
     },
     {
       "title": "Need Help?",
