@@ -275,7 +275,7 @@ Patching a single instance Oracle Database require downtime. Downtime starts now
 
     ```
     <copy>
-    cd /home/oracle/autoupgrade-patching/simple-patching/log/FTEX
+    cd /home/oracle/autoupgrade-patching/simple-patching/log/FTEX/101
     ll
     </copy>
 

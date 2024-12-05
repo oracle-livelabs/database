@@ -19,7 +19,7 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 2: Simple Patching
+- You have completed Lab 4: Simple Patching to Existing Oracle Home
 
 ## Task 1: Check database
 

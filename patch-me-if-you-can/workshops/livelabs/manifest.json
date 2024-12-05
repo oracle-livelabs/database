@@ -29,19 +29,19 @@
       "filename": "../../03-familiarize-with-patching/familiarize-with-patching.md"
     },
     {
-      "title": "Lab 4: Simple rollback",
-      "description": "Simple rollback",
-      "filename": "../../04-simple-rollback/simple-rollback.md"
-    },
-    {
-      "title": "Lab 5: Install Oracle home",
-      "description": "Install Oracle home",
-      "filename": "../../05-install-oracle-home/install-oracle-home.md"
-    },
-    {
-      "title": "Lab 6: Simple patching to existing Oracle home",
+      "title": "Lab 4: Simple patching to existing Oracle home",
       "description": "Simple patching to existing Oracle home",
-      "filename": "../../06-simple-patching-existing-home/simple-patching-existing-home.md"
+      "filename": "../../04-simple-patching-existing-home/simple-patching-existing-home.md"
+    },
+    {
+      "title": "Lab 5: Simple rollback",
+      "description": "Simple rollback",
+      "filename": "../../05-simple-rollback/simple-rollback.md"
+    },
+    {
+      "title": "Lab 6: Install Oracle home",
+      "description": "Install Oracle home",
+      "filename": "../../06-install-oracle-home/install-oracle-home.md"
     },
     {
       "title": "Lab 7: Manual patching of a container database",

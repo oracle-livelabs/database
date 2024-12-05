@@ -695,7 +695,7 @@ Oracle recommends that you always use the latest version of AutoUpgrade.
     ```
     </details>   
 
-You may now *proceed to the next lab*.
+You may now *proceed to the next lab*. Return to *lab 2* if you didn't finish it.
 
 ## Acknowledgements
 
