@@ -288,7 +288,7 @@ Patching a single instance Oracle Database require downtime. Downtime starts now
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    $ cd /home/oracle/autoupgrade-patching/simple-patching/log/FTEX
+    $ cd /home/oracle/autoupgrade-patching/simple-patching/log/FTEX/101
     $ ll
     total 36
     -rw-r-----. 1 oracle oinstall 22287 Nov  4 10:16 autoupgrade_patching_20241104.log
@@ -366,6 +366,8 @@ Patching a single instance Oracle Database require downtime. Downtime starts now
     </details> 
 
 8. Spend some time examining the other log files and subdirectories.
+
+9. Optionally, you can perform lab 3, *Familiarize with patching*. 
 
 9. Return to the *yellow* terminal 🟨. It takes around 20 minutes to patch the database. AutoUpgrade prints a message to the console and exists when patching completes. 
 

@@ -20,7 +20,7 @@ This lab assumes:
 
 - You have completed Lab 1: Initialize environment
 
-This is an optional lab. You can skip it if you are already familiar with installation of Oracle homes and use of gold images. 
+This is an optional lab. 
 
 ## Task 1: Install using AutoUpgrade
 
@@ -254,6 +254,7 @@ While AutoUpgrade installs a new Oracle home, you can inspect some of the patch 
     * The text on bug 28971177 states *Delete from recyclebin$ going for full table scan*.
     * The bug is solved by adding two indexes.
     * This illustrates how changes required by a bug fix gets into the database.
+    * Also note how the backport is registered by inserting a row into `REGISTRY$BACKPORTS`. 
 
     <details>
     <summary>*click to see the output*</summary>
@@ -302,7 +303,91 @@ While AutoUpgrade installs a new Oracle home, you can inspect some of the patch 
     ```
     </details>   
 
-## Task 3: Check AutoUpgrade
+## Task 3: Install manually
+
+Install an Oracle manually. This allows you to compare the two methods.
+
+1. Switch to the *blue* 🟦 terminal. Create a directory for the new Oracle home.
+
+    ```
+    <copy>
+    cd
+    export ORACLE_HOME=/u01/app/oracle/product/19_25_man
+    mkdir -p $ORACLE_HOME
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+2. Unzip the base release into the new Oracle home.
+
+    ```
+    <copy>
+    unzip /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip -d $ORACLE_HOME
+    </copy>
+    ```
+
+    * Oracle recommends that you always start with the base release when you install a new Oracle home.
+    * Oracle does not recommend using the same, cloned Oracle home over and over again. Over time, the Oracle home might become bloated.
+    * You can download the base release from www.oracle.com.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ unzip /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip -d $ORACLE_HOME
+    Archive:  /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip
+       creating: /u01/app/oracle/product/19_25_man/drdaas/
+       creating: /u01/app/oracle/product/19_25_man/drdaas/admin/
+      inflating: /u01/app/oracle/product/19_25_man/drdaas/admin/drdasqtt_translator_setup.sql
+      inflating: /u01/app/oracle/product/19_25_man/drdaas/admin/drdapkg_db2.sql
+    ...
+    (output truncated)  
+    ...
+      /u01/app/oracle/product/19_25_man/javavm/lib/security/cacerts -> ../../../javavm/jdk/jdk8/lib/security/cacerts
+      /u01/app/oracle/product/19_25_man/javavm/lib/sunjce_provider.jar -> ../../javavm/jdk/jdk8/lib/sunjce_provider.jar
+      /u01/app/oracle/product/19_25_man/javavm/lib/security/README.txt -> ../../../javavm/jdk/jdk8/lib/security/README.txt
+      /u01/app/oracle/product/19_25_man/javavm/lib/security/java.security -> ../../../javavm/jdk/jdk8/lib/security/java.security
+      /u01/app/oracle/product/19_25_man/jdk/jre/lib/amd64/server/libjsig.so -> ../libjsig.so
+    ```
+    </details>  
+
+3. Update OPatch.
+
+    ```
+    <copy>
+    cd $ORACLE_HOME
+    mv OPatch OPatch.old
+    unzip /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip -d $ORACLE_HOME
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ cd $ORACLE_HOME
+    $ mv OPatch OPatch.old
+    $ unzip /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip -d $ORACLE_HOME
+    Archive:  /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip
+       creating: /u01/app/oracle/product/19_25_man/OPatch/
+      inflating: /u01/app/oracle/product/19_25_man/OPatch/opatchauto
+       creating: /u01/app/oracle/product/19_25_man/OPatch/ocm/
+       creating: /u01/app/oracle/product/19_25_man/OPatch/ocm/doc/
+    ...
+    (output truncated)  
+    ...
+      inflating: /u01/app/oracle/product/19_25_man/OPatch/modules/features/com.oracle.orapki.jar
+      inflating: /u01/app/oracle/product/19_25_man/OPatch/modules/features/com.oracle.glcm.patch.opatch-common-api-classpath.jar
+      inflating: /u01/app/oracle/product/19_25_man/OPatch/modules/com.sun.org.apache.xml.internal.resolver.jar
+      inflating: /u01/app/oracle/product/19_25_man/OPatch/modules/com.sun.xml.bind.jaxb-jxc.jar
+      inflating: /u01/app/oracle/product/19_25_man/OPatch/modules/javax.activation.javax.activation.jar
+    ```
+    </details>  
+
+4. Next step is to start the installer. However, only one installer can be active at the same time. Let's check AutoUpgrade and the first Oracle home.
+
+## Task 4: Check AutoUpgrade
 
 Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
 
@@ -386,91 +471,11 @@ Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
     ```
     </details> 
 
-The remainder of this lab is about installing an Oracle home manually and using gold images. Those tasks are optional. You may *decide whether to move to the next lab*.
+## Task 5: Install manually, continued
 
-## Task 4: Install manually
+Now that AutoUpgrade has created the first Oracle home, you can start the installer to install the second Oracle home. 
 
-Install an Oracle manually. This allows you to compare the two methods.
-
-1. Switch to the *blue* 🟦 terminal. Create a directory for the new Oracle home.
-
-    ```
-    <copy>
-    cd
-    export ORACLE_HOME=/u01/app/oracle/product/19_25_man
-    mkdir -p $ORACLE_HOME
-    </copy>
-
-    -- Be sure to hit RETURN
-    ```
-
-2. Unzip the base release into the new Oracle home.
-
-    ```
-    <copy>
-    unzip /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip -d $ORACLE_HOME
-    </copy>
-    ```
-
-    * Oracle recommends that you always start with the base release when you install a new Oracle home.
-    * Oracle does not recommend using the same, cloned Oracle home over and over again. Over time, the Oracle home might become bloated.
-    * You can download the base release from www.oracle.com.
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    $ unzip /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip -d $ORACLE_HOME
-    Archive:  /home/oracle/patch-repo/LINUX.X64_193000_db_home.zip
-       creating: /u01/app/oracle/product/19_25_man/drdaas/
-       creating: /u01/app/oracle/product/19_25_man/drdaas/admin/
-      inflating: /u01/app/oracle/product/19_25_man/drdaas/admin/drdasqtt_translator_setup.sql
-      inflating: /u01/app/oracle/product/19_25_man/drdaas/admin/drdapkg_db2.sql
-    ...
-    (output truncated)  
-    ...
-      /u01/app/oracle/product/19_25_man/javavm/lib/security/cacerts -> ../../../javavm/jdk/jdk8/lib/security/cacerts
-      /u01/app/oracle/product/19_25_man/javavm/lib/sunjce_provider.jar -> ../../javavm/jdk/jdk8/lib/sunjce_provider.jar
-      /u01/app/oracle/product/19_25_man/javavm/lib/security/README.txt -> ../../../javavm/jdk/jdk8/lib/security/README.txt
-      /u01/app/oracle/product/19_25_man/javavm/lib/security/java.security -> ../../../javavm/jdk/jdk8/lib/security/java.security
-      /u01/app/oracle/product/19_25_man/jdk/jre/lib/amd64/server/libjsig.so -> ../libjsig.so
-    ```
-    </details>  
-
-3. Update OPatch.
-
-    ```
-    <copy>
-    cd $ORACLE_HOME
-    mv OPatch OPatch.old
-    unzip /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip -d $ORACLE_HOME
-    </copy>
-
-    -- Be sure to hit RETURN
-    ```
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    $ cd $ORACLE_HOME
-    $ mv OPatch OPatch.old
-    $ unzip /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip -d $ORACLE_HOME
-    Archive:  /home/oracle/patch-repo/p6880880_190000_Linux-x86-64.zip
-       creating: /u01/app/oracle/product/19_25_man/OPatch/
-      inflating: /u01/app/oracle/product/19_25_man/OPatch/opatchauto
-       creating: /u01/app/oracle/product/19_25_man/OPatch/ocm/
-       creating: /u01/app/oracle/product/19_25_man/OPatch/ocm/doc/
-    ...
-    (output truncated)  
-    ...
-      inflating: /u01/app/oracle/product/19_25_man/OPatch/modules/features/com.oracle.orapki.jar
-      inflating: /u01/app/oracle/product/19_25_man/OPatch/modules/features/com.oracle.glcm.patch.opatch-common-api-classpath.jar
-      inflating: /u01/app/oracle/product/19_25_man/OPatch/modules/com.sun.org.apache.xml.internal.resolver.jar
-      inflating: /u01/app/oracle/product/19_25_man/OPatch/modules/com.sun.xml.bind.jaxb-jxc.jar
-      inflating: /u01/app/oracle/product/19_25_man/OPatch/modules/javax.activation.javax.activation.jar
-    ```
-    </details>  
-
-4. Start the installer to attach the Oracle home and apply the patches at the same time.
+1. Switch to the *blue* 🟦 terminal. Start the installer to attach the Oracle home and apply the patches at the same time.
 
     ```
     <copy>
@@ -538,13 +543,44 @@ Install an Oracle manually. This allows you to compare the two methods.
     ```
     </details>  
 
-5. It takes around 10 minutes to install the Oracle home. Leave the process running and move on to the next task.
+5. It takes around 10 minutes to install the Oracle home. Leave the process running. You can start on the next lab, and return to this lab after a while.
 
-## Task 5: Use Gold Image
+## Task 6: Check manual installation
+
+1. Still in the *blue* 🟦 terminal. 
+
+2. The manual installation should be done by now. The installer should have exited with the message `Successfully Setup Software.`
+
+3. Check the patches in the new Oracle home.
+
+    ```
+    <copy>
+    $ORACLE_HOME/OPatch/opatch lspatches
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ $ORACLE_HOME/OPatch/opatch lspatches
+    29213893;DBMS_STATS FAILING WITH ERROR ORA-01422 WHEN GATHERING STATS FOR USER$ TABLE
+    36878697;OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
+    37056207;DATAPUMP BUNDLE PATCH 19.25.0.0.0
+    36912597;Database Release Update : 19.25.0.0.241015 (36912597)
+    29585399;OCW RELEASE UPDATE 19.3.0.0.0 (29585399)
+    
+    OPatch succeeded.
+    ```
+    </details> 
+
+4. In this lab, you can't run `root.sh` because of missing privileges. 
+
+
+## Task 7: Use Gold Image
 
 Gold images are a convenient way of installing Oracle homes on many different servers. You prepare and patch an Oracle home only once, and then distribute the patched Oracle home to all other servers.
 
-1. Switch back to the *yellow* terminal 🟨. Set the environment to the new Oracle home.
+1. Still in the *blue* 🟦 terminal. Set the environment to the new Oracle home.
 
     ```
     <copy>
@@ -637,34 +673,9 @@ Gold images are a convenient way of installing Oracle homes on many different se
     * The Oracle home is already patched, so you can skip that part.
     * OPatch is also already updated.
 
+5. Did you notice any difference in creating the new Oracle home using AutoUpgrade and manually?
 
-## Task 6: Check manual installation
-
-1. Switch back to the *blue* 🟦 terminal. The manual installation should be done by now. The installer should have exited with the message `Successfully Setup Software.`
-
-2. Check the patches in the new Oracle home.
-
-    ```
-    <copy>
-    $ORACLE_HOME/OPatch/opatch lspatches
-    </copy>
-    ```
-
-    <details>
-    <summary>*click to see the output*</summary>
-    ``` text
-    $ $ORACLE_HOME/OPatch/opatch lspatches
-    29213893;DBMS_STATS FAILING WITH ERROR ORA-01422 WHEN GATHERING STATS FOR USER$ TABLE
-    36878697;OJVM RELEASE UPDATE: 19.25.0.0.241015 (36878697)
-    37056207;DATAPUMP BUNDLE PATCH 19.25.0.0.0
-    36912597;Database Release Update : 19.25.0.0.241015 (36912597)
-    29585399;OCW RELEASE UPDATE 19.3.0.0.0 (29585399)
-    
-    OPatch succeeded.
-    ```
-    </details> 
-
-3. In this lab, you can't run `root.sh` because of missing privileges. 
+    * AutoUpgrade automates the process and you need just one command to perform all tasks.
 
 You may now *proceed to the next lab*.
 

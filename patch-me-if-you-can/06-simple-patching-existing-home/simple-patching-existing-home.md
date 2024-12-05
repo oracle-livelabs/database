@@ -17,11 +17,11 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 3: Simple Patching With AutoUpgrade
+- You have completed Lab 2: Simple Patching With AutoUpgrade
 
 ## Task 1: Analyze database
 
-You will use AutoUpgrade just like in lab 3. 
+You will use AutoUpgrade just like in lab 2. 
 
 1. Use the *yellow* terminal 🟨. In this lab, you use a pre-created config file. Examine the config file.
 
@@ -34,7 +34,7 @@ You will use AutoUpgrade just like in lab 3.
     -- Be sure to hit RETURN
     ```
 
-    * This config file is much simpler than the previous one from lab 3.
+    * This config file is much simpler than the previous one from lab 2.
     * Since the Oracle home exists, the patch process becomes easier.
     * The *UPGR* database is not running ARCHIVELOG mode, so you must disable restoration.
     
@@ -59,7 +59,7 @@ You will use AutoUpgrade just like in lab 3.
     ```
 
     * Since you don't need to build a new Oracle home, you need to omit the `-patch` parameter from the command line.
-    * Otherwise, you use the same commands as in lab 3.
+    * Otherwise, you use the same commands as in lab 2.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -175,8 +175,8 @@ Patching a single instance Oracle Database require downtime. Downtime starts now
 
 3. It takes just a few minutes to patch the database. Leave AutoUpgrade running.
 
-    * Optionally, switch to the *blue* 🟦 terminal and examine the log files.
-    * Or, you can use the `status -job 101 -a 10` command.
+    * You can press ENTER and can use the `status -job 101 -a 10` command.
+    * Explore the options in AutoUpgrade using the `help` command.
 
 4. When patching completes, AutoUpgrade exists.    
 

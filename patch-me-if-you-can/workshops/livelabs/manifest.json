@@ -19,14 +19,14 @@
       "filename": "../../01-initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 2: Familiarize with patching",
-      "description": "Familiarize with patching",
-      "filename": "../../02-familiarize-with-patching/familiarize-with-patching.md"
+      "title": "Lab 2: Simple patching",
+      "description": "Simple patching",
+      "filename": "../../02-simple-patching/simple-patching.md"
     },
     {
-      "title": "Lab 3: Simple patching",
-      "description": "Simple patching",
-      "filename": "../../03-simple-patching/simple-patching.md"
+      "title": "Lab 3: Familiarize with patching",
+      "description": "Familiarize with patching",
+      "filename": "../../03-familiarize-with-patching/familiarize-with-patching.md"
     },
     {
       "title": "Lab 4: Simple rollback",

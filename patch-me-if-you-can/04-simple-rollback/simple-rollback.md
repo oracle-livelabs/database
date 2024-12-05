@@ -19,11 +19,11 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 3: Simple Patching
+- You have completed Lab 2: Simple Patching
 
 ## Task 1: Check database
 
-1. Verify the *FTEX* database has been patched. Check `/etc/oratab`.
+1. Use the *yellow* terminal 🟨. Verify the *FTEX* database has been patched. Check `/etc/oratab`.
 
     ```
     <copy>
@@ -218,6 +218,14 @@ This lab assumes:
     19.21.0.0.0
     ```
     </details>      
+
+7. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
 
 You may now *proceed to the next lab*.
 

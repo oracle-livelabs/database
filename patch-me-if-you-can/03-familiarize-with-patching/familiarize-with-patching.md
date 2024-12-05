@@ -26,11 +26,11 @@ This is an optional lab. You can skip it if you are already familiar with patchi
 
 You use *OPatch* to perform the first part of patching an Oracle Database; patching the Oracle home. OPatch replaces some files in the Oracle home and might also add new files. If the Oracle home is in use, for instance by a database instance or listener, you must stop those processes. 
 
-1. Use the *yellow* terminal 🟨. Set the environment to *FTEX* and change to the Oracle home.
+1. Use the *blue* 🟦 terminal. Set the environment to *UPGR* and change to the Oracle home.
 
     ```
     <copy>
-    . ftex
+    . upgr
     cd $ORACLE_HOME
     </copy>
     ```
@@ -239,11 +239,11 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
 
 You can use the *queryable inventory* inside the database to get information from OPatch.
 
-1. Remain in the *yellow* terminal 🟨. Connect to the FTEX database.
+1. Remain in the *blue* 🟦 terminal. Connect to the *UPGR* database.
 
      ```
     <copy>
-    . ftex
+    . upgr
     sqlplus / as sysdba
     </copy>
 
@@ -340,7 +340,7 @@ You can use the *queryable inventory* inside the database to get information fro
 
 Datapatch applies or rolls back SQL changes to the database. 
 
-1. Remain in the *yellow* terminal 🟨. You find Datapatch in the *OPatch* directory. 
+1. Remain in the *blue* 🟦 terminal. You find Datapatch in the *OPatch* directory. 
     
     ```
     <copy>
@@ -514,7 +514,7 @@ Datapatch applies or rolls back SQL changes to the database.
     ```
     </details>   
 
-5. Connect to the FTEX database.
+5. Connect to the *UPGR* database.
 
      ```
     <copy>
@@ -571,7 +571,7 @@ Datapatch applies or rolls back SQL changes to the database.
 
 Here are a few useful queries that informs about the database.
 
-1. Still connected to the FTEX database. Get the Oracle home of the database.
+1. Still connected to the *UPGR* database. Get the Oracle home of the database.
 
     ```
     <copy>
@@ -683,13 +683,13 @@ Oracle recommends that you always use the latest version of AutoUpgrade.
     ``` text
     $ cd
     $ java -jar autoupgrade.jar -version
-    build.version 24.7.241021
-    build.date 2024/10/21 11:16:20 -0400
-    build.hash babf5a631
-    build.hash_date 2024/10/18 18:36:27 -0400
+    build.version 24.8.241119
+    build.date 2024/11/19 12:49:28 -0500
+    build.hash b404cf007
+    build.hash_date 2024/11/18 14:39:19 -0500
     build.supported_target_versions 12.2,18,19,21,23
     build.type production
-    build.label (HEAD, tag: v24.7, origin/stable_devel, stable_devel)
+    build.label (HEAD, tag: v24.8, origin/stable_devel, stable_devel)
     build.MOS_NOTE 2485457.1
     build.MOS_LINK https://support.oracle.com/epmos/faces/DocumentDisplay?id=2485457.1
     ```

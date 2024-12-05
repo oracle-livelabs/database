@@ -17,7 +17,7 @@ In this lab, you will:
 
 This lab assumes:
 
-- You have completed Lab 3: Simple Patching With AutoUpgrade
+- You have completed Lab 2: Simple Patching With AutoUpgrade
 
 ## Task 1: Examine Datapatch tables
 
@@ -107,7 +107,7 @@ Datapatch stores patching information inside the database. Understanding these t
     ```
 
     * This database was first patched from the base release, 19.3, to 19.21, including the OJVM and Data Pump bundle patches.
-    * In lab 3, you patched the database to 19.25.
+    * In lab 2, you patched the database to 19.25.
     * In lab 8, you rolled back to 19.21.
 
     <details>
