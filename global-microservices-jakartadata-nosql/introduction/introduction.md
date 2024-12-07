@@ -19,6 +19,48 @@ _Estimated Workshop Time:_ 90 Minutes
 
 _Estimated Time:_ 4 minutes
 
+
+### About Jakarta Data
+
+Jakarta Data is a modern API designed to simplify data persistence in Jakarta EE applications. It provides a consistent, developer-friendly abstraction for accessing and managing data stored in relational and non-relational databases. By focusing on standardization, Jakarta Data ensures interoperability between different Jakarta EE implementations while offering developers a familiar and intuitive programming model.
+
+Key features of Jakarta Data include:
+
+- **Declarative Data Access**: Supports repository-style data access patterns with minimal boilerplate code.
+- **Database Agnostic**: It is compatible with both relational and NoSQL databases, allowing seamless switching between database types.
+- **Integration with Jakarta EE**: Works harmoniously with Jakarta CDI, Jakarta Transactions, and other Jakarta EE specifications to provide a cohesive ecosystem.
+
+Jakarta Data's emphasis on simplifying data persistence makes it an essential tool for building scalable and maintainable enterprise applications.
+
+### About Jakarta NoSQL
+
+Jakarta NoSQL is a Jakarta EE specification that standardizes interactions with NoSQL databases. It provides a unified API bridging the gap between NoSQL database types, including document, column-family, key-value, and graph databases. By abstracting database-specific details, Jakarta NoSQL empowers developers to focus on application logic rather than database intricacies.
+
+Core features of Jakarta NoSQL:
+
+- **Repository Support**: Enables developers to define query methods declaratively in repository interfaces.
+- **Polyglot Persistence**: Allows applications to use multiple NoSQL database types seamlessly within the same project.
+- **Database Independence**: Offers an abstraction layer that reduces database lock-in, making it easier to switch database providers.
+
+Integration with Jakarta Data enhances data management capabilities by leveraging Jakarta Data's repository model for NoSQL databases.
+With Jakarta NoSQL, developers can harness the power of NoSQL databases while adhering to Jakarta EE standards, ensuring scalability and flexibility in enterprise-grade applications.
+
+### About Eclipse JNoSQL
+
+Eclipse JNoSQL is the reference implementation of both Jakarta NoSQL and Jakarta Data, offering a powerful framework for integrating Java applications with NoSQL databases. As an open-source project under the Eclipse Foundation, it delivers a robust and practical solution for developers seeking to leverage the flexibility of NoSQL databases while adhering to Jakarta standards.
+
+#### Key Features of Eclipse JNoSQL:
+- **Full Jakarta NoSQL Implementation**: Implements the Jakarta NoSQL API, enabling seamless integration with various NoSQL database types, including document, key-value, column-family, and graph databases.
+- **Support for Jakarta Data**: Provides an additional layer of abstraction for data access, making it easy to use repository-style patterns with NoSQL databases.
+- **Rich Object Mapping**: Facilitates mapping between Java objects and NoSQL data structures using annotations, simplifying persistence operations.
+- **Extensive Database Support**: Includes connectors for popular NoSQL databases like MongoDB, Cassandra, Redis, and Neo4j, with the flexibility to add support for others.
+- **Query APIs**: Offers both a fluent API and annotation-based query capabilities to handle complex queries with ease.
+- **Extensibility**: Designed to adapt quickly to new database types and features, ensuring long-term relevance.
+
+#### Why Use Eclipse JNoSQL?
+
+Eclipse JNoSQL bridges the gap between Java applications and NoSQL databases, reducing the complexity of managing diverse data stores. By adhering to the Jakarta NoSQL and Jakarta Data specifications, it ensures compatibility, consistency, and productivity, making it an essential tool for modern Java developers.
+
 ### About Oracle NoSQL Database
 
 Modern application developers have many choices when it comes to persisting data. NoSQL databases have become an essential tool, solving modern challenges that require handling high volumes of data, delivering fast response times, and supporting globally distributed users. Oracle NoSQL Database provides exceptional availability and predictable, single-digit millisecond response times, thanks to its horizontally scalable, shared-nothing architecture. The Oracle NoSQL Database Cloud Service further simplifies development by handling scale-out, monitoring, and maintenance.
