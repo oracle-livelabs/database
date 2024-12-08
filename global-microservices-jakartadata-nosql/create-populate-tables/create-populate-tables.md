@@ -120,7 +120,7 @@ and  echo the DDL statement so you can see what is being created.
     ```shell
     <copy>
     oci nosql table create --compartment-id "$OCI_NOSQL_COMPID"   \
-    --name Movie --ddl-statement "$DDL_TABLE" \
+    --name Book --ddl-statement "$DDL_TABLE" \
     --table-limits="{\"maxReadUnits\": 10,  \"maxStorageInGBs\": 1,  \"maxWriteUnits\": 10 }" \
     --wait-for-state SUCCEEDED --wait-for-state FAILED
     </copy>
@@ -158,7 +158,7 @@ screen. Click **Tables** on top right.
 
     ![click-tables](./images/click-tables.png)
 
-6. Click **Movie** table
+6. Click **Book** table
 
     ![capturenosql](./images/capturenosql.png)
 
@@ -177,7 +177,7 @@ screen. Click **Tables** on top right.
 
     ```
     <copy>
-    INSERT INTO Movie VALUES (
+    INSERT INTO Book VALUES (
       DEFAULT,
       {
         "title":"American Mystic",
@@ -199,30 +199,30 @@ screen. Click **Tables** on top right.
     RETURNING *
     </copy>
     ```
-8. Let's insert rows using the upload data feature. Upload the file `movie-file-kvjson.json` in your computer.
+8. Let's insert rows using the upload data feature. Upload the file `book-file-kvjson.json` in your computer.
 
-   Right click button on this link [upload-file](./files/movie-file-kvjson.json), then click on **Save link as**.
+   Right click button on this link [upload-file](./files/book-file-kvjson.json), then click on **Save link as**.
 
 
 9. Click **Upload Data**, and the 'Upload Data' screen appears.
 
     ![uplaod-data](./images/upload-data.png)
 
-10. Upload the file `movie-file-kvjson.json` that you download in the step 8 and wait for the download of 50 records. Click on **close** when finished with the upload.
+10. Upload the file `book-file-kvjson.json` that you download in the step 8 and wait for the download of 50 records. Click on **close** when finished with the upload.
     ![uplaod-data-screen](./images/upload-data-screen.png)
 
     To summarize, in this Lab you have seen two different ways to insert data into a table.
 
 ## Task 4:  Show Data From the Console
 
-Starting with the `Movie` demo table, we can go and look at the data we
+Starting with the `Book` demo table, we can go and look at the data we
 inserted for that table.
 
 1. On the left click **Explore data**
 
     ![table-row-select](./images/table-row-select.png)
 
-2. In the textbox **SQL statement**, check to see if the text **SELECT * FROM Movie** is
+2. In the textbox **SQL statement**, check to see if the text **SELECT * FROM Book** is
 present in the box.   If not, remove what is there and insert it.  This will
 select all the rows from our table. Click **Execute**
 
