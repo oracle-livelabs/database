@@ -38,7 +38,13 @@ In this task, we will review the code using the OCI Code Editor.
 
 4. Next, review the `Book.java` entity class in `expert/os/demos/books/domain`. This class represents a `Book` in the database and includes fields for `id`, `title`, `genre`, `publicationYear`, `author`, and `tags`.
 
-   Jakarta Data automatically maps this entity to a NoSQL table with the primary key as `id` and the rest of the fields stored as JSON.
+The annotations used in this class are part of Jakarta NoSQL and are designed to map Java objects to NoSQL database tables effectively. Key annotations include:
+
+- **`@Entity`**: This class is identified as a persistable entity, meaning it will be mapped to a table in the NoSQL database.
+- **`@Id`**: Marks the field used as the primary key for the entity, uniquely identifying each record in the database.
+- **`@Column`**: Specifies which fields are persistable in the database. Unlike JPA, where fields are persistable by default, in Jakarta NoSQL, you must explicitly annotate each field you want to store in the database.
+
+These annotations give developers precise control over how objects are stored and retrieved in NoSQL databases, aligning with NoSQL systems' flexibility and schema-less nature.
 
    ![Code createTable](./images/appl-code.png)
 
