@@ -178,24 +178,18 @@ screen. Click **Tables** on top right.
     ```
     <copy>
     INSERT INTO Book VALUES (
-      DEFAULT,
-      {
-        "title":"American Mystic",
-        "crew":[{"job":"director","names":["Alex Mar"]}],
-        "genre":["Documentary"],
-        "data":{
-          "image_url":"https://upload.wikimedia.org/wikipedia/en/b/b2/American_Mystic_2010.jpg",
-          "list_price":0.99,
-          "opening_date":"2010-04-01",
-          "runtime":"+80",
-          "sku":"MLN91283",
-          "summary":"American Mystic is a 2010 American documentary film by writer-director Alex Mar. It premiered in the documentary competition at the 2010 Tribeca Film Festival.",
-          "views":2,
-          "wiki_article":"American_Mystic",
-          "year":2010
-        }
-      }
-    )
+    'Book:ac789542-1827-4435-b48c-fb7b32fa9fdd',
+    'Book',
+    '{
+    "_id": "ac789542-1827-4435-b48c-fb7b32fa9fdd",
+    "author": "George Orwell",
+    "entity": "Book",
+    "genre": "DYSTOPIAN",
+    "publicationYear": 1949,
+    "tags": ["Political", "Classic", "Science Fiction"],
+    "title": "1984"
+    }'
+    );
     RETURNING *
     </copy>
     ```
