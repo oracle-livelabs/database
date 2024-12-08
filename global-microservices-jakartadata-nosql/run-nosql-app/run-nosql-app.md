@@ -32,7 +32,7 @@ In this task, we will review the code using the OCI Code Editor.
 
    ![Expand Cloud Editor](./images/cloud-code-editor-expand.png)
 
-3. Open `application.properties` in the directory `global-microservices-nosql/src/main/resources`. This configuration file is used to set application properties and database connection settings, enabling flexibility for deployment.
+3. Open `microprofile-config.properties` in the directory `global-microservices-nosql/src/main/resources`. This configuration file is used to set application properties and database connection settings, enabling flexibility for deployment.
 
    ![Code createTable](./images/appl-properties.png)
 
