@@ -59,7 +59,9 @@ Eclipse JNoSQL is the reference implementation of both Jakarta NoSQL and Jakarta
 
 #### Why Use Eclipse JNoSQL?
 
-Eclipse JNoSQL bridges the gap between Java applications and NoSQL databases, reducing the complexity of managing diverse data stores. By adhering to the Jakarta NoSQL and Jakarta Data specifications, it ensures compatibility, consistency, and productivity, making it an essential tool for modern Java developers.
+Eclipse JNoSQL bridges the gap between Java applications and NoSQL databases, reducing the complexity of managing diverse data stores. Adhering to the Jakarta NoSQL and Jakarta Data specifications ensures compatibility, consistency, and productivity, making it an essential tool for modern Java developers.
+
+Eclipse JNoSQL is designed to work seamlessly with any Java framework that supports Eclipse MicroProfile or Jakarta EE vendors. This flexibility means you can integrate Eclipse JNoSQL with frameworks like Helidon, Quarkus, WildFly, Payara, and others, ensuring it fits effortlessly into your chosen technology stack.
 
 ### About Oracle NoSQL Database
 
