@@ -119,26 +119,20 @@ In this task, we will review the code using the OCI Code Editor.
     curl $URL
     ```
 
-6. Search for a book by title:
-
-    ```shell
-    curl http://localhost:8080/api/books/search/findByTitle?title=NewBookTitle
-    ```
-
-7. Delete the book and validate its removal:
+6. Delete the book and validate its removal:
 
     ```shell
     curl -i -X DELETE $URL
     curl $URL
     ```
 
-8. Stop the application (use `CTRL + C`) and delete temporary files:
+7. Stop the application (use `CTRL + C`) and delete temporary files:
 
     ```shell
     rm nohup.out result-test.txt
     ```
 
-9. Execute SQL queries over REST using the OCI CLI.
+8. Execute SQL queries over REST using the OCI CLI.
 
     ```shell
     SQL_STATEMENT="SELECT * from Book"
