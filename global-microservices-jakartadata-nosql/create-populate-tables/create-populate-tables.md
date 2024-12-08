@@ -249,4 +249,4 @@ You may now **proceed to the next lab.**
 
 
 ## Acknowledgements
-* **Author** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director NoSQL Development
+* **Authors** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director NoSQL Development; Otavio Santana, Award-winning Software Engineer and Architect
