@@ -23,7 +23,7 @@ _Estimated Time:_ 20 minutes
 
 ## Task 1: Create a GAT
 
-Before deploying the application in multiple regions, we will create replicas for the `movie` table.
+Before deploying the application in multiple regions, we will create replicas for the `book` table.
 
 1. From the hamburger menu, click **Databases**. Under Oracle NoSQL Databases, click **Tables**.
 Click the **Movie** table. Under **Resources**, click **Replicas**.
@@ -92,7 +92,7 @@ set up your environment. If you close/open the Cloud Shell Console, please re-ex
     nohup ./mvnw spring-boot:run &
     </copy>
     ```
-    **Note:** This will start the "movie" application in the background.
+    **Note:** This will start the "book" application in the background.
 
 2. After you complete step 1, you can use the command tail to see the startup for the application
 
@@ -109,7 +109,7 @@ set up your environment. If you close/open the Cloud Shell Console, please re-ex
 
     ```shell
     <copy>
-    curl  http://localhost:8080/api/movie | jq
+    curl  http://localhost:8080/api/book | jq
     </copy>
     ```
 
