@@ -50,6 +50,8 @@ These annotations give developers precise control over how objects are stored an
 
 5. Review `BookRepository.java`, also located in `expert/os/demos/books/domain`. This repository interface extends `BasicRepository`, which provides CRUD methods to interact with the `Book` entity in Oracle NoSQL.
 
+The `BasicRepository` interface is part of Jakarta Data and offers a set of predefined database operations, such as `save,` `delete,` `findById,` and more, to streamline interaction with the database. Beyond these built-in methods, Jakarta Data allows you to define custom queries through method naming conventions, such as `findByName`, where the query is automatically derived based on the method name. Additionally, Jakarta Data supports annotation-based operations, such as `@Insert`, `@Update`, `@Delete`, and `@Save`, which let you explicitly define specific actions. The provider implements all these functionalities, meaning developers only need to define the interface, and the underlying implementation is automatically handled, simplifying development and reducing boilerplate code.
+
    Open `BookRepository.java`:
 
    ![Code BookRepository](./images/appl-code-repository.png)
@@ -59,7 +61,6 @@ These annotations give developers precise control over how objects are stored an
    - `create`: Maps `BookRequest` to `Book` and saves it.
    - `update`: Updates an existing book by ID.
    - `findById`: Retrieves a book by ID.
-   - `getAllBooks`: Retrieves all books with pagination and sorting by title.
    - `delete`: Deletes a book by ID.
 
    This class also logs activities, providing visibility into operations performed.
