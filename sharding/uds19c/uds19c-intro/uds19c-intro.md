@@ -27,7 +27,7 @@ Once you complete your setup, the next lab will cover:
 - Exploring the user-defined sharding method implementation for Data Sovereignty
 - Testing the use-cases
 
-We will use Docker containers and demonstrate multiple use cases.
+We will use Podman containers and demonstrate multiple use cases.
 
 ### Prerequisites
 
@@ -37,11 +37,11 @@ You may now **proceed to the next lab**
 
 ## Learn More
 
-- [Achieving Data Sovereignty with Oracle Sharding : Release 23 Internal link](https://docs.oracle.com/en/database/oracle/oracle-database/21/shard/achieving-data-sovereignty-oracle-sharding1.html#GUID-4AA1D64A-F89B-462A-BA4E-F04038665999)
+- [Achieving Data Sovereignty with Oracle Sharding : Release 23 Internal link](https://docs.oracle.com/en/database/oracle/oracle-database/23/shard/achieving-data-sovereignty-oracle-sharding.html#GUID-4AA1D64A-F89B-462A-BA4E-F04038665999)
 
 
 ## Acknowledgements
 
 * **Authors** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff, October 2023
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff, November 2024

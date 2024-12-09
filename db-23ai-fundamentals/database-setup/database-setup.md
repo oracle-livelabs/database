@@ -20,7 +20,7 @@ The objective of this workshop is to set up the 23ai always free ADB. The follow
 
     ![locate adb](images/im2.png " ")
 
-3. Keep the default compartment and give the datable a display name and database name. Let's name it db23ai. Next **click** transaction Processing and keep the serverless option for the database.
+3. Keep the default compartment and give the database a display name and database name. Let's name it db23ai. Next **click** transaction Processing and keep the serverless option for the database.
 
     ![locate adb](images/im3.png " ")
 
@@ -33,7 +33,7 @@ The objective of this workshop is to set up the 23ai always free ADB. The follow
 
     ![locate adb](images/im5.png " ")
 
-6. The databse in now being created for us. It should take around 5 min or less. Once its available it will show green and say Available.
+6. The database in now being created for us. It should take around 5 min or less. Once its available it will show green and say Available.
 
     ![locate adb](images/im6.png " ")
 
