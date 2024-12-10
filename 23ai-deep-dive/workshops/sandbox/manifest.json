@@ -49,14 +49,6 @@
             "type": "livelabs",
             "filename": "../../../db-23ai-fundamentals/new-error-message-improvements/new-error-message-improvements.md"
         },
-
-        {
-            "title": "Lab: SQL Firewall",
-            "description": "Fortify your database security with SQL Firewall, protecting against unauthorized access and potential threats.",
-            "type": "livelabs",
-            "filename": "../../../db-23ai-fundamentals/new-sql-firewall/new-sql-firewall.md"
-        },
-
         {
             "title": "Lab: Annotations",
             "description": "Creating Annotations",
@@ -81,8 +73,15 @@
             "type": "livelabs",
             "filename": "../../../db-23ai-fundamentals/new-shrink-tablespace/new-shrink-tablespace.md"
         },
+
         {
-            "title": "Workshop: Build Your Own RAG App",
+            "title": "Workshop: AI Vector Search - Running a RAG Application",
+            "description": "Run a RAG application",
+            "type": "livelabs",
+            "filename": "../../../demo/demo.md"
+        },
+        {
+            "title": "Lab: Build Your Own RAG App",
             "description": "Exploring RAG",
             "type": "livelabs",
             "filename": "../../../ai-vector-rag/rag/rag.md"
