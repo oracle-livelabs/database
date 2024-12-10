@@ -382,6 +382,7 @@ You will patch *CDB19* to 19.25 and use an existing Oracle home.
     ```
 
     * Notice *YES* in the *RESTRICTED* column of *INDIGO*.
+    * Datapatch can patch a PDB as long as it is open *READ WRITE*. Even if a PDB is open in *RESTRICTED* mode, you can still patch it with Datapatch.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -410,6 +411,7 @@ You will patch *CDB19* to 19.25 and use an existing Oracle home.
 
     * Notice that *INDIGO* now opens without errors.
     * **Use this underscore parameter with caution!** Although the PDB opens unrestricted, it is still unpatched.
+    * Although you can use the parameter to forcefully open the PDB and allow users to connect, you must still complete the patching process.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -449,7 +451,7 @@ You will patch *CDB19* to 19.25 and use an existing Oracle home.
              3 INDIGO        READ WRITE NO    
              4 ORANGE        READ WRITE NO
     ```
-    </details>   
+    </details>
 
 9. Exit SQL*Plus.
 
