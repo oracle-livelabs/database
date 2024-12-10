@@ -369,9 +369,11 @@ Patching a single instance Oracle Database require downtime.
 
 8. Spend some time examining the other log files and subdirectories.
 
-9. Optionally, you can perform lab 3, *Familiarize with patching*. 
+9. Switch back to the *yellow* terminal 🟨. It takes around 20 minutes to patch the database. If AutoUpgrade is still running, you either wait or you can perform lab 3, *Familiarize with patching*. 
 
-9. Still in the *yellow* terminal 🟨. It takes around 20 minutes to patch the database. AutoUpgrade prints a message to the console and exists when patching completes. 
+## Task 3: Patch database, continued
+
+1. Use the *yellow* terminal 🟨. When AutoUpgrade completes, it prints a message to the console and exists. 
 
     * AutoUpgrade informs that there is a guaranteed restore point which you must remove when it is no longer needed. Don't remove the restore point yet.
     * Optionally, you can instruct AutoUpgrade to remove the restore point automatically using `drop_grp_after_upgrade=yes` in the config file.
@@ -398,7 +400,7 @@ Patching a single instance Oracle Database require downtime.
     ```
     </details> 
 
-10. Update the profile script. Since the database now runs out of a new Oracle home, you must update the profile script. This command replaces the `ORACLE_HOME` variable in the profile script.
+2. Update the profile script. Since the database now runs out of a new Oracle home, you must update the profile script. This command replaces the `ORACLE_HOME` variable in the profile script.
 
     ```
     <copy>
@@ -406,7 +408,7 @@ Patching a single instance Oracle Database require downtime.
     </copy>
     ``` 
 
-11. That's it. You just patched your Oracle Database including:
+3. That's it. You just patched your Oracle Database including:
     * Building a brand-new Oracle home enabling out-of-place patching
     * Updating OPatch
     * Installing Release Update and bundle patches

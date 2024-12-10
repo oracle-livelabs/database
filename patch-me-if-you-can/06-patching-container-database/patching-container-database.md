@@ -94,7 +94,7 @@ You will patch *CDB19* to 19.25 and use an existing Oracle home.
     </copy>
     ```    
 
-7. Move the SPFile and password file back to the new Oracle home. 
+7. Move the SPFile and password file to the new Oracle home. 
 
     ```
     <copy>

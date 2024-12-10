@@ -316,7 +316,7 @@ In the Oracle home you find other software components, that is patched together 
     set pagesize 100
     col directory_name format a25
     col directory_path format a50
-    select directory_name , directory_path from dba_directories where owner='SYS' order by 2;
+    select directory_name, directory_path from dba_directories where owner='SYS' order by 2;
     </copy>
 
     -- Be sure to hit RETURN
@@ -327,7 +327,7 @@ In the Oracle home you find other software components, that is patched together 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> select directory_name , directory_path from dba_directories where owner='SYS' order by 2;
+    SQL> select directory_name, directory_path from dba_directories where owner='SYS' order by 2;
     
     DIRECTORY_NAME            DIRECTORY_PATH
     ------------------------- --------------------------------------------------
@@ -442,7 +442,7 @@ In the Oracle home you find other software components, that is patched together 
 
 Optimizer fixes are provided as part of the Release Update. However, those optimizer fixes which might cause plan changes are turned off. Meaning the fix is present in the database, but the old code is still activated. This allows you to maintain maximum plan stability in your database and only turn on those optimizer fixes that you need for a given problem.
 
-1. List all the optimizer fixes that were added by the last Release Update. 
+1. Still in the *yellow* terminal 🟨 and connected to the *FTEX* database. List all the optimizer fixes that were added by the last Release Update. 
 
     ```
     <copy>
@@ -566,62 +566,108 @@ Optimizer fixes are provided as part of the Release Update. However, those optim
     
     PL/SQL procedure successfully completed.
     ```
-    </details>      
+    </details>
 
 6. Check the setting of the `_fix_control` parameter.
 
     ```
     <copy>
-    set pagesize 1000
-    select replace(value, ', ', chr(10)) as fixes from v$system_parameter where name='_fix_control';
+    select value from v$system_parameter where name='_fix_control';
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
-    * The output is formatted which a fix on each line.
+    * The output is formatted as a comma-separated string.
+    * Each element is a key-value pair with the bug number and the setting.
     * You can look up a specific fix in My Oracle Support to learn more about it.
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> set pagesize 1000
-    SQL> select replace(value, ', ', chr(10)) as fixes from v$system_parameter where name='_fix_control';
+    SQL> select value from v$system_parameter where name='_fix_control';
     
-    FIXES
-    --------------------------------------------------------------------------------
-    29331066:1
-    28965084:1
-    28776811:1
-    28498976:1
-    28567417:1
-    ....
-    (output truncated)
-    ....
-    35412607:1
-    34044661:1
-    33549743:0
-    34816383:0
-    35330506:1    
+    VALUE
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------    ----------------
+    29331066:1, 28965084:1, 28776811:1, 28498976:1, 28567417:1, 28558645:1, 29132869:1, 29450812:1, 29687220:1, 29939400:1, 30232638:1, 30001331:0, 29304314:1, 29930457:1, 30028663:1,     28144569:1, 28776431
+    :1, 27261477:1, 31069997:1, 31077481:1, 28602253:1, 29653132:0, 29937655:1, 30347410:1, 30602828:1, 30896685:0, 29487407:1, 30998035:1, 30786641:1, 31444353:0, 30486896:1, 28999046:1,     30902655:1, 3068
+    1521:1, 29302565:1, 30972817:1, 30222669:1, 31668694:1, 31001490:1, 30198239:7, 30980115:1, 30616738:0, 31895670:0, 19138896:1, 31670824:0, 9876287:0, 30564898:1, 32075777:0,     30570982:1, 30927440:1, 3
+    0822446:1, 24561942:1, 31625959:1, 31579233:1, 29696242:1, 30228422:1, 17295505:1, 29725425:1, 30618230:1, 30008456:1, 30537403:1, 30235878:1, 30646077:1, 29657973:1, 29712727:1,     20922160:1, 30006705:
+    1, 29463553:1, 30751171:1, 31009032:1, 30063629:1, 30207519:1, 31517502:1, 30617002:1, 30483217:1, 30235691:1, 30568514:1, 28414968:3, 32014520:1, 30249927:1, 31580374:1, 29590666:0,     29435966:1, 28173
+    995:1, 29867728:1, 30776676:1, 26577716:1, 30470947:1, 30979701:1, 30483184:1, 31001295:1, 31191224:1, 31974424:1, 29385774:1, 28234255:3, 31459242:0, 31082719:1, 28708585:1,     31821701:1, 32107621:1, 2
+    6758837:1, 31558194:1, 30781970:0, 30142527:1, 31143146:1, 31961578:0, 31496840:1, 22387320:1, 30652595:1, 25979242:1, 32578113:1, 32205825:1, 32408640:1, 31988833:1, 32800137:0,     31360214:1, 32913527:
+    0, 29738374:1, 33325981:1, 31945701:0, 32212062:0, 32766397:0, 32508585:1, 29651517:1, 31912834:1, 33145153:1, 31880080:0, 31050103:1, 30018126:1, 33303725:1, 32856375:1, 32754044:1,     33297275:1, 32851
+    615:1, 32302470:1, 27825962:0, 33323903:1, 31162457:1, 31843716:0, 28044739:1, 30771009:1, 33636280:0, 31545400:1, 30618406:1, 32614157:1, 33329027:1, 33311488:1, 32396085:1,     29972495:1, 32363981:1, 3
+    1582179:1, 30978868:1, 33381775:1, 33906515:1, 33443834:1, 33730024:1, 33649782:1, 33236729:1, 34092979:0, 33987911:1, 34028486:1, 32874571:0, 26491973:1, 30675651:0, 10123661:1,     30887435:1, 30231086:
+    1, 30195773:1, 31091402:1, 33547527:1, 18101156:0, 34428819:1, 31209735:1, 30609737:1, 32498602:1, 29499077:1, 32527739:1, 31266779:1, 31487332:1, 25869323:1, 31925765:0, 33667505:1,     33369863:1, 32933
+    936:0, 34131435:1, 33745469:1, 29015273:0, 34701323:1, 34123350:1, 32016340:0, 34244753:1, 34467295:0, 23220873:1, 32061341:1, 33548186:0, 33421972:0, 32616683:1, 33627879:1,     32005394:1, 33069936:1, 3
+    5012562:1, 34685578:1, 31184370:1, 35313797:1, 35412607:1, 34044661:1, 33549743:0, 34816383:0, 35330506:1
     ```
     </details>   
 
-7. Selectively turn a fix *OFF*. 
+7. Format the output in a more readable way.
 
     ```
     <copy>
-    exec dbms_optim_bundle.set_fix_controls('35330506:0','*', 'BOTH','NO');
+    set pagesize 1000
+    col value format a40
+    select * from (
+       select     trim(regexp_substr (str,'[^,]+',1,level)) value
+       from       (select value as str from v$system_parameter where name='_fix_control')
+       connect by level <= length ( str ) - length ( replace ( str, ',' ) ) + 1
+    ) order by 1;
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    * Each bug is now in a separate row.
+    * You can see there are 209 bug fixes currently.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> set pagesize 1000
+    SQL> col value format a40
+    SQL> select * from (
+            select     trim(regexp_substr (str,'[^,]+',1,level)) value
+            from       (select value as str from v$system_parameter where name='_fix_control')
+            connect by level <= length ( str ) - length ( replace ( str, ',' ) ) + 1
+         ) order by 1;
+    
+    VALUE
+    ----------------------------------------
+    10123661:1
+    17295505:1
+    18101156:0
+    19138896:1
+    ....
+    (output truncated)
+    ....
+    35012562:1
+    35313797:1
+    35330506:1
+    35412607:1
+    9876287:0
+    
+    209 rows selected. 
+    ```
+    </details>   
+
+8. Selectively turn a fix *OFF*. 
+
+    ```
+    <copy>
+    exec dbms_optim_bundle.set_fix_controls('35412607:0','*', 'BOTH','NO');
     </copy>
     ```
 
-    * *35330506* is one of the fixes from the output of the previous command.
+    * *35412607* is one of the fixes from the output of the previous command.
     * You can use the procedure to turn fixes *ON* as well.
 
     <details>
     <summary>*click to see the output*</summary>
     ``` text
-    SQL> exec dbms_optim_bundle.set_fix_controls('35330506:0','*', 'BOTH','NO');
-    DBMS_OPTIM command: dbms_optim_bundle.set_fix_controls('35330506:0', '*','BOTH', 'NO')
+    SQL> exec dbms_optim_bundle.set_fix_controls('35412607:0','*', 'BOTH','NO');
+    DBMS_OPTIM command: dbms_optim_bundle.set_fix_controls('35412607:0', '*','BOTH', 'NO')
     
     1) Current _fix_control setting for spfile:
     28965084:1  28776811:1	28567417:1  29132869:1	31444353:0  30927440:1
@@ -636,23 +682,85 @@ Optimizer fixes are provided as part of the Release Update. However, those optim
     18101156:0  29499077:1	31487332:1  25869323:1	33421972:0
     
     3) Current _fix_control setting in memory for sid = FTEX
-    35330506:1
+    35412607:1
     
     4) Final _fix_control setting for memory considering current_setting_precedence
     is NO
-    35330506:0
+    35412607:0
     
     PL/SQL procedure successfully completed.
     ```
     </details>      
 
-8. Exit SQL*Plus.
+9. Check the parameter *\_fix\_control* again and see that the value has changed for bug 35412607 from *1* to *0*. 
+
+    ```
+    <copy>
+    select * from (
+       select     trim(regexp_substr (str,'[^,]+',1,level)) value
+       from       (select value as str from v$system_parameter where name='_fix_control')
+       connect by level <= length ( str ) - length ( replace ( str, ',' ) ) + 1
+    ) where value like '35412607%';
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> select * from (
+            select     trim(regexp_substr (str,'[^,]+',1,level)) value
+            from       (select value as str from v$system_parameter where name='_fix_control')
+            connect by level <= length ( str ) - length ( replace ( str, ',' ) ) + 1
+         ) where value like '35412607%';
+    
+    VALUE
+    ----------------------------------------
+    35412607:0
+    ```
+    </details>   
+
+10. Create a PFile.
+
+    ```
+    <copy>
+    create pfile from spfile;
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> create pfile from spfile;
+    
+    File created.
+    ```
+    </details>   
+
+11. Exit SQL*Plus.
 
     ```
     <copy>
     exit
     </copy>
     ```    
+
+12. Check the lengthy *\_fix\_control* parameter in the PFile.
+
+    ```
+    <copy>
+    grep "fix_control" $ORACLE_HOME/dbs/initFTEX.ora
+    </copy>
+    ```
+
+    * All bug fix key-value pairs are in one long comma-separated value.
+    
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    [FTEX:oracle@holserv1:~]$ grep "fix_control" $ORACLE_HOME/dbs/initFTEX.ora
+    *._fix_control='35412607:0','28965084:1','28776811:1','28567417:1','29132869:1','31444353:0','30927440:1','24561942:1','17295505:1','30646077:1','29463553:1','31580374:1','28173995:1','29867728:1','31974424:1','28708585:1','26758837:1','32205825:1','31912834:1','31843716:0','33443834:1','34028486:1','34816383:0','30001331:0','29930457:1','30028663:1','29653132:0','30998035:1','30902655:1','30681521:1','29302565:1','30198239:7','31625959:1','31579233:1','31517502:1','30568514:1','32014520:1','29590666:0','26577716:1','29385774:1','31082719:1','31558194:1','31961578:0','29738374:1','32851615:1','27825962:0','33730024:1','31091402:1','33369863:1','32933936:0','32061341:1','35330506:1','28144569:1','30347410:1','30602828:1','9876287:0','30570982:1','30822446:1','30008456:1','29657973:1','30483217:1','22387320:1','31360214:1','33325981:1','31880080:0','30771009:1','32614157:1','33329027:1','33311488:1','32363981:1','33236729:1','32874571:0','30887435:1','30195773:1','33547527:1','31209735:1','32498602:1','32005394:1','35012562:1','34044661:1','28558645:1','29450812:1','29687220:1','29939400:1','30896685:0','28999046:1','30972817:1','30222669:1','31668694:1','30616738:0','29725425:1','29712727:1','20922160:1','30063629:1','30617002:1','29435966:1','31191224:1','31496840:1','32212062:0','33145153:1','33303725:1','32754044:1','29972495:1','33906515:1','10123661:1','34428819:1','34131435:1','34701323:1','30232638:1','29304314:1','28776431:1','31077481:1','29487407:1','30980115:1','30564898:1','30618230:1','30537403:1','30235878:1','30249927:1','30979701:1','31001295:1','31459242:0','32107621:1','30142527:1','31945701:0','32508585:1','33297275:1','32302470:1','28044739:1','33636280:0','33381775:1','33649782:1','30231086:1','29015273:0','32016340:0','34244753:1','23220873:1','33548186:0','29331066:1','27261477:1','31069997:1','30486896:1','19138896:1','29696242:1','30228422:1','30751171:1','28414968:3','30652595:1','25979242:1','32913527:0','29651517:1','31545400:1','30618406:1','26491973:1','32527739:1','31266779:1','34123350:1','34467295:0','32616683:1','33627879:1','34685578:1','35313797:1','28602253:1','29937655:1','31001490:1','32075777:0','30006705:1','30207519:1','30776676:1','30470947:1','30483184:1','31821701:1','30781970:0','32408640:1','31988833:1','32766397:0','30018126:1','33323903:1','31162457:1','33987911:1','30675651:0','30609737:1','31925765:0','33667505:1','33745469:1','33069936:1','31184370:1','33549743:0','28498976:1','30786641:1','31895670:0','31670824:0','31009032:1','30235691:1','28234255:3','31143146:1','32578113:1','32800137:0','31050103:1','32856375:1','32396085:1','31582179:1','30978868:1','34092979:0','18101156:0','29499077:1','31487332:1','25869323:1','33421972:0'#added through dbms_optim_bundle package
+    ```
+    </details>   
 
 You may now *proceed to the next lab*.
 
