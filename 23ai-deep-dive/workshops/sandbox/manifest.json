@@ -7,24 +7,29 @@
             "title": "Get Started with LiveLabs",
             "filename": "../../get-started/combined-get-started.md"
         },
-
         {
-            "title": "Lab: SQL Domains",
-            "description": "Using SQL Domains",
+            "title": "Lab: IF Exists for DDL",
+            "description": "Simplify data definition language operations with the introduction of conditional logic using 'IF Exists.'",
             "type": "livelabs",
-            "filename": "../../../db-23ai-fundamentals/new-domains/new-domains.md"
+            "filename": "../../../db-23ai-fundamentals/new-if-exists-for-ddl/new-if-exists-for-ddl.md"
         },
         {
-            "title": "Lab: Annotations",
-            "description": "Creating Annotations",
+            "title": "Lab: Direct Joins for Updates and Deletes",
+            "description": "Optimize update and delete operations by employing direct joins for increased efficiency.",
             "type": "livelabs",
-            "filename": "../../../db-23ai-fundamentals/annotations/annotations.md"
+            "filename": "../../../db-23ai-fundamentals/new-direct-joins-for-updates-deletes/new-direct-joins-for-updates-deletes.md"
         },
         {
-            "title": "Lab: SQL Firewall",
-            "description": "Fortify your database security with SQL Firewall, protecting against unauthorized access and potential threats.",
+            "title": "Lab: New Table Value Clause",
+            "description": "Explore the advantages of the new table value clause in SQL for enhanced data manipulation capabilities.",
             "type": "livelabs",
-            "filename": "../../../db-23ai-fundamentals/new-sql-firewall/new-sql-firewall.md"
+            "filename": "../../../db-23ai-fundamentals/new-table-value-clause/new-table-value-clause.md"
+        },
+        {
+            "title": "Lab: Boolean",
+            "description": "Embrace the Boolean data type in SQL for a more straightforward and efficient representation of truth values.",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-boolean/new-boolean.md"
         },
         {
             "title": "Lab: Schema Level Privileges",
@@ -39,16 +44,30 @@
             "filename": "../../../db-23ai-fundamentals/new-developer-role/new-developer-role.md"
         },
         {
-            "title": "Lab: Shrink Tablespace",
-            "description": "Optimize your database storage by mastering the technique of shrinking tablespaces efficiently.",
-            "type": "livelabs",
-            "filename": "../../../db-23ai-fundamentals/new-shrink-tablespace/new-shrink-tablespace.md"
-        },
-        {
             "title": "Lab: Error Message Improvements",
             "description": "Enhance user experience and troubleshooting by implementing improved error messages in your SQL environment.",
             "type": "livelabs",
             "filename": "../../../db-23ai-fundamentals/new-error-message-improvements/new-error-message-improvements.md"
+        },
+
+        {
+            "title": "Lab: SQL Firewall",
+            "description": "Fortify your database security with SQL Firewall, protecting against unauthorized access and potential threats.",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-sql-firewall/new-sql-firewall.md"
+        },
+
+        {
+            "title": "Lab: Annotations",
+            "description": "Creating Annotations",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/annotations/annotations.md"
+        },
+        {
+            "title": "Lab: SQL Domains",
+            "description": "Using SQL Domains",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-domains/new-domains.md"
         },
         {
             "title": "Lab: SQL Analysis Report",
@@ -57,37 +76,17 @@
             "filename": "../../../db-23ai-fundamentals/new-sql-analysis-report/new-sql-analysis-report.md"
         },
         {
-            "title": "Lab: Boolean",
-            "description": "Embrace the Boolean data type in SQL for a more straightforward and efficient representation of truth values.",
+            "title": "Lab: Shrink Tablespace",
+            "description": "Optimize your database storage by mastering the technique of shrinking tablespaces efficiently.",
             "type": "livelabs",
-            "filename": "../../../db-23ai-fundamentals/new-boolean/new-boolean.md"
+            "filename": "../../../db-23ai-fundamentals/new-shrink-tablespace/new-shrink-tablespace.md"
         },
-        {
-            "title": "Lab: IF Exists for DDL",
-            "description": "Simplify data definition language operations with the introduction of conditional logic using 'IF Exists.'",
-            "type": "livelabs",
-            "filename": "../../../db-23ai-fundamentals/new-if-exists-for-ddl/new-if-exists-for-ddl.md"
-        },
-        {
-            "title": "Lab: New Table Value Clause",
-            "description": "Explore the advantages of the new table value clause in SQL for enhanced data manipulation capabilities.",
-            "type": "livelabs",
-            "filename": "../../../db-23ai-fundamentals/new-table-value-clause/new-table-value-clause.md"
-        },
-        {
-            "title": "Lab: Direct Joins for Updates and Deletes",
-            "description": "Optimize update and delete operations by employing direct joins for increased efficiency.",
-            "type": "livelabs",
-            "filename": "../../../db-23ai-fundamentals/new-direct-joins-for-updates-deletes/new-direct-joins-for-updates-deletes.md"
-        },
-
         {
             "title": "Workshop: Build Your Own RAG App",
             "description": "Exploring RAG",
             "type": "livelabs",
             "filename": "../../../ai-vector-rag/rag/rag.md"
         },
-
         {
             "title": "Workshop: Create the JSON schema",
             "description": "Creating the schema including JSON Duality Views",
