@@ -12,115 +12,115 @@
             "title": "--Oracle Database 23ai New Features",
             "description": "This is an introduction to installing and exploring the Oracle Database 23ai Free",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/intro/23ai-intro.md"
+            "filename": "../db-23ai-fundamentals/intro/23ai-intro.md"
         },
         {
             "title": "Application Development",
             "description": "Application Development in the Oracle Database",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/intro/intro-application-development.md"
+            "filename": "../db-23ai-fundamentals/intro/intro-application-development.md"
         },
         {
             "title": "Lab: Property Graphs",
             "description": "Building Property Graphs",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/new-property-graph/property-graph-se-deep-dive.md"
+            "filename": "../db-23ai-fundamentals/new-property-graph/property-graph-se-deep-dive.md"
         },
         {
             "title": "Lab: SQL Domains",
             "description": "Using SQL Domains",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/new-domains/new-domains.md"
+            "filename": "../db-23ai-fundamentals/new-domains/new-domains.md"
         },
         {
             "title": "Lab: Annotations",
             "description": "Creating Annotations",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/annotations/annotations.md"
+            "filename": "../db-23ai-fundamentals/annotations/annotations.md"
         },
         {
             "title": "High Availability",
             "description": "Talks about some of the new HA features in 23ai",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/intro/new-high-availability.md"
+            "filename": "../db-23ai-fundamentals/intro/new-high-availability.md"
         },
         {
             "title": "Security",
             "description": "Security in 23ai",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/intro/new-security.md"
+            "filename": "../db-23ai-fundamentals/intro/new-security.md"
         },
         {
             "title": "Lab: SQL Firewall",
             "description": "Fortify your database security with SQL Firewall, protecting against unauthorized access and potential threats.",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/new-sql-firewall/new-sql-firewall.md"
+            "filename": "../db-23ai-fundamentals/new-sql-firewall/new-sql-firewall.md"
         },
         {
             "title": "Lab: Schema Level Privileges",
             "description": "Gain insights into schema-level privileges management, enhancing control and security at a granular level.",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/new-schema-level-privileges/new-schema-level-privileges.md"
+            "filename": "../db-23ai-fundamentals/new-schema-level-privileges/new-schema-level-privileges.md"
         },
         {
             "title": "Lab: Developer Role",
             "description": "Establish and configure a dedicated developer role, streamlining development activities within the database.",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/new-developer-role/new-developer-role.md"
+            "filename": "../db-23ai-fundamentals/new-developer-role/new-developer-role.md"
         },
         {
             "title": "Performance & Database Lifecycle Management",
             "description": "Performance & Database Lifecycle Management in 23ai",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/intro/new-performance.md"
+            "filename": "../db-23ai-fundamentals/intro/new-performance.md"
         },
         {
             "title": "Lab: Shrink Tablespace",
             "description": "Optimize your database storage by mastering the technique of shrinking tablespaces efficiently.",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/new-shrink-tablespace/new-shrink-tablespace.md"
+            "filename": "../db-23ai-fundamentals/new-shrink-tablespace/new-shrink-tablespace.md"
         },
         {
             "title": "Lab: Error Message Improvements",
             "description": "Enhance user experience and troubleshooting by implementing improved error messages in your SQL environment.",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/new-error-message-improvements/new-error-message-improvements.md"
+            "filename": "../db-23ai-fundamentals/new-error-message-improvements/new-error-message-improvements.md"
         },
         {
             "title": "Lab: SQL Analysis Report",
             "description": "Learn to generate comprehensive SQL analysis reports for performance optimization.",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/new-sql-analysis-report/new-sql-analysis-report.md"
+            "filename": "../db-23ai-fundamentals/new-sql-analysis-report/new-sql-analysis-report.md"
         },
         {
             "title": "SQL Enhancements",
             "description": "SQL Enhancements in the Oracle Database",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/intro/sql-enhancements.md"
+            "filename": "../db-23ai-fundamentals/intro/sql-enhancements.md"
         },
         {
             "title": "Lab: Boolean",
             "description": "Embrace the Boolean data type in SQL for a more straightforward and efficient representation of truth values.",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/new-boolean/new-boolean.md"
+            "filename": "../db-23ai-fundamentals/new-boolean/new-boolean.md"
         },
         {
             "title": "Lab: IF Exists for DDL",
             "description": "Simplify data definition language operations with the introduction of conditional logic using 'IF Exists.'",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/new-if-exists-for-ddl/new-if-exists-for-ddl.md"
+            "filename": "../db-23ai-fundamentals/new-if-exists-for-ddl/new-if-exists-for-ddl.md"
         },
         {
             "title": "Lab: New Table Value Clause",
             "description": "Explore the advantages of the new table value clause in SQL for enhanced data manipulation capabilities.",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/new-table-value-clause/new-table-value-clause.md"
+            "filename": "../db-23ai-fundamentals/new-table-value-clause/new-table-value-clause.md"
         },
         {
             "title": "Lab: Direct Joins for Updates and Deletes",
             "description": "Optimize update and delete operations by employing direct joins for increased efficiency.",
             "type": "livelabs",
-            "filename": "/db-23ai-fundamentals/new-direct-joins-for-updates-deletes/new-direct-joins-for-updates-deletes.md"
+            "filename": "../db-23ai-fundamentals/new-direct-joins-for-updates-deletes/new-direct-joins-for-updates-deletes.md"
         },
 
 
@@ -128,7 +128,7 @@
             "title": "--AI Vector Search - Complete RAG application with Oracle AI Vector Search",
             "description": "This is an introduction to RAG",
             "type": "livelabs",
-            "filename": "/ai-vector-rag/introduction/introduction.md"
+            "filename": "../ai-vector-rag/introduction/introduction.md"
         },
         {
           "title": "Get Started",
@@ -139,13 +139,13 @@
           "title": "Lab: Running a RAG Application",
           "description": "Run a RAG application",
           "type": "livelabs",
-          "filename": "/ai-vector-rag/demo/demo.md"
+          "filename": "../ai-vector-rag/demo/demo.md"
         },
         {
             "title": "Lab: Build Your Own RAG App",
             "description": "Exploring RAG",
             "type": "livelabs",
-            "filename": "/ai-vector-rag/rag/rag.md"
+            "filename": "../ai-vector-rag/rag/rag.md"
         },
 
 
