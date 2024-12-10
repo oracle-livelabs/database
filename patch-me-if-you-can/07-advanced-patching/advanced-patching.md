@@ -662,6 +662,7 @@ Optimizer fixes are provided as part of the Release Update. However, those optim
 
     * *35412607* is one of the fixes from the output of the previous command.
     * You can use the procedure to turn fixes *ON* as well.
+    * Check the last section (no. 4) to see that the fix is turned off.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -675,7 +676,7 @@ Optimizer fixes are provided as part of the Release Update. However, those optim
     29867728:1  31974424:1	28708585:1  26758837:1	32205825:1  31912834:1
     31843716:0  33443834:1	34028486:1  34816383:0	35330506:1  30001331:0
     ....
-    (putput truncated)
+    (output truncated)
     ....  
     31009032:1  30235691:1	28234255:3  31143146:1	32578113:1  32800137:0
     31050103:1  32856375:1	32396085:1  31582179:1	30978868:1  34092979:0
@@ -703,6 +704,8 @@ Optimizer fixes are provided as part of the Release Update. However, those optim
     ) where value like '35412607%';
     </copy>
     ```
+
+    * This time a predicate is added to show just that bug fix.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -752,7 +755,8 @@ Optimizer fixes are provided as part of the Release Update. However, those optim
     </copy>
     ```
 
-    * All bug fix key-value pairs are in one long comma-separated value.
+    * All bug fix key-value pairs are in one long comma-separated line.
+    * The comment at the end of the line tells that the value was `#added through dbms_optim_bundle package`.
     
     <details>
     <summary>*click to see the output*</summary>
