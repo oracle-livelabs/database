@@ -253,7 +253,7 @@ This lab assumes you have:
 
     Let's see an example.
 
-    First, we can insert some orders into our Jim Brown customer. Here, we can use `mergepath`.
+    First, we can insert some orders into our Jim Brown customer. Here, we can use `json_mergepatch`.
 
 
 	```
@@ -322,7 +322,7 @@ This lab assumes you have:
 
     For a small example, I will show this using a macOS native terminal and execute a basic GET request.
 
-2. Click on SQL under the Development section. The first thing we want to do is enable REST on our Duality Views. Use the Oracle Database Actions Navigator on the left side of the screen, click the drop-down arrow for the box showing the Table objects, and select Views. Refer to the picture below.
+2. In the Navigator menu on the left hand side of the screen, click the drop-down arrow for the box showing the Table objects, and select Views. Refer to the picture below if needed.
 
     ![load rest](images/rest1.png " ")
 
@@ -350,7 +350,7 @@ This lab assumes you have:
     ADB_LL_URL=https://ajs6esm7pafcr84-atp97134.adb.us-ashburn-1.oraclecloudapps.com
     ```
 
-6. Now, create a variable in your terminal (It shouldn't have / at the end.)
+6. Now, if you're on macOS or Linux create a variable in your terminal (It shouldn't have / at the end.). If you're on windows, see step 9 below.
 
 	```
 	<copy>
@@ -367,7 +367,7 @@ This lab assumes you have:
     ```
     > NOTE: This base url will be unique for each user, verify that you are using the correct URL.
 
-8. Make a GET request from your laptop terminal command line.
+8. Make a GET request from your laptop terminal command line. I've done this on a macOS - if you're running on Windows, see step 9 below instead.
 
 	```
 	<copy>
@@ -377,12 +377,38 @@ This lab assumes you have:
     ```
     ![pull one doc](images/r1.png " ")
 
+9. 	If you're using a Windows 10 and up machine, run the following
 
-9. This lab is only intended to give you a small taste of what Duality Views have to offer. For full, in-depth free workshops, follow the link below:
+    ```
+	<copy>
+    set ADB_LL_URL=https://ajs6esm7pafcr84-atp97134.adb.us-ashburn-1.oraclecloudapps.com
+    </copy>
+    ```
+10. Check it was set.
+
+	```
+	<copy>
+    echo %ADB_LL_URL%
+    </copy>
+    ```
+    > NOTE: This base url will be unique for each user, verify that you are using the correct URL.
+
+11. Make a GET request from your laptop terminal command line. 
+
+	```
+	<copy>
+    curl -X GET %ADB_LL_URL%/ords/admin/customers_dv/
+    </copy>
+    ```
+    ![pull one doc](images/r1.png " ")
+
+12. This lab is only intended to give you a small taste of what Duality Views have to offer. For full, in-depth free workshops, follow the link below:
 
     [23ai JSON Duality View Workshops](https://livelabs.oracle.com/pls/apex/f?p=133:100:110578183178299::::SEARCH:duality%20views)
 
     In summary, this lab checks out the power of JSON Relational Duality Views, allowing you to work with data in either JSON Document format or SQL Relational format. Changes made through views are reflected in the corresponding documents and tables. This flexibility enables convenient create, read, update, or delete operations across multiple documents and tables with ease.
+
+
 
 10. We can clean up from the lab by dropping our tables. Navigate back to the SQL editor or go back to task one - step one if you need a reminder where it is.
 
