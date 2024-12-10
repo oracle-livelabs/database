@@ -37,7 +37,7 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
     -- Be sure to hit RETURN
     ```
 
-    * `source_home` and `sid` describes the current database.
+    * `source_home` and `sid` describe the current database.
     * `target_home` is the location of the new Oracle home. It doesn't exist yet. AutoUpgrade creates it for you.
     * `folder` is the location where AutoUpgrade can find and store patch files. Ideally, this location is a network share accessible to all your database hosts. 
     * `patch` informs AutoUpgrade which patches you want to apply. `RECOMMENDED` means the recent-most OPatch and Release Update plus matching OJVM and Data Pump bundle patches.
@@ -156,7 +156,9 @@ Oracle recommends that you first check your database. AutoUpgrade in *analyze* m
 
 ## Task 2: Patch database
 
-Patching a single instance Oracle Database require downtime. Downtime starts now.
+Patching a single instance Oracle Database require downtime. 
+
+**Downtime starts now.**
 
 1. Start patching the database. 
 

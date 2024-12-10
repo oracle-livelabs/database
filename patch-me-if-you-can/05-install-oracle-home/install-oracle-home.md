@@ -319,7 +319,7 @@ Install an Oracle manually. This allows you to compare the two methods.
     -- Be sure to hit RETURN
     ```
 
-2. Unzip the base release into the new Oracle home.
+2. Unzip the Oracle Database 19.3 base release into the new Oracle home.
 
     ```
     <copy>
@@ -450,8 +450,11 @@ Ensure that AutoUpgrade installed the Oracle home and perform a few checks.
 
     ```
     <copy>
-    /u01/app/oracle/product/19_25_au/OPatch/opatch lspatches
+    export ORACLE_HOME=/u01/app/oracle/product/19_25_au
+    $ORACLE_HOME/OPatch/opatch lspatches
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     * Because the config file contained `patch=RECOMMENDED` AutoUpgrade installed the recent-most Release Update and matching OPatch and bundle patches.
@@ -479,6 +482,7 @@ Now that AutoUpgrade has created the first Oracle home, you can start the instal
 
     ```
     <copy>
+    export ORACLE_HOME=/u01/app/oracle/product/19_25_man
     export PATH=$ORACLE_HOME/bin:$PATH
     export ORAINVENTORY=/u01/app/oraInventory
     export ORACLE_BASE=/u01/app/oracle
@@ -555,6 +559,7 @@ Now that AutoUpgrade has created the first Oracle home, you can start the instal
 
     ```
     <copy>
+    export ORACLE_HOME=/u01/app/oracle/product/19_25_man
     $ORACLE_HOME/OPatch/opatch lspatches
     </copy>
     ```

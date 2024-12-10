@@ -34,7 +34,7 @@ You will use AutoUpgrade just like in lab 2.
     -- Be sure to hit RETURN
     ```
 
-    * This config file is much simpler than the previous one from lab 2.
+    * This config file contains fewer parameters than the previous one from lab 2.
     * Since the Oracle home exists, the patch process becomes easier.
     * The *UPGR* database is not running ARCHIVELOG mode, so you must disable restoration.
     

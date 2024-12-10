@@ -33,6 +33,8 @@ You use *OPatch* to perform the first part of patching an Oracle Database; patch
     . upgr
     cd $ORACLE_HOME
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
 2. You find OPatch in a subdirectory. Check the version of OPatch.
