@@ -75,10 +75,10 @@
         },
 
         {
-            "title": "Workshop: AI Vector Search - Running a RAG Application",
+            "title": "Workshop: AI Vector Search - Run a RAG Application",
             "description": "Run a RAG application",
             "type": "livelabs",
-            "filename": "../../../demo/demo.md"
+            "filename": "../../../ai-vector-rag/demo/demo.md"
         },
         {
             "title": "Lab: Build Your Own RAG App",
