@@ -20,6 +20,12 @@
             "filename": "../../../db-23ai-fundamentals/new-direct-joins-for-updates-deletes/new-direct-joins-for-updates-deletes.md"
         },
         {
+            "title": "Lab: Enhanced DML RETURNING Clause",
+            "description": "Enhanced Data Manipulation with DML RETURNING Clause",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/update-return-clause-enhancements/update-return-clause-enhancements.md"
+        },
+        {
             "title": "Lab: New Table Value Clause",
             "description": "Explore the advantages of the new table value clause in SQL for enhanced data manipulation capabilities.",
             "type": "livelabs",
