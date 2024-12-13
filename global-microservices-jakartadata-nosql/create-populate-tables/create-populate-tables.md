@@ -100,7 +100,7 @@ We need to download those to the Cloud Shell first.
 
     ```shell
     <copy>
-    source ~/global-microservices-springdata-nosql/env.sh
+    source ~/books-management/env.sh
     </copy>
     ```
 3. Let's create NoSQL table using the Oracle Cloud Infrastructure Command Line Interface (CLI).
@@ -110,8 +110,8 @@ and  echo the DDL statement so you can see what is being created.
 
     ```shell
     <copy>
-    cd ~/global-microservices-springdata-nosql
-    DDL_TABLE=$(cat nosql/movie-create-table-for-spring-with-frozen.ddl)
+    cd ~/books-management
+    DDL_TABLE=$(cat nosql/books-create-table-for-jakarta-nosq-with-frozen.ddl)
     echo $DDL_TABLE
     </copy>
     ```
@@ -120,7 +120,7 @@ and  echo the DDL statement so you can see what is being created.
     ```shell
     <copy>
     oci nosql table create --compartment-id "$OCI_NOSQL_COMPID"   \
-    --name Book --ddl-statement "$DDL_TABLE" \
+    --name books --ddl-statement "$DDL_TABLE" \
     --table-limits="{\"maxReadUnits\": 10,  \"maxStorageInGBs\": 1,  \"maxWriteUnits\": 10 }" \
     --wait-for-state SUCCEEDED --wait-for-state FAILED
     </copy>
@@ -158,7 +158,7 @@ screen. Click **Tables** on top right.
 
     ![click-tables](./images/click-tables.png)
 
-6. Click **Book** table
+6. Click **books** table
 
     ![capturenosql](./images/capturenosql.png)
 
@@ -166,7 +166,7 @@ screen. Click **Tables** on top right.
 
   Copy/Paste the following command below in the **SQL statement** text box. Because
   this JSON document is complex, it is easiest to copy/paste into the field.
-  However, you could have typed it all in. You will notice at the end of our INSERT statement
+  However, you could have typed it all in. You will notice at the end of our UPSERT statement
   we have a RETURNING clause.   This clause acts the same way as a SELECT clause and
   in this case it returns the full row.  Click on **Execute.**
 
@@ -177,19 +177,19 @@ screen. Click **Tables** on top right.
 
     ```
     <copy>
-    INSERT INTO Book VALUES (
+    UPSERT INTO Books VALUES (
     'Book:ac789542-1827-4435-b48c-fb7b32fa9fdd',
     'Book',
-    '{
-    "_id": "ac789542-1827-4435-b48c-fb7b32fa9fdd",
-    "author": "George Orwell",
-    "entity": "Book",
-    "genre": "DYSTOPIAN",
-    "publicationYear": 1949,
-    "tags": ["Political", "Classic", "Science Fiction"],
-    "title": "1984"
-    }'
-    );
+    {
+      "_id": "ac789542-1827-4435-b48c-fb7b32fa9fdd",
+      "author": "Aldous Huxley",
+      "entity": "Book",
+      "genre": "SCIENCE_FICTION",
+      "publicationYear": 1932,
+      "tags": ["Dystopian", "Philosophical"],
+      "title": "Brave New World"
+    }
+    )
     RETURNING *
     </copy>
     ```

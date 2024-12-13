@@ -34,11 +34,25 @@ In this task, we will review the code using the OCI Code Editor.
 
 2. Open `application.properties` in the `global-microservices-nosql/src/main/resources` directory. This file configures the database connection and deployment settings, providing flexibility for different environments.
 
-   ![Code createTable](./images/appl-properties.png)
+   ![Code createTable](./images/appl-properties.png
 
-3. Review the `Dockerfile` in the `global-microservices-nosql/code-nosql-jakarta-sdk` directory. This file defines the instructions for building the container image for the Book Management application.
+   Let's take a look at the class `application.properties` again. In the previous lab, we ran the application code using Cloud Shell and used delegation tokens.
+   In this lab, we are going to be running application using Resource Principals.
 
-4. Take a look at the GitHub Actions script used to build and push the container image to GitHub Container Registry. You can [review it here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/build-and-push-demo-book-image.yml) for details on container deployment.
+    As discussed in the Lab 2 - Task 4: Understand Credentials, and Policies. To use them you have to set up a dynamic group and create a policy
+    that grants the dynamic group access to a resource. We did it for you in Lab 2 - Task 3: Deploy Infrastructure using Terraform.
+    Take a look at the policy.tf file in the following directory books-management.
+
+
+    **Note**: When deploying using OKE - see Lab 1, you will do the connection using Instance Principals. It is not the topic of this workshop but if you want to learn more, then read the `oracle-app-ndcs-deployment.yaml`    
+
+3. Review the `Dockerfile` in the `books-management` directory. This file defines the instructions for building the container image for the Book Management application.
+
+    In this Lab, we will use a container image that we deployed in GitHub Container Registry
+
+4. Take a look at the GitHub Actions script used to build and push the container image to GitHub Container Registry.
+
+    You can [review it here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/build-and-push-demo-book-image.yml) for details on container deployment.  
 
 After reviewing the code, you can close the Code Editor.
 
@@ -76,7 +90,7 @@ After reviewing the code, you can close the Code Editor.
    ![Create Container Instances](images/create-container-instance-2.png)
 
 4. Scroll down and add the following environment variables:
-   - `NOSQL_SERVICETYPE` as key and `useResourcePrincipal` as value
+   - `NOSQL_DEPLOYMENT` as key and `CLOUD_RESOURCE_PRINCIPAL` as value
    - `OCI_REGION` as key with the value copied in Task 2
    - `OCI_NOSQL_COMPID` as key with the value copied in Task 2
 
@@ -97,19 +111,25 @@ After reviewing the code, you can close the Code Editor.
 1. Set up the Cloud Shell environment again.
 
     ```shell
-    source ~/global-microservices-nosql/env.sh
+    <copy>
+    source ~/books-management/env.sh
+    </copy>
     ```
 
 2. Set the `IP_CI` environment variable to the Public IP address of the container instance.
 
     ```shell
+    <copy>
     export IP_CI=<copied Public IP address>
+    </copy>
     ```
 
 3. Use the REST API to read data from the Book Management application running in the container:
 
     ```shell
-    curl http://$IP_CI:8080/api/books | jq
+    <copy>
+    curl http://$IP_CI:8081/api/books | jq
+    </copy>
     ```
 
    This will display all the rows in the table. You can execute additional queries as needed.

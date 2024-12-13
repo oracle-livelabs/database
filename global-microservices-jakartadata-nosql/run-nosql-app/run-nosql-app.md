@@ -32,40 +32,77 @@ In this task, we will review the code using the OCI Code Editor.
 
    ![Expand Cloud Editor](./images/cloud-code-editor-expand.png)
 
-3. Open `microprofile-config.properties` in the directory `global-microservices-nosql/src/main/resources`. This configuration file is used to set application properties and database connection settings, enabling flexibility for deployment.
+3. Open `microprofile-config.properties` in the directory `books-management/src/main/resources/META-INF/`.
+This configuration file is used to set application properties and database connection settings, enabling flexibility for deployment.
 
    ![Code createTable](./images/appl-properties.png)
 
-4. Next, review the `Book.java` entity class in `expert/os/demos/books/domain`. This class represents a `Book` in the database and includes fields for `id`, `title`, `genre`, `publicationYear`, `author`, and `tags`.
+   Oracle NoSQL Database offers flexible deployment options to suit the needs of its customers.
+   Whether deploying on an "On-Premises" cluster or utilizing the Oracle NoSQL Database Cloud Service,
+   developers and end-users get the latest in NoSQL technology. Oracle offers a complete range of deployment
+   options to support your Oracle NoSQL database, from on-premises to private cloud to public cloud.
+   Depending on which deployment option you choose, you may need different authentication strategies.
 
-The annotations used in this class are part of Jakarta NoSQL and are designed to map Java objects to NoSQL database tables effectively. Key annotations include:
+   There are 5 authentication methods available (using the property `jnosql.oracle.nosql.deployment`)
 
-- **`@Entity`**: This class is identified as a persistable entity, meaning it will be mapped to a table in the NoSQL database.
-- **`@Id`**: Marks the field used as the primary key for the entity, uniquely identifying each record in the database.
-- **`@Column`**: Specifies which fields are persistable in the database. Unlike JPA, where fields are persistable by default, in Jakarta NoSQL, you must explicitly annotate each field you want to store in the database.
+    - `CLOUD_API_KEY`: Represents a cloud deployment using an API key for authentication and authorization.
+    - `CLOUD_INSTANCE_PRINCIPAL`: Represents a cloud deployment using instance principal for authentication and authorization.
+    - `CLOUD_INSTANCE_OBO_USER`: Represents a cloud deployment using instance principal for delegation with an OBO token.
+    It is a pre-authenticated option available in the Cloud Shell.
+    - `CLOUD_RESOURCE_PRINCIPAL`: Represents a cloud deployment using resource principal for authentication and authorization.
+    - `CLOUD_SECURITY_TOKEN`: Represents a "Cloud" deployment using Token-based Authentication.
 
-These annotations give developers precise control over how objects are stored and retrieved in NoSQL databases, aligning with NoSQL systems' flexibility and schema-less nature.
+    When you create a table, you can choose between *Provisioned Capacity* and *On-Demand Capacity*.
+    With the availability of both models, businesses have total flexibility when choosing the most cost-effective deployment
+    to meet their business and application workload requirements. Such flexibility empowers businesses to solely focus on application
+    innovations to delight their customers, making operational costs "worry-free" in their decision-making process.
+    You can also modify the Capacity mode from Provisioned Capacity to On Demand Capacity and vice-versa.
+
+    The Jakarta Data Framework supports the persistence of entities to Oracle NoSQL Database tables. An entity is mapped to a table.
+    It creates automatically the table using the properties `jnosql.document.database` and `jnosql.keyvalue.database`
+
+    In this application we will use Common Application Properties and variables for easy setup and changeability when deploying using container services.
+
+4. Next, review the `Book.java` entity class in `books-management/src/main/java/expert/os/demos/books/domain`. This class represents a `Book` in the database and includes fields for `id`, `title`, `genre`, `publicationYear`, `author`, and `tags`.
+
+    The annotations used in this class are part of Jakarta NoSQL and are designed to map Java objects to NoSQL database tables effectively. Key annotations include:
+
+    - **`@Entity`**: This class is identified as a persistable entity, meaning it will be mapped to a table in the NoSQL database.
+    - **`@Id`**: Marks the field used as the primary key for the entity, uniquely identifying each record in the database.
+    - **`@Column`**: Specifies which fields are persistable in the database. Unlike JPA, where fields are persistable by default, in Jakarta NoSQL, you must explicitly annotate each field you want to store in the database.
+
+    These annotations give developers precise control over how objects are stored and retrieved in NoSQL databases, aligning with NoSQL systems' flexibility and schema-less nature.
 
    ![Code createTable](./images/appl-code.png)
 
-5. Review `BookRepository.java`, also located in `expert/os/demos/books/domain`. This repository interface extends `BasicRepository`, which provides CRUD methods to interact with the `Book` entity in Oracle NoSQL.
+5. Review `BookRepository.java`, also located in `books-management/src/main/java/expert/os/demos/books/domain`. This repository interface extends `BasicRepository`, which provides CRUD methods to interact with the `Book` entity in Oracle NoSQL.
 
-The `BasicRepository` interface is part of Jakarta Data and offers a set of predefined database operations, such as `save,` `delete,` `findById,` and more, to streamline interaction with the database. Beyond these built-in methods, Jakarta Data allows you to define custom queries through method naming conventions, such as `findByName`, where the query is automatically derived based on the method name. Additionally, Jakarta Data supports annotation-based operations, such as `@Insert`, `@Update`, `@Delete`, and `@Save`, which let you explicitly define specific actions. The provider implements all these functionalities, meaning developers only need to define the interface, and the underlying implementation is automatically handled, simplifying development and reducing boilerplate code.
+    The `BasicRepository` interface is part of Jakarta Data and offers a set of predefined database operations, such as `save,` `delete,` `findById,` and more, to streamline
+    interaction with the database. Beyond these built-in methods, Jakarta Data allows you to define custom queries through method naming conventions, such as `findByName`, where
+    the query is automatically derived based on the method name. Additionally, Jakarta Data supports annotation-based operations, such as `@Insert`, `@Update`, `@Delete`, and
+    `@Save`, which let you explicitly define specific actions. The provider implements all these functionalities, meaning developers only need to define the interface, and the
+    underlying implementation is automatically handled, simplifying development and reducing boilerplate code.
 
-   Open `BookRepository.java`:
+    Open `BookRepository.java`:
 
-   ![Code BookRepository](./images/appl-code-repository.png)
+    ![Code BookRepository](./images/appl-code-repository.png)
 
 6. Open `BookService.java` in the `application` package to view the main logic for managing books. `BookService` injects `BookRepository` and `BookMapper` to handle CRUD operations on books.
 
-   - `create`: Maps `BookRequest` to `Book` and saves it.
-   - `update`: Updates an existing book by ID.
-   - `findById`: Retrieves a book by ID.
-   - `delete`: Deletes a book by ID.
+    - `create`: Maps `BookRequest` to `Book` and saves it.
+    - `update`: Updates an existing book by ID.
+    - `findById`: Retrieves a book by ID.
+    - `delete`: Deletes a book by ID.
 
-   This class also logs activities, providing visibility into operations performed.
+    This class also logs activities, providing visibility into operations performed.
+
+    ![Code BookService](./images/appl-code-service.png)
+
 
 7. Open `BookMapper.java` in the `application` package. This mapper uses MapStruct to convert between `Book`, `BookRequest`, and `BookResponse`.
+
+    ![Code BookMapper](./images/appl-code-mapper.png)
+
 
 ## Task 2: Restart the Cloud Shell
 
@@ -76,19 +113,24 @@ The `BasicRepository` interface is part of Jakarta Data and offers a set of pred
 2. Execute the setup shell script in Cloud Shell:
 
     ```shell
-    export OCI_obo_token=$(cat $OCI_obo_token_path)
-    source ~/global-microservices-nosql/env.sh
+    <copy>
+    source ~/books-management/env.sh
+    </copy>
     ```
    ![Cloud Shell](./images/cloud-shell-result.png)
 
 3. List installed JDKs and set GraalVM for JDK 21 as the current JDK.
 
     ```shell
+    <copy>
     csruntimectl java list
+    </copy>
     ```
 
     ```shell
+    <copy>
     csruntimectl java set graalvmjdk-21
+    </copy>
     ```
 
 ## Task 3: Build, Deploy, and Examine Data
@@ -96,47 +138,70 @@ The `BasicRepository` interface is part of Jakarta Data and offers a set of pred
 1. Package the Jakarta EE application using Maven:
 
     ```shell
-    cd ~/global-microservices-nosql/code-nosql-jakarta-sdk/
+    <copy>
+    cd ~/books-management/
     mvn package
+    </copy>
     ```
 
 2. Run the packaged application:
 
     ```shell
-    java -jar target/books.jar
+    <copy>
+    nohup java -jar target/books.jar &
+    </copy>
     ```
 
 3. Review the data created in Lab 2 by querying the API:
 
     ```shell
-    curl http://localhost:8080/api/books | jq
+    <copy>
+    curl http://localhost:8081/api/books | jq
+    </copy>
     ```
 
 4. Insert a new Book using the REST API:
 
     ```shell
-    curl -X POST -H "Content-Type:application/json" -d @../data/book-example.json http://localhost:8080/api/books | tee result-test.txt
+    <copy>
+    curl -X POST -H "Content-Type: application/json" -d '{"title":"The Catcher in the Rye","genre":"FICTION","publicationYear":1951,"author":"J.D. Salinger","tags":["Classic","Literature","American"]}' http://localhost:8181/books| tee result-test.txt
+    </copy>
     ```
 
-5. Read the book information using the self-link generated above:
+5. Read the book information using the id generated above:
 
     ```shell
-    URL=`cat result-test.txt | jq -r '."_links".self.href'`
+    <copy>
+    URL="http://localhost:8181/books/"`cat result-test.txt | jq -r '.id' `
     echo $URL
     curl $URL
+    </copy>
     ```
 
 6. Delete the book and validate its removal:
 
     ```shell
+    <copy>
     curl -i -X DELETE $URL
     curl $URL
+    </copy>
     ```
 
-7. Stop the application (use `CTRL + C`) and delete temporary files:
+7. Stop the application and delete temporary files
 
+    execute the linux command `fg` followed by CTRL-C and enter to stop the application.
     ```shell
+    <copy>
+    fg
+    </copy>
+    ```
+    Note: you can rexecute the command `fg` to validate that there are not jobs running in background.
+
+    Delete the temporary files created.
+    ```shell
+    <copy>
     rm nohup.out result-test.txt
+    </copy>
     ```
 
 8. Execute SQL queries over REST using the OCI CLI.
@@ -144,7 +209,7 @@ The `BasicRepository` interface is part of Jakarta Data and offers a set of pred
     ```shell
     SQL_STATEMENT="SELECT * from Book"
     echo "$SQL_STATEMENT"
-    oci nosql query execute -c  $OCI_NOSQL_COMPID --statement "$SQL_STATEMENT"
+    oci nosql query execute --compartment-id  $OCI_NOSQL_COMPID --statement "$SQL_STATEMENT"
     ```
 
 Exit the Cloud Shell to **proceed to the next lab.**

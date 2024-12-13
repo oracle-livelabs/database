@@ -62,8 +62,7 @@ set up your environment. If you close/open the Cloud Shell Console, please re-ex
 
     ```shell
     <copy>
-    export OCI_obo_token=$(cat $OCI_obo_token_path)
-    source ~/global-microservices-springdata-nosql/env.sh
+    source ~/books-management/env.sh
     </copy>
     ```
     ![Cloud Shell Result](./images/cloud-shell-result.png)
@@ -88,8 +87,7 @@ set up your environment. If you close/open the Cloud Shell Console, please re-ex
 
     ```shell
     <copy>
-    cd ~/global-microservices-springdata-nosql/code-nosql-spring-sdk/
-    nohup ./mvnw spring-boot:run &
+    nohup java -jar target/books.jar &
     </copy>
     ```
     **Note:** This will start the "book" application in the background.
