@@ -55,6 +55,12 @@
           "filename": "../../new-json-schema/new-json-schema.md"
       },
       {
+        "title": "Lab: JavaScript Stored Procedures",
+        "description": "Creating avaScript Stored Procedures",
+        "type": "livelabs",
+        "filename": "../../javascript/javascript.md"
+      },
+      {
           "title": "High Availability",
           "description": "Talks about some of the new HA features in 23ai",
           "type": "livelabs",
