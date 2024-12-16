@@ -31,10 +31,6 @@
             "filename": "../../sql-macros/sql-macros.md"
         },
         {
-            "title": "Lab: Partitioning",
-            "filename": "../../hybrid-partitioned-tables/partitioning.md"
-        },
-        {
             "title": "Lab: Blockchain Tables",
             "filename": "./../../blockchain-tables-adb/blockchain-tables-adb.md",
             "type": "freetier"
