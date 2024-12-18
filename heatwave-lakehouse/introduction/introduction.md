@@ -16,9 +16,10 @@ HeatWave Lakehouse. The deployment goals are:
 
 _Estimated Time:_ 2 hours
 
+<!---  
 Watch the video below for a quick walk-through of the lab.
-[Analyze Data at Web Scale in Object Store with MySQL HeatWave Lakehouse](videohub:1_sokyn79m)
-
+[comment]: <> [Analyze Data at Web Scale in Object Store with MySQL HeatWave Lakehouse](videohub:1_sokyn79m)
+--->
 ### About Product/Technology
 
 
@@ -54,7 +55,8 @@ You may now **proceed to the next lab**
 - **Author** - Perside Foster, MySQL Solution Engineering
 
 - **Contributors** - Abhinav Agarwal, Senior Principal Product Manager, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, May 2023
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, December 2024
 
-
+<!--- 
 [def]: videohub:VideoID
+--->

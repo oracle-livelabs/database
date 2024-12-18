@@ -123,18 +123,13 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 5. On Placement, keep the selected Availability Domain
 
-6. Keep the selected Image, Oracle Linux 8
+6. Keep Security "Disabled"
+
+    ![Use Linux OS](./images/compute-placement-security.png "compute security placement")  
+
+7. Keep the defaults for Image and Shape
 
     ![Use Linux OS](./images/compute-oracle-linux.png "compute oracle linux")  
-
-7. Change the Instance Shape:
-    - Click **Change shape** button
-    - Click **Virtual Machine** box
-    - Click **Specialty and previous generation** box
-    - Click **VM.Standard.E2.2**
-    - Click the **Select Shape** button
-
-    ![New Shape](./images/compute-shape-select.png "compute shape select")
 
 8. On Networking, make sure '**heatwave-vcn**' is selected
 
@@ -217,4 +212,4 @@ You may now **proceed to the next lab**
 - **Author** - Perside Foster, MySQL Solution Engineering
 
 - **Contributors** - Abhinav Agarwal, Senior Principal Product Manager, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, May 2023
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, December 2024

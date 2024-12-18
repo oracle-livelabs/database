@@ -208,10 +208,7 @@ In this lab, you will be guided through the following tasks:
 
     ![HeatWave credentials](./images/mysql-heatwave-basic.png "HeatWave Basic")
 
-6. Select **“Standalone”** and enable **“Configure MySQL HeatWave”**
-    ![HeatWave Type selection](./images/mysql-heatwave-system-selection.png "mysql heatwave system selection")
-
-7. Create Administrator Credentials
+6. Create Administrator Credentials
 
     **Enter Username** (write username to notepad for later use)
     - **Note**: user name is case sensitive so use **admin** to match the the labs' connect string example
@@ -221,6 +218,9 @@ In this lab, you will be guided through the following tasks:
     **Confirm Password** (value should match password for later use)
 
     ![HeatWave password](./images/mysql-password.png "mysql password ")
+
+7. Select **“Standalone”** 
+    ![HeatWave Type selection](./images/mysql-heatwave-system-selection.png "mysql heatwave system selection")
 
 8. On Configure networking, keep the default values
 
@@ -238,13 +238,22 @@ In this lab, you will be guided through the following tasks:
 
     ![HeatWave AD choice](./images/mysql-avail-domain.png "mysql availability domain ")
 
-10. On Configure hardware, keep default shape as **MySQL.HeatWave.VM.Standard**
+10. On Configure hardware: Select the "Enable HeatWave cluster"
 
-    Data Storage Size (GB) Set value to:  **1024**
+    Shape details
+    - Select Shape: MySQL.2
+    - Set ECPU count: 2
+    - Set Memory size: 16 GB
+    - Set Max network bandwidth: 1Gbps
 
-    ```bash
-    <copy>1024</copy>
-    ```
+    HeatWave cluster configuration
+    - Select Shape: HeatWave.32GB
+    - Set Memory: 32 GB
+    - Set Nodes:        1
+    - Set HeatWave Lakehouse:Enabled
+
+    Data Storage Size (GB) Set value to: 50
+
 
     ![HeatWave hardware selection](./images/mysql-configure-hardware.png "mysql hardware ")
 
@@ -261,9 +270,9 @@ In this lab, you will be guided through the following tasks:
     ```
 
     ![HeatWave add host](./images/mysql-host.png "mysql host ")
-14. Go to the Configuration tab. Click on Select a MySQL version: Select the latest MySQL version of the DB system.
+14. Go to the Configuration tab. Click on Select a MySQL version: Select the latest Innovation MySQL version of the DB system.
 
-    ![Select mysql version](./images/mysql-configuration-version.png "Select mysql version")
+    ![Select mysql version](./images/mysql-configuration-version.png "Select latest MySQL version")
 
 15. Select the Data Import tab.
 
@@ -282,35 +291,10 @@ In this lab, you will be guided through the following tasks:
     <br>
     ```
     <copy>
-    https://objectstorage.us-ashburn-1.oraclecloud.com/p/0pZRzTl1hFLchwAcornQVePE7eXxp1u6rjVVF3i7a5qN7HASVk4CtTQ9BK9y4xIG/n/mysqlpm/b/plf_mysql_customer_orders/o/mco_nocoupon_dump_05242023/
+   https://objectstorage.us-ashburn-1.oraclecloud.com/p/e9-qd9eqC2gatEl4qqsRD4L_mqn433tr00ALKmYzh8AuTQ-drS1thJvgLoz64-vF/n/mysqlpm/b/mysql_customer_orders/o/mco_nocoupon_11272024/
     </copy>
     ```
-    </details>
-
-    <details>
-    <summary>US West (Phoenix) Region - Copy and paste to PAR Source URL</summary>
-    <br>
-    ```
-    <copy>https://objectstorage.us-phoenix-1.oraclecloud.com/p/mUzBCdSGiskSfFH0X8h5rRXV7GN3k0wqXeY-K3A1V7PBt_9_O2nbS2U1HO3nOqt_/n/mysqlpm/b/mysql_customer_orders/o/mco_nocoupon_dump_05242023/</copy>
-    ```
-    </details>
-
-    <details>
-    <summary>US West (San Jose) Region - Copy and paste to PAR Source URL</summary>
-    <br>
-    ```
-    <copy>https://objectstorage.us-sanjose-1.oraclecloud.com/p/WVEfexlDvAa_wJQFA5zl0Yc6k0hBIfMZEk2xu898A9GhNgaLIJFm2WELR5tK_RNA/n/mysqlpm/b/mysql_customer_orders/o/mco_nocoupon_dump_05242023/</copy>
-    ```
-    </details>
-    ## Latin America (LAD)
-    **Tenancy Regions** Please select the same region that you are creating **heatwave-db** in
-    <details>
-    <summary>Brazil East (Sao Paulo) Region - Copy and paste to PAR Source URL</summary>
-    <br>
-    ```
-    <copy>https://objectstorage.sa-saopaulo-1.oraclecloud.com/p/Hhx1BmORRm2T-D45RZShnfReE4LhyeVMQ4WpJ7pR6dS5bf466BhpxHv1i4FXMpnC/n/mysqlpm/b/mysql_customer_orders/o/mco_nocoupon_dump_05242023/</copy>
-     ```
-    </details>
+    
 
 18. If your OCI Region is not listed in step 16, don't worry, You will be able to load the DB Data in Lab 4 Task 1. Please skip to step 19.
 
@@ -318,11 +302,9 @@ In this lab, you will be guided through the following tasks:
 
     ![HeatWave PAR Import](./images/mysql-data-import.png "mysql data import ")
 
-20. Review **Create MySQL DB System**  Screen
+20. Click the '**Create**' button
 
-    ![HeatWave create button](./images/mysql-create-button.png "mysql create dbbutton")
-
-    Click the '**Create**' button
+   ![mysql creare button ](./images/mysql-create-button.png "mysql creare button")
 
 21. The New MySQL DB System will be ready to use after a few minutes
 
@@ -341,4 +323,4 @@ You may now **proceed to the next lab**
 - **Author** - Perside Foster, MySQL Solution Engineering
 
 - **Contributors** - Abhinav Agarwal, Senior Principal Product Manager, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, May 2023
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, December 2024
