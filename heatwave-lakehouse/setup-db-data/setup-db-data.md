@@ -1,19 +1,17 @@
-# Create Mysql HeatWave Cluster and test MySQl Shell
+# Setup HeatWave with mysql\_customer\_orders Data
 
 ## Introduction
 
-A HeatWave cluster comprise of a MySQL DB System and one or more HeatWave nodes. The MySQL DB System includes a plugin that is responsible for cluster management, loading data into the HeatWave cluster, query scheduling, and returning query result.
+We will be using the mysql\_customer\_orders Data for this wprkshop
 
-![Lakehouse Architecture](./images/heatwave-lab-setup.png "heatwave lab setup ")
-
-_Estimated Time:_ 15 minutes
+_Estimated Time:_ 10 minutes
 
 ### Objectives
 
 In this lab, you will be guided through the following task:
 
-- Add a HeatWave Cluster to heatwave-db MySQL Database System
 - Connect to database using MySQL Shell
+- Add the mysql\_customer\_orders Datato  HeatWave if it is not already there
 
 ### Prerequisites
 
@@ -56,7 +54,7 @@ In this lab, you will be guided through the following task:
         <copy>\js</copy>
         ```
 
-    - b. Run load caommand
+    - b. Run load command
 
         ```bash
         <copy>util.loadDump("https://objectstorage.us-ashburn-1.oraclecloud.com/p/e9-qd9eqC2gatEl4qqsRD4L_mqn433tr00ALKmYzh8AuTQ-drS1thJvgLoz64-vF/n/mysqlpm/b/mysql_customer_orders/o/mco_nocoupon_11272024/", {progressFile: "progress.json", loadIndexes:false,ignoreVersion:true})</copy>
@@ -88,7 +86,7 @@ In this lab, you will be guided through the following task:
 
     ![Databse Tables](./images/mysql-customer-orders-list.png "mysql customer orders list")
 
-## Task 2: Add a HeatWave Cluster to heatwave-db MySQL Database System
+## Task 2: Review the HeatWave Cluster Setup
 
 1. Go to Navigation Menu
     Databases
@@ -98,18 +96,11 @@ In this lab, you will be guided through the following task:
 
     ![Database List](./images/db-list.png "Database List")
 
-3. In the list of DB Systems, click the **heatwave-db** system. click **More Action ->  Add HeatWave Cluster**.
-    ![Databse Detail](./images/mysql-heatwave-more.png "mysql heatwave more")
+3. In the list of DB Systems, click the **heatwave-db** system. On  the **HeatWave Cluster** Section, click on Details
 
-4. Enable the **MySQL HeatWave LakeHouse** checkbox
+    ![Databse Cluster Detail](./images/mysql-heatwave-more.png "mysql heatwave cluster")
 
-5. Set **Node Count to 2** for this Lab Click **Add HeatWave Cluster** to create the HeatWave cluster
-
-    ![Activate Lakehouse](./images/mysql-add-heatwave-cluster.png "mysql add heatwave cluster")
-
-6. HeatWave creation will take about 10 minutes. From the DB display page scroll down to the Resources section.
-
-7. Click the **HeatWave** link. Your completed HeatWave Cluster Information section will look like this:
+4. The HeatWave Cluster Information section will look like this:
     ![Completed Cluster Creation](./images/mysql-heat-cluster-complete.png "mysql heat cluster complete ")
 
 You may now **proceed to the next lab**
@@ -119,4 +110,4 @@ You may now **proceed to the next lab**
 - **Author** - Perside Foster, MySQL Solution Engineering
 
 - **Contributors** - Abhinav Agarwal, Senior Principal Product Manager, Nick Mader, MySQL Global Channel Enablement & Strategy Manager
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, May 2023
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, December 2024
