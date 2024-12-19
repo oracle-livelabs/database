@@ -54,7 +54,7 @@ In this lab, you will be guided through the following task:
         <copy>\js</copy>
         ```
 
-    - b. Run load caommand
+    - b. Run load command
 
         ```bash
         <copy>util.loadDump("https://objectstorage.us-ashburn-1.oraclecloud.com/p/e9-qd9eqC2gatEl4qqsRD4L_mqn433tr00ALKmYzh8AuTQ-drS1thJvgLoz64-vF/n/mysqlpm/b/mysql_customer_orders/o/mco_nocoupon_11272024/", {progressFile: "progress.json", loadIndexes:false,ignoreVersion:true})</copy>
