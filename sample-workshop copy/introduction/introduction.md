@@ -2,44 +2,43 @@
 
 ## About this Workshop
 
-This introduction covers the complete "parent" workshop. Use this text to set up the story for the workshop. Be engaging - what will the learner get from spending their time on this workshop?
+In this workshop, we will discover the story of Tom, a struggling developer that is interacting a lot with database making his apps, overwhelmed by the challenges of managing database updates and changes. But one day, he discovered a magical tool that transformed his life, simplifying complex tasks and lifting the heavy burden of his work. We will see in the upcoming labs how this tool makes his live more easier as a developer. This tool is SQLcl Projects.
 
-Estimated Workshop Time: -- hours -- minutes (This estimate is for the entire workshop - it is the sum of the estimates provided for each of the labs included in the workshop.)
+![](./../data-load/images/Projects-Potter.png)
 
-*You may add an option video, using this format: [](youtube:YouTube video id)*
+SQLcl Projects for database CICD, is an extension within SQLcl that integrates database changes into the development pipeline while ensuring swift and secure deployment to production environments.
 
-  [](youtube:zNKxJjkq0Pw)
+**Estimated Workshop Time:** 1 hours 30 minutes
 
-### Objectives
+### **Objectives**
 
-*List objectives for the workshop*
+The main objective of this workshop is let you discover the database CICD tool in SQLcl and learn how to use it and get benefit from it for you own projects.
 
 In this workshop, you will learn how to:
-* Provision
-* Setup
-* Load
-* Query
 
-### Prerequisites (Optional)
+* Setup you oracle autonomous database instance
+* Create your schema and some objects inside
+* Make changes in an existing application
+* Deploy the changes to the DEV database
+* See and understand the difficulties of synching with DEV database before the SQLcl Projects
+* Use SQLcl Projects extension to manage you database changes
+* Realize how the database CICD tool saves time and effort for you
 
-*List the prerequisites for this lab using the format below. Fill in whatever knowledge, accounts, etc. is needed to complete the lab. **Do NOT list** each previous lab as a prerequisite.*
+### **Prerequisites**
 
-This lab assumes you have:
-* An Oracle account
-* All previous labs successfully completed
+This workshop requires the following:
 
-*This is the "fold" - below items are collapsed by default*
+* An Oracle Cloud account
+* Oracle autonomous database
 
-In general, the Introduction does not have Steps.
+NB: No worries, we will help you create all what you need, so you need just to follow the labs and the given steps and instructions.
 
 ## Learn More
 
-*(optional - include links to docs, white papers, blogs, etc)*
-
-* [URL text 1](http://docs.oracle.com)
-* [URL text 2](http://docs.oracle.com)
+* [Database Application CI/CD Doc](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/database-application-ci-cd.html#GUID-6A942F42-A365-4FF2-9D05-6DC2A0740D24)
+* [Liquibase feature in SQLcl Doc](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/using-liquibase.html)
+* [Oracle SQLcl Doc](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/working-sqlcl.html)
 
 ## Acknowledgements
-* **Author** - <Name, Title, Group>
-* **Contributors** -  <Name, Group> -- optional
-* **Last Updated By/Date** - <Name, Month Year>
+* **Author** - Barry McGillin, Senior Director of Development, Database Tooling
+* **Contributors** - Abdelilah AIT HAMMOU, Fatima AOURGA, Junior Members of Technical Staff, SQLcl
