@@ -8,8 +8,6 @@ provide active-active replication of table data between geographically separated
 
 _Estimated Time:_ 20 minutes
 
-[Lab 5 Walkthrough](videohub:1_jymc6ms2)
-
 ### Objectives
 
 * GAT Offers low-latency local access to data irrespective of where the data originated.
@@ -26,7 +24,7 @@ _Estimated Time:_ 20 minutes
 Before deploying the application in multiple regions, we will create replicas for the `book` table.
 
 1. From the hamburger menu, click **Databases**. Under Oracle NoSQL Databases, click **Tables**.
-Click the **Movie** table. Under **Resources**, click **Replicas**.
+Click the **books** table. Under **Resources**, click **Replicas**.
 The list of replicas already created in the table is listed. In our case, the list start empty
 ![list-replicas](./images/list-replicas.png)
 
@@ -49,7 +47,7 @@ The list of replicas already created in the table is listed. In our case, the li
 6. Modify a row in a region and query in the other region to verify that the changes got pushed to the other region.
 
 
-## Task 2: Set up the Movie Stream Catalog Microservice in the New Region
+## Task 2: Set up the Book Management Catalog Microservice in the New Region
 
 We are going to set up the Movie Stream Microservice in the new region and follow similar steps to what  we used in **Lab 3 - Run the Movie Stream Catalog Microservice.**
 
@@ -62,32 +60,28 @@ set up your environment. If you close/open the Cloud Shell Console, please re-ex
 
     ```shell
     <copy>
+    export NOSQL_DEPLOYMENT=CLOUD_INSTANCE_OBO_USER
     source ~/books-management/env.sh
     </copy>
     ```
     ![Cloud Shell Result](./images/cloud-shell-result.png)
 
-3. List the installed JDKs using the `csruntimectl java list` command. Select GraalVM for JDK 17 as the current JDK.   
-
-     ```shell
-      <copy>
-      csruntimectl java list
-      </copy>
-      ```
+3. Set the JAVA HOME to use JDK 21 as the current JDK.   
 
     ```shell
-     <copy>
-     csruntimectl java set graalvmjdk-17
-     </copy>
-     ```
+    <copy>
+    export JAVA_HOME=`pwd`/jdk-21.0.5
+    </copy>
+    ```
 
-## Task 3: Start the Movie Stream Catalog Microservice and look at data
+## Task 3: Start the Book Management Catalog Microservice  and look at data
 
 1. Use the following maven wrapper command to start the Spring application. Execute in the Cloud Shell.
 
     ```shell
     <copy>
-    nohup java -jar target/books.jar &
+    cd ~/books-management/
+    nohup $JAVA_HOME/bin/java -jar target/books.jar &
     </copy>
     ```
     **Note:** This will start the "book" application in the background.
@@ -107,7 +101,7 @@ set up your environment. If you close/open the Cloud Shell Console, please re-ex
 
     ```shell
     <copy>
-    curl  http://localhost:8080/api/book | jq
+    curl  http://localhost:8080/books | jq
     </copy>
     ```
 
@@ -157,4 +151,4 @@ You may now **proceed to the next lab.**
 
 
 ## Acknowledgements
-* **Author** - Dario Vega, Product Manager, NoSQL Product Management, Michael Brey, Director, NoSQL Product Development
+* **Author** - Dario Vega, Product Manager, NoSQL Product Management

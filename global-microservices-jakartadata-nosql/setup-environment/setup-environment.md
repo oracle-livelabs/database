@@ -6,8 +6,6 @@ This lab walks you through the steps necessary to create a proper operating envi
 
 _Estimated Time:_ 9 minutes
 
-[Lab 1 Walkthrough](videohub:1_f6tvezjm)
-
 ### Objectives
 
 In this lab you will:
@@ -60,10 +58,14 @@ to get the Cloud Shell started.
     ```shell
     <copy>
     cd $HOME
-    rm -rf global-microservices-springdata-nosql
-    curl -L https://github.com/oracle/nosql-examples/raw/master/zips/global-microservices-springdata-nosql.zip -o global-microservices-springdata-nosql.zip
-    unzip global-microservices-springdata-nosql.zip
-    chmod +x ~/global-microservices-springdata-nosql/code-nosql-spring-sdk/mvnw
+    rm -rf books-management
+    curl -L https://github.com/dario-vega/nosql-examples/raw/master/zips/books-management.zip  -o books-management.zip
+    unzip books-management.zip
+
+    arch=`uname -m | sed  's/x86_64/x64/g'`
+    wget https://download.oracle.com/java/21/latest/jdk-21_linux-${arch}_bin.tar.gz
+    tar -xzvf jdk-21_linux-${arch}_bin.tar.gz
+    rm -f jdk-21_linux-${arch}_bin.tar.gz
     </copy>
     ```
 
@@ -73,7 +75,7 @@ to get the Cloud Shell started.
 
 1. To deploy the application, we will use a terraform scripts provided for this Lab. Click on the 'Deploy to Oracle Cloud ' button.  This will create a new window in your browser.
 
-  [![Deploy to Oracle Cloud - home](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle/nosql-examples/raw/master/zips/global-microservices-springdata-nosql.zip)
+  [![Deploy to Oracle Cloud - home](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/dario-vega/nosql-examples/raw/master/zips/books-management.zip)
 
 2. After successfully hitting the 'Deploy to Oracle Cloud' button, you will be brought to a new screen.
 
@@ -156,4 +158,4 @@ to get the Cloud Shell started.
 
 
 ## Acknowledgements
-* **Author** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director NoSQL Development
+* **Author** - Dario Vega, Product Manager, NoSQL Product Management

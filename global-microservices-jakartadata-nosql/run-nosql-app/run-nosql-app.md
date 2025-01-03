@@ -6,8 +6,6 @@ This lab picks up where lab 2 left off. We will explore the tables created, load
 
 _Estimated Time:_ 16 minutes
 
-[Lab 3 Walkthrough](videohub:1_m5ilj0z4)
-
 ### Objectives
 
 * Understand the different Java Classes in this Jakarta EE SDK project.
@@ -114,22 +112,17 @@ This configuration file is used to set application properties and database conne
 
     ```shell
     <copy>
+    export NOSQL_DEPLOYMENT=CLOUD_INSTANCE_OBO_USER
     source ~/books-management/env.sh
     </copy>
     ```
    ![Cloud Shell](./images/cloud-shell-result.png)
 
-3. List installed JDKs and set GraalVM for JDK 21 as the current JDK.
+3. Set the JAVA HOME to use JDK 21 as the current JDK.
 
     ```shell
     <copy>
-    csruntimectl java list
-    </copy>
-    ```
-
-    ```shell
-    <copy>
-    csruntimectl java set graalvmjdk-21
+    export JAVA_HOME=`pwd`/jdk-21.0.5
     </copy>
     ```
 
@@ -148,7 +141,7 @@ This configuration file is used to set application properties and database conne
 
     ```shell
     <copy>
-    nohup java -jar target/books.jar &
+    nohup $JAVA_HOME/bin/java -jar target/books.jar &
     </copy>
     ```
 
@@ -156,7 +149,7 @@ This configuration file is used to set application properties and database conne
 
     ```shell
     <copy>
-    curl http://localhost:8081/api/books | jq
+    curl http://localhost:8080/books | jq
     </copy>
     ```
 
@@ -164,7 +157,7 @@ This configuration file is used to set application properties and database conne
 
     ```shell
     <copy>
-    curl -X POST -H "Content-Type: application/json" -d '{"title":"The Catcher in the Rye","genre":"FICTION","publicationYear":1951,"author":"J.D. Salinger","tags":["Classic","Literature","American"]}' http://localhost:8181/books| tee result-test.txt
+    curl -X POST -H "Content-Type: application/json" -d '{"title":"The Catcher in the Rye","genre":"FICTION","publicationYear":1951,"author":"J.D. Salinger","tags":["Classic","Literature","American"]}' http://localhost:8080/books| tee result-test.txt |jq
     </copy>
     ```
 
@@ -172,9 +165,9 @@ This configuration file is used to set application properties and database conne
 
     ```shell
     <copy>
-    URL="http://localhost:8181/books/"`cat result-test.txt | jq -r '.id' `
+    URL="http://localhost:8080/books/"`cat result-test.txt | jq -r '.id' `
     echo $URL
-    curl $URL
+    curl $URL | jq
     </copy>
     ```
 
@@ -221,4 +214,4 @@ Exit the Cloud Shell to **proceed to the next lab.**
 * [OCI Cloud Shell](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm)
 
 ## Acknowledgements
-* **Authors** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director NoSQL Development; Otavio Santana, Award-winning Software Engineer and Architect
+* **Authors** - Dario Vega, Product Manager, NoSQL Product Management; Otavio Santana, Award-winning Software Engineer and Architect

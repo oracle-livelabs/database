@@ -20,16 +20,17 @@ In this task we will deleted the resource created using the Cloud Shell.
 
     ```
     <copy>
-    source ~/global-microservices-springdata-nosql/env.sh
-    oci nosql table delete --compartment-id "$OCI_NOSQL_COMPID" --table-name-or-id Movie \
+    source ~/books-management/env.sh
+    oci nosql table delete --compartment-id "$OCI_NOSQL_COMPID" --table-name-or-id books \
     --wait-for-state SUCCEEDED --wait-for-state FAILED
     </copy>
     ```
     ```
     <copy>
     cd $HOME
-    rm -rf global-microservices-springdata-nosql
-    rm -rf global-microservices-springdata-nosql.zip
+    rm -rf books-management  
+    rm -rf books-management.zip  
+    rm -rf jdk-21.0.5
     </copy>
     ```
 
@@ -94,5 +95,4 @@ set your compartment to 'demonosql', click on the Test table, which will bring u
 
 
 ## Acknowledgements
-* **Author** - Dario Vega, Product Manager, NoSQL Product Management and Michael Brey, Director, NoSQL Product Development
-* **Last Updated By/Date** - Dario Vega, Product Manager, NoSQL Product Management, Michael Brey, Director, NoSQL Product Development July 2024
+* **Author** - Dario Vega, Product Manager, NoSQL Product Management

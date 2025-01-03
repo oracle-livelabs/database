@@ -10,8 +10,6 @@ Container Instances are suitable for containerized workloads that do not require
 
 _Estimated Time:_ 20 minutes
 
-[Lab 4 Walkthrough](videohub:1_7yxajmgz)
-
 ### Objectives
 
 * Deploy the application using Container Instances
@@ -34,7 +32,7 @@ In this task, we will review the code using the OCI Code Editor.
 
 2. Open `application.properties` in the `global-microservices-nosql/src/main/resources` directory. This file configures the database connection and deployment settings, providing flexibility for different environments.
 
-   ![Code createTable](./images/appl-properties.png
+   ![Code createTable](./images/appl-properties.png)
 
    Let's take a look at the class `application.properties` again. In the previous lab, we ran the application code using Cloud Shell and used delegation tokens.
    In this lab, we are going to be running application using Resource Principals.
@@ -144,4 +142,4 @@ Exit the Cloud Shell, and you may now **proceed to the next lab.**
 
 ## Acknowledgements
 
-* **Authors** - Dario Vega, Product Manager, NoSQL Product Management; Michael Brey, Director NoSQL Development; Otavio Santana, Award-winning Software Engineer and Architect
+* **Authors** - Dario Vega, Product Manager, NoSQL Product Management; Otavio Santana, Award-winning Software Engineer and Architect
