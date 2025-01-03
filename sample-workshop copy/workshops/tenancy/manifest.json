@@ -15,13 +15,9 @@
       "filename": "../../get-started/get-started.md"
     },
     {
-      "title": "Lab 1: Setup",
+      "title": "Lab 1: Database Setup",
       "description": "Labs that follow the introduction are numbered, starting with Lab 1",
-      "filename": "../../lab-1/lab-1.md"
-    },
-    {
-      "title": "Lab 2: Create user and setup schema",
-      "filename": "../../lab-2/lab-2.md"
+      "filename": "../../database-setup/database-setup.md"
     },
     {
       "title": "Need Help?",

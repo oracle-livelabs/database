@@ -26,15 +26,15 @@ _Note: While this lab uses ATP, the steps are identical for creating and connect
 
     **Note:** You can also directly access your Autonomous Transaction Processing or Autonomous Data Warehouse service in the **Quick Actions** section of the dashboard.
 
-    ![Begin navigation in OCI menu](./../lab-1/images/begin-oci-menu.png =60%x*)
+    ![Begin navigation in OCI menu](./../database-setup/images/begin-oci-menu.png =60%x*)
 
 3. The following steps apply similarly to either Autonomous Data Warehouse or Autonomous Transaction Processing. This lab shows provisioning of an Autonomous Transaction Processing database, so click **Oracle Database** -> **Autonomous Transaction Processing**.
 
-    ![Select Autonomous Transaction Processing from menu](./../lab-1/images/select-atp.png =60%x*)
+    ![Select Autonomous Transaction Processing from menu](./../database-setup/images/select-atp.png =60%x*)
 
 4. On the left side, make sure your **Workload Type** is **Transaction Processing** or **All** to see your Autonomous Transaction Processing instances. You can use the **Compartment** drop-down menu to select a compartment. Select your root compartment, or another compartment of your choice where you will create your new ATP instance. If you want to learn how to create a new compartment, click [here](https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#Working). To learn more about compartments, click [here](https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/settinguptenancy.htm#Setting_Up_Your_Tenancy).
 
-    ![View Oracle Autonomous Transaction Processing Databases in compartment](./../lab-1/images/compartment.png " ")
+    ![View Oracle Autonomous Transaction Processing Databases in compartment](./../database-setup/images/compartment.png " ")
 
     **Note** - Avoid the use of the Managed Compartment for PaaS compartment as this is an Oracle default used for Oracle Platform Services.
 
@@ -44,13 +44,13 @@ _Note: While this lab uses ATP, the steps are identical for creating and connect
 
 1. Click **Create Autonomous Database** to start the instance creation process.
 
-    ![Create Autonomous Database](./../lab-1/images/create-adb.png " ")
+    ![Create Autonomous Database](./../database-setup/images/create-adb.png " ")
 
 2. This brings up the **Create Autonomous Database** screen where you will specify the configuration of the instance.
 
 3. Provide basic information for the autonomous database:
 
-    ![Specify database instance configuration](./../lab-1/images/compartment-name.png " ")
+    ![Specify database instance configuration](./../database-setup/images/compartment-name.png " ")
 
     **Compartment** - Select a compartment for the database from the drop-down list. In the above example, the root compartment that is chosen.
 
@@ -58,7 +58,7 @@ _Note: While this lab uses ATP, the steps are identical for creating and connect
 
     **Database Name** - Use letters and numbers only, starting with a letter. Maximum length is 14 characters. (Underscores not initially supported.) For example use **WORKSHOP**.
 
-    ![Specify database custom name](./../lab-1/images/compartment-custom-name.png " ")
+    ![Specify database custom name](./../database-setup/images/compartment-custom-name.png " ")
 
 4. Choose a workload type. Select the workload type for your database from the choices:
 
@@ -66,7 +66,7 @@ _Note: While this lab uses ATP, the steps are identical for creating and connect
 
     **Data Warehouse** - Alternately, you could have chosen Data Warehouse as the workload type.
 
-    ![Chose a workload type](./../lab-1/images/adb-workload-type.png " ")
+    ![Chose a workload type](./../database-setup/images/adb-workload-type.png " ")
 
 5. Choose a deployment type. Select the deployment type for your database from the choices:
 
@@ -74,7 +74,7 @@ _Note: While this lab uses ATP, the steps are identical for creating and connect
 
     **Dedicated Infrastructure** - Alternately, you could have chosen Dedicated Infrastructure as the workload type.
 
-    ![Choose a deployment type](./../lab-1/images/deployment-type-serverless.png " ")
+    ![Choose a deployment type](./../database-setup/images/deployment-type-serverless.png " ")
 
 6. Configure the database:
 
@@ -82,19 +82,21 @@ _Note: While this lab uses ATP, the steps are identical for creating and connect
 
     **Choose database version** - Select a database version from the available versions.
 
-    ![Configure the database](./../lab-1/images/configure-db.png " ")
+    ![Configure the database](./../database-setup/images/configure-db.png " ")
 
 7. Create administrator credentials:
 
     **Password** and **Confirm Password** - Specify a strong password for ADMIN user of the service instance.
 
-    ![Set administrator credentials](./../lab-1/images/create-admin.png " ")
+    ***Remember** this password, you will need it later*
+
+    ![Set administrator credentials](./../database-setup/images/create-admin.png " ")
 
 8. Choose network access:
 
     For this lab, accept the default, **Secure access from everywhere**.
 
-    ![Choose the network access type](./../lab-1/images/network-access.png " ")
+    ![Choose the network access type](./../database-setup/images/network-access.png " ")
 
 9. Choose a license type. For this lab, choose **License Included**. The two license types are:
 
@@ -102,25 +104,25 @@ _Note: While this lab uses ATP, the steps are identical for creating and connect
 
     * **License Included** - Select this type when you want to subscribe to new database software licenses and the database cloud service.
 
-    ![Choose database license type](./../lab-1/images/license.png)
+    ![Choose database license type](./../database-setup/images/license.png)
 
 10. For this lab, do not provide a contact email address. The **Contact Email** field allows you to list contacts to receive operational notices and announcements as well as unplanned maintenance notifications.
 
-    ![Do not provide a contact email address](./../lab-1/images/contact-email-field.png)
+    ![Do not provide a contact email address](./../database-setup/images/contact-email-field.png)
 
     Leave the advanced options as they are.
 
 11. Click **Create Autonomous Database**.
 
-    ![Click Create Autonomous Database button](./../lab-1/images/create-adb-button.png " ")
+    ![Click Create Autonomous Database button](./../database-setup/images/create-adb-button.png " ")
 
 12. Your instance will begin provisioning. In a few minutes the state will turn from Provisioning to Available. At this point, your Autonomous Transaction Processing database is ready to use! Have a look at your instance's details here including its name, database version, CPU count and storage size.
 
-    ![Provisioning an Autonomous Database instance](./../lab-1/images/adb-provisioning.png " ")
+    ![Provisioning an Autonomous Database instance](./../database-setup/images/adb-provisioning.png " ")
 
     Provisioning an Autonomous Database instance.
 
-    ![Autonomous Database instance successfully provisioned](./../lab-1/images/adb-provisioned.png " ")
+    ![Autonomous Database instance successfully provisioned](./../database-setup/images/adb-provisioned.png " ")
 
     Autonomous Database instance successfully provisioned.
 
@@ -130,17 +132,17 @@ Although you can connect to your autonomous database from local desktop tools, s
 
 1. In your database's details page, click the **Database Actions** button. Then choose the **SQL** option.
 
-    ![Click the Database Actions button](./../lab-1/images/click-database-actions-button.png " ")
+    ![Click the Database Actions button](./../database-setup/images/click-database-actions-button.png " ")
 
 2. The Database Actions page opens with a SQL Worksheet window.
 
-    ![SQL Worksheet new window](./../lab-1/images/sql-worksheet-new-window.png " ")
+    ![SQL Worksheet new window](./../database-setup/images/sql-worksheet-new-window.png " ")
 
     You can follow the guide to understand the different components of database actions (don't worry about the warning pop up just close it).
 
     If a sign-in page opens for Database Actions, simply use your database instance's default administrator account, **Username - ADMIN**, and **Password** you specified when creating the database, then click **Sign in**.
 
-    ![SQL Worksheet screen](./../lab-1/images/sql-worksheet.png " ")
+    ![SQL Worksheet screen](./../database-setup/images/sql-worksheet.png " ")
 
     Database administrators perform many tasks. One of their more common tasks is creating database users and assigning them unique usernames. After users log in to the database with their username and password, they can issue database SQL statements to create objects, query objects, and manage the database.
 
@@ -163,7 +165,7 @@ Although you can connect to your autonomous database from local desktop tools, s
     <copy>CREATE USER hruser IDENTIFIED BY Example_pwd01;</copy>
     ```
 
-    ![Create user](./../lab-1/images/user-created.png =50%x*)
+    ![Create user](./../database-setup/images/user-created.png =50%x*)
 
 4. Use the `GRANT` statement to assign privileges and roles to users.
 
@@ -175,7 +177,7 @@ Although you can connect to your autonomous database from local desktop tools, s
     <copy>GRANT CREATE ANY TABLE, ALTER ANY TABLE, DROP ANY TABLE TO hruser;</copy>
     ```
 
-    ![Assign privileges to the user](./../lab-1/images/assign-privileges.png =50%x*)
+    ![Assign privileges to the user](./../database-setup/images/assign-privileges.png =50%x*)
 
 ## Task 4: Create Database Objects For The Labs
 
