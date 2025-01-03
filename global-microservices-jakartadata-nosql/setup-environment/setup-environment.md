@@ -59,7 +59,7 @@ to get the Cloud Shell started.
     <copy>
     cd $HOME
     rm -rf books-management
-    curl -L https://github.com/dario-vega/nosql-examples/raw/master/zips/books-management.zip  -o books-management.zip
+    curl -L https://github.com/oracle/nosql-examples/raw/master/zips/books-management.zip  -o books-management.zip
     unzip books-management.zip
 
     arch=`uname -m | sed  's/x86_64/x64/g'`
@@ -75,7 +75,7 @@ to get the Cloud Shell started.
 
 1. To deploy the application, we will use a terraform scripts provided for this Lab. Click on the 'Deploy to Oracle Cloud ' button.  This will create a new window in your browser.
 
-  [![Deploy to Oracle Cloud - home](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/dario-vega/nosql-examples/raw/master/zips/books-management.zip)
+  [![Deploy to Oracle Cloud - home](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle/nosql-examples/raw/master/zips/books-management.zip)
 
 2. After successfully hitting the 'Deploy to Oracle Cloud' button, you will be brought to a new screen.
 
