@@ -30,11 +30,11 @@ In this task, we will review the code using the OCI Code Editor.
 
    ![Cloud Editor](./images/cloud-code-editor.png)
 
-2. Open `application.properties` in the `global-microservices-nosql/src/main/resources` directory. This file configures the database connection and deployment settings, providing flexibility for different environments.
+2. Open `microprofile-config.properties` in the directory `books-management/src/main/resources/META-INF/`. This file configures the database connection and deployment settings, providing flexibility for different environments.
 
    ![Code createTable](./images/appl-properties.png)
 
-   Let's take a look at the class `application.properties` again. In the previous lab, we ran the application code using Cloud Shell and used delegation tokens.
+   Let's take a look at the class ` microprofile-config.properties` again. In the previous lab, we ran the application code using Cloud Shell and used delegation tokens.
    In this lab, we are going to be running application using Resource Principals.
 
     As discussed in the Lab 2 - Task 4: Understand Credentials, and Policies. To use them you have to set up a dynamic group and create a policy
@@ -63,7 +63,9 @@ After reviewing the code, you can close the Code Editor.
 2. Execute the following setup shell script in Cloud Shell to set up your environment. Please copy the values for `OCI_REGION` and `OCI_NOSQL_COMPID` (labeled `NOSQL_REGION` and `NOSQL_COMPID` in your environment):
 
     ```shell
-    source ~/global-microservices-nosql/env.sh
+    <copy>
+    source ~/books-management/env.sh
+    </copy>
     ```
    ![Cloud Shell](./images/cloud-shell-result.png)
 
@@ -81,7 +83,7 @@ After reviewing the code, you can close the Code Editor.
 
 3. Enter **demo-nosql-book-management-app** as the name. Click **Select Image**, choose **External Registry**, and enter:
    - **Registry hostname**: `ghcr.io`
-   - **Repository**: `oracle/demo-nosql-book-management-app`
+   - **Repository**: `oracle/demo-nosql-book-example-app`
 
    Then, click **Select Image** at the bottom of the screen.
 
@@ -126,7 +128,7 @@ After reviewing the code, you can close the Code Editor.
 
     ```shell
     <copy>
-    curl http://$IP_CI:8081/api/books | jq
+    curl http://$IP_CI:8080/books | jq
     </copy>
     ```
 

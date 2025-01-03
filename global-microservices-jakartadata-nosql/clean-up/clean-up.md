@@ -6,8 +6,6 @@ This lab is finished. We will delete all resources created.
 
 _Estimated Time:_ 5 minutes
 
-[Lab 6 Walkthrough](videohub:1_elpp0ki2)
-
 ## Task 1: Delete resources created using Cloud Shell
 
 In this task we will deleted the resource created using the Cloud Shell.
@@ -50,7 +48,7 @@ set your compartment to 'demonosql', click on the Test table, which will bring u
 
 2. On the top left, go to menu, then Developer Services and then Containers & Artifacts - Container Instances.
 
-   In the Container instance screen, click on the container with the name `Creating Scalable, Global Microservices with OCI, Spring Data, and NoSQL`. Under 'More actions' click on Delete.
+   In the Container instance screen, click on the container with the name `Book Management Catalog with OCI and NoSQL`. Under 'More actions' click on Delete.
 
    ![Delete Container Instance](./images/delete-ci.png)
 
