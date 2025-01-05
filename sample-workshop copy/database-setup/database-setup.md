@@ -228,6 +228,125 @@ Although you can connect to your autonomous database from local desktop tools, s
     <copy>SELECT FIRST_NAME, LAST_NAME FROM HRUSER.EMPLOYEES;</copy>
     ```
 
+**Setting up your connection credentials and files**
+
+1. First let's set up your connection credentials to your database. Cloud Shell makes this easy.
+
+    * Cloud Shell provides a Linux terminal in your Oracle Cloud webpage with a pre-authenticated Oracle Cloud Infrastructure (OCI) Command Line Interface (CLI) connected to it.
+    * Select the < > icon in the top right corner of your Oracle Cloud menu and then select “Cloud Shell”
+
+    ![Cloud Shell Icon](./../database-setup/images/cloud-shell.png " ")
+
+2. On the bottom of your screen you’ll see the Cloud Shell interface appear.
+
+    ![Cloud Shell Interface](./../database-setup/images/cloud-shell-interface.png " ")
+
+3. You can fetch your wallet with the following command. Before you paste the command in the Cloud Shell command prompt, place it in a text editor and edit the following areas (make sure to remove the brackets):
+
+    * Replace [Insert Password] with a password of your choice for your wallet
+        * The wallet password cannot contain special characters such as $
+
+    * Replace [Insert OCID] with your Autonomous Database OCID
+        * This can be found under your "Autonomous Database information" tab
+
+    ![Oracle Cloud Id](./../database-setup/images/ocid.png " ")
+
+    ```
+    <copy>oci db autonomous-database generate-wallet --generate-type ALL --file Wallet_workshop.zip --password [Insert Password] --autonomous-database-id [Insert OCID]</copy>
+    ```
+
+4. Now you can place the command into Cloud Shell and generate your wallet.
+
+    ![Wallet generated](./../database-setup/images/wallet-gen.png " ")
+
+5. Before you connect to your database, let's upload some files you'll need for the workshop. Select the settings gear in the top right of the Cloud Shell interface then click “Upload”.
+
+    ![Upload button](./../database-setup/images/upload.png " ")
+
+6. Download [setup_files.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/developer-library/setup_changelogs.zip) by clicking the link.
+
+    * The files in this zip folder will be used to automatically create the database objects you will use in the workshop
+
+7. Once that zip file has downloaded to your computer, select it in the "File Upload to your Home Directory" menu and click Upload.
+
+    ![File upload](./../database-setup/images/file-upload.png " ")
+
+    ![Upload files](./../database-setup/images/upload-files.png " ")
+
+8. There will be a notification in the top right “File Transfers” window when the upload is complete.
+
+9. Let’s now unzip the setup_changelogs folder in the Cloud Shell command line using the unzip Linux command.
+
+    * unzip decompresses your files in the zip folder/directory. The -d option you will use extracts those files and subdirectories to a different directory in the format of unzip -d [new/existing directory to extract to] [zip file/folder to extract from].
+
+    ```
+    <copy>unzip -d setup_files setup_files.zip</copy>
+    ```
+
+10. Next, change your current working directory to the newly created setup_files folder. You’ll be using the cd (change directory) command and entering it twice due to the folder unzipping in such a way that the structure is setup_files -> setup_files -> [files]
+
+    ```
+    <copy>cd setup_files</copy>
+    ```
+
+**Connect To HRUSER user and create database objects**
+
+1. Now that your wallet and setup files are downloaded, it's time to connect to SQLcl.
+
+    ```
+    <copy>sql /nolog</copy>
+    ```
+
+    ![Connect to SQLcl no log](./../database-setup/images/sql-nolog.png " ")
+
+2. Set cloudconfig to Wallet_lbworkshop.zip so SQLcl knows to read your credentials from this wallet. In the set cloudconfig command below replace [OCI CLI Profile Name] with your profile name.
+
+    * This is the name to the left of @cloudshell in your command prompt before you logged in to SQLcl.
+
+    ```
+    <copy>set cloudconfig /home/[OCI CLI Profile Name]/Wallet_workshop.zip</copy>
+    ```
+
+    ![Set CloudConfig](./../database-setup/images/set-cloudconfig.png " ")
+
+3. Use the command show tns to show connection information.
+
+    * Transparent Network Substrate (TNS) is an Oracle networking technology that serves as the foundational component for all of our network products.
+
+    ```
+    <copy>show tns</copy>
+    ```
+
+    ![Show TNS](./../database-setup/images/show-tns.png " ")
+
+4. It is now time to connect to MOVIESTREAM_MANAGER and create some database objects in this user.
+
+    -   Under the "Available TNS Entries" section of the `show tns` command, there are 3 connections by default for Autonomous Data Warehouse (ADW) and 5 for Autonomous Transaction Processing (ATP). The names are designated by `[database name]_[connection level]`.
+    -   These workshop instructions will use workshop_low in the command below.
+    -   If you prefer to use a different connection, simply replace the command with that connection.
+        -   lbworkshop_high
+            -   High priority application connection service for reporting and batch operations. All operations run in parallel and are subject to queuing.
+        -   lbworkshop_medium
+            -   A typical application connection service for reporting and batch operations. All operations run in parallel and are subject to queuing. Using this service, the degree of parallelism is limited to four.
+        -   lbworkshop_low
+            -   A lowest priority application connection service for reporting or batch processing operations. This connection service does not run with parallelism.
+        -   lbworkshop_tpurgent (ATP only)
+            -   The highest priority application connection service for time critical transaction processing operations. This connection service supports manual parallelism.
+        -   lbworkshop_tp (ATP only)
+            -   A typical application connection service for transaction processing operations. This connection service does not run with parallelism.
+
+    ```
+    <copy>connect hruser@workshop_low</copy>
+    ```
+
+    ![Connect to the user](./../database-setup/images/connect-user.png " ")
+
+5. You are now connected to your HRUSER user. If you run the tables SQL command you’ll see by the “no rows selected” result that you don’t have any tables yet. So let’s create some database objects to use in your workshop!
+
+    ```
+    <copy>tables;</copy>
+    ```
+
 You may now **proceed to the next lab.**
 
 ## Want to Learn More?
