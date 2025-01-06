@@ -9,9 +9,12 @@
 
 <In this workshop you will live an adventure where you will be a developer with our team (you will be part of our development team X) helping us to develop an application.>
 
- Tom is a developer within a company that will increase its capacity by hiring new employees, it needs an application for HR management. The work is  already started. This struggling developer that is interacting a lot with database making his apps, overwhelmed by the challenges of managing database updates and changes. But one day while working on an application, he discovered a magical tool **SQLcl Projects** that transformed his life, simplifying complex tasks and lifting the heavy burden of his work.
+<Tom is a developer within a company that will increase its capacity by hiring new employees, it needs an application for HR management. The work is  already started. This struggling developer that is interacting a lot with database making his apps, overwhelmed by the challenges of managing database updates and changes. But one day while working on an application, he discovered a magical tool **SQLcl Projects** that transformed his life, simplifying complex tasks and lifting the heavy burden of his work.>
+This workshop follows the journey of Tom, a developer in a growing company that is hiring more employees. To support this expansion, the company needs to improve his HR management application.
 
-In this workshop you will join Tom in this project and you will help him making this app getting the chance to discover also this tool.
+As part of his role, Tom, like many developers, spends a lot of time working with databases. He often feels overwhelmed by the challenges of managing database updates and changes. But everything changed when he stumbled upon a game-changing tool <discovered a tool>called **SQLcl Projects**. This magical solution transformed his workflow<simplified his tasks>, making database management faster and easier. From that moment on, Tom’s work became more efficient and enjoyable, empowering him to focus on delivering high-quality applications.
+
+In this workshop you will join Tom in this project and you will help him making this app getting the chance to discover also this great tool. Get ready to lighten your workload and unlock new possibilities in your development journey!
 ![Image for SQLcl Projects logo and Harry Potter](./../introduction/images/projects-potter.png " ")
 
 SQLcl Projects for database CICD, is an extension within SQLcl that integrates database changes into the development pipeline while ensuring swift and secure deployment to production environments.

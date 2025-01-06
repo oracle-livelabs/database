@@ -347,7 +347,7 @@ Although you can connect to your autonomous database from local desktop tools, s
     <copy>tables;</copy>
     ```
 
-You may now **proceed to the next lab.**
+You are now all set! Let's **proceed to the next lab.**
 
 ## Want to Learn More?
 
