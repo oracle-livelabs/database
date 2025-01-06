@@ -307,7 +307,7 @@ Although you can connect to your autonomous database from local desktop tools, s
     <copy>set cloudconfig /home/[OCI CLI Profile Name]/Wallet_workshop.zip</copy>
     ```
 
-    ![Set CloudConfig](./../database-setup/images/set-cloudconfig.png " ")
+    ![Set CloudConfig](./../database-setup/images/set-cloudconfig.png =50%x*)
 
 3. Use the command show tns to show connection information.
 
@@ -317,7 +317,7 @@ Although you can connect to your autonomous database from local desktop tools, s
     <copy>show tns</copy>
     ```
 
-    ![Show TNS](./../database-setup/images/show-tns.png " ")
+    ![Show TNS](./../database-setup/images/show-tns.png =50%x*)
 
 4. It is now time to connect to MOVIESTREAM_MANAGER and create some database objects in this user.
 
@@ -339,7 +339,7 @@ Although you can connect to your autonomous database from local desktop tools, s
     <copy>connect hruser@workshop_low</copy>
     ```
 
-    ![Connect to the user](./../database-setup/images/connect-user.png " ")
+    ![Connect to the user](./../database-setup/images/connect-user.png =50%x*)
 
 5. You are now connected to your HRUSER user. If you run the tables SQL command you’ll see by the “no rows selected” result that you don’t have any tables yet. So let’s create some database objects to use in your workshop!
 
@@ -349,7 +349,7 @@ Although you can connect to your autonomous database from local desktop tools, s
 
 You are now all set! Let's **proceed to the next lab.**
 
-## Want to Learn More?
+## Learn More
 
 Click [here](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/index.html) for documentation on using Oracle Autonomous Database Serverless.
 
