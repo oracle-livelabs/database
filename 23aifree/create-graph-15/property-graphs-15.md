@@ -12,7 +12,7 @@ Estimated Time: 15 minutes.
 * Create an Operational Property Graph 
 
 Learn how to:
-- Use APEX and SQL/PGQ to define and query a property graph.
+- Use SQL/PGQ to define and query a property graph.
 ​
 ### Prerequisites
 This lab assumes you have:
