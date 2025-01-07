@@ -22,9 +22,9 @@ You can switch between environments with the shortcuts shown in the last column 
 
 ![Overview of the Oracle Homes and databases in the lab](./images/introduction-overview.png " ")
 
-The lab contains nine labs. You should perform the labs in order. 
+The lab contains a number of labs that you should perform in the specified order. 
 
-* You start exploring patching concepts
+* You start by exploring patching concepts
 * Then you use simple methods to patch databases
 * Before moving to advanced topics
 * And patching internals
@@ -33,7 +33,7 @@ The lab contains nine labs. You should perform the labs in order.
 
 ### AutoUpgrade
 
-- AutoUpgrade was originally developed to facilitate easier upgrades of Oracle Database. By demand of our customers, it was enhanced to also patch Oracle Database using the same easy methodology that our customers liked. The aim of AutoUpgrade is to fully automated maintenance activites and perform them according to our best practices - include all pre- and post-tasks. It can patch many databases in parallel and allows all sorts of customizations needed in today's complex environments. utoUpgrade works on all supported platforms, for non-CDB and CDBs, for all or only selected pluggable databases.
+- AutoUpgrade was originally developed to facilitate easier upgrades of Oracle Database. By demand of our customers, it was enhanced to also patch Oracle Database using the same easy methodology that our customers liked. The aim of AutoUpgrade is to fully automate maintenance activites and perform them according to our best practices - include all pre- and post-tasks. It can patch many databases in parallel and allows all sorts of customizations needed in today's complex environments. AutoUpgrade works on all supported platforms, for non-CDB and CDBs, for all or only selected pluggable databases.
 
 ### OPatch
 
@@ -41,7 +41,7 @@ The lab contains nine labs. You should perform the labs in order.
 
 ### Datapatch
 
-- Datapatch patches the database itself. Most often, patches requires changes inside the database. This could be changes to existing objects (tables, views, packages) or completely new objects. Datapatch uses *apply* scripts to make those changes. The apply scripts are stored in the Oracle home and are updated by OPatch.
+- Datapatch patches the database itself. Most often, patches requires changes inside the database. This could be changes to existing objects (tables, views, packages) or completely new objects. Datapatch uses *apply scripts* to make those changes. OPatch updates the apply scripts and places them in the Oracle home.
 
 You may *proceed to the next lab*.
 
@@ -53,5 +53,5 @@ You may *proceed to the next lab*.
 ## Acknowledgments
 
 * **Author** - Daniel Overby Hansen
-* **Contributors** - Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, December 2024
+* **Contributors** - Rodrigo Jorge, Mike Dietrich
+* **Last Updated By/Date** - Daniel Overby Hansen, January 2025
