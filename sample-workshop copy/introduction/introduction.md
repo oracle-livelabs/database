@@ -15,9 +15,9 @@ This workshop follows the journey of Tom, a developer in a growing company that 
 As part of his role, Tom, like many developers, spends a lot of time working with databases. He often feels overwhelmed by the challenges of managing database updates and changes. But everything changed when he stumbled upon a game-changing tool <discovered a tool>called **SQLcl Projects**. This magical solution transformed his workflow<simplified his tasks>, making database management faster and easier. From that moment on, Tom’s work became more efficient and enjoyable, empowering him to focus on delivering high-quality applications.
 
 In this workshop you will join Tom in this project and you will help him making this app getting the chance to discover also this great tool. Get ready to lighten your workload and unlock new possibilities in your development journey!
-![Image for SQLcl Projects logo and Harry Potter](./../introduction/images/projects-potter.png " ")
+![Image for SQLcl Projects logo and Harry Potter](./../introduction/images/sqlcl-projects-logo.png " ")
 
-SQLcl Projects for database CICD, is an extension within SQLcl that integrates database changes into the development pipeline while ensuring swift and secure deployment to production environments.
+**SQLcl Projects** for **Database CICD**, is an extension within SQLcl that integrates database changes into the development pipeline while ensuring swift and secure deployment to production environments.
 
 **Estimated Workshop Time:** 1 hours 30 minutes
 

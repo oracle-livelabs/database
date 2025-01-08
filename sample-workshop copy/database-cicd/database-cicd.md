@@ -1,10 +1,10 @@
-# Explore The Application
+# Database CI/CD
 
 ## Introduction
 
-In this Lab you will start working on the application spreading your magic on it.
+In this Lab you will start working on the database CICD workflow using SQLcl Projects commands and git.
 
-![HR application interface](./../application-change/images/hr-app.png " ")
+![CI/CD workflow](./../database-cicd/images/cicd.png " ")
 
 **Estimated Workshop Time:** 10 minutes
 
@@ -18,27 +18,27 @@ In this Lab you will start working on the application spreading your magic on it
 * Completion of the previous Labs.
 * Get the application
 
-## Task 1: XXXX
+## Task 1: Initialization using project init
 
 TBD
 
-## Task 2: XXXX
+## Task 2: Exporting from database (project export)
 
 TBD
 
-## Task 3: XXXX
+## Task 3: Project Stage
 
 TBD
 
-## Task 4: XXXX
+## Task 4: Project Release
 
 TBD
 
-## Task 5: XXXX
+## Task 5: Generate The Artifact (project gen-artifact)
 
 TBD
 
-## Task 6: XXXX
+## Task 6: Deploy The Artifact To The PROD DB
 
 TBD
 

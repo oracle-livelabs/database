@@ -30,6 +30,11 @@
       "filename": "../../application-change/application-change.md"
     },
     {
+      "title": "Lab 4: Database CI/CD",
+      "description": "In this lab the learner will go through the database ci/cd workflow",
+      "filename": "../../database-cicd/database-cicd.md"
+    },
+    {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
