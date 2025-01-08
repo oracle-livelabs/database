@@ -123,7 +123,10 @@ This workshop assumes you have:
     * Data is stored as JSON documents in Oracle NoSQL Cloud Service
     * Java with Helidon, Jakarta NoSQL, and Jakarta Data provide a clear and understandable description of the data within your API
 
-   These benefits help simplify the development process with Oracle NoSQL Database Cloud Service. We hope this lab demonstrates the ease of integrating with Oracle NoSQL. You may now **proceed to the next lab.**
+   These benefits help simplify the development process with Oracle NoSQL Database Cloud Service.
+   We hope this lab demonstrates the ease of integrating with Oracle NoSQL.
+
+   You may now **proceed to the next lab.**
 
 ## Learn More
 
