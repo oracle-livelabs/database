@@ -64,5 +64,5 @@ Are you curious by discovering this tool ? Let's get started!
 
 ## Acknowledgements
 
-* **Author** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl
+* **Authors** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of Technical Staff, SQLcl
 * **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, December 2024

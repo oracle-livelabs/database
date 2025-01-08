@@ -355,5 +355,5 @@ Click [here](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverles
 
 ## Acknowledgements
 
-- **Author** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl
+- **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Member of Technical Staff, SQLcl
 - **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, December 2024

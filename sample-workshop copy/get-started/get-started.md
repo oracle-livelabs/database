@@ -131,5 +131,5 @@ Here are some useful links if you want to know more about Oracle Cloud :
 
 ## Acknowledgements
 
-* **Author** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl
+* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Member of Technical Staff, SQLcl
 * **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, December 2024
