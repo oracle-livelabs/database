@@ -134,7 +134,10 @@ After reviewing the code, you can close the Code Editor.
 
    This will display all the rows in the table. You can execute additional queries as needed.
 
-Exit the Cloud Shell, and you may now **proceed to the next lab.**
+4. Exit the Cloud Shell
+
+You may now **proceed to the next lab.**
+
 
 ## Learn More
 

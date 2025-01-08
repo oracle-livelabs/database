@@ -200,12 +200,16 @@ This configuration file is used to set application properties and database conne
 8. Execute SQL queries over REST using the OCI CLI.
 
     ```shell
-    SQL_STATEMENT="SELECT * from Book"
+    <copy>
+    SQL_STATEMENT="SELECT * from Books"
     echo "$SQL_STATEMENT"
     oci nosql query execute --compartment-id  $OCI_NOSQL_COMPID --statement "$SQL_STATEMENT"
+    </copy>
     ```
 
-Exit the Cloud Shell to **proceed to the next lab.**
+9. Exit the Cloud Shell 
+
+You may now **proceed to the next lab.**
 
 ## Learn More
 
