@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab walks you through the steps to quickly provision an **O**racle **A**utonomous **D**atabase (either Autonomous Transaction Processing [ATP] or Autonomous Data Warehouse [ADW]) on Oracle Cloud. You will connect to the database using SQL Worksheet, a browser-based tool that is easily accessible from the Autonomous Database console. Then create a database user (schema), assign privileges to the user, and enable the user to log in to the database creating the needed objects and using **O**racle **R**EST **D**ata **S**ervices **(ORDS)** to enable REST APIs for the created objects.
+This lab walks you through the steps to quickly provision an **O**racle **A**utonomous **D**atabase (either Autonomous Transaction Processing [ATP] or Autonomous Data Warehouse [ADW]) on Oracle Cloud. You will connect to the database using SQL Worksheet, a browser-based tool that is easily accessible from the Autonomous Database console. Then create a database user (schema), assign privileges to the user, and enable the user to log in to the database creating the needed objects and using **O**racle **R**EST **D**ata **S**ervices **(ORDS)** to enable REST Endpoints for the created objects.
 <create and setup your schema (user). You will use this database in subsequent labs of this workshop.>
 
 ![ADB & ORDS](./../database-setup/images/adb-ords.png " ")
