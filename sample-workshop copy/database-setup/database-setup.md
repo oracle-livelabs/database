@@ -296,7 +296,7 @@ Although you can connect to your autonomous database from local desktop tools, s
 
     ![HRUSER created objects](./../database-setup/images/hruser-objects.png " ")
 
-## Task 4: Generate ORDS links
+## Task 4: Generate ORDS Links
 
 You will generate the ORDS links to use as API for your application to interact with the database.
 
@@ -316,7 +316,7 @@ You will generate the ORDS links to use as API for your application to interact 
 
     ![Connect to HRUSER](./../database-setup/images/hruser-signin.png " ")
 
-    Now, you are connected as HRUSER as you can see at the top right of the screen.
+    Now, you are connected as HRUSER as you can see at the top right of the screen. Now, we will proceed for enabling the user tables to get the ORDS links by the next steps.
 
 5. Click **Development** then **SQL**
 
@@ -332,7 +332,7 @@ You will generate the ORDS links to use as API for your application to interact 
 
     Now, your **EMPLOYEES** table is **REST Enables**.
 
-    Repeat the same thing to enable the other tables (ATTENDANCE, DEPARTMENTS and PERFORMANCEREVIEWS).
+    >**Note:** *Repeat the same thing to enable the other tables (ATTENDANCE, DEPARTMENTS and PERFORMANCEREVIEWS).*
 
 8. Click the hamburger menu. Click **REST**.
 
