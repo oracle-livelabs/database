@@ -1,9 +1,11 @@
-# Provision an Oracle Autonomous Database
+# Database Setup Using OAD & ORDS
 
 ## Introduction
 
-This lab walks you through the steps to quickly provision an Oracle Autonomous Database (either Autonomous Transaction Processing [ATP] or Autonomous Data Warehouse [ADW]) on Oracle Cloud. You will connect to the database using SQL Worksheet, a browser-based tool that is easily accessible from the Autonomous Database console. Then create a database user (schema), assign privileges to the user, and enable the user to log in to the database.
+This lab walks you through the steps to quickly provision an **O**racle **A**utonomous **D**atabase (either Autonomous Transaction Processing [ATP] or Autonomous Data Warehouse [ADW]) on Oracle Cloud. You will connect to the database using SQL Worksheet, a browser-based tool that is easily accessible from the Autonomous Database console. Then create a database user (schema), assign privileges to the user, and enable the user to log in to the database creating the needed objects and using **O**racle **R**EST **D**ata **S**ervices **(ORDS)** to enable REST APIs for the created objects.
 <create and setup your schema (user). You will use this database in subsequent labs of this workshop.>
+
+![ADB & ORDS](./../database-setup/images/adb-ords.png " ")
 
 Estimated lab time: 10 minutes
 
@@ -179,7 +181,33 @@ Although you can connect to your autonomous database from local desktop tools, s
 
     ![Assign privileges to the user](./../database-setup/images/assign-privileges.png =50%x*)
 
-5. Create four tables for HRUSER schema and add records.
+## Task 4: Create Objects & Generate REST Endpoints
+
+You will generate REST endpoints to serve as APIs for your application to interact with the database. But first, let's create the necessary objects for our application.
+
+1. Click the hamburger menu in the top-left corner of the page and click **Database Users**.
+
+    ![Click Database Users](./../database-setup/images/database-users.png " ")
+
+2. Search for HRUSER (by scrolling) and click on the three dotes in the right side of the user, then click **Enable REST**.
+
+    ![Click Enable REST](./../database-setup/images/enable-rest.png " ")
+
+3. Click on the flesh icon at the bottom right to connect as HRUSER.
+
+    ![Click HRUSER flesh](./../database-setup/images/hruser-flesh.png " ")
+
+4. Enter **Username** and **Password** for HRUSER then click **Sign in**.
+
+    ![Connect to HRUSER](./../database-setup/images/hruser-signin.png " ")
+
+    Now, you are connected as HRUSER as you can see at the top right corner of the screen.
+
+5. Click **Development** then **SQL**
+
+    ![Click Development then SQL](./../database-setup/images/development-sql.png " ")
+
+6. Create four tables for HRUSER schema and add records.
 
 * Copy the following script to do that. *Expand the line right below by clicking on it to view the copyable code block*
 
@@ -290,43 +318,19 @@ Although you can connect to your autonomous database from local desktop tools, s
 
 * Past the copied script in the SQL worksheet and click run script as shown in the following:
 
-    ![Run the script in the SQL worksheet to create the objects](./../database-setup/images/run-hruser-script.png " ")
+    ![Run the script in the SQL worksheet to create the objects](./../database-setup/images/run-script.png " ")
 
 * Click the reload button surrounded in blue color to see the created tables for this **HRUSER**.
 
     ![HRUSER created objects](./../database-setup/images/hruser-objects.png " ")
 
-## Task 4: Generate ORDS Links
+    Now, we will proceed for enabling the user tables to get the ORDS URLs (Endpoints) by the next steps.
 
-You will generate the ORDS links to use as API for your application to interact with the database.
-
-1. Click the hamburger menu in the top-left corner of the page and click **Database Users**.
-
-    ![Click Database Users](./../database-setup/images/database-users.png " ")
-
-2. Search for HRUSER (by scrolling) and click on the three dotes in the right side of the user, then click **Enable REST**.
-
-    ![Click Enable REST](./../database-setup/images/enable-rest.png " ")
-
-3. Click on the flesh icon at the bottom right to connect as HRUSER.
-
-    ![Click HRUSER flesh](./../database-setup/images/hruser-flesh.png " ")
-
-4. Enter **Username** and **Password** for HRUSER then click **Sign in**.
-
-    ![Connect to HRUSER](./../database-setup/images/hruser-signin.png " ")
-
-    Now, you are connected as HRUSER as you can see at the top right of the screen. Now, we will proceed for enabling the user tables to get the ORDS links by the next steps.
-
-5. Click **Development** then **SQL**
-
-    ![Click Development then SQL](./../database-setup/images/development-sql.png " ")
-
-6. Right click on the **EMPLOYEES** table. Click **REST**. Click **Enable...**.
+7. Right click on the **EMPLOYEES** table. Click **REST**. Click **Enable...**.
 
     ![Click ](./../database-setup/images/rest-enable.png " ")
 
-7. Click **Enable**.
+8. Click **Enable**.
 
     ![Click Enable](./../database-setup/images/enable.png " ")
 
@@ -334,17 +338,19 @@ You will generate the ORDS links to use as API for your application to interact 
 
     >**Note:** *Repeat the same thing to enable the other tables (ATTENDANCE, DEPARTMENTS and PERFORMANCEREVIEWS).*
 
-8. Click the hamburger menu. Click **REST**.
+9. Click the hamburger menu. Click **REST**.
 
     ![Click REST](./../database-setup/images/rest.png " ")
 
-9. Click **AUTOREST**.
+10. Click **AUTOREST**.
 
     ![Click AUTOREST](./../database-setup/images/autorest.png " ")
 
     You will see all the enabled table shown there.
 
     ![Click AUTOREST tables](./../database-setup/images/autorest-tables.png " ")
+
+    Those URLs generated by ORDS are the ones that we will use in our application.
 
 You are now all set! Let's **proceed to the next lab.**
 
