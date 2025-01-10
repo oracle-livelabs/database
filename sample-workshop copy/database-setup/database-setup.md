@@ -209,7 +209,7 @@ You will generate REST endpoints to serve as APIs for your application to intera
 
 6. Create four tables for HRUSER schema and add records.
 
-* Copy the following script to do that. *Expand the line right below by clicking on it to view the copyable code block*
+    * Copy the following script to do that. *Expand the line right below by clicking on it to view the copyable code block*
 
     <details>
     <summary>[CLICK TO EXPAND] SQL script fo database objects creation</summary>
@@ -316,11 +316,11 @@ You will generate REST endpoints to serve as APIs for your application to intera
     ```
     </details>
 
-* Past the copied script in the SQL worksheet and click run script as shown in the following:
+    * Past the copied script in the SQL worksheet and click run script as shown in the following:
 
     ![Run the script in the SQL worksheet to create the objects](./../database-setup/images/run-script.png " ")
 
-* Click the reload button surrounded in blue color to see the created tables for this **HRUSER**.
+    * Click the reload button surrounded in blue color to see the created tables for this **HRUSER**.
 
     ![HRUSER created objects](./../database-setup/images/hruser-objects.png " ")
 
