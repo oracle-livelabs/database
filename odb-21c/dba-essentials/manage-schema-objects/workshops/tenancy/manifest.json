@@ -19,7 +19,7 @@
       "filename": "./../../prepare-setup/prepare-setup.md"
     },
     {
-      "title": "Lab 2: Setup Compute Instance",
+      "title": "Lab 2: Set up Compute Instance",
       "description": "How to provision the workshop environment and connect to it",
       "publisheddate": "08/31/2021",
       "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc-ssh.md"

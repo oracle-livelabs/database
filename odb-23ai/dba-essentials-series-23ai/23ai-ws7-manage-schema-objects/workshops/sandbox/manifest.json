@@ -1,0 +1,42 @@
+{
+  "workshoptitle": "Manage schema objects in Oracle Database 23ai using Database Actions",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction.",
+      "filename": "./../../intro-schema-objects/intro-schema-objects.md"
+    },
+    {
+      "title": "Lab 1: Environment Setup",
+      "description": "Verify Setup of compute instance",
+      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+    },
+    {
+      "title": "Lab 2: Initialize Environment",
+      "description": "How to initialize and start all the workshop components.",
+      "publisheddate": "12/21/2021",
+      "filename": "./../../initialize-environment/initialize-environment.md"
+    },
+    {
+      "title": "Lab 3: Manage Tables",
+      "description": "How to manage tables in Oracle Database 23ai using Database Actions.",
+      "filename": "./../../manage-tables/manage-tables.md"
+    },
+    {
+      "title": "Lab 4: Create Indexes and Views",
+      "description": "How to create indexes and views in Oracle Database 23ai using Database Actions.",
+      "filename": "./../../create-indexes-and-views/create-indexes-and-views.md"
+    },
+    {
+      "title": "Lab 5: Manage Program code stored in Oracle Database",
+      "description": "How to manage program code stored in Oracle Database 23ai using Database Actions.",
+      "filename": "./../../manage-program-code/manage-program-code.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}

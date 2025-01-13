@@ -1,0 +1,1 @@
+Deleting an Oracle Database also deletes any user data that you have in the Oracle base or Oracle home locations. To save your data and files, export or move them outside Oracle base and Oracle home before you remove the database.

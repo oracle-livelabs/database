@@ -1,7 +1,7 @@
 {
     "workshoptitle": "Launch Your First MySQL HeatWave Database System - Administrators",
     "help": "livelabs-help-db_us@oracle.com",
-	"tutorials": [
+    "tutorials": [
         {
             "title": "Introduction",
             "description": "The Introduction is always second. The title and contents menu title match for the Introduction.",
@@ -24,6 +24,10 @@
         {
             "title": "Lab 3: Enable and explore Database Management for MySQL Heatwave",
             "filename": "../../enabledbm/enabledbm.md"
+        },
+        {
+            "title": "Lab 4: Enable and explore Ops Insights for HeatWave MySQL",
+            "filename": "../../enableopsi/enableopsi.md"
         },
         {
             "title": "Need Help?",

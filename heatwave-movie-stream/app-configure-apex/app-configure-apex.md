@@ -30,7 +30,7 @@ In this lab, you will be guided through the following tasks:
 
 1. Download the MovieHub application template:
 
-    Click on this link to **Download file** [MovieHub.zip](https://objectstorage.us-phoenix-1.oraclecloud.com/p/p_59Wj-TSoegriKLewLSQEC3T7IBIkCllrs5ztNZ5TDvtbLGSu2RR4pH6u8oQ8J6/n/idazzjlcjqzj/b/bucket-images/o/MovieHub_V2.zip) to your local machine
+    Click on this link to **Download file** [MovieHub.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/IV9G5YNe0k7TxBeL-kIs7APtLwgHBEXHGc9nxARpsgS1lxcNg6tm6qTVIsbOdnw6/n/idi1o0a010nx/b/Bucket-CA/o/LiveLab-MovieHub-images/MovieHub_V3.zip) to your local machine
 
 ## Task 2: Import the sample application - MovieHub
 
@@ -180,4 +180,4 @@ You may now **proceed to the next lab**
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, February 2024
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2024

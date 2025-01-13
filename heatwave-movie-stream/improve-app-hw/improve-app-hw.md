@@ -25,7 +25,7 @@ In this lab, you will be guided through the following tasks:
 
 ## Task 1: Download sample display images from a Bucket in OCI Object Store:
 
-1. Click on this link to Download the images [MovieHub Sample Images](https://objectstorage.us-phoenix-1.oraclecloud.com/p/Uim7lrT2O4eMuGunwu608ejFy-nlvNTtfEBNbElXaaAwTafZn2QveR6kgWJE5atV/n/idazzjlcjqzj/b/bucket-images/o/moviehub_imgs.zip) from the Demo to your local machine
+1. Click on this link to Download the images [MovieHub Sample Images](https://objectstorage.us-ashburn-1.oraclecloud.com/p/IQ5Zvpi-KPjZMgVUMfAQfkzwezllFxOzLgEZ9tuLdkQilotp3WzvUh58eMGRXGTc/n/idi1o0a010nx/b/Bucket-CA/o/LiveLab-MovieHub-images/moviehub_imgs.zip) from the Demo to your local machine
 
 ## Task 2: Upload Images to the OCI Object Store:
 
@@ -191,4 +191,4 @@ In this lab, you will be guided through the following tasks:
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, February 2024
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2024
