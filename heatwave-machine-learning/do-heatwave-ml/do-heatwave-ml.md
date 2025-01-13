@@ -48,25 +48,25 @@ In this lab, you will be guided through the following task:
 
     ![Connect](./images/heatwave-load-shell.png "heatwave-load-shell ")
 
-    a. SELECT and ALTER privileges on the schema that contains the machine learning datasets
+    a. Create the ml\_dev user used to create the  schema for the machine learning datasets
 
     ```bash
     <copy>CREATE USER 'ml_dev'@'%' IDENTIFIED BY 'Welcome#123';</copy>
     ```
 
-    b. Give all privileges on the ml\_data schema that contains the machine learning datasets
+    b. Grant ml\_dev the required privileges on the ml_data schema that contains the machine learning datasets
 
     ```bash
     <copy>GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT ON ml_data.* TO 'ml_dev'@'%';</copy>
     ```
 
-    c. Give all privileges on the ML\_SCHEMA\_ml\_dev schema that contains the machine learning development objects
+    c. Grant ml\_dev the required privileges on the ML_SCHEMA_ml_dev schema that contains the machine learning development objects
 
     ```bash
     <copy>GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT ON ML_SCHEMA_ml_dev.* TO 'ml_dev'@'%';</copy>
     ```
 
-    d. SELECT and EXECUTE on the MySQL sys schema where HeatWave AutoML routines reside; for example:
+    d. Grant ml\_dev SELECT and EXECUTE privileges on the MySQL sys schema where HeatWave AutoML routines reside;
 
     ```bash
     <copy>GRANT SELECT, EXECUTE ON sys.* TO 'ml_dev'@'%';</copy>
