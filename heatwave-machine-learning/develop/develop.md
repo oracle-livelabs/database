@@ -170,7 +170,7 @@ In this lab, you will be guided through the following tasks:
 
 6. Insert test values in the text boxes (you can use the examples in the page) and press '**Submit**' button. Page down to see the prediction, explanation, and score:
 
-     ![Test Iris App](./images/iris-web-php-r esult.png "iris-app-php test ")
+     ![Test Iris App](./images/iris-web-php-result.png "iris-app-php test ")
 
 ## Acknowledgements
 
