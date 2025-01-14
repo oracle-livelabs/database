@@ -1,0 +1,14 @@
+{
+   "workshoptitle": "LiveLabs Sprints",
+   "help": "livelabs-help-db_us@oracle.com",
+   "tutorials": [
+      {
+         "title": "How do I find a Data Catalog instance OCID?",
+         "type": "freetier",
+         "description": " ",
+         "filename": "./../sprint-find-data-catalog-ocid/sprint-find-data-catalog-ocid.md"
+      }
+   ],
+   "task_type": "Sections",
+   "hide_button": "true"
+}

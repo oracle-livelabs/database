@@ -100,7 +100,7 @@ In this lab, you will be guided through the following tasks:
     Enter the following command at the prompt
 
     ```bash
-    <copy>sudo wget https://objectstorage.us-phoenix-1.oraclecloud.com/p/uaOgU_UDi0OIvgvS1R0-UPSD9PqK0UXHtojya5VZrrFtTbssGq_8dhNNmmkUnFyb/n/idazzjlcjqzj/b/bucket-images/o/scripts.zip</copy>
+    <copy>sudo wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/7yuwIwQMyXC5lTzpv-mKaXbnqAnIDTdubHnHsCaWd0LyUgs7KGVxphWDMaFZpviL/n/idi1o0a010nx/b/Bucket-CA/o/LiveLab-MovieHub-images/scripts.zip</copy>
     ```
 
     Unzip the application code. Be sure to include the -j option to avoid creating a new folder.
@@ -185,7 +185,7 @@ You may now **proceed to the next lab**
 
 - **Author** - Cristian Aguilar, MySQL Solution Engineering
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, February 2024
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2024
 
 - **Dataset** - F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets:
 History and Context. ACM Transactions on Interactive Intelligent
