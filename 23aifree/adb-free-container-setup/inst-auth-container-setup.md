@@ -8,7 +8,7 @@ In this lab, you will experience just how easy it is to get started with the Ora
 ### **Objectives**
 In this lab, you will:
 
-* Launch the container image.
+* Launch the container image using Podman.
 * Connect to your Autonomous Database.
 * Access SQL Developer Web & APEX.
 

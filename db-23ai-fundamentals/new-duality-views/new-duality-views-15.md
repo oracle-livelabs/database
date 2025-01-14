@@ -272,4 +272,4 @@ If the eTags do not match, which can occur if another concurrent operation updat
 ## Acknowledgements
 * **Author** - Killian Lynch, Oracle Database Product Management, Product Manager
 * **Contributors** - Dominic Giles, Oracle Database Product Management, Distinguished Product Manager
-* **Last Updated By/Date** - Briana Ambler, Oracle Database Product Management, Product Manager, August 2024
+* **Last Updated By/Date** - Brianna Ambler, Oracle Database Product Management, Product Manager, September 2024

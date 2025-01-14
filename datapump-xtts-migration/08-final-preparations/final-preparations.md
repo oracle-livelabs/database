@@ -6,7 +6,7 @@ Right before the outage starts, there are a few final preparations.
 
 Estimated Time: 5 Minutes
 
-[Next Level Platform](videohub:1_dmmf02vy)
+[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 8](youtube:fgyDy-QcV_o?start=2231)
 
 ### Objectives
 

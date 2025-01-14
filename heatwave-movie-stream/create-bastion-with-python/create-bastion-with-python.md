@@ -68,7 +68,7 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
 
     ![ssh key list ](./images/shh-key-list.png "shh key list")
 
-    Note in the output there are two files, a *private key:* `id_rsa` and a *public key:* `id_rsa.pub`. Keep the private key safe and don't share its content with anyone. The public key will be needed for various activities and can be uploaded to certain systems as well as copied and pasted to facilitate secure communications in the cloud.
+    Note: In the output there are two files, a *private key:* `id_rsa` and a *public key:* `id_rsa.pub`. Keep the private key safe and don't share its content with anyone. The public key will be needed for various activities and can be uploaded to certain systems as well as copied and pasted to facilitate secure communications in the cloud.
 
 ## Task 2: Create Compute instance
 
@@ -188,14 +188,20 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![connect signin](./images/connect-first-signin.png "connect signin ")
 
-3. You will need a MySQL client tool to connect to your new MySQL HeatWave System from the Batien.
+3. You will need a MySQL client tool to connect to your new MySQL HeatWave System from the Bastion. You can download the specific desired version and architecture at [MySQL Community Dowloads](https://dev.mysql.com/downloads/shell/)
 
-    Install MySQL Shell with the following command (enter y for each question)
+    To Install the current latest version MySQL Shell version, you can follow the instructions:
+
+    a. Install MySQL Shell with the following command (enter y for each question)
 
     **[opc@…]$**
 
     ```bash
-    <copy>sudo yum install mysql-shell -y</copy>
+    <copy>wget https://dev.mysql.com/get/Downloads/MySQL-Shell/mysql-shell-9.1.0-1.el8.x86_64.rpm</copy>
+    ```
+
+    ```bash
+    <copy>sudo yum install mysql-shell-9* -y</copy>
     ```
 
     ![mysql shell install](./images/mysql-install-shell.png "mysql shell install ")
@@ -227,4 +233,4 @@ You may now **proceed to the next lab**
 
 - **Author** - Perside Foster, MySQL Principal Solution Engineering
 - **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Nick Mader, MySQL Global Channel Enablement & Strategy Manager, Cristian Aguilar, MySQL Solution Engineering
-- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, February 2024
+- **Last Updated By/Date** - Cristian Aguilar, MySQL Solution Engineering, November 2024
