@@ -166,7 +166,7 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
     ```python
     <copy>
     # transform docs into a string array using the "paylod" key
-    docs_as_one_string = "\n=========\n".join([doc["text"] for doc in docs])
+    docs_as_one_string = "\n=========\n".join([doc["text"] for doc in results])
     docs_truncated = truncate_string(docs_as_one_string, 1000)
     </copy>
     ```
@@ -327,4 +327,7 @@ You may now **proceed to the next lab**
 * **Contributors** 
    - Liana Lixandru, Principal Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
    - Kevin Lazarz, Senior Manager, Product Management, Database
-* **Last Updated By/Date** -  Bogdan Farca, Sep 2024
+* **Reviewers**
+  - Rahul Gupta, Senior Cloud Engineer, Analytics
+  - Kashif Manzoor, Master Principal Account Cloud Engineer, EMEA AI CoE
+* **Last Updated By/Date** -  Bogdan Farca, Jan 2025
