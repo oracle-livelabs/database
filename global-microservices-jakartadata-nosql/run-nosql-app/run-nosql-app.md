@@ -48,18 +48,18 @@ This configuration file is used to set application properties and database conne
     - `CLOUD_INSTANCE_OBO_USER`: Represents a cloud deployment using instance principal for delegation with an OBO token.
     It is a pre-authenticated option available in the Cloud Shell.
     - `CLOUD_RESOURCE_PRINCIPAL`: Represents a cloud deployment using resource principal for authentication and authorization.
-    - `CLOUD_SECURITY_TOKEN`: Represents a "Cloud" deployment using Token-based Authentication.
+    - `CLOUD_SECURITY_TOKEN`: Represents a cloud deployment using Token-based Authentication.
 
-    When you create a table, you can choose between *Provisioned Capacity* and *On-Demand Capacity*.
+    When you create a table, you can choose between *Provisioned Capacity* and *On Demand Capacity*.
     With the availability of both models, businesses have total flexibility when choosing the most cost-effective deployment
     to meet their business and application workload requirements. Such flexibility empowers businesses to solely focus on application
     innovations to delight their customers, making operational costs "worry-free" in their decision-making process.
     You can also modify the Capacity mode from Provisioned Capacity to On Demand Capacity and vice-versa.
 
     The Jakarta Data Framework supports the persistence of entities to Oracle NoSQL Database tables. An entity is mapped to a table.
-    It creates automatically the table using the properties `jnosql.document.database` and `jnosql.keyvalue.database`
+    It automatically creates the table using the properties `jnosql.document.database` and `jnosql.keyvalue.database`
 
-    In this application we will use Common Application Properties and variables for easy setup and changeability when deploying using container services.
+    In this application we will use Common application properties and variables for easy setup and changeability when deploying using container services.
 
 4. Next, review the `Book.java` entity class in `books-management/src/main/java/expert/os/demos/books/domain`. This class represents a `Book` in the database and includes fields for `id`, `title`, `genre`, `publicationYear`, `author`, and `tags`.
 
@@ -180,15 +180,15 @@ This configuration file is used to set application properties and database conne
     </copy>
     ```
 
-7. Stop the application and delete temporary files
+7. Stop the application and delete temporary files.
 
-    execute the linux command `fg` followed by CTRL-C and enter to stop the application.
+    Execute the linux command `fg` followed by CTRL-C and enter to stop the application.
     ```shell
     <copy>
     fg
     </copy>
     ```
-    Note: you can rexecute the command `fg` to validate that there are not jobs running in background.
+    Note: you can reexecute the command `fg` to validate that there are not jobs running in background.
 
     Delete the temporary files created.
     ```shell
@@ -207,7 +207,7 @@ This configuration file is used to set application properties and database conne
     </copy>
     ```
 
-9. Exit the Cloud Shell 
+9. Exit the Cloud Shell
 
 You may now **proceed to the next lab.**
 

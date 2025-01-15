@@ -12,8 +12,8 @@ _Estimated Time:_ 20 minutes
 
 ### Objectives
 
-* Deploy the application using Container Instances
-* Read data with REST API deployed in the new Container Instances
+* Deploy the application using Container Instances.
+* Read data with REST API deployed in the new Container Instances.
 
 ### Prerequisites
 
@@ -34,7 +34,7 @@ In this task, we will review the code using the OCI Code Editor.
 
    ![Code createTable](./images/appl-properties.png)
 
-   Let's take a look at the class ` microprofile-config.properties` again. In the previous lab, we ran the application code using Cloud Shell and used delegation tokens.
+   Let us take a look at the class ` microprofile-config.properties` again. In the previous lab, we ran the application code using Cloud Shell and used delegation tokens.
    In this lab, we are going to be running application using Resource Principals.
 
     As discussed in the Lab 2 - Task 4: Understand Credentials, and Policies. To use them you have to set up a dynamic group and create a policy
@@ -42,21 +42,21 @@ In this task, we will review the code using the OCI Code Editor.
     Take a look at the policy.tf file in the following directory books-management.
 
 
-    **Note**: When deploying using OKE - see Lab 1, you will do the connection using Instance Principals. It is not the topic of this workshop but if you want to learn more, then read the `oracle-app-ndcs-deployment.yaml`    
+    **Note**: When deploying using OKE - see Lab 1, you will connect using Instance Principals. This authentication procedure is beyond the scope of this workshop but if you want to learn more, then read the `oracle-app-ndcs-deployment.yaml`    
 
 3. Review the `Dockerfile` in the `books-management` directory. This file defines the instructions for building the container image for the Book Management application.
 
     In this Lab, we will use a container image that we deployed in GitHub Container Registry
 
-4. Take a look at the GitHub Actions script used to build and push the container image to GitHub Container Registry.
+4. Review the GitHub Actions script used to build and push the container image to GitHub Container Registry.
 
-    You can [review it here](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/build-and-push-demo-book-image.yml) for details on container deployment.  
+    For details on container deployment, see [this GitHub link](https://github.com/oracle/nosql-examples/blob/master/.github/workflows/build-and-push-demo-book-image.yml).  
 
 After reviewing the code, you can close the Code Editor.
 
 ## Task 2: Restart the Cloud Shell
 
-1. Open the Cloud Shell. If you minimized it earlier, expand it. If it’s disconnected or timed out, restart it.
+1. Open the Cloud Shell. If you minimized it earlier, expand it. If it is disconnected or timed out, restart it.
 
    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 

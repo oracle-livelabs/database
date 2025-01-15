@@ -14,16 +14,16 @@ _Estimated Time:_ 20 minutes
 
 ### Prerequisites
 
-* An Oracle Free Tier, Paid Account or Green Button
-* Connection to the Oracle NoSQL Database Cloud Service
-* Working knowledge of bash shell
+* An Oracle Free Tier, Paid Account or Green Button.
+* Connection to the Oracle NoSQL Database Cloud Service.
+* Working knowledge of bash shell.
 
 
 ## Task 1: Create a GAT
 
 Before deploying the application in multiple regions, we will create replicas for the `book` table.
 
-1. From the hamburger menu, click **Databases**. Under Oracle NoSQL Databases, click **Tables**.
+1. On the Oracle Cloud Infrastructure menu drop-down on the top left corner, go to **Databases**. Under Oracle NoSQL Databases, click **Tables**.
 Click the **books** table. Under **Resources**, click **Replicas**.
 The list of replicas already created in the table is listed. In our case, the list start empty
 ![list-replicas](./images/list-replicas.png)
@@ -86,7 +86,7 @@ set up your environment. If you close/open the Cloud Shell Console, please re-ex
     ```
     **Note:** This will start the "book" application in the background.
 
-2. After you complete step 1, you can use the command tail to see the startup for the application
+2. After you complete step 1, you can use the command tail to see the startup for the application.
 
     ![appl-running](./images/appl-running.png)
 
@@ -97,7 +97,7 @@ set up your environment. If you close/open the Cloud Shell Console, please re-ex
     ```
     The `mvnw` command will compile and start the application, please wait for the message *Started DemoApplication in xx seconds*
 
-3. Lets review the data created in the prior Labs. Execute in the Cloud Shell.
+3. Let us review the data created in the prior Labs. Execute in the Cloud Shell.
 
     ```shell
     <copy>
@@ -125,14 +125,14 @@ set up your environment. If you close/open the Cloud Shell Console, please re-ex
 5. Close the tab for the remote region.
 
 
-Adding a new region and standing up the application in that region is a straight forward process.  You could use the same process to extend to even more regions.   You can also use the application to insert new data into your replicated region and look to see that it got properly transmitted to the other region.   
+Adding a new region and starting up the application in that region is a straight forward process.  You can use the same process to extend to more regions.   You can also use the application to insert new data into your replicated region and verify that data got properly transmitted to the other region.   
 
 ## Task 4: Delete a remote region
 
 
 This task deletes the resources that got created.  Ensure you are back in your original region.
 
-1. From the hamburger menu, click Databases. Under Oracle NoSQL Databases, click Tables. Click the Movie table. Under Resources, click Replicas.
+1. On the Oracle Cloud Infrastructure menu drop-down on the top left corner, go to click **Databases**. Under Oracle NoSQL Databases, click Tables. Click the Movie table. Under Resources, click Replicas.
 The list of replicas already created in the table is listed. Click on delete
 
   ![Delete Region](./images/delete-region-table.png)

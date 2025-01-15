@@ -3,7 +3,7 @@
 ## About this Workshop
 
 Welcome to the serverless world where provisioning instances is a thing of the past.
-Oracle NoSQL Database Cloud Service enables modern application development in mere minutes.
+Oracle NoSQL Database Cloud Service (NDCS) enables modern application development in mere minutes.
 
 **Simply connect and go.**
 
@@ -11,7 +11,7 @@ Unchain yourself from rigid data modeling and leverage Oracle NoSQL’s rich JSO
 
 Learn how Oracle NoSQL Database provides an optimal developer experience with predictable single-digit millisecond latencies, Global Active Tables, and deep integration with Visual Studio Code and IntelliJ. The Oracle Cloud Infrastructure (OCI) Code Editor is also available for streamlined development.
 
-This lab uses a Book management system as the sample application to walk you through the steps to create tables in Oracle NoSQL Database Cloud Service (NDCS), load data, and perform basic queries. You’ll also make a Java application using Helidon, Jakarta NoSQL, and Jakarta Data, which Eclipse JNoSQL implements.
+This lab uses a Book management system as the sample application to walk you through the steps to create tables in NDCS, load data, and perform basic queries. You will also develop a Java application using Helidon, Jakarta NoSQL, and Jakarta Data, which Eclipse JNoSQL implements.
 
 Finally, enhance your applications with Oracle NoSQL Global Active Tables, whose design motto is "Simplicity Hides Complexity." This feature enables local read and write performance for globally distributed applications, with automatic conflict resolution for data consistency.
 
@@ -74,11 +74,11 @@ Oracle NoSQL SDKs are available in popular programming languages, allowing devel
 ### Objectives
 
 In this workshop, you will:
-* Set up your environment
-* Create a table with provisioned reads/sec, writes/sec, and GB storage, write data to it, and read data from it
-* Develop a NoSQL Application using Java, Helidon, and Eclipse JNoSQL with Jakarta NoSQL and Jakarta Data
-* Deploy this application as a **containerized application** using OCI services
-* Set up Global Active Table for your application
+* Set up your environment.
+* Create a table with provisioned reads/sec, writes/sec, and GB storage, write data to it, and read data from it.
+* Develop a NoSQL Application using Java, Helidon, and Eclipse JNoSQL with Jakarta NoSQL and Jakarta Data.
+* Deploy this application as a **containerized application** using OCI services.
+* Set up Global Active Table for your application.
 
 ### Prerequisites
 
@@ -90,9 +90,11 @@ This workshop assumes you have:
 
 1. Review the architecture information below.
 
-   This application uses a three-tier architecture with components including an API Gateway and OKE for serverless application management. REST has become a standard for designing web APIs, offering a structured, stateless approach for accessing resources, simplifying development.
+   In this LiveLab, we will develop a Book management system using Java with Helidon and Oracle NoSQL Database.
+   This application uses a three-tier architecture with components including an API Gateway and OKE for serverless
+   application management. REST has become a standard for designing web APIs, offering a structured, stateless approach
+   for accessing resources, therefore, simplifying the development.
 
-   In this LiveLab, we’ll develop a Book management system using Java with Helidon and Oracle NoSQL Database.
 
    Benefits of using managed services include:
     * No operating systems to manage, secure, or patch
@@ -100,7 +102,7 @@ This workshop assumes you have:
     * Cost control with minimized over-provisioning risks
     * Optimized performance without under-provisioning risks
 
-   Here is a diagram of the architecture:
+   Here is an illustration of the architecture:
 
    ![arch-diagram](images/arch-diagram.jpg)
 
@@ -116,12 +118,12 @@ This workshop assumes you have:
 
 1. Review the following information.
 
-   This lab is a demo application showcasing various Oracle Cloud Infrastructure (OCI) components.
-    * The Book management application is running live in all Oracle Cloud Infrastructure regions
-    * Oracle Cloud Infrastructure Traffic Management handles Geo-Steering to route requests to the nearest region
-    * Oracle Cloud Infrastructure API Gateway is used for API management
-    * Data is stored as JSON documents in Oracle NoSQL Cloud Service
-    * Java with Helidon, Jakarta NoSQL, and Jakarta Data provide a clear and understandable description of the data within your API
+   This workshop is a demo application showcasing various Oracle Cloud Infrastructure (OCI) components.
+    * The Book management application is running live in all Oracle Cloud Infrastructure regions.
+    * Oracle Cloud Infrastructure Traffic Management handles Geo-Steering to route requests to the nearest region.
+    * Oracle Cloud Infrastructure API Gateway is used for API management.
+    * Data is stored as JSON documents in Oracle NoSQL Cloud Service.
+    * Java with Helidon, Jakarta NoSQL, and Jakarta Data provide a clear and understandable description of the data within your API.
 
    These benefits help simplify the development process with Oracle NoSQL Database Cloud Service.
    We hope this lab demonstrates the ease of integrating with Oracle NoSQL.

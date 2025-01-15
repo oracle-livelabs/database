@@ -13,9 +13,9 @@ _Estimated Time:_ 11 minutes
 
 ### Objectives
 
-* Create 2 tables with provisioned reads/sec, writes/sec, and GB storage
-* Write data to the table and read data from the table
-* Look at the data in the tables with the Oracle Cloud Console
+* Create 2 tables with provisioned reads/sec, writes/sec, and GB storage.
+* Write data to the table and read data from the table.
+* Look at the data in the tables with the Oracle Cloud Console.
 
 ### Prerequisites
 
@@ -23,17 +23,17 @@ _Estimated Time:_ 11 minutes
 * Connection to the Oracle NoSQL Database Cloud Service
 * Working knowledge of bash shell
 
-## Task 1: Create an Oracle NoSQL Table With the Console
+## Task 1: Create an Oracle NoSQL Table with the Console
 
-1. On the Oracle Cloud Infrastructure menu drop down on the left,
-go to **Databases** and then press **Tables** under Oracle NoSQL Database.
+1. On the Oracle Cloud Infrastructure menu drop-down on the left,
+go to **Databases** and then select **Tables** under Oracle NoSQL Database.
 This brings you to the 'Tables' screen where you can create a table from the console.
 
     ![nosql-tables](./images/nosql-tables.png)
 
 <if type="freetier">
 2. On the 'Tables' screen there is a **Compartment** field on the left.
-Please make sure **demonosql** compartment is selected.
+Please ensure that you select the  **demonosql** compartment.
 
   ![set-compartment](./images/set-compartment.png)
 </if>
@@ -67,7 +67,7 @@ Enter in 10,10, and 5 respectively.
    name, pkey with a type of integer as the primary key, and name with a type
    of string as an additional column.
 
-5. When done with inputs click **Create table** at the bottom.
+5. After providing the inputs, click **Create table** at the bottom.
 
    ![create-my-table](./images/create-my-table.png)
 
@@ -80,7 +80,7 @@ Enter in 10,10, and 5 respectively.
     ![my-table](./images/my-table.png)
 
 
-## Task 2: NoSQL Tables Deployment
+## Task 2: Deploy NoSQL Tables
 
 In this task we are going to create tables using the Cloud Shell, and Oracle Cloud
 Infrastructure Command Line Interface (CLI). The CLI commands issued from the Cloud
@@ -94,14 +94,14 @@ We need to download those to the Cloud Shell first.
 
     ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
-2. Execute the following environment setup shell script in the Cloud Shell. If you close/open the Cloud Shell, please re-execute it.
+2. Execute the following environment setup shell script in the Cloud Shell. If you close/open the Cloud Shell, please reexecute it.
 
     ```shell
     <copy>
     source ~/books-management/env.sh
     </copy>
     ```
-3. Let's create NoSQL table using the Oracle Cloud Infrastructure Command Line Interface (CLI).
+3. Let us create NoSQL table using the Oracle Cloud Infrastructure Command Line Interface (CLI).
 The CLI command for Oracle NoSQl is 'oci nosql <command>'. We will create a table
 and  echo the DDL statement so you can see what is being created.
 
@@ -128,7 +128,7 @@ and  echo the DDL statement so you can see what is being created.
 4. Exit the Cloud Shell.
 
 
-## Task 3:  Adding Data From the Oracle Cloud Console
+## Task 3:  Add Data From the Oracle Cloud Console
 
 1. Make sure you see the 'Tables' screen. You should see 2 tables listed. You
 may see different values for read units, write units and storage.
@@ -146,8 +146,8 @@ Explore that screen.
     ![insert-row](./images/insert-row.png)
 
 4. On the 'Insert row' screen, you will see two ways to input data - a simple and advanced.
-For our test table we will use the simple method. Enter a value for the **Pkey** column
-and the **Name** column. When done, press **Insert row.**
+For our test table we will use the simple method. Enter a value for the **pkey** column
+and the **name** column. When done, press **Insert row.**
 
     ![row-inserted](./images/row-inserted.png)
 
@@ -191,7 +191,7 @@ screen. Click **Tables** on top right.
     RETURNING *
     </copy>
     ```
-8. Let's insert rows using the upload data feature. Upload the file `book-file-kvjson.json` in your computer.
+8. Let's insert rows using the upload data feature. Download the file `book-file-kvjson.json` in your computer.
 
    Right click button on this link [upload-file](./files/book-file-kvjson.json), then click on **Save link as**.
 
@@ -205,7 +205,7 @@ screen. Click **Tables** on top right.
 
     To summarize, in this Lab you have seen two different ways to insert data into a table.
 
-## Task 4:  Show Data From the Console
+## Task 4:  Show Data from the Console
 
 Starting with the `Book` demo table, we can go and look at the data we
 inserted for that table.
