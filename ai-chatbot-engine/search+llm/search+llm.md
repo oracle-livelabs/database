@@ -200,7 +200,7 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
 ## Task 3: Call the Generative AI Service LLM
 
 <if type="ocw24">
-0. **If you're running this lab at CloudWorld 2024**
+0. **If you're running this lab at CloudWorld**
 
 In this case, the credentials needed to access the OCI GenAI Service are provided for you. Click on the link below and download the zip file.
 
