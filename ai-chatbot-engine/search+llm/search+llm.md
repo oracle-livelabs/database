@@ -45,7 +45,7 @@ fetch approx first {topK} rows only"""
 ```
 In the given SQL query, `topK` represents the number of top results to retrieve. The query selects the payload column along with the cosine distance between the vector column in the specified table (`table_name`) and a provided vector parameter `:vector`, aliasing the distance calculation as `score`. 
 
-By ordering the results by the calculated `score` and using `fetch approx first {topK} rows onl`y, the query efficiently retrieves only the top `topK` results based on their cosine similarity to the provided vector. 
+By ordering the results by the calculated `score` and using `fetch approx first {topK} rows only`, the query efficiently retrieves only the top `topK` results based on their cosine similarity to the provided vector.
 
 ### Step 2: Transforming the question into a vector
 First, we define the question in a new cell.
