@@ -82,19 +82,19 @@ After reviewing the code, you can close the Code Editor.
    ![Create Container Instances](images/create-container-instance-1.png)
 
 3. Enter **demo-nosql-book-management-app** as the name. Click **Select Image**, choose **External Registry**, and enter:
-   - **Registry hostname**: `ghcr.io`
-   - **Repository**: `oracle/demo-nosql-book-example-app`
+    - **Registry hostname**: `ghcr.io`
+    - **Repository**: `oracle/demo-nosql-book-example-app`
 
-   Then, click **Select Image** at the bottom of the screen.
+    Then, click **Select Image** at the bottom of the screen.
 
-   ![Create Container Instances](images/create-container-instance-2.png)
+    ![Create Container Instances](images/create-container-instance-2.png)
 
 4. Scroll down and add the following environment variables:
-   - `NOSQL_DEPLOYMENT` as key and `CLOUD_RESOURCE_PRINCIPAL` as value
-   - `OCI_REGION` as key with the value copied in Task 2
-   - `OCI_NOSQL_COMPID` as key with the value copied in Task 2
+    - `NOSQL_DEPLOYMENT` as key and `CLOUD_RESOURCE_PRINCIPAL` as value
+    - `OCI_REGION` as key with the value copied in Task 2
+    - `OCI_NOSQL_COMPID` as key with the value copied in Task 2
 
-   ![Create Container Instances](images/create-container-instance-3.png)
+    ![Create Container Instances](images/create-container-instance-3.png)
 
 5. Click **Next**, review the setup, and then click **Create**.
 
@@ -105,6 +105,7 @@ After reviewing the code, you can close the Code Editor.
    ![Create Deployment](images/create-container-instance-5.png)
 
 7. Copy the Public IP address of the container instance.
+
 
 ## Task 4: Read Data and Examine It
 
