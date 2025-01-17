@@ -45,7 +45,7 @@ fetch approx first {topK} rows only"""
 ```
 In the given SQL query, `topK` represents the number of top results to retrieve. The query selects the payload column along with the cosine distance between the vector column in the specified table (`table_name`) and a provided vector parameter `:vector`, aliasing the distance calculation as `score`. 
 
-By ordering the results by the calculated `score` and using `fetch approx first {topK} rows onl`y, the query efficiently retrieves only the top `topK` results based on their cosine similarity to the provided vector. 
+By ordering the results by the calculated `score` and using `fetch approx first {topK} rows only`, the query efficiently retrieves only the top `topK` results based on their cosine similarity to the provided vector.
 
 ### Step 2: Transforming the question into a vector
 First, we define the question in a new cell.
@@ -166,7 +166,7 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
     ```python
     <copy>
     # transform docs into a string array using the "paylod" key
-    docs_as_one_string = "\n=========\n".join([doc["text"] for doc in docs])
+    docs_as_one_string = "\n=========\n".join([doc["text"] for doc in results])
     docs_truncated = truncate_string(docs_as_one_string, 1000)
     </copy>
     ```
@@ -200,7 +200,7 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
 ## Task 3: Call the Generative AI Service LLM
 
 <if type="ocw24">
-0. **If you're running this lab at CloudWorld 2024**
+0. **If you're running this lab at CloudWorld**
 
 In this case, the credentials needed to access the OCI GenAI Service are provided for you. Click on the link below and download the zip file.
 
@@ -327,4 +327,7 @@ You may now **proceed to the next lab**
 * **Contributors** 
    - Liana Lixandru, Principal Digital Adoption Manager, Digital Customer Experience (DCX), EMEA
    - Kevin Lazarz, Senior Manager, Product Management, Database
-* **Last Updated By/Date** -  Bogdan Farca, Sep 2024
+* **Reviewers**
+  - Rahul Gupta, Senior Cloud Engineer, Analytics
+  - Kashif Manzoor, Master Principal Account Cloud Engineer, EMEA AI CoE
+* **Last Updated By/Date** -  Bogdan Farca, Jan 2025
