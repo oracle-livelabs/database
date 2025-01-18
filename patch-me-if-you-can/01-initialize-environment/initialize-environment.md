@@ -83,5 +83,5 @@ You may now *proceed to the next lab*.
 ## Acknowledgements
 
 * **Author** - Daniel Overby Hansen
-* **Contributors** - Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, December 2024
+* **Contributors** - Rodrigo Jorge, Mike Dietrich
+* **Last Updated By/Date** - Daniel Overby Hansen, January 2025
