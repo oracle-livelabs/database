@@ -93,22 +93,16 @@
             "filename": "../../../ai-vector-rag/rag/rag.md"
         },
         {
-            "title": "Workshop: Create the JSON schema",
-            "description": "Creating the schema including JSON Duality Views",
+            "title": "Workshop: JSON Schema",
+            "description": "Creating JSON Schemas",
             "type": "livelabs",
-            "filename": "https://raw.githubusercontent.com/oracle-livelabs/developer/main/json-duality-adb-free/sql-schema/sql-schema.md"
+            "filename": "../../../db-23ai-fundamentals/new-json-schema/new-json-schema.md"
         },
         {
-            "title": "Lab: JSON and the Duality Views",
-            "description": "Working with JSON and the Duality Views",
+            "title": "Lab: JSON Duality Views",
+            "description": "Building Duality Views",
             "type": "livelabs",
-            "filename": "https://raw.githubusercontent.com/oracle-livelabs/developer/main/json-duality-adb-free/sql-json/sql-json.md"
-        },
-        {
-            "title": "Lab: The Extreme Flexibility of JSON Duality Views",
-            "description": "Working with SQL and the Duality Views",
-            "type": "livelabs",
-            "filename": "https://raw.githubusercontent.com/oracle-livelabs/developer/main/json-duality-adb-free/sql-extended/sql-extended.md"
+            "filename": "../../../db-23ai-fundamentals/new-duality-views/new-duality-views.md"
         },
         {
             "title": "Workshop: Property Graphs",

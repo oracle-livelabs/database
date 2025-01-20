@@ -24,23 +24,10 @@ By the end of this lab, you'll be equipped to effectively develop and deploy the
 
 **Estimated Workshop Time:** 10 minutes
 
-### Objectives
+### **Objectives**
 
-By the end of this lab, you will be able to:
-
-* **Successfully implement and deploy new features:**
-    * Develop and integrate the "Departments" feature into the existing HR application.
-    * Make coordinated changes to both the application code and the underlying database schema.
-    * Utilize SQLcl's project feature to manage and version database changes effectively.
-* **Master core CI/CD concepts:** 
-    * Understand the importance of development, testing, and production environments.
-    * Learn how to automate database deployments using SQLcl.
-    * Experience the benefits of integrating database CICD.
-* **Gain practical skills:**
-    * Set up and run the application locally.
-    * Explore and understand the application's components and architecture.
-    * Analyze application requirements and design database solutions accordingly.
-    * Troubleshoot and resolve common issues encountered during development and deployment.
+* Setup the application.
+* Understand its components.
 
 ### Prerequisites
 

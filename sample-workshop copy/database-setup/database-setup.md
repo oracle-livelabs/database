@@ -1,9 +1,11 @@
-# Provision an Oracle Autonomous Database
+# Database Setup Using OAD & ORDS
 
 ## Introduction
 
-This lab walks you through the steps to quickly provision an Oracle Autonomous Database (either Autonomous Transaction Processing [ATP] or Autonomous Data Warehouse [ADW]) on Oracle Cloud. You will connect to the database using SQL Worksheet, a browser-based tool that is easily accessible from the Autonomous Database console. Then create a database user (schema), assign privileges to the user, and enable the user to log in to the database.
+This lab walks you through the steps to quickly provision an **O**racle **A**utonomous **D**atabase (either Autonomous Transaction Processing [ATP] or Autonomous Data Warehouse [ADW]) on Oracle Cloud. You will connect to the database using SQL Worksheet, a browser-based tool that is easily accessible from the Autonomous Database console. Then create a database user (schema), assign privileges to the user, and enable the user to log in to the database creating the needed objects and using **O**racle **R**EST **D**ata **S**ervices **(ORDS)** to enable REST Endpoints for the created objects.
 <create and setup your schema (user). You will use this database in subsequent labs of this workshop.>
+
+![ADB & ORDS](./../database-setup/images/adb-ords.png " ")
 
 Estimated lab time: 10 minutes
 
@@ -179,173 +181,178 @@ Although you can connect to your autonomous database from local desktop tools, s
 
     ![Assign privileges to the user](./../database-setup/images/assign-privileges.png =50%x*)
 
-## Task 4: Create Database Objects For The Labs
+## Task 4: Create Objects & Generate REST Endpoints
 
-1. You are still connected to SQL Worksheet as administrator. In this section, you execute the `CREATE TABLE` statement to create two tables in the HRUSER schema.
+You will generate REST endpoints to serve as APIs for your application to interact with the database. But first, let's create the necessary objects for our application.
 
-    **Syntax**:
-	```
-	CREATE TABLE [schema.]table (column datatype [DEFAULT expr][, ...]);
-	```
+1. Click the hamburger menu in the top-left corner of the page and click **Database Users**.
 
-    Perform the following steps to create the `Employees` and `Departments` tables in the HRUSER schema. Since the ADMIN user will be creating these, we will prepend HRUSER to the table name.
+    ![Click Database Users](./../database-setup/images/database-users.png " ")
 
-3. Create the `EMPLOYEES` table with the `EMPLOYEES_ID` column as the primary key.
+2. Search for HRUSER (by scrolling) and click on the three dotes in the right side of the user, then click **Enable REST**.
 
-    ```sql
-    <copy>CREATE TABLE HRUSER.EMPLOYEES (
-	    employees_id NUMBER GENERATED ALWAYS AS IDENTITY,
-	    first_name VARCHAR2(100),
-        last_name VARCHAR2(100),
-	    start_date DATE,
-	    department_id NUMBER,
-	    PRIMARY KEY(employees_id));
-        </copy>
-    ```
+    ![Click Enable REST](./../database-setup/images/enable-rest.png " ")
 
-4. You will now populate the table with sample data. You will add rows by executing `INSERT` statements.
+3. Click on the flesh icon at the bottom right to connect as HRUSER.
 
-    **Syntax**:
-	```sql
-	INSERT INTO [schema.]table [(column [, column...])] VALUES (value [, value...]);
-	```
+    ![Click HRUSER flesh](./../database-setup/images/hruser-flesh.png " ")
 
-    Execute the following statements to insert data into the `EMPLOYEES` table. We will again prepend HRUSER to the table name. When executing more than one statement in the worksheet at a time, highlight all the SQL to execute with the mouse, then click the green and white Run Statement button.
+4. Enter **Username** and **Password** for HRUSER then click **Sign in**.
 
-    ```sql
-    <copy>INSERT INTO HRUSER.EMPLOYEES (FIRST_NAME, LAST_NAME) VALUES('Abdelilah', 'AIT HAMMOU');
-    INSERT INTO HRUSER.EMPLOYEES (FIRST_NAME, LAST_NAME) VALUES('Fatima', 'AOURGA');
-    INSERT INTO HRUSER.EMPLOYEES (FIRST_NAME, LAST_NAME) VALUES('Tom', 'Tomas');
-    INSERT INTO HRUSER.EMPLOYEES (FIRST_NAME, LAST_NAME) VALUES('Larry', 'King');
-    INSERT INTO HRUSER.EMPLOYEES (FIRST_NAME, LAST_NAME) VALUES('Alex', 'Dom');
+    ![Connect to HRUSER](./../database-setup/images/hruser-signin.png " ")
+
+    Now, you are connected as HRUSER as you can see at the top right corner of the screen.
+
+5. Click **Development** then **SQL**
+
+    ![Click Development then SQL](./../database-setup/images/development-sql.png " ")
+
+6. Create four tables for HRUSER schema and add records.
+
+    * Copy the following script to do that. *Expand the line right below by clicking on it to view the copyable code block*
+
+    <details>
+    <summary>[CLICK TO EXPAND] SQL script fo database objects creation</summary>
+
+    ```na
+
+    <copy>
+    -- Drop tables if they already exist to avoid conflicts
+    BEGIN
+        EXECUTE IMMEDIATE 'DROP TABLE hruser.Attendance CASCADE CONSTRAINTS';
+        EXECUTE IMMEDIATE 'DROP TABLE hruser.PerformanceReviews CASCADE CONSTRAINTS';
+        EXECUTE IMMEDIATE 'DROP TABLE hruser.Employees CASCADE CONSTRAINTS';
+        EXECUTE IMMEDIATE 'DROP TABLE hruser.Departments CASCADE CONSTRAINTS';
+    EXCEPTION
+        WHEN OTHERS THEN
+            NULL; -- Ignore errors if tables do not exist
+    END;
+    /
+
+    -- Create Departments table first
+    CREATE TABLE hruser.Departments (
+        department_id INT PRIMARY KEY,
+        name VARCHAR2(50),
+        description VARCHAR2(255),
+        manager_id INT,
+        location VARCHAR2(100)
+    );
+
+    -- Create Employees table
+    CREATE TABLE hruser.Employees (
+        employee_id INT PRIMARY KEY,
+        first_name VARCHAR2(50),
+        last_name VARCHAR2(50),
+        email VARCHAR2(100),
+        phone VARCHAR2(20),
+        hire_date DATE,
+        status VARCHAR2(20),
+        department_id INT,
+        current_salary NUMBER(10, 2),
+        FOREIGN KEY (department_id) REFERENCES hruser.Departments(department_id)
+    );
+
+    -- Create Attendance table
+    CREATE TABLE hruser.Attendance (
+        attendance_id INT PRIMARY KEY,
+        employee_id INT,
+        check_in TIMESTAMP,
+        check_out TIMESTAMP,
+        status VARCHAR2(20),
+        FOREIGN KEY (employee_id) REFERENCES hruser.Employees(employee_id)
+    );
+
+    -- Create PerformanceReviews table
+    CREATE TABLE hruser.PerformanceReviews (
+        review_id INT PRIMARY KEY,
+        employee_id INT,
+        review_date DATE,
+        performance_score NUMBER(3,2),
+        goals_achieved VARCHAR2(255),
+        areas_improvement VARCHAR2(255),
+        reviewer_id INT,
+        next_review_date DATE,
+        FOREIGN KEY (employee_id) REFERENCES hruser.Employees(employee_id)
+    );
+
+    -- Sample data for Departments
+    INSERT INTO hruser.Departments (department_id, name, description, manager_id, location)
+    VALUES
+    (1, 'HR', 'Human Resources Department', NULL, 'New York'),
+    (2, 'IT', 'Information Technology Department', NULL, 'San Francisco');
+
+    -- Sample data for Employees
+    INSERT INTO hruser.Employees (employee_id, first_name, last_name, email, phone, hire_date, status, department_id, current_salary)
+    VALUES
+    (1, 'John', 'Doe', 'john.doe@example.com', '123-456-7890', DATE '2020-01-15', 'Active', 1, 50000.00),
+    (2, 'Jane', 'Smith', 'jane.smith@example.com', '123-456-7891', DATE '2019-05-22', 'Active', 2, 60000.00);
+
+    -- Sample data for Attendance
+    INSERT INTO hruser.Attendance (attendance_id, employee_id, check_in, check_out, status)
+    VALUES
+    (1, 1, TO_TIMESTAMP('2025-01-08 09:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_TIMESTAMP('2025-01-08 17:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Present'),
+    (2, 2, TO_TIMESTAMP('2025-01-08 08:45:00', 'YYYY-MM-DD HH24:MI:SS'), TO_TIMESTAMP('2025-01-08 16:45:00', 'YYYY-MM-DD HH24:MI:SS'), 'Present');
+
+    -- Sample data for PerformanceReviews
+    INSERT INTO hruser.PerformanceReviews (review_id, employee_id, review_date, performance_score, goals_achieved, areas_improvement, reviewer_id, next_review_date)
+    VALUES
+    (1, 1, DATE '2025-01-01', 4.5, 'Completed all HR recruitment goals', 'Improve team management skills', 2, DATE '2025-07-01'),
+    (2, 2, DATE '2025-01-01', 4.0, 'Successfully implemented new IT infrastructure', 'Enhance communication with non-technical teams', 1, DATE '2025-07-01');
+
+    -- Commit the changes
     COMMIT;
+
+
+    select * from hruser.Employees;
+    select * from hruser.DEPARTMENTS;
+    select * from hruser.PerformanceReviews;
+    select * from hruser.ATTENDANCE;
+
+    desc hruser.Employees;
+
+
     </copy>
-    ```
-
-5. You can retrieve the data from the `EMPLOYEES` table. Execute the following statement to select all the `FIRST_NAME` and `LAST_NAME` columns and view the results:
 
     ```
-    <copy>SELECT FIRST_NAME, LAST_NAME FROM HRUSER.EMPLOYEES;</copy>
-    ```
+    </details>
 
-**Setting up your connection credentials and files**
+    * Past the copied script in the SQL worksheet and click run script as shown in the following:
 
-1. First let's set up your connection credentials to your database. Cloud Shell makes this easy.
+    ![Run the script in the SQL worksheet to create the objects](./../database-setup/images/run-script.png " ")
 
-    * Cloud Shell provides a Linux terminal in your Oracle Cloud webpage with a pre-authenticated Oracle Cloud Infrastructure (OCI) Command Line Interface (CLI) connected to it.
-    * Select the < > icon in the top right corner of your Oracle Cloud menu and then select “Cloud Shell”
+    * Click the reload button surrounded in blue color to see the created tables for this **HRUSER**.
 
-    ![Cloud Shell Icon](./../database-setup/images/cloud-shell.png " ")
+    ![HRUSER created objects](./../database-setup/images/hruser-objects.png " ")
 
-2. On the bottom of your screen you’ll see the Cloud Shell interface appear.
+    Now, we will proceed for enabling the user tables to get the ORDS URLs (Endpoints) by the next steps.
 
-    ![Cloud Shell Interface](./../database-setup/images/cloud-shell-interface.png " ")
+7. Right click on the **EMPLOYEES** table. Click **REST**. Click **Enable...**.
 
-3. You can fetch your wallet with the following command. Before you paste the command in the Cloud Shell command prompt, place it in a text editor and edit the following areas (make sure to remove the brackets):
+    ![Click ](./../database-setup/images/rest-enable.png " ")
 
-    * Replace [Insert Password] with a password of your choice for your wallet
-        * The wallet password cannot contain special characters such as $
+8. Click **Enable**.
 
-    * Replace [Insert OCID] with your Autonomous Database OCID
-        * This can be found under your "Autonomous Database information" tab
+    ![Click Enable](./../database-setup/images/enable.png " ")
 
-    ![Oracle Cloud Id](./../database-setup/images/ocid.png " ")
+    Now, your **EMPLOYEES** table is **REST Enables**.
 
-    ```
-    <copy>oci db autonomous-database generate-wallet --generate-type ALL --file Wallet_workshop.zip --password [Insert Password] --autonomous-database-id [Insert OCID]</copy>
-    ```
+    >**Note:** *Repeat the same thing to enable the other tables (ATTENDANCE, DEPARTMENTS and PERFORMANCEREVIEWS).*
 
-4. Now you can place the command into Cloud Shell and generate your wallet.
+9. Click the hamburger menu. Click **REST**.
 
-    ![Wallet generated](./../database-setup/images/wallet-gen.png " ")
+    ![Click REST](./../database-setup/images/rest.png " ")
 
-5. Before you connect to your database, let's upload some files you'll need for the workshop. Select the settings gear in the top right of the Cloud Shell interface then click “Upload”.
+10. Click **AUTOREST**.
 
-    ![Upload button](./../database-setup/images/upload.png " ")
+    ![Click AUTOREST](./../database-setup/images/autorest.png " ")
 
-6. Download [setup_files.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/developer-library/setup_changelogs.zip) by clicking the link.
+    You will see all the enabled table shown there.
 
-    * The files in this zip folder will be used to automatically create the database objects you will use in the workshop
+    ![Click AUTOREST tables](./../database-setup/images/autorest-tables.png " ")
 
-7. Once that zip file has downloaded to your computer, select it in the "File Upload to your Home Directory" menu and click Upload.
+    Those URLs generated by ORDS are the ones that we will use in our application.
 
-    ![File upload](./../database-setup/images/file-upload.png " ")
-
-    ![Upload files](./../database-setup/images/upload-files.png " ")
-
-8. There will be a notification in the top right “File Transfers” window when the upload is complete.
-
-9. Let’s now unzip the setup_changelogs folder in the Cloud Shell command line using the unzip Linux command.
-
-    * unzip decompresses your files in the zip folder/directory. The -d option you will use extracts those files and subdirectories to a different directory in the format of unzip -d [new/existing directory to extract to] [zip file/folder to extract from].
-
-    ```
-    <copy>unzip -d setup_files setup_files.zip</copy>
-    ```
-
-10. Next, change your current working directory to the newly created setup_files folder. You’ll be using the cd (change directory) command and entering it twice due to the folder unzipping in such a way that the structure is setup_files -> setup_files -> [files]
-
-    ```
-    <copy>cd setup_files</copy>
-    ```
-
-**Connect To HRUSER user and create database objects**
-
-1. Now that your wallet and setup files are downloaded, it's time to connect to SQLcl.
-
-    ```
-    <copy>sql /nolog</copy>
-    ```
-
-    ![Connect to SQLcl no log](./../database-setup/images/sql-nolog.png " ")
-
-2. Set cloudconfig to Wallet_lbworkshop.zip so SQLcl knows to read your credentials from this wallet. In the set cloudconfig command below replace [OCI CLI Profile Name] with your profile name.
-
-    * This is the name to the left of @cloudshell in your command prompt before you logged in to SQLcl.
-
-    ```
-    <copy>set cloudconfig /home/[OCI CLI Profile Name]/Wallet_workshop.zip</copy>
-    ```
-
-    ![Set CloudConfig](./../database-setup/images/set-cloudconfig.png =50%x*)
-
-3. Use the command show tns to show connection information.
-
-    * Transparent Network Substrate (TNS) is an Oracle networking technology that serves as the foundational component for all of our network products.
-
-    ```
-    <copy>show tns</copy>
-    ```
-
-    ![Show TNS](./../database-setup/images/show-tns.png =50%x*)
-
-4. It is now time to connect to MOVIESTREAM_MANAGER and create some database objects in this user.
-
-    -   Under the "Available TNS Entries" section of the `show tns` command, there are 3 connections by default for Autonomous Data Warehouse (ADW) and 5 for Autonomous Transaction Processing (ATP). The names are designated by `[database name]_[connection level]`.
-    -   These workshop instructions will use workshop_low in the command below.
-    -   If you prefer to use a different connection, simply replace the command with that connection.
-        -   lbworkshop_high
-            -   High priority application connection service for reporting and batch operations. All operations run in parallel and are subject to queuing.
-        -   lbworkshop_medium
-            -   A typical application connection service for reporting and batch operations. All operations run in parallel and are subject to queuing. Using this service, the degree of parallelism is limited to four.
-        -   lbworkshop_low
-            -   A lowest priority application connection service for reporting or batch processing operations. This connection service does not run with parallelism.
-        -   lbworkshop_tpurgent (ATP only)
-            -   The highest priority application connection service for time critical transaction processing operations. This connection service supports manual parallelism.
-        -   lbworkshop_tp (ATP only)
-            -   A typical application connection service for transaction processing operations. This connection service does not run with parallelism.
-
-    ```
-    <copy>connect hruser@workshop_low</copy>
-    ```
-
-    ![Connect to the user](./../database-setup/images/connect-user.png =50%x*)
-
-5. You are now connected to your HRUSER user. If you run the tables SQL command you’ll see by the “no rows selected” result that you don’t have any tables yet. So let’s create some database objects to use in your workshop!
-
-    ```
-    <copy>tables;</copy>
-    ```
+>***Note (Important):** You will use these REST endpoints later in the application. We will show you how when we get to that point.*
 
 You are now all set! Let's **proceed to the next lab.**
 
@@ -355,5 +362,5 @@ Click [here](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverles
 
 ## Acknowledgements
 
-- **Author** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl
+- **Author** - Fatima AOURGA & hruser AIT HAMMOU, Junior Member of Technical Staff, SQLcl
 - **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, December 2024

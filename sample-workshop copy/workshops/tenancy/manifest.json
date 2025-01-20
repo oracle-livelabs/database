@@ -15,7 +15,7 @@
       "filename": "../../get-started/get-started.md"
     },
     {
-      "title": "Lab 1: Database Setup",
+      "title": "Lab 1: Database Setup Using OAD & ORDS",
       "description": "Labs that follow the introduction are numbered, starting with Lab 1",
       "filename": "../../database-setup/database-setup.md"
     },
@@ -28,6 +28,11 @@
       "title": "Lab 3: Application Change",
       "description": "In this lab the learner will explore the app and do a change",
       "filename": "../../application-change/application-change.md"
+    },
+    {
+      "title": "Lab 4: Database CI/CD",
+      "description": "In this lab the learner will go through the database ci/cd workflow",
+      "filename": "../../database-cicd/database-cicd.md"
     },
     {
       "title": "Need Help?",

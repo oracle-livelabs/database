@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this Lan you will start working on the application spreading your magic on it.
+In this Lab you will start working on the application spreading your magic on it.
 
 ![HR application interface](./../application-change/images/hr-app.png " ")
 
@@ -52,5 +52,5 @@ TBD: Add some useful links if you want, or just remove this section.
 
 ## Acknowledgements
 
-* **Author** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl
+* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Member of Technical Staff, SQLcl
 * **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, December 2024
