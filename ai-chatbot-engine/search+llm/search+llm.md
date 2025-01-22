@@ -88,8 +88,10 @@ The SQL query is executed with the provided vector parameter, fetching relevant 
 
 If we print the results, we obtain something like the following. As requested, we have the "score" of each hit, which is essentially the distance in vector space between the question and the text chunk, as well as the metadata JSON embedded in each chunk.
 ```python
+<copy>
 import pprint
 pprint.pp(results)
+</copy>
 ```
 
 ```
@@ -166,7 +168,7 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
     ```python
     <copy>
     # transform docs into a string array using the "paylod" key
-    docs_as_one_string = "\n=========\n".join([doc["text"] for doc in results])
+    docs_as_one_string = "\n=========\n".join([doc[1]["text"] for doc in results])
     docs_truncated = truncate_string(docs_as_one_string, 1000)
     </copy>
     ```
