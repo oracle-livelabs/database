@@ -1,30 +1,31 @@
 # Getting Started With The Application
 
-## Introduction
+**Introduction**
 
-Welcome aboard! As a talented developer at MoroccanTech Solutions in Casablanca city, you've been entrusted with a crucial mission: developing the "Departments" feature for our HR application. Before diving into the code, let's get acquainted with the existing application.
+Welcome aboard! You're about to embark on an exciting project: developing the "Departments" feature for the growing HR application at MoroccanTech Solutions in Casablanca. 
 
-Our Story
+**The Challenge**
 
-The MoroccanTech Solutions as a tech company in Casablanca. Their HR systems, once sufficient for a small startup, are struggling to keep pace with the company's growth and multiple departments. This is where you come in! Your task is to build a Department Management system that brings order and efficiency to their employee structure.
+MoroccanTech Solutions is a thriving company experiencing rapid growth. Their current HR systems, while sufficient in the past, are now struggling to keep up with the increasing number of employees and departments. To address this, they need a robust Department Management system to improve efficiency and organization.
 
-The Challenge
+**Your Mission**
 
-There's a catch, though. The "Departments" feature depends on critical database changes that require careful handling. To ensure a smooth and successful deployment, we'll leverage the power of SQLcl CI/CD practices.
+Before we dive into the code, let's explore the existing HR application. In this lab, you'll:
 
-Throughout this lab, you'll:
+* **Understand the Current System:** Examine the application to understand its current functionalities and identify areas where the "Departments" feature is needed.
+* **Learn SQLcl and CI/CD:** Utilize SQLcl's project feature to streamline the development and deployment process. You'll also gain hands-on experience with automating database changes and managing them within a CI/CD pipeline.
 
-- Explore the current HR application to understand its functionalities and identify areas where the "Departments" feature is missing.
-- Utilize SQLcl's project feature to accelerate the development and deployment process.
-- Gain hands-on experience with automating database changes and managing them within the PROJECT CICD in sqlcl.
+By the end of this lab, you'll have the skills and knowledge to effectively develop and deploy the "Departments" feature, ensuring a smooth and seamless integration with the existing HR application.
 
-By the end of this lab, you'll be equipped to effectively develop and deploy the "Departments" feature, ensuring a seamless integration with the existing HR application.
+**Focus on the Process**
 
->**Note:** The technology used doesn't matter. The goal of the workshop is not learning you how to develop an application but is to get you now how to develop using SQLcl and Project CICD commands workflow, whatever the technology used.
+Remember, the primary goal of this lab is to learn the principles of database development and deployment using SQLcl and CI/CD practices. The specific technology used in the application itself is not the main focus.
 
-**Estimated Workshop Time:** 10 minutes
 
-### Objectives
+**Estimated Workshop Time:** 14 minutes
+
+
+## Objectives
 
 By the end of this lab, you will be able to:
 
@@ -32,7 +33,7 @@ By the end of this lab, you will be able to:
     * Develop and integrate the "Departments" feature into the existing HR application.
     * Make coordinated changes to both the application code and the underlying database schema.
     * Utilize SQLcl's project feature to manage and version database changes effectively.
-* **Master core CI/CD concepts:** 
+* **Master core CICD concepts:** 
     * Understand the importance of development, testing, and production environments.
     * Learn how to automate database deployments using SQLcl.
     * Experience the benefits of integrating database CICD.
@@ -41,18 +42,18 @@ By the end of this lab, you will be able to:
     * Explore and understand the application's components and architecture.
     * Analyze application requirements and design database solutions accordingly.
     * Troubleshoot and resolve common issues encountered during development and deployment.
+    ![the goal of the lab ](../application-setup/images/before-and-after.png " ")
 
 ### Prerequisites
 
 * Completion of Lab 1 and Lab 2 
 * Basic understanding of Git 
 
-## Task 1: Understanding Environments and Database CI/CD Challenges
+## Task 1: Understanding Environments and Database CICD Challenges
 
 ##### Introduction to Development, Testing, and Production Environments: 
 
 In this lab, we will focus on two environments:
-
 
 * **Development (Dev):** 
     * This is where **you** will work on implementing the new "Departments" and "Analytics" features for our HR application. 
@@ -76,18 +77,28 @@ Our Goal:
 This is where our journey with SQLcl Project CICD begins. **You**, faced with the challenges of managing database changes for your new features, will leverage the power of SQLcl to automate deployments, track changes, and ensure a smooth and reliable release process.
 
 ## Why are we using Project sqlcl and Project CICD ?
+Database Application Continuous Integration and Continuous Delivery (CI/CD) represents a transformative approach in modern database management and application development. This methodology seamlessly integrates database changes into the development pipeline while ensuring swift and secure deployment to production environments. By combining the rapid feedback mechanisms of Continuous Integration with the streamlined deployment processes of Continuous Delivery, Database CI/CD addresses the critical need for agility and reliability in today's fast-paced software development landscape.
 
-In this lab, you'll leverage the power of SQLcl's project feature to streamline the development and deployment of the "Departments" feature. By using SQLcl and CI/CD practices, you'll achieve several benefits:
+ ![Database CI/CD](./images/cicd.png " " )
+At its core, Database CI/CD aims to:
+
+* Accelerate time-to-market for new features and updates.
+* Maintain a consistently high quality of code and database schema.
+* Facilitate immediate issue detection and resolution.
+* Ensure that both application and database components are always in a deployable state.
+This approach not only enhances development efficiency but also significantly improves the end-user experience through frequent, reliable releases.
+
+In this lab, you'll leverage the power of SQLcl's project feature to show the development and deployment of the "Departments" feature. By using SQLcl PROJECT CICD practices, you'll achieve several benefits:
 
 * **Efficient deployments:** Successfully deploy the "Departments" feature to production with minimal risk and maximum efficiency.
 * **Reduced manual effort:** Automate repetitive database deployment tasks, freeing you to focus on development and innovation.
 * **Consistent deployments:** Minimize errors and inconsistencies across environments (Dev and Prod) for a stable and reliable production environment.
-* **Faster development cycles:** Speed up delivery of new features to users, enabling MoroccanTech Solutions to adapt to changing business needs.
-* **Hands-on CI/CD experience:** Gain practical experience implementing and managing database changes within a controlled and automated framework, preparing you for real-world database development projects.
+* **Faster development cycles:** Speed up delivery of new features to users.
+* **Hands-on CICD experience:** Gain practical experience implementing and managing database changes within a controlled and automated framework, preparing you for real-world database development projects.
 
-By the end of this lab, you'll have a solid understanding of how to use SQLcl's project feature effectively within a CI/CD pipeline. This knowledge will empower you to implement similar practices in your own projects and contribute to the success of future database-driven applications.
+By the end of this lab, you'll have a solid understanding of how to use SQLcl's project feature effectively within a CICD pipeline. This knowledge will empower you to implement similar practices in your own projects and contribute to the success of future database-driven applications.
 
-**Want to learn more about SQLcl Project and CI/CD?**
+**Want to learn more about SQLcl Project and CICD?**
 
 Check out this resource: https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/introduction.html?utm_source=pocket_shared
 
@@ -126,11 +137,19 @@ By carefully analyzing the application, you'll gain valuable insights that will 
  
     * **Install Dependencies:**
         * With the `.env` file properly configured, execute the following command to install the necessary project dependencies:
-            ```npm install```
+            ```
+        <copy> 
+            npm install
+        </copy>
+            ```
  
     * **Start the Development Server:**
         * Now that the database connection is set up, run the following command to launch the application in development mode:
-            <copy>npm run dev</copy>
+                ```
+        <copy> 
+            npm run dev
+        </copy>
+            ```
         * This will typically start a local development server and open the application in your web browser.
         * **You are now interacting with the V1 of the HR application.**
 * **Explore the Application:**
@@ -139,13 +158,14 @@ By carefully analyzing the application, you'll gain valuable insights that will 
     * **Look for employee-related features:** Examine features related to employee profiles, employee lists, and any existing team assignments.
     * **Identify missing "Departments" functionality:**
         * Are there any options to create, view, or manage departments?
+    ![the goal of the lab ](../application-setup/images/placeholder.png " ")
 
 **Troubleshooting:**
 
 * **Incorrect OCI URL:** Double-check that you've copied and pasted the OCI URL from the previous lab accurately. Ensure it includes the correct hostname, port, and path to your ORDS endpoint.
 * **Database Configuration Mismatch:** Verify that the `DB_USERNAME` variable in your `.env` file matches the username you configured for your development database in the previous lab.
 
-## Task 3: Implementing the Departments Feature with SQLcl and CI/CD
+## Task 3: Implementing the Departments Feature with SQLcl and PROJECT CICD
 
 ### 3.1 Getting Started
 
@@ -160,6 +180,9 @@ By carefully analyzing the application, you'll gain valuable insights that will 
       ```
      The `project init` command initializes a new SQLcl PROJECTS project, setting up the necessary directories and files for managing your database objects and changes within your current directory.
 
+    <details>  <summary> **Screenshots:**</summary>
+    ![ init ](./images/project-init-output.png " ")
+    </details>
 
     * Create a new Git branch for this feature:
         ```
@@ -168,6 +191,7 @@ By carefully analyzing the application, you'll gain valuable insights that will 
         </copy>
         ```
      This creates a new branch named "TICKET-1-Departments" where you will develop and test the "Departments" feature.
+    
 
 * **Project Structure:**
     * SQLcl Projects use a specific folder structure to manage database objects and changes. 
@@ -215,7 +239,11 @@ By carefully analyzing the application, you'll gain valuable insights that will 
     </details>
 
 * **Create the "Departments" Table:**
-    * **Option 1: Using SQLcl:**
+    * **Option 1: Using HR application:**
+        * Go to the update Records page , and do your inserts: 
+            ![the goal of the lab ](../application-setup/images/inserts-in-application.png " ")
+
+    * **Option 2: Using SQLcl:**
         * Open SQLcl with your connection.
         * Write and execute the following SQL statement to create the "Departments" table:
             ```sql
@@ -240,7 +268,7 @@ By carefully analyzing the application, you'll gain valuable insights that will 
             VALUES (3, 'Finance', 'Finance and Accounting Department', 'Chicago');
 
             ```
-    * **Option 2: Using OCI :**
+    * **Option 3: Using OCI :**
         * In your OCI home page, go to **Oracle Database** -> **Autonomous Database**.
         * Click on your available Autonomous Database.
         * In the **Database Actions** section, click on **SQL**.
@@ -258,6 +286,8 @@ By carefully analyzing the application, you'll gain valuable insights that will 
      project export -schemas DEVUSER -verbose
     </copy>
         ```
+    ![the goal of the lab ](../application-setup/images/project-export-output.png " ")
+    ![the goal of the lab ](../application-setup/images/project-export-editor-output.png " ")
 
 * This command **exports database objects** into your repository. 
 *  more explination : ? 
@@ -279,6 +309,7 @@ By carefully analyzing the application, you'll gain valuable insights that will 
     </copy> 
         ```
     * This command prepares the staged changes for release by creating a release artifact in the `dist` folder.
+    ![the goal of the lab ](../application-setup/images/project-stage-commit.png " ")
 
 
 * **Commit and Merge Changes:**
@@ -306,9 +337,10 @@ By carefully analyzing the application, you'll gain valuable insights that will 
 
 * **Generate Release Artifact:**
     * The `project gen-artifact` command can be used to create a deployable artifact for your database changes. This artifact can then be easily deployed to different environments.
+        ![the goal of the lab ](../application-setup/images/project-gen-artf-and-output.png " ")
 
 
-**In the next section, we will learn how to deploy these changes to the production environment using SQLcl and explore advanced CI/CD concepts.**
+**In the next section, we will learn how to deploy these changes to the production environment using SQLcl and explore advanced CICD concepts.**
 
 
 ## Task 4: Deploying to Production
@@ -365,4 +397,4 @@ By carefully analyzing the application, you'll gain valuable insights that will 
     * Verify that the "Departments" feature is functioning correctly in the production environment. 
     * Perform thorough testing to ensure that all aspects of the feature are working as expected.
 
-**Congratulations!** You have successfully implemented and deployed the "Departments" feature using SQLcl and CI/CD practices. You have gained valuable experience in managing database changes, automating deployments, and working with a CI/CD pipeline.
+**Congratulations!** You have successfully implemented and deployed the "Departments" feature using SQLcl and CICD practices. You have gained valuable experience in managing database changes, automating deployments, and working with a CICD pipeline.
