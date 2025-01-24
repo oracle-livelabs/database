@@ -2,22 +2,15 @@
 
 ## About this Workshop
 
-<In this workshop, we will discover the story of Tom, a struggling developer that is interacting a lot with database making his apps, overwhelmed by the challenges of managing database updates and changes. But one day while working on an application, he discovered a magical tool **SQLcl Projects** that transformed his life, simplifying complex tasks and lifting the heavy burden of his work. We will see in the upcoming labs how this tool makes his life more easier as a developer.>
+Welcome to this workshop! As a developer at MoroccanTech Solutions, you have been assigned the task of adding new features for the HR application. With the company's growth, the complexities of managing both the application and its database have also increased.
 
-<You will join Tom to help him making and finishing his app and discover this magical tool by yourself.>
-<In this workshop you will use In-Database JavaScript feature available in Oracle Database 23ai. You will create a quick application from a Spreadsheet and then extend the application using Server-Side JavaScript instead of PL/SQL. Next, you will learn how to load external JavaScript modules and leverage some of the useful libraries in your APEX application.>
+While many developers recognize the advantages of CI/CD pipelines for automating application deployments, the integration of database CI/CD is frequently overlooked. Manually managing database updates, rollbacks, and migrations can result in significant errors and delays. Imagine if the process of managing database changes could be as straightforward as deploying application code.
 
-<In this workshop you will live an adventure where you will be a developer with our team (you will be part of our development team X) helping us to develop an application.>
+Introducing **SQLcl Projects Extension** a transformative magical tool designed to enhance database CI/CD. This extension offers automation, consistency, and reliability in database management, enabling developers like you to manage database changes effectively and without the typical challenges.
 
-<Tom is a developer within a company that will increase its capacity by hiring new employees, it needs an application for HR management. The work is  already started. This struggling developer that is interacting a lot with database making his apps, overwhelmed by the challenges of managing database updates and changes. But one day while working on an application, he discovered a magical tool **SQLcl Projects** that transformed his life, simplifying complex tasks and lifting the heavy burden of his work.>
-This workshop follows the journey of Tom, a developer in a growing company that is hiring more employees. To support this expansion, the company needs to improve his HR management application.
+During this workshop, you will not only work on adding features to the HR application but also discover how the SQLcl Project Extension can transform your database management practices. The main goal of this workshop is to show you how this extension, designed for more than just database applications, can enhance any application that involves database management. We will explore how this robust extension integrates seamlessly with your CI/CD pipeline, facilitating smooth and error-free database deployments across all environments.
 
-As part of his role, Tom, like many developers, spends a lot of time working with databases. He often feels overwhelmed by the challenges of managing database updates and changes. But everything changed when he stumbled upon a game-changing tool <discovered a tool>called **SQLcl Projects**. This magical solution transformed his workflow<simplified his tasks>, making database management faster and easier. From that moment on, Tom’s work became more efficient and enjoyable, empowering him to focus on delivering high-quality applications.
-
-In this workshop you will join Tom in this project and you will help him making this app getting the chance to discover also this great tool. Get ready to lighten your workload and unlock new possibilities in your development journey!
 ![Image for SQLcl Projects logo and Harry Potter](./../introduction/images/sqlcl-projects-logo.png " ")
-
-**SQLcl Projects** for **Database CICD**, is an extension within SQLcl that integrates database changes into the development pipeline while ensuring swift and secure deployment to production environments.
 
 **Estimated Workshop Time:** 1 hours 30 minutes
 
@@ -44,16 +37,7 @@ This workshop requires the following:
 
 **NB:** No worries, we will help you create all what you need, so you need just to follow the labs and the given steps and instructions.
 
-<This is the end of this lab
-Let's move to the next lab
-let's start the magic
-let's make some magic
-you are the widzart
-now we will tell the ta3wida si7riya : project
-keep discussing and following the user in each step like there is someone talking with him to enjoy and feel no boring
-Links to labs>
-
-Are you curious by discovering this tool ? Let's get started!
+By the end of this workshop, you will possess the expertise to optimize your database workflows and deploy your changes confidently using SQLcl. **Let's get started!**
 
 ## Learn More
 
