@@ -20,19 +20,14 @@
       "filename": "../../database-setup/database-setup.md"
     },
     {
-      "title": "Lab 2: Application Setup",
+      "title": "Lab 2: Application Setup & Change",
       "description": "This Lab will introduce the application and its setup",
-      "filename": "../../application-setup/application-setup.md"
+      "filename": "../../application-setup-change/application-setup-change.md"
     },
     {
-      "title": "Lab 3: Application Change",
+      "title": "Lab 3: Bonus Lab",
       "description": "In this lab the learner will explore the app and do a change",
-      "filename": "../../application-change/application-change.md"
-    },
-    {
-      "title": "Lab 3: Application Change",
-      "description": "In this lab the learner will explore the app and do a change",
-      "filename": "../../application-change/application-change.md"
+      "filename": "../../bonus-lab/bonus-lab.md"
     },
     {
       "title": "Need Help?",

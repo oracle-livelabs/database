@@ -1,14 +1,14 @@
 # Getting Started With The Application
 
-**Introduction**
+## Introduction
 
 Welcome aboard! You're about to embark on an exciting project: developing the "Departments" feature for the growing HR application at MoroccanTech Solutions in Casablanca. 
 
-**The Challenge**
+### **The Challenge**
 
 MoroccanTech Solutions is a thriving company experiencing rapid growth. Their current HR systems, while sufficient in the past, are now struggling to keep up with the increasing number of employees and departments. To address this, they need a robust Department Management system to improve efficiency and organization.
 
-**Your Mission**
+### **Your Mission**
 
 Before we dive into the code, let's explore the existing HR application. In this lab, you'll:
 
@@ -17,7 +17,7 @@ Before we dive into the code, let's explore the existing HR application. In this
 
 By the end of this lab, you'll have the skills and knowledge to effectively develop and deploy the "Departments" feature, ensuring a smooth and seamless integration with the existing HR application.
 
-**Focus on the Process**
+### **Focus on the Process**
 
 Remember, the primary goal of this lab is to learn the principles of database development and deployment using SQLcl and CI/CD practices. The specific technology used in the application itself is not the main focus.
 
@@ -25,7 +25,7 @@ Remember, the primary goal of this lab is to learn the principles of database de
 **Estimated Workshop Time:** 14 minutes
 
 
-## Objectives
+### **Objectives**
 
 By the end of this lab, you will be able to:
 
@@ -42,16 +42,16 @@ By the end of this lab, you will be able to:
     * Explore and understand the application's components and architecture.
     * Analyze application requirements and design database solutions accordingly.
     * Troubleshoot and resolve common issues encountered during development and deployment.
-    ![the goal of the lab ](../application-setup/images/before-and-after.png " ")
+    ![the goal of the lab ](../application-setup-change/images/before-and-after.png " ")
 
-### Prerequisites
+### **Prerequisites**
 
-* Completion of Lab 1 and Lab 2 
-* Basic understanding of Git 
+* Completion of Lab 1 and Lab 2
+* Basic understanding of Git
 
 ## Task 1: Understanding Environments and Database CICD Challenges
 
-##### Introduction to Development, Testing, and Production Environments: 
+### **Overview of Development, Testing, and Production Environments:**
 
 In this lab, we will focus on two environments:
 
@@ -61,22 +61,22 @@ In this lab, we will focus on two environments:
 * **Production (Prod):** 
     * This is the live environment where the final, polished version of the application will be available to our company's HR department. 
     * The application in the Prod environment should be stable, fully functional, and free of major bugs. 
-    * **Our goal in this lab is to successfully deploy the “Departments” and “Analytics” features to the Prod environment.** 
+    * *Our goal in the current and next labs is to successfully deploy the “Departments” and “Analytics” features to the Prod environment.* 
 
-**Note:** To simplify this lab, we will primarily focus on the Development (Dev) and Production (Prod) environments. 
+>**Note:** There are often other environments involved in the development lifecycle (Test, pre-prod, ...) but this workshop just those two ones above that we need.
 
 
-### Bottlenecks of Traditional Database Deployments
+### **Bottlenecks of Traditional Database Deployments**
 In traditional database deployments, especially in a manual process, several challenges arise:
 
-- Manual Interventions: Deploying database changes often involves manual steps, such as executing SQL scripts, creating database objects, and migrating data. This manual process is prone to human error, time-consuming, and can introduce inconsistencies between environments.
-- Lack of Automation: Without automation, it becomes difficult to consistently and reliably deploy changes across different environments (Dev, Test, Prod) in a timely manner. This can significantly slow down the development cycle and hinder the rapid delivery of new features to our users.
-- Increased Risk of Errors: Manual deployments increase the risk of introducing bugs, data corruption, or unintended side effects in the production environment. This can lead to downtime, data loss, and negatively impact the user experience.
+- **Manual Interventions:** Deploying database changes often involves manual steps, such as executing SQL scripts, creating database objects, and migrating data. This manual process is prone to human error, time-consuming, and can introduce inconsistencies between environments.
+- **Lack of Automation:** Without automation, it becomes difficult to consistently and reliably deploy changes across different environments (Dev, Test, Prod) in a timely manner. This can significantly slow down the development cycle and hinder the rapid delivery of new features to our users.
+- **Increased Risk of Errors:** Manual deployments increase the risk of introducing bugs, data corruption, or unintended side effects in the production environment. This can lead to downtime, data loss, and negatively impact the user experience.
 Our Goal:
 
 This is where our journey with SQLcl Project CICD begins. **You**, faced with the challenges of managing database changes for your new features, will leverage the power of SQLcl to automate deployments, track changes, and ensure a smooth and reliable release process.
 
-## Why are we using Project sqlcl and Project CICD ?
+### **Why are we using Project sqlcl and Project CICD ?**
 Database Application Continuous Integration and Continuous Delivery (CI/CD) represents a transformative approach in modern database management and application development. This methodology seamlessly integrates database changes into the development pipeline while ensuring swift and secure deployment to production environments. By combining the rapid feedback mechanisms of Continuous Integration with the streamlined deployment processes of Continuous Delivery, Database CI/CD addresses the critical need for agility and reliability in today's fast-paced software development landscape.
 
  ![Database CI/CD](./images/cicd.png " " )
@@ -98,13 +98,9 @@ In this lab, you'll leverage the power of SQLcl's project feature to show the de
 
 By the end of this lab, you'll have a solid understanding of how to use SQLcl's project feature effectively within a CICD pipeline. This knowledge will empower you to implement similar practices in your own projects and contribute to the success of future database-driven applications.
 
-**Want to learn more about SQLcl Project and CICD?**
-
-Check out this resource: https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/introduction.html?utm_source=pocket_shared
-
 
 ## Task 2: Exploring the Initial Application
-### Getting Started With The Application
+### **Getting Started With The Application**
 
 Youssef, the HR director of MoroccanTech Solutions, has a vision: to streamline employee management by implementing a  "Departments" feature. Before diving into development, you'll need to thoroughly understand the existing HR application. 
 
@@ -118,7 +114,7 @@ By carefully analyzing the application, you'll gain valuable insights that will 
  
 **Let's begin!** 
  
-**Access the Application:** 
+* **Access the Application:** 
     * **Log in to the virtual machine.** 
     * **Navigate to the application directory:** Use the command line to navigate to the directory where the application code is located (e.g., `cd /path/to/hr-application`).
  
@@ -153,12 +149,13 @@ By carefully analyzing the application, you'll gain valuable insights that will 
         * This will typically start a local development server and open the application in your web browser.
         * **You are now interacting with the V1 of the HR application.**
 * **Explore the Application:**
-    ![Application](../application-setup/images/application.png " ")
+    ![Application](../application-setup-change/images/application.png " ")
     * **Interact with the application:** Navigate through the different pages and sections of the application.
     * **Look for employee-related features:** Examine features related to employee profiles, employee lists, and any existing team assignments.
     * **Identify missing "Departments" functionality:**
-        * Are there any options to create, view, or manage departments?
-    ![the goal of the lab ](../application-setup/images/placeholder.png " ")
+    
+Are there any options to create, view, or manage departments?
+    ![the goal of the lab ](../application-setup-change/images/placeholder.png " ")
 
 **Troubleshooting:**
 
@@ -175,7 +172,7 @@ By carefully analyzing the application, you'll gain valuable insights that will 
     * Begin by initializing a new SQLcl project:
       ```
       <copy>
-      project init
+      project init -name HrManager -schema DEVUSER -verbose
       </copy>
       ```
      The `project init` command initializes a new SQLcl PROJECTS project, setting up the necessary directories and files for managing your database objects and changes within your current directory.
@@ -184,7 +181,14 @@ By carefully analyzing the application, you'll gain valuable insights that will 
     ![ init ](./images/project-init-output.png " ")
     </details>
 
-    * Create a new Git branch for this feature:
+    * Initialize git
+        ```
+        <copy>
+        git init --initial-branch main
+        </copy>
+        ```
+
+    * Create a new git branch and switch to it for this feature:
         ```
         <copy>
         git checkout -b TICKET-1-Departments
@@ -219,29 +223,30 @@ By carefully analyzing the application, you'll gain valuable insights that will 
 
 
 ### 3.2 Database Changes
-* **Work on the New Feature:**  **Activate the "Departments" Feature:**
 
-    * **Locate the Placeholder Component:** 
+**Work on the New Feature: Activate the "Departments" Feature:**
+
+- **Locate the Placeholder Component:** 
     * **Challenge:** 
         * Examine the application code to locate the placeholder component for the "Departments" section. This might be a simple message, a loading indicator, or a basic UI element. 
-        * **Hint:** 
-            * Look for comments in the code related to the "Departments" feature (e.g., "TODO: Implement Departments", "Departments feature not yet implemented").
-            * Search for component names or file names that might relate to the "Departments" functionality (e.g HRPageContent...).
-            * Inspect the application's UI for any areas where the "Departments" feature is expected to be displayed.
-
-    <details>  <summary> **Solution:**</summary>
-      
-       * Find the placeholder component within the application's code, and replace it with Department implementation.
-       * **Go to : `/Livelab-APP/src/components/pages/HRPageContentSwitcher.tsx`**
-       * **Go to line 66**
-       * **Implement Department by adding `<DepartmentPage />` and delete the placeholder component**
-       ![Application](../application-setup/images/unlock-departement-code.png " ")
+    * **Hint:** 
+        * Look for comments in the code related to the "Departments" feature (e.g., "TODO: Implement Departments", "Departments feature not yet implemented").
+        * Search for component names or file names that might relate to the "Departments" functionality (e.g HRPageContent...).
+        * Inspect the application's UI for any areas where the "Departments" feature is expected to be displayed.
+        
+    <details><summary>**Solution:**</summary>
+    * Find the placeholder component within the application's code, and replace it with Department implementation.
+    * **Go to : `/Livelab-APP/src/components/pages/HRPageContentSwitcher.tsx`**
+    * **Go to line 66**
+    * **Implement Department by adding `<DepartmentPage />` and delete the placeholder component**
+![Application](../application-setup-change/images/unlock-departement-code.png " ")
     </details>
 
-* **Create the "Departments" Table:**
+- **Create the "Departments" Table:**
+
     * **Option 1: Using HR application:**
         * Go to the update Records page , and do your inserts: 
-            ![the goal of the lab ](../application-setup/images/inserts-in-application.png " ")
+            ![the goal of the lab ](../application-setup-change/images/inserts-in-application.png " ")
 
     * **Option 2: Using SQLcl:**
         * Open SQLcl with your connection.
@@ -272,9 +277,9 @@ By carefully analyzing the application, you'll gain valuable insights that will 
         * In your OCI home page, go to **Oracle Database** -> **Autonomous Database**.
         * Click on your available Autonomous Database.
         * In the **Database Actions** section, click on **SQL**.
-         ![OCI page](../application-setup/images/oci-SQL.png " ")
+         ![OCI page](../application-setup-change/images/oci-SQL.png " ")
         * This will open the SQL Database Actions page where you can directly execute your SQL query.
-         ![OCI page](../application-setup/images/insert-oci-sql.png " ")
+         ![OCI page](../application-setup-change/images/insert-oci-sql.png " ")
         * Write and execute the same SQL statements in the option 1.
 
 ### 3.3 Exporting Database Changes with SQLcl
@@ -286,11 +291,12 @@ By carefully analyzing the application, you'll gain valuable insights that will 
      project export -schemas DEVUSER -verbose
     </copy>
         ```
-    ![the goal of the lab ](../application-setup/images/project-export-output.png " ")
-    ![the goal of the lab ](../application-setup/images/project-export-editor-output.png " ")
+![the goal of the lab ](../application-setup-change/images/project-export-output.png " ")
+![the goal of the lab ](../application-setup-change/images/project-export-editor-output.png " ")
+
 
 * This command **exports database objects** into your repository. 
-*  more explination : ? 
+* More explination : ? 
 * **Now that we have made the database changes, we export our objects to have them included in our project folders.**
   
  * **Test the Application:** 
@@ -303,64 +309,50 @@ By carefully analyzing the application, you'll gain valuable insights that will 
 
 * **Stage Changes:**
     * Execute the following command to stage the changes for release:
+        * Add and commit changes before stage
         ```
-    <copy> 
-        project stage
-    </copy> 
-        ```
-    * This command prepares the staged changes for release by creating a release artifact in the `dist` folder.
-    ![the goal of the lab ](../application-setup/images/project-stage-commit.png " ")
-
-
-* **Commit and Merge Changes:**
-       *  ```
     <copy>
     git add -A
     git commit -m "Added Departments feature"
     </copy>
-    ```
-    * **Merge to main branch:**
-    ```
-     <copy>
+        ```
+        ```
+    <copy> 
+        project stage -verbose
+    </copy> 
+        ```
+* This command prepares the staged changes for release by creating a release artifact in the `dist` folder.
+    ![the goal of the lab ](../application-setup-change/images/project-stage-commit.png " ")
+
+* **Merge to main branch:**
+        ```
+    <copy>
     git checkout main
     git merge TICKET-1-Departments
     </copy>
-    ```
-    * **Resolve any merge conflicts:** (If necessary)
+        ```
+    ![merge branch with main ](../application-setup-change/images/merge-ticket1-main.png " ")
+* **Resolve any merge conflicts:** (If necessary)
 
 
 * **Release Changes:**
-    * Once your changes are merged into the main branch, execute the following command to create a release artifact:
+    * Once your changes are merged into the main branch, execute the following command to create a release:
         <copy>project release -version 2.0 </copy> 
-    * This command creates a compressed release artifact that can be easily deployed to other environments.
+        ![the goal of the lab ](../application-setup-change/images/project-release-V2.png " ")
+    * This command creates a release folder with the specified version.
+        ![the goal of the lab ](../application-setup-change/images/project-release-and-output.png " ")
+
+* **Generate the deployable Artifact:**
+    * The `project gen-artifact` command can be used to generate an artifact for your database changes. This artifact can then be easily deployed to different environments.
+        ![the goal of the lab ](../application-setup-change/images/project-gen-artf-and-output.png " ")
 
 
-* **Generate Release Artifact:**
-    * The `project gen-artifact` command can be used to create a deployable artifact for your database changes. This artifact can then be easily deployed to different environments.
-        ![the goal of the lab ](../application-setup/images/project-gen-artf-and-output.png " ")
-
-
-**In the next section, we will learn how to deploy these changes to the production environment using SQLcl and explore advanced CICD concepts.**
+In the next section, we will learn how to deploy these changes to the production environment using SQLcl and explore advanced CICD concepts.
 
 
 ## Task 4: Deploying to Production
 
-### 4.1 Preparing for Production Deployment
-
-* **Connect to the Development Database:** 
-    * Establish a connection to the development database using SQLcl. 
-    * You can use the `connect` command to connect to the database using your development credentials.
-
-* **Deploy Changes to Development:**
-    * Execute the following command to deploy the staged changes to the development database:
-        ```
-    <copy>
-     project deploy -file artifact/HrManager-2.0.zip  -verbose 
-    </copy>
-    ```
-    * This command applies the changes defined in the release artifact to the development database.
-
-### 4.2 Preparing for Production
+### 4.1 Preparing for Production
 
 * **Update Environment Variables:**
     * Modify the `.env` file to use the production database credentials:
@@ -370,7 +362,7 @@ By carefully analyzing the application, you'll gain valuable insights that will 
         ```
     * Replace `your_oci_url_prod` with the actual OCI URL for your production database.
 
-### 4.3 Deploying to Production
+### 4.2 Deploying to Production
 
 * **Connect to the Production Database:**
     * Establish a connection to the production database using SQLcl.
@@ -388,25 +380,27 @@ By carefully analyzing the application, you'll gain valuable insights that will 
     project deploy -file artifact/HrManager-2.O.zip  -verbose
     </copy>
     ```
+    ![project deploy ](../application-setup-change/images/project-deploy-prodUser.png " ")
     * This command applies the changes defined in the release artifact to the production database without recreating existing schema objects.
 
-### 4.4 Testing in Production
+### 4.3 Testing in Production
 
 * **Run the Production Application:**
     * Restart the application using the production environment variables.
     * Verify that the "Departments" feature is functioning correctly in the production environment. 
     * Perform thorough testing to ensure that all aspects of the feature are working as expected.
 
-**Congratulations!** You have successfully implemented and deployed the "Departments" feature using SQLcl and CICD practices. You have gained valuable experience in managing database changes, automating deployments, and working with a CICD pipeline.
+* **The department section, should locks like this:**
 
+    ![the goal of the lab ](../application-setup-change/images/department-unlocked.png " ")
+
+**Congratulations!** You have successfully implemented and deployed the "Departments" feature using SQLcl and CICD practices. You have gained valuable experience in managing database changes, automating deployments, and working with a CICD pipeline.
 
 ## Learn More
 
-Here are some useful links if you want to know more about Oracle Cloud :
-* [Oracle Cloud Doc](https://www.oracle.com/cloud/)
+Click [here](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/introduction.html?utm_source=pocket_shared) for documentation on using SQLcl Projects.
 
 ## Acknowledgements
 
-* **Author** -  Abdelilah AIT HAMOU, Junior Member of Technical Staff, SQLcl
-* **Created By/Date** -  Junior Member of Technical Staff, SQLcl, December 2024
-
+- **Author** - Fatima AOURGA & hruser AIT HAMMOU, Junior Member of Technical Staff, SQLcl
+- **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, December 2024
