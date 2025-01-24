@@ -278,4 +278,4 @@ You may now **proceed to the next lab**.
 
 - **Contributors** - Mandy Pang, MySQL Principal Product Manager,  Priscila Galvao, MySQL Solution Engineering, Nick Mader, MySQL Global Channel Enablement & Strategy Manager, Frédéric Descamps, MySQL Community Manager
 
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, July 2023
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering,January 2025
