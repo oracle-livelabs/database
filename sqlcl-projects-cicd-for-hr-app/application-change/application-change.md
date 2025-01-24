@@ -132,7 +132,7 @@ The "Analytics" feature was initially planned for the HR application but was not
     </details>
 
 
-## Challenge 5: Enhance the Analytics Arsenal (Optional)
+## Challenge 3: Enhance the Analytics Arsenal (Optional)
 
 * **Challenge:** Go beyond the current implementation by exploring innovative database objects and advanced analytics capabilities:
 
@@ -163,7 +163,7 @@ The "Analytics" feature was initially planned for the HR application but was not
           * Explore options for exporting data to different formats (e.g., CSV, PDF).
   </details>
 
-## Challenge 6: Preparing for Release
+## Challenge 4: Preparing for Release
 
 * **Challenge:** Prepare the "Analytics" feature for release by following proper version control and staging procedures.
     * **Hint:**
@@ -203,7 +203,7 @@ The "Analytics" feature was initially planned for the HR application but was not
     </details>
 
 
-## Challenge 7: Creating a Release Artifact
+## Challenge 5: Creating a Release Artifact
 
   * **Challenge:** Create a release artifact containing the changes for the "Analytics" feature.
     * **Hint:**
@@ -221,7 +221,7 @@ The "Analytics" feature was initially planned for the HR application but was not
             ``` 
     </details>
 
-## Challenge 8: Deploying Analytics to Production
+## Challenge 6: Deploying Analytics to Production
 
 * **Challenge:** Deploy the "Analytics" feature to the production environment.
     * **Hint:**
