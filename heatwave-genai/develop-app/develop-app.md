@@ -215,14 +215,13 @@ _Estimated Time:_ 20 minutes
 3. Paste the following code in the config.php file. 
 
      ```bash
-    <copy><?php
-    // Database credentials
+    <copy>
     <?php
     // Database credentials
-    define('DB_SERVER', '10.0.1.241');// HeatWave instance IP address
+    define('DB_SERVER', '10.0..');// HeatWave instance IP address
     define('DB_USERNAME', 'admin');
-    define('DB_PASSWORD', 'Password123!');
-    define('DB_NAME', 'genai-db');
+    define('DB_PASSWORD', 'Pass...');
+    define('DB_NAME', 'mysql');
     //Attempt to connect to HeatWave instance
     $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
     // Check connection
@@ -243,7 +242,7 @@ _Estimated Time:_ 20 minutes
     - DB_SERVER: Specify the IP address of the HeatWave instance.
     - DB_USERNAME: Specify administrator username, **admin**, which you had provided in Lab 1, Task 5, Step 5.
     - DB_PASSWORD: Specify the password, which you had provided in Lab 1, Task 5, Step 5.
-    - DB_NAME: Specify the schema, **genai-db**, which you had provided in Lab 5, Task 6, Step 2.
+    - DB_NAME: Specify the schema, **mysql**, the testing database.
 
     ![config.php](./images/config-php.png "config.php")
 
