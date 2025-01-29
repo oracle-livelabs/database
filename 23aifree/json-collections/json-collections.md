@@ -6,7 +6,7 @@ Oracle is a relational database, meaning it typically stores data in rows and co
 
 To create a collection all you have to specify is the collection's name. Unlike a relational table, you do not have to provide any schema information. So, let's create a collection for the products we want to sell in the store.
 
-Estimated Time: 20 minutes
+Estimated Time: 15 minutes
 
 ### Objectives
 
@@ -19,7 +19,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-- All previous labs successfully completed
+- An Oracle Autonomous Database 23ai available for the LiveLab.
 
 ## Task 1: Create Collection
 
