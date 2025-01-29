@@ -6,20 +6,23 @@ This lab walks you through the installation of the MongoDB Shell and MongoDB Com
 
 **NOTE**: MongoDB Shell and MongoDB Command Line Database Tools are tools provided by MongoDB Inc. Oracle is not associated with MongoDB Inc, and has no control over the software. These instructions are provided simply to help you learn about MongoDB Shell and MongoDB Command Line Database Tools. Links may change without notice.
 
-Check the official MongoDB Shell and MongoDB Command Line Database Tools website for latest versions and instructions:
+Check the official MongoDB download website for latest versions and instructions, e.g.:
 
 https://www.mongodb.com/try/download/shell
 
 https://www.mongodb.com/try/download/database-tools
 
+https://www.mongodb.com/try/download/compass
 
-Estimated Time: 15 minutes
+
+Estimated Time: 10 minutes
 
 ### Objectives
 
 In this lab, you will:
 
 * Install MongoDB Shell and MongoDB Command Line Database Tools on your local machine
+* Alternatively, you can install MongoDB Compass (GUI)
 * Set up your PATH to point to the MongoDB Shell and MongoDB Command Line Database Tools executable
 
 ### Prerequisites
@@ -166,10 +169,16 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
 
 Mongo Shell is now set up on your PC or Mac.
 
+## Task 5: Alternatively, you can install MongoDB Compass, the GUI for MongoDB
+
+1. Identify the appropriate MongoDB Compass download for your local machine on https://www.mongodb.com/try/download/compass, download and install it. MongoDB Compass offers you both a graphical user interface, as well as a built-in MongoDB shell.
+
+This step is optional, so it is not described in more detail here, although the installation itself is intuitive and self-describing.
+
 You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
 - **Author** - Roger Ford, Principal Product Manager, Oracle Database
 - **Contributors** - Kamryn Vinson, Andres Quintana
-- **Last Updated By/Date** - Carmen Berdant, August 2024
+- **Last Updated By/Date** - Hermann Baer, Februar 2025

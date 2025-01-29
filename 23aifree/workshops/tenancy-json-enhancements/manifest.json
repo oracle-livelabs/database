@@ -24,8 +24,8 @@
             "filename": "./../../json-collections/json-collections.md"
         },
         {
-            "title": "Lab 3: Install Mongo Shell",
-            "description": "Install Mongo Shell",
+            "title": "Lab 3: Install MongoDB tools and utilities",
+            "description": "Install MongoDB tools and utilities",
             "filename": "./../../json-install-mongo/json-install-mongo.md"
         },
         {
@@ -54,8 +54,8 @@
             "filename": "./../../json-migrating/json-migrating.md"
         },
         {
-            "title": "Lab 9: Creating multi-value JSON indexes and aggregation pipelines using MongoDB Shell (mongosh) in Oracle Database 23ai",
-            "description": "Creating multi-value JSON indexes and aggregation pipelines using MongoDB Shell (mongosh) in Oracle Database 23ai",
+            "title": "Lab 9: Creating multi-value JSON indexes and aggregation pipelines using MongoDB Shell",
+            "description": "Creating multi-value JSON indexes and aggregation pipelines using MongoDB Shell",
             "filename": "./../../json-indexes/json-indexes.md"
         },
         {
