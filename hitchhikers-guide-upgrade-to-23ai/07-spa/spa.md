@@ -6,7 +6,7 @@ In this lab, you will use the SQL Performance Analyzer (SPA) that is a part of t
 
 Estimated Time: 10 minutes
 
-[Hitchhiker's Guide LAB7](videohub:1_khvx83yu)
+[Hitchhiker's Guide Lab 7](youtube:lwvdaM4v4tQ?start=3165)
 
 ### Objectives
 
@@ -43,6 +43,8 @@ This lab assumes:
     where sqlset_name like 'STS_Capture%'
     group by sqlset_name order by 2;
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     <details>

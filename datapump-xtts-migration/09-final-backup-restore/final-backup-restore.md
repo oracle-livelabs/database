@@ -6,7 +6,7 @@ It's time to complete the migration. You've done all the preparations, but now i
 
 Estimated Time: 20 Minutes
 
-[Next Level Platform](videohub:1_3r3ijska)
+[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 9](youtube:fgyDy-QcV_o?start=2363)
 
 ![Complete the migration](./images/final-backup-restore-overview.png " ")
 

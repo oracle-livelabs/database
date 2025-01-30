@@ -6,7 +6,7 @@ In this lab, you will use SQL Tuning Advisor (STA) to find suggestions for impro
 
 Estimated Time: 10 minutes
 
-[Hitchhiker's Guide LAB9](videohub:1_prpaczgp)
+[Hitchhiker's Guide Lab 9](youtube:lwvdaM4v4tQ?start=4242)
 
 ### Objectives
 
@@ -217,8 +217,6 @@ In this lab, you will implement some of the recommendations. Namely, those about
     <copy>
     create index TPCC.IDX$$_00650001 on TPCC.STOCK("S_W_ID","S_QUANTITY","S_I_ID");
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * Do not implement any of the other recommendations.
@@ -302,4 +300,4 @@ You can submit one or more SQL statements as input to the advisor and receive ad
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, August 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, January 2025

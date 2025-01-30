@@ -6,7 +6,7 @@ In this lab, you create a new, empty pluggable database in *CDB23*. The database
 
 Estimated Time: 10 Minutes
 
-[Next Level Platform](videohub:1_04gmmrd8)
+[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 3](youtube:fgyDy-QcV_o?start=535)
 
 ### Objectives
 

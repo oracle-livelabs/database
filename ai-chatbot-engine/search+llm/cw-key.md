@@ -1,0 +1,1 @@
+This is the link to the GenerativeAI API key: https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/sCxNUExb6_eLVYNxc1Waef-KLO6nSmchNG56nK_xBAkktsX-DiUMa6Xp-RbdW3aR/n/fr1wb0c6sbky/b/bucket-20250115-1555/o/oci-files.zip
