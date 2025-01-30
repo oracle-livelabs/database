@@ -298,7 +298,7 @@ This lab assumes you have:
 
     ```text
     <copy>
-    /home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/lib 
+    /home/oracle/OTMM/otmm-package/samples/xa/plsql/lib 
     </copy>
     ```
 
@@ -310,7 +310,7 @@ This lab assumes you have:
 
     ```text
     <copy>
-    /home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/databaseapp 
+    /home/oracle/OTMM/otmm-package/samples/xa/plsql/databaseapp 
     </copy>
     ```
 
@@ -354,7 +354,7 @@ This lab assumes you have:
 
     ```text
     <copy>
-    home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/lib
+    home/oracle/OTMM/otmm-package/samples/xa/plsql/lib
     </copy>
     ```
 
@@ -366,7 +366,7 @@ This lab assumes you have:
 
     ```text
     <copy>
-    /home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/databaseapp
+    /home/oracle/OTMM/otmm-package/samples/xa/plsql/databaseapp
     </copy>
     ```
 

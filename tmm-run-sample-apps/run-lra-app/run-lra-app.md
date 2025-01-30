@@ -142,7 +142,7 @@ Run the Travel Agent application to book a hotel room and flight ticket.
 
     ```text
     <copy>
-    cd /home/oracle/OTMM/otmm-24.2.1/samples/lra/lrademo/trip-client
+    cd /home/oracle/OTMM/otmm-package/samples/lra/lrademo/trip-client
     java -jar target/trip-client.jar
     </copy>
     ```
@@ -235,11 +235,11 @@ When you started Minikube while performing Task 1, Kiali, Jaeger, and Prometheus
 
 ## Task 5: View Source Code of the Travel Agent Application (Optional)
 
-The source code of the Travel Agent application is present in folder: /home/oracle/OTMM/otmm-24.2.1/samples/lra/lrademo
-- Trip Service Source code: /home/oracle/OTMM/otmm-24.2.1/samples/lra/lrademo/trip-manager
-- Hotel Service Source code: /home/oracle/OTMM/otmm-24.2.1/samples/lra/lrademo/hotel
-- Flight Service Source code: /home/oracle/OTMM/otmm-24.2.1/samples/lra/lrademo/flight
-- Trip Client Source code: /home/oracle/OTMM/otmm-24.2.1/samples/lra/lrademo/trip-client
+The source code of the Travel Agent application is present in folder: /home/oracle/OTMM/otmm-package/samples/lra/lrademo
+- Trip Service Source code: /home/oracle/OTMM/otmm-package/samples/lra/lrademo/trip-manager
+- Hotel Service Source code: /home/oracle/OTMM/otmm-package/samples/lra/lrademo/hotel
+- Flight Service Source code: /home/oracle/OTMM/otmm-package/samples/lra/lrademo/flight
+- Trip Client Source code: /home/oracle/OTMM/otmm-package/samples/lra/lrademo/trip-client
 
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files. To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
 

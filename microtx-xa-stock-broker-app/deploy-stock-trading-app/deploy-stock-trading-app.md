@@ -405,7 +405,7 @@ The folder that contains the Bank and Stock-Trading application code also contai
 
 To provide the configuration and environment details in the `values.yaml` file:
 
-1. Open the `values.yaml` file, which is in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/Helmcharts` folder.
+1. Open the `values.yaml` file, which is in the `/home/oracle/OTMM/otmm-package/samples/xa/java/bankapp/Helmcharts` folder.
 
 2. Enter values that you have noted down for the following fields under `security` in `UserBanking`.
 
@@ -419,7 +419,7 @@ To provide the configuration and environment details in the `values.yaml` file:
 
 ## Task 4: Build Container Image for the Stock Broker service
 
-The code for the Bank and Stock-Trading application is available in the installation bundle in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp` folder. The container image for the User Banking, Branch Banking, Core Banking services are pre-built and available for your use. Build the container image only for the Stock Broker service.
+The code for the Bank and Stock-Trading application is available in the installation bundle in the `/home/oracle/OTMM/otmm-package/samples/xa/java/bankapp` folder. The container image for the User Banking, Branch Banking, Core Banking services are pre-built and available for your use. Build the container image only for the Stock Broker service.
 
 To build container image for the Stock Broker service:
 
@@ -427,7 +427,7 @@ To build container image for the Stock Broker service:
 
     ```
     <copy>
-    cd /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/StockBroker
+    cd /home/oracle/OTMM/otmm-package/samples/xa/java/bankapp/StockBroker
     </copy>
     ```
 
@@ -451,7 +451,7 @@ Install the Bank and Stock-Trading application in the `otmm` namespace, where yo
 
     ```
     <copy>
-    cd /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/Helmcharts
+    cd /home/oracle/OTMM/otmm-package/samples/xa/java/bankapp/Helmcharts
     </copy>
     ```
 
@@ -551,7 +551,7 @@ You may now **proceed to the next lab**.
 
 ## Learn More
 
-* [Develop Applications with XA](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
+* [Develop Applications with XA](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG-GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
 
 ## Acknowledgements
 

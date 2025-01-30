@@ -60,7 +60,7 @@ Build and deploy the Teller application, which is the transaction initiator serv
 
     ```text
     <copy>
-    cd /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/teller
+    cd /home/oracle/OTMM/otmm-package/samples/xa/java/teller
     </copy>
     ```
 
@@ -70,12 +70,12 @@ Build and deploy the Teller application, which is the transaction initiator serv
     </copy>
     ```
 
-2. Open the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/helmcharts/ords-teller/values.yaml` file in any code editor. This is the manifest file, which contains the deployment configuration details of the Teller application.
+2. Open the `/home/oracle/OTMM/otmm-package/samples/xa/java/helmcharts/ords-teller/values.yaml` file in any code editor. This is the manifest file, which contains the deployment configuration details of the Teller application.
 
     **Example command**
     ```text
     <copy>
-    vim /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/helmcharts/ords-teller/values.yaml
+    vim /home/oracle/OTMM/otmm-package/samples/xa/java/helmcharts/ords-teller/values.yaml
     </copy>
     ```
 
@@ -92,7 +92,7 @@ Build and deploy the Teller application, which is the transaction initiator serv
 
     ```text
     <copy>
-    cd /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/helmcharts
+    cd /home/oracle/OTMM/otmm-package/samples/xa/java/helmcharts
     </copy>
     ```
 
@@ -365,8 +365,8 @@ To bring up the Text Editor, click on Activities (top left) -> Show Applications
 
 The application source code is present in following location.
 
-* Teller application source code: `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/teller`.
-* Department 1 and Department 2 application source code: `/home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/databaseapp/ordsapp.sql`.
+* Teller application source code: `/home/oracle/OTMM/otmm-package/samples/xa/java/teller`.
+* Department 1 and Department 2 application source code: `/home/oracle/OTMM/otmm-package/samples/xa/plsql/databaseapp/ordsapp.sql`.
 
 You may now **proceed to the next lab.**
 

@@ -47,7 +47,7 @@ This lab assumes you have:
 
 ## Task 1: Start Minikube
 
-Code for the Transfer application is available in the MicroTx distribution. The MicroTx library files are already integrated with the application code. Container images, for each microservice in the application, are already built and available in your Minikube container registry. The `values.yaml` file is available in the `/home/oracle/OTMM/otmm-24.2.1/samples/xa/java/helmcharts/transfer` folder. This is the manifest file, which contains the deployment configuration details for the application.
+Code for the Transfer application is available in the MicroTx distribution. The MicroTx library files are already integrated with the application code. Container images, for each microservice in the application, are already built and available in your Minikube container registry. The `values.yaml` file is available in the `/home/oracle/OTMM/otmm-package/samples/xa/java/helmcharts/transfer` folder. This is the manifest file, which contains the deployment configuration details for the application.
 
 When you start Minikube, an instance of the Oracle Database 23ai Free Release, with two PDBs, is deployed on Minikube. See [Oracle Database Free](https://www.oracle.com/database/free/get-started). Department 1 microservice, which is developed using the Helidon framework, uses `DEPT1PDB` PDB as resource manager. Department 2 microservice, which is developed using the Spring Boot framework, uses `DEPT2PDB` PDB as resource manager. Each PDB contains an `accounts` table with `account_id` as the primary key. The `accounts` table is populated with the following sample data. The `values.yaml` file also contains the details to access the resource managers.
 
@@ -289,10 +289,10 @@ When you started Minikube while performing Task 1, Kiali, Jaeger, and Prometheus
 
 ## Task 5: View Source Code of the Transfer Application (Optional)
 
-The source code of the application is present in folder: /home/oracle/OTMM/otmm-24.2.1/samples/xa/java
-- Teller Service Source code: /home/oracle/OTMM/otmm-24.2.1/samples/xa/java/teller
-- Department 1 Service Source code: /home/oracle/OTMM/otmm-24.2.1/samples/xa/java/department-helidon
-- Department 2 Service Source code: /home/oracle/OTMM/otmm-24.2.1/samples/xa/java/department-spring
+The source code of the application is present in folder: /home/oracle/OTMM/otmm-package/samples/xa/java
+- Teller Service Source code: /home/oracle/OTMM/otmm-package/samples/xa/java/teller
+- Department 1 Service Source code: /home/oracle/OTMM/otmm-package/samples/xa/java/department-helidon
+- Department 2 Service Source code: /home/oracle/OTMM/otmm-package/samples/xa/java/department-spring
 
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
 To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
