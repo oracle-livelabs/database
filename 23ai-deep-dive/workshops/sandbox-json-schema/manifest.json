@@ -79,6 +79,7 @@
             "type": "livelabs",
             "filename": "../../../db-23ai-fundamentals/new-shrink-tablespace/new-shrink-tablespace.md"
         },
+
         {
             "title": "Workshop: AI Vector Search - Run a RAG Application",
             "description": "Run a RAG application",
@@ -92,19 +93,10 @@
             "filename": "../../../ai-vector-rag/rag/rag.md"
         },
         {
-            "title": "Workshop: Work with JSON Collections",
-            "description": "Work with JSON Collections",
-            "filename": "../../../23aifree/json-collections/json-collections.md"
-        },
-        {
-            "title": "Lab: Install MongoDB tools and utilities",
-            "description": "Install MongoDB tools and utilities",
-            "filename": "../../../23aifree/json-install-mongo/json-install-mongo.md"
-        },
-        {
-            "title": "Lab: Use Mongo API to interact with Oracle Database",
-            "description": "Use Mongo API to interact with Oracle Database",
-            "filename": "../../../23aifree/json-mongo/json-mongo.md"
+            "title": "Workshop: JSON Schema",
+            "description": "Creating JSON Schemas",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-json-schema/new-json-schema.md"
         },
         {
             "title": "Lab: JSON Duality Views",
