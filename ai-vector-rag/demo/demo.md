@@ -71,4 +71,4 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 * **Author** - Francis Regalado, Database Product Management; David Start, Database Product Management
 * **Contributors** - Brianna Ambler, Kaylien Phan, Database Product Management
-* **Last Updated By/Date** - Brianna Ambler, October 2024
+* **Last Updated By/Date** - Francis Regalado, February 2025
