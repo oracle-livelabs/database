@@ -57,13 +57,13 @@
         },
         {
             "title": "Lab: Annotations",
-            "description": "Create Annotations",
+            "description": "Creating Annotations",
             "type": "livelabs",
             "filename": "../../../db-23ai-fundamentals/annotations/annotations.md"
         },
         {
             "title": "Lab: SQL Domains",
-            "description": "Use SQL Domains",
+            "description": "Using SQL Domains",
             "type": "livelabs",
             "filename": "../../../db-23ai-fundamentals/new-domains/new-domains.md"
         },
@@ -79,6 +79,7 @@
             "type": "livelabs",
             "filename": "../../../db-23ai-fundamentals/new-shrink-tablespace/new-shrink-tablespace.md"
         },
+
         {
             "title": "Workshop: AI Vector Search - Run a RAG Application",
             "description": "Run a RAG application",
@@ -87,24 +88,25 @@
         },
         {
             "title": "Lab: Build Your Own RAG App",
-            "description": "Explore RAG",
+            "description": "Exploring RAG",
             "type": "livelabs",
             "filename": "../../../ai-vector-rag/rag/rag.md"
         },
         {
-            "title": "Workshop: Work with JSON Collections and MongoDB API",
-            "description": "Create JSON Collections and use MongoDB API",
-            "filename": "../../../23aifree/json-collections/json-collections-mongo.md"
+            "title": "Workshop: JSON Schema",
+            "description": "Creating JSON Schemas",
+            "type": "livelabs",
+            "filename": "../../../db-23ai-fundamentals/new-json-schema/new-json-schema.md"
         },
         {
             "title": "Lab: JSON Duality Views",
-            "description": "Build Duality Views",
+            "description": "Building Duality Views",
             "type": "livelabs",
             "filename": "../../../db-23ai-fundamentals/new-duality-views/new-duality-views.md"
         },
         {
             "title": "Workshop: Property Graphs",
-            "description": "Build Property Graphs",
+            "description": "Building Property Graphs",
             "type": "livelabs",
             "filename": "../../../db-23ai-fundamentals/new-property-graph/property-graph-se-deep-dive.md"
         },

@@ -38,7 +38,7 @@ In this lab, you will:
 
     !["about this mac" menu item](./images/about-this-mac.png " ")
 
-    That will open a "details" panel. Intel Mac will show a line with *Processor:* and the name of an Intel processor. Apple Silicon Macs will show a line saying *Chip"* and a line such as "Apple M1 Pro".
+    That will open a "details" panel. Intel Mac will show a line with *Processor:* and the name of an Intel processor. Apple Silicon Macs will show a line saying *Chip* and a line such as "Apple M1 Pro".
 
     ![processor details](./images/about-mac-details.png " ")
 
@@ -155,7 +155,7 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
     </copy>
     ```
 
-    If that fails, you'll have to set your path manually to include the 'bin' directory from the files you just downloaded. If you close and reopen your terminal window, you will need to re-run this comamnd. Alternatively, you can always navigate to the directory where you have extracted the software and run the shell with the relative path.
+    If that fails, you'll have to set your path manually to include the 'bin' directory from the files you just downloaded. If you close and reopen your terminal window, you will need to re-run this command. Alternatively, you can always navigate to the directory where you have extracted the software and run the shell with the relative path.
 
 2. On **Windows** you can use the following command, assuming you created the 'mongosh' directory in your home directory. If you created it elsewhere, you'll need to edit the path command appropriately.
 
@@ -181,4 +181,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Roger Ford, Principal Product Manager, Oracle Database
 - **Contributors** - Kamryn Vinson, Andres Quintana
-- **Last Updated By/Date** - Hermann Baer, Februar 2025
+- **Last Updated By/Date** - Hermann Baer, February 2025
