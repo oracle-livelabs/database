@@ -1,4 +1,4 @@
-# Validate workshop environment
+# Validate the workshop environment
 
 ## Introduction
 
@@ -63,3 +63,8 @@ sudo podman ps -a
 This completes the validating the workshop environment and stop/start podman containers as and when needed during this workshop.
 
 You may now **proceed to the next lab**
+
+## Acknowledgements
+* **Author** - Ajay Joshi, Distributed Database Product Management
+* **Contributors** - Ravi Sharma, Vibhor Sharma, Jyoti Verma, Param Saini, Distributed Database Product Management
+* **Last Updated By/Date** - Ajay Joshi, February 2025

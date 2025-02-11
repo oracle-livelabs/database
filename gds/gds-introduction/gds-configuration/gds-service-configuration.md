@@ -1,6 +1,6 @@
-# GDS Configuration using GDSCTL
+# Oracle GDS Configuration
 
-Once databases are ready to configure with GDS as per previous lab "Database updates for enabling GDS", now its time to configure GDS for Global services using GDSCTL.
+Once databases are ready to configure with GDS as per previous lab "Database updates for enabling GDS", now its time to configure Oracle GDS for Global services using GDSCTL.
 
 *Estimated Time*:  30 minutes
 
@@ -236,3 +236,8 @@ exit
 This completes GDS configuration tasks and its verification by database connection(s) created using Global service(s).
 
 You may now **proceed to the next lab**.
+
+## Acknowledgements
+* **Author** - Ajay Joshi, Distributed Database Product Management
+* **Contributors** - Ravi Sharma, Vibhor Sharma, Jyoti Verma, Param Saini, Distributed Database Product Management
+* **Last Updated By/Date** - Ajay Joshi, February 2025

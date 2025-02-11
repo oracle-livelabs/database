@@ -1,4 +1,4 @@
-# Introduction
+# Oracle Global Data Services Overview
 
 ## About Oracle Database Global Data Services (GDS)
 
@@ -16,7 +16,7 @@ A Global Data Services configuration and its global services are created and man
 
 A global service manager (GSM) is the central software component of Global Data Services (GDS). It orchestrates GDS operations and provides service-level load balancing, failover, and centralized management of services in GDS setups. A global service manager is analogous to the remote listener in an Oracle RAC database, except that a Global Service Manager is more powerful, has additional capabilities, and serves multiple databases.
 
-**Overview of Global Services**
+**Global Services**
 
 For database clients, a Global Data Services configuration is presented by a set of global services. A global service manager serving a Global Data Services configuration is aware of all global services that the configuration provides and acts as a mediator for the database clients and databases in the configuration. A client program connects to a regional global service manager and requests a connection to a global service. The client does not need to specify which database or instance it should connect to. The global service manager forwards the client's request to the optimal instance in the configuration that offers target the global service.
 
@@ -27,13 +27,13 @@ For database clients, a Global Data Services configuration is presented by a set
 
 - This workshop will give you first-hand experience with Global Data Services (GDS) setup, configuration, and usage.
 
-This includes: 
+This includes:
 
 - GSM software installation and GDS Catalog creation
 - Primary and Standby database setup (in an Active Data Guard configuration)
 - Creating global services for RW and RO workloads and application setup
 - Testing and validating global services in action using the GDS Control Utility (GDSCTL)
-- Switchover and Fail-over tests using Global services
+- Switchover and Failover tests using Global services
 
 Note: This workshop uses Podman containers for simplicity and focus on the workshop objectives.
 
@@ -48,3 +48,7 @@ You may now **proceed to the next lab**
 
 - [Introduction to Global Data Services](https://docs.oracle.com/en/database/oracle/oracle-database/23/gsmug/intro-global-data-services.html#GUID-415B8BB5-5C8D-4C78-8E76-43DB1648E467)
 
+## Acknowledgements
+* **Author** - Ajay Joshi, Distributed Database Product Management
+* **Contributors** - Ravi Sharma, Vibhor Sharma, Jyoti Verma, Param Saini, Distributed Database Product Management
+* **Last Updated By/Date** - Ajay Joshi, February 2025

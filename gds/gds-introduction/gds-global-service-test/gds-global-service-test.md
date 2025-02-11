@@ -95,3 +95,8 @@ Note: Such Global Service's JDBC URL can be used from application to connect Ora
 This completes Global service usage and its verification by insert records in a sample application schema.
 
 You may now **proceed to the next lab**.
+
+## Acknowledgements
+* **Author** - Ajay Joshi, Distributed Database Product Management
+* **Contributors** - Ravi Sharma, Vibhor Sharma, Jyoti Verma, Param Saini, Distributed Database Product Management
+* **Last Updated By/Date** - Ajay Joshi, February 2025

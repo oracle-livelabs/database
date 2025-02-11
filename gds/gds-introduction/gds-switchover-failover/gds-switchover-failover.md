@@ -164,3 +164,8 @@ This step confirms that "insert\_records" test is running with zero data loss du
 Similarly, any other application using global service connections can be verified with zero data loss during Switchover or Failover.
 
 This Completes the GDS introduction LiveLabs.
+
+## Acknowledgements
+* **Author** - Ajay Joshi, Distributed Database Product Management
+* **Contributors** - Ravi Sharma, Vibhor Sharma, Jyoti Verma, Param Saini, Distributed Database Product Management
+* **Last Updated By/Date** - Ajay Joshi, February 2025

@@ -3,8 +3,8 @@
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
-      "title": "Introduction",
-      "description": "Introduction",
+      "title": "Oracle Global Data Services Overview",
+      "description": "Oracle Global Data Services Overview",
       "filename": "../../introduction/introduction.md"
     },
     {
@@ -13,13 +13,13 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-23ai.md"
     },
     {
-      "title": "Lab 1: Validate workshop environment",
-      "description": "Validate workshop environment",
+      "title": "Lab 1: Validate the workshop environment",
+      "description": "Validate the workshop environment",
       "filename": "../../validate-workshop-environment/validate-workshop-environment.md"
     },
     {
-      "title": "Lab 2: GDS Install",
-      "description": "GDS Install",
+      "title": "Lab 2: Oracle GDS Installation",
+      "description": "Oracle GDS Installation",
       "filename": "../../gds-install/gds-install.md"
     },
     {
@@ -28,8 +28,8 @@
       "filename": "../../database-updates-to-enable-GDS/gds-dbs-configuration.md"
     },
     {
-      "title": "Lab 4: GDS Configuration",
-      "description": "GDS Configuration",
+      "title": "Lab 4: Oracle GDS Configuration",
+      "description": "Oracle GDS Configuration",
       "filename": "../../gds-configuration/gds-service-configuration.md"
     },
     {

@@ -88,3 +88,8 @@ Note: Review the contents of each of the database scripts to get familiar with t
 Since You have installed GSM already, now you can perform the next Lab **GDS Configuration using GDSCTL**
 
 You may now **proceed to the next lab**.
+
+## Acknowledgements
+* **Author** - Ajay Joshi, Distributed Database Product Management
+* **Contributors** - Ravi Sharma, Vibhor Sharma, Jyoti Verma, Param Saini, Distributed Database Product Management
+* **Last Updated By/Date** - Ajay Joshi, February 2025
