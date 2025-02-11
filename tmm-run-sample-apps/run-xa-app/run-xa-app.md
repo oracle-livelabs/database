@@ -86,7 +86,7 @@ Follow the instructions in this section to start Minikube, and then verify that 
     </copy>
     ```
 
-   In the output, verify that the `STATUS` of the `sample-xa-app` is `deployed``.
+   In the output, verify that the `STATUS` of the `sample-xa-app` is `deployed` as shown in the following image.
 
    **Example output**
 
@@ -158,9 +158,32 @@ Before you start a transaction, you must start a Minikube tunnel. You can skip t
 
     Note that, if you don't do this, then you must explicitly specify the IP address in the commands when required.
 
-## Task 3: Run the Transfer Application
+## Task 3: Run the Teller Application
 
-When you run the Transfer application, it starts an XA transaction. The Teller application is the transaction initiator service, it initiates the transaction. When the Teller application runs, it withdraws money from Department A and deposits it to Department B by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
+The Teller application is the transaction initiator service, it initiates the XA transaction. When the Teller application runs, it withdraws money from one account and deposits it to another account by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or all actions are rolled back in case of a failure of any one or more actions.
+
+1. Run the Teller application. Type the URL in the following format, 'http://$CLUSTER_IPADDR/teller', in a new web browser. For example, `http://192.0.2.117/teller`. The Teller application opens as shown in the following figure.
+
+    ![Teller application](./images/teller-initial.png)
+
+2. In the **From Account** group, select the account from which you want to transfer an amount.
+
+3. Click **Check Balance**. The current balance in the selected account is displayed.
+
+4. In the **To Account** group, select the account to which you want to transfer the amount.
+
+5. Click **Check Balance**. The current balance in the selected account is displayed as shown in the following figure.
+    ![Current balance in two accounts](./images/teller-app-balance.png)
+
+6. In the **Amount** group, enter the amount that you want to transfer, and then click **Transfer**.
+
+    Transfer completed successfully message is displayed to indicate that the specified amount has been transfered.
+
+7. Check the balance of both the accounts once more to verify that the correct updated amount is reflected and to confirm that the transaction was completed successfully.
+
+## Task 4: Use cURL Commands to Run the Transfer Application (Optional)
+
+You can skip this task if you have already completed Task 3. This task provides details to run the Transfer application using cURL commands. When you run the Transfer application, it starts an XA transaction. The Teller application is the transaction initiator service, it initiates the transaction. When the Teller application runs, it withdraws money from Department A and deposits it to Department B by creating an XA transaction. Within the XA transaction, all actions such as withdraw and deposit either succeed, or they all are rolled back in case of a failure of any one or more actions.
 
 1. Before you start the transaction, run the following commands to check the balance in the Department 1 and Department 2 accounts.
 
@@ -241,7 +264,7 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
     </copy>
     ```
 
-## Task 4: Visualize the Flow of Requests (Optional)
+## Task 5: Visualize the Flow of Requests (Optional)
 
 To visualize the flow of requests between MicroTx and the distributed microservices to book a trip, use Kiali and Jaeger dashboards.
 
@@ -287,7 +310,7 @@ When you started Minikube while performing Task 1, Kiali, Jaeger, and Prometheus
 8. Click **Find Traces**. You can see the list of traces with each trace representing a request.
 9. Select one of the traces to view.
 
-## Task 5: View Source Code of the Transfer Application (Optional)
+## Task 6: View Source Code of the Transfer Application (Optional)
 
 The source code of the application is present in folder: /home/oracle/OTMM/otmm-package/samples/xa/java
 - Teller Service Source code: /home/oracle/OTMM/otmm-package/samples/xa/java/teller
@@ -297,7 +320,7 @@ The source code of the application is present in folder: /home/oracle/OTMM/otmm-
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
 To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
 
-## Task 6: Access the Oracle Database Instances (Optional)
+## Task 7: Access the Oracle Database Instances (Optional)
 
 Use tools, such as Oracle Database SQL*Plus, to access the Oracle Database 23ai instances to view the tables and data.
 
@@ -317,7 +340,7 @@ Use tools, such as Oracle Database SQL*Plus, to access the Oracle Database 23ai 
     </copy>
     ```
 
-2. Run the following command to access `DEPT2PDB` PDB.
+3. Run the following command to access `DEPT2PDB` PDB.
 
     ```text
     <copy>
@@ -334,5 +357,5 @@ If you would like to finish the LiveLabs and clean up the resources, then comple
 ## Acknowledgements
 
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
-* **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja Kannan, August 2024
+* **Contributors** - Brijesh Kumar Deo, Bharath MC, Atul Dhiman, and Anand Verma
+* **Last Updated By/Date** - Sylaja Kannan, February 2025

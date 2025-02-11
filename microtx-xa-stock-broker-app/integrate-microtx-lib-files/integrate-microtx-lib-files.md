@@ -101,18 +101,7 @@ The following section provides reference information about each line of code tha
    </copy>
     ```
 
-7. Uncomment the following line of code under `sell()` to create an instance of the `MicroTxUserTransactionService` object to sell stocks. Autowire the `MicroTxUserTransactionService` class before your application logic initiates or begins a transaction.
-
-    **Sample command**
-
-    ```java
-    <copy>
-    @Autowired
-    MicroTxUserTransactionService microTxUserTransaction;
-    </copy>
-    ```
-
-8. Uncomment the following line of code under `sell()` to begin the XA transaction to sell stocks.
+7. Uncomment the following line of code under `sell()` to begin the XA transaction to sell stocks.
 
     **Sample command**
 
@@ -122,7 +111,7 @@ The following section provides reference information about each line of code tha
     </copy>
     ```
 
-9. Uncomment all the occurrences of the following lines of code to specify the transaction boundaries for rolling back or committing the transaction. Based on your business logic, commit or rollback the transaction.
+8. Uncomment all the occurrences of the following lines of code to specify the transaction boundaries for rolling back or committing the transaction. Based on your business logic, commit or rollback the transaction.
 
     **Sample command**
 
@@ -133,9 +122,9 @@ The following section provides reference information about each line of code tha
    </copy>
     ```
 
-10. Uncomment the catch blocks in the `buy()` and `sell()` methods.
+9. Uncomment the catch blocks in the `buy()` and `sell()` methods.
 
-11. Uncomment the following lines of code in the `BankUtility.java` file, located in the `/com/oracle/tmm/stockbroker/utils/` package of the `StockBroker` application, to inject the Spring Boot REST template provided by MicroTx.
+10. Uncomment the following lines of code in the `BankUtility.java` file, located in the `/com/oracle/tmm/stockbroker/utils/` package of the `StockBroker` application, to inject the Spring Boot REST template provided by MicroTx.
 
     **Sample command**
 
