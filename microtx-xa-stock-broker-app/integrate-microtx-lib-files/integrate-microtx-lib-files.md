@@ -49,7 +49,7 @@ The following section provides reference information about each line of code tha
     ```
     <copy>
     <dependency>
-      <groupId>com.oracle.tmm.jta</groupId>
+      <groupId>com.oracle.microtx</groupId>
       <artifactId>microtx-spring-boot-starter</artifactId>
       <version>23.4.1</version>
     </dependency>
