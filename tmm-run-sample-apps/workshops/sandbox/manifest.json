@@ -10,7 +10,7 @@
     {
       "title": "Lab 1: Environment setup",
       "description": "Verify Setup of compute instance",
-      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+      "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-novnc.md"
     },
     {
       "title": "Lab 2: Run Travel agent app which uses Saga",
