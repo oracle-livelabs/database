@@ -2,7 +2,7 @@
 
 Once global service(s) created along with Data guard configuration as per previous lab, now it’s time to run Switchover and Failover tests. Application continuity is expected with zero data loss during Switchover and Failover tests for connections using Global services.
 
-Estimated Time: 20 minutes
+*Estimated Time*: 20 minutes
 
 ### Objectives
 
@@ -23,18 +23,16 @@ This lab assumes you have:
     * Lab: GDS Configuration using GDSCTL
     * Lab: Prepare a sample Schema and Test Global Service
 
-## 
-
 ## Task 1: Prior to perform Switchover from primary to standby, make sure insert_records.sh is running from appclient container
 
 1. From the appclient container, start the test (if not running already, in a different terminal window):
 
 ```
 <copy>
-#from another terminal window
+# From another terminal window
 sudo podman exec -i -t appclient /bin/bash
 su - oracle
-#run the script
+# Run the script
 ./insert_records.sh
 </copy>
 ```
@@ -55,19 +53,19 @@ switchover to sorclcdb
 
 2. From appclient container, verify that when Switchover from primary to standby gets started, connection errors occurs:
 
-![Switchover_from_primary_to_standby_started](./images/Switchover_from_primary_to_standby_started.png " ")
+![switchover_from_primary_to_standby_started](./images/Switchover_from_primary_to_standby_started.png " ")
 
-    Wait for Switchover completion. It may complete soon but sometimes it may take up to 3 minutes in this liveLab environment. You can monitor from appclient terminal that records started inserting again using new primary which is sorclpdb. After Failover completion, note that HOST_NAME is "standby" as expected.
+Wait for Switchover completion. It may complete soon but sometimes it may take up to 3 minutes in this liveLab environment. You can monitor from appclient terminal that records started inserting again using new primary which is sorclpdb. After Failover completion, note that HOST_NAME is "standby" as expected.
 
 3. From appclient container, verify Switchover from primary to standby is completed and you see records getting inserted again using new primary cdb (sorclpdb) belongs to standby container:
 
-![Switchover_from_primary_to_standby_completed](./images/Switchover_from_primary_to_standby_completed.png " ")
+![switchover_from_primary_to_standby_completed](./images/switchover_from_primary_to_standby_completed.png " ")
 
 Look at the value of ID prior to start Switchover and after Switchover completion. ID doesn't skip!. This confirms that Switchover happened with zero data loss.
 
 4. Verify Switchover to standbydb (sorclcdb) is completed.
 
-![verify_Switchover_to_standby_completed](./images/verify_Switchover_to_standby_completed.png " ")
+![verify_switchover_to_standby_completed](./images/verify_switchover_to_standby_completed.png " ")
 
 5. Similarly, you can verify from standby container (optional):
 
@@ -80,7 +78,7 @@ show configuration
 </copy>
 ```
 
-![standby_show_configuration_after_Switchover_to_sorclcdb](./images/standby_show_configuration_after_Switchover_to_sorclcdb.png " ")
+![standby_show_configuration_after_switchover_to_sorclcdb](./images/standby_show_configuration_after_switchover_to_sorclcdb.png " ")
 
 
 ## Task 3: Perform Failover to current standby database which is primary cdb (porclcdb)
@@ -97,6 +95,7 @@ sudo podman exec -i -t appclient /bin/bash
 
 2. From the another terminal window, connect to primary container (if not already) and perform Failover to current standby CDB (porclcdb):
 
+
 ```
 <copy>
 sudo podman exec -it primary /bin/bash
@@ -110,12 +109,12 @@ failover to PORCLCDB
 3. From the appclient container, verify that "insert\_records.sh" is running during Failover to porclpdb. Prior to Failover completion, note that HOST_NAME is "standby"
 
 
-![Failover_to_porclcdb_started_when_sorclcdb_is_primary](./images/Failover_to_porclcdb_started_when_sorclcdb_is_primary.png " ")
+![failover_to_porclcdb_started_when_sorclcdb_is_primary](./images/failover_to_porclcdb_started_when_sorclcdb_is_primary.png " ")
 
 
 4. Wait for Failover completion. It may complete soon but sometimes it may take up to 3 minutes in this liveLab environment. You can monitor from appclient terminal that records started inserting again using new primary which is sorclpdb. After Failover completion, note that HOST_NAME is "primary" as expected.
 
-![Failover_to_porclcdb_completed_now_porclcdb_is_primary](./images/Failover_to_porclcdb_completed_now_porclcdb_is_primary.png " ")
+![failover_to_porclcdb_completed_now_porclcdb_is_primary](./images/failover_to_porclcdb_completed_now_porclcdb_is_primary.png " ")
 
 5. After Failover completes, confirm from primary container that porclcdb becomes primary again:
 
@@ -128,7 +127,7 @@ show configuration
 </copy>
 ```
 
-![dgmgrl_configuration_after_Failover_completion](./images/dgmgrl_configuration_after_Failover_completion.png " ")
+![dgmgrl_configuration_after_failover_completion](./images/dgmgrl_configuration_after_failover_completion.png " ")
 
 Application continues to run from primary.
 
@@ -144,7 +143,7 @@ show pdbs
 </copy>
 ```
 
-![startup_standby_after_Failover_completed_confirm_read_only](./images/startup_standby_after_Failover_completed_confirm_read_only.png " ")
+![startup_standby_after_failover_completed_confirm_read_only](./images/startup_standby_after_failover_completed_confirm_read_only.png " ")
 
 "OPEN\_MODE" is now "READ ONLY" and this step confirms that "standby" database is in the desired state.
 
@@ -159,7 +158,7 @@ show configuration
 </copy>
 ```
 
-![after_Failover_to_porclcdb_it_becomes_primary_again](./images/after_Failover_to_porclcdb_it_becomes_primary_again.png " ")
+![after_failover_to_porclcdb_it_becomes_primary_again](./images/after_failover_to_porclcdb_it_becomes_primary_again.png " ")
 
 This step confirms that "insert\_records" test is running with zero data loss during Switchover or Failover.
 Similarly, any other application using global service connections can be verified with zero data loss during Switchover or Failover.
