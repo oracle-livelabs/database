@@ -54,6 +54,7 @@ switchover to sorclcdb
 ```
 
 2. From appclient container, verify that when Switchover from primary to standby gets started, connection errors occurs:
+
 ![Switchover_from_primary_to_standby_started](./images/Switchover_from_primary_to_standby_started.png " ")
 
     Wait for Switchover completion. It may complete soon but sometimes it may take up to 3 minutes in this liveLab environment. You can monitor from appclient terminal that records started inserting again using new primary which is sorclpdb. After Failover completion, note that HOST_NAME is "standby" as expected.

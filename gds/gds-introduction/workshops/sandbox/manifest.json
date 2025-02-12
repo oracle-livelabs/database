@@ -25,7 +25,7 @@
     {
       "title": "Lab 3: Database updates to enable GDS",
       "description": "Database updates to enable GDS",
-      "filename": "../../database-updates-to-enable-GDS/gds-dbs-configuration.md"
+      "filename": "../../database-updates-to-enable-gds/gds-dbs-configuration.md"
     },
     {
       "title": "Lab 4: Oracle GDS Configuration",
@@ -38,8 +38,8 @@
       "filename": "../../gds-global-service-test/gds-global-service-test.md"
     },
     {
-      "title": "Lab 6: Test Switchover and Failover while connecting using Global Services",
-      "description": "Test Switchover and Failover while connecting using Global Services",
+      "title": "Lab 6: Switchover and Failover tests while using Global services",
+      "description": "Switchover and Failover tests while using Global services",
       "filename": "../../gds-switchover-failover/gds-switchover-failover.md"
     },
     {
