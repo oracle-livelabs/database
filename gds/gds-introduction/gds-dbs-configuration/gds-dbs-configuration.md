@@ -16,6 +16,7 @@ This lab assumes you have:
     * Lab: Validate workshop environment
     * Lab: GDS Installation
 
+##
 ## Task 1: Connect to Podman instance of Catalog Primary DB
 
 1. Apply Database Configuration for Catalog which will be used in "create gdscatalog.." at the later stage from gsm1 to apply GDS configuration steps.

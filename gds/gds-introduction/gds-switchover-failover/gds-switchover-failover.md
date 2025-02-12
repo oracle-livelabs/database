@@ -23,6 +23,7 @@ This lab assumes you have:
     * Lab: GDS Configuration using GDSCTL
     * Lab: Prepare a sample Schema and Test Global Service
 
+##
 ## Task 1: Prior to perform Switchover from primary to standby, make sure insert_records.sh is running from appclient container
 
 1. From the appclient container, start the test (if not running already, in a different terminal window):
