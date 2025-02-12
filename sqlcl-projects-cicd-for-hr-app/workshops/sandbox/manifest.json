@@ -1,0 +1,33 @@
+{
+  "workshoptitle": "Development of an application using SQLcl Projects",
+  "help": "livelabs-help-**enterarea**_us@oracle.com",
+  "variables": ["../../variables/variables.json",
+    "../../variables/variables-in-another-file.json"],
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The Introduction is always second for LiveLabs. The title and contents menu title match for the Introduction.",
+      "filename": "../../1-introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Using Oracle Cloud",
+      "filename": "../../2-get-started/get-started-sandbox.md"
+    },
+    {
+      "title": "Lab 1: Application Setup & Change",
+      "description": "This Lab will introduce the application and its setup",
+      "filename": "../../4-application-setup-change/application-setup-change.md"
+    },
+    {
+      "title": "Lab 2: Bonus Lab",
+      "description": "In this lab the learner will explore the app and do a change",
+      "filename": "../../5-bonus-lab/bonus-lab.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}

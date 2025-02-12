@@ -10,7 +10,7 @@ Introducing **SQLcl Projects Extension** a transformative magical tool designed 
 
 During this workshop, you will not only work on adding features to the HR application but also discover how the SQLcl Project Extension can transform your database management practices. The main goal of this workshop is to show you how this extension, designed for more than just database applications, can enhance any application that involves database management. We will explore how this robust extension integrates seamlessly with your CI/CD pipeline, facilitating smooth and error-free database deployments across all environments.
 
-![Image for SQLcl Projects logo and Harry Potter](./../introduction/images/sqlcl-projects-logo.png " ")
+![Image for SQLcl Projects logo and Harry Potter](./../1-introduction/images/sqlcl-projects-logo.png " ")
 
 **Estimated Workshop Time:** 1 hours 30 minutes
 

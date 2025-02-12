@@ -2,20 +2,18 @@
 
 ## Introduction
 
-Welcome aboard! You're about to embark on an exciting project: developing the "Departments" feature for the growing HR application at MoroccanTech Solutions in Casablanca. 
+Welcome aboard! You're about to embark on an exciting project: developing the "Departments" feature for the growing HR application at MoroccanTech Solutions in Casablanca.
 
 ### **The Challenge**
 
-MoroccanTech Solutions is a thriving company experiencing rapid growth. Their current HR systems, while sufficient in the past, are now struggling to keep up with the increasing number of employees and departments. To address this, they need a robust Department Management system to improve efficiency and organization.
+MoroccanTech Solutions is a thriving company experiencing rapid growth. Their current HR systems, while sufficient in the past, are now struggling to keep up with the increasing number of employees and departments. To address this, they need a Department Management system to improve efficiency and organization.
 
 ### **Your Mission**
 
 Before we dive into the code, let's explore the existing HR application. In this lab, you'll:
 
-* **Understand the Current System:** Examine the application to understand its current functionalities and identify areas where the "Departments" feature is needed.
-* **Learn SQLcl and CI/CD:** Utilize SQLcl's project feature to streamline the development and deployment process. You'll also gain hands-on experience with automating database changes and managing them within a CI/CD pipeline.
-
-By the end of this lab, you'll have the skills and knowledge to effectively develop and deploy the "Departments" feature, ensuring a smooth and seamless integration with the existing HR application.
+* **Understand the Current System:** Understand existing functionalities and where the "Departments" feature fits.
+* **Learn SQLcl and CI/CD:** Use SQLcl's project feature for the development and deployment process.
 
 ### **Focus on the Process**
 
@@ -29,20 +27,12 @@ Remember, the primary goal of this lab is to learn the principles of database de
 
 By the end of this lab, you will be able to:
 
-* **Successfully implement and deploy new features:**
-    * Develop and integrate the "Departments" feature into the existing HR application.
-    * Make coordinated changes to both the application code and the underlying database schema.
-    * Utilize SQLcl's project feature to manage and version database changes effectively.
-* **Master core CICD concepts:** 
-    * Understand the importance of development, testing, and production environments.
-    * Learn how to automate database deployments using SQLcl.
-    * Experience the benefits of integrating database CICD.
-* **Gain practical skills:**
-    * Set up and run the application locally.
-    * Explore and understand the application's components and architecture.
-    * Analyze application requirements and design database solutions accordingly.
-    * Troubleshoot and resolve common issues encountered during development and deployment.
-    ![the goal of the lab ](../application-setup-change/images/before-and-after.png " ")
+* Add the new feature to the application with database and code changes.
+* Use SQLcl to manage and deploy database changes.
+* Practice and apply SQLcl project commands through hands-on exploration.
+* Experience and understand the benefits of database CICD
+
+![the goal of the lab ](../application-setup-change/images/before-and-after.png =150%x*)
 
 ### **Prerequisites**
 
@@ -51,53 +41,36 @@ By the end of this lab, you will be able to:
 
 ## Task 1: Understanding Environments and Database CICD Challenges
 
-### **Overview of Development, Testing, and Production Environments:**
+### **Environments Overview**
 
 In this lab, we will focus on two environments:
 
-* **Development (Dev):** 
-    * This is where **you** will work on implementing the new "Departments" and "Analytics" features for our HR application. 
-    * In the Dev environment, the application may have incomplete features, bugs, or unstable behavior as they are still under development.
-* **Production (Prod):** 
-    * This is the live environment where the final, polished version of the application will be available to our company's HR department. 
-    * The application in the Prod environment should be stable, fully functional, and free of major bugs. 
-    * *Our goal in the current and next labs is to successfully deploy the “Departments” and “Analytics” features to the Prod environment.* 
+* **Development (Dev):**
+    * Where you create and fix database changes.
+* **Production (Prod):**
+    * Where you deploy stable and reliable database updates.
+    * *Our goal in the current and next labs is to successfully deploy the “Departments” and “Analytics” features to the Prod environment.*
 
 >**Note:** There are often other environments involved in the development lifecycle (Test, pre-prod, ...) but this workshop just those two ones above that we need.
 
 
-### **Bottlenecks of Traditional Database Deployments**
+### **Challenges of Traditional Database Deployments**
 In traditional database deployments, especially in a manual process, several challenges arise:
 
-- **Manual Interventions:** Deploying database changes often involves manual steps, such as executing SQL scripts, creating database objects, and migrating data. This manual process is prone to human error, time-consuming, and can introduce inconsistencies between environments.
-- **Lack of Automation:** Without automation, it becomes difficult to consistently and reliably deploy changes across different environments (Dev, Test, Prod) in a timely manner. This can significantly slow down the development cycle and hinder the rapid delivery of new features to our users.
-- **Increased Risk of Errors:** Manual deployments increase the risk of introducing bugs, data corruption, or unintended side effects in the production environment. This can lead to downtime, data loss, and negatively impact the user experience.
-Our Goal:
+* **Manual Interventions:** Prone to errors and time-consuming.
+* **No Automation:** Slows down deployments and adds inconsistencies.
+* **High Error Risks:** Bugs and data issues can disrupt production.
 
-This is where our journey with SQLcl Project CICD begins. **You**, faced with the challenges of managing database changes for your new features, will leverage the power of SQLcl to automate deployments, track changes, and ensure a smooth and reliable release process.
+**Our Goal:**
 
-### **Why are we using Project sqlcl and Project CICD ?**
-Database Application Continuous Integration and Continuous Delivery (CI/CD) represents a transformative approach in modern database management and application development. This methodology seamlessly integrates database changes into the development pipeline while ensuring swift and secure deployment to production environments. By combining the rapid feedback mechanisms of Continuous Integration with the streamlined deployment processes of Continuous Delivery, Database CI/CD addresses the critical need for agility and reliability in today's fast-paced software development landscape.
+![Database CI/CD](./images/cicd.png " " )
 
- ![Database CI/CD](./images/cicd.png " " )
-At its core, Database CI/CD aims to:
+Use SQLcl Projects CICD to:
 
-* Accelerate time-to-market for new features and updates.
-* Maintain a consistently high quality of code and database schema.
-* Facilitate immediate issue detection and resolution.
-* Ensure that both application and database components are always in a deployable state.
-This approach not only enhances development efficiency but also significantly improves the end-user experience through frequent, reliable releases.
-
-In this lab, you'll leverage the power of SQLcl's project feature to show the development and deployment of the "Departments" feature. By using SQLcl PROJECT CICD practices, you'll achieve several benefits:
-
-* **Efficient deployments:** Successfully deploy the "Departments" feature to production with minimal risk and maximum efficiency.
-* **Reduced manual effort:** Automate repetitive database deployment tasks, freeing you to focus on development and innovation.
-* **Consistent deployments:** Minimize errors and inconsistencies across environments (Dev and Prod) for a stable and reliable production environment.
-* **Faster development cycles:** Speed up delivery of new features to users.
-* **Hands-on CICD experience:** Gain practical experience implementing and managing database changes within a controlled and automated framework, preparing you for real-world database development projects.
-
-By the end of this lab, you'll have a solid understanding of how to use SQLcl's project feature effectively within a CICD pipeline. This knowledge will empower you to implement similar practices in your own projects and contribute to the success of future database-driven applications.
-
+* Deploy with minimal risk.
+* Automate and ensure consistent deployments.
+* Speed up feature delivery.
+* Gain practical experience for real-world database projects.
 
 ## Task 2: Exploring the Initial Application
 ### **Getting Started With The Application**
