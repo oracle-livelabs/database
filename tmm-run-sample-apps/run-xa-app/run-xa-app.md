@@ -177,7 +177,8 @@ The Teller application is the transaction initiator service, it initiates the XA
 
 6. In the **Amount** group, enter the amount that you want to transfer, and then click **Transfer**.
 
-    Transfer completed successfully message is displayed to indicate that the specified amount has been transfered.
+    Transfer completed successfully message is displayed as shown in the following image to indicate that the specified amount has been transfered.
+    ![Transfer completed successfully](./images/teller-app-transfer-msg.png)
 
 7. Check the balance of both the accounts once more to verify that the correct updated amount is reflected and to confirm that the transaction was completed successfully.
 
