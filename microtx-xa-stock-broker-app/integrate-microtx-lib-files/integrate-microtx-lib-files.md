@@ -44,14 +44,14 @@ Uncomment all the lines of code in the following files to integrate the function
 
 The following section provides reference information about each line of code that you must uncomment and its purpose. You can skip this reading this section if you only want to quickly uncomment the code and run the application. You can return to this section later to understand the purpose of each line of code that you uncomment.
 
-1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is in the `/home/oracle/OTMM/otmm-package/samples/xa/java/bankapp/StockBroker/` folder in any code editor, and then uncomment the following lines of code. The following sample code is for the 23.4.1 release. Provide the correct version, based on the release that you want to use.
+1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is in the `/home/oracle/OTMM/otmm-package/samples/xa/java/bankapp/StockBroker/` folder in any code editor, and then uncomment the following lines of code. The following sample code is for the 24.4.1 release. Provide the correct version, based on the release that you want to use.
 
     ```
     <copy>
     <dependency>
       <groupId>com.oracle.microtx</groupId>
       <artifactId>microtx-spring-boot-starter</artifactId>
-      <version>23.4.1</version>
+      <version>24.4.1</version>
     </dependency>
     </copy>
     ```
@@ -80,7 +80,7 @@ The following section provides reference information about each line of code tha
     </copy>
     ```
 
-5. Uncomment the following line of code to begin an XA transaction to buy stocks.
+5. Uncomment the following line of code under `buy()` to begin an XA transaction to buy stocks.
 
     **Sample command**
 
@@ -176,17 +176,20 @@ To configure the Stock Broker application as a transaction participant:
         PoolXADataSource xapds = null;
         try {
             xapds = PoolDataSourceFactory.getPoolXADataSource();
-            xapds.setConnectionFactoryClassName("oracle.jdbc.xa.client.OracleXADataSource");
-            xapds.setURL(url); //database connection string
-            xapds.setUser(username); //username to access the resource manager
-            xapds.setPassword(password); //password to access the resource manager
+            xapds.setConnectionFactoryClassName(xaConnectionFactoryClassName);
+            xapds.setURL(url);
+            xapds.setUser(username);
+            xapds.setPassword(password);
             xapds.setMinPoolSize(Integer.valueOf(minPoolSize));
             xapds.setInitialPoolSize(Integer.valueOf(initialPoolSize));
             xapds.setMaxPoolSize(Integer.valueOf(maxPoolSize));
-            //Initialize the XA data source object
+            xapds.setValidateConnectionOnBorrow(true);
+            xapds.setInactiveConnectionTimeout(60);
+            xapds.setAbandonedConnectionTimeout(60);
+
             MicroTxConfig.initXaDataSource(xapds);
-        } catch (SQLException ea) {
-            log.severe("Error connecting to the database: " + ea.getMessage());
+            } catch (SQLException ea) {
+            log.error("Error connecting to the database: " + ea.getMessage());
         }
         log.info("PoolXADataSource initialized successfully.");
         return xapds;
@@ -297,5 +300,5 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 
 * **Author** - Sylaja Kannan
-* **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja, June 2023
+* **Contributors** - Brijesh Kumar Deo, Bharath MC, Atul Dhiman, and Anand Verma
+* **Last Updated By/Date** - Sylaja, February 2025

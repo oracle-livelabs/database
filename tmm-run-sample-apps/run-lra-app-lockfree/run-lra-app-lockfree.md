@@ -155,6 +155,8 @@ When you start Minikube, the Travel Agent application which uses Saga is deploye
     </copy>
     ```
 
+It may take upto 45 seconds to initialize the pod, so wait for a minute before you proceed to the next task.
+
 ## Task 4: Run the Travel Agent Application
 
 Run the Travel Agent application to book a hotel room and flight ticket.
