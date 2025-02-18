@@ -1,0 +1,51 @@
+{
+  "workshoptitle": "Use Oracle GDS with Data Guard for Zero Data Loss Apps",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Oracle Global Data Services Overview",
+      "description": "Oracle Global Data Services Overview",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Prerequisites for LiveLabs (Oracle-owned tenancies). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-23ai.md"
+    },
+    {
+      "title": "Lab 1: Validate the workshop environment",
+      "description": "Validate the workshop environment",
+      "filename": "../../validate-workshop-environment/validate-workshop-environment.md"
+    },
+    {
+      "title": "Lab 2: Oracle GDS Installation",
+      "description": "Oracle GDS Installation",
+      "filename": "../../gds-install/gds-install.md"
+    },
+    {
+      "title": "Lab 3: Database updates to enable GDS",
+      "description": "Database updates to enable GDS",
+      "filename": "../../gds-dbs-configuration/gds-dbs-configuration.md"
+    },
+    {
+      "title": "Lab 4: Oracle GDS Configuration",
+      "description": "Oracle GDS Configuration",
+      "filename": "../../gds-configuration/gds-service-configuration.md"
+    },
+    {
+      "title": "Lab 5: Prepare a sample Schema and Test Global Service",
+      "description": "Prepare a sample Schema and Test Global Service",
+      "filename": "../../gds-global-service-test/gds-global-service-test.md"
+    },
+    {
+      "title": "Lab 6: Switchover and Failover tests while using Global services",
+      "description": "Switchover and Failover tests while using Global services",
+      "filename": "../../gds-switchover-failover/gds-switchover-failover.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}
