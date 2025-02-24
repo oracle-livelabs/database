@@ -10,7 +10,7 @@ Some experience in shell commands, react, JavaScript, and HTML are helpful but n
 
 Estimated Time: 10 minutes
 
-### Objectives
+### **Objectives**
 
 In this lab, you will:
 
@@ -19,7 +19,7 @@ In this lab, you will:
 * Add your ORDS APIs to your project's files
 * Start-up the HR Management react application
 
-### Prerequisites
+### **Prerequisites**
 
 * Access to a LiveLabs-provided sandbox environment
 * Access to Database Actions
@@ -63,7 +63,7 @@ This lab assumes you have:
 
       ```sql
       <copy>
-      SELECT * FROM DEV_USER FETCH FIRST 5 ROWS ONLY;
+      SELECT * FROM EMPLOYEES FETCH FIRST 5 ROWS ONLY;
       </copy>
       ```
 
@@ -75,7 +75,7 @@ This lab assumes you have:
 
    Note the data types:
 
-   ![Reviewing the DEV_USER table properties.](images_sandbox/workshop-presentation-four-dot-two.png " ")
+   ![Reviewing the DEV_USER table properties.](images_sandbox/1-show-employees-ddl.png " ")
 
       > **NOTE:** ORDS APIs will be able to handle all of these various data types and send them to your application.
 
@@ -93,9 +93,9 @@ This lab assumes you have:
 
    ![Login to Jupyter lab.](images_sandbox/jupyter-pwd.png " ")
   
-2. Once logged in, you may see several directories. Navigate (i.e., a double or single click on the directory) to the `workshops` directory, then the `SQLcl-Projects-HR-App` directory.
+2. Once logged in, you may see several directories. Navigate (i.e., a double or single click on the directory) to the `workshops` directory, then the `sqlcl-projects-react-app` directory.
 
-   ![Navigating to SQLcl Projects react app directory.](images_sandbox/workshops-app-dir.png " ")
+   ![Navigating to SQLcl Projects react app directory.](images_sandbox/1-navigate-to-app-folder.png " ")
 
 3. Next, navigate to the `scripts` directory, then open the `DEV_USERstream_resource_module_definitions.sql` file.  
 
@@ -106,7 +106,7 @@ This lab assumes you have:
    This file contains the definitions for your Resource Module, Templates, and Handlers, which are your ORDS APIs.  
 
    ![Reviewing the resource definitions file.](images_sandbox/scripts-then-DEV_USERstream-sql.png " ")
-   *Navigate to `ords-flask-app` then `scripts` then `DEV_USERstream_resource_module_definitions.sql`*
+   *Navigate to `sqlcl-projects-react-app` then `scripts` then `DEV_USERstream_resource_module_definitions.sql`*
 
 4. Select all contents and copy the contents to your clipboard. Then, return to the SQL Worksheet.
 
@@ -126,67 +126,54 @@ This lab assumes you have:
 
 3. You've just created the ORDS APIs for the `DEV_USER` user. To review the Resource Module, its Resource Templates and Resource Handlers, navigate to the REST Workshop.
 
+    ![Employees table enabled icon](images_sandbox/1-employees-rest-enabled-icon.png " ")
+
    Click the hamburger menu from the top of Database Actions, then click REST.  
 
-      ![Navigating to the REST Workshop.](images_sandbox/workshop-presentation-eight.png " ")
+      ![Navigating to the REST Workshop.](images_sandbox/1-hamburger-rest.png " ")
 
-4. You'll notice a single Module in the Workshop's Object panel. Click it, then click the `DEV_USERstream` card.
+4. You'll notice a single AUTOREST in the Workshop's Object panel. Click it.
 
-   ![Navigating to the DEV_USERstream resource module.](images_sandbox/workshop-presentation-nine.png " ")
+   ![Navigating to the DEV_USERstream resource module.](images_sandbox/1-autorest.png " ")
 
-5. You'll now see the newly created Resource Templates. Each Template contains a single `GET` Resource Handler. These are your ORDS APIs; you'll rely on them to feed data to your application.
+5. Next, copy this URI's to your clipboard. In a few moments, you will return to the Jupyter lab to input this into the application code.
 
-   ![Acknowledging the resource templates.](images_sandbox/workshop-presentation-ten.png " ")
-
-6. Next, copy each of these URI's to your clipboard. In a few moments, you will return to the Jupyter lab to input these into the application code.
-
-   ![Adding the ORDS URIs to the clipboard](images_sandbox/workshop-presentation-eleven.png " ")
+   ![Adding the ORDS URIs to the clipboard](images_sandbox/1-copy-rest.png " ")
 
 ## Task 4: Jupyter Lab, Part II
 
-1. Navigate back to the Jupyter lab. Once again, locate the `ords-flask-app` directory. Then click on the `ordsflask.py` file to open it.
+1. Navigate back to the Jupyter lab. Once again, locate the `sqlcl-projects-react-app` directory.
 
-   ![Locating the ordsflask python file.](images_sandbox/navigate-to-flask-py-file-for-inserting-ords-apis.png " ")
+2. Replace the temporary URI with the one you captured in the previous lab. The ORDS URI ending in `/dev_user/employees` will go here.
 
-     > You will notice two request variables, `r1` and `r2`. They will both have temporary, placeholder URIs.
+3. Modify the `.env` file: In your application's root directory, update the hidden .env file, which stores essential configuration variables for runtime.
 
-2. Replace the `r1` temporary URI with the one you captured in the previous lab. The ORDS URI ending in `/DEV_USER-genre` will go here.  
+4. Add Environment Variables:
+    - Edit the `.env` file with:
+            ```
+        <copy> 
+            vi .env
+        </copy>
+        ``` 
+    - Press Esc + I to enter insert mode.
+    - Navigate to the placeholders and enter the variables.
+    - Press Esc, then type :wq to save and exit.
+    - Add the following variables, replacing placeholders with actual values:
 
-   ![Reviewing r1 variable before ords apis.](images_sandbox/r1-pre-ords-changes.png " ")
+        ```
+        BASE_URL=your_oci_url (e.g.,(https://123-databasename.adb.eu-amsterdam.oraclecloudapps.com/ords/)
+        DB_USERNAME=DEV_USER
+        ```
+        * `BASE_URL`: This variable stores the base URL for your ORDS REST service endpoint.
+        * `DB_USERNAME`: This variable stores the username for your development database user. Ensure this username matches the one you configured in the previous lab.
+
+   ![Open the environment variable file](images_sandbox/1-dot-env-file-opened.png " ")
    *Refer to ~ Line 21 in the Editor.*  
 
       > **NOTE:** This should be in the form of: `http://Your Lab's IP:Your Lab's Port Number/ords/DEV_USER/myDEV_USERs/DEV_USER-genre`. Make sure you double-quote the URI; as can be seen in the image below.  
 
    ![Reviewing r1 variable after ords apis.](images_sandbox/r1-post-ords-changes.png " ")
    *At or near Line 21, should look similar to the above image.*
-
-3. Next, replace the `/r2` temporary URI with the `/DEV_USER-all` URI.
-
-   ![Reviewing r2 variable before ords apis.](images_sandbox/r2-variable-pre-ords-api-changes.png " ")
-   *Refer to ~ Line 73 in the Editor.*  
-
-     > **NOTE:** This should be in the form of: `http://Your Lab's IP:Your Lab's Port Number/ords/DEV_USER/myDEV_USERs/DEV_USER-all`. Make sure you double-quote the URI and retain the `params=data1` portion as can be seen in the image below.
-
-   ![Reviewing r2 variable after ords apis.](images_sandbox/r2-variable-post-ords-api-changes.png " ")
-   *At or near Line 73, should look similar to the above image.*
-
-4. Verify that your `r1` and `r2` variables are structured like those in the image. Then, save your changes.
-
-5. Next, locate the `static` directory, then open the `functions.js` file. Here, you will see another ORDS URI placeholder at or near Line 12.  
-
-   ![Locating the function js file.](images_sandbox/locating-the-function-js-file-for-ords-changes.png " ")
-
-6. Replace it with your `/DEV_USER-single/:id` URI.
-
-   ![Locating the fetch api, before ords changes.](images_sandbox/fetch-pre-ords-changes.png " ")
-
-7. Verify that your `const response = ...` is structured exactly as the image shows (your URI will differ). Then, save your changes.  
-
-   > **NOTE:** This should be in the form of: `http://Your Lab's IP:Your Lab's Port Number/ords/DEV_USER/myDEV_USERs/DEV_USER-single/${DEV_USER_id}`. Make sure you
-   > remove the ORDS-provided `:id` portion of the URI. The JavaScript `Fetch()` API requires the *new* URI to be structured this way. Compare your new
-   > URI to the one in the image, it should look similar.
-
-   ![Modifying the function.js file.](images_sandbox/fetch-post-ords-changes.png " ")
 
 ## Task 5: Start the React application
 
@@ -195,22 +182,20 @@ This lab assumes you have:
    > **NOTE:** If a new Launcher window is not present, you can click the Blue Box (the box with the `+` inside) to open a new Launcher. Then you may 
    > open a new Terminal.
 
-   ![Launching a new terminal.](images_sandbox/workshop-presentation-fourteen-one.png " ")  
+   ![Launching a new terminal.](images_sandbox/1-launch-terminal.png " ")  
 
 2. Verify you are in the correct directory by:  
 
-    1. First issuing the **`cd workshops`** command.
-    2. You may then issue the **`ls`** command to list the files and directories in the `workshops` directory.
-    3. Next issue the **`cd SQLcl-Projects-HR-Application`** command to enter into the `ords-flask-app` directory.
+    ![Run the application](images_sandbox/1-print-working-directory.png " ")
 
 3. Next, issue the following command:
 
       ```sh
-      <copy>python ordsflask.py</copy>
+      <copy>npm run dev</copy>
       ```
 
-    ![Verify in the correct folder.](images_sandbox/workshop-presentation-fourteen-two.png " ")
-    *The Flask development server will start up.*
+    ![Run the application](images_sandbox/1-run-the-app.png " ")
+    *The React development server will start up.*
 
 4. Your application will be available on port `5000`. However, you will need to open the application in a new tab. Modify the URL, so you are using the one provided to you for this lab *plus* port `5000`.  
 
@@ -223,13 +208,23 @@ This lab assumes you have:
 
    ![Navigating to your application.](images_sandbox/secure-site-not-available-warning.png " ")
 
-6. The ORDS application will load.  
+6. The HR application will load. Scroll right left or up down to see all the infos.
 
-   ![ORDS application up and running.](images_sandbox/application-up-and-running.png " ")
+   ![HR application up and running.](images_sandbox/1-application-up-and-running.png " ")
 
-7. With the application running, we'll next explore the ORDS APIs and how they feed data to your application.
+   ![Light mode vs dark mode](images_sandbox/1-light-vs-dark-mode.png " ")
 
-8. You may now [proceed to the next lab](#next).  
+   ![Update records page](images_sandbox/1-update-records-page.png " ")
+
+   ![Departments page](images_sandbox/1-departments-page.png " ")
+
+Oh, the departments page is missing! That's what will be the subject of the next lab. Let's jump to the next lab to implement this new feature. You may now [proceed to the next lab](#next).
+
+Oh no, the departments page is missing! But don’t worry—that’s exactly what we’ll tackle next. Get ready to dive into the [next lab](#next) and bring this feature to life!
+
+Wait… where’s the departments page? Looks like we’ve got some work to do! Jump into the [next lab](#next) and let’s unlock this new feature together!
+
+Uh-oh! The departments page is missing! But here’s your chance to build it. Let’s dive into the [next lab](#next) and bring this feature to life!
 
 ## Learn More
 

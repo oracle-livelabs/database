@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Development of an application using SQLcl Projects",
+  "workshoptitle": "Database CI/CD for a React & Node.js Application",
   "help": "livelabs-help-**enterarea**_us@oracle.com",
   "variables": ["../../variables/variables.json",
     "../../variables/variables-in-another-file.json"],
@@ -15,12 +15,17 @@
       "filename": "../../2-get-started/get-started-sandbox.md"
     },
     {
-      "title": "Lab 1: Application Setup & Change",
+      "title": "Lab 1: Application development and deployment",
+      "description": "This Lab will introduce the application and its setup",
+      "filename": "../../3-application-dev-deploy/application-dev-deploy.md"
+    },
+    {
+      "title": "Lab 2: Database CI/CD with SQLcl Projects",
       "description": "This Lab will introduce the application and its setup",
       "filename": "../../4-application-setup-change/application-setup-change.md"
     },
     {
-      "title": "Lab 2: Bonus Lab",
+      "title": "Lab 3: Challenge yourself",
       "description": "In this lab the learner will explore the app and do a change",
       "filename": "../../5-bonus-lab/bonus-lab.md"
     },
