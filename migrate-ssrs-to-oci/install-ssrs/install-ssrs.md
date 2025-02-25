@@ -20,7 +20,7 @@ This lab assumes you have:
 
 1. RDP to the Bastion host server using the username .\opc and password. From the Bastion host, opens the Remote Desktop and connect to the Microsoft SSRS server using the private IP Address.
 
-2. Download the Microsoft SQL Server Reporting Services (SSRS) binaries from the [link](https://www.microsoft.com/en-us/download/confirmation.aspx?id=100122) from the browser. 
+2. Download the Microsoft SQL Server Reporting Services (SSRS) binaries from the [link](https://www.microsoft.com/en-us/download/details.aspx?id=100122) from the browser. 
 
 ##  Task 2: Install Microsoft SQL Server Reporting Services (SSRS)
 
