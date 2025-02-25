@@ -36,6 +36,12 @@ This lab assumes you have:
 
     ![View Login info.](images_sandbox/return-to-workshop-login-information.png " ")
 
+    You’ve been provided with the necessary information for this workshop: 
+    
+     * **JupyterLab URL:** Click to access JupyterLab.
+     * **Users with their password:** Use these to log in when needed.
+     * **SQL Developer Web (Database Actions):** For database-related tasks.
+
     ![Database Actions URI in Lab.](images_sandbox/sql-developer-web-uri-first-time.png " ")
 
 2. Several users have been created for you, including a new `DEV_USER` user. Its schema has already been REST-enabled, meaning you will be able to Sign in to Database Actions.
@@ -97,7 +103,7 @@ This lab assumes you have:
 
    ![Navigating to SQLcl Projects react app directory.](images_sandbox/1-navigate-to-app-folder.png " ")
 
-3. Next, navigate to the `scripts` directory, then open the `DEV_USERstream_resource_module_definitions.sql` file.  
+<!--3. Next, navigate to the `scripts` directory, then open the `DEV_USERstream_resource_module_definitions.sql` file.  
 
     > **TIP:** You may open a file by clicking on the file name *or* right-clicking a file and choose to "Open with > Editor".  
     >
@@ -112,7 +118,7 @@ This lab assumes you have:
 
     > **TIP:** Refer to Task 1, Step 1 for keyboard shortcuts for copy and paste actions.
 
-   ![Copying contents of the DEV_USERstream module.](images_sandbox/the-DEV_USERstream-resource-module.png " ")
+   ![Copying contents of the DEV_USERstream module.](images_sandbox/the-DEV_USERstream-resource-module.png " ")-->
 
 ## Task 3: Database Actions, Part II
 
@@ -161,30 +167,26 @@ This lab assumes you have:
     - Add the following variables, replacing placeholders with actual values:
 
         ```
-        BASE_URL=your_oci_url (e.g.,(https://123-databasename.adb.eu-amsterdam.oraclecloudapps.com/ords/)
+        BASE_URL=your_oci_url
         DB_USERNAME=DEV_USER
         ```
         * `BASE_URL`: This variable stores the base URL for your ORDS REST service endpoint.
         * `DB_USERNAME`: This variable stores the username for your development database user. Ensure this username matches the one you configured in the previous lab.
 
    ![Open the environment variable file](images_sandbox/1-dot-env-file-opened.png " ")
-   *Refer to ~ Line 21 in the Editor.*  
 
-      > **NOTE:** This should be in the form of: `http://Your Lab's IP:Your Lab's Port Number/ords/DEV_USER/myDEV_USERs/DEV_USER-genre`. Make sure you double-quote the URI; as can be seen in the image below.  
-
-   ![Reviewing r1 variable after ords apis.](images_sandbox/r1-post-ords-changes.png " ")
-   *At or near Line 21, should look similar to the above image.*
+      > **NOTE:** This should be in the form of: `http://Your Lab's IP:Your Lab's Port Number/ords/DEV_USER`. Make sure you double-quote the URI; as can be seen in the image below.
 
 ## Task 5: Start the React application
 
-1. From the Jupyter Launcher, open a new Terminal.  
+1. From the Jupyter Launcher, open a new Terminal.
 
    > **NOTE:** If a new Launcher window is not present, you can click the Blue Box (the box with the `+` inside) to open a new Launcher. Then you may 
    > open a new Terminal.
 
-   ![Launching a new terminal.](images_sandbox/1-launch-terminal.png " ")  
+   ![Launching a new terminal.](images_sandbox/1-launch-terminal.png " ")
 
-2. Verify you are in the correct directory by:  
+2. Verify you are in the correct directory by:
 
     ![Run the application](images_sandbox/1-print-working-directory.png " ")
 
@@ -218,11 +220,11 @@ This lab assumes you have:
 
    ![Departments page](images_sandbox/1-departments-page.png " ")
 
-Oh, the departments page is missing! That's what will be the subject of the next lab. Let's jump to the next lab to implement this new feature. You may now [proceed to the next lab](#next).
+<!--Oh, the departments page is missing! That's what will be the subject of the next lab. Let's jump to the next lab to implement this new feature. You may now [proceed to the next lab](#next).-->
 
-Oh no, the departments page is missing! But don’t worry—that’s exactly what we’ll tackle next. Get ready to dive into the [next lab](#next) and bring this feature to life!
+<!--Oh no, the departments page is missing! But don’t worry—that’s exactly what we’ll tackle next. Get ready to dive into the [next lab](#next) and bring this feature to life!-->
 
-Wait… where’s the departments page? Looks like we’ve got some work to do! Jump into the [next lab](#next) and let’s unlock this new feature together!
+<!--Wait… where’s the departments page? Looks like we’ve got some work to do! Jump into the [next lab](#next) and let’s unlock this new feature together!-->
 
 Uh-oh! The departments page is missing! But here’s your chance to build it. Let’s dive into the [next lab](#next) and bring this feature to life!
 
@@ -234,5 +236,5 @@ Uh-oh! The departments page is missing! But here’s your chance to build it. Le
 
 ## Acknowledgements
 
-* **Authors** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of Technical Staff, SQLcl
-* **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, December 2024
+* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, SQLcl
+* **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, February 2025

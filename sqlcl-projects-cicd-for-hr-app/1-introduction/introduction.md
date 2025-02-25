@@ -2,7 +2,7 @@
 
 ## About this Workshop
 
-Welcome to this workshop! As a developer at MoroccanTech Solutions, you have been assigned the task of adding new features for the HR application. With the company's growth, the complexities of managing both the application and its database have also increased.
+Welcome to this workshop! As a developer at a Tech Company Solutions, you have been assigned the task of adding new features for the HR application. With the company's growth, the complexities of managing both the application and its database have also increased.
 
 While many developers recognize the advantages of CI/CD pipelines for automating application deployments, the integration of database CI/CD is frequently overlooked. Manually managing database updates, rollbacks, and migrations can result in significant errors and delays. Imagine if the process of managing database changes could be as straightforward as deploying application code.
 
@@ -16,9 +16,9 @@ During this workshop, you will not only work on adding features to the HR applic
 
 ### **Objectives**
 
-The main objective of this workshop is let you discover the database CICD tool in SQLcl and learn how to use it and get benefit from it for you own projects.
+The main objective of this workshop is to explore the database CICD tool in SQLcl and learn how to use and get benefit from it for you own projects.
 
-![ci/cd](./../1-introduction/images/cicd.png " ")
+![ci/cd](./../1-introduction/images/database-cicd.png " ")
 
 In this workshop, you will learn how to:
 
@@ -50,5 +50,5 @@ By the end of this workshop, you will possess the expertise to optimize your dat
 
 ## Acknowledgements
 
-* **Authors** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of Technical Staff, SQLcl
-* **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, December 2024
+* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, SQLcl
+* **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, February 2025

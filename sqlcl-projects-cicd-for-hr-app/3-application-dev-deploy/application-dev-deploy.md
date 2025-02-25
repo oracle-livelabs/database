@@ -22,7 +22,11 @@ Now that your application is up and running, this lab will guide you through dev
 
 ### **Environments Overview**
 
-In this lab, we will focus on two environments:
+Database CI/CD ensures synchronization between two databases, allowing us to deploy changes from a source database to a target database and keep them in sync.
+
+![source and target database](./images/source-target-database.png " " )
+
+In this lab, we will work with these two environments:
 
 * **Development (Dev):**
     * Where you create and fix database changes.
@@ -160,9 +164,9 @@ There are no rows (data) now. Which is normal because we changed the schema (env
 In a traditional approach, we would manually apply changes to the production database, increasing the risk of errors and inconsistencies. But with **SQLcl Projects**, we can automate database changes and bring the power of **CI/CD** to database management!
 ![Traditional Approach vs SQLcl Projects Approach](./images/traditional-approach-vs-projects.png " ")
 
-Ready to fix this issue and explore **SQLcl Projects**? Let's jump into the next lab and get it done!
+Ready to fix this issue and explore **SQLcl Projects**? Let's jump into the [next lab](#next) and get it done!
 
-Let's fix this issue and dive into SQLcl Projects in the next lab!
+<!--Let's fix this issue and dive into SQLcl Projects in the next lab!-->
 
 ## Learn More
 
@@ -171,5 +175,5 @@ Here are some useful links if you want to know more about Oracle Cloud :
 
 ## Acknowledgements
 
-* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Member of Technical Staff, SQLcl
-* **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, December 2024
+* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, SQLcl
+* **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, February 2025

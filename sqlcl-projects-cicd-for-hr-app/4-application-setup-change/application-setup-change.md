@@ -2,12 +2,15 @@
 
 ## Introduction
 
-Welcome aboard! You're about to embark on an exciting project: developing the "Departments" feature for the growing HR application at MoroccanTech Solutions in Casablanca.
-The SQLcl Projects contain many commands: we will explore them all in this lab
+Welcome aboard! You're about to embark on an exciting project: developing the "Departments" feature for the growing HR application.
+
+The SQLcl Projects contains many commands: we will explore them all in this lab.
 
 ### **The Challenge**
 
-MoroccanTech Solutions is a thriving company experiencing rapid growth. Their current HR systems, while sufficient in the past, are now struggling to keep up with the increasing number of employees and departments. To address this, they need a Department Management system to improve efficiency and organization.
+The Tech Company Solutions is a thriving company experiencing rapid growth. Their current HR systems, while sufficient in the past, are now struggling to keep up with the increasing number of employees and departments. To address this, they need a Department Management system to improve efficiency and organization.
+
+![Database cicd](./images/database-cicd.png " ")
 
 ### **Your Mission**
 
@@ -117,9 +120,10 @@ By the end of this lab, you will be able to:
         ```
 
     * Create a new git branch and switch to it for this feature:
+    > **Note:** You can choose the name you want for your branch. It doesn’t have to match this one.
             ```
         <copy>
-        !git checkout -b TICKET-1-Departments
+        !git checkout -b TICKET-1-Departments2
         </copy>
         ```
      This creates a new branch named "TICKET-1-Departments" where you will develop and test the "Departments" feature.
@@ -240,11 +244,13 @@ In the next section, we will learn how to deploy these changes to the production
     * Execute the following command to deploy the changes to the production database:
         ```
     <copy>
-        project deploy -file artifact/artifact-2.O.zip  -verbose
+        project deploy -file artifact-2.O.zip  -verbose
     </copy>
     ```
-    ![project deploy ](../application-setup-change/images/project-deploy-prodUser.png " ")
+    ![project deploy ](./images/project-deploy.png " ")
     * This command applies the changes defined in the release artifact to the production database without recreating existing schema objects.
+    * If you check now you find the departments table in the PROD_USER
+    ![Departments table in PROD_USER ](./images/departments-prod-user.png " ")
 
 * **Run the Production Application:**
     * Restart the application using the production environment variables.
@@ -263,5 +269,5 @@ Click [here](https://docs.oracle.com/en/database/oracle/sql-developer-command-li
 
 ## Acknowledgements
 
-- **Author** - Fatima AOURGA & hruser AIT HAMMOU, Junior Member of Technical Staff, SQLcl
-- **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, December 2024
+* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, SQLcl
+* **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, February 2025
