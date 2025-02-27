@@ -122,13 +122,9 @@ This lab assumes you have:
 
 ## Task 3: Database Actions, Part II
 
-1. Navigate to the SQL Worksheet. Then paste (easily done with keyboard shortcuts) the contents of the `DEV_USERstream_resource_module_definitions.sql` file to the SQL Worksheet.
-
-   ![Paste module definitions in sql worksheet.](images_sandbox/paste-module-definition-in-sql-worksheet.png " ")
+1. Navigate to the SQL Worksheet. Then paste (easily done with keyboard shortcuts) the contents of the `users.sql` file to the SQL Worksheet.
   
 2. Click the `Run Script` icon. Upon completion, a `PL/SQL procedure successfully completed` message will appear in the `Script Output` tab.
-
-   ![Running the resource module script.](images_sandbox/plsql-procedure-successfully-completed.png " ")
 
 3. You've just created the ORDS APIs for the `DEV_USER` user. To review the Resource Module, its Resource Templates and Resource Handlers, navigate to the REST Workshop.
 

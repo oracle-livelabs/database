@@ -157,14 +157,16 @@ All right, so now we will go to the .env file and replace **DEV\_USER** with **P
 
 ![Departments-page](./images/departments-unlocked.png " ")
 
-There are no rows (data) now. Which is normal because we changed the schema (environment) from DEV\_UER (development environment) to PROD_USER (production environment)
+There are no rows at the moment, which is expected because we switched from DEV_USER (development environment) to PROD_USER (production environment), where the departments table doesn’t exist yet. You can verify this by connecting to the PROD_USER schema and checking its tables.
+
+![No departments table in prod](./images/prod-user-tables.png " ")
 
 **What would be the next ?**
 
 In a traditional approach, we would manually apply changes to the production database, increasing the risk of errors and inconsistencies. But with **SQLcl Projects**, we can automate database changes and bring the power of **CI/CD** to database management!
 ![Traditional Approach vs SQLcl Projects Approach](./images/traditional-approach-vs-projects.png " ")
 
-Ready to fix this issue and explore **SQLcl Projects**? Let's jump into the [next lab](#next) and get it done!
+Ready to fix this issue and explore **SQLcl Projects** and get the databases synched? Let's jump into the [next lab](#next) and get it done!
 
 <!--Let's fix this issue and dive into SQLcl Projects in the next lab!-->
 

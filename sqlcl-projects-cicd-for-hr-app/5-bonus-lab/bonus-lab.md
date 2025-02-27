@@ -147,31 +147,8 @@ Your task is to update the database by adding the performancereviews and attenda
 
 <details><summary>**Hint**</summary>
 
-* Use SQLcl to create the tables with appropriate columns and data types.
-    * **`attendance` Table**
+Run the SQL scripts (attendance\_table.sql and performancereviews\_table.sql) in the scripts folder, just as you did previously for the employees and departments tables.
 
-    | Column Name      | Data Type       | Constraints             |
-    |------------------|-----------------|------------------------|
-    | ATTENDANCE_ID    | NUMBER(38)      | NOT NULL PRIMARY KEY   |
-    | EMPLOYEE_ID      | NUMBER(38)      |                        |
-    | CHECK_IN         | TIMESTAMP(6)    |                        |
-    | CHECK_OUT        | TIMESTAMP(6)    |                        |
-    | STATUS           | VARCHAR2(20)    |                        |
-    
-    * **`performancereviews` Table**
-
-    | Column Name         | Data Type       | Constraints            |
-    |----------------------|-----------------|-----------------------|
-    | REVIEW_ID           | NUMBER(38)      | NOT NULL PRIMARY KEY   |
-    | EMPLOYEE_ID         | NUMBER(38)      |                        |
-    | REVIEW_DATE         | DATE            |                        |
-    | PERFORMANCE_SCORE   | NUMBER(3,2)     |                        |
-    | GOALS_ACHIEVED      | VARCHAR2(255)   |                        |
-    | AREAS_IMPROVEMENT   | VARCHAR2(255)   |                        |
-    | REVIEWER_ID         | NUMBER(38)      |                        |
-    | NEXTREVIEWDATE      | DATE            |                        |
-
-* Consider adding sample data to the tables to test the analytics functionality.
 </details>
 
 <details><summary>**Solution**</summary>
@@ -186,36 +163,24 @@ Your task is to update the database by adding the performancereviews and attenda
 
 * **Step 2: Create Tables**
 
-Copy and past this in the SQLcl or the SQL Developer Web sql worksheet.
-            ```sql
-            CREATE TABLE attendance (
-                ATTENDANCE_ID NUMBER(38) NOT NULL PRIMARY KEY,
-                EMPLOYEE_ID NUMBER(38),
-                CHECK_IN TIMESTAMP(6),
-                CHECK_OUT TIMESTAMP(6),
-                STATUS VARCHAR2(20)
-            );
+    * **Using SQLcl:**
+        * Make sure you are in the scripts directory.
+        * Execute the attendance\_table.sql and performancereviews\_table.sql
+                ```sql
+                    @attendance_table.sql
+                ```
+                ```sql
+                    @performancereviews_table.sql
+                ```
 
-            CREATE TABLE performancereviews (
-                REVIEW_ID NUMBER(38) NOT NULL PRIMARY KEY,
-                EMPLOYEE_ID NUMBER(38),
-                REVIEW_DATE DATE,
-                PERFORMANCE_SCORE NUMBER(3,2),
-                GOALS_ACHIEVED VARCHAR2(255),
-                AREAS_IMPROVEMENT VARCHAR2(255),
-                REVIEWER_ID NUMBER(38),
-                NEXT_REVIEW_DATE DATE
-            );
-            ```
-            -- Insert sample data into tables
-            ```
-            INSERT INTO attendance (EMPLOYEE_ID, CHECK_IN, CHECK_OUT, STATUS) VALUES (1, TO_DATE('2024-07-01', 'YYYY-MM-DD'), TO_DATE('2024-07-01 17:00', 'YYYY-MM-DD HH24:MI'), 'Present'); 
-            -- Insert more sample data as needed
-            ```
+    * **Using SQL Developer Web:**
+    Copy and past the content of the tabes scripts to SQL Developer Web sql worksheet and run the script.
 
 * **Step 3: Refresh the application**
 
-Refresh the application window to view the Analytics page with the data.
+    Refresh the application window to view the Analytics page with the data.
+
+    ![Analytics page working](./images/analytics-page-works.png " ")
 
 </details>
 
@@ -254,25 +219,24 @@ Refresh the application window to view the Analytics page with the data.
         ```
     </details>-->
 
-
 ## Challenge 3: Deploy The Database Changes To The Target Database
 
 Our target database in this case is the PROD_USER schema (production database), though it could be any other database.
 
 To deploy changes, we will follow the SQLcl Projects workflow, just like in the previous lab.
 
-> **Challenge:** Apply SQLcl Projects workflow
+> **Challenge:** Deploy to production (PROD_USER)
 
 <details><summary>**Hint**</summary>
-
-1. Deploy the application to production by changing the user in the .env file to PROD_USER.
+Follow the same steps as in the previous lab, applying SQLcl Projects commands until you deploy and get the Analytics feature working.
+<!--1. Deploy the application to production by changing the user in the .env file to PROD_USER.
 2. The Analytics page will not work if you refresh and check it, as PROD_USER doesn’t contain the two new tables.
 3. In SQLcl, connect as DEV_USER and navigate to the application folder.
-4. Create a new branch and check out to it for future changes
+4. Create a new branch and check out to it for future changes.
 5. Export the new objects from DEV_USER.
 6. Run the subsequent commands after the export, as in the previous lab, until you generate the artifact.
 7. Connect to PROD_USER and run the deploy command to apply the changes.
-8. Refresh the application. The Analytics page should work correctly.
+8. Refresh the application. The Analytics page should work correctly.-->
 
 <!--1. Deploy the application to production by changing the user in the .env file to PROD_USER
 2. The Analytics page will not work now if you refresh and check it cause PROD_USER does't contain the two new tables
@@ -283,12 +247,31 @@ To deploy changes, we will follow the SQLcl Projects workflow, just like in the 
 7. Connect to PROD_USER and run deploy command to deploy the changes to it
 8. Refresh the application. The Analytics page should work fine.-->
 
-    ![Analytics page working](./images/analytics-page-works.png " ")
-
 </details>
 
 <details><summary>**Solution**</summary>
-* Commit your changes:
+
+1. Change the username in the .env file from DEV\_USER to PROD\_USER.
+2. Refresh the application window. The Analytics page will not work as PROD_USER doesn’t contain the two new tables yet. Which you will ensure using SQLcl Projects.
+3. In SQLcl, connect as DEV_USER and navigate to the application folder.
+4. Create a new branch and check out to it for upcoming changes.
+5. Export the new objects from DEV_USER.
+    ![Project-export](./images/project-export.png " ")
+6. Add, commit then stage
+    * Add and commit your changes
+        ![Git add and commit](./images/git-add-commit.png " ")
+        ![Project stage](./images/project-stage.png " ")
+7. Checkout to main and then merge the previous branch to it.
+    ![Merge to main](./images/merge-to-main.png " ")
+8. Project release and gen-artifact
+    * Project release
+        ![Project release](./images/project-release.png " ")
+    * Project gen-artifact
+        ![Project-gen-artifact](./images/project-gen-artifact.png " ")
+9. Connect to PROD_USER and run the deploy command to apply the changes.
+
+10. Refresh the application. The Analytics page should work correctly.
+<!--* Commit your changes:
             ```
             git add -A
             git commit -m "Added basic Analytics functionality"
@@ -329,8 +312,8 @@ To deploy changes, we will follow the SQLcl Projects workflow, just like in the 
             ```
             project deploy -file [NameOfYourArtifact].zip
             ```
-
-    ![Analytics page working](./images/analytics-page-works.png " ")
+-->
+![Analytics page working](./images/analytics-page-works.png " ")
 
 Congratulations, Developer! You've successfully navigated this challenging lab and created a valuable system for MoroccanTech Solutions. By completing the labs , you've demonstrated a strong understanding of database development, version control, and deployment practices. You've also gained valuable experience with SQLcl and its powerful project management capabilities.
 

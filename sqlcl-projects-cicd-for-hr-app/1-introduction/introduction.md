@@ -2,13 +2,13 @@
 
 ## About this Workshop
 
-Welcome to this workshop! As a developer at a Tech Company Solutions, you have been assigned the task of adding new features for the HR application. With the company's growth, the complexities of managing both the application and its database have also increased.
+As a developer at Tech Company Solutions, you’ve been tasked with adding new features to the HR application. As the company grows, so do the challenges of managing both the application and its database.
 
-While many developers recognize the advantages of CI/CD pipelines for automating application deployments, the integration of database CI/CD is frequently overlooked. Manually managing database updates, rollbacks, and migrations can result in significant errors and delays. Imagine if the process of managing database changes could be as straightforward as deploying application code.
+Many developers appreciate the benefits of CI/CD pipelines for automating application deployments, yet database CI/CD integration is often overlooked. Manually handling database updates, rollbacks, and migrations can lead to significant errors and delays. What if managing database changes could be as seamless as deploying application code?
 
-Introducing **SQLcl Projects Extension** a transformative magical tool designed to enhance database CI/CD. This extension offers automation, consistency, and reliability in database management, enabling developers like you to manage database changes effectively and without the typical challenges.
+Meet the **SQLcl Projects CI/CD workflow** a powerful tool designed to revolutionize database development. SQLcl brings automation, consistency, and reliability to database management, empowering developers like you to handle changes efficiently and overcome common obstacles.
 
-During this workshop, you will not only work on adding features to the HR application but also discover how the SQLcl Project Extension can transform your database management practices. The main goal of this workshop is to show you how this extension, designed for more than just database applications, can enhance any application that involves database management.
+In this workshop, you’ll not only enhance the HR application with new features but also explore how the SQLcl Projects feature can transform your database management practices. Our goal is to demonstrate how this versatile extension—built to support more than just database applications—can elevate any project involving database management.
 
 ![SQLcl Projects logo](./../1-introduction/images/sqlcl-projects-logo.png " ")
 
@@ -16,37 +16,36 @@ During this workshop, you will not only work on adding features to the HR applic
 
 ### **Objectives**
 
-The main objective of this workshop is to explore the database CICD tool in SQLcl and learn how to use and get benefit from it for you own projects.
+This workshop explores the database CICD tool in SQLcl and demonstrates how to use it for you database development projects.
 
 ![ci/cd](./../1-introduction/images/database-cicd.png " ")
 
 In this workshop, you will learn how to:
 
-* Make changes in an existing application
+* Update an existing application and it's associated database objects
 * Deploy the changes to the production database
-* See and understand the difficulties of synching with DEV database before the SQLcl Projects
-* Use SQLcl Projects extension to manage you database changes
-* Realize how the database CICD tool saves time and effort for you
+* Address the difficulties of synching with DEV database instances
+* Use SQLcl `project` command to manage you database changes
 
 ### **Prerequisites**
 
 This workshop requires the following:
 
-* Basic knowledge in development practices
-* Basic knowledge in database concepts
+* Basic knowledge in development practices, including Git
+* Experience with SQL and database schema design
 
-**NB:** No worries, we will help you create all what you need, so you need just to follow the labs and the given steps and instructions.
+**This lab has been built for the beginner**: simply follow the labs and the given steps and instructions. We provide the database, application, code, and SQLcl/Git instructions.
 
-By the end of this workshop, you will possess the expertise to optimize your database workflows and deploy your changes confidently using SQLcl. 
+Upon completion of this lab, you will understand the process of implementing CI/CD for your database applications using using SQLcl.
 
 **Let's get started!**
 
 ## Learn More
 
-* [Database Application CI/CD Doc](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/database-application-ci-cd.html#GUID-6A942F42-A365-4FF2-9D05-6DC2A0740D24)
-* [Liquibase feature in SQLcl Doc](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/using-liquibase.html)
 * [Oracle SQLcl Doc](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/working-sqlcl.html)
-* [Video demos for SQLcl Projects (Office hours)](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/working-sqlcl.html)
+* [Oracle SQLcl Project & CI/CD Docs](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/database-application-ci-cd.html#GUID-6A942F42-A365-4FF2-9D05-6DC2A0740D24)
+* [Oracle SQLcl Liquibase Docs](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/using-liquibase.html)
+* [Video overview and demonstration for SQLcl Projects](https://youtu.be/qCc-f24HLCU?si=3z-aRBdzu_QhixJ9&t=182)
 
 ## Acknowledgements
 
