@@ -1,0 +1,319 @@
+# CI/CD for Database Deployments
+
+## Introduction
+
+Welcome aboard! You're about to embark on an exciting project: developing the "Departments" feature for the growing HR application.
+
+The SQLcl Projects contains many commands: we will explore them all in this lab.
+
+### **The Challenge**
+
+The Tech Company Solutions is a thriving company experiencing rapid growth. Their current HR systems, while sufficient in the past, are now struggling to keep up with the increasing number of employees and departments. To address this, they need a Department Management system to improve efficiency and organization.
+
+![Database cicd](./images/database-cicd.png " ")
+
+### **Your Mission**
+
+Before we dive into the code, let's explore the existing HR application. In this lab, you'll:
+
+* **Understand the Current System:** Understand existing functionalities and where the "Departments" feature fits.
+* **Learn SQLcl and CI/CD:** Use SQLcl's project feature for the development and deployment process.
+
+### **Focus on the Process**
+
+Remember, the primary goal of this lab is to learn the principles of database development and deployment using SQLcl and CI/CD practices. The specific technology used in the application itself is not the main focus.
+
+**Estimated Workshop Time:** 14 minutes
+
+### **Objectives**
+
+By the end of this lab, you will be able to:
+
+* Add the new feature to the application with database and code changes.
+* Use SQLcl to manage and deploy database changes.
+* Practice and apply SQLcl project commands through hands-on exploration.
+* Experience and understand the benefits of database CICD
+
+### **Prerequisites**
+
+* Completion of Lab 1 and Lab 2
+* Basic understanding of Git
+
+## Task 1: Initialize Project (project init)
+
+* **Connecting to DEV_USER via SQLcl:**
+    1. Launch SQLcl in the jupyter terminal
+            ```sql
+      <copy>
+        sql SYS/[PASSWORD]@[IP_ADD:PORT]/FREEPDB1 as sysdba
+      </copy>
+      ```
+      ![Launch SQLcl](./images/launch-sqlcl.png " ")
+
+    2. Connect to the DEV_USER schema using connect command
+            ```sql
+      <copy>
+        connect DEV_USER/[PASSWORD]
+      </copy>
+      ```
+      ![Connect to DEV_USER](./images/connect-to-dev-user.png " ")
+
+>**Note:** You can clear your screen anytime you want by using:
+        ```sql
+    <copy>
+        cle scr
+    </copy>
+        ```
+
+* **Project Initialization:**
+
+    * Make sure you are it the application folder before running SQLcl Projects commands
+
+        ![Check the current working dir](./images/print-woking-dir.png " ")
+
+    * Initializing project
+    ```sql
+      <copy>
+        project init -name HrManager -schemas DEV_USER -verbose
+      </copy>
+      ```
+      ![Run project init command](./images/project-init.png " ")
+
+      The `project init` command initializes a new SQLcl PROJECTS project, setting up the necessary directories and files for managing your database objects and changes within your current directory.
+
+    * **Project Structure:**
+        * SQLcl Projects use a specific folder structure to manage database objects and changes. 
+        * Key folders include:
+            * **`.dbtools`:** This folder contains project configuration files, filters, and formatting rules.
+            * **`src`:** This folder stores exported objects from the database, organized by schema and object type.
+            * **`dist`:** This folder contains the distributable for each release
+
+
+            ```text
+            ──.dbtools
+            │   ├── filters
+            │   │   └── project.filters
+            │   ├── project.config.json
+            │   └── project.sqlformat.xml
+            ├── dist
+            │   ├── README.md
+            │   └── install.sql
+            └── src
+                ├── README.md
+                └── database
+                    ├── README.md
+                    └── hr
+            ```
+        * List all, to see the generated project folders
+        ![List all](./images/list-generated-dirs.png " ")
+        ![List all](./images/list-dirs.png " ")
+
+    <!--<details>  <summary> **Screenshots:**</summary>
+    ![ init ](./images/project-init-output.png " ")
+    </details>-->
+
+    * Initialize git
+            ```sql
+        <copy>
+        !git init --initial-branch main
+        </copy>
+        ```
+
+    * Create a new git branch and switch to it for this feature:
+        ```sql
+    <copy>
+    !git checkout -b TICKET-1-Departments2
+    </copy>
+    ```
+
+    > **Note:** You can choose the name you want for your branch. It doesn’t have to match this one.
+    
+    This creates a new branch named "TICKET-1-Departments" where you will develop and test the "Departments" feature.
+
+## Task 2: Set Configuration (project config)
+
+Since the source and target databases have different schemas, we need to set emitSchema (a setting in the project.config.json file under the .dbtools folder) to false. This setting determines whether the object name will be prefixed with its schema (fully qualified).
+
+```sql
+<copy>
+    project config -list -name export.setTransform.emitSchema
+</copy>
+```
+```sql
+<copy>
+    project config set -name export.setTransform.emitSchema -value false
+</copy>
+```
+
+![Set emitSchema to false](./images/set-emitschema-false.png " ")
+
+## Task 3: Export Database Changes (project export)
+
+* **Export Database Objects:**
+
+    * Execute the following command to export the newly created "Departments" table to the application folder:
+        ```sql
+    <copy>
+     project export -schemas DEV_USER -verbose
+    </copy>
+        ```
+
+    ![Run project export command](./images/project-export.png " ")
+
+* This command **exports database objects** into your repository.
+
+* Locate the exported object files in the database folder
+
+    ![Exported Objects](./images/database-folder-location.png " ")
+
+* Double click on the 'departments.sql' to see its content
+
+    ![Departments.sql content](./images/departments-sql-content.png " ")
+
+* **Now we have made the database changes, we export our objects to have them included in our project folders.**
+
+## Task 4: Stage Changes (project stage)
+
+* **Stage Changes:**
+
+    * Add and commit changes before stage
+        ```sql
+    <copy>
+        !git add .
+    </copy>
+        ```
+    ```sql
+    <copy>
+        !git commit -m "Add departments feature"
+    </copy>
+        ```
+    ![Add and commit changes](./images/git-add-commit.png " ")
+
+    * Execute the following command to stage the changes for release
+            ```sql
+        <copy>
+            project stage -verbose
+        </copy>
+            ```
+    ![project stage](./images/project-stage.png " ")
+
+    This command prepares the staged changes for release by creating a release artifact in the `dist` folder.
+
+* **Add custom scripts**
+
+    You can add custom scripts using the **add-custom** sub-command of the stage command
+
+    * Execute the following command to add the custom file to the stage
+                ```sql
+            <copy>
+                project stage add-custom -file-name departments.sql -verbose
+            </copy>
+                ```
+        ![project stage add-custom](./images/project-stage-add-custom.png " ")
+
+        A custom folder will be added to the dist folder containing the created custom sql files
+
+    * Copy the inserts of the departments table from scripts/departments_table and put them in that created custom file
+
+        ![Insert data in the custom script](./images/insert-into-custom.png " ")
+        <!--TODO: add commit-->
+
+* **Merge to main branch:**
+        ```sql
+    <copy>
+        !git checkout main
+    </copy>
+        ```
+        ```sql
+    <copy>
+        !git merge TICKET-1-Departments2
+    </copy>
+        ```
+    ![Merge branch with main ](./images/merge-branch-to-main.png " ")
+
+* **Resolve any merge conflicts:** (If necessary)
+
+## Task 5: Release Changes (project release)
+
+* Once your changes are merged into the main branch, execute the following command to create a release:
+        ```sql
+    <copy>
+        project release -version 2.0
+    </copy>
+        ```
+    ![Project release](./images/project-release.png " ")
+
+* This command creates a release folder with the specified version.
+
+## Task 6: Generate Deployable Artifact (project gen-artifact)
+
+* The `project gen-artifact` command can be used to generate an artifact for your database changes. This artifact can then be easily deployed to different environments.
+        ```sql
+    <copy>
+        project gen-artifact -name artifact
+    </copy>
+        ```
+    ![Project gen-artifact](./images/project-gen-artifact.png " ")
+
+* If you return to the application folder, you will fid an new folder **artifact** created, and it contains our generated zip artifact.
+
+    ![Artifact folder](./images/artifact-folder.png " ")
+
+In the next section, we will learn how to deploy these changes to the production environment using SQLcl and explore advanced CICD concepts.
+
+## Task 7: Deploying to Production (project deploy)
+
+* **Connect to the Production Database:**
+    * Establish a connection to the production database using SQLcl.
+    * Use the `connect` command with the `PROD_USER` credentials.
+
+        ```sql
+    <copy>
+        connect PROD_USER/[PASSWORD]
+    </copy>
+        ```
+    ![Connect to prod](./images/connect-to-production.png " ")
+
+* **Deploy Changes to Production:**
+
+    * Execute the following command to deploy the changes to the production database:
+        ```sql
+    <copy>
+        project deploy -file artifact-2.O.zip  -verbose
+    </copy>
+    ```
+        ![project deploy ](./images/project-deploy.png " ")
+
+    * This command applies the changes defined in the release artifact to the production database without recreating existing schema objects.
+
+    * If you check now you find the departments table in the PROD_USER. But what are the other tables ?
+
+        ![Departments table in PROD_USER ](./images/departments-prod-user.png " ")
+
+* **SQLcl Liquibase**
+
+    The other three tables created are Liquibase tables. Liquibase is the engine behind the SQLcl Projects tool, executing the `liquibase update` command behind the scenes. It checks for differences between the source and target databases—if differences exist, it applies the necessary changes to synchronize them; if not, no action is taken.
+
+    <!--The other three created tables are liquibase tables. Liquibase is the engine of the SQLcl Projects tool that apply its command 'liquibase update' behiend scens to check if there is any differences between the source and target database, if they are it apply the changes to get them synched, if they are not, it does't do anything. So it checks that there are diffs before doing anything.-->
+
+    ![Liquibase](./images/liquibase-logo.png " ")
+
+* **Run the Production Application:**
+    * Restart the application using the production environment variables.
+    * Verify that the "Departments" feature is functioning correctly in the production environment.
+    * Perform thorough testing to ensure that all aspects of the feature are working as expected.
+
+* **The department section, should locks like this:**
+
+    ![Departments data working in the app](./images/departments-data-appearing-in-the-app.png " ")
+
+**Congratulations!** You have successfully implemented and deployed the "Departments" feature and release the version 2 of the application using SQLcl and CICD practices. You have gained valuable experience in managing database changes, automating deployments, and working with a CICD pipeline.
+
+## Learn More
+
+Click [here](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/introduction.html?utm_source=pocket_shared) for documentation on using SQLcl Projects.
+
+## Acknowledgements
+
+* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, SQLcl
+* **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, February 2025
