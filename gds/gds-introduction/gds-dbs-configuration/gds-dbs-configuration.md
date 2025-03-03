@@ -1,93 +1,158 @@
-# Database updates for enabling GDS
+# Database Updates for Enabling GDS
 
-Database(s) needs to be GDS enabled before configuring GDS using GDSCTL. In this lab, we'll run the shell scripts which has the SQL commands for database configurations.
-*Estimated Time*:  15 minutes
+##  Introduction
 
-### Objectives
+Before configuring GDS using GDSCTL, each database must be GDS-enabled. In this lab, we will execute shell scripts containing the necessary SQL commands for database configuration.
+
+*Estimated Lab Time*:  ~15 Minutes
+
+**Objectives**
 
 In this lab, you will:
 
-* Configure each Database for commands to be run using sysdba.
-* Verify Database are ready, so that we can start GDS configuration using GDSCTL in the next lab.
-### Prerequisites
-This lab assumes you have:
-* A Free Tier, Paid or LiveLabs Oracle Cloud account
-* You have completed:
-    * Lab: Validate workshop environment
+* Configure each database by executing the required commands as SYSDBA.
+* Verify that the databases are ready for GDS configuration, which will be performed using GDSCTL in the next lab.
+
+**Prerequisites**
+
+Before starting this lab, ensure that you have:
+* A Free Tier, Paid, or LiveLabs Oracle Cloud account.
+* Successfully completed the following prerequisite labs:
+    * Lab: Validate Workshop Environment
     * Lab: GDS Installation
 
-## 
-## Task 1: Connect to Podman instance of Catalog Primary DB
+## Task 1: Configure the Catalog Database
+Before proceeding with GDS configuration, the GDS Catalog Database must be prepared. The GDS Catalog database can be a standalone or shared database and will contain the GDS catalog (a repository of metadata about the GDS configuration such as regions, database pools, global services, etc.).
 
-1. Apply Database Configuration for Catalog which will be used in "create gdscatalog.." at the later stage from gsm1 to apply GDS configuration steps.
+This task ensures that the database is properly configured before running the CREATE GDSCATALOG command, which will be executed later from gsm1.
 
-You will run "configure_catalog.sh" which mainly:
+
+**What This Configuration Does**
+
+You will run the script configure_catalog.sh. This script performs the following tasks on the GDS Catalog database:
 *   Unlocks GSMCATUSER on both CDB and PDB of the catalog database.
 *   Enables ARCHIVELOG, FLASHBACK, and FORCE LOGGING if not enabled.
 *   Restarts database in READ WRITE mode.
 
-```
-<copy>
-sudo podman exec -it catalog /bin/bash
-# View the contents of "configure_catalog.sh". This file doesn't need any updates for this LiveLab task.
-cat configure_catalog.sh
 
-# Run the script
-./configure_catalog.sh
-exit
-</copy>
-```
+**Steps to Configure the Catalog Database**
 
-## Task 2: Connect to Podman instance of Primary Database for Application
+1.	Access the Catalog Database container:
+    ```nohighlighting
+    <copy>
+    sudo podman exec -it catalog /bin/bash
+    </copy>
+    ```
+2.	View the contents of configure_catalog.sh (No modifications are required for this LiveLab task):
+    ```nohighlighting
+    <copy>
+    cat configure_catalog.sh
+    </copy>
+    ```
+3.	Execute the script to apply the necessary configurations:
+    ```nohighlighting
+    <copy>
+    ./configure_catalog.sh
+    </copy>
+    ```
+4.	Exit the container session:
+    ```nohighlighting
+    <copy>
+    exit
+    </copy>
+    ```
 
-1. Prepare Primary Database for the application. This primary database will be used in "add database" at later stage from gsm1 to apply GDS configuration steps.
+## Task 2: Configure the Primary Database for the Application
+Before proceeding with GDS configuration, the Primary Database must be prepared. This task ensures that the database is properly configured before the ADD DATABASE command is executed later from gsm1.
 
-You will run "configure_primary.sh" which mainly:
-*   Unlocks GSMUSER on both CDB and PDB of the primary database.
-*   Unlocks GSMROOTUSER on CDB only of the primary database.
-*   Enables ARCHIVELOG, FLASHBACK, and FORCE LOGGING if not enabled.
-*   Restarts database in READ WRITE mode.
 
-```
-<copy>
-sudo podman exec -it primary /bin/bash
-# View the contents of "configure_primary.sh". This file doesn't need updates for this LiveLab task.
-cat configure_primary.sh
+**What This Configuration Does**
+ 
+You will run the script configure_primary.sh, which performs the following tasks:
 
-# Run the script
-./configure_primary.sh
-exit
-</copy>
-```
+*   Unlocks GSMUSER in both the CDB and PDB of the primary database.
+*   Unlocks GSMROOTUSER in the CDB only of the primary database.
+*   Enables ARCHIVELOG, FLASHBACK, and FORCE LOGGING (if not already enabled).
+*   Restarts the database in READ WRITE mode.
 
-## Task 3: Connection to Podman instance of StandBy Database for Application Data
 
-1. Though no updates needed at this time for the standby database, you can still verify its PDB is in READ ONLY mode.
+**Steps to Configure the Primary Database**
+ 
+1.	Access the Primary Database container:
+    ```nohighlighting
+    <copy>
+    sudo podman exec -it primary /bin/bash
+    </copy>
+    ```
+2.	View the contents of configure_primary.sh (No modifications are required for this LiveLab task):
+    ```nohighlighting
+    <copy>
+    cat configure_primary.sh
+    </copy>
+    ```
+3.	Execute the script to apply the necessary configurations:
+    ```nohighlighting
+    <copy>
+    ./configure_primary.sh
+    </copy>
+    ```
+4.	Exit the container session:
+    ```nohighlighting
+    <copy>
+    exit
+    </copy>
+    ```
 
-```nohighlighting
-<copy>
-sudo podman exec -it standby /bin/bash
-# Login as sysDBA and Verify that PDBs are in READ ONLY OPEN MODE 
-sqlplus / as sysdba;
-show pdbs;
-select open_mode from v$database;
-# To exit from standby container and return to opc@oraclegdshost
-exit
-exit
-</copy>
-```
+## Task 3: Verify the Standby Database for Application Data
 
-![standby-verify](./images/standby-verify.png " ")
+Although no updates are required for the standby database at this stage, you can verify that its PDB is in READ ONLY mode.
 
-This completes database tasks.
+**Steps to Verify the Standby Database**
+ 
+1.	Access the Standby Database container:
+    ```nohighlighting
+    <copy>
+    sudo podman exec -it standby /bin/bash
+    </copy>
+    ```
+2.	Log in as SYSDBA and verify the PDB open mode:
+    ```nohighlighting
+    <copy>
+    sqlplus / as sysdba
+    </copy>
+    ```
+3.	Check the status of all PDBs:
+    ```nohighlighting
+    <copy>
+    show pdbs
+    </copy>
+    ```
+4.	Confirm that the database is in READ ONLY mode:
+    ```nohighlighting
+    <copy>
+    select open_mode from v$database;
+    </copy>
+    ```
+5.	Exit the SQL session and container:
+    ```nohighlighting
+    <copy>
+    exit
+    </copy>
+    ```
+    ![standby-verify](./images/standby-verify.png " ")
 
-Note: Review the contents of each of the database scripts to get familiar with the necessary steps needed prior to GDSCTL configuration steps.
+## Conclusion
+ 
+Database Configuration Completed.
 
-Since You have installed GSM already, now you can perform the next Lab **GDS Configuration using GDSCTL**
+This concludes the database configuration tasks.
+
+**Note**: It is recommended to review the contents of each database script to understand the key configuration elements required before proceeding with GDSCTL setup. Now that GSM is installed, you are ready to move on to the next lab: Oracle GDS Configuration
 
 You may now **proceed to the next lab**
+
 
 ## Acknowledgements
 * **Author** - Ajay Joshi, Distributed Database Product Management
 * **Contributors** - Ravi Sharma, Vibhor Sharma, Jyoti Verma, Param Saini, Distributed Database Product Management
-* **Last Updated By/Date** - Ajay Joshi, February 2025
+* **Last Updated By/Date** - Ajay Joshi, March 2025
