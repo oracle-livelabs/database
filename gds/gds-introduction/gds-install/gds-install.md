@@ -4,15 +4,13 @@
 
 To manage the GDS environment, the Global Data Services Control Utility (GDSCTL) is used for setup, configuration, and administration.
 
-**GDS Installation Overview**
-
 Installing Oracle Global Data Services (GDS) involves two key steps:
 1. Installing the Global Service Manager (GSM) software.
 2. Creating a GDS catalog in either a new or an existing database.
 
 Once installed, global services are configured within a target database pool, which typically consists of a primary database and one or more standby or replica databases.
 
-*Estimated Lab Time*:  ~15 Minutes
+Estimated Time: 15 Minutes
 
 **Objectives**
 
@@ -213,7 +211,7 @@ For high availability, you can install GDS on "gsm2" container. To do so:
     - Repeat Task 2, Task 3, and Task 4 inside the gsm2 container.
 
     
-##  Note: Why Install GDS on Multiple GSM Containers?
+**Note:** Why Install GDS on Multiple GSM Containers?
     
 If gsm1 becomes unavailable due to patching, maintenance, or an unplanned event, gsm2 will automatically take over as the primary GSM, ensuring continuous service availability. Multiple Global Service Managers (GSMs) enhance redundancy and fault tolerance. Once gsm2 is installed, it can be included in the database connection string for seamless failover.
 

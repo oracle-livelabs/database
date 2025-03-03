@@ -10,7 +10,7 @@ A Global Data Services configuration looks like a virtual multi-instance databas
 
 A Global Data Services configuration and its global services are created and managed using the GDS Control Utility (GDSCTL) command-line interface (CLI). The GDSCTL CLI is similar to the SRVCTL CLI that is used to manage an Oracle RAC Database and its services.
 
-*Total Estimated Workshop Time:* 2 hours
+**Total Estimated Workshop Time: 2 hours**
 
 **Global Service Manager (GSM)**:
 
@@ -36,7 +36,7 @@ This includes:
 - Testing and validating global services in action using the GDS Control Utility (GDSCTL)
 - Switchover and Failover tests using Global services
 
-*Note: This workshop uses Podman containers for simplicity.*
+**Note:** This workshop uses Podman containers for simplicity.
 
 **Prerequisites**
 

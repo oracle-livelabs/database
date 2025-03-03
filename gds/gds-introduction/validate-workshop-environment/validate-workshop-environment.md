@@ -4,7 +4,7 @@
 
 In this lab, you will review the status of the Podman containers required to successfully run this workshop.
 
-*Estimated Lab Time:* ~5 Minutes
+Estimated Time: 5 Minutes
 
 **Objectives**
 
@@ -63,10 +63,8 @@ Ensure that the following Podman containers are actively running:
       To stop and start all containers simultaneously, use:
 
    ```nohighlighting
-   <copy>
    sudo podman container stop $(sudo podman container list -qa)
    sudo podman container start $(sudo podman container list -qa)
-   </copy>
    ```
 
 ## Conclusion

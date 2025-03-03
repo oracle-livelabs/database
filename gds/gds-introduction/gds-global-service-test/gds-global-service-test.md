@@ -4,7 +4,7 @@
 
 Now that GDS Global Services are configured, they can be used in database connection strings. These connection strings can be utilized from various client applications, including SQL, PL/SQL, Java, Python, and more.
 
-*Estimated Lab Time*: ~15 Minutes
+Estimated Lab Time: 15 Minutes
 
 **Objectives**
 

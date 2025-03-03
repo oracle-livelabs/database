@@ -4,7 +4,7 @@
 Now that Global Services and Data Guard are configured (as per the previous lab), it’s time to test Switchover and Failover scenarios.
 During these tests, application continuity should be maintained with zero data loss for connections using Global Services.
 
-*Estimated Lab Time*: ~30 Minutes
+Estimated Time: 30 Minutes
 
 **Objectives**
 

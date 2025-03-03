@@ -3,7 +3,7 @@
 ## Introduction
 Now that the databases have been prepared in the previous lab "Database Updates for Enabling GDS," it's time to configure Oracle GDS to enable Global Services using GDSCTL.
 
-*Estimated Lab Time*:  ~30 Minutes
+Estimated Time: 30 Minutes
 
 **Objectives**
 

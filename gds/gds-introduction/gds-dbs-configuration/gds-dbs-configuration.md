@@ -4,7 +4,7 @@
 
 Before configuring GDS using GDSCTL, each database must be GDS-enabled. In this lab, we will execute shell scripts containing the necessary SQL commands for database configuration.
 
-*Estimated Lab Time*:  ~15 Minutes
+Estimated Time: 15 Minutes
 
 **Objectives**
 
