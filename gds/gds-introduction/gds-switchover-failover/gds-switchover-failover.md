@@ -282,7 +282,8 @@ Similarly, any other application using Global Service connections can be verifie
 
 This completes the Oracle GDS Introduction LiveLabs.
 
+
 ## Acknowledgements
-* **Author** - Ajay Joshi, Distributed Database Product Management
-* **Contributors** - Ravi Sharma, Vibhor Sharma, Jyoti Verma, Param Saini, Distributed Database Product Management
+* **Authors** - Ajay Joshi, Ravi Sharma, Distributed Database Product Management
+* **Contributors** - Vibhor Sharma, Jyoti Verma, Param Saini, Distributed Database Product Management
 * **Last Updated By/Date** - Ajay Joshi, March 2025

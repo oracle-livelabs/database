@@ -49,7 +49,8 @@ You may now **proceed to the next lab**
 
 - [Introduction to Global Data Services](https://docs.oracle.com/en/database/oracle/oracle-database/23/gsmug/intro-global-data-services.html#GUID-415B8BB5-5C8D-4C78-8E76-43DB1648E467)
 
+
 ## Acknowledgements
-* **Author** - Ajay Joshi, Distributed Database Product Management
-* **Contributors** - Ravi Sharma, Vibhor Sharma, Jyoti Verma, Param Saini, Distributed Database Product Management
+* **Authors** - Ajay Joshi, Ravi Sharma, Distributed Database Product Management
+* **Contributors** - Vibhor Sharma, Jyoti Verma, Param Saini, Distributed Database Product Management
 * **Last Updated By/Date** - Ajay Joshi, March 2025

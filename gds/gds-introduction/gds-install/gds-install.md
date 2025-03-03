@@ -2,13 +2,15 @@
 
 ## Introduction
 
-### GDS Installation Overview
+To manage the GDS environment, the Global Data Services Control Utility (GDSCTL) is used for setup, configuration, and administration.
+
+**GDS Installation Overview**
 
 Installing Oracle Global Data Services (GDS) involves two key steps:
 1. Installing the Global Service Manager (GSM) software.
 2. Creating a GDS catalog in either a new or an existing database.
 
-Once installed, global services are configured within a target database pool, which typically consists of a primary database and one or more standby or replica databases. To manage the GDS environment, the Global Data Services Control Utility (GDSCTL) is used for setup, configuration, and administration.
+Once installed, global services are configured within a target database pool, which typically consists of a primary database and one or more standby or replica databases.
 
 *Estimated Lab Time*:  ~15 Minutes
 
@@ -226,6 +228,6 @@ You may now **proceed to the next lab**
 
 
 ## Acknowledgements
-* **Author** - Ajay Joshi, Distributed Database Product Management
-* **Contributors** - Ravi Sharma, Vibhor Sharma, Jyoti Verma, Param Saini, Distributed Database Product Management
+* **Authors** - Ajay Joshi, Ravi Sharma, Distributed Database Product Management
+* **Contributors** - Vibhor Sharma, Jyoti Verma, Param Saini, Distributed Database Product Management
 * **Last Updated By/Date** - Ajay Joshi, March 2025

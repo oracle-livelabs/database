@@ -3,8 +3,8 @@
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
-      "title": "Oracle Global Data Services Overview",
-      "description": "Oracle Global Data Services Overview",
+      "title": "Introduction to Oracle Global Data Services (GDS)",
+      "description": "Introduction to Oracle Global Data Services (GDS)",
       "filename": "../../introduction/introduction.md"
     },
     {
