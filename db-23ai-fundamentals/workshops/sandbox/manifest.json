@@ -31,6 +31,11 @@
           "filename": "../../new-duality-views/new-duality-views.md"
       },
       {
+          "title": "Lab: JSON Collections and MongoDB API",
+          "description": "Create JSON Collections and use MongoDB API",
+          "filename": "../../../23aifree/json-collections/json-collections-mongo.md"
+      },
+      {
           "title": "Lab: Property Graphs",
           "description": "Building Property Graphs",
           "type": "livelabs",
