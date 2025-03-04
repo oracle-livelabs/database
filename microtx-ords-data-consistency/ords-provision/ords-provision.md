@@ -47,7 +47,7 @@ This lab assumes you have:
     * Lab 2: Environment setup
 * Logged in using remote desktop URL as an `oracle` user. If you have connected to your instance as an `opc` user through an SSH terminal using auto-generated SSH Keys, then you must switch to the `oracle` user before proceeding with the next step.
 
- ```text
+  ```text
   <copy>
   sudo su - oracle
   </copy>
@@ -88,40 +88,67 @@ This lab assumes you have:
     </copy>
     ```
 
-3. Reset the password for the `SYS` user by logging into the catalog database with the default password.
+3. Run the following commands, in the specified order, to log into the catalog database with the default password, and then reset the password for the `SYS` user.
 
     ```SQL
     <copy>
-    sql sys/Passw0rd@FREE as sysdba
-    SQL> ALTER USER SYS IDENTIFIED BY [new-user-password];
-    SQL> ALTER USER SYSTEM IDENTIFIED BY [new-user-password];
-    SQL> commit;
-    SQL> exit;
+    sys/Passw0rd@FREE as sysdba
+    </copy>
+    ```
+
+    ```SQL
+    <copy>
+    ALTER USER SYS IDENTIFIED BY [new-user-password];
     </copy>
     ```
 
     Where, `[new-user-password]` is the new password that you specify for FREE, a catalog database.
 
-## Task 2: Grant Privileges to the Schema in FREEPDB1
-
-1. Login to FREEPDB1 using the default username and password.
-
     ```SQL
     <copy>
-    sql sys/Passw0rd@FREEPDB1 as sysdba
+    ALTER USER SYSTEM IDENTIFIED BY [new-user-password];
     </copy>
     ```
 
-2. Change the default password.
-
     ```SQL
     <copy>
-    ALTER USER OTMM IDENTIFIED BY [<new-freepdb1-password>]; 
     commit;
     </copy>
     ```
 
-    Where, `<new-freepdb1-password>` is the new password that you want to set for the `OTMM` schema user.
+    ```SQL
+    <copy>
+    exit;
+    </copy>
+    ```
+
+## Task 2: Grant Privileges to the Schema in FREEPDB1
+
+1. Login to FREEPDB1 as SYS user.
+
+    ```SQL
+    <copy>
+    sys/[new-user-password]@FREEPDB1 as sysdba
+    </copy>
+    ```
+
+    Where, `[new-user-password]` is the new password that you specify for the `SYS` user in a previous task.
+
+2. Change the password for the OTMM user.
+
+    ```SQL
+    <copy>
+    ALTER USER OTMM IDENTIFIED BY [new-freepdb1-password];
+    </copy>
+    ```
+
+    Where, `[new-freepdb1-password]` is the new password that you want to set for the `OTMM` schema user.
+
+    ```SQL
+    <copy>
+    commit;
+    </copy>
+    ```
 
 3. Run the following commands to grant privileges to the schema.
 
@@ -155,35 +182,49 @@ This lab assumes you have:
 
     Where, `OTMM` is the name of the user that can access the schema.
 
-4. Commit the changes and exit from SQL prompt.
+4. Commit the changes.
 
     ```SQL
     <copy>
-    SQL> commit;
-    SQL> exit;
+    commit;
+    </copy>
+    ```
+
+5. Exit SQL prompt.
+
+    ```SQL
+    <copy>
+    exit;
     </copy>
     ```
 
 ## Task 3: Grant Privileges to the Schema in FREEPDB2
 
-1. Login to FREEPDB2 using the default username and password.
+1. Login to FREEPDB1 as SYS user.
 
     ```SQL
     <copy>
-    sql sys/Passw0rd@FREEPDB2 as sysdba
+    sys/[new-user-password]@FREEPDB1 as sysdba
     </copy>
     ```
 
-2. Change the default password.
+    Where, `[new-user-password]` is the new password that you specify for the `SYS` user in a previous task.
+
+2. Change the password for the OTMM user.
 
     ```SQL
     <copy>
-    ALTER USER OTMM IDENTIFIED BY [<new-freepdb2-password>]; 
+    ALTER USER OTMM IDENTIFIED BY [new-freepdb2-password];
+    </copy>
+    ```
+
+    Where, `[new-freepdb2-password]` is the new password that you want to set for the `OTMM` schema user.
+
+    ```SQL
+    <copy>
     commit;
     </copy>
     ```
-
-    Where, `<new-freepdb2-password>` is the new password that you want to set for the `OTMM` schema user.
 
 3. Run the following commands to grant privileges to the schema.
 
@@ -217,18 +258,32 @@ This lab assumes you have:
 
     Where, `OTMM` is the name of the user that can access the schema.
 
-4. Commit the changes and exit from SQL prompt.
+4. Commit the changes.
 
     ```SQL
     <copy>
-    SQL> commit;
-    SQL> exit;
+    commit;
+    </copy>
+    ```
+
+5. Exit SQL prompt.
+
+    ```SQL
+    <copy>
+    exit;
     </copy>
     ```
 
 ## Task 4: Set Up Department 1
 
-1. Enter the SQL Developer web URL, `http://localhost:8080/ords/sql-developer`, to access Department 1 database.
+1. Enter the SQL Developer web URL to access Department 1 database.
+
+    ```text
+    <copy>
+    http://localhost:8080/ords/sql-developer
+    </copy>
+    ```
+
     A sign-in page for Database Actions is displayed.
 
 2. Enter the new password that you have specified earlier, `<new-freepdb1-password>`, to access the FREEPDB1 database as `OTMM` schema user.
@@ -239,13 +294,25 @@ This lab assumes you have:
 
     ![Click on SQL](./images/click-sql.png)
 
-4. Open the `tmmxa.sql` SQL script file which is located at `/home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/lib`.
+4. Open the `tmmxa.sql` SQL script file which is located in the following folder.
+
+    ```text
+    <copy>
+    /home/oracle/OTMM/otmm-package/samples/xa/plsql/lib 
+    </copy>
+    ```
 
 5. Click **Run as SQL script** to run the `tmmxa.sql` SQL script file.
 
     ![Click Run as SQL script](./images/run-sql-script.png)
 
-6. Open the `ordsapp.sql` SQL script file which is located at `/home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/databaseapp`.
+6. Open the `ordsapp.sql` SQL script file which is located in the following folder.
+
+    ```text
+    <copy>
+    /home/oracle/OTMM/otmm-package/samples/xa/plsql/databaseapp 
+    </copy>
+    ```
 
 7. In the script, search for `resManagerId` and enter a unique resource manager ID to identify the database in both the `deposit` and `withdraw` handlers.
 
@@ -257,12 +324,6 @@ This lab assumes you have:
     </copy>
     ```
 
-    ```text
-    <copy>
-    resManagerId VARCHAR2(256):= ''DEPT1-RM'';
-    </copy>
-    ```
-
 7. Click **Run as SQL script** to run the `ordsapp.sql` SQL script file.
 
     ![Click Run as SQL script](./images/run-sql-script.png)
@@ -271,7 +332,13 @@ This lab assumes you have:
 
 ## Task 5: Set Up Department 2
 
-1. Enter the SQL Developer web URL, `http://localhost:8080/ords/pool2/sql-developer`, to access Department 2 database.
+1. Enter the SQL Developer web URL to access Department 2 database.
+
+    ```text
+    <copy>
+    http://localhost:8080/ords/pool2/sql-developer
+    </copy>
+    ```
 
     A sign-in page for Database Actions is displayed.
 
@@ -283,13 +350,25 @@ This lab assumes you have:
 
     ![Click on SQL](./images/click-sql.png)
 
-4. Open the `tmmxa.sql` SQL script file which is located at `/home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/lib`.
+4. Open the `tmmxa.sql` SQL script file which is located in the following folder.
+
+    ```text
+    <copy>
+    home/oracle/OTMM/otmm-package/samples/xa/plsql/lib
+    </copy>
+    ```
 
 5. Click **Run as SQL script** to run the script file.
 
     ![Click Run as SQL script](./images/run-sql-script.png)
 
-6. Open the `ordsapp.sql` SQL script file which is located at `/home/oracle/OTMM/otmm-23.4.1/samples/xa/plsql/databaseapp`.
+6. Open the `ordsapp.sql` SQL script file which is located in the following folder.
+
+    ```text
+    <copy>
+    /home/oracle/OTMM/otmm-package/samples/xa/plsql/databaseapp
+    </copy>
+    ```
 
 7. In the script, search for `resManagerId` and enter a unique resource manager ID to identify the database in both the `deposit` and `withdraw` handlers.
 
@@ -298,12 +377,6 @@ This lab assumes you have:
     ```text
     <copy>
     resManagerId VARCHAR2(256):= ''DEPT2-RM''; 
-    </copy>
-    ```
-
-    ```text
-    <copy>
-    resManagerId VARCHAR2(256):= ''DEPT2-RM'';
     </copy>
     ```
 
@@ -343,4 +416,4 @@ You may now **proceed to the next lab.**
 
 * **Author** - Sylaja Kannan
 * **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja Kannan, February 2024
+* **Last Updated By/Date** - Sylaja Kannan, September 2024

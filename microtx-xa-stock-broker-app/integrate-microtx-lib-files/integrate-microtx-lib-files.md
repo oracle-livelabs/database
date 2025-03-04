@@ -39,24 +39,24 @@ This lab assumes you have:
 
 Uncomment all the lines of code in the following files to integrate the functionality provided by the MicroTx client libraries with the Stock Broker application.
 
-* `pom.xml` file located in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/StockBroker/` folder
+* `pom.xml` file located in the `/home/oracle/OTMM/otmm-package/samples/xa/java/bankapp/StockBroker/` folder
 * `UserStockTransactionServiceImpl.java` file located in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application
 
 The following section provides reference information about each line of code that you must uncomment and its purpose. You can skip this reading this section if you only want to quickly uncomment the code and run the application. You can return to this section later to understand the purpose of each line of code that you uncomment.
 
-1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/StockBroker/` folder in any code editor, and then uncomment the following lines of code. The following sample code is for the 23.4.1 release. Provide the correct version, based on the release that you want to use.
+1. Include the MicroTx library as a maven dependency in the application's `pom.xml` file. Open the `pom.xml` file which is in the `/home/oracle/OTMM/otmm-package/samples/xa/java/bankapp/StockBroker/` folder in any code editor, such as Visual Studio Code, and then uncomment the following lines of code. The following sample code is for the 24.4.1 release. Provide the correct version, based on the release that you want to use.
 
     ```
     <copy>
     <dependency>
-      <groupId>com.oracle.tmm.jta</groupId>
+      <groupId>com.oracle.microtx</groupId>
       <artifactId>microtx-spring-boot-starter</artifactId>
-      <version>23.4.1</version>
+      <version>24.4.1</version>
     </dependency>
     </copy>
     ```
 
-2. Open the `UserStockTransactionServiceImpl.java` file in any code editor. This file is in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
+2. Open the `UserStockTransactionServiceImpl.java` file in any code editor, such as Visual Studio Code. This file is in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
 3. Uncomment the following lines of code to import the required packages.
 
@@ -80,7 +80,7 @@ The following section provides reference information about each line of code tha
     </copy>
     ```
 
-5. Uncomment the following line of code to begin an XA transaction to buy stocks.
+5. Uncomment the following line of code under `buy()` to begin an XA transaction to buy stocks.
 
     **Sample command**
 
@@ -101,18 +101,7 @@ The following section provides reference information about each line of code tha
    </copy>
     ```
 
-7. Uncomment the following line of code under `sell()` to create an instance of the `MicroTxUserTransactionService` object to sell stocks. Autowire the `MicroTxUserTransactionService` class before your application logic initiates or begins a transaction.
-
-    **Sample command**
-
-    ```java
-    <copy>
-    @Autowired
-    MicroTxUserTransactionService microTxUserTransaction;
-    </copy>
-    ```
-
-8. Uncomment the following line of code under `sell()` to begin the XA transaction to sell stocks.
+7. Uncomment the following line of code under `sell()` to begin the XA transaction to sell stocks.
 
     **Sample command**
 
@@ -122,7 +111,7 @@ The following section provides reference information about each line of code tha
     </copy>
     ```
 
-9. Uncomment all the occurrences of the following lines of code to specify the transaction boundaries for rolling back or committing the transaction. Based on your business logic, commit or rollback the transaction.
+8. Uncomment all the occurrences of the following lines of code to specify the transaction boundaries for rolling back or committing the transaction. Based on your business logic, commit or rollback the transaction.
 
     **Sample command**
 
@@ -133,9 +122,9 @@ The following section provides reference information about each line of code tha
    </copy>
     ```
 
-10. Uncomment the catch blocks in the `buy()` and `sell()` methods.
+9. Uncomment the catch blocks in the `buy()` and `sell()` methods.
 
-11. Uncomment the following lines of code in the `BankUtility.java` file, located in the `/com/oracle/tmm/stockbroker/utils/` package of the `StockBroker` application, to inject the Spring Boot REST template provided by MicroTx.
+10. Uncomment the following lines of code in the `BankUtility.java` file, located in the `/com/oracle/tmm/stockbroker/utils/` package of the `StockBroker` application, to inject the Spring Boot REST template provided by MicroTx.
 
     **Sample command**
 
@@ -167,7 +156,7 @@ The following section provides reference information about each line of code tha
 
 To configure the Stock Broker application as a transaction participant:
 
-1. Open the `DatasourceConfigurations.java` file in any code editor. This file is in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
+1. Open the `DatasourceConfigurations.java` file in any code editor, such as Visual Studio Code. This file is in the `/com/oracle/tmm/stockbroker` package of the `StockBroker` application.
 
 2. Uncomment the following line of code to import the `com.oracle.microtx.common.MicroTxConfig` package.
 
@@ -187,17 +176,20 @@ To configure the Stock Broker application as a transaction participant:
         PoolXADataSource xapds = null;
         try {
             xapds = PoolDataSourceFactory.getPoolXADataSource();
-            xapds.setConnectionFactoryClassName("oracle.jdbc.xa.client.OracleXADataSource");
-            xapds.setURL(url); //database connection string
-            xapds.setUser(username); //username to access the resource manager
-            xapds.setPassword(password); //password to access the resource manager
+            xapds.setConnectionFactoryClassName(xaConnectionFactoryClassName);
+            xapds.setURL(url);
+            xapds.setUser(username);
+            xapds.setPassword(password);
             xapds.setMinPoolSize(Integer.valueOf(minPoolSize));
             xapds.setInitialPoolSize(Integer.valueOf(initialPoolSize));
             xapds.setMaxPoolSize(Integer.valueOf(maxPoolSize));
-            //Initialize the XA data source object
+            xapds.setValidateConnectionOnBorrow(true);
+            xapds.setInactiveConnectionTimeout(60);
+            xapds.setAbandonedConnectionTimeout(60);
+
             MicroTxConfig.initXaDataSource(xapds);
-        } catch (SQLException ea) {
-            log.severe("Error connecting to the database: " + ea.getMessage());
+            } catch (SQLException ea) {
+            log.error("Error connecting to the database: " + ea.getMessage());
         }
         log.info("PoolXADataSource initialized successfully.");
         return xapds;
@@ -207,7 +199,7 @@ To configure the Stock Broker application as a transaction participant:
 
     It is your responsibility as an application developer to ensure that an XA-compliant JDBC driver and required parameters are set up while creating the `PoolXADataSource` object. The MicroTx client library uses the `XADatasource` object to create database connections.
 
-10. Open the `AccountServiceImpl.java` file in any code editor. This file is in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
+10. Open the `AccountServiceImpl.java` file in any code editor, such as Visual Studio Code. This file is in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
 12. Uncomment the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application autowires the connection object bean `microTxSqlConnection` that is managed by the MicroTx client library.
 
@@ -222,7 +214,7 @@ To configure the Stock Broker application as a transaction participant:
 
 14. Save the changes.
 
-15. Open the `StockBrokerTransactionServiceImpl.java` file in any code editor. This file is in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
+15. Open the `StockBrokerTransactionServiceImpl.java` file in any code edito, such as Visual Studio Code. This file is in the `/com/oracle/tmm/stockbroker/service/impl/` package of the `StockBroker` application.
 
 17. Uncomment the following lines of code so that the application uses the connection passed by the MicroTx client library. The following code in the participant application autowires the connection object bean `microTxSqlConnection` that is managed by the MicroTx client library.
 
@@ -303,10 +295,10 @@ You may now **proceed to the next lab**.
 
 ## Learn More
 
-* [Develop Applications with XA](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
+* [Develop Applications with XA](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG-GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
 
 ## Acknowledgements
 
 * **Author** - Sylaja Kannan
-* **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja, June 2023
+* **Contributors** - Brijesh Kumar Deo, Bharath MC, Atul Dhiman, and Anand Verma
+* **Last Updated By/Date** - Sylaja, February 2025

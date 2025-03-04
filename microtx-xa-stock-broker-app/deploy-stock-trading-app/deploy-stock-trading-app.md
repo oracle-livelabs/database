@@ -47,7 +47,7 @@ Before you start a transaction, you must start a Minikube tunnel.
     </copy>
     ```
 
-3. Run the following command in a new terminal to start a tunnel. Keep this terminal window open.
+2. Run the following command in a new terminal to start a tunnel. Keep this terminal window open.
 
     ```
     <copy>
@@ -55,9 +55,9 @@ Before you start a transaction, you must start a Minikube tunnel.
     </copy>
     ```
 
-4. Enter the password to access your local machine if you are prompted to enter your password.
+3. Enter the password to access your local machine if you are prompted to enter your password.
 
-5. In a new terminal, run the following command to note down the external IP address of the Istio ingress gateway.
+4. In a new terminal, run the following command to note down the external IP address of the Istio ingress gateway.
 
     ```
     <copy>
@@ -73,7 +73,7 @@ Before you start a transaction, you must start a Minikube tunnel.
 
     Let's consider that the external IP in the above example is 192.0.2.117.
 
-6. Store the external IP address of the Istio ingress gateway in an environment variable named `CLUSTER_IPADDR` as shown in the following command.
+5. Store the external IP address of the Istio ingress gateway in an environment variable named `CLUSTER_IPADDR` as shown in the following command.
 
     ```
     <copy>
@@ -177,7 +177,7 @@ The following sample code provides details about the sample code that is availab
 
 ### About the Resource Manager for the Stock Broker Service
 
-The Stock Broker service uses `STOCKBROKERPDB` as resource manager. This PDB contains six tables: CASH_ACCOUNT, STOCKS, USER_ACCOUNT, STOCK_BROKER_STOCKS, USER_STOCKS, and HISTORY. The following code snippet provides details about the tables. The sample code is provided only for your reference. The tables are already available in the PDB and populated with sample values.
+The Stock Broker service uses `STOCKBROKERPDB` as resource manager. This PDB contains six tables: `CASH_ACCOUNT`, `STOCKS`, `USER_ACCOUNT`, `STOCK_BROKER_STOCKS`, `USER_STOCKS`, and `HISTORY`. The following code snippet provides details about the tables. The sample code is provided only for your reference. The tables are already available in the PDB and populated with sample values.
 
     ```SQL
     -- Tables to be created
@@ -241,7 +241,7 @@ The Stock Broker service uses `STOCKBROKERPDB` as resource manager. This PDB con
         DESCRIPTION      VARCHAR2(1024)
     );
     ```
-The following sample code provides details about the sample code that is available in the CASH_ACCOUNT, STOCKS, USER_ACCOUNT, STOCK_BROKER_STOCKS, and USER_STOCKS table.
+The following sample code provides details about the sample code that is available in the `CASH_ACCOUNT`, `STOCKS`, `USER_ACCOUNT`, `STOCK_BROKER_STOCKS`, and `USER_STOCKS` tables.
 
     ```SQL
     -- Sample value in the STOCKS table
@@ -399,27 +399,27 @@ The Bank and Stock-Trading Application console uses Keycloak to authenticate use
 
 14. Click **Save**.
 
-## Task 3: Provide Access Details in the values.yaml File
+## Task 5: Provide Access Details in the values.yaml File
 
 The folder that contains the Bank and Stock-Trading application code also contains the `values.yaml` file. This is the manifest file, which contains the deployment configuration details for the Bank and Stock-Trading application. Edit the `values.yaml` file to provide the URL to access Keycloak and other access details.
 
 To provide the configuration and environment details in the `values.yaml` file:
 
-1. Open the `values.yaml` file, which is in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/Helmcharts` folder.
+1. Open the `values.yaml` file, which is in the `/home/oracle/OTMM/otmm-package/samples/xa/java/bankapp/Helmcharts` folder.
 
 2. Enter values that you have noted down for the following fields under `security` in `UserBanking`.
 
-    * `clientSecret`: Enter the value of the client secret value that you had copied in step 10 of [Task 2](#Task2:ConfigureKeycloak).
-    * `issuerURL`: Enter the URL that you had copied in step 13 of [Task 2](#Task2:ConfigureKeycloak).
+    * `clientSecret`: Enter the value of the client secret value that you had copied in step 10 of [Task 4](#Task4:ConfigureKeycloak).
+    * `issuerURL`: Enter the URL that you had copied in step 13 of [Task 4](#Task4:ConfigureKeycloak).
     * `logoutRedirectURL`: Enter the URL in the format, `http://$CLUSTER_IPADDR/bankapp`. Where, `CLUSTER_IPADDR` is the external IP address of the Istio ingress gateway that you have noted down in [Task 1](#Task1:ConfigureMinikubeandStartaTunnel). For example, `http://192.0.2.117/bankapp`.
 
 3. Under `StockBroker`, set `deploymentEnabled` to `true`. You must set this flag to true before deploying the Stock Broker service.
 
 4. Save the changes you have made to the `values.yaml` file.
 
-## Task 4: Build Container Image for the Stock Broker service
+## Task 6: Build Container Image for the Stock Broker service
 
-The code for the Bank and Stock-Trading application is available in the installation bundle in the `/home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp` folder. The container image for the User Banking, Branch Banking, Core Banking services are pre-built and available for your use. Build the container image only for the Stock Broker service.
+The code for the Bank and Stock-Trading application is available in the installation bundle in the `/home/oracle/OTMM/otmm-package/samples/xa/java/bankapp` folder. The container image for the User Banking, Branch Banking, Core Banking services are pre-built and available for your use. Build the container image only for the Stock Broker service.
 
 To build container image for the Stock Broker service:
 
@@ -427,7 +427,7 @@ To build container image for the Stock Broker service:
 
     ```
     <copy>
-    cd /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/StockBroker
+    cd /home/oracle/OTMM/otmm-package/samples/xa/java/bankapp/StockBroker
     </copy>
     ```
 
@@ -443,7 +443,7 @@ To build container image for the Stock Broker service:
 
 The container image that you have built is available in your Minikube container registry.
 
-## Task 5: Install the Bank and Stock-Trading application
+## Task 7: Install the Bank and Stock-Trading application
 
 Install the Bank and Stock-Trading application in the `otmm` namespace, where you have installed MicroTx. While installing the Bank and Stock-Trading application, Helm uses the configuration details you have provided in the `values.yaml` file.
 
@@ -451,7 +451,7 @@ Install the Bank and Stock-Trading application in the `otmm` namespace, where yo
 
     ```
     <copy>
-    cd /home/oracle/OTMM/otmm-23.4.1/samples/xa/java/bankapp/Helmcharts
+    cd /home/oracle/OTMM/otmm-package/samples/xa/java/bankapp/Helmcharts
     </copy>
     ```
 
@@ -497,7 +497,7 @@ Install the Bank and Stock-Trading application in the `otmm` namespace, where yo
     The following image shows a sample output.
    ![Get details of the pods and services](./images/get-pods-details.png)
 
-## Task 6: Deploy Kiali and Jaeger (Optional)
+## Task 8: Deploy Kiali and Jaeger (Optional)
 
 Optionally, you can use Kiali and Jaeger to track and trace distributed transactions in MicroTx through visualization. Use distributed tracing to track how requests flow between MicroTx and the microservices.
 
@@ -551,10 +551,10 @@ You may now **proceed to the next lab**.
 
 ## Learn More
 
-* [Develop Applications with XA](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
+* [Develop Applications with XA](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG-GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
 
 ## Acknowledgements
 
 * **Author** - Sylaja Kannan
-* **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja, November 2023
+* **Contributors** - Brijesh Kumar Deo, Bharath MC, Atul Dhiman, and Anand Verma
+* **Last Updated By/Date** - Sylaja, February 2025

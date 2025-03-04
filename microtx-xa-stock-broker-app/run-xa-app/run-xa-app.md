@@ -131,12 +131,12 @@ To visualize what happens behind the scenes and how a request to purchase or sel
 
 ## Task 5: View Source Code of the Bank and Stock-Trading application (Optional)
 
-Source code for the following microservices is present in the `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp` folder.
+Source code for the following microservices is present in the `/home/oracle/microtx/otmm-package/samples/xa/java/bankapp` folder.
 
-* Source code for the Stock Broker Service is available at `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/StockBroker`.
-* Source code for the Branch Banking Service is available at `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/BranchBanking`.
-* Source code for the Core Banking Service is available at`/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/CoreBanking`.
-* Source code for the User Banking Service is available at `/home/oracle/microtx/otmm-22.3.2/samples/xa/java/bankapp/UserBanking`.
+* Source code for the Stock Broker Service is available at `/home/oracle/microtx/otmm-package/samples/xa/java/bankapp/StockBroker`.
+* Source code for the Branch Banking Service is available at `/home/oracle/microtx/otmm-package/samples/xa/java/bankapp/BranchBanking`.
+* Source code for the Core Banking Service is available at`/home/oracle/microtx/otmm-package/samples/xa/java/bankapp/CoreBanking`.
+* Source code for the User Banking Service is available at `/home/oracle/microtx/otmm-package/samples/xa/java/bankapp/UserBanking`.
 
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files.
 To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
@@ -145,7 +145,7 @@ You may now **proceed to the next lab**.
 
 ## Learn More
 
-* [Develop Applications with XA](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/22.3/tmmdg/develop-xa-applications.html#GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
+* [Develop Applications with XA](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG-GUID-D9681E76-3F37-4AC0-8914-F27B030A93F5)
 
 ## Acknowledgements
 
