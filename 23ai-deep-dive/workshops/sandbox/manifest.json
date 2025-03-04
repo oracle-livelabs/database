@@ -97,11 +97,6 @@
             "filename": "../../../23aifree/json-collections/json-collections.md"
         },
         {
-            "title": "Lab: JSON Collections and MongoDB API",
-            "description": "Create JSON Collections and use MongoDB API",
-            "filename": "../../../23aifree/json-collections/json-collections-mongo.md"
-        },
-        {
             "title": "Lab: JSON Duality Views",
             "description": "Build Duality Views",
             "type": "livelabs",
