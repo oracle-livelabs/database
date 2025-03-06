@@ -1,4 +1,4 @@
-# Run Travel Agent App which Uses Saga
+# Run Travel Agent App which Uses Saga and Lock-Free Reservation
 
 ## Introduction
 
@@ -11,15 +11,15 @@ Watch the video below for a quick walk-through of the lab.
 
 ### About the Travel Agent Application
 
-The following figure shows a Travel Agent application, which contains several microservices, to demonstrate how you can develop microservices that participate in Saga transactions while using MicroTx to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and a flight ticket. The Flight Booking and Hotel Booking applications store the booking or reservation information in memory.
+The following figure shows a Travel Agent application, which contains several microservices, to demonstrate how you can develop microservices that participate in Saga transactions while using MicroTx to coordinate the transactions. When you run the application, it makes a provisional booking by reserving a hotel room and a flight ticket. The Flight Booking and Hotel Booking applications store the booking or reservation information in Oracle Database 23ai. Oracle Database 23ai are provisioned in the Minikube environment.
 
 ![Microservices in sample Saga application](./images/lra-sample-app.png)
 
 Only when you provide approval to confirm the provisional booking, the booking of the hotel room and flight ticket is confirmed. If you cancel the provisional booking, the hotel room and flight ticket that was blocked is released and the booking is canceled. The Flight Booking application in this example allows only two confirmed bookings by default. To test the failure scenario, the Flight Booking applications rejects any additional booking requests after two confirmed bookings. This leads to the cancellation (compensation) of a provisionally booked hotel within the trip and the trip is not booked.
 
-Code for the Travel Agent application is available in the MicroTx distribution package. The MicroTx library files are already integrated with the application code.
+When microservices use only Oracle Database 23ai as resource manager, you can use Sagas provided by Oracle Database to manage transactions. If one microservice uses Oracle Database 23ai as resource manager and other microservices use other databases, then you can use MicroTx to leverage the lock-free reservation feature introduced in Oracle Database 23ai. See [Using Lock-Free Reservation](https://docs.oracle.com/en/database/oracle/oracle-database/23/adfns/using-lock-free-reservation.html#GUID-299FDC3E-2169-4D5F-80A9-E9F704B1CEAF) in Database Development Guide.
 
-For more details, see [About the Sample Saga Application](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG-GUID-C5332159-BD13-4210-A02E-475107919FD9) in the *Transaction Manager for Microservices Developer Guide*.
+Code for the Travel Agent application is available in the MicroTx distribution package. The MicroTx library files are already integrated with the application code. For more details, see [About the Sample Saga Application](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG-GUID-C5332159-BD13-4210-A02E-475107919FD9) in the *Transaction Manager for Microservices Developer Guide*.
 
 ### Objectives
 
@@ -30,6 +30,7 @@ In this lab, you will:
 * Run the Travel Agent application
 * Visualize the flow of requests (optional)
 * View source code of the Travel Agent application (optional)
+* Access the Oracle Database instances (optional)
 
 ### Prerequisites
 
@@ -50,7 +51,7 @@ This lab assumes you have:
 
 ## Task 1: Configure Minikube
 
-Follow the instructions in this section to configure Minikube. When you start Minikube, the Travel Agent application is deployed.
+Follow the instructions in this section to start Minikube. When you start Minikube, an instance of the Oracle Database 23ai Free Release with two PDBs is deployed on Minikube. See [Oracle Database Free](https://www.oracle.com/database/free/get-started/). The Flight Booking microservice uses `FLIGHTPDB` PDB as resource manager. The Hotel Booking microservice uses `HOTELPDB` PDB as resource manager.
 
 1. Click **Activities** in the remote desktop window to open a new terminal.
 
@@ -80,7 +81,7 @@ Follow the instructions in this section to configure Minikube. When you start Mi
 
 ## Task 2: Start a tunnel
 
-Before you start a transaction, you must start a tunnel between Minikube and MicroTx.
+Before you start a transaction, you must start a tunnel between Minikube and MicroTx. You can skip this task if you had started a tunnel earlier while running another lab.
 
 1. Run the following command in a new terminal to start a tunnel. Keep this terminal window open.
 
@@ -122,7 +123,7 @@ Before you start a transaction, you must start a tunnel between Minikube and Mic
 
     ```text
    <copy>
-    export TRIP_SERVICE_URL=http://<copied-external-IP-address>/trip-service/api/trip
+    export TRIP_SERVICE_URL=http://<copied-external-IP-address>/trip-service/api/sync/trip
    </copy>
     ```
 
@@ -130,11 +131,33 @@ Before you start a transaction, you must start a tunnel between Minikube and Mic
 
     ```text
     <copy>
-    export TRIP_SERVICE_URL=http://192.0.2.117/trip-service/api/trip
+    export TRIP_SERVICE_URL=http://192.0.2.117/trip-service/api/sync/trip
     </copy>
     ```
 
-## Task 3: Run the Travel Agent Application
+## Task 3: Deploy the Travel Agent Application
+
+When you start Minikube, the Travel Agent application which uses Saga is deployed by default. Uninstall this application and reinstall the Travel Agent application which uses Saga and lock-free reservation. The Helm Chart that contains the configuration information for this application is available at `/home/oracle/OTMM/otmm-package/samples/lra/helmcharts/sampleappslra-lockfree/values.yaml`.
+
+1. Run the following command to uninstall the Travel Agent application that uses Saga.
+    ```text
+    <copy>
+    helm uninstall sample-lra-app -n otmm
+    </copy>
+    ```
+
+2.  Deploy the Travel Agent application that uses Saga and lock-free reservation.
+
+    ```text
+    <copy>
+    cd /home/oracle/OTMM/otmm-package/samples/lra/helmcharts
+    helm install sample-lra-lockfree-app --namespace otmm sampleappslra-lockfree/ --values sampleappslra-lockfree/values.yaml
+    </copy>
+    ```
+
+It may take upto 45 seconds to initialize the pod, so wait for a minute before you proceed to the next task.
+
+## Task 4: Run the Travel Agent Application
 
 Run the Travel Agent application to book a hotel room and flight ticket.
 
@@ -164,7 +187,7 @@ The Travel Agent application provisionally books a hotel room and a flight ticke
 
     ```text
     <copy>
-    curl --location --request GET http://$CLUSTER_IPADDR/trip-service/api/trip | jq
+    curl --location --request GET http://$CLUSTER_IPADDR/trip-service/api/sync/trip | jq
     </copy>
     ```
 
@@ -187,7 +210,7 @@ The Travel Agent application provisionally books a hotel room and a flight ticke
     </copy>
     ```
 
-## Task 4: Visualize the Flow of Requests (Optional)
+## Task 5: Visualize the Flow of Requests (Optional)
 
 To visualize the flow of requests between MicroTx and the distributed microservices to book a trip, use Kiali and Jaeger dashboards.
 
@@ -233,15 +256,42 @@ When you started Minikube while performing Task 1, Kiali, Jaeger, and Prometheus
 7. Select one of the traces to view.
 ![Jaeger Trace for Confirmation Step](images/jaeger-trace-confirm-cancel.png)
 
-## Task 5: View Source Code of the Travel Agent Application (Optional)
+## Task 6: View Source Code of the Travel Agent Application (Optional)
 
-The source code of the Travel Agent application is present in folder: /home/oracle/OTMM/otmm-package/samples/lra/lrademo
-- Trip Service Source code: /home/oracle/OTMM/otmm-package/samples/lra/lrademo/trip-manager
-- Hotel Service Source code: /home/oracle/OTMM/otmm-package/samples/lra/lrademo/hotel
-- Flight Service Source code: /home/oracle/OTMM/otmm-package/samples/lra/lrademo/flight
-- Trip Client Source code: /home/oracle/OTMM/otmm-package/samples/lra/lrademo/trip-client
+The source code of the Travel Agent application is present in folder: `/home/oracle/OTMM/otmm-package/samples/lra/lockfree/springboot`.
+- Trip Service Source code: `/home/oracle/OTMM/otmm-package/samples/lra/lockfree/springboot/trip-manager-springboot`
+- Hotel Service Source code: `/home/oracle/OTMM/otmm-package/samples/lra/lockfree/springboot/hotel-springboot`
+- Flight Service Source code: `/home/oracle/OTMM/otmm-package/samples/lra/lockfree/springboot/flight-springboot`
 
 You can use the VIM editor to view the source code files. You can also use the Text Editor application to view the source code files. To bring up the Text Editor, click on Activities (top left) -> Show Applications -> Text Editor. Inside Text Editor, select Open a File and browse to the source code files in the folders shown above.
+
+## Task 7: Access the Oracle Database Instances (Optional)
+
+Use tools, such as Oracle Database SQL*Plus, to access the Oracle Database 23ai instances to view the tables and data.
+
+1. Navigate to the folder that contains the scripts.
+
+    ```text
+    <copy>
+    cd $HOME/db_access
+    </copy>
+    ```
+
+2. Run the following command to access `FLIGHTPDB` PDB, which contains details for the Flight Booking application.
+
+    ```text
+    <copy>
+    ./loginFlightPDB.sh
+    </copy>
+    ```
+
+2. Run the following command to access `HOTELPDB` PDB, which contains details for the Hotel Booking application.
+
+    ```text
+    <copy>
+    ./loginHotelPDB.sh
+    </copy>
+    ```
 
 You may now **proceed to the next lab**. If you do not want to proceed further and would like to finish the LiveLabs and clean up the resources, then complete **Lab 6: Clean Up**.
 
