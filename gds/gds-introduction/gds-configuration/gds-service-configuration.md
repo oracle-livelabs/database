@@ -53,15 +53,21 @@ Before starting this lab, ensure that you have:
 
 **Step 1: Configure GDS for the LiveLab Environment**
  
-1.	Launch GDSCTL and set GSM to gsm1:
+1.	Launch GDSCTL:
     ```nohighlighting
     <copy>
     gdsctl
+    </copy>
+    ```
+
+2.	set gsm to gsm1:
+    ```nohighlighting
+    <copy>
     set gsm -gsm gsm1
     </copy>
     ```
 
-2.	Verify connectivity to the databases:
+3.	Verify connectivity to the databases:
     - GDS Catalog:
     ```nohighlighting
     <copy>
@@ -83,14 +89,14 @@ Before starting this lab, ensure that you have:
     </copy>
     ```
 
-3.	Reconnect to the catalog database (as all GDSCTL steps must be executed from the catalog):
+4.	Reconnect to the catalog database (as all GDSCTL steps must be executed from the catalog):
     ```nohighlighting
     <copy>
     connect gsmcatuser/Oracle_23ai@catalog.example.com:1521/CAT1PDB;
     </copy>
     ```
 
-4.	Configure the GDS Driver and Display Configuration:
+5.	Configure the GDS Driver and Display Configuration:
     ```nohighlighting
     <copy>
     configure -driver oci

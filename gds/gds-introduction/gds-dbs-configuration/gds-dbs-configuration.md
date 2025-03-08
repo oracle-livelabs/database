@@ -130,7 +130,7 @@ Although no updates are required for the standby database at this stage, you can
 4.	Confirm that the database is in READ ONLY mode:
     ```nohighlighting
     <copy>
-    select open_mode from v$database;
+    select name, open_mode from v$database;
     </copy>
     ```
 5.	Exit the SQL session and container:
