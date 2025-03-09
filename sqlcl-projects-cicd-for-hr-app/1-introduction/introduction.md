@@ -18,7 +18,7 @@ In this workshop, you’ll not only enhance the HR application with new features
 
 This workshop explores the database CICD tool in SQLcl and demonstrates how to use it for you database development projects.
 
-![ci/cd](./../1-introduction/images/database-cicd.png " ")
+![Database ci/cd](./../1-introduction/images/database-cicd.png " ")
 
 In this workshop, you will learn how to:
 
@@ -36,9 +36,12 @@ This workshop requires the following:
 
 **This lab has been built for the beginner**: simply follow the labs and the given steps and instructions. We provide the database, application, code, and SQLcl/Git instructions.
 
-Upon completion of this lab, you will understand the process of implementing CI/CD for your database applications using using SQLcl.
+Upon completion of this lab, you will understand the process of implementing CI/CD for your database applications using SQLcl.
 
-**Let's get started!**
+![Are you ready?](./../1-introduction/images/are-you-ready.png " ")
+
+### **Let's** [**get started!**](#next)
+</br>
 
 ## Learn More
 

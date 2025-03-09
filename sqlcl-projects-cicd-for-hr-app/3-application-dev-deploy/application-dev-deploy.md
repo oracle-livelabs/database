@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Now that your application is up and running, this lab will guide you through developing a new feature. We will enable the department feature by making necessary changes to both the application and the database, ensuring full functionality.
+Now that your application is up and running, this lab will guide you through developing a new feature. You will enable the department feature by making necessary changes to both the application and the database, ensuring full functionality.
 
-**Estimated Workshop Time:** 14 minutes
+**Estimated Lab Time:** 14 minutes
 
 ### **Objectives**
 
@@ -50,12 +50,16 @@ In traditional database deployments, especially in a manual process, several cha
 
 ![Database CI/CD](./images/cicd.png " " )
 
-Use SQLcl Projects CICD to:
+Use SQLcl's **project** command to:
 
-* Deploy with minimal risk.
+* Create your local database application work environments
+* Track changes and create database install and upgrade scripts
+* Automate and ensure consistent deployments.
+
+<!--* Deploy with minimal risk.
 * Automate and ensure consistent deployments.
 * Speed up feature delivery.
-* Gain practical experience for real-world database projects.
+* Gain practical experience for real-world database projects.-->
 
 ## Task 2: Unlock Departments Page
 
@@ -66,12 +70,13 @@ Find the placeholder component within the application's code, and replace it wit
 2. Find departments change location in the code (line 65)
 ![Find department change location](./images/find-change-location.png " ")
 3. Remove what's after "return" (line 67) and replace it with the just the below commented line
-![Do the change](./images/department-feature-implemented.png " ")
 4. Implement Department by adding `<DepartmentPage />` and delete the placeholder component
-![Departments-page](./images/departments-page-unlocked.png " ")
+![Do the change](./images/department-feature-implemented.png " ")
 5. Now, refresh the application window and head to the departments section—your new feature is live!
-    >**Note:** *if just wait a little bit and refresh again until it appears*
-![Departments-page](./images/departments-unlocked.png " ")
+
+    >**Note:** *if it doesn't appear just wait a little bit and refresh again until it appears*
+
+![Departments-page](./images/departments-page-unlocked.png " ")
 
 But the table is empty, with no rows, and all the statistics show 0. Let's fix that in the next task!
 
@@ -84,11 +89,11 @@ The issue in the previous task occurred because the departments table is missing
     <details><summary>**Option 1: Using SQLcl**</summary>
     * Go to the application folder in the left side and double click on the **scripts** folder
     ![Scripts folder](./images/scripts-folder.png " ")
-    * Double click on departments_table.sql to see the table ddl and departments_data.sql to see the data to insert
-    ![Departments ddl and data](./images/departments-ddl-data.png " ")
+    * Double click on departments_table.sql to see the table ddl and data to insert
+    ![Departments ddl and data](./images/departments-table.png " ")
     * Execute the previous sql file in SQLcl starting by the ddl then the inserts
 
-        >**Note:** Make sure you are in the scripts directory before executing the sql files in SQLcl.
+        >**Note:** Make sure you are in the scripts directory before executing the sql file in SQLcl.
 
         ```
         <copy>
@@ -100,33 +105,37 @@ The issue in the previous task occurred because the departments table is missing
             @departments_table.sql
         </copy>
         ```
-        ```
-        <copy>
-            @departments_data.sql
-        </copy>
-        ```
-        ![Departments ddl and data executed](./images/departments-ddl-data-executed.png " ")
+        ![Departments ddl and data executed](./images/departments-table-executed.png " ")
     </details>
 
         <details><summary>**Option 2: Using Database Actions**</summary>
         * Go to Database Actions
         * Connect as DEV_USER
-        * Copy the ddl statement from departments-table.sql, past it and click on the run script button
-        ![Run departments ddl in database actions](./images/run-departments-ddl-database-actions.png " ")
-        * Copy the inserts statements from departments-data.sql, past it and click on the run script button
-        ![Run departments inserts in database actions](./images/run-departments-inserts-database-actions.png " ")
+        * Copy all the content of `departments-table.sql` file, then past it in the worksheet there and click on the run script button
+        ![Run departments ddl in database actions](./images/run-departments-table-database-actions.png " ")
         </details>
 
-## Task 4: Check the Departments Page After Database Update
+## Task 4: Enable ORDS Endpoint For Departments Table
+
+1. Go to Database Actions
+2. Connect as DEV_USER
+3. Select **Tables**, right-click on **`DEPARTMENTS`**, choose **REST**, and then click **Enable**
+![Enable ORDS Endpoint For Departments Table](./images/enable-ords-for-departments.png " ")
+4. Click **Enable** at the bottom right
+![REST Enable Object](./images/rest-enable-object.png " ")
+5. The **DEPARTMENTS** table is **REST enabled** now
+![Departments REST Enabled](./images/departments-rest-enabled.png " ")
+
+## Task 5: Check the Departments Page After Database Update
 
 * Go to the application, refresh the page, and head to the departments section—you'll see the data appearing now!
 ![Departments data working in the app](./images/departments-data-appearing-in-the-app.png " ")
 
-## Task 5: Deploy the application to production
+## Task 6: Deploy the application to production
 
 Now, our application is ready for the next release (version 2), and will be deployed to production.
 
->**Note:** We will just simulate and imagine this process of deployments due to time constant of the workshop and also to avoid diverging from the workshop main goal (Explore SQLcl Projects Database CI/CD extension)
+>**Note:** We will just simulate and imagine this process of deployments due to time constant of the workshop and also to avoid diverging from the workshop main goal (Explore Project command in SQLcl)
 
 When moving to production, we will no longer be working with the development database (DEV\_USER). Instead, the application will use the **production database**, which, in this workshop, is represented by the **PROD\_USER** schema.
 
@@ -145,11 +154,11 @@ All right, so now we will go to the .env file and replace **DEV\_USER** with **P
 
 3. Press Esc + I to enter insert mode.
 
-4. Replace **DEV\_USER** with **PROD\_USER**. User Up, down, left and right arrow keys to reach your target.
+4. Replace **DEV\_USER** with **PROD\_USER**. Use the Up, Down, Left, and Right arrow keys to navigate to your target.
 
-![Replace DEV_USER with PROD_USER in .env](./images/replace-dev-to-prod-user.png " ")
+    ![Replace DEV_USER with PROD_USER in .env](./images/replace-dev-to-prod-user.png " ")
 
-5. Press **Esc**, then type **:wq** to save and exit.
+5. Press **Esc**, then type **:wq** and press **Enter** to save and exit.
 
 6. Go to the application and refresh
 
@@ -157,22 +166,23 @@ All right, so now we will go to the .env file and replace **DEV\_USER** with **P
 
 ![Departments-page](./images/departments-unlocked.png " ")
 
-There are no rows at the moment, which is expected because we switched from DEV_USER (development environment) to PROD_USER (production environment), where the departments table doesn’t exist yet. You can verify this by connecting to the PROD_USER schema and checking its tables.
+There are no rows at the moment, which is expected because we switched from DEV\_USER (development environment) to PROD\_USER (production environment), where the departments table doesn’t exist yet. You can verify this by connecting to the PROD_USER schema and checking its tables.
 
 ![No departments table in prod](./images/prod-user-tables.png " ")
 
 **What would be the next ?**
 
-In a traditional approach, we would manually apply changes to the production database, increasing the risk of errors and inconsistencies. But with **SQLcl Projects**, we can automate database changes and bring the power of **CI/CD** to database management!
+In a traditional approach, we would manually apply changes to the production database, increasing the risk of errors and inconsistencies. But with **SQLcl's project command**, we can automate database changes and bring the power of **CI/CD** to database management!
 ![Traditional Approach vs SQLcl Projects Approach](./images/traditional-approach-vs-projects.png " ")
 
-Ready to fix this issue and explore **SQLcl Projects** and get the databases synched? Let's jump into the [next lab](#next) and get it done!
+Ready to fix this issue and explore **SQLcl Project feature** and get the databases synched? Let's jump into the [next lab](#next) and get it done!
 
 <!--Let's fix this issue and dive into SQLcl Projects in the next lab!-->
 
 ## Learn More
 
-Here are some useful links if you want to know more about Oracle Cloud :
+* Click [here](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/introduction.html?utm_source=pocket_shared) for documentation on using SQLcl Projects.
+
 * [Oracle Cloud Doc](https://www.oracle.com/cloud/)
 
 ## Acknowledgements
