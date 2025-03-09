@@ -265,7 +265,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
 
 There is no Challenge 4 :), you've reached the end of this workshop and this journey. We’d like to say you:
 
-**Congratulations, Developer!** You've successfully navigated this challenging lab and created a valuable system for MoroccanTech Solutions. By completing the labs , you've demonstrated a strong understanding of database development, version control, and deployment practices. You've also gained valuable experience with SQLcl and its powerful project management capabilities.
+**Congratulations, Developer!** You've successfully navigated this challenging lab and created a valuable system for this Tech Company Solutions. By completing the labs , you've demonstrated a strong understanding of database development, version control, and deployment practices. You've also gained valuable experience with SQLcl and its powerful project management capabilities.
 
 This lab has equipped you with the essential skills to effectively develop and deploy database-driven features within a real-world application environment. Keep practicing and exploring new challenges, and continue to enhance your skills as a skilled developer.
 

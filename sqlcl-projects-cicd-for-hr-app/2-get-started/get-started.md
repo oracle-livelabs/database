@@ -30,7 +30,7 @@ In this lab, you will:
 
 1. You have been provided various URLs. One for accessing Database Actions, and another one for accessing a Jupyter lab. First, navigate to Database Actions using the provided URL. You can find these details by clicking **View Login Info** near the top of the Workshop outline.
 
-    ![View Login info.](images/return-to-workshop-login-information.png " ")
+    ![View Login info.](images/workshop-login-info.png " ")
 
     You’ve been provided with the necessary information for this workshop: 
     
@@ -38,11 +38,11 @@ In this lab, you will:
      * **Users with their password:** Use these to log in when needed.
      * **SQL Developer Web (Database Actions):** For database-related tasks.
 
-    ![Database Actions URI in Lab.](images/sql-developer-web-uri-first-time.png " ")
+    ![Database Actions URI in Lab.](images/reservation-info.png " ")
 
 2. Several users have been created for you, including a new `DEV_USER` user. Its schema has already been REST-enabled, meaning you will be able to Sign in to Database Actions.
 
-    > **NOTE:** Depending on your lab configuration, you may be redirected to a SQL Developer Web Sign-in screen rather than the Oracle REST Data Services "landing page." In such cases, simply Sign in with the `DEV_USER` user's credentials.
+    > **Note:** Depending on your lab configuration, you may be redirected to a SQL Developer Web Sign-in screen rather than the Oracle REST Data Services "landing page." In such cases, simply Sign in with the `DEV_USER` user's credentials.
 
     To Sign in, click the <button type="button" style="pointer-events: none;">Go</button> button under the SQL Developer Web card.
 
@@ -53,8 +53,8 @@ In this lab, you will:
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Username: `DEV_USER`
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password: `[Can be found in your Reservation details - see image in Step 1 for reference]`
 
-   if you cannot connect to DEV_USER, use Admin to login, then open the hamburger menu then go to database users -> search for dev_user card in the bottom right, you will see an icone to open the link, click on it, then it will direct you to a signin page, then login as dev_user
-   or, simply, change the URL to (include the dev_user in the URL)
+   >**Note:** If you're having trouble connecting to DEV\_USER, log in with Admin first. Then, open the hamburger menu, go to Database Users, and locate the DEV\_USER card in the bottom right. Click the icon to open the link, which will take you to a sign-in page where you can log in as DEV\_USER.
+   Alternatively, simply modify the URL to include DEV\_USER in the path.
 
 3. The Database Actions Launchpad will appear. Navigate to the `Development` category, then click `SQL`. A blank SQL Worksheet will appear.
 
@@ -86,13 +86,13 @@ In this lab, you will:
 
 6. Once you are satisfied, return to the Reservation information for this workshop.
 
-   ![Returning to login information.](images/return-to-workshop-login-information.png " ")
+   ![View Login info.](images/workshop-login-info.png " ")
 
 ## Task 2: Open Jupyter lab
 
 1. Using the URL you were provided, log in to your Jupyter lab. *It is recommended you open the Juptyer Lab in a new tab or window.*
 
-   ![Using the password from previous task.](images/retrieve-jupyter-lab-uri-first-time.png " ")
+   ![Using the password from previous task.](images/jupyter-lab-uri.png " ")
 
    Use the same password from the previous task.
 
