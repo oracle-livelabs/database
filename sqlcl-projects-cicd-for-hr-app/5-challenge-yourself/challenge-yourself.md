@@ -4,15 +4,15 @@
 
 You’ve just completed the "Departments" feature and deployed it successfully. But wait—it's time for an even bigger challenge: Unveiling the Analytics Engine!
 
+![Challenge picture](./images/challenge-pic.png " ")
+
 In this bonus lab, you will release version 3 (V3) of the HR application, packed with the game-changing Analytics feature. This new feature will offer insights not only into employee and department data but also provide valuable analytics on attendance and performancereviews, giving you a complete picture of employee engagement and productivity.
 
-**The Challenge** Unlock this page
+**The Challenge:** Unlock this page
 
-![Analytics page appearing](./images/analytics-appears.png " ")
+![Analytics page working](./images/analytics-page-works.png " ")
 
 While the Analytics feature was part of the original vision for the HR application, it wasn’t included in the initial release. Now, MoroccanTech Solutions is ready to take things to the next level by enabling this feature. Your mission is to uncover and activate the hidden Analytics functionality!
-
-![Challenge picture](./images/challenge-pic.png " ")
 
 ### **Objectives**
 
