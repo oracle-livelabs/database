@@ -26,19 +26,32 @@ In this lab, you will:
 * Access to Database Actions
 * Beginner-level experience in javascript, HTML, and Integrated Developer Environments
 
-## Task 1: View Login Info
+## Task 1: Get To Know Your Workshop Environment
 
-1. You have been provided various URLs. One for accessing Database Actions, and another one for accessing a Jupyter lab. First, navigate to Database Actions using the provided URL. You can find these details by clicking **View Login Info** near the top of the Workshop outline.
+Before diving into the workshop, take a moment to familiarize yourself with the tools and resources available.
+
+1. Accessing Your Workshop Tools
+
+   You have been provided various URLs. One for accessing Database Actions, and another one for accessing a Jupyter lab. First, navigate to Database Actions using the provided URL. You can find these details by clicking **View Login Info** near the top of the Workshop outline.
 
     ![View Login info.](images/workshop-login-info.png " ")
 
-    You’ve been provided with the necessary information for this workshop: 
-    
-     * **JupyterLab URL:** Click to access JupyterLab.
-     * **Users with their password:** Use these to log in when needed.
-     * **SQL Developer Web (Database Actions):** For database-related tasks.
+2. Workshop Credentials
+
+   You’ve been provided with the necessary details for this workshop:
+
+     * **JupyterLab:** Click the provided URL to access JupyterLab.
+     * **ORDS Users:** The list of users we’ll be working with during the workshop.
+     * **Password:** A single password used for all ORDS users.
+     * **SQL Developer Web (Database Actions):** Click the provided URL to access Database Actions.
 
     ![Database Actions URI in Lab.](images/reservation-info.png " ")
+
+## Task 2: Sign in Database Actions
+
+1. Click the SQL Developer Web URL in the Reservation information to access it.
+
+   ![Database Actions URI in Lab.](images/reservation-info.png " ")
 
 2. Several users have been created for you, including a new `DEV_USER` user. Its schema has already been REST-enabled, meaning you will be able to Sign in to Database Actions.
 
@@ -88,7 +101,7 @@ In this lab, you will:
 
    ![View Login info.](images/workshop-login-info.png " ")
 
-## Task 2: Open Jupyter lab
+## Task 3: Open Jupyter lab
 
 1. Using the URL you were provided, log in to your Jupyter lab. *It is recommended you open the Juptyer Lab in a new tab or window.*
 
@@ -119,7 +132,7 @@ In this lab, you will:
 
    ![Copying contents of the DEV_USERstream module.](images/the-DEV_USERstream-resource-module.png " ")-->
 
-## Task 3: Check Enabled ORDS Endpoints
+## Task 4: Check Enabled ORDS Endpoints
 
 <!--1. Navigate to the SQL Worksheet. Then paste (easily done with keyboard shortcuts) the contents of the `users.sql` file to the SQL Worksheet.
   
@@ -141,23 +154,21 @@ In this lab, you will:
 
    ![Adding the ORDS URIs to the clipboard](images/copy-rest.png " ")-->
 
-## Task 4: Prepare Your Environment Variables
+## Task 5: Prepare Your Application Environment Variables
 
-1. Navigate back to the Jupyter lab. Once again, locate the `sqlcl-projects-react-app` directory.
+In this task, you will navigate back to JupyterLab and locate the `sqlcl-projects-react-app` directory once again.
 
-2. Replace the temporary URI with the one you captured in the previous lab. The ORDS URI ending in `/dev_user/employees` will go here.
+Next, you will modify the .env file, which is located in your application's root directory (`sqlcl-projects-react-app`). This file contains essential configuration variables required at runtime.
 
-3. Modify the `.env` file: In your application's root directory, update the hidden .env file, which stores essential configuration variables for runtime.
+   >**Note:** The .env file is hidden by default because filenames that begin with a dot (.) are not displayed in the folder structure.
 
-      >**Note:** The **.env** file is hidden because files and directories starting with . are not shown by default in the folder structure.
-
-      Click on the triangle icon or **More** below for more insights.
+   Click on the triangle icon or **More** below for more insights.
 
    <details><summary>**More**</summary>
 
-      Files and folders that start with a dot (.) in a computer system (especially in Linux, macOS, and other Unix-like operating systems) are called hidden files or dotfiles. For example **.gitconfig** file that stores settings for Git.
+   Files and folders that start with a dot (.) in a computer system (especially in Linux, macOS, and other Unix-like operating systems) are called hidden files or dotfiles. For example **.gitconfig** file that stores settings for Git.
 
-      **What Are They?**
+   **What Are They?**
       * These files and folders are not shown by default when you list files in a directory.
       * They are often used to store settings, configurations, and user preferences for different programs.
 
@@ -171,50 +182,57 @@ In this lab, you will:
          ```
    Otherwise, enable "Show hidden files" in File Explorer settings.
 
-      **Why Are They Hidden?**
+   **Why Are They Hidden?**
       * To keep the file system clean by hiding unnecessary details from users.
       * To prevent accidental modification of important configuration files.
+
    </details></br>
 
-4. Add Environment Variables:
-    - Open the terminal
-      ![Open terminal](images/open-the-terminal.png " ")
+1. Open the terminal
+   ![Open terminal](images/open-the-terminal.png " ")
       >**Tip:** You can reduce the font size by pressing **Ctrl + Minus (-)** on Windows/Linux or **Command (⌘) + Minus (-)** on Mac.
 
-    - Edit the `.env` file with:
-            ```
-        <copy>
-            vi .env
-        </copy>
-        ```
-      ![Open .env file](images/vi-env.png " ")
-    - Press Esc + I to enter insert mode.
-    - Navigate to the placeholders and enter the variables.
-    - Add the following variables, replacing placeholders with actual values:
+2. Edit the `.env` file with:
+      ```sql
+      <copy>
+         vi .env
+      </copy>
       ```
-        VITE_BASE_URL=your_oci_url
-        VITE_DB_USERNAME=DEV_USER
-        ```
-        * `VITE_BASE_URL`: This variable stores the base URL for your ORDS REST service endpoint.
-        * `VITE_DB_USERNAME`: This variable stores the username for your development database user. Ensure this username matches the one you configured in the previous lab.
-        ![Open the environment variable file](images/env-file-opened.png " ")
+      ![Open .env file](images/vi-env.png " ")
 
-        >**Note:** In a React app using Vite, the **VITE_** prefix in environment variables is a Vite requirement to expose them to your front-end code.
+3. Press Esc + I to enter insert mode.
 
-        <details><summary>**More**</summary>
-        
-        Vite is a fast modern build tool and development server for JavaScript frameworks like React, Vue. It improves app performance with instant reloading and optimized production builds.
+4. Navigate to the placeholders and enter the variables.
 
-        **Explanation of VITE_ in .env**
+5. Add the following variables, replacing placeholders with actual values:
 
-         Vite automatically loads environment variables from a .env file only if they start with VITE_. This is a security measure to prevent unintended exposure of sensitive backend credentials.
+      ```text
+     VITE_BASE_URL=your_oci_url
+     VITE_DB_USERNAME=DEV_USER
+      ```
+
+     * `VITE_BASE_URL`: This variable stores the base URL for your ORDS REST service endpoint.
+
+     * `VITE_DB_USERNAME`: This variable stores the username for your development database user. Ensure this username matches the one you configured in the previous lab.
+
+     ![Open the environment variable file](images/env-file-opened.png " ")
+
+      >**Note:** In a React app using Vite, the **VITE_** prefix in environment variables is a Vite requirement to expose them to your front-end code.
+
+      <details><summary>**More**</summary>
+
+      Vite is a fast modern build tool and development server for JavaScript frameworks like React, Vue. It improves app performance with instant reloading and optimized production builds.
+
+      **Explanation of VITE_ in .env**
+
+      Vite automatically loads environment variables from a .env file only if they start with VITE_. This is a security measure to prevent unintended exposure of sensitive backend credentials.
       </details>
 
-    - Press Esc, then type :wq to save and exit.
+6. Press Esc, then type :wq to save and exit.
 
-      > **Note:** This should be in the form of: `http://Your Lab's IP:Your Lab's Port Number/ords/DEV_USER`. Make sure you double-quote the URI; as can be seen in the image below.
+   > **Note:** This should be in the form of: `http://Your Lab's IP:Your Lab's Port Number/ords/DEV_USER`. Make sure you double-quote the URI; as can be seen in the image below.
 
-## Task 5: Start Your React Application
+## Task 6: Start Your React Application
 
 1. From the Jupyter Launcher, open a new Terminal.
 
