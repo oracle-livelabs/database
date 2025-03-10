@@ -117,7 +117,7 @@ The issue in the previous task occurred because the departments table is missing
 
 ## Task 4: Enable ORDS Endpoint For Departments Table
 
-1. Go to Database Actions
+1. Open Oracle Database Actions
 2. Connect as DEV_USER
 3. Select **Tables**, right-click on **`DEPARTMENTS`**, choose **REST**, and then click **Enable**
 ![Enable ORDS Endpoint For Departments Table](./images/enable-ords-for-departments.png " ")

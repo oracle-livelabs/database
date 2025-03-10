@@ -4,7 +4,7 @@
 
 In this lab, you will configure, and then execute commands to start-up the HR Management application.
 
-You have been provided with access to a Database Actions (*aka* SQL Developer Web), as well as a Jupyter Lab.
+You have been provided with access to a Oracle Database Actions (*aka* Oracle SQL Developer Web), as well as a Jupyter Lab.
 
 <!--Some experience in shell commands, react, JavaScript, and HTML are helpful but not necessary. Although, we've designed this workshop so even the beginner can complete it!-->
 
@@ -47,7 +47,7 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
     ![Database Actions URI in Lab.](images/reservation-info.png " ")
 
-## Task 2: Sign in Database Actions
+## Task 2: Sign in Oracle Database Actions
 
 1. Click the SQL Developer Web URL in the Reservation information to access it.
 
@@ -142,7 +142,7 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
     ![Employees table enabled icon](images/employees-rest-enabled-icon.png " ")
 
-   Click the hamburger menu from the top of Database Actions, then click REST.  
+   Click the hamburger menu from the top of Oracle Database Actions, then click REST.  
 
       ![Navigating to the REST Workshop.](images/hamburger-rest.png " ")
 

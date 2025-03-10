@@ -65,7 +65,7 @@ As you can see, only the Employees per Department analytics is working—the oth
 
 </details>
 
-## Challenge 2: Apply Database Changes
+## Challenge 2: Apply Database Changes & Enable ORDS Endpoints
 
 Your task is to update the database by adding the performancereviews and attendance tables to DEV_USER.
 
@@ -75,7 +75,7 @@ Your task is to update the database by adding the performancereviews and attenda
 
 <details><summary>**Hint**</summary>
 
-Run the SQL scripts (attendance\_table.sql and performancereviews\_table.sql) in the scripts folder, just as you did previously for the employees and departments tables.
+Run the SQL scripts (attendance_table.sql and performancereviews_table.sql) from the scripts folder to create the required tables and populate them with data, just as you did earlier for the departments table. Once the tables are created, make sure to enable the REST endpoints for both tables to allow API access (If you need a refresher, refer to Lab 1 → Task 4).
 
 </details>
 
@@ -112,6 +112,15 @@ Run the SQL scripts (attendance\_table.sql and performancereviews\_table.sql) in
     * **Using SQL Developer Web:**
 
         Copy and past the content of the tabes scripts to SQL Developer Web sql worksheet and run the script.
+
+* **Step 3: Enable ORDS Endpoints For The New Tables**
+
+    To make the Attendance and PerformanceReviews tables in PROD_USER accessible as REST endpoints, repeat the steps you followed for DEV_USER in **Lab 1 → Task 4**.
+
+    * Open Database Actions
+    * Connect as DEV_USER
+    * Locate the Departments table, right-click on it.
+    * Select REST, then click Enable.
 
 * **Step 3: Refresh the application**
 
@@ -253,7 +262,16 @@ Follow the same steps as in the previous lab (starting from `project export`), a
     </copy>
     ```
 
-11. Refresh the application. The Analytics page should work correctly.
+11. Enable ORDS Endpoints
+
+    To enable the REST endpoints for the Attendance and PerformanceReviews tables in PROD_USER, follow the same procedure you used for DEV_USER in Lab 1 → Task 4.
+
+    * Open Database Actions
+    * Connect as PROD_USER
+    * Locate the Departments table, right-click on it.
+    * Select REST, then click Enable.
+
+12. Refresh the application. The Analytics page should work correctly.
 
 ![Analytics page working](./images/analytics-page-works.png " ")
 

@@ -6,7 +6,7 @@ As a developer at Tech Company Solutions, you’ve been tasked with adding new f
 
 Many developers appreciate the benefits of CI/CD pipelines for automating application deployments, yet database CI/CD integration is often overlooked. Manually handling database updates, rollbacks, and migrations can lead to significant errors and delays. What if managing database changes could be as seamless as deploying application code?
 
-Meet the **SQLcl Projects CI/CD workflow** a powerful tool designed to revolutionize database development. SQLcl brings automation, consistency, and reliability to database management, empowering developers like you to handle changes efficiently and overcome common obstacles.
+Meet the **SQLcl Projects CI/CD workflow** a powerful tool designed to revolutionize database development. Oracle SQLcl brings automation, consistency, and reliability to database management, empowering developers like you to handle changes efficiently and overcome common obstacles.
 
 In this workshop, you’ll not only enhance the HR application with new features but also explore how the SQLcl Projects feature can transform your database management practices. Our goal is to demonstrate how this versatile extension—built to support more than just database applications—can elevate any project involving database management.
 

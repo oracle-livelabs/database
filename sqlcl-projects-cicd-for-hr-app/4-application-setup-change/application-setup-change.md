@@ -388,16 +388,30 @@ In the next section, we will learn how to deploy these changes to the production
 
     ![Liquibase](./images/liquibase-logo.png " ")
 
+* **Enable REST Endpoints**
+
+    To expose the Departments table in PROD\_USER as a REST endpoint, follow the same steps you performed for DEV\_USER in **Lab 1 → Task 4**.
+
+    1. Open Database Actions
+    2. Connect as PROD_USER
+    3. Locate the Departments table, right-click on it.
+    4. Select REST, then click Enable.
+
+    </br>
+
 * **Run the Production Application:**
-    * Restart the application using the production environment variables.
-    * Verify that the "Departments" feature is functioning correctly in the production environment.
-    * Perform thorough testing to ensure that all aspects of the feature are working as expected.
+
+    1. Restart the application using the production environment variables.
+    2. Verify that the "Departments" feature is functioning correctly in the production environment.
+    3. Perform thorough testing to ensure that all aspects of the feature are working as expected.
+
+    </br>
 
 * **The department section, should locks like this:**
 
     ![Departments data working in the app](./images/departments-data-appearing-in-the-app.png " ")
 
-**Congratulations!** You have successfully implemented and deployed the "Departments" feature and release the version 2 of the application using SQLcl and CICD practices. You have gained valuable experience in managing database changes, automating deployments, and working with a CICD pipeline.
+**You did it!** You have successfully implemented and deployed the "Departments" feature and release the version 2 of the application using SQLcl and CICD practices. You have gained valuable experience in managing database changes, automating deployments, and working with a CICD pipeline.
 
 ## Learn More
 
