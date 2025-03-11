@@ -2,7 +2,7 @@
 
 ## About this Workshop
 
-As a developer at Tech Company Solutions, you’ve been tasked with adding new features to the HR application. As the company grows, so do the challenges of managing both the application and its database.
+As a developer at Tech Solutions Company, you’ve been tasked with adding new features to the HR application. As the company grows, so do the challenges of managing both the application and its database.
 
 Many developers appreciate the benefits of CI/CD pipelines for automating application deployments, yet database CI/CD integration is often overlooked. Manually handling database updates, rollbacks, and migrations can lead to significant errors and delays. What if managing database changes could be as seamless as deploying application code?
 

@@ -8,7 +8,7 @@ The SQLcl Project feature contains many commands: we will explore them all in th
 
 ### **The Challenge**
 
-The Tech Company Solutions is a thriving company experiencing rapid growth. Their current HR systems, while sufficient in the past, are now struggling to keep up with the increasing number of employees and departments. To address this, they need a Department Management system to improve efficiency and organization.
+The Tech Solutions Company is a thriving company experiencing rapid growth. Their current HR systems, while sufficient in the past, are now struggling to keep up with the increasing number of employees and departments. To address this, they need a Department Management system to improve efficiency and organization.
 
 ![Database cicd](./images/database-cicd.png " ")
 
@@ -74,10 +74,34 @@ By the end of this lab, you will be able to:
 
         ![Check the current working dir](./images/print-woking-dir.png " ")
 
+    * **Initialize git**
+        ```sql
+        <copy>
+            !git init --initial-branch main
+        </copy>
+        ```
+    >**Note:** We use a bang or exclamation mark (**!**) at the beginning of hosted commands (non-SQLcl commands) to run them within SQLcl.
+    <!--In SQLcl, it is used as a shell escape to run external (non-SQLcl) commands.-->
+
+    * Add and commit
+
+        ```sql
+        <copy>
+            !git add --all
+        </copy>
+        ```
+        ```sql
+        <copy>
+            !git commit -m "Initial commit"
+        </copy>
+        ```
+        ![First commit](./images/git-init-add-initial-commit.png " ")
+        <!--![First commit](./images/git-init-add-first-commit.png " ")-->
+
     >**Tip:** Press Tab to view completions, then keep pressing Tab or use the arrow keys to navigate. Press Enter when you find the desired option.
       ![Run project init command](./images/tab-completion.png " ")
 
-    * Initializing project
+    * **Initialize project**
     ```sql
       <copy>
         project init -name HrManager -schemas DEV_USER -verbose
@@ -121,16 +145,17 @@ By the end of this lab, you will be able to:
     ![ init ](./images/project-init-output.png " ")
     </details>-->
 
-    * Initialize git
-            ```sql
+    * Add and commit
+        ```sql
         <copy>
-        !git init --initial-branch main
+            !git branch
         </copy>
         ```
-    >**Note:** We use a bang or exclamation mark (**!**) at the beginning of hosted commands (non-SQLcl commands) to run them within SQLcl.
-    <!--In SQLcl, it is used as a shell escape to run external (non-SQLcl) commands.-->
-
-    * Add and commit
+        ```sql
+        <copy>
+            !git status
+        </copy>
+        ```
         ```sql
         <copy>
             !git add --all
@@ -138,10 +163,16 @@ By the end of this lab, you will be able to:
         ```
         ```sql
         <copy>
-            !git commit -m "Initial commit"
+            !git status
         </copy>
         ```
-        ![First commit](./images/git-init-add-first-commit.png " ")
+        ```sql
+        <copy>
+            !git commit -m "Add project files"
+        </copy>
+        ```
+        ![Commit project files](./images/git-commit-project-files.png " ")
+        >**Note:** You can click the image if it is not visible for you.
 
     * Create a new git branch and switch to it for this feature:
         ```sql
@@ -178,15 +209,16 @@ Since the source and target databases use different schemas, we need to set emit
 ```
 ```sql
 <copy>
-    project config set -name export.setTransform.emitSchema -value false
+    project config set -name export.setTransform.emitSchema -value false -verbose
 </copy>
 ```
 
-![Set emitSchema to false](./images/set-emitschema-false.png " ")
+![Set emitSchema to false](./images/set-emitschema-to-false.png " ")
+<!--![Set emitSchema to false](./images/set-emitschema-false.png " ")-->
 
 ## Task 3: Export Database Changes (project export)
 
-For exporting, we have two options:
+<!--For exporting, we have two options:
 
 1. Export the entire schema, including all its objects, using the -schemas option, which accepts a list of schemas to export (in our case, just one: "DEV_USER").
 2. Export specific objects using the -objects option.
@@ -233,34 +265,82 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
     ![Departments.sql content](./images/departments-sql-content.png " ")
 
-* **Now we have made the database changes, we export our objects to have them included in our project folders.**
+* **Now we have made the database changes, we export our objects to have them included in our project folders.**-->
+
+For exporting, we have two options:
+
+* Export the entire schema, including all its objects, using the -schemas option, which accepts a list of schemas to export (in our case, just one: "DEV_USER").
+* Export specific objects using the -objects option.
+
+>**Note:** Use `help project export` for more details on the export command.
+    ```sql
+    <copy>
+     help project export
+    </copy>
+    ```
+
+**Export Database Objects:**
+
+1. Execute the following command to export the DEV_USER schema to the application folder:
+
+    ```sql
+    <copy>
+        project export -schemas DEV_USER -verbose
+    </copy>
+    ```
+
+    ![Exported schema](./images/export-devuser-schema.png " ")
+    <!--![Exported schema](./images/export-dev-user-schema.png " ")-->
+    <!--![Exported schema without hist](./images/export-dev-user.png " ")-->
+    <!--![Run project export command](./images/project-export-object.png " ")-->
+
+    This command **exports database objects** into your repository.
+
+2. Find the exported schema folder and its database object files inside the database folder under src.
+
+    ![Database folder location](./images/database-schema-location.png " ")
+    <!--![Database folder location](./images/database-schema-folder.png " ")-->
+    <!--![Database folder location](./images/database-folder-location.png " ")-->
+
+3. Double click on the 'departments.sql' to see its content.
+
+    ![Departments.sql content](./images/departments-sql-file.png " ")
+    <!--![Departments.sql content](./images/departments-sql-file-content.png " ")-->
+    <!--![Departments.sql content](./images/departments-sql-content.png " ")-->
+
+4. Now we have made the database changes, we export our objects to have them included in our project folders.
 
 ## Task 4: Stage Changes (project stage)
 
 * **Stage Changes:**
 
     * Add and commit changes before stage
-            ```sql
+        ```sql
         <copy>
             !git status
         </copy>
-            ```
-            ```sql
+        ```
+
+        ```sql
         <copy>
             !git add --all
         </copy>
-            ```
-            ```sql
+        ```
+
+        ```sql
         <copy>
             !git status
         </copy>
-            ```
+        ```
+
         ```sql
         <copy>
-            !git commit -m "Add departments table"
+            !git commit -m "Export dev_user schema"
         </copy>
-            ```
-        ![Add and commit changes](./images/git-add-commit.png " ")
+        ```
+
+        ![Add and commit changes](./images/git-commit-changes.png " ")
+        <!--![Add and commit changes](./images/git-add-commit-changes.png " ")-->
 
     * Execute the following command to stage the changes for release
             ```sql
@@ -268,9 +348,11 @@ To see what's happen when exporting the whole schema drop down **Export schema**
             project stage -verbose
         </copy>
             ```
-    ![project stage](./images/project-stage.png " ")
+    ![project stage](./images/project-stage-command.png " ")
+    <!--![project stage](./images/project-stage-cmd.png " ")-->
+    <!--![project stage](./images/project-stage.png " ")-->
 
-    This command prepares the staged changes for release by creating a release artifact in the `dist` folder.
+        This command prepares the staged changes for release by creating a release artifact in the `dist` folder.
 
 * **Add custom scripts**
 
@@ -302,7 +384,7 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
     * Open the dept_data.sql file and paste the insert statements
 
-        Double-click the file and paste the copied inserts inside.
+        Double-click the file and paste the copied inserts inside and save it (Command + S or Ctrl + S).
 
         ![Insert data in the custom script](./images/insert-into-custom.png " ")
 
@@ -319,9 +401,8 @@ To see what's happen when exporting the whole schema drop down **Export schema**
         !git merge Ticket-1-Departments
     </copy>
         ```
+    ![Merge branch with main ](./images/merge-to-main.png " ")
     <!--![Merge branch with main ](./images/merge-branch-to-main.png " ")-->
-
-* **Resolve any merge conflicts:** (If necessary)
 
 ## Task 5: Release Changes (project release)
 
@@ -333,17 +414,20 @@ To see what's happen when exporting the whole schema drop down **Export schema**
         ```
     ![Project release](./images/project-release.png " ")
 
-* This command creates a release folder with the specified version.
+    This command creates a release folder with the specified version.
 
 ## Task 6: Generate Deployable Artifact (project gen-artifact)
 
 * The `project gen-artifact` command can be used to generate an artifact for your database changes. This artifact can then be easily deployed to different environments.
-        ```sql
+    ```sql
     <copy>
         project gen-artifact -verbose
     </copy>
-        ```
-    ![Project gen-artifact](./images/project-gen-artifact.png " ")
+    ```
+
+    ![Project gen-artifact](./images/project-genartifact-cmd.png " ")
+    <!--![Project gen-artifact](./images/project-genartifact.png " ")-->
+    <!--![Project gen-artifact](./images/project-gen-artifact.png " ")-->
 
 * If you return to the application folder, you will fid an new folder **artifact** created, and it contains our generated zip artifact.
 
@@ -368,10 +452,11 @@ In the next section, we will learn how to deploy these changes to the production
 
     * Execute the following command to deploy the changes to the production database:
         ```sql
-    <copy>
-        project deploy -file HrManager-2.O.zip  -verbose
-    </copy>
-    ```
+        <copy>
+            project deploy -file artifact/HrManager-2.O.zip  -verbose
+        </copy>
+        ```
+        <!--![project deploy ](./images/project-deploy-cmd.png " ")-->
         ![project deploy ](./images/project-deploy.png " ")
 
     * This command applies the changes defined in the release artifact to the production database without recreating existing schema objects.

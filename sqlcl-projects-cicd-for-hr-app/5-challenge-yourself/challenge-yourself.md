@@ -2,20 +2,25 @@
 
 ## Introduction
 
-You’ve just completed the "Departments" feature and deployed it successfully. But wait—it's time for an even bigger challenge: Unveiling the Analytics Engine!
+You’ve just completed the "Departments" feature and deployed it successfully. But wait—it's time for an even bigger challenge: Unleashing the Analytics Engine!
+
+In this phase, you will release version 3 (V3) of the HR application. This new feature will offer insights not only into employee and department data but also provide valuable analytics on attendance and performance reviews, helping you visualize employee engagement and productivity.
 
 ![Challenge picture](./images/challenge-pic.png " ")
 
-In this bonus lab, you will release version 3 (V3) of the HR application, packed with the game-changing Analytics feature. This new feature will offer insights not only into employee and department data but also provide valuable analytics on attendance and performancereviews, giving you a complete picture of employee engagement and productivity.
+The Analytics feature was always planned but left inactive in the initial release. Now, MoroccanTech Solutions is ready to bring it to life, and it’s up to you to make it happen!
 
 **The Challenge:** Unlock this page
 
 ![Analytics page working](./images/analytics-page-works.png " ")
 
-While the Analytics feature was part of the original vision for the HR application, it wasn’t included in the initial release. Now, MoroccanTech Solutions is ready to take things to the next level by enabling this feature. Your mission is to uncover and activate the hidden Analytics functionality!
+This lab has a game-challenge approach. First, you'll get an overview of the goal. Try to solve it on your own! If you need help, you'll get a hint. Still stuck? A step-by-step solution will guide you through.
+
+**Estimated Lab Time:** 14 minutes
 
 ### **Objectives**
 
+* Overcome all the challenges successfully
 * Enable the Analytics feature
 * Release the version 3 of the database for the application
 
@@ -23,9 +28,7 @@ While the Analytics feature was part of the original vision for the HR applicati
 
 * Complete successfully the previous labs
 
-**Estimated Lab Time:** 14 minutes
-
-Bring on the challenge! Let’s crush it!
+*Bring on the challenge! **Let’s crush it!***
 
 ## Challenge 1: Implement Analytics Page
 
@@ -75,7 +78,7 @@ Your task is to update the database by adding the performancereviews and attenda
 
 <details><summary>**Hint**</summary>
 
-Run the SQL scripts (attendance_table.sql and performancereviews_table.sql) from the scripts folder to create the required tables and populate them with data, just as you did earlier for the departments table. Once the tables are created, make sure to enable the REST endpoints for both tables to allow API access (If you need a refresher, refer to Lab 1 → Task 4).
+Run the SQL scripts (attendance\_table.sql and performancereviews\_table.sql) from the scripts folder to create the required tables and populate them with data, just as you did earlier for the departments table. Once the tables are created, make sure to enable the REST endpoints for both tables to allow API access (If you need a refresher, refer to Lab 1 → Task 4).
 
 </details>
 
@@ -115,7 +118,7 @@ Run the SQL scripts (attendance_table.sql and performancereviews_table.sql) from
 
 * **Step 3: Enable ORDS Endpoints For The New Tables**
 
-    To make the Attendance and PerformanceReviews tables in PROD_USER accessible as REST endpoints, repeat the steps you followed for DEV_USER in **Lab 1 → Task 4**.
+    To make the Attendance and PerformanceReviews tables in PROD\_USER accessible as REST endpoints, repeat the steps you followed for DEV\_USER in **Lab 1 → Task 4**.
 
     * Open Database Actions
     * Connect as DEV_USER
@@ -283,7 +286,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
 
 There is no Challenge 4 :), you've reached the end of this workshop and this journey. We’d like to say you:
 
-**Congratulations, Developer!** You've successfully navigated this challenging lab and created a valuable system for this Tech Company Solutions. By completing the labs , you've demonstrated a strong understanding of database development, version control, and deployment practices. You've also gained valuable experience with SQLcl and its powerful project management capabilities.
+**Congratulations, Developer!** You've successfully navigated this challenging lab and created a valuable system for this Tech Solutions Company. By completing the labs , you've demonstrated a strong understanding of database development, version control, and deployment practices. You've also gained valuable experience with SQLcl and its powerful project management capabilities.
 
 This lab has equipped you with the essential skills to effectively develop and deploy database-driven features within a real-world application environment. Keep practicing and exploring new challenges, and continue to enhance your skills as a skilled developer.
 
