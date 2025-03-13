@@ -27,13 +27,17 @@
       "filename": "../../run-lra-app/run-lra-app.md"
     },
     {
-      "title": "Lab 4: Run Transfer app which uses XA",
+      "title": "Lab 4: Run Travel agent app which uses Saga and Lock-Free Reservation",
+      "filename": "../../run-lra-app-lockfree/run-lra-app-lockfree.md"
+    },
+    {
+      "title": "Lab 5: Run Transfer app which uses XA",
       "filename": "../../run-xa-app/run-xa-app.md"
     },
     {
       "description": "Cleanly dispose of all OCI resources created by ORM for the workshop, and delete the stack",
       "filename": "https://oracle-livelabs.github.io/common/labs/cleanup-stack/cleanup-stack.md",
-      "title": "Lab 5: Environment Cleanup"
+      "title": "Lab 6: Environment Cleanup"
     },
     {
       "title": "Need help?",
