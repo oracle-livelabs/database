@@ -49,8 +49,8 @@ The last issue in the previous task occurred because the departments table is mi
     * Go to the application folder in the left side and double click on the **scripts** folder
     ![Scripts folder](./images/scripts-folder.png " ")
     * Double click on departments_table.sql to see the table ddl and data to insert
-    ![Departments ddl and data](./images/departments-table2.png " ")
     ![Departments ddl and data](./images/departments-table.png " ")
+    <!--![Departments ddl and data](./images/departments-table2.png " ")-->
     * Execute the previous sql file in SQLcl starting by the ddl then the inserts
 
         >**Note:** Make sure you are in the scripts directory before executing the sql file in SQLcl.
@@ -137,7 +137,7 @@ There are no rows at the moment, which is expected because we switched from DEV\
 In a traditional approach, we would manually apply changes to the production database, increasing the risk of errors and inconsistencies. But with **SQLcl's project command**, we can automate database changes and bring the power of **CI/CD** to database management!
 ![Traditional Approach vs SQLcl Projects Approach](./images/traditional-approach-vs-projects.png " ")
 
-Ready to fix this issue and explore **SQLcl Project feature** and get the databases synched? Let's jump into the [next lab](#next) and get it done!
+Ready to fix this issue and explore **SQLcl Project feature** and get the databases synched? Let's jump into the [**next lab**](#next) and get it done!
 
 <!--Let's fix this issue and dive into SQLcl Projects in the next lab!-->
 
@@ -152,5 +152,5 @@ Ready to fix this issue and explore **SQLcl Project feature** and get the databa
 
 ## Acknowledgements
 
-* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, SQLcl
-* **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, February 2025
+* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, Database Tooling, SQLcl developers
+* **Created By/Date** - Fatima AOURGA, Junior Member of The Technical Staff, Database Tooling, SQLcl developer, February 2025

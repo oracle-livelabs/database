@@ -465,7 +465,7 @@ In the next task, we will learn how to deploy these changes to the production en
 
 **Well done!** Migration completed successfully.
 
-Now, it's time for some code changes! Let’s jump into the [next lab](#next) and kickstart our application development to bring the departments feature to life!
+Now, it's time for some code changes! Let’s jump into the [**next lab**](#next) and kickstart our application development to bring the departments feature to life!
 
 ## Learn More
 
@@ -476,5 +476,5 @@ Now, it's time for some code changes! Let’s jump into the [next lab](#next) an
 
 ## Acknowledgements
 
-* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, SQLcl
-* **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, February 2025
+* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, Database Tooling, SQLcl developers
+* **Created By/Date** - Fatima AOURGA, Junior Member of The Technical Staff, Database Tooling, SQLcl developer, February 2025

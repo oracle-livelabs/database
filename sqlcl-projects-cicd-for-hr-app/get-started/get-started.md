@@ -96,7 +96,7 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
    ![Reviewing the DEV_USER table properties.](images/show-employees-ddl.png " ")
 
-      > **NOTE:** ORDS APIs will be able to handle all of these various data types and send them to your application.
+      > **Note:** ORDS APIs will be able to handle all of these various data types and send them to your application.
 
 6. Once you are satisfied, return to the Reservation information for this workshop.
 
@@ -203,35 +203,37 @@ Next, you will modify the .env file, which is located in your application's root
 
 3. Press Esc + I to enter insert mode.
 
-4. Navigate to the placeholders and enter the variables.
-
-5. Add the following variables, replacing placeholders with actual values:
+4. Navigate to the placeholders. Replace [Your Lab's IP] with your actual lab IP in the following variables:
 
       ```text
-     VITE_BASE_URL=your_oci_url
-     VITE_DB_USERNAME=DEV_USER
+      VITE_API_URL=http://[Your Lab's IP]:5500/api/connection
+      VITE_BASE_URL=http://[Your Lab's IP]:8181/ords/
+      VITE_DB_USERNAME=DEV_USER
       ```
 
-     * `VITE_BASE_URL`: This variable stores the base URL for your ORDS REST service endpoint.
+     * **`VITE_API_URL`**: The base URL for your API connection.
 
-     * `VITE_DB_USERNAME`: This variable stores the username for your development database user. Ensure this username matches the one you configured in the previous lab.
+     * **`VITE_BASE_URL`**: The base URL for your ORDS REST service.
 
-     ![Open the environment variable file](images/env-file-opened.png " ")
+     * **`VITE_DB_USERNAME`**: The database username.
 
-      >**Note:** In a React app using Vite, the **VITE_** prefix in environment variables is a Vite requirement to expose them to your front-end code.
+     ![Open the environment variable file](images/env-file-opened2.png " ")
+     <!--![Open the environment variable file](images/env-file-opened.png " ")-->
 
-      <details><summary>**More**</summary>
+5. Press Esc, then type :wq to save and exit.
 
-      Vite is a fast modern build tool and development server for JavaScript frameworks like React, Vue. It improves app performance with instant reloading and optimized production builds.
+>**Note:** In a React app using Vite, the **VITE_** prefix in environment variables is a Vite requirement to expose them to your front-end code.
 
-      **Explanation of VITE_ in .env**
+<details><summary>**More**</summary>
 
-      Vite automatically loads environment variables from a .env file only if they start with VITE_. This is a security measure to prevent unintended exposure of sensitive backend credentials.
-      </details>
+Vite is a fast modern build tool and development server for JavaScript frameworks like React, Vue. It improves app performance with instant reloading and optimized production builds.
 
-6. Press Esc, then type :wq to save and exit.
+**Explanation of VITE_ in .env**
 
-   > **Note:** This should be in the form of: `http://Your Lab's IP:Your Lab's Port Number/ords/DEV_USER`. Make sure you double-quote the URI; as can be seen in the image below.
+Vite automatically loads environment variables from a .env file only if they start with VITE_. This is a security measure to prevent unintended exposure of sensitive backend credentials.
+</details>
+
+<!-- > **Note:** This should be in the form of: `http://Your Lab's IP:Your Lab's Port Number/ords/DEV_USER`. Make sure you double-quote the URI; as can be seen in the image below.-->
 
 ## Task 6: Start Your React Application
 
@@ -246,7 +248,8 @@ Next, you will modify the .env file, which is located in your application's root
     ![Run the application](images/print-working-dir.png " ")
 
     >**Tip:** You can clear your terminal screen using **clear** command.
-    ```sh
+
+      ```sh
       <copy>clear</copy>
       ```
 
@@ -274,9 +277,15 @@ Next, you will modify the .env file, which is located in your application's root
 
    ![HR application up and running.](images/application-up-and-running.png " ")
 
+7. You can switch from the light mode to dark mode
+
    ![Light mode vs dark mode](images/light-vs-dark-mode.png " ")
 
+8. Check the Update Records page.
+
    ![Update records page](images/update-records-page.png " ")
+
+9. Move to the Departments page.
 
    ![Departments page](images/departments-page.png " ")
 
@@ -286,7 +295,7 @@ Next, you will modify the .env file, which is located in your application's root
 
 <!--Wait… where’s the departments page? Looks like we’ve got some work to do! Jump into the [next lab](#next) and let’s unlock this new feature together!-->
 
-Uh-oh! The departments page is missing! But here’s your chance to build it. Let’s dive into the [next labs](#next) and bring this feature to life!
+**Uh-oh!** The departments page is missing! But here’s your chance to build it. Let’s dive into the [**next labs**](#next) and bring this feature to life!
 
 ## Learn More
 
@@ -296,5 +305,5 @@ Uh-oh! The departments page is missing! But here’s your chance to build it. Le
 
 ## Acknowledgements
 
-* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, SQLcl
-* **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, February 2025
+* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, Database Tooling, SQLcl developers
+* **Created By/Date** - Fatima AOURGA, Junior Member of The Technical Staff, Database Tooling, SQLcl developer, February 2025

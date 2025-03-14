@@ -52,5 +52,5 @@ Upon completion of this lab, you will understand the process of implementing CI/
 
 ## Acknowledgements
 
-* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, SQLcl
-* **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, February 2025
+* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, Database Tooling, SQLcl developers
+* **Created By/Date** - Fatima AOURGA, Junior Member of The Technical Staff, Database Tooling, SQLcl developer, February 2025

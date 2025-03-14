@@ -32,7 +32,7 @@ By the end of this lab, you will be able to:
 * Add the new feature to the application with database and code changes.
 * Use SQLcl to manage and deploy database changes.
 * Practice and apply SQLcl project commands through hands-on exploration.
-* Experience and understand the benefits of database CICD
+* Experience and understand the benefits of database CICD.
 
 ### **Prerequisites**
 
@@ -323,6 +323,8 @@ Before generating the artifact, you need to return the install.sql file to its i
 
 **You did it!** You have successfully implemented and deployed the "Departments" feature and release the version 2 of the application using SQLcl and CICD practices. You have gained valuable experience in managing database changes, automating deployments, and working with a CICD pipeline.
 
+After you gain this some experience, it's time for a new challenge! Head to the [**next lab**](#next) and take your skills to the next level!
+
 ## Learn More
 
 * [Oracle SQLcl Doc](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/working-sqlcl.html)
@@ -332,5 +334,5 @@ Before generating the artifact, you need to return the install.sql file to its i
 
 ## Acknowledgements
 
-* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, SQLcl
-* **Created By/Date** - Fatima AOURGA, Junior Member of Technical Staff, SQLcl, February 2025
+* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, Database Tooling, SQLcl developers
+* **Created By/Date** - Fatima AOURGA, Junior Member of The Technical Staff, Database Tooling, SQLcl developer, February 2025
