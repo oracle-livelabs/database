@@ -42,12 +42,14 @@ By the end of this lab, you will be able to:
 ## Task 1: Export Database Changes (project export)
 
 Before exporting, create a new git branch and switch to it for this feature:
-    ```sql
-    <copy>
-        !git checkout -b Ticket-1-Departments
-    </copy>
-    ```
-    ![Checkout first branch](./images/checkout-first-branch.png " ")
+
+```sql
+<copy>
+    !git checkout -b Ticket-1-Departments
+</copy>
+```
+
+![Checkout first branch](./images/checkout-first-branch.png " ")
 
 <!--For exporting, we have two options:
 

@@ -32,6 +32,10 @@ Estimated Lab Time: 14 minutes
 
 ## Challenge 1: Implement Analytics Page
 
+When you check the Analytics page, you will find it locked, not working. In this challenge you will unlock it.
+
+![Analytics not working](./images/analytics-not-working.png " ")
+
 Before making changes, we need to switch back to the development environment. To do this, update the **.env** file by changing PROD_USER to DEV_USER, ensuring the application connects to the development database.
 
 Now, let's modify the application code to enable the Analytics page.
@@ -50,17 +54,17 @@ Now, let's modify the application code to enable the Analytics page.
 
 2. Double click on the pages folder then the 'HRPageContentSwitcher.tsx' file
 
-3. Find Analytics change location in the code (line 70)
+3. Find Analytics change location in the code (line 71)
 
     ![Identify code change](./images/where-to-change-in-code.png " ")
 
-4. Implement Analytics by removing the line 72 and uncomment line 73 just below
+4. Implement Analytics by removing the line 73 and uncomment line 74 just below
 
     ![Implement the change](./images/code-change-done.png " ")
 
 5. Refresh the application and go to the Analytics section. It should appear now
 
-    ![Analytics page appearing just for Emp per Dep](./images/analytics-appears.png " ")
+    ![Analytics page appearing just for Emp per Dep](./images/analytics-appears-just-for-emp-dep.png " ")
 
 >**Note:** If you lost your application window, run it again as you did the first time.
 
@@ -274,7 +278,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
     * Locate the Departments table, right-click on it.
     * Select REST, then click Enable.
 
-12. Refresh the application. The Analytics page should work correctly.
+12. Refresh the application. The Analytics page should work correctly in production environment.
 
 ![Analytics page working](./images/analytics-page-works.png " ")
 

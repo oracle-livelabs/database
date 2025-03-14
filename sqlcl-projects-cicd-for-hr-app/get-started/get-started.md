@@ -68,7 +68,11 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password: `[Can be found in your Reservation details - see image in Step 1 for reference]`
 
    >**Note:** If you're having trouble connecting to DEV\_USER, log in with Admin first. Then, open the hamburger menu, go to Database Users, and locate the DEV\_USER card in the bottom right. Click the icon to open the link, which will take you to a sign-in page where you can log in as DEV\_USER.
-   Alternatively, simply modify the URL to include DEV\_USER in the path.
+   Alternatively, simply modify the URL to include DEV\_USER in the path as the following:
+
+   ```text
+   http://[Your Lab's IP]:8181/ords/DEV_USER/_sdw/
+   ```
 
 3. The Database Actions Launchpad will appear. Navigate to the `Development` category, then click `SQL`. A blank SQL Worksheet will appear.
 
