@@ -4,7 +4,7 @@
 
 Welcome aboard! You're about to embark on an exciting project: developing the "Departments" feature for the growing HR application.
 
-The SQLcl Project feature contains many commands: we will explore them all in this lab.
+The SQLcl Project feature contains many commands. You will explore them in this lab.
 
 ### **The Challenge**
 
