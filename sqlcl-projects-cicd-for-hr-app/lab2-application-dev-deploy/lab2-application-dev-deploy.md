@@ -66,14 +66,32 @@ The last issue in the previous task occurred because the departments table is mi
         </copy>
         ```
         ![Departments ddl and data executed](./images/departments-table-executed.png " ")
+
     </details>
 
-        <details><summary>**Option 2: Using Database Actions**</summary>
-        * Open to Database Actions
-        * Connect as DEV_USER
-        * Copy all the content of `departments-table.sql` file, then past it in the worksheet there and click on the run script button
+    <details><summary>**Option 2: Using Database Actions**</summary>
+    * Open to Database Actions
+    * Connect as DEV_USER
+    * Copy all the content of `departments-table.sql` file, then past it in the worksheet there and click on the run script button
         ![Run departments ddl in database actions](./images/run-departments-table-database-actions.png " ")
+    </details>
+
+    <details><summary>**Result**</summary>
+    
+    * The table is created and data inserted in now, so the data should appear now in the Departments page. Refresh the app to check.
+
+        <details><summary>***Check ...***</summary>
+
+        **Oops!** It doesn’t appear yet!
+
+        ![Departments-page](./images/departments-page-unlocked.png " ")
+
+        This is expected because the ***REST*** endpoint for the table hasn’t been enabled yet.
+
+        Don’t worry, we’ll easily configure it in the next lab using ***ORDS***, which simplifies the process.
         </details>
+
+    </details>
 
 ## Task 3: Enable ORDS Endpoint For Departments Table
 
@@ -126,7 +144,7 @@ All right, so now we will go to the .env file and replace **DEV\_USER** with **P
 
 7. Click on the Departments section
 
-![Departments-page](./images/departments-unlocked.png " ")
+![Departments-page](./images/departments-page-unlocked.png " ")
 
 There are no rows at the moment, which is expected because we switched from DEV\_USER (development environment) to PROD\_USER (production environment), where the departments table doesn’t exist yet. You can verify this by connecting to the PROD_USER schema and checking its tables.
 

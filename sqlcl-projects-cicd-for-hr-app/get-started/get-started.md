@@ -8,7 +8,7 @@ You have been provided with access to a Oracle Database Actions (*aka* Oracle SQ
 
 <!--Some experience in shell commands, react, JavaScript, and HTML are helpful but not necessary. Although, we've designed this workshop so even the beginner can complete it!-->
 
-![ORDS, SQLcl, Database Actions](images/ords-sqlcl-sqldevweb.png " ")
+![ORDS, SQLcl, Database Actions](images/ords-sqlcl-sql-dev-web.png " ")
 
 Estimated Lab Time: 10 minutes
 
