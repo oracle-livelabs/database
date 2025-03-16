@@ -12,22 +12,13 @@ The Tech Solutions Company is a thriving company experiencing rapid growth. Thei
 
 ![Database cicd](./images/database-cicd.png " ")
 
-### **Your Mission**
-
-Before we dive into the code, let's explore the existing HR application. In this lab, you'll:
-
-* **Understand the Current System:** Understand existing functionalities and where the "Departments" feature fits.
-* **Learn SQLcl and CI/CD:** Use SQLcl's project feature for the development and deployment process.
-
 ### **Focus on the Process**
 
-Remember, the primary goal of this lab is to learn the principles of database development and deployment using SQLcl and CI/CD practices. The specific technology used in the application itself is not the main focus.
+Remember, the main goal of this workshop is to understand the principles of database development and deployment using project command in SQLcl and CI/CD practices, regardless of the technology used in the application.
 
-Estimated Lab Time: 14 minutes
+Estimated Lab Time: 15 minutes
 
 ### **Objectives**
-
-By the end of this lab, you will be able to:
 
 * Add the new feature to the application with database and code changes.
 * Use SQLcl to manage and deploy database changes.
@@ -41,7 +32,37 @@ By the end of this lab, you will be able to:
 
 ## Task 1: Export Database Changes (project export)
 
-Before exporting, create a new git branch and switch to it for this feature:
+First, you have to be connect to DEV_USER in SQLcl and make sure you are in the application folder </br> /home/oracle/assets/workshops/**sqlcl-projects-react-app**.
+
+```sql
+<copy>
+    sql sys/Welcome23ai@10.89.0.1:1521/FREEPDB1 as sysdba
+</copy>
+```
+
+```sql
+<copy>
+    connect DEV_USER
+</copy>
+```
+
+```sql
+<copy>
+    cd /home/oracle/assets/workshops/sqlcl-projects-react-app/
+</copy>
+```
+
+![Connect to dev](./images/connec-to-dev-and-be-in-the-app-dir.png " ")
+
+>**Note:** You must be in the project folder (in your case **sqlcl-projects-react-app** is your project/application folder) to execute project commands; otherwise, an error will occur.
+
+Before exporting, create a new git branch from main branch and switch to it for this feature:
+
+```sql
+<copy>
+    !git branch
+</copy>
+```
 
 ```sql
 <copy>
@@ -106,18 +127,16 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
     ```sql
     <copy>
-        project export -schemas DEV_USER -verbose
+        project export -objects DEPARTMENTS -verbose
     </copy>
     ```
 
-    ![Exported schema](./images/export-devuser-schema.png " ")
+    ![Run project export command](./images/project-export-object.png " ")
+    <!--![Exported schema](./images/export-devuser-schema.png " ")-->
     <!--![Exported schema](./images/export-dev-user-schema.png " ")-->
     <!--![Exported schema without hist](./images/export-dev-user.png " ")-->
-    <!--![Run project export command](./images/project-export-object.png " ")-->
 
-    This command **exports database objects** into your repository.
-
-2. Find the exported schema folder and its database object files inside the database folder under src.
+2. Find the exported departments table inside the database folder under src/database/dev_user/tables.
 
     ![Database folder location](./images/database-schema-location.png " ")
     <!--![Database folder location](./images/database-schema-folder.png " ")-->
@@ -128,8 +147,6 @@ To see what's happen when exporting the whole schema drop down **Export schema**
     ![Departments.sql content](./images/departments-sql-file.png " ")
     <!--![Departments.sql content](./images/departments-sql-file-content.png " ")-->
     <!--![Departments.sql content](./images/departments-sql-content.png " ")-->
-
-4. Now we have made the database changes, we export our objects to have them included in our project folders.
 
 ## Task 4: Stage Changes (project stage)
 
@@ -157,7 +174,7 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
         ```sql
         <copy>
-            !git commit -m "Export dev_user schema"
+            !git commit -m "Export departments table"
         </copy>
         ```
 
@@ -165,42 +182,46 @@ To see what's happen when exporting the whole schema drop down **Export schema**
         <!--![Add and commit changes](./images/git-add-commit-changes.png " ")-->
 
     * Execute the following command to stage the changes for release
+
         ```sql
         <copy>
             project stage -verbose
         </copy>
         ```
+
         ![project stage](./images/project-stage-command.png " ")
         <!--![project stage](./images/project-stage-cmd.png " ")-->
         <!--![project stage](./images/project-stage.png " ")-->
 
-        This command prepares the staged changes for release by creating a release artifact in the `dist` folder.
-
 * **Add custom scripts**
 
-    You can add custom scripts using the **add-custom** sub-command of the stage command
+    You can add custom scripts using the **add-custom** sub-command of the stage command.
 
     * Add the custom file to the stage
+
         ```sql
         <copy>
             project stage add-custom -file-name dept-data.sql -verbose
         </copy>
         ```
+
         ![project stage add-custom](./images/project-stage-add-custom.png " ")
 
-        A custom folder will be added to the dist folder containing the created custom sql file
+        This will create a custom sql file in the dist/_custom folder.
 
     * Navigate to the scripts folder
 
         ![Go to scripts folder](./images/scripts-folder.png " ")
-    
+
     * Copy the insert statements from `departments_table.sql`
 
         ![Copy inserts](./images/copy-inserts.png " ")
 
     * Locate the newly created dept_data.sql file
 
-        The file can be found at:`sqlcl-projects-react-app/dist/releases/next/changes/Ticket-1-Departments/_custom`
+        The file can be found at:
+
+        `sqlcl-projects-react-app/dist/releases/next/changes/Ticket-1-Departments/_custom/dept-data.sql`
 
         ![Custom file location](./images/custom-file-location.png " ")
 
@@ -212,31 +233,50 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
         <!--TODO: add commit-->
 
+* **Add and commit:**
+
+    ```sql
+    <copy>
+        !git add .
+    </copy>
+    ```
+
+    ```sql
+    <copy>
+        !git commit -m "Add stage files"
+    </copy>
+    ```
+
+    ![Commit stage files](./images/commit-stage-add-custom-files.png " ")
+
 * **Merge to main branch:**
-        ```sql
+
+    ```sql
     <copy>
         !git checkout main
     </copy>
-        ```
-        ```sql
+    ```
+
+    ```sql
     <copy>
         !git merge Ticket-1-Departments
     </copy>
-        ```
+    ```
+
     ![Merge branch with main ](./images/merge-to-main.png " ")
     <!--![Merge branch with main ](./images/merge-branch-to-main.png " ")-->
 
 ## Task 5: Release Changes (project release)
 
-* Once your changes are merged into the main branch, execute the following command to create a release:
-        ```sql
+* Once your changes are merged into the main branch, execute the following command to create a second release:
+
+    ```sql
     <copy>
         project release -version 2.0.0 -verbose
     </copy>
-        ```
-    ![Project release](./images/project-release.png " ")
+    ```
 
-    This command creates a release folder with the specified version.
+    ![Project release](./images/project-release.png " ")
 
 ## Task 6: Generate Deployable Artifact (project gen-artifact)
 
@@ -246,7 +286,7 @@ Before generating the artifact, you need to return the install.sql file to its i
 
     ![Open install.sql](./images/navigate-to-install-sql-file.png " ")
 
-* Go to line 17 and replace **lb update** with **lb changelog-sync** 
+* Go to line 17 and replace **lb changelog-sync** with **lb update**
 
     <!--![Replace lb update with lb changelog-sync](./images/lb-update-to-lb-changelog-syn.png " ")-->
     ![Replace lb update with lb changelog-sync](./images/lb-changelog-sync-to-update.png " ")
@@ -254,6 +294,7 @@ Before generating the artifact, you need to return the install.sql file to its i
 * Save the **install.sql** file by pressing **Cmd + S** on Mac or **Ctrl + S** on Windows/Linux.
 
 * Run `project gen-artifact`
+
     ```sql
     <copy>
         project gen-artifact -verbose
@@ -271,22 +312,26 @@ Before generating the artifact, you need to return the install.sql file to its i
 ## Task 7: Deploying to Production (project deploy)
 
 * **Connect to the Production Database:**
+
     * Establish a connection to the production database using SQLcl.
+
     * Use the `connect` command with the `PROD_USER` credentials.
 
-        ```sql
+    ```sql
     <copy>
         connect PROD_USER/[PASSWORD]
     </copy>
-        ```
+    ```
+
     ![Connect to prod](./images/connect-to-production.png " ")
 
 * **Deploy Changes to Production:**
 
     * Execute the following command to deploy the changes to the production database:
+
         ```sql
         <copy>
-            project deploy -file artifact/HrManager-2.O.zip  -verbose
+            project deploy -file artifact/HrManager-2.O.0.zip  -verbose
         </copy>
         ```
         <!--![project deploy ](./images/project-deploy-cmd.png " ")-->
@@ -302,7 +347,7 @@ Before generating the artifact, you need to return the install.sql file to its i
 
 * **Enable REST Endpoints**
 
-    To expose the Departments table in PROD\_USER as a REST endpoint, follow the same steps you performed for DEV\_USER in **Lab 1 → Task 4**.
+    To expose the Departments table in PROD\_USER as a REST endpoint, follow the same steps you performed for DEV\_USER in **Lab 2 → Task 3**.
 
     1. Open Database Actions
     2. Connect as PROD_USER
@@ -319,13 +364,13 @@ Before generating the artifact, you need to return the install.sql file to its i
 
     </br>
 
-* **The department section, should locks like this:**
+* **The department section should look like this:**
 
     ![Departments data working in the app](./images/departments-data-appearing-in-the-app.png " ")
 
 **You did it!** You have successfully implemented and deployed the "Departments" feature and release the version 2 of the application using SQLcl and CICD practices. You have gained valuable experience in managing database changes, automating deployments, and working with a CICD pipeline.
 
-After you gain this some experience, it's time for a new challenge! Head to the [**next lab**](#next) and take your skills to the next level!
+After you gain this some experience, it's time for some challenges! Head to the [**next lab**](#next) and take your skills to the next level!
 
 ## Learn More
 

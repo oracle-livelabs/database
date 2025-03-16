@@ -10,7 +10,7 @@ You have been provided with access to a Oracle Database Actions (*aka* Oracle SQ
 
 ![ORDS, SQLcl, Database Actions](images/ords-sqlcl-sql-dev-web.png " ")
 
-Estimated Lab Time: 10 minutes
+Estimated Lab Time: 15 minutes
 
 ### **Objectives**
 

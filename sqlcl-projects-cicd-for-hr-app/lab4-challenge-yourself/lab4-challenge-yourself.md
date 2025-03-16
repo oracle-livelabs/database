@@ -16,7 +16,7 @@ The Analytics feature was always planned but left inactive in the initial releas
 
 This lab has a game-challenge approach. First, you'll get an overview of the goal. Try to solve it on your own! If you need help, you'll get a hint. Still stuck? A step-by-step solution will guide you through.
 
-Estimated Lab Time: 14 minutes
+Estimated Lab Time: 15 minutes
 
 ### **Objectives**
 
@@ -220,7 +220,21 @@ Follow the same steps as in the previous lab (starting from `project export`), a
 
     Copy the inserts from the tables scripts in the scripts folder and paste them into the newly created custom scripts, just as you did previously with dept_data.sql.
 
-8. Checkout to main and then merge the previous branch to it.
+8. Add and commit
+
+    ```sql
+    <copy>
+        !git add --all
+    </copy>
+    ```
+
+    ```sql
+    <copy>
+        !git commit -m "Add stage files"
+    </copy>
+    ```
+
+9. Checkout to main and then merge the previous branch to it.
 
     ```sql
     <copy>
@@ -236,7 +250,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
 
     <!--![Merge to main](./images/merge-to-main.png " ")-->
 
-9. Project release and gen-artifact
+10. Project release and gen-artifact
 
     * Project release
 
@@ -245,6 +259,21 @@ Follow the same steps as in the previous lab (starting from `project export`), a
         project release -version 3.0.0 -verbose
     </copy>
     ```
+
+    * Project release
+
+    ```sql
+    <copy>
+        !git add .
+    </copy>
+    ```
+
+    ```sql
+    <copy>
+        !git commit -m "Release 3.0.0"
+    </copy>
+    ```
+
     <!--![Project release](./images/project-release.png " ")-->
     * Project gen-artifact
 
@@ -255,7 +284,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
     ```
     <!--![Project-gen-artifact](./images/project-gen-artifact.png " ")-->
 
-10. Connect to PROD_USER and run the deploy command to apply the changes.
+11. Connect to PROD_USER and run the deploy command to apply the changes.
 
     ```sql
     <copy>
@@ -269,16 +298,16 @@ Follow the same steps as in the previous lab (starting from `project export`), a
     </copy>
     ```
 
-11. Enable ORDS Endpoints
+12. Enable ORDS Endpoints
 
-    To enable the REST endpoints for the Attendance and PerformanceReviews tables in PROD\_USER, follow the same procedure you used for DEV\_USER in Lab 1 → Task 4.
+    To enable the REST endpoints for the Attendance and PerformanceReviews tables in PROD\_USER, follow the same procedure you used for DEV\_USER in Lab 2 → Task 3.
 
     * Open Database Actions
     * Connect as PROD_USER
     * Locate the Departments table, right-click on it.
     * Select REST, then click Enable.
 
-12. Refresh the application. The Analytics page should work correctly in production environment.
+13. Refresh the application. The Analytics page should work correctly in production environment.
 
 ![Analytics page working](./images/analytics-page-works.png " ")
 

@@ -2,13 +2,13 @@
 
 ## Introduction
 
-Before starting development on the Departments feature, you need to migrate your application to SQLcl Projects.
+Before starting development on the Departments feature, you need to migrate your application to use SQLcl's project feature.
 
 This lab will guide you through the process of integrating SQLcl Projects into your existing application. By adopting this approach, you’ll benefit from better database versioning and the ability to deploy database and application changes simultaneously.
 
 ![Application Migration](./images/application-migration.png " ")
 
-Estimated Lab Time: 14 minutes
+Estimated Lab Time: 15 minutes
 
 ### **Objectives**
 
@@ -139,7 +139,7 @@ Use SQLcl's **project** command to:
 
       ![Run project init command](./images/project-init.png " ")
 
-      The `project init` command initializes a new project, setting up the necessary directories and files for managing your database objects and changes within your current directory.
+      The **`project init`** command creates a specific folder structure, setting up the necessary directories and files for managing your database objects and changes within your current directory. If you add the **-makeroot** flag to your init command, a folder with the project name will be created under your current directory and will hold all the project files and folders.
 
       >**Note:** Use `help project` for more info
         ```sql
@@ -152,9 +152,9 @@ Use SQLcl's **project** command to:
     * **Project Structure:**
         * SQLcl Project feature use a specific folder structure to manage database objects and changes.
         * Key folders include:
-            * **`.dbtools`:** This folder contains project configuration files, filters, and formatting rules. It's a hidden folder.
-            * **`src`:** This folder stores exported objects from the database, organized by schema and object type.
-            * **`dist`:** This folder contains the distributable for each release
+            * **`.dbtools`:** contains project configuration files, filters, and formatting rules. It's a hidden folder.
+            * **`src`:** stores exported objects from the database, organized by schema and object type.
+            * **`dist`:** contains the distributable for each release.
 
             ```text
             ──.dbtools
@@ -229,6 +229,8 @@ Use SQLcl's **project** command to:
 
 Since the source and target databases use different schemas, we need to set emitSchema to false in project.config.json (inside .dbtools). By default, this setting is true, meaning exported DDL includes fully qualified object names in the format schema.object (e.g., dev_user.departments). Disabling it ensures objects are created without schema prefixes in the target database.
 
+You will use the project config command to view to edit this configuration item.
+
 <!--Since the source and target databases have different schemas, we need to set emitSchema (a setting in the project.config.json file under the .dbtools folder) to false. This setting determines whether the object name will be prefixed with its schema (fully qualified).-->
 
 ```sql
@@ -265,7 +267,7 @@ In this task, you will export the DEV_USER schema.
 
 But before proceeding, we need to add a filter in `.dbtools/filters/project.filters` to exclude the auto-generated objects that were not our proper stuff.
 
->**Notes:** Project filters are used to filter out objects that will be exported. <!--to control what gets exported and what is excluded. Find more details in [Oracle SQLcl Project & CI/CD Docs](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/database-application-ci-cd.html#GUID-6A942F42-A365-4FF2-9D05-6DC2A0740D24)-->
+>**Notes:** Project filters are used to filter out objects that will be exported or exclude specific ones. <!--to control what gets exported and what is excluded. Find more details in [Oracle SQLcl Project & CI/CD Docs](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/database-application-ci-cd.html#GUID-6A942F42-A365-4FF2-9D05-6DC2A0740D24)-->
 
 1. Open the filters configuration file
 
@@ -277,9 +279,9 @@ But before proceeding, we need to add a filter in `.dbtools/filters/project.filt
 
     ![Project filters](./images/project-filters.png " ")
 
-2. Insert this line `not (object_name like 'DBTOOLS$%'),` as the following:
+2. Insert this line **"not (object_name like 'DBTOOLS$%'),"** as the following:
 
-    * Press Esc + I to enter insert mode
+    * Press **Esc** + **I** to enter insert mode
 
     * Copy and paste this line in the location shown in the image below
         
@@ -291,15 +293,17 @@ But before proceeding, we need to add a filter in `.dbtools/filters/project.filt
 
         ![Insert filters](./images/insert-filters.png " ")
 
-    * Press Esc, then type :wq to save and exit
+    * Press **Esc**, then type **:wq** to save and exit
 
-Now, we are ready to export our schema cleanly.
+    Now, we are ready to export our schema cleanly.
 
-3. Execute the following command to export the DEV_USER schema to the application folder:
+3. Export the DEV_USER schema to the application folder
+
+    Run the following command to export objects from the schemas defined during project init. The specified schema is used by default, so you don’t need to specify it again.
 
     ```sql
     <copy>
-        project export -schemas DEV_USER -verbose
+        project export -verbose
     </copy>
     ```
 
@@ -307,6 +311,8 @@ Now, we are ready to export our schema cleanly.
     <!--![Exported schema](./images/export-dev-user-schema.png " ")-->
     <!--![Exported schema without hist](./images/export-dev-user.png " ")-->
     <!--![Run project export command](./images/project-export-object.png " ")-->
+
+    >**Note:** To export a different schema, provide it explicitly in the project export command.
 
     This command **exports database objects** into your repository.
 
@@ -327,54 +333,95 @@ Now, we export our objects to have them included in our project folders.
 ## Task 5: Project Stage
 
 * You need to add and commit changes before stage
+
     ```sql
     <copy>
         !git status
     </copy>
     ```
+
     ```sql
     <copy>
         !git add --all
     </copy>
     ```
+
     ```sql
     <copy>
         !git status
     </copy>
     ```
+
     ```sql
     <copy>
         !git commit -m "Export dev_user schema"
     </copy>
     ```
+
     ![Add and commit changes](./images/git-commit-changes.png " ")
     <!--![Add and commit changes](./images/git-add-commit-changes.png " ")-->
 
 * Execute the following command to stage the changes for release
+
     ```sql
     <copy>
         project stage -verbose
     </copy>
     ```
+
     ![project stage](./images/project-stage-command.png " ")
 <!--![project stage](./images/project-stage-cmd.png " ")-->
 <!--![project stage](./images/project-stage.png " ")-->
-This command prepares the staged changes for release by creating a release artifact in the `dist` folder.
+
+This command generates Liquibase changelogs for all source (src) and custom SQL files by comparing the current branch (`SQLcl-Projects-Migration`) to the base branch (`main`). It creates a structured folder (dist/releases/next/) for staged files and allows adding custom changesets with SQL and SQLcl commands.
+
+* Add and commit the files
+
+    ```sql
+    <copy>
+        !git status
+    </copy>
+    ```
+
+    ```sql
+    <copy>
+        !git add --all
+    </copy>
+    ```
+
+    ```sql
+    <copy>
+        !git status
+    </copy>
+    ```
+
+    ```sql
+    <copy>
+        !git commit -m "Add stage files"
+    </copy>
+    ```
+
+    ![Commit project stage files](./images/commit-stage-files.png " ")
 
 * **Merge to main branch:**
+
+    This is typically done via a Merge Request or Pull Request, depending on your Git provider. However, since this is a local repository, you can merge directly into the main branch.
+
     ```sql
     <copy>
         !git checkout main
     </copy>
     ```
+
     ```sql
     <copy>
         !git merge SQLcl-Projects-Migration
     </copy>
     ```
+
     ![Merge branch with main ](./images/merge-to-main.png " ")
 
-## Task 6: Project Release
+## Task 6: Generate Release 1.0.0
 
 Once your changes are merged to the main branch, execute the following command to create a first release:
 ```sql
@@ -382,13 +429,30 @@ Once your changes are merged to the main branch, execute the following command t
     project release -version 1.0.0 -verbose
 </copy>
 ```
+
 ![Project release](./images/project-release.png " ")
 
-This command creates a release folder with the specified version.
+This command renames the contents of dist/releases/next to the specified version number and then creates a new next folder under dist.
+
+Add the changed files and commit:
+
+```sql
+<copy>
+    !git add .
+</copy>
+```
+
+```sql
+<copy>
+    !git commit -m "Release 1.0.0"
+</copy>
+```
+
+![Project release](./images/commit-first-release.png " ")
 
 ## Task 7: Generate Deployable Artifact
 
-Before generating the artifact, you need to establish a new database baseline by syncing the two environments (schemas).
+Before generating the artifact, you need to establish a new database baseline by syncing the two environments (schemas). We need to do this because the employees table already exists in the target environment and is in the same state as the source. So we need just to sync them. If your target environment was empty during migration, you don't need to do that and just skip this step.
 
 * Open the dist/install.sql file
 
@@ -401,7 +465,22 @@ Before generating the artifact, you need to establish a new database baseline by
 
 * Save the **install.sql** file by pressing **Cmd + S** on Mac or **Ctrl + S** on Windows/Linux.
 
+* Add and commit
+
+    ```sql
+    <copy>
+        !git add .
+    </copy>
+    ```
+
+    ```sql
+    <copy>
+        !git commit -m "Modify install file"
+    </copy>
+    ```
+
 * The `project gen-artifact` command can be used to generate an artifact for your database changes. This artifact can then be easily deployed to different environments.
+
     ```sql
     <copy>
         project gen-artifact -verbose
@@ -437,11 +516,15 @@ In the next task, we will learn how to deploy these changes to the production en
 * **Deploy to Production:**
 
     * Execute the following command to deploy the changes to the production database:
+
         ```sh
         <copy>
             project deploy -file artifact/HrManager-1.O.0.zip  -verbose
         </copy>
         ```
+
+        >***Note:** If it returns the help when pasting this command in SQLcl, try typing it manually. Use tab for completion.*
+
         <!--![project deploy ](./images/project-deploy-cmd.png " ")-->
         ![Project deploy ](./images/project-deploy.png " ")
 
@@ -457,7 +540,15 @@ In the next task, we will learn how to deploy these changes to the production en
 
 * **SQLcl Liquibase**
 
-    The other three tables created are Liquibase tables. Liquibase is the engine behind the SQLcl Project feature, executing the `liquibase update` command behind the scenes. It checks for differences between the source and target databases—if differences exist, it applies the necessary changes to synchronize them; if not, no action is taken.
+    SQLcl Liquibase is the engine behind the SQLcl Project feature, executing the `liquibase update` command in the background. It compares the source and target databases, applying necessary changes only if differences exist.
+
+    During the first deployment using the project deploy command, Liquibase creates two key tables:
+
+    * **DATABASECHANGELOG** – Tracks executed changesets, including timestamps and checksums.
+
+    * **DATABASECHANGELOGLOCK** – Prevents concurrent deployments.
+
+    Before applying changes, Liquibase checks databasechangelog to see if a changeset has already been executed. If not, it processes them in the order defined in the changelog file.
 
     <!--The other three created tables are liquibase tables. Liquibase is the engine of the SQLcl Projects tool that apply its command 'liquibase update' behiend scens to check if there is any differences between the source and target database, if they are it apply the changes to get them synched, if they are not, it does't do anything. So it checks that there are diffs before doing anything.-->
 

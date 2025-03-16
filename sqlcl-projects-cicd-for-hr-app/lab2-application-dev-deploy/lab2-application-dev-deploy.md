@@ -6,7 +6,7 @@ Now that your application has been migrated to SQLcl Projects and is up and runn
 
 <!--![App dev deploy](./images/app-dev-deploy.png " ")-->
 
-Estimated Lab Time: 14 minutes
+Estimated Lab Time: 15 minutes
 
 ### **Objectives**
 
@@ -51,7 +51,7 @@ The last issue in the previous task occurred because the departments table is mi
     * Double click on departments_table.sql to see the table ddl and data to insert
     ![Departments ddl and data](./images/departments-table.png " ")
     <!--![Departments ddl and data](./images/departments-table2.png " ")-->
-    * Execute the previous sql file in SQLcl starting by the ddl then the inserts
+    * Connect to DEV_USER in SQLcl then execute the previous sql file, starting by the ddl then the inserts.
 
         >**Note:** Make sure you are in the scripts directory before executing the sql file in SQLcl.
 
@@ -148,7 +148,7 @@ All right, so now we will go to the .env file and replace **DEV\_USER** with **P
 
 There are no rows at the moment, which is expected because we switched from DEV\_USER (development environment) to PROD\_USER (production environment), where the departments table doesn’t exist yet. You can verify this by connecting to the PROD_USER schema and checking its tables.
 
-![No departments table in prod](./images/prod-user-tables.png " ")
+![No departments table in prod](./images/show-prod-tables.png " ")
 
 **What would be the next ?**
 
