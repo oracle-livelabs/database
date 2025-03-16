@@ -43,7 +43,7 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
      * **JupyterLab:** Click the provided URL to access JupyterLab.
      * **ORDS Users:** The list of users we’ll be working with during the workshop.
-     * **Password:** A single password used for all ORDS users.
+     * **Password:** A single password used for JupyterLab and all ORDS users.
      * **SQL Developer Web (Database Actions):** Click the provided URL to access Database Actions.
 
     ![Database Actions URI in Lab.](images/reservation-info.png " ")
