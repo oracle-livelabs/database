@@ -205,23 +205,27 @@ Follow the same steps as in the previous lab (starting from `project export`), a
         <!--![Git add and commit](./images/git-add-commit.png " ")
         ![Project stage](./images/project-stage.png " ")-->
 
-7. Add custom scripts
+7. Add custom scripts using add-custom sub-command of stage command.
 
-    ```sql
-    <copy>
-        project stage add-custom -file att_data.sql -verbose
-    </copy>
-    ```
+    * Add custom script for **attendance** table.
 
-    ```sql
-    <copy>
-        project stage add-custom -file perf_data.sql -verbose
-    </copy>
-    ```
+        ```sql
+        <copy>
+            project stage add-custom -file att_data.sql -verbose
+        </copy>
+        ```
 
-    Copy the inserts from the tables scripts in the scripts folder and paste them into the newly created custom scripts, just as you did previously with dept_data.sql.
+    * Add custom script for **performancereviews** table.
 
-8. Add and commit
+        ```sql
+        <copy>
+            project stage add-custom -file perf_data.sql -verbose
+        </copy>
+        ```
+
+    Copy the inserts from the tables sql files in the scripts folder and paste them into the newly created custom scripts (attendance inserts in the att\_data.sql custom file and performancereviews inserts in the perf_data.sql custom file), just as you did previously with dept\_data.sql.
+
+8. Add and commit.
 
     ```sql
     <copy>
@@ -261,7 +265,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
     </copy>
     ```
 
-    * Project release
+    * Add and commit
 
     ```sql
     <copy>
@@ -301,7 +305,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
 
 12. Enable ORDS Endpoints
 
-    To enable the REST endpoints for the Attendance and PerformanceReviews tables in PROD\_USER, follow the same procedure you used for DEV\_USER in Lab 2 → Task 3.
+    To **enable** the **REST endpoints** for the **Attendance** and **PerformanceReviews** tables in PROD\_USER, follow the same procedure you used for DEV\_USER in Lab 2 → Task 3.
 
     * Open Database Actions
     * Connect as PROD_USER
