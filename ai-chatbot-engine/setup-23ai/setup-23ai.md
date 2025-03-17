@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab guide you through setting up Oracle Database Free (23c) in a container and setting it up for vector operations.
+This lab guide you through setting up Oracle Autonomous Database 23ai.
 
 Estimated Time: 15 minutes
 
