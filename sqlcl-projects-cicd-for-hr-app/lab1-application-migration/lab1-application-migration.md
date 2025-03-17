@@ -363,6 +363,20 @@ Now, we export our objects to have them included in our project folders.
     ![Add and commit changes](./images/git-commit-changes.png " ")
     <!--![Add and commit changes](./images/git-add-commit-changes.png " ")-->
 
+* By default, the **dist** folder is ignored in many React projects because it contains generated build files. However, you need to track it in Git by removing dist in the .gitignore file.
+
+    * Open .gitignore, press Esc + I then search for **dist** and delete the line that contains it.
+
+        >**Note:** Make sure you are in the application folder /home/oracle/assets/workshops/**sqlcl-projects-react-app**
+
+        ```sql
+        <copy>
+            vi .gitignore
+        </copy>
+        ```
+
+    * Save the file.
+
 * Execute the following command to stage the changes for release
 
     ```sql
