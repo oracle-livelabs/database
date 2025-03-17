@@ -156,7 +156,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
 <details><summary>**Solution**</summary>
 
 1. Change the username in the .env file from DEV\_USER to PROD\_USER.
-2. Refresh the application window. The Analytics page will not work as PROD_USER doesn’t contain the two new tables yet. Which you will ensure using SQLcl Projects.
+2. Refresh the application window. Only the "Employees per Department" chart appears since PROD_USER lacks the two new tables. You'll fix this with **project** commands.
 3. In SQLcl, connect as DEV_USER and navigate to the application folder `sqlcl-project-react-app`.
         ```sql
     <copy>
