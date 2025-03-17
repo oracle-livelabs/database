@@ -43,6 +43,8 @@ This lab assumes:
     where sqlset_name like 'STS_Capture%'
     group by sqlset_name order by 2;
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     <details>

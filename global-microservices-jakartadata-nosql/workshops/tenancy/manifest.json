@@ -1,0 +1,58 @@
+{
+	"workshoptitle": "Create Global, Scalable Microservices on OCI with Jakarta Data, and NoSQL",
+	"help": "livelabs-help-db_us@oracle.com",
+	"tutorials": [
+		{
+			"title": "Introduction",
+			"description": "This is the introduction for the lab",
+			"type": "freetier",
+			"filename": "../../introduction/introduction.md"
+		},
+		{
+			"title": "Get Started",
+			"description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable).",
+			"filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+		},
+		{
+			"title": "Lab 1: Prepare Your Environment",
+			"description": "Perform the inital setup operations",
+			"type": "freetier",
+			"filename": "../../setup-environment/setup-environment.md"
+		},
+		{
+			"title": "Lab 2: Create Tables, Load Tables",
+			"description": "Create and populate your tables",
+			"type": "freetier",
+			"filename": "../../create-populate-tables/create-populate-tables.md"
+		},
+		{
+			"title": "Lab 3: Run the Book Management Catalog Microservice",
+			"description": "This is the content developers",
+			"type": "freetier",
+			"filename": "../../run-nosql-app/run-nosql-app.md"
+		},
+		{
+			"title": "Lab 4: Deploy the Book Management Catalog Microservice with Container Instances",
+			"description": "This is the content devops",
+			"type": "freetier",
+			"filename": "../../run-nosql-app-container/run-nosql-app-container.md"
+		},
+		{
+			"title": "Lab 5: Setup Global Active Tables",
+			"description": "Using GAT to create a geo-Distributed microservice",
+			"type": "freetier",
+			"filename": "../../create-gat-tables/create-gat-tables.md"
+		},
+		{
+			"title": "Lab 6: Clean Up",
+			"description": "Perform clean-up",
+			"type": "freetier",
+			"filename": "../../clean-up/clean-up.md"
+		},
+		{
+			"title": "Need Help?",
+			"description": "Solutions to Common Problems and Directions for Receiving Live Help",
+			"filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+		}
+	]
+}
