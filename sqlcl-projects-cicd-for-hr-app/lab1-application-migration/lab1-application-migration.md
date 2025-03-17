@@ -12,6 +12,8 @@ Estimated Lab Time: 15 minutes
 
 ### **Objectives**
 
+* Practice and apply SQLcl project commands through hands-on exploration
+* Experience and understand the benefits of database CICD
 * Successfully migrate the HR Application to SQLcl Projects
 * Synchronize DEV\_USER and PROD\_USER
 

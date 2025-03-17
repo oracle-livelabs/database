@@ -36,7 +36,7 @@ This workshop requires the following:
 
 **This lab has been built for the beginner**: simply follow the labs and the given steps and instructions. We provide the database, application, code, and SQLcl/Git instructions.
 
-Upon completion of this lab, you will understand the process of implementing CI/CD for your database applications using SQLcl.
+Upon completion of this workshop, you will understand the process of implementing CI/CD for your database applications using SQLcl.
 
 ![Are you ready?](./images/are-you-ready.png " ")
 

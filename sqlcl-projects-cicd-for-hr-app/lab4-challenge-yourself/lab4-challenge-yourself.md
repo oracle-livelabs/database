@@ -20,9 +20,10 @@ Estimated Lab Time: 15 minutes
 
 ### **Objectives**
 
-* Overcome all the challenges successfully
+* Assess your understanding of the project feature from previous labs and reinforce your knowledge.
 * Enable the Analytics feature
-* Release the version 3 of the database for the application
+* Release the version 3 of the database and the application
+* Overcome all the challenges successfully
 
 ### **Prerequisites**
 

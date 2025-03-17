@@ -4,15 +4,13 @@
 
 Welcome aboard! You're about to embark on an exciting project: developing the "Departments" feature for the growing HR application.
 
-The SQLcl Project feature contains many commands. You will explore them in this lab.
-
-### **The Challenge**
+**The Challenge**
 
 The Tech Solutions Company is a thriving company experiencing rapid growth. Their current HR systems, while sufficient in the past, are now struggling to keep up with the increasing number of employees and departments. To address this, they need a Department Management system to improve efficiency and organization.
 
 ![Database cicd](./images/database-cicd.png " ")
 
-### **Focus on the Process**
+**Focus on the Process**
 
 Remember, the main goal of this workshop is to understand the principles of database development and deployment using project command in SQLcl and CI/CD practices, regardless of the technology used in the application.
 
@@ -20,10 +18,10 @@ Estimated Lab Time: 15 minutes
 
 ### **Objectives**
 
-* Add the new feature to the application with database and code changes.
-* Use SQLcl to manage and deploy database changes.
-* Practice and apply SQLcl project commands through hands-on exploration.
-* Experience and understand the benefits of database CICD.
+* Utilize SQLcl to manage and deploy database changes.
+* Deploy database changes to the production environment and verify application functionality.
+* Practice and apply SQLcl's project commands.
+* Gain hands-on experience with database CI/CD and understand its benefits.
 
 ### **Prerequisites**
 
