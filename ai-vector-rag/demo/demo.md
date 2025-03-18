@@ -48,7 +48,7 @@ This lab assumes you have:
       ````
       ![Run the code snippet in the terminal.](images/lab1-6-terminal-commands.png)
 
-3. The above commands will start a streamlit application running your Chatbot. Three URLs will appear. Click on the last URL to interact with the application from your browser. 
+3. The above commands will start a streamlit application running your Chatbot. A URL will appear. Click on the URL to interact with the application from your browser. 
    ![Launch the app in your browser.](images/lab1-7-app-urls.png)
 
 4. You should now see the landing page of the application you'll be building shortly. Explore the application by following the instructions on the landing page. Feel free to explore the documents with your own questions and discover how the RAG application can retrieve and provide accurate responses based on the document’s content.
@@ -71,4 +71,4 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 * **Author** - Francis Regalado, Database Product Management; David Start, Database Product Management
 * **Contributors** - Brianna Ambler, Kaylien Phan, Database Product Management
-* **Last Updated By/Date** - Brianna Ambler, October 2024
+* **Last Updated By/Date** - Francis Regalado, February 2025

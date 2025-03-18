@@ -53,6 +53,8 @@ You need to prepare a few things before you can start FTEX.
     exec dbms_stats.gather_schema_stats('SYS');
     exec dbms_stats.gather_schema_stats('SYSTEM');
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -968,6 +970,8 @@ You need a few more changes to the new PDB before you can start the import.
     exec dbms_stats.gather_schema_stats('SYS');
     exec dbms_stats.gather_schema_stats('SYSTEM');
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -1132,6 +1136,8 @@ You might need the *FTEX* database in another lab. In a real migration, you don'
     . ftex
     sqlplus / as sysdba
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
 2. Set the tablespace *READ WRITE*.
@@ -1176,4 +1182,4 @@ You can avoid an in-place upgrade and PDB conversion by using FTEX. The source d
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, July 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, January 2025

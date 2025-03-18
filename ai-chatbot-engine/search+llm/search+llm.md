@@ -88,8 +88,10 @@ The SQL query is executed with the provided vector parameter, fetching relevant 
 
 If we print the results, we obtain something like the following. As requested, we have the "score" of each hit, which is essentially the distance in vector space between the question and the text chunk, as well as the metadata JSON embedded in each chunk.
 ```python
+<copy>
 import pprint
 pprint.pp(results)
+</copy>
 ```
 
 ```
@@ -166,7 +168,7 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
     ```python
     <copy>
     # transform docs into a string array using the "paylod" key
-    docs_as_one_string = "\n=========\n".join([doc["text"] for doc in results])
+    docs_as_one_string = "\n=========\n".join([doc[1]["text"] for doc in results])
     docs_truncated = truncate_string(docs_as_one_string, 1000)
     </copy>
     ```
@@ -278,7 +280,7 @@ The compartment id (needed later in this tutorial) is stored in the `compartment
     ```
 
 ### Step 2: Make the call
-This code leverages *Oracle Cloud Infrastructure (OCI)* to generate text using a language model, specifically the “*cohere.command-r-plus*” model. The process starts by creating an inference request where various parameters are defined. These parameters include the input prompt, the maximum number of tokens to generate, and settings for controlling the randomness and creativity of the output, such as `temperature` and `top_p` values. The `is_stream` attribute is set to `False`, indicating that the SDK currently does not support streaming responses.
+This code leverages *Oracle Cloud Infrastructure (OCI)* to generate text using a language model, specifically the latest available Cohere model. The process starts by creating an inference request where various parameters are defined. These parameters include the input prompt, the maximum number of tokens to generate, and settings for controlling the randomness and creativity of the output, such as `temperature` and `top_p` values. The `is_stream` attribute is set to `False`, indicating that the SDK currently does not support streaming responses.
 
 Next, the code sets up the details required for the text generation request. This involves specifying the serving mode and model ID, which identifies the language model to use, and the compartment ID where the request will be processed. The inference request, with all its configured parameters, is then attached to these details. This setup ensures that the OCI service knows exactly what model to use and how to handle the request.
 
@@ -296,7 +298,7 @@ chat_request.frequency_penalty = 0
 chat_request.top_p = 0.75
 chat_request.top_k = 0
 
-chat_detail.serving_mode = oci.generative_ai_inference.models.OnDemandServingMode(model_id="cohere.command-r-plus")
+chat_detail.serving_mode = oci.generative_ai_inference.models.OnDemandServingMode(model_id="cohere.command-r-plus-08-2024") # <- Please check the OCI docs for the latest available model at the time you're running the lab.
 chat_detail.chat_request = chat_request
 chat_detail.compartment_id = compartment_id
 chat_response = generative_ai_inference_client.chat(chat_detail)
@@ -315,6 +317,7 @@ You may now **proceed to the next lab**
 ## Learn More
 * [Oracle Generative AI Service](https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/)
 * [Oracle Database Free](https://www.oracle.com/database/free/)
+* [Oracle Autonomous Database](https://www.oracle.com/autonomous-database/)
 * [Get Started with Oracle Database 23ai](https://www.oracle.com/ro/database/free/get-started/)
 
 ## Acknowledgements
