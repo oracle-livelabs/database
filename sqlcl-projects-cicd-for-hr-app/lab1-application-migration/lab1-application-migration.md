@@ -511,7 +511,7 @@ Before generating the artifact, you need to establish a new database baseline by
 
 ![Artifact folder](./images/artifact-folder.png " ")
 
-In the next task, we will learn how to deploy these changes to the production environment using SQLcl' project command and explore advanced CICD concepts.
+In the next task, we will learn how to deploy these changes to the production environment using SQLcl's project command and explore advanced CICD concepts.
 
 ## Task 8: Deploy to Target Environment
 
