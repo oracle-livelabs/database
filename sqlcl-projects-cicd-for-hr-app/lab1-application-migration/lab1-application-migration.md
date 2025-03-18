@@ -229,7 +229,7 @@ Use SQLcl's **project** command to:
 
 Since the source and target databases use different schemas, we need to set emitSchema to false in project.config.json (inside .dbtools). By default, this setting is true, meaning exported DDL includes fully qualified object names in the format schema.object (e.g., dev_user.departments). Disabling it ensures objects are created without schema prefixes in the target database.
 
-You will use the project config command to view to edit this configuration item.
+You will use the project config command to view and edit this configuration item.
 
 <!--Since the source and target databases have different schemas, we need to set emitSchema (a setting in the project.config.json file under the .dbtools folder) to false. This setting determines whether the object name will be prefixed with its schema (fully qualified).-->
 
