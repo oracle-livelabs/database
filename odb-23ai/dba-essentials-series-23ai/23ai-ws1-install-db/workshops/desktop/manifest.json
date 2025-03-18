@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "DBA Essentials - Install Oracle Database 23ai software and create a database",
+  "workshoptitle": "DBA Essentials - Install Oracle Database 23ai on OCI compute",
   "help": "livelabs-help-db_us@oracle.com",
   "include": {
         "adm-users": "./../../intro-install/files/adm-users.txt", 
@@ -17,7 +17,7 @@
     {
       "title": "Introduction",
       "description": "The workshop on Oracle Database 23ai Installation.",
-      "publisheddate": "10/14/2024",
+      "publisheddate": "03/11/2025",
       "filename": "./../../intro-install/intro-install.md"
     },
     {
@@ -29,7 +29,7 @@
     {
       "title": "Lab 1: Install Oracle Database",
       "description": "How to install the Oracle Database software and create a database with Desktop class (minimal configuration) and Server class (advanced configuration).",
-      "publisheddate": "10/14/2024",
+      "publisheddate": "03/11/2025",
       "filename": "./../../install-desktop-server/install-desktop-server.md"
     },
     {

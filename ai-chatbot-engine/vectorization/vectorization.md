@@ -149,13 +149,12 @@ Finally, let's start to code.
 It is now time to insert the prepared chunks into the vector database.
 
 ### Step 1: Create a database connection
-1. Drag and drop the wallet file you downloaded previosly into the Jupyter file pane. Unzip it in folder named "wallet".
-
+<if type="freetier">1. Drag and drop the wallet file you downloaded previosly into the Jupyter file pane. Unzip it in folder named "wallet".</if>
 1. The connection details should be pinned down in a cell.
    ```python
    <copy>
-   un = <your database username>
-   pw = <your database password>
+   un = "<your database username>"
+   pw = "<your database password>"
    <if type="livelabs">cs = "host.containers.internal/FREEPDB1"</if>
    <if type="ocw24">cs = "host.containers.internal/FREEPDB1"</if>
    </copy>
@@ -303,6 +302,7 @@ You may now **proceed to the next lab**
 ## Learn More
 * [Oracle Generative AI Service](https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/)
 * [Oracle Database Free](https://www.oracle.com/database/free/)
+* [Oracle Autonomous Database](https://www.oracle.com/autonomous-database/)
 * [Get Started with Oracle Database 23ai](https://www.oracle.com/ro/database/free/get-started/)
 
 ## Acknowledgements

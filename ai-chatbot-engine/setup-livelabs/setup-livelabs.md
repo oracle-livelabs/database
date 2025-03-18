@@ -137,6 +137,7 @@ You may now **proceed to the next lab**
 ## Learn More
 * [Oracle Generative AI Service](https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/)
 * [Oracle Database Free](https://www.oracle.com/database/free/)
+* [Oracle Autonomous Database](https://www.oracle.com/autonomous-database/)
 * [Get Started with Oracle Database 23ai](https://www.oracle.com/ro/database/free/get-started/)
 
 ## Acknowledgements

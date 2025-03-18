@@ -7,27 +7,32 @@
     {
       "title": "Introduction",
       "description": "The Introduction is always second for LiveLabs. The title and contents menu title match for the Introduction.",
-      "filename": "../../1-introduction/introduction.md"
+      "filename": "../../introduction/introduction.md"
     },
     {
       "title": "Get Started",
       "description": "Using Oracle Cloud",
-      "filename": "../../2-get-started/get-started.md"
+      "filename": "../../get-started/get-started.md"
     },
     {
-      "title": "Lab 1: Application development and deployment",
+      "title": "Lab 1: Migrate Your Application to SQLcl Projects",
       "description": "This Lab will introduce the application and its setup",
-      "filename": "../../3-application-dev-deploy/application-dev-deploy.md"
+      "filename": "../../lab1-application-migration/lab1-application-migration.md"
     },
     {
-      "title": "Lab 2: Database CI/CD with SQLcl Projects",
+      "title": "Lab 2: Application Development & Deployment",
       "description": "This Lab will introduce the application and its setup",
-      "filename": "../../4-application-setup-change/application-setup-change.md"
+      "filename": "../../lab2-application-dev-deploy/lab2-application-dev-deploy.md"
     },
     {
-      "title": "Lab 3: Challenge Yourself",
+      "title": "Lab 3: Database CI/CD with SQLcl Projects",
+      "description": "This Lab will introduce the application and its setup",
+      "filename": "../../lab3-database-cicd/lab3-database-cicd.md"
+    },
+    {
+      "title": "Lab 4: Challenge Yourself",
       "description": "In this lab the learner will explore the app and do a change",
-      "filename": "../../5-challenge-yourself/challenge-yourself.md"
+      "filename": "../../lab4-challenge-yourself/lab4-challenge-yourself.md"
     },
     {
       "title": "Need Help?",

@@ -32,6 +32,8 @@ Capture workload information from the workload you generated in lab 3 - Generate
     . upgr
     sqlplus / as sysdba
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
 2.  Run the capture script.
@@ -73,6 +75,8 @@ You now have two SQL Tuning Sets:
     from dba_sqlset 
     where name like 'STS_Capture%';
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -116,4 +120,4 @@ A SQL Tuning Set allows you to transport this information between databases. You
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, August 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, January 2025
