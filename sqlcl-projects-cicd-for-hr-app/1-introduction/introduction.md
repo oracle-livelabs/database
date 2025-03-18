@@ -2,11 +2,11 @@
 
 ## About this Workshop
 
-As a developer at Tech Company Solutions, you’ve been tasked with adding new features to the HR application. As the company grows, so do the challenges of managing both the application and its database.
+As a developer at Tech Solutions Company, you’ve been tasked with adding new features to the HR application. As the company grows, so do the challenges of managing both the application and its database.
 
 Many developers appreciate the benefits of CI/CD pipelines for automating application deployments, yet database CI/CD integration is often overlooked. Manually handling database updates, rollbacks, and migrations can lead to significant errors and delays. What if managing database changes could be as seamless as deploying application code?
 
-Meet the **SQLcl Projects CI/CD workflow** a powerful tool designed to revolutionize database development. SQLcl brings automation, consistency, and reliability to database management, empowering developers like you to handle changes efficiently and overcome common obstacles.
+Meet the **SQLcl Projects CI/CD workflow** a powerful tool designed to revolutionize database development. Oracle SQLcl brings automation, consistency, and reliability to database management, empowering developers like you to handle changes efficiently and overcome common obstacles.
 
 In this workshop, you’ll not only enhance the HR application with new features but also explore how the SQLcl Projects feature can transform your database management practices. Our goal is to demonstrate how this versatile extension—built to support more than just database applications—can elevate any project involving database management.
 
@@ -18,7 +18,7 @@ In this workshop, you’ll not only enhance the HR application with new features
 
 This workshop explores the database CICD tool in SQLcl and demonstrates how to use it for you database development projects.
 
-![ci/cd](./../1-introduction/images/database-cicd.png " ")
+![Database ci/cd](./../1-introduction/images/database-cicd.png " ")
 
 In this workshop, you will learn how to:
 
@@ -36,9 +36,12 @@ This workshop requires the following:
 
 **This lab has been built for the beginner**: simply follow the labs and the given steps and instructions. We provide the database, application, code, and SQLcl/Git instructions.
 
-Upon completion of this lab, you will understand the process of implementing CI/CD for your database applications using using SQLcl.
+Upon completion of this lab, you will understand the process of implementing CI/CD for your database applications using SQLcl.
 
-**Let's get started!**
+![Are you ready?](./../1-introduction/images/are-you-ready.png " ")
+
+### **Let's** [**get started!**](#next)
+</br>
 
 ## Learn More
 

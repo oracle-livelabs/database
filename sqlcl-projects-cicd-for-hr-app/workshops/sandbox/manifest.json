@@ -12,7 +12,7 @@
     {
       "title": "Get Started",
       "description": "Using Oracle Cloud",
-      "filename": "../../2-get-started/get-started-sandbox.md"
+      "filename": "../../2-get-started/get-started.md"
     },
     {
       "title": "Lab 1: Application development and deployment",
@@ -27,7 +27,7 @@
     {
       "title": "Lab 3: Challenge Yourself",
       "description": "In this lab the learner will explore the app and do a change",
-      "filename": "../../5-bonus-lab/bonus-lab.md"
+      "filename": "../../5-challenge-yourself/challenge-yourself.md"
     },
     {
       "title": "Need Help?",
