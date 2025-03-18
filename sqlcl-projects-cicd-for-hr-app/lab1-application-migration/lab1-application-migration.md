@@ -57,13 +57,11 @@ In traditional database deployments, especially in a manual process, several cha
 
 **Our Goal:**
 
-![Database CI/CD](./images/cicd.png " " )
-
 Use SQLcl's **project** command to:
 
 * Create your local database application work environments
 * Track changes and create database install and upgrade scripts
-* Automate and ensure consistent deployments.
+* Automate and ensure consistent deployments
 
 <!--* Deploy with minimal risk.
 * Automate and ensure consistent deployments.

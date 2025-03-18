@@ -318,8 +318,6 @@ Follow the same steps as in the previous lab (starting from `project export`), a
 
 ## Challenge 4: Final Step
 
-![Congratulations](./images/congrats.png " ")
-
 There is no Challenge 4 **:)** , you've reached the end of this workshop **(^_^)** and this journey. We’d like to say you:
 
 **Congratulations, Developer!** You've successfully navigated this challenging lab and created a valuable system for this Tech Solutions Company. By completing the labs , you've demonstrated a strong understanding of database development, version control, and deployment practices. You've also gained valuable experience with SQLcl and its powerful project management capabilities.

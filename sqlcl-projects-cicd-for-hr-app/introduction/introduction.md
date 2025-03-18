@@ -16,20 +16,12 @@ Estimated Workshop Time: 1 hours 30 minutes
 
 ### **Objectives**
 
-This workshop explores the database CICD tool in SQLcl and demonstrates how to use it for you database development projects.
-
-![Database ci/cd](./images/database-cicd.png " ")
-
-In this workshop, you will learn how to:
-
 * Update an existing application and it's associated database objects
 * Deploy the changes to the production database
 * Address the difficulties of synching with DEV database instances
 * Use SQLcl `project` command to manage you database changes
 
 ### **Prerequisites**
-
-This workshop requires the following:
 
 * Basic knowledge in development practices, including Git
 * Experience with SQL and database schema design

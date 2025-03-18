@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Now that your application has been migrated to SQLcl Projects and is up and running from the Get Started lab, this lab will guide you through developing a new feature. You’ll enable the departments feature by making the necessary changes to both the application and the database, ensuring everything works seamlessly.
+Now that your application is migrated to SQLcl Projects and running from the Get Started lab, it’s time to develop the Departments feature for Tech Solutions Company to help it keep up with its growing workforce.
+
+In this lab, you’ll enable the departments feature by updating both the application and database, ensuring they work seamlessly with SQLcl Projects and CI/CD principles.
 
 <!--![App dev deploy](./images/app-dev-deploy.png " ")-->
 

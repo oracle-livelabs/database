@@ -2,11 +2,7 @@
 
 ## Introduction
 
-Welcome aboard! You're about to embark on an exciting project: developing the "Departments" feature for the growing HR application.
-
-**The Challenge**
-
-The Tech Solutions Company is a thriving company experiencing rapid growth. Their current HR systems, while sufficient in the past, are now struggling to keep up with the increasing number of employees and departments. To address this, they need a Department Management system to improve efficiency and organization.
+Since the table is missing in PROD, the next step is to synchronize the two environments. Traditionally, this would mean manually applying changes to the production database, a process prone to errors and inconsistencies. However, with SQLcl's project command, we can automate this process, making database changes faster, safer, and more reliable. This is where CI/CD principles come into play, bringing the same efficiency and consistency of modern application deployment pipelines to database management.
 
 ![Database cicd](./images/database-cicd.png " ")
 
