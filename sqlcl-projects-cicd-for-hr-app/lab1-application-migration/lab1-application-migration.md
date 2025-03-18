@@ -562,7 +562,7 @@ In the next task, we will learn how to deploy these changes to the production en
 
     * **DATABASECHANGELOGLOCK** – Prevents concurrent deployments.
 
-    Before applying changes, Liquibase checks databasechangelog to see if a changeset has already been executed. If not, it processes them in the order defined in the changelog file.
+    Before applying changes, Liquibase checks database changelog to see if a changeset has already been executed. If not, it processes them in the order defined in the changelog file.
 
     <!--The other three created tables are liquibase tables. Liquibase is the engine of the SQLcl Projects tool that apply its command 'liquibase update' behiend scens to check if there is any differences between the source and target database, if they are it apply the changes to get them synched, if they are not, it does't do anything. So it checks that there are diffs before doing anything.-->
 
