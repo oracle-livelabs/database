@@ -99,7 +99,7 @@ Use SQLcl's **project** command to:
 
 * **Project Initialization:**
 
-    * Make sure you are it the application folder before running **project** commands
+    * Make sure you are in the application folder before running **project** commands
 
         ![Check the current working dir](./images/print-woking-dir.png " ")
 

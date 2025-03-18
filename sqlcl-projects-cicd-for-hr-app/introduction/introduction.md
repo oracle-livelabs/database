@@ -16,10 +16,10 @@ Estimated Workshop Time: 1 hours 30 minutes
 
 ### **Objectives**
 
-* Update an existing application and it's associated database objects
+* Update an existing application and its associated database objects
 * Deploy the changes to the production database
 * Address the difficulties of synching with DEV database instances
-* Use SQLcl `project` command to manage you database changes
+* Use SQLcl `project` command to manage your database changes
 
 ### **Prerequisites**
 
@@ -29,7 +29,6 @@ Estimated Workshop Time: 1 hours 30 minutes
 **This lab has been built for the beginner**: simply follow the labs and the given steps and instructions. We provide the database, application, code, and SQLcl/Git instructions.
 
 Upon completion of this workshop, you will understand the process of implementing CI/CD for your database applications using SQLcl.
-
 
 ### **Let's** [**get started!**](#next)
 </br>
