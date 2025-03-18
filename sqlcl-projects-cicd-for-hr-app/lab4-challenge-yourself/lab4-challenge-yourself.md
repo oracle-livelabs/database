@@ -6,8 +6,6 @@ You’ve just completed the "Departments" feature and deployed it successfully. 
 
 In this phase, you will release version 3 (V3) of the HR application. This new feature will offer insights not only into employee and department data but also provide valuable analytics on attendance and performance reviews, helping you visualize employee engagement and productivity.
 
-![Challenge picture](./images/challenge-pic.png " ")
-
 The Analytics feature was always planned but left inactive in the initial release. Now, MoroccanTech Solutions is ready to bring it to life, and it’s up to you to make it happen!
 
 **The Challenge:** Unlock this page

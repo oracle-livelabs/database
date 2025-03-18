@@ -38,7 +38,6 @@ This workshop requires the following:
 
 Upon completion of this workshop, you will understand the process of implementing CI/CD for your database applications using SQLcl.
 
-![Are you ready?](./images/are-you-ready.png " ")
 
 ### **Let's** [**get started!**](#next)
 </br>
