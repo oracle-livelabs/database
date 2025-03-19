@@ -7,7 +7,7 @@ Welcome to the "Validating JSON Data with JSON Schema" lab. In this lab, you wil
 Estimated Lab Time: 15 minutes
 
 ### Objective:
-The objective of this lab is to familiarize you with JSON Schema validation in Oracle 23ai and demonstrate its practical applications. By the end of this lab, you will be able to use JSON Schema to validate JSON data in various scenarios, including as part of table constraints and within SQL queries.
+The objective of this lab is to familiarize you with JSON Schema validation in Oracle Database 23ai and demonstrate its practical applications. By the end of this lab, you will be able to use JSON Schema to validate JSON data in various scenarios, including as part of table constraints and within SQL queries.
 
 ### Prerequisites:
 - Access to Oracle Database 23ai.

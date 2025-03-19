@@ -104,7 +104,7 @@ The goal of this lab is to help you understand and use direct joins effectively 
     ![remove the thrillers](images/movies-4.png " ")
 
 
-6. Again, with Oracle 23ai's direct join capability, removing these movies becomes a lot easier.
+6. Again, with Oracle Database 23ai's direct join capability, removing these movies becomes a lot easier.
 
     ```
     <copy>

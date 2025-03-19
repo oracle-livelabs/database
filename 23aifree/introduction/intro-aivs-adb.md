@@ -26,7 +26,7 @@ Estimated Time: 75 minutes
 ### Objectives
 
 In this lab, you will:
-* Install and configure an Oracle 23ai Enterprise Edition database.
+* Install and configure an Oracle Database 23ai Enterprise Edition database.
 * Install the ORDS, SQLcl, and APEX.
 * Get started with Semantic Data Search using AI Vector Search.
 
