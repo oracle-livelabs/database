@@ -61,7 +61,7 @@ This lab assumes you have:
 1. Import the MySQL repository GPG key using the RPM package manager
 
     ```bash
-    <copy>sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023</copy>
+    <copy>sudo rpm --import https://objectstorage.us-ashburn-1.oraclecloud.com/p/Yja90YIvw39JvHu0YusNxl_wdKS-1hPt0_a_39eT_ihp-xm8kYR3CA3eKe5ny99C/n/idazzjlcjqzj/b/mysql-ee-downloads/o/RPM-GPG-KEY-mysql-2023</copy>
     ```
 
 2. Install the "yum-utils" package using the Yum package manager
