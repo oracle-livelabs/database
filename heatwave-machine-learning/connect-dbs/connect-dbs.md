@@ -259,4 +259,4 @@ You may now **proceed to the next lab**
 
 - **Author** - Perside Foster, MySQL Solution Engineering
 - **Contributor** - Frédéric Descamps, MySQL Community Manager
-- **Last Updated By/Date** - Perside Foster,Jul 2023
+- **Last Updated By/Date** - Perside Foster, January 2025

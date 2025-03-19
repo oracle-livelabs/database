@@ -9,27 +9,27 @@
             "filename": "../../introduction/intro-aivs-adb.md"
         },
         {
-            "title": "Get Started",
+            "title": "Get Started with NoVNC Remote Desktop",
             "description": "Using noVNC Remote Desktop",
-            "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+            "filename": "../../introduction/using-novnc-remote-desktop.md"
         },
         {
-            "title": "Lab 1: Install Autonomous Database 23ai Free Docker Image",
-            "description": "Installing and configuring the database",
+            "title": "Lab 1: Launch the Oracle ADB Free Container Image",
+            "description": "Installing and configuring the Oracle Database.",
             "type": "livelabs",
-            "filename": "../../adb-free-container-setup-2/adb-free-container-setup.md"
+            "filename": "../../adb-free-container-setup/inst-auth-container-setup.md"
         },
         {
-            "title": "Lab 2: Configure ORDS, APEX, & SQLcl",
-            "description": "Setting up the various database tools",
+            "title": "Lab 2: Perform a Traditional Data Search",
+            "description": "Understanding the value of Oracle AI Vector Search.",
             "type": "livelabs",
-            "filename": "../../config_tools/config_tools.md"
+            "filename": "../../vector-search/traditional-search.md"
         },
         {
-            "title": "Lab 3: Explore AI Vector Search",
-            "description": "Hands-on introduction to AI Vector Search in ADB.",
+            "title": "Lab 3: Perform a Similarity Search with Oracle AI Vector Search",
+            "description": "Explains how to vectorize your data.",
             "type": "livelabs",
-            "filename": "../../sql-schema/sql-schema.md"
+            "filename": "../../vector-search/similarity-search.md"
         },
         {
           "title": "Need Help?",

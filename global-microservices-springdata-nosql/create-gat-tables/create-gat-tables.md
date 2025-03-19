@@ -1,4 +1,4 @@
-# Setup Global Active Tables
+# Set Up Global Active Tables
 
 ## Introduction
 
@@ -7,6 +7,8 @@ and deploy your application in multiple regions. Oracle NoSQL Global Active Tabl
 provide active-active replication of table data between geographically separated regions.
 
 _Estimated Time:_ 20 minutes
+
+[Lab 5 Walkthrough](videohub:1_jymc6ms2)
 
 ### Objectives
 

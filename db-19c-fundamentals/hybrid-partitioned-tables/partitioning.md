@@ -397,7 +397,7 @@ END;
 You may now proceed to the next lab. 
 
 ## Learn More
-* [In Depth Hybrid Partitioning Lab](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=568&clear=RR,180&session=116161642012812)
+* [In Depth Hybrid Partitioning Lab](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=568&clear=RR,180&session=116161642012812)
 * [Hybrid Partitioning](youtube:Z21-Mc_s3a4)
 
 ## Acknowledgements

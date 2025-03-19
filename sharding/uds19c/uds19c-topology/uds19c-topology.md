@@ -8,7 +8,7 @@ Oracle Sharding is a scalability and availability feature for custom-designed OL
 
 For a user-defined sharded database, two replication schemes are supported: Oracle Data Guard or Oracle Active Data Guard. Oracle GoldenGate can be used used as the incremental replication method. Oracle Data Guard with Oracle GoldenGate enables fast automatic failover with zero data loss.
 
-This workshop is configured with a custom image that has all of the required Docker containers for Oracle Sharding using release 19c GSM and Database Images.
+This workshop is configured with a custom image that has all of the required podman containers for Oracle Sharding using release 19c GSM and Database Images.
 
 In this workshop, we attempt to use minimal resources to demonstrate the use cases, so you need only a single compute instance to install all of the Oracle Sharding components.
 
@@ -37,11 +37,11 @@ This lab assumes you have:
 
     ```
     <copy>
-    sudo docker ps -a
+    sudo podman ps -a
     </copy>
     ```
 
-     ![<Docker containers>](images/uds19c-init-env-docker-containers-status.png " ")
+     ![<podman containers>](images/uds19c-init-env-podman-containers-status.png " ")
 
 2. The user-defined sharding method provides a means to achieve regulatory compliance by enabling user-defined data placement It allows you to use a range or list of countries to partition data among the shards by letting you explicitly specify the mapping of data to individual shards.
     User-Defined Sharding Definitions
@@ -56,11 +56,11 @@ This lab assumes you have:
 
     ```
     <copy>
-    sudo docker exec -i -t gsm1 /bin/bash
+    sudo podman exec -i -t gsm1 /bin/bash
     </copy>
     ```
 
-    ![<connect to GSM1>](images/uds19c-docker-gsm1.png " ")
+    ![<connect to GSM1>](images/uds19c-podman-gsm1.png " ")
 
 4. Verify sharding topology using the  **CONFIG** command.
 
@@ -191,4 +191,4 @@ You may now **proceed to the next lab**.
 
 * **Authors** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff, October 2023
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff, November 2024

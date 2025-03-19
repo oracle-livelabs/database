@@ -88,14 +88,13 @@ In this lab, you will:
    Enter the following command to run SQL*Plus:
     ```
     <copy>
-    sqlplus system/<admin_password>@<dbcs_public_ip>:1521/<dbcs_pdb_service>
+    sqlplus system/<admin_password>@<PDB Connection String>
     </copy>
     ```
 
     Please replace the following placeholders withe the actual values from terraform output:
     * <admin\_password\>
-    * <dbcs\_public\_ip\>
-    * <dbcs\_pdb\_service\>
+    * <PDB\_Connection\_String\>
 
     ![Screenshot of Cloud Shell and SQLPlus](images/cloudshell_sqlplus.png =90%x*)
 
@@ -129,7 +128,7 @@ In this lab, you will:
     ![Screenshot of ADB list](images/db-actions.png =50%x*) 
 
  
- 13. Run the following query to locate the previously inserted record on the source database that was replicated to our ADB insance:
+ 13. Run the following query to locate the previously inserted record on the source database that was replicated to our ADB instance:
 
       ```
     <copy>
@@ -137,7 +136,7 @@ In this lab, you will:
     </copy>
       ``` 
 
-    Click on the Run Statemet button, you should see the record in the bottom:
+    Click on the Run Statement button, you should see the record in the bottom:
 
     ![Screenshot of sql statement](images/run-statement.png =50%x*) 
 
@@ -157,7 +156,7 @@ In this lab, you will:
  
     ![Screenshot of resume job switchover](./images/resume-job-switchover.png " ")
 
- 19. After Job resumes and changes the status to WAITING after Switchover App phase, press Resume. Select the last phase Cleanup and press Resume:
+ 19. Once the Job status is WAITING and Switchover phase is Completed , press Resume again:
     ![Screenshot of resume job cleanup](./images/resume-job-cleanup.png =60%x*)
 
  20. The migration runs the final cleanup phases and shows as Succeeded when finished:

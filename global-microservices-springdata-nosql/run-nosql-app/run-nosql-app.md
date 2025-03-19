@@ -1,4 +1,4 @@
-# Run the Movie Stream Catalog Microservice
+# Run the MovieStream Catalog Microservice
 
 ## Introduction
 
@@ -6,6 +6,8 @@ This lab picks up where lab 2 left off. We are going to explore in more detail
 the tables we created, load data, and execute queries using a Spring Data REST based application.
 
 _Estimated Time:_ 16 minutes
+
+[Lab 3 Walkthrough](videohub:1_m5ilj0z4)
 
 ### Objectives
 
@@ -41,7 +43,7 @@ In this task we will review the code using OCI Code Editor.
 its customers. Whether deploying on an "On-Premises" cluster or utilizing the
 Oracle NoSQL Database Cloud Service, developers and end-users get the latest in
 NoSQL technology. Oracle offers a complete range of deployment options to
-support your NoSQL database, from on-premises to private cloud to public cloud.  Depending
+support your Oracle NoSQL database, from on-premises to private cloud to public cloud.  Depending
 on which deployment option you choose, you may need different authentication strategies.
 
   The class `AppConfig.java` illustrates the different authentication options in the case
@@ -176,7 +178,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
     ```
     **Note:** This will start the "movie" application in the background.
 
-2. After you complete step 1, you can use the command tail to see the startup for the application
+2. After you complete step 1, you can use the command tail to see the startup for the application.
 
     ![appl-running](./images/appl-running.png)
 
@@ -187,7 +189,7 @@ You can also modify the **Capacity mode** from Provisioned Capacity to On Demand
     ```
     The `mvnw` command will compile and start the application, please wait for the message *Started DemoApplication in xx seconds*
 
-3. Lets review the data created in the Lab 2.Execute in the Cloud Shell.
+3. Lets review the data created in the Lab 2.  Execute in the Cloud Shell.
 
     ```shell
     <copy>

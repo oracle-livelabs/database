@@ -6,7 +6,7 @@ As organizations rush to adopt microservices architecture, they often run into p
 
 In this workshop, you will learn how to use MicroTx to maintain data consistency across multiple Oracle REST Data Services (ORDS) applications by deploying and running a Bank Transfer application. You will also integrate MicroTx with the Kubernetes ecosystem by using tools, such as Kiali and Jaeger, to visualize the flow of requests between MicroTx and the microservices.
 
-Estimated Workshop Time: 50 minutes
+Estimated Workshop Time: 60 minutes
 
 ### Objectives
 
@@ -28,8 +28,8 @@ Let's begin! If you need to create an Oracle Cloud account, click **Get Started*
 
 ## Learn More
 
-* [Oracle® Transaction Manager for Microservices Developer Guide](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmdg/index.html)
-* [Oracle® Transaction Manager for Microservices Quick Start Guide](http://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/23.4.1/tmmqs/index.html)
+* [Oracle® Transaction Manager for Microservices Developer Guide](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG)
+* [Oracle® Transaction Manager for Microservices Quick Start Guide](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMQS)
 
 ## Acknowledgements
 

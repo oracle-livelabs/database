@@ -10,10 +10,7 @@ A key characteristic of a JSON collection (like 'products') is that it is backed
 
 In the following, we show you how you can use SQL to work with the JSON data in a collection.
 
-Estimated Time: 45 minutes
-
-Watch the video below for a quick walk through of the lab.
-[Watch the video](videohub:1_yu8ie1t8)
+Estimated Time: 30 minutes
 
 ### Objectives
 
@@ -27,30 +24,28 @@ In this lab, you will:
 
 ### Prerequisites
 
-- Oracle Database 23ai Free Developer Release
-- ORDS up and running (for Database Actions). Alternatively, you can use sqlplus or sqlcl
-- All previous labs successfully completed
+- Oracle Database 23ai, version 23.4 or above
+- All previous labs successfully completed to ensure the existence of JSON Collection movies
 
 ## Task 1: Explore the table behind your JSON collection
 
-1. Open Database Actions (if you don't already have it open). Either choose **SQL** under Development from the launchpad, or click on the navigation menu on the top left and select **SQL** under Development.
+1. Open Database Actions (if you don't already have it open). Choose **SQL** under Development from the launchpad.
 
-    ```
-    <copy>
-    http://localhost:8080/ords/hol23c/_sdw
-    </copy>
-    ```
-    ![SQL navigation](./images/nav-sql.png)
     ![SQL development navigation](./images/development-sql.png)
 
-2. On the left side, click on MOVIES - this is the table for the 'movies' collection. To get the details about its data structure displayed, you need to right-click on **MOVIES** and choose **Open**.
+2. If you have not done anything outside the workshop, you will see one table 'movies' (in addition to the internal sql history table of database actions). This is the table for the 'movies' collection. To get the details about its data structure displayed, let's do a DESCRIBE of the table.
 
-    ![Open table](./images/open-movies.png)
-    ![View table](./images/table-view.png)
+    ```sql
+    <copy>
+    desc movies;
+    </copy>
+    ```
 
-    You see that the table 'MOVIES' has 5 columns: an 'ID' which is a unique identifier for the document (and in the case of MongoDB-compatible collections, is taken from the "_id" field in the JSON), a column 'DATA' which holds the JSON document in Oracle's binary OSON format, 2 metadata columns to keep track of creation and update timestamps and 'VERSION' which is typically a hash value for the document and allows us to keep caches in sync (similar to an eTag). None of this is really important at this point as we will only use the DATA column in the following examples. The DATA column holds our JSON document within the collection MOVIES.
 
-    *Learn more -* [Use Oracle Database Actions with JSON Collections](https://docs.oracle.com/en/cloud/paas/autonomous-json-database/ajdug/use-oracle-database-actions-json-collections1.html) and [Use SQL With JSON Data](https://docs.oracle.com/en/database/oracle/oracle-database/21/adjsn/json-in-oracle-database.html#GUID-04377B36-654B-47C4-A480-535E00E46D1F)
+    ![Describe table](./images/describe-movies.png)
+
+    You see that the table 'movies' only has one column 'DATA' which holds the JSON document in Oracle's binary OSON format. That's really all you need to know about a **JSON Collection Table**, Oracle's native first class object to store collectons of documents. The DATA column is all you need.
+
 
 ## Task 2: JSON Fundamentals
 
@@ -350,12 +345,6 @@ JSON_Mergepatch follows RFC 7386 [https://datatracker.ietf.org/doc/html/rfc7386]
     ```
     ![JSON merge patch update](./images/json-mergepatch-update.png " ")
 
-    Don't forget to commit your changes! 
-
-    ```
-    <copy>commit;</copy>
-    ```
-
 3.  Run the select query again to see the effect of the change: the cast was updated, and a note got added.
 
     ```
@@ -442,6 +431,7 @@ Irrespective of whether data is stored relationally or as JSON document, you can
     ```
     ![JSON object agg](./images/json-arrayagg.png " ")
 
+Now that's only one part of the story: there is way more to the duality between JSON and relational representation. Hold this thought, we will come back to this in Lab 9!
 
 ## Task 6: JSON Dataguide
 
@@ -515,4 +505,4 @@ Often, you do not know all the fields that occur in a collection of JSON data, e
 
 * **Author** - William Masdon, Kaylien Phan, Hermann Baer
 * **Contributors** -  David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - William Masdon, Database Product Manager, April 2023
+* **Last Updated By/Date** - Hermann Baer, Database Product Management, August 2024

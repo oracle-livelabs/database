@@ -1,0 +1,38 @@
+{
+    "workshoptitle": "Get Started with MySQL-HeatWave and Feel the Difference",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "MySQL Database HeatWave Cloud Services Workshop for OCI Lab Introduction.",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Getting Started",
+            "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+        },
+        {
+            "title": "Lab 1: Create MySQL Database System in Oracle Cloud",
+            "description": "Create MySQL Database System first so that later we can enable HeatWave Cluster",
+            "filename": "../../create-mysql-database-system/create-mysql-database-system.md"
+        },
+        {
+            "title": "Lab 2: Enable HeatWave Cluster in MySQL Database System",
+            "filename": "../../enable-heatwave-cluster/enable-heatwave-cluster.md"
+        },
+        {
+            "title": "Lab 3: Upload Data into MySQL HeatWave Cluster Engine",
+            "filename": "../../upload-data-into-heatwave/upload-data-into-heatwave.md"
+        },
+        {
+            "title": "Lab 4: Execute SQL Query to View the Performance Differences",
+            "filename": "../../execute-sql-queries/execute-sql-queries.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

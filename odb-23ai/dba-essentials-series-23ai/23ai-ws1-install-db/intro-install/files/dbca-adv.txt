@@ -1,0 +1,1 @@
+In this mode, you can customize the configurations of your database, such as initialization parameters, network configurations, memory management, passwords for administrators, and so on.

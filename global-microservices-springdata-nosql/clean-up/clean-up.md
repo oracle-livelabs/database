@@ -6,6 +6,8 @@ This lab is finished. We will delete all resources created.
 
 _Estimated Time:_ 5 minutes
 
+[Lab 6 Walkthrough](videohub:1_elpp0ki2)
+
 ## Task 1: Delete resources created using Cloud Shell
 
 In this task we will deleted the resource created using the Cloud Shell.
@@ -70,7 +72,7 @@ set your compartment to 'demonosql', click on the Test table, which will bring u
 
   ![Destroy Stack](./images/destroy-stack.png)
 
-4.  When the destroy task will show Succeeded, return to the stack page.
+4.  When the "destroy-job" task shows Succeeded, return to the stack page.
 
 5. Click on more actions and delete stack.  
 

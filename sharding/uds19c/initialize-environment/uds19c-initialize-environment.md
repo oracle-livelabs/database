@@ -35,29 +35,29 @@ This lab assumes you have:
 
         ```
         <copy>
-        sudo docker ps -a
+        sudo podman ps -a
         </copy>
         ```
-        ![sharding docker](images/uds19c-init-env-docker-containers-status.png " ")
+        ![sharding podman](images/uds19c-init-env-podman-containers-status.png " ")
 
-    - If a container is stopped and not in running state then try to restart it by using the following Docker command.
+    - If a container is stopped and not in running state then try to restart it by using the following podman command.
 
         ```
         <copy>
-        sudo docker stop <container ID/NAME>
+        sudo podman stop <container ID/NAME>
         </copy>
         <copy>
-        sudo docker start <container ID/NAME>
+        sudo podman start <container ID/NAME>
         </copy>
         ```
     - For multiple containers, run the following commands to restart all of them at once:
 
         ```
         <copy>
-        sudo docker container stop $(sudo docker container list -qa)
+        sudo podman container stop $(sudo podman container list -qa)
         </copy>
         <copy>
-        sudo docker container start $(sudo docker container list -qa)
+        sudo podman container start $(sudo podman container list -qa)
         </copy>
         ```
 
@@ -67,4 +67,4 @@ You may now **proceed to the next lab**.
 
 * **Authors** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff, October 2023
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database Product Management, Consulting Member of Technical Staff, November 2024

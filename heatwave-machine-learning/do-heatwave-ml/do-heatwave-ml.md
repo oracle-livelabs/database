@@ -22,7 +22,9 @@ _Estimated Time:_ 10 minutes
 
 In this lab, you will be guided through the following task:
 
+- Create Machine Learning user ml_dev
 - Load Iris Data into HeatWave
+- Create and test Machine Learning Model
 
 ### Prerequisites
 
@@ -36,7 +38,9 @@ In this lab, you will be guided through the following task:
 
     (Example: **ssh -i id_rsa opc@132.145.17....**)
 
-2. On the command line, connect to MySQL using the MySQL Shell client tool with the following command:
+2. In this lab we will create the user **ml_dev** and set the privilieges to build the AutoML model.
+
+3. On the command line, connect to the MySQL **admin** user  using the MySQL Shell client tool with the following command:
 
     ```bash
     <copy>mysqlsh -uadmin -p -h 10.... -P3306 --sql </copy>
@@ -44,23 +48,45 @@ In this lab, you will be guided through the following task:
 
     ![Connect](./images/heatwave-load-shell.png "heatwave-load-shell ")
 
-3. In this lab we use the administrative account previously created, but if you want to use a dedicated MySQL user, please remember to grant the following privileges to use HeatWave AutoML
-
-    a. SELECT and ALTER privileges on the schema that contains the machine learning datasets
+    a. Create the ml\_dev user used to create the  schema for the machine learning datasets
 
     ```bash
-    <copy>GRANT SELECT, ALTER ON schema_name.* TO 'user_name'@'%';</copy>
+    <copy>CREATE USER 'ml_dev'@'%' IDENTIFIED BY 'Welcome#123';</copy>
     ```
 
-    b. SELECT and EXECUTE on the MySQL sys schema where HeatWave AutoML routines reside; for example:
+    b. Grant ml\_dev the required privileges on the ml_data schema that contains the machine learning datasets
 
     ```bash
-    <copy>GRANT SELECT, EXECUTE ON sys.* TO 'user_name'@'%';</copy>
+    <copy>GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT ON ml_data.* TO 'ml_dev'@'%';</copy>
+    ```
+
+    c. Grant ml\_dev the required privileges on the ML_SCHEMA_ml_dev schema that contains the machine learning development objects
+
+    ```bash
+    <copy>GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT ON ML_SCHEMA_ml_dev.* TO 'ml_dev'@'%';</copy>
+    ```
+
+    d. Grant ml\_dev SELECT and EXECUTE privileges on the MySQL sys schema where HeatWave AutoML routines reside;
+
+    ```bash
+    <copy>GRANT SELECT, EXECUTE ON sys.* TO 'ml_dev'@'%';</copy>
+    ```
+
+    e. Exit mysqlsh for admin user
+
+    ```bash
+    <copy>\q</copy>
     ```
 
 ## Task 2: load training and test data
 
-1. To Create the Machine Learning schema and tables on the MySQL HeatWave DB System perform download the sample database with this command:
+1. On the command line, connect to the MySQL **ml\_dev** user  using the MySQL Shell client tool with the following command:
+
+    ```bash
+    <copy>mysqlsh -uml_dev -p -h 10.... -P3306 --sql </copy>
+    ```
+
+2. To Create the Machine Learning schema and tables on the MySQL HeatWave DB System perform download the sample database with this command:
 
     a. Click on this link to **Download file [iris-ml-data.txt](files/iris-ml-data.txt)**  to your local machine
     b. Open iris-ml-data.txt from your local machine with notepad
@@ -72,9 +98,9 @@ In this lab, you will be guided through the following task:
 
     ![MDS iris data execute](./images/iris-ml-data-execute.png "iris-ml-data-execute ")
 
-2. View the content of  your machine Learning schema (ml_data)
+3. View the content of  your machine Learning schema (ml_data)
 
-    a. Connected to the new database ml_data 
+    a. Connected to the new database ml_data
 
     ```bash
     <copy>use ml_data; </copy>
@@ -93,13 +119,13 @@ In this lab, you will be guided through the following task:
 1. Train the model using ML_TRAIN. Since this is a classification dataset, the classification task is specified to create a classification model:
 
     ```bash
-    <copy>CALL sys.ML_TRAIN('ml_data.iris_train', 'class',JSON_OBJECT('task', 'classification'), @iris_model);</copy>
+    <copy>CALL sys.ML_TRAIN('ml_data.iris_train', 'class', NULL, @iris_model);</copy>
     ```
 
 2. When the training operation finishes, the model handle is assigned to the @iris_model session variable, and the model is stored in your model catalog. You can view the entry in your model catalog using the following query:
 
     ```bash
-    <copy>SELECT model_id, model_handle, train_table_name FROM ML_SCHEMA_admin.MODEL_CATALOG;</copy>
+    <copy>SELECT model_id, model_handle, train_table_name FROM ML_SCHEMA_ml_dev.MODEL_CATALOG;</copy>
     ```
 
 3. Load the model into HeatWave AutoML using ML\_MODEL\_LOAD routine:
@@ -224,4 +250,4 @@ In this lab, you will be guided through the following task:
 - **Contributors** - Salil Pradhan, Principal Product Manager,
 Nick Mader, MySQL Global Channel Enablement & Strategy Manager
 Marco Carlessi, MySQL Solution Engineering
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, Jul 2023
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, January 2025
