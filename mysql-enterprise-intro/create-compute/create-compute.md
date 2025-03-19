@@ -4,8 +4,7 @@
 
 Oracle Cloud Infrastructure Compute lets you provision and manage compute hosts, known as instances . You can create instances as needed to meet your compute and application requirements. After you create an instance, you can access it securely from your computer or cloud shell.
 
-In this lab, you will create a create a compartment, a Virtual Cloud Network,  and a Compute instance.
-In this lab, you will be guided through the following tasks:
+In this lab, you will create a compartment, a Virtual Cloud Network,  and a Compute instance.
 
 _Estimated Time:_ 10 minutes
 
