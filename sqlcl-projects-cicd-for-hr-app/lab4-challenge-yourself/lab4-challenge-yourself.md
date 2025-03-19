@@ -2,7 +2,7 @@
 
 ## Introduction
 
-You’ve just completed the "Departments" feature and deployed it successfully. But wait—it's time for an even bigger challenge: Unleashing the Analytics Engine!
+You’ve just completed the "Departments" feature and deployed it successfully. But wait, it's time for an even bigger challenge: Unleashing the Analytics Engine!
 
 In this phase, you will release version 3 (V3) of the HR application. This new feature will offer insights not only into employee and department data but also provide valuable analytics on attendance and performance reviews, helping you visualize employee engagement and productivity.
 
@@ -18,7 +18,7 @@ Estimated Lab Time: 15 minutes
 
 ### **Objectives**
 
-* Assess your understanding of the project feature from previous labs and reinforce your knowledge.
+* Assess your understanding of the project feature from previous labs and reinforce your knowledge
 * Enable the Analytics feature
 * Release the version 3 of the database and the application
 * Overcome all the challenges successfully
