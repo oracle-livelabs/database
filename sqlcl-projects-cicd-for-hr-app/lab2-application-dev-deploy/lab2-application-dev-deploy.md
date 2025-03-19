@@ -90,14 +90,14 @@ The last issue in the previous task occurred because the departments table is mi
 
         This is expected because the ***REST*** endpoint for the table hasn’t been enabled yet.
 
-        Don’t worry, we’ll easily configure it in the next lab using ***ORDS***, which simplifies the process.
+        Don’t worry, we’ll easily configure it in the next task using ***ORDS***, which simplifies the process.
         </details>
 
     </details>
 
 ## Task 3: Enable ORDS Endpoint For Departments Table
 
->**Note:** If you still connected to DEV_USER in Database Actions, skip to step 3.
+>**Note:** If you are still connected to DEV_USER in Database Actions, skip to step 3.
 
 1. Open Oracle Database Actions
 2. Connect as DEV_USER
@@ -125,7 +125,7 @@ Let's assume our production database is PROD_USER for all the next operations.
 
 All right, so now we will go to the .env file and replace **DEV\_USER** with **PROD\_USER**
 
-1. In the terminal, make sure ypu are in the application directory.
+1. In the terminal, make sure you are in the application directory.
 
 2. Edit the `.env` file with:
             ```

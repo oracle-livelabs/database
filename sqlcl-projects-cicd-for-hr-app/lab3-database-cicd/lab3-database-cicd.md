@@ -362,7 +362,7 @@ Before generating the artifact, you need to return the install.sql file to its i
 
     ![Departments data working in the app](./images/departments-data-appearing-in-the-app.png " ")
 
-**You did it!** You have successfully implemented and deployed the "Departments" feature and release the version 2 of the application using SQLcl and CICD practices. You have gained valuable experience in managing database changes, automating deployments, and working with a CICD pipeline.
+**You did it!** You have successfully implemented and deployed the "Departments" feature and released the version 2 of the application using SQLcl and CICD practices. You have gained valuable experience in managing database changes, automating deployments, and working with a CICD pipeline.
 
 After you gain this some experience, it's time for some challenges! Head to the [**next lab**](#next) and take your skills to the next level!
 
