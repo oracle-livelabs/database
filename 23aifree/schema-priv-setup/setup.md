@@ -24,7 +24,7 @@ Watch the video below for a quick walk-through of the lab.
 ### Prerequisites
 
 In order to do this workshop you need
-* An Oracle 23ai Free Developer Release Database or one running in a LiveLabs environment
+* An Oracle Database 23ai Free Developer Release Database or one running in a LiveLabs environment
 
 ## Task 1: Create Users
 

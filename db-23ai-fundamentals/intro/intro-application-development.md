@@ -2,7 +2,7 @@
 
 Welcome to the Application Development focus area of the LiveLab. This section covers some of the latest features in Oracle Database 23ai for application development. While this is not an exhaustive list of new features, we've chosen to spotlight six particularly exciting ones: AI Vector Search, JSON Duality Views, Property Graphs, Use Case Domains, Schema Annotations, and JSON Schema. From these labs, you'll gain an understanding of each of the new features and how they can improve your development projects. This section will be updated over time. If you'd like to see a specific feature added, tag me on X (twitter) with your suggestion! [@Killianlynchh](https://twitter.com/Killianlynchh)
 
-[Oracle 23ai app dev video](youtube:ksVgnhbxj9w)
+[Oracle Database 23ai app dev video](youtube:ksVgnhbxj9w)
 
 ## About Oracle Database 23ai
 
