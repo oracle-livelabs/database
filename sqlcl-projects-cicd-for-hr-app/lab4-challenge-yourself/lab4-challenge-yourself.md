@@ -35,7 +35,7 @@ When you check the Analytics page, you will find it locked, not working. In this
 
 ![Analytics not working](./images/analytics-not-working.png " ")
 
-Before making changes, we need to switch back to the development environment. To do this, update the **.env** file by changing PROD_USER to DEV_USER, ensuring the application connects to the development database.
+Before making changes, we need to switch back to the development environment. To do this, update the **.env** file by changing PROD\_USER to DEV\_USER, ensuring the application connects to the development database.
 
 Now, let's modify the application code to enable the Analytics page.
 
@@ -81,7 +81,7 @@ Your task is to update the database by adding the performancereviews and attenda
 
 <details><summary>**Hint**</summary>
 
-Run the SQL scripts (attendance\_table.sql and performancereviews\_table.sql) from the scripts folder to create the required tables and populate them with data, just as you did earlier for the departments table. Once the tables are created, make sure to enable the REST endpoints for both tables to allow API access (If you need a refresher, refer to Lab 1 → Task 4).
+Run the SQL scripts (attendance\_table.sql and performancereviews\_table.sql) from the scripts folder to create the required tables and populate them with data, just as you did earlier for the departments table. Once the tables are created, make sure to enable the REST endpoints for both tables to allow API access (If you need a refresher, refer to **Lab 1 → Task 4**).
 
 </details>
 
@@ -147,7 +147,7 @@ The project is already initialized, we will now directly export the desired obje
 > **Challenge:** Deploy to production (PROD_USER)
 
 <details><summary>**Hint**</summary>
-Follow the same steps as in the previous lab (starting from `project export`), applying SQLcl Projects commands until you deploy and get the Analytics feature working.
+Follow the same steps as in the previous lab (starting from `project export`), applying **project** commands until you deploy and get the Analytics feature working.
 
 </details>
 
