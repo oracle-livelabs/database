@@ -2,9 +2,9 @@
 
 ## Introduction
 
-In this lab, you will configure, and then execute commands to start-up the HR Management application.
+In this lab, you will be introduced to the environment, tools, and resources you’ll be working with throughout the workshop. You’ll also configure and run the necessary components to launch the HR Management application.
 
-You have been provided with access to a Oracle Database Actions (*aka* Oracle SQL Developer Web), as well as a Jupyter Lab.
+You have been provided with access to an Oracle Database Actions (*aka* Oracle SQL Developer Web), as well as a Jupyter Lab.
 
 <!--Some experience in shell commands, react, JavaScript, and HTML are helpful but not necessary. Although, we've designed this workshop so even the beginner can complete it!-->
 
