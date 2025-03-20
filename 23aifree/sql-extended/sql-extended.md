@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab walks you through the steps to work with SQL data and JSON documents at the same time in the Oracle 23ai database, looking at the true duality of the views.
+This lab walks you through the steps to work with SQL data and JSON documents at the same time in the Oracle Database 23ai database, looking at the true duality of the views.
 
 Regardless of which one you choose to work with, the underlying result in the database is the same, with SQL access and JSON document access to all data. Developers now get the flexibility and data access benefits of the JSON document model as well as the storage efficiency and power of the relational model.
 

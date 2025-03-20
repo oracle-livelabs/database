@@ -9,7 +9,7 @@ Estimated Time: 5 minutes.
 ### Objectives
 Learn how to:
 - Create new JRDVs
-- Explore JRDV metadata captured within an Oracle 23ai database
+- Explore JRDV metadata captured within an Oracle Database 23ai database
 
 ### Prerequisites
 This lab assumes:
@@ -48,7 +48,7 @@ Watch the video below for a quick walk through of the lab.
 
 ## Task 2: Explore JRDV Metadata
 
-1. Next, let's take a closer look at the available metadata that Oracle 23ai retains automatically for each JRDV.
+1. Next, let's take a closer look at the available metadata that Oracle Database 23ai retains automatically for each JRDV.
 
     - Open the file named **view\_jrdv\_metadata.sql** by clicking on the File ... Open icon.
     - Select the **hol23c\_free** database from the drop-down list in the upper-right-hand corner of the window  to connect to your PDB.
@@ -86,7 +86,7 @@ This task looks at a few eccentricities you might encounter when creating your o
 
    ![JRDV Failures](./images/jrdv-failures.png)
 
-2. What happened here? The JRDV creation syntax appears to be syntactically correct, but yet Oracle 23ai would not create the JDRV as specified. The answer is explained rather cryptically in the more detailed error message explanation for **ORA-40895**:
+2. What happened here? The JRDV creation syntax appears to be syntactically correct, but yet Oracle Database 23ai would not create the JDRV as specified. The answer is explained rather cryptically in the more detailed error message explanation for **ORA-40895**:
 
     ```
     SQL> ? 40895
