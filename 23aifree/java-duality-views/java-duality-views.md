@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab walks you through the steps to work with Java and JSON documents in the Oracle 23ai database. We'll show you how to populate the tables and subsequent duality views, as well as filter, replace, fetch, update, and delete JSON documents by predicates. Finally, we'll let you test out non-updateable fields. 
+This lab walks you through the steps to work with Java and JSON documents in the Oracle Database 23ai database. We'll show you how to populate the tables and subsequent duality views, as well as filter, replace, fetch, update, and delete JSON documents by predicates. Finally, we'll let you test out non-updateable fields. 
 
 Estimated Time: 15 minutes
 
