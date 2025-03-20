@@ -28,11 +28,15 @@ Find the placeholder component within the application's code, and replace it wit
 
 1. Go to : `/sqlcl-projects-react-app/src/componenets/pages/HRPageContentSwitcher.tsx`
     ![navigate to department page](./images/navigate-to-hr-page-content-switcher.png " ")
+
 2. Find Departments change location in the code (line 65)
     ![Find department change location](./images/find-change-location.png " ")
+
 3. Implement Departments by removing the line 67 and uncomment line 68 just below
     ![Do the change](./images/department-feature-implemented.png " ")
+
 4. Save the file change (Cmd + S for Mac or Ctrl + S for Linux/Windows)
+
 5. Now, refresh the application window and head to the departments section. Your new feature is live!
 
     >**Note:** *if it doesn't appear just wait a little bit and refresh again until it appears*
