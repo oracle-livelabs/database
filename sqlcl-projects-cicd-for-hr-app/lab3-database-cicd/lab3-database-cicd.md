@@ -272,6 +272,20 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
     ![Project release](./images/project-release.png " ")
 
+* Add and commit
+
+    ```sql
+    <copy>
+        !git add .
+    </copy>
+    ```
+
+    ```sql
+    <copy>
+        !git commit -m "Release 2.0.0"
+    </copy>
+    ```
+
 ## Task 6: Generate Deployable Artifact (project gen-artifact)
 
 Before generating the artifact, you need to return the install.sql file to its initial state containing **lb update**.
