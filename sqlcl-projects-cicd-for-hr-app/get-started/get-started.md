@@ -71,7 +71,9 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
     Alternatively, simply modify the URL to include DEV\_USER in the path as the following:
 
     ```text
+    <copy>
     http://[Your Lab's IP]:8181/ords/DEV_USER/_sdw/
+    </copy>
     ```
 
 3. The Database Actions Launchpad will appear. Navigate to the `Development` category, then click `SQL`. A blank SQL Worksheet will appear.
@@ -210,9 +212,11 @@ Next, you will modify the .env file, which is located in your application's root
 4. Navigate to the placeholders. Replace [Your Lab's IP] with your actual lab IP in the following variables:
 
       ```text
+      <copy>
       VITE_API_URL=http://[Your Lab's IP]:5500/api/connection
       VITE_BASE_URL=http://[Your Lab's IP]:8181/ords/
       VITE_DB_USERNAME=DEV_USER
+      </copy>
       ```
 
      * **`VITE_API_URL`**: The base URL for your API connection.

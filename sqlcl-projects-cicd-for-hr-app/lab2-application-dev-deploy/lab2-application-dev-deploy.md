@@ -141,7 +141,7 @@ All right, so now we will go to the .env file and replace **DEV\_USER** with **P
 1. In the terminal, make sure you are in the application directory.
 
 2. Edit the `.env` file with:
-            ```
+        ```
         <copy>
             vi .env
         </copy>

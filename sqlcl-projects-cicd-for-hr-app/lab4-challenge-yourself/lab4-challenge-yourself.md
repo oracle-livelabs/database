@@ -29,7 +29,7 @@ Estimated Lab Time: 15 minutes
 
 *Bring on the challenge! **Let’s crush it!***
 
-## Challenge 1: Implement Analytics Page
+## Task 1: Implement Analytics Page
 
 When you check the Analytics page, you will find it locked, not working. In this challenge you will unlock it.
 
@@ -71,7 +71,7 @@ As you can see, only the Employees per Department analytics is working—the oth
 
 </details>
 
-## Challenge 2: Apply Database Changes & Enable ORDS Endpoints
+## Task 2: Apply Database Changes & Enable ORDS Endpoints
 
 Your task is to update the database by adding the performancereviews and attendance tables to DEV_USER.
 
@@ -89,9 +89,13 @@ Run the SQL scripts (attendance\_table.sql and performancereviews\_table.sql) fr
 
 1. **Step 1: Connect to DEV_USER**
     * **Using SQLcl:**
-            ```sql
-                connect DEV_USER/[PASSWORD]
-                ```
+
+        ```sql
+        <copy>
+            connect DEV_USER/[PASSWORD]
+        </copy>
+        ```
+
     * **Using SQL Developer Web:**
     Signin with DEV_USER credentials
 
@@ -136,7 +140,7 @@ Run the SQL scripts (attendance\_table.sql and performancereviews\_table.sql) fr
 
 </details>
 
-## Challenge 3: Deploy The Database Changes To The Target Database
+## Task 3: Deploy The Database Changes To The Target Database
 
 Our target database in this case is the PROD_USER schema (production database), though it could be any other database.
 
@@ -156,16 +160,19 @@ Follow the same steps as in the previous lab (starting from `project export`), a
 1. Change the username in the .env file from DEV\_USER to PROD\_USER.
 2. Refresh the application window. Only the "Employees per Department" chart appears since PROD_USER lacks the two new tables. You'll fix this with **project** commands.
 3. In SQLcl, connect as DEV_USER and navigate to the application folder `sqlcl-project-react-app`.
-        ```sql
+
+    ```sql
     <copy>
         connect DEV_USER/[PASSWORD]
     </copy>
-        ```
-        ```sql
+    ```
+
+    ```sql
     <copy>
         cd /home/oracle/assets/workshops/sqlcl-projects-react-app
     </copy>
-        ```
+    ```
+
 4. Create a new branch from the main branch and check out to it for upcoming changes.
         ```sql
         <copy>
@@ -173,6 +180,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
         </copy>
         ```
 5. Export the new objects from DEV_USER.
+
     ```sql
     <copy>
         project export -objects attendance,performancereviews -verbose
@@ -316,7 +324,7 @@ Follow the same steps as in the previous lab (starting from `project export`), a
 
 </details>
 
-## Challenge 4: Final Step
+## Task 4: Final Step
 
 There is no Challenge 4 **:)** , you've reached the end of this workshop **(^_^)** and this journey. We’d like to say you:
 

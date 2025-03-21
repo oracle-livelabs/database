@@ -165,6 +165,7 @@ Use SQLcl's **project** command to:
             * **`dist`:** contains the distributable for each release.
 
             ```text
+            <copy>
             ──.dbtools
             │   ├── filters
             │   │   └── project.filters
@@ -174,7 +175,9 @@ Use SQLcl's **project** command to:
             │   └── install.sql
             └── src
                 └── database
+            </copy>
             ```
+
         * List all, to see the generated project folders
         ![List all dirs](./images/list-dirs.png " ")
 
