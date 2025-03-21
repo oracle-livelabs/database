@@ -1,4 +1,4 @@
-# Unveiling the Analytics Engine (Release 3.0.0)
+# Unveiling the Analytics Page (Release 3.0.0)
 
 ## Introduction
 
