@@ -42,5 +42,5 @@ Upon completion of this workshop, you will understand the process of implementin
 
 ## Acknowledgements
 
-* **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, Database Tooling, SQLcl developers
-* **Created By/Date** - Fatima AOURGA & Abdelilah AIT HAMMOU, Software Developers, February 2025
+* **Author** - Fatima AOURGA & Abdelilah AIT HAMOU, Junior Members of The Technical Staff, Database Tooling, SQLcl developers
+* **Created By/Date** - Fatima AOURGA & Abdelilah AIT HAMOU, Software Developers, February 2025
