@@ -268,6 +268,7 @@ Vite automatically loads environment variables from a .env file only if they sta
       ```
 
     ![Run the application](images/npm-run-dev.png " ")
+
     *The React development server will start up.*
 
 4. Your application will be available on port `5000`. However, you will need to open the application in a new tab. Modify the URL, so you are using the one provided to you for this lab *plus* port `5000`.
@@ -296,12 +297,6 @@ Vite automatically loads environment variables from a .env file only if they sta
 9. Move to the Departments page.
 
    ![Departments page](images/departments-page.png " ")
-
-<!--Oh, the departments page is missing! That's what will be the subject of the next lab. Let's jump to the next lab to implement this new feature. You may now [proceed to the next lab](#next).-->
-
-<!--Oh no, the departments page is missing! But don’t worry—that’s exactly what we’ll tackle next. Get ready to dive into the [next lab](#next) and bring this feature to life!-->
-
-<!--Wait… where’s the departments page? Looks like we’ve got some work to do! Jump into the [next lab](#next) and let’s unlock this new feature together!-->
 
 **Uh-oh!** The departments page is missing! But here’s your chance to build it. Let’s dive into the [**next labs**](#next) and bring this feature to life!
 
