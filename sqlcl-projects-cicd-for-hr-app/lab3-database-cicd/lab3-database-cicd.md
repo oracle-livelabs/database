@@ -301,6 +301,8 @@ Before generating the artifact, you need to return the install.sql file to its i
 
 * Save the **install.sql** file by pressing **Cmd + S** on Mac or **Ctrl + S** on Windows/Linux.
 
+* Add and commit.
+
 * Run `project gen-artifact`
 
     ```sql
