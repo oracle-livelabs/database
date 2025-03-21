@@ -382,6 +382,8 @@ Before generating the artifact, you need to return the install.sql file to its i
 
 After you gain this some experience, it's time for some challenges! Head to the [**next lab**](#next) and take your skills to the next level!
 
+You may now [**proceed to the next lab**] (#next)
+
 ## Learn More
 
 * [Oracle SQLcl Doc](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/working-sqlcl.html)

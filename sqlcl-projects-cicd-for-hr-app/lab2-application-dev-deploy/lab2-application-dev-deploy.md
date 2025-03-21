@@ -163,6 +163,8 @@ In a traditional approach, we would manually apply changes to the production dat
 
 Ready to fix this issue and explore **SQLcl Project feature** and get the databases synched? Let's jump into the [**next lab**](#next) and get it done!
 
+You may now [**proceed to the next lab**] (#next)
+
 <!--Let's fix this issue and dive into SQLcl Projects in the next lab!-->
 
 ## Learn More

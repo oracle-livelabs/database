@@ -572,6 +572,8 @@ In the next task, we will learn how to deploy these changes to the production en
 
 Now, it's time for some code changes! Let’s jump into the [**next lab**](#next) and kickstart our application development to bring the departments feature to life!
 
+You may now [**proceed to the next lab**] (#next)
+
 ## Learn More
 
 * [Oracle SQLcl Doc](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/working-sqlcl.html)

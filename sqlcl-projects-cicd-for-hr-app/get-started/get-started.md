@@ -301,6 +301,8 @@ Vite automatically loads environment variables from a .env file only if they sta
 
 **Uh-oh!** The departments page is missing! But here’s your chance to build it. Let’s dive into the [**next labs**](#next) and bring this feature to life!
 
+You may now [**proceed to the next lab**] (#next)
+
 ## Learn More
 
 * [Oracle REST Data Services (ORDS) Doc](https://docs.oracle.com/en/database/oracle/oracle-rest-data-services/24.4/orddg/introduction-to-Oracle-REST-Data-Services.html)

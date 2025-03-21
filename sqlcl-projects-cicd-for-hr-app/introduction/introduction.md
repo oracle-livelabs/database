@@ -30,8 +30,9 @@ Estimated Workshop Time: 1 hours 30 minutes
 
 Upon completion of this workshop, you will understand the process of implementing CI/CD for your database applications using SQLcl.
 
-### **Let's** [**get started!**](#next)
-</br>
+**Let's** get started!
+
+You may now [**proceed to the next lab**] (#next)
 
 ## Learn More
 
