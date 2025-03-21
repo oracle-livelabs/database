@@ -1,6 +1,6 @@
 {
   "workshoptitle": "Database CI/CD for a React & Node.js Application",
-  "help": "livelabs-help-**enterarea**_us@oracle.com",
+  "help": "abdelilah.ait.hamou@oracle.com",
   "variables": ["../../variables/variables.json",
     "../../variables/variables-in-another-file.json"],
   "tutorials": [

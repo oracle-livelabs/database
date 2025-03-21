@@ -392,4 +392,4 @@ After you gain this some experience, it's time for some challenges! Head to the 
 ## Acknowledgements
 
 * **Author** - Fatima AOURGA & Abdelilah AIT HAMMOU, Junior Members of The Technical Staff, Database Tooling, SQLcl developers
-* **Created By/Date** - Fatima AOURGA, Junior Member of The Technical Staff, Database Tooling, SQLcl developer, February 2025
+* **Created By/Date** - Fatima AOURGA & Abdelilah AIT HAMMOU, Software Developers, February 2025
