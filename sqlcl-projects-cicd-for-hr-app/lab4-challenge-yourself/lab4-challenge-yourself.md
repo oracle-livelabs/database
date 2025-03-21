@@ -33,7 +33,7 @@ Estimated Lab Time: 15 minutes
 
 When you check the Analytics page, you will find it locked, not working. In this challenge you will unlock it.
 
-![Analytics not working](./images/analytics-not-working.png " ")
+![Analytics page not working](./images/analytics-not-working.png " ")
 
 Before making changes, we need to switch back to the development environment. To do this, update the **.env** file by changing PROD\_USER to DEV\_USER, ensuring the application connects to the development database.
 
@@ -87,7 +87,7 @@ Run the SQL scripts (attendance\_table.sql and performancereviews\_table.sql) fr
 
 <details><summary>**Solution**</summary>
 
-* **Step 1: Connect to DEV_USER**
+1. **Step 1: Connect to DEV_USER**
     * **Using SQLcl:**
             ```sql
                 connect DEV_USER/[PASSWORD]
@@ -95,7 +95,7 @@ Run the SQL scripts (attendance\_table.sql and performancereviews\_table.sql) fr
     * **Using SQL Developer Web:**
     Signin with DEV_USER credentials
 
-* **Step 2: Create Tables**
+2. **Step 2: Create Tables**
 
     * **Using SQLcl:**
 
@@ -119,7 +119,7 @@ Run the SQL scripts (attendance\_table.sql and performancereviews\_table.sql) fr
 
         Copy and past the content of the tabes scripts to SQL Developer Web sql worksheet and run the script.
 
-* **Step 3: Enable ORDS Endpoints For The New Tables**
+3. **Step 3: Enable ORDS Endpoints For The New Tables**
 
     To make the Attendance and PerformanceReviews tables in PROD\_USER accessible as REST endpoints, repeat the steps you followed for DEV\_USER in **Lab 1 → Task 4**.
 
@@ -128,7 +128,7 @@ Run the SQL scripts (attendance\_table.sql and performancereviews\_table.sql) fr
     * Locate the Departments table, right-click on it.
     * Select REST, then click Enable.
 
-* **Step 3: Refresh the application**
+4. **Step 3: Refresh the application**
 
     Refresh the application window to view the Analytics page with the data.
 

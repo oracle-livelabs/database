@@ -35,7 +35,7 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
    You have been provided various URLs. One for accessing Database Actions, and another one for accessing a Jupyter lab. First, navigate to Database Actions using the provided URL. You can find these details by clicking **View Login Info** near the top of the Workshop outline.
 
-    ![View Login info.](images/workshop-login-info.png " ")
+    ![Workshop view Login info](images/workshop-login-info.png " ")
 
 2. Workshop Credentials
 
@@ -46,13 +46,13 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
      * **Password:** A single password used for JupyterLab and all ORDS users.
      * **SQL Developer Web (Database Actions):** Click the provided URL to access Database Actions.
 
-    ![Database Actions URI in Lab.](images/reservation-info.png " ")
+    ![Reservation info](images/reservation-info.png " ")
 
 ## Task 2: Sign in Oracle Database Actions
 
 1. Click the SQL Developer Web URL in the Reservation information to access it.
 
-   ![Database Actions URI in Lab.](images/reservation-info.png " ")
+   ![Reservation info](images/reservation-info.png " ")
 
 2. Several users have been created for you, including a new `DEV_USER` user. Its schema has already been REST-enabled, meaning you will be able to Sign in to Database Actions.
 
@@ -60,19 +60,19 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
     To Sign in, click the <button type="button" style="pointer-events: none;">Go</button> button under the SQL Developer Web card.
 
-    ![Navigating to SQL Developer Web.](images/ords-signin.png " ")
+    ![ORDS Signin](images/ords-signin.png " ")
 
     Once the Sign-in screen appears, enter the following credentials, and click the <button type="button" style="pointer-events: none;">Sign-in</button> button:
 
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Username: `DEV_USER`
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password: `[Can be found in your Reservation details - see image in Step 1 for reference]`
 
-   >**Note:** If you're having trouble connecting to DEV\_USER, log in with Admin first. Then, open the hamburger menu, go to Database Users, and locate the DEV\_USER card in the bottom right. Click the icon to open the link, which will take you to a sign-in page where you can log in as DEV\_USER.
-   Alternatively, simply modify the URL to include DEV\_USER in the path as the following:
+    >**Note:** If you're having trouble connecting to DEV\_USER, log in with Admin first. Then, open the hamburger menu, go to Database Users, and locate the DEV\_USER card in the bottom right. Click the icon to open the link, which will take you to a sign-in page where you can log in as DEV\_USER.
+    Alternatively, simply modify the URL to include DEV\_USER in the path as the following:
 
-   ```text
-   http://[Your Lab's IP]:8181/ords/DEV_USER/_sdw/
-   ```
+    ```text
+    http://[Your Lab's IP]:8181/ords/DEV_USER/_sdw/
+    ```
 
 3. The Database Actions Launchpad will appear. Navigate to the `Development` category, then click `SQL`. A blank SQL Worksheet will appear.
 
@@ -92,29 +92,29 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
    You will see results similar to the following image:
 
-   ![Reviewing the results.](images/run-select-from-employees.png " ")
+   ![Reviewing the results](images/run-select-from-employees.png " ")
 
 5. You may notice the varied data types in this table. To take a closer look at how this `DEV_USER` table is structured, right-click on the `DEV_USER` table, then select `Edit...`. When the `Table Properties` slider appears, click `DDL`, then select the `Create` tab.  
 
    Note the data types:
 
-   ![Reviewing the DEV_USER table properties.](images/show-employees-ddl.png " ")
+   ![Reviewing the DEV_USER table ddl](images/show-employees-ddl.png " ")
 
       > **Note:** ORDS APIs will be able to handle all of these various data types and send them to your application.
 
 6. Once you are satisfied, return to the Reservation information for this workshop.
 
-   ![View Login info.](images/workshop-login-info.png " ")
+   ![View Login info](images/workshop-login-info.png " ")
 
 ## Task 3: Open Jupyter lab
 
 1. Using the URL you were provided, log in to your Jupyter lab. *It is recommended you open the Juptyer Lab in a new tab or window.*
 
-   ![Using the password from previous task.](images/jupyter-lab-uri.png " ")
+   ![Jupyter lab URI](images/jupyter-lab-uri.png " ")
 
    Use the same password from the previous task.
 
-   ![Login to Jupyter lab.](images/jupyter-pwd.png " ")
+   ![Jupyter password](images/jupyter-pwd.png " ")
   
 2. Once logged in, you may see several directories. Navigate (i.e., a double or single click on the directory) to the `workshops` directory, then the `sqlcl-projects-react-app` directory.
 
@@ -145,15 +145,15 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
 1. We created for you the ORDS APIs for the `DEV_USER` user. To review the Resource Module, its Resource Templates and Resource Handlers, navigate to the REST Workshop.
 
-    ![Employees table enabled icon](images/employees-rest-enabled-icon.png " ")
+   ![Employees table enabled icon](images/employees-rest-enabled-icon.png " ")
 
-   Click the hamburger menu from the top of Oracle Database Actions, then click REST.  
+2. Click the hamburger menu from the top of Oracle Database Actions, then click REST.  
 
-      ![Navigating to the REST Workshop.](images/hamburger-rest.png " ")
+   ![Navigating to the REST using hamburger](images/hamburger-rest.png " ")
 
-2. You'll notice a single AUTOREST in the Workshop's Object panel. Click it.
+3. You'll notice a single AUTOREST in the Workshop's Object panel. Click it.
 
-   ![Navigating to the DEV_USERstream resource module.](images/autorest.png " ")
+   ![Click AUTOREST](images/autorest.png " ")
 
 <!--5. Next, copy this URI's to your clipboard. In a few moments, you will return to the Jupyter lab to input this into the application code.
 
@@ -194,7 +194,7 @@ Next, you will modify the .env file, which is located in your application's root
    </details></br>
 
 1. Open the terminal
-   ![Open terminal](images/open-the-terminal.png " ")
+   ![Open jupyter terminal](images/open-the-terminal.png " ")
       >**Tip:** You can reduce the font size by pressing **Ctrl + Minus (-)** on Windows/Linux or **Command (⌘) + Minus (-)** on Mac.
 
 2. Edit the `.env` file with:
@@ -245,11 +245,11 @@ Vite automatically loads environment variables from a .env file only if they sta
 
    ![Launching a new terminal.](images/launch-terminal.png " ")
 
-   > **Note:** If a new Launcher window is not present, you can click the Blue Box (the box with the `+` inside) to open a new Launcher. Then you may open a new Terminal.
+      > **Note:** If a new Launcher window is not present, you can click the Blue Box (the box with the `+` inside) to open a new Launcher. Then you may open a new Terminal.
 
 2. Verify you are in the correct directory by:
 
-    ![Run the application](images/print-working-dir.png " ")
+    ![Print the current working directory](images/print-working-dir.png " ")
 
     >**Tip:** You can clear your terminal screen using **clear** command.
 
@@ -268,14 +268,14 @@ Vite automatically loads environment variables from a .env file only if they sta
 
 4. Your application will be available on port `5000`. However, you will need to open the application in a new tab. Modify the URL, so you are using the one provided to you for this lab *plus* port `5000`.
 
-   ![Workshop lab IP address.](images/copy-correct-portion-of-url-for-sample-app.png " ")
+   ![Copy correct portion of url for the app](images/copy-correct-portion-of-url-for-sample-app.png " ")
 
    ![Navigating to the correct address plus port 5000.](images/your-virtual-labs-uri-for-app.png " ")
    *Open in a new tab or window.*
 
 5. Navigate to the new tab and combine the lab's URI with port `5000`. Accept any warnings and your application will load.
 
-   ![Navigating to your application.](images/secure-site-not-available-warning.png " ")
+   ![Click continue if a warning alert appears](images/secure-site-not-available-warning.png " ")
 
 6. The HR application will load. Scroll right left or up down to see all the infos.
 

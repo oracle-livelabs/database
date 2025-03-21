@@ -27,7 +27,7 @@ Estimated Lab Time: 15 minutes
 Find the placeholder component within the application's code, and replace it with Department implementation.
 
 1. Go to : `/sqlcl-projects-react-app/src/componenets/pages/HRPageContentSwitcher.tsx`
-    ![navigate to department page](./images/navigate-to-hr-page-content-switcher.png " ")
+    ![Navigate to department page](./images/navigate-to-hr-page-content-switcher.png " ")
 
 2. Find Departments change location in the code (line 65)
     ![Find department change location](./images/find-change-location.png " ")
@@ -41,7 +41,7 @@ Find the placeholder component within the application's code, and replace it wit
 
     >**Note:** *if it doesn't appear just wait a little bit and refresh again until it appears*
 
-    ![Departments-page](./images/departments-page-unlocked.png " ")
+    ![Departments page appearing](./images/departments-page-unlocked.png " ")
 
 But the table is empty, with no rows, and all the statistics show 0. Let's fix that in the next task!
 
@@ -49,73 +49,82 @@ But the table is empty, with no rows, and all the statistics show 0. Let's fix t
 
 The last issue in the previous task occurred because the departments table is missing. This will be resolved by creating it in the DEV_USER schema.
 
-* Database Changes: Create the "Departments" Table
+<details><summary>**Option 1: Using SQLcl**</summary>
 
-    <details><summary>**Option 1: Using SQLcl**</summary>
-    * Go to the application folder in the left side and double click on the **scripts** folder
+1. Go to the application folder in the left side and double click on the **scripts** folder
+
     ![Scripts folder](./images/scripts-folder.png " ")
-    * Double click on departments_table.sql to see the table ddl and data to insert
+
+2. Double click on departments_table.sql to see the table ddl and data to insert
+
     ![Departments ddl and data](./images/departments-table.png " ")
-    <!--![Departments ddl and data](./images/departments-table2.png " ")-->
-    * Connect to DEV_USER in SQLcl then execute the previous sql file, starting by the ddl then the inserts.
 
-        >**Note:** Make sure you are in the scripts directory before executing the sql file in SQLcl.
+<!--![Departments ddl and data](./images/departments-table2.png " ")-->
 
-        ```
-        <copy>
-            cd /home/oracle/assets/workshops/sqlcl-projects-react-app/scripts/
-        </copy>
-        ```
-        ```
-        <copy>
-            @departments_table.sql
-        </copy>
-        ```
-        ![Departments ddl and data executed](./images/departments-table-executed.png " ")
+3. Connect to DEV_USER in SQLcl then execute the previous sql file, starting by the ddl then the inserts.
 
-    </details>
+    >**Note:** Make sure you are in the scripts directory before executing the sql file in SQLcl.
 
-    <details><summary>**Option 2: Using Database Actions**</summary>
-    * Open to Database Actions
-    * Connect as DEV_USER
-    * Copy all the content of `departments-table.sql` file, then past it in the worksheet there and click on the run script button
-        ![Run departments ddl in database actions](./images/run-departments-table-database-actions.png " ")
-    </details>
+    ```sql
+    <copy>
+        cd /home/oracle/assets/workshops/sqlcl-projects-react-app/scripts/
+    </copy>
+    ```
 
-    <details><summary>**Result**</summary>
-    
-    * The table is created and data inserted in now, so the data should appear now in the Departments page. Refresh the app to check.
+    ```sql
+    <copy>
+        @departments_table.sql
+    </copy>
+    ```
 
-        <details><summary>***Check ...***</summary>
+    ![Departments ddl and data executed](./images/departments-table-executed.png " ")
 
-        **Oops!** It doesn’t appear yet!
+</details>
 
-        ![Departments-page](./images/departments-page-unlocked.png " ")
+<details><summary>**Option 2: Using Database Actions**</summary>
 
-        This is expected because the ***REST*** endpoint for the table hasn’t been enabled yet.
+1. Open to Database Actions
+2. Connect as DEV_USER
+3. Copy all the content of `departments-table.sql` file, then past it in the worksheet there and click on the run script button
 
-        Don’t worry, we’ll easily configure it in the next task using ***ORDS***, which simplifies the process.
-        </details>
+    ![Run departments ddl in database actions](./images/run-departments-table-database-actions.png " ")
 
-    </details>
+</details>
+
+<details><summary>**Result**</summary>
+
+The table is created and data inserted in now, so the data should appear now in the Departments page. Refresh the app to check.
+
+<details><summary>***Check ...***</summary>
+
+**Oops!** It doesn’t appear yet!
+
+![Departments page unlocked](./images/departments-page-unlocked.png " ")
+
+This is expected because the ***REST*** endpoint for the table hasn’t been enabled yet.
+
+Don’t worry, we’ll easily configure it in the next task using ***ORDS***, which simplifies the process.
+</details>
+
+</details>
 
 ## Task 3: Enable ORDS Endpoint For Departments Table
 
->**Note:** If you are still connected to DEV_USER in Database Actions, skip to step 3.
+If you are still connected to DEV_USER in Database Actions, skip to step 3.
 
 1. Open Oracle Database Actions
 2. Connect as DEV_USER
 3. Select **Tables**, right-click on **`DEPARTMENTS`**, choose **REST**, and then click **Enable**
-![Enable ORDS Endpoint For Departments Table](./images/enable-ords-for-departments.png " ")
+    ![Enable ORDS Endpoint For Departments Table](./images/enable-ords-for-departments.png " ")
 4. Click **Enable** at the bottom right
-![REST Enable Object](./images/rest-enable-object.png " ")
+    ![REST Enable Object](./images/rest-enable-object.png " ")
 5. The **DEPARTMENTS** table is **REST enabled** now
-![Departments REST Enabled](./images/departments-rest-enabled.png " ")
+    ![Departments REST Enabled](./images/departments-rest-enabled.png " ")
 
 ## Task 4: Check the Departments Page After Database Update
 
-* Go to the application, refresh the page, and head to the departments section—you'll see the data appearing now!
-![Departments data working in the app](./images/departments-data-appearing-in-the-app.png " ")
+Go to the application, refresh the page, and head to the departments section—you'll see the data appearing now!
+![Departments data appearing in the app](./images/departments-data-appearing-in-the-app.png " ")
 
 ## Task 5: Deploy the application to production
 
@@ -150,7 +159,7 @@ All right, so now we will go to the .env file and replace **DEV\_USER** with **P
 
 7. Click on the Departments section
 
-![Departments-page](./images/departments-page-unlocked.png " ")
+    ![Departments page unlocked](./images/departments-page-unlocked.png " ")
 
 There are no rows at the moment, which is expected because we switched from DEV\_USER (development environment) to PROD\_USER (production environment), where the departments table doesn’t exist yet. You can verify this by connecting to the PROD_USER schema and checking its tables.
 

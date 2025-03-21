@@ -28,7 +28,7 @@ Estimated Lab Time: 15 minutes
 
 Database CI/CD ensures synchronization between two databases, allowing you to deploy changes from a source database to a target database and keep them in sync.
 
-![source and target database](./images/source-target-database.png " " )
+![Source and Target database](./images/source-target-database.png " " )
 
 From this lab, you will work with these two environments:
 
@@ -38,7 +38,7 @@ From this lab, you will work with these two environments:
     * Where you deploy stable and reliable database updates.
     * *Our goal in the current and next labs is to successfully deploy the “Departments” and “Analytics” features to the Prod environment.*
 
-    ![dev vs prod environment](./images/dev-vs-prod.png " " )
+    ![Dev vs Prod environment](./images/dev-vs-prod.png " " )
 
 In this workshop, we will use:
 
@@ -72,23 +72,24 @@ Use SQLcl's **project** command to:
 
 * **Connecting to DEV_USER via SQLcl:**
     1. Launch SQLcl in the jupyter terminal
-            ```sql
+        ```sql
       <copy>
         sql SYS/[PASSWORD]@[IP_ADD:PORT]/FREEPDB1 as sysdba
       </copy>
       ```
       ![Launch SQLcl](./images/launch-sqlcl.png " ")
+
       >**Tip:** Click the icon in the screenshot below to enter full-screen mode.
 
-      ![Check the current working dir](./images/full-terminal-screen.png " ")
+      ![Click the icon at top left to enter full screen mode](./images/full-terminal-screen.png " ")
 
     2. Connect to the DEV_USER schema using connect command
-            ```sql
-      <copy>
-        connect DEV_USER/[PASSWORD]
-      </copy>
-      ```
-      ![Connect to DEV_USER](./images/connect-to-dev-user.png " ")
+        ```sql
+        <copy>
+            connect DEV_USER/[PASSWORD]
+        </copy>
+        ```
+        ![Connect to DEV_USER](./images/connect-to-dev-user.png " ")
 
     >**Tip:** You can clear your screen anytime you want by using **clear screen** command or just its short format **cle scr**:
         ```sql
@@ -99,54 +100,61 @@ Use SQLcl's **project** command to:
 
 * **Project Initialization:**
 
-    * Make sure you are in the application folder before running **project** commands
+    1. Make sure you are in the application folder before running **project** commands
 
         ![Check the current working dir](./images/print-woking-dir.png " ")
 
-    * **Initialize git**
+    2. **Initialize git**
+
         ```sql
         <copy>
             !git init --initial-branch main
         </copy>
         ```
-    >**Note:** We use a bang or exclamation mark (**!**) at the beginning of hosted commands (non-SQLcl commands) to run them within SQLcl.
-    <!--In SQLcl, it is used as a shell escape to run external (non-SQLcl) commands.-->
 
-    * Add and commit
+        >**Note:** We use a bang or exclamation mark (**!**) at the beginning of hosted commands (non-SQLcl commands) to run them within SQLcl.
+        <!--In SQLcl, it is used as a shell escape to run external (non-SQLcl) commands.-->
+
+    3. Add and commit
 
         ```sql
         <copy>
             !git add --all
         </copy>
         ```
+
         ```sql
         <copy>
             !git commit -m "Initial commit"
         </copy>
         ```
+
         ![First commit](./images/git-init-add-initial-commit.png " ")
         <!--![First commit](./images/git-init-add-first-commit.png " ")-->
 
-    >**Tip:** Press Tab to view completions, then keep pressing Tab or use the arrow keys to navigate. Press Enter when you find the desired option.
-      ![Run project init command](./images/tab-completion.png " ")
+        >**Tip:** Press Tab to view completions, then keep pressing Tab or use the arrow keys to navigate. Press Enter when you find the desired option.
+        ![Use tab for completion](./images/tab-completion.png " ")
 
-    * **Initialize project**
-    ```sql
-      <copy>
-        project init -name HrManager -schemas DEV_USER -verbose
-      </copy>
-      ```
+    4. **Initialize project**
 
-      ![Run project init command](./images/project-init.png " ")
+        ```sql
+        <copy>
+            project init -name HrManager -schemas DEV_USER -verbose
+        </copy>
+        ```
 
-      The **`project init`** command creates a specific folder structure, setting up the necessary directories and files for managing your database objects and changes within your current directory. If you add the **-makeroot** flag to your init command, a folder with the project name will be created under your current directory and will hold all the project files and folders.
+        ![Run project init command](./images/project-init.png " ")
 
-      >**Note:** Use `help project` for more info
+        The **`project init`** command creates a specific folder structure, setting up the necessary directories and files for managing your database objects and changes within your current directory. If you add the **-makeroot** flag to your init command, a folder with the project name will be created under your current directory and will hold all the project files and folders.
+
+        >**Note:** Use `help project` for more info
+
         ```sql
         <copy>
             help project
         </copy>
         ```
+
         ![Help project](./images/help-project.png " ")
 
     * **Project Structure:**
@@ -168,59 +176,69 @@ Use SQLcl's **project** command to:
                 └── database
             ```
         * List all, to see the generated project folders
-        ![List all](./images/list-dirs.png " ")
+        ![List all dirs](./images/list-dirs.png " ")
 
         >**Note:** The project init command creates a src folder. However, since the application already has a src folder, SQLcl Projects merges its newly created src folder with the existing one. As a result, the database project folder will be located inside src, ensuring seamless integration.
 
-    <!--<details>  <summary> **Screenshots:**</summary>
-    ![ init ](./images/project-init-output.png " ")
-    </details>-->
+        <!--<details>  <summary> **Screenshots:**</summary>
+        ![ init ](./images/project-init-output.png " ")
+        </details>-->
 
-    * Add and commit
+    5. Add and commit
+
         ```sql
         <copy>
             !git branch
         </copy>
         ```
+
         ```sql
         <copy>
             !git status
         </copy>
         ```
+
         ```sql
         <copy>
             !git add --all
         </copy>
         ```
+
         ```sql
         <copy>
             !git status
         </copy>
         ```
+
         ```sql
         <copy>
             !git commit -m "Add project files"
         </copy>
         ```
+
         ![Commit project files](./images/git-commit-project-files.png " ")
         >**Note:** You can click the image if it is not visible for you.
 
-    * Create a new git branch and switch to it
+    6. Create a new git branch and switch to it
+
         ```sql
         <copy>
             !git checkout -b SQLcl-Projects-Migration
         </copy>
         ```
+
         ```sql
         <copy>
             !git branch
         </copy>
         ```
+
         ```sql
         <copy>
             !git status
         </copy>
         ```
+
     ![Checkout first branch](./images/checkout-first-branch.png " ")
 
     >**Note:** You can choose the name you want for your branch. It doesn’t have to match this one.
@@ -238,6 +256,7 @@ You will use the project config command to view and edit this configuration item
     project config -list -name export.setTransform.emitSchema
 </copy>
 ```
+
 ```sql
 <copy>
     project config set -name export.setTransform.emitSchema -value false -verbose
@@ -284,7 +303,7 @@ But before proceeding, we need to add a filter in `.dbtools/filters/project.filt
     * Press **Esc** + **I** to enter insert mode
 
     * Copy and paste this line in the location shown in the image below
-        
+
         ```sh
         <copy>
             not (object_name like 'DBTOOLS$%'),
@@ -307,7 +326,7 @@ But before proceeding, we need to add a filter in `.dbtools/filters/project.filt
     </copy>
     ```
 
-    ![Exported schema](./images/export-devuser-schema.png " ")
+    ![Run project export command](./images/export-devuser-schema.png " ")
     <!--![Exported schema](./images/export-dev-user-schema.png " ")-->
     <!--![Exported schema without hist](./images/export-dev-user.png " ")-->
     <!--![Run project export command](./images/project-export-object.png " ")-->
@@ -324,7 +343,7 @@ But before proceeding, we need to add a filter in `.dbtools/filters/project.filt
 
 5. Double click on the 'employees.sql' to see its content.
 
-    ![Employees.sql content](./images/employees-sql-file.png " ")
+    ![Employees.sql file content](./images/employees-sql-file.png " ")
     <!--![Departments.sql content](./images/departments-sql-file-content.png " ")-->
     <!--![Departments.sql content](./images/departments-sql-content.png " ")-->
 
@@ -332,7 +351,7 @@ Now, we export our objects to have them included in our project folders.
 
 ## Task 5: Project Stage
 
-* You need to add and commit changes before stage
+1. You need to add and commit changes before stage
 
     ```sql
     <copy>
@@ -361,7 +380,7 @@ Now, we export our objects to have them included in our project folders.
     ![Add and commit changes](./images/git-commit-changes.png " ")
     <!--![Add and commit changes](./images/git-add-commit-changes.png " ")-->
 
-* By default, the **dist** folder is ignored in many React projects because it contains generated build files. However, you need to track it in Git by removing dist in the .gitignore file.
+2. By default, the **dist** folder is ignored in many React projects because it contains generated build files. However, you need to track it in Git by removing dist in the .gitignore file.
 
     * Open .gitignore, press Esc + I then search for **dist** and delete the line that contains it.
 
@@ -375,7 +394,7 @@ Now, we export our objects to have them included in our project folders.
 
     * Save the file.
 
-* Execute the following command to stage the changes for release
+3. Execute the following command to stage the changes for release
 
     ```sql
     <copy>
@@ -383,13 +402,13 @@ Now, we export our objects to have them included in our project folders.
     </copy>
     ```
 
-    ![project stage](./images/project-stage-command.png " ")
-<!--![project stage](./images/project-stage-cmd.png " ")-->
-<!--![project stage](./images/project-stage.png " ")-->
+    ![Run project stage](./images/project-stage-command.png " ")
+    <!--![project stage](./images/project-stage-cmd.png " ")-->
+    <!--![project stage](./images/project-stage.png " ")-->
 
-This command generates Liquibase changelogs for all source (src) and custom SQL files by comparing the current branch (`SQLcl-Projects-Migration`) to the base branch (`main`). It creates a structured folder (dist/releases/next/) for staged files and allows adding custom changesets with SQL and SQLcl commands.
+    This command generates Liquibase changelogs for all source (src) and custom SQL files by comparing the current branch (`SQLcl-Projects-Migration`) to the base branch (`main`). It creates a structured folder (dist/releases/next/) for staged files and allows adding custom changesets with SQL and SQLcl commands.
 
-* Add and commit the files
+4. Add and commit the files
 
     ```sql
     <copy>
@@ -417,7 +436,7 @@ This command generates Liquibase changelogs for all source (src) and custom SQL 
 
     ![Commit project stage files](./images/commit-stage-files.png " ")
 
-* **Merge to main branch:**
+5. Merge to main branch
 
     This is typically done via a Merge Request or Pull Request, depending on your Git provider. However, since this is a local repository, you can merge directly into the main branch.
 
@@ -433,53 +452,54 @@ This command generates Liquibase changelogs for all source (src) and custom SQL 
     </copy>
     ```
 
-    ![Merge branch with main ](./images/merge-to-main.png " ")
+    ![Merge SQLcl-Projects-Migration branch with main ](./images/merge-to-main.png " ")
 
 ## Task 6: Generate Release 1.0.0
 
-Once your changes are merged to the main branch, execute the following command to create a first release:
-```sql
-<copy>
-    project release -version 1.0.0 -verbose
-</copy>
-```
+1. Once your changes are merged to the main branch, execute the following command to create a first release
 
-![Project release](./images/project-release.png " ")
+    ```sql
+    <copy>
+        project release -version 1.0.0 -verbose
+    </copy>
+    ```
 
-This command renames the contents of dist/releases/next to the specified version number and then creates a new next folder under dist.
+    ![Run project release](./images/project-release.png " ")
 
-Add the changed files and commit:
+    This command renames the contents of dist/releases/next to the specified version number and then creates a new next folder under dist.
 
-```sql
-<copy>
-    !git add .
-</copy>
-```
+2. Add the changed files and commit:
 
-```sql
-<copy>
-    !git commit -m "Release 1.0.0"
-</copy>
-```
+    ```sql
+    <copy>
+        !git add .
+    </copy>
+    ```
 
-![Project release](./images/commit-first-release.png " ")
+    ```sql
+    <copy>
+        !git commit -m "Release 1.0.0"
+    </copy>
+    ```
+
+    ![Commit release file changes](./images/commit-first-release.png " ")
 
 ## Task 7: Generate Deployable Artifact
 
 Before generating the artifact, you need to establish a new database baseline by syncing the two environments (schemas). We need to do this because the employees table already exists in the target environment and is in the same state as the source. So we need just to sync them. If your target environment was empty during migration, you don't need to do that and just skip this step.
 
-* Open the dist/install.sql file
+1. Open the dist/install.sql file
 
-    ![Open install.sql](./images/navigate-to-install-sql-file.png " ")
+    ![Open install.sql file](./images/navigate-to-install-sql-file.png " ")
 
-* Go to line 17 and replace **lb update** with **lb changelog-sync** (liquibase commands)
+2. Go to line 17 and replace **lb update** with **lb changelog-sync** (liquibase commands)
 
     <!--![Replace lb update with lb changelog-sync](./images/lb-update-to-lb-changelog-syn.png " ")-->
     ![Replace lb update with lb changelog-sync](./images/lb-update-to-changelog-sync.png " ")
 
-* Save the **install.sql** file by pressing **Cmd + S** on Mac or **Ctrl + S** on Windows/Linux.
+3. Save the **install.sql** file by pressing **Cmd + S** on Mac or **Ctrl + S** on Windows/Linux.
 
-* Add and commit
+4. Add and commit
 
     ```sql
     <copy>
@@ -493,7 +513,7 @@ Before generating the artifact, you need to establish a new database baseline by
     </copy>
     ```
 
-* The `project gen-artifact` command can be used to generate an artifact for your database changes. This artifact can then be easily deployed to different environments.
+5. The `project gen-artifact` command can be used to generate an artifact for your database changes. This artifact can then be easily deployed to different environments.
 
     ```sql
     <copy>
@@ -501,21 +521,21 @@ Before generating the artifact, you need to establish a new database baseline by
     </copy>
     ```
 
-    ![Project gen-artifact](./images/project-genartifact-cmd.png " ")
+    ![Run project gen-artifact command](./images/project-genartifact-cmd.png " ")
     <!--![Project gen-artifact](./images/project-genartifact.png " ")-->
     <!--![Project gen-artifact](./images/project-gen-artifact.png " ")-->
 
-* Returning to the application folder, you will find a new folder named artifact, which contains the generated zip artifact.
+6. Returning to the application folder, you will find a new folder named artifact, which contains the generated zip artifact.
 
->**Note:** The artifact is created with the provided name to the project at the moment of its initialization , as the default name, in case no specific name was specified using the **-name** option with the **project gen-artifact** command.
+    >**Note:** The artifact is created with the provided name to the project at the moment of its initialization , as the default name, in case no specific name was specified using the **-name** option with the **project gen-artifact** command.
 
-![Artifact folder](./images/artifact-folder.png " ")
+    ![Navigate to the artifact folder](./images/artifact-folder.png " ")
 
 In the next task, we will learn how to deploy these changes to the production environment using SQLcl's project command and explore advanced CICD concepts.
 
 ## Task 8: Deploy to Target Environment
 
-* **Connect to the Production Database:**
+1. **Connect to the Production Database:**
 
     * Establish a connection to the production database using SQLcl.
     * Use the `connect` command with the `PROD_USER` credentials.
@@ -525,9 +545,10 @@ In the next task, we will learn how to deploy these changes to the production en
             connect PROD_USER/[PASSWORD]
         </copy>
         ```
-        ![Connect to prod](./images/connect-to-production.png " ")
 
-* **Deploy to Production:**
+        ![Connect to prod schema](./images/connect-to-production.png " ")
+
+2. **Deploy to Production:**
 
     * Execute the following command to deploy the changes to the production database:
 
@@ -540,7 +561,7 @@ In the next task, we will learn how to deploy these changes to the production en
         >***Note:** If it returns the help when pasting this command in SQLcl, try typing it manually. Use tab for completion.*
 
         <!--![project deploy ](./images/project-deploy-cmd.png " ")-->
-        ![Project deploy ](./images/project-deploy.png " ")
+        ![Run project deploy command](./images/project-deploy.png " ")
 
     * This command applies the changes defined in the release artifact to the production database without recreating existing schema objects.
 
@@ -566,7 +587,7 @@ In the next task, we will learn how to deploy these changes to the production en
 
     <!--The other three created tables are liquibase tables. Liquibase is the engine of the SQLcl Projects tool that apply its command 'liquibase update' behiend scens to check if there is any differences between the source and target database, if they are it apply the changes to get them synched, if they are not, it does't do anything. So it checks that there are diffs before doing anything.-->
 
-    ![Liquibase](./images/liquibase-logo.png " ")
+    ![Liquibase workflow](./images/liquibase-logo.png " ")
 
 **Well done!** Migration completed successfully.
 

@@ -4,7 +4,7 @@
 
 Since the table is missing in PROD, the next step is to synchronize the two environments. Traditionally, this would mean manually applying changes to the production database, a process prone to errors and inconsistencies. However, with SQLcl's project command, we can automate this process, making database changes faster, safer, and more reliable. This is where CI/CD principles come into play, bringing the same efficiency and consistency of modern application deployment pipelines to database management.
 
-![Database cicd](./images/database-cicd.png " ")
+![Database cicd logo](./images/database-cicd.png " ")
 
 **Focus on the Process**
 
@@ -46,7 +46,7 @@ First, you have to be connect to DEV_USER in SQLcl and make sure you are in the 
 </copy>
 ```
 
-![Connect to dev](./images/connec-to-dev-and-be-in-the-app-dir.png " ")
+![Connect to DEV_USER](./images/connec-to-dev-and-be-in-the-app-dir.png " ")
 
 >**Note:** You must be in the project folder (in your case **sqlcl-projects-react-app** is your project/application folder) to execute project commands; otherwise, an error will occur.
 
@@ -64,7 +64,7 @@ Before exporting, create a new git branch from main branch and switch to it for 
 </copy>
 ```
 
-![Checkout first branch](./images/checkout-first-branch.png " ")
+![Create and checkout to the departments feature branch](./images/checkout-first-branch.png " ")
 
 <!--For exporting, we have two options:
 
@@ -138,13 +138,13 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
 3. Double click on the 'departments.sql' to see its content.
 
-    ![Departments.sql content](./images/departments-sql-file.png " ")
+    ![Departments.sql file content](./images/departments-sql-file.png " ")
     <!--![Departments.sql content](./images/departments-sql-file-content.png " ")-->
     <!--![Departments.sql content](./images/departments-sql-content.png " ")-->
 
 ## Task 4: Stage Changes (project stage)
 
-* **Stage Changes:**
+1. **Stage Changes:**
 
     * Add and commit changes before stage
 
@@ -183,11 +183,11 @@ To see what's happen when exporting the whole schema drop down **Export schema**
         </copy>
         ```
 
-        ![project stage](./images/project-stage-command.png " ")
+        ![Run project stage command](./images/project-stage-command.png " ")
         <!--![project stage](./images/project-stage-cmd.png " ")-->
         <!--![project stage](./images/project-stage.png " ")-->
 
-* **Add custom scripts**
+2. **Add custom scripts**
 
     You can add custom scripts using the **add-custom** sub-command of the stage command.
 
@@ -199,17 +199,17 @@ To see what's happen when exporting the whole schema drop down **Export schema**
         </copy>
         ```
 
-        ![project stage add-custom](./images/project-stage-add-custom.png " ")
+        ![Run project stage add-custom](./images/project-stage-add-custom.png " ")
 
         This will create a custom sql file in the dist/_custom folder.
 
     * Navigate to the scripts folder
 
-        ![Go to scripts folder](./images/scripts-folder.png " ")
+        ![Navigate to scripts folder](./images/scripts-folder.png " ")
 
     * Copy the insert statements from `departments_table.sql`
 
-        ![Copy inserts](./images/copy-inserts.png " ")
+        ![Copy the inserts](./images/copy-inserts.png " ")
 
     * Locate the newly created dept_data.sql file
 
@@ -227,7 +227,7 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
         <!--TODO: add commit-->
 
-* **Add and commit:**
+3. **Add and commit:**
 
     ```sql
     <copy>
@@ -243,7 +243,7 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
     ![Commit stage files](./images/commit-stage-add-custom-files.png " ")
 
-* **Merge to main branch:**
+4. **Merge to main branch:**
 
     ```sql
     <copy>
@@ -262,7 +262,7 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
 ## Task 5: Release Changes (project release)
 
-* Once your changes are merged into the main branch, execute the following command to create a second release:
+1. Once your changes are merged into the main branch, execute the following command to create a second release:
 
     ```sql
     <copy>
@@ -270,9 +270,9 @@ To see what's happen when exporting the whole schema drop down **Export schema**
     </copy>
     ```
 
-    ![Project release](./images/project-release.png " ")
+    ![Run project release command](./images/project-release.png " ")
 
-* Add and commit
+2. Add and commit
 
     ```sql
     <copy>
@@ -290,20 +290,20 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
 Before generating the artifact, you need to return the install.sql file to its initial state containing **lb update**.
 
-* Open the dist/install.sql file
+1. Open the dist/install.sql file
 
-    ![Open install.sql](./images/navigate-to-install-sql-file.png " ")
+    ![Open install.sql file](./images/navigate-to-install-sql-file.png " ")
 
-* Go to line 17 and replace **lb changelog-sync** with **lb update**
+2. Go to line 17 and replace **lb changelog-sync** with **lb update**
 
     <!--![Replace lb update with lb changelog-sync](./images/lb-update-to-lb-changelog-syn.png " ")-->
-    ![Replace lb update with lb changelog-sync](./images/lb-changelog-sync-to-update.png " ")
+    ![Replace lb changelog-sync with lb update](./images/lb-changelog-sync-to-update.png " ")
 
-* Save the **install.sql** file by pressing **Cmd + S** on Mac or **Ctrl + S** on Windows/Linux.
+3. Save the **install.sql** file by pressing **Cmd + S** on Mac or **Ctrl + S** on Windows/Linux.
 
-* Add and commit.
+4. Add and commit.
 
-* Run `project gen-artifact`
+5. Run `project gen-artifact`
 
     ```sql
     <copy>
@@ -311,17 +311,17 @@ Before generating the artifact, you need to return the install.sql file to its i
     </copy>
     ```
 
-    ![Project gen-artifact](./images/project-genartifact-cmd.png " ")
+    ![Run project gen-artifact command](./images/project-genartifact-cmd.png " ")
     <!--![Project gen-artifact](./images/project-genartifact.png " ")-->
     <!--![Project gen-artifact](./images/project-gen-artifact.png " ")-->
 
-* If you go back to the **artifact** folder, you will find a new artifact generated.
+6. If you go back to the **artifact** folder, you will find a new artifact generated.
 
-    ![Artifact folder](./images/artifact-folder.png " ")
+    ![Navigate to the artifact folder](./images/artifact-folder.png " ")
 
 ## Task 7: Deploying to Production (project deploy)
 
-* **Connect to the Production Database:**
+1. **Connect to the Production Database:**
 
     * Establish a connection to the production database using SQLcl.
 
@@ -333,9 +333,9 @@ Before generating the artifact, you need to return the install.sql file to its i
     </copy>
     ```
 
-    ![Connect to prod](./images/connect-to-production.png " ")
+    ![Connect to PROD_USER](./images/connect-to-production.png " ")
 
-* **Deploy Changes to Production:**
+2. **Deploy Changes to Production:**
 
     * Execute the following command to deploy the changes to the production database:
 
@@ -345,17 +345,17 @@ Before generating the artifact, you need to return the install.sql file to its i
         </copy>
         ```
         <!--![project deploy ](./images/project-deploy-cmd.png " ")-->
-        ![project deploy ](./images/project-deploy.png " ")
+        ![Run project deploy command](./images/project-deploy.png " ")
 
     * This command applies the changes defined in the release artifact to the production database without recreating existing schema objects.
 
     * If you check now you find the departments table in the PROD_USER. But what are the other tables ?
 
-        ![Departments table in PROD_USER ](./images/departments-prod-user.png " ")
+        ![Find departments table in PROD_USER](./images/departments-prod-user.png " ")
 
     <!--The other three created tables are liquibase tables. Liquibase is the engine of the SQLcl Projects tool that apply its command 'liquibase update' behiend scens to check if there is any differences between the source and target database, if they are it apply the changes to get them synched, if they are not, it does't do anything. So it checks that there are diffs before doing anything.-->
 
-* **Enable REST Endpoints**
+3. **Enable REST Endpoints**
 
     To expose the Departments table in PROD\_USER as a REST endpoint, follow the same steps you performed for DEV\_USER in **Lab 2 → Task 3**.
 
@@ -366,7 +366,7 @@ Before generating the artifact, you need to return the install.sql file to its i
 
     </br>
 
-* **Run the Production Application:**
+4. **Run the Production Application:**
 
     1. Restart the application using the production environment variables.
     2. Verify that the "Departments" feature is functioning correctly in the production environment.
@@ -374,9 +374,9 @@ Before generating the artifact, you need to return the install.sql file to its i
 
     </br>
 
-* **The department section should look like this:**
+5. **The department section should look like this:**
 
-    ![Departments data working in the app](./images/departments-data-appearing-in-the-app.png " ")
+    ![Departments data appearing in the app](./images/departments-data-appearing-in-the-app.png " ")
 
 **You did it!** You have successfully implemented and deployed the "Departments" feature and released the version 2 of the application using SQLcl and CICD practices. You have gained valuable experience in managing database changes, automating deployments, and working with a CICD pipeline.
 
