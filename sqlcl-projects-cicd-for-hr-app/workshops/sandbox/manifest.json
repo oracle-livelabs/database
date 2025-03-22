@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Database CI/CD for a React & Node.js Application",
+  "workshoptitle": "Database CI/CD for a React JS Application",
   "help": "abdelilah.ait.hamou@oracle.com",
   "variables": ["../../variables/variables.json",
     "../../variables/variables-in-another-file.json"],
