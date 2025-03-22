@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Database CI/CD Automation for a React JS Application",
+  "workshoptitle": "Database CI/CD Project Automation for a React JS Application",
   "help": "abdelilah.ait.hamou@oracle.com",
   "variables": ["../../variables/variables.json",
     "../../variables/variables-in-another-file.json"],
