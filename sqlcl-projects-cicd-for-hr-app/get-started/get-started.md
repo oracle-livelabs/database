@@ -67,14 +67,17 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Username: `DEV_USER`
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password: `[Can be found in your Reservation details - see image in Step 1 for reference]`
 
-    >**Note:** If you're having trouble connecting to DEV\_USER, log in with Admin first. Then, open the hamburger menu, go to Database Users, and locate the DEV\_USER card in the bottom right. Click the icon to open the link, which will take you to a sign-in page where you can log in as DEV\_USER.
-    Alternatively, simply modify the URL to include DEV\_USER in the path as the following:
+    >**Note:** If you're having trouble connecting to DEV\_USER which is normal in the first time, log in with Admin first. Then, open the hamburger menu, go to Database Users, and locate the DEV\_USER card. Click the icon to open the link, which will take you to a sign-in page where you can log in as DEV\_USER.
+
+    ***Alternatively***, simply modify the URL to include DEV\_USER in the path as the following:
 
     ```text
     <copy>
     http://[Your Lab's IP]:8181/ords/DEV_USER/_sdw/
     </copy>
     ```
+
+    Then, enter the DEV_USER credentials (username & password).
 
 3. The Database Actions Launchpad will appear. Navigate to the `Development` category, then click `SQL`. A blank SQL Worksheet will appear.
 
@@ -96,7 +99,7 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
    ![Reviewing the results](images/run-select-from-employees.png " ")
 
-5. You may notice the varied data types in this table. To take a closer look at how this `DEV_USER` table is structured, right-click on the `DEV_USER` table, then select `Edit...`. When the `Table Properties` slider appears, click `DDL`, then select the `Create` tab.  
+5. You may notice the varied data types in this table. To take a closer look at how this `DEV_USER` table is structured, right-click on the `DEV_USER` table, then select `Edit...`. When the `Table Properties` slider appears, click `DDL`, then select the `Create` tab.
 
    Note the data types:
 
@@ -118,7 +121,7 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
    ![Jupyter password](images/jupyter-pwd.png " ")
   
-2. Once logged in, you may see several directories. Navigate (i.e., a double or single click on the directory) to the `workshops` directory, then the `sqlcl-projects-react-app` directory.
+2. Once logged in, you may see several directories. Navigate (i.e., double or single-click on the directory) to the `workshops` directory, then to the `sqlcl-projects-react-app` directory. This last directory is the folder containing the application you will use and work with throughout this workshop. Take a moment to locate it, explore its contents, and get familiar with its structure.
 
    ![Navigating to SQLcl Projects react app directory.](images/go-to-app-folder.png " ")
 
@@ -145,17 +148,21 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
 2. Click the `Run Script` icon. Upon completion, a `PL/SQL procedure successfully completed` message will appear in the `Script Output` tab.-->
 
-1. We created for you the ORDS APIs for the `DEV_USER` user. To review the Resource Module, its Resource Templates and Resource Handlers, navigate to the REST Workshop.
+1. We have created the ORDS APIs for the DEV_USER user and REST-enabled the EMPLOYEES table. 
+
+      >**Note:** The icon next to the table name indicates that the table is REST-enabled.
 
    ![Employees table enabled icon](images/employees-rest-enabled-icon.png " ")
 
-2. Click the hamburger menu from the top of Oracle Database Actions, then click REST.  
+2. Click the hamburger menu at the top of Oracle Database Actions, then select REST.
 
    ![Navigating to the REST using hamburger](images/hamburger-rest.png " ")
 
-3. You'll notice a single AUTOREST in the Workshop's Object panel. Click it.
+3. In the Workshop's Object panel, you will see a single AUTOREST. Click it.
 
    ![Click AUTOREST](images/autorest.png " ")
+
+There, you will find all the REST-enabled objects for the user along with their corresponding endpoints. Since this user only has the EMPLOYEES table REST-enabled, it will be the only one displayed.
 
 <!--5. Next, copy this URI's to your clipboard. In a few moments, you will return to the Jupyter lab to input this into the application code.
 
