@@ -1,6 +1,6 @@
 {
   "workshoptitle": "Development of an application using SQLcl Projects",
-  "help": "livelabs-help-**abdelilah.ait.hamou@oracle.com",
+  "help": "livelabs-help-db_us@oracle.com",
   "variables": ["../../variables/variables.json",
     "../../variables/variables-in-another-file.json"],
   "tutorials": [
