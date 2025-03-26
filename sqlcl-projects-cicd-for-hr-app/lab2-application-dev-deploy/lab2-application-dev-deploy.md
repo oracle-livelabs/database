@@ -108,18 +108,36 @@ Don’t worry, we’ll easily configure it in the next task using ***ORDS***, wh
 
 </details>
 
-## Task 3: Enable ORDS Endpoint For Departments Table
+## Task 3: Enable REST Endpoints For Departments Table
+
+<!--You already enabled the employees table in the get stated lab and know how to do that, now we need enable the departments table as well. This time you will use an other more easy way to enable it quickly different from the first way, just using a specific PL/SQL block.-->
+You have already enabled the EMPLOYEES table in the "Get Started" lab and are familiar with the process. Now, we need to enable the DEPARTMENTS table as well. This time, you will use a quicker and simpler method, different from the previous one, by using a specific PL/SQL block.
 
 If you are still connected to DEV_USER in Database Actions, skip to step 3.
 
 1. Open Oracle Database Actions
 2. Connect as DEV_USER
+3. Copy the following PL/SQL block and paste it into the SQL worksheet:
+
+    ```sql
+    <copy>
+        PL/SQL
+    </copy>
+    ```
+
+4. Click the **Run Script** button to execute the block
+    ![Copy and past the PL/SQL block to the sql worksheet](./images/rest-enable-.png " ")
+5. Refresh the tables list, and you'll notice the REST-enabled icon appear next to the DEPARTMENTS table, confirming that it is now ready for REST interactions
+    ![The REST enabled icon appears](./images/rest-enable-icon-for-departments.png " ")
+
+Your DEPARTMENTS table is now ready for REST interactions.
+<!--
 3. Select **Tables**, right-click on **`DEPARTMENTS`**, choose **REST**, and then click **Enable**
     ![Enable ORDS Endpoint For Departments Table](./images/enable-ords-for-departments.png " ")
 4. Click **Enable** at the bottom right
     ![REST Enable Object](./images/rest-enable-object.png " ")
 5. The **DEPARTMENTS** table is **REST enabled** now
-    ![Departments REST Enabled](./images/departments-rest-enabled.png " ")
+    ![Departments REST Enabled](./images/departments-rest-enabled.png " ")-->
 
 ## Task 4: Check the Departments Page After Database Update
 

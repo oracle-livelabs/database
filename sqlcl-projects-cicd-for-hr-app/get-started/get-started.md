@@ -85,7 +85,7 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
       > **NOTE:** If this is your first time visiting the SQL Worksheet, a guided tour will appear. You may continue with the tour, or click the <button type="button" style="pointer-events: none;">X</button> (as seen in the image) to exit the tour.
 
-4. You'll notice an `Employees` table has already been created for you. This table has also been pre-populated with DEV_USER data.
+4. You'll notice an `Employees` table has already been created for you. This table has also been pre-populated with data.
 
    To view a sample of the table's data<span class="fa fa-file-play" aria-hidden="true"></span> copy and paste the following SQL statement into the SQL Worksheet and click then `Run Statement` icon.
 
@@ -97,9 +97,9 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
    You will see results similar to the following image:
 
-   ![Reviewing the results](images/run-select-from-employees.png " ")
+   ![Reviewing the results](images/run-select-from-employees-unenabled.png " ")
 
-5. You may notice the varied data types in this table. To take a closer look at how this `DEV_USER` table is structured, right-click on the `DEV_USER` table, then select `Edit...`. When the `Table Properties` slider appears, click `DDL`, then select the `Create` tab.
+5. You may notice the varied data types in this table. To take a closer look at how this `EMPLOYEES` table is structured, right-click on the `EMPLOYEES` table, then select `Edit...`. When the `Table Properties` slider appears, click `DDL`, then select the `Create` tab.
 
    Note the data types:
 
@@ -107,11 +107,63 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
       > **Note:** ORDS APIs will be able to handle all of these various data types and send them to your application.
 
-6. Once you are satisfied, return to the Reservation information for this workshop.
+## Task 3: Enable REST Endpoints Using ORDS
+
+To interact with the EMPLOYEES table from your application, you need to enable a REST endpoint. This will allow you to fetch and post data directly to the database using standard HTTP requests.
+
+Oracle REST Data Services (ORDS) provides a simple and efficient way to expose database objects as RESTful services. Instead of building custom APIs from scratch, ORDS allows you to instantly enable REST access to your tables with minimal effort and eliminate the need for complex backend development while ensuring secure and scalable database access.
+
+In this task, you will use ORDS to enable a REST endpoint for the Departments table, making it accessible through standard HTTP requests, simplifying data integration and allowing your application to interact with the database smoothly.
+
+1. Open Oracle Database Actions
+2. Connect as DEV_USER
+3. Select **Tables**, right-click on **`EMPLOYEES`**, choose **REST**, and then click **Enable**
+    ![Enable ORDS Endpoint For EMPLOYEES Table](./images/enable-ords-for-employees.png " ")
+4. Click **Enable** at the bottom right
+    ![REST Enable Object](./images/rest-enable-object.png " ")
+5. The **EMPLOYEES** table is **REST enabled** now
+    ![EMPLOYEES REST Enabled](./images/employees-rest-enabled.png " ")
+
+    >**Note:** The icon next to the table name indicates that the table is REST-enabled.
+
+6. Click the hamburger menu at the top of Oracle Database Actions, then select REST.
+
+   ![Navigating to the REST using hamburger](images/hamburger-rest.png " ")
+
+7. In the Workshop's Object panel, you will see a single AUTOREST. Click it.
+
+   ![Click AUTOREST](images/autorest.png " ")
+
+There, you will find all the REST-enabled objects for the user along with their corresponding endpoints. Since this user only has the EMPLOYEES table REST-enabled, it will be the only one displayed.
+
+Once you are satisfied, return to the Reservation information for this workshop.
 
    ![View Login info](images/workshop-login-info.png " ")
+<!--1. Navigate to the SQL Worksheet. Then paste (easily done with keyboard shortcuts) the contents of the `users.sql` file to the SQL Worksheet.
 
-## Task 3: Open Jupyter lab
+2. Click the `Run Script` icon. Upon completion, a `PL/SQL procedure successfully completed` message will appear in the `Script Output` tab.-->
+
+<!--1. We have created the ORDS APIs for the DEV_USER user and REST-enabled the EMPLOYEES table.
+
+      >**Note:** The icon next to the table name indicates that the table is REST-enabled.
+
+   ![Employees table enabled icon](images/employees-rest-enabled-icon.png " ")
+
+2. Click the hamburger menu at the top of Oracle Database Actions, then select REST.
+
+   ![Navigating to the REST using hamburger](images/hamburger-rest.png " ")
+
+3. In the Workshop's Object panel, you will see a single AUTOREST. Click it.
+
+   ![Click AUTOREST](images/autorest.png " ")
+
+There, you will find all the REST-enabled objects for the user along with their corresponding endpoints. Since this user only has the EMPLOYEES table REST-enabled, it will be the only one displayed.-->
+
+<!--5. Next, copy this URI's to your clipboard. In a few moments, you will return to the Jupyter lab to input this into the application code.
+
+   ![Adding the ORDS URIs to the clipboard](images/copy-rest.png " ")-->
+
+## Task 4: Open Jupyter lab
 
 1. Using the URL you were provided, log in to your Jupyter lab. *It is recommended you open the Juptyer Lab in a new tab or window.*
 
@@ -120,7 +172,7 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
    Use the same password from the previous task.
 
    ![Jupyter password](images/jupyter-pwd.png " ")
-  
+
 2. Once logged in, you may see several directories. Navigate (i.e., double or single-click on the directory) to the `workshops` directory, then to the `sqlcl-projects-react-app` directory. This last directory is the folder containing the application you will use and work with throughout this workshop. Take a moment to locate it, explore its contents, and get familiar with its structure.
 
    ![Navigating to SQLcl Projects react app directory.](images/go-to-app-folder.png " ")
@@ -141,32 +193,6 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
     > **TIP:** Refer to Task 1, Step 1 for keyboard shortcuts for copy and paste actions.
 
    ![Copying contents of the DEV_USERstream module.](images/the-DEV_USERstream-resource-module.png " ")-->
-
-## Task 4: Check Enabled ORDS Endpoints
-
-<!--1. Navigate to the SQL Worksheet. Then paste (easily done with keyboard shortcuts) the contents of the `users.sql` file to the SQL Worksheet.
-
-2. Click the `Run Script` icon. Upon completion, a `PL/SQL procedure successfully completed` message will appear in the `Script Output` tab.-->
-
-1. We have created the ORDS APIs for the DEV_USER user and REST-enabled the EMPLOYEES table. 
-
-      >**Note:** The icon next to the table name indicates that the table is REST-enabled.
-
-   ![Employees table enabled icon](images/employees-rest-enabled-icon.png " ")
-
-2. Click the hamburger menu at the top of Oracle Database Actions, then select REST.
-
-   ![Navigating to the REST using hamburger](images/hamburger-rest.png " ")
-
-3. In the Workshop's Object panel, you will see a single AUTOREST. Click it.
-
-   ![Click AUTOREST](images/autorest.png " ")
-
-There, you will find all the REST-enabled objects for the user along with their corresponding endpoints. Since this user only has the EMPLOYEES table REST-enabled, it will be the only one displayed.
-
-<!--5. Next, copy this URI's to your clipboard. In a few moments, you will return to the Jupyter lab to input this into the application code.
-
-   ![Adding the ORDS URIs to the clipboard](images/copy-rest.png " ")-->
 
 ## Task 5: Prepare Your Application Environment Variables
 
