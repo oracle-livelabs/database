@@ -163,7 +163,7 @@ There, you will find all the REST-enabled objects for the user along with their 
 
    ![Adding the ORDS URIs to the clipboard](images/copy-rest.png " ")-->
 
-## Task 4: Open Jupyter lab
+## Task 4: Open Jupyter Lab
 
 1. Using the URL you were provided, log in to your Jupyter lab. *It is recommended you open the Juptyer Lab in a new tab or window.*
 
