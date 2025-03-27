@@ -125,4 +125,4 @@ You may proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Dave Rubin, Senior Director, NoSQL and Embedded Database Development and Michael Brey, Director, NoSQL Product Development
-* **Last Updated By/Date** - Vandana Rajamani, Database User Assistance, November 2024
+* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, March 2025
