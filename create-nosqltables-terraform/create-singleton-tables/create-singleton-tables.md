@@ -71,16 +71,21 @@ variable "private_key_path" {
 variable "region" {
 }
 
+# Include the passkey variable if you used a passphrase while creating API sign-in keys
+variable "passkey" {
+}
+
 provider "oci" {
    region = var.region
    tenancy_ocid = var.tenancy_ocid
    user_ocid = var.user_ocid
    fingerprint = var.fingerprint
    private_key_path = var.private_key_path
+   private_key_password = var.passkey
 }
 </copy>
 ```
-Provide values for your tenancy\_ocid, user\_ocid, private_key\_path, and fingerprint, region, and compartment\_ocid arguments in the **terraform.tfvars** file. You should already have an OCI IAM user with access keys having sufficient permissions on NoSQL Database Cloud Service. Use the values recorded from [Lab 1 : Create an API Sign-In Key ](?lab=create-api-signing-keys).
+Provide values for your tenancy\_ocid, user\_ocid, private_key\_path, and fingerprint, region, and compartment\_ocid arguments in the **terraform.tfvars** file. If you used a passphrase while generating API sign-in keys, provide the passphrase value. Otherwise, remove the argument from the **terraform.tfvars** file. You should already have an OCI IAM user with access keys having sufficient permissions on NoSQL Database Cloud Service. Use the values recorded from [Lab 1 : Create an API Sign-In Key ](?lab=create-api-signing-keys).
 
 A sample **terraform.tfvars** is shown below:
 ```
@@ -91,6 +96,7 @@ fingerprint = <FINGERPRINT_VALUE>
 private_key_path = <PATH_PRIVATE_KEY_FILE>
 compartment_ocid = <COMPARTMENT_OCID>
 region = <YOUR_REGION>
+passkey = <PASSPHRASE>
 </copy>
 ```
 
@@ -223,8 +229,7 @@ variable "compartment_ocid" {
 
 resource "oci_nosql_table" "nosql_demo" {
     compartment_id = var.compartment_ocid
-    ddl_statement = "CREATE TABLE if not exists nosql_demo (id INTEGER,name STRING,
-                                                        info JSON,PRIMARY KEY(id))"
+    ddl_statement = "CREATE TABLE if not exists nosql_demo (id INTEGER, name STRING, info JSON, PRIMARY KEY(id))"
     name = "nosql_demo"
     table_limits {
         max_read_units = var.table_table_limits_max_read_units
@@ -236,11 +241,7 @@ resource "oci_nosql_table" "nosql_demo" {
 resource "oci_nosql_table" "nosql_demoKeyVal" {
 
     compartment_id = var.compartment_ocid
-    ddl_statement = "CREATE TABLE if not exists demoKeyVal (key INTEGER GENERATED ALWAYS AS
-                                                            IDENTITY (START WITH 1
-                                                            INCREMENT BY 1 NO CYCLE),
-                                                            value JSON, name STRING,
-                                                            PRIMARY KEY (key))"
+    ddl_statement = "CREATE TABLE if not exists nosql_demoKeyVal (key INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 NO CYCLE), value JSON, name STRING, PRIMARY KEY (key))"
     name = "nosql_demoKeyVal"
     table_limits {
        max_read_units = var.table_table_limits_max_read_units
@@ -318,4 +319,4 @@ You may proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance
-* **Last Updated By/Date** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance, November 2024
+* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, March 2025

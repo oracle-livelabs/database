@@ -25,7 +25,7 @@ When you create a Global Active table:
 * The table should contain at least one JSON column.
 * The table DDL definition must include **with schema frozen** clause.
 
-When you add a regional table replica, you can either specify the name of the table or the OCID of the table. If you specify the name of the table, then you need to specify the OCID of your compartment and the **depends\_on** clause while defining the regional replica as shown below. If you are specifying the OCID of the table, then **depends_on** clause, and compartment OCID is optional.
+When you add a regional table replica, you can either specify the name of the table or the OCID of the table. If you specify the name of the table, then you need to specify the OCID of your compartment and the **depends\_on** clause while defining the regional replica. If you are specifying the OCID of the table as shown below, then **depends_on** clause, and compartment OCID are optional.
 
 You create a new file named **nosql.tf** that contains the NoSQL terraform configuration resources for creating NoSQL Database Cloud Service tables.
 In the example below, you are creating a table **nosql_demo** with a json column and schema frozen. You then add a regional replica to the table and make it a Global Active table.
@@ -36,9 +36,7 @@ variable "compartment_ocid" {
 }
 
 variable "table_ddl_statement" {
-  default = "CREATE TABLE IF NOT EXISTS nosql_dem0(id INTEGER,
-                            name STRING, info JSON,PRIMARY KEY(id))
-                            using TTL 10 days with schema frozen"
+  default = "CREATE TABLE IF NOT EXISTS nosql_demo(id INTEGER, name STRING, info JSON,PRIMARY KEY(id)) with schema frozen"
 }
 
 resource "oci_nosql_table" "nosql_demo" {
@@ -62,6 +60,20 @@ resource "oci_nosql_table_replica" "replica_montreal" {
   max_read_units     = "60"
   max_write_units    = "60"
 }
+
+# Retain the CREATE TABLE definition for nosql_demoKeyVal table to avoid table deletion 
+resource "oci_nosql_table" "nosql_demoKeyVal" {
+
+    compartment_id = var.compartment_ocid
+    ddl_statement = "CREATE TABLE if not exists nosql_demoKeyVal (key INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 NO CYCLE), value JSON, name STRING, PRIMARY KEY (key))"
+    name = "nosql_demoKeyVal"
+    table_limits {
+       max_read_units = var.table_table_limits_max_read_units
+       max_storage_in_gbs = var.table_table_limits_max_storage_in_gbs
+       max_write_units = var.table_table_limits_max_write_units
+    }
+}
+
 </copy>
 ```
 *Note: The definition of the singleton table (CREATE TABLE IF NOT EXISTS nosql\_demo...) must always be included in the terraform script even if the table (nosql\_demo) already exists. If the table already exists, Terraform compares the existing definition of the table to the new definition in the script. If there are no changes, the CREATE TABLE definition is ignored. If there are any changes to the definition, the terraform script overwrites the existing definition of the table with the new script (This is equivalent to an ALTER TABLE statement).If you do not include the CREATE TABLE definition in the script and terraform sees the table existing, then terraform drops the table from the  existing region.*
@@ -144,4 +156,4 @@ You may proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance
-* **Last Updated By/Date** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance, November 2024
+* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, March 2025
