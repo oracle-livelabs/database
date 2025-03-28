@@ -49,7 +49,7 @@ resource "oci_nosql_table" "nosql_demoKeyVal" {
 ```
 When Terraform processes this file **override.tf**, internally it parses the DDL statement (CREATE TABLE statement) and compares it with the existing table definition and generates an equivalent ALTER TABLE statement, and applies it.
 
-*Note: It is possible to modify a NoSQL table object outside of Terraform. For example, the table limits can be modified from the Cloud console or through Oracle NoSQL SDKs. If your state and configuration don't match, the terraform script overwrites the existing definition. You can configure Terraform to ignore these changes by including a lifeycle block in your terraform script as shown above. In this example, you configure the Terraform to ignore changes to the table limits, if any.*
+*Note: It is possible to modify a NoSQL table object outside of Terraform. For example, the table limits can be modified from the Cloud console or through Oracle NoSQL SDKs. If your current table state and terraform configuration don't match, the terraform script overwrites the existing definition. You can configure Terraform to ignore these changes by including a lifeycle block in your terraform script as shown above. In this example, you configure the Terraform to ignore changes to the table limits, if any.*
 
 **Option 2: Modifying a Global Active table:**
 
