@@ -46,7 +46,7 @@ This lab assumes you have:
 3. Download the Sakila Database
 
     ```bash    
-    <copy>wget https://downloads.mysql.com/docs/sakila-db.tar.gz</copy>
+    <copy>wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/bZJU1s_dUgBBWjMp34WFKqVGJvDBnC_yFg9PrOawSlCZ6GblRwjcb4r0pSPIrL5k/n/idazzjlcjqzj/b/mysql-ee-downloads/o/sakila-db.tar.gz</copy>
     ```
 
 4. Extract the contents of the "sakila-db.tar.gz" archive file. you should see two .sql files: sakila-data.sql and sakila-schema.sql
