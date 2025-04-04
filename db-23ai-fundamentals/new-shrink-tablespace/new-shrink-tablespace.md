@@ -15,6 +15,15 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
 
 ## Task 1: Understanding the need for tablespace shrinkage
 
+1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
+    ![click SQL](images/im1.png =50%x*)
+
+    Using the ADMIN user isn’t typically advised due to the high level of access and security concerns it poses. **However**, for this demo, we’ll use it to simplify the setup and ensure we can show the full range of features effectively. 
+
+2. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
+
+    ![click SQL](images/simple-db-actions.png =50%x*)
+
 1. Before we jump into the process of using the `shrink_tablespace` procedure, let's understand why reclaiming unused space in tablespaces is important.
 
     Unused or free space within tablespaces can grow over time, reducing database efficiency and performance. Shrinking tablespaces helps optimize database resource utilization by reclaiming unused space. The `shrink_tablespace` procedure provides a convenient solution for resizing data files and organizing objects.

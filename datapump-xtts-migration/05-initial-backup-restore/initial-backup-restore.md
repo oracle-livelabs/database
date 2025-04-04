@@ -6,7 +6,8 @@ Now, it's time to start the migration. First, you take a level 0 backup that you
 
 Estimated Time: 10 Minutes
 
-[Next Level Platform](videohub:1_x11nn7nr)
+[Next-Level Platform Migration with Cross-Platform Transportable Tablespaces - lab 5](youtube:fgyDy-QcV_o?start=930)
+
 
 ![Start the initial level 0 backup/restore](./images/initial-backup-restore-overview.png " ")
 

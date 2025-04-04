@@ -27,215 +27,393 @@ The objective of this workshop is to learn how to work with the schema-level pri
 1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
     ![click SQL](images/im1.png " ")
 
-2. Let's create users and tables for this lab.
+2. Let's first drop roles and users.
 
     ```
     <copy>
-    drop user if exists customers cascade;
-    drop user if exists employee cascade;
-    create user customers identified by Oracle123long;
-    create user employee identified by Oracle123long;
+    -- Drop users if they already exist
+    DROP USER IF EXISTS hr_user CASCADE;
+    DROP USER IF EXISTS it_user CASCADE;
+    DROP USER IF EXISTS it_manager CASCADE; 
+    </copy>
+    ```
+    ![drops users and roles](images/a.png " ")
 
-    GRANT CONNECT, RESOURCE TO employee;
-    GRANT CONNECT, RESOURCE TO customers;
-    GRANT DWROLE to customers;
-    GRANT CREATE SESSION TO customers;
+3. We will next create users.  To change the password for the users use the "alter user identified by "new password" command. With the syntax below for distinct users,  Throughout this workshop we will use the Oracle123long password.
 
-    GRANT CONNECT, RESOURCE TO employee;
-    -- Grant quota to employee on DATA tablespace
-    ALTER USER employee QUOTA 50M ON DATA;
-    ALTER USER customers QUOTA 50M ON DATA;
+    ```
+    <copy>
+    -- Create users
+    CREATE USER hr_user IDENTIFIED BY Oracle123long;
+    CREATE USER it_user IDENTIFIED BY Oracle123long;
+    </copy>
+    ```
+    ![creates users](images/1a.png " ")
 
-    -- REST ENABLE
+    
+    If you'd like to change the password for the individual users, you'd run the following and make sure to replace `new_password_here` with your new password(needs one uppercase letter and atleast one number).
+    ```
+    <copy>
+    ALTER USER hr_user IDENTIFIED BY  </copy>new_password_here;
+    ```
+    ```
+    ALTER USER hr_user IDENTIFIED BY Oracle123long;
+    ```
+    ![changes password for hr user](images/1b.png " ")
+
+
+    This will change the password for it_user
+    ```
+    <copy>
+    ALTER USER it_user IDENTIFIED BY  </copy>new_password_here;
+    ```
+    ```
+    ALTER USER it_user IDENTIFIED BY Oracle123long;
+    ```
+    ![changes password for it user](images/1c.png " ")
+
+
+    This will change the password for it_manager
+    ```
+    <copy>
+    ALTER USER it_manager IDENTIFIED BY  </copy>new_password_here;
+    ```
+    ```
+    ALTER USER it_manager IDENTIFIED BY Oracle123long;
+    ```
+    ![changes password for it manager](images/1d.png " ")
+
+4. Now we will be granting the respective roles to the users as well as the quota for the tablespace.
+    ```
+    <copy>
+    --Grant roles to user
+    GRANT CONNECT, RESOURCE TO hr_user, it_user, it_manager;
+    GRANT DWROLE TO hr_user, it_user, it_manager;
+    GRANT CREATE SESSION TO hr_user, it_user, it_manager;
+
+    -- Grant quota for tablespace use
+    ALTER USER hr_user QUOTA UNLIMITED ON DATA;
+    ALTER USER it_user QUOTA UNLIMITED ON DATA;
+    ALTER USER it_manager QUOTA UNLIMITED ON DATA;
+    </copy>
+    ```
+    ![creates and grants users and roles](images/1e.png " ")
+
+
+5. With this next code, we will enable web access to our 3 users.
+
+    ```
+    <copy>
+    -- REST ENABLE FOR HR_USER
     BEGIN
         ORDS_ADMIN.ENABLE_SCHEMA(
             p_enabled => TRUE,
-            p_schema => 'CUSTOMERS',
+            p_schema => 'HR_USER',
             p_url_mapping_type => 'BASE_PATH',
-            p_url_mapping_pattern => 'customers',
+            p_url_mapping_pattern => 'hr_user',
             p_auto_rest_auth=> FALSE
         );
         -- ENABLE DATA SHARING
         C##ADP$SERVICE.DBMS_SHARE.ENABLE_SCHEMA(
-                SCHEMA_NAME => 'CUSTOMERS',
+                SCHEMA_NAME => 'HR_USER',
                 ENABLED => TRUE
         );
         commit;
     END;
     /
 
+    -- REST ENABLE for IT_USER
+    BEGIN
+        ORDS_ADMIN.ENABLE_SCHEMA(
+            p_enabled => TRUE,
+            p_schema => 'IT_USER',
+            p_url_mapping_type => 'BASE_PATH',
+            p_url_mapping_pattern => 'it_user',
+            p_auto_rest_auth=> FALSE
+        );
+        -- ENABLE DATA SHARING
+        C##ADP$SERVICE.DBMS_SHARE.ENABLE_SCHEMA(
+                SCHEMA_NAME => 'IT_USER',
+                ENABLED => TRUE
+        );
+        commit;
+    END;
+    /
+
+    -- REST ENABLE for IT_MANAGER
+    BEGIN
+        ORDS_ADMIN.ENABLE_SCHEMA(
+            p_enabled => TRUE,
+            p_schema => 'IT_MANAGER',
+            p_url_mapping_type => 'BASE_PATH',
+            p_url_mapping_pattern => 'it_manager',
+            p_auto_rest_auth=> FALSE
+        );
+        -- ENABLE DATA SHARING
+        C##ADP$SERVICE.DBMS_SHARE.ENABLE_SCHEMA(
+                SCHEMA_NAME => 'IT_MANAGER',
+                ENABLED => TRUE
+        );
+        commit;
+    END;
+    /
     </copy>
     ```
-    ![drop and create the needed users for the lab](images/2.png " ")
+    ![grants users access to webconsole](images/c.png " ")
 
-    Now we will create two tables in the employee schema. These tables will demonstarte how different levels of privilege can be applied. Initially, customers will be granted access to only one of the tables. 
+6. Now we will create `employees`, `department` and `salary` tables. These tables will demonstarte how different levels of privilege can be applied.  
 
     ```
     <copy>
-    CREATE TABLE employee.table1 (id NUMBER PRIMARY KEY, name VARCHAR2(50));
-    CREATE TABLE employee.table2 (id NUMBER PRIMARY KEY, description VARCHAR2(100));
+    -- Create employees and department
+    CREATE TABLE hr_user.employees (id NUMBER PRIMARY KEY, name VARCHAR2(50), salary NUMBER);
+    CREATE TABLE hr_user.departments (id NUMBER PRIMARY KEY, department_name VARCHAR2(100));
 
-    -- Insert some sample data into both tables
-    INSERT INTO employee.table1(id, name) VALUES (1, 'CEO');
-    INSERT INTO employee.table1(id, name) VALUES (2, 'Director');
-    INSERT INTO employee.table1(id, name) VALUES (3, 'Manager');
+    -- Create salary table which is sensitive and only accessible by hr_user and it_manager
+    CREATE TABLE hr_user.salaries (employee_id NUMBER REFERENCES hr_user.employees(id), salary NUMBER);
 
-    INSERT INTO employee.table2(id, description) VALUES (1, 'CEO_NAME');
-    INSERT INTO employee.table2(id, description) VALUES (2, 'DIRECTOR_NAME');
-    INSERT INTO employee.table2(id, description) VALUES (3, 'MANAGER_NAME');
+    -- Insert some sample data into employees and departments
+    INSERT INTO hr_user.employees (id, name) VALUES (1, 'John Doe');
+    INSERT INTO hr_user.employees (id, name) VALUES (2, 'Sammy Smith');
+    INSERT INTO hr_user.employees (id, name) VALUES (3, 'Alisa Brown');
+    INSERT INTO hr_user.departments (id, department_name) VALUES (1, 'HR');
+    INSERT INTO hr_user.departments (id, department_name) VALUES (2, 'IT');
+    INSERT INTO hr_user.departments (id, department_name) VALUES (3, 'IT');
+
+    --Insert salary data into salaries table
+    INSERT INTO hr_user.salaries (employee_id, salary) VALUES (1, 50000);
+    INSERT INTO hr_user.salaries (employee_id, salary) VALUES (2, 60000);
+    INSERT INTO hr_user.salaries (employee_id, salary) VALUES (3, 70000);
     </copy>
     ```
 
-    ![tables created](images/3.png " ")
-
-
-3. We will grant customers access to only one table. Specifically, they will receive `SELECT` privileges on `employee.table1` but will not have access to `employee.table2`. To ensure the correct privileges have been applied, we will verify the granted permissions using the `dba_tab_privs` view.
-
-    ```
-    <copy>
-    GRANT SELECT ON employee.table1 TO customers;
-    SELECT * FROM dba_tab_privs WHERE grantee = 'CUSTOMERS';
-    </copy>
-    ```
-
-    ![grants access](images/4.png " ")    
-
-4. Now that customers has been granted access, we will see how this access differs between the two tables. First, we will `Sign out` of ADMIN account and switch to Customers account. At the login screen, click `Advanced` to drop down the Path and enter the login credentials we previously set up for the Customers user.
-    - `Path` : customers
-    - `USERNAME`: customers 
-    - `PASSWORD`: Oracle123long
-
-    ![signout from admin](images/5.png " ")
-    ![log in info for customers](images/6.png " ")
-
-5. Now that you're logged in to CUSTOMER, click on SQL to open SQL Developer, where we'll run our code. We'll start by running a command to select from `employee.table1` and observe the results, demonstrating how Customers can successfully query `table1` but not `table2`. 
-
-    ```
-    <copy>
-    SELECT * FROM employee.table1;
-    </copy>
-    ```
-
-    ![viewing table 1](images/8.png " ")
-
-    ```
-    <copy>
-    SELECT * FROM employee.table2;
-    </copy>
-    ```
-    ![viewing table 2](images/9.png " ")
-
-    As expected, when selecting from `table1`, the query is successful. However, when attempting to query `table2`, the following error should appear: "ORA-00942: table or view "EMPLOYEE:TABLE2" does not exist" as an error.
-
-    With this completed, Sign Out of the user customers. Return to the Admin page. Return to the ADB screen on OCI and click on `SQL` again to automatically return to the ADMIN account.
-    ![signout from customers](images/10.png " ")
-    ![adb sql to return to admin ](images/im1.png " ")
+    ![tables created](images/d.png " ")
 
 ## Task 3: Apply Schema-Level Privileges
-1. Next, we will transition from table-level to schema-level privileges. Instead of granting access to individual tables, we will allow the `customers` user to access all current and future tables within the `employee` schema. This ensures that as more tables are created in the employee schema, the customers user will automatically have SELECT privileges on those tables. 
-
-    Use the following command to grand schema-level access:
+1. Now, we will grant schema-level privileges. Instead of granting access to individual tables, we will allow the `hr_user` to access all current and future tables within the `hr_user` schema. Both `it_manager` and  `it_user` will have access to the `employee` and `departments` tables, but no access to the `salaries` table. 
 
     ```
     <copy>
-    GRANT SELECT ANY TABLE ON SCHEMA employee TO customers;
+    -- Grant schema-level privileges to HR, IT, and IT Manager roles
+    GRANT SELECT ANY TABLE ON SCHEMA hr_user TO hr_user;
+
+    -- IT user and It manager can access to employees and departments but not salaries
+    GRANT SELECT ON hr_user.employees TO it_user;
+    GRANT SELECT ON hr_user.departments TO it_user;
+    GRANT SELECT ON hr_user.employees TO it_manager;
+    GRANT SELECT ON hr_user.departments TO it_manager;
     </copy>
     ```
-    ![granting schema level privileges](images/11.png " ")
 
-    After running this command, the `customers` will have access to all tables under the `employee` schema. This change broadens the scope of access, making it more efficient to manage privileges across the schema rather than assigning them table by table. 
+    ![granting schema level privileges](images/e.png " ")
 
-2. Oracle Database 23ai simplifies privilege management with dedicated views. We can use views like `DBA_SCHEMA_PRIVS` to check the schema-level privileges granted to users. Others include ROLE\_SCHEMA\_PRIVS, USER\_SCHEMA\_PRIVS, and SESSION\_SCHEMA\_PRIVS.
+3. Oracle Database 23ai simplifies privilege management with dedicated views. We can use views like `DBA_SCHEMA_PRIVS` to check the schema-level privileges granted to users. Others include ROLE\_SCHEMA\_PRIVS, USER\_SCHEMA\_PRIVS, and SESSION\_SCHEMA\_PRIVS.
 
     ```
     <copy>
-    SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'CUSTOMERS';
+    SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'HR_USER';
+    SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'IT_USER';
+    SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'IT_MANAGER';
+    SELECT * FROM DBA_TAB_PRIVS WHERE GRANTEE = 'IT_USER';
+    SELECT * FROM DBA_TAB_PRIVS WHERE GRANTEE = 'IT_MANAGER';
     </copy>
     ```
-    ![check the acess](images/12.png " ")
+    
+    Since only `hr_user` has schema-level privileges, when we run `DBA_SCHEMA_PRIVS`, we see that the privilege SELECT is set to ANY. Meanwhile, since both `it_user` and `it_manager` neither have schema-level privileges, when running the same command for both they return no data found as neither has the correct privileges. It is only with `DBA_TAB_PRIVS` that we can see their privileges.
+    ![view privileges](images/f1.png " ")
 
-3. To explore the new schema-level privileges, `Sign out` of the `ADMIN` account and log in as the `customers` user. At the login screen, click on `Advanced` to drop down the Path settings. Now, enter the login credentials for the `customers` user:
-    - `Path` : customers
-    - `USERNAME`: customers 
+## Task 4: Demonstrating Schema-Level Privileges
+1. To explore the new schema-level privileges, `Sign out` of the `ADMIN` account and log in as the `hr_user` user. At the login screen, enter the login credentials for the `hr_user` user:
+    - `USERNAME`: hr_user 
     - `PASSWORD`: Oracle123long
 
-    ![signout from admin](images/13.png " ")
-    ![login screen for customers](images/14.png " ")
-    ![click on sql](images/15.png " ")
+    ![signout from admin](images/16.png " ")
+    ![login screen for hr_user](images/7.png " ")
+    ![click on sql](images/8.png " ")
 
     
-4. Schema-level privileges dynamically adapt to schema changes. When new tables or views are added to the schema, users granted schema-level access instantly gain the ability to query them without requiring any further administrative actions. Now that the `customers` user has schema-level privileges, they should be able to query data from both `table1` and `table2`. Test this to confirm that the prvivileges extend beyond the original access to only `table1`. 
+2. Schema-level privileges dynamically adapt to schema changes. When new tables or views are added to the schema, users granted schema-level access instantly gain the ability to query them without requiring any further administrative actions. With `hr_user` having schema-level privileges, they should be able to query data from `employees`, `department` and `salaries`.  
 
     ```
     <copy>
-    SELECT * FROM employee.table1;
-    SELECT * FROM employee.table2;
+    SELECT * FROM hr_user.employees;
+    SELECT * FROM hr_user.departments;
+    SELECT * FROM hr_user.salaries;
     </copy>
     ```
-    ![output for both tables](images/16.png " ")
+    ![view hr user select](images/9.png " ")
 
-    If successful, both tables will return data, demonstrating the schema-level privileges have been applied. Now that verified, sign out of the `customers` session and return to the `Admin` account. From the ADB screen on OCI, click on SQL to return to the `ADMIN` session automatically.
-    ![signout of customers](images/17.png " ")
-    ![adb sql to return to admin](images/im1.png " ")
-
-## Task 4: Revoke Schema-Level Privileges
-1. As expected, we can also revoke schema-level privileges when they are no longer required. Let's proceed by revoking the `SELECT` privilege that was granted to the `customers` user for the `employee` schema.
-
-    ```
-    <copy>
-    REVOKE SELECT ANY TABLE ON SCHEMA employee FROM customers;
-    </copy>
-    ```
-    ![revoking privileges](images/18.png " ")
-
-2. Once the privileges have been revoked, we can verify the updated access by reviewing the remaining privileges granted to `customers`. 
-    ```
-    <copy>
-    SELECT * FROM dba_tab_privs WHERE grantee = 'CUSTOMERS';
-    </copy>
-    ```
-    ![check new privileges](images/19.png " ") 
-
-3. We will `Sign out` of ADMIN account and switch to Customers account. At the login screen, click `Advanced` to drop down the Path and enter the login credentials we previously set up for the Customers user.
-    - `Path` : customers
-    - `USERNAME`: customers 
+3. If successful, all the 3 tables will return data, demonstrating the schema-level privileges have been applied. Now verified, sign out of the `hr_user` session and log into `it_user`. We will see how the privileges of this user is limited when compared to hr_user.
+    - `USERNAME`: it_user 
     - `PASSWORD`: Oracle123long
 
-    ![signout admin](images/20.png " ")
-    ![login to customers](images/21.png " ")
+    ![signout from admin](images/10.png " ")
+    ![login screen for hr_user](images/11.png " ")
+    ![click on sql](images/12.png " ")
 
-4. Our privileges will be reverted. Customers will only see access to `table1` and not `table2`.
+4. Within the SQL developer, we shall now test the restricted access. Notice that `employees` and `departments` tables shall be successful but the `salaries` will return an error.  
 
     ```
     <copy>
-    SELECT * FROM employee.table1;
-    SELECT * FROM employee.table2;
+    SELECT * FROM hr_user.employees;
+    SELECT * FROM hr_user.departments;
+    SELECT * FROM hr_user.salaries;
     </copy>
     ```
-    ![view new output from tables](images/22.png " ")
 
-5. Now verified, let's return to the `Admin` account by logging out of the `customers` session. Navigate back to the  ADB screen on OCI ,click on SQL again to automatically return to the `ADMIN`.
-    ![signout customers](images/24.png " ")
+    ![it user viewing from tables](images/13.png " ")
+
+5. Now that this has been verified, let's return to the `Admin` account by logging out of the `it_user` session. Navigate back to the  ADB screen on OCI ,click on SQL again to automatically return to the `ADMIN`.
+    ![signout hr_user](images/14.png " ")
     ![adb sql returning to admin](images/im1.png " ")
 
-6. Finally, let's clean up the environment by dropping the the users and their associated objects. We can clean up from the lab by dropping our tables.
+6. We will be granting schema-level privileges to the it_user 
+    ```
+    <copy>
+    -- Grant schema-level privileges directly to hr_user and it_manager
+    GRANT SELECT ANY TABLE ON SCHEMA hr_user TO it_user;
+
+    SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'IT_USER';
+    </copy>
+    ```
+    ![grants schemalevel privileges to ituser](images/h.png " ")
+
+7. To show the flexibility of schema-level privileges, we will also be creating a new table called projects
+    
+    ```
+    <copy>
+    -- Create a new table called projects
+    CREATE TABLE hr_user.projects (
+        project_id NUMBER PRIMARY KEY, 
+        project_name VARCHAR2(100)
+    );
+
+    -- Insert some data into projects
+    INSERT INTO hr_user.projects (project_id, project_name) VALUES (1, 'Project Alpha');
+    INSERT INTO hr_user.projects (project_id, project_name) VALUES (2, 'Project Beta');
+    </copy>
+    ```
+    ![creating new projects table](images/I.png " ")
+
+
+8. Now, sign out of the `ADMIN` session and log into `it_user`. We will see how the privileges of this user is limited when compared to hr_user.
+    - `Path` : it_user
+    - `USERNAME`: it_user 
+    - `PASSWORD`: Oracle123long
+
+    ![signout from admin](images/16.png " ")
+    ![login screen for hr_user](images/17.png " ")
+    ![click on sql](images/18.png " ")
+
+9. Witin `it_user` now let's view our tables. You should be able to see the 3 original tables, as well as the newest, `projects` table we created after granting `it_user` schema-level privileges. 
 
     ```
     <copy>
-    drop user if exists customers cascade;
-    drop user if exists management cascade;
-
+    SELECT * FROM hr_user.employees;
+    SELECT * FROM hr_user.departments;
+    SELECT * FROM hr_user.salaries;
+    SELECT * FROM hr_user.projects;
     </copy>
     ```
 
-    ![dropping the users](images/25.png " ")
+    ![it user viewing all the tables](images/J.png " ")
 
-## Task 5: Understanding Advanced Privilege Management
+10. Sign out of the `it_user` session and log into `hr_user`. We will see how the privileges of this user is limited when compared to hr_user.
+    - `USERNAME`: hr_user 
+    - `PASSWORD`: Oracle123long
+
+    ![signout from admin](images/16.png " ")
+    ![login screen for hr_user](images/17.png " ")
+    ![click on sql](images/18.png " ")
+
+11. Now that we have returned to `hr_user` which was the original user with schema-level privileges, we will see how not only do we have access to the first 3 tables, we can also `SELECT` from `projects`.
+    ```
+    <copy>
+    SELECT * FROM hr_user.employees;
+    SELECT * FROM hr_user.departments;
+    SELECT * FROM hr_user.salaries;
+    SELECT * FROM hr_user.projects;
+    </copy>
+    ```
+    ![hr user viewing all the tables](images/J1.png " ")
+
+
+12. Let's return to the `Admin` account by logging out of the `hr_user` session. Navigate back to the  ADB screen on OCI ,click on SQL again to automatically return to the `ADMIN`.
+    ![signout from hr user](images/10.png " ")
+    ![adb sql returning to admin](images/im1.png " ")
+
+## Task 5: Revoking Schema-Level Privileges
+1. As expected, we can also revoke schema-level privileges when they are no longer required. In the `ADMIN` profile, let's proceed by revoking the `SELECT` privilege that was granted to the `it_user` for the schema.
+
+    ```
+    <copy>
+    -- Revoke schema-level privileges from IT_USER
+    REVOKE SELECT ANY TABLE ON SCHEMA hr_user FROM it_user;
+    </copy>
+    ```
+    ![revoking access from it user](images/M.png " ")
+
+2. Once the privileges have been revoked, we can verify the updated access by reviewing the remaining privileges granted to `it_user`. `DBA_SCHEMA_PRVIS` will return no data found, but `DBA_TAB_PRIVS` will show that our original privileges are still there.
+    ```
+    <copy>
+    SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'IT_USER';
+    </copy>
+    ```
+    ![showing schema level priv is gone](images/N.png " ") 
+
+    ```
+    <copy>
+    SELECT * FROM DBA_TAB_PRIVS WHERE GRANTEE = 'IT_USER';   
+    </copy>
+    ```
+      ![showing table level priv is back to normal](images/O.png " ") 
+
+3. We will `Sign out` of ADMIN account and switch to it_user account. At the login screen, enter the login credentials we set up for the it_user user.
+    - `USERNAME`: it_user
+    - `PASSWORD`: Oracle123long
+
+    ![signout admin](images/24.png " ")
+    ![login to hr_user](images/25.png " ")
+
+4. Now we will see that our schema-level privileges have been revoked. `it_user` will not be able to `SELECT` from all the tables as before, only `employees` and `department` which were originally granted.  
+
+    ```
+    <copy>
+    SELECT * FROM hr_user.employees;
+    SELECT * FROM hr_user.departments;
+    SELECT * FROM hr_user.salaries;
+    SELECT * FROM hr_user.projects;
+    </copy>
+    ```
+    ![view output ](images/P.png " ")
+
+5. Let's return to the `Admin` account by logging out of the `it_user` session. Navigate back to the  ADB screen on OCI ,click on SQL again to automatically return to the `ADMIN`.
+    ![signout hr_user](images/28.png " ")
+    ![adb sql returning to admin](images/im1.png " ")
+
+## Task 6: Cleanup
+1. Finally, let's clean up the environment by dropping the the users, roles, and objects created
+
+    ```
+    <copy>
+    -- Drop users, roles, and related objects
+    DROP USER IF EXISTS hr_user CASCADE;
+    DROP USER IF EXISTS it_user CASCADE;
+    DROP USER IF EXISTS it_manager CASCADE;
+    DROP ROLE IF EXISTS hr_user;
+    DROP ROLE IF EXISTS it_user;
+    DROP ROLE IF EXISTS it_manager;
+    </copy>
+    ```
+
+    ![drop the users and roles](images/29.png " ")
+
+## Task 7: Understanding Advanced Privilege Management
 1. You can also grant schema-level privileges on schemas that do not belong to the current user. However, doing this requires additonal permissions such as `GRANT ANY SCHEMA PRIVILEGE`, which allows you to grant privileges on other users' schemas.
 
 2. Throughout this lab, you've explored how schema-level privilege management simplifies user access control in Oracle Database 23ai. By using schema-level privileges, you can drastically reduce the management and administration needed to grant schema privileges prior to 23ai and improve security through their use.
 
-    You may now **proceed to the next lab** 
+You may now **proceed to the next lab** 
 
 ## Learn More
 
@@ -245,4 +423,4 @@ The objective of this workshop is to learn how to work with the schema-level pri
 ## Acknowledgements
 * **Author** - Killian Lynch, Database Product Management
 * **Contributors** - Dom Giles, Distinguished Database Product Manager, Francis Regalado, Database Product Manager
-* **Last Updated By/Date** - Francis Regalado, Database Product Manager September 2024
+* **Last Updated By/Date** - Francis Regalado, Database Product Manager October 2024

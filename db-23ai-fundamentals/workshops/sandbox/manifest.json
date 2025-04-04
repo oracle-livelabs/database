@@ -28,7 +28,7 @@
           "title": "Lab: JSON Duality Views",
           "description": "Building Duality Views",
           "type": "livelabs",
-          "filename": "../../new-duality-views/new-duality-views-updated.md"
+          "filename": "../../new-duality-views/new-duality-views.md"
       },
       {
           "title": "Lab: Property Graphs",
@@ -53,6 +53,12 @@
           "description": "Creating JSON Schemas",
           "type": "livelabs",
           "filename": "../../new-json-schema/new-json-schema.md"
+      },
+      {
+        "title": "Lab: JavaScript Stored Procedures",
+        "description": "Creating avaScript Stored Procedures",
+        "type": "livelabs",
+        "filename": "../../javascript/javascript.md"
       },
       {
           "title": "High Availability",
@@ -137,6 +143,12 @@
             "description": "Optimize update and delete operations by employing direct joins for increased efficiency.",
             "type": "livelabs",
             "filename": "../../new-direct-joins-for-updates-deletes/new-direct-joins-for-updates-deletes.md"
+        },  
+        {
+            "title": "Lab: Enhanced DML RETURNING Clause",
+            "description": "Enhanced Data Manipulation with DML RETURNING Clause",
+            "type": "livelabs",
+            "filename": "../../update-return-clause-enhancements/update-return-clause-enhancements.md"
         },  
         {
           "title": "Need Help?",
