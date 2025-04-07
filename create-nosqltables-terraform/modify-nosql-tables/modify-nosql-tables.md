@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab walks you through the steps to modify or update a NoSQL table using Terraform. You can modify both a singleton table and a Global Active table using Terraform.
+This lab walks you through the steps to modify or update a NoSQL table using Terraform. You can modify both singleton table and Global Active table using Terraform.
 
 Estimated Lab Time: 15 Minutes
 
@@ -18,10 +18,10 @@ You can modify resources in OCI using terraform. To modify a NoSQL table, you ne
 
 **Option 1: Modifying a singleton table:**
 
-If you have a singleton table, you can update the table limits (read units or write units or storage capacity) using Terraform.
+You can use Terraform to modify the table schema of a singleton table by adding or dropping columns. You can also modify the Time-To-Live value of the table and change the table limits (read units or write units or storage capacity). 
 
-Create a new file named **override.tf** and provide the specific portion of the NoSQL Database table object that you want to override. For example, you may want to add or drop a column from the table or change the data type of an existing column, or change table limits (read/write and storage units).
-In the below example, you are modifying the *nosql_demoKeyVal* table. You drop an existing column, named **name**, and add a new column, named **fullName**.
+Create a new file named **override.tf** and provide the specific portion of the NoSQL Database table object that you want to override. In the below example, you are modifying the *nosql_demoKeyVal* table. You drop an existing column, named **name**, and add a new column, named **fullName**.
+
 ```
 <copy>
 variable "compartment_ocid" {
@@ -31,11 +31,7 @@ resource "oci_nosql_table" "nosql_demoKeyVal" {
 
     compartment_id = var.compartment_ocid
 
-    ddl_statement = "CREATE TABLE if not exists nosql_demoKeyVal (key INTEGER GENERATED ALWAYS AS
-                                                            IDENTITY (START WITH 1
-                                                            INCREMENT BY 1 NO CYCLE),
-                                                            value JSON,
-                                                            fullName STRING, PRIMARY KEY (key))"
+    ddl_statement = "CREATE TABLE if not exists nosql_demoKeyVal (key INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 NO CYCLE), value JSON, fullName STRING, PRIMARY KEY (key))"
     name = "nosql_demoKeyVal"
 
     table_limits {
@@ -43,10 +39,17 @@ resource "oci_nosql_table" "nosql_demoKeyVal" {
        max_storage_in_gbs = var.table_table_limits_max_storage_in_gbs
        max_write_units = var.table_table_limits_max_write_units
     }
+	
+	  lifecycle {
+        ignore_changes = [ table_limits, freeform_tags, defined_tags ]
+    }
+
 }
 </copy>
 ```
 When Terraform processes this file **override.tf**, internally it parses the DDL statement (CREATE TABLE statement) and compares it with the existing table definition and generates an equivalent ALTER TABLE statement, and applies it.
+
+*Note: It is possible to modify a NoSQL table object outside of Terraform. For example, the table limits can be modified from the Cloud console or through Oracle NoSQL SDKs. If your current table state and terraform configuration don't match, the terraform script overwrites the existing definition. You can configure Terraform to ignore these changes by including a lifeycle block in your terraform script as shown above. In this example, you configure the Terraform to ignore changes to the table limits, if any.*
 
 **Option 2: Modifying a Global Active table:**
 
@@ -64,9 +67,7 @@ variable "compartment_ocid" {
 }
 
 variable "table_ddl_statement" {
-  default = "CREATE TABLE IF NOT EXISTS nosql_demo(id INTEGER,
-             name STRING, info JSON,PRIMARY KEY(id))
-             using TTL 10 days with schema frozen"
+  default = "CREATE TABLE IF NOT EXISTS nosql_demo(id INTEGER, name STRING, info JSON,PRIMARY KEY(id)) with schema frozen"
 }
 
 resource "oci_nosql_table" "nosql_demo" {
@@ -97,6 +98,19 @@ resource "oci_nosql_table_replica" "replica_toronto" {
   region = "ca-toronto-1"  
   depends_on = [oci_nosql_table.nosql_demo]
 }
+
+# Retain the CREATE TABLE definition for nosql_demoKeyVal table to avoid table deletion 
+resource "oci_nosql_table" "nosql_demoKeyVal" {
+
+    compartment_id = var.compartment_ocid
+    ddl_statement = "CREATE TABLE if not exists nosql_demoKeyVal (key INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 NO CYCLE), value JSON, name STRING, PRIMARY KEY (key))"
+    name = "nosql_demoKeyVal"
+    table_limits {
+       max_read_units = var.table_table_limits_max_read_units
+       max_storage_in_gbs = var.table_table_limits_max_storage_in_gbs
+       max_write_units = var.table_table_limits_max_write_units
+    }
+}
 </copy>
 ```
 
@@ -112,9 +126,7 @@ variable "compartment_ocid" {
 }
 
 variable "table_ddl_statement" {
-  default = "CREATE TABLE IF NOT EXISTS nosql_demo(id INTEGER,
-             name STRING, info JSON,PRIMARY KEY(id))
-             using TTL 10 days with schema frozen"
+  default = "CREATE TABLE IF NOT EXISTS nosql_demo(id INTEGER, name STRING, info JSON,PRIMARY KEY(id)) with schema frozen"
 }
 resource "oci_nosql_table" "nosql_demo" {
   #Required
@@ -141,6 +153,19 @@ resource "oci_nosql_table_replica" "replica_montreal" {
 #  region = "ca-toronto-1"  
 #  depends_on = [oci_nosql_table.nosql_demo]
 #}
+
+# Retain the CREATE TABLE definition for nosql_demoKeyVal table to avoid table deletion 
+resource "oci_nosql_table" "nosql_demoKeyVal" {
+
+    compartment_id = var.compartment_ocid
+    ddl_statement = "CREATE TABLE if not exists nosql_demoKeyVal (key INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 NO CYCLE), value JSON, name STRING, PRIMARY KEY (key))"
+    name = "nosql_demoKeyVal"
+    table_limits {
+       max_read_units = var.table_table_limits_max_read_units
+       max_storage_in_gbs = var.table_table_limits_max_storage_in_gbs
+       max_write_units = var.table_table_limits_max_write_units
+    }
+}
 </copy>
 ```
 *Note: The definition of the GAT table (CREATE TABLE IF NOT EXISTS nosql_demo...) must always be included in the terraform script even if the table (nosql_demo) already exists. If the table already exists, Terraform compares the existing definition of the table to the new definition in the script. If there are no changes, the CREATE TABLE definition is ignored. If there are any changes to the definition, the terraform script overwrites the existing definition of the table with the new script (This is equivalent to an ALTER TABLE statement).If you do not include the CREATE TABLE definition in the script and terraform sees the table existing, then terraform drops the table from the  existing region.*
@@ -156,10 +181,9 @@ variable "compartment_ocid" {
 }
 
 variable "table_ddl_statement" {
-  default = "CREATE TABLE IF NOT EXISTS nosql_demo(id INTEGER,
-            name STRING, info JSON,PRIMARY KEY(id))
-            using TTL 15 days with schema frozen"
+  default = "CREATE TABLE IF NOT EXISTS nosql_demo(id INTEGER, name STRING, info JSON,PRIMARY KEY(id)) using TTL 15 days with schema frozen"
 }
+           
 resource "oci_nosql_table" "nosql_demo" {
   #Required
   compartment_id = var.compartment_ocid
@@ -181,6 +205,19 @@ resource "oci_nosql_table_replica" "replica_toronto" {
   table_name_or_id = "nosql_demo"
   region = "ca-toronto-1"  
   depends_on = [oci_nosql_table.nosql_demo]
+}
+
+# Retain the CREATE TABLE definition for nosql_demoKeyVal table to avoid table deletion 
+resource "oci_nosql_table" "nosql_demoKeyVal" {
+
+    compartment_id = var.compartment_ocid
+    ddl_statement = "CREATE TABLE if not exists nosql_demoKeyVal (key INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 NO CYCLE), value JSON, name STRING, PRIMARY KEY (key))"
+    name = "nosql_demoKeyVal"
+    table_limits {
+       max_read_units = var.table_table_limits_max_read_units
+       max_storage_in_gbs = var.table_table_limits_max_storage_in_gbs
+       max_write_units = var.table_table_limits_max_write_units
+    }
 }
 </copy>
 ```
@@ -213,4 +250,4 @@ Terraform shows the plan to be applied and prompts for confirmation. Once confir
 
 ## Acknowledgements
 * **Author** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance
-* **Last Updated By/Date** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance, November 2024
+* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, March 2025
