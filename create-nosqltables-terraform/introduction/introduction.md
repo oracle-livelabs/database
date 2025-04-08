@@ -45,9 +45,8 @@ You may proceed to the next lab.
 ## Learn More
 
 * [About Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/dtddt/index.html)
-* [Oracle NoSQL Database Cloud Service page](https://cloud.oracle.com/en_US/nosql)
 * [Learn more on Terraform](https://www.terraform.io/)
 
 ## Acknowledgements
 * **Author** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance
-* **Last Updated By/Date** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance, November 2024
+* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, March 2025

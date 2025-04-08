@@ -172,7 +172,6 @@ There, you will find all the REST-enabled objects for the user along with their 
    Use the same password from the previous task.
 
    ![Jupyter password](images/jupyter-pwd.png " ")
-
 2. Once logged in, you may see several directories. Navigate (i.e., double or single-click on the directory) to the `workshops` directory, then to the `sqlcl-projects-react-app` directory. This last directory is the folder containing the application you will use and work with throughout this workshop. Take a moment to locate it, explore its contents, and get familiar with its structure.
 
    ![Navigating to SQLcl Projects react app directory.](images/go-to-app-folder.png " ")
