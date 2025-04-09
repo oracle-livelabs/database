@@ -142,7 +142,7 @@ To see what's happen when exporting the whole schema drop down **Export schema**
     <!--![Departments.sql content](./images/departments-sql-file-content.png " ")-->
     <!--![Departments.sql content](./images/departments-sql-content.png " ")-->
 
-## Task 4: Stage Changes (project stage)
+## Task 2: Stage Changes (project stage)
 
 1. **Stage Changes:**
 
@@ -260,7 +260,7 @@ To see what's happen when exporting the whole schema drop down **Export schema**
     ![Merge branch with main ](./images/merge-to-main.png " ")
     <!--![Merge branch with main ](./images/merge-branch-to-main.png " ")-->
 
-## Task 5: Release Changes (project release)
+## Task 3: Release Changes (project release)
 
 1. Once your changes are merged into the main branch, execute the following command to create a second release:
 
@@ -286,7 +286,7 @@ To see what's happen when exporting the whole schema drop down **Export schema**
     </copy>
     ```
 
-## Task 6: Generate Deployable Artifact (project gen-artifact)
+## Task 4: Generate Deployable Artifact (project gen-artifact)
 
 Before generating the artifact, you need to return the install.sql file to its initial state containing **lb update**.
 
@@ -319,7 +319,7 @@ Before generating the artifact, you need to return the install.sql file to its i
 
     ![Navigate to the artifact folder](./images/artifact-folder.png " ")
 
-## Task 7: Deploying to Production (project deploy)
+## Task 5: Deploying to Production (project deploy)
 
 1. **Connect to the Production Database:**
 

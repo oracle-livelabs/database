@@ -20,6 +20,7 @@ Estimated Workshop Time: 1 hours 30 minutes
 * Deploy the changes to the production database
 * Address the difficulties of synching with DEV database instances
 * Use SQLcl `project` command to manage your database changes
+* Use version control for database development with SQLcl Projects
 
 ### **Prerequisites**
 
