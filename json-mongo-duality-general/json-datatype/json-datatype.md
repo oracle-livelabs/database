@@ -210,12 +210,11 @@ Let's insert another movie quickly and use the extended textual representation. 
 
 We have experienced our table **movies** with w set of relational and JSON columns. We are going to look into the movies data in the next lab using a native JSON Collection Table, so let's clean up for the next exercise:
 
-	```
-	<copy>
-	drop table movies purge;
-	</copy>
-	```
-
+```
+<copy>
+drop table movies purge;
+</copy>
+```
 
 There is obviously way more to the JSON datatype and how to effectively work with the JSON datatype, both as a column of a relational table and as JSON Collections. If you want to learn more about the JSON data type, check out the link below.
 
