@@ -74,7 +74,7 @@ Use SQLcl's **project** command to:
     1. Launch SQLcl in the jupyter terminal
         ```sql
       <copy>
-        sql SYS/[PASSWORD]@[IP_ADD:PORT]/FREEPDB1 as sysdba
+        sql SYS/[PASSWORD]@10.89.0.1:1521/FREEPDB1 as sysdba
       </copy>
       ```
       ![Launch SQLcl](./images/launch-sqlcl.png " ")
@@ -385,7 +385,7 @@ Now, we export our objects to have them included in our project folders.
 
 2. By default, the **dist** folder is ignored in many React projects because it contains generated build files. However, you need to track it in Git by removing dist in the .gitignore file.
 
-    * Open .gitignore, press Esc + I then search for **dist** and delete the line that contains it.
+    * Open .gitignore, search for **dist**, and remove the line if it's present. If you don't find it there, you can skip this step and move on to step 3.
 
         >**Note:** Make sure you are in the application folder /home/oracle/assets/workshops/**sqlcl-projects-react-app**
 
