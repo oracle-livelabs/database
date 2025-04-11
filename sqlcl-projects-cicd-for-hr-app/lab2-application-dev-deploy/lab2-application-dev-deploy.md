@@ -125,9 +125,9 @@ If you are still connected to DEV_USER in Database Actions, skip to step 3.
         ORDS.ENABLE_OBJECT(
             P_ENABLED => TRUE,
             P_SCHEMA => 'DEV_USER',
-            P_OBJECT =>  'EMPLOYEES',
+            P_OBJECT =>  'DEPARTMENTS',
             P_OBJECT_TYPE => 'TABLE',
-            P_OBJECT_ALIAS => 'DEV_USER.employees',
+            P_OBJECT_ALIAS => 'DEV_USER.departments',
             P_AUTO_REST_AUTH => FALSE
         );
         COMMIT;
