@@ -70,6 +70,8 @@ In this lab, you will be guided through the following tasks:
 
 3. From a browser test apache from your loacal machine using the Public IP Address of your Compute Instance
 
+    **Note** If the Apache test page does not appear, wait 5 minutes and then try again.
+
     **Example: http://129.213....**
 
 ## Task 2: Install PHP
@@ -232,13 +234,24 @@ In this lab, you will be guided through the following tasks:
     <copy>cd sakila-web</copy>
     ```
 
-4. Run the application as follows (Use your coupute IP address):
+4. Update file db_config.php to change the following values if needed
+
+    - 'host' => 'localhost',
+    - 'user' => 'admin',
+    - 'password' => 'Welcome#123',
+    - 'database' => 'sakila'
+
+    ```bash
+    <copy>sudo nano config.php</copy>
+    ```
+
+5. Run the application as follows (Use your coupute IP address):
 
     http://127.0.0.../sakila-web/
 
     ![Sakila Web](./images/sakila-list.png "Sakila Web")
 
-5. Test the application with following examples(Enter seconds, then select **short** or **long** format):
+6. Test the application with following examples(Enter seconds, then select **short** or **long** format):
 
     a. Test Case 1 - Movie Length:
     - Input: 7200 seconds (typical movie)
