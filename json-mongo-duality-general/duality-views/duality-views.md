@@ -1,4 +1,4 @@
-# Exploring JSON Relational Duality Views - the Fundamentals
+# JSON Duality Views - JSON meets relational
 
 ## Introduction
 
@@ -57,7 +57,7 @@ This lab assumes you have:
     aid      number,
     aname    varchar2(128),
     extras   JSON (object),
-    constraint attendee primary key (aid)
+    constraint pk_attendee primary key (aid)
     );
 
     create table speaker(
@@ -492,7 +492,7 @@ You might have noticed that any JSON document in a Duality View carried addition
     In summary, this lab checks out the power of JSON Relational Duality Views, allowing you to work with data in either JSON Document format or SQL Relational format. Changes made through views are reflected in the corresponding documents and tables. This flexibility enables convenient create, read, update, or delete operations across multiple documents and tables with ease.
 
 
-    You may now **proceed to the next lab** 
+    You may now proceed to the next lab.
 
 ## Learn More
 

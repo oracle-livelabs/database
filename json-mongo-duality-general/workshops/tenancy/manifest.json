@@ -8,7 +8,7 @@
             "filename": "../../introduction/introduction.md"
         },
         {
-            "title": "Getting Started",
+            "title": "Get Started",
             "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
             "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
         },
@@ -24,7 +24,7 @@
             "filename": "../../json-datatype/json-datatype.md"
           },
         {
-            "title": "Lab 3: JSON Collections for storing documents",
+            "title": "Lab 3: JSON Collections - the native storage for JSON documents",
             "description": "Create JSON Collections to store documents in the database",
             "filename": "../../json-collections/json-collections.md"
           },

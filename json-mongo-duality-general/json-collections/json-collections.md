@@ -1,4 +1,4 @@
-# Work with JSON collections
+# JSON Collections - the native storage for JSON documents
 
 ## Introduction
 
