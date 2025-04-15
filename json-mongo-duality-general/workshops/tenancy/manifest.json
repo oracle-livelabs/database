@@ -24,18 +24,18 @@
             "filename": "../../json-datatype/json-datatype.md"
           },
         {
-            "title": "Lab 2: JSON Collections for storing documents",
+            "title": "Lab 3: JSON Collections for storing documents",
             "description": "Create JSON Collections to store documents in the database",
             "filename": "../../json-collections/json-collections.md"
           },
           {
-              "title": "Lab 3: JSON Duality Views - JSON meets relational",
+              "title": "Lab 4: JSON Duality Views - JSON meets relational",
               "description": "Building Duality Views",
               "type": "livelabs",
               "filename": "../../duality-views/duality-views.md"
           },
           {
-            "title": "Lab 4: MongoDB Plug-and-Play - Full MongoDB compatibility to work with JSON Collections and Duality Views",
+            "title": "Lab 5: MongoDB Plug-and-Play - Full MongoDB compatibility to work with JSON Collections and Duality Views",
             "description": "MongoDB compatibility with the MongoDB API",
             "type": "livelabs",
             "filename": "../../mongodb-api/mongodb-api.md"

@@ -89,7 +89,7 @@ In this lab, you will:
 										 'starring': ['Kurt Russel',
 										  			  'Wilford Brimley',
 										  			  'Keith David']}),
-							   (102, 'Aliens', 'movie','VHS', 'unknown, cassette looks ok, 1986,
+							   (102, 'Aliens', 'movie','VHS', 'unknown, cassette looks ok', 1986,
     							json { 'price': 2.50,
 									    'starring': ['Sigourney Weaver',
 											         'Michael Bien',
