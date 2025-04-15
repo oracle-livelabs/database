@@ -17,8 +17,12 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
 
 ## Task 1: Enabling SQL Firewall
 
-1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png " ")
+1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
+    ![click SQL](images/im1.png =50%x*)
+
+2. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
+
+    ![click SQL](images/simple-db-actions.png =50%x*)
 
 2. For this lab, we'll create two new users, 'TEST' and 'DB23AI' and grant necessary roles including SQL\_FIREWALL\_ADMIN and the developer role respectively.
 
@@ -124,7 +128,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     BEGIN
         DBMS_SQL_FIREWALL.CREATE_CAPTURE(
             username => 'DB23AI',
-            top_level_only => FALSE,
+            top_level_only => TRUE,
             start_capture => TRUE
         );
     END;
@@ -140,7 +144,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ![start capture](images/im22.png " ")
     ![start capture](images/im23.png " ")
 
-10. Select the SQL time and perform typical SQL operations to capture normal activities (e.g., select and insert statements).
+10. Select the SQL tile so we can run some typical SQL operations to capture normal activities (e.g., select and insert statements).
 
     ```
     <copy>
@@ -200,7 +204,10 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     WHERE username = 'DB23AI';
     </copy>
     ```
+
     ![review capture logs](images/im12.png " ")
+
+    Remember we are capturing everything. We are going to see the statements we ran as well as the things we clicked on inside of database actions, like signing in and out of our user.
 
 2. Check the allow list, which will initially be empty.
 
@@ -245,6 +252,30 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     </copy>
     ```
     ![SQL Firewall violation](images/im16.png " ")
+
+7. Log back in as the TEST user
+
+    * the password is Oracledb_4U#
+
+    ![perform SQL operations](images/im24.png " ")
+    ![perform SQL operations](images/im5.png =50%x*)
+
+8. We can review the violation log for abnormal SQL.
+    ```
+    <copy>
+    SELECT SQL_TEXT, FIREWALL_ACTION, IP_ADDRESS, CAUSE, OCCURRED_AT
+    FROM DBA_SQL_FIREWALL_VIOLATIONS WHERE USERNAME = 'DB23AI';
+    </copy>
+    ```
+
+9. We can also disable the allow list.
+
+    ```
+    <copy>
+    EXEC DBMS_SQL_FIREWALL.DISABLE_ALLOW_LIST(username=>'DB23AI');
+    </copy>
+    ```
+
 
 ## Task 3: Clean up
 

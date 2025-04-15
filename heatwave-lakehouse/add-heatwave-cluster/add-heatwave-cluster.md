@@ -59,7 +59,7 @@ In this lab, you will be guided through the following task:
     - b. Run load caommand
 
         ```bash
-        <copy>util.loadDump("https://objectstorage.us-ashburn-1.oraclecloud.com/p/0pZRzTl1hFLchwAcornQVePE7eXxp1u6rjVVF3i7a5qN7HASVk4CtTQ9BK9y4xIG/n/mysqlpm/b/plf_mysql_customer_orders/o/mco_nocoupon_dump_05242023/", {progressFile: "progress.json", loadIndexes:false})</copy>
+        <copy>util.loadDump("https://objectstorage.us-ashburn-1.oraclecloud.com/p/e9-qd9eqC2gatEl4qqsRD4L_mqn433tr00ALKmYzh8AuTQ-drS1thJvgLoz64-vF/n/mysqlpm/b/mysql_customer_orders/o/mco_nocoupon_11272024/", {progressFile: "progress.json", loadIndexes:false,ignoreVersion:true})</copy>
         ```
 
         **Note**: If you get errors like the one below, the **mysql\_customer\_orders** schema already exists. You used the correct PAR Link to load the data during the creation process in Lab1. Don't worry; everything is okay.

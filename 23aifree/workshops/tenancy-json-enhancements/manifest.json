@@ -1,7 +1,6 @@
 {
-    "workshoptitle": "SQL, JSON, and MongoDB API: Unify worlds with Oracle Database 23ai Free",
+    "workshoptitle": "SQL, JSON, and MongoDB API: Unify worlds with Oracle Autonomous Database 23ai Free",
     "help": "livelabs-help-db_us@oracle.com",
-
     "tutorials": [
         {
             "title": "Introduction",
@@ -9,50 +8,55 @@
             "filename": "../../introduction/intro-json-enhancements.md"
         },
         {
-          "title": "Getting Started",
-          "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
-          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+            "title": "Getting Started",
+            "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
         },
         {
-          "title": "Lab 1: Prepare Setup",
-          "description": "How to download your ORM stack and update security rules for an existing VCN",
-          "filename": "../../prepare-setup/prepare-setup.md",
-          "type": "json-enhancements"
+            "title": "Lab 1: Create an Autonomous Database 23ai Free instance",
+            "description": "Create an Autonomous Database 23ai Free instance",
+            "filename": "../../login-to-abd3/login-to-adb3.md",
+            "type": "json-enhancements"
         },
         {
-          "title": "Lab 2: Environment Setup",
-          "description": "How to provision the workshop environment and connect to it",
-          "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc-ssh.md"
-        },
-        {
-            "title": "Lab 3: Use noVNC remote desktop",
-            "description": "Using noVNC Remote Desktop",
-            "filename": "https://oracle-livelabs.github.io/common/labs/remote-desktop/using-novnc-remote-desktop.md"
-        },
-        {
-            "title": "Lab 4: Setup User",
-            "description": "Setup User",
-            "filename": "./../../change-pw/change-pw-json-enhancements.md"
-        },
-        {
-            "title": "Lab 5: Work with JSON Collections",
+            "title": "Lab 2: Work with JSON Collections",
             "description": "Work with JSON Collections",
             "filename": "./../../json-collections/json-collections.md"
         },
-       {
-            "title": "Lab 6: Use Mongo API to interact with Oracle Database",
+        {
+            "title": "Lab 3: Install MongoDB tools and utilities",
+            "description": "Install MongoDB tools and utilities",
+            "filename": "./../../json-install-mongo/json-install-mongo.md"
+        },
+        {
+            "title": "Lab 4: Use Mongo API to interact with Oracle Database",
             "description": "Use Mongo API to interact with Oracle Database",
             "filename": "./../../json-mongo/json-mongo.md"
         },
         {
-            "title": "Lab 7: Use SQL to work with JSON",
+            "title": "Lab 5: Use SQL to work with JSON",
             "description": "Use SQL to work with JSON",
             "filename": "./../../json-sql/json-sql.md"
         },
         {
-            "title": "Lab 8: Work with JSON Search Indexes",
+            "title": "Lab 6: Work with JSON Search Indexes",
             "description": "Work with JSON Search Indexes",
             "filename": "./../../json-search/json-search.md"
+        },
+        {
+            "title": "Lab 7: JSON-To-Duality Migrator",
+            "description": "JSON-To-Duality Migrator",
+            "filename": "./../../json-duality-migrator/json-duality-migrator.md"
+        },
+        {
+            "title": "Lab 8: Migrating MongoDB collections to Oracle Autonomous Database 23ai",
+            "description": "Migrating MongoDB collections to Oracle Autonomous Database 23ai",
+            "filename": "./../../json-migrating/json-migrating.md"
+        },
+        {
+            "title": "Lab 9: Creating multi-value JSON indexes and aggregation pipelines using MongoDB Shell",
+            "description": "Creating multi-value JSON indexes and aggregation pipelines using MongoDB Shell",
+            "filename": "./../../json-indexes/json-indexes.md"
         },
         {
             "title": "Need Help?",

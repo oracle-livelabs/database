@@ -1,0 +1,1 @@
+You cannot create multiple databases on a host with the same **Global database name**. If an Oracle Database with the specified name already exists, then enter a different name, for example *orcl4.us.oracle.com*.

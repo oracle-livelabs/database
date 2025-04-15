@@ -100,9 +100,7 @@ This lab assumes you have:
 
 5. If you get errors shown in below two screenshots during relocate chunk
 
-
     ![<relocate_chunk_error_not_exist_source>](./images/5-relocate-chunk-error-not-exist-source.png " ")
-
 
 
     ![<relocate_chunk_error_not_colocated>](./images/5-relocate-chunk-ru-not-colocated.png " ")
@@ -133,8 +131,6 @@ This lab assumes you have:
     ```
     Whitelabel Error Page
     This application has no explicit mapping for /error, so you are seeing this as a fallback.
-
-    Mon Aug 12 21:13:04 UTC 2024
     ```
 
    Please wait and go slow with the delete process. Rapid clicks can cause errors, so allow the operation to complete before clicking again.

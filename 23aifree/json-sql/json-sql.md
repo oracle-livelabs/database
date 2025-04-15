@@ -10,10 +10,7 @@ A key characteristic of a JSON collection (like 'products') is that it is backed
 
 In the following, we show you how you can use SQL to work with the JSON data in a collection.
 
-Estimated Time: 45 minutes
-
-Watch the video below for a quick walk through of the lab.
-[Watch the video](videohub:1_yu8ie1t8)
+Estimated Time: 30 minutes
 
 ### Objectives
 
@@ -28,22 +25,22 @@ In this lab, you will:
 ### Prerequisites
 
 - Oracle Database 23ai, version 23.4 or above
-- ORDS up and running (for Database Actions). Alternatively, you can use sqlplus or sqlcl
-- All previous labs successfully completed
+- All previous labs successfully completed to ensure the existence of JSON Collection movies
 
 ## Task 1: Explore the table behind your JSON collection
 
-1. Open Database Actions (if you don't already have it open). Either choose **SQL** under Development from the launchpad, or click on the navigation menu on the top left and select **SQL** under Development.
+1. Open Database Actions (if you don't already have it open). Choose **SQL** under Development from the launchpad.
 
-    ```
-    <copy>
-    http://localhost:8080/ords/hol23c/_sdw
-    </copy>
-    ```
-    ![SQL navigation](./images/nav-sql.png)
     ![SQL development navigation](./images/development-sql.png)
 
 2. If you have not done anything outside the workshop, you will see one table 'movies' (in addition to the internal sql history table of database actions). This is the table for the 'movies' collection. To get the details about its data structure displayed, let's do a DESCRIBE of the table.
+
+    ```sql
+    <copy>
+    desc movies;
+    </copy>
+    ```
+
 
     ![Describe table](./images/describe-movies.png)
 

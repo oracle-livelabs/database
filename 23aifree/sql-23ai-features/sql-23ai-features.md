@@ -352,7 +352,7 @@ You may update table data via joins - based on foreign table conditions. There i
     and d.dname='RESEARCH');
     ```
 
-    With Oracle 23ai, you can now use:
+    With Oracle Database 23ai, you can now use:
     ```
     <copy>UPDATE emp e set e.sal=e.sal*2
     FROM dept d

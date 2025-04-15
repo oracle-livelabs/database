@@ -8,7 +8,7 @@ Those reports give you a first indication of issues you may see (or performance 
 
 Estimated Time: 10 minutes
 
-[Hitchhiker's Guide LAB6](videohub:1_rid0tt2a)
+[Hitchhiker's Guide Lab 6](youtube:lwvdaM4v4tQ?start=2782)
 
 ### Objectives
 
@@ -122,11 +122,11 @@ In the AWR Diff Report, you will compare a snapshot period **before** upgrade to
     * *report_type*, hit RETURN.
     * *awr_location*, type *AWR\_PDB*, hit RETURN.
     * *num_days*, type *2*, hit RETURN.
-    * *begin_snap* (first pair), type the first *Snap Id* from lab 2, hit RETURN. If you can't remember, check the file `/home/oracle/scripts/snap-lab-02-before.log`.
-    * *end_snap* (first pair), type the last *Snap Id* from lab 2, hit RETURN. If you can't remember, check the file `/home/oracle/scripts/snap-lab-02-after.log`.
+    * *begin_snap* (first pair), type the first *Snap Id* from lab 3, hit RETURN. If you can't remember, check the file `/home/oracle/logs/awr-snapshot-snap-before.log`.
+    * *end_snap* (first pair), type the last *Snap Id* from lab 3, hit RETURN. If you can't remember, check the file `/home/oracle/logs/awr-snapshot-snap-after.log`.
     * *num_days*, type *2*, hit RETURN.
-    * *begin_snap* (second pair), type the first *Snap Id* from this lab, hit RETURN. If you can't remember, check the file `/home/oracle/scripts/awr-compare-snap-before.log`.
-    * *end_snap* (second pair), type the last *Snap Id* from this lab, hit RETURN. If you can't remember, check the file `/home/oracle/scripts/awr-compare-snap-after.log`.
+    * *begin_snap* (second pair), type the first *Snap Id* from this lab, hit RETURN. If you can't remember, check the file `/home/oracle/logs/awr-compare-snap-before.log`.
+    * *end_snap* (second pair), type the last *Snap Id* from this lab, hit RETURN. If you can't remember, check the file `/home/oracle/logs/awr-compare-snap-after.log`.
     * *report_name*, hit RETURN.
 
 2. Wait until the HTML output has been generated, then exit SQL*Plus.
@@ -169,4 +169,4 @@ An AWR Compare Periods report, shows the difference between two periods in time 
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, August 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, November 2024

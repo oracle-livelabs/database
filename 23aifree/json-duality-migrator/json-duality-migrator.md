@@ -21,8 +21,7 @@ Estimated Time: 10 minutes
 
 In this lab, you will:
 
-- Create a native JSON collection using the new syntax
-- Import data from JSON files
+- Create a native JSON collection and populate if with JSON Documents stored in Object Storage
 - Run the JSON-To-Duality Migrator (both converter and importer)
 - Validate the newly created objects (tables and duality views)
 
@@ -30,50 +29,30 @@ In this lab, you will:
 ### Prerequisites
 
 - Oracle Database 23ai, version 23.4 or above
-- MongoDB Compass [can be downloaded for free from here:](https://www.mongodb.com/docs/compass/current/install/)
 
 
+## Task 1: Connect to Mongo Shell to create and populate a new collection
 
-## Task 1: Clean up the environment:
+1. Connect to the mongo shell as in the previous labs.
 
-1. Follow these steps to clean up your environment. These steps are only needed in case you're running the workshop more than once. If this is the first time you are using this workshop, you can skip the cleanup.
+    When connected, you can create a new collection simply by using the Aggregation pipeline operator $external to read from object storage. This is an Oracle-specific operator available in MongoDB. When connected, run the following aggregation pipeline
 
     ```
     <copy>
-    DROP VIEW if exists CONF_SCHEDULE_DUALITY;
-    DROP TABLE if exists CONF_SCHEDULE PURGE;
-    DROP TABLE if exists CONF_SCHEDULE_SCHEDULE PURGE;
-    DROP TABLE if exists CONF_SCHEDULE_ROOT PURGE;
+    db.aggregate([
+            {$external: 'https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/BHRJ_Schedule.json'},
+            {$out: 'CONF_SCHEDULE'}
+            ])
     </copy>
     ```
+    This will create a new collection named CONF_SCHEDULE and populate it with a number of documents.
+   
+    ![Create and populate a new collection](images/populate_collection_with_external.png)
 
-## Task 2: Create a native JSON collection
+    
+    In this case we are reading data from a PAR Url, meaning that no authentication is required. You can also access private and secure endpoints, but need to specify a credential object for authentication and authorization.
 
-1. Option 1: In SQL Developer run:
-
-    ```
-    <copy>CREATE JSON COLLECTION TABLE CONF_SCHEDULE;</copy>
-    ```
-
-2. Option 2: Create in MongoDB Compass the collection **CONF\_SCHEDULE**
-
-![Create Collection](images/create_collection.png)
-
-
-## Task 3: Import the document(s) from MongoDB Compass into CONF_SCHEDULE
-
-1. Download the [BHRJ_Schedule.json](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/BHRJ_Schedule.json) document.
-
-![Add File](images/add_file.png)
-![Choose File](images/import_data.png)
-
-2. Import the BHRJ_Schedule.json file
-
-![Import File](images/import_schedule.png)
-![Show import](images/imported_completed.png)
-
-
-## Task 4: Run the JSON-To-Duality Migrator
+## Task 2: Run the JSON-To-Duality Migrator
 
 1. Follow this code to run the JSON-To-Duality Migrator: we will do infer\_schema and generate\_schema together.
 
@@ -103,7 +82,13 @@ In this lab, you will:
     /
     </copy>
     ```
-## Task 5: Validate the newly created objects and check the output from the select statement below
+    As you can see, the duality migrator analyzed the existing collection CONF_SCHEDULE and automatically migrated it into a new JSON Relational Duality View CONF\_SCHEDULE\_DUALIY, including the creation of the underlying relational model.
+
+    ![JSON-to-Duality migration](images/run_mongone.png)
+
+
+
+## Task 3: Validate the newly created objects and check the output from the select statement below
 
 1. In SQL Developer run:
 
@@ -115,17 +100,20 @@ In this lab, you will:
     select * from CONF_SCHEDULE_ROOT;
     </copy>
     ```
+    You can see your JSON documents as you saw them before in the native JSON collection, but also see the data content in the underlying relational structures.
 
-2. In MongoDB Compass after refreshing the databases, click on the **CONF\_SCHEDULE\_DUALITY** collection under the ADMIN database
-
-![Conf Schedule Duality](images/conf_schedule_duality%20collection.png)
-
-3. In mongosh, verify the number of documents in the **CONF\_SCHEDULE\_DUALITY** collection:
+2. In mongosh, verify the number of documents in the **CONF\_SCHEDULE\_DUALITY** collection: 
 
     ```
-    hol23> <copy>db.CONF_SCHEDULE_DUALITY.countDocuments({});
+    <copy>
+    db.CONF_SCHEDULE_DUALITY.countDocuments();
+    db.CONF_SCHEDULE_DUALITY.find();
     </copy>
     ```
+    ![Your first Duality View](images/my_first_dv.png)
+
+    You successfully migrated your first collection to a JSON Relational Duality View.
+
 ## Learn More
 
 * [JSON-Relational Duality Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/json-duality.html)
@@ -134,4 +122,4 @@ In this lab, you will:
 
 * **Author** - Julian Dontcheff, Hermann Baer
 * **Contributors** -  David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - Carmen Berdant, Technical Program Manager, July 2024
+* **Last Updated By/Date** - Hermann Baer, February 2025

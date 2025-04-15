@@ -6,7 +6,7 @@ In this lab, you will upgrade the *UPGR* database from Oracle Database 19c to 23
 
 Estimated Time: 45 minutes
 
-[Hitchhiker's Guide LAB5](videohub:1_k95lbxlz)
+[Hitchhiker's Guide Lab 5](youtube:lwvdaM4v4tQ?start=1966)
 
 ### Objectives
 
@@ -34,6 +34,8 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     cd
     java -jar autoupgrade.jar -version
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -62,6 +64,8 @@ It is strongly recommended to always use the latest version of AutoUpgrade. To u
     java -jar autoupgrade.jar -create_sample_file config
     more sample_config.cfg
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     * Hit *SPACE* to scroll through the output.
@@ -444,6 +448,8 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     cd /home/oracle/logs/autoupgrade-UPGR/UPGR
     ls -l
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     * Explore the subdirectories.
@@ -466,6 +472,8 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     cd /home/oracle/logs/autoupgrade-UPGR/UPGR/101
     ls -l
     </copy>
+
+    -- Be sure to hit RETURN
     ```
 
     <details>
@@ -564,4 +572,4 @@ AutoUpgrade completely automates upgrades and incorporates our best practices. A
 ## Acknowledgements
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Alex Zaballa, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, August 2024
+* **Last Updated By/Date** - Daniel Overby Hansen, January 2025

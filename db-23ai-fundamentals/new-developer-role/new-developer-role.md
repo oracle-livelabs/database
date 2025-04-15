@@ -24,8 +24,12 @@ The objective of this lab is to familiarize you with the Developer Role in Oracl
 
 ## Task 2: Generating a list of granted privileges and roles
 
-1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png " ")
+1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
+    ![click SQL](images/im1.png =50%x*)
+
+2. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
+
+    ![click SQL](images/simple-db-actions.png =50%x*)
 
 2. To check all of the system privileges, object privileges, and roles granted by the Developer Role, run the following PL/SQL script:
 

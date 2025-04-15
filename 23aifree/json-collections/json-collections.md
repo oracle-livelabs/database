@@ -6,68 +6,49 @@ Oracle is a relational database, meaning it typically stores data in rows and co
 
 To create a collection all you have to specify is the collection's name. Unlike a relational table, you do not have to provide any schema information. So, let's create a collection for the products we want to sell in the store.
 
-Estimated Time: 20 minutes
-
-Watch the video below for a quick walk through of the lab.
-[Watch the video](videohub:1_6ajt3iiz)
+Estimated Time: 15 minutes
 
 ### Objectives
 
 In this lab, you will:
 
-* Create Collection
-* Insert First Document
-* Find JSON documents in a collection
-* Learn about JSON and Constraints
+* Create Collection using Database Actions|JSON
+* Insert First Document using Database Actions|JSON
+* Find JSON documents in a collection using Database Actions|JSON
+* Learn about JSON and Constraints 
 
 ### Prerequisites
 
-- Oracle Database 23ai, version 23.4 or above
-- All previous labs successfully completed
+- An Oracle Autonomous Database 23ai available for the LiveLab.
 
 ## Task 1: Create Collection
 
-1. Open a browser window to Database Actions.
+1. Click in the *Database Actions* dropdown list and select **View all database actions**
 
-	```
-    <copy>http://localhost:8080/ords/hol23c/_sdw</copy>
-    ```
+	![DB Actions](images/dbaction1.png)
 
-	![Open Browser](./images/open-browser.png)
 
-2. Sign in with the username and password of the schema with ORDS enabled. If you are using the green button, this user has already been created for you. Replace the `<new_password>` with the one you entered in Lab 1: Setup User.
-
-    ```
-    username: hol23c
-    password: <new_password>
-    ```
-
-	![User Sign In](./images/ords-sign-in.png)
-
-4. Experience the homepage of Database Actions. Database Actions was formerly known as 'SQL Developer Web' and was focusing meinly on the SQL worksheet functionality, a subset of functionality that is available in SQL Developer Desktop
+2. Below you can find the Database Actions homepage.
 
 	![Homepage Database Actions](./images/homepage-dbactions.png)
 
-	Let's have a quick look into the SQL Worksheet and some of its capabilities to compare and contrast with SQL Developer Desktop. You can walk through the guided tour or return to the main screen of Database Actions.
 
-	![Homepage SQL Developer Web](./images/homepage-intro-sdw.png)
-
-5. On the homepage, click the JSON tile under Development. You can ignore the guided tours when they pop up. 
+3. On the homepage, click the JSON tile under Development.
 
 	![Homepage Development JSON](./images/homepage-json.png)
 
-6. To create a collection, click **Create Collection**.
+4. To create a collection, click **Create Collection**.
 	A tour of this section may automatically begin when the page loads. You can click `next` to continue through the tour and return to this page.
 
 	![JSON Create Collection](./images/json-create-collection.png)
 
-7. In the field **Collection Name**, provide the name **movies**. Then click **Create**.
+5. In the field **Collection Name**, provide the name **movies**. Then click **Create**.
 
 	Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use MOVIES or Movies.
 
 	![New Collection: movies](./images/collection-name.png)
 
-8. A notification pops up that displays **movies** collections has been created.
+6. A notification pops up that displays **movies** collections has been created.
 
 	![New collection notification](./images/popup.png)
 
@@ -77,11 +58,7 @@ In this lab, you will:
 
 ## Task 2: Insert Documents
 
-1. Double click **movies** collection to show the **JSON-movies** worksheet.
-
-	![products worksheet](./images/click-movies.png)
-
-2. Click the *New JSON Document* button.
+1. Double click **movies** collection to show the **JSON-movies** worksheet. Click the *New JSON Document* button.
 
 	![new document button](./images/new-json-doc.png)
 
@@ -362,6 +339,8 @@ In the SQL tool, run:
 
 	_Click on a table cell then the eye icon to view the full value._
 
+	![SQL for data dictionary result](./images/json-schema-result.png)
+
 You may now proceed to the next lab.
 
 ## Learn More
@@ -372,4 +351,4 @@ You may now proceed to the next lab.
 
 * **Author** - William Masdon, Kaylien Phan, Hermann Baer
 * **Contributors** -  David Start, Ranjan Priyadarshi
-* **Last Updated By/Date** - Hermann Baer, Database Product Management, August 2024
+* **Last Updated By/Date** - Carmen Berdant, Technical Program Manager, August 2024

@@ -1,0 +1,84 @@
+{
+    "workshoptitle": "MySQL Heatwave Lakehouse: Realtime Asset Maintenance",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Explore how Oracle MySQL Heatwave Lakehouse help the business in monitoring the Operational metrics and optimizing the supply chain using the Out of the box AI and ML capabilities of OCI. The workshop covers the exceptional features of MySQL Heatwave Lakehouse which helps customers to focus on data platform innovations.",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+        },
+        {
+            "title": "Lab 1: Create Demo Compartment and ObjectStore Buckets and upload Data",
+            "description": "Create Demo Compartment and ObjectStore Buckets and upload Data",
+            "filename": "../../upload-demo-data-objectstore/upload-demo-data-objectstore.md"
+        },
+        {
+            "title": "Lab 2a: Create VCN and Compartment for workshop",
+            "description": "This lab walks you through user setup and configuration and puts the foundation in place to build the Demo on OCI",
+            "filename": "../../create-heatwave-vcn-db/create-heatwave-vcn-db.md"
+        },
+        {
+            "title": "Lab 2b: Create Compute instance for workshop and configure MySQL Shell",
+            "description": "Create compute instance for workshop and configure MySQL Shell.",
+            "filename": "../../create-compute-with-mysqlsh/create-compute-with-mysqlsh.md"
+        },
+        {
+            "title": "Lab 2c: Create MySQL Database System in Oracle Cloud",
+            "description": "Create MySQL Database System first so that later we can enable HeatWave Cluster",
+            "filename": "../../create-mysql-database-system/create-mysql-database-system.md"
+        },
+        {
+            "title": "Lab 2d: Enable Lakehouse and Create MFG_SENSOR Database/Table in MySQL Database System",
+            "description": "Create a OCI Data Science notebook and Deploy the ML Model",
+            "filename": "../../enable-heatwave-cluster/enable-heatwave-cluster.md"
+        },
+        {
+            "title": "Lab 3: Build ML model API to evalaute the probablity of device faiures",
+            "filename": "../../insights/insights.md"
+          },
+        {
+            "title": "Lab 4a: Set up OCI Stream service & Execute Sensor Data Simulator",
+            "description": "set up OCI stream service Execute Sensor Data Simulator",
+            "filename": "../../create-stream/create-stream.md"
+        },
+        {
+            "title": "Lab 4b: Setup Dynamic Group for function to manage stream/objects",
+            "description": "set up OCI stream service Execute Sensor Data Simulator",
+            "filename": "../../dg-policy/dg-policy.md"
+        },
+        {
+            "title": "Lab 5: Set up and Deploy OCI function and connect to service connector Hub ",
+            "description": "Set up and Deploy OCI function and connect to service connector Hub",
+            "filename": "../../configuring-fn/configuring-fn.md"
+        },
+        {
+            "title": "Lab 6a: Set up OCI Dataflow and deploy a Pyspark Application and load the datasets from demo-events-silver-mysqlhw to MYSQL HW",
+            "description": "Set up OCI Dataflow and deploy a Pyspark Application",
+            "filename": "../../dataflow/dataflow.md"
+        },
+        {
+            "title": "Lab 6b: Load the datasets from demo-events-silver-mysqlhw to MYSQL HW",
+            "description": "Load the datasets from demo-events-silver-mysqlhw to MYSQL HW",
+            "filename": "../../load-into-lakehouse/load-into-lakehouse.md"
+        },
+        {
+            "title": "Lab 7: Design and Develop OAC Dashboards ",
+            "filename": "../../oac-provisioning/oac-provisioning.md"
+        },
+        {
+            "title": "Lab 8: Set up OCI Data Catalog ",
+            "filename": "../../sprint-find-data-catalog-ocid/sprint-find-data-catalog-ocid.md"
+        },  
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename":"https://oracle-livelabs.github.io/common//labs/need-help/need-help-freetier.md"
+        }
+    ]
+}
+

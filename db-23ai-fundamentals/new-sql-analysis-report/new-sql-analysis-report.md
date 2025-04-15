@@ -6,6 +6,9 @@ Welcome to the "Exploring the SQL Analysis Report" lab. In this lab, you will le
 
 Estimated Lab Time: 15 minutes
 
+Watch the video below for a walkthrough of the lab.
+[Lab walkthrough video](videohub:1_qn2333jb)
+
 ### Objective:
 The objective of this lab is to show you the SQL Analysis Report feature in Oracle Database 23ai. By the end of this lab, you will be able to interpret SQL Analysis Reports and use the insights to improve query performance.
 
@@ -15,8 +18,14 @@ The objective of this lab is to show you the SQL Analysis Report feature in Orac
 
 ## Task 1: Lab setup and understanding SQL Analysis Reports
 
-1. From the Autonomous Database home page, **click** Database action and then **click** SQL.
-    ![click SQL](images/im1.png " ")
+1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
+    ![click SQL](images/im1.png =50%x*)
+
+    Using the ADMIN user isn’t typically advised due to the high level of access and security concerns it poses. **However**, for this demo, we’ll use it to simplify the setup and ensure we can show the full range of features effectively. 
+
+2. Before we begin, this lab will be using Database Actions Web. If you're unfamiliar, please see the picture below for a simple explanation of the tool. You can click on the photo to enlarge it.
+
+    ![click SQL](images/simple-db-actions.png =50%x*)
    
 2. SQL Analysis Reports provide insights and suggestions for SQL queries. These reports show potential issues, such as Cartesian products, expensive operations, and inefficient use of hints, to help you optimize your queries for better performance. SQL analysis is enabled by default.
 
@@ -24,8 +33,8 @@ The objective of this lab is to show you the SQL Analysis Report feature in Orac
 
     ```
     <copy>
-    DROP TABLE sales cascade constraints;
-    DROP TABLE products cascade constraints;
+    DROP TABLE IF EXISTS sales cascade constraints;
+    DROP TABLE IF EXISTS products cascade constraints;
 
     CREATE TABLE sales (
         sale_id INT,
