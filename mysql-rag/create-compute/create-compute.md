@@ -77,6 +77,7 @@ In this lab, you will be guided through the following tasks:
 
     ![Create VCN](./images/7-create-vcn.png "Create VCN")
 
+
 7. When the Virtual Cloud Network is created, click **View VCN** to display the created VCN.
 
     ![View VCN](./images/8-view-vcn.png "View VCN")
