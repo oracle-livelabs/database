@@ -121,14 +121,25 @@ If you are still connected to DEV_USER in Database Actions, skip to step 3.
 
     ```sql
     <copy>
-        PL/SQL
+        BEGIN
+        ORDS.ENABLE_OBJECT(
+            P_ENABLED => TRUE,
+            P_SCHEMA => 'DEV_USER',
+            P_OBJECT =>  'DEPARTMENTS',
+            P_OBJECT_TYPE => 'TABLE',
+            P_OBJECT_ALIAS => 'DEV_USER.departments',
+            P_AUTO_REST_AUTH => FALSE
+        );
+        COMMIT;
+    END;
+    /
     </copy>
     ```
 
 4. Click the **Run Script** button to execute the block
-    ![Copy and past the PL/SQL block to the sql worksheet](./images/rest-enable-.png " ")
+    <!--![Copy and past the PL/SQL block to the sql worksheet](./images/rest-enable-.png " ")-->
 5. Refresh the tables list, and you'll notice the REST-enabled icon appear next to the DEPARTMENTS table, confirming that it is now ready for REST interactions
-    ![The REST enabled icon appears](./images/rest-enable-icon-for-departments.png " ")
+    <!--![The REST enabled icon appears](./images/rest-enable-icon-for-departments.png " ")-->
 
 Your DEPARTMENTS table is now ready for REST interactions.
 <!--
