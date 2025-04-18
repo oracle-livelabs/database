@@ -19,20 +19,7 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
     },
     {
-      "title": "Lab 1: Prepare setup",
-      "description": "How to download your ORM stack and update security rules for an existing VCN.",
-      "publisheddate": "10/31/2021",
-      "filename": "./../../prepare-setup/prepare-setup.md",
-      "type": "default"
-    },
-    {
-      "title": "Lab 2: Setup compute instance",
-      "description": "How to provision the workshop environment and connect to it",
-      "publisheddate": "06/30/2020",
-      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc.md"
-    },
-    {
-      "title": "Lab 3: Administer listener operations",
+      "title": "Lab 1: Administer listener operations",
       "description": "How to perform listener operations, such as starting and stopping the listener, checking the listener status, and so on, using the listener control utility.",
       "publisheddate": "04/14/2023",
       "filename": "./../../administer-listener-ops/administer-listener-ops.md"
