@@ -19,26 +19,13 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
     },
     {
-      "title": "Lab 1: Prepare setup",
-      "description": "How to download your ORM stack and update security rules for an existing VCN.",
-      "filename": "../../prepare-setup/prepare-setup.md",
-      "publisheddate": "11/24/2022",
-      "type": "default"
-    },
-    {
-      "title": "Lab 2: Setup compute instance",
-      "description": "How to provision the workshop environment and connect to it",
-      "publisheddate": "03/22/2024",
-      "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute-generic/setup-compute-novnc.md"
-    },
-    {
-      "title": "Lab 3: Delete an Oracle Database",
+      "title": "Lab 1: Delete an Oracle Database",
       "description": "Only delete the database from your host but retain Oracle Database software and Oracle home.",
       "publisheddate": "14/10/2024",
       "filename": "./../../delete-db/delete-db.md"
     },
     {
-      "title": "Lab 4: Deinstall Oracle Database and remove Oracle home",
+      "title": "Lab 2: Deinstall Oracle Database and remove Oracle home",
       "description": "How to remove Oracle Database software and delete Oracle Database and its components from your host.",
       "publisheddate": "14/10/2024",
       "filename": "./../../deinstall-db/deinstall-db.md"
