@@ -282,6 +282,8 @@ In this lab, you will be guided through the following tasks:
 ## Acknowledgements
 
 - **Author** - Perside Foster, MySQL Solution Engineering
-- **Contributor** - Nick Mader, MySQL Global Channel Enablement & Strategy Director,
-Selena Sanchez, MySQL Staff Solutions Engineer 
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, March  2025
+- **Contributor** 
+    - Nick Mader, MySQL Global Channel Enablement & Strategy Director, 
+    - Selena Sanchez, MySQL Staff Solutions Engineer, 
+    - Debbie Stracher Weis  MySQL AMERICAS Partner Marketing Manager 
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering,April  2025
