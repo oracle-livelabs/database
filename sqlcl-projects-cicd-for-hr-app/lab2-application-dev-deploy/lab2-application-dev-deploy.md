@@ -178,9 +178,9 @@ All right, so now we will go to the .env file and replace **DEV\_USER** with **P
 
 3. Press Esc + I to enter insert mode.
 
-4. Replace **DEV\_USER** with **PROD\_USER**. Use the Up, Down, Left, and Right arrow keys to navigate to your target.
+4. Replace **dev\_user** with **prod\_user**. Use the Up, Down, Left, and Right arrow keys to navigate to your target.
 
-    ![Replace DEV_USER with PROD_USER in .env](./images/replace-dev-to-prod-user.png " ")
+    ![Replace dev_user with prod_user in .env](./images/replace-dev-to-prod.png " ")
 
 5. Press **Esc**, then type **:wq** and press **Enter** to save and exit.
 
