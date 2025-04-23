@@ -30,17 +30,17 @@
         "description": "Try out AI Vector search in 23ai",
         "type": "livelabs",
         "filename": "../../new-ai-vector-search/new-ai-vector-search.md"
-    },
+      },
+      {
+        "title": "Lab: JSON Collections and MongoDB API",
+        "description": "Create JSON Collections and use MongoDB API",
+        "filename": "../../../23aifree/json-collections/json-collections-mongo.md"
+      },
       {
           "title": "Lab: JSON Duality Views",
           "description": "Building Duality Views",
           "type": "livelabs",
           "filename": "../../new-duality-views/new-duality-views.md"
-      },
-      {
-          "title": "Lab: JSON Collections and MongoDB API",
-          "description": "Create JSON Collections and use MongoDB API",
-          "filename": "../../../23aifree/json-collections/json-collections-mongo.md"
       },
       {
           "title": "Lab: Property Graphs",
