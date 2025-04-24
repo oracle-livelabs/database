@@ -11,7 +11,7 @@ This LiveLab session focuses on a real-world environmental and climate issue: ho
 
 The database tables we will populate contain dozens of variables, including publicly-available data to plot geospatial boundaries of 25 heat islands within the City of Chicago, Illinois. We will also track the activity of three volunteer teams as they plant various tree species within those heat islands. These data will be stored in various formats within Oracle Database tables, including the native JSON datatype introduced in Oracle 21c.
 
-We will then explore how JSON Relational Duality Views (JRDVs) introduced in Oracle 23ai make short work of reporting on and maintaining data within these tables without ever having to write SQL query statements or data manipulation language (DML) statements. Instead, we will use JSON to perform all required tasks, thus empowering DevOps teams to use the same language they're already using with other NoSQL implementations without the steeper learning curve required to master SQL.
+We will then explore how JSON Relational Duality Views (JRDVs) introduced in Oracle Database 23ai make short work of reporting on and maintaining data within these tables without ever having to write SQL query statements or data manipulation language (DML) statements. Instead, we will use JSON to perform all required tasks, thus empowering DevOps teams to use the same language they're already using with other NoSQL implementations without the steeper learning curve required to master SQL.
 
 Finally, we'll create a simple Oracle Spatial Suite environment and use it to quickly map out the results of our volunteer teams' tree planting efforts.
 

@@ -10,7 +10,7 @@ Estimated workshop time: 2 hours 45 minutes
 
 Watch this video to learn about the *highlights of Oracle Database 23ai*.
 
-[](youtube:TRDDsStoMxc)
+[](youtube:4yobT4rtmeo)
 
 ### Objectives
 
@@ -121,5 +121,5 @@ Click the next lab to **Get Started**.
 ## Acknowledgments
 
  - **Author**: Manish Garodia, Database User Assistance Development
- - **Contributors**: Prakash Jashnani, Subhash Chandra, Subrahmanyam Kodavaluru, Manisha Mati
- - **Last Updated By/Date**: Manish Garodia, October 2024
+ - **Contributors**: Prakash Jashnani, Subhash Chandra, Subrahmanyam Kodavaluru, Manisha Mati, Aayushi Arora
+ - **Last Updated By/Date**: Aayushi Arora, March 2025

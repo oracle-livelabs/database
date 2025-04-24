@@ -65,7 +65,7 @@ In this lab, you will:
 
 In order to do this workshop you need
 
-* An Oracle 23ai Free Developer Release Database or one running in a LiveLabs environment
+* An Oracle Database 23ai Free Developer Release Database or one running in a LiveLabs environment
 
 You may **proceed to the next lab.**
 

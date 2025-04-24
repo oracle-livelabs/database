@@ -1,0 +1,38 @@
+{
+  "workshoptitle": "Development of an application using SQLcl Projects",
+  "help": "livelabs-help-db_us@oracle.com",
+  "variables": ["../../variables/variables.json",
+    "../../variables/variables-in-another-file.json"],
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The Introduction is always second for LiveLabs. The title and contents menu title match for the Introduction.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Lab 0: Environment Setup",
+      "description": "Using Oracle Cloud",
+      "filename": "../../get-started/get-started.md"
+    },
+    {
+      "title": "Lab 1: Database Setup Using OAD & ORDS",
+      "description": "Labs that follow the introduction are numbered, starting with Lab 1",
+      "filename": "../../database-setup/database-setup.md"
+    },
+    {
+      "title": "Lab 2: Application Setup & Change",
+      "description": "This Lab will introduce the application and its setup",
+      "filename": "../../application-setup-change/application-setup-change.md"
+    },
+    {
+      "title": "Lab 3: Bonus Lab",
+      "description": "In this lab the learner will explore the app and do a change",
+      "filename": "../../bonus-lab/bonus-lab.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}

@@ -3,14 +3,14 @@
     "help": "livelabs-help-db_us@oracle.com",
 	"tutorials": [
         {
-          "title": "Get Started",
-          "description": "Prerequisites for LiveLabs (Oracle-owned tenancies).",
-          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
-        },
-        {
           "title": "Introduction",
           "description": "This is the introduction to the lab",
           "filename":"../../introduction/introduction.md"
+        },
+        {
+          "title": "Get Started",
+          "description": "Prerequisites for LiveLabs (Oracle-owned tenancies).",
+          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
         },
         {
           "title": "Lab 1: Create an API Sign-In Key and SDK CLI Configuration File",

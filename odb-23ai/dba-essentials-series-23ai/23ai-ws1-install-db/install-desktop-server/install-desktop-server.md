@@ -24,7 +24,7 @@ This lab assumes you have -
  - Completed all previous labs successfully
  - Downloaded the database installer
 
-	> **Tip**: You can get the database installer from Oracle's [download site](https://www.oracle.com/database/free/get-started/). If you have reserved a Livelabs environment, then it has the installer already.
+	<!-- > **Tip**: You can get the database installer from Oracle's [download site](https://www.oracle.com/database/free/get-started/). If you have reserved a Livelabs environment, then it has the installer already. -->
 
 Besides, you are installing Oracle Database for the first time and do not have Oracle home already configured on your host.
 
@@ -159,24 +159,46 @@ In this task, you will select *Desktop class* to install the database software a
 
     It returns the following.
 
+    Press Enter, if prompted.
+
 	```
+    Performing root user operation.
+
+    The following environment variables are set as:
+        ORACLE_OWNER= oracle
+        ORACLE_HOME=  /u01/app/oracle/product/23.4.0/dbhome_1
+
+    Enter the full pathname of the local bin directory: [/usr/local/bin]: 
+    Copying dbhome to /usr/local/bin ...
+    Copying oraenv to /usr/local/bin ...
+    Copying coraenv to /usr/local/bin ...
+
+    Creating /etc/oratab file...
+    Entries will be added to the /etc/oratab file as needed by
+    Database Configuration Assistant when a database is created
+    Finished running generic part of root script.
+    Now product-specific root actions will be performed.
+    ```
+    You can close the terminal window. Running scripts are applicable for Linux and UNIX operating systems only.
+
+<!-- 
     The following environment variables are set as:
 
 	ORACLE_OWNER= oracle
 	ORACLE_HOME=  /u01/app/oracle/product/23.4.0/dbhome_1
 
     Enter the full pathname of the local bin directory: [/usr/local/bin]:
-	```
+	
 
     Press Enter to continue.
 
-	```
+	
 	/usr/local/bin is read only.  Continue without copy (y/n) or retry (r)? [y]:
-	```
+	
 
     Press Enter to continue.
 
-    ```
+    
 	Warning: /usr/local/bin is read only. No files will be copied.
 
 
@@ -185,11 +207,9 @@ In this task, you will select *Desktop class* to install the database software a
     Database Configuration Assistant when a database is created
     Finished running generic part of root script.
     Now product-specific root actions will be performed.
-	```
+    -->
 
-    You can close the terminal window. Running scripts are applicable for Linux and UNIX operating systems only.
-
-1.  Return to the Run Configuration Scripts window and click **OK** to continue. The installer proceeds with creating the database according to your configuration.
+11.  Return to the Run Configuration Scripts window and click **OK** to continue. The installer proceeds with creating the database according to your configuration.
 
     On completion, the installer displays the Finish window.
 
@@ -323,7 +343,10 @@ In this task, you will select *Server class* to install the database software an
 	[](include:adm-users)
 
 1.  You can select specific OS groups to grant the corresponding SYS privileges to database administrators. The drop-down menu displays the groups to which your user belongs.   
-    For this lab, select *dba* for all groups and click **Next**.
+    <!-- For this lab, select *dba* for all groups and click **Next**. -->
+    For this task, leave the default OS groups and click **Next**. 
+
+    > **Note**: If OS groups are not configured in your system, you can select *dba* for all groups.
 
     ![Select OS groups](./images/db23-srv-12-os-groups.png " ")
 
@@ -362,7 +385,27 @@ In this task, you will select *Server class* to install the database software an
 
     It returns the following.
 
+    Press Enter, if prompted.
     ```
+    Performing root user operation.
+
+    The following environment variables are set as:
+        ORACLE_OWNER= oracle
+        ORACLE_HOME=  /u01/app/oracle/product/23.4.0/dbhome_2
+
+    Enter the full pathname of the local bin directory: [/usr/local/bin]: 
+    The contents of "dbhome" have not changed. No need to overwrite.
+    The contents of "oraenv" have not changed. No need to overwrite.
+    The contents of "coraenv" have not changed. No need to overwrite.
+
+    Entries will be added to the /etc/oratab file as needed by
+    Database Configuration Assistant when a database is created
+    Finished running generic part of root script.
+    Now product-specific root actions will be performed.
+    ```
+    You can close the terminal window. Running scripts are applicable for Linux and UNIX operating systems only. 
+
+    <!-- ```
 	The following environment variables are set as:
 
 	ORACLE_OWNER= oracle
@@ -387,9 +430,9 @@ In this task, you will select *Server class* to install the database software an
     Database Configuration Assistant when a database is created
     Finished running generic part of root script.
     Now product-specific root actions will be performed.
-	```
+	``` -->
 
-    You can close the terminal window. Running scripts are applicable for Linux and UNIX operating systems only. 
+    
 
 1.  Return to the Run Configuration Scripts window and click **OK** to continue. The installer proceeds with creating the database according to your configuration.
 
@@ -406,5 +449,5 @@ You may now **proceed to the next lab**.
 ## Acknowledgments
 
  - **Author**: Manish Garodia, Database User Assistance Development
- - **Contributors**: Prakash Jashnani, Subhash Chandra, Subrahmanyam Kodavaluru, Manisha Mati
- - **Last Updated By/Date**: Manish Garodia, October 2024
+ - **Contributors**: Prakash Jashnani, Subhash Chandra, Subrahmanyam Kodavaluru, Manisha Mati, Aayushi Arora
+ - **Last Updated By/Date**: Aayushi Arora, March 2025

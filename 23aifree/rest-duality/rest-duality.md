@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab focuses on populating, querying, and updating Duality Views in the Oracle 23ai database using REST calls. You will use REST calls to upload data into the database using JSON documents. It's important to note that when you make a POST request directly to a Duality View, the data is not stored within the view itself. Instead, the inserted data is stored in the underlying tables that make up the view.
+This lab focuses on populating, querying, and updating Duality Views in the Oracle Database 23ai database using REST calls. You will use REST calls to upload data into the database using JSON documents. It's important to note that when you make a POST request directly to a Duality View, the data is not stored within the view itself. Instead, the inserted data is stored in the underlying tables that make up the view.
 
 Estimated Time: 10 minutes
 
