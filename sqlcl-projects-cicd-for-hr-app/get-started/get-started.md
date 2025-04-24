@@ -247,17 +247,19 @@ Next, you will modify the .env file, which is located in your application's root
       <copy>
       VITE_API_URL=http://[Your Lab's IP]:5500/api/connection
       VITE_BASE_URL=http://[Your Lab's IP]:8181/ords/
-      VITE_DB_USERNAME=DEV_USER
+      VITE_DB_USERNAME=dev_user
       </copy>
       ```
 
-     * **`VITE_API_URL`**: The base URL for your API connection.
+      ***Important!*** If you find VITE\_DB\_USERNAME (dev_user) in uppercase, make sure to convert it to lowercase. This value is used in the ORDS endpoints within the application, and it must be lowercase for the endpoints to function correctly.
 
-     * **`VITE_BASE_URL`**: The base URL for your ORDS REST service.
+     * **`VITE_API_URL`:** The base URL for your API connection.
 
-     * **`VITE_DB_USERNAME`**: The database username.
+     * **`VITE_BASE_URL`:** The base URL for your ORDS REST service.
 
-     ![Open the environment variable file](images/env-file-opened2.png " ")
+     * **`VITE_DB_USERNAME`:** The database username which should be in lowercase.
+
+     ![Open the environment variable file](images/env-file-opened3.png " ")
      <!--![Open the environment variable file](images/env-file-opened.png " ")-->
 
 5. Press Esc, then type :wq to save and exit.

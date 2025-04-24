@@ -278,7 +278,8 @@ You may now **proceed to the next lab**.
 ## Acknowledgements
 
 - **Author** - Perside Foster, MySQL Solution Engineering
-- **Contributors** - Scott Stroz, MySQL Developer Advocate, 
-John Kehoe, Principal Solution Engineer MySQL GBU,  
-Nick Mader, MySQL Global Channel Enablement & Strategy Director
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering, March 2025
+- **Contributor** 
+    - Nick Mader, MySQL Global Channel Enablement & Strategy Director, 
+    - Selena Sanchez, MySQL Staff Solutions Engineer, 
+    - Debbie Stracher Weis  MySQL AMERICAS Partner Marketing Manager 
+- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering,April  2025
