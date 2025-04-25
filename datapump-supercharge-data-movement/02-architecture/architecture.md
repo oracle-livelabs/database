@@ -1,4 +1,4 @@
-# Initialize Environment
+# Architecture
 
 ## Introduction
 

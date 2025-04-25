@@ -20,25 +20,11 @@ STUFF TO REMEMBER
 
 **************************************************************
 
-##### Architecture
-
-Using HELP - grepping for a keyword
-
 ##### Getting Started
-Data Pump roles - who has the role by default
-Creating a user
-never run Data Pump as SYS
-Directory object - DATA_PUMP_DIR vs. your own
 Using a par file
-
-Different modes: full, schema, tablespace, table, transportable
-
-Dumpfile versus Network Mode -- again, do the same thing both ways.
-
 
 ##### Best Practices
 Data Pump bundle patch
-streams_pool_size
 PARALLEL basics (not available with SE)
 PARALLEL settings - 2x physical cores, ECPUs/4 or no of OCPUs
 Different parallel for export and imports
@@ -93,8 +79,11 @@ ABORT_STEP=1
 
 master_only=YES
 
+
+##### Network imports
+Dumpfile versus Network Mode -- again, do the same thing both ways.
+
 ##### Usability
-Using Data Pump through SQLcl
 Interactive console commands
 Attaching to a job
 Using Interactive Mode to Stop and Reattach to a Job

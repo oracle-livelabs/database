@@ -24,6 +24,11 @@
       "filename": "../../02-architecture/architecture.md"
     },
     {
+      "title": "Lab 3: Getting Started",
+      "description": "Getting Started",
+      "filename": "../../03-getting-started/getting-started.md"
+    },
+    {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
