@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will create the prerequisites for starting a job.
+In this lab, you will create the prerequisites for starting a job. Plus, start a simple Data Pump export/import.
 
 Estimated Time: 10 Minutes
 
@@ -393,8 +393,6 @@ With a parameter file you can now start a Data Pump export and import a schema i
     <copy>
     create or replace directory dpdir as '/home/oracle/dpdir';
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * The directory object points to the same directory as in the *FTEX* database. Thus, you avoid copying files from one directory to another.
@@ -444,7 +442,7 @@ With a parameter file you can now start a Data Pump export and import a schema i
     ```
 
     * The import parameter is much simpler than the export. 
-    * Basically, you just point to the files and tell Data Pump to import whatever it finds in the dump files.
+    * Basically, you just tell Data Pump to import whatever it finds in the dump file.
   
     <details>
     <summary>*click to see the output*</summary>
@@ -579,7 +577,7 @@ You just done an export/import via a dump file. Let's try to an import using *ne
 
     * The parameter looks similar to the export parameter file.
     * Notice the *network\_link* parameter. It instructs Data Pump to import over a database link without a dump file.
-    * Also, notice the *remap\_schema* parameter. Since you just imported the schema *F1* into *UPGR*, you can rename the schema on import to *F2*. 
+    * Also, notice the *remap\_schema* parameter. Since you just imported the schema *F1* into *UPGR*, you can't import it again. But you can tell Data Pump to rename the schema on import to *F2*. 
 
     <details>
     <summary>*click to see the output*</summary>
@@ -649,6 +647,10 @@ You just done an export/import via a dump file. Let's try to an import using *ne
     </details> 
 
 You may now *proceed to the next lab*.
+
+## Additional information
+
+The network mode import is simpler than using dump files. You need to call Data Pump only once. However, there are certain restrictions in a network mode import that can severely impact performance. Especially around parallel jobs and LOBs you might find that a network mode import is much slower. In such cases, use dump files instead.
 
 ## Acknowledgments
 
