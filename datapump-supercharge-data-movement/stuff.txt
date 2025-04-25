@@ -1,0 +1,155 @@
+STUFF TO REMEMBER
+- YouTube videos for each chapter
+
+**************************************************************
+
+
+    ```
+    <copy>
+    desc dbms_metadata
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    ```
+    </details> 
+
+**************************************************************
+
+##### Architecture
+
+Using HELP - grepping for a keyword
+
+##### Getting Started
+Data Pump roles - who has the role by default
+Creating a user
+never run Data Pump as SYS
+Directory object - DATA_PUMP_DIR vs. your own
+Using a par file
+
+Different modes: full, schema, tablespace, table, transportable
+
+Dumpfile versus Network Mode -- again, do the same thing both ways.
+
+
+##### Best Practices
+Data Pump bundle patch
+streams_pool_size
+PARALLEL basics (not available with SE)
+PARALLEL settings - 2x physical cores, ECPUs/4 or no of OCPUs
+Different parallel for export and imports
+FILE_SIZE and wildcarding with %U or %L (depending on version
+Limit file_size
+
+
+metrics=yes logtime=all
+
+Fake the dictionary stats to show how collecting it can improve the data pump time.
+Show how export and import can have different degree sets (I’m still seeing people who think that if they have only one dump file, they cannot use parallel to import).
+Convert to Secure Lob Files / DB_SECUREFILE=ALWAYS
+For the daily business: Take care about your dict/sys/system stats and 
+
+##### Using Data Pump
+FLASHBACK_SCN and FLASHBACK_TIME
+FLASHBACK_TIME=systimestamp
+
+##### Performance Tweaks
+CONSTRAINT_NOVALIDATE
+Parallelism: workers versus PQ, how it shows up in the interactive STATUS command, how and why we might not go parallel (network mode doesn't support PQ, BasicFile LOBs)
+
+The importance of dictionary and database stats, when/whether to gather after import, turning off gathering stats on load
+CONSTRAINT_NOVALIDATE and how to re-enable validation afterwards
+
+Automatic parallelism for index creation on import
+
+Always exclude statistics - regather or use DBMS_STATS
+
+Compressions - compare algorithm (ACO) check dump file size
+Compress dump file after export
+
+##### Monitoring and Tracing and Troubleshooting
+New views in 23ai:
+V_$DATAPUMP_PROCESSWAIT_INFO
+V_$DATAPUMP_PROCESS_INFO
+V_$DATAPUMP_SESSIONWAIT_INFO
+Monitoring performace with V$SESSION_LONGOPS
+
+Different trace levels and when to use it
+take a look at awr or execute certain SQL queries when DP runs slow.
+
+My Data Pump tracing recipe  
+
+Use keep_master and query the master_table showing we can use it to check the total rows for each table that was exported vs imported
+
+Important views: dba_datapump_jobs (also the user variant), dba_datapump_sessions, database_export_objects, schema_export_objects and table_export_objects
+
+SQLFILE
+
+ABORT_STEP=1
+
+master_only=YES
+
+##### Usability
+Using Data Pump through SQLcl
+Interactive console commands
+Attaching to a job
+Using Interactive Mode to Stop and Reattach to a Job
+Universal (backwardly compatible) client (and how you don't need the client if you use the API)
+Interactive command line usage in all its forms: stop, start, adjust parallelism or tracing, status, skip current, etc
+
+##### Customizing Data Pump jobs
+EXCLUDE and INCLUDE, and how these differ from Table or Schema mode (I don't think this would quite be in the "advanced" category, but showing how filters are so much easier in the parfile than the command line would be helpful
+    Full mode: DATABASE_EXPORT_OBJECTS
+    Schema mode: SCHEMA_EXPORT_OBJECTS
+    Table and Tablespace mode: TABLE_EXPORT_OBJECTS
+Mutually exclusive until 21c
+
+
+DATA_OPTIONS & TRANSFORM parameters and their options
+
+REMAP_xxxx (table, schema, tablespace)
+
+VIEWS_AS_TABLES
+
+CONTENT=ALL DATA_ONLY METADATA_ONLY
+
+##### Determining Import Success
+Show how to compare source and target (objects and rows) using DBMS_COMPARISON.
+Also, show a script to compare an export log versus an import log (when the source is not available).
+Marcus D - log file analyzer
+
+##### Encryption and Checksumming
+Do strings on a dump file
+
+manual checksum in 19c
+
+Encrypted vs no encrypted (run strings to show that we can grep the contents when it is not encrypted) => requires ASO
+Changing with dd a block on the dump file and show that with checksum it will fail before, while without it will fail at the middle.
+ENCRYPTION and COMPRESSION usage with licensing information
+CHECKSUM
+
+##### Upgrade and Convert
+Export from 19c non-CDB - import directly into 23ai PDB
+
+##### Going back to earlier releases
+VERSION parameter and general interoperability and compatibility
+How to use version parameter to export from higher release and import on lower release
+
+
+##### Using DBMS_DATAPUMP
+well for sure DP API. I never used it in ACS and always thought I can do everything with a PAR file and the binaries.
+just showing how to use the DBMS_DATAPUMP API.
+
+SQL trace and check trace file
+
+##### Metadata API
+DBMS_METADATA.GET_DDL
+DBMS_METADATA_DIFF package especially the COMPARE_ALTER routines
+The stuff in the developer package: DBMS_DEVELOPER.GET????
+sqlfile=
+
+

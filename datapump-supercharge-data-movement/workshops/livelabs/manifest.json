@@ -19,6 +19,11 @@
       "filename": "../../01-initialize-environment/initialize-environment.md"
     },
     {
+      "title": "Lab 2: Architecture",
+      "description": "Architecture",
+      "filename": "../../02-architecture/architecture.md"
+    },
+    {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"

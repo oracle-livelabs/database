@@ -25,7 +25,7 @@ You can switch between environments using the shortcuts shown in the last column
 
 ![Overview of the Oracle Homes and databases in the lab](./images/introduction-overview.png " ")
 
-## Migration methods and processes
+## Data Pump export and import modes
 
 ### Full 
 
