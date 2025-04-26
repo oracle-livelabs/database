@@ -6,7 +6,7 @@ STUFF TO REMEMBER
 
     ```
     <copy>
-    desc dbms_metadata
+
     </copy>
 
     -- Be sure to hit RETURN
@@ -21,25 +21,10 @@ STUFF TO REMEMBER
 **************************************************************
 
 
-##### Best Practices
-Data Pump bundle patch
-PARALLEL basics (not available with SE)
-PARALLEL settings - 2x physical cores, ECPUs/4 or no of OCPUs
-Different parallel for export and imports
-FILE_SIZE and wildcarding with %U or %L (depending on version
-Limit file_size
-
-
-metrics=yes logtime=all
-
-Fake the dictionary stats to show how collecting it can improve the data pump time.
-Show how export and import can have different degree sets (I’m still seeing people who think that if they have only one dump file, they cannot use parallel to import).
-Convert to Secure Lob Files / DB_SECUREFILE=ALWAYS
-For the daily business: Take care about your dict/sys/system stats and 
-
 ##### Using Data Pump
 FLASHBACK_SCN and FLASHBACK_TIME
 FLASHBACK_TIME=systimestamp
+
 
 ##### Performance Tweaks
 CONSTRAINT_NOVALIDATE
@@ -52,8 +37,9 @@ Automatic parallelism for index creation on import
 
 Always exclude statistics - regather or use DBMS_STATS
 
-Compressions - compare algorithm (ACO) check dump file size
-Compress dump file after export
+Convert to Secure Lob Files / DB_SECUREFILE=ALWAYS
+
+
 
 ##### Monitoring and Tracing and Troubleshooting
 New views in 23ai:
@@ -76,10 +62,6 @@ SQLFILE
 ABORT_STEP=1
 
 master_only=YES
-
-
-##### Network imports
-Dumpfile versus Network Mode -- again, do the same thing both ways.
 
 ##### Usability
 Interactive console commands
@@ -152,21 +134,94 @@ sqlfile=
 ##########################################################################################################################################
 ##########################################################################################################################################
 
-
-scripts/dp-03-export.par
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-03-export.par > /dev/null
 schemas=f1
 directory=dpdir
 dumpfile=f1.dmp
 logfile=f1-export.log
+EOF
 
-cat /home/oracle/scripts/dp-03-import.par
-    directory=dpdir
-    dumpfile=f1.dmp
-    logfile=f1-import.log
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-03-import.par > /dev/null
+directory=dpdir
+dumpfile=f1.dmp
+logfile=f1-import.log
+EOF
 
-cat /home/oracle/scripts/dp-03-import-network.par
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-03-import-network.par > /dev/null
 schemas=f1
 directory=dpdir
 logfile=f1-import.log
 network_link=ftexlink
 remap_schema=f1:f2
+EOF
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-bp-1.par > /dev/null
+schemas=f1
+directory=dpdir
+dumpfile=f1.dmp
+logfile=f1-export.log
+metrics=yes
+logtime=all
+EOF
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-bp-2.par > /dev/null
+schemas=f1
+directory=dpdir
+logfile=f1-export.log
+metrics=yes
+logtime=all
+dumpfile=f1_%L.dmp
+filesize=1M
+EOF
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-bp-3.par > /dev/null
+schemas=f1
+directory=dpdir
+logfile=f1-export.log
+metrics=yes
+logtime=all
+dumpfile=f1_%L.dmp
+filesize=1M
+parallel=4
+EOF
+
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-comp-no.par > /dev/null
+schemas=f1
+directory=dpdir
+logfile=f1-export.log
+metrics=yes
+logtime=all
+dumpfile=f1_nocomp_%L.dmp
+filesize=1M
+parallel=4
+job_name=NO_COMPRESSION
+EOF
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-comp-med.par > /dev/null
+schemas=f1
+directory=dpdir
+logfile=f1-export-medium.log
+metrics=yes
+logtime=all
+dumpfile=f1_compmed_%L.dmp
+filesize=1M
+parallel=4
+job_name=MEDIUM_COMPRESSION
+compression=all
+compression_algorithm=medium
+EOF
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-comp-high.par > /dev/null
+schemas=f1
+directory=dpdir
+logfile=f1-export-high.log
+metrics=yes
+logtime=all
+dumpfile=f1_comphigh_%L.dmp
+filesize=1M
+parallel=4
+job_name=HIGH_COMPRESSION
+compression=all
+compression_algorithm=high
+EOF
