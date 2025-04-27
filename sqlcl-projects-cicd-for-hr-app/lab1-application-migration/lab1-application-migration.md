@@ -71,25 +71,23 @@ Use SQLcl's **project** command to:
 ## Task 2: Project Initialization
 
 * **Connecting to DEV_USER via SQLcl:**
-    1. Launch SQLcl in the jupyter terminal
-        ```sql
+
+   1. Setup "TNS\_ADMIN" :
+- We are connecting to an Autonomous Database, so we set TNS_ADMIN to /wallet to tell SQLcl where to find the wallet and network configuration files for secure connection.
+
+    ```sql
       <copy>
-        sql SYS/[PASSWORD]@10.89.0.1:1521/FREEPDB1 as sysdba
+        export TNS_ADMIN=/wallet
       </copy>
       ```
-      ![Launch SQLcl](./images/launch-sqlcl.png " ")
 
-      >**Tip:** Click the icon in the screenshot below to enter full-screen mode.
-
-      ![Click the icon at top left to enter full screen mode](./images/full-terminal-screen.png " ")
-
-    2. Connect to the DEV_USER schema using connect command
+   2. Connect to the DEV_USER schema using :
         ```sql
         <copy>
-            connect DEV_USER/[PASSWORD]
+             sql dev_user/$DBPASSWORD@"$DBCONNECTION"
         </copy>
         ```
-        ![Connect to DEV_USER](./images/connect-to-dev-user.png " ")
+        ![Connect to DEV_USER](./images/launch-sqlcl.png " ")
 
     >**Tip:** You can clear your screen anytime you want by using **clear screen** command or just its short format **cle scr**:
         ```sql
@@ -116,6 +114,15 @@ Use SQLcl's **project** command to:
         <!--In SQLcl, it is used as a shell escape to run external (non-SQLcl) commands.-->
 
     3. Add and commit
+    
+    - Before committing to Git, make sure to configure your user identity. Run the following commands to set your name and email address, which Git uses to track your commits:
+
+        ```sql
+        <copy>
+            !git config --global user.name "Your Name"
+        !git config --global user.email "your.email@example.com"
+        </copy>
+        ```
 
         ```sql
         <copy>
@@ -557,7 +564,7 @@ In the next task, we will learn how to deploy these changes to the production en
 
         ```sh
         <copy>
-            project deploy -file artifact/HrManager-1.O.0.zip  -verbose
+            project deploy -file artifact/HrManager-1.0.0.zip  -verbose
         </copy>
         ```
 

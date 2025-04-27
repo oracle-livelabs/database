@@ -302,6 +302,18 @@ Before generating the artifact, you need to return the install.sql file to its i
 3. Save the **install.sql** file by pressing **Cmd + S** on Mac or **Ctrl + S** on Windows/Linux.
 
 4. Add and commit.
+    ```sql
+    <copy>
+        !git add --all
+    </copy>
+    ```
+
+    ```sql
+    <copy>
+        !git commit -m "generated deployable artifact"
+    </copy>
+    ```
+
 
 5. Run `project gen-artifact`
 
@@ -341,7 +353,7 @@ Before generating the artifact, you need to return the install.sql file to its i
 
         ```sql
         <copy>
-            project deploy -file artifact/HrManager-2.O.0.zip  -verbose
+            project deploy -file artifact/HrManager-2.0.0.zip  -verbose
         </copy>
         ```
         <!--![project deploy ](./images/project-deploy-cmd.png " ")-->

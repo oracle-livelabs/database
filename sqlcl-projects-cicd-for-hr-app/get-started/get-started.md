@@ -241,23 +241,40 @@ Next, you will modify the .env file, which is located in your application's root
 
 3. Press Esc + I to enter insert mode.
 
-4. Navigate to the placeholders. Replace [Your Lab's IP] with your actual lab IP in the following variables:
+4. Navigate to the placeholders. Replace [THE PLACEHOLDER] with your instance links in the following variables:
 
       ```text
       <copy>
       VITE_API_URL=http://[Your Lab's IP]:5500/api/connection
-      VITE_BASE_URL=http://[Your Lab's IP]:8181/ords/
+      VITE_BASE_URL=http://[ORDS LINK]:8181/ords/
       VITE_DB_USERNAME=dev_user
       </copy>
-      ```
+       ```
 
-      ***Important!*** If you find VITE\_DB\_USERNAME (dev_user) in uppercase, make sure to convert it to lowercase. This value is used in the ORDS endpoints within the application, and it must be lowercase for the endpoints to function correctly.
+     * **`VITE_API_URL`:** The base URL for your API connection, replace placeholder with your jupyter IP address.
 
-     * **`VITE_API_URL`:** The base URL for your API connection.
+     * **`VITE_BASE_URL`:** The base URL for your ORDS REST service. You can obtain this URL using either of these methods:
+          - Method 1: Use your terminal and run the following command: 
+          ```text
+            <copy>
+          echo $ORDSURL"
+          </copy>
+            ```
+         ![Get the ords link](images/echo-ords-link.png " ")
 
-     * **`VITE_BASE_URL`:** The base URL for your ORDS REST service.
+          - Method 2: Retrieve the URL from SQL Developer Web:
+            1. Access SQL Developer Web using the link provided in the login info page
+            2. Log in with username "dev_user" and the Database Password (found in the login info page)
+            3. Copy the URL from your browser's address bar
+            4. Remove the final "dev_user/_sdw/" portion from the URL
+            ![Get the ords link from ORDS ](images/ords-link-url.png " ")
 
-     * **`VITE_DB_USERNAME`:** The database username which should be in lowercase.
+
+     * **`VITE_DB_USERNAME`:** The database username which should be in lowercase. during this workshop we will be using dev_user for development environment and prod_user for production environment.
+
+    ***Important!*** If you find VITE\_DB\_USERNAME (dev_user) in uppercase, make sure to convert it to lowercase. This value is used in the ORDS endpoints within the application, and it must be lowercase for the endpoints to function correctly.
+
+
 
      ![Open the environment variable file](images/env-file-opened3.png " ")
      <!--![Open the environment variable file](images/env-file-opened.png " ")-->
