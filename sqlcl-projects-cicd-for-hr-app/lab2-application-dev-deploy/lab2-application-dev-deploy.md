@@ -67,7 +67,7 @@ The last issue in the previous task occurred because the departments table is mi
 
     ```sql
     <copy>
-        cd /home/oracle/assets/workshops/sqlcl-projects-react-app/scripts/
+        cd /home/assets/assets/workshops/sqlcl-projects-react-app/scripts/
     </copy>
     ```
 

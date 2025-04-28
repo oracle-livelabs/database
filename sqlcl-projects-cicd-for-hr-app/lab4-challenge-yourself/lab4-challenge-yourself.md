@@ -92,7 +92,7 @@ Run the SQL scripts (attendance\_table.sql and performancereviews\_table.sql) fr
 
         ```sql
         <copy>
-            connect DEV_USER/[PASSWORD]
+            sql dev_user/$DBPASSWORD@"$DBCONNECTION"
         </copy>
         ```
 
@@ -163,13 +163,13 @@ Follow the same steps as in the previous lab (starting from `project export`), a
 
     ```sql
     <copy>
-        connect DEV_USER/[PASSWORD]
+        sql dev_user/$DBPASSWORD@"$DBCONNECTION"
     </copy>
     ```
 
     ```sql
     <copy>
-        cd /home/oracle/assets/workshops/sqlcl-projects-react-app
+        cd /home/assets/assets/workshops/sqlcl-projects-react-app
     </copy>
     ```
 
