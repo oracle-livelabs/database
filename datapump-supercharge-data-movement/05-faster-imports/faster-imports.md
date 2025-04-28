@@ -1,10 +1,10 @@
-# Best Practices and Other Settings
+# Faster Imports
 
 ## Introduction
 
-In this lab, you will see some best practices that will help you get the more out of Data Pump. In addition, you will use some of the settings in Data Pump.
+If you use Data Pump to migrate entire databases, you often want it to happen as fast as possible. There are several techniques that you can use with Data Pump that will speed up the import process. In this lab, you will use these techniques and see the effect of them.
 
-Estimated Time: 10 Minutes
+Estimated Time: 20 Minutes
 
 ### Objectives
 
@@ -30,7 +30,7 @@ Oracle Database stores LOBs in two formats. *SecureFile LOBs* is the newest form
     </copy>
     ```
 
-2. Examine a precreated parameter file.
+2. Examine a pre-created parameter file.
 
     ```
     <copy>
@@ -38,7 +38,19 @@ Oracle Database stores LOBs in two formats. *SecureFile LOBs* is the newest form
     </copy>
     ```
 
-    * This is a simple import using `PARALLEL=4`.
+    * This is a simple import parameter file with nothing special.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    directory=dpdir
+    dumpfile=faster-import-lob.dmp
+    logfile=faster-import-lob-basicfile.log
+    metrics=yes
+    logtime=all
+    parallel=4    
+    ```
+    </details> 
 
 3. Set the environment to *FTEX* and import.
     
