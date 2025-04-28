@@ -32,7 +32,12 @@
       "title": "Lab 4: Best Practices and Other Settings",
       "description": "Best Practices and Other Settings",
       "filename": "../../04-settings-and-best-practices/settings-and-best-practices.md"
-    },    
+    },
+    {
+      "title": "Lab 5: Faster Imports",
+      "description": "Faster Imports",
+      "filename": "../../05-faster-imports/faster-imports.md"
+    },
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",

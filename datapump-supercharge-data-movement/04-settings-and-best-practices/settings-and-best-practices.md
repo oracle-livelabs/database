@@ -373,7 +373,7 @@ Besides the general best practices, there are a number of useful settings. Compr
     -- Be sure to hit RETURN
     ```
 
-        <details>
+    <details>
     <summary>*click to see the output*</summary>
     ``` text
     $ . ftex
