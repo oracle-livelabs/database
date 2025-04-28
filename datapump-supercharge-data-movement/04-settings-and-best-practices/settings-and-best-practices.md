@@ -21,7 +21,7 @@ This lab assumes:
 
 ## Task 1: Best Practices
 
-Applying these practices will help you get more out of Data Pump and avoid some of the common mistakes. You will enhance the parameter files that you used in the previous lab.
+Applying these practices will help you get more out of Data Pump and avoid some of the common mistakes. You will enhance the parameter file that you used in the previous lab.
 
 1. Use the *yellow* terminal 🟨. Set the environment to *FTEX* and check for the Data Pump Bundle Patch.
 
@@ -35,7 +35,7 @@ Applying these practices will help you get more out of Data Pump and avoid some 
     ```
 
     * You should be able to see a patch named *DATAPUMP BUNDLE PATCH*.
-    * The Data Pump fixes usually don't come into a Releaes Update, but there is a bundle patch with most Data Pump fixes.
+    * The Data Pump fixes usually don't come into a Release Update, but there is a bundle patch with most Data Pump fixes.
     * The Data Pump Bundle Patch contains not only a lot of functionality fixes, but also several performance fixes.
     * Oracle strongly recommends that you apply the bundle patch when working with Data Pump.
 
@@ -53,7 +53,7 @@ Applying these practices will help you get more out of Data Pump and avoid some 
     ```
     </details> 
 
-2. Add diagnostic information to the log file using the *metrics* and *logtime* parameters. Check the pre-created parameter file.
+2. Add diagnostic information to the log file using the `METRICS` and `LOGTIME` parameters. Check the pre-created parameter file.
 
     ```
     <copy>
@@ -61,8 +61,8 @@ Applying these practices will help you get more out of Data Pump and avoid some 
     </copy>
     ```
 
-    * By adding *metrics* and *logtime* to your parameter file, the log file contains much more information.
-    * This will help you troubleshoot issues.
+    * By adding `METRICS` and `LOGTIME` to your parameter file, the log file contains much more information.
+    * This will help you troubleshoot issues and get a better understanding of what happens during a job.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -85,9 +85,9 @@ Applying these practices will help you get more out of Data Pump and avoid some 
     </copy>
     ```
 
-    * The *dumpfile* parameter now contains *%L*. Data Pump now creates multiple dump files (when needed) and generates unique file names. In earlier versions of Data Pump, you would use *%U* instead.
+    * The `DUMPFILE` parameter now contains `%L`. Data Pump now creates multiple dump files (when needed) and generates unique file names. In earlier versions of Data Pump, you would use *%U* instead.
     * Allowing Data Pump to create multiple files is essential to maximize the throughput of parallel exports.
-    * *filesize* tells Data Pump to split the files when reaching a certain size. The *1M* setting splits at 1 MB allowing you to neatly put your dump files on floppy disks... Just kidding, this low setting is for demonstration purposes only. Normally, you would have a much larger setting. When moving data to the cloud a *filesize=5g* is normally a good setting.
+    * `FILESIZE` tells Data Pump to split the files when reaching a certain size. The *1M* setting splits at 1 MB allowing you to neatly put your dump files on floppy disks... Just kidding, this low setting is for demonstration purposes only. Normally, you would have a much larger setting. When moving data to the cloud a `FILESIZE=5G` is normally a good setting.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -111,14 +111,14 @@ Applying these practices will help you get more out of Data Pump and avoid some 
     </copy>
     ```
 
-    * Setting a *parallel* degree allows Data Pump to spawn worker processes to speed up the process.
-    * With a setting of *parallel=4* Data Pump uses one control process and up to four worker processes. 
+    * Setting a `PARALLEL` degree allows Data Pump to spawn worker processes to speed up the process.
+    * With a setting of `PARALLEL=4` Data Pump uses one control process and up to four worker processes. 
     * If one worker process is using parallel query processes (PQ), you will see less worker processes being active.
-    * The parallel degree on export and on import are completely independent. You can export with parallel=4 and import with parallel=16 - even if you just have four dump files.
+    * The parallel degree on export and on import are completely independent. You can export with `PARALLEL=4` and import with `PARALLEL=16` - even if you just have four dump files.
     * You can even import in parallel when you have just one dump file.
     * To avoid bottlenecks during parallel export, be sure to allow multiple dump files using the *%L* wildcard discussed above.
-    * As a rule-of-thumb, set parallel to twice the number of physical cores, or number of ECPUs / 4 in OCI (alternatively number of OCPUs).
-    * Using parallel requires Enterprise Edition.
+    * As a rule-of-thumb, set `PARALLEL` to twice the number of physical cores, or number of ECPUs / 4 in OCI (alternatively number of OCPUs).
+    * Using `PARALLEL` requires Enterprise Edition.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -152,7 +152,7 @@ Applying these practices will help you get more out of Data Pump and avoid some 
     * Data Pump jobs - both export and import - are querying the data dictionary massively. 
     * To avoid issues with poor performing SQLs ensure that the dictionary statistics are current.
     * Oracle recommends gathering dictionary statistics before an export, before an import and immediately after an import.
-    * You can also use `dbms_stats.gather_dictionary_stats`, but the Data Pump product management team recommends gathering schema statistics instead.
+    * You can also use `DBMS_STATS.GATHER_DICTIONARY_STATS`, but the Data Pump product management team recommends gathering schema statistics instead.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -330,7 +330,7 @@ Applying these practices will help you get more out of Data Pump and avoid some 
 
 Besides the general best practices, there are a number of useful settings. Compression reduces the size of the dump files and make it easier to transfer them to the cloud or other locations. Using compression during export requires a license for the Advanced Compression Option.
 
-1. Examine a parameter file with compression.
+1. Still in the *yellow* terminal 🟨. Examine a parameter file with compression.
 
     ```
     <copy>
@@ -338,8 +338,8 @@ Besides the general best practices, there are a number of useful settings. Compr
     </copy>
     ```
 
-    * *compression=all* instructs Data Pump to compress metadata and data.
-    * *compression\_algorithm* tells which algorithm to use. *medium* is also the default, because it often gives a good balance between compression ratio and CPU usage.
+    * `COMPRESSION=ALL` instructs Data Pump to compress metadata and data.
+    * `COMPRESSION_ALGORITHM` tells which algorithm to use. *medium* is also the default, because it often gives a good balance between compression ratio and CPU usage.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -645,15 +645,156 @@ Besides the general best practices, there are a number of useful settings. Compr
 
 5. Compression uses CPU cycles. But it also reduces the amount of I/O because less needs to be written to or read from the dump files. Often, you'll see that applying compression reduces the overall runtime of the export or import.
 
-## Task 3: Consistent exports and imports
+## Task 3: Consistent exports
+
+Data Pump attempts to minimize the impact on the database during export. This means that each table is exported in a consistent manner, but the entire data set is not consistent. As an example, table T1 is exported at SCN 100 and all rows are from SCN 100. Table T2 is exported a little later at SCN 105, T3 at SCN 150 and so forth. If you export in a database with no users or if you plan on using Oracle GoldenGate later on, that's not a problem. But sometimes you want to export a complete, consistent data from an active database. 
+
+1. Still in the *yellow* terminal 🟨. Examine the following parameter file.
+
+    ```
+    <copy>
+    cat /home/oracle/scripts/dp-04-consistent.par
+    </copy>
+    ```
+
+    * It's an export for the *F1* schema. 
+    * Since there's no `FLASHBACK_TIME` or `FLASHBACK_SCN` parameter, it means that you must export from an inactive database in order to get a fully consistent data set.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    schemas=f1
+    directory=dpdir
+    logfile=f1-export-consistent.log
+    metrics=yes
+    logtime=all
+    dumpfile=f1-export-consistent_%L.dmp
+    ```
+    </details> 
+
+2. Add a parameter instructing Data Pump to perform a fully consistent export.
+
+    ```
+    <copy>
+    echo "flashback_time=systimestamp" >> /home/oracle/scripts/dp-04-consistent.par
+    cat /home/oracle/scripts/dp-04-consistent.par
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    * Setting `FLASHBACK_TIME=SYSTIMESTAMP` is an easy way to make the export fully consistent.
+    * At the start of the export, Data Pump records the current SCN and extracts the rows from all the tables at that specific SCN.
+    * The method uses Flashback Query which relies on *undo* information. In an active database, if the undo information is not available, you might hit `ORA-01555: snapshot too old`.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    schemas=f1
+    directory=dpdir
+    logfile=f1-export-consistent.log
+    metrics=yes
+    logtime=all
+    dumpfile=f1-export-consistent_%L.dmp
+    flashback_time=systimestamp
+    ```
+    </details> 
+
+3. Start the export.
+
+    ```
+    <copy>
+    . ftex
+    rm /home/oracle/dpdir/*
+    expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-consistent.par
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ . ftex
+    $ rm /home/oracle/dpdir/*
+    $ expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-consistent.par
+    
+    Export: Release 19.0.0.0.0 - Production on Mon Apr 28 05:25:51 2025
+    Version 19.21.0.0.0
+    
+    Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+    
+    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+    28-APR-25 05:25:53.692: Starting "DPUSER"."SYS_EXPORT_SCHEMA_02":  dpuser/******** parfile=/home/oracle/scripts/dp-04-consistent.par
+    28-APR-25 05:25:53.958: W-1 Startup took 0 seconds
+    28-APR-25 05:25:56.216: W-1 Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
+    28-APR-25 05:25:56.358: W-1 Processing object type SCHEMA_EXPORT/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
+    28-APR-25 05:25:56.386: W-1      Completed 19 INDEX_STATISTICS objects in 0 seconds
+    28-APR-25 05:25:56.522: W-1 Processing object type SCHEMA_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
+    28-APR-25 05:25:56.528: W-1      Completed 14 TABLE_STATISTICS objects in 0 seconds
+    28-APR-25 05:25:59.968: W-1 Processing object type SCHEMA_EXPORT/STATISTICS/MARKER
+    28-APR-25 05:26:00.117: W-1      Completed 1 MARKER objects in 4 seconds
+    28-APR-25 05:26:00.159: W-1 Processing object type SCHEMA_EXPORT/USER
+    28-APR-25 05:26:00.170: W-1      Completed 1 USER objects in 0 seconds
+    28-APR-25 05:26:00.190: W-1 Processing object type SCHEMA_EXPORT/SYSTEM_GRANT
+    28-APR-25 05:26:00.194: W-1      Completed 2 SYSTEM_GRANT objects in 0 seconds
+    28-APR-25 05:26:00.225: W-1 Processing object type SCHEMA_EXPORT/DEFAULT_ROLE
+    28-APR-25 05:26:00.230: W-1      Completed 1 DEFAULT_ROLE objects in 0 seconds
+    28-APR-25 05:26:00.260: W-1 Processing object type SCHEMA_EXPORT/TABLESPACE_QUOTA
+    28-APR-25 05:26:00.264: W-1      Completed 1 TABLESPACE_QUOTA objects in 0 seconds
+    28-APR-25 05:26:00.533: W-1 Processing object type SCHEMA_EXPORT/PRE_SCHEMA/PROCACT_SCHEMA
+    28-APR-25 05:26:00.537: W-1      Completed 1 PROCACT_SCHEMA objects in 0 seconds
+    28-APR-25 05:26:04.663: W-1 Processing object type SCHEMA_EXPORT/TABLE/TABLE
+    28-APR-25 05:26:04.761: W-1      Completed 14 TABLE objects in 1 seconds
+    28-APR-25 05:26:07.763: W-1 Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
+    28-APR-25 05:26:07.772: W-1      Completed 22 CONSTRAINT objects in 1 seconds
+    28-APR-25 05:26:09.268: W-1 . . exported "F1"."F1_LAPTIMES"                          16.98 MB  571047 rows in 0 seconds using direct_path
+    28-APR-25 05:26:09.306: W-1 . . exported "F1"."F1_RESULTS"                           1.429 MB   26439 rows in 0 seconds using direct_path
+    28-APR-25 05:26:09.332: W-1 . . exported "F1"."F1_DRIVERSTANDINGS"                   916.2 KB   34511 rows in 0 seconds using direct_path
+    28-APR-25 05:26:09.357: W-1 . . exported "F1"."F1_QUALIFYING"                        419.0 KB   10174 rows in 0 seconds using direct_path
+    28-APR-25 05:26:09.382: W-1 . . exported "F1"."F1_PITSTOPS"                          416.8 KB   10793 rows in 0 seconds using direct_path
+    28-APR-25 05:26:09.406: W-1 . . exported "F1"."F1_CONSTRUCTORSTANDINGS"              344.1 KB   13231 rows in 0 seconds using direct_path
+    28-APR-25 05:26:09.430: W-1 . . exported "F1"."F1_CONSTRUCTORRESULTS"                225.2 KB   12465 rows in 0 seconds using direct_path
+    28-APR-25 05:26:09.455: W-1 . . exported "F1"."F1_RACES"                             131.4 KB    1125 rows in 0 seconds using direct_path
+    28-APR-25 05:26:09.478: W-1 . . exported "F1"."F1_DRIVERS"                           87.86 KB     859 rows in 0 seconds using direct_path
+    28-APR-25 05:26:09.502: W-1 . . exported "F1"."F1_SPRINTRESULTS"                     29.88 KB     280 rows in 0 seconds using direct_path
+    28-APR-25 05:26:09.524: W-1 . . exported "F1"."F1_CONSTRUCTORS"                      22.97 KB     212 rows in 0 seconds using direct_path
+    28-APR-25 05:26:09.546: W-1 . . exported "F1"."F1_CIRCUITS"                          17.42 KB      77 rows in 0 seconds using direct_path
+    28-APR-25 05:26:09.568: W-1 . . exported "F1"."F1_SEASONS"                           10.03 KB      75 rows in 0 seconds using direct_path
+    28-APR-25 05:26:09.589: W-1 . . exported "F1"."F1_STATUS"                            7.843 KB     139 rows in 0 seconds using direct_path
+    28-APR-25 05:26:10.337: W-1      Completed 14 SCHEMA_EXPORT/TABLE/TABLE_DATA objects in 0 seconds
+    28-APR-25 05:26:10.999: W-1 Master table "DPUSER"."SYS_EXPORT_SCHEMA_02" successfully loaded/unloaded
+    28-APR-25 05:26:11.001: ******************************************************************************
+    28-APR-25 05:26:11.002: Dump file set for DPUSER.SYS_EXPORT_SCHEMA_02 is:
+    28-APR-25 05:26:11.003:   /home/oracle/dpdir/f1-export-consistent_01.dmp
+    28-APR-25 05:26:11.010: Job "DPUSER"."SYS_EXPORT_SCHEMA_02" successfully completed at Mon Apr 28 05:26:11 2025 elapsed 0 00:00:18
+    ```
+    </details>     
+
+4. Verify the use of `FLASHBACK_SCN` from the export log file.
+
+    ```
+    <copy>
+    grep -i "flashback" /home/oracle/dpdir/f1-export-consistent.log
+    </copy>
+    ```
+
+    * The Data Pump log file contains a list of all parameters used.
+    * You can find the parameter `FLASHBACK_TIME=SYSTIMESTAMP`.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    $ grep -i "flashback" /home/oracle/dpdir/f1-export-consistent.log
+    28-APR-25 05:25:52.880: ;;;  parfile:  flashback_time=systimestamp
+    ```
+    </details>     
 
 You may now *proceed to the next lab*.
 
 ## Additional information
 
-* This lab showed only a portion of the available parameters. Data Pump is a very powerful and flexible utility. Find a complete list of parameters in the [Utilities Guide](https://docs.oracle.com/en/database/oracle/oracle-database/23/sutil/oracle-data-pump.html#GUID-501A9908-BCC5-434C-8853-9A6096766B5A). 
-* You can learn much more about [parallel export](https://www.youtube.com/watch?v=CUHcKHx_YvA&t=3310s) and [parallel import](https://www.youtube.com/watch?v=CUHcKHx_YvA&t=4029s) in our webinar, [Data Pump Extreme - Deep Dive with Development](https://dohdatabase.com/webinars/).
-
+* Webinar, [Data Pump Extreme - Deep Dive with Development](https://www.youtube.com/watch?v=CUHcKHx_YvA&t=2169s)
 
 ## Acknowledgments
 

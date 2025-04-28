@@ -21,10 +21,6 @@ STUFF TO REMEMBER
 **************************************************************
 
 
-##### Using Data Pump
-FLASHBACK_SCN and FLASHBACK_TIME
-FLASHBACK_TIME=systimestamp
-
 
 ##### Performance Tweaks
 CONSTRAINT_NOVALIDATE
@@ -39,7 +35,27 @@ Always exclude statistics - regather or use DBMS_STATS
 
 Convert to Secure Lob Files / DB_SECUREFILE=ALWAYS
 
+##### Customizing Data Pump jobs
+EXCLUDE and INCLUDE, and how these differ from Table or Schema mode (I don't think this would quite be in the "advanced" category, but showing how filters are so much easier in the parfile than the command line would be helpful
+    Full mode: DATABASE_EXPORT_OBJECTS
+    Schema mode: SCHEMA_EXPORT_OBJECTS
+    Table and Tablespace mode: TABLE_EXPORT_OBJECTS
+Mutually exclusive until 21c
 
+
+DATA_OPTIONS & TRANSFORM parameters and their options
+
+REMAP_xxxx (table, schema, tablespace)
+
+VIEWS_AS_TABLES
+
+CONTENT=ALL DATA_ONLY METADATA_ONLY
+
+
+##### Determining Import Success
+Show how to compare source and target (objects and rows) using DBMS_COMPARISON.
+Also, show a script to compare an export log versus an import log (when the source is not available).
+Marcus D - log file analyzer
 
 ##### Monitoring and Tracing and Troubleshooting
 New views in 23ai:
@@ -69,27 +85,6 @@ Attaching to a job
 Using Interactive Mode to Stop and Reattach to a Job
 Universal (backwardly compatible) client (and how you don't need the client if you use the API)
 Interactive command line usage in all its forms: stop, start, adjust parallelism or tracing, status, skip current, etc
-
-##### Customizing Data Pump jobs
-EXCLUDE and INCLUDE, and how these differ from Table or Schema mode (I don't think this would quite be in the "advanced" category, but showing how filters are so much easier in the parfile than the command line would be helpful
-    Full mode: DATABASE_EXPORT_OBJECTS
-    Schema mode: SCHEMA_EXPORT_OBJECTS
-    Table and Tablespace mode: TABLE_EXPORT_OBJECTS
-Mutually exclusive until 21c
-
-
-DATA_OPTIONS & TRANSFORM parameters and their options
-
-REMAP_xxxx (table, schema, tablespace)
-
-VIEWS_AS_TABLES
-
-CONTENT=ALL DATA_ONLY METADATA_ONLY
-
-##### Determining Import Success
-Show how to compare source and target (objects and rows) using DBMS_COMPARISON.
-Also, show a script to compare an export log versus an import log (when the source is not available).
-Marcus D - log file analyzer
 
 ##### Encryption and Checksumming
 Do strings on a dump file
@@ -225,3 +220,150 @@ job_name=HIGH_COMPRESSION
 compression=all
 compression_algorithm=high
 EOF
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-consistent.par > /dev/null
+schemas=f1
+directory=dpdir
+logfile=f1-export-consistent.log
+metrics=yes
+logtime=all
+dumpfile=f1-export-consistent_%L.dmp
+EOF
+
+
+
+
+
+##########################################################################################################################################
+##########################################################################################################################################
+##########################################################################################################################################
+##########################################################################################################################################
+##########################################################################################################################################
+##########################################################################################################################################
+##########################################################################################################################################
+##########################################################################################################################################
+##########################################################################################################################################
+##########################################################################################################################################
+##########################################################################################################################################
+
+
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-consistent.par > /dev/null
+schemas=f1
+directory=dpdir
+logfile=f1-export-consistent.log
+metrics=yes
+logtime=all
+dumpfile=f1-export-consistent_%L.dmp
+EOF
+
+echo "flashback_time=systimestamp" >> /home/oracle/scripts/dp-04-consistent.par
+sqlplus dpuser/oracle<<EOF
+   drop table F1_EXPORT_CONSISTENT;
+EOF
+ . ftex
+    rm /home/oracle/dpdir/*
+    expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-consistent.par
+    
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-consistent-no-import.par > /dev/null
+remap_schema=f1:FNO
+directory=dpdir
+logfile=f1-import-consistent-no.log
+metrics=yes
+logtime=all
+dumpfile=f1-export-consistent_%L.dmp
+sqlfile=foo.sql
+EOF
+
+    impdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-consistent-no-import.par
+
+
+sys.dbms_logrep_imp.instantiate_schema(schema_name=>SYS_CONTEXT('USERENV','CURRENT_SCHEMA'), export_db_name=>'FTEX', inst_scn=>'1665003');
+
+
+exec DBMS_STREAMS_ADM.ADD_TABLE_RULES('"F1"."F1_SEASONS"', 'capture');
+
+
+
+sqlplus dpuser/oracle
+
+
+
+
+
+col base_object_name format a30
+
+select base_object_name, "SCN" 
+from "DPUSER"."F1_EXPORT_CONSISTENT"
+where base_object_type='TABLE'
+      and object_type_path='SCHEMA_EXPORT/TABLE/TABLE_DATA' 
+order by 2;
+
+
+select *
+from "DPUSER"."F1_EXPORT_CONSISTENT"
+where base_object_type='TABLE';
+
+
+SELECT TO_CHAR(TO_NUMBER(EXTRACTVALUE(XMLTYPE(METADATA), '/ROW/SCN'))) AS EXPORT_SCN
+from "DPUSER"."F1_EXPORT_CONSISTENT"
+WHERE ROWNUM = 1;
+
+SELECT OBJECT_TYPE, NAME, PROCESS_ORDER, FLAGS
+from "DPUSER"."F1_EXPORT_CONSISTENT"
+WHERE OBJECT_TYPE = 'EXPORT';
+
+
+SELECT * FROM DBA_APPLY_INSTANTIATED_OBJECTS;
+
+COLUMN name FORMAT a15
+COLUMN type FORMAT a15
+SELECT source_object_name name, 
+       source_object_type type,
+       instantiation_scn, ignore_scn
+
+select * 
+FROM dba_apply_instantiated_objects;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-consistent-no.par > /dev/null
+schemas=f1
+directory=dpdir
+logfile=f1-export-consistent-no.log
+metrics=yes
+logtime=all
+dumpfile=f1-export-consistent-no_%L.dmp
+flashback_time=systimestamp
+EOF
+
+ . ftex
+    rm /home/oracle/dpdir/*
+    expdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-consistent-no.par
+
+sqlplus / as sysdba<<EOF
+   drop user FNO cascade;
+EOF
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-consistent-no-import.par > /dev/null
+remap_schema=f1:FNO
+directory=dpdir
+logfile=f1-import-consistent-no.log
+metrics=yes
+logtime=all
+dumpfile=f1-export-consistent-no_%L.dmp
+EOF
+
+    impdp dpuser/oracle parfile=/home/oracle/scripts/dp-04-consistent-no-import.par
