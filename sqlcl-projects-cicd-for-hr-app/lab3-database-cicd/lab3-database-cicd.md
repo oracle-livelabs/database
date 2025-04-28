@@ -26,27 +26,19 @@ Estimated Lab Time: 15 minutes
 
 ## Task 1: Export Database Changes (project export)
 
-First, you have to be connect to DEV_USER in SQLcl and make sure you are in the application folder </br> /home/oracle/assets/workshops/**sqlcl-projects-react-app**.
+First, you have to be connect to DEV_USER in SQLcl and make sure you are in the application folder </br> /home/assets/assets/workshops/**sqlcl-projects-react-app**.
 
 ```sql
 <copy>
-    sql sys/Welcome23ai@10.89.0.1:1521/FREEPDB1 as sysdba
+    sql dev_user/$DBPASSWORD@"$DBCONNECTION"
 </copy>
 ```
 
 ```sql
 <copy>
-    connect DEV_USER
+    cd /home/assets/assets/workshops/sqlcl-projects-react-app
 </copy>
 ```
-
-```sql
-<copy>
-    cd /home/oracle/assets/workshops/sqlcl-projects-react-app/
-</copy>
-```
-
-![Connect to DEV_USER](./images/connec-to-dev-and-be-in-the-app-dir.png " ")
 
 >**Note:** You must be in the project folder (in your case **sqlcl-projects-react-app** is your project/application folder) to execute project commands; otherwise, an error will occur.
 
