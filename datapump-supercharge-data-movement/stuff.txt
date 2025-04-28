@@ -23,8 +23,6 @@ STUFF TO REMEMBER
 ##### Faster Imports
 * CONSTRAINT_NOVALIDATE and how to re-enable validation afterwards
 * Automatic parallelism for index creation on import
-* Always exclude statistics - regather or use DBMS_STATS
-  The importance of dictionary and database stats, when/whether to gather after import, turning off gathering stats on load
 
 ##### Customizing Data Pump Jobs
 EXCLUDE and INCLUDE, and how these differ from Table or Schema mode (I don't think this would quite be in the "advanced" category, but showing how filters are so much easier in the parfile than the command line would be helpful
@@ -240,6 +238,28 @@ parallel=4
 transform=lob_storage:securefile
 EOF
 
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-05-stats-export.par > /dev/null
+schemas=F1
+reuse_dumpfiles=yes
+directory=dpdir
+dumpfile=faster-import-stats-%L.dmp
+logfile=faster-import-stats-export.log
+metrics=yes
+logtime=all
+parallel=4
+reuse_dumpfiles=yes
+exclude=statistics
+EOF
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-05-stats-import.par > /dev/null
+directory=dpdir
+dumpfile=faster-import-stats-%L.dmp
+logfile=faster-import-stats-import.log
+metrics=yes
+logtime=all
+parallel=4
+remap_schema=F1:LAB5STATS
+EOF
 
 ##########################################################################################################################################
 ##########################################################################################################################################

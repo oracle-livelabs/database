@@ -199,7 +199,7 @@ A few things must be in place before you can start a Data Pump job.
     ```
 
     * Normally, 128M to 256M is enough. 
-    * If you frequently run Data Pump jobs, you can use `scope=both` to persist the change.
+    * If you frequently run Data Pump jobs, you can use `SCOPE=BOTH` to persist the change.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -237,7 +237,7 @@ It often takes a number of parameters to start a Data Pump job. If you have many
     </copy>
     ```
 
-    * You can use *parfile* to reference a parameter file.
+    * You can use `PARFILE` to reference a parameter file.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -257,9 +257,9 @@ It often takes a number of parameters to start a Data Pump job. If you have many
     </copy>
     ```
 
-    * *schemas* indicates a schema mode export.
-    * Data Pump names files according to *dumpfile* and *logfile* and stores those files in the directory specified by *directory*.
-    * *reuse\_dumpfiles* allows Data Pump to overwrite existing dump files.
+    * `SCHEMAS` indicates a schema mode export.
+    * Data Pump names files according to `DUMPFILE` and `LOGFILE` and stores those files in the directory specified by `DIRECTORY`.
+    * `REUSE_DUMPFILES` allows Data Pump to overwrite existing dump files.
   
     <details>
     <summary>*click to see the output*</summary>
@@ -288,7 +288,7 @@ With a parameter file you can now start a Data Pump export and import a schema i
     -- Be sure to hit RETURN
     ```
 
-    * To start an export, you use the *expdp* client.
+    * To start an export, you use the `expdp` client.
     * Connect as the user you created in the previous lab.
     * Take the parameters from the parfile specified.
 
@@ -576,8 +576,8 @@ You just done an export/import via a dump file. Let's try to an import using *ne
     ```
 
     * The parameter looks similar to the export parameter file.
-    * Notice the *network\_link* parameter. It instructs Data Pump to import over a database link without a dump file.
-    * Also, notice the *remap\_schema* parameter. Since you just imported the schema *F1* into *UPGR*, you can't import it again. But you can tell Data Pump to rename the schema on import to *F2*. 
+    * Notice the `NETWORK_LINK` parameter. It instructs Data Pump to import over a database link without a dump file.
+    * Also, notice the `REMAP_SCHEMA` parameter. Since you just imported the schema *F1* into *UPGR*, you can't import it again. But you can tell Data Pump to rename the schema on import to *F2*. 
 
     <details>
     <summary>*click to see the output*</summary>
