@@ -46,13 +46,13 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
      * **Password:** A single password used for JupyterLab and all ORDS users.
      * **SQL Developer Web (Database Actions):** Click the provided URL to access Database Actions.
 
-    ![Reservation info](images/reservation-info.png " ")
+    ![Reservation info](images/reservation-info.png =50%x*)
 
 ## Task 2: Sign in Oracle Database Actions
 
 1. Click the SQL Developer Web URL in the Reservation information to access it.
 
-   ![Reservation info](images/reservation-info.png " ")
+   ![Reservation info](images/reservation-info-for-sdw.png " ")
 
 2. Several users have been created for you, including a new `DEV_USER` user. Its schema has already been REST-enabled, meaning you will be able to Sign in to Database Actions.
 
@@ -266,11 +266,11 @@ Next, you will modify the .env file, which is located in your application's root
             1. Access SQL Developer Web using the link provided in the login info page
             2. Log in with username "dev_user" and the Database Password (found in the login info page)
             3. Copy the URL from your browser's address bar
-            4. Remove the final "dev_user/_sdw/" portion from the URL
+            4. Remove the final "dev\_user/\_sdw/" portion from the URL
             ![Get the ords link from ORDS ](images/ords-link-url.png " ")
 
 
-     * **`VITE_DB_USERNAME`:** The database username which should be in lowercase. during this workshop we will be using dev_user for development environment and prod_user for production environment.
+     * **`VITE_DB_USERNAME`:** The database username which should be in lowercase.
 
     ***Important!*** If you find VITE\_DB\_USERNAME (dev_user) in uppercase, make sure to convert it to lowercase. This value is used in the ORDS endpoints within the application, and it must be lowercase for the endpoints to function correctly.
 

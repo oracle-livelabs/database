@@ -219,11 +219,18 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
         ![Custom file location](./images/custom-file-location.png " ")
 
-    * Open the dept_data.sql file and paste the insert statements
+    * Open the dept-data.sql file and paste the insert statements
 
         Double-click the file and paste the copied inserts inside and save it (Command + S or Ctrl + S).
 
         ![Insert data in the custom script](./images/insert-into-custom.png " ")
+
+           ***Important:*** Add the COMMIT statement at the end of the dept-data.sql file.
+          ```sql
+          <copy>
+              COMMIT
+          </copy>
+          ```
 
         <!--TODO: add commit-->
 
@@ -302,18 +309,26 @@ Before generating the artifact, you need to return the install.sql file to its i
 3. Save the **install.sql** file by pressing **Cmd + S** on Mac or **Ctrl + S** on Windows/Linux.
 
 4. Add and commit.
+
     ```sql
     <copy>
-        !git add --all
+        !git add .
     </copy>
     ```
 
     ```sql
     <copy>
-        !git commit -m "generated deployable artifact"
+        !git status
     </copy>
     ```
 
+    ![Git add the installer file](./images/update-install-file-to-update.png " ")
+
+    ```sql
+    <copy>
+        !git commit -m "updated installer to do an update"
+    </copy>
+    ```
 
 5. Run `project gen-artifact`
 

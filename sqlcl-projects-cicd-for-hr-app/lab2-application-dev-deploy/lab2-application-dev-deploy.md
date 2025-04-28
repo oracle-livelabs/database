@@ -76,7 +76,7 @@ The last issue in the previous task occurred because the departments table is mi
         @departments_table.sql
     </copy>
     ```
-    If all the inserts run successfully, commit your changes to the database.
+    After all the inserts have run successfully, commit your changes to the database using COMMIT statement.
     ```sql
     <copy>
         COMMIT
@@ -198,33 +198,33 @@ All right, so now we will go to the .env file and replace **dev\_user** with **p
     ```
     Once the application is restarted, go to the browser and refresh the page.
 
-  >**Note:**: Every time you make changes to the .env file, you must restart the application to apply the new environment variables.
+    >**Note:** Every time you make changes to the **.env** file, you must restart the application to apply the new environment variables.
 
-  - If you don't see the changes on the department page, ensure that the DEPARTMENTS table is REST-enabled. You can verify this by executing the following SQL query:
+    - If you don't see the changes on the department page, ensure that the DEPARTMENTS table is REST-enabled. You can verify this by executing the following SQL query:
 
-      - connect as prod_user with : 
-        ```
-        <copy>
-         sql prod_user/$DBPASSWORD@"$DBCONNECTION" 
-        </copy>
-        ```
-      - run this query to REST-enable departments table:
-        ```sql
-             <copy>
-                 BEGIN
-                 ORDS.ENABLE_OBJECT(
-                     P_ENABLED => TRUE,
-                     P_SCHEMA => 'PROD_USER',
-                     P_OBJECT =>  'DEPARTMENTS',
-                     P_OBJECT_TYPE => 'TABLE',
-                     P_OBJECT_ALIAS => 'departments',
-                     P_AUTO_REST_AUTH => FALSE
-                 );
-                 COMMIT;
-             END;
-             /
-             </copy>
-        ```
+        - Connect as prod_user with : 
+            ```
+            <copy>
+            sql prod_user/$DBPASSWORD@"$DBCONNECTION" 
+            </copy>
+            ```
+        - Run this query to REST-enable departments table:
+            ```sql
+                <copy>
+                    BEGIN
+                    ORDS.ENABLE_OBJECT(
+                        P_ENABLED => TRUE,
+                        P_SCHEMA => 'PROD_USER',
+                        P_OBJECT =>  'DEPARTMENTS',
+                        P_OBJECT_TYPE => 'TABLE',
+                        P_OBJECT_ALIAS => 'departments',
+                        P_AUTO_REST_AUTH => FALSE
+                    );
+                    COMMIT;
+                END;
+                /
+                </copy>
+            ```
 
 7. Click on the Departments section
 

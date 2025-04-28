@@ -72,29 +72,30 @@ Use SQLcl's **project** command to:
 
 * **Connecting to DEV_USER via SQLcl:**
 
-   1. Setup "TNS\_ADMIN" :
-- We are connecting to an Autonomous Database, so we set TNS_ADMIN to /wallet to tell SQLcl where to find the wallet and network configuration files for secure connection.
+    1. Setup "TNS\_ADMIN" :
 
-    ```sql
-      <copy>
-        export TNS_ADMIN=/wallet
-      </copy>
-      ```
+        We are connecting to an Autonomous Database, so we set TNS_ADMIN to /wallet to tell SQLcl where to find the wallet and network configuration files for secure connection.
 
-   2. Connect to the DEV_USER schema using :
         ```sql
         <copy>
-             sql dev_user/$DBPASSWORD@"$DBCONNECTION"
+            export TNS_ADMIN=/wallet
         </copy>
         ```
-        ![Connect to DEV_USER](./images/launch-sqlcl.png " ")
 
-    >**Tip:** You can clear your screen anytime you want by using **clear screen** command or just its short format **cle scr**:
-        ```sql
-        <copy>
-            cle scr
-        </copy>
-        ```
+    2. Connect to the DEV_USER schema using :
+            ```sql
+            <copy>
+                sql dev_user/$DBPASSWORD@"$DBCONNECTION"
+            </copy>
+            ```
+            ![Connect to DEV_USER](./images/launch-sqlcl.png " ")
+
+        >**Tip:** You can clear your screen anytime you want by using **clear screen** command or just its short format **cle scr**:
+            ```sql
+            <copy>
+                cle scr
+            </copy>
+            ```
 
 * **Project Initialization:**
 
@@ -114,8 +115,8 @@ Use SQLcl's **project** command to:
         <!--In SQLcl, it is used as a shell escape to run external (non-SQLcl) commands.-->
 
     3. Add and commit
-    
-    - Before committing to Git, make sure to configure your user identity. Run the following commands to set your name and email address, which Git uses to track your commits:
+
+        Before committing to Git, make sure to configure your user identity. Run the following commands to set your name and email address, which Git uses to track your commits:
 
         ```sql
         <copy>
@@ -164,35 +165,35 @@ Use SQLcl's **project** command to:
 
         ![Help project](./images/help-project.png " ")
 
-    * **Project Structure:**
-        * SQLcl Project feature use a specific folder structure to manage database objects and changes.
-        * Key folders include:
-            * **`.dbtools`:** contains project configuration files, filters, and formatting rules. It's a hidden folder.
-            * **`src`:** stores exported objects from the database, organized by schema and object type.
-            * **`dist`:** contains the distributable for each release.
+        * **Project Structure:**
+            * SQLcl Project feature use a specific folder structure to manage database objects and changes.
+            * Key folders include:
+                * **`.dbtools`:** contains project configuration files, filters, and formatting rules. It's a hidden folder.
+                * **`src`:** stores exported objects from the database, organized by schema and object type.
+                * **`dist`:** contains the distributable for each release.
 
-            ```text
-            <copy>
-            ──.dbtools
-            │   ├── filters
-            │   │   └── project.filters
-            │   ├── project.config.json
-            │   └── project.sqlformat.xml
-            ├── dist
-            │   └── install.sql
-            └── src
-                └── database
-            </copy>
-            ```
+                ```text
+                <copy>
+                ──.dbtools
+                │   ├── filters
+                │   │   └── project.filters
+                │   ├── project.config.json
+                │   └── project.sqlformat.xml
+                ├── dist
+                │   └── install.sql
+                └── src
+                    └── database
+                </copy>
+                ```
 
-        * List all, to see the generated project folders
-        ![List all dirs](./images/list-dirs.png " ")
+            * List all, to see the generated project folders
+            ![List all dirs](./images/list-dirs.png " ")
 
-        >**Note:** The project init command creates a src folder. However, since the application already has a src folder, SQLcl Projects merges its newly created src folder with the existing one. As a result, the database project folder will be located inside src, ensuring seamless integration.
+            >**Note:** The project init command creates a src folder. However, since the application already has a src folder, SQLcl Projects merges its newly created src folder with the existing one. As a result, the database project folder will be located inside src, ensuring seamless integration.
 
-        <!--<details>  <summary> **Screenshots:**</summary>
-        ![ init ](./images/project-init-output.png " ")
-        </details>-->
+            <!--<details>  <summary> **Screenshots:**</summary>
+            ![ init ](./images/project-init-output.png " ")
+            </details>-->
 
     5. Add and commit
 
@@ -249,9 +250,9 @@ Use SQLcl's **project** command to:
         </copy>
         ```
 
-    ![Checkout first branch](./images/checkout-first-branch.png " ")
+        ![Checkout first branch](./images/checkout-first-branch.png " ")
 
-    >**Note:** You can choose the name you want for your branch. It doesn’t have to match this one.
+        >**Note:** You can choose the name you want for your branch. It doesn’t have to match this one.
 
 ## Task 3: Set Project Configuration
 
@@ -517,9 +518,11 @@ Before generating the artifact, you need to establish a new database baseline by
     </copy>
     ```
 
+    ![Git add the installer file](./images/update-install-file-to-sync.png " ")
+
     ```sql
     <copy>
-        !git commit -m "Modify install file"
+        !git commit -m "updated installer to do a changelog-sync"
     </copy>
     ```
 
