@@ -26,27 +26,19 @@ Estimated Lab Time: 15 minutes
 
 ## Task 1: Export Database Changes (project export)
 
-First, you have to be connect to DEV_USER in SQLcl and make sure you are in the application folder </br> /home/oracle/assets/workshops/**sqlcl-projects-react-app**.
+First, you have to be connect to DEV_USER in SQLcl and make sure you are in the application folder </br> /home/assets/assets/workshops/**sqlcl-projects-react-app**.
 
 ```sql
 <copy>
-    sql sys/Welcome23ai@10.89.0.1:1521/FREEPDB1 as sysdba
+    sql dev_user/$DBPASSWORD@"$DBCONNECTION"
 </copy>
 ```
 
 ```sql
 <copy>
-    connect DEV_USER
+    cd /home/assets/assets/workshops/sqlcl-projects-react-app
 </copy>
 ```
-
-```sql
-<copy>
-    cd /home/oracle/assets/workshops/sqlcl-projects-react-app/
-</copy>
-```
-
-![Connect to DEV_USER](./images/connec-to-dev-and-be-in-the-app-dir.png " ")
 
 >**Note:** You must be in the project folder (in your case **sqlcl-projects-react-app** is your project/application folder) to execute project commands; otherwise, an error will occur.
 
@@ -219,11 +211,18 @@ To see what's happen when exporting the whole schema drop down **Export schema**
 
         ![Custom file location](./images/custom-file-location.png " ")
 
-    * Open the dept_data.sql file and paste the insert statements
+    * Open the dept-data.sql file and paste the insert statements
 
         Double-click the file and paste the copied inserts inside and save it (Command + S or Ctrl + S).
 
         ![Insert data in the custom script](./images/insert-into-custom.png " ")
+
+           ***Important:*** Add the COMMIT statement at the end of the dept-data.sql file.
+          ```sql
+          <copy>
+              COMMIT
+          </copy>
+          ```
 
         <!--TODO: add commit-->
 
@@ -303,6 +302,26 @@ Before generating the artifact, you need to return the install.sql file to its i
 
 4. Add and commit.
 
+    ```sql
+    <copy>
+        !git add .
+    </copy>
+    ```
+
+    ```sql
+    <copy>
+        !git status
+    </copy>
+    ```
+
+    ![Git add the installer file](./images/update-install-file-to-update.png " ")
+
+    ```sql
+    <copy>
+        !git commit -m "updated installer to do an update"
+    </copy>
+    ```
+
 5. Run `project gen-artifact`
 
     ```sql
@@ -341,7 +360,7 @@ Before generating the artifact, you need to return the install.sql file to its i
 
         ```sql
         <copy>
-            project deploy -file artifact/HrManager-2.O.0.zip  -verbose
+            project deploy -file artifact/HrManager-2.0.0.zip  -verbose
         </copy>
         ```
         <!--![project deploy ](./images/project-deploy-cmd.png " ")-->

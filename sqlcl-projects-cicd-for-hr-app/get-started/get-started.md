@@ -46,13 +46,13 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
      * **Password:** A single password used for JupyterLab and all ORDS users.
      * **SQL Developer Web (Database Actions):** Click the provided URL to access Database Actions.
 
-    ![Reservation info](images/reservation-info.png " ")
+    ![Reservation info](images/reservation-info.png =50%x*)
 
 ## Task 2: Sign in Oracle Database Actions
 
 1. Click the SQL Developer Web URL in the Reservation information to access it.
 
-   ![Reservation info](images/reservation-info.png " ")
+   ![Reservation info](images/reservation-info-for-sdw.png " ")
 
 2. Several users have been created for you, including a new `DEV_USER` user. Its schema has already been REST-enabled, meaning you will be able to Sign in to Database Actions.
 
@@ -241,15 +241,40 @@ Next, you will modify the .env file, which is located in your application's root
 
 3. Press Esc + I to enter insert mode.
 
-4. Navigate to the placeholders. Replace [Your Lab's IP] with your actual lab IP in the following variables:
+4. Navigate to the placeholders. Replace [THE PLACEHOLDER] with your instance links in the following variables:
 
       ```text
       <copy>
       VITE_API_URL=http://[Your Lab's IP]:5500/api/connection
-      VITE_BASE_URL=http://[Your Lab's IP]:8181/ords/
+      VITE_BASE_URL=http://[ORDS LINK]:8181/ords/
       VITE_DB_USERNAME=dev_user
       </copy>
-      ```
+       ```
+
+     * **`VITE_API_URL`:** The base URL for your API connection, replace placeholder with your jupyter IP address.
+
+     * **`VITE_BASE_URL`:** The base URL for your ORDS REST service. You can obtain this URL using either of these methods:
+          - Method 1: Use your terminal and run the following command: 
+          ```text
+            <copy>
+          echo $ORDSURL"
+          </copy>
+            ```
+         ![Get the ords link](images/echo-ords-link.png " ")
+
+          - Method 2: Retrieve the URL from SQL Developer Web:
+            1. Access SQL Developer Web using the link provided in the login info page
+            2. Log in with username "dev_user" and the Database Password (found in the login info page)
+            3. Copy the URL from your browser's address bar
+            4. Remove the final "dev\_user/\_sdw/" portion from the URL
+            ![Get the ords link from ORDS ](images/ords-link-url.png " ")
+
+
+     * **`VITE_DB_USERNAME`:** The database username which should be in lowercase.
+
+    ***Important!*** If you find VITE\_DB\_USERNAME (dev_user) in uppercase, make sure to convert it to lowercase. This value is used in the ORDS endpoints within the application, and it must be lowercase for the endpoints to function correctly.
+
+
 
       ***Important!*** If you find VITE\_DB\_USERNAME (dev_user) in uppercase, make sure to convert it to lowercase. This value is used in the ORDS endpoints within the application, and it must be lowercase for the endpoints to function correctly.
 
