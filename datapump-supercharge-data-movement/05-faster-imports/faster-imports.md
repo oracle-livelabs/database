@@ -535,7 +535,7 @@ When exporting tables or indexes Data Pump also exports the corresponding statis
 
 ## Task 3: Statistics - Transfer
 
-Another option is to transfer the statistics from the source database using the `DBMS_STATS` package. Transferring statistics is much faster than exporting and importing using Data Pump. 
+Another option is to transfer the statistics from the source database using the `DBMS_STATS` package. Transferring statistics is much faster than exporting and importing statistics using Data Pump. 
 
 1. Still in the *yellow* terminal 🟨 and connected to the *FTEX* database. In our lab, the source and target databases are the same. Otherwise, you should have switched to the source database now. The source tables in the *F1* schema does have statistics. 
 
@@ -618,15 +618,13 @@ Another option is to transfer the statistics from the source database using the 
     
     * If you perform the statistics export before you use Data Pump to export the entire schema, then the staging table is included in the dump file and there's no need for a separate export.
 
-6. In this lab, you remapped the *F1* schema to *LAB5STATS*. `DBMS_STATS` does not support this remapping functionality. But you can get an idea of the process, by deleting schema stats on *F1* and importing the statistics from the staging table. 
+6. In this lab, you remapped the *F1* schema to *LAB5STATS*. `DBMS_STATS` does not support this remapping functionality. But you can get an idea of the process, by deleting schema stats on *F1* and importing the statistics from the staging table. Delete all statistics in the *F1* schema.
 
     ```
     <copy>
     exec dbms_stats.delete_schema_stats('F1');
     </copy>
     ```
-
-    * Now there are no statistics in the *F1* schema indicated by `LAST_ANALYZED` being *NULL*. 
 
     <details>
     <summary>*click to see the output*</summary>
@@ -740,6 +738,7 @@ You may now *proceed to the next lab*.
 ## Additional information
 
 * Webinar, [Data Pump Best Practices and Real World Scenarios, LOB data and Data Pump and things to know](https://www.youtube.com/watch?v=960ToLE-ZE8&t=1798s)
+* Webinar, [Data Pump Best Practices and Real World Scenarios, Statistics and Data Pump](https://www.youtube.com/watch?v=960ToLE-ZE8&t=1117s)
 
 ## Acknowledgments
 
