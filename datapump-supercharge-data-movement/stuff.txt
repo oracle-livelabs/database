@@ -41,14 +41,23 @@ VIEWS_AS_TABLES
 CONTENT=ALL DATA_ONLY METADATA_ONLY
 
 ##### Encryption and Checksumming
-Do strings on a dump file
 
-manual checksum in 19c
+Task
+    Export F1 schema
+    Corrupt dump file
+    Import => error
+    calculate checksum on export
+    verify_only import
+    other import options
+    requires 21
+    19c => calculate your own checksum using md5sum or sha256sum
 
-Encrypted vs no encrypted (run strings to show that we can grep the contents when it is not encrypted) => requires ASO
-Changing with dd a block on the dump file and show that with checksum it will fail before, while without it will fail at the middle.
-ENCRYPTION and COMPRESSION usage with licensing information
-CHECKSUM
+Task
+    Do strings on file
+    export encrypt using password
+    strings on file
+    requires ASO
+
 
 ##### Determining Import Success
 Show how to compare source and target (objects and rows) using DBMS_COMPARISON.
@@ -126,3 +135,27 @@ sqlfile=
 ##########################################################################################################################################
 ##########################################################################################################################################
 ##########################################################################################################################################
+
+
+
+
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-07-checksum-export.par > /dev/null
+schemas=F1
+reuse_dumpfiles=yes
+directory=dpdir
+logfile=dp-07-checksum-export.log
+dumpfile=dp-07-checksum.dmp
+metrics=yes
+logtime=all
+exclude=statistics
+EOF
+
+cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-07-checksum-import.par > /dev/null
+directory=dpdir
+logfile=dp-07-checksum-import.log
+dumpfile=dp-07-checksum.dmp
+metrics=yes
+logtime=all
+remap_schema=F1:LAB7CHECKSUM
+EOF

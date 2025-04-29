@@ -229,7 +229,7 @@ A few things must be in place before you can start a Data Pump job.
 
 It often takes a number of parameters to start a Data Pump job. If you have many parameters or need to escape characters, it becomes very impractical to supply the parameters on the command line. Instead you can use a parameter file.
 
-1. Find the command line parameter that toggles the use of a parameter file.
+1. Still connected to the *yellow* terminal 🟨. Find the command line parameter that toggles the use of a parameter file.
 
     ```
     <copy>
@@ -277,7 +277,7 @@ It often takes a number of parameters to start a Data Pump job. If you have many
 
 With a parameter file you can now start a Data Pump export and import a schema into another database.
 
-1. Export the schema *F1* from *FTEX* database.
+1. Still connected to the *yellow* terminal 🟨. Export the schema *F1* from *FTEX* database.
 
     ```
     <copy>
@@ -513,7 +513,7 @@ With a parameter file you can now start a Data Pump export and import a schema i
 
 You just done an export/import via a dump file. Let's try to an import using *network mode*. This is a different approach that doesn't use a dump file. Instead, Data Pump fetches data and metadata directly from the source database via a database link. 
 
-1. Remove the dump file to proof that the import works over the database link.
+1. Still connected to the *yellow* terminal 🟨. Remove the dump file to proof that the import works over the database link.
 
     ```
     <copy>
