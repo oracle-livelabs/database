@@ -276,6 +276,14 @@ Next, you will modify the .env file, which is located in your application's root
 
 
 
+      ***Important!*** If you find VITE\_DB\_USERNAME (dev_user) in uppercase, make sure to convert it to lowercase. This value is used in the ORDS endpoints within the application, and it must be lowercase for the endpoints to function correctly.
+
+     * **`VITE_API_URL`:** The base URL for your API connection.
+
+     * **`VITE_BASE_URL`:** The base URL for your ORDS REST service.
+
+     * **`VITE_DB_USERNAME`:** The database username which should be in lowercase.
+
      ![Open the environment variable file](images/env-file-opened3.png " ")
      <!--![Open the environment variable file](images/env-file-opened.png " ")-->
 
