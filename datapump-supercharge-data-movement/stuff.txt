@@ -40,6 +40,15 @@ VIEWS_AS_TABLES
 
 CONTENT=ALL DATA_ONLY METADATA_ONLY
 
+##### Encryption and Checksumming
+Do strings on a dump file
+
+manual checksum in 19c
+
+Encrypted vs no encrypted (run strings to show that we can grep the contents when it is not encrypted) => requires ASO
+Changing with dd a block on the dump file and show that with checksum it will fail before, while without it will fail at the middle.
+ENCRYPTION and COMPRESSION usage with licensing information
+CHECKSUM
 
 ##### Determining Import Success
 Show how to compare source and target (objects and rows) using DBMS_COMPARISON.
@@ -60,30 +69,17 @@ My Data Pump tracing recipe
 
 Use keep_master and query the master_table showing we can use it to check the total rows for each table that was exported vs imported
 
-Important views: dba_datapump_jobs (also the user variant), dba_datapump_sessions, database_export_objects, schema_export_objects and table_export_objects
-
-SQLFILE
+Important views: dba_datapump_jobs (also the user variant), dba_datapump_sessions
 
 ABORT_STEP=1
 
 master_only=YES
 
-##### Usability
 Interactive console commands
 Attaching to a job
 Using Interactive Mode to Stop and Reattach to a Job
 Universal (backwardly compatible) client (and how you don't need the client if you use the API)
 Interactive command line usage in all its forms: stop, start, adjust parallelism or tracing, status, skip current, etc
-
-##### Encryption and Checksumming
-Do strings on a dump file
-
-manual checksum in 19c
-
-Encrypted vs no encrypted (run strings to show that we can grep the contents when it is not encrypted) => requires ASO
-Changing with dd a block on the dump file and show that with checksum it will fail before, while without it will fail at the middle.
-ENCRYPTION and COMPRESSION usage with licensing information
-CHECKSUM
 
 ##### Upgrade, Downgrade and Convert
 Export from 19c non-CDB - import directly into 23ai PDB
@@ -116,150 +112,8 @@ sqlfile=
 ##########################################################################################################################################
 ##########################################################################################################################################
 
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-03-export.par > /dev/null
-schemas=f1
-directory=dpdir
-dumpfile=f1.dmp
-logfile=f1-export.log
-EOF
-
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-03-import.par > /dev/null
-directory=dpdir
-dumpfile=f1.dmp
-logfile=f1-import.log
-EOF
-
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-03-import-network.par > /dev/null
-schemas=f1
-directory=dpdir
-logfile=f1-import.log
-network_link=ftexlink
-remap_schema=f1:f2
-EOF
-
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-bp-1.par > /dev/null
-schemas=f1
-directory=dpdir
-dumpfile=f1.dmp
-logfile=f1-export.log
-metrics=yes
-logtime=all
-EOF
-
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-bp-2.par > /dev/null
-schemas=f1
-directory=dpdir
-logfile=f1-export.log
-metrics=yes
-logtime=all
-dumpfile=f1_%L.dmp
-filesize=1M
-EOF
-
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-bp-3.par > /dev/null
-schemas=f1
-directory=dpdir
-logfile=f1-export.log
-metrics=yes
-logtime=all
-dumpfile=f1_%L.dmp
-filesize=1M
-parallel=4
-EOF
 
 
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-comp-no.par > /dev/null
-schemas=f1
-directory=dpdir
-logfile=f1-export.log
-metrics=yes
-logtime=all
-dumpfile=f1_nocomp_%L.dmp
-filesize=1M
-parallel=4
-job_name=NO_COMPRESSION
-EOF
-
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-comp-med.par > /dev/null
-schemas=f1
-directory=dpdir
-logfile=f1-export-medium.log
-metrics=yes
-logtime=all
-dumpfile=f1_compmed_%L.dmp
-filesize=1M
-parallel=4
-job_name=MEDIUM_COMPRESSION
-compression=all
-compression_algorithm=medium
-EOF
-
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-comp-high.par > /dev/null
-schemas=f1
-directory=dpdir
-logfile=f1-export-high.log
-metrics=yes
-logtime=all
-dumpfile=f1_comphigh_%L.dmp
-filesize=1M
-parallel=4
-job_name=HIGH_COMPRESSION
-compression=all
-compression_algorithm=high
-EOF
-
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-04-consistent.par > /dev/null
-schemas=f1
-directory=dpdir
-logfile=f1-export-consistent.log
-metrics=yes
-logtime=all
-dumpfile=f1-export-consistent_%L.dmp
-EOF
-
-DOWNLOAD faster-import-lob.dmp 
-
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-05-lob-basicfile.par > /dev/null
-directory=dpdir
-dumpfile=faster-import-lob.dmp
-logfile=faster-import-lob-basicfile.log
-metrics=yes
-logtime=all
-parallel=4 
-EOF
-
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-05-lob-securefile.par > /dev/null
-directory=dpdir
-dumpfile=faster-import-lob.dmp
-logfile=faster-import-lob-securefile.log
-metrics=yes
-logtime=all
-parallel=4
-transform=lob_storage:securefile
-EOF
-
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-05-stats-export.par > /dev/null
-schemas=F1
-reuse_dumpfiles=yes
-directory=dpdir
-dumpfile=faster-import-stats-%L.dmp
-logfile=faster-import-stats-export.log
-metrics=yes
-logtime=all
-parallel=4
-reuse_dumpfiles=yes
-exclude=statistics
-EOF
-
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-05-stats-import.par > /dev/null
-directory=dpdir
-dumpfile=faster-import-stats-%L.dmp
-logfile=faster-import-stats-import.log
-metrics=yes
-logtime=all
-parallel=4
-remap_schema=F1:LAB5STATS
-EOF
 
 ##########################################################################################################################################
 ##########################################################################################################################################

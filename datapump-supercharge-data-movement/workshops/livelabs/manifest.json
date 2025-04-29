@@ -39,6 +39,36 @@
       "filename": "../../05-faster-imports/faster-imports.md"
     },
     {
+      "title": "Lab 6: Customizing Data Pump Jobs",
+      "description": "Customizing Data Pump Jobs",
+      "filename": "../../06-customize/customize.md"
+    },
+    {
+      "title": "Lab 7: Checksum and Encryption",
+      "description": "Checksum and Encryption",
+      "filename": "../../07-checksum-encryption/checksum-encryption.md"
+    },
+    {
+      "title": "Lab 8: Determining Import Success",
+      "description": "Determining Import Success",
+      "filename": "../../08-import-success/import-success.md"
+    },
+    {
+      "title": "Lab 9: Monitoring, Troubleshooting and Tracing",
+      "description": "Monitoring, Troubleshooting and Tracing",
+      "filename": "../../09-monitor-troubleshoot-trace/monitor-troubleshoot-trace.md"
+    },
+    {
+      "title": "Lab 10: Upgrading, Downgrading and Converting",
+      "description": "Upgrading, Downgrading and Converting",
+      "filename": "../../10-upgrade-downgrade-convert/upgrade-downgrade-convert.md"
+    },
+    {
+      "title": "Lab 11: Using DBMS_DATAPUMP and DBMS_METADATA",
+      "description": "Using DBMS_DATAPUMP and DBMS_METADATA",
+      "filename": "../../11-dbms-datapump-dbms-metadata/dbms-datapump-dbms-metadata.md"
+    },
+    {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
