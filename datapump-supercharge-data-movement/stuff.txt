@@ -25,39 +25,9 @@ STUFF TO REMEMBER
 * Automatic parallelism for index creation on import
 
 ##### Customizing Data Pump Jobs
-EXCLUDE and INCLUDE, and how these differ from Table or Schema mode (I don't think this would quite be in the "advanced" category, but showing how filters are so much easier in the parfile than the command line would be helpful
-    Full mode: DATABASE_EXPORT_OBJECTS
-    Schema mode: SCHEMA_EXPORT_OBJECTS
-    Table and Tablespace mode: TABLE_EXPORT_OBJECTS
-Mutually exclusive until 21c
-
-
 DATA_OPTIONS & TRANSFORM parameters and their options
 
-REMAP_xxxx (table, schema, tablespace)
-
-VIEWS_AS_TABLES
-
 CONTENT=ALL DATA_ONLY METADATA_ONLY
-
-##### Encryption and Checksumming
-
-Task
-    Export F1 schema
-    Corrupt dump file
-    Import => error
-    calculate checksum on export
-    verify_only import
-    other import options
-    requires 21
-    19c => calculate your own checksum using md5sum or sha256sum
-
-Task
-    Do strings on file
-    export encrypt using password
-    strings on file
-    requires ASO
-
 
 ##### Determining Import Success
 Show how to compare source and target (objects and rows) using DBMS_COMPARISON.
@@ -106,7 +76,6 @@ SQL trace and check trace file
 DBMS_METADATA.GET_DDL
 DBMS_METADATA_DIFF package especially the COMPARE_ALTER routines
 The stuff in the developer package: DBMS_DEVELOPER.GET????
-sqlfile=
 
 
 ##########################################################################################################################################

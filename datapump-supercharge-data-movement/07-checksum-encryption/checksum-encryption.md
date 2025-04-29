@@ -2,7 +2,7 @@
 
 ## Introduction
 
-What happens to your data when you move it out of the database? If you need to ship data to a far-away data center, how can you ensure that nothing happens *in-flight*? It could be a simple network corruption or a malicious user altering data.
+What happens to your data when you move it out of the database? If you need to ship data to a far-away data center, how can you ensure that nothing happens *in-flight*? It could be a simple network corruption or a malicious user altering data. In this lab, you will explore options to detect and avoid this.
 
 Estimated Time: 15 Minutes
 
@@ -117,6 +117,8 @@ While you move a dump file from the source to the target host, it might get corr
     -- Be sure to hit RETURN
     ```
 
+    * In the end of the log file, Data Pump informs you that it calculated the checksum and stored it in the dump file.
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -224,7 +226,7 @@ While you move a dump file from the source to the target host, it might get corr
     ```
 
     * After checking the dump file, Data Pump determines that there's a mismatch in the checksums.
-    * Data Pump reports `dump file set is inconsistent`.
+    * Data Pump reports *dump file set is inconsistent*.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -246,7 +248,7 @@ While you move a dump file from the source to the target host, it might get corr
     ```
     </details> 
 
-9. Now, it is recoemmended to re-transmit the dump file from the source to avoid the corruption. But you can also force Data Pump to import the dump file anyway. Examine a pre-created dump file.
+9. Now, it is recommended to re-transmit the dump file from the source to avoid the corruption. But you can also force Data Pump to import the dump file anyway. Examine a pre-created dump file.
 
     ```
     <copy>
@@ -255,8 +257,7 @@ While you move a dump file from the source to the target host, it might get corr
     ```
 
     * You must set `VERIFY_ONLY=NO`. If there is a checksum in the dump file, Data Pump automatically verifies the integrity.
-    * Since you are importing to the same database, the *F1* schema exist already. Hence, you must remap to a different schema name.
-
+    
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -332,7 +333,7 @@ While you move a dump file from the source to the target host, it might get corr
 
 Data Pump stores the data in the dump files in a proprietary format. However, some data is easily readable.
 
-1. Still in the *yellow* terminal 🟨. Export the *F1* schema again, since you just corrupted the dump file.
+1. Still in the *yellow* terminal 🟨. Export the *F1* schema again.
 
     ```
     <copy>
@@ -411,6 +412,7 @@ Data Pump stores the data in the dump files in a proprietary format. However, so
 
     * You can clearly read data in the dump file in clear text.
     * Your output might vary depending on which order Data Pump unloaded the rows.
+    * Ayrton Senna da Silva was a Brazilian racing driver, who competed in Formula One from 1984 to 1994. He won 41 Grand Prixs across 11 seasons.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -418,14 +420,14 @@ Data Pump stores the data in the dump files in a proprietary format. However, so
     Australian*http://en.wikipedia.org/wiki/David_Brabham<
     senna
     Ayrton
-    Senna
+    Sennaf
     	Brazilian)http://en.wikipedia.org/wiki/Ayrton_Senna<
     bernard
     Bernard    
     ```
     </details>
 
-3. If you are moving sensitive data, you must protect your dump file. Data Pump can encrypt the dump file making it impossible to read the content unless you have the encryption passphrase. Examine a pre-created parameter file.
+3. If you are moving sensitive data, you must protect your dump file. Data Pump can encrypt the dump file making it impossible to read the content unless you have the encryption password. Examine a pre-created parameter file.
 
     ```
     <copy>

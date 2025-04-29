@@ -176,7 +176,7 @@ Oracle Database stores LOBs in two formats. *SecureFile LOBs* is the newest form
     * Loading data into a SecureFile LOB allows Data Pump to choose other load methods and using parallel query (PQ) processes.
     * Compare the time it took to import the table with the previous import. Importing into a SecureFile LOB is faster. In the example in the instructions, it went from 121 seconds to 80 seconds. 
     * Oracle recommends that you always convert BasicFile LOBs to SecureFile LOBs on import. It's faster and SecureFile LOBs offer superior functionality. 
-    * It's safe to always add `TRANSFORM=LOB_STORAGE:SECUFILE` to your parameter files. If a LOB is already a SecureFile, Data Pump ignores the transformation.
+    * It's safe to always add `TRANSFORM=LOB_STORAGE:SECUREFILE` to your parameter files. If a LOB is already a SecureFile, Data Pump ignores the transformation.
     
     <details>
     <summary>*click to see the output*</summary>
@@ -728,7 +728,15 @@ Another option is to transfer the statistics from the source database using the 
     ```
     </details>  
 
-10. That's how you transfer statistics from one database to another. Take the statistics out of the data dictionary and store them in a staging table. Now, move that staging table to the target database using Data Pump. Finally, move the statistics from the staging table and into the data dictionary in the target database.
+10. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
+11. That's how you transfer statistics from one database to another. Take the statistics out of the data dictionary and store them in a staging table. Now, move that staging table to the target database using Data Pump. Finally, move the statistics from the staging table and into the data dictionary in the target database.
 
 ## Task 4: Constraints
 ## Task 5: Indexes
