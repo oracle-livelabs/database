@@ -740,9 +740,9 @@ Another option is to transfer the statistics from the source database using the 
 
 ## Task 4: Constraints
 
-Constraints are used to enforce data quality and is often used extensively. A constraint is by default in *validated* state. This means that database guarantees that all data meets the constraint the defintion. When Data Pump adds a validated constraint during import, the database full scans the table. You can save a lot of time by adding the constraint as *not validated*. Adding a not validated constraint is an instant data dictionary change and doesn't require a full scan. 
+Constraints are used to enforce data quality and is often used extensively. A constraint is by default in *validated* state. This means that database guarantees that all data meets the constraint defintion. When Data Pump adds a validated constraint during import, the database full scans the table. You can save a lot of time by adding the constraint as *not validated*. Adding a not validated constraint is an instant data dictionary change and doesn't require a full scan. 
 
-1. Still in the *yellow* terminal 🟨. In the lab, you can find a dump file containing a schema with four tables. Each table has million rows and 23 constraints. Copy the dump file to the **DPDIR* directory.
+1. Use the *yellow* terminal 🟨. In the lab, you can find a dump file containing a schema with four tables. Each table has million rows and 23 constraints. Copy the dump file to the *DPDIR* directory.
 
     ```
     <copy>
@@ -839,6 +839,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
     -- Be sure to hit RETURN
     ```
 
+    * Notice the `ATTACH` parameter which contains the job name that you specified in the import parameter file.
     * You're now in the *interactive console*.
     * It's a separate session but connected to the running import in the *yellow* terminal 🟨.
     * Scroll through the output and familiarize yourself with the information.
@@ -1008,12 +1009,10 @@ Constraints are used to enforce data quality and is often used extensively. A co
     <copy>
     status
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * Notice that each worker is processing a different table. 
-    * Run the `STATUS` a few times and notice *Completed Rows* increasing.
+    * Repeat the `STATUS` command a few times and notice *Completed Rows* increasing.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -1127,7 +1126,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
 
 9. Switch back to the *yellow* terminal 🟨. Data Pump should be processing `SCHEMA_EXPORT/TABLE/TABLE_DATA`. That's import of rows and you just saw how the `STATUS` command could give more detailed information.
 
-10. In this exercise, the name is *CONSTR\_VALIDATE*. You used the parameter `JOB_NAME` to set it. See if you can find the name in the Data Pump output.
+10. In this exercise, the job name is *CONSTR\_VALIDATE*. You used the parameter `JOB_NAME` to set it. See if you can find the name in the Data Pump output.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -1142,6 +1141,8 @@ Constraints are used to enforce data quality and is often used extensively. A co
 
 11. After a while Data Pump is done processing rows. It will move on to process constraints. This happens in `SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT`. 
 
+    * If your job is not there yet, then wait a little while. 
+
     <details>
     <summary>*click to see the output*</summary>
     ``` text
@@ -1152,9 +1153,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
     30-APR-25 17:13:51.453: W-3 . . imported "CONSTR_VALIDATE"."T3"                      381.6 MB 23312384 rows in 277 seconds using direct_path
     30-APR-25 17:13:51.466: W-1 Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
     ```
-    </details> 
-
-    * If your job is not there yet, then wait a little while. 
+    </details>    
 
 12. When Data Pump is processing constraints (`SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT`) switch to the *blue* 🟦 terminal.
 
@@ -1164,8 +1163,6 @@ Constraints are used to enforce data quality and is often used extensively. A co
     <copy>
     status
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * When Data Pump processes constraints the work is done by only one worker. 
@@ -1238,7 +1235,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
 14. Switch back to the *yellow* terminal 🟨. It usually takes a few minutes to add the constraints. Wait for the job to complete.
 
     * It took almost 5 minutes to import the table data.
-    * In addition it took 3 three minutes to add constraints.
+    * In addition, it took 3 three minutes to add constraints.
     * If you move bigger data sets with more constraints, it can take hours to add the constraints.
 
     <details>
@@ -1290,12 +1287,13 @@ Constraints are used to enforce data quality and is often used extensively. A co
 
 15. There is a Data Pump transformation that allows you to add the constraints as *NOT VALIDATED* instead of *VALIDATED*. This can reduce the time it takes to add constraints from minutes or hours to just seconds. Examine a pre-created parameter file.
 
-
     ```
     <copy>
     cat /home/oracle/scripts/dp-05-import-novalidate.par
     </copy>
     ```
+
+    * You allow Data Pump to transform constraints using the parameter `TRANSFORM=CONSTRAINT_NOVALIDATE:Y`.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -1353,7 +1351,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
     </copy>
     ```
 
-    * As soon as the job starts, move on with the new step.
+    * As soon as the job starts, move on with the next step.
     * Don't wait for the job to finish.
 
     <details>
@@ -1405,7 +1403,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
     ```
 
     * Don't use the `EXIT` command if you are in the shell.
-    * If you accidently close the *blue* 🟦 terminal, you can open a new tab in the terminal.
+    * If you accidently close the *blue* 🟦 terminal, you can open a new *blue* 🟦 tab in the terminal.
 
 20. Connect to the *FTEX* database. 
 
@@ -1631,8 +1629,10 @@ Constraints are used to enforce data quality and is often used extensively. A co
     -- Be sure to hit RETURN
     ```
 
+    * Notice the `ALTER TABLE ... PARALLEL` command that changes the default parallel degree of the table.
     * It takes less time to perform the validation because the database can use parallel query to full scan the table.
     * Still it does *not* require a table lock.
+    * Don't forget to reset the default parallel degree using `ALTER TABLE ... NOPARALLEL`. Leaving a table with a default parallel degree causes all queries to utilize parallel query which can exhaust the server.
 
     <details>
     <summary>*click to see the output*</summary>
