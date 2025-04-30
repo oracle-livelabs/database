@@ -855,7 +855,7 @@ Some times you just want to export or import just the metadata, or just the data
     </copy>
     ```
 
-5. Examine the `CONTENTDEMO.F1_DRIVERS` table.
+5. Examine the *CONTENTDEMO.F1\_DRIVERS* table.
 
     ```
     <copy>
@@ -880,12 +880,12 @@ Some times you just want to export or import just the metadata, or just the data
     ```
     </details>     
 
-6. Imagine that you are importing into a Unicode database. Names on people often contain national characters which mostly likely takes up more bytes in a Unicode character set. To avoid any truncation issues you decide to expand the `FORENAME` column to 512 bytes. Another option is to change the length semantics from `BYTE` to `CHAR`. You decide to do that on the `SURNAMNE` column.
+6. Imagine that you are importing into a Unicode database. Names on people often contain national characters which mostly likely takes up more bytes in a Unicode character set. To avoid any truncation issues you decide to expand the *FORENAME* column to 512 bytes. Another option is to change the length semantics from `BYTE` to `CHAR`. You decide to do that on the *SURNAME* column.
 
     ```
     <copy>
     alter table contentdemo.f1_drivers modify forename varchar2(512);
-    alter table contentdemo.f1_drivers modify surname varchar2(512 char);
+    alter table contentdemo.f1_drivers modify surname varchar2(255 char);
     </copy>
 
     -- Be sure to hit RETURN
@@ -929,7 +929,7 @@ Some times you just want to export or import just the metadata, or just the data
     ```
     </details>  
 
-8. You also decide to partition the `F1_LAPTIMES` table because it is quite large. After analysis you determine that a hash partitioning model would be effective.
+8. You also decide to partition the *F1\_LAPTIMES* table because it is quite large. After analysis you determine that a hash partitioning model would be effective.
 
     ```
     <copy>
@@ -1010,8 +1010,7 @@ Some times you just want to export or import just the metadata, or just the data
     -- Be sure to hit RETURN
     ```
 
-    * This looks similar to the other import parameter file.
-    * `CONTENT=DATA_ONLY` instructs Data Pump to just load the rows. The schema and tables must exist in advance.
+    * Data Pump moves directly to the `SCHEMA_EXPORT/TABLE/TABLE_DATA` object path and starts loading the rows.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -1076,6 +1075,7 @@ Some times you just want to export or import just the metadata, or just the data
     * The database generates names for the different hash partitions automatically.
     * Depending on the hash key the rows are loaded into different partitions.
     * When Data Pump loaded the rows into the database, the table was already partitioned, but it didn't cause any problems.
+    * There are 16 rows; one for each partition. 
 
     <details>
     <summary>*click to see the output*</summary>

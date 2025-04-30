@@ -740,112 +740,956 @@ Another option is to transfer the statistics from the source database using the 
 
 ## Task 4: Constraints
 
-set timing on
-create table appuser.tab2 as select * from appuser.tab3;
-create table appuser.tab1 as select * from appuser.tab3;
-create table appuser.tab4 as select * from appuser.tab3;
+Constraints are used to enforce data quality and is often used extensively. A constraint is by default in *validated* state. This means that database guarantees that all data meets the constraint the defintion. When Data Pump adds a validated constraint during import, the database full scans the table. You can save a lot of time by adding the constraint as *not validated*. Adding a not validated constraint is an instant data dictionary change and doesn't require a full scan. 
 
-set timing on
-alter table appuser.tab1 add constraint c_tab1_c01 check (owner != 'FOOBAR') enable validate;
-alter table appuser.tab1 add constraint c_tab1_c02 check (object_name != 'FOOBAR') enable validate;
-alter table appuser.tab1 add constraint c_tab1_c03 check (SUBOBJECT_NAME != 'FOOBAR') enable validate;
-alter table appuser.tab1 add constraint c_tab1_c04 check (OBJECT_TYPE != 'FOOBAR') enable validate;
-alter table appuser.tab1 add constraint c_tab1_c05 check (TIMESTAMP != 'FOOBAR') enable validate;
-alter table appuser.tab1 add constraint c_tab1_c06 check (STATUS != 'FOOBAR') enable validate;
-alter table appuser.tab1 add constraint c_tab1_c07 check (TEMPORARY in ('Y', 'N')) enable validate;
-alter table appuser.tab1 add constraint c_tab1_c08 check (SECONDARY in ('Y', 'N')) enable validate;
-alter table appuser.tab1 add constraint c_tab1_c09 check (EDITIONABLE in ('Y', 'N')) enable validate;
-alter table appuser.tab1 add constraint c_tab1_c10 check (ORACLE_MAINTAINED in ('Y', 'N')) enable validate;
-alter table appuser.tab1 add constraint c_tab1_c11 check (APPLICATION in ('Y', 'N')) enable validate;
-alter table appuser.tab1 add constraint c_tab1_c12 check (DUPLICATED in ('Y', 'N')) enable validate;
-alter table appuser.tab1 add constraint c_tab1_c13 check (SHARDED in ('Y', 'N')) enable validate;
-alter table appuser.tab1 add constraint c_tab1_c14 check (EDITION_NAME != 'FOOBAR') enable validate;
-alter table appuser.tab1 add constraint c_tab1_c15 check (SHARING != 'FOOBAR') enable validate;
-alter table appuser.tab1 add constraint c_tab1_c16 check (DEFAULT_COLLATION != 'FOOBAR') enable validate;
+1. Still in the *yellow* terminal 🟨. In the lab, you can find a dump file containing a schema with four tables. Each table has million rows and 23 constraints. Copy the dump file to the **DPDIR* directory.
 
-alter table appuser.tab2 add constraint c_tab2_c01 check (owner != 'FOOBAR') enable validate;
-alter table appuser.tab2 add constraint c_tab2_c02 check (object_name != 'FOOBAR') enable validate;
-alter table appuser.tab2 add constraint c_tab2_c03 check (SUBOBJECT_NAME != 'FOOBAR') enable validate;
-alter table appuser.tab2 add constraint c_tab2_c04 check (OBJECT_TYPE != 'FOOBAR') enable validate;
-alter table appuser.tab2 add constraint c_tab2_c05 check (TIMESTAMP != 'FOOBAR') enable validate;
-alter table appuser.tab2 add constraint c_tab2_c06 check (STATUS != 'FOOBAR') enable validate;
-alter table appuser.tab2 add constraint c_tab2_c07 check (TEMPORARY in ('Y', 'N')) enable validate;
-alter table appuser.tab2 add constraint c_tab2_c08 check (SECONDARY in ('Y', 'N')) enable validate;
-alter table appuser.tab2 add constraint c_tab2_c09 check (EDITIONABLE in ('Y', 'N')) enable validate;
-alter table appuser.tab2 add constraint c_tab2_c10 check (ORACLE_MAINTAINED in ('Y', 'N')) enable validate;
-alter table appuser.tab2 add constraint c_tab2_c11 check (APPLICATION in ('Y', 'N')) enable validate;
-alter table appuser.tab2 add constraint c_tab2_c12 check (DUPLICATED in ('Y', 'N')) enable validate;
-alter table appuser.tab2 add constraint c_tab2_c13 check (SHARDED in ('Y', 'N')) enable validate;
-alter table appuser.tab2 add constraint c_tab2_c14 check (EDITION_NAME != 'FOOBAR') enable validate;
-alter table appuser.tab2 add constraint c_tab2_c15 check (SHARING != 'FOOBAR') enable validate;
-alter table appuser.tab2 add constraint c_tab2_c16 check (DEFAULT_COLLATION != 'FOOBAR') enable validate;
+    ```
+    <copy>
+    cp /home/oracle/scripts/faster-import-constraints.dmp /home/oracle/dpdir
+    </copy>
+    ```
 
-alter table appuser.tab3 add constraint c_tab3_c01 check (owner != 'FOOBAR') enable validate;
-alter table appuser.tab3 add constraint c_tab3_c02 check (object_name != 'FOOBAR') enable validate;
-alter table appuser.tab3 add constraint c_tab3_c03 check (SUBOBJECT_NAME != 'FOOBAR') enable validate;
-alter table appuser.tab3 add constraint c_tab3_c04 check (OBJECT_TYPE != 'FOOBAR') enable validate;
-alter table appuser.tab3 add constraint c_tab3_c05 check (TIMESTAMP != 'FOOBAR') enable validate;
-alter table appuser.tab3 add constraint c_tab3_c06 check (STATUS != 'FOOBAR') enable validate;
-alter table appuser.tab3 add constraint c_tab3_c07 check (TEMPORARY in ('Y', 'N')) enable validate;
-alter table appuser.tab3 add constraint c_tab3_c08 check (SECONDARY in ('Y', 'N')) enable validate;
-alter table appuser.tab3 add constraint c_tab3_c09 check (EDITIONABLE in ('Y', 'N')) enable validate;
-alter table appuser.tab3 add constraint c_tab3_c10 check (ORACLE_MAINTAINED in ('Y', 'N')) enable validate;
-alter table appuser.tab3 add constraint c_tab3_c11 check (APPLICATION in ('Y', 'N')) enable validate;
-alter table appuser.tab3 add constraint c_tab3_c12 check (DUPLICATED in ('Y', 'N')) enable validate;
-alter table appuser.tab3 add constraint c_tab3_c13 check (SHARDED in ('Y', 'N')) enable validate;
-alter table appuser.tab3 add constraint c_tab3_c14 check (EDITION_NAME != 'FOOBAR') enable validate;
-alter table appuser.tab3 add constraint c_tab3_c15 check (SHARING != 'FOOBAR') enable validate;
-alter table appuser.tab3 add constraint c_tab3_c16 check (DEFAULT_COLLATION != 'FOOBAR') enable validate;
+2. Examine a pre-created parameter file.
 
-alter table appuser.tab4 add constraint c_tab4_c01 check (owner != 'FOOBAR') enable validate;
-alter table appuser.tab4 add constraint c_tab4_c02 check (object_name != 'FOOBAR') enable validate;
-alter table appuser.tab4 add constraint c_tab4_c03 check (SUBOBJECT_NAME != 'FOOBAR') enable validate;
-alter table appuser.tab4 add constraint c_tab4_c04 check (OBJECT_TYPE != 'FOOBAR') enable validate;
-alter table appuser.tab4 add constraint c_tab4_c05 check (TIMESTAMP != 'FOOBAR') enable validate;
-alter table appuser.tab4 add constraint c_tab4_c06 check (STATUS != 'FOOBAR') enable validate;
-alter table appuser.tab4 add constraint c_tab4_c07 check (TEMPORARY in ('Y', 'N')) enable validate;
-alter table appuser.tab4 add constraint c_tab4_c08 check (SECONDARY in ('Y', 'N')) enable validate;
-alter table appuser.tab4 add constraint c_tab4_c09 check (EDITIONABLE in ('Y', 'N')) enable validate;
-alter table appuser.tab4 add constraint c_tab4_c10 check (ORACLE_MAINTAINED in ('Y', 'N')) enable validate;
-alter table appuser.tab4 add constraint c_tab4_c11 check (APPLICATION in ('Y', 'N')) enable validate;
-alter table appuser.tab4 add constraint c_tab4_c12 check (DUPLICATED in ('Y', 'N')) enable validate;
-alter table appuser.tab4 add constraint c_tab4_c13 check (SHARDED in ('Y', 'N')) enable validate;
-alter table appuser.tab4 add constraint c_tab4_c14 check (EDITION_NAME != 'FOOBAR') enable validate;
-alter table appuser.tab4 add constraint c_tab4_c15 check (SHARING != 'FOOBAR') enable validate;
-alter table appuser.tab4 add constraint c_tab4_c16 check (DEFAULT_COLLATION != 'FOOBAR') enable validate;
+    ```
+    <copy>
+    cat /home/oracle/scripts/dp-05-import-validate.par
+    </copy>
+    ```
 
-select table_name, constraint_name from dba_constraints where table_name='TAB1';
-select table_name, constraint_name from dba_constraints where table_name='TAB2';
-select table_name, constraint_name from dba_constraints where table_name='TAB3';
-select table_name, constraint_name from dba_constraints where table_name='TAB4';
+    * This is a regular import.
+    * Notice the `JOB_NAME` parameter. This gives the Data Pump a specific name, so you can easily attach to the Data Pump from a different session. The import will run for a while and you will attach to the job and monitor it.
 
-select table_name, count(*) from dba_constraints where owner='APPUSER' group by table_name;
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    directory=dpdir
+    dumpfile=faster-import-constraints.dmp
+    parallel=4
+    logfile=faster-import-constraints-import-validate.log
+    logtime=all
+    metrics=yes
+    job_name=constr_validate
+    ```
+    </details> 
 
+3. Start the import.
 
-create table appuser.tab2 as select * from appuser.tab1;
-insert into appuser.tab2 select * from appuser.tab2;
-commit;
+    ```
+    <copy>
+    . ftex
+    impdp dpuser/oracle parfile=/home/oracle/scripts/dp-05-import-validate.par
+    </copy>
 
-drop table appuser.tab3;
-create table appuser.tab3 as select * from appuser.tab2;
-drop table appuser.tab2;
-create table appuser.tab2 as select * from appuser.tab3;
-insert into appuser.tab2 select * from appuser.tab2;
-commit;
+    -- Be sure to hit RETURN
+    ```
+
+    * Don't wait for the import to complete.
+    * Leave it running in the *yellow* terminal 🟨.
+    * Move on with the next step.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    Import: Release 19.0.0.0.0 - Production on Wed Apr 30 17:09:10 2025
+    Version 19.27.0.0.0
+    
+    Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+    
+    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+    30-APR-25 17:09:13.051: W-1 Startup took 1 seconds
+    30-APR-25 17:09:13.779: W-1 Master table "DPUSER"."CONSTR_VALIDATE" successfully loaded/unloaded
+    30-APR-25 17:09:13.892: Starting "DPUSER"."CONSTR_VALIDATE":  dpuser/******** parfile=/home/oracle/scripts/dp-05-import-valite.par
+    30-APR-25 17:09:13.901: W-1 Processing object type SCHEMA_EXPORT/USER
+    30-APR-25 17:09:13.974: W-1      Completed 1 USER objects in 0 seconds
+    30-APR-25 17:09:13.974: W-1      Completed by worker 1 1 USER objects in 0 seconds
+    30-APR-25 17:09:13.975: W-1 Processing object type SCHEMA_EXPORT/SYSTEM_GRANT
+    30-APR-25 17:09:13.998: W-1      Completed 1 SYSTEM_GRANT objects in 0 seconds
+    30-APR-25 17:09:13.998: W-1      Completed by worker 1 1 SYSTEM_GRANT objects in 0 seconds
+    30-APR-25 17:09:13.999: W-1 Processing object type SCHEMA_EXPORT/ROLE_GRANT
+    30-APR-25 17:09:14.021: W-1      Completed 1 ROLE_GRANT objects in 0 seconds
+    30-APR-25 17:09:14.021: W-1      Completed by worker 1 1 ROLE_GRANT objects in 0 seconds
+    30-APR-25 17:09:14.023: W-1 Processing object type SCHEMA_EXPORT/DEFAULT_ROLE
+    30-APR-25 17:09:14.042: W-1      Completed 1 DEFAULT_ROLE objects in 0 seconds
+    30-APR-25 17:09:14.042: W-1      Completed by worker 1 1 DEFAULT_ROLE objects in 0 seconds
+    30-APR-25 17:09:14.043: W-1 Processing object type SCHEMA_EXPORT/PRE_SCHEMA/PROCACT_SCHEMA
+    30-APR-25 17:09:14.137: W-1      Completed 1 PROCACT_SCHEMA objects in 0 seconds
+    30-APR-25 17:09:14.137: W-1      Completed by worker 1 1 PROCACT_SCHEMA objects in 0 seconds
+    30-APR-25 17:09:14.138: W-1 Processing object type SCHEMA_EXPORT/TABLE/TABLE
+    30-APR-25 17:09:14.516: W-2 Startup took 0 seconds
+    30-APR-25 17:09:14.530: W-3 Startup took 0 seconds
+    30-APR-25 17:09:14.533: W-4 Startup took 0 seconds
+    30-APR-25 17:09:14.613: W-3      Completed 4 TABLE objects in 0 seconds
+    30-APR-25 17:09:14.613: W-3      Completed by worker 1 3 TABLE objects in 0 seconds
+    30-APR-25 17:09:14.613: W-3      Completed by worker 2 1 TABLE objects in 0 seconds
+    30-APR-25 17:09:14.624: W-4 Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
+    ```
+    </details> 
 
 
-expdp dpuser/oracle schemas=appuser compression=all directory=dpdir dumpfile=faster-import-constraints.dmp exclude=statistics reuse_dumpfiles=yes logfile=faster-import-constraints-export.log logtime=all metrics=yes
+4. Now, switch to the *blue* 🟦 terminal. Attach another Data Pump session to the running job.
 
-impdp dpuser/oracle directory=dpdir dumpfile=faster-import-constraints.dmp parallel=4 remap_schema=APPUSER:CONSTR_VALIDATE logfile=faster-import-constraints-import-validate.log logtime=all metrics=yes
+    ```
+    <copy>
+    . ftex
+    impdp dpuser/oracle attach=CONSTR_VALIDATE
+    </copy>
 
-must have multiple workers
+    -- Be sure to hit RETURN
+    ```
 
-remap_schema=APPUSER:CONSTR_VALIDATE
-remap_schema=APPUSER:CONSTR_NOVALIDATE
+    * You're now in the *interactive console*.
+    * It's a separate session but connected to the running import in the *yellow* terminal 🟨.
+    * Scroll through the output and familiarize yourself with the information.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    Import: Release 19.0.0.0.0 - Production on Wed Apr 30 17:09:21 2025
+    Version 19.27.0.0.0
+    
+    Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+    
+    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+    
+    Job: CONSTR_VALIDATE
+      Owner: DPUSER
+      Operation: IMPORT
+      Creator Privs: TRUE
+      GUID: 3402F9CFC76C4E47E063A601000A9500
+      Start Time: Wednesday, 30 April, 2025 17:09:12
+      Mode: FULL
+      Instance: FTEX
+      Max Parallelism: 4
+      Timezone: +00:00
+      Timezone version: 44
+      Endianness: LITTLE
+      NLS character set: AL32UTF8
+      NLS NCHAR character set: AL16UTF16
+      EXPORT Job Parameters:
+      Parameter Name      Parameter Value:
+         CLIENT_COMMAND        dpuser/******** schemas=constr_validate compression=all directory=dpdir dumpfile=faster-import-constraints.dmp exclude=statistics reuse_dumpfiles=yes     logfile=faster-import-constraints-export.log logtime=all metrics=yes
+         COMPRESSION           ALL
+         LOGTIME               ALL
+         METRICS               1
+         TRACE                 0
+      IMPORT Job Parameters:
+      Parameter Name      Parameter Value:
+         CLIENT_COMMAND        dpuser/******** parfile=/home/oracle/scripts/dp-05-import-valite.par
+         LOGTIME               ALL
+         METRICS               1
+         TRACE                 0
+      State: EXECUTING
+      Bytes Processed: 0
+      Current Parallelism: 4
+      Job Error Count: 0
+      Job heartbeat: 1
+      Dump File: /home/oracle/dpdir/faster-import-constraints.dmp
+    
+    Worker 1 Status:
+      Instance ID: 1
+      Instance name: FTEX
+      Host name: holserv1.livelabs.oraclevcn.com
+      Object start time: Wednesday, 30 April, 2025 17:09:14
+      Object status at: Wednesday, 30 April, 2025 17:09:14
+      Process Name: DW00
+      State: EXECUTING
+      Object Schema: CONSTR_VALIDATE
+      Object Name: T1
+      Object Type: SCHEMA_EXPORT/TABLE/TABLE_DATA
+      Completed Objects: 1
+      Completed Bytes: 400,185,632
+      Worker Parallelism: 1
+    
+    Worker 2 Status:
+      Instance ID: 1
+      Instance name: FTEX
+      Host name: holserv1.livelabs.oraclevcn.com
+      Object start time: Wednesday, 30 April, 2025 17:09:14
+      Object status at: Wednesday, 30 April, 2025 17:09:14
+      Process Name: DW01
+      State: EXECUTING
+      Object Schema: CONSTR_VALIDATE
+      Object Name: T2
+      Object Type: SCHEMA_EXPORT/TABLE/TABLE_DATA
+      Completed Objects: 1
+      Completed Bytes: 400,257,480
+      Worker Parallelism: 1
+    
+    Worker 3 Status:
+      Instance ID: 1
+      Instance name: FTEX
+      Host name: holserv1.livelabs.oraclevcn.com
+      Object start time: Wednesday, 30 April, 2025 17:09:14
+      Object status at: Wednesday, 30 April, 2025 17:09:14
+      Process Name: DW02
+      State: EXECUTING
+      Object Schema: CONSTR_VALIDATE
+      Object Name: T3
+      Object Type: SCHEMA_EXPORT/TABLE/TABLE_DATA
+      Completed Objects: 1
+      Completed Bytes: 400,199,144
+      Worker Parallelism: 1
+    
+    Worker 4 Status:
+      Instance ID: 1
+      Instance name: FTEX
+      Host name: holserv1.livelabs.oraclevcn.com
+      Object start time: Wednesday, 30 April, 2025 17:09:14
+      Object status at: Wednesday, 30 April, 2025 17:09:14
+      Process Name: DW03
+      State: EXECUTING
+      Object Schema: CONSTR_VALIDATE
+      Object Name: T4
+      Object Type: SCHEMA_EXPORT/TABLE/TABLE_DATA
+      Completed Objects: 1
+      Completed Bytes: 400,209,328
+      Worker Parallelism: 1
+    
+    Import>    
+    ```
+    </details> 
+
+5. Get a list of commands.
+
+    ```
+    <copy>
+    help
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    ------------------------------------------------------------------------------
+    
+    The following commands are valid while in interactive mode.
+    Note: abbreviations are allowed.
+    
+    CONTINUE_CLIENT
+    Return to logging mode. Job will be restarted if idle.
+    
+    EXIT_CLIENT
+    Quit client session and leave job running.
+    
+    HELP
+    Summarize interactive commands.
+    
+    KILL_JOB
+    Detach and delete job.
+    
+    PARALLEL
+    Change the number of active workers for current job.
+    
+    START_JOB
+    Start or resume current job.
+    Valid keywords are: SKIP_CURRENT.
+    
+    STATUS
+    Frequency (secs) job status is to be monitored where
+    the default [0] will show new status when available.
+    
+    STOP_JOB
+    Orderly shutdown of job execution and exits the client.
+    Valid keywords are: IMMEDIATE.
+    
+    STOP_WORKER
+    Stops a hung or stuck worker.
+    
+    TRACE
+    Set trace/debug flags for the current job.    
+    ```
+    </details> 
+
+6. Get a status of the running job.
+
+    ```
+    <copy>
+    status
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    * Notice that each worker is processing a different table. 
+    * Run the `STATUS` a few times and notice *Completed Rows* increasing.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    Job: CONSTR_VALIDATE
+      Operation: IMPORT
+      Mode: FULL
+      State: EXECUTING
+      Bytes Processed: 0
+      Current Parallelism: 4
+      Job Error Count: 0
+      Job heartbeat: 2
+      Dump File: /home/oracle/dpdir/faster-import-constraints.dmp
+    
+    Worker 1 Status:
+      Instance ID: 1
+      Instance name: FTEX
+      Host name: holserv1.livelabs.oraclevcn.com
+      Object start time: Wednesday, 30 April, 2025 17:09:14
+      Object status at: Wednesday, 30 April, 2025 17:09:14
+      Process Name: DW00
+      State: EXECUTING
+      Object Schema: CONSTR_VALIDATE
+      Object Name: T1
+      Object Type: SCHEMA_EXPORT/TABLE/TABLE_DATA
+      Completed Objects: 1
+      Completed Rows: 3,981,428
+      Completed Bytes: 400,185,632
+      Percent Done: 17
+      Worker Parallelism: 1
+    
+    Worker 2 Status:
+      Instance ID: 1
+      Instance name: FTEX
+      Host name: holserv1.livelabs.oraclevcn.com
+      Object start time: Wednesday, 30 April, 2025 17:09:14
+      Object status at: Wednesday, 30 April, 2025 17:09:14
+      Process Name: DW01
+      State: EXECUTING
+      Object Schema: CONSTR_VALIDATE
+      Object Name: T2
+      Object Type: SCHEMA_EXPORT/TABLE/TABLE_DATA
+      Completed Objects: 1
+      Completed Rows: 3,981,425
+      Completed Bytes: 400,257,480
+      Percent Done: 17
+      Worker Parallelism: 1
+    
+    Worker 3 Status:
+      Instance ID: 1
+      Instance name: FTEX
+      Host name: holserv1.livelabs.oraclevcn.com
+      Object start time: Wednesday, 30 April, 2025 17:09:14
+      Object status at: Wednesday, 30 April, 2025 17:09:14
+      Process Name: DW02
+      State: EXECUTING
+      Object Schema: CONSTR_VALIDATE
+      Object Name: T3
+      Object Type: SCHEMA_EXPORT/TABLE/TABLE_DATA
+      Completed Objects: 1
+      Completed Rows: 3,982,197
+      Completed Bytes: 400,199,144
+      Percent Done: 17
+      Worker Parallelism: 1
+    
+    Worker 4 Status:
+      Instance ID: 1
+      Instance name: FTEX
+      Host name: holserv1.livelabs.oraclevcn.com
+      Object start time: Wednesday, 30 April, 2025 17:09:14
+      Object status at: Wednesday, 30 April, 2025 17:09:14
+      Process Name: DW03
+      State: EXECUTING
+      Object Schema: CONSTR_VALIDATE
+      Object Name: T4
+      Object Type: SCHEMA_EXPORT/TABLE/TABLE_DATA
+      Completed Objects: 1
+      Completed Rows: 3,982,202
+      Completed Bytes: 400,209,328
+      Percent Done: 17
+      Worker Parallelism: 1    
+    ```
+    </details> 
+
+7. Increase the parallel degree to six.
+
+    ```
+    <copy>
+    parallel=6
+    </copy>
+    ```
+
+8. Use the `STATUS` command see how many workers are active. 
+    
+    ```
+    <copy>
+    status
+    </copy>
+    ```
+
+    * There are still only four active workers, even though you raised the parallel degree.
+    * Spend a moment to think about the reason.
+
+    <details>
+    <summary>*click to see the answer*</summary>
+    ``` text
+    In the dump file there are only four tables. Each of the four original workers are busy working on the tables. One table is only processed by one worker, so the extra two workers wouldn't make a difference. So, Data Pump doesn't use the resources to start them.
+    Had there been more tables, the workers would immediately be started and assigned to a table.
+    ```
+    </details> 
+
+9. Switch back to the *yellow* terminal 🟨. Data Pump should be processing `SCHEMA_EXPORT/TABLE/TABLE_DATA`. That's import of rows and you just saw how the `STATUS` command could give more detailed information.
+
+10. In this exercise, the name is *CONSTR\_VALIDATE*. You used the parameter `JOB_NAME` to set it. See if you can find the name in the Data Pump output.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    30-APR-25 17:09:13.779: W-1 Master table "DPUSER"."CONSTR_VALIDATE" successfully loaded/unloaded
+    30-APR-25 17:09:13.892: Starting "DPUSER"."CONSTR_VALIDATE":  dpuser/******** parfile=/home/oracle/scripts/dp-05-import-valite.par
+    ```
+    </details> 
+
+    * If you don't give a job a specific name, Data Pump generates one for you.
+    * You can still attach to the job from a different session.
+
+11. After a while Data Pump is done processing rows. It will move on to process constraints. This happens in `SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT`. 
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    30-APR-25 17:09:14.624: W-4 Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
+    30-APR-25 17:13:47.914: W-4 . . imported "CONSTR_VALIDATE"."T4"                      381.6 MB 23312384 rows in 273 seconds using direct_path
+    30-APR-25 17:13:51.251: W-1 . . imported "CONSTR_VALIDATE"."T1"                      381.6 MB 23312384 rows in 277 seconds using direct_path
+    30-APR-25 17:13:51.313: W-2 . . imported "CONSTR_VALIDATE"."T2"                      381.7 MB 23312384 rows in 276 seconds using direct_path
+    30-APR-25 17:13:51.453: W-3 . . imported "CONSTR_VALIDATE"."T3"                      381.6 MB 23312384 rows in 277 seconds using direct_path
+    30-APR-25 17:13:51.466: W-1 Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
+    ```
+    </details> 
+
+    * If your job is not there yet, then wait a little while. 
+
+12. When Data Pump is processing constraints (`SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT`) switch to the *blue* 🟦 terminal.
+
+13. Get a new status.
+
+    ```
+    <copy>
+    status
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    * When Data Pump processes constraints the work is done by only one worker. 
+    * All other workers are idle.
+    * When Data Pump adds a constraint, the database will perform a full scan to ensure the column has no bad data. This full scan can't use parallel query.
+    * So, one worker is processing constraints and each constraint uses no parallel query.
+    * This is the reason why it might take very long to add constraints.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    Import> status
+    
+    Job: CONSTR_VALIDATE
+      Operation: IMPORT
+      Mode: FULL
+      State: EXECUTING
+      Bytes Processed: 1,600,851,584
+      Percent Done: 14
+      Current Parallelism: 6
+      Job Error Count: 0
+      Job heartbeat: 2
+      Dump File: /home/oracle/dpdir/faster-import-constraints.dmp
+    
+    Worker 1 Status:
+      Instance ID: 1
+      Instance name: FTEX
+      Host name: holserv1.livelabs.oraclevcn.com
+      Access method: direct_path
+      Object start time: Wednesday, 30 April, 2025 17:13:51
+      Object status at: Wednesday, 30 April, 2025 17:13:51
+      Process Name: DW00
+      State: WORK WAITING
+    
+    Worker 2 Status:
+      Instance ID: 1
+      Instance name: FTEX
+      Host name: holserv1.livelabs.oraclevcn.com
+      Object start time: Wednesday, 30 April, 2025 17:13:51
+      Object status at: Wednesday, 30 April, 2025 17:13:51
+      Process Name: DW01
+      State: EXECUTING
+      Object Schema: CONSTR_VALIDATE
+      Object Name: C_TAB1_C01
+      Object Type: SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
+      Worker Parallelism: 1
+    
+    Worker 3 Status:
+      Instance ID: 1
+      Instance name: FTEX
+      Host name: holserv1.livelabs.oraclevcn.com
+      Access method: direct_path
+      Object start time: Wednesday, 30 April, 2025 17:13:51
+      Object status at: Wednesday, 30 April, 2025 17:13:51
+      Process Name: DW02
+      State: WORK WAITING
+    
+    Worker 4 Status:
+      Instance ID: 1
+      Instance name: FTEX
+      Host name: holserv1.livelabs.oraclevcn.com
+      Access method: direct_path
+      Object start time: Wednesday, 30 April, 2025 17:13:47
+      Object status at: Wednesday, 30 April, 2025 17:13:51
+      Process Name: DW03
+      State: WORK WAITING    
+    ```
+    </details> 
+
+14. Switch back to the *yellow* terminal 🟨. It usually takes a few minutes to add the constraints. Wait for the job to complete.
+
+    * It took almost 5 minutes to import the table data.
+    * In addition it took 3 three minutes to add constraints.
+    * If you move bigger data sets with more constraints, it can take hours to add the constraints.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    Import: Release 19.0.0.0.0 - Production on Wed Apr 30 17:09:10 2025
+    Version 19.27.0.0.0
+    
+    Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+    
+    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+    30-APR-25 17:09:13.051: W-1 Startup took 1 seconds
+    30-APR-25 17:09:13.779: W-1 Master table "DPUSER"."CONSTR_VALIDATE" successfully loaded/unloaded
+    30-APR-25 17:09:13.892: Starting "DPUSER"."CONSTR_VALIDATE":  dpuser/******** parfile=/home/oracle/scripts/dp-05-import-valite.par
+    30-APR-25 17:09:13.901: W-1 Processing object type SCHEMA_EXPORT/USER
+    30-APR-25 17:09:13.974: W-1      Completed 1 USER objects in 0 seconds
+    30-APR-25 17:09:13.974: W-1      Completed by worker 1 1 USER objects in 0 seconds
+    30-APR-25 17:09:13.975: W-1 Processing object type SCHEMA_EXPORT/SYSTEM_GRANT
+    30-APR-25 17:09:13.998: W-1      Completed 1 SYSTEM_GRANT objects in 0 seconds
+    30-APR-25 17:09:13.998: W-1      Completed by worker 1 1 SYSTEM_GRANT objects in 0 seconds
+    30-APR-25 17:09:13.999: W-1 Processing object type SCHEMA_EXPORT/ROLE_GRANT
+    30-APR-25 17:09:14.021: W-1      Completed 1 ROLE_GRANT objects in 0 seconds
+    30-APR-25 17:09:14.021: W-1      Completed by worker 1 1 ROLE_GRANT objects in 0 seconds
+    30-APR-25 17:09:14.023: W-1 Processing object type SCHEMA_EXPORT/DEFAULT_ROLE
+    30-APR-25 17:09:14.042: W-1      Completed 1 DEFAULT_ROLE objects in 0 seconds
+    30-APR-25 17:09:14.042: W-1      Completed by worker 1 1 DEFAULT_ROLE objects in 0 seconds
+    30-APR-25 17:09:14.043: W-1 Processing object type SCHEMA_EXPORT/PRE_SCHEMA/PROCACT_SCHEMA
+    30-APR-25 17:09:14.137: W-1      Completed 1 PROCACT_SCHEMA objects in 0 seconds
+    30-APR-25 17:09:14.137: W-1      Completed by worker 1 1 PROCACT_SCHEMA objects in 0 seconds
+    30-APR-25 17:09:14.138: W-1 Processing object type SCHEMA_EXPORT/TABLE/TABLE
+    30-APR-25 17:09:14.516: W-2 Startup took 0 seconds
+    30-APR-25 17:09:14.530: W-3 Startup took 0 seconds
+    30-APR-25 17:09:14.533: W-4 Startup took 0 seconds
+    30-APR-25 17:09:14.613: W-3      Completed 4 TABLE objects in 0 seconds
+    30-APR-25 17:09:14.613: W-3      Completed by worker 1 3 TABLE objects in 0 seconds
+    30-APR-25 17:09:14.613: W-3      Completed by worker 2 1 TABLE objects in 0 seconds
+    30-APR-25 17:09:14.624: W-4 Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
+    30-APR-25 17:13:47.914: W-4 . . imported "CONSTR_VALIDATE"."T4"                      381.6 MB 23312384 rows in 273 seconds using direct_path
+    30-APR-25 17:13:51.251: W-1 . . imported "CONSTR_VALIDATE"."T1"                      381.6 MB 23312384 rows in 277 seconds using direct_path
+    30-APR-25 17:13:51.313: W-2 . . imported "CONSTR_VALIDATE"."T2"                      381.7 MB 23312384 rows in 276 seconds using direct_path
+    30-APR-25 17:13:51.453: W-3 . . imported "CONSTR_VALIDATE"."T3"                      381.6 MB 23312384 rows in 277 seconds using direct_path
+    30-APR-25 17:13:51.466: W-1 Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
+    30-APR-25 17:16:35.025: W-3      Completed 92 CONSTRAINT objects in 164 seconds
+    30-APR-25 17:16:35.025: W-3      Completed by worker 2 92 CONSTRAINT objects in 164 seconds
+    30-APR-25 17:16:35.035: W-4      Completed 4 SCHEMA_EXPORT/TABLE/TABLE_DATA objects in 277 seconds
+    30-APR-25 17:16:35.071: Job "DPUSER"."CONSTR_VALIDATE" successfully completed at Wed Apr 30 17:16:35 2025 elapsed 0 00:07:23    
+    ```
+    </details> 
+
+15. There is a Data Pump transformation that allows you to add the constraints as *NOT VALIDATED* instead of *VALIDATED*. This can reduce the time it takes to add constraints from minutes or hours to just seconds. Examine a pre-created parameter file.
 
 
+    ```
+    <copy>
+    cat /home/oracle/scripts/dp-05-import-novalidate.par
+    </copy>
+    ```
 
-## Task 5: Indexes
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    directory=dpdir
+    dumpfile=faster-import-constraints.dmp
+    parallel=4
+    logfile=faster-import-constraints-import-novalidate.log
+    logtime=all
+    metrics=yes
+    job_name=constr_novalidate
+    transform=constraint_novalidate:y
+    ```
+    </details> 
+
+16. Drop the schema, so you can import again.
+
+    ```
+    <copy>
+    . ftex
+    sqlplus / as sysdba<<EOF
+       drop user constr_validate cascade;
+    EOF
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL*Plus: Release 19.0.0.0.0 - Production on Wed Apr 30 17:54:12 2025
+    Version 19.27.0.0.0
+    
+    Copyright (c) 1982, 2024, Oracle.  All rights reserved.
+    
+    
+    Connected to:
+    Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+    Version 19.27.0.0.0
+    
+    SQL>
+    User dropped.
+    
+    SQL> Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+    Version 19.27.0.0.0
+    ```
+    </details> 
+
+17. Start the import and allow Data Pump to add the constraints as not validated.
+
+    ```
+    <copy>
+    impdp dpuser/oracle parfile=/home/oracle/scripts/dp-05-import-novalidate.par
+    </copy>
+    ```
+
+    * As soon as the job starts, move on with the new step.
+    * Don't wait for the job to finish.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    Import: Release 19.0.0.0.0 - Production on Wed Apr 30 18:08:33 2025
+    Version 19.27.0.0.0
+    
+    Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+    
+    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+    30-APR-25 18:08:35.330: W-1 Startup took 0 seconds
+    30-APR-25 18:08:35.975: W-1 Master table "DPUSER"."CONSTR_NOVALIDATE" successfully loaded/unloaded
+    30-APR-25 18:08:36.053: Starting "DPUSER"."CONSTR_NOVALIDATE":  dpuser/******** parfile=/home/oracle/scripts/dp-05-import-novalidate.par
+    30-APR-25 18:08:36.064: W-1 Processing object type SCHEMA_EXPORT/USER
+    30-APR-25 18:08:36.138: W-1      Completed 1 USER objects in 0 seconds
+    30-APR-25 18:08:36.138: W-1      Completed by worker 1 1 USER objects in 0 seconds
+    30-APR-25 18:08:36.140: W-1 Processing object type SCHEMA_EXPORT/SYSTEM_GRANT
+    30-APR-25 18:08:36.165: W-1      Completed 1 SYSTEM_GRANT objects in 0 seconds
+    30-APR-25 18:08:36.165: W-1      Completed by worker 1 1 SYSTEM_GRANT objects in 0 seconds
+    30-APR-25 18:08:36.166: W-1 Processing object type SCHEMA_EXPORT/ROLE_GRANT
+    30-APR-25 18:08:36.189: W-1      Completed 1 ROLE_GRANT objects in 0 seconds
+    30-APR-25 18:08:36.189: W-1      Completed by worker 1 1 ROLE_GRANT objects in 0 seconds
+    30-APR-25 18:08:36.190: W-1 Processing object type SCHEMA_EXPORT/DEFAULT_ROLE
+    30-APR-25 18:08:36.210: W-1      Completed 1 DEFAULT_ROLE objects in 0 seconds
+    30-APR-25 18:08:36.210: W-1      Completed by worker 1 1 DEFAULT_ROLE objects in 0 seconds
+    30-APR-25 18:08:36.212: W-1 Processing object type SCHEMA_EXPORT/PRE_SCHEMA/PROCACT_SCHEMA
+    30-APR-25 18:08:36.303: W-1      Completed 1 PROCACT_SCHEMA objects in 0 seconds
+    30-APR-25 18:08:36.303: W-1      Completed by worker 1 1 PROCACT_SCHEMA objects in 0 seconds
+    30-APR-25 18:08:36.304: W-1 Processing object type SCHEMA_EXPORT/TABLE/TABLE
+    30-APR-25 18:08:36.672: W-2 Startup took 0 seconds
+    30-APR-25 18:08:36.702: W-3 Startup took 0 seconds
+    30-APR-25 18:08:36.710: W-4 Startup took 0 seconds
+    30-APR-25 18:08:36.767: W-1      Completed 4 TABLE objects in 0 seconds
+    30-APR-25 18:08:36.767: W-1      Completed by worker 1 3 TABLE objects in 0 seconds
+    30-APR-25 18:08:36.767: W-1      Completed by worker 2 1 TABLE objects in 0 seconds
+    30-APR-25 18:08:36.778: W-3 Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA    
+    ```
+    </details> 
+
+18. Switch to the *blue* 🟦 terminal.
+
+19. You're probably in the interactive console from the previous import. You should see the `Import>` prompt. Exit from the interactive console. 
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
+    * Don't use the `EXIT` command if you are in the shell.
+    * If you accidently close the *blue* 🟦 terminal, you can open a new tab in the terminal.
+
+20. Connect to the *FTEX* database. 
+
+    ```
+    <copy>
+    . ftex
+    sqlplus / as sysdba
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+21. Get a list of running jobs.
+
+    ```
+    <copy>
+    col operation format a20
+    col job_mode format a20
+    col state format a20
+    select operation, job_mode, state, degree from dba_datapump_jobs where owner_name='DPUSER';
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    OPERATION            JOB_MODE             STATE                DEGREE
+    -------------------- -------------------- -------------------- ----------
+    IMPORT               FULL                 EXECUTING            4    
+    
+    1 row selected.
+    ```
+    </details> 
+
+22. Get a list of Data Pump sessions.
+
+    ```
+    <copy>
+    select inst_id, saddr, session_type from dba_datapump_sessions;
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    INST_ID    SADDR            SESSION_TYPE
+    ---------- ---------------- --------------
+    1          000000006F701888 DBMS_DATAPUMP
+    1          000000006F333B68 MASTER
+    1          000000006EC9C728 WORKER
+    1          000000006ED37350 WORKER
+    1          000000006EDC0820 WORKER
+    1          000000006F5C7068 WORKER
+    
+    6 rows selected.    
+    ```
+    </details> 
+
+23. Get a list of long running operations.
+
+    ```
+    <copy>
+    set line 100
+    col opname format a18
+    col target_desc format a12
+    col message format a50
+    select opname, target_desc, message, sql_id from  v$session_longops
+    where sofar != totalwork;
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    OPNAME             TARGET_DESC  MESSAGE                                            SQL_ID
+    ------------------ ------------ -------------------------------------------------- -------------
+    CONSTR_NOVALIDATE  IMPORT       CONSTR_NOVALIDATE: IMPORT : 0 out of 10227 MB done bn21aqz1pgytj
+
+    1 row selected.
+    ```
+    </details> 
+
+24. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
+25. Switch back to the *yellow* terminal 🟨. Wait for the Data Pump job to complete. 
+
+26. When the jobs complete. Check the time it took to add constraints.
+
+    * Look for the object type `SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT`.
+    * It took 0 seconds to add all 92 constraints. 
+    * Because Data Pump adds the constraints as *not validated*, the database just write the constraint defintion to the data dictionary. It does not check the table.
+    * In the previous import where Data Pump added *validated* constraints, the same operation took 162 seconds.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    30-APR-25 18:13:10.621: W-1 Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
+    30-APR-25 18:13:10.921: W-2      Completed 92 CONSTRAINT objects in 0 seconds
+    30-APR-25 18:13:10.921: W-2      Completed by worker 4 92 CONSTRAINT objects in 0 seconds
+    ```
+    </details> 
+
+27. It is preferable to have validated constraints. A validated constraint allows the optimizer to perform certain query optimizations. 
+
+28. Connect to the *FTEX* database.
+
+    ```
+    <copy>
+    . ftex
+    sqlplus / as sysdba
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+29. Check the state of all the constraints.
+
+    ```
+    <copy>
+    col table_name format a30
+    select   table_name, validated, count(*) 
+    from     all_constraints 
+    where    owner='CONSTR_VALIDATE' 
+    group by table_name, validated;
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    * As expected, all constraints are not validated.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    TABLE_NAME                     VALIDATED       COUNT(*)
+    ------------------------------ ------------- ----------
+    T4                             NOT VALIDATED         23
+    T1                             NOT VALIDATED         23
+    T2                             NOT VALIDATED         23
+    T3                             NOT VALIDATED         23
+    ```
+    </details> 
+
+30. Validate some of the constraints.
+
+    ```
+    <copy>
+    set timing on
+    alter table constr_validate.t1 modify constraint C_TAB1_C10 validate;
+    alter table constr_validate.t1 modify constraint C_TAB1_C11 validate;
+    alter table constr_validate.t1 modify constraint C_TAB1_C12 validate;
+    alter table constr_validate.t1 modify constraint C_TAB1_C13 validate;
+    alter table constr_validate.t1 modify constraint C_TAB1_C14 validate;
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    * It takes around two seconds to validate each of the constraints. 
+    * The table is probably already in the buffer cache, but it still requires a full scan.
+    * Validating an already enabled constraint does *not* require a table lock, so you can perform this operation without any outage.
+    * The validation recursively runs a full table scan, that requires resources, but it's important to stress that there's no table lock.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text   
+    SQL> alter table constr_validate.t1 modify constraint C_TAB1_C10 validate;
+        
+    Table altered.
+    
+    Elapsed: 00:00:01.90
+    
+    SQL> alter table constr_validate.t1 modify constraint C_TAB1_C11 validate;
+        
+    Table altered.
+    
+    Elapsed: 00:00:01.97
+    
+    SQL> alter table constr_validate.t1 modify constraint C_TAB1_C12 validate;
+
+    Table altered.
+    
+    Elapsed: 00:00:02.12
+    
+    SQL> alter table constr_validate.t1 modify constraint C_TAB1_C13 validate;
+
+    Table altered.
+    
+    Elapsed: 00:00:02.13
+
+    SQL> alter table constr_validate.t1 modify constraint C_TAB1_C14 validate;
+    
+    Table altered.
+    
+    Elapsed: 00:00:01.74
+    ```
+    </details> 
+
+30. When validating an already enabled constraint, you can take advantage of parallel query and do the validation much faster. Validate some more constraints.
+
+    ```
+    <copy>
+    set timing on
+    alter table constr_validate.t1 parallel;
+    alter table constr_validate.t1 modify constraint C_TAB1_C15 validate;
+    alter table constr_validate.t1 modify constraint C_TAB1_C16 validate;
+    alter table constr_validate.t1 modify constraint C_TAB1_C17 validate;
+    alter table constr_validate.t1 modify constraint C_TAB1_C18 validate;
+    alter table constr_validate.t1 modify constraint C_TAB1_C19 validate;
+    alter table constr_validate.t1 noparallel;
+    </copy>
+
+    -- Be sure to hit RETURN
+    ```
+
+    * It takes less time to perform the validation because the database can use parallel query to full scan the table.
+    * Still it does *not* require a table lock.
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text   
+    SQL> alter table constr_validate.t1 parallel;
+        
+    Table altered.
+    
+    Elapsed: 00:00:00.01
+    
+    SQL> alter table constr_validate.t1 modify constraint C_TAB1_C15 validate;
+        
+    Table altered.
+    
+    Elapsed: 00:00:00.20
+    
+    SQL> alter table constr_validate.t1 modify constraint C_TAB1_C16 validate;
+        
+    Table altered.
+    
+    Elapsed: 00:00:00.22
+    
+    SQL> alter table constr_validate.t1 modify constraint C_TAB1_C17 validate;
+
+    Table altered.
+    
+    Elapsed: 00:00:00.16
+    
+    SQL> alter table constr_validate.t1 modify constraint C_TAB1_C18 validate;
+
+    Table altered.
+    
+    Elapsed: 00:00:00.17
+
+    SQL> alter table constr_validate.t1 modify constraint C_TAB1_C19 validate;
+    
+    Table altered.
+    
+    Elapsed: 00:00:00.19
+
+    SQL> alter table constr_validate.t1 noparallel;
+        
+    Table altered.
+    
+    Elapsed: 00:00:00.01
+    ```
+    </details> 
+
+31. Exit SQL*Plus.
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+
+32. Transforming validated constraints to not validated constraints is potentially a huge time saver. It is still adversible to validate the constraints, but you can do that after the Data Pump import while you are doing other tasks. You can even postpone the validation to a later maintenance window. You might even do it online, as it requires no table lock. 
 
 You may now *proceed to the next lab*.
 
@@ -853,6 +1697,7 @@ You may now *proceed to the next lab*.
 
 * Webinar, [Data Pump Best Practices and Real World Scenarios, LOB data and Data Pump and things to know](https://www.youtube.com/watch?v=960ToLE-ZE8&t=1798s)
 * Webinar, [Data Pump Best Practices and Real World Scenarios, Statistics and Data Pump](https://www.youtube.com/watch?v=960ToLE-ZE8&t=1117s)
+* [Speeding up Database Constraints](https://www.youtube.com/watch?v=lgFc0cduPJk&t=299s)
 
 ## Acknowledgments
 

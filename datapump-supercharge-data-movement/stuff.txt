@@ -20,10 +20,6 @@ STUFF TO REMEMBER
 
 **************************************************************
 
-##### Faster Imports
-* CONSTRAINT_NOVALIDATE and how to re-enable validation afterwards
-* Automatic parallelism for index creation on import
-
 ##### Determining Import Success
 Show how to compare source and target (objects and rows) using DBMS_COMPARISON.
 Also, show a script to compare an export log versus an import log (when the source is not available).
@@ -43,17 +39,9 @@ My Data Pump tracing recipe
 
 Use keep_master and query the master_table showing we can use it to check the total rows for each table that was exported vs imported
 
-Important views: dba_datapump_jobs (also the user variant), dba_datapump_sessions
-
 ABORT_STEP=1
 
 master_only=YES
-
-Interactive console commands
-Attaching to a job
-Using Interactive Mode to Stop and Reattach to a Job
-Universal (backwardly compatible) client (and how you don't need the client if you use the API)
-Interactive command line usage in all its forms: stop, start, adjust parallelism or tracing, status, skip current, etc
 
 ##### Upgrade, Downgrade and Convert
 Export from 19c non-CDB - import directly into 23ai PDB
@@ -84,26 +72,3 @@ The stuff in the developer package: DBMS_DEVELOPER.GET????
 ##########################################################################################################################################
 ##########################################################################################################################################
 ##########################################################################################################################################
-
-
-create table appuser.t2 as select * from appuser.tab2 where mod(rownum, 4)=1;
-create table appuser.t3 as select * from appuser.tab2 where mod(rownum, 4)=2;
-create table appuser.t4 as select * from appuser.tab2 where mod(rownum, 4)=3;
-
-set timing on
-alter table appuser.t1 add constraint c_tab2_c01 check (owner != 'FOOBAR') enable validate;
-alter table appuser.t1 add constraint c_tab2_c02 check (object_name != 'FOOBAR') enable validate;
-alter table appuser.t1 add constraint c_tab2_c03 check (SUBOBJECT_NAME != 'FOOBAR') enable validate;
-alter table appuser.t1 add constraint c_tab2_c04 check (OBJECT_TYPE != 'FOOBAR') enable validate;
-alter table appuser.t1 add constraint c_tab2_c05 check (TIMESTAMP != 'FOOBAR') enable validate;
-alter table appuser.t1 add constraint c_tab2_c06 check (STATUS != 'FOOBAR') enable validate;
-alter table appuser.t1 add constraint c_tab2_c07 check (TEMPORARY in ('Y', 'N')) enable validate;
-alter table appuser.t1 add constraint c_tab2_c08 check (SECONDARY in ('Y', 'N')) enable validate;
-alter table appuser.t1 add constraint c_tab2_c09 check (EDITIONABLE in ('Y', 'N')) enable validate;
-alter table appuser.t1 add constraint c_tab2_c10 check (ORACLE_MAINTAINED in ('Y', 'N')) enable validate;
-alter table appuser.t1 add constraint c_tab2_c11 check (APPLICATION in ('Y', 'N')) enable validate;
-alter table appuser.t1 add constraint c_tab2_c12 check (DUPLICATED in ('Y', 'N')) enable validate;
-alter table appuser.t1 add constraint c_tab2_c13 check (SHARDED in ('Y', 'N')) enable validate;
-alter table appuser.t1 add constraint c_tab2_c14 check (EDITION_NAME != 'FOOBAR') enable validate;
-alter table appuser.t1 add constraint c_tab2_c15 check (SHARING != 'FOOBAR') enable validate;
-alter table appuser.t1 add constraint c_tab2_c16 check (DEFAULT_COLLATION != 'FOOBAR') enable validate;
