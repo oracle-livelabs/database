@@ -67,7 +67,7 @@ The last issue in the previous task occurred because the departments table is mi
 
     ```sql
     <copy>
-        cd /home/oracle/assets/workshops/sqlcl-projects-react-app/scripts/
+        cd /home/assets/assets/workshops/sqlcl-projects-react-app/scripts/
     </copy>
     ```
 
@@ -76,7 +76,12 @@ The last issue in the previous task occurred because the departments table is mi
         @departments_table.sql
     </copy>
     ```
-
+    After all the inserts have run successfully, commit your changes to the database using COMMIT statement.
+    ```sql
+    <copy>
+        COMMIT
+    </copy>
+    ```
     ![Departments ddl and data executed](./images/departments-table-executed.png " ")
 
 </details>
@@ -85,7 +90,7 @@ The last issue in the previous task occurred because the departments table is mi
 
 1. Open to Database Actions
 2. Connect as DEV_USER
-3. Copy all the content of `departments-table.sql` file, then past it in the worksheet there and click on the run script button
+3. Copy all the content of `departments-table.sql` file, then past it in the worksheet there and click on the run script button.
 
     ![Run departments ddl in database actions](./images/run-departments-table-database-actions.png " ")
 
@@ -127,7 +132,7 @@ If you are still connected to DEV_USER in Database Actions, skip to step 3.
             P_SCHEMA => 'DEV_USER',
             P_OBJECT =>  'DEPARTMENTS',
             P_OBJECT_TYPE => 'TABLE',
-            P_OBJECT_ALIAS => 'DEV_USER.departments',
+            P_OBJECT_ALIAS => 'departments',
             P_AUTO_REST_AUTH => FALSE
         );
         COMMIT;
@@ -161,11 +166,11 @@ Now, our application is ready for the next release (version 2), and will be depl
 
 >**Note:** We will just simulate and imagine this process of deployments due to time constant of the workshop and also to avoid diverging from the workshop main goal (Explore Project command in SQLcl)
 
-When moving to production, we will no longer be working with the development database (DEV\_USER). Instead, the application will use the **production database**, which, in this workshop, is represented by the **PROD\_USER** schema.
+When moving to production, we will no longer be working with the development database (DEV\_USER). Instead, the application will use the **production database**, which, in this workshop, is represented by the **prod\_user** schema.
 
 Let's assume our production database is PROD_USER for all the next operations.
 
-All right, so now we will go to the .env file and replace **DEV\_USER** with **PROD\_USER**
+All right, so now we will go to the .env file and replace **dev\_user** with **prod\_user**
 
 1. In the terminal, make sure you are in the application directory.
 
@@ -185,12 +190,47 @@ All right, so now we will go to the .env file and replace **DEV\_USER** with **P
 5. Press **Esc**, then type **:wq** and press **Enter** to save and exit.
 
 6. Go to the application and refresh
+    - After making modifications to the .env file, go to the terminal where the application is running, stop the process by pressing Ctrl+C, and then restart it by running:
+    ```
+       <copy>
+         npm run dev
+     </copy>
+    ```
+    Once the application is restarted, go to the browser and refresh the page.
+
+    >**Note:** Every time you make changes to the **.env** file, you must restart the application to apply the new environment variables.
+
+    - If you don't see the changes on the department page, ensure that the DEPARTMENTS table is REST-enabled. You can verify this by executing the following SQL query:
+
+        - Connect as prod_user with : 
+            ```
+            <copy>
+            sql prod_user/$DBPASSWORD@"$DBCONNECTION" 
+            </copy>
+            ```
+        - Run this query to REST-enable departments table:
+            ```sql
+                <copy>
+                    BEGIN
+                    ORDS.ENABLE_OBJECT(
+                        P_ENABLED => TRUE,
+                        P_SCHEMA => 'PROD_USER',
+                        P_OBJECT =>  'DEPARTMENTS',
+                        P_OBJECT_TYPE => 'TABLE',
+                        P_OBJECT_ALIAS => 'departments',
+                        P_AUTO_REST_AUTH => FALSE
+                    );
+                    COMMIT;
+                END;
+                /
+                </copy>
+            ```
 
 7. Click on the Departments section
 
     ![Departments page unlocked](./images/departments-page-unlocked.png " ")
 
-There are no rows at the moment, which is expected because we switched from DEV\_USER (development environment) to PROD\_USER (production environment), where the departments table doesn’t exist yet. You can verify this by connecting to the PROD_USER schema and checking its tables.
+There are no rows at the moment, which is expected because we switched from DEV\_USER (development environment) to prod\_user (production environment), where the departments table doesn’t exist yet. You can verify this by connecting to the prod_user schema and checking its tables.
 
 ![No departments table in prod](./images/show-prod-tables.png " ")
 

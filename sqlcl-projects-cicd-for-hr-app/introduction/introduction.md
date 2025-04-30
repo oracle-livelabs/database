@@ -10,6 +10,7 @@ Meet the **SQLcl Projects CI/CD workflow** a powerful tool designed to revolutio
 
 ![SQLcl Projects logo](./images/sqlcl-projects-logo.png " ")
 
+
 In this workshop, you’ll not only enhance the HR application with new features but also explore how the SQLcl Projects feature can transform your database management practices. Our goal is to demonstrate how this versatile extension—built to support more than just database applications—can elevate any project involving database management.
 
 Estimated Workshop Time: 1 hours 30 minutes
