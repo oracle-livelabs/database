@@ -64,20 +64,8 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
     Once the Sign-in screen appears, enter the following credentials, and click the <button type="button" style="pointer-events: none;">Sign-in</button> button:
 
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Username: `DEV_USER`
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password: `[Can be found in your Reservation details - see image in Step 1 for reference]`
-
-    >**Note:** If you're having trouble connecting to DEV\_USER which is normal in the first time, log in with Admin first. Then, open the hamburger menu, go to Database Users, and locate the DEV\_USER card. Click the icon to open the link, which will take you to a sign-in page where you can log in as DEV\_USER.
-
-    ***Alternatively***, simply modify the URL to include DEV\_USER in the path as the following:
-
-    ```text
-    <copy>
-    http://[Your Lab's IP]:8181/ords/DEV_USER/_sdw/
-    </copy>
-    ```
-
-    Then, enter the DEV_USER credentials (username & password).
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Username:** `DEV_USER`
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Password:** `[Can be found in your Reservation details - see image in Step 1 for reference]`
 
 3. The Database Actions Launchpad will appear. Navigate to the `Development` category, then click `SQL`. A blank SQL Worksheet will appear.
 
@@ -255,10 +243,10 @@ Next, you will modify the .env file, which is located in your application's root
 
      * **`VITE_BASE_URL`:** The base URL for your ORDS REST service. You can obtain this URL using either of these methods:
           - Method 1: Use your terminal and run the following command: 
-          ```text
+            ```text
             <copy>
-          echo $ORDSURL"
-          </copy>
+               echo $ORDSURL
+            </copy>
             ```
          ![Get the ords link](images/echo-ords-link.png " ")
 
@@ -273,16 +261,6 @@ Next, you will modify the .env file, which is located in your application's root
      * **`VITE_DB_USERNAME`:** The database username which should be in lowercase.
 
     ***Important!*** If you find VITE\_DB\_USERNAME (dev_user) in uppercase, make sure to convert it to lowercase. This value is used in the ORDS endpoints within the application, and it must be lowercase for the endpoints to function correctly.
-
-
-
-      ***Important!*** If you find VITE\_DB\_USERNAME (dev_user) in uppercase, make sure to convert it to lowercase. This value is used in the ORDS endpoints within the application, and it must be lowercase for the endpoints to function correctly.
-
-     * **`VITE_API_URL`:** The base URL for your API connection.
-
-     * **`VITE_BASE_URL`:** The base URL for your ORDS REST service.
-
-     * **`VITE_DB_USERNAME`:** The database username which should be in lowercase.
 
      ![Open the environment variable file](images/env-file-opened3.png " ")
      <!--![Open the environment variable file](images/env-file-opened.png " ")-->
