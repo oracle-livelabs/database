@@ -655,5 +655,5 @@ The network mode import is simpler than using dump files. You need to call Data 
 ## Acknowledgments
 
 * **Author** - Daniel Overby Hansen
-* **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
+* **Contributors** - William Beauregard, Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
 * **Last Updated By/Date** - Daniel Overby Hansen, May 2025

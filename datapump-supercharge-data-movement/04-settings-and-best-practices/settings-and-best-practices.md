@@ -799,5 +799,5 @@ You may now *proceed to the next lab*.
 ## Acknowledgments
 
 * **Author** - Daniel Overby Hansen
-* **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
+* **Contributors** - William Beauregard, Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
 * **Last Updated By/Date** - Daniel Overby Hansen, May 2025

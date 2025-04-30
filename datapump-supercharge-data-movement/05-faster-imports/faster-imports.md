@@ -739,6 +739,112 @@ Another option is to transfer the statistics from the source database using the 
 11. That's how you transfer statistics from one database to another. Take the statistics out of the data dictionary and store them in a staging table. Now, move that staging table to the target database using Data Pump. Finally, move the statistics from the staging table and into the data dictionary in the target database.
 
 ## Task 4: Constraints
+
+set timing on
+create table appuser.tab2 as select * from appuser.tab3;
+create table appuser.tab1 as select * from appuser.tab3;
+create table appuser.tab4 as select * from appuser.tab3;
+
+set timing on
+alter table appuser.tab1 add constraint c_tab1_c01 check (owner != 'FOOBAR') enable validate;
+alter table appuser.tab1 add constraint c_tab1_c02 check (object_name != 'FOOBAR') enable validate;
+alter table appuser.tab1 add constraint c_tab1_c03 check (SUBOBJECT_NAME != 'FOOBAR') enable validate;
+alter table appuser.tab1 add constraint c_tab1_c04 check (OBJECT_TYPE != 'FOOBAR') enable validate;
+alter table appuser.tab1 add constraint c_tab1_c05 check (TIMESTAMP != 'FOOBAR') enable validate;
+alter table appuser.tab1 add constraint c_tab1_c06 check (STATUS != 'FOOBAR') enable validate;
+alter table appuser.tab1 add constraint c_tab1_c07 check (TEMPORARY in ('Y', 'N')) enable validate;
+alter table appuser.tab1 add constraint c_tab1_c08 check (SECONDARY in ('Y', 'N')) enable validate;
+alter table appuser.tab1 add constraint c_tab1_c09 check (EDITIONABLE in ('Y', 'N')) enable validate;
+alter table appuser.tab1 add constraint c_tab1_c10 check (ORACLE_MAINTAINED in ('Y', 'N')) enable validate;
+alter table appuser.tab1 add constraint c_tab1_c11 check (APPLICATION in ('Y', 'N')) enable validate;
+alter table appuser.tab1 add constraint c_tab1_c12 check (DUPLICATED in ('Y', 'N')) enable validate;
+alter table appuser.tab1 add constraint c_tab1_c13 check (SHARDED in ('Y', 'N')) enable validate;
+alter table appuser.tab1 add constraint c_tab1_c14 check (EDITION_NAME != 'FOOBAR') enable validate;
+alter table appuser.tab1 add constraint c_tab1_c15 check (SHARING != 'FOOBAR') enable validate;
+alter table appuser.tab1 add constraint c_tab1_c16 check (DEFAULT_COLLATION != 'FOOBAR') enable validate;
+
+alter table appuser.tab2 add constraint c_tab2_c01 check (owner != 'FOOBAR') enable validate;
+alter table appuser.tab2 add constraint c_tab2_c02 check (object_name != 'FOOBAR') enable validate;
+alter table appuser.tab2 add constraint c_tab2_c03 check (SUBOBJECT_NAME != 'FOOBAR') enable validate;
+alter table appuser.tab2 add constraint c_tab2_c04 check (OBJECT_TYPE != 'FOOBAR') enable validate;
+alter table appuser.tab2 add constraint c_tab2_c05 check (TIMESTAMP != 'FOOBAR') enable validate;
+alter table appuser.tab2 add constraint c_tab2_c06 check (STATUS != 'FOOBAR') enable validate;
+alter table appuser.tab2 add constraint c_tab2_c07 check (TEMPORARY in ('Y', 'N')) enable validate;
+alter table appuser.tab2 add constraint c_tab2_c08 check (SECONDARY in ('Y', 'N')) enable validate;
+alter table appuser.tab2 add constraint c_tab2_c09 check (EDITIONABLE in ('Y', 'N')) enable validate;
+alter table appuser.tab2 add constraint c_tab2_c10 check (ORACLE_MAINTAINED in ('Y', 'N')) enable validate;
+alter table appuser.tab2 add constraint c_tab2_c11 check (APPLICATION in ('Y', 'N')) enable validate;
+alter table appuser.tab2 add constraint c_tab2_c12 check (DUPLICATED in ('Y', 'N')) enable validate;
+alter table appuser.tab2 add constraint c_tab2_c13 check (SHARDED in ('Y', 'N')) enable validate;
+alter table appuser.tab2 add constraint c_tab2_c14 check (EDITION_NAME != 'FOOBAR') enable validate;
+alter table appuser.tab2 add constraint c_tab2_c15 check (SHARING != 'FOOBAR') enable validate;
+alter table appuser.tab2 add constraint c_tab2_c16 check (DEFAULT_COLLATION != 'FOOBAR') enable validate;
+
+alter table appuser.tab3 add constraint c_tab3_c01 check (owner != 'FOOBAR') enable validate;
+alter table appuser.tab3 add constraint c_tab3_c02 check (object_name != 'FOOBAR') enable validate;
+alter table appuser.tab3 add constraint c_tab3_c03 check (SUBOBJECT_NAME != 'FOOBAR') enable validate;
+alter table appuser.tab3 add constraint c_tab3_c04 check (OBJECT_TYPE != 'FOOBAR') enable validate;
+alter table appuser.tab3 add constraint c_tab3_c05 check (TIMESTAMP != 'FOOBAR') enable validate;
+alter table appuser.tab3 add constraint c_tab3_c06 check (STATUS != 'FOOBAR') enable validate;
+alter table appuser.tab3 add constraint c_tab3_c07 check (TEMPORARY in ('Y', 'N')) enable validate;
+alter table appuser.tab3 add constraint c_tab3_c08 check (SECONDARY in ('Y', 'N')) enable validate;
+alter table appuser.tab3 add constraint c_tab3_c09 check (EDITIONABLE in ('Y', 'N')) enable validate;
+alter table appuser.tab3 add constraint c_tab3_c10 check (ORACLE_MAINTAINED in ('Y', 'N')) enable validate;
+alter table appuser.tab3 add constraint c_tab3_c11 check (APPLICATION in ('Y', 'N')) enable validate;
+alter table appuser.tab3 add constraint c_tab3_c12 check (DUPLICATED in ('Y', 'N')) enable validate;
+alter table appuser.tab3 add constraint c_tab3_c13 check (SHARDED in ('Y', 'N')) enable validate;
+alter table appuser.tab3 add constraint c_tab3_c14 check (EDITION_NAME != 'FOOBAR') enable validate;
+alter table appuser.tab3 add constraint c_tab3_c15 check (SHARING != 'FOOBAR') enable validate;
+alter table appuser.tab3 add constraint c_tab3_c16 check (DEFAULT_COLLATION != 'FOOBAR') enable validate;
+
+alter table appuser.tab4 add constraint c_tab4_c01 check (owner != 'FOOBAR') enable validate;
+alter table appuser.tab4 add constraint c_tab4_c02 check (object_name != 'FOOBAR') enable validate;
+alter table appuser.tab4 add constraint c_tab4_c03 check (SUBOBJECT_NAME != 'FOOBAR') enable validate;
+alter table appuser.tab4 add constraint c_tab4_c04 check (OBJECT_TYPE != 'FOOBAR') enable validate;
+alter table appuser.tab4 add constraint c_tab4_c05 check (TIMESTAMP != 'FOOBAR') enable validate;
+alter table appuser.tab4 add constraint c_tab4_c06 check (STATUS != 'FOOBAR') enable validate;
+alter table appuser.tab4 add constraint c_tab4_c07 check (TEMPORARY in ('Y', 'N')) enable validate;
+alter table appuser.tab4 add constraint c_tab4_c08 check (SECONDARY in ('Y', 'N')) enable validate;
+alter table appuser.tab4 add constraint c_tab4_c09 check (EDITIONABLE in ('Y', 'N')) enable validate;
+alter table appuser.tab4 add constraint c_tab4_c10 check (ORACLE_MAINTAINED in ('Y', 'N')) enable validate;
+alter table appuser.tab4 add constraint c_tab4_c11 check (APPLICATION in ('Y', 'N')) enable validate;
+alter table appuser.tab4 add constraint c_tab4_c12 check (DUPLICATED in ('Y', 'N')) enable validate;
+alter table appuser.tab4 add constraint c_tab4_c13 check (SHARDED in ('Y', 'N')) enable validate;
+alter table appuser.tab4 add constraint c_tab4_c14 check (EDITION_NAME != 'FOOBAR') enable validate;
+alter table appuser.tab4 add constraint c_tab4_c15 check (SHARING != 'FOOBAR') enable validate;
+alter table appuser.tab4 add constraint c_tab4_c16 check (DEFAULT_COLLATION != 'FOOBAR') enable validate;
+
+select table_name, constraint_name from dba_constraints where table_name='TAB1';
+select table_name, constraint_name from dba_constraints where table_name='TAB2';
+select table_name, constraint_name from dba_constraints where table_name='TAB3';
+select table_name, constraint_name from dba_constraints where table_name='TAB4';
+
+select table_name, count(*) from dba_constraints where owner='APPUSER' group by table_name;
+
+
+create table appuser.tab2 as select * from appuser.tab1;
+insert into appuser.tab2 select * from appuser.tab2;
+commit;
+
+drop table appuser.tab3;
+create table appuser.tab3 as select * from appuser.tab2;
+drop table appuser.tab2;
+create table appuser.tab2 as select * from appuser.tab3;
+insert into appuser.tab2 select * from appuser.tab2;
+commit;
+
+
+expdp dpuser/oracle schemas=appuser compression=all directory=dpdir dumpfile=faster-import-constraints.dmp exclude=statistics reuse_dumpfiles=yes logfile=faster-import-constraints-export.log logtime=all metrics=yes
+
+impdp dpuser/oracle directory=dpdir dumpfile=faster-import-constraints.dmp parallel=4 remap_schema=APPUSER:CONSTR_VALIDATE logfile=faster-import-constraints-import-validate.log logtime=all metrics=yes
+
+must have multiple workers
+
+remap_schema=APPUSER:CONSTR_VALIDATE
+remap_schema=APPUSER:CONSTR_NOVALIDATE
+
+
+
 ## Task 5: Indexes
 
 You may now *proceed to the next lab*.
@@ -751,5 +857,5 @@ You may now *proceed to the next lab*.
 ## Acknowledgments
 
 * **Author** - Daniel Overby Hansen
-* **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
+* **Contributors** - William Beauregard, Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
 * **Last Updated By/Date** - Daniel Overby Hansen, May 2025

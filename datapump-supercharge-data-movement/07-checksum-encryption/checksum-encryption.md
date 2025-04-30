@@ -329,7 +329,7 @@ While you move a dump file from the source to the target host, it might get corr
     ```
     </details>
 
-# Task 2: Encryption
+## Task 2: Encryption
 
 Data Pump stores the data in the dump files in a proprietary format. However, some data is easily readable.
 
@@ -483,5 +483,5 @@ You may now *proceed to the next lab*.
 ## Acknowledgments
 
 * **Author** - Daniel Overby Hansen
-* **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
+* **Contributors** - William Beauregard, Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
 * **Last Updated By/Date** - Daniel Overby Hansen, May 2025

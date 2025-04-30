@@ -24,11 +24,6 @@ STUFF TO REMEMBER
 * CONSTRAINT_NOVALIDATE and how to re-enable validation afterwards
 * Automatic parallelism for index creation on import
 
-##### Customizing Data Pump Jobs
-DATA_OPTIONS & TRANSFORM parameters and their options
-
-CONTENT=ALL DATA_ONLY METADATA_ONLY
-
 ##### Determining Import Success
 Show how to compare source and target (objects and rows) using DBMS_COMPARISON.
 Also, show a script to compare an export log versus an import log (when the source is not available).
@@ -91,40 +86,24 @@ The stuff in the developer package: DBMS_DEVELOPER.GET????
 ##########################################################################################################################################
 
 
+create table appuser.t2 as select * from appuser.tab2 where mod(rownum, 4)=1;
+create table appuser.t3 as select * from appuser.tab2 where mod(rownum, 4)=2;
+create table appuser.t4 as select * from appuser.tab2 where mod(rownum, 4)=3;
 
-
-##########################################################################################################################################
-##########################################################################################################################################
-##########################################################################################################################################
-##########################################################################################################################################
-##########################################################################################################################################
-##########################################################################################################################################
-##########################################################################################################################################
-##########################################################################################################################################
-##########################################################################################################################################
-##########################################################################################################################################
-##########################################################################################################################################
-
-
-
-
-
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-07-checksum-export.par > /dev/null
-schemas=F1
-reuse_dumpfiles=yes
-directory=dpdir
-logfile=dp-07-checksum-export.log
-dumpfile=dp-07-checksum.dmp
-metrics=yes
-logtime=all
-exclude=statistics
-EOF
-
-cat << 'EOF' | sudo -u oracle tee /home/oracle/scripts/dp-07-checksum-import.par > /dev/null
-directory=dpdir
-logfile=dp-07-checksum-import.log
-dumpfile=dp-07-checksum.dmp
-metrics=yes
-logtime=all
-remap_schema=F1:LAB7CHECKSUM
-EOF
+set timing on
+alter table appuser.t1 add constraint c_tab2_c01 check (owner != 'FOOBAR') enable validate;
+alter table appuser.t1 add constraint c_tab2_c02 check (object_name != 'FOOBAR') enable validate;
+alter table appuser.t1 add constraint c_tab2_c03 check (SUBOBJECT_NAME != 'FOOBAR') enable validate;
+alter table appuser.t1 add constraint c_tab2_c04 check (OBJECT_TYPE != 'FOOBAR') enable validate;
+alter table appuser.t1 add constraint c_tab2_c05 check (TIMESTAMP != 'FOOBAR') enable validate;
+alter table appuser.t1 add constraint c_tab2_c06 check (STATUS != 'FOOBAR') enable validate;
+alter table appuser.t1 add constraint c_tab2_c07 check (TEMPORARY in ('Y', 'N')) enable validate;
+alter table appuser.t1 add constraint c_tab2_c08 check (SECONDARY in ('Y', 'N')) enable validate;
+alter table appuser.t1 add constraint c_tab2_c09 check (EDITIONABLE in ('Y', 'N')) enable validate;
+alter table appuser.t1 add constraint c_tab2_c10 check (ORACLE_MAINTAINED in ('Y', 'N')) enable validate;
+alter table appuser.t1 add constraint c_tab2_c11 check (APPLICATION in ('Y', 'N')) enable validate;
+alter table appuser.t1 add constraint c_tab2_c12 check (DUPLICATED in ('Y', 'N')) enable validate;
+alter table appuser.t1 add constraint c_tab2_c13 check (SHARDED in ('Y', 'N')) enable validate;
+alter table appuser.t1 add constraint c_tab2_c14 check (EDITION_NAME != 'FOOBAR') enable validate;
+alter table appuser.t1 add constraint c_tab2_c15 check (SHARING != 'FOOBAR') enable validate;
+alter table appuser.t1 add constraint c_tab2_c16 check (DEFAULT_COLLATION != 'FOOBAR') enable validate;
