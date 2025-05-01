@@ -1198,8 +1198,8 @@ You may now *proceed to the next lab*.
 
 ## Additional information
 
-* Webinar, [Data Pump Best Practices and Real World Scenarios, LOB data and Data Pump and things to know](https://www.youtube.com/watch?v=960ToLE-ZE8&t=1798s)
-* Webinar, [Data Pump Best Practices and Real World Scenarios, Statistics and Data Pump](https://www.youtube.com/watch?v=960ToLE-ZE8&t=1117s)
+* Webinar, [Fallback is your insurance, Methods: Data Pump](https://www.youtube.com/watch?v=P12UqVRzarw&t=1820s)
+* Webinar, [Data Pump Best Practices and Real World Scenarios, Upgrade with Data Pump](https://www.youtube.com/watch?v=960ToLE-ZE8&t=780s)
 
 ## Acknowledgments
 

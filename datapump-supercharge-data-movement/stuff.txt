@@ -1,4 +1,5 @@
 STUFF TO REMEMBER
+- Test all labs - check timing
 - YouTube videos for each chapter
 
 **************************************************************
@@ -21,9 +22,8 @@ STUFF TO REMEMBER
 **************************************************************
 
 ##### Determining Import Success
-Show how to compare source and target (objects and rows) using DBMS_COMPARISON.
-Also, show a script to compare an export log versus an import log (when the source is not available).
-Marcus D - log file analyzer
+
+
 
 ##### Monitoring, Troubleshooting and Tracing
 
