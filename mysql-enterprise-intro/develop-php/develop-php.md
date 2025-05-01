@@ -1,6 +1,8 @@
-# Build and Test Apache/ PHP/ MySQL Web Application
+# Build and Test Web Application - LAMP: Linux, Apache, MySQL, PHP
 
 ## Introduction
+
+**Important:** You can install either the PHP (LAMP) stack or the Python (LMPF) stack on this server — not both.  
 
 MySQL Enterprise Edition integrates seamlessly with the LAMP (Linux, Apache, MySQL, PHP) stack, enhancing open-source capabilities with enterprise features. MySQL EE works with the LAMP stack by:
 
@@ -36,7 +38,18 @@ In this lab, you will be guided through the following tasks:
     <copy>ssh -i private_key_file opc@new_compute_instance_ip</copy>
      ```
 
-2. Install app server
+2. Verify that the Python (LMPF) stack has not already been installed on this server.
+
+     ```bash
+    <copy>python -c "import flask" 2>/dev/null
+        if [ $? -eq 0 ]; then
+            echo "Python Flask is installed. You cannot install the PHP (LAMP) stack. Please exit this Lab."
+        else
+            echo "Python Flask is not installed. You may proceed to install the PHP (LAMP) stack."
+        fi</copy>
+     ```
+
+3. Install app server
 
     a. Install Apache
 
@@ -68,9 +81,7 @@ In this lab, you will be guided through the following tasks:
     <copy>sudo firewall-cmd --reload</copy>
     ```
 
-3. From a browser test apache from your loacal machine using the Public IP Address of your Compute Instance
-
-    **Note** If the Apache test page does not appear, wait 5 minutes and then try again.
+4. From a browser test apache from your loacal machine using the Public IP Address of your Compute Instance
 
     **Example: http://129.213....**
 
@@ -221,37 +232,63 @@ In this lab, you will be guided through the following tasks:
 2. Download application code
 
     ```bash
-    <copy> sudo wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/Ebnl0Yd1YwZkXBiQYZQu6nljiMWSTb9TdhZd4fF9SNGILS_QkYgr_q8E-VBd3x1Z/n/idazzjlcjqzj/b/livelab_apps/o/sakila-web.zip</copy>
+    <copy> sudo wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/rPTYzb6NhleKQN6i0Jnq3MJ_p_IAhDH4jm-a7Y5do65WWh5NnPdCmdkhJ2hCL1ID/n/idazzjlcjqzj/b/livelab_apps/o/sakila-web-php.zip</copy>
     ```
 
 3. unzip Application code
 
     ```bash
-    <copy>sudo unzip sakila-web.zip</copy>
+    <copy>sudo unzip sakila-web-php.zip</copy>
+    ```
+
+4. Check if tree is installed, install if not
+
+    ```bash
+        <copy>command -v tree >/dev/null 2>&1 || sudo dnf install -y tree
+        tree sakila-web-php</copy>
+    ```
+
+    - Application directory structure:
+
+    ![Sakila Tree](./images/sakila-tree-php.png "Sakila Tree")
+
+
+5. Update file db_config.php 
+
+    ```bash
+    <copy>cd sakila-web-php</copy>
     ```
 
     ```bash
-    <copy>cd sakila-web</copy>
+    <copy>sudo nano  config.php</copy>
     ```
 
-4. Update file db_config.php to change the following values if needed
+    - Change the following values if needed
+        - $host = 'localhost'; // Change this if your MySQL server is hosted elsewhere
+        - $dbname = 'sakila';
+        - $username = 'admin'; // Change this to your MySQL username
+        - $password = ''; // Change this to your MySQL password
 
-    - 'host' => 'localhost',
-    - 'user' => 'admin',
-    - 'password' => 'Welcome#123',
-    - 'database' => 'sakila'
+6. **Important** - The following command puts only the MySQL process in permissive mode, leaving the rest of your system protected by SELinux. It tells SELinux to allow all actions by MySQL while still logging any potential violations. 
+    - **This is for testing only. Please contact Oracle MySQL Support for Production guidance.**
 
     ```bash
-    <copy>sudo nano config.php</copy>
+    <copy>sudo semanage permissive -a mysqld_t</copy>
     ```
 
-5. Run the application as follows (Use your coupute IP address):
+    - Restart MySQL 
 
-    http://127.0.0.../sakila-web/
+    ```bash
+    <copy>sudo systemctl restart mysqld</copy>
+    ```
+
+7. Run the application as follows (Use your coupute IP address):
+
+    http://127.0.0.../sakila-web-php/
 
     ![Sakila Web](./images/sakila-list.png "Sakila Web")
 
-6. Test the application with following examples(Enter seconds, then select **short** or **long** format):
+8. Test the application with following examples(Enter seconds, then select **short** or **long** format):
 
     a. Test Case 1 - Movie Length:
     - Input: 7200 seconds (typical movie)
@@ -273,17 +310,15 @@ In this lab, you will be guided through the following tasks:
     - Short format: 00:01:30
     - Long format: 1 minute 30 seconds
 
-
 ## Learn More
 
 - [Install Apache and PHP on an Oracle Linux Instance](https://docs.oracle.com/en-us/iaas/developer-tutorials/tutorials/apache-on-oracle-linux/01-summary.htm)
 
-
 ## Acknowledgements
 
-- **Author** - Perside Foster, MySQL Solution Engineering
+- **Author** - Perside Foster, MySQL Principal Solution Engineering
 - **Contributor** 
     - Nick Mader, MySQL Global Channel Enablement & Strategy Director, 
-    - Selena Sanchez, MySQL Staff Solutions Engineer, 
+    - Selena Sanchez, MySQL Staff Solutions Engineer,
     - Debbie Stracher Weis  MySQL AMERICAS Partner Marketing Manager 
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering,April  2025
+- **Last Updated By/Date** - Perside Foster, MySQL Principal Solution Engineering, April  2025

@@ -24,7 +24,7 @@ This lab assumes you have:
 
 ## Task 1: Get MySQL Enterprise Edition Download from Oracle Technology Network (OTN)
 
-1. Connect to **myserver** instance using Cloud Shell (**Example:** ssh -i  ~/.ssh/id_rsa opc@132.145.17….)
+1. Connect to **myserver** instance using Cloud Shell (**Example:** ssh -i  ~/.ssh/id_rsa opc@132.145...)
 
      ```bash
     <copy>ssh -i ~/.ssh/id_rsa opc@<your_compute_instance_ip></copy>
@@ -47,13 +47,13 @@ This lab assumes you have:
 4. Get  OTN MySQL Enterprise Edition package
 
     ```bash
-    <copy>wget 'https://objectstorage.us-ashburn-1.oraclecloud.com/p/_85tMv-_I0WRJRAuHI9StGHfo3WXtAsSbpslsOIqIu2hsHgmKc8n7zmhk-5KvVw8/n/idazzjlcjqzj/b/mysql-ee-downloads/o/Oracle%20Technical%20Resource(OTR)/mysql-enterprise-9.2.0_el8_x86_64_bundle.tar'</copy>
+    <copy>wget 'https://objectstorage.us-ashburn-1.oraclecloud.com/p/OG6aTpLGugOeCftxqcU1D4d1k360Zko_MC9cYLeZSdchpDhTwIwwZ9gX4nVBboMT/n/idazzjlcjqzj/b/mysql-ee-downloads/o/Oracle%20Technical%20Resource(OTR)/mysql-enterprise-9.3.0_el8_x86_64_bundle.tar'</copy>
     ```
 
-5. Extract the contents of the "mysql-enterprise-9.2.0_el8_x86_64_bundle.tar" archive file
+5. Extract the contents of the `"mysql-enterprise-9.3.0_el8_x86_64_bundle.tar"` archive file
 
     ```bash
-    <copy>tar xvf mysql-enterprise-9.2.0_el8_x86_64_bundle.tar</copy>
+    <copy>tar xvf mysql-enterprise-9.3.0_el8_x86_64_bundle.tar</copy>
     ```
 
 ## Task 2: Install MySQL Enterprise Edition
@@ -102,11 +102,15 @@ This lab assumes you have:
     <copy>sudo systemctl start mysqld</copy>
     ```
 
+    - Press Ctrl + C to enter the next command 
+
 2. Check the status of the MySQL server service
 
     ```bash
     <copy>sudo systemctl status mysqld</copy>
     ```
+
+    - Press Ctrl + C to enter the next command 
 
 3. List all running processes and filter for those containing "mysqld" in their command line
 
@@ -164,9 +168,9 @@ You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
-- **Author** - Perside Foster, MySQL Solution Engineering
+- **Author** - Perside Foster, MySQL Principal Solution Engineering
 - **Contributor** 
     - Nick Mader, MySQL Global Channel Enablement & Strategy Director, 
-    - Selena Sanchez, MySQL Staff Solutions Engineer, 
+    - Selena Sanchez, MySQL Staff Solutions Engineer,
     - Debbie Stracher Weis  MySQL AMERICAS Partner Marketing Manager 
-- **Last Updated By/Date** - Perside Foster, MySQL Solution Engineering,April  2025
+- **Last Updated By/Date** - Perside Foster, MySQL Principal Solution Engineering, April  2025
