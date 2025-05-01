@@ -21,9 +21,9 @@ This lab assumes:
 
 ## Task 1: Upgrade and convert
 
-Data Pump can move data into any higher release Oracle Database. Data Pump was introducted in Oracle Database 10g and you can export from that initial release and import directly into a PDB on Oracle Database 23ai. Using Data Pumps for upgrades is normally only suited for smaller data sets, from very old releases of Oracle Database, or when you need to do some sort of data manipulation as part of the upgrade.
+Data Pump can move data into any higher release Oracle Database. Data Pump was introduced in Oracle Database 10g and you can export from that initial release and import directly into a PDB on Oracle Database 23ai. Using Data Pump for upgrades is normally only suited for smaller data sets, from very old releases of Oracle Database, or when you need to do some sort of data manipulation/reorganization as part of the upgrade.
 
-1. Use the *yellow* terminal 🟨. Connect to the *FTEX* database. This CDB runs Oracle Database 19c.
+1. Use the *yellow* terminal 🟨. Connect to the *FTEX* database. This database runs Oracle Database 19c.
 
     ```
     <copy>
@@ -34,7 +34,7 @@ Data Pump can move data into any higher release Oracle Database. Data Pump was i
     -- Be sure to hit RETURN
     ```
 
-2. In this task, you perform a full database export. In lab 6 you looked at the objects paths included in various export modes. A full export has the most object paths included. Look at the object paths that are part of a full export.
+2. In this task, you perform a full database export. In lab 6, *Customizing Data Pump Jobs*, you looked at the objects paths included in various export modes. A full export has the most object paths included. Look at the object paths that are part of a full export.
 
     ```
     <copy>
@@ -97,9 +97,8 @@ Data Pump can move data into any higher release Oracle Database. Data Pump was i
     </copy>
     ```
 
-    * You export the *F1* schema from the database.
-    * Data Pump calculates a checksum at the end of the export and stores it in the dump file in an encrypted format because of `CHECKSUM=YES`. 
-
+    * You perform a full database export using `FULL=Y`.
+    
     <details>
     <summary>*click to see the output*</summary>
     ``` text
