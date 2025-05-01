@@ -340,6 +340,8 @@ Depending on the job mode (full, schema, tablespace, table, or tablespace), Data
     * Combining `INCLUDE` and `EXCLUDE` allows you to easily customize the Data Pump job.
     * Previously, you had to use `INCLUDE` on the export command, and then `EXCLUDE` on the import command.
 
+11. Not only can you exclude/include an entire object path. You can also selectively exclude/include specific objects within an object path. For example, you can exclude certain, but not all users using `EXCLUDE=USER:"IN('APPUSER', 'REPORTUSER')"`. You learn more about that syntax in lab 10, *Upgrading, Downgrading and Converting*. 
+
 ## Task 2: Views as tables and remap table
 
 Data Pump allows you to export a view including all the rows. On import, that view is transformed in a regular table.
@@ -697,9 +699,7 @@ Data Pump allows you to export a view including all the rows. On import, that vi
     drop view f1.f1_winners;
     </copy>
     ```
-
-
-
+    
 13. Exit SQL*Plus.
 
     ```

@@ -1681,6 +1681,23 @@ Constraints are used to enforce data quality and is often used extensively. A co
     ```
     </details> 
 
+12. Clean up.
+
+    ```
+    <copy>
+    drop user constr_validate cascade;
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+    ``` text
+    SQL> drop user constr_validate cascade;
+
+    User dropped.
+    ```
+    </details> 
+
 31. Exit SQL*Plus.
 
     ```
