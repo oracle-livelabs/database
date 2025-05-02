@@ -221,9 +221,11 @@ A lot of the Data Pump functionality is in the `DBMS_DATAPUMP` package. If you u
     ```
     </details> 
     
-13. If you need inspiration on how to use `DBMS_DATAPUMP`. You can enable SQL trace on a database and start the job via `expdp` or `impdp`. Find the matching trace file. You will be able to see the `DBMS_DATAPUMP` calls made by the client.
+13. If you need inspiration on how to use `DBMS_DATAPUMP`. You can enable SQL trace on a database and start the job via `expdp` or `impdp`. Find the matching trace file (not dm or dw trace files, but the session trace file). You will be able to see the `DBMS_DATAPUMP` calls made by `expdp` or `impdp`.
 
 ## Task 2: DBMS\_METADATA
+
+
 
 **Congratulations!** This is the end of the lab.
 
