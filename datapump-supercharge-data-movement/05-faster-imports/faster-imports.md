@@ -1232,7 +1232,15 @@ Constraints are used to enforce data quality and is often used extensively. A co
     ```
     </details> 
 
-14. Switch back to the *yellow* terminal 🟨. It usually takes a few minutes to add the constraints. Wait for the job to complete.
+14. Exit from the interactive console. 
+
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
+    
+15. Switch back to the *yellow* terminal 🟨. It usually takes a few minutes to add the constraints. Wait for the job to complete.
 
     * It took almost 5 minutes to import the table data.
     * In addition, it took 3 three minutes to add constraints.
@@ -1285,7 +1293,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
     ```
     </details> 
 
-15. There is a Data Pump transformation that allows you to add the constraints as *NOT VALIDATED* instead of *VALIDATED*. This can reduce the time it takes to add constraints from minutes or hours to just seconds. Examine a pre-created parameter file.
+16. There is a Data Pump transformation that allows you to add the constraints as *NOT VALIDATED* instead of *VALIDATED*. This can reduce the time it takes to add constraints from minutes or hours to just seconds. Examine a pre-created parameter file.
 
     ```
     <copy>
@@ -1309,7 +1317,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
     ```
     </details> 
 
-16. Drop the schema, so you can import again.
+17. Drop the schema, so you can import again.
 
     ```
     <copy>
@@ -1343,7 +1351,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
     ```
     </details> 
 
-17. Start the import and allow Data Pump to add the constraints as not validated.
+18. Start the import and allow Data Pump to add the constraints as not validated.
 
     ```
     <copy>
@@ -1392,18 +1400,7 @@ Constraints are used to enforce data quality and is often used extensively. A co
     ```
     </details> 
 
-18. Switch to the *blue* 🟦 terminal.
-
-19. You're probably in the interactive console from the previous import. You should see the `Import>` prompt. Exit from the interactive console. 
-
-    ```
-    <copy>
-    exit
-    </copy>
-    ```
-
-    * Don't use the `EXIT` command if you are in the shell.
-    * If you accidently close the *blue* 🟦 terminal, you can open a new *blue* 🟦 tab in the terminal.
+19. Switch to the *blue* 🟦 terminal.
 
 20. Connect to the *FTEX* database. 
 

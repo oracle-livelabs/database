@@ -1,6 +1,8 @@
 STUFF TO REMEMBER
 - Test all labs - check timing
 - YouTube videos for each chapter
+- Data Pump log analyzer is out
+- Nothing on the new index method
 
 **************************************************************
 
@@ -21,29 +23,12 @@ STUFF TO REMEMBER
 
 **************************************************************
 
-##### Determining Import Success
-
-
-
 ##### Monitoring, Troubleshooting and Tracing
-
-Task: Views
-    New views in 23ai:
-    V_$DATAPUMP_PROCESSWAIT_INFO
-    V_$DATAPUMP_PROCESS_INFO
-    V_$DATAPUMP_SESSIONWAIT_INFO
 
 Task: Tracing
     My Data Pump tracing recipe  
     Different trace levels and when to use it
     take a look at awr or execute certain SQL queries when DP runs slow.
-
-Task: Troubleshooting
-    ABORT_STEP=1
-
-Task: Control table
-    Use keep_master and query the master_table showing we can use it to check the total rows for each table that was exported vs imported
-    master_only=YES
 
 ##### Using DBMS_DATAPUMP and DBMS_METADATA
 
@@ -51,6 +36,7 @@ Task: Start a job using DBMS_DATAPUMP
     well for sure DP API. I never used it in ACS and always thought I can do everything with a PAR file and the binaries.
     just showing how to use the DBMS_DATAPUMP API.
     SQL trace and check trace file
+    https://mosemp.us.oracle.com/epmos/faces/DocumentDisplay?_afrLoop=548399437337606&id=1340781.1&displayIndex=2&_afrWindowMode=0&_adf.ctrl-state=17iffyik6r_171#FIX
 
 Task: Generate metadata
     DBMS_METADATA.GET_DDL
@@ -69,3 +55,6 @@ Task: Generate metadata
 ##########################################################################################################################################
 ##########################################################################################################################################
 ##########################################################################################################################################
+
+Flights:
+Hotel: 

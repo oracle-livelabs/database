@@ -468,12 +468,6 @@ The `DBMS_COMPARISON` package allows you to compare the rows of the same table i
     </copy>
     ```    
 
-## Task 4: Data Pump Log Analyzer
-
-Data Pump Log Analyzer (DPLA) is not an official Oracle tool. It is a free utility created by an Oracle employee, Marcus Doeringer. He does migrations more often than you and I brush our teeth. He found it hard to get an overview of log files from massive Data Pump jobs. So, he created a tool. It's open-source and free to use. You can download it from https://github.com/macsdata/data-pump-log-analyzer. 
-
-1. Still in the *yellow* terminal 🟨.
-
 You may now *proceed to the next lab*.
 
 ## Additional information
