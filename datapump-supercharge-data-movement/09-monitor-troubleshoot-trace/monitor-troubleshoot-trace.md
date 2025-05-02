@@ -772,13 +772,11 @@ The control table contains information about the data and metadata in the dump f
     ```
     </details> 
 
-## Task 3: Daniel's Tracing Recipe
+## Task 3: Tracing
 
 Here's a good way to generate trace information to solve a specific functional or performance problem.
 
-1. Still in the *yellow* terminal 🟨.
-
-2. Connect to the database. 
+1. Still in the *yellow* terminal 🟨. Connect to the database. 
 
     ```
     <copy>
@@ -850,12 +848,12 @@ Here's a good way to generate trace information to solve a specific functional o
     </copy>
     ```  
 
-6. Remove existing Data Pump trace files to make it easier to gather them afterward.
+6. Remove existing Data Pump trace files.
 
     ```
     <copy>
-    rm /u01/app/oracle/diag/rdbms/ftex/FTEX/trace/FTEX*dw*trc
-    rm /u01/app/oracle/diag/rdbms/ftex/FTEX/trace/FTEX*dm*trc
+    rm /u01/app/oracle/diag/rdbms/ftex/FTEX/trace/FTEX_dw*trc
+    rm /u01/app/oracle/diag/rdbms/ftex/FTEX/trace/FTEX_dm*trc
     </copy>
 
     -- Be sure to hit RETURN
@@ -874,7 +872,6 @@ Here's a good way to generate trace information to solve a specific functional o
 
     * The `TRACE` parameter enables Data Pump specific tracing. This is different than SQL trace.
     * The parameter file also contains `LOGTIME=ALL` and `METRICS=YES`. 
-    * This Data Pump job completes quickly, so you can move on with other labs. Realistically, you would have a longer-running job or problem to trace. 
     * If you know in which phase the problem happens, you can use `ABORT_STEP` to stop Data Pump before the problematic phase. Then restart with SQL trace and Data Pump tracing enabled.
 
     <details>
@@ -1113,6 +1110,8 @@ Here's a good way to generate trace information to solve a specific functional o
 
     -- Be sure to hit RETURN
     ```
+
+    * The zip file contains a lot of valuable tracing information. Share it with Oracle Support if needed.
 
     <details>
     <summary>*click to see the output*</summary>
