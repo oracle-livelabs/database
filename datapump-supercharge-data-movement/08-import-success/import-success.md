@@ -23,14 +23,12 @@ This lab assumes:
 
 During export and import, Data Pump may faces errors or situations that can't be resolved.
 
-1. Use the the *yellow* terminal 🟨. If Data Pump encounters an error or face a situation it can't resolve, it will print an error to the console and into the logfile. At the end of the output, Data Pump summarizes and list the number of errors faced during the job. Examine the last lines of a Data Pump import log file.
+1. Use the *yellow* terminal 🟨. If Data Pump encounters an error or face a situation it can't resolve, it will print an error to the console and into the logfile. At the end of the output, Data Pump summarizes and list the number of errors faced during the job. Examine the last lines of a Data Pump import log file.
 
     ```
     <copy>
     tail -4f /home/oracle/scripts/dp-08-errors-import.log
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * The last line says *completed with 1 error*.
@@ -88,7 +86,7 @@ During export and import, Data Pump may faces errors or situations that can't be
     <details>
     <summary>*click to see the answer*</summary>
     ``` text
-    First, you should determine the cause for some object to exist already in the database. Are you importing into a "contaminated" database? Where you expecting a comletely new, empty database? For the first index that already exist, check which columns are indexes. If it is the same columns, you coulde decide to ignore the error. You could use "impdp ... include=index sqlfile=idx.sql" to find the defintion of the index in the dump file. The other index fails because those columns are already indexed; you could also decide to ignore the error.
+    First, you should determine the cause for some objects to exist already. Are you importing into a "contaminated" database? Were you expecting a comletely new, empty database? For the first index that already exist, check which columns are indexed. If it is the same columns, you coulde decide to ignore the error. You could use "impdp ... include=index sqlfile=idx.sql" to find the defintion of the index in the dump file. The other index fails because those columns are already indexed; you could also decide to ignore the error.
     ```
     </details> 
 
@@ -282,9 +280,9 @@ After moving data you can perform simple checks to validate the outcome. You wil
     <details>
     <summary>*click to see the output*</summary>
     ``` text  
-        SOURCE     TARGET
+    SOURCE     TARGET
     ---------- ----------
-        571047     571047
+    571047     571047
     ```
     </details>
 
@@ -293,10 +291,11 @@ After moving data you can perform simple checks to validate the outcome. You wil
 
 ## Task 3: DBMS_COMPARISON
 
-The `DBMS_COMPARISON` allows you to compare the rows of the same table in two different databases. 
+The `DBMS_COMPARISON` package allows you to compare the rows of the same table in two different databases. 
 
 1. Still in the *yellow* terminal 🟨 and connected to the *RED* PDB from the previous task. Make a change to one of the tables in the local, or target, database.
 
+    ```
     <copy>
     update f1.f1_constructors set name=name||'##42##' where name='Haas F1 Team';
     commit;
