@@ -25,12 +25,6 @@ STUFF TO REMEMBER
 
 ##### Using DBMS_DATAPUMP and DBMS_METADATA
 
-Task: Start a job using DBMS_DATAPUMP
-    well for sure DP API. I never used it in ACS and always thought I can do everything with a PAR file and the binaries.
-    just showing how to use the DBMS_DATAPUMP API.
-    SQL trace and check trace file
-    https://mosemp.us.oracle.com/epmos/faces/DocumentDisplay?_afrLoop=548399437337606&id=1340781.1&displayIndex=2&_afrWindowMode=0&_adf.ctrl-state=17iffyik6r_171#FIX
-
 Task: Generate metadata
     DBMS_METADATA.GET_DDL
     DBMS_METADATA_DIFF package especially the COMPARE_ALTER routines
@@ -48,6 +42,3 @@ Task: Generate metadata
 ##########################################################################################################################################
 ##########################################################################################################################################
 ##########################################################################################################################################
-
-Flights:
-Hotel: 
