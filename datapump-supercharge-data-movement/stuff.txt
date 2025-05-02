@@ -23,13 +23,6 @@ STUFF TO REMEMBER
 
 **************************************************************
 
-##### Monitoring, Troubleshooting and Tracing
-
-Task: Tracing
-    My Data Pump tracing recipe  
-    Different trace levels and when to use it
-    take a look at awr or execute certain SQL queries when DP runs slow.
-
 ##### Using DBMS_DATAPUMP and DBMS_METADATA
 
 Task: Start a job using DBMS_DATAPUMP
